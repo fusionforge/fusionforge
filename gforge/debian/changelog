@@ -1,3 +1,11 @@
+gforge (4.6.99+svn6319-3+1) unstable; urgency=low
+
+  * Finished removing all references to LDAP from the Debconf templates
+    and maintainer scripts (closes: #408867).
+  * Also updated German debconf template translation (closes: #456504).
+
+ -- Roland Mas <lolando@debian.org>  Sun, 23 Dec 2007 11:07:38 +0100
+
 gforge (4.6.99+svn6319-3) unstable; urgency=low
 
   * gforge-mta-postfix.config: don't try to replace files unless their

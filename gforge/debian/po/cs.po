@@ -14,9 +14,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gforge\n"
-"Report-Msgid-Bugs-To: Source: gforge@packages.debian.org\n"
-"POT-Creation-Date: 2007-12-05 13:50+0100\n"
-"PO-Revision-Date: 2007-12-05 13:50+0100\n"
+"Report-Msgid-Bugs-To: lolando@debian.org\n"
+"POT-Creation-Date: 2007-12-23 11:02+0100\n"
+"PO-Revision-Date: 2007-12-23 11:04+0100\n"
 "Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -64,14 +64,12 @@ msgstr "Měl by to být jiný počítač než je hlavní server GForge."
 #. Type: string
 #. Default
 #: ../gforge-db-postgresql.templates.dsfh-in:8001
-#: ../gforge-dns-bind9.templates.dsfh-in:5001
 msgid "admin"
 msgstr "admin"
 
 #. Type: string
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:8002
-#: ../gforge-dns-bind9.templates.dsfh-in:5002
 msgid "GForge administrator login:"
 msgstr "Přihlašovací jméno správce GForge:"
 
@@ -81,8 +79,6 @@ msgstr "Přihlašovací jméno správce GForge:"
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:8002
 #: ../gforge-db-postgresql.templates.dsfh-in:10001
-#: ../gforge-dns-bind9.templates.dsfh-in:5002
-#: ../gforge-dns-bind9.templates.dsfh-in:6001
 msgid ""
 "The GForge administrator account will have full privileges on the system. It "
 "will be used to approve the creation of new projects."
@@ -93,7 +89,6 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:8002
-#: ../gforge-dns-bind9.templates.dsfh-in:5002
 msgid "Please choose the username for this account."
 msgstr "Zadejte prosím přihlašovací jméno tohoto účtu."
 
@@ -123,62 +118,38 @@ msgstr "To je vyžadováno pro nastavení virtuálních hostů v Apachi."
 #. Type: password
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:10001
-#: ../gforge-dns-bind9.templates.dsfh-in:6001
 msgid "GForge administrator password:"
 msgstr "Heslo správce GForge:"
 
 #. Type: password
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:10001
-#: ../gforge-dns-bind9.templates.dsfh-in:6001
 msgid "Please choose the password for this account."
 msgstr "Zadejte prosím heslo pro tento účet."
 
 #. Type: password
 #. Description
-#. Type: password
-#. Description
-#. Type: password
-#. Description
-#. Type: password
-#. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:11001
-#: ../gforge-dns-bind9.templates.dsfh-in:4001
-#: ../gforge-dns-bind9.templates.dsfh-in:7001
-#: ../gforge-dns-bind9.templates.dsfh-in:13001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
-#: ../dsf-helper/ldap-variables.templates:5001
 msgid "Password confirmation:"
 msgstr "Potvrzení hesla:"
 
 #. Type: password
 #. Description
-#. Type: password
-#. Description
-#. Type: password
-#. Description
-#. Type: password
-#. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:11001
-#: ../gforge-dns-bind9.templates.dsfh-in:4001
-#: ../gforge-dns-bind9.templates.dsfh-in:7001
-#: ../gforge-dns-bind9.templates.dsfh-in:13001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
-#: ../dsf-helper/ldap-variables.templates:5001
 msgid "Please re-type the password for confirmation."
 msgstr "Zadejte heslo ještě jednou pro potvrzení."
 
 #. Type: string
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:12001
-#: ../gforge-dns-bind9.templates.dsfh-in:8001
 msgid "Initial list of skills:"
 msgstr "Počáteční seznam schopností:"
 
 #. Type: string
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:12001
-#: ../gforge-dns-bind9.templates.dsfh-in:8001
 msgid ""
 "GForge allows users to define a list of their skills, to be chosen from "
 "those present in the database. This list is the initial list of skills that "
@@ -191,173 +162,14 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:12001
-#: ../gforge-dns-bind9.templates.dsfh-in:8001
 msgid "Please enter a semicolon-separated list of skill names."
 msgstr "Jednotlivé položky seznamu schopností oddělte středníky."
-
-#. Type: password
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:3001
-#: ../dsf-helper/dbpasswd-variables.templates:2001
-msgid "Password used for the database:"
-msgstr "Heslo pro připojení do databáze:"
-
-#. Type: password
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:3001
-#: ../dsf-helper/dbpasswd-variables.templates:2001
-msgid "Connections to the database system are authenticated by a password."
-msgstr "Připojení do databáze je ověřováno heslem."
-
-#. Type: password
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:3001
-#: ../dsf-helper/dbpasswd-variables.templates:2001
-msgid "Please choose the connection password."
-msgstr "Zadejte zde prosím heslo pro připojení."
-
-#. Type: string
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:9001
-#: ../dsf-helper/ldap-variables.templates:2001
-msgid "LDAP base DN:"
-msgstr "Základní LDAP DN:"
-
-#. Type: string
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:9001
-#: ../dsf-helper/ldap-variables.templates:2001
-msgid ""
-"The DN (Distinguished Name) is used to refer to the LDAP directory "
-"unambiguously. Example: \"dc=gforge,dc=example,dc=com\"."
-msgstr ""
-"DN (rozlišovací jméno) se používá pro jednoznačné odkazování do LDAP "
-"adresáře. Například: „dc=gforge,dc=priklad,dc=cz“."
-
-#. Type: string
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:10001
-msgid "LDAP server hostname:"
-msgstr "Jméno počítače s LDAP serverem:"
-
-#. Type: boolean
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:11001
-#: ../gforge-mta-postfix.templates.dsfh-in:3001
-msgid "Do you want mail to ${noreply} to be discarded?"
-msgstr "Chcete, aby se pošta doručená na ${noreply} zahazovala?"
-
-#. Type: boolean
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:11001
-#: ../gforge-mta-postfix.templates.dsfh-in:3001
-msgid ""
-"GForge sends and receives plenty of e-mail to and from the \"${noreply}\" "
-"address."
-msgstr ""
-"GForge využívá adresu „${noreply}“ k odesílání i příjmu velkého množství "
-"pošty."
-
-#. Type: boolean
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:11001
-#: ../gforge-mta-postfix.templates.dsfh-in:3001
-msgid ""
-"E-mail to that address should be directed to a black hole (/dev/null), "
-"unless you have another use for that address."
-msgstr ""
-"Pokud s touto adresou nemáte jiné plány, doporučujeme veškerou příchozí "
-"poštu přesměrovat do černé díry (/dev/null)."
-
-#. Type: password
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:12001
-#: ../dsf-helper/ldap-variables.templates:4001
-msgid "LDAP password used to add users from the web:"
-msgstr "LDAP heslo používané pro přidávání uživatelů z webu:"
-
-#. Type: password
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:12001
-#: ../dsf-helper/ldap-variables.templates:4001
-msgid ""
-"Please provide the password to use when adding users into the LDAP directory "
-"from the web."
-msgstr ""
-"Zadejte prosím heslo, které budete používat pro přidávání uživatelů do LDAP "
-"adresáře z webového rozhraní."
-
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:14001
-msgid "SSL certificate generation"
-msgstr "Vytvoření SSL certifikátu"
-
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:14001
-msgid ""
-"A valid SSL/TLS certificate is needed to run GForge. If you don't already "
-"use one, you'll have to run the 'mod-ssl-makecert' command to generate one, "
-"and restart Apache afterwards."
-msgstr ""
-"Pro běh GForge potřebujete platný SSL/TLS certifikát. Pokud již nějaký "
-"nepoužíváte, můžete si jej vytvořit příkazem „mod-ssl-makecert“ a poté "
-"restartovat Apache."
-
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:14001
-msgid ""
-"Please note you will not be able to start Apache if you have no such "
-"certificate."
-msgstr "Jestliže certifikát nemáte, nepodaří se vám spustit Apache."
-
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:15001
-msgid "Appropriate PAM-LDAP configuration required for GForge"
-msgstr "GForge vyžaduje odpovídající nastavení PAM-LDAP"
-
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:15001
-msgid ""
-"GForge requires the libpam-ldap package to be configured appropriately. You "
-"might need to run 'dpkg-reconfigure libpam-ldap' in order to fix incorrect "
-"parameters."
-msgstr ""
-"GForge vyžaduje, aby byl balík libpam-ldap nastaven odpovídajícím způsobem. "
-"Abyste opravili chybné parametry, budete možná muset spustit příkaz „dpkg-"
-"reconfigure libpam-ldap“."
-
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:15001
-msgid ""
-"Known good values are: LDAP protocol version=3, make root database "
-"admin=yes, root login account=\"cn=admin,dc=<your-dc-here>\", crypt to use "
-"for passwords=crypt."
-msgstr ""
-"Známé rozumné hodnoty jsou: Verze LDAP protokolu=3, udělat roota správcem "
-"databáze=ano, přihlašovací účet roota=\"cn=admin,dc=<vaše-dc>\", šifra pro "
-"hesla=crypt."
-
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:15001
-msgid ""
-"Make sure that you type the same password for the libpam-ldap root password "
-"and the GForge LDAP password."
-msgstr ""
-"Ujistěte se, že jako LDAP heslo pro GForge zadáte stejné heslo, jako pro "
-"jste zadali pro roota v libpam-ldap."
 
 #. Type: boolean
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../gforge-dns-bind9.templates.dsfh-in:16001
+#: ../gforge-dns-bind9.templates.dsfh-in:3001
 msgid "Do you want a simple DNS setup for GForge?"
 msgstr "Chcete mít v GForge jednoduchou konfiguraci DNS?"
 
@@ -365,7 +177,7 @@ msgstr "Chcete mít v GForge jednoduchou konfiguraci DNS?"
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../gforge-dns-bind9.templates.dsfh-in:16001
+#: ../gforge-dns-bind9.templates.dsfh-in:3001
 msgid ""
 "You can use a simple DNS setup with wildcards to map all project web-hosts "
 "to a single IP address, and direct all the scm-hosts to a single SCM server, "
@@ -381,7 +193,7 @@ msgstr ""
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../gforge-dns-bind9.templates.dsfh-in:16001
+#: ../gforge-dns-bind9.templates.dsfh-in:3001
 msgid ""
 "Even if you use a simple DNS setup, you can still use separate machines as "
 "project servers; it just assumes that all the project web directories are on "
@@ -390,6 +202,32 @@ msgstr ""
 "I když zvolíte jednodušší nastavení DNS, stále můžete použít více počítačů. "
 "Nastavení bude pouze předpokládat, budete mít všechny adresáře s weby "
 "projektů na jednom počítači a že pro SCM použijete jediný server."
+
+#. Type: boolean
+#. Description
+#: ../gforge-mta-postfix.templates.dsfh-in:3001
+msgid "Do you want mail to ${noreply} to be discarded?"
+msgstr "Chcete, aby se pošta doručená na ${noreply} zahazovala?"
+
+#. Type: boolean
+#. Description
+#: ../gforge-mta-postfix.templates.dsfh-in:3001
+msgid ""
+"GForge sends and receives plenty of e-mail to and from the \"${noreply}\" "
+"address."
+msgstr ""
+"GForge využívá adresu „${noreply}“ k odesílání i příjmu velkého množství "
+"pošty."
+
+#. Type: boolean
+#. Description
+#: ../gforge-mta-postfix.templates.dsfh-in:3001
+msgid ""
+"E-mail to that address should be directed to a black hole (/dev/null), "
+"unless you have another use for that address."
+msgstr ""
+"Pokud s touto adresou nemáte jiné plány, doporučujeme veškerou příchozí "
+"poštu přesměrovat do černé díry (/dev/null)."
 
 #. Type: string
 #. Description
@@ -484,6 +322,24 @@ msgstr ""
 "Zadejte prosím uživatelské jméno správce databáze na serveru, který bude "
 "hostit databázi GForge."
 
+#. Type: password
+#. Description
+#: ../dsf-helper/dbpasswd-variables.templates:2001
+msgid "Password used for the database:"
+msgstr "Heslo pro připojení do databáze:"
+
+#. Type: password
+#. Description
+#: ../dsf-helper/dbpasswd-variables.templates:2001
+msgid "Connections to the database system are authenticated by a password."
+msgstr "Připojení do databáze je ověřováno heslem."
+
+#. Type: password
+#. Description
+#: ../dsf-helper/dbpasswd-variables.templates:2001
+msgid "Please choose the connection password."
+msgstr "Zadejte zde prosím heslo pro připojení."
+
 #. Type: string
 #. Description
 #: ../dsf-helper/downloadhost-variables.templates:2001
@@ -520,12 +376,6 @@ msgstr "ID skupiny správců pro statistiky:"
 #: ../dsf-helper/groupid-variables.templates:4001
 msgid "Peer rating administrative group ID:"
 msgstr "ID skupiny správců pro hodnocení:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/ldap-variables.templates:3001
-msgid "LDAP server host name:"
-msgstr "Jméno počítače s LDAP serverem:"
 
 #. Type: string
 #. Description

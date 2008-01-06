@@ -8,7 +8,6 @@
 [type: gettext/rfc822deb] dsf-helper/downloadhost-variables.templates
 [type: gettext/rfc822deb] dsf-helper/groupid-variables.templates
 [type: gettext/rfc822deb] dsf-helper/host-variables.templates
-[type: gettext/rfc822deb] dsf-helper/ldap-variables.templates
 [type: gettext/rfc822deb] dsf-helper/lists-variables.templates
 [type: gettext/rfc822deb] dsf-helper/shellhost-variables.templates
 [type: gettext/rfc822deb] dsf-helper/users-variables.templates

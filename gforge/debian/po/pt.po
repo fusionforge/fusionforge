@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gforge 4.6.99+svn6094-4\n"
-"Report-Msgid-Bugs-To: Source: gforge@packages.debian.org\n"
-"POT-Creation-Date: 2007-12-05 13:50+0100\n"
-"PO-Revision-Date: 2007-12-05 13:51+0100\n"
+"Report-Msgid-Bugs-To: lolando@debian.org\n"
+"POT-Creation-Date: 2007-12-23 11:02+0100\n"
+"PO-Revision-Date: 2007-12-23 11:05+0100\n"
 "Last-Translator: Ricardo Silva <ardoric@gmail.com>\n"
 "Language-Team: Portuguese <traduz@debianpt.org>\n"
 "MIME-Version: 1.0\n"
@@ -59,14 +59,12 @@ msgstr "Não deve ser o mesmo que o host principal do GForge."
 #. Type: string
 #. Default
 #: ../gforge-db-postgresql.templates.dsfh-in:8001
-#: ../gforge-dns-bind9.templates.dsfh-in:5001
 msgid "admin"
 msgstr "admin"
 
 #. Type: string
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:8002
-#: ../gforge-dns-bind9.templates.dsfh-in:5002
 msgid "GForge administrator login:"
 msgstr "Login do administrador do GForge:"
 
@@ -76,8 +74,6 @@ msgstr "Login do administrador do GForge:"
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:8002
 #: ../gforge-db-postgresql.templates.dsfh-in:10001
-#: ../gforge-dns-bind9.templates.dsfh-in:5002
-#: ../gforge-dns-bind9.templates.dsfh-in:6001
 msgid ""
 "The GForge administrator account will have full privileges on the system. It "
 "will be used to approve the creation of new projects."
@@ -88,7 +84,6 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:8002
-#: ../gforge-dns-bind9.templates.dsfh-in:5002
 msgid "Please choose the username for this account."
 msgstr "Por favor escolha o nome de utilizador para esta conta."
 
@@ -120,62 +115,38 @@ msgstr "Isto é necessário para a configuração de 'virtual hosts' do Apache."
 #. Type: password
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:10001
-#: ../gforge-dns-bind9.templates.dsfh-in:6001
 msgid "GForge administrator password:"
 msgstr "Palavra-chave do administrador do GForge:"
 
 #. Type: password
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:10001
-#: ../gforge-dns-bind9.templates.dsfh-in:6001
 msgid "Please choose the password for this account."
 msgstr "Por favor escolha a palavra-chave para esta conta."
 
 #. Type: password
 #. Description
-#. Type: password
-#. Description
-#. Type: password
-#. Description
-#. Type: password
-#. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:11001
-#: ../gforge-dns-bind9.templates.dsfh-in:4001
-#: ../gforge-dns-bind9.templates.dsfh-in:7001
-#: ../gforge-dns-bind9.templates.dsfh-in:13001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
-#: ../dsf-helper/ldap-variables.templates:5001
 msgid "Password confirmation:"
 msgstr "Confirmação da palavra-chave:"
 
 #. Type: password
 #. Description
-#. Type: password
-#. Description
-#. Type: password
-#. Description
-#. Type: password
-#. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:11001
-#: ../gforge-dns-bind9.templates.dsfh-in:4001
-#: ../gforge-dns-bind9.templates.dsfh-in:7001
-#: ../gforge-dns-bind9.templates.dsfh-in:13001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
-#: ../dsf-helper/ldap-variables.templates:5001
 msgid "Please re-type the password for confirmation."
 msgstr "Por favor, reescreva a palavra chave para confirmação."
 
 #. Type: string
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:12001
-#: ../gforge-dns-bind9.templates.dsfh-in:8001
 msgid "Initial list of skills:"
 msgstr "Lista inicial de competências:"
 
 #. Type: string
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:12001
-#: ../gforge-dns-bind9.templates.dsfh-in:8001
 msgid ""
 "GForge allows users to define a list of their skills, to be chosen from "
 "those present in the database. This list is the initial list of skills that "
@@ -189,175 +160,16 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:12001
-#: ../gforge-dns-bind9.templates.dsfh-in:8001
 msgid "Please enter a semicolon-separated list of skill names."
 msgstr ""
 "Por favor introduza uma lista de nomes de capacidades, separadas pelo "
 "símbolo ponto-e-v+irgula (;)."
 
-#. Type: password
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:3001
-#: ../dsf-helper/dbpasswd-variables.templates:2001
-msgid "Password used for the database:"
-msgstr "Palavra-chave utilizada na base de dados:"
-
-#. Type: password
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:3001
-#: ../dsf-helper/dbpasswd-variables.templates:2001
-msgid "Connections to the database system are authenticated by a password."
-msgstr "As ligações à base de dados são autenticadas por uma palavra-chave."
-
-#. Type: password
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:3001
-#: ../dsf-helper/dbpasswd-variables.templates:2001
-msgid "Please choose the connection password."
-msgstr "Por favor escolha a palavra chave da ligação."
-
-#. Type: string
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:9001
-#: ../dsf-helper/ldap-variables.templates:2001
-msgid "LDAP base DN:"
-msgstr "DN base no LDAP:"
-
-#. Type: string
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:9001
-#: ../dsf-helper/ldap-variables.templates:2001
-msgid ""
-"The DN (Distinguished Name) is used to refer to the LDAP directory "
-"unambiguously. Example: \"dc=gforge,dc=example,dc=com\"."
-msgstr ""
-"O DN (Nome Distinto) é usado para se referir sem ambiguidades ao directório "
-"LDAP. Pode usar, por exemplo, \"dc=gforge,dc=exemplo,dc=com\"."
-
-#. Type: string
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:10001
-msgid "LDAP server hostname:"
-msgstr "Nome da máquina com o servidor de LDAP:"
-
-#. Type: boolean
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:11001
-#: ../gforge-mta-postfix.templates.dsfh-in:3001
-msgid "Do you want mail to ${noreply} to be discarded?"
-msgstr "Deseja que o mail para ${noreply} seja apagado?"
-
-#. Type: boolean
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:11001
-#: ../gforge-mta-postfix.templates.dsfh-in:3001
-msgid ""
-"GForge sends and receives plenty of e-mail to and from the \"${noreply}\" "
-"address."
-msgstr ""
-"O GForge envia e recebe bastante e-mail para e de o endereço \"${noreply}\"."
-
-#. Type: boolean
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:11001
-#: ../gforge-mta-postfix.templates.dsfh-in:3001
-msgid ""
-"E-mail to that address should be directed to a black hole (/dev/null), "
-"unless you have another use for that address."
-msgstr ""
-"Os e-mails para esse endereço devem ser redireccionados para um buraco negro "
-"(/dev/null), a não ser que tenha outro uso para esse endereço."
-
-#. Type: password
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:12001
-#: ../dsf-helper/ldap-variables.templates:4001
-msgid "LDAP password used to add users from the web:"
-msgstr "A palavra-chave no LDAP usada para adicionar utilizadores pela web:"
-
-#. Type: password
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:12001
-#: ../dsf-helper/ldap-variables.templates:4001
-msgid ""
-"Please provide the password to use when adding users into the LDAP directory "
-"from the web."
-msgstr ""
-"Por favor indique a palavra-chave que deve ser usada quando se adicionarem "
-"utilizadores ao directório LDAP a partir da net."
-
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:14001
-msgid "SSL certificate generation"
-msgstr "Geração do certificado SSL"
-
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:14001
-msgid ""
-"A valid SSL/TLS certificate is needed to run GForge. If you don't already "
-"use one, you'll have to run the 'mod-ssl-makecert' command to generate one, "
-"and restart Apache afterwards."
-msgstr ""
-"Precisa de um certificado SSL/TLS válido para correr o Gforce. Se ainda não "
-"tem um, terá de correr o comando \"mod-ssl-makecert\" para gerar um, e em "
-"seguida reiniciar o Apache."
-
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:14001
-msgid ""
-"Please note you will not be able to start Apache if you have no such "
-"certificate."
-msgstr ""
-"Por favor note que não conseguirá iniciar o Apache sem ter tal certificado."
-
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:15001
-msgid "Appropriate PAM-LDAP configuration required for GForge"
-msgstr "O GForge necessita de uma configuração PAM-LDAP apropriada"
-
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:15001
-msgid ""
-"GForge requires the libpam-ldap package to be configured appropriately. You "
-"might need to run 'dpkg-reconfigure libpam-ldap' in order to fix incorrect "
-"parameters."
-msgstr ""
-"O Gforge necessita que o pacote libpam-ldap esteja configurado "
-"apropriadamente.  Você pode precisar de correr \"dpkg-reconfigure libpam-ldap"
-"\" para corrigir parâmetros incorrectos."
-
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:15001
-msgid ""
-"Known good values are: LDAP protocol version=3, make root database "
-"admin=yes, root login account=\"cn=admin,dc=<your-dc-here>\", crypt to use "
-"for passwords=crypt."
-msgstr ""
-"Bons valores conhecidos são: LDAP protocol version=3, make root database "
-"admin=yes, root login account=\"cn=admin,dc=<o-seu-dc-aqui>\", crypt to use "
-"for passwords=crypt."
-
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:15001
-msgid ""
-"Make sure that you type the same password for the libpam-ldap root password "
-"and the GForge LDAP password."
-msgstr ""
-"Certifique-se que especifica a mesma palavra-chave para root do libpam-ldap "
-"e do LDAP do GForge."
-
 #. Type: boolean
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../gforge-dns-bind9.templates.dsfh-in:16001
+#: ../gforge-dns-bind9.templates.dsfh-in:3001
 msgid "Do you want a simple DNS setup for GForge?"
 msgstr "Deseja uma configuração simples de DNS no GForge?"
 
@@ -365,7 +177,7 @@ msgstr "Deseja uma configuração simples de DNS no GForge?"
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../gforge-dns-bind9.templates.dsfh-in:16001
+#: ../gforge-dns-bind9.templates.dsfh-in:3001
 msgid ""
 "You can use a simple DNS setup with wildcards to map all project web-hosts "
 "to a single IP address, and direct all the scm-hosts to a single SCM server, "
@@ -382,7 +194,7 @@ msgstr ""
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../gforge-dns-bind9.templates.dsfh-in:16001
+#: ../gforge-dns-bind9.templates.dsfh-in:3001
 msgid ""
 "Even if you use a simple DNS setup, you can still use separate machines as "
 "project servers; it just assumes that all the project web directories are on "
@@ -392,6 +204,31 @@ msgstr ""
 "para os seus servidores de projectos; a configuração simplesmente assume que "
 "tem os directórios de projectos no mesmo servidor e tem um único servidor "
 "SCM."
+
+#. Type: boolean
+#. Description
+#: ../gforge-mta-postfix.templates.dsfh-in:3001
+msgid "Do you want mail to ${noreply} to be discarded?"
+msgstr "Deseja que o mail para ${noreply} seja apagado?"
+
+#. Type: boolean
+#. Description
+#: ../gforge-mta-postfix.templates.dsfh-in:3001
+msgid ""
+"GForge sends and receives plenty of e-mail to and from the \"${noreply}\" "
+"address."
+msgstr ""
+"O GForge envia e recebe bastante e-mail para e de o endereço \"${noreply}\"."
+
+#. Type: boolean
+#. Description
+#: ../gforge-mta-postfix.templates.dsfh-in:3001
+msgid ""
+"E-mail to that address should be directed to a black hole (/dev/null), "
+"unless you have another use for that address."
+msgstr ""
+"Os e-mails para esse endereço devem ser redireccionados para um buraco negro "
+"(/dev/null), a não ser que tenha outro uso para esse endereço."
 
 #. Type: string
 #. Description
@@ -489,6 +326,24 @@ msgstr ""
 "Por favor introduza o nome de utilizador do administrador do servidor que "
 "irá guardar a base de dados do GForge."
 
+#. Type: password
+#. Description
+#: ../dsf-helper/dbpasswd-variables.templates:2001
+msgid "Password used for the database:"
+msgstr "Palavra-chave utilizada na base de dados:"
+
+#. Type: password
+#. Description
+#: ../dsf-helper/dbpasswd-variables.templates:2001
+msgid "Connections to the database system are authenticated by a password."
+msgstr "As ligações à base de dados são autenticadas por uma palavra-chave."
+
+#. Type: password
+#. Description
+#: ../dsf-helper/dbpasswd-variables.templates:2001
+msgid "Please choose the connection password."
+msgstr "Por favor escolha a palavra chave da ligação."
+
 #. Type: string
 #. Description
 #: ../dsf-helper/downloadhost-variables.templates:2001
@@ -527,12 +382,6 @@ msgstr "Identificador do grupo de administradores de estatísticas:"
 #: ../dsf-helper/groupid-variables.templates:4001
 msgid "Peer rating administrative group ID:"
 msgstr "Identificador do grupo de administradores de classificação por pares:"
-
-#. Type: string
-#. Description
-#: ../dsf-helper/ldap-variables.templates:3001
-msgid "LDAP server host name:"
-msgstr "Nome do servidor de LDAP:"
 
 #. Type: string
 #. Description
