@@ -701,6 +701,7 @@ gforge/plugins/webcalendar/common/languages/Base.tab -text
 gforge/plugins/webcalendar/common/languages/French.tab -text
 gforge/plugins/webcalendar/common/webcalendar-init.php -text
 gforge/plugins/webcalendar/common/webcalendarPlugin.class -text
+gforge/plugins/webcalendar/cronjobs/gforge_webcalendar_cron -text
 gforge/plugins/webcalendar/db/20070829.sql -text
 gforge/plugins/webcalendar/db/20071109.sql -text
 gforge/plugins/webcalendar/db/webcalendar-init.sql -text

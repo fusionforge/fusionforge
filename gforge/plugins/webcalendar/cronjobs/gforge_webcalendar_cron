@@ -1,0 +1,13 @@
+#
+#       For webcalendar
+#       Make correspondance between Gforge project and Gforge user with
+#       webcalendar group and webcalendar user
+#
+15,45 * * * * root /usr/bin/php -f /usr/share/gforge/plugins/webcalendar/bin/lists_utils_projects.php
+
+#
+#       For webcalendar
+#       Update the project and the user of gforge into webcalendar
+#
+19,49 * * * * root /usr/bin/php -f /usr/share/gforge/plugins/webcalendar/script/webcal_update_user.php 
+

@@ -59,7 +59,7 @@ class webcalendarPlugin extends Plugin {
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
 			if ($G_SESSION->usesPlugin("webcalendar")) {
-				$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we´re calling is the user one
+				$param = '?type_param=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we´re calling is the user one
 				echo ' | ' . $HTML->PrintSubMenu (array ($text),
 						  array ('/plugins/webcalendar/index.php' . $param ));				
 			}
@@ -74,15 +74,29 @@ class webcalendarPlugin extends Plugin {
 			if (!$project->isProject()) {
 				return;
 			}
-			if ( !$project->usesPlugin ( $this->name ) ) {
+			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
-				$params['DIRS'][]='/plugins/webcalendar/index2.php?type=group&group_id='.$group_id;
+				$params['DIRS'][]='/plugins/webcalendar/index2.php?type_param=group&group_id='.$group_id;
 				} else {
-				$params['TITLES'][]=$this->text." is [Off]";
+			//	$params['TITLES'][]=$this->text." is [Off]";
 			}	
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == "groupisactivecheckbox") {
 			///Check if the group is active
+			$group = &group_get_object($group_id);
+			echo "<tr>";
+			echo "<td>";
+			echo ' <input type="CHECKBOX" name="use_webcalendarplugin" value="1" ';
+			// CHECKED OR UNCHECKED?
+			if ( $group->usesPlugin ( $this->name ) ) {
+				echo "CHECKED";
+			}
+			echo "><br/>";
+			echo "</td>";
+			echo "<td>";
+			echo "<strong>Use ".$this->text." Plugin</strong>";
+			echo "</td>";
+			echo "</tr>";
 		} elseif ($hookname == "groupisactivecheckboxpost") {
 			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
 			$group = &group_get_object($group_id);
@@ -95,7 +109,8 @@ class webcalendarPlugin extends Plugin {
 		} elseif ($hookname == "userisactivecheckbox") {
 			//check if user is active
 			// this code creates the checkbox in the user account manteinance page to activate/deactivate the plugin
-		} elseif ($hookname == "userisactivecheckboxpost") {
+
+                } elseif ($hookname == "userisactivecheckboxpost") {
 			// this code actually activates/deactivates the plugin after the form was submitted in the user account manteinance page
 			$user = $params['user'];
 			$use_webcalendarplugin = getStringFromRequest('use_webcalendarplugin');
@@ -123,7 +138,7 @@ class webcalendarPlugin extends Plugin {
 			//check if the user has the plugin activated
 			if ($user->usesPlugin($this->name)) {
 				echo '	<p>
-					<a href="/plugins/webcalendar/index.php?id=' . $userid . '&type=user&pluginname=' . $this->name . '">' . $Language->getText('user_home','view_webcalendar') .'</a></p>';
+					<a href="/plugins/webcalendar/index.php?id=' . $userid . '&type_param=user&pluginname=' . $this->name . '">' . $Language->getText('user_home','view_webcalendar') .'</a></p>';
 			}
 		} elseif ($hookname == "project_admin_plugins") {
 			global $Language;
@@ -132,7 +147,7 @@ class webcalendarPlugin extends Plugin {
 			$group = &group_get_object($group_id);
 			
 			if ( $group->usesPlugin ( $this->name ) ) {
-				echo '<a href="/plugins/webcalendar/index.php?id=' . $group->getID() . '&type=admin&pluginname=' . $this->name . '">' . $Language->getText('project_admin','webcalendar') . '</a><br />';
+				echo '<a href="/plugins/webcalendar/index.php?id=' . $group->getID() . '&type_param=admin&pluginname=' . $this->name . '">' . $Language->getText('project_admin','webcalendar') . '</a><br />';
 			}
 			
 		}												    
@@ -142,12 +157,12 @@ class webcalendarPlugin extends Plugin {
 			
 			<div id="cal" class="tabbertab" title="WebCalendar"  >
 			<table width="100%" cellspacing="0" cellpadding="0" border="0" ><tr align="center" ><td >
-			<iframe name="webcal" src="/plugins/webcalendar/login.php?type=user" border=no scrolling="yes" width="100%" height="700"></iframe>
+			<iframe name="webcal" src="/plugins/webcalendar/login.php?type_param=user" border=no scrolling="yes" width="100%" height="700"></iframe>
 			</td></tr></table>
 			</div>
 			<script>
 			function reload_webcal() {
-			frames['webcal'].location.replace('/plugins/webcalendar/login.php?type=user');
+			frames['webcal'].location.replace('/plugins/webcalendar/login.php?type_param=user');
 			
 			}
 			</script>
@@ -519,7 +534,7 @@ class webcalendarPlugin extends Plugin {
 		// www/include/project_home.php line 418
 		//params = group_id
 		print '<hr size="1" />';
-		print '<a href="/plugins/webcalendar/index2.php?type=group&group_id='.$params.'">Webcalendar</a> ';
+		print '<a href="/plugins/webcalendar/index2.php?type_param=group&group_id='.$params.'">Webcalendar</a> ';
 		}
 		 
 	}

@@ -4,6 +4,7 @@ Added files :
 
  bin/lists_utils_projects.php
  bin/users_groups.xml
+ cronjobs/gforge_webcalendar_cron
  db/20070829.sql
  db/20071109.sql
  script/webcal_update_user.php
@@ -11,7 +12,7 @@ Added files :
  www/list_users_role.php
  
 Modified files :
-  common/webcalendarPlugin.class.php
+  common/webcalendarPlugin.class
   script/webcalendar-init.php
   www/docs/WebCalendar-Database.html
   www/docs/WebCalendar-DeveloperGuide.html
