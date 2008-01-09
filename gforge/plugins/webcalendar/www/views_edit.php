@@ -15,6 +15,24 @@
  */
 include_once 'includes/init.php';
 
+//Debug
+logs($log_file,"#######  view_edit.php  #######\n");
+//Debug
+
+//Debug
+logs($log_file,"login : ".$login."\n");
+//Debug
+
+if(isset($_GET['type_param'])){
+  $GLOBALS['type_param']=$_GET['type_param'];
+}else{
+  $GLOBALS['type_param']='user';
+}
+
+if(isset($_GET['group_param'])){
+  $GLOBALS['group_param']=$_GET['group_param'];
+}
+
 $error = "";
 
 if ( ! $is_admin )
@@ -30,6 +48,16 @@ print_header ( $INC, "", $BodyX );
 ?>
 
 <form action="views_edit_handler.php" method="post" name="editviewform">
+
+<?php
+  $echo = "<input type=\"hidden\" value=\"".$GLOBALS['type_param']."\" name=\"type_param\" />";
+  if($GLOBALS['type_param']=='group'){
+    $echo2 = "<input type=\"hidden\" value=\"".$GLOBALS['group_param']."\" name=\"group_param\" />";
+  }
+  echo $echo;
+  echo $echo2;
+?>
+
 <?php
 $newview = true;
 $viewname = "";

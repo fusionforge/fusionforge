@@ -3,6 +3,34 @@ include_once 'includes/init.php';
 
 $error = "";
 
+//Debug
+logs($log_file,"#######  view_edit_handler.php  #######\n");
+//Debug
+
+//Debug
+logs($log_file,"login : ".$login."\n");
+//Debug
+
+if(isset($_POST['type_param'])){
+  $GLOBALS['type_param']=$_POST['type_param'];
+}else{
+  $GLOBALS['type_param']='user';
+}
+
+logs($log_file, "type_param : ".$GLOBALS['type_param']);
+
+if(isset($_POST['group_param'])){
+  $GLOBALS['group_param']=$_POST['group_param'];
+  logs($log_file, "group_param : ".$GLOBALS['group_param']);
+
+}
+
+$info_type = "type_param=".$GLOBALS['type_param'];
+
+if($GLOBALS['type_param'] == 'group'){
+  $info_type .= "&group_param=".$GLOBALS['group_param'];
+}
+
 $viewisglobal = getPostValue ( "is_global" );
 if ( ! $is_admin || $viewisglobal != 'Y' )
   $viewisglobal = 'N'; // only admin can create global view
@@ -59,7 +87,8 @@ if ( $action == "Delete" || $action == translate ("Delete") ) {
 
 
 if ( $error == "" ) {
-  do_redirect ( "views.php" );
+  logs($log_file, "do redirect\n");
+  do_redirect ( "views.php?".$info_type );
 }
 print_header();
 ?>

@@ -1,53 +1,73 @@
 <?php
+
 include_once 'includes/init.php';
 
-$my_event = false;
-$can_edit = false;
+//Debug
+logs($log_file,"#######  del_entry.php #######\n");
+//Debug
 
-// First, check to see if this user should be able to delete this event.
-if ( $id > 0 ) {
-  // first see who has access to edit this entry
-  if ( $is_admin ) {
-    $can_edit = true;
-  } else if ( $readonly == "Y" ) {
-    $can_edit = false;
-  } else {
-    $can_edit = false;
-    $sql = "SELECT webcal_entry.cal_id FROM webcal_entry, " .
-      "webcal_entry_user WHERE webcal_entry.cal_id = " .
-      "webcal_entry_user.cal_id AND webcal_entry.cal_id = $id " .
-      "AND (webcal_entry.cal_create_by = '$login' " .
-      "OR webcal_entry_user.cal_login = '$login')";
-    $res = dbi_query ( $sql );
-    if ( $res ) {
-      $row = dbi_fetch_row ( $res );
-      if ( $row && $row[0] > 0 )
+$my_event = false;
+//$can_edit = false;
+
+//Récupération du type et du groupe
+if(isset($_GET['type_param'])){
+  $GLOBALS['type_param']=$_GET['type_param'];
+}else{
+  $GLOBALS['type_param']='user';
+}
+
+logs($log_file, "Type : ".$GLOBALS['type_param']."\n");
+
+if(isset($_GET['group_param'])){
+  $GLOBALS['group_param']=$_GET['group_param'];
+}
+
+if($GLOBALS['type_param']=='group' && isset($_GET['group_param'])){
+
+  $group_cal=$GLOBALS['group_param'];
+  $role_user=user_project_role($login,$group_cal);
+  
+  $res=dbi_query("select unix_group_name from groups where group_id=".$GLOBALS['group_param']);
+  $row = pg_fetch_array($res);
+  $GLOBALS['group_name_param']=$row[0];
+  
+  //debug  
+  logs($log_file,"edit_entry.php : role : ".$role_user."\n login : ".$login."\n group : ".$group_cal."\nuser : ".$user."\n");
+  //debug
+}
+
+//debug
+logs($log_file,"Start can_modifiy\n");
+//debug
+
+$can_modify = Can_Modify($_GET['id'],$login);
+
+/*$can_edit=false;
+if($GLOBALS['type_param'] == 'group' && $role_user >=2 ){
+
+  $can_edit = true;
+  
+  //debug
+   
+  logs($log_file,"edit_entry_handler.php : can_modify 1 \n");
+  fclose($log);
+  //debug
+  
+}else{
+  if($GLOBALS['type_param'] == 'user'){
+    if(isset($id) && $id!="" ){
+      $res = dbi_query("select cal_id 
+              from webcal_entry 
+              where cal_id = '".$id."' 
+                and cal_create_by = '".$login."'");
+      if( pg_numrows($res) ){
         $can_edit = true;
-      dbi_free_result ( $res );
+      }
     }
   }
-}
+}*/
 
-// See who owns the event.  Owner should be able to delete.
-$res = dbi_query (
-  "SELECT cal_create_by FROM webcal_entry WHERE cal_id = $id" );
-if ( $res ) {
-  $row = dbi_fetch_row ( $res );
-  $owner = $row[0];
-  dbi_free_result ( $res );
-  
-  
-  if ( $owner == $login || $is_assistant && ( $user == $owner ) || $is_nonuser_admin && ( $user == $owner ) ) {
-    $my_event = true;
-    $can_edit = true;
-  }
-  
-}
-
-if ( $readonly == 'Y' )
-  $can_edit = false;
-
-if ( ! $can_edit ) {
+if ( ! $can_modify ) {
   $error = translate ( "You are not authorized" );
 }
 
@@ -66,6 +86,10 @@ if ( ! empty ( $date ) && $event_repeats && ! empty ( $override ) ) {
   $override_repeat = true;
 }
 
+//debug
+logs($log_file,"repeating event? \n");
+//debug
+
 if ( $id > 0 && empty ( $error ) ) {
   if ( ! empty ( $date ) ) {
     $thisdate = $date;
@@ -77,6 +101,10 @@ if ( $id > 0 && empty ( $error ) ) {
       $thisdate = $row[0];
     }
   }
+  
+  //debug
+  logs($log_file,"event date? \n");
+  //debug
 
   // Only allow delete of webcal_entry & webcal_entry_repeats
   // if owner or admin, not participant.
@@ -116,7 +144,17 @@ if ( $id > 0 && empty ( $error ) ) {
       $do_send = get_pref_setting ( $partlogin[$i], "EMAIL_EVENT_DELETED" );
       $user_TZ = get_pref_setting ( $partlogin[$i], "TZ_OFFSET" );
       $user_language = get_pref_setting ( $partlogin[$i], "LANGUAGE" );
+  
+      //debug
+      logs($log_file,"LOAD OF THE USER VARIABLES \n");
+      //debug
+      
       user_load_variables ( $partlogin[$i], "temp" );
+      
+      //debug
+      logs($log_file,"AFTER LOAD OF THE USER VARIABLES \n");
+      //debug
+      
       // Want date/time in user's timezone
       if ( $eventtime != '-1' ) { 
         $eventtime += ( $user_TZ * 10000 );
@@ -126,7 +164,11 @@ if ( $id > 0 && empty ( $error ) ) {
           $eventtime -= 240000;
         }
       }  
-               
+      
+      //debug
+      logs($log_file,"event time ? \n");
+      //debug  
+                   
       if ( /*$partlogin[$i] != $login &&*/ $do_send == "Y" && boss_must_be_notified ( $login, $partlogin[$i] ) && 
         strlen ( $tempemail ) && $send_email != "N" ) {
          if (($GLOBALS['LANGUAGE'] != $user_language) && ! empty ( $user_language ) && ( $user_language != 'none' )){
@@ -148,9 +190,13 @@ if ( $id > 0 && empty ( $error ) ) {
         mail ( $tempemail,
           translate($application_name) . " " .
    translate("Notification") . ": " . $name,
-         utf8_deconde(html_to_8bits ($msg)), $extra_hdrs );
+         utf8_decode(html_to_8bits ($msg)), $extra_hdrs );
       }
     }
+    
+    //debug
+    logs($log_file,"AFTER SEND MAIL \n");
+    //debug
 
     // Instead of deleting from the database... mark it as deleted
     // by setting the status for each participant to "D" (instead
@@ -163,17 +209,22 @@ if ( $id > 0 && empty ( $error ) ) {
       // If it's a repeating event, delete any event exceptions
       // that were entered.
       if ( $event_repeats ) {
- $res = dbi_query ( "SELECT cal_id FROM webcal_entry " .
-   "WHERE cal_group_id = $id" );
+        $res = dbi_query ( "SELECT cal_id 
+                            FROM webcal_entry " .
+                           "WHERE cal_group_id = $id" );
         if ( $res ) {
-   $ex_events = array ();
+          $ex_events = array ();
+          
           while ( $row = dbi_fetch_row ( $res ) ) {
-     $ex_events[] = $row[0];
-   }
+            $ex_events[] = $row[0];
+          }
+          
           dbi_free_result ( $res );
+          
           for ( $i = 0; $i < count ( $ex_events ); $i++ ) {
-     $res = dbi_query ( "SELECT cal_login FROM " .
-              "webcal_entry_user WHERE cal_id = $ex_events[$i]" );
+            $res = dbi_query ( "SELECT cal_login 
+                                FROM " . "webcal_entry_user 
+                                WHERE cal_id = $ex_events[$i]" );
             if ( $res ) {
               $delusers = array ();
               while ( $row = dbi_fetch_row ( $res ) ) {
@@ -182,20 +233,26 @@ if ( $id > 0 && empty ( $error ) ) {
               dbi_free_result ( $res );
               for ( $j = 0; $j < count ( $delusers ); $j++ ) {
                 // Log the deletion
-         activity_log ( $ex_events[$i], $login, $delusers[$j],
-                  $LOG_DELETE, "" );
-                dbi_query ( "UPDATE webcal_entry_user SET cal_status = 'D' " .
-           "WHERE cal_id = $ex_events[$i] " .
-                  "AND cal_login = '$delusers[$j]'" );
+                activity_log ( $ex_events[$i], $login, $delusers[$j],$LOG_DELETE, "" );
+                dbi_query ( "UPDATE webcal_entry_user 
+                             SET cal_status = 'D' " .
+                            "WHERE cal_id = $ex_events[$i] " .
+                              "AND cal_login = '$delusers[$j]'" );
               }
             }
           }
- }
+        }
       }
+      
+      //debug
+      logs($log_file,"AFTER UPDATE OF WEBCAL_ENTRY_USER \n");
+      //debug
+
 
       // Now, mark event as deleted for all users.
-      dbi_query ( "UPDATE webcal_entry_user SET cal_status = 'D' " .
-        "WHERE cal_id = $id" );
+      dbi_query ( "UPDATE webcal_entry_user 
+                   SET cal_status = 'D' " .
+                  "WHERE cal_id = $id" );
     }
   } else {
     // Not the owner of the event and are not the admin.
@@ -203,22 +260,92 @@ if ( $id > 0 && empty ( $error ) ) {
     // We could just set the status to 'D' instead of deleting.
     // (but we would need to make some changes to edit_entry_handler.php
     // to accomodate this).
-    dbi_query ( "DELETE FROM webcal_entry_user " .
-      "WHERE cal_id = $id AND cal_login = '$login'" );
+    dbi_query ( "DELETE 
+                 FROM webcal_entry_user " .
+                "WHERE cal_id = $id 
+                   AND cal_login = '$login'" );
     activity_log ( $id, $login, $login, $LOG_REJECT, "" );
   }
+  
+  //debug
+  logs($log_file,"END IF \n");
+  //debug
 }
 
-$ret = getValue ( "ret" );
+//debug
+logs($log_file,"AFTER IF \n");
+//debug
+
+/*$ret = getValue ( "ret" );
 if ( ! empty ( $ret ) && $ret == "list" ) {
   $url = "list_unapproved.php";
   if ( ! empty ( $user ) )
     $url .= "?user=$user";
 } else {
   $url = get_preferred_view ( "", empty ( $user ) ? "" : "user=$user" );
+}*/
+	
+$res = dbi_query("SELECT cal_value 
+                  FROM webcal_user_pref 
+                  WHERE cal_login='".$login."' 
+                    AND cal_setting='STARTVIEW'");
+//debug
+logs($log_file,"view : "."SELECT cal_value 
+                          FROM webcal_user_pref 
+                          WHERE cal_login='".$login."' 
+                            AND cal_setting='STARTVIEW'"."\n");
+//debug
+
+$rows = pg_fetch_row($res);
+$view = $rows[0];
+
+//debug
+logs($log_file,"view : ".print_r($rows,true)."\n");
+//debug
+
+if($view == "" || empty($view)){
+  $res = dbi_query("SELECT cal_value 
+                    FROM webcal_config
+                    WHERE cal_setting='STARTVIEW'");
+  $rows = pg_fetch_row($res);
+  
+  //debug
+  logs($log_file,"sql : SELECT cal_value
+                    FROM webcal_config
+                    WHERE cal_setting='STARTVIEW'\n");   
+  logs($log_file,"view : ".print_r($rows,true)."\n");
+  fclose($log);
+  //debug
+  
+  $view = $rows[0];
 }
 
+//debug
+logs($log_file,"view : ".$view."\n");
+//debug
+
+//Debug
+logs($log_file,"group_name : ".$GLOBALS['group_name']."\n");
+//Debug
+
+$url = $view.'?user=';
+
+if($GLOBALS['type_param'] == 'group'){
+  $url .= $GLOBALS['group_name_param']."&type_param=".$GLOBALS['type_param']."&group_param=".$GLOBALS['group_param'];
+}else{
+  $url .= $login."&type_param=".$GLOBALS['type_param'];
+}
+
+//Debug
+logs($log_file,"url : ".$url."\n");
+//Debug
+
 if ( empty ( $error ) ) {
+
+  //Debug
+  logs($log_file, "Do_redirect \n");
+  //Debug
+ 
   do_redirect ( $url );
   exit;
 }

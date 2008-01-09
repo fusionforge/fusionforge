@@ -1,0 +1,51 @@
+09 January 2008:
+
+Added files :
+
+ bin/lists_utils_projects.php
+ bin/users_groups.xml
+ db/20070829.sql
+ db/20071109.sql
+ script/webcal_update_user.php
+ www/list_roles_projects.php
+ www/list_users_role.php
+ 
+Modified files :
+  common/webcalendarPlugin.class.php
+  script/webcalendar-init.php
+  www/docs/WebCalendar-Database.html
+  www/docs/WebCalendar-DeveloperGuide.html
+  www/docs/WebCalendar-Styling.html
+  www/docs/WebCalendar-SysAdmin.html
+  www/includes/js/edit_entry.php
+  www/includes/connect.php
+  www/includes/functions.php
+  www/includes/index.php
+  www/includes/init.php
+  www/includes/settings.php
+  www/includes/trailer.php
+  www/includes/user.php
+  www/admin.php
+  www/admin_handler.php
+  www/adminhome.php
+  www/approve_entry.php
+  www/day.php
+  www/del_entry.php
+  www/edit_entry.php
+  www/edit_entry_handler.php
+  www/index.php
+  www/index2.php
+  www/layers.php
+  www/list_unapproved.php
+  www/login.php
+  www/month.php
+  www/pref.php
+  www/purge.php
+  www/reject_entry.php
+  www/view_entry.php
+  www/views.php
+  www/views_edit.php
+  www/views_edit_handler.php
+  www/week.php
+  www/year.php
+  ./README 

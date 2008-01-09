@@ -17,6 +17,52 @@
  */
 include_once 'includes/init.php';
 
+//Debug
+logs($log_file,"#######  purge.php  #######\n");
+//Debug
+
+//Debug
+logs($log_file,"login : ".$login."\n");
+//Debug
+
+if(isset($_POST['type_param']) && ($_POST['type_param'] == 'group' || $_POST['type_param'] == 'user') ) {
+  $GLOBALS['type_param']=$_POST['type_param'];
+  $sender = 'post';
+}else{
+  if(isset($_GET['type_param']) && ($_GET['type_param'] == 'group' || $_GET['type_param'] == 'user') ) {
+    $GLOBALS['type_param']=$_GET['type_param'];
+    $sender = 'get';
+  }else{
+    $GLOBALS['type_param']='user';
+  }
+}
+
+logs($log_file, "type_param : ".$GLOBALS['type_param']);
+
+if($GLOBALS['type_param']=='group'){
+  if($sender == 'post'){
+    $GLOBALS['group_param']=$_POST['group_param'];
+  }else if($sender == 'get'){
+    $GLOBALS['group_param']=$_GET['group_param'];
+  }
+  
+  $res=dbi_query("select unix_group_name from groups where group_id=".$GLOBALS['group_param']);
+  $row = pg_fetch_array($res);
+  $GLOBALS['group_name_param']=$row[0];
+  
+  $user = $GLOBALS['group_name_param'];
+  
+  logs($log_file, "group_param : ".$GLOBALS['group_param']);
+}else{
+  $user = $login;
+}
+
+$info_type = "type_param=".$GLOBALS['type_param'];
+
+if($GLOBALS['type_param'] == 'group'){
+  $info_type .= "&group_param=".$GLOBALS['group_param'];
+}
+
 // Set this to true do show the SQL at the bottom of the page
 $purgeDebug = true;
 $sqlLog = '';
@@ -56,7 +102,7 @@ if ( $preview )
 echo "</h2>\n";
 
 ?>
-<a title="<?php etranslate("Admin") ?>" class="nav" href="adminhome.php">&laquo;&nbsp;<?php etranslate("Admin") ?></a><br /><br />
+<a title="<?php etranslate("Admin") ?>" class="nav" href="adminhome.php?<?php echo $info_type ?>">&laquo;&nbsp;<?php etranslate("Admin") ?></a><br /><br />
 <?php
 
 if ( ! empty ( $user ) ) {
@@ -72,8 +118,10 @@ if ( ! empty ( $user ) ) {
     if ( $user == 'ALL' ) {
       $ids = array ( 'ALL' );
     } else {
+      logs($log_file,"SELECT cal_id FROM webcal_entry WHERE cal_create_by = '$user'\n");
       $ids = get_ids (
         "SELECT cal_id FROM webcal_entry WHERE cal_create_by = '$user'" );
+      logs($log_file, " ID : ".print_r($ids,true)."\n");
     }
   } elseif ( $end_date ) {
     if ( $user != 'ALL' ) {
@@ -93,6 +141,9 @@ if ( ! empty ( $user ) ) {
       $ALL );
     $ids = array_merge ( $E_ids, $M_ids );
   }
+  
+  logs($log_file, " ID : ".print_r($ids,true)."\n");
+  
   //echo "event ids: <ul><li>" . implode ( "</li><li>", $ids ) . "</li></ul>\n";
   if ( count ( $ids ) > 0 ) {
     purge_events ( $ids );
@@ -107,6 +158,15 @@ if ( ! empty ( $user ) ) {
 ?>
 
 <form action="purge.php" method="post" name="purgeform">
+<?php
+  $echo = "<input type=\"hidden\" value=\"".$GLOBALS['type_param']."\" name=\"type_param\" />";
+  if($GLOBALS['type_param']=='group'){
+    $echo2 = "<input type=\"hidden\" value=\"".$GLOBALS['group_param']."\" name=\"group_param\" />";
+  }
+  echo $echo;
+  echo $echo2;
+?>
+
 <table>
 	<tr><td><label for="user">
 		<?php etranslate("User");?>:</label></td>

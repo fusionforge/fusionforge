@@ -1,5 +1,32 @@
 <?php
+
+
 include_once 'includes/init.php';
+
+//Debug
+logs($log_file,"####### pref.php #######\n");
+//debug
+  
+
+if(isset($_GET['type_param'])){
+  $GLOBALS['type_param']=$_GET['type_param'];
+}else{
+  $GLOBALS['type_param']='user';
+}
+
+if(isset($_GET['group_param'])){
+  $GLOBALS['group_param']=$_GET['group_param'];
+}
+
+if($GLOBALS['type_param']=='group' && isset($_GET['group_param'])){
+
+  $group_cal=$GLOBALS['group_param'];
+  $role_user=user_project_role($login,$group_cal);
+  
+  //Debug
+  logs($log_file,"role : ".$role_user."\n login : ".$login."\n group : ".$group_cal."\nuser : ".$user."\n");
+  //debug
+}
 
 if ($user != $login)
   $user = (($is_admin || $is_nonuser_admin) && $user) ? $user : $login;
@@ -50,7 +77,25 @@ print_header($INC);
 	}
 ?>&nbsp;<img src="help.gif" alt="<?php etranslate("Help")?>" class="help" onclick="window.open ( 'help_pref.php', 'cal_help', 'dependent,menubar,scrollbars,height=400,width=400,innerHeight=420,outerWidth=420');" /></h2>
 
-<a title="<?php etranslate("Admin") ?>" class="nav" href="adminhome.php">&laquo;&nbsp;<?php etranslate("Admin") ?></a><br /><br />
+<?php 
+
+  //Debug
+  logs($log_file,"admin link\n");
+  //debug
+  
+  $admin_link = "<a title=\"".translate("Admin")."\" class=\"nav\" href=\"adminhome.php";
+  
+  if($GLOBALS['type_param'] == 'group'){
+    $admin_link .= "?type_param=".$GLOBALS['type_param']."&group_param=".$GLOBALS['group_param'];
+  }else{
+    $admin_link .= "?type_param=".$GLOBALS['type_param'];
+  }
+  
+  $admin_link .= "\">&nbsp;".translate("Admin")."</a><br /><br />";
+  
+  echo $admin_link;
+
+?>
 
 <form action="pref_handler.php" method="post" onsubmit="return valid_form(this);" name="prefform">
 <?php 

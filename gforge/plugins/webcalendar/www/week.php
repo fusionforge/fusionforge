@@ -1,6 +1,66 @@
 <?php
+
 include_once 'includes/init.php';
 
+//Debug
+logs($log_file,"#######  week.php #######\n");
+//Debug
+
+if(isset($_GET['type_param'])){
+  $GLOBALS['type_param']=$_GET['type_param'];
+}else{
+  $GLOBALS['type_param']='user';
+}
+
+if(isset($_GET['group_param'])){
+  $GLOBALS['group_param']=$_GET['group_param'];
+}
+
+if($GLOBALS['type_param']=='group' && isset($_GET['group_param'])){
+  $group_cal=$GLOBALS['group_param'];
+  $role_user=user_project_role($login,$group_cal);
+  
+  $res=dbi_query("select unix_group_name from groups where group_id=".$GLOBALS['group_param']);
+  $row = pg_fetch_array($res);
+  $GLOBALS['group_name_param']=$row[0];
+  
+  //Debug
+  logs($log_file,"trailer.php : role : ".$role_user."\n login : ".$login."\n group : ".$group_cal."\nuser : ".$user."\n");
+  //debug
+}
+
+//Determine the info type
+if($GLOBALS['type_param']=='group'){
+  $info_type="type_param=group&group_param=".$GLOBALS['group_param']."&";
+}else{
+  $info_type="type_param=user&";
+}
+
+$can_add = Can_Add($login,$GLOBALS['type_param'],$GLOBALS['group_param']);
+
+/*$can_add=false;
+if($GLOBALS['type_param'] == 'group' && $role_user >=2 ){
+  $can_add = true;
+  //debug
+  logs($log_file,"edit_entry_handler.php : can_modify \n");
+  //debug
+}else{
+  if($GLOBALS['type_param'] == 'user'){
+      $can_add = true;
+  }
+}*/
+
+$test=print_r($_GET,true);
+
+//Debug
+fputs($f,"week.php:\n");
+fputs($f,"GET:".$test." \n");
+//Debug
+    
+//Debug
+logs($log_file,"week.php : type : ".$GLOBALS['type_param']."\n");
+//Debug
+    
 if (($user != $login) && $is_nonuser_admin) {
    load_user_layers ($user);
 } else {
@@ -8,7 +68,8 @@ if (($user != $login) && $is_nonuser_admin) {
 }
 
 load_user_categories ();
-
+    $user = $_GET['user'];
+   
 $next = mktime ( 3, 0, 0, $thismonth, $thisday + 7, $thisyear );
 $prev = mktime ( 3, 0, 0, $thismonth, $thisday - 7, $thisyear );
 
@@ -50,6 +111,7 @@ $INC = array('js/popups.php');
 print_header($INC,$HeadX);
 
 /* Pre-Load the repeated events for quckier access */
+
 $repeated_events = read_repeated_events ( strlen ( $user ) ? $user : $login,
   $cat_id, $startdate );
 
@@ -87,7 +149,7 @@ href="week.php?<?php echo $u_url;?>date=<?php echo
   date ("Ymd", $next ) . $caturl;?>"><img src="rightarrow.gif" 
   alt="<?php etranslate("Next")?>" /></a>
 <span class="user"><?php
-  if ( $single_user == "N" ) {
+  /*if ( $single_user == "N" ) {
     echo "<br />$user_fullname";
   }
   if ( $is_nonuser_admin ) {
@@ -95,7 +157,19 @@ href="week.php?<?php echo $u_url;?>date=<?php echo
   }
   if ( $is_assistant ) {
     echo "<br />-- " . translate("Assistant mode") . " --";
-  }
+  }*/
+echo "<br />";  
+if($GLOBALS['type_param'] == 'group'){
+  $res = dbi_query("SELECT group_name from groups where unix_group_name = '".$GLOBALS['group_name_param']."'");
+  $row = pg_fetch_array($res);
+  $echo .= $row[0];
+}else{
+  $echo .= $login;
+}
+  
+echo $echo;
+
+  
 ?></span>
 <?php
   if ( $categories_enabled == "Y" && (!$user || ($user == $login || 
@@ -173,7 +247,13 @@ for ( $d = $start_ind; $d < $end_ind; $d++ ) {
   $ev = get_entries ( $user, $date, $get_unapproved );
   $hour_arr = array ();
   $rowspan_arr = array ();
-  for ( $i = 0; $i < count ( $ev ); $i++ ) {
+  
+  //debug
+  logs($log_file,"######## Start ###########\n");
+  logs($log_file,"trailer.php : d: ".$d." hour_arr : ".print_r($hour_arr , true)."\n");
+  //debug
+  
+  for ( $i = 0; $i < count ( $ev ); $i++ ) {  
     // print out any repeating events that are before this one...
     while ( $cur_rep < count ( $rep ) &&
       $rep[$cur_rep]['cal_time'] < $ev[$i]['cal_time'] ) {
@@ -198,6 +278,12 @@ for ( $d = $start_ind; $d < $end_ind; $d++ ) {
       }
       $cur_rep++;
     }
+    
+    //debug
+    logs($log_file,"######## ON FIRST LOOP ###########\n");
+    logs($log_file,"trailer.php : i: ".$i." hour_arr : ".print_r($hour_arr , true)."\n");
+    //debug
+    
     if ( $get_unapproved || $ev[$i]['cal_status'] == 'A' ) {
       if ( ! empty ( $ev[$i]['cal_ext_for_id'] ) ) {
         $viewid = $ev[$i]['cal_ext_for_id'];
@@ -210,14 +296,31 @@ for ( $d = $start_ind; $d < $end_ind; $d++ ) {
       if ( $ev[$i]['cal_duration'] == ( 24 * 60 ) ) {
         $all_day[$d] = 1;
       }
+      
+      //debug
+      logs($log_file,"######## AVANT html_for_event_week_at_a_glance ###########\n");
+      logs($log_file,"trailer.php : i: ".$i." hour_arr : ".print_r($hour_arr , true)."\n");
+      //debug
+      
       html_for_event_week_at_a_glance ( $viewid,
         $date, $ev[$i]['cal_time'],
         $viewname, $ev[$i]['cal_description'],
         $ev[$i]['cal_status'], $ev[$i]['cal_priority'],
         $ev[$i]['cal_access'], $ev[$i]['cal_duration'],
         $ev[$i]['cal_login'], $ev[$i]['cal_category'] );
-    }
+        //debug
+        logs($log_file,"######## APRES html_for_event_week_at_a_glance ###########\n");
+        logs($log_file,"trailer.php : i: ".$i." hour_arr : ".print_r($hour_arr , true)."\n");
+        //debug
+      
+    }    
   }
+  
+  //debug
+  logs($log_file,"######## ONE ###########\n");
+  logs($log_file,"trailer.php : d: ".$d." hour_arr : ".print_r($hour_arr , true)."\n");
+  //debug
+  
   // print out any remaining repeating events
   while ( $cur_rep < count ( $rep ) ) {
     if ( $get_unapproved || $rep[$cur_rep]['cal_status'] == 'A' ) {
@@ -241,6 +344,11 @@ for ( $d = $start_ind; $d < $end_ind; $d++ ) {
     }
     $cur_rep++;
   }
+
+  //debug
+  logs($log_file,"######## TWO ###########\n");
+  logs($log_file,"trailer.php : d: ".$d." hour_arr : ".print_r($hour_arr , true)."\n");
+  //debug
 
   // squish events that use the same cell into the same cell.
   // For example, an event from 8:00-9:15 and another from 9:30-9:45 both
@@ -275,6 +383,11 @@ for ( $d = $start_ind; $d < $end_ind; $d++ ) {
     }
   }
 
+  //debug
+  logs($log_file,"######## LAST ###########\n");
+  logs($log_file,"trailer.php : d: ".$d." hour_arr : ".print_r($hour_arr , true)."\n");
+  //debug
+
   // now save the output...
   if ( ! empty ( $hour_arr[9999] ) && strlen ( $hour_arr[9999] ) ) {
     $untimed[$d] = $hour_arr[9999];
@@ -283,6 +396,10 @@ for ( $d = $start_ind; $d < $end_ind; $d++ ) {
   $save_hour_arr[$d] = $hour_arr;
   $save_rowspan_arr[$d] = $rowspan_arr;
 }
+
+//debug
+logs($log_file,"trailer.php : save_hour_arr : ".print_r($save_hour_arr , true)."\n");
+//debug
 
 // untimed events first
 if ( $untimed_found ) {
@@ -406,7 +523,7 @@ if ( ! empty ( $eventinfo ) ) {
   echo $eventinfo;
 }
 display_unapproved_events ( ( $is_assistant || 
-  $is_nonuser_admin ? $user : $login ) );
+  $is_nonuser_admin ? $user : $login ) , $info_type);
 ?>
 
 <br />

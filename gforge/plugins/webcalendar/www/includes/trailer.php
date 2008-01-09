@@ -1,5 +1,13 @@
 <?php
 
+//Debug
+logs($log_file,"#######  trailer.php #######\n");
+//Debug
+
+//Debug
+logs($log_file,"type : ".$GLOBALS['type_param']."\n");
+//Debug
+
 if ( empty ( $PHP_SELF ) && ! empty ( $_SERVER ) &&
   ! empty ( $_SERVER['PHP_SELF'] ) ) {
   $PHP_SELF = $_SERVER['PHP_SELF'];
@@ -7,6 +15,54 @@ if ( empty ( $PHP_SELF ) && ! empty ( $_SERVER ) &&
 if ( ! empty ( $PHP_SELF ) && preg_match ( "/\/includes\//", $PHP_SELF ) ) {
     die ( "You can't access this file directly!" );
 }
+
+if(isset($GLOBALS['type_param'])){
+  $type_cal=$GLOBALS['type_param'];
+}else{
+  $type_cal='user';
+}
+
+if($type_cal=='group' && isset($GLOBALS['group_param'])){
+
+  $group_cal=$GLOBALS['group_param'];
+  $role_user=user_project_role($login,$group_cal);
+  
+  //Debug
+  logs($log_file,"trailer.php : role : ".$role_user."\n login : ".$login."\n group : ".$group_cal."\nuser : ".$user."\n");
+  //Debug
+}
+
+//Determine the info type
+if($GLOBALS['type_param'] == 'group'){
+  $info_type = "type_param=".$GLOBALS['type_param']."&group_param=".$GLOBALS['group_param'];
+}else{
+  $info_type = "type_param=".$GLOBALs['type_param'];
+}
+
+$can_add = Can_Add($login,$GLOBALS['type_param'],$GLOBALS['group_param']);
+
+/*
+$can_add=false;
+if($GLOBALS['type_param'] == 'group' && $role_user >=2 ){
+  $can_add = true;
+  //debug
+  logs($log_file,"edit_entry_handler.php : can_modify \n");
+  //debug
+}else{
+  if($GLOBALS['type_param'] == 'user'){
+  
+    //debug
+    logs($log_file,"edit_entry_handler.php : can_modify \n");
+    //debug
+    
+    $can_add = true;
+  }
+}
+*/
+
+//Debug
+logs($log_file,"trailer.php : role : ".$role_user."\n login : ".$login."\n group : ".$group_cal."\nuser : ".$user."\n");
+//Debug
 
 // NOTE: This file is included within the print_trailer function found
 // in includes/init.php.  If you add a global variable somewhere in this
@@ -23,6 +79,10 @@ if ( ! empty ( $PHP_SELF ) && preg_match ( "/\/includes\//", $PHP_SELF ) ) {
   if ( ! empty ( $cat_id ) && $categories_enabled == "Y"
     && ( ! $user || $user == $login ) ) {
     echo "<input type=\"hidden\" name=\"cat_id\" value=\"$cat_id\" />\n";
+  }
+  echo "<input type=\"hidden\" name=\"type_param\" value=\"".$GLOBALS['type_param']."\" />\n";
+  if($GLOBALS['type_param'] == 'group'){
+    echo "<input type=\"hidden\" name=\"group_param\" value=\"".$GLOBALS['group_param']."\" />\n";
   }
 ?>
 <label for="monthselect"><?php etranslate("Month")?>:&nbsp;</label>
@@ -66,6 +126,10 @@ if ( ! empty ( $PHP_SELF ) && preg_match ( "/\/includes\//", $PHP_SELF ) ) {
   if ( ! empty ( $cat_id ) && $categories_enabled == "Y"
     && ( ! $user || $user == $login ) ) {
     echo "<input type=\"hidden\" name=\"cat_id\" value=\"$cat_id\" />\n";
+  }
+  echo "<input type=\"hidden\" name=\"type_param\" value=\"".$GLOBALS['type_param']."\" />\n";
+  if($GLOBALS['type_param'] == 'group'){
+    echo "<input type=\"hidden\" name=\"group_param\" value=\"".$GLOBALS['group_param']."\" />\n";
   }
 ?>
 <label for="weekselect"><?php etranslate("Week")?>:&nbsp;</label>
@@ -120,6 +184,10 @@ if ( ! empty ( $PHP_SELF ) && preg_match ( "/\/includes\//", $PHP_SELF ) ) {
     && ( ! $user || $user == $login ) ) {
     echo "<input type=\"hidden\" name=\"cat_id\" value=\"$cat_id\" />\n";
   }
+  echo "<input type=\"hidden\" name=\"type_param\" value=\"".$GLOBALS['type_param']."\" />\n";
+  if($GLOBALS['type_param'] == 'group'){
+    echo "<input type=\"hidden\" name=\"group_param\" value=\"".$GLOBALS['group_param']."\" />\n";
+  }
 ?>
 <label for="yearselect"><?php etranslate("Year")?>:&nbsp;</label>
 <select name="year" id="yearselect" onchange="document.SelectYear.submit()">
@@ -149,17 +217,15 @@ $reports_link = array ( );
 $manage_calendar_link = array ( );
 
 // Go To links
-$can_add = ( $readonly == "N" );
-if ( $public_access == "Y" && $public_access_can_add != "Y" &&
-  $login == "__public__" ) {
-  $can_add = false;
-}
+
 
 if ( ! empty ( $GLOBALS['STARTVIEW'] ) ) {
   $mycal = $GLOBALS['STARTVIEW'];
 } else {
   $mycal = "index.php";
 }
+
+$mycal .= "?".$info_type;
 
 // calc URL to today
 $todayURL = 'month.php';
@@ -192,9 +258,12 @@ if ( $single_user != "Y" ) {
       translate("My Calendar") . "</a>";
       */
   }
+  $todayURL .= "?";
   if ( ! empty ( $user ) && $user != $login ) {
-    $todayURL .= '?user=' . $user;
+    $todayURL .= 'user=' . $user."&";
   }
+  
+  $todayURL .= $info_type;
   /*
   $goto_link[] = "<a title=\"" . 
     translate("Today") . "\" style=\"font-weight:bold;\" " .
@@ -204,15 +273,16 @@ if ( $single_user != "Y" ) {
   if ( $login != '__public__' && $readonly == 'N' ) {
     $goto_link[] = "<a title=\"" . 
       translate("Admin") . "\" style=\"font-weight:bold;\" " .
-      "href=\"adminhome.php\">" . 
+      "href=\"adminhome.php?type_param=".$type_cal."".(isset($group_cal)? "&group_param=".$group_cal."" : "")."\">" . 
       translate("Admin") . "</a>";
   }
   if ( $login != "__public__" && $readonly == "N" &&
     ( $require_approvals == "Y" || $public_access == "Y" ) ) {
-    $url = 'list_unapproved.php';
+    $url = 'list_unapproved.php?';
     if ($is_nonuser_admin) {
-      $url .= "?user=$user";
+      $url .= "user=".$user."&";
     }
+    $url .= $info_type;
     $goto_link[] = "<a title=\"" . 
       translate("Unapproved Events") . "\" href=\"$url\">" . 
       translate("Unapproved Events") . "</a>";
@@ -238,35 +308,36 @@ if ( $single_user != "Y" ) {
   if ( $readonly == 'N' ) {
     $goto_link[] = "<a title=\"" . 
       translate("Admin") . "\" style=\"font-weight:bold;\" " .
-      "href=\"adminhome.php\">" . 
+      "href=\"adminhome.php?type_param=".$type_cal."".(isset($group_cal)? "&group_param=".$group_cal."" : "")."\">" . 
       translate("Admin") . "</a>";
   }
 }
 // only display some links if we're viewing our own calendar.
-if ( empty ( $user ) || $user == $login ) {
+if ( empty ( $user ) || $user == $login || $role_user >=1) {
   $goto_link[] = "<a title=\"" . 
-    translate("Search") . "\" href=\"search.php\">" .
+    translate("Search") . "\" href=\"search.php?".$info_type."\">" .
     translate("Search") . "</a>";
   if ( $login != '__public__' ) {
     $goto_link[] = "<a title=\"" . 
-      translate("Import") . "\" href=\"import.php\">" . 
+      translate("Import") . "\" href=\"import.php?".$info_type."\">" . 
       translate("Import") . "</a>";
     $goto_link[] = "<a title=\"" . 
-      translate("Export") . "\" href=\"export.php\">" . 
+      translate("Export") . "\" href=\"export.php?".$info_type."\">" . 
       translate("Export") . "</a>";
   }
   if ( $can_add ) {
     $url = "<a title=\"" . 
-      translate("Add New Entry") . "\" href=\"edit_entry.php";
+      translate("Add New Entry") . "\" href=\"edit_entry.php?";
     if ( ! empty ( $thisyear ) ) {
-      $url .= "?year=$thisyear";
+      $url .= "year=".$thisyear."&";
       if ( ! empty ( $thismonth ) ) {
-        $url .= "&amp;month=$thismonth";
+        $url .= "month=".$thismonth."&";
       }
       if ( ! empty ( $thisday ) ) {
-        $url .= "&amp;day=$thisday";
+        $url .= "day=".$thisday."&";
       }
     }
+    $url .= $info_type;
     $url .= "\">" . translate("Add New Entry") . "</a>";
     $goto_link[] = $url;
   }
@@ -301,6 +372,7 @@ if ( ( $is_admin || $allow_view_other != "N" ) && count ( $views ) > 0 ) {
       htmlspecialchars ( $views[$i]['cal_name'] ) .
       "\" href=\"";
     $out .= $views[$i]['url'];
+    $out .= "&".$info_type;
     if ( ! empty ( $thisdate ) )
       $out .= "&amp;date=$thisdate";
     $out .= "\">" .
@@ -328,6 +400,7 @@ if ( ! empty ( $reports_enabled ) && $reports_enabled == 'Y' ) {
   } else {
     $u_url = "";
   }
+  $u_url .= "&".$info_type;
   $res = dbi_query ( "SELECT cal_report_name, cal_report_id " .
     "FROM webcal_report " .
     "WHERE cal_login = '$login' OR " .

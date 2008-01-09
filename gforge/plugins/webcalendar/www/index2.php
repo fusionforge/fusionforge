@@ -1,11 +1,17 @@
 <?php
-
+require_once('/usr/share/gforge/www/env.inc.php');
 require_once('pre.php');
 
-function forum_header($params) {
-	global $HTML,$group_id,$forum_name,$forum_id,$sys_datefmt,$sys_news_group,$Language,$f,$sys_use_forum,$group_forum_id;
+//Debug
+//$log=fopen("/var/lib/gforge/chroot/home/users/placoste/webcalendar/webcalendar.txt","a+");
+//fputs($log,"#######  index2.php #######\n");
+//fclose($log);
+//Debug
 
-	if ($group_forum_id) {
+function forum_header($params) {
+  global $HTML,$group_id,$forum_name,$forum_id,$sys_datefmt,$sys_news_group,$Language,$f,$sys_use_forum,$group_forum_id;
+
+  if ($group_forum_id) {
 		$forum_id=$group_forum_id;
 	}
 	if (!$sys_use_forum) {
@@ -109,15 +115,26 @@ forum_header(array('title'=>'Webcalendar' ));
 
 $group_id = getIntFromRequest('group_id');
 if ($group_id > 5) { // add '> 5' if you won't a calendar for the admin groups
+
 	$g =& group_get_object($group_id);
-	if (!$g || !is_object($g) || $g->isError()) { 
+	
+if (!$g || !is_object($g) || $g->isError()) { 
 		exit_no_group();
 	} else {
+
 	$user_id = user_getid() ;
+
 	$belong =  user_belongs_to_group($user_id,$group_id);
+	
+	//Debug
+  //$log=fopen("/var/lib/gforge/chroot/home/users/placoste/webcalendar/webcalendar.txt","a+");
+  //fputs($log,"index2.php ".$belong."\n");
+  //fclose($log);
+  //Debug
+	
 	if($belong > 0){
 	?>	
-	<iframe src="/plugins/webcalendar/login.php?type=group&group_id=<?php print $group_id ?>" border=no scrolling="yes" width="100%" height="700"></iframe>	
+	<iframe src="/plugins/webcalendar/login.php?type_param=group&group_id=<?php print $group_id ?>" border=no scrolling="yes" width="100%" height="700"></iframe>	
 	<?}
 	else {
 	print $Language->getText('webcalendar_user','allow');	

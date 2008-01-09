@@ -87,7 +87,7 @@ include_once 'includes/translate.php';
 
 // error-check some commonly used form variable names
 $id = getValue ( "id", "[0-9]+", true );
-$user = getValue ( "user", "[A-Za-z0-9_\.=@,\-]*", true );
+$user = getValue ( "user", "[\\p{L}A-Za-z0-9_\.=@,\-]*", true );
 $date = getValue ( "date", "[0-9]+" );
 $year = getValue ( "year", "[0-9]+" );
 $month = getValue ( "month", "[0-9]+" );
@@ -105,8 +105,8 @@ if ($DMW) {
   send_no_cache_header ();
 
   if ( $allow_view_other != 'Y' && ! $is_admin )
-    $user = "";
-
+   // $user = "";
+       
   $can_add = ( $readonly == "N" || $is_admin == "Y" );
   if ( $public_access == "Y" && $login == "__public__" ) {
     if ( $public_access_can_add != "Y" )
@@ -127,11 +127,13 @@ if ($DMW) {
       if ( $user == $userlist[$i]['cal_login'] ) $valid_user = true;
     } 
     if ($valid_user == false) { 
-      $user = ""; // security precaution
+    //  $user = ""; // security precaution
     }
   }
 
   if ( ! empty ( $user ) ) {
+
+
     $u_url = "user=$user&amp;";
     user_load_variables ( $user, "user_" );
     if ( $user == "__public__" )
@@ -394,4 +396,92 @@ function print_trailer ( $include_nav_links=true, $closeDb=true,
     unset ( $c );
   }
 }
+?>
+
+<?php
+function xml2array($contents, $get_attributes=1) {
+    if(!$contents) return array();
+
+    if(!function_exists('xml_parser_create')) {
+        //print "'xml_parser_create()' function not found!";
+        return array();
+    }
+    //Get the XML parser of PHP - PHP must have this module for the parser to work
+    $parser = xml_parser_create();
+    xml_parser_set_option( $parser, XML_OPTION_CASE_FOLDING, 0 );
+    xml_parser_set_option( $parser, XML_OPTION_SKIP_WHITE, 1 );
+    xml_parse_into_struct( $parser, $contents, $xml_values );
+    xml_parser_free( $parser );
+
+    if(!$xml_values) return;//Hmm...
+
+    //Initializations
+    $xml_array = array();
+    $parents = array();
+    $opened_tags = array();
+    $arr = array();
+
+    $current = &$xml_array;
+
+    //Go through the tags.
+    foreach($xml_values as $data) {
+        unset($attributes,$value);//Remove existing values, or there will be trouble
+        extract($data);//We could use the array by itself, but this cooler.
+
+        $result = '';
+        if($get_attributes) {//The second argument of the function decides this.
+            $result = array();
+            if(isset($value)) $result['value'] = $value;
+
+            //Set the attributes too.
+            if(isset($attributes)) {
+                foreach($attributes as $attr => $val) {
+                    if($get_attributes == 1) $result['attr'][$attr] = $val; //Set all the attributes in a array called 'attr'
+                    /**  :TODO: should we change the key name to '_attr'? Someone may use the tagname 'attr'. Same goes for 'value' too */
+                }
+            }
+        } elseif(isset($value)) {
+            $result = $value;
+        }
+
+        //See tag status and do the needed.
+        if($type == "open") {//The starting of the tag '<tag>'
+            $parent[$level-1] = &$current;
+
+            if(!is_array($current) or (!in_array($tag, array_keys($current)))) { //Insert New tag
+                $current[$tag] = $result;
+                $current = &$current[$tag];
+
+            } else { //There was another element with the same tag name
+                if(isset($current[$tag][0])) {
+                    array_push($current[$tag], $result);
+                } else {
+                    $current[$tag] = array($current[$tag],$result);
+                }
+                $last = count($current[$tag]) - 1;
+                $current = &$current[$tag][$last];
+            }
+
+        } elseif($type == "complete") { //Tags that ends in 1 line '<tag />'
+            //See if the key is already taken.
+            if(!isset($current[$tag])) { //New Key
+                $current[$tag] = $result;
+
+            } else { //If taken, put all things inside a list(array)
+                if((is_array($current[$tag]) and $get_attributes == 0)//If it is already an array...
+                        or (isset($current[$tag][0]) and is_array($current[$tag][0]) and $get_attributes == 1)) {
+                    array_push($current[$tag],$result); // ...push the new element into that array.
+                } else { //If it is not an array...
+                    $current[$tag] = array($current[$tag],$result); //...Make it an array using using the existing value and the new value
+                }
+            }
+
+        } elseif($type == 'close') { //End of tag '</tag>'
+            $current = &$parent[$level-1];
+        }
+    }
+
+    return($xml_array);
+}
+
 ?>

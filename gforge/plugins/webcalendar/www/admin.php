@@ -1,6 +1,25 @@
 <?php
 include_once 'includes/init.php';
 
+//Debug
+logs($log_file,"#######  admin.php  #######\n");
+//Debug
+
+//Debug
+logs($log_file,"login : ".$login."\n");
+//Debug
+
+if(isset($_GET['type_param'])){
+  $type_cal=$_GET['type_param'];
+}else{
+  $type_cal='user';
+}
+
+if(isset($_GET['group_param'])){
+  $group_cal=$_GET['group_param'];
+}
+
+
 function print_color_sample ( $color ) {
   echo "<table style=\"border-width:0px;\"><tr><td style=\"background-color:$color;\">&nbsp;&nbsp;</td></tr></table>";
 }
@@ -36,7 +55,7 @@ if ( ! $is_admin ) {
   $error = true;
 }
 if ( ! $error ) {
- echo "<a title=\"" . translate("Admin") . "\" class=\"nav\" href=\"adminhome.php\">&laquo;&nbsp;" . translate("Admin") . "</a><br /><br />\n";
+ echo "<a title=\"" . translate("Admin") . "\" class=\"nav\" href=\"adminhome.php".($GLOBALS['type_param']=='group'? "?type_param=".$GLOBALS['type_param']."&group_param=".$GLOBALS['group_param'] : "?type_param=".$GLOBALS['type_param'])."\">&laquo;&nbsp;" . translate("Admin") . "</a><br /><br />\n";
 }
 
 if ( empty ( $ovrd ) && ! $error ) {
@@ -62,9 +81,18 @@ if ( empty ( $ovrd ) && ! $error ) {
 if ( ! $error ) {
 ?>
 
-<form action="admin_handler.php" method="post" onsubmit="return valid_form(this);" name="prefform">
+<form action="admin_handler.php?<?php// echo ($GLOBALS['type_param']=='group' ? "type_param=".$GLOBALS['type_param']."&group_param=".$GLOBALS['group_param'] : "type_param=".$GLOBALS['type_param']) ?>" method="post" onsubmit="return valid_form(this);" name="prefform">
 <table style="border-width:0px;"><tr><td>
  <input type="submit" value="<?php etranslate("Save")?>" name="" />
+ 
+<?php
+  $echo = "<input type=\"hidden\" value=\"".$GLOBALS['type_param']."\" name=\"type_param\" />";
+  if($GLOBALS['type_param']=='group'){
+    $echo2 = "<input type=\"hidden\" value=\"".$GLOBALS['group_param']."\" name=\"group_param\" />";
+  }
+  echo $echo;
+  echo $echo2;
+?>
 </td></tr></table>
 <br />
 

@@ -7,6 +7,27 @@
  *
  * This is an example to watch things in action. You can obviously modify things and logic as you see fit
  */
+//Debug
+//$log=fopen("/var/lib/gforge/chroot/home/users/placoste/webcalendar/webcalendar.txt","a+");
+//fputs($log,"#######  index.php #######\n");
+//fclose($log);
+//Debug
+
+//Debug
+//$log=fopen("/var/lib/gforge/chroot/home/users/placoste/webcalendar/webcalendar.txt","a+");
+//fputs($log,"type GET : ".$_GET['type_param']."\n");
+//fclose($log);
+//Debug
+
+if(!isset($GLOBALS['type_param']) ){
+  $GLOBALS['type_param'] = $_GET['type_param'];
+  
+  //Debug
+  //$log=fopen("/var/lib/gforge/chroot/home/users/placoste/webcalendar/webcalendar.txt","a+");
+  //fputs($log,"type GLOBALS : ".$GLOBALS['type_param']."\n");
+  //fclose($log);
+  //Debug
+}
 
 require_once('pre.php');
 //require_once ('plugins/webcalendar/config.php');
@@ -108,12 +129,18 @@ include_once 'includes/init.php';
 // If not yet logged in, you will be redirected to login.php before
 // we get to this point (by connect.php included above)
 
-if ( ! empty ( $STARTVIEW ) )
-  send_to_preferred_view ();
-else
-  do_redirect ( "month.php" );
+if ( ! empty ( $STARTVIEW ) ){
+  if($GLOBALS['type_param']=='group'){
+    $url = "?type_param=group&group_param='".$GLOBALS['group_pram'];
+  }else{
+    $url = "?type_param=user";
+  }
+   
+  send_to_preferred_view ("", $url);
+}else
+  do_redirect ( "month.php?type_param=user" );
 
-	site_project_footer(array());
+site_project_footer(array());
 
 
 

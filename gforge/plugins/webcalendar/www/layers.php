@@ -27,7 +27,6 @@ if ( $res ) {
 print_header();
 
 if ( $allow_view_other != 'Y') {
-  echo "allow_view_other = $allow_view_other <br>";
   echo translate("You are not authorized");
 } else {
 ?>

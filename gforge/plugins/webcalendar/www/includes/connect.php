@@ -87,6 +87,10 @@ if ( $pub_acc_enabled ) {
 
 if ( empty ( $PHP_SELF ) )
   $PHP_SELF = $_SERVER["PHP_SELF"];
+  
+  //debug
+  //logs($log_file,"connect.php : l-92 : login_is_admin :".$login_is_admin."\n");
+  //debug
 
 if ( empty ( $login_url ) )
   $login_url = "login.php";
@@ -96,10 +100,14 @@ else
   $login_url .= "?";
 if ( ! empty ( $login_return_path ) )
   $login_url .= "return_path=$login_return_path";
- 
+
+//debug  
+//logs($log_file,"connect.php l-105 : login_is_admin :".$login_is_admin."\n");
+//debug
 
 if ( empty ( $session_not_found ) )
   $session_not_found = false;
+  
 
 if ( $pub_acc_enabled && ! empty ( $session_not_found ) ) {
   $login = "__public__";
@@ -112,6 +120,10 @@ if ( $pub_acc_enabled && ! empty ( $session_not_found ) ) {
   do_redirect ( $login_url );
   exit;
 }
+
+//debug
+//logs($log_file,"connect.php l-125 : login_is_admin :".$login_is_admin."\n");
+//debug
 
 if ( empty ( $login ) && $use_http_auth ) {
   if ( strstr ( $PHP_SELF, "login.php" ) ) {
@@ -130,7 +142,17 @@ if ( empty ( $login ) && $use_http_auth ) {
     $fullname = "Public Access";
     $user_email = "";
   } else {
+  
+    //debug
+    //logs($log_file,"connect.php l-147 : login_is_admin :".$login_is_admin."\n");
+    //debug
+    
     user_load_variables ( $login, "login_" );
+    
+    //debug
+    //logs($log_file,"connect.php l-151 : login_is_admin :".$login_is_admin."\n");
+    //debug
+    
     if ( ! empty ( $login_login ) ) {
       $is_admin =  ( $login_is_admin == "Y" ? true : false );
       $lastname = $login_lastname;

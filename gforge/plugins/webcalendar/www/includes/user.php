@@ -1,4 +1,5 @@
 <?php
+
 if ( empty ( $PHP_SELF ) && ! empty ( $_SERVER ) &&
   ! empty ( $_SERVER['PHP_SELF'] ) ) {
   $PHP_SELF = $_SERVER['PHP_SELF'];
@@ -33,10 +34,15 @@ $admin_can_delete_user = true;
 function user_valid_login ( $login, $password ) {
   global $error;
   $ret = false;
+  
+  //Debug
+  logs($log_file,"user_valid_login \n");
+  //Debug
 
   $sql = "SELECT cal_login FROM webcal_user WHERE " .
   "cal_login = '" . $login . "' AND cal_passwd = '" . $password . "'";
  //   "cal_login = '" . $login . "' AND cal_passwd = '" . md5($password) . "'";
+  
   $res = dbi_query ( $sql );
   if ( $res ) {
     $row = dbi_fetch_row ( $res );
@@ -72,7 +78,6 @@ function user_valid_login ( $login, $password ) {
   } else {
     $error = translate("Database error") . ": " . dbi_error();
   }
-
   return $ret;
 }
 
@@ -85,6 +90,10 @@ function user_valid_login ( $login, $password ) {
 function user_valid_crypt ( $login, $crypt_password ) {
   global $error;
   $ret = false;
+  
+  //Debug
+  logs($log_file,"user_valid_crypt \n");
+  //Debug
 
   $salt = substr($crypt_password, 0, 2);
 
@@ -123,10 +132,15 @@ function user_valid_crypt ( $login, $crypt_password ) {
 function user_load_variables ( $login, $prefix ) {
   global $PUBLIC_ACCESS_FULLNAME, $NONUSER_PREFIX;
 
+  //Debug
+  logs($log_file,"user_load_variables \n");
+  //Debug
+
   if ($NONUSER_PREFIX && substr($login, 0, strlen($NONUSER_PREFIX) ) == $NONUSER_PREFIX) {
     nonuser_load_variables ( $login, $prefix );
     return true;
   }
+
   
   if ( $login == "__public__" ) {
     $GLOBALS[$prefix . "login"] = $login;
@@ -138,6 +152,9 @@ function user_load_variables ( $login, $prefix ) {
     $GLOBALS[$prefix . "password"] = "";
     return true;
   }
+  
+ 
+  
   $sql =
     "SELECT cal_firstname, cal_lastname, cal_is_admin, cal_email, cal_passwd " .
     "FROM webcal_user WHERE cal_login = '" . $login . "'";
@@ -174,6 +191,10 @@ function user_load_variables ( $login, $prefix ) {
 function user_add_user ( $user, $password, $firstname, $lastname, $email,
   $admin ) {
   global $error;
+  
+  //Debug
+  logs($log_file,"user_add_user \n");
+  //Debug
 
   if ( $user == "__public__" ) {
     $error = translate ("Invalid user login");
@@ -219,6 +240,10 @@ function user_add_user ( $user, $password, $firstname, $lastname, $email,
 //   $admin - is admin?
 function user_update_user ( $user, $firstname, $lastname, $email, $admin ) {
   global $error;
+  
+  //Debug
+  logs($log_file,"user_update_user \n");
+  //Debug
 
   if ( $user == "__public__" ) {
     $error = translate ("Invalid user login");
@@ -255,6 +280,10 @@ function user_update_user ( $user, $firstname, $lastname, $email, $admin ) {
 //   $password - last name
 function user_update_user_password ( $user, $password ) {
   global $error;
+  
+  //Debug
+  logs($log_file,"user_update_user_password \n");
+  //Debug
 
   $sql = "UPDATE webcal_user SET cal_passwd = '".md5($password)."' " .
     "WHERE cal_login = '$user'";
@@ -273,6 +302,11 @@ function user_update_user_password ( $user, $password ) {
 function user_delete_user ( $user ) {
   // Get event ids for all events this user is a participant
   $events = array ();
+  
+  //Debug
+  logs($log_file,"user_delete_user \n");
+  //Debug
+  
   $res = dbi_query ( "SELECT webcal_entry.cal_id " .
     "FROM webcal_entry, webcal_entry_user " .
     "WHERE webcal_entry.cal_id = webcal_entry_user.cal_id " .
@@ -379,4 +413,78 @@ function user_get_users () {
   }
   return $ret;
 }
+
+//add for Gforge
+function user_project_role($login,$project){
+
+  //debug 
+  logs($log_file,"#######  user.php  #######\n-------  user_project_role  -------\n");
+  //debug 
+
+  $res = dbi_query("select user_id from users where user_name = '".$login."'");
+  $row = pg_fetch_row($res);
+  $user_id = $row[0];
+  
+  //debug 
+  logs($log_file,"user_id : ".$user_id." group : ".$project."\n");
+  //debug 
+
+  $res = dbi_query("select admin_flags from user_group where group_id=".$project." and user_id=".$user_id." and admin_flags='A'");
+  
+  //debug 
+  logs($log_file,"res : ".print_r($res,true)."\n");
+  //debug  
+  
+  //IF user is admin of the project
+  if(pg_num_rows($res)>0){
+  
+    //debug 
+    logs($log_file,"user_projet_role - user_id : ".$user_id."\n");
+    //debug 
+  
+    $role=3;
+    
+  //else get his permission on role_setting table
+  }else{
+  
+    //get projet_id
+    $sql ="select rs.value
+           from role_setting rs, user_group ug, users u
+           where rs.role_id=ug.role_id
+             and ug.group_id=".$project."
+             and ug.user_id=u.user_id
+             and u.user_name='".$login."'
+             and rs.section_name ='webcal'";
+             
+    //debug 
+    logs($log_file,"user_projet_role - sql : ".$sql."\n");
+    //debug 
+    
+    $res = dbi_query ($sql);
+    $row = pg_fetch_row($res);
+  
+    //role get the value on the table 
+    if (pg_num_rows($res)>0) {
+    
+      $role = $row[0];
+      
+    //Else if the value are not set, fixe the value at 0  
+    }else{
+    
+      $role = 0;
+      
+    } 
+  }
+  
+  //debug 
+  logs($log_file,"role : ".$role."\n");
+  //debug   
+  
+  //debug 
+  logs($log_file,"-------  user_project_role  -------\n#######  user.php  #######\n");
+  //debug 
+  
+  return $role;
+}
+
 ?>

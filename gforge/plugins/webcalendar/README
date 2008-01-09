@@ -1,4 +1,22 @@
+Complete the ficle www/includes/settings.php
 Change owner of www/includes/settings.php
 The owner must be apache
 
 chown www-data www/includes/settings.php
+
+#########################################
+#		           Cronojobs		            #
+#########################################
+
+Add the file cronjobs/gforge_webcalendar_cron to the directory : /etc/cron.d/
+
+
+#########################################
+#		           Data Base		            #
+#########################################
+
+Launch the update file (and ONLY the update file) on the directory 
+plugins/webcalendar/db/ and NOT THE INIT FILE.
+
+Launch manually the file plugins/webcalendar/bin/lists_utils_projects.php
+

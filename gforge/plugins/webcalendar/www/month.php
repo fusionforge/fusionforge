@@ -1,5 +1,20 @@
 <?php
+//echo "debug<br />";
+
+
 include_once 'includes/init.php';
+
+global $get_unapproved;
+$get_unapproved = $GLOBALS['DISPLAY_UNAPPROVED']=='Y';
+
+//debug
+logs($log_file,"####### month.php ##########\n");
+//debug
+
+
+//Debug
+logs($log_file,print_r($_GET,true)."\n");
+//Debug
 
 if (($user != $login) && $is_nonuser_admin) {
   load_user_layers ($user);
@@ -8,6 +23,49 @@ if (($user != $login) && $is_nonuser_admin) {
 }
 
 load_user_categories ();
+
+if(isset($_GET['type_param'])){
+  $GLOBALS['type_param']=$_GET['type_param'];
+}else{
+  $GLOBALS['type_param']='user';
+}
+
+if(isset($_GET['group_param'])){
+  $GLOBALS['group_param']=$_GET['group_param'];
+}
+
+//debug
+logs($log_file,"month.php : type : ".$GLOBALS['type_param']." user : ".$user."\n");
+//debug
+
+if($GLOBALS['type_param']=='group' && isset($_GET['group_param'])){
+
+  //debug
+  logs($log_file,"month.php : Avant user_project_role \n");
+  //debug
+  
+  $group_cal=$GLOBALS['group_param'];
+  $role_user=user_project_role($login,$group_cal);
+  
+  $res=dbi_query("select unix_group_name from groups where group_id=".$GLOBALS['group_param']);
+  $row = pg_fetch_array($res);
+  $GLOBALS['group_name_param']=$row[0];
+  
+  //debug
+  logs($log_file,"month.php : role : ".$role_user."\n login : ".$login."\n group : ".$group_cal."\nuser : ".$user."\n");
+  //debug
+}
+
+//debug
+logs($log_file,"month.php : Après if group \n");
+//debug
+
+//Determine the info type
+if($GLOBALS['type_param']=='group'){
+  $info_type="type_param=group&group_param=".$GLOBALS['group_param']."&";
+}else{
+  $info_type="type_param=user&";
+}
 
 $next = mktime ( 3, 0, 0, $thismonth + 1, 1, $thisyear );
 $nextyear = date ( "Y", $next );
@@ -39,22 +97,46 @@ if ( $auto_refresh == "Y" && ! empty ( $auto_refresh_time ) ) {
 $INC = array('js/popups.php');
 print_header($INC,$HeadX);
 
+if($GLOBALS['type_param']=='group'){
+  $user=$GLOBALS['group_name_param'];
+}else{
+  $user=$login;
+}
+
 /* Pre-Load the repeated events for quicker access */
 $repeated_events = read_repeated_events (
   ( ! empty ( $user ) && strlen ( $user ) ) ? $user : $login, $cat_id, $startdate );
+
+//Debug
+logs($log_file,"month.php : avant read_events \n");
+//Debug
 
 /* Pre-load the non-repeating events for quicker access */
 $events = read_events ( ( ! empty ( $user ) && strlen ( $user ) )
   ? $user : $login, $startdate, $enddate, $cat_id );
 
+//Debug
+logs($log_file,"month.php : après read_events \n");
+//Debug
+
 if ( ! empty ( $cat_id ) )
   $monthURL = "month.php?cat_id=$cat_id&amp;";
 else
   $monthURL = 'month.php?';
+  
+//debug
+logs($log_file,"month.php : events : ".print_r($events,true)." \n");
+//debug
+
 display_small_month ( $prevmonth, $prevyear, true, true, "prevmonth",
-  $monthURL );
+  $monthURL , $info_type);
 display_small_month ( $nextmonth, $nextyear, true, true, "nextmonth",
-  $monthURL );
+  $monthURL, $info_type );
+  
+//debug
+logs($log_file,"month.php : Après small_manth \n");
+//debug
+
 ?>
 <div class="title">
 <span class="date"><br /><?php
@@ -62,16 +144,27 @@ display_small_month ( $nextmonth, $nextyear, true, true, "nextmonth",
     $DATE_FORMAT_MY, false, false );
 ?></span>
 <span class="user"><?php
-  if ( $single_user == "N" ) {
-    echo "<br />\n";
-    echo $user_fullname;
+
+  echo "<br />\n";
+    
+  if($GLOBALS['type_param'] == 'group'){
+    $res = dbi_query("SELECT group_name from groups where unix_group_name = '".$GLOBALS['group_name_param']."'");
+    $row = pg_fetch_array($res);
+    $echo .= $row[0];
+  }else{
+    $echo .= $login;
+  }
+  
+  echo $echo;
+
+    /*echo $user_fullname;
   }
   if ( $is_nonuser_admin ) {
     echo "<br />-- " . translate("Admin mode") . " --";
   }
   if ( $is_assistant ) {
     echo "<br />-- " . translate("Assistant mode") . " --";
-  }
+  }*/
 ?></span>
 <?php
   if ( $categories_enabled == "Y" && (!$user || ($user == $login || $is_assistant ))) {
@@ -144,9 +237,19 @@ for ( $i = $wkstart; date ( "Ymd", $i ) <= date ( "Ymd", $monthend );
       echo " class=\"$class\"";
       }
       echo ">";
+      
+      //debug
+      logs($log_file,"month.php : Avant print_date_entries \n");
+      //debug
+      
       //echo date ( "D, m-d-Y H:i:s", $date ) . "<br />";
       print_date_entries ( date ( "Ymd", $date ),
         ( ! empty ( $user ) ) ? $user : $login, false );
+        
+      //debug
+      logs($log_file,"month.php : Après print_date_entries \n");
+      //debug
+      
       print "</td>\n";
     } else {
       print "<td>&nbsp;</td>\n";
@@ -159,7 +262,7 @@ for ( $i = $wkstart; date ( "Ymd", $i ) <= date ( "Ymd", $monthend );
 <?php
  if ( ! empty ( $eventinfo ) ) echo $eventinfo;
 
- display_unapproved_events ( ( $is_assistant || $is_nonuser_admin ? $user : $login ) );
+ display_unapproved_events ( ( $is_assistant || $is_nonuser_admin ? $user : $login ), $info_type );
 ?>
 
 <br />

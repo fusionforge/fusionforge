@@ -10,15 +10,117 @@
  * SysAdmin must enable HTML for event full descriptions.
  * The htmlarea files should be installed so that the htmlarea.php
  * file is in ../includes/htmlarea/htmlarea.php
- * The htmlarea code can be downloaded from:
+ * The htmlarea code can be downloaded from
  *  http://www.htmlarea.com
  * TODO
  * This file will not pass XHTML validation with HTMLArea enabled
  */
+ 
 include_once 'includes/init.php';
 include_once 'includes/site_extras.php';
 
+//Debug
+logs($log_file,"#######  edit_entry.php #######\n");
+logs($log_file,"GET : ".print_r($_GET,true)." \n");
+//Debug
+
 load_user_categories ();
+
+//Récupération du type et du groupe
+if(isset($_GET['type_param'])){
+  $GLOBALS['type_param']=$_GET['type_param'];
+}else{
+  $GLOBALS['type_param']='user';
+}
+
+if(isset($_GET['group_param'])){
+  $GLOBALS['group_param']=$_GET['group_param'];
+}
+
+if($GLOBALS['type_param'] == 'group' && isset($_GET['group_param'])){
+
+  //debug
+  logs($log_file, 
+       "role : ".$role_user."\nlogin : ".$login."\ntype : ".$GLOBALS['type_param']."\ngroup : ".$GLOBALS['group_param']."\nuser : ".$user."\n" );
+  //debug
+  
+  $group_cal=$GLOBALS['group_param'];
+  $role_user=user_project_role($login,$GLOBALS['group_param']);
+  
+  //debug
+  logs($log_file, 
+       "role : ".$role_user."\nlogin : ".$login."\ntype : ".$GLOBALS['type_param']."\ngroup : ".$GLOBALS['group_param']."\nuser : ".$user."\n" );
+  //debug
+  
+}
+
+//debug
+logs($log_file,"edit_entry.php : Start can_modifiy\n");
+//debug
+
+if(isset($_GET['id'])){
+  $can_modify = Can_Modify($_GET['id'],$login);
+}else{
+  $can_modify = false;
+}
+
+$can_add = Can_Add($login,$GLOBALS['type_param'],$GLOBALS['group_param']);
+
+//debug
+if($can_add){
+  logs($log_file,"CAN ADD\n");
+}else{
+  logs($log_file,"!!!!!!!  CAN'T ADD  !!!!!!!\n");
+}
+
+if($can_modify){
+  logs($log_file,"CAN MODIFY\n");
+}else{
+  logs($log_file,"!!!!!!!  CAN'T MODIFY  !!!!!!!\n");
+}
+//debug
+
+/*$can_modify=false;
+if($GLOBALS['type_param'] == 'group' && $role_user >=2 ){
+  $can_modify = true;
+  //debug
+  logs($log_file,"edit_entry.php : can_modify 1 \n");
+  //debug
+}else{
+  //debug
+  logs($log_file,"edit_entry.php : can_modify 2.1 \n");
+  //debug
+  if($GLOBALS['type_param'] == 'user'){
+    if(isset($id) && $id!="" ){
+    
+      //debug
+      logs($log_file,"select cal_id 
+              from webcal_entry 
+              where cal_id = '".$id."' 
+                and cal_create_by = '".$login."' \n");
+      //debug
+      $res = dbi_query("select cal_id 
+              from webcal_entry 
+              where cal_id = '".$id."' 
+                and cal_create_by = '".$login."'");
+      if( pg_numrows($res) ){
+        $can_modify = true;
+        //debug
+        logs($log_file,"edit_entry.php : can_modify 2 \n");
+        //debug
+      }
+    }else{
+      $can_modify=true;
+      //debug
+      logs($log_file,"edit_entry.php : can_modify 3 \n");
+      //debug
+    }
+  }
+}*/
+
+//debug
+logs($log_file,"edit_entry.php : type 1 : ".$GLOBALS['type_param']." \n");
+//debug
 
 // Default for using tabs is enabled
 if ( empty ( $EVENT_EDIT_TABS ) )
@@ -26,7 +128,7 @@ if ( empty ( $EVENT_EDIT_TABS ) )
 $useTabs = ( $EVENT_EDIT_TABS == 'Y' );
 
 // make sure this is not a read-only calendar
-$can_edit = false;
+//$can_edit = false;
 
 // Public access can only add events, not edit.
 if ( $login == "__public__" && $id > 0 ) {
@@ -36,159 +138,192 @@ if ( $login == "__public__" && $id > 0 ) {
 $external_users = "";
 $participants = array ();
 
-if ( $readonly == 'Y' ) {
-  $can_edit = false;
-} else if ( ! empty ( $id ) && $id > 0 ) {
-  // first see who has access to edit this entry
-  if ( $is_admin ) {
-    $can_edit = true;
-  } else {
-    $can_edit = false;
-    if ( $readonly == "N" || $is_admin ) {
-      $sql = "SELECT webcal_entry.cal_id FROM webcal_entry, " .
-        "webcal_entry_user WHERE webcal_entry.cal_id = " .
-        "webcal_entry_user.cal_id AND webcal_entry.cal_id = $id " .
-        "AND (webcal_entry.cal_create_by = '$login' " .
-        "OR webcal_entry_user.cal_login = '$login')";
-      $res = dbi_query ( $sql );
-      if ( $res ) {
-        $row = dbi_fetch_row ( $res );
-        if ( $row && $row[0] > 0 )
-          $can_edit = true;
-        dbi_free_result ( $res );
-      }
-    }
-  }
-  $sql = "SELECT cal_create_by, cal_date, cal_time, cal_mod_date, " .
+//debug
+logs($log_file,"edit_entry.php : type 2 : ".$GLOBALS['type_param']." \n");
+//debug
+
+//debug
+if ($can_modify){
+  logs($log_file,"can modify \n");
+}else{
+  logs($log_file,"can't modify \n");
+}
+
+if (isset($_GET['id'])){
+  logs($log_file,"id is set \n");
+}else{
+  logs($log_file,"id isn't set \n");
+}
+
+if ($can_add){
+  logs($log_file,"can add \n");
+}else{
+  logs($log_file,"can't add \n");
+}
+//debug
+
+//If event Id is passed AND login can_modify OR event Id is not passed AND login can_add
+if ( ($can_modify && isset($_GET['id'])) || ($can_add && !isset($_GET['id'])) ) {
+  
+  //Debug
+  logs($log_file,"test is passed \ncal_date : ".$cal_date."\n");
+  //Debug
+
+  if ( ! empty ( $id ) && $id > 0 ) {
+  
+    //Debug
+    logs($log_file,"edit event \n");
+    //Debug
+  
+    $sql = "SELECT cal_create_by, cal_date, cal_time, cal_mod_date, " .
     "cal_mod_time, cal_duration, cal_priority, cal_type, cal_access, " .
     "cal_name, cal_description, cal_group_id FROM webcal_entry WHERE cal_id = " . $id;
-  $res = dbi_query ( $sql );
-  if ( $res ) {
-    $row = dbi_fetch_row ( $res );
-    if ( ! empty ( $override ) && ! empty ( $date ) ) {
-      // Leave $cal_date to what was set in URL with date=YYYYMMDD
-      $cal_date = $date;
-    } else {
-      $cal_date = $row[1];
-    }
-    $create_by = $row[0];
-    if (( $user == $create_by ) && ( $is_assistant || $is_nonuser_admin )) $can_edit = true;
+    $res = dbi_query ( $sql );
     
-    $year = (int) ( $cal_date / 10000 );
-    $month = ( $cal_date / 100 ) % 100;
-    $day = $cal_date % 100;
-    $time = $row[2];
-    // test for AllDay event, if so, don't adjust time
-    if ( $time > 0  || ( $time == 0 &&  $row[5] != 1440 ) ) { /* -1 = no time specified */
-      $time += ( ! empty ( $TZ_OFFSET )?$TZ_OFFSET : 0)  * 10000;
-      if ( $time > 240000 ) {
-        $time -= 240000;
-        $gmt = mktime ( 3, 0, 0, $month, $day, $year );
-        $gmt += $ONE_DAY;
-        $month = date ( "m", $gmt );
-        $day = date ( "d", $gmt );
-        $year = date ( "Y", $gmt );
-      } else if ( $time < 0 ) {
-        $time += 240000;
-        $gmt = mktime ( 3, 0, 0, $month, $day, $year );
-        $gmt -= $ONE_DAY;
-        $month = date ( "m", $gmt );
-        $day = date ( "d", $gmt );
-        $year = date ( "Y", $gmt );
+    if ( $res ) {
+      $row = dbi_fetch_row ( $res );
+      if ( ! empty ( $override ) && ! empty ( $date ) ) {
+        // Leave $cal_date to what was set in URL with date=YYYYMMDD
+        $cal_date = $date;
+      } else {
+        $cal_date = $row[1];
       }
-      // Set alterted date
-      $cal_date = sprintf("%04d%02d%02d",$year,$month,$day);
-    }
-    if ( $time >= 0 ) {
-      $hour = floor($time / 10000);
-      $minute = ( $time / 100 ) % 100;
-      $duration = $row[5];
-    } else {
-      $duration = "";
-      $hour = -1;
-    }
-    $priority = $row[6];
-    $type = $row[7];
-    $access = $row[8];
-    $name = $row[9];
-    $description = $row[10];
-    $parent = $row[11];
-    // check for repeating event info...
-    // but not if we are overriding a single entry of an already repeating
-    // event... confusing, eh?
-    if ( ! empty ( $override ) ) {
-      $rpt_type = "none";
-      $rpt_end = 0;
-      $rpt_end_date = $cal_date;
-      $rpt_freq = 1;
-      $rpt_days = "nnnnnnn";
-      $rpt_sun = $rpt_mon = $rpt_tue = $rpt_wed =
+      $create_by = $row[0];
+      //if (( $user == $create_by ) && ( $is_assistant || $is_nonuser_admin )) $can_ed = true;
+    
+      $year = (int) ( $cal_date / 10000 );
+      $month = ( $cal_date / 100 ) % 100;
+      $day = $cal_date % 100;
+      $time = $row[2];
+      // test for AllDay event, if so, don't adjust time
+      if ( $time > 0  || ( $time == 0 &&  $row[5] != 1440 ) ) { /* -1 = no time specified */
+        $time += ( ! empty ( $TZ_OFFSET )?$TZ_OFFSET : 0)  * 10000;
+        if ( $time > 240000 ) {
+          $time -= 240000;
+          $gmt = mktime ( 3, 0, 0, $month, $day, $year );
+          $gmt += $ONE_DAY;
+          $month = date ( "m", $gmt );
+          $day = date ( "d", $gmt );
+          $year = date ( "Y", $gmt );
+        } else if ( $time < 0 ) {
+          $time += 240000;
+          $gmt = mktime ( 3, 0, 0, $month, $day, $year );
+          $gmt -= $ONE_DAY;
+          $month = date ( "m", $gmt );
+          $day = date ( "d", $gmt );
+          $year = date ( "Y", $gmt );
+        }
+        // Set alterted date
+        $cal_date = sprintf("%04d%02d%02d",$year,$month,$day);
+      }
+
+      if ( $time >= 0 ) {
+        $hour = floor($time / 10000);
+        $minute = ( $time / 100 ) % 100;
+        $duration = $row[5];
+      } else {
+        $duration = "";
+        $hour = -1;
+      }
+
+      $priority = $row[6];
+      $type = $row[7];
+      $access = $row[8];
+      $name = $row[9];
+      $description = $row[10];
+      $parent = $row[11];
+      // check for repeating event info...
+      // but not if we are overriding a single entry of an already repeating
+      // event... confusing, eh?
+
+      if ( ! empty ( $override ) ) {
+        $rpt_type = "none";
+        $rpt_end = 0;
+        $rpt_end_date = $cal_date;
+        $rpt_freq = 1;
+        $rpt_days = "nnnnnnn";
+        $rpt_sun = $rpt_mon = $rpt_tue = $rpt_wed =
         $rpt_thu = $rpt_fri = $rpt_sat = false;
-    } else {
-      $res = dbi_query ( "SELECT cal_id, cal_type, cal_end, " .
-        "cal_frequency, cal_days FROM webcal_entry_repeats " .
-        "WHERE cal_id = $id" );
-      if ( $res ) {
-        if ( $row = dbi_fetch_row ( $res ) ) {
-          $rpt_type = $row[1];
-          if ( $row[2] > 0 )
-            $rpt_end = date_to_epoch ( $row[2] );
-          else
-            $rpt_end = 0;
-          $rpt_end_date = $row[2];
-          $rpt_freq = $row[3];
-          $rpt_days = $row[4];
-          $rpt_sun  = ( substr ( $rpt_days, 0, 1 ) == 'y' );
-          $rpt_mon  = ( substr ( $rpt_days, 1, 1 ) == 'y' );
-          $rpt_tue  = ( substr ( $rpt_days, 2, 1 ) == 'y' );
-          $rpt_wed  = ( substr ( $rpt_days, 3, 1 ) == 'y' );
-          $rpt_thu  = ( substr ( $rpt_days, 4, 1 ) == 'y' );
-          $rpt_fri  = ( substr ( $rpt_days, 5, 1 ) == 'y' );
-          $rpt_sat  = ( substr ( $rpt_days, 6, 1 ) == 'y' );
+      } else {
+        $res = dbi_query ( "SELECT cal_id, cal_type, cal_end, " .
+          "cal_frequency, cal_days FROM webcal_entry_repeats " .
+          "WHERE cal_id = $id" );
+        if ( $res ) {
+          if ( $row = dbi_fetch_row ( $res ) ) {
+            $rpt_type = $row[1];
+ 
+            if ( $row[2] > 0 )
+              $rpt_end = date_to_epoch ( $row[2] );
+            else
+              $rpt_end = 0;
+              
+            $rpt_end_date = $row[2];
+            $rpt_freq = $row[3];
+            $rpt_days = $row[4];
+            $rpt_sun  = ( substr ( $rpt_days, 0, 1 ) == 'y' );
+            $rpt_mon  = ( substr ( $rpt_days, 1, 1 ) == 'y' );
+            $rpt_tue  = ( substr ( $rpt_days, 2, 1 ) == 'y' );
+            $rpt_wed  = ( substr ( $rpt_days, 3, 1 ) == 'y' );
+            $rpt_thu  = ( substr ( $rpt_days, 4, 1 ) == 'y' );
+            $rpt_fri  = ( substr ( $rpt_days, 5, 1 ) == 'y' );
+            $rpt_sat  = ( substr ( $rpt_days, 6, 1 ) == 'y' );
+          }
         }
       }
     }
-    
-  }
-  $sql = "SELECT cal_login, cal_category FROM webcal_entry_user WHERE cal_id = $id";
-  $res = dbi_query ( $sql );
-  if ( $res ) {
-    while ( $row = dbi_fetch_row ( $res ) ) {
-      $participants[$row[0]] = 1;
-      if ($login == $row[0]) $cat_id = $row[1];
-      if ( ( $is_assistant  || $is_admin ) && $user == $row[0]) $cat_id = $row[1];
+
+    $sql = "SELECT cal_login, cal_category FROM webcal_entry_user WHERE cal_id = $id";
+    $res = dbi_query ( $sql );
+    if ( $res ) {
+      while ( $row = dbi_fetch_row ( $res ) ) {
+        $participants[$row[0]] = 1;
+        if ($login == $row[0]) $cat_id = $row[1];
+        if ( ( $is_assistant  || $is_admin ) && $user == $row[0]) $cat_id = $row[1];
+      }
     }
-  }
-  if ( ! empty ( $allow_external_users ) && $allow_external_users == "Y" ) {
-    $external_users = event_get_external_users ( $id );
-  }
-} else {
-  // New event.
-  $id = 0; // to avoid warnings below about use of undefined var
-  // Anything other then testing for strlen breaks either hour=0 or no hour in URL
-  if ( strlen ( $hour ) ) {
-    $time = $hour * 100;
+
+    if ( ! empty ( $allow_external_users ) && $allow_external_users == "Y" ) {
+      $external_users = event_get_external_users ( $id );
+    }
+
   } else {
-    $time = -1;
-    $hour = -1;
-  }
-  if ( ! empty ( $defusers ) ) {
-    $tmp_ar = explode ( ",", $defusers );
-    for ( $i = 0; $i < count ( $tmp_ar ); $i++ ) {
-      $participants[$tmp_ar[$i]] = 1;
-    }
-  }
-  if ( $readonly == "N" ) {
-    // If public, then make sure we can add events
-    if ( $login == '__public__' ) {
-      if ( $public_access_can_add )
-        $can_edit = true;
+    //Debug
+    logs($log_file,"new event \ncal_date : ".$cal_date."\n");
+    //Debug
+  
+    // New event.
+    $id = 0; // to avoid warnings below about use of undefined var
+    // Anything other then testing for strlen breaks either hour=0 or no hour in URL
+    if ( strlen ( $hour ) ) {
+      $time = $hour * 100;
     } else {
-      // not public user
-        $can_edit = true;
+      $time = -1;
+      $hour = -1;
     }
+    if ( ! empty ( $defusers ) ) {
+      $tmp_ar = explode ( ",", $defusers );
+      for ( $i = 0; $i < count ( $tmp_ar ); $i++ ) {
+        $participants[$tmp_ar[$i]] = 1;
+      }
+    }
+    /*if ( $readonly == "N" ) {
+      // If public, then make sure we can add events
+      if ( $login == '__public__' ) {
+        if ( $public_access_can_add )
+          $can_edit = true;
+      } else {
+          // not public user
+          $can_edit = true;
+      }
+    }*/
   }
 }
+
+
+//Debug
+logs($log_file,"cal_date : ".$cal_date."\n");
+//Debug
+
 if ( ! empty ( $year ) && $year )
   $thisyear = $year;
 if ( ! empty ( $month ) && $month )
@@ -197,6 +332,10 @@ if ( ! empty ( $day ) && $day )
   $thisday = $day;
 if ( empty ( $rpt_type ) || ! $rpt_type )
   $rpt_type = "none";
+  
+//Debug
+logs($log_file,"year : ".$thisyear."\nmonth : ".$thismonth."\nday : ".$thisday."\n");
+//Debug
 
 // avoid error for using undefined vars
 if ( ! isset ( $hour ) )
@@ -240,8 +379,21 @@ else {
     empty ( $thismonth ) ? date ( "m" ) : $thismonth,
     empty ( $thisday ) ? date ( "d" ) : $thisday );
 }
+
+//Debug
+logs($log_file,"date : ".$thisdate."\n");
+//Debug
+
+//Debug
+logs($log_file,"cal_date : ".$cal_date."\n");
+//Debug
+
 if ( empty ( $cal_date ) || ! $cal_date )
   $cal_date = $thisdate;
+  
+//Debug
+logs($log_file,"cal_date : ".$cal_date."\n");
+//Debug
 
 if ( $allow_html_description == "Y" ){
   // Allow HTML in description
@@ -263,18 +415,17 @@ if ( $allow_html_description == "Y" ){
 }
 
 print_header ( $INC, '', $BodyX );
+
 ?>
 
 
 <h2><?php if ( $id ) echo translate("Edit Entry"); else echo translate("Add Entry"); ?>&nbsp;<img src="help.gif" alt="<?php etranslate("Help")?>" class="help" onclick="window.open ( 'help_edit_entry.php<?php if ( empty ( $id ) ) echo "?add=1"; ?>', 'cal_help', 'dependent,menubar,scrollbars,height=400,width=400,innerHeight=420,outerWidth=420');" /></h2>
 
 <?php
- if ( $can_edit ) {
+if ( ($can_modify && isset($_GET['id'])) || ($can_add && !isset($_GET['id'])) ) {
 
-?>
-<form action="edit_entry_handler.php" method="post" name="editentryform">
+echo '<form action="edit_entry_handler.php'.($GLOBALS['type_param']=='group'? '?type_param=group&group_param='.$GLOBALS['group_param'].'" ' : '?type_param=user" ').'method="post" name="editentryform">';
 
-<?php
 if ( ! empty ( $id ) && ( empty ( $copy ) || $copy != '1' ) ) echo "<input type=\"hidden\" name=\"id\" value=\"$id\" />\n";
 // we need an additional hidden input field
 echo "<input type=\"hidden\" name=\"entry_changed\" value=\"\" />\n";
@@ -376,6 +527,11 @@ if ( ! empty ( $parent ) )
   <tr><td class="tooltip" title="<?php etooltip("date-help")?>">
    <?php etranslate("Date")?>:</td><td colspan="2">
    <?php
+   
+   //Debug
+   logs($log_file, "cal_date : ".$cal_date."\n");
+   //Debug
+   
     print_date_selection ( "", $cal_date );
    ?>
   </td></tr>
@@ -626,72 +782,67 @@ for ( $i = 0; $i < count ( $site_extras ); $i++ ) {
 <?php } /* $useTabs */ ?>
 <table>
 <?php
-// Only ask for participants if we are multi-user.
-$show_participants = ( $disable_participants_field != "Y" );
-if ( $is_admin )
-  $show_participants = true;
-if ( $login == "__public__" && $public_access_others != "Y" )
-  $show_participants = false;
 
-if ( $single_user == "N" && $show_participants ) {
-  $userlist = get_my_users ();
-  if ($nonuser_enabled == "Y" ) {
-    $nonusers = get_nonuser_cals ();
-    $userlist = ($nonuser_at_top == "Y") ? array_merge($nonusers, $userlist) : array_merge($userlist, $nonusers);
-  }
-  $num_users = 0;
-  $size = 0;
-  $users = "";
-  for ( $i = 0; $i < count ( $userlist ); $i++ ) {
-    $l = $userlist[$i]['cal_login'];
-    $size++;
-    $users .= "<option value=\"" . $l . "\"";
-    if ( $id > 0 ) {
-      if ( ! empty ($participants[$l]) )
-        $users .= " selected=\"selected\"";
-    } else {
-      if ( ! empty ($defusers) ) {
-        // default selection of participants was in the URL
-        if ( ! empty ( $participants[$l] ) )
-          $users .= " selected=\"selected\"";
-      } else {
-        if ( ($l == $login && ! $is_assistant  && ! $is_nonuser_admin) || (! empty ($user) && $l == $user) )
-          $users .= " selected=\"selected\"";
-      }
-      if ( $l == '__public__' &&
-        ! empty ($public_access_default_selected) &&
-         $public_access_default_selected == 'Y' )
-           $users .= " selected=\"selected\"";
+$contents = file_get_contents('../bin/users_groups.xml');
+$result = xml2array($contents);
+$project = array();
+
+print("<table border=\"0\" cellspacing=\"20\" cellpadding=\"0\">\n");
+print("<tr><td>\n");
+
+print("<select name=\"projects\">\n");
+print("<option value=\"null\"> </option>\n");
+foreach ($result['projects']['project'] as $proj)
+{  
+  print("<option onclick=\"listRole('".$proj['attr']['name']."')\" value=\"".$proj['attr']['name']."\">".$proj['attr']['name']."</option>\n");
+}
+print("</select>\n");
+print("</td>");
+
+print("<td><div class=\"hideRole\" id=\"hideRole\">\n");
+print("</div></td>\n");
+
+print("<td><div class=\"hideUser\" id=\"hideUser\">\n");
+print("</div></td>\n");
+
+print("<td><div class=\"selected\" id=\"selected\">\n");
+print("<select MULTIPLE name=\"participants[]\" id=\"partlist\">\n");
+print("<option name=\"part\" value=\"");
+print($login);
+print("\">");
+print($login);
+print("</option>\n");
+if(sizeof($participants)>0){
+  foreach($participants as $part => $value){
+    if($part != $login){
+      print("<option name=\"part\" value=\"");
+      print($part);
+      print("\">");
+      print($part);
+      print("</option>\n");
     }
-    $users .= ">" . $userlist[$i]['cal_fullname'] . "</option>\n";
-  }
-
-  if ( $size > 50 )
-    $size = 15;
-  else if ( $size > 5 )
-    $size = 5;
-  print "<tr title=\"" . 
- tooltip("participants-help") . "\"><td class=\"tooltipselect\">\n<label for=\"entry_part\">" . 
- translate("Participants") . ":</label></td><td>\n";
-  print "<select name=\"participants[]\" id=\"entry_part\" size=\"$size\" multiple=\"multiple\">$users\n";
-  print "</select>\n";
-  if ( $groups_enabled == "Y" ) {
-    echo "<input type=\"button\" onclick=\"selectUsers()\" value=\"" .
-      translate("Select") . "...\" />\n";
-  }
-  echo "<input type=\"button\" onclick=\"showSchedule()\" value=\"" .
-    translate("Availability") . "...\" />\n";
-  print "</td></tr>\n";
-
-  // external users
-  if ( ! empty ( $allow_external_users ) && $allow_external_users == "Y" ) {
-    print "<tr title=\"" .
-      tooltip("external-participants-help") . "\"><td style=\"vertical-align:top;\" class=\"tooltip\">\n<label for=\"entry_extpart\">" .
-      translate("External Participants") . ":</label></td><td>\n";
-    print "<textarea name=\"externalparticipants\" id=\"entry_extpart\" rows=\"5\" cols=\"40\">";
-    print $external_users . "</textarea>\n</td></tr>\n";
   }
 }
+print("</select>\n");
+print("</div></td></tr>\n");
+
+print("<tr><td><input type=\"button\" value=\"");
+etranslate('Ajouter Projet');
+print("\" onclick=\"addGroup()\" /></td>\n");
+
+print("<td><div class=\"hidebRole\" id=\"hidebRole\">\n");
+print("</div></td>\n");
+
+print("<td><div class=\"hidebUser\" id=\"hidebUser\">\n");
+print("</div></td>\n");
+
+print("<td><div class=\"hidebDel\" id=\"hidebDel\">\n");
+if(sizeof($participants)>0){
+  print("<input type=\"button\" value=\"".translate("Delete")."\" onclick=\"del()\" />\n");
+}
+print("</div></td></tr>\n");
+
+print("</table>\n");
 ?>
 </table>
 <?php if ( $useTabs ) { ?>
@@ -806,7 +957,7 @@ if ( $single_user == "N" && $show_participants ) {
 <input type="hidden" name="participant_list" value="" />
 </form>
 
-<?php if ( $id > 0 && ( $login == $create_by || $single_user == "Y" || $is_admin ) ) { ?>
+<?php if ( $can_modify/*$id > 0 && ( $login == $create_by || $single_user == "Y" || $is_admin )*/ ) { ?>
  <a href="del_entry.php?id=<?php echo $id;?>" onclick="return confirm('<?php etranslate("Are you sure you want to delete this entry?")?>');"><?php etranslate("Delete entry")?></a><br />
 <?php 
  } //end if clause for delete link

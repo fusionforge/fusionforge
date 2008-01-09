@@ -9,7 +9,31 @@
 	Security:
 		Users will see different options available on this page.
  */
+
 include_once 'includes/init.php';
+include_once 'includes/user.php';
+
+//Debug
+logs($log_file,"#######  admin_home.php #######\n");
+//Debug
+
+//Debug
+logs($log_file,"admin_home.php _ login : ".$login."\n");
+//Debug
+
+if(isset($_GET['type_param'])){
+  $type_cal=$_GET['type_param'];
+}else{
+  $type_cal='user';
+}
+
+if(isset($_GET['group_param'])){
+  $group_cal=$_GET['group_param'];
+}
+
+//Debug
+logs($log_file,"admin_home.php : group : ".$group_cal."\n");
+//Debug
 
 $COLUMNS = 3;
 
@@ -58,12 +82,33 @@ $names = array ();
 $links = array ();
 
 if ($is_admin) {
-	$names[] = translate("System Settings");
-	$links[] = "admin.php";
+  if ($type_cal=='group'){
+  
+    if(user_project_role($login,$group_cal) == '3'){  
+	    $names[] = translate("System Settings");
+	    $links[] = "admin.php?type_param=".$type_cal."&group_param=".$group_cal;
+	  }
+	    
+	}else{
+	  
+	    $names[] = translate("System Settings");
+	    $links[] = "admin.php?type_param=".$type_cal;
+        
+  }
 }
 
-$names[] = translate("Preferences");
-$links[] = "pref.php";
+
+if ($type_cal=='group'){
+
+  $names[] = translate("Preferences");
+  $links[] = "pref.php?type_param=".$type_cal."&group_param=".$group_cal;
+  
+}else {
+
+  $names[] = translate("Preferences");
+  $links[] = "pref.php?type_param=".$type_cal;
+  
+}
 //remove user admin
 /*
 if ( $is_admin ) {
@@ -75,44 +120,89 @@ if ( $is_admin ) {
 }
 */
 
-if ( $single_user != 'Y' ) {
+/*if ( $single_user != 'Y' ) {
 	$names[] = translate("Assistants");
 	$links[] = "assistant_edit.php";
-}
+}*/
 
 if ( $categories_enabled == 'Y' ) {
-	$names[] = translate("Categories");
-	$links[] = "category.php";
+  if ($type_cal=='group'){
+  
+    if(user_project_role($login,$group_cal) >= '1'){
+	    $names[] = translate("Categories");
+	    $links[] = "category.php?type_param=".$GLOBALS['type_param']."&group_param=".$GLOBALS['group_param'];
+	  }
+	    
+	}else{
+	  $names[] = translate("Categories");
+	  $links[] = "category.php?type_param=".$GLOBALS['type_param'];  
+  }
 }
 
-$names[] = translate("Views");
-$links[] = "views.php";
+if ($type_cal=='group'){ 
+  if(user_project_role($login,$group_cal) >= '1'){
+    $names[] = translate("Views");
+    $links[] = "views.php?type_param=".$GLOBALS['type_param']."&group_param=".$GLOBALS['group_param'];
+  }
+}else{
+  $names[] = translate("Views");
+  $links[] = "views.php?type_param=".$GLOBALS['type_param'];
+}
 
-$names[] = translate("Layers");
-$links[] = "layers.php";
+if ($type_cal=='group' && user_project_role($login,$group_cal) >= '1' ){
+  $names[] = translate("Layers");
+  $links[] = "layers.php?type_param=".$GLOBALS['type_param']."&group_param=".$GLOBALS['group_param'];
+}else{
+  $names[] = translate("Layers");
+  $links[] = "layers.php?type_param=".$GLOBALS['type_param']; 
+}
 
 if ( $reports_enabled == 'Y' ) {
-	$names[] = translate("Reports");
-	$links[] = "report.php";
+  if ($type_cal=='group' && user_project_role($login,$group_cal) >= '1' ){
+	  $names[] = translate("Reports");
+	  $links[] = "report.php?type_param=".$GLOBALS['type_param']."&group_param=".$GLOBALS['group_param'];
+	}else{
+	  $names[] = translate("Reports");
+	  $links[] = "report.php?type_param=".$GLOBALS['type_param'];   
+  }
 }
 
 if ( $is_admin ) {
-	$names[] = translate("Delete Events");
-	$links[] = "purge.php";
+  if ($type_cal=='group' && user_project_role($login,$group_cal) >= '1' ){
+  	$names[] = translate("Delete Events");
+  	$links[] = "purge.php?type_param=".$GLOBALS['type_param']."&group_param=".$GLOBALS['group_param'];
 
-	$names[] = translate("Activity Log");
-	$links[] = "activity_log.php";
+  	$names[] = translate("Activity Log");
+  	$links[] = "activity_log.php?type_param=".$GLOBALS['type_param']."&group_param=".$GLOBALS['group_param'];
+	}else{
+  	$names[] = translate("Delete Events");
+  	$links[] = "purge.php?type_param=".$GLOBALS['type_param']; 
+
+  	$names[] = translate("Activity Log");
+  	$links[] = "activity_log.php?type_param=".$GLOBALS['type_param']; 
+  }
 }
 
 if ( $is_admin && ! empty ($public_access) && $public_access == 'Y' ) {
-	$names[] = translate("Public Preferences");
-	$links[] = "pref.php?public=1";
+  if ($type_cal=='group' && user_project_role($login,$group_cal) >= '1' ){
+	  $names[] = translate("Public Preferences");
+	  $links[] = "pref.php?public=1&type_param=".$GLOBALS['type_param']."&group_param=".$GLOBALS['group_param'];
+	}else{
+	  $names[] = translate("Public Preferences");
+	  $links[] = "pref.php?public=1&type_param=".$GLOBALS['type_param'];  
+  }
 }
 
 if ( $is_admin && ! empty ( $public_access ) && $public_access == 'Y' &&
 	$public_access_can_add == 'Y' && $public_access_add_needs_approval == 'Y' ) {
-	$names[] = translate("Unapproved Public Events");
-	$links[] = "list_unapproved.php?user=__public__";
+	
+	if ($type_cal=='group' && user_project_role($login,$group_cal) >= '1' ){
+	  $names[] = translate("Unapproved Public Events");
+	  $links[] = "list_unapproved.php?user=__public__&type_param=".$GLOBALS['type_param']."&group_param=".$GLOBALS['group_param'];
+	}else{
+	  $names[] = translate("Unapproved Public Events");
+	  $links[] = "list_unapproved.php?user=__public__&type_param=".$GLOBALS['type_param'];   
+  }
 }
 ?>
 

@@ -12,8 +12,88 @@
  * user  - user to display
  * (*) required field
  */
+ 
+
 include_once 'includes/init.php';
 include_once 'includes/site_extras.php';
+
+//Debug
+logs($log_file,"#######  view_entry.php  #######\n");
+//Debug
+ 
+
+//Récupération du type et du groupe
+if(isset($_GET['type_param'])){
+  $GLOBALS['type_param']=$_GET['type_param'];
+}else{
+  $GLOBALS['type_param']='user';
+}
+
+if(isset($_GET['group_param'])){
+  $GLOBALS['group_param']=$_GET['group_param'];
+}
+
+//Debug
+logs($log_file,"login : ".$login."\n");
+//Debug
+
+//Determine if the user can add event on this calendar
+$can_modify = Can_Modify($_GET['id'],$login);
+
+//Determine the info type
+if($GLOBALS['type_param']=='group'){
+  $info_type="type_param=group&group_param=".$GLOBALS['group_param']."&";
+}else{
+  $info_type="type_param=user&";
+}
+
+//debug
+if($can_modify){
+  logs($log_file,"CAN MODIFY\n");
+}else{
+  logs($log_file,"!!!!!!!  CAN'T MODIFY  !!!!!!!\n");
+}
+//debug
+
+/*$can_edit=false;
+if($GLOBALS['type_param'] == 'group' && $role_user >=2 ){
+  $can_edit = true;
+  //debug
+  logs($log_file,"edit_entry.php : can_edit 1 \n");
+  //debug
+}else{
+  //debug
+  logs($log_file,"edit_entry.php : can_edit 2.1 \n");
+  //debug
+  if($GLOBALS['type_param'] == 'user'){
+    if(isset($id) && $id!="" ){
+    
+      //debug
+      logs($log_file,"select cal_id 
+              from webcal_entry 
+              where cal_id = '".$id."' 
+                and cal_create_by = '".$login."' \n");
+      //debug
+      $res = dbi_query("select cal_id 
+              from webcal_entry 
+              where cal_id = '".$id."' 
+                and cal_create_by = '".$login."'");
+      if( pg_numrows($res) ){
+        $can_edit = true;
+        //debug
+        logs($log_file,"edit_entry.php : can_edit 2 \n");
+        //debug
+      }
+    }else{
+      $can_edit=true;
+      //debug
+      logs($log_file,"edit_entry.php : can_medit 3 \n");
+      //debug
+    }
+  }
+}*/
+
+
 
 // make sure this user is allowed to look at this calendar.
 $can_view = false;
@@ -31,11 +111,24 @@ if ( empty ( $id ) || $id <= 0 || ! is_numeric ( $id ) ) {
 
 if ( empty ( $error ) ) {
   // is this user a participant or the creator of the event?
-  $sql = "SELECT webcal_entry.cal_id FROM webcal_entry, " .
-    "webcal_entry_user WHERE webcal_entry.cal_id = " .
-    "webcal_entry_user.cal_id AND webcal_entry.cal_id = $id " .
-    "AND (webcal_entry.cal_create_by = '$login' " .
-    "OR webcal_entry_user.cal_login = '$login')";
+  $sql = "  SELECT e.cal_id
+            FROM webcal_entry e
+            WHERE e.cal_id='".$id."'
+              AND e.cal_create_by='".$login."'
+          UNION
+            SELECT e.cal_id
+            FROM webcal_entry e, webcal_entry_user eu
+            WHERE e.cal_id='".$id."'
+              AND e.cal_id=eu.cal_id 
+              AND eu.cal_login='".$login."'
+          UNION
+            SELECT e.cal_id
+            FROM webcal_entry e, webcal_entry_user eu, webcal_user u, webcal_group_user gu, webcal_group g
+            WHERE e.cal_id='".$id."'
+              AND e.cal_id=eu.cal_id 
+              AND eu.cal_login=g.cal_name 
+              AND g.cal_group_id=gu.cal_group_id
+              AND gu.cal_login='".$login."'";
   $res = dbi_query ( $sql );
   if ( $res ) {
     $row = dbi_fetch_row ( $res );
@@ -166,16 +259,18 @@ if ( empty ( $error ) ) {
   }
 }
 if ( $ext_id > 0 ) {
-  $url = "view_entry.php?id=$ext_id";
+  $url = "view_entry.php?id=".$ext_id."&";
   if ( $date != "" ) {
-    $url .= "&amp;date=$date";
+    $url .= "date=".$date."&";
   }
   if ( $user != "" ) {
-    $url .= "&amp;user=$user";
+    $url .= "user=".$user."&";
   }
   if ( $cat_id != "" ) {
-    $url .= "&amp;cat_id=$cat_id";
+    $url .= "cat_id=".$cat_id."&";
   }
+  
+  $url .= $info_type;
   do_redirect ( $url );
 }
 
@@ -646,6 +741,7 @@ for ( $i = 0; $i < count ( $site_extras ); $i++ ) {
 
 <?php // participants
 // Only ask for participants if we are multi-user.
+
 $allmails = array ();
 $show_participants = ( $disable_participants_field != "Y" );
 if ( $is_admin ) {
@@ -662,16 +758,48 @@ if ( $single_user == "N" && $show_participants ) { ?>
   if ( $is_private ) {
     echo "[" . translate("Confidential") . "]";
   } else {
-    $sql = "SELECT cal_login, cal_status FROM webcal_entry_user " .
-      "WHERE cal_id = $id";
+    $sql = "SELECT cal_login, cal_status, cal_group_status 
+            FROM webcal_entry_user " .
+            "WHERE cal_id = $id";
+    $sql_redacteur = "select cal_create_by from webcal_entry where cal_id = ".$id;
+    $sql_invite = "select gu.cal_login
+                   from webcal_entry_user eu, webcal_group_user gu, webcal_group g
+                   where eu.cal_id='".$id."'
+                     and g.cal_name=eu.cal_login
+                     and gu.cal_group_id=g.cal_group_id";
+                     
+    $res_invite = dbi_query ( $sql_invite );
+    
+    $inviteS="";
+    while( $invite = dbi_fetch_row($res_invite) ){
+      $inviteS = $inviteS.$invite["cal_login"].",";
+    }
+    
+    $sql_invite = "select eu.cal_login
+                   from webcal_entry_user eu
+                   where eu.cal_id='".$id."'
+                     and eu.cal_login not in (select cal_name
+                                              from webcal_group)";
+                                                                                        
+    $res_invite = dbi_query ( $sql_invite );
+    
+    while( $invite = dbi_fetch_row($res_invite) ){
+      $inviteS = $inviteS.$invite["cal_login"].",";
+    }
+    
     //echo "$sql\n";
     $res = dbi_query ( $sql );
+    
+    $res_redacteur = dbi_query ( $sql_redacteur );
+    
+    $red = dbi_fetch_row ($res_redacteur);
+    $redacteur = $red["cal_create_by"];
     $first = 1;
     $num_app = $num_wait = $num_rej = 0;
     if ( $res ) {
       while ( $row = dbi_fetch_row ( $res ) ) {
         $pname = $row[0];
-        if ( $login == $row[0] && $row[1] == 'W' ) {
+        if ( (strcmp($redacteur,$login) != 0) && ereg($login,$inviteS) && !ereg($login,$row[2]) ) {
           $unapproved = TRUE;
         }
         if ( $row[1] == 'A' ) {
@@ -688,13 +816,46 @@ if ( $single_user == "N" && $show_participants ) { ?>
     }
   }
   for ( $i = 0; $i < $num_app; $i++ ) {
-    user_load_variables ( $approved[$i], "temp" );
-    if ( strlen ( $tempemail ) ) {
-      echo "<a href=\"mailto:" . $tempemail . "?subject=$subject\">" . 
-        $tempfullname . "</a><br />\n";
-      $allmails[] = $tempemail;
-    } else {
-      echo $tempfullname . "<br />\n";
+  
+    $res_group_app = dbi_query("select count(cal_group_id) from webcal_group where cal_name='".$approved[$i]."'");
+        
+    $count_group_app=dbi_fetch_row($res_group_app);
+    if ( $count_group_app[0]<1){ 
+      user_load_variables ( $approved[$i], "temp" );
+      if ( strlen ( $tempemail ) ) {
+        echo "<a href=\"mailto:" . $tempemail . "?subject=$subject\">" . 
+          $tempfullname . "</a><br />\n";
+        $allmails[] = $tempemail;
+      } else {
+        echo $tempfullname . "<br />\n";
+      }
+    }else{
+      $res_group_app = dbi_query("select cal_group_id from webcal_group where cal_name='".$approved[$i]."'");
+      
+      $id_group_app = dbi_fetch_row($res_group_app);
+      
+      $res_group_users = dbi_query("select cal_login from webcal_group_user where cal_group_id = '".$id_group_app["cal_group_id"]."'");
+      
+      $group_email="";
+      if($res_group_users){
+        while( $group_user=dbi_fetch_row($res_group_users) ){
+          user_load_variables($group_user["cal_login"], "temp" );
+          if ( strlen ( $tempemail )  && ( strpos($group_email,$tempemail)===FALSE ) ) {
+            $group_email=$group_email.$tempemail.";";
+            if(!in_array($tempemail,$allmails)){
+              $allmails[] = $tempemail;
+            }
+          }
+        }
+        if ( strcmp($group_email,"") !=0 ){
+          echo "<a href=\"mailto:" . $group_email . "?subject=$subject\">" . 
+          $approved[$i] . "</a><br /> \n";
+        }else{
+          echo "" . $approved[$i] . "<br /> \n";
+        }
+      }else{
+        echo "" . $approved[$i] . "<br />\n";
+      }
     }
   }
   // show external users here...
@@ -711,13 +872,46 @@ if ( $single_user == "N" && $show_participants ) { ?>
     }
   }
   for ( $i = 0; $i < $num_wait; $i++ ) {
-    user_load_variables ( $waiting[$i], "temp" );
-    if ( strlen ( $tempemail ) ) {
-      echo "<br /><a href=\"mailto:" . $tempemail . "?subject=$subject\">" . 
-        $tempfullname . "</a> (?)\n";
-      $allmails[] = $tempemail;
-    } else {
-      echo "<br />" . $tempfullname . " (?)\n";
+  
+    $res_group_wait = dbi_query("select count(cal_group_id) from webcal_group where cal_name='".$waiting[$i]."'");
+    
+    $count_group_wait=dbi_fetch_row($res_group_wait);
+    if ( $count_group_wait[0]<1){ 
+      user_load_variables ( $waiting[$i], "temp" );
+      if ( strlen ( $tempemail ) ) {
+        echo "<br /><a href=\"mailto:" . $tempemail . "?subject=$subject\">" . 
+          $tempfullname . "</a> (?)\n";
+        $allmails[] = $tempemail;
+      } else {
+        echo "<br />" . $tempfullname . " (?)\n";
+      }
+    }else{
+      $res_group_wait = dbi_query("select cal_group_id from webcal_group where cal_name='".$waiting[$i]."'");
+      
+      $id_group_wait = dbi_fetch_row($res_group_wait);
+
+      $res_group_users = dbi_query("select cal_login from webcal_group_user where cal_group_id = '".$id_group_wait["cal_group_id"]."'");
+      
+      $group_email="";
+      if($res_group_users){
+        while( $group_user=dbi_fetch_row($res_group_users) ){
+          user_load_variables($group_user["cal_login"], "temp" );
+          if ( strlen ( $tempemail )  && ( strpos($group_email,$tempemail)===FALSE ) ) {
+            $group_email=$group_email.$tempemail.";";
+            if(!in_array($tempemail,$allmails)){
+              $allmails[] = $tempemail;
+            }
+          }
+        }
+        if ( strcmp($group_email,"") !=0 ){
+          echo "<br /><a href=\"mailto:" . $group_email . "?subject=$subject\">" . 
+          $waiting[$i] . "</a> (?)\n";
+        }else{
+          echo "<br />" . $waiting[$i] . " (?)\n";
+        }
+      }else{
+        echo "<br />" . $waiting[$i] . " (?)\n";
+      }
     }
   }
   for ( $i = 0; $i < $num_rej; $i++ ) {
@@ -750,7 +944,7 @@ if ( $event_repeats ) {
 if ( empty ( $friendly ) ) {
   echo "<a title=\"" . 
     translate("Generate printer-friendly version") . "\" class=\"printer\" " .
-    "href=\"view_entry.php?id=$id&amp;friendly=1$rdate\" " .
+    "href=\"view_entry.php?id=".$id."&amp;friendly=1".$rdate."&".$info_type."\" " .
     "target=\"cal_printer_friendly\">" .
     translate("Printer Friendly") . "</a><br />\n";
 }
@@ -765,24 +959,28 @@ if ( empty ( $event_status ) ) {
 if ( $unapproved && $readonly == 'N' ) {
   echo "<a title=\"" . 
     translate("Approve/Confirm entry") . 
-    "\" href=\"approve_entry.php?id=$id\" " .
+    "\" href=\"approve_entry.php?id=".$id."&".$info_type."\" " .
     "onclick=\"return confirm('" . 
     translate("Approve this entry?") . "');\">" . 
     translate("Approve/Confirm entry") . "</a><br />\n";
   echo "<a title=\"" . 
-    translate("Reject entry") . "\" href=\"reject_entry.php?id=$id\" " .
+    translate("Reject entry") . "\" href=\"reject_entry.php?id=".$id."&".$info_type."\" " .
     "onclick=\"return confirm('" .
     translate("Reject this entry?") . "');\">" . 
     translate("Reject entry") . "</a><br />\n";
 }
 
-if ( ! empty ( $user ) && $login != $user ) {
-  $u_url = "&amp;user=$user";
-} else {
-  $u_url = "";
+$u_url = '';
+if(isset($GLOBALS['type_param']) && $GLOBALS['type_param']=='group'){
+  $u_url = "type_param=group&amp;group_param=".$GLOBALS['group_param'];
+}else{
+  $u_url .= "type_param=user";
+  if ( ! empty ( $user ) && $user != $login ){
+    $u_url .= "&user=$user";
+  }
 }
 
-$can_edit = ( $is_admin || $is_nonuser_admin && ($user == $create_by) || 
+/*$can_edit = ( $is_admin || $is_nonuser_admin && ($user == $create_by) || 
   ( $is_assistant && ! $is_private && ($user == $create_by) ) ||
   ( $readonly != "Y" && ( $login == $create_by || $single_user == "Y" ) ) );
 if ( $public_access == "Y" && $login == "__public__" ) {
@@ -790,36 +988,47 @@ if ( $public_access == "Y" && $login == "__public__" ) {
 }
 if ( $readonly == 'Y' ) {
   $can_edit = false;
-}
+}*/
+
+
+
 
 // If approved, but event category not set (and user does not have permission
 // to edit where they could also set the category), then allow them to
 // set it through set_cat.php.
 if ( empty ( $user ) && $categories_enabled == "Y" &&
   $readonly != "Y" && $is_my_event && $login != "__public__" &&
-  $event_status != "D" && ! $can_edit )  {
+  $event_status != "D" && ! $can_modify )  {
   echo "<a title=\"" . 
     translate("Set category") . "\" class=\"nav\" " .
-    "href=\"set_entry_cat.php?id=$id$rdate\">" .
+    "href=\"set_entry_cat.php?id=".$id.$rdate."&".$u_url."\">" .
     translate("Set category") . "</a><br />\n";
 }
 
-if ( $can_edit && $event_status != "D" ) {
+//debug
+if($can_modify){
+  logs($log_file,"CAN MODIFY\n");
+}else{
+  logs($log_file,"!!!!!!!  CAN'T MODIFY  !!!!!!!\n");
+}
+//debug
+
+if ( $can_modify && $event_status != "D" ) {
   if ( $event_repeats ) {
     echo "<a title=\"" .
       translate("Edit repeating entry for all dates") . 
-      "\" class=\"nav\" href=\"edit_entry.php?id=$id$u_url\">" . 
+      "\" class=\"nav\" href=\"edit_entry.php?id=".$id."&".$u_url."\">" . 
       translate("Edit repeating entry for all dates") . "</a><br />\n";
     // Don't allow override of first event
     if ( ! empty ( $date ) && $date != $orig_date ) {
       echo "<a title=\"" .
         translate("Edit entry for this date") . "\" class=\"nav\" " . 
-        "href=\"edit_entry.php?id=$id$u_url$rdate&amp;override=1\">" .
+        "href=\"edit_entry.php?id=".$id."&".$u_url."&".$rdate."&amp;override=1\">" .
         translate("Edit entry for this date") . "</a><br />\n";
     }
     echo "<a title=\"" . 
       translate("Delete repeating event for all dates") . 
-      "\" class=\"nav\" href=\"del_entry.php?id=$id$u_url&amp;override=1\" " .
+      "\" class=\"nav\" href=\"del_entry.php?id=".$id."&".$u_url."&amp;override=1\""  .
       "onclick=\"return confirm('" . 
       translate("Are you sure you want to delete this entry?") . "\\n\\n" . 
       translate("This will delete this entry for all users.") . "');\">" . 
@@ -828,7 +1037,7 @@ if ( $can_edit && $event_status != "D" ) {
     if ( ! empty ( $date ) && $date != $orig_date ) {
       echo "<a title=\"" . 
         translate("Delete entry only for this date") . 
-        "\" class=\"nav\" href=\"del_entry.php?id=$id$u_url$rdate&amp;override=1\" " .
+        "\" class=\"nav\" href=\"del_entry.php?id=".$id."&".$u_url."&".$rdate."&amp;override=1\" " .
         "onclick=\"return confirm('" .
         translate("Are you sure you want to delete this entry?") . "\\n\\n" . 
         translate("This will delete this entry for all users.") . "');\">" . 
@@ -837,20 +1046,20 @@ if ( $can_edit && $event_status != "D" ) {
   } else {
     echo "<a title=\"" .
       translate("Edit entry") . "\" class=\"nav\" " .
-      "href=\"edit_entry.php?id=$id$u_url\">" .
+      "href=\"edit_entry.php?id=".$id."&".$u_url."\">" .
       translate("Edit entry") . "</a><br />\n";
     echo "<a title=\"" . 
       translate("Delete entry") . "\" class=\"nav\" " .
-      "href=\"del_entry.php?id=$id$u_url$rdate\" onclick=\"return confirm('" . 
+      "href=\"del_entry.php?id=".$id."&".$u_url."&".$rdate."\" onclick=\"return confirm('" . 
        translate("Are you sure you want to delete this entry?") . "\\n\\n" . 
        translate("This will delete this entry for all users.") . "');\">" . 
        translate("Delete entry") . "</a><br />\n";
   }
   echo "<a title=\"" . 
     translate("Copy entry") . "\" class=\"nav\" " .
-    "href=\"edit_entry.php?id=$id$u_url&amp;copy=1\">" . 
+    "href=\"edit_entry.php?id=".$id."&".$u_url."&amp;copy=1\">" . 
     translate("Copy entry") . "</a><br />\n";  
-} elseif ( $readonly != "Y" && $is_my_event && $login != "__public__" &&
+} /*elseif ( $readonly != "Y" && $is_my_event && $login != "__public__" &&
   $event_status != "D" )  {
   echo "<a title=\"" . 
     translate("Delete entry") . "\" class=\"nav\" " .
@@ -862,12 +1071,12 @@ if ( $can_edit && $event_status != "D" ) {
     translate("Copy entry") . "\" class=\"nav\" " .
     "href=\"edit_entry.php?id=$id&amp;copy=1\">" . 
     translate("Copy entry") . "</a><br />\n";
-}
+}*/
 if ( $readonly != "Y" && ! $is_my_event && ! $is_private && 
   $event_status != "D" && $login != "__public__" )  {
   echo "<a title=\"" . 
     translate("Add to My Calendar") . "\" class=\"nav\" " .
-    "href=\"add_entry.php?id=$id&user=".$_GET['user']."\" onclick=\"return confirm('" . 
+    "href=\"add_entry.php?id=".$id."&user=".$_GET['user']."&".$info_type."\" onclick=\"return confirm('" . 
     translate("Do you want to add this entry to your calendar?") . "\\n\\n" . 
     translate("This will add the entry to your calendar.") . "');\">" . 
     translate("Add to My Calendar") . "</a><br />\n";
@@ -887,12 +1096,12 @@ if ( $is_admin ) {
   if ( empty ( $log ) ) {
     echo "<a title=\"" . 
       translate("Show activity log") . "\" class=\"nav\" " .
-      "href=\"view_entry.php?id=$id&amp;log=1\">" . 
+      "href=\"view_entry.php?id=".$id."&amp;log=1&".$info_type."\">" . 
       translate("Show activity log") . "</a><br />\n";
   } else {
     echo "<a title=\"" . 
       translate("Hide activity log") . "\" class=\"nav\" " .
-      "href=\"view_entry.php?id=$id\">" . 
+      "href=\"view_entry.php?id=".$id."&".$info_type."\">" . 
        translate("Hide activity log") . "</a><br />\n";
     $show_log = true;
   }
@@ -943,7 +1152,7 @@ if ( $show_log ) {
 
 if (! $is_private) {
   echo "<br /><form method=\"post\" name=\"exportform\" " .
-    "action=\"export_handler.php\">\n";
+    "action=\"export_handler.php?".$info_type."\">\n";
   echo "<label for=\"exformat\">" . 
     translate("Export this entry to") . ":&nbsp;</label>\n";
   echo "<select name=\"format\" id=\"exformat\">\n";

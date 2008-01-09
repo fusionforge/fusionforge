@@ -14,9 +14,28 @@ else
   $app_user = ( $is_assistant || $is_nonuser_admin ? $user : $login );
 
 if ( empty ( $error ) && $id > 0 ) {
-  if ( ! dbi_query ( "UPDATE webcal_entry_user SET cal_status = 'R' " .
-    "WHERE cal_login = '$app_user' AND cal_id = $id" ) ) {
+
+  $res = dbi_query ( "select COUNT(*) as num FROM webcal_entry_user WHERE cal_status = 'W' " .
+          "AND cal_login = '$app_user' AND cal_id = ".$id );
+  if(!$res || $res['num'] < 1 ){
+    $result = dbi_query ( "SELECT * FROM webcal_entry_user WHERE cal_id = ".$id);
+    while ($trait = dbi_fetch_row($result)) { 
+    if($trait['cal_group_status'] == null){
+      dbi_query ( "UPDATE webcal_entry_user SET cal_group_status = ',R:".$app_user.",' " .
+    "WHERE cal_id = ".$id." AND cal_login = '".$trait['cal_login']."'" );
+    }else{
+      dbi_query ( "UPDATE webcal_entry_user SET cal_group_status = cal_group_status||',R:".$app_user.",' " .
+    "WHERE cal_id = ".$id." AND cal_login = '".$trait['cal_login']."'" );
+    }
+    }
+  }else  if ( ! dbi_query ( "UPDATE webcal_entry_user SET cal_status = 'R' " .
+    "WHERE cal_login = '".$app_user."' AND cal_id = ".$id ) ) {
     $error = translate("Error approving event") . ": " . dbi_error ();
+    //plugin add father
+    $params[0] = $app_user ;
+    $params[1] = $id ;
+    plugin_hook('add_cal_link_father_event',$params);
+    
   } else {
     activity_log ( $id, $login, $app_user, $LOG_REJECT, "" );
   }

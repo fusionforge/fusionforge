@@ -6,6 +6,7 @@ include "./includes/functions.php";
 include "./includes/$user_inc";
 include "./includes/connect.php";
 
+
 // Change this to true to show "no such user" or "invalid password" on
 // login failures.
 $showLoginFailureReason = true;
@@ -13,28 +14,59 @@ $showLoginFailureReason = true;
 load_global_settings ();
 //ajout de fab
 
+//Debug
+logs($log_file,"#######  login.php #######\n");
+//Debug
 
+//Debug
+logs($log_file,"login.php : ".$_GET['type_param']."\n");
+//Debug
 
 //utilisation des cookies
 //modif du fichier include/user.php
 
-if($_GET['type'] == 'group'){
+
+if($_GET['type_param'] == 'group'){
+  $GLOBALS['type_param'] = $_GET['type_param'];
+  
+  //TODO : Tester si l'utilisateur a le droit de le voir.
+  
 	$group_id = getIntFromRequest('group_id');
 	//session_require(array('group'=>$group_id,'admin_flags'=>'A'));
+	
+	//Debug
+  logs($log_file,"login.php LUSER : ".$LUSER->getUnixName()."\n");
+	//Debug
+	
+	$res = dbi_query("SELECT cal_value FROM webcal_user_pref WHERE cal_login='".$LUSER->getUnixName()."' and cal_setting='STARTVIEW'");
+	$rows = pg_fetch_row($res);
+	$view = $rows[0];
+	
+	//Debug
+  logs($log_file,"login.php : ".print_r($rows,true)."\n");
+	//Debug
+	
+	//Debug
+  logs($log_file,"login.php : SELECT cal_value FROM webcal_user_pref WHERE cal_login='".$LUSER->getUnixName()."' and cal_setting='STARTVIEW'\n");
+  //Debug
 	
 	//choix du calendrier a afficher 
 	$sql_group = "SELECT unix_group_name FROM groups WHERE group_id = '".$_GET['group_id']."'" ;
 	$result_group = dbi_query ($sql_group);
 		if ( $result_group ) {
 			 if ( $row_group = dbi_fetch_row ( $result_group ) ) {
-		       $return_path = 'week.php?user='.$row_group[0];
+		       $return_path = ($view != "" ? $view : "week.php").'?user='.$row_group[0].'&type_param='.$GLOBALS['type_param']."&group_param=".$_GET['group_id'];
 		     }
 		     dbi_free_result ( $result_group );
 		   }
 	//on log l'utilisateur
 	$sql = "SELECT user_name,user_pw FROM users WHERE user_id = '".user_getid()."'" ;		
 
-$result = dbi_query ($sql);
+	//Debug
+  logs($log_file,"login.php : return_path : ".$return_path."\n");
+  //Debug
+
+  $result = dbi_query ($sql);
 		if ( $result ) {
 			 if ( $row_log = dbi_fetch_row ( $result ) ) {
 		       $_POST['login'] = $row_log[0];
@@ -46,20 +78,25 @@ $result = dbi_query ($sql);
 	
 }
 
+if($_GET['type_param'] == 'user'){
 
-if($_GET['type'] == 'user'){
-$sql = "SELECT user_name,user_pw FROM users WHERE user_id = '".user_getid()."'" ;	
-$result = dbi_query ($sql);
-		if ( $result ) {
-			 if ( $row_log = dbi_fetch_row ( $result ) ) {
-		       $_POST['login'] = $row_log[0];
-		     	$_POST['password'] = $row_log[1];
-		    
-		     }
-		     dbi_free_result ( $result );
-		   }
+  $GLOBALS['type_param'] = 'user';
+  
+  //Debug
+  logs($log_file,"login.php : GLOBALS : ".$GLOBALS['type_param']."\n");
+  //Debug
+  
+  $sql = "SELECT user_name,user_pw FROM users WHERE user_id = '".user_getid()."'" ;	
+  $result = dbi_query ($sql);
+    if ( $result ) {
+      if ( $row_log = dbi_fetch_row ( $result ) ) {
+        $_POST['login'] = $row_log[0];
+        $_POST['password'] = $row_log[1];
+      }
+		     
+      dbi_free_result ( $result );
+    }
 }
-
 
 //fin ajout de fab
 if ( ! empty ( $last_login ) ) {
@@ -82,7 +119,7 @@ if ( ! empty ( $return_path ) ) {
   $return_path = clean_whitespace ( $return_path );
   $url = $return_path;
 } else {
-  $url = "index.php";
+  $url = "index.php?type_group=user";
 }
 $lang = '';
 if ( ! empty ( $LANGUAGE ) &&  $LANGUAGE != "Browser-defined" && $LANGUAGE != "none" ) {
@@ -102,8 +139,7 @@ $password = getPostValue ( 'password' );
 if ( ! empty ( $settings['session'] ) && $settings['session'] = 'php' ) {
   session_start ();
 }
-
-// calculate path for cookie
+ // calculate path for cookie
 if ( empty ( $PHP_SELF ) ) {
   $PHP_SELF = $_SERVER["PHP_SELF"];
 }
@@ -128,7 +164,7 @@ if ( $single_user == "Y" ) {
         "<tt>" . htmlentities ( $login ) . "</tt>" );
     }
     if ( user_valid_login ( $login, $password ) ) {
-      user_load_variables ( $login, "" );
+       user_load_variables ( $login, "" );
       // set login to expire in 365 days
       srand((double) microtime() * 1000000);
       $salt = chr( rand(ord('A'), ord('z'))) . chr( rand(ord('A'), ord('z')));
@@ -144,7 +180,17 @@ if ( $single_user == "Y" ) {
           SetCookie ( "webcalendar_session", $encoded_login, 0, $cookie_path );
         }
       }
-load_user_preferences ();
+
+      //Debug
+      logs($log_file,"login.php : avant load_user_preferences \n");
+      //Debug
+
+      load_user_preferences ();
+
+      //Debug
+      logs($log_file,"login.php : après load_user_preferences \n");
+      //Debug
+      
       // The cookie "webcalendar_login" is provided as a convenience to
       // other apps that may wish to find out what the last calendar
       // login was, so they can use week_ssi.php as a server-side include.
@@ -153,12 +199,21 @@ load_user_preferences ();
       // load user preferences on the login page (before anyone has
       // logged in) if $remember_last_login is set to "Y" (in admin.php).
       if ( ! empty ( $remember ) && $remember == "yes" ) {
-        SetCookie ( "webcalendar_login", $login,
-          time() + ( 24 * 3600 * 365 ), $cookie_path );
+        SetCookie ( "webcalendar_login", $login, time() + ( 24 * 3600 * 365 ), $cookie_path );
       } else {
         SetCookie ( "webcalendar_login", $login, 0, $cookie_path );
       }
+
+      //Debug
+      logs($log_file,"login.php : avant do_redirect\nurl : ".$url."\n");
+      //Debug
+
       do_redirect ( $url );
+
+      //Debug
+      logs($log_file,"login.php : après do_redirect \n");
+      //Debug
+
     } else {
       // Invalid login
       if ( empty ( $error ) || ! $showLoginFailureReason ) {
@@ -178,7 +233,13 @@ load_user_preferences ();
   if (substr($cookie_path, -1) == '/') {
     SetCookie ( "webcalendar_session", "", 0, substr($cookie_path, 0, -1)  );
   }
+  
 }
+
+//Debug
+logs($log_file,"login.php : avant <html>\n");
+//Debug
+
 $charset = ( ! empty ( $LANGUAGE )?translate("charset"): "iso-8859-1" );
 echo "<?xml version=\"1.0\" encoding=\"$charset\"?>" . "\n";
 ?>
@@ -214,20 +275,20 @@ function myOnLoad() {
 }
 </script>
 <?php 
- include "includes/styles.php";
+include "includes/styles.php";
 
- // Print custom header (since we do not call print_header function)
- if ( ! empty ( $CUSTOM_SCRIPT ) && $CUSTOM_SCRIPT == 'Y' ) {
-   $res = dbi_query (
-     "SELECT cal_template_text FROM webcal_report_template " .
-     "WHERE cal_template_type = 'S' and cal_report_id = 0" );
-   if ( $res ) {
-     if ( $row = dbi_fetch_row ( $res ) ) {
-       echo $row[0];
-     }
-     dbi_free_result ( $res );
-   }
- }
+// Print custom header (since we do not call print_header function)
+if ( ! empty ( $CUSTOM_SCRIPT ) && $CUSTOM_SCRIPT == 'Y' ) {
+  $res = dbi_query (
+    "SELECT cal_template_text FROM webcal_report_template " .
+    "WHERE cal_template_type = 'S' and cal_report_id = 0" );
+  if ( $res ) {
+    if ( $row = dbi_fetch_row ( $res ) ) {
+      echo $row[0];
+    }
+    dbi_free_result ( $res );
+  }
+}
 ?>
 </head>
 <body onload="myOnLoad();">
@@ -304,10 +365,12 @@ if ( ! empty ( $return_path ) ) {
    <?php etranslate("Access public calendar")?></a><br />
 <?php } ?>
 
-<?php if ( $demo_mode == "Y" ) {
- // This is used on the sourceforge demo page
- echo "Demo login: user = \"demo\", password = \"demo\"<br />";
-} ?>
+<?php
+if ( $demo_mode == "Y" ) {
+  // This is used on the sourceforge demo page
+  echo "Demo login: user = \"demo\", password = \"demo\"<br />";
+} 
+?>
 <br /><br /><br />
 <span class="cookies"><?php etranslate("cookies-note")?></span><br />
 <hr />
@@ -325,6 +388,7 @@ if ( ! empty ( $CUSTOM_TRAILER ) && $CUSTOM_TRAILER == 'Y' ) {
     }
     dbi_free_result ( $res );
   }
-} ?>
+}
+?>
 </body>
 </html>

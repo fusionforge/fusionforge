@@ -30,6 +30,14 @@ $LOG_REMINDER = "R";
 /**#@-*/
 
 /**
+ *File to log
+ *
+ */  
+global $log_file;
+$log_file="/var/lib/gforge/chroot/home/users/placoste/webcalendar/webcalendar.txt";
+
+
+/**
  * Number of seconds in a day
  *
  * @global int $ONE_DAY
@@ -184,6 +192,14 @@ for ( $i = 0; $i < count ( $offsets ); $i++ ) {
   echo "offset $i: $offsets[$i] <br />\n";
 }
 */
+
+function logs($logs_file, $msg){
+
+  /*$log=fopen($logs_file,"a+");
+  fputs($log,$msg."\n");
+  fclose($log);*/
+
+}
 
 /*
  * Functions start here.  All non-function code should be above this
@@ -576,6 +592,19 @@ function send_to_preferred_view ( $indate="", $args="" ) {
  * @global resource Database connection
  */
 function do_redirect ( $url ) {
+
+  //Debug
+  //$log=fopen("/var/lib/gforge/chroot/home/users/placoste/webcalendar/webcalendar.txt","a+");
+  //fputs($log,"#######  functions.php  #######\n-------  do_redirect  -------\n");
+  //fclose($log);
+  //Debug
+  
+  //Debug
+  //$log=fopen("/var/lib/gforge/chroot/home/users/placoste/webcalendar/webcalendar.txt","a+");
+  //fputs($log,"url : ".$url."\n");
+  //fclose($log);
+  //Debug
+ 
   global $SERVER_SOFTWARE, $_SERVER, $c;
 
   // Replace any '&amp;' with '&' since we don't want that in the HTTP
@@ -584,28 +613,43 @@ function do_redirect ( $url ) {
 
   if ( empty ( $SERVER_SOFTWARE ) )
     $SERVER_SOFTWARE = $_SERVER["SERVER_SOFTWARE"];
+    
   //echo "SERVER_SOFTWARE = $SERVER_SOFTWARE <br />\n"; exit;
-  if ( ( substr ( $SERVER_SOFTWARE, 0, 5 ) == "Micro" ) ||
-    ( substr ( $SERVER_SOFTWARE, 0, 3 ) == "WN/" ) ) {
-    echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<!DOCTYPE html
-    PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"
-    \"DTD/xhtml1-transitional.dtd\">
+  if ( ( substr ( $SERVER_SOFTWARE, 0, 5 ) == "Micro" ) || ( substr ( $SERVER_SOFTWARE, 0, 3 ) == "WN/" ) ) {
+  
+    echo "<?xml version=\"1.0\" encoding=\"utf-8\"\n
+<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"\"DTD/xhtml1-transitional.dtd\">
 <html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">
-<head>\n<title>Redirect</title>\n" .
-      "<meta http-equiv=\"refresh\" content=\"0; url=$url\" />\n</head>\n<body>\n" .
-      "Redirecting to.. <a href=\"" . $url . "\">here</a>.</body>\n</html>";
-  } else {
-    Header ( "Location: $url" );
-    //print "<javascript>window.location.href='index.php';</script>" ;
-    echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<!DOCTYPE html
-    PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"
-    \"DTD/xhtml1-transitional.dtd\">
+  <head>\n
+    <title>Redirect</title>\n
+    <meta http-equiv=\"refresh\" content=\"0; url=\"".$url."\" />\n
+  </head>\n
+  <body>\n
+    Redirecting to.. <a href=\"".$url."\">here</a>
+  </body>\n
+</html>";
+
+  }else {
+  
+    Header ( "Location: ".$url );
+    print "<script>window.location.href=\"".$url."\";</script>" ;
+    echo "<?xml version=\"1.0\" encoding=\"utf-8\"\n
+<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"DTD/xhtml1-transitional.dtd\">
 <html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">
-<head>\n<title>Redirect</title>\n</head>\n<body>\n" .
-      "Redirecting to aa... <a href=\"" . $url . "\">here</a>.</body>\n</html>";
+  <head>\n
+    <title>Redirect</title>\n
+  </head>\n
+  <body>\n
+    Redirecting to ... <a href=\"".$url."\">here</a>.
+  </body>\n
+</html>";
+
   }
+  
   dbi_close ( $c );
+  
   exit;
+  
 }
 
 /**
@@ -729,7 +773,7 @@ function load_user_preferences () {
     "POPUP_BG" => 1,
     "POPUP_FG" => 1,
   );
-
+  
   $browser = get_web_browser ();
   $browser_lang = get_browser_language ();
   $prefarray = array ();
@@ -804,6 +848,8 @@ function load_user_preferences () {
   $is_nonuser_admin = ($user) ? user_is_nonuser_admin ( $login, $user ) : false;
   if ( $is_nonuser_admin ) load_nonuser_preferences ($user);
 }
+
+
 
 /**
  * Gets the list of external users for an event from the webcal_entry_ext_user table in an HTML format.
@@ -1279,17 +1325,33 @@ function date_selection_html ( $prefix, $date ) {
  *                              month.php?  or  view_l.php?id=7&amp;)
  */
 function display_small_month ( $thismonth, $thisyear, $showyear,
-  $show_weeknums=false, $minical_id='', $month_link='month.php?' ) {
+  $show_weeknums=false, $minical_id='', $month_link='month.php?', $info_type='&type_param=user' ) {
   global $WEEK_START, $user, $login, $boldDays, $get_unapproved;
   global $DISPLAY_WEEKNUMBER;
   global $SCRIPT, $thisday; // Needed for day.php
   global $caturl, $today;
+  global $log_file;
+  
+  //Debug
+  logs($log_file,"#######  function.php  #######\n-------  display_small_month  -------\n");
+  if(isset($get_unapproved)){
+    logs($log_file, "1\n");
+  }else{
+    logs($log_file, "0\n");
+  }
+  //Debug
+  
+  //Debug
+  logs($log_file, "UNAPPROVED : ".$GLOBALS['DISPLAY_UNAPPROVED']." get_unapproved : ".($get_unapproved?"1":"0")."\n");
+  //Debug
 
   if ( $user != $login && ! empty ( $user ) ) {
     $u_url = "user=$user" . "&amp;";
   } else {
     $u_url = '';
   }
+  
+  $u_url .= $info_type."&";
 
   //start the minical table for each month
   echo "\n<table class=\"minical\"";
@@ -1460,11 +1522,17 @@ function print_entry ( $id, $date, $time, $duration,
     strstr ( $PHP_SELF, "view_t.php" ) )
     $class = "entry";
 
+  if($GLOBALS['type_param'] == 'group'){
+    $info_type = "&type_param=group&group_param=".$GLOBALS['group_param'];
+  }else{
+    $info_type = "&type_param=user";
+  }
+
   if ( $pri == 3 ) echo "<strong>";
   $popupid = "eventinfo-$id-$key";
   $key++;
   echo "<a title=\"" . 
-    translate("View this entry") . "\" class=\"$class\" href=\"view_entry.php?id=$id&amp;date=$date";
+    translate("View this entry") . "\" class=\"$class\" href=\"view_entry.php?id=$id&amp;date=$date".$info_type;
   if ( strlen ( $user ) > 0 )
     echo "&amp;user=" . $user;
   echo "\" onmouseover=\"window.status='" . 
@@ -1602,6 +1670,11 @@ function read_events ( $user, $startdate, $enddate, $cat_id = ''  ) {
   global $login;
   global $layers;
   global $TZ_OFFSET;
+  global $log_file;
+  
+  //debug
+  logs($log_file,"function.php : read_event \n");
+  //debug
 
   $sy = substr ( $startdate, 0, 4 );
   $sm = substr ( $startdate, 4, 2 );
@@ -1663,6 +1736,10 @@ function read_events ( $user, $startdate, $enddate, $cat_id = ''  ) {
         "webcal_entry.cal_date < $enddate_plus1 ) )";
     }
   }
+  
+  //debug
+  //logs($log_file,"function.php : read_event : ".$date_filter."\n");
+  //debug
   return query_events ( $user, false, $date_filter, $cat_id  );
 }
 
@@ -1682,12 +1759,24 @@ function read_events ( $user, $startdate, $enddate, $cat_id = ''  ) {
  */
 function get_entries ( $user, $date, $get_unapproved=true ) {
   global $events, $TZ_OFFSET;
+  global $log_file;
   $n = 0;
   $ret = array ();
 
   //echo "<br />\nChecking " . count ( $events ) . " events.  TZ_OFFSET = $TZ_OFFSET, get_unapproved=" . $get_unapproved . "<br />\n";
 
   //print_r ( $events );
+  
+  //Debug
+  //logs($log_file,"########  function.php  #######\n--------  get_entries  -------\n");
+  //logs($log_file,"date : ".$date."\n");
+  //if($get_unapproved){
+  //  logs($log_file,"get unapproved\n");
+  //}else{
+  //  logs($log_file,"don't get unapproved\n");
+  //}
+  //logs($log_file,print_r($events,true)."\n");
+  //Debug
 
   for ( $i = 0; $i < count ( $events ); $i++ ) {
     // In case of data corruption (or some other bug...)
@@ -1695,6 +1784,9 @@ function get_entries ( $user, $date, $get_unapproved=true ) {
       continue;
     if ( ( ! $get_unapproved ) && $events[$i]['cal_status'] == 'W' ) {
       // ignore this event
+      //debug
+      logs($log_file,"ignore this event\n");
+      //debug
     //don't adjust anything  if  no TZ offset or ALL Day Event or Untimed
     } else if ( empty ( $TZ_OFFSET) ||  ( $events[$i]['cal_time'] <= 0 ) ) {
       if ( $events[$i]['cal_date'] == $date )
@@ -1747,6 +1839,11 @@ function get_entries ( $user, $date, $get_unapproved=true ) {
       }
     }
   }
+  
+  //Debug
+  //logs($log_file,"ret : ".print_r($ret,true)."\n");
+  //Debug
+  
   return $ret;
 }
 
@@ -1766,39 +1863,37 @@ function get_entries ( $user, $date, $get_unapproved=true ) {
 function query_events ( $user, $want_repeated, $date_filter, $cat_id = '' ) {
   global $login;
   global $layers, $public_access_default_visible;
+  global $log_file;
   $result = array ();
   $layers_byuser = array ();
 
-  $sql = "SELECT webcal_entry.cal_name, webcal_entry.cal_description, "
-    . "webcal_entry.cal_date, webcal_entry.cal_time, "
-    . "webcal_entry.cal_id, webcal_entry.cal_ext_for_id, "
-    . "webcal_entry.cal_priority, "
-    . "webcal_entry.cal_access, webcal_entry.cal_duration, "
-    . "webcal_entry_user.cal_status, "
-    . "webcal_entry_user.cal_category, "
-    . "webcal_entry_user.cal_login ";
+  $sql = "SELECT distinct e.cal_name, e.cal_description,e.cal_date, e.cal_time,e.cal_id,"
+        ." e.cal_ext_for_id,e.cal_priority,e.cal_access,e.cal_duration, "
+        ." eu1.cal_status,eu1.cal_category, eu1.cal_login ";
   if ( $want_repeated ) {
     $sql .= ", "
-      . "webcal_entry_repeats.cal_type, webcal_entry_repeats.cal_end, "
-      . "webcal_entry_repeats.cal_frequency, webcal_entry_repeats.cal_days "
-      . "FROM webcal_entry, webcal_entry_repeats, webcal_entry_user "
-      . "WHERE webcal_entry.cal_id = webcal_entry_repeats.cal_id AND ";
+      . "er.cal_type, er.cal_end, "
+      . "er.cal_frequency, er.cal_days "
+      . "FROM webcal_entry e, webcal_entry_repeats er, webcal_entry_user eu1 "
+      . "WHERE e.cal_id = er.cal_id AND ";
   } else {
-    $sql .= "FROM webcal_entry, webcal_entry_user WHERE ";
+    $sql .= "FROM webcal_entry e, webcal_entry_user eu1 "
+      . " WHERE ";
   }
-  $sql .= "webcal_entry.cal_id = webcal_entry_user.cal_id " .
-    "AND webcal_entry_user.cal_status IN ('A','W') ";
+  $sql .= "e.cal_id = eu1.cal_id AND eu1.cal_status IN ('A','W') AND ".
+  "(eu1.cal_group_status NOT LIKE ('%,R:".$user.",%') ".
+            " OR eu1.cal_group_status is null)";
 
-  if ( $cat_id != '' ) $sql .= "AND webcal_entry_user.cal_category LIKE '$cat_id' ";
+  if ( $cat_id != '' ) $sql .= "AND eu1.cal_category LIKE '$cat_id' ";
 
   if ( strlen ( $user ) > 0 )
-    $sql .= "AND (webcal_entry_user.cal_login = '" . $user . "' ";
+    $sql .= "AND (eu1.cal_login = '" . $user . "' ";
 
   if ( $user == $login && strlen ( $user ) > 0 ) {
     if ($layers) foreach ($layers as $layer) {
       $layeruser = $layer['cal_layeruser'];
 
-      $sql .= "OR webcal_entry_user.cal_login = '" . $layeruser . "' ";
+      $sql .= "OR eu1.cal_login = '" . $layeruser . "' ";
 
       // while we are parsing the whole layers array, build ourselves
       // a new array that will help when we have to check for dups
@@ -1807,16 +1902,38 @@ function query_events ( $user, $want_repeated, $date_filter, $cat_id = '' ) {
   }
   if ( $user == $login && strlen ( $user ) &&
     $public_access_default_visible == 'Y' ) {
-    $sql .= "OR webcal_entry_user.cal_login = '__public__' ";
+    $sql .= "OR eu1.cal_login = '__public__' ";
   }
   if ( strlen ( $user ) > 0 )
-    $sql .= ") ";
+    $sql .= " OR ".
+            "eu1.cal_login in ( ".
+            "select  ".
+            "eu2.cal_login ". 
+            "from ".
+            "webcal_entry e,  ". 
+            "webcal_entry_user eu2,  ".
+            "webcal_group_user gu,  ".
+            "webcal_group g  ".
+            "where  ".
+            "e.cal_id = eu2.cal_id AND  ".
+            "eu2.cal_login = g.cal_name AND  ". 
+            "g.cal_group_id = gu.cal_group_id AND  ". 
+            "eu2.cal_status IN ('A','W') AND  ".
+            "gu.cal_login = '".$user."'  AND ".
+            "(eu2.cal_group_status NOT LIKE ('%,R:".$user.",%') ".
+            " OR eu2.cal_group_status is null)".
+            ")
+              OR e.cal_create_by='".$user."')";
   $sql .= $date_filter;
 
   // now order the results by time and by entry id.
-  $sql .= " ORDER BY webcal_entry.cal_time, webcal_entry.cal_id";
+  $sql .= " ORDER BY e.cal_time, e.cal_id";
 
   //echo "<strong>SQL:</strong> $sql<br />\n";
+  
+  //debug
+  logs($log_file,"function.php : query_events : ".$sql."\n");
+  //debug
   
   $res = dbi_query ( $sql );
   if ( $res ) {
@@ -2422,34 +2539,64 @@ function print_date_entries ( $date, $user, $ssi ) {
   $month = substr ( $date, 4, 2 );
   $day = substr ( $date, 6, 2 );
   $dateu = mktime ( 3, 0, 0, $month, $day, $year );
-  $can_add = ( $readonly == "N" || $is_admin );
-  if ( $public_access == "Y" && $public_access_can_add != "Y" &&
-    $login == "__public__" )
-    $can_add = false;
-  if ( $readonly == 'Y' )
-    $can_add = false;
+  
+  //Debug
+  logs($log_file,"print_date_entries : ".$login." group :".$GLOBALS['type_param']." \n");
+  //Debug
+  
+  if($GLOBALS['type_param'] == 'group'){
+    $role_user=user_project_role($login,$GLOBALS['group_param']);
+  }
+  
+  //Debug
+  logs($log_file,"print_date_entries : ".$login." group :".$GLOBALS['group_param']." \n");
+  //Debug
+  
+  $can_add=false;
+  if($GLOBALS['type_param'] == 'group' && $role_user >=2 ){
+    $can_add = true;
+    
+    //debug
+    logs($log_file,"edit_entry_handler.php : can_modify \n");
+    //debug
+  }else{
+    if($GLOBALS['type_param'] == 'user'){
+        $can_add = true;
+    }
+  }
+
+  if ($GLOBALS['type_param']=='group'){
+    $info_type = "type_param=group&group_param=".$GLOBALS['group_param'];
+  }else{
+    $info_type = "type_param=user";
+  }
+
   if ( ! $ssi && $can_add ) {
     print "<a title=\"" .
       translate("New Entry") . "\" href=\"edit_entry.php?";
-    if ( strcmp ( $user, $GLOBALS["login"] ) )
+    if ( strcmp ( $user, $GLOBALS["login"] ) ){
       print "user=$user&amp;";
+    }
+    
+    print $info_type;
+      
     if ( ! empty ( $cat_id ) )
-      print "cat_id=$cat_id&amp;";
-    print "date=$date\"><img src=\"new.gif\" alt=\"" .
+      print "&cat_id=".$cat_id;
+    print "&date=$date\"><img src=\"new.gif\" alt=\"" .
       translate("New Entry") . "\" class=\"new\" /></a>";
     $cnt++;
   }
   if ( ! $ssi ) {
-    echo "<a class=\"dayofmonth\" href=\"day.php?";
+    echo "<a class=\"dayofmonth\" href=\"day.php?".$info_type;
     if ( strcmp ( $user, $GLOBALS["login"] ) )
-      echo "user=$user&amp;";
+      echo "&user=$user&amp;";
     if ( ! empty ( $cat_id ) )
-      echo "cat_id=$cat_id&amp;";
-    echo "date=$date\">$day</a>";
+      echo "&cat_id=$cat_id&amp;";
+    echo "&date=$date\">$day</a>";
     if ( $GLOBALS["DISPLAY_WEEKNUMBER"] == "Y" &&
       date ( "w", $dateu ) == $GLOBALS["WEEK_START"] ) {
       echo "&nbsp;<a title=\"" .
-        translate("Week") . "&nbsp;" . week_number ( $dateu ) . "\" href=\"week.php?date=$date";
+        translate("Week") . "&nbsp;" . week_number ( $dateu ) . "\" href=\"week.php?date=".$date."&".$info_type;
       if ( strcmp ( $user, $GLOBALS["login"] ) )
         echo "&amp;user=$user";
       if ( ! empty ( $cat_id ) )
@@ -2807,9 +2954,28 @@ function calc_time_slot ( $time, $round_down = false ) {
  * @return string The HTML for the add event icon
  */
 function html_for_add_icon ( $date=0,$hour="", $minute="", $user="" ) {
+
+  //Debug
+  logs($log_file,"#######  functions.php #######\n");
+  logs($log_file,"-------  html_for_add_icon  -------\n");
+  //Debug
+
   global $TZ_OFFSET;
   global $login, $readonly, $cat_id;
   $u_url = '';
+  
+  if(isset($GLOBALS['type_param']) && $GLOBALS['type_param']=='group'){
+    $u_url = "type_param=group&amp;group_param=".$GLOBALS['group_param']."&amp;";
+  }else{
+    if ( ! empty ( $user ) && $user != $login )
+    $u_url = "user=$user&amp;";
+    
+    $u_url .= "type_param=user&";
+  }
+
+  //Debug
+  logs($log_file,"u_url : ".$u_url."\n");
+  //Debug
 
   if ( $readonly == 'Y' )
     return '';
@@ -2818,8 +2984,7 @@ function html_for_add_icon ( $date=0,$hour="", $minute="", $user="" ) {
    $minute = abs($minute);
    $hour = $hour -1;
   }
-  if ( ! empty ( $user ) && $user != $login )
-    $u_url = "user=$user&amp;";
+  
   if ( isset ( $hour ) && $hour != NULL )
     $hour += $TZ_OFFSET;
   return "<a title=\"" . 
@@ -2894,8 +3059,13 @@ function html_for_event_week_at_a_glance ( $id, $date, $time,
     $hour_arr[$ind] .= "<img src=\"$catIcon\" alt=\"$catIcon\" />";
   }
 
+  if($GLOBALS['type_param']=='group'){
+    $info_type="&type_param=group&group_param=".$GLOBALS['group_param'];
+  }else{
+    $info_type="&type_param=user";
+  }
   $hour_arr[$ind] .= "<a title=\"" . 
-  translate("View this entry") . "\" class=\"$class\" href=\"view_entry.php?id=$id&amp;date=$date";
+  translate("View this entry") . "\" class=\"$class\" href=\"view_entry.php?id=$id&amp;date=$date".$info_type;
   if ( strlen ( $GLOBALS["user"] ) > 0 )
     $hour_arr[$ind] .= "&amp;user=" . $GLOBALS["user"];
   $hour_arr[$ind] .= "\" onmouseover=\"window.status='" .
@@ -3003,6 +3173,13 @@ function html_for_event_week_at_a_glance ( $id, $date, $time,
 function html_for_event_day_at_a_glance ( $id, $date, $time,
   $name, $description, $status, $pri, $access, $duration, $event_owner,
   $event_category=-1 ) {
+  
+  //debug
+  logs($log_file,"#######  functions.php  ######\n");
+  logs($log_file,"-------  html_for_event_day_at_a_glance  -------\n");
+  logs($log_file,"type : ".$GLOBALS['type_param']."\n");
+  //debug
+  
   global $first_slot, $last_slot, $hour_arr, $rowspan_arr, $rowspan,
     $eventinfo, $login, $user;
   static $key = 0;
@@ -3064,7 +3241,8 @@ function html_for_event_day_at_a_glance ( $id, $date, $time,
   }
 
   $hour_arr[$ind] .= "<a title=\"" .
-    translate("View this entry") . "\" class=\"$class\" href=\"view_entry.php?id=$id&amp;date=$date";
+  translate("View this entry") . "\" class=\"$class\" href=\"view_entry.php?id=$id&amp;date=$date"."&type_param=".($GLOBALS['type_param']=='group'?"group&group_param=".$GLOBALS['group_param']:"user");
+  
   if ( strlen ( $GLOBALS["user"] ) > 0 )
     $hour_arr[$ind] .= "&amp;user=" . $GLOBALS["user"];
   $hour_arr[$ind] .= "\" onmouseover=\"window.status='" .
@@ -3152,6 +3330,11 @@ function html_for_event_day_at_a_glance ( $id, $date, $time,
   }
 
   $hour_arr[$ind] .= "<br />\n";
+  
+  //debug
+  logs($log_file,"-------  html_for_event_day_at_a_glance  -------\n");
+  //debug
+  
 }
 
 /**
@@ -3164,6 +3347,13 @@ function html_for_event_day_at_a_glance ( $id, $date, $time,
  * @param string $user Username of calendar
  */
 function print_day_at_a_glance ( $date, $user, $can_add=0 ) {
+
+  //debug
+  logs($log_file,"#######  functions.php  ######\n");
+  logs($log_file,"-------  print_day_at_a_glance  -------\n");
+  logs($log_file,"type : ".$GLOBALS['type_param']."\n");
+  //debug
+
   global $first_slot, $last_slot, $hour_arr, $rowspan_arr, $rowspan;
   global $TABLEBG, $CELLBG, $TODAYCELLBG, $THFG, $THBG, $TIME_SLOTS, $TZ_OFFSET;
   global $WORK_DAY_START_HOUR, $WORK_DAY_END_HOUR;
@@ -3361,7 +3551,7 @@ function print_day_at_a_glance ( $date, $user, $can_add=0 ) {
  *
  * @param string $user Current user login
  */
-function display_unapproved_events ( $user ) {
+function display_unapproved_events ( $user , $info_type = "type_param=user") {
   global $public_access, $is_admin, $nonuser_enabled, $login;
 
   // Don't do this for public access login, admin user must approve public
@@ -3369,34 +3559,55 @@ function display_unapproved_events ( $user ) {
   if ( $user == "__public__" )
     return;
 
-  $sql = "SELECT COUNT(webcal_entry_user.cal_id) " .
-    "FROM webcal_entry_user, webcal_entry " .
-    "WHERE webcal_entry_user.cal_id = webcal_entry.cal_id " .
-    "AND webcal_entry_user.cal_status = 'W' " .
-    "AND ( webcal_entry.cal_ext_for_id IS NULL " .
-    "OR webcal_entry.cal_ext_for_id = 0 ) " .
-    "AND ( webcal_entry_user.cal_login = '$user'";
+
+  $sql = "SELECT COUNT(eu1.cal_id) " .
+         "FROM webcal_entry_user eu1, webcal_entry e " .
+         "WHERE eu1.cal_id = e.cal_id " .
+           "AND eu1.cal_status = 'W' " .
+           "AND (eu1.cal_group_status NOT LIKE ('%,A:".$user.",%') ".
+           "OR eu1.cal_group_status is null) ".
+           "AND (eu1.cal_group_status NOT LIKE ('%,R:".$user.",%') ".
+           "OR eu1.cal_group_status is null) ".
+           "AND ( eu1.cal_login = '".$user."'";
+    
   if ( $public_access == "Y" && $is_admin ) {
-    $sql .= " OR webcal_entry_user.cal_login = '__public__'";
+    $sql .= " OR eu1.cal_login = '__public__'";
   }
+  
   if ( $nonuser_enabled == 'Y' ) {
     $admincals = get_nonuser_cals ( $login );
+  
     for ( $i = 0; $i < count ( $admincals ); $i++ ) {
-      $sql .= " OR webcal_entry_user.cal_login = '" .
-        $admincals[$i]['cal_login'] . "'";
-    }
+      $sql .= " OR eu1.cal_login = '" . $admincals[$i]['cal_login'] . "'";
+    } 
   }
-  $sql .= " )";
+  
+  $sql .= " OR eu1.cal_login in ". 
+  "( SELECT eu2.cal_login 
+     FROM webcal_entry e, webcal_entry_user eu2, "."webcal_group_user gu,webcal_group g 
+     WHERE e.cal_id = eu2.cal_id ". 
+      "AND eu2.cal_login = g.cal_name ". 
+      "AND g.cal_group_id = gu.cal_group_id ". 
+      "AND gu.cal_login = '".$user."' ".
+      "AND ((eu2.cal_group_status NOT LIKE ('%,A:".$user.",%') ".
+      "AND eu2.cal_group_status NOT LIKE ('%,R:".$user.",%')) ".
+      "OR eu2.cal_group_status is null)))";
+      
   //print "SQL: $sql<br />\n";
   $res = dbi_query ( $sql );
+  
   if ( $res ) {
     if ( $row = dbi_fetch_row ( $res ) ) {
       if ( $row[0] > 0 ) {
- $str = translate ("You have XXX unapproved events");
- $str = str_replace ( "XXX", $row[0], $str );
-        echo "<a class=\"nav\" href=\"list_unapproved.php";
-        if ( $user != $login )
-          echo "?user=$user\"";
+        $str = translate ("You have XXX unapproved events");
+        $str = str_replace ( "XXX", $row[0], $str );
+        echo "<a class=\"nav\" href=\"list_unapproved.php?";
+        
+        if ( $user != $login ){
+          echo "user=".$user."&";
+        }
+        
+        echo $info_type;
         echo "\">" . $str .  "</a><br />\n";
       }
     }
@@ -4853,4 +5064,141 @@ function add_duration ( $time, $duration ) {
   //echo "add_duration ( $time, $duration ) = $ret <br />\n";
   return $ret;
 }
+
+/**
+ * Return true if the user ($Login) can add an event in the calendar 
+ * 
+ *@param String Login
+ *@param String type
+ *@param int group    
+ * 
+ */
+function Can_Add ($Login, $type, $group){
+
+  logs($log_file,"#######  functions.php  #######\n-------  Can_Add  -------\n");
+
+  $can_add = false;
+  
+  if($type == 'user'){
+    $can_add = true;
+  }else{
+    if(user_project_role($Login,$group) >= 2){
+      $can_add = true;
+    }
+  }
+  
+  return $can_add;
+  
+} 
+
+/**
+ * Return true if the user ($Login) can add an event in the calendar 
+ * 
+ *@param Int id event id
+ *@param String Login
+ *@param int project_id     
+ * 
+ */
+function Can_Modify ($id, $Login){
+
+  logs($log_file,"#######  functions.php  #######\n-------  Can_Modify  -------\n");
+  //Debug
+  
+  //Debug
+  logs($log_file,"id : ".$id." login : ".$Login."\n");
+  //Debug 
+   
+  $can_modify = false;
+  
+  //Get the creator of the event
+  $res_cal_entry = dbi_query("SELECT cal_create_by
+                             FROM webcal_entry
+                             WHERE cal_id = ".$id);
+  $row_creator = pg_fetch_array($res_cal_entry);
+  $creator = $row_creator[0];
+  
+  //Debug
+  logs($log_file,"creator".$creator."\n");
+  //Debug 
+             
+  //IF Login is the creator of the event, He can modify it
+  if($Login == $creator){
+  
+    //Debug
+    logs($log_file,"login is creator \n");
+    //Debug 
+  
+    $can_modify = true;
+  
+  //Else test if it's a project and if Login can modify the calendar of the project
+  }else{
+  
+    $res_project = dbi_query("SELECT cal_name
+                               FROM webcal_group
+                               WHERE cal_name = '".$creator."'");
+    //Debug
+    logs($log_file,"test id is a project \n");
+    //Debug
+  
+    //If it's a project
+    if(pg_num_rows($res_project) > 0){
+ 
+      //Debug
+      logs($log_file,"id is a project SQL : SELECT group_id
+                                      FROM groups
+                                      WHERE unix_group_name = '".$creator."'\n");
+      //Debug
+       
+      //Get the Gforge id of the project
+      $res_id_project = dbi_query("SELECT group_id
+                                  FROM groups
+                                  WHERE unix_group_name = '".$creator."'");
+      $row_project_id = pg_fetch_array($res_id_project);
+      $project_id = $row_project_id[0];
+      
+      //Debug
+      logs($log_file,"project id : ".$project_id." \n");
+      //Debug
+   
+      //Test if Login can modify the calendar of the project   
+      if(user_project_role($Login,$project_id) >=2){
+        $can_modify = true;
+      }
+      
+    } 
+  } 
+    
+  //Debug
+  logs($log_file,"-------  Can_Modify  -------\n#######  functions.php  #######\n");
+  //Debug  
+  return $can_modify;
+} 
+
+/**
+ * Return true if the user ($Login) can add an event in the calendar 
+ * 
+ *@param String Login
+ *@param String type
+ *@param int group    
+ * 
+ */
+function Can_View ($Login, $type, $group){
+
+  //Debug
+  logs($log_file,"#######  functions.php  #######\n-------  Can_View  -------\n");
+  //Debug
+
+  $can_view = false;
+  
+  if($type == 'user'){
+    $can_view = true;
+  }else{
+    if(user_project_role($Login,$group) >= 1){
+      $can_view = true;
+    }
+  }
+   return $can_view;
+} 
+ 
+
 ?>

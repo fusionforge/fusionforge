@@ -695,11 +695,16 @@ gforge/plugins/webcalendar/AUTHORS -text
 gforge/plugins/webcalendar/COPYING -text
 gforge/plugins/webcalendar/ChangeLog -text
 gforge/plugins/webcalendar/README -text
+gforge/plugins/webcalendar/bin/lists_utils_projects.php -text
+gforge/plugins/webcalendar/bin/users_groups.xml -text
 gforge/plugins/webcalendar/common/languages/Base.tab -text
 gforge/plugins/webcalendar/common/languages/French.tab -text
 gforge/plugins/webcalendar/common/webcalendar-init.php -text
 gforge/plugins/webcalendar/common/webcalendarPlugin.class -text
+gforge/plugins/webcalendar/db/20070829.sql -text
+gforge/plugins/webcalendar/db/20071109.sql -text
 gforge/plugins/webcalendar/db/webcalendar-init.sql -text
+gforge/plugins/webcalendar/script/webcal_update_user.php -text
 gforge/plugins/webcalendar/script/webcalendar-init.php -text
 gforge/plugins/webcalendar/www/.project -text
 gforge/plugins/webcalendar/www/AUTHORS -text
@@ -809,7 +814,9 @@ gforge/plugins/webcalendar/www/layers.php -text
 gforge/plugins/webcalendar/www/layers_toggle.php -text
 gforge/plugins/webcalendar/www/leftarrow.gif -text
 gforge/plugins/webcalendar/www/leftarrowsmall.gif -text
+gforge/plugins/webcalendar/www/list_roles_projects.php -text
 gforge/plugins/webcalendar/www/list_unapproved.php -text
+gforge/plugins/webcalendar/www/list_users_role.php -text
 gforge/plugins/webcalendar/www/login.gif -text
 gforge/plugins/webcalendar/www/login.php -text
 gforge/plugins/webcalendar/www/month.php -text

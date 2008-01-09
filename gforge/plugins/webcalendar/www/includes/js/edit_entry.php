@@ -4,6 +4,9 @@
 <!-- <![CDATA[
 // do a little form verifying
 function validate_and_submit () {
+  for(i=0;i < document.getElementsByName("part").length;i++) {
+        document.getElementsByName("part")[i].selected = true;
+  }
   if ( document.editentryform.name.value == "" ) {
     document.editentryform.name.select ();
 <?php
@@ -254,5 +257,220 @@ function showSchedule () {
   }
 }
 
+function listRole(project){
+
+    var xhr=null;
+    
+    document.getElementById("hideRole").innerHTML = "";
+    document.getElementById("hideUser").innerHTML = "";
+    document.getElementById("hidebRole").innerHTML = "";
+    document.getElementById("hidebUser").innerHTML = "";
+    
+    if (window.XMLHttpRequest) { 
+        xhr = new XMLHttpRequest();
+    }
+    else if (window.ActiveXObject) 
+    {
+        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    //on définit l'appel de la fonction au retour serveur
+    xhr.onreadystatechange = function() { genRole(xhr,project); };
+    
+    
+    //on appelle le fichier reponse.txt
+    xhr.open("GET", "list_roles_projects.php?groupe="+project, true);
+    xhr.send(null);
+}
+
+function genRole(xhr,project)
+{
+    if (xhr.readyState==4) 
+    {
+    	var docXML= xhr.responseXML;
+    	var items = docXML.getElementsByTagName("role");
+    	var text = "<select name=\"role\">\n"+
+    	           "<option value=\"null\"> </option>\n";
+    	for (i=0;i<items.length;i++)
+    	{
+         text=text+"<option value=\""+project+"."+items.item(i).firstChild.data+"\" onclick=\"listUser('"+items.item(i).firstChild.data+"','"+project+"')\">"
+         +items.item(i).firstChild.data+"</option>\n";
+
+    	}
+    	text=text+"</select>\n"+
+    	         "</td>\n";
+    	document.getElementById("hideRole").innerHTML = text;
+    	text = "<input type=\"button\" value=\"<?php etranslate("Add Group") ?>\" onclick=\"addRole()\" />\n";
+    	document.getElementById("hidebRole").innerHTML = text;
+    }
+}
+
+function listUser(role,project){
+
+    var xhr=null;
+    
+    document.getElementById("hideUser").innerHTML = "";
+    document.getElementById("hidebUser").innerHTML = "";
+    
+    if (window.XMLHttpRequest) { 
+        xhr = new XMLHttpRequest();
+    }
+    else if (window.ActiveXObject) 
+    {
+        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    //on définit l'appel de la fonction au retour serveur
+    xhr.onreadystatechange = function() { genUser(xhr,role,project); };
+    
+    
+    //on appelle le fichier reponse.txt
+    xhr.open("GET", "list_users_role.php?groupe="+project+"&role="+role, true);
+    xhr.send(null);
+}
+
+function genUser(xhr,role,project)
+{
+    if (xhr.readyState==4) 
+    {
+    	var docXML= xhr.responseXML;
+    	var items = docXML.getElementsByTagName("user");
+    	var text = "<select MULTIPLE>\n";
+    	for (i=0;i<items.length;i++)
+    	{
+    	   var attrib = items.item(i).attributes;
+         text=text+"<option name=\"user\" value=\""+items.item(i).firstChild.data+"\">"+attrib[0].value+" " +attrib[1].value+" ("+items.item(i).firstChild.data+")"+"</option>\n";
+
+    	}
+    	text=text+"</select>\n"+
+    	         "</td>\n";
+    	document.getElementById("hideUser").innerHTML = text;
+    	text = "<input type=\"button\" value=\"<?php etranslate("Add User") ?>\" onclick=\"addUser()\" />\n";
+    	document.getElementById("hidebUser").innerHTML = text;
+    }
+}
+
+function addUser()
+{
+    var text = document.getElementById("selected").innerHTML;
+    var test = 0;
+    if(document.getElementById("selected").innerHTML == "\n"){
+      test = 1;
+      text = "<select name=\"participants[]\" MULTIPLE>\n";
+    }else{
+      text = text.substring(0,text.indexOf("</select>",0));
+    }
+    for(i=0;i<document.getElementsByName("user").length;i++){
+      if(document.getElementsByName("user")[i].selected && text.indexOf(document.getElementsByName("user")[i].value,0)==-1){
+        text=text+"<option name=\"part\" value=\""+document.getElementsByName("user")[i].value+"\">"+document.getElementsByName("user")[i].firstChild.data+"</option>\n";
+      }
+    }
+    text = text+"</select>\n";
+    document.getElementById("selected").innerHTML=text;
+    
+    text = "<input type=\"button\" value=\"<?php etranslate("Delete") ?>\" onclick=\"del()\" />\n";
+    document.getElementById("hidebDel").innerHTML = text;
+}
+
+function addRole()
+{
+    var text = document.getElementById("selected").innerHTML;
+    if(document.getElementById("selected").innerHTML == "\n"){
+      text = "<select name=\"participants[]\" MULTIPLE>\n";
+    }else{
+      text = text.substring(0,text.indexOf("</select>",0));
+    }
+    if(text.indexOf(document.getElementsByName("role")[0].value,0)==-1 && document.getElementsByName("role")[0].value != "null"){
+      text=text+"<option name=\"part\" value=\""+document.getElementsByName("role")[0].value+"\">"+document.getElementsByName("role")[0].value+"</option>\n";
+    }
+    text = text+"</select>\n";
+    document.getElementById("selected").innerHTML=text;
+    
+    text = "<input type=\"button\" value=\"<?php etranslate("Delete") ?>\" onclick=\"del()\" />\n";
+    document.getElementById("hidebDel").innerHTML = text;
+}
+
+function addGroup()
+{
+    var text = document.getElementById("selected").innerHTML;
+    if(document.getElementById("selected").innerHTML == "\n"){
+      text = "<select name=\"participants[]\" MULTIPLE>\n";
+    }else{
+      text = text.substring(0,text.indexOf("</select>",0));
+    }
+    if(text.indexOf(document.getElementsByName("projects")[0].value,0)==-1 && document.getElementsByName("projects")[0].value != "null"){
+      text=text+"<option name=\"part\" value=\""+document.getElementsByName("projects")[0].value+"\">"+document.getElementsByName("projects")[0].value+"</option>\n";
+    }
+    text = text+"</select>\n";
+    document.getElementById("selected").innerHTML=text;
+    
+    text = "<input type=\"button\" value=\"<?php etranslate("Delete") ?>\" onclick=\"del()\" />\n";
+    document.getElementById("hidebDel").innerHTML = text;
+}
+
+function addAll(value){
+    var text = document.getElementById("selected").innerHTML;
+    if(document.getElementById("selected").innerHTML == "\n"){
+      text = "<select name=\"participants[]\" MULTIPLE>\n";
+    }else{
+      text = text.substring(0,text.indexOf("</select>",0));
+    }
+    if(text.indexOf(value,0)==-1){
+      text=text+"<option name=\"part\" value=\""+value+"\">"+value+"</option>\n";
+    }
+    text = text+"</select>\n";
+    document.getElementById("selected").innerHTML=text;
+    
+    text = "<input type=\"button\" value=\"<?php etranslate("Delete") ?>\" onclick=\"del()\" />\n";
+    document.getElementById("hidebDel").innerHTML = text;
+}
+
+function del(){
+  for(i=1;i < document.getElementsByName("part").length;i++) {
+    if(document.getElementsByName("part")[i].selected == true){
+        document.getElementById("partlist").options[i] = null;
+    }
+  }
+  if(document.getElementsByName("part").length < 1){
+    document.getElementById("selected").innerHTML="\n";
+    document.getElementById("hidebDel").innerHTML = "\n";
+  }
+}
+
+var aSelected = new Array();
+function selec(obj){
+  var found = false;
+  
+  if(aSelected.length == 0){
+    for(i=0;i < document.getElementsByName("part").length;i++) {
+        aSelected[aSelected.length] = document.getElementsByName("part")[i].value;
+    }
+  }
+  
+  
+  for(i=0;i < aSelected.length;i++) {
+    if(obj.value == aSelected[i]) {
+      found = true;
+      for(j=i;j < aSelected.length-1;j++) {
+        aSelected[j] = aSelected[j+1];
+      }
+      delete aSelected[aSelected.length-1];
+      break;
+    }
+  }
+  if( !found ) {
+    aSelected[aSelected.length] = obj.value;
+  }
+  for(i=0;i < document.getElementsByName("part").length;i++) {
+    found = false;
+    for(j=0;j < aSelected.length;j++) {
+      if(document.getElementsByName("part")[i].value == aSelected[j]){
+        found = true;
+        document.getElementsByName("part")[i].selected = true;
+      }
+    }
+    if(!found){
+      document.getElementsByName("part")[i].selected = false;
+    }
+  }
+}
 //]]> -->
 </script>
