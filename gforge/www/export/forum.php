@@ -18,6 +18,9 @@ require_once('pre.php');
 
 header("Content-Type: text/plain");
 
+if (!is_numeric ($group_id)) {
+	$group_id = 0 ;
+}
 // ## group_id must be specified
 $res_grp = db_query("
 	SELECT group_id,group_name
