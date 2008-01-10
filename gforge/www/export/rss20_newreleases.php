@@ -10,6 +10,12 @@ print '<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
 ';
 
+if (!is_numeric ($limit)) {
+	$limit = 0 ;
+}
+if (!is_numeric ($group_id)) {
+	$group_id = 0 ;
+}
 // ## default limit
 if (!$limit) $limit = 10;
 if ($limit > 100) $limit = 100;
