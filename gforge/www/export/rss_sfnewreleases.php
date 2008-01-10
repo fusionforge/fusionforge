@@ -20,6 +20,9 @@ print '<?xml version="1.0"?>
 <!DOCTYPE rss SYSTEM "http://my.netscape.com/publish/formats/rss-0.91.dtd">
 <rss version="0.91">
 ';
+if (!is_numeric ($limit)) {
+	$limit = 0 ;
+}
 // ## default limit
 if (!$limit) $limit = 10;
 if ($limit > 100) $limit = 100;
