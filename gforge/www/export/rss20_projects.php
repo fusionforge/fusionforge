@@ -10,6 +10,9 @@ header("Content-Type: text/xml");
 print '<?xml version="1.0"?>
 <rss version="2.0">
 ';
+if (!is_numeric ($limit)) {
+	$limit = 0 ;
+}
 $res = db_query(
 	 'SELECT group_id,group_name,unix_group_name,homepage,short_description,register_time '
 	.'FROM groups '

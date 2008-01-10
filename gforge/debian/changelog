@@ -1,10 +1,12 @@
-gforge (4.6.99+svn6319-3+1) unstable; urgency=low
+gforge (4.6.99+svn6319-4) unstable; urgency=high
 
   * Finished removing all references to LDAP from the Debconf templates
     and maintainer scripts (closes: #408867).
   * Also updated German debconf template translation (closes: #456504).
+  * Fixed SQL injection vulnerability due to insufficient input sanitizing
+    (CVE-2008-0173).
 
- -- Roland Mas <lolando@debian.org>  Sun, 23 Dec 2007 11:07:38 +0100
+ -- Roland Mas <lolando@debian.org>  Wed, 09 Jan 2008 20:34:36 +0100
 
 gforge (4.6.99+svn6319-3) unstable; urgency=low
 

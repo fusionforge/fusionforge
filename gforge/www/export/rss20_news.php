@@ -10,6 +10,12 @@ header("Content-Type: text/xml");
 print '<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
 ';
+if (!is_numeric ($limit)) {
+	$limit = 0 ;
+}
+if (!is_numeric ($group_id)) {
+	$group_id = 0 ;
+}
 // ## default limit
 if (!$limit) $limit = 10;
 if ($limit > 100) $limit = 100;
@@ -62,7 +68,7 @@ $sql = "SELECT forum_id,summary,post_date,details,g.group_id,g.group_name,u.real
         AND u.user_id=news_bytes.submitted_by
         AND g.is_public='1'
         AND g.status='A'
-        $where_clause
+        $where
         order by post_date desc";
         $res = db_query($sql, $limit);
 

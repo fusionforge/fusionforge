@@ -1,3 +1,14 @@
+2008-01-09  Roland Mas  <lolando@debian.org>
+
+	* www/export/rss_sfprojects.php: Validate input to prevent an SQL
+	injection.
+	* www/export/forum.php: Ditto.
+	* www/export/rss20_newreleases.php: Ditto.
+	* www/export/rss20_news.php: Ditto.
+	* www/export/rss20_projects.php: Ditto.
+	* www/export/rss_sfnewreleases.php: Ditto.
+	* www/export/rss_sfnews.php: Ditto.
+
 2007-12-12  Roland Mas  <lolando@debian.org>
 
 	* www/tracker/taskmgr.php: Fetch project_task_id parameter from

@@ -29,6 +29,13 @@ print '<?xml version="1.0" encoding="UTF-8"?>
 	xmlns:dc="http://purl.org/dc/elements/1.1/"
 	xmlns:syn="http://purl.org/rss/1.0/modules/syndication/"
 	xmlns:admin="http://webns.net/mvcb/" >';
+
+if (!is_numeric ($limit)) {
+	$limit = 0 ;
+}
+if (!is_numeric ($group_id)) {
+	$group_id = 0 ;
+}
 // ## default limit
 if ($limit < 1) {
 	$limit = 10;
