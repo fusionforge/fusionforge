@@ -1,3 +1,10 @@
+2008-01-11  Roland Mas  <lolando@debian.org>
+
+	* www/export/*.php: The previous validation didn't work since
+	we're no longer using register_globals=on.  Fixed that.
+
+	* www/export/*.php: Fixed a bunch of PHP warnings.
+
 2008-01-09  Roland Mas  <lolando@debian.org>
 
 	* www/export/rss_sfprojects.php: Validate input to prevent an SQL

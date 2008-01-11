@@ -14,7 +14,6 @@
 
 require_once('../env.inc.php');
 require_once('pre.php');
-global $group_id;
 $HTML->header(array(title=>"Exports Available"));
 ?>
 <p><?php echo $GLOBALS['sys_name']; ?> data is exported in a variety of standard formats. Many of
@@ -35,9 +34,9 @@ RSS/XML Exports
 </ul>
 
 <ul>
-<li><a href="rss20_news.php"><?php print $GLOBALS[sys_name] ?> Front Page News/Project News</a>
+<li><a href="rss20_news.php"><?php print $GLOBALS['sys_name'] ?> Front Page News/Project News</a>
 (<a href="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</a>)
-<li><a href="rss20_newreleases.php"><?php print $GLOBALS[sys_name] ?> New Releases/New Project Releases</a>
+<li><a href="rss20_newreleases.php"><?php print $GLOBALS['sys_name'] ?> New Releases/New Project Releases</a>
 (<a href="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</a>)</li>
 </ul>
 
@@ -46,7 +45,7 @@ RSS/XML Exports
 <li><a href="rss_sfprojects.php"><?php echo $GLOBALS['sys_name']; ?> Full Project Listing</a>
 (<a href="http://my.netscape.com/publish/formats/rss-spec-0.91.html">RSS 0.91</a>,
 <a href="http://my.netscape.com/publish/formats/rss-0.91.dtd">&lt;rss-0.91.dtd&gt;</a>)</li>
-<li><A href="rss20_projects.php"><?php print $GLOBALS[sys_name] ?> Full Project Listing</a>
+<li><A href="rss20_projects.php"><?php print $GLOBALS['sys_name'] ?> Full Project Listing</a>
 (<a href="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</a>)</li>
 <li><a href="trove_tree.php"><?php echo $GLOBALS['sys_name']; ?> Trove Categories Tree</a>
 (<a href="http://www.w3.org/XML">XML</a>,<a href="trove_tree_0.1.dtd">&lt;trove_tree_0.1.dtd&gt;</a>)</li>

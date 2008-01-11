@@ -38,7 +38,7 @@ require_once('www/news/news_utils.php');
 
 $group_name = getStringFromRequest('group_name');
 $group_id = getIntFromRequest('group_id');
-$limit = getIntFromRequest('limit');
+$limit = getIntFromRequest('limit', 20);
 $show_summaries = getStringFromRequest('show_summaries');
 $flat = getStringFromRequest('flat');
 

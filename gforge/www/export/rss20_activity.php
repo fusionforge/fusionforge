@@ -29,11 +29,10 @@ include "../env.inc.php";
 include "www/include/pre.php";
 include "www/export/rss_utils.inc";
 
-// ## default limit
-if (!isset($limit)) $limit = 10;
-if ($limit > 100) $limit = 100;
-
 $group_id = getIntFromRequest('group_id');
+$limit = getIntFromRequest('limit', 10);
+
+if ($limit > 100) $limit = 100;
 
 $proto = ($GLOBALS['sys_use_ssl']) ? 'https://' : 'http://';
 $url = $proto.$GLOBALS['sys_default_domain'].$GLOBALS['sys_urlprefix'];

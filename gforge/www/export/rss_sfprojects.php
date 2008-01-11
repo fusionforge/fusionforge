@@ -16,16 +16,14 @@ require_once('../env.inc.php');
 require_once('pre.php');
 require_once('rss_utils.inc');
 
-$limit = getIntFromRequest('limit');
+$limit = getIntFromRequest('limit', 10);
+if ($limit > 100) $limit = 100;
 
 header("Content-Type: text/plain");
 print '<?xml version="1.0"?>
 <!DOCTYPE rss SYSTEM "http://my.netscape.com/publish/formats/rss-0.91.dtd">
 <rss version="0.91">
 ';
-if (!is_numeric ($limit)) {
-	$limit = 0 ;
-}
 $res = db_query("
 	SELECT 
 		group_id,
