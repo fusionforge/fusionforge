@@ -46,33 +46,33 @@ $sql = "SELECT forum_id,summary,post_date,details,g.group_id,g.group_name,u.real
 	order by post_date desc";
 	$res = db_query($sql, $limit);
 
-print "\n <channel rdf:about=".'"'."http://$GLOBALS['sys_default_domain']/export/rss_sfnews.php".'"'.">\n";
+print "\n <channel rdf:about=".'"'."http://$GLOBALS[sys_default_domain]/export/rss_sfnews.php".'"'.">\n";
 print "  <copyright>Copyright 1999-2000 VA Linux Systems, Inc.</copyright>\n";
 $grsql = "SELECT group_name from groups where group_id='.$group_id'";
 $grres = db_query($sql,$limit);
 $grrow = db_fetch_array($grres);
 
 print "  <title>".$GLOBALS['sys_name']." Project News</title>\n";
-print "  <link>http://$GLOBALS['sys_default_domain']</link>\n";
+print "  <link>http://$GLOBALS[sys_default_domain]</link>\n";
 print "  <description>".$GLOBALS['sys_name']." Project News Highlights</description>\n";
 // ## item outputs
 print " <items>\n";
 print " <rdf:Seq>\n";
 while ($row = db_fetch_array($res)) {
-	print " <rdf:li rdf:resource=".'"'."http://$GLOBALS['sys_default_domain']/forum/forum.php?forum_id=$row['forum_id']".'"'." />\n";
+	print " <rdf:li rdf:resource=".'"'."http://$GLOBALS[sys_default_domain]/forum/forum.php?forum_id=$row[forum_id]".'"'." />\n";
 }
 print " </rdf:Seq>\n";
 print " </items>\n";
 print " </channel>\n";
 $res = db_query($sql, $limit);
 while ($row = db_fetch_array($res)) {
-	print "\n <item rdf:about=".'"'."http://$GLOBALS['sys_default_domain']/forum/forum.php?forum_id=$row['forum_id']".'"'.">\n";
+	print "\n <item rdf:about=".'"'."http://$GLOBALS[sys_default_domain]/forum/forum.php?forum_id=$row[forum_id]".'"'.">\n";
 	print "   <title>".htmlspecialchars($row['summary'])."</title>\n";
 	// if news group, link is main page
 	if ($row['group_id'] != $sys_news_group) {
-		print "   <link>http://$GLOBALS['sys_default_domain']/forum/forum.php?forum_id=$row['forum_id']</link>\n";
+		print "   <link>http://$GLOBALS[sys_default_domain]/forum/forum.php?forum_id=$row[forum_id]</link>\n";
 	} else {
-		print "   <link>http://$GLOBALS['sys_default_domain']/</link>\n";
+		print "   <link>http://$GLOBALS[sys_default_domain]/</link>\n";
 	}
 	print "   <description>".rss_description($row['details'])."</description>\n";
 	print "   <dc:subject>".$row['group_name']."</dc:subject>\n";

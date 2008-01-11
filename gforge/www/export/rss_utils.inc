@@ -43,9 +43,9 @@ function rss_dump_project_result_set ($res,$title,$desription='',$callback=0) {
 	print "  <copyright>Copyright 1999-2000 VA Linux Systems, Inc.</copyright>\n";
 	print "  <pubDate>".gmdate('D, d M Y g:i:s',time())." GMT</pubDate>\n";
 	print "  <description>$desription</description>\n";
-	print "  <link>http://$GLOBALS['sys_default_domain']</link>\n";
+	print "  <link>http://$GLOBALS[sys_default_domain]</link>\n";
 	print "  <title>$title</title>\n";
-	print "  <webMaster>webmaster@$GLOBALS['sys_default_domain']</webMaster>\n";
+	print "  <webMaster>webmaster@$GLOBALS[sys_default_domain]</webMaster>\n";
 	print "  <language>en-us</language>\n";
 
 	// ## item outputs
