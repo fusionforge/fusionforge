@@ -705,9 +705,8 @@ You should select "Web Server" from the list of
 $php_settings = array (
   //array ('Safe Mode','safe_mode','OFF'),
   array ('Magic Quotes GPC','magic_quotes_gpc','ON'),
-  array ('Register Globals','register_globals','ON'),
+  array ('Register Globals','register_globals','OFF'),
   array ('Display Errors','display_errors','ON'),
-  //array ('Register Globals','register_globals','OFF'),
   array ('File Uploads','file_uploads','ON'),
 );
 

@@ -325,7 +325,7 @@ zone "gforge.<replaceable>company.com</replaceable>" {
 				<listitem>
 					<para><emphasis>Serving Web pages</emphasis>.  In this case, PHP is usually used as module and its configuration is in virtual host configuration, as shown later in the document.  If you prefer to configure <filename>php.ini</filename>, the following directives are required by GForge:</para>
 <programlisting>
-register_globals = On
+register_globals = Off
 magic_quotes_gpc = On
 file_uploads = On
 include_path=".:<replaceable>/var/www/gforge</replaceable>:<replaceable>/var/www/gforge</replaceable>/www/include:/etc/gforge"
@@ -447,7 +447,7 @@ AcceptPathInfo on
 				<listitem>
 					<para>Set up PHP module:</para>
 <programlisting>
-php_flag   register_globals On
+php_flag   register_globals Off
 php_flag   magic_quotes_gpc On
 php_flag   files_uploads    On
 php_value  include_path     ".:/etc/gforge:<replaceable>/var/www/gforge</replaceable>:<replaceable>/var/www/gforge</replaceable>/www/include"
