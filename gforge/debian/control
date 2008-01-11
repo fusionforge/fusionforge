@@ -12,7 +12,7 @@ Vcs-Bzr: http://bzr.debian.org/~lolando/bzr/gforge/debian/sid/
 Package: gforge
 Architecture: all
 Conflicts: sourceforge, gforge-cvs, gforge-common (<< ${source:Version})
-Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, gforge-common (=${source:Version}), gforge-web-apache2 | gforge-web, gforge-db, gforge-mta-exim4 | gforge-mta, gforge-shell-postgresql | gforge-shell, gforge-ftp-proftpd | gfprge-ftp, gforge-lists-maiman | gforge-lists
+Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, gforge-common (=${source:Version}), gforge-web-apache2 | gforge-web, gforge-db, gforge-mta-exim4 | gforge-mta, gforge-shell-postgresql | gforge-shell, gforge-ftp-proftpd | gforge-ftp, gforge-lists-mailman | gforge-lists
 Recommends: gforge-plugin-scm
 Description: collaborative development tool - meta-package
  GForge provides many tools to aid collaboration in a
