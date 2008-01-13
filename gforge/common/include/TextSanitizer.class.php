@@ -30,7 +30,7 @@
 Class TextSanitizer extends Error {
 	
 	
-			/**
+	/**
 	 *  convertExtendedCharsForEmail - Grabs some text with html special characters and converts them to the corresponding character. 
 	 *
 	 *	@param   string		The input string
@@ -49,7 +49,7 @@ Class TextSanitizer extends Error {
 		return $text;
 	}
 	
-			/**
+	/**
 	 *  convertNeededTagsForEmail - Grabs some text with html tags and those which are important for display (<br>, <p>) convert accordingly
 	 *
 	 *	@param   string		The input string
@@ -70,7 +70,7 @@ Class TextSanitizer extends Error {
 		return $res;
 	}
 	
-		/**
+	/**
 	 *  SanitizeHtml - Grabs some text with all kinds of html code and parses it to make it safe
 	 *
 	 *	@param   string		The HTML Code
@@ -80,7 +80,7 @@ Class TextSanitizer extends Error {
 		
 		$input = htmlspecialchars($input); // first strip all chars
 
-				$input=str_replace('&amp;','&',$input);
+		$input=str_replace('&amp;','&',$input);
                 $input=str_replace('&quot;','"',$input);
                 $input=str_replace('/&gt;','/>',$input);
                 $input=str_replace('"&gt;','">',$input);
@@ -116,7 +116,7 @@ Class TextSanitizer extends Error {
                 $input=str_replace('&lt;p ','<p ',$input);
                 $input=str_replace('&lt;li&gt;','<li>',$input);
                 $input=str_replace('&lt;/li&gt;','</li>',$input);
-				$input=str_replace('&lt;ul&gt;','<ul>',$input);
+		$input=str_replace('&lt;ul&gt;','<ul>',$input);
                 $input=str_replace('&lt;/ul&gt;','</ul>',$input);
                 $input=str_replace('&lt;ol&gt;','<ol>',$input);
                 $input=str_replace('&lt;/ol&gt;','</ol>',$input);
@@ -152,12 +152,16 @@ Class TextSanitizer extends Error {
                 $input=str_replace('&lt;h2 ','<h2 ',$input);
                 $input=str_replace('&lt;h3 ','<h3 ',$input);
                 $input=str_replace('&lt;h4 ','<h4 ',$input);
-				$input=str_replace('&lt;h5 ','<h5 ',$input);
+		$input=str_replace('&lt;h5 ','<h5 ',$input);
                 $input=str_replace('&lt;h6 ','<h6 ',$input);
 	
 		return $input;
 	}
 }
 
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>
