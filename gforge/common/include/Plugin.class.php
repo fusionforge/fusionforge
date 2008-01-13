@@ -79,29 +79,6 @@ class Plugin extends Error {
 		return true ; 
 	}
 
-	/**
-	 * GetLanguagePath() - get the path where we can find i18n for the plugin
-	 *
-	 * @return string path
-	 */
-	function GetLanguagePath() {
-		if (file_exists($GLOBALS['sys_plugins_path'].'/'.$this->name.'/common/languages/')) {
-			return $GLOBALS['sys_plugins_path'].'/'.$this->name.'/common/languages/';
-		} else {
-			return $GLOBALS['sys_plugins_path'].'/'.$this->name.'/include/languages/';
-		}
-	}
-
-	/**
-	 * GetSpecificLanguagePath() - get the path where we can find installation specific language files
-	 *
-	 * @return string path
-	 */
-	function GetSpecificLanguagePath() {
-		global $sys_etc_path;
-
-		return $sys_etc_path.'/plugins/'.$this->name.'/languages/';
-	}
 }
 
 // Local Variables:

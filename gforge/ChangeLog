@@ -1,3 +1,7 @@
+2008-01-13  Roland Mas  <lolando@debian.org>
+
+	* common/include/Plugin.class.php: Removed two unused functions.
+
 2008-01-11  Roland Mas  <lolando@debian.org>
 
 	* www/export/*.php: The previous validation didn't work since
