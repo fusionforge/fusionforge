@@ -1,3 +1,8 @@
+2008-01-14  Roland Mas  <lolando@debian.org>
+
+	* www/export/rss20_news.php: Fixed typo that prevented the RSS
+	feed from returning any results.
+
 2008-01-13  Roland Mas  <lolando@debian.org>
 
 	* common/include/Plugin.class.php: Removed two unused functions.

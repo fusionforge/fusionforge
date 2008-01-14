@@ -30,7 +30,7 @@ if ($group_id) {
 	  $webmaster = $GLOBALS['sys_admin_email'];
 	}
 } else {
-	$where = "is_approved=1";
+	$where = "AND is_approved=1";
 	$title = "";
 	$link = "";
 	$description = "";
