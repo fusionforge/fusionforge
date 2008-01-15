@@ -746,6 +746,9 @@ if (isset($params['group']) && $params['group']) {
 		} else {
 			$defaultWords = $words;
 		}
+
+		//Fix CVE-2007-0176
+		$defaultWords = htmlspecialchars($defaultWords);
 		
 		// if there is no search currently, set the default
 		if ( ! isset($type_of_search) ) {
