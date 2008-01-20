@@ -1,6 +1,6 @@
-<section>
+<section id="ug_sitewide">
 	<title>Site-wide functions</title>
-	<section>
+	<section id="ug_sitewide_introduction">
 		<title>Introduction</title>
 		<para>
 			The side-wide functions are available anytime, they are not dependent on the single projects.

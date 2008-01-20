@@ -1,0 +1,262 @@
+/* 
+		========================================================
+	================================================================
+ 			Feuille de Style spéciale document Docbook
+	================================================================
+		========================================================
+		
+		2002-2004 - S.URBANOVSKI <s.urbanovski@ac-nancy-metz.fr>
+*/
+
+
+/* 
+	---------------------------------------------------------------------------------------------------	
+	Elements généraux :	
+	---------------------------------------------------------------------------------------------------
+*/
+
+body {
+	font-family:		Helvetica, sans-serif;
+	font-size:			11px;
+	text-align:			justify;
+
+	background-color:	white;
+/*	background-image:	url("/images/fond_page.gif") ;*/
+
+	margin-right:		12px;
+	margin-left:		12px;
+	margin-top:			2px;
+	margin-bottom:		2px;
+
+}
+
+
+/* Les liens :*/
+a[href] {
+	color:				#2929BB;
+	text-decoration:	none;
+}
+a[href]:hover {
+	color:				#800000;
+	text-decoration:	underline;
+}
+a[href]:visited {
+	color:				#222288;
+}
+a[href]:active {
+	color:				red;
+}
+
+
+tr,th,td {
+	font-size:			11px;
+}
+
+
+/* 
+    ---------------------------------------------------------------------------------------------------
+    Mise en forme des titres de document et de chapitre :
+    ---------------------------------------------------------------------------------------------------
+*/
+
+div.chapter > h1 {
+	color:				#EFEFE0;
+	background-color:	#5278B6;
+	text-decoration:	none;
+	font-size:			18px;
+	padding:			3px;
+	margin-right:		-5px;
+	margin-left:		-5px;
+}
+
+div.titlepage h1.title {
+	background-color:	#4268A6;
+	background-image:	none ;
+	color:				white;
+	font-size:			20px;
+	text-align:			center;
+	text-decoration:	none;
+
+	margin-left:		2px;
+	border-bottom:		ridge #404090;
+	border-top:			ridge #404090;
+	padding-top:		5px;
+	padding-bottom:		5px;
+}
+
+div.book {
+}
+
+
+/* 
+    ---------------------------------------------------------------------------------------------------
+    Mise en forme des entêtes et pieds de page :
+    ---------------------------------------------------------------------------------------------------
+*/
+
+div.navfooter, div.navheader {
+	background-color:	#4268A6;
+	border: thin solid	#6DA9E2;
+	margin-right:		-10px;
+	margin-left:		-10px;
+	padding:			5px;
+	color:				yellow;
+}
+
+div.navheader {
+	margin-bottom:		10px;
+}
+div.navfooter {
+	margin-top:			10px;
+}
+div.navfooter a, div.navheader a {
+	color:				#E7B508;
+}
+div.navfooter a:visited, div.navheader a:visited {
+	color:				#E7B508;
+}
+div.navfooter a:hover, div.navheader a:hover {
+	color:				#F27334;
+}
+div.navfooter td, div.navheader td, div.navheader th {
+	color:				white;
+}
+div.navfooter hr, div.navheader hr {
+	display:			none;
+	border-style:		none;
+}
+
+
+/* 
+    ---------------------------------------------------------------------------------------------------
+    Mise en page des sections :
+    ---------------------------------------------------------------------------------------------------
+*/
+
+/* Commun */
+div.sect1, div.sect2, div.sect3, div.bibliography {
+	margin-left:		20px;
+}
+H1.SECT1, H2.SECT2, H3.SECT3, H1.TITLE {
+	text-decoration: underline;
+	margin-left:		-20px;
+}
+
+/* Niveau 1 */
+div.sect1 {
+}
+div.sect1 div.titlepage h2  {
+	color:				#800000;
+	font-size:			17px;
+}
+
+/* Niveau 2 */
+div.sect2 {
+}
+div.sect2 div.titlepage h3  {
+	color:				#600000;
+	font-size:			15px;
+}
+
+/* Niveau 3 */
+div.sect3 {
+}
+div.sect3 div.titlepage h4  {
+	color:				#400000;
+	font-size:			12px;
+}
+
+/* 
+    ---------------------------------------------------------------------------------------------------
+    Mises en forme diverses (block) :
+    ---------------------------------------------------------------------------------------------------
+*/
+
+DIV.CAUTION TABLE {
+	border-style:		hidden;
+	border-spacing:		1px;
+	padding-left:		30px;
+	padding-right:		30px;
+}
+
+DIV.CAUTION TD {
+	border:				none !important;
+	background-color:	#FFDDDD;
+}
+
+
+
+
+div.example, div.toc {
+	border:				thin dotted #70AAE5;
+	padding-left:		10px;
+	padding-right:		10px;
+	background-color:	#E8F4F0;
+}
+div.toc {
+	margin-left:		20px;
+	margin-right:		20px;
+}
+pre.programlisting {
+	background-color:	#DDFFDD;
+	padding:			5px;
+	border:				thin solid #a0a0a0;;
+}
+
+
+
+div.note, div.caution {
+	padding-left:		10px;
+	padding-right:		30px;
+	margin:				10px 0 10px 0;
+}
+
+div.caution  {
+	border-left:		10px solid #FFAAAA;
+	background-color:	#FFF8F8;
+}
+
+div.note  {
+	border-left:		10px solid #FFFF99;
+	background-color:	#FFFFF0;
+}
+
+
+/* 
+    ---------------------------------------------------------------------------------------------------
+    Mises en forme diverses (flow) :
+    ---------------------------------------------------------------------------------------------------
+*/
+
+tt.filename {
+	color:				#8000A0;
+}
+pre.screen {
+	background-color:	#202020;
+	color:				white;
+	padding:			5px;
+}
+tt.prompt {
+	color:				#FFFFAA;
+}
+
+/* Ajoute les <> pour les balises sgml/xml :*/
+tt.sgmltag-element:before {
+	content:			"<"
+}
+tt.sgmltag-element:after {
+	content:			">"
+}
+tt.sgmltag-element {
+	color: 			purple;
+}
+
+/*
+    ---------------------------------------------------------------------------------------------------
+    Classes utiles
+    ---------------------------------------------------------------------------------------------------
+*/
+
+guimenuitem { font-style: italic; }
+guibutton   { font-style: italic; }
+

@@ -27,9 +27,9 @@
 		You can search for People or Software groups by selecting the item in the combo box and inserting the search text in the text box.
 	</para>
 	<para>
-		If the user is inside one of the Trackers, a voice Tracker appears in the combo box.
+		If the user is inside a project, he can search on all the items of the project (trackers, forums, mailing lists, tasks, releases, documents, news and wiki); he can also search on a specific item by selecting the corresponding search.
 	</para>
 	<para>
-		If the user is inside a forum, a voice Forum appears in the combo box.
+		An advanced search is also provided to precise the search on a project.
 	</para>
 </section>

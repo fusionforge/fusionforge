@@ -3,7 +3,7 @@
 	<para>
 		The Document Manager provided with GForge gives you a simple way to publish documents on the site. 
 	</para>
-	<section>
+	<section id="ug_project_docman_submit_new">
 		<title>Submit new documentation</title>
 		<para>
 			Here you can submit new documents for approving/publishing on the site. The form requires you to insert the following information:
@@ -28,6 +28,12 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
+				<term>Reference File (by an URL)</term>
+				<listitem>
+					<para>Instead of uploading a file, you can specify the URL where the document is located.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
 				<term>Language</term>
 				<listitem>
 					<para>You should select here the language of the document.</para>
@@ -44,13 +50,13 @@
 			Fill in all the fields, select the group from the drop down list and click <guimenuitem>Submit Information</guimenuitem>. The document will then be placed in the <guimenuitem>Pending Submissions</guimenuitem> section of the <guimenuitem>DocManager Admin</guimenuitem> page, to be approved or rejected.
 		</para>
 	</section>
-	<section>
+	<section id="ug_project_docman_view_existing">
 		<title>Viewing existing docs</title>
 		<para>
 			The View Documentation page shows you a list of documents published and approved for viewing; grouped by Document groups. You can click on a document to view the entire content.
 		</para>
 	</section>
-	<section>
+	<section id="ug_project_docman_admin">
 		<title>Admin</title>
 		<para>
 			Clicking on this will present you with a page showing pending and active documents. In order to allow users to submit a document, you must first set up the document groups for the project.
@@ -113,7 +119,7 @@
 			</varlistentry>
 		</variablelist>
 	</section>
-	<section>
+	<section id="ug_project_docman_edit">
 		<title>Edit Document</title>
 		<para>
 			When you select a document from one of the lists, a form will be displayed. In this form you can change the Document Title, the Short Description, the Language, the Document Group and the State.

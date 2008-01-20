@@ -1,0 +1,12 @@
+<section id="ug_project_activity">
+    <title>Project Activity</title>
+    <para>
+        The project activity displays information about the current project activity. 
+    </para>
+    <para>
+        You have to select an activity, a start date and an end date. Then click the <emphasis>Submit</emphasis> button.
+    </para>
+    <para>
+        The list of corresponding activities will be displayed.
+    </para>
+</section>

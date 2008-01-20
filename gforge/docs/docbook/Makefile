@@ -9,7 +9,7 @@ DEVNULL = &> /dev/null
 BOOKS=gforge_manual
 ARTICLES=administration_guide user_guide contribution_guide installation_guide
 
-all: clean html html-chunk pdf
+all: clean html html-chunk html-guide pdf
 
 html: validate prepare
 	##
@@ -50,6 +50,15 @@ html-chunk: validate prepare
 	#
 	# Done
 	##
+
+# This guide is the online guide, it is generated as chunked document
+# and saved in /usr/share/gforge/www/help/guide/
+html-guide: $(SRC)/user_guide/user_guide.xml
+	rm -f guide/ug_* guide/bk*
+	xsltproc --xinclude --stringparam use.id.as.filename 1 --stringparam chunk.section.depth 2 --stringparam chunker.output.indent yes --stringparam chunker.output.encoding UTF-8 --stringparam base.dir guide/ --stringparam html.stylesheet docbook.css ${XSL}article_html_chunk.xsl $<
+	cp css/docbook.css guide/docbook.css
+#	rm -f guide/images/*
+#	cp -p images/* guide/images/
 
 pdf: validate prepare
 	##

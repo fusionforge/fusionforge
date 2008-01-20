@@ -2,6 +2,7 @@
 	<title>Project functions</title>
 
 	<xi:include href="project_summary.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="activity.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="project_admin.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="forums.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="tracker.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />

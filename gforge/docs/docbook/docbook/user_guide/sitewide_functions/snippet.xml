@@ -6,7 +6,7 @@
 	<para>
 		A typical example are sophisticated shell commands, javascript functions, perl one-liner, SQL expressions that perform special queries, an algorithm, etc.
 	</para>
-	<section>
+	<section id="ug_sitewide_snippet_insert_new">
 		<title>Inserting a new snippet</title>
 		<para>
 			You can insert a new Snippet by clicking on the <guimenuitem>Submit a New Snippet</guimenuitem> link.
@@ -65,7 +65,7 @@
 			</varlistentry>
 		</variablelist>
 	</section>
-	<section>
+	<section id="ug_sitewide_snippet_browse">
 		<title>Browsing snippets</title>
 		<para>
 			You can browse snippets by clicking the <guimenuitem>Browse</guimenuitem> link.
@@ -74,7 +74,7 @@
 			You can browse snippets by Language or by Category. The resulting table shows the list of all snippets of the Language/Category. You can click on the snippet number to view the detail of the snippet.
 		</para>
 	</section>
-	<section>
+	<section id="ug_sitewide_snippet_modify">
 		<title>Modifying a snippet</title>
 		<para>
 			You cannot modify an existing snippet, but you can add a new version of the snippet by clicking on the Submit a new version link on the bottom part of the detail page of the snippet.
