@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-11 10:56+0100\n"
+"POT-Creation-Date: 2008-01-20 16:38+0100\n"
 "PO-Revision-Date: 2007-03-02 16:02 +0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1731,6 +1731,17 @@ msgstr "Notifica attivata"
 #: common/tracker/ArtifactType.class.php:577
 msgid "Tracker Monitoring Deactivated"
 msgstr "Notifica disattivata"
+
+#: cronjobs/massmail.php:143
+#, php-format
+msgid ""
+"You receive this message because you subscribed to %1$s\n"
+"site mailing(s). You may opt out from some of them selectively\n"
+"by logging in to %1$s and visiting your Account Maintenance\n"
+"page (%2$s), or disable them altogether\n"
+"by visiting following link:\n"
+"<%3$s>\n"
+msgstr ""
 
 #: cronjobs/send_pending_items_mail.php:76
 msgid "Pending task manager items notification"
@@ -4989,8 +5000,8 @@ msgstr "Invia file"
 msgid "Submit Information"
 msgstr "Invia informazioni"
 
-#: www/docman/search.php:92 www/include/Layout.class.php:791
-#: www/include/Layout.class.php:815
+#: www/docman/search.php:92 www/include/Layout.class.php:794
+#: www/include/Layout.class.php:818
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:51
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:42
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:42
@@ -6405,37 +6416,37 @@ msgstr "Mailing List"
 msgid "Surveys"
 msgstr "Sondaggi"
 
-#: www/include/Layout.class.php:797
+#: www/include/Layout.class.php:800
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:76
 #: www/themes/gforge-simple-theme/Theme.class.php:683
 #: www/themes/gforge/Theme.class.php:754
 msgid "Advanced search"
 msgstr "Ricerca avanzata"
 
-#: www/include/Layout.class.php:820
+#: www/include/Layout.class.php:823
 #: www/themes/gforge-simple-theme/Theme.class.php:698
 #: www/themes/gforge/Theme.class.php:777
 msgid "with all words"
 msgstr "con tutte le parole"
 
-#: www/include/Layout.class.php:823
+#: www/include/Layout.class.php:826
 #: www/themes/gforge-simple-theme/Theme.class.php:699
 #: www/themes/gforge/Theme.class.php:780
 msgid "with one word"
 msgstr "una parola"
 
-#: www/include/Layout.class.php:868 www/themes/gforge/Theme.class.php:825
+#: www/include/Layout.class.php:871 www/themes/gforge/Theme.class.php:825
 msgid "Search in"
 msgstr "Cerca in"
 
-#: www/include/Layout.class.php:869 www/include/Layout.class.php:900
+#: www/include/Layout.class.php:872 www/include/Layout.class.php:903
 #: www/themes/gforge-simple-theme/Theme.class.php:701
 #: www/themes/gforge-simple-theme/Theme.class.php:757
 #: www/themes/gforge/Theme.class.php:826 www/themes/gforge/Theme.class.php:857
 msgid "Select"
 msgstr "Seleziona"
 
-#: www/include/Layout.class.php:869 www/include/Layout.class.php:900
+#: www/include/Layout.class.php:872 www/include/Layout.class.php:903
 #: www/stats/site_stats_utils.php:127
 #: www/themes/gforge-simple-theme/Theme.class.php:701
 #: www/themes/gforge-simple-theme/Theme.class.php:757
@@ -6443,7 +6454,7 @@ msgstr "Seleziona"
 msgid "all"
 msgstr "tutti"
 
-#: www/include/Layout.class.php:869 www/include/Layout.class.php:900
+#: www/include/Layout.class.php:872 www/include/Layout.class.php:903
 #: www/themes/gforge-simple-theme/Theme.class.php:701
 #: www/themes/gforge-simple-theme/Theme.class.php:757
 #: www/themes/gforge/Theme.class.php:826 www/themes/gforge/Theme.class.php:857
@@ -9679,8 +9690,8 @@ msgstr ""
 "Seleziona un progetto/sottoprogetto nel Gestore Attività. Devi selezionare "
 "una attività e una categoria per consuntivare."
 
-#: www/reporting/timeadd.php:207 www/tracker/taskmgr.php:88
-#: www/tracker/taskmgr.php:141
+#: www/reporting/timeadd.php:207 www/tracker/taskmgr.php:89
+#: www/tracker/taskmgr.php:142
 msgid "Task Manager Project"
 msgstr "Progetto Attività"
 
@@ -9770,7 +9781,7 @@ msgstr "Stato attività"
 msgid "No matches found"
 msgstr "Nessuna corrispondenza trovata"
 
-#: www/reporting/usersummary.php:104 www/tracker/taskmgr.php:92
+#: www/reporting/usersummary.php:104 www/tracker/taskmgr.php:93
 msgid "Task"
 msgstr "Attività"
 
@@ -11945,53 +11956,53 @@ msgstr "Intervallo data di apertura"
 msgid "Close Date range"
 msgstr "Intervallo data di chiusura"
 
-#: www/tracker/taskmgr.php:35
+#: www/tracker/taskmgr.php:36
 #, fuzzy
 msgid "Artifact Could Not Be Created"
 msgstr "Rimozione fallita"
 
-#: www/tracker/taskmgr.php:54
+#: www/tracker/taskmgr.php:55
 #, fuzzy
 msgid "Could Not Get ProjectGroup"
 msgstr "Non ho potuto aggiornare il messaggio superiore"
 
-#: www/tracker/taskmgr.php:62
+#: www/tracker/taskmgr.php:63
 msgid "Could Not Get ProjectTaskFactory"
 msgstr ""
 
-#: www/tracker/taskmgr.php:77
+#: www/tracker/taskmgr.php:78
 #, fuzzy
 msgid "No Existing Tasks Found"
 msgstr "Nessuna attività trovata"
 
-#: www/tracker/taskmgr.php:84 www/tracker/taskmgr.php:138
+#: www/tracker/taskmgr.php:85 www/tracker/taskmgr.php:139
 msgid "Build Relationship Between Tracker Items and Task Manager"
 msgstr "Costruisci una relazione tra voci nel tracker e le attività"
 
-#: www/tracker/taskmgr.php:87 www/tracker/taskmgr.php:140
+#: www/tracker/taskmgr.php:88 www/tracker/taskmgr.php:141
 #: www/tracker/tracker.php:256
 msgid "Tracker Item"
 msgstr "Elemento tracker"
 
-#: www/tracker/taskmgr.php:98
+#: www/tracker/taskmgr.php:99
 msgid "Add Relationship To Selected Task"
 msgstr "Aggiungi relazione all'attività selezionata"
 
-#: www/tracker/taskmgr.php:122
+#: www/tracker/taskmgr.php:123
 #, fuzzy
 msgid "Could Not Get Factory"
 msgstr "Impossibile completare l'operazione"
 
-#: www/tracker/taskmgr.php:132
+#: www/tracker/taskmgr.php:133
 #, fuzzy
 msgid "No Existing Project Groups Found"
 msgstr "Nessun sottoprogetto trovato"
 
-#: www/tracker/taskmgr.php:147
+#: www/tracker/taskmgr.php:148
 msgid "Add Relation To Existing Task."
 msgstr "Aggiungi relazione ad attività esistente"
 
-#: www/tracker/taskmgr.php:148
+#: www/tracker/taskmgr.php:149
 msgid "Create New Task"
 msgstr "Crea nuova attività"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-11 10:56+0100\n"
+"POT-Creation-Date: 2008-01-20 16:38+0100\n"
 "PO-Revision-Date: 2007-03-02 16:02 +0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1590,6 +1590,17 @@ msgstr ""
 
 #: common/tracker/ArtifactType.class.php:577
 msgid "Tracker Monitoring Deactivated"
+msgstr ""
+
+#: cronjobs/massmail.php:143
+#, php-format
+msgid ""
+"You receive this message because you subscribed to %1$s\n"
+"site mailing(s). You may opt out from some of them selectively\n"
+"by logging in to %1$s and visiting your Account Maintenance\n"
+"page (%2$s), or disable them altogether\n"
+"by visiting following link:\n"
+"<%3$s>\n"
 msgstr ""
 
 #: cronjobs/send_pending_items_mail.php:76
@@ -4701,8 +4712,8 @@ msgstr ""
 msgid "Submit Information"
 msgstr ""
 
-#: www/docman/search.php:92 www/include/Layout.class.php:791
-#: www/include/Layout.class.php:815
+#: www/docman/search.php:92 www/include/Layout.class.php:794
+#: www/include/Layout.class.php:818
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:51
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:42
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:42
@@ -6017,37 +6028,37 @@ msgstr ""
 msgid "Surveys"
 msgstr ""
 
-#: www/include/Layout.class.php:797
+#: www/include/Layout.class.php:800
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:76
 #: www/themes/gforge-simple-theme/Theme.class.php:683
 #: www/themes/gforge/Theme.class.php:754
 msgid "Advanced search"
 msgstr ""
 
-#: www/include/Layout.class.php:820
+#: www/include/Layout.class.php:823
 #: www/themes/gforge-simple-theme/Theme.class.php:698
 #: www/themes/gforge/Theme.class.php:777
 msgid "with all words"
 msgstr ""
 
-#: www/include/Layout.class.php:823
+#: www/include/Layout.class.php:826
 #: www/themes/gforge-simple-theme/Theme.class.php:699
 #: www/themes/gforge/Theme.class.php:780
 msgid "with one word"
 msgstr ""
 
-#: www/include/Layout.class.php:868 www/themes/gforge/Theme.class.php:825
+#: www/include/Layout.class.php:871 www/themes/gforge/Theme.class.php:825
 msgid "Search in"
 msgstr ""
 
-#: www/include/Layout.class.php:869 www/include/Layout.class.php:900
+#: www/include/Layout.class.php:872 www/include/Layout.class.php:903
 #: www/themes/gforge-simple-theme/Theme.class.php:701
 #: www/themes/gforge-simple-theme/Theme.class.php:757
 #: www/themes/gforge/Theme.class.php:826 www/themes/gforge/Theme.class.php:857
 msgid "Select"
 msgstr ""
 
-#: www/include/Layout.class.php:869 www/include/Layout.class.php:900
+#: www/include/Layout.class.php:872 www/include/Layout.class.php:903
 #: www/stats/site_stats_utils.php:127
 #: www/themes/gforge-simple-theme/Theme.class.php:701
 #: www/themes/gforge-simple-theme/Theme.class.php:757
@@ -6055,7 +6066,7 @@ msgstr ""
 msgid "all"
 msgstr ""
 
-#: www/include/Layout.class.php:869 www/include/Layout.class.php:900
+#: www/include/Layout.class.php:872 www/include/Layout.class.php:903
 #: www/themes/gforge-simple-theme/Theme.class.php:701
 #: www/themes/gforge-simple-theme/Theme.class.php:757
 #: www/themes/gforge/Theme.class.php:826 www/themes/gforge/Theme.class.php:857
@@ -9097,8 +9108,8 @@ msgid ""
 "choose a Task and category to record your time in."
 msgstr ""
 
-#: www/reporting/timeadd.php:207 www/tracker/taskmgr.php:88
-#: www/tracker/taskmgr.php:141
+#: www/reporting/timeadd.php:207 www/tracker/taskmgr.php:89
+#: www/tracker/taskmgr.php:142
 msgid "Task Manager Project"
 msgstr ""
 
@@ -9182,7 +9193,7 @@ msgstr ""
 msgid "No matches found"
 msgstr ""
 
-#: www/reporting/usersummary.php:104 www/tracker/taskmgr.php:92
+#: www/reporting/usersummary.php:104 www/tracker/taskmgr.php:93
 msgid "Task"
 msgstr ""
 
@@ -11227,48 +11238,48 @@ msgstr ""
 msgid "Close Date range"
 msgstr ""
 
-#: www/tracker/taskmgr.php:35
+#: www/tracker/taskmgr.php:36
 msgid "Artifact Could Not Be Created"
 msgstr ""
 
-#: www/tracker/taskmgr.php:54
+#: www/tracker/taskmgr.php:55
 msgid "Could Not Get ProjectGroup"
 msgstr ""
 
-#: www/tracker/taskmgr.php:62
+#: www/tracker/taskmgr.php:63
 msgid "Could Not Get ProjectTaskFactory"
 msgstr ""
 
-#: www/tracker/taskmgr.php:77
+#: www/tracker/taskmgr.php:78
 msgid "No Existing Tasks Found"
 msgstr ""
 
-#: www/tracker/taskmgr.php:84 www/tracker/taskmgr.php:138
+#: www/tracker/taskmgr.php:85 www/tracker/taskmgr.php:139
 msgid "Build Relationship Between Tracker Items and Task Manager"
 msgstr ""
 
-#: www/tracker/taskmgr.php:87 www/tracker/taskmgr.php:140
+#: www/tracker/taskmgr.php:88 www/tracker/taskmgr.php:141
 #: www/tracker/tracker.php:256
 msgid "Tracker Item"
 msgstr ""
 
-#: www/tracker/taskmgr.php:98
+#: www/tracker/taskmgr.php:99
 msgid "Add Relationship To Selected Task"
 msgstr ""
 
-#: www/tracker/taskmgr.php:122
+#: www/tracker/taskmgr.php:123
 msgid "Could Not Get Factory"
 msgstr ""
 
-#: www/tracker/taskmgr.php:132
+#: www/tracker/taskmgr.php:133
 msgid "No Existing Project Groups Found"
 msgstr ""
 
-#: www/tracker/taskmgr.php:147
+#: www/tracker/taskmgr.php:148
 msgid "Add Relation To Existing Task."
 msgstr ""
 
-#: www/tracker/taskmgr.php:148
+#: www/tracker/taskmgr.php:149
 msgid "Create New Task"
 msgstr ""
 

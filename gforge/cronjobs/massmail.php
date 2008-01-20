@@ -140,13 +140,13 @@ while ($row =& db_fetch_array($users_res)) {
 	$compt++;
 	if ($type=='SITE' || $type=='COMMNTY') {
 		$tail = "\r\n==================================================================\r\n" ;
-		$tail .= sprintf (_("You receive this message because you subscribed to %1$s
+		$tail .= sprintf (_('You receive this message because you subscribed to %1$s
 site mailing(s). You may opt out from some of them selectively
-by logging in to $sys_name and visiting your Account Maintenance
+by logging in to %1$s and visiting your Account Maintenance
 page (%2$s), or disable them altogether
 by visiting following link:
 <%3$s>
-"), 
+'), 
 				  $GLOBALS['sys_name'], 
 				  "http://".$GLOBALS['sys_default_domain']."/account/",
 				  "http://".$GLOBALS['sys_default_domain']."/account/unsubscribe.php?ch=_" . $row['confirm_hash']) ;
