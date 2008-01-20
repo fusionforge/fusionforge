@@ -7,6 +7,27 @@ define('THEME_DIR', $GLOBALS['sys_urlprefix'].'/themes/gforge');
 define('TOP_TAB_HEIGHT', 30);
 define('BOTTOM_TAB_HEIGHT', 22);
 
+$user_guide = array(
+	'user' => 'ug_user.html',
+	'login' => 'ug_getting_started_login.html',
+	'trove' => 'ug_sitewide_trove.html',
+	'snippet' => 'ug_sitewide_snippet.html',
+	'people' => 'ug_sitewide_project_help.html',
+	'home' => 'ug_project.html',
+	'admin' => 'ug_project_project_admin.html',
+	'activity' => 'ug_project_activity.html',
+	'forums' => 'ug_project_forums.html',
+	'tracker' => 'ug_project_tracker.html',
+	'mail' => 'ug_project_mailing_lists.html',
+	'pm' => 'ug_project_task_manager.html',
+	'docman' => 'ug_project_docman.html',
+	'surveys' => 'ug_project_surveys.html',
+	'news' => 'ug_project_news.html',
+	'scm' => 'ug_project_subversion.html',
+	'frs' => 'ug_project_file_releases.html',
+	'wiki' => 'ug_project_wiki.html',
+	);
+
 class Theme extends Layout {
 
     function Theme() {
@@ -105,6 +126,7 @@ class Theme extends Layout {
         } else {
             $params['title'] =  $GLOBALS['sys_name'] . ': ' . $params['title'];
         }
+
         print '<?xml version="1.0" encoding="utf-8"?>';
         ?>
 
@@ -131,7 +153,7 @@ class Theme extends Layout {
         AdminWin.focus();
     }
     function help_window(helpurl) {
-        HelpWin = window.open( helpurl,'HelpWindow','scrollbars=yes,resizable=yes,toolbar=no,height=400,width=400');
+        HelpWin = window.open( helpurl,'HelpWindow','scrollbars=yes,resizable=yes,toolbar=no,height=400,width=600');
     }
     // -->
     <?php plugin_hook ("javascript",false) ; ?>
@@ -155,6 +177,8 @@ class Theme extends Layout {
   }
 
   function bodyHeader($params){
+	global $user_guide;
+
   ?>
 <div class="header">
   <table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -175,6 +199,27 @@ class Theme extends Layout {
             <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/register.php"><?php echo _('New Account'); ?></a>
             <?php
           }
+
+		$guide = $GLOBALS['sys_urlprefix'].'/help/guide/';
+		if (strstr($_SERVER['REQUEST_URI'],'softwaremap')) {
+			$guide .= $user_guide['trove'];
+		} elseif (strstr($_SERVER['REQUEST_URI'],'/my/')) {
+			$guide .= $user_guide['user'];
+		} elseif (strstr($_SERVER['REQUEST_URI'],'/account/login.php')) {
+			$guide .= $user_guide['login'];
+		} elseif (strstr($_SERVER['REQUEST_URI'],'/account/')) {
+			$guide .= $user_guide['user'];
+		} elseif (strstr($_SERVER['REQUEST_URI'],'/snippet/')) {
+			$guide .= $user_guide['snippet'];
+		} elseif (strstr($_SERVER['REQUEST_URI'],'/people/')) {
+			$guide .= $user_guide['people'];
+		} elseif (isset($params['toptab']) && isset($user_guide[ $params['toptab'] ])) {
+			$guide .= $user_guide[ $params['toptab'] ];
+		}
+		?>
+		| 
+		<a href="javascript:help_window('<?php echo $guide ?>')"><?php echo _('Get Help'); ?></a>
+		<?php
           echo $this->quickNav();
         ?></td>
         <td>&nbsp;&nbsp;</td>
