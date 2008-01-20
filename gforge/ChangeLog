@@ -1,3 +1,8 @@
+2008-01-19  Roland Mas  <lolando@debian.org>
+
+	* cronjobs/massmail.php: Added missing i18n on the mass mail cron
+	script.
+
 2008-01-14  Roland Mas  <lolando@debian.org>
 
 	* www/export/rss20_news.php: Fixed typo that prevented the RSS

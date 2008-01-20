@@ -132,23 +132,28 @@ if ($users_res && db_numrows($users_res)==0) {
 	m_exit();
 }
 
-// These mailing types should include unsubscription info
-if ($type=='SITE' || $type=='COMMNTY') {
-	$tail = "\r\n==================================================================\r\n"
-		   ."You receive this message because you subscribed to $sys_name\r\n"
-		   ."site mailing(s). You may opt out from some of them selectively\r\n"
-		   ."by logging in to $sys_name and visiting your Account Maintenance\r\n"
-		   ."page (http://$sys_default_domain/account/), or disable them altogether\r\n"
-		   ."by visiting following link:\r\n"
-		   ."<http://$sys_default_domain/account/unsubscribe.php?ch=_%s>\r\n";
-}
 $body = db_result($mail_res, 0, 'message');
 
 // Actual mailing loop
 $compt = 0;
 while ($row =& db_fetch_array($users_res)) {
 	$compt++;
-	util_send_message($row['email'],$subj,$body."\r\n".sprintf( $tail,$row['confirm_hash'] ),'noreply@'.$sys_default_domain );
+	if ($type=='SITE' || $type=='COMMNTY') {
+		$tail = "\r\n==================================================================\r\n" ;
+		$tail .= sprintf (_("You receive this message because you subscribed to %1$s
+site mailing(s). You may opt out from some of them selectively
+by logging in to $sys_name and visiting your Account Maintenance
+page (%2$s), or disable them altogether
+by visiting following link:
+<%3$s>
+"), 
+				  $GLOBALS['sys_name'], 
+				  "http://".$GLOBALS['sys_default_domain']."/account/",
+				  "http://".$GLOBALS['sys_default_domain']."/account/unsubscribe.php?ch=_" . $row['confirm_hash']) ;
+	} else {
+		$tail = "" ;
+	}
+	util_send_message($row['email'],$subj, $body."\r\n".$tail,'noreply@'.$sys_default_domain);
 	$last_userid = $row['user_id'];
 
 	sleep($SLEEP);
