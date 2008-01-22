@@ -25,20 +25,29 @@ class MediaWikiPlugin extends Plugin {
 	function MediaWikiPlugin () {
 		$this->Plugin() ;
 		$this->name = "mediawiki" ;
-		$this->text = "MediaWiki!" ; // To show in the tabs, use...
-		$this->hooks[] = "user_personal_links";//to make a link to the user큦 personal part of the plugin
+		$this->text = "Mediawiki" ; // To show in the tabs, use...
+		$this->hooks[] = "user_personal_links";//to make a link to the user's personal part of the plugin
 		$this->hooks[] = "usermenu" ;
-		$this->hooks[] = "outermenu" ;
+		// $this->hooks[] = "outermenu" ;
 		$this->hooks[] = "groupmenu" ;	// To put into the project tabs
 		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
 		$this->hooks[] = "groupisactivecheckboxpost" ; //
 		$this->hooks[] = "userisactivecheckbox" ; // The "use ..." checkbox in user account
 		$this->hooks[] = "userisactivecheckboxpost" ; //
-		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page fro group
+		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page for group
+		$this->hooks[] = "session_before_login" ; // to register GF users in the MW database
 	}
 
 	function CallHook ($hookname, $params) {
 		global $use_mediawikiplugin,$G_SESSION,$HTML;
+
+		if (isset($params['group_id'])) {
+			$group_id=$params['group_id'];
+		} elseif (isset($params['group'])) {
+			$group_id=$params['group'];
+		} else {
+			$group_id=null;
+		}
 		if ($hookname == "outermenu") {
 			$params['TITLES'][] = 'MediaWiki';
 			$params['DIRS'][] = '/mediawiki';
@@ -46,10 +55,9 @@ class MediaWikiPlugin extends Plugin {
 			$text = $this->text; // this is what shows in the tab
 			if ($G_SESSION->usesPlugin("mediawiki")) {
 				echo ' | ' . $HTML->PrintSubMenu (array ($text),
-						  array ('/mediawiki/index.php/User:' . $G_SESSION->getUnixName() ));				
+						  array ('/mediawiki/index.php?title=User:' . $G_SESSION->getUnixName() ));				
 			}
 		} elseif ($hookname == "groupmenu") {
-			$group_id=$params['group'];
 			$project = &group_get_object($group_id);
 			if (!$project || !is_object($project)) {
 				return;
@@ -60,17 +68,14 @@ class MediaWikiPlugin extends Plugin {
 			if (!$project->isProject()) {
 				return;
 			}
-			$params['DIRS'][]='/mediawiki/index.php/' . $project->getUnixName(); 
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
-			} else {
-				$params['TITLES'][]=$this->text." is [Off]";
-			}	
+				$params['DIRS'][]='/plugins/mediawiki/index.php?group_id=' . $project->getID(); 
+			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == "groupisactivecheckbox") {
 			//Check if the group is active
 			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
-			$group_id=$params['group'];
 			$group = &group_get_object($group_id);
 			echo "<tr>";
 			echo "<td>";
@@ -87,7 +92,6 @@ class MediaWikiPlugin extends Plugin {
 			echo "</tr>";
 		} elseif ($hookname == "groupisactivecheckboxpost") {
 			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
-			$group_id=$params['group'];
 			$group = &group_get_object($group_id);
 			$use_mediawikiplugin = getStringFromRequest('use_mediawikiplugin');
 			if ( $use_mediawikiplugin == 1 ) {
@@ -129,7 +133,7 @@ class MediaWikiPlugin extends Plugin {
 			echo "</td>";
 			echo "</tr>";
 		} elseif ($hookname == "user_personal_links") {
-			// this displays the link in the user큦 profile page to it큦 personal MediaWiki (if you want other sto access it, youll have to change the permissions in the index.php
+			// this displays the link in the user's profile page to it's personal MediaWiki (if you want other sto access it, youll have to change the permissions in the index.php
 			$userid = $params['user_id'];
 			$user = user_get_object($userid);
 			$text = $params['text'];
@@ -139,13 +143,44 @@ class MediaWikiPlugin extends Plugin {
 					<a href="/mediawiki/index.php/User:' . $user->getUnixName() . '">' . _('View Personal MediaWiki') .'</a></p>';
 			}
 		} elseif ($hookname == "project_admin_plugins") {
-			// this displays the link in the project admin options page to it큦  MediaWiki administration
+			// this displays the link in the project admin options page to it's  MediaWiki administration
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
 				echo '<a href="/mediawiki/index.php?title=' . $group->getUnixName() . '&action=edit' . '">' . _('View the MediaWiki Administration') . '</a><br />';
 			}
 		}												    
+		elseif ($hookname == "session_before_login") {
+			$loginname = $params['loginname'] ;
+			$passwd = $params['passwd'] ;
+			if (! session_login_valid_dbonly ($loginname, $passwd, false)) {
+				return ;
+			}
+			$u = user_get_object_by_name ($loginname) ;
+			
+			define ('MEDIAWIKI', true);
+
+                        require_once ('/var/lib/mediawiki1.10/LocalSettings.php');
+                        require_once ('/usr/share/mediawiki1.10/includes/Defines.php');
+                        require_once ('/usr/share/mediawiki1.10/includes/Exception.php');
+                        require_once ('/usr/share/mediawiki1.10/includes/GlobalFunctions.php');
+                        require_once ('/usr/share/mediawiki1.10/StartProfiler.php');
+                        require_once ('/usr/share/mediawiki1.10/includes/Database.php');
+
+                        $mwdb = new Database() ;
+                        $mwdb->open($wgDBserver, $wgDBuser, $wgDBpassword, $wgDBname) ;
+                        $sql = "select count(*) from user where user_name=?";
+                        $res = $mwdb->safeQuery ($sql, ucfirst($loginname));
+			$row = $mwdb->fetchRow ($res) ;
+			if ($row[0] == 1) {
+				$sql = "update user set user_password=?, user_email=?, user_real_name=? where user_name=?" ;
+				$res = $mwdb->safeQuery ($sql, md5($passwd), $u->getEmail(), $u->getRealName(), array(ucfirst($loginname))) ;
+			} else {
+				$sql = "insert into user (user_name, user_real_name, user_password, user_email, user_options) values (?, ?, ?, ?, ?)" ;
+				$res = $mwdb->safeQuery ($sql, array(ucfirst($loginname), $u->getRealName(), md5($passwd), $u->getEmail(), "skin=gforge\ncols=80\nrows=25")) ;
+			}
+		} 
+
 		elseif ($hookname == "blahblahblah") {
 			// ...
 		} 

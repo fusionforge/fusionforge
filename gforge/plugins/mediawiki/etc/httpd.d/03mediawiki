@@ -1,0 +1,21 @@
+Alias /mediawiki /var/lib/mediawiki1.10
+
+<Directory /var/lib/mediawiki1.10/>
+	Options +FollowSymLinks
+	AllowOverride All
+	order allow,deny
+	allow from all
+	# Allow mediawiki to connect to gforge
+	Include /etc/gforge/httpd.secrets
+	php_admin_value include_path "/etc/gforge/custom:/etc/gforge:/usr/share/gforge:/usr/share/gforge/www/include:."
+</Directory>
+
+# some directories must be protected
+<Directory /var/lib/mediawiki1.10/config>
+	Options -FollowSymLinks
+	AllowOverride None
+</Directory>
+<Directory /var/lib/mediawiki1.10/upload>
+	Options -FollowSymLinks
+	AllowOverride None
+</Directory>

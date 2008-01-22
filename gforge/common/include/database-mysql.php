@@ -13,17 +13,17 @@
  *  db_connect() -  Connect to the database
  *
  *  Notice the global vars that must be set up
- *  Sets up a global $conn variable which is used 
+ *  Sets up a global $gfconn variable which is used 
  *  in other functions in this library
  */
 function db_connect() {
-	global $sys_dbhost, $sys_dbuser, $sys_dbpasswd, $conn;
+	global $sys_dbhost, $sys_dbuser, $sys_dbpasswd, $gfconn;
 
 	db_log_entry('db_connect', NULL);
 
 	db_log_dbentry('mysqli_connect',"$sys_dbhost, $sys_dbuser, $sys_dbpasswd");
-	$conn = @mysqli_connect($sys_dbhost, $sys_dbuser, $sys_dbpasswd);
-	db_log_dbexit('mysqli_connect',"$conn");
+	$gfconn = @mysqli_connect($sys_dbhost, $sys_dbuser, $sys_dbpasswd);
+	db_log_dbexit('mysqli_connect',"$gfconn");
 
 	//
 	//	Now map the physical database connections to the
@@ -37,7 +37,7 @@ function db_connect() {
 
 	db_log_exit('db_connect');
 
-	#return $conn;
+	#return $gfconn;
 }
 
 /**
@@ -48,7 +48,7 @@ function db_connect() {
  *  @param		int		Of matching rows, return only rows starting here
  */
 function db_query($qstring, $limit = '-1', $offset = 0) {
-	global $sys_dbname, $conn;
+	global $sys_dbname, $gfconn;
 
 	db_log_entry('db_query',"$qstring, $limit, $offset");
 
@@ -61,16 +61,16 @@ function db_query($qstring, $limit = '-1', $offset = 0) {
 //	if ($GLOBALS['IS_DEBUG'])
 //		$GLOBALS['G_DEBUGQUERY'] .= $qstring . "<p><br />\n";
 
-	db_log_dbentry('mysqli_select_db',"$conn, $sys_dbname");
-	if (!mysqli_select_db($conn, $sys_dbname)) {
+	db_log_dbentry('mysqli_select_db',"$gfconn, $sys_dbname");
+	if (!mysqli_select_db($gfconn, $sys_dbname)) {
 		db_log_dbexit('mysqli_select_db',false);
 		db_log_exit('db_query');
 		return NULL;
 	}
 	db_log_dbexit('mysqli_select_db',true);
 
-	db_log_dbentry('mysqli_query',"$conn, $sys_dbname");
-	$res = mysqli_query($conn, $qstring);
+	db_log_dbentry('mysqli_query',"$gfconn, $sys_dbname");
+	$res = mysqli_query($gfconn, $qstring);
 	db_log_dbexit('mysqli_query',$res);
 
 	db_log_exit('db_query',"$res");
@@ -83,17 +83,17 @@ function db_query($qstring, $limit = '-1', $offset = 0) {
  *  @param		string	SQL statement
  */
 function db_mquery($qstring) {
-	global $sys_dbname, $conn;
+	global $sys_dbname, $gfconn;
 
 //	if ($GLOBALS['IS_DEBUG'])
 //		$GLOBALS['G_DEBUGQUERY'] .= $qstring . "<p><br />\n";
 
 	db_log_entry('db_mquery',"$qstring");
 
-	db_log_dbentry('mysqli_select_db',"$conn, $sys_dbname");
-	if (!mysqli_select_db($conn, $sys_dbname)) {
+	db_log_dbentry('mysqli_select_db',"$gfconn, $sys_dbname");
+	if (!mysqli_select_db($gfconn, $sys_dbname)) {
 		db_log_dbexit('mysqli_select_db',false);
-		$err = mysqli_error($conn);
+		$err = mysqli_error($gfconn);
 		if ($err) {
 			db_log('DB Error = '.$err);
 		}
@@ -102,10 +102,10 @@ function db_mquery($qstring) {
 	}
 	db_log_dbexit('mysqli_select_db', true);
 
-	db_log_dbentry('mysqli_multi_query',"$conn, $qstring");
-	if (!mysqli_multi_query($conn, $qstring)) {
+	db_log_dbentry('mysqli_multi_query',"$gfconn, $qstring");
+	if (!mysqli_multi_query($gfconn, $qstring)) {
 		db_log_dbexit('mysqli_multi_query','false');
-		$err = mysqli_error($conn);
+		$err = mysqli_error($gfconn);
 		if ($err) {
 			db_log('DB Error = '.$err);
 		}
@@ -114,13 +114,13 @@ function db_mquery($qstring) {
 	}
 	db_log_dbexit('mysqli_multi_query',true);
 
-	db_log_dbentry('mysqli_store_result',"$conn");
-	if ($res = mysqli_store_result($conn)) {
+	db_log_dbentry('mysqli_store_result',"$gfconn");
+	if ($res = mysqli_store_result($gfconn)) {
 		db_log_dbexit('mysqli_store_result',"$res");
 		db_log_exit('db_mquery',"$res");
 		return $res;
 	} else {
-		$err = mysqli_error($conn);
+		$err = mysqli_error($gfconn);
 		if ($err) {
 			db_log('DB Error = '.$err);
 		}
@@ -138,27 +138,27 @@ function db_mquery($qstring) {
  *  @param		int		Of matching rows, return only rows starting here
  */
 function db_next_result() {
-	global $conn;
+	global $gfconn;
 
 	db_log_entry('db_next_result',NULL);
 
-	db_log_dbentry('mysqli_next_result',"$conn");
-	$ret = mysqli_next_result($conn);
+	db_log_dbentry('mysqli_next_result',"$gfconn");
+	$ret = mysqli_next_result($gfconn);
 	db_log_dbexit('mysqli_next_result',"$ret");
-	$err = mysqli_error($conn);
+	$err = mysqli_error($gfconn);
 	if ($err) {
 		db_log('DB Error = '.$err);
 	}
 
 	if ($ret) {
-		db_log_dbentry('mysqli_store_result',"$conn");
-		$res = mysqli_store_result($conn);
+		db_log_dbentry('mysqli_store_result',"$gfconn");
+		$res = mysqli_store_result($gfconn);
 		db_log_dbexit('mysqli_store_result',"$res");
 		if (!$res) {
 			$res = 1;
 		}
 	} else {
-		$err = mysqli_error($conn);
+		$err = mysqli_error($gfconn);
 		if ($err) {
 			db_log('DB Error = '.$err);
 		}
@@ -291,9 +291,9 @@ function db_fieldname($lhandle,$fnumber) {
  *  @param		string	Query result set handle
  */
 function db_affected_rows() {
-	global $conn;
+	global $gfconn;
 
-	return mysqli_affected_rows($conn);
+	return mysqli_affected_rows($gfconn);
 }
 
 /**
@@ -317,18 +317,18 @@ function db_fetch_array($qhandle) {
  *  @param		string	Is the field name of the primary key
  */
 function db_insertid($qhandle,$table_name,$pkey_field_name) {
-	global $conn;
+	global $gfconn;
 
-	return mysqli_insert_id($conn);
+	return mysqli_insert_id($gfconn);
 }
 
 /**
  *  db_error() - Returns the last error from the database
  */
 function db_error() {
-	global $conn;
+	global $gfconn;
 
-	return mysqli_error($conn);
+	return mysqli_error($gfconn);
 }
 
 /**

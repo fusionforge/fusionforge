@@ -126,23 +126,23 @@ class SearchManager {
 		// Global search engine
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_SOFTWARE,
-			new SearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectHtmlSearchRenderer', _('Software/Group'))
+			new GFSearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectHtmlSearchRenderer', _('Software/Group'))
 		);
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_PEOPLE,
-			new SearchEngine(SEARCH__TYPE_IS_PEOPLE, 'PeopleHtmlSearchRenderer', _('People'))
+			new GFSearchEngine(SEARCH__TYPE_IS_PEOPLE, 'PeopleHtmlSearchRenderer', _('People'))
 		);
 		if ($GLOBALS['sys_use_people']) {
 			$this->addSearchEngine(
 				SEARCH__TYPE_IS_SKILL,
-				new SearchEngine(SEARCH__TYPE_IS_SKILL, 'SkillHtmlSearchRenderer', _('Skill'))
+				new GFSearchEngine(SEARCH__TYPE_IS_SKILL, 'SkillHtmlSearchRenderer', _('Skill'))
 			);
 		}
 		
 		// Rss search engines
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_SOFTWARE,
-			new SearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectRssSearchRenderer', _('Software/Group')),
+			new GFSearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectRssSearchRenderer', _('Software/Group')),
 			SEARCH__OUTPUT_RSS
 		);
 		

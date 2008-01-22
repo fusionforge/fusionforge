@@ -9,12 +9,12 @@
  * @version $Id$
  */
 
-class SearchEngine {
+class GFSearchEngine {
 	var $type;
 	var $rendererClassName;
 	var $label;
 	
-	function SearchEngine($type, $rendererClassName, $label) {
+	function GFSearchEngine($type, $rendererClassName, $label) {
 		$this->type = $type;
 		$this->rendererClassName = $rendererClassName;
 		$this->label = $label;

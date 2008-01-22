@@ -1,6 +1,6 @@
 <?php
 /**
- * User class
+ * GFUser class
  *
  * Sets up database results and preferences for a user and abstracts this info
  *
@@ -86,7 +86,7 @@ function &user_get_object($user_id,$res=false) {
 		if (!$res || db_numrows($res) < 1) {
 			$USER_OBJ["_".$user_id."_"]=false;
 		} else {
-			$USER_OBJ["_".$user_id."_"]= new User($user_id,$res);
+			$USER_OBJ["_".$user_id."_"]= new GFUser($user_id,$res);
 		}
 	}
 	return $USER_OBJ["_".$user_id."_"];
@@ -114,7 +114,7 @@ function &user_get_objects($id_arr) {
 		$sql="SELECT * FROM users WHERE user_id IN ('".implode($fetch,'\',\'') ."')";
 		$res=db_query($sql);
 		while ($arr =& db_fetch_array($res)) {
-			$USER_OBJ["_".$arr['user_id']."_"] = new User($arr['user_id'],$arr);
+			$USER_OBJ["_".$arr['user_id']."_"] = new GFUser($arr['user_id'],$arr);
 			$return[] =& $USER_OBJ["_".$arr['user_id']."_"];
 		}
 	}
@@ -127,7 +127,7 @@ function &user_get_objects_by_name($username_arr) {
 	return user_get_objects($arr);
 }
 
-class User extends Error {
+class GFUser extends Error {
 	/** 
 	 * Associative array of data from db.
 	 *
@@ -160,14 +160,14 @@ class User extends Error {
 	var $theme_id;
 
 	/**
-	 *	User($id,$res) - CONSTRUCTOR - GENERALLY DON'T USE THIS
+	 *	GFUser($id,$res) - CONSTRUCTOR - GENERALLY DON'T USE THIS
 	 *
 	 *	instead use the user_get_object() function call
 	 *
 	 *	@param	int		The user_id
 	 *	@param	int		The database result set OR array of data
 	 */
-	function User($id=false,$res=false) {
+	function GFUser($id=false,$res=false) {
 		$this->Error();
 		if (!$id) {
 			//setting up an empty object
@@ -425,7 +425,7 @@ Enjoy the site.
 	}
 
 	/**
-	 *	update() - update *common* properties of User object.
+	 *	update() - update *common* properties of GFUser object.
 	 *
 	 *	Use specific setter to change other properties.
 	 *
@@ -518,7 +518,7 @@ Enjoy the site.
 	function fetchData($user_id) {
 		$res=db_query("SELECT * FROM users WHERE user_id='$user_id'");
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError('User::fetchData()::'.db_error());
+			$this->setError('GFUser::fetchData()::'.db_error());
 			return false;
 		}
 		$this->data_array =& db_fetch_array($res);

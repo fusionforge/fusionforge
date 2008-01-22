@@ -24,7 +24,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-//$conn - database connection handle
+//$gfconn - database connection handle
 
 /**
  * Current row for each result set
@@ -66,35 +66,35 @@ function pg_connectstring($dbname, $user, $password = "", $host = "", $port = ""
 /**
  *  db_connect() - Connect to the database
  *  Notice the global vars that must be set up
- *  Sets up a global $conn variable which is used 
+ *  Sets up a global $gfconn variable which is used 
  *  in other functions in this library.
  */
 function db_connect() {
-	global $sys_dbhost,$sys_dbuser,$sys_dbpasswd,$conn,
+	global $sys_dbhost,$sys_dbuser,$sys_dbpasswd,$gfconn,
 		$sys_dbname,$sys_db_use_replication,$sys_dbport,$sys_dbreaddb,$sys_dbreadhost;
 
 	//
 	//	Connect to primary database
 	//
-	$conn = @pg_pconnect(pg_connectstring($sys_dbname, $sys_dbuser, $sys_dbpasswd, $sys_dbhost, $sys_dbport));
+	$gfconn = @pg_pconnect(pg_connectstring($sys_dbname, $sys_dbuser, $sys_dbpasswd, $sys_dbhost, $sys_dbport));
 
 	//
 	//	If any replication is configured, connect
 	//
 	if ($sys_db_use_replication) {
-		$conn2 = @pg_pconnect(pg_connectstring($sys_dbreaddb, $sys_dbuser, $sys_dbpasswd, $sys_dbreadhost, $sys_dbreadport));
+		$gfconn2 = @pg_pconnect(pg_connectstring($sys_dbreaddb, $sys_dbuser, $sys_dbpasswd, $sys_dbreadhost, $sys_dbreadport));
 	} else {
-		$conn2 = $conn;
+		$gfconn2 = $gfconn;
 	}
 
 	//
 	//	Now map the physical database connections to the
 	//	"virtual" list that is used to distribute load in db_query()
 	//
-	define('SYS_DB_PRIMARY', $conn);
-	define('SYS_DB_STATS', $conn2);
-	define('SYS_DB_TROVE', $conn2);
-	define('SYS_DB_SEARCH', $conn2);
+	define('SYS_DB_PRIMARY', $gfconn);
+	define('SYS_DB_STATS', $gfconn2);
+	define('SYS_DB_TROVE', $gfconn2);
+	define('SYS_DB_SEARCH', $gfconn2);
 
 	// Register top-level "finally" handler to abort current
 	// transaction in case of error

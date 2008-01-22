@@ -75,14 +75,6 @@ install: build
 	chmod 755 $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/*/sbin/*
 	chmod 755 $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/*/bin/*
 	rm -f $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/*/COPYING
-	# mediawiki plugin
-	cp -r $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/mediawiki/usr $(CURDIR)/debian/gforge-plugins-extra/
-	rm -rf $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/mediawiki/usr
-	mv $(CURDIR)/debian/gforge-plugins-extra/usr/share/mediawiki1.7/LocalLdapSettings.php \
-	$(CURDIR)/debian/gforge-plugins-extra/usr/share/mediawiki1.7/LocalLdapSettings.php.example
-	mv $(CURDIR)/debian/gforge-plugins-extra/usr/share/mediawiki1.7/LocalSettings.php \
-	$(CURDIR)/debian/gforge-plugins-extra/usr/share/mediawiki1.7/LocalSettings.php.gforge_example
-	mv $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/mediawiki/README $(CURDIR)/debian/gforge-plugins-extra/usr/share/doc/gforge-plugins-extra/README.mediawiki
 	# cvstracker plugin
 	chmod +x $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/svntracker/postcommit.example
 	# webcalendar plugin
@@ -118,6 +110,13 @@ install: build
 	rm -f $(CURDIR)/debian/gforge-plugin-scmsvn/usr/share/gforge/plugins/scmsvn/cronjobs/README
 	find $(CURDIR)/debian/gforge-plugin-scmsvn/usr/share/gforge/plugins/scmsvn/cronjobs/ -type f | xargs chmod 0755
 	cp -r plugins/scmsvn/etc/plugins/scmsvn/* $(CURDIR)/debian/gforge-plugin-scmsvn/etc/gforge/plugins/scmsvn/
+
+	# gforge-plugin-mediawiki
+	cp -r plugins/mediawiki/common/* $(CURDIR)/debian/gforge-plugin-mediawiki/usr/share/gforge/plugins/mediawiki/common/
+	cp -r plugins/mediawiki/www/* $(CURDIR)/debian/gforge-plugin-mediawiki/usr/share/gforge/www/plugins/mediawiki/
+	cp -r plugins/mediawiki/mediawiki-skin/* $(CURDIR)/debian/gforge-plugin-mediawiki/usr/share/mediawiki1.10/skins/
+	cp -r plugins/mediawiki/etc/httpd.d/* $(CURDIR)/debian/gforge-plugin-mediawiki/usr/share/gforge/etc/httpd.d/
+	ln -s /usr/share/mediawiki1.10/skins/gforge/loader.php $(CURDIR)/debian/gforge-plugin-mediawiki/etc/mediawiki-extensions/extensions-available/GforgeAuth.php
 
 	# gforge-common
 	install -m 644 etc/httpd.d/[0-9][0-9]*            $(CURDIR)/debian/gforge-common/usr/share/gforge/etc/httpd.d/
@@ -279,6 +278,8 @@ install: build
 
 	# Remove potential SCM artefacts from binary packages
 	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -name .svn -or -name {arch} -or -name .arch-ids -or -name .bzr | xargs rm -rf ; done
+	# Also remove uuencoded files
+	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -name \*.uu | xargs echo rm ; done
 
 binary-indep: build install
 	dh_testdir

@@ -1849,7 +1849,7 @@ class Group extends Error {
 				INNER JOIN user_group ON users.user_id=user_group.user_id
 				WHERE user_group.group_id='".$this->getID()."'");
 			while ($arr =& db_fetch_array($res)) {
-				$this->membersArr[] =& new User($arr['user_id'],$arr);
+				$this->membersArr[] =& new GFUser($arr['user_id'],$arr);
 			}
 		}
 		return $this->membersArr;

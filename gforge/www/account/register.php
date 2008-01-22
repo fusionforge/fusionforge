@@ -69,7 +69,7 @@ if (getStringFromRequest('submit')) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit();
 	}	
-	$new_user = new User();
+	$new_user = new GFUser();
 	$register = $new_user->create($unix_name,$firstname,$lastname,$password1,$password2,
 		$email,$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,'',
 		$address,$address2,$phone,$fax,$title,$ccode);

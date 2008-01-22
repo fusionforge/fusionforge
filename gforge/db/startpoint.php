@@ -17,7 +17,7 @@ require_once('common/include/database.php');
 
 db_connect();
 
-if (!$conn) {
+if (!$gfconn) {
 	print "$sys_name Could Not Connect to Database: ".db_error();
 	exit;
 }

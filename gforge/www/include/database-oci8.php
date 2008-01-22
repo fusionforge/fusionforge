@@ -26,13 +26,13 @@ $sys_db_oci_commit_mode='OCI_COMMIT_ON_SUCCESS';
  *  db_connect() - Connect to the database
  *
  *  Notice the global vars that must be set up
- *  Sets up a global $conn variable which is used 
+ *  Sets up a global $gfconn variable which is used 
  *  in other functions in this library
  */
 function db_connect() {
-	global $sys_dbhost,$sys_dbuser,$sys_dbpasswd,$conn,$sys_dbname;
-	$conn = @ocilogon($sys_dbuser,$sys_dbpasswd,$sys_dbname);
-	#return $conn;
+	global $sys_dbhost,$sys_dbuser,$sys_dbpasswd,$gfconn,$sys_dbname;
+	$gfconn = @ocilogon($sys_dbuser,$sys_dbpasswd,$sys_dbname);
+	#return $gfconn;
 }
 
 /**
@@ -50,7 +50,7 @@ function db_query($qstring,$limit='-1',$offset=0) {
 	global $QUERY_COUNT,$sys_db_results,$sys_db_row_pointer,$sys_db_oci_commit_mode;
 	$QUERY_COUNT++;
 
-	$stmt=@ociparse($conn,$qstring);
+	$stmt=@ociparse($gfconn,$qstring);
 	if (!$stmt) {
 		return 0;
 	} else {
@@ -112,18 +112,18 @@ function db_begin() {
  * db_commit() - Commit a transaction
  */
 function db_commit() {
-	global $sys_db_oci_commit_mode,$conn;
+	global $sys_db_oci_commit_mode,$gfconn;
 	$sys_db_oci_commit_mode='OCI_COMMIT_ON_SUCCESS';
-	return ocicommit($conn);
+	return ocicommit($gfconn);
 }
 
 /**
  * db_rollback() - Rollback a transaction
  */
 function db_rollback() {
-	global $sys_db_oci_commit_mode,$conn;
+	global $sys_db_oci_commit_mode,$gfconn;
 	$sys_db_oci_commit_mode='OCI_COMMIT_ON_SUCCESS';
-	return ocirollback($conn);
+	return ocirollback($gfconn);
 }
 
 /**
@@ -240,8 +240,8 @@ function db_insertid($qhandle,$table_name,$pkey_field_name) {
  *  db_error() - Returns the last error from the database
  */
 function db_error() {
-	global $conn;
-	$err= @ocierror($conn);
+	global $gfconn;
+	$err= @ocierror($gfconn);
 	if ($err) {
 		return $err['message'];
 	} else {

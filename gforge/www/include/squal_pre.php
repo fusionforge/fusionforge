@@ -55,7 +55,7 @@ $SYS=new $sys_account_manager_type();
 
 db_connect();
 
-if (!$conn) {
+if (!$gfconn) {
 	exit_error("Could Not Connect to Database",db_error());
 }
 

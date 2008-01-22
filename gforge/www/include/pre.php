@@ -87,7 +87,7 @@ require_once('common/include/forms.php');
 
 db_connect();
 
-if (!$GLOBALS['conn']) {
+if (!$GLOBALS['gfconn']) {
 	print "$sys_name Could Not Connect to Database: ".db_error();
 	exit;
 }
@@ -166,7 +166,7 @@ setup_gettext_from_browser() ;
 
 RESERVED VARIABLES
 
-$conn
+$gfconn
 $session_hash
 $LUSER - Logged in user object
 $HTML

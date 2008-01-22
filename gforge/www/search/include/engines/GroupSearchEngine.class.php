@@ -11,11 +11,11 @@
 
 require_once('www/search/include/engines/SearchEngine.class.php');
 
-class GroupSearchEngine extends SearchEngine {
+class GroupSearchEngine extends GFSearchEngine {
 	var $Group;
 	
 	function GroupSearchEngine($type, $rendererClassName, $label) {
-		$this->SearchEngine($type, $rendererClassName, $label);
+		$this->GFSearchEngine($type, $rendererClassName, $label);
 	}
 	
 	function isAvailable($parameters) {
