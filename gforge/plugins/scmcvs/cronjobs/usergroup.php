@@ -75,23 +75,8 @@ $unmanaged_lines_shadow = array();
 $unmanaged_lines_group = array();
 
 // user description is something like "MyGForge user"
-$user_description = preg_replace('/[^[:alnum:] _-]/', '', $sys_name);
-$user_description .= " user";
-
-/*
-for ($i=0; $i < count($gforge_users); $i++) {
-	$username = $gforge_users[$i];
-	$user_unix_uid = $user_unix_uids[$i];
-	$user_unix_gid = $user_unix_gids[$i];
-	$shell = DEFAULT_SHELL;
-	$unix_passwd = $user_pws[$i];
-	
-	$line_passwd =	$username.":x:".$user_unix_uid.":".$user_unix_gid.":".
-					$user_description.":/home/".$username.":".$shell;
-	$line_shadow = $username.":".$unix_passwd.":12090:0:99999:7:::";
-	
-}
-*/
+//$user_description = preg_replace('/[^[:alnum:] _-]/', '', $sys_name);
+$user_description = " GForge User";
 
 /*************************************************************************
  * Step 1: Process /etc/passwd
@@ -99,6 +84,10 @@ for ($i=0; $i < count($gforge_users); $i++) {
 
 // Read the passwd file line by line
 $passwd_orig = file("/etc/passwd", "r");
+if (count($passwd_orig) < 1) {
+	echo "Exit - could not read original file contents";
+	exit;
+}
 for ($i=0; $i < count($passwd_orig); $i++) {
 	$line = trim($passwd_orig[$i]);
 
@@ -160,6 +149,10 @@ $passwd_contents .= "\n#GFORGEEND\n";
 
 // Read the shadow file line by line
 $shadow_orig = file("/etc/shadow", "r");
+if (count($shadow_orig) < 1) {
+	echo "Exit - could not read original file contents";
+	exit;
+}
 for ($i=0; $i < count($shadow_orig); $i++) {
 	$line = trim($shadow_orig[$i]);
 
@@ -211,6 +204,10 @@ $shadow_contents .= "\n#GFORGEEND\n";
  * Step 3: Parse /etc/group
  *************************************************************************/
 $group_orig = file("/etc/group");
+if (count($group_orig) < 1) {
+	echo "Exit - could not read original file contents";
+	exit;
+}
 
 //	Add the groups from the gforge database
 $group_res = db_query("SELECT group_id, unix_group_name, (is_public=1 AND enable_anonscm=1 AND type_id=1) AS enable_pserver FROM groups WHERE status='A' AND type_id='1'");
@@ -219,8 +216,8 @@ $err .= db_error();
 $gforge_groups = array();
 for($i = 0; $i < db_numrows($group_res); $i++) {
 	$group_name = db_result($group_res,$i,'unix_group_name');
-    $gforge_groups[] = $group_name;
-    $gids[$group_name] = db_result($group_res,$i,'group_id') + 50000;	// 50000: hardcoded value (for now).
+	$gforge_groups[] = $group_name;
+	$gids[$group_name] = db_result($group_res,$i,'group_id') + 50000;	// 50000: hardcoded value (for now).
 }
 
 for ($i=0; $i < count($group_orig); $i++) {
