@@ -135,7 +135,7 @@ if ($sys_use_tracker) {
 	}
 }
 
-if ($sys_use_mail && file_exists("/tmp/mailman-aliases")) {
+if ($sys_use_mail && file_exists("/var/lib/gforge/dumps/mailman-aliases")) {
 	//
 	//	Read in the mailman aliases
 	//
