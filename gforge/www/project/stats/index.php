@@ -17,6 +17,13 @@ if ( !$group_id ) {
 	exit_no_group();
 }
 
+$group =& group_get_object($group_id);
+if (!$group || !is_object($group)) {
+	exit_error('Error','Could Not Get Group');
+} elseif ($group->isError()) {
+	exit_error('Error',$group->getErrorMessage());
+}
+
 $report=new Report();
 if ($report->isError()) {
     exit_error($report->getErrorMessage());
@@ -32,7 +39,7 @@ if (!$start) {
 	$start = $z[count($z)-1];
 }
 
-site_project_header(array('title'=>_('Project Activity').' '.$groupname,'group'=>$group_id,'toptab'=>'home'));
+site_project_header(array('title'=>_('Project Activity').' '.$group->getPublicName(),'group'=>$group_id,'toptab'=>'home'));
 
 if ($area && !is_numeric($area)) { $area = 1; }
 if ($SPAN && !is_numeric($SPAN)) { $SPAN = 1; }
