@@ -215,6 +215,8 @@ class Theme extends Layout {
 			$guide .= $user_guide['people'];
 		} elseif (isset($params['toptab']) && isset($user_guide[ $params['toptab'] ])) {
 			$guide .= $user_guide[ $params['toptab'] ];
+		} else {
+			$guide .= 'index.html';
 		}
 		?>
 		| 
