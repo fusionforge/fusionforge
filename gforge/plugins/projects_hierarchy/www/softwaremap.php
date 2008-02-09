@@ -351,6 +351,7 @@ else {
 			// construction du tableau associatif
 			// key = name of the father
 			// value = list of sons
+			$tree = array();
 			while ($row = db_fetch_array($res)) {
 				//$tree[$row['father_name']][] = $row['son_name'];
 				$tree[$row['father_id']][] = $row['son_id'];
@@ -398,7 +399,7 @@ else {
 				reset($arbre);
 				//construction automatique de l'arbre format : (num_fils, num_pere,nom,nom_unix)
 				while (list($key2, $sons2) = each($arbre)) {
-				print "d.add(".$key2.",".$sons2.",'".$project_name[$key2][0]."','".$GLOBALS['sys_urlprefix']."/projects/".$project_name[$key2][1]."');\n";
+				print "d.add(".$key2.",".$sons2.",'".$project_name[$key2][0]."','".$GLOBALS['sys_urlprefix']."/projects/".$project_name[$key2][1]."/');\n";
 				}
 				?>
 		

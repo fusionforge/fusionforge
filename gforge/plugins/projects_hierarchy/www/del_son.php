@@ -26,20 +26,24 @@
  */
 
 require_once('pre.php');
+
+$group_id = getIntFromRequest('group_id');
+$sub_group_id = getIntFromRequest('sub_group_id');
+
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
+
 //plugin webcal
-$params[0] =  $_GET['sub_group_id'] ;
-$params[1] =  $_GET['group_id'] ;
+$params[0] = $sub_group_id;
+$params[1] = $group_id ;
+
 plugin_hook('del_cal_link_father',$params);
+
 //del link between two projects
-$sql = "DELETE FROM plugin_projects_hierarchy WHERE project_id  = '".$_GET['group_id']."' AND sub_project_id = '".$_GET['sub_group_id']."'";
+$sql = "DELETE FROM plugin_projects_hierarchy WHERE project_id  = '".$group_id."' AND sub_project_id = '".$sub_group_id."'";
 //print "<br>".$sql;
 db_begin();
-$test = db_query($sql) or die(db_error());
+db_query($sql) or die(db_error());
 db_commit();
 
+header("Location: ".$GLOBALS['sys_urlprefix']."/project/admin/index.php?group_id=$group_id");
 ?>
-<script>
-//back to the administration (father)
-window.location.href = "/project/admin/index.php?group_id=<?php print $_GET['group_id'] ?>";
-</script>

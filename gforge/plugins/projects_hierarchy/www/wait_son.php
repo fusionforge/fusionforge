@@ -26,20 +26,23 @@
  */
 
 require_once('pre.php');
+
+$group_id = getIntFromRequest('group_id');
+$sub_group_id = getIntFromRequest('sub_group_id');
+
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 //update the link when the son allow the father
-$sql = "UPDATE plugin_projects_hierarchy SET activated = true WHERE project_id  = '".$_GET['group_id']."' AND sub_project_id = '".$_GET['sub_group_id']."'";
+$sql = "UPDATE plugin_projects_hierarchy SET activated = true WHERE project_id  = '".$group_id."' AND sub_project_id = '".$sub_group_id."'";
 //print "<br>".$sql;
 db_begin();
-$test = db_query($sql) or die(db_error());
+db_query($sql) or die(db_error());
 db_commit();
+
 //plugin webcal
-$params[0] =  $_GET['sub_group_id'] ;
-$params[1] =  $_GET['group_id'] ;
+$params[0] =  $sub_group_id;
+$params[1] =  $group_id;
+
 plugin_hook('add_cal_link_father',$params);
 
+header("Location: ".$GLOBALS['sys_urlprefix']."/project/admin/index.php?group_id=$sub_group_id");
 ?>
-<script>
-//back to the administration (son) 
-window.location.href = "/project/admin/index.php?group_id=<?php print $_GET['sub_group_id'] ?>";
-</script>

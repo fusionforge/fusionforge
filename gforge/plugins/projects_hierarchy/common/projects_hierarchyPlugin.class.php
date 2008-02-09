@@ -26,7 +26,7 @@ class projects_hierarchyPlugin extends Plugin {
 		$this->Plugin() ;
 		$this->name = "projects_hierarchy" ;
 		$this->text = "projects_hierarchy!" ; // To show in the tabs, use...
-		$this->hooks[] = "user_personal_links";//to make a link to the user´s personal part of the plugin
+		$this->hooks[] = "user_personal_links";//to make a link to the user's personal part of the plugin
 		$this->hooks[] = "usermenu" ;
 		$this->hooks[] = "groupmenu" ;	// To put into the project tabs
 		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
@@ -45,7 +45,7 @@ class projects_hierarchyPlugin extends Plugin {
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
 			if ($G_SESSION->usesPlugin("projects_hierarchy")) {
-				$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we´re calling is the user one
+				$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we're calling is the user one
 				echo ' | ' . $HTML->PrintSubMenu (array ($text),
 						  array ('/plugins/projects_hierarchy/index.php' . $param ));				
 			}
@@ -63,7 +63,7 @@ class projects_hierarchyPlugin extends Plugin {
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
-				$params['DIRS'][]='/plugins/projects_hierarchy/index.php?type=group&id=' . $group_id . "&pluginname=" . $this->name; // we indicate the part we´re calling is the project one
+				$params['DIRS'][]='/plugins/projects_hierarchy/index.php?type=group&id=' . $group_id . "&pluginname=" . $this->name; // we indicate the part we're calling is the project one
 			} else {
 				//$params['TITLES'][]=$this->text." is [Off]";
 			}	
@@ -103,7 +103,7 @@ class projects_hierarchyPlugin extends Plugin {
 			echo "</td>";
 			echo "</tr>";
 		} elseif ($hookname == "user_personal_links") {
-			// this displays the link in the user´s profile page to it´s personal projects_hierarchy (if you want other sto access it, youll have to change the permissions in the index.php
+			// this displays the link in the user's profile page to it's personal projects_hierarchy (if you want other sto access it, youll have to change the permissions in the index.php
 			$userid = $params['user_id'];
 			$user = user_get_object($userid);
 			$text = $params['text'];
@@ -113,7 +113,7 @@ class projects_hierarchyPlugin extends Plugin {
 					<a href="/plugins/projects_hierarchy/index.php?id=' . $userid . '&type=user&pluginname=' . $this->name . '">' . _('View Personal projects_hierarchy') .'</a></p>';
 			}
 		} elseif ($hookname == "project_admin_plugins") {
-			// this displays the link in the project admin options page to it´s  projects_hierarchy administration
+			// this displays the link in the project admin options page to it's  projects_hierarchy administration
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
@@ -135,7 +135,7 @@ class projects_hierarchyPlugin extends Plugin {
 			$res = db_query($query);
 			echo db_error();
 			while ($row = db_fetch_array($res)) {
-				echo '<img src="'.$GLOBALS['sys_urlprefix'].'/themes/gforge/images/ic/forum20g.png" border="0">&nbsp;'._('Parent project').': <a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.$row['unix_group_name'].'">' . $row['group_name'] . '</a><br/>';
+				echo html_image('ic/forum20g.png','20','20',array('alt'=>_('Link'))).'&nbsp;'._('Parent project').': <a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.$row['unix_group_name'].'/">' . $row['group_name'] . '</a><br/>';
 				$cpt_project ++;
 			}
 			
@@ -148,7 +148,7 @@ class projects_hierarchyPlugin extends Plugin {
 			$res = db_query($query);
 			echo db_error();
 			while ($row = db_fetch_array($res)) {
-				echo '<img src="'.$GLOBALS['sys_urlprefix'].'/themes/gforge/images/ic/forum20g.png" border="0">&nbsp;'._('Child project').' : <a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.$row['unix_group_name'].'">' . $row['group_name'] . '</a> : '.$row['com'].'<br/>';
+				echo html_image('ic/forum20g.png','20','20',array('alt'=>_('Link'))).'&nbsp;'._('Child project').' : <a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.$row['unix_group_name'].'/">' . $row['group_name'] . '</a> : '.$row['com'].'<br/>';
 				$cpt_project ++;
 			}
 			
@@ -163,7 +163,7 @@ class projects_hierarchyPlugin extends Plugin {
 			$res = db_query($query);
 			echo db_error();
 			while ($row = db_fetch_array($res)) {
-				echo "<img src=\"themes/gforge/images/ic/forum20g.png\" border=\"0\">&nbsp;"._('Links')." : <a href=\"/projects/".$row['unix_group_name']."\">" . $row['group_name'] . "</a> :  ".$row['com']."<br/>";
+				echo html_image('ic/forum20g.png','20','20',array('alt'=>_('Link'))).'&nbsp;'._('Links')." : <a href=\"".$GLOBALS['sys_urlprefix']."/projects/".$row['unix_group_name']."/\">" . $row['group_name'] . "</a> :  ".$row['com']."<br/>";
 				$cpt_project ++;
 			}
 			// links if project is son
@@ -171,7 +171,7 @@ class projects_hierarchyPlugin extends Plugin {
 			$res = db_query($query);
 			echo db_error();
 			while ($row = db_fetch_array($res)) {
-				echo "<img src=\"themes/gforge/images/ic/forum20g.png\" border=\"0\">&nbsp;"._('Links')." : <a href=\"/projects/".$row['unix_group_name']."\">" . $row['group_name'] . "</a><br/>";
+				echo html_image('ic/forum20g.png','20','20',array('alt'=>_('Link'))).'&nbsp;'._('Links')." : <a href=\"".$GLOBALS['sys_urlprefix']."/projects/".$row['unix_group_name']."/\">" . $row['group_name'] . "</a><br/>";
 				$cpt_project ++;
 			}
 			
@@ -223,7 +223,7 @@ class projects_hierarchyPlugin extends Plugin {
 			
 			$res_son=db_query($sql_son)or die(db_error());
 			if (!$res_son || db_numrows($res_son) < 1) {
-				
+				$cpt_son = 0;
 			}
 			else {
 				//display of sons
@@ -236,7 +236,7 @@ class projects_hierarchyPlugin extends Plugin {
 						echo '<tr>';
 						echo '<td>';
 						//link to the project
-						echo "<a href=\"../../projects/".$row_son['unix_group_name']."\">".$row_son['group_name']."</a>";
+						echo "<a href=\"../../projects/".$row_son['unix_group_name']."/\">".$row_son['group_name']."</a>";
 						echo '</td>'; 
 						
 						echo '<td>';
@@ -286,7 +286,7 @@ class projects_hierarchyPlugin extends Plugin {
 						echo '<tr>';
 						echo '<td>';
 						//link to the project
-						echo "<a href=\"../../projects/".$row_son['unix_group_name']."\">".$row_son['group_name']."</a>";
+						echo "<a href=\"../../projects/".$row_son['unix_group_name']."/\">".$row_son['group_name']."</a>";
 						echo '</td>'; 
 						
 						echo '<td>';
@@ -332,7 +332,7 @@ class projects_hierarchyPlugin extends Plugin {
 					while ($row_father = db_fetch_array($res_father)) {
 					echo '<tr>';
 					echo '<td>';
-					echo "<a href=\"../../projects/".$row_father['unix_group_name']."\">".$row_father['group_name']."</a>";
+					echo "<a href=\"../../projects/".$row_father['unix_group_name']."/\">".$row_father['group_name']."</a>";
 					echo '</td><td>';
 					echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to delete this link ?')."\")){window.location.href=\"../../plugins/projects_hierarchy/del_father.php?sub_group_id=".$group_id."&group_id=".$row_father['group_id']."\"}'}>"._('Delete')."</a></td>";
 					echo '</td></tr>';
@@ -359,13 +359,13 @@ class projects_hierarchyPlugin extends Plugin {
 					while ($row_wait = db_fetch_array($res_wait)) {
 					echo '<tr>';
 					echo '<td>';
-					echo "<a href=\"../../projects/".$row_wait[unix_group_name]."\">".$row_wait[group_name]."</a>";
+					echo "<a href=\"../../projects/".$row_wait['unix_group_name']."/\">".$row_wait['group_name']."</a>";
 					echo '</td>';
 					echo'<td>';
-					echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to authorize this project ?')."\")){window.location.href=\"../../plugins/projects_hierarchy/wait_son.php?sub_group_id=".$group_id."&group_id=".$row_wait[group_id]."\"}'}>"._('Do you really want to authorize this project ?')."</a></td>";
+					echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to authorize this project ?')."\")){window.location.href=\"../../plugins/projects_hierarchy/wait_son.php?sub_group_id=".$group_id."&group_id=".$row_wait['group_id']."\"}'}>"._('Do you really want to authorize this project ?')."</a></td>";
 					echo '</td><td>';
-					echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to delete this link ?')."\")){window.location.href=\"../../plugins/projects_hierarchy/del_father.php?sub_group_id=".$group_id."&group_id=".$row_wait[group_id]."\"}'}>"._('Delete')."</a></td>";
-					echo "</td><tr><td colspan='3'>"._('Commentary of father :')." <i>".$row_wait[com]."</i>";
+					echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to delete this link ?')."\")){window.location.href=\"../../plugins/projects_hierarchy/del_father.php?sub_group_id=".$group_id."&group_id=".$row_wait['group_id']."\"}'}>"._('Delete')."</a></td>";
+					echo "</td><tr><td colspan='3'>"._('Commentary of father :')." <i>".$row_wait['com']."</i>";
 					echo '</td></tr>';
 					}
 					echo '</table>';

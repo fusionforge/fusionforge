@@ -26,17 +26,18 @@
  */
 
 require_once('pre.php');
+
+$group_id = getIntFromRequest('group_id');
+$sub_project_id = getIntFromRequest('sub_project_id');
+$com = getStringFromRequest('com');
+
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 //add link between two projects
-$sql = "INSERT INTO plugin_projects_hierarchy (project_id ,sub_project_id,link_type,com) VALUES ('".$_GET['group_id']."' , '".$_POST['sub_project_id']."', 'navi','".$_POST['com']."')";
+$sql = "INSERT INTO plugin_projects_hierarchy (project_id ,sub_project_id,link_type,com) VALUES ('".$group_id."' , '".$sub_project_id."', 'navi','".$com."')";
 //print "<br>".$sql;
 db_begin();
-$test = db_query($sql) or die(db_error());
+db_query($sql) or die(db_error());
 db_commit();
 
-
+header("Location: ".$GLOBALS['sys_urlprefix']."/project/admin/index.php?group_id=$group_id");
 ?>
-<script>
-//back to the administration 
-window.location.href = "/project/admin/index.php?group_id=<?php print $_GET['group_id'] ?>";
-</script>

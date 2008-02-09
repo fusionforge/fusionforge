@@ -28,10 +28,10 @@
 	if (!$son) {
 		
 		$family = get_family($group_id);
+		$cond = '';
 		if($family != NULL){
 		
 		reset($family);
-			$cond = "";
 			while (list($key, $val) = each($family)) {		
 			$cond .= " AND group_id != ".$val." ";
 			}
