@@ -53,7 +53,7 @@ function performAction($newStatus, $statusString, $user_id) {
 			exit_error('Error',$u->getErrorMessage());
 		}	
 	}
-	echo "<h2>" .sprintf(_('User updated to %1$s status'), $GLOBALS['statusString'])."</h2>";
+	echo "<h2>" .sprintf(_('User updated to %1$s status'), $statusString)."</h2>";
 }
 
 function show_users_list ($result) {
@@ -150,10 +150,7 @@ if (!$group_id) {
 		$sql .= ' \''.$user_name_search.'%\' ORDER BY lastname';
 		$result = db_query($sql);
 	} else {
-		$sortorder = $_GET['sortorder'];
-		if (!isset($sortorder) || empty($sortorder)) {
-		  $sortorder = "user_name";
-		}
+		$sortorder = getStringFromRequest('sortorder', 'user_name');
 		$result = db_query("SELECT user_name,lastname,firstname,user_id,status,add_date FROM users ORDER BY ".$sortorder);
 	}
 	show_users_list ($result);
