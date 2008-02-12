@@ -284,7 +284,7 @@ class GFUser extends Error {
 			}
 		}
 		// if we got this far, it must be good
-		$confirm_hash = substr(md5($password1 . time()),0,16);
+		$confirm_hash = substr(md5($password1 . rand() . microtime()),0,16);
 		db_begin();
 		$sql="INSERT INTO users (user_name,user_pw,unix_pw,realname,firstname,lastname,email,add_date,
 			status,confirm_hash,mail_siteupdates,mail_va,language,timezone,jabber_address,jabber_only,
