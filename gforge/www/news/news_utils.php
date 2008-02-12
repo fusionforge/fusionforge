@@ -184,9 +184,9 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 			$return .= '<hr width="100%" size="1" />'."\n";
 		}
 		if ($group_id != $sys_news_group) {
-			$archive_url='/news/?group_id='.$group_id;
+			$archive_url=$GLOBALS['sys_urlprefix'].'/news/?group_id='.$group_id;
 		} else {
-			$archive_url='/news/';
+			$archive_url=$GLOBALS['sys_urlprefix'].'/news/';
 		}
 
 		if ($show_forum) {
