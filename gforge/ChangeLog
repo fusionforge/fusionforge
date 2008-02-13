@@ -1,3 +1,8 @@
+2008-02-13  Roland Mas  <lolando@debian.org>
+
+	* www/admin/unsubscribe.php: Fixed yet another undefined variable
+	warning.
+
 2008-01-19  Roland Mas  <lolando@debian.org>
 
 	* cronjobs/massmail.php: Added missing i18n on the mass mail cron
