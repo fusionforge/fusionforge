@@ -1,7 +1,8 @@
 2008-02-13  Roland Mas  <lolando@debian.org>
 
-	* www/admin/unsubscribe.php: Fixed yet another undefined variable
-	warning.
+	* common/include/Group.class.php: 
+	* www/admin/unsubscribe.php: Fixed yet another few undefined
+	variable warnings.
 
 2008-01-19  Roland Mas  <lolando@debian.org>
 

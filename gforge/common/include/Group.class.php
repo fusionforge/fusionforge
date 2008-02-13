@@ -1989,6 +1989,8 @@ class Group extends Error {
 		WHERE group_id=".$this->getID()." AND admin_flags='A'");
 		if (db_numrows($admin_group) > 0) {
 			$idadmin_group = db_result($admin_group,0,'user_id');
+		} else {
+			$idadmin_group = 1;
 		}
 		if (!$mlist->create('commits','Commits',1,$idadmin_group)) {
 			$this->setError(sprintf(_('ML: %s'),$mlist->getErrorMessage()));
