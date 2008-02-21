@@ -127,14 +127,15 @@ if ($usersearch) {
 
 if (getStringFromRequest('groupsearch')) {
 	$status = getStringFromRequest('status');
-	$is_public = getStringFromRequest('is_public');
+	$is_public = getIntFromRequest('is_public');
 	$crit_desc = getStringFromRequest('crit_desc');
+	$crit_sql = '';
 
 	if ($status) {
 		$crit_sql  .= " AND status='$status'";
 		$crit_desc .= " status=$status";
 	}
-	if ($is_public) {
+	if (isset($is_public)) {
 		$crit_sql  .= " AND is_public='$is_public'";
 		$crit_desc .= " is_public=$is_public";
 	}
@@ -160,8 +161,8 @@ if (getStringFromRequest('groupsearch')) {
 	if ($crit_desc) {
 		$crit_desc = "($crit_desc )";
 	}
-	print '<p><strong>' .sprintf(ngettext('Group search with criteria <em>%1$s</em>: %2$s match', 'Group search with criteria <em>%1$s</em>: %2$s matches', $search, db_numrows($result)), db_numrows($result)).'</strong></p>';
-
+	print '<p><strong>'.sprintf(ngettext('Group search with criteria <em>%s</em>: %d match', 'Group search with criteria <em>%s</em>: %d matches', db_numrows($result)), $crit_desc, db_numrows($result)).'</strong></p>';
+	
 	if (db_numrows($result) < 1) {
 		echo db_error();
 	} else {
@@ -175,6 +176,7 @@ if (getStringFromRequest('groupsearch')) {
 
 		echo $GLOBALS['HTML']->listTableTop($title);
 
+		$i = 0;
 		while ($row = db_fetch_array($result)) {
 
 			$extra_status = "";
