@@ -1,11 +1,11 @@
-gforge (4.6.99+svn6347+something-0) UNRELEASED; urgency=low
+gforge (4.6.99+svn6368-1) unstable; urgency=low
 
-  * Tracking upstream SVN.
+  * New SVN snapshot.
   * New binary package: gforge-plugin-mediawiki, to embed Mediawiki in
     Gforge (in an iframe, on a new optional project tab).  The related
     files have been removed from gforge-plugin-extras.
 
- -- Roland Mas <lolando@debian.org>  Tue, 22 Jan 2008 22:11:34 +0100
+ -- Roland Mas <lolando@debian.org>  Mon, 25 Feb 2008 20:13:21 +0100
 
 gforge (4.6.99+svn6347-1) unstable; urgency=high
 
