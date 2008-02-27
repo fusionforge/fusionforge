@@ -2298,7 +2298,7 @@ eval {
 		$sth3->finish () ;
 
 		$query3 = "UPDATE artifact_history SET old_value=?,field_name='Category'
-			   WHERE old_value=$cat_id AND field_name='category_id'" ;
+			   WHERE old_value='$cat_id' AND field_name='category_id'" ;
 		# &debug ($query3) ;
 		$sth3 =$dbh->prepare ($query3) ;
 		$sth3->execute ($catname) ;
@@ -2356,7 +2356,7 @@ eval {
 		$sth3->finish () ;
 
 		$query3 = "UPDATE artifact_history SET old_value=?,field_name='Group'
-			   WHERE old_value=$grp_id AND field_name='artifact_group_id'" ;
+			   WHERE old_value='$grp_id' AND field_name='artifact_group_id'" ;
 		# &debug ($query3) ;
 		$sth3 =$dbh->prepare ($query3) ;
 		$sth3->execute ($grpname) ;
@@ -2415,7 +2415,7 @@ eval {
 		    $sth3->finish () ;
 
 		    $query3 = "UPDATE artifact_history SET old_value=?,field_name='Resolution'
-			       WHERE old_value=$res_id AND field_name='resolution_id'" ;
+			       WHERE old_value='$res_id' AND field_name='resolution_id'" ;
 		    # &debug ($query3) ;
 		    $sth3 =$dbh->prepare ($query3) ;
 		    $sth3->execute ($resname) ;

@@ -1,3 +1,11 @@
+2008-02-27  Roland Mas  <lolando@debian.org>
+
+	* deb-specific/db-upgrade.pl: Fixed syntax for PostgreSQL 8.3's
+	stricter checking.
+
+	* deb-specific/sf-2.6-complete.sql: Fixed a foreign key constraint
+	for compatibility with PostgreSQL 8.3.
+
 2008-02-13  Roland Mas  <lolando@debian.org>
 
 	* common/include/Group.class.php: 
