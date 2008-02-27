@@ -5,8 +5,9 @@ gforge (4.6.99+svn6368+something-0) UNRELEASED; urgency=low
   * Bumped Standards-Version to 3.7.3 (no changes needed).
   * Removed .cvsignore files from packages.
   * Cleaned up empty directories in binary packages.
+  * Rephrased debian/copyright file.
 
- -- Roland Mas <lolando@debian.org>  Tue, 26 Feb 2008 21:35:04 +0100
+ -- Roland Mas <lolando@debian.org>  Tue, 26 Feb 2008 21:45:32 +0100
 
 gforge (4.6.99+svn6368-1) unstable; urgency=low
 
