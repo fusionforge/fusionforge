@@ -10,7 +10,7 @@ gforge (4.6.99+svn6368+something-0) UNRELEASED; urgency=low
     gforge-shell-postgresql.config.
   * Various fixes in debconf files, inspired by a lintian check.
 
- -- Roland Mas <lolando@debian.org>  Tue, 26 Feb 2008 22:02:10 +0100
+ -- Roland Mas <lolando@debian.org>  Tue, 26 Feb 2008 22:20:40 +0100
 
 gforge (4.6.99+svn6368-1) unstable; urgency=low
 
