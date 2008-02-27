@@ -1,6 +1,6 @@
-Alias /mediawiki /var/lib/mediawiki1.10
+Alias /mediawiki /var/lib/mediawiki
 
-<Directory /var/lib/mediawiki1.10/>
+<Directory /var/lib/mediawiki/>
 	Options +FollowSymLinks
 	AllowOverride All
 	order allow,deny
@@ -11,11 +11,11 @@ Alias /mediawiki /var/lib/mediawiki1.10
 </Directory>
 
 # some directories must be protected
-<Directory /var/lib/mediawiki1.10/config>
+<Directory /var/lib/mediawiki/config>
 	Options -FollowSymLinks
 	AllowOverride None
 </Directory>
-<Directory /var/lib/mediawiki1.10/upload>
+<Directory /var/lib/mediawiki/upload>
 	Options -FollowSymLinks
 	AllowOverride None
 </Directory>

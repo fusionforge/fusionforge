@@ -116,9 +116,9 @@ install: build
 	# gforge-plugin-mediawiki
 	cp -r plugins/mediawiki/common/* $(CURDIR)/debian/gforge-plugin-mediawiki/usr/share/gforge/plugins/mediawiki/common/
 	cp -r plugins/mediawiki/www/* $(CURDIR)/debian/gforge-plugin-mediawiki/usr/share/gforge/www/plugins/mediawiki/
-	cp -r plugins/mediawiki/mediawiki-skin/* $(CURDIR)/debian/gforge-plugin-mediawiki/usr/share/mediawiki1.10/skins/
+	cp -r plugins/mediawiki/mediawiki-skin/* $(CURDIR)/debian/gforge-plugin-mediawiki/usr/share/mediawiki/skins/
 	cp -r plugins/mediawiki/etc/httpd.d/* $(CURDIR)/debian/gforge-plugin-mediawiki/usr/share/gforge/etc/httpd.d/
-	ln -s /usr/share/mediawiki1.10/skins/gforge/loader.php $(CURDIR)/debian/gforge-plugin-mediawiki/etc/mediawiki-extensions/extensions-available/GforgeAuth.php
+	ln -s /usr/share/mediawiki/skins/gforge/loader.php $(CURDIR)/debian/gforge-plugin-mediawiki/etc/mediawiki-extensions/extensions-available/GforgeAuth.php
 
 	# gforge-common
 	install -m 644 etc/httpd.d/[0-9][0-9]*            $(CURDIR)/debian/gforge-common/usr/share/gforge/etc/httpd.d/
@@ -151,6 +151,7 @@ install: build
 
 	# gforge/debian/gforge-web-apache2
 	cp -r www $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/
+	rm $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/plugins/mediawiki
 	install -m 644 deb-specific/index_std.php $(CURDIR)/debian/gforge-web-apache2/etc/gforge/custom/
 	rm $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/index_std.php
 	find $(CURDIR)/debian/gforge-web-apache2 -name \*.uu -type f | xargs rm -f
