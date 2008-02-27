@@ -1,6 +1,6 @@
-gforge (4.6.99+svn6368+something-0) UNRELEASED; urgency=low
+gforge (4.6.99+svn6387-1) unstable; urgency=low
 
-  * Tracking upstream SVN.
+  * New SVN snapshot.
   * Adapted to mediawiki packaging no longer being in mediawiki1.X package
     and directory names.
   * Bumped Standards-Version to 3.7.3 (no changes needed).
@@ -14,7 +14,7 @@ gforge (4.6.99+svn6368+something-0) UNRELEASED; urgency=low
   * Updated to PostgreSQL 8.3 (while still retaining compatibility with
     8.2), with a few syntax fixes.
 
- -- Roland Mas <lolando@debian.org>  Wed, 27 Feb 2008 10:22:54 +0100
+ -- Roland Mas <lolando@debian.org>  Wed, 27 Feb 2008 10:23:40 +0100
 
 gforge (4.6.99+svn6368-1) unstable; urgency=low
 
