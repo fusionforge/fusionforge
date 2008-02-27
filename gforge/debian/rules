@@ -277,7 +277,7 @@ install: build
 	cp deb-specific/fckeditor/config.js $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/www/plugins/fckeditor/
 
 	# Remove potential SCM artefacts from binary packages
-	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -name .svn -or -name {arch} -or -name .arch-ids -or -name .bzr | xargs rm -rf ; done
+	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -name .svn -or -name {arch} -or -name .arch-ids -or -name .bzr -or -name .cvsignore | xargs rm -rf ; done
 	# Also remove uuencoded files
 	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -name \*.uu | xargs echo rm ; done
 
