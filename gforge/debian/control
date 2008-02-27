@@ -75,7 +75,7 @@ Description: transition package to gforge-web-apache2
 
 Package: gforge-db-postgresql
 Architecture: all
-Depends: gforge-common, postgresql-8.3 | postgresql, perl, libdbi-perl, libdbd-pg-perl, libmime-base64-perl, libhtml-parser-perl, libtext-autoformat-perl, libmail-sendmail-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, php5-cli
+Depends: gforge-common, postgresql-8.3 | postgresql-8.2 | postgresql, perl, libdbi-perl, libdbd-pg-perl, libmime-base64-perl, libhtml-parser-perl, libtext-autoformat-perl, libmail-sendmail-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, php5-cli
 Provides: gforge-db
 Conflicts: gforge-db
 Description: collaborative development tool - database (using PostgreSQL)

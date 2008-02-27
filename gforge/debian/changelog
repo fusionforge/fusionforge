@@ -11,9 +11,10 @@ gforge (4.6.99+svn6368+something-0) UNRELEASED; urgency=low
     gforge-shell-postgresql.config.
   * Various fixes in debconf files, inspired by a lintian check.
   * Removed lintian overrides, no longer needed.
-  * Updated to PostgreSQL 8.3, with a few syntax fixes.
+  * Updated to PostgreSQL 8.3 (while still retaining compatibility with
+    8.2), with a few syntax fixes.
 
- -- Roland Mas <lolando@debian.org>  Wed, 27 Feb 2008 09:46:51 +0100
+ -- Roland Mas <lolando@debian.org>  Wed, 27 Feb 2008 10:22:54 +0100
 
 gforge (4.6.99+svn6368-1) unstable; urgency=low
 
