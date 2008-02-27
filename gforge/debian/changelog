@@ -9,8 +9,9 @@ gforge (4.6.99+svn6368+something-0) UNRELEASED; urgency=low
   * Removed useless gforge-ftp-proftpd.templates and
     gforge-shell-postgresql.config.
   * Various fixes in debconf files, inspired by a lintian check.
+  * Removed lintian overrides, no longer needed.
 
- -- Roland Mas <lolando@debian.org>  Tue, 26 Feb 2008 22:20:40 +0100
+ -- Roland Mas <lolando@debian.org>  Tue, 26 Feb 2008 22:45:56 +0100
 
 gforge (4.6.99+svn6368-1) unstable; urgency=low
 

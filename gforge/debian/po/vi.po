@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gforge 4.6.99+svn6094-4\n"
 "Report-Msgid-Bugs-To: gforge@packages.debian.org\n"
-"POT-Creation-Date: 2008-02-26 22:14+0100\n"
+"POT-Creation-Date: 2008-02-26 22:50+0100\n"
 "PO-Revision-Date: 2007-12-23 11:06+0100\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -56,14 +56,8 @@ msgid "It should not be the same as the main GForge host."
 msgstr "Không nên trùng với máy chủ GForge chính."
 
 #. Type: string
-#. Default
-#: ../gforge-db-postgresql.templates.dsfh-in:8001
-msgid "admin"
-msgstr "quản trị"
-
-#. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:8002
+#: ../gforge-db-postgresql.templates.dsfh-in:8001
 msgid "GForge administrator login:"
 msgstr "Tên đăng nhập quản trị GForge:"
 
@@ -71,7 +65,7 @@ msgstr "Tên đăng nhập quản trị GForge:"
 #. Description
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:8002
+#: ../gforge-db-postgresql.templates.dsfh-in:8001
 #: ../gforge-db-postgresql.templates.dsfh-in:10001
 msgid ""
 "The GForge administrator account will have full privileges on the system. It "
@@ -82,7 +76,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:8002
+#: ../gforge-db-postgresql.templates.dsfh-in:8001
 msgid "Please choose the username for this account."
 msgstr "Hãy chọn tên người dùng cho tài khoản này."
 
@@ -583,3 +577,6 @@ msgstr "Sắc thái mặc định:"
 msgid ""
 "Please choose the default theme for web pages. This must be a valid name."
 msgstr "Hãy chọn sắc thái mặc định cho trang Web: nó phải là một tên hợp lệ."
+
+#~ msgid "admin"
+#~ msgstr "quản trị"

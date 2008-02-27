@@ -31,7 +31,7 @@ _Description: Download server:
 
 Template: gforge/shared/admin_login
 Type: string
-_Default: admin
+Default: admin
 _Description: GForge administrator login:
  The GForge administrator account will have full privileges on the
  system. It will be used to approve the creation of new projects.

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gforge\n"
 "Report-Msgid-Bugs-To: gforge@packages.debian.org\n"
-"POT-Creation-Date: 2008-02-26 22:14+0100\n"
+"POT-Creation-Date: 2008-02-26 22:50+0100\n"
 "PO-Revision-Date: 2007-12-23 11:05+0100\n"
 "Last-Translator: Esko Arajärvi <edu@iki.fi>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
@@ -51,14 +51,8 @@ msgid "It should not be the same as the main GForge host."
 msgstr "Tämän ei tulisi olla GForgen pääpalvelin."
 
 #. Type: string
-#. Default
-#: ../gforge-db-postgresql.templates.dsfh-in:8001
-msgid "admin"
-msgstr "admin"
-
-#. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:8002
+#: ../gforge-db-postgresql.templates.dsfh-in:8001
 msgid "GForge administrator login:"
 msgstr "GForgen ylläpitotunnus:"
 
@@ -66,7 +60,7 @@ msgstr "GForgen ylläpitotunnus:"
 #. Description
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:8002
+#: ../gforge-db-postgresql.templates.dsfh-in:8001
 #: ../gforge-db-postgresql.templates.dsfh-in:10001
 msgid ""
 "The GForge administrator account will have full privileges on the system. It "
@@ -77,7 +71,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:8002
+#: ../gforge-db-postgresql.templates.dsfh-in:8001
 msgid "Please choose the username for this account."
 msgstr "Valitse tämän tunnuksen nimi."
 
@@ -582,3 +576,6 @@ msgstr "Oletusteema:"
 msgid ""
 "Please choose the default theme for web pages. This must be a valid name."
 msgstr "Valitse verkkosivujen oletusteema. Tämän tulee olla käypä nimi."
+
+#~ msgid "admin"
+#~ msgstr "admin"

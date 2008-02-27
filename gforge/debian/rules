@@ -149,7 +149,6 @@ install: build
 	cp -r locales/* $(CURDIR)/debian/gforge-common/usr/share/locale/
 
 	# gforge/debian/gforge-web-apache2
-	install -m 644 $(CURDIR)/debian/gforge-web-apache2.overrides $(CURDIR)/debian/gforge-web-apache2/usr/share/lintian/overrides/gforge-web-apache2
 	cp -r www $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/
 	install -m 644 deb-specific/index_std.php $(CURDIR)/debian/gforge-web-apache2/etc/gforge/custom/
 	rm $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/index_std.php
@@ -189,7 +188,6 @@ install: build
 		$(CURDIR)/debian/gforge-common/usr/share/gforge/www/include
 
 	# gforge-db-postgresql
-	install -m 644 $(CURDIR)/debian/gforge-db-postgresql.overrides $(CURDIR)/debian/gforge-db-postgresql/usr/share/lintian/overrides/gforge-db-postgresql
 	install -m 644 deb-specific/sf-2.6-complete.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 	install -m 644 deb-specific/sf2.5-to-sf2.6.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 	#
@@ -258,7 +256,6 @@ install: build
 	install -m 644 deb-specific/sf-proftpd.conf $(CURDIR)/debian/gforge-ftp-proftpd/etc/gforge/
 
 	# gforge-dns-bind9
-	install -m 644 $(CURDIR)/debian/gforge-dns-bind9.overrides $(CURDIR)/debian/gforge-dns-bind9/usr/share/lintian/overrides/gforge-dns-bind9
 	install -m 755 deb-specific/install-dns.sh $(CURDIR)/debian/gforge-dns-bind9/usr/lib/gforge/bin/
 	install -m 644 deb-specific/dns.head.template $(CURDIR)/debian/gforge-dns-bind9/var/lib/gforge/bind/
 	install -m 644 deb-specific/dns.simple.template $(CURDIR)/debian/gforge-dns-bind9/var/lib/gforge/bind/

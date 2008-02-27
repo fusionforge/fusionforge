@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gforge 4.6.99+svn6094-4\n"
 "Report-Msgid-Bugs-To: gforge@packages.debian.org\n"
-"POT-Creation-Date: 2008-02-26 22:14+0100\n"
+"POT-Creation-Date: 2008-02-26 22:50+0100\n"
 "PO-Revision-Date: 2007-12-23 11:05+0100\n"
 "Last-Translator: Helge Kreutzmann <debian@helgefjell.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -58,14 +58,8 @@ msgstr ""
 "Dieser sollte nicht mit dem Namen des Haupt-GForge-Rechners übereinstimmen."
 
 #. Type: string
-#. Default
-#: ../gforge-db-postgresql.templates.dsfh-in:8001
-msgid "admin"
-msgstr "Administrator"
-
-#. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:8002
+#: ../gforge-db-postgresql.templates.dsfh-in:8001
 msgid "GForge administrator login:"
 msgstr "GForge-Administrator-Anmeldung:"
 
@@ -73,7 +67,7 @@ msgstr "GForge-Administrator-Anmeldung:"
 #. Description
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:8002
+#: ../gforge-db-postgresql.templates.dsfh-in:8001
 #: ../gforge-db-postgresql.templates.dsfh-in:10001
 msgid ""
 "The GForge administrator account will have full privileges on the system. It "
@@ -84,7 +78,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:8002
+#: ../gforge-db-postgresql.templates.dsfh-in:8001
 msgid "Please choose the username for this account."
 msgstr "Bitte wählen Sie den Benutzernamen für dieses Konto."
 
@@ -605,3 +599,6 @@ msgid ""
 msgstr ""
 "Bitte wählen Sie das Standard-Thema für Webseiten. Dies muss ein gültiger "
 "Namen sein."
+
+#~ msgid "admin"
+#~ msgstr "Administrator"

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gforge 3.1-31\n"
 "Report-Msgid-Bugs-To: gforge@packages.debian.org\n"
-"POT-Creation-Date: 2008-02-26 22:14+0100\n"
+"POT-Creation-Date: 2008-02-26 22:50+0100\n"
 "PO-Revision-Date: 2007-12-23 11:06+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -67,14 +67,8 @@ msgid "It should not be the same as the main GForge host."
 msgstr ""
 
 #. Type: string
-#. Default
-#: ../gforge-db-postgresql.templates.dsfh-in:8001
-msgid "admin"
-msgstr "admin"
-
-#. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:8002
+#: ../gforge-db-postgresql.templates.dsfh-in:8001
 #, fuzzy
 msgid "GForge administrator login:"
 msgstr "Gforge-administratörens användarnamn"
@@ -83,7 +77,7 @@ msgstr "Gforge-administratörens användarnamn"
 #. Description
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:8002
+#: ../gforge-db-postgresql.templates.dsfh-in:8001
 #: ../gforge-db-postgresql.templates.dsfh-in:10001
 #, fuzzy
 msgid ""
@@ -95,7 +89,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:8002
+#: ../gforge-db-postgresql.templates.dsfh-in:8001
 msgid "Please choose the username for this account."
 msgstr ""
 
@@ -635,3 +629,6 @@ msgid ""
 msgstr ""
 "Här är standardtemat för webbsidorna, var försiktig och ange ett giltigt "
 "namn."
+
+#~ msgid "admin"
+#~ msgstr "admin"
