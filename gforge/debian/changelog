@@ -1,8 +1,9 @@
 gforge (4.6.99+svn6368+something-0) UNRELEASED; urgency=low
 
   * Tracking upstream SVN.
+  * Fixed dependency on mediawiki.
 
- -- Roland Mas <lolando@debian.org>  Mon, 25 Feb 2008 20:25:20 +0100
+ -- Roland Mas <lolando@debian.org>  Tue, 26 Feb 2008 21:07:44 +0100
 
 gforge (4.6.99+svn6368-1) unstable; urgency=low
 

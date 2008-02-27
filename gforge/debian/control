@@ -223,6 +223,6 @@ Provides: gforge-plugin-scm
 
 Package: gforge-plugin-mediawiki
 Architecture: all
-Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, mediawiki1.10
+Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, mediawiki
 Description: Mediawiki plugin for GForge
  This plugin allows each project to embed Mediawiki under a tab.
