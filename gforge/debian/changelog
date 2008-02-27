@@ -1,3 +1,9 @@
+gforge (4.6.99+svn6387+something-0) UNRELEASED; urgency=low
+
+  * Tracking upstream SVN.
+
+ -- Roland Mas <lolando@debian.org>  Wed, 27 Feb 2008 10:54:27 +0100
+
 gforge (4.6.99+svn6387-1) unstable; urgency=low
 
   * New SVN snapshot.
