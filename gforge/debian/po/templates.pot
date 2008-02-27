@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: lolando@debian.org\n"
-"POT-Creation-Date: 2007-12-23 11:02+0100\n"
+"Report-Msgid-Bugs-To: gforge@packages.debian.org\n"
+"POT-Creation-Date: 2008-02-26 22:14+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -379,10 +379,7 @@ msgstr ""
 
 #. Type: select
 #. Choices
-#. Type: select
-#. DefaultChoice
 #: ../dsf-helper/web-variables.templates:2001
-#: ../dsf-helper/web-variables.templates:2002
 msgid "English"
 msgstr ""
 
@@ -522,6 +519,12 @@ msgstr ""
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Thai"
+msgstr ""
+
+#. Type: select
+#. DefaultChoice
+#: ../dsf-helper/web-variables.templates:2002
+msgid "English[ Default language]"
 msgstr ""
 
 #. Type: select

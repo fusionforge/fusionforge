@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gforge 4.6.99+svn6094-4\n"
-"Report-Msgid-Bugs-To: lolando@debian.org\n"
-"POT-Creation-Date: 2007-12-23 11:02+0100\n"
+"Report-Msgid-Bugs-To: gforge@packages.debian.org\n"
+"POT-Creation-Date: 2008-02-26 22:14+0100\n"
 "PO-Revision-Date: 2007-12-23 11:05+0100\n"
 "Last-Translator: Ricardo Silva <ardoric@gmail.com>\n"
 "Language-Team: Portuguese <traduz@debianpt.org>\n"
@@ -427,10 +427,7 @@ msgstr ""
 
 #. Type: select
 #. Choices
-#. Type: select
-#. DefaultChoice
 #: ../dsf-helper/web-variables.templates:2001
-#: ../dsf-helper/web-variables.templates:2002
 msgid "English"
 msgstr "Inglês"
 
@@ -571,6 +568,14 @@ msgstr "Sueco"
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Thai"
 msgstr "Tailandês"
+
+#. Type: select
+#. DefaultChoice
+#: ../dsf-helper/web-variables.templates:2002
+#, fuzzy
+#| msgid "Default language:"
+msgid "English[ Default language]"
+msgstr "Idioma por omissão:"
 
 #. Type: select
 #. Description

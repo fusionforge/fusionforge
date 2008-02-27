@@ -13,8 +13,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gforge 3.1-31\n"
-"Report-Msgid-Bugs-To: lolando@debian.org\n"
-"POT-Creation-Date: 2007-12-23 11:02+0100\n"
+"Report-Msgid-Bugs-To: gforge@packages.debian.org\n"
+"POT-Creation-Date: 2008-02-26 22:14+0100\n"
 "PO-Revision-Date: 2007-12-23 11:06+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -455,10 +455,7 @@ msgstr "Värdnamnet för servern som tillhandahåller dina skalkonton för Gforge"
 
 #. Type: select
 #. Choices
-#. Type: select
-#. DefaultChoice
 #: ../dsf-helper/web-variables.templates:2001
-#: ../dsf-helper/web-variables.templates:2002
 msgid "English"
 msgstr "Engelska"
 
@@ -600,6 +597,13 @@ msgstr "Svenska"
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Thai"
 msgstr "Thai"
+
+#. Type: select
+#. DefaultChoice
+#: ../dsf-helper/web-variables.templates:2002
+#, fuzzy
+msgid "English[ Default language]"
+msgstr "Standardspråk"
 
 #. Type: select
 #. Description

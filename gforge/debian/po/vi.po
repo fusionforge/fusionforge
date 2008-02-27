@@ -1,12 +1,12 @@
 # Vietnamese Translation for GForge.
 # Copyright © 2007 Free Software Foundation, Inc.
 # Clytie Siddall <clytie@riverland.net.au>, 2005-2007.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gforge 4.6.99+svn6094-4\n"
-"Report-Msgid-Bugs-To: lolando@debian.org\n"
-"POT-Creation-Date: 2007-12-23 11:02+0100\n"
+"Report-Msgid-Bugs-To: gforge@packages.debian.org\n"
+"POT-Creation-Date: 2008-02-26 22:14+0100\n"
 "PO-Revision-Date: 2007-12-23 11:06+0100\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -210,8 +210,7 @@ msgstr "Bạn có muốn hủy mọi thư được gửi cho ${noreply} không?"
 msgid ""
 "GForge sends and receives plenty of e-mail to and from the \"${noreply}\" "
 "address."
-msgstr ""
-"GForge gửi và nhận rất nhiều thư điện tử cho/từ địa chỉ « ${noreply} »."
+msgstr "GForge gửi và nhận rất nhiều thư điện tử cho/từ địa chỉ « ${noreply} »."
 
 #. Type: boolean
 #. Description
@@ -410,10 +409,7 @@ msgstr ""
 
 #. Type: select
 #. Choices
-#. Type: select
-#. DefaultChoice
 #: ../dsf-helper/web-variables.templates:2001
-#: ../dsf-helper/web-variables.templates:2002
 msgid "English"
 msgstr "tiếng Anh"
 
@@ -554,6 +550,14 @@ msgstr "tiếng Thuỵ Điển"
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Thai"
 msgstr "tiếng Thái"
+
+#. Type: select
+#. DefaultChoice
+#: ../dsf-helper/web-variables.templates:2002
+#, fuzzy
+#| msgid "Default language:"
+msgid "English[ Default language]"
+msgstr "Ngôn ngữ mặc định:"
 
 #. Type: select
 #. Description
