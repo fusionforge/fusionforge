@@ -4,8 +4,9 @@ gforge (4.6.99+svn6368+something-0) UNRELEASED; urgency=low
   * Fixed dependency on mediawiki.
   * Bumped Standards-Version to 3.7.3 (no changes needed).
   * Removed .cvsignore files from packages.
+  * Cleaned up empty directories in binary packages.
 
- -- Roland Mas <lolando@debian.org>  Tue, 26 Feb 2008 21:24:08 +0100
+ -- Roland Mas <lolando@debian.org>  Tue, 26 Feb 2008 21:35:04 +0100
 
 gforge (4.6.99+svn6368-1) unstable; urgency=low
 

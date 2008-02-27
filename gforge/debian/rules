@@ -91,6 +91,7 @@ install: build
 	# Remove files that are in other packages
 	rm -r $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/scmcvs/
 	rm -r $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/scmsvn/
+	rm -r $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/mediawiki/
 
 	# gforge-plugin-scmcvs
 	install -m 755 deb-specific/install-cvs.sh     $(CURDIR)/debian/gforge-plugin-scmcvs/usr/lib/gforge/plugins/scmcvs/bin/
