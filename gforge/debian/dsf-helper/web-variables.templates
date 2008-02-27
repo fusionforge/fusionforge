@@ -10,7 +10,7 @@
 Template: gforge/shared/sys_lang
 Type: select
 __Choices: English, Bulgarian, Catalan, Chinese (Traditional), Dutch, Esperanto, French, German, Greek, Hebrew, Indonesian, Italian, Japanese, Korean, Latin, Norwegian, Polish, Portuguese (Brazilian), Portuguese, Russian, Chinese (Simplified), Spanish, Swedish, Thai
-_DefaultChoice: English
+_DefaultChoice: English[ Default language]
 _Description: Default language:
  Please choose the default language for web pages.
 

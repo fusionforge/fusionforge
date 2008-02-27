@@ -6,9 +6,11 @@ gforge (4.6.99+svn6368+something-0) UNRELEASED; urgency=low
   * Removed .cvsignore files from packages.
   * Cleaned up empty directories in binary packages.
   * Rephrased debian/copyright file.
-  * Removed useless gforge-ftp-proftpd.templates.
+  * Removed useless gforge-ftp-proftpd.templates and
+    gforge-shell-postgresql.config.
+  * Various fixes in debconf files, inspired by a lintian check.
 
- -- Roland Mas <lolando@debian.org>  Tue, 26 Feb 2008 21:55:09 +0100
+ -- Roland Mas <lolando@debian.org>  Tue, 26 Feb 2008 22:02:10 +0100
 
 gforge (4.6.99+svn6368-1) unstable; urgency=low
 
