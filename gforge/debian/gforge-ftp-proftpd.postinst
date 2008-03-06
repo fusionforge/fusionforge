@@ -31,8 +31,11 @@ case "$1" in
 
         # Patch Proftpd configuration files
 	/usr/lib/gforge/bin/install-ftp.sh configure-files
-	ucf --debconf-ok /etc/proftpd/proftpd.conf.gforge-new /etc/proftpd/proftpd.conf
-	rm /etc/proftpd/proftpd.conf.gforge-new
+	if [ -f /etc/proftpd/proftpd.conf.gforge-new ]
+	then
+		ucf --debconf-ok /etc/proftpd/proftpd.conf.gforge-new /etc/proftpd/proftpd.conf
+		rm /etc/proftpd/proftpd.conf.gforge-new
+	fi
 
         # Setup our FTP
 	/usr/lib/gforge/bin/install-ftp.sh configure 
