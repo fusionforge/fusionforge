@@ -32,6 +32,7 @@
 	* www/themes/gforge/Theme.class.php: Use these functions.
 	* common/include/*: Ditto.
 	* common/docman/*: Ditto.
+	* common/forum/*: Ditto.
 
 2008-01-11  Roland Mas  <lolando@debian.org>
 

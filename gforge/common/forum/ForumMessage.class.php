@@ -654,7 +654,7 @@ class ForumMessage extends Error {
 		}
 			
 		$body = "\nRead and respond to this message at: ".
-		"\nhttp://".$GLOBALS['sys_default_domain']."/forum/message.php?msg_id=".$this->getID().
+			"\n".util_make_url ('/forum/message.php?msg_id='.$this->getID()).
 		"\nOr by replying to this e-mail entering your response between the following markers: ".
 			"\n".FORUM_MAIL_MARKER.
 			"\n(enter your response here)".
@@ -678,7 +678,7 @@ class ForumMessage extends Error {
 		"\n\n______________________________________________________________________".
 		"\nYou are receiving this email because you elected to monitor this forum.".
 		"\nTo stop monitoring this forum, login to ".$GLOBALS['sys_name']." and visit: ".
-		"\nhttp://".$GLOBALS['sys_default_domain']."/forum/monitor.php?forum_id=".$this->Forum->getID() .'&group_id='.$this->Forum->Group->getID().'&stop=1';
+			"\n".util_make_url('/forum/monitor.php?forum_id='.$this->Forum->getID().'&group_id='.$this->Forum->Group->getID().'&stop=1');
 
 		//$extra_headers = 'Reply-to: '.$this->Forum->getUnixName().'@'.$GLOBALS['sys_default_domain'];
 		$extra_headers = "Return-Path: <noreply@".$GLOBALS['sys_default_domain'].">\n";
@@ -687,7 +687,7 @@ class ForumMessage extends Error {
 		$extra_headers .= "Reply-To: ".$this->Forum->getReturnEmailAddress()."\n";
 		$extra_headers .= "Precedence: Bulk\n"
 			."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getId()."@".$GLOBALS['sys_default_domain'].">\n"
-			."List-Help: http://".$GLOBALS['sys_default_domain']."/forum/forum.php?id=".$this->Forum->getId()."\n"
+			."List-Help: ".util_make_url ('/forum/forum.php?id='.$this->Forum->getId())."\n"
 			."Message-Id: <forumpost".$this->getId()."@".$GLOBALS['sys_default_domain'].">";
 		$parentid = $this->getParentId();
 		if (!empty($parentid)) {
@@ -729,7 +729,7 @@ class ForumMessage extends Error {
 		$g =& $f->getGroup();
 
 		$body = "\nRead to this message and approve/reject it at: ".
-		"\nhttp://".$GLOBALS['sys_default_domain']."/forum/admin/pending.php?action=view_pending&group_id=". $g->getID() . "&forum_id=" . $f->getID() .
+			"\n".util_make_url('/forum/admin/pending.php?action=view_pending&group_id='. $g->getID() . "&forum_id=" . $f->getID()) .
 		"\nBy: " . $this->getPosterRealName() . "\n\n";
 
 		$text = $this->getBody();
@@ -748,7 +748,7 @@ class ForumMessage extends Error {
 		$extra_headers .= "Reply-To: ".$this->Forum->getReturnEmailAddress()."\n";
 		$extra_headers .= "Precedence: Bulk\n"
 			."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getId()."@".$GLOBALS['sys_default_domain'].">\n"
-			."List-Help: http://".$GLOBALS['sys_default_domain']."/forum/forum.php?id=".$this->Forum->getId()."\n"
+			."List-Help: ".util_make_url('/forum/forum.php?id='.$this->Forum->getId())."\n"
 			."Message-Id: <forumpost".$this->getId()."@".$GLOBALS['sys_default_domain'].">";
 		$parentid = $this->getParentId();
 		if (!empty($parentid)) {
@@ -826,17 +826,17 @@ class ForumMessage extends Error {
 			}
 			
 			$body = "\nRead and respond to this message at: ".
-			"\nhttp://".$GLOBALS['sys_default_domain']."/forum/message.php?msg_id=".$this->getID().
+				"\n".util_make_url('/forum/message.php?msg_id='.$this->getID()).
 			"\nBy: " . $this->getPosterRealName() . "\n\n";
 			
 			$body .= "A file has been uploaded to this message, you can download it at: ".
-			"\nhttp://".$GLOBALS['sys_default_domain']."/forum/attachment.php?attachid=". $attach_id . "&group_id=" . $this->Forum->Group->getID() . "&forum_id=" . $this->Forum->getID() . "\n\n";
+				"\n".util_make_url('/forum/attachment.php?attachid='. $attach_id . "&group_id=" . $this->Forum->Group->getID() . "&forum_id=" . $this->Forum->getID()) . "\n\n";
 
 			$body .=
 			"\n\n______________________________________________________________________".
 			"\nYou are receiving this email because you elected to monitor this forum.".
 			"\nTo stop monitoring this forum, login to ".$GLOBALS['sys_name']." and visit: ".
-			"\nhttp://".$GLOBALS['sys_default_domain']."/forum/monitor.php?forum_id=".$this->Forum->getID() .'&group_id='.$this->Forum->Group->getID().'&stop=1';
+				"\n".util_make_url ('/forum/monitor.php?forum_id='.$this->Forum->getID() .'&group_id='.$this->Forum->Group->getID().'&stop=1');
 	
 			$extra_headers = "Return-Path: <noreply@".$GLOBALS['sys_default_domain'].">\n";
 			$extra_headers .= "Errors-To: <noreply@".$GLOBALS['sys_default_domain'].">\n";
@@ -844,7 +844,7 @@ class ForumMessage extends Error {
 			$extra_headers .= "Reply-To: ".$this->Forum->getReturnEmailAddress()."\n";
 			$extra_headers .= "Precedence: Bulk\n"
 				."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getId()."@".$GLOBALS['sys_default_domain'].">\n"
-				."List-Help: http://".$GLOBALS['sys_default_domain']."/forum/forum.php?id=".$this->Forum->getId()."\n"
+				."List-Help: ".util_make_url('/forum/forum.php?id='.$this->Forum->getId())."\n"
 				."Message-Id: <forumpost".$this->getId()."@".$GLOBALS['sys_default_domain'].">";
 			$parentid = $this->getParentId();
 			if (!empty($parentid)) {
