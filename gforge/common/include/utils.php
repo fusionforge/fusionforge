@@ -923,6 +923,30 @@ function util_is_root_dir($dir) {
 	return !preg_match('/[^\\/]/',$dir);
 }
 
+function util_make_url ($path) {
+	if ($GLOBALS['sys_use_ssl']) 
+		$url = "https://" ;
+	else
+		$url = "http://" ;
+	
+	$url .= $GLOBALS['sys_default_domain'] ;
+	// $url .= $GLOBALS['url_prefix'] ;
+	$url .= "/" ;
+	$path = ereg_replace ("^/", "", $path) ;
+	$url .= $path ;
+	return $url ;
+}
+
+function util_make_link ($path, $text, $extra_params=false) {
+	$ep = '' ;
+	if (is_array($extra_params)) {
+		foreach ($extra_params as $key => $value) {
+			$ep .= "$key=\"$value\" ";
+		}
+	}
+	return '<a ' . $ep . 'href="' . util_make_url ($path) . '">' . $text . '</a>' ;
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
