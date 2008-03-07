@@ -112,7 +112,7 @@ class Theme extends Layout {
      *    @param    string    The user's realname
      */
     function createLinkToUserHome($user_name, $realname) {
-        return '<a href="'.$GLOBALS['sys_urlprefix'].'/users/'.$user_name.'/">'.$realname.'</a>';
+	    return util_make_link ('/users/'.$user_name, $realname);
     }
 
     /**
@@ -141,9 +141,9 @@ class Theme extends Layout {
     <title><?php echo $params['title']; ?></title>
     <link rel="icon" type="image/png" href="<?php echo $this->imgroot; ?>icon.png"/>
     <link rel="shortcut icon" href="<?php echo $this->imgroot; ?>icon.png"/>
-    <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/export/rss_sfnews.php" type="application/rss+xml"/>
-    <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/export/rss20_news.php" type="application/rss+xml"/>
-    <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - New Projects RSS" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/export/rss_sfprojects.php" type="application/rss+xml"/>
+    <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="<?php echo util_make_url ('/export/rss_sfnews.php'); ?>" type="application/rss+xml"/>
+    <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="<?php echo util_make_url ('/export/rss20_news.php'); ?>" type="application/rss+xml"/>
+    <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - New Projects RSS" href="<?php echo util_make_url ('/export/rss_sfprojects.php'); ?>" type="application/rss+xml"/>
 
     <script language="JavaScript" type="text/javascript">
     <!--
@@ -183,21 +183,17 @@ class Theme extends Layout {
 <div class="header">
   <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-        <td class="topLeft"><a href="/"><?php echo html_image('header/top-logo.gif',205,54,array('border'=>'0')); ?></a></td>
+		  <td class="topLeft"><?php echo util_make_link ('/', html_image('header/top-logo.gif',205,54,array('border'=>'0'))); ?></td>
         <td class="middleRight"><?php echo $this->searchBox(); ?></td>
         <td class="middleRight"><?php
           if (session_loggedin()) {
-            ?>
-            <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/logout.php"><?php echo _('Log Out'); ?></a> 
-            |
-            <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/"><?php echo _('My Account'); ?></a>
-            <?php
+		  echo util_make_link ('/account/logout.php', _('Log Out'));
+		  echo ' | ';
+		  echo util_make_link ('/account/', _('My Account'));
           } else {
-            ?>
-            <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/login.php"><?php echo _('Log In'); ?></a>
-            |
-            <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/register.php"><?php echo _('New Account'); ?></a>
-            <?php
+		  echo util_make_link ('/account/login.php', _('Log In'));
+		  echo ' | ';
+		  echo util_make_link ('/account/register.php', _('New Account'));
           }
 
 		$guide = $GLOBALS['sys_urlprefix'].'/help/guide/';
@@ -276,7 +272,7 @@ class Theme extends Layout {
 global $sys_show_source;
 if ($sys_show_source) {
     global $SCRIPT_NAME;
-    print '<a class="showsource" href="'.$GLOBALS['sys_urlprefix'].'/source.php?file=' . $SCRIPT_NAME . '"> '._('Show source').' </a>';
+    print util_make_link ('/source.php?file=' . $SCRIPT_NAME, _('Show source'), array ("class" => "showsource"));
 }
 ?>
 
@@ -392,7 +388,7 @@ if ($sys_show_source) {
         if ($links_arr) {
             for ($i=0; $i<$count; $i++) {
                 $return .= '
-                <td style="text-align:center"><a class="sortbutton" href="'.$GLOBALS['sys_urlprefix'].$links_arr[$i].'"><span style="color:'.
+                <td style="text-align:center"><a class="sortbutton" href="'.util_make_url ($links_arr[$i]).'"><span style="color:'.
                 $this->FONTCOLOR_HTMLBOX_TITLE.'"><strong>'.$title_arr[$i].'</strong></span></a></td>';
             }
         } else {
@@ -665,7 +661,7 @@ if ($sys_show_source) {
                 $return .= sprintf(
                     '<td background="%s" width="'.$width.'%%" style="text-align:center">
             		<a class="%s" href="%s">%s</a>
-    		</td>', $middle_img, $css_class, $GLOBALS['sys_urlprefix'].$TABS_DIRS[$i], $TABS_TITLES[$i]);
+    		</td>', $middle_img, $css_class, util_make_url ($TABS_DIRS[$i]), $TABS_TITLES[$i]);
     
                 // if the next tab is not last, insert a separator
                 if ($i < $count-1) {
@@ -686,7 +682,7 @@ if ($sys_show_source) {
                 $return .= sprintf(
                     '<td background="%s" width="'.$width.'%%" style="text-align:center">
             		<a class="%s" href="%s">%s</a>
-    		</td>', $middle_img, $css_class, $GLOBALS['sys_urlprefix'].$TABS_DIRS[$i], $TABS_TITLES[$i]);
+    		</td>', $middle_img, $css_class, util_make_url ($TABS_DIRS[$i]), $TABS_TITLES[$i]);
     
                 // if the next tab is not selected, close this tab
                 if ($selected != $i+1) {
@@ -798,7 +794,7 @@ if ($sys_show_source) {
         if (isset($group_id) && $group_id) {
             print '
                     <td width="10">&nbsp;</td>
-                    <td><a href="'.$GLOBALS['sys_urlprefix'].'/search/advanced_search.php?group_id='.$group_id.'"> '._('Advanced search').'</a></td>';
+                    <td>'.util_make_link ('/search/advanced_search.php?group_id='.$group_id, _('Advanced search')).'</td>';
         }
         print '</tr></table>';
         print '</form>';
@@ -974,11 +970,9 @@ if ($sys_show_source) {
         $return = '';
 
         for ($i=0; $i<$count; $i++) {
-            $return .= '
-                <a href="'.$GLOBALS['sys_urlprefix'].$links_arr[$i].'">'.$title_arr[$i].'</a> | ';
+		$return .= util_make_link ($links_arr[$i], $title_arr[$i]) . ' | ';
         }
-        $return .= '
-                <a href="'.$GLOBALS['sys_urlprefix'].$links_arr[$i].'">'.$title_arr[$i].'</a>';
+	$return .= util_make_link ($links_arr[$i], $title_arr[$i]);
         return $return;
     }
 
