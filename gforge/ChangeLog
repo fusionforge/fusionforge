@@ -12,6 +12,10 @@
 	* www/admin/unsubscribe.php: Fixed yet another few undefined
 	variable warnings.
 
+2008-02-07  Roland Mas  <lolando@debian.org>
+
+	* www/account/*: Migrate to util_make_url() and util_make_link().
+
 2008-01-19  Roland Mas  <lolando@debian.org>
 
 	* cronjobs/massmail.php: Added missing i18n on the mass mail cron

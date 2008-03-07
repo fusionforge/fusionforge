@@ -76,7 +76,7 @@ if ($login) {
 			header ("Location: " . $return_to);
 			exit;
 		} else {
-			header ("Location: ".$GLOBALS['sys_urlprefix']."/my/");
+			header ("Location: ".util_make_url ("/my/"));
 			exit;
 		}
 	}
@@ -96,10 +96,10 @@ if ($login && !$success) {
 	form_release_key(getStringFromRequest('form_key'));	
 	// Account Pending
 	if ($userstatus == "P") {
-		$feedback = sprintf(_('<P>Your account is currently pending your email confirmation.		Visiting the link sent to you in this email will activate your account.		<P>If you need this email resent, please click below and a confirmation		email will be sent to the email address you provided in registration.		<P><A href="pending-resend.php?form_user=%1$s">[Resend Confirmation Email]</A>		<br><hr>		<p>'), htmlspecialchars($form_loginname));
+		$feedback = sprintf(_('<P>Your account is currently pending your email confirmation.		Visiting the link sent to you in this email will activate your account.		<P>If you need this email resent, please click below and a confirmation		email will be sent to the email address you provided in registration.		<P><A href="%1$s">[Resend Confirmation Email]</A>		<br><hr>		<p>'), util_make_url ("pending-resend.php?form_user=".htmlspecialchars($form_loginname)));
 	} else {
 		if ($userstatus == "D") {
-			$feedback .= '<br />'.sprintf(_('<p>Your %1$s account has been removed by %1$s staff. This may occur for two reasons, either 1) you requested that your account be removed; or 2) some action has been performed using your account which has been seen as objectionable (i.e. you have breached the terms of service for use of your account) and your account has been revoked for administrative reasons. Should you have questions or concerns regarding this matter, please log a <a href="/support/?group_id=1">support request</a>.</p><p>Thank you, <br><br>%1$s Staff</p>'), $GLOBALS['sys_name']);
+			$feedback .= '<br />'.sprintf(_('<p>Your %1$s account has been removed by %1$s staff. This may occur for two reasons, either 1) you requested that your account be removed; or 2) some action has been performed using your account which has been seen as objectionable (i.e. you have breached the terms of service for use of your account) and your account has been revoked for administrative reasons. Should you have questions or concerns regarding this matter, please log a <a href="%2$s">support request</a>.</p><p>Thank you, <br><br>%1$s Staff</p>'), $GLOBALS['sys_name'], util_make_url ("/support/?group_id=1"));
 		}
 	}
 	html_feedback_top($feedback);

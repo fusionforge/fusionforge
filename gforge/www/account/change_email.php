@@ -63,15 +63,17 @@ if (getStringFromRequest('submit')) {
 	$message = stripcslashes(sprintf(_('You have requested a change of email address on %1$s.
 Please visit the following URL to complete the email change:
 
-<http://%1$s/account/change_email-complete.php?ch=_%2$s>
+%2$s
 
- -- the %1$s staff'), getStringFromServer('HTTP_HOST'), $confirm_hash, $GLOBALS['sys_name']));
+ -- the %1$s staff'), 
+					 $GLOBALS['sys_name'],
+					 util_make_url ('/account/change_email-complete.php?ch=_'.$confirm_hash), ));
 
 	util_send_message($newemail,sprintf(_('%1$s Verification'), $GLOBALS['sys_name']),$message);
 
 	site_user_header(array('title'=>_('Email Change Confirmation')));
 
-	echo _('<p>An email has been sent to the new address. Follow the instructions in the email to complete the email change. </p><a href="/">[ Home ]</a>');
+	printf (_('<p>An email has been sent to the new address. Follow the instructions in the email to complete the email change. </p><a href="%1$s">[ Home ]</a>'), util_make_url ('/'));
 
 	site_user_footer(array());
 	exit();
@@ -90,7 +92,7 @@ echo _('<p>Changing your email address will require confirmation from your new e
 <input type="submit" name="submit" value="<?php echo _('Send Confirmation to New Address') ?>" />
 </form>
 
-<p><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"><?php printf(_('Return'), $sys_name); ?></a></p>
+	<p><?php echo util_make_link('/', _('Return')); ?></p>
 
 <?php
 site_user_footer(array());

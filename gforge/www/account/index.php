@@ -87,7 +87,7 @@ if (getStringFromRequest('submit')) {
 	}
 
 	if ($refresh) {
-		header("Location: /account/?feedback=".urlencode($feedback));
+		session_redirect("/account/?feedback=".urlencode($feedback));
 	}
 
 }
@@ -107,9 +107,9 @@ echo $HTML->boxTop(_('Account Maintenance'));
 <?php echo _('Account options:'); ?>
 </p>
 <ul>
-<li><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/users/<?php print $u->getUnixName(); ?>/"><strong><?php echo _('View My Developer Profile'); ?></strong></a></li>
+<li><a href="<?php echo util_make_url ('/users/'.$u->getUnixName().'/'); ?>"><strong><?php echo _('View My Developer Profile'); ?></strong></a></li>
 <?php if($GLOBALS['sys_use_people']) { ?>
-	<li><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/people/editprofile.php"><strong><?php echo _('Edit My Skills Profile'); ?></strong></a></li>
+	<li><a href="<?php echo util_make_url ('/people/editprofile.php'); ?>"><strong><?php echo _('Edit My Skills Profile'); ?></strong></a></li>
 <?php } ?>
 </ul>
 <?php echo $HTML->boxBottom(); ?>
@@ -230,15 +230,15 @@ echo $HTML->boxTop(_('Preferences')); ?>
 <?php /*
 <p /><input type="checkbox"  name="remember_user" value="1"<?php
 	if ($sf_user_hash) print " checked=\"checked\""; ?> />
-<?php printf(_('"Remember me". <i>(Allows to access your <a href="%s">personal page</a> without being logged in. You will still need to login explicitly before making any changes.)</i>'),$GLOBALS['sys_urlprefix'].'/my/');
+<?php printf(_('"Remember me". <i>(Allows to access your <a href="%s">personal page</a> without being logged in. You will still need to login explicitly before making any changes.)</i>'),util_make_url ('/my/'));
 */ ?>
 
 <p />
 <?php if ($sys_use_ratings) { ?>
 <input type="checkbox"  name="use_ratings" value="1"<?php
 	if ($u->usesRatings()) print " checked=\"checked\""; ?> />
-		  <?php printf(_('Participate in peer ratings. <i>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your <a href="%s">user page</a> if you have chosen to participate in ratings.)</i>'),$GLOBALS['sys_urlprefix'].'/users/'.$u->getUnixName()); ?>
-<?php } ?>	
+		  <?php printf(_('Participate in peer ratings. <i>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your <a href="%s">user page</a> if you have chosen to participate in ratings.)</i>'),util_make_url('/users/'.$u->getUnixName())); 
+} ?>	
 </td></tr>
 <?php 
 $hookParams['user']= user_get_object(user_getid());
@@ -266,7 +266,7 @@ if (($u->getUnixStatus() == 'A') && ($sys_use_shell)) {
 	} else {
 		print '0';
 	}
-	print '</strong> <a href="editsshkeys.php">['._('Edit Keys').']</a>';
+	print '</strong>' . util_make_link ("editsshkeys.php",_('Edit Keys')) ;
 	echo $HTML->boxBottom();
 }
 ?>

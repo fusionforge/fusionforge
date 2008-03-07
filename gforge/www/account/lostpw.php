@@ -63,16 +63,16 @@ ignore this message and nothing will happen.
 If you requested this verification, visit the following URL
 to change your password:
 
-<http://%1$s/account/lostlogin.php?ch=_%2$s>
+<%2$s>
 
  -- the %3$s staff
-'), getStringFromServer('HTTP_HOST'), $confirm_hash, $GLOBALS['sys_name']));
+'), getStringFromServer('HTTP_HOST'), util_make_url ("/account/lostlogin.php?ch=_".$confirm_hash), $GLOBALS['sys_name']));
 
 		util_send_message($u->getEmail(),sprintf(_('%1$s Verification'), $GLOBALS['sys_name']),$message);
 
 		$HTML->header(array('title'=>"Lost Password Confirmation"));
 
-		echo '<p>'._('An email has been sent to the address you have on file. Follow the instructions in the email to change your account password.').'</p><p><a href="/">'._('Home').'</a></p>';
+		echo '<p>'.printf(_('An email has been sent to the address you have on file. Follow the instructions in the email to change your account password.').'</p><p><a href="%1$s">Home</a>', util_make_url ('/')).'</p>';
 
 		$HTML->footer(array());
 		exit();
@@ -96,7 +96,7 @@ echo _('<p>Hey... losing your password is serious business. It compromises the s
 </p>
 </form>
 
-<p><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"><?php printf(_('Return'), $GLOBALS['sys_name']); ?></a></p>
+	<p><?php echo util_make_link ("/", _('Return')); ?></p>
 
 <?php
 

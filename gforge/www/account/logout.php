@@ -46,8 +46,8 @@ session_logout();
 plugin_hook('before_logout_redirect');
 
 if ($return_to) {
-header('Location: '.$return_to);
+	header('Location: '.$return_to);
 }else{
-header('Location: '.$GLOBALS['sys_urlprefix'].'/');
+	header('Location: '.util_make_url ('/'));
 }
 ?>

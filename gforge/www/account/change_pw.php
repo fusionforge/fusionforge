@@ -87,7 +87,8 @@ if (getStringFromRequest('submit')) {
 	<?php printf(_('<h2>%1$s Password Change Confirmation</h2><p>Congratulations. You have changed your password.</p>'), $GLOBALS['sys_name']); ?>
 
 	<p>
-	<?php printf(_('You should now %1$s Return to UserPrefs %2$s.'), '<a href="'.$GLOBALS['sys_urlprefix'].'/account/">', '</a>') ?>
+		 <?php printf(_('You should now <a href="%1$s">Return to User Prefs</a>.'),
+			      util_make_url('/account/')) ?>
 	</p>
 	
 	<?php

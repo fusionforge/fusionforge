@@ -60,25 +60,19 @@ if (!$u || !is_object($u)) {
 $all=getStringFromRequest('all');
 $user->unsubscribeFromMailings($all);
 
-site_header(array('title'=>"Unsubscription Complete"));
+site_header(array('title'=>_("Unsubscription Complete")));
+
+echo '<h2>'._('Unsubscription Complete').'</h2><p>';
 
 if ($all) {
-	$what = sprintf(_('all %1$s mailings and notifications'), $GLOBALS['sys_name']);
+	$what = sprintf(_('You have been unsubscribed from all %1$s mailings and notifications. In case you will want to re-activate your subscriptions in the future, login and visit your Account Maintenance page.'), $GLOBALS['sys_name']);
 } else {
-	$what = sprintf(_('%1$s site mailings'), $GLOBALS['sys_name']);
+	$what = sprintf(_('You have been unsubscribed from %1$s site mailings. In case you will want to re-activate your subscriptions in the future, login and visit your Account Maintenance page.'), $GLOBALS['sys_name']);
 }
+echo '</p>';
 ?>
 
-<h2>Unsubscription Complete</h2>
-<p>
-You have been unsubscribed from <?php print $what; ?>. In case you
-will want to re-activate your subscriptions in the future, login
-and visit your Account Maintenance page.
-</p>
-
-<p>
-<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"><?php printf(_('Return'), $GLOBALS['sys_name']); ?></a>
-</p>
+	<p><?php echo util_make_link ("/", _('Return')); ?></p>
 
 <?php
 
