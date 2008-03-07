@@ -30,11 +30,7 @@
 	util_make_link, whose goal is to provide a central place where URL
 	scheme is implemented.
 	* www/themes/gforge/Theme.class.php: Use these functions.
-	* common/include/*: Ditto.
-	* common/docman/*: Ditto.
-	* common/forum/*: Ditto.
-	* common/frs/*: Ditto.
-	* common/pm/*: Ditto.
+	* common/*: Ditto.
 
 2008-01-11  Roland Mas  <lolando@debian.org>
 

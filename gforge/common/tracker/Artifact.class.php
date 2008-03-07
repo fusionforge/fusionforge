@@ -1207,9 +1207,9 @@ class Artifact extends Error {
 		
 		$body = $this->ArtifactType->getName() ." item #". $this->getID() .", was opened at ". date( _('Y-m-d H:i'), $this->getOpenDate() ). 
 			"\nYou can respond by visiting: ".
-			"\nhttp://".$GLOBALS['sys_default_domain']."/tracker/?func=detail&atid=". $this->ArtifactType->getID() .
-				"&aid=". $this->getID() .
-				"&group_id=". $this->ArtifactType->Group->getID() .
+			"\n".util_make_url ('/tracker/?func=detail&atid='. $this->ArtifactType->getID() .
+					    "&aid=". $this->getID() .
+					    "&group_id=". $this->ArtifactType->Group->getID()) .
 			"\nOr by replying to this e-mail entering your response between the following markers: ".
 			"\n".ARTIFACT_MAIL_MARKER.
 			"\n(enter your response here)".
@@ -1311,9 +1311,9 @@ class Artifact extends Error {
 		}
 
 		$body .= "\n\nYou can respond by visiting: ".
-		"\nhttp://".$GLOBALS['sys_default_domain']."/tracker/?func=detail&atid=". $this->ArtifactType->getID() .
-			"&aid=". $this->getID() .
-			"&group_id=". $this->ArtifactType->Group->getID();
+			"\n".util_make_url ('/tracker/?func=detail&atid='. $this->ArtifactType->getID() .
+					    "&aid=". $this->getID() .
+					    "&group_id=". $this->ArtifactType->Group->getID());
 
 		//only send if some recipients were found
 		if (count($emails) < 1 && count($monitor_ids) < 1) {
