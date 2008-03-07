@@ -6,32 +6,20 @@
 
 @DPATCH@
 diff -urNad gforge~/common/tracker/Artifact.class.php gforge/common/tracker/Artifact.class.php
---- gforge~/common/tracker/Artifact.class.php	2006-06-12 10:22:31.000000000 +0200
-+++ gforge/common/tracker/Artifact.class.php	2006-06-12 15:43:49.000000000 +0200
-@@ -1206,16 +1206,16 @@
- 			$changes=array();
- 		}
- 		
--		$body = $this->ArtifactType->getName() ." item #". $this->getID() .", was opened at ". date( _('Y-m-d H:i'), $this->getOpenDate() ). 
--			"\nYou can respond by visiting: ".
--			"\nhttp://".$GLOBALS['sys_default_domain']."/tracker/?func=detail&atid=". $this->ArtifactType->getID() .
--				"&aid=". $this->getID() .
--				"&group_id=". $this->ArtifactType->Group->getID() .
+--- gforge~/common/tracker/Artifact.class.php	2008-01-13 23:13:59.000000000 +0100
++++ gforge/common/tracker/Artifact.class.php	2008-01-13 23:29:14.000000000 +0100
+@@ -1210,10 +1210,10 @@
+ 			"\n".util_make_url ('/tracker/?func=detail&atid='. $this->ArtifactType->getID() .
+ 					    "&aid=". $this->getID() .
+ 					    "&group_id=". $this->ArtifactType->Group->getID()) .
 -			"\nOr by replying to this e-mail entering your response between the following markers: ".
 -			"\n".ARTIFACT_MAIL_MARKER.
 -			"\n(enter your response here)".
 -			"\n".ARTIFACT_MAIL_MARKER.
--			"\n\n".
-+		$body = $this->ArtifactType->getName() ." item #". $this->getID() .", was opened at ". date( _('Y-m-d H:i'), $this->getOpenDate() ). "\n".
-+// 			"\nYou can respond by visiting: ".
-+// 			"\nhttp://".$GLOBALS['sys_default_domain']."/tracker/?func=detail&atid=". $this->ArtifactType->getID() .
-+// 				"&aid=". $this->getID() .
-+// 				"&group_id=". $this->ArtifactType->Group->getID() .
 +// 			"\nOr by replying to this e-mail entering your response between the following markers: ".
 +// 			"\n".ARTIFACT_MAIL_MARKER.
 +// 			"\n(enter your response here)".
 +// 			"\n".ARTIFACT_MAIL_MARKER.
-+// 			"\n\n".
+ 			"\n\n".
  			$this->marker('status',$changes).
  			 "Status: ". $this->getStatusName() ."\n".
- 			$this->marker('priority',$changes).
