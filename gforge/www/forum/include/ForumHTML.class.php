@@ -66,8 +66,12 @@ function forum_header($params) {
 				echo '
 				<strong>'._('Posted by').':</strong> '.$user->getRealName().'<br />
 				<strong>'._('Date').':</strong> '. date(_('Y-m-d H:i'),db_result($result,0,'post_date')).'<br />
-				<strong>'._('Summary').':</strong> <a href="'.$GLOBALS['sys_urlprefix'].'/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'&group_id='.$group_id.'">'. db_result($result,0,'summary').'</a><br/>
-				<strong>'._('Project').':</strong> <a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.$group->getUnixName().'">'.$group->getPublicName().'</a> <br />
+				<strong>'._('Summary').':</strong>'.
+					util_make_link ('/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'&group_id='.$group_id,
+							db_result($result,0,'summary')).'<br/>
+				<strong>'._('Project').':</strong>'.
+					util_make_link ('/projects/'.$group->getUnixName(),
+							$group->getPublicName()).'<br />
 				<p>
 				'. (util_make_links(nl2br(db_result($result,0,'details'))));
 
@@ -115,21 +119,21 @@ function forum_header($params) {
 	if (session_loggedin() ) {
 		if ($f) {
 			if ($f->isMonitoring()) {
-				echo '<a href="'.$GLOBALS['sys_urlprefix'].'/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;stop=1">' .
-				html_image('ic/xmail16w.png','20','20',array()).' '._('Stop Monitoring').'</a> | ';
+				echo util_make_link ('/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;stop=1',
+						     html_image('ic/xmail16w.png','20','20',array()).' '._('Stop Monitoring')).' | ';
 			} else {
-				echo '<a href="'.$GLOBALS['sys_urlprefix'].'/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;start=1">' .
-				html_image('ic/mail16w.png','20','20',array()).' '._('Monitor Forum').'</a> | ';
+				echo util_make_link ('/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;start=1',
+						     html_image('ic/mail16w.png','20','20',array()).' '._('Monitor Forum')).' | ';
 			}
-			echo '<a href="'.$GLOBALS['sys_urlprefix'].'/forum/save.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'">' .
-			html_image('ic/save.png','24','24',array()) .' '._('Save Place').'</a> | ';
+			echo util_make_link ('/forum/save.php?forum_id='.$forum_id.'&amp;group_id='.$group_id,
+					     html_image('ic/save.png','24','24',array()) .' '._('Save Place')).' | ';
 		}
 	}
 
 	if ($f && $forum_id) {
-		echo '<a href="'.$GLOBALS['sys_urlprefix'].'/forum/new.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'">' .
-		html_image('ic/write16w.png','20','20',array('alt'=>_('Start New Thread'))) .' '.
-		_('Start New Thread').'</a>';
+		echo util_make_link ('/forum/new.php?forum_id='.$forum_id.'&amp;group_id='.$group_id,
+				     html_image('ic/write16w.png','20','20',array('alt'=>_('Start New Thread'))) .' '.
+				     _('Start New Thread'));
 	}
 }
 
@@ -231,17 +235,13 @@ class ForumHTML extends Error {
 		'
 		<table border="0">
 			<tr>
-				<td class="tablecontent" nowrap="nowrap">'; if ($msgforum->userIsAdmin()) {$ret_val .= $fa->PrintAdminMessageOptions($msg->getID(),$group_id,$msg->getThreadID(),$msgforum->getID());} $ret_val .= _('By:').' <a href="'.$GLOBALS['sys_urlprefix'].'/users/'.
-		$msg->getPosterName() .'/">'.
-		$msg->getPosterRealName() .'</a>'.
-		'<br />
-					';
+				<td class="tablecontent" nowrap="nowrap">'; if ($msgforum->userIsAdmin()) {$ret_val .= $fa->PrintAdminMessageOptions($msg->getID(),$group_id,$msg->getThreadID(),$msgforum->getID());} $ret_val .= _('By:').' '.util_make_link ('/users/'.$msg->getPosterName() .'/',
+																																$msg->getPosterRealName()).'<br />
+';
 		$ret_val .= $am->PrintAttachLink($msg,$group_id,$msgforum->getID()) . '
-					<br />
-					<a href="'.$GLOBALS['sys_urlprefix'].'/forum/message.php?msg_id='.
-		$msg->getID() .'&group_id='.$group_id.'">'.
+					<br />'.util_make_link ('/forum/message.php?msg_id='.$msg->getID() .'&group_id='.$group_id,
 		html_image('ic/msg.png',"10","12",array("border"=>"0")) .
-		$bold_begin. $msg->getSubject() .' [ '._('reply').' ]'. $bold_end .'</a> &nbsp; '.
+								$bold_begin. $msg->getSubject() .' [ '._('reply').' ]'. $bold_end) .' &nbsp; '.
 		'<br />'. date(_('Y-m-d H:i'),$msg->getPostDate()) .'
 				</td>
 			</tr>
@@ -403,8 +403,7 @@ class ForumHTML extends Error {
 					If it this is the message being displayed, don't show a link to it
 					*/
 				if ($current_message != $msg_arr["$msg_id"][$i]->getID()) {
-					$ah_begin='<a href="'.$GLOBALS['sys_urlprefix'].'/forum/message.php?msg_id='. $msg_arr["$msg_id"][$i]->getID() .
-					'&group_id='.$group_id.'">';
+					$ah_begin='<a href="'.util_make_url ('/forum/message.php?msg_id='. $msg_arr["$msg_id"][$i]->getID() .'&group_id='.$group_id).'">';
 					$ah_end='</a>';
 				} else {
 					$ah_begin='';
@@ -425,7 +424,7 @@ class ForumHTML extends Error {
 				}
 
 				$ret_val .= $bold_begin.$msg_arr["$msg_id"][$i]->getSubject() .$bold_end.$ah_end.'</td>'.
-				'<td><a href="'.$GLOBALS['sys_urlprefix'].'/users/'.$msg_arr["$msg_id"][$i]->getPosterName().'/">'. $msg_arr["$msg_id"][$i]->getPosterRealName() .'</a></td>'.
+					'<td>'.util_make_link ('/users/'.$msg_arr["$msg_id"][$i]->getPosterName(),$msg_arr["$msg_id"][$i]->getPosterRealName()) .'</td>'.
 				'<td>'.date(_('Y-m-d H:i'), $msg_arr["$msg_id"][$i]->getPostDate() ).'</td></tr>';
 
 				if ($msg_arr["$msg_id"][$i]->hasFollowups() > 0) {
@@ -447,8 +446,6 @@ class ForumHTML extends Error {
 	 */
 
 	function showEditForm(&$msg) {
-		global $sys_default_domain;
-
 		$thread_id = $msg->getThreadID();
 		$msg_id = $msg->getID();
 		$posted_by = $msg->getPosterID();
@@ -461,17 +458,11 @@ class ForumHTML extends Error {
 		$g =& $this->Forum->getGroup();
 		$group_id = $g->getID();
 
-		if (strtoupper(getStringFromServer('HTTPS')) == 'ON') {
-			$http = "https://";
-		} else {
-			$http = "http://";
-		}
-
 		if ($this->Forum->userCanPost()) { // minor control, but anyways it should be an admin at this point
 			echo notepad_func();
 			?>
 <div align="center">
-<form "enctype="multipart/form-data" action="/forum/admin/index.php"
+	 <form "enctype="multipart/form-data" action="<? echo util_make_url ('/forum/admin/index.php') ?>"
 	method="post"><?php $objid = $this->Forum->getID();?> <input
 	type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" /> <input
 	type="hidden" name="forum_id" value="<?php echo $objid; ?>" /> <input
@@ -532,16 +523,10 @@ class ForumHTML extends Error {
 }
 
 function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
-	global $sys_default_domain,$group_id;
+	global $group_id;
 
 	$body = '';
 	
-	if (strtoupper(getStringFromServer('HTTPS')) == 'ON') {
-		$http = "https://";
-	} else {
-		$http = "http://";
-	}
-
 	if ($this->Forum->userCanPost()) {
 		if ($subject) {
 			//if this is a followup, put a RE: before it if needed
@@ -553,7 +538,7 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 		?>
 <div align="center">
 <form "enctype="multipart/form-data"
-	action="<? echo $GLOBALS['sys_urlprefix'] ?>/forum/forum.php?forum_id=<?php echo $this->Forum->getID(); ?>&group_id=<?php echo $group_id; ?>"
+	action="<? echo url_make_link ('/forum/forum.php?forum_id='.$this->Forum->getID().'&group_id='.$group_id); ?>"
 	method="post"><?php $objid = $this->Forum->getID();?> <input
 	type="hidden" name="post_message" value="y" /> <input type="hidden"
 	name="thread_id" value="<?php echo $thread_id; ?>" /> <input
@@ -593,7 +578,8 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 		
 		<p><?php
 		if (!session_loggedin()) {
-			echo '<span class="highlight">'._('You are posting anonymously because you are not').' <a href="'.$GLOBALS['sys_urlprefix'].'/account/login.php?return_to='. urlencode(getStringFromServer('REQUEST_URI')) .'">['._('logged in').']</a></span>';
+			echo '<span class="highlight">';
+			printf (_('You are posting anonymously because you are not <a href="%1$s">logged in</a>'),util_make_url ('/account/login.php?return_to='. urlencode(getStringFromServer('REQUEST_URI')))) .'</span>';
 		}
 		?> <br />
 		<input type="submit" name="submit"
@@ -610,11 +596,10 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 
 } elseif ($this->Forum->allowAnonymous()) {
 	echo '<span class="error">';
-	printf(_('You could post if you were %1$s logged in %2$s'), '<a href="'.$GLOBALS['sys_urlprefix'].'/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI')).' ">', '</a>');
-	echo '<>';
+	printf(_('You could post if you were <a href="%1$s">logged in</a>'), util_make_url ('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))));
 } elseif (!session_loggedin()) {
 	echo '
-			<span class="error">'.sprintf(_('Please %1$s login %2$s'), '<a href="'.$GLOBALS['sys_urlprefix'].'/account/login.php?return_to='.urlencode($REQUEST_URI).'">', '</a>').'</span><br/></p>';
+			<span class="error">'.sprintf(_('Please <a href="%1$s">log in</a>'), util_make_url('/account/login.php?return_to='.urlencode($REQUEST_URI))).'</span><br/></p>';
 } else {
 	//do nothing
 }
@@ -622,38 +607,6 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 }
 
 }
-/*
- $messagelink='http://'.$GLOBALS[sys_default_domain].'/forum/message.php?msg_id='.$msg_id;
- $messagesender=db_result($result,0, 'user_name');
- $messagebody=util_line_wrap(util_unconvert_htmlspecialchars(db_result($result,0, 'body')));
- $messagesys=$GLOBALS['sys_name'];
- $messagemonitor='http://'.$GLOBALS[sys_default_domain].'/forum/monitor.php?forum_id='.$forum_id;
- $body = stripcslashes(sprintf(_('
- Read and respond to this message at:
- %1$s
- By: %2$s
-
- %3$s
-
- ______________________________________________________________________
- You are receiving this email because you elected to monitor this forum.
- To stop monitoring this forum, login to %4$s
- and visit: %5$s'), $messagelink, $messagesender, $messagebody, $messagesys, $messagemonitor));
- /*
- $body = "\nRead and respond to this message at: ".
- "\nhttp://$GLOBALS[sys_default_domain]/forum/message.php?msg_id=".$msg_id.
- "\nBy: " . db_result($result,0, 'user_name') .
- "\n\n" . util_line_wrap(util_unconvert_htmlspecialchars(db_result($result,0, 'body'))).
- "\n\n______________________________________________________________________".
- "\nYou are receiving this email because you elected to monitor this forum.".
- "\nTo stop monitoring this forum, login to ".$GLOBALS['sys_name']." and visit: ".
- "\nhttp://$GLOBALS[sys_default_domain]/forum/monitor.php?forum_id=$forum_id";
- * /
-
- $subject="[" .db_result($result,0,'unix_group_name'). " - " . db_result($result,0,'forum_name')."] ".util_unconvert_htmlspecialchars(db_result($result,0,'subject'));
- util_handle_message(array_unique($tolist),$subject,$body,$send_all_posts_to);
- */
-
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

@@ -47,13 +47,13 @@ if (session_loggedin()) {
 			if (!$f->stopMonitor()) {
 				exit_error('Error',$f->getErrorMessage());
 			} else {
-				header ("Location: ".$GLOBALS['sys_urlprefix']."/forum/forum.php?forum_id=$forum_id&group_id=$group_id&feedback=".urlencode(_('Forum monitoring deactivated')));
+				header ("Location: ".util_make_url ("/forum/forum.php?forum_id=$forum_id&group_id=$group_id&feedback=".urlencode(_('Forum monitoring deactivated'))));
 			}
 		} elseif(getStringFromRequest('start')) {
 			if (!$f->setMonitor()) {
 				exit_error('Error',$f->getErrorMessage());
 			} else {
-				header ("Location: ".$GLOBALS['sys_urlprefix']."/forum/forum.php?forum_id=$forum_id&group_id=$group_id&feedback=".urlencode(_('Forum monitoring started')));
+				header ("Location: ".util_make_url ("/forum/forum.php?forum_id=$forum_id&group_id=$group_id&feedback=".urlencode(_('Forum monitoring started'))));
 			}
 		}
 	} else {

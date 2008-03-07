@@ -1,6 +1,7 @@
 2008-02-28  Roland Mas  <lolando@debian.org>
 
 	* plugins/*: Migrate to util_make_url() and util_make_link().
+	* www/forum/*: Ditto.
 
 2008-02-27  Roland Mas  <lolando@debian.org>
 

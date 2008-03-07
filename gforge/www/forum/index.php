@@ -39,7 +39,7 @@ if ($group_id) {
 	$farr =& $ff->getForums();
 
 	if ( $farr !== false && count($farr) == 1 ) {
-  		Header("Location: http://".$sys_default_domain.$GLOBALS['sys_urlprefix']."/forum/forum.php?forum_id=".$farr[0]->getID());
+  		Header("Location: ".util_make_url ("/forum/forum.php?forum_id=".$farr[0]->getID()));
 		exit();
 	}
 

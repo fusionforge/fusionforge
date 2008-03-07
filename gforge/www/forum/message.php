@@ -104,7 +104,7 @@ if ($msg_id) {
 	if ($f->userIsAdmin()) {
 		echo $fa->PrintAdminMessageOptions($msg_id,$group_id,0,$forum_id); // 0 in thread id because that tells us to go back to message.php instead of forum.php
 	}
-	echo _('BY').': '. $fm->getPosterRealName() .' (<a href="'.$GLOBALS['sys_urlprefix'].'/users/'.$fm->getPosterName().'/">'. $fm->getPosterName() .'</a>)<br />';
+	echo _('BY').': '. $fm->getPosterRealName() .' (<a href="'.util_make_url('/users/'.$fm->getPosterName().'/').'">'. $fm->getPosterName() .'</a>)<br />';
 	echo _('DATE').': '. date(_('Y-m-d H:i'), $fm->getPostDate()) .'<br />';
 	$am = new AttachManager();
 	echo $am->PrintHelperFunctions();
@@ -155,8 +155,8 @@ if ($msg_id) {
 		
 		
 		if ($fm->getID() != $msg->getID()) {
-			$ah_begin='<a href="'.$GLOBALS['sys_urlprefix'].'/forum/message.php?msg_id='.$msg->getID().
-				'&group_id='.$group_id.'">';
+			$ah_begin='<a href="'.util_make_url ('/forum/message.php?msg_id='.$msg->getID().
+							     '&group_id='.$group_id).'">';
 			$ah_end='</a>';
 		} else {
 			$ah_begin='';

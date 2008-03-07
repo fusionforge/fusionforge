@@ -50,7 +50,7 @@ if (session_loggedin()) {
 		if (!$f->savePlace()) {
 			exit_error(_('Error'),$f->getErrorMessage());
 		} else {
-			header ("Location: ".$GLOBALS['sys_urlprefix']."/forum/forum.php?forum_id=$forum_id&group_id=$group_id&feedback=".urlencode(_('Forum Position Saved. New messages will be highlighted when you return')));
+			header ("Location: ".util_make_url ("/forum/forum.php?forum_id=$forum_id&group_id=$group_id&feedback=".urlencode(_('Forum Position Saved. New messages will be highlighted when you return'))));
 		}
 	} else {
 		exit_missing_param();

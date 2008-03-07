@@ -209,7 +209,7 @@ if ($group_id) {
 					//actually delete the message
 					$feedback .= $fa->ExecuteAction("delete");
 					forum_header(array('title'=>_('Delete a Message')));
-					echo '<p><a href="'.$GLOBALS['sys_urlprefix'].'/forum/forum.php?forum_id=' . $forum_id . '">Return to the forum</a>';
+					echo '<p>'.util_make_link ('/forum/forum.php?forum_id=' . $forum_id, _("Return to the forum")) ;
 					forum_footer(array());
 				} elseif (getStringFromRequest("cancel")) {
 					// the user cancelled the request, go back to forum
@@ -289,7 +289,7 @@ if ($group_id) {
 						$feedback .= $fm->getErrorMessage();
 					}
 					forum_header(array('title'=>_('Edit a Message')));
-					echo '<p><a href="'.$GLOBALS['sys_urlprefix'].'/forum/forum.php?forum_id=' . $forum_id . '">Return to the forum</a>';
+					echo '<p>'.util_make_link ('/forum/forum.php?forum_id=' . $forum_id, _("Return to the forum")) ;
 					forum_footer(array());
 				} elseif (getStringFromRequest("cancel")) {
 					// the user cancelled the request, go back to forum
