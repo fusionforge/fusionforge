@@ -322,7 +322,7 @@ function session_cookie($name ,$value, $domain = '', $expiration = 0) {
  *	@return never returns
  */
 function session_redirect($loc) {
-	header('Location: http' . (session_issecure()?'s':'') . '://' . getStringFromServer('HTTP_HOST') . $loc);
+	header('Location: '.util_make_url ($loc));
 	print("\n\n");
 	exit;
 }

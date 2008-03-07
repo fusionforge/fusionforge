@@ -247,10 +247,13 @@ class GroupJoinRequest extends Error {
 			$subject = sprintf(_('Request to Join Project %1$s'), $this->Group->getPublicName());
 			$comments = util_unconvert_htmlspecialchars($this->data_array["comments"]);
 			$body = sprintf(_('%1$s has requested to join your project. 
-You can approve this request here: http://%2$s/project/admin/?group_id=%3$s. 
+You can approve this request here: %2$s 
 
 Comments by the user:
-%4$s'), $user->getRealName(), $GLOBALS['sys_default_domain'], $this->Group->getId(), $comments);
+%3$s'),
+					$user->getRealName(),
+					util_make_url ('/project/admin/?group_id='.$this->Group->getId()),
+					$comments);
 			$body = str_replace("\\n","\n",$body);
 
 			$ret = util_send_message($email,$subject,$body);

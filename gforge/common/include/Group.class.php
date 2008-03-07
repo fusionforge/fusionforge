@@ -2040,7 +2040,6 @@ class Group extends Error {
 			$admin =& user_get_object($row_admins['user_id']);
 			setup_gettext_for_user ($admin) ;
 
-			//																			   $2					  $2					$3							  $4						  $5						$6
 			$message=stripcslashes(sprintf(_('Your project registration for %7$s has been approved.
 
 Project Full Name:  %1$s
@@ -2058,20 +2057,26 @@ additional menu functions to your left labeled \'Project Admin\'.
 We highly suggest that you now visit %7$s and create a public
 description for your project. This can be done by visiting your project
 page while logged in, and selecting \'Project Admin\' from the menus
-on the left (or by visiting http://%3$s/project/admin/?group_id=%6$s
+on the left (or by visiting %3$s
 after login).
 
 Your project will also not appear in the Trove Software Map (primary
-list of projects hosted on %7$s which offers great flexibility in
+list of projects hosted on %6$s which offers great flexibility in
 browsing and search) until you categorize it in the project administration
 screens. So that people can find your project, you should do this now.
 Visit your project while logged in, and select \'Project Admin\' from the
 menus on the left.
 
-Enjoy the system, and please tell others about %7$s. Let us know
+Enjoy the system, and please tell others about %6$s. Let us know
 if there is anything we can do to help you.
 
--- the %7$s crew'), $this->getPublicName(), $this->getUnixName(), $GLOBALS['sys_default_domain'], $GLOBALS['sys_shell_host'], $GLOBALS['sys_scm_host'], $this->getID(), $GLOBALS['sys_name']));
+-- the %6$s crew'), 
+						       $this->getPublicName(), 
+						       $this->getUnixName(), 
+						       util_make_url ('/project/admin/?group_id='.$this->getID()),
+						       $GLOBALS['sys_shell_host'], 
+						       $GLOBALS['sys_scm_host'], 
+						       $GLOBALS['sys_name']));
 	
 			util_send_message($row_admins['email'], sprintf(_('%1$s Project Approved'), $GLOBALS['sys_name']), $message);
 
@@ -2185,7 +2190,14 @@ License: %4$s
 Submitter: %6$s (%7$s)
 
 Please visit the following URL to approve or reject this project:
-http://%5$s/admin/approve-pending.php'), $GLOBALS['sys_name'], $this->getPublicName(), util_unconvert_htmlspecialchars($this->getRegistrationPurpose()), $this->getLicenseName(), $GLOBALS['sys_default_domain'], $submitter->getRealName(), $submitter->getUnixName()));
+%5$s'),
+						       $GLOBALS['sys_name'],
+						       $this->getPublicName(),
+						       util_unconvert_htmlspecialchars($this->getRegistrationPurpose()),
+						       $this->getLicenseName(), 
+						       util_make_url ('/admin/approve-pending.php'),
+						       $submitter->getRealName(), 
+						       $submitter->getUnixName()));
 			util_send_message($admin_email, sprintf(_('New %1$s Project Submitted'), $GLOBALS['sys_name']), $message);
 			setup_gettext_from_browser () ;
 		}

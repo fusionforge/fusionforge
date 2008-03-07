@@ -356,17 +356,20 @@ class GFUser extends Error {
 account with username %1$s created for you. In order
 to complete your registration, visit the following url: 
 
-<http://%2$s/account/verify.php?confirm_hash=_%3$s>
+<%2$s>
 
 (If you don\'t see any URL above, it is likely due to a bug in your mail client.
 Use one below, but make sure it is entered as the single line.)
 
-http://%2$s/account/verify.php?confirm_hash=_%3$s
+%2$s
 
 Enjoy the site.
 
--- the %4$s staff
-'), $this->getUnixName(), $GLOBALS['sys_default_domain'], $this->getConfirmHash(), $GLOBALS['sys_name']));
+-- the %3$s staff
+'),
+					       $this->getUnixName(),
+					       util_make_url ('/account/verify.php?confirm_hash=_'.$this->getConfirmHash()),
+					       $GLOBALS['sys_name']));
 		util_send_message(
 			$this->getEmail(),
 			sprintf(_('%1$s Account Registration'), $GLOBALS['sys_name']),
