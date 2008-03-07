@@ -111,9 +111,10 @@ class svntrackerPlugin extends Plugin {
 	*
 	*/
 	function getFileLink($GroupName, $FileName, $LatestRevision) {
-		global $sys_default_domain;
-		return '<a href="/plugins/scmsvn/viewcvs.php/'.
-			$FileName.'?root='.$GroupName.'&view=log&rev=' . $LatestRevision .'">'.$FileName.'</a>';
+		return util_make_link ('/plugins/scmsvn/viewcvs.php/'.$FileName .
+				       '?root='.$GroupName.'&view=log&rev=' .
+				       $LatestRevision,
+				       $FileName) ;
 	}
 
 	/**
@@ -127,10 +128,9 @@ class svntrackerPlugin extends Plugin {
 	*
 	*/
 	function getActualVersionLink($GroupName, $FileName, $Version) {
-		global $sys_default_domain;
-		return '<a href="/plugins/scmsvn/viewcvs.php/'.
-			$FileName.'?root='.$GroupName.'&rev='.$Version.'">'.
-			$Version.'</a>';
+		return util_make_link ('/plugins/scmsvn/viewcvs.php/'.$FileName .
+				       '?root='.$GroupName.'&rev='.$Version,
+				       $Version);
 	}
 
 	/**
@@ -145,11 +145,10 @@ class svntrackerPlugin extends Plugin {
 	*
 	*/
 	function getDiffLink($GroupName, $FileName, $PrevVersion, $ActualVersion) {
-		global $sys_default_domain;
-		return '<a href="/plugins/scmsvn/viewcvs.php/'.
-			$FileName.'?root='.$GroupName.'&r1='.$PrevVersion.'&r2='.
-			$ActualVersion.'">'.
-			_('Diff To').' '.$PrevVersion.'</a>';
+		return util_make_link ('/plugins/scmsvn/viewcvs.php/'.$FileName .
+				       '?root='.$GroupName.'&r1='.$PrevVersion .
+				       '&r2='.$ActualVersion,
+				       _('Diff To').' '.$PrevVersion);
 	}
 
 

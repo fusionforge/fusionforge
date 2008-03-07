@@ -58,7 +58,6 @@ function send_pending_pm_items_mail(){
 	/* first we check the tasks from the project_manager */
 	$sql='select project_task.project_task_id, project_task.group_project_id, project_group_list.group_project_id, group_id, project_task.summary,project_task.created_by, project_task.status_id, project_task_vw.user_name, project_task_vw.status_name, project_task_vw.percent_complete from project_task, project_group_list natural join project_task_vw where project_task.end_date >0 and project_task.end_date<'.$time.' and project_task.group_project_id=project_group_list.group_project_id and project_task.status_id=1;';
 	$res = db_query($sql);
-	global $sys_default_domain;
 	for($i = 0; $i < db_numrows($res); $i++) {
 		$summary= db_result($res,$i,'summary');
 		$status_name=db_result($res,$i,'status_name');
@@ -90,7 +89,6 @@ Click here to visit the item %3$s'), $project_task_id, $summary, $hyperlink, $us
 
 
 function send_pending_tracker_items_mail(){
-	global $sys_default_domain;
 	/* first, get all the items that are considered overdue */
 	$time = time();
 	$sql = 	'SELECT artifact_id, submitted_by, group_id, assigned_to, summary,  details, description,  assigned_realname, submitted_realname, status_name, category_name, group_name, group_artifact_id, open_date	FROM artifact_vw a NATURAL JOIN artifact_group_list agl	WHERE (agl.due_period+a.open_date) < '.$time.' AND	a.status_id=1';	

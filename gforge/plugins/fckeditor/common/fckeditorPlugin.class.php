@@ -46,7 +46,7 @@ class fckeditorPlugin extends Plugin {
 	*
 	*/
 	function CallHook ($hookname, $params) {
-		global $group_id, $sys_default_domain ;
+		global $group_id;
 
 		if (file_exists ("/usr/share/fckeditor/fckeditor.php")) {
 			$use_system_fckeditor = true ;
@@ -97,10 +97,10 @@ class fckeditorPlugin extends Plugin {
 					$oFCKeditor = new FCKeditor('body') ;
 				}
 				if ($use_system_fckeditor) {
-					$oFCKeditor->BasePath = $http . $sys_default_domain  . '/fckeditor/';
+					$oFCKeditor->BasePath = util_make_url ('/fckeditor/');
 					$oFCKeditor->Config['CustomConfigurationsPath'] = "/plugins/fckeditor/config.js"  ;
 				} else {
-					$oFCKeditor->BasePath = $http . $sys_default_domain  . '/plugins/' . $this->name . '/';
+					$oFCKeditor->BasePath = util_make_url('/plugins/' . $this->name . '/');
 				}
 				$oFCKeditor->Value = $params['body']; // this is the initial text that will be displayed (if any)
 				$oFCKeditor->Width = $params['width'];

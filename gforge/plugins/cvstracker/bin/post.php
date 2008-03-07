@@ -173,7 +173,7 @@ if ($use_ssl) {
 	$http = "http://";
 }
 
-$SubmitUrl = $http . $sys_default_domain . '/plugins/cvstracker/newcommit.php';
+$SubmitUrl = util_make_url('/plugins/cvstracker/newcommit.php');
 
 $UserArray=posix_getpwuid ( posix_geteuid ( ) );
 $UserName= $UserArray['name'];

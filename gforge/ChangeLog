@@ -1,3 +1,7 @@
+2008-02-28  Roland Mas  <lolando@debian.org>
+
+	* plugins/*: Migrate to util_make_url() and util_make_link().
+
 2008-02-27  Roland Mas  <lolando@debian.org>
 
 	* deb-specific/db-upgrade.pl: Fixed syntax for PostgreSQL 8.3's

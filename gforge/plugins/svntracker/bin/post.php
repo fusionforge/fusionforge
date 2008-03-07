@@ -174,7 +174,7 @@ if ($use_ssl) {
 	$http = "http://";
 }
 
-$SubmitUrl = $http . $sys_default_domain.'/plugins/svntracker/newcommit.php';
+$SubmitUrl = util_make_url('/plugins/svntracker/newcommit.php');
 if ($svn_tracker_debug) {
 	fwrite($file,"submiturl : " . $SubmitUrl . "\n");
 }

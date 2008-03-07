@@ -118,9 +118,9 @@ class cvstrackerPlugin extends Plugin {
 	*
 	*/
 	function getFileLink($GroupName, $FileName, $LatestRevision) {
-		global $sys_default_domain;
-		return '<a href="/scm/viewvc.php/'.
-			$FileName.'?root='.$GroupName.'&amp;view=log">'.$FileName.'</a>';
+		return url_make_link ('/scm/viewvc.php/'.$FileName .
+				      '?root='.$GroupName.'&amp;view=log',
+				      $FileName);
 	}
 
 	/**
@@ -134,10 +134,10 @@ class cvstrackerPlugin extends Plugin {
 	*
 	*/
 	function getActualVersionLink($GroupName, $FileName, $Version) {
-		global $sys_default_domain;
-		return '<a href="/scm/viewvc.php/'.
-			$FileName.'?root='.$GroupName.'&pathrev='.$Version.'&amp;view=markup">'.
-			$Version.'</a>';
+		return url_make_link ('/scm/viewvc.php/'.$FileName .
+				      '?root='.$GroupName.'&pathrev='.$Version .
+				      '&amp;view=markup',
+				      $Version);
 	}
 
 	/**
@@ -152,11 +152,10 @@ class cvstrackerPlugin extends Plugin {
 	*
 	*/
 	function getDiffLink($GroupName, $FileName, $PrevVersion, $ActualVersion) {
-		global $sys_default_domain;
-		return '<a href="/scm/viewvc.php/'.
-			$FileName.'?root='.$GroupName.'&r1='.$PrevVersion.'&r2='.
-			$ActualVersion.'">'.
-			_('Diff To').' '.$PrevVersion.'</a>';
+		return url_make_link ('/scm/viewvc.php/'.$FileName .
+				      '?root='.$GroupName.'&r1='.$PrevVersion .
+				      '&r2='.$ActualVersion,
+				      _('Diff To').' '.$PrevVersion);
 	}
 
 
