@@ -30,13 +30,7 @@ $HTML->header(array('title'=>_('Requested Page not Found (Error 404)')));
 
 echo "<div align=\"center\">";
 
-if (session_issecure()) {
-	echo '<h1><a href="https://'.$GLOBALS['sys_default_domain'].'">';
-} else {
-	echo '<h1><a href="http://'.$GLOBALS['sys_default_domain'].'">';
-}
-
-echo _('PAGE NOT FOUND')."</a></h1>";
+echo "<h1>".util_make_link('/',_('PAGE NOT FOUND'))."</h1>";
 
 echo "<p />";
 

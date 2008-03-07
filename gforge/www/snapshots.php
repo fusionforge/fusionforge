@@ -54,7 +54,7 @@ if (file_exists($sys_scm_snapshots_path.'/'.$filename)) {
 
 	readfile_chunked($sys_scm_snapshots_path.'/'.$filename);
 } else {
-	session_redirect('/404.php');
+	session_redirect(util_make_url('/404.php'));
 }
 
 ?>

@@ -33,6 +33,7 @@
 	* common/*: Ditto.
 	* cronjobs/*: Ditto.
 	* deb-specific/*: Ditto.
+	* www/* (not recursive): Ditto.
 
 2008-01-11  Roland Mas  <lolando@debian.org>
 
