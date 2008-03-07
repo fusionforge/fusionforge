@@ -4,6 +4,10 @@ gforge (4.6.99+svn6387+urlmaker-0) UNRELEASED; urgency=low
     place, the point being to make it easier to host Gforge in a variety
     of URL schemes (full virtual host or http://shared.host/gforge, for
     instance).
+  * TODO: replace all hand-coded URLs and links with calls to
+    util_make_url or util_make_link
+  * TODO: do something similar for images, or check that html_image() in
+    www/include/html.php does it properly
 
  -- Roland Mas <lolando@debian.org>  Thu, 07 Feb 2008 17:37:36 +0100
 
