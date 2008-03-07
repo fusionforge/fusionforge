@@ -1,3 +1,12 @@
+gforge (4.6.99+svn6387+urlmaker-0) UNRELEASED; urgency=low
+
+  * New branch urlmaker, to compute URLs for links and forms in one single
+    place, the point being to make it easier to host Gforge in a variety
+    of URL schemes (full virtual host or http://shared.host/gforge, for
+    instance).
+
+ -- Roland Mas <lolando@debian.org>  Thu, 07 Feb 2008 17:37:36 +0100
+
 gforge (4.6.99+svn6387+something-0) UNRELEASED; urgency=low
 
   * Tracking upstream SVN.
