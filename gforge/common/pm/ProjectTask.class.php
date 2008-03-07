@@ -1113,9 +1113,9 @@ class ProjectTask extends Error {
 		}
 		$body .= "\n\n-------------------------------------------------------".
 			"\nFor more info, visit:".
-			"\n\nhttp://".$GLOBALS['sys_default_domain']."/pm/task.php?func=detailtask&project_task_id=".
-				$this->getID() ."&group_id=".
-				$this->ProjectGroup->Group->getID() ."&group_project_id=". $this->ProjectGroup->getID();
+			"\n\n".util_make_url ('/pm/task.php?func=detailtask&project_task_id='.$this->getID().
+					      "&group_id=".$this->ProjectGroup->Group->getID().
+					      "&group_project_id=".$this->ProjectGroup->getID());
 
 		$subject="[Task #". $this->getID() .'] '.
 			util_unconvert_htmlspecialchars( $this->getSummary() );
