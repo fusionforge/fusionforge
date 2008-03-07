@@ -507,7 +507,7 @@ class Document extends Error {
 			$body .= "Submitter: ".$this->getCreatorRealName()." (".$this->getCreatorUserName().") \n";
 			$body .= "\n\n-------------------------------------------------------".
 				"\nFor more info, visit:".
-				"\n\nhttp://".$GLOBALS['sys_default_domain']."/docman/index.php?group_id=".$this->Group->getID();
+				"\n\n" . util_make_url('/docman/index.php?group_id='.$this->Group->getID());
 
 			util_send_message('',$subject,$body,'',$BCC);
 		}
