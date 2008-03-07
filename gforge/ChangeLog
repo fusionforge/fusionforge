@@ -29,6 +29,7 @@
 	* common/include/utils.php: New functions util_make_url and
 	util_make_link, whose goal is to provide a central place where URL
 	scheme is implemented.
+	* www/themes/gforge/Theme.class.php: Use these functions.
 
 2008-01-11  Roland Mas  <lolando@debian.org>
 
