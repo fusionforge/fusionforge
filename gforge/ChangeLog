@@ -31,6 +31,7 @@
 	scheme is implemented.
 	* www/themes/gforge/Theme.class.php: Use these functions.
 	* common/*: Ditto.
+	* cronjobs/*: Ditto.
 
 2008-01-11  Roland Mas  <lolando@debian.org>
 

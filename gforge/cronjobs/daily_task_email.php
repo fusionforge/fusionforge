@@ -112,8 +112,8 @@ for ($i=0; $i<db_numrows($res);$i++) {
 						echo '***'.
 						(($now>$task->getEndDate())? 'overdue' : "due $end_date").
 						"***\n";
-						echo 'http://'.$sys_default_domain.'/pm/task.php?func=detailtask&project_task_id='.
-						$task->getID().'&group_id='.$group->getID().'&group_project_id='.$projectGroup->getID();
+						echo util_make_url ('/pm/task.php?func=detailtask&project_task_id='.
+								    $task->getID().'&group_id='.$group->getID().'&group_project_id='.$projectGroup->getID());
 						echo "\n\n";
 
 						$last_group = $group->getID();

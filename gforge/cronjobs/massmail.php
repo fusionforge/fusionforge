@@ -132,8 +132,6 @@ if ($users_res && db_numrows($users_res)==0) {
 	m_exit();
 }
 
-$body = db_result($mail_res, 0, 'message');
-
 // Actual mailing loop
 $compt = 0;
 while ($row =& db_fetch_array($users_res)) {
@@ -148,8 +146,8 @@ by visiting following link:
 <%3$s>
 '), 
 				  $GLOBALS['sys_name'], 
-				  "http://".$GLOBALS['sys_default_domain']."/account/",
-				  "http://".$GLOBALS['sys_default_domain']."/account/unsubscribe.php?ch=_" . $row['confirm_hash']) ;
+				  util_make_url('/account/'),
+				  util_make_url('/account/unsubscribe.php?ch=_'.$row['confirm_hash'])) ;
 	} else {
 		$tail = "" ;
 	}

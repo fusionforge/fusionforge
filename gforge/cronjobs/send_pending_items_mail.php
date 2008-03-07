@@ -64,8 +64,8 @@ function send_pending_pm_items_mail(){
 		$status_name=db_result($res,$i,'status_name');
 		$user_name= db_result($res,$i,'user_name');
 		$project_task_id=db_result($res,$i,'project_task_id');
-		$hyperlink='http://'.$sys_default_domain.'/pm/task.php?func=detailtask&project_task_id='.db_result($res,$i,"project_task_id").'&group_id='.db_result($res,$i,"group_id")
-		.'&group_project_id='.db_result($res,$i,"group_project_id").'';
+		$hyperlink=util_make_url('/pm/task.php?func=detailtask&project_task_id='.db_result($res,$i,"project_task_id").'&group_id='.db_result($res,$i,"group_id")
+					 .'&group_project_id='.db_result($res,$i,"group_project_id"));
 		$sql="select * from users where users.status='A' and user_id in (".db_result($res,$i,"created_by").", (select assigned_to_id from project_assigned_to where project_task_id=".db_result($res,$i,"project_task_id")."))";			
 		$userres=db_query($sql);
 		/* now, for each user, send the mail */
@@ -102,8 +102,8 @@ function send_pending_tracker_items_mail(){
 		$details=db_result($res,$tmp,'detail');
 		$summary= db_result($res,$tmp,'summary');
 		$users='('.db_result($res,$tmp,"submitted_by").','.db_result($res,$tmp,"assigned_to").')';
-		$hyperlink='http://'.$GLOBALS['sys_default_domain'].'/tracker/index.php?func=detail&aid='.db_result($res,$tmp,"artifact_id").'&group_id='.db_result($res,$tmp,"group_id")
-			.'&atid='.db_result($res,$tmp,"group_artifact_id").'';
+		$hyperlink=util_make_url('/tracker/index.php?func=detail&aid='.db_result($res,$tmp,"artifact_id").'&group_id='.db_result($res,$tmp,"group_id")
+					 .'&atid='.db_result($res,$tmp,"group_artifact_id"));
 		$artifact=db_result($res,$tmp,"artifact_id");
 		$opendate=db_result($res,$tmp,"open_date");
 
