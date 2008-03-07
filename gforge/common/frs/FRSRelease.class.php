@@ -282,10 +282,6 @@ class FRSRelease extends Error {
 		$arr =& $this->FRSPackage->getMonitorIDs();
 
 		$date = date('Y-m-d H:i',time());
-		$proto = "http://";
-		if ($GLOBALS['sys_use_ssl']) {
-			$proto = "https://";
-		}
 
 		$subject = sprintf (_('[%1$s Release] %2$s'),
 				    $this->FRSPackage->Group->getUnixName(),
@@ -303,9 +299,9 @@ notified in the future, please login to %5$s and click this link:
 					      $this->FRSPackage->Group->getPublicName(),
 					      $this->FRSPackage->Group->getUnixName(),
 					      $this->FRSPackage->getName(),
-					      "<${proto}".getStringFromServer('HTTP_HOST')."/frs/?group_id=". $this->FRSPackage->Group->getID() ."&release_id=". $this->getID().">",
+					      util_make_url ("/frs/?group_id=". $this->FRSPackage->Group->getID() ."&release_id=". $this->getID()),
 					      $GLOBALS['sys_name'],
-					      "<${proto}".getStringFromServer('HTTP_HOST')."/frs/monitor.php?filemodule_id=".$this->FRSPackage->getID()."&group_id=".$this->FRSPackage->Group->getID()."&stop=1>"));
+					      util_make_url ("/frs/monitor.php?filemodule_id=".$this->FRSPackage->getID()."&group_id=".$this->FRSPackage->Group->getID()."&stop=1")));
 		$text = util_line_wrap($text);
 		if (count($arr)) {
 			util_handle_message(array_unique($arr),$subject,$text);
