@@ -538,7 +538,7 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 		?>
 <div align="center">
 <form "enctype="multipart/form-data"
-	action="<? echo url_make_link ('/forum/forum.php?forum_id='.$this->Forum->getID().'&group_id='.$group_id); ?>"
+	action="<? echo util_make_url ('/forum/forum.php?forum_id='.$this->Forum->getID().'&group_id='.$group_id); ?>"
 	method="post"><?php $objid = $this->Forum->getID();?> <input
 	type="hidden" name="post_message" value="y" /> <input type="hidden"
 	name="thread_id" value="<?php echo $thread_id; ?>" /> <input
