@@ -150,13 +150,13 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	<h2><?php echo $row_grp['group_name']; ?></h2>
 
 	<p />
-	<h3><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/admin/groupedit.php?group_id=<?php echo $row_grp['group_id']; ?>"><?php echo _('[Edit Project Details]'); ?></a></h3>
+	<h3><?php echo util_make_link ('/admin/groupedit.php?group_id='.$row_grp['group_id'],_('[Edit Project Details]')); ?></h3>
 
 	<p />
-	<h3><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/project/admin/?group_id=<?php echo $row_grp['group_id']; ?>"><?php echo _('Project Admin'); ?></a></h3>
+	<h3><?php echo util_make_link ('/project/admin/?group_id='.$row_grp['group_id'],_('Project Admin')); ?></h3>
 
 	<p />
-	<h3><a href="userlist.php?group_id=<?php print $row_grp['group_id']; ?>"><?php echo _('[View/Edit Project Members]'); ?></a></h3>
+	<h3><?php echo util_make_link ('/admin/userlist.php?group_id='.$row_grp['group_id'],_('[View/Edit Project Members]')); ?></h3>
 
 	<p />
 	<table><tr><td>

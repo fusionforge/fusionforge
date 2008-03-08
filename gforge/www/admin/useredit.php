@@ -250,7 +250,7 @@ while ($row_cat = db_fetch_array($res_cat)) {
 		<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>
 		<td>'.$row_cat['group_name'].'</td>
 		<td>'.$row_cat['unix_group_name'].'</td>
-		<td width="40%"><a href="'.$GLOBALS['sys_urlprefix'].'/project/admin/?group_id='.$row_cat['group_id'].'">['._('Project Admin').']</a></td>
+		<td width="40%">'.util_make_link ('/project/admin/?group_id='.$row_cat['group_id'],_('[Project Admin]')).'</td>
 		</tr>
 	';
 

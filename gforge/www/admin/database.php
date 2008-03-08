@@ -135,9 +135,7 @@ if ($displaydb) {
 	");
 
 	while ($row_db = db_fetch_array($res_db)) {
-
-		print '<li><a href="'.$GLOBALS['sys_urlprefix'].'/project/admin/database.php?group_id='.$row_db['group_id'].'">'.$row_db['dbname']."</a></li>";
-
+		print '<li>'.util_make_link ('/project/admin/database.php?group_id='.$row_db['group_id'],$row_db['dbname']).'</li>';
 	}
 	print "</ul>";
 

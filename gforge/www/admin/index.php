@@ -110,7 +110,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	</li>
 </ul>
 <ul>
-	<li><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/register/"><?php echo _('Register New Project'); ?></a></li>
+	<li><?php echo util_make_link ('/register/',_('Register New Project')); ?></li>
 	<li><?php echo _('Groups with status'); ?> <a href="approve-pending.php"><?php echo _('Pending (P)'); ?> <em><?php echo _('(New Project Approval)'); ?></em></a></li>
 	<li><form name="projectsearch" action="search.php">
 	<?php echo _('Groups with status'); ?>
@@ -130,14 +130,14 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 <strong><?php echo _('News'); ?></strong>
 </p>
 <ul>
-	<li><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/news/admin/"><?php echo _('Approve/Reject'); ?></a> <?php echo _('Front-page news'); ?></li>
+	<li><?php echo util_make_link ('/news/admin/',_('Approve/Reject')); ?> <?php echo _('Front-page news'); ?></li>
 </ul>
 
 <p>
 <strong><?php echo _('Stats'); ?></strong>
 </p>
 <ul>
-	<li><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/stats/"><?php echo _('Site-Wide Stats'); ?></a></li>
+	<li><?php echo util_make_link ('/stats/',_('Site-Wide Stats')); ?></li>
 </ul>
 
 <p>
@@ -156,7 +156,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	<li><a href="edit_frs_processor.php"><?php echo _('Add, Delete, or Edit Processors'); ?></a></li>
 	<li><a href="edit_theme.php"><?php echo _('Add, Delete, or Edit Themes'); ?></a></li>
 	<li><a href="edit_licenses.php"><?php echo _('Add, Delete, or Edit Licenses'); ?></a></li>
-	<li><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/stats/lastlogins.php"><?php echo _('Recent logins'); ?></a></li>
+	<li><a href="<?php echo util_make_url ('/stats/lastlogins.php'); ?>"><?php echo _('Recent logins'); ?></a></li>
 	<li><a href="cronman.php"><?php echo _('Cron Manager'); ?></a></li>
 	<li><a href="pluginman.php"><?php echo _('Plugin Manager'); ?></a></li>
 	<li><a href="configman.php"><?php echo _('Config Manager'); ?></a></li>

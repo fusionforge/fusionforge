@@ -1,3 +1,7 @@
+2008-03-07  Christian Bayle <bayle@debian.org>
+	
+	* admin/*: Migrate to util_make_url()
+
 2008-02-28  Roland Mas  <lolando@debian.org>
 
 	* plugins/*: Migrate to util_make_url() and util_make_link().

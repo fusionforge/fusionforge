@@ -177,7 +177,7 @@ if (getStringFromRequest('tweak')) {
 			'.$GLOBALS['HTML']->listTableTop($title).'
 			<tr><td>'.$row_vh['vhostid'].'</td>
 			<td>'.$row_vh['vhost_name'].'</td>
-			<td><a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.$row_vh['unix_group_name'].'">'.$row_vh['unix_group_name'].'</a></td>
+			<td>'.util_make_link ('/projects/'.$row_vh['unix_group_name'],$row_vh['unix_group_name']).'</td>
 			<td><input maxlength="255" type="text" name="docdir" value="'.$row_vh['docdir'].'" /></td>
 			<td><input type="text" name="cgidir" value="'.$row_vh['cgidir'].'" /></td><td><input maxlength="255" type="submit" value="'._('Update').'" /></tr>
 			'.$GLOBALS['HTML']->listTableBottom().'
