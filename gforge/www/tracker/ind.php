@@ -32,7 +32,7 @@ if ($perm->isArtifactAdmin()) {
 
 if (!$at_arr || count($at_arr) < 1) {
 	echo "<h1>"._('No Accessible Trackers Found')."</h1>";
-	echo "<p><strong>".sprintf(_('No trackers have been set up, or you cannot view them.<p><span class="important">The Admin for this project will have to set up data types using the %1$s admin page %2$s</span>'), '<a href="'.$GLOBALS['sys_urlprefix'].'/tracker/admin/?group_id='.$group_id.'">', '</a>')."</strong>";
+	echo "<p><strong>".sprintf(_('No trackers have been set up, or you cannot view them.<p><span class="important">The Admin for this project will have to set up data types using the %1$s admin page %2$s</span>'), '<a href="'.util_make_url ('/tracker/admin/?group_id='.$group_id).'">', '</a>')."</strong>";
 } else {
 
 	echo '<p>'._('Choose a tracker and you can browse/edit/add items to it.').'<p>';
@@ -51,7 +51,7 @@ if (!$at_arr || count($at_arr) < 1) {
 		} else {
 			echo '
 		<tr '. $HTML->boxGetAltRowStyle($j) . '>
-			<td><a href="'.$GLOBALS['sys_urlprefix'].'/tracker/?atid='.$at_arr[$j]->getID().'&amp;group_id='.$group_id.'&func=browse">'.
+			<td><a href="'.util_make_url ('/tracker/?atid='.$at_arr[$j]->getID().'&amp;group_id='.$group_id.'&func=browse').'">'.
 			html_image("ic/tracker20w.png","20","20",array("border"=>"0")).' &nbsp;'.
 			$at_arr[$j]->getName() .'</a>
 			</td>

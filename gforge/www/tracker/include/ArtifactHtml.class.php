@@ -62,7 +62,7 @@ class ArtifactHtml extends Artifact {
 				if(db_result($result,$i,'user_id') == 100) {
 					echo db_result($result,$i,'realname');
 				} else {
-					echo '<a href="'.$GLOBALS['sys_urlprefix'].'/users/'.db_result($result,$i,'user_name').'/">'.db_result($result,$i,'realname').'</a>';
+					echo util_make_link ('/users/'.db_result($result,$i,'user_name'),db_result($result,$i,'realname'));
 				}
 				echo "\n\n". util_line_wrap ( db_result($result, $i, 'body'),65,"\n"). '</pre></td></tr>';
 			}

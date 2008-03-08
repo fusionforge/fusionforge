@@ -44,7 +44,7 @@ $ath->header(array ('title'=>_('Submit')));
 		<td valign="top">';
 	if (!session_loggedin()) {
 		echo '
-		<span class="error">'.sprintf(_('Please %1$s login %2$s'), '<a href="'.$GLOBALS['sys_urlprefix'].'/account/login.php?return_to='.urlencode($REQUEST_URI).'">', '</a>').'</span><<br />
+		<span class="error">'.sprintf(_('Please %1$s login %2$s'), '<a href="'.util_make_url ('/account/login.php?return_to='.urlencode($REQUEST_URI)).'">', '</a>').'</span><<br />
 		'._('If you <strong>cannot</strong> login, then enter your email address here').':<p>
 		<input type="text" name="user_email" size="30" maxlength="35" /></p>
 		';
@@ -61,18 +61,18 @@ $ath->header(array ('title'=>_('Submit')));
  
 	if ($ath->userIsAdmin()) {
 		echo '<tr>
-		<td><strong>'._('Assigned to').': <a href="javascript:help_window(\''.$GLOBALS['sys_urlprefix'].'/help/tracker.php?helpname=assignee\')"><strong>(?)</strong></a></strong><br />';
+		<td><strong>'._('Assigned to').': <a href="javascript:help_window(\''.util_make_url ('/help/tracker.php?helpname=assignee').'\')"><strong>(?)</strong></a></strong><br />';
 		echo $ath->technicianBox ('assigned_to');
-		echo '&nbsp;<a href="'.$GLOBALS['sys_urlprefix'].'/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;update_users=1">('._('Admin').')</a>';
+		echo '&nbsp;'.util_make_link ('/tracker/admin/?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;update_users=1', '('._('Admin').')' );
 
-		echo '</td><td><strong>'._('Priority').': <a href="javascript:help_window(\''.$GLOBALS['sys_urlprefix'].'/help/tracker.php?helpname=priority\')"><strong>(?)</strong></a></strong><br />';
+		echo '</td><td><strong>'._('Priority').': <a href="javascript:help_window(\''.util_make_url ('/help/tracker.php?helpname=priority').'\')"><strong>(?)</strong></a></strong><br />';
 		echo build_priority_select_box('priority');
 		echo '</td></tr>';
 	}
 	
 	?>
 	<tr>
-		<td colspan="2"><strong><?php echo _('Summary') ?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=summary')"></strong><?php echo utils_requiredField(); ?><strong>(?)</strong></a><br />
+		<td colspan="2"><strong><?php echo _('Summary') ?>: <a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=summary'); ?>')"></strong><?php echo utils_requiredField(); ?><strong>(?)</strong></a><br />
 		<input type="text" name="summary" size="80" maxlength="255" />
 		</td>
 	</tr>
@@ -90,7 +90,7 @@ $ath->header(array ('title'=>_('Submit')));
 	<?php 
 	if (!session_loggedin()) {
 		echo '
-		<span class="error">'.sprintf(_('Please %1$s login %2$s'), '<a href="'.$GLOBALS['sys_urlprefix'].'/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI')).'">', '</a>').'</span><br />
+		<span class="error">'.sprintf(_('Please %1$s login %2$s'), '<a href="'.util_make_url ('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))).'">', '</a>').'</span><br />
 		'._('If you <strong>cannot</strong> login, then enter your email address here').':<p>
 		<input type="text" name="user_email" size="30" maxlength="255" /></p>
 		';
@@ -104,7 +104,7 @@ $ath->header(array ('title'=>_('Submit')));
 
 	<tr>
 		<td colspan="2">
-		<a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=attach_file')"><strong>(?)</strong></a><br />
+		<a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=attach_file'); ?>')"><strong>(?)</strong></a><br />
 		<p>
 		<strong><?php echo _('Attach Files') ?>:</strong><br />
 		<input type="file" name="input_file[]" size="30" /><br />

@@ -33,20 +33,7 @@ echo notepad_func();
 					echo '
 					<a href="index.php?group_id='.$group_id.'&amp;artifact_id='.$ah->getID().'&amp;atid='.$ath->getID().'&amp;func=monitor"><strong>'.
 						html_image('ic/'.$img.'','20','20',array()).' '.$key.'</strong></a>';
-					?>&nbsp;<a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=monitor')"><strong>(?)</strong></a>
-
-				<?php /* } else { ?>
-
-				<span class="error">
-				<?php printf(_('Please %1$s login %2$s'), '<a href="'.$GLOBALS['sys_urlprefix'].'/account/login.php?return_to='.urlencode($REQUEST_URI).'">', '</a>') ?></span>
-				<?php if ($ath->allowsAnon()) { ?>
-				<?php echo _('If you <strong>cannot</strong> login, then enter your email address here') ?>
-				<br />
-				<p>
-				<input type="TEXT" name="user_email" SIZE="20" MAXLENGTH="255">
-				<?php } ?>
-
-				<?php  } */ ?>
+					?>&nbsp;<a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=monitor'); ?>')"><strong>(?)</strong></a>
 			</td>
 			<td>
 				<input type="submit" name="submit" value="<?php echo _('Save Changes') ?>" />
@@ -66,13 +53,6 @@ echo notepad_func();
 		</tr>
 		<tr>
 			<td><strong><?php echo _('Submitted by') ?>:</strong><br />
-			<?php
-			echo $ah->getSubmittedRealName();
-			/*if($ah->getSubmittedBy() != 100) {
-				$submittedUnixName = $ah->getSubmittedUnixName();
-				?>
-				(<tt><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/users/<?php echo $submittedUnixName; ?>"><?php echo $submittedUnixName; ?></a></tt>)
-			<?php }*/ ?>
 			</td>
 			<td><strong><?php echo _('Assigned to') ?>:</strong><br />
 			<?php echo $ah->getAssignedRealName(); ?> (<?php echo $ah->getAssignedUnixName(); ?>)</td>
@@ -140,8 +120,7 @@ if ($group->usesPM()) {
 				$enddate   = date(_('Y-m-d H:i'), $taskinfo['end_date']);
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 					<td>'.$taskid.'</td>
-						<td><a href="'.$GLOBALS['sys_urlprefix'].'/pm/task.php?func=detailtask&project_task_id='.$taskid.
-						'&amp;group_id='.$groupid.'&amp;group_project_id='.$projectid.'">'.$summary.'</a></td>
+						<td>'.util_make_link ('/pm/task.php?func=detailtask&project_task_id='.$taskid.'&amp;group_id='.$groupid.'&amp;group_project_id='.$projectid,$summary).'</td>
 						<td>'.$startdate.'</td>
 						<td>'.$enddate.'</td>
 				</tr>';
@@ -185,8 +164,7 @@ if ($group->usesPM()) {
 		for ($i=0; $i<$count; $i++) {
 			echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 			<td>'. htmlspecialchars($file_list[$i]->getName()) .'</td>
-			<td><a href="'.$GLOBALS['sys_urlprefix'].'/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.
-				$file_list[$i]->getID().'/'. $file_list[$i]->getName() .'">'._('Download').'</a></td>
+			<td>'.util_make_link ('/tracker/download.php/'.$group_id.'/'.$ath->getID().'/'.$ah->getID().'/'.$file_list[$i]->getID().'/'.$file_list[$i]->getName(),_('Download')).'</td>
 			</tr>';
 		}
 		echo $GLOBALS['HTML']->listTableBottom();

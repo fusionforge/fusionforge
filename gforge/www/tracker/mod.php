@@ -68,7 +68,7 @@ if (session_loggedin()) {
 			if($ah->getSubmittedBy() != 100) {
 				$submittedUnixName = $ah->getSubmittedUnixName();
 				?>
-				(<tt><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/users/<?php echo $submittedUnixName; ?>"><?php echo $submittedUnixName; ?></a></tt>)
+				(<tt><?php echo util_make_link ('/users/'.$submittedUnixName,$submittedUnixName); ?></tt>)
 			<?php } ?>
 		</td>
 		<td><strong><?php echo _('Date Submitted') ?>:</strong><br />
@@ -85,7 +85,7 @@ if (session_loggedin()) {
 	</tr>
 
 	<tr>
-		<td><strong><?php echo _('Data Type') ?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=data_type')"><strong>(?)</strong></a></strong><br />
+		<td><strong><?php echo _('Data Type') ?>: <a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=data_type'); ?>')"><strong>(?)</strong></a></strong><br />
 		<?php
 
 //
@@ -121,13 +121,13 @@ if (session_loggedin()) {
 	?>
 
 	<tr>
-		<td><strong><?php echo _('Assigned to')?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=assignee')"><strong>(?)</strong></a></strong><br />
+		<td><strong><?php echo _('Assigned to')?>: <a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=assignee'); ?>')"><strong>(?)</strong></a></strong><br />
 		<?php
 		echo $ath->technicianBox('assigned_to', $ah->getAssignedTo() );
-		echo '&nbsp;<a href="'.$GLOBALS['sys_urlprefix'].'/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;update_users=1">('._('Admin').')</a>';
+		echo '&nbsp;'.util_make_link ('/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;update_users=1','('._('Admin').')');
 		?>
 		</td><td>
-		<strong><?php echo _('Priority') ?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=priority')"><strong>(?)</strong></a></strong><br />
+		<strong><?php echo _('Priority') ?>: <a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=priority'); ?>')"><strong>(?)</strong></a></strong><br />
 		<?php
 		/*
 			Priority of this request
@@ -140,7 +140,7 @@ if (session_loggedin()) {
 	<tr>
 		<td>
 		<?php if (!$ath->usesCustomStatuses()) { ?>
-		<strong><?php echo _('State') ?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=status')"><strong>(?)</strong></a></strong><br />
+		<strong><?php echo _('State') ?>: <a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=status'); ?>')"><strong>(?)</strong></a></strong><br />
 		<?php
 
 		echo $ath->statusBox ('status_id', $ah->getStatusID() );
@@ -152,7 +152,7 @@ if (session_loggedin()) {
 	</tr>
 
 	<tr>
-		<td><strong><?php echo _('Summary')?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=summary')"><strong>(?)</strong></a></strong><br />
+		<td><strong><?php echo _('Summary')?>: <a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=summary'); ?>')"><strong>(?)</strong></a></strong><br />
 		<input type="text" name="summary" size="70" value="<?php
 			echo $ah->getSummary(); 
 			?>" maxlength="255" />
@@ -171,13 +171,13 @@ if (session_loggedin()) {
 <div class="tabbertab" title="<?php echo _('Followups'); ?>">
 <table border="0" width="80%">
 	<tr><td colspan="2">
-		<br /><strong><?php echo _('Use Canned Response') ?>: <a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=canned_response')"><strong>(?)</strong></a></strong><br />
+		<br /><strong><?php echo _('Use Canned Response') ?>: <a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=canned_response'); ?>')"><strong>(?)</strong></a></strong><br />
 		<?php
 		echo $ath->cannedResponseBox('canned_response');
-		echo '&nbsp;<a href="'.$GLOBALS['sys_urlprefix'].'/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;add_canned=1">('._('Admin').')</a>';
+		echo '&nbsp;'.util_make_link ('/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;add_canned=1','('._('Admin').')');
 		?>
 		<p>
-		<strong><?php echo _('OR Attach A Comment') ?>:<?php echo notepad_button('document.forms[1].details') ?><a href="javascript:help_window('<?php echo $GLOBALS['sys_urlprefix']; ?>/help/tracker.php?helpname=comment')"><strong>(?)</strong></a></strong><br />
+		<strong><?php echo _('OR Attach A Comment') ?>:<?php echo notepad_button('document.forms[1].details') ?><a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=comment'); ?>')"><strong>(?)</strong></a></strong><br />
 		<textarea name="details" rows="7" cols="60"></textarea></p>
 		<h3><?php echo _('Followup') ?>:</h3>
 		<?php
@@ -214,8 +214,7 @@ if ($group->usesPM()) {
 				$enddate   = date(_('Y-m-d H:i'), $taskinfo['end_date']);
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 					<td>'.$taskid.'</td>
-						<td><a href="'.$GLOBALS['sys_urlprefix'].'/pm/task.php?func=detailtask&amp;project_task_id='.$taskid.
-						'&amp;group_id='.$groupid.'&amp;group_project_id='.$projectid.'">'.$summary.'</a></td>
+						<td>'.util_make_link ('/pm/task.php?func=detailtask&amp;project_task_id='.$taskid.'&amp;group_id='.$groupid.'&amp;group_project_id='.$projectid,$summary).'</td>
 						<td>'.$startdate.'</td>
 						<td>'.$enddate.'</td>
 				</tr>';
@@ -259,7 +258,7 @@ if ($group->usesPM()) {
 				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 				<td><input type="CHECKBOX" name="delete_file[]" value="'. $file_list[$i]->getID() .'">'._('Delete').' </td>'.
 				'<td>'. htmlspecialchars($file_list[$i]->getName()) .'</td>
-				<td><a href="'.$GLOBALS['sys_urlprefix'].'/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.$file_list[$i]->getID().'/'.$file_list[$i]->getName() .'">'._('Download').'</a></td>
+				<td>i'.util_make_link ('/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.$file_list[$i]->getID().'/'.$file_list[$i]->getName(),_('Download')).'</td>
 				</tr>';
 			}
 

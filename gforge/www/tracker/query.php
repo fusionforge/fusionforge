@@ -216,13 +216,13 @@ $res=db_query("SELECT artifact_query_id,query_name
 ?><html>
 <head>
 <title>Query</title>
-<link rel="stylesheet" type="text/css" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/themes/css/gforge-compat.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo util_make_url ('/themes/css/gforge-compat.css'); ?>" />
 <?php
 
 $theme_cssfile=$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'].'/css/theme.css';
 if (file_exists($theme_cssfile)){
 echo '
-<link rel="stylesheet" type="text/css" href="'.$GLOBALS['sys_urlprefix'].'/themes/'.$GLOBALS['sys_theme'].'/css/theme.css" />
+<link rel="stylesheet" type="text/css" href="'.util_make_url ('/themes/'.$GLOBALS['sys_theme'].'/css/theme.css').'" />
 ';
 }
 echo '

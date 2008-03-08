@@ -42,7 +42,7 @@
 				$due_period,$use_resolution,$submit_instructions,$browse_instructions)) {
 				$feedback .= $res->getErrorMessage();
 			} else {
-				header ("Location: ".$GLOBALS['sys_urlprefix']."/tracker/admin/?group_id=$group_id&atid=".$res->getID()."&update_users=1");
+				header ("Location: ".util_make_url ("/tracker/admin/?group_id=$group_id&atid=".$res->getID()."&update_users=1"));
 			}
 
 		}
@@ -97,7 +97,7 @@
 		for ($j = 0; $j < count($at_arr); $j++) {
 			echo '
 			<tr '. $HTML->boxGetAltRowStyle($j) . '>
-				<td><a href="'.$GLOBALS['sys_urlprefix'].'/tracker/admin/?atid='. $at_arr[$j]->getID() . '&amp;group_id='.$group_id.'">' .
+				<td><a href="'.util_make_url ('/tracker/admin/?atid='. $at_arr[$j]->getID() . '&amp;group_id='.$group_id).'">' .
 					html_image("ic/tracker20w.png","20","20",array("border"=>"0")) . ' &nbsp;'.
 					$at_arr[$j]->getName() .'</a>
 				</td>
