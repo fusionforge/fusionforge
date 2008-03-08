@@ -2040,7 +2040,7 @@ class Group extends Error {
 			$admin =& user_get_object($row_admins['user_id']);
 			setup_gettext_for_user ($admin) ;
 
-			$message=stripcslashes(sprintf(_('Your project registration for %7$s has been approved.
+			$message=stripcslashes(sprintf(_('Your project registration for %4$s has been approved.
 
 Project Full Name:  %1$s
 Project Unix Name:  %2$s
@@ -2051,31 +2051,29 @@ site documentation (see link below) about intended usage, available
 services, and directory layout of the account.
 
 If you visit your
-own project page in %7$s while logged in, you will find
+own project page in %4$s while logged in, you will find
 additional menu functions to your left labeled \'Project Admin\'.
 
-We highly suggest that you now visit %7$s and create a public
+We highly suggest that you now visit %4$s and create a public
 description for your project. This can be done by visiting your project
 page while logged in, and selecting \'Project Admin\' from the menus
 on the left (or by visiting %3$s
 after login).
 
 Your project will also not appear in the Trove Software Map (primary
-list of projects hosted on %6$s which offers great flexibility in
+list of projects hosted on %4$s which offers great flexibility in
 browsing and search) until you categorize it in the project administration
 screens. So that people can find your project, you should do this now.
 Visit your project while logged in, and select \'Project Admin\' from the
 menus on the left.
 
-Enjoy the system, and please tell others about %6$s. Let us know
+Enjoy the system, and please tell others about %4$s. Let us know
 if there is anything we can do to help you.
 
--- the %6$s crew'), 
+-- the %4$s crew'), 
 						       $this->getPublicName(), 
 						       $this->getUnixName(), 
 						       util_make_url ('/project/admin/?group_id='.$this->getID()),
-						       $GLOBALS['sys_shell_host'], 
-						       $GLOBALS['sys_scm_host'], 
 						       $GLOBALS['sys_name']));
 	
 			util_send_message($row_admins['email'], sprintf(_('%1$s Project Approved'), $GLOBALS['sys_name']), $message);
