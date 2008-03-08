@@ -431,7 +431,11 @@ function outerTabs($params) {
 			} elseif (!$project->isProject()) {
 
 			} else {
-				$TABS_DIRS[]='/projects/'.$project->getUnixName().'/';
+		    		if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
+		    			$TABS_DIRS[]='/project/?group_id='. $params['group'];
+		    		} else {
+					$TABS_DIRS[]='/projects/'.$project->getUnixName().'/';
+				}
 				$TABS_TITLES[]=$project->getPublicName();
 				$selected=count($TABS_DIRS)-1;
 			}
@@ -494,7 +498,11 @@ function projectTabs($toptab,$group) {
 	//		$TABS_TITLES[]=$project->getPublicName();
 
 	// Summary
-	$TABS_DIRS[]='/projects/'. $project->getUnixName() .'/';
+	if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
+	    	$TABS_DIRS[]='/project/?group_id='. $group;
+	} else {
+		$TABS_DIRS[]='/projects/'. $project->getUnixName() .'/';
+	}
 	$TABS_IDS[]='gforge-project-summary';
 	$TABS_TITLES[]=_('Summary');
 	(($toptab == 'home') ? $selected=(count($TABS_TITLES)-1) : '' );

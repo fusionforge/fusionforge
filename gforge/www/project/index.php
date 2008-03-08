@@ -29,6 +29,13 @@ if (!$group_id) {
 	exit_error("Missing Group Argument","A group must be specified for this page.");
 }
 
-header ("Location: ".$GLOBALS['sys_urlprefix']."/projects/". group_getunixname($group_id) ."/");
+if (isset ($sys_noforcetype) && $sys_noforcetype) {
+	require_once('../env.inc.php');
+	require_once('pre.php');
+	$project = &group_get_object($group_id);
+	include('project_home.php');
+} else {
+	header ("Location: ".$GLOBALS['sys_urlprefix']."/projects/". group_getunixname($group_id) ."/");
+}
 
 ?>

@@ -301,7 +301,11 @@ vironment" border="0" /></a>
 		                } elseif (!$project->isProject()) {
 		
 		                } else {
-		                        $TABS_DIRS[]='/projects/'.$project->getUnixName().'/';
+		    			if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
+		    				$TABS_DIRS[]='/project/?group_id='. $params['group'];
+		    			} else {
+		                       		 $TABS_DIRS[]='/projects/'.$project->getUnixName().'/';
+					}
 		                        $TABS_TITLES[]=$project->getPublicName();
 		                        $selected=count($TABS_DIRS)-1;
 		                }
