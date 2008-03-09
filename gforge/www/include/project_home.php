@@ -88,7 +88,7 @@ if($GLOBALS['sys_use_people']) {
 					ngettext('HELP WANTED: This project is looking for a <a href="%1$s">"%2$s"</a>.',
 						 'HELP WANTED: This project is looking for people to fill <a href="%1$s">several different positions</a>.',
 						 $num),
-					$GLOBALS['sys_urlprefix'].'/people/?group_id='.$group_id,
+					util_make_url ('/people/?group_id='.$group_id),
 					db_result($jobs_res,0,"name"));
 			}
 	}
@@ -118,7 +118,7 @@ if (db_numrows($res_admin) > 0) {
 				$started_developers=true;
 				echo '<span class="develtitle">'. _('Developers').':</span><br />';
 			}
-			echo '<a href="'.$GLOBALS['sys_urlprefix'].'/users/'.$row_admin['user_name'].'/">'.$row_admin['realname'].'</a><br />';
+			echo util_make_link ('/users/'.$row_admin['user_name'].'/',$row_admin['realname']).'<br />';
 		}
 	?>
 	<hr width="100%" size="1" />
@@ -128,8 +128,8 @@ if (db_numrows($res_admin) > 0) {
 
 ?>
 
-<p><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/project/memberlist.php?group_id=<?php print $group_id; ?>">[<?php echo _('View Members') ?>]</a></p>
-<p><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/project/request.php?group_id=<?php print $group_id; ?>">[<?php echo _('Request to join'); ?>]</a></p>
+<p><?php echo util_make_link ('/project/memberlist.php?group_id='.$group_id,'['._('View Members').']'); ?></p>
+<p><?php echo util_make_link ('/project/request.php?group_id='.$group_id,'['._('Request to join').']'); ?></p>
 <?php
 
 echo $HTML->boxBottom();
@@ -217,20 +217,20 @@ if ($project->usesFRS()) {
 					print '<td>'.db_result($res_files,$f,'release_name') .'
 					</td>
 					<td>' . $rel_date["month"] . ' ' . $rel_date["mday"] . ', ' . $rel_date["year"] . '</td>
-					<td><a href="'.$GLOBALS['sys_urlprefix'].'/frs/shownotes.php?group_id=' . $group_id . '&amp;release_id=' . db_result($res_files,$f,'release_id') . '">';
+					<td><a href="'.util_make_url ('/frs/shownotes.php?group_id=' . $group_id . '&amp;release_id=' . db_result($res_files,$f,'release_id')) . '">';
 					echo html_image('ic/manual16c.png','15','15',array('alt'=>_('Release Notes')));
-					echo '</a> - <a href="'.$GLOBALS['sys_urlprefix'].'/frs/monitor.php?filemodule_id=' .	db_result($res_files,$f,'package_id') . '&amp;group_id='.$group_id.'&amp;start=1">';
+					echo '</a> - <a href="'.util_make_url ('/frs/monitor.php?filemodule_id=' . db_result($res_files,$f,'package_id') . '&amp;group_id='.$group_id.'&amp;start=1').'">';
 					echo html_image('ic/mail16d.png','15','15',array('alt'=>_('Monitor this package')));
 					echo '</a>
 					</td>
-					<td><a href="'.$GLOBALS['sys_urlprefix'].'/frs/?group_id=' . $group_id . '&amp;release_id=' . db_result($res_files,$f,'release_id') . '">'._('Download').'</a></td></tr>';
+					<td>'.util_make_link ('/frs/?group_id=' . $group_id . '&amp;release_id=' . db_result($res_files,$f,'release_id'),_('Download')).'</td></tr>';
 				}
 			}
 
 		}
 		?></table>
 	<div style="text-align:center">
-	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/frs/?group_id=<?php print $group_id; ?>">[<?php echo _('View All Project Files')?>]</a>
+	<?php echo util_make_link ('/frs/?group_id='.$group_id,'['._('View All Project Files').']'); ?>
 	</div>
 <?php
 	echo $HTML->boxBottom();
@@ -257,7 +257,7 @@ print '&nbsp;'._('Project Home Page').'</a>';
 
 // CB hide tracker if desired
 if ($project->usesTracker()) {
-	print '<hr size="1" /><a href="'.$GLOBALS['sys_urlprefix'].'/tracker/?group_id='.$group_id.'">';
+	print '<hr size="1" /><a href="'.util_make_url ('/tracker/?group_id='.$group_id).'">';
 	print html_image('ic/tracker20g.png','20','20',array('alt'=>_('Tracker')));
 	print _('Tracker').'</a>';
 
@@ -275,9 +275,8 @@ if ($project->usesTracker()) {
 	} else {
 		for ($j = 0; $j < $rows; $j++) {
 			echo '<p />
-		&nbsp;-&nbsp;<a href="'.$GLOBALS['sys_urlprefix'].'/tracker/?atid='. db_result($result, $j, 'group_artifact_id') .
-		'&amp;group_id='.$group_id.'&amp;func=browse">'. db_result($result, $j, 'name') .'</a>
-		'.sprintf(ngettext('(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', '(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', (int) db_result($result, $j, 'open_count')), (int) db_result($result, $j, 'open_count'), (int) db_result($result, $j, 'count')) .'<br />'.
+		&nbsp;-&nbsp;'.util_make_link ('/tracker/?atid='. db_result($result, $j, 'group_artifact_id') . '&amp;group_id='.$group_id.'&amp;func=browse',db_result($result, $j, 'name'))
+		.sprintf(ngettext(' (<strong>%1$s</strong> open / <strong>%2$s</strong> total)', ' (<strong>%1$s</strong> open / <strong>%2$s</strong> total)', (int) db_result($result, $j, 'open_count')), (int) db_result($result, $j, 'open_count'), (int) db_result($result, $j, 'count')) .'<br />'.
 		db_result($result, $j, 'description');
 		}
 	}
@@ -286,7 +285,7 @@ if ($project->usesTracker()) {
 // ################## forums
 
 if ($project->usesForum()) {
-	print '<hr size="1" /><a href="'.$GLOBALS['sys_urlprefix'].'/forum/?group_id='.$group_id.'">';
+	print '<hr size="1" /><a href="'.util_make_url ('/forum/?group_id='.$group_id).'">';
 	print html_image('ic/forum20g.png','20','20',array('alt'=>_('Forums')));
 	print '&nbsp;'._('Public Forums').'</a> ( ';
 	$messages_count = project_get_public_forum_message_count($group_id);
@@ -302,7 +301,7 @@ if ($project->usesForum()) {
 if ($project->usesDocman()) {
 	print '
 	<hr size="1" />
-	<a href="'.$GLOBALS['sys_urlprefix'].'/docman/?group_id='.$group_id.'">';
+	<a href="'.util_make_url ('/docman/?group_id='.$group_id).'">';
 	print html_image('ic/docman16b.png','20','20',array('alt'=>_('Docs')));
 	print '&nbsp;'._('DocManager: Project Documentation').'</a>';
 }
@@ -310,7 +309,7 @@ if ($project->usesDocman()) {
 // ##################### Mailing lists
 
 if ($project->usesMail()) {
-	print '<hr size="1" /><a href="'.$GLOBALS['sys_urlprefix'].'/mail/?group_id='.$group_id.'">';
+	print '<hr size="1" /><a href="'.util_make_url ('/mail/?group_id='.$group_id).'">';
 	print html_image('ic/mail16b.png','20','20',array('alt'=>_('Lists')));
 	print '&nbsp;'._('Mailing Lists').'</a>';
 	$n = project_get_mail_list_count($group_id);
@@ -320,7 +319,7 @@ if ($project->usesMail()) {
 // ##################### Task Manager
 
 if ($project->usesPm()) {
-	print '<hr size="1" /><a href="'.$GLOBALS['sys_urlprefix'].'/pm/?group_id='.$group_id.'">';
+	print '<hr size="1" /><a href="'.util_make_url ('/pm/?group_id='.$group_id).'">';
 	print html_image('ic/taskman20g.png','20','20',array('alt'=>_('Tasks')));
 	print '&nbsp;'._('Task Manager').'</a>';
 	$sql="SELECT * FROM project_group_list WHERE group_id='$group_id' AND is_public=1";
@@ -331,8 +330,7 @@ if ($project->usesPm()) {
 	} else {
 		for ($j = 0; $j < $rows; $j++) {
 			echo '
-			<br /> &nbsp; - <a href="'.$GLOBALS['sys_urlprefix'].'/pm/task.php?group_project_id='.db_result($result, $j, 'group_project_id').
-			'&amp;group_id='.$group_id.'&amp;func=browse">'.db_result($result, $j, 'project_name').'</a>';
+			<br /> &nbsp; - '.util_make_link ('/pm/task.php?group_project_id='.db_result($result, $j, 'group_project_id').'&amp;group_id='.$group_id.'&amp;func=browse',db_result($result, $j, 'project_name'));
 		}
 
 	}
@@ -341,7 +339,7 @@ if ($project->usesPm()) {
 // ######################### Surveys
 
 if ($project->usesSurvey()) {
-	print '<hr size="1" /><a href="'.$GLOBALS['sys_urlprefix'].'/survey/?group_id='.$group_id.'">';
+	print '<hr size="1" /><a href="'.util_make_url ('/survey/?group_id='.$group_id).'">';
 	print html_image('ic/survey16b.png','20','20',array('alt'=>_('Surveys')));
 	print " "._('Surveys')."</a>";
 	echo ' ( <strong>'. project_get_survey_count($group_id) .'</strong> '._('surveys').'  )';
@@ -350,7 +348,7 @@ if ($project->usesSurvey()) {
 // ######################### SCM
 
 if ($project->usesSCM()) {
-	print '<hr size="1" /><a href="'.$GLOBALS['sys_urlprefix'].'/scm/?group_id='.$group_id.'">';
+	print '<hr size="1" /><a href="'.util_make_url ('/scm/?group_id='.$group_id).'">';
 	print html_image('ic/cvs16b.png','20','20',array('alt'=>_('SCM')));
 	print " "._('SCM Repository')."</a>";
 

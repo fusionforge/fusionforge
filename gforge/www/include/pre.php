@@ -158,6 +158,7 @@ if (session_loggedin()) {
 */
 
 require_once('common/include/gettext.php');
+require_once('common/include/group_section_texts.php');
 
 setup_gettext_from_browser() ;
 

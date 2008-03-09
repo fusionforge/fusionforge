@@ -60,10 +60,11 @@ function show_top_downloads() {
 	$return = "";
 	while ($row_topdown = db_fetch_array($res_topdown)) {
 		if ($row_topdown['downloads'] > 0)
-			$return .= "(" . number_format($row_topdown['downloads']) . ') <a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.$row_topdown['unix_group_name'].'/">'
-			. $row_topdown['group_name']."</a><br />\n";
+			$return .= '(' . number_format($row_topdown['downloads']) . ')'
+			. util_make_url ('/projects/'.$row_topdown['unix_group_name'].'/',$row_topdown['group_name'])
+			. "<br />\n";
 	}
-	$return .= '<div align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/top/">[ '._('More').' ]</a></div>';
+	$return .= '<div align="center">'.util_make_link ('/top/',_('More')).'</div>';
 
 	return $return;
 
@@ -131,12 +132,12 @@ function show_newest_projects() {
 	} else {
 		while ( $row_newproj = db_fetch_array($res_newproj) ) {
 			$return .= "<strong>(" . date(_('m/d'),$row_newproj['register_time'])  . ")</strong> "
-				. '<a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.$row_newproj['unix_group_name'].'/">'
-				. $row_newproj['group_name'].'</a><br />';
+				. util_make_link ('/projects/'.$row_newproj['unix_group_name'].'/',$row_newproj['group_name'])
+				.'<br />';
 		}
 	}
 	/// TODO: Add more link to show all project
-	//$return .= '<div align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/top/projlist.php">[ '._('More').' ]</a></div>';
+	//$return .= '<div align="center">'.util_make_link ('/top/projlist.php','[ '._('More').' ]').'</div>';
 	return $return;
 }
 
@@ -153,10 +154,12 @@ function show_highest_ranked_users() {
 	} else {
 		$return = '';
 		for ($i=0; $i<$rows; $i++) {
-			$return .= ($i+1).' - ('. number_format(db_result($res,$i,'metric'),4) .') <a href="'.$GLOBALS['sys_urlprefix'].'/users/'. db_result($res,$i,'user_name') .'">'. db_result($res,$i,'realname') .'</a><br />';
+			$return .= ($i+1).' - ('. number_format(db_result($res,$i,'metric'),4) .') '
+			. util_make_link ('/users/'. db_result($res,$i,'user_name'), db_result($res,$i,'realname'))
+			.'<br />';
 		}
 	}
-	$return .= '<div align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/top/topusers.php">[  '._('More').' ]</a></div>';
+	$return .= '<div align="center">'.util_make_link ('/top/topusers.php','[ '._('More').' ]').'</div>';
 	return $return;
 }
 
@@ -175,10 +178,12 @@ function show_highest_ranked_projects() {
 	} else {
 		while ($row=db_fetch_array($result)) {
 			$return .= '<strong>( '.number_format(substr($row['percentile'],0,5),1).'% )</strong>'
-				.' <a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.$row['unix_group_name'].
-			'/">'.$row['group_name'].'</a><br />';
+				.util_make_link ('/projects/'.$row['unix_group_name'].'/',$row['group_name'])
+				.'<br />';
 		}
-		$return .= '<div align="center"><a href="'.$GLOBALS['sys_urlprefix'].'/top/mostactive.php?type=week">[ '._('More').' ]</a></div>';
+		$return .= '<div align="center">'
+		.util_make_link ('/top/mostactive.php?type=week','[ '._('More').' ]')
+		.'</div>';
 	}
 	return $return;
 }

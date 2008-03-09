@@ -240,9 +240,8 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats) {
 	$need_close_ul_tag = 0;
 	if (db_numrows($res_trovecat) < 1) {
 		$return .= _('This project has not yet categorized itself in the')
-			.' <a href="'.$GLOBALS['sys_urlprefix'].'/softwaremap/trove_list.php">'
-			. _('Trove Software Map')
-			.'</a>.<p />';
+			.util_make_link ('/softwaremap/trove_list.php',_('Trove Software Map'))
+			.'<p />';
 	} else {
 		$return .= '<ul>';
 		$need_close_ul_tag = 1;
@@ -277,8 +276,8 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats) {
 		}
 
 		if ($a_cats) {
-			$return .= '<a href="'.$GLOBALS['sys_urlprefix'].'/softwaremap/trove_list.php?form_cat='
-				 .$folders_ids[$folders_len-1].$discrim_url.'">';
+			$return .= '<a href="'
+			.util_make_url ('/softwaremap/trove_list.php?form_cat='.$folders_ids[$folders_len-1].$discrim_url).'">';
 		}
 		$return .= ($folders[$folders_len-1]);
 		if ($a_cats) {
@@ -289,8 +288,7 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats) {
 			if ($filterisalreadyapplied) {
 				$return .= ' <strong>'._('(Now Filtering)').'</strong> ';
 			} else {
-				$return .= ' <a href="'.$GLOBALS['sys_urlprefix'].'/softwaremap/trove_list.php?form_cat='
-					 .$form_cat;
+				$return .= ' <a href="'.util_make_url ('/softwaremap/trove_list.php?form_cat='.$form_cat);
 				if ($discrim_url) {
 					$return .= $discrim_url.','.$folders_ids[$folders_len-1];
 				} else {

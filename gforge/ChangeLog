@@ -1,6 +1,7 @@
-2008-03-07  Christian Bayle <bayle@debian.org>
+2008-03-09  Christian Bayle <bayle@debian.org>
 	
-	* admin/*: Migrate to util_make_url() and util_make_link()
+	* include/*: Migrate to util_make_url() and util_make_link()
+	* admin/*: Ditto
 	* my/*: Ditto
 	* tracker/*: Ditto
 	* search/*: Ditto
