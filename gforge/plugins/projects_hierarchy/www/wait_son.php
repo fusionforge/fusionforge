@@ -44,5 +44,5 @@ $params[1] =  $group_id;
 
 plugin_hook('add_cal_link_father',$params);
 
-header("Location: ".$GLOBALS['sys_urlprefix']."/project/admin/index.php?group_id=$sub_group_id");
+header("Location: ".util_make_url ('/project/admin/index.php?group_id='.$sub_group_id));
 ?>

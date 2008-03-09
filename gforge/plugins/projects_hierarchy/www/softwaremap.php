@@ -305,8 +305,7 @@ if(@$_SESSION['cat'] != 't'){
 		
 			if ($row_grp && $viewthisrow) {
 				print '<table border="0" cellpadding="0" width="100%"><tr valign="top"><td colspan="2"><span style="font-family:arial,helvetica">';
-				print '$i_proj. <a href="'.$GLOBALS['sys_urlprefix'].'/projects/'. strtolower($row_grp['unix_group_name']) .'/"><strong>'
-					.htmlspecialchars($row_grp['group_name']).'</strong></a> ';
+				print '$i_proj. '.util_make_link ('/projects/'. strtolower($row_grp['unix_group_name']) .'/','<strong>'.htmlspecialchars($row_grp['group_name']).'</strong> ');
 				if ($row_grp['short_description']) {
 					print "- " . htmlspecialchars($row_grp['short_description']);
 				}
@@ -399,7 +398,7 @@ else {
 				reset($arbre);
 				//construction automatique de l'arbre format : (num_fils, num_pere,nom,nom_unix)
 				while (list($key2, $sons2) = each($arbre)) {
-				print "d.add(".$key2.",".$sons2.",'".$project_name[$key2][0]."','".$GLOBALS['sys_urlprefix']."/projects/".$project_name[$key2][1]."/');\n";
+					print "d.add(".$key2.",".$sons2.",'".$project_name[$key2][0]."','".util_make_link ("/projects/".$project_name[$key2][1] ."/") . "');\n";
 				}
 				?>
 		

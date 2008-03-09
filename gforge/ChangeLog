@@ -1,6 +1,7 @@
 2008-03-09  Christian Bayle <bayle@debian.org>
 	
-	* snippet/*: Migrate to util_make_url() and util_make_link()
+	* plugins/*: Migrate to util_make_url() and util_make_link()
+	* snippet/*: Ditto
 	* include/*: Ditto
 	* admin/*: Ditto
 	* my/*: Ditto

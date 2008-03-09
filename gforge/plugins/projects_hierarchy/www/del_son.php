@@ -45,5 +45,5 @@ db_begin();
 db_query($sql) or die(db_error());
 db_commit();
 
-header("Location: ".$GLOBALS['sys_urlprefix']."/project/admin/index.php?group_id=$group_id");
+header("Location: ".util_make_url ('/project/admin/index.php?group_id='.$group_id));
 ?>
