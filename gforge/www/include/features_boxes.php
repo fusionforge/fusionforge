@@ -130,10 +130,18 @@ function show_newest_projects() {
 	if (!$res_newproj || db_numrows($res_newproj) < 1) {
 		return _('No Stats Available')." ".db_error();
 	} else {
-		while ( $row_newproj = db_fetch_array($res_newproj) ) {
-			$return .= "<strong>(" . date(_('m/d'),$row_newproj['register_time'])  . ")</strong> "
+		if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
+			while ( $row_newproj = db_fetch_array($res_newproj) ) {
+				$return .= "<strong>(" . date(_('m/d'),$row_newproj['register_time'])  . ")</strong> "
+				. util_make_link ('/project/?group_id='.$row_newproj['group_id'],$row_newproj['group_name'])
+				.'<br />';
+			}
+		} else {
+			while ( $row_newproj = db_fetch_array($res_newproj) ) {
+				$return .= "<strong>(" . date(_('m/d'),$row_newproj['register_time'])  . ")</strong> "
 				. util_make_link ('/projects/'.$row_newproj['unix_group_name'].'/',$row_newproj['group_name'])
 				.'<br />';
+			}
 		}
 	}
 	/// TODO: Add more link to show all project
