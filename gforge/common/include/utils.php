@@ -930,7 +930,7 @@ function util_make_url ($path) {
 		$url = "http://" ;
 	
 	$url .= $GLOBALS['sys_default_domain'] ;
-	// $url .= $GLOBALS['url_prefix'] ;
+	$url .= $GLOBALS['sys_urlprefix'] ;
 	$url .= "/" ;
 	$path = ereg_replace ("^/", "", $path) ;
 	$url .= $path ;
