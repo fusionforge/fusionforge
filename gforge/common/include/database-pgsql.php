@@ -76,13 +76,18 @@ function db_connect() {
 	//
 	//	Connect to primary database
 	//
-	$gfconn = @pg_pconnect(pg_connectstring($sys_dbname, $sys_dbuser, $sys_dbpasswd, $sys_dbhost, $sys_dbport));
+	if (function_exists("pg_pconnect")) {
+		$gfconn = pg_pconnect(pg_connectstring($sys_dbname, $sys_dbuser, $sys_dbpasswd, $sys_dbhost, $sys_dbport));
+	} else {
+		print("function pg_pconnect doesn't exist: no postgresql interface");
+		exit;
+	}
 
 	//
 	//	If any replication is configured, connect
 	//
 	if ($sys_db_use_replication) {
-		$gfconn2 = @pg_pconnect(pg_connectstring($sys_dbreaddb, $sys_dbuser, $sys_dbpasswd, $sys_dbreadhost, $sys_dbreadport));
+		$gfconn2 = pg_pconnect(pg_connectstring($sys_dbreaddb, $sys_dbuser, $sys_dbpasswd, $sys_dbreadhost, $sys_dbreadport));
 	} else {
 		$gfconn2 = $gfconn;
 	}
