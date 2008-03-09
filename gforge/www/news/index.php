@@ -71,7 +71,7 @@ if ($rows < 1) {
 
 	for ($j = 0; $j < $rows; $j++) { 
 		echo '
-		<a href="'.$GLOBALS['sys_urlprefix'].'/forum/forum.php?forum_id='.db_result($result, $j, 'forum_id').'">'.
+		<a href="'.util_make_url ('/forum/forum.php?forum_id='.db_result($result, $j, 'forum_id')).'">'.
 			html_image("ic/cfolder15.png","15","13",array("border"=>"0")) . ' &nbsp;'.
 			stripslashes(db_result($result, $j, 'summary')).'</a> ';
 		echo '

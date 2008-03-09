@@ -136,8 +136,8 @@ if (getStringFromRequest('submit')) {
 						<p>
 							 <?php 
 							 printf (_('You can now <a href="%1$s"><strong>add files to this release</strong></a> if you wish, or edit the release. Please note that file(s) may not appear immediately on the <a href="%2$s">download page</a>. Allow several hours for propagation.'),
-								 $GLOBALS['sys_urlprefix'].'/frs/admin/editrelease.php?release_id='.$frsr->getID().'&amp;group_id='.$group_id.'&amp;package_id='.$package_id,
-								 $GLOBALS['sys_urlprefix'].'/frs/?group_id='.$group_id
+								 util_make_url ('/frs/admin/editrelease.php?release_id='.$frsr->getID().'&amp;group_id='.$group_id.'&amp;package_id='.$package_id),
+								 util_make_url ('/frs/?group_id='.$group_id)
 								 )
 							 ?>
 						<?php
@@ -157,6 +157,17 @@ if (getStringFromRequest('submit')) {
 
 	}
 
+} else {
+	$release_name = '';
+	$userfile = '';
+	$userfile_name = '';
+	$type_id = '';
+	$processor_id = '';
+	$release_date = '';
+	$release_notes = '';
+	$release_changes = '';
+	$preformatted = '';
+	$ftp_filename = '';
 }
 
 frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
@@ -189,7 +200,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 ?>
 			&nbsp;&nbsp;
 			
-			<?php printf(_('Or %1$s create a new package %2$s'), '<a href="'.$GLOBALS['sys_urlprefix'].'/frs/admin/?group_id='.$group_id.'">', '</a>') ?>
+			<?php printf(_('Or %1$s create a new package %2$s'), '<a href="'.util_make_url ('/frs/admin/?group_id='.$group_id).'">', '</a>') ?>
 		</td>
 	</tr>
 	<tr>

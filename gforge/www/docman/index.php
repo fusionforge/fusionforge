@@ -127,14 +127,14 @@ function docman_recursive_display($docgroup) {
 }
 
 ?>
-<script language="JavaScript" src="<?php echo $GLOBALS['sys_urlprefix']; ?>/jscook/JSCookTree.js"></script>
-<link rel="stylesheet" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/jscook/ThemeXP/theme.css" type="text/css" />
+<script language="JavaScript" src="<?php echo util_make_url ('/jscook/JSCookTree.js'); ?>"></script>
+<link rel="stylesheet" href="<?php echo util_make_url ('/jscook/ThemeXP/theme.css'); ?>" type="text/css" />
 <script src="/jscook/ThemeXP/theme.js" type="text/javascript"></script>
 
 <script language="JavaScript"><!--
 var myMenu =
 [
-['<span class="JSCookTreeFolderClosed"><i><img src="<?php echo $GLOBALS['sys_urlprefix']; ?>/jscook/ThemeXP/folder1.gif"></i></span><span class="JSCookTreeFolderOpen"><i><img src="/jscook/ThemeXP/folderopen1.gif"></i></span>', '/', '#', '', '',
+['<span class="JSCookTreeFolderClosed"><i><img src="<?php echo util_make_url ('/jscook/ThemeXP/folder1.gif'); ?>"></i></span><span class="JSCookTreeFolderOpen"><i><img src="/jscook/ThemeXP/folderopen1.gif"></i></span>', '/', '#', '', '',
 <?php
 docman_recursive_display(0);
 ?>

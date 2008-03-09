@@ -35,19 +35,19 @@ class Theme extends Layout {
 		
 		<body>
 		<p align=left>
-		<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"><h2>GForge</h2></a>
+		<?php echo util_make_link ('/',_('GForge')); ?></h2></a>
 		</p>
 		<p align=right>
 		<?php
 		if (session_loggedin()) {
 		?>
-		<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/logout.php"><?php echo _('Log Out'); ?></a></b>
-		<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/"><?php echo _('My Account'); ?></a></b>
+		<b><?php echo util_make_link ('/account/logout.php',_('Log Out')); ?></b>
+		<b><?php echo util_make_link ('/account/',_('My Account')); ?></b>
 		<?php
 		} else {
 		?>
-		<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/login.php"><?php echo _('Log In'); ?></a></b>
-		<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/register.php"><?php echo _('New Account'); ?></a></b>
+		<b><?php echo util_make_link ('/account/login.php',_('Log In')); ?></b>
+		<b><?php echo util_make_link ('/account/register.php',_('New Account')); ?></b>
 		<?php
 		}
 		?>
@@ -144,7 +144,7 @@ class Theme extends Layout {
 		<?php
 		global $sys_show_source;
 		if ($sys_show_source) {
-		print '<a class="showsource" href="'.$GLOBALS['sys_urlprefix'].'/source.php?file=' . getStringFromServer('SCRIPT_NAME') . '">Show Source</a>';
+			echo util_make_link ('/source.php?file='.getStringFromServer('SCRIPT_NAME'),_('Show Source'),array('class'=>'showsource'));
 		}
 		?>
 		</body>

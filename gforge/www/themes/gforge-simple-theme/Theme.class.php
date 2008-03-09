@@ -66,7 +66,7 @@ class Theme extends Error {
 	 *	@param	string	The user's realname
 	 */
 	function createLinkToUserHome($user_name, $realname) {
-		return '<a href="'.$GLOBALS['sys_urlprefix'].'/users/'.$user_name.'/">'.$realname.'</a>';
+		return util_make_link ('/users/'.$user_name.'/',$realname);
 	}
 
 	/**
@@ -96,19 +96,21 @@ class Theme extends Error {
 <title><?php echo $params['title']; ?></title>
 <link rel="alternate"
 	title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS"
-	href="<?php echo $GLOBALS['sys_urlprefix']; ?>/export/rss_sfnews.php"
+	href="<?php echo util_make_url ('/export/rss_sfnews.php'); ?>"
 	type="application/rss+xml" />
 <link rel="alternate"
 	title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS 2.0"
-	href="<?php echo $GLOBALS['sys_urlprefix']; ?>/export/rss20_news.php"
+	href="<?php echo util_make_url ('/export/rss20_news.php'); ?>"
 	type="application/rss+xml" />
 <link rel="alternate"
 	title="<?php echo $GLOBALS['sys_name']; ?> - New Projects RSS"
-	href="<?php echo $GLOBALS['sys_urlprefix']; ?>/export/rss_sfprojects.php"
+	href="<?php echo util_make_url ('/export/rss_sfprojects.php'); ?>"
 	type="application/rss+xml" />
 
 		<?php	if (isset($GLOBALS['group_id'])) {
-			$activity = '<link rel="alternate" title="'.$GLOBALS['sys_name'].' - New Activity RSS" href="'.$GLOBALS['sys_urlprefix'].'/export/rss20_activity.php?group_id='.$GLOBALS['group_id'].'" type="application/rss+xml"/>';
+			$activity = '<link rel="alternate" title="'.$GLOBALS['sys_name'].' - New Activity RSS" href="'.
+			util_make_url ('/export/rss20_activity.php?group_id='.$GLOBALS['group_id']).
+			'" type="application/rss+xml"/>';
 			echo $activity;
 		}
 		?>
@@ -121,7 +123,7 @@ class Theme extends Error {
 		$theme_cssfile=$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'].'/css/'.$GLOBALS['sys_theme'].'.css';
 		if (file_exists($theme_cssfile)){
 			echo '
-<link rel="stylesheet" type="text/css" href="'.$GLOBALS['sys_urlprefix'].'/themes/'.$GLOBALS['sys_theme'].'/css/'.$GLOBALS['sys_theme'].'.css"/>';
+<link rel="stylesheet" type="text/css" href="'.util_make_url ('/themes/'.$GLOBALS['sys_theme'].'/css/'.$GLOBALS['sys_theme'].'.css').'"/>';
 		}
 		?>
 
@@ -153,18 +155,15 @@ function header($params) {
 
 <div id="container">
 <div id="logo">
-<h1><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/">Goto GForge</a></h1>
-<!--<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"><img src="<?php echo $GLOBALS['sys_urlprefix']; ?>/themes/gforge-simple-theme/images/logo.png" border="0" margin="0" padding="0" valign="top"/></a>-->
+<h1><?php echo util_make_link ('/',_('Goto GForge')); ?></h1>
 </div>
 <div id="util"><?php	if (session_loggedin()) {
-	?> <a
-	href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/logout.php"><?php echo _('Log Out'); ?></a><br />
-<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/"><?php echo _('My Account'); ?></a><br />
-
+	echo util_make_link ('/account/logout.php',_('Log Out')); ?><br />
+<?php echo util_make_link ('/account/',_('My Account')); ?><br />
 	<?php
 } else {
-	?> <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/login.php"><?php echo _('Log In'); ?></a><br />
-<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/register.php"><?php echo _('New Account'); ?></a>
+	echo util_make_link ('/account/login.php',_('Log In')); ?><br />
+<?php echo util_make_link ('/account/register.php',_('New Account')); ?>
 	<?php
 }
 ?></div>
@@ -220,7 +219,7 @@ function footerEnd($params) { ?> <!-- PLEASE LEAVE "Powered By GForge" on your s
 <?php
 global $sys_show_source;
 if ($sys_show_source) {
-	print '<a class="showsource" href="'.$GLOBALS['sys_urlprefix'].'/source.php?file=' . getStringFromServer('SCRIPT_NAME') . '"> '._('Show source').' </a>';
+	echo util_make_link ('/source.php?file='.getStringFromServer('SCRIPT_NAME'),_('Show source'),array('class'=>'showsource'));
 }
 ?>
 
@@ -686,9 +685,7 @@ function searchBox() {
 
 
 	if (isset($group_id)&& $group_id) {
-		print '
-					
-					<a class="lnkutility" href="'.$GLOBALS['sys_urlprefix'].'/search/advanced_search.php?group_id='.$group_id.'"> '._('Advanced search').'</a>';
+		echo util_make_link ('/search/advanced_search.php?group_id='.$group_id,_('Advanced search'),array('class'=>'lnkutility'));
 	}
 	print '</form>';
 

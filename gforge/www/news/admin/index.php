@@ -173,9 +173,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 				<ul>';
 			for ($i=0; $i<$rows; $i++) {
 				echo '
-				<li><a href="'.$GLOBALS['sys_urlprefix'].'/news/admin/?approve=1&id='.db_result($result,$i,'id').'&amp;group_id='.
-					db_result($result,$i,'group_id').'">'.
-					db_result($result,$i,'summary').'</a></li>';
+				<li>'.util_make_link ('/news/admin/?approve=1&id='.db_result($result,$i,'id').'&amp;group_id='.db_result($result,$i,'group_id'),db_result($result,$i,'summary')).'</li>';
 			}
 			echo '</ul>';
 		}
@@ -270,7 +268,8 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="for_group" value="'.db_result($result,0,'group_id').'" />
 		<input type="hidden" name="id" value="'.db_result($result,0,'id').'" />
-		<strong>'._('Submitted for group').':</strong> <a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.strtolower(db_result($result,0,'unix_group_name')).'/">'.$group->getPublicName().'</a><br />
+		<strong>'._('Submitted for group').':</strong> '.
+		util_make_link ('/projects/'.strtolower(db_result($result,0,'unix_group_name')).'/',$group->getPublicName()).'<br />
 		<strong>'._('Submitted by').':</strong> '.$user->getRealName().'<br />
 		<input type="hidden" name="approve" value="y" />
 		<input type="hidden" name="post_changes" value="y" />

@@ -1,12 +1,13 @@
-2008-03-09  Christian Bayle <bayle@debian.org>
+2008-03-10  Christian Bayle <bayle@debian.org>
 	
-	* plugins/*: Migrate to util_make_url() and util_make_link()
-	* snippet/*: Ditto
-	* include/*: Ditto
-	* admin/*: Ditto
-	* my/*: Ditto
-	* tracker/*: Ditto
-	* search/*: Ditto
+	* Removed as much php warning as possible
+	* Migrate to util_make_url() and util_make_link()
+	* - www/export/*,www/developer/*,www/themes/*
+	* - www/frs/*,www/activity/*,www/project/*
+	* - www/news/*,www/pm/*,www/people/*,www/docman/*
+	* - plugins/*
+	* - www/snippet/*,www/include/*,www/admin/*
+	* - www/my/*,www/tracker/*,www/search/*
 	* introduced $sys_noforcetype to make possible to get rid of /projects
 	and /users forcetype
 

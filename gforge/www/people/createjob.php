@@ -46,7 +46,7 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 	echo '
 		<p>'._('Start by filling in the fields below. When you click continue, you will be shown a list of skills and experience levels that this job requires.').'	</p>
 		<p>
-		<form action="/people/editjob.php" method="post">
+		<form action="'.util_make_url ('/people/editjob.php').'" method="post">
 		<input type="hidden" name="group_id" value="'.$group_id.'" />
 		<input type="hidden" name="form_key" value="' . form_generate_key() . '">
 		<strong>'._('Category').'</strong>'.utils_requiredField().'<br /></p>

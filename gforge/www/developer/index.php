@@ -39,6 +39,18 @@ if (!$user_id) {
 	$user_id=$form_dev;
 }
 
-header("Location: ".$GLOBALS['sys_urlprefix']."/users/". user_getname($user_id) ."/");
+if (isset ($sys_noforcetype) && $sys_noforcetype) {
+	if (!$user_id) {
+		exit_error("Missing User Argument","A user must be specified for this page.");
+	} else {
+		$user =& user_get_object($user_id);
+		if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
+			exit_error(_('That user does not exist.'),_('Invalid User'));
+		}
+		include('user_home.php');
+	}
+} else {
+	header("Location: ".util_make_url ('/users/'.user_getname($user_id).'/'));
+}
 
 ?>

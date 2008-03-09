@@ -138,39 +138,44 @@ if ($rows<1) {
 		switch ($arr['section']) {
 			case 'commit': {
 				$icon=html_image("ic/cvs16b.png","20","20",array("border"=>"0","alt"=>"SCM"));
-				$url='<a href="'.$GLOBALS['sys_urlprefix'].'/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'].'">Commit for Tracker Item [#'.$arr['subref_id'].'] '.$arr['description'].' </a>';
+				$url=util_make_link ('/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('Commit for Tracker Item').' [#'.$arr['subref_id'].'] '.$arr['description']);
 				break;
 			}
 			case 'trackeropen': {
 				$icon=html_image("ic/tracker20g.png",'20','20',array('alt'=>'Tracker'));
-				$url='<a href="'.$GLOBALS['sys_urlprefix'].'/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'].'">Tracker Item [#'.$arr['subref_id'].' '.$arr['description'].' ] Opened</a>';
+				$url=util_make_link ('/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('Tracker Item').' [#'.$arr['subref_id'].' '.$arr['description'].' ] '._('Opened'));
 				break;
 			}
 			case 'trackerclose': {
 				$icon=html_image("ic/tracker20g.png",'20','20',array('alt'=>'Tracker'));
-				$url='<a href="'.$GLOBALS['sys_urlprefix'].'/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'].'">Tracker Item [#'.$arr['subref_id'].' '.$arr['description'].' ] Closed</a>';
+				$url=util_make_link ('/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('Tracker Item').' [#'.$arr['subref_id'].' '.$arr['description'].' ] '._('Closed'));
 				break;
 			}
 			case 'frsrelease': {
 				$icon=html_image("ic/cvs16b.png","20","20",array("border"=>"0","alt"=>"SCM"));
-				$url='<a href="'.$GLOBALS['sys_urlprefix'].'/frs/?release_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'].'">FRS Release '.$arr['description'].'</a>';
+				$url=util_make_link ('/frs/?release_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('FRS Release').' '.$arr['description']);
 				break;
 			}
 			case 'forumpost': {
 				$icon=html_image("ic/forum20g.png","20","20",array("border"=>"0","alt"=>"Forum"));
-				$url='<a href="'.$GLOBALS['sys_urlprefix'].'/forum/message.php?msg_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'].'">Forum Post '.$arr['description'].'</a>';
+				$url=util_make_link ('/forum/message.php?msg_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('Forum Post ').' '.$arr['description']);
 				break;
 			}
 			case 'news': {
 				$icon=html_image("ic/write16w.png","20","20",array("border"=>"0","alt"=>"News"));
-				$url='<a href="'.$GLOBALS['sys_urlprefix'].'/forum/forum.php?forum_id='.$arr['subref_id'].'">News '.$arr['description'].'</a>';
+				$url=util_make_link ('/forum/forum.php?forum_id='.$arr['subref_id'],_('News').' '.$arr['description']);
 				break;
 			}
+		}
+		if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
+			$userlink='/developer/?user_id='.$arr['user_id'];
+		} else {
+			$userlink='/users/'.$arr['user_name'].'/';
 		}
 		echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
 			<td>&nbsp;&nbsp;&nbsp;&nbsp;'.date('H:i:s',$arr['activity_date']).'</td>
 			<td>'.$icon .' '.$url.'</td>
-			<td><a href="'.$GLOBALS['sys_urlprefix'].'/users/'.$arr['user_name'].'/">'.$arr['realname'].'</a></td>
+			<td>'.util_make_link ($userlink,$arr['realname']).'</td>
 			</tr>';
 	}
 

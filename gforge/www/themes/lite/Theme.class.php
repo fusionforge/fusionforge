@@ -77,7 +77,7 @@ class Theme extends Layout {
   <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<title><?php echo $params['title']; ?></title>
-	<link rel="stylesheet" type="text/css" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/themes/lite/css/theme.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo util_make_url ('/themes/lite/css/theme.css'); ?>" />
 	<script type="text/javascript">
 	<!--
 	function help_window(helpurl) {
@@ -117,19 +117,15 @@ class Theme extends Layout {
 <table border="0px" width="100%" cellspacing="0px" cellpadding="0px" class="content">
 
 	<tr>
-		<td><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"><img src="/themes/lite/images/gforge_logo.png" border="0" alt="Gforge Logo" width="200px" /></a></td>
+		<td><a href="<?php echo util_make_url ('/'); ?>"><img src="/themes/lite/images/gforge_logo.png" border="0" alt="Gforge Logo" width="200px" /></a></td>
 		<td align="right"><?php echo $this->searchBox(); ?></td>
 		<td align="right"><?php
 			if (session_loggedin()) {
-				?>
-				<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/logout.php">Logout</a><br />
-				<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/">My Account</a>
-				<?php
-			} else {
-				?>
-				<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/login.php">Login</a><br />
-				<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/register.php">New Account</a>
-				<?php
+				echo util_make_link ('/account/logout.php',_('Logout')); ?><br /><?php
+				echo util_make_link ('/account/',_('My Account')); ?><br /><?php
+			} else { 
+				echo util_make_link ('/account/login.php',_('Login')); ?><br /><?php
+				echo util_make_link ('/account/register.php',_('New Account')); ?><br /><?php
 			}
 
 		?></td>

@@ -57,7 +57,7 @@ if (!$result || db_numrows($result) < 1) {
 
 	echo $HTML->boxTop(_('Notes:'));
 
-	echo '<h3>'._('Release Name:').' <a href="'.$GLOBALS['sys_urlprefix'].'/frs/?group_id='.db_result($result,0,'group_id').'">'.db_result($result,0,'name').'</a></h3>
+	echo '<h3>'._('Release Name:').' '.util_make_link ('/frs/?group_id='.db_result($result,0,'group_id'),db_result($result,0,'name')).'</h3>
 		<p>';
 
 /*

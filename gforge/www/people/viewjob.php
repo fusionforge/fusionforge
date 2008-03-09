@@ -72,7 +72,7 @@ if ($group_id && $job_id) {
 
 		<tr><td>
 			<strong>'._('Contact Info').'<br />
-			<a href="'.$GLOBALS['sys_urlprefix'].'/sendmessage.php?touser='. db_result($result,0,'user_id') .'&amp;subject='. urlencode( 'RE: '.db_result($result,0,'title')) .'">'. db_result($result,0,'user_name') .'</a></strong>
+			'.util_make_link ('/sendmessage.php?touser='. db_result($result,0,'user_id') .'&amp;subject='. urlencode( 'RE: '.db_result($result,0,'title')), db_result($result,0,'user_name')) .'</strong>
 		</td><td>
 			<strong>'._('Status').'</strong><br />
 			'. db_result($result,0,'status_name') .'
@@ -83,7 +83,7 @@ if ($group_id && $job_id) {
 			'. date(_('Y-m-d H:i'),db_result($result,0,'post_date')) .'
 		</td><td>
 			<strong>'._('For project').'<br />
-			<a href="'.$GLOBALS['sys_urlprefix'].'/project/?group_id='. $group_id .'">'. db_result($result,0,'group_name') .'</a></strong>
+			'.util_make_link ('/project/?group_id='. $group_id, db_result($result,0,'group_name')) .'</strong>
 		</td></tr>
 
 		<tr><td colspan="2">

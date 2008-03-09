@@ -34,8 +34,7 @@ $limit = getIntFromRequest('limit', 10);
 
 if ($limit > 100) $limit = 100;
 
-$proto = ($GLOBALS['sys_use_ssl']) ? 'https://' : 'http://';
-$url = $proto.$GLOBALS['sys_default_domain'].$GLOBALS['sys_urlprefix'];
+$url = util_make_url ('/');
 
 if ($group_id) {
 	$where = "group_id=$group_id and is_public=1";

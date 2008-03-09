@@ -69,13 +69,13 @@ class Theme extends Layout {
 		<td style="text-align:right"><?php
 			if (session_loggedin()) {
 				?>
-				<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/logout.php"><?php echo _('Log Out'); ?></a></b><br />
-				<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/"><?php echo _('My Account'); ?></a></b>
+				<b><?php echo util_make_link ('/account/logout.php',_('Log Out')); ?></b><br />
+				<b><?php echo util_make_link ('/account/',_('My Account')); ?></b>
 				<?php
 			} else {
 				?>
-				<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/login.php"><?php echo _('Log In'); ?></a></b><br />
-				<b><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/account/register.php"><?php echo _('New Account'); ?></a></b>
+				<b><?php echo util_make_link ('/account/login.php',_('Log In')); ?></b><br />
+				<b><?php echo util_make_link ('/account/register.php',_('New Account')); ?></b>
 				<?php
 			}
 

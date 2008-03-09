@@ -47,13 +47,9 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
        		<a href="'.getStringFromServer('PHP_SELF').'?approve=1&amp;id='.db_result($result,$i,'id').'">'.db_result($result,$i,'summary').'</a>
        		</td>
 
-       		<td width="35%">
-       		<a href="'.$GLOBALS['sys_urlprefix'].'/projects/'
-       		.db_result($result,$i,'unix_group_name').'/">'
-       		.db_result($result,$i,'group_name')
-       		.' ('.db_result($result,$i,'unix_group_name').')'
-       		.'</a>
-       		</td>
+       		<td width="35%">'
+		.util_make_link ('/projects/'.db_result($result,$i,'unix_group_name').'/',db_result($result,$i,'group_name').' ('.db_result($result,$i,'unix_group_name').')')
+       		.'</td>
        		</tr>'
        		;
        	}

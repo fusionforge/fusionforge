@@ -286,18 +286,14 @@ if ($rows < 1) {
 	*/
 	echo '<tr><td colspan="2">';
 	if ($offset > 0) {
-		echo '<a href="'.$GLOBALS['sys_urlprefix'].'/pm/task.php?func=browse&amp;group_project_id='.
-			$group_project_id.'&amp;group_id='.$group_id.'&amp;offset='.($offset-50).'">
-			<strong>'._('previous 50').'<--</strong></a>';
+		echo util_make_link ('/pm/task.php?func=browse&amp;group_project_id='.$group_project_id.'&amp;group_id='.$group_id.'&amp;offset='.($offset-50),'<strong>'._('previous 50').'<--</strong>');
 	} else {
 		echo '&nbsp;';
 	}
 	echo '</td><td>&nbsp;</td><td colspan="2">';
 
 	if ($rows==50) {
-		echo '<a href="'.$GLOBALS['sys_urlprefix'].'/pm/task.php?func=browse&amp;group_project_id='.
-			$group_project_id.'&amp;group_id='.$group_id.'&amp;offset='.($offset+50).
-			'"><strong>'._('next 50').' --></strong></a>';
+		echo util_make_link ('/pm/task.php?func=browse&amp;group_project_id='.$group_project_id.'&amp;group_id='.$group_id.'&amp;offset='.($offset+50),'<strong>'._('next 50').' --></strong></a>');
 	} else {
 		echo '&nbsp;';
 	}

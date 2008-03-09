@@ -119,7 +119,7 @@ if ( $num_packages < 1) {
 		$cur_style = $GLOBALS['HTML']->boxGetAltRowStyle($p);
 
 		print '<tr '.$cur_style.'><td colspan="3"><h3>'.db_result($res_package,$p,'name').'
-	<a href="'.$GLOBALS['sys_urlprefix'].'/frs/monitor.php?filemodule_id='. db_result($res_package,$p,'package_id') .'&group_id='.db_result($res_package,$p,'group_id').'&start=1">'.
+	<a href="'.util_make_url ('/frs/monitor.php?filemodule_id='. db_result($res_package,$p,'package_id') .'&group_id='.db_result($res_package,$p,'group_id').'&start=1').'">'.
 		html_image('ic/mail16w.png','20','20',array('alt'=>_('Monitor this package'))) .
 		'</a></h3></td><td colspan="4">&nbsp;</td></tr>';
 
@@ -192,8 +192,7 @@ if ( $num_packages < 1) {
 						$cell_data=array();
 							
 						$cell_data[] = array('<dd>
-						<a href="'.$GLOBALS['sys_urlprefix'].'/frs/download.php/'.$file_release['file_id'].'/'.$file_release['filename'].'">'
-						. $file_release['filename'] .'</a>',
+						'.util_make_link ('/frs/download.php/'.$file_release['file_id'].'/'.$file_release['filename'],$file_release['filename']),
 						'colspan=3');
 
 						$cell_data[] = array(human_readable_bytes($file_release['file_size']),'align="right"');
