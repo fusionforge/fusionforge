@@ -47,7 +47,7 @@ function snippet_mainpage() {
 
 	$existing_snippets = create_snippet_hash("SELECT language, count(*) as count from snippet group by language", "language");
 	for ($i=1; $i<count($SCRIPT_LANGUAGE); $i++) {
-		$return .= '<li><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/browse.php?by=lang&amp;lang='.$i.'">'.$SCRIPT_LANGUAGE[$i].'</a> (';
+		$return .= '<li>'.util_make_link ('/snippet/browse.php?by=lang&amp;lang='.$i,$SCRIPT_LANGUAGE[$i]).' (';
 		// Remove warning
 		if (@$existing_snippets[$i]) {
 			$return .= $existing_snippets[$i].')</li>';
@@ -64,7 +64,7 @@ function snippet_mainpage() {
 	$existing_categories = create_snippet_hash("SELECT category, count(*) as count from snippet group by category", "category");
 	for ($i=1; $i<count($SCRIPT_CATEGORY); $i++) {
 		// Remove warning
-		@$return .= '<li><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/browse.php?by=cat&amp;cat='.$i.'">'.$SCRIPT_CATEGORY[$i].'</a> (';
+		@$return .= '<li>'.util_make_link ('/snippet/browse.php?by=cat&amp;cat='.$i,$SCRIPT_CATEGORY[$i]).' (';
 		// Remove warning
 		if (@$existing_categories[$i]) {
 			$return .= $existing_categories[$i].')</li>';

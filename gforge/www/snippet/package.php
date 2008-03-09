@@ -96,7 +96,7 @@ function show_add_snippet_box() {
 <p>
 <?php echo _('If a new window opened, use it to add snippets to your package. If a new window did not open, use the following link to add to your package BEFORE you leave this page.'); ?></p>
 
-<p><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/snippet/add_snippet_to_package.php?snippet_package_version_id=<?php echo $snippet_package_version_id; ?>" target="_blank"><?php echo _('Add snippets to package'); ?></a></p>
+<p><?php echo util_make_link ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id,_('Add snippets to package'),array('target'=>'_blank')); ?></p>
 
 <p>
 <?php echo _('<strong>Browse the library</strong> to find the snippets you want to add, then add them using the new window link shown above.'); ?>
@@ -138,13 +138,13 @@ function show_add_snippet_box() {
 	<td><strong><?php echo _('Language') ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_LANGUAGE,'language'); ?>
 		<br />
-		<!--<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/support/?func=addsupport&amp;group_id=1"><?php echo _('Suggest a Language'); ?></a>-->
+		<!--<?php echo util_make_link ('/support/?func=addsupport&amp;group_id=1',_('Suggest a Language')); ?>-->
 	</td>
 
 	<td><strong><?php echo _('Category') ?></strong><?php echo utils_requiredField(); ?><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_CATEGORY,'category'); ?>
 		<br />
-		<!-- <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/support/?func=addsupport&amp;group_id=1"><?php echo _('Suggest a Category'); ?></a>-->
+		<!--<?php echo util_make_link ('/support/?func=addsupport&amp;group_id=1',_('Suggest a Category')); ?>-->
 	</td>
 	</tr>
  

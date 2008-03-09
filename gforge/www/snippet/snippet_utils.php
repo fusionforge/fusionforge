@@ -108,9 +108,9 @@ function snippet_header($params) {
 	*/
 	
 	echo '<p><strong>';
-	echo '<a href="'.$GLOBALS['sys_urlprefix'].'/snippet/">' ._('Browse').'</a>
-		 | <a href="'.$GLOBALS['sys_urlprefix'].'/snippet/submit.php">' ._('Submit A New Snippet').'</a>
-		 | <a href="'.$GLOBALS['sys_urlprefix'].'/snippet/package.php">' ._('Create A Package').'</a></strong>';
+	echo util_make_link ('/snippet/',_('Browse')).'
+		 | '.util_make_link ('/snippet/submit.php',_('Submit A New Snippet')).'
+		 | '.util_make_link ('/snippet/package.php',_('Create A Package')).'</strong>';
 	echo '&nbsp;';
 }
 
@@ -157,9 +157,9 @@ function snippet_show_package_snippets($version) {
 		for ($i=0; $i<$rows; $i++) {
 			echo '
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.db_result($result,$i,'snippet_version_id').
-				'</td><td><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/download.php?type=snippet&amp;id='.
-				db_result($result,$i,'snippet_version_id').'">'.
-				db_result($result,$i,'version').'</a></td><td>'.
+				'</td><td>'.
+				util_make_link ('/snippet/download.php?type=snippet&amp;id='.db_result($result,$i,'snippet_version_id'),db_result($result,$i,'version')).
+				'</td><td>'.
 				db_result($result,$i,'name').'</td><td>'.
 				db_result($result,$i,'user_name').'</td></tr>';
 		}

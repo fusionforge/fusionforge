@@ -75,9 +75,8 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 	}
 	for ($i=0; $i<$rows2; $i++) {
 		echo '
-			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td rowspan="2"><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/detail.php?type=package&amp;id='.
-			db_result($result2,$i,'snippet_package_id').'"><strong>'.
-			db_result($result2,$i,'snippet_package_id').'</strong></a></td><td><strong>'.
+			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td rowspan="2">'.
+			util_make_link ('/snippet/detail.php?type=package&amp;id='.db_result($result2,$i,'snippet_package_id'),'<strong>'.db_result($result2,$i,'snippet_package_id').'</strong>').'</td><td><strong>'.
 			db_result($result2,$i,'name').'</td><td>'.
 			$GLOBALS['HTML']->createLinkToUserHome(db_result($result2, $i, 'user_name'), db_result($result2, $i, 'realname')).'</td></tr>';
 		echo '
@@ -91,10 +90,11 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 	}
 	for ($i=0; $i<$rows; $i++) {
 		echo '
-			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td rowspan="2"><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/detail.php?type=snippet&amp;id='.
-			db_result($result,$i,'snippet_id').'"><strong>'.
-			db_result($result,$i,'snippet_id').'</strong></a></td><td><strong><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/detail.php?type=snippet&amp;id='.
-			db_result($result,$i,'snippet_id').'">'.db_result($result,$i,'name').'</a></td><td>'.
+			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td rowspan="2">'.
+			util_make_link ('/snippet/detail.php?type=snippet&amp;id='.db_result($result,$i,'snippet_id'),'<strong>'.db_result($result,$i,'snippet_id').'</strong>').
+			'</td><td><strong>'.
+			util_make_link ('/snippet/detail.php?type=snippet&amp;id='.db_result($result,$i,'snippet_id'),db_result($result,$i,'name')).
+			'</strong></td><td>'.
 			$GLOBALS['HTML']->createLinkToUserHome(db_result($result, $i, 'user_name'), db_result($result, $i, 'realname')).'</td></tr>';
 		echo '
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td colspan="2">'.util_make_links(nl2br(db_result($result,$i,'description'))).'</td></tr>';

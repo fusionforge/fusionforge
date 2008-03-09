@@ -103,13 +103,13 @@ if (session_loggedin()) {
 	<td><strong><?php echo _('Language'); ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_LANGUAGE,'language'); ?>
 		<br />
-		<!-- FIXME: Where should this link go to? <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/support/?func=addsupport&amp;group_id=1"><?php echo _('Suggest a Language'); ?></a> -->
+		<!-- FIXME: Where should this link go to? <?php echo util_make_link ('/support/?func=addsupport&amp;group_id=1',_('Suggest a Language')); ?> -->
 	</td>
 
 	<td><strong><?php echo _('Category'); ?></strong><?php echo utils_requiredField(); ?><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_CATEGORY,'category'); ?>
                 <br />
-                <!-- FIXME: Where should this link go to? <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/support/?func=addsupport&amp;group_id=1"><?php echo _('Suggest a Category'); ?></a> -->
+                <!-- FIXME: Where should this link go to? <?php echo util_make_link ('/support/?func=addsupport&amp;group_id=1',_('Suggest a Category')); ?> -->
 	</td>
 	</tr>
 

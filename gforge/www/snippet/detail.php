@@ -67,14 +67,11 @@ if ($type=='snippet') {
 		for ($i=0; $i<$rows; $i++) {
 			echo '
 				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.db_result($result,$i,'snippet_version_id').
-				'</td><td><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/download.php?type=snippet&amp;id='.
-				db_result($result,$i,'snippet_version_id').'"><strong>'.
-				db_result($result,$i,'version').'</strong></a></td><td>'. 
+				'</td><td>'.
+				util_make_link ('/snippet/download.php?type=snippet&amp;id='.db_result($result,$i,'snippet_version_id'),'<strong>'. db_result($result,$i,'version').'</strong>').'</td><td>'. 
 				date(_('Y-m-d H:i'),db_result($result,$i,'post_date')).'</td><td>'.
 				$GLOBALS['HTML']->createLinkToUserHome(db_result($result, $i, 'user_name'), db_result($result, $i, 'realname')).'</td>'.
-				'<td style="text-align:center"><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/delete.php?type=snippet&amp;snippet_version_id='.
-				db_result($result,$i,'snippet_version_id').
-				'">' . html_image("ic/trash.png","16","16",array("border"=>"0")) . '</a></td></tr>';
+				'<td style="text-align:center"><a href="'.util_make_url ('/snippet/delete.php?type=snippet&amp;snippet_version_id='.db_result($result,$i,'snippet_version_id')).'">' . html_image("ic/trash.png","16","16",array("border"=>"0")) . '</a></td></tr>';
 
 				if ($i != ($rows - 1)) {
 					echo '
@@ -106,7 +103,7 @@ if ($type=='snippet') {
 		Show a link so you can add a new version of this snippet
 	*/
 	echo '
-	<h3><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/addversion.php?type=snippet&amp;id='.htmlspecialchars($id).'"><span class="important">'._('Submit a new version').'</span></a></h3>
+	<h3><a href="'.util_make_url ('/snippet/addversion.php?type=snippet&amp;id='.htmlspecialchars($id)).'"><span class="important">'._('Submit a new version').'</span></a></h3>
 	<p>' ._('You can submit a new version of this snippet if you have modified it and you feel it is appropriate to share with others.').'.</p>';
 
 	snippet_footer(array());
@@ -158,16 +155,14 @@ if ($type=='snippet') {
 
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/detail.php?type=packagever&amp;id='.
-				db_result($result,$i,'snippet_package_version_id').'"><strong>'.
-				db_result($result,$i,'version').'</strong></a></td><td>'.
+			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.
+			util_make_link ('/snippet/detail.php?type=packagever&amp;id='.db_result($result,$i,'snippet_package_version_id'),'<strong>'.db_result($result,$i,'version').'</strong>').'</td><td>'.
 				date(_('Y-m-d H:i'),db_result($result,$i,'post_date')).'</td><td>'.
 				$GLOBALS['HTML']->createLinkToUserHome(db_result($result, $i, 'user_name'), db_result($result, $i, 'realname')).'</td>'.
-				'<td style="text-align:center"><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/add_snippet_to_package.php?snippet_package_version_id='.
-				db_result($result,$i,'snippet_package_version_id').
+				'<td style="text-align:center"><a href="'.util_make_url ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.db_result($result,$i,'snippet_package_version_id')).
 				'">' . html_image("ic/pencil.png","20","25",array("border"=>"0")) .
-				'</a> &nbsp; &nbsp; &nbsp; <a href="'.$GLOBALS['sys_urlprefix'].'/snippet/delete.php?type=package&snippet_package_version_id='.
-				db_result($result,$i,'snippet_package_version_id').
+				'</a> &nbsp; &nbsp; &nbsp; <a href="'.
+				util_make_url ('/snippet/delete.php?type=package&snippet_package_version_id='.db_result($result,$i,'snippet_package_version_id')).
 				'">' . html_image("ic/trash.png","16","16",array("border"=>"0")) . '</a></td></tr>';
 		}
 
@@ -195,7 +190,7 @@ if ($type=='snippet') {
 		Show a form so you can add a new version of this package
 	*/
 	echo '
-	<h3><a href="'.$GLOBALS['sys_urlprefix'].'/snippet/addversion.php?type=package&amp;id='.$id.'"><span class="important">' ._('Submit a new version').'</span></a></h3>
+	<h3><a href="'.util_make_url ('/snippet/addversion.php?type=package&amp;id='.$id).'"><span class="important">' ._('Submit a new version').'</span></a></h3>
 	<p>' ._('You can submit a new version of this package if you have modified it and you feel it is appropriate to share with others.').'.</p>';
 
 	snippet_footer(array());

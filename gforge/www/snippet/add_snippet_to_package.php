@@ -69,7 +69,7 @@ if (session_loggedin()) {
 			$result=db_query("SELECT * FROM snippet_version WHERE snippet_version_id='$snippet_version_id'");
 			if (!$result || db_numrows($result) < 1) {
 				echo '<h1>' ._('Error - That snippet doesn\'t exist.').'</h1>';
-				echo '<a href="'.$GLOBALS['sys_urlprefix'].'/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id.'">' ._('Back To Add Page').'</a>';
+				echo util_make_link ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id,_('Back To Add Page'));
 				handle_add_exit();
 			}
 
@@ -81,7 +81,7 @@ if (session_loggedin()) {
 				"AND snippet_version_id='$snippet_version_id'");
 			if ($result && db_numrows($result) > 0) {
 				echo '<h1>'._('Error - That snippet was already added to this package.').'</h1>';
-				echo '<a href="'.$GLOBALS['sys_urlprefix'].'/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id.'">'._('Back To Add Page').'</a>';
+				echo util_make_url ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id,_('Back To Add Page'));
 				handle_add_exit();
 			}
 
@@ -100,7 +100,7 @@ if (session_loggedin()) {
 			}
 		} else {
 			echo '<h1>' ._('Error - Go back and fill in all the information').'</h1>';
-			echo '<a href="'.$GLOBALS['sys_urlprefix'].'/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id.'">'._('Back To Add Page').'</a>';
+			echo util_make_link ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id,_('Back To Add Page'));
 			handle_add_exit();
 		}
 
@@ -174,9 +174,7 @@ for ($i=0; $i<$combolistrows; $i++)
 		for ($i=0; $i<$rows; $i++) {
 			echo '
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td style="text-align:center">
-				<a href="'.$GLOBALS['sys_urlprefix'].'/snippet/delete.php?type=frompackage&snippet_version_id='.
-				db_result($result,$i,'snippet_version_id').
-				'&snippet_package_version_id='.$snippet_package_version_id.
+				<a href="'.util_make_url ('/snippet/delete.php?type=frompackage&snippet_version_id='.db_result($result,$i,'snippet_version_id').'&snippet_package_version_id='.$snippet_package_version_id).
 				'">' . html_image("ic/trash.png","16","16",array("border"=>"0")) . '</a></td><td width="99%">'.
 				db_result($result,$i,'name').' '.db_result($result,$i,'version')."</td></tr>";
 
