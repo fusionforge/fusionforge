@@ -68,9 +68,7 @@ class TasksHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 						. ' <td width="5%">&nbsp;</td>'
 						. ' <td>'.db_result($result, $i, 'project_task_id').'</td>'
 						. ' <td>'
-							. '<a href="'.$GLOBALS['sys_urlprefix'].'/pm/task.php?func=detailtask&project_task_id='
-							. db_result($result, $i, 'project_task_id').'&group_id='.$this->groupId
-							. '&group_project_id='.db_result($result, $i, 'group_project_id').'">'
+							. '<a href="'.util_make_url ('/pm/task.php?func=detailtask&project_task_id=' . db_result($result, $i, 'project_task_id').'&group_id='.$this->groupId . '&group_project_id='.db_result($result, $i, 'group_project_id')).'">'
 							. html_image('ic/msg.png', '10', '12', array('border'=>'0')).' '
 							. db_result($result, $i, 'summary').'</a></td>'
 						. ' <td width="15%">'.date($dateFormat, db_result($result, $i, 'start_date')).'</td>'

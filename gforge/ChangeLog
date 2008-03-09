@@ -3,6 +3,7 @@
 	* admin/*: Migrate to util_make_url() and util_make_link()
 	* my/*: Ditto
 	* tracker/*: Ditto
+	* search/*: Ditto
 	* introduced $sys_noforcetype to make possible to get rid of /projects
 	and /users forcetype
 

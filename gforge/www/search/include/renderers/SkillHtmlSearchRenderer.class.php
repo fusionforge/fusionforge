@@ -73,8 +73,7 @@ class SkillHtmlSearchRenderer extends HtmlSearchRenderer {
 			$finishMonth = substr($finish, 4, 2);
 				
 			$return .= '<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i).'>'
-				. '<td><a href="'.$GLOBALS['sys_urlprefix'].'/users/'.db_result($result, $i, 'user_name').'/">'
-				. db_result($result, $i, 'realname').'</a></td>'
+				. '<td>'.util_make_link ('/users/'.db_result($result, $i, 'user_name').'/',db_result($result, $i, 'realname')).'</td>'
 				. '<td>'.db_result($result, $i, 'type_name').'</td>'
 				. '<td>'.db_result($result, $i, 'title').'</td>'
 				. '<td>'.db_result($result, $i, 'keywords').'</td>'

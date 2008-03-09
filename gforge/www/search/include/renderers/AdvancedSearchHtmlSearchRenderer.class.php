@@ -56,6 +56,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$this->groupId = $groupId;
 		$this->words = $words;
 		$this->isExact = $isExact;
+		$searchQuery =& $this->searchQuery;
 		
 		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_ADVANCED, $words, $isExact, $searchQuery, $groupId);
 	}
