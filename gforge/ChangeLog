@@ -2,6 +2,8 @@
 	
 	* Removed as much php warning as possible
 	* Migrate to util_make_url() and util_make_link()
+	* - www/reporting/*,www/pm/*,www/softwaremap/*
+	* - www/survey/*,www/stats/*,www/top/*
 	* - www/export/*,www/developer/*,www/themes/*
 	* - www/frs/*,www/activity/*,www/project/*
 	* - www/news/*,www/pm/*,www/people/*,www/docman/*

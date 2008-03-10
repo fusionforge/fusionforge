@@ -55,13 +55,13 @@ class Theme extends Layout {
 
 		$this->headerStart($params); ?>
 
-<link rel="stylesheet" type="text/css" href="<?php echo $GLOBALS['sys_urlprefix']; ?>/themes/osx/css/theme.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo util_make_url ('/themes/osx/css/theme.css'); ?>" />
 <body>
 
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
 
 	<tr>
-		<td><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/"
+		<td><a href="<?php echo util_make_url ('/'); ?>"
 			onmouseover="imgOver('logo')"
 			onmouseout="imgOff('logo')"><img name="logo" border="0" height="60" width="180"
 				src="<?php echo $this->imgroot.'logo.png'; ?>" alt="GForge Logo" /></a></td>

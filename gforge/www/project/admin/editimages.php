@@ -294,8 +294,7 @@ for ($i=0; $i<$rows; $i++) {
 
 	.'<td>'.date('Y-m-d', db_result($result, $i, 'upload_date')).'</td>'
 
-	.'<td><a href="'.$GLOBALS['sys_urlprefix'].'/dbimage.php?id='.db_result($result,$i,'id').'">'
-	     .stripslashes(db_result($result,$i,'filename')).'</a></td>'
+	.'<td>'util_make_link ('/dbimage.php?id='.db_result($result,$i,'id'), stripslashes(db_result($result,$i,'filename'))).'</td>'
 	.'<td>'.db_result($result,$i,'filetype').'</td>'
 	.'<td style="text-align:right">'.db_result($result,$i,'filesize').'</td>'
 	.'<td style="text-align:right">'.$dims.'</td>'

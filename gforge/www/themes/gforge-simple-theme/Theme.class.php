@@ -213,7 +213,7 @@ function footer($params){
 }
 function footerEnd($params) { ?> <!-- PLEASE LEAVE "Powered By GForge" on your site -->
 <div id="footer"><a href="http://gforge.org/"><img
-	src="<?php echo $GLOBALS['sys_urlprefix']; ?>/images/pow-gforge.png"
+	src="<?php echo util_make_url ('/images/pow-gforge.png'); ?>"
 	alt="Powered By GForge Collaborative Development Environment"
 	border="0" /></a></div>
 <?php

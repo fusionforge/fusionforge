@@ -69,8 +69,8 @@ if ($project->usesStats()) {
 		$actv_res=0;
 	}
 	print '<br />'._('Activity Percentile:&nbsp;'). substr($actv_res, 0, 5). '%';
-	print '<br />'.sprintf(_('View project <a href="/project/stats/?group_id=%1$s">Statistics</a> or <a href="/project/report/?group_id=%1$s">Activity</a>.'), $group_id);
-	print '<br />'.sprintf(_('View list of <a href="/export/rss_project.php?group_id=%1$s">RSS feeds</a> available for this project.'), $group_id). '&nbsp;' . html_image('ic/rss.png',16,16,array('border'=>'0'));
+	print '<br />'.sprintf(_('View project <a href="%1$s" >Statistics</a> or <a href="%2$s">Activity</a>'), util_make_url ('/project/stats/?group_id='.$group_id),util_make_url ('/project/report/?group_id='.$group_id));
+	print '<br />'.sprintf(_('View list of <a href="%1$s">RSS feeds</a> available for this project.</a>'), util_make_url ('/export/rss_project.php?group_id='.$group_id)). '&nbsp;' . html_image('ic/rss.png',16,16,array('border'=>'0'));
 }
 
 if($GLOBALS['sys_use_people']) {

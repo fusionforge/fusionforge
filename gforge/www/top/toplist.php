@@ -54,7 +54,7 @@ else {
 	$column1 = _('Downloads');
 }
 $HTML->header(array('title'=>$title));
-print '<p><a href="'.$GLOBALS['sys_urlprefix'].'/top/">['._('View Other Top Categories').']</a>';
+print '<p>'.util_make_link ('/top/','['._('View Other Top Categories').']');
 $arr=array(_('Rank'),_('Project name'),"$column1");
 echo $HTML->listTableTop($arr);
 
@@ -68,7 +68,7 @@ while ($row_top = db_fetch_array($res_top)) {
 	}
 	$display_rank++;
 	print '<tr '. $HTML->boxGetAltRowStyle($i) .'><td>&nbsp;&nbsp;'.$display_rank
-		.'</td><td><a href="'.$GLOBALS['sys_urlprefix'].'/projects/'. strtolower($row_top['unix_group_name']) .'/">'
+		.'</td><td>'.util_make_link ('/projects/'. strtolower($row_top['unix_group_name']) .'/').'">'
 		.stripslashes($row_top['group_name'])."</a>"
 		.'</td><td align="right">'.$row_top['items']
 		.'&nbsp;&nbsp;&nbsp;</td>'

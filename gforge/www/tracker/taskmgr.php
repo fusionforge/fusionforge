@@ -104,14 +104,14 @@ if (getStringFromRequest('add_to_task')) {
 //
 } elseif (getStringFromRequest('done_adding')) {
 
-	Header ('Location: /pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id.'&project_task_id='.$project_task_id.'&func=addartifact&add_artifact_id[]='. $a->getID() );
+	Header ('Location: '.util_make_url ('/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id.'&project_task_id='.$project_task_id.'&func=addartifact&add_artifact_id[]='. $a->getID()) );
 
 //
 //	Create a new task and relate it to this artifact
 //
 } elseif (getStringFromRequest('new_task')) {
 
-	Header ('Location: /pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id.'&func=addtask&related_artifact_summary='. urlencode($a->getSummary()) .'&related_artifact_id='. $a->getID() );
+	Header ('Location: '.util_make_url ('/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id.'&func=addtask&related_artifact_summary='. urlencode($a->getSummary()) .'&related_artifact_id='. $a->getID()) );
 
 //
 //	Show the list of ProjectGroups available

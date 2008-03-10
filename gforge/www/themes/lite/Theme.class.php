@@ -172,7 +172,7 @@ if ($params['group']) {
 <!-- PLEASE LEAVE "Powered By GForge" on your site -->
 <br />
 <center>
-<a href="http://gforge.org/"><img src="<?php echo $GLOBALS['sys_urlprefix']; ?>/images/pow-gforge.png" alt="Powered By GForge Collaborative Development En
+<a href="http://gforge.org/"><img src="<?php echo util_make_url ('/images/pow-gforge.png'); ?>" alt="Powered By GForge Collaborative Development En
 vironment" border="0" /></a>
 </center>
 

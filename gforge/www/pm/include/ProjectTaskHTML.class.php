@@ -62,11 +62,8 @@ class ProjectTaskHTML extends ProjectTask {
 			for ($i=0; $i < $rows; $i++) {
 				echo '
 				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-					<td><a href="'.$GLOBALS['sys_urlprefix'].'/pm/task.php?func=detailtask&project_task_id='.
-					db_result($result, $i, 'project_task_id').
-					'&group_id='. $this->ProjectGroup->Group->getID() .
-					'&group_project_id='. $this->ProjectGroup->getID() .'">'.
-					db_result($result, $i, 'project_task_id').'</td>
+					<td>'
+					.util_make_link ('/pm/task.php?func=detailtask&project_task_id='. db_result($result, $i, 'project_task_id'). '&group_id='. $this->ProjectGroup->Group->getID() . '&group_project_id='. $this->ProjectGroup->getID(), db_result($result, $i, 'project_task_id')).'</td>
 					<td>'.db_result($result, $i, 'summary').'</td></tr>';
 			}
 
@@ -107,7 +104,7 @@ class ProjectTaskHTML extends ProjectTask {
 			for ($i=0; $i < $rows; $i++) {
 				echo '
 				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-					<td><a href="'.$GLOBALS['sys_urlprefix'].'/tracker/?func=detail&aid='.db_result($res,$i,'artifact_id').'&group_id='.db_result($res,$i,'group_id').'&atid='.db_result($res,$i,'group_artifact_id').'">'.db_result($res,$i,'summary').'</a></td>
+					<td>'.util_make_link ('/tracker/?func=detail&aid='.db_result($res,$i,'artifact_id').'&group_id='.db_result($res,$i,'group_id').'&atid='.db_result($res,$i,'group_artifact_id'), db_result($res,$i,'summary')).'</td>
 					<td>'. db_result($res,$i,'name') .'</td>
 					<td>'. date(_('Y-m-d H:i'),db_result($res,$i,'open_date')) .'</td>'.
 					(($is_admin) ? '<td><input type="checkbox" name="rem_artifact_id[]" value="'.db_result($res,$i,'artifact_id').'"></td>' : '').

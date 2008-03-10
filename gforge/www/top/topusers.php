@@ -62,7 +62,7 @@ $HTML->header(array('title'=>_('Top users')));
 print '<h1>'._('Top users').'</h1>
 <br /><em>('._('Updated Daily').')</em>
 
-<p><a href="'.$GLOBALS['sys_urlprefix'].'/top/">['._('View Other Top Categories').']</a></p>';
+<p>'.util_make_link ('/top/','['._('View Other Top Categories').']').'</p>';
 
 $tableHeaders = array(
 	_('Rank'),
@@ -75,11 +75,11 @@ $tableHeaders = array(
 
 echo $HTML->listTableTop($tableHeaders);
 
+$i=0;
 while ($row_top = db_fetch_array($res_top)) {
 	$i++;
 	print '<tr '. $HTML->boxGetAltRowStyle($i) .'><td>&nbsp;&nbsp;'.$row_top['ranking']
-		.'</td><td><a href="'.$GLOBALS['sys_urlprefix'].'/users/'. $row_top['user_name'] .'/">'
-		.$row_top['user_name'].'</a></td>'
+		.'</td><td>'.util_make_link ('/users/'. $row_top['user_name'] .'/', $row_top['user_name']).'</td>'
 		.'<td>'.$row_top['realname'].'</td>'
 		.'</td><td align="right">'.sprintf('%.2f', $row_top['metric'])
 		.'&nbsp;&nbsp;&nbsp;</td><td align="right">'.$row_top['old_ranking']

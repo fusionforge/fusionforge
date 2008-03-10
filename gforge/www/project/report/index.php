@@ -151,23 +151,29 @@ $query = "SELECT users.*,user_group.admin_flags,people_job_category.name AS role
 $res_memb = db_query($query);
 
 while ( $row_memb=db_fetch_array($res_memb) ) {
-	echo "\n\n\t\t<tr>";
+	echo '
+		<tr>';
 	if ( trim($row_memb['admin_flags'])=='A' ) {
-		echo "\n\t\t<td><strong>".$row_memb['realname']."</strong></td>\n";
+		echo '
+			<td><strong>'.$row_memb['realname'].'</strong></td>';
 	} else {
-		echo "\n\t\t<td>".$row_memb['realname']."</td>\n";
+		echo '
+			<td>'.$row_memb['realname'].'</td>';
 	}
-	echo "\t\t<td><a href=\"".$GLOBALS['sys_urlprefix']."/sendmessage.php?touser=".$row_memb['user_id']."\">" . _('Contact') . "
-</a>".
-		"<a href=\"".$GLOBALS['sys_urlprefix']."/users/".
-		$row_memb['user_name']."/\">".$row_memb['user_name']."</a></td>
-		<td align=\"center\">".$row_memb['role']."</td>\n";
+	echo '
+			<td>'.
+			util_make_link ('/sendmessage.php?touser='.$row_memb['user_id'],_('Contact')).' '.
+			util_make_link ('/users/' . $row_memb['user_name'] . '/', $row_memb['user_name']).'
+			</td>
+			<td align="center">'.$row_memb['role'].'
+			</td>';
 	if($GLOBALS['sys_use_people']) {
-		echo "\t\t<td align=\"center\"><a href=\"".$GLOBALS['sys_urlprefix']."/people/viewprofile.php?user_id=".
-			$row_memb['user_id']."\">"._('View').
-			"</a></td>";
+		echo '
+			<td align="center">'.util_make_link('/people/viewprofile.php?user_id='.$row_memb['user_id'],_('View')).'
+			</td>';
 	}
-	echo "</tr>\n";
+	echo '
+		</tr>';
 
 	// print out all the artifacts assigned to this person 
         $artifact_group=db_query("SELECT group_artifact_id, name
@@ -184,31 +190,27 @@ while ( $row_memb=db_fetch_array($res_memb) ) {
 
                 $num_artifacts=db_numrows($artifacts);
                 for ($m=0; $m < $num_artifacts; $m++) {
-			echo "\t\t";
-			echo '<tr class="priority'.db_result($artifacts, $m, 'priority').'">';
-			echo "\n\t\t";
-			echo '<td><a href="'.$GLOBALS['sys_urlprefix'].'/tracker/?func=detail&amp;aid='.
-				db_result($artifacts, $m, 'artifact_id').
-				'&amp;group_id='.$group_id.
-				'&atid='.$artifact_type['group_artifact_id'].
-				'">'.$artifact_type['name'].' '.db_result($artifacts, $m, 'artifact_id').
-				'</a></td>';
-			echo "\n\t\t";
-			echo '<td>'.db_result($artifacts, $m, 'summary').'</td>';
-			echo "\n\t\t";
-		
-			echo '<td>'.GetTime( time() - db_result($artifacts, $m, 'open_date'))	.'</td>';
-		#	echo '<td>'. date(_('Y-m-d H:i'),db_result($artifacts, $m, 'open_date')).'</td>';
+			echo '
+		<tr class="priority'.db_result($artifacts, $m, 'priority').'">
+			<td>'.util_make_link ('/tracker/?func=detail&amp;aid='. db_result($artifacts, $m, 'artifact_id') .'&amp;group_id='.$group_id.'&atid='.$artifact_type['group_artifact_id'], $artifact_type['name'].' '.db_result($artifacts, $m, 'artifact_id')).'
+			</td>
+			<td>'.db_result($artifacts, $m, 'summary').'</td>';
+			echo '
+			<td>'.GetTime( time() - db_result($artifacts, $m, 'open_date'))	.'
+			</td>';
 
 			$messages=db_query("select adddate FROM artifact_message_user_vw ".
 						"WHERE artifact_id='".db_result($artifacts, $m, 'artifact_id')."' ".
 						"ORDER by adddate DESC");
 			if ( db_numrows($messages)) {
-				echo '<td>'. GetTime( time () - db_result($messages, 0, 'adddate')).'</td>';
+				echo '
+			<td>'. GetTime( time () - db_result($messages, 0, 'adddate')).'</td>';
 			} else {
-				echo '<td>'. GetTime( time () - db_result($artifacts, $m, 'open_date')).'</td>';
+				echo '
+			<td>'. GetTime( time () - db_result($artifacts, $m, 'open_date')).'</td>';
 			}
-			echo "</tr>\n";
+			echo '
+		</tr>';
                 }
 	}
 	$task_group=db_query("SELECT ptv.*,g.group_name,pgl.project_name
@@ -226,21 +228,23 @@ while ( $row_memb=db_fetch_array($res_memb) ) {
 
 	while ( $task_type = db_fetch_array($task_group) ) {
 		if ( $task_type['percent_complete'] != 100 ) {
-                	echo '<tr class="priority'.$task_type['priority'].'">';
-
-			echo '<td><a href="'.$GLOBALS['sys_urlprefix'].'/pm/task.php?func=detailtask&amp;project_task_id='.
-				$task_type['project_task_id'].
-				'&amp;group_id='.$group_id.
-				'&amp;group_project_id='.$task_type['group_project_id'].
-				'">Task '.$task_type['project_task_id'].'</a></td>';
-			echo '<td>'.$task_type['summary'].'</td>';
-			echo "\n\t\t";
-			echo '<td>'.GetTime(time()-$task_type['start_date']).'</td>';
-			echo '<td>'.$task_type['percent_complete'].'% done</td>';
-			echo '</tr>';
+                	echo '
+		<tr class="priority'.$task_type['priority'].'">
+			<td>'.util_make_link ('/pm/task.php?func=detailtask&amp;project_task_id='. $task_type['project_task_id'].'&amp;group_id='.$group_id.'&amp;group_project_id='.$task_type['group_project_id'],_('Task').' '.$task_type['project_task_id']).'
+			</td>
+			<td>'.$task_type['summary'].'
+			</td>
+			<td>'.GetTime(time()-$task_type['start_date']).'
+			</td>
+			<td>'.$task_type['percent_complete'].'% done'.'
+			</td>
+		</tr>';
 		}
 	}
-	echo "<tr><td><BR></td></tr>";
+	echo '
+		<tr>
+			<td><BR></td>
+		</tr>';
 }
 
 echo $HTML->boxBottom();

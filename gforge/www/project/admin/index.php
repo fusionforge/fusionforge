@@ -193,39 +193,39 @@ project_admin_header(array('title'=>$adminheadertitle, 'group'=>$group->getID())
 ?> 
 
 <?php	if($sys_use_scm) { ?>
-	<p>[ <a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/tarballs.php?group_id=<?php echo $group_id; ?>"><?php echo _('Download Your Nightly SCM Tree Tarball') ?></a> ]</p>
+	<p>[ <?php echo util_make_link ('/tarballs.php?group_id='.$group_id,_('Download Your Nightly SCM Tree Tarball')) ?> ]</p>
 <?php	} ?>
 
 <hr />
 <p>
-<h4><?php echo _('Trove Categorization:&nbsp;') ?><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/project/admin/group_trove.php?group_id=<?php echo $group->getID(); ?>">[<?php echo _('Edit') ?>]</a></h4>
+<h4><?php echo _('Trove Categorization:&nbsp;') ?><?php echo util_make_link ('/project/admin/group_trove.php?group_id='. $group->getID(),'['._('Edit').']'); ?></h4>
 </p>
 <?php
 echo $HTML->boxMiddle(_('Tool Admin').'');
 
 if($sys_use_tracker) { ?>
-	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/tracker/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Tracker admin') ?></a><br />
+	<?php echo util_make_link ('/tracker/admin/?group_id='. $group->getID(), _('Tracker admin')) ?><br />
 <?php }
 if($sys_use_docman) { ?>
-	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/docman/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Doc manager admin') ?></a><br />
+	<?php echo util_make_link ('/docman/admin/?group_id='. $group->getID(),_('Doc manager admin')) ?><br />
 <?php }
 if($sys_use_mail) { ?>
-	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/mail/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Mail admin') ?></a><br />
+	<?php echo util_make_link ('/mail/admin/?group_id='. $group->getID(),_('Mail admin')) ?><br />
 <?php }
 if($sys_use_news) { ?>
-	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/news/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('News admin') ?></a><br />
+	<?php echo util_make_link ('/news/admin/?group_id='. $group->getID(),_('News admin')) ?></a><br />
 <?php }
 if($sys_use_pm) { ?>
-	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/pm/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Task manager admin') ?></a><br />
+	<?php echo util_make_link ('/pm/admin/?group_id='. $group->getID(),_('Task manager admin')) ?></a><br />
 <?php }
 if($sys_use_forum) { ?>
-	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/forum/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Forum admin') ?></a><br />
+	<?php echo util_make_link ('/forum/admin/?group_id='. $group->getID(),_('Forum admin')) ?></a><br />
 <?php }
 if($sys_use_frs) { ?>
-	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/frs/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('FRS admin') ?></a><br />
+	<?php echo util_make_link ('/frs/admin/?group_id='. $group->getID(),_('FRS admin')) ?></a><br />
 <?php }
 if($sys_use_scm) { ?>
-	<a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/scm/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('SCM admin') ?></a><br />
+	<?php echo util_make_link ('/scm/admin/?group_id='. $group->getID(),_('SCM admin')) ?></a><br />
 <?php }
 
 $hook_params = array () ;
@@ -319,7 +319,7 @@ if (count($reqs) < 1) {
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
 		<input type="hidden" name="submit" value="y" />
 		<input type="hidden" name="form_userid" value="<?php echo $user->getId(); ?>" />
-		<tr><td><input type="hidden" name="form_unix_name" value="<?php echo $user->getUnixName(); ?>" /><a href="<?php echo $GLOBALS['sys_urlprefix']; ?>/users/<?php echo $user->getUnixName(); ?>"><?php echo $user->getRealName(); ?></a></td>
+		<tr><td><input type="hidden" name="form_unix_name" value="<?php echo $user->getUnixName(); ?>" /><?php echo util_make_link ('/users/'.$user->getUnixName(), $user->getRealName()); ?></td>
 		<td><?php echo role_box($group_id,'role_id',$row_memb['role_id']); ?>
 			<input type="submit" name="acceptpending" value="<?php echo _('Accept') ?>" />
 			<input type="submit" name="rejectpending" value="<?php echo _('Reject') ?>" /></td>

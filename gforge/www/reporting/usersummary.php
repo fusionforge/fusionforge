@@ -67,13 +67,15 @@ echo report_header(_('User Summary Report'));
 	<p>
 	<?php echo _('Choose the range from the pop-up boxes below. The report will list all tasks with an open date in that range.'); ?>
 	<p>
-    <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
-    <table><tr>
-    <td><strong><?php echo _('Start'); ?>:</strong><br /><?php echo report_weeks_box($report, 'start', $start); ?></td>
-    <td><strong><?php echo _('End'); ?>:</strong><br /><?php echo report_weeks_box($report, 'end', $end); ?></td>
-	<td><strong><?php echo _('Task Status'); ?>:</strong><br /><?php echo html_build_select_box_from_arrays($l,$n,'tstat',$tstat,false); ?></td>
-    <td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>"></td>
-	</tr></table>
+	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
+	<table>
+		<tr>
+			<td><strong><?php echo _('Start'); ?>:</strong><br /><?php echo report_weeks_box($report, 'start', $start); ?></td>
+			<td><strong><?php echo _('End'); ?>:</strong><br /><?php echo report_weeks_box($report, 'end', $end); ?></td>
+			<td><strong><?php echo _('Task Status'); ?>:</strong><br /><?php echo html_build_select_box_from_arrays($l,$n,'tstat',$tstat,false); ?></td>
+			<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>"></td>
+		</tr>
+	</table>
 	</form>
 	<p>
 	<?php
@@ -108,22 +110,26 @@ if (!$res || db_numrows($res) < 1) {
 		_('End Date')
 	);
 	echo $HTML->listTableTop($tableHeaders);
+	$last_name='';
 	for ($i=0; $i<db_numrows($res); $i++) {
 		$name=db_result($res,$i,'realname');
 		if ($last_name != $name) {
-			echo '<tr '.$HTML->boxGetAltRowStyle(0).'><td colspan="6"><strong>'.$name.'</strong></td></tr>';
+			echo '
+		<tr '.$HTML->boxGetAltRowStyle(0).'>
+			<td colspan="6"><strong>'.$name.'</strong></td>
+		</tr>';
 			$last_name = $name;
 		}
-		echo '<tr '.$HTML->boxGetAltRowStyle(1).'><td>&nbsp;</td>
-				<td><a href="'.$GLOBALS['sys_urlprefix'].'/pm/task.php?func=detailtask&group_id='.db_result($res,$i,'group_id')
-					.'&project_task_id='.db_result($res,$i,'project_task_id')
-					.'&group_project_id='.db_result($res,$i,'group_project_id')
-					.'" target="_blank">'.db_result($res,$i,'summary').'</a></td>
-				<td>'.db_result($res,$i,'status_name').'</td>
-				<td>'.number_format(db_result($res,$i,'cumulative_hrs'),1).'</td>
-				<td>'.number_format((db_result($res,$i,'hours')-db_result($res,$i,'remaining_hrs')),1).'</td>
-				<td>'.date(_('Y-m-d H:i'),db_result($res,$i,'end_date')).'</td>
-				</tr>';
+		echo '
+		<tr '.$HTML->boxGetAltRowStyle(1).'>
+			<td>&nbsp;</td>
+			<td>'.util_make_link ('/pm/task.php?func=detailtask&group_id='.db_result($res,$i,'group_id') .'&project_task_id='.db_result($res,$i,'project_task_id') .'&group_project_id='.db_result($res,$i,'group_project_id'),db_result($res,$i,'summary')) .'
+			</td>
+			<td>'.db_result($res,$i,'status_name').'</td>
+			<td>'.number_format(db_result($res,$i,'cumulative_hrs'),1).'</td>
+			<td>'.number_format((db_result($res,$i,'hours')-db_result($res,$i,'remaining_hrs')),1).'</td>
+			<td>'.date(_('Y-m-d H:i'),db_result($res,$i,'end_date')).'</td>
+		</tr>';
 
 		$task=db_result($res,$i,'project_task_id');
 		$sql2="SELECT g.group_name, g.group_id, agl.group_artifact_id, agl.name, a.artifact_id, a.summary
@@ -134,23 +140,27 @@ if (!$res || db_numrows($res) < 1) {
 		AND agl.group_id=g.group_id";
 
 		$res2=db_query($sql2);
+		$last_tracker='';
 		if (!$res2 || db_numrows($res2) < 1) {
 			echo db_error();
 		} else {
 			for ($j=0; $j<db_numrows($res2); $j++) {
 				$tracker=db_result($res2,$j,'group_name'). '*' .db_result($res2,$j,'name');
-				echo '<tr '.$HTML->boxGetAltRowStyle(1).'><td colspan="3">&nbsp;</td>
-					<td>';
+				echo '
+		<tr '.$HTML->boxGetAltRowStyle(1).'>
+			<td colspan="3">&nbsp;</td>
+			<td>';
 				if ($last_tracker != $tracker) {
 					$last_tracker = $tracker;
 					echo $tracker;
 				} else {
 					echo '&nbsp;';
 				}
-				echo '</td>
-						<td colspan="2"><a href="'.$GLOBALS['sys_urlprefix'].'/tracker/?func=detail&atid='.db_result($res2,$j,'group_artifact_id').
-						'&group_id='.db_result($res2,$j,'group_id').
-						'&aid='.db_result($res2,$j,'artifact_id').'" target="_blank">'.db_result($res2,$j,'summary').'</a></td></tr>';
+				echo '
+			</td>
+			<td colspan="2">'.util_make_link ('/tracker/?func=detail&atid='.db_result($res2,$j,'group_artifact_id'). '&group_id='.db_result($res2,$j,'group_id'). '&aid='.db_result($res2,$j,'artifact_id'), db_result($res2,$j,'summary')).'
+			</td>
+		</tr>';
 			}
 			$last_tracker='';
 		}

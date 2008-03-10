@@ -33,7 +33,7 @@ if (isset ($sys_noforcetype) && $sys_noforcetype) {
 	$project = &group_get_object($group_id);
 	include('project_home.php');
 } else {
-	header ("Location: ".$GLOBALS['sys_urlprefix']."/projects/". group_getunixname($group_id) ."/");
+	header ('Location: '.util_make_url ('/projects/'. group_getunixname($group_id) .'/'));
 }
 
 ?>

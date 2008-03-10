@@ -2,7 +2,7 @@
 
 require_once('www/include/Layout.class.php');
 
-define('THEME_DIR', $GLOBALS['sys_urlprefix'].'/themes/gforge');
+define('THEME_DIR', util_make_url ('/themes/gforge'));
 
 define('TOP_TAB_HEIGHT', 30);
 define('BOTTOM_TAB_HEIGHT', 22);
@@ -196,7 +196,7 @@ class Theme extends Layout {
 		  echo util_make_link ('/account/register.php', _('New Account'));
           }
 
-		$guide = $GLOBALS['sys_urlprefix'].'/help/guide/';
+		$guide = util_make_url ('/help/guide/');
 		if (strstr($_SERVER['REQUEST_URI'],'softwaremap')) {
 			$guide .= $user_guide['trove'];
 		} elseif (strstr($_SERVER['REQUEST_URI'],'/my/')) {
