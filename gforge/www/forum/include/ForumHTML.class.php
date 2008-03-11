@@ -230,12 +230,14 @@ class ForumHTML extends Error {
 		$am = new AttachManager();
 		$fa = new ForumAdmin();
 		$msgforum =& $msg->getForum();
-		$ret_val =
-		'
+		$ret_val = '
 		<table border="0">
 			<tr>
-				<td class="tablecontent" nowrap="nowrap">'; if ($msgforum->userIsAdmin()) {$ret_val .= $fa->PrintAdminMessageOptions($msg->getID(),$group_id,$msg->getThreadID(),$msgforum->getID());} $ret_val .= _('By:').' '.util_make_link ('/users/'.$msg->getPosterName() .'/',
-																																$msg->getPosterRealName()).'<br />
+				<td class="tablecontent" nowrap="nowrap">';
+		if ($msgforum->userIsAdmin()) {
+			$ret_val .= $fa->PrintAdminMessageOptions($msg->getID(),$group_id,$msg->getThreadID(),$msgforum->getID());
+		} 
+		$ret_val .= _('By:').' '.util_make_link_u ($msg->getPosterName(),$msg->getPosterID(),$msg->getPosterRealName()).'<br />
 ';
 		$ret_val .= $am->PrintAttachLink($msg,$group_id,$msgforum->getID()) . '
 					<br />'.util_make_link ('/forum/message.php?msg_id='.$msg->getID() .'&group_id='.$group_id,
@@ -423,7 +425,7 @@ class ForumHTML extends Error {
 				}
 
 				$ret_val .= $bold_begin.$msg_arr["$msg_id"][$i]->getSubject() .$bold_end.$ah_end.'</td>'.
-					'<td>'.util_make_link ('/users/'.$msg_arr["$msg_id"][$i]->getPosterName(),$msg_arr["$msg_id"][$i]->getPosterRealName()) .'</td>'.
+					'<td>'.util_make_link_u ($msg_arr["$msg_id"][$i]->getPosterName(),$msg_arr["$msg_id"][$i]->getPosterID(),$msg_arr["$msg_id"][$i]->getPosterRealName()) .'</td>'.
 				'<td>'.date(_('Y-m-d H:i'), $msg_arr["$msg_id"][$i]->getPostDate() ).'</td></tr>';
 
 				if ($msg_arr["$msg_id"][$i]->hasFollowups() > 0) {

@@ -118,7 +118,7 @@ if (db_numrows($res_admin) > 0) {
 				$started_developers=true;
 				echo '<span class="develtitle">'. _('Developers').':</span><br />';
 			}
-			echo util_make_link ('/users/'.$row_admin['user_name'].'/',$row_admin['realname']).'<br />';
+			echo util_make_link_u ($row_admin['user_name'],$row_admin['user_id'],$row_admin['realname']).'<br />';
 		}
 	?>
 	<hr width="100%" size="1" />

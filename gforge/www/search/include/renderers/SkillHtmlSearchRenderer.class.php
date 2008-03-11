@@ -72,14 +72,15 @@ class SkillHtmlSearchRenderer extends HtmlSearchRenderer {
 			$finishYear = substr($finish, 0, 4);
 			$finishMonth = substr($finish, 4, 2);
 				
-			$return .= '<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i).'>'
-				. '<td>'.util_make_link ('/users/'.db_result($result, $i, 'user_name').'/',db_result($result, $i, 'realname')).'</td>'
-				. '<td>'.db_result($result, $i, 'type_name').'</td>'
-				. '<td>'.db_result($result, $i, 'title').'</td>'
-				. '<td>'.db_result($result, $i, 'keywords').'</td>'
-				. '<td>'.$monthArray[$startMonth - 1].' '.$startYear.'</td>'
-				. '<td>'.$monthArray[$finishMonth - 1].' '.$finishYear.'</td>'
-				. '<tr>';
+			$return .= '
+			<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i).'>
+				<td>'.util_make_link_u (db_result($result, $i, 'user_name'),db_result($result, $i, 'user_id'),db_result($result, $i, 'realname')).'</td>
+				<td>'.db_result($result, $i, 'type_name').'</td>
+				<td>'.db_result($result, $i, 'title').'</td>
+				<td>'.db_result($result, $i, 'keywords').'</td>
+				<td>'.$monthArray[$startMonth - 1].' '.$startYear.'</td>
+				<td>'.$monthArray[$finishMonth - 1].' '.$finishYear.'</td>
+			<tr>';
 		}
 		
 		return $return;
@@ -89,6 +90,7 @@ class SkillHtmlSearchRenderer extends HtmlSearchRenderer {
 	 * redirectToResult - redirect the user  directly to the result when there is only one matching result
 	 */
 	function redirectToResult() {
+		/* TODO : use util_make_url_u */
 		header('Location: /users/'.$this->getResultId('user_name').'/');
 		exit();
 	}

@@ -163,7 +163,7 @@ while ( $row_memb=db_fetch_array($res_memb) ) {
 	echo '
 			<td>'.
 			util_make_link ('/sendmessage.php?touser='.$row_memb['user_id'],_('Contact')).' '.
-			util_make_link ('/users/' . $row_memb['user_name'] . '/', $row_memb['user_name']).'
+			util_make_link_u ($row_memb['user_name'],$row_memb['user_id'],$row_memb['user_name']).'
 			</td>
 			<td align="center">'.$row_memb['role'].'
 			</td>';

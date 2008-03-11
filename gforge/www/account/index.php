@@ -107,9 +107,9 @@ echo $HTML->boxTop(_('Account Maintenance'));
 <?php echo _('Account options:'); ?>
 </p>
 <ul>
-<li><a href="<?php echo util_make_url ('/users/'.$u->getUnixName().'/'); ?>"><strong><?php echo _('View My Developer Profile'); ?></strong></a></li>
+	<li><?php echo util_make_link_u ($u->getUnixName(),$u->getId(),'<strong>'._('View My Developer Profile').'</strong>'); ?></a></li>
 <?php if($GLOBALS['sys_use_people']) { ?>
-	<li><a href="<?php echo util_make_url ('/people/editprofile.php'); ?>"><strong><?php echo _('Edit My Skills Profile'); ?></strong></a></li>
+	<li><?php echo util_make_link ('/people/editprofile.php','<strong>'._('Edit My Skills Profile').'</strong>'); ?></a></li>
 <?php } ?>
 </ul>
 <?php echo $HTML->boxBottom(); ?>
@@ -236,8 +236,8 @@ echo $HTML->boxTop(_('Preferences')); ?>
 <p />
 <?php if ($sys_use_ratings) { ?>
 <input type="checkbox"  name="use_ratings" value="1"<?php
-	if ($u->usesRatings()) print " checked=\"checked\""; ?> />
-		  <?php printf(_('Participate in peer ratings. <i>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your <a href="%s">user page</a> if you have chosen to participate in ratings.)</i>'),util_make_url('/users/'.$u->getUnixName())); 
+	if ($u->usesRatings()) print ' checked="checked"'; ?> />
+		  <?php printf(_('Participate in peer ratings. <i>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your <a href="%s">user page</a> if you have chosen to participate in ratings.)</i>'),util_make_url_u ($u->getUnixName(),$u->getId())); 
 } ?>	
 </td></tr>
 <?php 

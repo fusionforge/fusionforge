@@ -55,7 +55,7 @@ function rss_dump_project_result_set ($res,$title,$desription='',$callback=0) {
                 }
 		print "  <item>\n";
 		print "   <title>".htmlspecialchars($row['group_name'])."</title>\n";
-		print "   <link>http://".$GLOBALS['sys_default_domain']."/projects/".$row['unix_group_name']."/</link>\n";
+		print "   <link>".util_make_url_p ($row['unix_group_name'],$row['group_id'])."</link>\n";
 		print "   <description>";
 		print ereg_replace(" *\r*\n *"," ",rss_description($row['short_description']));
                 print $addendum;

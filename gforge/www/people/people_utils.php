@@ -443,7 +443,7 @@ function people_show_job_list($result) {
 					'><td>'.util_make_link ('/people/viewjob.php?group_id='. db_result($result,$i,'group_id') .'&amp;job_id='.  db_result($result,$i,'job_id'), db_result($result,$i,'title')) .'</td><td>'.
 					db_result($result,$i,'category_name') .'</td><td>'.
 					date(_('Y-m-d H:i'),db_result($result,$i,'post_date')) .
-					'</td><td>'.util_make_link ('/projects/'.strtolower(db_result($result,$i,'unix_group_name')).'/', db_result($result,$i,'group_name')) .'</td></tr>';
+					'</td><td>'.util_make_link_g (strtolower(db_result($result,$i,'unix_group_name')),db_result($result,$i,'group_id'),db_result($result,$i,'group_name')) .'</td></tr>';
 		}
 	}
 

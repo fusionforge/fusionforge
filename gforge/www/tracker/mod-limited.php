@@ -60,8 +60,9 @@ if (session_loggedin()) {
 			echo $ah->getSubmittedRealName();
 			if($ah->getSubmittedBy() != 100) {
 				$submittedUnixName = $ah->getSubmittedUnixName();
+				$submittedBy = $ah->getSubmittedBy();
 				?>
-				(<tt><?php echo util_make_link ('/users/'.$submittedUnixName,$submittedUnixName); ?></tt>)
+				(<tt><?php echo util_make_link ($submittedUnixName,$submittedBy,$submittedUnixName); ?></tt>)
 			<?php } ?>
 		</td>
 		<td><strong><?php echo _('Date Submitted') ?>:</strong><br />

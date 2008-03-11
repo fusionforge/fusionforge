@@ -26,6 +26,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+require "../env.inc.php";    
 require "pre.php";    
 require_once "common/include/Stats.class.php";    
 
@@ -61,6 +62,7 @@ echo $HTML->listTableTop($arr);
 echo db_error();
 
 $display_rank = 0;
+$i=0;
 while ($row_top = db_fetch_array($res_top)) {
 	$i++;
 	if ($row_top["items"] == 0) {
@@ -68,7 +70,7 @@ while ($row_top = db_fetch_array($res_top)) {
 	}
 	$display_rank++;
 	print '<tr '. $HTML->boxGetAltRowStyle($i) .'><td>&nbsp;&nbsp;'.$display_rank
-		.'</td><td>'.util_make_link ('/projects/'. strtolower($row_top['unix_group_name']) .'/').'">'
+		.'</td><td>'.util_make_link_g (strtolower($row_top['unix_group_name']),$row_top['group_id']).'">'
 		.stripslashes($row_top['group_name'])."</a>"
 		.'</td><td align="right">'.$row_top['items']
 		.'&nbsp;&nbsp;&nbsp;</td>'

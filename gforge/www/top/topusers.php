@@ -38,7 +38,7 @@ $yd_month = date('Ym', $yesterday);
 $yd_day = date('d', $yesterday);
 
 $res_top = db_query("
-	SELECT user_metric.ranking,users.user_name,users.realname,
+	SELECT user_metric.ranking,users.user_name,users.user_id,users.realname,
 		user_metric.metric,user_metric_history.ranking AS old_ranking
 	FROM users,user_metric LEFT JOIN user_metric_history 
 		ON (user_metric.user_id=user_metric_history.user_id 
@@ -79,7 +79,7 @@ $i=0;
 while ($row_top = db_fetch_array($res_top)) {
 	$i++;
 	print '<tr '. $HTML->boxGetAltRowStyle($i) .'><td>&nbsp;&nbsp;'.$row_top['ranking']
-		.'</td><td>'.util_make_link ('/users/'. $row_top['user_name'] .'/', $row_top['user_name']).'</td>'
+		.'</td><td>'.util_make_link_u ($row_top['user_name'],$row_top['user_id'],$row_top['user_name']).'</td>'
 		.'<td>'.$row_top['realname'].'</td>'
 		.'</td><td align="right">'.sprintf('%.2f', $row_top['metric'])
 		.'&nbsp;&nbsp;&nbsp;</td><td align="right">'.$row_top['old_ranking']

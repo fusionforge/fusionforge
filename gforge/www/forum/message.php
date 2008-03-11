@@ -104,7 +104,7 @@ if ($msg_id) {
 	if ($f->userIsAdmin()) {
 		echo $fa->PrintAdminMessageOptions($msg_id,$group_id,0,$forum_id); // 0 in thread id because that tells us to go back to message.php instead of forum.php
 	}
-	echo _('BY').': '. $fm->getPosterRealName() .' (<a href="'.util_make_url('/users/'.$fm->getPosterName().'/').'">'. $fm->getPosterName() .'</a>)<br />';
+	echo _('BY').': '. $fm->getPosterRealName() .' (<a href="'.util_make_url_u($fm->getPosterName(),$fm->getPosterID(),$fm->getPosterName()) .'</a>)<br />';
 	echo _('DATE').': '. date(_('Y-m-d H:i'), $fm->getPostDate()) .'<br />';
 	$am = new AttachManager();
 	echo $am->PrintHelperFunctions();

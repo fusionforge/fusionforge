@@ -87,7 +87,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 		$wclause='news_bytes.is_approved=1';
 	}
 
-	$sql="SELECT groups.group_name,groups.unix_group_name,
+	$sql="SELECT groups.group_name,groups.unix_group_name,groups.group_id,
 		groups.type_id,users.user_name,users.realname,
 		news_bytes.forum_id,news_bytes.summary,news_bytes.post_date,news_bytes.details 
 		FROM users,news_bytes,groups 
@@ -122,7 +122,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 				} else {
 					$summ_txt='<br />'. util_make_links( $arr[0] );
 				}
-				$proj_name=' &nbsp; - &nbsp; '.util_make_link ('/projects/'. strtolower(db_result($result,$i,'unix_group_name')) .'/',db_result($result,$i,'group_name'));
+				$proj_name=' &nbsp; - &nbsp; '.util_make_link_g (strtolower(db_result($result,$i,'unix_group_name')),db_result($result,$i,'group_id'),db_result($result,$i,'group_name'));
 			} else {
 				$proj_name='';
 				$summ_txt='';
@@ -215,7 +215,7 @@ function news_foundry_latest($group_id=0,$limit=5,$show_summaries=true) {
 		Show a the latest news for a portal
 	*/
 
-	$sql="SELECT groups.group_name,groups.unix_group_name,
+	$sql="SELECT groups.group_name,groups.unix_group_name,groups.group_id,
 		users.user_name,users.realname,news_bytes.forum_id,
 		news_bytes.summary,news_bytes.post_date,news_bytes.details 
 		FROM users,news_bytes,groups,foundry_news 
@@ -244,7 +244,7 @@ function news_foundry_latest($group_id=0,$limit=5,$show_summaries=true) {
 				}
 
 				//show the project name
-				$proj_name=' &nbsp; - &nbsp; '.util_make_link ('/projects/'. strtolower(db_result($result,$i,'unix_group_name')) .'/',db_result($result,$i,'group_name'));
+				$proj_name=' &nbsp; - &nbsp; '.util_make_link_g (strtolower(db_result($result,$i,'unix_group_name')),db_result($result,$i,'group_id'),db_result($result,$i,'group_name'));
 			} else {
 				$proj_name='';
 				$summ_txt='';

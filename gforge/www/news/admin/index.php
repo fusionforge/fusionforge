@@ -251,7 +251,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 			Show the submit form
 		*/
 
-		$sql="SELECT groups.unix_group_name,news_bytes.* ".
+		$sql="SELECT groups.unix_group_name,groups.group_id,news_bytes.* ".
 			"FROM news_bytes,groups WHERE id='$id' ".
 			"AND news_bytes.group_id=groups.group_id ";
 		$result=db_query($sql);
@@ -269,7 +269,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		<input type="hidden" name="for_group" value="'.db_result($result,0,'group_id').'" />
 		<input type="hidden" name="id" value="'.db_result($result,0,'id').'" />
 		<strong>'._('Submitted for group').':</strong> '.
-		util_make_link ('/projects/'.strtolower(db_result($result,0,'unix_group_name')).'/',$group->getPublicName()).'<br />
+		util_make_link_g (strtolower(db_result($result,0,'unix_group_name')),db_result($result,0,'group_id'),$group->getPublicName()).'<br />
 		<strong>'._('Submitted by').':</strong> '.$user->getRealName().'<br />
 		<input type="hidden" name="approve" value="y" />
 		<input type="hidden" name="post_changes" value="y" />

@@ -70,7 +70,7 @@ while ( $row_memb=db_fetch_array($res_memb) ) {
 		echo '		<td>'.$row_memb['realname'].'</td>';
 	}
 
-	echo '<td align="center">'.util_make_link ('/users/'.$row_memb['user_name'].'/', $row_memb['user_name']).'</td>
+	echo '<td align="center">'.util_make_link_u ($row_memb['user_name'],$row_memb['user_id'],$row_memb['user_name']).'</td>
 	<td align="center">'.$row_memb['role'].'</td>';
 	if($GLOBALS['sys_use_people']) {
 		echo '<td align="center">'.util_make_link ('/people/viewprofile.php?user_id='.$row_memb['user_id'],_('View')).'</td>';

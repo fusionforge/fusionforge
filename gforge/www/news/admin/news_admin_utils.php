@@ -48,7 +48,7 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
        		</td>
 
        		<td width="35%">'
-		.util_make_link ('/projects/'.db_result($result,$i,'unix_group_name').'/',db_result($result,$i,'group_name').' ('.db_result($result,$i,'unix_group_name').')')
+		.util_make_link_g (db_result($result,$i,'unix_group_name'),db_result($result,$i,'group_id'),db_result($result,$i,'group_name').' ('.db_result($result,$i,'unix_group_name').')')
        		.'</td>
        		</tr>'
        		;

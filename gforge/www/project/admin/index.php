@@ -319,7 +319,7 @@ if (count($reqs) < 1) {
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
 		<input type="hidden" name="submit" value="y" />
 		<input type="hidden" name="form_userid" value="<?php echo $user->getId(); ?>" />
-		<tr><td><input type="hidden" name="form_unix_name" value="<?php echo $user->getUnixName(); ?>" /><?php echo util_make_link ('/users/'.$user->getUnixName(), $user->getRealName()); ?></td>
+		<tr><td><input type="hidden" name="form_unix_name" value="<?php echo $user->getUnixName(); ?>" /><?php echo util_make_link_u ($user->getUnixName(),$user->getId,$user->getRealName()); ?></td>
 		<td><?php echo role_box($group_id,'role_id',$row_memb['role_id']); ?>
 			<input type="submit" name="acceptpending" value="<?php echo _('Accept') ?>" />
 			<input type="submit" name="rejectpending" value="<?php echo _('Reject') ?>" /></td>

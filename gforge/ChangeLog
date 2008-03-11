@@ -1,3 +1,9 @@
+2008-03-10  Christian Bayle <bayle@debian.org>
+	
+	* Added and use util_make_url_u, util_make_url_g ,
+	util_make_link_u and util_make_link_g for /projects and /users link
+	forcetype shouln'd be necessary to run gforge now
+
 2008-03-11  Alain Peyrat <aljeux@free.fr>
 
 	* New plugin online_help to display the gforge manual
