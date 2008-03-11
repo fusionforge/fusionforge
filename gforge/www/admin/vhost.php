@@ -151,7 +151,7 @@ if (getStringFromRequest('tweak')) {
 	$vhost_name = getStringFromRequest('vhost_name');
 
 	$res_vh = db_query("
-		SELECT vhostid,vhost_name,docdir,cgidir,unix_group_name
+		SELECT vhostid,vhost_name,docdir,cgidir,unix_group_name,group_id
 		FROM prweb_vhost,groups
 		WHERE vhost_name='$vhost_name'
 		AND prweb_vhost.group_id=groups.group_id
@@ -177,7 +177,7 @@ if (getStringFromRequest('tweak')) {
 			'.$GLOBALS['HTML']->listTableTop($title).'
 			<tr><td>'.$row_vh['vhostid'].'</td>
 			<td>'.$row_vh['vhost_name'].'</td>
-			<td>'.util_make_link ('/projects/'.$row_vh['unix_group_name'],$row_vh['unix_group_name']).'</td>
+			<td>'.util_make_link_g ($row_vh['unix_group_name'],$row_vh['group_id'],$row_vh['unix_group_name']).'</td>
 			<td><input maxlength="255" type="text" name="docdir" value="'.$row_vh['docdir'].'" /></td>
 			<td><input type="text" name="cgidir" value="'.$row_vh['cgidir'].'" /></td><td><input maxlength="255" type="submit" value="'._('Update').'" /></tr>
 			'.$GLOBALS['HTML']->listTableBottom().'

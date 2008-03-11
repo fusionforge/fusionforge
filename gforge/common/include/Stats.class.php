@@ -69,7 +69,8 @@ class Stats extends Error {
 			"AND g.is_public=1 and s.group_ranking > 0 ".
 			"ORDER BY ranking ASC";
 		}
-		return db_query($sql, $LIMIT, $offset);
+		//return db_query($sql, $LIMIT, $offset);
+		return db_query($sql, 0, $offset);
 	}
 
 	/**

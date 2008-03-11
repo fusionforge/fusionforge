@@ -231,7 +231,7 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 	$order_name_arr[]=_('Monitored FileModules');
 	echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
 
-	$sql="SELECT groups.group_name,groups.group_id,frs_package.name,filemodule_monitor.filemodule_id ".
+	$sql="SELECT groups.group_name,groups.unix_group_name,groups.group_id,frs_package.name,filemodule_monitor.filemodule_id ".
 		"FROM groups,filemodule_monitor,frs_package ".
 		"WHERE groups.group_id=frs_package.group_id AND groups.status = 'A' ".
 		"AND frs_package.package_id=filemodule_monitor.filemodule_id ".
@@ -244,7 +244,7 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 		for ($i=0; $i<$rows; $i++) {
 			if (db_result($result,$i,'group_id') != $last_group) {
 				echo '
-				<tr '. $HTML->boxGetAltRowStyle($i) .'><td colspan="2">'.util_make_link ('/project/?group_id='.db_result($result,$i,'group_id'),db_result($result,$i,'group_name')).'</td></tr>';
+				<tr '. $HTML->boxGetAltRowStyle($i) .'><td colspan="2">'.util_make_link_g (db_result($result,$i,'unix_group_name'),db_result($result,$i,'group_id'),db_result($result,$i,'group_name')).'</td></tr>';
 			}
 			echo '
 			<tr '. $HTML->boxGetAltRowStyle($i) .'><td style="text-align:center"><a href="'.util_make_url ('/frs/monitor.php?filemodule_id='.db_result($result,$i,'filemodule_id').'&amp;group_id='.db_result($result,$i,'group_id').'&amp;stop=1').'"><img src="'. $HTML->imgroot.'/ic/trash.png" height="16" width="16" '.
@@ -325,16 +325,11 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 			} else {
 				$img="trash.png";
 			}
-			if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
-				$shortlink='/project/?group_id='.db_result($result,$i,'group_id');
-			} else {
-				$shortlink='/projects/'.db_result($result,$i,'unix_group_name');
-			}
 			echo '
 			<tr '. $HTML->boxGetAltRowStyle($i) .'><td style="text-align:center">
 			<a href="rmproject.php?group_id='. db_result($result,$i,'group_id') .'">
 			<img src="'.$HTML->imgroot.'ic/'.$img.'" alt="Delete" height="16" width="16" border="0" /></a></td>
-			<td>'.util_make_link ($shortlink,htmlspecialchars(db_result($result,$i,'group_name'))).'</td>
+			<td>'.util_make_link_g (db_result($result,$i,'unix_group_name'),db_result($result,$i,'group_id'),htmlspecialchars(db_result($result,$i,'group_name'))).'</td>
 			<td>'. htmlspecialchars(db_result($result,$i,'role_name')) .'</td></tr>';
 		}
 	}

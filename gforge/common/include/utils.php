@@ -947,6 +947,30 @@ function util_make_link ($path, $text, $extra_params=false) {
 	return '<a ' . $ep . 'href="' . util_make_url ($path) . '">' . $text . '</a>' ;
 }
 
+function util_make_link_u ($username, $user_id,$text) {
+	return '<a href="' . util_make_url_u ($username, $user_id) . '">' . $text . '</a>' ;
+}
+
+function util_make_url_u ($username, $user_id) {
+	if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
+		return util_make_url ("/developer/?user_id=$user_id");
+	} else {
+		return util_make_url ("/projects/$username/");
+	}
+}
+
+function util_make_link_g ($groupame, $group_id,$text) {
+	return '<a href="' . util_make_url_g ($groupame, $group_id) . '">' . $text . '</a>' ;
+}
+
+function util_make_url_g ($groupame, $group_id) {
+	if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
+		return util_make_url ("/project/?group_id=$group_id");
+	} else {
+		return util_make_url ("/projects/$groupame/");
+	}
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

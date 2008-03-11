@@ -246,9 +246,9 @@ function boxTop($title) {
 		
 		<table cellspacing="0" cellpadding="0" width="100%" border="0">
 		<tr class="tableheading">
-			<td valign="top" align="right" width="10"><img src="'.$this->imgroot.'clear.png" width="10" height="20" alt="" /></td>
+			<td valign="top" align="right" width="10"><img src="'.$this->imgroot.'clear.png'.'" width="10" height="20" alt="" /></td>
 			<td width="100%"><span class="titlebar">'.$title.'</span></td>
-			<td valign="top" width="10"><img src="'.$this->imgroot.'clear.png" width="10" height="20" alt=""/></td>
+			<td valign="top" width="10"><img src="'.$this->imgroot.'clear.png'.'" width="10" height="20" alt=""/></td>
 		</tr>
 		<tr>
 			<td colspan="3">
@@ -430,11 +430,7 @@ function outerTabs($params) {
 			} elseif (!$project->isProject()) {
 
 			} else {
-		    		if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
-		    			$TABS_DIRS[]='/project/?group_id='. $params['group'];
-		    		} else {
-					$TABS_DIRS[]='/projects/'.$project->getUnixName().'/';
-				}
+				$TABS_DIRS[]=util_make_url_g ($project->getUnixName(),$params['group']);
 				$TABS_TITLES[]=$project->getPublicName();
 				$selected=count($TABS_DIRS)-1;
 			}
@@ -457,16 +453,14 @@ function outerTabs($params) {
 			$this->selected_title = $TABS_TITLES[$i];
 			$this->selected_dir = $TABS_DIRS[$i];
 			$this->selected_id = $TABS_IDS[$i];
-			$return .= '<a id="gforge-selected" title="'.$TABS_TITLES[$i].'" href="'.$TABS_DIRS[$i].'" >'.$TABS_TITLES[$i].'</a> ';
+			@$return .= util_make_link ($TABS_DIRS[$i],$TABS_TITLES[$i],array('id'=>'gforge-selected','title'=>$TABS_TITLES[$i]));
 		}
 		else{
-			$return .= '<a id="gforge-'.$TABS_IDS[$i].'" title="'.$TABS_TITLES[$i].'"
-href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
+			@$return .= util_make_link ($TABS_DIRS[$i],$TABS_TITLES[$i],array('id'=>'gforge-'.$TABS_IDS[$i],'title'=>$TABS_TITLES[$i]));
 		}
 	}
 	if(isset($params['group']) && $params['group']) {
-		$return .= '<a id="gforge-selected" title="'.$TABS_TITLES[$i].'"
-href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
+		$return .= util_make_link ($TABS_DIRS[$i],$TABS_TITLES[$i],array('id'=>'gforge-selected','title'=>$TABS_TITLES[$i]));
 		$this->selected_title = $TABS_TITLES[$i];
 	}
 	return $return;
@@ -498,9 +492,9 @@ function projectTabs($toptab,$group) {
 
 	// Summary
 	if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
-	    	$TABS_DIRS[]='/project/?group_id='. $group;
+		$TABS_DIRS[]='/project/?group_id='.$group;
 	} else {
-		$TABS_DIRS[]='/projects/'. $project->getUnixName() .'/';
+		$TABS_DIRS[]='/projects/'.$project->getUnixName();
 	}
 	$TABS_IDS[]='gforge-project-summary';
 	$TABS_TITLES[]=_('Summary');
@@ -621,16 +615,16 @@ function projectTabs($toptab,$group) {
 			$this->selected_title = $TABS_TITLES[$i];
 			$this->selected_dir = $TABS_DIRS[$i];
 			$this->selected_id = $TABS_IDS[$i];
-			$return .= '<a id="gforge-project-selected" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a> ';
+			$return .= util_make_link ($TABS_DIRS[$i],$TABS_TITLES[$i],array('id'=>'gforge-project-selected'));
 
 		}
 		else{
 			if ($TABS_IDS[$i]==''){
-				$return .= '<a id="gforge-project-std" title="'.$TABS_TITLES[$i].'" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a>';
+				$return .= util_make_link ($TABS_DIRS[$i],$TABS_TITLES[$i],array('id'=>'gforge-project-std','title'=>$TABS_TITLES[$i]));
 
 			}
 			else {
-				$return .= '<a id="'.$TABS_IDS[$i].'" title="'.$TABS_TITLES[$i].'" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a>';
+				$return .= util_make_link ($TABS_DIRS[$i],$TABS_TITLES[$i],array('id'=>$TABS_IDS[$i],'title'=>$TABS_TITLES[$i]));
 			}
 		}
 	}
@@ -824,11 +818,9 @@ function printSubMenu ($title_arr,$links_arr) {
 	$return = '';
 
 	for ($i=0; $i<$count; $i++) {
-		$return .= '
-				<a href="'.$links_arr[$i].'">'.$title_arr[$i].'</a> | ';
+		$return .= util_make_link ($links_arr[$i],$title_arr[$i]).' | ';
 	}
-	$return .= '
-				<a href="'.$links_arr[$i].'">'.$title_arr[$i].'</a>';
+	$return .= util_make_link ($links_arr[$i],$title_arr[$i]);
 	return $return;
 }
 

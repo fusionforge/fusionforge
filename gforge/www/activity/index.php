@@ -167,15 +167,10 @@ if ($rows<1) {
 				break;
 			}
 		}
-		if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
-			$userlink='/developer/?user_id='.$arr['user_id'];
-		} else {
-			$userlink='/users/'.$arr['user_name'].'/';
-		}
 		echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
 			<td>&nbsp;&nbsp;&nbsp;&nbsp;'.date('H:i:s',$arr['activity_date']).'</td>
 			<td>'.$icon .' '.$url.'</td>
-			<td>'.util_make_link ($userlink,$arr['realname']).'</td>
+			<td>'.util_make_link_u ($arr['user_name'],$arr['user_id'],$arr['realname']).'</td>
 			</tr>';
 	}
 

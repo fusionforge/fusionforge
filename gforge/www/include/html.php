@@ -20,19 +20,6 @@ function html_feedback_top($feedback) {
 }
 
 /**
- * make_user_link() - Make a username reference into a link to that users User page on SF.
- *
- * @param		string	The username of the user to link.
- */
-function make_user_link($username) {
-	if (!strcasecmp($username,'Nobody') || !strcasecmp($username,'None')) {
-		return $username;
-	} else {
-		return util_make_link ('/users/'.$username,$username);
-	}
-}
-
-/**
  * html_feedback_top() - Show the feedback output at the bottom of the page.
  *
  * @param		string	The feedback.

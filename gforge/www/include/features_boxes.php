@@ -61,7 +61,7 @@ function show_top_downloads() {
 	while ($row_topdown = db_fetch_array($res_topdown)) {
 		if ($row_topdown['downloads'] > 0)
 			$return .= '(' . number_format($row_topdown['downloads']) . ')'
-			. util_make_url ('/projects/'.$row_topdown['unix_group_name'].'/',$row_topdown['group_name'])
+			. util_make_link_g ($row_topdown['unix_group_name'],$row_topdown['group_id'],$row_topdown['group_name'])
 			. "<br />\n";
 	}
 	$return .= '<div align="center">'.util_make_link ('/top/',_('More')).'</div>';
@@ -130,18 +130,10 @@ function show_newest_projects() {
 	if (!$res_newproj || db_numrows($res_newproj) < 1) {
 		return _('No Stats Available')." ".db_error();
 	} else {
-		if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
-			while ( $row_newproj = db_fetch_array($res_newproj) ) {
-				$return .= "<strong>(" . date(_('m/d'),$row_newproj['register_time'])  . ")</strong> "
-				. util_make_link ('/project/?group_id='.$row_newproj['group_id'],$row_newproj['group_name'])
-				.'<br />';
-			}
-		} else {
-			while ( $row_newproj = db_fetch_array($res_newproj) ) {
-				$return .= "<strong>(" . date(_('m/d'),$row_newproj['register_time'])  . ")</strong> "
-				. util_make_link ('/projects/'.$row_newproj['unix_group_name'].'/',$row_newproj['group_name'])
-				.'<br />';
-			}
+		while ( $row_newproj = db_fetch_array($res_newproj) ) {
+			$return .= "<strong>(" . date(_('m/d'),$row_newproj['register_time'])  . ")</strong> "
+			. util_make_link_g ($row_newproj['group_name'],$row_newproj['group_id'],$row_newproj['group_name'])
+			.'<br />';
 		}
 	}
 	/// TODO: Add more link to show all project
@@ -151,7 +143,7 @@ function show_newest_projects() {
 
 function show_highest_ranked_users() {
 	//select out the users information to show the top users on the site
-	$sql="SELECT users.user_name,users.realname,user_metric.metric
+	$sql="SELECT users.user_name,users.user_id,users.realname,user_metric.metric
 		FROM user_metric,users
 		WHERE users.user_id=user_metric.user_id AND user_metric.ranking < 11 AND users.status != 'D'  
 		ORDER BY ranking ASC";
@@ -163,7 +155,7 @@ function show_highest_ranked_users() {
 		$return = '';
 		for ($i=0; $i<$rows; $i++) {
 			$return .= ($i+1).' - ('. number_format(db_result($res,$i,'metric'),4) .') '
-			. util_make_link ('/users/'. db_result($res,$i,'user_name'), db_result($res,$i,'realname'))
+			. util_make_link_u (db_result($res,$i,'user_name'),db_result($res,$i,'user_id'),db_result($res,$i,'realname'))
 			.'<br />';
 		}
 	}
@@ -186,7 +178,7 @@ function show_highest_ranked_projects() {
 	} else {
 		while ($row=db_fetch_array($result)) {
 			$return .= '<strong>( '.number_format(substr($row['percentile'],0,5),1).'% )</strong>'
-				.util_make_link ('/projects/'.$row['unix_group_name'].'/',$row['group_name'])
+				.util_make_link_g ($row['unix_group_name'],$row['group_id'],$row['group_name'])
 				.'<br />';
 		}
 		$return .= '<div align="center">'
