@@ -60,16 +60,6 @@ class Theme extends Error {
 	}
 
 	/**
-	 *	createLinkToUserHome() - Creates a link to a user's home page
-	 *
-	 *	@param	string	The user's user_name
-	 *	@param	string	The user's realname
-	 */
-	function createLinkToUserHome($user_name, $realname) {
-		return util_make_link ('/users/'.$user_name.'/',$realname);
-	}
-
-	/**
 	 *	headerStart() - common code for all themes
 	 *
 	 * @param	array	Header parameters array

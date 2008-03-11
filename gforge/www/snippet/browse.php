@@ -30,7 +30,7 @@ function createSnippetQuery($clause) {
  * @param	string	clause - the last part of the where clause
  */
 function createPackageQuery($clause) {
-	return "SELECT users.realname,users.user_name,snippet_package.description,snippet_package.snippet_package_id,snippet_package.name FROM snippet_package,users WHERE users.user_id=snippet_package.created_by AND ".$clause;
+	return "SELECT users.realname,users.user_name,users.user_id,snippet_package.description,snippet_package.snippet_package_id,snippet_package.name FROM snippet_package,users WHERE users.user_id=snippet_package.created_by AND ".$clause;
 }
 
 snippet_header(array('title'=>_('Snippet Library'), 'header'=>''));
@@ -78,7 +78,7 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td rowspan="2">'.
 			util_make_link ('/snippet/detail.php?type=package&amp;id='.db_result($result2,$i,'snippet_package_id'),'<strong>'.db_result($result2,$i,'snippet_package_id').'</strong>').'</td><td><strong>'.
 			db_result($result2,$i,'name').'</td><td>'.
-			$GLOBALS['HTML']->createLinkToUserHome(db_result($result2, $i, 'user_name'), db_result($result2, $i, 'realname')).'</td></tr>';
+			util_make_link_u (db_result($result2, $i, 'user_name'), db_result($result2, $i, 'user_id'), db_result($result2, $i, 'realname')).'</td></tr>';
 		echo '
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td colspan="2">'.util_make_links(nl2br(db_result($result2,$i,'description'))).'</td></tr>';
 	}
@@ -95,7 +95,7 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 			'</td><td><strong>'.
 			util_make_link ('/snippet/detail.php?type=snippet&amp;id='.db_result($result,$i,'snippet_id'),db_result($result,$i,'name')).
 			'</strong></td><td>'.
-			$GLOBALS['HTML']->createLinkToUserHome(db_result($result, $i, 'user_name'), db_result($result, $i, 'realname')).'</td></tr>';
+			util_make_link_u (db_result($result, $i, 'user_name'), db_result($result, $i, 'user_id'), db_result($result, $i, 'realname')).'</td></tr>';
 		echo '
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td colspan="2">'.util_make_links(nl2br(db_result($result,$i,'description'))).'</td></tr>';
 	}

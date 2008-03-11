@@ -85,16 +85,6 @@ class Theme extends Layout {
     }
 
     /**
-     *    createLinkToUserHome() - Creates a link to a user's home page    
-     * 
-     *    @param    string    The user's user_name
-     *    @param    string    The user's realname
-     */
-    function createLinkToUserHome($user_name, $realname) {
-	    return util_make_link ('/users/'.$user_name, $realname);
-    }
-
-    /**
      *    header() - "steel theme" top of page
      *
      * @param    array    Header parameters array

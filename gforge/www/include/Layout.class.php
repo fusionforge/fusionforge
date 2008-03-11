@@ -54,16 +54,6 @@ class Layout extends Error {
 	}
 
 	/**
-	 *	createLinkToUserHome() - Creates a link to a user's home page	
-	 * 
-	 *	@param	string	The user's user_name
-	 *	@param	string	The user's realname
-	 */
-	function createLinkToUserHome($user_name, $realname) {
-		return util_make_link ('/users/'.$user_name.'/',$realname);
-	}
-
-	/**
 	 *	headerStart() - common code for all themes
 	 *
 	 * @param	array	Header parameters array
@@ -467,14 +457,18 @@ if (isset($params['group']) && $params['group']) {
 				} elseif (!$project->isProject()) {
 
 				} else {
-					$TABS_DIRS[]='/projects/'.$project->getUnixName().'/';
+					if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
+						$TABS_DIRS[]='/project/?group_id'.$project->getId();
+					} else {
+						$TABS_DIRS[]='/projects/'.$project->getUnixName().'/';
+					}
 					$TABS_TITLES[]=$project->getPublicName();
 					$selected=count($TABS_DIRS)-1;
 				}
 			}
-		} elseif (strstr($GLOBALS['REQUEST_URI'],'/my/') || 
-				strstr($GLOBALS['REQUEST_URI'],'/account/') || 
-				strstr($GLOBALS['REQUEST_URI'],'/register/') ||  
+		} elseif (strstr(getStringFromServer('REQUEST_URI'),'/my/') || 
+				strstr(getStringFromServer('REQUEST_URI'),'/account/') || 
+				strstr(getStringFromServer('REQUEST_URI'),'/register/') ||  
 				strstr(getStringFromServer('REQUEST_URI'),'/themes/') ) {
 			$selected=array_search("/my/", $TABS_DIRS);
 		} elseif (strstr(getStringFromServer('REQUEST_URI'),'softwaremap')) {
@@ -523,7 +517,11 @@ if (isset($params['group']) && $params['group']) {
 		}
 
 		// Summary
-		$TABS_DIRS[]='/projects/'. $project->getUnixName() .'/';
+		if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
+			$TABS_DIRS[]='/project/?group_id='. $project->getId();
+		} else {
+			$TABS_DIRS[]='/projects/'. $project->getUnixName() .'/';
+		}
 		$TABS_TITLES[]=_('Summary');
 		(($toptab == 'home') ? $selected=(count($TABS_TITLES)-1) : '' );
 

@@ -7,6 +7,7 @@
 
 2008-03-10  Christian Bayle <bayle@debian.org>
 	
+	* Removed createLinkToUserHome function replaced by util_make_link_u
 	* Removed as much php warning as possible
 	* Migrate to util_make_url() and util_make_link()
 	* - www/reporting/*,www/pm/*,www/softwaremap/*
