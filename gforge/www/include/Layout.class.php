@@ -163,6 +163,10 @@ class Layout extends Error {
 				echo util_make_link ('/account/login.php',_('Log In'),array('class'=>'lnkutility'));
 				echo util_make_link ('/account/register.php',_('New Account'),array('class'=>'lnkutility'));
 			}
+			
+			$params['template'] = ' {menu}';
+			plugin_hook ('headermenu', $params);
+			
 			echo $this->quickNav();
 
 		?></td>

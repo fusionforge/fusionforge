@@ -50,6 +50,8 @@ class Theme extends Layout {
 		<b><?php echo util_make_link ('/account/register.php',_('New Account')); ?></b>
 		<?php
 		}
+		$params['template'] = '<b>{menu}</b>';
+		plugin_hook ('headermenu', $params);
 		?>
 		</p>
 

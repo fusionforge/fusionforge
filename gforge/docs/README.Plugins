@@ -297,6 +297,15 @@ had been written.
   Locations  : www/include/Layout.class.php
   Description: Provides a tab for the SCM system in the group pages.
 
+  Hook Name  : headermenu
+  Parameters : toptab - A reference to a string containing the name of
+                        the GForge tab menu in use (eg. admin, tracker)
+               template - An HTML template giving how to add the menu.
+  Locations  : www/include/Layout.class.php
+  Description: Used to provide a plugin specific menu entry in the header
+               top menu (after: Login, Logout, My Account).
+               See plugin online_help for example of use.
+
   Hook Name  : javascript
   Locations  : www/include/Layout.class.php
                www/include/LayoutSF.class.php

@@ -1,3 +1,10 @@
+2008-03-11  Alain Peyrat <aljeux@free.fr>
+
+	* New plugin online_help to display the gforge manual
+	as a contextual online help (code moved in plugin).
+	
+	* New hook 'headermenu' to add a menu in the header top.
+
 2008-03-10  Christian Bayle <bayle@debian.org>
 	
 	* Removed as much php warning as possible
@@ -447,7 +454,7 @@
 		http://gforge.org/tracker/?func=detail&aid=1829&group_id=1&atid=105
 	* Fixed bug :  alt row color doesn't render right in IE
 		http://gforge.org/tracker/?func=detail&aid=1830&group_id=1&atid=105
-	* Fixed bug in rss, where group_id wasn´t being properly set
+	* Fixed bug in rss, where group_id wasn't being properly set
 
 2006-01-29 Tim Perdue   <tim@gforgegroup.com>
 	* added google-style page counts at the bottom of the tracker browse page
@@ -470,7 +477,7 @@
 2006-01-04 Daniel Perez <daniel@gforgegroup.com>
 	* Docman : when editing files, the editor only shows up for TEXT files
 			For html text files, the plugin editor shows up (fckeditor at this time)
-			For other text files it´s a textarea to preserver the text format
+			For other text files it's a textarea to preserver the text format
 
 2006-01-03  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
 
@@ -506,8 +513,8 @@
 	* SOAP call artifactGetChangeLog now returns strings instead of IDs
 
 2005-12-14 Daniel Perez <daniel@gforgegroup.com>
-	create_svn : post-commit was being overwritten every time on several repositories, now there´s a check to see
-			if the lines are already there for svncommitemail and svntracker and appended if they´re not there,
+	create_svn : post-commit was being overwritten every time on several repositories, now there's a check to see
+			if the lines are already there for svncommitemail and svntracker and appended if they're not there,
 			else the file is created (never overwritten)
 
 2005-12-13 Daniel Perez <daniel@gforgegroup.com>
@@ -649,7 +656,7 @@ FOLLOWING SCRIPTS MUST BE RUN:
 
 	* forum/ForumMessage.class : strip_tags to emails. This is for when fckeditor edited messages have permitted html
 	* TextSanitizer : Fixed various bugs. <input> tag not allowed
-	* utils.php : added param to send_mail function, just to have it if it´s needed sometime
+	* utils.php : added param to send_mail function, just to have it if it's needed sometime
 	* Applied patch -> http://gforge.org/tracker/index.php?func=detail&aid=1590&group_id=1&atid=106
 
 2005-10-18 Daniel Perez <daniel@gforgegroup.com>
@@ -660,7 +667,7 @@ FOLLOWING SCRIPTS MUST BE RUN:
 					added <address> tag
 					double quotes replaced (now allowed)
 	* www/include/html.php : added html_build_rich_textarea function
-	* Fckeditor made plugin. Merged plugin into forums. Defaults to old <textarea> (but anyway it´s sanitized for html tags)
+	* Fckeditor made plugin. Merged plugin into forums. Defaults to old <textarea> (but anyway it's sanitized for html tags)
 	* Fixed bug -> scmcvs/cronjobs/usergroup.php
 		http://gforge.org/tracker/?func=detail&aid=1429&group_id=6&atid=222
 
@@ -674,7 +681,7 @@ FOLLOWING SCRIPTS MUST BE RUN:
 2005-10-17 Daniel Perez <daniel@gforgegroup.com>
 
 	* Fixed bug -> html_build_multiple_select_box_from_arrays and
-				html_build_multiple_select_box now doesn´t display DB ids
+				html_build_multiple_select_box now doesn't display DB ids
 		http://gforge.org/tracker/?func=detail&aid=1575&group_id=6&atid=222
 	* Fixed bug -> www/tracker/mod.php
 		http://gforge.org/tracker/?func=detail&aid=1549&group_id=6&atid=222
@@ -684,7 +691,7 @@ FOLLOWING SCRIPTS MUST BE RUN:
 	* Fixed bug -> cronjobs/
 		cronjobs/daily_task_email.php
 		http://gforge.org/tracker/?func=detail&aid=1553&group_id=6&atid=222
-		Applied reverse function to htmlentities() so that in the email the chars aren´t displayed as html
+		Applied reverse function to htmlentities() so that in the email the chars aren't displayed as html
 	* FCKEDITOR added
 	* TextSanitizer : first revision
 	* Fckeditor merged into the forums : first revision
@@ -717,7 +724,7 @@ FOLLOWING SCRIPTS MUST BE RUN:
 2005-10-11 Daniel Perez <daniel@gforgegroup.com>
 
 	(**Survey**)
-	For admin -> the text in comments wasn´t wrapped and it resulted in naugthy display. Now it´s wrapped at 100 chars
+	For admin -> the text in comments wasn't wrapped and it resulted in naugthy display. Now it's wrapped at 100 chars
 
 2005-10-10 Daniel Perez <daniel@gforgegroup.com>
 
@@ -824,7 +831,7 @@ Unneeded addslashes removed, it was messing up the name when mass updating
 
 	* myforums page : added the myforums page to the "my page" and when you visit any list of forums 
 	for any group. it shows a description of all the forums you are monitoring, the project they belong to, a 
-	link to them and an indicator that tells you if there´s new content for that forum.
+	link to them and an indicator that tells you if there's new content for that forum.
 
 2005-08-24 Daniel Perez <daniel@gforgegroup.com>
 

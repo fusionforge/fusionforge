@@ -70,15 +70,16 @@ class Theme extends Layout {
 			if (session_loggedin()) {
 				?>
 				<b><?php echo util_make_link ('/account/logout.php',_('Log Out')); ?></b><br />
-				<b><?php echo util_make_link ('/account/',_('My Account')); ?></b>
-				<?php
+				<b><?php echo util_make_link ('/account/',_('My Account')); ?></b><?php
 			} else {
 				?>
 				<b><?php echo util_make_link ('/account/login.php',_('Log In')); ?></b><br />
-				<b><?php echo util_make_link ('/account/register.php',_('New Account')); ?></b>
-				<?php
+				<b><?php echo util_make_link ('/account/register.php',_('New Account')); ?></b><?php
 			}
-
+			
+			$params['template'] = '<br/><b>{menu}</b>';
+			plugin_hook ('headermenu', $params);
+			
 		?></td>
 		<td>&nbsp;&nbsp;</td>
 	</tr>

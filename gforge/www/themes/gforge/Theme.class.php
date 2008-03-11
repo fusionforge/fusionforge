@@ -7,27 +7,6 @@ define('THEME_DIR', util_make_url ('/themes/gforge'));
 define('TOP_TAB_HEIGHT', 30);
 define('BOTTOM_TAB_HEIGHT', 22);
 
-$user_guide = array(
-	'user' => 'ug_user.html',
-	'login' => 'ug_getting_started_login.html',
-	'trove' => 'ug_sitewide_trove.html',
-	'snippet' => 'ug_sitewide_snippet.html',
-	'people' => 'ug_sitewide_project_help.html',
-	'home' => 'ug_project.html',
-	'admin' => 'ug_project_project_admin.html',
-	'activity' => 'ug_project_activity.html',
-	'forums' => 'ug_project_forums.html',
-	'tracker' => 'ug_project_tracker.html',
-	'mail' => 'ug_project_mailing_lists.html',
-	'pm' => 'ug_project_task_manager.html',
-	'docman' => 'ug_project_docman.html',
-	'surveys' => 'ug_project_surveys.html',
-	'news' => 'ug_project_news.html',
-	'scm' => 'ug_project_subversion.html',
-	'frs' => 'ug_project_file_releases.html',
-	'wiki' => 'ug_project_wiki.html',
-	);
-
 class Theme extends Layout {
 
     function Theme() {
@@ -196,29 +175,9 @@ class Theme extends Layout {
 		  echo util_make_link ('/account/register.php', _('New Account'));
           }
 
-		$guide = util_make_url ('/help/guide/');
-		if (strstr($_SERVER['REQUEST_URI'],'softwaremap')) {
-			$guide .= $user_guide['trove'];
-		} elseif (strstr($_SERVER['REQUEST_URI'],'/my/')) {
-			$guide .= $user_guide['user'];
-		} elseif (strstr($_SERVER['REQUEST_URI'],'/account/login.php')) {
-			$guide .= $user_guide['login'];
-		} elseif (strstr($_SERVER['REQUEST_URI'],'/account/')) {
-			$guide .= $user_guide['user'];
-		} elseif (strstr($_SERVER['REQUEST_URI'],'/snippet/')) {
-			$guide .= $user_guide['snippet'];
-		} elseif (strstr($_SERVER['REQUEST_URI'],'/people/')) {
-			$guide .= $user_guide['people'];
-		} elseif (isset($params['toptab']) && isset($user_guide[ $params['toptab'] ])) {
-			$guide .= $user_guide[ $params['toptab'] ];
-		} else {
-			$guide .= 'index.html';
-		}
-		?>
-		| 
-		<a href="javascript:help_window('<?php echo $guide ?>')"><?php echo _('Get Help'); ?></a>
-		<?php
-          echo $this->quickNav();
+	plugin_hook ('headermenu', $params);
+
+        echo $this->quickNav();
         ?></td>
         <td>&nbsp;&nbsp;</td>
       </tr>
