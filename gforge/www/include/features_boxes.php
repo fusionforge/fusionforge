@@ -132,7 +132,7 @@ function show_newest_projects() {
 	} else {
 		while ( $row_newproj = db_fetch_array($res_newproj) ) {
 			$return .= "<strong>(" . date(_('m/d'),$row_newproj['register_time'])  . ")</strong> "
-			. util_make_link_g ($row_newproj['group_name'],$row_newproj['group_id'],$row_newproj['group_name'])
+			. util_make_link_g ($row_newproj['unix_group_name'],$row_newproj['group_id'],$row_newproj['group_name'])
 			.'<br />';
 		}
 	}
