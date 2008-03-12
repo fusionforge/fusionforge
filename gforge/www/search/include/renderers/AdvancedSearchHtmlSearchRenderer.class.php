@@ -74,7 +74,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * writeHeader - write the header of the output
 	 */		
 	function writeHeader() {
-		site_project_header(array('title' => _('Advanced search'), 'group' => $this->groupId, ));
+		site_project_header(array('title' => _('Advanced search'), 'group' => $this->groupId, 'toptab'=>'none'));
 		$sectionarray = $this->getSectionArray();
 		$this->handleTransferInformation($sectionarray);
 		
@@ -141,6 +141,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	function getPartResult($renderer, $section, $title='') {
 		$result = '';
 		$renderer->searchQuery->executeQuery();
+		$query = NULL;
 		
 		if ($title === '')
 			$title = $section;

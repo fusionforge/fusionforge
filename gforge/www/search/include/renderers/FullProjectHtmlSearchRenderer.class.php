@@ -55,6 +55,7 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$this->groupId = $groupId;
 		$this->words = $words;
 		$this->isExact = $isExact;
+		$searchQuery =& $this->searchQuery;
 		
 		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_ADVANCED, $words, $isExact, $searchQuery, $groupId);
 	}
@@ -71,7 +72,7 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * writeBody - write the Body of the output
 	 */
 	function writeBody() {
-		site_project_header(array('title' => _('Advanced project search'), 'group' => $this->groupId, ));
+		site_project_header(array('title' => _('Advanced project search'), 'group' => $this->groupId, 'toptab'=>'none'));
 		echo $this->getResult();
 	}
 	
@@ -147,6 +148,7 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	function getPartResult($renderer, $section, $title='') {
 		$result = '';
 		$renderer->searchQuery->executeQuery();
+		$query = NULL;
 		
 		if ($title === '')
 			$title = $section;

@@ -15,6 +15,9 @@ require_once('www/search/include/renderers/HtmlSearchRenderer.class.php');
 
 class HtmlGroupSearchRenderer extends HtmlSearchRenderer {
 	
+	/** TODO: Find what for is $offset, looks like it's not used, added to remove warning 
+	*/
+	var $offset;
 	/**
 	 * group id
 	 *
