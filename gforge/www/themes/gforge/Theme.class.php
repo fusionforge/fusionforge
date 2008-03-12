@@ -710,7 +710,7 @@ if ($sys_show_source) {
         }
 
         print '
-        <form action="/search/" method="get">
+        <form action="'.util_make_url ('/search/').'" method="get">
         <table border="0" cellpadding="0" cellspacing="0">
         <tr><td>
         <div align="center" style="font-size:smaller">';
