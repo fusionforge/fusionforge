@@ -1,6 +1,19 @@
 // change this variable to update the theme directory
 var ctThemeXPBase = '/~heng/JSCookTree/ThemeXP/';
 
+// the follow block allows user to re-define theme base directory
+// before it is loaded.
+try
+{
+	if (myThemeXPBase)
+	{
+		ctThemeXPBase = myThemeXPBase;
+	}
+}
+catch (e)
+{
+}
+
 // theme node properties
 var ctThemeXP1 =
 {
