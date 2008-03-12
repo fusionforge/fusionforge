@@ -450,6 +450,7 @@ return $handle;
 }
 
 function newSession($handle="{0}",$nom_zone = "|root|"){
+global $cache,$time,$num_session;
 if ( $this->sessions[$handle][$nom_zone]->used ) $this->closeSession($handle,$nom_zone);
 $this->addSession($handle,$nom_zone,$cache,$time,$num_session);
 return 1;

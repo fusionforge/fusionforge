@@ -251,8 +251,9 @@ class DocumentGroup extends Error {
 	* @param int	(optional) State of the documents
 	*/
 	function hasDocuments(&$nested_groups, &$document_factory, $stateid=0) {
+		global $doc_group_id;
 		static $result = array();	// this function will probably be called several times so we better store results in order to speed things up
-		if (!is_array($result[$stateid])) $result[$stateid] = array();
+		if (!is_array(@$result[$stateid])) $result[$stateid] = array();
 		if (array_key_exists($doc_group_id, $result[$stateid])) return $result[$stateid][$doc_group_id];
 
 		$doc_group_id = $this->getID();
@@ -296,7 +297,7 @@ class DocumentGroup extends Error {
 	function hasSubgroup(&$nested_groups, $doc_subgroup_id) {
 		$doc_group_id = $this->getID();
 
-		if (is_array($nested_groups["$doc_group_id"])) {
+		if (is_array(@$nested_groups["$doc_group_id"])) {
 			$count = count($nested_groups["$doc_group_id"]);
 			for ($i=0; $i < $count; $i++) {
 				// child is a match?

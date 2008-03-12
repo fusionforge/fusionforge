@@ -172,12 +172,12 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 		// Display group and subgroups only if it has associated documents
 		if ($doc_group->hasDocuments($nested_groups, $document_factory, $stateid)) {
 			// Recursive call			
-			if (($doc_group->getID() == $selected_doc_group_id || $doc_group->hasSubgroup($nested_groups, $selected_doc_group_id)) && (!$stateid || $stateid == $selected_stateid)) {
+			if (($doc_group->getID() == $selected_doc_group_id || $doc_group->hasSubgroup($nested_groups, $selected_doc_group_id)) && (!$stateid || $stateid == @$selected_stateid)) {
 				$icon = 'ofolder15.png';
 			} else {
 				$icon = 'cfolder15.png';
 			}
-			echo "<li>".html_image('ic/'.$icon,"15","13",array("border"=>"0"))." <a href='index.php?group_id=".$doc_group->Group->getID()."&selected_doc_group_id=".$doc_group->getID()."&amp;language_id=".$GLOBALS['selected_language'];
+			echo "<li>".html_image('ic/'.$icon,"15","13",array("border"=>"0"))." <a href='index.php?group_id=".$doc_group->Group->getID()."&selected_doc_group_id=".$doc_group->getID()."&amp;language_id=".@$GLOBALS['selected_language'];
 			if ($from_admin && $stateid) {	// if we're sorting by the state, pass the state as a variable
 				echo "&amp;selected_stateid=".$stateid;
 			}

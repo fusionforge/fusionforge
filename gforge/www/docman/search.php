@@ -82,12 +82,12 @@ $handle = $vtp->Open("search.tpl.html");
 $vtp->NewSession($handle,"MAIN");
 
 $allchecked = ""; $onechecked = ""; 
-if ($_POST["search_type"] == "one") {$onechecked = "checked";}
+if (getStringFromPost('search_type') == "one") {$onechecked = "checked";}
 else {$allchecked = "checked";}
 $vtp->AddSession($handle,"FORMSEARCH");
 $vtp->SetVar($handle,"FORMSEARCH.TITLE",_('Search in documents'));
 $vtp->SetVar($handle,"FORMSEARCH.GROUP_ID",$_GET["group_id"]);
-$vtp->SetVar($handle,"FORMSEARCH.TEXTSEARCH",$_POST["textsearch"]);
+$vtp->SetVar($handle,"FORMSEARCH.TEXTSEARCH",getStringFromPost("textsearch"));
 $vtp->SetVar($handle,"FORMSEARCH.ALLCHECKED",$allchecked);
 $vtp->SetVar($handle,"FORMSEARCH.ONECHECKED",$onechecked);
 $vtp->SetVar($handle,"FORMSEARCH.SUBMIT_PROMPT",_('Search'));
@@ -95,14 +95,14 @@ $vtp->SetVar($handle,"FORMSEARCH.SEARCH_ALL_WORDS",_('With all the words'));
 $vtp->SetVar($handle,"FORMSEARCH.SEARCH_ONE_WORD",_('With at least one of words'));
 $vtp->CloseSession($handle,"FORMSEARCH");
 
-if ($_POST["cmd"] == "search")
+if (getStringFromPost('cmd') == "search")
 {
 	
-	$textsearch = $_POST["textsearch"];
+	$textsearch = getStringFromPost("textsearch");
 	$textsearch = prepare_search_text ($textsearch);
 	$mots = preg_split("/[\s,]+/",$textsearch);
 	$WHERE = "WHERE TRUE ";
-	if ($_POST["search_type"] == "one")
+	if (getStringFromPost('search_type') == "one")
 	{
 		if (count($mots) > 0)
 		{
@@ -223,12 +223,12 @@ function get_path_document ($groupsarr, $doc_group, $group_id, $language_id="1")
 		{
 			if ($group["parent_doc_group"] == 0) 
 			{
-				$href = "/docman/index.php?group_id=$group_id&selected_doc_group_id=$group[doc_group]&language_id=$language_id";
+				$href = util_make_url ("/docman/index.php?group_id=$group_id&selected_doc_group_id=$group[doc_group]&language_id=$language_id");
 				$rep .= "<a href=\"$href\" style=\"color:#00610A;\">$group[groupname]</a>";
 				break;
 			}
 			$s = get_path_document ($groupsarr,  $group["parent_doc_group"], $group_id, $language_id);
-			$href = "/docman/index.php?group_id=$group_id&selected_doc_group_id=$group[doc_group]&language_id=$language_id";
+			$href = util_make_url ("/docman/index.php?group_id=$group_id&selected_doc_group_id=$group[doc_group]&language_id=$language_id");
 			$rep .= "$s / <a href=\"$href\" style=\"color:#00610A;\">$group[groupname]</a>";
 			break;
 		}

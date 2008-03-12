@@ -180,7 +180,7 @@ if ( $num_packages < 1) {
 				$res_file = db_query($sql);
 				$num_files = db_numrows( $res_file );
 
-				$proj_stats['files'] += $num_files;
+				@$proj_stats['files'] += $num_files;
 
 				if ( !$res_file || $num_files < 1 ) {
 					print '<tr '.$bgstyle.'><td colspan="3"><dd><em>No Files</em></td><td colspan="4">&nbsp;</td></tr>'."\n";
@@ -208,7 +208,7 @@ if ( $num_packages < 1) {
 							print $GLOBALS['HTML']->multiTableRow($bgstyle, $cell_data, FALSE);
 						}
 						$proj_stats['size'] += $file_release['file_size'];
-						$proj_stats['downloads'] += $file_release['downloads'];
+						@$proj_stats['downloads'] += $file_release['downloads'];
 					}
 				}
 			}
