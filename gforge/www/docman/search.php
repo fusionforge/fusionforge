@@ -16,6 +16,7 @@
 
 */
 
+require_once('../env.inc.php');
 require_once('pre.php');
 require_once('include/vtemplate.class.php');
 require_once('include/doc_utils.php');

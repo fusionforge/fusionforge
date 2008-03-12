@@ -111,7 +111,7 @@ if (getStringFromRequest('submit')) {
 			//release the cookie for the document contents (should expire at the end of the session anyway)
 			setcookie ("gforgecurrentdocdata", "", time() - 3600);
 		}
-		Header("Location: /docman/?group_id=$group_id&feedback="._('Document submitted sucessfully'));
+		Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='._('Document submitted sucessfully')));
 		exit;
 	}
 

@@ -258,7 +258,7 @@ class DocumentFactory extends Error {
 		
 		while ($arr =& db_fetch_array($result)) {
 			$doc_group_id = $arr['doc_group'];
-			if (!is_array($this->Documents[$doc_group_id])) {
+			if (!is_array(@$this->Documents[$doc_group_id])) {
 				$this->Documents[$doc_group_id] = array();
 			}
 			

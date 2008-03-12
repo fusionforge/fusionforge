@@ -3,6 +3,12 @@
 	* Added and use util_make_url_u, util_make_url_g ,
 	util_make_link_u and util_make_link_g for /projects and /users link
 	forcetype shouln'd be necessary to run gforge now
+	* Rewrite jscook stuffs for docman, should be more readeable
+	added expand/collapse buttons
+	* Upgraded jscook (tree and menu) with last available version from
+	http://jscook.yuanheng.org/JSCookTree/
+	* Patched jscook so it takes in account myThemeXPBase on the model of 
+	JSCookMenu
 
 2008-03-11  Alain Peyrat <aljeux@free.fr>
 

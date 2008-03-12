@@ -23,6 +23,31 @@ require_once('include/doc_utils.php');
 require_once('common/docman/DocumentFactory.class.php');
 require_once('common/docman/DocumentGroupFactory.class.php');
 
+/*
+	EXPERIMENTAL CODE TO USE JAVASCRIPT TREE
+*/
+function docman_recursive_display($docgroup) {
+	global $nested_groups,$nested_docs,$group_id;
+	if (is_array(@$nested_groups[$docgroup])) {
+		foreach ($nested_groups[$docgroup] as $dg) {
+			echo "
+		['".'<span class="JSCookTreeFolderClosed"><i><img alt="" src="\' + ctThemeXPBase + \'folder1.gif" /></i></span><span class="JSCookTreeFolderOpen"><i><img alt="" src="\' + ctThemeXPBase + \'folderopen1.gif"></i></span>'."', '".$dg->getName()."', '#', '', '',";
+			docman_recursive_display($dg->getID());
+			if (is_array($nested_docs[$dg->getID()])) {
+				foreach ($nested_docs[$dg->getID()] as $d) {
+					$docurl=util_make_url ('/docman/view.php/'.$group_id.'/'.$d->getID().'/'.$d->getFileName());
+					$docname=addslashes($d->getName())." (".$d->getFileName().")";
+					$docdesc=addslashes($d->getDescription());
+					echo ",['','".$docname."','".$docurl."','','".$docdesc."' ]";
+				}
+			}
+			echo ",
+		],";
+	
+		}
+	}
+}
+
 $group_id = getIntFromRequest('group_id');
 $language_id = getStringFromRequest('language_id');
 
@@ -104,55 +129,36 @@ if (!$d_arr || count($d_arr) < 1) {
 	foreach ($d_arr as $doc) {
 		$nested_docs[$doc->getDocGroupID()][] = $doc;
 	}
+	?>
+	<script language="JavaScript"><!--
+	var myThemeXPBase = "<?php echo util_make_url ('/jscook/ThemeXP/'); ?>";
+	--></script>
+	<script language="JavaScript" src="<?php echo util_make_url ('/jscook/JSCookTree.js'); ?>"></script>
+	<link rel="stylesheet" href="<?php echo util_make_url ('/jscook/ThemeXP/theme.css'); ?>" type="text/css" />
+	<script src="<?php echo util_make_url ('/jscook/ThemeXP/theme.js'); ?>" type="text/javascript"></script>
 
-/*
-	EXPERIMENTAL CODE TO USE JAVASCRIPT TREE
-*/
-function docman_recursive_display($docgroup) {
-	global $nested_groups,$nested_docs,$group_id;
-	if (is_array($nested_groups[$docgroup])) {
-		foreach ($nested_groups[$docgroup] as $dg) {
-			$folder = '<span class="JSCookTreeFolderClosed"><i><img src=\"/jscook/ThemeXP/folder1.gif\"></i></span><span class="JSCookTreeFolderOpen"><i><img src=\"/jscook/ThemeXP/folderopen1.gif\"></i></span>';
-			echo "\n['$folder', '".$dg->getName()."', '#', '', '',";
-			docman_recursive_display($dg->getID());
-			if (is_array($nested_docs[$dg->getID()])) {
-				foreach ($nested_docs[$dg->getID()] as $d) {
-					echo "\n\t,['<img src=\"/jscook/ThemeXP/page.gif\">', '".addslashes($d->getName())." (".$d->getFileName().")', '/docman/view.php/".$group_id."/".$d->getID()."/".$d->getFileName()."', '', '".addslashes($d->getDescription())."']";
-				}
-			}
-			echo ",\n],";
-	
-		}
-	}
+	<br>
+	<form action="">
+		<input style="width: 100px" type="button" value="<?php echo _('expand all'); ?>" onclick="ctExpandTree('myMenuID',9);" />
+		<input style="width: 100px" type="button" value="<?php echo _('collapse all'); ?>" onclick="ctCollapseTree('myMenuID');" />
+	</form>
+	<br>
+	<div id="myMenuID"></div>
+
+	<script language="JavaScript"><!--
+	var myMenu =
+	[
+		['<span class="JSCookTreeFolderClosed"><i><img alt="" src="' + ctThemeXPBase + 'folder1.gif" /></i></span><span class="JSCookTreeFolderOpen"><i><img alt="" src="' + ctThemeXPBase + 'folderopen1.gif" /></i></span>', '/', '#', '', '', <?php docman_recursive_display(0); ?>
+		]
+	];
+	ctDraw ('myMenuID', myMenu, ctThemeXP1, 'ThemeXP', 0, 1);
+	--></script>
+
+	<noscript>
+		<?php docman_display_documents($nested_groups,$df,$is_editor); ?>
+	</noscript>
+	<?php
 }
-
-?>
-<script language="JavaScript" src="<?php echo util_make_url ('/jscook/JSCookTree.js'); ?>"></script>
-<link rel="stylesheet" href="<?php echo util_make_url ('/jscook/ThemeXP/theme.css'); ?>" type="text/css" />
-<script src="/jscook/ThemeXP/theme.js" type="text/javascript"></script>
-
-<script language="JavaScript"><!--
-var myMenu =
-[
-['<span class="JSCookTreeFolderClosed"><i><img src="<?php echo util_make_url ('/jscook/ThemeXP/folder1.gif'); ?>"></i></span><span class="JSCookTreeFolderOpen"><i><img src="/jscook/ThemeXP/folderopen1.gif"></i></span>', '/', '#', '', '',
-<?php
-docman_recursive_display(0);
-?>
-]
-]
---></script>
-<div id="myMenuID"></div>
-
-<script language="JavaScript"><!--
-        ctDraw ('myMenuID', myMenu, ctThemeXP1, 'ThemeXP', 0, 1);
---></script>
-<?php
-
-	echo '<noscript>';
-	docman_display_documents($nested_groups,$df,$is_editor);
-	echo '</noscript>';
-}
-
 docman_footer(array());
 
 // Local Variables:
