@@ -77,6 +77,7 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 		global $sys_use_fti;
 		
 		$project_name = $this->getResultId('unix_group_name');
+		$project_id = $this->getResultId('group_id');
 		
 		if ($sys_use_fti) {
 			// If FTI is being used, the project name returned by the query will be "<b>projectname</b>", so
@@ -85,7 +86,11 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 			$project_name = str_replace('</b>', '', $project_name);
 		}
 		
-		header('Location: /'.($this->getResultId('type') == 2 ? 'foundry' : 'projects').'/'.$project_name.'/');
+		if ($this->getResultId('type') == 2) {
+			header('Location: /foundry/'.$project_name.'/');
+		} else {
+			header('Location: '.util_make_url_g($project_name,$project_id));
+		}
 		exit();
 	}
 	
