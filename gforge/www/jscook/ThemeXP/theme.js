@@ -1,5 +1,5 @@
 // change this variable to update the theme directory
-var ctThemeXPBase = '/jscook/ThemeXP/';
+var ctThemeXPBase = '/~heng/JSCookTree/ThemeXP/';
 
 // theme node properties
 var ctThemeXP1 =

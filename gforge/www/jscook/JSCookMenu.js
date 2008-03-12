@@ -1,5 +1,5 @@
 /*
-	JSCookMenu v1.4.3.  (c) Copyright 2002-2005 by Heng Yuan
+	JSCookMenu v1.4.4.  (c) Copyright 2002-2005 by Heng Yuan
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -175,11 +175,11 @@ function cmDrawSubMenu (subMenu, prefix, id, orient, nodeProperties)
 		if (!item)
 			continue;
 
-		hasChild = (item.length > 5);
-		idSub = hasChild ? cmNewID () : null;
-
 		if (item == _cmSplit)
 			item = cmSplitItem (prefix, 0, true);
+
+		hasChild = (item.length > 5);
+		idSub = hasChild ? cmNewID () : null;
 
 		str += '<tr class="' + prefix + 'MenuItem"';
 		if (item[0] != _cmNoClick)
@@ -1069,6 +1069,9 @@ function cmGetProperties (obj)
 	return msg;
 }
 
+/* v1.4.4			1. a quick fix for a bug for _cmSplit checking.  reported by
+						Son Nguyen.
+*/
 /* v1.4.3			1. changed how _cmSplit is handled a bit so that _cmNoClick can work
 						properly.  All splits in predefined themes are changed to use
 						_cmNoClick instead of _cmNoAction.

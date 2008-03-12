@@ -1,5 +1,5 @@
 /*
-	JSCookTree v2.0.  (c) Copyright 2002 by Heng Yuan
+	JSCookTree v2.01.  (c) Copyright 2002 by Heng Yuan
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -267,6 +267,19 @@ function ctMarkTreeIndex (treeIndex, index)
 }
 
 //
+// return the current selected node for the current tree
+//
+// treeItem treeItem is the table row of where the tree item is located
+//
+function ctGetSelectedItem (treeIndex)
+{
+	if (_ctTreeList[treeIndex].hideType <= 1)
+		return _ctTreeList[treeIndex].currentItem;
+	else
+		return _ctCurrentItem;
+}
+
+//
 // The function that builds the menu inside the specified element id.
 //
 function ctDraw (id, tree, nodeProperties, prefix, hideType, expandLevel)
@@ -282,7 +295,10 @@ function ctDraw (id, tree, nodeProperties, prefix, hideType, expandLevel)
 	if (!expandLevel)
 		expandLevel = 0;
 
-	var treeIndex = _ctTreeList.push (new ctTreeInfo (nodeProperties, prefix, hideType, expandLevel)) - 1;
+	//var treeIndex = _ctTreeList.push (new ctTreeInfo (nodeProperties, prefix, hideType, expandLevel)) - 1;
+	_ctTreeList[_ctTreeList.length] = new ctTreeInfo (nodeProperties, prefix, hideType, expandLevel);
+	var treeIndex = _ctTreeList.length - 1;
+
 	var beginIndex = _ctItemList.length;
 
 	_ctMenuInitStr = '';
@@ -347,7 +363,9 @@ function ctDrawSub (subMenu, isMain, id, treeIndex, level, nodeProperties, prefi
 		if (!item)
 			continue;
 
-		index = _ctItemList.push (item) - 1;
+		//index = _ctItemList.push (item) - 1;
+		_ctItemList[_ctItemList.length] = item;
+		index = _ctItemList.length - 1;
 
 		hasChild = (item.length > 5);
 		idSub = hasChild ? ctNewSubMenuID () : null;
@@ -696,7 +714,8 @@ function ctSetupMenu (thisMenu, thisItem, parentMenu, parentItem)
 			thisMenu.ctParent = parentItem;
 			thisMenu.ctLevel = parentItem.ctLevel + 1;
 
-			parentMenu.ctSubMenu.push (thisMenu);
+			//parentMenu.ctSubMenu.push (thisMenu);
+			parentMenu.ctSubMenu[parentMenu.ctSubMenu.length] = thisMenu;
 		}
 	}
 
@@ -710,7 +729,9 @@ function ctSetupMenu (thisMenu, thisItem, parentMenu, parentItem)
 
 			if (!thisMenu.ctItems)
 				thisMenu.ctItems = new Array ();
-			thisMenu.ctItems.push (thisItem);
+
+			//thisMenu.ctItems.push (thisItem);
+			thisMenu.ctItems[thisMenu.ctItems.length] = thisItem;
 		}
 	}
 }
@@ -821,6 +842,11 @@ function ctGetProperties (obj)
 	return msg;
 }
 
+/* JSCookTree v2.01		1. change Array.push (obj) call to Array[length] = obj.
+						   Suggestion from Dick van der Kaaden <dick@netrex.nl> to
+						   make the script compatible with IE 5.0
+						2. added ctGetSelectedItem (treeIndex) function due to demand
+*/
 /* JSCookTree v2.0		1. added controls over tree branches opening/closing
 						2. added the ability to mark a specific tree item
 						3. added an extra description field to make the tree
