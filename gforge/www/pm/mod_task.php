@@ -220,7 +220,7 @@ echo $HTML->listTableTop ($title_arr);
 	echo '<form action="/reporting/timeadd.php" method="post" />
 	<input type="hidden" name="project_task_id" value="'.$project_task_id.'">
 	<input type="hidden" name="submit" value="1" />
-	<tr '.$HTML->boxGetAltRowStyle($xi++).'>
+	<tr '.$HTML->boxGetAltRowStyle(@$xi++).'>
 		<td style="text-align:center">'. report_weeks_box($report, 'week') .'</td>
 		<td style="text-align:center">'. report_day_adjust_box($report, 'days_adjust') .'</td>
 		<td style="text-align:center"><input type="text" name="hours" value="" size="3" maxlength="3" /></td>
@@ -242,6 +242,7 @@ $sql="SELECT users.realname, rep_time_tracking.report_date, rep_time_tracking.ho
 	AND rep_time_tracking.project_task_id='$project_task_id'";
 
 $res=db_query($sql);
+$total_hours =0;
 for ($i=0; $i<db_numrows($res); $i++) {
 
 	echo '
