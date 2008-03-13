@@ -11,7 +11,7 @@
 
 require_once('www/search/include/engines/GroupSearchEngine.class.php');
 
-class ExternalSearchEngine extends SearchEngine {
+class ExternalSearchEngine extends GroupSearchEngine {
 	
 	/**
 	* name of the external site
@@ -31,7 +31,7 @@ class ExternalSearchEngine extends SearchEngine {
 		$this->name = $name;
 		$this->url = $url;
 		
-		$this->SearchEngine($type, 'ExternalHtmlSearchRenderer', $name);
+		$this->GroupSearchEngine($type, 'ExternalHtmlSearchRenderer', $name);
 	}
 	
 	function isAvailable($parameters) {

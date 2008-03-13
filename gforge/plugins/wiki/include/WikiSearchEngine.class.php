@@ -11,7 +11,7 @@
 
 require_once('www/search/include/engines/GroupSearchEngine.class.php');
 
-class WikiSearchEngine extends SearchEngine {
+class WikiSearchEngine extends GroupSearchEngine {
 	
 	/**
 	* name of the external site
@@ -25,7 +25,7 @@ class WikiSearchEngine extends SearchEngine {
 		$this->groupId = $groupId;
 		$this->rendererClassName = $rendererClassName;
 		
-		$this->SearchEngine($type, $rendererClassName, $label);
+		$this->GroupSearchEngine($type, $rendererClassName, $label);
 	}
 	
 	function isAvailable($parameters) {
