@@ -60,7 +60,7 @@ class webcalendarPlugin extends Plugin {
 			if ($G_SESSION->usesPlugin("webcalendar")) {
 				$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we´re calling is the user one
 				echo ' | ' . $HTML->PrintSubMenu (array ($text),
-						  array ('/plugins/webcalendar/index.php' . $param ));				
+						  array (util_make_url('/plugins/webcalendar/index.php' . $param)));				
 			}
 		} elseif ($hookname == "groupmenu") {
 			$group_id=$params['group'];
@@ -124,7 +124,7 @@ class webcalendarPlugin extends Plugin {
 			//check if the user has the plugin activated
 			if ($user->usesPlugin($this->name)) {
 				echo '	<p>
-					<a href="/plugins/webcalendar/index.php?id=' . $userid . '&type=user&pluginname=' . $this->name . '">' . _('View Personal webcalendar') .'</a></p>';
+					'.util_make_link('/plugins/webcalendar/index.php?id=' . $userid . '&type=user&pluginname=' . $this->name,_('View Personal webcalendar')) .'</p>';
 			}
 		} elseif ($hookname == "project_admin_plugins") {
 			// this displays the link in the project admin options page to it´s  webcalendar administration
@@ -132,7 +132,7 @@ class webcalendarPlugin extends Plugin {
 			$group = &group_get_object($group_id);
 			
 			if ( $group->usesPlugin ( $this->name ) ) {
-				echo '<a href="/plugins/webcalendar/index.php?id=' . $group->getID() . '&type=admin&pluginname=' . $this->name . '">' . _('View the webcalendar Administration') . '</a><br />';
+				echo util_make_link('/plugins/webcalendar/index.php?id=' . $group->getID() . '&type=admin&pluginname=' . $this->name,_('View the webcalendar Administration')) . '<br />';
 			}
 			
 		}												    
@@ -142,12 +142,12 @@ class webcalendarPlugin extends Plugin {
 			
 			<div id="cal" class="tabbertab" title="WebCalendar"  >
 			<table width="100%" cellspacing="0" cellpadding="0" border="0" ><tr align="center" ><td >
-			<iframe name="webcal" src="/plugins/webcalendar/login.php?type=user" border=no scrolling="yes" width="100%" height="700"></iframe>
+			<iframe name="webcal" src="<?php echo util_make_url('/plugins/webcalendar/login.php?type=user'); ?>" border=no scrolling="yes" width="100%" height="700"></iframe>
 			</td></tr></table>
 			</div>
 			<script>
 			function reload_webcal() {
-			frames['webcal'].location.replace('/plugins/webcalendar/login.php?type=user');
+			frames['webcal'].location.replace('<?php echo util_make_url("/plugins/webcalendar/login.php?type=user"); ?>');
 			
 			}
 			</script>
@@ -519,7 +519,7 @@ class webcalendarPlugin extends Plugin {
 		// www/include/project_home.php line 418
 		//params = group_id
 		print '<hr size="1" />';
-		print '<a href="/plugins/webcalendar/index2.php?type=group&group_id='.$params.'">Webcalendar</a> ';
+		print util_make_link('/plugins/webcalendar/index2.php?type=group&group_id='.$params,_('Webcalendar'));
 		}
 		 
 	}
