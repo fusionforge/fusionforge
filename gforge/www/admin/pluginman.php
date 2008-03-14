@@ -124,6 +124,7 @@ if (getStringFromRequest('update')) {
 				// The apache group or user should have write perms the www/plugins folder...
 				$code = symlink($sys_plugins_path . $pluginname . '/www', '../'.$installdir); 
 				if (!$code) {
+					$feedback .= '<br>['.'../'.$installdir.'->'.$sys_plugins_path . $pluginname . '/www]';
 					$feedback .= _('<br>Soft link to www couldn\'t be created. Check the write permissions for apache in gforge www/plugins dir or create the link manually.');
 				}
 			}
@@ -133,6 +134,7 @@ if (getStringFromRequest('update')) {
 				// The apache group or user should have write perms in /etc/gforge/plugins folder...
 				$code = symlink($sys_plugins_path . $pluginname . '/etc/plugins/' . $pluginname, $sys_etc_path. '/plugins/'.$pluginname); 
 				if (!$code) {
+					$feedback .= '<br>['.$sys_etc_path. '/plugins/'.$pluginname.'->'.$sys_plugins_path . $pluginname . '/etc/plugins/' . $pluginname . ']';
 					$feedback .= sprintf(_('<br>Config file could not be linked to etc/gforge/plugins/%1$s. Check the write permissions for apache in /etc/gforge/plugins or create the link manually.'), $pluginname);
 				}
 			}
