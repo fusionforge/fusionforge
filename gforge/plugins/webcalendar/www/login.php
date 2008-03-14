@@ -1,4 +1,5 @@
 <?php
+include "../../env.inc.php";
 include "pre.php";
 include "./includes/config.php";
 include "./includes/php-dbi.php";
