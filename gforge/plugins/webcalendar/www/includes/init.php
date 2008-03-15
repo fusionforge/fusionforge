@@ -260,6 +260,7 @@ function print_header($includes = '', $HeadX = '', $BodyX = '',
 
  // Start the header & specify the charset
  // The charset is defined in the translation file
+ // TODO: set language properly
  if ( ! empty ( $LANGUAGE ) ) {
    $charset = translate ( "charset" );
    if ( $charset != "charset" ) {

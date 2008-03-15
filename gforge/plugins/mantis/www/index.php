@@ -7,6 +7,7 @@
  *
  */
 
+require_once('../../env.inc.php');
 require_once('pre.php');
 require_once ('plugins/mantis/config.php');
 
@@ -34,6 +35,9 @@ function helloworld_User_Header($params) {
 
 
 	$user = session_get_user(); // get the session user
+	$type = getStringFromRequest('type');
+	$id = getStringFromRequest('id');
+	$pluginname = getStringFromRequest('pluginname');
 
 	if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 		exit_error("Invalid User", "Cannot Process your request for this user.");
@@ -61,7 +65,7 @@ function helloworld_User_Header($params) {
 			// other perms checks here...
 			helloworld_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));    
 			// DO THE STUFF FOR THE PROJECT PART HERE
-			echo "Cet onglet vous permet d'initialiser un compte Mantis à partir de votre compte GForge. <br>";
+			echo "Cet onglet vous permet d'initialiser un compte Mantis &agrave; partir de votre compte GForge. <br>";
 			echo "Le serveur est " . $serveur_mantis; // $serveur_mantis comes from the config file in /etc
 		} elseif ($type == 'user') {
 			$realuser = user_get_object($id);// 
@@ -73,7 +77,7 @@ function helloworld_User_Header($params) {
 			}
 			helloworld_User_Header(array('title'=>'My '.$pluginname,'pagename'=>"$pluginname",'sectionvals'=>array($realuser->getUnixName())));    
 			// DO THE STUFF FOR THE USER PART HERE
-			echo "Bienvenue à l'initiateur de compte Mantis <br>";
+			echo "Bienvenue &agrave; l'initiateur de compte Mantis <br>";
 			echo "Cette page vous permet de charger votre compte dans " . $serveur_mantis; // $serveur_mantis comes from the config file in /etc
             ?>
             <form>

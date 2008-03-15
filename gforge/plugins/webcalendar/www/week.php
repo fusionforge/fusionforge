@@ -88,7 +88,7 @@ href="week.php?<?php echo $u_url;?>date=<?php echo
   alt="<?php etranslate("Next")?>" /></a>
 <span class="user"><?php
   if ( $single_user == "N" ) {
-    echo "<br />$user_fullname";
+    echo "<br />".@$user_fullname;
   }
   if ( $is_nonuser_admin ) {
     echo "<br />-- " . translate("Admin mode") . " --";

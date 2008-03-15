@@ -16,6 +16,10 @@
  * @version $Id: config.php,v 1.53.2.15 2006/06/07 15:27:20 cknudsen Exp $
  * @package WebCalendar
  */
+
+require_once('../../env.inc.php');
+require_once('pre.php');
+
 if ( empty ( $PHP_SELF ) && ! empty ( $_SERVER ) &&
   ! empty ( $_SERVER['PHP_SELF'] ) ) {
   $PHP_SELF = $_SERVER['PHP_SELF'];
@@ -74,64 +78,26 @@ global $TROUBLE_URL;
   exit;
 }
 
+global $sys_database_type,$sys_dbhost,$sys_dbuser,$sys_dbpasswd,$sys_dbname;
 
-
-// Open settings file to read
-$settings = array ();
-$settings_file = dirname(__FILE__) . "/settings.php";
-//called from send_reminders.php
-if ( ! empty ( $includedir ) ) 
-  $fd = @fopen ( "$includedir/settings.php", "rb", true );
-else
-  $fd = @fopen ( "settings.php", "rb", true );
-if ( ! $fd )
-  $fd = @fopen ( "includes/settings.php", "rb", true );
-if ( ! $fd  && file_exists ( $settings_file ) )
-  $fd = @fopen ( $settings_file, "rb", true );
-if ( empty ( $fd ) ) {
-  // There is no settings.php file.
-  // Redirect user to install page if it exists.
-  if ( file_exists ( "install/index.php" ) ) {
-    Header ( "Location: install/index.php" );
-    exit;
-  } else {
-    die_miserable_death ( "Could not find settings.php file.<br />\n" .
-      "Please copy settings.php.orig to settings.php and modify for your " .
-      "site.\n" );
-  }
+if ( $sys_database_type == 'pgsql' ){
+        $db_type = 'postgresql';
+	$settings['db_type'] = 'postgresql';
+} else {
+	$settings['db_type'] = 'mysql';
 }
-
-// We don't use fgets() since it seems to have problems with Mac-formatted
-// text files.  Instead, we read in the entire file, then split the lines
-// manually.
-$data = '';
-while ( ! feof ( $fd ) ) {
-  $data .= fgets ( $fd, 4096 );
-}
-fclose ( $fd );
-
-// Replace any combination of carriage return (\r) and new line (\n)
-// with a single new line.
-$data = preg_replace ( "/[\r\n]+/", "\n", $data );
-
-// Split the data into lines.
-$configLines = explode ( "\n", $data );
-
-for ( $n = 0; $n < count ( $configLines ); $n++ ) {
-  $buffer = $configLines[$n];
-  $buffer = trim ( $buffer, "\r\n " );
-  if ( preg_match ( "/^#/", $buffer ) )
-    continue;
-  if ( preg_match ( "/^<\?/", $buffer ) ) // start php code
-    continue;
-  if ( preg_match ( "/^\?>/", $buffer ) ) // end php code
-    continue;
-  if ( preg_match ( "/(\S+):\s*(\S+)/", $buffer, $matches ) ) {
-    $settings[$matches[1]] = $matches[2];
-    //echo "settings $matches[1] => $matches[2] <br>";
-  }
-}
-$configLines = $data = '';
+$settings['db_host'] = $sys_dbhost;
+$settings['db_database'] = $sys_dbname;
+$settings['db_login'] = $sys_dbuser;
+$settings['db_password'] = $sys_dbpasswd;
+$settings['db_persistent'] = 'true';
+$settings['readonly'] = 'false';
+$settings['user_inc'] = 'user.php';
+$settings['install_password'] = '';
+$settings['single_user_login'] = '';
+$settings['use_http_auth'] = 'false';
+$settings['single_user'] = 'false';
+$settings['user_inc'] = 'user.php';
 
 // Extract db settings into global vars
 $db_type = $settings['db_type'];

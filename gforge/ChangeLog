@@ -1,5 +1,6 @@
-2008-03-10  Christian Bayle <bayle@debian.org>
+2008-03-15  Christian Bayle <bayle@debian.org>
 	
+	* Improve a bit Mantis and Webcalendar Plugins, so gforge don't crash
 	* Added and use util_make_url_u, util_make_url_g ,
 	util_make_link_u and util_make_link_g for /projects and /users link
 	forcetype shouln'd be necessary to run gforge now

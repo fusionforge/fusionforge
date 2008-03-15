@@ -1,15 +1,14 @@
-CREATE TABLE webcal_user (
-  cal_login VARCHAR(25) NOT NULL,
-  cal_passwd VARCHAR(32),
-  cal_lastname VARCHAR(25),
-  cal_firstname VARCHAR(25),
-  cal_is_admin CHAR(1) DEFAULT 'N',
-  cal_email VARCHAR(75),
-  PRIMARY KEY ( cal_login )
-);
-
-INSERT INTO webcal_user ( cal_login, cal_passwd, cal_lastname, cal_firstname, cal_is_admin ) VALUES ( 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Administrator', 'Default', 'Y' );
-
+CREATE VIEW webcal_user AS
+SELECT user_name AS cal_login, user_pw AS cal_passwd, lastname AS cal_lastname, firstname AS cal_firstname, status AS cal_is_admin, email AS cal_email FROM users; 
+-- CREATE TABLE webcal_user (
+--  cal_login VARCHAR(25) NOT NULL,
+--  cal_passwd VARCHAR(32),
+--  cal_lastname VARCHAR(25),
+--  cal_firstname VARCHAR(25),
+--  cal_is_admin CHAR(1) DEFAULT 'N',
+--  cal_email VARCHAR(75),
+--  PRIMARY KEY ( cal_login )
+--);
 
 CREATE TABLE webcal_entry (
   cal_id INT NOT NULL,
@@ -103,19 +102,25 @@ CREATE TABLE webcal_reminder_log (
   PRIMARY KEY ( cal_id, cal_name, cal_event_date )
 );
 
-CREATE TABLE webcal_group (
-  cal_group_id INT NOT NULL,
-  cal_owner VARCHAR(25) NOT NULL,
-  cal_name VARCHAR(50) NOT NULL,
-  cal_last_update INT NOT NULL,
-  PRIMARY KEY ( cal_group_id )
-);
+CREATE VIEW webcal_group AS
+SELECT group_id AS cal_group_id, 'admin' AS cal_owner, unix_group_name AS cal_name, register_time AS cal_last_update FROM groups;
+--CREATE TABLE webcal_group (
+--  cal_group_id INT NOT NULL,
+--  cal_owner VARCHAR(25) NOT NULL,
+--  cal_name VARCHAR(50) NOT NULL,
+--  cal_last_update INT NOT NULL,
+--  PRIMARY KEY ( cal_group_id )
+--);
 
-CREATE TABLE webcal_group_user (
-  cal_group_id INT NOT NULL,
-  cal_login VARCHAR(25) NOT NULL,
-  PRIMARY KEY ( cal_group_id, cal_login )
-);
+DROP TABLE webcal_group_user;
+CREATE VIEW webcal_group_user AS 
+SELECT group_id AS cal_group_id, users.user_name AS cal_login FROM users,user_group 
+WHERE users.user_id = user_group.user_id;
+--CREATE TABLE webcal_group_user (
+--  cal_group_id INT NOT NULL,
+--  cal_login VARCHAR(25) NOT NULL,
+--  PRIMARY KEY ( cal_group_id, cal_login )
+--);
 
 CREATE TABLE webcal_view (
   cal_view_id INT NOT NULL,

@@ -87,6 +87,7 @@ class MantisPlugin extends Plugin {
 			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
 			$group_id=$params['group'];
 			$group = &group_get_object($group_id);
+			$use_mantisplugin = getStringFromRequest('use_mantisplugin');
 			if ( $use_mantisplugin == 1 ) {
 				$group->setPluginUse ( $this->name );
 			} else {
@@ -109,6 +110,7 @@ class MantisPlugin extends Plugin {
 		} elseif ($hookname == "userisactivecheckboxpost") {
 			// this code actually activates/deactivates the plugin after the form was submitted in the user account manteinance page
 			$user = $params['user'];
+			$use_mantisplugin = getStringFromRequest('use_mantisplugin');
 			if ( $use_mantisplugin == 1 ) {
 				$user->setPluginUse ( $this->name );
 			} else {
