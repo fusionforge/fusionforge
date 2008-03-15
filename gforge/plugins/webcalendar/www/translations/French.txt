@@ -16,7 +16,7 @@
 ###############################################
 # Specify a charset (will be sent within meta tag for each page)
 #
-charset: iso-8859-1
+charset: utf-8
 
 
 
