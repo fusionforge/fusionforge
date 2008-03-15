@@ -159,13 +159,25 @@ class MediaWikiPlugin extends Plugin {
 			$u = user_get_object_by_name ($loginname) ;
 			
 			define ('MEDIAWIKI', true);
-
-                        require_once ('/var/lib/mediawiki1.10/LocalSettings.php');
-                        require_once ('/usr/share/mediawiki1.10/includes/Defines.php');
-                        require_once ('/usr/share/mediawiki1.10/includes/Exception.php');
-                        require_once ('/usr/share/mediawiki1.10/includes/GlobalFunctions.php');
-                        require_once ('/usr/share/mediawiki1.10/StartProfiler.php');
-                        require_once ('/usr/share/mediawiki1.10/includes/Database.php');
+			if (is_file('/var/lib/mediawiki/LocalSettings.php')){
+                        	require_once ('/var/lib/mediawiki/LocalSettings.php');
+			} elseif (is_file('/var/lib/mediawiki1.10/LocalSettings.php')){
+                        	require_once ('/var/lib/mediawiki1.10/LocalSettings.php');
+			} else {
+				return 1;
+			}
+			if (is_dir('/usr/share/mediawiki')){
+				$mw_share_path="/usr/share/mediawiki";
+			} elseif (is_dir('/usr/share/mediawiki1.10')){
+				$mw_share_path="/usr/share/mediawiki1.10";
+			} else {
+				return 1;
+			}
+                        require_once ($mw_share_path.'/includes/Defines.php');
+                        require_once ($mw_share_path.'/includes/Exception.php');
+                        require_once ($mw_share_path.'/includes/GlobalFunctions.php');
+                        require_once ($mw_share_path.'/StartProfiler.php');
+                        require_once ($mw_share_path.'/includes/Database.php');
 
                         $mwdb = new Database() ;
                         $mwdb->open($wgDBserver, $wgDBuser, $wgDBpassword, $wgDBname) ;
