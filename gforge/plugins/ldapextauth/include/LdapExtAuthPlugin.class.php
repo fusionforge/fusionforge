@@ -72,6 +72,10 @@ class LdapextauthPlugin extends Plugin {
 	function AuthUser ($loginname, $passwd) {
 		global $feedback;
 	
+		if  (!function_exists ( "ldap_connect" )) {
+			return false;
+		}
+
 		if (!$this->ldap_conn) {
 			$this->ldap_conn = ldap_connect ($this->ldap_server,
 							 $this->ldap_port);
