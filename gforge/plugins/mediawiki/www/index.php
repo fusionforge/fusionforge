@@ -8,7 +8,7 @@
  * This is an example to watch things in action. You can obviously modify things and logic as you see fit
  */
 
-  // require_once('../../env.inc.php');
+require_once('../../env.inc.php');
 require_once('pre.php');
 //require_once ('plugins/mediawiki/config.php');
 
@@ -68,7 +68,7 @@ $pluginname = 'mediawiki' ;
 			// echo "We are in the Project MediaWiki plugin <br>";
 			// echo "Greetings from planet " . $world; // $world comes from the config file in /etc
 
-			echo '<iframe src="/mediawiki/index.php?title='.$group->getUnixName().'" frameborder="no" width=100% height=700></iframe>' ;
+			echo '<iframe src="'.util_make_url('/mediawiki/index.php?title='.$group->getUnixName()).'" frameborder="no" width=100% height=700></iframe>' ;
 		} elseif ($type == 'user') {
 			$realuser = user_get_object($id);// 
 			if (!($realuser) || !($realuser->usesPlugin($pluginname))) {
