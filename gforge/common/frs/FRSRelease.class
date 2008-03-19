@@ -296,7 +296,7 @@ class FRSRelease extends Error {
 		$this->FRSPackage->Group->getPublicName(),
 		$this->FRSPackage->Group->getUnixName(),
 		$this->FRSPackage->getName(),
-		"<${proto}".getStringFromServer('HTTP_HOST')."/project/showfiles.php?group_id=". $this->FRSPackage->Group->getID() ."&release_id=". $this->getID().">",
+		"<${proto}".getStringFromServer('HTTP_HOST')."/frs/?group_id=". $this->FRSPackage->Group->getID() ."&release_id=". $this->getID().">",
 		$GLOBALS['sys_name'],
 		"<${proto}".getStringFromServer('HTTP_HOST')."/frs/monitor.php?filemodule_id=".$this->FRSPackage->getID()."&group_id=".$this->FRSPackage->Group->getID()."&stop=1>")));
 			
