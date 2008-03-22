@@ -47,7 +47,7 @@ if (getStringFromPost('submit')) {
 		exit_error('Error',$group->getErrorMessage());
 	} else {
 		plugin_hook('delete_link',$_GET['group_id']) ;
-		header("Location: /admin/?feedback=DELETED");
+		header("Location: ".util_make_url("/admin/?feedback=DELETED"));
 	}
 }
 
