@@ -239,7 +239,7 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats) {
 	$return = '';
 	$need_close_ul_tag = 0;
 	if (db_numrows($res_trovecat) < 1) {
-		$return .= _('This project has not yet categorized itself in the')
+		$return .= _('This project has not yet categorized itself in the').' '
 			.util_make_link ('/softwaremap/trove_list.php',_('Trove Software Map'))
 			.'<p />';
 	} else {
