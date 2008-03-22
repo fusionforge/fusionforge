@@ -93,9 +93,8 @@ site_admin_header(array('title'=>_('Site Admin: Group Info')));
 
 echo '<h2>'.$group->getPublicName().'</h2>' ;?>
 
-<p>
-<?php print "<a href=\"/project/admin/?group_id=$group_id\"><h3>"._('[Project Admin]'). "</h3></a>"; ?></p>
-<?php print "<a href=\"groupdelete.php?group_id=$group_id\"><h3>"._('Permanently Delete Project'). "</h3></a>"; ?></p>
+<p><h3><?php echo util_make_link("/project/admin/?group_id=$group_id", _('[Project Admin]')); ?></h3></p>
+<p><h3><?php echo util_make_link("/admin/groupdelete.php?group_id=$group_id", _('Permanently Delete Project')); ?></h3></p>
 
 <p>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
