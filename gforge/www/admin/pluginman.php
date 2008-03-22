@@ -49,7 +49,7 @@ site_admin_header(array('title'=>_('Site admin')));
 
 </script>
 
-<form name="theform" action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="GET">
+<form name="theform" action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <?php
 
 if (getStringFromRequest('update')) {
@@ -91,7 +91,7 @@ if (getStringFromRequest('update')) {
 				if (file_exists('../'.$installdir)) {
 					$result = unlink('../'.$installdir);
 					if (!$result) {
-						$feedback .= _('<br>Soft link wasn\'t removed in www/plugins folder, please do so manually.');
+						$feedback .= _('<br />Soft link wasn\'t removed in www/plugins folder, please do so manually.');
 					}
 				} else {
 					$result = 0;
@@ -124,8 +124,8 @@ if (getStringFromRequest('update')) {
 				// The apache group or user should have write perms the www/plugins folder...
 				$code = symlink($sys_plugins_path . $pluginname . '/www', '../'.$installdir); 
 				if (!$code) {
-					$feedback .= '<br>['.'../'.$installdir.'->'.$sys_plugins_path . $pluginname . '/www]';
-					$feedback .= _('<br>Soft link to www couldn\'t be created. Check the write permissions for apache in gforge www/plugins dir or create the link manually.');
+					$feedback .= '<br />['.'../'.$installdir.'->'.$sys_plugins_path . $pluginname . '/www]';
+					$feedback .= _('<br />Soft link to www couldn\'t be created. Check the write permissions for apache in gforge www/plugins dir or create the link manually.');
 				}
 			}
 				
@@ -134,8 +134,8 @@ if (getStringFromRequest('update')) {
 				// The apache group or user should have write perms in /etc/gforge/plugins folder...
 				$code = symlink($sys_plugins_path . $pluginname . '/etc/plugins/' . $pluginname, $sys_etc_path. '/plugins/'.$pluginname); 
 				if (!$code) {
-					$feedback .= '<br>['.$sys_etc_path. '/plugins/'.$pluginname.'->'.$sys_plugins_path . $pluginname . '/etc/plugins/' . $pluginname . ']';
-					$feedback .= sprintf(_('<br>Config file could not be linked to etc/gforge/plugins/%1$s. Check the write permissions for apache in /etc/gforge/plugins or create the link manually.'), $pluginname);
+					$feedback .= '<br />['.$sys_etc_path. '/plugins/'.$pluginname.'->'.$sys_plugins_path . $pluginname . '/etc/plugins/' . $pluginname . ']';
+					$feedback .= sprintf(_('<br />Config file could not be linked to etc/gforge/plugins/%1$s. Check the write permissions for apache in /etc/gforge/plugins or create the link manually.'), $pluginname);
 				}
 			}
 
@@ -160,7 +160,7 @@ if (getStringFromRequest('update')) {
 							$res = db_next_result();
 						}
 					} else {
-						$feedback .= _('Initialisation error<br>Database said: ').db_error();
+						$feedback .= _('Initialisation error<br />Database said: ').db_error();
 					}
 				}	
 				//we check for a php script	
@@ -174,8 +174,8 @@ if (getStringFromRequest('update')) {
 	}
 }
 
-echo $feedback.'<br>';
-echo _('Here you can activate / deactivate Site wide plugins which are in the plugins/ folder. Then, you should activate them also per project, per user or whatever the plugin specifically applies to.<br><span class="important">Be careful because some groups/users can be using the plugin. Deactivating it will remove the plugin from all users/groups.<br>Be EXTRA careful running the SQL init script when a plugin has been deactivated prior use (and you want to re-activate) because some scripts have DROP TABLE statements</span><br><br>');
+echo $feedback.'<br />';
+echo _('Here you can activate / deactivate Site wide plugins which are in the plugins/ folder. Then, you should activate them also per project, per user or whatever the plugin specifically applies to.<br /><span class="important">Be careful because some groups/users can be using the plugin. Deactivating it will remove the plugin from all users/groups.<br />Be EXTRA careful running the SQL init script when a plugin has been deactivated prior use (and you want to re-activate) because some scripts have DROP TABLE statements</span><br /><br />');
 $title_arr = array( _('Plugin Name'),
 				_('Status'),
 				_('Action'),
@@ -213,7 +213,7 @@ foreach ($filelist as $filename) {
 	if (db_numrows($res)!=0) {
 		$msg = _('Active');
 		$status="active";
-		$link = "<a href=\"javascript:change('" . getStringFromServer('PHP_SELF') . "?update=$filename&action=deactivate";
+		$link = "<a href=\"javascript:change('" . getStringFromServer('PHP_SELF') . "?update=$filename&amp;action=deactivate";
 		$sql = "SELECT  u.user_name FROM plugins p, user_plugin up, users u WHERE p.plugin_name = '$filename' and up.user_id = u.user_id and p.plugin_id = up.plugin_id";
 		$res = db_query($sql);
 		if ($res) {
@@ -245,23 +245,23 @@ foreach ($filelist as $filename) {
 			}
 		}
 		$link .= "','$j');" . '">' . _('Deactivate') . "</a>";
-		$init = '<input id="'.$j.'" type="checkbox" disabled name="script[]" value="'.$filename.'">';
+		$init = '<input id="n'.$j.'" type="checkbox" disabled name="script[]" value="'.$filename.'" />';
 	} else {
 		$msg = _('Inactive');
 		$status = "inactive";
-		$link = "<a href=\"javascript:change('" . getStringFromServer('PHP_SELF') . "?update=$filename&action=activate','$j');" . '">' . _('Activate') . "</a>";
-		$init = '<input id="'.$j.'" type="checkbox" name="script[]" value="'.$filename.'">';
+		$link = "<a href=\"javascript:change('" . getStringFromServer('PHP_SELF') . "?update=$filename&amp;action=activate','$j');" . '">' . _('Activate') . "</a>";
+		$init = '<input id="n'.$j.'" type="checkbox" name="script[]" value="'.$filename.'" />';
 		$users = "none";
 		$groups = "none";
 	}
 
 	echo '<tr '. $HTML->boxGetAltRowStyle($j+1) .'>'.
 		'<td>'. $filename.'</td>'.
-		'<td span class="'.$status.'" style="text-align:left">'. $msg .'</span></td>'.
+		'<td class="'.$status.'" style="text-align:center">'. $msg .'</td>'.
 		'<td><div align="center">'. $link .'</div></td>'.
 		'<td><div align="center">'. $init .'</div></td>'.
 		'<td><div align="left">'. $users .'</div></td>'.
-		'<td><div align="left">'. $groups .'</div></td></tr>';
+		'<td><div align="left">'. $groups .'</div></td></tr>'."\n";
 
 	$j++;
 }
