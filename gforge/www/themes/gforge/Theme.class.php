@@ -125,9 +125,9 @@ class Theme extends Layout {
         HelpWin = window.open( helpurl,'HelpWindow','scrollbars=yes,resizable=yes,toolbar=no,height=400,width=600');
     }
     // -->
-    <?php plugin_hook ("javascript",false) ; ?>
+<?php plugin_hook ("javascript",false) ; ?>
     </script>
-    <?php
+<?php
 	      if (_('default_font') != 'default_font') {
 		      $site_fonts = _('default_font');
 	      } else {
@@ -135,8 +135,7 @@ class Theme extends Layout {
 	      }
 
     $this->headerCSS();
-    ?>
-
+?>
 </head>
 
 <body>
@@ -233,9 +232,10 @@ if ($sys_show_source) {
     }
 
     function headerCSS(){
-       ?>
-       <link rel="stylesheet" type="text/css" href="<?php echo THEME_DIR ?>/css/theme.css" />
-       <?php
+?>
+    <link rel="stylesheet" type="text/css" href="<?php echo util_make_url ('/themes/css/gforge.css') ?>" />
+    <link rel="stylesheet" type="text/css" href="<?php echo THEME_DIR ?>/css/theme.css" />
+<?php
        plugin_hook ('cssfile',$this);
     }
 
