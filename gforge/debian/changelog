@@ -5,10 +5,10 @@ gforge (4.6.99+svn6387+something-0) UNRELEASED; urgency=low
     forms in one single place, the point being to make it easier to host
     Gforge in a variety of URL schemes (full virtual host or
     http://shared.host/gforge, for instance). 
-  * Updated Debconf template translations for French (closes: #468471) and
-    German (closes: #469756).
+  * Updated Debconf template translations for French, German and Finnish
+    (closes: #468471, #469756, #472485).
 
- -- Roland Mas <lolando@debian.org>  Mon, 24 Mar 2008 13:59:59 +0100
+ -- Roland Mas <lolando@debian.org>  Mon, 24 Mar 2008 16:54:34 +0100
 
 gforge (4.6.99+svn6387-1) unstable; urgency=low
 
