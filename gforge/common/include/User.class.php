@@ -352,7 +352,7 @@ class GFUser extends Error {
 	 *	@return true or false
 	 */
 	function sendRegistrationEmail() {
-		$message=stripcslashes(sprintf(_('Thank you for registering on the %4$s web site. You have
+		$message=stripcslashes(sprintf(_('Thank you for registering on the %3$s web site. You have
 account with username %1$s created for you. In order
 to complete your registration, visit the following url: 
 
