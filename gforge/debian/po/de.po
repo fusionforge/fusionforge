@@ -1,13 +1,13 @@
 # Translation of gforge debconf templates to German
-# Copyright (C) Helge Kreutzmann <debian@helgefjell.de>, 2007.
+# Copyright (C) Helge Kreutzmann <debian@helgefjell.de>, 2007, 2008.
 # This file is distributed under the same license as the gforge package.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gforge 4.6.99+svn6094-4\n"
+"Project-Id-Version: gforge 4.6.99+svn6387-1\n"
 "Report-Msgid-Bugs-To: gforge@packages.debian.org\n"
 "POT-Creation-Date: 2008-02-26 22:50+0100\n"
-"PO-Revision-Date: 2007-12-23 11:05+0100\n"
+"PO-Revision-Date: 2008-03-06 22:57+0100\n"
 "Last-Translator: Helge Kreutzmann <debian@helgefjell.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -211,7 +211,8 @@ msgid ""
 "GForge sends and receives plenty of e-mail to and from the \"${noreply}\" "
 "address."
 msgstr ""
-"GForge sendet und empfängt viele E-Mails von und auf der »${noreply}«-Adresse."
+"GForge sendet und empfängt viele E-Mails von und auf der »${noreply}«-"
+"Adresse."
 
 #. Type: boolean
 #. Description
@@ -568,10 +569,8 @@ msgstr "Thailändisch"
 #. Type: select
 #. DefaultChoice
 #: ../dsf-helper/web-variables.templates:2002
-#, fuzzy
-#| msgid "Default language:"
 msgid "English[ Default language]"
-msgstr "Standardsprache:"
+msgstr "German"
 
 #. Type: select
 #. Description

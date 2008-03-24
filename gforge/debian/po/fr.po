@@ -567,10 +567,8 @@ msgstr "thaï"
 #. Type: select
 #. DefaultChoice
 #: ../dsf-helper/web-variables.templates:2002
-#, fuzzy
-#| msgid "Default language:"
 msgid "English[ Default language]"
-msgstr "Langue par défaut :"
+msgstr "French"
 
 #. Type: select
 #. Description
