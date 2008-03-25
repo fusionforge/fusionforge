@@ -1,13 +1,13 @@
 # Galician translation of gforge's debconf templates
 # This file is distributed under the same license as the gforge package.
-# Jacobo Tarrio <jtarrio@debian.org>, 2007.
+# Jacobo Tarrio <jtarrio@debian.org>, 2007, 2008.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gforge\n"
 "Report-Msgid-Bugs-To: gforge@packages.debian.org\n"
 "POT-Creation-Date: 2008-02-26 22:50+0100\n"
-"PO-Revision-Date: 2007-12-23 11:05+0100\n"
+"PO-Revision-Date: 2008-03-25 03:47+0000\n"
 "Last-Translator: Jacobo Tarrio <jtarrio@debian.org>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
@@ -554,10 +554,9 @@ msgstr "Thai"
 #. Type: select
 #. DefaultChoice
 #: ../dsf-helper/web-variables.templates:2002
-#, fuzzy
 #| msgid "Default language:"
 msgid "English[ Default language]"
-msgstr "Idioma por defecto:"
+msgstr "Inglés"
 
 #. Type: select
 #. Description
