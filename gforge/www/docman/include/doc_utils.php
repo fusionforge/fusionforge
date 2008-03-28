@@ -188,7 +188,7 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 			echo html_image('ic/adddoc12.png',"12","14",array("border"=>"0"))." ";
 			echo _('[Add document here]');
 			echo "</a>";
-			if (($doc_group->getID() == $selected_doc_group_id || $doc_group->hasSubgroup($nested_groups, $selected_doc_group_id)) && (!$stateid || $stateid == $selected_stateid)) {
+			if (($doc_group->getID() == $selected_doc_group_id || $doc_group->hasSubgroup($nested_groups, $selected_doc_group_id)) && (!$stateid || $stateid == @$selected_stateid)) {
 				docman_display_documents($nested_groups, $document_factory, $is_editor, $stateid, $from_admin, $doc_group->getID());
 			}
 		}
