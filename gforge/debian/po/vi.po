@@ -1,20 +1,21 @@
 # Vietnamese Translation for GForge.
-# Copyright © 2007 Free Software Foundation, Inc.
-# Clytie Siddall <clytie@riverland.net.au>, 2005-2007.
+# Copyright © 2008 Free Software Foundation, Inc.
+# This file is distributed under the same license as the gforge 4.6.99+svn6387-1 package.
+# Clytie Siddall <clytie@riverland.net.au>, 2005-2008.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gforge 4.6.99+svn6094-4\n"
+"Project-Id-Version: gforge 4.6.99+svn6387-1\n"
 "Report-Msgid-Bugs-To: gforge@packages.debian.org\n"
 "POT-Creation-Date: 2008-02-26 22:50+0100\n"
-"PO-Revision-Date: 2007-12-23 11:06+0100\n"
+"PO-Revision-Date: 2008-03-29 18:46+1030\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: LocFactoryEditor 1.7b1\n"
+"X-Generator: LocFactoryEditor 1.7b3\n"
 
 #. Type: string
 #. Description
@@ -548,10 +549,9 @@ msgstr "tiếng Thái"
 #. Type: select
 #. DefaultChoice
 #: ../dsf-helper/web-variables.templates:2002
-#, fuzzy
 #| msgid "Default language:"
 msgid "English[ Default language]"
-msgstr "Ngôn ngữ mặc định:"
+msgstr "Tiếng Việt [Ngôn ngữ mặc định]"
 
 #. Type: select
 #. Description
@@ -577,6 +577,3 @@ msgstr "Sắc thái mặc định:"
 msgid ""
 "Please choose the default theme for web pages. This must be a valid name."
 msgstr "Hãy chọn sắc thái mặc định cho trang Web: nó phải là một tên hợp lệ."
-
-#~ msgid "admin"
-#~ msgstr "quản trị"
