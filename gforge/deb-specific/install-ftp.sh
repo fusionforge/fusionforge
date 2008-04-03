@@ -43,7 +43,7 @@ This is an experimental FTP server.  If have any unusual problems,
 please report them via e-mail to <root@%L>.
 FIN
 	fi
-	invoke-rc.d proftpd restart
+	#invoke-rc.d proftpd restart
 	;;
 
     update)
@@ -67,7 +67,7 @@ FIN
 	;;
 
     purge)
-	invoke-rc.d proftpd restart
+	#invoke-rc.d proftpd restart
 	rm -rf $FTPROOT
 	deluser --quiet sfftp || true
 	;;
