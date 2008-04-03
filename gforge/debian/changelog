@@ -1,4 +1,11 @@
-gforge (4.6.99+svn6387+something-0) UNRELEASED; urgency=low
+gforge (4.6.99+svn6467-1) unstable; urgency=low
+
+  * Don't invoke proftpd restart as it locks install
+  * Replace deprecated DisplayFirstChdir with DisplayChdir in proftpd config
+
+ -- Christian Bayle <bayle@debian.org>  Thu, 03 Apr 2008 21:41:44 +0200
+
+gforge (4.6.99+svn6387+something-0) unstable; urgency=low
 
   * Tracking upstream SVN.
   * New feature from the "urlmaker" branch, to compute URLs for links and
