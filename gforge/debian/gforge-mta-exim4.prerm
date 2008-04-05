@@ -24,11 +24,14 @@ case "$1" in
 	# Unpatch Exim configuration files
 	/usr/lib/gforge/bin/install-exim4.sh purge-files
 	ucf --debconf-ok /etc/aliases.gforge-new /etc/aliases
-	ucf --debconf-ok /etc/exim4/exim4.conf.gforge-new /etc/exim4/exim4.conf
+	if [ -f /etc/exim4/exim4.conf.gforge-new ]
+	then
+		ucf --debconf-ok /etc/exim4/exim4.conf.gforge-new /etc/exim4/exim4.conf
+		rm /etc/exim4/exim4.conf.gforge-new
+	fi
 	ucf --debconf-ok /etc/exim4/exim4.conf.template.gforge-new /etc/exim4/exim4.conf.template
 	ucf --debconf-ok /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs.gforge-new /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs
 	rm /etc/aliases.gforge-new
-	rm /etc/exim4/exim4.conf.gforge-new
 	rm /etc/exim4/exim4.conf.template.gforge-new
 	rm /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs.gforge-new
 	ucf --purge /etc/aliases
