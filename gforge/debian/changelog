@@ -1,5 +1,7 @@
-gforge (4.6.99+svn6467-1) unstable; urgency=low
+gforge (4.6.99+svn6473-1) unstable; urgency=low
 
+  * Change apache NameVirtualHost to use * instead of IP address
+  * Harden exim4 uninstall so it doesn't fail on a missing file
   * Don't invoke proftpd restart as it locks install
   * Replace deprecated DisplayFirstChdir with DisplayChdir in proftpd config
 
