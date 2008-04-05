@@ -285,7 +285,10 @@ while (<>) { print; };
       rm $tmp1
     done
 
-    mv $cfg_exim4_split_router $cfg_exim4_split_router.gforge-new
+    if [ -f $cfg_exim4_split_router ]
+    then
+    	mv $cfg_exim4_split_router $cfg_exim4_split_router.gforge-new
+    fi
 
     for r in $cfg_exim4_router; do
       cfg_gforge_router=$r.gforge-new
