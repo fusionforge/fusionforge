@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: gforge\n"
 "Report-Msgid-Bugs-To: gforge@packages.debian.org\n"
 "POT-Creation-Date: 2008-02-26 22:50+0100\n"
-"PO-Revision-Date: 2007-12-23 11:04+0100\n"
+"PO-Revision-Date: 2008-03-30 14:36+0200\n"
 "Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -557,10 +557,9 @@ msgstr "thajština"
 #. Type: select
 #. DefaultChoice
 #: ../dsf-helper/web-variables.templates:2002
-#, fuzzy
 #| msgid "Default language:"
 msgid "English[ Default language]"
-msgstr "Výchozí jazyk:"
+msgstr "English"
 
 #. Type: select
 #. Description
@@ -587,6 +586,3 @@ msgid ""
 "Please choose the default theme for web pages. This must be a valid name."
 msgstr ""
 "Vyberte prosím výchozí téma pro webové stránky. Musí to být platný název."
-
-#~ msgid "admin"
-#~ msgstr "admin"
