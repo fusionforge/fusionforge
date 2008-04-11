@@ -1,4 +1,4 @@
-gforge (4.6.99+svn6387+something-0) unstable; urgency=low
+gforge (4.6.99+svn6477-1) unstable; urgency=low
 
   [ Christian Bayle ]
   * Change apache NameVirtualHost to use * instead of IP address
@@ -16,7 +16,7 @@ gforge (4.6.99+svn6387+something-0) unstable; urgency=low
     Russian, Galician, Vietnamese, Czech and Dutch (closes: #468471,
     #469756, #472485, #472502, #472588, #473192, #474621).
 
- -- Roland Mas <lolando@debian.org>  Sun, 06 Apr 2008 21:51:42 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 11 Apr 2008 13:59:31 +0200
 
 gforge (4.6.99+svn6387-1) unstable; urgency=low
 
