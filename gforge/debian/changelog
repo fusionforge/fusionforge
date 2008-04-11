@@ -1,3 +1,9 @@
+gforge (4.6.99+svn6477+something-0) unstable; urgency=low
+
+  * Tracking upstream SVN.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 11 Apr 2008 14:42:44 +0200
+
 gforge (4.6.99+svn6477-1) unstable; urgency=low
 
   [ Christian Bayle ]
