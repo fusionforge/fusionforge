@@ -1,8 +1,10 @@
 gforge (4.6.99+svn6477+something-0) unstable; urgency=low
 
   * Tracking upstream SVN.
+  * Updated Debconf template translations for Portuguese (closes:
+    #475769).
 
- -- Roland Mas <lolando@debian.org>  Fri, 11 Apr 2008 14:42:44 +0200
+ -- Roland Mas <lolando@debian.org>  Mon, 14 Apr 2008 10:02:55 +0200
 
 gforge (4.6.99+svn6477-1) unstable; urgency=low
 

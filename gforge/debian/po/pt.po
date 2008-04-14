@@ -1,14 +1,14 @@
 # Portuguese translation for gforge's debconf messages
 # Copyright (C) 2007 Ricardo Silva
 # This file is distributed under the same license as the gforge package.
-# Ricardo Silva <ardoric@gmail.com>, 2007.
+# Ricardo Silva <ardoric@gmail.com>, 2007-2008.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gforge 4.6.99+svn6094-4\n"
+"Project-Id-Version: gforge 4.6.99+svn6387-1\n"
 "Report-Msgid-Bugs-To: gforge@packages.debian.org\n"
 "POT-Creation-Date: 2008-02-26 22:50+0100\n"
-"PO-Revision-Date: 2007-12-23 11:05+0100\n"
+"PO-Revision-Date: 2008-04-12 21:30+0100\n"
 "Last-Translator: Ricardo Silva <ardoric@gmail.com>\n"
 "Language-Team: Portuguese <traduz@debianpt.org>\n"
 "MIME-Version: 1.0\n"
@@ -110,27 +110,27 @@ msgstr "Isto é necessário para a configuração de 'virtual hosts' do Apache."
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:10001
 msgid "GForge administrator password:"
-msgstr "Palavra-chave do administrador do GForge:"
+msgstr "Palavra-passe do administrador do GForge:"
 
 #. Type: password
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:10001
 msgid "Please choose the password for this account."
-msgstr "Por favor escolha a palavra-chave para esta conta."
+msgstr "Por favor escolha a palavra-passe para esta conta."
 
 #. Type: password
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:11001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
 msgid "Password confirmation:"
-msgstr "Confirmação da palavra-chave:"
+msgstr "Confirmação da palavra-passe:"
 
 #. Type: password
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:11001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
 msgid "Please re-type the password for confirmation."
-msgstr "Por favor, reescreva a palavra chave para confirmação."
+msgstr "Por favor, reescreva a palavra-passe para confirmação."
 
 #. Type: string
 #. Description
@@ -157,7 +157,7 @@ msgstr ""
 msgid "Please enter a semicolon-separated list of skill names."
 msgstr ""
 "Por favor introduza uma lista de nomes de capacidades, separadas pelo "
-"símbolo ponto-e-v+irgula (;)."
+"símbolo ponto-e-vírgula (;)."
 
 #. Type: boolean
 #. Description
@@ -178,7 +178,7 @@ msgid ""
 "or a complex setup which allows many servers as project web servers or SCM "
 "servers."
 msgstr ""
-"Você pode ter uma configuração simples de DNS com wildcards para mapear "
+"Você pode ter uma configuração simples de DNS com 'wildcards' para mapear "
 "todos os web-hosts de projectos para um só endereço IP, e direccionar todos "
 "os hosts scm para um único servidor SCM, ou uma configuração complexa que "
 "permite ter bastantes servidores como servidores web para projectos ou para "
@@ -212,7 +212,8 @@ msgid ""
 "GForge sends and receives plenty of e-mail to and from the \"${noreply}\" "
 "address."
 msgstr ""
-"O GForge envia e recebe bastante e-mail para e de o endereço \"${noreply}\"."
+"O GForge envia e recebe bastante e-mail para e a partir do endereço "
+"\"${noreply}\"."
 
 #. Type: boolean
 #. Description
@@ -324,19 +325,19 @@ msgstr ""
 #. Description
 #: ../dsf-helper/dbpasswd-variables.templates:2001
 msgid "Password used for the database:"
-msgstr "Palavra-chave utilizada na base de dados:"
+msgstr "Palavra-passe utilizada na base de dados:"
 
 #. Type: password
 #. Description
 #: ../dsf-helper/dbpasswd-variables.templates:2001
 msgid "Connections to the database system are authenticated by a password."
-msgstr "As ligações à base de dados são autenticadas por uma palavra-chave."
+msgstr "As ligações à base de dados são autenticadas por uma palavra-passe."
 
 #. Type: password
 #. Description
 #: ../dsf-helper/dbpasswd-variables.templates:2001
 msgid "Please choose the connection password."
-msgstr "Por favor escolha a palavra chave da ligação."
+msgstr "Por favor escolha a palavra-passe da ligação."
 
 #. Type: string
 #. Description
@@ -566,28 +567,27 @@ msgstr "Tailandês"
 #. Type: select
 #. DefaultChoice
 #: ../dsf-helper/web-variables.templates:2002
-#, fuzzy
 #| msgid "Default language:"
 msgid "English[ Default language]"
-msgstr "Idioma por omissão:"
+msgstr "Inglês[ Idioma pré-definido]"
 
 #. Type: select
 #. Description
 #: ../dsf-helper/web-variables.templates:2003
 msgid "Default language:"
-msgstr "Idioma por omissão:"
+msgstr "Idioma pré-definido:"
 
 #. Type: select
 #. Description
 #: ../dsf-helper/web-variables.templates:2003
 msgid "Please choose the default language for web pages."
-msgstr "Por favor escolha o idioma por omissão das páginas web."
+msgstr "Por favor escolha o idioma pré-definido das páginas web."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/web-variables.templates:3001
 msgid "Default theme:"
-msgstr "Tema por omissão:"
+msgstr "Tema pré-definido:"
 
 #. Type: string
 #. Description
@@ -595,7 +595,7 @@ msgstr "Tema por omissão:"
 msgid ""
 "Please choose the default theme for web pages. This must be a valid name."
 msgstr ""
-"Por favor escolha o tema por omissão para as páginas web. Tem de introduzir "
+"Por favor escolha o tema pré-definido para as páginas web. Tem de introduzir "
 "um nome válido."
 
 #~ msgid "admin"
