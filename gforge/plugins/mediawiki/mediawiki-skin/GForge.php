@@ -15,11 +15,11 @@ if( !defined( 'MEDIAWIKI' ) )
 
 /** */
 require_once('includes/SkinTemplate.php');
-$GLOBALS['sys_dbhost']=getenv('sys_gfdbhost');
-$GLOBALS['sys_dbport']=getenv('sys_gfdbport');
-$GLOBALS['sys_dbname']=getenv('sys_gfdbname');
-$GLOBALS['sys_dbuser']=getenv('sys_gfdbuser');
-$GLOBALS['sys_dbpasswd']=getenv('sys_gfdbpasswd');
+$GLOBALS['sys_dbhost'] = $headers['GForgeDbhost'] || getenv('sys_gfdbhost');
+$GLOBALS['sys_dbport'] = $headers['GForgeDbport'] || getenv('sys_gfdbport');
+$GLOBALS['sys_dbname'] = $headers['GForgeDbname'] || getenv('sys_gfdbname');
+$GLOBALS['sys_dbuser'] = $headers['GForgeDbuser'] || getenv('sys_gfdbuser');
+$GLOBALS['sys_dbpasswd'] = $headers['GForgeDbpasswd'] || getenv('sys_gfdbpasswd');
 $no_gz_buffer = 1 ;
 require_once ('/etc/gforge/local.inc') ;
 $GLOBALS['sys_urlroot'] = $sys_urlroot;
