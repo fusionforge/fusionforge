@@ -5,8 +5,11 @@ gforge (4.6.99+svn6477+something-0) unstable; urgency=low
     #475769).
   * Removed from gforge-plugins-extra a file that should only be in
     gforge-plugin-mediawiki (closes: #476582).
+  * Enabled the "headers" module in apache2, since the database auth
+    tokens are now received through an extra header rather than through
+    environment variables.
 
- -- Roland Mas <lolando@debian.org>  Thu, 24 Apr 2008 20:49:08 +0200
+ -- Roland Mas <lolando@debian.org>  Thu, 24 Apr 2008 22:40:40 +0200
 
 gforge (4.6.99+svn6477-1) unstable; urgency=low
 
