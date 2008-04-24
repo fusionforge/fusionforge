@@ -1,6 +1,6 @@
-gforge (4.6.99+svn6477+something-0) unstable; urgency=low
+gforge (4.6.99+svn6486-1) unstable; urgency=low
 
-  * Tracking upstream SVN.
+  * New SVN snapshot.
   * Updated Debconf template translations for Portuguese (closes:
     #475769).
   * Removed from gforge-plugins-extra a file that should only be in
@@ -9,7 +9,7 @@ gforge (4.6.99+svn6477+something-0) unstable; urgency=low
     tokens are now received through an extra header rather than through
     environment variables.
 
- -- Roland Mas <lolando@debian.org>  Thu, 24 Apr 2008 22:40:40 +0200
+ -- Roland Mas <lolando@debian.org>  Thu, 24 Apr 2008 22:57:54 +0200
 
 gforge (4.6.99+svn6477-1) unstable; urgency=low
 
@@ -20,7 +20,7 @@ gforge (4.6.99+svn6477-1) unstable; urgency=low
   * Replace deprecated DisplayFirstChdir with DisplayChdir in proftpd config
 
   [ Roland Mas ]
-  * Tracking upstream SVN.
+  * New SVN snapshot.
   * New feature from the "urlmaker" branch, to compute URLs for links and
     forms in one single place, the point being to make it easier to host
     Gforge in a variety of URL schemes (full virtual host or
