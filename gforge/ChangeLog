@@ -2,8 +2,10 @@
 
 	* etc/local.d/10database.header: Read database authentication info
 	from HTTP headers in addition to environment variables.
+	* plugins/mediawiki/mediawiki-skin/GForge.php: Ditto.
 	* etc/httpd.d/httpd.secrets: Provide this info using the
 	RequestHeader directive.
+	* utils/install-apache.sh: Load appropriate module.
 
 2008-03-15  Christian Bayle <bayle@debian.org>
 	
