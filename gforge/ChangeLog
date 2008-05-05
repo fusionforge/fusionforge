@@ -1,3 +1,8 @@
+2008-05-05  Roland Mas  <lolando@debian.org>
+
+	* www/soap/nusoap.php: Renamed soapclient class to gfsoapclient,
+	for compatibility with PHP5.
+
 2008-04-24  Roland Mas  <lolando@debian.org>
 
 	* etc/local.d/10database.header: Read database authentication info
