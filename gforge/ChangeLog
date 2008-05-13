@@ -1,3 +1,10 @@
+2008-05-13  Roland Mas  <lolando@debian.org>
+
+	* utils/include.pl: Use temporary files and renaming to avoid
+	insecure file handling (CVE-2008-0167).
+	* deb-specific/ssh_dump_update.pl: Handle potential failure in
+	write_array_file.
+
 2007-11-04  Roland Mas  <lolando@debian.org>
 
 	* Several fixes to remove vulnerabilities against symlink attacks

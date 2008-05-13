@@ -51,16 +51,18 @@ while ($ln = pop(@ssh_array)) {
 	if (-d "$homedir_prefix/$username"){
 		if (! -d $ssh_dir) {
 			mkdir $ssh_dir, 0755;
-			system("chown $uid:$uid $ssh_dir");
+                        chown $uid, $uid, $ssh_dir;
 		}
 	
 		if($verbose){print("Writing authorized_keys for $username: ")};
 	
-		write_array_file("$ssh_dir/authorized_keys", @user_authorized_keys);
-		system("chown $uid:$uid $homedir_prefix/$username");
-		system("chown $uid:$uid $ssh_dir");
-		system("chmod 0644 $ssh_dir/authorized_keys");
-		system("chown $uid:$uid $ssh_dir/authorized_keys");
+		if (write_array_file("$ssh_dir/authorized_keys", @user_authorized_keys)) {
+                        warn "Problem writing authorized_keys for $username\n";
+                        next;
+                }
+
+		chown $uid, $uid, ($homedir_prefix/$username, $ssh_dir, "$ssh_dir/authorized_keys");
+		chmod 0644, "$ssh_dir/authorized_keys";
 
 		if($verbose){print ("Done\n")};
 	} else {
