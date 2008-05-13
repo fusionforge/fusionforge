@@ -1,3 +1,10 @@
+2008-05-13  Roland Mas  <lolando@debian.org>
+
+	* utils/include.pl: Use temporary files and renaming to avoid
+	insecure file handling (CVE-2008-0167).
+	* deb-specific/ssh_dump_update.pl: Handle potential failure in
+	write_array_file.
+
 2008-05-05  Roland Mas  <lolando@debian.org>
 
 	* www/soap/nusoap.php: Renamed soapclient class to gfsoapclient,

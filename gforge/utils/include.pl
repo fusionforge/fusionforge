@@ -79,12 +79,22 @@ sub open_array_file {
 #############################
 sub write_array_file {
         my ($file_name, @file_array) = @_;
-        
-        open(FD, ">$file_name") || die "Can't open $file_name: $!.\n";
+
+        use File::Temp qw(tempfile);
+        use File::Basename qw(dirname);
+
+        my ($fd, $filename) = tempfile( DIR => dirname($file_name), UNLINK => 0) || return 1;
+
         foreach (@file_array) { 
                 if ($_ ne '') { 
-                        print FD;
+                        print $fd $_;
                 }       
         }       
-        close(FD);
+
+        close($fd);
+        unless (rename ($filename, $file_name)) {
+                unlink $filename;
+                return 1;
+        }
+        return 0;
 }      

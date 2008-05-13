@@ -1,8 +1,9 @@
 gforge (4.6.99+svn6486+something-0) unstable; urgency=low
 
-  * Tracking upstream SVN.
+  * Tracking upstream SVN.  Includes fix for an insecure file handling
+    (CVE-2008-0167).
 
- -- Roland Mas <lolando@debian.org>  Thu, 24 Apr 2008 23:15:19 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 13 May 2008 12:02:50 +0200
 
 gforge (4.6.99+svn6486-1) unstable; urgency=low
 
