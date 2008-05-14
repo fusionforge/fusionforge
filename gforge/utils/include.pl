@@ -83,7 +83,8 @@ sub write_array_file {
         use File::Temp qw(tempfile);
         use File::Basename qw(dirname);
 
-        my ($fd, $filename) = tempfile( DIR => dirname($file_name), UNLINK => 0) || return 1;
+        my ($fd, $filename) = tempfile( DIR => dirname($file_name), UNLINK => 0) ;
+	return 1 unless ($fd && $filename) ;
 
         foreach (@file_array) { 
                 if ($_ ne '') { 

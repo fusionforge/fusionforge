@@ -1,3 +1,8 @@
+2008-05-14  Roland Mas  <lolando@debian.org>
+
+	* utils/include.pl (write_array_file): Fixed bad logic that
+	rendered the function inoperant.
+
 2008-05-13  Roland Mas  <lolando@debian.org>
 
 	* utils/include.pl: Use temporary files and renaming to avoid
