@@ -1,8 +1,8 @@
-gforge (4.6.99+svn6491+something-0) unstable; urgency=low
+gforge (4.6.99+svn6496-1) unstable; urgency=low
 
-  * Tracking upstream SVN.
+  * New SVN snapshot, incuding a fix for the previous patch.
 
- -- Roland Mas <lolando@debian.org>  Tue, 13 May 2008 12:40:35 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 14 May 2008 18:27:34 +0200
 
 gforge (4.6.99+svn6491-1) unstable; urgency=high
 
