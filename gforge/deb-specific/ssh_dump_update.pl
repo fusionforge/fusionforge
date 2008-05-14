@@ -61,7 +61,7 @@ while ($ln = pop(@ssh_array)) {
                         next;
                 }
 
-		chown $uid, $uid, ($homedir_prefix/$username, $ssh_dir, "$ssh_dir/authorized_keys");
+		chown $uid, $uid, ("$homedir_prefix/$username", $ssh_dir, "$ssh_dir/authorized_keys");
 		chmod 0644, "$ssh_dir/authorized_keys";
 
 		if($verbose){print ("Done\n")};
