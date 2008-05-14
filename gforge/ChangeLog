@@ -1,5 +1,7 @@
 2008-05-14  Roland Mas  <lolando@debian.org>
 
+	* deb-specific/ssh_dump_update.pl: Fixed syntax error.
+
 	* utils/include.pl (write_array_file): Fixed bad logic that
 	rendered the function inoperant.
 
