@@ -3369,6 +3369,16 @@ gforge/www/themes/ultralite/images/forum_add.gif -text
 gforge/www/themes/ultralite/images/forum_delete.gif -text
 gforge/www/themes/ultralite/images/forum_edit.gif -text
 gforge/www/themes/ultralite/images/new.png -text
+gforge/www/trove/TroveCategory.class.php -text
+gforge/www/trove/TroveCategoryAdmin.class.php -text
+gforge/www/trove/TroveCategoryFactory.class.php -text
+gforge/www/trove/TroveCategoryLabel.class.php -text
+gforge/www/trove/admin/trove_cat_add.php -text
+gforge/www/trove/admin/trove_cat_edit.php -text
+gforge/www/trove/admin/trove_cat_list.php -text
+gforge/www/trove/include/trove.php -text
+gforge/www/trove/include/utils.php -text
+gforge/www/trove/index.php -text
 tools/export-tracker.tcl -text
 tools/make-mo.sh -text
 tools/update-gettext-files.sh -text
