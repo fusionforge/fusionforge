@@ -20,7 +20,12 @@ set -e
 
 case "$1" in
     remove|deconfigure)
-	/usr/lib/gforge/bin/unregister-plugin scmcvs
+    	if [ -f /var/run/postgresql/.s.PGSQL.5432 ]
+	then
+		/usr/lib/gforge/bin/unregister-plugin scmcvs
+	else
+		echo "WARNING: GForge database not available to unregister scmcvs plugin"
+	fi
 	test -f /etc/default/apache2 && . /etc/default/apache2
 	if [ "$NO_START" != "0" ]; then
 		if [ -x /usr/sbin/apache ]; then
