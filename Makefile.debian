@@ -23,6 +23,7 @@ debuildopts=-sa
 debuildopts=-sa -us -uc
 debuildopts=-us -uc
 gfversion=$(shell head -1 gforge/debian/changelog | sed 's/.*(\(.*\)-.*).*/\1/')
+gfminor=$(shell head -1 gforge/debian/changelog | sed 's/.*(.*-\(.*\)).*/\1/')
 where=g-rouille
 where=mercure
 where=local
@@ -65,5 +66,9 @@ gforge/docs/phpdoc/docs:
 # Developper personal use
 #
 chris:
-	make -f Makefile.debian allgf dchcmd="dch -i" debuildopts=""
-	make -f Makefile.debian upload where=localgforge
+	make -f Makefile.debian allgf dchcmd="dch -i" debuildopts="-sa"
+	#make -f Makefile.debian upload where=localgforge
+	reprepro -Vb /var/www/debian-local include gforge gforge_$(gfversion)-$(gfminor)_i386.changes
+
+cdd:
+	build-simple-cdd --profiles-udeb-dist sid --debian-mirror http://ftp.uk.debian.org/debian --dist etch
