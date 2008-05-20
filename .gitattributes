@@ -3361,5 +3361,6 @@ gforge/www/themes/ultralite/images/forum_add.gif -text
 gforge/www/themes/ultralite/images/forum_delete.gif -text
 gforge/www/themes/ultralite/images/forum_edit.gif -text
 gforge/www/themes/ultralite/images/new.png -text
+tools/export-tracker.tcl -text
 tools/make-mo.sh -text
 tools/update-gettext-files.sh -text
