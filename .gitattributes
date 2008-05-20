@@ -3060,9 +3060,17 @@ gforge/www/jscook/ThemeXP/page.gif svneol=native#unset
 gforge/www/jscook/ThemeXP/plus.gif svneol=native#unset
 gforge/www/jscook/ThemeXP/plusbottom.gif svneol=native#unset
 gforge/www/jscook/ThemeXP/spacer.gif svneol=native#unset
+gforge/www/plugins/cvstracker -text
+gforge/www/plugins/eirc -text
+gforge/www/plugins/fckeditor -text
 gforge/www/plugins/helloworld -text
+gforge/www/plugins/mantis -text
 gforge/www/plugins/mediawiki -text
+gforge/www/plugins/online_help -text
 gforge/www/plugins/projects_hierarchy -text
+gforge/www/plugins/quota_management -text
+gforge/www/plugins/scmcvs -text
+gforge/www/plugins/svntracker -text
 gforge/www/plugins/webcalendar -text
 gforge/www/scm/viewvc/lib/accept.pyc svneol=native#unset
 gforge/www/scm/viewvc/lib/compat.pyc svneol=native#unset
