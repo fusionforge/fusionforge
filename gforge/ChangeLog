@@ -1,3 +1,8 @@
+2008-05-21  Roland Mas  <lolando@debian.org>
+
+	* deb-specific/sqlparser.pm: Added support for /* comments */ in
+	SQL files (except that contrary to C, they can be nested).
+
 2008-05-14  Roland Mas  <lolando@debian.org>
 
 	* deb-specific/ssh_dump_update.pl: Fixed syntax error.

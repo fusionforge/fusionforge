@@ -4,7 +4,7 @@
 # (represented by an array of strings)
 #
 ### AUTHOR/COPYRIGHT
-# This file is copyright 2002 Roland Mas <99.roland.mas@aist.enst.fr>.
+# This file is copyright 2002, 2008 Roland Mas <99.roland.mas@aist.enst.fr>,
 #
 # This is Free Software; you can redistribute it and/or modify it under the
 # terms of the GNU General Public License version 2, as published by the
@@ -48,8 +48,10 @@ sub parse_sql_file ( $ ) {
 		  'START_COPY' => 7,
 		  'IN_COPY' => 8,
 		  'ERROR' => 9,
+		  'IN_COMMENT' => 10,
+		  'IN_SQL_COMMENT' => 11,
 		  'DONE' => 999) ;
-    my ($state, $l, $par_level, $chunk, $rest, $sql, @sql_list, $copy_table, $copy_rest, @copy_data, @copy_data_tmp, $copy_field) ;
+    my ($state, $l, $par_level, $com_level, $chunk, $rest, $sql, @sql_list, $copy_table, $copy_rest, @copy_data, @copy_data_tmp, $copy_field) ;
 
     # Init the state machine
 
@@ -63,6 +65,7 @@ sub parse_sql_file ( $ ) {
 	$state == $states{INIT} && do {
 	    # sql_parser_debug "State = INIT" ;
 	    $par_level = 0 ;
+	    $com_level = 0 ;
 	    $l = $sql = $chunk = $rest = "" ;	 
 	    @sql_list = () ;
 	    $copy_table = $copy_rest = "" ;
@@ -76,7 +79,7 @@ sub parse_sql_file ( $ ) {
 	$state == $states{SCAN} && do {
 	    # sql_parser_debug "State = SCAN" ;
 	  SCAN_STATE_SWITCH: {
-	      ( ($l eq "") or ($l =~ /^\s*$/) or ($l =~ /^--/) ) && do {
+	      ( ($l eq "") or ($l =~ /^\s*$/) or ($l =~ /^\s*--/) ) && do {
 		  $l = <F> ;
 		  unless ($l) {
 		      $state = $states{DONE} ;
@@ -105,6 +108,114 @@ sub parse_sql_file ( $ ) {
 	  }			# SCAN_STATE_SWITCH
 	    last STATE_SWITCH ;
 	} ;			# End of SCAN state
+
+	$state == $states{IN_COMMENT} && do {
+	    # sql_parser_debug "State = IN_COMMENT" ;
+	  IN_COMMENT_STATE_SWITCH: {
+	      ( ($l eq "") or ($l =~ /^\s*$/) ) && do {
+		  $l = <F> ;
+		  unless ($l) {
+		      sql_parser_debug "End of file detected during a comment." ;
+		      $state = $states{ERROR} ;
+		      last IN_COMMENT_STATE_SWITCH ;
+		  }
+		  chomp $l ;
+		  
+		  $state = $states{IN_COMMENT} ;
+		  last IN_COMMENT_STATE_SWITCH ;
+	      } ;
+
+	      ( ($l =~ m,\*/,) || ($l =~ m,/\*,) ) && do {
+		  $l =~ s,.*?((/\*)|(\*/)),$1, ;
+		  ($chunk, $rest) = ($l =~ /^(..)(.*)/) ;
+		  
+		  $l = $rest ;
+
+		  if ($chunk eq '/*') {
+		      $com_level += 1 ;
+		  } else {
+		      $com_level -= 1 ;
+		  }
+
+		  if ($com_level == 0) {
+		      $state = $states{SQL_SCAN} ;
+		      last IN_COMMENT_STATE_SWITCH ;
+		  } else {
+		      $state = $states{IN_COMMENT} ;
+		      last IN_COMMENT_STATE_SWITCH ;
+		  }
+	      } ;
+
+	      ( 1 ) && do {
+		  $l = <F> ;
+		  # sql_parser_debug "Examining $l\n" ;
+		  unless ($l) {
+		      $state = $states{ERROR} ;
+		      last IN_COMMENT_STATE_SWITCH ;
+		  }
+		  chomp $l ;
+		  
+		  $state = $states{IN_COMMENT} ;
+		  last IN_COMMENT_STATE_SWITCH ;
+	      } ;
+
+	  }			# IN_COMMENT_STATE_SWITCH
+	    last STATE_SWITCH ;
+	} ;			# End of IN_COMMENT state
+	
+	$state == $states{IN_SQL_COMMENT} && do {
+	    # sql_parser_debug "State = IN_SQL_COMMENT" ;
+	  IN_SQL_COMMENT_STATE_SWITCH: {
+	      ( ($rest eq "") or ($rest =~ /^\s*$/) ) && do {
+		  $rest = <F> ;
+		  unless ($rest) {
+		      sql_parser_debug "End of file detected during a comment." ;
+		      $state = $states{ERROR} ;
+		      last IN_SQL_COMMENT_STATE_SWITCH ;
+		  }
+		  chomp $rest ;
+		  
+		  $state = $states{IN_SQL_COMMENT} ;
+		  last IN_SQL_COMMENT_STATE_SWITCH ;
+	      } ;
+
+	      ( ($rest =~ m,\*/,) || ($rest =~ m,/\*,) ) && do {
+		  $rest =~ s,.*?((/\*)|(\*/)),$1, ;
+		  ($chunk, my $rest2) = ($rest =~ /^(..)(.*)/) ;
+		  
+		  $rest = $rest2 ;
+
+		  if ($chunk eq '/*') {
+		      $com_level += 1 ;
+		  } else {
+		      $com_level -= 1 ;
+		  }
+
+		  if ($com_level == 0) {
+		      $state = $states{IN_SQL} ;
+		      last IN_SQL_COMMENT_STATE_SWITCH ;
+		  } else {
+		      $state = $states{IN_SQL_COMMENT} ;
+		      last IN_SQL_COMMENT_STATE_SWITCH ;
+		  }
+	      } ;
+
+	      ( 1 ) && do {
+		  $rest = <F> ;
+		  unless ($rest) {
+		      sql_parser_debug "End of file detected during a comment." ;
+		      $state = $states{ERROR} ;
+		      last IN_SQL_COMMENT_STATE_SWITCH ;
+		  }
+		  chomp $rest ;
+		  
+		  $state = $states{IN_SQL_COMMENT} ;
+		  last IN_SQL_COMMENT_STATE_SWITCH ;
+	      } ;
+
+	  }			# IN_SQL_COMMENT_STATE_SWITCH
+	    last STATE_SWITCH ;
+	} ;			# End of IN_SQL_COMMENT state
 	
 	$state == $states{SQL_SCAN} && do {
 	    # sql_parser_debug "State = SQL_SCAN" ;
@@ -122,8 +233,15 @@ sub parse_sql_file ( $ ) {
 		  last SQL_SCAN_STATE_SWITCH ;
 	      } ;
 
+	      ($l =~ m,^\s*/\*,) && do {
+		  $l =~ s,^\s*/\*,, ;
+		  $com_level = 1 ;
+		  $state = $states{IN_COMMENT} ;
+		  last SQL_SCAN_STATE_SWITCH ;
+	      } ;
+	      
 	      ( 1 ) && do {
-		  ($chunk, $rest) = ($l =~ /^([^()\';-]*)(.*)/) ;
+		  ($chunk, $rest) = ($l =~ m,^([^()\';-]*)(.*),) ;
 		  $sql .= $chunk ;
 		  
 		  $state = $states{IN_SQL} ;
@@ -134,9 +252,72 @@ sub parse_sql_file ( $ ) {
 	    last STATE_SWITCH ;
 	} ;			# End of SQL_SCAN state
 	
+	$state == $states{IN_COMMENT} && do {
+	    # sql_parser_debug "State = IN_COMMENT" ;
+	  IN_COMMENT_STATE_SWITCH: {
+	      ( ($l eq "") or ($l =~ /^\s*$/) ) && do {
+		  $l = <F> ;
+		  unless ($l) {
+		      sql_parser_debug "End of file detected during a comment." ;
+		      $state = $states{ERROR} ;
+		      last IN_COMMENT_STATE_SWITCH ;
+		  }
+		  chomp $l ;
+		  
+		  $state = $states{IN_COMMENT} ;
+		  last IN_COMMENT_STATE_SWITCH ;
+	      } ;
+
+	      ( ($l !~ m,\*/,) || ($l !~ m,/\*,) ) && do {
+		  $l =~ s,.*?((/\*)|(\*/)),$1, ;
+		  ($chunk, $rest) = ($l =~ /^(..)(.*)/) ;
+		  
+		  $l = $rest ;
+
+		  if ($chunk eq '/*') {
+		      $com_level += 1 ;
+		  } else {
+		      $com_level -= 1 ;
+		  }
+
+		  if ($com_level == 0) {
+		      $state = $states{SQL_SCAN} ;
+		      last IN_COMMENT_STATE_SWITCH ;
+		  } else {
+		      $state = $states{IN_COMMENT} ;
+		      last IN_COMMENT_STATE_SWITCH ;
+		  }
+	      } ;
+
+	      ( 1 ) && do {
+		  $l = <F> ;
+		  unless ($l) {
+		      sql_parser_debug "End of file detected during a comment." ;
+		      $state = $states{ERROR} ;
+		      last IN_COMMENT_STATE_SWITCH ;
+		  }
+		  chomp $l ;
+		  
+		  $state = $states{IN_COMMENT} ;
+		  last IN_COMMENT_STATE_SWITCH ;
+	      } ;
+
+	  }			# IN_COMMENT_STATE_SWITCH
+	    last STATE_SWITCH ;
+	} ;			# End of IN_COMMENT state
+	
 	$state == $states{IN_SQL} && do {
 	    # sql_parser_debug "State = IN_SQL" ;
+	    
 	  IN_SQL_STATE_SWITCH: {
+	      ($rest =~ m,^\s*/\*,) && do {
+		  $rest =~ s,^\s*/\*,, ;
+		  $com_level = 1 ;
+		  $state = $states{IN_SQL_COMMENT} ;
+		  last IN_SQL_STATE_SWITCH ;
+	      } ;
+	      
+
 	      ($rest =~ /^\(/) && do {
 		  $par_level += 1 ;
 		  $sql .= '(' ;
@@ -233,6 +414,7 @@ sub parse_sql_file ( $ ) {
 
 	      ( 1 ) && do {
 		  push @sql_list, $sql ;
+		  # sql_parser_debug ("Found SQL $sql\n") ;
 		  $sql = "" ;
 		  $l = $rest ;
 
@@ -263,8 +445,6 @@ sub parse_sql_file ( $ ) {
 
 	      ( 1 ) && do {
 		  ($chunk, $rest) = ($l =~ /^([^\\\']*)(.*)/) ;
-		  # sql_parser_debug "chunk = $chunk" ;
-		  # sql_parser_debug "rest = $rest" ;
 		  $sql .= $chunk ;
 		  
 		  $state = $states{IN_QUOTE} ;
