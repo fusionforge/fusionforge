@@ -1,9 +1,13 @@
-gforge (4.6.99+svn6498-1) unstable; urgency=low
+gforge (4.6.99+svn6496+something-0) unstable; urgency=low
 
+  [ Christian Bayle ]
   * Don't try to unregister scm plugins when GForge database is not
     available
 
- -- Christian Bayle <bayle@debian.org>  Tue, 20 May 2008 23:08:02 +0200
+  [ Roland Mas ]
+  * Tracking upstream SVN.
+
+ -- Roland Mas <lolando@debian.org>  Wed, 21 May 2008 15:49:18 +0200
 
 gforge (4.6.99+svn6496-1) unstable; urgency=low
 
