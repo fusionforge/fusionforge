@@ -12,9 +12,9 @@ diff -urNad gforge~/plugins/cvstracker/bin/post.php gforge/plugins/cvstracker/bi
 @@ -33,7 +33,7 @@
   
  //require ('local.inc'); we don´t need this file. also, in some installations this file cannot be accessed by the caller (perms problem)
- require ('plugins/cvstracker/config.php');
--require ($sys_plugins_path.'/cvstracker/common/Snoopy.class.php');
-+require ('/usr/share/php/libphp-snoopy/Snoopy.class.php');
+ require $gfconfig.'plugins/cvstracker/config.php';
+-require $gfplugins.'cvstracker/common/Snoopy.class.php';
++require '/usr/share/php/libphp-snoopy/Snoopy.class.php';
  
  
  if ($cvs_binary_version != "1.12" &&
@@ -24,9 +24,9 @@ diff -urNad gforge~/plugins/scmcvs/bin/aclcheck.php gforge/plugins/scmcvs/bin/ac
 @@ -30,7 +30,7 @@
  }
  
- require_once('plugins/scmcvs/config.php');
--require ($sys_plugins_path.'/scmcvs/common/Snoopy.class.php');
-+require ('/usr/share/php/libphp-snoopy/Snoopy.class.php');
+ require_once $gfconfig.'plugins/scmcvs/config.php';
+-require $gfplugins.'scmcvs/common/Snoopy.class.php';
++require '/usr/share/php/libphp-snoopy/Snoopy.class.php';
  
  // Input cleansing
  $env_cvsroot = (string) $_ENV['CVSROOT'];
@@ -36,9 +36,9 @@ diff -urNad gforge~/plugins/svntracker/bin/post.php gforge/plugins/svntracker/bi
 @@ -32,7 +32,7 @@
  
  
- require ('plugins/svntracker/config.php');
--require ($sys_plugins_path.'/svntracker/common/Snoopy.class.php');
-+require ('/usr/share/php/libphp-snoopy/Snoopy.class.php');
+ require $gfconfig.'plugins/svntracker/config.php';
+-require $gfplugins.'svntracker/common/Snoopy.class.php';
++require '/usr/share/php/libphp-snoopy/Snoopy.class.php';
  
  if ($svn_tracker_debug) {
  	$file = fopen($svn_tracker_debug_file,"a+");	
