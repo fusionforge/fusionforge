@@ -34,7 +34,7 @@ $include_path = join(PATH_SEPARATOR,
 // Easyforge config, allow several instances of gforge based on server name.
 if (getenv('sys_localinc')) {
 	$gfcgfile = getenv('sys_localinc');
-	$gfconfig = dirname($gfcgfile/);
+	$gfconfig = dirname($gfcgfile).'/';
 } elseif (file_exists($IP.'/config/'.$_SERVER['SERVER_NAME'].'/local.inc.php')) {
 	$gfcgfile = $IP.'/config/'.$_SERVER['SERVER_NAME'].'/local.inc.php';
 	$gfconfig = $IP.'/config/'.$_SERVER['SERVER_NAME'];
