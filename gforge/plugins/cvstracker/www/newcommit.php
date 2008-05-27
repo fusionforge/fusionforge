@@ -16,8 +16,8 @@
  * store in DB the commit info attached to the tracker or task.
  *
  */
-require_once('squal_pre.php');
-require_once('plugins/cvstracker/config.php');
+require_once $gfwww.'include/squal_pre.php';
+require_once $gfconfig.'plugins/cvstracker/config.php';
 
 /**
  * Getting POST variables

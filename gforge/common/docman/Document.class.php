@@ -33,8 +33,8 @@
 	Complete OO rewrite by Tim Perdue 1/2003
 */
 
-require_once('common/include/Error.class.php');
-require_once('common/docman/Parsedata.class.php');
+require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'docman/Parsedata.class.php';
 
 class Document extends Error {
 

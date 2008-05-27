@@ -26,13 +26,13 @@
  */
 
 require_once('../../env.inc.php');
-require_once('pre.php');
-require_once('note.php');
-require_once('news_admin_utils.php');
-require_once('www/news/news_utils.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'include/note.php';
+require_once $gfwww.'news/admin/news_admin_utils.php';
+require_once $gfwww.'news/news_utils.php';
 //common forum tools which are used during the creation/editing of news items
-require_once('common/forum/Forum.class.php');
-require_once('common/include/TextSanitizer.class.php'); // to make the HTML input by the user safe to store
+require_once $gfcommon.'forum/Forum.class.php';
+require_once $gfcommon.'include/TextSanitizer.class.php'; // to make the HTML input by the user safe to store
 
 $group_id = getIntFromRequest('group_id');
 $post_changes = getStringFromRequest('post_changes');

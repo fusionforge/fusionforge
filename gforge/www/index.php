@@ -26,10 +26,10 @@
  */
 
 require_once('env.inc.php');
-require_once('pre.php');    // Initial db and session library, opens session
-require_once('www/news/news_utils.php');
-require_once('common/forum/Forum.class.php');
-require_once('www/include/features_boxes.php');
+require_once $gfwww.'include/pre.php';    // Initial db and session library, opens session
+require_once $gfwww.'news/news_utils.php';
+require_once $gfcommon.'forum/Forum.class.php';
+require_once $gfwww.'include/features_boxes.php';
 
 $HTML->header(array('title'=>_('Welcome')));
 

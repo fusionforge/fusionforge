@@ -39,9 +39,9 @@
 
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('common/include/license.php');
-require_once('common/scm/SCMFactory.class.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/license.php';
+require_once $gfcommon.'scm/SCMFactory.class.php';
 //
 //	Test if restricted project registration
 //

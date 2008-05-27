@@ -15,7 +15,7 @@
  *	  System Settings unless the user is an admin user ($is_admin).
  */
 
-include_once 'includes/init.php';
+include_once $gfplugins.'webcalendar/www/includes/init.php';
 
 // Don't allow users to use this feature if "allow view others" is
 // disabled.

@@ -26,8 +26,8 @@
  */
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('common/include/account.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/account.php';
 
 $passwd = getStringFromRequest('passwd');
 $passwd2 = getStringFromRequest('passwd2');

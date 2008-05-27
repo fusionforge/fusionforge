@@ -12,9 +12,9 @@
   */
 
 
-require_once('common/tracker/ArtifactType.class.php');
-require_once('common/tracker/ArtifactExtraField.class.php');
-require_once('common/tracker/ArtifactExtraFieldElement.class.php');
+require_once $gfcommon.'tracker/ArtifactType.class.php';
+require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
+require_once $gfcommon.'tracker/ArtifactExtraFieldElement.class.php';
 
 class ArtifactTypeHtml extends ArtifactType {
 

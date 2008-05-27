@@ -13,8 +13,8 @@
 
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('graph_lib.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'include/graph_lib.php';
 
    // require you to be a member of the sfstats group (group_id = 11084)
 session_require( array('group'=>$sys_stats_group) );

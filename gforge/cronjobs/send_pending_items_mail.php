@@ -35,8 +35,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require ('pre.php');
-require ('common/include/cron_utils.php');
+require $gfwww.'include/pre.php';
+require $gfcommon.'include/cron_utils.php';
 
 
 $options=$GLOBALS['argv'];

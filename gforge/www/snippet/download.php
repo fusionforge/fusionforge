@@ -14,8 +14,8 @@
 $no_gz_buffer=true;
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require('www/snippet/snippet_utils.php');
+require_once $gfwww.'include/pre.php';
+require $gfwww.'snippet/snippet_utils.php';
 
 global $SCRIPT_EXTENSION;
 

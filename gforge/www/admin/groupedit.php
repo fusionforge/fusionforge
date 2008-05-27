@@ -24,10 +24,10 @@
  */
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('common/include/license.php');
-require_once('www/admin/admin_utils.php');
-require_once('www/project/admin/project_admin_utils.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/license.php';
+require_once $gfwww.'admin/admin_utils.php';
+require_once $gfwww.'project/admin/project_admin_utils.php';
 
 session_require(array('group'=>'1','admin_flags'=>'A'));
 

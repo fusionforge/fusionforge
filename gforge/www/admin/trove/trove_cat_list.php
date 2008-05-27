@@ -25,9 +25,9 @@
 
 
 require_once('../../env.inc.php');
-require_once('pre.php');
-require_once('www/include/trove.php');
-require_once('www/admin/admin_utils.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'include/trove.php';
+require_once $gfwww.'admin/admin_utils.php';
 
 // print current node, then all subnodes
 function printnode ($nodeid,$text) {

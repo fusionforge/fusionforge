@@ -15,7 +15,7 @@
  *	create) will remain unchanged.
  *
  */
-include_once 'includes/init.php';
+include_once $gfplugins.'webcalendar/www/includes/init.php';
 
 // Set this to true do show the SQL at the bottom of the page
 $purgeDebug = true;

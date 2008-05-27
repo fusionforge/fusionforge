@@ -9,12 +9,12 @@
  * @version   $Id: 04_IMPROVDOC_75_document_specific_search_engine.dpatch,v 1.1 2006/01/11 17:02:45 fabio Exp $
  */
 
-require_once('pre.php');
-require_once('www/docman/include/doc_utils.php');
-require_once('common/docman/Parsedata.class.php');
-require_once('common/docman/Document.class.php');
-require_once('common/docman/DocumentFactory.class.php');
-require_once('common/docman/DocumentGroupFactory.class.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'docman/include/doc_utils.php';
+require_once $gfcommon.'docman/Parsedata.class.php';
+require_once $gfcommon.'docman/Document.class.php';
+require_once $gfcommon.'docman/DocumentFactory.class.php';
+require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
 
 $p = new Parsedata ("$sys_engine_path");
 // print_debug(print_r($p->get_parser_list (),true));

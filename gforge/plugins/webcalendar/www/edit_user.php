@@ -1,6 +1,6 @@
 <?php
 /* $Id: edit_user.php,v 1.41 2005/02/26 06:49:45 cknudsen Exp $ */
-include_once 'includes/init.php';
+include_once $gfplugins.'webcalendar/www/includes/init.php';
 
 if ( ! $is_admin )
   $user = $login;

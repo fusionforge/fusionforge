@@ -10,8 +10,8 @@
  * @version $Id$
  */
 
-require_once('pre.php');
-require_once('www/search/include/renderers/HtmlGroupSearchRenderer.class.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'search/include/renderers/HtmlGroupSearchRenderer.class.php';
 
 class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	
@@ -170,7 +170,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$group =& group_get_object($this->groupId);
 		
 		if ($group->usesForum()) {
-			require_once('ForumsHtmlSearchRenderer.class.php');
+			require_once $gfwww.'search/include/renderers/ForumsHtmlSearchRenderer.class.php';
 			$undersections = ForumsHtmlSearchRenderer::getSections($this->groupId);
 			if (count($undersections) > 0) {
 				$sections['short_forum'] = $undersections;
@@ -178,7 +178,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		}
 		
 		if ($group->usesTracker()) {
-			require_once('TrackersHtmlSearchRenderer.class.php');
+			require_once $gfwww.'search/include/renderers/TrackersHtmlSearchRenderer.class.php';
 			$undersections = TrackersHtmlSearchRenderer::getSections($this->groupId);
 			if (count($undersections) > 0) {
 				$sections['short_tracker'] = $undersections;
@@ -186,7 +186,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		}
 
 		if ($group->usesPM()) {
-			require_once('TasksHtmlSearchRenderer.class.php');
+			require_once $gfwww.'search/include/renderers/TasksHtmlSearchRenderer.class.php';
 			$undersections = TasksHtmlSearchRenderer::getSections($this->groupId);
 			if (count($undersections) > 0) {
 				$sections['short_pm'] = $undersections;
@@ -195,7 +195,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		}
 
 		if ($group->usesDocman()) {
-			require_once('DocsHtmlSearchRenderer.class.php');
+			require_once $gfwww.'search/include/renderers/DocsHtmlSearchRenderer.class.php';
 			$undersections = DocsHtmlSearchRenderer::getSections($this->groupId);	
 			if (count($undersections) > 0) {
 				$sections['short_docman'] = $undersections;
@@ -203,12 +203,12 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		}
 		
 		if ($group->usesNews()) {
-			require_once('NewsHtmlSearchRenderer.class.php');
+			require_once $gfwww.'search/include/renderers/NewsHtmlSearchRenderer.class.php';
 			$sections['short_news'] = true;
 		}
 			
 		if ($group->usesFRS()) {
-			require_once('FrsHtmlSearchRenderer.class.php');
+			require_once $gfwww.'search/include/renderers/FrsHtmlSearchRenderer.class.php';
 			$undersections = FrsHtmlSearchRenderer::getSections($this->groupId);
 			if (count($undersections) > 0) {
 				$sections['short_files'] = $undersections;

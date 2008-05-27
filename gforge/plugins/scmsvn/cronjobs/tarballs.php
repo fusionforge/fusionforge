@@ -8,8 +8,8 @@ $scmname='scmroot';
 putenv("PATH=/usr/lib/subversion:".getenv('PATH'));
 $BACKUPPROG='hot-backup.py';
 
-require ('squal_pre.php');
-require ('common/include/cron_utils.php');
+require $gfwww.'include/squal_pre.php';
+require $gfcommon.'include/cron_utils.php';
 
 $sys_scm_root_path = "$sys_chroot$svndir_prefix";
 

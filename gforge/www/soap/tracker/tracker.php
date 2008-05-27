@@ -24,14 +24,14 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
-require_once('common/include/Error.class.php');
-require_once('common/tracker/ArtifactType.class.php');
-require_once('common/tracker/Artifact.class.php');
-require_once('common/tracker/ArtifactFactory.class.php');
-require_once('common/tracker/ArtifactTypeFactory.class.php');
-require_once('common/tracker/Artifacts.class.php');
-require_once('common/tracker/ArtifactFile.class.php');
-require_once('common/tracker/ArtifactMessage.class.php');
+require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'tracker/ArtifactType.class.php';
+require_once $gfcommon.'tracker/Artifact.class.php';
+require_once $gfcommon.'tracker/ArtifactFactory.class.php';
+require_once $gfcommon.'tracker/ArtifactTypeFactory.class.php';
+require_once $gfcommon.'tracker/Artifacts.class.php';
+require_once $gfcommon.'tracker/ArtifactFile.class.php';
+require_once $gfcommon.'tracker/ArtifactMessage.class.php';
 
 //
 // ArtifactExtraField

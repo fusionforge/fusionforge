@@ -53,7 +53,7 @@ class fckeditorPlugin extends Plugin {
 			require_once("/usr/share/fckeditor/fckeditor.php");
 		} else {
 			$use_system_fckeditor = false ;
-			require_once($GLOBALS['sys_plugins_path']."fckeditor/www/fckeditor.php");
+			require_once $gfplugins.'fckeditor/www/fckeditor.php';
 		}
 
 		if ($hookname == "groupisactivecheckbox") {

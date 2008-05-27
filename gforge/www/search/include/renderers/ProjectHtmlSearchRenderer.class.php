@@ -11,8 +11,8 @@
  * @version $Id$
  */
 
-require_once('www/search/include/renderers/HtmlSearchRenderer.class.php');
-require_once('common/search/ProjectSearchQuery.class.php');
+require_once $gfwww.'search/include/renderers/HtmlSearchRenderer.class.php';
+require_once $gfcommon.'search/ProjectSearchQuery.class.php';
 
 class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 

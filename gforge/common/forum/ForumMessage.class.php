@@ -34,9 +34,9 @@
 	Complete OO rewrite by Tim Perdue 12/2002
 */
 
-require_once('common/include/Error.class.php');
-include_once('common/include/TextSanitizer.class.php'); // for parsing the mail body
-include_once('common/include/User.class.php');
+require_once $gfcommon.'include/Error.class.php';
+include_once $gfcommon.'include/TextSanitizer.class.php'; // for parsing the mail body
+include_once $gfcommon.'include/User.class.php';
 
 class ForumMessage extends Error {
 

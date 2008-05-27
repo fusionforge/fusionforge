@@ -1,5 +1,5 @@
 <?php
-require_once('common/include/Error.class.php');
+require_once $gfcommon.'include/Error.class.php';
 
 // smilies list
 $SMILIES = array(

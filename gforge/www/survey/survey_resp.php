@@ -27,10 +27,10 @@
 
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('common/survey/Survey.class.php');
-require_once('common/survey/SurveyResponse.class.php');
-require_once('www/survey/include/SurveyHTML.class.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'survey/Survey.class.php';
+require_once $gfcommon.'survey/SurveyResponse.class.php';
+require_once $gfwww.'survey/include/SurveyHTML.class.php';
 
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');

@@ -19,7 +19,7 @@
  * If not an admin user, only report creator (cal_login in webcal_report)
  *   can edit/delete report.
  */
-include_once 'includes/init.php';
+include_once $gfplugins.'webcalendar/www/includes/init.php';
 load_user_categories ();
 
 $updating_public = false;

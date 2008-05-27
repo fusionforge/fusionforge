@@ -33,7 +33,8 @@ class GFSearchEngine {
 	}
 	
 	function includeSearchRenderer() {
-		require_once('www/search/include/renderers/'.$this->rendererClassName.'.class.php');
+		global $gfwww, $gfcommon;
+		require_once $gfwww.'search/include/renderers/'.$this->rendererClassName.'.class.php';
 	}
 	
 	function & getSearchRenderer($words, $offset, $exact) {

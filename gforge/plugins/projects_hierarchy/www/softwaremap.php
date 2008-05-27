@@ -13,9 +13,9 @@
 
 session_start();
 require_once('../../env.inc.php');    
-require_once('pre.php');    
-require_once('www/include/trove.php');
-require_once('www/docman/include/doc_utils.php');
+require_once $gfwww.'include/pre.php';    
+require_once $gfwww.'include/trove.php';
+require_once $gfwww.'docman/include/doc_utils.php';
 
 if (!$sys_use_trove) {
 	exit_disabled();

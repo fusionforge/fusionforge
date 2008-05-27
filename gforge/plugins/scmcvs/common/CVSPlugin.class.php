@@ -13,7 +13,7 @@ class CVSPlugin extends SCM {
 
 		$this->hooks[] = 'scm_plugin';
 
-		require_once('plugins/scmcvs/config.php') ;
+		require_once $gfconfig.'plugins/scmcvs/config.php' ;
 
 		$this->default_cvs_server = $default_cvs_server ;
 		if ($cvs_root) {

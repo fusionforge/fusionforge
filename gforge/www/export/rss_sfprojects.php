@@ -13,8 +13,8 @@
   */
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('rss_utils.inc');
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'export/rss_utils.inc';
 
 $limit = getIntFromRequest('limit', 10);
 if ($limit > 100) $limit = 100;

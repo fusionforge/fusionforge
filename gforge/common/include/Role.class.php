@@ -26,7 +26,7 @@
  */
 
 
-require_once ('common/include/rbac_texts.php') ;
+require_once $gfcommon.'include/rbac_texts.php' ;
 
 class Role extends Error {
 

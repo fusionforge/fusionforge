@@ -24,7 +24,7 @@
  */
 
 require_once('../env.inc.php');
-require_once('pre.php');
+require_once $gfwww.'include/pre.php';
 
 session_require(array('isloggedin'=>1));
 

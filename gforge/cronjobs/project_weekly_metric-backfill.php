@@ -22,7 +22,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
-require ('squal_pre.php');
+require $gfwww.'include/squal_pre.php';
 
 for ($i=0; $i<510; $i++) {
 

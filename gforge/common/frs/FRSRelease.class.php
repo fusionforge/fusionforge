@@ -25,8 +25,8 @@
  */
 
 
-require_once('common/include/Error.class.php');
-require_once('common/frs/FRSFile.class.php');
+require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'frs/FRSFile.class.php';
 
 /**
  *	  Factory method which creates a FRSRelease from an release id

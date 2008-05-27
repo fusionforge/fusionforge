@@ -25,9 +25,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
-require_once('www/include/squal_pre.php');
-require_once('common/tracker/ArtifactExtraField.class.php');
-require_once('common/tracker/ArtifactExtraFieldElement.class.php');
+require_once $gfwww.'include/squal_pre.php';
+require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
+require_once $gfcommon.'tracker/ArtifactExtraFieldElement.class.php';
 
 // First of all, try to create the "alias" field if it doesn't exist
 $res = db_query("SELECT alias FROM artifact_extra_field_list");

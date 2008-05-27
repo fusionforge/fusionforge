@@ -16,7 +16,7 @@
 	Total rewrite in OO and GForge coding guidelines 12/2002 by Tim Perdue
 */
 
-require_once('note.php');
+require_once $gfwww.'include/note.php';
 
 $related_artifact_id = getIntFromRequest('related_artifact_id');
 $related_artifact_summary = getStringFromRequest('related_artifact_summary');

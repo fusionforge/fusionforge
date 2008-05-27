@@ -20,34 +20,34 @@ if (!isset($no_gz_buffer) || !$no_gz_buffer) {
     ob_start("ob_gzhandler");
 }
 
-require_once('local.inc');
-require('common/include/constants.php');
-require_once('common/include/database-'.$sys_database_type.'.php');
-require_once('common/include/session.php');
-require_once('common/include/Error.class.php');
-require_once('common/include/User.class.php');
-require_once('common/include/Permission.class.php');
-require_once('common/include/utils.php');
-require_once('common/include/Group.class.php');
-require_once('common/include/escapingUtils.php');
-require_once('common/include/gettext.php');
+require $gfcgfile;
+require $gfcommon.'include/constants.php';
+require_once $gfcommon.'include/database-'.$sys_database_type.'.php';
+require_once $gfcommon.'include/session.php';
+require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/User.class.php';
+require_once $gfcommon.'include/Permission.class.php';
+require_once $gfcommon.'include/utils.php';
+require_once $gfcommon.'include/Group.class.php';
+require_once $gfcommon.'include/escapingUtils.php';
+require_once $gfcommon.'include/gettext.php';
 
 // Plugins subsystem
-require_once('common/include/Plugin.class.php') ;
-require_once('common/include/PluginManager.class.php') ;
+require_once $gfcommon.'include/Plugin.class.php' ;
+require_once $gfcommon.'include/PluginManager.class.php' ;
 
 //plain text version of exit_error();
-require_once('squal_exit.php');
+require_once $gfwww.'include/squal_exit.php';
 
 //needed for logging / logo
 //require_once('browser.php');
 
 //system library
-require_once('common/include/System.class.php');
+require_once $gfcommon.'include/System.class.php';
 if (!$sys_account_manager_type) {
         $sys_account_manager_type='UNIX';
 }
-require_once('common/include/system/'.$sys_account_manager_type.'.class.php');
+require_once $gfcommon.'include/system/'.$sys_account_manager_type.'.class.php';
 $SYS=new $sys_account_manager_type();
 
 

@@ -25,7 +25,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once('common/include/scm.php');
+require_once $gfcommon.'include/scm.php';
 
 class SCM extends Plugin {
 	/**

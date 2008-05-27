@@ -32,8 +32,8 @@
 	Total rewrite in OO and GForge coding guidelines 12/2002 by Tim Perdue
 */
 
-require_once('common/include/Error.class.php');
-require_once('common/pm/ProjectTask.class.php');
+require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'pm/ProjectTask.class.php';
 
 class ProjectTaskFactory extends Error {
 

@@ -44,8 +44,8 @@ $wgGroupPermissions['*'    ]['createaccount']   = false;
 //$wgGroupPermissions['*'    ]['read']            = false;
 $wgGroupPermissions['*'    ]['edit']            = false;
 
-require_once( 'AuthPlugin.php' );
-require_once( "includes/GForgePre.php" );
+require_once  'AuthPlugin.php' ;
+require_once  "includes/GForgePre.php" ;
 
 function GForgeAuthenticationHook() {
 	global $wgUser;

@@ -12,7 +12,7 @@
  */
 
 require_once('env.inc.php');
-require_once('pre.php');
+require_once $gfwww.'include/pre.php';
 
 global $sys_show_source;
 if (!$sys_show_source) {

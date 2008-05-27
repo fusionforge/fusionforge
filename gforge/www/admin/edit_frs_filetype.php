@@ -28,6 +28,6 @@ $unit        = 'file_type';
 $table       = 'frs_filetype';
 $primary_key = 'type_id';
 
-include_once('admin_table.php');
+include_once $gfwww.'admin/admin_table.php';
 
 ?>

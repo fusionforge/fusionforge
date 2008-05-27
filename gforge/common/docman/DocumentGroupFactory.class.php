@@ -29,8 +29,8 @@
 	Document Groups
 */
 
-require_once('common/include/Error.class.php');
-require_once('common/forum/ForumMessage.class.php');
+require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'forum/ForumMessage.class.php';
 
 class DocumentGroupFactory extends Error {
 	/**

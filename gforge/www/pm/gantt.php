@@ -6,8 +6,8 @@ if (!file_exists($sys_path_to_jpgraph.'/jpgraph.php')) {
 
 require_once($sys_path_to_jpgraph.'/jpgraph.php');
 require_once($sys_path_to_jpgraph.'/jpgraph_gantt.php');
-require_once('common/pm/ProjectTaskFactory.class.php');
-require_once('www/include/unicode.php');
+require_once $gfcommon.'pm/ProjectTaskFactory.class.php';
+require_once $gfwww.'include/unicode.php';
 
 $ptf = new ProjectTaskFactory($pg);
 if (!$ptf || !is_object($ptf)) {

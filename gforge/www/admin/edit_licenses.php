@@ -29,6 +29,6 @@ $unit        = 'license';
 $table       = 'licenses';
 $primary_key = 'license_id';
 
-include_once('admin_table.php');
+include_once $gfwww.'admin/admin_table.php';
 
 ?>

@@ -25,8 +25,8 @@
  */
 
 
-require_once('pre.php');
-require_once('www/admin/admin_utils.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'admin/admin_utils.php';
 
 
 $_quota_block_size = 1024;

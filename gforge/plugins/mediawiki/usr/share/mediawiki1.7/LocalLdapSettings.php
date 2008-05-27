@@ -1,5 +1,5 @@
 <?php
-require_once( 'LdapAuthentication.php' );
+require_once  'LdapAuthentication.php' ;
 $wgAuth = new LdapAuthenticationPlugin();
 
 //The names of one or more domains you wish to use

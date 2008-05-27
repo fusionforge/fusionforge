@@ -1,5 +1,5 @@
 <?php
-include_once 'includes/init.php';
+include_once $gfplugins.'webcalendar/www/includes/init.php';
 
 if ( empty ( $login) || $login == "__public__" ) {
   // do not allow public access

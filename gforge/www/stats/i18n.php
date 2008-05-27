@@ -11,8 +11,8 @@
   *
   */
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('site_stats_utils.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'stats/site_stats_utils.php';
 
 // require you to be a member of the sfstats group
 session_require( array('group'=>$sys_stats_group) );

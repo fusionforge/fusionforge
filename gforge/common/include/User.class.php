@@ -38,7 +38,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once('www/include/vote_function.php');
+require_once $gfwww.'include/vote_function.php';
 $USER_OBJ=array();
 
 /**

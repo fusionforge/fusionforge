@@ -9,11 +9,11 @@
  */
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('../mail/mail_utils.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'mail/../mail/mail_utils.php';
 
-require_once('common/mail/MailingList.class.php');
-require_once('common/mail/MailingListFactory.class.php');
+require_once $gfcommon.'mail/MailingList.class.php';
+require_once $gfcommon.'mail/MailingListFactory.class.php';
 
 $group_id = getIntFromGet('group_id');
 

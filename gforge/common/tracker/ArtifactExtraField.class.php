@@ -22,7 +22,7 @@
  * along with GForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
-require_once('common/include/Error.class.php');
+require_once $gfcommon.'include/Error.class.php';
 
 define('ARTIFACT_EXTRAFIELD_FILTER_INT','1,2,3,5,7');
 define('ARTIFACT_EXTRAFIELDTYPE_SELECT',1);

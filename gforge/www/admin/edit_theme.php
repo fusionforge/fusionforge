@@ -28,6 +28,6 @@ $unit        = 'theme';
 $table       = 'themes';
 $primary_key = 'theme_id';
 
-include_once('admin_table.php');
+include_once $gfwww.'admin/admin_table.php';
 
 ?>

@@ -12,7 +12,7 @@
 $no_gz_buffer=true;
 
 require_once('env.inc.php');
-require_once('pre.php');
+require_once $gfwww.'include/pre.php';
 
 // Get current information
 $group_id=getIntFromGet('group_id');

@@ -26,11 +26,11 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once ('squal_pre.php');
-require_once ('common/include/Group.class.php');
-require_once ('common/include/MailParser.class.php');
-require_once ('common/forum/Forum.class.php');
-require_once ('common/forum/ForumMessage.class.php');
+require_once $gfwww.'include/squal_pre.php';
+require_once $gfcommon.'include/Group.class.php';
+require_once $gfcommon.'include/MailParser.class.php';
+require_once $gfcommon.'forum/Forum.class.php';
+require_once $gfcommon.'forum/ForumMessage.class.php';
 
 class ForumGateway extends Error {
 	/*

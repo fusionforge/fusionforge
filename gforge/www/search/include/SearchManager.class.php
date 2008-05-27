@@ -9,16 +9,16 @@
  * @version $Id$
  */
 
-require_once('www/search/include/engines/GroupSearchEngine.class.php');
-require_once('www/search/include/engines/DocsGroupSearchEngine.class.php');
-require_once('www/search/include/engines/ForumsGroupSearchEngine.class.php');
-require_once('www/search/include/engines/FrsGroupSearchEngine.class.php');
-require_once('www/search/include/engines/NewsGroupSearchEngine.class.php');
-require_once('www/search/include/engines/TasksGroupSearchEngine.class.php');
-require_once('www/search/include/engines/TrackersGroupSearchEngine.class.php');
+require_once $gfwww.'search/include/engines/GroupSearchEngine.class.php';
+require_once $gfwww.'search/include/engines/DocsGroupSearchEngine.class.php';
+require_once $gfwww.'search/include/engines/ForumsGroupSearchEngine.class.php';
+require_once $gfwww.'search/include/engines/FrsGroupSearchEngine.class.php';
+require_once $gfwww.'search/include/engines/NewsGroupSearchEngine.class.php';
+require_once $gfwww.'search/include/engines/TasksGroupSearchEngine.class.php';
+require_once $gfwww.'search/include/engines/TrackersGroupSearchEngine.class.php';
 
-require_once('www/search/include/engines/ArtifactSearchEngine.class.php');
-require_once('www/search/include/engines/ForumSearchEngine.class.php');
+require_once $gfwww.'search/include/engines/ArtifactSearchEngine.class.php';
+require_once $gfwww.'search/include/engines/ForumSearchEngine.class.php';
 
 function & getSearchManager() {
 	if(!isset($GLOBALS['OBJ_SEARCH_MANAGER'])) {

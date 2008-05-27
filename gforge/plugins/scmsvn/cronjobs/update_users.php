@@ -13,8 +13,8 @@
  * @version   $Id
  */
 
-require ('squal_pre.php');
-require_once('common/include/cron_utils.php');
+require $gfwww.'include/squal_pre.php';
+require_once $gfcommon.'include/cron_utils.php';
 
 //	Where is the SVN repository?
 $svn=$svndir_prefix;

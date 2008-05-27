@@ -13,7 +13,7 @@ if (is_file($sys_localinc)) {
 	}
 }
 // database abstraction
-require_once('common/include/database.php');
+require_once $gfcommon.'include/database.php';
 
 db_connect();
 

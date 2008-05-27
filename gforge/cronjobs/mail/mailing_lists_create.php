@@ -7,8 +7,8 @@
 //	The /var/lib/gforge/dumps/mailman-aliases file will then be read by the mailaliases.php file
 //
 
-require ('squal_pre.php');
-require ('common/include/cron_utils.php');
+require $gfwww.'include/squal_pre.php';
+require $gfcommon.'include/cron_utils.php';
 
 $err = '';
 

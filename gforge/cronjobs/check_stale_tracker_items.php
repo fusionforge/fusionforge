@@ -30,8 +30,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
-require ('squal_pre.php');
-require ('common/include/cron_utils.php');
+require $gfwww.'include/squal_pre.php';
+require $gfcommon.'include/cron_utils.php';
 
 if ($sys_database_type == 'mysql') {
 	$sql = 'UPDATE artifact NATURAL JOIN artifact_group_list SET status_id = 2

@@ -1,5 +1,5 @@
 <?php 
-require_once('www/include/BBCodeSupport.class.php');
+require_once $gfwww.'include/BBCodeSupport.class.php';
 
 	
 class BBCodeSupportHtml extends BBCodeSupport {

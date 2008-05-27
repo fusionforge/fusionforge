@@ -26,12 +26,12 @@
  */
 
 require_once('../env.inc.php');
-require_once('pre.php');
+require_once $gfwww.'include/pre.php';
 require_once($sys_path_to_jpgraph.'/jpgraph.php');
 require_once($sys_path_to_jpgraph.'/jpgraph_pie.php');
 require_once($sys_path_to_jpgraph.'/jpgraph_pie3d.php');
-require_once('common/reporting/ReportSiteTime.class.php');
-require_once('common/reporting/report_utils.php');
+require_once $gfcommon.'reporting/ReportSiteTime.class.php';
+require_once $gfcommon.'reporting/report_utils.php';
 
 session_require( array('group'=>$sys_stats_group) );
 

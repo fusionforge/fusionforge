@@ -16,7 +16,7 @@
 	Total rewrite in OO and GForge coding guidelines 12/2002 by Tim Perdue
 */
 
-require_once('common/pm/ProjectGroup.class.php');
+require_once $gfcommon.'pm/ProjectGroup.class.php';
 
 function pm_header($params) {
 	// XXX ogi: What to do with these?

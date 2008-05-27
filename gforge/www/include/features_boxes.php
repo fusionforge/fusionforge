@@ -11,7 +11,7 @@
 
 //require_once('../env.inc.php');
 //require_once('pre.php');
-require_once('common/include/GForge.class.php');
+require_once $gfcommon.'include/GForge.class.php';
 
 function show_features_boxes() {
 	GLOBAL $HTML,$sys_use_ratings;

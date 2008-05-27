@@ -12,7 +12,7 @@
  * @author		Drew Streib <dtype@valinux.com>
  */
 
-require_once('vote_function.php');
+require_once $gfwww.'include/vote_function.php';
 
 $HTML->header(array('title'=>_('Developer Profile')));
 

@@ -18,11 +18,11 @@
  * 		Frederico Caldeira Knabben (fredck@fckeditor.net)
  */
 
-include('config.php') ;
-include('util.php') ;
-include('io.php') ;
-include('basexml.php') ;
-include('commands.php') ;
+include $gfplugins.'fckeditor/www/editor/filemanager/browser/default/connectors/php/config.php' ;
+include $gfplugins.'fckeditor/www/editor/filemanager/browser/default/connectors/php/util.php' ;
+include $gfplugins.'fckeditor/www/editor/filemanager/browser/default/connectors/php/io.php' ;
+include $gfplugins.'fckeditor/www/editor/filemanager/browser/default/connectors/php/basexml.php' ;
+include $gfplugins.'fckeditor/www/editor/filemanager/browser/default/connectors/php/commands.php' ;
 
 if ( !$Config['Enabled'] )
 	SendError( 1, 'This connector is disabled. Please check the "editor/filemanager/browser/default/connectors/php/config.php" file' ) ;

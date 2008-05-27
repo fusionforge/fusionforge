@@ -26,11 +26,11 @@
  */
 
 require_once('../env.inc.php');
-require_once('pre.php');
+require_once $gfwww.'include/pre.php';
 require_once($sys_path_to_jpgraph.'/jpgraph.php');
 require_once($sys_path_to_jpgraph.'/jpgraph_line.php');
-require_once('common/reporting/ReportProjectAct.class.php');
-require_once('www/include/unicode.php');
+require_once $gfcommon.'reporting/ReportProjectAct.class.php';
+require_once $gfwww.'include/unicode.php';
 
 $area = getStringFromRequest('area');
 $SPAN = getStringFromRequest('SPAN');

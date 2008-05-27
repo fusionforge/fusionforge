@@ -14,12 +14,12 @@
 $no_gz_buffer=true;
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('common/tracker/Artifact.class.php');
-require_once('common/tracker/ArtifactFile.class.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'tracker/Artifact.class.php';
+require_once $gfcommon.'tracker/ArtifactFile.class.php';
 //require_once('www/tracker/include/ArtifactFileHtml.class.php');
-require_once('common/tracker/ArtifactType.class.php');
-require_once('common/tracker/ArtifactType.class.php');
+require_once $gfcommon.'tracker/ArtifactType.class.php';
+require_once $gfcommon.'tracker/ArtifactType.class.php';
 
 if (!session_loggedin()) {
 	exit_not_logged_in();	

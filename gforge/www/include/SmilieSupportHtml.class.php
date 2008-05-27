@@ -1,5 +1,5 @@
 <?php
-require_once('www/include/SmilieSupport.class.php');
+require_once $gfwww.'include/SmilieSupport.class.php';
 
 
 

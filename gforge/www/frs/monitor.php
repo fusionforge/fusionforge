@@ -9,9 +9,9 @@
  */
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('common/frs/FRSPackage.class.php');
-require_once('www/frs/include/frs_utils.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'frs/FRSPackage.class.php';
+require_once $gfwww.'frs/include/frs_utils.php';
 
 
 if (session_loggedin()) {

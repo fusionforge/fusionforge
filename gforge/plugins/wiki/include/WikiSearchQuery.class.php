@@ -9,7 +9,7 @@
  * @version $Id: NewsSearchQuery.class,v 1.2 2005/01/28 20:36:44 ruben Exp $
  */
 
-require_once('common/search/SearchQuery.class.php');
+require_once $gfcommon.'search/SearchQuery.class.php';
 
 class WikiSearchQuery extends SearchQuery {
 	

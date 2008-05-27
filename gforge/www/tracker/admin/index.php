@@ -7,17 +7,17 @@
 // $Id$
 
 require_once('../../env.inc.php');
-require_once('pre.php');
-require_once('common/tracker/Artifact.class.php');
-require_once('common/tracker/ArtifactFile.class.php');
-require_once('www/tracker/include/ArtifactFileHtml.class.php');
-require_once('common/tracker/ArtifactType.class.php');
-require_once('common/tracker/ArtifactTypeFactory.class.php');
-require_once('www/tracker/include/ArtifactTypeHtml.class.php');
-require_once('www/tracker/include/ArtifactHtml.class.php');
-require_once('common/tracker/ArtifactCanned.class.php');
-require_once('common/tracker/ArtifactExtraField.class.php');
-require_once('common/tracker/ArtifactExtraFieldElement.class.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'tracker/Artifact.class.php';
+require_once $gfcommon.'tracker/ArtifactFile.class.php';
+require_once $gfwww.'tracker/include/ArtifactFileHtml.class.php';
+require_once $gfcommon.'tracker/ArtifactType.class.php';
+require_once $gfcommon.'tracker/ArtifactTypeFactory.class.php';
+require_once $gfwww.'tracker/include/ArtifactTypeHtml.class.php';
+require_once $gfwww.'tracker/include/ArtifactHtml.class.php';
+require_once $gfcommon.'tracker/ArtifactCanned.class.php';
+require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
+require_once $gfcommon.'tracker/ArtifactExtraFieldElement.class.php';
 
 $group_id = getIntFromRequest('group_id');
 $atid = getIntFromRequest('atid');
@@ -57,34 +57,34 @@ if ($group_id && $atid) {
 	}
 
 	if (getStringFromRequest('post_changes')) {
-		include('updates.php');
+		include $gfwww.'tracker/admin/updates.php';
 	} 
 //
 //		FORMS TO ADD/UPDATE DATABASE
 //
 	if (getStringFromRequest('add_extrafield')) {  
 
-		include ('form-addextrafield.php');
+		include $gfwww.'tracker/admin/form-addextrafield.php';
 
 	} elseif (getStringFromRequest('add_opt')) {
 
-		include ('form-addextrafieldoption.php');
+		include $gfwww.'tracker/admin/form-addextrafieldoption.php';
 
 	} elseif (getStringFromRequest('copy_opt')) {
 
-		include ('form-extrafieldcopy.php');
+		include $gfwww.'tracker/admin/form-extrafieldcopy.php';
 
 	} elseif (getStringFromRequest('add_canned')) {
 
-		include ('form-addcanned.php');
+		include $gfwww.'tracker/admin/form-addcanned.php';
 
 	} elseif (getStringFromRequest('clone_tracker')) {
 
-		include ('form-clonetracker.php');
+		include $gfwww.'tracker/admin/form-clonetracker.php';
 
 	} elseif (getStringFromRequest('uploadtemplate')) {
 
-		include ('form-uploadtemplate.php');
+		include $gfwww.'tracker/admin/form-uploadtemplate.php';
 
 	} elseif (getStringFromRequest('downloadtemplate')) {
 
@@ -95,35 +95,35 @@ if ($group_id && $atid) {
 		db_query("UPDATE artifact_group_list SET custom_renderer='' WHERE group_artifact_id='".$ath->getID()."'");
 		echo db_error();
 		$feedback .= 'Renderer Deleted';
-		include ('form-addextrafield.php');
+		include $gfwww.'tracker/admin/form-addextrafield.php';
 
 	} elseif (getStringFromRequest('update_canned')) {
 
-		include ('form-updatecanned.php');
+		include $gfwww.'tracker/admin/form-updatecanned.php';
 
 	} elseif (getStringFromRequest('update_box')) {
 
-		include ('form-updateextrafield.php');
+		include $gfwww.'tracker/admin/form-updateextrafield.php';
 
 	} elseif (getStringFromRequest('update_opt')) {
 
-		include ('form-updateextrafieldelement.php');
+		include $gfwww.'tracker/admin/form-updateextrafieldelement.php';
 
 	} elseif (getStringFromRequest('delete')) {
 
-		include ('form-deletetracker.php');
+		include $gfwww.'tracker/admin/form-deletetracker.php';
 
 	} elseif (getStringFromRequest('deleteextrafield')) {
 
-		include ('form-deleteextrafield.php');
+		include $gfwww.'tracker/admin/form-deleteextrafield.php';
 
 	} elseif (getStringFromRequest('update_type')) {
 
-		include ('form-updatetracker.php');
+		include $gfwww.'tracker/admin/form-updatetracker.php';
 
 	} else {
 
-		include ('tracker.php');
+		include $gfwww.'tracker/admin/tracker.php';
 
 	}
 
@@ -132,7 +132,7 @@ if ($group_id && $atid) {
 		$feedback .= _('Successfully Deleted.');
 	}
 
-	include ('ind.php');
+	include $gfwww.'tracker/admin/ind.php';
 
 } else {
 

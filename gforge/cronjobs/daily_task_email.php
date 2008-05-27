@@ -24,9 +24,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
-require_once('squal_pre.php');
-require_once('common/pm/ProjectTasksForUser.class.php');
-require_once('common/include/cron_utils.php');
+require_once $gfwww.'include/squal_pre.php';
+require_once $gfcommon.'pm/ProjectTasksForUser.class.php';
+require_once $gfcommon.'include/cron_utils.php';
 
 //
 //  Set up this script to run as the site admin

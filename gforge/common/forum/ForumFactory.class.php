@@ -35,8 +35,8 @@
 */
 
 
-require_once('common/include/Error.class.php');
-require_once('common/forum/Forum.class.php');
+require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'forum/Forum.class.php';
 
 class ForumFactory extends Error {
 

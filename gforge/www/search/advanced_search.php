@@ -11,9 +11,9 @@
  */
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('common/include/escapingUtils.php');
-require_once('include/renderers/AdvancedSearchHtmlSearchRenderer.class.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/escapingUtils.php';
+require_once $gfwww.'search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php';
 
 $group_id = getIntFromRequest('group_id');
 $offset = getIntFromRequest('offset');

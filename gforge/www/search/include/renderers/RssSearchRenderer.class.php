@@ -11,7 +11,7 @@
  * @version $Id$
  */
 
-require_once('www/search/include/renderers/SearchRenderer.class.php');
+require_once $gfwww.'search/include/renderers/SearchRenderer.class.php';
 
 class RssSearchRenderer extends SearchRenderer {
 	
@@ -47,7 +47,7 @@ class RssSearchRenderer extends SearchRenderer {
 			echo '<channel></channel>';
 		} else {		
 			$searchQuery->executeQuery();
-			include_once('www/export/rss_utils.inc');
+			include_once $GLOBALS['gfwww'].'export/rss_utils.inc';
 	
 			rss_dump_project_result_set(
 				$searchQuery->getResult(),

@@ -27,8 +27,8 @@
 
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('www/frs/include/frs_utils.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'frs/include/frs_utils.php';
 
 $group_id = getIntFromRequest('group_id');
 $release_id = getIntFromRequest('release_id');

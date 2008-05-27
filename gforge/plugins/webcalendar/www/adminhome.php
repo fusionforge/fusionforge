@@ -9,7 +9,7 @@
 	Security:
 		Users will see different options available on this page.
  */
-include_once 'includes/init.php';
+include_once $gfplugins.'webcalendar/www/includes/init.php';
 
 $COLUMNS = 3;
 

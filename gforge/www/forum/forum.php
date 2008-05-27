@@ -19,14 +19,14 @@
 */
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('www/forum/include/ForumHTML.class.php');
-require_once('common/forum/Forum.class.php');
-require_once('common/forum/ForumFactory.class.php');
-require_once('common/forum/ForumMessageFactory.class.php');
-require_once('common/forum/ForumMessage.class.php');
-require_once('www/forum/include/AttachManager.class.php'); //attachent manager
-require_once('common/include/TextSanitizer.class.php'); // to make the HTML input by the user safe to store
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'forum/include/ForumHTML.class.php';
+require_once $gfcommon.'forum/Forum.class.php';
+require_once $gfcommon.'forum/ForumFactory.class.php';
+require_once $gfcommon.'forum/ForumMessageFactory.class.php';
+require_once $gfcommon.'forum/ForumMessage.class.php';
+require_once $gfwww.'forum/include/AttachManager.class.php'; //attachent manager
+require_once $gfcommon.'include/TextSanitizer.class.php'; // to make the HTML input by the user safe to store
 
 $forum_id = getIntFromRequest('forum_id');
 $style = getStringFromRequest('style');

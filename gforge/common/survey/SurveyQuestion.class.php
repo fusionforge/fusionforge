@@ -28,7 +28,7 @@
 	By Sung Kim 2004/2/13
 */
 
-require_once('common/include/Error.class.php');
+require_once $gfcommon.'include/Error.class.php';
 
 class SurveyQuestion extends Error {
 

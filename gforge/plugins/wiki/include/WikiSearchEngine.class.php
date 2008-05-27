@@ -9,7 +9,7 @@
  * @version $Id: ExternalSearchEngine.class 3933 2005-02-19 13:04:45Z gsmet $
  */
 
-require_once('www/search/include/engines/GroupSearchEngine.class.php');
+require_once $GLOBALS['gfwww'].'search/include/engines/GroupSearchEngine.class.php';
 
 class WikiSearchEngine extends GroupSearchEngine {
 	

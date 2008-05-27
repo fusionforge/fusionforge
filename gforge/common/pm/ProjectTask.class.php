@@ -33,8 +33,8 @@
 */
 
 
-require_once('common/include/Error.class.php');
-require_once('common/include/Validator.class.php');
+require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/Validator.class.php';
 
 function &projecttask_get_object($project_task_id,$data=false) {
 		global $PROJECTTASK_OBJ;

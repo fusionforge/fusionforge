@@ -25,8 +25,8 @@
  * along with GForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-require_once('common/include/account.php');
-require_once('common/include/system/UNIX.class.php');
+require_once $gfcommon.'include/account.php';
+require_once $gfcommon.'include/system/UNIX.class.php';
 
 class LDAP extends UNIX {
 	/**

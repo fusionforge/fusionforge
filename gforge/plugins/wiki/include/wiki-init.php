@@ -19,7 +19,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-require_once ('WikiPlugin.class.php') ;
+require_once  'WikiPlugin.class.php' ;
 
 define('SEARCH__TYPE_IS_WIKI', 'wiki');
 

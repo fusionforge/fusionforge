@@ -25,9 +25,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-include "../env.inc.php";
-include "www/include/pre.php";
-include "www/export/rss_utils.inc";
+require_once '../env.inc.php';
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'export/rss_utils.inc';
 
 $group_id = getIntFromRequest('group_id');
 $limit = getIntFromRequest('limit', 10);

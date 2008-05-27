@@ -23,7 +23,7 @@
 /**
  * Base error class
  */
-require_once 'common/include/Error.class.php';
+require_once $gfcommon.'include/Error.class.php';
 
 /**
  * Time Entry model object
@@ -141,7 +141,7 @@ class TimeEntry extends Error {
         ob_start();
 
         // Now pull in the procedural code to handle the processing.
-        require_once 'www/reporting/timeadd.php';
+        require_once $GLOBALS['gfwww'].'reporting/timeadd.php';
         $tmpOutput = ob_get_contents();
 
         // Now discard any output.

@@ -1,11 +1,12 @@
 <?php
 
-ini_set("memory_limit", "64M");
-
 // Disable compression, seems needed to get all the messages.
 $no_gz_buffer=true;
 
-require_once('pre.php');
+require_once '../../../www/env.inc.php';
+require_once $gfwww.'include/pre.php';
+
+ini_set("memory_limit", "64M");
 
 if (!$group_id || !$project) {
 	exit_error("Invalid Project","Invalid Project");
@@ -70,7 +71,7 @@ if (!$group_id || !$project) {
 	define('ERROR_REPORTING', E_ERROR);
 	
 	// Load the default configuration.
-	include "index.php";
+	include dirname(__FILE__).'/index.php';
 
 	// Override the default configuration for VARIABLES after index.php:
 	// E.g. Use another DB:
@@ -98,6 +99,6 @@ if (!$group_id || !$project) {
 	}
 
 	// Start the wiki
-	include "lib/main.php";
+	include dirname(__FILE__).'/lib/main.php';
 }
 ?>

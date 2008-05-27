@@ -23,7 +23,7 @@ exit;
 
 */
 
-require ('squal_pre.php');
+require $gfwww.'include/squal_pre.php';
 
 echo $REMOTE_ADDR;
 

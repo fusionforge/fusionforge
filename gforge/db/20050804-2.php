@@ -25,7 +25,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
  
-require_once('www/include/squal_pre.php');
+require_once $gfwww.'include/squal_pre.php';
 
 $res = db_query("SELECT * FROM doc_data");
 if (!$res) {		// error

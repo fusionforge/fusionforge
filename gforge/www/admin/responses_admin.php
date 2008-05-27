@@ -26,11 +26,11 @@
  */
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('common/include/account.php');
-require_once('www/include/canned_responses.php');
-require_once('www/admin/admin_utils.php');
-require_once('www/project/admin/project_admin_utils.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/account.php';
+require_once $gfwww.'include/canned_responses.php';
+require_once $gfwww.'admin/admin_utils.php';
+require_once $gfwww.'project/admin/project_admin_utils.php';
 
 site_admin_header(array('title'=>_('Site Admin: Edit Rejection Responses')));
 

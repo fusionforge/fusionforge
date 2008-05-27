@@ -29,7 +29,7 @@
 //	By Daniel A. P�rez 2005
 
 require_once('../env.inc.php');
-require_once('pre.php');
+require_once $gfwww.'include/pre.php';
 
 $group_id = getIntFromRequest('group_id'); //get the group id
 echo '<script>';

@@ -26,9 +26,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require ('squal_pre.php');
-require ('common/include/cron_utils.php');
-require ('common/reporting/ReportSetup.class.php');
+require $gfwww.'include/squal_pre.php';
+require $gfcommon.'include/cron_utils.php';
+require $gfcommon.'reporting/ReportSetup.class.php';
 
 $err='';
 

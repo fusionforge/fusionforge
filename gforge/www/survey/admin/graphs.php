@@ -18,7 +18,7 @@
  */ 
 
 require_once('../../env.inc.php');
-require_once('pre.php');
+require_once $gfwww.'include/pre.php';
 
 // Check if we have jpgraph
 if (!file_exists($sys_path_to_jpgraph.'/jpgraph.php')) {
@@ -27,11 +27,11 @@ if (!file_exists($sys_path_to_jpgraph.'/jpgraph.php')) {
 }
 
 // Read jPGraph libraries. Make sure the $sys_path_to_jpgraph is correct in local.inc
-require_once($sys_path_to_jpgraph.'/jpgraph.php');
-require_once($sys_path_to_jpgraph.'/jpgraph_line.php');
-require_once($sys_path_to_jpgraph.'/jpgraph_bar.php');
-require_once($sys_path_to_jpgraph.'/jpgraph_pie.php');
-require_once($sys_path_to_jpgraph.'/jpgraph_pie3d.php');
+require_once $sys_path_to_jpgraph.'/jpgraph.php';
+require_once $sys_path_to_jpgraph.'/jpgraph_line.php';
+require_once $sys_path_to_jpgraph.'/jpgraph_bar.php';
+require_once $sys_path_to_jpgraph.'/jpgraph_pie.php';
+require_once $sys_path_to_jpgraph.'/jpgraph_pie3d.php';
 
 $type = getStringFromRequest('type');
 $legend = getStringFromRequest('legend');

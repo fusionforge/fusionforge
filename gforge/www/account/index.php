@@ -24,8 +24,8 @@
  */
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('common/include/timezones.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/timezones.php';
 
 if (!session_loggedin()) {
 	exit_not_logged_in();

@@ -12,8 +12,8 @@
 	By Sung Kim, GForge, 02/2004
 */
 
-require_once('pre.php');
-require_once('note.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'include/note.php';
 
 /**
  * Survey HTML related functions

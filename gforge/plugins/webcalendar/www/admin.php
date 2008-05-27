@@ -1,5 +1,5 @@
 <?php
-include_once 'includes/init.php';
+include_once $gfplugins.'webcalendar/www/includes/init.php';
 
 function print_color_sample ( $color ) {
   echo "<table style=\"border-width:0px;\"><tr><td style=\"background-color:$color;\">&nbsp;&nbsp;</td></tr></table>";

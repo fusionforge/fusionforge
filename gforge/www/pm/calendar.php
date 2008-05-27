@@ -13,7 +13,7 @@
  */
 
 require_once('../env.inc.php');
-require_once('pre.php');
+require_once $gfwww.'include/pre.php';
 
 $group_id = getIntFromRequest('group_id');
 $group_project_id = getIntFromRequest('group_project_id');
@@ -75,8 +75,8 @@ $months = array(1 => _('January'), _('February'), _('March'), _('April'), _('May
 		_('July'), _('August'), _('September'), _('October'), _('November'), _('December'));
 
 if ($group_id && $group_project_id) {
-	require_once('common/pm/ProjectTaskFactory.class.php');
-	require_once('common/pm/ProjectGroup.class.php');
+	require_once $gfcommon.'pm/ProjectTaskFactory.class.php';
+	require_once $gfcommon.'pm/ProjectGroup.class.php';
 
 	$g =& group_get_object($group_id);
 	if (!$g || !is_object($g)) {

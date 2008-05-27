@@ -9,8 +9,8 @@
  * @version $Id$
  */
  
-require_once('www/search/include/renderers/HtmlGroupSearchRenderer.class.php');
-require_once('common/search/NewsSearchQuery.class.php');
+require_once $gfwww.'search/include/renderers/HtmlGroupSearchRenderer.class.php';
+require_once $gfcommon.'search/NewsSearchQuery.class.php';
 
 class NewsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	

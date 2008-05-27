@@ -10,8 +10,8 @@
  * @version $Id$
  */
 
-require_once ('www/search/include/SearchManager.class.php');
-require_once ('ExternalSearchEngine.class.php');
+require_once $gfwww.'search/include/SearchManager.class.php';
+require_once $gfplugins.'externalsearch/include/ExternalSearchEngine.class.php';
 
 class ExternalSearchPlugin extends Plugin {
 	function ExternalSearchPlugin() {
@@ -25,7 +25,7 @@ class ExternalSearchPlugin extends Plugin {
 	function CallHook($hookname, & $searchManager) {
 		switch($hookname) {
 			case 'search_engines':
-				require_once('plugins/externalsearch/config.php');
+				require_once $gfconfig.'plugins/externalsearch/config.php';
 				foreach($externalSearchEngines AS $name => $url) {
 					$type = SEARCH__TYPE_IS_EXTERNAL.'_'.$name;
 					$searchManager->addSearchEngine(

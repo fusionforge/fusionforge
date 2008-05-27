@@ -30,7 +30,7 @@
 
 
 require_once('../env.inc.php');
-require_once('pre.php');
+require_once $gfwww.'include/pre.php';
 
 if (getStringFromRequest('submit')) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {

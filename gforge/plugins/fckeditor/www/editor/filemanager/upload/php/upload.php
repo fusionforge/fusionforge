@@ -18,8 +18,8 @@
  * 		Frederico Caldeira Knabben (fredck@fckeditor.net)
  */
 
-require('config.php') ;
-require('util.php') ;
+require $gfplugins.'fckeditor/www/editor/filemanager/upload/php/config.php' ;
+require $gfplugins.'fckeditor/www/editor/filemanager/upload/php/util.php' ;
 
 // This is the function that sends the results of the uploading process.
 function SendResults( $errorNumber, $fileUrl = '', $fileName = '', $customMsg = '' )

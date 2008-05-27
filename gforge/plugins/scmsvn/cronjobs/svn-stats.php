@@ -20,9 +20,9 @@
 * along with GForge; if not, write to the Free Software
 * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
 */
-require_once ('squal_pre.php');
-require_once ('common/include/cron_utils.php');
-require_once ('plugins/scmsvn/config.php');
+require_once $gfwww.'include/squal_pre.php';
+require_once $gfcommon.'include/cron_utils.php';
+require_once $gfconfig.'plugins/scmsvn/config.php';
 
 $pluginname = "scmsvn" ;
 // This variable should probably be moved to this plugin's config.php

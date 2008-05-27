@@ -12,8 +12,8 @@
   */
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('vote_function.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'include/vote_function.php';
 
 $HTML->header(array("title"=>_('New File Releases')));
 

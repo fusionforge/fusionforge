@@ -9,10 +9,10 @@
   *
   */
 require_once('../../env.inc.php');
-require_once('pre.php');
-require_once('common/survey/SurveyQuestion.class.php');
-require_once('common/survey/SurveyQuestionFactory.class.php');
-require_once('www/survey/include/SurveyHTML.class.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'survey/SurveyQuestion.class.php';
+require_once $gfcommon.'survey/SurveyQuestionFactory.class.php';
+require_once $gfwww.'survey/include/SurveyHTML.class.php';
 
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');

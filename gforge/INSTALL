@@ -359,7 +359,7 @@ talk to the postgres database. Find a php-pgsql RPM or recompile
 php to have pgql support.
 
 If you're sure you have php-pgsql support, you can edit 
-common/include/database.php and remove the @ symbol from
+common/include/database-pgsql.php and remove the @ symbol from
 this line:
 
 	$conn = @pg_connect( 

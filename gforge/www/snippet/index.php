@@ -11,8 +11,8 @@
   *
   */
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('www/snippet/snippet_utils.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'snippet/snippet_utils.php';
 
 /**
  * create_snippet_hash() - A little utility function to reduce duplicated code in snippet_mainpage()

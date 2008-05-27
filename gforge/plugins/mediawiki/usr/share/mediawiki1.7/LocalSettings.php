@@ -19,7 +19,7 @@ if( defined( 'MW_INSTALL_PATH' ) ) {
 $path = array( $IP, "$IP/includes", "$IP/languages", "/usr/share/gforge", "/etc/gforge/" );
 set_include_path( implode( PATH_SEPARATOR, $path ) . PATH_SEPARATOR . get_include_path() );
 
-require_once( "includes/DefaultSettings.php" );
+require_once  "includes/DefaultSettings.php" ;
 
 # If PHP's memory limit is very low, some operations may fail.
 ini_set( 'memory_limit', '20M' );
@@ -137,7 +137,7 @@ if (is_file("/etc/mediawiki-extensions/extensions.php")) {
 }
 
 $wgShowIPinHeader=false;
-require_once( 'includes/GForgeAuthentication.php' );
+require_once $gfplugins.'mediawiki/usr/share/mediawiki1.7/includes/GForgeAuthentication.php';
 $wgAuth = new GForgeAuthenticationPlugin();
 # 'AutoAuthenticate': called to authenticate users on external/environmental means
 # $user: writes user object to this parameter

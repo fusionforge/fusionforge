@@ -24,13 +24,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
-require('local.inc');
-require_once('common/include/Error.class.php');
-require_once('common/include/database.php');
-require_once('common/docman/Document.class.php');
-require_once('common/docman/DocumentFactory.class.php');
-require_once('common/docman/DocumentGroup.class.php');
-require_once('common/docman/DocumentGroupFactory.class.php');
+require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'include/database.php';
+require_once $gfcommon.'docman/Document.class.php';
+require_once $gfcommon.'docman/DocumentFactory.class.php';
+require_once $gfcommon.'docman/DocumentGroup.class.php';
+require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
 
 
 

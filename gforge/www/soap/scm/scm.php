@@ -85,7 +85,7 @@ function getSCMData($session_ser, $group_id) {
 		
 		// Note: This is an ugly hack. We can't access SVN plugin object for this project
 		// directly. Currently this is being rewritten, but for now we must make this.
-		include("plugins/scmsvn/config.php");
+		include $gfconfig.'plugins/scmsvn/config.php';
 		$res["connection_string"] = "http".(($use_ssl) ? "s" : "")."://".$grp->getSCMBox()."/".$svn_root."/".$grp->getUnixName();
 	}
 	return $res;

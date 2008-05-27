@@ -1,6 +1,6 @@
 <?php
 /* $Id: admin_handler.php,v 1.7.4.4 2006/03/23 16:06:06 cknudsen Exp $ */
-include_once 'includes/init.php';
+include_once $gfplugins.'webcalendar/www/includes/init.php';
 
 $error = "";
 

@@ -22,7 +22,7 @@
  * along with GForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
-require_once('common/include/Error.class.php');
+require_once $gfcommon.'include/Error.class.php';
 
 define('ARTIFACT_QUERY_ASSIGNEE',1);
 define('ARTIFACT_QUERY_STATE',2);
@@ -33,7 +33,7 @@ define('ARTIFACT_QUERY_SORTORD',6);
 define('ARTIFACT_QUERY_OPENDATE',7);
 define('ARTIFACT_QUERY_CLOSEDATE',8);
 
-require_once('common/tracker/ArtifactType.class.php');
+require_once $gfcommon.'tracker/ArtifactType.class.php';
 
 class ArtifactQuery extends Error {
 	/** 

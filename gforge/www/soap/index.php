@@ -2,12 +2,13 @@
 
 $no_gz_buffer=true;
 // 0. Include GForge files for access to GForge system
-require_once('www/include/squal_pre.php');
-require_once('common/include/gettext.php');
+require_once '../env.inc.php';
+require_once $gfwww.'include/squal_pre.php';
+require_once $gfcommon.'include/gettext.php';
 
 $uri = 'http://'.$sys_default_domain;
 // 1. include client and server
-require_once('./nusoap.php');
+require_once $gfwww.'soap/nusoap.php';
 //$debug = true;
 // 2. instantiate server object
 $server = new soap_server();
@@ -78,39 +79,39 @@ $server->register(
 //
 //	Include Group Functions
 //
-require_once('www/soap/common/group.php');
+require_once $gfwww.'soap/common/group.php';
 
 //
 //	Include User Functions
 //
-require_once('www/soap/common/user.php');
+require_once $gfwww.'soap/common/user.php';
 
 //
 //	Include tracker & tracker query Functions
 //
-require_once('www/soap/tracker/tracker.php');
-require_once('www/soap/tracker/query.php');
+require_once $gfwww.'soap/tracker/tracker.php';
+require_once $gfwww.'soap/tracker/query.php';
 
 //
 //	Include Docman Functions
 //
-require_once('www/soap/docman/docman.php');
+require_once $gfwww.'soap/docman/docman.php';
 
 //
 //	Include task manager Functions
 //
-require_once('www/soap/pm/pm.php');
-require_once('www/soap/reporting/timeentry.php');
+require_once $gfwww.'soap/pm/pm.php';
+require_once $gfwww.'soap/reporting/timeentry.php';
 
 //
 //	Include frs Functions
 //
-require_once('www/soap/frs/frs.php');
+require_once $gfwww.'soap/frs/frs.php';
 
 //
 //	Include SCM Functions
 //
-require_once('www/soap/scm/scm.php');
+require_once $gfwww.'soap/scm/scm.php';
 
 
 $wsdl_data = $server->wsdl->serialize();

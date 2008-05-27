@@ -11,16 +11,16 @@
 
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('note.php');
-require_once('common/tracker/Artifact.class.php');
-require_once('common/tracker/ArtifactFile.class.php');
-require_once('www/tracker/include/ArtifactFileHtml.class.php');
-require_once('common/tracker/ArtifactType.class.php');
-require_once('www/tracker/include/ArtifactTypeHtml.class.php');
-require_once('www/tracker/include/ArtifactHtml.class.php');
-require_once('common/tracker/ArtifactCanned.class.php');
-require_once('common/tracker/ArtifactTypeFactory.class.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'include/note.php';
+require_once $gfcommon.'tracker/Artifact.class.php';
+require_once $gfcommon.'tracker/ArtifactFile.class.php';
+require_once $gfwww.'tracker/include/ArtifactFileHtml.class.php';
+require_once $gfcommon.'tracker/ArtifactType.class.php';
+require_once $gfwww.'tracker/include/ArtifactTypeHtml.class.php';
+require_once $gfwww.'tracker/include/ArtifactHtml.class.php';
+require_once $gfcommon.'tracker/ArtifactCanned.class.php';
+require_once $gfcommon.'tracker/ArtifactTypeFactory.class.php';
 
 if (!$sys_use_tracker) {
 	exit_disabled();
@@ -44,11 +44,11 @@ if ($aid && (!$group_id || !$atid)) {
 }
 
 if ($group_id && $atid) {
-	include('tracker.php');
+	include $gfwww.'tracker/tracker.php';
 
 } elseif ($group_id) {
 
-	include('ind.php');
+	include $gfwww.'tracker/ind.php';
 
 } else {
 

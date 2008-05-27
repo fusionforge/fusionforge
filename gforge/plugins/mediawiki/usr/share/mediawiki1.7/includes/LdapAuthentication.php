@@ -41,7 +41,7 @@
 # including the fixes describend in comment #50 #51 and #52
 #
 
-require_once( 'AuthPlugin.php' );
+require_once  'AuthPlugin.php' ;
 
 class LdapAuthenticationPlugin extends AuthPlugin {
 	var $email, $lang, $realname, $nickname, $SearchType;

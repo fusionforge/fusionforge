@@ -9,8 +9,8 @@
  * @version $Id$
  */
 
-require_once('www/search/include/engines/GroupSearchEngine.class.php');
-require_once('www/tracker/include/ArtifactTypeHtml.class.php');
+require_once $gfwww.'search/include/engines/GroupSearchEngine.class.php';
+require_once $gfwww.'tracker/include/ArtifactTypeHtml.class.php';
 
 class ArtifactSearchEngine extends GroupSearchEngine {
 	var $ath;

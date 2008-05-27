@@ -6,7 +6,7 @@
 // a URL to get around functions that are not being displayed on the
 // web page to them. 
 
-include_once 'includes/init.php';
+include_once $gfplugins.'webcalendar/www/includes/init.php';
 load_user_layers ();
 
 $error = "";

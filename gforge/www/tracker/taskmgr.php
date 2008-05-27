@@ -23,9 +23,9 @@ http://dev.gforge.org/pm/task.php?func=addartifact
 */
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('common/pm/ProjectGroupFactory.class.php');
-require_once('common/pm/ProjectTaskFactory.class.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'pm/ProjectGroupFactory.class.php';
+require_once $gfcommon.'pm/ProjectTaskFactory.class.php';
 
 $group_project_id = getIntFromRequest('group_project_id');
 $project_task_id = getIntFromRequest('project_task_id');

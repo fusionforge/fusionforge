@@ -9,8 +9,8 @@
  * @version $Id$
  */
 
-require_once('www/search/include/renderers/HtmlGroupSearchRenderer.class.php');
-require_once('common/search/TasksSearchQuery.class.php');
+require_once $gfwww.'search/include/renderers/HtmlGroupSearchRenderer.class.php';
+require_once $gfcommon.'search/TasksSearchQuery.class.php';
 	
 class TasksHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	

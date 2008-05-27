@@ -26,11 +26,11 @@
  */
 
 require_once('../env.inc.php');
-require_once('pre.php');
+require_once $gfwww.'include/pre.php';
 require_once($sys_path_to_jpgraph.'/jpgraph.php');
 require_once($sys_path_to_jpgraph.'/jpgraph_line.php');
-require_once('common/reporting/ReportSiteAct.class.php');
-require_once('www/include/unicode.php');
+require_once $gfcommon.'reporting/ReportSiteAct.class.php';
+require_once $gfwww.'include/unicode.php';
 
 session_require( array('group'=>$sys_stats_group) );
 

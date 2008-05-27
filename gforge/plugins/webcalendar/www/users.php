@@ -19,7 +19,7 @@
 
 /* $Id $ */
 
-include_once 'includes/init.php';
+include_once $gfplugins.'webcalendar/www/includes/init.php';
 
 if ( empty ( $login) || $login == "__public__" ) {
   // do not allow public access
@@ -98,10 +98,10 @@ print_header($INC);
 
 <?php 
 	if ($groups_enabled == "Y" && $is_admin) { 
-		include_once 'groups.php';
+		include_once $gfplugins.'webcalendar/www/groups.php';
 	} 
 	if ($nonuser_enabled == 'Y' && $is_admin) {
-		include_once 'nonusers.php';
+		include_once $gfplugins.'webcalendar/www/nonusers.php';
 	}
 ?>
 </div>

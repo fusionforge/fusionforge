@@ -1,7 +1,7 @@
 #! /usr/bin/php5 -f
 <?php
-require_once('www/include/squal_pre.php');
-require_once('common/pm/ProjectTask.class.php');
+require_once $gfwww.'include/squal_pre.php';
+require_once $gfcommon.'pm/ProjectTask.class.php';
 
 db_begin();
 

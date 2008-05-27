@@ -1,27 +1,59 @@
 <?php
 /*
- * Created on 24 sept. 2006
+ * Sets the default required environnement for Gforge
  *
- * To change the template for this generated file go to
- * Window - Preferences - PHPeclipse - PHP - Code Templates
+ * Some of the settings made here can be overwrite in the
+ * configuration file if needed.
+ * 
  */
-error_reporting( E_ALL );
-////header( "Content-type: text/html; charset=utf-8" );
-@ini_set( "display_errors", true );
-//@ini_set( "display_errors", false );
 
 # In case of errors, let output be clean.
 $gfRequestTime = microtime( true );
 
+@ini_set( 'memory_limit', '20M' );
+@ini_set( "display_errors", true );
+
+error_reporting( E_ALL );
+
 # Attempt to set up the include path, to fix problems with relative includes
-////$IP = dirname( __FILE__ ) ;
 $IP = dirname(dirname( __FILE__ )) ;
-//define( 'GF_INSTALL_PATH', $IP );
-$sep = PATH_SEPARATOR;
-if( !ini_set( "include_path", "/etc/gforge/custom$sep$IP$sep/etc/gforge$sep$IP/www/include$sep$IP/plugins/scmccase/etc$sep$IP/plugins/scmsvn/etc$sep$IP/plugins/scmcvs/etc$sep$IP/plugins$sep$IP/plugins/externalsearch/etc$sep$IP/plugins/ldapextauth/etc$sep$IP/plugins/webcalendar/www$sep$IP/plugins/helloworld/etc$sep$IP/etc" ) ) {
-        set_include_path( "/etc/gforge/custom$sep$IP$sep/etc/gforge$sep$IP/www/include$sep$IP/plugins/scmccase/etc$sep$IP/plugins/scmsvn/etc$sep$IP/plugins/scmcvs/etc$sep$IP/plugins$sep$IP/plugins/externalsearch/etc$sep$IP/plugins/ldapextauth/etc$sep$IP/plugins/webcalendar/www$sep$IP/plugins/helloworld/etc$sep$IP/etc" );
+$include_path = join(PATH_SEPARATOR, 
+	array("/etc/gforge/custom", "/etc/gforge", "$IP/common", "$IP/www",	"$IP/plugins", "."));
+
+// By default, the include_path is changed to include path needed by Gforge.
+// If this does not work, then set defines to real path directly.
+//
+// In case of failure, the following defines are set:
+//    GFCGFILE : Configuration file of gforge.
+//    $gfconfig : Directory where are the configuration files (/etc/gforge).
+//    $gfcommon : Directory common of gforge (for common php classes).
+//    $gfwww    : Directory www of gforge (publicly accessible files).
+//    $gfplugins: Directory for plugins.
+//
+
+// Easyforge config, allow several instances of gforge based on server name.
+if (getenv('sys_localinc')) {
+	$gfcgfile = getenv('sys_localinc');
+	$gfconfig = dirname(GFCGFILE);
+} elseif (file_exists($IP.'/config/'.$_SERVER['SERVER_NAME'].'/local.inc.php')) {
+	$gfcgfile = $IP.'/config/'.$_SERVER['SERVER_NAME'].'/local.inc.php';
+	$gfconfig = $IP.'/config/'.$_SERVER['SERVER_NAME'];
+} elseif (file_exists($IP.'/config/local.inc.php')) {
+	$gfcgfile = $IP.'/config/local.inc.php';
+	$gfconfig = $IP.'/config/';
+} else {
+	$gfcgfile = 'local.inc';
+	$gfconfig = '';
 }
-ini_set( 'memory_limit', '20M' );
-#echo '['.$IP.']';
+
+if( !ini_set('include_path', $include_path ) && !set_include_path( $include_path )) {
+	$gfcommon = $IP.'/common/';
+	$gfwww = $IP.'/www/';
+	$gfplugins = $IP.'/plugins/';
+} else {
+	$gfcommon = '';
+	$gfwww = '';
+	$gfplugins = '';
+}
 
 ?>

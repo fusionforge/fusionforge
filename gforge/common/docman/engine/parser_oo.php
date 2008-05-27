@@ -8,7 +8,7 @@
  *
  */
  
-require_once("parser_text.inc.php");
+require_once $gfcommon.'docman/engine/parser_text.inc.php';
 
 
 if ($argc != 2)

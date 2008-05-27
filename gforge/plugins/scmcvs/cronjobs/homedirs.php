@@ -53,8 +53,8 @@ creates a group home directory with a template in it.
 	</IfModule>
 </VirtualHost> 
 */
-require_once('squal_pre.php');
-require ('common/include/cron_utils.php');
+require_once $gfwww.'include/squal_pre.php';
+require $gfcommon.'include/cron_utils.php';
 
 define('USER_DEFAULT_GROUP','users');
 

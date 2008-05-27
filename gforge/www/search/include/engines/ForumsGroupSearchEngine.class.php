@@ -9,7 +9,7 @@
  * @version $Id: GroupSearchEngine.class.php,v 1.2 2004/12/12 23:34:46 gsmet Exp $
  */
 
-require_once('www/search/include/engines/GroupSearchEngine.class.php');
+require_once $gfwww.'search/include/engines/GroupSearchEngine.class.php';
 
 class ForumsGroupSearchEngine extends GroupSearchEngine {
 	

@@ -25,9 +25,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('common/survey/SurveyFactory.class.php');
-require_once('www/survey/include/SurveyHTML.class.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'survey/SurveyFactory.class.php';
+require_once $gfwww.'survey/include/SurveyHTML.class.php';
 
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');

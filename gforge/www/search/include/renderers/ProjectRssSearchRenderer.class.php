@@ -11,8 +11,8 @@
  * @version $Id$
  */
 
-require_once('www/search/include/renderers/RssSearchRenderer.class.php');
-require_once('common/search/ExportProjectSearchQuery.class.php');
+require_once $gfwww.'search/include/renderers/RssSearchRenderer.class.php';
+require_once $gfcommon.'search/ExportProjectSearchQuery.class.php';
 
 /**
  * callback function used during the RSS export

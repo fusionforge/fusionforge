@@ -28,7 +28,7 @@
  * GForge Notepad Window
  * By Hidenari Miwa, FUJITSU PRIME SOFTWARE TECHNOLOGIES LIMITED, 09/2003
  */
-require_once('html.php');
+require_once $gfwww.'include/html.php';
 
 /**
  * editor_button_raw() - Open an Editor dialog window

@@ -18,11 +18,11 @@
  Complete OO rewrite by Tim Perdue 12/2002
  */
 
-require_once('pre.php');
-require_once('note.php');
-require_once('www/news/news_utils.php');
-require_once('www/forum/admin/ForumAdmin.class.php');
-require_once('www/forum/include/AttachManager.class.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'include/note.php';
+require_once $gfwww.'news/news_utils.php';
+require_once $gfwww.'forum/admin/ForumAdmin.class.php';
+require_once $gfwww.'forum/include/AttachManager.class.php';
 
 function forum_header($params) {
 	global $HTML,$group_id,$forum_name,$forum_id,$sys_news_group,$f,$sys_use_forum,$group_forum_id;

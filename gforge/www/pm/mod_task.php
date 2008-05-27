@@ -16,9 +16,9 @@
 	Total rewrite in OO and GForge coding guidelines 12/2002 by Tim Perdue
 */
 
-require_once('note.php');
-require_once('common/reporting/report_utils.php');
-require_once('common/reporting/Report.class.php');
+require_once $gfwww.'include/note.php';
+require_once $gfcommon.'reporting/report_utils.php';
+require_once $gfcommon.'reporting/Report.class.php';
 
 echo notepad_func();
 

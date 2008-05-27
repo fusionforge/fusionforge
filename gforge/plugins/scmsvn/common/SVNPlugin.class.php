@@ -35,7 +35,7 @@ class SVNPlugin extends SCM {
  		$this->hooks[] = 'scm_stats';
 		$this->hooks[] = 'scm_plugin';
 
-		require_once('plugins/scmsvn/config.php') ;
+		require_once $gfconfig.'plugins/scmsvn/config.php' ;
 		
 		$this->default_svn_server = $default_svn_server ;
 		$this->enabled_by_default = $enabled_by_default ;

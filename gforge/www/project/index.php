@@ -13,7 +13,7 @@
 
 
 require_once('../env.inc.php');
-require_once('pre.php');    
+require_once $gfwww.'include/pre.php';    
 
 /*
 	Project Summary Page
@@ -31,7 +31,7 @@ if (!$group_id) {
 
 if (isset ($sys_noforcetype) && $sys_noforcetype) {
 	$project = &group_get_object($group_id);
-	include('project_home.php');
+	include $gfwww.'include/project_home.php';
 } else {
 	header ('Location: '.util_make_url ('/projects/'. group_getunixname($group_id) .'/'));
 }

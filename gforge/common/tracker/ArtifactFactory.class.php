@@ -24,10 +24,10 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
-require_once('common/include/Error.class.php');
-require_once('common/tracker/Artifact.class.php');
-require_once('common/tracker/ArtifactType.class.php');
-require_once('common/tracker/ArtifactQuery.class.php');
+require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'tracker/Artifact.class.php';
+require_once $gfcommon.'tracker/ArtifactType.class.php';
+require_once $gfcommon.'tracker/ArtifactQuery.class.php';
 
 class ArtifactFactory extends Error {
 

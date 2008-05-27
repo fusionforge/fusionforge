@@ -1,5 +1,5 @@
 <?php
-include_once 'includes/init.php';
+include_once $gfplugins.'webcalendar/www/includes/init.php';
 
 if ($user != $login)
   $user = (($is_admin || $is_nonuser_admin) && $user) ? $user : $login;

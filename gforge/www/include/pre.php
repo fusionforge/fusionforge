@@ -10,7 +10,7 @@
  */
 
 // escaping lib
-require_once('common/include/escapingUtils.php');
+require_once $gfcommon.'include/escapingUtils.php';
 
 // Just say no to link prefetching (Moz prefetching, Google Web Accelerator, others)
 // http://www.google.com/webmasters/faq.html#prefetchblock
@@ -24,64 +24,64 @@ if (!isset($no_gz_buffer) || !$no_gz_buffer) {
 	ob_start("ob_gzhandler");
 }
 
-require('local.inc');
+require $gfcgfile;
 
 // get constants used for flags or status
-require('common/include/constants.php');
+require $gfcommon.'include/constants.php';
 
 
 //
 if ($sys_use_jabber) {
-	require_once('common/include/Jabber.class.php');
+	require_once $gfcommon.'include/Jabber.class.php';
 }
 
 //library to determine browser settings
-require_once('www/include/browser.php');
+require_once $gfwww.'include/browser.php';
 
 //base error library for new objects
-require_once('common/include/Error.class.php');
+require_once $gfcommon.'include/Error.class.php';
 
 // HTML layout class, may be overriden by the Theme class
-require_once('www/include/Layout.class.php');
+require_once $gfwww.'include/Layout.class.php';
 
 
 //various html utilities
-require_once('common/include/utils.php');
+require_once $gfcommon.'include/utils.php';
 
 //database abstraction
-require_once('common/include/database-'.$sys_database_type.'.php');
+require_once $gfcommon.'include/database-'.$sys_database_type.'.php';
 
 //security library
-require_once('common/include/session.php');
+require_once $gfcommon.'include/session.php';
 
 //system library
-require_once('common/include/System.class.php');
+require_once $gfcommon.'include/System.class.php';
 if (!$sys_account_manager_type) {
 	$sys_account_manager_type='UNIX';
 }
-require_once('common/include/system/'.$sys_account_manager_type.'.class.php');
+require_once $gfcommon.'include/system/'.$sys_account_manager_type.'.class.php';
 $SYS=new $sys_account_manager_type();
 
 //user functions like get_name, logged_in, etc
-require_once('common/include/User.class.php');
+require_once $gfcommon.'include/User.class.php';
 
 //group functions like get_name, etc
-require_once('common/include/Group.class.php');
+require_once $gfcommon.'include/Group.class.php';
 
 //permission functions
-require_once('common/include/Permission.class.php');
+require_once $gfcommon.'include/Permission.class.php';
 
 //library to set up context help
-require_once('www/include/help.php');
+require_once $gfwww.'include/help.php';
 
 //exit_error library
-require_once('www/include/exit.php');
+require_once $gfwww.'include/exit.php';
 
 //various html libs like button bar, themable
-require_once('www/include/html.php');
+require_once $gfwww.'include/html.php';
 
 //forms key generation
-require_once('common/include/forms.php');
+require_once $gfcommon.'include/forms.php';
 
 // #### Connect to db
 
@@ -93,11 +93,11 @@ if (!$GLOBALS['gfconn']) {
 }
 
 // Plugins subsystem
-require_once('common/include/Plugin.class.php') ;
-require_once('common/include/PluginManager.class.php') ;
+require_once $gfcommon.'include/Plugin.class.php' ;
+require_once $gfcommon.'include/PluginManager.class.php' ;
 
 // SCM-specific plugins subsystem
-require_once('common/include/SCM.class.php') ;
+require_once $gfcommon.'include/SCM.class.php' ;
 
 setup_plugin_manager () ;
 
@@ -117,7 +117,7 @@ if (!session_loggedin() && $sys_force_login == 1 ) {
 }
 
 //insert this page view into the database
-require_once('www/include/logger.php');
+require_once $gfwww.'include/logger.php';
 
 //
 //	If logged in, set up a $LUSER var referencing
@@ -133,7 +133,7 @@ if (session_loggedin()) {
 //
 //	Include user Theme
 //
-require_once($sys_themeroot.$sys_theme.'/Theme.class.php');
+require_once $sys_themeroot.$sys_theme.'/Theme.class.php';
 
 $HTML=new Theme();
 
@@ -157,8 +157,8 @@ if (session_loggedin()) {
 
 */
 
-require_once('common/include/gettext.php');
-require_once('common/include/group_section_texts.php');
+require_once $gfcommon.'include/gettext.php';
+require_once $gfcommon.'include/group_section_texts.php';
 
 setup_gettext_from_browser() ;
 

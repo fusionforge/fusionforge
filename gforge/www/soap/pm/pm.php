@@ -24,12 +24,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
-require_once('common/include/Error.class.php');
-require_once('common/pm/ProjectGroup.class.php');
-require_once('common/pm/ProjectGroupFactory.class.php');
-require_once('common/pm/ProjectTaskFactory.class.php');
-require_once('common/pm/ProjectTask.class.php');
-require_once('common/pm/ProjectCategory.class.php');
+require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'pm/ProjectGroup.class.php';
+require_once $gfcommon.'pm/ProjectGroupFactory.class.php';
+require_once $gfcommon.'pm/ProjectTaskFactory.class.php';
+require_once $gfcommon.'pm/ProjectTask.class.php';
+require_once $gfcommon.'pm/ProjectCategory.class.php';
 //require_once('common/pm/ProjectMessage.class.php');
 
 //

@@ -26,9 +26,9 @@
  */
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('common/reporting/report_utils.php');
-require_once('common/reporting/ReportUserTime.class.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'reporting/report_utils.php';
+require_once $gfcommon.'reporting/ReportUserTime.class.php';
 
 session_require( array('group'=>$sys_stats_group) );
 

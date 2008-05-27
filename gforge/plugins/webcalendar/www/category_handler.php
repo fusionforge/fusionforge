@@ -1,5 +1,5 @@
 <?php
-include_once 'includes/init.php';
+include_once $gfplugins.'webcalendar/www/includes/init.php';
 
 // does the category belong to the user?
 $is_my_event = false;

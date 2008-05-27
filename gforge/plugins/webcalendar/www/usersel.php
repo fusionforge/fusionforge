@@ -1,5 +1,5 @@
 <?php
-include_once 'includes/init.php';
+include_once $gfplugins.'webcalendar/www/includes/init.php';
 
 // input args in URL
 // users: list of comma-separated users

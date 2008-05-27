@@ -26,7 +26,7 @@
  */
 
 require_once('../env.inc.php');
-require_once('pre.php');
+require_once $gfwww.'include/pre.php';
 
 $HTML->header(array('title'=>sprintf(_('Welcome to %1$s'), $GLOBALS['sys_name'])));
 

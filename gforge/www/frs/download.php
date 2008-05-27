@@ -28,10 +28,10 @@
 $no_gz_buffer=true;
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('common/frs/FRSPackage.class.php');
-require_once('common/frs/FRSRelease.class.php');
-require_once('common/frs/FRSFile.class.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'frs/FRSPackage.class.php';
+require_once $gfcommon.'frs/FRSRelease.class.php';
+require_once $gfcommon.'frs/FRSFile.class.php';
 
 $arr=explode('/',getStringFromServer('REQUEST_URI'));
 $file_id=$arr[3];

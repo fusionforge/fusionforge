@@ -25,10 +25,10 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
-require_once('www/include/squal_pre.php');
-require_once('common/frs/FRSFile.class.php');
-require_once('common/frs/FRSRelease.class.php');
-require_once('common/frs/FRSPackage.class.php');
+require_once $gfwww.'include/squal_pre.php';
+require_once $gfcommon.'frs/FRSFile.class.php';
+require_once $gfcommon.'frs/FRSRelease.class.php';
+require_once $gfcommon.'frs/FRSPackage.class.php';
 //
 //  Set up this script to run as the site admin
 //

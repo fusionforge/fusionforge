@@ -26,10 +26,10 @@
  */
 
 require_once('../../env.inc.php');
-require_once('pre.php');
+require_once $gfwww.'include/pre.php';
 require_once($sys_path_to_jpgraph.'/jpgraph.php');
 require_once($sys_path_to_jpgraph.'/jpgraph_line.php');
-require_once('common/reporting/ReportTrackerAct.class.php');
+require_once $gfcommon.'reporting/ReportTrackerAct.class.php';
 
 $group_id = getIntFromRequest('group_id');
 $atid = getStringFromRequest('atid');

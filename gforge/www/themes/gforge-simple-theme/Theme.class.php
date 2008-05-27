@@ -13,7 +13,7 @@
  * @version   $Id$
  */
 
-require_once ('www/search/include/SearchManager.class.php');
+require_once $gfwww.'search/include/SearchManager.class.php';
 
 class Theme extends Error {
 

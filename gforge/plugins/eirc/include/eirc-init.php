@@ -1,6 +1,6 @@
 <?php
 
-require_once ('EIRCPlugin.class.php') ;
+require_once $gfplugins.'eirc/include/EIRCPlugin.class.php' ;
 
 $EIRCPluginObject = new EIRCPlugin ;
 

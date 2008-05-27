@@ -11,7 +11,7 @@
  * @version $Id$
  */
 
-require_once('common/search/SearchQuery.class.php');
+require_once $gfcommon.'search/SearchQuery.class.php';
 
 class ExportProjectSearchQuery extends SearchQuery {
 

@@ -23,8 +23,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once('common/include/account.php');
-require_once('common/include/escapingUtils.php');
+require_once $gfcommon.'include/account.php';
+require_once $gfcommon.'include/escapingUtils.php';
 
 /**
  * A User object if user is logged in

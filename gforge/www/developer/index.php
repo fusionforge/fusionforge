@@ -30,7 +30,7 @@
 */
 
 require_once('../env.inc.php');
-require_once('pre.php');
+require_once $gfwww.'include/pre.php';
 
 $user_id = getStringFromRequest('user_id');
 $form_dev = getStringFromRequest('form_dev');
@@ -47,7 +47,7 @@ if (isset ($sys_noforcetype) && $sys_noforcetype) {
 		if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 			exit_error(_('That user does not exist.'),_('Invalid User'));
 		}
-		include('user_home.php');
+		include $gfwww.'include/user_home.php';
 	}
 } else {
 	header("Location: ".util_make_url ('/users/'.user_getname($user_id).'/'));

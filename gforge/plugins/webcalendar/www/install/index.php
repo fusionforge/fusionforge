@@ -18,7 +18,7 @@
  * TODO:
  * Add translations to this page.
  */
-include_once '../includes/php-dbi.php';
+include_once $gfplugins.'webcalendar/www/install/../includes/php-dbi.php';
 
 $file = "../includes/settings.php";
 $fileDir = "../includes";

@@ -17,12 +17,12 @@
 */
 
 require_once('../../env.inc.php');
-require_once('pre.php');
-require_once('www/pm/include/ProjectGroupHTML.class.php');
-require_once('common/pm/ProjectGroupFactory.class.php');
-require_once('common/pm/ProjectCategory.class.php');
-require_once('www/project/stats/project_stats_utils.php');
-require_once('www/include/tool_reports.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'pm/include/ProjectGroupHTML.class.php';
+require_once $gfcommon.'pm/ProjectGroupFactory.class.php';
+require_once $gfcommon.'pm/ProjectCategory.class.php';
+require_once $gfwww.'project/stats/project_stats_utils.php';
+require_once $gfwww.'include/tool_reports.php';
 
 if (!session_loggedin()) {
 	exit_not_logged_in();
@@ -73,7 +73,7 @@ function pm_quick_report($group_id,$title,$subtitle1,$sql1,$subtitle2,$sql2,$com
 }
 
 
-include_once('www/include/HTML_Graphs.php');
+include_once $gfwww.'include/HTML_Graphs.php';
 
 $what = getStringFromRequest('what');
 if ($what) {

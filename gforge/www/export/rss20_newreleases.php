@@ -3,9 +3,10 @@
 // Author: Scott Grayban <sgrayban@borgnet.us>
 //
 
-include "../env.inc.php";
-include "pre.php";
-include "rss_utils.inc";
+require_once '../env.inc.php';
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'export/rss_utils.inc';
+
 header("Content-Type: text/xml");
 print '<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">

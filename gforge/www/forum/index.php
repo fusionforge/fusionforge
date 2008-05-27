@@ -19,10 +19,10 @@
 */
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('../forum/include/ForumHTML.class.php');
-require_once('common/forum/ForumFactory.class.php');
-require_once('common/forum/Forum.class.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'forum/../forum/include/ForumHTML.class.php';
+require_once $gfcommon.'forum/ForumFactory.class.php';
+require_once $gfcommon.'forum/Forum.class.php';
 
 $group_id = getIntFromRequest('group_id');
 if ($group_id) {

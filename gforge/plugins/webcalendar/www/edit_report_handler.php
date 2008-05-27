@@ -34,7 +34,7 @@
  *	Can only delete/edit an event if you are the creator of the event
  *	  or you are an admin user.
  */
-include_once 'includes/init.php';
+include_once $gfplugins.'webcalendar/www/includes/init.php';
 load_user_categories ();
 
 $error = "";

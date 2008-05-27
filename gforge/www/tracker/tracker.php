@@ -36,7 +36,7 @@ switch (getStringFromRequest('func')) {
 		if (!$ath->allowsAnon() && !session_loggedin()) {
 			exit_error('ERROR',_('Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please Login.'));
 		} else {
-			include ('add.php');
+			include $gfwww.'tracker/add.php';
 		}
 		break;
 	}
@@ -115,7 +115,7 @@ switch (getStringFromRequest('func')) {
 					}
 				}
 				$feedback .= _('Item Successfully Created');
-				include 'browse.php';
+				include $gfwww.'tracker/browse.php';
 			}
 		}
 		break;
@@ -205,7 +205,7 @@ switch (getStringFromRequest('func')) {
 			$feedback = _('Updated successfully');			}
 		}
 		unset ($extra_fields_choice);
-		include ('browse.php');
+		include $gfwww.'tracker/browse.php';
 		break;
 	}
 	case 'postmod' : {
@@ -357,7 +357,7 @@ switch (getStringFromRequest('func')) {
 			if (!$was_error) {
 				$feedback = _('Updated successfully');
 			}
-			include ('browse.php');
+			include $gfwww.'tracker/browse.php';
 		}
 		break;
 	}
@@ -373,7 +373,7 @@ switch (getStringFromRequest('func')) {
 				$ah->setMonitor();
 				$feedback=$ah->getErrorMessage();
 
-				include 'browse.php';
+				include $gfwww.'tracker/browse.php';
 			}
 		} else {
 			$at=new ArtifactType($group,$atid);
@@ -385,7 +385,7 @@ switch (getStringFromRequest('func')) {
 				$at->setMonitor();
 				$feedback=$at->getErrorMessage();	
 				$at->clearError();
-				include 'browse.php';
+				include $gfwww.'tracker/browse.php';
 			}
 		}
 		break;
@@ -404,7 +404,7 @@ switch (getStringFromRequest('func')) {
 			} elseif ($ah->isError()) {
 				exit_error('ERROR',$ah->getErrorMessage());
 			}
-			include 'deleteartifact.php';
+			include $gfwww.'tracker/deleteartifact.php';
 		} else {
 			exit_permission_denied();
 		}
@@ -437,7 +437,7 @@ switch (getStringFromRequest('func')) {
 					$feedback .= _('Artifact Deleted Successfully');
 				}
 			}
-			include 'browse.php';
+			include $gfwww.'tracker/browse.php';
 		} else {
 			exit_permission_denied();
 		}
@@ -446,19 +446,19 @@ switch (getStringFromRequest('func')) {
 
 
 	case 'taskmgr' : {
-		include 'taskmgr.php';
+		include $gfwww.'tracker/taskmgr.php';
 		break;
 	}
 	case 'browse' : {
-		include 'browse.php';
+		include $gfwww.'tracker/browse.php';
 		break;
 	}
 	case 'query' : {
-		include ('query.php');
+		include $gfwww.'tracker/query.php';
 		break;
 	}
 	case 'downloadcsv' : {
-		include ('downloadcsv.php');
+		include $gfwww.'tracker/downloadcsv.php';
 		break;
 	}
 	case 'download' : {
@@ -480,17 +480,17 @@ switch (getStringFromRequest('func')) {
 			exit_error('ERROR',$ah->getErrorMessage());
 		} else {
 			if ($ath->userIsAdmin()) {
-				include 'mod.php';
+				include $gfwww.'tracker/mod.php';
 			} elseif ($ath->userIsTechnician()) {
-				include 'mod-limited.php';
+				include $gfwww.'tracker/mod-limited.php';
 			} else {
-				include 'detail.php';
+				include $gfwww.'tracker/detail.php';
 			}
 		}
 		break;
 	}
 	default : {
-		include 'browse.php';
+		include $gfwww.'tracker/browse.php';
 		break;
 	}
 }

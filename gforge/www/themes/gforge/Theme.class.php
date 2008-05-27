@@ -1,6 +1,6 @@
 <?php
 
-require_once('www/include/Layout.class.php');
+require_once $gfwww.'include/Layout.class.php';
 
 define('THEME_DIR', util_make_url ('/themes/gforge'));
 
@@ -38,7 +38,10 @@ class Theme extends Layout {
         GLOBAL $bgpri;
         // Constructor for parent class...
         if ( file_exists($GLOBALS['sys_custom_path'] . '/index_std.php') )
-        $this->rootindex = $GLOBALS['sys_custom_path'] . '/index_std.php';
+            $this->rootindex = $GLOBALS['sys_custom_path'] . '/index_std.php';
+        else
+            $this->rootindex = $GLOBALS['gfwww'].'index_std.php';
+        
         $this->Error();
 
         /*

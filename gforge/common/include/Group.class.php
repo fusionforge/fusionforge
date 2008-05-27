@@ -34,20 +34,20 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once('common/tracker/ArtifactTypes.class.php');
-require_once('common/tracker/ArtifactTypeFactory.class.php');
-require_once('common/forum/Forum.class.php');
-require_once('common/forum/ForumFactory.class.php');
-require_once('common/pm/ProjectGroup.class.php');
-require_once('common/pm/ProjectGroupFactory.class.php');
-require_once('common/include/Role.class.php');
-require_once('common/frs/FRSPackage.class.php');
-require_once('common/docman/DocumentGroup.class.php');
-require_once('common/mail/MailingList.class.php');
-require_once('common/mail/MailingListFactory.class.php');
-require_once('common/survey/SurveyFactory.class.php');
-require_once('common/survey/SurveyQuestionFactory.class.php');
-require_once('common/include/gettext.php');
+require_once $gfcommon.'tracker/ArtifactTypes.class.php';
+require_once $gfcommon.'tracker/ArtifactTypeFactory.class.php';
+require_once $gfcommon.'forum/Forum.class.php';
+require_once $gfcommon.'forum/ForumFactory.class.php';
+require_once $gfcommon.'pm/ProjectGroup.class.php';
+require_once $gfcommon.'pm/ProjectGroupFactory.class.php';
+require_once $gfcommon.'include/Role.class.php';
+require_once $gfcommon.'frs/FRSPackage.class.php';
+require_once $gfcommon.'docman/DocumentGroup.class.php';
+require_once $gfcommon.'mail/MailingList.class.php';
+require_once $gfcommon.'mail/MailingListFactory.class.php';
+require_once $gfcommon.'survey/SurveyFactory.class.php';
+require_once $gfcommon.'survey/SurveyQuestionFactory.class.php';
+require_once $gfcommon.'include/gettext.php';
 
 //the license_id of "Other/proprietary" license
 define('GROUP_LICENSE_OTHER',126);

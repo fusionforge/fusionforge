@@ -11,8 +11,8 @@
  * @version $Id$
  */
 
-require_once('www/search/include/renderers/HtmlGroupSearchRenderer.class.php');
-require_once('common/search/ArtifactSearchQuery.class.php');
+require_once $gfwww.'search/include/renderers/HtmlGroupSearchRenderer.class.php';
+require_once $gfcommon.'search/ArtifactSearchQuery.class.php';
 
 class ArtifactHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	

@@ -10,14 +10,14 @@
  * @version $Id$
  */
 
-require_once('pre.php');
-require_once('www/search/include/renderers/HtmlGroupSearchRenderer.class.php');
-require_once('www/search/include/renderers/ForumsHtmlSearchRenderer.class.php');
-require_once('www/search/include/renderers/TrackersHtmlSearchRenderer.class.php');
-require_once('www/search/include/renderers/TasksHtmlSearchRenderer.class.php');
-require_once('www/search/include/renderers/DocsHtmlSearchRenderer.class.php');
-require_once('www/search/include/renderers/FrsHtmlSearchRenderer.class.php');
-require_once('www/search/include/renderers/NewsHtmlSearchRenderer.class.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'search/include/renderers/HtmlGroupSearchRenderer.class.php';
+require_once $gfwww.'search/include/renderers/ForumsHtmlSearchRenderer.class.php';
+require_once $gfwww.'search/include/renderers/TrackersHtmlSearchRenderer.class.php';
+require_once $gfwww.'search/include/renderers/TasksHtmlSearchRenderer.class.php';
+require_once $gfwww.'search/include/renderers/DocsHtmlSearchRenderer.class.php';
+require_once $gfwww.'search/include/renderers/FrsHtmlSearchRenderer.class.php';
+require_once $gfwww.'search/include/renderers/NewsHtmlSearchRenderer.class.php';
 
 class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	

@@ -26,9 +26,9 @@
 
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('www/admin/admin_utils.php');
-require_once ('common/include/cron_utils.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'admin/admin_utils.php';
+require_once $gfcommon.'include/cron_utils.php';
 
 site_admin_header(array('title'=>_('Site admin')));
 

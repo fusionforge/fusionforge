@@ -34,8 +34,8 @@
 	Complete OO rewrite by Tim Perdue 12/2002
 */
 
-require_once('common/include/Error.class.php');
-require_once('common/forum/ForumMessage.class.php');
+require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'forum/ForumMessage.class.php';
 // This string is used when sending the notification mail for identifying the
 // user response
 define('FORUM_MAIL_MARKER', '#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+');	

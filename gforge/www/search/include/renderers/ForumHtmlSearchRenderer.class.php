@@ -11,8 +11,8 @@
  * @version $Id$
  */
 
-require_once('www/search/include/renderers/HtmlGroupSearchRenderer.class.php');
-require_once('common/search/ForumSearchQuery.class.php');
+require_once $gfwww.'search/include/renderers/HtmlGroupSearchRenderer.class.php';
+require_once $gfcommon.'search/ForumSearchQuery.class.php';
 
 class ForumHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	

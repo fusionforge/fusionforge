@@ -16,7 +16,7 @@
 	Total rewrite in OO and GForge coding guidelines 12/2002 by Tim Perdue
 */
 
-require_once('common/pm/ProjectTaskFactory.class.php');
+require_once $gfcommon.'pm/ProjectTaskFactory.class.php';
 //build page title to make bookmarking easier
 //if a user was selected, add the user_name to the title
 //same for status

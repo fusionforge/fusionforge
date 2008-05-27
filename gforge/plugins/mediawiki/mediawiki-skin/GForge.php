@@ -25,7 +25,7 @@ require_once ('/etc/gforge/local.inc') ;
 $GLOBALS['sys_urlroot'] = $sys_urlroot;
 $GLOBALS['sys_session_key'] = $sys_session_key;
 $GLOBALS['sys_session_expire'] = $sys_session_expire;
-require_once('pre.php');
+require_once $gfwww.'include/pre.php';
 $GLOBALS['REMOTE_ADDR'] = getStringFromServer('REMOTE_ADDR') ;
 $GLOBALS['HTTP_USER_AGENT'] = getStringFromServer('HTTP_USER_AGENT') ;
 

@@ -285,7 +285,7 @@ function getUnitLabel($unit) {
 
 
 require_once('../env.inc.php');
-require_once('pre.php');
+require_once $gfwww.'include/pre.php';
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
 $HTML->header(array('title'=>sprintf(_('Edit the %1$ss Table'), ucwords(getUnitLabel($unit)))));

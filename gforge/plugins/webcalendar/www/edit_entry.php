@@ -15,8 +15,8 @@
  * TODO
  * This file will not pass XHTML validation with HTMLArea enabled
  */
-include_once 'includes/init.php';
-include_once 'includes/site_extras.php';
+include_once $gfplugins.'webcalendar/www/includes/init.php';
+include_once $gfplugins.'webcalendar/www/includes/site_extras.php';
 
 load_user_categories ();
 

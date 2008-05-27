@@ -16,7 +16,7 @@ exit;
 
 */
 
-require ('pre.php');    
+require $gfwww.'include/pre.php';    
 
 session_require(array('group'=>'1','admin_flags'=>'A'));
 

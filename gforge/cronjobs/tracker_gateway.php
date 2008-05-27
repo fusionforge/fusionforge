@@ -29,11 +29,11 @@
  * This file is based on forum_gateway.php
  */
 
-require_once ('squal_pre.php');
-require_once ('common/include/Group.class.php');
-require_once ('common/include/MailParser.class.php');
-require_once ('common/tracker/Artifact.class.php');
-require_once ('common/tracker/ArtifactFactory.class.php');
+require_once $gfwww.'include/squal_pre.php';
+require_once $gfcommon.'include/Group.class.php';
+require_once $gfcommon.'include/MailParser.class.php';
+require_once $gfcommon.'tracker/Artifact.class.php';
+require_once $gfcommon.'tracker/ArtifactFactory.class.php';
 
 class TrackerGateway extends Error {
 	/*

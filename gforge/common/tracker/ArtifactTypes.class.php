@@ -24,9 +24,9 @@
  * along with GForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-require_once('common/include/Error.class.php');
-require_once('common/tracker/ArtifactType.class.php');
-require_once('common/tracker/ArtifactExtraField.class.php');
+require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'tracker/ArtifactType.class.php';
+require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
 
 class ArtifactTypes extends Error {
 
@@ -78,7 +78,7 @@ class ArtifactTypes extends Error {
 			return true;
 		}
 
-		include ('common/tracker/artifact_type_definitions.php');
+		include $GLOBALS['gfcommon'].'tracker/artifact_type_definitions.php';
 		db_begin();
 		foreach ($trackers as $trk) {
 			$at = new ArtifactType($this->Group);

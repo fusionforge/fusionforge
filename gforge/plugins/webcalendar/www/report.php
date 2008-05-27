@@ -31,7 +31,7 @@
  *
  */
 
-include_once 'includes/init.php';
+include_once $gfplugins.'webcalendar/www/includes/init.php';
 
 // Generate the HTML for one event
 // params:

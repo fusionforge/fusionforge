@@ -18,10 +18,10 @@
 */
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('include/doc_utils.php');
-require_once('common/docman/DocumentFactory.class.php');
-require_once('common/docman/DocumentGroupFactory.class.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'docman/include/doc_utils.php';
+require_once $gfcommon.'docman/DocumentFactory.class.php';
+require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
 
 /*
 	EXPERIMENTAL CODE TO USE JAVASCRIPT TREE

@@ -13,8 +13,8 @@
  * @version   $Id$
  */
  
-require_once('common/include/constants.php');
-require_once('www/search/include/SearchManager.class.php');
+require_once $gfcommon.'include/constants.php';
+require_once $gfwww.'search/include/SearchManager.class.php';
 
 class Layout extends Error {
 

@@ -12,7 +12,7 @@
   */
 
 
-require_once('common/tracker/ArtifactFile.class.php');
+require_once $gfcommon.'tracker/ArtifactFile.class.php';
 
 class ArtifactFileHtml extends ArtifactFile {
 

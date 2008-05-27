@@ -12,13 +12,13 @@
   */
 
 require_once('../env.inc.php');
-require_once('pre.php'); 
+require_once $gfwww.'include/pre.php'; 
 
 // entry for hierarchy plugin
 // we didn't find any other way to do it :(
 plugin_hook('tree');  
 
-require_once('www/include/trove.php');
+require_once $gfwww.'include/trove.php';
 
 if (!$sys_use_trove) {
 	exit_disabled();

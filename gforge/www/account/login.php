@@ -32,7 +32,7 @@ Header( "Cache-Control: no-cache");
 Header( "Cache-Control: must-revalidate"); 
 
 require_once('../env.inc.php');
-require_once('pre.php');
+require_once $gfwww.'include/pre.php';
 
 $return_to = getStringFromRequest('return_to');
 $login = getStringFromRequest('login');

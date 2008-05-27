@@ -5,8 +5,8 @@
 // http://sourceforge.net
 //
 
-require "../env.inc.php";
-require "pre.php";
+require_once '../env.inc.php';
+require_once $gfwww.'include/pre.php';
 
 $HTML->header(array('title'=>"Project Exports"));
 ?>

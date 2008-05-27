@@ -5,7 +5,7 @@
  * Christian Bayle <bayle@debian.org>
  */
 
-require_once('pre.php');
+require_once $gfwww.'include/pre.php';
 
 if (!$user_id) {
 	exit_error('Error','No User Id Provided');

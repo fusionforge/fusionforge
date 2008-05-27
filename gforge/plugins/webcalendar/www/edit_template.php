@@ -15,7 +15,7 @@
  * Security:
  *	Admin permissions are checked in connect.php.
  */
-include_once 'includes/init.php';
+include_once $gfplugins.'webcalendar/www/includes/init.php';
 
 $report_id = 0;
 $error = '';

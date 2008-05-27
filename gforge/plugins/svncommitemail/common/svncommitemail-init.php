@@ -23,12 +23,12 @@ global $sys_plugins_path;
 $found = false;
 if (is_dir($sys_plugins_path.'/svncommitemail/common/')) {
 	if (is_file($sys_plugins_path.'/svncommitemail/common/SVNCommitEmailPlugin.class.php')) {
-		require_once ($sys_plugins_path.'/svncommitemail/common/SVNCommitEmailPlugin.class.php') ;
+		require_once $gfplugins.'svncommitemail/common/SVNCommitEmailPlugin.class.php' ;
 		$found = true;
 	}
 } else {
 	if (is_file($sys_plugins_path.'/svncommitemail/include/SVNCommitEmailPlugin.class.php')) {
-		require_once ($sys_plugins_path.'/svncommitemail/include/SVNCommitEmailPlugin.class.php') ;
+		require_once $gfplugins.'svncommitemail/include/SVNCommitEmailPlugin.class.php' ;
 		$found = true;
 	}
 }

@@ -1,5 +1,5 @@
 <?php
-require_once('common/pm/ProjectTaskFactory.class.php');
+require_once $gfcommon.'pm/ProjectTaskFactory.class.php';
 
 function printr($var, $name='$var', $echo=true) {
 /*

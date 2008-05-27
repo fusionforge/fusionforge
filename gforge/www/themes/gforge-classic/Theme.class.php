@@ -1,6 +1,6 @@
 <?php
 
-require_once('www/include/Layout.class.php');
+require_once $gfwww.'include/Layout.class.php';
 
 class Theme extends Layout {
 

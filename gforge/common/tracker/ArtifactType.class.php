@@ -24,7 +24,7 @@
  * along with GForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-require_once('common/include/Error.class.php');
+require_once $gfcommon.'include/Error.class.php';
 
 	/**
 	* Gets an ArtifactType object from the artifact type id

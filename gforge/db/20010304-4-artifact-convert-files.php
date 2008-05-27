@@ -1,7 +1,7 @@
 #! /usr/bin/php5 -f
 <?php
 
-require ('squal_pre.php');
+require $gfwww.'include/squal_pre.php';
 
 db_begin();
 

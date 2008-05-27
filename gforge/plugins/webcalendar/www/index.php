@@ -9,7 +9,7 @@
  */
 
 require_once('../../env.inc.php');
-require_once('pre.php');
+require_once $gfwww.'include/pre.php';
 //require_once ('plugins/webcalendar/config.php');
 
 // the header that displays for the user portion of the plugin
@@ -104,7 +104,7 @@ function webcalendar_User_Header($params) {
 	}	 
 	
 */
-include_once 'includes/init.php';
+include_once $gfplugins.'webcalendar/www/includes/init.php';
 
 // If not yet logged in, you will be redirected to login.php before
 // we get to this point (by connect.php included above)

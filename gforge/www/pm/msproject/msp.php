@@ -8,13 +8,13 @@
  * @version   $Id$
  */
 
-require_once('squal_pre.php');
-require_once('common/pm/ProjectGroup.class.php');
-require_once('common/pm/import_utils.php');
-require_once('common/pm/ProjectTask.class.php');
-require_once('common/pm/ProjectTaskFactory.class.php');
-require_once('common/include/User.class.php');
-require_once('common/include/session.php');
+require_once $gfwww.'include/squal_pre.php';
+require_once $gfcommon.'pm/ProjectGroup.class.php';
+require_once $gfcommon.'pm/import_utils.php';
+require_once $gfcommon.'pm/ProjectTask.class.php';
+require_once $gfcommon.'pm/ProjectTaskFactory.class.php';
+require_once $gfcommon.'include/User.class.php';
+require_once $gfcommon.'include/session.php';
 
 /**
 return data:

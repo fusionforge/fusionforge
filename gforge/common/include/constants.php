@@ -1,6 +1,5 @@
 <?php
 
-require_once('local.inc');
 /* Search */
 
 define('SEARCH__TYPE_IS_ARTIFACT', 'artifact');

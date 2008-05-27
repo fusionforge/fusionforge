@@ -16,8 +16,8 @@
  *
  */
 
-require_once('squal_pre.php');
-require_once('plugins/svntracker/config.php');
+require_once $gfwww.'include/squal_pre.php';
+require_once $gfconfig.'plugins/svntracker/config.php';
 
 if ($svn_tracker_debug) {
 	$file = fopen($svn_tracker_debug_file,"a+");	

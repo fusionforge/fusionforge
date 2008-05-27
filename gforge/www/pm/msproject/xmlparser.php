@@ -22,7 +22,7 @@
  * Copyright 2004 GForge, LLC
  */
 
-require_once('msp.php');
+require_once $gfwww.'pm/msproject/msp.php';
 
 $send_task_email=false;
 

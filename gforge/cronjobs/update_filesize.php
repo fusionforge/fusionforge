@@ -32,7 +32,7 @@
  * Thanks
  */
 
-require_once ('squal_pre.php');
+require_once $gfwww.'include/squal_pre.php';
 
 db_begin();
 

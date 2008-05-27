@@ -9,7 +9,7 @@
  * @version   $Id$
  */
 
-require_once('HTML_Graphs.php');
+require_once $gfwww.'include/HTML_Graphs.php';
 
 /**
  * stats_sf_stats() - Get SourceForge stats

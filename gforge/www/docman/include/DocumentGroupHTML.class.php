@@ -9,8 +9,8 @@
  */
 
 
-require_once('pre.php');
-require_once('note.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'include/note.php';
 
 /**
  *	Wrap many group display related functions

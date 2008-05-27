@@ -1,5 +1,5 @@
 <?php
-require_once('common/pm/import_utils.php');
+require_once $gfcommon.'pm/import_utils.php';
 
 $input_file = getUploadedFile('userfile');
 if (is_uploaded_file($input_file['tmp_name'])) {

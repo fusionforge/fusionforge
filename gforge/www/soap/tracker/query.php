@@ -24,11 +24,11 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
-require_once('common/include/Error.class.php');
-require_once('common/tracker/ArtifactQuery.class.php');
-require_once('common/tracker/ArtifactQueryFactory.class.php');
+require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'tracker/ArtifactQuery.class.php';
+require_once $gfcommon.'tracker/ArtifactQueryFactory.class.php';
 // imports ArrayOfArtifactExtraFieldsData type
-require_once('tracker.php');
+require_once $gfwww.'soap/tracker/tracker.php';
 
 
 /**

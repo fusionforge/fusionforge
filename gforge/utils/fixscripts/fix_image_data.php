@@ -9,7 +9,7 @@
 
 */
 exit;
-require('squal_pre.php');
+require $gfwww.'include/squal_pre.php';
 
 if (!strstr($REMOTE_ADDR,$sys_internal_network)) {
         exit_permission_denied();

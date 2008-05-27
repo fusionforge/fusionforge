@@ -23,7 +23,7 @@
  */
 //$start = microtime();
 
-include_once 'includes/init.php';
+include_once $gfplugins.'webcalendar/www/includes/init.php';
 
 $error = "";
 // Don't allow users to use this feature if "allow view others" is

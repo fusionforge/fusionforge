@@ -10,9 +10,9 @@
 * @version   $Id$ 
 */
 
-require_once('www/news/news_utils.php');
-require_once('www/include/trove.php');
-require_once('www/include/project_summary.php');
+require_once $gfwww.'news/news_utils.php';
+require_once $gfwww.'include/trove.php';
+require_once $gfwww.'include/project_summary.php';
 
 $title = _('Project Info');
 

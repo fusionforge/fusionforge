@@ -15,7 +15,7 @@
  *	calendar and import them into WebCalendar with a category
  *	"work".
  */
-include_once 'includes/init.php';
+include_once $gfplugins.'webcalendar/www/includes/init.php';
 
 print_header();
 

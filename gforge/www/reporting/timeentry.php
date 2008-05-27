@@ -25,8 +25,8 @@
  *
  */
 
-require_once('common/include/Error.class.php');
-require_once('common/reporting/TimeEntry.class.php');
+require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'reporting/TimeEntry.class.php';
 
 //addTimeEntry
 $server->register(

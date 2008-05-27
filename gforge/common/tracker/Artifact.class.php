@@ -22,9 +22,9 @@
  * along with GForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
-require_once('common/include/Error.class.php');
-require_once('common/tracker/ArtifactMessage.class.php');
-require_once('common/tracker/ArtifactExtraField.class.php');
+require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'tracker/ArtifactMessage.class.php';
+require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
 
 // This string is used when sending the notification mail for identifying the
 // user response

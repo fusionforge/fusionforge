@@ -24,7 +24,7 @@
  */
 
 require_once('env.inc.php');
-require_once('squal_pre.php');
+require_once $gfwww.'include/squal_pre.php';
 
 $id = getStringFromRequest('id');
 

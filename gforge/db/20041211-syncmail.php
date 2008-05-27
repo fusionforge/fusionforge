@@ -1,8 +1,8 @@
 #! /usr/bin/php5 -f
 <?php
-require_once('www/include/squal_pre.php');
-require_once('common/mail/MailingList.class.php');
-require_once('common/include/Group.class.php');
+require_once $gfwww.'include/squal_pre.php';
+require_once $gfcommon.'mail/MailingList.class.php';
+require_once $gfcommon.'include/Group.class.php';
 
 //
 //	Set up this script to run as the site admin

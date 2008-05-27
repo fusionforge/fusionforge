@@ -30,8 +30,8 @@
 */
 
 
-require_once('common/include/Error.class.php');
-require_once('common/survey/SurveyQuestion.class.php');
+require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'survey/SurveyQuestion.class.php';
 
 class SurveyQuestionFactory extends Error {
 

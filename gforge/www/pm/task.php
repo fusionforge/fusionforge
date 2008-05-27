@@ -17,10 +17,10 @@
 */
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('www/pm/include/ProjectGroupHTML.class.php');
-require_once('www/pm/include/ProjectTaskHTML.class.php');
-require_once('common/pm/ProjectGroupFactory.class.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'pm/include/ProjectGroupHTML.class.php';
+require_once $gfwww.'pm/include/ProjectTaskHTML.class.php';
+require_once $gfcommon.'pm/ProjectGroupFactory.class.php';
 
 $group_id = getIntFromRequest('group_id');
 $group_project_id = getIntFromRequest('group_project_id');
@@ -86,7 +86,7 @@ switch (getStringFromRequest('func')) {
 			} elseif ($pt->isError()) {
 				exit_error('Error',$pt->getErrorMessage());
 			}
-			include 'add_task.php';
+			include $gfwww.'pm/add_task.php';
 		} else {
 			exit_permission_denied();
 		}
@@ -125,7 +125,7 @@ switch (getStringFromRequest('func')) {
 					}
 				}
 				$feedback=_('Task Created Successfully');
-				include 'browse_task.php';
+				include $gfwww.'pm/browse_task.php';
 			}
 		} else {
 			exit_permission_denied();
@@ -166,7 +166,7 @@ switch (getStringFromRequest('func')) {
 					}
 				}
 				$feedback=_('Task Updated Successfully');
-				include 'browse_task.php';
+				include $gfwww.'pm/browse_task.php';
 			}
 		} else {
 			exit_permission_denied();
@@ -177,7 +177,7 @@ switch (getStringFromRequest('func')) {
 	case 'downloadcsv': {
 
 		if ($pg->userIsAdmin()) {
-			include 'downloadcsv.php';
+			include $gfwww.'pm/downloadcsv.php';
 			exit;
 		} else {
 			exit_permission_denied();
@@ -188,7 +188,7 @@ switch (getStringFromRequest('func')) {
 	case 'uploadcsv': {
 
 		if ($pg->userIsAdmin()) {
-			include 'uploadcsv.php';
+			include $gfwww.'pm/uploadcsv.php';
 			exit;
 		} else {
 			exit_permission_denied();
@@ -199,7 +199,7 @@ switch (getStringFromRequest('func')) {
 	case 'postuploadcsv': {
 
 		if ($pg->userIsAdmin()) {			
-			include 'postuploadcsv.php';
+			include $gfwww.'pm/postuploadcsv.php';
 		} else {
 			exit_permission_denied();
 		}
@@ -261,7 +261,7 @@ switch (getStringFromRequest('func')) {
 			if (!$was_error) {
 				$feedback = _('Task Updated Successfully');
 			}
-			include 'browse_task.php';
+			include $gfwww.'pm/browse_task.php';
 			break;
 		} else {
 			exit_permission_denied();
@@ -286,7 +286,7 @@ switch (getStringFromRequest('func')) {
 				exit_error('ERROR','addRelatedArtifacts():: '.$pt->getErrorMessage());
 			} else {
 				$feedback=_('Successfully Added Tracker Relationship');
-				include 'browse_task.php';
+				include $gfwww.'pm/browse_task.php';
 
 			}
 		} else {
@@ -306,7 +306,7 @@ switch (getStringFromRequest('func')) {
 			} elseif ($pt->isError()) {
 				exit_error('Error',$pt->getErrorMessage());
 			}
-			include 'deletetask.php';
+			include $gfwww.'pm/deletetask.php';
 		} else {
 			exit_permission_denied();
 		}
@@ -335,7 +335,7 @@ switch (getStringFromRequest('func')) {
 					$feedback .= _('Task Successfully Deleted');
 				}
 			}
-			include 'browse_task.php';
+			include $gfwww.'pm/browse_task.php';
 		} else {
 			exit_permission_denied();
 		}
@@ -346,7 +346,7 @@ switch (getStringFromRequest('func')) {
 	//	Show the page surrounding the gantt chart
 	//
 	case 'ganttpage' : {
-		include 'ganttpage.php';
+		include $gfwww.'pm/ganttpage.php';
 		break;
 	}
 
@@ -354,7 +354,7 @@ switch (getStringFromRequest('func')) {
 	//	Show a gantt chart
 	//
 	case 'ganttchart' : {
-		include 'gantt.php';
+		include $gfwww.'pm/gantt.php';
 		break;
 	}
 
@@ -369,15 +369,15 @@ switch (getStringFromRequest('func')) {
 			exit_error('Error',$pt->getErrorMessage());
 		}
 		if (session_loggedin() && $pg->userIsAdmin()) {
-			include 'mod_task.php';
+			include $gfwww.'pm/mod_task.php';
 		} else {
-			include 'detail_task.php';
+			include $gfwww.'pm/detail_task.php';
 		}
 		break;
 	}
 
 	default : {
-		include 'browse_task.php';
+		include $gfwww.'pm/browse_task.php';
 		break;
 	}
 

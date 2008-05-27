@@ -26,7 +26,7 @@
  * (except for nonuser calendars... which we allow regardless of group).
  */
 
-include_once 'includes/init.php';
+include_once $gfplugins.'webcalendar/www/includes/init.php';
 
 $error = "";
 

@@ -1,5 +1,5 @@
 <?php
-include_once 'includes/init.php';
+include_once $gfplugins.'webcalendar/www/includes/init.php';
 print_header( '', '', '', true );
 
 if ( ! $is_admin ) {

@@ -26,8 +26,8 @@
  */
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('project_summary.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'include/project_summary.php';
 
 $group_name = getStringFromRequest('group_name');
 $group_id = getIntFromRequest('group_id');

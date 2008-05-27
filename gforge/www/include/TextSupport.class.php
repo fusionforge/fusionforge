@@ -1,8 +1,8 @@
 <?php
-require_once('common/include/Error.class.php');
-require_once('www/include/SmilieSupportHtml.class.php');
-require_once('www/include/BBCodeSupportHtml.class.php');
-require_once('www/include/HTMLSupport.class.php');
+require_once $gfcommon.'include/Error.class.php';
+require_once $gfwww.'include/SmilieSupportHtml.class.php';
+require_once $gfwww.'include/BBCodeSupportHtml.class.php';
+require_once $gfwww.'include/HTMLSupport.class.php';
 
 
 class TextSupport extends Error {

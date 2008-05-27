@@ -21,7 +21,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once('common/include/Error.class.php');
+require_once $gfcommon.'include/Error.class.php';
 class GForge extends Error {
 
 	/**

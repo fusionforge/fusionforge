@@ -25,8 +25,8 @@
 
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('bookmarks.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'include/bookmarks.php';
 
 $bookmark_id = getIntFromRequest('bookmark_id');
 if (!$bookmark_id) {

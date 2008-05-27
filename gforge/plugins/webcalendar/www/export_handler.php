@@ -11,7 +11,7 @@
  *	untimed events with a start time of -1 in the webcalendar database.
  *
  *********************************************************************/
-include_once 'includes/init.php';
+include_once $gfplugins.'webcalendar/www/includes/init.php';
 
 if ( ! empty ( $PROGRAM_VERSION ) ) {
   $prodid = "PRODID:-//WebCalendar-$PROGRAM_VERSION";

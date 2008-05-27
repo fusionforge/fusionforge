@@ -18,7 +18,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
-require_once('Aselect.class.php');
+require_once $gfplugins.'aselectextauth/include/Aselect.class.php';
 
 
 class ASelectextauthPlugin extends Plugin {

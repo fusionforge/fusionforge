@@ -26,9 +26,9 @@
  */
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('common/reporting/report_utils.php');
-require_once('common/reporting/Report.class.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'reporting/report_utils.php';
+require_once $gfcommon.'reporting/Report.class.php';
 
 if (!session_loggedin()) {
 	exit_not_logged_in();

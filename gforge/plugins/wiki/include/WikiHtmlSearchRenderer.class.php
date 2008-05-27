@@ -7,8 +7,8 @@
  * @version $Id: NewsHtmlSearchRenderer.class,v 1.1 2004/10/16 16:36:31 gsmet Exp $
  */
  
-require_once('www/search/include/renderers/HtmlGroupSearchRenderer.class.php');
-require_once('WikiSearchQuery.class.php');
+require_once $gfwww.'search/include/renderers/HtmlGroupSearchRenderer.class.php';
+require_once 'WikiSearchQuery.class.php';
 
 class WikiHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	

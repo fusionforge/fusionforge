@@ -1,5 +1,5 @@
 <?php
-include_once 'includes/init.php';
+include_once $gfplugins.'webcalendar/www/includes/init.php';
 send_no_cache_header ();
 
 if (($user != $login) && $is_nonuser_admin)

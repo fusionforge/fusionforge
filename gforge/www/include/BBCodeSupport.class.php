@@ -1,5 +1,5 @@
 <?php 
-require_once('common/include/Error.class.php');
+require_once $gfcommon.'include/Error.class.php';
 
 
 // length of the bbcode bbcode_uid that will be inserted in each bbcode tag

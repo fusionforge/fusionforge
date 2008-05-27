@@ -23,8 +23,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
-require_once('common/include/escapingUtils.php');
-require_once('squal_pre.php');
+require_once $gfcommon.'include/escapingUtils.php';
+require_once $gfwww.'include/squal_pre.php';
 
 if (!$sys_use_scm) {
 	exit_disabled();

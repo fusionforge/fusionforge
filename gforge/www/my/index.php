@@ -26,11 +26,11 @@
  */
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('vote_function.php');
-require_once('common/tracker/ArtifactsForUser.class.php');
-require_once('common/forum/ForumsForUser.class.php');
-require_once('common/pm/ProjectTasksForUser.class.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'include/vote_function.php';
+require_once $gfcommon.'tracker/ArtifactsForUser.class.php';
+require_once $gfcommon.'forum/ForumsForUser.class.php';
+require_once $gfcommon.'pm/ProjectTasksForUser.class.php';
 
 if (!session_loggedin()) { // || $sf_user_hash) {
 

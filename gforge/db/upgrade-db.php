@@ -26,7 +26,7 @@ if (version_compare(phpversion(), '4.3.0', '<') || php_sapi_name() == 'cgi') {
        ); 
 }
 
-require_once('squal_pre.php');
+require_once $gfwww.'include/squal_pre.php';
 
 $db_path = './';
 $date = -1;

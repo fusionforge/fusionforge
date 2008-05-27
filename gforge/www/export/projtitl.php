@@ -33,8 +33,8 @@
  */
 
 require_once('../env.inc.php');
-require_once('pre.php');
-require_once('www/news/news_utils.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'news/news_utils.php';
 
 $group_name = getStringFromRequest('group_name');
 $group_id = getIntFromRequest('group_id');

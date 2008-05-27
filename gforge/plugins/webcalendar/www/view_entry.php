@@ -12,8 +12,8 @@
  * user  - user to display
  * (*) required field
  */
-include_once 'includes/init.php';
-include_once 'includes/site_extras.php';
+include_once $gfplugins.'webcalendar/www/includes/init.php';
+include_once $gfplugins.'webcalendar/www/includes/site_extras.php';
 
 // make sure this user is allowed to look at this calendar.
 $can_view = false;
