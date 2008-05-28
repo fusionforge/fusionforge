@@ -193,7 +193,9 @@ class projects_hierarchyPlugin extends Plugin {
 			//modif pour hierarchie par Fabien le 10/10/06
 			//add files add_son.php, del_father.php,del_son.php,wait_son.php and hierarchy_utils.php
 			
-			include('../../plugins/projects_hierarchy/hierarchy_utils.php');
+			global $gfplugins;
+			require_once $gfplugins.'projects_hierarchy/www/hierarchy_utils.php';
+			//include('../../plugins/projects_hierarchy/hierarchy_utils.php');
 			$group_id = $params ;
 			echo $HTML->boxMiddle(_('Modify the hierarchy'));
 			echo '<form action="../../plugins/projects_hierarchy/add_son.php?group_id='.$group_id.'" method="POST" name="formson">';
