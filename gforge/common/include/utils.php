@@ -955,7 +955,7 @@ function util_make_url_u ($username, $user_id) {
 	if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
 		return util_make_url ("/developer/?user_id=$user_id");
 	} else {
-		return util_make_url ("/projects/$username/");
+		return util_make_url ("/users/$username/");
 	}
 }
 
