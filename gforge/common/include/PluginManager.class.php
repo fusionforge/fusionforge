@@ -91,6 +91,8 @@ class PluginManager extends Error {
 	 *
 	 */
 	function LoadPlugin ($p_name) {
+		global $gfplugins;
+		
 		$plugins_data = $this->GetPlugins() ;
 		$include_path = $GLOBALS['sys_plugins_path'] ;
 		$filename = $include_path . $p_name . "/common/".$p_name."-init.php" ;
