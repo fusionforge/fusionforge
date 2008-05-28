@@ -18,28 +18,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-global $sys_plugins_path;
+require_once $gfplugins.'svncommitemail/common/SVNCommitEmailPlugin.class.php' ;
 
-$found = false;
-if (is_dir($sys_plugins_path.'/svncommitemail/common/')) {
-	if (is_file($sys_plugins_path.'/svncommitemail/common/SVNCommitEmailPlugin.class.php')) {
-		require_once $gfplugins.'svncommitemail/common/SVNCommitEmailPlugin.class.php' ;
-		$found = true;
-	}
-} else {
-	if (is_file($sys_plugins_path.'/svncommitemail/include/SVNCommitEmailPlugin.class.php')) {
-		require_once $gfplugins.'svncommitemail/include/SVNCommitEmailPlugin.class.php' ;
-		$found = true;
-	}
-}
-
-if ($found) {
-	$SVNCommitEmailPlugin = new SVNCommitEmailPlugin() ;
-	register_plugin ($SVNCommitEmailPlugin) ;	
-} else {
-	echo 'Plugin svncommitemail not found';
-}
-
+register_plugin (new SVNCommitEmailPlugin) ;
 
 // Local Variables:
 // mode: php
