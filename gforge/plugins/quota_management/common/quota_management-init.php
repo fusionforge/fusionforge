@@ -19,6 +19,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
+global $gfplugins;
 require_once $gfplugins.'quota_management/common/quota_managementPlugin.class.php' ;
 
 $quota_managementPluginObject = new quota_managementPlugin ;

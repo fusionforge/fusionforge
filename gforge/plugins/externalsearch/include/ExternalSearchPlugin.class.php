@@ -10,7 +10,9 @@
  * @version $Id$
  */
 
+global $gfwww;
 require_once $gfwww.'search/include/SearchManager.class.php';
+global $gfplugins;
 require_once $gfplugins.'externalsearch/include/ExternalSearchEngine.class.php';
 
 class ExternalSearchPlugin extends Plugin {
@@ -23,6 +25,7 @@ class ExternalSearchPlugin extends Plugin {
 	}
 
 	function CallHook($hookname, & $searchManager) {
+		global $gfconfig;
 		switch($hookname) {
 			case 'search_engines':
 				require_once $gfconfig.'plugins/externalsearch/config.php';

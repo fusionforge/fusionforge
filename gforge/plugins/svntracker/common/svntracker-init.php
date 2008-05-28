@@ -23,6 +23,7 @@
  * along with GForge-plugin-svntracker; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
+global $gfplugins;
 require_once $gfplugins.'svntracker/common/svntrackerPlugin.class.php' ;
 
 $svntrackerPluginObject = new svntrackerPlugin ;

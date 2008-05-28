@@ -1,6 +1,6 @@
 etc/gforge
+etc/gforge/plugins
 usr/share/doc/gforge-plugins-extra
-usr/share/gforge/etc
 usr/share/gforge/etc/httpd.d
 usr/share/gforge/etc/local.d
 usr/share/gforge/etc/templates

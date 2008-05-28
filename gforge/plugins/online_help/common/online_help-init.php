@@ -21,6 +21,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
+global $gfplugins;
 require_once $gfplugins.'online_help/common/online_helpPlugin.class.php' ;
 
 register_plugin (new online_helpPlugin) ;

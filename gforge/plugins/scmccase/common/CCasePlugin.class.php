@@ -25,6 +25,7 @@
 
 class CCasePlugin extends SCM {
 	function CCasePlugin () {
+		global $gfconfig;
 		$this->SCM () ;
 		$this->name = "scmccase";
 		$this->text = 'CCASE';

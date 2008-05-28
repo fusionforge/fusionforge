@@ -22,10 +22,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
-require_once 'plugins/ldapextauth/mapping.php' ;
+global $gfconfig;
+require_once $gfconfig.'plugins/ldapextauth/mapping.php' ;
 
 class LdapextauthPlugin extends Plugin {
 	function LdapextauthPlugin () {
+		global $gfconfig;
 		$this->Plugin() ;
 		$this->name = "ldapextauth";
 		$this->hooks[] = "session_before_login";

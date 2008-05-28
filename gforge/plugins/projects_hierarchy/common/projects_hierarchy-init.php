@@ -19,6 +19,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
+global $gfplugins;
 require_once $gfplugins.'projects_hierarchy/common/projects_hierarchyPlugin.class.php' ;
 
 $projects_hierarchyPluginObject = new projects_hierarchyPlugin ;

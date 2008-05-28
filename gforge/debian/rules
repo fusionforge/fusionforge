@@ -67,7 +67,7 @@ install: build
 
 	# gforge-plugins-extra
 	cp -r plugins $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/
-	cp -r $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/*/etc/* $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/etc/
+	cp -r $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/*/etc/* $(CURDIR)/debian/gforge-plugins-extra/etc/gforge/
 	rm -rf $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/*/etc/*
 	rm -rf $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/*/debian
 	# ln -s /var/lib/gforge/www/plugins $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/www
@@ -92,7 +92,7 @@ install: build
 	rm -r $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/scmcvs/
 	rm -r $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/scmsvn/
 	rm -r $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/mediawiki/
-	rm $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/etc/httpd.d/03mediawiki
+	rm $(CURDIR)/debian/gforge-plugins-extra/etc/gforge/httpd.d/03mediawiki
 
 	# gforge-plugin-scmcvs
 	install -m 755 deb-specific/install-cvs.sh     $(CURDIR)/debian/gforge-plugin-scmcvs/usr/lib/gforge/plugins/scmcvs/bin/
@@ -152,6 +152,7 @@ install: build
 	# gforge/debian/gforge-web-apache2
 	cp -r www $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/
 	rm $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/plugins/mediawiki
+	rm $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/plugins/*
 	install -m 644 deb-specific/index_std.php $(CURDIR)/debian/gforge-web-apache2/etc/gforge/custom/
 	rm $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/index_std.php
 	find $(CURDIR)/debian/gforge-web-apache2 -name \*.uu -type f | xargs rm -f

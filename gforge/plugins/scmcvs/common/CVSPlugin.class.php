@@ -3,6 +3,7 @@
 class CVSPlugin extends SCM {
 	function CVSPlugin () {
 		global $cvs_root;
+		global $gfconfig;
 		$this->SCM () ;
 		$this->name = 'scmcvs';
 		$this->text = 'CVS';

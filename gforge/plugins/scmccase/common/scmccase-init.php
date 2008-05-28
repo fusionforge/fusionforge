@@ -23,6 +23,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
+global $gfplugins;
 require_once $gfplugins.'scmccase/common/CCasePlugin.class.php' ;
 
 $CCasePluginObject = new CCasePlugin ;
