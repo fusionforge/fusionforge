@@ -37,7 +37,7 @@ if (getenv('sys_localinc')) {
 	$gfconfig = dirname($gfcgfile).'/';
 } elseif (file_exists($IP.'/config/'.$_SERVER['SERVER_NAME'].'/local.inc.php')) {
 	$gfcgfile = $IP.'/config/'.$_SERVER['SERVER_NAME'].'/local.inc.php';
-	$gfconfig = $IP.'/config/'.$_SERVER['SERVER_NAME'];
+	$gfconfig = $IP.'/config/'.$_SERVER['SERVER_NAME'].'/';
 } elseif (file_exists($IP.'/config/local.inc.php')) {
 	$gfcgfile = $IP.'/config/local.inc.php';
 	$gfconfig = $IP.'/config/';
