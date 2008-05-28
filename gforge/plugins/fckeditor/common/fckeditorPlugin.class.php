@@ -91,7 +91,7 @@ class fckeditorPlugin extends Plugin {
 				} else {
 					$http = "http://";
 				}
-				if ($params['name']) {
+				if (@$params['name']) {
 					$oFCKeditor = new FCKeditor($params['name']) ;
 				} else {
 					$oFCKeditor = new FCKeditor('body') ;
