@@ -1125,7 +1125,7 @@ Enjoy the site.
 		*/
 		if ($this->user_pref) {
 			//echo "\n\nPrefs were fetched already";
-			if ($this->user_pref["$preference_name"]) {
+			if (isset($this->user_pref["$preference_name"])) {
 				//we have fetched prefs - return part of array
 				return $this->user_pref["$preference_name"];
 			} else {
