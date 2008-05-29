@@ -245,7 +245,7 @@ class Role extends Error {
 	 *  @return array	Assoc array of values for this section.
 	 */
 	function &getRoleVals($section) {
-		global $role_vals;
+		global $role_vals, $rbac_permission_names;
 
 		//
 		//	Optimization - save array so it is only built once per page view
