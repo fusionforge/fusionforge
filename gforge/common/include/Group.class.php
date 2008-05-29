@@ -1979,12 +1979,6 @@ class Group extends Error {
 			}
 		}
 
-		//
-		//
-		//	Create MailingList
-		//
-		//
-		$mlist = new MailingList($this);
 		$admin_group = db_query("SELECT user_id FROM user_group 
 		WHERE group_id=".$this->getID()." AND admin_flags='A'");
 		if (db_numrows($admin_group) > 0) {
@@ -1992,12 +1986,21 @@ class Group extends Error {
 		} else {
 			$idadmin_group = 1;
 		}
-		if (!$mlist->create('commits','Commits',1,$idadmin_group)) {
-			$this->setError(sprintf(_('ML: %s'),$mlist->getErrorMessage()));
-			db_rollback();
-			return false;
-		}
 
+		//
+		//
+		//	Create MailingList
+		//
+		//
+		if ($GLOBALS['sys_use_mail']) {
+			$mlist = new MailingList($this);
+			if (!$mlist->create('commits','Commits',1,$idadmin_group)) {
+				$this->setError(sprintf(_('ML: %s'),$mlist->getErrorMessage()));
+				db_rollback();
+				return false;
+			}
+		}
+		
 		db_commit();
 
 		$this->sendApprovalEmail();
