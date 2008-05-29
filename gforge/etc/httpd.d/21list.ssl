@@ -23,7 +23,7 @@
     SSLEnable
   </IfModule>
 
-  ScriptAlias /mailman/ /var/lib/mailman/cgi-bin/
+  ScriptAlias /cgi-bin/mailman/ /var/lib/mailman/cgi-bin/
 
   Alias /pipermail /var/lib/mailman/archives/public
   <Directory /var/lib/mailman/archives/public>
