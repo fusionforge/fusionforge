@@ -46,7 +46,7 @@ if (getStringFromRequest('submit') && getStringFromRequest('root1')) {
 	// there is at least a $root1[xxx]
 	$allroots = array();
 	$allroots = getStringFromRequest('root1');
-	//$eachroot = ;//must make this bypass because it wouldn´t compile otherwise
+	//$eachroot = ;//must make this bypass because it wouldn't compile otherwise
 	while (list($rootnode,$value) = each($allroots)) {
 		// check for array, then clear each root node for group
 		db_query("
