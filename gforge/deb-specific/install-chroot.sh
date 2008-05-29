@@ -67,6 +67,8 @@ case "$1" in
 	    | sort -u \
 	    | cpio --quiet -pdumVLB $CHROOTDIR
 
+	# cvs extra
+	cp /lib/ld-linux.so.* $CHROOTDIR/lib
 	# sshd extras
 	# pthread cancel
 	cp /lib/libgcc_s* $CHROOTDIR/lib

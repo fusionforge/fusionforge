@@ -99,7 +99,8 @@ install: build
 	install -m 755 deb-specific/update-user-group-cvs.sh $(CURDIR)/debian/gforge-plugin-scmcvs/usr/lib/gforge/plugins/scmcvs/bin/
 	cp -r deb-specific/scmcvs/cronjobs/* $(CURDIR)/debian/gforge-plugin-scmcvs/usr/share/gforge/plugins/scmcvs/cronjobs
 	cp -r plugins/scmcvs/bin/* $(CURDIR)/debian/gforge-plugin-scmcvs/usr/lib/gforge/plugins/scmcvs/bin/
-	cp -r plugins/scmcvs/sbin/* $(CURDIR)/debian/gforge-plugin-scmcvs/usr/lib/gforge/plugins/scmcvs/sbin/
+	cp -r plugins/scmcvs/sbin/* $(CURDIR)/debian/gforge-plugin-scmcvs/usr/share/gforge/plugins/scmcvs/sbin/
+	chmod 755 $(CURDIR)/debian/gforge-plugin-scmcvs/usr/share/gforge/plugins/scmcvs/sbin/*
 	cp -r plugins/scmcvs/common/* $(CURDIR)/debian/gforge-plugin-scmcvs/usr/share/gforge/plugins/scmcvs/common/
 	cp -r plugins/scmcvs/cronjobs/* $(CURDIR)/debian/gforge-plugin-scmcvs/usr/share/gforge/plugins/scmcvs/cronjobs/
 	cp -r plugins/scmcvs/etc/plugins/scmcvs/* $(CURDIR)/debian/gforge-plugin-scmcvs/etc/gforge/plugins/scmcvs/

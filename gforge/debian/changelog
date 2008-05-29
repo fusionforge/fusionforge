@@ -1,4 +1,4 @@
-gforge (4.6.99+svn6526-1) unstable; urgency=low
+gforge (4.6.99+svn6530-1) unstable; urgency=low
 
   [ Christian Bayle ]
   * Don't try to unregister scm plugins when GForge database is not
@@ -6,7 +6,8 @@ gforge (4.6.99+svn6526-1) unstable; urgency=low
   * Adapted use-snoopy-from-distro.dpatch for new gfplugin and
     gfconfig vars
   * Readded missing cvs-pserver and removed obsolete one from
-    deb-specific
+    deb-specific, fixed missing lib for cvs in install-chroot.sh
+  * Fix mailman ScriptAlias
 
   [ Roland Mas ]
   * Tracking upstream SVN.
