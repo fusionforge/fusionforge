@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `db_images` (
   `id` int(11) NOT NULL auto_increment,
   `group_id` int(11) NOT NULL default '0',
   `description` varchar(255) NOT NULL default '',
-  `bin_data` text NOT NULL,
+  `bin_data` mediumblob NOT NULL,
   `filename` varchar(25) NOT NULL default '',
   `filesize` int(11) NOT NULL default '0',
   `filetype` varchar(10) NOT NULL default '',
@@ -126,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `forum` (
   `subject` varchar(100) NOT NULL default '',
   `body` text NOT NULL,
   `post_date` int(11) NOT NULL default '0',
-  `is_followup_to` int(11) NOT NULL default '0',
+  `is_followup_to` tinyint(1) NOT NULL default '0',
   `thread_id` int(11) NOT NULL default '0',
   `has_followups` int(11) default '0',
   `most_recent_date` int(11) NOT NULL default '0',
@@ -159,7 +159,7 @@ CREATE TABLE IF NOT EXISTS `forum_group_list` (
   `group_forum_id` int(11) NOT NULL auto_increment,
   `group_id` int(11) NOT NULL default '0',
   `forum_name` varchar(25) NOT NULL default '',
-  `is_public` int(11) NOT NULL default '0',
+  `is_public` tinyint(1) NOT NULL default '0',
   `description` varchar(255) default NULL,
   `allow_anonymous` int(11) NOT NULL default '0',
   `send_all_posts_to` varchar(25) default NULL,
@@ -239,7 +239,7 @@ CREATE TABLE IF NOT EXISTS `frs_package` (
   `group_id` int(11) NOT NULL default '0',
   `name` varchar(25) default NULL,
   `status_id` int(11) NOT NULL default '0',
-  `is_public` int(11) default '1',
+  `is_public` tinyint(1) default '1',
   PRIMARY KEY  (`package_id`),
   KEY `package_group_id` (`group_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -315,7 +315,7 @@ CREATE TABLE IF NOT EXISTS `groups` (
   `group_id` int(11) NOT NULL auto_increment,
   `group_name` varchar(40) default NULL,
   `homepage` varchar(128) default NULL,
-  `is_public` int(11) NOT NULL default '0',
+  `is_public` tinyint(1) NOT NULL default '0',
   `status` char(1) NOT NULL default '',
   `unix_group_name` varchar(30) NOT NULL default '',
   `unix_box` varchar(20) NOT NULL default 'shell1',
@@ -325,25 +325,25 @@ CREATE TABLE IF NOT EXISTS `groups` (
   `license_other` varchar(25) default NULL,
   `register_time` int(11) NOT NULL default '0',
   `rand_hash` varchar(32) default NULL,
-  `use_mail` int(11) NOT NULL default '1',
-  `use_survey` int(11) NOT NULL default '1',
-  `use_forum` int(11) NOT NULL default '1',
-  `use_pm` int(11) NOT NULL default '1',
-  `use_scm` int(11) NOT NULL default '1',
-  `use_news` int(11) NOT NULL default '1',
+  `use_mail` tinyint(1) NOT NULL default '1',
+  `use_survey` tinyint(1) NOT NULL default '1',
+  `use_forum` tinyint(1) NOT NULL default '1',
+  `use_pm` tinyint(1) NOT NULL default '1',
+  `use_scm` tinyint(1) NOT NULL default '1',
+  `use_news` tinyint(1) NOT NULL default '1',
   `type_id` int(11) NOT NULL default '1',
-  `use_docman` int(11) NOT NULL default '1',
+  `use_docman` tinyint(1) NOT NULL default '1',
   `new_doc_address` varchar(100) NOT NULL default '',
-  `send_all_docs` int(11) NOT NULL default '0',
-  `use_pm_depend_box` int(11) NOT NULL default '1',
-  `use_ftp` int(11) default '1',
-  `use_tracker` int(11) default '1',
-  `use_frs` int(11) default '1',
-  `use_stats` int(11) default '1',
-  `enable_pserver` int(11) default '1',
-  `enable_anonscm` int(11) default '1',
+  `send_all_docs` tinyint(1) NOT NULL default '0',
+  `use_pm_depend_box` tinyint(1) NOT NULL default '1',
+  `use_ftp` tinyint(1) default '1',
+  `use_tracker` tinyint(1) default '1',
+  `use_frs` tinyint(1) default '1',
+  `use_stats` tinyint(1) default '1',
+  `enable_pserver` tinyint(1) default '1',
+  `enable_anonscm` tinyint(1) default '1',
   `license` int(11) default '100',
-  `scm_box` varchar(25) default NULL,
+  `scm_box` varchar(80) default NULL,
   PRIMARY KEY  (`group_id`),
   UNIQUE KEY `group_unix_uniq` (`unix_group_name`),
   KEY `groups_type` (`type_id`),
@@ -361,7 +361,7 @@ CREATE TABLE IF NOT EXISTS `mail_group_list` (
   `group_list_id` int(11) NOT NULL auto_increment,
   `group_id` int(11) NOT NULL default '0',
   `list_name` varchar(25) default NULL,
-  `is_public` int(11) NOT NULL default '0',
+  `is_public` tinyint(1) NOT NULL default '0',
   `password` varchar(16) default NULL,
   `list_admin` int(11) NOT NULL default '0',
   `status` int(11) NOT NULL default '0',
@@ -380,7 +380,7 @@ CREATE TABLE IF NOT EXISTS `news_bytes` (
   `id` int(11) NOT NULL auto_increment,
   `group_id` int(11) NOT NULL default '0',
   `submitted_by` int(11) NOT NULL default '0',
-  `is_approved` int(11) NOT NULL default '0',
+  `is_approved` tinyint(1) NOT NULL default '0',
   `post_date` int(11) NOT NULL default '0',
   `forum_id` int(11) NOT NULL default '0',
   `summary` text,
@@ -542,7 +542,7 @@ CREATE TABLE IF NOT EXISTS `project_group_list` (
   `group_project_id` int(11) NOT NULL auto_increment,
   `group_id` int(11) NOT NULL default '0',
   `project_name` varchar(25) NOT NULL default '',
-  `is_public` int(11) NOT NULL default '0',
+  `is_public` tinyint(1) NOT NULL default '0',
   `description` varchar(255) default NULL,
   `send_all_posts_to` varchar(25) default NULL,
   PRIMARY KEY  (`group_project_id`),
@@ -869,7 +869,7 @@ CREATE TABLE IF NOT EXISTS `surveys` (
   `group_id` int(11) NOT NULL default '0',
   `survey_title` varchar(100) NOT NULL default '',
   `survey_questions` varchar(100) NOT NULL default '',
-  `is_active` int(11) NOT NULL default '1',
+  `is_active` tinyint(1) NOT NULL default '1',
   PRIMARY KEY  (`survey_id`),
   KEY `surveys_group` (`group_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -939,7 +939,7 @@ CREATE TABLE IF NOT EXISTS `user_diary` (
   `date_posted` int(11) NOT NULL default '0',
   `summary` text,
   `details` text,
-  `is_public` int(11) NOT NULL default '0',
+  `is_public` tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (`id`),
   KEY `user_diary_user_date` (`user_id`,`date_posted`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -1180,9 +1180,9 @@ CREATE TABLE IF NOT EXISTS `artifact_group_list` (
   `group_id` int(11) NOT NULL default '0',
   `name` text,
   `description` text,
-  `is_public` int(11) NOT NULL default '0',
-  `allow_anon` int(11) NOT NULL default '0',
-  `email_all_updates` int(11) NOT NULL default '0',
+  `is_public` tinyint(1) NOT NULL default '0',
+  `allow_anon` tinyint(1) NOT NULL default '0',
+  `email_all_updates` tinyint(1) NOT NULL default '0',
   `email_address` text NOT NULL,
   `due_period` int(11) NOT NULL default '2592000',
   `submit_instructions` text,
@@ -1297,7 +1297,7 @@ CREATE TABLE IF NOT EXISTS `artifact_file` (
   `id` int(11) NOT NULL auto_increment,
   `artifact_id` int(11) NOT NULL default '0',
   `description` text NOT NULL,
-  `bin_data` text NOT NULL,
+  `bin_data` mediumblob NOT NULL,
   `filename` text NOT NULL,
   `filesize` int(11) NOT NULL default '0',
   `filetype` text NOT NULL,
@@ -1986,7 +1986,7 @@ CREATE TABLE IF NOT EXISTS `user_plugin` (
 CREATE TABLE IF NOT EXISTS `cron_history` (
   `rundate` int(11) NOT NULL default '0',
   `job` varchar(255) default NULL,
-  `output` varchar(255) default NULL,
+  `output` text default NULL,
   KEY `cronhist_rundate` (`rundate`),
   KEY `cronhist_jobrundate` (`job`,`rundate`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -2090,11 +2090,11 @@ CREATE TABLE IF NOT EXISTS `role_setting` (
 CREATE TABLE IF NOT EXISTS `artifact_extra_field_list` (
   `extra_field_id` int(11) NOT NULL auto_increment,
   `group_artifact_id` int(11) NOT NULL default '0',
-  `field_name` text NOT NULL,
+  `field_name` varchar(255) NOT NULL,
   `field_type` int(11) default '1',
   `attribute1` int(11) default '0',
   `attribute2` int(11) default '0',
-  `is_required` int(11) NOT NULL default '0',
+  `is_required` tinyint(1) NOT NULL default '0',
   `alias` text,
   PRIMARY KEY  (`extra_field_id`),
   KEY `artifactextrafieldlist_groupartid` (`group_artifact_id`)
@@ -2394,7 +2394,7 @@ CREATE TABLE IF NOT EXISTS `form_keys` (
     key_id int(11) NOT NULL auto_increment,
     `key` char(32) NOT NULL,
     creation_date int(11) NOT NULL,
-    is_used int(11) default 0 NOT NULL,
+    is_used tinyint(1) default 0 NOT NULL,
 	PRIMARY KEY  (`key_id`),
 	UNIQUE KEY `key` (`key`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -2439,13 +2439,10 @@ CREATE OR REPLACE VIEW `forum_group_list_vw` AS
 		forum_group_list.send_all_posts_to,
 		forum_group_list.moderation_level,
 		forum_agg_msg_count.count AS total,
-		(SELECT max(forum.post_date) AS recent
-		FROM forum
-		WHERE (forum.group_forum_id = forum_group_list.group_forum_id)) AS recent,
-		(SELECT count(forum.thread_id) AS count
-		FROM forum
-		WHERE (forum.group_forum_id = forum_group_list.group_forum_id)
-		GROUP BY forum.thread_id) AS threads
+		(SELECT max(forum.post_date) FROM forum
+		 WHERE (forum.group_forum_id = forum_group_list.group_forum_id)) AS recent,
+		(SELECT count(distinct forum.thread_id) FROM forum
+		 WHERE (forum.group_forum_id = forum_group_list.group_forum_id)) AS threads
 	FROM (forum_group_list LEFT JOIN forum_agg_msg_count USING (group_forum_id));
 
 
@@ -2470,7 +2467,7 @@ CREATE TABLE IF NOT EXISTS `forum_pending_attachment` (
     userid int(11) DEFAULT 100 NOT NULL,
     dateline int(11) DEFAULT 0 NOT NULL,
     filename character varying(100) DEFAULT '' NOT NULL,
-    filedata text NOT NULL,
+    filedata mediumblob NOT NULL,
     visible smallint DEFAULT 0 NOT NULL,
     counter smallint DEFAULT 0 NOT NULL,
     filesize int(11) DEFAULT 0 NOT NULL,
@@ -2530,7 +2527,7 @@ CREATE TABLE IF NOT EXISTS `group_activity_monitor` (
 CREATE OR REPLACE VIEW `activity_vw` AS
 	(SELECT
 		agl.group_id,
-		`trackeropen` AS section,
+		'trackeropen' AS section,
 		agl.group_artifact_id AS ref_id,
 		a.artifact_id AS subref_id,
 		a.summary AS description,
@@ -2543,7 +2540,7 @@ CREATE OR REPLACE VIEW `activity_vw` AS
 	UNION
 	(SELECT
 		agl.group_id,
-		`trackerclose` AS section,
+		'trackerclose' AS section,
 		agl.group_artifact_id AS ref_id,
 		a.artifact_id AS subref_id,
 		a.summary AS description,
@@ -2557,7 +2554,7 @@ CREATE OR REPLACE VIEW `activity_vw` AS
 	UNION
 	(SELECT
 		agl.group_id,
-		`commit` AS section,
+		'commit' AS section,
 		agl.group_artifact_id AS ref_id,
 		a.artifact_id AS subref_id,
 		pcdm.log_text AS description,
@@ -2569,7 +2566,7 @@ CREATE OR REPLACE VIEW `activity_vw` AS
 	UNION
 	(SELECT
 		frsp.group_id,
-		`frsrelease` AS section,
+		'frsrelease' AS section,
 		frsp.package_id AS ref_id,
 		frsr.release_id AS subref_id,
 		frsr.name AS description,
@@ -2581,7 +2578,7 @@ CREATE OR REPLACE VIEW `activity_vw` AS
 	UNION
 	(SELECT
 		fgl.group_id,
-		`forumpost` AS section,
+		'forumpost' AS section,
 		fgl.group_forum_id AS ref_id,
 		forum.msg_id AS subref_id,
 		forum.subject AS description,
@@ -2591,7 +2588,20 @@ CREATE OR REPLACE VIEW `activity_vw` AS
 		u.realname
 	FROM (forum_group_list fgl
 	JOIN forum USING (group_forum_id)), users u
-	WHERE (u.user_id = forum.posted_by));
+	WHERE (u.user_id = forum.posted_by))
+	UNION
+	(SELECT
+		news_bytes.group_id,
+		'news' AS section,
+		news_bytes.id AS ref_id,
+		news_bytes.forum_id AS subref_id,
+		news_bytes.summary AS description,
+		news_bytes.post_date AS activity_date,
+		u.user_id,
+		u.user_name,
+		u.realname
+	FROM news_bytes, users u
+	WHERE (u.user_id = news_bytes.submitted_by));
 
 
 
