@@ -8,6 +8,7 @@ gforge (4.6.99+svn6530-1) unstable; urgency=low
   * Readded missing cvs-pserver and removed obsolete one from
     deb-specific, fixed missing lib for cvs in install-chroot.sh
   * Fix mailman ScriptAlias
+  * SYSLOGD is now to set in /etc/default/syslog
 
   [ Roland Mas ]
   * Tracking upstream SVN.

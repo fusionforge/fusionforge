@@ -97,7 +97,7 @@ We can't do this for Debian policy reason that forbid this.
 ln -s /var/lib/gforge/chroot/svnroot /svnroot is to be done
 
   Don't forget about adding 
-SYSLOGD="-p /dev/log -a /var/lib/gforge/chroot/dev/log" in /etc/init.d/sysklogd
+SYSLOGD="-p /dev/log -a /var/lib/gforge/chroot/dev/log" in /etc/default/syslog
 This is a WARNING you might have seen at install, essential if you run 
 anonymous cvs in a root jail (This is the default in Debian)
 

@@ -86,9 +86,9 @@ case "$1" in
 	[ -c $CHROOTDIR/dev/urandom ] || mknod $CHROOTDIR/dev/urandom c 1 9
 	[ -c $CHROOTDIR/dev/console ] || mknod $CHROOTDIR/dev/console c 5 1
 	# For /dev/log
-	if ! grep -q "^SYSLOGD.*/var/lib/gforge/chroot/dev/log.*" /etc/init.d/sysklogd ; then 
+	if ! grep -q "^SYSLOGD.*/var/lib/gforge/chroot/dev/log.*" /etc/default/syslog ; then 
 		echo '######################################################################################################'
-		echo 'WARNING: you must have SYSLOGD="-p /dev/log -a /var/lib/gforge/chroot/dev/log" in /etc/init.d/sysklogd'
+		echo 'WARNING: you must have SYSLOGD="-p /dev/log -a /var/lib/gforge/chroot/dev/log" in /etc/default/syslog'
 		echo 'To have cvs pserver running correctly'
 		echo '######################################################################################################'
 	fi
