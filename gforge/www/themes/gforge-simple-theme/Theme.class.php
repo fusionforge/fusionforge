@@ -920,7 +920,7 @@ function quickNav() {
 				if (db_result($res,$i,'use_tracker')) {
 					$ret .= '
 				<option value="/tracker/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tracker</option>';
-					if (db_result($res,$i,'admin_flags') || db_result($res,$i,'tracker_flags')) {
+					if (db_result($res,$i,'admin_flags') || db_result($res,$i,'artifact_flags')) {
 						$ret .= '
 				<option value="/tracker/admin/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
 					}

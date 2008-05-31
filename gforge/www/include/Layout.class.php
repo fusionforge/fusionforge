@@ -1081,7 +1081,7 @@ echo db_error();
 					if (db_result($res,$i,'use_tracker')) {
 					$ret .= '
 				<option value="'.util_make_url ('/tracker/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tracker</option>';
-						if (db_result($res,$i,'admin_flags') || db_result($res,$i,'tracker_flags')) {
+						if (db_result($res,$i,'admin_flags') || db_result($res,$i,'artifact_flags')) {
 					$ret .= '
 				<option value="'.util_make_url ('/tracker/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
 						}
