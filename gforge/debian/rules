@@ -96,7 +96,7 @@ install: build
 
 	# gforge-plugin-scmcvs
 	install -m 755 deb-specific/install-cvs.sh     $(CURDIR)/debian/gforge-plugin-scmcvs/usr/lib/gforge/plugins/scmcvs/bin/
-	install -m 755 deb-specific/update-user-group-cvs.sh $(CURDIR)/debian/gforge-plugin-scmcvs/usr/lib/gforge/plugins/scmcvs/bin/
+	install -m 755 deb-specific/update-user-group-ssh.sh $(CURDIR)/debian/gforge-plugin-scmcvs/usr/lib/gforge/plugins/scmcvs/bin/
 	cp -r deb-specific/scmcvs/cronjobs/* $(CURDIR)/debian/gforge-plugin-scmcvs/usr/share/gforge/plugins/scmcvs/cronjobs
 	cp -r plugins/scmcvs/bin/* $(CURDIR)/debian/gforge-plugin-scmcvs/usr/lib/gforge/plugins/scmcvs/bin/
 	cp -r plugins/scmcvs/sbin/* $(CURDIR)/debian/gforge-plugin-scmcvs/usr/share/gforge/plugins/scmcvs/sbin/
@@ -141,7 +141,7 @@ install: build
 #	install -m 644 cronjobs/cvs-cron/default_page.php $(CURDIR)/debian/gforge-common/usr/lib/gforge/lib/
 	install -m 755 deb-specific/ssh_dump_update.pl    $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 	#
-	install -m 755 deb-specific/update-user-group-cvs.sh $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
+	install -m 755 deb-specific/update-user-group-ssh.sh $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 	#
 	cp -r common $(CURDIR)/debian/gforge-common/usr/share/gforge/
 	ln -s database-pgsql.php $(CURDIR)/debian/gforge-common/usr/share/gforge/common/include/database.php

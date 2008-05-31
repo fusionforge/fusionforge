@@ -1,4 +1,4 @@
-gforge (4.6.99+svn6530-1) unstable; urgency=low
+gforge (4.6.99+svn6537-1) UNRELEASED; urgency=low
 
   [ Christian Bayle ]
   * Don't try to unregister scm plugins when GForge database is not
@@ -8,7 +8,9 @@ gforge (4.6.99+svn6530-1) unstable; urgency=low
   * Readded missing cvs-pserver and removed obsolete one from
     deb-specific, fixed missing lib for cvs in install-chroot.sh
   * Fix mailman ScriptAlias
-  * SYSLOGD is now to set in /etc/default/syslog
+  * SYSLOGD is now to set in /etc/default/syslogd
+  * Renamed update-user-group-cvs.sh in update-user-group-ssh.sh
+    as it doesn't update CVS
 
   [ Roland Mas ]
   * Tracking upstream SVN.

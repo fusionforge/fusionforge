@@ -3,4 +3,4 @@
 #
 
 # SCM/user/group update
-0 * * * * root [ -x /usr/lib/gforge/bin/update-user-group-cvs.sh ] && /usr/lib/gforge/bin/update-user-group-cvs.sh > /dev/null 2>&1
+0 * * * * root [ -x /usr/lib/gforge/bin/update-user-group-ssh.sh ] && /usr/lib/gforge/bin/update-user-group-ssh.sh > /dev/null 2>&1
