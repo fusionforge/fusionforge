@@ -32,6 +32,7 @@ case "$1" in
 	    var \
 	    var/run \
 	    var/run/sshd \
+	    var/run/postgresql \
 	    var/lib \
 	    var/lib/gforge \
 	    cvsroot \
