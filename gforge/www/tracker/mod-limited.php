@@ -15,6 +15,11 @@ $ath->header(array ('title'=>_('Modify').': '.$ah->getID(). ' - ' . $ah->getSumm
 ?>
 	<h3>[#<?php echo $ah->getID(); ?>] <?php echo $ah->getSummary(); ?></h3>
 
+	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;atid=<?php echo $ath->getID(); ?>" METHOD="post" enctype="multipart/form-data">
+	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
+	<input type="hidden" name="func" value="postmod" />
+	<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>" />
+
 	<table width="80%">
 <?php
 if (session_loggedin()) {
@@ -42,16 +47,11 @@ if (session_loggedin()) {
 				?>
 			</td>
 			<td>
-				<input type="submit" name="submit" value="<?php echo _('Submit') ?>">
+				<input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
 			</td>
 		</tr>
 	</table>
 <?php } ?>
-	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;atid=<?php echo $ath->getID(); ?>" METHOD="POST" enctype="multipart/form-data">
-	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
-	<input type="hidden" name="func" value="postmod">
-	<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>">
-
 <table border="0" width="80%">
 
 	<tr>
@@ -121,7 +121,7 @@ if (session_loggedin()) {
 		<?php echo $ah->showDetails(); ?>
 	</td></tr>
 </table>
-<script type="text/javascript" src="/tabber/tabber.js"></script>
+<script type="text/javascript" src="<?php echo util_make_url('/tabber/tabber.js') ?>"></script>
 <div id="tabber" class="tabber">
 <div class="tabbertab" title="<?php echo _('Followups');?>">
 <table border="0" width="80%">
@@ -137,6 +137,7 @@ if (session_loggedin()) {
 </table>
 </div>
 <div class="tabbertab" title="<?php echo _('Attachments'); ?>">
+<table border="0" width="80%">
 	<tr><td colspan="2">
 		<?php echo _('Attach Files') ?><br />
 		<input type="file" name="input_file[]" size="30" /><br />

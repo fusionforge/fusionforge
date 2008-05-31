@@ -167,7 +167,7 @@ if (session_loggedin()) {
 </table>
 <br />
 <br />
-<script type="text/javascript" src="/tabber/tabber.js"></script>
+<script type="text/javascript" src="<?php echo util_make_url('/tabber/tabber.js') ?>"></script>
 <div id="tabber" class="tabber">
 <div class="tabbertab" title="<?php echo _('Followups'); ?>">
 <table border="0" width="80%">
