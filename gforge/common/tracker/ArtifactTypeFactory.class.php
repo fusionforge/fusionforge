@@ -99,7 +99,7 @@ class ArtifactTypeFactory extends Error {
 				if ($perm->isArtifactAdmin()) {
 					$exists='';
 				} else {
-					$exists=" AND group_forum_id IN (SELECT role_setting.ref_id
+					$exists=" AND group_artifact_id IN (SELECT role_setting.ref_id
 					FROM role_setting, user_group
 					WHERE role_setting.value >= 0
                                           AND role_setting.section_name = 'tracker'
