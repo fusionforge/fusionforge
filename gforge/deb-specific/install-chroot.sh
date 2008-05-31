@@ -87,9 +87,9 @@ case "$1" in
 	[ -c $CHROOTDIR/dev/urandom ] || mknod $CHROOTDIR/dev/urandom c 1 9
 	[ -c $CHROOTDIR/dev/console ] || mknod $CHROOTDIR/dev/console c 5 1
 	# For /dev/log
-	if ! grep -q "^SYSLOGD.*/var/lib/gforge/chroot/dev/log.*" /etc/default/syslog ; then 
+	if ! grep -q "^SYSLOGD.*/var/lib/gforge/chroot/dev/log.*" /etc/default/syslogd ; then 
 		echo '######################################################################################################'
-		echo 'WARNING: you must have SYSLOGD="-p /dev/log -a /var/lib/gforge/chroot/dev/log" in /etc/default/syslog'
+		echo 'WARNING: you must have SYSLOGD="-p /dev/log -a /var/lib/gforge/chroot/dev/log" in /etc/default/syslogd'
 		echo 'To have cvs pserver running correctly'
 		echo '######################################################################################################'
 	fi
@@ -159,8 +159,8 @@ FIN
 root:x:0:0:Root:/:/bin/bash
 nobody:x:65534:65534:nobody:/:/bin/false
 FIN
-getent passwd | grep sshd >> $CHROOTDIR/etc/passwd
-getent passwd | grep anonscm-gforge >> $CHROOTDIR/etc/passwd
+getent passwd | grep sshd | sed "s:$CHROOTDIR::g" >> $CHROOTDIR/etc/passwd
+getent passwd | grep scm-gforge | sed "s:$CHROOTDIR::g" >> $CHROOTDIR/etc/passwd
 	cat > $CHROOTDIR/etc/shadow <<-FIN
 root:*:11142:0:99999:7:::
 nobody:*:11142:0:99999:7:::
