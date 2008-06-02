@@ -122,10 +122,12 @@ if (getStringFromRequest('update')) {
 			// Create a symbolic links to plugins/<plugin>/www (if directory exists).
 			if (is_dir($sys_plugins_path . $pluginname . '/www')) { // if the plugin has a www dir make a link to it
 				// The apache group or user should have write perms the www/plugins folder...
-				$code = symlink($sys_plugins_path . $pluginname . '/www', '../'.$installdir); 
-				if (!$code) {
-					$feedback .= '<br />['.'../'.$installdir.'->'.$sys_plugins_path . $pluginname . '/www]';
-					$feedback .= _('<br />Soft link to www couldn\'t be created. Check the write permissions for apache in gforge www/plugins dir or create the link manually.');
+				if (!is_link('../'.$installdir)) {
+					$code = symlink($sys_plugins_path . $pluginname . '/www', '../'.$installdir); 
+					if (!$code) {
+						$feedback .= '<br />['.'../'.$installdir.'->'.$sys_plugins_path . $pluginname . '/www]';
+						$feedback .= _('<br />Soft link to www couldn\'t be created. Check the write permissions for apache in gforge www/plugins dir or create the link manually.');
+					}
 				}
 			}
 				
@@ -249,7 +251,7 @@ foreach ($filelist as $filename) {
 	} else {
 		$msg = _('Inactive');
 		$status = "inactive";
-		$link = "<a href=\"javascript:change('" . getStringFromServer('PHP_SELF') . "?update=$filename&amp;action=activate','$j');" . '">' . _('Activate') . "</a>";
+		$link = "<a href=\"javascript:change('" . getStringFromServer('PHP_SELF') . "?update=$filename&amp;action=activate','n$j');" . '">' . _('Activate') . "</a>";
 		$init = '<input id="n'.$j.'" type="checkbox" name="script[]" value="'.$filename.'" />';
 		$users = "none";
 		$groups = "none";
