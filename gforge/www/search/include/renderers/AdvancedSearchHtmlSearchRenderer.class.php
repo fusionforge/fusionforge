@@ -166,6 +166,8 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
   	* @return array sections 
 	*/		
 	function getSectionArray() {
+		global $gfwww, $gfcommon;
+		
 		$sections = array();
 		$group =& group_get_object($this->groupId);
 		
