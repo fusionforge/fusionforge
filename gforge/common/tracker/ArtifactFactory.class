@@ -108,13 +108,13 @@ class ArtifactFactory extends Error {
 		if (!is_array($_extra_fields)) {
 			$_extra_fields=array();
 		}
-
+/*
 		//default to open
 		$_assigned_to = 0;
 		$_status = 1;
 		$_changed = 0;
 		$default_query = null;
-
+*/
 		if (!$set) {
 			/*
 				if no set is passed in, see if a preference was set
