@@ -63,27 +63,22 @@ gforge/docs/phpdoc/docs:
 	cd gforge/docs/phpdoc/ && ./makedoc.sh
 
 #
-# Developper personal use
+# Build with pbuilder
 #
 DISTRIB=etch
 MINOR=1
-chris:
-	make -f Makefile.debian allgf dchcmd="dch -i" debuildopts="-sa"
-	#make -f Makefile.debian upload where=localgforge
-	reprepro -Vb /var/www/debian-local include gforge gforge_$(gfversion)-$(gfminor)_i386.changes
-
 svnbuild:
+	make -f Makefile.debian svnbuilddist DISTRIB=sid
 	make -f Makefile.debian svnbuilddist DISTRIB=etch
 	make -f Makefile.debian svnbuilddist DISTRIB=lenny
 
-svnbuilddist:
+svnbuilddist: tarballs/gforge_$(gfversion).orig.tar.gz pbuilder/base-$(DISTRIB).tgz
 	cd gforge; dch -v $(gfversion)-$(MINOR)$(DISTRIB) -D $(DISTRIB) "This is $(DISTRIB) autobuild"
 	cd gforge; svn-buildpackage --svn-ignore --svn-builder="pdebuild --debbuildopts -sa --buildresult $(CURDIR)/result -- --basetgz $(CURDIR)/pbuilder/base-$(DISTRIB).tgz"
 	cd result; reprepro -Vb /var/www/debian-local include $(DISTRIB) gforge_$(gfversion)-$(MINOR)$(DISTRIB)_i386.changes
 
-pbuildertgz:
-	make -f Makefile.debian pbuildertgzdist DISTRIB=etch
-	make -f Makefile.debian pbuildertgzdist DISTRIB=lenny
+tarballs/gforge_$(gfversion).orig.tar.gz:
+	debclean; find gforge -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -o -H ustar | gzip > tarballs/gforge_$(gfversion).orig.tar.gz
 	
-pbuildertgzdist:
+pbuilder/base-$(DISTRIB).tgz:
 	sudo /usr/sbin/pbuilder --create --distribution $(DISTRIB) --basetgz $(CURDIR)/pbuilder/base-$(DISTRIB).tgz
