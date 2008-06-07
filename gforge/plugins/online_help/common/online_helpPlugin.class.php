@@ -34,42 +34,12 @@ class online_helpPlugin extends Plugin {
 		$this->Plugin() ;
 		$this->name = "online_help" ;
 		$this->text = "online_help!" ; // To show in the tabs, use...
-		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
-		$this->hooks[] = "groupisactivecheckboxpost" ; //
 		$this->hooks[] = "headermenu"; // to show up in the admin page fro group
 	}
 
 	function CallHook ($hookname, $params) {
 		global $G_SESSION,$HTML;
-		if ($hookname == "groupisactivecheckbox") {
-			//Check if the group is active
-			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
-			$group_id=$params['group'];
-			$group = &group_get_object($group_id);
-			echo "<tr>";
-			echo "<td>";
-			echo ' <input type="CHECKBOX" name="use_online_helpplugin" value="1" ';
-			// CHECKED OR UNCHECKED?
-			if ( $group->usesPlugin ( $this->name ) ) {
-				echo "CHECKED";
-			}
-			echo "><br/>";
-			echo "</td>";
-			echo "<td>";
-			echo "<strong>Use ".$this->text." Plugin</strong>";
-			echo "</td>";
-			echo "</tr>";
-		} elseif ($hookname == "groupisactivecheckboxpost") {
-			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
-			$group_id=$params['group'];
-			$group = &group_get_object($group_id);
-			$use_online_helpplugin = getStringFromRequest('use_online_helpplugin');
-			if ( $use_online_helpplugin == 1 ) {
-				$group->setPluginUse ( $this->name );
-			} else {
-				$group->setPluginUse ( $this->name, false );
-			}
-		} elseif ($hookname == "headermenu") {
+		if ($hookname == "headermenu") {
 			$guide = util_make_url('/plugins/online_help/');
 
 			$user_guide = array(
