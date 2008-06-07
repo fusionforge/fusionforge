@@ -1,4 +1,4 @@
-gforge (4.6.99+svn6537-1) UNRELEASED; urgency=low
+gforge (4.6.99+svn6549-1) UNRELEASED; urgency=low
 
   [ Christian Bayle ]
   * Don't try to unregister scm plugins when GForge database is not
