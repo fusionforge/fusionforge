@@ -30,9 +30,12 @@
 require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
+
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
 $user_name = getStringFromRequest('user_name');
+$pattern   = getStringFromRequest('pattern');
+
 if (getStringFromRequest('submit') && $user_name) {
 	$type = getStringFromRequest('type');
 
@@ -104,7 +107,6 @@ Pattern: <input type="text" name="pattern" value="<?php echo $pattern; ?>" />
 
 <?php
 
-$pattern = getStringFromRequest('pattern');
 if ($pattern) {
 	$sql = "
 		SELECT *
