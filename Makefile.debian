@@ -67,18 +67,61 @@ gforge/docs/phpdoc/docs:
 #
 DISTRIB=etch
 MINOR=1
+LOCALREPO=/var/www/debian-gforge
+DISTRIBLIST=etch lenny sid
+
 svnbuild:
-	make -f Makefile.debian svnbuilddist DISTRIB=sid
-	make -f Makefile.debian svnbuilddist DISTRIB=etch
-	make -f Makefile.debian svnbuilddist DISTRIB=lenny
+	for dist in $(DISTRIBLIST); do \
+	make -f Makefile.debian svnbuilddist DISTRIB=$$dist ; \
+	done
 
-svnbuilddist: tarballs/gforge_$(gfversion).orig.tar.gz pbuilder/base-$(DISTRIB).tgz
-	cd gforge; dch -v $(gfversion)-$(MINOR)$(DISTRIB) -D $(DISTRIB) "This is $(DISTRIB) autobuild"
+svnbuilddist: pbuilderenv localrepo result/gforge_$(gfversion)-$(MINOR)$(DISTRIB)_i386.changes
+
+result/gforge_$(gfversion)-$(MINOR)$(DISTRIB)_i386.changes: tarballs/gforge_$(gfversion).orig.tar.gz 
+	# Save changelog
+	cp gforge/debian/changelog . 
+	# Set version for given distrib
+	cd gforge; dch -v $(gfversion)-$(MINOR)$(DISTRIB) -D UNRELEASED "This is $(DISTRIB) autobuild"
+	perl -pi -e "s/UNRELEASED/$(DISTRIB)/" gforge/debian/changelog
+	# Build the package
 	cd gforge; svn-buildpackage --svn-ignore --svn-builder="pdebuild --debbuildopts -sa --buildresult $(CURDIR)/result -- --basetgz $(CURDIR)/pbuilder/base-$(DISTRIB).tgz"
-	cd result; reprepro -Vb /var/www/debian-local include $(DISTRIB) gforge_$(gfversion)-$(MINOR)$(DISTRIB)_i386.changes
+	# Restore changelog
+	mv changelog gforge/debian/changelog
+	# Install in repository
+	cd result; reprepro -Vb $(LOCALREPO) include $(DISTRIB) gforge_$(gfversion)-$(MINOR)$(DISTRIB)_i386.changes
 
-tarballs/gforge_$(gfversion).orig.tar.gz:
+tarballs/gforge_$(gfversion).orig.tar.gz: tarballs
 	debclean; find gforge -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -o -H ustar | gzip > tarballs/gforge_$(gfversion).orig.tar.gz
 	
-pbuilder/base-$(DISTRIB).tgz:
-	sudo /usr/sbin/pbuilder --create --distribution $(DISTRIB) --basetgz $(CURDIR)/pbuilder/base-$(DISTRIB).tgz
+tarballs:
+	mkdir tarballs
+
+pbuilderenv: pbuilder/base-$(DISTRIB).tgz
+
+pbuilder/base-$(DISTRIB).tgz: pbuilder
+	sudo /usr/sbin/pbuilder create --distribution $(DISTRIB) --basetgz $(CURDIR)/pbuilder/base-$(DISTRIB).tgz
+
+pbuilder:
+	mkdir pbuilder
+
+localrepo: $(LOCALREPO) $(LOCALREPO)/conf $(LOCALREPO)/conf/distributions
+	
+$(LOCALREPO)/conf/distributions:
+	for dist in $(DISTRIBLIST); do \
+	echo "Codename: $$dist" ; \
+	echo "Suite: $$dist" ; \
+	echo "Components: main" ; \
+	echo "UDebComponents: main" ; \
+	echo "Architectures: i386 source" ; \
+	echo "Origin: gforge.eu" ; \
+	echo "Version: 4.7" ; \
+	echo "Description: My GForge $$dist repository" ; \
+	echo "SignWith: yes" ; \
+	echo "" ; done >> $(LOCALREPO)/conf/distributions
+
+$(LOCALREPO)/conf:
+	mkdir $(LOCALREPO)/conf
+
+$(LOCALREPO):
+	sudo mkdir /var/www/debian-gforge
+	sudo chown `id -u`.`id -g` /var/www/debian-gforge
