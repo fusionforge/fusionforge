@@ -96,10 +96,11 @@ tarballs/gforge_$(gfversion).orig.tar.gz: tarballs
 tarballs:
 	mkdir tarballs
 
-pbuilderenv: pbuilder/base-$(DISTRIB).tgz
+pbuilderenv: pbuilder pbuilder/base-$(DISTRIB).tgz
+	@echo "Ready for $(DISTRIB)"
 
-pbuilder/base-$(DISTRIB).tgz: pbuilder
-	sudo /usr/sbin/pbuilder create --distribution $(DISTRIB) --basetgz $(CURDIR)/pbuilder/base-$(DISTRIB).tgz
+pbuilder/base-$(DISTRIB).tgz: 
+	sudo /usr/sbin/pbuilder create --debug --distribution $(DISTRIB) --basetgz $(CURDIR)/pbuilder/base-$(DISTRIB).tgz
 
 pbuilder:
 	mkdir pbuilder
