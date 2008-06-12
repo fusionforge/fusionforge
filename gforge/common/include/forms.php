@@ -42,7 +42,6 @@ function form_generate_key() {
 			$sql = "SELECT * FROM form_keys WHERE key='".$key."'";
 		}
 		$res=db_query($sql);
-		$res=db_query($sql);
 		if (!db_numrows($res)) {
 			$is_new=true;	
 		}
