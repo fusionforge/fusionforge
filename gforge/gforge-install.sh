@@ -84,6 +84,10 @@ mkdir /etc/gforge
 cp etc/local.inc.example /etc/gforge/local.inc
 cp etc/gforge-httpd.conf.example /etc/gforge/httpd.conf
 
+if [ ! -d /etc/gforge/plugins ]; then
+	mkdir /etc/gforge/plugins
+fi
+
 #copy the scmcvs plugin config to /etc/gforge/
 if [ ! -d /etc/gforge/plugins/scmcvs ]; then
 	mkdir /etc/gforge/plugins/scmcvs
