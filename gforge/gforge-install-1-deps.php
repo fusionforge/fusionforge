@@ -64,6 +64,16 @@ function installRHEL() {
 	passthru("/etc/init.d/postgresql start");
 }
 
+function installRHEL5() {
+
+	INFO("Installing packages: Executing YUM. Please wait...\n\n\n");
+	passthru("yum -y install php php-gd php-pgsql mailman postgresql-server postgresql-contrib rcs cvs httpd subversion perl-URI mod_dav_svn ssh postfix mod_ssl wget");
+
+	INFO("Restarting PostgreSQL\n");
+	passthru("service postgresql stop");
+	passthru("service postgresql start");
+}
+
 function installDebian() {
 
 	INFO("Installing Packages with apt-get");
@@ -101,8 +111,7 @@ function installArk() {
 }
 
 if (count($argv) < 2) {
-	echo "Usage: pre-install.php [RHEL4|DEBIANSARGE|FC3|FC4|ARK|SUSE]\n";
-    check_version();
+	echo "Usage: pre-install.php [RHEL4|RHEL5|DEBIANSARGE|FC3|FC4|ARK|SUSE]\n";
 } else {
     $platform = $argv[1];
 
@@ -112,6 +121,8 @@ if (count($argv) < 2) {
 		installRedhat(4);
 	} elseif ($platform == 'RHEL4') {
 		installRHEL();
+	} elseif ($platform == 'RHEL5') {
+		installRHEL5();
 	} elseif ($platform == 'DEBIANSARGE') {
 		installDebian(); /* Debian and friends */
 	} elseif ($platform == 'SUSE') {
