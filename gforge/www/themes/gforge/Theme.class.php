@@ -93,7 +93,7 @@ class Theme extends Layout {
      * @param    array    Header parameters array
      */
     function header($params) {
-        if (!$params['title']) {
+        if (!isset($params['title'])) {
             $params['title'] =  $GLOBALS['sys_name'];
         } else {
             $params['title'] =  $GLOBALS['sys_name'] . ': ' . $params['title'];

@@ -17,7 +17,7 @@ require_once $gfwww.'stats/site_stats_utils.php';
 // require you to be a member of the sfstats group
 session_require( array('group'=>$sys_stats_group) );
 
-$HTML->header(array(sprintf(_('%1$s I18n Statistics'), $GLOBALS['sys_name'])));
+$HTML->header(array('title' => sprintf(_('%1$s I18n Statistics'), $GLOBALS['sys_name'])));
 echo $GLOBALS['HTML']->listTableTop(array(_('Language')."",_('Users')."","%"));
 echo "<h1>".sprintf(_('Languages Distributions'), $GLOBALS['sys_name'])." </h1>";
 

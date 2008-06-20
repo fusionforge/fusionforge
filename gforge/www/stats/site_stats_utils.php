@@ -335,7 +335,6 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 
 	} else {
 		echo _('Query returned no valid data.')."\n";
-		echo "<br /><hr /><br />\n $sql \n<br /><hr /><br />\n\n";
 		echo db_error();
 	}
 
