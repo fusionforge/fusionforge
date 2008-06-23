@@ -24,7 +24,6 @@ $include_path = join(PATH_SEPARATOR,
 // If this does not work, then set defines to real path directly.
 //
 // In case of failure, the following defines are set:
-//    GFCGFILE : Configuration file of gforge.
 //    $gfconfig : Directory where are the configuration files (/etc/gforge).
 //    $gfcommon : Directory common of gforge (for common php classes).
 //    $gfwww    : Directory www of gforge (publicly accessible files).
@@ -35,7 +34,8 @@ $include_path = join(PATH_SEPARATOR,
 if (getenv('sys_localinc')) {
 	$gfcgfile = getenv('sys_localinc');
 	$gfconfig = dirname($gfcgfile).'/';
-} elseif (file_exists($IP.'/config/'.$_SERVER['SERVER_NAME'].'/local.inc.php')) {
+} elseif (isset($_SERVER['SERVER_NAME']) && 
+	file_exists($IP.'/config/'.$_SERVER['SERVER_NAME'].'/local.inc.php')) {
 	$gfcgfile = $IP.'/config/'.$_SERVER['SERVER_NAME'].'/local.inc.php';
 	$gfconfig = $IP.'/config/'.$_SERVER['SERVER_NAME'].'/';
 } elseif (file_exists($IP.'/config/local.inc.php')) {

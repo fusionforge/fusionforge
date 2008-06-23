@@ -29,8 +29,12 @@
 This file creates user / group permissions by editing 
 the /etc/passwd /etc/shadow and /etc/group files
 */
+require_once dirname(__FILE__).'/../../env.inc.php';
 require_once $gfwww.'include/squal_pre.php';
 require $gfcommon.'include/cron_utils.php';
+
+//error variable
+$err = '';
 
 //
 //	Default values for the script
@@ -98,7 +102,7 @@ for ($i=0; $i < count($gforge_users); $i++) {
  *************************************************************************/
 
 // Read the passwd file line by line
-$passwd_orig = file("/etc/passwd", "r");
+$passwd_orig = file("/etc/passwd");
 for ($i=0; $i < count($passwd_orig); $i++) {
 	$line = trim($passwd_orig[$i]);
 
@@ -159,7 +163,7 @@ $passwd_contents .= "\n#GFORGEEND\n";
  *************************************************************************/
 
 // Read the shadow file line by line
-$shadow_orig = file("/etc/shadow", "r");
+$shadow_orig = file("/etc/shadow");
 for ($i=0; $i < count($shadow_orig); $i++) {
 	$line = trim($shadow_orig[$i]);
 
