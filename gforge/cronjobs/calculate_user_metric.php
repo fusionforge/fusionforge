@@ -61,7 +61,7 @@ ON user_metric_history(month,day,user_id);
 		what we want - a list of the top users on the site.
 
 */
-
+require dirname(__FILE__).'/../www/env.inc.php';
 require $gfwww.'include/squal_pre.php';
 require $gfcommon.'include/cron_utils.php';
 
