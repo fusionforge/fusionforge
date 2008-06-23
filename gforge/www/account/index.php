@@ -266,7 +266,8 @@ if (($u->getUnixStatus() == 'A') && ($sys_use_shell)) {
 	} else {
 		print '0';
 	}
-	print '</strong>' . util_make_link ("editsshkeys.php",_('Edit Keys')) ;
+	print '</strong>';
+	print '<br />' . util_make_link ("account/editsshkeys.php",_('Edit Keys')) ;
 	echo $HTML->boxBottom();
 }
 ?>
