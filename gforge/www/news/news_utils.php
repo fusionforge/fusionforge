@@ -117,7 +117,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 					$arr=explode("\n",db_result($result,$i,'details'));
 				}
 				//if the first paragraph is short, and so are following paragraphs, add the next paragraph on
-				if ((strlen($arr[0]) < 200) && (strlen($arr[1].$arr[2]) < 300) && (strlen($arr[2]) > 5)) {
+				if ((isset($arr[1]))&&(isset($arr[2]))&& (strlen($arr[0]) < 200) && (strlen($arr[1].$arr[2]) < 300) && (strlen($arr[2]) > 5)) {
 					$summ_txt='<br />'. util_make_links( $arr[0].'<br />'.$arr[1].'<br />'.$arr[2] );
 				} else {
 					$summ_txt='<br />'. util_make_links( $arr[0] );
@@ -237,7 +237,7 @@ function news_foundry_latest($group_id=0,$limit=5,$show_summaries=true) {
 			if ($show_summaries) {
 				//get the first paragraph of the story
 				$arr=explode("\n",db_result($result,$i,'details'));
-				if ((strlen($arr[0]) < 200) && (strlen($arr[1].$arr[2]) < 300) && (strlen($arr[2]) > 5)) {
+				if ((isset($arr[1]))&&(isset($arr[2]))&&(strlen($arr[0]) < 200) && (strlen($arr[1].$arr[2]) < 300) && (strlen($arr[2]) > 5)) {
 					$summ_txt=util_make_links( $arr[0].'<br />'.$arr[1].'<br />'.$arr[2] );
 				} else {
 					$summ_txt=util_make_links( $arr[0] );
