@@ -10,6 +10,7 @@ gforge/db/20041025-gforge-4.0 -text svneol=unset#application/octet-stream
 gforge/db/20050822-drops.sql -text
 gforge/db/20060216-drops.sql -text
 gforge/db/20060216-nocommit.sql -text
+gforge/db/20060402-gforge-4.6 -text
 gforge/db/FTI-20061025.sql -text
 gforge/deb-specific/install-cvs.sh -text
 gforge/deb-specific/scmcvs/cronjobs/cvs-stats.pl -text

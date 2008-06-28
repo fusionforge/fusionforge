@@ -34,7 +34,7 @@ $sys_forum_return_domain = "gforge.company.com";
 //$sys_fallback_domain = 'gforge2.company.com';
 
 // Machine used for downloading sources/packages
-$sys_download_host = 'download.gforge.company.com';
+$sys_download_host = 'gforge.company.com';
 
 // Machine(s) that host users' shell accounts
 //  N.B. to the SourceForge Crew: What's the difference between the user
@@ -52,7 +52,7 @@ $sys_lists_host = 'gforge.company.com';
 //
 
 // Machine that hosts SCM
-$sys_scm_host = 'cvs.gforge.company.com';
+$sys_scm_host = 'gforge.company.com';
 $sys_cvs_host=$sys_scm_host;
 
 // Force the use of a single scm host instead of scm.project.domain.com

@@ -66,7 +66,7 @@ function util_check_fileupload($filename) {
 		return false;
 	}
 	if ((dirname($filename) != '/tmp') &&
-            (dirname($filename) != "/var/tmp")) {
+	    (dirname($filename) != "/var/tmp")) {
 		return false;
 	}
 	return true;
@@ -127,10 +127,10 @@ function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$e
 		  " | ".$sys_sendmail_path." -f'$from' -t -i > /dev/null 2>&1 &");	
 	// WARNING : popen commented code probably brought some trouble, we will use the pipe method as we were before
        /*if (!$handle = popen($sys_sendmail_path." -f'$from' -t -i", "w")) {
-               echo "<p>Error: cannot run '$sys_sendmail_path' - mail not sent</p>\n";
+	       echo "<p>Error: cannot run '$sys_sendmail_path' - mail not sent</p>\n";
        } else {
-               fwrite($handle, util_prep_string_for_sendmail($body2));
-               pclose($handle);
+	       fwrite($handle, util_prep_string_for_sendmail($body2));
+	       pclose($handle);
        }*/
 }
 
@@ -795,6 +795,21 @@ function util_is_valid_filename ($file) {
 	}
 }
 
+function valid_maillistname ( $hostname = "xyz" ) {
+	//bad char test
+	$invalidchars = eregi_replace("[-A-Z0-9\.]","",$hostname);
+
+	if (!empty($invalidchars)) {
+		return false;
+	}
+
+	//double dot, starts with a . or -
+	if (ereg("\.\.",$hostname) || ereg("^\.",$hostname) || ereg("^\-",$hostname)) {
+		return false;
+	}
+	return true;
+}
+
 /**
  * valid_hostname() - Validates a hostname string to make sure it doesn't contain invalid characters
  *
@@ -833,14 +848,14 @@ function valid_hostname ($hostname = "xyz") {
  * Format file size in a human-readable way
  * such as "xx Megabytes" or "xx Mo"
  *
- * @author           Andrea Paleni <andreaSPAMLESS_AT_SPAMLESScriticalbit.com>
- * @version        1.0
+ * @author	   Andrea Paleni <andreaSPAMLESS_AT_SPAMLESScriticalbit.com>
+ * @version	1.0
  * @param int       bytes   is the size
  * @param bool     base10  enable base 10 representation, otherwise
- *                 default base 2  is used  
+ *		 default base 2  is used  
  * @param int       round   number of fractional digits
  * @param array     labels  strings associated to each 2^10 or
- *                  10^3(base10==true) multiple of base units
+ *		  10^3(base10==true) multiple of base units
  */
 function human_readable_bytes ($bytes, $base10=false, $round=0, $labels=array(' bytes',  ' KB', ' MB', ' GB')) {
 	if ($bytes <= 0 || !is_array($labels) || (count($labels) <= 0)) {
@@ -898,19 +913,19 @@ function readfile_chunked($filename, $returnBytes=true) {
     
     $handle = fopen($filename, 'rb');
     if ($handle === false) {
-        return false;
+	return false;
     }
     
     while (!feof($handle)) {
-        $buffer = fread($handle, $chunksize);
-        echo $buffer;
-        if ($returnBytes) {
-            $byteCounter += strlen($buffer);
+	$buffer = fread($handle, $chunksize);
+	echo $buffer;
+	if ($returnBytes) {
+	    $byteCounter += strlen($buffer);
 		}
     }
     $status = fclose($handle);
     if ($returnBytes && $status) {
-        return $byteCounter; // return num. bytes delivered like readfile() does.
+	return $byteCounter; // return num. bytes delivered like readfile() does.
     }
     return $status;
 }

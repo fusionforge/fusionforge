@@ -180,6 +180,11 @@ function install()
 	//	run("su $susufix $gforge_user -c \"psql $gforge_db < 
 	//		$gforge_lib_dir/db/pgsql/FTI-gforge5.sql\" >> /tmp/gforge-import.log");
 	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI.sql\" >> /tmp/gforge-import.log");
+	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20050315.sql\" >> /tmp/gforge-import.log");
+	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20050401.sql\" >> /tmp/gforge-import.log");
+	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20050530.sql\" >> /tmp/gforge-import.log");
+	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20060130.sql\" >> /tmp/gforge-import.log");
+	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20061025.sql\" >> /tmp/gforge-import.log");
 
 	show(" * Enter the Admin Username (gforgeadmin): ");
 	$admin_user = trim(fgets($STDIN));
@@ -237,7 +242,7 @@ function install()
 //$t = trim(fgets($STDIN));
 
 //	run("su - postgres -c \"psql $gforge_db -c \\\"INSERT INTO users (user_name, user_pw, unix_pw) VALUES ('$admin_user', '$pw_md5', '$pw_crypt')\\\"\"");
-	run("su - postgres -c \"psql $gforge_db -c \\\"INSERT INTO users (user_name, user_pw, unix_pw, status, theme_id) VALUES ('$admin_user', '$pw_md5', '$pw_crypt', 'A', 1); INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (currval('users_pk_seq'), 1, 'A')\\\"\"");
+	run("su - postgres -c \"psql $gforge_db -c \\\"INSERT INTO users (user_name, email, user_pw, unix_pw, status, theme_id) VALUES ('$admin_user', 'root@localhost', '$pw_md5', '$pw_crypt', 'A', 1); INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (currval('users_pk_seq'), 1, 'A')\\\"\"");
 
 //echo "BREAKPOINT 2\n";
 //$t = trim(fgets($STDIN));

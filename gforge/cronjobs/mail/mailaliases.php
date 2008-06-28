@@ -28,7 +28,7 @@
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
 
-define('FILE_EXTENSION','.new'); // use .new when testing
+define('FILE_EXTENSION',''); // use .new when testing
 
 /*
 
