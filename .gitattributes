@@ -38,9 +38,9 @@ gforge/docs/images/sflogo2-105a.png -text
 gforge/etc/httpd.d/00listen443.ssl -text
 gforge/etc/httpd.d/21list.ssl -text
 gforge/etc/local.d/60bbcode -text
-gforge/gforge-install-1.php -text
-gforge/gforge-install-2-db.php -text
-gforge/gforge-preinstall.php -text
+gforge/gforge-install-1-deps.php -text
+gforge/gforge-install-3-db.php -text
+gforge/gforge-install-3.php -text
 gforge/plugins/createplugin.sh -text
 gforge/plugins/cvstracker/gforge-plugin-cvstracker.spec -text svneol=unset#application/octet-stream
 gforge/plugins/cvstracker/rpm-specific/cron.d/gforge-plugin-cvstracker -text svneol=unset#application/octet-stream
