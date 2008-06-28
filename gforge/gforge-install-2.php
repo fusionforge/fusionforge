@@ -1,25 +1,25 @@
 #!/usr/bin/php
 
 <?php
-        define ('GREEN', "\033[01;32m" );
-        define ('NORMAL', "\033[00m" );
-        define ('RED', "\033[01;31m" );
+	define ('GREEN', "\033[01;32m" );
+	define ('NORMAL', "\033[00m" );
+	define ('RED', "\033[01;31m" );
 
-        $args = $_SERVER['argv'];
+	$args = $_SERVER['argv'];
 
 	echo "Validating arguments  ";
-        if (count($args) != 4) {
+	if (count($args) != 4) {
 		echo "FAIL\n  Usage: $args[0]  gforge.company.com  apacheuser  apachegroup\n";
-                exit(127);
-        }
+		exit(127);
+	}
 	echo "OK\n";
 
-        //validate hostname
+	//validate hostname
 	echo "Validating hostname  ";
-        if (!preg_match("/^([[:alnum:]._-])*$/" , $args[1])) {
+	if (!preg_match("/^([[:alnum:]._-])*$/" , $args[1])) {
 		echo "FAIL\n  invalid hostname\n";
-                exit(2);
-        }
+		exit(2);
+	}
 	echo "OK\n";
 
 	// #validate apache user
@@ -41,12 +41,12 @@
 
 
 	// #validate apache group
-        //getent group $3 > /dev/null
-        //found_apachegroup=$?
-        //if [ $found_apachegroup -ne 0 ]; then
-        //     echo 1>&2 "invalid apache group"
-        //     exit 2
-        //fi
+	//getent group $3 > /dev/null
+	//found_apachegroup=$?
+	//if [ $found_apachegroup -ne 0 ]; then
+	//     echo 1>&2 "invalid apache group"
+	//     exit 2
+	//fi
 	
 	//ARREGLAR ESTO
 	exec("getent group $args[3] > /dev/null", $arr, $t);
@@ -189,7 +189,24 @@
 	//echo "Despues de salir del foreach\n";
 
 
+	$apacheconffiles=array();
+	if (is_file('/etc/httpd/conf/httpd.conf')) {
+		$apacheconffiles[]='/etc/httpd/conf/httpd.conf';
+	} elseif (is_file('/opt/csw/apache2/etc/httpd.conf')) {
+		$apacheconffiles[]='/opt/csw/apache2/etc/httpd.conf';
+	} elseif (is_file('/etc/apache2/httpd.conf')) {
+		$apacheconffiles[]='/etc/apache2/httpd.conf';
+	} else {
+		$apacheconffiles[]='/etc/apache2/sites-enabled/000-default';
+	}
 
+	foreach ($apacheconffiles as $apacheconffile) {
+		show(' * Setting GForge Include For Apache...');
+		system("grep \"^Include $gforge_etc_dir/httpd.conf\" $apacheconffile > /dev/null", $ret);
+		if ($ret == 1) {
+			run("echo \"Include $gforge_etc_dir/httpd.conf\" >> $apacheconffile");
+		}
+	}
 
 
 	//#symlink plugin www's
@@ -237,7 +254,7 @@
 	system("cd /etc/gforge && find -type f -exec perl -pi -e \"s/apacheuser/$args[2]/\" {} \;");
 	system("cd /etc/gforge && find -type f -exec perl -pi -e \"s/apachegroup/$args[3]/\" {} \;");
 	system("cd /etc/gforge && find -type f -exec perl -pi -e \"s/gforge\.company\.com/$args[1]/\" {} \;");
-	system("echo \"noreply:        /dev/null\" >> /etc/aliases");
+	system("echo \"noreply:	/dev/null\" >> /etc/aliases");
 
 	//# create symlink for fckeditor
 	system("cd /opt/gforge/www && ln -s ../utils/fckeditor/www/ fckeditor");
