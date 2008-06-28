@@ -69,10 +69,8 @@ echo $HTML->boxBottom();
 <td width="35%" valign="top">
 <?php
 echo $HTML->boxTop('Ad');
-echo '<center><h3>GForge Enterprise CDE 4.5</h3>';
 echo '
-<a href="http://gforgegroup.com/products/">GForge Enterprise CDE 4.5</a> from the GForge Group includes commercial-grade 
-documentation, online-training, updates, and support.<br/>
+<center>
 <a target="_blank" href="http://gforgegroup.com/products/">
 <img src="http://gforge.org/gfginstaller.png" border="0" height="164" width="250" alt="GForge Training" /></a></center>';
 echo $HTML->boxMiddle('Getting GForge');

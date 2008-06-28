@@ -135,7 +135,7 @@ class MailingList extends Error {
 		
 		$realListName = strtolower($this->Group->getUnixName().'-'.$listName);
 		
-		if(!valid_hostname($realListName)) {
+		if(!valid_maillistname($realListName)) {
 			$this->setError($Language->getText('mail_common', 'error_invalid_name') . ': ' .
 			$realListName.'@'.$GLOBALS['sys_lists_host']);
 			return false;

@@ -36,7 +36,7 @@ require ('common/include/cron_utils.php');
 //	Default values for the script
 //
 define('DEFAULT_SHELL','/bin/cvssh.pl'); //use /bin/grap for cvs-only
-define('FILE_EXTENSION','.new'); // use .new when testing
+define('FILE_EXTENSION',''); // use .new when testing
 
 if (util_is_root_dir($groupdir_prefix)) {
 	$err .=  "Error! groupdir_prefix Points To Root Directory!";

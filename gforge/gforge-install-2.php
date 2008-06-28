@@ -108,6 +108,8 @@
 	{
 		symlink("/var/lib/gforge/cvsroot", "/cvsroot");
 	}
+	#create default dumps dir 
+	system("mkdir -p /var/lib/gforge/dumps");
 
 	//cd /opt/gforge
 	chdir("/opt/gforge");
@@ -201,10 +203,10 @@
 	}
 
 	foreach ($apacheconffiles as $apacheconffile) {
-		show(' * Setting GForge Include For Apache...');
-		system("grep \"^Include $gforge_etc_dir/httpd.conf\" $apacheconffile > /dev/null", $ret);
+		echo(' * Setting GForge Include For Apache...');
+		system("grep \"^Include /etc/gforge/httpd.conf\" $apacheconffile > /dev/null", $ret);
 		if ($ret == 1) {
-			run("echo \"Include $gforge_etc_dir/httpd.conf\" >> $apacheconffile");
+			system("echo \"Include /etc/gforge/httpd.conf\" >> $apacheconffile");
 		}
 	}
 
