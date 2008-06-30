@@ -225,20 +225,6 @@ class Artifact extends Error {
 
 		db_begin();
 
-		//
-		//	Check to see if this user is trying to double-submit
-		//
-		$res=db_query("SELECT * FROM artifact 
-			WHERE summary='".htmlspecialchars($summary)."' 
-			AND submitted_by='$user'
-			AND group_artifact_id='".$this->ArtifactType->getID()."'
-			AND open_date > '". (time() - 86400) ."'");
-		if ($res && db_numrows($res) > 0) {
-			$this->setError(_('You Attempted To Double-submit this item. Please avoid double-clicking.'));
-			db_rollback();
-			return false;
-		}
-
 		$sql="INSERT INTO artifact 
 			(group_artifact_id,status_id,priority,
 			submitted_by,assigned_to,open_date,summary,details) 
