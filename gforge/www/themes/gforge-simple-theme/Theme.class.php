@@ -147,16 +147,23 @@ function header($params) {
 <div id="logo">
 <h1><?php echo util_make_link ('/',_('Goto GForge')); ?></h1>
 </div>
-<div id="util"><?php	if (session_loggedin()) {
-	echo util_make_link ('/account/logout.php',_('Log Out')); ?><br />
-<?php echo util_make_link ('/account/',_('My Account')); ?><br />
-	<?php
+<div id="util">
+<?php
+if (session_loggedin()) {
+	echo util_make_link ('/account/logout.php',_('Log Out'));
+	echo '<br />';
+	echo util_make_link ('/account/',_('My Account'));
+	echo '<br />';
 } else {
-	echo util_make_link ('/account/login.php',_('Log In')); ?><br />
-<?php echo util_make_link ('/account/register.php',_('New Account')); ?>
-	<?php
+	echo util_make_link ('/account/login.php',_('Log In'));
+	echo '<br />';
+	if (!$GLOBALS['sys_user_reg_restricted']) {
+		echo util_make_link ('/account/register.php',_('New Account'));
+		echo '<br />';
+	}
 }
-?></div>
+?>
+</div>
 
 <div id="content"><br />
 <?php echo $this->searchBox();

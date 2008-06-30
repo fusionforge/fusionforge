@@ -157,17 +157,19 @@ class Theme extends Layout {
 		  <td class="topLeft"><?php echo util_make_link ('/', html_image('header/top-logo.gif',205,54,array('border'=>'0'))); ?></td>
         <td class="middleRight"><?php echo $this->searchBox(); ?></td>
         <td class="middleRight"><?php
-          if (session_loggedin()) {
-		  echo util_make_link ('/account/logout.php', _('Log Out'));
-		  echo ' | ';
-		  echo util_make_link ('/account/', _('My Account'));
-          } else {
-		  echo util_make_link ('/account/login.php', _('Log In'));
-		  echo ' | ';
-		  echo util_make_link ('/account/register.php', _('New Account'));
-          }
+        if (session_loggedin()) {
+        	echo util_make_link ('/account/logout.php', _('Log Out'));
+        	echo ' | ';
+        	echo util_make_link ('/account/', _('My Account'));
+        } else {
+        	echo util_make_link ('/account/login.php', _('Log In'));
+        	echo ' | ';
+        	if (!$GLOBALS['sys_user_reg_restricted']) {
+        		echo util_make_link ('/account/register.php', _('New Account'));
+        	}
+        }
 
-	plugin_hook ('headermenu', $params);
+        plugin_hook ('headermenu', $params);
 
         echo $this->quickNav();
         ?></td>

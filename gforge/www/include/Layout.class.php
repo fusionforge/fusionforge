@@ -151,7 +151,9 @@ class Layout extends Error {
 				echo util_make_link ('/account/',_('My Account'),array('class'=>'lnkutility'));
 			} else {
 				echo util_make_link ('/account/login.php',_('Log In'),array('class'=>'lnkutility'));
-				echo util_make_link ('/account/register.php',_('New Account'),array('class'=>'lnkutility'));
+				if (!$GLOBALS['sys_user_reg_restricted']) {
+					echo util_make_link ('/account/register.php',_('New Account'),array('class'=>'lnkutility'));
+				}
 			}
 			
 			$params['template'] = ' {menu}';

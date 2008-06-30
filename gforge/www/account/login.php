@@ -126,7 +126,12 @@ if ($login && !$success) {
 </p>
 </form>
 <p><a href="lostpw.php"><?php echo _('[Lost your password?]'); ?></a></p>
-<p><a href="register.php"><?php echo _('[New Account]'); ?></a></p>
+<?php
+// hide "new account" item if restricted to admin
+if (!$sys_user_reg_restricted) {
+	echo '<p><a href="register.php">'._('[New Account]').'</a></p>';
+}
+?>
 <p><a href="pending-resend.php"><?php echo _('[Resend confirmation email to a pending account]'); ?></a></p>
 
 <?php
