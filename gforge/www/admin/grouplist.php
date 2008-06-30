@@ -91,13 +91,13 @@ $headers = array(
 );
 
 $headerLinks = array(
-	'?sortorder=group_name',
-	'?sortorder=register_time',
-	'?sortorder=unix_group_name',
-	'?sortorder=status',
-	'?sortorder=is_public',
-	'?sortorder=license_name',
-	'?sortorder=members'
+	'/admin/grouplist.php?sortorder=group_name',
+	'/admin/grouplist.php?sortorder=register_time',
+	'/admin/grouplist.php?sortorder=unix_group_name',
+	'/admin/grouplist.php?sortorder=status',
+	'/admin/grouplist.php?sortorder=is_public',
+	'/admin/grouplist.php?sortorder=license_name',
+	'/admin/grouplist.php?sortorder=members'
 );
 
 echo $HTML->listTableTop($headers, $headerLinks);

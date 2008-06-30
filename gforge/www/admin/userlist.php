@@ -73,12 +73,12 @@ function show_users_list ($result) {
 	);
 
 	$headerLinks = array(
-	  '?sortorder=user_name',
-	  '?sortorder=add_date',
-	  '?sortorder=user_name',
-	  '?sortorder=user_name',
-	  '?sortorder=user_name',
-	  '?sortorder=user_name'
+	  '/admin/userlist.php?sortorder=user_name',
+	  '/admin/userlist.php?sortorder=add_date',
+	  '/admin/userlist.php?sortorder=user_name',
+	  '/admin/userlist.php?sortorder=user_name',
+	  '/admin/userlist.php?sortorder=user_name',
+	  '/admin/userlist.php?sortorder=user_name'
 	);
 
 	echo $GLOBALS['HTML']->listTableTop($headers, $headerLinks);
