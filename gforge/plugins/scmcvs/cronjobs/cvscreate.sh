@@ -21,11 +21,11 @@ groupname=$2
 isanonymousenabled=$3
 ispserverenabled=$4
 
-function setAnonymousPserverAccess() {
+setAnonymousPserverAccess () {
 	writers=""
 	readers=""
 	passwd=""
-	if [[ $isanonymousenabled -eq 1 && $ispserverenabled -eq 1 ]] ; then
+	if [ $isanonymousenabled -eq 1 -a $ispserverenabled -eq 1 ] ; then
 		readers="anonymous::anonymous"
 		passwd="anonymous:\$1\$0H\$2/LSjjwDfsSA0gaDYY5Df/:anonymous"
 	fi
@@ -34,7 +34,7 @@ function setAnonymousPserverAccess() {
 	echo $passwd > $repositorypath/CVSROOT/passwd
 }
 
-function setRepositoryAccess() {
+setRepositoryAccess () {
 	if [ $isanonymousenabled -eq 1 ] ; then
 		# make the repository user and group writable and world readable
 		chmod 2775 $repositorypath
@@ -44,7 +44,7 @@ function setRepositoryAccess() {
 	fi
 }
 
-function createRepository() {
+createRepository () {
 	mkdir $repositorypath
 	mkdir -p /cvsroot/cvs-locks/$repositoryname
 	chmod 755 /cvsroot/cvs-locks
