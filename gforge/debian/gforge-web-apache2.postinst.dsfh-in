@@ -86,15 +86,12 @@ case "$1" in
 	
 	# Enable the Gforge configuration
 	if [ -e /etc/apache2/conf.d/gforge.httpd.conf ] ; then
-	    LINK=`ls -l /etc/apache2/conf.d/gforge.httpd.conf | sed 's/.*-> \(.*\)$/\1/'`
-	    if [ "$LINK" != "/etc/gforge/httpd.conf" ] ; then 
-		# echo Removing symlink
-		rm -f /etc/apache2/conf.d/gforge.httpd.conf
-	    fi
+	    rm -f /etc/apache2/conf.d/gforge.httpd.conf
 	fi
-	if [ -d /etc/apache2/conf.d ] && [ ! -e /etc/apache2/conf.d/gforge.httpd.conf ] ; then
-	    ln -s /etc/gforge/httpd.conf /etc/apache2/conf.d/gforge.httpd.conf
+	if [ -d /etc/apache2/sites-available ] && [ ! -e /etc/apache2/sites-available/gforge ] ; then
+	    ln -s /etc/gforge/httpd.conf /etc/apache2/sites-available/gforge
 	fi
+	/usr/sbin/a2ensite gforge
 	
 	# Make Apache see these new changes
 	invoke-rc.d apache2 restart || true
