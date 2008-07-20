@@ -1,4 +1,4 @@
-gforge (4.6.99+svn6549+something-1) unstable; urgency=low
+gforge (4.6.99+svn6580-1) unstable; urgency=low
 
   [ Christian Bayle ]
   * Don't try to unregister scm plugins when GForge database is not
@@ -13,7 +13,7 @@ gforge (4.6.99+svn6549+something-1) unstable; urgency=low
     as it doesn't update CVS
 
   [ Roland Mas ]
-  * Tracking upstream SVN.
+  * New SVN snapshot.
   * Fix a few bashisms in shell scripts (closes: #489600, #489601).
   * Tweaked dependencies on virtual packages.
   * Fixed PostgreSQL socket path in Postfix configuration, and removed old
@@ -32,7 +32,7 @@ gforge (4.6.99+svn6549+something-1) unstable; urgency=low
   * Stop trying to copy a nonexisting default page for projects (closes:
     #374431).
 
- -- Roland Mas <lolando@debian.org>  Sun, 20 Jul 2008 19:07:55 +0200
+ -- Roland Mas <lolando@debian.org>  Sun, 20 Jul 2008 20:16:46 +0200
 
 gforge (4.6.99+svn6496-1) unstable; urgency=low
 
