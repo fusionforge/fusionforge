@@ -73,8 +73,8 @@ $sql="SELECT DISTINCT agl.group_artifact_id,agl.name
         AND ug.role_id=rs.role_id
         AND (
                            (rs.section_name = 'projectadmin' AND rs.value = 'A')
-                           OR (rs.section_name = 'trackeradmin' AND rs.value = 2)
-                           OR (rs.section_name = 'tracker' AND rs.value >= 1 AND rs.ref_id = agl.group_artifact_id)
+                           OR (rs.section_name = 'trackeradmin' AND rs.value = '2')
+                           OR (rs.section_name = 'tracker' AND rs.value::integer >= 1 AND rs.ref_id = agl.group_artifact_id)
         )";
 $restracker=db_query($sql);
 echo db_error();

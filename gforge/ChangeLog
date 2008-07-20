@@ -1,3 +1,8 @@
+2008-07-20  Roland Mas  <lolando@debian.org>
+
+	* www/tracker/reporting/index.php: Added explicit type conversion
+	in SQL query.
+
 2008-05-21  Roland Mas  <lolando@debian.org>
 
 	* deb-specific/sqlparser.pm: Added support for /* comments */ in
