@@ -1,5 +1,8 @@
 2008-07-20  Roland Mas  <lolando@debian.org>
 
+	* etc/local.d/10database.env: Only call apache_request_headers
+	when available.
+
 	* common/reporting/ReportTrackerAct.class.php: Fixed off-by-one
 	bug in reports.
 

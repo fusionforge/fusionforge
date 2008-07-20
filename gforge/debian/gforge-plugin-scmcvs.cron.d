@@ -2,7 +2,7 @@
 # Regular cron jobs for gforge-plugin-scmcvs
 #
 
-INCLUDE_PATH=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www
+INCLUDE_PATH=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www:/usr/share/gforge/common
 
 # Tarballs
 5 2 * * * root [ -x /usr/share/gforge/plugins/scmcvs/cronjobs/tarballs.php ] && php -d include_path=$INCLUDE_PATH /usr/share/gforge/plugins/scmcvs/cronjobs/tarballs.php > /dev/null 2>&1

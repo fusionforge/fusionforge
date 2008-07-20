@@ -2,7 +2,7 @@
 # Regular cron jobs for the gforge-db-postgresql package
 #
 
-INCLUDE_PATH=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www
+INCLUDE_PATH=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www:/usr/share/gforge/common
 
 # Daily reporting process
 25 7 * * * gforge [ -x /usr/lib/gforge/bin/reporting_cron.php ] && /usr/lib/gforge/bin/reporting_cron.php -d include_path=$INCLUDE_PATH > /dev/null 2>&1
