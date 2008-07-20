@@ -24,8 +24,9 @@ gforge (4.6.99+svn6549+something-1) unstable; urgency=low
     troubles (closes: #399671, #486845).
   * Cleaned up the Apache configuration script to use the
     sites-available/sites-enabled system (closes: #398885).
+  * Fixed include_path for cron jobs.
 
- -- Roland Mas <lolando@debian.org>  Sun, 20 Jul 2008 17:18:32 +0200
+ -- Roland Mas <lolando@debian.org>  Sun, 20 Jul 2008 18:15:12 +0200
 
 gforge (4.6.99+svn6496-1) unstable; urgency=low
 

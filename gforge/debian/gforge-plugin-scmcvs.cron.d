@@ -1,8 +1,11 @@
 #
 # Regular cron jobs for gforge-plugin-scmcvs
 #
+
+INCLUDE_PATH=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www
+
 # Tarballs
-5 2 * * * root [ -x /usr/share/gforge/plugins/scmcvs/cronjobs/tarballs.php ] && php -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include /usr/share/gforge/plugins/scmcvs/cronjobs/tarballs.php > /dev/null 2>&1
+5 2 * * * root [ -x /usr/share/gforge/plugins/scmcvs/cronjobs/tarballs.php ] && php -d include_path=$INCLUDE_PATH /usr/share/gforge/plugins/scmcvs/cronjobs/tarballs.php > /dev/null 2>&1
 
 # Snapshots
 35 2 * * * root [ -x /usr/share/gforge/plugins/scmcvs/cronjobs/snapshots.sh ] && /usr/share/gforge/plugins/scmcvs/cronjobs/snapshots.sh generate > /dev/null 2>&1
