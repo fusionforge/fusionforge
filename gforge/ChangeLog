@@ -1,5 +1,8 @@
 2008-07-20  Roland Mas  <lolando@debian.org>
 
+	* common/reporting/report_utils.php: Search user by the initial
+	letter of their username, as well as their lastname.
+
 	* etc/local.d/10database.env: Only call apache_request_headers
 	when available.
 

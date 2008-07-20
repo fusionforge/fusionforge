@@ -103,9 +103,9 @@ function report_useract_box($name='dev_id', $selected='1', $start_with='') {
 
 	if ($start_with) {
 		if ( $sys_database_type == "mysql" ) {
-			$sql2=" AND lastname LIKE '$start_with%' ";
+			$sql2=" AND (lastname LIKE '$start_with%' OR user_name LIKE '$start_with%')";
 		} else {
-			$sql2=" AND lastname ILIKE '$start_with%' ";
+			$sql2=" AND (lastname ILIKE '$start_with%' OR user_name ILIKE '$start_with%')";
 		}
 	}
 
