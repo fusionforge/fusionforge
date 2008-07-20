@@ -1,5 +1,8 @@
 2008-07-20  Roland Mas  <lolando@debian.org>
 
+	* common/reporting/ReportTrackerAct.class.php: Fixed off-by-one
+	bug in reports.
+
 	* www/tracker/reporting/index.php: Added explicit type conversion
 	in SQL query.
 

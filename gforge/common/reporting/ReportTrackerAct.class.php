@@ -54,7 +54,7 @@ function ReportTrackerAct($span,$group_id,$atid,$start=0,$end=0) {
 
 		$arr =& $this->getMonthStartArr();
 
-		for ($i=1; $i<count($arr); $i++) {
+		for ($i=0; $i<count($arr); $i++) {
 			if ($arr[$i]<$start || $arr[$i]>$end) {
 				//skip this month as it's not in the range
 			} else {
@@ -71,7 +71,7 @@ function ReportTrackerAct($span,$group_id,$atid,$start=0,$end=0) {
 
 		$arr =& $this->getWeekStartArr();
 
-		for ($i=1; $i<count($arr); $i++) {
+		for ($i=0; $i<count($arr); $i++) {
 			if ($arr[$i]<$start || $arr[$i]>$end) {
 				//skip this month as it's not in the range
 			} else {
