@@ -67,20 +67,12 @@ $gf_block = qq{### BEGIN GFORGE BLOCK -- DO NOT EDIT ###
 # You may move this block around to accomodate your local needs as long as you
 # keep it in an appropriate position, where \"appropriate\" is defined by you.
 
-pgsql_gforge_users_hosts = unix:/var/run/postgresql/.s.PGSQL.5432
+pgsql_gforge_users_hosts = unix:/var/run/postgresql
 pgsql_gforge_users_user = gforge_mta
 pgsql_gforge_users_password = gforge_mta
 pgsql_gforge_users_dbname = $sys_dbname
 pgsql_gforge_users_domain = users.$domain_name
 pgsql_gforge_users_query = SELECT email FROM mta_users WHERE login = '\''%u'\''
-
-# pgsql_gforge_lists_hosts = unix:/var/run/postgresql/.s.PGSQL.5432
-# pgsql_gforge_lists_user = gforge_mta
-# pgsql_gforge_lists_password = gforge_mta
-# pgsql_gforge_lists_dbname = $sys_dbname
-# pgsql_gforge_lists_domain = lists.$domain_name
-# pgsql_gforge_lists_query = SELECT post_address FROM mta_lists WHERE list_name = '\''%u'\''
-# pgsql_gforge_lists_result_format = "%s"
 
 ### END GFORGE BLOCK ###
 };
