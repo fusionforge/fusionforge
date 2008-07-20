@@ -21,7 +21,7 @@ if [ "$RET" = "false" ]; then
 	db_set gforge/shared/admin_password $(gen_random_pw)
 	db_get gforge/shared/admin_password || true
 	echo "Since you asked not to see all the debconf questions, I generated a random"
-	echo "password for the admin user.  It is '${RET}'.\n" ;
+	echo "password for the admin user.  It is '${RET}'." ;
 	db_fset gforge/shared/admin_password seen true
     fi
 fi

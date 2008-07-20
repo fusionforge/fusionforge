@@ -14,9 +14,9 @@ gforge (4.6.99+svn6549-1) UNRELEASED; urgency=low
 
   [ Roland Mas ]
   * Tracking upstream SVN.
-  * Fix a few bashisms in shell scripts (closes: #489601).
+  * Fix a few bashisms in shell scripts (closes: #489600, #489601).
 
- -- Roland Mas <lolando@debian.org>  Sun, 20 Jul 2008 14:55:02 +0200
+ -- Roland Mas <lolando@debian.org>  Sun, 20 Jul 2008 14:57:39 +0200
 
 gforge (4.6.99+svn6496-1) unstable; urgency=low
 
