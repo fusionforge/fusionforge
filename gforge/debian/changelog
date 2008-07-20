@@ -1,4 +1,4 @@
-gforge (4.6.99+svn6549-1) UNRELEASED; urgency=low
+gforge (4.6.99+svn6549+something-1) unstable; urgency=low
 
   [ Christian Bayle ]
   * Don't try to unregister scm plugins when GForge database is not
@@ -15,8 +15,9 @@ gforge (4.6.99+svn6549-1) UNRELEASED; urgency=low
   [ Roland Mas ]
   * Tracking upstream SVN.
   * Fix a few bashisms in shell scripts (closes: #489600, #489601).
+  * Tweaked dependencies on virtual packages.
 
- -- Roland Mas <lolando@debian.org>  Sun, 20 Jul 2008 14:57:39 +0200
+ -- Roland Mas <lolando@debian.org>  Sun, 20 Jul 2008 15:59:01 +0200
 
 gforge (4.6.99+svn6496-1) unstable; urgency=low
 
