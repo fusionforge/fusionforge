@@ -93,6 +93,8 @@ install: build
 	rm -r $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/scmsvn/
 	rm -r $(CURDIR)/debian/gforge-plugins-extra/usr/share/gforge/plugins/mediawiki/
 	rm $(CURDIR)/debian/gforge-plugins-extra/etc/gforge/httpd.d/03mediawiki
+	rm -rf $(CURDIR)/debian/gforge-plugins-extra/etc/gforge/plugins/scmcvs/
+	rm -rf $(CURDIR)/debian/gforge-plugins-extra/etc/gforge/plugins/scmsvn/
 
 	# gforge-plugin-scmcvs
 	install -m 755 deb-specific/install-cvs.sh     $(CURDIR)/debian/gforge-plugin-scmcvs/usr/lib/gforge/plugins/scmcvs/bin/

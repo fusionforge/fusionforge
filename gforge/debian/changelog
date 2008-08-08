@@ -1,8 +1,9 @@
-gforge (4.6.99+svn6580+something-1) unstable; urgency=low
+gforge (4.6.99+svn6582-1) unstable; urgency=low
 
-  * Tracking upstream SVN.
+  * Removed from gforge-plugins-extra a few files that were also present
+    in other packages (closes: #492952).
 
- -- Roland Mas <lolando@debian.org>  Sun, 20 Jul 2008 20:40:23 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 08 Aug 2008 17:03:48 +0200
 
 gforge (4.6.99+svn6580-1) unstable; urgency=low
 
