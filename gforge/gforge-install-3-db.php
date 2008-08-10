@@ -29,9 +29,9 @@
 	{
 		$pgservice='/etc/init.d/postgresql';
 	} 
-	elseif (is_file('/etc/init.d/postgresql-7.4'))
+	elseif (is_file('/etc/init.d/postgresql-8.2'))
 	{
-		$pgservice='/etc/init.d/postgresql-7.4';
+		$pgservice='/etc/init.d/postgresql-8.2';
 	} 
 	elseif (is_file('/etc/init.d/cswpostgres'))
 	{
@@ -70,9 +70,9 @@
 		// RedHat & SuSE
 		$PGHBA='/var/lib/pgsql/data/pg_hba.conf';
 	}
-	elseif (is_file('/etc/postgresql/7.4/main/pg_hba.conf'))
+	elseif (is_file('/etc/postgresql/8.2/main/pg_hba.conf'))
 	{
-		$PGHBA='/etc/postgresql/7.4/main/pg_hba.conf';
+		$PGHBA='/etc/postgresql/8.2/main/pg_hba.conf';
 	}
 	elseif (is_file('/opt/csw/var/pgdata/pg_hba.conf'))
 	{
@@ -94,9 +94,9 @@
 		// SuSE
 		$tsearch2_sql='/usr/share/postgresql/contrib/tsearch2.sql';
 	}
-	elseif (is_file('/usr/share/postgresql/7.4/contrib/tsearch2.sql'))
+	elseif (is_file('/usr/share/postgresql/8.2/contrib/tsearch2.sql'))
 	{
-		$tsearch2_sql='/usr/share/postgresql/7.4/contrib/tsearch2.sql';
+		$tsearch2_sql='/usr/share/postgresql/8.2/contrib/tsearch2.sql';
 	}
 	elseif (is_file('/opt/csw/postgresql/share/contrib/tsearch2.sql'))
 	{

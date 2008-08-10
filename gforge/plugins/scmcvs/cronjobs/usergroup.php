@@ -83,7 +83,7 @@ $user_description = " GForge User";
  *************************************************************************/
 
 // Read the passwd file line by line
-$passwd_orig = file("/etc/passwd", "r");
+$passwd_orig = file("/etc/passwd");
 if (count($passwd_orig) < 1) {
 	echo "Exit - could not read original file contents";
 	exit;
@@ -148,7 +148,7 @@ $passwd_contents .= "\n#GFORGEEND\n";
  *************************************************************************/
 
 // Read the shadow file line by line
-$shadow_orig = file("/etc/shadow", "r");
+$shadow_orig = file("/etc/shadow");
 if (count($shadow_orig) < 1) {
 	echo "Exit - could not read original file contents";
 	exit;
