@@ -248,7 +248,7 @@ EOF
 	echo "Restoring $RESTFILE"
 	su -s /bin/sh postgres -c "dropdb $db_name" || true
 	su -s /bin/sh postgres -c "createdb --encoding=UNICODE $db_name"  || true
-	su -s /bin/sh postgres -c "/usr/lib/postgresql/bin/psql -f $RESTFILE $db_name"
+	su -s /bin/sh postgres -c "/usr/bin/psql -f $RESTFILE $db_name"
         perl -pi -e "s/### Next line inserted by GForge restore\n//" ${pg_hba_dir}/pg_hba.conf
         perl -pi -e "s/$localtrust\n//" ${pg_hba_dir}/pg_hba.conf
 	invoke-rc.d ${pg_name} reload
