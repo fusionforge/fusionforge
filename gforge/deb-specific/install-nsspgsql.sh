@@ -40,52 +40,42 @@ modify_pam_pgsql(){
 
 # Check/Modify /etc/libnss-ldap.conf
 configure_libnss_pgsql(){
-    # All users can see ldap stored gid/uid
-#    cat > /etc/nss-pgsql.conf.gforge-new <<EOF
-#host            = $db_host
-#port            = 5432
-#database        = $db_name
-#login           = gforge_nss
-#passwd          = ''
-#passwdtable     = nss_passwd
-#grouptable      = nss_groups
-#groupmembertable = nss_passwd JOIN nss_usergroups ON nss_passwd.uid=nss_usergroups.uid JOIN nss_groups ON nss_usergroups.gid=nss_groups.gid
-#
-#passwd_name     = login
-#passwd_passwd   = passwd
-#passwd_uid      = uid
-#passwd_dir      = homedir
-#passwd_shell    = shell
-#passwd_gecos    = gecos
-#passwd_gid      = gid
-#
-#group_name      = name
-#group_passwd    = passwd
-#group_gid       = gid
-#group_member    = login
-#EOF
     cat > /etc/nss-pgsql.conf.gforge-new <<EOF
 ### NSS Configuration for Gforge
 
 #----------------- DB connection
-connectionstring = port=5432 user=gforge_nss password=gforge_nss dbname=gforge
+connectionstring = user=gforge_nss password=gforge_nss dbname=gforge
 
 #----------------- NSS queries
 getpwnam        = SELECT login AS username,passwd,gecos,('/var/lib/gforge/chroot/home/users/' || login) AS homedir,shell,uid,gid FROM nss_passwd WHERE login = \$1
 getpwuid        = SELECT login AS username,passwd,gecos,('/var/lib/gforge/chroot/home/users/' || login) AS homedir,shell,uid,gid FROM nss_passwd WHERE uid = \$1
-allusers        = SELECT login AS username,passwd,gecos,('/var/lib/gforge/chroot/home/users/' || login) AS homedir,shell,uid,gid FROM nss_passwd
+#allusers        = SELECT login AS username,passwd,gecos,('/var/lib/gforge/chroot/home/users/' || login) AS homedir,shell,uid,gid FROM nss_passwd
 getgroupmembersbygid = SELECT login AS username FROM nss_passwd WHERE gid = \$1
 getgrnam = SELECT name AS groupname,'x',gid,ARRAY(SELECT user_name FROM nss_usergroups WHERE nss_usergroups.gid = nss_groups.gid) AS members FROM nss_groups WHERE name = \$1
 getgrgid = SELECT name AS groupname,'x',gid,ARRAY(SELECT user_name FROM nss_usergroups WHERE nss_usergroups.gid = nss_groups.gid) AS members FROM nss_groups WHERE gid = \$1
-allgroups = SELECT name AS groupname,'x',gid,ARRAY(SELECT user_name FROM nss_usergroups WHERE nss_usergroups.gid = nss_groups.gid) AS members FROM nss_groups 
+#allgroups = SELECT name AS groupname,'x',gid,ARRAY(SELECT user_name FROM nss_usergroups WHERE nss_usergroups.gid = nss_groups.gid) AS members FROM nss_groups 
 groups_dyn = SELECT ug.gid FROM nss_usergroups ug, nss_passwd p WHERE ug.uid = p.uid AND p.login = \$1 AND ug.gid <> \$2
 EOF
+    cat > /etc/nss-pgsql-root.conf.gforge-new <<EOF
+### NSS Configuration for Gforge
+
+#----------------- DB connection
+shadowconnectionstring = user=gforge_nss password=gforge_nss dbname=gforge
+
+#----------------- NSS queries
+shadowbyname    = SELECT login AS shadow_name, passwd AS shadow_passwd, 14087 AS shadow_lstchg, 0 AS shadow_min, 99999 AS shadow_max, 7 AS shadow_warn, '' AS shadow_inact, '' AS shadow_expire, '' AS shadow_flag FROM nss_passwd WHERE login = $1
+shadow          = SELECT login AS shadow_name, passwd AS shadow_passwd, 14087 AS shadow_lstchg, 0 AS shadow_min, 99999 AS shadow_max, 7 AS shadow_warn, '' AS shadow_inact, '' AS shadow_expire, '' AS shadow_flag FROM nss_passwd
+EOF
+
     chmod 644 /etc/nss-pgsql.conf.gforge-new
+    chmod 600 /etc/nss-pgsql-root.conf.gforge-new
+    chown root:root /etc/nss-pgsql-root.conf.gforge-new
 }
 
 # Purge /etc/nss-pgsql.conf
 purge_libnss_pgsql(){
     echo -n > /etc/nss-pgsql.conf.gforge-new
+    echo -n > /etc/nss-pgsql-root.conf.gforge-new
 }
 
 # Modify /etc/nsswitch.conf
@@ -119,7 +109,7 @@ purge_nsswitch()
 case "$1" in
     configure-files)
 	setup_vars
-	# echo "Modifying /etc/nss-pgsql.conf"
+	# echo "Modifying /etc/nss-pgsql.conf and /etc/nss-pgsql-root.conf"
 	configure_libnss_pgsql
 	# echo "Modifying /etc/nsswitch.conf"
 	configure_nsswitch
@@ -130,7 +120,7 @@ case "$1" in
 	setup_vars
 	# echo "Purging /etc/nsswitch.conf"
 	purge_nsswitch
-	# echo "Purging /etc/nss-pgsql.conf"
+	# echo "Purging /etc/nss-pgsql.conf and /etc/nss-pgsql-root.conf"
 	purge_libnss_pgsql
 	;;
     test|check)
@@ -141,15 +131,19 @@ case "$1" in
     	$0 configure-files
 	$0 configure
 	cp /etc/nss-pgsql.conf /etc/nss-pgsql.conf.gforge-old
+	cp /etc/nss-pgsql-root.conf /etc/nss-pgsql-root.conf.gforge-old
 	cp /etc/nsswitch.conf.gforge /etc/nsswitch.conf.gforge-old
 	mv /etc/nss-pgsql.conf.gforge-new /etc/nss-pgsql.conf
+	mv /etc/nss-pgsql-root.conf.gforge-new /etc/nss-pgsql-root.conf
 	mv /etc/nsswitch.conf.gforge-new /etc/nsswitch.conf
 	;;
     cleanup)
 	$0 purge-files
 	cp /etc/nss-pgsql.conf /etc/nss-pgsql.conf.gforge-old
+	cp /etc/nss-pgsql-root.conf /etc/nss-pgsql-root.conf.gforge-old
 	cp /etc/nsswitch.conf.gforge /etc/nsswitch.conf.gforge-old
 	mv /etc/nss-pgsql.conf.gforge-new /etc/nss-pgsql.conf
+	mv /etc/nss-pgsql-root.conf.gforge-new /etc/nss-pgsql-root.conf
 	mv /etc/nsswitch.conf.gforge-new /etc/nsswitch.conf
 	;;
     *)

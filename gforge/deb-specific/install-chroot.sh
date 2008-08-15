@@ -140,6 +140,7 @@ FIN
 
 	# Libnss-pgsql related stuffs
 	[ -e /etc/nss-pgsql.conf ] && cp /etc/nss-pgsql.conf $CHROOTDIR/etc
+	[ -e /etc/nss-pgsql-root.conf ] && cp /etc/nss-pgsql-root.conf $CHROOTDIR/etc
 	[ "$(echo /lib/libnss_pgsql*)" != "/lib/libnss_pgsql*" ] && cp /lib/libnss_pgsql* $CHROOTDIR/lib
 	[ "$(echo /usr/lib/libnss_pgsql*)" != "/usr/lib/libnss_pgsql*" ] && cp /usr/lib/libnss_pgsql* $CHROOTDIR/usr/lib
 	[ "$(echo /usr/lib/libdb*)" != "/usr/lib/libdb*" ] && cp /usr/lib/libdb* $CHROOTDIR/usr/lib
