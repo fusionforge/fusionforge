@@ -22,7 +22,7 @@ dchcmd=dch -v 4.5.6-1 -D unstable "New Upstream version"
 debuildopts=-sa
 debuildopts=-sa -us -uc
 debuildopts=-us -uc
-gfversion=$(shell head -1 gforge/debian/changelog | sed 's/.*(\(.*\)-.*).*/\1/')
+gfversion=$(shell head -1 gforge/debian/changelog | sed 's/.*(\(.*\)-.*).*/\1/'| sed 's/+something/+z/')
 gfminor=$(shell head -1 gforge/debian/changelog | sed 's/.*(.*-\(.*\)).*/\1/')
 where=g-rouille
 where=mercure
@@ -70,7 +70,10 @@ MINOR=1
 LOCALREPO=/var/www/debian-gforge
 DISTRIBLIST=etch lenny sid
 
-svnbuild:
+svnbuildtest:
+	@echo "Will build gforge_$(gfversion)-$(MINOR)$(DISTRIB)"
+
+svnbuild:		# This is the one you should use #
 	for dist in $(DISTRIBLIST); do \
 	make -f Makefile.debian svnbuilddist DISTRIB=$$dist ; \
 	done
