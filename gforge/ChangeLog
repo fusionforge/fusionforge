@@ -1,5 +1,8 @@
 2008-08-18  Roland Mas  <lolando@debian.org>
 
+	* common/include/PluginManager.class.php: Allow return values for
+	plugins (patch #2689 by Alain Peyrat).
+
 	* plugins/scmcvs/cronjobs/history_parse.php: Fixed DB commit
 	underflow (patch #2207 by Yann Dirson).
 

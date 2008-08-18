@@ -29,6 +29,7 @@ class PluginManager extends Error {
 	var $plugins_objects ;
 	var $plugins_to_hooks ;
 	var $hooks_to_plugins ;
+	var $returned_value = array();
 
 	/**
 	 * PluginManager() - constructor
@@ -166,16 +167,27 @@ class PluginManager extends Error {
 	 *
 	 * @param hookname - name of the hook
 	 * @param params - array of extra parameters
+	 *
+	 * @return boolean, true if all returned true.
 	 */
 	function RunHooks ($hookname, & $params) {
+		$result = true;
 		if (isset($this->hooks_to_plugins[$hookname])) {
 			$p_list = $this->hooks_to_plugins[$hookname];
 			foreach ($p_list as $p_name) {
 				$p_obj = $this->plugins_objects[$p_name] ;
-				$p_obj->CallHook ($hookname, $params) ;
+				$returned = $p_obj->CallHook ($hookname, $params);
+				$this->returned_value[$hookname] = $returned;
+				$result = $result && $returned ;
 			}
 		}
-		return true ;
+
+		// Return true only if all the plugins have returned true.
+		return $result;
+	}
+
+	function getReturnedValue($hookname) {
+		return $this->returned_value[$hookname];
 	}
 
 	/**
