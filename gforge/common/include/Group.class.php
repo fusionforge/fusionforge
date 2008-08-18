@@ -391,6 +391,14 @@ class Group extends Error {
 				db_rollback();
 				return false;
 			}
+
+			$hook_params = array ();
+			$hook_params['group'] = $this;
+			$hook_params['group_id'] = $this->getID();
+			$hook_params['group_name'] = $full_name;
+			$hook_params['unix_group_name'] = $unix_name;
+			plugin_hook ("group_create", $hook_params);
+			
 			db_commit();
 			$this->sendNewProjectNotificationEmail();
 			return true;
@@ -608,6 +616,14 @@ class Group extends Error {
 			return false;
 		}
 
+		$hook_params = array ();
+		$hook_params['group'] = $this;
+		$hook_params['group_id'] = $this->getID();
+		$hook_params['group_homepage'] = $homepage;
+		$hook_params['group_name'] = htmlspecialchars($group_name);
+		$hook_params['group_description'] = htmlspecialchars($short_description);
+		plugin_hook ("group_update", $hook_params);
+
 		// Log the audit trail
 		$this->addHistory('Changed Public Info', '');
 
@@ -722,6 +738,12 @@ class Group extends Error {
 			}
 		}
 
+		$hook_params = array ();
+		$hook_params['group'] = $this;
+		$hook_params['group_id'] = $this->getID();
+		$hook_params['status'] = $status;
+		plugin_hook ("group_setstatus", $hook_params);
+		
 		db_commit();
 
 		// Log the audit trail
@@ -1454,6 +1476,12 @@ class Group extends Error {
 		if (!$res) {
 			return false;
 		}
+               
+		$hook_params = array ();
+		$hook_params['group'] = $this;
+		$hook_params['group_id'] = $this->getID();
+		plugin_hook ("group_delete", $hook_params);
+		
 		if (isset($GLOBALS['sys_upload_dir']) && $this->getUnixName()) {
 			exec('/bin/rm -rf '.$GLOBALS['sys_upload_dir'].'/'.$this->getUnixName().'/');
 		}
@@ -1629,6 +1657,13 @@ class Group extends Error {
 			db_rollback();
 			return false;
 		}
+
+		$hook_params['group'] = $this;
+		$hook_params['group_id'] = $this->getID();
+		$hook_params['user'] = &user_get_object($user_id);
+		$hook_params['user_id'] = $user_id;
+		plugin_hook ("group_adduser", $hook_params);
+		
 		//
 		//	audit trail
 		//
@@ -1773,6 +1808,13 @@ class Group extends Error {
 			$this->setError(sprintf(_('Role: %s'),$role->getErrorMessage()));
 			return false;
 		}
+		
+		$hook_params['group'] = $this;
+		$hook_params['group_id'] = $this->getID();
+		$hook_params['user'] = &user_get_object($user_id);
+		$hook_params['user_id'] = $user_id;
+		plugin_hook ("group_removeuser", $hook_params);
+		
 		$this->addHistory('Updated User',$user_id);
 		return true;
 	}

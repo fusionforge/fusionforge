@@ -335,6 +335,13 @@ class GFUser extends Error {
 				return false;
 			}
 
+			$hook_params = array ();
+			$hook_params['user'] = $this;
+			$hook_params['user_id'] = $this->getID();
+			$hook_params['user_name'] = $unix_name;
+			$hook_params['user_password'] = $password1;
+			plugin_hook ("user_create", $hook_params);
+			
 			if ($send_mail) {
 				setup_gettext_from_lang_id($language_id);
 				$this->sendRegistrationEmail();
@@ -421,6 +428,12 @@ Enjoy the site.
 				db_rollback();
 				return false;
 			}
+
+			$hook_params = array ();
+			$hook_params['user'] = $this;
+			$hook_params['user_id'] = $this->getID();
+			plugin_hook ("user_delete", $hook_params);
+			
 			$this->setStatus('D');
 			db_commit();
 		}
@@ -506,6 +519,12 @@ Enjoy the site.
 				db_rollback();
 				return false;
 			}
+			
+			$hook_params = array ();
+			$hook_params['user'] = $this;
+			$hook_params['user_id'] = $this->getID();
+			plugin_hook ("user_update", $hook_params);
+			
 			db_commit();
 			return true;
 		}
@@ -582,6 +601,12 @@ Enjoy the site.
 					return false;
 				}
 			}
+			$hook_params = array ();
+			$hook_params['user'] = $this;
+			$hook_params['user_id'] = $this->getID();
+			$hook_params['status'] = $status;
+			plugin_hook ("user_setstatus", $hook_params);
+			
 			db_commit();
 			
 			//plugin webcalendar, create cal_user
@@ -738,6 +763,7 @@ Enjoy the site.
 			$this->setError('ERROR: Invalid Email');
 			return false;
 		}
+		db_begin();
 		$res=db_query("
 			UPDATE users 
 			SET email='$email' 
@@ -746,9 +772,17 @@ Enjoy the site.
 
 		if (!$res) {
 			$this->setError('ERROR - Could Not Update User Email: '.db_error());
+			db_rollback();
 			return false;
 		} else {
+			$hook_params = array ();
+			$hook_params['user'] = $this;
+			$hook_params['user_id'] = $this->getID();
+			$hook_params['user_email'] = $email;
+			plugin_hook ("user_setemail", $hook_params);
+			
 			$this->data_array['email'] = $email;
+			db_commit();
 			return true;
 		}
 	}
@@ -1196,6 +1230,11 @@ Enjoy the site.
 				}
 			}
 		}
+		$hook_params = array ();
+		$hook_params['user'] = $this;
+		$hook_params['user_id'] = $this->getID();
+		$hook_params['user_password'] = $passwd;
+		plugin_hook ("user_setpasswd", $hook_params);
 		db_commit();
 		return true;
 	}

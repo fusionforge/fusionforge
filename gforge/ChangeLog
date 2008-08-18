@@ -1,5 +1,9 @@
 2008-08-18  Roland Mas  <lolando@debian.org>
 
+	* common/include/Group.class.php: Added new hooks (patch #1715 by
+	Nicolas Quienot).
+	* common/include/User.class.php: Ditto.
+
 	* cronjobs/db_trove_maint.php: Enable showing private projects in
 	Trove map (patch #1264 by Vittal Aithal).
 
