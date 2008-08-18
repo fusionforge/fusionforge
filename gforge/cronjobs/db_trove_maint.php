@@ -42,12 +42,12 @@ CREATE TABLE trove_agg AS
 		WHERE
 		tgl.group_id=g.group_id
 		AND (g.is_public=1)
-		AND (g.type=1)
+		AND (g.type_id=1)
 		AND (g.status='A')
 	ORDER BY trove_cat_id ASC, ranking ASC;
 
 CREATE INDEX troveagg_trovecatid ON trove_agg(trove_cat_id);
-create index troveagg_trovecatid_ranking ON trove_agg(trove_cat_id,ranking);
+CREATE INDEX troveagg_trovecatid_ranking ON trove_agg(trove_cat_id,ranking);
 
 DROP TABLE trove_treesums;
 CREATE TABLE "trove_treesums" (
@@ -75,12 +75,26 @@ db_begin(SYS_DB_TROVE);
 
 db_query("DELETE FROM trove_agg;", -1, 0, SYS_DB_TROVE);
 
+if ($sys_private_trove_view == 1) {
+	// Show public *and* private groups
+	$public_sql = 'g.is_public=1 OR g.is_public = 0';
+	$sum_public_sql .= " OR groups.is_public='0'";
+} elseif ($sys_private_trove_view == 2) {
+	// Show just private groups
+	$public_sql = 'g.is_public = 0';
+	$sum_public_sql = "groups.is_public='0'";
+} else {
+	// Show public groups only
+	$public_sql = 'g.is_public=1';
+	$sum_public_sql = "groups.is_public='1' OR groups.is_public IS NULL";
+}
+
 $sql="INSERT INTO trove_agg
 	(SELECT tgl.trove_cat_id, g.group_id, g.group_name, g.unix_group_name, g.status, g.register_time, g.short_description, project_weekly_metric.percentile, project_weekly_metric.ranking
 	FROM groups g
 	LEFT JOIN project_weekly_metric USING (group_id), trove_group_link tgl 
 	WHERE tgl.group_id=g.group_id 
-	AND (g.is_public=1) 
+	AND ($public_sql) 
 	AND (g.type_id=1) 
 	AND (g.status='A') 
 	ORDER BY trove_cat_id ASC, ranking ASC)";
@@ -126,8 +140,8 @@ $res=db_query("SELECT trove_cat.trove_cat_id,trove_cat.parent,count(groups.group
 	LEFT JOIN groups ON
 		groups.group_id=trove_group_link.group_id
 	WHERE (groups.status='A' OR groups.status IS NULL)
-	AND ( groups.type_id='1' OR groups.status IS NULL)
-	AND ( groups.is_public='1' OR groups.is_public IS NULL)
+	AND (groups.type_id='1' OR groups.status IS NULL)
+	AND ($sum_public_sql)
 	GROUP BY trove_cat.trove_cat_id,trove_cat.parent", -1, 0, SYS_DB_TROVE);
 
 $rows = db_numrows($res);
