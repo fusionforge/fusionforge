@@ -260,7 +260,11 @@ if ( $ARGV[1] && $ARGV[2] && $ARGV[3] ) {
 	$day_end = $day_begin + 86400;
  
 	db_begin();
-	$rollback = process_day($day_begin, $day_end);
+	if (process_day($day_begin, $day_end)) {
+		db_rollback();
+	} else {
+		db_commit();
+	}
 } else if($ARGV[1]=='all' && !$ARGV[2] && !$ARGV[3]) { 
   
 	// Heavy (rarely used) operation, allow for 8hrs
@@ -269,10 +273,9 @@ if ( $ARGV[1] && $ARGV[2] && $ARGV[3] ) {
 	foreach ( $all_days as $day ) {
 		echo date('Y-m-d', $day)."\n";  	
 		db_begin();
-		$rollback = process_day($day, $day + 86400);
 		
-		if($rollback) {
-			break;
+		if(process_day($day, $day + 86400)) {
+			db_rollback();
 		} else {
 			db_commit();
 		}
@@ -289,8 +292,11 @@ if ( $ARGV[1] && $ARGV[2] && $ARGV[3] ) {
 	$day_begin = $day_end - 86400;
 	//	$day_begin = timegm( 0, 0, 0, (gmtime( time() - 86400 ))[3,4,5] );
 	db_begin();
-	$rollback = process_day($day_begin, $day_end);
-
+	if (process_day($day_begin, $day_end)) {
+		db_rollback();
+	} else {
+		db_commit();
+	}
 }
 
 if ( $rollback ) {

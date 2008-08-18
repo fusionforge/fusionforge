@@ -1,5 +1,8 @@
 2008-08-18  Roland Mas  <lolando@debian.org>
 
+	* plugins/scmcvs/cronjobs/history_parse.php: Fixed DB commit
+	underflow (patch #2207 by Yann Dirson).
+
 	* common/include/Group.class.php: Added new hooks (patch #1715 by
 	Nicolas Quienot).
 	* common/include/User.class.php: Ditto.
