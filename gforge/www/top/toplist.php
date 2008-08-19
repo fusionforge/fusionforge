@@ -26,9 +26,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require "../env.inc.php";    
-require "pre.php";    
-require_once "common/include/Stats.class.php";    
+require ('../env.inc.php');
+require $gfwww.'include/pre.php';
+require_once $gfcommon.'include/Stats.class.php';
 
 $type = getStringFromRequest('type');
 
@@ -70,8 +70,7 @@ while ($row_top = db_fetch_array($res_top)) {
 	}
 	$display_rank++;
 	print '<tr '. $HTML->boxGetAltRowStyle($i) .'><td>&nbsp;&nbsp;'.$display_rank
-		.'</td><td>'.util_make_link_g (strtolower($row_top['unix_group_name']),$row_top['group_id']).'">'
-		.stripslashes($row_top['group_name'])."</a>"
+		.'</td><td>'.util_make_link_g (strtolower($row_top['unix_group_name']),@$row_top['group_id'],stripslashes($row_top['group_name']))
 		.'</td><td align="right">'.$row_top['items']
 		.'&nbsp;&nbsp;&nbsp;</td>'
 		.'<td align="right">';
