@@ -176,6 +176,7 @@ function show_highest_ranked_projects() {
 	if (!$result || db_numrows($result) < 1) {
 		return _('No Stats Available')." ".db_error();
 	} else {
+		$return='';
 		while ($row=db_fetch_array($result)) {
 			$return .= '<strong>( '.number_format(substr($row['percentile'],0,5),1).'% )</strong>'
 				.util_make_link_g ($row['unix_group_name'],$row['group_id'],$row['group_name'])
