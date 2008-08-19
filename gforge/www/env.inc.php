@@ -18,7 +18,7 @@ error_reporting( E_ALL );
 # Attempt to set up the include path, to fix problems with relative includes
 $IP = dirname(dirname( __FILE__ )) ;
 $include_path = join(PATH_SEPARATOR, 
-	array("/etc/gforge/custom", "/etc/gforge", "$IP/common", "$IP/www",	"$IP/plugins", "."));
+	array("/etc/gforge/custom", "/etc/gforge", "$IP/common", "$IP/www",	"$IP/plugins", "$IP", "."));
 
 // By default, the include_path is changed to include path needed by Gforge.
 // If this does not work, then set defines to real path directly.
