@@ -463,7 +463,7 @@ class ForumHTML extends Error {
 			echo notepad_func();
 			?>
 <div align="center">
-	 <form "enctype="multipart/form-data" action="<? echo util_make_url ('/forum/admin/index.php') ?>"
+	 <form enctype="multipart/form-data" action="<? echo util_make_url ('/forum/admin/index.php') ?>"
 	method="post"><?php $objid = $this->Forum->getID();?> <input
 	type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" /> <input
 	type="hidden" name="forum_id" value="<?php echo $objid; ?>" /> <input
@@ -495,8 +495,8 @@ class ForumHTML extends Error {
 		$params['group'] = $group_id;
 		plugin_hook("text_editor",$params);
 		if (!$GLOBALS['editor_was_set_up']) {
-			//if we don�t have any plugin for text editor, display a simple textarea edit box
-			echo '<textarea name="body"  rows="10" cols="50" wrap="soft">' . $body . '</textarea>';
+			//if we don't have any plugin for text editor, display a simple textarea edit box
+			echo '<textarea name="body"  rows="10" cols="50">' . $body . '</textarea>';
 		}
 		unset($GLOBALS['editor_was_set_up']);
 		?> <br>
