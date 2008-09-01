@@ -47,6 +47,9 @@ if (session_loggedin()) {
 	}
 
 	if (getStringFromRequest('post_changes')) {
+		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+			exit_form_double_submit();
+		}
 		$summary = getStringFromRequest('summary');
 		$details = getStringFromRequest('details');
 
@@ -76,12 +79,14 @@ if (session_loggedin()) {
 	   			$result=db_query($sql);
 	   			if (!$result) {
 					db_rollback();
+					form_release_key(getStringFromRequest('form_key'));
 	   				$feedback = ' '._('ERROR doing insert').' ';
 	   			} else {
 					db_commit();
 	   				$feedback = ' '._('News Added.').' ';
 	   			}
 		} else {
+			form_release_key(getStringFromRequest('form_key'));
 			$feedback = ' '._('ERROR - both subject and body are required').' ';
 		}
 	}
@@ -101,11 +106,12 @@ if (session_loggedin()) {
 	echo '
 		<p>
 		'. sprintf(_('You can post news about your project if you are an admin on your project. You may also post "help wanted" notes if your project needs help.</p><p>All posts <b>for your project</b> will appear instantly on your project summary page. Posts that are of special interest to the community will have to be approved by a member of the %1$s news team before they will appear on the %1$s home page.</p><p>You may include URLs, but not HTML in your submissions.</p><p>URLs that start with http:// are made clickable.'), $GLOBALS['sys_name']) .'</p>' . $jsfunc . 
-		'<p>
+		'
 		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="group_id" value="'.$group_id.'" />
-		<strong>'._('For project').' '.$group->getPublicName().'</strong>
-		<input type="hidden" name="post_changes" value="y" /></p>
+		<input type="hidden" name="post_changes" value="y" />
+		<input type="hidden" name="form_key" value="'. form_generate_key() .'" />
+		<p><strong>'._('For project').' '.$group->getPublicName().'</strong></p>
 		<p>
 		<strong>'._('Subject').':</strong>'.utils_requiredField().'<br />
 		<input type="text" name="summary" value="" size="30" maxlength="60" /></p>
@@ -121,11 +127,11 @@ if (session_loggedin()) {
 	plugin_hook("text_editor",$params);
 	if (!isset($GLOBALS['editor_was_set_up'])) {
 		//if we don't have any plugin for text editor, display a simple textarea edit box
-		echo '<textarea name="details" rows="5" cols="50" wrap="soft"></textarea><br />';
+		echo '<textarea name="details" rows="5" cols="50"></textarea><br />';
 	}
 	unset($GLOBALS['editor_was_set_up']);
 	echo '<input type="submit" name="submit" value="'._('Submit').'" />
-		</form></p>';
+		</p></form>';
 
 	news_footer(array());
 
