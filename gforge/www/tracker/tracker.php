@@ -253,6 +253,7 @@ switch (getStringFromRequest('func')) {
 				//techs will have certain fields overridden inside the update() function call
 				if (!$ah->update($priority,$status_id,
 					$assigned_to,$summary,$canned_response,$details,$new_artifact_type_id,$extra_fields)) {
+					form_release_key(getStringFromRequest('form_key'));
 					$feedback =_('Tracker Item'). ': '.$ah->getErrorMessage();
 					$ah->clearError();
 					$was_error=true;
@@ -268,7 +269,7 @@ switch (getStringFromRequest('func')) {
 					if ($ah->addMessage($details,$user_email,true)) {
 						$feedback=_('Comment added');
 					} else {
-						if ( (strlen($details)>0) ) { //if there was no message, then it´s not an error but addMessage returns false and sets missing params error
+						if ( (strlen($details)>0) ) { //if there was no message, then it's not an error but addMessage returns false and sets missing params error
 							//some kind of error in creation
 							exit_error($ah->getErrorMessage(),$feedback);
 						} else {
