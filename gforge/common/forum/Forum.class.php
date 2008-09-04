@@ -421,7 +421,7 @@ class Forum extends Error {
                         FROM user_group, role_setting
                         WHERE role_setting.section_name='forum'
                           AND role_setting.ref_id='".$this->getID()."'
-                          AND role_setting.value > 1
+                          AND role_setting.value::integer > 1
                           AND user_group.role_id = role_setting.role_id";
 		$result = db_query($sql);
 		return util_result_column_to_array($result);
@@ -771,7 +771,7 @@ class Forum extends Error {
 			return -1;
 		} else {
 			if (!isset($this->current_user_perm)) {
-				$sql="SELECT role_setting.value
+				$sql="SELECT role_setting.value::integer
 				FROM role_setting, user_group
 				WHERE role_setting.ref_id='". $this->getID() ."'
 				AND user_group.role_id = role_setting.role_id

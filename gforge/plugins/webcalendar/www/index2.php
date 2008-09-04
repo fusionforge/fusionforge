@@ -30,7 +30,7 @@ echo site_project_footer(array());
 
 function user_belongs_to_group($user_id,$group_id){
 global $HTML;
-$sql = "SELECT value,admin_flags FROM user_group,role_setting WHERE role_setting.role_id = user_group.role_id AND user_group.user_id = '".$user_id."' AND user_group.group_id = '".$group_id."' AND role_setting.section_name = 'webcal'";
+$sql = "SELECT value::integer,admin_flags FROM user_group,role_setting WHERE role_setting.role_id = user_group.role_id AND user_group.user_id = '".$user_id."' AND user_group.group_id = '".$group_id."' AND role_setting.section_name = 'webcal'";
 		
 //$sql = "SELECT COUNT(*) FROM user_group WHERE user_id = '".$user_id."' AND group_id = '".$group_id."'";	
 $res = db_query($sql);

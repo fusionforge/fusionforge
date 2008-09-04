@@ -101,7 +101,7 @@ class ArtifactTypeFactory extends Error {
 				} else {
 					$exists=" AND group_artifact_id IN (SELECT role_setting.ref_id
 					FROM role_setting, user_group
-					WHERE role_setting.value >= 0
+					WHERE role_setting.value::integer >= 0
                                           AND role_setting.section_name = 'tracker'
                                           AND role_setting.ref_id=artifact_group_list_vw.group_artifact_id
                                           

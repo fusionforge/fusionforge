@@ -1015,7 +1015,7 @@ class ArtifactType extends Error {
 			return 0;
 		} else {
 			if (!isset($this->current_user_perm)) {
-				$sql="SELECT role_setting.value
+				$sql="SELECT role_setting.value::integer
 				FROM role_setting, user_group
 				WHERE role_setting.ref_id='". $this->getID() ."'
 				AND user_group.role_id = role_setting.role_id

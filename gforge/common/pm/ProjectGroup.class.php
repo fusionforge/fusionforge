@@ -323,7 +323,7 @@ class ProjectGroup extends Error {
 				WHERE users.user_id=user_group.user_id
                                 AND role_setting.role_id=user_group.role_id
                                 AND role_setting.ref_id='". $this->getID() ."' 
-				AND role_setting.value IN (1,2) 
+				AND role_setting.value::integer IN (1,2) 
                                 AND role_setting.section_name='pm'
 				ORDER BY users.realname";
 			$this->technicians=db_query($sql);
@@ -602,7 +602,7 @@ class ProjectGroup extends Error {
 			return -1;
 		} else {
 			if (!isset($this->current_user_perm)) {
-				$sql="SELECT role_setting.value
+				$sql="SELECT role_setting.value::integer
 				FROM role_setting, user_group
 				WHERE role_setting.ref_id='". $this->getID() ."'
 				AND user_group.role_id = role_setting.role_id

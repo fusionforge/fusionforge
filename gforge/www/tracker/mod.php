@@ -103,7 +103,7 @@ if (session_loggedin()) {
 		FROM artifact_group_list agl, role_setting rs, user_group ug
 		WHERE agl.group_artifact_id=rs.ref_id
 		AND ug.user_id='". user_getid() ."' 
-		AND rs.value $alevel
+		AND rs.value::integer $alevel
 		AND agl.group_id='$group_id'
                 AND ug.role_id = rs.role_id
                 AND rs.section_name='tracker'";

@@ -69,7 +69,7 @@ case "$1" in
 	    | cpio --quiet -pdumVLB $CHROOTDIR
 
 	# cvs extra
-	cp /lib/ld-linux.so.* $CHROOTDIR/lib
+	cp /lib/ld-linux*.so.* $CHROOTDIR/lib
 	# sshd extras
 	# pthread cancel
 	cp /lib/libgcc_s* $CHROOTDIR/lib

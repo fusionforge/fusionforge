@@ -6,6 +6,27 @@ gforge (4.6.99+svn6585-1) unstable; urgency=low
 
  -- Christian Bayle <bayle@debian.org>  Fri, 15 Aug 2008 20:05:16 +0200
 
+gforge (4.7~rc2-3) unstable; urgency=low
+
+  * Added explicit cast to fix PostgreSQL 8.3 compatibility (closes:
+    #497512).
+
+ -- Roland Mas <lolando@debian.org>  Thu, 04 Sep 2008 09:06:51 +0200
+
+gforge (4.7~rc2-2) unstable; urgency=low
+
+  * Fixed chroot setup on amd64 (closes: #495728).
+
+ -- Roland Mas <lolando@debian.org>  Sun, 31 Aug 2008 20:33:58 +0200
+
+gforge (4.7~rc2-1) unstable; urgency=low
+
+  * Changed version number to reflect the upstream tagging of r6582 to
+    4.7rc2.  No changes in code.
+  * Updated Debconf template translations for Swedish (closes: #492883).
+
+ -- Roland Mas <lolando@debian.org>  Tue, 19 Aug 2008 21:19:03 +0200
+
 gforge (4.6.99+svn6582-1) unstable; urgency=low
 
   * Removed from gforge-plugins-extra a few files that were also present

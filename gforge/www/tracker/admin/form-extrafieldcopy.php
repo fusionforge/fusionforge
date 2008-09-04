@@ -44,8 +44,8 @@
 			WHERE
                         (
                            (rs.section_name = 'projectadmin' AND rs.value = 'A')
-                           OR (rs.section_name = 'trackeradmin' AND rs.value = 2)
-                           OR (rs.section_name = 'tracker' AND rs.value >= 2 AND rs.ref_id = agl.group_artifact_id)
+                           OR (rs.section_name = 'trackeradmin' AND rs.value = '2')
+                           OR (rs.section_name = 'tracker' AND rs.value::integer >= 2 AND rs.ref_id = agl.group_artifact_id)
                         )
 			AND ug.user_id='".user_getid()."'
 			AND ug.group_id=g.group_id

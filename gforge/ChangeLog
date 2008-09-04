@@ -1,3 +1,18 @@
+2008-09-03  Roland Mas  <lolando@debian.org>
+
+	* common/tracker/ArtifactType.class.php: Fixed PostgreSQL 8.3
+	compatibility by explicitly converting role_setting.value to an
+	integer.
+	* common/tracker/ArtifactTypeFactory.class.php: Ditto.
+	* common/pm/ProjectGroup.class.php: Ditto.
+	* common/pm/ProjectGroupFactory.class.php: Ditto.
+	* common/forum/Forum.class.php: Ditto.
+	* common/forum/ForumFactory.class.php: Ditto.
+	* plugins/webcalendar/www/index2.php: Ditto.
+	* www/pm/msproject/msp.php: Ditto.
+	* www/tracker/admin/form-extrafieldcopy.php: Ditto.
+	* www/tracker/mod.php: Ditto.
+
 2008-08-18  Roland Mas  <lolando@debian.org>
 
 	* common/include/PluginManager.class.php: Allow return values for
