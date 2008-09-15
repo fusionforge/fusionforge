@@ -129,7 +129,7 @@ if ($edit=="yes") {
 			$fm = new ForumMessage($f,$msg_id,false,false);
 			$am->SetForumMsg($fm);
 			$attach = getUploadedFile("attachment1");
-			if ($attachid==0) {
+			if ($attachid) {
 				//update existing one
 				$attachok = $am->attach($attach,$group_id,$attachid,$msg_id);
 				if ($attachok!=false) {
@@ -138,7 +138,7 @@ if ($edit=="yes") {
 				}
 			} else {
 				//add new one
-				$attachok = $am->attach($attach,$group_id,$attachid);
+				$attachok = $am->attach($attach,$group_id,$attachid, $msg_id);
 				if ($attachok!=false) {
 					$fm->fetchData($msg_id);
 					$fm->sendAttachNotice($attachok);
@@ -198,8 +198,6 @@ if (!$extension) {
 
 $last = gmdate('D, d M Y H:i:s', db_result($res,0,'dateline'));
 header('X-Powered-By:');
-header('Cache-control: max-age=31536000');
-header('Expires: ' . gmdate("D, d M Y H:i:s", time() + 31536000) . ' GMT');
 header('Last-Modified: ' . $last . ' GMT');
 header('ETag: "' . db_result($res,0,'attachmentid') . '"');
 
