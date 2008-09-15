@@ -34,7 +34,7 @@ $bookmark_title = trim(getStringFromRequest('bookmark_title'));
 
 if (getStringFromRequest('submit') && $bookmark_url && $bookmark_title) {
 
-	print $Language->getText('my_bookmark_add','added_bookmark', array($bookmark_url,$bookmark_title)).".<p>&nbsp;</p>";
+	print $Language->getText('my_bookmark_add','added_bookmark', array(htmlspecialchars(stripslashes($bookmark_url)),htmlspecialchars(stripslashes($bookmark_title)))).".<p>&nbsp;</p>";
 
 	bookmark_add ($bookmark_url, $bookmark_title);
 	print "<a href=\"$bookmark_url\">".$Language->getText('my_bookmark_add','visit_page')."</a> - ";
