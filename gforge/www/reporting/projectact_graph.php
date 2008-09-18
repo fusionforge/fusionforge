@@ -149,8 +149,8 @@ if ($area=='tracker') {
 //
 //	Titles
 //
-$graph->title->Set("Project Activity For: ".$g->getPublicName(). 
-	" (".date('m/d/Y',$report->getStartDate()) ."-". date('m/d/Y',$report->getEndDate()) .")");
+$graph->title->Set("Project Activity For: ".util_unconvert_htmlspecialchars($g->getPublicName()). 
+	" (".date('Y-m-d',$report->getStartDate()) ." to ". date('Y-m-d',$report->getEndDate()) .")");
 $graph->subtitle->Set($sys_name);
 //$graph->xaxis-> title->Set("Date" );
 //$graph->yaxis-> title->Set("Number" ); 
