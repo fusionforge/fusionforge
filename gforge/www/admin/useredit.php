@@ -257,8 +257,7 @@ while ($row_cat = db_fetch_array($res_cat)) {
 }
 
 echo $GLOBALS['HTML']->listTableBottom();
-
-html_feedback_bottom($feedback);
+echo '<br />';
 
 site_admin_footer(array());
 
