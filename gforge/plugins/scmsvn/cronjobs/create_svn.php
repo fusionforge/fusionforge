@@ -8,7 +8,8 @@
  * @version   $Id
  */
 
-require $gfwww.'include/squal_pre.php';
+require_once '../../../www/env.inc.php' ;
+require_once $gfwww.'include/squal_pre.php';
 require_once $gfcommon.'include/cron_utils.php';
 
 //	/path/to/svn/bin/
@@ -52,7 +53,7 @@ $password_file = "/var/lib/gforge/svnroot-authfile";
 
 
 
-$err .= "Creating Groups at ". $svn."\n";
+$err = "Creating Groups at ". $svn."\n";
 
 if (empty($sys_apache_user) || empty($sys_apache_group)) {
 	$err .=  "Error! sys_apache_user Is Not Set Or sys_apache_group Is Not Set!";
