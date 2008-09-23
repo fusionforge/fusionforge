@@ -8,8 +8,7 @@
  * @version   $Id
  */
 
-require_once '../../../www/env.inc.php' ;
-require_once $gfwww.'include/squal_pre.php';
+require $gfwww.'include/squal_pre.php';
 require_once $gfcommon.'include/cron_utils.php';
 
 //	/path/to/svn/bin/
