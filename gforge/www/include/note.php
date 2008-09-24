@@ -59,7 +59,7 @@ function notepad_func() {
 '<script language="JavaScript" type="text/javascript">'.
 "\n<!--\n".
 'function notepad_window_param(form, wrap, rows, cols) {'.
-'   notepad_php = "/notepad.php";'.
+'   notepad_php = "'.util_make_url("/notepad.php").'";'.
 '   notepad_url = notepad_php + "?form="+form + "&wrap=" + wrap +'.
 '                "&rows=" + rows + "&cols=" + cols;'.
 '     notepad_title = \'GForgeNotepad\';'.
