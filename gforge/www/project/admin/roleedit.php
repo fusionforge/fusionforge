@@ -38,6 +38,8 @@ session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 $role_id = getStringFromRequest('role_id');
 $data = getStringFromRequest('data');
 
+$feedback='';
+
 //
 //	The observer is a special role, which is actually
 //	just controlling the is_public/allow anon flags
