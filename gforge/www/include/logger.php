@@ -12,7 +12,7 @@
 /*
 	Determine group
 */
-
+$group_id=getIntFromRequest('group_id');
 if (isset($group_id) && $group_id) {
 	$log_group=$group_id;
 } else if (isset($form_grp) && $form_grp) {
