@@ -567,7 +567,7 @@ extends WikiDB_backend
             . (!$include_empty ? ", $nonempty_tbl" : '')
             . " WHERE linkfrom=linker.id AND linkto=linkee.id"
             . " AND $have.pagename='$pat$qpagename'"
-            . " AND substring($page_tbl.pagename from 0 for $p) = '$pat'"
+            . " AND substring($want.pagename from 0 for $p) = '$pat'"
             . (!$include_empty ? " AND $nonempty_tbl.id=$want.id" : "")
             //. " GROUP BY $want.id"
             . $exclude

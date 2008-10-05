@@ -52,9 +52,9 @@ if (!$group_id || !$project) {
 	define('ALLOW_USER_PASSWORDS', true);
 	
 	// Select the plugin_wiki_pref table for getting prefs.
-	define('DBAUTH_PREF_SELECT', "SELECT prefs FROM plugin_wiki_pref WHERE userid='$userid'");
-	define('DBAUTH_PREF_UPDATE', "UPDATE plugin_wiki_pref SET prefs='$pref_blob' WHERE userid='$userid'");
-	define('DBAUTH_PREF_INSERT', "INSERT INTO plugin_wiki_pref (userid,prefs) VALUES ('$userid','$pref_blob')");
+	define('DBAUTH_PREF_SELECT', "SELECT prefs FROM plugin_wiki_pref WHERE userid='\$userid'");
+	define('DBAUTH_PREF_UPDATE', "UPDATE plugin_wiki_pref SET prefs='\$pref_blob' WHERE userid='\$userid'");
+	define('DBAUTH_PREF_INSERT', "INSERT INTO plugin_wiki_pref (userid,prefs) VALUES ('\$userid','\$pref_blob')");
 	
 	// A dedicated auth has been created to get auth from GForge
 	$USER_AUTH_ORDER = array("GForge");
