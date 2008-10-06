@@ -741,7 +741,7 @@ class ArtifactType extends Error {
 			return '';
 		}
 		if (is_array($choiceid)) {
-			$choiceid=implode(',', intval($choiceid));
+			$choiceid=implode(',', array_map('intval', $choiceid));
 		} else {
 			$choiceid=intval($choiceid);
 		}
