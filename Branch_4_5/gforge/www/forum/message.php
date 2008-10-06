@@ -1,0 +1,192 @@
+<?php
+/**
+ * GForge Forums Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ */
+
+
+/*
+	Message Forums
+	By Tim Perdue, Sourceforge, 11/99
+
+	Massive rewrite by Tim Perdue 7/2000 (nested/views/save)
+
+	Complete OO rewrite by Tim Perdue 12/2002
+*/
+
+require_once('pre.php');
+require_once('www/forum/include/ForumHTML.class');
+require_once('common/forum/Forum.class');
+require_once('common/forum/ForumFactory.class');
+require_once('common/forum/ForumMessageFactory.class');
+require_once('common/forum/ForumMessage.class');
+
+if ($msg_id) {
+
+	/*
+		Figure out which group this message is in, for the sake of the admin links
+	*/
+	$result=db_query("SELECT forum_group_list.group_id,forum_group_list.group_forum_id
+		FROM forum_group_list,forum
+		WHERE forum_group_list.group_forum_id=forum.group_forum_id
+		AND forum.msg_id='$msg_id'");
+
+	if (!$result || db_numrows($result) < 1) {
+		/*
+			Message not found
+		*/
+		exit_error($Language->getText('forum_message','message_not_found_title'),
+				$Language->getText('forum_message','message_not_found_body'));
+	}
+
+	$group_id=db_result($result,0,'group_id');
+	$forum_id=db_result($result,0,'group_forum_id');
+
+	//
+	//  Set up local objects
+	//
+	$g =& group_get_object($group_id);
+	if (!$g || !is_object($g) || $g->isError()) {
+		exit_no_group();
+	}
+
+	$f=new Forum($g,$forum_id);
+	if (!$f || !is_object($f)) {
+		exit_error($Language->getText('general','error'),$Language->getText('forum_message','error_getting_new_forum'));
+	} elseif ($f->isError()) {
+		exit_error($Language->getText('general','error'),$f->getErrorMessage());
+	}
+
+	$fm=new ForumMessage($f,$msg_id);
+	if (!$fm || !is_object($fm)) {
+		exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_new_forummessage'));
+	} elseif ($fm->isError()) {
+		exit_error($Language->getText('general','error'),$fm->getErrorMessage());
+	}
+
+	$fmf = new ForumMessageFactory($f);
+	if (!$fmf || !is_object($fmf)) {
+		exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_new_forummessagefactory'));
+	} elseif ($fmf->isError()) {
+		exit_error($Language->getText('general','error'),$fmf->getErrorMessage());
+	}
+
+	$fmf->setUp(0,'threaded',200,'');
+	$style=$fmf->getStyle();
+	$max_rows=$fmf->max_rows;
+	$offset=$fmf->offset;
+
+	$fh = new ForumHTML($f);
+	if (!$fh || !is_object($fh)) {
+		exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_newforumhtml'));
+	} elseif ($fh->isError()) {
+		exit_error($Language->getText('general','error'),$fh->getErrorMessage());
+	}
+
+	forum_header(array('title'=>db_result($result,0,'subject'),'pagename'=>'forum_message','forum_id'=>$forum_id));
+
+	$title_arr=array();
+	$title_arr[]=$Language->getText('forum_message','message').': '.$msg_id;
+
+	echo $GLOBALS['HTML']->listTableTop ($title_arr);
+
+	echo "<tr><td style=\"background-color:#e3e3e3\">\n";
+	echo $Language->getText('forum_message','by').": ". $fm->getPosterRealName() ." (<a href=\"/users/".$fm->getPosterName()."/\">". $fm->getPosterName() ."</a>)<br />";
+	echo $Language->getText('forum_message','date').": ". date($sys_datefmt, $fm->getPostDate()) ."<br />";
+	echo $Language->getText('forum_message','subject').": ". $fm->getSubject() ."<p>&nbsp;</p>";
+	echo nl2br( util_make_links($fm->getBody() ));
+	echo "</td></tr>";
+
+	echo $GLOBALS['HTML']->listTableBottom();
+
+	/*
+
+		Show entire thread
+
+	*/
+	echo '<br /><br />
+		<h3>'.$Language->getText('forum_message','thread_view').'</h3>';
+
+	$msg_arr =& $fmf->nestArray($fmf->getThreaded($fm->getThreadID()));
+	if ($fmf->isError()) {
+		echo $fmf->getErrorMessage();
+	}
+
+	$title_arr=array();
+	$title_arr[]=$Language->getText('forum_forum','thread');
+	$title_arr[]=$Language->getText('forum_forum','author');
+	$title_arr[]=$Language->getText('forum_forum','date');
+
+	$ret_val .= $GLOBALS['HTML']->listTableTop ($title_arr);
+
+	$rows=count($msg_arr[0]);
+
+	if ($rows > $max_rows) {
+		$rows=$max_rows;
+	}
+
+	$current_message=$msg_id;
+	$i=0;
+	while (($i < $rows) && ($total_rows < $max_rows)) {
+		$msg =& $msg_arr["0"][$i];
+		$total_rows++;
+
+		if ($fm->getID() != $msg->getID()) {
+			$ah_begin='<a href="/forum/message.php?msg_id='.$msg->getID().'">';
+			$ah_end='</a>';
+		} else {
+			$ah_begin='';
+			$ah_end='';
+		}
+		$ret_val .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'>
+			<td>'. $ah_begin .
+			html_image('ic/msg.png',"10","12",array("border"=>"0"));
+		/*
+			See if this message is new or not
+			If so, highlite it in bold
+		*/
+		$bold_begin='';
+		$bold_end='';
+		if ($f->getSavedDate() < $msg->getPostDate()) {
+			$bold_begin = '<strong>';
+			$bold_end = '</strong>';
+		}
+		/*
+			show the subject and poster
+		*/
+		$ret_val .= $bold_begin . $msg->getSubject() . $bold_end.$ah_end.'</td>'.
+			'<td>'. $msg->getPosterRealName() .'</td>'.
+			'<td>'. date($sys_datefmt,$msg->getPostDate()) .'</td></tr>';
+
+		if ($msg->hasFollowups()) {
+			$ret_val .= $fh->showSubmessages($msg_arr,$msg->getID(),1);
+		}
+		$i++;
+	}
+
+	$ret_val .= $GLOBALS['HTML']->listTableBottom();
+
+	echo $ret_val;
+
+	/*
+		Show post followup form
+	*/
+
+//	echo '<p>&nbsp;<p>';
+	echo '<div align="center"><h3>'.$Language->getText('forum_message','post_followup').'</h3></div>';
+
+	$fh->showPostForm($fm->getThreadID(), $msg_id, $fm->getSubject());
+
+} else {
+	forum_header(array('title'=>$Language->getText('forum_message','must_choose_message_title'),'pagename'=>'forum_message'));
+	echo '<h1>'.$Language->getText('forum_message','must_choose_message_body').'</h1>';
+
+}
+
+forum_footer(array());
+
+?>

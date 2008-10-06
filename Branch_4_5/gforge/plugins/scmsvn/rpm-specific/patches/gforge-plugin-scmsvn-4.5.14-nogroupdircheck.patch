@@ -1,0 +1,15 @@
+--- bin/svn_update.pl.orig	2006-10-13 17:51:16.000000000 +0200
++++ bin/svn_update.pl	2006-10-13 17:51:34.000000000 +0200
+@@ -41,11 +41,10 @@
+ 
+ 	$userlist =~ tr/A-Z/a-z/;
+ 
+-	$group_exists = (-d $grpdir_prefix . '/' . $group_name);
+ 	$svn_exists = (-d "$svn_root/$group_name");
+ 
+ 	# SVN repository creation
+-	if ($group_exists && !$svn_exists && $use_scm && $status eq 'A' && !(-e "$svn_root/$group_name/format")) {
++	if (!$svn_exists && $use_scm && $status eq 'A' && !(-e "$svn_root/$group_name/format")) {
+ 
+ 		# This for the first time
+ 		if (!(-d "$svn_root")) {

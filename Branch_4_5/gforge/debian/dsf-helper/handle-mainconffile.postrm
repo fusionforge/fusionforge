@@ -1,0 +1,8 @@
+###
+# Functions to handle the main Gforge confguration file
+###
+mainconffile=/etc/gforge/gforge.conf
+# Delete the main configuration file
+delete_mainconffile () {
+    rm -f $mainconffile
+}

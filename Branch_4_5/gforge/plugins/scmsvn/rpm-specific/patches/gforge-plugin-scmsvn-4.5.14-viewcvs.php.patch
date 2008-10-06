@@ -1,0 +1,10 @@
+--- www/viewcvs.php.orig	2006-10-31 15:05:43.000000000 +0100
++++ www/viewcvs.php	2006-10-31 15:06:07.000000000 +0100
+@@ -138,7 +138,6 @@
+ 	}
+ 	scm_header(array('title'=>$Language->getText('scm_index','svn_repository'),
+ 		'group'=>$Group->getID()));
+-	?><link href="/plugins/scmsvn/styles.css" rel="stylesheet" TYPE="text/css"><?php
+ 	echo $content;
+ 	scm_footer(array());
+ } else {

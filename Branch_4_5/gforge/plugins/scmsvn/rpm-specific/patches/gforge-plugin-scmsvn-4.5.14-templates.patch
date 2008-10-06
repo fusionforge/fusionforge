@@ -1,0 +1,67 @@
+--- etc/plugins/scmsvn/viewcvs/templates/diff.ezt.orig	2006-10-31 15:14:47.000000000 +0100
++++ etc/plugins/scmsvn/viewcvs/templates/diff.ezt	2006-10-31 15:14:54.000000000 +0100
+@@ -118,9 +118,9 @@
+ 
+ <br><hr noshade width="100%">
+ 
+-<table border=0 cellpadding=10>
++<table border=0 cellpadding=10 class="vc_diff_form">
+   <tr>
+-    <td>
++    <td class="vc_diff_makepatch">
+       <form method=get action="[diff_format_action]">
+         [diff_format_hidden_values]
+         <input type=checkbox name="makepatch" value="1"> 
+@@ -139,10 +139,10 @@
+ [if-any raw_diff]
+       &nbsp;
+ [else]
+-      <table border=1>
++      <table class="vc_diff_help">
+         <tr>
+-          <td>Legend:<br>
+-            <table border=0 cellspacing=0 cellpadding=1>
++          <td>
++            <table border=0 cellspacing=0 cellpadding=0>
+               <tr>
+                 <td align=center class="vc_diff_remove">Removed from v.[rev1]</td>
+                 <td class="vc_diff_empty">&nbsp;</td>
+--- etc/plugins/scmsvn/viewcvs/templates/include/footer.ezt.orig	2006-10-31 15:12:55.000000000 +0100
++++ etc/plugins/scmsvn/viewcvs/templates/include/footer.ezt	2006-10-31 15:12:59.000000000 +0100
+@@ -5,17 +5,15 @@
+ <table width="100%" border="0" cellpadding="0" cellspacing="0">
+ <tr>
+   <td align="left">
+-    <address>[cfg.general.address]</address><br />
+-    Powered by <a href="http://viewcvs.sourceforge.net/">ViewCVS [vsn]</a>
++&nbsp;
+   </td>
+   <td align="right">
+-    <img src="/doc/viewcvs/images/logo.png" alt="(Powered by ViewCVS)" border="0" 
++    <img src="[docroot]/images/logo.png" alt="(Powered by ViewCVS)" border="0" 
+               width="128" height="48" /><br />
+-    <h3><a target="_blank" href="[help_href]">ViewCVS and CVS/SVN Help</a></h3>
+   </td>
+ </tr>
+ </table>
+ <!--
+ </body>
+ </html>
+--->
+\ No newline at end of file
++-->
+--- etc/plugins/scmsvn/viewcvs/templates/include/header.ezt.orig	2006-10-02 10:15:22.000000000 +0200
++++ etc/plugins/scmsvn/viewcvs/templates/include/header.ezt	2006-10-31 18:32:58.000000000 +0100
+@@ -1 +1,11 @@
+-<h1>[location]</h1>
++<div class="vc_navheader">
++<table width="100%" border="0" cellpadding="0" cellspacing="0">
++<tr>
++  <td align="left">[nav_path]</td>
++  <td align="right">
++    <a href="?root=[rootname]">Root of repository</a>
++  </td>
++</tr>
++</table>
++</div>
++

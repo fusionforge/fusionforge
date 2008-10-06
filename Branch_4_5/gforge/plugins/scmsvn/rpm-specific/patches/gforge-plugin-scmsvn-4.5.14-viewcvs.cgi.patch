@@ -1,0 +1,12 @@
+--- cgi-bin/viewcvs.cgi.orig	2006-10-30 14:48:59.000000000 +0100
++++ cgi-bin/viewcvs.cgi	2006-10-30 14:49:25.000000000 +0100
+@@ -21,8 +21,7 @@
+ import os
+ import sys
+ 
+-sys.path.insert(0, "/usr/lib/python2.3/site-packages/viewcvs/")
+-sys.path.insert(0, "/var/lib/gforge/etc/")
++sys.path.insert(0, "/usr/share/viewcvs/lib/")
+ 
+ # go do the work
+ import sapi

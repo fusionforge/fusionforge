@@ -1,0 +1,5 @@
+  # SVN begin
+  Alias /plugins/scmsvn/ /usr/share/gforge/www/plugins/scmsvn/
+  # SVN end
+
+

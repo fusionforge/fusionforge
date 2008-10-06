@@ -1,0 +1,30 @@
+gforge-plugin-cvstracker (0.2-2) unstable; urgency=low
+
+  * Apache2 support. Default web server.
+  * Added support for different CVS versions.
+
+ -- Francisco Gimeno <kikov@fco-gimeno.com>  Mon,  4 Jul 2005 22:11:40 +0200
+
+gforge-plugin-cvstracker (0.2-1) unstable; urgency=low
+
+  * A lot of changes from Guillaume Smet.
+  * Updated database scheme
+  * Improved support for l10n
+  * Improved support for i18n
+  * Cvstracker box hidden if empty
+
+ -- Francisco Gimeno <kikov@kikov.org>  Mon,  7 Mar 2005 13:56:06 +0100
+
+gforge-plugin-cvstracker (0.1-2) unstable; urgency=low
+
+  * Added cronfile
+  * Added config creation
+
+ -- Francisco Gimeno <kikov@kikov.org>  Thu, 29 Jul 2004 00:17:49 +0200
+
+gforge-plugin-cvstracker (0.1-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Francisco Gimeno <kikov@kikov.org>  Mon, 19 Jul 2004 17:40:17 +0200
+

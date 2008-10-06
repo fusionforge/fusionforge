@@ -1,0 +1,12 @@
+Upgrading with 20021216.sql
+	 DBD::Pg::st execute failed: ERROR: Cannot
+	 insert a duplicate key into unique index themes_pkey at
+	 /usr/lib/gforge/bin/db-upgrade.pl
+	 Last SQL query was:
+	 INSERT INTO themes (dirname, fullname) SELECT
+	 dirname,fullname FROM themes where theme_id=1;
+
+I suspect autoincrement is not set in theme table, in some very particular case
+so please add it before upgrading
+
+

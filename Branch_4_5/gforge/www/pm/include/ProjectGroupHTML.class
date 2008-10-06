@@ -1,0 +1,249 @@
+<?php
+/**
+ * GForge Project Management Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ */
+/*
+
+	Project/Task Manager
+	By Tim Perdue, Sourceforge, 11/99
+	Heavy rewrite by Tim Perdue April 2000
+
+	Total rewrite in OO and GForge coding guidelines 12/2002 by Tim Perdue
+*/
+
+require_once('common/pm/ProjectGroup.class');
+
+function pm_header($params) {
+	global $group_id,$is_pm_page,$words,$group_project_id,$HTML,$DOCUMENT_ROOT,$order,$pg,$Language,$sys_use_pm;
+
+	if (!$sys_use_pm) {
+		exit_disabled();
+	}
+
+	//required by site_project_header
+	$params['group']=$group_id;
+	$params['toptab']='pm';
+
+	//only projects can use the bug tracker, and only if they have it turned on
+	$project =& group_get_object($group_id);
+	if (!$project || !is_object($project)) {
+		exit_no_group();
+	}
+
+	if (!$project->usesPm()) {
+		exit_error($Language->getText('general','error'),$Language->getText('pm_include_grouphtml','error_disabled'));
+	}
+
+
+	if ($group_project_id) {
+		$gantt_width=820;
+		$gantt_height=680;
+		$gantt_url="/pm/task.php?group_id=$group_id&group_project_id=$group_project_id&func=ganttpage";
+		// The following make an error in IE
+		//$gantt_title=$Language->getText('pm_include_grouphtml','gantt_chart');
+		// Quite dirty replacement
+		$gantt_title='GanttChart';
+		$gantt_winopt='scrollbars=yes,resizable=yes,toolbar=no,height=' . $gantt_height . ',width=' . $gantt_width;
+
+		echo '<script language="JavaScript" type="text/javascript">' 
+			.'<!-- ' . "\n"
+			.'function gantt_window() {'
+			.'GanttWin = window.open(\''
+			. $gantt_url
+			. '\', \''
+			. $gantt_title
+			. '\', \''
+			. $gantt_winopt . '\');'
+			. '}' . "\n"
+			. ' -->'
+			. '</script>';
+	}
+	site_project_header($params);
+
+	$labels = array();
+	$links = array();
+
+	if ($group_project_id) {
+		$labels[] = (($pg) ? $pg->getName() .': ' : '') .$Language->getText('pm_include_grouphtml','browse_task');
+		$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=browse';
+		if (session_loggedin()) {
+			$labels[] = $Language->getText('pm_include_grouphtml','add_task');
+			$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=addtask';
+		}
+		$labels[] = $Language->getText('pm_include_grouphtml','gantt_chart');
+		$links[]  = 'javascript:gantt_window()';
+		//upload/download as CSV files
+		$labels[] = $Language->getText('pm_include_grouphtml','downloadcsv');
+		$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=downloadcsv';
+		$labels[] = $Language->getText('pm_include_grouphtml','uploadcsv');
+		$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=uploadcsv';
+	}
+	if ($pg && is_object($pg) && $pg->userIsAdmin()) {
+		$labels[] = $Language->getText('pm_include_grouphtml','reporting');
+		$links[]  = '/pm/reporting/?group_id='.$group_id;
+		$labels[] = $Language->getText('pm_include_grouphtml','admin');
+		$links[]  = '/pm/admin/?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;update_pg=1';
+	}
+	if(!empty($labels)) {
+		echo ($HTML->subMenu($labels,$links));
+	}
+
+}
+
+function pm_footer($params) {
+	site_project_footer($params);
+}
+
+class ProjectGroupHTML extends ProjectGroup {
+
+	function ProjectGroupHTML(&$Group, $group_project_id=false, $arr=false) {
+		if (!$this->ProjectGroup($Group,$group_project_id,$arr)) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	function statusBox($name='status_id',$checked='xyxy',$show_100=true,$text_100='None') {
+		return html_build_select_box($this->getStatuses(),$name,$checked,$show_100,$text_100);
+	}
+
+	function categoryBox($name='category_id',$checked='xzxz',$show_100=true,$text_100='None') {
+		return html_build_select_box($this->getCategories(),$name,$checked,$show_100,$text_100);
+	}
+
+	function groupProjectBox($name='group_project_id',$checked='xzxz',$show_100=true,$text_100='None') {
+		$res=db_query("SELECT group_project_id,project_name 
+			FROM project_group_list 
+			WHERE group_id='".$this->Group->getID()."'");
+		return html_build_select_box($res,$name,$checked,$show_100,$text_100);
+	}
+
+	function percentCompleteBox($name='percent_complete',$selected=0) {
+		global $Language;
+		echo '
+		<select name="'.$name.'">';
+		echo '
+		<option value="0">'.$Language->getText('pm_include_grouphtml','not_started'). '</option>';
+		for ($i=5; $i<101; $i+=5) {
+			echo '
+			<option value="'.$i.'"';
+			if ($i==$selected) {
+				echo ' selected="selected"';
+			}
+			echo '>'.$i.'%</option>';
+		}
+		echo '
+		</select>';
+	}
+
+	function showMonthBox($name,$select_month=0) {
+		global $Language;
+		echo '
+		<select name="'.$name.'" size="1">';
+		$monthlist = array(
+			'1'=>$Language->getText('calendar','january'),
+			'2'=>$Language->getText('calendar','february'),
+			'3'=>$Language->getText('calendar','march'),
+			'4'=>$Language->getText('calendar','april'),
+			'5'=>$Language->getText('calendar','may'),
+			'6'=>$Language->getText('calendar','june'),
+			'7'=>$Language->getText('calendar','july'),
+			'8'=>$Language->getText('calendar','august'),
+			'9'=>$Language->getText('calendar','september'),
+			'10'=>$Language->getText('calendar','october'),
+			'11'=>$Language->getText('calendar','november'),
+			'12'=>$Language->getText('calendar','december'));
+
+		for ($i=1; $i<=count($monthlist); $i++) {
+			if ($i == $select_month) {
+				echo '
+				<option selected="selected" value="'.$i.'">'.$monthlist[$i].'</option>';
+			} else {
+				echo '
+				<option value="'.$i.'">'.$monthlist[$i].'</option>';
+			}
+		}
+		echo '
+		</select>';
+	}
+
+	function showDayBox($name,$day=1) {
+		echo '
+		<select name="'.$name.'" size="1">';
+		for ($i=1; $i<=31; $i++) {
+			if ($i == $day) {
+				echo '
+				<option selected="selected" value="'.$i.'">'.$i.'</option>';
+			} else {
+				echo '
+				<option value="'.$i.'">'.$i.'</option>';
+			}
+		}
+		echo '
+		</select>';
+	}
+
+	function showYearBox($name,$year=1) {
+		echo '
+		<select name="'.$name.'" size="1">';
+		for ($i=1999; $i<=2013; $i++) {
+			if ($i == $year) {
+				echo '
+				<option selected="selected" value="'.$i.'">'.$i.'</option>';
+			} else {
+				echo '
+				<option value="'.$i.'">'.$i.'</option>';
+			}
+		}
+		echo '
+		</select>';
+	}
+
+	function showHourBox($name,$hour=1) {
+
+		echo '
+		<select name="'.$name.'" size="1">';
+		for ($i=0; $i<=23; $i++) {
+			if ($i == $hour) {
+				echo '
+				<option selected="selected" value="'.$i.'">'.$i.'</option>';
+			} else {
+				echo '
+				<option value="'.$i.'">'.$i.'</option>';
+			}
+		}
+		echo '
+		</select>';
+	}
+
+	function showMinuteBox($name,$minute=0) {
+		echo '	<select name="'.$name.'" size="1">';
+		for ($i=0; $i<=45; $i=$i+15) {
+			if ($i == $minute) {
+				echo '	<option selected="selected" value="'.$i.'">'.$i.'</option>';
+			} else {
+				echo '
+				<option value="'.$i.'">'.$i.'</option>';
+			}
+		}
+		echo '
+		</select>';
+	}
+
+	function renderAssigneeList($assignee_ids) {
+		$techs =& user_get_objects($assignee_ids);
+		for ($i=0; $i<count($techs); $i++) {
+			$return .= $techs[$i]->getRealName().'<br />';
+		}
+		return $return;
+	}
+
+}
+
+?>

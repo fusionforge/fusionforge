@@ -1,0 +1,5 @@
+//
+// Plugins configuration
+//
+// Path to plugins directory
+$sys_plugins_path='{sys_plugins_path}';

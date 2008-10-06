@@ -1,0 +1,179 @@
+[# setup page definitions]
+  [define location][rootname][if-any where]: [where][end][end]
+  [define page_title][cfg.general.main_title] - log - [location][end]
+  [define help_href][docroot]/help_logtable.html[end]
+[# end]
+
+[include "include/header.ezt" "logtable"]
+
+<hr noshade>
+
+[include "include/branch.ezt"]
+
+[include "include/view_tag.ezt"]
+
+[include "include/paging.ezt"]
+
+<hr noshade>
+<table width="100%" border="0" cellspacing="1" cellpadding="2">
+<thead>
+<tr>
+  <th align="left" class="vc_header[is logsort "rev"]_sort[end]">Revision</th>
+  [is pathtype "file"]
+  <th align="left" class="vc_header">Tasks</th>
+  <th align="left" class="vc_header">Diffs</th>
+  [end]
+  [is roottype "cvs"]
+  <th align="left" class="vc_header">Branches/<br>Tags</th>
+  [end]
+  <th align="left" class="vc_header[is logsort "date"]_sort[end]">Age</th>
+  <th align="left" class="vc_header">Author</th>
+</tr>
+</thead>
+[for entries]
+  <tbody>
+  <tr valign="top" class="vc_row_[if-index entries even]even[else]odd[end]">
+
+    [# Revision column]
+    <td rowspan="2">
+      [is roottype "svn"]<a href="[entries.revision_href]"><b>[entries.rev]</b></a>[else]<b>[entries.rev]</b>[end]
+      <a name="rev[entries.rev]"></a>
+    </td>
+
+    [is pathtype "file"]
+      <td>
+      [# Tasks column]
+        <a href="[entries.view_href]"><b>View</b></a><br>
+        <a href="[entries.download_href]"><b>Download</b></a><br>
+        [if-any entries.download_text_href]<a href="[entries.download_text_href]"><b>As text</b></a><br>[end]
+
+        [# if you don't want to allow annotation, then remove this line]
+        [is roottype "svn"][else]<a href="[entries.annotate_href]"><b>Annotate</b></a><br>[end]
+      </td>
+      <td>
+      [is entries.state "dead"]
+        <b><i>FILE REMOVED</i></b>
+      [else]
+      [# if you don't want to allow select for diffs then remove this section]
+      [is entries.rev rev_selected]
+        <b>[[]selected]</b><br>
+      [else]
+      <a href="[entries.sel_for_diff_href]"><b>[[]select&nbsp;for&nbsp;diffs]</b></a><br>
+      [end]
+        [if-any entries.diff_to_sel_href]
+          <a href="[entries.diff_to_sel_href]"><b>Diff&nbsp;to&nbsp;selected&nbsp;[rev_selected]</b></a>
+          [if-any human_readable]
+          [else]
+            (<a href="[entries.diff_to_sel_href]&amp;diff_format=h"><b>colored</b></a>)
+          [end]<br />
+        [end]
+        [if-any entries.prev]
+          <a href="[entries.diff_to_prev_href]"><b>Diff&nbsp;to&nbsp;previous&nbsp;[entries.prev]</b></a>
+          [if-any human_readable]
+          [else]
+            (<a href="[entries.diff_to_prev_href]&amp;diff_format=h"><b>colored</b></a>)
+          [end]<br />
+        [end]
+      [end]  
+      </td>
+    [end]
+    [is roottype "cvs"]
+    <td>
+      [# Branches column]
+      [if-any entries.vendor_branch]
+        <i>vendor branch</i><br>
+      [end]
+      [if-any entries.branches]
+        [for entries.branches]
+          <a href="[entries.branches.href]"><b>[entries.branches.name]</b></a><br>
+        [end]
+      [end]
+      [if-any entries.branch_points]
+        Branch point for:
+        [for entries.branch_points]
+          <a href="[entries.branch_points.href]"><b>[entries.branch_points.name]</b></a><br>
+        [end]
+      [end]
+      [if-any entries.next_main]
+        <a href="[entries.diff_to_main_href]"><b>Diff&nbsp;to&nbsp;next&nbsp;MAIN&nbsp;[entries.next_main]</b></a>
+        [if-any human_readable]
+        [else]
+          (<a href="[entries.diff_to_main_href]&amp;diff_format=h"><b>colored</b></a>)
+        [end]<br />
+      [end]
+      [if-any entries.branch_point]
+        <a href="[entries.diff_to_branch_href]"><b>Diff&nbsp;to&nbsp;branch&nbsp;point&nbsp;[entries.branch_point]</b></a>
+        [if-any human_readable]
+        [else]
+          (<a href="[entries.diff_to_branch_href]&amp;diff_format=h"><b>colored</b></a>)
+        [end]<br />
+      [end]
+
+      [# Tags ]
+      [if-any entries.tags]
+        <form method=get action="[branch_select_action]" >
+          [branch_select_hidden_values]
+          <select name="only_with_tag" onChange="submit()">
+          <option value="" [is view_tag ""]selected[end]>Show all tags</option>
+          [for entries.tags]
+            <option [is view_tag entries.tags.name]selected[end]>[entries.tags.name]</option>
+          [end]
+          </select>
+        </form>
+      [else]&nbsp;
+      [end]
+    </td>
+    [end]
+
+    [# Time column]
+    <td>
+      [is roottype "svn"]
+        [if-index entries last]Added[else]Modified[end]
+      [end]
+      [entries.ago] ago<br><i>[entries.date_str]</i>
+      [is roottype "cvs"]
+        [if-any entries.prev]
+          [if-any entries.changed]
+            <br>Changes since <b>[entries.prev]: [entries.changed] lines</b>
+          [end]
+        [end]
+      [end]
+    </td>
+
+    [# Author column]
+    <td>
+      [entries.author]
+    </td>
+
+  </tr>
+  <tr class="vc_row_[if-index entries even]even[else]odd[end]">
+    <td colspan=5>
+      [is roottype "svn"]
+        [is entries.filename where][else]<b>File name: </b>[entries.filename]<br>[end]
+        [if-any entries.size]
+          <b>File length: </b>[entries.size] byte(s)<br>
+        [end]
+
+        [if-any entries.copy_path]
+           <b>Copied from: </b><a href="[entries.copy_href]">[entries.copy_path]</a> revision [entries.copy_rev]<br>
+        [end]
+      [end]
+
+      <b>Log: </b><pre class="vc_log">[entries.html_log]</pre>
+    </td>
+  </tr>
+  </tbody>
+[end]
+</table>
+
+[include "include/paging.ezt"]
+
+[is pathtype "file"]
+  [include "include/diff_form.ezt"]
+[end]
+
+[include "include/branch_form.ezt"]
+
+[include "include/sort.ezt"]
+
+[include "include/footer.ezt"]

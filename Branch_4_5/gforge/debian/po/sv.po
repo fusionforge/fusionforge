@@ -1,0 +1,883 @@
+# Translators, if you are not familiar with the PO format, gettext
+# documentation is worth reading, especially sections dedicated to
+# this format, e.g. by running:
+# info -n '(gettext)PO Files'
+# info -n '(gettext)Header Entry'
+# Some information specific to po-debconf are available at
+# /usr/share/doc/po-debconf/README-trans
+# or http://www.debian.org/intl/l10n/po-debconf/README-trans
+# Developers do not need to manually edit POT or PO files.
+# , fuzzy
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gforge 3.1-31\n"
+"Report-Msgid-Bugs-To: lolando@debian.org\n"
+"POT-Creation-Date: 2007-07-01 18:52+0200\n"
+"PO-Revision-Date: 2006-08-16 21:38+0100\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
+"Language-Team: Swedish <sv@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: sv\n"
+"X-Poedit-Country: sv\n"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:3001
+#: ../dsf-helper/shellhost-variables.templates:1001
+msgid "Your shell server"
+msgstr "Din skalserver"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:3001
+#: ../dsf-helper/shellhost-variables.templates:1001
+msgid "The hostname of the server that will host your Gforge shell accounts"
+msgstr "Värdnamnet för servern som tillhandahåller dina skalkonton för Gforge"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:6001
+#: ../dsf-helper/downloadhost-variables.templates:1001
+msgid "Your download server"
+msgstr "Din hämtningsserver"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:6001
+msgid ""
+"The hostname of the server that will host your Gforge packages.  It should "
+"not be the same as your main Gforge host."
+msgstr ""
+"Värdnamnet på servern som ska stå värd för dina Gforge-paket.  Den bör inte "
+"vara samma som din huvudsakliga Gforge-värd."
+
+#. Type: string
+#. Default
+#: ../gforge-db-postgresql.templates.dsfh-in:8001
+#: ../gforge-dns-bind9.templates.dsfh-in:4001
+msgid "admin"
+msgstr "admin"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:8002
+#: ../gforge-dns-bind9.templates.dsfh-in:4002
+msgid "The Gforge administrator login"
+msgstr "Gforge-administratörens användarnamn"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:8002
+#: ../gforge-dns-bind9.templates.dsfh-in:4002
+msgid ""
+"This Gforge account will have all privileges on the Gforge system.  It is "
+"needed to approve the creation of the projects."
+msgstr ""
+"Detta Gforge-konto kommer att ha alla rättigheter i Gforge-systemet.  Det "
+"behövs för att godkänna skapandet av projekten."
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:9001
+#: ../dsf-helper/host-variables.templates:1001
+msgid "Your IP address"
+msgstr "Din IP-adress"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:9001
+#: ../dsf-helper/host-variables.templates:1001
+msgid ""
+"The IP address of the server that will host your Gforge installation. This "
+"is needed for the Apache virtualhosting configuration."
+msgstr ""
+"IP-adressen på servern som ska stå värd för din Gforge-installation.  Detta "
+"behövs för konfigurationen av virtualhosts i Apache."
+
+#. Type: password
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:10001
+#: ../gforge-dns-bind9.templates.dsfh-in:5001
+msgid "The Gforge administrator password"
+msgstr "Gforge-administratörens lösenord"
+
+#. Type: password
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:10001
+#: ../gforge-dns-bind9.templates.dsfh-in:5001
+msgid ""
+"This Gforge account will have all privileges on the Gforge system.  It is "
+"needed to approve the creation of the projects.  Please type a password here."
+msgstr ""
+"Detta Gforge-konto kommer att ha alla rättigheter i Gforge-systemet.  Det "
+"behövs för att godkänna skapandet av projekten.  Ange ett lösenord här."
+
+#. Type: password
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:11001
+#: ../gforge-dns-bind9.templates.dsfh-in:6001
+msgid "The Gforge administrator password - again"
+msgstr "Gforge-administratörens lösenord - igen"
+
+#. Type: password
+#. Description
+#. Type: password
+#. Description
+#. Type: password
+#. Description
+#. Type: password
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:11001
+#: ../gforge-dns-bind9.templates.dsfh-in:3001
+#: ../gforge-dns-bind9.templates.dsfh-in:6001
+#: ../gforge-dns-bind9.templates.dsfh-in:12001
+#: ../dsf-helper/dbpasswd-variables.templates:2001
+#: ../dsf-helper/ldap-variables.templates:4001
+msgid "Please re-type the password for confirmation."
+msgstr "Mata in lösenordet igen för bekräftelse."
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:12001
+#: ../gforge-dns-bind9.templates.dsfh-in:7001
+msgid "The initial list of skills"
+msgstr "Initiala listan av färdigheter"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:12001
+#: ../gforge-dns-bind9.templates.dsfh-in:7001
+msgid ""
+"Gforge allows users to define a list of their skills, to be chosen amongst "
+"those present in the database.  This list is the initial list of skills that "
+"will enter the database.  Please enter the skill names separated by semi-"
+"colons `;'."
+msgstr ""
+"Gforge låter användarna definiera en lista på sina färdigheter som kan "
+"väljas av de som finns i databasen.  Denna lista är den initiala listan av "
+"färdigheter som kommer att läggas in i databasen.  Mata in namn på "
+"färdigheter, separera dem med semikolon \";\"."
+
+#. Type: password
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:2001
+#: ../dsf-helper/dbpasswd-variables.templates:1001
+msgid "Password used for the database"
+msgstr "Lösenordet som används för databasen"
+
+#. Type: password
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:2001
+msgid ""
+"The connection to the DB system requires a password.  Please choose a "
+"password here."
+msgstr ""
+"Anslutningen till DB-systemet kräver ett lösenord.  Ange ett lösenord här."
+
+#. Type: password
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:3001
+#: ../dsf-helper/dbpasswd-variables.templates:2001
+msgid "Password used for the database - again"
+msgstr "Lösenordet som används för databasen - igen"
+
+#. Type: string
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:8001
+#: ../dsf-helper/ldap-variables.templates:1001
+msgid "The LDAP base DN"
+msgstr "LDAP-bas DN"
+
+#. Type: string
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:8001
+#: ../dsf-helper/ldap-variables.templates:1001
+msgid ""
+"The DN is used to refer to the LDAP directory unambiguously.  You could use, "
+"for instance, \"dc=gforge,dc=example,dc=com\""
+msgstr ""
+"DN som används refererar otvetydligt till LDAP-katalogen.  Du kan använda, "
+"till exempel \"dc=gforge,dc=exempel,dc=se"
+
+#. Type: string
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:9001
+#: ../dsf-helper/ldap-variables.templates:2001
+msgid "The LDAP host"
+msgstr "LDAP-värden"
+
+#. Type: string
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:9001
+#: ../dsf-helper/ldap-variables.templates:2001
+msgid "The hostname of the LDAP server."
+msgstr "Värdnamnet på din LDAP-server."
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:10001
+#: ../gforge-mta-exim4.templates.dsfh-in:2001
+#: ../gforge-mta-postfix.templates.dsfh-in:2001
+msgid "Do you want mail to ${noreply} to be deleted?"
+msgstr "Vill du att e-post till ${noreply} ska tas bort?"
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:10001
+#: ../gforge-mta-exim4.templates.dsfh-in:2001
+#: ../gforge-mta-postfix.templates.dsfh-in:2001
+msgid ""
+"Gforge sends plenty of e-mail from the \"${noreply}\" address, and maybe "
+"even some e-mail to that address too."
+msgstr ""
+"Gforge skickar en mängd e-postmeddelanden från adressen \"${noreply}\" och "
+"kanske även några meddelanden till den adressen."
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:10001
+#: ../gforge-mta-exim4.templates.dsfh-in:2001
+#: ../gforge-mta-postfix.templates.dsfh-in:2001
+msgid ""
+"It is advised that you let the package direct e-mail to that address to a "
+"black hole (/dev/null), unless you have another use for that address."
+msgstr ""
+"Det rekommenderas att du låter detta paket peka e-post till den adressen mot "
+"ett svart hål (/dev/null) såvida du inte har andra användningsområden för "
+"den adressen."
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:10001
+#: ../gforge-mta-exim4.templates.dsfh-in:2001
+#: ../gforge-mta-postfix.templates.dsfh-in:2001
+msgid "Accepting this option will perform that redirection."
+msgstr "Acceptera denna åtgärd innebär att pekningen genomförs."
+
+#. Type: password
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:11001
+#: ../dsf-helper/ldap-variables.templates:3001
+msgid "LDAP password used to add users from the web"
+msgstr "LDAP-lösenordet som används för att lägga till användare från webben"
+
+#. Type: password
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:11001
+#: ../dsf-helper/ldap-variables.templates:3001
+msgid ""
+"In order to add users into the LDAP directory from the web, you need to "
+"provide a password."
+msgstr ""
+"Du behöver ange ett lösenord för att lägga till användare till LDAP-"
+"katalogen från webben."
+
+#. Type: password
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:12001
+#: ../dsf-helper/ldap-variables.templates:4001
+msgid "LDAP password - again"
+msgstr "LDAP-lösenordet - igen"
+
+#. Type: note
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:13001
+msgid "Generate an SSL certificate"
+msgstr "Generera ett SSL-certifikat"
+
+#. Type: note
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:13001
+msgid ""
+"You need a valid SSL/TLS certificate to run Gforge. If you don't already "
+"have one, you'll have to run the \"mod-ssl-makecert\" command to generate "
+"one, and restart Apache afterwards."
+msgstr ""
+"Du behöver ett giltigt SSL/TLS-certifikat för att köra Gforce. Om du inte "
+"redan har ett måste du köra kommandot \"mod-ssl-makecert\" för att generera "
+"ett, och sedan starta om Apache."
+
+#. Type: note
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:13001
+msgid ""
+"Please note you will not be able to start Apache if you have no such "
+"certificate."
+msgstr ""
+"Notera att du inte kommer att kunna starta Apache om du inte har ett sådant "
+"certifikat."
+
+#. Type: note
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:14001
+#: ../gforge-shell-ldap.templates.dsfh-in:2001
+msgid "Gforge requires appropriate PAM-LDAP configuration"
+msgstr "Gforge kräver en lämplig PAM-LDAP-konfiguration"
+
+#. Type: note
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:14001
+#: ../gforge-shell-ldap.templates.dsfh-in:2001
+msgid ""
+"Gforge requires the libpam-ldap package to be configured appropriately.  You "
+"might need to \"dpkg-reconfigure libpam-ldap\" in order to fix incorrect "
+"parameters."
+msgstr ""
+"Gforge kräver att paketet libpam-ldap konfigureras på lämpligt sätt.  Du "
+"kanske behöver att köra \"dpkg-reconfigure libpam-ldap\" för att rätta till "
+"felaktiga parametrar."
+
+#. Type: note
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:14001
+#: ../gforge-shell-ldap.templates.dsfh-in:2001
+msgid ""
+"Known good values are: LDAP protocol version=3, make root database "
+"admin=yes, root login account=\"cn=admin,dc=<your-dc-here>\", crypt to use "
+"for passwords=crypt.  Make sure that you type the same password for the "
+"libpam-ldap root password and the Gforge LDAP password."
+msgstr ""
+"Bra kända värden är: LDAP protocol version=3, make root database admin=yes, "
+"root login account=\"cn=admin,dc=<din-dc-här>\", crypt to use for "
+"passwords=crypt. Se till att du anger samma lösenord för root i libpam-ldap "
+"som Gforge LDAP-lösenordet."
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:15001
+msgid "Do you want a simple DNS setup?"
+msgstr "Vill du ha en enkel DNS-konfiguration?"
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:15001
+msgid ""
+"You can have a simple DNS setup wich uses wildcards to map all project web-"
+"hosts to a single IP, and direct all the scm-hosts to a single SCM server, "
+"or a complex setup wich allows you to have many servers as project web "
+"servers or SCM servers."
+msgstr ""
+"Du kan ha en enkel DNS-konfiguration som använder jokertecken för att peka "
+"alla projektwebbplatser till en enda IP-adress och vidaresända alla scm-"
+"värdar till en enda SCM-server, eller en komplex konfiguration som låter dig "
+"att ha många servrar som projektwebbservrar eller SCM-servrar."
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:15001
+msgid ""
+"Even though you have a simple DNS setup, you can still have separate boxes "
+"for your project servers, it just assumes you have all the project web dirs "
+"on the same server and a single server for SCM."
+msgstr ""
+"Även om du har en enkel DNS-konfiguration kan du fortfarande ha separata "
+"burkar för dina projektservrar, den antar att du har alla projektens "
+"webbkataloger på samma server och en enda server för SCM."
+
+#. Type: boolean
+#. Description
+#. Type: boolean
+#. Description
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:16001
+#: ../dsf-helper/replace-files.templates:1001
+#: ../dsf-helper/replace-files.templates:2001
+msgid "Do you want ${file} to be updated?"
+msgstr "Vill du att ${file} ska uppdateras?"
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:16001
+#: ../dsf-helper/replace-files.templates:2001
+msgid ""
+"In order for Gforge to be fully deinstalled, some changes must be made to "
+"the ${file} file."
+msgstr ""
+"För att Gforge ska fullständigt avinstalleras måste vissa ändringar göras i "
+"filen ${file}."
+
+#. Type: boolean
+#. Description
+#. Type: boolean
+#. Description
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:16001
+#: ../dsf-helper/replace-files.templates:1001
+#: ../dsf-helper/replace-files.templates:2001
+msgid ""
+"I can either do them for you (and backup the current version in ${file}."
+"gforge-old), or write the changes to another file (${file}.gforge-new) and "
+"let you propagate the changes to ${file} yourself."
+msgstr ""
+"Jag kan göra dem åt dig (och säkerhetskopiera den nuvarande versionen i "
+"${file}.gforge-old) eller skriva ner ändringarna till en annan fil (${file}."
+"gforge-new) och låta dig göra ändringarna i ${file}."
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:16001
+#: ../dsf-helper/replace-files.templates:2001
+msgid "Shall I modify the ${file} automatically?"
+msgstr "Ska jag ändra ${file} automatiskt?"
+
+#. Type: note
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:17001
+#: ../dsf-helper/replace-files.templates:3001
+msgid "Please check ${file}"
+msgstr "Kontrollera ${file}"
+
+#. Type: note
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:17001
+#: ../dsf-helper/replace-files.templates:3001
+msgid ""
+"You have chosen not to let the Gforge package update the ${file} file.  Very "
+"well, I have not changed it.  Instead, I have written the suggested changes "
+"into ${file}.gforge-new. Please check this file and apply the appropriate "
+"changes to ${file}."
+msgstr ""
+"Du har valt att inte låta Gforge-paketet uppdatera filen ${file}.  Ok då, "
+"jag ska inte ändra den.  Istället har jag skrivit de rekommenderade "
+"ändringarna till ${file}.gforge-new. Vänligen kontrollera den filen och "
+"verkställ de lämpliga ändringarna till ${file}."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/common-variables.templates:1001
+msgid "Your Gforge domain or subdomain name"
+msgstr "Namnet på din Gforge-domän eller underdomän"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/common-variables.templates:1001
+msgid ""
+"The domain that will host your Gforge installation.  Some services will be "
+"given their own subdomain in that domain (scm, lists, etc.)."
+msgstr ""
+"Domänen som kommer att vara värd för din Gforge-installation.  Vissa "
+"tjänster kommer att tilldelas sina egna underdomäner i den domänen (scm, "
+"lists, etc.)."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/common-variables.templates:2001
+msgid "The Gforge admin email address."
+msgstr "Gforge-administratörens e-postadress."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/common-variables.templates:2001
+msgid ""
+"The email address of the Gforge administrator of your site.  Needed in case "
+"a problem occurs."
+msgstr ""
+"E-postadressen för Gforge-administratören på ditt system.  Behövs i fall att "
+"problem uppstår."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/common-variables.templates:3001
+msgid "The Gforge system name"
+msgstr "Gforges systemnamn"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/common-variables.templates:3001
+msgid "This name is used in various places throughout the system."
+msgstr "Detta namn används på flera ställen i systemet."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/dbhost-variables.templates:1001
+msgid "Your database server"
+msgstr "Din databasserver"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/dbhost-variables.templates:1001
+msgid ""
+"The IP address (or host name) of the server that will host your GForge "
+"database.  This is needed for virtually all the subpackages."
+msgstr ""
+"IP-adressen (eller värdnamnet) för servern som kommer att stå värd för din "
+"Gforge-databas.  Detta behövs för nästan alla underpaket."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/dbhost-variables.templates:2001
+msgid "Your database name"
+msgstr "Ditt databasnamn"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/dbhost-variables.templates:2001
+msgid ""
+"The name of the database that will host your GForge database.  This is "
+"needed for virtually all the subpackages."
+msgstr ""
+"Namnet på databasen som kommer att stå värd för din Gforge-databas.  Detta "
+"behövs för nästan alla underpaket."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/dbhost-variables.templates:3001
+msgid "Your database admin username"
+msgstr "Din databasadministratörens användarnamn"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/dbhost-variables.templates:3001
+msgid ""
+"The admin username of the database that will host your GForge database.  "
+"This is needed for virtually all the subpackages."
+msgstr ""
+"Administratörens användarnamn för databasen som kommer att stå värd för din "
+"Gforge-databas.  Detta behövs för nästan alla underpaket."
+
+#. Type: password
+#. Description
+#: ../dsf-helper/dbpasswd-variables.templates:1001
+msgid ""
+"The connecton to the DB system requires a password.  Please choose a "
+"password here."
+msgstr ""
+"Anslutningen till DB-systemet kräver ett lösenord.  Ange ett lösenord här."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/downloadhost-variables.templates:1001
+msgid ""
+"The hostname of the server that will host your Gforge packages. It should "
+"not be the same as your main Gforge host."
+msgstr ""
+"Värdnamnet på servern som ska stå värd för dina Gforge-paket.  Den bör inte "
+"vara samma som din huvudsakliga Gforge-värd."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/groupid-variables.templates:1001
+msgid "The news admin group id"
+msgstr "Grupp-id för nyhetsadministratörerna"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/groupid-variables.templates:1001
+msgid ""
+"Members of the news admin group can approve news for the Gforge main page.  "
+"This group id MUST NOT be 1. You only need to touch this group if you "
+"upgrade from a previous version and want to keep your data."
+msgstr ""
+"Medlemmar av nyhetersadministrationsgruppen kan godkänna nyheter för Gforges "
+"förstasida.  Detta grupp-id FÅR INTE vara 1. Du behöver bara röra denna "
+"grupp om du uppgraderar från en tidigare version och vill behålla ditt data."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/groupid-variables.templates:2001
+msgid "The stats admin group id"
+msgstr "Grupp-id för statistikadministratörerna"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/groupid-variables.templates:3001
+msgid "The peer rating admin group id"
+msgstr "Grupp-id för användarbedömningsadministratörerna"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/lists-variables.templates:1001
+msgid "Your mailing-lists server"
+msgstr "Din server för sändlistor"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/lists-variables.templates:1001
+msgid ""
+"The hostname of the server that will host your Gforge mailing-lists. It "
+"should not be the same as your main Gforge host."
+msgstr ""
+"Värdnamnet för servern som kommer att stå värd för dina sändlistor för "
+"Gforge. Den bör inte vara samma som din huvudsakliga Gforge-server."
+
+#. Type: boolean
+#. Description
+#: ../dsf-helper/migration.templates:1001
+msgid "Migrate to Gforge?"
+msgstr "Migrera till Gforge?"
+
+#. Type: boolean
+#. Description
+#: ../dsf-helper/migration.templates:1001
+msgid ""
+"The free software version of the Sourceforge software has been renamed to "
+"\"Gforge\".  Accordingly, the Debian package has been renamed to \"gforge\", "
+"and \"sourceforge\" is no longer supported or maintained.  The transition to "
+"Gforge should be rather simple, as most of the work is automated: once this "
+"package has been successfully installed, just install the \"gforge\" package "
+"and things should go smoothly."
+msgstr ""
+"Den fria programvaruversionen av Sourceforge har bytt namn till \"Gforge\".  "
+"Således har även Debian-paketet bytt namn till \"gforge\" och \"sourceforge"
+"\" underhålls och stöds inte längre.  Övergången till Gforge bör vara ganska "
+"enkel eftersom det mesta arbetet är automatiserat: när detta paket har "
+"blivit fullständigt installerat, installera helt enkelt paketet \"gforge\" "
+"och saker och ting bör gå smidigt."
+
+#. Type: boolean
+#. Description
+#: ../dsf-helper/migration.templates:1001
+msgid ""
+"You still have the option not to upgrade to Gforge yet, for instance if you "
+"want to backup things beforehand.  If you refuse the upgrade, nothing will "
+"happen."
+msgstr ""
+"Du har fortfarande möjligheten att inte uppgradera till Gforge, till exempel "
+"om du vill säkerhetskopiera saker innan.  Om du vägrar uppgraderingen kommer "
+"inget att hända."
+
+#. Type: note
+#. Description
+#: ../dsf-helper/migration.templates:2001
+msgid "Sourceforge is no more"
+msgstr "Sourceforge finns inte längre"
+
+#. Type: note
+#. Description
+#: ../dsf-helper/migration.templates:2001
+msgid ""
+"Sourceforge has been renamed Gforge, and is no longer maintained as free "
+"software. This \"sourceforge\" package is only here to help you upgrade to "
+"Gforge.  Once you have installed this package and the one it depends on "
+"(gforge-sourceforge-transition), your data have been saved, and you can "
+"safely uninstall the \"sourceforge\" package and proceed to install Gforge."
+msgstr ""
+"Sourceforge har bytt namn till Gforge och underhålls inte längre som fri "
+"programvara.  Detta \"sourceforge\"-paket är bara här för att hjälpa dig "
+"uppgradera till Gforge.  När du har installerat detta paket och det paket "
+"som det är beroende av (gforge-sourceforge-transition) och ditt data har "
+"sparats, kan du avinstallera \"sourceforge\"-paketet och fortsätta att "
+"installera Gforge."
+
+#. Type: boolean
+#. Description
+#: ../dsf-helper/replace-files.templates:1001
+msgid ""
+"In order for Gforge to fully work, some changes must be made to the ${file} "
+"file."
+msgstr ""
+"För att Gforge ska fungera fullt ut måste några ändringar göras i filen "
+"${file}."
+
+#. Type: boolean
+#. Description
+#: ../dsf-helper/replace-files.templates:1001
+msgid "Shall I modify ${file} automatically?"
+msgstr "Ska jag ändra ${file} automatiskt?"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/users-variables.templates:1001
+msgid "Your user mail redirector server"
+msgstr "Din relay-server för användarnas e-post"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/users-variables.templates:1001
+msgid ""
+"The hostname of the server that will host your Gforge user mail redirector. "
+"It should not be the same as your main Gforge host."
+msgstr ""
+"Värdnamnet för servern som kommer att stå värd för vidaresändning av e-post "
+"till användarna i Gforge.  Den bör inte vara samma som din huvudsakliga "
+"Gforge-server."
+
+#. Type: select
+#. Choices
+#. Type: select
+#. DefaultChoice
+#: ../dsf-helper/web-variables.templates:1001
+#: ../dsf-helper/web-variables.templates:1002
+msgid "English"
+msgstr "Engelska"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Bulgarian"
+msgstr "Bulgariska"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Catalan"
+msgstr "Katalanska"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Chinese"
+msgstr "Kinesiska"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Dutch"
+msgstr "Holländska"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Esperanto"
+msgstr "Esperanto"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "French"
+msgstr "Franska"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "German"
+msgstr "Tyska"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Greek"
+msgstr "Grekiska"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Hebrew"
+msgstr "Hebreiska"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Indonesian"
+msgstr "Indonesiska"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Italian"
+msgstr "Italienska"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Japanese"
+msgstr "Japanska"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Korean"
+msgstr "Koreanska"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Latin"
+msgstr "Latin"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Norwegian"
+msgstr "Norska"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Polish"
+msgstr "Polska"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "PortugueseBrazilian"
+msgstr "Portugisk-Brasilianska"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Portuguese"
+msgstr "Portugisiska"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Russian"
+msgstr "Ryska"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "SimplifiedChinese"
+msgstr "Kinesiska (förenklad)"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Spanish"
+msgstr "Spanska"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Swedish"
+msgstr "Svenska"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:1001
+msgid "Thai"
+msgstr "Thai"
+
+#. Type: select
+#. Description
+#: ../dsf-helper/web-variables.templates:1003
+msgid "Default language"
+msgstr "Standardspråk"
+
+#. Type: select
+#. Description
+#: ../dsf-helper/web-variables.templates:1003
+msgid "Here is the default language for web pages."
+msgstr "Här är standardspråket för webbsidorna."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/web-variables.templates:2001
+msgid "Default theme"
+msgstr "Standardtema"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/web-variables.templates:2001
+msgid ""
+"Here is the default theme for web pages, be carreful to enter a valid name."
+msgstr ""
+"Här är standardtemat för webbsidorna, var försiktig och ange ett giltigt "
+"namn."
+
+#~ msgid "Your CVS server"
+#~ msgstr "Din CVS-server"
+
+#~ msgid ""
+#~ "The hostname of the server that will host your Gforge CVS repositories.  "
+#~ "It should not be the same as your main Gforge host."
+#~ msgstr ""
+#~ "Värdnamnet för servern som kommer att hålla dina CVS-förråd för Gforge.  "
+#~ "Den bör inte vara samma som din huvudserver för Gforge."
