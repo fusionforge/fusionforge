@@ -118,6 +118,7 @@ if (session_loggedin()) {
 		<p>
 		<strong>'._('Details').':</strong>'.notepad_button('document.forms[1].details').utils_requiredField().'<br />';
 	
+	$GLOBALS['editor_was_set_up']=false;
 	$params = array() ;
 	$params['name'] = 'details';
 	$params['width'] = "600";
@@ -125,7 +126,7 @@ if (session_loggedin()) {
 	$params['body'] = "";
 	$params['group'] = $group_id;
 	plugin_hook("text_editor",$params);
-	if (!isset($GLOBALS['editor_was_set_up'])) {
+	if (!$GLOBALS['editor_was_set_up']) {
 		//if we don't have any plugin for text editor, display a simple textarea edit box
 		echo '<textarea name="details" rows="5" cols="50"></textarea><br />';
 	}

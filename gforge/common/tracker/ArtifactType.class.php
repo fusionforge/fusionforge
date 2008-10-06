@@ -746,7 +746,7 @@ class ArtifactType extends Error {
 		if ($choiceid == 100) {
 			return 'None';
 		}
-		if (!$this->element_name["$choiceid"]) {
+		if (!isset($this->element_name["$choiceid"])) {
 			$sql="select element_id,extra_field_id,element_name
 				FROM artifact_extra_field_elements
 				WHERE element_id IN ($choiceid)";

@@ -488,7 +488,8 @@ class ForumHTML extends Error {
 		<br>
 		<strong><?php echo _('Message:'); ?></strong><?php echo notepad_button('document.forms[1].body') ?><?php echo utils_requiredField(); ?><br />
 		<?php
-                $params = array() ;
+		$GLOBALS['editor_was_set_up']=false;
+		$params = array() ;
 		$params['body'] = $body;
 		$params['width'] = "800";
 		$params['height'] = "500";
@@ -560,14 +561,14 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 
 		<?php
 		$GLOBALS['editor_was_set_up']=false;
-                $params = array();
+		$params = array();
 		$params['body'] = $body;
 		$params['width'] = "800";
 		$params['height'] = "500";
 		$params['group'] = $group_id;
 		plugin_hook("text_editor",$params);
 		if (!$GLOBALS['editor_was_set_up']) {
-			//if we don�t have any plugin for text editor, display a simple textarea edit box
+			//if we don't have any plugin for text editor, display a simple textarea edit box
 			echo '<textarea name="body"  rows="10" cols="50" wrap="soft">' . $body . '</textarea>';
 		}
 		unset($GLOBALS['editor_was_set_up']);

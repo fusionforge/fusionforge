@@ -53,6 +53,7 @@ function setEditorValue( instanceName, text )
 ';
 echo '</script>';
 echo '<form name="theform">';
+$GLOBALS['editor_was_set_up']=false;
 $params = array () ;
 $params['body'] = '';
 $params['name'] = 'data';
@@ -62,20 +63,19 @@ $params['group'] = $group_id;
 plugin_hook("text_editor",$params);
 $editor = true;
 if (!$GLOBALS['editor_was_set_up']) {
-	//if we don�t have any plugin for text editor, display a simple textarea edit box
+	//if we don't have any plugin for text editor, display a simple textarea edit box
 	$editor = false;
 	echo '<textarea name="data" rows="15" cols="100" wrap="soft"></textarea><br />';
 	echo '<script>	
 			window.document.theform.data.value = window.opener.document.adddata.data.value;
 		</script>';
 } else {
-	// we must make it wait a bit or else the fckeditor object won�t be set yet
+	// we must make it wait a bit or else the fckeditor object won't be set yet
 	echo '<script type="text/javascript">
 		setTimeout("setEditorValue(\'data\',window.opener.document.adddata.data.value)",2250);
 	</script>
 	';
 }
-
 
 unset($GLOBALS['editor_was_set_up']);
 
