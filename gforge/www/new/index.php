@@ -16,7 +16,7 @@ require_once('vote_function.php');
 
 $HTML->header(array("title"=>$Language->getText('new','title'),'pagename'=>'new'));
 
-if ( !$offset || $offset < 0 ) {
+if ( !$offset || $offset < 0 || !is_int($offset) ) {
 	$offset = 0;
 }
 
