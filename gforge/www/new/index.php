@@ -19,7 +19,7 @@ $HTML->header(array("title"=>_('New File Releases')));
 
 $offset = getIntFromRequest('offset');
 
-if ( !$offset || $offset < 0 || !is_int($offset) ) {
+if ( !$offset || $offset < 0 || !is_numeric($offset) ) {
 	$offset = 0;
 }
 

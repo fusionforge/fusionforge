@@ -11,7 +11,7 @@ gforge (4.7~rc2-5) unstable; urgency=high
   * Fix several SQL injection vulnerabilities due to insufficient input
     sanitizing.
 
- --
+ -- Roland Mas <lolando@debian.org>  Mon, 06 Oct 2008 16:12:50 +0200
 
 gforge (4.7~rc2-4) unstable; urgency=low
 
