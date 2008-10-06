@@ -113,11 +113,11 @@ function db_query($qstring,$limit='-1',$offset=0,$dbserver=SYS_DB_PRIMARY) {
 	global $QUERY_COUNT;
 	$QUERY_COUNT++;
 
-	if (!$limit || !is_int($limit) || $limit < 0) {
+	if (!$limit || !is_numeric($limit) || $limit < 0) {
 		$limit=0;
 	}
 	if ($limit > 0) {
-		if (!$offset || !is_int($offset) || $offset < 0) {
+		if (!$offset || !is_numeric($offset) || $offset < 0) {
 			$offset=0;
 		}
 		$qstring=$qstring." LIMIT $limit OFFSET $offset";
