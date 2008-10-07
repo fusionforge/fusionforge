@@ -18,7 +18,7 @@ $HTML->header(array("title"=>$Language->getText('new','title')));
 
 $offset = getIntFromRequest('offset');
 
-if ( !$offset || $offset < 0 ) {
+if ( !$offset || $offset < 0 || !is_numeric($offset) ) {
 	$offset = 0;
 }
 

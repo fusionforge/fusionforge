@@ -13,13 +13,19 @@
 	Determine group
 */
 
-if (isset($group_id) && $group_id) {
-	$log_group=$group_id;
-} else if (isset($form_grp) && $form_grp) {
-	$log_group=$form_grp;
+$group_id=getIntFromRequest('group_id');
+$form_grp=getIntFromRequest('form_grp');
+if (isset($group_id) && is_numeric($group_id) && $group_id) {
+      $log_group=$group_id;
+} else if (isset($form_grp) && is_numeric($form_grp) && $form_grp) {
+      $log_group=$form_grp;
 } else if (isset($group_name) && $group_name) {
-	$group =& group_get_object_by_name($group_name);
-	if ($group) $log_group=$group->getID();
+      $group =& group_get_object_by_name($group_name);
+      if ($group) {
+              $log_group=$group->getID();
+      } else {
+              $log_group=0;
+      }
 } else {
 	//
 	//

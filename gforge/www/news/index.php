@@ -40,13 +40,22 @@ echo $Language->getText('news', 'choose');
 /*
 	Put the result set (list of forums for this group) into a column with folders
 */
+if ( !$group_id || $group_id < 0 || !is_numeric($group_id) ) {
+	$group_id = 0;
+}
 if ($group_id && ($group_id != $sys_news_group)) {
 	$sql="SELECT * FROM news_bytes WHERE group_id='$group_id' AND is_approved <> '4' ORDER BY post_date DESC";
 } else {
 	$sql="SELECT * FROM news_bytes WHERE is_approved='1' ORDER BY post_date DESC";
 }
 
-if (!$limit || $limit>50) $limit=50;
+if ( !$offset || $offset < 0 || !is_numeric($offset) ) {
+	$offset = 0;
+}
+if ( !$limit || $limit < 0 || $limit > 50 || !is_numeric($limit) ) {
+	$limit = 50;
+}
+
 $result=db_query($sql,$limit+1,$offset);
 $rows=db_numrows($result);
 $more=0;
