@@ -41,10 +41,9 @@ site_admin_header(array('title'=>_('Site admin')));
  * @param string	the path to the plugins conf dir
  */
 function printSelection($checked,$pluginpath) {
-	global $feedback,$sys_etc_path;
+	global $feedback, $gfcgfile;
 	
 	$config_files = array(); // array that'll have the config files
-	$i = 0;
 	
 	if (strlen($pluginpath)>=1){
 		if ($pluginpath[strlen($pluginpath)-1]!='/') {
@@ -53,19 +52,18 @@ function printSelection($checked,$pluginpath) {
 	}
 					
 	// check if we can get local.inc
-	@$handle = fopen($sys_etc_path . '/local.inc','r+');
+	@$handle = fopen($gfcgfile,'r+');
 	if (! $handle) { 
 		// Open readonly but tell you can't write
-		$handle = fopen($sys_etc_path . '/local.inc','r');
-		$feedback .= _('Could not open local.inc file for read/write. Check the permissions for apache<br>');
+		$handle = fopen($gfcgfile,'r');
+		$feedback .= _('Could not open local.inc file for read/write. Check the permissions for apache').'<br />';
 	}
 	if ($handle) {
-		$config_files['local.inc'] = $sys_etc_path . '/local.inc';
+		$config_files['local.inc'] = $gfcgfile;
 		fclose($handle);
-		$i++;
 	} else {
 		// say we couldn't open local.inc
-		$feedback .= _('Could not open local.inc file for read/write. Check the permissions for apache<br>');
+		$feedback .= _('Could not open local.inc file for read. Check the permissions for apache').'<br />';
 	}
 
 	//get the directories from the plugins dir
@@ -80,7 +78,6 @@ function printSelection($checked,$pluginpath) {
 					while ($filename2 = readdir($handle2)) {
 						if (strstr($filename2,'.conf') || strstr($filename2,'.inc') || ($filename2=='config.php')) {
 							$config_files['(' . $filename . ') - ' . $filename2] = $pluginpath . $filename . '/' . $filename2;
-							$i++;						
 						}
 					}
 					fclose($handle2);
@@ -93,10 +90,10 @@ function printSelection($checked,$pluginpath) {
 		$feedback .= _('Could not open plugins etc dir for reading. Check the permissions for apache<br>');
 	}*/
 	
-	echo '<br><div align="center">';
+	echo '<br /><div align="center">';
 	echo html_build_select_box_from_assoc($config_files,'files',$checked,true);
 	echo '&nbsp;<input type="submit" name="choose" value="' . _('Choose') .'"/>';
-	echo '</div><br>';	
+	echo '</div><br />';	
 }
 
 /**
@@ -145,21 +142,21 @@ function updateVars($vars,$filepath) {
 	if (@$handle = fopen($filepath,'w')) {
 		if (fwrite($handle,$filedata)) {
 			// say wrote ok
-			$feedback .= _('File wrote successfully.<br>');
+			$feedback .= _('File wrote successfully.').'<br />';
 		} else {
 			// say some problem
-			$feedback .= _('File wasn\'t written or is empty.<br>');
+			$feedback .= _('File wasn\'t written or is empty.').'<br />';
 		}
 	} else {
 		// say couldn't open
-		$feedback .= _('Could not open the file for read/write. Check the permissions for apache<br>');
+		$feedback .= _('Could not open the file for write. Check the permissions for apache').'<br />';
 	}
 }
 
 ?>
 
 
-<form name="theform" action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="POST">
+<form name="theform" action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 
 <!--<?php //echo _('Path were you store the plugin configuration folders. E.g. : /etc/gforge/plugins/'); ?>&nbsp;&nbsp;
 <input type="text" size="55" width="55" name="pluginpath" value="<?php //echo getStringFromRequest('pluginpath')?>"/>
@@ -169,16 +166,18 @@ function updateVars($vars,$filepath) {
 
 //if (getStringFromRequest('pluginpath')) {
 
-	printSelection(getStringFromRequest('files'),getStringFromRequest('pluginpath'));
+//	printSelection(getStringFromRequest('files'),getStringFromRequest('pluginpath'));
 	
-	if (getStringFromRequest('choose')) {
+	if (!getStringFromRequest('doedit')) {
 		
-		$filepath = getStringFromRequest('files');
+		$filepath = $gfcgfile;
+		$has_write = true;
 		@$handle = fopen($filepath,'r+');
 		if (! $handle) {
 			// Open readonly but tell you can't write
-			$handle = fopen($sys_etc_path.'/local.inc','r');
-			$feedback .= _('Could not open the file for read/write. Check the permissions for apache<br>');
+			$handle = fopen($filepath,'r');
+			$has_write = false;
+			$feedback .= _('Could not open the file for read/write. Check the permissions for apache').'<br />';
 		}
 		if ($handle){
 			fclose($handle); // we had to open it in r+ because we need to check we'll be able to save it later
@@ -186,29 +185,33 @@ function updateVars($vars,$filepath) {
 			$vars = getVars($filedata); // get the vars from local.inc
 			$keys = array_keys($vars);
 			sort($keys);
+			echo '<h2>Configuration file: '. $filepath.'</h2>';
 			$title_arr = array(_('Attribute'),_('On'),_('Off'));
 			echo $HTML->listTableTop($title_arr);
 			$j = 0;
 			for($i=0;$i<(count($keys));$i++) {
 				$checkedtrue = "";
 				$checkedfalse = "";
-				($vars[$keys[$i]]=="true")?$checkedtrue=' CHECKED ':$checkedfalse=' CHECKED ';
+				($vars[$keys[$i]]=="true")?$checkedtrue=' checked="checked" ':$checkedfalse=' checked="checked" ';
 				echo '<tr '. $HTML->boxGetAltRowStyle($j+1) .'>'.
 			 	'<td>'. $keys[$i] .'</td>'.
-			 	'<td style="text-align:center"><input type="radio" name="attributes[' . $keys[$i] . ']" value="true" ' . $checkedtrue . '>' .'</td>'.
-			 	'<td style="text-align:center"><input type="radio" name="attributes[' . $keys[$i] . ']" value="false" ' . $checkedfalse . '></td></tr>';
+			 	'<td style="text-align:center"><input type="radio" name="attributes[' . $keys[$i] . ']" value="true" ' . $checkedtrue . '/>' .'</td>'.
+			 	'<td style="text-align:center"><input type="radio" name="attributes[' . $keys[$i] . ']" value="false" ' . $checkedfalse . '/></td>'.
+				'</tr>'."\n";
 			 	$j++;
 			}
 			echo $HTML->listTableBottom();
-			/*echo '<br><center>' . html_build_rich_textarea('filedata',30,150,$filedata,false) . '</center>';
-			echo '<input type="hidden" name="filepath" value="' . $filepath . '">';*/
-			echo '<br><div align="center"><input type="submit" name="doedit" value="' . _('Save') .'"/></div>';
+			/*echo '<br><center>' . html_build_rich_textarea('filedata',30,150,$filedata,false) . '</center>';*/
+			echo '<br />';
+			if ($has_write) {
+				echo '<div align="center"><input type="submit" name="doedit" value="' . _('Save') .'"/></div>';
+			}
 		} else {
 			// say we couldn't open the file
-			$feedback .= _('Could not open the file for read/write. Check the permissions for apache<br>');
+			$feedback .= _('Could not open the file for read. Check the permissions for apache').'<br />';
 		}
 	} elseif (getStringFromRequest('doedit')) {
-		updateVars(getArrayFromRequest('attributes'),$sys_etc_path . '/local.inc'); // perhaps later we'll update something else, for now it's local.inc
+		updateVars(getArrayFromRequest('attributes'),$gfcgfile); // perhaps later we'll update something else, for now it's local.inc
 		/*$filedata = getStringFromRequest('filedata');
 		$filedata = str_replace('\"','"',$filedata);
 		$filedata = str_replace("\'","'",$filedata);
