@@ -305,22 +305,6 @@ $sys_force_login=0;
 $sys_custom_path=$sys_etc_path.'/custom';
 
 //
-// Localization caching Configuration
-//
-
-// Enable localization caching system
-$sys_localization_enable_caching = true;
-
-// Create a directory, which is writable by your webserver, but not
-// within its document root (does not fall under www/ in the tarball)
-// Your php.ini file may have to be modified to allow writing outside
-// the webserver's directory
-$sys_localization_cache_path = "$sys_var_path/localizationcache/";
-
-// Enable timestamp checking (if disabled, you have to remove manually cache files on update)
-$sys_localization_enable_timestamp_checking = true;
-
-//
 // Plugins configuration
 //
 // Path to plugins directory
