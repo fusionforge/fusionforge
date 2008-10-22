@@ -39,7 +39,9 @@ function admin_table_add($table, $unit, $primary_key) {
 	if ($result) {
 		$cols = db_numfields($result);
 
-		printf(_('Create a new %1$s below:'), getUnitLabel($unit)).'
+		printf(_('Create a new %1$s below:'), getUnitLabel($unit));
+
+		echo '
 			<form name="add" action="'.getStringFromServer('PHP_SELF').'?function=postadd" method="post">
 			<input type="hidden" name="form_key" value="'.form_generate_key().'">
 			<table>';
@@ -174,7 +176,9 @@ function admin_table_edit($table, $unit, $primary_key, $id) {
 	if ($result) {
 		$cols = db_numfields($result);
 
-		printf(_('Modify the %1$s below:'), getUnitLabel($unit)).'
+		printf(_('Modify the %1$s below:'), getUnitLabel($unit));
+		
+		echo '
 			<form name="edit" action="'.getStringFromServer('PHP_SELF').'?function=postedit&amp;id='.$id.'" method="post">
 			<table>';
 
