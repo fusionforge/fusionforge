@@ -33,7 +33,7 @@
 	$STDOUT = fopen('php://stdout','w');
 	$STDIN = fopen('php://stdin','r');
 
-	show("\n-=# Welcome to GForge DB-Installer v4.6 #=-");
+	show("\n-=# Welcome to GForge DB-Installer v4.7 #=-");
 
 	//TO DO: add dependency check
 		//if (!run("php check-deps.php", true)) {
@@ -274,20 +274,21 @@ function install()
 		mkdir($gforge_etc_dir);
 	}
 
-	//show(' * Setting up Config File for GForge');
-	//$gforge5_db_conf = array("'hostspec'"=>		"'hostspec' => '',", 
-	//					 	 "'database'"=>			"'database' => '$gforge_db',",
-	//					 	 "'username'"=>			"'username' => '$gforge_user',",
-	//					 	 "'password'"=>			"'password' => '',");
-	//
-	//exec('/bin/cp conf/gforge5-db-conf.php.example '.$gforge_etc_dir.'/gforge5-db-conf.php');
-	//echo "BP 1\n";
-	//foreach($gforge5_db_conf as $key => $val) {
-	//	$key = str_replace("'", "\\'", $key);
-	//	$val = str_replace("'", "\\'", $val);
-	//	run("perl -pi -e \"s/$key.*/$val/gi\" $gforge_etc_dir/gforge5-db-conf.php");
-	//}
-	//finish();
+
+	show(' * Saving database configuration in GForge config file');
+	$data = file_get_contents("$gforge_etc_dir/local.inc");
+	$lines = explode("\n",$data);
+	$config = '';
+	foreach ($lines as $l) {
+		$l = preg_replace("/^.sys_dbname\s*=\s*'(.*)'/", "\$sys_dbname='$gforge_db'", $l);
+		$l = preg_replace("/^.sys_dbuser\s*=\s*'(.*)'/", "\$sys_dbuser='$gforge_user'", $l);
+		$config .= $l."\n";
+	}
+
+	if ($fp = fopen("$gforge_etc_dir/local.inc", "w")) {
+		fwrite ($fp, $config);
+		fclose($fp);	
+	}
 }
 /*
 function uninstall() {

@@ -202,16 +202,19 @@
 	//echo "Antes de entrar al foreach\n";
 	foreach ($plugins_confFiles as $plugin_name => $conf_files)
 	{
-		if ($conf_files == "standard")
-			$source = "/opt/gforge/plugins/$plugin_name/etc/plugins/$plugin_name/*";
-		else
+		if ($conf_files == "standard") {
+			$source = "/opt/gforge/plugins/$plugin_name/etc/plugins/$plugin_name";
+			$dest =  "/etc/gforge/plugins/";
+		} else {
 			$source = $conf_files;
-		
-		$dest =  "/etc/gforge/plugins/$plugin_name/";
+			$dest =  "/etc/gforge/plugins/$plugin_name/";
+		}
 		
 		//echo "\tsource=$source\tdest=$dest\n\t\tmkdir -p $dest\n\t\tcp $source $dest\n";
-		system("mkdir -p $dest");
-		system("cp $source $dest");
+		if (is_dir("/opt/gforge/plugins/$plugin_name/etc/plugins/$plugin_name")) {
+			system("mkdir -p $dest");
+			system("cp -r $source $dest");
+		}
 	}
 	//echo "Despues de salir del foreach\n";
 
@@ -228,7 +231,7 @@
 	}
 
 	foreach ($apacheconffiles as $apacheconffile) {
-		echo(' * Setting GForge Include For Apache...');
+		echo('Setting GForge Include For Apache...');
 		system("grep \"^Include /etc/gforge/httpd.conf\" $apacheconffile > /dev/null", $ret);
 		if ($ret == 1) {
 			system("echo \"Include /etc/gforge/httpd.conf\" >> $apacheconffile");
@@ -249,7 +252,7 @@
 	{
 		symlink ("../../plugins/cvstracker/www/", "cvstracker");
 	}
-	if (!is_dir(svntracker))
+	if (!is_dir("svntracker"))
 	{
 		symlink ("../../plugins/svntracker/www/", "svntracker");
 	}
@@ -287,3 +290,5 @@
 
 	//# create symlink for fckeditor
 	system("cd /opt/gforge/www && ln -s ../utils/fckeditor/www/ fckeditor");
+
+	print "\n";
