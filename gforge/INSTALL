@@ -18,20 +18,31 @@ BASICS OF INSTALLATION
 ----------------------
 
 
-SEE THE NEW FILE:
+Installation has been drastically simplified in 4.6 as the installer 
+from GForge AS has been back-ported to the open source version to 
+make it easier to set up.
+
+To do an installation, use a supported OS like Debian, Centos, 
+Fedora or Red Hat and start by installing PHP using your package
+manager.
+
+yum -y install php
+php gforge-install-1-deps.php [CENTOS|RHEL5|RHEL4|FEDORA|DEBIAN]
+php gforge-install-2.php [yourhostname] [yourapacheuser] [yourapachegroup]
+php gforge-install-3-db.php
+crontab crontab.in
+
+That will install the bulk of the system and even set up a site admin
+user account for you.
 
 
-INSTALL.dependencies
+****
+The information below may not be necessary if you succeeded installing
+using the above method. However this info may give you an overview 
+of how the installation is done.
+****
 
-	Optional (but highly recommended)
-	PHP Accelerator ( http://www.php-accelerator.co.uk/ )
 
-	Optional Gantt Charting and Graphing Support:
-	JPGraph: ( http://www.aditus.nu/jpgraph/ )
-
-		(NOTE: An older version of JPGraph may be 
-		required - it can be downloaded here: 
-		http://gforge.org/frs/download.php/142/jpgraph-1.9.1.tar.gz)
 
 
 OVERVIEW
@@ -108,7 +119,7 @@ cronjob in crontab.in.
 file to be properly configured with your include_path OR edit the 
 crontab.in file to set your include path.
 
-  In addition, you may have to symlink /usr/bin/php to /usr/bin/php5, 
+  In addition, you may have to symlink /usr/bin/php to /usr/bin/php4, 
 which is where the cronjobs expect your PHP CGI to be located.
 
 
@@ -127,52 +138,6 @@ to change the location of the mailman bin/ directory.
 
   For all problems with mailman installation and use, contact 
 the mailman mailing lists for help.
-
-
-
-STARTING THE INSTALL
---------------------
-
-
-
-BLANK DATABASE - FRESH INSTALL
-------------------------------
-
-First, make sure you create a 'gforge' user at the unix command prompt:
-
-# adduser gforge
-
-Then create a postgres account for gforge:
-
-[root]# su - postgres
-
-[postgres]# createuser -A -d -E -P gforge
-
-and enter the password for the user.
-
-You may also need to add Pl/Pgsql as a language.  To do so:
-
-[postgres]$ createlang plpgsql template1
-
-[postgres]$ exit
-
-[root]# su - gforge
-[gforge]# createdb gforge
-[gforge]# psql gforge < db/gforge.sql > import.log
-
-Be sure to watch for any errors during import and check the 
-import.log file. For postgresql 7.3 users, you will have to 
-use the db/gforge-pgsql7.3.sql file, since the postgres team 
-has broken compatibility between releases yet again.
-
-Now, find your pg_hba.conf file and edit it to include this line:
-
-local    all         all                                             md5
-
-You will have to restart postgresql after changing this line so it can 
-pick up your configuration change. Usually you can restart by 
-
-[root]# /etc/init.d/postgresql restart
 
 
 UPGRADING DATABASE - EXISTING INSTALL
@@ -244,7 +209,7 @@ PHP CLI that is used by crontab.in may use different php.ini.  Find
 it by running the following command and add the above include_path
 directive there:
 
-$ /usr/bin/php5 -i | fgrep php.ini
+$ /usr/bin/php4 -i | fgrep php.ini
 
 
 FRS - File Release System
@@ -359,7 +324,7 @@ talk to the postgres database. Find a php-pgsql RPM or recompile
 php to have pgql support.
 
 If you're sure you have php-pgsql support, you can edit 
-common/include/database-pgsql.php and remove the @ symbol from
+common/include/database.php and remove the @ symbol from
 this line:
 
 	$conn = @pg_connect( 
@@ -399,7 +364,7 @@ in your old db/ directory should be applied, and they should be applied and
 checked IN ORDER.
 
 
-Q: I'm getting an error about BaseLanguage.class.php not being found.
+Q: I'm getting an error about BaseLanguage.class not being found.
 
 A: Make sure your localization path is correctly specified in the local.inc 
 file and that it is readable AND writable by the apache user.

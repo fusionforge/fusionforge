@@ -82,6 +82,8 @@ gforge/docs/images/sflogo2-105a.png -text
 gforge/etc/httpd.d/01common.ssl -text
 gforge/etc/httpd.d/21list.ssl -text
 gforge/etc/local.d/60bbcode -text
+gforge/gforge-install-2.php -text
+gforge/gforge-install-3-db.php -text
 gforge/gforge-install.sh -text
 gforge/plugins/createplugin.sh -text
 gforge/plugins/cvstracker/db/cvstracker-init-mysql.sql -text
