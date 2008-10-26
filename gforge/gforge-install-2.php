@@ -106,7 +106,6 @@
 	system("mkdir -p /opt/jpgraph");
 	system("mkdir -p scmtarballs");
 	system("mkdir -p scmsnapshots");
-	system("mkdir -p localizationcache");
 	if (!is_file("/usr/bin/php4"))
 	{
 		symlink("/usr/bin/php", "/usr/bin/php4");
@@ -238,6 +237,11 @@
 		}
 	}
 
+	// Create symlink for the wiki plugin.
+	if (!is_dir("/opt/gforge/www/wiki"))
+	{
+		symlink ("../plugins/wiki/www/", "/opt/gforge/www/wiki");
+	}
 
 	//#symlink plugin www's
 	//cd /opt/gforge/www
@@ -288,7 +292,7 @@
 	system("cd /etc/gforge && find -type f -exec perl -pi -e \"s/gforge\.company\.com/$args[1]/\" {} \;");
 	system("echo \"noreply:	/dev/null\" >> /etc/aliases");
 
-	//# create symlink for fckeditor
-	system("cd /opt/gforge/www && ln -s ../utils/fckeditor/www/ fckeditor");
+	// Create symlink for fckeditor
+	symlink ("../utils/fckeditor/www/", "/opt/gforge/fckeditor");
 
 	print "\n";
