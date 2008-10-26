@@ -3672,6 +3672,7 @@ COPY plugins (plugin_id, plugin_name, plugin_desc) FROM stdin;
 1	scmcvs	CVS Plugin
 2	scmsvn	SVN Plugin
 3	cvstracker	CVS Tracker Integration
+4	online_help	Online Help Plugin
 \.
 
 
@@ -7645,6 +7646,5 @@ SELECT pg_catalog.setval('forum_pending_attachment_attachmentid_seq', 1, false);
 
 
 
-COMMENT ON SCHEMA public IS 'Standard public schema';
-
+-- COMMENT ON SCHEMA public IS 'Standard public schema';
 

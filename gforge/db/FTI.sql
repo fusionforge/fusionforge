@@ -146,7 +146,7 @@ VACUUM FULL ANALYZE;
 
 -- ********** Create trigger function to update idx tables ********** 
 
-CREATE OR REPLACE FUNCTION update_vectors() RETURNS trigger AS '
+CREATE OR REPLACE FUNCTION update_vectors() RETURNS TRIGGER AS '
 DECLARE
 table_name TEXT;
 BEGIN
