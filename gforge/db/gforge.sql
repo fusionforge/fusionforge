@@ -1,6 +1,7 @@
 
 SET client_encoding = 'SQL_ASCII';
 SET check_function_bodies = false;
+SET client_min_messages TO warning;
 
 SET search_path = public, pg_catalog;
 
@@ -4575,7 +4576,7 @@ CREATE INDEX artifactcannedresponses_groupid ON artifact_canned_responses USING 
 
 
 
-CREATE UNIQUE INDEX statssitepgsbyday_oid ON stats_site_pages_by_day USING btree (oid);
+-- CREATE UNIQUE INDEX statssitepgsbyday_oid ON stats_site_pages_by_day USING btree (oid);
 
 
 
@@ -4583,7 +4584,7 @@ CREATE INDEX statssitepagesbyday_month_day ON stats_site_pages_by_day USING btre
 
 
 
-CREATE UNIQUE INDEX statsaggsitebygrp_oid ON stats_agg_site_by_group USING btree (oid);
+-- CREATE UNIQUE INDEX statsaggsitebygrp_oid ON stats_agg_site_by_group USING btree (oid);
 
 
 
@@ -4591,7 +4592,7 @@ CREATE UNIQUE INDEX statssitebygroup_month_day_grou ON stats_agg_site_by_group U
 
 
 
-CREATE UNIQUE INDEX statsprojectmetric_oid ON stats_project_metric USING btree (oid);
+-- CREATE UNIQUE INDEX statsprojectmetric_oid ON stats_project_metric USING btree (oid);
 
 
 
@@ -4599,7 +4600,7 @@ CREATE UNIQUE INDEX statsprojectmetric_month_day_gr ON stats_project_metric USIN
 
 
 
-CREATE UNIQUE INDEX statsagglogobygrp_oid ON stats_agg_logo_by_group USING btree (oid);
+-- CREATE UNIQUE INDEX statsagglogobygrp_oid ON stats_agg_logo_by_group USING btree (oid);
 
 
 
@@ -4607,7 +4608,7 @@ CREATE UNIQUE INDEX statslogobygroup_month_day_grou ON stats_agg_logo_by_group U
 
 
 
-CREATE UNIQUE INDEX statssubdpages_oid ON stats_subd_pages USING btree (oid);
+-- CREATE UNIQUE INDEX statssubdpages_oid ON stats_subd_pages USING btree (oid);
 
 
 
@@ -4615,7 +4616,7 @@ CREATE UNIQUE INDEX statssubdpages_month_day_group ON stats_subd_pages USING btr
 
 
 
-CREATE UNIQUE INDEX statscvsgrp_oid ON stats_cvs_group USING btree (oid);
+-- CREATE UNIQUE INDEX statscvsgrp_oid ON stats_cvs_group USING btree (oid);
 
 
 
@@ -4623,7 +4624,7 @@ CREATE UNIQUE INDEX statscvsgroup_month_day_group ON stats_cvs_group USING btree
 
 
 
-CREATE UNIQUE INDEX statsprojectdevelop_oid ON stats_project_developers USING btree (oid);
+-- CREATE UNIQUE INDEX statsprojectdevelop_oid ON stats_project_developers USING btree (oid);
 
 
 
@@ -4631,7 +4632,7 @@ CREATE UNIQUE INDEX statsprojectdev_month_day_group ON stats_project_developers 
 
 
 
-CREATE UNIQUE INDEX statsproject_oid ON stats_project USING btree (oid);
+-- CREATE UNIQUE INDEX statsproject_oid ON stats_project USING btree (oid);
 
 
 
@@ -4639,7 +4640,7 @@ CREATE UNIQUE INDEX statsproject_month_day_group ON stats_project USING btree ("
 
 
 
-CREATE UNIQUE INDEX statssite_oid ON stats_site USING btree (oid);
+-- CREATE UNIQUE INDEX statssite_oid ON stats_site USING btree (oid);
 
 
 
