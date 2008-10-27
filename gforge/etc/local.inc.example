@@ -304,6 +304,9 @@ $sys_force_login=0;
 // Place for customized files
 $sys_custom_path=$sys_etc_path.'/custom';
 
+// Gettext files (default: /usr/share/locale).
+$sys_gettext_path=$sys_opt_path.'/locales';
+
 //
 // Plugins configuration
 //

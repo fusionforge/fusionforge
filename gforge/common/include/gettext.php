@@ -185,7 +185,12 @@ function setup_gettext_from_langname ($lang) {
 function setup_gettext_from_locale ($locale) {
 	setlocale(LC_ALL, $locale);
 	setlocale (LC_TIME, _('en_US'));
-	bindtextdomain('gforge', '/usr/share/locale/');
+	
+	if (isset($GLOBALS['sys_gettext_path'])) {
+		bindtextdomain('gforge', $GLOBALS['sys_gettext_path']);
+	} else {
+		bindtextdomain('gforge', '/usr/share/locale/');
+	}
 	textdomain('gforge');
 }
 
