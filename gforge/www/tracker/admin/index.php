@@ -56,68 +56,85 @@ if ($group_id && $atid) {
 		exit_permission_denied();
 	}
 
+	$next = '';
 	if (getStringFromRequest('post_changes')) {
 		include $gfwww.'tracker/admin/updates.php';
-	} 
-//
-//		FORMS TO ADD/UPDATE DATABASE
-//
-	if (getStringFromRequest('add_extrafield')) {  
-
-		include $gfwww.'tracker/admin/form-addextrafield.php';
-
-	} elseif (getStringFromRequest('add_opt')) {
-
-		include $gfwww.'tracker/admin/form-addextrafieldoption.php';
-
-	} elseif (getStringFromRequest('copy_opt')) {
-
-		include $gfwww.'tracker/admin/form-extrafieldcopy.php';
-
-	} elseif (getStringFromRequest('add_canned')) {
-
-		include $gfwww.'tracker/admin/form-addcanned.php';
-
-	} elseif (getStringFromRequest('clone_tracker')) {
-
-		include $gfwww.'tracker/admin/form-clonetracker.php';
-
-	} elseif (getStringFromRequest('uploadtemplate')) {
-
-		include $gfwww.'tracker/admin/form-uploadtemplate.php';
-
-	} elseif (getStringFromRequest('downloadtemplate')) {
-
-		echo $ath->getRenderHTML();
 
 	} elseif (getStringFromRequest('deletetemplate')) {
 
 		db_query("UPDATE artifact_group_list SET custom_renderer='' WHERE group_artifact_id='".$ath->getID()."'");
 		echo db_error();
 		$feedback .= 'Renderer Deleted';
+		$next = 'add_extrafield';
+	}
+	
+	//
+	//	FORMS TO ADD/UPDATE DATABASE
+	//
+	if ($next) {
+		$action = $next;
+	} else {
+		$actions = array('add_extrafield', 'add_opt', 'copy_opt', 'add_canned','clone_tracker',
+			'uploadtemplate', 'downloadtemplate', 'update_canned', 'update_box',
+			'update_opt', 'delete', 'deleteextrafield','update_type');
+		$action = '';
+		foreach ($actions as $a) {
+			if (getStringFromRequest($a)) {
+				$action = $a;
+				break;
+			}
+		}
+	}
+		
+	if ($action == 'add_extrafield') {  
+
 		include $gfwww.'tracker/admin/form-addextrafield.php';
 
-	} elseif (getStringFromRequest('update_canned')) {
+	} elseif ($action == 'add_opt') {
+
+		include $gfwww.'tracker/admin/form-addextrafieldoption.php';
+
+	} elseif ($action == 'copy_opt') {
+
+		include $gfwww.'tracker/admin/form-extrafieldcopy.php';
+
+	} elseif ($action == 'add_canned') {
+
+		include $gfwww.'tracker/admin/form-addcanned.php';
+
+	} elseif ($action == 'clone_tracker') {
+
+		include $gfwww.'tracker/admin/form-clonetracker.php';
+
+	} elseif ($action == 'uploadtemplate') {
+
+		include $gfwww.'tracker/admin/form-uploadtemplate.php';
+
+	} elseif ($action == 'downloadtemplate') {
+
+		echo $ath->getRenderHTML();
+
+	} elseif ($action == 'update_canned') {
 
 		include $gfwww.'tracker/admin/form-updatecanned.php';
 
-	} elseif (getStringFromRequest('update_box')) {
+	} elseif ($action == 'update_box') {
 
 		include $gfwww.'tracker/admin/form-updateextrafield.php';
 
-	} elseif (getStringFromRequest('update_opt')) {
+	} elseif ($action == 'update_opt') {
 
 		include $gfwww.'tracker/admin/form-updateextrafieldelement.php';
 
-	} elseif (getStringFromRequest('delete')) {
+	} elseif ($action == 'delete') {
 
 		include $gfwww.'tracker/admin/form-deletetracker.php';
 
-	} elseif (getStringFromRequest('deleteextrafield')) {
+	} elseif ($action == 'deleteextrafield') {
 
 		include $gfwww.'tracker/admin/form-deleteextrafield.php';
 
-	} elseif (getStringFromRequest('update_type')) {
+	} elseif ($action == 'update_type') {
 
 		include $gfwww.'tracker/admin/form-updatetracker.php';
 

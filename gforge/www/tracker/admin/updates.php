@@ -42,7 +42,7 @@
 					$feedback .= $ab->getErrorMessage();
 				} else {
 					$feedback .= _('Custom Field Deleted');
-					$deleteextrafield=false;
+					$next = 'add_extrafield';
 				}
 			}
 
@@ -114,8 +114,7 @@
 					$acr->clearError();
 				} else {
 					$feedback .= _('Canned Response Updated');
-					$update_canned=false;
-					$add_canned=true;
+					$next = 'add_canned';
 				}
 			}
 
@@ -199,8 +198,7 @@
 					$ac->clearError();
 				} else {
 					$feedback .= _('Custom Field updated');
-					$update_box=false;
-					$add_extrafield=true;
+					$next = 'add_extrafield';
 				}
 			}
 
@@ -231,8 +229,7 @@
 						$ao->clearError();
 					} else {
 						$feedback .= _('Element updated');
-						$update_opt=false;
-						$add_extrafield=true;
+						$next = 'add_extrafield';
 					}
 				}
 			}
@@ -250,7 +247,7 @@
 				exit_error('Error','Error cloning fields: '.$ath->getErrorMessage());
 			} else {
 				$feedback .= 'Successfully Cloned Tracker Fields ';
-				$clone_tracker='';
+				$next = '*main*';
 			}
 
 		//
