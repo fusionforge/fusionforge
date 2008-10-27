@@ -33,7 +33,7 @@ echo '<h2>'.$title.'</h2>';
 		<?php echo _('Text Fields and Text Areas need to have Size/Maxlength and Rows/Cols defined, respectively.'); ?><br />
 		<?php echo _('Text Field Size/Text Area Rows'); ?> <input type="text" name="attribute1" value="<?php echo $ac->getAttribute1(); ?>" size="2" maxlength="2"><br />
 		<?php echo _('Text Field Maxlength/Text Area Columns'); ?> <input type="text" name="attribute2" value="<?php echo $ac->getAttribute2(); ?>" size="2" maxlength="2">
-		<?php echo _('Text Fields and Text Areas need to have Size/Maxlength and Rows/Cols defined, respectively.'); ?><br />
+		<br />
 		<?php } else { ?>
 			<input type="hidden" name="attribute1" value="0" />
 			<input type="hidden" name="attribute2" value="0" />
