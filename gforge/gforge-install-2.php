@@ -264,9 +264,9 @@
 	{
 		symlink ("../../plugins/scmcvs/www", "scmcvs");
 	}
-	if (!is_dir("scmsvn"))
+	if (!is_dir("fckeditor"))
 	{
-		symlink ("../../plugins/scmsvn/www/", "scmsvn");
+		symlink ("../../plugins/fckeditor/www", "fckeditor");
 	}
 
 	//cd /opt/gforge
@@ -291,8 +291,5 @@
 	system("cd /etc/gforge && find -type f -exec perl -pi -e \"s/apachegroup/$args[3]/\" {} \;");
 	system("cd /etc/gforge && find -type f -exec perl -pi -e \"s/gforge\.company\.com/$args[1]/\" {} \;");
 	system("echo \"noreply:	/dev/null\" >> /etc/aliases");
-
-	// Create symlink for fckeditor
-	symlink ("../utils/fckeditor/www/", "/opt/gforge/fckeditor");
 
 	print "\n";
