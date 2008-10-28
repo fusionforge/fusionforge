@@ -142,7 +142,7 @@ FROM users ORDER BY user_id;
 
 CREATE INDEX users_idxFTI ON users_idx USING gist(vectors);
 
-VACUUM FULL ANALYZE;
+-- VACUUM FULL ANALYZE;
 
 -- ********** Create trigger function to update idx tables ********** 
 
@@ -440,6 +440,13 @@ CREATE OR REPLACE FUNCTION doc_data_search(text, integer, text, boolean) RETURNS
 	RETURN;
 	END;'
 LANGUAGE 'plpgsql';
+
+CREATE TYPE forums_results AS (msg_id integer,
+        subject text,
+        post_date integer,
+        realname character varying(32),
+        forum_name text
+);
 
 CREATE OR REPLACE FUNCTION forums_search(text, integer, text, boolean) RETURNS SETOF forums_results AS '
 	DECLARE
