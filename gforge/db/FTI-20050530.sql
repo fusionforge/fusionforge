@@ -1,10 +1,3 @@
-CREATE TYPE forums_results AS (msg_id integer,
-	subject text,
-	post_date integer,
-	realname character varying(32),
-	forum_name text
-);
-
 CREATE OR REPLACE FUNCTION forums_search(text, integer, text, boolean) RETURNS SETOF forums_results AS '
 	DECLARE
 	data forums_results;
