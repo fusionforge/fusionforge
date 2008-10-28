@@ -159,8 +159,7 @@ function install()
 	run("/usr/sbin/useradd -g $gforge_user $gforge_user", true);
 
 	show(" * Creating Database User '$gforge_user'...");
-	//run("su - postgres -c \"createuser -A -d -E $gforge_user\"", true);
-	run("su - postgres -c \"createuser -A -d -E $gforge_user\"", true);
+	run("su - postgres -c \"createuser -A -R -d -E $gforge_user\"", true);
 
 	show(' * Creating Language...');
 	run("su - postgres -c \"createlang plpgsql template1\"", true);
@@ -175,7 +174,7 @@ function install()
 	run("su $susufix $gforge_user -c \"createdb $gforge_db\"", true);
 
 	show(" * Dumping tsearch2 Database Into '$gforge_db' DB");
-	run("su - postgres -c \"psql $gforge_db < $tsearch2_sql\"");
+	run("su - postgres -c \"psql $gforge_db < $tsearch2_sql\" >> /tmp/gforge-import.log");
 
 	$tables = array('pg_ts_cfg', 'pg_ts_cfgmap', 'pg_ts_dict', 'pg_ts_parser');
 	foreach ($tables as $table) {
@@ -183,19 +182,9 @@ function install()
 	}
 
 	show(' * Dumping GForge DB');
-	//run("su $susufix $gforge_user -c \"psql $gforge_db < 
-	//	$gforge_lib_dir/db/pgsql/gforge5-complete.sql\" > /tmp/gforge-import.log");
-
-	//run("su $susufix $gforge_user -c \"psql $gforge_db < 
-	//	$gforge_lib_dir/db/gforge.sql\" > /tmp/gforge-import.log");
-
-	//LINEA SUGERIDA POR MARCELO
-	//system("createlang -U postgres plpgsql gforge");
-	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/gforge.sql\" > /tmp/gforge-import.log");
+	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/gforge.sql\" >> /tmp/gforge-import.log");
 
 	show(' * Dumping GForge FTI DB');
-	//	run("su $susufix $gforge_user -c \"psql $gforge_db < 
-	//		$gforge_lib_dir/db/pgsql/FTI-gforge5.sql\" >> /tmp/gforge-import.log");
 	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI.sql\" >> /tmp/gforge-import.log");
 	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20050315.sql\" >> /tmp/gforge-import.log");
 	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20050401.sql\" >> /tmp/gforge-import.log");
@@ -289,6 +278,8 @@ function install()
 		fwrite ($fp, $config);
 		fclose($fp);	
 	}
+
+	show(' * Saving installation log in /tmp/gforge-import.log');
 }
 /*
 function uninstall() {
@@ -353,6 +344,11 @@ function finish() {
 
 function show($text, $newLine = true) {
 	global $STDOUT;
+
+	$hd = fopen ("/tmp/gforge-import.log", "a+");
+	fwrite($hd, "*** $text\n");
+	fclose($hd);
+
 	if ($newLine) {
 		$text = GREEN.$text .NORMAL."\n";
 	}
@@ -360,6 +356,11 @@ function show($text, $newLine = true) {
 }
 
 function run($command, $ignore = false) {
+
+	$hd = fopen ("/tmp/gforge-import.log", "a+");
+	fwrite($hd, "CMD ".$command."\n");
+	fclose($hd);
+
 	system($command, $ret);
 	if ($ignore) {
 		if ($ret != 0) {
