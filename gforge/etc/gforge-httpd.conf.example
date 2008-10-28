@@ -21,6 +21,10 @@ LoadModule authz_svn_module   modules/mod_authz_svn.so
 		ForceType application/x-httpd-php
 	</Location>
 
+	<Location "/wiki/g">
+		ForceType application/x-httpd-php
+	</Location>
+
 	#
 	#       mailman settings - may have to adjust
 	#
