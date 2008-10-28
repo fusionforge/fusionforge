@@ -67,7 +67,7 @@ Please visit the following URL to complete the email change:
 
  -- the %1$s staff'), 
 					 $GLOBALS['sys_name'],
-					 util_make_url ('/account/change_email-complete.php?ch=_'.$confirm_hash), ));
+					 util_make_url ('/account/change_email-complete.php?ch=_'.$confirm_hash)));
 
 	util_send_message($newemail,sprintf(_('%1$s Verification'), $GLOBALS['sys_name']),$message);
 
