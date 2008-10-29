@@ -292,4 +292,8 @@
 	system("cd /etc/gforge && find -type f -exec perl -pi -e \"s/gforge\.company\.com/$args[1]/\" {} \;");
 	system("echo \"noreply:	/dev/null\" >> /etc/aliases");
 
+	# Generate a random hash for the session_key
+	$hash = md5(microtime());
+	system("perl -spi -e \"s/sys_session_key = 'foobar'/sys_session_key = '$hash'/\" /etc/gforge/local.inc");
+
 	print "\n";
