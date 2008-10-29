@@ -29,13 +29,13 @@ class GforgeWikiPlugin extends Plugin {
 		$this->name = "wiki" ;
 		$this->text = "Wiki" ; // To show in the tabs, use...
 		$this->installdir = 'wiki';
-		$this->hooks[] = "user_personal_links";//to make a link to the user's personal wiki
-		$this->hooks[] = "usermenu" ;
+//		$this->hooks[] = "user_personal_links";//to make a link to the user's personal wiki
+//		$this->hooks[] = "usermenu" ;
 		$this->hooks[] = "groupmenu";
 		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
 		$this->hooks[] = "groupisactivecheckboxpost" ; // 
-		$this->hooks[] = "userisactivecheckbox" ; // The "use ..." checkbox in user account
-		$this->hooks[] = "userisactivecheckboxpost" ; // 
+//		$this->hooks[] = "userisactivecheckbox" ; // The "use ..." checkbox in user account
+//		$this->hooks[] = "userisactivecheckboxpost" ; // 
 		$this->hooks[] = 'search_engines';
 		$this->hooks[] = 'full_search_engines';
 		$this->hooks[] = 'cssfile';
