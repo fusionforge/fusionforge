@@ -162,8 +162,8 @@ WEB SETUP - MANUAL INSTALLATION
 
 The following are sample commands commonly issued for a manual installation:
 
-tar -xjf gforge-4.5.6.tar.bz2
-cd gforge-4.5.6
+tar -xjf gforge-4.7.tar.bz2
+cd gforge-4.7
 
 #
 #	BEFORE RUNNING THIS, determine your apacheuser/group 
