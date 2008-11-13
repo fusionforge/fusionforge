@@ -53,10 +53,13 @@ creates a group home directory with a template in it.
 	</IfModule>
 </VirtualHost> 
 */
+require_once dirname(__FILE__).'/../../env.inc.php';
 require_once $gfwww.'include/squal_pre.php';
 require $gfcommon.'include/cron_utils.php';
 
 define('USER_DEFAULT_GROUP','users');
+//error variable
+$err = '';
 
 if (!isset($groupdir_prefix)) {		// this should be set in local.inc
 	$groupdir_prefix = '/home/groups';
@@ -86,12 +89,12 @@ $groups = util_result_column_to_array($group_res,'unix_group_name');
 //	this is where we give a user a home
 //
 foreach($users as $user) {
-	if (is_dir("/home/".$user)) {
+	if (is_dir($homedir_prefix."/".$user)) {
 		
 	} else {
-		@mkdir("/home/".$user);
+		@mkdir($homedir_prefix."/".$user);
 	}
-	system("chown $user:".USER_DEFAULT_GROUP." /home/".$user);
+	system("chown $user:".USER_DEFAULT_GROUP." ".$homedir_prefix."/".$user);
 }
 
 
@@ -119,7 +122,7 @@ foreach($groups as $group) {
 		//
 		//	Read in the template file
 		//
-		$fo=fopen(dirname(__FILE__).'/default_page.php','r');
+		$fo=fopen(dirname(__FILE__).'../../utils/default_page.php','r');
 		$contents = '';
 		if (!$fo) {
 			$err .= 'Default Page Not Found';
