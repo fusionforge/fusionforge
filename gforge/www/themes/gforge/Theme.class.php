@@ -441,6 +441,13 @@ if ($sys_show_source) {
             $selected=array_search('/reporting/',$TABS_DIRS);
         } elseif (strstr(getStringFromServer('REQUEST_URI'),'/admin/') && $user_is_super) {
             $selected=array_search('/admin/',$TABS_DIRS);
+        } elseif (count($PLUGIN_TABS_DIRS)>0) {
+            foreach ($PLUGIN_TABS_DIRS as $PLUGIN_TABS_DIRS_VALUE) {
+               if (strstr(getStringFromServer('REQUEST_URI'),$PLUGIN_TABS_DIRS_VALUE)) {
+                   $selected=array_search($PLUGIN_TABS_DIRS_VALUE,$TABS_DIRS);
+                   break;
+               }
+            }
         } else {
             $selected=0;
         }
