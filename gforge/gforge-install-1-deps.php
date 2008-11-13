@@ -42,21 +42,13 @@ function INFO($message)
 
 function installRedhat() {
 	INFO("Installing packages: Executing YUM. Please wait...\n\n\n");
-	passthru("yum -y install httpd php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php-pgsql subversion mod_dav_svn postfix rcs php-gd mod_ssl wget ssh inetd");
-
-	INFO("Restarting PostgreSQL\n");
-	passthru("/etc/init.d/postgresql stop");
-	passthru("/etc/init.d/postgresql start");
+	passthru("yum -y install httpd php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php-pgsql subversion mod_dav_svn postfix rcs php-gd mod_ssl wget openssh inetd");
 }
 
 function installRHEL4() {
 
 	INFO("Installing packages: Executing UP2DATE. Please wait...\n\n\n");
 	passthru("up2date --install php php-gd php-pgsql mailman postgresql-server postgresql-contrib rcs cvs httpd subversion perl-URI mod_dav_svn ssh postfix mod_ssl wget");
-
-	INFO("Restarting PostgreSQL\n");
-	passthru("/etc/init.d/postgresql stop");
-	passthru("/etc/init.d/postgresql start");
 }
 
 function installDebian() {
