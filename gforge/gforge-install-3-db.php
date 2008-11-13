@@ -26,122 +26,139 @@
  * Francisco Gimeno
  */
 
-	define ('GREEN', "\033[01;32m" );
-	define ('NORMAL', "\033[00m" );
-	define ('RED', "\033[01;31m" );
+define ('GREEN', "\033[01;32m" );
+define ('NORMAL', "\033[00m" );
+define ('RED', "\033[01;31m" );
 
-	$STDOUT = fopen('php://stdout','w');
-	$STDIN = fopen('php://stdin','r');
+$STDOUT = fopen('php://stdout','w');
+$STDIN = fopen('php://stdin','r');
 
-	show("\n-=# Welcome to GForge DB-Installer v4.7 #=-");
+show("\n-=# Welcome to GForge DB-Installer v4.7 #=-");
 
-	//TO DO: add dependency check
-		//if (!run("php check-deps.php", true)) {
-		//	echo RED.'Not all the necessary dependencies were found. aborting.'.NORMAL."\n";
-		//	exit(1);
-		//}
+//TO DO: add dependency check
+//if (!run("php check-deps.php", true)) {
+//	echo RED.'Not all the necessary dependencies were found. aborting.'.NORMAL."\n";
+//	exit(1);
+//}
 
-	// Make sure the DB is initialized by starting postgresql service
-	if (is_file('/etc/init.d/postgresql')) 
-	{
-		$pgservice='/etc/init.d/postgresql';
-	} 
-	elseif (is_file('/etc/init.d/postgresql-8.2'))
-	{
-		$pgservice='/etc/init.d/postgresql-8.2';
-	} 
-	elseif (is_file('/etc/init.d/cswpostgres'))
-	{
-		$pgservice='/etc/init.d/cswpostgres';
+// Make sure the DB is initialized by starting postgresql service
+if (is_file('/etc/init.d/postgresql')) 
+{
+	$pgservice='/etc/init.d/postgresql';
+} 
+elseif (is_file('/etc/init.d/postgresql-8.2'))
+{
+	$pgservice='/etc/init.d/postgresql-8.2';
+} 
+elseif (is_file('/etc/init.d/cswpostgres'))
+{
+	$pgservice='/etc/init.d/cswpostgres';
+}
+else
+{
+	die("ERROR: Could not find Postgresql init script\n");
+}
+
+# Fedora9 (an maybe newer) requires running initdb
+if ($pgservice == '/etc/init.d/postgresql') {
+	if (!is_dir("/var/lib/pgsql/data/base")) {
+		run("service postgresql initdb");
 	}
-	else
-	{
-		die("ERROR: Could not find Postgresql init script\n");
-	}
+}
 
-	// Might fail if it's already running, so we'll ingnore the result
-	run("$pgservice start", true);
+// Might fail if it's already running, so we'll ingnore the result
+run("$pgservice start", true);
 
+// Where the PHP code will live
+//$gforge_lib_dir = '/opt/gforge5';   //CAMBIE ESTO
+$gforge_lib_dir = '/opt/gforge';
 
-	// Where the PHP code will live
-	//$gforge_lib_dir = '/opt/gforge5';   //CAMBIE ESTO
-	$gforge_lib_dir = '/opt/gforge';
-
-	if (!is_dir($gforge_lib_dir))
-	{
-		die("Error: GForge folder doesn't exist. Run install-gforge-1-deps.php first.");
-	}
+if (!is_dir($gforge_lib_dir))
+{
+	die("Error: GForge folder doesn't exist. Run gforge-install-2.php first.");
+}
 
 
-	// Where the configuration files will live
-	$gforge_etc_dir = getenv('GFORGE_ETC_DIR');
-	if (empty($gforge_etc_dir))
-	{
-		$gforge_etc_dir = '/etc/gforge';
-	}
+// Where the configuration files will live
+$gforge_etc_dir = getenv('GFORGE_ETC_DIR');
+if (empty($gforge_etc_dir))
+{
+	$gforge_etc_dir = '/etc/gforge';
+}
+
+// Where the PGHBA config file is
+if (is_file("/var/lib/pgsql/data/pg_hba.conf"))
+{
+	// RedHat & SuSE
+	$PGHBA='/var/lib/pgsql/data/pg_hba.conf';
+}
+elseif (is_file('/etc/postgresql/8.2/main/pg_hba.conf'))
+{
+	$PGHBA='/etc/postgresql/8.2/main/pg_hba.conf';
+}
+elseif (is_file('/opt/csw/var/pgdata/pg_hba.conf'))
+{
+	$PGHBA='/opt/csw/var/pgdata/pg_hba.conf';
+}
+else
+{
+	die("ERROR: Could not find pg_hba.conf file\n");
+}
 
 
-	// Where the PGHBA config file is
-	if (is_file("/var/lib/pgsql/data/pg_hba.conf"))
-	{
-		// RedHat & SuSE
-		$PGHBA='/var/lib/pgsql/data/pg_hba.conf';
-	}
-	elseif (is_file('/etc/postgresql/8.2/main/pg_hba.conf'))
-	{
-		$PGHBA='/etc/postgresql/8.2/main/pg_hba.conf';
-	}
-	elseif (is_file('/opt/csw/var/pgdata/pg_hba.conf'))
-	{
-		$PGHBA='/opt/csw/var/pgdata/pg_hba.conf';
-	}
-	else
-	{
-		die("ERROR: Could not find pg_hba.conf file\n");
-	}
-
-
-	if (is_file('/usr/share/pgsql/contrib/tsearch2.sql'))
-	{
-		// RedHat
-		$tsearch2_sql='/usr/share/pgsql/contrib/tsearch2.sql';
-	}
-	elseif (is_file('/usr/share/postgresql/contrib/tsearch2.sql'))
-	{
-		// SuSE
-		$tsearch2_sql='/usr/share/postgresql/contrib/tsearch2.sql';
-	}
-	elseif (is_file('/usr/share/postgresql/8.2/contrib/tsearch2.sql'))
-	{
-		$tsearch2_sql='/usr/share/postgresql/8.2/contrib/tsearch2.sql';
-	}
-	elseif (is_file('/opt/csw/postgresql/share/contrib/tsearch2.sql'))
-	{
-		// Solaris 10
-		$tsearch2_sql='/opt/csw/postgresql/share/contrib/tsearch2.sql';
-	}
-	else
-	{
-		die("ERROR: Could not find tsearch2.sql file\n");
-	}
+if (is_file('/usr/share/pgsql/contrib/tsearch2.sql'))
+{
+	// RedHat
+	$tsearch2_sql='/usr/share/pgsql/contrib/tsearch2.sql';
+}
+elseif (is_file('/usr/share/postgresql/contrib/tsearch2.sql'))
+{
+	// SuSE
+	$tsearch2_sql='/usr/share/postgresql/contrib/tsearch2.sql';
+}
+elseif (is_file('/usr/share/postgresql/8.2/contrib/tsearch2.sql'))
+{
+	$tsearch2_sql='/usr/share/postgresql/8.2/contrib/tsearch2.sql';
+}
+elseif (is_file('/opt/csw/postgresql/share/contrib/tsearch2.sql'))
+{
+	// Solaris 10
+	$tsearch2_sql='/opt/csw/postgresql/share/contrib/tsearch2.sql';
+}
+else
+{
+	die("ERROR: Could not find tsearch2.sql file\n");
+}
 
 
 function install()
 {
 	global $PGHBA, $gforge_lib_dir, $gforge_etc_dir, $tsearch2_sql, $pgservice, $STDIN, $STDOUT;
+
 	show("\n * Enter the Database Name (gforge): ");
 
-	$gforge_db = trim(fgets($STDIN));
-	if (strlen($gforge_db) == 0) {
-		$gforge_db = 'gforge';
-		show(" ...using '$gforge_db'");
+	if (getenv('GFORGE_DB')) {
+		$gforge_db = getenv('GFORGE_DB');
+	} else {
+		$gforge_db = trim(fgets($STDIN));
+		if (strlen($gforge_db) == 0) {
+			$gforge_db = 'gforge';
+		}
 	}
+	show(" ...using '$gforge_db'");
+
 	show(' * Enter the Database Username (gforge): ');
-	$gforge_user = trim(fgets($STDIN));
-	if (strlen($gforge_user) == 0) {
-		$gforge_user = 'gforge';
-		show(" ...using '$gforge_user'");
+
+	if (getenv('GFORGE_USER')) {
+		$gforge_user = getenv('GFORGE_USER');
+	} else {
+		$gforge_user = trim(fgets($STDIN));
+		if (strlen($gforge_user) == 0) {
+			$gforge_user = 'gforge';
+		}
 	}
+	show(" ...using '$gforge_user'");
+
 	show(" * Modifying DB Access Permissions...");
 	if (!file_exists("$PGHBA.gforge.backup")) {
 		run("cp $PGHBA $PGHBA.gforge.backup", true);
@@ -173,13 +190,23 @@ function install()
 	show(" * Creating '$gforge_db' Database...");
 	run("su $susufix $gforge_user -c \"createdb $gforge_db\"", true);
 
-	show(" * Dumping tsearch2 Database Into '$gforge_db' DB");
-	run("su - postgres -c \"psql $gforge_db < $tsearch2_sql\" >> /tmp/gforge-import.log");
+	# Detect postgresql version, load tsearch2 for pg < 8.3
+	$pg_version = explode(' ', system("postgres --version"));
+	$pgv = $pg_version[2];
 
-	$tables = array('pg_ts_cfg', 'pg_ts_cfgmap', 'pg_ts_dict', 'pg_ts_parser');
-	foreach ($tables as $table) {
-		run('su - postgres -c "psql '.$gforge_db.' -c \\"GRANT ALL on '.$table.' TO '.$gforge_user.';\\""');
+	if (preg_match('/^(7\.|8\.1|8\.2)/', $pgv)) {
+		show(" * Dumping tsearch2 Database Into '$gforge_db' DB");
+		run("su - postgres -c \"psql $gforge_db < $tsearch2_sql\" >> /tmp/gforge-import.log");
+
+		$tables = array('pg_ts_cfg', 'pg_ts_cfgmap', 'pg_ts_dict', 'pg_ts_parser');
+		foreach ($tables as $table) {
+			run('su - postgres -c "psql '.$gforge_db.' -c \\"GRANT ALL on '.$table.' TO '.$gforge_user.';\\""');
+		}
+	} else {
+		show(" * Creating FTS default configuation (Full Text Search)");
+		run("su - postgres -c \"psql $gforge_db < $gforge_lib_dir/db/FTS-20081108.sql\" >> /tmp/gforge-import.log");
 	}
+
 
 	show(' * Dumping GForge DB');
 	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/gforge.sql\" >> /tmp/gforge-import.log");
@@ -193,35 +220,44 @@ function install()
 	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20061025.sql\" >> /tmp/gforge-import.log");
 
 	show(" * Enter the Admin Username (gforgeadmin): ");
-	$admin_user = trim(fgets($STDIN));
+	if (getenv('GFORGE_ADMIN_USER')) {
+		$admin_user = getenv('GFORGE_ADMIN_USER');
+	} else {
+		$admin_user = trim(fgets($STDIN));
 
-	if (strlen($admin_user) == 0) {
-		$admin_user = 'gforgeadmin';
-		show(" ...using '$admin_user'");
+		if (strlen($admin_user) == 0) {
+			$admin_user = 'gforgeadmin';
+		}
 	}
+	show(" ...using '$admin_user'");
 
-	$retries = 0;
-	$bad_pwd = true;
-	$pwd1 = '';
-	$pwd2 = '';
-	$error = '';
-	while ($bad_pwd && $retries < 5) {
-		if ($bad_pwd && $retries > 0) {
-			show(' * ' . $error);
-		}
-		$pwd1 = readMasked(" * Enter the Site Admin Password:");
-		$error = validatePassword($pwd1);
-		if ($error != '') {
-			$bad_pwd = true;
-		} else {
-			$pwd2 = readMasked(" * Please enter it again: \n");
-			if ($pwd1 == $pwd2) {
-				$bad_pwd = false;
-			} else {
-				$error = 'Passwords don\'t match. Please try again.';
+	if (getenv('GFORGE_ADMIN_PASSWORD')) {
+		$bad_pwd = false;
+		$pwd1 = getenv('GFORGE_ADMIN_PASSWORD');
+	} else {
+		$retries = 0;
+		$bad_pwd = true;
+		$pwd1 = '';
+		$pwd2 = '';
+		$error = '';
+		while ($bad_pwd && $retries < 5) {
+			if ($bad_pwd && $retries > 0) {
+				show(' * ' . $error);
 			}
+			$pwd1 = readMasked(" * Enter the Site Admin Password:");
+			$error = validatePassword($pwd1);
+			if ($error != '') {
+				$bad_pwd = true;
+			} else {
+				$pwd2 = readMasked(" * Please enter it again: \n");
+				if ($pwd1 == $pwd2) {
+					$bad_pwd = false;
+				} else {
+					$error = 'Passwords don\'t match. Please try again.';
+				}
+			}
+			$retries++;
 		}
-		$retries++;
 	}
 
 	if ($bad_pwd) {
