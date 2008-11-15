@@ -1,21 +1,8 @@
 #! /usr/bin/php5 -f
 <?php
-$sys_localinc=getenv('sys_localinc');
-if (is_file($sys_localinc)) {
-	require($sys_localinc);
-} else {
-	if (is_file('/etc/gforge/local.inc')) {
-		require ('/etc/gforge/local.inc');
-	} else {
-		if (is_file('../etc/gforge/local.inc')) {
-			require('../etc/gforge/local.inc');
-		}
-	}
-}
-// database abstraction
-require_once $gfcommon.'include/database.php';
 
-db_connect();
+require_once dirname(__FILE__).'/../www/env.inc.php';
+require_once $gfwww.'include/squal_pre.php';
 
 if (!$gfconn) {
 	print "$sys_name Could Not Connect to Database: ".db_error();
@@ -80,10 +67,10 @@ function check_version($version = 0) {
 	$version  = trim($version);
 	$date = 0;
 	$versions = array('2.5', 'sfee3.3', 'sfee3.0', '2.6','3.0pre5', '3.0pre6', '3.0pre7', '3.0pre8', '3.0pre9',
-					'3.0b1', '3.0rc2', '3.0', '3.1', '3.21', '3.3', '4.0', '4.0.1', '4.0.2', '4.5.0.1','4.5.11');
+					'3.0b1', '3.0rc2', '3.0', '3.1', '3.21', '3.3', '4.0', '4.0.1', '4.0.2', '4.5.0.1','4.5.11', '4.6', '4.7');
 	$dates    = array('20001219', '20021001', '20021001', '20021001', '20021206', '20021210', '20021214', '20021230',
 					'20030115', '20030304',	'20030510', '20040511', '20031026', '20040108', '20040326', '20041025',
-					'20041107', '20041215','20050803','20050810');
+					'20041107', '20041215','20050803','20050810', '20070924', '20070924');
 
 	if (in_array($version, $versions)) {
 		$date = $dates[array_search($version, $versions)];
