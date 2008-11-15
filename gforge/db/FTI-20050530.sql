@@ -1,3 +1,5 @@
+SET client_min_messages TO warning;
+
 CREATE OR REPLACE FUNCTION forums_search(text, integer, text, boolean) RETURNS SETOF forums_results AS '
 	DECLARE
 	data forums_results;

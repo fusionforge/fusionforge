@@ -1,3 +1,5 @@
+SET client_min_messages TO warning;
+
 DROP FUNCTION doc_data_search(text, int, text, bool) CASCADE;
 DROP FUNCTION news_bytes_search(text, int) CASCADE;
 DROP FUNCTION artifact_search(text, int) CASCADE;

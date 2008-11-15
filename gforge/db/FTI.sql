@@ -1,3 +1,5 @@
+SET client_min_messages TO warning;
+
 -- ********** Create auxiliar tables ********** 
 
 CREATE TABLE artifact_idx (

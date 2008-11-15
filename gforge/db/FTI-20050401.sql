@@ -1,3 +1,5 @@
+SET client_min_messages TO warning;
+
 BEGIN;
 
 DROP FUNCTION update_vectors() CASCADE;
