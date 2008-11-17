@@ -4,6 +4,15 @@ gforge (4.7~rc2-svn6665-1) unstable; urgency=low
 
  -- Christian Bayle <bayle@debian.org>  Mon, 06 Oct 2008 18:43:47 +0200
 
+gforge (4.7~rc2-6) unstable; urgency=high
+
+  * Removed gforge-plugins-extra binary package (closes: #504758).  I
+    can't promise to do security support for it, and it's quite
+    susceptible to security holes since it ships local copies of PHP
+    libraries.
+
+ -- Roland Mas <lolando@debian.org>  Sat, 15 Nov 2008 20:06:46 +0100
+
 gforge (4.7~rc2-5) unstable; urgency=high
 
   * Fix several SQL injection vulnerabilities due to insufficient input

@@ -37,19 +37,6 @@ Description: collaborative development tool - shared files
  This package contains files and programs used by several other
  subpackages.
 
-Package: gforge-plugins-extra
-Architecture: all
-Depends: gforge-common, php5-cli, python, python-subversion, libphp-snoopy, fckeditor
-Conflicts: sourceforge, gforge-plugin-scmccase
-Description: collaborative development tool - extra plugins
- GForge provides many tools to aid collaboration in a
- development project, such as bug-tracking, task management,
- mailing-lists, SCM repository, forums, support request helper,
- web/FTP hosting, release management, etc. All these services are
- integrated into one web site and managed through a web interface.
- .
- This package contains a set of various plugins.
-
 Package: gforge-web-apache2
 Architecture: all
 Depends: gforge-common, gforge-db-postgresql | gforge-db, libapache2-mod-php5, php5-cgi, php5-pgsql, php5-gd, perl, perl-suid, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, cronolog, python, ssl-cert
