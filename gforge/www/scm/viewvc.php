@@ -131,7 +131,7 @@ if (viewcvs_is_html()) {
 	// If we output html and we found the mbstring extension, we
 	// should try to encode the output of ViewCVS in UTF-8
 	if (extension_loaded('mbstring')) {
-		$encoding = mb_detect_encoding($content);
+		$encoding = mb_detect_encoding($content, 'UTF-8, ISO-8859-1');
 		if($encoding != 'UTF-8') {
 			$content = mb_convert_encoding($content, 'UTF-8', $encoding);
 		}
