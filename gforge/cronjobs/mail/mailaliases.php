@@ -56,6 +56,7 @@ $php_command = "/usr/bin/php -d include_path=".ini_get("include_path");
 
 $aliases_orig = file("/etc/aliases");
 $aliases = array();
+$err = '';
 
 for ($i=0; $i < count($aliases_orig); $i++) {
 	$line = trim($aliases_orig[$i]);
@@ -135,20 +136,19 @@ if ($sys_use_tracker) {
 	}
 }
 
-if ($sys_use_mail && file_exists("/var/lib/gforge/dumps/mailman-aliases")) {
+if ($sys_use_mail && file_exists($sys_var_path.'/dumps/mailman-aliases')) {
 	//
 	//	Read in the mailman aliases
 	//
-	$h2 = fopen("/var/lib/gforge/dumps/mailman-aliases","r");
-	$mailmancontents = fread($h2,filesize("/var/lib/gforge/dumps/mailman-aliases"));
+	$h2 = fopen($sys_var_path.'/dumps/mailman-aliases',"r");
+	$mailmancontents = fread($h2,filesize($sys_var_path.'/dumps/mailman-aliases'));
 	$mailmanlines = explode("\n",$mailmancontents);
 	for	($k = 0; $k < count($mailmanlines); $k++) {
 		$mailmanline = explode(":",$mailmanlines[$k], 2);
 		
 		$alias = trim($mailmanline[0]);
-		$command = trim($mailmanline[1]);
-		
 		if (empty($alias)) continue;
+		$command = trim($mailmanline[1]);
 		
 		if (array_key_exists($alias, $aliases)) {
 			// A GForge alias was found outside the markers

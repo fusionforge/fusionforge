@@ -43,8 +43,8 @@ $repos_co = '/var/svn-co';
 $repos_type = '';
 
 //the name of the access_file
-$access_file = "/var/lib/gforge/svnroot-access";
-$password_file = "/var/lib/gforge/svnroot-authfile";
+$access_file = $sys_var_path.'/svnroot-access';
+$password_file = $sys_var_path.'/svnroot-authfile';
 
 /*
 	This script create the gforge dav/svn/docman repositories
@@ -201,12 +201,14 @@ function add2AccessFile($group_id) {
 	$project = &group_get_object($group_id);
 	$result = "[". $project->getUnixName(). ":/]\n";
 	$users= &$project->getMembers();
-	foreach($users as $user ) {
-		$perm = &$project->getPermission($user);
-		if ( $perm->isCVSWriter() ) {
-			$result.= $user->getUnixName() . "= rw\n";
-		} else if ( $perm->isCVSReader() ) {
-			$result.= $user->getUnixName() . "= r\n";
+	if(isset ($users) ) {
+		foreach($users as $user ) {
+			$perm = &$project->getPermission($user);
+			if ( $perm->isCVSWriter() ) {
+				$result.= $user->getUnixName() . "= rw\n";
+			} else if ( $perm->isCVSReader() ) {
+				$result.= $user->getUnixName() . "= r\n";
+			}
 		}
 	}
 	if ( $project->enableAnonSCM() ) {

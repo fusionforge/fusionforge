@@ -28,6 +28,8 @@ require_once $gfwww.'include/squal_pre.php';
 require_once $gfcommon.'pm/ProjectTasksForUser.class.php';
 require_once $gfcommon.'include/cron_utils.php';
 
+$err = '';
+
 //
 //  Set up this script to run as the site admin
 //

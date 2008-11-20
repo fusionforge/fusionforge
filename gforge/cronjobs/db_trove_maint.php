@@ -75,6 +75,10 @@ db_begin(SYS_DB_TROVE);
 
 db_query("DELETE FROM trove_agg;", -1, 0, SYS_DB_TROVE);
 
+if ( ! isset($sys_private_trove_view) ) {
+	$sys_private_trove_view = 0;
+}
+
 if ($sys_private_trove_view == 1) {
 	// Show public *and* private groups
 	$public_sql = 'g.is_public=1 OR g.is_public = 0';
