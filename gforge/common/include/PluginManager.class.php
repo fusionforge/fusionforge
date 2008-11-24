@@ -96,11 +96,11 @@ class PluginManager extends Error {
 		
 		$plugins_data = $this->GetPlugins() ;
 		$include_path = $GLOBALS['sys_plugins_path'] ;
-		$filename = $include_path . $p_name . "/common/".$p_name."-init.php" ;
+		$filename = $include_path . '/'. $p_name . "/common/".$p_name."-init.php" ;
 		if (file_exists ($filename)) {
 			require_once ($filename) ;
 		} else { //if we didn't found it in common/ it may be an old plugin that has it's files in include/							
-			$filename = $include_path . $p_name . "/include/".$p_name."-init.php" ;
+			$filename = $include_path . '/' . $p_name . "/include/".$p_name."-init.php" ;
 			if (file_exists ($filename)) {
 				require_once ($filename) ;
 			} else {
