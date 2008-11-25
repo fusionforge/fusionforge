@@ -23,6 +23,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
+require_once '../../../www/env.inc.php';
 require_once $gfcommon.'include/escapingUtils.php';
 require_once $gfwww.'include/squal_pre.php';
 
@@ -35,21 +36,21 @@ $env_user = getStringFromPost('user');
 # Group must contain 3 - 15 alphanumeric chars or -
 preg_match("/^([[:alnum:]-]{3,15})$/", $env_group, $matches);
 # User rules
-# 1. Must only contain alphanumeric chars
+# 1. Must only contain alphanumeric chars or _ or -
 # 2. Must be 3 - 15 chars
-preg_match("/[[:alnum:]_]{3,15}/", $env_user, $matches2);
+preg_match("/[[:alnum:]_-]{3,15}/", $env_user, $matches2);
 
 if (count($matches) == 0) {
-	exit_error('','Invalid CVS repository');
+	exit_error('','Invalid CVS repository : '.$env_group);
 } else {
 	if (count($matches2) == 0) {
-		exit_error('','Invalid username');
+		exit_error('','Invalid username : '.$env_user);
 	}
 
 	$userName = $matches2[count($matches2)-1];
 	$User =& user_get_object_by_name($userName);
 	if (!$User || !is_object($User)) {
-		exit_error('','User not found');
+		exit_error('','User "'.$userName.'"not found');
 	}
 	session_set_new($User->getID());
 
