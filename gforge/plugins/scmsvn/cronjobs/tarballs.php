@@ -8,6 +8,7 @@ $scmname='scmroot';
 putenv("PATH=/usr/lib/subversion:".getenv('PATH'));
 $BACKUPPROG='hot-backup.py';
 
+require dirname(__FILE__).'/../../env.inc.php';
 require $gfwww.'include/squal_pre.php';
 require $gfcommon.'include/cron_utils.php';
 
