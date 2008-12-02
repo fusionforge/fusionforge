@@ -35,7 +35,6 @@ require_once $gfwww.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 
 $search = getStringFromRequest('search');
-$substr = getStringFromRequest('substr');
 $usersearch = getStringFromRequest('usersearch');
 
 if (!$search) {
@@ -63,32 +62,27 @@ function format_name($name, $status) {
 /*
 	Main code
 */
-if ($substr) {
-	$search = "%$search%";
-}
-
-
 if ($usersearch) {
 
 	$sql = "
 		SELECT DISTINCT * 
-		FROM users";
+		FROM users WHERE ";
+	
+	if(is_numeric($search)) {
+		$sql .="user_id = '$search' OR ";
+	}
 	if ( $sys_database_type == "mysql" ) {
-		$sql .= "
-		WHERE user_id LIKE '$search'
-		OR user_name LIKE '%$search%'
+		$sql .= "user_name LIKE '%$search%'
 		OR email LIKE '%$search%'
 		OR realname LIKE '%$search%'"; 
 	} else {
-		$sql .= "
-		WHERE user_id ILIKE '$search'
-		OR user_name ILIKE '%$search%'
+		$sql .= "user_name ILIKE '%$search%'
 		OR email ILIKE '%$search%'
 		OR realname ILIKE '%$search%'"; 
 	}
 	$result = db_query($sql);
 
-	print '<p><strong>' .sprintf(ngettext('User search with criteria <em>%1$s</em>: %2$s match', 'User search with criteria <em>%1$s</em>: %2$s matches', $search, db_numrows($result)), db_numrows($result)).'</strong></p>';
+	print '<p><strong>' .sprintf(ngettext('User search with criteria <em>%1$s</em>: %2$s match', 'User search with criteria <em>%1$s</em>: %2$s matches', db_numrows($result)), $search, db_numrows($result)).'</strong></p>';
 
 	if (db_numrows($result) < 1) {
 
@@ -105,7 +99,7 @@ if ($usersearch) {
 		$title[]=_('Status');
 					 
 		echo $GLOBALS['HTML']->listTableTop($title);
-
+		$i = 0 ;
 		while ($row = db_fetch_array($result)) {
 			print '
 				<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>
@@ -127,7 +121,7 @@ if ($usersearch) {
 
 if (getStringFromRequest('groupsearch')) {
 	$status = getStringFromRequest('status');
-	$is_public = getIntFromRequest('is_public');
+	$is_public = getIntFromRequest('is_public', -1);
 	$crit_desc = getStringFromRequest('crit_desc');
 	$crit_sql = '';
 
@@ -135,24 +129,24 @@ if (getStringFromRequest('groupsearch')) {
 		$crit_sql  .= " AND status='$status'";
 		$crit_desc .= " status=$status";
 	}
-	if (isset($is_public)) {
+	if ($is_public !== -1) {
 		$crit_sql  .= " AND is_public='$is_public'";
 		$crit_desc .= " is_public=$is_public";
 	}
 
 	$sql = "
 		SELECT DISTINCT *
-		FROM groups";
+		FROM groups WHERE (";
+	
+	if(is_numeric($search)) {
+		$sql .="group_id = '$search' OR ";
+	}	
 	if ( $sys_database_type == "mysql" ) {
-		$sql .= "
-		WHERE (group_id LIKE '%$search%'
-		OR unix_group_name LIKE '%$search%'
+		$sql .= "unix_group_name LIKE '%$search%'
 		OR group_name LIKE '%$search%')
 		$crit_sql"; 
 	} else {
-		$sql .= "
-		WHERE (group_id ILIKE '%$search%'
-		OR unix_group_name ILIKE '%$search%'
+		$sql .= "unix_group_name ILIKE '%$search%'
 		OR group_name ILIKE '%$search%')
 		$crit_sql"; 
 	}
