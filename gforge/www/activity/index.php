@@ -112,7 +112,7 @@ if ($rows<1) {
 	<td><?php echo $multiselect; ?></td>
 	<td valign="top"><input name="start_date" value="<?php echo date(_('Y-m-d'),$begin); ?>" size="10" maxlength="10" /></td>
 	<td valign="top"><input name="end_date" value="<?php echo date(_('Y-m-d'),$end); ?>" size="10" maxlength="10" /></td>
-	<td valign="top"><input type="submit" name="submit" value="Submit"/></td>
+	<td valign="top"><input type="submit" name="submit" value="<?php echo _('Submit'); ?>"/></td>
 </tr>
 </table>
 </form>

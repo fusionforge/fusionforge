@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-22 21:58+0200\n"
+"POT-Creation-Date: 2008-12-02 21:11+0100\n"
 "PO-Revision-Date: 2007-03-16 23:03+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -770,7 +770,7 @@ msgstr ""
 #: plugins/quota_management/www/quota_project.php:93
 #: www/include/Layout.class.php:551 www/include/project_home.php:289
 #: www/themes/gforge-simple-theme/Theme.class.php:521
-#: www/themes/gforge/Theme.class.php:504
+#: www/themes/gforge/Theme.class.php:511
 msgid "Forums"
 msgstr "Форумы"
 
@@ -788,7 +788,7 @@ msgstr ""
 #: www/stats/site_stats_utils.php:269 www/stats/site_stats_utils.php:379
 #: www/stats/site_stats_utils.php:434
 #: www/themes/gforge-simple-theme/Theme.class.php:546
-#: www/themes/gforge/Theme.class.php:526
+#: www/themes/gforge/Theme.class.php:533
 #: www/themes/ultralite/Theme.class.php:102
 msgid "Tasks"
 msgstr ""
@@ -801,16 +801,16 @@ msgstr "Просмотр документации"
 #: common/include/group_section_texts.php:12 common/include/rbac_texts.php:73
 #: www/frs/include/frs_utils.php:92 www/include/Layout.class.php:617
 #: www/themes/gforge-simple-theme/Theme.class.php:595
-#: www/themes/gforge/Theme.class.php:570
+#: www/themes/gforge/Theme.class.php:577
 msgid "Files"
 msgstr "Файлы"
 
 #: common/include/group_section_texts.php:13
 #: plugins/quota_management/www/quota_project.php:78 www/activity/index.php:66
-#: www/activity/index.php:166 www/admin/index.php:130
+#: www/activity/index.php:166 www/admin/index.php:128
 #: www/include/Layout.class.php:594 www/news/index.php:37
 #: www/news/submit.php:102 www/themes/gforge-simple-theme/Theme.class.php:570
-#: www/themes/gforge/Theme.class.php:547
+#: www/themes/gforge/Theme.class.php:554
 msgid "News"
 msgstr "Новости"
 
@@ -881,7 +881,7 @@ msgstr "Сообщения"
 #: www/survey/survey_utils.php:79
 #: www/themes/gforge-simple-theme/Theme.class.php:405
 #: www/themes/gforge-simple-theme/Theme.class.php:504
-#: www/themes/gforge/Theme.class.php:406 www/themes/gforge/Theme.class.php:488
+#: www/themes/gforge/Theme.class.php:406 www/themes/gforge/Theme.class.php:495
 #: www/themes/lite/Theme.class.php:285 www/tracker/add.php:66
 #: www/tracker/admin/ind.php:75
 #: www/tracker/include/ArtifactTypeHtml.class.php:68 www/tracker/ind.php:27
@@ -958,7 +958,7 @@ msgstr ""
 #: www/include/project_home.php:261 www/include/project_home.php:262
 #: www/pm/include/ProjectTaskHTML.class.php:98
 #: www/themes/gforge-simple-theme/Theme.class.php:529
-#: www/themes/gforge/Theme.class.php:511 www/tracker/admin/ind.php:94
+#: www/themes/gforge/Theme.class.php:518 www/tracker/admin/ind.php:94
 #: www/tracker/ind.php:43
 msgid "Tracker"
 msgstr ""
@@ -985,7 +985,7 @@ msgstr ""
 #: www/include/Layout.class.php:601 www/include/project_home.php:352
 #: www/scm/include/scm_utils.php:53
 #: www/themes/gforge-simple-theme/Theme.class.php:578
-#: www/themes/gforge/Theme.class.php:554
+#: www/themes/gforge/Theme.class.php:561
 msgid "SCM"
 msgstr "SCM"
 
@@ -1109,7 +1109,7 @@ msgstr ""
 #: plugins/projects_hierarchy/www/softwaremap.php:322
 #: www/account/index.php:122 www/admin/cronman.php:74
 #: www/admin/grouplist.php:120 www/admin/massmail.php:161
-#: www/admin/search.php:116 www/admin/search.php:192 www/admin/userlist.php:98
+#: www/admin/search.php:110 www/admin/search.php:186 www/admin/userlist.php:98
 #: www/developer/diary.php:48 www/developer/diary.php:86
 #: www/docman/include/doc_utils.php:216 www/docman/include/doc_utils.php:217
 #: www/export/tracker.php:114 www/forum/forum.php:271 www/forum/forum.php:344
@@ -1232,7 +1232,7 @@ msgstr ""
 #: common/reporting/report_utils.php:152 www/include/Layout.class.php:580
 #: www/include/project_home.php:305
 #: www/themes/gforge-simple-theme/Theme.class.php:554
-#: www/themes/gforge/Theme.class.php:533
+#: www/themes/gforge/Theme.class.php:540
 msgid "Docs"
 msgstr "Документация"
 
@@ -1360,7 +1360,7 @@ msgstr ""
 #: common/survey/SurveyResponse.class.php:97 www/account/change_email.php:41
 #: www/account/change_pw.php:51 www/account/change_pw.php:59
 #: www/account/change_pw.php:67 www/account/change_pw.php:75
-#: www/admin/search.php:42 www/developer/diary.php:99
+#: www/admin/search.php:41 www/developer/diary.php:99
 #: www/developer/rate.php:79 www/docman/admin/index.php:76
 #: www/docman/admin/index.php:88 www/docman/admin/index.php:473
 #: www/docman/admin/index.php:478 www/docman/include/doc_utils.php:66
@@ -1432,7 +1432,7 @@ msgstr ""
 #: www/survey/include/SurveyHTML.class.php:45 www/survey/survey_utils.php:46
 #: www/tarballs.php:25 www/tarballs.php:28 www/tarballs.php:34
 #: www/tarballs.php:37 www/tracker/admin/index.php:53
-#: www/tracker/admin/updates.php:141 www/tracker/tracker.php:15
+#: www/tracker/admin/updates.php:140 www/tracker/tracker.php:15
 #: www/tracker/tracker.php:30 www/users:35
 msgid "Error"
 msgstr ""
@@ -1540,7 +1540,7 @@ msgstr ""
 
 #: common/tracker/ArtifactExtraField.class.php:297 www/admin/groupedit.php:106
 #: www/admin/grouplist.php:87 www/admin/pluginman.php:182
-#: www/admin/search.php:105 www/admin/search.php:175
+#: www/admin/search.php:99 www/admin/search.php:169
 #: www/frs/admin/editrelease.php:251 www/frs/admin/index.php:147
 #: www/news/admin/index.php:131 www/people/editjob.php:174
 #: www/people/viewjob.php:77 www/pm/browse_task.php:122
@@ -1610,7 +1610,7 @@ msgstr ""
 msgid "Latest News"
 msgstr "Новости"
 
-#: cronjobs/massmail.php:141
+#: cronjobs/massmail.php:142
 #, php-format
 msgid ""
 "You receive this message because you subscribed to %1$s\n"
@@ -3029,7 +3029,7 @@ msgstr ""
 #: www/activity/index.php:47 www/activity/index.php:106
 #: www/activity/index.php:124 www/include/Layout.class.php:545
 #: www/themes/gforge-simple-theme/Theme.class.php:514
-#: www/themes/gforge/Theme.class.php:498
+#: www/themes/gforge/Theme.class.php:505
 msgid "Activity"
 msgstr ""
 
@@ -3074,6 +3074,33 @@ msgstr ""
 #: www/reporting/usertime.php:86
 msgid "End"
 msgstr ""
+
+#: www/activity/index.php:115 www/admin/admin_table.php:197
+#: www/admin/cronman.php:47 www/admin/index.php:122 www/admin/userlist.php:184
+#: www/include/vote_function.php:267 www/my/bookmark_add.php:53
+#: www/my/bookmark_edit.php:64 www/news/admin/index.php:155
+#: www/news/admin/index.php:300 www/news/news_utils.php:54
+#: www/news/submit.php:134 www/pm/add_task.php:44 www/pm/add_task.php:126
+#: www/pm/add_task.php:140 www/pm/admin/index.php:222
+#: www/pm/admin/index.php:268 www/pm/admin/index.php:307
+#: www/pm/deletetask.php:37 www/pm/mod_task.php:38 www/pm/mod_task.php:196
+#: www/project/admin/editimages.php:233 www/project/admin/roleedit.php:261
+#: www/project/request.php:69 www/register/projectinfo.php:201
+#: www/survey/include/SurveyHTML.class.php:539 www/tracker/add.php:28
+#: www/tracker/add.php:57 www/tracker/add.php:119
+#: www/tracker/admin/form-addcanned.php:52
+#: www/tracker/admin/form-addextrafield.php:114
+#: www/tracker/admin/form-addextrafieldoption.php:55
+#: www/tracker/admin/form-clonetracker.php:38
+#: www/tracker/admin/form-extrafieldcopy.php:71
+#: www/tracker/admin/form-updatecanned.php:29
+#: www/tracker/admin/form-updateextrafield.php:49
+#: www/tracker/admin/form-updateextrafieldelement.php:50
+#: www/tracker/admin/form-updatetracker.php:49
+#: www/tracker/admin/form-uploadtemplate.php:14 www/tracker/admin/ind.php:150
+#: www/tracker/deleteartifact.php:33 www/tracker/mod-limited.php:50
+msgid "Submit"
+msgstr "Отправить"
 
 #: www/activity/index.php:123 www/reporting/projecttime.php:87
 #: www/reporting/sitetime.php:82 www/reporting/sitetimebar.php:85
@@ -3171,33 +3198,6 @@ msgstr ""
 #, php-format
 msgid "Modify the %1$s below:"
 msgstr ""
-
-#: www/admin/admin_table.php:197 www/admin/cronman.php:47
-#: www/admin/index.php:124 www/admin/userlist.php:184
-#: www/include/vote_function.php:267 www/my/bookmark_add.php:53
-#: www/my/bookmark_edit.php:64 www/news/admin/index.php:155
-#: www/news/admin/index.php:300 www/news/news_utils.php:54
-#: www/news/submit.php:134 www/pm/add_task.php:44 www/pm/add_task.php:126
-#: www/pm/add_task.php:140 www/pm/admin/index.php:222
-#: www/pm/admin/index.php:268 www/pm/admin/index.php:307
-#: www/pm/deletetask.php:37 www/pm/mod_task.php:38 www/pm/mod_task.php:196
-#: www/project/admin/editimages.php:233 www/project/admin/roleedit.php:261
-#: www/project/request.php:69 www/register/projectinfo.php:201
-#: www/survey/include/SurveyHTML.class.php:539 www/tracker/add.php:28
-#: www/tracker/add.php:57 www/tracker/add.php:119
-#: www/tracker/admin/form-addcanned.php:52
-#: www/tracker/admin/form-addextrafield.php:114
-#: www/tracker/admin/form-addextrafieldoption.php:55
-#: www/tracker/admin/form-clonetracker.php:38
-#: www/tracker/admin/form-extrafieldcopy.php:71
-#: www/tracker/admin/form-updatecanned.php:29
-#: www/tracker/admin/form-updateextrafield.php:49
-#: www/tracker/admin/form-updateextrafieldelement.php:50
-#: www/tracker/admin/form-updatetracker.php:49
-#: www/tracker/admin/form-uploadtemplate.php:14 www/tracker/admin/ind.php:150
-#: www/tracker/deleteartifact.php:33 www/tracker/mod-limited.php:50
-msgid "Submit"
-msgstr "Отправить"
 
 #: www/admin/admin_table.php:227
 #, php-format
@@ -3499,7 +3499,7 @@ msgid "[Project Admin]"
 msgstr ""
 
 #: www/admin/groupedit.php:114 www/admin/groupedit.php:126
-#: www/admin/index.php:114 www/admin/index.php:120 www/admin/useredit.php:132
+#: www/admin/index.php:112 www/admin/index.php:118 www/admin/useredit.php:132
 #: www/admin/useredit.php:138
 msgid "Pending (P)"
 msgstr ""
@@ -3508,7 +3508,7 @@ msgstr ""
 msgid "Incomplete (I)"
 msgstr ""
 
-#: www/admin/groupedit.php:125 www/admin/index.php:118
+#: www/admin/groupedit.php:125 www/admin/index.php:116
 #: www/admin/useredit.php:34 www/admin/useredit.php:133
 #: www/admin/useredit.php:139
 msgid "Active (A)"
@@ -3578,7 +3578,7 @@ msgstr ""
 msgid "Register Time"
 msgstr ""
 
-#: www/admin/grouplist.php:86 www/admin/search.php:172
+#: www/admin/grouplist.php:86 www/admin/search.php:166
 #: www/admin/useredit.php:241 www/project/admin/index.php:261
 #: www/project/admin/massadd.php:103 www/project/admin/massfinish.php:82
 #, fuzzy
@@ -3614,144 +3614,144 @@ msgstr ""
 msgid "Search <em>(userid, username, realname, email)</em>"
 msgstr ""
 
-#: www/admin/index.php:64 www/admin/index.php:108
+#: www/admin/index.php:63 www/admin/index.php:106
 msgid "get"
 msgstr ""
 
-#: www/admin/index.php:68
+#: www/admin/index.php:67
 msgid "Register a New User"
 msgstr ""
 
-#: www/admin/index.php:73
+#: www/admin/index.php:72
 msgid "Group Maintenance"
 msgstr ""
 
-#: www/admin/index.php:79
+#: www/admin/index.php:78
 #, php-format
 msgid "Registered projects: <strong>%1$s</strong>"
 msgstr ""
 
-#: www/admin/index.php:84
+#: www/admin/index.php:83
 #, php-format
 msgid "Active projects: <strong>%1$s</strong>"
 msgstr ""
 
-#: www/admin/index.php:89
+#: www/admin/index.php:88
 #, php-format
 msgid "Pending projects: <strong>%1$s</strong>"
 msgstr ""
 
-#: www/admin/index.php:93
+#: www/admin/index.php:92
 msgid "Display Full Group List/Edit Groups"
 msgstr ""
 
-#: www/admin/index.php:97
+#: www/admin/index.php:96
 msgid "Display Groups Beginning with :"
 msgstr ""
 
-#: www/admin/index.php:104
+#: www/admin/index.php:103
 msgid "Search <em>(groupid, group unix name, full name)</em>"
 msgstr ""
 
-#: www/admin/index.php:113
+#: www/admin/index.php:111
 msgid "Register New Project"
 msgstr "Зарегистрировать проект"
 
-#: www/admin/index.php:114 www/admin/index.php:116
+#: www/admin/index.php:112 www/admin/index.php:114
 msgid "Groups with status"
 msgstr ""
 
-#: www/admin/index.php:114
+#: www/admin/index.php:112
 #, fuzzy
 msgid "(New Project Approval)"
 msgstr "Нет проектов для утверждения"
 
-#: www/admin/index.php:119
+#: www/admin/index.php:117
 msgid "Hold (H)"
 msgstr ""
 
-#: www/admin/index.php:126
+#: www/admin/index.php:124
 msgid "Private Groups"
 msgstr ""
 
-#: www/admin/index.php:133
+#: www/admin/index.php:131
 msgid "Approve/Reject"
 msgstr ""
 
-#: www/admin/index.php:133
+#: www/admin/index.php:131
 msgid "Front-page news"
 msgstr ""
 
-#: www/admin/index.php:137 www/project/admin/project_admin_utils.php:79
+#: www/admin/index.php:135 www/project/admin/project_admin_utils.php:79
 msgid "Stats"
 msgstr "Статистика"
 
-#: www/admin/index.php:140
+#: www/admin/index.php:138
 msgid "Site-Wide Stats"
 msgstr ""
 
-#: www/admin/index.php:144
+#: www/admin/index.php:142
 msgid "Trove Project Tree"
 msgstr ""
 
-#: www/admin/index.php:147
+#: www/admin/index.php:145
 msgid "Display Trove Map"
 msgstr ""
 
-#: www/admin/index.php:148
+#: www/admin/index.php:146
 msgid "Add to the Trove Map"
 msgstr ""
 
-#: www/admin/index.php:151
+#: www/admin/index.php:149
 msgid "Site Utilities"
 msgstr ""
 
-#: www/admin/index.php:153 www/admin/massmail.php:87
+#: www/admin/index.php:151 www/admin/massmail.php:87
 #, php-format
 msgid "Mail Engine for %1$s Subscribers"
 msgstr ""
 
-#: www/admin/index.php:154
+#: www/admin/index.php:152
 msgid "Site Mailings Maintenance"
 msgstr ""
 
-#: www/admin/index.php:155
+#: www/admin/index.php:153
 msgid "Add, Delete, or Edit File Types"
 msgstr ""
 
-#: www/admin/index.php:156
+#: www/admin/index.php:154
 msgid "Add, Delete, or Edit Processors"
 msgstr ""
 
-#: www/admin/index.php:157
+#: www/admin/index.php:155
 msgid "Add, Delete, or Edit Themes"
 msgstr ""
 
-#: www/admin/index.php:158
+#: www/admin/index.php:156
 msgid "Add, Delete, or Edit Licenses"
 msgstr ""
 
-#: www/admin/index.php:159
+#: www/admin/index.php:157
 msgid "Recent logins"
 msgstr ""
 
-#: www/admin/index.php:160
+#: www/admin/index.php:158
 msgid "Cron Manager"
 msgstr ""
 
-#: www/admin/index.php:161
+#: www/admin/index.php:159
 msgid "Plugin Manager"
 msgstr ""
 
-#: www/admin/index.php:162
+#: www/admin/index.php:160
 msgid "Config Manager"
 msgstr ""
 
-#: www/admin/index.php:171
+#: www/admin/index.php:169
 msgid "Virtual Host Admin Tool"
 msgstr ""
 
-#: www/admin/index.php:175
+#: www/admin/index.php:173
 msgid "Project Database Administration"
 msgstr ""
 
@@ -3838,10 +3838,9 @@ msgstr ""
 msgid "Schedule for Mailing"
 msgstr ""
 
-#: www/admin/massmail.php:144 www/admin/search.php:100
-#: www/admin/search.php:171 www/docman/admin/index.php:353 www/my/index.php:74
-#: www/my/index.php:116 www/my/index.php:163
-#: www/project/admin/editimages.php:260
+#: www/admin/massmail.php:144 www/admin/search.php:94 www/admin/search.php:165
+#: www/docman/admin/index.php:353 www/my/index.php:74 www/my/index.php:116
+#: www/my/index.php:163 www/project/admin/editimages.php:260
 #: www/tracker/admin/form-addcanned.php:23 www/tracker/browse.php:138
 #: www/tracker/browse.php:288 www/tracker/query.php:160
 msgid "ID"
@@ -4010,17 +4009,17 @@ msgstr ""
 msgid "Create"
 msgstr "Создать"
 
-#: www/admin/search.php:42
+#: www/admin/search.php:41
 msgid ""
 "Refusing to display whole DB,That would display whole DB.  Please use a CLI "
 "query if you wish to do this."
 msgstr ""
 
-#: www/admin/search.php:45
+#: www/admin/search.php:44
 msgid "Admin Search Results"
 msgstr ""
 
-#: www/admin/search.php:91
+#: www/admin/search.php:85
 #, php-format
 msgid "User search with criteria <em>%1$s</em>: %2$s match"
 msgid_plural "User search with criteria <em>%1$s</em>: %2$s matches"
@@ -4028,14 +4027,14 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: www/admin/search.php:101 www/admin/unsubscribe.php:132
+#: www/admin/search.php:95 www/admin/unsubscribe.php:132
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:33
 #: www/top/topusers.php:69
 #, fuzzy
 msgid "User name"
 msgstr "Дата релиза"
 
-#: www/admin/search.php:102 www/admin/unsubscribe.php:133
+#: www/admin/search.php:96 www/admin/unsubscribe.php:133
 #: www/admin/useredit.php:117 www/include/user_home.php:48
 #: www/project/admin/massadd.php:102 www/project/admin/massfinish.php:81
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:34
@@ -4043,15 +4042,15 @@ msgstr "Дата релиза"
 msgid "Real name"
 msgstr ""
 
-#: www/admin/search.php:103 www/admin/unsubscribe.php:134
+#: www/admin/search.php:97 www/admin/unsubscribe.php:134
 msgid "Email"
 msgstr ""
 
-#: www/admin/search.php:104
+#: www/admin/search.php:98
 msgid "Member since"
 msgstr ""
 
-#: www/admin/search.php:164
+#: www/admin/search.php:158
 #, php-format
 msgid "Group search with criteria <em>%s</em>: %d match"
 msgid_plural "Group search with criteria <em>%s</em>: %d matches"
@@ -4059,11 +4058,11 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: www/admin/search.php:173
+#: www/admin/search.php:167
 msgid "Full Name"
 msgstr ""
 
-#: www/admin/search.php:174
+#: www/admin/search.php:168
 msgid "Registered"
 msgstr ""
 
@@ -4796,7 +4795,7 @@ msgstr "Отправить"
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:46
 #: www/search/index.php:70 www/themes/gforge-simple-theme/Theme.class.php:675
 #: www/themes/gforge-simple-theme/Theme.class.php:693
-#: www/themes/gforge/Theme.class.php:753 www/themes/gforge/Theme.class.php:777
+#: www/themes/gforge/Theme.class.php:760 www/themes/gforge/Theme.class.php:784
 #: www/themes/ultralite/Theme.class.php:132
 msgid "Search"
 msgstr "Поиск"
@@ -5179,7 +5178,7 @@ msgstr "Опубликовать вакансии"
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:37
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:37
 #: www/themes/gforge-simple-theme/Theme.class.php:497
-#: www/themes/gforge/Theme.class.php:481 www/tracker/add.php:75
+#: www/themes/gforge/Theme.class.php:488 www/tracker/add.php:75
 #: www/tracker/browse.php:140 www/tracker/browse.php:290
 #: www/tracker/detail.php:65 www/tracker/mod-limited.php:114
 #: www/tracker/mod.php:156 www/tracker/query.php:162
@@ -6193,7 +6192,7 @@ msgstr "Вакансии"
 
 #: www/include/Layout.class.php:566 www/include/project_home.php:313
 #: www/themes/gforge-simple-theme/Theme.class.php:538
-#: www/themes/gforge/Theme.class.php:519
+#: www/themes/gforge/Theme.class.php:526
 msgid "Lists"
 msgstr "Сп.рассылки"
 
@@ -6201,37 +6200,37 @@ msgstr "Сп.рассылки"
 #: www/include/project_home.php:344 www/survey/include/SurveyHTML.class.php:53
 #: www/survey/survey_utils.php:54
 #: www/themes/gforge-simple-theme/Theme.class.php:562
-#: www/themes/gforge/Theme.class.php:540
+#: www/themes/gforge/Theme.class.php:547
 msgid "Surveys"
 msgstr "Опросы"
 
 #: www/include/Layout.class.php:799
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:77
 #: www/themes/gforge-simple-theme/Theme.class.php:679
-#: www/themes/gforge/Theme.class.php:759
+#: www/themes/gforge/Theme.class.php:766
 msgid "Advanced search"
 msgstr "Комбинированный поиск"
 
 #: www/include/Layout.class.php:822
 #: www/themes/gforge-simple-theme/Theme.class.php:694
-#: www/themes/gforge/Theme.class.php:782
+#: www/themes/gforge/Theme.class.php:789
 msgid "with all words"
 msgstr ""
 
 #: www/include/Layout.class.php:825
 #: www/themes/gforge-simple-theme/Theme.class.php:695
-#: www/themes/gforge/Theme.class.php:785
+#: www/themes/gforge/Theme.class.php:792
 msgid "with one word"
 msgstr ""
 
-#: www/include/Layout.class.php:870 www/themes/gforge/Theme.class.php:831
+#: www/include/Layout.class.php:870 www/themes/gforge/Theme.class.php:838
 msgid "Search in"
 msgstr ""
 
 #: www/include/Layout.class.php:871 www/include/Layout.class.php:902
 #: www/themes/gforge-simple-theme/Theme.class.php:697
 #: www/themes/gforge-simple-theme/Theme.class.php:753
-#: www/themes/gforge/Theme.class.php:832 www/themes/gforge/Theme.class.php:863
+#: www/themes/gforge/Theme.class.php:839 www/themes/gforge/Theme.class.php:870
 msgid "Select"
 msgstr ""
 
@@ -6239,14 +6238,14 @@ msgstr ""
 #: www/stats/site_stats_utils.php:127
 #: www/themes/gforge-simple-theme/Theme.class.php:697
 #: www/themes/gforge-simple-theme/Theme.class.php:753
-#: www/themes/gforge/Theme.class.php:832 www/themes/gforge/Theme.class.php:863
+#: www/themes/gforge/Theme.class.php:839 www/themes/gforge/Theme.class.php:870
 msgid "all"
 msgstr ""
 
 #: www/include/Layout.class.php:871 www/include/Layout.class.php:902
 #: www/themes/gforge-simple-theme/Theme.class.php:697
 #: www/themes/gforge-simple-theme/Theme.class.php:753
-#: www/themes/gforge/Theme.class.php:832 www/themes/gforge/Theme.class.php:863
+#: www/themes/gforge/Theme.class.php:839 www/themes/gforge/Theme.class.php:870
 msgid "none"
 msgstr ""
 
@@ -10997,7 +10996,6 @@ msgstr ""
 
 #: www/tracker/admin/form-addextrafield.php:106
 #: www/tracker/admin/form-updateextrafield.php:33
-#: www/tracker/admin/form-updateextrafield.php:36
 msgid ""
 "Text Fields and Text Areas need to have Size/Maxlength and Rows/Cols "
 "defined, respectively."
@@ -11211,7 +11209,7 @@ msgstr ""
 msgid "Allow non-logged-in postings"
 msgstr ""
 
-#: www/tracker/admin/index.php:132
+#: www/tracker/admin/index.php:149
 msgid "Successfully Deleted."
 msgstr ""
 
@@ -11263,7 +11261,7 @@ msgstr ""
 msgid "Custom Field Deleted"
 msgstr ""
 
-#: www/tracker/admin/updates.php:69 www/tracker/admin/updates.php:168
+#: www/tracker/admin/updates.php:69 www/tracker/admin/updates.php:167
 msgid "Error inserting an element"
 msgstr ""
 
@@ -11279,8 +11277,8 @@ msgstr ""
 msgid "Canned Response Inserted"
 msgstr ""
 
-#: www/tracker/admin/updates.php:113 www/tracker/admin/updates.php:272
-#: www/tracker/admin/updates.php:286
+#: www/tracker/admin/updates.php:113 www/tracker/admin/updates.php:269
+#: www/tracker/admin/updates.php:283
 msgid "Error updating"
 msgstr ""
 
@@ -11288,19 +11286,19 @@ msgstr ""
 msgid "Canned Response Updated"
 msgstr ""
 
-#: www/tracker/admin/updates.php:198 www/tracker/admin/updates.php:230
+#: www/tracker/admin/updates.php:197 www/tracker/admin/updates.php:228
 msgid "Error updating a custom field"
 msgstr ""
 
-#: www/tracker/admin/updates.php:201
+#: www/tracker/admin/updates.php:200
 msgid "Custom Field updated"
 msgstr ""
 
-#: www/tracker/admin/updates.php:233
+#: www/tracker/admin/updates.php:231
 msgid "Element updated"
 msgstr ""
 
-#: www/tracker/admin/updates.php:275
+#: www/tracker/admin/updates.php:272
 msgid "Tracker Updated"
 msgstr ""
 
