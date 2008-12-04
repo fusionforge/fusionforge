@@ -650,7 +650,7 @@ msgstr ""
 "Licencia: %4$s\n"
 "\n"
 "Por favor, visite esta dirección para aprobar o rechazar este proyecto:\n"
-"http://%5$s/admin/approve-pending.php"
+"%5$s"
 
 #: common/include/Group.class.php:2244 common/include/Group.class.php:2260
 #, php-format

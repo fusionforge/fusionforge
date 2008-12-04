@@ -619,7 +619,7 @@ msgstr ""
 "ライセンス: %4$s\n"
 "\n"
 "以下のURLにてこのプロジェクトを許可、もしくは断って下さい。 \n"
-"http://%5$s/admin/approve-pending.php"
+"%5$s"
 
 #: common/include/Group.class.php:2244 common/include/Group.class.php:2260
 #, php-format

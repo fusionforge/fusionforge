@@ -659,7 +659,7 @@ msgstr ""
 "Lisence: %4$s\n"
 "\n"
 "Var vänlig besök följande URL för att godkänna eller avslå detta projekt:\n"
-"http://%5$s/admin/approve-pending.php"
+"%5$s"
 
 #: common/include/Group.class.php:2244 common/include/Group.class.php:2260
 #, php-format

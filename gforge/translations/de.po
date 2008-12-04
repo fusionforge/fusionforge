@@ -666,7 +666,7 @@ msgstr ""
 "\n"
 "Bitte besuchen Sie die folgende URL, um dieses Projekt zu genehmigen oder "
 "abzuweisen:\n"
-"http://%5$s/admin/approve-pending.php"
+"%5$s"
 
 #: common/include/Group.class.php:2244 common/include/Group.class.php:2260
 #, php-format

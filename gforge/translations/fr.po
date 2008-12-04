@@ -642,7 +642,7 @@ msgid "There is no administrator to send the mail."
 msgstr "Il n'y a pas d'administrateur à qui envoyer le courrier"
 
 #: common/include/Group.class.php:2228
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "New %1$s Project Submitted\n"
 "\n"
@@ -662,7 +662,7 @@ msgstr ""
 "Soumis par : %6$s (%7$s)\n"
 "\n"
 "Visitez l'URL suivante pour approuver ou refuser ce projet:\n"
-"http://%5$s/admin/approve-pending.php"
+"%5$s"
 
 #: common/include/Group.class.php:2244 common/include/Group.class.php:2260
 #, php-format

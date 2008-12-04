@@ -643,7 +643,7 @@ msgstr ""
 "License: %4$s\n"
 "\n"
 "Please visit the following URL to approve or reject this project:\n"
-"http://%5$s/admin/approve-pending.php"
+"%5$s"
 
 #: common/include/Group.class.php:2244 common/include/Group.class.php:2260
 #, php-format

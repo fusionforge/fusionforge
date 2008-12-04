@@ -642,7 +642,7 @@ msgstr ""
 "授權方式：%4$s\n"
 "\n"
 "請瀏覽下面網址審核這個專案：\n"
-"http://%5$s/admin/approve-pending.php"
+"%5$s"
 
 #: common/include/Group.class.php:2244 common/include/Group.class.php:2260
 #, php-format
