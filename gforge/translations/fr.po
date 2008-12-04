@@ -797,7 +797,6 @@ msgid "Insert Failed"
 msgstr "L'insertion a échouée."
 
 #: common/include/User.class.php:362
-#, fuzzy, php-format
 msgid ""
 "Thank you for registering on the %3$s web site. You have\n"
 "account with username %1$s created for you. In order\n"
