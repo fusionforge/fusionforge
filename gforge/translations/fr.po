@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-02 21:11+0100\n"
+"POT-Creation-Date: 2008-12-04 16:06+0100\n"
 "PO-Revision-Date: 2008-10-22 22:19+0100\n"
 "Last-Translator: Aljeux <aljeux@free.fr>\n"
 "Language-Team: LANGUAGE <aljeux@free.fr>\n"
@@ -815,22 +815,22 @@ msgid ""
 "\n"
 "-- the %3$s staff\n"
 msgstr ""
-"Merci de vous être enregistré sur le site %4$s. \n"
+"Merci de vous être enregistré sur le site %3$s. \n"
 "Vous avez maintenant un compte du nom de %1$s. \n"
 "Pour terminer votre inscription, suivez le lien : \n"
 "\n"
-"<http://%2$s/account/verify.php?confirm_hash=_%3$s>\n"
+"<%2$s>\n"
 "\n"
 " (Si vous ne voyez rien ci-dessus, c'est probablement en raison d'un bogue "
 "de votre client de messagerie.\n"
 "Utilisez le lien ci-dessous en prenant garde qu'il soit entré sur une seule "
 "ligne)\n"
 "\n"
-"http://%2$s/account/verify.php?confirm_hash=_%3$s\n"
+"%2$s\n"
 "\n"
 "Profitez du site.\n"
 "\n"
-"-- L'équipe de %4$s\n"
+"-- L'équipe de %3$s\n"
 
 #: common/include/User.class.php:382
 #, php-format
@@ -1722,13 +1722,6 @@ msgstr "Surveillance activée"
 msgid "Tracker Monitoring Deactivated"
 msgstr "Surveillance arrêtée"
 
-#: config/easyforge.free.fr/custom/index_std.php:12
-#: config/localhost.org/custom/index_std.php:12 deb-specific/index_std.php:11
-#: www/export/projnews.php:82 www/forum/include/ForumHTML.class.php:80
-#: www/include/project_home.php:408 www/index_std.php:62
-msgid "Latest News"
-msgstr "Dernières annonces"
-
 #: cronjobs/massmail.php:142
 #, php-format
 msgid ""
@@ -1836,9 +1829,11 @@ msgstr ""
 "register/\">enregistrez votre projet</A>.</P><P>Merci... et profitez du "
 "site !</P>"
 
-#: include/File_Passwd.php:209
-msgid "The crypt function is not available in this version of PHP."
-msgstr "La fonction crypt n'est pas disponible dans cette version de PHP."
+#: deb-specific/index_std.php:11 www/export/projnews.php:82
+#: www/forum/include/ForumHTML.class.php:80 www/include/project_home.php:408
+#: www/index_std.php:62
+msgid "Latest News"
+msgstr "Dernières annonces"
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:64
 msgid "Links to related CVS commits"
@@ -3179,11 +3174,52 @@ msgstr ""
 msgid "Send Lost PW Hash"
 msgstr "Envoyer une clé de hachage pour mot de passe perdu"
 
+#: www/account/pending-resend.php:50
+#, fuzzy
+msgid "Pending Account"
+msgstr "Compte en attente"
+
+#: www/account/pending-resend.php:52
+msgid ""
+"Your email confirmation has been resent. Visit the link\n"
+"\tin this email to complete the registration process."
+msgstr ""
+"Un courrier électronique de confirmation vient de vous être envoyé."
+"Suivez le lien qui vous a été envoyé pour activer votre compte."
+
 #: www/account/pending-resend.php:61
 msgid "Fill in a user name and click 'Submit' to resend the confirmation email"
 msgstr ""
 "Saisissez un nom d'utilisateur et validez pour envoyer le courrier de "
 "confirmation"
+
+#: www/account/pending-resend.php:67 www/activity/index.php:115
+#: www/admin/admin_table.php:197 www/admin/cronman.php:47
+#: www/admin/index.php:122 www/admin/userlist.php:184
+#: www/include/vote_function.php:267 www/my/bookmark_add.php:53
+#: www/my/bookmark_edit.php:64 www/news/admin/index.php:155
+#: www/news/admin/index.php:300 www/news/news_utils.php:54
+#: www/news/submit.php:134 www/pm/add_task.php:44 www/pm/add_task.php:126
+#: www/pm/add_task.php:140 www/pm/admin/index.php:222
+#: www/pm/admin/index.php:268 www/pm/admin/index.php:307
+#: www/pm/deletetask.php:37 www/pm/mod_task.php:38 www/pm/mod_task.php:196
+#: www/project/admin/editimages.php:233 www/project/admin/roleedit.php:261
+#: www/project/request.php:69 www/register/projectinfo.php:201
+#: www/survey/include/SurveyHTML.class.php:539 www/tracker/add.php:28
+#: www/tracker/add.php:57 www/tracker/add.php:119
+#: www/tracker/admin/form-addcanned.php:52
+#: www/tracker/admin/form-addextrafield.php:114
+#: www/tracker/admin/form-addextrafieldoption.php:55
+#: www/tracker/admin/form-clonetracker.php:38
+#: www/tracker/admin/form-extrafieldcopy.php:71
+#: www/tracker/admin/form-updatecanned.php:29
+#: www/tracker/admin/form-updateextrafield.php:49
+#: www/tracker/admin/form-updateextrafieldelement.php:50
+#: www/tracker/admin/form-updatetracker.php:49
+#: www/tracker/admin/form-uploadtemplate.php:14 www/tracker/admin/ind.php:150
+#: www/tracker/deleteartifact.php:33 www/tracker/mod-limited.php:50
+msgid "Submit"
+msgstr "Soumettre"
 
 #: www/account/register.php:79
 #, php-format
@@ -3359,33 +3395,6 @@ msgstr "Début"
 #: www/reporting/usertime.php:86
 msgid "End"
 msgstr "Fin"
-
-#: www/activity/index.php:115 www/admin/admin_table.php:197
-#: www/admin/cronman.php:47 www/admin/index.php:122 www/admin/userlist.php:184
-#: www/include/vote_function.php:267 www/my/bookmark_add.php:53
-#: www/my/bookmark_edit.php:64 www/news/admin/index.php:155
-#: www/news/admin/index.php:300 www/news/news_utils.php:54
-#: www/news/submit.php:134 www/pm/add_task.php:44 www/pm/add_task.php:126
-#: www/pm/add_task.php:140 www/pm/admin/index.php:222
-#: www/pm/admin/index.php:268 www/pm/admin/index.php:307
-#: www/pm/deletetask.php:37 www/pm/mod_task.php:38 www/pm/mod_task.php:196
-#: www/project/admin/editimages.php:233 www/project/admin/roleedit.php:261
-#: www/project/request.php:69 www/register/projectinfo.php:201
-#: www/survey/include/SurveyHTML.class.php:539 www/tracker/add.php:28
-#: www/tracker/add.php:57 www/tracker/add.php:119
-#: www/tracker/admin/form-addcanned.php:52
-#: www/tracker/admin/form-addextrafield.php:114
-#: www/tracker/admin/form-addextrafieldoption.php:55
-#: www/tracker/admin/form-clonetracker.php:38
-#: www/tracker/admin/form-extrafieldcopy.php:71
-#: www/tracker/admin/form-updatecanned.php:29
-#: www/tracker/admin/form-updateextrafield.php:49
-#: www/tracker/admin/form-updateextrafieldelement.php:50
-#: www/tracker/admin/form-updatetracker.php:49
-#: www/tracker/admin/form-uploadtemplate.php:14 www/tracker/admin/ind.php:150
-#: www/tracker/deleteartifact.php:33 www/tracker/mod-limited.php:50
-msgid "Submit"
-msgstr "Soumettre"
 
 #: www/activity/index.php:123 www/reporting/projecttime.php:87
 #: www/reporting/sitetime.php:82 www/reporting/sitetimebar.php:85
@@ -4534,8 +4543,9 @@ msgstr ""
 "Utilisez le champ ci-dessous pour trouver des utilisateurs correspondant à "
 "un critère donné portant sur le nom d'utilisateur %1$s, le nom complet, ou "
 "l'adresse email.  La recherche porte sur des sous-chaînes, et il est "
-"possible d'utiliser « %% » pour chercher une sous-shaîne quelconque.  Cliquez "
-"sur un nom d'utilisateur pour le désabonner des envois de messages en masse."
+"possible d'utiliser « %% » pour chercher une sous-shaîne quelconque.  "
+"Cliquez sur un nom d'utilisateur pour le désabonner des envois de messages "
+"en masse."
 
 #: www/admin/unsubscribe.php:105
 msgid "Show users matching pattern"
@@ -8516,8 +8526,8 @@ msgid ""
 msgstr ""
 "<strong>Administration :</strong>Si vous souhaitez appliquer des changements "
 "à tous les objets sélectionnés ci-dessus, utilisez ces contrôles pour "
-"changer les propriétés, et cliquez (une seule fois) sur « Mise à jour massive "
-"»."
+"changer les propriétés, et cliquez (une seule fois) sur « Mise à jour "
+"massive »."
 
 #: www/pm/browse_task.php:363 www/pm/mod_task.php:48
 msgid "Subproject"
@@ -9777,11 +9787,11 @@ msgid ""
 "li><li>Search engines throughout the site</li></ul><p/>Unix Name:<br/>"
 msgstr ""
 "<h3>5. Nom Unix du projet</h3>\n"
-"<p>En plus du nom complet du projet, vous devez choisir un nom « Unix » court."
-"</p><p>Du fait de son utilisation à de nombreux endroits sur le site, le « "
-"nom Unix » est soumis à plusieurs restrictions :</p><ul><li>Il doit être "
-"unique</li><li>Il doit comprendre entre 3 et 15 caractères</li><li>Il ne "
-"peut contenir que des lettres (minuscules), des chiffres et des tirets</"
+"<p>En plus du nom complet du projet, vous devez choisir un nom « Unix » "
+"court.</p><p>Du fait de son utilisation à de nombreux endroits sur le site, "
+"le « nom Unix » est soumis à plusieurs restrictions :</p><ul><li>Il doit "
+"être unique</li><li>Il doit comprendre entre 3 et 15 caractères</li><li>Il "
+"ne peut contenir que des lettres (minuscules), des chiffres et des tirets</"
 "li><li>Il ne peut être choisi parmi certains noms réservés</li><li>Il ne "
 "changera pas tout au long de la vie du projet</li></ul>\n"
 "<p>Ce nom Unix est important, car il est utilisé des manières suivantes :</"
@@ -12412,6 +12422,9 @@ msgstr "Supprimer ce filtre"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Aucun nom d'utilisateur n'a été fourni"
+
+#~ msgid "The crypt function is not available in this version of PHP."
+#~ msgstr "La fonction crypt n'est pas disponible dans cette version de PHP."
 
 #~ msgid "Public Forum"
 #~ msgstr "Forum public"

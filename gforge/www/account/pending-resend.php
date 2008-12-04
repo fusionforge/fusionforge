@@ -47,10 +47,10 @@ if (getStringFromRequest('submit')) {
 	
 	?>
 
-	<h2>Pending Account</h2>
+	<h2><?php echo _('Pending Account')?></h2>
 	<p>
-	Your email confirmation has been resent. Visit the link
-	in this email to complete the registration process.
+	<?php echo _('Your email confirmation has been resent. Visit the link
+	in this email to complete the registration process.');?>
 	</p>
 
 <?php
@@ -64,7 +64,7 @@ echo _('Fill in a user name and click \'Submit\' to resend the confirmation emai
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <p><?php echo _('Login name:'); ?>
 <br /><input type="text" name="loginname" /></p>
-<p><input type="submit" name="submit" value="<?php echo "Submit"; ?>" /></p>
+<p><input type="submit" name="submit" value="<?php echo _('Submit'); ?>" /></p>
 </form>
 
 <?php $HTML->footer(array()); ?>
