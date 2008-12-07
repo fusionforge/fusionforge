@@ -91,9 +91,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 <ul>
 	<li><a href="grouplist.php"><?php echo _('Display Full Group List/Edit Groups'); ?></a></li>
 
-	<li>
-	<?php
-	echo _('Display Groups Beginning with :').' ';
+	<li><?php echo _('Display Groups Beginning with :').' ';
 	for ($i=0; $i < count($abc_array); $i++) {
 		echo '<a href="grouplist.php?group_name_search='.$abc_array[$i].'">'.$abc_array[$i].'</a>|';
 	}
