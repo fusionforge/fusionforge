@@ -23,6 +23,7 @@ $_order = getStringFromRequest('_order');
 $_resolution = getStringFromRequest('_resolution');
 $_category_id = getIntFromRequest('_category_id');
 $_size = getIntFromRequest('_size');
+$max_rows = getIntFromRequest('max_rows');
 
 $ptf->setup($offset,$_order,$max_rows,'custom',$_assigned_to,$_status,$_category_id);
 if ($ptf->isError()) {
