@@ -1071,7 +1071,7 @@ echo db_error();
 		<form name="quicknavform">
 			<select name="quicknav" onChange="location.href=document.quicknavform.quicknav.value">';
 				$ret .= '
-				<option value="">Quick Jump To...</option>';
+				<option value="">'._('Quick Jump To...').'</option>';
 				for ($i=0; $i<db_numrows($res); $i++) {
 					$ret .= '
 				<option value="'.util_make_url_g (db_result($res,$i,'unix_group_name'),db_result($res,$i,'group_id')).'">'.db_result($res,$i,'group_name').'</option>';

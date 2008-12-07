@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-02 21:11+0100\n"
+"POT-Creation-Date: 2008-12-07 14:18-0700\n"
 "PO-Revision-Date: 2007-03-13 19:44+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -901,7 +901,7 @@ msgstr "Fitxeroak"
 
 #: common/include/group_section_texts.php:13
 #: plugins/quota_management/www/quota_project.php:78 www/activity/index.php:66
-#: www/activity/index.php:166 www/admin/index.php:128
+#: www/activity/index.php:166 www/admin/index.php:126
 #: www/include/Layout.class.php:594 www/news/index.php:37
 #: www/news/submit.php:102 www/themes/gforge-simple-theme/Theme.class.php:570
 #: www/themes/gforge/Theme.class.php:554
@@ -1009,7 +1009,7 @@ msgstr "Kargu/Posizio"
 #: common/include/rbac_texts.php:46 common/include/rbac_texts.php:48
 #: common/include/rbac_texts.php:50 common/include/rbac_texts.php:52
 #: www/include/html.php:242 www/include/html.php:308 www/include/html.php:372
-#: www/include/html.php:401 www/include/html.php:442 www/pm/ganttpage.php:66
+#: www/include/html.php:401 www/include/html.php:442 www/pm/ganttpage.php:73
 #: www/tracker/include/ArtifactTypeHtml.class.php:280
 #: www/tracker/include/ArtifactTypeHtml.class.php:319
 #: www/tracker/include/ArtifactTypeHtml.class.php:424
@@ -1216,11 +1216,11 @@ msgstr "Proiektu kategoria: izena eta esleipena derrigorrezko eremuak dira"
 msgid "No ProjectGroups Found"
 msgstr "Ez da proiektuaren taldea aurkitu"
 
-#: common/pm/ProjectTask.class.php:689
+#: common/pm/ProjectTask.class.php:691
 msgid "Circular Dependency Detected'"
 msgstr "Menpekotasun zirkularra antzeman da"
 
-#: common/pm/ProjectTask.class.php:1109 common/tracker/Artifact.class.php:1194
+#: common/pm/ProjectTask.class.php:1113 common/tracker/Artifact.class.php:1194
 #: common/tracker/Artifact.class.php:1290
 #: cronjobs/send_pending_items_mail.php:98
 #: plugins/projects_hierarchy/www/softwaremap.php:322
@@ -1665,7 +1665,7 @@ msgstr ""
 #: www/frs/admin/editrelease.php:251 www/frs/admin/index.php:147
 #: www/news/admin/index.php:131 www/people/editjob.php:174
 #: www/people/viewjob.php:77 www/pm/browse_task.php:122
-#: www/pm/detail_task.php:107 www/pm/ganttpage.php:161 www/pm/mod_task.php:143
+#: www/pm/detail_task.php:107 www/pm/ganttpage.php:168 www/pm/mod_task.php:143
 #: www/pm/mod_task.php:160 www/reporting/usersummary.php:107
 #: www/tracker/admin/form-addextrafield.php:102
 #: www/tracker/admin/form-addextrafieldoption.php:49
@@ -1725,13 +1725,6 @@ msgstr ""
 #: common/tracker/ArtifactType.class.php:577
 msgid "Tracker Monitoring Deactivated"
 msgstr ""
-
-#: config/easyforge.free.fr/custom/index_std.php:12
-#: config/localhost.org/custom/index_std.php:12 deb-specific/index_std.php:11
-#: www/export/projnews.php:82 www/forum/include/ForumHTML.class.php:80
-#: www/include/project_home.php:408 www/index_std.php:62
-msgid "Latest News"
-msgstr "Azken albisteak"
 
 #: cronjobs/massmail.php:142
 #, php-format
@@ -1799,9 +1792,11 @@ msgid ""
 "site.</p>"
 msgstr ""
 
-#: include/File_Passwd.php:209
-msgid "The crypt function is not available in this version of PHP."
-msgstr ""
+#: deb-specific/index_std.php:11 www/export/projnews.php:82
+#: www/forum/include/ForumHTML.class.php:80 www/include/project_home.php:408
+#: www/index_std.php:62
+msgid "Latest News"
+msgstr "Azken albisteak"
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:64
 msgid "Links to related CVS commits"
@@ -3058,10 +3053,49 @@ msgstr ""
 msgid "Send Lost PW Hash"
 msgstr "Pasahitzaren Hash kodea bidali"
 
+#: www/account/pending-resend.php:50
+#, fuzzy
+msgid "Pending Account"
+msgstr "Kontu berria"
+
+#: www/account/pending-resend.php:52
+msgid ""
+"Your email confirmation has been resent. Visit the link\n"
+"\tin this email to complete the registration process."
+msgstr ""
+
 #: www/account/pending-resend.php:61
 msgid "Fill in a user name and click 'Submit' to resend the confirmation email"
 msgstr ""
 "Jarri erabiltzaile izen bat 'Bidali' sakatu onespen mezua berriz bidaltzeko"
+
+#: www/account/pending-resend.php:67 www/activity/index.php:115
+#: www/admin/admin_table.php:197 www/admin/cronman.php:47
+#: www/admin/index.php:120 www/admin/userlist.php:184
+#: www/include/vote_function.php:267 www/my/bookmark_add.php:53
+#: www/my/bookmark_edit.php:64 www/news/admin/index.php:155
+#: www/news/admin/index.php:300 www/news/news_utils.php:54
+#: www/news/submit.php:134 www/pm/add_task.php:44 www/pm/add_task.php:126
+#: www/pm/add_task.php:140 www/pm/admin/index.php:222
+#: www/pm/admin/index.php:268 www/pm/admin/index.php:307
+#: www/pm/deletetask.php:37 www/pm/mod_task.php:38 www/pm/mod_task.php:196
+#: www/project/admin/editimages.php:233 www/project/admin/roleedit.php:261
+#: www/project/request.php:69 www/register/projectinfo.php:201
+#: www/survey/include/SurveyHTML.class.php:539 www/tracker/add.php:28
+#: www/tracker/add.php:57 www/tracker/add.php:119
+#: www/tracker/admin/form-addcanned.php:52
+#: www/tracker/admin/form-addextrafield.php:114
+#: www/tracker/admin/form-addextrafieldoption.php:55
+#: www/tracker/admin/form-clonetracker.php:38
+#: www/tracker/admin/form-extrafieldcopy.php:71
+#: www/tracker/admin/form-updatecanned.php:29
+#: www/tracker/admin/form-updateextrafield.php:49
+#: www/tracker/admin/form-updateextrafieldelement.php:50
+#: www/tracker/admin/form-updatetracker.php:49
+#: www/tracker/admin/form-uploadtemplate.php:14 www/tracker/admin/ind.php:150
+#: www/tracker/deleteartifact.php:33 www/tracker/mod-limited.php:50
+msgid "Submit"
+msgstr "Bidali"
 
 #: www/account/register.php:79
 #, php-format
@@ -3231,33 +3265,6 @@ msgstr ""
 #: www/reporting/usertime.php:86
 msgid "End"
 msgstr ""
-
-#: www/activity/index.php:115 www/admin/admin_table.php:197
-#: www/admin/cronman.php:47 www/admin/index.php:122 www/admin/userlist.php:184
-#: www/include/vote_function.php:267 www/my/bookmark_add.php:53
-#: www/my/bookmark_edit.php:64 www/news/admin/index.php:155
-#: www/news/admin/index.php:300 www/news/news_utils.php:54
-#: www/news/submit.php:134 www/pm/add_task.php:44 www/pm/add_task.php:126
-#: www/pm/add_task.php:140 www/pm/admin/index.php:222
-#: www/pm/admin/index.php:268 www/pm/admin/index.php:307
-#: www/pm/deletetask.php:37 www/pm/mod_task.php:38 www/pm/mod_task.php:196
-#: www/project/admin/editimages.php:233 www/project/admin/roleedit.php:261
-#: www/project/request.php:69 www/register/projectinfo.php:201
-#: www/survey/include/SurveyHTML.class.php:539 www/tracker/add.php:28
-#: www/tracker/add.php:57 www/tracker/add.php:119
-#: www/tracker/admin/form-addcanned.php:52
-#: www/tracker/admin/form-addextrafield.php:114
-#: www/tracker/admin/form-addextrafieldoption.php:55
-#: www/tracker/admin/form-clonetracker.php:38
-#: www/tracker/admin/form-extrafieldcopy.php:71
-#: www/tracker/admin/form-updatecanned.php:29
-#: www/tracker/admin/form-updateextrafield.php:49
-#: www/tracker/admin/form-updateextrafieldelement.php:50
-#: www/tracker/admin/form-updatetracker.php:49
-#: www/tracker/admin/form-uploadtemplate.php:14 www/tracker/admin/ind.php:150
-#: www/tracker/deleteartifact.php:33 www/tracker/mod-limited.php:50
-msgid "Submit"
-msgstr "Bidali"
 
 #: www/activity/index.php:123 www/reporting/projecttime.php:87
 #: www/reporting/sitetime.php:82 www/reporting/sitetimebar.php:85
@@ -3557,7 +3564,7 @@ msgid "Job"
 msgstr "Lana"
 
 #: www/admin/cronman.php:54 www/forum/admin/ForumAdmin.class.php:342
-#: www/forum/message.php:98 www/sendmessage.php:139
+#: www/forum/message.php:98 www/sendmessage.php:140
 #: www/tracker/include/ArtifactHtml.class.php:54
 msgid "Message"
 msgstr "Mezua"
@@ -3661,7 +3668,7 @@ msgid "[Project Admin]"
 msgstr "[Proiektuaren administraria]"
 
 #: www/admin/groupedit.php:114 www/admin/groupedit.php:126
-#: www/admin/index.php:112 www/admin/index.php:118 www/admin/useredit.php:132
+#: www/admin/index.php:110 www/admin/index.php:116 www/admin/useredit.php:132
 #: www/admin/useredit.php:138
 msgid "Pending (P)"
 msgstr "Zintzilik (P)"
@@ -3670,7 +3677,7 @@ msgstr "Zintzilik (P)"
 msgid "Incomplete (I)"
 msgstr "Bukatugabea (I)"
 
-#: www/admin/groupedit.php:125 www/admin/index.php:116
+#: www/admin/groupedit.php:125 www/admin/index.php:114
 #: www/admin/useredit.php:34 www/admin/useredit.php:133
 #: www/admin/useredit.php:139
 msgid "Active (A)"
@@ -3776,7 +3783,7 @@ msgstr "Erakutsi erabiltzaileak hasten direla:"
 msgid "Search <em>(userid, username, realname, email)</em>"
 msgstr "Bilatu <em>(userid, username, realname, email)</em>"
 
-#: www/admin/index.php:63 www/admin/index.php:106
+#: www/admin/index.php:63 www/admin/index.php:104
 msgid "get"
 msgstr "Lortu:"
 
@@ -3807,113 +3814,113 @@ msgstr "Onesteke dauden projektuak: <strong>%1$s</strong>"
 msgid "Display Full Group List/Edit Groups"
 msgstr "Taldeen zerrenda osoa erakutsi / Taldeak aldatu"
 
-#: www/admin/index.php:96
+#: www/admin/index.php:94
 msgid "Display Groups Beginning with :"
 msgstr "Erakutsi taldeak hasten direla:"
 
-#: www/admin/index.php:103
+#: www/admin/index.php:101
 msgid "Search <em>(groupid, group unix name, full name)</em>"
 msgstr "Bilatu <em>(groupid, group unix name, full name)</em>"
 
-#: www/admin/index.php:111
+#: www/admin/index.php:109
 msgid "Register New Project"
 msgstr "Proiektu berria erregistratu"
 
-#: www/admin/index.php:112 www/admin/index.php:114
+#: www/admin/index.php:110 www/admin/index.php:112
 msgid "Groups with status"
 msgstr "Estatusa duten taldeak"
 
-#: www/admin/index.php:112
+#: www/admin/index.php:110
 #, fuzzy
 msgid "(New Project Approval)"
 msgstr "%1$s -ek onartutako proiektua"
 
-#: www/admin/index.php:117
+#: www/admin/index.php:115
 msgid "Hold (H)"
 msgstr "Geldituak (H)"
 
-#: www/admin/index.php:124
+#: www/admin/index.php:122
 msgid "Private Groups"
 msgstr "Talde pribatua"
 
-#: www/admin/index.php:131
+#: www/admin/index.php:129
 msgid "Approve/Reject"
 msgstr "Onartu/Baztertu"
 
-#: www/admin/index.php:131
+#: www/admin/index.php:129
 msgid "Front-page news"
 msgstr ""
 
-#: www/admin/index.php:135 www/project/admin/project_admin_utils.php:79
+#: www/admin/index.php:133 www/project/admin/project_admin_utils.php:79
 msgid "Stats"
 msgstr "Estatistikak"
 
-#: www/admin/index.php:138
+#: www/admin/index.php:136
 msgid "Site-Wide Stats"
 msgstr "Webgunearen estadistikak"
 
-#: www/admin/index.php:142
+#: www/admin/index.php:140
 msgid "Trove Project Tree"
 msgstr "Proiektuen zuhaitz mapa"
 
-#: www/admin/index.php:145
+#: www/admin/index.php:143
 msgid "Display Trove Map"
 msgstr "Proiektuen mapa erakutsi:"
 
-#: www/admin/index.php:146
+#: www/admin/index.php:144
 msgid "Add to the Trove Map"
 msgstr "Proiektuen mapa gehitu"
 
-#: www/admin/index.php:149
+#: www/admin/index.php:147
 msgid "Site Utilities"
 msgstr "Webgunearen erabilgarritasunak"
 
-#: www/admin/index.php:151 www/admin/massmail.php:87
+#: www/admin/index.php:149 www/admin/massmail.php:87
 #, php-format
 msgid "Mail Engine for %1$s Subscribers"
 msgstr "Posta motorra %1$s harpidedunentzako"
 
-#: www/admin/index.php:152
+#: www/admin/index.php:150
 msgid "Site Mailings Maintenance"
 msgstr "Webgune honetako korrespondentziaren mantentze lanak"
 
-#: www/admin/index.php:153
+#: www/admin/index.php:151
 msgid "Add, Delete, or Edit File Types"
 msgstr "Fitxero motak gehitu, ezabatu edo aldatu"
 
-#: www/admin/index.php:154
+#: www/admin/index.php:152
 msgid "Add, Delete, or Edit Processors"
 msgstr "Prozesadoreak gehitu, ezabatu edo aldatu"
 
-#: www/admin/index.php:155
+#: www/admin/index.php:153
 msgid "Add, Delete, or Edit Themes"
 msgstr "Gaiak gehitu, ezabatu edo aldatu"
 
-#: www/admin/index.php:156
+#: www/admin/index.php:154
 msgid "Add, Delete, or Edit Licenses"
 msgstr ""
 
-#: www/admin/index.php:157
+#: www/admin/index.php:155
 msgid "Recent logins"
 msgstr "Berriki izenpetutakoak"
 
-#: www/admin/index.php:158
+#: www/admin/index.php:156
 msgid "Cron Manager"
 msgstr "Cron Kudeatzailea"
 
-#: www/admin/index.php:159
+#: www/admin/index.php:157
 msgid "Plugin Manager"
 msgstr ""
 
-#: www/admin/index.php:160
+#: www/admin/index.php:158
 msgid "Config Manager"
 msgstr ""
 
-#: www/admin/index.php:169
+#: www/admin/index.php:167
 msgid "Virtual Host Admin Tool"
 msgstr "Virtual Host administrazioaren tresna"
 
-#: www/admin/index.php:173
+#: www/admin/index.php:171
 msgid "Project Database Administration"
 msgstr "Proiektuen datu baseen administrazioa"
 
@@ -3988,7 +3995,7 @@ msgstr "Kolaboratzaileak (proban dago)"
 #: www/developer/diary.php:52 www/developer/diary.php:79
 #: www/news/admin/index.php:135 www/news/admin/index.php:280
 #: www/news/admin/news_admin_utils.php:59 www/news/submit.php:116
-#: www/sendmessage.php:136
+#: www/sendmessage.php:137
 msgid "Subject"
 msgstr "Gaia"
 
@@ -4998,6 +5005,21 @@ msgstr ""
 msgid "Your search did not match any documents"
 msgstr ""
 
+#: www/export/rss_project.php:19
+#, fuzzy
+msgid "News Data"
+msgstr "Data gabe"
+
+#: www/export/rss_project.php:21
+msgid ""
+"To get Project News or New Project Releases of a specific project use the "
+"Links below."
+msgstr ""
+
+#: www/export/rss_project.php:40
+msgid "Go back"
+msgstr ""
+
 #: www/forum/admin/ForumAdmin.class.php:79 www/forum/admin/index.php:83
 #: www/forum/admin/monitor.php:45
 #, fuzzy
@@ -5970,7 +5992,7 @@ msgstr "Pakete"
 msgid "Release &amp; Notes"
 msgstr "Bertsioaren oharrak"
 
-#: www/frs/index.php:106 www/pm/ganttpage.php:165
+#: www/frs/index.php:106 www/pm/ganttpage.php:172
 #: www/project/admin/editimages.php:264
 msgid "Size"
 msgstr "Tamaina"
@@ -6106,7 +6128,7 @@ msgstr ""
 "oso erabilgarria da gehienbat akatsentzako eta sostengu eskaerentzako, non "
 "erabiltzaileak arazo larria eduki lezake bere proiektuan."
 
-#: www/help/tracker.php:62 www/pm/ganttpage.php:164
+#: www/help/tracker.php:62 www/pm/ganttpage.php:171
 msgid "Resolution"
 msgstr "Erabakia"
 
@@ -6469,6 +6491,10 @@ msgstr "Denak"
 #, fuzzy
 msgid "none"
 msgstr "Egina"
+
+#: www/include/Layout.class.php:1074
+msgid "Quick Jump To..."
+msgstr ""
 
 #: www/include/SmilieSupportHtml.class.php:53
 msgid "Smilies's list"
@@ -6863,7 +6889,7 @@ msgstr "Esperientzia"
 msgid "Login name"
 msgstr "Erabiltzailearen izena:"
 
-#: www/include/user_home.php:54 www/sendmessage.php:133
+#: www/include/user_home.php:54 www/sendmessage.php:134
 msgid "Your Email Address"
 msgstr "Posta elektronikoa"
 
@@ -7540,7 +7566,7 @@ msgstr ""
 #: www/people/people_utils.php:363 www/people/people_utils.php:429
 #: www/pm/add_task.php:36 www/pm/browse_task.php:123
 #: www/pm/browse_task.php:177 www/pm/browse_task.php:347
-#: www/pm/detail_task.php:31 www/pm/ganttpage.php:162 www/pm/mod_task.php:43
+#: www/pm/detail_task.php:31 www/pm/ganttpage.php:169 www/pm/mod_task.php:43
 #: www/pm/mod_task.php:210 www/reporting/timeadd.php:156
 #: www/snippet/package.php:144 www/snippet/submit.php:109
 msgid "Category"
@@ -7800,7 +7826,7 @@ msgstr "¡Eremu guztiak derrigorrezkoak dira!"
 #: www/people/editprofile.php:292 www/people/skills_utils.php:40
 #: www/people/skills_utils.php:154 www/pm/add_task.php:81
 #: www/pm/browse_task.php:89 www/pm/browse_task.php:171
-#: www/pm/detail_task.php:50 www/pm/ganttpage.php:74 www/pm/mod_task.php:87
+#: www/pm/detail_task.php:50 www/pm/ganttpage.php:81 www/pm/mod_task.php:87
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:38
 #: www/tracker/detail.php:110 www/tracker/mod.php:205
 msgid "Start Date"
@@ -7809,7 +7835,7 @@ msgstr ""
 #: www/people/editprofile.php:293 www/people/skills_utils.php:41
 #: www/people/skills_utils.php:155 www/pm/add_task.php:96
 #: www/pm/browse_task.php:90 www/pm/browse_task.php:173
-#: www/pm/detail_task.php:54 www/pm/ganttpage.php:75 www/pm/mod_task.php:101
+#: www/pm/detail_task.php:54 www/pm/ganttpage.php:82 www/pm/mod_task.php:101
 #: www/reporting/usersummary.php:110
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:39
 #: www/tracker/detail.php:111 www/tracker/mod.php:206
@@ -8006,12 +8032,12 @@ msgid "admin"
 msgstr "Administrazioa"
 
 #: www/pm/add_task.php:50 www/pm/browse_task.php:91 www/pm/browse_task.php:175
-#: www/pm/detail_task.php:38 www/pm/ganttpage.php:76 www/pm/mod_task.php:55
+#: www/pm/detail_task.php:38 www/pm/ganttpage.php:83 www/pm/mod_task.php:55
 msgid "Percent Complete"
 msgstr "Osatutako ehunekoa"
 
 #: www/pm/add_task.php:61 www/pm/browse_task.php:88 www/pm/browse_task.php:169
-#: www/pm/detail_task.php:61 www/pm/ganttpage.php:73
+#: www/pm/detail_task.php:61 www/pm/ganttpage.php:80
 #: www/pm/include/ProjectTaskHTML.class.php:58
 #: www/pm/include/ProjectTaskHTML.class.php:97 www/pm/mod_task.php:67
 #: www/tracker/detail.php:109 www/tracker/mod.php:204
@@ -8203,7 +8229,7 @@ msgid "Unassigned"
 msgstr "Esleitu gabea"
 
 #: www/pm/browse_task.php:87 www/pm/browse_task.php:167
-#: www/pm/ganttpage.php:72 www/pm/include/ProjectTaskHTML.class.php:57
+#: www/pm/ganttpage.php:79 www/pm/include/ProjectTaskHTML.class.php:57
 #: www/tracker/detail.php:108 www/tracker/mod.php:203
 msgid "Task Id"
 msgstr "Atazaren ID-a"
@@ -8212,13 +8238,13 @@ msgstr "Atazaren ID-a"
 msgid "Detailed"
 msgstr ""
 
-#: www/pm/browse_task.php:121 www/pm/ganttpage.php:160
+#: www/pm/browse_task.php:121 www/pm/ganttpage.php:167
 #: www/tracker/browse.php:144 www/tracker/browse.php:238
 #: www/tracker/query.php:166 www/tracker/query.php:270
 msgid "Assignee"
 msgstr "Nork esleitua"
 
-#: www/pm/browse_task.php:124 www/pm/ganttpage.php:163
+#: www/pm/browse_task.php:124 www/pm/ganttpage.php:170
 msgid "Sort On"
 msgstr "Nola antolatua"
 
@@ -8226,7 +8252,7 @@ msgstr "Nola antolatua"
 msgid "Detail View"
 msgstr ""
 
-#: www/pm/browse_task.php:126 www/pm/ganttpage.php:166
+#: www/pm/browse_task.php:126 www/pm/ganttpage.php:173
 #: www/snippet/snippet_utils.php:111
 #: www/tracker/include/ArtifactTypeHtml.class.php:48
 msgid "Browse"
@@ -8450,20 +8476,20 @@ msgstr "Jatorrizko azalpena"
 msgid "Hours"
 msgstr ""
 
-#: www/pm/ganttpage.php:33 www/pm/ganttpage.php:178
+#: www/pm/ganttpage.php:33 www/pm/ganttpage.php:185
 #: www/pm/include/ProjectGroupHTML.class.php:59
 msgid "Gantt Chart"
 msgstr "Gantt diagrama"
 
-#: www/pm/ganttpage.php:87 www/pm/ganttpage.php:91
+#: www/pm/ganttpage.php:94 www/pm/ganttpage.php:98
 msgid "Months"
 msgstr "Hilabeteak"
 
-#: www/pm/ganttpage.php:88
+#: www/pm/ganttpage.php:95
 msgid "Weeks"
 msgstr "Asteak"
 
-#: www/pm/ganttpage.php:89 www/project/stats/project_stats_utils.php:205
+#: www/pm/ganttpage.php:96 www/project/stats/project_stats_utils.php:205
 msgid "Days"
 msgstr "Egunak"
 
@@ -9993,11 +10019,11 @@ msgid ""
 "<b>project id</b> (<b>group_id</b>) and <b>Project Name</b>.</span>"
 msgstr ""
 
-#: www/sendmessage.php:130
+#: www/sendmessage.php:131
 msgid "Your Name"
 msgstr "Zure izena"
 
-#: www/sendmessage.php:143
+#: www/sendmessage.php:144
 msgid "Send Message"
 msgstr "Mezua bidali"
 
