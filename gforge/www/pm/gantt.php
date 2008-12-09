@@ -49,9 +49,13 @@ if ($_size==640) {
 $graph->SetMargin(10,10,25,10);
 
 // Add title and subtitle
-$graph->title-> Set($pg->getName());
-//global $sys_gantt_title_font_family,$sys_gantt_title_font_style,$sys_gantt_title_font_size;
-//settitlefont($graph,$sys_gantt_title_font_family,$sys_gantt_title_font_style,$sys_gantt_title_font_size);
+$graph->title->Set($pg->getName());
+
+if (isset($gantt_title_font_family)) {
+	$graph->title->SetFont( constant($gantt_title_font_family), 
+		constant($gantt_title_font_style), $gantt_title_font_size);
+}
+
 //$graph->subtitle-> Set("(Draft version)");
 
 // Show day, week and month scale
@@ -68,7 +72,10 @@ if ($_resolution == 'Days') {
 $graph->scale->week->SetStyle(WEEKSTYLE_FIRSTDAY);
 
 // Make the week scale font smaller than the default
-$graph->scale->week->SetFont(FF_FONT0 );
+if (isset($gantt_title_font_family)) {
+	$graph->scale->week->SetFont( constant($gantt_title_font_family), FS_NORMAL, 9);
+	$graph->scale->month->SetFont( constant($gantt_title_font_family), FS_NORMAL, 9);
+}
 
 // Use the short name of the month together with a 2 digit year
 // on the month scale
@@ -86,10 +93,12 @@ for ($i=0; $i<$rows; $i++) {
 	$activity[$i]->SetFillColor ("red");
 	$activity[$i]->progress->Set( (( $pt_arr[$i]->getPercentComplete() ) ? ($pt_arr[$i]->getPercentComplete()/100) : 0));
 	$activity[$i]->progress->SetPattern(BAND_RDIAG, "blue");
-	$activity[$i]->title->SetFont( FF_ARIAL, FS_NORMAL,9);
 
-//	global $sys_gantt_task_font_family,$sys_gantt_task_font_style,$sys_gantt_task_font_size;
-//	settitlefont($activity[$i],$sys_gantt_title_font_family,$sys_gantt_title_font_style,$sys_gantt_title_font_size);
+	if (isset($gantt_task_font_family)) {
+		$activity[$i]->title->SetFont( constant($gantt_task_font_family), 
+			constant($gantt_task_font_style), $gantt_task_font_size);
+	}
+
 	// Finally add the bar to the graph
 	$graph->Add( $activity[$i] );
 }
