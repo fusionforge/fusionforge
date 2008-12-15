@@ -1,19 +1,19 @@
-diff -u gforge/deb-specific/db-upgrade.pl gforge-rpm/deb-specific/db-upgrade.pl
---- gforge/deb-specific/db-upgrade.pl	2005-02-13 03:45:59.000000000 +0100
-+++ gforge-rpm/deb-specific/db-upgrade.pl	2005-02-20 16:34:35.001940285 +0100
-@@ -1991,7 +1991,7 @@
- $dbh->disconnect ;
- 
- sub get_pg_version () {
--    my $command = q(dpkg -s postgresql | awk '/^Version: / { print $2 }') ;
-+    my $command = q(rpm -q --qf %{VERSION} postgresql) ;
+diff -ru gforge/deb-specific/db-upgrade.pl gforge-rpm/deb-specific/db-upgrade.pl
+--- gforge/deb-specific/db-upgrade.pl	2008-11-05 18:01:46.000000000 +0100
++++ gforge-rpm/deb-specific/db-upgrade.pl	2008-11-05 18:04:13.000000000 +0100
+@@ -2836,7 +2836,7 @@
+     if (-x '/usr/bin/pg_lsclusters' ) {
+     	$command = q(/usr/bin/pg_lsclusters | grep 5432 | grep online | cut -d' ' -f1) ;
+     } else {
+-    	$command = q(dpkg -s postgresql | awk '/^Version: / { print $2 }') ;
++        my $command = q(rpm -q --qf %{VERSION} postgresql) ;
+     }
      my $version = qx($command) ;
      chomp $version ;
-     return $version ;
-diff -u gforge/deb-specific/sqlhelper.pm gforge-rpm/deb-specific/sqlhelper.pm
---- gforge/deb-specific/sqlhelper.pm	2004-05-16 18:54:58.000000000 +0200
-+++ gforge-rpm/deb-specific/sqlhelper.pm	2005-02-20 16:32:36.217311080 +0100
-@@ -264,18 +264,98 @@
+diff -ru gforge/deb-specific/sqlhelper.pm gforge-rpm/deb-specific/sqlhelper.pm
+--- gforge/deb-specific/sqlhelper.pm	2008-11-05 18:01:46.000000000 +0100
++++ gforge-rpm/deb-specific/sqlhelper.pm	2008-11-05 18:08:12.000000000 +0100
+@@ -289,18 +289,98 @@
      my $v1 = shift || 0 ;
      my $v2 = shift || 0 ;
  
