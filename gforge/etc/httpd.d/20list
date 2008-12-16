@@ -6,8 +6,8 @@
   ServerName {lists_host}
   AddHandler cgi-script .cgi
 
-  ScriptAlias /cgi-bin/mailman/ /usr/lib/mailman/cgi-bin/
-  ScriptAlias /mailman/ /usr/lib/mailman/cgi-bin/
+  ScriptAlias /cgi-bin/mailman/ /var/lib/mailman/cgi-bin/
+  ScriptAlias /mailman/ /var/lib/mailman/cgi-bin/
 
   Alias /pipermail /var/lib/mailman/archives/public
   <Directory /var/lib/mailman/archives/public>
@@ -15,12 +15,11 @@
     Options FollowSymLinks
   </Directory>
 
-# It seems to be unnecessary
-#  Alias /images/mailman /usr/share/images/mailman
-#  <Location /images/mailman>
-#    order allow,deny
-#    allow from all
-#  </Location>
+  Alias /images/mailman /usr/share/images/mailman
+  <Location /images/mailman>
+    order allow,deny
+    allow from all
+  </Location>
 
   RedirectMatch permanent ^/$ http://{lists_host}/mailman/listinfo
   LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
