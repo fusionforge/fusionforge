@@ -1,3 +1,9 @@
+2008-11-25  Roland Mas  <lolando@debian.org>
+
+	* common/include/GroupJoinRequest.class: Properly escape the
+	comments value to avoid an SQL injection
+	vulnerability (CVE-2008-2381).
+
 2007-11-04  Roland Mas  <lolando@debian.org>
 
 	* Several fixes to remove vulnerabilities against symlink attacks
