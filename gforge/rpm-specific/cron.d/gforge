@@ -97,7 +97,7 @@ MAILTO=""
 #
 #       Create the shell users accounts and groups home directories
 #
-15 * * * * root $PHP $GFORGE_PLUGINS/scmcvs/cronjobs/homedirs.php
+15 * * * * root $PHP $GFORGE/cronjobs/homedirs.php
 
 #
 #       Upload the SSH key files
