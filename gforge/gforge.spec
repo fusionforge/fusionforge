@@ -41,6 +41,7 @@ Requires: php-jpgraph php-gd
 #update sys_path_to_jpgraph in gforge.conf if you remove this line
 Requires: /var/www/jpgraph/jpgraph.php
 Requires: libnss-pgsql = 1.3
+Requires: mailman
  
 BuildRequires: perl
 
@@ -164,6 +165,7 @@ for i in common cronjobs etc rpm-specific utils www ; do
 done
 install -m 750 setup $RPM_BUILD_ROOT/%{GFORGE_DIR}/
 chmod 755 $RPM_BUILD_ROOT/%{GFORGE_DIR}/utils/fill-in-the-blanks.pl
+chmod 755 $RPM_BUILD_ROOT/%{GFORGE_DIR}/utils/install-nsspgsql.sh
 
 cp -rp db/. $RPM_BUILD_ROOT/%{GFORGE_DB_DIR}/
 cp -p deb-specific/sf-2.6-complete.sql $RPM_BUILD_ROOT/%{GFORGE_DB_DIR}/
@@ -264,6 +266,9 @@ if [ "$1" -eq "1" ]; then
  	perl -pi -e "
  		s/SERVER_ADMIN/"$adminemail"/g" %{GFORGE_CONF_DIR}/gforge.conf
  
+ 	#wrong 20list http template for mailman on rpm
+ 	rm -f %{GFORGE_CONF_DIR}/httpd.d/20list
+ 	
  	perl -pi -e "
  		s#^GFORGE_CONF_DIR=.*#GFORGE_CONF_DIR="%{GFORGE_CONF_DIR}"#g" %{SBIN_DIR}/gforge-config
  
@@ -289,13 +294,14 @@ if [ "$1" -eq "1" ]; then
  
  	[ ! -f /usr/bin/php4 ] && ln -s /usr/bin/php /usr/bin/php4
  	
- 	[ ! -f /bin/cvssh ] && ln -s %{GFORGE_DIR}/cronjobs/cvs-cron/cvssh.pl /bin/cvssh
- 	
  	chroot=`grep '^gforge_chroot:' gforge/gforge.spec | sed 's/.*:\s*\(.*\)/\1/'`
- 	if [ ! -d /var/lib/gforge/chroot/cvsroot/ ] ; then
-		mkdir -p /var/lib/gforge/chroot/cvsroot/
+ 	if [ ! -d /var/lib/gforge/chroot/ ] ; then
+		mkdir -p /var/lib/gforge/chroot/
 	fi
-	ln -s /var/lib/gforge/chroot/cvsroot /cvsroot
+	
+	#Configuration de libnss-pgsql
+	ln -s %{GFORGE_DIR}/utils/install-nsspgsql.sh /usr/sbin
+	install-nsspgsql.sh setup
 
 else
 	# upgrading database
@@ -334,8 +340,7 @@ if [ "$1" -eq "0" ]; then
  	fi
  
  	[ -L /usr/bin/php4 ] && rm -f /usr/bin/php4
- 
- 	[ -L /bin/cvssh ] && rm -f /bin/cvssh
+
 fi
 
 %clean
