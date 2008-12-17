@@ -225,7 +225,7 @@ install: build
 	install -m 755 deb-specific/install-postfix.sh $(CURDIR)/debian/gforge-mta-postfix/usr/lib/gforge/bin/
 
 	# gforge-shell-postgresql
-	install -m 755 deb-specific/install-nsspgsql.sh $(CURDIR)/debian/gforge-shell-postgresql/usr/lib/gforge/bin/
+	install -m 755 utils/install-nsspgsql.sh $(CURDIR)/debian/gforge-shell-postgresql/usr/lib/gforge/bin/
 
 	# gforge-ftp-proftpd
 	install -m 755 deb-specific/install-ftp.sh $(CURDIR)/debian/gforge-ftp-proftpd/usr/lib/gforge/bin/
