@@ -150,7 +150,7 @@ class GroupJoinRequest extends Error {
 
 		$sql="INSERT INTO group_join_request (group_id,user_id,comments,request_date)
 			VALUES ('".$this->Group->getID()."','".$user_id."',
-			'".htmlspecialchars($comments)."','".time()."')";
+			'".addslashes(htmlspecialchars($comments))."','".time()."')";
 		$result=db_query($sql);
 		if (!$result || db_affected_rows($result) < 1) {
 			$this->setError('GroupJoinRequest::create() Posting Failed '.db_error());

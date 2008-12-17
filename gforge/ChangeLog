@@ -1,3 +1,9 @@
+2008-11-25  Roland Mas  <lolando@debian.org>
+
+	* common/include/GroupJoinRequest.class: Properly escape the
+	comments value to avoid an SQL injection
+	vulnerability (CVE-2008-2381).
+
 2008-05-13  Roland Mas  <lolando@debian.org>
 
 	* utils/include.pl: Use temporary files and renaming to avoid
