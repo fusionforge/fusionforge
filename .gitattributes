@@ -2963,6 +2963,7 @@ gforge/translations/sv.po -text
 gforge/translations/th.po -text
 gforge/translations/zh_CN.po -text
 gforge/translations/zh_TW.po -text
+gforge/utils/install-nsspgsql.sh -text
 gforge/www/docman/include/vtemplate.class.php -text
 gforge/www/docman/search.php -text
 gforge/www/docman/search.tpl.html -text
