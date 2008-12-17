@@ -122,7 +122,7 @@ foreach($groups as $group) {
 		//
 		//	Read in the template file
 		//
-		$fo=fopen(dirname(__FILE__).'../../utils/default_page.php','r');
+		$fo=fopen(dirname(__FILE__).'/../../../utils/default_page.php','r');
 		$contents = '';
 		if (!$fo) {
 			$err .= 'Default Page Not Found';
@@ -162,27 +162,6 @@ foreach($groups as $group) {
 		system("chown -R $user:$group $groupdir_prefix/$group");
 	}*/
 	system("chown -R $sys_apache_user:$sys_apache_group $groupdir_prefix/$group");
-}
-
-//
-// Move CVS trees for deleted groups
-//
-$res8 = db_query("SELECT unix_group_name FROM deleted_groups WHERE isdeleted = 0;");
-$err .= db_error();
-$rows	 = db_numrows($res8);
-for($k = 0; $k < $rows; $k++) {
-	$deleted_group_name = db_result($res8,$k,'unix_group_name');
-
-	if(!is_dir($cvsdir_prefix."/.deleted"))
-		system("mkdir ".$cvsdir_prefix."/.deleted");
-		
-	system("mv -f $cvsdir_prefix/$deleted_group_name/ $cvsdir_prefix/.deleted/");
-	system("chown -R root:root $cvsdir_prefix/.deleted/$deleted_group_name");
-	system("chmod -R o-rwx $cvsdir_prefix/.deleted/$deleted_group_name");
-	
-	
-	$res9 = db_query("UPDATE deleted_groups set isdeleted = 1 WHERE unix_group_name = '$deleted_group_name';" );
-	$err .= db_error();
 }
 
 
