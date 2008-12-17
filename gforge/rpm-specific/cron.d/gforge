@@ -9,6 +9,7 @@
 
 # Change path to the GForge directory.
 GFORGE="/usr/share/gforge"
+GFORGE_PLUGINS="/usr/lib/gforge/plugins"
 
 # Change paths to the GForge directory.
 # Don't reference $GFORGE because this won't work!
@@ -89,32 +90,37 @@ MAILTO=""
 #
 #
 #
-#       Create the /etc/* files
+#       Create the /etc/* files : only usefull if the sys_account_manager_type=UNIX
 #
-#10 * * * * root $PHP $GFORGE/cronjobs/cvs-cron/usergroup.php
+#10 * * * * root $PHP $GFORGE_PLUGINS/scmcvs/cronjobs/usergroup.php
+
+#
+#       Create the shell users accounts and groups home directories
+#
+15 * * * * root $PHP $GFORGE_PLUGINS/scmcvs/cronjobs/homedirs.php
 
 #
 #       Upload the SSH key files
 #
-#15 * * * * root $PHP $GFORGE/cronjobs/cvs-cron/ssh_create.php
+15 * * * * root $PHP $GFORGE_PLUGINS/scmcvs/cronjobs/ssh_create.php
 
 #
 #       Create the blank cvs trees
 #
-#20 * * * * root $PHP $GFORGE/cronjobs/cvs-cron/cvs.php
+20 * * * * root $PHP $GFORGE_PLUGINS/scmcvs/cronjobs/cvs.php
 
 #
 #       Daily stats collection
 #
-###incomplete 20 1 * * * root $PHP $GFORGE/cronjobs/cvs-cron/history_parse.php
+20 1 * * * root $PHP $GFORGE_PLUGINS/scmcvs/cronjobs/history_parse.php
 
 #
 #       Create the new mailing lists
 #
-#06 * * * * root $PHP $GFORGE/cronjobs/mail/mailing_lists_create.php
+06 * * * * root $PHP $GFORGE/cronjobs/mail/mailing_lists_create.php
 
 #
 #       Create the /etc/aliases file
 #
-#08 * * * * root $PHP $GFORGE/cronjobs/mail/mailaliases.php
+08 * * * * root $PHP $GFORGE/cronjobs/mail/mailaliases.php
 
