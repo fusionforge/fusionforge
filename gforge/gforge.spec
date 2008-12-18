@@ -166,6 +166,7 @@ done
 install -m 750 setup $RPM_BUILD_ROOT/%{GFORGE_DIR}/
 chmod 755 $RPM_BUILD_ROOT/%{GFORGE_DIR}/utils/fill-in-the-blanks.pl
 chmod 755 $RPM_BUILD_ROOT/%{GFORGE_DIR}/utils/install-nsspgsql.sh
+chmod 755 $RPM_BUILD_ROOT/%{GFORGE_DIR}/www/scm/viewvc/bin/cgi/viewvc.cgi
 
 cp -rp db/. $RPM_BUILD_ROOT/%{GFORGE_DB_DIR}/
 cp -p deb-specific/sf-2.6-complete.sql $RPM_BUILD_ROOT/%{GFORGE_DB_DIR}/
