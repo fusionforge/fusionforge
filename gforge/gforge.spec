@@ -42,6 +42,7 @@ Requires: php-jpgraph php-gd
 Requires: /var/www/jpgraph/jpgraph.php
 Requires: libnss-pgsql >= 1.4
 Requires: mailman
+Requires: nscd
  
 BuildRequires: perl
 
