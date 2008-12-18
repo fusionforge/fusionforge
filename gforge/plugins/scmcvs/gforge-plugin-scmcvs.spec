@@ -130,8 +130,6 @@ if [ "$1" = "1" ] ; then
 			mkdir -p /var/lib/gforge/chroot/cvsroot/
 		fi
 		ln -s /var/lib/gforge/chroot/cvsroot /cvsroot
-		
-		ln -s %{GFORGE_DIR}/www/env.inc.php %{PLUGINS_LIB_DIR}
 else
         # upgrade
         :
