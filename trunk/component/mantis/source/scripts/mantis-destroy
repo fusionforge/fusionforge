@@ -1,0 +1,173 @@
+#!/bin/bash
+#---------------------------------------------------------------------------
+# Novaforge is a registered trade mark from Bull S.A.S
+# Copyright (C) 2007 Bull S.A.S.
+# 
+# http://novaforge.org/
+#
+#
+# This file has been developped within the Novaforge(TM) project from Bull S.A.S
+# and contributed back to GForge community.
+#
+# GForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# GForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#---------------------------------------------------------------------------
+
+#
+# Source functions
+#
+
+. %DATADIR%/%NAME%/config/functions
+
+#
+# Constants
+#
+
+DB_USER="%NAME%"
+
+#
+# Variables
+#
+
+DB_NAME=""
+MYSQL_PASSWORD=""
+
+#
+# Main script
+#
+
+init_variables "#"
+echo -e "$PREFIX_CHAR$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR %FRIENDLY_NAME% : destruction of database and data files"
+echo -e "$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR This script will remove configuration and destroy"
+echo -e "$PREFIX_CHAR the database and data files for all projects and users."
+echo -e "$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR It should be executed if you want to loose all your data."
+echo -e "$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR -> Continue ('y' or 'n') ?"
+echo -en "$PREFIX_CHAR -> "
+read CHOICE
+if [ "$CHOICE" != "y" ]; then
+        exit 1
+fi
+#
+# Read configuration
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Reading configuration from file '%SYSCONFDIR%/%NAME%/.config'"
+	DB_NAME=""
+	if [ -e %SYSCONFDIR%/%NAME%/.config ] ; then
+		. %SYSCONFDIR%/%NAME%/.config
+		if [ -z "$DB_NAME" ] ; then
+			echo -e "$PREFIX_CHAR -> Parameter DB_NAME is empty or not defined"
+		fi
+	else
+		echo -e "$PREFIX_CHAR -> No file to read from"
+	fi
+fi
+#
+# Get password of MySQL's root
+#
+echo -e "$PREFIX_CHAR Please type the password of MySQL 'root' user ('q' to quit)"
+echo -en "$PREFIX_CHAR -> "
+read CHOICE
+if [ "$CHOICE" = "q" ] ; then
+	exit 1
+else
+	MYSQL_PASSWORD=$CHOICE
+fi
+#
+# Switch to maintenance mode
+#
+echo -e "$PREFIX_CHAR Switching to maintenance mode"
+ln -sf %DATADIR%/%NAME%/www/mantis_offline.php %SYSCONFDIR%/%NAME%/mantis_offline.php
+if [ $? -ne 0 ] ; then
+	echo -e "$PREFIX_CHAR -> Error while creating symbolic link '%SYSCONFDIR%/%NAME%/mantis_offline.php' to file '%DATADIR%/%NAME%/config/mantis_offline.php'"
+fi
+#
+# Revoke rights of MySQL user
+#
+echo -e "$PREFIX_CHAR Revoking MySQL user '$DB_USER' rights"
+if [ -n "$MYSQL_PASSWORD" ]; then
+	OPTION="--password=$MYSQL_PASSWORD"
+else
+	OPTION=""
+fi
+echo -n "REVOKE ALL ON *.* FROM '$DB_USER'@'localhost';" | mysql --database=mysql --user=root $OPTION >> /dev/null 2>&1
+if [ $? -ne 0 ] ; then
+	echo -e "$PREFIX_CHAR -> Error while revoking MySQL user rights"
+fi
+#
+# Delete MySQL user
+#
+echo -e "$PREFIX_CHAR Deleting MySQL user '$DB_USER'"
+echo -n "DELETE FROM user WHERE User='$DB_USER' AND Host='localhost'; FLUSH PRIVILEGES;" | mysql --database=mysql --user=root $OPTION >> /dev/null 2>&1
+if [ $? -ne 0 ] ; then
+	echo -e "$PREFIX_CHAR -> Error while deleting user"
+fi
+#
+# Blank configuration file
+#
+echo -e "$PREFIX_CHAR Blanking configuration file '%SYSCONFDIR%/%NAME%/config_inc.php'"
+rm -f %SYSCONFDIR%/%NAME%/config_inc.php
+touch %SYSCONFDIR%/%NAME%/config_inc.php
+chown root.%APACHE_GROUP% %SYSCONFDIR%/%NAME%/config_inc.php
+chmod 640 %SYSCONFDIR%/%NAME%/config_inc.php
+#
+# Stop mysqld service
+#
+stop_service mysqld
+#
+# Delete database
+#
+echo -e "$PREFIX_CHAR Deleting database"
+if [ -n "$DB_NAME" ] ; then
+	if [ -e %LOCALSTATEDIR%/lib/mysql/$DB_NAME ] ; then
+		rm -rf %LOCALSTATEDIR%/lib/mysql/$DB_NAME
+	else
+		echo -e "$PREFIX_CHAR -> Database directory does not exist"
+	fi
+else
+	echo -e "$PREFIX_CHAR -> Database name is empty"
+fi
+#
+# Start mysqld service
+#
+start_service mysqld
+#
+# Remove configuration
+#
+echo -e "$PREFIX_CHAR Removing file '%SYSCONFDIR%/%NAME%/.config'"
+if [ -e %SYSCONFDIR%/%NAME%/.config ] ; then
+	rm -f %SYSCONFDIR%/%NAME%/.config
+else
+	echo -e "$PREFIX_CHAR -> File does not exist"
+fi
+#
+# Remove admin password
+#
+echo -e "$PREFIX_CHAR Removing file '%SYSCONFDIR%/%NAME%/.admin'"
+if [ -e %SYSCONFDIR%/%NAME%/.admin ] ; then
+	rm -f %SYSCONFDIR%/%NAME%/.admin
+else
+	echo -e "$PREFIX_CHAR -> File does not exist"
+fi
+#
+# Delete public keys of GForge servers
+#
+echo -e "$PREFIX_CHAR Deleting public keys of GForge servers"
+rm -f %LOCALSTATEDIR%/lib/%NAME%/keys/*
+echo -e "$PREFIX_CHAR$PREFIX_CHAR"
+exit 0

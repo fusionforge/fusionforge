@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# Wrapper for the gforge-backup script
+# Parameters:
+# - backup name (default: gforge_backup_<hostname>_<YYYY-MM-DD_HH-MM-SS>.tar.gz)
+# - backup directory (default: current working directory)
+# - temporary directory (default: /tmp)
+# Each parameter may be empty: ""
+
+BACKUP_NAME="$1"
+if [ -z "$BACKUP_NAME" ] ; then
+	BACKUP_NAME="gforge_backup_`hostname --fqdn`_`date +%Y-%m-%d_%H-%M-%S`.tar.gz"
+fi
+BACKUP_DIR="$2"
+if [ -z "$BACKUP_DIR" -o ! -d "$BACKUP_DIR" ] ; then
+	BACKUP_DIR=`pwd`
+fi
+TEMP_DIR="$3"
+if [ -z "$TEMP_DIR" -o ! -d "$TEMP_DIR" ] ; then
+	TEMP_DIR="/tmp"
+fi
+BACKUP_FILE="$BACKUP_DIR/$BACKUP_NAME"
+/usr/sbin/gforge-backup <<EOT
+y
+$TEMP_DIR
+$BACKUP_FILE
+EOT
+exit $?

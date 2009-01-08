@@ -1,0 +1,11 @@
+#!/bin/sh
+
+CVS_ROOT=/cvsroot
+LIST=`/usr/bin/find $CVS_ROOT/ -type d -mindepth 1 -maxdepth 1 | /bin/grep -v -e "$CVS_ROOT/.deleted" -e "$CVS_ROOT/cvs-locks" | /bin/sed "s| | --allow-root=|g"`
+if [ -n "$LIST" ] ; then
+	/usr/bin/cvs -f --allow-root=$LIST pserver
+	exit $?
+else
+	echo "No repository available in $CVS_ROOT"
+	exit 1
+fi

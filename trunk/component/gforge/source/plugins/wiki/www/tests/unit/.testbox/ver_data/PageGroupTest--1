@@ -1,0 +1,23 @@
+a:6:{s:6:"markup";s:1:"2";s:6:"author";s:6:"a_user";s:9:"author_id";s:6:"a_user";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625920;s:8:"%content";s:470:"PageGroupTest is a test of the ~PageGroup plugin.
+
+Click the first page to start the tour of this experimental plugin.
+
+!Table of Contents
+# [PageGroupTestOne]
+# [PageGroupTestTwo]
+# [PageGroupTestThree]
+# [PageGroupTestFour]
+
+! TODO
+
+* Support ~[ name | page ~] links
+* Support Previous, Next ... image buttons
+
+%%% %%% %%% %%%
+
+----
+
+For reference, here are all the pages that link to PageGroupTest
+(note that one is missing):
+
+<?plugin BackLinks page=PageGroupTest ?>";}

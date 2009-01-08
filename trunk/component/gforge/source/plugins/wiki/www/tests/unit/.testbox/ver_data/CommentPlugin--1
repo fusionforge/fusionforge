@@ -1,0 +1,37 @@
+a:6:{s:6:"markup";s:1:"2";s:6:"author";s:6:"a_user";s:9:"author_id";s:6:"a_user";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625911;s:8:"%content";s:709:"!!! Synopsis
+
+The CommentPlugin lets you hide parts of a Wiki page without actually
+deleting the text. Comments will only be visible in the Wiki markup
+when editing or viewing the source.
+
+!!! Usage
+
+Simply place the text to be commented out between =<?plugin Comment=
+and =?>=:
+
+<verbatim>
+<?plugin Comment
+
+!!! A Hidden Section
+
+This text will not show up in the generated HTML page, but it is still
+visible when editing the WikiMarkup.
+
+?>
+</verbatim>
+
+!!! Author
+
+Martin Geisler mailto:gimpster@gimpster.com.
+
+<?plugin Comment
+
+!!! "Fuzzy" Logic
+Theorem: a cat has nine tails.
+Proof:
+    No cat has eight tails. A cat has one tail more than no cat.
+    Therefore, a cat has nine tails.
+
+?>
+----
+WikiPlugin";}

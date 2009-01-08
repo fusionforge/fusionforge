@@ -1,0 +1,1 @@
+link ../www/env.inc.php

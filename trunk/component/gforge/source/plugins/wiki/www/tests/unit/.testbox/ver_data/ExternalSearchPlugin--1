@@ -1,0 +1,60 @@
+a:6:{s:6:"markup";s:1:"2";s:6:"author";s:6:"a_user";s:9:"author_id";s:6:"a_user";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625911;s:8:"%content";s:1704:"!! Synopsis
+
+The ExternalSearchPlugin creates a form to query InterWiki~s or other
+internet sites.
+
+!! Typical Usage
+<verbatim>
+<?plugin ExternalSearch
+         url="InterWiki or URL"
+         name="button text"
+?>
+</verbatim>
+
+
+!! Arguments
+__url__:
+  Specify a wiki from the InterWikiMap or a url. Any text entered by
+  the user will be appended to the search url. The string placeholder
+  '__=%s=__' can be used to insert a search query into the url rather
+  than appending it.
+
+__name__:
+  Text to display in the submit button. For InterWiki sites the
+  default is the wiki name, for other urls the default is the text
+  "External Search".
+
+__formsize__:
+  Specify the input area size. (default: 30 characters)
+
+__debug__:
+  Don't really redirect to the external site, just print out the url
+  that would be redirected to.
+
+
+!! Examples
+
+<verbatim>
+  url="http://sunir.org/apps/meta.pl?"       name="Metawiki Search"
+  url="http://www.usemod.com/cgi-bin/mb.pl?" name="MeatBall Search"
+  url=php-lookup
+  url=php-function
+  url=PhpWiki
+</verbatim>
+
+Perform a full-text search on multiple wiki's:
+<?plugin ExternalSearch url="http://sunir.org/apps/meta.pl?" name="Metawiki Search" ?>
+
+Perform a full-text search on [MeatBall|MeatBall:SiteSearch] wiki:
+<?plugin ExternalSearch url="http://www.usemod.com/cgi-bin/mb.pl?" name="MeatBall Search" ?>
+
+Search the PHP web site for a function name:
+<?plugin ExternalSearch url=php-lookup name="PHP Lookup" ?>
+
+Enter the name of a PHP function to view the documentation page:%%%
+<?plugin ExternalSearch url=php-function ?>
+
+Enter any existing page name on PhpWiki to jump to that page:
+<?plugin ExternalSearch url=PhpWiki ?>
+----
+PhpWikiDocumentation WikiPlugin";}

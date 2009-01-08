@@ -1,0 +1,15 @@
+Date: Sun, 16 Nov 2003 03:12:58 +0100
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.5pre)
+X-Rcs-Id: $Id: UpLoad,v 1.2 2004/11/03 16:43:56 rurban Exp $
+Content-Type: application/x-phpwiki;
+  pagename=UpLoad;
+  pgsrc_version="2 $Revision: 1.2 $";
+  flags="";
+  markup=2;
+  charset=iso-8859-1
+Content-Transfer-Encoding: binary
+
+__Uploade eine Datei, die dann mit dem "Upload~:" Prefix zugänglich sein sein wird.__
+----
+<?plugin UpLoad ?>
+----

@@ -1,0 +1,32 @@
+<?php // -*-html-*- ?>
+<!-- $Id: navbar.tmpl,v 1.6 2005/02/02 18:54:16 rurban Exp $ -->
+<!-- The top navigation/search bar -->
+<form action="<?= WikiURL(_("TitleSearch"))?>"
+      method="get" accept-charset="<?=$charset?>">
+  <div id="navbuttons">
+   <ul>
+    <?=$SEP?>
+    <?php if (strrchr($page->getName(), "/Discussion")) { ?>
+        <?= WikiLink(substr($page->getName(), 0, 
+                     strlen($page->getName()) - strlen("/Discussion")), "", 
+                     _("Go to Page")) ?>
+    <?php } else { ?>
+        <?= WikiLink($page->getName()."/Discussion", "", _("Discussion")) ?>
+    <?php } ?>
+    </li>
+   <?=$SEP?><?= WikiLink(_("HomePage"), "","HomePage") ?></li>
+   <?=$SEP?><?= WikiLink(_("RecentChanges"), "","News") ?></li>
+   <?=$SEP?><?= WikiLink(_("FindPage"), "","Search") ?></li>
+    <?php if (!empty($revision)) { ?>
+     <?=$SEP?><?= Button(array('action'=>'LikePages'),_("LikePages"),$page->getName()) ?></li>
+     <?=$SEP?><?= Button(array('action'=>'BackLinks'), _("BackLinks"),$page->getName()) ?></li>
+    <?php } ?>
+   <?=$SEP?><?= WikiLink(_("UpLoad"), "","UpLoad") ?></li>
+    <?php if (!empty($user) && $user->isAdmin()) { ?>
+     <?=$SEP?><?= WikiLink(_("PhpWikiAdministration"), "","Admin") ?></li>
+    <?php } ?>
+    <?php if (!empty($user) && $user->isSignedIn()) { ?>
+     <?=$SEP?><?= WikiLink(_("UserPreferences"), "","Preferences") ?><?php } ?></li>
+    </ul>
+  </div>
+</form>

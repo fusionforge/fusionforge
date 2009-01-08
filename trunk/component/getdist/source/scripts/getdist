@@ -1,0 +1,78 @@
+#!/bin/sh
+#---------------------------------------------------------------------------
+# This file is part of the NovaForge project
+# Novaforge is a registered trade mark from Bull S.A.S
+# Copyright (C) 2007 Bull S.A.S.
+# http://novaforge.org
+#
+# This file is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This file is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#---------------------------------------------------------------------------
+
+DEBIAN=`test -f /etc/debian_version && cat /etc/debian_version || echo unknown`
+
+if [ $DEBIAN == 4.0 ] ; then
+	echo "deb4"
+else
+
+DISTRIBUTIONS="aurora:/etc/aurora-release ydl:/etc/yellowdog-release aurox:/etc/aurox-release fc:/etc/fedora-release rh:/etc/redhat-release mdv:/etc/mandriva-release mdk:/etc/mandrake-release suse:/etc/SuSE-release"
+DIST=""
+VERS=""
+FILE=""
+
+check_distribution()
+{
+	if [ -e $FILE ] ; then
+		VERS="`rpm -qf $FILE --queryformat='%{VERSION}' 2>/dev/null`"
+		if [ $? -eq 0 ] ; then
+			VERS="`echo $VERS | cut -c1`"
+			if [ $? -ne 0 ] ; then
+				VERS=""
+			fi
+		else
+			VERS=""
+		fi
+	else
+		VERS=""
+	fi
+}
+
+for DISTRIBUTION in $DISTRIBUTIONS ; do
+	DIST="`echo $DISTRIBUTION | cut -d':' -f1`"
+	VERS=""
+	FILE="`echo $DISTRIBUTION | cut -d':' -f2-`"
+	check_distribution
+	if [ -n "$VERS" ] ; then
+		break
+	fi
+done
+if [ -n "$VERS" -a "$DIST" = "rh" ] ; then
+	RPM="`rpm -qf /etc/redhat-release --queryformat='%{NAME}' 2>/dev/null`"
+	if [ $? -eq 0 ] ; then
+		if [ "$RPM" = "redhat-release" -o "$RPM" = "centos-release" ] ; then
+			if [ "$VERS" = "3" -o "$VERS" = "4" -o "$VERS" = "5" ]; then
+				DIST="rhel"
+			fi
+		fi
+	else
+		VERS=""
+	fi
+fi
+if [ -n "$VERS" ] ; then
+	echo $DIST$VERS
+else
+	echo unknown
+fi
+fi
+exit 0

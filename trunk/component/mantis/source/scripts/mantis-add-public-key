@@ -1,0 +1,164 @@
+#!/bin/bash
+#---------------------------------------------------------------------------
+# Novaforge is a registered trade mark from Bull S.A.S
+# Copyright (C) 2007 Bull S.A.S.
+# 
+# http://novaforge.org/
+#
+#
+# This file has been developped within the Novaforge(TM) project from Bull S.A.S
+# and contributed back to GForge community.
+#
+# GForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# GForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#---------------------------------------------------------------------------
+
+#
+# Source functions
+#
+
+. %DATADIR%/%NAME%/config/functions
+
+#
+# Constants
+#
+
+#
+# Variables
+#
+
+GFORGE_SERVER_FQDN=`hostname --fqdn`
+RSA_PUBLIC_KEY_FILE=""
+
+#
+# Main script
+#
+
+init_variables "#"
+echo -e "$PREFIX_CHAR$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR %FRIENDLY_NAME% : add a public key"
+echo -e "$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR This script will copy the RSA public key of a GForge server"
+echo -e "$PREFIX_CHAR to a local directory."
+echo -e "$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR It should be executed when you need to use %FRIENDLY_NAME%"
+echo -e "$PREFIX_CHAR through a GForge server."
+echo -e "$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR -> Continue ('y' or 'n') ?"
+echo -en "$PREFIX_CHAR -> "
+read CHOICE
+if [ "$CHOICE" != "y" ]; then
+        EXIT=1
+fi
+#
+# Get the hostname of the GForge server
+#
+if [ $EXIT -eq 0 ] ; then
+	if [ -z "$GFORGE_SERVER_FQDN" ] ; then
+		echo -e "$PREFIX_CHAR Please type the FQDN hostname of the GForge server ('q' to quit)"
+	else
+		echo -e "$PREFIX_CHAR Please type the FQDN hostname of the GForge server (default: '$GFORGE_SERVER_FQDN', 'q' to quit)"
+	fi
+	echo -en "$PREFIX_CHAR -> "
+	read CHOICE
+	if [ "$CHOICE" = "q" ] ; then
+		EXIT=1
+	else
+		if [ -n "$CHOICE" ]; then
+			GFORGE_SERVER_FQDN=$CHOICE
+		else
+			if [ -z "$GFORGE_SERVER_FQDN" ] ; then
+				echo -e "$PREFIX_CHAR -> Invalid choice"
+				EXIT=1
+			else
+				if [ -e %SYSCONFDIR%/gforge/plugins/apibull/auth_key.public ] ; then
+					RSA_PUBLIC_KEY_FILE=%SYSCONFDIR%/gforge/plugins/apibull/auth_key.public
+				fi
+			fi
+		fi
+		if [ $EXIT -eq 0 ] ; then
+			if [ -e %LOCALSTATEDIR%/lib/%NAME%/keys/$GFORGE_SERVER_FQDN ] ; then
+				echo -e "$PREFIX_CHAR -> The file '%LOCALSTATEDIR%/lib/%NAME%/keys/$GFORGE_SERVER_FQDN' already exists"
+				EXIT=1
+			fi
+		fi
+	fi
+fi
+#
+# Get the filename of the key
+#
+if [ $EXIT -eq 0 ] ; then
+	if [ -z "$RSA_PUBLIC_KEY_FILE" ] ; then
+		echo -e "$PREFIX_CHAR Please type the full pathname of the RSA public key ('q' to quit) ?"
+	else
+		echo -e "$PREFIX_CHAR Please type the full pathname of the RSA public key (default: '$RSA_PUBLIC_KEY_FILE', 'q' to quit) ?"
+	fi
+	echo -en "$PREFIX_CHAR -> "
+	read CHOICE
+	if [ "$CHOICE" = "q" ] ; then
+		EXIT=1
+	else
+		if [ -n "$CHOICE" ]; then
+			RSA_PUBLIC_KEY_FILE=$CHOICE
+		else
+			if [ -z "$RSA_PUBLIC_KEY_FILE" ] ; then
+				echo -e "$PREFIX_CHAR -> Invalid choice"
+				EXIT=1
+			fi
+		fi
+		if [ $EXIT -eq 0 ] ; then
+			if [ ! -f "$RSA_PUBLIC_KEY_FILE" ] ; then
+				echo -e "$PREFIX_CHAR -> The file '$RSA_PUBLIC_KEY_FILE' does not exist"
+				EXIT=1
+			fi
+		fi
+	fi
+fi
+#
+# Confirm
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Checking parameters"
+	echo -e "$PREFIX_CHAR   GForge server FQDN    : $GFORGE_SERVER_FQDN"
+	echo -e "$PREFIX_CHAR   RSA public key        : $RSA_PUBLIC_KEY_FILE"
+	echo -e "$PREFIX_CHAR -> Accept ('y' or 'n') ?"
+	echo -en "$PREFIX_CHAR -> "
+	read CHOICE
+	if [ "$CHOICE" != "y" ] ; then
+		EXIT=1
+	fi
+fi
+#
+# Copy file
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Copying file '$RSA_PUBLIC_KEY_FILE' to '%LOCALSTATEDIR%/lib/%NAME%/keys/$GFORGE_SERVER_FQDN'"
+	cp $RSA_PUBLIC_KEY_FILE %LOCALSTATEDIR%/lib/%NAME%/keys/$GFORGE_SERVER_FQDN
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while copying file"
+		EXIT=1
+	else
+		chown root.root %LOCALSTATEDIR%/lib/%NAME%/keys/$GFORGE_SERVER_FQDN
+		chmod 644 %LOCALSTATEDIR%/lib/%NAME%/keys/$GFORGE_SERVER_FQDN
+		echo -e "$PREFIX_CHAR -> OK"
+	fi
+fi
+echo -e "$PREFIX_CHAR"
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR -> Success !"
+else
+	echo -e "$PREFIX_CHAR -> Failure !"
+fi
+echo -e "$PREFIX_CHAR$PREFIX_CHAR"
+exit $EXIT

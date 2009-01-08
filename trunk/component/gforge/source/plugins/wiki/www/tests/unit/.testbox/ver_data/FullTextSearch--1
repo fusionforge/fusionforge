@@ -1,0 +1,31 @@
+a:6:{s:6:"markup";s:1:"2";s:6:"author";s:6:"a_user";s:9:"author_id";s:6:"a_user";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625911;s:8:"%content";s:756:"<?plugin FullTextSearch ?>
+
+----
+
+Additional Searches:
+<?plugin WikiFormRich action=TitleSearch method=GET nobr=1 class=wikiaction
+  editbox[] name=s text=""
+  submit[]
+  checkbox[] name=case_exact
+  pulldown[] name=regex value="auto,none,glob,posix,pcre,sql" ?>
+
+<?plugin WikiFormRich action=FullTextSearch method=GET nobr=1 class=wikiaction
+  editbox[] name=s text=""
+  submit[]
+  checkbox[] name=case_exact
+  pulldown[] name=regex value="auto,none,glob,posix,pcre,sql" ?>
+
+<?plugin WikiFormRich action=FuzzyPages method=GET nobr=1 class=wikiaction
+  editbox[] name=s text=""
+  submit[]
+  checkbox[] name=case_exact ?>
+
+----
+
+Create or edit page:
+
+<?plugin-form CreatePage?>
+
+----
+
+<?plugin IncludePage page=FindPage quiet=1 section=Tips sectionhead=1 ?>";}

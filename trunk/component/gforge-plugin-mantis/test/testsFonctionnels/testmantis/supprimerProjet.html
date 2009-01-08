@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title> supprimerProjet
+    </title>
+  </head>
+  <body>
+    <table cellpadding="1" cellspacing="1" border="1">
+      <thead>
+        <tr>
+          <td rowspan="1" colspan="3">
+            supprimerProjet</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            getIdMantisProject</td>
+          <td>
+            ${projet},${MantisProjet},${url}</td>
+          <td>
+            idMantisProject</td>
+        </tr>
+        <tr>
+          <td>
+            open</td>
+          <td>
+            /plugins/mantis/deleteProject.php?project_id=${idMantisProject}</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            click</td>
+          <td>
+            sure</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            click</td>
+          <td>
+            reallysure</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            clickAndWait</td>
+          <td>
+            submit</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            verifyTextPresent</td>
+          <td>
+            Le projet Mantis a &eacute;t&eacute; supprim&eacute; avec succ&egrave;s</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

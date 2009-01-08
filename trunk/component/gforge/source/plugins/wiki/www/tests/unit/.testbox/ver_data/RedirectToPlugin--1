@@ -1,0 +1,29 @@
+a:6:{s:5:"mtime";s:10:"1045352818";s:6:"markup";s:1:"2";s:6:"author";s:6:"a_user";s:9:"author_id";s:6:"a_user";s:8:"pagetype";s:8:"wikitext";s:8:"%content";s:818:"The RedirectToPlugin can be used to redirect a user to another page.
+In other words it makes a page an _alias_ for another page.
+
+! Arguments
+
+Use only one of these arguments at a time.
+
+page |
+  The page to redirect to (a wiki page name).
+href |
+  An external URL to redirect to.  Redirection to external URLs will only work
+  on locked pages.  (If the URL contains funny characters, you'll probably have
+  to put quotes around the URL.)
+
+! Caveats
+
+The RedirectToPlugin invocation must be the first thing on a page.
+For most purposes it makes any other content on the page inaccessible.
+
+! Example
+
+A page may be made a alias for the HomePage by placing this code at the top:
+<verbatim>
+<?plugin RedirectTo page="HomePage" ?>
+</verbatim>
+
+To see the example in action, visit HomePageAlias.
+-----
+PhpWikiDocumentation";}

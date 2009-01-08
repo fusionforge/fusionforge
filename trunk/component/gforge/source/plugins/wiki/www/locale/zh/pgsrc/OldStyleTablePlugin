@@ -1,0 +1,43 @@
+Date: Tue, 17 Sep 2002 12:48:59 -0700
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.4pre)
+X-Rcs-Id: $Id: OldStyleTablePlugin,v 1.1 2004/04/29 23:59:07 rurban Exp $
+Content-Type: application/x-phpwiki;
+  pagename=OldStyleTablePlugin;
+  flags="";
+  pgsrc_version="2 $Revision: 1.1 $";
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+OldStyleTablePlugin 用來在 wiki 頁面含括使用舊風格標記語法的表格.
+
+<verbatim>
+<?plugin OldStyleTable
+||^  *Name*                |v *Cost*   |v *Notes*
+| *First*     | *Last*
+|> Jeff       |< Dairiki   |^  Cheap   |< Not worth it
+|> Marco      |< Polo      | Cheaper   |< Not available
+?>
+</verbatim>
+
+將會得到
+
+<?plugin OldStyleTable
+||^  *Name*                |v *Cost*   |v *Notes*
+| *First*     | *Last*
+|> Jeff       |< Dairiki   |^  Cheap   |< Not worth it
+|> Marco      |< Polo      | Cheaper   |< Not available
+?>
+
+置首的多重 __|__ 用來展延欄, 而 __v__ 用來展延列.
+__>__ 產生靠右對齊的欄, __<__ 產生靠左對齊的欄, 而 __^__ 則產生置中的欄 (預設).
+
+----
+
+Note that within each table cell, _new-style_ markup is used.  You can
+only use inline markup --- no block level markup is allowed within
+table cells.
+
+(Using old-style markup wouldn't make much sense, since one can't
+include multi-line plugin invocations using the old-style markup
+rules.)

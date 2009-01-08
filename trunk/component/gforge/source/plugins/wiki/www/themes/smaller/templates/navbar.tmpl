@@ -1,0 +1,25 @@
+<?php // -*-html-*- ?>
+<!-- $Id: navbar.tmpl,v 1.6 2005/02/02 18:54:16 rurban Exp $ -->
+<!-- The top navigation/search bar -->
+<form action="<?= WikiURL(_("TitleSearch"))?>"
+      method="get" accept-charset="<?=$charset?>">
+  <div id="navbuttons">
+   <?= WikiLink(_("RecentChanges"), "","News") ?>
+   <?=$SEP?><?= WikiLink(_("FindPage"), "","Search:") ?>
+   <input type="hidden" name="auto_redirect" value="1" />
+      <input type="text"  name="s" size="12" maxlength="256"
+             title='<?=_("Quick Search")?>'
+             onmouseover="window.status='<?=_("Quick Search")?>'; return true;"
+             onmouseout="window.status=''; return true;" />
+    <?php if (!empty($revision)) { ?>
+     <?=$SEP?><?= Button(array('action'=>'LikePages'),_("LikePages"),$page->getName()) ?>
+     <?=$SEP?><?= Button(array('action'=>'BackLinks'), _("BackLinks"),$page->getName()) ?>
+    <?php } ?>
+    <?php if (!empty($user) && $user->isAdmin()) { ?>
+     <?=$SEP?><?= WikiLink(_("PhpWikiAdministration"), "","Admin") ?>
+    <?php } ?>
+    <?php if (!empty($user) && $user->isSignedIn()) { ?>
+     <?=$SEP?><?= WikiLink(_("UserPreferences"), "","Preferences") ?>
+    <?php } ?>
+  </div>
+</form>

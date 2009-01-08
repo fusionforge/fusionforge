@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN" "../../dtd/docbookx.dtd" [
+	<!ENTITY % authors SYSTEM "entities/authors.ent">
+	%authors;
+	<!ENTITY % xinclude SYSTEM "entities/xinclude.ent">
+	%xinclude;
+
+	<!ENTITY introduction "introduction/introduction.xml">
+	<!ENTITY installation_guide "installation_guide/installation_guide.xml">
+	<!ENTITY administration_guide "administration_guide/administration_guide.xml">
+	<!ENTITY user_guide "user_guide/user_guide.xml">
+	<!ENTITY contribution_guide "contribution_guide/contribution_guide.xml">
+]>
+
+<book lang="en-US" id="gforge_manual">
+	<bookinfo>
+		<title>GForge Manual</title>
+		<authorgroup>
+			&tom_copeland;
+			&roland_mas;
+			&ken_mccullagh;
+			&tim_perdue;
+			&guillaume_smet;
+			&reinhard_spisser;
+		</authorgroup>
+	</bookinfo>
+
+	<xi:include href="&introduction;" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="&installation_guide;" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="&administration_guide;" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="&user_guide;" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="&contribution_guide;" xmlns:xi="http://www.w3.org/2001/XInclude" />
+
+</book>

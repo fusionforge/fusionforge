@@ -1,0 +1,20 @@
+#/**
+#  *
+#  * svntracker message catalog (English)
+#  *
+#  * GForge: Breaking Down the Barriers to Open Source Development
+#  * Copyright 1999-2001 (c) VA Linux Systems
+#  *                2004 (c) Francisco Gimeno <kikov@kikov.org>
+#  * http://sourceforge.net
+#  *
+#  * @version   $Id: Base.tab,v 1.1 2005/10/11 18:46:41 danper Exp $
+#  *
+#  */
+plugin_svntracker	title	Links to related SVN commits
+plugin_svntracker	file	Filename
+plugin_svntracker	prevVersion	Previous Version
+plugin_svntracker	actualVersion	Actual Version
+plugin_svntracker	log	Log Message
+plugin_svntracker	date	Date
+plugin_svntracker	diffto	Diff To
+plugin_svntracker	author	Author

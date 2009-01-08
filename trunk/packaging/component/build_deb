@@ -1,0 +1,673 @@
+#!/bin/sh
+
+#
+# This script builds a component
+#
+# Parameters:
+# $1: target directory
+# $2: SVN location (trunk, tags, branches)
+# $3: component name
+# $4: source version
+# $5: package release
+# $6: branch identifier
+
+#
+# Environment variable that MUST be defined
+# by the calling script
+#
+# SVN_URL SVN_USER SVN_PASS
+
+#
+# Binaries
+#
+BIN_AWK="/usr/bin/awk"
+BIN_CAT="/bin/cat"
+BIN_CP="/bin/cp"
+BIN_CUT="/bin/cut"
+BIN_ECHO="/bin/echo"
+BIN_GETDIST="/usr/bin/getdist"
+BIN_LS="/bin/ls"
+BIN_MKDIR="/bin/mkdir"
+BIN_MV="/bin/mv"
+BIN_RM="/bin/rm"
+BIN_RPM="/usr/bin/rpm"
+BIN_DPKG="/usr/bin/dpkg"
+BIN_DPKG_DEB="/usr/bin/dpkg-deb"
+BIN_SVN="/usr/bin/svn"
+BIN_TAR="/bin/tar"
+BIN_CHMOD="/bin/chmod"
+BIN_EXPORT="export"
+
+#
+# Parameters
+#
+TARGET_DIR=""
+SVN_LOCATION=""
+SVN_COMPONENT=""
+SVN_VERSION=""
+SVN_RELEASE=""
+SVN_BRANCH=""
+
+#
+# Internal variables
+#
+EXIT=0
+BUILD=1
+SVN_PATH_PACKAGE=""
+SVN_PATH_SOURCE=""
+SVN_LOG=""
+DEB_LOG=""
+
+#
+# Config variables
+#
+TARGET_OS=""
+USE_EXTRA_VERSION_LEVEL=0
+CREATE_TARBALL=0
+TARBALL_COMPONENT=""
+TARBALL_VERSION=""
+EXCLUDE_FROM_TARBALL=""
+USE_EXTRA_SOURCES=0
+EXTRA_SOURCES_DIRS=""
+DEB_COMPONENT=""
+DEB_VERSION=""
+DEB_RELEASE=""
+DEB_ARCH=""
+DEB_SUBCOMPONENTS=""
+POST_DEB_SCRIPT=""
+
+#
+# Functions
+#
+
+invert_string()
+# $1: string to invert
+{
+	STRING=$1
+	GNIRTS=""
+	while [ -n "$STRING" ] ; do
+		GNIRTS="`$BIN_ECHO $STRING | $BIN_CUT -c1`$GNIRTS"
+		STRING=`$BIN_ECHO $STRING | $BIN_CUT -c2-`
+	done
+}
+
+delete_dir()
+# $1: dir to delete
+{
+	DIR=$1
+	if [ -n "$DIR" ] ; then
+		if [ "$DIR" != "/" ] ; then
+			$BIN_RM -rf $DIR
+		else
+			$BIN_ECHO "-> The name of the directory to delete is '/' !!!"
+			EXIT=1
+		fi
+	else
+		$BIN_ECHO "-> The name of the directory to delete is empty"
+		EXIT=1
+	fi
+}
+
+readconfig()
+# $1: target directory
+# $2: SVN location (trunk, tags, branches)
+# $3: component name
+# $4: source version
+# $5: package release
+# $6: branch identifier
+{
+	if [ $EXIT -eq 0 ] ; then
+		$BIN_ECHO "Reading configuration"
+		if [ -z "$1" ] ; then
+			$BIN_ECHO "-> Target directory parameter is missing"
+			EXIT=1
+		else
+			if [ -d $1 ] ; then
+				TARGET_DIR=$1
+			else
+				$BIN_ECHO "-> Target directory '$1' does not exist"
+				EXIT=1
+			fi
+		fi
+		if [ -z "$2" ] ; then
+			$BIN_ECHO "-> SVN location parameter is missing"
+			EXIT=1
+		else
+			if [ "$2" != "trunk" -a "$2" != "tags" -a "$2" != "branches" ] ; then
+				$BIN_ECHO "-> SVN location '$2' is not supported"
+				EXIT=1
+			else
+				SVN_LOCATION=$2
+			fi
+		fi
+		if [ -z "$3" ] ; then
+			$BIN_ECHO "-> SVN component parameter is missing"
+			EXIT=1
+		else
+			SVN_COMPONENT=$3
+		fi
+		if [ -z "$4" ] ; then
+			if [ "$SVN_LOCATION" = "tags" -o "$SVN_LOCATION" = "branches" ] ; then
+				$BIN_ECHO "-> SVN version parameter is missing"
+				EXIT=1
+			fi
+		else
+			SVN_VERSION=$4
+		fi
+		if [ -z "$5" ] ; then
+			if [ "$SVN_LOCATION" = "tags" -o "$SVN_LOCATION" = "branches" ] ; then
+				$BIN_ECHO "-> SVN release parameter is missing"
+				EXIT=1
+			fi
+		else
+			SVN_RELEASE=$5
+		fi
+		if [ -z "$6" ] ; then
+			if [ "$SVN_LOCATION" = "branches" ] ; then
+				$BIN_ECHO "-> SVN branch parameter is missing"
+				EXIT=1
+			fi
+		else
+			SVN_BRANCH=$6
+		fi
+		if [ -x $BIN_GETDIST ] ; then
+			HOST_OS=`$BIN_GETDIST`
+		else
+			$BIN_ECHO "-> Binary '$BIN_GETDIST' is missing"
+			EXIT=1
+		fi
+		if [ ! -x $BIN_SVN ] ; then
+			$BIN_ECHO "-> Binary '$BIN_SVN' is missing"
+			EXIT=1
+		fi
+	fi
+	if [ $EXIT -eq 0 ] ; then
+		case "$SVN_LOCATION" in
+			trunk)
+				SVN_VERSION=""
+				SVN_RELEASE=""
+				SVN_BRANCH=""
+				SVN_PATH_PACKAGE="trunk/component/$SVN_COMPONENT/package"
+				SVN_PATH_SOURCE="trunk/component/$SVN_COMPONENT/source"
+				SVN_LOG="$TARGET_DIR/$SVN_COMPONENT-trunk.svnlog"
+				DEB_LOG="$TARGET_DIR/$SVN_COMPONENT-trunk.deblog"
+				;;
+			tags)
+				SVN_BRANCH=""
+				SVN_PATH_PACKAGE="tags/component/$SVN_COMPONENT/package/$SVN_VERSION-$SVN_RELEASE"
+				SVN_PATH_SOURCE="tags/component/$SVN_COMPONENT/source/$SVN_VERSION"
+				SVN_LOG="$TARGET_DIR/$SVN_COMPONENT-$SVN_VERSION-$SVN_RELEASE.svnlog"
+				DEB_LOG="$TARGET_DIR/$SVN_COMPONENT-$SVN_VERSION-$SVN_RELEASE.deblog"
+				;;
+			branches)
+				SVN_PATH_PACKAGE="branches/component/$SVN_COMPONENT/package/$SVN_VERSION-$SVN_RELEASE-$SVN_BRANCH"
+				SVN_PATH_SOURCE="branches/component/$SVN_COMPONENT/source/$SVN_VERSION-$SVN_BRANCH"
+				SVN_LOG="$TARGET_DIR/$SVN_COMPONENT-$SVN_VERSION-$SVN_RELEASE-$SVN_BRANCH.svnlog"
+				DEB_LOG="$TARGET_DIR/$SVN_COMPONENT-$SVN_VERSION-$SVN_RELEASE-$SVN_BRANCH.deblog"
+				;;
+			*)
+				$BIN_ECHO "-> SVN location '$SVN_LOCATION' is not supported"
+				EXIT=1
+		esac
+	fi
+	if [ $EXIT -eq 0 ] ; then
+		$BIN_RM -f $SVN_LOG
+		$BIN_RM -f $DEB_LOG
+	fi
+	if [ $EXIT -eq 0 ] ; then
+		TMP_DIR="$TARGET_DIR/readconfig"
+		if [ -e $TMP_DIR ] ; then
+			$BIN_ECHO "-> Directory '$TMP_DIR' already exists"
+			EXIT=1
+		else
+            $BIN_MKDIR -p $TMP_DIR
+			if [ $? -ne 0 ] ; then
+				$BIN_ECHO "-> Error while creating directory '$TMP_DIR'"
+				EXIT=1
+			fi
+		fi
+	fi
+	if [ $EXIT -eq 0 ] ; then
+		pushd $TMP_DIR >> /dev/null 2>&1
+			$BIN_ECHO -e "\n\n\n$BIN_SVN checkout --username $SVN_USER --password $SVN_PASS $SVN_URL/$SVN_PATH_PACKAGE .\n\n\n" >> $SVN_LOG
+            $BIN_SVN checkout --username $SVN_USER --password $SVN_PASS $SVN_URL/$SVN_PATH_PACKAGE . >> $SVN_LOG 2>&1
+		if [ $? -ne 0 ] ; then
+			$BIN_ECHO "-> Error while checkouting URL '$SVN_URL/$SVN_PATH_PACKAGE'"
+			EXIT=1
+		fi
+        popd >> /dev/null 2>&1
+	fi
+	if [ $EXIT -eq 0 ] ; then
+		if [ -e $TMP_DIR/config ] ; then
+			TARGET_OS=""
+			USE_EXTRA_VERSION_LEVEL=0
+			CREATE_TARBALL=0
+			TARBALL_COMPONENT=""
+			TARBALL_VERSION=""
+			EXCLUDE_FROM_TARBALL=""
+			USE_EXTRA_SOURCES=0
+			EXTRA_SOURCES_DIRS=""
+			DEB_COMPONENT=""
+			DEB_VERSION=""
+			DEB_RELEASE=""
+			DEB_ARCH=""
+			DEB_SUBCOMPONENTS=""
+			POST_DEB_SCRIPT=""
+			. $TMP_DIR/config
+			if [ -z "$TARGET_OS" ] ; then
+				TARGET_OS=$HOST_OS
+			fi
+			if [ "$USE_EXTRA_VERSION_LEVEL" != "1" ] ; then
+				USE_EXTRA_VERSION_LEVEL=0
+			fi
+			if [ "$CREATE_TARBALL" != "1" ] ; then
+				CREATE_TARBALL=0
+			fi
+			if [ -z "$TARBALL_COMPONENT" ] ; then
+				TARBALL_COMPONENT=$SVN_COMPONENT
+			fi
+			if [ -z "$TARBALL_VERSION" ] ; then
+				TARBALL_VERSION=$SVN_VERSION
+			fi
+			if [ "$CREATE_TARBALL" = "1" -a -z "$TARBALL_VERSION" ] ; then
+				$BIN_ECHO "-> Tarball version is empty"
+				EXIT=1
+			fi
+			if [ "$USE_EXTRA_SOURCES" != "1" ] ; then
+				USE_EXTRA_SOURCES=0
+			fi
+			if [ -z "$DEB_COMPONENT" ] ; then
+				DEB_COMPONENT=$SVN_COMPONENT
+			fi
+			if [ -z "$DEB_VERSION" -a -n "$SVN_VERSION" ] ; then
+				if [ $USE_EXTRA_VERSION_LEVEL -eq 1 ] ; then
+					invert_string $SVN_VERSION
+					DEB_VERSION=`$BIN_ECHO $GNIRTS$GNIRTS | $BIN_CUT -f2- -d.`
+					invert_string $DEB_VERSION
+					DEB_VERSION=$GNIRTS
+				else
+					DEB_VERSION=$SVN_VERSION
+				fi
+			fi
+			if [ -z "$DEB_RELEASE" -a -n "$SVN_RELEASE" ] ; then
+				if [ $USE_EXTRA_VERSION_LEVEL -eq 1 -a -n "$SVN_VERSION" ] ; then
+					invert_string $SVN_VERSION
+					DEB_RELEASE=`$BIN_ECHO $GNIRTS | $BIN_CUT -f1 -d.`
+					invert_string $DEB_RELEASE
+					DEB_RELEASE="$GNIRTS.$SVN_RELEASE"
+				else
+					DEB_RELEASE=$SVN_RELEASE
+				fi
+			fi
+			if [ -n "$DEB_RELEASE" -a "$SVN_COMPONENT" != "getdist" ] ; then
+				DEB_RELEASE="$DEB_RELEASE.$HOST_OS"
+			fi
+			if [ -z "$DEB_ARCH" ] ; then
+				if [ -n "$DEFAULT_DEB_ARCH" ] ; then
+					DEB_ARCH=$DEFAULT_DEB_ARCH
+				else
+					DEB_ARCH=`$BIN_RPM --eval %_host_cpu`
+					if [ $? -ne 0 ] ; then
+						$BIN_ECHO "-> Error while retrieving architecture"
+						EXIT=1
+					fi
+				fi
+			fi
+			if [ -n "$POST_DEB_SCRIPT" ] ; then
+				if [ -e $TMP_DIR/$POST_DEB_SCRIPT ] ; then
+					. $TMP_DIR/$POST_DEB_SCRIPT
+				else
+					$BIN_ECHO "-> Post DEB script '$TMP_DIR/$POST_DEB_SCRIPT' is missing"
+					EXIT=1
+				fi
+			fi
+			if [ -z "$BUILDROOT" ] ; then
+				$BIN_EXPORT BUILDROOT=`$BIN_RPM --eval %{_tmppath}/"$DEB_COMPONENT"-"$DEB_VERSION"-"$DEB_RELEASE"-buildroot`
+			fi			
+		else
+			$BIN_ECHO "-> File '$TMP_DIR/config' is missing"
+			EXIT=1
+		fi
+	fi
+	delete_dir $TMP_DIR
+	if [ $EXIT -eq 0 ] ; then
+		echo "-> OK"
+	fi
+}
+
+checkbuild()
+{
+	if [ $EXIT -eq 0 ] ; then
+		$BIN_ECHO "Checking component '$SVN_COMPONENT'"
+		BUILD=0
+		if [ -z "$TARGET_OS" ] ; then
+			BUILD=1
+		else
+			for OS in $TARGET_OS ; do
+				if [ "$OS" = "$HOST_OS" ] ; then
+					BUILD=1
+				fi
+			done
+		fi
+		if [ $BUILD -eq 1 ] ; then
+			MESSAGE="DEBs need to be built for this OS"
+		else
+			MESSAGE="No need to build for this OS"
+		fi
+	fi
+	if [ $EXIT -eq 0 -a $BUILD -eq 1 ] ; then
+		BUILD=0
+		if [ "$SVN_LOCATION" = "trunk" ] ; then
+			DEB_VERSION_ARCH="*"
+		else
+			DEB_VERSION_ARCH="$DEB_VERSION"
+		fi
+		if [ ! -z $DEB_ARCH -a ! $DEB_ARCH = "noarch" ] ; then
+			DEB_VERSION_ARCH="$DEB_VERSION_ARCH"_"$DEB_ARCH"
+		fi
+		LIST="`$BIN_LS -1 $TARGET_DIR/"$DEB_COMPONENT"_"$DEB_VERSION_ARCH".deb 2>/dev/null`"
+		if [ -z "$LIST" ] ; then
+			BUILD=1
+		fi
+		if [ -n "$DEB_SUBCOMPONENTS" ] ; then
+			for COMPONENT in $DEB_SUBCOMPONENTS ; do
+				LIST="`$BIN_LS -1 $TARGET_DIR/"$COMPONENT"_"$DEB_VERSION_ARCH".deb 2>/dev/null`"
+				if [ -z "$LIST" ] ; then
+					BUILD=1
+					break
+				fi
+			done
+		fi
+		if [ $BUILD -eq 0 ] ; then
+			MESSAGE="DEBs already exist in target directory"
+		fi
+	fi
+	if [ $EXIT -eq 0 ] ; then
+		$BIN_ECHO "-> $MESSAGE"
+	fi
+}
+
+getfiles()
+{
+	if [ $EXIT -eq 0 ] ; then
+		$BIN_ECHO "Getting files to build '$SVN_COMPONENT'"
+	fi
+	if [ $EXIT -eq 0 ] ; then
+		TMP_DIR="$TARGET_DIR/getfiles"
+		if [ -e $TMP_DIR ] ; then
+			$BIN_ECHO "-> Directory '$TMP_DIR' already exists"
+			EXIT=1
+		else
+			$BIN_MKDIR -p $TMP_DIR/package
+			if [ $? -ne 0 ] ; then
+				$BIN_ECHO "-> Error while creating directory '$TMP_DIR/package'"
+				EXIT=1
+			fi
+		fi
+	fi
+	if [ $EXIT -eq 0 ] ; then
+		pushd $TMP_DIR/package >> /dev/null 2>&1
+		$BIN_ECHO -e "\n\n\n$BIN_SVN checkout --username $SVN_USER --password $SVN_PASS $SVN_URL/$SVN_PATH_PACKAGE .\n\n\n" >> $SVN_LOG
+		$BIN_SVN checkout --username $SVN_USER --password $SVN_PASS $SVN_URL/$SVN_PATH_PACKAGE . >> $SVN_LOG 2>&1
+		if [ $? -ne 0 ] ; then
+			$BIN_ECHO "-> Error while checkouting URL '$SVN_URL/SVN_PATH_PACKAGE'"
+			EXIT=1
+		fi
+		popd >> /dev/null 2>&1
+	fi
+	if [ $EXIT -eq 0 ] ; then
+		if [ ! -e $TMP_DIR/package/"$DEB_COMPONENT"_deb.spec ] ; then
+			$BIN_ECHO "-> File '$TMP_DIR/package/"$DEB_COMPONENT"_deb.spec' is missing"
+			EXIT=1
+		fi
+	fi
+	if [ $CREATE_TARBALL -eq 1 -o $USE_EXTRA_SOURCES -eq 1 ] ; then
+		if [ $EXIT -eq 0 ] ; then
+			$BIN_MKDIR -p $TMP_DIR/$TARBALL_COMPONENT-$TARBALL_VERSION
+			if [ $? -ne 0 ] ; then
+				$BIN_ECHO "-> Error while creating directory '$TMP_DIR/$TARBALL_COMPONENT-$TARBALL_VERSION'"
+				EXIT=1
+			fi
+		fi
+		if [ $EXIT -eq 0 ] ; then
+			pushd $TMP_DIR/$TARBALL_COMPONENT-$TARBALL_VERSION >> /dev/null 2>&1
+			$BIN_ECHO -e "\n\n\n$BIN_SVN checkout --username $SVN_USER --password $SVN_PASS $SVN_URL/$SVN_PATH_SOURCE .\n\n\n" >> $SVN_LOG
+			$BIN_SVN checkout --username $SVN_USER --password $SVN_PASS $SVN_URL/$SVN_PATH_SOURCE . >> $SVN_LOG 2>&1
+			if [ $? -ne 0 ] ; then
+				$BIN_ECHO "-> Error while checkouting URL '$SVN_URL/$SVN_PATH_SOURCE'"
+				EXIT=1
+			fi
+			popd >> /dev/null 2>&1
+		fi
+	fi
+	if [ $EXIT -eq 0 -a $CREATE_TARBALL -eq 1 ] ; then
+		EXCLUDES="--exclude=.svn"
+		if [ -n "$EXCLUDE_FROM_TARBALL" ] ; then
+			for EXCLUDE in $EXCLUDE_FROM_TARBALL ; do
+				EXCLUDES="$EXCLUDES --exclude=$EXCLUDE"
+			done
+		fi
+		pushd $TMP_DIR >> /dev/null 2>&1
+		$BIN_TAR -czf $TARGET_DIR/$TARBALL_COMPONENT-$TARBALL_VERSION.tar.gz $EXCLUDES $TARBALL_COMPONENT-$TARBALL_VERSION
+		if [ $? -ne 0 ] ; then
+			$BIN_ECHO "-> Error while creating tarball '$TARGET_DIR/$TARBALL_COMPONENT-$TARBALL_VERSION.tar.gz'"
+			EXIT=1
+		fi
+		popd >> /dev/null 2>&1
+	fi
+	if [ $EXIT -eq 0 ] ; then
+		$BIN_CP -af $TMP_DIR/package/"$DEB_COMPONENT"_deb.spec $TARGET_DIR/
+		if [ $? -ne 0 ] ; then
+			$BIN_ECHO "-> Error while copying file '$TMP_DIR/package/"$DEB_COMPONENT"_deb.spec' to directory '$TARGET_DIR'"
+			EXIT=1
+		fi
+	fi
+	if [ $EXIT -eq 0 -a $USE_EXTRA_SOURCES -eq 1 ] ; then
+		for DIR in $EXTRA_SOURCES_DIRS ; do
+			if [ -d $TMP_DIR/$TARBALL_COMPONENT-$TARBALL_VERSION/$DIR ] ; then
+				$BIN_CP -a $TMP_DIR/$TARBALL_COMPONENT-$TARBALL_VERSION/$DIR/* $TARGET_DIR/
+				if [ $? -ne 0 ] ; then
+					$BIN_ECHO "-> Error while copying files '$TMP_DIR/$TARBALL_COMPONENT-$TARBALL_VERSION/$DIR/*' to directory '$TARGET_DIR'"
+					EXIT=1
+					break
+				fi
+			else
+				$BIN_ECHO "-> Extra source directory '$TMP_DIR/$TARBALL_COMPONENT-$TARBALL_VERSION/$DIR' is missing"
+				EXIT=1
+				break
+			fi
+		done
+	fi
+	delete_dir $TMP_DIR
+	if [ $EXIT -eq 0 ] ; then
+		$BIN_ECHO "-> OK"
+	fi
+}
+
+uninstalldebs()
+{
+	if [ $EXIT -eq 0 ] ; then
+		$BIN_ECHO "Uninstalling '$SVN_COMPONENT'"
+		LIST=""
+		$BIN_ECHO -e "\n\n\n$BIN_DPKG -s $DEB_COMPONENT\n\n\n" >> $DEB_LOG
+		$BIN_DPKG -s $DEB_COMPONENT >> $DEB_LOG 2>&1
+		if [ $? -eq 0 ] ; then
+			LIST="$LIST $DEB_COMPONENT"
+		fi
+		if [ -n "$DEB_SUBCOMPONENTS" ] ; then
+			for COMPONENT in $DEB_SUBCOMPONENTS ; do
+				$BIN_DPKG -s $COMPONENT >> $DEB_LOG 2>&1
+				if [ $? -eq 0 ] ; then
+					LIST="$LIST $COMPONENT"
+				fi
+			done
+		fi
+		if [ -n "$LIST" ] ; then
+			$BIN_ECHO -e "\n\n\n$BIN_DPKG --remove $LIST\n\n\n" >> $DEB_LOG
+			$BIN_DPKG --remove $LIST >> $DEB_LOG 2>&1
+			if [ $? -eq 0 ] ; then
+				$BIN_ECHO "-> OK"
+			else
+				$BIN_ECHO "-> Error while uninstalling"
+				EXIT=1
+			fi
+		else
+			$BIN_ECHO "-> Nothing to uninstall"
+		fi
+	fi
+}
+
+split_file(){
+# $1: target directory
+# $2: spec file
+	$BIN_CAT $2 | $BIN_AWK -v dir=$1 \
+		'{					
+			size=length($0)
+			if ((substr($0,1,1) == "[") && (substr($0,2,1) != " ") && (substr($0,size-1,1) != " ") && (substr($0,size,1) == "]")) {
+				label = substr($0,2,(length($0)-2))
+				filename = dir"/"label
+				if(label != "control" && label != "changelog"){
+					printf("#!/bin/sh") > filename
+				} 
+				else {
+					printf("") > filename
+				}
+			}
+			else {
+				if(filename != ""){							
+					printf("%s\n",$0) > filename
+				}
+			}
+		}'
+	$BIN_CHMOD 0755 $1/*
+	
+}
+
+builddebs()
+{	
+	pushd $TARGET_DIR >> /dev/null 2>&1
+	SCRIPT_DIR=$TARGET_DIR/scripts
+	$BIN_MKDIR -p $SCRIPT_DIR 2>/dev/null 1>&2
+	if [ $EXIT -eq 0 ] ; then
+		if [ -d $SCRIPT_DIR ] ; then 
+			split_file $SCRIPT_DIR $TARGET_DIR/"$DEB_COMPONENT"_deb.spec 
+		else
+			$BIN_ECHO "-> Error while creating directory '$TARGET_DIR'"
+			EXIT=1
+		fi
+	fi
+	if [ $EXIT -eq 0 ] ; then
+		$BIN_ECHO "Compiling '$DEB_COMPONENT'"
+	fi
+	if [ $EXIT -eq 0 -a -d $BUILDROOT ] ; then
+		$BIN_ECHO "-> Directory '$BUILDROOT' already exist"
+		EXIT=1
+	fi
+	if [ $EXIT -eq 0 ] ; then
+		$SCRIPT_DIR/prep
+		EXIT=$?
+	fi
+	if [ $EXIT -eq 0 ] ; then
+		$SCRIPT_DIR/install
+		EXIT=$?
+	fi
+	if [ $EXIT -eq 0 ] ; then
+		$BIN_MKDIR -p $BUILDROOT/DEBIAN
+		if [ ! -d $BUILDROOT/DEBIAN ] ; then
+			$BIN_ECHO "-> Error while creating directory '$BUILDROOT/DEBIAN'"
+			EXIT=1
+		fi
+	fi
+	if [ $EXIT -eq 0 ] ; then
+		if [ -f "$SCRIPT_DIR/control" ] ; then 
+			$BIN_CP $SCRIPT_DIR/control $BUILDROOT/DEBIAN/
+		else
+			$BIN_ECHO "-> File '$SCRIPT_DIR/control' is missing"
+			EXIT=1
+		fi
+	fi
+	if [ $EXIT -eq 0 ] ; then
+		$BIN_CP $SCRIPT_DIR/preinst $BUILDROOT/DEBIAN/ 2>/dev/null 1>&2
+		$BIN_CP $SCRIPT_DIR/postinst $BUILDROOT/DEBIAN/ 2>/dev/null 1>&2
+		$BIN_CP $SCRIPT_DIR/prerm $BUILDROOT/DEBIAN/ 2>/dev/null 1>&2
+		$BIN_CP $SCRIPT_DIR/postrm $BUILDROOT/DEBIAN/ 2>/dev/null 1>&2
+	fi		
+	if [ $EXIT -eq 0 ] ; then
+		LIST="`$BIN_LS -l $SCRIPT_DIR/changelog`"
+		if [ ! -z "$LIST" ] ; then
+			$BIN_MKDIR -p $BUILDROOT/usr/share/doc/$DEB_COMPONENT/
+			$BIN_CP $SCRIPT_DIR/changelog $BUILDROOT/usr/share/doc/$DEB_COMPONENT/
+		fi
+	fi		
+	if [ $EXIT -eq 0 ] ; then
+		$BIN_ECHO -e "\n\n\n$BIN_DPKG_DEB --build $BUILDROOT $TARGET_DIR/\n\n\n" >> $DEB_LOG
+		$BIN_DPKG_DEB --build $BUILDROOT $TARGET_DIR/ >> $DEB_LOG 2>&1
+		if [ $? -ne 0 ] ; then
+				$BIN_ECHO "-> Error while compiling"
+				EXIT=1
+			else
+				$BIN_ECHO "-> OK"
+		fi
+	fi
+	if [ $EXIT -eq 0 ] ; then	
+		$SCRIPT_DIR/clean
+		$BIN_RM -rf $SCRIPT_DIR
+		$BIN_RM -rf $TARGET_DIR/"$DEB_COMPONENT"_deb.spec
+		$BIN_RM -rf $TARGET_DIR/*.tar.gz
+		EXIT=$?
+	fi
+	popd >> /dev/null 2>&1
+}
+
+installdebs()
+{
+	if [ $EXIT -eq 0 ] ; then
+		$BIN_ECHO "Installing '$SVN_COMPONENT'"
+		$BIN_ECHO -e "\n\n\n$BIN_DPKG -i $TARGET_DIR/*.deb\n\n\n" >> $DEB_LOG
+		$BIN_DPKG -i $TARGET_DIR/*.deb >> $DEB_LOG 2>&1
+		if [ $? -eq 0 ] ; then
+			$BIN_ECHO "-> OK"
+		else
+			$BIN_ECHO "-> Error while installing"
+			EXIT=1
+		fi
+	fi
+}
+
+postdebscript()
+{
+	if [ $EXIT -eq 0 ] ; then
+		$BIN_ECHO "Executing post DEB script for '$SVN_COMPONENT'"
+		if [ -n "$POST_DEB_SCRIPT" ] ; then
+			postdebbuild
+		else
+			$BIN_ECHO "-> No script to execute"
+		fi
+	fi
+}
+
+#
+# Main script
+#
+readconfig $1 $2 $3 $4 $5 $6
+checkbuild
+if [ $BUILD -eq 1 ] ; then
+	getfiles
+	if [ "$SVN_COMPONENT" = "subversion" ] ; then
+	uninstalldebs
+	fi
+	builddebs
+	if [ "$SVN_COMPONENT" = "subversion" ] ; then
+		installdebs
+	fi
+	postdebscript
+fi
+if [ $EXIT -ne 0 ] ; then
+	$BIN_ECHO ""
+	$BIN_ECHO "****************************************"
+	$BIN_ECHO "Build of component '$SVN_COMPONENT' failed !"
+	$BIN_ECHO "SVN log: $SVN_LOG"
+	$BIN_ECHO "DEB log: $DEB_LOG"
+	$BIN_ECHO "****************************************"
+fi
+exit $EXIT

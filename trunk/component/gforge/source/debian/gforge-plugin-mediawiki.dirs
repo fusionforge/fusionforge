@@ -1,0 +1,6 @@
+etc/gforge/plugins/mediawiki
+etc/mediawiki-extensions/extensions-available
+usr/share/gforge/plugins/mediawiki/common
+usr/share/gforge/www/plugins/mediawiki
+usr/share/gforge/etc/httpd.d
+usr/share/mediawiki/skins

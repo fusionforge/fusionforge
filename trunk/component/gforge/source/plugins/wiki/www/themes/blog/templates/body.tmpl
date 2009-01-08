@@ -1,0 +1,24 @@
+<?php // -*-html-*-
+rcs_id('$Id: body.tmpl,v 1.4 2005/02/03 08:20:51 rurban Exp $');
+?>
+<body leftmargin="20" topmargin="0" <?= $WikiTheme->getMoreAttr('body') ?>>
+<!--{{{ Page-->
+<div id="page">
+<?= Template('top') ?>
+
+<?php // $CONTENT includes browse.tmpl ?>
+<!--{{{ PageTitle-->
+<div id="pagetitle">
+<h1 id="pagetitleText"><?= $HEADER ?></h1></div>
+<!--}}}-->
+
+<?=$CONTENT?>
+
+<!--{{{ Footer-->
+<div id="footer">
+<?= Template('bottom') ?>
+<?= Template('browse-footer') ?>
+</div><!--}}} Footer-->
+
+</div><!--}}} Page-->
+</body>

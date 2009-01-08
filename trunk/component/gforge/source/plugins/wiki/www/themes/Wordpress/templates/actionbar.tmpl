@@ -1,0 +1,101 @@
+<?php // -*-php-*- ?>
+<!-- $Id: actionbar.tmpl,v 1.5 2005/09/11 15:23:08 rurban Exp $ -->
+<div id="actionbar">
+
+<?php
+  if ((!$page->get('locked') || $user->isAdmin()) and $revision)
+      $EditB = Button("edit",
+                      $revision->isCurrent() ? _("Edit this page") : _("Edit old revision"));
+  else
+      $EditB = Button("viewsource", _("View Source"));
+  // $EditB = fmt("%s of this page", $EditB);
+?>
+
+ <ul>
+   <li><a class="wikilink" href="<?=WikiURL(HOME_PAGE)?>"><?= WIKI_NAME ?></a>
+     <ul>
+       <li>
+         <?= WikiLink(_("HomePage"), "button") ?>
+       </li>
+       <li>
+         <?= WikiLink(_("RecentChanges"), "button") ?>
+       </li>
+       <?php if (!empty($user) && $user->isAdmin()) { ?>
+       <li>
+       <?=$SEP?><?= WikiLink(_("PhpWikiAdministration"), "button") ?>
+       </li>
+       <?php } ?>
+       <?php if (!empty($user)) { ?>
+       <?php
+       /* Today's calendar page for the user, if the Calender subpage is defined. */
+        $UserCalPageTitle = $user->getId() . SUBPAGE_SEPARATOR . _("Calendar");
+        $dbi = $request->getDbh();
+        if ($dbi->isWikiPage($UserCalPageTitle)) {
+          $UserCalPageTodayTitle = $UserCalPageTitle . SUBPAGE_SEPARATOR . strftime("%Y-%m-%d", time());
+         ?>
+         <li>
+         <?=$SEP?><?= WikiLink($UserCalPageTodayTitle, "button", _("Today")) ?>
+         </li>
+       <?php } ?>
+      <?php } ?>
+      <?php if (defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) { ?> 
+        <li><?=$SEP?><?= Button("pdf") ?></li>
+       <?php } ?>
+     </ul>
+   </li>
+   <li>Editing
+     <ul>
+       <li><?= $EditB ?></li>
+       <?php if ($user->isAdmin() or mayAccessPage('change', $page->getName())) { ?>
+        <li><?=$SEP?><?= Button($page->get('locked') ? 'unlock' : 'lock')?></li>
+        <?php if (ENABLE_PAGEPERM) { ?>
+          <li><?=$SEP?><?= Button('chown') ?></li>
+          <li><?=$SEP?><?= Button('setacl') ?></li>
+        <?php } ?>
+       <?php } ?>
+       <?php if ($user->isAdmin() or mayAccessPage('remove', $page->getName())) { ?>
+        <li><?=$SEP?><?= Button('revert',_("Revert"), $revision->isCurrent() ? $page->GetRevisionBefore() : $revision) ?></li>
+        <li><?=$SEP?><?= Button('remove') ?></li>
+       <?php } ?>
+     </ul>
+   </li>
+   <li>Information
+     <ul>
+       <li>
+         <a href="<?=WikiURL($revision,array('action'=>'diff'))?>" >
+         <?= $WikiTheme->getLastModifiedMessage($revision) ?></a>
+       </li>
+       <li>
+         <?=$SEP?><?= Button("PageHistory", _("PageHistory")) ?><?=$SEP?>
+       </li>
+       <li> <?= Button("PageInfo", _("PageInfo")) ?> </li>
+         <?php if ((DEBUG and $request->getArg('action') == 'browse') || $user->isAdmin()) { ?>
+         <li>
+           <?=$SEP?><?= Button("DebugInfo", _("DebugInfo")) ?> <!-- For debugging only, really -->
+           <?=$SEP?><?= Button("PageDump", _("PageDump")) ?>
+         </li>
+         <?php } ?>
+     </ul>
+   </li>
+   <li>Search
+     <ul>
+       <li>
+         <?plugin-form TitleSearch formsize=20 ?>
+       </li>
+       <li>
+         <?plugin-form FullTextSearch formsize=20 ?>
+       </li>
+       <li>
+         <?php if (!empty($revision)) { ?>
+           <?= Button("LikePages", _("LikePages")) ?>
+         <?php } ?>
+       </li>
+     </ul>
+   </li>
+   <li>User info
+     <ul>
+       <?= Template('signin') ?>
+     </ul>
+   </li>
+ </ul>
+</div>

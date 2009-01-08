@@ -1,0 +1,20 @@
+Date: Sun, 27 Jan 2002 17:28:55 -0500
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.2-jeffs-hacks)
+X-Rcs-Id: $Id: HomePage,v 1.1 2004/04/29 23:59:07 rurban Exp $
+Content-Type: application/x-phpwiki;
+  pagename=HomePage;
+  pgsrc_version="2 $Revision: 1.1 $";
+  flags="";
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+* 什麼是 WikiWikiWeb? 關於此應用程式的描述.
+* 學習如何使用 Wiki - HowToUseWiki 並學習如何增加頁面 - AddingPages.
+* 使用 SandBox (沙箱)頁面進行嘗試.
+* 請在 RecentVisitors 簽上你的大名.
+* 參閱 RecentChanges 取得最新的頁面增加部份與變更.
+* 點擊 MostPopular 以得知那些頁面是最受歡迎的.
+* 閱讀 ReleaseNotes.
+* 透過 PhpWikiAdministration 管理本 wiki.
+* 閱讀更多... PhpWikiDocumentation.

@@ -1,0 +1,11 @@
+diff -ruN apache-maven-2.0.9/conf/settings.xml apache-maven-2.0.9-novaforge/conf/settings.xml
+--- apache-maven-2.0.9/conf/settings.xml	2008-04-07 18:04:44.000000000 +0200
++++ apache-maven-2.0.9-novaforge/conf/settings.xml	2008-07-07 17:28:25.000000000 +0200
+@@ -48,6 +48,7 @@
+    | Default: ~/.m2/repository
+   <localRepository>/path/to/local/repo</localRepository>
+   -->
++  <localRepository>/var/lib/maven/repository/</localRepository>
+ 
+   <!-- interactiveMode
+    | This will determine whether maven prompts you when it needs input. If set to false,

@@ -1,0 +1,400 @@
+#!/bin/sh
+#---------------------------------------------------------------------------
+# Novaforge is a registered trade mark from Bull S.A.S
+# Copyright (C) 2007 Bull S.A.S.
+# 
+# http://novaforge.org/
+#
+#
+# This file has been developped within the Novaforge(TM) project from Bull S.A.S
+# and contributed back to GForge community.
+#
+# GForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# GForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#---------------------------------------------------------------------------
+
+#
+# Constants
+#
+
+PREFIX_CHAR="#"
+BACKUP_CONFIG_DIR="%SYSCONFDIR%/%NAME%"
+BACKUP_CONFIG_FILTER=".[a-z]*"
+BACKUP_SSL_DIR="%SYSCONFDIR%/%NAME%/ssl"
+BACKUP_GFORGE_DIR="%LOCALSTATEDIR%/lib/%NAME%"
+BACKUP_MAILMAN_ARCHIVES_DIR="%MAILMANDATADIR%/archives"
+BACKUP_MAILMAN_DATA_DIR="%MAILMANDATADIR%/data"
+BACKUP_MAILMAN_LISTS_DIR="%MAILMANDATADIR%/lists"
+BACKUP_MAILMAN_SPAM_DIR="%MAILMANDATADIR%/spam"
+RESTORE_NAME="%NAME%_restore_`date +%Y-%m-%d_%H-%M-%S`"
+SQL_LOG_FILE="%LOCALSTATEDIR%/log/%NAME%/$RESTORE_NAME.log"
+
+#
+# Variables
+#
+
+EXIT=0
+TMP_DIR="/tmp"
+BACKUP_DIR=""
+BACKUP_FILE=""
+
+#
+# Functions
+#
+
+# Remove unowned files and directories
+# Parameters:
+#   Directory, without ending /
+remove_unowned ()
+{
+	TARGET=$1
+	FILES=`find $TARGET/ | sort -r`
+	for FILE in $FILES ; do
+		if [ $FILE != $TARGET/ ] ; then
+			rpm -qf $FILE >> /dev/null 2>&1
+			if [ $? -ne 0 ] ; then
+				if [ -d $FILE -a ! -L $FILE ] ; then
+					rmdir $FILE
+				else
+					rm -f $FILE
+				fi
+			fi
+		fi
+	done
+}
+
+# Restore the content of a directory
+# Parameters:
+#   Source directory, without ending /
+#   Files filter
+#   Target directory, without ending /
+#   Empty target directory (0/1)
+copy_directory_content ()
+{
+	SOURCE=$1
+	FILTER=$2
+	TARGET=$3
+	EMPTY=$4
+	if [ $EXIT -eq 0 ] ; then
+		echo -e "$PREFIX_CHAR Copying '$SOURCE/$FILTER' to '$TARGET/'"
+		if [ -d $SOURCE ] ; then
+			pushd $SOURCE >> /dev/null 2>&1
+			if [ ! -e $TARGET ] ; then
+				mkdir -p $TARGET
+			fi
+			if [ -d $TARGET -o -L $TARGET ] ; then
+				NUMBER=`ls -a -1 | wc -l`
+				expr $NUMBER \>= 2 > /dev/null 2>&1
+				if [ $? -ne 0 ] ; then
+					echo -e "$PREFIX_CHAR -> Error while checking if source directory is empty"
+					EXIT=1
+				else
+					if [ $EMPTY -eq 1 ] ; then
+						remove_unowned $TARGET
+					fi
+					if [ $EXIT -eq 0 ] ; then
+						expr $NUMBER = 2 > /dev/null 2>&1
+						if [ $? -eq 0 ] ; then
+							echo -e "$PREFIX_CHAR -> Source directory is empty"
+						else
+							cp -af $FILTER $TARGET/
+							if [ $? -ne 0 ] ; then
+								echo -e "$PREFIX_CHAR -> Error while copying"
+								EXIT=1
+							fi
+						fi
+					fi
+				fi
+			else
+				echo -e "$PREFIX_CHAR -> Error while creating target directory '$TARGET'"
+				EXIT=1
+			fi
+			popd >> /dev/null 2>&1
+		else
+			echo -e "$PREFIX_CHAR -> Source directory '$1' does not exist"
+			EXIT=1
+		fi
+	fi
+}
+
+# Stop a service
+# Parameters:
+#   Service name
+stop_service ()
+{
+	if [ $EXIT -eq 0 ] ; then
+		SERVICE_NAME=$1
+		echo -e "$PREFIX_CHAR Stopping service $SERVICE_NAME"
+		if [ -x %INITRDDIR%/$SERVICE_NAME ] ; then
+			service $SERVICE_NAME stop >> /dev/null 2>&1
+			if [ $? -ne 0 ] ; then
+				echo -e "$PREFIX_CHAR -> Error while stopping"
+			fi
+		else
+			echo -e "$PREFIX_CHAR -> Script '%INITRDDIR%/$SERVICE_NAME' does not exist"
+			EXIT=1
+		fi
+	fi
+}
+
+
+#
+# Main script
+#
+
+echo -e "$PREFIX_CHAR$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR %FRIENDLY_NAME% : restore data"
+echo -e "$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR This script will restore data from an archive file."
+echo -e "$PREFIX_CHAR -> Continue ('y' or 'n') ?"
+echo -en "$PREFIX_CHAR -> "
+read CHOICE
+if [ "$CHOICE" != "y" ]; then
+        exit 1
+fi
+#
+# Ask temporary directory
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Please type the temporary directory (default: '$TMP_DIR', 'q' to quit)"
+	echo -en "$PREFIX_CHAR -> "
+	read CHOICE
+	if [ "$CHOICE" = "q" ] ; then
+		EXIT=1
+	else
+		if [ -n "$CHOICE" ]; then
+			TMP_DIR=$CHOICE
+		fi
+		if [ ! -e $TMP_DIR ] ; then
+			echo -e "$PREFIX_CHAR -> Directory '$TMP_DIR' does not exist"
+			EXIT=1
+		else
+			if [ ! -d $TMP_DIR -a ! -L $TMP_DIR ] ; then
+				echo -e "$PREFIX_CHAR -> '$TMP_DIR' is not a directory or a symbolic link"
+				EXIT=1
+			else
+				BACKUP_DIR="$TMP_DIR/$RESTORE_NAME"
+				export TMP=$TMP_DIR
+			fi
+		fi
+	fi
+fi
+#
+# Ask backup filename
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Please type the backup filename with its full path ('q' to quit)"
+	echo -en "$PREFIX_CHAR -> "
+	read CHOICE
+	if [ "$CHOICE" = "q" ] ; then
+		EXIT=1
+	else
+		if [ -n "$CHOICE" ]; then
+			if [ -e $CHOICE ] ; then
+				if [ -f $CHOICE ] ; then
+					BACKUP_FILE=$CHOICE
+				else
+					echo -e "$PREFIX_CHAR -> '$CHOICE' is not a regular file"
+					EXIT=1
+				fi
+			else
+				echo -e "$PREFIX_CHAR -> File '$CHOICE' does not exist"
+				EXIT=1
+			fi
+		else
+			echo -e "$PREFIX_CHAR -> Backup filename is empty"
+			EXIT=1
+		fi
+	fi
+fi
+#
+# Confirm apocalypse
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Do you want to REPLACE CURRENT DATA with"
+	echo -e "$PREFIX_CHAR content from file '$BACKUP_FILE' ('y' or 'n') ?"
+	echo -en "$PREFIX_CHAR -> "
+	read CHOICE
+	if [ "$CHOICE" != "y" ]; then
+		EXIT=1
+	fi
+fi
+#
+# Extract backup
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Extracting backup"
+	mkdir $BACKUP_DIR >> /dev/null 2>&1
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while creating directory '$BACKUP_DIR'"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	pushd $BACKUP_DIR >> /dev/null 2>&1
+	tar -xzf $BACKUP_FILE >> /dev/null 2>&1
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while extracting to directory '$BACKUP_DIR'"
+		EXIT=1
+	else
+		if [ -f VERSION ] ; then
+			VERSION=`cat VERSION`
+			if [ "$VERSION" != "%NOVAFORGE_LEVEL%" ] ; then
+				echo -e "$PREFIX_CHAR -> Versions differs ($VERSION != %NOVAFORGE_LEVEL%), do you want to continue ('y' or 'n') ?"
+				echo -en "$PREFIX_CHAR -> "
+				read CHOICE
+				if [ "$CHOICE" != "y" ] ; then
+					EXIT=1
+				fi
+			fi
+		else
+			echo -e "$PREFIX_CHAR -> Version file is missing"
+			EXIT=1
+		fi
+	fi
+	popd >> /dev/null 2>&1
+fi
+#
+# Stop httpd, xinetd, crond, mailman and postfix services
+#
+stop_service httpd
+stop_service xinetd
+stop_service crond
+stop_service mailman
+stop_service postfix
+#
+# Remove config files
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Removing '$BACKUP_CONFIG_DIR/$BACKUP_CONFIG_FILTER'"
+	rm -f $BACKUP_CONFIG_DIR/$BACKUP_CONFIG_FILTER >> /dev/null 2>&1
+fi
+#
+# Restore files
+#
+copy_directory_content $BACKUP_DIR/config "$BACKUP_CONFIG_FILTER" $BACKUP_CONFIG_DIR 0
+copy_directory_content $BACKUP_DIR/ssl "*" $BACKUP_SSL_DIR 0
+copy_directory_content $BACKUP_DIR/gforge "*" $BACKUP_GFORGE_DIR 1
+copy_directory_content $BACKUP_DIR/mailman/archives "*" $BACKUP_MAILMAN_ARCHIVES_DIR 1
+copy_directory_content $BACKUP_DIR/mailman/data "*" $BACKUP_MAILMAN_DATA_DIR 1
+copy_directory_content $BACKUP_DIR/mailman/lists "*" $BACKUP_MAILMAN_LISTS_DIR 1
+copy_directory_content $BACKUP_DIR/mailman/spam "*" $BACKUP_MAILMAN_SPAM_DIR 1
+#
+# Drop database %NAME%
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Dropping database '%NAME%'"
+	echo -e "#\n#\n# Dropping database '%NAME%'\n#\n#\n" >> $SQL_LOG_FILE
+	NAME=`su - postgres -c "psql -d template1 -At -c \"SELECT datname FROM pg_database WHERE datname='%NAME%'\"" 2>$SQL_LOG_FILE`
+	if [ $? -eq 0 -a -z "$NAME" ] ; then
+		echo -e "$PREFIX_CHAR -> Database does not exist"
+	else
+		su - postgres -c "psql -d template1 -c \"DROP DATABASE %NAME%\"" >> $SQL_LOG_FILE 2>&1
+		if [ $? -ne 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Error while dropping database (see log file '$SQL_LOG_FILE')"
+			EXIT=1
+		fi
+	fi
+fi
+#
+# Drop database user
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Dropping database user '%NAME%'"
+	echo -e "#\n#\n# Dropping database user '%NAME%'\n#\n#\n" >> $SQL_LOG_FILE
+	NAME=`su - postgres -c "psql -d template1 -At -c \"SELECT usename FROM pg_user WHERE usename='%NAME%'\""` 2>$SQL_LOG_FILE
+	if [ $? -eq 0 -a -z "$NAME" ] ; then
+		echo -e "$PREFIX_CHAR -> User does not exist"
+	else
+		su - postgres -c "psql -d template1 -c \"DROP USER %NAME%\"" >> $SQL_LOG_FILE 2>&1
+		if [ $? -ne 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Error while dropping user (see log file '$SQL_LOG_FILE')"
+			EXIT=1
+		fi
+	fi
+fi
+#
+# Create database user
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Creating database user '%NAME%'"
+	if [ -e %SYSCONFDIR%/%NAME%/.init -o -e %SYSCONFDIR%/%NAME%/.db ] ; then
+		if [ -e %SYSCONFDIR%/%NAME%/.init ] ; then
+			. %SYSCONFDIR%/%NAME%/.init
+		else
+			. %SYSCONFDIR%/%NAME%/.db
+		fi
+		if [ -z "$DB_PASSWORD" ] ; then
+			echo -e "$PREFIX_CHAR -> Parameter 'DB_PASSWORD' is empty or not defined"
+			EXIT=1
+		fi
+	else
+		echo -e "$PREFIX_CHAR -> File '%SYSCONFDIR%/%NAME%/.init' is missing"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "#\n#\n# Creating database user '%NAME%'\n#\n#\n" >> $SQL_LOG_FILE
+	su - postgres -c "psql -d template1 -c \"CREATE USER %NAME% ENCRYPTED PASSWORD '$DB_PASSWORD' NOCREATEDB NOCREATEUSER\"" >> $SQL_LOG_FILE 2>&1
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while creating user (see log file '$SQL_LOG_FILE')"
+	fi
+fi
+#
+# Create database
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Creating database '%NAME%'"
+	echo -e "#\n#\n# Creating database '%NAME%'\n#\n#\n" >> $SQL_LOG_FILE
+	su - postgres -c "psql -d template1 -c \"CREATE DATABASE %NAME% OWNER %NAME% TEMPLATE template0 ENCODING 'UNICODE'\"" >> $SQL_LOG_FILE 2>&1
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while creating database (see log file '$SQL_LOG_FILE')"
+		EXIT=1
+	fi
+fi
+#
+# Restore database
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Restoring database"
+	echo -e "#\n#\n# Restoring database\n#\n#\n" >> $SQL_LOG_FILE
+	su - postgres -c "pg_restore -d %NAME% -F c -x $BACKUP_DIR/database" >> $SQL_LOG_FILE 2>&1
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while restoring (see log file '$SQL_LOG_FILE')"
+		EXIT=1
+	fi
+fi
+#
+# Remove backup directory
+#
+if [ -d $BACKUP_DIR ] ; then
+	echo -e "$PREFIX_CHAR Removing backup directory"
+	rm -rf $BACKUP_DIR
+fi
+echo -e "$PREFIX_CHAR"
+if [ $EXIT -eq 0 ] ; then
+        echo -e "$PREFIX_CHAR -> Success !"
+        echo -e "$PREFIX_CHAR"
+	echo -e "$PREFIX_CHAR You should now run '%NAME%-config' to configure %FRIENDLY_NAME%."
+	echo -e "$PREFIX_CHAR"
+	echo -e "$PREFIX_CHAR Please note:"
+	echo -e "$PREFIX_CHAR   * file '%SYSCONFDIR%/%NAME%/.init' contains the init parameters (including cleartext password of PostgreSQL user '%NAME%'),"
+	echo -e "$PREFIX_CHAR   * file '%SYSCONFDIR%/%NAME%/.admin' contains the cleartext password of %FRIENDLY_NAME% administrator 'admin',"
+	echo -e "$PREFIX_CHAR   * file '$SQL_LOG_FILE' contains the logs of SQL commands executed in this script."
+
+else
+        echo -e "$PREFIX_CHAR -> Failure !"
+fi
+echo -e "$PREFIX_CHAR$PREFIX_CHAR"
+exit $EXIT

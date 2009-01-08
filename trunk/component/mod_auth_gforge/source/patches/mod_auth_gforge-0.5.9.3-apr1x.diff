@@ -1,0 +1,11 @@
+--- src/mod_auth_gforge.c	2006-01-04 23:31:38.000000000 +0100
++++ src/mod_auth_gforge.c.oden	2006-05-08 11:44:50.000000000 +0200
+@@ -226,7 +226,7 @@
+ 		    server_rec * s)
+ {
+     if (auth_gforge_pool == NULL)
+-	apr_pool_sub_make (&auth_gforge_pool, NULL, NULL);
++	apr_pool_create_ex (&auth_gforge_pool, NULL, NULL, NULL);
+ 
+     DBG ("[mod_auth_gforge.c] GFORGE_AUTH: Init");
+     ap_add_version_component (p, "mod_auth_gforge/" AUTH_GFORGE_VERSION);

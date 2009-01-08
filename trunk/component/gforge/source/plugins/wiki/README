@@ -1,0 +1,22 @@
+This is a port of phpwiki 1.3.12 to be used as plugin in gforge.
+
+This plugin provides a full wiki for each project and also a personal wiki for people who wants one.
+
+Currently, only postgresql is supported.
+
+To use this plugin, you have to:
+
+1) add in your apache file:
+
+========== BEGIN
+        <Location /wiki/g>
+                ForceType application/x-httpd-php
+                AcceptPathInfo on
+        </Location>
+        <Location /wiki/u>
+                ForceType application/x-httpd-php
+                AcceptPathInfo on
+        </Location>
+========== END
+
+2) Allow write access to your gforge/www directory (or install the link manually).

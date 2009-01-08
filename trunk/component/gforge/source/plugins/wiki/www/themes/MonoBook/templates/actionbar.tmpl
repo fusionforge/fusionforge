@@ -1,0 +1,62 @@
+<?php // -*-php-*- ?>
+<!-- $Id: actionbar.tmpl,v 1.6 2005/08/28 11:10:15 rurban Exp $ -->
+<?php
+$dbh = $request->getDbh();
+$Sep = HTML::raw("<li>");
+?>
+<div id="p-cactions" class="portlet">
+    <h5>Views</h5>
+    <ul>
+    <?php if ((!$page->get('locked') || $user->isAdmin()) and $revision) { ?>
+      <?= Button("edit", $revision->isCurrent() ? _("Edit") : _("Edit Old Revision")) ?>
+    <?php } else { ?>
+      <?= Button("viewsource", _("View Source")) ?>
+    <?php } ?>
+    <?php if (!string_ends_with($page->getName(), _("Discussion"))) { ?>
+    <?php 
+	$talk = new WikiPageName('Talk:'.$page->getName());
+        if ($dbh->isWikiPage($talk->getName())) { ?>
+	  <?=$Sep?><?= Button(array('action'=>'browse'), _("Discussion"), $talk->getName()) ?>
+        <?php } else { ?>
+	  <?=$Sep?><?= Button(array('action'=>'create',
+                              'template'=>'TemplateTalk'),
+			  _("Discussion"), $talk->getName()) ?>
+        <?php } ?>
+    <?php } else { ?>
+      <?php $talk = new WikiPageName($page->getName()); ?>
+      <?=$Sep?><?= Button(array(),_("Article"), $talk->getParent()) ?>
+    <?php } ?>
+    <? if ( $user->isSignedIn() ) { ?>
+     <?php if ($user->isAdmin() or mayAccessPage('change', $page->getName())) { ?>
+      <?=$Sep?><?= Button($page->get('locked') ? 'unlock' : 'lock') ?>
+     <?php if (ENABLE_PAGEPERM and mayAccessPage('change', $page->getName())) { ?>
+      <?=$Sep?><?= Button('chown') ?>
+      <?=$Sep?><?= Button('setacl') ?>
+     <?php }} ?>
+     <?php if ($user->isAdmin() or mayAccessPage('remove', $page->getName())) { ?>
+      <?=$Sep?><?= Button('revert',_("Revert"), $revision->isCurrent() ? $page->GetRevisionBefore() : $revision) ?>
+      <?=$Sep?><?= Button('remove') ?>
+     <?php } ?>
+    <?php } ?>
+    <?=$Sep?><?= Button(array('action'=>'PageInfo'),
+                        _("Info"),$page->getName()) ?>
+<?php 
+    if (((defined('DEBUG') and DEBUG and $request->getArg('action') == 'browse')) || $user->isAdmin()) { ?> 
+      <!-- Buttons really only for debugging -->
+      <?=$Sep?><?= Button(_("PageHistory")) ?>
+      <?=$Sep?><?= Button("diff") ?> 
+      <?=$Sep?><?= Button(_("PageDump")) ?>
+<?php
+    if (DEBUG & _DEBUG_SQL and USECACHE) {
+      $PurgeCache = Button(array('nocache' => 'purge'),
+                     _("PurgeHtmlCache"), $page->getName());
+      $PurgeCache->addTooltip(_("Purge HTML cache for this page. Regenerate from WikiMarkup when next accessed."));
+?>
+      <?=$Sep?><?= $PurgeCache ?>
+<?php } ?>
+      <!-- End debugging buttons -->
+    <?php } ?>
+  <?php if (defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) { ?> 
+    <?=$Sep?><?= Button("pdf") ?>
+  <?php } ?>
+</div>

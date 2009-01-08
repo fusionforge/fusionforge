@@ -1,0 +1,23 @@
+#!/bin/sh
+# need to check write perms to the .testbox/* (mixed web/cli perms)
+
+chmod -R a+rw .dumphtml
+if [ -d .dumphtml -a ! -w .dumphtml/AllPages.html ]; then
+  rm -rf .dumphtml/*
+fi
+# TODO: if php>5 add PDO
+# TODO: oracle (free download now)
+for db in PearDB_sqlite PearDB_mysql ADODB_sqlite ADODB_mysql; do
+    php -Cq -d register_argc_argv=1 test.php debug=1 level=10 db=$db | tee all_$db.result
+done
+
+echo "Ready for postgresql ?"
+read
+
+rcmysql stop
+pg_ctl start
+for db in PearDB_pgsql ADODB_postgres7; do
+    php -Cq -d register_argc_argv=1 test.php debug=1 level=10 db=$db | tee all_$db.result
+done
+pg_ctl stop
+rcmysql start

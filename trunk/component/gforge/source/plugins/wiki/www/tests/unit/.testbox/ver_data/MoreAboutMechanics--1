@@ -1,0 +1,33 @@
+a:6:{s:6:"markup";s:1:"2";s:6:"author";s:6:"a_user";s:9:"author_id";s:6:"a_user";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625918;s:8:"%content";s:1339:"PhpWiki is written in the server-side scripting language PHP,
+available from http://www.php.net/. PHP resembles C and Perl in its
+syntax, and functions much like ASP, ~EmbPerl or JSP.
+
+PhpWiki consists of a dozen or so files of mixed PHP and HTML. The web
+pages that make up a WikiWikiWeb based on PHP live in a database with
+backup copies of previous versions of pages stored as well. (For the
+database, PhpWiki works with DBM, MySQL, PostgreSQL or text files.)
+
+Every time a user hits the site, the page requested is pulled from the
+database and rendered on the fly. The user only really ever requests
+the file =index.php=, which then decides which other php files to
+include.
+
+Links to pages in the Wiki are automatically linked: AddingPages.
+This might be the single most compelling aspect of a Wiki, the ability
+to add pages simply by linking to them. The next most compelling thing
+is how easily external URLs link, like this:
+
+# http://www.wcsb.org/
+# ftp://ftp.redhat.com/
+# news://news.mozilla.org/
+# http://slashdot.org/
+# http://theregister.co.uk/
+
+Combined with one namespace and a simple markup, a Wiki exhibits many
+of the characteristics of WabiSabi.
+
+PhpWiki is licensed under the GNU General Public license, which you
+should be able to see here: http://www.gnu.org/copyleft/gpl.txt.
+
+----
+PhpWikiDocumentation CategoryWiki";}

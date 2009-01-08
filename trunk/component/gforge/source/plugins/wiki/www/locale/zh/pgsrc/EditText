@@ -1,0 +1,16 @@
+Date: Sun, 27 Jan 2002 17:28:55 -0500
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.2-jeffs-hacks)
+X-Rcs-Id: $Id: EditText,v 1.1 2004/04/29 23:59:07 rurban Exp $
+Content-Type: application/x-phpwiki;
+  pagename=EditText;
+  flags="";
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+所有頁面 (除了搜尋結果以外) 的最底部都有一個 EditText 連結.
+如果準備好要編輯這個頁面時,你可以點擊這個連結.
+
+----
+
+PhpWikiDocumentation

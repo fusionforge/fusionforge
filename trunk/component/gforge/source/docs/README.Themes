@@ -1,0 +1,179 @@
+DEBIAN SOURCEFORGE THEMING HOWTO
+--------------------------------
+
+Here is a short HOWTO explaining how Themes work in Debian
+Sourceforge, and how to make a new one.
+
+It was written by Christian Bayle <bayle@debian.org>, with a few
+cosmetic fixes applied by Roland Mas <lolando@debian.org>.
+
+HOW DOES THEMING WORK?
+----------------------
+Themes are done by overloading the Layout class you can find in
+/usr/share/gforge/www/include/
+
+This is done by the "$HTML = new Theme();" line in the theme_sysinit
+function (www/include/theme.php):
+
+The theme_sysinit function is called in www/include/pre.php
+The Theme class is included from 
+$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'].'/Theme.class.php'
+If sys_theme is not defined it is set to "forged".
+
+So this means that to write a theme you "just" have to create a
+correct www/themes/<your theme>/Theme.class.php and to add the proper
+record in the database.  This addition can be done with Roland's
+sf-register-theme tool or in the administrative web interface.
+
+The simplest you can find is at www/themes/forged/Theme.class.php:
+
+,----
+| class Theme extends Layout {
+|         function Theme() {
+| 	// Parent constructor
+| 	$this->Layout();
+| 	}
+| }
+`----
+
+(This one does nothing)
+
+HOW DO I MAKE A THEME?
+----------------------
+A simple theme is the Savannah one, that just changes some colors.
+The big work is to make new icons found in www/themes/savannah/images/
+
+,----
+| class Theme extends Layout {
+| 
+| 	/**
+| 	 * Theme() - Constructor
+| 	 */
+| 	function Theme() {
+| 		// Parent constructor
+| 		$this->Layout();
+| 
+| 		// The root location for images
+| 		$this->imgroot = 'themes/savannah/images/';
+| 
+| 		// The content background color
+| 		$this->COLOR_CONTENT_BACK= '#EAC164';
+| 
+| 		// The background color
+| 		$this->COLOR_BACK= '#FFFFFF';
+| 
+| 		// The primary light background color
+| 		$this->COLOR_LTBACK1= '#FFF4A8';
+| 
+| 		// The secondary light background color
+| 		$this->COLOR_LTBACK2= '#FFF4A8';
+| 
+| 		// The HTML box title color
+| 		$this->COLOR_HTMLBOX_TITLE = '#DAD5D7';
+| 
+| 		// The HTML box background color
+| 		$this->COLOR_HTMLBOX_BACK = '#FFF4A8';
+| 
+| 		// Font Face Constants
+| 		// The content font
+| 		$this->FONT_CONTENT = 'Helvetica';
+| 		// The HTML box title font
+| 		$this->FONT_HTMLBOX_TITLE = 'Helvetica';
+| 		// The HTML box title font color
+| 		$this->FONTCOLOR_HTMLBOX_TITLE = '#333333';
+| 		// The content font color
+| 		$this->FONTCOLOR_CONTENT = '#333333';
+| 		//The smaller font size
+| 		$this->FONTSIZE_SMALLER='x-small';
+| 		//The smallest font size
+| 		$this->FONTSIZE_SMALLEST='xx-small';
+| 		//The HTML box title font size
+| 		$this->FONTSIZE_HTMLBOX_TITLE = 'small';
+| 
+| 	}
+| }
+`----
+
+To do more you can replace all the Layout.class.php functions by yours.
+This is done a lot in www/themes/classic/Themes.class.php.  A small
+example of this is for the tab_entry function in debian theme, that
+allows you to customize the menu in e.g. the page located at
+http://.../projects/siteadmin/
+
+,----
+| 	/**
+| 	 *	tab_entry() - Prints out the a themed tab, used by project_tabs
+| 	 *
+| 	 *	@param	string	Is the URL to link to
+| 	 *	@param	string	Us the image to use (if the theme uses it)
+| 	 *	@param	string	Is the title to use in the link tags
+| 	 *	@param	bool	Is a boolean to test if the tab is 'selected'
+| 	 */
+| 	function tab_entry($url='http://localhost/', $icon='', $title='Home', $selected=0) {
+| 		print '
+| 		<A ';
+| 		if ($selected){
+| 			print 'class=tabselect ';
+| 		} else {
+| 			print 'class=tabs ';
+| 		}
+| 		print 'href="'. $url .'">';
+| 		print html_image($this->imgroot . $icon,'24','24',array('alt'=>"$title",'border'=>($selected?'1':'0')));
+| 		print '</A>';
+| 	}
+`----
+
+
+I WANT TO CUSTOMIZE ICONS
+-------------------------
+
+Icons are not customizable by default.  I started to enable this like
+this in a non regressive way for icons in the project page (code is at
+www/include/project_home.php).  I added the variable $imgproj =
+'images/ic/'; in Layout.class.php and changed html_image function calls
+like this:
+,----
+| html_image($imgproj. "manual16c.png", '15','15',array('alt'=>'Release Notes'));
+`----
+
+By default images are searched in the original place, but you can now
+change this place.  It's just a matter of doing e.g. like it's done in
+debian theme:
+,----
+| $this->imgproj = 'themes/debian/images/proj/'; 
+`----
+in the class constructor.
+
+All other themes will continue to work.
+
+Just proceed in the same way for other places in the code where you
+want to customize icons, and send us the appropriate patch :)
+
+
+HOW TO NAME MY THEME
+--------------------
+
+Since all themes need to be known by their "identifier", which
+corresponds to their directory name, there needs to be some sort of
+cooperation to avoid namespace conflicts.  We suggest that theme
+authors who want to release their work to the public first contact us
+to "allocate" a theme identifier.  Once this is done, you're very
+welcome to provide a gforge-theme-<yourthemeid> package.  If you
+are not a Debian developer yourself, we can even help you spread it to
+the community by sponsoring the package to Debian.
+
+  For reference, this is the list of currently used theme names:
+
+- classic: the "Classic" theme, from sourceforge.net;
+- forged: "Forged metal", also from sourceforge.net;
+- savannah: historical theme for Savannah, "stolen" from
+  savannah.gnu.org;
+- savannah_codex, savannah_darkslate, savannah_forest,
+  savannah_reverse, savannah_sad, savannah_savannah, savannah_slashd,
+  savannah_startrek, savannah_transparent, savannah_water,
+  savannah_www.gnu.org: lots of other themes "stolen" from Savannah;
+- ultralite: "Ultra lite" theme, from sourceforge.net;
+- querencia: theme from Querencia Livre, contributed by Otavio
+  Salvador <otavio@debian.org>.
+
+  -- Christian Bayle

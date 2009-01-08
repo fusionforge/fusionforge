@@ -1,0 +1,6 @@
+# $Id: AAD_FindText.inputs,v 1.2 2002/01/29 22:15:31 wainstead Exp $
+
+# check if all pages my be dumped
+type: start dump
+start_url: index.php?action=zip
+go

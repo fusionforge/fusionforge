@@ -1,0 +1,32 @@
+a:6:{s:6:"markup";s:1:"2";s:6:"author";s:6:"a_user";s:9:"author_id";s:6:"a_user";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625908;s:8:"%content";s:958:"WikiPlugin to let users attach comments to the end of a page. Since v1.3.8.
+Change the layout via the templates comment.tmpl and addcomment.tmpl, and the CSS classes
+wikicomment, wikicomment-header, wikicomment-body, wikicomment-footer
+
+!! Usage
+<verbatim>
+     <?plugin AddComment order||=normal jshide||=0 mode||=show,add noheader||=0 ?>
+</verbatim>
+
+!! Plugin Arguments
+__jshide__: |
+  Boolean if the comments and/or textbox should be initially hidden and on click expanded. Default: 0
+__order__:  |
+  List comments in chronological (order=normal) or reverse order (order=reverse)
+__mode__:  |
+  List of add and/or show.  Default: add,show
+__noheader__:  |
+  Boolean if the "Comments" h2 header should be omitted. Default: 0
+__pagename__:  |
+  Attach to which page? Default: current pagename
+
+!! Known Problems
+
+jshide does not work yet. Not very well tested.
+
+!! Examples
+
+<?plugin AddComment jshide||=1 ?>
+
+-------------
+
+PhpWikiDocumentation WikiPlugin";}

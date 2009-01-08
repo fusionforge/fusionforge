@@ -1,0 +1,107 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title> reportAbug
+    </title>
+  </head>
+  <body>
+    <table cellpadding="1" cellspacing="1" border="1">
+      <thead>
+        <tr>
+          <td rowspan="1" colspan="3">
+            reportAbug</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            open</td>
+          <td>
+            /my/</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            clickAndWait</td>
+          <td>
+            link=${projet}</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            clickAndWait</td>
+          <td>
+            link=En bref</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            clickAndWait</td>
+          <td>
+            link=Mantis</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            select</td>
+          <td>
+            plugin_mantis_project_id</td>
+          <td>
+            label=${MantisProjet}</td>
+        </tr>
+        <tr>
+          <td>
+            clickAndWait</td>
+          <td>
+            //input[@value='Afficher']</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            clickAndWait</td>
+          <td>
+            link=Report Issue</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            clickAndWait</td>
+          <td>
+            link=Advanced Report</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            select</td>
+          <td>
+            handler_id</td>
+          <td>
+            label=${bugHandler}</td>
+        </tr>
+        <tr>
+          <td>
+            type</td>
+          <td>
+            summary</td>
+          <td>
+            ${bugSummary}</td>
+        </tr>
+        <tr>
+          <td>
+            type</td>
+          <td>
+            description</td>
+          <td>
+            ${bugDescription}</td>
+        </tr>
+        <tr>
+          <td>
+            clickAndWait</td>
+          <td>
+            //input[@value='Submit Report']</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

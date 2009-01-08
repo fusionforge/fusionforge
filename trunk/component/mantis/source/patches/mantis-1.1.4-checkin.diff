@@ -1,0 +1,8 @@
+--- mantis-1.1.1/core/checkin.php	2007-11-01 09:12:03.000000000 +0100
++++ patch_de_mantis-1.1.1/core/checkin.php	2008-06-13 09:58:15.000000000 +0200
+@@ -1,4 +1,4 @@
+-#!/usr/local/bin/php -q
++#!/usr/bin/php -q
+ <?php
+ # Mantis - a php based bugtracking system
+ 

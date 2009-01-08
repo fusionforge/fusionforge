@@ -1,0 +1,86 @@
+--- mantis-1.1.1/core/user_api.php	2007-10-15 00:35:35.000000000 +0200
++++ patch_de_mantis-1.1.1/core/user_api.php	2008-06-13 10:10:40.000000000 +0200
+@@ -216,8 +216,8 @@
+ 	#  realname can match
+ 	# Return true if it is, false otherwise
+ 	function user_is_name_valid( $p_username ) {
+-		# The DB field is only 32 characters
+-		if ( strlen( $p_username ) > 32 ) {
++		# The DB field is only 64 characters
++		if ( strlen( $p_username ) > 64 ) {
+ 			return false;
+ 		}
+ 
+--- mantis-1.1.1/login_page.php	2007-10-14 00:36:41.000000000 +0200
++++ patch_de_mantis-1.1.1/login_page.php	2008-06-13 10:12:10.000000000 +0200
+@@ -98,7 +98,7 @@
+ 		<?php echo lang_get( 'username' ) ?>
+ 	</td>
+ 	<td width="75%">
+-		<input type="text" name="username" size="32" maxlength="32" />
++		<input type="text" name="username" size="64" maxlength="64" />
+ 	</td>
+ </tr>
+ <tr class="row-2">
+--- mantis-1.1.1/lost_pwd_page.php	2007-10-14 00:36:41.000000000 +0200
++++ patch_de_mantis-1.1.1/lost_pwd_page.php	2008-06-13 10:12:52.000000000 +0200
+@@ -56,7 +56,7 @@
+ 		<?php echo lang_get( 'username' ) ?>
+ 	</td>
+ 	<td width="75%">
+-		<input type="text" name="username" size="32" maxlength="32" />
++		<input type="text" name="username" size="64" maxlength="64" />
+ 	</td>
+ </tr>
+ <tr class="row-2">
+--- mantis-1.1.1/manage_user_create_page.php	2007-10-14 00:36:41.000000000 +0200
++++ patch_de_mantis-1.1.1/manage_user_create_page.php	2008-06-13 10:13:53.000000000 +0200
+@@ -47,7 +47,7 @@
+ 		<?php echo lang_get( 'username' ) ?>
+ 	</td>
+ 	<td width="75%">
+-		<input type="text" name="username" size="32" maxlength="32" />
++		<input type="text" name="username" size="64" maxlength="64" />
+ 	</td>
+ </tr>
+ <tr <?php echo helper_alternate_class() ?>>
+@@ -55,7 +55,7 @@
+ 		<?php echo lang_get( 'realname' ) ?>
+ 	</td>
+ 	<td>
+-		<input type="text" name="realname" size="32" maxlength="32" />
++		<input type="text" name="realname" size="64" maxlength="64" />
+ 	</td>
+ </tr>
+ <tr <?php echo helper_alternate_class() ?>>
+--- mantis-1.1.1/manage_user_edit_page.php	2007-10-14 00:36:41.000000000 +0200
++++ patch_de_mantis-1.1.1/manage_user_edit_page.php	2008-06-13 10:15:19.000000000 +0200
+@@ -60,7 +60,7 @@
+ 		<?php echo lang_get( 'username' ) ?>:
+ 	</td>
+ 	<td width="70%">
+-		<input type="text" size="16" maxlength="32" name="username" value="<?php echo $t_user['username'] ?>" />
++		<input type="text" size="64" maxlength="64" name="username" value="<?php echo $t_user['username'] ?>" />
+ 	</td>
+ </tr>
+ 
+@@ -70,7 +70,7 @@
+ 		<?php echo lang_get( 'realname' ) ?>:
+ 	</td>
+ 	<td width="70%">
+-		<input type="text" size="16" maxlength="100" name="realname" value="<?php echo string_attribute( $t_user['realname'] ) ?>" />
++		<input type="text" size="64" maxlength="64" name="realname" value="<?php echo string_attribute( $t_user['realname'] ) ?>" />
+ 	</td>
+ </tr>
+ 
+--- mantis-1.1.1/signup_page.php	2007-10-14 00:36:41.000000000 +0200
++++ patch_de_mantis-1.1.1/signup_page.php	2008-06-13 10:15:41.000000000 +0200
+@@ -49,7 +49,7 @@
+ 		<?php echo lang_get( 'username' ) ?>:
+ 	</td>
+ 	<td width="70%" colspan="2">
+-		<input type="text" name="username" size="32" maxlength="32" />
++		<input type="text" name="username" size="64" maxlength="64" />
+ 	</td>
+ </tr>
+ <tr class="row-2">

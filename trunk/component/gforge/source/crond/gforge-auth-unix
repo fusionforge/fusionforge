@@ -1,0 +1,22 @@
+#
+# %FRIENDLY_NAME%
+# Copyright 1999-2001 (c) VA Linux Systems
+# Copyright 2002-2004 (c) GForge, LLC, Ognyan Kulev
+# http://gforge.org/
+#
+
+# Change path to the %FRIENDLY_NAME% directory.
+GFORGE="%DATADIR%/%NAME%"
+
+# Change paths to the %FRIENDLY_NAME% directory.
+# Don't reference $GFORGE because this won't work!
+# You may need to change the pathname to php CLI (command line interface)
+PHP="%BINDIR%/php -q -d include_path=%DATADIR%/%NAME%/override/:%DATADIR%/%NAME%/override/www/include/:.:%DATADIR%/%NAME%/:%DATADIR%/%NAME%/www/include/:%SYSCONFDIR%/%NAME%/"
+
+# Don't mail command output to anyone.
+MAILTO=""
+
+#
+# Generate the /etc/passwd, /etc/shadow and /etc/group files
+#
+10 * * * * root $PHP $GFORGE/cronjobs/auth_unix.php >> %LOCALSTATEDIR%/log/%NAME%/cron 2>&1

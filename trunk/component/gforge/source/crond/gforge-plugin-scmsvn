@@ -1,0 +1,38 @@
+#
+# %FRIENDLY_NAME%
+# Copyright 1999-2001 (c) VA Linux Systems
+# Copyright 2002-2004 (c) GForge, LLC, Ognyan Kulev
+# http://gforge.org/
+#
+
+# Change path to the %FRIENDLY_NAME% directory.
+GFORGE="%DATADIR%/%NAME%"
+
+# Change paths to the %FRIENDLY_NAME% directory.
+# Don't reference $GFORGE because this won't work!
+# You may need to change the pathname to php CLI (command line interface)
+PHP="%BINDIR%/php -q -d include_path=%DATADIR%/%NAME%/override/:%DATADIR%/%NAME%/override/www/include/:.:%DATADIR%/%NAME%/:%DATADIR%/%NAME%/www/include/:%SYSCONFDIR%/%NAME%/"
+
+# Don't mail command output to anyone.
+MAILTO=""
+
+#
+# Create the SVN repositories
+#
+21 * * * * root $PHP $GFORGE/plugins/scmsvn/cronjobs/create_svn.php >> %LOCALSTATEDIR%/log/%NAME%/cron 2>&1
+
+#
+# Create SVN tarballs
+#
+#
+5 3 * * * root $PHP $GFORGE/plugins/scmsvn/cronjobs/tarballs.php >> %LOCALSTATEDIR%/log/%NAME%/cron 2>&1
+
+#
+# Create SVN snapshots
+#
+35 3 * * * root /bin/sh $GFORGE/plugins/scmsvn/cronjobs/snapshots.sh generate >> %LOCALSTATEDIR%/log/%NAME%/cron 2>&1
+
+#
+# Daily SVN stats collection
+#
+20 1 * * * root $PHP $GFORGE/plugins/scmsvn/cronjobs/svn-stats.php >> %LOCALSTATEDIR%/log/%NAME%/cron 2>&1

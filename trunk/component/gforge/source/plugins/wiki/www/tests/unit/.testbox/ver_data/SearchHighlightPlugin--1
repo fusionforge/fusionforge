@@ -1,0 +1,14 @@
+a:6:{s:6:"markup";s:1:"2";s:6:"author";s:6:"a_user";s:9:"author_id";s:6:"a_user";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625924;s:8:"%content";s:398:"The SearchHighLight WikiPlugin is an internal actionpage plugin,
+which is only used internally.
+
+When someone is referred from a search engine like Google, Yahoo
+or our own fulltextsearch, the terms the user searched for are highlighted.
+See also http://wordpress.org/about/shots/1.2/plugins.png
+
+!! Plugin Arguments
+__s__: |
+  The search term
+__case_exact__:  |
+  boolean.
+__regex__:  |
+  boolean.";}

@@ -1,0 +1,15 @@
+# default: on
+# description: Subversion client/server operations.
+service svnserve
+{
+	socket_type	= stream
+	protocol	= tcp
+	wait		= no
+	user		= nobody
+	server		= /usr/bin/svnserve.subversion
+	server_args	= -i -R -r /svnroot
+	log_type	= FILE /var/log/gforge/svn_anon
+	log_on_success	+= HOST USERID
+	log_on_failure	+= HOST USERID
+	disable		= no
+}

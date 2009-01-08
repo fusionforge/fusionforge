@@ -1,0 +1,57 @@
+--- mantis-1.1.1/core/custom_function_api.php	2007-10-14 00:36:41.000000000 +0200
++++ patch_de_mantis-1.1.1/core/custom_function_api.php	2008-06-13 09:50:46.000000000 +0200
+@@ -391,5 +391,19 @@
+ 	# and the context.  The printing of the buttons will typically call html_button() from
+ 	# html_api.php.  For each button, this function needs to generate the enclosing '<td>' and '</td>'.
+ 	function custom_function_default_print_bug_view_page_custom_buttons( $p_bug_id ) {
++		$headers = apache_request_headers ();
++		if (($headers !== false)
++		&&  (array_key_exists ("GForgeBaseURL", $headers) == true)
++		&&  (array_key_exists ("GForgeRemoteURL", $headers) == true))
++		{
++?><td class="center"><form name="add_task" action="<? echo $headers ["GForgeBaseURL"]; ?>/plugins/mantis/addpm.php" method="post">
++<input type="hidden" name="mantis_url" value="<? echo $headers ["GForgeRemoteURL"]; ?>">
++<input type="hidden" name="mantis_id" value="<? echo bug_get_field ($p_bug_id, "project_id"); ?>">
++<input type="hidden" name="bug_id" value="<? echo $p_bug_id; ?>">
++<input type="hidden" name="bug_summary" value="<? echo mb_convert_encoding (bug_get_field ($p_bug_id, "summary"), "ISO-8859-1", lang_get ("charset")); ?>">
++<input type="submit" name="add_task" value="<? echo lang_get ("create_gforge_task"); ?>">
++</form></td>
++<?
++		}
+ 	}
+ ?>
+--- mantis-1.1.1/lang/strings_english.txt	2008-01-16 05:49:48.000000000 +0100
++++ patch_de_mantis-1.1.1/lang/strings_english.txt	2008-06-24 16:06:48.000000000 +0200
+@@ -1375,6 +1375,10 @@
+ # wiki related strings
+ $s_wiki = 'Wiki';
+ 
++# GForge integration strings
++$s_create_gforge_task = 'Create a task';# GForge integration strings
++$s_create_gforge_task = 'Create a task';
++
+ # Tagging
+ $s_tags = 'Tags';
+ $s_tag_details = 'Tag Details: %s';
+--- mantis-1.1.1/lang/strings_french.txt	2007-10-14 00:36:41.000000000 +0200
++++ patch_de_mantis-1.1.1/lang/strings_french.txt	2008-06-24 16:09:34.000000000 +0200
+@@ -1381,6 +1381,9 @@
+ # wiki related strings
+ $s_wiki = 'Wiki';
+ 
++# GForge integration strings
++$s_create_gforge_task = 'CrÃ©er une tÃ¢che';
++
+ # Tagging
+ $s_tags = 'Balises';
+ $s_tag_details = 'Details de la balise : %s';
+--- mantis-1.1.1/lang/strings_french_8859-15.txt	2007-10-14 00:36:41.000000000 +0200
++++ patch_de_mantis-1.1.1/lang/strings_french_8859-15.txt	2008-06-13 09:56:22.000000000 +0200
+@@ -1334,4 +1334,7 @@
+ 
+ # wiki related strings
+ $s_wiki = 'Wiki';
++
++# GForge integration strings
++$s_create_gforge_task = 'Créer une tâche';
+ ?>

@@ -1,0 +1,11 @@
+etc/gforge
+etc/gforge/templates
+usr/lib/gforge/bin
+var
+var/lib
+var/lib/gforge
+var/lib/gforge/chroot
+var/lib/gforge/chroot/var
+var/lib/gforge/chroot/var/lib
+var/lib/gforge/chroot/var/lib/gforge
+var/lib/gforge/etc

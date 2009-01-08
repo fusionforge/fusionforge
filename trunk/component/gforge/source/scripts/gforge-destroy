@@ -1,0 +1,160 @@
+#!/bin/sh
+#---------------------------------------------------------------------------
+# Novaforge is a registered trade mark from Bull S.A.S
+# Copyright (C) 2007 Bull S.A.S.
+# 
+# http://novaforge.org/
+#
+#
+# This file has been developped within the Novaforge(TM) project from Bull S.A.S
+# and contributed back to GForge community.
+#
+# GForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# GForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#---------------------------------------------------------------------------
+
+
+# Source functions
+. %DATADIR%/%NAME%/config/util/functions
+init_variables "#" $*
+echo -e "$PREFIX_CHAR$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR %FRIENDLY_NAME% : destruction of database and data files"
+echo -e "$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR This script will remove configuration and destroy"
+echo -e "$PREFIX_CHAR the database and data files for all projects and users."
+echo -e "$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR It should be executed if you want to loose all your data."
+echo -e "$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR -> Continue ('y' or 'n') ?"
+echo -en "$PREFIX_CHAR -> "
+read CHOICE
+if [ "$CHOICE" != "y" ]; then
+	exit 1
+fi
+#
+# Remove configuration
+#
+echo -e "$PREFIX_CHAR Removing configuration"
+%SBINDIR%/%NAME%-remove silent
+#
+# Destroy data of modules
+#
+pushd %DATADIR%/%NAME%/config/scripts/destroy > /dev/null 2>&1
+LISTE=`ls -1 2>/dev/null`
+for MODULE in $LISTE ; do
+	if [ -f $MODULE -a -x $MODULE ] ; then
+		echo -e "$PREFIX_CHAR Destroying data of module '$MODULE'"
+		./$MODULE "$PREFIX_CHAR\t"
+	fi
+done
+popd > /dev/null 2>&1
+#
+# Remove plugins config files
+#
+echo -e "$PREFIX_CHAR Removing plugins configuration in directory '%LOCALSTATEDIR%/lib/%NAME%/config'"
+find %LOCALSTATEDIR%/lib/%NAME%/config -name "config.sql" -exec rm -f {} \; > /dev/null 2>&1
+#
+# Remove projects and users directories
+#
+DIRS="home/groups home/users localizationcache snapshots tarballs uploads"
+for DIR in $DIRS ; do
+	echo -e "$PREFIX_CHAR Destroying content of directory '%LOCALSTATEDIR%/lib/%NAME%/$DIR'"
+	if [ -d %LOCALSTATEDIR%/lib/%NAME%/$DIR ] ; then
+		rm -rf %LOCALSTATEDIR%/lib/%NAME%/$DIR/*
+	else
+		echo -e "$PREFIX_CHAR -> Directory is missing"
+	fi
+done
+#
+# Remove log files
+#
+echo -e "$PREFIX_CHAR Removing log files"
+rm -rf %LOCALSTATEDIR%/log/%NAME%/*
+#
+# Remove mailing lists
+#
+DIRS="archives/private archives/public lists"
+for DIR in $DIRS ; do
+	echo -e "$PREFIX_CHAR Destroying content of directory '%MAILMANDATADIR%/$DIR'"
+	if [ -d %MAILMANDATADIR%/$DIR ] ; then
+		rm -rf %MAILMANDATADIR%/$DIR/*
+	else
+		echo -e "$PREFIX_CHAR -> Directory is missing"
+	fi
+done
+#
+# Drop database %NAME%
+#
+echo -e "$PREFIX_CHAR Dropping database '%NAME%'"
+NAME=`su - postgres -c "psql -d template1 -At -c \"SELECT datname FROM pg_database WHERE datname='%NAME%'\" 2>/dev/null"`
+if [ $? -eq 0 -a -z "$NAME" ] ; then
+	echo -e "$PREFIX_CHAR -> Database has already been dropped"
+else
+	su - postgres -c "psql -d template1 -c \"DROP DATABASE %NAME%\" > /dev/null 2>&1"
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while dropping database"
+	fi
+fi
+#
+# Drop user %NAME%
+#
+echo -e "$PREFIX_CHAR Dropping user '%NAME%'"
+NAME=`su - postgres -c "psql -d template1 -At -c \"SELECT usename FROM pg_user WHERE usename='%NAME%'\" 2>/dev/null"`
+if [ $? -eq 0 -a -z "$NAME" ] ; then
+	echo -e "$PREFIX_CHAR -> User has already been dropped"
+else
+	su - postgres -c "psql -d template1 -c \"DROP USER %NAME%\" > /dev/null 2>&1"
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while dropping user"
+	fi
+fi
+#
+# Remove %SYSCONFDIR%/%NAME%/.config
+#
+echo -e "$PREFIX_CHAR Removing configuration parameters (file '%SYSCONFDIR%/%NAME%/.config')"
+if [ -e %SYSCONFDIR%/%NAME%/.config ] ; then
+	rm -f %SYSCONFDIR%/%NAME%/.config
+else
+	echo -e "$PREFIX_CHAR -> File has already been removed"
+fi
+#
+# Remove %SYSCONFDIR%/%NAME%/.init
+#
+echo -e "$PREFIX_CHAR Removing init parameters (file '%SYSCONFDIR%/%NAME%/.init')"
+if [ -e %SYSCONFDIR%/%NAME%/.init -o -e %SYSCONFDIR%/%NAME%/.db ] ; then
+	rm -f %SYSCONFDIR%/%NAME%/.init
+	rm -f %SYSCONFDIR%/%NAME%/.db
+else
+	echo -e "$PREFIX_CHAR -> File has already been removed"
+fi
+#
+# Remove %SYSCONFDIR%/%NAME%/.admin
+#
+echo -e "$PREFIX_CHAR Removing password of %FRIENDLY_NAME% administrator (file '%SYSCONFDIR%/%NAME%/.admin')"
+if [ -e %SYSCONFDIR%/%NAME%/.admin ] ; then
+	rm -f %SYSCONFDIR%/%NAME%/.admin
+else
+	echo -e "$PREFIX_CHAR -> File has already been removed"
+fi
+#
+# Remove %SYSCONFDIR%/%NAME%/.mailman
+#
+echo -e "$PREFIX_CHAR Removing administration password of mailing list 'mailman' (file '%SYSCONFDIR%/%NAME%/.mailman')"
+if [ -e %SYSCONFDIR%/%NAME%/.mailman ] ; then
+	rm -f %SYSCONFDIR%/%NAME%/.mailman
+else
+	echo -e "$PREFIX_CHAR -> File has already been removed"
+fi
+echo -e "$PREFIX_CHAR$PREFIX_CHAR"
+exit 0

@@ -1,0 +1,48 @@
+<?php
+/**
+ * GForge Search Engine
+ *
+ * Copyright 2004 (c) Guillaume Smet
+ *
+ * http://gforge.org
+ *
+ * @version $Id: SearchEngine.class.php 6506 2008-05-27 20:56:57Z aljeux $
+ */
+
+class GFSearchEngine {
+	var $type;
+	var $rendererClassName;
+	var $label;
+	
+	function GFSearchEngine($type, $rendererClassName, $label) {
+		$this->type = $type;
+		$this->rendererClassName = $rendererClassName;
+		$this->label = $label;
+	}
+	
+	function getType() {
+		return $this->type;
+	}
+	
+	function getLabel($parameters) {
+		return $this->label;
+	}
+	
+	function isAvailable($parameters) {
+		return true;
+	}
+	
+	function includeSearchRenderer() {
+		global $gfwww, $gfcommon;
+		require_once $gfwww.'search/include/renderers/'.$this->rendererClassName.'.class.php';
+	}
+	
+	function & getSearchRenderer($words, $offset, $exact) {
+		$this->includeSearchRenderer();
+		$rendererClassName = $this->rendererClassName;
+		$renderer = new $rendererClassName($words, $offset, $exact);
+		return $renderer;
+	}
+}
+
+?>

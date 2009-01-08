@@ -1,0 +1,49 @@
+<?php
+// PLEASE DO NOT REMOVE THIS LINE
+
+// GForge Universal Site Modifications
+// by David HM Spector <spector@zeitgeist.com>
+//
+// Really Important Safety Tip: --> DO NOT LEAVE ANY WHITE
+// SPACE AFTER THE CLOSING PHP TAG AT THE END OF THIS FILE!
+//
+// Doing so will really confuse the software and cause
+// 1) cookies to fail and 2) HTML page headers to fail
+// which will give you some preally hard-to-debug problems.
+// Why? PHP is a *pre-processor* -- anything that's not PHP gets
+// emitted as part of the HTML stream and processed by the browser,
+// so white space is meaningful!
+//
+//
+// GForge hostnames
+//
+// Hostnames should be fully qualified domain names (FQDNs); using short names
+// would be prettier but would stop you from distributing your SourceForge
+// implementation across multiple domains.
+//
+// Of course, if you have a lot of machines serving a particular purpose
+// such as FTP or for shell accounts, the "hostname" here might be in
+// reality an addr_list of machines that is serviced by a round-robin
+// mechanism or something fancy like a local-director.
+//
+// The default GForge domain
+// this is used where ever the "naked" form of the GForge domain
+// might be used.  E.g., "mailto:admin@gforge.net"
+$sys_default_domain = '{domain_name}';
+$sys_forum_return_domain = "{sys_forum_return_domain}";
+//$sys_fallback_domain = 'gforge2.company.com';
+
+// Machine used for downloading sources/packages
+$sys_download_host = '{download_host}';
+
+// Machine(s) that host users' shell accounts
+//  N.B. to the SourceForge Crew: What's the difference between the user
+// host and the shell host?  They are clearly two different hostnames
+// in the source code, but they seem to serve the same purpose..?
+$sys_shell_host = '{shell_host}';
+$sys_users_host = '{users_host}';
+
+// Machine that hosts the GForge mailing lists (This could also be
+// the mail host if you have enough horsepower & bandwidth)
+$sys_lists_host = '{lists_host}';
+

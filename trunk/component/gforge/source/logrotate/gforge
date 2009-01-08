@@ -1,0 +1,5 @@
+/var/log/gforge/cron {
+	missingok
+	notifempty
+	create 0640 root root
+}

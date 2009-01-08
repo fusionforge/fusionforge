@@ -1,0 +1,42 @@
+#
+# %FRIENDLY_NAME%
+# Copyright 1999-2001 (c) VA Linux Systems
+# Copyright 2002-2004 (c) GForge, LLC, Ognyan Kulev
+# http://gforge.org/
+#
+
+# Change path to the %FRIENDLY_NAME% directory.
+GFORGE="%DATADIR%/%NAME%"
+
+# Change paths to the %FRIENDLY_NAME% directory.
+# Don't reference $GFORGE because this won't work!
+# You may need to change the pathname to php CLI (command line interface)
+PHP="%BINDIR%/php -q -d include_path=%DATADIR%/%NAME%/override/:%DATADIR%/%NAME%/override/www/include/:.:%DATADIR%/%NAME%/:%DATADIR%/%NAME%/www/include/:%SYSCONFDIR%/%NAME%/"
+
+# Don't mail command output to anyone.
+MAILTO=""
+
+#
+# Create or update the CVS repositories
+#
+20 * * * * root $PHP $GFORGE/plugins/scmcvs/cronjobs/create_cvs.php >> %LOCALSTATEDIR%/log/%NAME%/cron 2>&1
+
+#
+# Create CVS tarballs
+#
+5 2 * * * root $PHP $GFORGE/plugins/scmcvs/cronjobs/tarballs.php >> %LOCALSTATEDIR%/log/%NAME%/cron 2>&1
+
+#
+# Create CVS snapshots
+#
+35 2 * * * root /bin/sh $GFORGE/plugins/scmcvs/cronjobs/snapshots.sh generate >> %LOCALSTATEDIR%/log/%NAME%/cron 2>&1
+
+#
+# Daily CVS stats collection
+#
+20 1 * * * root $PHP $GFORGE/plugins/scmcvs/cronjobs/history_parse.php >> %LOCALSTATEDIR%/log/%NAME%/cron 2>&1
+
+#
+# Move CVS repositories of deleted groups
+#
+25 1 * * * root $PHP $GFORGE/plugins/scmcvs/cronjobs/deleted_groups.php >> %LOCALSTATEDIR%/log/%NAME%/cron 2>&1

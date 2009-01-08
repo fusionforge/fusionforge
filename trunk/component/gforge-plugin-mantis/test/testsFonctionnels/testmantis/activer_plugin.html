@@ -1,0 +1,76 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title> activer_plugin
+    </title>
+  </head>
+  <body>
+    <table cellpadding="1" cellspacing="1" border="1">
+      <thead>
+        <tr>
+          <td rowspan="1" colspan="3">
+            activer_plugin</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            open</td>
+          <td>
+            /my/</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            clickAndWait</td>
+          <td>
+            link=Ma page</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            clickAndWait</td>
+          <td>
+            link=${projet}</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            clickAndWait</td>
+          <td>
+            link=Administration</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            clickAndWait</td>
+          <td>
+            //a[contains(text(),'Édition infos&nbsp;&nbsp;publiques')]</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            check</td>
+          <td>
+            use_mantis</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            clickAndWait</td>
+          <td>
+            submit</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            verifyText</td>
+          <td>
+            //h3[1]</td>
+          <td>
+            Informations de groupes mises à jour</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

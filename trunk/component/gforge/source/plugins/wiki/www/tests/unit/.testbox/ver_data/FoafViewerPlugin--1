@@ -1,0 +1,21 @@
+a:6:{s:6:"markup";s:1:"2";s:6:"author";s:6:"a_user";s:9:"author_id";s:6:"a_user";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625911;s:8:"%content";s:515:"!About
+FoafViewerPlugin is written to facilitate the viewing of FOAF / RDF files in human readable form. Please note, it provides only basic features at this time.
+
+!Version
+0.0.1
+
+!Usage
+<verbatim>
+<?plugin FoafViewer foaf=http://www.myfoaf.com/foaf.rdf ?>
+/FoafViewerPlugin?foaf=http://www.myfoaf.com/foaf.rdf
+</verbatim>
+
+!Download from....
+http://www.ahsonline.com.au/dod/FoafViewerPlugin.zip
+
+!Example
+<?plugin FoafViewer foaf=http://www.ahsonline.com.au/dod/FOAF.rdf ?>
+
+-----
+
+PhpWikiDocumentation WikiPlugin";}

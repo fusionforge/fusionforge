@@ -1,0 +1,259 @@
+#!/bin/sh
+#---------------------------------------------------------------------------
+# Novaforge is a registered trade mark from Bull S.A.S
+# Copyright (C) 2007 Bull S.A.S.
+# 
+# http://novaforge.org/
+#
+#
+# This file has been developped within the Novaforge(TM) project from Bull S.A.S
+# and contributed back to GForge community.
+#
+# GForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# GForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#---------------------------------------------------------------------------
+
+
+# Source functions
+. %DATADIR%/%NAME%/config/util/functions
+init_variables "#" $*
+echo -e "$PREFIX_CHAR $PREFIX_CHAR"
+echo -e "$PREFIX_CHAR %FRIENDLY_NAME% : initialization of database"
+echo -e "$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR This script will check access to the database server,"
+echo -e "$PREFIX_CHAR create the database and create the %FRIENDLY_NAME% administrator."
+echo -e "$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR It should be executed when a blank system is installed."
+echo -e "$PREFIX_CHAR -> Continue ('y' or 'n') ?"
+echo -en "$PREFIX_CHAR -> "
+read CHOICE
+if [ "$CHOICE" != "y" ]; then
+	EXIT=1
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Checking access to database server"
+	su - postgres -c "psql -d template1 -At -c \"SELECT COUNT(tablename) FROM pg_tables\" > /dev/null 2>&1"
+	if [ $? -ne 0 ] ; then
+		EXIT=1
+		echo -e "$PREFIX_CHAR -> Error while querying database"
+		if [ -e %LOCALSTATEDIR%/lib/pgsql/data/pg_hba.conf ] ; then
+			grep -E "^host[[:blank:]]+%NAME%[[:blank:]]+%NAME%[[:blank:]]+127.0.0.1[[:blank:]]+255.255.255.255[[:blank:]]+md5$" %LOCALSTATEDIR%/lib/pgsql/data/pg_hba.conf > /dev/null 2>&1
+			if [ $? -ne 0 ] ; then
+				echo -e "$PREFIX_CHAR -> File '%LOCALSTATEDIR%/lib/pgsql/data/pg_hba.conf' does not contain the line 'host %NAME% %NAME% 127.0.0.1 255.255.255.255 md5'"
+			fi
+			grep -E "^host[[:blank:]]+%NAME%[[:blank:]]+%NAME%_nss[[:blank:]]+127.0.0.1[[:blank:]]+255.255.255.255[[:blank:]]+md5$" %LOCALSTATEDIR%/lib/pgsql/data/pg_hba.conf > /dev/null 2>&1
+			if [ $? -ne 0 ] ; then
+				echo -e "$PREFIX_CHAR -> File '%LOCALSTATEDIR%/lib/pgsql/data/pg_hba.conf' does not contain the line 'host %NAME% %NAME%_nss 127.0.0.1 255.255.255.255 md5'"
+			fi
+		else
+			echo -e "$PREFIX_CHAR -> File '%LOCALSTATEDIR%/lib/pgsql/data/pg_hba.conf' is missing"
+		fi
+		if [ -e %LOCALSTATEDIR%/lib/pgsql/data/postgresql.conf ] ; then
+			grep -E "^tcpip_socket[[:blank:]]+=[[:blank:]]+true$" %LOCALSTATEDIR%/lib/pgsql/data/postgresql.conf > /dev/null 2>&1
+			if [ $? -ne 0 ] ; then
+				echo -e "$PREFIX_CHAR -> File '%LOCALSTATEDIR%/lib/pgsql/data/postgresql.conf' does not contain the line 'tcpip_socket = true'"
+			fi
+		else
+			echo -e "$PREFIX_CHAR -> File '%LOCALSTATEDIR%/lib/pgsql/data/postgresql.conf' is missing"
+		fi
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Creating user '%NAME%'"
+	DB_PASSWORD="`pwgen -N 1 -c -n -s`"
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while generating password"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	GFORGE_INIT_LOG="%LOCALSTATEDIR%/log/%NAME%/%NAME%-init.log"
+	if [ -e $GFORGE_INIT_LOG ] ; then
+		rm -f $GFORGE_INIT_LOG
+	fi
+	echo -e "#\n#\n# Creating user '%NAME%'\n#\n#\n" >> $GFORGE_INIT_LOG
+	su - postgres -c "psql -d template1 -c \"CREATE USER %NAME% ENCRYPTED PASSWORD '$DB_PASSWORD' NOCREATEDB NOCREATEUSER\"" >> $GFORGE_INIT_LOG 2>&1 
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while creating user"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Creating database '%NAME%'"
+	echo -e "#\n#\n# Creating database '%NAME%'\n#\n#\n" >> $GFORGE_INIT_LOG
+	su - postgres -c "psql -d template1 -c \"CREATE DATABASE %NAME% OWNER %NAME% TEMPLATE template0 ENCODING 'UNICODE'\"" >> $GFORGE_INIT_LOG 2>&1
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while creating database"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Creating function 'plpgsql_call_handler'"
+	echo -e "#\n#\n# Creating function 'plpgsql_call_handler'\n#\n#\n" >> $GFORGE_INIT_LOG
+	su - postgres -c "psql -d %NAME% -c \"CREATE FUNCTION plpgsql_call_handler () RETURNS LANGUAGE_HANDLER AS '%LIBDIR%/pgsql/plpgsql.so' LANGUAGE 'C'\"" >> $GFORGE_INIT_LOG 2>&1
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while creating function"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Creating trusted language 'plpgsql'"
+	echo -e "#\n#\n# Creating trusted language 'plpgsql'\n#\n#\n" >> $GFORGE_INIT_LOG
+	su - postgres -c "psql -d %NAME% -c \"CREATE TRUSTED LANGUAGE 'plpgsql' HANDLER plpgsql_call_handler LANCOMPILER 'PL/pgSQL'\"" >> $GFORGE_INIT_LOG 2>&1
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while creating trusted language"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Revoking all on schema public from public"
+	echo -e "#\n#\n# Revoking all on schema public from public\n#\n#\n" >> $GFORGE_INIT_LOG
+	su - postgres -c "psql -d %NAME% -c \"REVOKE ALL ON SCHEMA public FROM PUBLIC\"" >> $GFORGE_INIT_LOG 2>&1
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while revoking"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Granting all on schema public to public"
+	echo -e "#\n#\n# Granting all on schema public to public\n#\n#\n" >> $GFORGE_INIT_LOG
+	su - postgres -c "psql -d %NAME% -c \"GRANT ALL ON SCHEMA public TO PUBLIC\"" >> $GFORGE_INIT_LOG 2>&1
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while granting"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Creating main tables and initializing data"
+	echo -e "#\n#\n# Creating main tables and initializing data\n#\n#\n" >> $GFORGE_INIT_LOG
+	export PGHOST=localhost
+	export PGDATABASE=%NAME%
+	export PGUSER=%NAME%
+	export PGPASSWORD=$DB_PASSWORD
+	psql -q -f %DATADIR%/%NAME%/db/%NAME%.sql >> $GFORGE_INIT_LOG 2>&1
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while creating main tables"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 7 ] ; then
+	echo -e "$PREFIX_CHAR Copying data into trove catalog"
+	echo -e "#\n#\n# Copying data into trove catalog\n#\n#\n" >> $GFORGE_INIT_LOG
+	psql -q -c "\copy trove_cat (trove_cat_id, version, parent, root_parent, shortname, fullname, description, count_subcat, count_subproj, fullpath, fullpath_ids) FROM '%DATADIR%/%NAME%/db/%NAME%-trove_cat.sql'" >> $GFORGE_INIT_LOG 2>&1
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while copying data"
+		EXIT=1
+	else
+		psql -q -c "SELECT pg_catalog.setval('trove_cat_pk_seq', (SELECT COALESCE(MAX(trove_cat_id)+1, 1) from trove_cat), false)" >> $GFORGE_INIT_LOG 2>&1
+		if [ $? -ne 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Error while setting value of sequence"
+			EXIT=1
+		fi
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Creating reporting tables"
+	echo -e "#\n#\n# Creating reporting tables\n#\n#\n" >> $GFORGE_INIT_LOG
+	psql -q -f %DATADIR%/%NAME%/db/%NAME%-reporting.sql >> $GFORGE_INIT_LOG 2>&1
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while creating reporting tables"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Creating %FRIENDLY_NAME% administrator 'admin'"
+	echo -e "#\n#\n# Creating %FRIENDLY_NAME% administrator 'admin'\n#\n#\n" >> $GFORGE_INIT_LOG
+	ADMIN_PASSWORD="`pwgen -N 1 -c -n -s`"
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while generating password"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	ADMIN_PASSWORD_MD5=`md5sum --string=$ADMIN_PASSWORD | cut -c 1-32`
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while computing MD5 sum of password"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	ADMIN_PASSWORD_CRYPT_MD5=`echo "<? echo crypt('$ADMIN_PASSWORD'); ?>" | /usr/bin/php -q -n`
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while crypting password"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	DATE=`date +%s`
+	psql -q -c "INSERT INTO users (user_name, email, user_pw, realname, unix_pw, add_date, confirm_hash, mail_siteupdates, mail_va, authorized_keys, email_new, jabber_address, jabber_only, address, phone, fax, title, firstname, lastname, address2, theme_id) VALUES ('admin', 'root@localhost', '$ADMIN_PASSWORD_MD5', '%FRIENDLY_NAME% administrator', '$ADMIN_PASSWORD_CRYPT_MD5', $DATE, '', 1, 1, NULL, NULL, '', 0, '', '', '', '', '', '', '', 1)" >> $GFORGE_INIT_LOG 2>&1
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while inserting user"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	ADMIN_UID=`psql -At -c "SELECT user_id FROM users WHERE user_name='admin'"`
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while retrieving user id"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	psql -q -c "INSERT INTO user_group (user_id,group_id,admin_flags) VALUES ($ADMIN_UID,1,'A')" >> $GFORGE_INIT_LOG 2>&1
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while inserting user group"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Commenting schema public"
+	echo -e "#\n#\n# Commenting schema public\n#\n#\n" >> $GFORGE_INIT_LOG
+	su - postgres -c "psql -d %NAME% -c \"COMMENT ON SCHEMA public IS 'Standard public schema'\"" >> $GFORGE_INIT_LOG 2>&1
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while commenting schema"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Saving init parameters in file '%SYSCONFDIR%/%NAME%/.init'"
+	echo "DB_VERSION=%VERSION%" > %SYSCONFDIR%/%NAME%/.init
+	echo "DB_PASSWORD=$DB_PASSWORD" >> %SYSCONFDIR%/%NAME%/.init
+	chown root.root %SYSCONFDIR%/%NAME%/.init
+	chmod 600 %SYSCONFDIR%/%NAME%/.init
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Saving password of %FRIENDLY_NAME% administrator in file '%SYSCONFDIR%/%NAME%/.admin'"
+	echo "ADMIN_PASSWORD=$ADMIN_PASSWORD" > %SYSCONFDIR%/%NAME%/.admin
+	chown root.root %SYSCONFDIR%/%NAME%/.admin
+	chmod 600 %SYSCONFDIR%/%NAME%/.admin
+fi
+echo -e "$PREFIX_CHAR "
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Success !"
+	echo -e "$PREFIX_CHAR"
+	echo -e "$PREFIX_CHAR You should now run the '%NAME%-config' script to configure %FRIENDLY_NAME%."
+	echo -e "$PREFIX_CHAR"
+	echo -e "$PREFIX_CHAR Please note:"
+	echo -e "$PREFIX_CHAR   * file '%SYSCONFDIR%/%NAME%/.init' contains the init parameters (including cleartext password of PostgreSQL user '%NAME%'),"
+	echo -e "$PREFIX_CHAR   * file '%SYSCONFDIR%/%NAME%/.admin' contains the cleartext password of %FRIENDLY_NAME% administrator 'admin',"
+	echo -e "$PREFIX_CHAR   * file '$GFORGE_INIT_LOG' contains the logs of SQL commands executed in this script."
+else
+	echo -e "$PREFIX_CHAR Failure !"
+	if [ -n "$GFORGE_INIT_LOG" ] ; then
+		echo -e "$PREFIX_CHAR"
+		echo -e "$PREFIX_CHAR You should take a look at the SQL log file '$GFORGE_INIT_LOG'."
+	fi
+fi
+echo -e "$PREFIX_CHAR$PREFIX_CHAR"
+exit $EXIT

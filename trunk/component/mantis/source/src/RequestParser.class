@@ -1,0 +1,88 @@
+<?php
+/*
+ *
+ * Novaforge is a registered trade mark from Bull S.A.S
+ * Copyright (C) 2007 Bull S.A.S.
+ * 
+ * http://novaforge.org/
+ *
+ *
+ * This file has been developped within the Novaforge(TM) project from Bull S.A.S
+ * and contributed back to GForge community.
+ *
+ * GForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this file; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
+class RequestParser
+{
+	var $command;
+	var $array_attributes;
+	var $array_roles;
+
+	function parse ($xml)
+	{
+		$ok = false;
+		$this->command = "NONE";
+		$this->array_attributes = array ();
+		$this->array_roles = array ();
+		$parser = xml_parser_create ();
+		xml_set_object ($parser, $this);
+		xml_parser_set_option ($parser, XML_OPTION_SKIP_WHITE, 1);
+		xml_set_element_handler ($parser, "element_open", "element_close");
+		if (xml_parse ($parser, $xml) == 1)
+		{
+			$ok = true;
+		}
+		else
+		{
+			syslog (LOG_ERR, __FILE__ . " - " . __CLASS__ . "::" . __FUNCTION__ . " - Parsing error at line " . xml_get_current_line_number ($parser) . ", column " . xml_get_current_column_number ($parser) . " (code " . xml_get_error_code ($parser) . ": " . xml_error_string (xml_get_error_code ($parser)) .")", __FILE__, __FUNCTION__, __CLASS__);
+		}
+		xml_parser_free ($parser);
+		return $ok;
+	}
+
+	function element_open ($parser, $name, $attribs)
+	{
+		switch ($name)
+		{
+			case "CREATE_PROJECT" :
+			case "GET_PROJECT" :
+			case "UPDATE_PROJECT" :
+			case "REMOVE_PROJECT" :
+			case "GET_USERS" :
+			case "CREATE_USER" :
+			case "UPDATE_USER" :
+			case "GET_ROLES" :
+			case "SET_ROLES" :
+			case "GET_BUGS" :
+			case "CHECKIN_BUGS" :
+				$this->command = $name;
+				if (count ($attribs) > 0)
+				{
+					$this->array_attributes [$name] = $attribs;
+				}
+				break;
+			case "PAIR" :
+				$this->array_roles [$attribs ["USER_NAME"]] = $attribs ["ROLE_ID"];
+				break;
+		}
+	}
+
+	function element_close ($parser, $name)
+	{
+	}
+}
+
+?>

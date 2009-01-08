@@ -1,0 +1,60 @@
+# Version of packaging scripts
+#
+VERSION="1.1"
+
+# Target OS
+# Values: values returned by getdist
+# Default: built for every OS
+TARGET_OS=""
+
+# Do we use an extra version level ?
+# Values: [0,1]
+USE_EXTRA_VERSION_LEVEL=1
+
+# Create a tarball, or not ?
+# Values: [0,1]
+CREATE_TARBALL=0
+
+# Tarball component
+# Default: SVN component
+TARBALL_COMPONENT=""
+
+# Tarball version
+# Default: SVN version
+TARBALL_VERSION="1.1.1"
+
+# Files or directories to exclude from tarball
+EXCLUDE_FROM_TARBALL=""
+
+# Use extra sources
+# Values: [0,1]
+USE_EXTRA_SOURCES=1
+
+# Directories containing extra sources
+EXTRA_SOURCES_DIRS="tarballs scripts"
+
+# RPM component
+# Default: SVN component
+RPM_COMPONENT=""
+
+# RPM version
+# Default: SVN version (minus last dot and last level if
+#          USE_EXTRA_VERSION_LEVEL=1)
+RPM_VERSION=""
+
+# RPM release
+# Default: SVN release (prepended with last level of SVN version and
+#          a dot if USE_EXTRA_VERSION_LEVEL=1)
+RPM_RELEASE=""
+
+# RPM architecture
+# Values: noarch, i386, i486, i586, i686, athlon, x86_64, ia64, sparc,...
+# Default: value of BUILD_ARCH
+RPM_ARCH="noarch"
+
+# RPM subcomponents
+RPM_SUBCOMPONENTS=""
+
+# Script to execute after RPM build
+# This script is sourced and the 'postrpmbuild' function is called
+POST_RPM_SCRIPT=""

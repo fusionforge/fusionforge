@@ -1,0 +1,8 @@
+a:6:{s:6:"markup";s:1:"2";s:6:"author";s:6:"a_user";s:9:"author_id";s:6:"a_user";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625928;s:8:"%content";s:218:"This simple plugin allows blog-style entries on a page. Try making a few entries, and then look at RecentChanges to get an idea of how things work.
+
+<?plugin WikiBlog ?>
+
+
+-------------
+
+PhpWikiDocumentation WikiPlugin";}

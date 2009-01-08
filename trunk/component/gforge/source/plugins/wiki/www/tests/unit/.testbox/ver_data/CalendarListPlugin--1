@@ -1,0 +1,18 @@
+a:6:{s:6:"markup";s:1:"2";s:6:"author";s:6:"a_user";s:9:"author_id";s:6:"a_user";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625908;s:8:"%content";s:512:"The CalendarListPlugin is used in conjunction with the CalendarPlugin. It was written for those who use a wiki as a personal information manager.
+
+Just click any date in the calendar, edit the for that date, then come back to this page. The event should be listed below the calendar.
+
+Usage:
+<verbatim>
+<?plugin Calendar ?>
+<?plugin CalendarList ?>
+</verbatim>
+
+Example (click any date and edit it, then return to this page):
+<?plugin Calendar ?>
+
+<?plugin CalendarList ?>
+
+-----
+
+PhpWikiDocumentation WikiPlugin";}

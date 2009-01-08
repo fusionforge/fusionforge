@@ -1,0 +1,22 @@
+Date: Sun, 19 Mar 2006 00:14:20 -0500
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.12p3)
+X-Rcs-Id: $Id: WunschZettelSeiten,v 1.2 2005/09/27 17:31:25 rurban Exp $
+Content-Type: application/x-phpwiki;
+  pagename=WunschZettelSeiten;
+  flags="";
+  pgsrc_version="2 $Revision: 1.2 $";
+  markup=2;
+  charset=iso-8859-1
+Content-Transfer-Encoding: binary
+
+Das ist eine Liste von Seiten, die in diesem Wiki zitiert werden, aber
+nicht noch nicht erzeugt wurden. Obwohl sie anscheinend benötigt werden, 
+kann es auch sein, dass sie falsch geschriebene existierende Seiten sind, 
+oder einfach zu triviale Seiten, um erzeugt zu werden.
+
+Am besten wäre es natürlich, dass solche Seiten nicht erzeugt werden,
+sondern die Referenz so auszubessern, dass sie nicht mehr als ~WikiWort
+verlinkt werden.  Sie können entweder die Großschreibung anpassen,
+oder den Link mit "~~" verhindern.
+
+<?plugin WantedPages ?>

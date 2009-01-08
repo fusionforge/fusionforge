@@ -1,0 +1,21 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## unix-sockets-for-database by Roland Mas <lolando@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Use Unix sockets rather than TCP for the database.
+
+@DPATCH@
+diff -urNad gforge~/etc/httpd.d/httpd.secrets gforge/etc/httpd.d/httpd.secrets
+--- gforge~/etc/httpd.d/httpd.secrets	2008-04-24 21:19:20.000000000 +0200
++++ gforge/etc/httpd.d/httpd.secrets	2008-04-24 21:31:49.000000000 +0200
+@@ -2,8 +2,8 @@
+ 
+ SetEnv sys_localinc {sys_localinc}
+ 
+-RequestHeader unset GForgeDbhost
+-RequestHeader append GForgeDbhost {db_host}
++# RequestHeader unset GForgeDbhost
++# RequestHeader append GForgeDbhost {db_host}
+ 
+ RequestHeader unset GForgeDbport
+ RequestHeader append GForgeDbport {db_port}

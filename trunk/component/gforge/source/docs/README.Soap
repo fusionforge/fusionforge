@@ -1,0 +1,90 @@
+This file contains instructions for setting and and configuring the GForge 
+SOAP server.
+
+Server Setup
+
+1. Extract the tar file into the root GForge directory.  For example, if
+your root diectory is /usr/share/gforge/www, then
+
+	cd /usr/share/gforge/www ; tar xvf {tarfile}
+
+should work.  This will create a soap directory underneath the root directory
+and there should be 5 files plus one sub-directory:
+
+README - this README file
+SoapAPI.php - the PHP file that defines the SOAP functions
+nusoap.php  - the SOAP implementation provided by NuSOAP people (0.65)
+pre_soap.php - The includes from GForge directory for access to GForge system
+	I couldn't use (and didn't want to use) the pre.php file
+SoapAPI.wsdl - There is a bug in the nusoap WSDL generator so this file was
+	hand created for consumption by WSDL enabled tools (like Visual 
+	Studio .NET)
+api	- The directory containing the TCL scripts.  Currently one very short
+	  but functional TCL script is provided to get you started
+api/apiInit.tcl - The TCL script
+
+Once these are set up, you can use the WSDL file to connect and test two of 
+the SOAP functions.  One function is a simple string echo engine that echoes 
+back whatever you send it plus some extra text.  The other function defined 
+in the WSDL file gives access to the User database in GForge.  You pass in
+an array of strings to the 'user' function and it will return an array of
+strings back for each user in the input array.  For example, passing in
+the array 'bob','ted','mary' will return the user objects for these 3 users.
+If you pass in an empty list, you will get back all users.
+
+
+Command Line Setup
+-----------------
+
+The command line is based on TCL so you will need to install several TCL 
+components beforehand.
+
+TclX8.3     
+	apt-get tclx8.3
+
+TclDOM 2.0  
+	http://sourceforge.net/projects/showfiles.php?group_id=131&release_id=127168
+
+TclLib 1.0  <--------* Must be 1.0 Do not get higher versions !!!
+	http://prdownloads.sourceforge.net/tcllib/tcllib-1.0.tar.gz?download
+
+TclSOAP    
+	http://sourceforge.net/projects/showfiles.php?group_id=25970&release_id=40865
+
+
+Once these are installled properly, you should launch TCL from the shell.
+At the 'tcl>' prompt, source in the TCL script with
+
+tcl> source apiInit.tcl
+
+(the 'tcl>' prompt is shown for clarity.  You can enter full path to the 
+script file if you are not in the same directory as the script file
+when you started the TCL interpreter.
+
+The TCL script provides 3 functions, 
+
+
+---------------
+hello {arg}  Sends a SOAP 'hello' action to the soap server
+
+EXAMPLES
+	hello WORLD
+---------------
+user get {user-list}  sends a SOAP 'user' request to the SOAP server with
+	a function code of 'get' followed by a list os unix_user_names to fetch
+
+EXAMPLES
+	user get [list bob mary ted]   # returns up to three users
+	user get [list ]     # retruns all users
+
+---------------
+group get {group-list}  sends a SOAP 'group' request to the SOAP server with
+	a function code of 'get' followed by a list of group_names to fetch
+
+EXAMPLES
+	group get [list stats siteadmin]
+	group get [list all]
+
+(NOTE that the group function requires an arg list, cannot be empty list)
+
+

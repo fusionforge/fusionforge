@@ -1,0 +1,5 @@
+/var/log/gforge/svn_anon {
+	missingok
+	notifempty
+	create 0640 nobody nobody
+}

@@ -1,0 +1,52 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>
+			CreateNewProjet
+		</title>
+	</head>
+	<body>
+		<table cellpadding="1" cellspacing="1" border="1">
+			<thead>
+				<tr>
+					<td rowspan="1" colspan="3">
+					CreateNewProjet</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>open</td>
+					<td>/my/</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>clickAndWait</td>
+					<td>link=${projet}</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>clickAndWait</td>
+					<td>link=Administration</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>clickAndWait</td>
+					<td>link=Administration de Mantis</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>clickAndWait</td>
+					<td>link=Synchroniser les projets</td>
+					<td></td>
+				</tr>
+				<tr>
+          <td>
+            verifyTextPresent</td>
+          <td>
+            Les projets Mantis ont été synchronisé avec succès</td>
+          <td></td>
+        </tr>
+			</tbody>
+		</table>
+	</body>
+</html>

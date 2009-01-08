@@ -1,0 +1,180 @@
+diff -ruN libapache2-mod-auth-gforge-0.5.9.3-org/src/debug.h libapache2-mod-auth-gforge-0.5.9.3-anonymous/src/debug.h
+--- libapache2-mod-auth-gforge-0.5.9.3-org/src/debug.h	2005-11-16 00:32:39.000000000 +0100
++++ libapache2-mod-auth-gforge-0.5.9.3-anonymous/src/debug.h	2006-11-06 18:05:33.000000000 +0100
+@@ -3,7 +3,6 @@
+ 
+ #include <httpd.h>
+ #include <http_log.h>
+-#include "../lconfig.h"
+ 
+ // under debug mode, everything logged as an errror
+ // otherwise, DBG stripped out and others logged at appropriate LogLevel
+@@ -17,7 +16,8 @@
+ #define WRN(format, ...) ap_log_error(APLOG_MARK, APLOG_ERR, \
+ 		 	0, NULL, format, ## __VA_ARGS__)
+ #else
+-#define DBG(format, ...)
++#define DBG(format, ...) ap_log_error(APLOG_MARK, APLOG_DEBUG, \
++		 	0, NULL, format, ## __VA_ARGS__)
+ #define INFO(format, ...) ap_log_error(APLOG_MARK, APLOG_INFO, \
+ 		 	0, NULL, format, ## __VA_ARGS__)
+ #define ERR(format, ...) ap_log_error(APLOG_MARK, APLOG_ERR, \
+diff -ruN libapache2-mod-auth-gforge-0.5.9.3-org/src/mod_auth_gforge.c libapache2-mod-auth-gforge-0.5.9.3-anonymous/src/mod_auth_gforge.c
+--- libapache2-mod-auth-gforge-0.5.9.3-org/src/mod_auth_gforge.c	2006-01-04 23:31:38.000000000 +0100
++++ libapache2-mod-auth-gforge-0.5.9.3-anonymous/src/mod_auth_gforge.c	2006-11-06 18:01:04.000000000 +0100
+@@ -47,8 +47,6 @@
+  */
+ 
+ 
+-#include "../lconfig.h"
+-
+ #include "debug.h"
+ #include "types.h"
+ #include "database.h"
+@@ -74,7 +72,7 @@
+ 
+ #include <unistd.h>
+ 
+-#define AUTH_GFORGE_VERSION MOD_AUTH_GFORGE_PACKAGE_VERSION
++#define AUTH_GFORGE_VERSION "0.5.9.3"
+ 
+ int
+ pg_log_auth_user (request_rec * r, config_auth_gforge_state * sec, char *user,
+@@ -750,10 +748,9 @@
+     if (clause != NULL)
+     {
+ 	snprintf (query, MAX_STRING_LEN,
+-		  "SELECT group_id FROM groups,users "
++		  "SELECT group_id FROM groups "
+ 		  "WHERE groups.unix_group_name = '%s' AND "
+-		  "users.user_name = '%s' AND "
+-		  "%s", real_group, r->user, clause);
++		  "%s", real_group, clause);
+ 	s = (char *) do_pg_query (r, query, sec);
+     }
+ 
+diff -ruN libapache2-mod-auth-gforge-0.5.9.3-org/src/utils.c libapache2-mod-auth-gforge-0.5.9.3-anonymous/src/utils.c
+--- libapache2-mod-auth-gforge-0.5.9.3-org/src/utils.c	2005-11-16 00:32:39.000000000 +0100
++++ libapache2-mod-auth-gforge-0.5.9.3-anonymous/src/utils.c	2006-11-06 18:00:12.000000000 +0100
+@@ -19,8 +19,6 @@
+  *  See descriptions in utils.h
+  */
+ 
+-#include "../lconfig.h"
+-
+ #include "debug.h"
+ #include "types.h"
+ #include "database.h"
+@@ -147,14 +145,6 @@
+ 	DBG ("[mod_auth_gforge.c] is_root_dir(%s,%s) - TRUE", root, path);
+ 	return TRUE;		/* groups or groups/ */
+     }
+-    /* Check if we're looking for a file in a root dir, that's enabled by default */
+-    if (strncmp(root, path, strlen( root ) ) ==0 ) {
+-	DBG( "[mod_auth_gforge.c] is_root_dir : checking if this is a file in a rootdir" );
+-	if ( strstr( path + strlen( root ) + 2, "/" ) == NULL) {
+-		DBG( "[mod_auth_gforge.c] is_root_dir: this is a file in a root dir. No other / found" );
+-		return TRUE;
+-	}
+-    }
+     if (sec->first_letter == TRUE)
+     {	/* root = /groups, path= /groups/t/ */
+ 	DBG ("[mod_auth_gforge.c] testing if we're in the first letter");
+@@ -788,24 +778,81 @@
+ string_substitute (apr_pool_t * p, char *orig, char *a, char *b)
+ {
+     int i;
+-    char *result, *workstr;
+-
+-    result = workstr =
+-	(char *) apr_pcalloc (p, sizeof (char) * strlen (orig) * strlen (b));
+-
+-    do
++    int nb;
++    char* tmp;
++    int length;
++    char* result;
++    int j;
++    int k;
++    
++    nb = 0;
++    if ((orig != NULL) && (strlen (orig) > 0) && (a != NULL) && (strlen (a) > 0))
++    {
++        i = 0;
++        while (i < strlen (orig))
++        {
++            tmp = orig + i;
++            if (strstr (tmp, a) == tmp)
++            {
++                nb++;
++                i += strlen (a);
++            }
++            else
++            {
++                i++;
++            }
++        }
++    }
++    if (nb > 0)
++    {
++        if ((b != NULL) && (strlen (b) > 0))
++        {
++            DBG ("[mod_auth_gforge.c]  string_substitute: substituting  '%s' with '%s' in '%s'", a, b, orig);
++            length = strlen (orig) - (nb * strlen (a)) + (nb * strlen (b)) + 1;
++        }
++        else
++        {
++            DBG ("[mod_auth_gforge.c]  string_substitute: removing  '%s' in '%s'", a, orig);
++            length = strlen (orig) - (nb * strlen (a)) + 1;
++        }
++        result = (char *) apr_pcalloc (p, length);
++        i = 0;
++        j = 0;
++        while (i < strlen (orig))
++        {
++            tmp = orig + i;
++            if (strstr (tmp, a) == tmp)
++            {
++                if ((b != NULL) && (strlen (b) > 0))
++                {
++                    k = 0;
++                    while (k < strlen (b))
++                    {
++                        result [j] = b [k];
++                        j++;
++                        k++;
++                    }
++                    i += strlen (a);
++                }
++                else
++                {
++                    i++;
++                }
++            }
++            else
++            {
++                result [j] = orig [i];
++                j++;
++                i++;
++            }
++        }
++        result [j] = 0;
++    }
++    else
+     {
+-	if (strstr (orig, a) == orig)
+-	{
+-	    for (i = 0; i < strlen (b); i++)
+-		*workstr++ = b[i];
+-	    orig += strlen (a) - 1;
+-	}
+-	else
+-	    *workstr++ = *orig;
++        DBG ("[mod_auth_gforge.c]  string_substitute: nothing to do");
++        result = orig;
+     }
+-    while (*++orig);
+-
+     return result;
+ }
+ 

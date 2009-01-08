@@ -1,0 +1,38 @@
+Date: Sat, 15 Feb 2003 15:46:58 -0800
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.4pre)
+Content-Type: application/x-phpwiki;
+  pagename=RedirectToPlugin;
+  pgsrc_version="1 $Revision: 1.1 $";
+  flags="";
+  lastmodified=1045352818;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+RedirectToPlugin 用來重導向使用者到另外一個頁面. 換句話說,它為其他頁面創造
+了一個 _alias_ (別名).
+
+! Arguments
+
+一次只能使用這些引數中的其中一個.
+
+page |
+  重導向的目的頁面.
+href |
+  重導向到外部 URL. 重導向到外部頁面只能用在已鎖定頁面上.
+  (如果 URL 包含有趣的字元,你可能得用雙引號將 URL 包起來.)
+
+! Caveats
+
+RedirectToPlugin 必須處於頁面的一開頭. 此外也會使得頁面的其他內容無法被存取.
+
+! Example
+
+要製作一個連到 HomePage 的別名,就在頁面最上面放上:
+<verbatim>
+<?plugin RedirectTo page="HomePage" ?>
+</verbatim>
+
+要看這個範例的話,請參訪 HomePageAlias.
+-----
+PhpWikiDocumentation

@@ -1,0 +1,72 @@
+--- mantis-1.1.1/core.php	2007-10-14 00:36:41.000000000 +0200
++++ patch_de_mantis-1.1.1/core.php	2008-06-13 10:04:31.000000000 +0200
+@@ -43,32 +43,40 @@
+ 
+ 	# Check if Mantis is down for maintenance
+ 	#
+-	#   To make Mantis 'offline' simply create a file called
+-	#   'mantis_offline.php' in the mantis root directory.
++	#   To make Mantis 'offline' simply create in the mantis root directory
++	#   a 'conf/mantis_offline.php' symlink to the file of the same name
++	#   in the mantis root directory.
+ 	#   Users are redirected to that file if it exists.
+ 	#   If you have to test Mantis while it's offline, add the
+ 	#   parameter 'mbadmin=1' to the URL.
+ 	#
+-	$t_mantis_offline = 'mantis_offline.php';
+-	if ( file_exists( $t_mantis_offline ) && !isset( $_GET['mbadmin'] ) ) {
+-		include( $t_mantis_offline );
++	//$t_mantis_offline = 'mantis_offline.php';
++	//if ( file_exists( $t_mantis_offline ) && !isset( $_GET['mbadmin'] ) ) {
++	//	include( $t_mantis_offline );
++	if ( file_exists( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'conf'.DIRECTORY_SEPARATOR.'mantis_offline.php' ) && !isset( $_GET['mbadmin'] ) ) {
++		include( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'conf'.DIRECTORY_SEPARATOR.'mantis_offline.php' );	
+ 		exit;
+ 	}
+ 
+ 
+ 	# Load constants and configuration files
+   	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'constant_inc.php' );
+-	if ( file_exists( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_constant_inc.php' ) ) {
+-		require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_constant_inc.php' );
++	//if ( file_exists( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_constant_inc.php' ) ) {
++	//	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_constant_inc.php' );
++	 if ( file_exists( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'conf'.DIRECTORY_SEPARATOR.'custom_constant_inc.php' ) ) {
++		require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'conf'.DIRECTORY_SEPARATOR.'custom_constant_inc.php' );
+ 	}
+ 
+ 	$t_config_inc_found = false;
+ 
+ 	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_defaults_inc.php' );
+ 	# config_inc may not be present if this is a new install
+-	if ( file_exists( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_inc.php' ) ) {
+-		require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_inc.php' );
+-		$t_config_inc_found = true;
++	//if ( file_exists( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_inc.php' ) ) {
++	//	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_inc.php' );
++	if ( file_exists( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'conf'.DIRECTORY_SEPARATOR.'config_inc.php' ) ) {
++		require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'conf'.DIRECTORY_SEPARATOR.'config_inc.php' );
++ 		$t_config_inc_found = true;
++		
+ 	}
+ 
+ 	# Allow an environment variable (defined in an Apache vhost for example)
+@@ -82,6 +90,7 @@
+ 	if ( false === $t_config_inc_found ) {
+ 		# if not found, redirect to the admin page to install the system
+ 		# this needs to be long form and not replaced by is_page_name as that function isn't loaded yet
++		/*
+ 		if ( ! ( isset( $_SERVER['PHP_SELF'] ) && ( 0 < strpos( $_SERVER['PHP_SELF'], 'admin' ) ) ) ) {
+ 			if ( OFF == $g_use_iis ) {
+ 				header( 'Status: 302' );
+@@ -96,6 +105,10 @@
+ 
+ 			exit; # additional output can cause problems so let's just stop output here
+ 		}
++		*/
++		# if not found, display the maintenance page
++		include( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'mantis_offline.php' );
++		exit;
+ 	}
+ 
+ 	# Attempt to find the location of the core files.

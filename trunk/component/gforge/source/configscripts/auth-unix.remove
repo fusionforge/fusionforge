@@ -1,0 +1,92 @@
+#!/bin/sh
+#---------------------------------------------------------------------------
+# Novaforge is a registered trade mark from Bull S.A.S
+# Copyright (C) 2007 Bull S.A.S.
+# 
+# http://novaforge.org/
+#
+#
+# This file has been developped within the Novaforge(TM) project from Bull S.A.S
+# and contributed back to GForge community.
+#
+# GForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# GForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#---------------------------------------------------------------------------
+
+
+# Source functions
+if [ -e %DATADIR%/%NAME%/config/util/functions ] ; then
+	. %DATADIR%/%NAME%/config/util/functions
+else
+	exit 0
+fi
+init_variables $*
+#
+# Restore %SYSCONFDIR%/passwd
+#
+if [ $SILENT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Restoring file '%SYSCONFDIR%/passwd' from '%SYSCONFDIR%/passwd.org'"
+fi
+if [ -e %SYSCONFDIR%/passwd.org ] ; then
+	mv -f %SYSCONFDIR%/passwd.org %SYSCONFDIR%/passwd
+	if [ $? -ne 0 ] ; then
+		if [ $SILENT -eq 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Error while restoring file"
+		fi
+	fi
+else
+	if [ $SILENT -eq 0 ] ; then
+		echo -e "$PREFIX_CHAR -> No file to restore from"
+	fi
+fi
+#
+# Restore %SYSCONFDIR%/shadow
+#
+if [ $SILENT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Restoring file '%SYSCONFDIR%/shadow' from '%SYSCONFDIR%/shadow.org'"
+fi
+if [ -e %SYSCONFDIR%/shadow.org ] ; then
+	mv -f %SYSCONFDIR%/shadow.org %SYSCONFDIR%/shadow
+	if [ $? -ne 0 ] ; then
+		if [ $SILENT -eq 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Error while restoring file"
+		fi
+	fi
+else
+	if [ $SILENT -eq 0 ] ; then
+		echo -e "$PREFIX_CHAR -> No file to restore from"
+	fi
+fi
+#
+# Restore %SYSCONFDIR%/group
+#
+if [ $SILENT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Restoring file '%SYSCONFDIR%/group' from '%SYSCONFDIR%/group.org'"
+fi
+if [ -e %SYSCONFDIR%/group.org ] ; then
+	mv -f %SYSCONFDIR%/group.org %SYSCONFDIR%/group
+	if [ $? -ne 0 ] ; then
+		if [ $SILENT -eq 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Error while restoring file"
+		fi
+	fi
+else
+	if [ $SILENT -eq 0 ] ; then
+		echo -e "$PREFIX_CHAR -> No file to restore from"
+	fi
+fi
+#
+# Ignore previous errors
+#
+exit 0

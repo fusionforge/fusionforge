@@ -1,0 +1,106 @@
+#!/bin/sh
+#---------------------------------------------------------------------------
+# Novaforge is a registered trade mark from Bull S.A.S
+# Copyright (C) 2007 Bull S.A.S.
+# 
+# http://novaforge.org/
+#
+#
+# This file has been developped within the Novaforge(TM) project from Bull S.A.S
+# and contributed back to GForge community.
+#
+# GForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# GForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#---------------------------------------------------------------------------
+
+# Source functions
+if [ -e %DATADIR%/%NAME%/config/util/functions ] ; then
+	. %DATADIR%/%NAME%/config/util/functions
+else
+	echo "File '%DATADIR%/%NAME%/config/util/functions' is missing"
+	exit 1
+fi
+init_variables $*
+source_init_parameters
+if [ $EXIT -eq 0 ] ; then
+	source_config_parameters
+fi
+CREATE_KEYS=0
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Creating authentication keys"
+	if [ -f %SYSCONFDIR%/%NAME%/plugins/%PLUGIN_NAME%/auth_key.passphrase \
+	-a -f %SYSCONFDIR%/%NAME%/plugins/%PLUGIN_NAME%/auth_key.private \
+	-a -f %SYSCONFDIR%/%NAME%/plugins/%PLUGIN_NAME%/auth_key.public ] ; then
+		FILE_SIZE=`du -b %SYSCONFDIR%/%NAME%/plugins/%PLUGIN_NAME%/auth_key.passphrase | cut -f1`
+		if [ $FILE_SIZE -le 0 ] ; then
+			CREATE_KEYS=1
+		fi
+		FILE_SIZE=`du -b %SYSCONFDIR%/%NAME%/plugins/%PLUGIN_NAME%/auth_key.private | cut -f1`
+		if [ $FILE_SIZE -le 0 ] ; then
+			CREATE_KEYS=1
+		fi
+		FILE_SIZE=`du -b %SYSCONFDIR%/%NAME%/plugins/%PLUGIN_NAME%/auth_key.public | cut -f1`
+		if [ $FILE_SIZE -le 0 ] ; then
+			CREATE_KEYS=1
+		fi
+	else
+		CREATE_KEYS=1
+	fi
+fi
+if [ $EXIT -eq 0 -a $CREATE_KEYS -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR -> Files already exist"
+fi
+if [ $EXIT -eq 0 -a $CREATE_KEYS -eq 1 ] ; then
+	if [ $CREATE_KEYS -eq 1 ] ; then
+		pwgen -c -N 1 -n -s 128 > %SYSCONFDIR%/%NAME%/plugins/%PLUGIN_NAME%/auth_key.passphrase
+		if [ $? -ne 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Error while creating passphrase"
+			EXIT=1
+		fi
+	fi
+fi
+if [ $EXIT -eq 0 -a $CREATE_KEYS -eq 1 ] ; then
+	openssl genrsa \
+		-out %SYSCONFDIR%/%NAME%/plugins/%PLUGIN_NAME%/auth_key.private \
+		-passout file:%SYSCONFDIR%/%NAME%/plugins/%PLUGIN_NAME%/auth_key.passphrase \
+		-des3 \
+		768 >> /dev/null 2>&1
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while creating private key"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 -a $CREATE_KEYS -eq 1 ] ; then
+	openssl rsa \
+		-inform PEM \
+		-outform PEM \
+		-in %SYSCONFDIR%/%NAME%/plugins/%PLUGIN_NAME%/auth_key.private \
+		-passin file:%SYSCONFDIR%/%NAME%/plugins/%PLUGIN_NAME%/auth_key.passphrase \
+		-out %SYSCONFDIR%/%NAME%/plugins/%PLUGIN_NAME%/auth_key.public \
+		-pubout \
+		-outform PEM >> /dev/null 2>&1
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while creating public key"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	chown root.root %SYSCONFDIR%/%NAME%/plugins/%PLUGIN_NAME%/auth_key.passphrase
+	chmod 600 %SYSCONFDIR%/%NAME%/plugins/%PLUGIN_NAME%/auth_key.passphrase
+	chown root.%APACHE_GROUP% %SYSCONFDIR%/%NAME%/plugins/%PLUGIN_NAME%/auth_key.private
+	chmod 640 %SYSCONFDIR%/%NAME%/plugins/%PLUGIN_NAME%/auth_key.private
+	chown root.root %SYSCONFDIR%/%NAME%/plugins/%PLUGIN_NAME%/auth_key.public
+	chmod 644 %SYSCONFDIR%/%NAME%/plugins/%PLUGIN_NAME%/auth_key.public
+fi
+exit $EXIT

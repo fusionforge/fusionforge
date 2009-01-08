@@ -1,0 +1,6 @@
+a:6:{s:6:"markup";s:1:"2";s:6:"author";s:6:"a_user";s:9:"author_id";s:6:"a_user";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625923;s:8:"%content";s:269:"Here's a list of recently edited pages on this wiki. All minor changes
+are shown also, not just the most recent ones. (See RecentChanges for the
+most recent non-minor changes).
+
+--------
+<?plugin RecentChanges days||=3 show_all||=1 show_minor=1 daylist=1,3,7,30,90,0 ?>";}

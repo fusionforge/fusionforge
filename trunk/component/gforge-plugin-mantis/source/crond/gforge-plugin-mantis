@@ -1,0 +1,19 @@
+#
+# %FRIENDLY_NAME%
+# Copyright 2007 Bull SA
+# http:://www.bull.com
+#
+
+# PHP binary command line
+PHP="%BINDIR%/php -q -d include_path=%DATADIR%/%NAME%/override/:%DATADIR%/%NAME%/override/www/include/:.:%DATADIR%/%NAME%/:%DATADIR%/%NAME%/www/include/:%SYSCONFDIR%/%NAME%/"
+
+# Path to the %FRIENDLY_NAME% directory.
+GFORGE="%DATADIR%/%NAME%"
+
+# Don't mail command output to anyone.
+MAILTO=""
+
+#
+# Synchronize Mantis projects
+#
+28 * * * * root $PHP $GFORGE/plugins/%PLUGIN_NAME%/cronjobs/mantis_synchronize.php >> %LOCALSTATEDIR%/log/%NAME%/cron 2>&1

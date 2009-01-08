@@ -1,0 +1,12 @@
+Date: Wed, 16 Jun 2004 14:50:15 +0200
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.11pre)
+X-Rcs-Id: $Id: NeueSeite,v 1.1 2004/06/16 14:24:55 rurban Exp $
+Content-Type: application/x-phpwiki;
+  pagename=NeueSeite;
+  pgsrc_version="2 $Revision: 1.1 $";
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=iso-8859-1
+Content-Transfer-Encoding: binary
+
+<?plugin CreatePage ?>

@@ -1,0 +1,17 @@
+Date: Sun, 16 Nov 2003 01:39:41 +0100
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.5pre)
+X-Rcs-Id: $Id: AllUsers,v 1.1 2004/04/29 23:59:07 rurban Exp $
+Content-Type: application/x-phpwiki;
+  pagename=AllUsers;
+  pgsrc_version="2 $Revision: 1.1 $";
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+所有已經登入, 已經建立自己首頁以及已經儲存 UserPreferences (偏好設定)至少一次
+的使用者列表.
+----
+<?plugin AllUsers?>
+----
+WikiPlugin PluginManager

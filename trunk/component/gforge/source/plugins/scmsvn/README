@@ -1,0 +1,20 @@
+gforge-plugin-scmsvn
+--------------------
+
+This is the Subversion plugin for GForge. It creates Subversion
+repositories and provides some functionality to manage them.
+
+Decompress the plugin tarball and place it into your plugins directory.
+Usually, this would be in a location like /opt/gforge/gforge/plugins/scmsvn
+Whereever you place it, be sure your /etc/gforge/local.inc file has
+$sys_plugins_path pointing to the plugins directory.
+
+The scmsvn/etc/plugins/scmsvn/config.php should be copied and edited
+to
+
+        /etc/gforge/plugins/scmsvn/config.php
+
+The 'Site Admin' tab on the GForge web interface now has a 'Plugin Manager'
+page where you can activate plugins on a sitewide basis. Be sure to do that
+if you want this plugin to be available to projects.
+

@@ -1,0 +1,149 @@
+
+Eteria IRC Client, an RFC 1459 compliant client program written in Java.
+Copyright (C) 2000-2001  Javier Kohen <jkohen at users.sourceforge.net>
+
+
+This is the README file for EIRC, I'd appreciate if you read your way through this file, but if you are eager for some action, just jump to the "Quick Start" section below.
+
+
+Getting EIRC
+------------
+
+EIRC is kindly hosted by SourceForge at:
+ http://eirc.sourceforge.net/
+
+For anonymous CVS access read below.
+
+
+What is EIRC?
+-------------
+
+It's the short form for Eteria IRC Client. EIRC is an RFC 1459 compliant client program written entirely in Java using only version 1.1.x Java API, for compliance with current mainstream web browsers, without the need to download the Swing classes. IRC has been chosen as the protocol because of its widespread use, readily availability of a variety of servers and the moderate scalability it allows.
+
+It was written because it was needed a *free* Java IRC client that was at the same time flexible and easy to extend, and that had a simple -yet complete- GUI. After searching the net, we found out that what was available at the time wouldn't comply with more than just one of these requirements, it was specially evident the lack of good GUIs. By now I've received lots of suggestions from the public out there which have been fundamental to make the client grow up to its current state, and I expect that phenomena to persist.
+
+
+Requirements
+------------
+
+This program requires a version 1.1.x compatible Java Virtual Machine. See "Compatibility" section below. Read docs/INSTALL for further information on how to set your JVM to connect to external servers. Note that you don't need to run EIRC in an Applet context (ie.: inside of a browser).
+If you modify a program resource (ie: default configuration, language or image files) or the source code, you'll have to build your own packages. There's information on how to do that in the docs/INSTALL file under "Build".
+
+
+Quick Start
+-----------
+
+To test the applet off-the-shelf, load index.html in your browser.
+Note that you have to be running an IRC server locally if you want to do something besides watching the applet do -almost- nothing!
+
+Once the applet has been launched, it should connect to your localhost IRC server, and open a channel named #eirc (default bundled settings). You can try the following commands:
+
+Enter '/help' for a list of locally implemented commands.
+Enter '/help <command>' for a description on a <command> from the previous list.
+PLEASE read INSTALL if you have ANY kind of problems. Note that the default JAR has debug information compiled in, and that makes it larger.
+
+
+Running From the Command Line
+-----------------------------
+
+As of 20010204, you don't need to run EIRC in an Applet context anymore, that means that you don't need a browser to run the client.
+
+As Java doesn't provide the means to supply Applet parameters to an application, a command-line interface has been developed:
+
+If you used these PARAM to load EIRC from your browser:
+ <param name="server" value="irc.foo.net" />
+ <param name="foo" value="bar" />
+you get the same result by invoking EIRC with these command-line parameters:
+ --server irc.foo.net --foo bar
+
+
+Anonymous CVS Access
+--------------------
+
+This project's SourceForge CVS repository can be checked out through anonymous (pserver) CVS using the following commands. The module you wish to check out must be specified as the modulename. When prompted for a password for anonymous, simply press the Enter key.
+
+cvs -d:pserver:anonymous@cvs.eirc.sourceforge.net:/cvsroot/eirc login
+
+cvs -z3 -d:pserver:anonymous@cvs.eirc.sourceforge.net:/cvsroot/eirc co modulename
+
+Modules currently consist of:
+ * eirc.
+
+You only need to login once, unless you edit/remove your CVS login file, or issue a logout command.
+Updates from within the module's directory don't need the -d parameter.
+
+
+How Can I Help?
+---------------
+
+Read docs/TODO for a list of the topmost needs. Of course, as this is an open source project, you are free to work on whatever you want; if you do any modification, please let me know, I'll include your changes in the main codebase or as a contribution if I think it's appropiate. Non-programmers can always submit new ideas, suggestions, art or updated translations.
+Testing is always welcomed, if you think you've found a bug which is not listed in docs/BUGS or docs/TODO, please don't hesitate in reporting it (see "Contact Info" below).
+I'd appreciate any kind of feedback, even undiscriminated flaming (I have to keep /dev/null fed somehow).
+
+
+Compatibility
+-------------
+
+EIRC has been successfully tested in the following environments:
+ * Sun's JDK 1.2.2 Applet Viewer for Linux.
+ * Sun's JDK 1.3.x Applet Viewer for Linux.
+ * Netscape Navigator 6 and Mozilla nightly builds with Java Plug-In.
+ * Netscape Navigator 4.7x with JVM 1.1.5 for Linux. Note that this JVM has never been stable.
+ * Netscape Navigator 4.7x with JVM 1.1.5 for Microsoft Windows.
+ * Microsoft Internet Explorer 5.x for Microsoft Windows.
+ * Microsoft Internet Explorer 5.x for MacOS.
+
+It's also known to fail in the following environments:
+ * Netscape Navigator 4.0x with JVM 1.1.2 for Microsoft Windows.
+ * Netscape Navigator 4.0x for MacOS.
+ * Netscape Navigator 4.5 for MacOS.
+
+
+Contact Info
+------------
+
+If you are interested in contacting me, the author of this software, you are encouraged to drop me an e-mail to <jkohen@users.sourceforge.net>.
+There have been set up two mailing lists related to this project. Follow the links to browse the archives or to get subscribed to them:
+
+ * Eirc-Devel <http://lists.sourceforge.net/mailman/listinfo/eirc-devel>
+ This list is where bug reports, suggestions and other development related discussions should go.
+ * Eirc-Help <http://lists.sourceforge.net/mailman/listinfo/eirc-help>
+ This list is where you should ask for help on installing, deploying or using the client.
+
+
+3rd Party classes
+-----------------
+
+The enhanced text canvas -SmileyTextArea, for lack of a better name- was written for EIRC by Splendid <http://www.splendid.com/> and was sponsored by Freenet.de <http://freenet.de/>.
+This product includes software developed by the Apache Software Foundation (http://www.apache.org/). Jakarta Ant is used as the building system.
+
+
+Unnecessary babble
+------------------
+
+This software is currently developed with GNU EMACS and Sun's JDK 1.3.0_01 on a GNUized Linux system put together by me.
+
+The project's maintainer (me) was born in Ciudad de Buenos Aires, Argentina -where he currently lives- on 19810924. He actually hates human conventions like dates, flags and border lines, to name a few. He's finished high-school at Escuela Técnica ORT, where he got the Electronics Technician title. He has begun the Licensee on Computer Sciences career at the faculty of Ciencias Exactas from Universidad of Buenos Aires.
+He loves true friendship, playing the bass, playing RPGs and listening to music, specially old-school punk, black/thrash/death metal, and electronic. He speaks native Spanish, and has a good grasp on English; he'd like to learn other languages, too, being German topmost in his list. He has also learnt very little hebrew at school.
+
+
+License
+-------
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+
+(Non) Warranty
+--------------
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA

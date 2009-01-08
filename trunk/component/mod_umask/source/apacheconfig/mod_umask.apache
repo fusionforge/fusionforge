@@ -1,0 +1,9 @@
+#
+# Configuration to set Umask of Apache processes
+#
+
+<IfModule !mod_umask.c>
+LoadModule umask_module       modules/mod_umask.so
+</IfModule>
+
+umask 002

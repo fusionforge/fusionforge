@@ -1,0 +1,394 @@
+#!/bin/sh
+#---------------------------------------------------------------------------
+# Novaforge is a registered trade mark from Bull S.A.S
+# Copyright (C) 2007 Bull S.A.S.
+# 
+# http://novaforge.org/
+#
+#
+# This file has been developped within the Novaforge(TM) project from Bull S.A.S
+# and contributed back to GForge community.
+#
+# GForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# GForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#---------------------------------------------------------------------------
+
+#
+# Constants
+#
+
+PREFIX_CHAR="#"
+BACKUP_CONFIG_DIR="%SYSCONFDIR%/%NAME%"
+BACKUP_CONFIG_FILTER=".[a-z]*"
+BACKUP_SSL_DIR="%SYSCONFDIR%/%NAME%/ssl"
+BACKUP_GFORGE_DIR="%LOCALSTATEDIR%/lib/%NAME%"
+BACKUP_MAILMAN_ARCHIVES_DIR="%MAILMANDATADIR%/archives"
+BACKUP_MAILMAN_DATA_DIR="%MAILMANDATADIR%/data"
+BACKUP_MAILMAN_LISTS_DIR="%MAILMANDATADIR%/lists"
+BACKUP_MAILMAN_SPAM_DIR="%MAILMANDATADIR%/spam"
+BACKUP_POSTGRESQL_DIR="%LOCALSTATEDIR%/lib/pgsql/data"
+BACKUP_NAME="%NAME%_backup_`date +%Y-%m-%d_%H-%M-%S`"
+
+#
+# Variables
+#
+
+EXIT=0
+TMP_DIR="/tmp"
+TMP_DIR_DEVICE=""
+BACKUP_DIR=""
+BACKUP_FILE=""
+BACKUP_FILE_DIR=""
+BACKUP_FILE_DEVICE=""
+HTTPD_STOPPED=0
+XINETD_STOPPED=0
+CROND_STOPPED=0
+MAILMAN_STOPPED=0
+POSTFIX_STOPPED=0
+
+#
+# Functions
+#
+
+# Copy the content of a directory
+# Parameters:
+#   Source directory, without ending /
+#   Files filter
+#   Target directory, without ending /
+copy_directory_content ()
+{
+	if [ $EXIT -eq 0 ] ; then
+		SOURCE=$1
+		FILTER=$2
+		TARGET=$3
+		echo -e "$PREFIX_CHAR Copying '$SOURCE/$FILTER' to '$TARGET/'"
+		if [ -d $SOURCE -o -L $SOURCE ] ; then
+			pushd $SOURCE >> /dev/null 2>&1
+			if [ ! -e $TARGET ] ; then
+				mkdir -p $TARGET
+			fi
+			if [ -d $TARGET ] ; then
+				NUMBER=`ls -a -1 | wc -l`
+				expr $NUMBER \>= 2 > /dev/null 2>&1
+				if [ $? -ne 0 ] ; then
+					echo -e "$PREFIX_CHAR -> Error while checking if source directory is empty"
+					EXIT=1
+				else
+					expr $NUMBER = 2 > /dev/null 2>&1
+					if [ $? -eq 0 ] ; then
+						echo -e "$PREFIX_CHAR -> Source directory is empty"
+					else
+						cp -a $FILTER $TARGET/
+						if [ $? -ne 0 ] ; then
+							echo -e "$PREFIX_CHAR -> Error while copying"
+							EXIT=1
+						fi
+					fi
+				fi
+			else
+				echo -e "$PREFIX_CHAR -> Error while creating target directory '$TARGET'"
+				EXIT=1
+			fi
+			popd >> /dev/null 2>&1
+		else
+			echo -e "$PREFIX_CHAR -> Source directory '$SOURCE' does not exist"
+		fi
+	fi
+}
+
+# Stop a service
+# Parameters:
+#   Service name
+stop_service ()
+{
+	SERVICE_NAME=$1
+	echo -e "$PREFIX_CHAR Stopping service $SERVICE_NAME"
+	if [ -x %INITRDDIR%/$SERVICE_NAME ] ; then
+		service $SERVICE_NAME stop >> /dev/null 2>&1
+		if [ $? -ne 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Error while stopping"
+		fi
+	else
+		echo -e "$PREFIX_CHAR -> Script '%INITRDDIR%/$SERVICE_NAME' does not exist"
+		EXIT=1
+	fi
+}
+
+# Start a service
+# Parameters:
+#   Service name
+start_service ()
+{
+	SERVICE_NAME=$1
+	echo -e "$PREFIX_CHAR Starting service $SERVICE_NAME"
+	if [ -x %INITRDDIR%/$SERVICE_NAME ] ; then
+		service $SERVICE_NAME start >> /dev/null 2>&1
+		if [ $? -ne 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Error while starting"
+			EXIT=1
+		fi
+	else
+		echo -e "$PREFIX_CHAR -> Script '%INITRDDIR%/$SERVICE_NAME' does not exist"
+		EXIT=1
+	fi
+}
+
+#
+# Main script
+#
+
+echo -e "$PREFIX_CHAR$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR %FRIENDLY_NAME% : backup data"
+echo -e "$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR This script will backup data to an archive file."
+echo -e "$PREFIX_CHAR -> Continue ('y' or 'n') ?"
+echo -en "$PREFIX_CHAR -> "
+read CHOICE
+if [ "$CHOICE" != "y" ]; then
+	exit 1
+fi
+#
+# Ask temporary directory
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Please type the temporary directory (default: '$TMP_DIR', 'q' to quit)"
+	echo -en "$PREFIX_CHAR -> "
+	read CHOICE
+	if [ "$CHOICE" = "q" ] ; then
+		EXIT=1
+	else
+		if [ -n "$CHOICE" ]; then
+			TMP_DIR=$CHOICE
+		fi
+		if [ ! -e $TMP_DIR ] ; then
+			echo -e "$PREFIX_CHAR -> Directory '$TMP_DIR' does not exist"
+			EXIT=1
+		else
+			if [ ! -d $TMP_DIR -a ! -L $TMP_DIR ] ; then
+				echo -e "$PREFIX_CHAR -> '$TMP_DIR' is not a directory or a symbolic link"
+				EXIT=1
+			else
+				BACKUP_DIR="$TMP_DIR/$BACKUP_NAME"
+				export TMP=$TMP_DIR
+			fi
+		fi
+	fi
+fi
+#
+# Ask backup filename
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Please type the backup filename with its full path (default: '$TMP_DIR/$BACKUP_NAME.tar.gz', 'q' to quit)"
+	echo -en "$PREFIX_CHAR -> "
+	read CHOICE
+	if [ "$CHOICE" = "q" ] ; then
+		EXIT=1
+	else
+		if [ -n "$CHOICE" ]; then
+			BACKUP_FILE=$CHOICE
+		else
+			BACKUP_FILE="$TMP_DIR/$BACKUP_NAME.tar.gz"
+		fi
+		if [ -e $BACKUP_FILE ] ; then
+			echo -e "$PREFIX_CHAR -> File '$BACKUP_FILE' already exists"
+			EXIT=1
+		fi
+	fi
+fi
+#
+# Stop httpd, xinetd, crond, mailman and postfix services
+#
+if [ $EXIT -eq 0 ] ; then
+	stop_service httpd
+	if [ $EXIT -eq 0 ] ; then
+		HTTPD_STOPPED=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	stop_service xinetd
+	if [ $EXIT -eq 0 ] ; then
+		XINETD_STOPPED=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	stop_service crond
+	if [ $EXIT -eq 0 ] ; then
+		CROND_STOPPED=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	stop_service mailman
+	if [ $EXIT -eq 0 ] ; then
+		MAILMAN_STOPPED=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	stop_service postfix
+	if [ $EXIT -eq 0 ] ; then
+		POSTFIX_STOPPED=1
+	fi
+fi
+#
+# Check disk space
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Checking disk space"
+	NEEDED_SPACE=0
+	SIZES=`du -s $BACKUP_CONFIG_DIR/$BACKUP_CONFIG_FILTER $BACKUP_SSL_DIR $BACKUP_GFORGE_DIR $BACKUP_MAILMAN_ARCHIVES_DIR $BACKUP_MAILMAN_DATA_DIR $BACKUP_MAILMAN_LISTS_DIR $BACKUP_MAILMAN_SPAM_DIR $BACKUP_POSTGRESQL_DIR | cut -f1`
+	for SIZE in $SIZES ; do
+		NEEDED_SPACE=`expr $NEEDED_SPACE + $SIZE`
+	done
+	expr $NEEDED_SPACE + 1 >> /dev/null 2>&1
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Value '$NEEDED_SPACE' is not an integer (needed space)"
+		EXIT=1
+	else
+		TMP_DIR_DEVICE=`df -kP $TMP_DIR | grep -e "/" | cut -d' ' -f1`
+		BACKUP_FILE_DIR=`dirname $BACKUP_FILE`
+		BACKUP_FILE_DEVICE=`df -kP $BACKUP_FILE_DIR | grep -e "/" | cut -d' ' -f1`
+		if [ "$TMP_DIR_DEVICE" = "$BACKUP_FILE_DEVICE" ] ; then
+			NEEDED_SPACE=`expr $NEEDED_SPACE \* 2`
+			expr $NEEDED_SPACE + 1 >> /dev/null 2>&1
+			if [ $? -ne 0 ] ; then
+				echo -e "$PREFIX_CHAR -> Value '$NEEDED_SPACE' is not an integer (total needed space)"
+				EXIT=1
+			else
+				echo -e "$PREFIX_CHAR -> $NEEDED_SPACE KB needed on device '$TMP_DIR_DEVICE'"
+			fi
+		else
+			echo -e "$PREFIX_CHAR -> $NEEDED_SPACE KB needed on device '$TMP_DIR_DEVICE'"
+			echo -e "$PREFIX_CHAR -> $NEEDED_SPACE KB needed on device '$BACKUP_FILE_DEVICE'"
+		fi
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	FREE_SPACE=`df -kP | grep -e "^$TMP_DIR_DEVICE" | sed -e "s/ [[:blank:]]*/ /g" | cut -d' ' -f4`
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while checking free space of device '$TMP_DIR_DEVICE'"
+		EXIT=1
+	else
+		expr $FREE_SPACE + 1 >> /dev/null 2>&1
+		if [ $? -ne 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Value '$FREE_SPACE' is not an integer (free space of device '$TMP_DIR_DEVICE')"
+			EXIT=1
+		else
+			expr $NEEDED_SPACE \<= $FREE_SPACE >> /dev/null 2>&1
+			if [ $? -ne 0 ] ; then
+				echo -e "$PREFIX_CHAR -> Not enough free space on device '$TMP_DIR_DEVICE'"
+				EXIT=1
+			else
+				if [ "$TMP_DIR_DEVICE" != "$BACKUP_FILE_DEVICE" ] ; then
+					FREE_SPACE=`df -kP | grep -e "^$BACKUP_FILE_DEVICE" | sed -e "s/ [[:blank:]]*/ /g" | cut -d' ' -f4`
+					if [ $? -ne 0 ] ; then
+						echo -e "$PREFIX_CHAR -> Error while checking free space of device '$BACKUP_FILE_DEVICE'"
+						EXIT=1
+					else
+						expr $FREE_SPACE + 1 >> /dev/null 2>&1
+						if [ $? -ne 0 ] ; then
+							echo -e "$PREFIX_CHAR -> Value '$FREE_SPACE' is not an integer (free space of device '$BACKUP_FILE_DEVICE')"
+							EXIT=1
+						else
+							expr $NEEDED_SPACE \<= $FREE_SPACE >> /dev/null 2>&1
+							if [ $? -ne 0 ] ; then
+								echo -e "$PREFIX_CHAR -> Not enough free space on device '$BACKUP_FILE_DEVICE'"
+								EXIT=1
+							fi
+						fi
+					fi
+				fi
+			fi
+		fi
+	fi
+fi
+#
+# Backup files
+#
+copy_directory_content $BACKUP_CONFIG_DIR "$BACKUP_CONFIG_FILTER" $BACKUP_DIR/config
+copy_directory_content $BACKUP_SSL_DIR "*" $BACKUP_DIR/ssl
+copy_directory_content $BACKUP_GFORGE_DIR "*" $BACKUP_DIR/gforge
+copy_directory_content $BACKUP_MAILMAN_ARCHIVES_DIR "*" $BACKUP_DIR/mailman/archives
+copy_directory_content $BACKUP_MAILMAN_DATA_DIR "*" $BACKUP_DIR/mailman/data
+copy_directory_content $BACKUP_MAILMAN_LISTS_DIR "*" $BACKUP_DIR/mailman/lists
+copy_directory_content $BACKUP_MAILMAN_SPAM_DIR "*" $BACKUP_DIR/mailman/spam
+#
+# Backup database
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Backuping database"
+	touch $BACKUP_DIR/database
+	chmod 644 $BACKUP_DIR/database
+	chown postgres.postgres $BACKUP_DIR/database
+	su - postgres -c "pg_dump -b -c -f $BACKUP_DIR/database -F c -x gforge"
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while backuping"
+		EXIT=1
+	fi
+fi
+#
+# Create version file
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Creating version file"
+	echo "%NOVAFORGE_LEVEL%" > $BACKUP_DIR/VERSION
+fi
+#
+# Create archive
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Creating archive '$BACKUP_FILE'"
+	pushd $BACKUP_DIR >> /dev/null 2>&1
+	tar -czf $BACKUP_FILE --numeric-owner *
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while creating archive"
+		EXIT=1
+	fi
+	popd >> /dev/null 2>&1
+fi
+#
+# Remove backup directory
+#
+if [ -d $BACKUP_DIR ] ; then
+	echo -e "$PREFIX_CHAR Removing backup directory"
+	rm -rf $BACKUP_DIR
+fi
+#
+# Start postfix, mailman, crond, xinetd and httpd services
+#
+if [ $POSTFIX_STOPPED -eq 1 ] ; then
+	start_service postfix
+fi
+if [ $MAILMAN_STOPPED -eq 1 ] ; then
+	start_service mailman
+fi
+if [ $CROND_STOPPED -eq 1 ] ; then
+	start_service crond
+fi
+if [ $XINETD_STOPPED -eq 1 ] ; then
+	start_service xinetd
+fi
+if [ $HTTPD_STOPPED -eq 1 ] ; then
+	start_service httpd
+fi
+echo -e "$PREFIX_CHAR"
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR -> Success !"
+	echo -e "$PREFIX_CHAR"
+	echo -e "$PREFIX_CHAR Please note:"
+	echo -e "$PREFIX_CHAR   * you should now store the '$BACKUP_FILE' archive in a safe place,"
+	echo -e "$PREFIX_CHAR   * if you need to restore it, use the '%NAME%-restore' script."
+else
+	echo -e "$PREFIX_CHAR -> Failure !"
+fi
+echo -e "$PREFIX_CHAR$PREFIX_CHAR"
+exit $EXIT

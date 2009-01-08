@@ -1,0 +1,603 @@
+# Translation of gforge debconf templates to German
+# Copyright (C) Helge Kreutzmann <debian@helgefjell.de>, 2007, 2008.
+# This file is distributed under the same license as the gforge package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gforge 4.6.99+svn6387-1\n"
+"Report-Msgid-Bugs-To: gforge@packages.debian.org\n"
+"POT-Creation-Date: 2008-02-26 22:50+0100\n"
+"PO-Revision-Date: 2008-03-06 22:57+0100\n"
+"Last-Translator: Helge Kreutzmann <debian@helgefjell.de>\n"
+"Language-Team: German <debian-l10n-german@lists.debian.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:3001
+#: ../dsf-helper/shellhost-variables.templates:2001
+msgid "Shell server:"
+msgstr "Shell-Server:"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:3001
+msgid ""
+"Please enter the hostname of the server that will host the GForge shell "
+"accounts."
+msgstr ""
+"Bitte geben Sie den Rechnernamen des Servers ein, der Ihre GForge-Shell-"
+"Konten beherbergen wird."
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:6001
+#: ../dsf-helper/downloadhost-variables.templates:2001
+msgid "Download server:"
+msgstr "Download-Server:"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:6001
+msgid ""
+"Please enter the hostname of the server that will host the GForge packages."
+msgstr ""
+"Bitte geben Sie den Rechnernamen des Servers ein, der Ihre GForge-Pakete "
+"beherbergen wird."
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:6001
+#: ../dsf-helper/downloadhost-variables.templates:2001
+#: ../dsf-helper/lists-variables.templates:2001
+#: ../dsf-helper/users-variables.templates:2001
+msgid "It should not be the same as the main GForge host."
+msgstr ""
+"Dieser sollte nicht mit dem Namen des Haupt-GForge-Rechners übereinstimmen."
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:8001
+msgid "GForge administrator login:"
+msgstr "GForge-Administrator-Anmeldung:"
+
+#. Type: string
+#. Description
+#. Type: password
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:8001
+#: ../gforge-db-postgresql.templates.dsfh-in:10001
+msgid ""
+"The GForge administrator account will have full privileges on the system. It "
+"will be used to approve the creation of new projects."
+msgstr ""
+"Das GForge-Administrator-Konto wird alle Privilegien auf dem GForge-System "
+"haben. Es wird benötigt, um die Erstellung von neuen Projekten zu bewilligen."
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:8001
+msgid "Please choose the username for this account."
+msgstr "Bitte wählen Sie den Benutzernamen für dieses Konto."
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:9001
+#: ../dsf-helper/host-variables.templates:2001
+msgid "IP address:"
+msgstr "IP-Adresse:"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:9001
+#: ../dsf-helper/host-variables.templates:2001
+msgid ""
+"Please enter the IP address of the server that will host the GForge "
+"installation."
+msgstr ""
+"Bitte geben Sie die IP-Adresse des Servers ein, der Ihre GForge-Installation "
+"beherbergen wird."
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:9001
+#: ../dsf-helper/host-variables.templates:2001
+msgid "This is needed for the configuration of Apache virtual hosting."
+msgstr "Diese wird für die virtualhosting-Konfiguration des Apache benötigt."
+
+#. Type: password
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:10001
+msgid "GForge administrator password:"
+msgstr "GForge-Administrator-Passwort:"
+
+#. Type: password
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:10001
+msgid "Please choose the password for this account."
+msgstr "Bitte wählen Sie das Passwort für dieses Konto."
+
+#. Type: password
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:11001
+#: ../dsf-helper/dbpasswd-variables.templates:3001
+msgid "Password confirmation:"
+msgstr "Bestätigung des Passworts:"
+
+#. Type: password
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:11001
+#: ../dsf-helper/dbpasswd-variables.templates:3001
+msgid "Please re-type the password for confirmation."
+msgstr "Bitte geben Sie zur Bestätigung das Passwort erneut ein."
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:12001
+msgid "Initial list of skills:"
+msgstr "Anfängliche Liste der Fähigkeiten:"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:12001
+msgid ""
+"GForge allows users to define a list of their skills, to be chosen from "
+"those present in the database. This list is the initial list of skills that "
+"will enter the database."
+msgstr ""
+"GForge erlaubt es den Benutzern, eine Liste Ihrer Fähigkeiten zu definieren, "
+"die aus allen in der Datenbank hinterlegten Fähigkeiten ausgewählt werden "
+"können. Diese Liste ist die anfängliche Liste von Fähigkeiten, die in die "
+"Datenbank eingegeben wird."
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:12001
+msgid "Please enter a semicolon-separated list of skill names."
+msgstr ""
+"Bitte geben Sie die Namen der Fähigkeiten, getrennt durch Semikola »;«, ein."
+
+#. Type: boolean
+#. Description
+#. Translators: SCM here means "Source Control Management"
+#. (cvs, svn, etc.)
+#: ../gforge-dns-bind9.templates.dsfh-in:3001
+msgid "Do you want a simple DNS setup for GForge?"
+msgstr "Möchten Sie eine einfache DNS-Installation für GForge?"
+
+#. Type: boolean
+#. Description
+#. Translators: SCM here means "Source Control Management"
+#. (cvs, svn, etc.)
+#: ../gforge-dns-bind9.templates.dsfh-in:3001
+msgid ""
+"You can use a simple DNS setup with wildcards to map all project web-hosts "
+"to a single IP address, and direct all the scm-hosts to a single SCM server, "
+"or a complex setup which allows many servers as project web servers or SCM "
+"servers."
+msgstr ""
+"Sie können eine einfache DNS-Installation haben, die Jokerzeichen verwendet, "
+"um alle Projekt-Webhosts auf eine einzelne IP abzubilden und alle scm-hosts "
+"auf einen einzigen SCM-Server weiterzuleiten, oder eine komplexe "
+"Installation, die viele Server als Projektwebserver oder SCM-Server erlaubt."
+
+#. Type: boolean
+#. Description
+#. Translators: SCM here means "Source Control Management"
+#. (cvs, svn, etc.)
+#: ../gforge-dns-bind9.templates.dsfh-in:3001
+msgid ""
+"Even if you use a simple DNS setup, you can still use separate machines as "
+"project servers; it just assumes that all the project web directories are on "
+"the same server with a single SCM server."
+msgstr ""
+"Selbst falls Sie eine einfache DNS-Installation verwenden, können Sie "
+"dennoch separate Maschinen für die Projektserver verwenden, es wird nur "
+"angenommen, dass sich alle Webverzeichnisse der Projekte auf dem gleichen "
+"Server mit einem einzelnen Server für SCM befinden."
+
+#. Type: boolean
+#. Description
+#: ../gforge-mta-postfix.templates.dsfh-in:3001
+msgid "Do you want mail to ${noreply} to be discarded?"
+msgstr "Möchten Sie, dass E-Mail an ${noreply} verworfen wird?"
+
+#. Type: boolean
+#. Description
+#: ../gforge-mta-postfix.templates.dsfh-in:3001
+msgid ""
+"GForge sends and receives plenty of e-mail to and from the \"${noreply}\" "
+"address."
+msgstr ""
+"GForge sendet und empfängt viele E-Mails von und auf der »${noreply}«-"
+"Adresse."
+
+#. Type: boolean
+#. Description
+#: ../gforge-mta-postfix.templates.dsfh-in:3001
+msgid ""
+"E-mail to that address should be directed to a black hole (/dev/null), "
+"unless you have another use for that address."
+msgstr ""
+"E-Mails an diese Adresse sollten an ein schwarzes Loch (/dev/null) "
+"umgeleitet werden, es sei denn, Sie haben für diese Adresse eine andere "
+"Verwendung."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/common-variables.templates:2001
+msgid "GForge domain or subdomain name:"
+msgstr "GForge Domain- oder Subdomain-Name:"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/common-variables.templates:2001
+msgid ""
+"Please enter the domain that will host the GForge installation. Some "
+"services (scm, lists, etc.) will be given their own subdomain in that domain."
+msgstr ""
+"Bitte geben Sie die Domain an, die Ihre GForge-Installation beherbergen "
+"wird. Einigen Diensten (scm, lists, usw.) wird innerhalb der Domain eine "
+"eigene Subdomain zugewiesen."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/common-variables.templates:3001
+msgid "GForge administrator e-mail address:"
+msgstr "E-Mail-Adresse des GForge-Administrators:"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/common-variables.templates:3001
+msgid ""
+"Please enter the e-mail address of the GForge administrator of this site. It "
+"will be used when problems occur."
+msgstr ""
+"Bitte geben Sie die E-Mail-Adresse des GForge-Administrators Ihrer Site an. "
+"Diese wird beim Auftritt von Problemen benötigt."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/common-variables.templates:4001
+msgid "GForge system name:"
+msgstr "GForge-Systemname:"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/common-variables.templates:4001
+msgid ""
+"Please enter the name of the GForge system. It is used in various places "
+"throughout the system."
+msgstr ""
+"Bitte geben Sie den Namen des GForge-Systems ein. Er wird an verschiedenen "
+"Stellen im ganzen System verwendet."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/dbhost-variables.templates:2001
+msgid "Database server:"
+msgstr "Datenbank-Server:"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/dbhost-variables.templates:2001
+msgid ""
+"Please enter the IP address (or hostname) of the server that will host the "
+"GForge database."
+msgstr ""
+"Bitte geben Sie die IP-Adresse (oder den Rechnernamen) des Servers ein, der "
+"die GForge-Datenbank beherbergen wird."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/dbhost-variables.templates:3001
+msgid "Database name:"
+msgstr "Datenbankname:"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/dbhost-variables.templates:3001
+msgid ""
+"Please enter the name of the database that will host the GForge database."
+msgstr ""
+"Bitte geben Sie den Namen der Datenbank an, die die GForge-Datenbank "
+"beherbergen wird."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/dbhost-variables.templates:4001
+msgid "Database administrator username:"
+msgstr "Name des Administrators der Datenbank:"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/dbhost-variables.templates:4001
+msgid ""
+"Please enter the username of the database administrator for the server that "
+"will host the GForge database."
+msgstr ""
+"Bitte geben Sie den Benutzernamen des Datenbankadministrators für den Server "
+"ein, der die GForge-Datenbank beherbergen wird."
+
+#. Type: password
+#. Description
+#: ../dsf-helper/dbpasswd-variables.templates:2001
+msgid "Password used for the database:"
+msgstr "Für die Datenbank verwendetes Passwort:"
+
+#. Type: password
+#. Description
+#: ../dsf-helper/dbpasswd-variables.templates:2001
+msgid "Connections to the database system are authenticated by a password."
+msgstr ""
+"Verbindungen zum Datenbank-System werden durch ein Passwort authentifiziert."
+
+#. Type: password
+#. Description
+#: ../dsf-helper/dbpasswd-variables.templates:2001
+msgid "Please choose the connection password."
+msgstr "Bitte wählen Sie das Passwort für Verbindungen aus."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/downloadhost-variables.templates:2001
+msgid ""
+"Please enter the host name of the server that will host the GForge packages."
+msgstr ""
+"Bitte geben Sie den Rechnernamen des Servers ein, der Ihre GForge-Pakete "
+"beherbergen wird."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/groupid-variables.templates:2001
+msgid "News administrative group ID:"
+msgstr "ID der News-Administrators-Gruppe:"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/groupid-variables.templates:2001
+msgid ""
+"The members of the news admin group can approve news for the GForge main "
+"page. This group's ID must not be 1. This should be changed only if you "
+"upgrade from a previous version and want to keep the data."
+msgstr ""
+"Mitglieder der News-Administrator-Gruppe können Nachrichten für die GForge-"
+"Hauptseite genehmigen. Diese Gruppen-ID darf nicht 1 sein. Dies sollte nur "
+"geändert werden, falls Sie ein Upgrade von einer vorhergehenden Version "
+"durchführen und Ihre Daten behalten möchten."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/groupid-variables.templates:3001
+msgid "Statistics administrative group ID:"
+msgstr "ID der Statistik-Administratorgruppe:"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/groupid-variables.templates:4001
+msgid "Peer rating administrative group ID:"
+msgstr "ID der »peer rating«-Administratorgruppe:"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/lists-variables.templates:2001
+msgid "Mailing lists server:"
+msgstr "Mailinglisten-Server:"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/lists-variables.templates:2001
+msgid ""
+"Please enter the host name of the server that will host the GForge mailing "
+"lists."
+msgstr ""
+"Bitte geben Sie den Rechnernamen des Servers ein, der Ihre GForge-"
+"Mailinglisten beherbergen wird."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/shellhost-variables.templates:2001
+msgid ""
+"Please enter the host name of the server that will host the GForge shell "
+"accounts."
+msgstr ""
+"Bitte geben Sie den Rechnernamen des Servers ein, der Ihre GForge-Shell-"
+"Konten beherbergen wird."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/users-variables.templates:2001
+msgid "User mail redirector server:"
+msgstr "Benutzer-E-Mail-Umleitungsserver:"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/users-variables.templates:2001
+msgid ""
+"Please enter the host name of the server that will host the GForge user mail "
+"redirector."
+msgstr ""
+"Bitte geben Sie den Rechnernamen des Servers ein, der Ihren GForge-Benutzer-"
+"E-Mail-Umleiter beherbergen wird."
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:2001
+msgid "English"
+msgstr "Englisch"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:2001
+msgid "Bulgarian"
+msgstr "Bulgarisch"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:2001
+msgid "Catalan"
+msgstr "Katalanisch"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:2001
+msgid "Chinese (Traditional)"
+msgstr "(traditionelles) Chinesisch"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:2001
+msgid "Dutch"
+msgstr "Holländisch"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:2001
+msgid "Esperanto"
+msgstr "Esperanto"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:2001
+msgid "French"
+msgstr "Französisch"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:2001
+msgid "German"
+msgstr "Deutsch"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:2001
+msgid "Greek"
+msgstr "Griechisch"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:2001
+msgid "Hebrew"
+msgstr "Hebräisch"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:2001
+msgid "Indonesian"
+msgstr "Indonesisch"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:2001
+msgid "Italian"
+msgstr "Italienisch"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:2001
+msgid "Japanese"
+msgstr "Japanisch"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:2001
+msgid "Korean"
+msgstr "Koreanisch"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:2001
+msgid "Latin"
+msgstr "Latein"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:2001
+msgid "Norwegian"
+msgstr "Norwegisch"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:2001
+msgid "Polish"
+msgstr "Polnisch"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:2001
+msgid "Portuguese (Brazilian)"
+msgstr "brasilianisches Portugiesisch"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:2001
+msgid "Portuguese"
+msgstr "Portugiesisch"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:2001
+msgid "Russian"
+msgstr "Russisch"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:2001
+msgid "Chinese (Simplified)"
+msgstr "(vereinfachtes) Chinesisch"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:2001
+msgid "Spanish"
+msgstr "Spanisch"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:2001
+msgid "Swedish"
+msgstr "Schwedisch"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:2001
+msgid "Thai"
+msgstr "Thailändisch"
+
+#. Type: select
+#. DefaultChoice
+#: ../dsf-helper/web-variables.templates:2002
+msgid "English[ Default language]"
+msgstr "German"
+
+#. Type: select
+#. Description
+#: ../dsf-helper/web-variables.templates:2003
+msgid "Default language:"
+msgstr "Standardsprache:"
+
+#. Type: select
+#. Description
+#: ../dsf-helper/web-variables.templates:2003
+msgid "Please choose the default language for web pages."
+msgstr "Bitte wählen Sie die Standardsprache für Webseiten."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/web-variables.templates:3001
+msgid "Default theme:"
+msgstr "Standard Thema:"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/web-variables.templates:3001
+msgid ""
+"Please choose the default theme for web pages. This must be a valid name."
+msgstr ""
+"Bitte wählen Sie das Standard-Thema für Webseiten. Dies muss ein gültiger "
+"Namen sein."
+
+#~ msgid "admin"
+#~ msgstr "Administrator"

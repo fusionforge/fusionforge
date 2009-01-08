@@ -1,0 +1,113 @@
+#---------------------------------------------------------------------------
+# Novaforge is a registered trade mark from Bull S.A.S
+# Copyright (C) 2007 Bull S.A.S.
+# 
+# http://novaforge.org/
+#
+#
+# This file has been developped within the Novaforge(TM) project from Bull S.A.S
+# and contributed back to GForge community.
+#
+# GForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# GForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#---------------------------------------------------------------------------
+
+#
+# Mantis message catalog (Base)
+#
+
+gforge-plugin-mantis	udpate_project	Update
+gforge-plugin-mantis	not_enabled	The Mantis plugin is not enabled for this project.
+gforge-plugin-mantis	backto	Return to administration of Mantis projects.
+gforge-plugin-mantis	use_mantis	Mantis bugtracker
+gforge-plugin-mantis	name	Project name
+gforge-plugin-mantis	description	Description
+gforge-plugin-mantis	url	Mantis instance
+gforge-plugin-mantis	url_info	 URL of Mantis server, for example "http://$1/mantis/"
+gforge-plugin-mantis	no_instance_declared	No instance of Mantis is declared, please contact the administrator.
+gforge-plugin-mantis	instance_not_declared	Warning: Mantis instance '$1' is currently used but is not declared anymore, please contact the administrator.
+gforge-plugin-mantis	visibility	Project visibility
+gforge-plugin-mantis	public	Public
+gforge-plugin-mantis	private	Private
+gforge-plugin-mantis	status	Project status
+gforge-plugin-mantis	development	Development
+gforge-plugin-mantis	release	Release
+gforge-plugin-mantis	stable	Stable
+gforge-plugin-mantis	obsolete	Obsolete
+gforge-plugin-mantis	css	CSS substitution patterns (regular expressions)
+gforge-plugin-mantis	css_info	Format: &quot;pattern ==> replacement&quot; (see <a href="http://www.php.net/manual/en/function.preg-replace.php" target="_blank">PHP manual</a>).
+gforge-plugin-mantis	error_mantis_project	The Mantis project do no exist.
+gforge-plugin-mantis	error_mantis_project_id	The plugin_mantis_project_id parameter is not set.
+gforge-plugin-mantis	successfully_updated	The Mantis project has been successfully updated.
+gforge-plugin-mantis	roles_update_success	The roles mapping have been successfully updated.
+gforge-plugin-mantis	roles_update_failure	An error occured while updating the roles mapping.
+gforge-plugin-mantis	sync_success	The Mantis projects have been successfully synchronized.
+gforge-plugin-mantis	sync_failed	The synchronization of Mantis projects failed.
+gforge-plugin-mantis	affected_mantis_items	My assigned Mantis bugs
+gforge-plugin-mantis	no_mantis_items_assigned	You have no open bug assigned to you.
+gforge-plugin-mantis	tab_title	Mantis
+gforge-plugin-mantis	display_project	Display
+gforge-plugin-mantis	no_project_available	No project available.
+gforge-plugin-mantis	title_display_error	Mantis plugin
+gforge-plugin-mantis	title_display_project	Mantis project $1
+gforge-plugin-mantis	title_admin	Administration of Mantis projects
+gforge-plugin-mantis	title_create	Create a Mantis project
+gforge-plugin-mantis	create_forbidden_characters The name and/or description contains forbidden characters (&quot;&lt;&quot; and &quot;&gt;&quot;).
+gforge-plugin-mantis	database_error	An error occured while accessing the database.
+gforge-plugin-mantis	mantis_error	An error occured while calling Mantis server $1.
+gforge-plugin-mantis	title_edit	Edit a Mantis project
+gforge-plugin-mantis	title_delete	Delete a Mantis project
+gforge-plugin-mantis	title_edit_roles	Edit roles mapping of a Mantis project
+gforge-plugin-mantis	successfully_deleted	The Mantis project is deleted successfully.
+gforge-plugin-mantis	not_deleted	The Mantis project is not deleted.
+gforge-plugin-mantis	missing_project_id	The Mantis project identifier is missing.
+gforge-plugin-mantis	incorrect_project_id	The Mantis project identifier is incorrect.
+gforge-plugin-mantis	error_reading_gforge_roles	An error occured while reading GForge roles.
+gforge-plugin-mantis	error_reading_mantis_roles	An error occured while reading Mantis roles.
+gforge-plugin-mantis	error_reading_roles_mapping	An error occured while reading roles mapping.
+gforge-plugin-mantis	default_role	Default
+gforge-plugin-mantis	gforge_role	GForge role
+gforge-plugin-mantis	mantis_role	Mantis role
+gforge-plugin-mantis	undefined_gforge_roles	GForge roles are not defined.
+gforge-plugin-mantis	create_project	Create a project
+gforge-plugin-mantis	projects_list	Projects
+gforge-plugin-mantis	edit_project	Edit project
+gforge-plugin-mantis	edit_roles	Edit roles
+gforge-plugin-mantis	delete_project	Delete project
+gforge-plugin-mantis	synchronize_projects	Synchronize projects
+gforge-plugin-mantis	authentication_failure	An error occured while authenticating on Mantis server $1.
+gforge-plugin-mantis	submit_create_project	Create project
+gforge-plugin-mantis	submit_edit_project	Update project
+gforge-plugin-mantis	submit_delete_project	Delete project
+gforge-plugin-mantis	submit_edit_roles	Update roles mapping
+gforge-plugin-mantis	confirm_delete	Confirm delete
+gforge-plugin-mantis	sync_error_servers	Error while getting the list of Mantis instances.
+gforge-plugin-mantis	sync_error_users	Error while synchronizing the users of Mantis server $1.
+gforge-plugin-mantis	sync_error_projects	Error while getting the list of Mantis projects.
+gforge-plugin-mantis	sync_error_project	Error while synchronizing Mantis project $1.
+gforge-plugin-mantis	sync_error_roles	Error while synchronizing the roles of Mantis project $1.
+gforge-plugin-mantis	title_site_admin	Administration of Mantis plugin
+gforge-plugin-mantis	submit_mantis_settings	Save
+gforge-plugin-mantis	reset_mantis_settings	Reset
+gforge-plugin-mantis	mantis_urls	Available Mantis instances
+gforge-plugin-mantis	submit_add_url	Add
+gforge-plugin-mantis	submit_remove_url	Remove
+gforge-plugin-mantis	submit_modify_url	Update
+gforge-plugin-mantis	mantis_settings	Initial settings
+gforge-plugin-mantis	url_already_exists	The '$1' instance already exists.
+gforge-plugin-mantis	url_is_used	The '$1' instance is used by the following projects: 
+gforge-plugin-mantis	url_is_used_item	Mantis project '$1' of group '$2'
+gforge-plugin-mantis	back_to_site_admin	Return to administration of Mantis plugin.
+gforge-plugin-mantis	empty_url	The specified URL is empty.
+gforge-plugin-mantis	title_sync	Synchronize the Mantis projects

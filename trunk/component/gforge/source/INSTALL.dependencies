@@ -1,0 +1,122 @@
+This document lists package names for particular platforms.
+PLEASE ADD MISSING PACKAGES
+
+
+
+All Platforms
+-------------
+
+mod_auth_gforge has to be fetched from here:
+http://gforge.org/frs/?group_id=128
+
+viewvc (also known as viewcvs) has to be fetched from here:
+http://gforge.org/frs/?group_id=143
+This is a special version of viewvc with headers/footers 
+removed, so it can be piped through our viewcvs.php script.
+
+
+
+Debian Sarge
+------------
+
+apache2
+php4
+php4-cli
+php4-pgsql
+mailman
+cvs
+cvsd
+postgresql
+libipc-run-perl
+liburi-perl
+libapache2-svn
+libapache2-mod-php4
+subversion
+subversion-tools
+php4-curl
+
+
+Fedora Core 3
+-------------
+
+php
+php-pgsql
+php-gd
+mailman
+postgresql-server
+rcs
+cvs
+httpd
+mod_dav_svn
+subversion
+perl-URI
+mod_ssl
+
+perl-ipc-run can be fetched from here:
+http://gforge.org/frs/?group_id=143
+
+
+Fedora Core 4
+-------------
+
+php
+php-pgsql
+mailman
+postgresql-server
+rcs
+cvs
+httpd
+mod_dav_svn
+subversion
+perl-URI
+mod_ssl
+inetd
+
+perl-ipc-run can be fetched from here:
+http://gforge.org/frs/?group_id=143
+
+
+Suse 9.3
+--------
+
+php4
+php4-pgsql
+php4-session
+cvs
+mailman
+apache2
+apache2-prefork
+apache2-mod_php4
+postgresql
+postgresql-server
+postgresql-libs
+perl-IPC-run
+perl-URI
+rcs
+subversion
+subversion-python
+subversion-server (for apache)
+swig
+php4-session
+php4-curl
+
+
+Ubuntu
+------
+
+php4
+php4-cli
+php4-curl
+postgresql
+php4-pgsql
+libperl-ipc-run
+liburi-perl
+mailman
+cvs
+subversion
+rcs
+rlog
+libapache2-svn
+python-svn
+python2.4-svn
+

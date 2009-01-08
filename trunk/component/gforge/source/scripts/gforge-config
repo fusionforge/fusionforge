@@ -1,0 +1,889 @@
+#!/bin/sh
+#---------------------------------------------------------------------------
+# Novaforge is a registered trade mark from Bull S.A.S
+# Copyright (C) 2007 Bull S.A.S.
+# 
+# http://novaforge.org/
+#
+#
+# This file has been developped within the Novaforge(TM) project from Bull S.A.S
+# and contributed back to GForge community.
+#
+# GForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# GForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#---------------------------------------------------------------------------
+
+# Source functions
+. %DATADIR%/%NAME%/config/util/functions
+init_variables "#" $*
+echo -e "$PREFIX_CHAR$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR %FRIENDLY_NAME% : configuration"
+echo -e "$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR This script will generate configuration files."
+echo -e "$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR It should be executed after the '%NAME%-init' script,"
+echo -e "$PREFIX_CHAR after an update or if you need to change some values,"
+echo -e "$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR -> Continue ('y' or 'n') ?"
+echo -en "$PREFIX_CHAR -> "
+read CHOICE
+if [ "$CHOICE" != "y" ]; then
+	exit 1
+fi
+source_init_parameters
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Checking access to database"
+	psql -At -c "SELECT COUNT(user_id) FROM users" >> /dev/null 2>&1
+	if [ $? -ne 0 ] ; then
+		EXIT=1
+		echo -e "$PREFIX_CHAR -> Error while querying database"
+		if [ -e %LOCALSTATEDIR%/lib/pgsql/data/pg_hba.conf ] ; then
+			grep -E "^[[:blank:]]*host[[:blank:]]+%NAME%[[:blank:]]+%NAME%[[:blank:]]+127.0.0.1[[:blank:]]+255.255.255.255[[:blank:]]+md5[[:blank:]]*$" %LOCALSTATEDIR%/lib/pgsql/data/pg_hba.conf > /dev/null 2>&1
+			if [ $? -ne 0 ] ; then
+				echo -e "$PREFIX_CHAR -> File '%LOCALSTATEDIR%/lib/pgsql/data/pg_hba.conf' does not contain the line 'host %NAME% %NAME% 127.0.0.1 255.255.255.255 md5'"
+			fi
+		else
+			echo -e "$PREFIX_CHAR -> File '%LOCALSTATEDIR%/lib/pgsql/data/pg_hba.conf' is missing"
+		fi
+		if [ -e %LOCALSTATEDIR%/lib/pgsql/data/postgresql.conf ] ; then
+			grep -E "^[[:blank:]]*tcpip_socket[[:blank:]]*=[[:blank:]]*true[[:blank:]]*$" %LOCALSTATEDIR%/lib/pgsql/data/postgresql.conf > /dev/null 2>&1
+			if [ $? -ne 0 ] ; then
+				echo -e "$PREFIX_CHAR -> File '%LOCALSTATEDIR%/lib/pgsql/data/postgresql.conf' does not contain the line 'tcpip_socket = true'"
+			fi
+		else
+			echo -e "$PREFIX_CHAR -> File '%LOCALSTATEDIR%/lib/pgsql/data/postgresql.conf' is missing"
+		fi			
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	pushd %DATADIR%/%NAME%/config/scripts/config > /dev/null 2>&1
+	LISTE=`ls -1 auth-* 2>/dev/null`
+	for MODULE in $LISTE ; do
+		if [ -f $MODULE -a -x $MODULE ] ; then
+			echo -e "$PREFIX_CHAR Configuring account manager '$MODULE'"
+			./$MODULE "$PREFIX_CHAR\t"
+			if [ $? -ne 0 ] ; then
+				echo -e "$PREFIX_CHAR -> Error while configuring account manager '$MODULE'"
+				EXIT=1
+				break
+			fi
+		fi
+	done
+	popd > /dev/null 2>&1
+fi
+if [ $EXIT -eq 0 ] ; then
+	pushd %DATADIR%/%NAME%/config/scripts/config > /dev/null 2>&1
+	LISTE=`ls -1 theme-* 2>/dev/null`
+	for MODULE in $LISTE ; do
+		if [ -f $MODULE -a -x $MODULE ] ; then
+			echo -e "$PREFIX_CHAR Configuring theme '$MODULE'"
+			./$MODULE "$PREFIX_CHAR\t"
+			if [ $? -ne 0 ] ; then
+				echo -e "$PREFIX_CHAR -> Error while configuring theme '$MODULE'"
+				EXIT=1
+				break
+			fi
+		fi
+	done
+	popd > /dev/null 2>&1
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Checking available SCMs"
+	ROOT_PARENTS=""
+	SYS_USE_SCM="false"
+	SCM_RPM="`rpm -q %NAME%-plugin-scmcvs --queryformat %{NAME} 2>/dev/null`"
+	if [ $? -ne 0 -o -z "$SCM_RPM" ] ; then
+		echo -e "$PREFIX_CHAR -> RPM %NAME%-plugin-scmcvs is not installed"
+	else
+		echo -e "$PREFIX_CHAR -> RPM %NAME%-plugin-scmcvs is installed"
+		ROOT_PARENTS="/cvsroot : cvs"
+		SYS_USE_SCM="true"
+	fi
+	SCM_RPM="`rpm -q %NAME%-plugin-scmsvn --queryformat %{NAME} 2>/dev/null`"
+	if [ $? -ne 0 -o -z "$SCM_RPM" ] ; then
+		echo -e "$PREFIX_CHAR -> RPM %NAME%-plugin-scmsvn is not installed"
+	else
+		echo -e "$PREFIX_CHAR -> RPM %NAME%-plugin-scmsvn is installed"
+		if [ -n "$ROOT_PARENTS" ] ; then
+			ROOT_PARENTS="$ROOT_PARENTS, "
+		fi
+		ROOT_PARENTS="$ROOT_PARENTS/svnroot : svn"
+		SYS_USE_SCM="true"
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	source_config_parameters
+	EXIT=0
+fi
+if [ $EXIT -eq 0 ] ; then
+	if [ -z "$ADMIN_MAIL" ]; then
+		echo -e "$PREFIX_CHAR Please type the mail address of %FRIENDLY_NAME% administrator 'admin' ('q' to quit)"
+	else
+		echo -e "$PREFIX_CHAR Please type the mail address of %FRIENDLY_NAME% administrator 'admin' (default: '$ADMIN_MAIL', 'q' to quit)"
+	fi
+	echo -en "$PREFIX_CHAR -> "
+	read CHOICE
+	if [ "$CHOICE" = "q" ] ; then
+		EXIT=1
+	else
+		if [ -n "$CHOICE" ]; then
+			ADMIN_MAIL=$CHOICE
+		else
+			if [ -z "$ADMIN_MAIL" ] ; then
+				echo -e "$PREFIX_CHAR -> Mail address is empty"
+				EXIT=1
+			fi
+		fi
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	if [ -z "$FQDN_HOSTNAME" ]; then
+		echo -e "$PREFIX_CHAR Please type the FQDN hostname of this server ('q' to quit)"
+	else
+		echo -e "$PREFIX_CHAR Please type the FQDN hostname of this server (default: '$FQDN_HOSTNAME', 'q' to quit)"
+	fi
+	echo -en "$PREFIX_CHAR -> "
+	read CHOICE
+	if [ "$CHOICE" = "q" ] ; then
+		EXIT=1
+	else
+		if [ -n "$CHOICE" ]; then
+			FQDN_HOSTNAME=$CHOICE
+		else
+			if [ -z "$FQDN_HOSTNAME" ] ; then
+				echo -e "$PREFIX_CHAR -> Hostname is empty"
+				EXIT=1
+			fi
+		fi
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Please select the default language"
+	LISTE=`psql -At -c "SELECT classname FROM supported_languages ORDER BY classname" 2>/dev/null`
+	if [ $? -eq 0 ] ; then
+		SIZE=`echo $LISTE | awk '{print NF}'`
+		NUMBER=1
+		for LANGUAGE in $LISTE ; do
+			echo -en "$PREFIX_CHAR "
+			display_padded_item $NUMBER 3
+			echo -e $LANGUAGE
+			(( NUMBER+=1 ))
+		done
+		echo -e "$PREFIX_CHAR -> Default language (default: '$DEFAULT_LANGUAGE', '1' to '$SIZE' or 'q' to quit) ?"
+		echo -en "$PREFIX_CHAR -> "
+		read CHOICE
+		if [ "$CHOICE" = "q" ] ; then
+			EXIT=1
+		else
+			if [ -n "$CHOICE" ] ; then
+				expr $CHOICE \>= 1 > /dev/null 2>&1
+				if [ $? -eq 0 ] ; then
+					expr $CHOICE \<= $SIZE >> /dev/null 2>&1
+					if [ $? -ne 0 ] ; then
+						echo -e "$PREFIX_CHAR -> Value is greater than $SIZE"
+						EXIT=1
+					else
+						DEFAULT_LANGUAGE=`echo $LISTE | awk '{print $'$CHOICE'}'`
+					fi
+				else
+					echo -e "$PREFIX_CHAR -> Value is lower than 1 or not an integer"
+					EXIT=1
+				fi
+			fi
+		fi
+	else
+		echo -e "$PREFIX_CHAR -> Error while listing available languages"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Please select the default timezone"
+	LISTE=`cat %DATADIR%/%NAME%/common/include/timezones.php | grep "TZs\[\]=" | cut -d"'" -f2 2>/dev/null`
+	if [ $? -eq 0 ] ; then
+		SIZE=`echo $LISTE | awk '{print NF}'`
+		NUMBER=1
+		for TIMEZONE in $LISTE ; do
+			echo -en "$PREFIX_CHAR "
+			display_padded_item $NUMBER 4
+			echo -e $TIMEZONE
+			(( NUMBER+=1 ))
+		done
+		echo -e "$PREFIX_CHAR -> Default timezone (default: '$DEFAULT_TIMEZONE', '1' to '$SIZE' or 'q' to quit) ?"
+		echo -en "$PREFIX_CHAR -> "
+		read CHOICE
+		if [ "$CHOICE" = "q" ] ; then
+			EXIT=1
+		else
+			if [ -n "$CHOICE" ] ; then
+				expr $CHOICE \>= 1 > /dev/null 2>&1
+				if [ $? -eq 0 ] ; then
+					expr $CHOICE \<= $SIZE >> /dev/null 2>&1
+					if [ $? -ne 0 ] ; then
+						echo -e "$PREFIX_CHAR -> Value is greater than $SIZE"
+						EXIT=1
+					else
+						DEFAULT_TIMEZONE=`echo $LISTE | awk '{print $'$CHOICE'}'`
+					fi
+				else
+					echo -e "$PREFIX_CHAR -> Value is lower than 1 or not an integer"
+					EXIT=1
+				fi
+			fi
+		fi
+	else
+		echo -e "$PREFIX_CHAR -> Error while listing available timezones"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Please select the default country code"
+	LISTE=`psql -At -c "SELECT ccode FROM country_code ORDER BY ccode" 2>/dev/null`
+	if [ $? -eq 0 ] ; then
+		SIZE=`echo $LISTE | awk '{print NF}'`
+		NUMBER=1
+		for COUNTRY_CODE in $LISTE ; do
+			echo -en "$PREFIX_CHAR "
+			display_padded_item $NUMBER 4
+			echo -e $COUNTRY_CODE
+			(( NUMBER+=1 ))
+		done
+		echo -e "$PREFIX_CHAR -> Default country code (default: '$DEFAULT_COUNTRY_CODE', '1' to '$SIZE' or 'q' to quit) ?"
+		echo -en "$PREFIX_CHAR -> "
+		read CHOICE
+		if [ "$CHOICE" = "q" ] ; then
+			EXIT=1
+		else
+			if [ -n "$CHOICE" ]; then
+				expr $CHOICE \>= 1 > /dev/null 2>&1
+				if [ $? -eq 0 ] ; then
+					expr $CHOICE \<= $SIZE >> /dev/null 2>&1
+					if [ $? -ne 0 ] ; then
+						echo -e "$PREFIX_CHAR -> Value is greater than $SIZE"
+						EXIT=1
+					else
+						DEFAULT_COUNTRY_CODE=`echo $LISTE | awk '{print $'$CHOICE'}'`
+					fi
+				else
+					echo -e "$PREFIX_CHAR -> Value is lower than 1 or not an integer"
+					EXIT=1
+				fi
+			fi
+		fi
+	else
+		echo -e "$PREFIX_CHAR -> Error while listing available country codes"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Please select the default theme"
+	LISTE=`psql -At -c "SELECT dirname FROM themes ORDER BY dirname" 2>/dev/null`
+	if [ $? -eq 0 ] ; then
+		SIZE=`echo $LISTE | awk '{print NF}'`
+		NUMBER=1
+		for THEME in $LISTE ; do
+			echo -en "$PREFIX_CHAR "
+			display_padded_item $NUMBER 3
+			echo -e $THEME
+			(( NUMBER+=1 ))
+		done
+		echo -e "$PREFIX_CHAR -> Default theme (default: '$DEFAULT_THEME', '1' to '$SIZE' or 'q' to quit) ?"
+		echo -en "$PREFIX_CHAR -> "
+		read CHOICE
+		if [ "$CHOICE" = "q" ] ; then
+			EXIT=1
+		else
+			if [ -n "$CHOICE" ]; then
+				expr $CHOICE \>= 1 > /dev/null 2>&1
+				if [ $? -eq 0 ] ; then
+					expr $CHOICE \<= $SIZE >> /dev/null 2>&1
+					if [ $? -ne 0 ] ; then
+						echo -e "$PREFIX_CHAR -> Value is greater than $SIZE"
+						EXIT=1
+					else
+						DEFAULT_THEME=`echo $LISTE | awk '{print $'$CHOICE'}'`
+					fi
+				else
+					echo -e "$PREFIX_CHAR -> Value is lower than 1 or not an integer"
+					EXIT=1
+				fi
+			fi
+		fi
+	else
+		echo -e "$PREFIX_CHAR -> Error while listing available themes"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Please type the max upload size in MB (default: '$UPLOAD_MAX_SIZE', '1' to '128' or 'q' to quit)"
+	echo -en "$PREFIX_CHAR -> "
+	read CHOICE
+	if [ "$CHOICE" = "q" ] ; then
+		EXIT=1
+	else
+		if [ -n "$CHOICE" ] ; then
+			expr $CHOICE \>= 1 > /dev/null 2>&1
+			if [ $? -eq 0 ] ; then
+				expr $CHOICE \<= 128 >> /dev/null 2>&1
+				if [ $? -ne 0 ] ; then
+					echo -e "$PREFIX_CHAR -> Value is greater than 128"
+					EXIT=1
+				else
+					UPLOAD_MAX_SIZE=$CHOICE
+				fi
+			else
+				echo -e "$PREFIX_CHAR -> Value is lower than 1 or not an integer"
+				EXIT=1
+			fi
+		fi
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	UPLOAD_MAX_SIZE_X_2=`expr $UPLOAD_MAX_SIZE \* 2`
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Value is not an integer"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	if [ -z "$SMTP_RELAY" ] ; then 
+		echo -e "$PREFIX_CHAR Please type the SMTP relay FQDN or IP address (default: no relay, 'q' to quit)"
+	else
+		echo -e "$PREFIX_CHAR Please type the SMTP relay FQDN or IP address (default: '$SMTP_RELAY', 'none' for no relay or 'q' to quit)"
+	fi
+	echo -en "$PREFIX_CHAR -> "
+	read CHOICE
+	if [ "$CHOICE" = "q" ] ; then
+		EXIT=1
+	else
+		if [ -n "$CHOICE" ] ; then
+			if [ "$CHOICE" = "none" ] ; then
+				SMTP_RELAY=""
+			else
+				SMTP_RELAY=$CHOICE
+			fi
+		fi
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Please select the modules to enable"
+	SIZE=`echo $SYS_USE_MODULES_DEFAULT | awk '{print NF}'`
+	FINISHED=0
+	while [ $FINISHED -ne 1 ] ; do
+		SYS_USE_MODULES_TMP=""
+		NUMBER=1
+		for MODULE in $SYS_USE_MODULES_DEFAULT ; do
+			MODULE_NAME=`echo $MODULE | cut -d':' -f1`
+			MODULE_ENABLED=""
+			for MODULE_TMP in $SYS_USE_MODULES ; do
+				MODULE_NAME_TMP=`echo $MODULE_TMP | cut -d':' -f1`
+				if [ "$MODULE_NAME_TMP" = "$MODULE_NAME" ] ; then
+					MODULE_ENABLED=`echo $MODULE_TMP | cut -d':' -f2`
+					break
+				fi
+			done
+			if [ -z "$MODULE_ENABLED" ] ; then
+				MODULE_ENABLED=`echo $MODULE | cut -d':' -f2`
+			fi
+			echo -en "$PREFIX_CHAR "
+			display_padded_item $NUMBER 3
+			display_module_name $MODULE_NAME padding
+			if [ "$MODULE_ENABLED" = "true" ] ; then
+				echo -e " : enabled"
+			else
+				echo -e " : disabled"
+			fi
+			if [ -z "$SYS_USE_MODULES_TMP" ] ; then
+				SYS_USE_MODULES_TMP="$MODULE_NAME:$MODULE_ENABLED"
+			else
+				SYS_USE_MODULES_TMP="$SYS_USE_MODULES_TMP $MODULE_NAME:$MODULE_ENABLED"
+			fi
+			(( NUMBER+=1 ))
+		done
+		echo -e "$PREFIX_CHAR -> Module to toggle (default: continue, '1' to '$SIZE' or 'q' to quit) ?"
+		echo -en "$PREFIX_CHAR -> "
+		read CHOICE
+		if [ "$CHOICE" = "q" ] ; then
+			EXIT=1
+		else
+			if [ -n "$CHOICE" ]; then
+				expr $CHOICE \>= 1 > /dev/null 2>&1
+				if [ $? -eq 0 ] ; then
+					expr $CHOICE \<= $SIZE >> /dev/null 2>&1
+					if [ $? -ne 0 ] ; then
+						echo -e "$PREFIX_CHAR -> Value is greater than $SIZE"
+						EXIT=1
+					else
+						MODULE_TMP=`echo $SYS_USE_MODULES_TMP | awk '{print $'$CHOICE'}'`
+						SYS_USE_MODULES=""
+						for MODULE in $SYS_USE_MODULES_TMP ; do
+							if [ "$MODULE" = "$MODULE_TMP" ] ; then
+								MODULE_NAME=`echo $MODULE | cut -d':' -f1`
+								MODULE_ENABLED=`echo $MODULE | cut -d':' -f2`
+								if [ "$MODULE_ENABLED" = "false" ] ; then
+									MODULE_ENABLED="true"
+								else
+									MODULE_ENABLED="false"
+								fi
+								if [ -z "$SYS_USE_MODULES" ] ; then
+									SYS_USE_MODULES="$MODULE_NAME:$MODULE_ENABLED"
+								else
+									SYS_USE_MODULES="$SYS_USE_MODULES $MODULE_NAME:$MODULE_ENABLED"
+								fi
+							else
+								if [ -z "$SYS_USE_MODULES" ] ; then
+									SYS_USE_MODULES="$MODULE"
+								else
+									SYS_USE_MODULES="$SYS_USE_MODULES $MODULE"
+								fi
+							fi
+						done
+					fi
+				else
+					echo -e "$PREFIX_CHAR -> Value is lower than 1 or not an integer"
+					EXIT=1
+				fi
+			else
+				FINISHED=1
+			fi
+		fi
+		if [ $EXIT -eq 1 ] ; then
+			FINISHED=1
+		fi
+	done
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Checking parameters"
+	echo -e "$PREFIX_CHAR   Admin mail address   : $ADMIN_MAIL"
+	echo -e "$PREFIX_CHAR   FQDN hostname        : $FQDN_HOSTNAME"
+	echo -e "$PREFIX_CHAR   Default language     : $DEFAULT_LANGUAGE"
+	echo -e "$PREFIX_CHAR   Default timezone     : $DEFAULT_TIMEZONE"
+	echo -e "$PREFIX_CHAR   Default country code : $DEFAULT_COUNTRY_CODE"
+	echo -e "$PREFIX_CHAR   Default theme        : $DEFAULT_THEME"
+	echo -e "$PREFIX_CHAR   Upload max size      : $UPLOAD_MAX_SIZE MB"
+	echo -e "$PREFIX_CHAR   SMTP relay           : $SMTP_RELAY"
+	echo -en "$PREFIX_CHAR   Enabled modules      : "
+	FIRST=1
+	for MODULE in $SYS_USE_MODULES ; do
+		MODULE_NAME=`echo $MODULE | cut -d':' -f1`
+		MODULE_ENABLED=`echo $MODULE | cut -d':' -f2`
+		if [ "$MODULE_ENABLED" = "true" ] ; then
+			if [ $FIRST -eq 1 ] ; then
+				FIRST=0
+			else
+				echo -e ""
+				echo -en "$PREFIX_CHAR                          "
+			fi
+			display_module_name $MODULE_NAME
+		fi
+	done
+	echo -e ""
+	echo -en "$PREFIX_CHAR   Disabled modules     : "
+	FIRST=1
+	for MODULE in $SYS_USE_MODULES ; do
+		MODULE_NAME=`echo $MODULE | cut -d':' -f1`
+		MODULE_ENABLED=`echo $MODULE | cut -d':' -f2`
+		if [ "$MODULE_ENABLED" != "true" ] ; then
+			if [ $FIRST -eq 1 ] ; then
+				FIRST=0
+			else
+				echo -e ""
+				echo -en "$PREFIX_CHAR                          "
+			fi
+			display_module_name $MODULE_NAME
+		fi
+	done
+	echo -e ""
+	echo -e "$PREFIX_CHAR -> Accept ('y' or 'n') ?"
+	echo -en "$PREFIX_CHAR -> "
+	read CHOICE
+	if [ "$CHOICE" != "y" ] ; then
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Saving configuration in file '%SYSCONFDIR%/%NAME%/.config'"
+	echo -e "ADMIN_MAIL=$ADMIN_MAIL" > %SYSCONFDIR%/%NAME%/.config
+	echo -e "FQDN_HOSTNAME=$FQDN_HOSTNAME" >> %SYSCONFDIR%/%NAME%/.config
+	echo -e "DEFAULT_LANGUAGE=$DEFAULT_LANGUAGE" >> %SYSCONFDIR%/%NAME%/.config
+	echo -e "DEFAULT_TIMEZONE=$DEFAULT_TIMEZONE" >> %SYSCONFDIR%/%NAME%/.config
+	echo -e "DEFAULT_COUNTRY_CODE=$DEFAULT_COUNTRY_CODE" >> %SYSCONFDIR%/%NAME%/.config
+	echo -e "DEFAULT_THEME=$DEFAULT_THEME" >> %SYSCONFDIR%/%NAME%/.config
+	echo -e "SESSION_KEY=$SESSION_KEY" >> %SYSCONFDIR%/%NAME%/.config
+	echo -e "UPLOAD_MAX_SIZE=$UPLOAD_MAX_SIZE" >> %SYSCONFDIR%/%NAME%/.config
+	echo -e "SMTP_RELAY=$SMTP_RELAY" >> %SYSCONFDIR%/%NAME%/.config
+	echo -e "SYS_USE_MODULES=\"$SYS_USE_MODULES\"" >> %SYSCONFDIR%/%NAME%/.config
+	chown root.root %SYSCONFDIR%/%NAME%/.config
+	chmod 600 %SYSCONFDIR%/%NAME%/.config
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Setting value of sequence for trove catalog"
+	psql -q -c "SELECT pg_catalog.setval('trove_cat_pk_seq', (SELECT COALESCE(MAX(trove_cat_id)+1, 1) from trove_cat), false)" >> /dev/null 2>&1
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while setting value of sequence"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Flushing localization cache"
+	if [ -d %LOCALSTATEDIR%/lib/%NAME%/localizationcache ] ; then
+		rm -rf %LOCALSTATEDIR%/lib/%NAME%/localizationcache/*
+	else
+		echo -e "$PREFIX_CHAR -> Directory '%LOCALSTATEDIR%/lib/%NAME%/localizationcache' is missing"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Saving file '%SYSCONFDIR%/postfix/main.cf' as '%SYSCONFDIR%/postfix/main.cf.%NAME%'"
+	if [ ! -e %SYSCONFDIR%/postfix/main.cf.%NAME% ] ; then
+		if [ -e %SYSCONFDIR%/postfix/main.cf ] ; then
+			cp -af %SYSCONFDIR%/postfix/main.cf %SYSCONFDIR%/postfix/main.cf.%NAME%
+			if [ $? -ne 0 ] ; then
+				echo -e "$PREFIX_CHAR -> Error while saving file"
+				EXIT=1
+			fi
+		else
+			echo -e "$PREFIX_CHAR -> File is missing"
+			EXIT=1
+		fi
+	else
+		echo -e "$PREFIX_CHAR -> File already exists"
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Creating file '%SYSCONFDIR%/%NAME%/aliases.org'"
+	sed \
+		-e "s/@admin_mail@/$ADMIN_MAIL/g" \
+		%DATADIR%/%NAME%/config/skel/aliases > %SYSCONFDIR%/%NAME%/aliases.org
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while creating file"
+		EXIT=1
+	else
+		chown root.root %SYSCONFDIR%/%NAME%/aliases.org
+		chmod 644 %SYSCONFDIR%/%NAME%/aliases.org
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Creating file '%SYSCONFDIR%/%NAME%/aliases'"
+	cp -af %SYSCONFDIR%/%NAME%/aliases.org %SYSCONFDIR%/%NAME%/aliases
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while creating file"
+		EXIT=1
+	else
+		chown root.root %SYSCONFDIR%/%NAME%/aliases
+		chmod 644 %SYSCONFDIR%/%NAME%/aliases
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Creating file '%SYSCONFDIR%/postfix/main.cf'"
+	sed \
+		-e "/^[[:blank:]]*alias_maps[[:blank:]]*=/d" \
+		-e "/^[[:blank:]]*alias_database[[:blank:]]*=/d" \
+		-e "/^[[:blank:]]*inet_interfaces[[:blank:]]*=/d" \
+		-e "/^[[:blank:]]*relayhost[[:blank:]]*=/d" \
+		%SYSCONFDIR%/postfix/main.cf.%NAME% > %SYSCONFDIR%/postfix/main.cf
+	if [ $? -ne 0 ]; then
+		echo -e "$PREFIX_CHAR -> Error while creating file"
+		EXIT=1
+	else
+		echo -e "alias_maps = \$alias_database" >> %SYSCONFDIR%/postfix/main.cf
+		echo -e "alias_database = hash:%SYSCONFDIR%/%NAME%/aliases" >> %SYSCONFDIR%/postfix/main.cf
+		echo -e "inet_interfaces = all" >> %SYSCONFDIR%/postfix/main.cf
+		if [ -n "$SMTP_RELAY" ] ; then
+			echo -e "relayhost = $SMTP_RELAY" >> %SYSCONFDIR%/postfix/main.cf
+		fi
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	restart_service postfix
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Creating file '%SYSCONFDIR%/%NAME%/aliases.db'"
+	rm -f %SYSCONFDIR%/%NAME%/aliases.db >> /dev/null 2>&1
+	newaliases > /dev/null 2>&1
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while creating file"
+		EXIT=1
+	else
+		if [ ! -e %SYSCONFDIR%/%NAME%/aliases.db ] ; then
+			echo -e "$PREFIX_CHAR -> File has not been created"
+			EXIT=1
+		else
+			chown root.root %SYSCONFDIR%/%NAME%/aliases.db
+			chmod 644 %SYSCONFDIR%/%NAME%/aliases.db
+		fi
+	fi
+	
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Creating file '%MAILMANBINARIESDIR%/Mailman/mm_cfg.py'"
+	if [ -e %MAILMANBINARIESDIR%/Mailman/mm_cfg.py.dist ] ; then
+		sed \
+			-e "s|^[[:blank:]]*DEFAULT_URL_HOST[[:blank:]]*=[[:blank:]]*'[[:print:]]*'[[:blank:]]*$|DEFAULT_URL_HOST = '$FQDN_HOSTNAME'|g" \
+			-e "s|^[[:blank:]]*DEFAULT_EMAIL_HOST[[:blank:]]*=[[:blank:]]*'[[:print:]]*'[[:blank:]]*$|DEFAULT_EMAIL_HOST = '$FQDN_HOSTNAME'|g" \
+			%MAILMANBINARIESDIR%/Mailman/mm_cfg.py.dist > %MAILMANBINARIESDIR%/Mailman/mm_cfg.py
+		if [ $? -ne 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Error while creating file"
+			EXIT=1
+		fi
+	else
+		echo -e "$PREFIX_CHAR -> File '%MAILMANBINARIESDIR%/Mailman/mm_cfg.py.dist' is missing"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Creating mailing list 'mailman'"
+	if [ ! -d %MAILMANDATADIR%/lists/mailman ]; then
+		MM_PASSWORD="`pwgen -N 1 -c -n -s`"
+		if [ $? -ne 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Error while generating password"
+			EXIT=1
+		else
+			%MAILMANBINARIESDIR%/bin/newlist -q mailman postmaster@$FQDN_HOSTNAME $MM_PASSWORD >> /dev/null 2>&1
+			if [ $? -eq 0 ] ; then
+				if [ ! -d %MAILMANDATADIR%/lists/mailman ]; then
+					echo -e "$PREFIX_CHAR -> Directory '%MAILMANDATADIR%/lists/mailman' has not been created"
+					EXIT=1
+				else
+					echo -e "MM_PASSWORD=$MM_PASSWORD" > %SYSCONFDIR%/%NAME%/.mailman
+					chown root.root %SYSCONFDIR%/%NAME%/.mailman
+					chmod 600 %SYSCONFDIR%/%NAME%/.mailman
+				fi
+			else
+				echo -e "$PREFIX_CHAR -> Error while creating mailing list"
+				EXIT=1
+			fi
+		fi
+	else
+		echo -e "$PREFIX_CHAR -> Mailing list already exists"
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	restart_service mailman
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Creating file '%SYSCONFDIR%/%NAME%/local.inc'"
+	sed \
+		-e "s|@fqdn_hostname@|$FQDN_HOSTNAME|" \
+		-e "s|@sys_lang@|$DEFAULT_LANGUAGE|" \
+		-e "s|@sys_default_timezone@|$DEFAULT_TIMEZONE|" \
+		-e "s|@sys_default_country_code@|$DEFAULT_COUNTRY_CODE|" \
+		-e "s|@sys_theme@|$DEFAULT_THEME|" \
+		-e "s|@sys_session_key@|$SESSION_KEY|" \
+		-e "s|@sys_dbpasswd@|$DB_PASSWORD|" \
+		-e "s|@sys_use_scm@|$SYS_USE_SCM|" \
+		%DATADIR%/%NAME%/config/skel/local.inc > %SYSCONFDIR%/%NAME%/local.inc
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while creating file"
+		EXIT=1
+	else
+		for MODULE in $SYS_USE_MODULES ; do
+			MODULE_NAME=`echo $MODULE | cut -d':' -f1`
+			MODULE_ENABLED=`echo $MODULE | cut -d':' -f2`
+			sed \
+				-e "s|@sys_use_$MODULE_NAME@|$MODULE_ENABLED|" \
+				-i %SYSCONFDIR%/%NAME%/local.inc
+			if [ $? -ne 0 ] ; then
+				echo -e "$PREFIX_CHAR -> Error while enabling modules"
+				EXIT=1
+				break
+			fi
+		done
+	fi
+	if [ $EXIT -eq 1 ] ; then
+		rm -f %SYSCONFDIR%/%NAME%/local.inc
+		touch %SYSCONFDIR%/%NAME%/local.inc
+	fi
+	chown root.%APACHE_GROUP% %SYSCONFDIR%/%NAME%/local.inc
+	chmod 640 %SYSCONFDIR%/%NAME%/local.inc
+fi
+if [ $EXIT -eq 7 -a $REMOVE -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Creating file '%SYSCONFDIR%/%NAME%/viewvc.conf'"
+	sed \
+		-e "s|@admin_mail@|$ADMIN_MAIL|g" \
+		-e "s|@root_parents@|$ROOT_PARENTS|g" \
+		%DATADIR%/%NAME%/config/skel/viewvc.conf > %SYSCONFDIR%/%NAME%/viewvc.conf
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while creating file"
+		rm -f %SYSCONFDIR%/%NAME%/viewvc.conf
+		touch %SYSCONFDIR%/%NAME%/viewvc.conf
+		EXIT=1
+	fi
+	chown root.%APACHE_GROUP% %SYSCONFDIR%/%NAME%/viewvc.conf
+	chmod 640 %SYSCONFDIR%/%NAME%/viewvc.conf
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Checking SSL certificate"
+	if [ -e %SYSCONFDIR%/%NAME%/ssl/server.crt -o -e %SYSCONFDIR%/%NAME%/ssl/server.key ] ; then
+		if [ ! -e %SYSCONFDIR%/%NAME%/ssl/server.crt ] ; then
+			echo -e "$PREFIX_CHAR -> File '%SYSCONFDIR%/%NAME%/ssl/server.crt' is missing"
+			EXIT=1
+		fi
+		if [ ! -e %SYSCONFDIR%/%NAME%/ssl/server.key ] ; then
+			echo -e "$PREFIX_CHAR -> File '%SYSCONFDIR%/%NAME%/ssl/server.key' is missing"
+			EXIT=1
+		fi
+	else
+		if [ -e %SYSCONFDIR%/httpd/conf/ssl.crt/server.crt -a -e %SYSCONFDIR%/httpd/conf/ssl.key/server.key ] ; then
+			ln -s %SYSCONFDIR%/httpd/conf/ssl.crt/server.crt %SYSCONFDIR%/%NAME%/ssl/server.crt
+			if [ $? -ne 0 ] ; then
+				echo -e "$PREFIX_CHAR -> Error while creating '%SYSCONFDIR%/%NAME%/ssl/server.crt' softlink"
+				EXIT=1
+			fi
+			ln -s %SYSCONFDIR%/httpd/conf/ssl.key/server.key %SYSCONFDIR%/%NAME%/ssl/server.key
+			if [ $? -ne 0 ] ; then
+				echo -e "$PREFIX_CHAR -> Error while creating '%SYSCONFDIR%/%NAME%/ssl/server.key' softlink"
+				EXIT=1
+			fi
+		else
+			if [ ! -e %SYSCONFDIR%/httpd/conf/ssl.crt/server.crt ] ; then
+				echo -e "$PREFIX_CHAR -> File '%SYSCONFDIR%/httpd/conf/ssl.crt/server.crt' is missing"
+				EXIT=1
+			fi
+			if [ ! -e %SYSCONFDIR%/httpd/conf/ssl.key/server.key ] ; then
+				echo -e "$PREFIX_CHAR -> File '%SYSCONFDIR%/httpd/conf/ssl.key/server.key' is missing"
+				EXIT=1
+			fi
+		fi
+	fi
+
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Creating file '%SYSCONFDIR%/httpd/conf.d/%NAME%.conf'"
+	sed \
+		-e "s|@fqdn_hostname@|$FQDN_HOSTNAME|g" \
+		-e "s|@upload_max_size@|$UPLOAD_MAX_SIZE|g" \
+		-e "s|@upload_max_size_x_2@|$UPLOAD_MAX_SIZE_X_2|g" \
+		%DATADIR%/%NAME%/config/skel/%NAME%.conf > %SYSCONFDIR%/httpd/conf.d/%NAME%.conf
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while creating file"
+		rm -f %SYSCONFDIR%/httpd/conf.d/%NAME%.conf
+		touch %SYSCONFDIR%/httpd/conf.d/%NAME%.conf
+		EXIT=1
+	else
+		if [ -s %SYSCONFDIR%/%NAME%/ssl/ca.crt ] ; then
+			restart_service httpd
+		else
+			sed \
+				-e "/^[[:blank:]]*SSLCertificateChainFile[[:blank:]]*/d" \
+				-i %SYSCONFDIR%/httpd/conf.d/%NAME%.conf
+			if [ $? -ne 0 ] ; then
+				echo -e "$PREFIX_CHAR -> Error while removing SSL directive"
+				rm -f %SYSCONFDIR%/httpd/conf.d/%NAME%.conf
+				touch %SYSCONFDIR%/httpd/conf.d/%NAME%.conf
+				EXIT=1
+			else
+				restart_service httpd
+			fi
+		fi
+	fi
+	chown root.%APACHE_GROUP% %SYSCONFDIR%/httpd/conf.d/%NAME%.conf
+	chmod 640 %SYSCONFDIR%/httpd/conf.d/%NAME%.conf
+fi
+#SSHD_CONFIGif [ $EXIT -eq 0 ] ; then
+#SSHD_CONFIG	echo -e "$PREFIX_CHAR Saving file '%SYSCONFDIR%/ssh/sshd_config' as '%SYSCONFDIR%/ssh/sshd_config.%NAME%'"
+#SSHD_CONFIG	if [ ! -e %SYSCONFDIR%/ssh/sshd_config.%NAME% ] ; then	
+#SSHD_CONFIG		if [ -e %SYSCONFDIR%/ssh/sshd_config ] ; then
+#SSHD_CONFIG			cp -af %SYSCONFDIR%/ssh/sshd_config %SYSCONFDIR%/ssh/sshd_config.%NAME%
+#SSHD_CONFIG			if [ $? -ne 0 ] ; then
+#SSHD_CONFIG				echo -e "$PREFIX_CHAR -> Error while saving file"
+#SSHD_CONFIG				EXIT=1
+#SSHD_CONFIG			fi
+#SSHD_CONFIG		else
+#SSHD_CONFIG			echo -e "$PREFIX_CHAR -> File is missing"
+#SSHD_CONFIG			EXIT=1
+#SSHD_CONFIG		fi
+#SSHD_CONFIG	else
+#SSHD_CONFIG		echo -e "$PREFIX_CHAR -> File already exists"
+#SSHD_CONFIG	fi
+#SSHD_CONFIGfi
+#SSHD_CONFIGif [ $EXIT -eq 0 ] ; then
+#SSHD_CONFIG	echo -e "$PREFIX_CHAR Creating file '%SYSCONFDIR%/ssh/sshd_config'"
+#SSHD_CONFIG	sed \
+#SSHD_CONFIG		-e "s/^#[[:blank:]]*PAMAuthenticationViaKbdInt[[:blank:]]*[[:print:]]*$/PAMAuthenticationViaKbdInt yes/" \
+#SSHD_CONFIG		-e "s/^[[:blank:]]*PAMAuthenticationViaKbdInt[[:blank:]]*[[:print:]]*$/PAMAuthenticationViaKbdInt yes/" \
+#SSHD_CONFIG		%SYSCONFDIR%/ssh/sshd_config.%NAME% > %SYSCONFDIR%/ssh/sshd_config
+#SSHD_CONFIG	if [ $? -ne 0 ] ; then
+#SSHD_CONFIG		echo -e "$PREFIX_CHAR -> Error while creating file"
+#SSHD_CONFIG		EXIT=1
+#SSHD_CONFIG	else
+#SSHD_CONFIG		restart_service sshd
+#SSHD_CONFIG	fi
+#SSHD_CONFIGfi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Updating mail address, language, timezone, country code and theme of user 'admin'"
+	LANGUAGE_ID=`psql -At -c "SELECT language_id FROM supported_languages WHERE classname='$DEFAULT_LANGUAGE'" 2>/dev/null`
+	if [ $? -eq 0 ] ; then
+		if [ -z "$LANGUAGE_ID" ] ; then
+			echo -e "$PREFIX_CHAR -> Default language not found"
+			EXIT=1
+		fi
+	else
+		echo -e "$PREFIX_CHAR -> Error while searching identifier of default language"
+		EXIT=1
+	fi
+	if [ $EXIT -eq 0 ] ; then
+		THEME_ID=`psql -At -c "SELECT theme_id FROM themes WHERE dirname='$DEFAULT_THEME'" 2>/dev/null`
+		if [ $? -eq 0 ] ; then
+			if [ -z "$THEME_ID" ] ; then
+				echo -e "$PREFIX_CHAR -> Default theme not found"
+				EXIT=1
+			fi
+		else
+			echo -e "$PREFIX_CHAR -> Error while searching identifier of default theme"
+			EXIT=1
+		fi
+	fi
+	if [ $EXIT -eq 0 ] ; then
+		psql -q -c "UPDATE users SET email='$ADMIN_MAIL',language=$LANGUAGE_ID,timezone='$DEFAULT_TIMEZONE',ccode='$DEFAULT_COUNTRY_CODE',theme_id=$THEME_ID WHERE user_name='admin'" >> /dev/null 2>&1
+		if [ $? -ne 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Error while updating user"
+			EXIT=1
+		fi
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	pushd %DATADIR%/%NAME%/config/scripts/config > /dev/null 2>&1
+	LISTE=`ls -1 plugin-* 2>/dev/null`
+	for MODULE in $LISTE ; do
+		if [ -f $MODULE -a -x $MODULE ] ; then
+			echo -e "$PREFIX_CHAR Configuring plugin '$MODULE'"
+			./$MODULE "$PREFIX_CHAR\t"
+			if [ $? -ne 0 ] ; then
+				echo -e "$PREFIX_CHAR -> Error while configuring plugin '$MODULE'"
+				EXIT=1
+				break
+			fi
+		fi
+	done
+	popd > /dev/null 2>&1
+fi
+if [ $EXIT -eq 0 ] ; then
+	sleep 5
+fi
+if [ $EXIT -eq 0 ] ; then
+	restart_service crond
+fi
+echo -e "$PREFIX_CHAR"
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR -> Success !"
+	echo -e "$PREFIX_CHAR"
+	echo -e "$PREFIX_CHAR Please note:"
+	echo -e "$PREFIX_CHAR   * file '%SYSCONFDIR%/%NAME%/.admin' contains the cleartext password of %FRIENDLY_NAME% administrator 'admin',"
+	echo -e "$PREFIX_CHAR   * file '%SYSCONFDIR%/%NAME%/.config' contains the config parameters (used to generate all other config files),"
+	echo -e "$PREFIX_CHAR   * file '%SYSCONFDIR%/%NAME%/.mailman' contains the cleartext password used to administrate the 'mailman' mailing list."
+else
+	echo -e "$PREFIX_CHAR -> Failure !"
+fi
+echo -e "$PREFIX_CHAR$PREFIX_CHAR"
+exit $EXIT

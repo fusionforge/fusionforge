@@ -1,0 +1,13 @@
+a:6:{s:6:"markup";s:1:"2";s:6:"author";s:6:"a_user";s:9:"author_id";s:6:"a_user";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625911;s:8:"%content";s:494:"<b>This plugin allows you to add/edit/delete metadata key/value pairs for a given page. You must be logged in as the administrator to do this. The page's metadata contains things like the page hit count, last edit time and so on.</b>
+
+<b>Editing the metadata for the homepage would look like this:</b>
+------
+<?plugin EditMetaData page="HomePage" ?>
+------
+<b>With no arguments the plugin defaults to the current page:</b>
+------
+<?plugin EditMetaData ?>
+
+-----
+
+PhpWikiDocumentation WikiPlugin";}

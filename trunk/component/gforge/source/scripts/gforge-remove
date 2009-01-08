@@ -1,0 +1,233 @@
+#!/bin/sh
+#---------------------------------------------------------------------------
+# Novaforge is a registered trade mark from Bull S.A.S
+# Copyright (C) 2007 Bull S.A.S.
+# 
+# http://novaforge.org/
+#
+#
+# This file has been developped within the Novaforge(TM) project from Bull S.A.S
+# and contributed back to GForge community.
+#
+# GForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# GForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#---------------------------------------------------------------------------
+
+
+# Source functions
+. %DATADIR%/%NAME%/config/util/functions
+init_variables "#" $*
+if [ $SILENT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR$PREFIX_CHAR"
+	echo -e "$PREFIX_CHAR %FRIENDLY_NAME% : removal of configuration"
+	echo -e "$PREFIX_CHAR"
+	echo -e "$PREFIX_CHAR This script will do the reverse of the '%NAME%-config' script."
+	echo -e "$PREFIX_CHAR"
+	echo -e "$PREFIX_CHAR It should be executed if you want to uninstall %FRIENDLY_NAME%"
+	echo -e "$PREFIX_CHAR but want to keep data and be able to reinstall later with"
+	echo -e "$PREFIX_CHAR the same configuration."
+	echo -e "$PREFIX_CHAR"
+	echo -e "$PREFIX_CHAR -> Continue ('y' or 'n') ?"
+	echo -en "$PREFIX_CHAR -> "
+	read CHOICE
+	if [ "$CHOICE" != "y" ]; then
+		exit 1
+	fi
+fi
+#
+# Stop Apache
+#
+stop_service httpd
+#
+# Stop Mailman
+#
+stop_service mailman
+#
+# Stop Postfix
+#
+stop_service postfix
+#
+# Remove plugins
+#
+pushd %DATADIR%/%NAME%/config/scripts/remove >> /dev/null 2>&1
+LISTE=`ls -1 plugin-* 2>/dev/null`
+for MODULE in $LISTE ; do
+	if [ -f $MODULE -a -x $MODULE ] ; then
+		if [ $SILENT -eq 0 ] ; then
+			echo -e "$PREFIX_CHAR Removing plugin '$MODULE'"
+			./$MODULE "$PREFIX_CHAR\t"
+		else
+			./$MODULE "$PREFIX_CHAR\t" silent
+		fi
+	fi
+done
+popd >> /dev/null 2>&1
+#
+# Remove themes
+#
+pushd %DATADIR%/%NAME%/config/scripts/remove >> /dev/null 2>&1
+LISTE=`ls -1 theme-* 2>/dev/null`
+for MODULE in $LISTE ; do
+	if [ -f $MODULE -a -x $MODULE ] ; then
+		if [ $SILENT -eq 0 ] ; then
+			echo -e "$PREFIX_CHAR Removing theme '$MODULE'"
+			./$MODULE "$PREFIX_CHAR\t"
+		else
+			./$MODULE "$PREFIX_CHAR\t" silent
+		fi
+	fi
+done
+popd >> /dev/null 2>&1
+#
+# Remove account managers
+#
+pushd %DATADIR%/%NAME%/config/scripts/remove >> /dev/null 2>&1
+LISTE=`ls -1 auth-* 2>/dev/null`
+for MODULE in $LISTE ; do
+	if [ -f $MODULE -a -x $MODULE ] ; then
+		if [ $SILENT -eq 0 ] ; then
+			echo -e "$PREFIX_CHAR Removing account manager '$MODULE'"
+			./$MODULE "$PREFIX_CHAR\t"
+		else
+			./$MODULE "$PREFIX_CHAR\t" silent
+		fi
+	fi
+done
+popd >> /dev/null 2>&1
+#
+# Restore %SYSCONFDIR%/postfix/main.cf
+#
+if [ $SILENT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Restoring file '%SYSCONFDIR%/postfix/main.cf' from '%SYSCONFDIR%/postfix/main.cf.%NAME%'"
+fi
+if [ -e %SYSCONFDIR%/postfix/main.cf.%NAME% ] ; then
+	mv -f %SYSCONFDIR%/postfix/main.cf.%NAME% %SYSCONFDIR%/postfix/main.cf
+	if [ $? -ne 0 ] ; then
+		if [ $SILENT -eq 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Error while restoring file"
+		fi
+	fi
+else
+	if [ $SILENT -eq 0 ] ; then
+		echo -e "$PREFIX_CHAR -> No file to restore from"
+	fi
+fi
+#
+# Blank %SYSCONFDIR%/%NAME%/aliases, %SYSCONFDIR%/%NAME%/aliases.db and %SYSCONFDIR%/%NAME%/aliases.org
+#
+if [ $SILENT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Blanking files '%SYSCONFDIR%/%NAME%/aliases', '%SYSCONFDIR%/%NAME%/aliases.db' and '%SYSCONFDIR%/%NAME%/aliases.org'"
+fi
+rm -f %SYSCONFDIR%/%NAME%/aliases
+touch %SYSCONFDIR%/%NAME%/aliases
+chown root.root %SYSCONFDIR%/%NAME%/aliases
+chmod 644 %SYSCONFDIR%/%NAME%/aliases
+rm -f %SYSCONFDIR%/%NAME%/aliases.db
+touch %SYSCONFDIR%/%NAME%/aliases.db
+chown root.root %SYSCONFDIR%/%NAME%/aliases.db
+chmod 644 %SYSCONFDIR%/%NAME%/aliases.db
+rm -f %SYSCONFDIR%/%NAME%/aliases.org
+touch %SYSCONFDIR%/%NAME%/aliases.org
+chown root.root %SYSCONFDIR%/%NAME%/aliases.org
+chmod 644 %SYSCONFDIR%/%NAME%/aliases.org
+#
+# Restore %MAILMANBINARIESDIR%/Mailman/mm_cfg.py
+#
+if [ $SILENT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Restoring file '%MAILMANBINARIESDIR%/Mailman/mm_cfg.py' from '%MAILMANBINARIESDIR%/Mailman/mm_cfg.py.dist'"
+fi
+if [ -e %MAILMANBINARIESDIR%/Mailman/mm_cfg.py.dist ] ; then
+	cp -af %MAILMANBINARIESDIR%/Mailman/mm_cfg.py.dist %MAILMANBINARIESDIR%/Mailman/mm_cfg.py
+	if [ $? -ne 0 ] ; then
+		if [ $SILENT -eq 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Error while restoring file"
+		fi
+	fi
+else
+	if [ $SILENT -eq 0 ] ; then
+		echo -e "$PREFIX_CHAR -> No file to restore from"
+	fi
+fi
+#SSHD_CONFIG#
+#SSHD_CONFIG# Restore %SYSCONFDIR%/ssh/sshd_config
+#SSHD_CONFIG#
+#SSHD_CONFIGif [ $SILENT -eq 0 ] ; then
+#SSHD_CONFIG	echo -e "$PREFIX_CHAR Restoring file '%SYSCONFDIR%/ssh/sshd_config' from '%SYSCONFDIR%/ssh/sshd_config.%NAME%'"
+#SSHD_CONFIGfi
+#SSHD_CONFIGif [ -e %SYSCONFDIR%/ssh/sshd_config.%NAME% ] ; then
+#SSHD_CONFIG	mv -f %SYSCONFDIR%/ssh/sshd_config.%NAME% %SYSCONFDIR%/ssh/sshd_config
+#SSHD_CONFIG	if [ $? -ne 0 ] ; then
+#SSHD_CONFIG		if [ $SILENT -eq 0 ] ; then
+#SSHD_CONFIG			echo -e "$PREFIX_CHAR -> Error while restoring file"
+#SSHD_CONFIG		fi
+#SSHD_CONFIG	else
+#SSHD_CONFIG		service sshd restart >> /dev/null 2>&1
+#SSHD_CONFIG		if [ $? -ne 0 ] ; then
+#SSHD_CONFIG			if [ $SILENT -eq 0 ] ; then
+#SSHD_CONFIG				echo -e "$PREFIX_CHAR -> Error while restarting OpenSSH"
+#SSHD_CONFIG			fi
+#SSHD_CONFIG		fi
+#SSHD_CONFIG	fi
+#SSHD_CONFIGelse
+#SSHD_CONFIG	if [ $SILENT -eq 0 ] ; then
+#SSHD_CONFIG		echo -e "$PREFIX_CHAR -> No file to restore from"
+#SSHD_CONFIG	fi
+#SSHD_CONFIGfi
+#
+# Blanking %SYSCONFDIR%/%NAME%/local.inc
+#
+if [ $SILENT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Blanking file '%SYSCONFDIR%/%NAME%/local.inc'"
+fi
+rm -f %SYSCONFDIR%/%NAME%/local.inc
+touch %SYSCONFDIR%/%NAME%/local.inc
+chown root.%APACHE_GROUP% %SYSCONFDIR%/%NAME%/local.inc
+chmod 640 %SYSCONFDIR%/%NAME%/local.inc
+#
+# Blank %SYSCONFDIR%/%NAME%/viewvc.conf
+#
+if [ $SILENT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Blanking file '%SYSCONFDIR%/%NAME%/viewvc.conf'"
+fi
+rm -f %SYSCONFDIR%/%NAME%/viewvc.conf
+touch %SYSCONFDIR%/%NAME%/viewvc.conf
+chown root.%APACHE_GROUP% %SYSCONFDIR%/%NAME%/viewvc.conf
+chmod 640 %SYSCONFDIR%/%NAME%/viewvc.conf
+#
+# Blank %SYSCONFDIR%/httpd/conf.d/%NAME%.conf
+#
+if [ $SILENT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Blanking file '%SYSCONFDIR%/httpd/conf.d/%NAME%.conf'"
+fi
+rm -f %SYSCONFDIR%/httpd/conf.d/%NAME%.conf
+touch %SYSCONFDIR%/httpd/conf.d/%NAME%.conf
+chown root.%APACHE_GROUP% %SYSCONFDIR%/httpd/conf.d/%NAME%.conf
+chmod 640 %SYSCONFDIR%/httpd/conf.d/%NAME%.conf
+#
+# Flush localization cache
+#
+if [ $SILENT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Flushing localization cache"
+fi
+if [ -d %LOCALSTATEDIR%/lib/%NAME%/localizationcache ] ; then
+	rm -rf %LOCALSTATEDIR%/lib/%NAME%/localizationcache/*
+else
+	if [ $SILENT -eq 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Directory '%LOCALSTATEDIR%/lib/%NAME%/localizationcache' is missing"
+	fi
+fi
+if [ $SILENT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR$PREFIX_CHAR"
+fi
+exit 0

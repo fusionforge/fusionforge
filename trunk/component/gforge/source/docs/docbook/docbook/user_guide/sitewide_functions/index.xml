@@ -1,0 +1,25 @@
+<section id="ug_sitewide">
+	<title>Site-wide functions</title>
+	<section id="ug_sitewide_introduction">
+		<title>Introduction</title>
+		<para>
+			The side-wide functions are available anytime, they are not dependent on the single projects.
+		</para>
+		<para>
+			The site-wide functions handle data that are not relevant to a single project, as code fragments, project classification, project helps, etc.
+		</para>
+		<para>
+			The single site-wide functions available to the users are:
+		</para>
+		<itemizedlist>
+			<listitem><para>Project help</para></listitem>
+			<listitem><para>Search</para></listitem>
+			<listitem><para>Snippet Library</para></listitem>
+			<listitem><para>Trove map</para></listitem>
+		</itemizedlist>
+	</section>
+	<xi:include href="search.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="trove.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="snippet.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="project_help.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+</section>

@@ -1,0 +1,146 @@
+/**
+ * $Id: shamino_com.css,v 1.2 2005/09/15 05:57:53 rurban Exp $
+ *
+ * shamino.com style sheet based on the original Wiki
+ *
+ */
+body {
+    font-family: sans-serif; 
+    font-weight: normal;
+    font-style: normal;
+    background-color: #ffffff;
+    position: absolute; 
+    top:0px;
+    left:0px;
+    visibility: visible; 
+    z-index: auto;
+    margin:0px; 
+}
+
+hr { 
+    height:0px; 
+    margin-left:10px;
+    margin-right:10px;
+}
+
+#content { 
+    font-family: sans-serif; 
+    font-weight: normal;
+    font-style: normal;
+    background-color: #ffffff;
+    padding: 1em 10px 1em 10px;
+}
+
+.wikitext, p, form, ul, dd, dl, li, td { 
+    font-size: small;
+    line-height: 150%;
+    color: #111111; 
+    margin: 0px;
+    padding: 0px;
+    list-style-type:none;
+}
+
+p, ul {
+    padding: 10px;
+    text-align: justify;
+    background-color:#ffffff;
+}
+
+dd {
+    font-size: x-small;
+    text-align:right;
+    padding:0px;
+    margin:0px;
+    bottom:0px;
+}
+
+dl {
+    padding:0px;
+    margin:0px;
+    margin-top:14px;
+    bottom:0px;
+}
+
+li {
+  margin-left:0px;
+  margin-bottom:0px;
+}
+
+img {
+    margin:0px;
+    border:0px;
+    padding:0px;
+}
+
+table {
+/*  position:relative;left:0px;top:0px; */
+  border: 0px;;
+  padding: 0px;
+  border-spacing: 0px;
+  margin: 0px;
+}
+
+td, th, tr, tt {
+  padding: 0px;
+  margin: 2px;
+  border: 0px;
+  border-spacing: 0px;
+}
+
+input.numeric { text-align: right; }
+input {     
+  font-family: sans-serif; 
+  font-size: small;
+  font-style: normal;
+  font-weight: normal;
+}
+
+textarea { 
+  text-decoration:none;
+  font-family: sans-serif; 
+  font-size: small;
+  font-style: normal;
+  font-weight: normal;
+}
+
+h1, h2, h3, h4 { 
+  font-family: Lucida Grande, sans-serif; 
+  font-weight: normal;
+  font-style: normal;
+  margin:0px;
+  padding:0px; 
+  padding-top:10px;
+  text-decoration:none;
+  text-align:left;
+}
+
+a:link { font-weight:normal; color:#445566; text-decoration:none }
+a:visited { font-weight:normal; color:#445566; text-decoration:none }
+a:hover { font-weight:normal; color:#445566; text-decoration:underline }
+a:active { font-weight:normal; color:#445566; text-decoration:underline }
+a:focus { font-weight:normal; color:#445566; text-decoration:underline }
+
+.main { padding: 0px; border: 0px; margin:0px; }
+.maintable { padding: 0px; border: 0px; margin:0px; }
+.menu { font-size: x-small; padding: 10px; padding-top:0px; border: 0px; margin:0px; }
+.box { background-color: #eeeeee; border: 1px solid #dcdcdc; color: #111111; padding: 0px; position: absolute; }
+.bar { background-color: #eeeeee; color: #111111; font-weight: bold; padding: 2px 1em 2px 1em; }
+
+.wikilink { color: #5555CC; text-decoration:none; font-style:normal; }
+.wikinavbar { border-bottom: 1px #999999 solid; padding: 2px; font-size: xx-small; }
+.toolbar { border-top: 1px #999999 solid; padding: 2px; font-size: xx-small; }
+.debug { padding: 2px; margin-left:10px; font-size: xx-small; }
+.wikinavbar a.wikilink, .toolbar a.wikilink, .editdate, #xhtml-validator a.wikilink { font-size: xx-small; }
+.wikiaction { color: #5555CC; text-decoration:none; font-style:normal; }
+.wiki { color: #5555CC; text-decoration:none; font-style:normal; }
+.backlinks { color: #5555CC; text-decoration:none; font-style:normal; }
+/* .header { font-size: x-small; border-top: 1px #999999 solid; padding:10px; padding-top:5px; padding-bottom:5px; } */
+
+#header { font-size: xx-small; margin-left:4px; }
+.signin, .signin a.wiki, .signin a.wikiaction { font-size: xx-small; }
+.top { font-size: 75%; margin:4px; }
+.plugin { margin:0px; }
+
+div#logo {
+  float: right;
+}

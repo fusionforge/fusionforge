@@ -1,0 +1,706 @@
+#---------------------------------------------------------------------------
+# Novaforge is a registered trade mark from Bull S.A.S
+# Copyright (C) 2007 Bull S.A.S.
+# 
+# http://novaforge.org/
+#
+#
+# This file has been developped within the Novaforge(TM) project from Bull S.A.S
+# and contributed back to GForge community.
+#
+# GForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# GForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#---------------------------------------------------------------------------
+
+#
+# Functions
+#
+
+# Backup directories
+BACKUP_CONFIG_DIR="%SYSCONFDIR%/%NAME%"
+BACKUPED_CONFIG_FILTER=".[a-z]*"
+BACKUP_GFORGE_DIR="%LOCALSTATEDIR%/lib/%NAME%"
+BACKUP_MAILMAN_ARCHIVES_DIR="%MAILMANDATADIR%/archives"
+BACKUP_MAILMAN_DATA_DIR="%MAILMANDATADIR%/data"
+BACKUP_MAILMAN_LISTS_DIR="%MAILMANDATADIR%/lists"
+BACKUP_MAILMAN_SPAM_DIR="%MAILMANDATADIR%/spam"
+BACKUP_POSTGRESQL_DIR="%LOCALSTATEDIR%/lib/pgsql/data"
+
+# GForge modules activation
+SYS_USE_MODULES_DEFAULT="tracker:true forum:true pm:true docman:true news:true mail:true survey:true frs:true fti:false trove:true snippet:true ssl:false people:true shell:true"
+
+# Initialize variables
+init_variables ()
+{
+	PREFIX_CHAR="#"
+	SILENT=0
+	REMOVE=0
+	EXIT=0
+	if [ -n "$1" ] ; then
+		if [ "$1" = "remove" ] ; then
+			REMOVE=1
+		else
+			if [ "$1" = "silent" ] ; then
+				SILENT=1
+			else
+				PREFIX_CHAR=$1
+			fi
+		fi
+	fi
+	if [ -n "$2" ] ; then
+		if [ "$2" = "remove" ] ; then
+			REMOVE=1
+		else
+			if [ "$2" = "silent" ] ; then
+				SILENT=1
+			fi
+		fi
+	fi
+	if [ -n "$3" ] ; then
+		if [ "$3" = "remove" ] ; then
+			REMOVE=1
+		else
+			if [ "$3" = "silent" ] ; then
+				SILENT=1
+			fi
+		fi
+	fi
+}
+
+# Read init parameters
+source_init_parameters ()
+{
+	if [ $SILENT -eq 0 ] ; then
+		echo -e "$PREFIX_CHAR Reading init parameters from file '%SYSCONFDIR%/%NAME%/.init' or '%SYSCONFDIR%/%NAME%/.db'"
+	fi
+	if [ -e %SYSCONFDIR%/%NAME%/.init -o -e %SYSCONFDIR%/%NAME%/.db ] ; then
+		DB_VERSION=""
+		DB_PASSWORD=""
+		if [ -e %SYSCONFDIR%/%NAME%/.init ] ; then
+			. %SYSCONFDIR%/%NAME%/.init
+		else
+			. %SYSCONFDIR%/%NAME%/.db
+		fi
+		if [ -z "$DB_PASSWORD" ] ; then
+			if [ $SILENT -eq 0 ] ; then
+				echo -e "$PREFIX_CHAR -> Parameter 'DB_PASSWORD' is empty or not defined"
+			fi
+			EXIT=1
+		else
+			export PGHOST=localhost
+			export PGDATABASE=%NAME%
+			export PGUSER=%NAME%
+			export PGPASSWORD=$DB_PASSWORD
+		fi
+	else
+		if [ $SILENT -eq 0 ] ; then
+			echo -e "$PREFIX_CHAR -> No file to read from"
+		fi
+		EXIT=1
+	fi
+}
+
+# Read config parameters
+source_config_parameters ()
+{
+	if [ $SILENT -eq 0 ] ; then
+		echo -e "$PREFIX_CHAR Reading config parameters from file '%SYSCONFDIR%/%NAME%/.config'"
+	fi
+	ADMIN_MAIL=""
+	ROOT_MAIL=""
+	FQDN_HOSTNAME=""
+	DEFAULT_LANGUAGE=""
+	DEFAULT_TIMEZONE=""
+	DEFAULT_COUNTRY_CODE=""
+	DEFAULT_THEME=""
+	SESSION_KEY=""
+	UPLOAD_MAX_SIZE=""
+	SMTP_RELAY=""
+	SYS_USE_MODULES=""
+	if [ -e %SYSCONFDIR%/%NAME%/.config ] ; then
+		. %SYSCONFDIR%/%NAME%/.config
+		if [ -z "$ADMIN_MAIL" -a -z "$ROOT_MAIL" ] ; then
+			if [ $SILENT -eq 0 ] ; then
+				 echo -e "$PREFIX_CHAR -> Parameter ADMIN_MAIL is empty or not defined"
+			fi
+			EXIT=1
+		else
+			if [ -z "$ADMIN_MAIL" ] ; then
+				ADMIN_MAIL=$ROOT_MAIL
+			fi
+		fi
+		ROOT_MAIL=""
+	else
+		if [ $SILENT -eq 0 ] ; then
+			echo -e "$PREFIX_CHAR -> No file to read from"
+		fi
+		EXIT=1
+	fi
+	if [ -z "$FQDN_HOSTNAME" ] ; then
+		FQDN_HOSTNAME="`hostname --fqdn`"
+		if [ $? -ne 0 ] ; then
+			if [ $SILENT -eq 0 ] ; then
+				echo -e "$PREFIX_CHAR -> Error while retrieving FQDN hostname"
+			fi
+			EXIT=1
+		fi
+	fi
+	if [ -z "$DEFAULT_LANGUAGE" ] ; then
+		DEFAULT_LANGUAGE="French"
+	fi
+	if [ -z "$DEFAULT_TIMEZONE" ] ; then
+		DEFAULT_TIMEZONE="Europe/Paris"
+	fi
+	if [ -z "$DEFAULT_COUNTRY_CODE" ] ; then
+		DEFAULT_COUNTRY_CODE="FR"
+	fi
+	if [ -z "$DEFAULT_THEME" ] ; then
+		DEFAULT_THEME="gforge"
+	fi
+	if [ -z "$SESSION_KEY" ] ; then
+		SESSION_KEY="`ps aux | md5sum | cut -c1-32`"
+		if [ $? -ne 0 ] ; then
+			if [ $SILENT -eq 0 ] ; then
+				echo -e "$PREFIX_CHAR -> Error while creating session key"
+			fi
+			EXIT=1
+		fi
+	fi
+	if [ -z "$UPLOAD_MAX_SIZE" ] ; then
+		UPLOAD_MAX_SIZE="32"
+	fi
+	if [ -z "$SYS_USE_MODULES" ] ; then
+		SYS_USE_MODULES=$SYS_USE_MODULES_DEFAULT
+	fi
+}
+
+# Register a plugin in database
+# Parameters:
+#   Plugin name
+#   Plugin description
+register_plugin ()
+{
+	PLUGIN_NAME=$1
+	PLUGIN_DESCRIPTION=$2
+	if [ $SILENT -eq 0 ] ; then
+		echo -e "$PREFIX_CHAR Registering plugin in database"
+	fi
+	PLUGIN_ID=`psql -At -c "SELECT plugin_id FROM plugins WHERE plugin_name='$PLUGIN_NAME'" 2>/dev/null`
+	if [ $? -eq 0 ] ; then
+		if [ -n "$PLUGIN_ID" ] ; then
+			if [ $SILENT -eq 0 ] ; then
+				echo -e "$PREFIX_CHAR -> Plugin is already registered"
+			fi
+		else
+			psql -c "INSERT INTO plugins (plugin_name,plugin_desc) VALUES ('$PLUGIN_NAME','$PLUGIN_DESCRIPTION')" > /dev/null 2>&1
+			if [ $? -ne 0 ] ; then
+				if [ $SILENT -eq 0 ] ; then
+					echo -e "$PREFIX_CHAR -> Error while registering plugin"
+				fi
+				EXIT=1
+			fi
+		fi
+	else
+		if [ $SILENT -eq 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Error while searching plugin"
+		fi
+		EXIT=1
+	fi
+}
+
+# Unregister a plugin in database
+# Parameters:
+#   Plugin name
+unregister_plugin ()
+{
+	PLUGIN_NAME=$1
+	if [ $SILENT -eq 0 ] ; then
+		echo -e "$PREFIX_CHAR Unregistering plugin in database"
+	fi
+	PLUGIN_ID=`psql -At -c "SELECT plugin_id FROM plugins WHERE plugin_name='$PLUGIN_NAME'" 2>/dev/null`
+	if [ $? -eq 0 ] ; then
+		if [ -n "$PLUGIN_ID" ] ; then
+			psql -c "DELETE FROM user_plugin WHERE plugin_id=$PLUGIN_ID" > /dev/null 2>&1
+			if [ $? -ne 0 ] ; then
+				if [ $SILENT -eq 0 ] ; then
+					echo -e "$PREFIX_CHAR -> Error while removing users plugin configuration"
+				fi
+				EXIT=1
+			fi
+			if [ $EXIT -eq 0 ] ; then
+				psql -c "DELETE FROM group_plugin WHERE plugin_id=$PLUGIN_ID" > /dev/null 2>&1
+				if [ $? -ne 0 ] ; then
+					if [ $SILENT -eq 0 ] ; then
+						echo -e "$PREFIX_CHAR -> Error while removing groups plugin configuration"
+					fi
+					EXIT=1
+				fi
+			fi
+			if [ $EXIT -eq 0 ] ; then
+				psql -c "DELETE FROM plugins WHERE plugin_id=$PLUGIN_ID" > /dev/null 2>&1
+				if [ $? -ne 0 ] ; then
+					if [ $SILENT -eq 0 ] ; then
+						echo -e "$PREFIX_CHAR -> Error while unregistering plugin"
+					fi
+					EXIT=1
+				fi
+			fi
+		else
+			if [ $SILENT -eq 0 ] ; then
+				echo -e "$PREFIX_CHAR -> Plugin is not registered"
+			fi
+		fi
+	else
+		if [ $SILENT -eq 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Error while searching plugin"
+		fi
+		EXIT=1
+	fi
+}
+
+
+# Save plugin usage in a file
+# Parameters:
+#   Plugin name
+save_plugin_config ()
+{
+	PLUGIN_NAME=$1
+	if [ $SILENT -eq 0 ] ; then
+		echo -e "$PREFIX_CHAR Saving configuration in file '%LOCALSTATEDIR%/lib/%NAME%/config/plugin-$PLUGIN_NAME/config.sql'"
+	fi
+	PLUGIN_ID=`psql -At -c "SELECT plugin_id FROM plugins WHERE plugin_name='$PLUGIN_NAME'" 2>/dev/null`
+	if [ $? -eq 0 ] ; then
+		if [ -n "$PLUGIN_ID" ] ; then
+			psql -At -c "SELECT 'group___'||group_id FROM group_plugin WHERE plugin_id=$PLUGIN_ID" > %LOCALSTATEDIR%/lib/%NAME%/config/plugin-$PLUGIN_NAME/config.sql 2>/dev/null
+			if [ $? -ne 0 ] ; then
+				if [ $SILENT -eq 0 ] ; then
+					echo -e "$PREFIX_CHAR -> Error while reading groups plugin configuration"
+				fi
+				EXIT=1
+			fi
+			if [ $EXIT -eq 0 ] ; then
+				psql -At -c "SELECT 'user___'||user_id FROM user_plugin WHERE plugin_id=$PLUGIN_ID" >> %LOCALSTATEDIR%/lib/%NAME%/config/plugin-$PLUGIN_NAME/config.sql 2>/dev/null
+				if [ $? -ne 0 ] ; then
+					if [ $SILENT -eq 0 ] ; then
+						echo -e "$PREFIX_CHAR -> Error while reading users plugin configuration"
+					fi
+					EXIT=1
+				fi
+			fi
+			if [ $EXIT -eq 0 ] ; then
+				if [ -s %LOCALSTATEDIR%/lib/%NAME%/config/plugin-$PLUGIN_NAME/config.sql ] ; then
+					sed \
+						-e "s/^group___/INSERT INTO group_plugin (group_id,plugin_id) VALUES (/" \
+						-e "s/^user___/INSERT INTO user_plugin (user_id,plugin_id) VALUES (/" \
+						-e "s/$/,@plugin_id@)/" \
+						-i %LOCALSTATEDIR%/lib/%NAME%/config/plugin-$PLUGIN_NAME/config.sql
+					if [ $? -ne 0 ] ; then
+						if [ $SILENT -eq 0 ] ; then
+							echo -e "$PREFIX_CHAR -> Error while saving file"
+						fi
+						EXIT=1
+					fi
+				else
+					rm -f %LOCALSTATEDIR%/lib/%NAME%/config/plugin-$PLUGIN_NAME/config.sql > /dev/null 2>&1
+				fi
+			fi
+			if [ $EXIT -ne 0 ] ; then
+				rm -f %LOCALSTATEDIR%/lib/%NAME%/config/plugin-$PLUGIN_NAME/config.sql > /dev/null 2>&1
+			fi
+		else
+			if [ $SILENT -eq 0 ] ; then
+				echo -e "$PREFIX_CHAR -> Plugin is not registered"
+			fi
+		fi
+	else
+		if [ $SILENT -eq 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Error while searching plugin"
+		fi
+		EXIT=1
+	fi
+}
+
+# Restore plugin usage from a file
+# Parameters:
+#   Plugin name
+restore_plugin_config ()
+{
+	PLUGIN_NAME=$1
+	if [ $SILENT -eq 0 ] ; then
+		echo -e "$PREFIX_CHAR Restoring configuration from file '%LOCALSTATEDIR%/lib/%NAME%/config/plugin-$PLUGIN_NAME/config.sql'"
+	fi
+	if [ -e %LOCALSTATEDIR%/lib/%NAME%/config/plugin-$PLUGIN_NAME/config.sql ]; then
+		PLUGIN_ID=`psql -At -c "SELECT plugin_id FROM plugins WHERE plugin_name='$PLUGIN_NAME'" 2>/dev/null`
+		if [ $? -eq 0 ] ; then
+			if [ -n "$PLUGIN_ID" ] ; then
+				sed \
+					-e "s/@plugin_id@/$PLUGIN_ID/" \
+					%LOCALSTATEDIR%/lib/%NAME%/config/plugin-$PLUGIN_NAME/config.sql > %LOCALSTATEDIR%/lib/%NAME%/config/plugin-$PLUGIN_NAME/config-tmp.sql 2>/dev/null
+				if [ $? -eq 0 ] ; then
+					psql -f %LOCALSTATEDIR%/lib/%NAME%/config/plugin-$PLUGIN_NAME/config-tmp.sql > /dev/null 2>&1
+					if [ $? -ne 0 ] ; then
+						if [ $SILENT -eq 0 ] ; then
+							echo -e "$PREFIX_CHAR -> Error while restoring plugin configuration"
+						fi
+						EXIT=1
+					fi
+				else
+					if [ $SILENT -eq 0 ] ; then
+						echo -e "$PREFIX_CHAR -> Error while creating file '%LOCALSTATEDIR%/lib/%NAME%/config/plugin-$PLUGIN_NAME/config-tmp.sql'"
+					fi
+					EXIT=1
+				fi
+				rm -f %LOCALSTATEDIR%/lib/%NAME%/config/plugin-$PLUGIN_NAME/config-tmp.sql > /dev/null 2>&1
+			else
+				if [ $SILENT -eq 0 ] ; then
+					echo -e "$PREFIX_CHAR -> Plugin is not registered"
+				fi
+				EXIT=1
+			fi
+		else
+			if [ $SILENT -eq 0 ] ; then
+				echo -e "$PREFIX_CHAR -> Error while searching plugin"
+			fi
+			EXIT=1
+		fi
+		if [ $EXIT -eq 0 ] ; then
+			rm -f %LOCALSTATEDIR%/lib/%NAME%/config/plugin-$PLUGIN_NAME/config.sql > /dev/null 2>&1
+		fi
+	else
+		if [ $SILENT -eq 0 ] ; then
+			echo -e "$PREFIX_CHAR -> No file to restore from"
+		fi
+	fi
+}
+
+# Register a theme in database
+# Parameters:
+#   Theme name
+#   Theme description
+register_theme ()
+{
+	THEME_NAME=$1
+	THEME_DESCRIPTION=$2
+	if [ $SILENT -eq 0 ] ; then
+		echo -e "$PREFIX_CHAR Registering theme in database"
+	fi
+	THEME_ID=`psql -At -c "SELECT theme_id FROM themes WHERE dirname='$THEME_NAME'" 2>/dev/null`
+	if [ $? -eq 0 ] ; then
+		if [ -n "$THEME_ID" ] ; then
+			if [ $SILENT -eq 0 ] ; then
+				echo -e "$PREFIX_CHAR -> Theme is already registered"
+			fi
+		else
+			psql -c "INSERT INTO themes (dirname,fullname,enabled) VALUES ('$THEME_NAME','$THEME_DESCRIPTION', true)" > /dev/null 2>&1
+			if [ $? -ne 0 ] ; then
+				if [ $SILENT -eq 0 ] ; then
+					echo -e "$PREFIX_CHAR -> Error while registering theme"
+				fi
+				EXIT=1
+			fi
+		fi
+	else
+		if [ $SILENT -eq 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Error while searching theme"
+		fi
+		EXIT=1
+	fi
+}
+
+# Unregister a theme in database
+# Parameter:
+#   Theme name
+unregister_theme ()
+{
+	THEME_NAME=$1
+	if [ $SILENT -eq 0 ] ; then
+		echo -e "$PREFIX_CHAR Unregistering theme in database"
+	fi
+	THEME_ID=`psql -At -c "SELECT theme_id FROM themes WHERE dirname='$THEME_NAME'" 2>/dev/null`
+	if [ $? -eq 0 ] ; then
+		if [ -n "$THEME_ID" ] ; then
+			psql -c "UPDATE users SET theme_id=1 WHERE theme_id=$THEME_ID" > /dev/null 2>&1
+			if [ $? -ne 0 ] ; then
+				if [ $SILENT -eq 0 ] ; then
+					echo -e "$PREFIX_CHAR -> Error while removing users theme configuration"
+				fi
+				EXIT=1
+			fi
+			if [ $EXIT -eq 0 ] ; then
+				psql -c "DELETE FROM themes WHERE theme_id=$THEME_ID" > /dev/null 2>&1
+				if [ $? -ne 0 ] ; then
+					if [ $SILENT -eq 0 ] ; then
+						echo -e "$PREFIX_CHAR -> Error while unregistering theme"
+					fi
+					EXIT=1
+				fi
+			fi
+		else
+			if [ $SILENT -eq 0 ] ; then
+				echo -e "$PREFIX_CHAR -> Theme is not registered"
+			fi
+		fi
+	else
+		if [ $SILENT -eq 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Error while searching theme"
+		fi
+		EXIT=1
+	fi
+}
+
+# Stop service
+# Parameters:
+#   Service name
+stop_service ()
+{
+	SERVICE_NAME=$1
+	if [ $SILENT -eq 0 ] ; then
+		echo -e "$PREFIX_CHAR Stopping service $SERVICE_NAME"
+	fi
+	if [ -x %INITRDDIR%/$SERVICE_NAME ] ; then
+		service $SERVICE_NAME stop >> /dev/null 2>&1
+		if [ $? -ne 0 ] ; then
+			if [ $SILENT -eq 0 ] ; then
+				echo -e "$PREFIX_CHAR -> Error while stopping"
+			fi
+		fi
+	else
+		if [ $SILENT -eq 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Script '%INITRDDIR%/$SERVICE_NAME' does not exist"
+		fi
+	fi
+}
+
+# Start service
+# Parameters:
+#   Service name
+start_service ()
+{
+	SERVICE_NAME=$1
+	if [ $SILENT -eq 0 ] ; then
+		echo -e "$PREFIX_CHAR Starting service $SERVICE_NAME"
+	fi
+	if [ -x %INITRDDIR%/$SERVICE_NAME ] ; then
+		service $SERVICE_NAME start >> /dev/null 2>&1
+		if [ $? -ne 0 ] ; then
+			if [ $SILENT -eq 0 ] ; then
+				echo -e "$PREFIX_CHAR -> Error while starting"
+			fi
+			EXIT=1
+		fi
+	else
+		if [ $SILENT -eq 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Script '%INITRDDIR%/$SERVICE_NAME' does not exist"
+		fi
+		EXIT=1
+	fi
+}
+
+# Restart service
+# Parameters:
+#   Service name
+restart_service ()
+{
+	SERVICE_NAME=$1
+	if [ $SILENT -eq 0 ] ; then
+		echo -e "$PREFIX_CHAR Restarting service $SERVICE_NAME"
+	fi
+	if [ -x %INITRDDIR%/$SERVICE_NAME ] ; then
+		service $SERVICE_NAME restart >> /dev/null 2>&1
+		if [ $? -ne 0 ] ; then
+			if [ $SILENT -eq 0 ] ; then
+				echo -e "$PREFIX_CHAR -> Error while restarting"
+			fi
+			EXIT=1
+		fi
+	else
+		if [ $SILENT -eq 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Script '%INITRDDIR%/$SERVICE_NAME' does not exist"
+		fi
+		EXIT=1
+	fi
+}
+
+# Display status
+display_status ()
+{
+	if [ 0 -eq 1 ] ; then
+		echo ""
+	fi
+}
+
+# Drop plugin tables
+# Parameters:
+#   Plugin name
+drop_plugin_tables ()
+{
+	PLUGIN_NAME=$1
+	echo -e "$PREFIX_CHAR Dropping tables of plugin 'plugin-$PLUGIN_NAME'"
+	NAME=`su - postgres -c "psql -d template1 -At -c \"SELECT datname FROM pg_database WHERE datname='%NAME%'\" 2>/dev/null"`
+	if [ $? -eq 0 -a -z "$NAME" ] ; then
+		echo -e "$PREFIX_CHAR -> Database '%NAME%' has already been dropped"
+	else
+		su - postgres -c "psql -d %NAME% -q -f %DATADIR%/%NAME%/plugins/$PLUGIN_NAME/db/$PLUGIN_NAME-delete.sql >> /dev/null 2>&1"
+		if [ $? -ne 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Error while dropping tables"
+		fi
+	fi
+}
+
+# Empty plugin config directory
+# Parameters:
+#   Plugin name
+empty_plugin_config_directory ()
+{
+	PLUGIN_NAME=$1
+	echo -e "$PREFIX_CHAR Emptying configuration directory of plugin '$PLUGIN_NAME'"
+	if [ -d %LOCALSTATEDIR%/lib/%NAME%/config/plugin-$PLUGIN_NAME ] ; then
+		rm -rf %LOCALSTATEDIR%/lib/%NAME%/config/plugin-$PLUGIN_NAME/*
+	else
+		echo -e "$PREFIX_CHAR -> Directory '%LOCALSTATEDIR%/lib/%NAME%/config/plugin-$PLUGIN_NAME' is missing"
+	fi
+}
+
+# Empty plugin data directory
+# Parameters:
+#   Plugin name
+#   Plugin data directory
+empty_plugin_data_directory ()
+{
+	PLUGIN_NAME=$1
+	PLUGIN_DIR=$2
+	echo -e "$PREFIX_CHAR Emptying data directory of plugin '$PLUGIN_NAME'"
+	if [ -d $PLUGIN_DIR ] ; then
+		if [ -n "$PLUGIN_DIR" -a "$PLUGIN_DIR" != "/" ] ; then
+			rm -rf $PLUGIN_DIR/*
+		else
+			echo -e "$PREFIX_CHAR -> Name of directory '$PLUGIN_DIR' is empty or points to root directory !!!"
+		fi
+	else
+		echo -e "$PREFIX_CHAR -> Directory '$PLUGIN_DIR' is missing"
+	fi
+}
+
+# Display a right-padded item
+# Parameters:
+#   Item string
+#   padding size
+display_padded_item ()
+{
+	echo -en "`echo "$1         " | cut -c1-$2`"
+}
+
+# Display module name
+# Parameters:
+#   Module name
+#   Padding selection (enabled if not empty)
+display_module_name ()
+{
+	case "$1" in
+		tracker)
+			TMP_NAME="Trackers"
+			;;
+		forum)
+			TMP_NAME="Forums"
+			;;
+		pm)
+			TMP_NAME="Project/task manager"
+			;;
+		docman)
+			TMP_NAME="Document manager"
+			;;
+		news)
+			TMP_NAME="News"
+			;;
+		mail)
+			TMP_NAME="Mailing lists"
+			;;
+		survey)
+			TMP_NAME="Surveys"
+			;;
+		frs)
+			TMP_NAME="File release system"
+			;;
+		fti)
+			TMP_NAME="Full text indexing"
+			;;
+		trove)
+			TMP_NAME="Trove catalog"
+			;;
+		snippet)
+			TMP_NAME="Code snippets"
+			;;
+		ssl)
+			TMP_NAME="Force SSL for login"
+			;;
+		people)
+			TMP_NAME="Project openings"
+			;;
+		shell)
+			TMP_NAME="Shell access"
+			;;
+		*)
+			TMP_NAME="Unknown ($1)"
+	esac
+	if [ -z "$2" ] ; then
+		echo -en "$TMP_NAME"
+	else
+		echo -en "`echo "$TMP_NAME                    " | cut -c1-20`"
+	fi
+}
+
+# Restore the content of a directory
+# Parameters:
+#   Source directory
+#   Target directory
+restore_directory_content ()
+{
+	if [ $EXIT -eq 0 ] ; then
+		echo -e "$PREFIX_CHAR Restoring to directory '$2'"
+		if [ -d $1 ] ; then
+			FILES_NUMBER=`find $1 | wc -l`
+			if [ $FILES_NUMBER -le 1 ] ; then
+				echo -e "$PREFIX_CHAR -> Warning: source directory '$1' is empty"
+			else
+				if [ -n "$2" -a "$2" != "/" ] ; then
+					if [ -d $2 ] ; then
+						rm -rf $2/*
+						if [ $? -ne 0 ] ; then
+							echo -e "$PREFIX_CHAR -> Error while emptying target directory"
+							EXIT=1
+						fi
+					else
+						mkdir $2
+						if [ $? -ne 0 ] ; then
+							echo -e "$PREFIX_CHAR -> Error while creating target directory"
+							EXIT=1
+						fi
+					fi
+				else
+					echo -e "$PREFIX_CHAR -> Target directory '$2' is incorrect"
+					EXIT=1
+				fi
+				if [ $EXIT -eq 0 ] ; then
+					cp -a $1/* $2/
+					if [ $? -ne 0 ] ; then
+						echo -e "$PREFIX_CHAR -> Error while restoring from source directory '$1'"
+						EXIT=1
+					fi
+				fi
+			fi
+		else
+			echo -e "$PREFIX_CHAR -> Warning: source directory '$1' is missing"
+		fi
+	fi
+}

@@ -1,0 +1,319 @@
+#!/bin/sh
+#---------------------------------------------------------------------------
+# Novaforge is a registered trade mark from Bull S.A.S
+# Copyright (C) 2007 Bull S.A.S.
+# 
+# http://novaforge.org/
+#
+#
+# This file has been developped within the Novaforge(TM) project from Bull S.A.S
+# and contributed back to GForge community.
+#
+# GForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# GForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#---------------------------------------------------------------------------
+
+#
+# Constants
+#
+
+PREFIX_CHAR="#"
+BACKUP_CONFIG_DIR="%SYSCONFDIR%/%NAME%"
+BACKUP_CONFIG_FILTER=".[a-z]*"
+BACKUP_MYSQL_DIR="%LOCALSTATEDIR%/lib/mysql"
+BACKUP_NAME="%NAME%_backup_`date +%Y-%m-%d_%H-%M-%S`"
+
+#
+# Variables
+#
+
+EXIT=0
+TMP_DIR="/tmp"
+BACKUP_DIR=""
+BACKUP_FILE=""
+MYSQLD_STOPPED=0
+
+#
+# Functions
+#
+
+# Copy the content of a directory
+# Parameters:
+#   Source directory, without ending /
+#   Files filter
+#   Target directory, without ending /
+copy_directory_content ()
+{
+	if [ $EXIT -eq 0 ] ; then
+		SOURCE=$1
+		FILTER=$2
+		TARGET=$3
+		echo -e "$PREFIX_CHAR Copying '$SOURCE/$FILTER' to '$TARGET/'"
+		if [ -d $SOURCE -o -L $SOURCE ] ; then
+			pushd $SOURCE >> /dev/null 2>&1
+			if [ ! -e $TARGET ] ; then
+				mkdir -p $TARGET
+			fi
+			if [ -d $TARGET ] ; then
+				NUMBER=`ls -a -1 | wc -l`
+				expr $NUMBER \>= 2 > /dev/null 2>&1
+				if [ $? -ne 0 ] ; then
+					echo -e "$PREFIX_CHAR -> Error while checking if source directory is empty"
+					EXIT=1
+				else
+					expr $NUMBER = 2 > /dev/null 2>&1
+					if [ $? -eq 0 ] ; then
+						echo -e "$PREFIX_CHAR -> Source directory is empty"
+					else
+						cp -a $FILTER $TARGET/
+						if [ $? -ne 0 ] ; then
+							echo -e "$PREFIX_CHAR -> Error while copying"
+							EXIT=1
+						fi
+					fi
+				fi
+			else
+				echo -e "$PREFIX_CHAR -> Error while creating target directory '$TARGET'"
+				EXIT=1
+			fi
+			popd >> /dev/null 2>&1
+		else
+			echo -e "$PREFIX_CHAR -> Source directory '$SOURCE' does not exist"
+		fi
+	fi
+}
+
+# Stop a service
+# Parameters:
+#   Service name
+stop_service ()
+{
+	SERVICE_NAME=$1
+	echo -e "$PREFIX_CHAR Stopping service $SERVICE_NAME"
+	if [ -x %INITRDDIR%/$SERVICE_NAME ] ; then
+		service $SERVICE_NAME stop >> /dev/null 2>&1
+		if [ $? -ne 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Error while stopping"
+		fi
+	else
+		echo -e "$PREFIX_CHAR -> Script '%INITRDDIR%/$SERVICE_NAME' does not exist"
+		EXIT=1
+	fi
+}
+
+# Start a service
+# Parameters:
+#   Service name
+start_service ()
+{
+	SERVICE_NAME=$1
+	echo -e "$PREFIX_CHAR Restarting service $SERVICE_NAME"
+	if [ -x %INITRDDIR%/$SERVICE_NAME ] ; then
+		service $SERVICE_NAME start >> /dev/null 2>&1
+		if [ $? -ne 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Error while starting"
+			EXIT=1
+		fi
+	else
+		echo -e "$PREFIX_CHAR -> Script '%INITRDDIR%/$SERVICE_NAME' does not exist"
+		EXIT=1
+	fi
+}
+
+#
+# Main script
+#
+
+echo -e "$PREFIX_CHAR$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR %FRIENDLY_NAME% : backup data"
+echo -e "$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR This script will backup data to an archive file."
+echo -e "$PREFIX_CHAR -> Continue ('y' or 'n') ?"
+echo -en "$PREFIX_CHAR -> "
+read CHOICE
+if [ "$CHOICE" != "y" ]; then
+	exit 1
+fi
+#
+# Read configuration
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Reading configuration from file '%SYSCONFDIR%/%NAME%/.config'"
+	DB_NAME=""
+	if [ -e %SYSCONFDIR%/%NAME%/.config ] ; then
+		. %SYSCONFDIR%/%NAME%/.config
+		if [ -z "$DB_NAME" ] ; then
+			echo -e "$PREFIX_CHAR -> Parameter DB_NAME is empty or not defined"
+			EXIT=1
+		fi
+	else
+		echo -e "$PREFIX_CHAR -> FIle is missing"
+		EXIT=1
+	fi
+fi
+#
+# Ask temporary directory
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Please type the temporary directory (default: '$TMP_DIR', 'q' to quit)"
+	echo -en "$PREFIX_CHAR -> "
+	read CHOICE
+	if [ "$CHOICE" = "q" ] ; then
+		EXIT=1
+	else
+		if [ -n "$CHOICE" ]; then
+			TMP_DIR=$CHOICE
+		fi
+		if [ ! -e $TMP_DIR ] ; then
+			echo -e "$PREFIX_CHAR -> Directory '$TMP_DIR' does not exist"
+			EXIT=1
+		else
+			if [ ! -d $TMP_DIR -a ! -L $TMP_DIR ] ; then
+				echo -e "$PREFIX_CHAR -> '$TMP_DIR' is not a directory or a symbolic link"
+				EXIT=1
+			else
+				BACKUP_DIR="$TMP_DIR/$BACKUP_NAME"
+				export TMP=$TMP_DIR
+			fi
+		fi
+	fi
+fi
+#
+# Ask backup filename
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Please type the backup filename with its full path (default: '$TMP_DIR/$BACKUP_NAME.tar.gz', 'q' to quit)"
+	echo -en "$PREFIX_CHAR -> "
+	read CHOICE
+	if [ "$CHOICE" = "q" ] ; then
+		EXIT=1
+	else
+		if [ -n "$CHOICE" ]; then
+			BACKUP_FILE=$CHOICE
+		else
+			BACKUP_FILE="$TMP_DIR/$BACKUP_NAME.tar.gz"
+		fi
+		if [ -e $BACKUP_FILE ] ; then
+			echo -e "$PREFIX_CHAR -> File '$BACKUP_FILE' already exists"
+			EXIT=1
+		fi
+	fi
+fi
+#
+# Stop mysqld service
+#
+if [ $EXIT -eq 0 ] ; then
+	stop_service mysqld
+	if [ $EXIT -eq 0 ] ; then
+		MYSQLD_STOPPED=1
+	fi
+fi
+#
+# Check disk space
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Checking disk space"
+	FREE_SPACE=`df -kP $TMP_DIR | grep -e "^/" | sed -e "s/ [[:blank:]]*/ /g" | cut -d' ' -f4`
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while checking free space"
+		EXIT=1
+	else
+		expr $FREE_SPACE + 1 >> /dev/null 2>&1
+		if [ $? -ne 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Value '$FREE_SPACE' is not an integer"
+			EXIT=1
+		else
+			echo -e "$PREFIX_CHAR -> $FREE_SPACE KB available"
+		fi
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	NEEDED_SPACE=0
+	SIZES=`du -s $BACKUP_CONFIG_DIR/$BACKUP_CONFIG_FILTER $BACKUP_MYSQL_DIR/$DB_NAME | cut -f1`
+	for SIZE in $SIZES ; do
+		NEEDED_SPACE=`expr $NEEDED_SPACE + $SIZE`
+	done
+	NEEDED_SPACE=`expr $NEEDED_SPACE \* 2`
+	expr $NEEDED_SPACE + 1 >> /dev/null 2>&1
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Value '$NEEDED_SPACE' is not an integer"
+		EXIT=1
+	else
+		echo -e "$PREFIX_CHAR -> $NEEDED_SPACE KB needed"
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	expr $NEEDED_SPACE \<= $FREE_SPACE >> /dev/null 2>&1
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Not enough free space"
+		EXIT=1
+	fi
+fi
+#
+# Backup files
+#
+copy_directory_content $BACKUP_CONFIG_DIR "$BACKUP_CONFIG_FILTER" $BACKUP_DIR/config
+copy_directory_content $BACKUP_MYSQL_DIR/$DB_NAME "*" $BACKUP_DIR/database
+#
+# Create version file
+#
+if [ $EXIT -eq 0 ] ; then
+        echo -e "$PREFIX_CHAR Creating version file"
+        echo "%MANTIS_CUSTOM_LEVEL%" > $BACKUP_DIR/VERSION
+fi
+#
+# Create database name file
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Creating database name file"
+	echo $DB_NAME > $BACKUP_DIR/DB_NAME
+fi
+#
+# Create archive
+#
+if [ $EXIT -eq 0 ] ; then
+        echo -e "$PREFIX_CHAR Creating archive '$BACKUP_FILE'"
+        pushd $BACKUP_DIR >> /dev/null 2>&1
+        tar -czf $BACKUP_FILE --numeric-owner *
+        if [ $? -ne 0 ] ; then
+                echo -e "$PREFIX_CHAR -> Error while creating archive"
+                EXIT=1
+        fi
+        popd >> /dev/null 2>&1
+fi
+#
+# Remove backup directory
+#
+if [ -d $BACKUP_DIR ] ; then
+        echo -e "$PREFIX_CHAR Removing backup directory"
+        rm -rf $BACKUP_DIR
+fi
+#
+# Start mysqld service
+#
+if [ $MYSQLD_STOPPED -eq 1 ] ; then
+	start_service mysqld
+fi
+echo -e "$PREFIX_CHAR"
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR -> Success !"
+	echo -e "$PREFIX_CHAR"
+	echo -e "$PREFIX_CHAR Please note:"
+	echo -e "$PREFIX_CHAR   * you should now store the '$BACKUP_FILE' archive in a safe place,"
+	echo -e "$PREFIX_CHAR   * if you need to restore it, use the '%NAME%-restore' script."
+else
+	echo -e "$PREFIX_CHAR -> Failure !"
+fi
+echo -e "$PREFIX_CHAR$PREFIX_CHAR"
+exit $EXIT

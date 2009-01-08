@@ -1,0 +1,6 @@
+//bbcode customizations
+$sys_bbcode_make_clickable=1;
+$sys_bbcode_smilie_on=1;
+$sys_bbcode_bbcode_on=1;
+$sys_bbcode_strip_html=1;
+

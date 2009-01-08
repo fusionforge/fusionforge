@@ -1,0 +1,25 @@
+a:6:{s:6:"markup";s:1:"2";s:6:"author";s:6:"a_user";s:9:"author_id";s:6:"a_user";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625908;s:8:"%content";s:950:"To add a new page to Wiki, all you have to do is come up with a
+meaningful title, capitalize all the words and
+StringThemTogetherLikeThis. Wiki automagically recognizes it as a
+hyperlink. Alternatively, you can put anything into [square brackets].
+
+Then you can go ahead and ClickTheQuestionMark at the end of your new
+hyperlink, and the Wiki will give you a window for making the new
+page.
+
+If you wish to add documents with complex markup to the Wiki, you
+might be better off providing a URL to it than trying to add the text
+of the document here, like so:
+
+PhpWiki project homepage: http://phpwiki.sourceforge.net/
+
+The Wiki does not support HTML tags (see TextFormattingRules).
+<tags>They will just render like text.</tags> Wiki is meant to be as
+simple as possible to encourage use.
+
+Note that there is a feature that your system administrator can enable
+to allow embedded HTML, but there are security risks involved.
+
+----
+
+PhpWikiDocumentation";}

@@ -1,0 +1,141 @@
+<project name="mantis" basedir=".">
+	<!-- ================================= 
+		target: MantisCreerProjet10
+		================================= -->
+	<target name="CreerProject10" depends="init"
+		description="--> creer le projet 10">
+		<antcall target="launchSelenium">
+			<param name="test" value="MantisCreerProjet10" />
+		</antcall>
+	</target>
+
+	<!-- ================================= 
+		target: activation_plugin
+		================================= -->
+	<target name="active_plugin" depends="init"
+		description="--> active le plugin mantis">
+		<antcall target="launchSelenium">
+			<param name="test" value="Mantis_projet_activation" />
+		</antcall>
+	</target>
+
+	<!-- ================================= 
+		target: AddUserProjet10
+		================================= -->
+	<target name="AddUserProject10" depends="init"
+		description="--> ajout des utilisateurs au projet 10">
+		<antcall target="launchSelenium">
+			<param name="test" value="MantisAddUserProjet10" />
+		</antcall>
+	</target>
+
+	<!-- ================================= 
+		target: CreateProjet
+		================================= -->
+	<target name="CreateProject" depends="init"
+		description="--> créer un projet mantis">
+		<antcall target="launchSelenium">
+			<param name="test" value="Mantis_create_projet" />
+		</antcall>
+	</target>
+
+	<!-- ================================= 
+		target: ModifProjet
+		================================= -->
+	<target name="ModifProject" depends="init"
+		description="--> modifie un projet mantis">
+		<antcall target="launchSelenium">
+			<param name="test" value="Mantis_modif_projet" />
+		</antcall>
+	</target>
+
+	<!-- ================================= 
+		target: SetRolesProjet
+		================================= -->
+	<target name="SetRolesProject" depends="init"
+		description="--> affecte des roles">
+		<antcall target="launchSelenium">
+			<param name="test" value="Mantis_SetRoleProjet" />
+		</antcall>
+	</target>
+
+	<!-- ================================= 
+		target: Synchronize
+		================================= -->
+	<target name="Synchronize" depends="init"
+		description="--> Synchronise">
+		<antcall target="launchSelenium">
+			<param name="test" value="Mantis_synchronize" />
+		</antcall>
+	</target>
+
+	<!-- ================================= 
+		target: Report_a_bug
+		================================= -->
+	<target name="Report_a_bug" depends="init"
+		description="--> creer un bug">
+		<antcall target="launchSelenium">
+			<param name="test" value="Mantis_report_a_bug" />
+		</antcall>
+	</target>
+
+	<!-- ================================= 
+		target: view_my_bug
+		================================= -->
+	<target name="View_my_bug" depends="init"
+		description="--> visualisation du bug">
+		<antcall target="launchSelenium">
+			<param name="test" value="Mantis_view_my_bug" />
+		</antcall>
+	</target>
+
+	<!-- ================================= 
+		target: Create_task
+		================================= -->
+	<target name="Create_task" depends="init"
+		description="--> creer une tache">
+		<antcall target="launchSelenium">
+			<param name="test" value="Mantis_create_task" />
+		</antcall>
+	</target>
+
+	<!-- ================================= 
+		target: ChangeRoleDev
+		================================= -->
+	<target name="ChangeRole" depends="init"
+		description="--> verifie tous les role mantis">
+		<antcall target="launchSelenium">
+			<param name="test" value="Mantis_ChangeRoleDev" />
+		</antcall>
+	</target>
+
+	<!-- ================================= 
+		target: ChangeRoleDevWithCron
+		================================= -->
+	<target name="ChangeRoleWithCron" depends="init"
+		description="--> verifie tous les role mantis WithCron">
+		<antcall target="launchSelenium">
+			<param name="test" value="Mantis_ChangeRoleDevCron" />
+		</antcall>
+	</target>
+
+	<!-- ================================= 
+		target: Mantis_projet_delete
+		================================= -->
+	<target name="Project_delete" depends="init">
+		<antcall target="launchSelenium">
+			<param name="test" value="Mantis_projet_delete" />
+		</antcall>
+	</target>
+
+	<!-- ================================= 
+		target: Mantis_projet_desactivation
+		================================= -->
+	<target name="Project_desactivation" depends="init">
+		<antcall target="launchSelenium">
+			<param name="test" value="Mantis_projet_desactivation" />
+		</antcall>
+	</target>
+
+
+</project>

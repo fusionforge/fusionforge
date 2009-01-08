@@ -1,0 +1,41 @@
+#/**
+#  *
+#  * projects_hierarchy message catalog (English)
+#  *
+#  * GForge: Breaking Down the Barriers to Open Source Development
+#  * Copyright 1999-2001 (c) VA Linux Systems
+#  *                2005 (c) Daniel P�rez <danielperez.arg@gmail.com>
+#  * http://sourceforge.net
+#  * Here you can add your own language customizations
+#  *
+#  *
+#  */
+user_home	view_projects_hierarchy	View Personal projects_hierarchy
+project_admin	projects_hierarchy	View the projects_hierarchy Administration
+project_admin	link	Type de lien
+project_admin	del	Supprimer
+project_admin	allow	Autoriser
+project_admin	wait	En attente
+project_admin	share	Partagé
+project_admin	navi	Navigation
+project_admin	add_link	Ajouter un lien
+project_admin	validation_wait	Père en attente de validation
+project_admin	hierarchy	Modifier la Hiérarchie
+project_admin	save_son	Ajouter un fils
+project_admin	alert_del	Etes vous sûr de vouloir supprimer le lien?
+project_admin	father	Parent du projet
+project_admin	alert_allow	Etes vous sûr de vouloir autoriser ce projet?
+project_admin	display_link	Liste des liens
+project_admin	share_link	Partage de ressources
+project_admin	navi_link	Lien de navigation
+project_admin	com_father	Commentaire du père :
+project_admin	com	Commentaire :
+project_admin	choice_project	Choix du projet :
+project_tree	cat	Par catégorie
+project_tree	tree	Par hiérarchie
+project_tree	tree_project	Arbre des projets
+project_home	project_father	Projet père
+project_home	project_son	Projet fils
+project_home	hierarchy_title	Les projets liés
+project_home	hierarchy_no	Pas de projets liés
+project_home	link	Liens

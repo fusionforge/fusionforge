@@ -1,0 +1,59 @@
+
+variables
+-> societe : 	GDF ou BULL
+-> projet :	projet2
+-> user
+-> role NF
+-> role Mantis
+-> mantis_url : http://localhost/mantis (LOCAL) ou http://..../mantis (DISTANT)
+-> cron ou pas cron
+
+
+
+recup° fichier Mantis.conf
+-----------------------------
+
+
+creation projet dans mantis
+---------------------------
+-> creer projet dans NF (enregistrer, approuver (admin), cron home_dirs)
+
+-> activer plugin mantis pour le projet
+-> [cron si pas passé]
+-> [modification eventuelle du mantis.conf]
+-> admin du plugin mantis + synchronisation tt le projet
+-> onglet Mantis : acces au projet dans le combo
+
+
+creation user dans mantis
+---------------------------
+-> verif NOM_USER dans le projet ci dessus
+
+
+synchro role_user dans mantis
+------------------------------
+-> verif NOM_USER / ROLE dans le projet ci dessus
+
+
+synchro modification role_user dans mantis
+--------------------------------------------
+-> admin NF du projet : modif role User
+-> admin du plugin mantis + synchronisation tt le projet
+-> onglet Mantis : acces au projet dans le combo
+-> Test précédent
+
+
+creation sous-projet dans mantis
+---------------------------------
+-> [modification du mantis.conf]
+-> admin du plugin mantis + synchronisation tt le projet
+-> onglet Mantis : acces au sous-projet dans le combo
+
+
+association user-sous_projet dans mantis
+-------------------------------------------
+-> verif NOM_USER dans le sous-projet ci dessus
+
+
+
+

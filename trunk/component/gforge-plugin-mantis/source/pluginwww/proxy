@@ -1,0 +1,328 @@
+<?php
+/*
+ *
+ * Novaforge is a registered trade mark from Bull S.A.S
+ * Copyright (C) 2007 Bull S.A.S.
+ * 
+ * http://novaforge.org/
+ *
+ *
+ * This file has been developped within the Novaforge(TM) project from Bull S.A.S
+ * and contributed back to GForge community.
+ *
+ * GForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this file; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
+// The novaforge/auth.php file MUST be included before pre.php,
+// in order to properly declare the variables of apibull/config.php
+// If not, pre.php will include MantisPlugin.class in a function,
+// and the sys_auth_* variables will exist but will eb empty
+require_once ("common/novaforge/auth.php");
+require_once ("pre.php");
+require_once ("common/novaforge/log.php");
+require_once ("common/novaforge/proxy.php");
+require_once ("plugins/mantis/include/gforgefunctions.php");
+
+define ("MANTIS_COOKIE_PREFIX", "GFORGE_RP_MANTIS_");
+define ("MANTIS_LOCAL_PATH", "/plugins/mantis/proxy/");
+
+function addRegEx ($project_css_regex, &$array_patterns, &$array_replacements)
+{
+	if ((isset ($project_css_regex) == true)
+	&&  (strlen (trim (html_entity_decode ($project_css_regex))) > 0))
+	{
+		$pair = explode ("==>", $project_css_regex, 2);
+		if (($pair !== false)
+		&&  (count ($pair) == 2)
+		&&  (strlen (trim ($pair [0])) > 0)
+		&&  (strlen (trim ($pair [1])) > 0))
+		{
+			$array_patterns [] = trim ($pair [0]);
+			$array_replacements [] = trim ($pair [1]);
+		}
+		else
+		{
+			log_warning ("Format of '" . $project_css_regex . "' regular expresion is incorrect", __FILE__, __FUNCTION__);
+		}
+	}
+}
+
+if (session_loggedin () == false)
+{
+	exit_not_logged_in ();
+}
+else
+{
+	$user = user_get_object ($G_SESSION->getId ());
+	if ($user !== false)
+	{
+		$username = $user->getUnixName ();
+	}
+	else
+	{
+		exit_not_logged_in ();
+	}
+}
+if (array_key_exists ("plugin_mantis_project_id", $_POST) == false)
+{
+	$tmp = substr ($_SERVER ["REQUEST_URI"], strlen ($_SERVER ["SCRIPT_NAME"]) + 1);
+	if (strlen ($tmp) > 0)
+	{
+		$parts = split ("/", $tmp, 2);
+		if (count ($parts) == 2)
+		{
+			$plugin_mantis_project_id = intval ($parts [0]);
+			$path = $parts [1];
+		}
+		else
+		{
+			setcookie (MANTIS_COOKIE_PREFIX . "MANTIS_PROJECT_COOKIE", "", time () - 3600, MANTIS_LOCAL_PATH);
+			setcookie (MANTIS_COOKIE_PREFIX . "MANTIS_STRING_COOKIE", "", time () - 3600, MANTIS_LOCAL_PATH);
+			unset ($plugin_mantis_project_id);
+		}
+	}
+	else
+	{
+		setcookie (MANTIS_COOKIE_PREFIX . "MANTIS_PROJECT_COOKIE", "", time () - 3600, MANTIS_LOCAL_PATH);
+		setcookie (MANTIS_COOKIE_PREFIX . "MANTIS_STRING_COOKIE", "", time () - 3600, MANTIS_LOCAL_PATH);
+		unset ($plugin_mantis_project_id);
+	}
+}
+else
+{
+	setcookie (MANTIS_COOKIE_PREFIX . "MANTIS_PROJECT_COOKIE", "", time () - 3600, MANTIS_LOCAL_PATH);
+	setcookie (MANTIS_COOKIE_PREFIX . "MANTIS_STRING_COOKIE", "", time () - 3600, MANTIS_LOCAL_PATH);
+	header ("Location: " . MANTIS_LOCAL_PATH . $plugin_mantis_project_id . "/");
+	exit ();
+}
+if (isset ($plugin_mantis_project_id) == true)
+{
+	if (getProject ($plugin_mantis_project_id,
+	                $group_id,
+	                $project_url,
+	                $project_mantis_id,
+	                $project_name,
+	                $project_description,
+	                $project_status,
+	                $project_visibility,
+	                $project_css_regex_1,
+	                $project_css_regex_2,
+	                $project_css_regex_3,
+	                $project_css_regex_4) == false)
+	{
+		setcookie (MANTIS_COOKIE_PREFIX . "MANTIS_PROJECT_COOKIE", "", time () - 3600, MANTIS_LOCAL_PATH);
+		setcookie (MANTIS_COOKIE_PREFIX . "MANTIS_STRING_COOKIE", "", time () - 3600, MANTIS_LOCAL_PATH);
+		exit_error ($Language->getText ("gforge-plugin-mantis", "title_display_error"), $Language->getText ("gforge-plugin-mantis", "incorrect_project_id"));
+	}
+	else
+	{
+		if ((array_key_exists (MANTIS_COOKIE_PREFIX . "MANTIS_PROJECT_COOKIE", $_COOKIE) == true)
+		&&  ($_COOKIE [MANTIS_COOKIE_PREFIX . "MANTIS_PROJECT_COOKIE"] != $project_mantis_id))
+		{
+			if ($_COOKIE [MANTIS_COOKIE_PREFIX . "MANTIS_PROJECT_COOKIE"] != 0)
+			{
+				if (getProjectId ($group_id,
+				                  $project_url,
+				                  $_COOKIE [MANTIS_COOKIE_PREFIX . "MANTIS_PROJECT_COOKIE"],
+				                  $plugin_mantis_project_id) == false)
+				{
+					setcookie (MANTIS_COOKIE_PREFIX . "MANTIS_PROJECT_COOKIE", "", time () - 3600, MANTIS_LOCAL_PATH);
+					setcookie (MANTIS_COOKIE_PREFIX . "MANTIS_STRING_COOKIE", "", time () - 3600, MANTIS_LOCAL_PATH);
+					exit_error ($Language->getText ("gforge-plugin-mantis", "title_display_error"), $Language->getText ("gforge-plugin-mantis", "incorrect_project_id"));
+				}
+				else
+				{
+					header ("Location: " . MANTIS_LOCAL_PATH . $plugin_mantis_project_id . "/");
+					exit ();
+				}
+			}
+		}
+	}
+}
+else
+{
+	setcookie (MANTIS_COOKIE_PREFIX . "MANTIS_PROJECT_COOKIE", "", time () - 3600, MANTIS_LOCAL_PATH);
+	setcookie (MANTIS_COOKIE_PREFIX . "MANTIS_STRING_COOKIE", "", time () - 3600, MANTIS_LOCAL_PATH);
+	if (array_key_exists ("group_id", $_POST) == false)
+	{
+		if (array_key_exists ("group_id", $_GET) == false)
+		{
+			unset ($group_id);
+		}
+		else
+		{
+			$group_id = $_GET ["group_id"];
+		}
+	}
+	else
+	{
+		$group_id = $_POST ["group_id"];
+	}
+}
+if ((isset ($group_id) == false) || ($group_id <= 0))
+{
+	exit_no_group ();
+}
+$group = &group_get_object ($group_id);
+if ((isset ($group) == false) || (is_object ($group) == false))
+{
+	exit_no_group ();
+}
+else
+{
+	if ($group->isError () == true)
+	{
+		exit_error ($Language->getText ("gforge-plugin-mantis", "title_display_error"), $group->getErrorMessage ());
+	}
+}
+if ($group->usesPlugin ("mantis") == false)
+{
+	exit_error ($Language->getText ("gforge-plugin-mantis", "title_display_error"), $Language->getText ("gforge-plugin-mantis", "not_enabled"));
+}
+if (getProjects ($group_id, $array_project_ids, $array_project_names) == false)
+{
+	exit_error ($Language->getText ("gforge-plugin-mantis", "title_display_error"), $Language->getText ("gforge-plugin-mantis", "database_error"));
+}
+$html_page = true;
+$content = "";
+if (isset ($plugin_mantis_project_id) == true)
+{
+	$url = $project_url;
+	if ($url [strlen ($url) - 1] != "/")
+	{
+		$url .= "/";
+	}
+	$url .= "gforge/auth.php";
+	if ((array_key_exists (MANTIS_COOKIE_PREFIX . "MANTIS_STRING_COOKIE", $_COOKIE) == false)
+	||  ($path == "login_page.php"))
+	{
+		$cookies = array ();
+		if (authenticate ($url, $cookies, $username) === false)
+		{
+			exit_error ($Language->getText ("gforge-plugin-mantis", "title_display_error"), $Language->getText ("gforge-plugin-mantis", "authentication_failure", $project_url));
+		}
+		else
+		{
+			foreach ($cookies as $name => $array_value_and_expires)
+			{
+				$_COOKIE [MANTIS_COOKIE_PREFIX . $name] = $array_value_and_expires [0];
+				setcookie (MANTIS_COOKIE_PREFIX . $name, $array_value_and_expires [0], $array_value_and_expires [1], MANTIS_LOCAL_PATH);
+			}
+		}
+	}
+	$config = new ProxyConfig ($project_url, $sys_use_ssl, $sys_default_domain, MANTIS_LOCAL_PATH . $plugin_mantis_project_id . "/", MANTIS_COOKIE_PREFIX, true);
+	$request = new ProxyRequest ($config);
+	if ((isset ($path) == false) || (strlen (trim ($path)) <= 0))
+	{
+		$path = "my_view_page.php";
+	}
+	$_COOKIE [MANTIS_COOKIE_PREFIX . "MANTIS_PROJECT_COOKIE"] = $project_mantis_id;
+	if ($request->getServHttpReponse ($path, null, null, null, null) == false)
+	{
+		exit_error ($Language->getText ("gforge-plugin-mantis", "title_display_error"), $Language->getText ("gforge-plugin-mantis", "mantis_error"));
+	}
+	else
+	{
+		$httpHeader = new ProxyHttpHeader ($config, $request->httpHeader);
+		$httpHeader->fetchHeader ();
+		$httpHeader->sendHeader ();
+		if (($httpHeader->isHeaderOfHtmlPage () == true)
+		&&  (strncmp ($path, "return_dynamic_filters.php", strlen ("return_dynamic_filters.php")) != 0)
+)
+		{
+			$response = new ProxyReponse ($config, $request->httpHtml);
+			$response->changeLink ();
+			$response->deleteHtmlHeader ();
+			
+			$array_patterns = array ();
+			$array_replacements = array ();
+			
+			// Suppression du logo mantis
+			addRegEx ("/<div.*www\.mantisbt\.org.*mantis_logo\.gif.*<\/div>/m ==> <!-- Logo Removed -->", $array_patterns, $array_replacements);
+			
+			// Suppression de la combo box permettant de changer de projet, provoque un blocage du plugin qui oblige la suppression du projet
+			addRegEx ("/<form.*form_set_project.*(<a href=.*issues_rss.*<\/a>)<\/form>/s ==> <!-- Project selector Removed -->$1", $array_patterns, $array_replacements);
+			$response->replacePatterns ($array_patterns, $array_replacements);
+			$content = $httpHeader->changeCharset ($response->reponse, "UTF-8");
+		}
+		else
+		{
+			$html_page = false;
+			if ($httpHeader->isHeaderOfCssPage () == true)
+			{
+				$response = new ProxyReponse ($config, $request->httpHtml);
+				$array_patterns = array ();
+				$array_replacements = array ();
+				addRegEx ($project_css_regex_1, $array_patterns, $array_replacements);
+				addRegEx ($project_css_regex_2, $array_patterns, $array_replacements);
+				addRegEx ($project_css_regex_3, $array_patterns, $array_replacements);
+				addRegEx ($project_css_regex_4, $array_patterns, $array_replacements);
+				$response->replacePatterns ($array_patterns, $array_replacements);
+				$content = $response->reponse;
+			}
+			else
+			{
+				$content = $request->httpHtml;
+			}
+		}
+	}
+}
+if ($html_page == true)
+{
+	if ((isset ($project_name) == true) && (strlen ($project_name) > 0))
+	{
+		$title = $Language->getText ("gforge-plugin-mantis", "title_display_project", $project_name);
+	}
+	else
+	{
+		$title = $Language->getText ("gforge-plugin-mantis", "title_display_error");
+	}
+	site_project_header (array ("title" => $title, "group" => $group_id, "toptab" => "mantis"));
+	if (count ($array_project_ids) > 0)
+	{
+?>
+<form action="<? echo MANTIS_LOCAL_PATH; ?>" method="post">
+<input name="group_id" value="<? echo $group_id; ?>" type="hidden">
+<select name="plugin_mantis_project_id">
+<?
+		$index = 0;
+		while ($index < count ($array_project_ids))
+		{
+?><option value="<? echo $array_project_ids [$index]; ?>"<?
+			if ((isset ($plugin_mantis_project_id) == true)
+			&&  ($array_project_ids [$index] == $plugin_mantis_project_id))
+			{
+				echo " selected";
+			}
+?>><? echo $array_project_names [$index]; ?></option>
+<?
+			$index++;
+		}
+?></select>
+<input type="submit" value="<? echo $Language->getText ("gforge-plugin-mantis", "display_project"); ?>">
+</form>
+<?
+	}
+	else
+	{
+		echo "<h2>" . $Language->getText ("gforge-plugin-mantis", "no_project_available") . "</h2>";
+	}
+}
+echo $content;
+if ($html_page == true)
+{
+	site_project_footer (array ());
+}
+?>

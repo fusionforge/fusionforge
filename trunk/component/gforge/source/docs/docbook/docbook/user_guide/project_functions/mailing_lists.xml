@@ -1,0 +1,53 @@
+<section id="ug_project_mailing_lists">
+	<title>Mailing Lists</title>
+	<para>
+		This is where you will set up and administer the mailing lists associated with the project.
+	</para>
+	<section id="ug_project_mailing_lists_main_page">
+		<title>Main page</title>
+		<para>
+			This page shows the list of available mailing lists.
+		</para>
+		<para>
+			Clicking on List Name Archives will allow you to browse the archives of the selected mailing list.
+		</para>
+		<para>
+			You can subscribe, unsubscribe or edit your preferences for a specific mailing list by clicking the appropriate link.
+		</para>
+		<para>There is a special mailing list named
+		'&lt;project&gt;-commits' which is populated by all
+		the commits performed in CVS or Subversion. By simply
+		registering to this mailing list, any user can be
+		informed of the SCM activity on the project.</para>
+
+	</section>
+	<section id="ug_project_mailing_lists_admin">
+		<title>Admin</title>
+		<para>
+			This brings you to the Mail Admin page, where the following options are available to you.
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term>Add Mailing List</term>
+				<listitem>
+					<para>Clicking here will allow you to create a new mailing list. You can specify if it is to be made public (people who are not members of the project can see and/or join it) or not. You can also add a description of the list. You will receive an email with the administration password of the list.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Administrate/Update Lists</term>
+				<listitem>
+					<para>This allows you to change the description of the list, the state of the list, and by clicking on <guimenuitem>Administrate this list in GNU Mailman</guimenuitem> you can add members to the mailing list, set the properties of the list, posting policies and so forth.</para>
+				</listitem>
+			</varlistentry>
+                        <varlistentry>
+                                <term>Delete a Mailing List</term>
+                                <listitem>
+                                        <para>This allows you to permanently delete a mailing list.</para>
+                                        <para>Select the <emphasis>Update</emphasis> link of the list. Then click on the 
+                                              <emphasis>Permanently Delete List</emphasis> link.</para>
+
+                                </listitem>
+                        </varlistentry>
+		</variablelist>
+	</section>
+</section>

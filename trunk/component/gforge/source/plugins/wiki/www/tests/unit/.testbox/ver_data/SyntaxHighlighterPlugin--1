@@ -1,0 +1,50 @@
+a:6:{s:6:"markup";s:1:"2";s:6:"author";s:6:"a_user";s:9:"author_id";s:6:"a_user";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625924;s:8:"%content";s:1055:"The ~SyntaxHighlighter plugin passes all its arguments through a C++
+highlighter called "highlight" (available at http://www.andre-simon.de/).
+
+Author: alecthomas
+
+! Arguments
+syntax |
+  (required), See http://www.andre-simon.de/doku/highlight/highlight.html
+style |
+  ~[ "ansi", "gnu", "kr", "java", "linux" ~] (required)
+color |
+  null (optional), see =highlight/themes=
+number |
+  0  (optional)
+wrap |
+  0  (optional)
+
+
+! Example
+
+<verbatim>
+<?plugin SyntaxHighlighter syntax=c style=kr color=emacs
+ #include <stdio.h>
+
+ int main() {
+ printf("Lalala\n");
+ }
+?>
+</verbatim>
+
+=>
+
+<?plugin SyntaxHighlighter syntax=c style=kr color=emacs
+ #include <stdio.h>
+
+ int main() {
+ printf("Lalala\n");
+ }
+?>
+
+I did not use beautifier, because it used up more than 8M of memory on
+my system and PHP killed it. I'm not sure whether this is a problem
+with my integration, or with beautifier itself.
+
+Fixes by Reini Urban:
+* support options: syntax, style, color.
+* php version switch
+* HIGHLIGHT_DATA_DIR, HIGHLIGHT_EXE constants
+----
+PhpWikiDocumentation WikiPlugin";}

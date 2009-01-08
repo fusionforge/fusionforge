@@ -1,0 +1,130 @@
+#!/bin/bash
+#---------------------------------------------------------------------------
+# Novaforge is a registered trade mark from Bull S.A.S
+# Copyright (C) 2007 Bull S.A.S.
+# 
+# http://novaforge.org/
+#
+#
+# This file has been developped within the Novaforge(TM) project from Bull S.A.S
+# and contributed back to GForge community.
+#
+# GForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# GForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#---------------------------------------------------------------------------
+
+#
+# Source functions
+#
+
+. %DATADIR%/%NAME%/config/functions
+
+#
+# Constants
+#
+
+DB_USER="%NAME%"
+
+#
+# Variables
+#
+
+MYSQL_PASSWORD=""
+
+#
+# Main script
+#
+
+init_variables "#"
+echo -e "$PREFIX_CHAR$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR %FRIENDLY_NAME% : removal of configuration"
+echo -e "$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR This script will do the reverse of the '%NAME%-config' script."
+echo -e "$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR It should be executed if you want to uninstall %FRIENDLY_NAME%"
+echo -e "$PREFIX_CHAR but want to keep data and be able to reinstall later with"
+echo -e "$PREFIX_CHAR the same configuration."
+echo -e "$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR -> Continue ('y' or 'n') ?"
+echo -en "$PREFIX_CHAR -> "
+read CHOICE
+if [ "$CHOICE" != "y" ]; then
+	EXIT=1
+fi
+#
+# Get password of MySQL's root
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Please type the password of MySQL 'root' user ('q' to quit)"
+	echo -en "$PREFIX_CHAR -> "
+	read CHOICE
+	if [ "$CHOICE" = "q" ] ; then
+		EXIT=1
+	else
+		MYSQL_PASSWORD=$CHOICE
+	fi
+fi
+#
+# Switch to maintenance mode
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Switching to maintenance mode"
+	ln -sf %DATADIR%/%NAME%/www/mantis_offline.php %SYSCONFDIR%/%NAME%/mantis_offline.php
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while creating symbolic link '%SYSCONFDIR%/%NAME%/mantis_offline.php' to file '%DATADIR%/%NAME%/config/mantis_offline.php'"
+	fi
+fi
+#
+# Revoke rights of MySQL user
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Revoking MySQL user '$DB_USER' rights"
+	if [ -n "$MYSQL_PASSWORD" ]; then
+		OPTION="--password=$MYSQL_PASSWORD"
+	else
+		OPTION=""
+	fi
+	echo -n "REVOKE ALL ON *.* FROM '$DB_USER'@'localhost';" | mysql --database=mysql --user=root $OPTION >> /dev/null 2>&1
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while revoking MySQL user rights"
+	fi
+fi
+#
+# Delete MySQL user
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Deleting MySQL user '$DB_USER'"
+	echo -n "DELETE FROM user WHERE User='$DB_USER' AND Host='localhost'; FLUSH PRIVILEGES;" | mysql --database=mysql --user=root $OPTION >> /dev/null 2>&1
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while deleting user"
+	fi
+fi
+#
+# Blank configuration file
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Blanking configuration file '%SYSCONFDIR%/%NAME%/config_inc.php'"
+	rm -f %SYSCONFDIR%/%NAME%/config_inc.php
+	touch %SYSCONFDIR%/%NAME%/config_inc.php
+	chown root.%APACHE_GROUP% %SYSCONFDIR%/%NAME%/config_inc.php
+	chmod 640 %SYSCONFDIR%/%NAME%/config_inc.php
+fi
+echo -e "$PREFIX_CHAR"
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR -> Success !"
+else
+	echo -e "$PREFIX_CHAR -> Failure !"
+fi
+echo -e "$PREFIX_CHAR$PREFIX_CHAR"
+exit $EXIT

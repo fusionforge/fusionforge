@@ -1,0 +1,23 @@
+--- mantis-1.1.1/core/ldap_api.php	2007-10-14 00:36:41.000000000 +0200
++++ patch_de_mantis-1.1.1/core/ldap_api.php	2008-06-24 16:41:07.000000000 +0200
+@@ -37,11 +37,15 @@
+ 		
+ 		$t_ds = @ldap_connect ( $t_ldap_server, $t_ldap_port );
+ 		if ( $t_ds > 0 ) {
+-			$t_protocol_version = config_get( 'ldap_protocol_version' );
+-
+-			if ( $t_protocol_version > 0 ) {
+-				ldap_set_option( $t_ds, LDAP_OPT_PROTOCOL_VERSION, $t_protocol_version );
+-			}
++			# Set LDAP options
++			ldap_set_option( $t_ds, LDAP_OPT_PROTOCOL_VERSION, 3 );
++			ldap_set_option( $t_ds, LDAP_OPT_REFERRALS, 0 );
++			
++			$t_protocol_version = 3 ; // config_get( 'ldap_protocol_version' );
++
++			// if ( $t_protocol_version > 0 ) {
++			// 	ldap_set_option( $t_ds, LDAP_OPT_PROTOCOL_VERSION, $t_protocol_version );
++			// }
+ 
+ 			# If no Bind DN and Password is set, attempt to login as the configured
+ 			#  Bind DN.

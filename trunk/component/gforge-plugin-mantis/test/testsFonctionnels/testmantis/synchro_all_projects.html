@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title> synchro_all_projects
+    </title>
+  </head>
+  <body>
+    <table cellpadding="1" cellspacing="1" border="1">
+      <thead>
+        <tr>
+          <td rowspan="1" colspan="3">
+            synchro_all_projects</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            readGroupId</td>
+          <td>
+            ${projet}</td>
+          <td>
+            groupid</td>
+        </tr>
+        <tr>
+          <td>
+            open</td>
+          <td>
+            /plugins/mantis/admin.php?group_id=${groupid}</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            clickAndWait</td>
+          <td>
+            link=Synchroniser tous les projets Mantis.</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            verifyTextPresent</td>
+          <td>
+            Tous les projets Mantis ont &eacute;t&eacute; synchronis&eacute; avec succ&egrave;s.</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            clickAndWait</td>
+          <td>
+            link=Retour &agrave; la page d'administration des projets Mantis</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

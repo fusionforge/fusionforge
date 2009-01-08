@@ -1,0 +1,11 @@
+<?= Template("default/info") ?>
+<div class="actionbuttons">
+  <?=$SEP?><?= Button("AuthorHistory", _("AuthorHistory")) ?>
+  <?=$SEP?><?= Button("Diff") ?>
+  <?=$SEP?><?= Button(array('action'=>'diff','previous' => 'minor'),_("Diff previous Revision"),$page->getName()) ?>
+  <?=$SEP?><?= Button(array('action'=>'diff','previous' => 'author'),_("Diff previous Author"),$page->getName()) ?>
+</div>
+<br />
+<div class="actionbuttons">
+  <?= Template("default/actionbar") ?>
+</div>

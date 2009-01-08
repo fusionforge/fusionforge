@@ -1,0 +1,25 @@
+a:6:{s:6:"markup";s:1:"2";s:6:"author";s:6:"a_user";s:9:"author_id";s:6:"a_user";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625924;s:8:"%content";s:653:"<noinclude>
+The following predefined variables are automatically expanded if existing:
+  pagename
+  mtime     - last modified date + time
+  ctime     - creation date + time
+  author    - last author
+  owner
+  creator   - first author
+  SERVER_URL, DATA_PATH, SCRIPT_NAME, PHPWIKI_BASE_URL and BASE_URL
+</noinclude>
+
+Title: %%title%%   Year: %%year%%
+---
+* Pagename: %%pagename%%
+* Author: %%author%%
+* Last modified time: %%mtime%%
+* Created time: %%ctime%%
+* Owner: %%owner%%
+* Creator: %%creator%%
+
+* SERVER_URL: %%SERVER_URL%%
+* DATA_PATH: %%DATA_PATH%%
+* SCRIPT_NAME: %%SCRIPT_NAME%%
+* PHPWIKI_BASE_URL: %%PHPWIKI_BASE_URL%%
+* BASE_URL: %%BASE_URL%%";}

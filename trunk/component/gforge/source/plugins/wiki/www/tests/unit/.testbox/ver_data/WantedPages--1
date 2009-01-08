@@ -1,0 +1,12 @@
+a:6:{s:6:"markup";s:1:"2";s:6:"author";s:6:"a_user";s:9:"author_id";s:6:"a_user";s:8:"pagetype";s:8:"wikitext";s:5:"mtime";i:1150625928;s:8:"%content";s:481:"Here is a list of pages that have been cited on this wiki but are not
+yet written. Although they appear to be wanted, they may be
+misspellings of existing pages or pages too trivial to merit creation.
+
+The best course of action for these pages isn't necessarily to create
+a page. Often, it is better to change the references so they are no
+longer ~WikiNames. Where applicable, you can just change the case, add
+spaces or insert an escape character ~~.
+
+----
+
+<?plugin WantedPages?>";}

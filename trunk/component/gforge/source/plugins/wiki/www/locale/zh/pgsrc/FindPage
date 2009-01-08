@@ -1,0 +1,33 @@
+Date: Fri, 1 Mar 2002 23:44:38 -0500
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.3-jeffs-hacks)
+X-Rcs-Id: $Id: FindPage,v 1.1 2004/04/29 23:59:07 rurban Exp $
+Content-Type: application/x-phpwiki;
+  pagename=FindPage;
+  flags=PAGE_LOCKED;
+  pgsrc_version="2 $Revision: 1.1 $";
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+這裡有一些很好的瀏覽起點.
+
+* HowToUseWiki 讓你能快速的學會使用 Wiki 標記.
+* RecentChanges 會自動紀錄.
+* MoreAboutMechanics 在此伺服器上進行瀏覽與編輯.
+
+這裡則有標題搜索. 試著輸入 ''wiki'' 或 ''sandwich'' 看看.
+<?plugin-form TitleSearch?>
+
+使用下面的全文搜索. 這可能會花點時間. 結果將會依列顯示出所有頁面中符合
+條件的資料.
+<?plugin-form FullTextSearch?>
+
+模糊搜尋搜索所有頁面的標題以得到最接近的字或最接近的發音(英文).
+<?plugin-form FuzzyPages?>
+
+------
+
+! Tips
+使用空白分隔每個字. 所有的字都必須符合.
+%%%在標題搜索或全文檢索時,要排除某個字的話,在該字的前面加上 '-'.
+%%%Example: 'wiki text -php' 表示搜索所有頁面包含 'wiki' __和__ 'text', 但 __不__ 包含 'php'.
