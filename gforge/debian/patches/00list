@@ -1,4 +1,0 @@
-# List of patches to apply
-disable-tracker-reply-by-email
-use-snoopy-from-distro
-unix-sockets-for-database

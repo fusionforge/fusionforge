@@ -1,6 +1,0 @@
-etc/gforge/templates
-usr/lib/gforge/bin
-var/lib/gforge/chroot
-var/lib/gforge/download
-var/lib/gforge/etc
-var/lib/gforge/ftp/incoming

@@ -1,9 +1,0 @@
-<?php // -*-html-*-
-  rcs_id('$Id: browse-footer.tmpl,v 1.2 2004/12/15 17:47:32 rurban Exp $');
-?>
-<!--{{{ Edit Date-->
-<p class="editdate">
-<?php if( $page->getName() != "HomePage") { ?>
-<?= $WikiTheme->getOwnerMessage($page) ?>  <?= $WikiTheme->getLastModifiedMessage($revision) ?> <?= $WikiTheme->getAuthorMessage($revision) ?><br />
-<?php } ?>
-This site is powered by <a href="http://phpwiki.sourceforge.net">PhpWiki</a>. Page design based on <a href="http://binarybonsai.com/kubrick/">Kubrick</a>, adapted by <a href="http://the.taoofmac.com">Rui Carmo</a> from an original design by <a href="http://binarybonsai.com">Michael Heilemann</a>.</p><!--}}} Edit Date-->
