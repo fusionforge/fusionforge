@@ -118,7 +118,7 @@ if ($sys_database_type == 'mysql') {
 	$sql.="SELECT group_id,'mail'::text AS type,count(*) AS count ";
 }
 $sql.="
-	FROM mail_group_list WHERE is_public != 9
+	FROM mail_group_list WHERE is_public = 1
 	GROUP BY group_id,type;";
 
 $res=db_query($sql);
