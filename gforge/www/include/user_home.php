@@ -53,7 +53,7 @@ $HTML->header(array('title'=>_('Developer Profile')));
 <tr valign="top">
 	<td><?php echo _('Your Email Address') ?>: </td>
 	<td>
-	<strong><?php util_make_link ('/sendmessage.php?touser='.$user_id, str_replace('@',' @nospam@ ',$user->getEmail())); ?></strong>
+	<strong><?php echo util_make_link ('/sendmessage.php?touser='.$user_id, str_replace('@',' @nospam@ ',$user->getEmail())); ?></strong>
 	</td>
 </tr>
 <?php if ($user->getJabberAddress()) { ?>
