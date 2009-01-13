@@ -133,15 +133,20 @@ class HelloWorldPlugin extends Plugin {
 			$text = $params['text'];
 			//check if the user has the plugin activated
 			if ($user->usesPlugin($this->name)) {
-				echo '	<p>
-					<a href="/plugins/helloworld/index.php?id=' . $userid . '&type=user&pluginname=' . $this->name . '">' . _('View Personal HelloWorld') .'</a></p>';
+				echo '	<p>' ;
+				echo util_make_link ("/plugins/helloworld/index.php?id=$userid&type=user&pluginname=".$this->name,
+						     _('View Personal HelloWorld')
+					);
+				echo '</p>';
 			}
 		} elseif ($hookname == "project_admin_plugins") {
 			// this displays the link in the project admin options page to it´s  HelloWorld administration
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
-				echo '<a href="/plugins/helloworld/index.php?id=' . $group->getID() . '&type=admin&pluginname=' . $this->name . '">' . _('View the HelloWorld Administration') . '</a><br />';
+				echo util_make_link ("/plugins/projects_hierarchy/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
+						     _('View the HelloWorld Administration')
+				echo '</p>';
 			}
 		}												    
 		elseif ($hookname == "blahblahblah") {
