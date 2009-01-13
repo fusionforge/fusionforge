@@ -1,5 +1,8 @@
 2009-01-13  Roland Mas  <lolando@debian.org>
 
+	* plugins/wiki/www/u: Remove call to the old $Language->getText()
+	API.
+
 	* common/include/gettext.php: Fixed language_name_to_lang_id()
 	function (patch #5629 from Mickaël Bridard).
 

@@ -13,7 +13,7 @@ $user_name = $group_name;
 $user =& user_get_object_by_name($user_name);
 if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 
-	exit_error($Language->getText('users','user_not_exist_title'),$Language->getText('users','user_not_exist_text'));
+	exit_error(_('Invalid User'),_('That user does not exist.'));
 
 } else {
 
