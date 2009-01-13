@@ -109,15 +109,21 @@ class projects_hierarchyPlugin extends Plugin {
 			$text = $params['text'];
 			//check if the user has the plugin activated
 			if ($user->usesPlugin($this->name)) {
-				echo '	<p>
-					<a href="/plugins/projects_hierarchy/index.php?id=' . $userid . '&type=user&pluginname=' . $this->name . '">' . _('View Personal projects_hierarchy') .'</a></p>';
+				echo '	<p>' ;
+				echo util_make_link ("/plugins/projects_hierarchy/index.php?id=$userid&type=user&pluginname=".$this->name,
+						     _('View Personal projects_hierarchy')
+					);
+				echo '</p>';
 			}
 		} elseif ($hookname == "project_admin_plugins") {
 			// this displays the link in the project admin options page to it's  projects_hierarchy administration
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
-				echo '<a href="/plugins/projects_hierarchy/index.php?id=' . $group->getID() . '&type=admin&pluginname=' . $this->name . '">' . _('View the projects_hierarchy Administration') . '</a><br />';
+				echo util_make_link ("/plugins/projects_hierarchy/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
+						     _('View the projects_hierarchy Administration')
+					);
+				echo '<br />';
 			}
 		}												    
 		elseif ($hookname == "tree") {
