@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-13 16:17+0100\n"
-"PO-Revision-Date: 2009-01-13 16:19+0100\n"
+"POT-Creation-Date: 2009-01-13 17:21+0100\n"
+"PO-Revision-Date: 2009-01-13 17:22+0100\n"
 "Last-Translator: Aljeux <aljeux@free.fr>\n"
 "Language-Team: LANGUAGE <aljeux@free.fr>\n"
 "MIME-Version: 1.0\n"
@@ -2022,12 +2022,12 @@ msgstr "Voulez-vous réellement supprimer ce lien ?"
 #: www/forum/admin/index.php:185 www/forum/admin/index.php:195
 #: www/frs/admin/deletepackage.php:73 www/frs/admin/deleterelease.php:83
 #: www/frs/admin/index.php:173 www/frs/admin/showreleases.php:117
-#: www/news/admin/index.php:133 www/people/people_utils.php:185
-#: www/people/people_utils.php:335 www/people/skills_utils.php:36
-#: www/people/skills_utils.php:94 www/pm/admin/index.php:390
-#: www/pm/admin/index.php:401 www/project/admin/vhost.php:144
-#: www/reporting/timeadd.php:172 www/snippet/detail.php:58
-#: www/survey/include/SurveyHTML.class.php:306
+#: www/my/index.php:331 www/news/admin/index.php:133
+#: www/people/people_utils.php:185 www/people/people_utils.php:335
+#: www/people/skills_utils.php:36 www/people/skills_utils.php:94
+#: www/pm/admin/index.php:390 www/pm/admin/index.php:401
+#: www/project/admin/vhost.php:144 www/reporting/timeadd.php:172
+#: www/snippet/detail.php:58 www/survey/include/SurveyHTML.class.php:306
 #: www/tracker/admin/form-addextrafield.php:36
 #: www/tracker/admin/form-deleteextrafield.php:17
 #: www/tracker/admin/form-deletetracker.php:14
@@ -3112,7 +3112,7 @@ msgstr "Cet utilisateur n'existe pas"
 #: www/account/lostpw.php:59
 #, php-format
 msgid ""
-"Someone (presumably you) on the %3$s site requested a\n"
+"Someone (presumably you) on the %1$s site requested a\n"
 "password change through email verification. If this was not you,\n"
 "ignore this message and nothing will happen.\n"
 "\n"
@@ -3121,9 +3121,9 @@ msgid ""
 "\n"
 "<%2$s>\n"
 "\n"
-" -- the %3$s staff\n"
+" -- the %1$s staff\n"
 msgstr ""
-"Quelqu'un (probablement vous) sur le site %3$s, a demandé un\n"
+"Quelqu'un (probablement vous) sur le site %1$s, a demandé un\n"
 "changement de mot de passe par l'intermédiaire d'une vérification\n"
 "e-mail. Si ce n'est pas vous ignorez ce message et rien ne se passera.\n"
 "\n"
@@ -3132,7 +3132,7 @@ msgstr ""
 "\n"
 "<%2$s>\n"
 "\n"
-" -- L'équipe de %3$s\n"
+" -- L'équipe de %1$s\n"
 
 #: www/account/lostpw.php:75
 #, php-format
@@ -3440,7 +3440,7 @@ msgstr "Ajouter"
 
 #: www/admin/admin_table.php:60 www/admin/admin_table.php:141
 #: www/admin/admin_table.php:199 www/forum/include/ForumHTML.class.php:515
-#: www/my/rmproject.php:90 www/people/editprofile.php:150
+#: www/my/rmproject.php:92 www/people/editprofile.php:150
 #: www/people/editprofile.php:220 www/pm/mod_task.php:229
 #: www/register/projectinfo.php:201 www/reporting/timeadd.php:188
 msgid "Cancel"
@@ -7466,7 +7466,7 @@ msgid "Monitored Items"
 msgstr "Éléments surveillés"
 
 #: www/my/index.php:199 www/my/index.php:230 www/my/index.php:296
-#: www/my/rmproject.php:84 www/project/admin/index.php:264
+#: www/my/rmproject.php:86 www/project/admin/index.php:264
 #: www/project/admin/index.php:276
 msgid "Remove"
 msgstr "Enlever"
@@ -7517,25 +7517,20 @@ msgid "Operation Not Permitted"
 msgstr "Operation non permise"
 
 #: www/my/rmproject.php:66
+#, php-format
 msgid ""
 "You cannot remove yourself from this project, because you are admin of it. "
 "You should ask other admin to reset your admin privilege first. If you are "
 "the only admin of the project, please consider posting availability notice "
-"to <a href=\"/people/\">Help Wanted Board</a> and be ready to pass admin "
-"privilege to interested party."
-msgstr ""
-"Vous ne pouvez pas vous supprimer vous-même de ce projet, parce que vous en "
-"êtes un administrateur.  Vous devez d'abord demander à un autre "
-"administrateur de supprimer vos privilèves d'administrateur.  Si vous êtes "
-"le seul administrateur de ce projet, vous pouvez annoncer la disponibilité "
-"du poste sur le <a href=\"/people/\">tableau d'affichage</a>, de manière à "
-"pouvoir passer les privilèges d'administrateur aux personnes intéressées."
+"to <a href=\"%s\">Help Wanted Board</a> and be ready to pass admin privilege "
+"to interested party."
+msgstr "Vous ne pouvez pas vous supprimer vous-même de ce projet, parce que vous en êtes un administrateur.  Vous devez d'abord demander à un autre administrateur de supprimer vos privilèves d'administrateur.  Si vous êtes le seul administrateur de ce projet, vous pouvez annoncer la disponibilité du poste sur le <a href=\"%s\">tableau d'affichage</a>, de manière à pouvoir passer les privilèges d'administrateur aux personnes intéressées."
 
-#: www/my/rmproject.php:70 www/my/rmproject.php:73
+#: www/my/rmproject.php:72 www/my/rmproject.php:75
 msgid "Quitting Project"
 msgstr "Quitter le projet"
 
-#: www/my/rmproject.php:75
+#: www/my/rmproject.php:77
 msgid ""
 "You are about to remove yourself from the project. Please confirm your "
 "action:"

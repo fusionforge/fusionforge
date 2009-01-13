@@ -63,7 +63,9 @@ $perm =& $group->getPermission(session_get_user());
 if ( $perm->isAdmin() ) {
 	exit_error(
 		_('Operation Not Permitted'),
-		_('You cannot remove yourself from this project, because you are admin of it. You should ask other admin to reset your admin privilege first. If you are the only admin of the project, please consider posting availability notice to <a href="/people/">Help Wanted Board</a> and be ready to pass admin privilege to interested party.')
+		sprintf (_('You cannot remove yourself from this project, because you are admin of it. You should ask other admin to reset your admin privilege first. If you are the only admin of the project, please consider posting availability notice to <a href="%s">Help Wanted Board</a> and be ready to pass admin privilege to interested party.'),
+			 util_make_url ("/people/")
+			); 
 	);
 }
 

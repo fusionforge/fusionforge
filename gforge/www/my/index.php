@@ -326,9 +326,11 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 				$img="trash.png";
 			}
 			echo '
-			<tr '. $HTML->boxGetAltRowStyle($i) .'><td style="text-align:center">
-			<a href="rmproject.php?group_id='. db_result($result,$i,'group_id') .'">
-			<img src="'.$HTML->imgroot.'ic/'.$img.'" alt="Delete" height="16" width="16" border="0" /></a></td>
+			<tr '. $HTML->boxGetAltRowStyle($i) .'><td style="text-align:center">' ;
+			echo util_make_link ("/my/rmproject.php?group_id=" . db_result($result,$i,'group_id'),
+					     '<img src="'.$HTML->imgroot.'ic/'.$img.'" alt="'._('Delete').'" height="16" width="16" border="0" />') ;
+
+			echo '</td>
 			<td>'.util_make_link_g (db_result($result,$i,'unix_group_name'),db_result($result,$i,'group_id'),htmlspecialchars(db_result($result,$i,'group_name'))).'</td>
 			<td>'. htmlspecialchars(db_result($result,$i,'role_name')) .'</td></tr>';
 		}

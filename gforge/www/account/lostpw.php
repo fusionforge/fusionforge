@@ -56,7 +56,7 @@ if (getStringFromRequest('submit')) {
 		exit_error('Error',$u->getErrorMessage());
 	} else {
 
-		$message = stripcslashes(sprintf(_('Someone (presumably you) on the %3$s site requested a
+		$message = stripcslashes(sprintf(_('Someone (presumably you) on the %1$s site requested a
 password change through email verification. If this was not you,
 ignore this message and nothing will happen.
 
@@ -65,8 +65,8 @@ to change your password:
 
 <%2$s>
 
- -- the %3$s staff
-'), getStringFromServer('HTTP_HOST'), util_make_url ("/account/lostlogin.php?ch=_".$confirm_hash), $GLOBALS['sys_name']));
+ -- the %1$s staff
+'), util_make_url ($GLOBALS['sys_name'], "/account/lostlogin.php?ch=_".$confirm_hash)));
 
 		util_send_message($u->getEmail(),sprintf(_('%1$s Verification'), $GLOBALS['sys_name']),$message);
 
