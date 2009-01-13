@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-07 14:18-0700\n"
+"POT-Creation-Date: 2009-01-13 16:17+0100\n"
 "PO-Revision-Date: 2007-03-13 19:44+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1130,7 +1130,9 @@ msgstr "Compte no actiu"
 #: www/account/lostlogin.php:77 www/account/lostlogin.php:93
 #: www/pm/calendar.php:85 www/pm/calendar.php:89 www/pm/calendar.php:91
 #: www/pm/calendar.php:96 www/pm/calendar.php:98 www/pm/calendar.php:109
-#: www/survey/rating_resp.php:55
+#: www/survey/rating_resp.php:55 www/trove/TroveCategory.class.php:77
+#: www/trove/TroveCategory.class.php:105 www/trove/TroveCategory.class.php:117
+#: www/trove/admin/trove_cat_edit.php:44
 msgid "ERROR"
 msgstr "ERROR"
 
@@ -2030,7 +2032,7 @@ msgstr ""
 #: www/people/skills_utils.php:94 www/pm/admin/index.php:390
 #: www/pm/admin/index.php:401 www/project/admin/vhost.php:144
 #: www/reporting/timeadd.php:172 www/snippet/detail.php:58
-#: www/survey/include/SurveyHTML.class.php:308
+#: www/survey/include/SurveyHTML.class.php:306
 #: www/tracker/admin/form-addextrafield.php:36
 #: www/tracker/admin/form-deleteextrafield.php:17
 #: www/tracker/admin/form-deletetracker.php:14
@@ -2072,7 +2074,7 @@ msgid "Navigation"
 msgstr ""
 
 #: plugins/projects_hierarchy/www/softwaremap.php:44
-#: www/softwaremap/trove_list.php:42
+#: www/softwaremap/trove_list.php:42 www/trove/TroveCategory.class.php:69
 msgid "Invalid Trove Category"
 msgstr "Categoria no vàlida"
 
@@ -3119,7 +3121,7 @@ msgstr ""
 #: www/pm/deletetask.php:37 www/pm/mod_task.php:38 www/pm/mod_task.php:196
 #: www/project/admin/editimages.php:233 www/project/admin/roleedit.php:261
 #: www/project/request.php:69 www/register/projectinfo.php:201
-#: www/survey/include/SurveyHTML.class.php:539 www/tracker/add.php:28
+#: www/survey/include/SurveyHTML.class.php:537 www/tracker/add.php:28
 #: www/tracker/add.php:57 www/tracker/add.php:119
 #: www/tracker/admin/form-addcanned.php:52
 #: www/tracker/admin/form-addextrafield.php:114
@@ -3351,7 +3353,8 @@ msgstr "Crea un nou %1$s a sota:"
 #: www/admin/trove/trove_cat_add.php:118 www/admin/trove/trove_cat_list.php:43
 #: www/admin/trove/trove_cat_list.php:46 www/docman/admin/index.php:381
 #: www/pm/mod_task.php:229 www/reporting/timeadd.php:188
-#: www/reporting/timecategory.php:100
+#: www/reporting/timecategory.php:100 www/trove/admin/trove_cat_add.php:93
+#: www/trove/admin/trove_cat_list.php:35
 msgid "Add"
 msgstr "Afegeix"
 
@@ -3424,12 +3427,13 @@ msgstr "afegeix nou"
 #: www/docman/admin/index.php:433 www/frs/admin/showreleases.php:114
 #: www/people/skills_utils.php:35 www/people/skills_utils.php:93
 #: www/project/admin/editimages.php:259 www/project/admin/editimages.php:290
-#: www/project/admin/index.php:201 www/survey/include/SurveyHTML.class.php:306
-#: www/survey/include/SurveyHTML.class.php:354
-#: www/survey/include/SurveyHTML.class.php:414
+#: www/project/admin/index.php:201 www/survey/include/SurveyHTML.class.php:304
+#: www/survey/include/SurveyHTML.class.php:352
+#: www/survey/include/SurveyHTML.class.php:412
 #: www/tracker/admin/form-addextrafield.php:33
 #: www/tracker/admin/form-addextrafield.php:56
 #: www/tracker/admin/form-addextrafieldoption.php:32
+#: www/trove/admin/trove_cat_list.php:38
 msgid "Edit"
 msgstr "Edita"
 
@@ -4289,11 +4293,11 @@ msgstr "Registrat"
 msgid "Error In Trove Operation"
 msgstr "Error en l'operació"
 
-#: www/admin/trove/trove_cat_add.php:76
+#: www/admin/trove/trove_cat_add.php:76 www/trove/admin/trove_cat_add.php:53
 msgid "Site Admin: Trove - Add Node"
 msgstr "Administració del lloc: Arbre de projectes - Afegeix node"
 
-#: www/admin/trove/trove_cat_add.php:79
+#: www/admin/trove/trove_cat_add.php:79 www/trove/admin/trove_cat_add.php:56
 msgid "Add New Trove Category"
 msgstr "Afegeix una nova categoria a l'arbre de projectes"
 
@@ -4337,6 +4341,7 @@ msgid "No Such Category, That trove cat does not exist"
 msgstr "No hi ha tal categoria. Aquesta categoria no existeix"
 
 #: www/admin/trove/trove_cat_edit.php:127
+#: www/trove/admin/trove_cat_edit.php:83
 msgid "Site Admin: Trove - Edit Category"
 msgstr "Site Admin: Arbre de projectes - Edita la categoria"
 
@@ -4348,11 +4353,12 @@ msgstr "Edita categoria"
 msgid "Parent Category:"
 msgstr "Categoria pare:"
 
-#: www/admin/trove/trove_cat_list.php:64
+#: www/admin/trove/trove_cat_list.php:64 www/trove/admin/trove_cat_edit.php:77
+#: www/trove/admin/trove_cat_list.php:56
 msgid "Site Admin: Trove - Category List"
 msgstr "Administració del lloc: Arbre de projectes - Llistat de categories"
 
-#: www/admin/trove/trove_cat_list.php:68
+#: www/admin/trove/trove_cat_list.php:68 www/trove/admin/trove_cat_list.php:60
 msgid "Browse Trove Tree"
 msgstr "navega l'arbre de projectes"
 
@@ -5539,7 +5545,7 @@ msgstr "Rebeu respostes per correu electrònic"
 
 #: www/forum/include/ForumHTML.class.php:601
 #, fuzzy, php-format
-msgid "You could post if you were <a href=\"%1$s\">logged in</a>"
+msgid "You could post if you were <a href=\"%1$s\">logged in</a>."
 msgstr "Podrieu enviar missatges si fossiu %1$s iniciant sessió a %2$s"
 
 #: www/forum/include/ForumHTML.class.php:604
@@ -7028,17 +7034,17 @@ msgid ""
 msgstr ""
 
 #: www/include/vote_function.php:196
-#: www/survey/include/SurveyHTML.class.php:496
+#: www/survey/include/SurveyHTML.class.php:494
 msgid "Low"
 msgstr "Baix"
 
 #: www/include/vote_function.php:196
-#: www/survey/include/SurveyHTML.class.php:498
+#: www/survey/include/SurveyHTML.class.php:496
 msgid "High"
 msgstr "Alt"
 
 #: www/include/vote_function.php:269
-#: www/survey/include/SurveyHTML.class.php:540 www/survey/privacy.php:38
+#: www/survey/include/SurveyHTML.class.php:538 www/survey/privacy.php:38
 msgid "Survey Privacy"
 msgstr "Privadesa de l'enquesta"
 
@@ -7562,7 +7568,7 @@ msgstr "Titulars anteriors"
 msgid "No News Items Found"
 msgstr "No s'han trobat elements de notícies"
 
-#: www/news/news_utils.php:164 www/survey/include/SurveyHTML.class.php:640
+#: www/news/news_utils.php:164 www/survey/include/SurveyHTML.class.php:638
 msgid "Comments"
 msgstr "Comentaris"
 
@@ -10883,7 +10889,7 @@ msgid "Show Existing Questions"
 msgstr "Mostra les preguntes existents"
 
 #: www/survey/admin/add_survey.php:105 www/survey/admin/edit_survey.php:145
-#: www/survey/include/SurveyHTML.class.php:332
+#: www/survey/include/SurveyHTML.class.php:330
 #, fuzzy
 msgid "Existing Survey"
 msgid_plural "Existing Surveys"
@@ -10959,7 +10965,7 @@ msgstr "Nom de l'enquesta"
 
 #: www/survey/admin/edit_survey.php:115
 #: www/survey/include/SurveyHTML.class.php:198
-#: www/survey/include/SurveyHTML.class.php:342
+#: www/survey/include/SurveyHTML.class.php:340
 msgid "Questions"
 msgstr "Preguntes"
 
@@ -11109,66 +11115,70 @@ msgstr "Pregunes que es poden afegir"
 msgid "Questions in this Survey"
 msgstr "Preguntes en aquesta enquesta"
 
-#: www/survey/include/SurveyHTML.class.php:256
+#: www/survey/include/SurveyHTML.class.php:253
+msgid "Up"
+msgstr ""
+
+#: www/survey/include/SurveyHTML.class.php:254
 #, fuzzy
 msgid "Down"
 msgstr "Fet"
 
-#: www/survey/include/SurveyHTML.class.php:285
+#: www/survey/include/SurveyHTML.class.php:283
 #, fuzzy, php-format
 msgid "%d question found"
 msgid_plural "%d questions found"
 msgstr[0] "S'han trobat %1$s preguntes"
 msgstr[1] "S'han trobat %1$s preguntes"
 
-#: www/survey/include/SurveyHTML.class.php:336
+#: www/survey/include/SurveyHTML.class.php:334
 msgid "Survey ID"
 msgstr "ID d'enquesta"
 
-#: www/survey/include/SurveyHTML.class.php:339
+#: www/survey/include/SurveyHTML.class.php:337
 msgid "Survey Title"
 msgstr "Títol de l'enquesta"
 
-#: www/survey/include/SurveyHTML.class.php:345
+#: www/survey/include/SurveyHTML.class.php:343
 msgid "Number of Questions"
 msgstr "Nombre de preguntes"
 
-#: www/survey/include/SurveyHTML.class.php:348
+#: www/survey/include/SurveyHTML.class.php:346
 msgid "Number of Votes"
 msgstr "Nombre de vots"
 
-#: www/survey/include/SurveyHTML.class.php:351
+#: www/survey/include/SurveyHTML.class.php:349
 msgid "Vote"
 msgstr "Voteu"
 
-#: www/survey/include/SurveyHTML.class.php:357
-#: www/survey/include/SurveyHTML.class.php:424
+#: www/survey/include/SurveyHTML.class.php:355
+#: www/survey/include/SurveyHTML.class.php:422
 msgid "Result"
 msgstr "Resultat"
 
-#: www/survey/include/SurveyHTML.class.php:360
-#: www/survey/include/SurveyHTML.class.php:428
+#: www/survey/include/SurveyHTML.class.php:358
+#: www/survey/include/SurveyHTML.class.php:426
 msgid "Result with Graph"
 msgstr "Resultat amb gràfic"
 
-#: www/survey/include/SurveyHTML.class.php:363
-#: www/survey/include/SurveyHTML.class.php:432
+#: www/survey/include/SurveyHTML.class.php:361
+#: www/survey/include/SurveyHTML.class.php:430
 msgid "Result with Graph and Comments"
 msgstr "Resultat amb gràfic i comentaris"
 
-#: www/survey/include/SurveyHTML.class.php:449
+#: www/survey/include/SurveyHTML.class.php:447
 msgid "Error - you can't vote for inactive survey"
 msgstr ""
 
-#: www/survey/include/SurveyHTML.class.php:456
+#: www/survey/include/SurveyHTML.class.php:454
 msgid "Warning - you are about to vote a second time on this survey."
 msgstr "Compte - esteu a punt de votar per segon cop en aquesta enquesta."
 
-#: www/survey/include/SurveyHTML.class.php:574
+#: www/survey/include/SurveyHTML.class.php:572
 msgid "No Votes"
 msgstr "No hi ha vots"
 
-#: www/survey/include/SurveyHTML.class.php:672
+#: www/survey/include/SurveyHTML.class.php:670
 #, fuzzy, php-format
 msgid "View All %1$s Comment"
 msgid_plural "View All %1$s Comments"
@@ -12165,6 +12175,62 @@ msgstr ""
 msgid "Artifact Deleted Successfully"
 msgstr ""
 
+#: www/trove/TroveCategory.class.php:70 www/trove/TroveCategory.class.php:77
+#, fuzzy
+msgid "That Trove category does not exist."
+msgstr "Aquesta categoria no existeix"
+
+#: www/trove/TroveCategory.class.php:105
+msgid "Empty strings"
+msgstr ""
+
+#: www/trove/TroveCategory.class.php:117
+#, fuzzy
+msgid "Cannot update"
+msgstr "Actualització en massa"
+
+#: www/trove/admin/trove_cat_add.php:41
+#, fuzzy
+msgid "Error in Trove operation"
+msgstr "Error en l'operació"
+
+#: www/trove/admin/trove_cat_add.php:59 www/trove/admin/trove_cat_edit.php:140
+#, fuzzy
+msgid "Parent Category: "
+msgstr "Categoria pare:"
+
+#: www/trove/admin/trove_cat_add.php:87 www/trove/admin/trove_cat_edit.php:88
+#, fuzzy
+msgid "New category short name (no spaces, Unix-like): "
+msgstr "Nou nom abreujat de categoria (sense espais, estil unix)"
+
+#: www/trove/admin/trove_cat_add.php:89 www/trove/admin/trove_cat_edit.php:91
+#, fuzzy
+msgid "New category full name (80 characters max): "
+msgstr "Nou nom complet de categoria (VARCHAR 80)"
+
+#: www/trove/admin/trove_cat_add.php:91 www/trove/admin/trove_cat_edit.php:94
+#, fuzzy
+msgid "New category description (255 characters max): "
+msgstr "Nova descripció de categoria (VARCHAR 255)"
+
+#: www/trove/admin/trove_cat_edit.php:97
+#, fuzzy
+msgid "update"
+msgstr "Actualitza"
+
+#: www/trove/admin/trove_cat_edit.php:97
+#, fuzzy
+msgid "delete"
+msgstr "Suprimeix"
+
+#: www/trove/include/trove.php:242
+#, fuzzy, php-format
+msgid ""
+"This project has not yet categorized itself in the <a href=\"%s\">Trove "
+"Software Map</a>."
+msgstr "Aquest projecte encara no ha estat categoritzat al"
+
 #: www/trove/index.php:36
 #, fuzzy
 msgid "Trove Map"
@@ -12179,6 +12245,21 @@ msgstr "Visites del lloc"
 #, fuzzy
 msgid "Remove Filter"
 msgstr "Suprimeix aquest filtre"
+
+#: www/trove/index.php:161
+#, fuzzy, php-format
+msgid "<strong>%d</strong> project in result set."
+msgid_plural "<strong>%d</strong> projects in result set."
+msgstr[0] "<strong>%1$s</strong> projectes al conjunt de resultats."
+msgstr[1] "<strong>%1$s</strong> projectes al conjunt de resultats."
+
+#: www/trove/index.php:168
+#, php-format
+msgid "Displaying %d project per page. Projects sorted by activity ranking."
+msgid_plural ""
+"Displaying %d projects per page. Projects sorted by activity ranking."
+msgstr[0] ""
+msgstr[1] ""
 
 #: www/users:35
 #, fuzzy

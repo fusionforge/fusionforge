@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-07 14:18-0700\n"
+"POT-Creation-Date: 2009-01-13 16:17+0100\n"
 "PO-Revision-Date: 2007-03-02 16:02 +0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1104,7 +1104,9 @@ msgstr "帐号未启用"
 #: www/account/lostlogin.php:77 www/account/lostlogin.php:93
 #: www/pm/calendar.php:85 www/pm/calendar.php:89 www/pm/calendar.php:91
 #: www/pm/calendar.php:96 www/pm/calendar.php:98 www/pm/calendar.php:109
-#: www/survey/rating_resp.php:55
+#: www/survey/rating_resp.php:55 www/trove/TroveCategory.class.php:77
+#: www/trove/TroveCategory.class.php:105 www/trove/TroveCategory.class.php:117
+#: www/trove/admin/trove_cat_edit.php:44
 msgid "ERROR"
 msgstr "错误"
 
@@ -1995,7 +1997,7 @@ msgstr ""
 #: www/people/skills_utils.php:94 www/pm/admin/index.php:390
 #: www/pm/admin/index.php:401 www/project/admin/vhost.php:144
 #: www/reporting/timeadd.php:172 www/snippet/detail.php:58
-#: www/survey/include/SurveyHTML.class.php:308
+#: www/survey/include/SurveyHTML.class.php:306
 #: www/tracker/admin/form-addextrafield.php:36
 #: www/tracker/admin/form-deleteextrafield.php:17
 #: www/tracker/admin/form-deletetracker.php:14
@@ -2037,7 +2039,7 @@ msgid "Navigation"
 msgstr ""
 
 #: plugins/projects_hierarchy/www/softwaremap.php:44
-#: www/softwaremap/trove_list.php:42
+#: www/softwaremap/trove_list.php:42 www/trove/TroveCategory.class.php:69
 msgid "Invalid Trove Category"
 msgstr "错误的软件类别"
 
@@ -3067,7 +3069,7 @@ msgstr "填入用户帐号后点击'提交'就可以再次提交确认邮件"
 #: www/pm/deletetask.php:37 www/pm/mod_task.php:38 www/pm/mod_task.php:196
 #: www/project/admin/editimages.php:233 www/project/admin/roleedit.php:261
 #: www/project/request.php:69 www/register/projectinfo.php:201
-#: www/survey/include/SurveyHTML.class.php:539 www/tracker/add.php:28
+#: www/survey/include/SurveyHTML.class.php:537 www/tracker/add.php:28
 #: www/tracker/add.php:57 www/tracker/add.php:119
 #: www/tracker/admin/form-addcanned.php:52
 #: www/tracker/admin/form-addextrafield.php:114
@@ -3295,7 +3297,8 @@ msgstr "创造一个新的 %1$s 如下："
 #: www/admin/trove/trove_cat_add.php:118 www/admin/trove/trove_cat_list.php:43
 #: www/admin/trove/trove_cat_list.php:46 www/docman/admin/index.php:381
 #: www/pm/mod_task.php:229 www/reporting/timeadd.php:188
-#: www/reporting/timecategory.php:100
+#: www/reporting/timecategory.php:100 www/trove/admin/trove_cat_add.php:93
+#: www/trove/admin/trove_cat_list.php:35
 msgid "Add"
 msgstr "添加"
 
@@ -3362,12 +3365,13 @@ msgstr "add new"
 #: www/docman/admin/index.php:433 www/frs/admin/showreleases.php:114
 #: www/people/skills_utils.php:35 www/people/skills_utils.php:93
 #: www/project/admin/editimages.php:259 www/project/admin/editimages.php:290
-#: www/project/admin/index.php:201 www/survey/include/SurveyHTML.class.php:306
-#: www/survey/include/SurveyHTML.class.php:354
-#: www/survey/include/SurveyHTML.class.php:414
+#: www/project/admin/index.php:201 www/survey/include/SurveyHTML.class.php:304
+#: www/survey/include/SurveyHTML.class.php:352
+#: www/survey/include/SurveyHTML.class.php:412
 #: www/tracker/admin/form-addextrafield.php:33
 #: www/tracker/admin/form-addextrafield.php:56
 #: www/tracker/admin/form-addextrafieldoption.php:32
+#: www/trove/admin/trove_cat_list.php:38
 msgid "Edit"
 msgstr "编辑"
 
@@ -4233,11 +4237,11 @@ msgstr "注册"
 msgid "Error In Trove Operation"
 msgstr "在软件执行时发生错误"
 
-#: www/admin/trove/trove_cat_add.php:76
+#: www/admin/trove/trove_cat_add.php:76 www/trove/admin/trove_cat_add.php:53
 msgid "Site Admin: Trove - Add Node"
 msgstr "网站管理：软件 - 添加节点"
 
-#: www/admin/trove/trove_cat_add.php:79
+#: www/admin/trove/trove_cat_add.php:79 www/trove/admin/trove_cat_add.php:56
 msgid "Add New Trove Category"
 msgstr "添加软件类别"
 
@@ -4279,6 +4283,7 @@ msgid "No Such Category, That trove cat does not exist"
 msgstr "没有这个类别，那个软件类别不存在"
 
 #: www/admin/trove/trove_cat_edit.php:127
+#: www/trove/admin/trove_cat_edit.php:83
 msgid "Site Admin: Trove - Edit Category"
 msgstr "网站管理：软件 - 编辑类别"
 
@@ -4290,11 +4295,12 @@ msgstr "编辑软件类别"
 msgid "Parent Category:"
 msgstr "上层类别："
 
-#: www/admin/trove/trove_cat_list.php:64
+#: www/admin/trove/trove_cat_list.php:64 www/trove/admin/trove_cat_edit.php:77
+#: www/trove/admin/trove_cat_list.php:56
 msgid "Site Admin: Trove - Category List"
 msgstr "网站管理：软件 - 类别清单"
 
-#: www/admin/trove/trove_cat_list.php:68
+#: www/admin/trove/trove_cat_list.php:68 www/trove/admin/trove_cat_list.php:60
 msgid "Browse Trove Tree"
 msgstr "浏览软件地图"
 
@@ -5465,7 +5471,7 @@ msgstr "通过 Email 接收所有的回覆"
 
 #: www/forum/include/ForumHTML.class.php:601
 #, fuzzy, php-format
-msgid "You could post if you were <a href=\"%1$s\">logged in</a>"
+msgid "You could post if you were <a href=\"%1$s\">logged in</a>."
 msgstr "您只有 %1$s 登录 %2$s 之后才能发表"
 
 #: www/forum/include/ForumHTML.class.php:604
@@ -6922,17 +6928,17 @@ msgid ""
 msgstr ""
 
 #: www/include/vote_function.php:196
-#: www/survey/include/SurveyHTML.class.php:496
+#: www/survey/include/SurveyHTML.class.php:494
 msgid "Low"
 msgstr "低"
 
 #: www/include/vote_function.php:196
-#: www/survey/include/SurveyHTML.class.php:498
+#: www/survey/include/SurveyHTML.class.php:496
 msgid "High"
 msgstr "高"
 
 #: www/include/vote_function.php:269
-#: www/survey/include/SurveyHTML.class.php:540 www/survey/privacy.php:38
+#: www/survey/include/SurveyHTML.class.php:538 www/survey/privacy.php:38
 msgid "Survey Privacy"
 msgstr "问卷隐私声明"
 
@@ -7445,7 +7451,7 @@ msgstr "旧标题"
 msgid "No News Items Found"
 msgstr "没有发现新闻"
 
-#: www/news/news_utils.php:164 www/survey/include/SurveyHTML.class.php:640
+#: www/news/news_utils.php:164 www/survey/include/SurveyHTML.class.php:638
 msgid "Comments"
 msgstr "评论"
 
@@ -10703,7 +10709,7 @@ msgid "Show Existing Questions"
 msgstr "显示已经存在的问题"
 
 #: www/survey/admin/add_survey.php:105 www/survey/admin/edit_survey.php:145
-#: www/survey/include/SurveyHTML.class.php:332
+#: www/survey/include/SurveyHTML.class.php:330
 #, fuzzy
 msgid "Existing Survey"
 msgid_plural "Existing Surveys"
@@ -10771,7 +10777,7 @@ msgstr "问卷名称"
 
 #: www/survey/admin/edit_survey.php:115
 #: www/survey/include/SurveyHTML.class.php:198
-#: www/survey/include/SurveyHTML.class.php:342
+#: www/survey/include/SurveyHTML.class.php:340
 msgid "Questions"
 msgstr "问题"
 
@@ -10919,66 +10925,70 @@ msgstr "可添加问题"
 msgid "Questions in this Survey"
 msgstr "这个问卷中的问题"
 
-#: www/survey/include/SurveyHTML.class.php:256
+#: www/survey/include/SurveyHTML.class.php:253
+msgid "Up"
+msgstr ""
+
+#: www/survey/include/SurveyHTML.class.php:254
 #, fuzzy
 msgid "Down"
 msgstr "完成"
 
-#: www/survey/include/SurveyHTML.class.php:285
+#: www/survey/include/SurveyHTML.class.php:283
 #, fuzzy, php-format
 msgid "%d question found"
 msgid_plural "%d questions found"
 msgstr[0] "找到 %1$s 个问题"
 msgstr[1] "找到 %1$s 个问题"
 
-#: www/survey/include/SurveyHTML.class.php:336
+#: www/survey/include/SurveyHTML.class.php:334
 msgid "Survey ID"
 msgstr "问卷编号"
 
-#: www/survey/include/SurveyHTML.class.php:339
+#: www/survey/include/SurveyHTML.class.php:337
 msgid "Survey Title"
 msgstr "问卷标题"
 
-#: www/survey/include/SurveyHTML.class.php:345
+#: www/survey/include/SurveyHTML.class.php:343
 msgid "Number of Questions"
 msgstr "问题数"
 
-#: www/survey/include/SurveyHTML.class.php:348
+#: www/survey/include/SurveyHTML.class.php:346
 msgid "Number of Votes"
 msgstr "评分数"
 
-#: www/survey/include/SurveyHTML.class.php:351
+#: www/survey/include/SurveyHTML.class.php:349
 msgid "Vote"
 msgstr "评分"
 
-#: www/survey/include/SurveyHTML.class.php:357
-#: www/survey/include/SurveyHTML.class.php:424
+#: www/survey/include/SurveyHTML.class.php:355
+#: www/survey/include/SurveyHTML.class.php:422
 msgid "Result"
 msgstr "结果"
 
-#: www/survey/include/SurveyHTML.class.php:360
-#: www/survey/include/SurveyHTML.class.php:428
+#: www/survey/include/SurveyHTML.class.php:358
+#: www/survey/include/SurveyHTML.class.php:426
 msgid "Result with Graph"
 msgstr "统计图"
 
-#: www/survey/include/SurveyHTML.class.php:363
-#: www/survey/include/SurveyHTML.class.php:432
+#: www/survey/include/SurveyHTML.class.php:361
+#: www/survey/include/SurveyHTML.class.php:430
 msgid "Result with Graph and Comments"
 msgstr "图形与评论的结果"
 
-#: www/survey/include/SurveyHTML.class.php:449
+#: www/survey/include/SurveyHTML.class.php:447
 msgid "Error - you can't vote for inactive survey"
 msgstr ""
 
-#: www/survey/include/SurveyHTML.class.php:456
+#: www/survey/include/SurveyHTML.class.php:454
 msgid "Warning - you are about to vote a second time on this survey."
 msgstr "警告 - 您在本问卷大概投了两次票。"
 
-#: www/survey/include/SurveyHTML.class.php:574
+#: www/survey/include/SurveyHTML.class.php:572
 msgid "No Votes"
 msgstr "没有评分"
 
-#: www/survey/include/SurveyHTML.class.php:672
+#: www/survey/include/SurveyHTML.class.php:670
 #, fuzzy, php-format
 msgid "View All %1$s Comment"
 msgid_plural "View All %1$s Comments"
@@ -11946,6 +11956,62 @@ msgstr "定制类型删除失败"
 msgid "Artifact Deleted Successfully"
 msgstr "定制类型成功删除"
 
+#: www/trove/TroveCategory.class.php:70 www/trove/TroveCategory.class.php:77
+#, fuzzy
+msgid "That Trove category does not exist."
+msgstr "软件类别不存在"
+
+#: www/trove/TroveCategory.class.php:105
+msgid "Empty strings"
+msgstr ""
+
+#: www/trove/TroveCategory.class.php:117
+#, fuzzy
+msgid "Cannot update"
+msgstr "大量更新"
+
+#: www/trove/admin/trove_cat_add.php:41
+#, fuzzy
+msgid "Error in Trove operation"
+msgstr "在软件执行时发生错误"
+
+#: www/trove/admin/trove_cat_add.php:59 www/trove/admin/trove_cat_edit.php:140
+#, fuzzy
+msgid "Parent Category: "
+msgstr "上层类别："
+
+#: www/trove/admin/trove_cat_add.php:87 www/trove/admin/trove_cat_edit.php:88
+#, fuzzy
+msgid "New category short name (no spaces, Unix-like): "
+msgstr "新类别缩写 (没有空白，像是Unix)"
+
+#: www/trove/admin/trove_cat_add.php:89 www/trove/admin/trove_cat_edit.php:91
+#, fuzzy
+msgid "New category full name (80 characters max): "
+msgstr "新类别完整名称 (80字节)"
+
+#: www/trove/admin/trove_cat_add.php:91 www/trove/admin/trove_cat_edit.php:94
+#, fuzzy
+msgid "New category description (255 characters max): "
+msgstr "新类别说明 (255字节)"
+
+#: www/trove/admin/trove_cat_edit.php:97
+#, fuzzy
+msgid "update"
+msgstr "更新"
+
+#: www/trove/admin/trove_cat_edit.php:97
+#, fuzzy
+msgid "delete"
+msgstr "删除"
+
+#: www/trove/include/trove.php:242
+#, fuzzy, php-format
+msgid ""
+"This project has not yet categorized itself in the <a href=\"%s\">Trove "
+"Software Map</a>."
+msgstr "这个项目还没自行归类于"
+
 #: www/trove/index.php:36
 #, fuzzy
 msgid "Trove Map"
@@ -11960,6 +12026,21 @@ msgstr "网站浏览次数"
 #, fuzzy
 msgid "Remove Filter"
 msgstr "移除这个规则"
+
+#: www/trove/index.php:161
+#, fuzzy, php-format
+msgid "<strong>%d</strong> project in result set."
+msgid_plural "<strong>%d</strong> projects in result set."
+msgstr[0] "找到 <strong>%1$s</strong> 个项目"
+msgstr[1] "找到 <strong>%1$s</strong> 个项目"
+
+#: www/trove/index.php:168
+#, php-format
+msgid "Displaying %d project per page. Projects sorted by activity ranking."
+msgid_plural ""
+"Displaying %d projects per page. Projects sorted by activity ranking."
+msgstr[0] ""
+msgstr[1] ""
 
 #: www/users:35
 #, fuzzy

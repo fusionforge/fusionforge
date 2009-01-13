@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-07 14:18-0700\n"
+"POT-Creation-Date: 2009-01-13 16:17+0100\n"
 "PO-Revision-Date: 2007-03-16 23:00+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1129,7 +1129,9 @@ msgstr "Conta Inativa"
 #: www/account/lostlogin.php:77 www/account/lostlogin.php:93
 #: www/pm/calendar.php:85 www/pm/calendar.php:89 www/pm/calendar.php:91
 #: www/pm/calendar.php:96 www/pm/calendar.php:98 www/pm/calendar.php:109
-#: www/survey/rating_resp.php:55
+#: www/survey/rating_resp.php:55 www/trove/TroveCategory.class.php:77
+#: www/trove/TroveCategory.class.php:105 www/trove/TroveCategory.class.php:117
+#: www/trove/admin/trove_cat_edit.php:44
 msgid "ERROR"
 msgstr "ERRO"
 
@@ -1992,7 +1994,7 @@ msgstr ""
 #: www/people/skills_utils.php:94 www/pm/admin/index.php:390
 #: www/pm/admin/index.php:401 www/project/admin/vhost.php:144
 #: www/reporting/timeadd.php:172 www/snippet/detail.php:58
-#: www/survey/include/SurveyHTML.class.php:308
+#: www/survey/include/SurveyHTML.class.php:306
 #: www/tracker/admin/form-addextrafield.php:36
 #: www/tracker/admin/form-deleteextrafield.php:17
 #: www/tracker/admin/form-deletetracker.php:14
@@ -2034,7 +2036,7 @@ msgid "Navigation"
 msgstr ""
 
 #: plugins/projects_hierarchy/www/softwaremap.php:44
-#: www/softwaremap/trove_list.php:42
+#: www/softwaremap/trove_list.php:42 www/trove/TroveCategory.class.php:69
 msgid "Invalid Trove Category"
 msgstr "Categoria de Repositório Inválida"
 
@@ -3069,7 +3071,7 @@ msgstr ""
 #: www/pm/deletetask.php:37 www/pm/mod_task.php:38 www/pm/mod_task.php:196
 #: www/project/admin/editimages.php:233 www/project/admin/roleedit.php:261
 #: www/project/request.php:69 www/register/projectinfo.php:201
-#: www/survey/include/SurveyHTML.class.php:539 www/tracker/add.php:28
+#: www/survey/include/SurveyHTML.class.php:537 www/tracker/add.php:28
 #: www/tracker/add.php:57 www/tracker/add.php:119
 #: www/tracker/admin/form-addcanned.php:52
 #: www/tracker/admin/form-addextrafield.php:114
@@ -3301,7 +3303,8 @@ msgstr ""
 #: www/admin/trove/trove_cat_add.php:118 www/admin/trove/trove_cat_list.php:43
 #: www/admin/trove/trove_cat_list.php:46 www/docman/admin/index.php:381
 #: www/pm/mod_task.php:229 www/reporting/timeadd.php:188
-#: www/reporting/timecategory.php:100
+#: www/reporting/timecategory.php:100 www/trove/admin/trove_cat_add.php:93
+#: www/trove/admin/trove_cat_list.php:35
 msgid "Add"
 msgstr ""
 
@@ -3368,12 +3371,13 @@ msgstr ""
 #: www/docman/admin/index.php:433 www/frs/admin/showreleases.php:114
 #: www/people/skills_utils.php:35 www/people/skills_utils.php:93
 #: www/project/admin/editimages.php:259 www/project/admin/editimages.php:290
-#: www/project/admin/index.php:201 www/survey/include/SurveyHTML.class.php:306
-#: www/survey/include/SurveyHTML.class.php:354
-#: www/survey/include/SurveyHTML.class.php:414
+#: www/project/admin/index.php:201 www/survey/include/SurveyHTML.class.php:304
+#: www/survey/include/SurveyHTML.class.php:352
+#: www/survey/include/SurveyHTML.class.php:412
 #: www/tracker/admin/form-addextrafield.php:33
 #: www/tracker/admin/form-addextrafield.php:56
 #: www/tracker/admin/form-addextrafieldoption.php:32
+#: www/trove/admin/trove_cat_list.php:38
 msgid "Edit"
 msgstr ""
 
@@ -4230,11 +4234,11 @@ msgstr "Registrado"
 msgid "Error In Trove Operation"
 msgstr "Erro na Operação do Repositório"
 
-#: www/admin/trove/trove_cat_add.php:76
+#: www/admin/trove/trove_cat_add.php:76 www/trove/admin/trove_cat_add.php:53
 msgid "Site Admin: Trove - Add Node"
 msgstr "Administrador do Site: Repositório - Adicionar Nó"
 
-#: www/admin/trove/trove_cat_add.php:79
+#: www/admin/trove/trove_cat_add.php:79 www/trove/admin/trove_cat_add.php:56
 msgid "Add New Trove Category"
 msgstr "Adicionar Nova Categoria ao Repositório"
 
@@ -4279,6 +4283,7 @@ msgid "No Such Category, That trove cat does not exist"
 msgstr "Categoria Não Encontrada, Essa categoria de repositório não existe"
 
 #: www/admin/trove/trove_cat_edit.php:127
+#: www/trove/admin/trove_cat_edit.php:83
 msgid "Site Admin: Trove - Edit Category"
 msgstr "Administrador do Site: Repositório - Editar Categoria"
 
@@ -4290,11 +4295,12 @@ msgstr "Editar Categoria do Repositório"
 msgid "Parent Category:"
 msgstr "Categoria de Origem:"
 
-#: www/admin/trove/trove_cat_list.php:64
+#: www/admin/trove/trove_cat_list.php:64 www/trove/admin/trove_cat_edit.php:77
+#: www/trove/admin/trove_cat_list.php:56
 msgid "Site Admin: Trove - Category List"
 msgstr "Administração do Site: Repositório - Lista de Categorias"
 
-#: www/admin/trove/trove_cat_list.php:68
+#: www/admin/trove/trove_cat_list.php:68 www/trove/admin/trove_cat_list.php:60
 msgid "Browse Trove Tree"
 msgstr "Pesquisar Árvore do Repositório"
 
@@ -5478,7 +5484,7 @@ msgstr "Receber respostas via e-mail"
 
 #: www/forum/include/ForumHTML.class.php:601
 #, fuzzy, php-format
-msgid "You could post if you were <a href=\"%1$s\">logged in</a>"
+msgid "You could post if you were <a href=\"%1$s\">logged in</a>."
 msgstr "Você só pode postar se você for %1$s logado em %2$s"
 
 #: www/forum/include/ForumHTML.class.php:604
@@ -6963,17 +6969,17 @@ msgid ""
 msgstr ""
 
 #: www/include/vote_function.php:196
-#: www/survey/include/SurveyHTML.class.php:496
+#: www/survey/include/SurveyHTML.class.php:494
 msgid "Low"
 msgstr "Baixa"
 
 #: www/include/vote_function.php:196
-#: www/survey/include/SurveyHTML.class.php:498
+#: www/survey/include/SurveyHTML.class.php:496
 msgid "High"
 msgstr "Alta"
 
 #: www/include/vote_function.php:269
-#: www/survey/include/SurveyHTML.class.php:540 www/survey/privacy.php:38
+#: www/survey/include/SurveyHTML.class.php:538 www/survey/privacy.php:38
 msgid "Survey Privacy"
 msgstr "Privacidade da Enquete"
 
@@ -7489,7 +7495,7 @@ msgstr ""
 msgid "No News Items Found"
 msgstr "Nenhum Ítem de Notícia Encontrado"
 
-#: www/news/news_utils.php:164 www/survey/include/SurveyHTML.class.php:640
+#: www/news/news_utils.php:164 www/survey/include/SurveyHTML.class.php:638
 msgid "Comments"
 msgstr ""
 
@@ -10786,7 +10792,7 @@ msgid "Show Existing Questions"
 msgstr "Mostrar Questões Existentes"
 
 #: www/survey/admin/add_survey.php:105 www/survey/admin/edit_survey.php:145
-#: www/survey/include/SurveyHTML.class.php:332
+#: www/survey/include/SurveyHTML.class.php:330
 #, fuzzy
 msgid "Existing Survey"
 msgid_plural "Existing Surveys"
@@ -10861,7 +10867,7 @@ msgstr "Nome da Enquete"
 
 #: www/survey/admin/edit_survey.php:115
 #: www/survey/include/SurveyHTML.class.php:198
-#: www/survey/include/SurveyHTML.class.php:342
+#: www/survey/include/SurveyHTML.class.php:340
 msgid "Questions"
 msgstr ""
 
@@ -11013,66 +11019,70 @@ msgstr ""
 msgid "Questions in this Survey"
 msgstr ""
 
-#: www/survey/include/SurveyHTML.class.php:256
+#: www/survey/include/SurveyHTML.class.php:253
+msgid "Up"
+msgstr ""
+
+#: www/survey/include/SurveyHTML.class.php:254
 #, fuzzy
 msgid "Down"
 msgstr "Feito"
 
-#: www/survey/include/SurveyHTML.class.php:285
+#: www/survey/include/SurveyHTML.class.php:283
 #, fuzzy, php-format
 msgid "%d question found"
 msgid_plural "%d questions found"
 msgstr[0] "%1$s questões encontradas"
 msgstr[1] "%1$s questões encontradas"
 
-#: www/survey/include/SurveyHTML.class.php:336
+#: www/survey/include/SurveyHTML.class.php:334
 msgid "Survey ID"
 msgstr "ID da Enquete"
 
-#: www/survey/include/SurveyHTML.class.php:339
+#: www/survey/include/SurveyHTML.class.php:337
 msgid "Survey Title"
 msgstr "Título da Enquete"
 
-#: www/survey/include/SurveyHTML.class.php:345
+#: www/survey/include/SurveyHTML.class.php:343
 msgid "Number of Questions"
 msgstr ""
 
-#: www/survey/include/SurveyHTML.class.php:348
+#: www/survey/include/SurveyHTML.class.php:346
 msgid "Number of Votes"
 msgstr ""
 
-#: www/survey/include/SurveyHTML.class.php:351
+#: www/survey/include/SurveyHTML.class.php:349
 msgid "Vote"
 msgstr ""
 
-#: www/survey/include/SurveyHTML.class.php:357
-#: www/survey/include/SurveyHTML.class.php:424
+#: www/survey/include/SurveyHTML.class.php:355
+#: www/survey/include/SurveyHTML.class.php:422
 msgid "Result"
 msgstr ""
 
-#: www/survey/include/SurveyHTML.class.php:360
-#: www/survey/include/SurveyHTML.class.php:428
+#: www/survey/include/SurveyHTML.class.php:358
+#: www/survey/include/SurveyHTML.class.php:426
 msgid "Result with Graph"
 msgstr ""
 
-#: www/survey/include/SurveyHTML.class.php:363
-#: www/survey/include/SurveyHTML.class.php:432
+#: www/survey/include/SurveyHTML.class.php:361
+#: www/survey/include/SurveyHTML.class.php:430
 msgid "Result with Graph and Comments"
 msgstr ""
 
-#: www/survey/include/SurveyHTML.class.php:449
+#: www/survey/include/SurveyHTML.class.php:447
 msgid "Error - you can't vote for inactive survey"
 msgstr ""
 
-#: www/survey/include/SurveyHTML.class.php:456
+#: www/survey/include/SurveyHTML.class.php:454
 msgid "Warning - you are about to vote a second time on this survey."
 msgstr ""
 
-#: www/survey/include/SurveyHTML.class.php:574
+#: www/survey/include/SurveyHTML.class.php:572
 msgid "No Votes"
 msgstr ""
 
-#: www/survey/include/SurveyHTML.class.php:672
+#: www/survey/include/SurveyHTML.class.php:670
 #, fuzzy, php-format
 msgid "View All %1$s Comment"
 msgid_plural "View All %1$s Comments"
@@ -12055,6 +12065,62 @@ msgstr ""
 msgid "Artifact Deleted Successfully"
 msgstr ""
 
+#: www/trove/TroveCategory.class.php:70 www/trove/TroveCategory.class.php:77
+#, fuzzy
+msgid "That Trove category does not exist."
+msgstr "Aquela categoria de repositório não existe"
+
+#: www/trove/TroveCategory.class.php:105
+msgid "Empty strings"
+msgstr ""
+
+#: www/trove/TroveCategory.class.php:117
+#, fuzzy
+msgid "Cannot update"
+msgstr "Atualização em massa"
+
+#: www/trove/admin/trove_cat_add.php:41
+#, fuzzy
+msgid "Error in Trove operation"
+msgstr "Erro na Operação do Repositório"
+
+#: www/trove/admin/trove_cat_add.php:59 www/trove/admin/trove_cat_edit.php:140
+#, fuzzy
+msgid "Parent Category: "
+msgstr "Categoria de Origem:"
+
+#: www/trove/admin/trove_cat_add.php:87 www/trove/admin/trove_cat_edit.php:88
+#, fuzzy
+msgid "New category short name (no spaces, Unix-like): "
+msgstr "Novo nome curto de categoria (sem espaços, unix-like)"
+
+#: www/trove/admin/trove_cat_add.php:89 www/trove/admin/trove_cat_edit.php:91
+#, fuzzy
+msgid "New category full name (80 characters max): "
+msgstr "Novo nome completo de categoria (VARCHAR 80)"
+
+#: www/trove/admin/trove_cat_add.php:91 www/trove/admin/trove_cat_edit.php:94
+#, fuzzy
+msgid "New category description (255 characters max): "
+msgstr "Nova descrição de categoria (VARCHAR 255)"
+
+#: www/trove/admin/trove_cat_edit.php:97
+#, fuzzy
+msgid "update"
+msgstr "Atualizado"
+
+#: www/trove/admin/trove_cat_edit.php:97
+#, fuzzy
+msgid "delete"
+msgstr "Deletar"
+
+#: www/trove/include/trove.php:242
+#, fuzzy, php-format
+msgid ""
+"This project has not yet categorized itself in the <a href=\"%s\">Trove "
+"Software Map</a>."
+msgstr "Esse projeto ainda não foi categorizado no"
+
 #: www/trove/index.php:36
 #, fuzzy
 msgid "Trove Map"
@@ -12069,6 +12135,21 @@ msgstr "Visual. do Site"
 #, fuzzy
 msgid "Remove Filter"
 msgstr "Remover Esse Filtro"
+
+#: www/trove/index.php:161
+#, fuzzy, php-format
+msgid "<strong>%d</strong> project in result set."
+msgid_plural "<strong>%d</strong> projects in result set."
+msgstr[0] "<strong>%1$s</strong> projetos no conjunto de resultados."
+msgstr[1] "<strong>%1$s</strong> projetos no conjunto de resultados."
+
+#: www/trove/index.php:168
+#, php-format
+msgid "Displaying %d project per page. Projects sorted by activity ranking."
+msgid_plural ""
+"Displaying %d projects per page. Projects sorted by activity ranking."
+msgstr[0] ""
+msgstr[1] ""
 
 #: www/users:35
 #, fuzzy

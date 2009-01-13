@@ -598,7 +598,7 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 
 } elseif ($this->Forum->allowAnonymous()) {
 	echo '<span class="error">';
-	printf(_('You could post if you were <a href="%1$s">logged in</a>'), util_make_url ('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))));
+	printf(_('You could post if you were <a href="%1$s">logged in</a>.'), util_make_url ('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))));
 } elseif (!session_loggedin()) {
 	echo '
 			<span class="error">'.sprintf(_('Please <a href="%1$s">log in</a>'), util_make_url('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI')))).'</span><br/></p>';

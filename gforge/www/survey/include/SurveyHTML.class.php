@@ -250,9 +250,7 @@ class SurveyHTML extends Error {
 			$ret.= '<td>'.$arr_to_del[$i]->getID().'</td>';
 			$ret.= '<td>'.$arr_to_del[$i]->getQuestion().'</td>';
 			$ret.= '<td>'.$arr_to_del[$i]->getQuestionStringType().'</td>';
-			$ret.= '<td><center>[<a href="survey.php?group_id='.$group_id.'&amp;survey_id='.
-				$survey_id.'&amp;is_up=1&amp;updown=Y'.
-				'&amp;question_id='.$arr_to_del[$i]->getID().'">Up</a>]';
+			$ret.= '['.util_make_link ('/survey/admin/survey.php?group_id='.$group_id.'&amp;survey_id='. $survey_id.'&amp;is_up=1&amp;updown=Y'.'&amp;question_id='.$arr_to_del[$i]->getID(),_('Up')).']</center></td>';
 			$ret.= '['.util_make_link ('/survey/admin/survey.php?group_id='.$group_id.'&amp;survey_id='. $survey_id.'&amp;is_up=0&amp;updown=Y'.'&amp;question_id='.$arr_to_del[$i]->getID(),_('Down')).']</center></td>';
 			
 			$ret.= '<td><center><input type="checkbox" name="to_del[]" value="'.$arr_to_del[$i]->getID().'"></center></td>';

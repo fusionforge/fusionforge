@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-07 14:18-0700\n"
-"PO-Revision-Date: 2008-10-22 22:19+0100\n"
+"POT-Creation-Date: 2009-01-13 16:17+0100\n"
+"PO-Revision-Date: 2009-01-13 16:19+0100\n"
 "Last-Translator: Aljeux <aljeux@free.fr>\n"
 "Language-Team: LANGUAGE <aljeux@free.fr>\n"
 "MIME-Version: 1.0\n"
@@ -523,7 +523,7 @@ msgid "Group does not have any administrators."
 msgstr "Le groupe n'a pas d'administrateurs."
 
 #: common/include/Group.class.php:2088
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Your project registration for %4$s has been approved.\n"
 "\n"
@@ -557,52 +557,40 @@ msgid ""
 "\n"
 "-- the %4$s crew"
 msgstr ""
-"La candidature de votre projet sur %7$s a été acceptée.\n"
+"La candidature de votre projet sur %4$s a été acceptée.\n"
 "\n"
 "Nom complet du projet : %1$s\n"
 "Nom Unix du projet : %2$s\n"
-"Serveur CVS : cvs.%2$s.%3$s\n"
-"Shell / serveur web : %2$s.%3$s\n"
 "\n"
-"Votre enregistrement DNS mettra jusqu'à une journée pour être actif sur "
-"notre site.\n"
-"En attendant, vous pouvez essayer de vous connecter sur %4$s et de pointer "
-"CVS sur %5$s\n"
+"Votre enregistrement DNS mettra jusqu'à une journée pour être actif\n"
+"sur notre site.  Votre site web sera accessible par votre compte\n"
+"shell.  Vous pouvez lire la documentation du site (lien ci-dessous)\n"
+"afin de prendre connaissance des services disponibles, de leur\n"
+"utilisation et de l'arborescence de votre compte.\n"
 "\n"
-"Si après 6 heures votre compte Shell/CVS ne fonctionne toujours pas, "
-"veuillez ouvrir une demande de support afin que nous puissions résoudre "
-"votre problème.\n"
-"Notez que tous les comptes Shell/CVS fonctionnent seulement avec SSH et pas "
-"avec Telnet.\n"
-"\n"
-"Votre site web est accessible à travers votre compte shell. Vous pouvez lire "
-"la documentation du site (lien ci-dessous) afin de prendre connaissance des "
-"services disponibles, de leur utilisation et de l'arborescence de votre "
-"compte.Si vous vous rendez sur la page de votre projet sur %7$s en étant "
-"identifié, vous trouverez à votre gauche\n"
-"un menu appelé 'Administration du projet' proposant des fonctionnalités "
+"Si vous vous rendez sur la page de votre projet sur %4$s en étant\n"
+"identifié, vous trouverez à votre gauche un menu appelé\n"
+"'Administration du projet' proposant des fonctionnalités\n"
 "supplémentaires.\n"
 "\n"
-"Nous vous recommandons chaudement d'aller sur %7$s et de créer une\n"
-"description publique pour votre projet. Cette opération peut être effectué "
-"sur la page\n"
-"de votre projet quand vous êtes identifié en sélectionnant 'Administration "
-"du projet' dans le menu\n"
-"de gauche (ou en allant sur http://%3$s/project/admin/?group_id=%6$s\n"
-"après l'authentification).\n"
+"Nous vous recommandons chaudement d'aller sur %4$s et de créer une\n"
+"description publique pour votre projet. Cette opération peut être\n"
+"effectuée sur la page de votre projet quand vous êtes identifié en\n"
+"sélectionnant 'Administration du projet' dans le menu de gauche (ou en\n"
+"allant sur %3$s après l'authentification).\n"
 "\n"
-"Votre projet n'apparaîtra dans l'Arbre des projets (liste\n"
-"principale des projets hébergés sur %7$s qui offre une grande flexibilité de "
-"navigation et de recherche) qu'une fois que vous l'aurez classé dans une "
-"catégorie dans les écrans\n"
-"d'administration du projet. Afin que les autres utilisateurs puissent "
-"trouver votre projet, vous devriez le faire immédiatement.\n"
+"Votre projet n'apparaîtra dans l'Arbre des projets (liste principale\n"
+"des projets hébergés sur %4$s qui offre une grande flexibilité de\n"
+"navigation et de recherche) qu'une fois que vous l'aurez classé dans\n"
+"une catégorie dans les écrans d'administration du projet. Afin que les\n"
+"autres utilisateurs puissent trouver votre projet, vous devriez le\n"
+"faire immédiatement.\n"
 "\n"
-"Profitez du site et n'hésitez pas à parler de %7$s autour de vous. N'hésitez "
-"pas à nous contacter\n"
-" : nous sommes à votre disposition pour vous aider.\n"
+"Profitez du site et n'hésitez pas à parler de %4$s autour de\n"
+"vous. N'hésitez pas à nous contacter : nous sommes à votre disposition\n"
+"pour vous aider.\n"
 "\n"
-"-- L'équipe de %7$s"
+"-- L'équipe de %4$s"
 
 #: common/include/Group.class.php:2124
 #, php-format
@@ -715,7 +703,7 @@ msgid "Request to Join Project %1$s"
 msgstr "Demande pour rejoindre le projet %1$s"
 
 #: common/include/GroupJoinRequest.class.php:249
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "%1$s has requested to join your project. \n"
 "You can approve this request here: %2$s \n"
@@ -724,11 +712,10 @@ msgid ""
 "%3$s"
 msgstr ""
 "%1$s a demandé à rejoindre votre projet. Vous pouvez approuver sa demande "
-"sur la <a href=\"http://%2$s/project/admin/?group_id=%3$s\">page "
-"d'administration du projet</a>.\n"
+"ici: %2$s\n"
 "\n"
 "Commentaires de l'utilisateur :\n"
-"%4$s"
+"%3$s"
 
 #: common/include/GroupJoinRequest.class.php:276
 #, php-format
@@ -1120,7 +1107,9 @@ msgstr "Compte non actif"
 #: www/account/lostlogin.php:77 www/account/lostlogin.php:93
 #: www/pm/calendar.php:85 www/pm/calendar.php:89 www/pm/calendar.php:91
 #: www/pm/calendar.php:96 www/pm/calendar.php:98 www/pm/calendar.php:109
-#: www/survey/rating_resp.php:55
+#: www/survey/rating_resp.php:55 www/trove/TroveCategory.class.php:77
+#: www/trove/TroveCategory.class.php:105 www/trove/TroveCategory.class.php:117
+#: www/trove/admin/trove_cat_edit.php:44
 msgid "ERROR"
 msgstr "ERREUR"
 
@@ -1798,7 +1787,7 @@ msgstr ""
 "Cliquez ici pour accéder à cet élément : %4$s"
 
 #: deb-specific/index_std.php:5
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "<p>%1$s is a <b>free service to <a href=\"http://www.opensource.org/\">Open "
 "Source</a> developers</b> offering easy access to the best in CVS, mailing "
@@ -1813,21 +1802,23 @@ msgid ""
 "<a href=\"%4$s\">Register Your Project</a>.</p><p>Thanks... and enjoy the "
 "site.</p>"
 msgstr ""
-"<P>%1$s est un <B>service gratuit pour les développeurs <A href=\"http://www."
-"opensource.org/\">Open Source</A></B>, qui propose un accès facilité à "
-"divers outils comme des outils de suivi de sources, de listes de diffusion, "
-"de suivi de bugs, de forums, de gestion de tâches, d'hébergement de sites, "
-"le tout avec une administration entièrement par le web.</"
-"P><P><B>Participation au site et retours</B></P><P>Pour tirer le meilleur "
-"parti de %1$s, il vous sera nécessaire de vous <A href=\"/account/register."
-"php\">enregistrer comme un utilisateur du site</A>. Ceci vous permettra de "
-"participer pleinement à tout ce que ce site peut vous offrir.  Vous pouvez "
-"bien entendu naviguer sur le site sans vous enregistrer au préalable, mais "
-"certaines fonctions seront désactivées.</P><P><B>Mettre en place votre "
-"propre projet</B></P><P><A href=\"/account/register.php\">Enregistrez-vous</"
-"A>, puis <A HREF=\"/account/login.php\">connectez-vous</A> et <A HREF=\"/"
-"register/\">enregistrez votre projet</A>.</P><P>Merci... et profitez du "
-"site !</P>"
+"<p>%1$s est un <b>service gratuit pour les développeurs <a\n"
+"href=\"http://www.opensource.org/\">Open Source</a></b>, qui propose un\n"
+"accès facilité à divers outils comme des outils de suivi de sources,\n"
+"de listes de diffusion, de suivi de bugs, de forums, de gestion de\n"
+"tâches, d'hébergement de sites, le tout avec une administration\n"
+"entièrement par le web.</p><p><b>Participation au site et\n"
+"retours</b></p><p>Pour tirer le meilleur parti de %1$s, il vous sera\n"
+"nécessaire de vous <a href=\"%2$s\">enregistrer comme\n"
+"un utilisateur du site</a>. Ceci vous permettra de participer\n"
+"pleinement à tout ce que ce site peut vous offrir.  Vous pouvez bien\n"
+"entendu naviguer sur le site sans vous enregistrer au préalable, mais\n"
+"certaines fonctions seront désactivées.</p><p><b>Mettre en place votre\n"
+"propre projet</b></p><p><a\n"
+"href=\"%2$s\">Enregistrez-vous</a>, puis <a\n"
+"href=\"%3$s\">connectez-vous</a> et <a\n"
+"href=\"%4$s\">enregistrez votre projet</a>.</p><p>Merci... et\n"
+"profitez du site !</p>"
 
 #: deb-specific/index_std.php:11 www/export/projnews.php:82
 #: www/forum/include/ForumHTML.class.php:80 www/include/project_home.php:408
@@ -2036,7 +2027,7 @@ msgstr "Voulez-vous réellement supprimer ce lien ?"
 #: www/people/skills_utils.php:94 www/pm/admin/index.php:390
 #: www/pm/admin/index.php:401 www/project/admin/vhost.php:144
 #: www/reporting/timeadd.php:172 www/snippet/detail.php:58
-#: www/survey/include/SurveyHTML.class.php:308
+#: www/survey/include/SurveyHTML.class.php:306
 #: www/tracker/admin/form-addextrafield.php:36
 #: www/tracker/admin/form-deleteextrafield.php:17
 #: www/tracker/admin/form-deletetracker.php:14
@@ -2078,7 +2069,7 @@ msgid "Navigation"
 msgstr "Navigation"
 
 #: plugins/projects_hierarchy/www/softwaremap.php:44
-#: www/softwaremap/trove_list.php:42
+#: www/softwaremap/trove_list.php:42 www/trove/TroveCategory.class.php:69
 msgid "Invalid Trove Category"
 msgstr "Catégorie invalide"
 
@@ -2617,7 +2608,6 @@ msgid "View the webcalendar Administration"
 msgstr "Voir l'administration du calendrier"
 
 #: plugins/webcalendar/common/webcalendarPlugin.class.php:522
-#, fuzzy
 msgid "Webcalendar"
 msgstr "Calendrier"
 
@@ -2664,7 +2654,7 @@ msgid "Invalid email address."
 msgstr "Adresse de messagerie non valide."
 
 #: www/account/change_email.php:63
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "You have requested a change of email address on %1$s.\n"
 "Please visit the following URL to complete the email change:\n"
@@ -2677,9 +2667,9 @@ msgstr ""
 "$s.\n"
 "Veuillez visiter la page suivante pour que ce changement prenne effet :\n"
 "\n"
-"<http://%1$s/account/change_email-complete.php?ch=_%2$s>\n"
+"%2$s\n"
 "\n"
-"-- L'équipe de  %1$s"
+"-- L'équipe de %1$s"
 
 #: www/account/change_email.php:72 www/account/lostpw.php:71
 #, php-format
@@ -2759,10 +2749,11 @@ msgstr ""
 "Vous venez de changer votre mot de passe.</p>"
 
 #: www/account/change_pw.php:90
-#, fuzzy, php-format
+#, php-format
 msgid "You should now <a href=\"%1$s\">Return to User Prefs</a>."
 msgstr ""
-"Vous devriez maintenant %1$s Retourner aux préférences utilisateur %2$s."
+"Vous devriez maintenant <a href=\"%1$s\">retourner aux préférences "
+"utilisateur</a>."
 
 #: www/account/change_pw.php:97 www/account/index.php:132
 msgid "Change Password"
@@ -3020,7 +3011,7 @@ msgid "Login"
 msgstr "Identification"
 
 #: www/account/login.php:99
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "<P>Your account is currently pending your email confirmation.\t\tVisiting "
 "the link sent to you in this email will activate your account.\t\t<P>If you "
@@ -3028,16 +3019,16 @@ msgid ""
 "be sent to the email address you provided in registration.\t\t<P><A href=\"%1"
 "$s\">[Resend Confirmation Email]</A>\t\t<br><hr>\t\t<p>"
 msgstr ""
-"<P>Votre compte est actuellement en attente d'une confirmation par email, et "
-"sera activé lorsque vous visiterez le lien qui vous a été envoyé par email.</"
-"P><P>Si vous avez besoin que ce message vous soit renvoyé, veuillez cliquer "
-"ci-dessous, et un message de confirmation sera envoyé à l'adresse email que "
-"vous avez saisie lors de votre enregistrement.</P><P><A href=\"pending-"
-"resend.php?form_user=%1$s\">[Renvoyer le message de confirmation]</"
-"A><br><hr><p>"
+"<p>Votre compte est actuellement en attente d'une confirmation par\n"
+"email, et sera activé lorsque vous visiterez le lien qui vous a été\n"
+"envoyé par email.</p><p>Si vous avez besoin que ce message vous soit\n"
+"renvoyé, veuillez cliquer ci-dessous, et un message de confirmation\n"
+"sera envoyé à l'adresse email que vous avez saisie lors de votre\n"
+"enregistrement.</p><p><a href=\"%1$s\">[Renvoyer le message de\n"
+"confirmation]</a><br><hr><p>"
 
 #: www/account/login.php:102
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "<p>Your %1$s account has been removed by %1$s staff. This may occur for two "
 "reasons, either 1) you requested that your account be removed; or 2) some "
@@ -3047,14 +3038,14 @@ msgid ""
 "Should you have questions or concerns regarding this matter, please log a <a "
 "href=\"%2$s\">support request</a>.</p><p>Thank you, <br><br>%1$s Staff</p>"
 msgstr ""
-"<p>Votre compte %1$s a été supprimé par les administrateurs de %1$s.  Ceci "
-"peut être dû à deux raisons : soit vous avez demandé à ce qu'il soit "
-"supprimé, soit c'est un blocage administratif.  Ce dernier n'est "
-"généralement effectué qu'en réaction à une action litigieuse faite sous "
-"l'identité de votre compte, qui contrevient aux conditions d'utilisation.  "
-"Si vous avez des questions à ce propos, veuillez soumettre une <a href=\"/"
-"support/?group_id=1\">requête de support</a>.</p><p>Merci, <br><br>l'équipe %"
-"1$s.</p>"
+"<p>Votre compte %1$s a été supprimé par les administrateurs de %1$s.\n"
+"Ceci peut être dû à deux raisons : soit vous avez demandé à ce qu'il\n"
+"soit supprimé, soit c'est un blocage administratif.  Ce dernier n'est\n"
+"généralement effectué qu'en réaction à une action litigieuse faite\n"
+"sous l'identité de votre compte, qui contrevient aux conditions\n"
+"d'utilisation.  Si vous avez des questions à ce propos, veuillez\n"
+"soumettre une <a href=\"%2$s\">requête de\n"
+"support</a>.</p><p>Merci, <br><br>l'équipe de %1$s.</p>"
 
 #: www/account/login.php:111
 msgid "Cookies must be enabled past this point."
@@ -3119,7 +3110,7 @@ msgid "That user does not exist."
 msgstr "Cet utilisateur n'existe pas"
 
 #: www/account/lostpw.php:59
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Someone (presumably you) on the %3$s site requested a\n"
 "password change through email verification. If this was not you,\n"
@@ -3132,17 +3123,16 @@ msgid ""
 "\n"
 " -- the %3$s staff\n"
 msgstr ""
-"Quelqu'un (probablement vous) sur le site %3$s, a demandé un \n"
-"changement de mot de passe par l'intermédiaire d'une vérification e-mail. Si "
-"ce n'est pas vous\n"
-"ignorez ce message et rien ne se passera.\n"
+"Quelqu'un (probablement vous) sur le site %3$s, a demandé un\n"
+"changement de mot de passe par l'intermédiaire d'une vérification\n"
+"e-mail. Si ce n'est pas vous ignorez ce message et rien ne se passera.\n"
 "\n"
-"Si vous avez demandé cette vérification, allez à l'URL suivante\n"
-" pour changer votre mot de passe :\n"
+"Si vous avez demandé cette vérification, allez à l'URL suivante pour\n"
+"changer votre mot de passe :\n"
 "\n"
-"<http://%1$s/account/lostlogin.php?ch=_%2$s>\n"
+"<%2$s>\n"
 "\n"
-"-- L'équipe de %3$s\n"
+" -- L'équipe de %3$s\n"
 
 #: www/account/lostpw.php:75
 #, php-format
@@ -3175,7 +3165,6 @@ msgid "Send Lost PW Hash"
 msgstr "Envoyer une clé de hachage pour mot de passe perdu"
 
 #: www/account/pending-resend.php:50
-#, fuzzy
 msgid "Pending Account"
 msgstr "Compte en attente"
 
@@ -3205,7 +3194,7 @@ msgstr ""
 #: www/pm/deletetask.php:37 www/pm/mod_task.php:38 www/pm/mod_task.php:196
 #: www/project/admin/editimages.php:233 www/project/admin/roleedit.php:261
 #: www/project/request.php:69 www/register/projectinfo.php:201
-#: www/survey/include/SurveyHTML.class.php:539 www/tracker/add.php:28
+#: www/survey/include/SurveyHTML.class.php:537 www/tracker/add.php:28
 #: www/tracker/add.php:57 www/tracker/add.php:119
 #: www/tracker/admin/form-addcanned.php:52
 #: www/tracker/admin/form-addextrafield.php:114
@@ -3275,9 +3264,8 @@ msgid "Register"
 msgstr "S'inscrire"
 
 #: www/account/unsubscribe.php:63 www/account/unsubscribe.php:65
-#, fuzzy
 msgid "Unsubscription Complete"
-msgstr "Enregistrement complet"
+msgstr "Désabonnement effectué"
 
 #: www/account/unsubscribe.php:68
 #, php-format
@@ -3286,6 +3274,9 @@ msgid ""
 "you will want to re-activate your subscriptions in the future, login and "
 "visit your Account Maintenance page."
 msgstr ""
+"Vous avez été désabonné de tous les envois de messages et\n"
+"notifications de %1$s.  Si vous voulez réactiver ces abonnements,\n"
+"connectez-vous sur votre page de gestion du compte."
 
 #: www/account/unsubscribe.php:70
 #, php-format
@@ -3294,6 +3285,9 @@ msgid ""
 "re-activate your subscriptions in the future, login and visit your Account "
 "Maintenance page."
 msgstr ""
+"Vous avez été désabonné de tous les envois de messages concernant le\n"
+"site %1$s.  Si vous voulez réactiver ces abonnements, connectez-vous\n"
+"sur votre page de gestion du compte."
 
 #: www/account/verify.php:40
 msgid "Missing paramater"
@@ -3409,9 +3403,8 @@ msgid "By"
 msgstr "Par"
 
 #: www/activity/index.php:141
-#, fuzzy
 msgid "Commit for Tracker Item"
-msgstr "Élément de suivi"
+msgstr "Validation pour l'élément de suivi"
 
 #: www/activity/index.php:146 www/activity/index.php:151
 #: www/tracker/taskmgr.php:88 www/tracker/taskmgr.php:141
@@ -3420,7 +3413,6 @@ msgid "Tracker Item"
 msgstr "Élément de suivi"
 
 #: www/activity/index.php:146
-#, fuzzy
 msgid "Opened"
 msgstr "Ouvert"
 
@@ -3429,7 +3421,6 @@ msgid "Closed"
 msgstr "Fermé"
 
 #: www/activity/index.php:161
-#, fuzzy
 msgid "Forum Post "
 msgstr "Article de forum"
 
@@ -3442,7 +3433,8 @@ msgstr "Créer un(e) nouveau(elle) %1$s ci-dessous :"
 #: www/admin/trove/trove_cat_add.php:118 www/admin/trove/trove_cat_list.php:43
 #: www/admin/trove/trove_cat_list.php:46 www/docman/admin/index.php:381
 #: www/pm/mod_task.php:229 www/reporting/timeadd.php:188
-#: www/reporting/timecategory.php:100
+#: www/reporting/timecategory.php:100 www/trove/admin/trove_cat_add.php:93
+#: www/trove/admin/trove_cat_list.php:35
 msgid "Add"
 msgstr "Ajouter"
 
@@ -3515,12 +3507,13 @@ msgstr "ajouter nouveau"
 #: www/docman/admin/index.php:433 www/frs/admin/showreleases.php:114
 #: www/people/skills_utils.php:35 www/people/skills_utils.php:93
 #: www/project/admin/editimages.php:259 www/project/admin/editimages.php:290
-#: www/project/admin/index.php:201 www/survey/include/SurveyHTML.class.php:306
-#: www/survey/include/SurveyHTML.class.php:354
-#: www/survey/include/SurveyHTML.class.php:414
+#: www/project/admin/index.php:201 www/survey/include/SurveyHTML.class.php:304
+#: www/survey/include/SurveyHTML.class.php:352
+#: www/survey/include/SurveyHTML.class.php:412
 #: www/tracker/admin/form-addextrafield.php:33
 #: www/tracker/admin/form-addextrafield.php:56
 #: www/tracker/admin/form-addextrafieldoption.php:32
+#: www/trove/admin/trove_cat_list.php:38
 msgid "Edit"
 msgstr "Modifier"
 
@@ -3668,14 +3661,12 @@ msgid "File wasn't written or is empty."
 msgstr "Le fichier est vide ou n'a pas été écrit."
 
 #: www/admin/configman.php:152
-#, fuzzy
 msgid "Could not open the file for write. Check the permissions for apache"
 msgstr ""
-"Le fichier n'a pas pu être ouvert en lecture/écriture.  Veuillez vérifier "
-"les permissions pour Apache."
+"Le fichier n'a pas pu être ouvert en écriture.  Veuillez vérifier les "
+"permissions pour Apache."
 
 #: www/admin/configman.php:180
-#, fuzzy
 msgid ""
 "Could not open the file for read/write. Check the permissions for apache"
 msgstr ""
@@ -3699,11 +3690,10 @@ msgid "Save"
 msgstr "Enregistrer"
 
 #: www/admin/configman.php:211
-#, fuzzy
 msgid "Could not open the file for read. Check the permissions for apache"
 msgstr ""
-"Le fichier n'a pas pu être ouvert en lecture/écriture.  Veuillez vérifier "
-"les permissions pour Apache."
+"Le fichier n'a pas pu être ouvert en lecture.  Veuillez vérifier les "
+"permissions pour Apache."
 
 #: www/admin/cronman.php:53
 msgid "Job"
@@ -4190,35 +4180,33 @@ msgid "Plugin %1$s updated Successfully"
 msgstr "Greffon %1$s mis à jour avec succès"
 
 #: www/admin/pluginman.php:94
-#, fuzzy
 msgid ""
 "<br />Soft link wasn't removed in www/plugins folder, please do so manually."
 msgstr ""
-"<br>Le lien symbolique n'a pas été supprimé dans le répertoire www/plugins.  "
-"Veuillez le faire manuellement."
+"<br />Le lien symbolique n'a pas été supprimé dans le répertoire www/"
+"plugins.  Veuillez le faire manuellement."
 
 #: www/admin/pluginman.php:102
 msgid "Success, config not deleted"
 msgstr "Supprimé avec succès (sauf la configuration)"
 
 #: www/admin/pluginman.php:129
-#, fuzzy
 msgid ""
 "<br />Soft link to www couldn't be created. Check the write permissions for "
 "apache in gforge www/plugins dir or create the link manually."
 msgstr ""
-"<br>Le lien symbolique vers www n'a pas pu être créé.  Veuillez vérifier les "
-"permissions du répertoire www/plugins de GForge pour Apache, ou créer le "
+"<br />Le lien symbolique vers www n'a pas pu être créé.  Veuillez vérifier "
+"les permissions du répertoire www/plugins de GForge pour Apache, ou créer le "
 "lien manuellement."
 
 #: www/admin/pluginman.php:140
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "<br />Config file could not be linked to etc/gforge/plugins/%1$s. Check the "
 "write permissions for apache in /etc/gforge/plugins or create the link "
 "manually."
 msgstr ""
-"<br>Le lien symbolique du fichier de configuration n'a pas pu être créé "
+"<br />Le lien symbolique du fichier de configuration n'a pas pu être créé "
 "dans /etc/gforge/plugins/%1$s.  Veuillez vérifier les permissions du "
 "répertoire /etc/gforge/plugins de GForge pour Apache, ou créer le lien "
 "manuellement."
@@ -4228,7 +4216,6 @@ msgid "Initialisation error<br />Database said: "
 msgstr "Erreur d'initialisation<br />Erreur de base de données :"
 
 #: www/admin/pluginman.php:180
-#, fuzzy
 msgid ""
 "Here you can activate / deactivate Site wide plugins which are in the "
 "plugins/ folder. Then, you should activate them also per project, per user "
@@ -4239,14 +4226,15 @@ msgid ""
 "use (and you want to re-activate) because some scripts have DROP TABLE "
 "statements</span><br /><br />"
 msgstr ""
-"Cette section vous permet d'activer ou désactiver globalement des greffons "
-"présents dans le répertoire plugins/.  Selon les greffons, il peut également "
-"être nécessaire de les activer pour chaque projet ou utilisateur.<br><span "
-"class=\"important\">Prenez garde à ne pas désactiver un greffon utilisé par "
-"un utilisateur ou un groupe, car cela le supprimera globalement.<br>Soyez "
-"TRÈS attentif si vous lancez le script d'initialisation SQL après avoir "
-"désactivé un greffon que vous souhaitez réactiver, car certains de ces "
-"scripts contiennent des requêtes DROP TABLE.</span><br><br>"
+"Cette section vous permet d'activer ou désactiver globalement des\n"
+"greffons présents dans le répertoire plugins/.  Selon les greffons, il\n"
+"peut également être nécessaire de les activer pour chaque projet ou\n"
+"utilisateur.<br /><span class=\"important\">Prenez garde à ne pas\n"
+"désactiver un greffon utilisé par un utilisateur ou un groupe, car\n"
+"cela le supprimera globalement.<br>Soyez TRÈS attentif si vous lancez\n"
+"le script d'initialisation SQL après avoir désactivé un greffon que\n"
+"vous souhaitez réactiver, car certains de ces scripts contiennent des\n"
+"requêtes DROP TABLE.</span><br /><br />"
 
 #: www/admin/pluginman.php:181
 msgid "Plugin Name"
@@ -4392,7 +4380,7 @@ msgid "Member since"
 msgstr "Membre depuis le"
 
 #: www/admin/search.php:158
-#, fuzzy, php-format
+#, php-format
 msgid "Group search with criteria <em>%s</em>: %d match"
 msgid_plural "Group search with criteria <em>%s</em>: %d matches"
 msgstr[0] ""
@@ -4416,11 +4404,11 @@ msgstr "Inscrit"
 msgid "Error In Trove Operation"
 msgstr "Erreur lors d'une opération sur l'arbre"
 
-#: www/admin/trove/trove_cat_add.php:76
+#: www/admin/trove/trove_cat_add.php:76 www/trove/admin/trove_cat_add.php:53
 msgid "Site Admin: Trove - Add Node"
 msgstr "Administration du site : Ajouter un noeud à l'arbre"
 
-#: www/admin/trove/trove_cat_add.php:79
+#: www/admin/trove/trove_cat_add.php:79 www/trove/admin/trove_cat_add.php:56
 msgid "Add New Trove Category"
 msgstr "Ajouter une nouvelle branche"
 
@@ -4464,6 +4452,7 @@ msgid "No Such Category, That trove cat does not exist"
 msgstr "Cette catégorie n'existe pas"
 
 #: www/admin/trove/trove_cat_edit.php:127
+#: www/trove/admin/trove_cat_edit.php:83
 msgid "Site Admin: Trove - Edit Category"
 msgstr "Administration du site : Éditer une branche"
 
@@ -4475,11 +4464,12 @@ msgstr "Éditer une branche"
 msgid "Parent Category:"
 msgstr "Catégorie mère :"
 
-#: www/admin/trove/trove_cat_list.php:64
+#: www/admin/trove/trove_cat_list.php:64 www/trove/admin/trove_cat_edit.php:77
+#: www/trove/admin/trove_cat_list.php:56
 msgid "Site Admin: Trove - Category List"
 msgstr "Administration du site : Liste des catégories de l'arbre"
 
-#: www/admin/trove/trove_cat_list.php:68
+#: www/admin/trove/trove_cat_list.php:68 www/trove/admin/trove_cat_list.php:60
 msgid "Browse Trove Tree"
 msgstr "Afficher l'arbre des projets"
 
@@ -4543,9 +4533,8 @@ msgstr ""
 "Utilisez le champ ci-dessous pour trouver des utilisateurs correspondant à "
 "un critère donné portant sur le nom d'utilisateur %1$s, le nom complet, ou "
 "l'adresse email.  La recherche porte sur des sous-chaînes, et il est "
-"possible d'utiliser « %% » pour chercher une sous-shaîne quelconque.  "
-"Cliquez sur un nom d'utilisateur pour le désabonner des envois de messages "
-"en masse."
+"possible d'utiliser « %% » pour chercher une sous-shaîne quelconque.  Cliquez "
+"sur un nom d'utilisateur pour le désabonner des envois de messages en masse."
 
 #: www/admin/unsubscribe.php:105
 msgid "Show users matching pattern"
@@ -5179,19 +5168,20 @@ msgid "Your search did not match any documents"
 msgstr "Votre recherche n'a renvoyé aucun document."
 
 #: www/export/rss_project.php:19
-#, fuzzy
 msgid "News Data"
-msgstr "Aucune données"
+msgstr "Aucune donnée"
 
 #: www/export/rss_project.php:21
 msgid ""
 "To get Project News or New Project Releases of a specific project use the "
 "Links below."
 msgstr ""
+"Pour accéder aux annonces des projets ou aux nouvelles publications\n"
+"d'un projet spécifique, utilisez les liens ci-dessous."
 
 #: www/export/rss_project.php:40
 msgid "Go back"
-msgstr ""
+msgstr "Retour"
 
 #: www/forum/admin/ForumAdmin.class.php:79 www/forum/admin/index.php:83
 #: www/forum/admin/monitor.php:45
@@ -5656,9 +5646,9 @@ msgid "Receive followups via email"
 msgstr "Recevoir les réponses par e-mail"
 
 #: www/forum/include/ForumHTML.class.php:601
-#, fuzzy, php-format
-msgid "You could post if you were <a href=\"%1$s\">logged in</a>"
-msgstr "Vous pourriez répondre si vous étiez %1$s identifié %2$s"
+#, php-format
+msgid "You could post if you were <a href=\"%1$s\">logged in</a>."
+msgstr "Vous pourriez répondre si vous étiez <a href=\"%1$s\">identifié</a>."
 
 #: www/forum/include/ForumHTML.class.php:604
 #, php-format
@@ -6683,7 +6673,7 @@ msgstr "Aucun"
 
 #: www/include/Layout.class.php:1074
 msgid "Quick Jump To..."
-msgstr ""
+msgstr "Saut rapide vers..."
 
 #: www/include/SmilieSupportHtml.class.php:53
 msgid "Smilies's list"
@@ -6835,22 +6825,20 @@ msgid "Activity Percentile:&nbsp;"
 msgstr "Taux d'activité&nbsp;:&nbsp;"
 
 #: www/include/project_home.php:72
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "View project <a href=\"%1$s\" >Statistics</a> or <a href=\"%2$s\">Activity</"
 "a>"
 msgstr ""
-"Voir les <a href=\\\"/project/stats/?group_id=%1$s\\\">statistiques</a> ou "
-"le <a href=\\\"/project/report/?group_id=%1$s\\\">rapport d'activité</a> "
-"pour le projet."
+"Voir les <a href=\\\"%1$s\\\">statistiques</a> ou le <a href=\\\"%2$s\\"
+"\">rapport d'activité</a> pour le projet."
 
 #: www/include/project_home.php:73
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "View list of <a href=\"%1$s\">RSS feeds</a> available for this project.</a>"
 msgstr ""
-"Voir la liste des <a href=\"/export/rss_project.php?group_id=%1$s\">flux "
-"RSS</a> disponibles pour ce projet."
+"Voir la liste des <a href=\"%1$s\">flux RSS</a> disponibles pour ce projet."
 
 #: www/include/project_home.php:88
 #, php-format
@@ -6936,7 +6924,7 @@ msgid "There are no public trackers available"
 msgstr "Il n'y a pas de traceur public"
 
 #: www/include/project_home.php:279
-#, fuzzy, php-format
+#, php-format
 msgid " (<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
 msgid_plural " (<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
 msgstr[0] ""
@@ -7191,17 +7179,17 @@ msgstr ""
 "référez-vous à la <a href=\"/account/\">page de gestion de votre compte</a>."
 
 #: www/include/vote_function.php:196
-#: www/survey/include/SurveyHTML.class.php:496
+#: www/survey/include/SurveyHTML.class.php:494
 msgid "Low"
 msgstr "Bas"
 
 #: www/include/vote_function.php:196
-#: www/survey/include/SurveyHTML.class.php:498
+#: www/survey/include/SurveyHTML.class.php:496
 msgid "High"
 msgstr "Haut"
 
 #: www/include/vote_function.php:269
-#: www/survey/include/SurveyHTML.class.php:540 www/survey/privacy.php:38
+#: www/survey/include/SurveyHTML.class.php:538 www/survey/privacy.php:38
 msgid "Survey Privacy"
 msgstr "confidentialité des informations liées aux sondages"
 
@@ -7730,7 +7718,7 @@ msgstr "Anciennes annonces"
 msgid "No News Items Found"
 msgstr "Pas d'annonce"
 
-#: www/news/news_utils.php:164 www/survey/include/SurveyHTML.class.php:640
+#: www/news/news_utils.php:164 www/survey/include/SurveyHTML.class.php:638
 msgid "Comments"
 msgstr "Commentaires"
 
@@ -8545,8 +8533,8 @@ msgid ""
 msgstr ""
 "<strong>Administration :</strong>Si vous souhaitez appliquer des changements "
 "à tous les objets sélectionnés ci-dessus, utilisez ces contrôles pour "
-"changer les propriétés, et cliquez (une seule fois) sur « Mise à jour "
-"massive »."
+"changer les propriétés, et cliquez (une seule fois) sur « Mise à jour massive "
+"»."
 
 #: www/pm/browse_task.php:363 www/pm/mod_task.php:48
 msgid "Subproject"
@@ -9806,11 +9794,11 @@ msgid ""
 "li><li>Search engines throughout the site</li></ul><p/>Unix Name:<br/>"
 msgstr ""
 "<h3>5. Nom Unix du projet</h3>\n"
-"<p>En plus du nom complet du projet, vous devez choisir un nom « Unix » "
-"court.</p><p>Du fait de son utilisation à de nombreux endroits sur le site, "
-"le « nom Unix » est soumis à plusieurs restrictions :</p><ul><li>Il doit "
-"être unique</li><li>Il doit comprendre entre 3 et 15 caractères</li><li>Il "
-"ne peut contenir que des lettres (minuscules), des chiffres et des tirets</"
+"<p>En plus du nom complet du projet, vous devez choisir un nom « Unix » court."
+"</p><p>Du fait de son utilisation à de nombreux endroits sur le site, le « "
+"nom Unix » est soumis à plusieurs restrictions :</p><ul><li>Il doit être "
+"unique</li><li>Il doit comprendre entre 3 et 15 caractères</li><li>Il ne "
+"peut contenir que des lettres (minuscules), des chiffres et des tirets</"
 "li><li>Il ne peut être choisi parmi certains noms réservés</li><li>Il ne "
 "changera pas tout au long de la vie du projet</li></ul>\n"
 "<p>Ce nom Unix est important, car il est utilisé des manières suivantes :</"
@@ -11129,7 +11117,7 @@ msgid "Show Existing Questions"
 msgstr "Voir les questions existantes"
 
 #: www/survey/admin/add_survey.php:105 www/survey/admin/edit_survey.php:145
-#: www/survey/include/SurveyHTML.class.php:332
+#: www/survey/include/SurveyHTML.class.php:330
 msgid "Existing Survey"
 msgid_plural "Existing Surveys"
 msgstr[0] "Sondage existant"
@@ -11202,7 +11190,7 @@ msgstr "Nom du sondage"
 
 #: www/survey/admin/edit_survey.php:115
 #: www/survey/include/SurveyHTML.class.php:198
-#: www/survey/include/SurveyHTML.class.php:342
+#: www/survey/include/SurveyHTML.class.php:340
 msgid "Questions"
 msgstr "Questions"
 
@@ -11357,68 +11345,71 @@ msgstr "Questions possibles"
 msgid "Questions in this Survey"
 msgstr "Questions de ce sondage"
 
-#: www/survey/include/SurveyHTML.class.php:256
-#, fuzzy
-msgid "Down"
-msgstr "Effectué"
+#: www/survey/include/SurveyHTML.class.php:253
+msgid "Up"
+msgstr "Monter"
 
-#: www/survey/include/SurveyHTML.class.php:285
+#: www/survey/include/SurveyHTML.class.php:254
+msgid "Down"
+msgstr "Descendre"
+
+#: www/survey/include/SurveyHTML.class.php:283
 #, php-format
 msgid "%d question found"
 msgid_plural "%d questions found"
 msgstr[0] "%d question trouvée"
 msgstr[1] "%d questions trouvées"
 
-#: www/survey/include/SurveyHTML.class.php:336
+#: www/survey/include/SurveyHTML.class.php:334
 msgid "Survey ID"
 msgstr "ID du sondage"
 
-#: www/survey/include/SurveyHTML.class.php:339
+#: www/survey/include/SurveyHTML.class.php:337
 msgid "Survey Title"
 msgstr "Titre du sondage"
 
-#: www/survey/include/SurveyHTML.class.php:345
+#: www/survey/include/SurveyHTML.class.php:343
 msgid "Number of Questions"
 msgstr "Nombre de questions"
 
-#: www/survey/include/SurveyHTML.class.php:348
+#: www/survey/include/SurveyHTML.class.php:346
 msgid "Number of Votes"
 msgstr "Nombre de votes"
 
-#: www/survey/include/SurveyHTML.class.php:351
+#: www/survey/include/SurveyHTML.class.php:349
 msgid "Vote"
 msgstr "Voter"
 
-#: www/survey/include/SurveyHTML.class.php:357
-#: www/survey/include/SurveyHTML.class.php:424
+#: www/survey/include/SurveyHTML.class.php:355
+#: www/survey/include/SurveyHTML.class.php:422
 msgid "Result"
 msgstr "Résultats"
 
-#: www/survey/include/SurveyHTML.class.php:360
-#: www/survey/include/SurveyHTML.class.php:428
+#: www/survey/include/SurveyHTML.class.php:358
+#: www/survey/include/SurveyHTML.class.php:426
 msgid "Result with Graph"
 msgstr "Résultats avec graphique"
 
-#: www/survey/include/SurveyHTML.class.php:363
-#: www/survey/include/SurveyHTML.class.php:432
+#: www/survey/include/SurveyHTML.class.php:361
+#: www/survey/include/SurveyHTML.class.php:430
 msgid "Result with Graph and Comments"
 msgstr "Résultats avec graphique et commentaires"
 
-#: www/survey/include/SurveyHTML.class.php:449
+#: www/survey/include/SurveyHTML.class.php:447
 msgid "Error - you can't vote for inactive survey"
 msgstr "Erreur - vous ne pouvez pas participer à un sondage inactif."
 
-#: www/survey/include/SurveyHTML.class.php:456
+#: www/survey/include/SurveyHTML.class.php:454
 msgid "Warning - you are about to vote a second time on this survey."
 msgstr ""
 "Attention - vous êtes sur le point de participer à ce sondage pour la "
 "deuxième fois."
 
-#: www/survey/include/SurveyHTML.class.php:574
+#: www/survey/include/SurveyHTML.class.php:572
 msgid "No Votes"
 msgstr "Aucun vote"
 
-#: www/survey/include/SurveyHTML.class.php:672
+#: www/survey/include/SurveyHTML.class.php:670
 #, php-format
 msgid "View All %1$s Comment"
 msgid_plural "View All %1$s Comments"
@@ -12424,50 +12415,82 @@ msgstr "Erreur lors de la suppression de l'élément"
 msgid "Artifact Deleted Successfully"
 msgstr "Element supprimé avec succès"
 
+#: www/trove/TroveCategory.class.php:70 www/trove/TroveCategory.class.php:77
+msgid "That Trove category does not exist."
+msgstr "Cette catégorie n'existe pas."
+
+#: www/trove/TroveCategory.class.php:105
+msgid "Empty strings"
+msgstr "Chaînes vides"
+
+#: www/trove/TroveCategory.class.php:117
+msgid "Cannot update"
+msgstr "Erreur de mise à jour"
+
+#: www/trove/admin/trove_cat_add.php:41
+msgid "Error in Trove operation"
+msgstr "Erreur lors d'une opération sur l'arbre des catégories"
+
+#: www/trove/admin/trove_cat_add.php:59 www/trove/admin/trove_cat_edit.php:140
+msgid "Parent Category: "
+msgstr "Catégorie mère : "
+
+#: www/trove/admin/trove_cat_add.php:87 www/trove/admin/trove_cat_edit.php:88
+msgid "New category short name (no spaces, Unix-like): "
+msgstr "Nom court de la nouvelle catégorie (pas d'espace, à la Unix) : "
+
+#: www/trove/admin/trove_cat_add.php:89 www/trove/admin/trove_cat_edit.php:91
+msgid "New category full name (80 characters max): "
+msgstr "Nom complet de la nouvelle catégorie (80 caractères maxi) : "
+
+#: www/trove/admin/trove_cat_add.php:91 www/trove/admin/trove_cat_edit.php:94
+msgid "New category description (255 characters max): "
+msgstr "Description de la nouvelle catégorie (255 caractères maxi) : "
+
+#: www/trove/admin/trove_cat_edit.php:97
+msgid "update"
+msgstr "Mettre à jour"
+
+#: www/trove/admin/trove_cat_edit.php:97
+msgid "delete"
+msgstr "Effacer"
+
+#: www/trove/include/trove.php:242
+#, php-format
+msgid ""
+"This project has not yet categorized itself in the <a href=\"%s\">Trove "
+"Software Map</a>."
+msgstr ""
+"Ce projet n'a pas encore été classé dans l'<a href=\\\"%s\\\">arbre des\n"
+"projets</a>."
+
 #: www/trove/index.php:36
-#, fuzzy
 msgid "Trove Map"
 msgstr "Afficher l'arbre des projets"
 
 #: www/trove/index.php:59
-#, fuzzy
 msgid "Limiting View"
-msgstr "sites"
+msgstr "Vue limitée"
 
 #: www/trove/index.php:66
 msgid "Remove Filter"
 msgstr "Supprimer ce filtre"
 
+#: www/trove/index.php:161
+#, php-format
+msgid "<strong>%d</strong> project in result set."
+msgid_plural "<strong>%d</strong> projects in result set."
+msgstr[0] "<strong>%d</strong> projet trouvé."
+msgstr[1] "<strong>%d</strong> projets trouvés."
+
+#: www/trove/index.php:168
+#, php-format
+msgid "Displaying %d project per page. Projects sorted by activity ranking."
+msgid_plural ""
+"Displaying %d projects per page. Projects sorted by activity ranking."
+msgstr[0] ""
+msgstr[1] ""
+
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Aucun nom d'utilisateur n'a été fourni"
-
-#~ msgid "The crypt function is not available in this version of PHP."
-#~ msgstr "La fonction crypt n'est pas disponible dans cette version de PHP."
-
-#~ msgid "Public Forum"
-#~ msgstr "Forum public"
-
-#~ msgid "Project Manager"
-#~ msgstr "Gestionnaire de tâches"
-
-#~ msgid "Public Project Manager"
-#~ msgstr "Gestionnaire de tâches publiques"
-
-#~ msgid "Project Manager Admin"
-#~ msgstr "Administration du gestionnaire de tâches"
-
-#~ msgid "Public Tracker"
-#~ msgstr "Outil de suivi public"
-
-#~ msgid "File Package"
-#~ msgstr "Paquet de fichiers"
-
-#~ msgid "all %1$s mailings and notifications"
-#~ msgstr "Toutes les notifications et envois de courriers de %1$s"
-
-#~ msgid "%1$s site mailings"
-#~ msgstr "Les messages de %1$s"
-
-#~ msgid "logged in"
-#~ msgstr "connecté"
