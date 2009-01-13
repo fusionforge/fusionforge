@@ -512,28 +512,6 @@ if (\$params['group']) {
 
 	<?php
 
-/*
-
-	if (\$params['titlevals']) {
-		\$title =		\$Language->getText(\$params['pagename'],'title',\$params['titlevals']);
-	} else {
-		\$title =		\$Language->getText(\$params['pagename'],'title');
-	}
-
-	if (\$params['sectionvals']) {
-		\$section =	  \$Language->getText(\$params['pagename'],'section',\$params['sectionvals']);
-	} else {
-		\$section =	  \$Language->getText(\$params['pagename'],'section');
-	}
-
-	if (\$section) {
-		print "<strong>\$section</strong>\n";
-	}
-
-	if (\$title) {
-		   print "<h2>\$title</h2>\n";
-	}
-*/
 	}
 
 	function footer(\$params) {
