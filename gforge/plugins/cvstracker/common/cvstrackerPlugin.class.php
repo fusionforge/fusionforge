@@ -80,8 +80,9 @@ class cvstrackerPlugin extends Plugin {
 					$Row['file'], $Row['actual_version']).
 				'</td>
 				<td>'. htmlspecialchars($Row['log_text']).'</td>
-				<td><a href="/users/'. $Row['author'].'">'.
-					$Row['author'].'</a></td>
+				<td>'. util_make_link_u ($Row['author'],
+							 user_get_object_by_name ($Row['author'])->getId(),
+							 $Row['author']).'</td>
 				</tr>';
 			}
 			echo $GLOBALS['HTML']->listTableBottom();
