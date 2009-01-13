@@ -1,3 +1,8 @@
+2009-01-13  Roland Mas  <lolando@debian.org>
+
+	* common/include/gettext.php: Fixed language_name_to_lang_id()
+	function (patch #5629 from Mickaël Bridard).
+
 2008-11-25  Roland Mas  <lolando@debian.org>
 
 	* common/include/GroupJoinRequest.class.php: Properly escape the

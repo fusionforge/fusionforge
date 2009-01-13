@@ -161,7 +161,7 @@ function lang_id_to_language_name ($lang_id) {
 
 function language_name_to_lang_id ($language) {
 	$res = db_query('SELECT language_id FROM supported_languages WHERE classname=\''.$language.'\'');
-	return db_result($res, 0, 'classname');
+	return db_result($res, 0, 'language_id');
 }
 
 function setup_gettext_from_browser() {
