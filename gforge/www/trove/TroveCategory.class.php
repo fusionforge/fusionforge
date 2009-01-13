@@ -66,16 +66,15 @@ class TroveCategory extends Error {
 			$this->categoryId = $categoryId;
 			if (!$dataArray || !is_array($dataArray)) {
 				if (!$this->fetchData($categoryId)) {
-					$this->setError(
-						$Language->getText('trove_list','invalid_category_title'),
-						$Language->getText('trove_list','invalid_category_text').': '.db_error()
+					$this->setError(_('Invalid Trove Category'),
+							_('That Trove category does not exist.').' '.db_error()
 					);
 				}
 			} else {
 				$this->dataArray =& $dataArray;
 			}
 		} else {
-			$this->setError($Language->getText('global','error'), $GLOBALS['Language']->getText('admin_trove_cat_edit','no_such_category'));
+			$this->setError(_('ERROR'), _('That Trove category does not exist.'));
 		}
 	}
 	
@@ -103,7 +102,7 @@ class TroveCategory extends Error {
 		$fullName = trim($fullName);
 		$description = trim($description);
 		if(empty($shortName) || empty($fullName)) {
-			$this->setError($Language->getText('general','error'), 'empty strings');
+			$this->setError(_('ERROR'), _('Empty strings'));
 			return false;
 		} else {
 			db_begin();
@@ -115,7 +114,7 @@ class TroveCategory extends Error {
 				WHERE trove_cat_id='".$this->categoryId."'"
 			);
 			if(!$result || db_affected_rows($result) != 1) {
-				$this->setError($Language->getText('general','error'), 'cannot update');
+				$this->setError(_('ERROR'), _('Cannot update'));
 				db_rollback();
 				return false;
 			} else {
@@ -164,8 +163,6 @@ class TroveCategory extends Error {
 			$res = db_query($sql);
 			
 			if (!$res) {
-				//$this->setError($Language->getText('general', 'error_getting', array($Language->getText('mail_common', 'mailing_list'))));
-				//return false;
 				return $this->labels;
 			}
 			while($data =& db_fetch_array($res)) {

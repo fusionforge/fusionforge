@@ -152,54 +152,35 @@ if($filter) {
 // We display projects
 
 $offset = getIntFromGet('offset');
+$page = getIntFromGet('page');
 
 $projectsResult = $category->getProjects($offset);
-/*
-$res_grp = db_query("
-	SELECT * 
-	FROM trove_agg
-	$discrim_queryalias
-	WHERE trove_agg.trove_cat_id='$form_cat'
-	$discrim_queryand
-	ORDER BY trove_agg.trove_cat_id ASC, trove_agg.ranking ASC
-", $TROVE_HARDQUERYLIMIT, 0, SYS_DB_TROVE);
-echo db_error();
-$querytotalcount = db_numrows($res_grp);
-	
-// #################################################################
-// limit/offset display
-
-// no funny stuff with get vars
-
-if (!isset($page) || !is_numeric($page)) {
-	$page = 1;
-}
 
 // store this as a var so it can be printed later as well
 $html_limit = '<span style="text-align:center;font-size:smaller">';
-if ($querytotalcount == $TROVE_HARDQUERYLIMIT){
-	$html_limit .= 'More than ';
-	$html_limit .= $Language->getText('trove_list','more_than',array($querytotalcount));
-	
-	}
-$html_limit .= $Language->getText('trove_list','number_of_projects',array($querytotalcount));
+$html_limit .= sprintf (ngettext ('<strong>%d</strong> project in result set.',
+				  '<strong>%d</strong> projects in result set.',
+				  $querytotalcount),
+			$querytotalcount) ;
 
 // only display pages stuff if there is more to display
 if ($querytotalcount > $TROVE_BROWSELIMIT) {
-	$html_limit .= ' Displaying '.$TROVE_BROWSELIMIT.' per page. Projects sorted by activity ranking.<br />';
+	$html_limit .= ' ' . sprintf (ngettext ('Displaying %d project per page. Projects sorted by activity ranking.',
+						'Displaying %d projects per page. Projects sorted by activity ranking.',
+						$TROVE_BROWSELIMIT),
+				      $TROVE_BROWSELIMIT)
+		. '<br />';
 
 	// display all the numbers
 	for ($i=1;$i<=ceil($querytotalcount/$TROVE_BROWSELIMIT);$i++) {
 		$html_limit .= ' ';
-		if ($page != $i) {
-			$html_limit .= '<a href="/softwaremap/trove_list.php?form_cat='.$form_cat;
-			$html_limit .= $discrim_url.'&page='.$i;
-			$html_limit .= '">';
-		} else $html_limit .= '<strong>';
-		$html_limit .= '&lt;'.$i.'&gt;';
-		if ($page != $i) {
-			$html_limit .= '</a>';
-		} else $html_limit .= '</strong>';
+		$displayed_i = "&lt;$i&gt;" ;
+		if ($page == $i) {
+			$html_limit .= "<strong>$displayed_i</strong>" ;
+		} else {
+			$html_limit .= url_make_link ("/softwaremap/trove_list.php?form_cat=$form_cat&page=$i",
+						      $displayed_i) ;
+		}
 		$html_limit .= ' ';
 	}
 }

@@ -1,5 +1,8 @@
 2009-01-13  Roland Mas  <lolando@debian.org>
 
+	* www/trove/*: Redo gettext transition that had somehow gotten
+	lost.
+
 	* plugins/wiki/www/u: Remove call to the old $Language->getText()
 	API.
 
