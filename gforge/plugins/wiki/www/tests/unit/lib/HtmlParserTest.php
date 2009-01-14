@@ -13,10 +13,10 @@ class HtmlParserTest extends phpwiki_TestCase {
 
     function testSimple() {
         $html2wiki = array(
-                           "<B>bold</B>"              => "*bold*",
-                           "<STRONG>strong</STRONG>"  => "*strong*",
-                           "<I>italic</I>"	     => "_italic_",
-                           "<EM>emphasized</EM>"     => "_emphasized_",
+                           "<b>bold</b>"              => "*bold*",
+                           "<strong>strong</strong>"  => "*strong*",
+                           "<i>italic</i>"	     => "_italic_",
+                           "<em>emphasized</em>"     => "_emphasized_",
                            "<HR>"		     => "----",
                            "<DT><DD>Indent</DD></DT>" => ";:Indent",
                            "<NOWIKI>nowiki</NOWIKI>"  => "<verbatim>\nnowiki\n</verbatim>",

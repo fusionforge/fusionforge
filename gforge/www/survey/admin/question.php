@@ -43,9 +43,9 @@ if (!session_loggedin() || !user_ismember($group_id,'A')) {
 /* Create a Survey Question for general purpose */
 $sq = new SurveyQuestion($g, $question_id);
 if (!$sq || !is_object($sq)) {
-    echo "<h3>"._('Error'). ' Can not get Survey Question' ."</H3>";
+    echo "<h3>"._('Error'). ' Can not get Survey Question' ."</h3>";
 } else if ( $sq->isError()) {
-    echo "<h3>"._('Error'). $sq->getErrorMessage() ."</H3>";
+    echo "<h3>"._('Error'). $sq->getErrorMessage() ."</h3>";
 }
 
 /* Delete a question */
@@ -58,7 +58,7 @@ if (getStringFromRequest('delete')=="Y" && $question_id) {
     } else {
 	$msg = _('Delete successful');
     }
-    echo "<H3>".$msg ."</H3>";
+    echo "<h3>".$msg ."</h3>";
 } else if (getStringFromRequest('post')=="Y") {
     /* Modification */
     if ($question_id) {
@@ -79,7 +79,7 @@ if (getStringFromRequest('delete')=="Y" && $question_id) {
 	form_release_key(getStringFromRequest("form_key"));
     }
     
-    echo "<H3>".$msg ."</H3>";
+    echo "<h3>".$msg ."</h3>";
 
     /* Add now Question */
     $sq = false;

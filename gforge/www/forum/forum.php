@@ -384,7 +384,7 @@ if ($forum_id) {
 		//
 		//	Viewing an entire message forum in a given format
 		//
-		echo '<CENTER><h3>'._('Start New Thread').'</h3></CENTER>';
+		echo '<center><h3>'._('Start New Thread').'</h3></center>';
 		$fh->showPostForm();
 	}
 */

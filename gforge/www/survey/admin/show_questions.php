@@ -74,7 +74,7 @@ Function  ShowResultsEditQuestion($result) {
 
 		echo( "</tr>");
 	}
-	echo "</table>"; //</td></tr></TABLE>");
+	echo "</table>"; //</td></tr></table>");
 }
 
 /*

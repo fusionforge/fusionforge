@@ -255,7 +255,7 @@ if ($server) {
    $output['version'] = $GLOBALS['HTTP_GET_VARS']['version'];
    if ($server) {
       $title = $server['title'];
-      echo "<h2><CENTER>Results for $title</CENTER></H2>";
+      echo "<h2><center>Results for $title</center></h2>";
       
       ident($server, $debug, $output);
       

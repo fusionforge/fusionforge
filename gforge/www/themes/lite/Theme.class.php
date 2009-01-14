@@ -214,7 +214,7 @@ vironment" border="0" /></a>
 					</td>
 				</tr>
 				<tr bgcolor="'.$this->COLOR_HTMLBOX_TITLE.'" align="center">
-					<td colspan="2"><SPAN class=titlebar>'.$title.'</SPAN></td>
+					<td colspan="2"><SPAN class=titlebar>'.$title.'</span></td>
 				</tr>
 				<tr align=left bgcolor="'. $this->COLOR_HTMLBOX_BACK .'">
 					<td colspan="2">';

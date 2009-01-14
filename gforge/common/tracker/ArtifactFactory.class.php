@@ -94,7 +94,7 @@ class ArtifactFactory extends Error {
 	 *	@param	array	Array of extra fields & elements to limit the query to.
 	 */
 	function setup($offset,$order_col,$sort,$max_rows,$set,$_assigned_to,$_status,$_extra_fields=array()) {
-//echo "<BR>offset: $offset| order: $order|max_rows: $max_rows|_assigned_to: $_assigned_to|_status: $_status";
+//echo "<br />offset: $offset| order: $order|max_rows: $max_rows|_assigned_to: $_assigned_to|_status: $_status";
 
 		if ((!$offset) || ($offset < 0)) {
 			$this->offset=0;

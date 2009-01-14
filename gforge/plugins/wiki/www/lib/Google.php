@@ -112,7 +112,7 @@ class GoogleSearchResults {
  *   absolute URL path.
  *
  *   <snippet> - A snippet which shows the query in context on the URL
- *   where it appears. This is formatted HTML and usually includes <B>
+ *   where it appears. This is formatted HTML and usually includes <b>
  *   tags within it. Note that the query term does not always appear
  *   in the snippet. Note: Query terms will be in highlighted in bold
  *   in the results, and line breaks will be included for proper text

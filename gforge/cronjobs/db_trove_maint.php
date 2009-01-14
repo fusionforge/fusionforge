@@ -196,7 +196,7 @@ while (list($k,$v) = each($sum_totals)) {
 //	$err .= "<tr><td>$k</td><td>$v</td></tr>\n";
 
 }
-//$err .= "</TABLE>";
+//$err .= "</table>";
 
 db_commit(SYS_DB_TROVE);
 

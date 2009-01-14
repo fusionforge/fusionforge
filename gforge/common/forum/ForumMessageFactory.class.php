@@ -87,7 +87,7 @@ class ForumMessageFactory extends Error {
 	 *	@param	int	Whether to set these prefs into the database - use "custom".
 	 */
 	function setup($offset,$style,$max_rows,$set) {
-//echo "<BR>offset: $offset| style: $style|max_rows: $max_rows|set: $set+";
+//echo "<br />offset: $offset| style: $style|max_rows: $max_rows|set: $set+";
 		if ((!$offset) || ($offset < 0)) {
 			$this->offset=0;
 		} else {

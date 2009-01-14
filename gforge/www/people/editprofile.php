@@ -302,7 +302,7 @@ if (session_loggedin()) {
 					"<td>".html_build_select_box_from_arrays($monthArrayVals,$monthArray, "endM", date("m"), false, "").
 						html_build_select_box_from_arrays($yearArray,$yearArray, "endY", 0, false, "")."</td>".
 				"</tr>".
-			"</TABLE>".
+			"</table>".
 				
 				"<table border=0 >";
 
@@ -332,7 +332,7 @@ if (session_loggedin()) {
 		echo '<form action="'.getStringFromServer('PHP_SELF').'" METHOD="POST">';
 		displayUserSkills(user_getid(), 1); 
 		echo '</form>';				
-		echo '</TABLE>';
+		echo '</table>';
 
 	}
 

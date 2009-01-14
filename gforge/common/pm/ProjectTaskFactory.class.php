@@ -94,7 +94,7 @@ class ProjectTaskFactory extends Error {
 	 *	@param	string	What view mode the screen should be in.
 	 */
 	function setup($offset,$order,$max_rows,$set,$_assigned_to,$_status,$_category_id,$_view='') {
-//echo "<BR>offset: $offset| order: $order|max_rows: $max_rows|_assigned_to: $_assigned_to|_status: $_status|_category_id: $_category_id +";
+//echo "<br />offset: $offset| order: $order|max_rows: $max_rows|_assigned_to: $_assigned_to|_status: $_status|_category_id: $_category_id +";
 		if ((!$offset) || ($offset < 0)) {
 			$this->offset=0;
 		} else {

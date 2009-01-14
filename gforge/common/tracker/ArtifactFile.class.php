@@ -124,7 +124,7 @@ class ArtifactFile extends Error {
 		//	data validation
 		//
 		if (!$filename || !$filetype || !$filesize || !$bin_data) {
-			//echo '<P>|'.$filename.'|'.$filetype.'|'.$filesize.'|'.$bin_data.'|';
+			//echo '<p>|'.$filename.'|'.$filetype.'|'.$filesize.'|'.$bin_data.'|';
 			$this->setError(_('ArtifactFile: File name, type, size, and data are required'));
 			return false;
 		}

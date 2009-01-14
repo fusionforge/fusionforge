@@ -88,7 +88,7 @@ class BBCodeSupport extends Error {
 															<tr>
 																  <td>',
 								
-								'email' 				=> '<a href="mailto:\\1">\\1</A>',	
+								'email' 				=> '<a href="mailto:\\1">\\1</a>',	
 															
 								'url1' 					=> '<a href="\\1\\2" target="_blank">\\1\\2</a>',
 								'url2' 					=> '<a href="http://\\1" target="_blank">\\1</a>',

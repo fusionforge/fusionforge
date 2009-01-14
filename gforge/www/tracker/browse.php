@@ -461,7 +461,7 @@ if ($art_arr && count($art_arr) > 0) {
 
 			<tr><td colspan="3" align="MIDDLE"><input type="SUBMIT" name="submit" value="'._('Mass update').'"></td></tr>
 
-			</TABLE>
+			</table>
 		</form>';
 	}
 

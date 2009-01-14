@@ -67,7 +67,7 @@ Function  ShowResultComments($result) {
 
 		echo "</tr>";
 	}
-	echo "</table>"; //</td></tr></TABLE>";
+	echo "</table>"; //</td></tr></table>";
 }
 
 $sql="SELECT question FROM survey_questions WHERE question_id='$question_id'";

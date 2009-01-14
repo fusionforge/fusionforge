@@ -461,7 +461,7 @@ function dbtable_update ( $tablear, $tablename, $valuesar ) {
     }
     $sql .= " " . $tablear[$i]["name"] . " = '" . $valuesar[$i] . "'";
   }
-  //echo "SQL: $sql <P>\n";
+  //echo "SQL: $sql <p>\n";
   if ( ! dbi_query ( $sql ) ) {
     // Shouldn't happen... complain if it does.
     $error = translate("Database error") . ": " . dbi_error ();

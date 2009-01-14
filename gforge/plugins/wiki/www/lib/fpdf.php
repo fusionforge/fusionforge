@@ -269,7 +269,7 @@ class FPDF
 
     function Error($msg) {
 	//Fatal error
-	die('<B>FPDF error: </B>'.$msg);
+	die('<b>FPDF error: </b>'.$msg);
     }
 
     function Open() {
