@@ -1,5 +1,8 @@
 2009-01-14  Roland Mas  <lolando@debian.org>
 
+	* www/docman/admin/index.php: Fixed the types expected from the
+	query parameters (based on patch #5630 from Mickaël Bridard).
+
 	* various files all over the place: Converted a few links to make
 	use of util_make_link and util_make_url functions.  We should be
 	almost done now.
