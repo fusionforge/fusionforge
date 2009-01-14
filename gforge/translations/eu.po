@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-13 17:21+0100\n"
+"POT-Creation-Date: 2009-01-14 10:49+0100\n"
 "PO-Revision-Date: 2007-03-13 19:44+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1122,12 +1122,13 @@ msgstr "Jarduerarik gabeko kontua"
 
 #: common/include/session.php:409 www/account/lostlogin.php:49
 #: www/account/lostlogin.php:55 www/account/lostlogin.php:70
-#: www/account/lostlogin.php:77 www/account/lostlogin.php:93
+#: www/account/lostlogin.php:77 www/account/lostlogin.php:94
 #: www/pm/calendar.php:85 www/pm/calendar.php:89 www/pm/calendar.php:91
 #: www/pm/calendar.php:96 www/pm/calendar.php:98 www/pm/calendar.php:109
 #: www/survey/rating_resp.php:55 www/trove/TroveCategory.class.php:77
 #: www/trove/TroveCategory.class.php:105 www/trove/TroveCategory.class.php:117
 #: www/trove/admin/trove_cat_edit.php:44
+#, php-format
 msgid "ERROR"
 msgstr "Akatsa"
 
@@ -1258,7 +1259,7 @@ msgstr "Menpekotasun zirkularra antzeman da"
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:53
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:51
 #: www/snippet/detail.php:72 www/snippet/detail.php:160
-#: www/soap/tracker/tracker.php:1133 www/softwaremap/trove_list.php:307
+#: www/soap/tracker/tracker.php:1133 www/softwaremap/trove_list.php:304
 #: www/stats/lastlogins.php:51 www/tracker/browse.php:331
 #: www/tracker/detail.php:46 www/tracker/detail.php:119
 #: www/tracker/detail.php:120 www/tracker/downloadcsv.php:76
@@ -1804,18 +1805,18 @@ msgstr "Azken albisteak"
 msgid "Links to related CVS commits"
 msgstr ""
 
-#: plugins/cvstracker/common/cvstrackerPlugin.class.php:90
+#: plugins/cvstracker/common/cvstrackerPlugin.class.php:91
 msgid "No commits have been made."
 msgstr ""
 
-#: plugins/cvstracker/common/cvstrackerPlugin.class.php:102
-#: plugins/svntracker/common/svntrackerPlugin.class.php:94
+#: plugins/cvstracker/common/cvstrackerPlugin.class.php:103
+#: plugins/svntracker/common/svntrackerPlugin.class.php:95
 #: www/frs/index.php:100
 msgid "Filename"
 msgstr "Fitxeroaren izena"
 
-#: plugins/cvstracker/common/cvstrackerPlugin.class.php:103
-#: plugins/svntracker/common/svntrackerPlugin.class.php:95
+#: plugins/cvstracker/common/cvstrackerPlugin.class.php:104
+#: plugins/svntracker/common/svntrackerPlugin.class.php:96
 #: www/admin/cronman.php:52 www/admin/massmail.php:147
 #: www/developer/diary.php:48 www/developer/diary.php:80
 #: www/forum/forum.php:237 www/forum/include/ForumHTML.class.php:68
@@ -1837,24 +1838,24 @@ msgstr "Fitxeroaren izena"
 msgid "Date"
 msgstr "Data"
 
-#: plugins/cvstracker/common/cvstrackerPlugin.class.php:104
-#: plugins/svntracker/common/svntrackerPlugin.class.php:96
+#: plugins/cvstracker/common/cvstrackerPlugin.class.php:105
+#: plugins/svntracker/common/svntrackerPlugin.class.php:97
 msgid "Previous Version"
 msgstr ""
 
-#: plugins/cvstracker/common/cvstrackerPlugin.class.php:105
-#: plugins/svntracker/common/svntrackerPlugin.class.php:97
+#: plugins/cvstracker/common/cvstrackerPlugin.class.php:106
+#: plugins/svntracker/common/svntrackerPlugin.class.php:98
 #, fuzzy
 msgid "Current Version"
 msgstr "Bertsioa"
 
-#: plugins/cvstracker/common/cvstrackerPlugin.class.php:106
-#: plugins/svntracker/common/svntrackerPlugin.class.php:98
+#: plugins/cvstracker/common/cvstrackerPlugin.class.php:107
+#: plugins/svntracker/common/svntrackerPlugin.class.php:99
 msgid "Log Message"
 msgstr ""
 
-#: plugins/cvstracker/common/cvstrackerPlugin.class.php:107
-#: plugins/svntracker/common/svntrackerPlugin.class.php:99
+#: plugins/cvstracker/common/cvstrackerPlugin.class.php:108
+#: plugins/svntracker/common/svntrackerPlugin.class.php:100
 #: www/forum/forum.php:236 www/forum/message.php:139
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:44
 #: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:37
@@ -1863,16 +1864,16 @@ msgstr ""
 msgid "Author"
 msgstr "Egilea"
 
-#: plugins/cvstracker/common/cvstrackerPlugin.class.php:158
-#: plugins/svntracker/common/svntrackerPlugin.class.php:151
+#: plugins/cvstracker/common/cvstrackerPlugin.class.php:159
+#: plugins/svntracker/common/svntrackerPlugin.class.php:152
 msgid "Diff To"
 msgstr ""
 
-#: plugins/helloworld/common/HelloWorldPlugin.class.php:137
+#: plugins/helloworld/common/HelloWorldPlugin.class.php:138
 msgid "View Personal HelloWorld"
 msgstr ""
 
-#: plugins/helloworld/common/HelloWorldPlugin.class.php:144
+#: plugins/helloworld/common/HelloWorldPlugin.class.php:148
 msgid "View the HelloWorld Administration"
 msgstr ""
 
@@ -1886,11 +1887,11 @@ msgstr "Kideak ikusi"
 msgid "Mantis admin"
 msgstr "Posta elektronikoen administraria"
 
-#: plugins/mediawiki/common/MediaWikiPlugin.class.php:143
+#: plugins/mediawiki/common/MediaWikiPlugin.class.php:144
 msgid "View Personal MediaWiki"
 msgstr ""
 
-#: plugins/mediawiki/common/MediaWikiPlugin.class.php:150
+#: plugins/mediawiki/common/MediaWikiPlugin.class.php:154
 msgid "View the MediaWiki Administration"
 msgstr ""
 
@@ -1898,102 +1899,102 @@ msgstr ""
 msgid "Get Help"
 msgstr ""
 
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:113
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:114
 msgid "View Personal projects_hierarchy"
 msgstr ""
 
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:120
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:124
 msgid "View the projects_hierarchy Administration"
 msgstr ""
 
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:131
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:137
 msgid "Linked projects"
 msgstr ""
 
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:138
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:151
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:166
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:174
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:144
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:157
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:172
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:180
 #, fuzzy
 msgid "Link"
 msgstr "Izenpetu"
 
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:138
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:144
 msgid "Parent project"
 msgstr ""
 
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:151
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:157
 msgid "Child project"
 msgstr ""
 
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:166
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:174
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:172
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:180
 msgid "Links"
 msgstr ""
 
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:185
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:191
 msgid "No linked project avalaible"
 msgstr ""
 
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:200
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:206
 msgid "Modify the hierarchy"
 msgstr ""
 
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:205
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:215
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:211
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:221
 msgid "Select a project :"
 msgstr ""
 
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:207
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:217
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:262
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:213
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:223
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:268
 msgid "Commentary :"
 msgstr ""
 
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:209
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:215
 msgid "Add son project"
 msgstr ""
 
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:218
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:224
 msgid "Add a link"
 msgstr ""
 
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:233
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:281
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:239
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:287
 msgid "Link list"
 msgstr ""
 
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:246
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:296
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:252
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:302
 msgid "Navigation link"
 msgstr ""
 
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:249
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:299
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:255
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:305
 msgid "Share link"
 msgstr ""
 
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:255
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:261
 msgid "Waiting"
 msgstr ""
 
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:258
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:306
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:309
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:264
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:312
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:315
 msgid "Authorize"
 msgstr ""
 
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:261
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:312
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:339
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:369
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:267
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:318
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:345
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:375
 msgid "Do you really want to delete this link ?"
 msgstr ""
 
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:261
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:312
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:339
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:369
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:267
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:318
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:345
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:375
 #: www/admin/admin_table.php:138 www/admin/admin_table.php:268
 #: www/admin/responses_admin.php:49 www/admin/trove/trove_cat_edit.php:168
 #: www/admin/useredit.php:197 www/docman/admin/index.php:459
@@ -2016,21 +2017,21 @@ msgstr ""
 msgid "Delete"
 msgstr "Ezabatu"
 
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:306
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:367
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:312
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:373
 msgid "Do you really want to authorize this project ?"
 msgstr ""
 
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:313
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:370
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:319
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:376
 msgid "Commentary of father :"
 msgstr ""
 
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:332
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:338
 msgid "Project's parent"
 msgstr ""
 
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:359
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:365
 msgid "Father waiting for validation"
 msgstr ""
 
@@ -2082,49 +2083,49 @@ msgid "Remove This Filter"
 msgstr "Filtro hau ezabatu"
 
 #: plugins/projects_hierarchy/www/softwaremap.php:194
-#: www/softwaremap/trove_list.php:179 www/trove/index.php:142
+#: www/softwaremap/trove_list.php:175 www/trove/index.php:142
 #, php-format
 msgid "%1$s projects"
 msgstr "%1$s proiektu"
 
 #: plugins/projects_hierarchy/www/softwaremap.php:209
-#: www/softwaremap/trove_list.php:194 www/trove/index.php:85
+#: www/softwaremap/trove_list.php:190 www/trove/index.php:85
 msgid "Browse By"
 msgstr "Nola ikusi"
 
 #: plugins/projects_hierarchy/www/softwaremap.php:264
-#: www/softwaremap/trove_list.php:250
+#: www/softwaremap/trove_list.php:244
 #, php-format
 msgid "More than <strong>%1$s</strong> projects in result set."
 msgstr "<strong>%1$s</strong> proiektu gehiago kategoria honetan."
 
 #: plugins/projects_hierarchy/www/softwaremap.php:267
-#: www/softwaremap/trove_list.php:253
+#: www/softwaremap/trove_list.php:247
 #, fuzzy, php-format
 msgid "<strong>%1$s</strong> project in result set."
 msgid_plural "<strong>%1$s</strong> projects in result set."
 msgstr[0] "<strong>%1$s</strong> proiektu kategoria honetan."
 msgstr[1] "<strong>%1$s</strong> proiektu kategoria honetan."
 
-#: plugins/projects_hierarchy/www/softwaremap.php:396
+#: plugins/projects_hierarchy/www/softwaremap.php:390
 msgid "Project Tree"
 msgstr ""
 
-#: plugins/quota_management/common/quota_managementPlugin.class.php:123
+#: plugins/quota_management/common/quota_managementPlugin.class.php:124
 msgid "View Personal quota_management"
 msgstr ""
 
-#: plugins/quota_management/common/quota_managementPlugin.class.php:130
+#: plugins/quota_management/common/quota_managementPlugin.class.php:134
 msgid "View the quota_management Administration"
 msgstr ""
 
-#: plugins/quota_management/common/quota_managementPlugin.class.php:140
+#: plugins/quota_management/common/quota_managementPlugin.class.php:147
 #: plugins/quota_management/www/quota.php:38
 #: plugins/quota_management/www/quota_admin.php:43
 msgid "Ressources usage and quota"
 msgstr ""
 
-#: plugins/quota_management/common/quota_managementPlugin.class.php:145
+#: plugins/quota_management/common/quota_managementPlugin.class.php:153
 msgid "Quota"
 msgstr ""
 
@@ -2318,8 +2319,8 @@ msgstr ""
 
 #: plugins/quota_management/www/quota_project.php:206
 #: plugins/quota_management/www/quota_project.php:253
-#: plugins/scmcvs/common/CVSPlugin.class.php:247
-#: plugins/scmsvn/common/SVNPlugin.class.php:281 www/pm/index.php:71
+#: plugins/scmcvs/common/CVSPlugin.class.php:253
+#: plugins/scmsvn/common/SVNPlugin.class.php:287 www/pm/index.php:71
 #: www/pm/mod_task.php:262 www/stats/site_stats_utils.php:290
 #: www/tracker/ind.php:43
 msgid "Total"
@@ -2427,38 +2428,38 @@ msgstr ""
 msgid "Download The Nightly CVS Tree Snapshot"
 msgstr ""
 
-#: plugins/scmcvs/common/CVSPlugin.class.php:127
-#: plugins/scmsvn/common/SVNPlugin.class.php:151
+#: plugins/scmcvs/common/CVSPlugin.class.php:128
+#: plugins/scmsvn/common/SVNPlugin.class.php:153
 msgid "Repository History"
 msgstr ""
 
-#: plugins/scmcvs/common/CVSPlugin.class.php:130
+#: plugins/scmcvs/common/CVSPlugin.class.php:131
 msgid ""
 "<b>Browse the CVS Tree</b><p>Browsing the CVS tree gives you a great view "
 "into the current status of this project's code. You may also view the "
 "complete histories of any file in the repository.</p>"
 msgstr ""
 
-#: plugins/scmcvs/common/CVSPlugin.class.php:131
+#: plugins/scmcvs/common/CVSPlugin.class.php:134
 msgid "Browse CVS Repository"
 msgstr ""
 
-#: plugins/scmcvs/common/CVSPlugin.class.php:180
-#: plugins/scmsvn/common/SVNPlugin.class.php:197
+#: plugins/scmcvs/common/CVSPlugin.class.php:185
+#: plugins/scmsvn/common/SVNPlugin.class.php:203
 msgid "Enable Anonymous Access"
 msgstr ""
 
-#: plugins/scmcvs/common/CVSPlugin.class.php:182
+#: plugins/scmcvs/common/CVSPlugin.class.php:187
 msgid "Enable pserver"
 msgstr ""
 
-#: plugins/scmcvs/common/CVSPlugin.class.php:210
+#: plugins/scmcvs/common/CVSPlugin.class.php:215
 #, php-format
 msgid "<strong>%1$s</strong> commits, <strong>%2$s</strong> adds"
 msgstr ""
 
-#: plugins/scmcvs/common/CVSPlugin.class.php:228
-#: plugins/scmsvn/common/SVNPlugin.class.php:248 www/admin/useredit.php:240
+#: plugins/scmcvs/common/CVSPlugin.class.php:233
+#: plugins/scmsvn/common/SVNPlugin.class.php:254 www/admin/useredit.php:240
 #: www/project/admin/editimages.php:262 www/reporting/usersummary.php:105
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:33
 #: www/tracker/detail.php:161 www/tracker/mod-limited.php:160
@@ -2466,13 +2467,13 @@ msgstr ""
 msgid "Name"
 msgstr "Izena"
 
-#: plugins/scmcvs/common/CVSPlugin.class.php:229
-#: plugins/scmsvn/common/SVNPlugin.class.php:249
+#: plugins/scmcvs/common/CVSPlugin.class.php:234
+#: plugins/scmsvn/common/SVNPlugin.class.php:255
 #: www/stats/site_stats_utils.php:303
 msgid "Adds"
 msgstr "Adds"
 
-#: plugins/scmcvs/common/CVSPlugin.class.php:230 www/activity/index.php:71
+#: plugins/scmcvs/common/CVSPlugin.class.php:235 www/activity/index.php:71
 #: www/tracker/detail.php:180 www/tracker/mod-limited.php:184
 #: www/tracker/mod.php:275
 msgid "Commits"
@@ -2510,31 +2511,31 @@ msgid ""
 "with the proper values. Enter your site password when prompted.</p>"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:141
+#: plugins/scmsvn/common/SVNPlugin.class.php:142
 msgid "Download The Nightly SVN Tree Snapshot"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:154
+#: plugins/scmsvn/common/SVNPlugin.class.php:156
 msgid ""
 "<b>Browse the Subversion Tree</b><p>Browsing the SVN tree gives you a great "
 "view into the current status of this project's code. You may also view the "
 "complete histories of any file in the repository.</p>"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:155
+#: plugins/scmsvn/common/SVNPlugin.class.php:159
 msgid "Browse Subversion Repository"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:213
+#: plugins/scmsvn/common/SVNPlugin.class.php:219
 #, php-format
 msgid "<strong>%1$s</strong> updates, <strong>%2$s</strong> adds"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:250
+#: plugins/scmsvn/common/SVNPlugin.class.php:256
 msgid "Updates"
 msgstr ""
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:272
+#: plugins/scmsvn/common/SVNPlugin.class.php:278
 msgid "Unknown"
 msgstr ""
 
@@ -2702,7 +2703,8 @@ msgstr "Pasahitza zaharra"
 msgid "New Password (at least 6 chars)"
 msgstr "Pasahitza berria (gutxienez 6 karaktere)"
 
-#: www/account/change_pw.php:106 www/account/lostlogin.php:106
+#: www/account/change_pw.php:106 www/account/lostlogin.php:107
+#, php-format
 msgid "New Password (repeat)"
 msgstr "Pasahitza berria (errepika ezazu)"
 
@@ -2731,7 +2733,7 @@ msgid ""
 msgstr ""
 
 #: www/account/editsshkeys.php:62 www/account/index.php:281
-#: www/account/lostlogin.php:109 www/admin/groupedit.php:231
+#: www/account/lostlogin.php:110 www/admin/groupedit.php:231
 #: www/admin/trove/trove_cat_edit.php:168 www/admin/useredit.php:202
 #: www/admin/vhost.php:182 www/forum/admin/ForumAdmin.class.php:377
 #: www/forum/admin/index.php:169 www/forum/include/ForumHTML.class.php:300
@@ -2742,6 +2744,7 @@ msgstr ""
 #: www/project/admin/database.php:233 www/project/admin/editgroupinfo.php:329
 #: www/project/admin/index.php:263 www/project/admin/index.php:275
 #: www/reporting/timecategory.php:98 www/scm/admin/index.php:111
+#, php-format
 msgid "Update"
 msgstr ""
 
@@ -2982,22 +2985,24 @@ msgid "You must supply valid password (at least 6 chars)."
 msgstr "Pasahitza egokia eman behar duzu (gutxienez sei karakterekoa)."
 
 #: www/account/lostlogin.php:88
+#, php-format
 msgid ""
 "<h2>Password changed</h2><p>Congratulations, you have re-set your account "
-"password.You may <a href=\"/account/login.php\">login</a> to the sitenow.</p>"
+"password. You may <a href=\"%1$s\">login</a> to the site now.</p>"
 msgstr ""
 
-#: www/account/lostlogin.php:96
-#, fuzzy
+#: www/account/lostlogin.php:97
+#, fuzzy, php-format
 msgid "Lost Password Login"
 msgstr "[Pasahitza ahaztu al zaizu?]"
 
-#: www/account/lostlogin.php:99
+#: www/account/lostlogin.php:100
 #, php-format
 msgid "Welcome, %s. You may now change your password."
 msgstr ""
 
-#: www/account/lostlogin.php:104
+#: www/account/lostlogin.php:105
+#, php-format
 msgid "New Password (min. 6 chars)"
 msgstr "Pasahitza berria (gutxienez 6 karaktere)"
 
@@ -4887,16 +4892,14 @@ msgstr "Proiektu honek ez ditu dokumenturik ikusgai."
 
 #: www/docman/display_doc.php:34
 #, php-format
-msgid ""
-"This document was moved to <a href=\"/docman/view.php/%1$s/%2$s\">this new "
-"location</a>"
+msgid "This document was moved to <a href=\"%1$s\">this new location</a>"
 msgstr ""
 
-#: www/docman/display_doc.php:37 www/docman/view.php:61
+#: www/docman/display_doc.php:38 www/docman/view.php:61
 msgid "No document data"
 msgstr "Ez dago daturik dokumentu honetan"
 
-#: www/docman/display_doc.php:37 www/docman/view.php:61
+#: www/docman/display_doc.php:38 www/docman/view.php:61
 msgid "No document to display - invalid or inactive document number."
 msgstr ""
 
@@ -6626,7 +6629,7 @@ msgstr "Egunkaria eta Oharrak"
 msgid "Register Project"
 msgstr "Proiektu berria erregistratu"
 
-#: www/include/project_home.php:17 www/include/user_home.php:124
+#: www/include/project_home.php:17 www/include/user_home.php:127
 msgid "Project Info"
 msgstr "Proiektuaren informazioa"
 
@@ -6865,11 +6868,11 @@ msgstr "Proiektu hau oraindik ez da kategorizatu"
 msgid "Trove Software Map"
 msgstr "Proiektuen mapa"
 
-#: www/include/trove.php:289
+#: www/include/trove.php:289 www/trove/include/trove.php:286
 msgid "(Now Filtering)"
 msgstr ""
 
-#: www/include/trove.php:297
+#: www/include/trove.php:297 www/trove/include/trove.php:295
 #, fuzzy
 msgid "[Filter]"
 msgstr "Fitxategia"
@@ -6928,19 +6931,19 @@ msgstr "Egunkariaren/oharren sarrerak:"
 msgid "View Diary & Notes"
 msgstr "Egunkaria eta oharrak ikusi"
 
-#: www/include/user_home.php:114
+#: www/include/user_home.php:115
 msgid "Monitor this Diary"
 msgstr "Egunkari hau monitorizatu"
 
-#: www/include/user_home.php:140
+#: www/include/user_home.php:143
 msgid "This developer is not a member of any projects."
 msgstr "Garatzaile hau ez inungo proiektuko kidea."
 
-#: www/include/user_home.php:143
+#: www/include/user_home.php:146
 msgid "This developer is a member of the following groups:"
 msgstr "Garatzaile hau ondorengo taldekidea da:"
 
-#: www/include/user_home.php:165
+#: www/include/user_home.php:168
 #, php-format
 msgid ""
 "<P>If you are familiar with this user, please take a moment to rate him/her "
@@ -6950,7 +6953,7 @@ msgid ""
 "re-implemented and expanded in a few ways.</P>"
 msgstr ""
 
-#: www/include/user_home.php:172
+#: www/include/user_home.php:175
 #, php-format
 msgid ""
 "<P>The Peer rating box shows all rating averages (and response levels) for "
@@ -6963,17 +6966,18 @@ msgid ""
 "ratings of other developers will be given (between 1 and 1.5) -- higher "
 "rated user's responses are given more weight.</LI></UL><P><I>If you would "
 "like to opt-out from peer rating system (this will affect your ability to "
-"both rate and be rated), refer to <a href=\"/account/\">your account "
-"maintenance page</A>. If you choose not to participate, your ratings of "
-"other users will be permanently deleted and the 'Peer Rating' box will "
-"disappear from your user page. </I></P>"
+"both rate and be rated), refer to <a href=\"%2$s\">your account maintenance "
+"page</A>. If you choose not to participate, your ratings of other users will "
+"be permanently deleted and the 'Peer Rating' box will disappear from your "
+"user page. </I></P>"
 msgstr ""
 
-#: www/include/user_home.php:177
+#: www/include/user_home.php:182
+#, php-format
 msgid ""
 "You opted-out from peer rating system, otherwise you would have a chance to "
-"rate the user. Refer to <a href=\"/account/\">your account maintenance page</"
-"a> for more information."
+"rate the user. Refer to <a href=\"%1$s\">your account maintenance page</a> "
+"for more information."
 msgstr ""
 
 #: www/include/vote_function.php:196

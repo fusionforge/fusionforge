@@ -110,8 +110,11 @@ $HTML->header(array('title'=>_('Developer Profile')));
 		"WHERE user_id='". $user_id ."' AND is_public=1");
 	echo _('Diary/Note entries:').' '.db_result($res,0,0).'
 	<p/>'.util_make_link ('/developer/diary.php?diary_user='.$user_id,_('View Diary & Notes')).'</p>
-	<p/>
-	<a href="'.util_make_url ('/developer/monitor.php?diary_user='.$user_id) .'">'. html_image("ic/check.png",'15','13',array(),0) ._('Monitor this Diary').'</a></p>';
+	<p/>';
+	echo util_make_url ('/developer/monitor.php?diary_user='.$user_id,
+			    html_image("ic/check.png",'15','13',array(),0) ._('Monitor this Diary')
+		) ;
+	echo '</p>';
 	$hookparams['user_id'] = $user_id;
 	plugin_hook("user_personal_links",$hookparams);
 	
@@ -169,12 +172,15 @@ printf(_('<P>If you are familiar with this user, please take a moment to rate hi
         <?php echo vote_show_user_rate_box ($user_id, $me?$me->getID():0); ?>
 	</div>
 
-<?php printf(_('<P>The Peer rating box shows all rating averages (and response levels) for each individual criteria. Due to the math and processing required to do otherwise, these numbers incoporate responses from both "trusted" and "non-trusted" users.</P><UL><LI>The "Sitewide Rank" field shows the user\'s rank compared to all ranked %1$s users.</LI><LI>The "Aggregate Score" shows an average, weighted overall score, based on trusted-responses only.</LI><LI>The "Personal Importance" field shows the weight that users ratings of other developers will be given (between 1 and 1.5) -- higher rated user\'s responses are given more weight.</LI></UL><P><I>If you would like to opt-out from peer rating system (this will affect your ability to both rate and be rated), refer to <a href="/account/">your account maintenance page</A>. If you choose not to participate, your ratings of other users will be permanently deleted and the \'Peer Rating\' box will disappear from your user page. </I></P>'), $GLOBALS['sys_name']);
+		  <?php printf(_('<P>The Peer rating box shows all rating averages (and response levels) for each individual criteria. Due to the math and processing required to do otherwise, these numbers incoporate responses from both "trusted" and "non-trusted" users.</P><UL><LI>The "Sitewide Rank" field shows the user\'s rank compared to all ranked %1$s users.</LI><LI>The "Aggregate Score" shows an average, weighted overall score, based on trusted-responses only.</LI><LI>The "Personal Importance" field shows the weight that users ratings of other developers will be given (between 1 and 1.5) -- higher rated user\'s responses are given more weight.</LI></UL><P><I>If you would like to opt-out from peer rating system (this will affect your ability to both rate and be rated), refer to <a href="%2$s">your account maintenance page</A>. If you choose not to participate, your ratings of other users will be permanently deleted and the \'Peer Rating\' box will disappear from your user page. </I></P>'),
+			       $GLOBALS['sys_name'],
+			       util_make_url ("/account/"));
 
 } else if ($me && !$me->usesRatings()) { ?>
 <p/>
 <em>
-<?php echo _('You opted-out from peer rating system, otherwise you would have a chance to rate the user. Refer to <a href="/account/">your account maintenance page</a> for more information.'); ?>
+		<?php printf (_('You opted-out from peer rating system, otherwise you would have a chance to rate the user. Refer to <a href="%1$s">your account maintenance page</a> for more information.'),
+			      util_make_url ("/account")); ?>
 </em>
 <p/>
 <?php }

@@ -94,9 +94,9 @@ class BBCodeSupport extends Error {
 								'url2' 					=> '<a href="http://\\1" target="_blank">\\1</a>',
 								'url3' 					=> '<a href="\\1\\2" target="_blank">\\3</a>',
 								'url4' 					=> '<a href="http://\\1" target="_blank">\\2</a>',
-								'urltask'				=> '<a href="/pm/task.php?func=detailtask&project_task_id=\\3&group_id=\\1&group_project_id=\\2">\\4</a>',
-								'urlartifact'			=> '<a href="/tracker/index.php?func=detail&aid=\\1">Artifact\\1</a>'
-										);
+					  'urltask'				=> util_make_link ('/pm/task.php?func=detailtask&project_task_id=\\3&group_id=\\1&group_project_id=\\2', '\\4'),
+					  'urlartifact'			=> util_make_link ('/tracker/index.php?func=detail&aid=\\1', 'Artifact\\1')
+			);
 	 
 	 } 
 	

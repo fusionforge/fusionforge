@@ -53,9 +53,12 @@ class WikiHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$return = '';
 		for($i = 0; $i < $rowsCount; $i++) {
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'
-				. '<td><a href="/wiki/g/'. $group_name.'/'.db_result($result, $i, 'pagename').'">'
-				. html_image('ic/msg.png', '10', '12', array('border' => '0'))
-				. ' '.db_result($result, $i, 'pagename').'</a></td>
+				. '<td>' ;
+			$return .= util_make_link ('/wiki/g/'. $group_name.'/'.db_result($result, $i, 'pagename'),
+						   html_image('ic/msg.png', '10', '12', array('border' => '0'))
+						   . ' '.db_result($result, $i, 'pagename')
+				) ;
+			$return .= '</td>
 				<td width="15%">'.$data['author'].'</td>
 				<td width="15%">'.date($dateFormat, db_result($result, $i, 'mtime')).'</td></tr>';
 		}

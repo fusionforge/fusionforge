@@ -113,10 +113,11 @@ class CVSPlugin extends SCM {
 
 				// ######################## CVS Snapshot
 				if ($displayCvsBrowser) {
-					print '
-						<p>
-						[<a href="/snapshots.php?group_id='.$group_id.'">'._('Download The Nightly CVS Tree Snapshot').'</a>]
-						</p>';
+					print '<p>[' ;
+					print util_make_link ("/snapshots.php?group_id=$group_id",
+							      _('Download The Nightly CVS Tree Snapshot')
+						) ;
+					print ']</p>';
 	 			}
 				?>
 				</td>
@@ -128,7 +129,11 @@ class CVSPlugin extends SCM {
 				echo $this->getDetailedStats(array('group_id'=>$group_id)).'<p>';
 				if ($displayCvsBrowser){
 					echo _('<b>Browse the CVS Tree</b><p>Browsing the CVS tree gives you a great view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
-					echo '<p>[<a href="/scm/viewvc.php/?root='.$project->getUnixName().'">'._('Browse CVS Repository').'</a>]</p>' ;
+					echo '<p>[' ;
+					echo util_make_link ("/scm/viewvc.php/?root=".$project->getUnixName(),
+							     _('Browse CVS Repository')
+						) ;
+					echo ']</p>' ;
 					$hook_params['project_name'] = $project->getUnixName();
 					plugin_hook ("cvs_stats", $hook_params) ;
 				}
@@ -216,7 +221,7 @@ class CVSPlugin extends SCM {
 		$group_id = $params['group_id'] ;
 		
 		$result = db_query('
-			SELECT u.realname, u.user_name, sum(commits) as commits, sum(adds) as adds, sum(adds+commits) as combined
+			SELECT u.realname, u.user_name, u.user_id, sum(commits) as commits, sum(adds) as adds, sum(adds+commits) as combined
 			FROM stats_cvs_user s, users u
 			WHERE group_id=\''.$group_id.'\' AND s.user_id=u.user_id AND (commits>0 OR adds >0)
 			GROUP BY group_id, realname, user_name
@@ -236,8 +241,9 @@ class CVSPlugin extends SCM {
 
 			while($data = db_fetch_array($result)) {
 				echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
-				echo '<td width="50%"><a href="/users/'.$data['user_name'].'/">'.$data['realname'].'</a></td>'.
-					'<td width="25%" align="right">'.$data['adds']. '</td>'.
+				echo '<td width="50%">' ;
+				echo util_make_link_u ($data['user_name'], $data['user_id'], $data['realname']) ;
+				echo '</td><td width="25%" align="right">'.$data['adds']. '</td>'.
 					'<td width="25%" align="right">'.$data['commits'].'</td></tr>';
 				$total['adds'] += $data['adds'];
 				$total['commits'] += $data['commits'];

@@ -194,8 +194,10 @@ while($project = db_fetch_array($projectsResult)) {
 	?>
 		<tr valign="top">
 			<td colspan="2"><?php
-			echo $count.'. <a href="/projects/'.strtolower($project['unix_group_name']).'/"><strong>'
-			.htmlspecialchars($project['group_name']).'</strong></a>';
+	echo $count.'. ' ;
+	echo util_make_link_g ($project['unix_group_name'],
+			       $project['group_id'],
+			       '<strong>'.htmlspecialchars($project['group_name']).'</strong>');
 			if ($project['short_description']) {
 				echo ' - '.htmlspecialchars($project['short_description']);
 			}

@@ -275,26 +275,24 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats) {
 		}
 
 		if ($a_cats) {
-			$return .= '<a href="/softwaremap/trove_list.php?form_cat='
-				 .$folders_ids[$folders_len-1].$discrim_url.'">';
-		}
-		$return .= ($folders[$folders_len-1]);
-		if ($a_cats) {
-			$return .= '</a>';
+			$return .= util_make_link ('/softwaremap/trove_list.php?form_cat='.$folders_ids[$folders_len-1].$discrim_url,
+						   $folders[$folders_len-1]) ;
+		} else {
+			$return .= ($folders[$folders_len-1]);
 		}
 
 		if ($a_filter) {
 			if ($filterisalreadyapplied) {
-				$return .= ' <strong>(Now Filtering)</strong> ';
+				$return .= ' <strong>'. _('(Now Filtering)') .'</strong> ';
 			} else {
-				$return .= ' <a href="/softwaremap/trove_list.php?form_cat='
-					 .$form_cat;
+				$tmp_url = '/softwaremap/trove_list.php?form_cat='.$form_cat ;
 				if ($discrim_url) {
-					$return .= $discrim_url.','.$folders_ids[$folders_len-1];
+					$tmp_url .= $discrim_url.','.$folders_ids[$folders_len-1];
 				} else {
-					$return .= '&amp;discrim='.$folders_ids[$folders_len-1];
+					$tmp_url .= '&amp;discrim='.$folders_ids[$folders_len-1];
 				}
-				$return .= '">[Filter]</a> ';
+				$return .= util_make_link ($tmp_url,
+							   _('[Filter]')) . ' ' ;
 			}
 		}
 		$proj_discrim_used[$folders_ids[0]] = 1;

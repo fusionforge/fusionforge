@@ -1,8 +1,13 @@
+2009-01-14  Roland Mas  <lolando@debian.org>
+
+	* various files all over the place: Converted a few links to make
+	use of util_make_link and util_make_url functions.  We should be
+	almost done now.
+
 2009-01-13  Roland Mas  <lolando@debian.org>
 
-	* www/account/lostpw.php, www/my/index.php, www/my/rmproject.php,
-	various files under plugins/: Converted a few links to make use of
-	util_make_link and util_make_url functions.
+	* various files all over the place: Converted a few links to make
+	use of util_make_link and util_make_url functions.
 
 	* www/trove/*: Redo gettext transition that had somehow gotten
 	lost.

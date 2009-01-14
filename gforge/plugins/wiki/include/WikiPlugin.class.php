@@ -135,8 +135,10 @@ class GforgeWikiPlugin extends Plugin {
 			$user_name = $user->getUnixName();
 			//check if the user has the plugin activated
 			if ($user->usesPlugin($this->name)) {
-				echo '	<p>
-					<a href="/wiki/u/'.urlencode($user_name).'/HomePage">' . _('View personal wiki') .'</a></p>';
+				echo '	<p>' ;
+				echo util_make_link ('/wiki/u/'.urlencode($user_name).'/HomePage',
+						     _('View personal wiki'));
+				echo '</p>';
 			}
 		} elseif ($hookname == 'search_engines') {
 			// FIXME: when the hook is called, the group_id is not set.
@@ -169,9 +171,9 @@ class GforgeWikiPlugin extends Plugin {
 			}
 		} elseif ($hookname == 'cssfile') {
 			if (strncmp($_SERVER['REQUEST_URI'], '/wiki/', 6) == 0) {
-				echo '<link rel="stylesheet" type="text/css" href="/wiki/themes/gforge/phpwiki.css" media="screen" />';
-				echo "\n".'    <link rel="alternate stylesheet" type="text/css" href="/wiki/themes/gforge/phpwiki-fullscreen.css" media="screen" title="Fullscreen" />';
-				echo "\n".'    <link rel="stylesheet" type="text/css" href="/wiki/themes/gforge/phpwiki-print.css" media="print" />';
+				echo '<link rel="stylesheet" type="text/css" href="' . util_make_url ('/wiki/themes/gforge/phpwiki.css') . '" media="screen" />';
+				echo "\n".'    <link rel="alternate stylesheet" type="text/css" href="' . util_make_url ('/wiki/themes/gforge/phpwiki-fullscreen.css') . '" media="screen" title="Fullscreen" />';
+				echo "\n".'    <link rel="stylesheet" type="text/css" href="' . util_make_url ('/wiki/themes/gforge/phpwiki-print.css') . '" media="print" />';
 				echo "\n".'    <base href="'.PHPWIKI_BASE_URL.'" />';
 			}
 		}		
