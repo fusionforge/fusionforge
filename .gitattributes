@@ -17,6 +17,7 @@ gforge/common/include/rbac_texts.php -text
 gforge/contrib/cmd-line-prototype.tar.gz -text
 gforge/cronjobs/ftp_create_group_access.php -text
 gforge/cronjobs/gforge-db-backup.sh -text
+gforge/cronjobs/homedirs.php -text
 gforge/cronjobs/mail/publicize_list.py -text
 gforge/db/20030701-gforge-3.0 -text svneol=unset#application/octet-stream
 gforge/db/20031026-gforge-3.1 -text svneol=unset#application/octet-stream
@@ -780,6 +781,7 @@ gforge/plugins/quota_management/www/index.php -text
 gforge/plugins/quota_management/www/quota.php -text
 gforge/plugins/quota_management/www/quota_admin.php -text
 gforge/plugins/quota_management/www/quota_project.php -text
+gforge/plugins/scmcvs/gforge-plugin-scmcvs.spec -text
 gforge/plugins/scmsvn/cronjobs/update_users.php -text
 gforge/plugins/scmsvn/db/scmsvn-init-mysql.sql -text
 gforge/plugins/svntracker/AUTHORS -text
@@ -2963,6 +2965,7 @@ gforge/translations/sv.po -text
 gforge/translations/th.po -text
 gforge/translations/zh_CN.po -text
 gforge/translations/zh_TW.po -text
+gforge/utils/install-nsspgsql.sh -text
 gforge/www/docman/include/vtemplate.class.php -text
 gforge/www/docman/search.php -text
 gforge/www/docman/search.tpl.html -text

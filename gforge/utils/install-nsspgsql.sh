@@ -1,6 +1,6 @@
 #! /bin/bash
 #
-# $Id$
+# $Id: install-nsspgsql.sh 6586 2008-08-15 21:28:43Z cbayle $
 #
 # Configure LDAP for GForge
 # Christian Bayle, Roland Mas
@@ -28,6 +28,8 @@ setup_vars() {
     db_name=$(grep ^db_name= /etc/gforge/gforge.conf | cut -d= -f2-)
     db_user=$(grep ^db_user= /etc/gforge/gforge.conf | cut -d= -f2-)
     db_password=$(grep ^db_password= /etc/gforge/gforge.conf | cut -d= -f2-)
+    
+    db_user_nss=$db_user"_nss"
 
     tmpfile_pattern=/tmp/$(basename $0).XXXXXX
 }
@@ -44,7 +46,7 @@ configure_libnss_pgsql(){
 ### NSS Configuration for Gforge
 
 #----------------- DB connection
-connectionstring = user=gforge_nss password=gforge_nss dbname=gforge
+connectionstring = hostaddr=127.0.0.1 user=$db_user_nss password=$db_password dbname=$db_name
 
 #----------------- NSS queries
 getpwnam        = SELECT login AS username,passwd,gecos,('/var/lib/gforge/chroot/home/users/' || login) AS homedir,shell,uid,gid FROM nss_passwd WHERE login = \$1
@@ -60,10 +62,10 @@ EOF
 ### NSS Configuration for Gforge
 
 #----------------- DB connection
-shadowconnectionstring = user=gforge_nss password=gforge_nss dbname=gforge
+shadowconnectionstring = user=gforge_nss password=$db_password dbname=$db_name
 
 #----------------- NSS queries
-shadowbyname    = SELECT login AS shadow_name, passwd AS shadow_passwd, 14087 AS shadow_lstchg, 0 AS shadow_min, 99999 AS shadow_max, 7 AS shadow_warn, '' AS shadow_inact, '' AS shadow_expire, '' AS shadow_flag FROM nss_passwd WHERE login = $1
+shadowbyname    = SELECT login AS shadow_name, passwd AS shadow_passwd, 14087 AS shadow_lstchg, 0 AS shadow_min, 99999 AS shadow_max, 7 AS shadow_warn, '' AS shadow_inact, '' AS shadow_expire, '' AS shadow_flag FROM nss_passwd WHERE login = \$1
 shadow          = SELECT login AS shadow_name, passwd AS shadow_passwd, 14087 AS shadow_lstchg, 0 AS shadow_min, 99999 AS shadow_max, 7 AS shadow_warn, '' AS shadow_inact, '' AS shadow_expire, '' AS shadow_flag FROM nss_passwd
 EOF
 
@@ -128,11 +130,17 @@ case "$1" in
 	check_server
 	;;
     setup)
-    	$0 configure-files
+    $0 configure-files
 	$0 configure
-	cp /etc/nss-pgsql.conf /etc/nss-pgsql.conf.gforge-old
-	cp /etc/nss-pgsql-root.conf /etc/nss-pgsql-root.conf.gforge-old
-	cp /etc/nsswitch.conf.gforge /etc/nsswitch.conf.gforge-old
+	if [ -f /etc/nss-pgsql.conf ] ; then
+		cp /etc/nss-pgsql.conf /etc/nss-pgsql.conf.gforge-old
+	fi
+	if [ -f /etc/nss-pgsql-root.conf ] ; then
+		cp /etc/nss-pgsql-root.conf /etc/nss-pgsql-root.conf.gforge-old
+	fi
+	if [ -f /etc/nsswitch.conf ] ; then
+		cp /etc/nsswitch.conf /etc/nsswitch.conf.gforge-old
+	fi
 	mv /etc/nss-pgsql.conf.gforge-new /etc/nss-pgsql.conf
 	mv /etc/nss-pgsql-root.conf.gforge-new /etc/nss-pgsql-root.conf
 	mv /etc/nsswitch.conf.gforge-new /etc/nsswitch.conf

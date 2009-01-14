@@ -1,8 +1,8 @@
 //
 // Groups and Homes dir prefix
 //
-$homedir_prefix='{homedir}';
-$groupdir_prefix='{groupdir}';
+$homedir_prefix='{gforge_chroot}{homedir}';
+$groupdir_prefix='{gforge_chroot}{groupdir}';
 $cvsdir_prefix='{cvsdir}';
 $svndir_prefix='{svndir}';
 $sys_chroot='{gforge_chroot}';
