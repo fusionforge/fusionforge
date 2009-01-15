@@ -2937,6 +2937,7 @@ gforge/plugins/wiki/www/uploads/index.php -text
 gforge/plugins/wiki/www/wiki -text
 gforge/plugins/wiki/www/www -text
 gforge/rpm-specific/custom/.keepme -text svneol=unset#application/octet-stream
+gforge/rpm-specific/httpd.d/gforge.conf -text
 gforge/rpm-specific/languages/.keepme -text svneol=unset#application/octet-stream
 gforge/rpm-specific/scripts/gforge-config -text svneol=unset#application/octet-stream
 gforge/translations/bg.po -text
