@@ -145,7 +145,7 @@ function header($params) {
 
 <div id="container">
 <div id="logo">
-<h1><?php echo util_make_link ('/',_('Goto GForge')); ?></h1>
+<h1><?php echo util_make_link ('/',_('Home')); ?></h1>
 </div>
 <div id="util">
 <?php

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-15 14:13+0100\n"
-"PO-Revision-Date: 2009-01-14 12:17+0100\n"
+"POT-Creation-Date: 2009-01-15 15:15+0100\n"
+"PO-Revision-Date: 2009-01-15 15:24+0100\n"
 "Last-Translator: Aljeux <aljeux@free.fr>\n"
 "Language-Team: LANGUAGE <aljeux@free.fr>\n"
 "MIME-Version: 1.0\n"
@@ -6587,8 +6587,10 @@ msgid "Show source"
 msgstr "Montrer le source"
 
 #: www/include/Layout.class.php:417
+#: www/themes/gforge-simple-theme/Theme.class.php:148
 #: www/themes/gforge-simple-theme/Theme.class.php:358
 #: www/themes/gforge/Theme.class.php:378 www/themes/lite/Theme.class.php:264
+#: www/themes/ultralite/Theme.class.php:38
 msgid "Home"
 msgstr "Accueil"
 
@@ -11522,10 +11524,6 @@ msgstr "Ajouter des questions"
 msgid "Error creating permission"
 msgstr "Erreur lors de la création des permissions"
 
-#: www/themes/gforge-simple-theme/Theme.class.php:148
-msgid "Goto GForge"
-msgstr "Aller au projet GForge"
-
 #: www/themes/gforge/Theme.class.php:134 www/themes/gforge/Theme.class.php:135
 #: www/themes/lite/Theme.class.php:91 www/themes/lite/Theme.class.php:92
 msgid "default_font"
@@ -11534,10 +11532,6 @@ msgstr "default_font"
 #: www/themes/lite/Theme.class.php:124
 msgid "Logout"
 msgstr "Se déconnecter"
-
-#: www/themes/ultralite/Theme.class.php:38
-msgid "GForge"
-msgstr "GForge"
 
 #: www/themes/ultralite/Theme.class.php:149
 msgid "Show Source"
@@ -12500,3 +12494,6 @@ msgstr[1] ""
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Aucun nom d'utilisateur n'a été fourni"
+
+#~ msgid "GForge"
+#~ msgstr "GForge"

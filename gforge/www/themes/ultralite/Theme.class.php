@@ -35,7 +35,7 @@ class Theme extends Layout {
 		
 		<body>
 		<p align=left>
-		<?php echo util_make_link ('/',_('GForge')); ?></h2></a>
+		<?php echo util_make_link ('/',_('Home')); ?></h2></a>
 		</p>
 		<p align=right>
 		<?php

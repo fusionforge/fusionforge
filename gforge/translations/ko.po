@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-15 14:13+0100\n"
-"PO-Revision-Date: 2009-01-15 14:05+0100\n"
+"POT-Creation-Date: 2009-01-15 15:15+0100\n"
+"PO-Revision-Date: 2009-01-15 15:24+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -6355,8 +6355,10 @@ msgid "Show source"
 msgstr "Show source"
 
 #: www/include/Layout.class.php:417
+#: www/themes/gforge-simple-theme/Theme.class.php:148
 #: www/themes/gforge-simple-theme/Theme.class.php:358
 #: www/themes/gforge/Theme.class.php:378 www/themes/lite/Theme.class.php:264
+#: www/themes/ultralite/Theme.class.php:38
 msgid "Home"
 msgstr "홈"
 
@@ -11097,10 +11099,6 @@ msgstr "질문 추가하기"
 msgid "Error creating permission"
 msgstr "Error inserting question"
 
-#: www/themes/gforge-simple-theme/Theme.class.php:148
-msgid "Goto GForge"
-msgstr ""
-
 #: www/themes/gforge/Theme.class.php:134 www/themes/gforge/Theme.class.php:135
 #: www/themes/lite/Theme.class.php:91 www/themes/lite/Theme.class.php:92
 msgid "default_font"
@@ -11109,11 +11107,6 @@ msgstr ""
 #: www/themes/lite/Theme.class.php:124
 msgid "Logout"
 msgstr "로그아웃"
-
-#: www/themes/ultralite/Theme.class.php:38
-#, fuzzy
-msgid "GForge"
-msgstr "더 보기"
 
 #: www/themes/ultralite/Theme.class.php:149
 #, fuzzy
