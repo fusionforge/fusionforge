@@ -285,7 +285,7 @@ function add_svn_mail_to_repository($unix_group_name,$repos) {
 	if($FOut) {
 		$Line .= '
 #begin added by svncommitemail
-'.$sys_plugins_path.'/svncommitemail/bin/commit-email.pl '.$repos.' "$2" '.$unix_group_name.'-commits@'.$sys_lists_host.'
+php '.$sys_plugins_path.'/svncommitemail/bin/commit-email.php '.$repos.' "$2" '.$unix_group_name.'-commits@'.$sys_lists_host.'
 #end added by svncommitemail';
 		fwrite($FOut,$Line);
 		`chmod +x $repos'/hooks/post-commit'`;
