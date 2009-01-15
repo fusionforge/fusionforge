@@ -293,10 +293,10 @@ class ArtifactFactory extends Error {
 					continue;
 				}
 				if (is_array($vals[$i]) && !empty($vals[$i])) {
-					$vals[$i]=implode(',',$vals[$i]);
+					$vals[$i]=implode("','",$vals[$i]);
 				}
 				$ef_table_str.=", artifact_extra_field_data aefd$i ";
-				$ef_where_str.=" AND aefd$i.extra_field_id='".$keys[$i]."' AND aefd$i.field_data IN (".$vals[$i].") AND aefd$i.artifact_id=artifact_vw.artifact_id ";
+				$ef_where_str.=" AND aefd$i.extra_field_id='".$keys[$i]."' AND aefd$i.field_data IN ('".$vals[$i]."') AND aefd$i.artifact_id=artifact_vw.artifact_id ";
 			}
 		} else {
 			$ef_table_str='';

@@ -1,3 +1,8 @@
+2009-01-15  Roland Mas  <lolando@debian.org>
+
+	* common/tracker/ArtifactFactory.class.php: Fixed syntax of an SQL
+	query used when there's a user-defined query.
+
 2009-01-14  Roland Mas  <lolando@debian.org>
 
 	* www/docman/admin/index.php: Fixed the types expected from the
