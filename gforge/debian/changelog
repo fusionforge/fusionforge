@@ -1,9 +1,10 @@
-gforge (4.7~rc2-svn6731-1) unstable; urgency=low
+gforge (4.7~rc2-svn6763-1) unstable; urgency=low
 
   * Made PostgreSQL dependency stricter: some of the views only work with
     versions >= 8.1 (closes: #498811).
+  * New SVN snapshot.
 
- -- Roland Mas <lolando@debian.org>  Tue, 13 Jan 2009 10:48:13 +0100
+ -- Roland Mas <lolando@debian.org>  Thu, 15 Jan 2009 18:58:59 +0100
 
 gforge (4.7~rc2-7) unstable; urgency=high
 
