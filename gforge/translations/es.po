@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Gforge 4.5\n"
+"Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-14 12:13+0100\n"
-"PO-Revision-Date: 2007-11-08 10:48+0100\n"
+"PO-Revision-Date: 2009-01-15 11:34+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -264,9 +264,8 @@ msgid "Invalid full name"
 msgstr "Nombre completo inválido"
 
 #: common/include/Group.class.php:295
-#, fuzzy
 msgid "Invalid Unix name"
-msgstr "Nombre unix no válido"
+msgstr "Nombre Unix no válido"
 
 #: common/include/Group.class.php:298
 msgid "Unix name already taken"
@@ -293,7 +292,6 @@ msgid ""
 msgstr ""
 
 #: common/include/Group.class.php:313
-#, fuzzy
 msgid "You have not chosen a license"
 msgstr "No ha elegido tipo de licencia"
 
@@ -468,7 +466,6 @@ msgid "Error getting member object: %s"
 msgstr "Error creando el objeto grupo"
 
 #: common/include/Group.class.php:1909
-#, fuzzy
 msgid "Group already active"
 msgstr "La cuenta está activa todavía."
 
@@ -552,46 +549,35 @@ msgid ""
 "\n"
 "-- the %4$s crew"
 msgstr ""
-"El registro de su proyecto en %7$s ha sido aprobado.\n"
+"El registro de su proyecto en %4$s ha sido aprobado.\n"
 "\n"
 "Nombre Completo del Proyecto:  %1$s\n"
 "Nombre Unix del Proyecto:  %2$s\n"
 "\n"
 "Su dominio DNS tardará más de un día en estar activo en nuestro sitio.\n"
-"Su espacio web es accesible a través de esta cuenta de 'shell'. Por favor, "
-"lea la\n"
+"Su espacio web es accesible a través de esta cuenta de 'shell'. Por favor, lea la\n"
 "documentación (ver el enlace de abajo) acerca del uso propuesto, servicios\n"
 "disponibles, y la distribución de directorios de la cuenta.\n"
 "\n"
-"Por favor, tómese un tiempo para leer la documentación del portal sobre la "
-"administración de proyectos (http://%3$s/docs/site/). Si Ud. visita su\n"
-"propia página de proyectos en %3$s mientras está autenticado, encontrará\n"
-"funciones adicionales de menú con un título llamado 'Administración de "
-"Proyectos'.\n"
+"propia página de proyectos en %4$s mientras está autenticado, encontrará\n"
+"funciones adicionales de menú con un título llamado 'Administración de Proyectos'.\n"
 "\n"
-"Le recomendamos encarecidamente que visite ahora la página de %3$s y cree "
-"una descripción\n"
+"Le recomendamos encarecidamente que visite ahora la página de %4$s y cree una descripción\n"
 "pública de su proyecto. Esto puede hacerlo visitando su página\n"
-"de proyecto mientras está autenticado, y seleccionando 'Administración' del "
-"menú de la izquierda (o visitando http://%3$s/project/admin/?group_id=%6$s\n"
+"de proyecto mientras está autenticado, y seleccionando 'Administración' del menú de la izquierda (o visitando %3$s\n"
 "después de autenticarse).\n"
 "\n"
 "Su proyecto no aparecerá tampoco en el mapa de proyectos (lista\n"
-"principal de proyectos albergados en %3$s que permite gran flexibilidad en "
-"la\n"
-"navegación y búsqueda) hasta que no lo categorice en la pantalla de "
-"administración\n"
-"del proyecto. Para que la gente pueda encontrar su proyecto debe hacer esto "
-"ahora.\n"
-"Visite su proyecto, mientras está autenticado, y seleccione 'Administración' "
-"en el\n"
+"principal de proyectos albergados en %4$s que permite gran flexibilidad en la\n"
+"navegación y búsqueda) hasta que no lo categorice en la pantalla de administración\n"
+"del proyecto. Para que la gente pueda encontrar su proyecto debe hacer esto ahora.\n"
+"Visite su proyecto, mientras está autenticado, y seleccione 'Administración' en el\n"
 "menú.\n"
 "\n"
-"Disfrute del sistema, y por favor, dígales a otras personas de %3$s. "
-"Coméntenos también\n"
+"Disfrute del sistema, y por favor, dígales a otras personas de %4$s. Coméntenos también\n"
 "si podemos hacer algo para ayudarle.\n"
 "\n"
-"-- El equipo de %7$s"
+"-- El equipo de %4$s"
 
 #: common/include/Group.class.php:2124
 #, php-format
@@ -648,6 +634,7 @@ msgstr ""
 "Nombre completo del Proyecto:  %2$s\n"
 "Descripción registrada: %3$s\n"
 "Licencia: %4$s\n"
+"Registrado por: %6$s (%7$s)\n"
 "\n"
 "Por favor, visite esta dirección para aprobar o rechazar este proyecto:\n"
 "%5$s"
@@ -774,7 +761,7 @@ msgid "Insert Failed"
 msgstr "Inserción errónea"
 
 #: common/include/User.class.php:362
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Thank you for registering on the %3$s web site. You have\n"
 "account with username %1$s created for you. In order\n"
@@ -792,22 +779,20 @@ msgid ""
 "\n"
 "-- the %3$s staff\n"
 msgstr ""
-"Gracias por registrarse en el sitio Web de %4$s. Tiene\n"
+"Gracias por registrarse en el sitio Web de %3$s. Tiene\n"
 "una cuenta con nombre %1$s creada para usted. Para completar\n"
 "su registro, visite la siguiente dirección: \n"
 "\n"
-"<http://%2$s/account/verify.php?confirm_hash=_%3$s>\n"
+"<%2$s>\n"
 "\n"
-"(Si no se ve ninguna dirección URL arriba, se debe a un error en su cliente "
-"de correo.\n"
-"Use la dirección de abajo, pero asegúrese que lo escriba todo en una misma "
-"línea.)\n"
+"(Si no se ve ninguna dirección URL arriba, se debe a un error en su cliente de correo.\n"
+"Use la dirección de abajo, pero asegúrese que lo escriba todo en una misma línea.)\n"
 "\n"
-"http://%2$s/account/verify.php?confirm_hash=_%3$s\n"
+"%2$s\n"
 "\n"
 "Disfrute de este sitio.\n"
 "\n"
-"-- el equipo de %4$s\n"
+"-- el equipo de %3$s\n"
 
 #: common/include/User.class.php:382
 #, php-format
@@ -915,9 +900,8 @@ msgid "Public"
 msgstr "Público"
 
 #: common/include/rbac_texts.php:10 common/include/rbac_texts.php:72
-#, fuzzy
 msgid "File Release System"
-msgstr "Usar sistema de Publicación de Ficheros"
+msgstr "Sistema de Publicación de Ficheros"
 
 #: common/include/rbac_texts.php:14
 #, fuzzy
@@ -1031,7 +1015,6 @@ msgid "Anonymous Forum"
 msgstr "Espacio FTP Anónimo"
 
 #: common/include/rbac_texts.php:63
-#, fuzzy
 msgid "Forum Admin"
 msgstr "Administración de Foros"
 
@@ -2607,7 +2590,7 @@ msgid "Invalid email address."
 msgstr "Dirección de correo electrónico inválida"
 
 #: www/account/change_email.php:63
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "You have requested a change of email address on %1$s.\n"
 "Please visit the following URL to complete the email change:\n"
@@ -2617,10 +2600,9 @@ msgid ""
 " -- the %1$s staff"
 msgstr ""
 "Ha solicitado un cambio de correo en %1$s.\n"
-"Por favor, visite la siguiente dirección para completar el cambio de "
-"correo:\n"
+"Por favor, visite la siguiente dirección para completar el cambio de correo:\n"
 "\n"
-"<http://%1$s/account/change_email-complete.php?ch=_%2$s>\n"
+"%2$s\n"
 "\n"
 " -- el equipo de %1$s"
 
@@ -2699,9 +2681,9 @@ msgstr ""
 "cambiado su contraseña.</p>"
 
 #: www/account/change_pw.php:90
-#, fuzzy, php-format
+#, php-format
 msgid "You should now <a href=\"%1$s\">Return to User Prefs</a>."
-msgstr "Ahora debe %1$s regresar a las preferencias de usuario %2$s."
+msgstr "Ahora debe <a href=\"%1$s\">regresar a las preferencias de usuario</a>."
 
 #: www/account/change_pw.php:97 www/account/index.php:132
 msgid "Change Password"
@@ -3040,7 +3022,7 @@ msgid "That user does not exist."
 msgstr "Esta categoría no existe"
 
 #: www/account/lostpw.php:59
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Someone (presumably you) on the %1$s site requested a\n"
 "password change through email verification. If this was not you,\n"
@@ -3053,17 +3035,16 @@ msgid ""
 "\n"
 " -- the %1$s staff\n"
 msgstr ""
-"Alguien (probablemente usted) en el sitio %3$s solicitó un\n"
-"cambio de contraseña a través de esta verificación por correo. Si no está de "
-"acuerdo,\n"
+"Alguien (probablemente usted) en el sitio %1$s solicitó un\n"
+"cambio de contraseña a través de esta verificación por correo. Si no está de acuerdo,\n"
 "ignore este correo y no sucederá nada.\n"
 "\n"
 "Si ha solicitado esta verificación, visite el siguiente enlace\n"
 "para cambiar su contraseña:\n"
 "\n"
-"<http://%1$s/account/lostlogin.php?ch=_%2$s>\n"
+"<%2$s>\n"
 "\n"
-" -- el equipo de %3$s\n"
+" -- el equipo de %1$s\n"
 
 #: www/account/lostpw.php:75
 #, php-format
@@ -3325,12 +3306,10 @@ msgid "Tracker Item"
 msgstr "Artículo del registro."
 
 #: www/activity/index.php:146
-#, fuzzy
 msgid "Opened"
 msgstr "Abierto"
 
 #: www/activity/index.php:151
-#, fuzzy
 msgid "Closed"
 msgstr "Cerrado"
 
@@ -3540,9 +3519,9 @@ msgid "Pending reason:"
 msgstr "Razón por la que está Pendiente:"
 
 #: www/admin/approve-pending.php:226
-#, fuzzy, php-format
+#, php-format
 msgid "Submitted by %1$s (%2$s)"
-msgstr "Enviado por"
+msgstr "Enviado por %1$s (%2$s)"
 
 #: www/admin/approve-pending.php:243
 msgid "Approve All On This Page"
@@ -4539,12 +4518,10 @@ msgid "Add date"
 msgstr "Añadir fecha"
 
 #: www/admin/userlist.php:100
-#, fuzzy
 msgid "[DevProfile]"
 msgstr "Perfil de Colaborador"
 
 #: www/admin/userlist.php:101
-#, fuzzy
 msgid "[Activate]"
 msgstr "Activar"
 
@@ -4554,7 +4531,6 @@ msgid "[Delete]"
 msgstr "Borrar"
 
 #: www/admin/userlist.php:103
-#, fuzzy
 msgid "[Suspend]"
 msgstr "Suspender"
 
@@ -4668,7 +4644,6 @@ msgid "No User Selected"
 msgstr ""
 
 #: www/developer/index.php:48 www/users:43
-#, fuzzy
 msgid "Invalid User"
 msgstr "Usuario no válido"
 
@@ -4905,9 +4880,9 @@ msgid "I'm Really Sure."
 msgstr "Estoy completamente seguro."
 
 #: www/docman/admin/index.php:486
-#, fuzzy, php-format
+#, php-format
 msgid "Project %s"
-msgstr "Proyectos"
+msgstr "Proyecto %s"
 
 #: www/docman/admin/index.php:486 www/docman/admin/index.php:489
 msgid "Document Manager: Administration"
@@ -5522,9 +5497,9 @@ msgid "Receive followups via email"
 msgstr "Recibir respuestas vía correo electrónico"
 
 #: www/forum/include/ForumHTML.class.php:601
-#, fuzzy, php-format
+#, php-format
 msgid "You could post if you were <a href=\"%1$s\">logged in</a>."
-msgstr "Podr&iacute;as enviar un mensaje si estuviera %1$s registrado %2$s"
+msgstr "Podr&iacute;as enviar un mensaje si estuviera <a href=\"%1$s\">registrado</a>."
 
 #: www/forum/include/ForumHTML.class.php:604
 #, php-format
@@ -5532,9 +5507,9 @@ msgid "Please <a href=\"%1$s\">log in</a>"
 msgstr ""
 
 #: www/forum/index.php:46
-#, fuzzy, php-format
+#, php-format
 msgid "Forums for %1$s"
-msgstr "Foros para"
+msgstr "Foros para %1$s"
 
 #: www/forum/index.php:61 www/forum/myforums.php:72
 #, fuzzy
@@ -6402,9 +6377,8 @@ msgstr ""
 #: www/themes/gforge-simple-theme/Theme.class.php:81
 #: www/themes/gforge/Theme.class.php:109 www/themes/lite/Theme.class.php:76
 #: www/themes/ultralite/Theme.class.php:30
-#, fuzzy
 msgid "en"
-msgstr "Abierto"
+msgstr "es"
 
 #: www/include/Layout.class.php:150
 #: www/themes/gforge-simple-theme/Theme.class.php:153
@@ -6662,15 +6636,12 @@ msgid "Project Info"
 msgstr "Información del Proyecto"
 
 #: www/include/project_home.php:42
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "NOTE: This project entry is maintained by the %1$s staff. We are not the "
 "official site for this product. Additional copyright information may be "
 "found on this project's homepage."
-msgstr ""
-"NOTA: Este proyecto es mantenido enteramente por el personal. No somos el "
-"sitio oficial para este producto. Para más información sobre el copyright "
-"acudir a la página principal de este proyecto."
+msgstr "NOTA: Este proyecto es mantenido enteramente por el personal de %1$s. No somos el sitio oficial para este producto. Para más información sobre el copyright acudir a la página principal de este proyecto."
 
 #: www/include/project_home.php:52
 msgid "This project has not yet submitted a description."
@@ -6777,11 +6748,11 @@ msgid "There are no public trackers available"
 msgstr "No hay trackers públicos disponibles"
 
 #: www/include/project_home.php:279
-#, fuzzy, php-format
+#, php-format, fuzzy
 msgid " (<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
 msgid_plural " (<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
-msgstr[0] "%1$s abierto /%2$s total"
-msgstr[1] "%1$s abierto /%2$s total"
+msgstr[0] " (<strong>%1$s</strong> abierto / <strong>%2$s</strong> total)"
+msgstr[1] " (<strong>%1$s</strong> abierto / <strong>%2$s</strong> total)"
 
 #: www/include/project_home.php:290
 msgid "Public Forums"
@@ -11272,9 +11243,8 @@ msgid "Logout"
 msgstr "Salir"
 
 #: www/themes/ultralite/Theme.class.php:38
-#, fuzzy
 msgid "GForge"
-msgstr "Más"
+msgstr "GForge"
 
 #: www/themes/ultralite/Theme.class.php:149
 #, fuzzy
@@ -11649,12 +11619,9 @@ msgid "Modify A Group In %s"
 msgstr "Editar información pública"
 
 #: www/tracker/admin/form-updatetracker.php:12
-#, fuzzy
 msgid ""
 "<strong>Name:</strong> (examples: meeting minutes, test results, RFP Docs)"
-msgstr ""
-"<strong> Nombre:</strong> (ejemplos: reuniones, resultados de test, "
-"Documentos)"
+msgstr "<strong>Nombre:</strong> (ejemplos: reuniones, resultados de test, documentos)"
 
 #: www/tracker/admin/form-updatetracker.php:32 www/tracker/admin/ind.php:133
 msgid "Send email on new submission to address"
@@ -12143,9 +12110,8 @@ msgid "Artifact Deleted Successfully"
 msgstr "Registro borrado correctamente."
 
 #: www/trove/TroveCategory.class.php:70 www/trove/TroveCategory.class.php:77
-#, fuzzy
 msgid "That Trove category does not exist."
-msgstr "Esta categoría no existe"
+msgstr "Esta categoría no existe."
 
 #: www/trove/TroveCategory.class.php:105
 msgid "Empty strings"
@@ -12159,44 +12125,40 @@ msgstr "Actualización Masiva"
 #: www/trove/admin/trove_cat_add.php:41
 #, fuzzy
 msgid "Error in Trove operation"
-msgstr "Error en una operación ssobre el Mapa de Proyectos"
+msgstr "Error en una operación sobre el Mapa de Proyectos"
 
 #: www/trove/admin/trove_cat_add.php:59 www/trove/admin/trove_cat_edit.php:140
-#, fuzzy
 msgid "Parent Category: "
-msgstr "Categoría Superior:"
+msgstr "Categoría Superior: "
 
 #: www/trove/admin/trove_cat_add.php:87 www/trove/admin/trove_cat_edit.php:88
-#, fuzzy
 msgid "New category short name (no spaces, Unix-like): "
-msgstr "Nombre corto de la nueva categoría (sin espacios, al estilo unix)"
+msgstr "Nombre corto de la nueva categoría (sin espacios, al estilo Unix): "
 
 #: www/trove/admin/trove_cat_add.php:89 www/trove/admin/trove_cat_edit.php:91
 #, fuzzy
 msgid "New category full name (80 characters max): "
-msgstr "Nombre completo de la nueva categoría (80 carácteres)"
+msgstr "Nombre completo de la nueva categoría (80 carácteres): "
 
 #: www/trove/admin/trove_cat_add.php:91 www/trove/admin/trove_cat_edit.php:94
 #, fuzzy
 msgid "New category description (255 characters max): "
-msgstr "Descripción de la Nueva Categoría (255 carácteres)"
+msgstr "Descripción de la Nueva Categoría (255 carácteres): "
 
 #: www/trove/admin/trove_cat_edit.php:97
-#, fuzzy
 msgid "update"
 msgstr "Actualizar"
 
 #: www/trove/admin/trove_cat_edit.php:97
-#, fuzzy
 msgid "delete"
 msgstr "Borrar"
 
 #: www/trove/include/trove.php:242
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "This project has not yet categorized itself in the <a href=\"%s\">Trove "
 "Software Map</a>."
-msgstr "Este proyecto todavía no ha sido categorizado en el"
+msgstr "Este proyecto todavía no ha sido categorizado en el <a href=\"%s\">Mapa de Projectos</a>."
 
 #: www/trove/index.php:36
 #, fuzzy
@@ -12209,7 +12171,6 @@ msgid "Limiting View"
 msgstr "Vistas del Sitio"
 
 #: www/trove/index.php:66
-#, fuzzy
 msgid "Remove Filter"
 msgstr "Eliminar este Filtro"
 
@@ -12217,8 +12178,8 @@ msgstr "Eliminar este Filtro"
 #, fuzzy, php-format
 msgid "<strong>%d</strong> project in result set."
 msgid_plural "<strong>%d</strong> projects in result set."
-msgstr[0] "<strong>%1$s</strong> proyecto en esta categoría."
-msgstr[1] "<strong>%1$s</strong> proyectos en esta categoría."
+msgstr[0] "<strong>%d</strong> proyecto en esta categoría."
+msgstr[1] "<strong>%d</strong> proyectos en esta categoría."
 
 #: www/trove/index.php:168
 #, php-format
@@ -12232,236 +12193,3 @@ msgstr[1] ""
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "Nombre de Usuario"
-
-#, fuzzy
-#~ msgid "Public Forum"
-#~ msgstr "Foros Públicos"
-
-#, fuzzy
-#~ msgid "Project Manager"
-#~ msgstr "Nuevo Nombre del Subproyecto"
-
-#, fuzzy
-#~ msgid "Public Project Manager"
-#~ msgstr "Usar Gestor de Tareas"
-
-#, fuzzy
-#~ msgid "Project Manager Admin"
-#~ msgstr "Adminitrador de Projectos"
-
-#, fuzzy
-#~ msgid "Public Tracker"
-#~ msgstr "Área pública"
-
-#, fuzzy
-#~ msgid "File Package"
-#~ msgstr "Sin Ficheros en Paquetes"
-
-#~ msgid "all %1$s mailings and notifications"
-#~ msgstr "todas las notificaciones y correos de %1$s"
-
-#~ msgid "%1$s site mailings"
-#~ msgstr "Correos de %1$s"
-
-#, fuzzy
-#~ msgid "logged in"
-#~ msgstr "Dentro del Sistema: NO"
-
-#~ msgid "Add, Delete, or Edit Supported Languages"
-#~ msgstr "Añadir, Borrar o Editar Lenguajes Soportados"
-
-#~ msgid "Translation file tool"
-#~ msgstr "Herramienta de traducción de ficheros"
-
-#, fuzzy
-#~ msgid "Group list admin"
-#~ msgstr "Lista de Grupos"
-
-#, fuzzy
-#~ msgid "User list admin"
-#~ msgstr ": Lista de Usuarios:"
-
-#, fuzzy
-#~ msgid "Approve pending projects"
-#~ msgstr "Aprobando los Projectos Pendientes"
-
-#~ msgid "News admin approval"
-#~ msgstr "Administración de Noticias"
-
-#, fuzzy
-#~ msgid "People admin"
-#~ msgstr "Personas"
-
-#, fuzzy
-#~ msgid "logged in as %s"
-#~ msgstr "Dentro del Sistema: NO"
-
-#~ msgid "Bookmark Page"
-#~ msgstr "Marcar esta página"
-
-#~ msgid "New User via SSL"
-#~ msgstr "Nuevo usuario (vía SSL)"
-
-#~ msgid "%Y %B %e  %H:%M"
-#~ msgstr "%H:%M %e %B %Y"
-
-#~ msgid "public mailing lists"
-#~ msgstr "listas de correo públicas"
-
-#~ msgid "open"
-#~ msgstr "abierto"
-
-#~ msgid "Group search with criteria"
-#~ msgstr "Criterio de Búsqueda del Grupo"
-
-#~ msgid "matches"
-#~ msgstr "coincide"
-
-#~ msgid "<strong>%1$s</strong> projects in result set."
-#~ msgstr "<strong>%1$s</strong> proyectos en esta categoría."
-
-#~ msgid "Site has SCM enabled, but no SCM was chosen."
-#~ msgstr "El SCM está habilitado, pero no se eligió ningún SCM."
-
-#, fuzzy
-#~ msgid "Error - you can"
-#~ msgstr "Error al actualizar"
-
-#, fuzzy
-#~ msgid "You can"
-#~ msgstr "Su Nombre"
-
-#, fuzzy
-#~ msgid "I"
-#~ msgstr "ID"
-
-#~ msgid "You Can Only Monitor If You Are Logged In"
-#~ msgstr "Usted sólo puede monitorizar si ha ingresado"
-
-#~ msgid "User Id:"
-#~ msgstr "Id de Usuario"
-
-#~ msgid "Updated Successfully"
-#~ msgstr "Actualizado con éxito"
-
-#~ msgid "Vote Registered"
-#~ msgstr "Vote Registrado"
-
-#~ msgid "User Updated Successfully"
-#~ msgstr "Usuario actualizado con éxito"
-
-#~ msgid "Time Tracking"
-#~ msgstr "Seguimiento de Horas"
-
-#~ msgid "Unix Name"
-#~ msgstr "Nombre Unix"
-
-#~ msgid "UNIX Name"
-#~ msgstr "Nombre UNIX"
-
-#~ msgid "Assigned To"
-#~ msgstr "Asignado a"
-
-#~ msgid "Package Name"
-#~ msgstr "Nombre del Paquete"
-
-#~ msgid "Site Admin"
-#~ msgstr "Site Admin"
-
-#~ msgid "Add User"
-#~ msgstr "Añade usuario"
-
-#~ msgid "Real Name"
-#~ msgstr "Nombre Real"
-
-#~ msgid "Login Name"
-#~ msgstr "Nombre Cuenta"
-
-#~ msgid "Question Type"
-#~ msgstr "Tipo de Pregunta"
-
-#~ msgid "Permission Denied"
-#~ msgstr "Permiso Denegado"
-
-#~ msgid "Permission Denied."
-#~ msgstr "Permiso denegado."
-
-#~ msgid "No Such Posting For This Project"
-#~ msgstr "No existe esta publicación en este proyecto"
-
-#~ msgid "No matches Found"
-#~ msgstr "Ninguna tarea encontrada"
-
-#~ msgid "News Admin"
-#~ msgstr "Administración de Noticias"
-
-#~ msgid "Mail Admin"
-#~ msgstr "Administración de Correos"
-
-#, fuzzy
-#~ msgid "Massmail Admin"
-#~ msgstr "Administración de Correos"
-
-#~ msgid "For Project"
-#~ msgstr "Para el Proyecto"
-
-#~ msgid "Login Name:"
-#~ msgstr "Nombre de Inicio de Sesión"
-
-#~ msgid "Dependent On Task"
-#~ msgstr "Depende de la Tarea"
-
-#~ msgid "DELETE FAILED"
-#~ msgstr "FALLÓ LA ELIMINACIÓN"
-
-#~ msgid "DELETE SUCCESSFUL"
-#~ msgstr "ELIMINACIÓN CON ÉXITO"
-
-#~ msgid "Add Snippets To Package"
-#~ msgstr "Añadir Recortes al Paquete"
-
-#~ msgid "Add Forum"
-#~ msgstr "Crear foro"
-
-#~ msgid "Add A New Skill"
-#~ msgstr "Añadir una nueva habilidad"
-
-#~ msgid "Add Snippets to Package"
-#~ msgstr "Añadir Recortes al Paquete"
-
-#~ msgid "Browse Tasks"
-#~ msgstr "Hojea las Tareas"
-
-#, fuzzy
-#~ msgid "(at least %$1s characters)"
-#~ msgstr ""
-#~ "Debe proporcionar una contraseña válida (por lo menos seis carácteres)."
-
-#~ msgid "Error, Error - snippet doesn't exist"
-#~ msgstr "Error, Error - recorte inexistente"
-
-#, fuzzy
-#~ msgid ""
-#~ "This  mail is sent to you to remind you of pending/overdue tracker items. "
-#~ "The item #%1$s is pending: \n"
-#~ "Summary: %3$s\n"
-#~ "Status: %5$s\n"
-#~ "Open Date:%6$s\n"
-#~ "Assigned To: %7$s\n"
-#~ "Submitted by: %8$s\n"
-#~ "Details: %9$s\n"
-#~ "\n"
-#~ "\n"
-#~ "Click here to visit the item: %4$s"
-#~ msgstr ""
-#~ "Este mensaje se te ha enviado para recordarte los registros pendientes. "
-#~ "El registro #%1$s está pendiente: \n"
-#~ "Resumen: %3$s\n"
-#~ "Estado: %5$s\n"
-#~ "Fecha de comienzo:%6$s\n"
-#~ "Asignado a: %7$s\n"
-#~ "Enviado por: %8$s\n"
-#~ "Detalles: %9$s\n"
-#~ "\n"
-#~ "\n"
-#~ "Haga click aquí para visitar la tarea: %4$s"
