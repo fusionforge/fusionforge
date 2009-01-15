@@ -12,7 +12,7 @@ find -type f -\( -name \*.php -or -name users -or -name projects -\) \
     | LANG=C sort \
     | xargs xgettext -d gforge -o translations/gforge.pot -L PHP --from-code=iso-8859-1    
 
-for l in $locales ; do
+for l in $(echo $locales | xargs -n 1 | sort) ; do
     echo "Processing $l..."
     msgmerge -U translations/$l.po translations/gforge.pot
 done
