@@ -3385,6 +3385,5 @@ gforge/www/trove/include/trove.php -text
 gforge/www/trove/include/utils.php -text
 gforge/www/trove/index.php -text
 tools/export-tracker.tcl -text
-tools/gettext-stats.sh -text
 tools/make-mo.sh -text
 tools/update-gettext-files.sh -text
