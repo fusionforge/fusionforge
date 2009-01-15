@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Gforge 4.5\n"
+"Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-14 12:13+0100\n"
-"PO-Revision-Date: 2007-03-02 16:02 +0100\n"
+"POT-Creation-Date: 2009-01-15 14:13+0100\n"
+"PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -6316,12 +6316,12 @@ msgid "Tip: Styles can be applied quickly to selected text"
 msgstr ""
 
 #: www/include/Layout.class.php:74
+#: www/themes/gforge-simple-theme/Theme.class.php:80
 #: www/themes/gforge-simple-theme/Theme.class.php:81
 #: www/themes/gforge/Theme.class.php:109 www/themes/lite/Theme.class.php:76
 #: www/themes/ultralite/Theme.class.php:30
-#, fuzzy
 msgid "en"
-msgstr "開啟"
+msgstr "zh-TW"
 
 #: www/include/Layout.class.php:150
 #: www/themes/gforge-simple-theme/Theme.class.php:153
@@ -12039,244 +12039,3 @@ msgstr[1] ""
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "帳號"
-
-#, fuzzy
-#~ msgid "Public Forum"
-#~ msgstr "公共討論區"
-
-#, fuzzy
-#~ msgid "Project Manager"
-#~ msgstr "新專案名稱"
-
-#, fuzzy
-#~ msgid "Public Project Manager"
-#~ msgstr "使用專案/任務管理器"
-
-#, fuzzy
-#~ msgid "Project Manager Admin"
-#~ msgstr "專案管理"
-
-#, fuzzy
-#~ msgid "Public Tracker"
-#~ msgstr "公共區域"
-
-#, fuzzy
-#~ msgid "File Package"
-#~ msgstr "沒有釋出檔案"
-
-#~ msgid "all %1$s mailings and notifications"
-#~ msgstr "所有 %1$s 的通信論壇和通知"
-
-#~ msgid "%1$s site mailings"
-#~ msgstr "%1$s 網站的通信論壇"
-
-#, fuzzy
-#~ msgid "logged in"
-#~ msgstr "登入：否"
-
-#~ msgid "Add, Delete, or Edit Supported Languages"
-#~ msgstr "新增、刪除或編輯支援的語言"
-
-#~ msgid "Translation file tool"
-#~ msgstr "翻譯工具"
-
-#, fuzzy
-#~ msgid "Group list admin"
-#~ msgstr "群組清單"
-
-#, fuzzy
-#~ msgid "User list admin"
-#~ msgstr "：使用者清單"
-
-#, fuzzy
-#~ msgid "Approve pending projects"
-#~ msgstr "審核等待中的專案"
-
-#, fuzzy
-#~ msgid "News admin approval"
-#~ msgstr "新聞管理"
-
-#, fuzzy
-#~ msgid "People admin"
-#~ msgstr "人"
-
-#, fuzzy
-#~ msgid "logged in as %s"
-#~ msgstr "登入：否"
-
-#~ msgid "Bookmark Page"
-#~ msgstr "書籤"
-
-#~ msgid "New User via SSL"
-#~ msgstr "透過 SSL 建立新會員"
-
-#~ msgid "%Y %B %e  %H:%M"
-#~ msgstr "%Y %B %e  %H:%M"
-
-#~ msgid "public mailing lists"
-#~ msgstr "公開的通信論壇"
-
-#~ msgid "open"
-#~ msgstr "啟用"
-
-#~ msgid "Group search with criteria"
-#~ msgstr "依照條件搜尋群組"
-
-#~ msgid "matches"
-#~ msgstr "符合"
-
-#~ msgid "<strong>%1$s</strong> projects in result set."
-#~ msgstr "找到 <strong>%1$s</strong> 個專案"
-
-#~ msgid "Site has SCM enabled, but no SCM was chosen."
-#~ msgstr "網站有啟動原始碼版本管理功能，但是沒有選擇原始碼版本管理系統。"
-
-#, fuzzy
-#~ msgid "Error - you can"
-#~ msgstr "更新時發生錯誤"
-
-#, fuzzy
-#~ msgid "You can"
-#~ msgstr "您的姓名"
-
-#, fuzzy
-#~ msgid "I"
-#~ msgstr "編號"
-
-#~ msgid "You Can Only Monitor If You Are Logged In"
-#~ msgstr "只有登入後才能監視"
-
-#~ msgid "User Id:"
-#~ msgstr "會員編號"
-
-#~ msgid "Updated Successfully"
-#~ msgstr "更新成功"
-
-#~ msgid "Vote Registered"
-#~ msgstr "評分登記了"
-
-#~ msgid "User Updated Successfully"
-#~ msgstr "使用者更新成功"
-
-#~ msgid "Submitted By"
-#~ msgstr "發表人"
-
-#~ msgid "Time Tracking"
-#~ msgstr "時間追蹤"
-
-#~ msgid "Unix Name"
-#~ msgstr "Unix帳號"
-
-#~ msgid "UNIX Name"
-#~ msgstr "Unix名稱"
-
-#~ msgid "Assigned To"
-#~ msgstr "指定給"
-
-#~ msgid "Package Name"
-#~ msgstr "分類名稱"
-
-#~ msgid "Site Admin"
-#~ msgstr "網站管理"
-
-#~ msgid "Release Name"
-#~ msgstr "釋出版本名稱"
-
-#~ msgid "Add User"
-#~ msgstr "增加會員"
-
-#~ msgid "Real Name"
-#~ msgstr "真實姓名"
-
-#~ msgid "Login Name"
-#~ msgstr "登入帳號"
-
-#~ msgid "Question Type"
-#~ msgstr "問題類型"
-
-#~ msgid "Permission Denied"
-#~ msgstr "權限不足"
-
-#~ msgid "Permission Denied."
-#~ msgstr "許可權不允許"
-
-#~ msgid "Posted By"
-#~ msgstr "張貼者"
-
-#~ msgid "No Such Posting For This Project"
-#~ msgstr "該專案沒有這個文章"
-
-#~ msgid "No matches Found"
-#~ msgstr "未發現符合"
-
-#~ msgid "News Admin"
-#~ msgstr "新聞管理"
-
-#~ msgid "Mail Admin"
-#~ msgstr "郵件管理"
-
-#, fuzzy
-#~ msgid "Massmail Admin"
-#~ msgstr "郵件管理"
-
-#~ msgid "For Project"
-#~ msgstr "為專案"
-
-#~ msgid "Login Name:"
-#~ msgstr "帳號"
-
-#~ msgid "Dependent On Task"
-#~ msgstr "依賴於任務"
-
-#~ msgid "DELETE FAILED"
-#~ msgstr "刪除錯誤"
-
-#~ msgid "DELETE SUCCESSFUL"
-#~ msgstr "刪除成功"
-
-#~ msgid "Add Snippets To Package"
-#~ msgstr "新增程式碼到這個集合"
-
-#~ msgid "Add Forum"
-#~ msgstr "增加討論區"
-
-#~ msgid "Add A New Skill"
-#~ msgstr "增加新的技能"
-
-#~ msgid "Add Snippets to Package"
-#~ msgstr "新增程式碼到這個集合"
-
-#~ msgid "Browse Tasks"
-#~ msgstr "瀏覽任務"
-
-#, fuzzy
-#~ msgid "(at least %$1s characters)"
-#~ msgstr "密碼至少要6個字元"
-
-#~ msgid "Error, Error - snippet doesn't exist"
-#~ msgstr "錯誤, 錯誤 - 程式碼不存在"
-
-#, fuzzy
-#~ msgid ""
-#~ "This  mail is sent to you to remind you of pending/overdue tracker items. "
-#~ "The item #%1$s is pending: \n"
-#~ "Summary: %3$s\n"
-#~ "Status: %5$s\n"
-#~ "Open Date:%6$s\n"
-#~ "Assigned To: %7$s\n"
-#~ "Submitted by: %8$s\n"
-#~ "Details: %9$s\n"
-#~ "\n"
-#~ "\n"
-#~ "Click here to visit the item: %4$s"
-#~ msgstr ""
-#~ "這郵件被寄給你使你想起未決定/過期的追蹤者項目。\n"
-#~ "項目 #%1$s 是未決定: \n"
-#~ "摘要: %3$s\n"
-#~ "狀態: %5$s\n"
-#~ "啟用日期: %6$s\n"
-#~ "指定給: %7$s\n"
-#~ "發表人: %8$s\n"
-#~ "細節: %9$s\n"
-#~ "\n"
-#~ "點擊這裏拜訪這個項目: %4$s"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-14 12:13+0100\n"
+"POT-Creation-Date: 2009-01-15 14:13+0100\n"
 "PO-Revision-Date: 2009-01-14 12:17+0100\n"
 "Last-Translator: Aljeux <aljeux@free.fr>\n"
 "Language-Team: LANGUAGE <aljeux@free.fr>\n"
@@ -3087,7 +3087,10 @@ msgstr "Vous devez fournir un mot de passe valide (au moins 6 caractères)."
 msgid ""
 "<h2>Password changed</h2><p>Congratulations, you have re-set your account "
 "password. You may <a href=\"%1$s\">login</a> to the site now.</p>"
-msgstr "<h2>Mot de passe changé</h2><p>Bravo, vous venez de changer le mot de passe de votre compte.  Vous pouvez à présent <a href=\"%1$s\">vous connecter</a> au site."
+msgstr ""
+"<h2>Mot de passe changé</h2><p>Bravo, vous venez de changer le mot de passe "
+"de votre compte.  Vous pouvez à présent <a href=\"%1$s\">vous connecter</a> "
+"au site."
 
 #: www/account/lostlogin.php:97
 #, php-format
@@ -5048,7 +5051,8 @@ msgstr "Ce projet n'a pas de document visible"
 #: www/docman/display_doc.php:34
 #, php-format
 msgid "This document was moved to <a href=\"%1$s\">this new location</a>"
-msgstr "Ce document a été déplacé vers une <a href=\"%1$s\">nouvelle adresse</a>."
+msgstr ""
+"Ce document a été déplacé vers une <a href=\"%1$s\">nouvelle adresse</a>."
 
 #: www/docman/display_doc.php:38 www/docman/view.php:61
 msgid "No document data"
@@ -6541,6 +6545,7 @@ msgstr ""
 "sélectionné."
 
 #: www/include/Layout.class.php:74
+#: www/themes/gforge-simple-theme/Theme.class.php:80
 #: www/themes/gforge-simple-theme/Theme.class.php:81
 #: www/themes/gforge/Theme.class.php:109 www/themes/lite/Theme.class.php:76
 #: www/themes/ultralite/Theme.class.php:30
@@ -7150,7 +7155,22 @@ msgid ""
 "page</a>. If you choose not to participate, your ratings of other users will "
 "be permanently deleted and the 'Peer Rating' box will disappear from your "
 "user page. </i></p>"
-msgstr "<p>La boîte d'évaluations croisées renvoie les notes moyennes (et les niveaux de réponse) de chaque critère individuel.  Pour des raisons de calcul, ces chiffres tiennent compte à la fois des utilisateurs de confiance et des autres.</p><ul><li>Le champ « rang global » indique le rang de l'utilisateur comparé à tous les utilisateurs de %1$s classés.</li><li>Le « score agrégé » indique un score global moyen pondéré, basé uniquement sur les réponses de confiance.</li><li>Le champ « importance personnelle » indique le poids que cet utilisateur aura lors de ses évaluations des autres développeurs (entre 1 et 1,5).</li></ul><p><i>Si vous ne souhaitez pas participer à ces évaluations (ni en tant qu'évaluateur, ni en tant que sujet des évaluations), vous pouvez désactiver cette fonction depuis la <a href=\"%2$s\">page de gestion de votre compte</A>.  Si vous choisissez de ne plus participer, vos évaluations des autres utilisateurs seront effacées, et la boîte d'évaluations croisées n'apparaîtra plus sur votre page d'utilisateur.</i></p>"
+msgstr ""
+"<p>La boîte d'évaluations croisées renvoie les notes moyennes (et les "
+"niveaux de réponse) de chaque critère individuel.  Pour des raisons de "
+"calcul, ces chiffres tiennent compte à la fois des utilisateurs de confiance "
+"et des autres.</p><ul><li>Le champ « rang global » indique le rang de "
+"l'utilisateur comparé à tous les utilisateurs de %1$s classés.</li><li>Le « "
+"score agrégé » indique un score global moyen pondéré, basé uniquement sur "
+"les réponses de confiance.</li><li>Le champ « importance personnelle » "
+"indique le poids que cet utilisateur aura lors de ses évaluations des autres "
+"développeurs (entre 1 et 1,5).</li></ul><p><i>Si vous ne souhaitez pas "
+"participer à ces évaluations (ni en tant qu'évaluateur, ni en tant que sujet "
+"des évaluations), vous pouvez désactiver cette fonction depuis la <a href=\"%"
+"2$s\">page de gestion de votre compte</A>.  Si vous choisissez de ne plus "
+"participer, vos évaluations des autres utilisateurs seront effacées, et la "
+"boîte d'évaluations croisées n'apparaîtra plus sur votre page d'utilisateur."
+"</i></p>"
 
 #: www/include/user_home.php:182
 #, php-format
@@ -7158,7 +7178,10 @@ msgid ""
 "You opted-out from peer rating system, otherwise you would have a chance to "
 "rate the user. Refer to <a href=\"%1$s\">your account maintenance page</a> "
 "for more information."
-msgstr "Vous ne participez pas au système d'évaluations croisées, et vous ne pouvez donc pas donner une évaluation à cet utilisateur.  Pour plus d'informations, référez-vous à la <a href=\"%1$s\">page de gestion de votre compte</a>."
+msgstr ""
+"Vous ne participez pas au système d'évaluations croisées, et vous ne pouvez "
+"donc pas donner une évaluation à cet utilisateur.  Pour plus d'informations, "
+"référez-vous à la <a href=\"%1$s\">page de gestion de votre compte</a>."
 
 #: www/include/vote_function.php:196
 #: www/survey/include/SurveyHTML.class.php:494

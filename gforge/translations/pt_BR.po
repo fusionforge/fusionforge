@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Gforge 4.5\n"
+"Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-14 12:13+0100\n"
-"PO-Revision-Date: 2007-03-16 23:00+0100\n"
+"POT-Creation-Date: 2009-01-15 14:13+0100\n"
+"PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -6363,12 +6363,12 @@ msgid "Tip: Styles can be applied quickly to selected text"
 msgstr ""
 
 #: www/include/Layout.class.php:74
+#: www/themes/gforge-simple-theme/Theme.class.php:80
 #: www/themes/gforge-simple-theme/Theme.class.php:81
 #: www/themes/gforge/Theme.class.php:109 www/themes/lite/Theme.class.php:76
 #: www/themes/ultralite/Theme.class.php:30
-#, fuzzy
 msgid "en"
-msgstr "aberto"
+msgstr "pt-BR"
 
 #: www/include/Layout.class.php:150
 #: www/themes/gforge-simple-theme/Theme.class.php:153
@@ -12160,189 +12160,3 @@ msgstr[1] ""
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "Nome do Usuário"
-
-#, fuzzy
-#~ msgid "Public Forum"
-#~ msgstr "Fóruns Públicos"
-
-#, fuzzy
-#~ msgid "Project Manager"
-#~ msgstr "Nome do Novo Projeto"
-
-#, fuzzy
-#~ msgid "Public Project Manager"
-#~ msgstr "Usar Gerenciador de Projeto/Tarefa"
-
-#, fuzzy
-#~ msgid "Project Manager Admin"
-#~ msgstr "Administrador de Projeto"
-
-#, fuzzy
-#~ msgid "Public Tracker"
-#~ msgstr "Áreas Públicas"
-
-#, fuzzy
-#~ msgid "File Package"
-#~ msgstr "Nenhum Pacote de Arquivos"
-
-#~ msgid "all %1$s mailings and notifications"
-#~ msgstr "todas as mensagens e notificações do %1$s"
-
-#~ msgid "%1$s site mailings"
-#~ msgstr "mensagens do site %1$s"
-
-#, fuzzy
-#~ msgid "logged in"
-#~ msgstr "Logged In: NÃO"
-
-#~ msgid "Add, Delete, or Edit Supported Languages"
-#~ msgstr "Adicionar, Deletar, ou Editar Línguas Suportadas"
-
-#~ msgid "Translation file tool"
-#~ msgstr "Ferramenta de arquivamento de traduções"
-
-#, fuzzy
-#~ msgid "Group list admin"
-#~ msgstr "Lista de Grupos"
-
-#, fuzzy
-#~ msgid "User list admin"
-#~ msgstr ": Lista de Usuários"
-
-#, fuzzy
-#~ msgid "Approve pending projects"
-#~ msgstr "Aprovando Projetos Pendentes"
-
-#, fuzzy
-#~ msgid "News admin approval"
-#~ msgstr "Administrador de Notícias"
-
-#, fuzzy
-#~ msgid "People admin"
-#~ msgstr "Pessoa"
-
-#, fuzzy
-#~ msgid "logged in as %s"
-#~ msgstr "Logged In: NÃO"
-
-#~ msgid "Bookmark Page"
-#~ msgstr "Página de Favoritos"
-
-#~ msgid "New User via SSL"
-#~ msgstr "Novo Usuário via SSL"
-
-#~ msgid "%Y %B %e  %H:%M"
-#~ msgstr "%e %B %Y  %H:%M"
-
-#~ msgid "public mailing lists"
-#~ msgstr "listas de correio público"
-
-#~ msgid "Group search with criteria"
-#~ msgstr "Pesquisar Grupos com o critério"
-
-#~ msgid "matches"
-#~ msgstr "ocorrências"
-
-#~ msgid "<strong>%1$s</strong> projects in result set."
-#~ msgstr "<strong>%1$s</strong> projetos no conjunto de resultados."
-
-#, fuzzy
-#~ msgid "Error - you can"
-#~ msgstr "Erro atualizando"
-
-#, fuzzy
-#~ msgid "You can"
-#~ msgstr "Seu Nome"
-
-#, fuzzy
-#~ msgid "I"
-#~ msgstr "ID"
-
-#~ msgid "You Can Only Monitor If You Are Logged In"
-#~ msgstr "Você Só Pode Monitorar Se Você Estiver Logado"
-
-#~ msgid "User Id:"
-#~ msgstr "Id de Usuário:"
-
-#~ msgid "Updated Successfully"
-#~ msgstr "Atualizado com Sucesso"
-
-#~ msgid "Vote Registered"
-#~ msgstr "Voto Registrado"
-
-#~ msgid "Unix Name"
-#~ msgstr "Nome Unix"
-
-#~ msgid "UNIX Name"
-#~ msgstr "Nome UNIX"
-
-#~ msgid "Assigned To"
-#~ msgstr "Atribuído Para"
-
-#~ msgid "Package Name"
-#~ msgstr "Nome do Pacote"
-
-#~ msgid "Site Admin"
-#~ msgstr "Administrador do Site"
-
-#~ msgid "Add User"
-#~ msgstr "Adicionar Usuário"
-
-#~ msgid "Real Name"
-#~ msgstr "Nome Real"
-
-#~ msgid "Login Name"
-#~ msgstr "Nome de Login"
-
-#~ msgid "Question Type"
-#~ msgstr "Tipo de Questão"
-
-#~ msgid "Permission Denied"
-#~ msgstr "Permissão Negada"
-
-#~ msgid "Permission Denied."
-#~ msgstr "Permissão Negada."
-
-#~ msgid "No Such Posting For This Project"
-#~ msgstr "Postagem Não Encontrada Para Esse Projeto"
-
-#~ msgid "News Admin"
-#~ msgstr "Administrador de Notícias"
-
-#~ msgid "Mail Admin"
-#~ msgstr "Administrador de Correio"
-
-#, fuzzy
-#~ msgid "Massmail Admin"
-#~ msgstr "Administrador de Correio"
-
-#~ msgid "For Project"
-#~ msgstr "Para o Projeto"
-
-#~ msgid "Login Name:"
-#~ msgstr "Nome de Login:"
-
-#~ msgid "Dependent On Task"
-#~ msgstr "Dependente Da Tarefa"
-
-#~ msgid "Add Snippets To Package"
-#~ msgstr "Adicionar Trechos Ao Pacote"
-
-#~ msgid "Add Forum"
-#~ msgstr "Adicionar Fórum"
-
-#~ msgid "Add A New Skill"
-#~ msgstr "Adicionar Uma Nova Habilidade"
-
-#~ msgid "Add Snippets to Package"
-#~ msgstr "Adicionar Trechos ao Pacote"
-
-#~ msgid "Browse Tasks"
-#~ msgstr "Listar Tarefas"
-
-#, fuzzy
-#~ msgid "(at least %$1s characters)"
-#~ msgstr "A senha precisa ter pelo menos 6 caracteres."
-
-#~ msgid "Error, Error - snippet doesn't exist"
-#~ msgstr "Erro, Erro - trecho não existe"

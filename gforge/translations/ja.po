@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-14 12:13+0100\n"
-"PO-Revision-Date: 2009-01-15 12:16+0100\n"
+"POT-Creation-Date: 2009-01-15 14:13+0100\n"
+"PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -554,8 +554,10 @@ msgstr ""
 "プロジェクト名:%1$s\n"
 "Unixネーム:%2$s\n"
 "\n"
-"このサイトはCVSサーバーとシェル/ウェブサーバーのサービスは提供しておりません\n"
-"シェル/ウェブサーバーに関しては設定を変更し各自のサイトを参照するようにしてください。"
+"このサイトはCVSサーバーとシェル/ウェブサーバーのサービスは提供しておりませ"
+"ん\n"
+"シェル/ウェブサーバーに関しては設定を変更し各自のサイトを参照するようにしてく"
+"ださい。"
 
 #: common/include/Group.class.php:2124
 #, php-format
@@ -749,7 +751,8 @@ msgid ""
 "-- the %3$s staff\n"
 msgstr ""
 "%3$s ウェブサイトに登録していただき、ありがとうございます。\n"
-"ユーザー 「%1$s」 を登録しました。登録を終えるために次のURLを訪れてください:\n"
+"ユーザー 「%1$s」 を登録しました。登録を終えるために次のURLを訪れてくださ"
+"い:\n"
 "\n"
 "<%2$s>\n"
 "\n"
@@ -6157,11 +6160,12 @@ msgid "Tip: Styles can be applied quickly to selected text"
 msgstr ""
 
 #: www/include/Layout.class.php:74
+#: www/themes/gforge-simple-theme/Theme.class.php:80
 #: www/themes/gforge-simple-theme/Theme.class.php:81
 #: www/themes/gforge/Theme.class.php:109 www/themes/lite/Theme.class.php:76
 #: www/themes/ultralite/Theme.class.php:30
 msgid "en"
-msgstr ""
+msgstr "ja"
 
 #: www/include/Layout.class.php:150
 #: www/themes/gforge-simple-theme/Theme.class.php:153

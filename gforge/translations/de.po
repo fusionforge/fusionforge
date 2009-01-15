@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-14 12:13+0100\n"
+"POT-Creation-Date: 2009-01-15 14:13+0100\n"
 "PO-Revision-Date: 2009-01-15 12:04+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -556,9 +556,11 @@ msgstr ""
 "Vollständiger Name des Projektes:  %1$s\n"
 "Unix-Name des Projektes:  %2$s\n"
 "\n"
-"Ihr DNS wird bis zu einem Tag benötigen, bis es für Ihre Seite funktioniert.\n"
+"Ihr DNS wird bis zu einem Tag benötigen, bis es für Ihre Seite "
+"funktioniert.\n"
 "Ihre Website ist über Ihren Shell-Account zugänglich. Bitte lesen Sie\n"
-"die Seite-Dokumentation (siehe Link unten) über korrekte Verwendung, verfügbare\n"
+"die Seite-Dokumentation (siehe Link unten) über korrekte Verwendung, "
+"verfügbare\n"
 "Services und die Verzeichnisstruktur des Accounts.\n"
 "\n"
 "Wenn Sie Ihre eigene Projekt-Seite auf %4$s besuchen, während Sie\n"
@@ -704,7 +706,7 @@ msgstr ""
 "Projektadministratorseite (%2$s) akzeptieren."
 
 #: common/include/GroupJoinRequest.class.php:276
-#, php-format, fuzzy
+#, fuzzy, php-format
 msgid "Your request to join the %1$s project was denied by an administrator."
 msgstr ""
 "Ihre Bitte dem Projekt %1$s beizutreten wurde vom Administrator abgelehnt."
@@ -793,8 +795,10 @@ msgstr ""
 "\n"
 "<%2$s>\n"
 "\n"
-"(Falls Sie oben keinen Link sehen, ist möglicherweise Ihr Mailprogramm fehlerhaft.\n"
-"Kopieren Sie den unten stehenden Link als _eine Zeile_ in die Adressleiste Ihres Browsers.)\n"
+"(Falls Sie oben keinen Link sehen, ist möglicherweise Ihr Mailprogramm "
+"fehlerhaft.\n"
+"Kopieren Sie den unten stehenden Link als _eine Zeile_ in die Adressleiste "
+"Ihres Browsers.)\n"
 "\n"
 "%2$s\n"
 "\n"
@@ -1736,7 +1740,8 @@ msgid ""
 "\n"
 "Click here to visit the item %3$s"
 msgstr ""
-"Diese Mail wird Ihnen geschickt, um Sie an anstehende/überfällige Aufträge zu erinnern. \n"
+"Diese Mail wird Ihnen geschickt, um Sie an anstehende/überfällige Aufträge "
+"zu erinnern. \n"
 " Das Element des Auftrag-Managers #%1$s ist schwebend: \n"
 " Auftragszusammenfassung: %2$s\n"
 " Erstellt von: %4$s\n"
@@ -5521,7 +5526,9 @@ msgstr "Erhalten der Antworten per Email"
 #: www/forum/include/ForumHTML.class.php:601
 #, php-format
 msgid "You could post if you were <a href=\"%1$s\">logged in</a>."
-msgstr "Sie könnten einen Beitrag posten, wenn Sie <a href=\"%1$s\">angemeldet</a> wären."
+msgstr ""
+"Sie könnten einen Beitrag posten, wenn Sie <a href=\"%1$s\">angemeldet</a> "
+"wären."
 
 #: www/forum/include/ForumHTML.class.php:604
 #, php-format
@@ -6405,6 +6412,7 @@ msgid "Tip: Styles can be applied quickly to selected text"
 msgstr ""
 
 #: www/include/Layout.class.php:74
+#: www/themes/gforge-simple-theme/Theme.class.php:80
 #: www/themes/gforge-simple-theme/Theme.class.php:81
 #: www/themes/gforge/Theme.class.php:109 www/themes/lite/Theme.class.php:76
 #: www/themes/ultralite/Theme.class.php:30

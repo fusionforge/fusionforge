@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Gforge 4.5\n"
+"Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-14 12:13+0100\n"
-"PO-Revision-Date: 2007-03-02 16:02 +0100\n"
+"POT-Creation-Date: 2009-01-15 14:13+0100\n"
+"PO-Revision-Date: 2009-01-15 14:08+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -6327,12 +6327,12 @@ msgid "Tip: Styles can be applied quickly to selected text"
 msgstr ""
 
 #: www/include/Layout.class.php:74
+#: www/themes/gforge-simple-theme/Theme.class.php:80
 #: www/themes/gforge-simple-theme/Theme.class.php:81
 #: www/themes/gforge/Theme.class.php:109 www/themes/lite/Theme.class.php:76
 #: www/themes/ultralite/Theme.class.php:30
-#, fuzzy
 msgid "en"
-msgstr "开启"
+msgstr "zh-CN"
 
 #: www/include/Layout.class.php:150
 #: www/themes/gforge-simple-theme/Theme.class.php:153
@@ -12051,244 +12051,3 @@ msgstr[1] ""
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "帐号"
-
-#, fuzzy
-#~ msgid "Public Forum"
-#~ msgstr "公共讨论区"
-
-#, fuzzy
-#~ msgid "Project Manager"
-#~ msgstr "新项目名称"
-
-#, fuzzy
-#~ msgid "Public Project Manager"
-#~ msgstr "使用项目/任务管理器"
-
-#, fuzzy
-#~ msgid "Project Manager Admin"
-#~ msgstr "项目管理"
-
-#, fuzzy
-#~ msgid "Public Tracker"
-#~ msgstr "公共区域"
-
-#, fuzzy
-#~ msgid "File Package"
-#~ msgstr "没有发布文件"
-
-#~ msgid "all %1$s mailings and notifications"
-#~ msgstr "所有 %1$s 的邮件列表和通知"
-
-#~ msgid "%1$s site mailings"
-#~ msgstr "%1$s 网站的邮件列表"
-
-#, fuzzy
-#~ msgid "logged in"
-#~ msgstr "登录：否"
-
-#~ msgid "Add, Delete, or Edit Supported Languages"
-#~ msgstr "添加、删除或编辑支持的语言"
-
-#~ msgid "Translation file tool"
-#~ msgstr "翻译工具"
-
-#, fuzzy
-#~ msgid "Group list admin"
-#~ msgstr "群组清单"
-
-#, fuzzy
-#~ msgid "User list admin"
-#~ msgstr "：用户清单"
-
-#, fuzzy
-#~ msgid "Approve pending projects"
-#~ msgstr "审核等待中的项目"
-
-#, fuzzy
-#~ msgid "News admin approval"
-#~ msgstr "新闻管理"
-
-#, fuzzy
-#~ msgid "People admin"
-#~ msgstr "人"
-
-#, fuzzy
-#~ msgid "logged in as %s"
-#~ msgstr "登录：否"
-
-#~ msgid "Bookmark Page"
-#~ msgstr "书签"
-
-#~ msgid "New User via SSL"
-#~ msgstr "通过 SSL 创建新用户"
-
-#~ msgid "%Y %B %e  %H:%M"
-#~ msgstr "%Y %B %e  %H:%M"
-
-#~ msgid "public mailing lists"
-#~ msgstr "公开的邮件列表"
-
-#~ msgid "open"
-#~ msgstr "启用"
-
-#~ msgid "Group search with criteria"
-#~ msgstr "依照条件搜索群组"
-
-#~ msgid "matches"
-#~ msgstr "符合"
-
-#~ msgid "<strong>%1$s</strong> projects in result set."
-#~ msgstr "找到 <strong>%1$s</strong> 个项目"
-
-#~ msgid "Site has SCM enabled, but no SCM was chosen."
-#~ msgstr "网站有启动SCM，但是没有SCM被选择。"
-
-#, fuzzy
-#~ msgid "Error - you can"
-#~ msgstr "更新错误"
-
-#, fuzzy
-#~ msgid "You can"
-#~ msgstr "您的姓名"
-
-#, fuzzy
-#~ msgid "I"
-#~ msgstr "编号"
-
-#~ msgid "You Can Only Monitor If You Are Logged In"
-#~ msgstr "只有登录后才能监视"
-
-#~ msgid "User Id:"
-#~ msgstr "用户编号"
-
-#~ msgid "Updated Successfully"
-#~ msgstr "更新成功"
-
-#~ msgid "Vote Registered"
-#~ msgstr "评分登记了"
-
-#~ msgid "User Updated Successfully"
-#~ msgstr "用户更新成功"
-
-#~ msgid "Submitted By"
-#~ msgstr "发表人"
-
-#~ msgid "Time Tracking"
-#~ msgstr "时间跟踪"
-
-#~ msgid "Unix Name"
-#~ msgstr "Unix帐号"
-
-#~ msgid "UNIX Name"
-#~ msgstr "Unix名称"
-
-#~ msgid "Assigned To"
-#~ msgstr "指定给"
-
-#~ msgid "Package Name"
-#~ msgstr "分类名称"
-
-#~ msgid "Site Admin"
-#~ msgstr "网站管理"
-
-#~ msgid "Release Name"
-#~ msgstr "发布版本名称"
-
-#~ msgid "Add User"
-#~ msgstr "增加用户"
-
-#~ msgid "Real Name"
-#~ msgstr "真实姓名"
-
-#~ msgid "Login Name"
-#~ msgstr "登录帐号"
-
-#~ msgid "Question Type"
-#~ msgstr "问题类型"
-
-#~ msgid "Permission Denied"
-#~ msgstr "权限不足"
-
-#~ msgid "Permission Denied."
-#~ msgstr "许可权不允许"
-
-#~ msgid "Posted By"
-#~ msgstr "张贴者"
-
-#~ msgid "No Such Posting For This Project"
-#~ msgstr "该项目没有这个文章"
-
-#~ msgid "No matches Found"
-#~ msgstr "未发现符合"
-
-#~ msgid "News Admin"
-#~ msgstr "新闻管理"
-
-#~ msgid "Mail Admin"
-#~ msgstr "邮件管理"
-
-#, fuzzy
-#~ msgid "Massmail Admin"
-#~ msgstr "邮件管理"
-
-#~ msgid "For Project"
-#~ msgstr "为项目"
-
-#~ msgid "Login Name:"
-#~ msgstr "帐号"
-
-#~ msgid "Dependent On Task"
-#~ msgstr "依赖于任务"
-
-#~ msgid "DELETE FAILED"
-#~ msgstr "删除错误"
-
-#~ msgid "DELETE SUCCESSFUL"
-#~ msgstr "删除成功"
-
-#~ msgid "Add Snippets To Package"
-#~ msgstr "添加代码到这个软件包"
-
-#~ msgid "Add Forum"
-#~ msgstr "增加讨论区"
-
-#~ msgid "Add A New Skill"
-#~ msgstr "增加新的技能"
-
-#~ msgid "Add Snippets to Package"
-#~ msgstr "添加代码到这个软件包"
-
-#~ msgid "Browse Tasks"
-#~ msgstr "浏览任务"
-
-#, fuzzy
-#~ msgid "(at least %$1s characters)"
-#~ msgstr "密码至少要6个字节"
-
-#~ msgid "Error, Error - snippet doesn't exist"
-#~ msgstr "错误, 错误 - 代码不存在"
-
-#, fuzzy
-#~ msgid ""
-#~ "This  mail is sent to you to remind you of pending/overdue tracker items. "
-#~ "The item #%1$s is pending: \n"
-#~ "Summary: %3$s\n"
-#~ "Status: %5$s\n"
-#~ "Open Date:%6$s\n"
-#~ "Assigned To: %7$s\n"
-#~ "Submitted by: %8$s\n"
-#~ "Details: %9$s\n"
-#~ "\n"
-#~ "\n"
-#~ "Click here to visit the item: %4$s"
-#~ msgstr ""
-#~ "这邮件被寄给你使你想起未决定/过期的跟踪者项目。\n"
-#~ "项目 #%1$s 是未决定: \n"
-#~ "摘要: %3$s\n"
-#~ "状态: %5$s\n"
-#~ "启用日期: %6$s\n"
-#~ "指定给: %7$s\n"
-#~ "发表人: %8$s\n"
-#~ "细节: %9$s\n"
-#~ "\n"
-#~ "点击这里拜访这个项目: %4$s"

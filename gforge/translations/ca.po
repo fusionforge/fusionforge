@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Gforge 4.5\n"
+"Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-14 12:13+0100\n"
-"PO-Revision-Date: 2007-03-13 19:44+0100\n"
+"POT-Creation-Date: 2009-01-15 14:13+0100\n"
+"PO-Revision-Date: 2009-01-15 14:06+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -6429,12 +6429,12 @@ msgid "Tip: Styles can be applied quickly to selected text"
 msgstr ""
 
 #: www/include/Layout.class.php:74
+#: www/themes/gforge-simple-theme/Theme.class.php:80
 #: www/themes/gforge-simple-theme/Theme.class.php:81
 #: www/themes/gforge/Theme.class.php:109 www/themes/lite/Theme.class.php:76
 #: www/themes/ultralite/Theme.class.php:30
-#, fuzzy
 msgid "en"
-msgstr "Obert"
+msgstr "ca"
 
 #: www/include/Layout.class.php:150
 #: www/themes/gforge-simple-theme/Theme.class.php:153
@@ -12270,219 +12270,3 @@ msgstr[1] ""
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "Nom d'usuari"
-
-#, fuzzy
-#~ msgid "Public Forum"
-#~ msgstr "Fòrums públics"
-
-#, fuzzy
-#~ msgid "Project Manager"
-#~ msgstr "Nom del nou projecte"
-
-#, fuzzy
-#~ msgid "Public Project Manager"
-#~ msgstr "Usa el gestor de projectes/tasques"
-
-#, fuzzy
-#~ msgid "Project Manager Admin"
-#~ msgstr "Administració del projecte"
-
-#, fuzzy
-#~ msgid "Public Tracker"
-#~ msgstr "Àrees públiques"
-
-#, fuzzy
-#~ msgid "File Package"
-#~ msgstr "No hi ha paquets de fitxers"
-
-#~ msgid "all %1$s mailings and notifications"
-#~ msgstr "tots els correus i notificacions %1$s"
-
-#~ msgid "%1$s site mailings"
-#~ msgstr "correus del lloc %1$s"
-
-#, fuzzy
-#~ msgid "logged in"
-#~ msgstr "En sessió: NO"
-
-#~ msgid "Add, Delete, or Edit Supported Languages"
-#~ msgstr "Afegeix, suprimeix, o edita idiomes suportats"
-
-#~ msgid "Translation file tool"
-#~ msgstr "Eina del fitxer de traducció"
-
-#, fuzzy
-#~ msgid "Group list admin"
-#~ msgstr "Llista de grup"
-
-#, fuzzy
-#~ msgid "User list admin"
-#~ msgstr ": Llista d'usuaris"
-
-#, fuzzy
-#~ msgid "Approve pending projects"
-#~ msgstr "S'estan aprovant els projectes pendents"
-
-#, fuzzy
-#~ msgid "News admin approval"
-#~ msgstr "Administració de les notícies"
-
-#, fuzzy
-#~ msgid "People admin"
-#~ msgstr "Persones"
-
-#, fuzzy
-#~ msgid "logged in as %s"
-#~ msgstr "En sessió: NO"
-
-#~ msgid "Bookmark Page"
-#~ msgstr "Pàgina de enllaços d'interès"
-
-#~ msgid "New User via SSL"
-#~ msgstr "Nou usuari via SSL"
-
-#~ msgid "%Y %B %e  %H:%M"
-#~ msgstr "%Y %B %e  %H:%M"
-
-#~ msgid "public mailing lists"
-#~ msgstr "llistes de correu públiques"
-
-#~ msgid "open"
-#~ msgstr "obre"
-
-#~ msgid "Group search with criteria"
-#~ msgstr "Cerca de grups amb criteris"
-
-#~ msgid "matches"
-#~ msgstr "coincidències"
-
-#~ msgid "<strong>%1$s</strong> projects in result set."
-#~ msgstr "<strong>%1$s</strong> projectes al conjunt de resultats."
-
-#~ msgid "Site has SCM enabled, but no SCM was chosen."
-#~ msgstr "El lloc té l'SCM habilitat, però no s'ha escollit cap SCM."
-
-#, fuzzy
-#~ msgid "Error - you can"
-#~ msgstr "Error a l'actualitzar"
-
-#, fuzzy
-#~ msgid "You can"
-#~ msgstr "El vostre nom"
-
-#, fuzzy
-#~ msgid "I"
-#~ msgstr "ID"
-
-#~ msgid "You Can Only Monitor If You Are Logged In"
-#~ msgstr "Només podeu monitoritzar si sou dins d'una sessió"
-
-#~ msgid "User Id:"
-#~ msgstr "Id Usuari:"
-
-#~ msgid "Updated Successfully"
-#~ msgstr "Actualitzat amb èxit"
-
-#~ msgid "Vote Registered"
-#~ msgstr "Vot Registrat"
-
-#~ msgid "User Updated Successfully"
-#~ msgstr "Usuari actualitzat amb èxit"
-
-#~ msgid "Submitted By"
-#~ msgstr "Tramès per"
-
-#~ msgid "Time Tracking"
-#~ msgstr "Rastreig del temps"
-
-#~ msgid "Unix Name"
-#~ msgstr "Nom Unix"
-
-#~ msgid "UNIX Name"
-#~ msgstr "Nom UNIX"
-
-#~ msgid "Assigned To"
-#~ msgstr "Assignat a"
-
-#~ msgid "Package Name"
-#~ msgstr "Nom del paquet"
-
-#~ msgid "Site Admin"
-#~ msgstr "Administració del lloc"
-
-#~ msgid "Release Name"
-#~ msgstr "Nom de publicació"
-
-#~ msgid "Add User"
-#~ msgstr "Afegeix un usuari"
-
-#~ msgid "Real Name"
-#~ msgstr "Nom real"
-
-#~ msgid "Login Name"
-#~ msgstr "Nom d'inici de sessió"
-
-#~ msgid "Question Type"
-#~ msgstr "Tipus de qüestió"
-
-#~ msgid "Permission Denied"
-#~ msgstr "Permís denegat"
-
-#~ msgid "Permission Denied."
-#~ msgstr "Permís denegat."
-
-#~ msgid "Posted By"
-#~ msgstr "Enviat per"
-
-#~ msgid "No Such Posting For This Project"
-#~ msgstr "No hi ha tal missatge per aquest projecte"
-
-#~ msgid "No matches Found"
-#~ msgstr "No s'han trobat coincidències"
-
-#~ msgid "News Admin"
-#~ msgstr "Administració de les notícies"
-
-#~ msgid "Mail Admin"
-#~ msgstr "Administració de les llistes de correu"
-
-#, fuzzy
-#~ msgid "Massmail Admin"
-#~ msgstr "Administració de les llistes de correu"
-
-#~ msgid "For Project"
-#~ msgstr "Per projecte"
-
-#~ msgid "Login Name:"
-#~ msgstr "Nom d'inici de sessió:"
-
-#~ msgid "Dependent On Task"
-#~ msgstr "Dependent d'una tasca"
-
-#~ msgid "DELETE FAILED"
-#~ msgstr "NO S'HA POGUT SUPRIMIR"
-
-#~ msgid "DELETE SUCCESSFUL"
-#~ msgstr "SUPRIMIT AMB ÈXIT"
-
-#~ msgid "Add Snippets To Package"
-#~ msgstr "Afegeix fragments al paquet"
-
-#~ msgid "Add Forum"
-#~ msgstr "Afegeix fòrum"
-
-#~ msgid "Add A New Skill"
-#~ msgstr "Afegeix una nova habilitat"
-
-#~ msgid "Add Snippets to Package"
-#~ msgstr "Afegeix fragments al paquet"
-
-#~ msgid "Browse Tasks"
-#~ msgstr "navega les tasques"
-
-#, fuzzy
-#~ msgid "(at least %$1s characters)"
-#~ msgstr "La contrasenya ha de tenir com a mínim 6 caràcters."
-
-#~ msgid "Error, Error - snippet doesn't exist"
-#~ msgstr "Error, Error - el fragment de codi no existeix"

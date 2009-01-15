@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Gforge 4.5\n"
+"Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-14 12:13+0100\n"
-"PO-Revision-Date: 2007-03-13 19:44+0100\n"
+"POT-Creation-Date: 2009-01-15 14:13+0100\n"
+"PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -6370,12 +6370,12 @@ msgid "Tip: Styles can be applied quickly to selected text"
 msgstr ""
 
 #: www/include/Layout.class.php:74
+#: www/themes/gforge-simple-theme/Theme.class.php:80
 #: www/themes/gforge-simple-theme/Theme.class.php:81
 #: www/themes/gforge/Theme.class.php:109 www/themes/lite/Theme.class.php:76
 #: www/themes/ultralite/Theme.class.php:30
-#, fuzzy
 msgid "en"
-msgstr "Irekia"
+msgstr "eu"
 
 #: www/include/Layout.class.php:150
 #: www/themes/gforge-simple-theme/Theme.class.php:153
@@ -12177,198 +12177,3 @@ msgstr[1] ""
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "Erabiltzailearen izena"
-
-#, fuzzy
-#~ msgid "Public Forum"
-#~ msgstr "Foro publikoa"
-
-#, fuzzy
-#~ msgid "Project Manager"
-#~ msgstr "Azpiproiektuaren izen berria"
-
-#, fuzzy
-#~ msgid "Public Project Manager"
-#~ msgstr "Ataza kudeatzailea erabili"
-
-#, fuzzy
-#~ msgid "Project Manager Admin"
-#~ msgstr "Proiektuen administrariaAdminitrador de Projectos"
-
-#, fuzzy
-#~ msgid "Public Tracker"
-#~ msgstr "Gune publikoa"
-
-#, fuzzy
-#~ msgid "File Package"
-#~ msgstr "Fitxerorik gabeko paketeak"
-
-#~ msgid "all %1$s mailings and notifications"
-#~ msgstr "%1$s -en berri eta posta guztiak"
-
-#~ msgid "%1$s site mailings"
-#~ msgstr "%1$s -en posta"
-
-#, fuzzy
-#~ msgid "logged in"
-#~ msgstr "Sistemaren barnean: Ez"
-
-#~ msgid "Add, Delete, or Edit Supported Languages"
-#~ msgstr "Onartutako hizkuntzak gehitu, ezabatu edo aldatu"
-
-#~ msgid "Translation file tool"
-#~ msgstr "Fitxeroak itzultzeko tresna"
-
-#, fuzzy
-#~ msgid "Group list admin"
-#~ msgstr "Taldeen zerrenda"
-
-#, fuzzy
-#~ msgid "User list admin"
-#~ msgstr ": Erabiltzaile Zerrenda"
-
-#, fuzzy
-#~ msgid "Approve pending projects"
-#~ msgstr "Zintzilik dauden proiektuak onartzen"
-
-#, fuzzy
-#~ msgid "News admin approval"
-#~ msgstr "Albisteen administraria"
-
-#, fuzzy
-#~ msgid "People admin"
-#~ msgstr "Pertsonak"
-
-#, fuzzy
-#~ msgid "logged in as %s"
-#~ msgstr "Sistemaren barnean: Ez"
-
-#~ msgid "Bookmark Page"
-#~ msgstr "Orri hau markatu"
-
-#~ msgid "New User via SSL"
-#~ msgstr "Erabiltzaile berria (SSL bidez)"
-
-#~ msgid "%Y %B %e  %H:%M"
-#~ msgstr "%H:%M %e %B %Y"
-
-#~ msgid "public mailing lists"
-#~ msgstr "Posta zerrenda publikoak"
-
-#~ msgid "Group search with criteria"
-#~ msgstr "Taldea bilatzeko hirizpidea"
-
-#~ msgid "matches"
-#~ msgstr "Bat datoz"
-
-#~ msgid "<strong>%1$s</strong> projects in result set."
-#~ msgstr "<strong>%1$s</strong> proiektu kategoria honetan."
-
-#, fuzzy
-#~ msgid "Error - you can"
-#~ msgstr "Akatsa eguneratzean"
-
-#, fuzzy
-#~ msgid "You can"
-#~ msgstr "Zure izena"
-
-#, fuzzy
-#~ msgid "I"
-#~ msgstr "ID-a"
-
-#~ msgid "You Can Only Monitor If You Are Logged In"
-#~ msgstr "Monitorizatzeko izenpetua eta gune bertan egon behar duzu"
-
-#~ msgid "User Id:"
-#~ msgstr "Erabiltzailearen ID-a"
-
-#~ msgid "Updated Successfully"
-#~ msgstr "Arrakastaz eguneratua"
-
-#~ msgid "Vote Registered"
-#~ msgstr "Vote Erregistratua"
-
-#~ msgid "User Updated Successfully"
-#~ msgstr "Erabiltzailea Ongi Eguneratua"
-
-#~ msgid "Unix Name"
-#~ msgstr "Unix izena"
-
-#~ msgid "UNIX Name"
-#~ msgstr "UNIX izena"
-
-#~ msgid "Assigned To"
-#~ msgstr "Nori esleitua"
-
-#~ msgid "Package Name"
-#~ msgstr "Paketearen izena"
-
-#~ msgid "Site Admin"
-#~ msgstr "Administrari gunea"
-
-#~ msgid "Add User"
-#~ msgstr "Erabiltzailea gehitu"
-
-#~ msgid "Real Name"
-#~ msgstr "Benetazko izena"
-
-#~ msgid "Login Name"
-#~ msgstr "Kontuaren izena"
-
-#~ msgid "Question Type"
-#~ msgstr "Galdera mota"
-
-#~ msgid "Permission Denied"
-#~ msgstr "Baimena ukatu da"
-
-#~ msgid "Permission Denied."
-#~ msgstr "Baimena ukatua"
-
-#~ msgid "No Such Posting For This Project"
-#~ msgstr "Ez dago argitalpen hau proiektu honetan"
-
-#~ msgid "News Admin"
-#~ msgstr "Albisteen administraria"
-
-#~ msgid "Mail Admin"
-#~ msgstr "Posta elektronikoen administraria"
-
-#, fuzzy
-#~ msgid "Massmail Admin"
-#~ msgstr "Posta elektronikoen administraria"
-
-#~ msgid "For Project"
-#~ msgstr "Proiektuarentzako"
-
-#~ msgid "Login Name:"
-#~ msgstr "Sesioa hasierako izena"
-
-#~ msgid "Dependent On Task"
-#~ msgstr "Ataza honen menpean dago"
-
-#~ msgid "DELETE FAILED"
-#~ msgstr "EZABATZEAN AKATSA"
-
-#~ msgid "DELETE SUCCESSFUL"
-#~ msgstr "ONGI EZABATUA"
-
-#~ msgid "Add Snippets To Package"
-#~ msgstr "Paketeari adabakiak gehitu"
-
-#~ msgid "Add Forum"
-#~ msgstr "Foroa gehitu"
-
-#~ msgid "Add A New Skill"
-#~ msgstr "Trebezi berria gehitu"
-
-#~ msgid "Add Snippets to Package"
-#~ msgstr "Paketeari adabakiak gehitu"
-
-#~ msgid "Browse Tasks"
-#~ msgstr "Atazak gainetik irakurri"
-
-#, fuzzy
-#~ msgid "(at least %$1s characters)"
-#~ msgstr "Pasahitza egokia eman behar duzu (gutxienez 6 karakterekoa)."
-
-#~ msgid "Error, Error - snippet doesn't exist"
-#~ msgstr "Akasta - Adabaki hau ez da aurkitzen"

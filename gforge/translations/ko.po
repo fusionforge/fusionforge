@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Gforge 4.5\n"
+"Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-14 12:13+0100\n"
-"PO-Revision-Date: 2007-03-16 23:01+0100\n"
+"POT-Creation-Date: 2009-01-15 14:13+0100\n"
+"PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -6313,12 +6313,12 @@ msgid "Tip: Styles can be applied quickly to selected text"
 msgstr ""
 
 #: www/include/Layout.class.php:74
+#: www/themes/gforge-simple-theme/Theme.class.php:80
 #: www/themes/gforge-simple-theme/Theme.class.php:81
 #: www/themes/gforge/Theme.class.php:109 www/themes/lite/Theme.class.php:76
 #: www/themes/ultralite/Theme.class.php:30
-#, fuzzy
 msgid "en"
-msgstr "open"
+msgstr "ko"
 
 #: www/include/Layout.class.php:150
 #: www/themes/gforge-simple-theme/Theme.class.php:153
@@ -12048,189 +12048,3 @@ msgstr[0] ""
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "사용자ID"
-
-#, fuzzy
-#~ msgid "Public Forum"
-#~ msgstr "공개 게시판"
-
-#, fuzzy
-#~ msgid "Project Manager"
-#~ msgstr "새 프로젝트 이름"
-
-#, fuzzy
-#~ msgid "Public Project Manager"
-#~ msgstr "프로젝트/임무 관리자 기능 사용"
-
-#, fuzzy
-#~ msgid "Project Manager Admin"
-#~ msgstr "Project Admin"
-
-#, fuzzy
-#~ msgid "Public Tracker"
-#~ msgstr "공개 구역"
-
-#, fuzzy
-#~ msgid "File Package"
-#~ msgstr "파일 패키지가 없습니다."
-
-#~ msgid "all %1$s mailings and notifications"
-#~ msgstr "모든 %1$s 메일 및 공지사항"
-
-#~ msgid "%1$s site mailings"
-#~ msgstr "%1$s 메일"
-
-#, fuzzy
-#~ msgid "logged in"
-#~ msgstr "로그인: NO"
-
-#~ msgid "Add, Delete, or Edit Supported Languages"
-#~ msgstr "Add, Delete, or Edit Supported Languages"
-
-#~ msgid "Translation file tool"
-#~ msgstr "Translation file tool"
-
-#, fuzzy
-#~ msgid "Group list admin"
-#~ msgstr "Group List"
-
-#, fuzzy
-#~ msgid "User list admin"
-#~ msgstr ": User List"
-
-#, fuzzy
-#~ msgid "Approve pending projects"
-#~ msgstr "대기중인 프로젝트 승인하기"
-
-#, fuzzy
-#~ msgid "News admin approval"
-#~ msgstr "뉴스 설정"
-
-#, fuzzy
-#~ msgid "People admin"
-#~ msgstr "사람"
-
-#, fuzzy
-#~ msgid "logged in as %s"
-#~ msgstr "로그인: NO"
-
-#~ msgid "Bookmark Page"
-#~ msgstr "즐겨찾기"
-
-#~ msgid "New User via SSL"
-#~ msgstr "사용자 등록"
-
-#~ msgid "%Y %B %e  %H:%M"
-#~ msgstr "%Y %B %e  %H:%M"
-
-#~ msgid "public mailing lists"
-#~ msgstr "공개 메일링 리스트"
-
-#~ msgid "Group search with criteria"
-#~ msgstr "Group search with criteria"
-
-#~ msgid "matches"
-#~ msgstr "matches"
-
-#~ msgid "<strong>%1$s</strong> projects in result set."
-#~ msgstr "<strong>%1$s</strong>개의 프로젝트가 결과에 포함되었습니다."
-
-#, fuzzy
-#~ msgid "Error - you can"
-#~ msgstr "갱신 에러"
-
-#, fuzzy
-#~ msgid "You can"
-#~ msgstr "보내는 사람 이름"
-
-#, fuzzy
-#~ msgid "I"
-#~ msgstr "ID"
-
-#~ msgid "You Can Only Monitor If You Are Logged In"
-#~ msgstr "로그인하셔야 모니터링하실 수 있습니다."
-
-#~ msgid "User Id:"
-#~ msgstr "사용자 번호:"
-
-#~ msgid "Updated Successfully"
-#~ msgstr "갱신 성공"
-
-#~ msgid "Vote Registered"
-#~ msgstr "Vote Registered"
-
-#~ msgid "Unix Name"
-#~ msgstr "Unix 이름"
-
-#~ msgid "UNIX Name"
-#~ msgstr "UNIX Name"
-
-#~ msgid "Assigned To"
-#~ msgstr "담당자"
-
-#~ msgid "Package Name"
-#~ msgstr "패키지 이름"
-
-#~ msgid "Site Admin"
-#~ msgstr "Site Admin"
-
-#~ msgid "Add User"
-#~ msgstr "사용자 추가"
-
-#~ msgid "Real Name"
-#~ msgstr "이름"
-
-#~ msgid "Login Name"
-#~ msgstr "사용자 ID"
-
-#~ msgid "Question Type"
-#~ msgstr "Question Type"
-
-#~ msgid "Permission Denied"
-#~ msgstr "Permission Denied"
-
-#~ msgid "Permission Denied."
-#~ msgstr "접근 금지"
-
-#~ msgid "No Such Posting For This Project"
-#~ msgstr "No Such Posting For This Project"
-
-#~ msgid "News Admin"
-#~ msgstr "뉴스 설정"
-
-#~ msgid "Mail Admin"
-#~ msgstr "메일 설정"
-
-#, fuzzy
-#~ msgid "Massmail Admin"
-#~ msgstr "메일 설정"
-
-#~ msgid "For Project"
-#~ msgstr "프로젝트 이름"
-
-#~ msgid "Login Name:"
-#~ msgstr "사용자 ID:"
-
-#~ msgid "Dependent On Task"
-#~ msgstr "Dependent On Task"
-
-#~ msgid "Add Snippets To Package"
-#~ msgstr "Add Snippets To Package"
-
-#~ msgid "Add Forum"
-#~ msgstr "게시판 추가하기"
-
-#~ msgid "Add A New Skill"
-#~ msgstr "Add A New Skill"
-
-#~ msgid "Add Snippets to Package"
-#~ msgstr "Add Snippets to Package"
-
-#~ msgid "Browse Tasks"
-#~ msgstr "임무 보기"
-
-#, fuzzy
-#~ msgid "(at least %$1s characters)"
-#~ msgstr "비밀번호는 적어도 6글자 이상이어야 합니다."
-
-#~ msgid "Error, Error - snippet doesn't exist"
-#~ msgstr "Error, Error - snippet doesn't exist"

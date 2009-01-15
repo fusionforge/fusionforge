@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Gforge 4.5\n"
+"Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-14 12:13+0100\n"
-"PO-Revision-Date: 2007-03-13 19:44+0100\n"
+"POT-Creation-Date: 2009-01-15 14:13+0100\n"
+"PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -6433,12 +6433,12 @@ msgid "Tip: Styles can be applied quickly to selected text"
 msgstr ""
 
 #: www/include/Layout.class.php:74
+#: www/themes/gforge-simple-theme/Theme.class.php:80
 #: www/themes/gforge-simple-theme/Theme.class.php:81
 #: www/themes/gforge/Theme.class.php:109 www/themes/lite/Theme.class.php:76
 #: www/themes/ultralite/Theme.class.php:30
-#, fuzzy
 msgid "en"
-msgstr "Open"
+msgstr "nl"
 
 #: www/include/Layout.class.php:150
 #: www/themes/gforge-simple-theme/Theme.class.php:153
@@ -12302,246 +12302,3 @@ msgstr[1] ""
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "Gebruikersnaam"
-
-#, fuzzy
-#~ msgid "Public Forum"
-#~ msgstr "Openbare forums"
-
-#, fuzzy
-#~ msgid "Project Manager"
-#~ msgstr "Nieuwe projectnaam"
-
-#, fuzzy
-#~ msgid "Public Project Manager"
-#~ msgstr "Gebruik project- of taakmanager"
-
-#, fuzzy
-#~ msgid "Project Manager Admin"
-#~ msgstr "Project beheer"
-
-#, fuzzy
-#~ msgid "Public Tracker"
-#~ msgstr "Publiek domein"
-
-#, fuzzy
-#~ msgid "File Package"
-#~ msgstr "Geen bestandsbundels"
-
-#~ msgid "all %1$s mailings and notifications"
-#~ msgstr "alle %1$s mailings en aankondigingen"
-
-#~ msgid "%1$s site mailings"
-#~ msgstr "%1$s site mailings"
-
-#, fuzzy
-#~ msgid "logged in"
-#~ msgstr "Ingelogd: NEE"
-
-#~ msgid "Add, Delete, or Edit Supported Languages"
-#~ msgstr "Toevoegen, Verwijderen, of Wijzigen van ondersteunde talen"
-
-#~ msgid "Translation file tool"
-#~ msgstr "Vertalingsbestanden beheer"
-
-#, fuzzy
-#~ msgid "Group list admin"
-#~ msgstr "Groepslijst"
-
-#, fuzzy
-#~ msgid "User list admin"
-#~ msgstr ": Gebruikerslijst"
-
-#, fuzzy
-#~ msgid "Approve pending projects"
-#~ msgstr "Goedkeuren projecten"
-
-#, fuzzy
-#~ msgid "News admin approval"
-#~ msgstr "Nieuwsbeheer"
-
-#, fuzzy
-#~ msgid "People admin"
-#~ msgstr "Mensen"
-
-#, fuzzy
-#~ msgid "logged in as %s"
-#~ msgstr "Ingelogd: NEE"
-
-#~ msgid "Bookmark Page"
-#~ msgstr "Deze pagina toevoegen aan favorieten"
-
-#~ msgid "New User via SSL"
-#~ msgstr "Nieuwe gebruiker via SSL"
-
-#~ msgid "%Y %B %e  %H:%M"
-#~ msgstr "%Y %B %e  %H:%M"
-
-#~ msgid "public mailing lists"
-#~ msgstr "openbare mailinglijsten"
-
-#~ msgid "open"
-#~ msgstr "open"
-
-#~ msgid "Group search with criteria"
-#~ msgstr "Groep zoeken met zoekcriteria"
-
-#~ msgid "matches"
-#~ msgstr "gevonden"
-
-#~ msgid "<strong>%1$s</strong> projects in result set."
-#~ msgstr "<strong>%1$s</strong> projecten in resultaatset."
-
-#~ msgid "Site has SCM enabled, but no SCM was chosen."
-#~ msgstr ""
-#~ "Deze site heeft SCM geactiveerd, maar g&eacute;&eacute;n SCM geselecteerd."
-
-#, fuzzy
-#~ msgid "Error - you can"
-#~ msgstr "Fout bij het wijzigen"
-
-#, fuzzy
-#~ msgid "You can"
-#~ msgstr "Je naam"
-
-#, fuzzy
-#~ msgid "I"
-#~ msgstr "ID"
-
-#~ msgid "You Can Only Monitor If You Are Logged In"
-#~ msgstr "Je kunt alleen monitoren als je ingelogd bent"
-
-#~ msgid "User Id:"
-#~ msgstr "Gebruikers ID"
-
-#~ msgid "Updated Successfully"
-#~ msgstr "Gewijzigd"
-
-#~ msgid "Vote Registered"
-#~ msgstr "Stem geregistreerd"
-
-#~ msgid "User Updated Successfully"
-#~ msgstr "Gebruiker aangepast"
-
-#~ msgid "Submitted By"
-#~ msgstr "Ingediend door"
-
-#~ msgid "Time Tracking"
-#~ msgstr "Tijdregistratie"
-
-#~ msgid "Unix Name"
-#~ msgstr "Unixnaam"
-
-#~ msgid "UNIX Name"
-#~ msgstr "Unix naam"
-
-#~ msgid "Assigned To"
-#~ msgstr "Toegewezen aan"
-
-#~ msgid "Package Name"
-#~ msgstr "Bundelnaam"
-
-#~ msgid "Site Admin"
-#~ msgstr "Site beheer"
-
-#~ msgid "Release Name"
-#~ msgstr "Releasenaam"
-
-#~ msgid "Add User"
-#~ msgstr "Gebruiker toevoegen"
-
-#~ msgid "Real Name"
-#~ msgstr "Echte naam"
-
-#~ msgid "Login Name"
-#~ msgstr "Loginnaam"
-
-#~ msgid "Question Type"
-#~ msgstr "Vraag Type"
-
-#~ msgid "Permission Denied"
-#~ msgstr "Toegang geweigerd"
-
-#~ msgid "Permission Denied."
-#~ msgstr "Toegang geweigerd."
-
-#~ msgid "Posted By"
-#~ msgstr "Gepost door"
-
-#~ msgid "No Such Posting For This Project"
-#~ msgstr "Deze vacature is niet aanwezig bij dit project"
-
-#~ msgid "No matches Found"
-#~ msgstr "Niets gevonden"
-
-#~ msgid "News Admin"
-#~ msgstr "Nieuwsbeheer"
-
-#~ msgid "Mail Admin"
-#~ msgstr "Mailbeheer"
-
-#, fuzzy
-#~ msgid "Massmail Admin"
-#~ msgstr "Mailbeheer"
-
-#~ msgid "For Project"
-#~ msgstr "Voor project"
-
-#~ msgid "Login Name:"
-#~ msgstr "Loginnaam"
-
-#~ msgid "Dependent On Task"
-#~ msgstr "Hangt af van taak"
-
-#~ msgid "DELETE FAILED"
-#~ msgstr "WISSEN MISLUKT"
-
-#~ msgid "DELETE SUCCESSFUL"
-#~ msgstr "GEWISD"
-
-#~ msgid "Add Snippets To Package"
-#~ msgstr "Voeg codefragmenten toe"
-
-#~ msgid "Add Forum"
-#~ msgstr "Voeg forum toe"
-
-#~ msgid "Add A New Skill"
-#~ msgstr "Voeg een nieuwe vaardigheid toe"
-
-#~ msgid "Add Snippets to Package"
-#~ msgstr "Voeg codefragmenten aan bundel toe"
-
-#~ msgid "Browse Tasks"
-#~ msgstr "Bladeren door taken"
-
-#, fuzzy
-#~ msgid "(at least %$1s characters)"
-#~ msgstr "Het wachtwoord moet minstens uit 6 karakters bestaan."
-
-#~ msgid "Error, Error - snippet doesn't exist"
-#~ msgstr "Fout: codefragment bestaat niet"
-
-#, fuzzy
-#~ msgid ""
-#~ "This  mail is sent to you to remind you of pending/overdue tracker items. "
-#~ "The item #%1$s is pending: \n"
-#~ "Summary: %3$s\n"
-#~ "Status: %5$s\n"
-#~ "Open Date:%6$s\n"
-#~ "Assigned To: %7$s\n"
-#~ "Submitted by: %8$s\n"
-#~ "Details: %9$s\n"
-#~ "\n"
-#~ "\n"
-#~ "Click here to visit the item: %4$s"
-#~ msgstr ""
-#~ "Je hebt deze email onvangen om je te wijzen op openstaande of over tijd "
-#~ "zijnde trackers. Item #%1$s staat open: \n"
-#~ "Samenvatting: %3$s\n"
-#~ "Status: %5$s\n"
-#~ "Opvoerdatum:%6$s\n"
-#~ "Toegewezen aan: %7$s\n"
-#~ "Ingediend door: %8$s\n"
-#~ "Details: %9$s\n"
-#~ "\n"
-#~ "\n"
-#~ "Klik hier om te springen naar item %4$s"

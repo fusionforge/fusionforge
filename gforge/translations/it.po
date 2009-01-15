@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Gforge 4.5\n"
+"Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-14 12:13+0100\n"
-"PO-Revision-Date: 2007-03-02 16:02 +0100\n"
+"POT-Creation-Date: 2009-01-15 14:13+0100\n"
+"PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -6431,12 +6431,12 @@ msgstr ""
 "selezionato"
 
 #: www/include/Layout.class.php:74
+#: www/themes/gforge-simple-theme/Theme.class.php:80
 #: www/themes/gforge-simple-theme/Theme.class.php:81
 #: www/themes/gforge/Theme.class.php:109 www/themes/lite/Theme.class.php:76
 #: www/themes/ultralite/Theme.class.php:30
-#, fuzzy
 msgid "en"
-msgstr "Aperti"
+msgstr "it"
 
 #: www/include/Layout.class.php:150
 #: www/themes/gforge-simple-theme/Theme.class.php:153
@@ -12294,248 +12294,3 @@ msgstr[1] ""
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "Non è stato inserito alcun file"
-
-#, fuzzy
-#~ msgid "Public Forum"
-#~ msgstr "Forum Pubblici"
-
-#, fuzzy
-#~ msgid "Project Manager"
-#~ msgstr "Nome progetto"
-
-#, fuzzy
-#~ msgid "Public Project Manager"
-#~ msgstr "Usa gestore attività"
-
-#, fuzzy
-#~ msgid "Project Manager Admin"
-#~ msgstr "Amministrazione progetto"
-
-#, fuzzy
-#~ msgid "Public Tracker"
-#~ msgstr "Aree pubbliche"
-
-#, fuzzy
-#~ msgid "File Package"
-#~ msgstr "Non è definito alcun pacchetto di file"
-
-#~ msgid "all %1$s mailings and notifications"
-#~ msgstr "tutti le e-mail ed annunci di %1$s"
-
-#~ msgid "%1$s site mailings"
-#~ msgstr "tutti le e-mail di %1$s"
-
-#, fuzzy
-#~ msgid "logged in"
-#~ msgstr "Collegato: NO"
-
-#~ msgid "Add, Delete, or Edit Supported Languages"
-#~ msgstr "Gestione lingue supportate"
-
-#~ msgid "Translation file tool"
-#~ msgstr "Strumento per la traduzione"
-
-#, fuzzy
-#~ msgid "Group list admin"
-#~ msgstr "Elenco progetti"
-
-#, fuzzy
-#~ msgid "User list admin"
-#~ msgstr ": Elenco utenti"
-
-#, fuzzy
-#~ msgid "Approve pending projects"
-#~ msgstr "Approvazione nuovi progetti"
-
-#, fuzzy
-#~ msgid "News admin approval"
-#~ msgstr "Amministrazione News"
-
-#, fuzzy
-#~ msgid "People admin"
-#~ msgstr "Persone"
-
-#, fuzzy
-#~ msgid "logged in as %s"
-#~ msgstr "Collegato: NO"
-
-#~ msgid "Bookmark Page"
-#~ msgstr "Segna pagina"
-
-#~ msgid "New User via SSL"
-#~ msgstr "Nuovo utente via SSL"
-
-#~ msgid "%Y %B %e  %H:%M"
-#~ msgstr "%d %B %Y %H:%M"
-
-#~ msgid "public mailing lists"
-#~ msgstr "mailing list pubbliche"
-
-#~ msgid "open"
-#~ msgstr "aperti"
-
-#~ msgid "Group search with criteria"
-#~ msgstr "Ricerca progetto con criterio"
-
-#~ msgid "matches"
-#~ msgstr "corrispondenze"
-
-#~ msgid "<strong>%1$s</strong> projects in result set."
-#~ msgstr "<strong>%1$s</strong> progetti."
-
-#~ msgid "Site has SCM enabled, but no SCM was chosen."
-#~ msgstr "Il sito ha SCM abilitato, non è stato selezionato alcun SCM."
-
-#, fuzzy
-#~ msgid "Error - you can"
-#~ msgstr "Errore nell'aggiornamento"
-
-#, fuzzy
-#~ msgid "You can"
-#~ msgstr "Il tuo nome"
-
-#, fuzzy
-#~ msgid "I"
-#~ msgstr "ID"
-
-#~ msgid "You Can Only Monitor If You Are Logged In"
-#~ msgstr "Puoi attivare la notifica solo quando sei collegato"
-
-#~ msgid "User Id:"
-#~ msgstr "Id utente:"
-
-#~ msgid "Updated Successfully"
-#~ msgstr "Aggiornato con successo"
-
-#~ msgid "User Name"
-#~ msgstr "Nome utente"
-
-#~ msgid "Vote Registered"
-#~ msgstr "Voto registrato"
-
-#~ msgid "User Updated Successfully"
-#~ msgstr "Utente aggiornato"
-
-#~ msgid "Submitted By"
-#~ msgstr "Inserito da"
-
-#~ msgid "Time Tracking"
-#~ msgstr "Registro delle consuntivazioni"
-
-#~ msgid "Unix Name"
-#~ msgstr "Nome unix"
-
-#~ msgid "UNIX Name"
-#~ msgstr "Nome UNIX"
-
-#~ msgid "Assigned To"
-#~ msgstr "Assegnato a"
-
-#~ msgid "Package Name"
-#~ msgstr "Nome package"
-
-#~ msgid "Site Admin"
-#~ msgstr "Amministrazione sito"
-
-#~ msgid "Release Name"
-#~ msgstr "Nome rilascio"
-
-#~ msgid "Add User"
-#~ msgstr "Aggiungi utente"
-
-#~ msgid "Real Name"
-#~ msgstr "Nome completo"
-
-#~ msgid "Login Name"
-#~ msgstr "Login"
-
-#~ msgid "Question Type"
-#~ msgstr "Tipo domanda"
-
-#~ msgid "Permission Denied"
-#~ msgstr "Utente non autorizzato"
-
-#~ msgid "Permission Denied."
-#~ msgstr "Autorizzazione negata."
-
-#~ msgid "Posted By"
-#~ msgstr "Inserito da"
-
-#~ msgid "No Such Posting For This Project"
-#~ msgstr "Questa posizione non è disponibile per questo progetto"
-
-#~ msgid "No matches Found"
-#~ msgstr "Nessuna occorrenza trovata"
-
-#~ msgid "News Admin"
-#~ msgstr "Amministrazione News"
-
-#~ msgid "Mail Admin"
-#~ msgstr "Amministrazione Mail"
-
-#, fuzzy
-#~ msgid "Massmail Admin"
-#~ msgstr "Amministrazione Mail"
-
-#~ msgid "For Project"
-#~ msgstr "Per il progetto"
-
-#~ msgid "Login Name:"
-#~ msgstr "Login:"
-
-#~ msgid "Dependent On Task"
-#~ msgstr "Dipende da attività"
-
-#~ msgid "DELETE FAILED"
-#~ msgstr "RIMOZIONE FALLITA"
-
-#~ msgid "DELETE SUCCESSFUL"
-#~ msgstr "RIMOSSO"
-
-#~ msgid "Add Snippets To Package"
-#~ msgstr "Aggiungi frammenti ai package"
-
-#~ msgid "Add Forum"
-#~ msgstr "Aggiungi forum"
-
-#~ msgid "Add A New Skill"
-#~ msgstr "Aggiungi nuova competenza"
-
-#~ msgid "Add Snippets to Package"
-#~ msgstr "Aggiungi frammenti ai package"
-
-#~ msgid "Browse Tasks"
-#~ msgstr "Consulta attività"
-
-#, fuzzy
-#~ msgid "(at least %$1s characters)"
-#~ msgstr "La lunghezza della password deve essere di almeno 6 caratteri."
-
-#~ msgid "Error, Error - snippet doesn't exist"
-#~ msgstr "Errore - il frammento non esiste"
-
-#, fuzzy
-#~ msgid ""
-#~ "This  mail is sent to you to remind you of pending/overdue tracker items. "
-#~ "The item #%1$s is pending: \n"
-#~ "Summary: %3$s\n"
-#~ "Status: %5$s\n"
-#~ "Open Date:%6$s\n"
-#~ "Assigned To: %7$s\n"
-#~ "Submitted by: %8$s\n"
-#~ "Details: %9$s\n"
-#~ "\n"
-#~ "\n"
-#~ "Click here to visit the item: %4$s"
-#~ msgstr ""
-#~ "Questa mail viene inviata per ricordare che ci sono elementi del tracker "
-#~ "scaduti. L'elemento #%1$s è scaduto: \n"
-#~ "Sommario: %3$s\n"
-#~ "Stato: %5$s\n"
-#~ "Data inserimento:%6$s\n"
-#~ "Assegnato a: %7$s\n"
-#~ "Inserito da: %8$s\n"
-#~ "Dettagli: %9$s\n"
-#~ "\n"
-#~ "\n"
-#~ "Clicca qui per andare all'elemento: %4$s"

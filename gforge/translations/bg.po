@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Gforge 4.5\n"
+"Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-14 12:13+0100\n"
-"PO-Revision-Date: 2007-03-02 16:02 +0100\n"
+"POT-Creation-Date: 2009-01-15 14:13+0100\n"
+"PO-Revision-Date: 2009-01-15 14:06+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -6157,12 +6157,12 @@ msgid "Tip: Styles can be applied quickly to selected text"
 msgstr ""
 
 #: www/include/Layout.class.php:74
+#: www/themes/gforge-simple-theme/Theme.class.php:80
 #: www/themes/gforge-simple-theme/Theme.class.php:81
 #: www/themes/gforge/Theme.class.php:109 www/themes/lite/Theme.class.php:76
 #: www/themes/ultralite/Theme.class.php:30
-#, fuzzy
 msgid "en"
-msgstr "Отворени"
+msgstr "bg"
 
 #: www/include/Layout.class.php:150
 #: www/themes/gforge-simple-theme/Theme.class.php:153
@@ -11764,65 +11764,3 @@ msgstr[1] ""
 #: www/users:35
 msgid "No User Name Provided"
 msgstr ""
-
-#, fuzzy
-#~ msgid "Public Forum"
-#~ msgstr "Публични форуми"
-
-#, fuzzy
-#~ msgid "Project Manager"
-#~ msgstr "Проекти на потребителя"
-
-#, fuzzy
-#~ msgid "Public Project Manager"
-#~ msgstr "Модул \"Управление на задачи\""
-
-#, fuzzy
-#~ msgid "Project Manager Admin"
-#~ msgstr "Администратори"
-
-#, fuzzy
-#~ msgid "Public Tracker"
-#~ msgstr "Общодостъпни места"
-
-#, fuzzy
-#~ msgid "File Package"
-#~ msgstr "Пакет"
-
-#, fuzzy
-#~ msgid "People admin"
-#~ msgstr "Хора"
-
-#~ msgid "New User via SSL"
-#~ msgstr "Нов потребител"
-
-#, fuzzy
-#~ msgid "You can"
-#~ msgstr "Вашето Име"
-
-#~ msgid "User Id:"
-#~ msgstr "Системен идентификатор на потребителя:"
-
-#~ msgid "Unix Name"
-#~ msgstr "Име"
-
-#~ msgid "Add User"
-#~ msgstr "Добавяне"
-
-#~ msgid "Real Name"
-#~ msgstr "Истинско Име"
-
-#~ msgid "Permission Denied."
-#~ msgstr "Разрешението е отказано."
-
-#~ msgid "For Project"
-#~ msgstr "Проект"
-
-#~ msgid "Login Name:"
-#~ msgstr "Потребителско име:"
-
-#~ msgid "Add Forum"
-#~ msgstr "Добавяне на форум"
-
-#~ msgid "Add A New Skill"
-#~ msgstr "Добавяне на ново умение"

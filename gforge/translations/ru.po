@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Gforge 4.5\n"
+"Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-14 12:13+0100\n"
-"PO-Revision-Date: 2007-03-16 23:03+0100\n"
+"POT-Creation-Date: 2009-01-15 14:13+0100\n"
+"PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -6151,11 +6151,12 @@ msgid "Tip: Styles can be applied quickly to selected text"
 msgstr ""
 
 #: www/include/Layout.class.php:74
+#: www/themes/gforge-simple-theme/Theme.class.php:80
 #: www/themes/gforge-simple-theme/Theme.class.php:81
 #: www/themes/gforge/Theme.class.php:109 www/themes/lite/Theme.class.php:76
 #: www/themes/ultralite/Theme.class.php:30
 msgid "en"
-msgstr ""
+msgstr "ru"
 
 #: www/include/Layout.class.php:150
 #: www/themes/gforge-simple-theme/Theme.class.php:153
@@ -11738,64 +11739,3 @@ msgstr[2] ""
 #: www/users:35
 msgid "No User Name Provided"
 msgstr ""
-
-#, fuzzy
-#~ msgid "Public Forum"
-#~ msgstr "Общедоступные форумы"
-
-#, fuzzy
-#~ msgid "Project Manager"
-#~ msgstr "Итого по проекту"
-
-#, fuzzy
-#~ msgid "Public Project Manager"
-#~ msgstr "Итого по проекту"
-
-#, fuzzy
-#~ msgid "Project Manager Admin"
-#~ msgstr "Администраторы"
-
-#, fuzzy
-#~ msgid "Public Tracker"
-#~ msgstr "Сервисы проекта"
-
-#, fuzzy
-#~ msgid "File Package"
-#~ msgstr "Нет файлов"
-
-#, fuzzy
-#~ msgid "Approve pending projects"
-#~ msgstr "Утверждение ожидающих проектов"
-
-#, fuzzy
-#~ msgid "News admin approval"
-#~ msgstr "Управление новостями"
-
-#, fuzzy
-#~ msgid "People admin"
-#~ msgstr "Пользователи"
-
-#~ msgid "New User via SSL"
-#~ msgstr "Новый пользователь"
-
-#~ msgid "User Updated Successfully"
-#~ msgstr "Информация о пользователе обновлена"
-
-#~ msgid "Unix Name"
-#~ msgstr "Unix имя"
-
-#~ msgid "Add User"
-#~ msgstr "Добавить пользователя"
-
-#~ msgid "Login Name"
-#~ msgstr "Регистрационное имя"
-
-#~ msgid "News Admin"
-#~ msgstr "Управление новостями"
-
-#~ msgid "Mail Admin"
-#~ msgstr "Управление почтовой подсистемой"
-
-#, fuzzy
-#~ msgid "Massmail Admin"
-#~ msgstr "Управление почтовой подсистемой"

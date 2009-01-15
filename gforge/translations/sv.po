@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Gforge 4.5\n"
+"Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-14 12:13+0100\n"
-"PO-Revision-Date: 2007-03-02 16:02 +0100\n"
+"POT-Creation-Date: 2009-01-15 14:13+0100\n"
+"PO-Revision-Date: 2009-01-15 14:08+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -6330,12 +6330,12 @@ msgid "Tip: Styles can be applied quickly to selected text"
 msgstr ""
 
 #: www/include/Layout.class.php:74
+#: www/themes/gforge-simple-theme/Theme.class.php:80
 #: www/themes/gforge-simple-theme/Theme.class.php:81
 #: www/themes/gforge/Theme.class.php:109 www/themes/lite/Theme.class.php:76
 #: www/themes/ultralite/Theme.class.php:30
-#, fuzzy
 msgid "en"
-msgstr "öppna"
+msgstr "sv"
 
 #: www/include/Layout.class.php:150
 #: www/themes/gforge-simple-theme/Theme.class.php:153
@@ -12117,189 +12117,3 @@ msgstr[1] ""
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "Användarenamn"
-
-#, fuzzy
-#~ msgid "Public Forum"
-#~ msgstr "Öppna forum"
-
-#, fuzzy
-#~ msgid "Project Manager"
-#~ msgstr "Nytt projektnamn"
-
-#, fuzzy
-#~ msgid "Public Project Manager"
-#~ msgstr "Använd projekt-/uppgiftsansvarig"
-
-#, fuzzy
-#~ msgid "Project Manager Admin"
-#~ msgstr "Projekt admin"
-
-#, fuzzy
-#~ msgid "Public Tracker"
-#~ msgstr "Öppet utrymme"
-
-#, fuzzy
-#~ msgid "File Package"
-#~ msgstr "Inga filpaket"
-
-#~ msgid "all %1$s mailings and notifications"
-#~ msgstr "all %1$s e-post och kungörelser"
-
-#~ msgid "%1$s site mailings"
-#~ msgstr "%1$s webbplats e-post"
-
-#, fuzzy
-#~ msgid "logged in"
-#~ msgstr "Inloggad: NEJ"
-
-#~ msgid "Add, Delete, or Edit Supported Languages"
-#~ msgstr "Lägg till, ta bort eller redigera stödda språk"
-
-#~ msgid "Translation file tool"
-#~ msgstr "Översättningsverktyg"
-
-#, fuzzy
-#~ msgid "Group list admin"
-#~ msgstr "Grupplista"
-
-#, fuzzy
-#~ msgid "User list admin"
-#~ msgstr ": Användarlista"
-
-#, fuzzy
-#~ msgid "Approve pending projects"
-#~ msgstr "Godkänner väntande projekt"
-
-#, fuzzy
-#~ msgid "News admin approval"
-#~ msgstr "Nyheter admin"
-
-#, fuzzy
-#~ msgid "People admin"
-#~ msgstr "Personer"
-
-#, fuzzy
-#~ msgid "logged in as %s"
-#~ msgstr "Inloggad: NEJ"
-
-#~ msgid "Bookmark Page"
-#~ msgstr "Lägg till bokmärke"
-
-#~ msgid "New User via SSL"
-#~ msgstr "Ny användare via SSL"
-
-#~ msgid "%Y %B %e  %H:%M"
-#~ msgstr "%Y %B %e  %H:%M"
-
-#~ msgid "public mailing lists"
-#~ msgstr "offentliga e-postlistor"
-
-#~ msgid "Group search with criteria"
-#~ msgstr "Gruppsökning med urval"
-
-#~ msgid "matches"
-#~ msgstr "träffar"
-
-#~ msgid "<strong>%1$s</strong> projects in result set."
-#~ msgstr "<strong>%1$s</strong> projekt i resultatmängden."
-
-#, fuzzy
-#~ msgid "Error - you can"
-#~ msgstr "Fel vid uppdatering"
-
-#, fuzzy
-#~ msgid "You can"
-#~ msgstr "Ditt namn"
-
-#, fuzzy
-#~ msgid "I"
-#~ msgstr "ID"
-
-#~ msgid "You Can Only Monitor If You Are Logged In"
-#~ msgstr "Du kan bara bevaka om du är inloggad"
-
-#~ msgid "User Id:"
-#~ msgstr "Användar-ID"
-
-#~ msgid "Updated Successfully"
-#~ msgstr "Uppdatering lyckades"
-
-#~ msgid "Vote Registered"
-#~ msgstr "Röst Registrerad"
-
-#~ msgid "Unix Name"
-#~ msgstr "Unixnamn"
-
-#~ msgid "UNIX Name"
-#~ msgstr "UNIX-namn"
-
-#~ msgid "Assigned To"
-#~ msgstr "Tilldelad"
-
-#~ msgid "Package Name"
-#~ msgstr "Paketnamn"
-
-#~ msgid "Site Admin"
-#~ msgstr "Webbplats admin"
-
-#~ msgid "Add User"
-#~ msgstr "Lägg till användare"
-
-#~ msgid "Real Name"
-#~ msgstr "Verkligt namn"
-
-#~ msgid "Login Name"
-#~ msgstr "Inloggningsnamn"
-
-#~ msgid "Question Type"
-#~ msgstr "Frågetyp"
-
-#~ msgid "Permission Denied"
-#~ msgstr "Tillgång nekad"
-
-#~ msgid "Permission Denied."
-#~ msgstr "Rättighet saknas."
-
-#~ msgid "No Such Posting For This Project"
-#~ msgstr "Inga sådana poster i detta projekt"
-
-#~ msgid "News Admin"
-#~ msgstr "Nyheter admin"
-
-#~ msgid "Mail Admin"
-#~ msgstr "E-post admin"
-
-#, fuzzy
-#~ msgid "Massmail Admin"
-#~ msgstr "E-post admin"
-
-#~ msgid "For Project"
-#~ msgstr "För projekt"
-
-#~ msgid "Login Name:"
-#~ msgstr "Inloggningsnamn"
-
-#~ msgid "Dependent On Task"
-#~ msgstr "Beroende av uppgift"
-
-#~ msgid "Add Snippets To Package"
-#~ msgstr "Lägg till kodstycken till paket"
-
-#~ msgid "Add Forum"
-#~ msgstr "Lägg till forum"
-
-#~ msgid "Add A New Skill"
-#~ msgstr "Lägg till en ny kompetens"
-
-#~ msgid "Add Snippets to Package"
-#~ msgstr "Lägg till kodstycken till paket"
-
-#~ msgid "Browse Tasks"
-#~ msgstr "Bläddra i uppgifter"
-
-#, fuzzy
-#~ msgid "(at least %$1s characters)"
-#~ msgstr "Lösenord måste ha minst 6 tecken."
-
-#~ msgid "Error, Error - snippet doesn't exist"
-#~ msgstr "Fel, kodstycke finns inte"
