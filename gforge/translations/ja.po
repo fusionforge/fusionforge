@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Gforge 4.5\n"
+"Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-14 12:13+0100\n"
-"PO-Revision-Date: 2007-03-16 23:01+0100\n"
+"PO-Revision-Date: 2009-01-15 12:16+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -263,7 +263,6 @@ msgid "Invalid full name"
 msgstr ""
 
 #: common/include/Group.class.php:295
-#, fuzzy
 msgid "Invalid Unix name"
 msgstr "無効なUnixネーム"
 
@@ -330,7 +329,6 @@ msgid "ERROR: DB: Could not change group properties: %s"
 msgstr ""
 
 #: common/include/Group.class.php:511
-#, fuzzy
 msgid "Invalid Group Name"
 msgstr "無効なUnixネーム"
 
@@ -551,16 +549,13 @@ msgid ""
 "\n"
 "-- the %4$s crew"
 msgstr ""
-"%7$s へのプロジェクト登録が承認されました。\n"
+"%4$s へのプロジェクト登録が承認されました。\n"
 "\n"
 "プロジェクト名:%1$s\n"
-"CVSサーバー:cvs.%2$s.%3$s (サービスを提供できません)\n"
-"シェル/ウェブサーバー:%2$s.%3$s (サービスを提供できません)\n"
+"Unixネーム:%2$s\n"
 "\n"
-"このサイトはCVSサーバーとシェル/ウェブサーバーのサービスは提供しておりませ"
-"ん\n"
-"シェル/ウェブサーバーに関しては設定を変更し各自のサイトを参照するようにしてく"
-"ださい。"
+"このサイトはCVSサーバーとシェル/ウェブサーバーのサービスは提供しておりません\n"
+"シェル/ウェブサーバーに関しては設定を変更し各自のサイトを参照するようにしてください。"
 
 #: common/include/Group.class.php:2124
 #, php-format
@@ -735,7 +730,7 @@ msgid "Insert Failed"
 msgstr "インサート失敗"
 
 #: common/include/User.class.php:362
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Thank you for registering on the %3$s web site. You have\n"
 "account with username %1$s created for you. In order\n"
@@ -753,20 +748,19 @@ msgid ""
 "\n"
 "-- the %3$s staff\n"
 msgstr ""
-"%4$s ウェブサイトに登録していただき、ありがとうございます。\n"
-"ユーザー 「%1$s」 を登録しました。登録を終えるために次のURLを訪れてくださ"
-"い:\n"
+"%3$s ウェブサイトに登録していただき、ありがとうございます。\n"
+"ユーザー 「%1$s」 を登録しました。登録を終えるために次のURLを訪れてください:\n"
 "\n"
-"<http://%2$s/account/verify.php?confirm_hash=_%3$s>\n"
+"<%2$s>\n"
 "\n"
 "(このメッセージの上にURLが表示されますが、そこに表示されていなければ、\n"
 "それは恐らくあなたのメールクライアントのバグによるものだと思われます。\n"
 "表示されなかったときのためにもう一つのURLを下に用意して置きました。\n"
 "このURLを入力するときは改行を含めないようにお願いします。)\n"
 "\n"
-"http://%2$s/account/verify.php?confirm_hash=_%3$s\n"
+"%2$s\n"
 "\n"
-"どうぞ %4$s サイトを楽しんで下さい %4$s スタッフより。\n"
+"どうぞ %3$s サイトを楽しんで下さい %3$s スタッフより。\n"
 
 #: common/include/User.class.php:382
 #, php-format
@@ -2502,7 +2496,6 @@ msgid "Return"
 msgstr ""
 
 #: www/account/change_email.php:41
-#, fuzzy
 msgid "Invalid email address."
 msgstr "無効なJabberアドレス"
 
@@ -2521,9 +2514,9 @@ msgstr ""
 "手続きの覚えのある方は以下のURLにて処理を完了してください。\n"
 "\n"
 "\n"
-"<http://%1$s/account/change_email-complete.php?ch=_%2$s>\n"
+"%2$s\n"
 "\n"
-" -- the %1$s staff"
+" -- %1$s スタッフより。"
 
 #: www/account/change_email.php:72 www/account/lostpw.php:71
 #, php-format
@@ -3662,9 +3655,8 @@ msgstr ""
 #: www/admin/grouplist.php:86 www/admin/search.php:166
 #: www/admin/useredit.php:241 www/project/admin/index.php:261
 #: www/project/admin/massadd.php:103 www/project/admin/massfinish.php:82
-#, fuzzy
 msgid "Unix name"
-msgstr "ログイン名:"
+msgstr "ログイン名"
 
 #: www/admin/grouplist.php:89 www/snippet/submit.php:97
 msgid "License"
@@ -6675,7 +6667,7 @@ msgstr ""
 #: www/include/user_home.php:43
 #, fuzzy
 msgid "Login name"
-msgstr "ログイン名:"
+msgstr "ログイン名"
 
 #: www/include/user_home.php:54 www/sendmessage.php:134
 msgid "Your Email Address"
@@ -6991,9 +6983,9 @@ msgid "You Have No Diary Entries"
 msgstr ""
 
 #: www/my/index.php:61
-#, fuzzy, php-format
+#, php-format
 msgid "Personal Page For %s"
-msgstr "パーソナルページ"
+msgstr "%sのパーソナルページ"
 
 #: www/my/index.php:67
 msgid "Assigned Artifacts"
@@ -11677,7 +11669,6 @@ msgid ""
 msgstr "このプロジェクトはまだ分類されていません。"
 
 #: www/trove/index.php:36
-#, fuzzy
 msgid "Trove Map"
 msgstr "ソフトマップ"
 
@@ -11705,57 +11696,3 @@ msgstr[0] ""
 #: www/users:35
 msgid "No User Name Provided"
 msgstr ""
-
-#, fuzzy
-#~ msgid "Public Forum"
-#~ msgstr "パブリックフォーラム"
-
-#, fuzzy
-#~ msgid "Project Manager"
-#~ msgstr "プロジェクト管理"
-
-#, fuzzy
-#~ msgid "Public Project Manager"
-#~ msgstr "プロジェクト管理"
-
-#, fuzzy
-#~ msgid "Project Manager Admin"
-#~ msgstr "プロジェクト管理"
-
-#, fuzzy
-#~ msgid "Public Tracker"
-#~ msgstr "パブリックエリア"
-
-#~ msgid "all %1$s mailings and notifications"
-#~ msgstr ""
-#~ "(未訳：account_unsubscribe.all_mailings)all %1$s mailings and "
-#~ "notifications"
-
-#~ msgid "%1$s site mailings"
-#~ msgstr "(未訳：account_unsubscribe.site_mailings)%1$s site mailings"
-
-#, fuzzy
-#~ msgid "People admin"
-#~ msgstr "人物"
-
-#~ msgid "Bookmark Page"
-#~ msgstr "ブックマークページ"
-
-#~ msgid "New User via SSL"
-#~ msgstr "新規ユーザー(SSL)"
-
-#~ msgid "%Y %B %e  %H:%M"
-#~ msgstr "%Y %B %e  %H:%M"
-
-#~ msgid "User Id:"
-#~ msgstr "ユーザーID"
-
-#~ msgid "Permission Denied."
-#~ msgstr "許可がありません"
-
-#~ msgid "Login Name:"
-#~ msgstr "ログイン名"
-
-#, fuzzy
-#~ msgid "(at least %$1s characters)"
-#~ msgstr "パスワードは最低 6 文字以上でなければいけません。"
