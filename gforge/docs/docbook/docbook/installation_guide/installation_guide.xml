@@ -32,11 +32,11 @@
 		</para>
 		<orderedlist>
 			<listitem><para>Linux Operating System</para></listitem>
-			<listitem><para><ulink url="http://www.postgresql.org/">PostgreSQL</ulink> 7.3 or later</para></listitem>
-			<listitem><para><ulink url="http://www.apache.org/">Apache</ulink> 1.3.22 or later</para></listitem>
+			<listitem><para><ulink url="http://www.postgresql.org/">PostgreSQL</ulink> 8.3 or later (8.1, 8.2 should work)</para></listitem>
+			<listitem><para><ulink url="http://www.apache.org/">Apache</ulink> 2.2 or later</para></listitem>
 			<listitem><para><ulink url="http://www.openssl.org/">openssl</ulink> 0.9.4 or later</para></listitem>
 			<listitem><para><ulink url="http://www.openssl.org/">mod_ssl</ulink> 2.4.10 or later (included in Apache 2.0 and later)</para></listitem>
-			<listitem><para><ulink url="http://www.php.net/">PHP</ulink> 4.0.4 or later (note that you'll need to have PHP built with the command line interface support, which only comes standard with PHP 4.3 or later)</para></listitem>
+			<listitem><para><ulink url="http://www.php.net/">PHP</ulink> 5.2 or later (php4 with the command line interface support & php5.1 should work)</para></listitem>
 			<listitem><para>php-pgsql (enable it with <literal>--with-pgsql</literal> when building PHP, or install it as package)</para></listitem>
 			<listitem><para>php-mbstring (enable it with <literal>--with-mbstring</literal> when building PHP, or install it as package)</para></listitem>
 		</orderedlist>
@@ -73,7 +73,7 @@
 				<para>The <filename>INSTALL</filename> file in GForge package and <filename>README</filename> files in plugin directories are the authoritive sources for installation instructions and they should have more precedence over this guide.</para>
 			</important>
 			<note>
-				<para>This installation guide is for GForge 4.5.3.</para>
+				<para>This installation guide is for GForge 4.7.</para>
 			</note>
 			<para>GForge has a lot of different pieces touching a lot of different components in the system. Cronjobs are required to maintain the system, touching lots of files on a daily and hourly basis, including <filename>/etc/*</filename> system files.</para>
 			<para>The plugins that now manage the CVS and SVN functionality have made installation slightly harder because even more files have to be moved into place during installation.</para>
@@ -96,7 +96,7 @@
 			<title>Installing GForge</title>
 			<section>
 				<title>Directory Layout</title>
-				<para>Instructions below assume that gforge is unpacked into <filename class="directory"><replaceable>/var/www/gforge</replaceable></filename>.  There are some other directories where GForge stores files. In this installation guide, they are put in <filename class="directory">/var/www</filename> too.</para>
+				<para>Instructions below assume that gforge is unpacked into <filename class="directory"><replaceable>/opt/gforge</replaceable></filename>.  There are some other directories where GForge stores files. In this installation guide, they are put in <filename class="directory">/var/www</filename> too.</para>
 				<note>
 					<para>If you want to be <ulink url="http://www.pathname.com/fhs/">FHS</ulink>-compliant, GForge should be unpacked into <filename class="directory">/usr/local/share/gforge</filename>, and directories for storing files should be in <filename class="directory">/var/lib/gforge</filename> or <filename class="directory">/var/local/gforge</filename>. You may use symbolic links to physically place files in FHS-compliant places and still use directory paths that are presented in this manual.</para>
 				</note>
@@ -105,8 +105,10 @@
 				<title>Unpacking</title>
 				<para>To install GForge, follow these steps (as root):</para>
 <screen>
-# <userinput>bzip2 -dc gforge-4.5.tar.bz2 | tar xvf -</userinput>
-# <userinput>mv gforge-4.5 <replaceable>/var/www/gforge</replaceable></userinput>
+# <userinput>tar -xjvf gforge-4.7-svn6744.tar.bz2</userinput>
+# <userinput>cd gforge-4.7-svn6744</userinput>
+# <userinput>mkdir -p /opt/gforge</userinput>
+# <userinput>cp -r *<replaceable>/opt/gforge</replaceable></userinput>
 </screen>
 			</section>
 			<section>
@@ -149,17 +151,17 @@ $ <userinput>cvs -q update -Pd</userinput>
 					</screen>
 					<para>To monitor latest changes in GForge, including <literal>Branch_4_5</literal>, subscribe to <ulink url="http://lists.gforge.org/mailman/listinfo/gforge-commits">gforge-commits mailing list</ulink>.</para>
 				</section>
-				<section>
-					<title>Fixing access rights</title>
-					<para>You may want to make sure that permissions are correct (replace <replaceable>apache-group</replaceable> with the system group used by Apache server):</para>
-					<screen>
-# <userinput>cd gforge</userinput>
+			</section>
+			<section>
+				<title>Fixing access rights</title>
+				<para>You may want to make sure that permissions are correct (replace <replaceable>apache-group</replaceable> with the system group used by Apache server):</para>
+				<screen>
+# <userinput>cd /opt/gforge</userinput>
 # <userinput>chown -R root:<replaceable>apache-group</replaceable> .</userinput>
 # <userinput>chmod -R 644 .</userinput>
 # <userinput>find -type d | xargs chmod 755</userinput>
 # <userinput>chmod -R 755 cronjobs</userinput>
-					</screen>
-				</section>
+				</screen>
 			</section>
 			<section>
 				<title>GForge Config File</title>
@@ -168,7 +170,7 @@ $ <userinput>cvs -q update -Pd</userinput>
 # <userinput>mkdir /etc/gforge</userinput>
 # <userinput>chown root: /etc/gforge</userinput>
 # <userinput>chmod 755 /etc/gforge</userinput>
-# <userinput>cp <replaceable>/var/www/gforge</replaceable>/etc/local.inc.example /etc/gforge/local.inc</userinput>
+# <userinput>cp <replaceable>/opt/gforge</replaceable>/etc/local.inc.example /etc/gforge/local.inc</userinput>
 # <userinput>chown <replaceable>apache-user</replaceable>:<replaceable>apache-group</replaceable> /etc/gforge/local.inc</userinput>
 # <userinput>chmod 600 /etc/gforge/local.inc</userinput>
 </programlisting>
@@ -186,14 +188,14 @@ $sys_dbuser="gforge"
 $sys_dbpasswd="<replaceable>gforge-password</replaceable>"
 </programlisting>
 					</listitem>
-					<listitem>
+					<!--<listitem>
 						<para>Change the following basic variables::</para>
 <programlisting>
 $sys_urlroot="<replaceable>/var/www/gforge</replaceable>/www/";
 $sys_themeroot="<replaceable>/var/www/gforge</replaceable>/www/themes/";
 $sys_plugins_path="<replaceable>/var/www/gforge</replaceable>/plugins/";
 </programlisting>
-					</listitem>
+					</listitem>-->
 					<listitem>
 						<para>The directive <varname>$sys_default_domain</varname> should contain the domain of your server, e.g. <literal>gforge.<replaceable>company.com</replaceable></literal>. You may want to replace all occurences of <replaceable>company.com</replaceable> with company's domain name.</para>
 					</listitem>
@@ -202,6 +204,16 @@ $sys_plugins_path="<replaceable>/var/www/gforge</replaceable>/plugins/";
 		</section>
 		<section>
 			<title>Configuring the Database (PostgreSQL)</title>
+			<section>
+				<title>PostgreSQL Requirements</title>
+				<para>You to have installed the following packages for </para>
+					<orderedlist>
+						<listitem>a CentOS or Red Hat 5 or Fedora: postgresql, postgresql-libs, postgresql-server, postgresql-contrib</listitem>
+						<listitem>a Debian: postgresql, postgresql-contrib</listitem>
+						<listitem>a Red Hat 4 : postgresql, postgresql-contrib</listitem>
+					</orderedlist>
+
+			</section>
 			<section>
 				<title>Initialization of PostgreSQL</title>
 				<para>In some distributions, PostgreSQL database cluster is not initialised.  Consult distribution documentation for more information.  If database cluster is not created, you can do so by running:</para>
@@ -218,6 +230,7 @@ $ <userinput>initdb</userinput>
 				<title>PostgreSQL Authentication Configuration</title>
 				<para>The <literal>postgres</literal> PostgreSQL user is used only during installation.  Usually, it can connect via UNIX socket without password when invoked by <literal>postgresql</literal> system account.  Check by running this:</para>
 <screen>
+# <userinput>/etc/init.d/postgresql restart</userinput>
 # <userinput>su - postgres</userinput>
 $ <userinput>psql template1</userinput>
 </screen>
@@ -225,15 +238,18 @@ $ <userinput>psql template1</userinput>
 <screen>
 local all postgres ident sameuser
 </screen>
+<para>If you went just to install postgresql on your server be sure that there is only this line in your <filename>pg_hba.conf</filename> (comment the others)</para>
+<screen>local all all ident sameuser</screen>
 				<para>GForge uses <literal>gforge</literal> PostgreSQL user to connect to <literal>gforge</literal> database by using password.  (You can change that name by editing <filename>local.inc</filename>.)  In order this to work, assure that you have the following line in your <filename>pg_hba.conf</filename> (before other <literal>host</literal> directives):</para>
 <screen>
 host gforge gforge 127.0.0.1 255.255.255.255 md5
 </screen>
 				<para>This line assumes that GForge will always use local PostgreSQL database (<literal>localhost</literal>).  If this is not the case, consult PostgreSQL manual for ways to allow connection.</para>
-				<para>The following option should be set in <filename>postgresql.conf</filename> because connection to <literal>localhost</literal> uses TCP/IP:</para>
+				
+				<!-- <para>The following option should be set in <filename>postgresql.conf</filename> because connection to <literal>localhost</literal> uses TCP/IP:</para>
 <screen>
 tcpip_socket = true
-</screen>
+</screen>-->
 				<para>After all these changes to PostgreSQL configuration files are made, PostgreSQL should be restarted.  This depends on the distribution.  In Debian, it's like this:</para>
 <screen>
 # <userinput>/etc/init.d/postgresql restart</userinput>
@@ -251,16 +267,22 @@ template1-# <userinput>PASSWORD '<replaceable>gforge-password</replaceable>';</u
 				<para>Create GForge database:</para>
 <screen>
 template1=# <userinput>CREATE DATABASE gforge OWNER gforge ENCODING 'UNICODE';</userinput>
+template1=# <userinput>\q</userinput>
 </screen>
 				<para>Add PL/pgSQL support using the commands:</para>
 <screen>
-# <userinput>su - postgres</userinput>
+<!-- # <userinput>su - postgres</userinput> -->
 $ <userinput>createlang plpgsql gforge</userinput>
 </screen>
 				<para>Finally, install the database:</para>
 <screen>
-$ <userinput>cd <replaceable>/var/www/gforge</replaceable>/db</userinput>
+$ <userinput>cd <replaceable>/opt/gforge</replaceable>/db</userinput>
 $ <userinput>psql -a -U gforge -W -h localhost -f gforge.sql gforge &amp;&gt; /tmp/gforge.sql.log</userinput>
+$ <userinput>exit</userinput>
+</screen>
+<para>It is required that the postgresql service is up on each reboot</para>
+<screen>
+$ <userinput>chkconfig postgresql on</userinput>
 </screen>
 				<note>
 					<para>You may experience the following errors.  They are harmless and you can safely ignore them:</para>
@@ -276,6 +298,11 @@ ERROR:  permission denied for schema public
 			<title>Configuring DNS Server (BIND)</title>
 			<para>GForge needs its own domain.  In example GForge configuration file, it's <literal>gforge.<replaceable>company.com</replaceable></literal>.  You should search for <replaceable>company.com</replaceable> in example GForge configuration file and replace it with your domain name.</para>
 			<para>Here some example configuration files for BIND are presented that can help you if you are not familiar with BIND but it's not meant to be complete. Don't ask BIND-related questions in GForge forums &ndash; consult documentation that come with your distribution and search in Internet.  Distributions put files in different places and so there are no file locations here.  The example configuration below is only quick start example and doesn't include reverse mapping.</para>
+			<section>
+				<title>DNS Requirements</title>
+				<para>It's required to have the bind package installed </para>
+			</section>
+			
 			<para>New subdomain in <literal>gforge.<replaceable>company.com</replaceable></literal> should be created.  In <replaceable>company.com</replaceable> zone file, it may look like that:</para>
 <screen>
 gforge          IN      NS      ns.gforge.<replaceable>company.com</replaceable>.
@@ -316,6 +343,36 @@ zone "gforge.<replaceable>company.com</replaceable>" {
 };
 </screen>
 			<para>Of course, changes will take effect after reloading BIND.</para>
+			<para>It is required that the dns service is up on each reboot.</para>
+			<screen>
+$ <userinput>chkconfig named on</userinput>
+			</screen>
+			<!-- <section>
+				<title>Basic but concrete DNS cofiguration on CentOS, Fedora or Red Hat</title>
+				<para>Create the file <filename>/etc/named.conf</filename> and add in :</para>
+				<screen>
+options {
+        directory "/var/named";
+        dump-file "/var/named/data/cache_dump.db";
+        statistics-file "/var/named/data/named_stats.txt";
+};
+include "/etc/rndc.key";
+
+zone "." {
+        type hint;
+        file "/var/named/root.db";
+};
+zone "gforge.company.com" {
+        type master;
+        file "/var/named/gforge.db";
+};
+				</screen>
+				<para>Create the file <filename>/var/named/named.root</filename>and add in :</para>
+				<screen>
+
+				</screen>
+				<para></para>
+			</section>-->
 		</section>
 		<section>
 			<title>Configuring PHP</title>
