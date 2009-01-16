@@ -39,7 +39,7 @@ Requires: perl, perl-DBI, perl-HTML-Parser
 Requires: cronolog
 Requires: php-jpgraph php-gd
 #update sys_path_to_jpgraph in gforge.conf if you remove this line
-Requires: /var/www/jpgraph/jpgraph.php
+#Requires: /var/www/jpgraph/jpgraph.php
 Requires: libnss-pgsql >= 1.4
 Requires: mailman
 Requires: nscd
@@ -268,6 +268,11 @@ if [ "$1" -eq "1" ]; then
  	perl -pi -e "
  		s/SERVER_ADMIN/"$adminemail"/g" %{GFORGE_CONF_DIR}/gforge.conf
  
+ 	#path of jpgraph.php
+ 	path_jpgraph=$(rpm -ql php-jpgraph | grep jpgraph.php)
+ 	perl -pi -e "
+		s#^sys_path_to_jpgraph=.*#sys_path_to_jpgraph=$path_jpgraph#g" %{GFORGE_CONF_DIR}/gforge.conf
+ 	
  	#wrong 20list http template for mailman on rpm
  	rm -f %{GFORGE_CONF_DIR}/httpd.d/20list
  	
