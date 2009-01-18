@@ -296,4 +296,13 @@
 	$hash = md5(microtime());
 	system("perl -spi -e \"s/sys_session_key = 'foobar'/sys_session_key = '$hash'/\" /etc/gforge/local.inc");
 
+	# Use liberation fonts if jpgraph provided in the archive.
+	if (is_dir("/opt/gforge/jpgraph")) {
+		system("perl -spi -e \"s!//(.gantt_title_font_family)='FF_ARIAL';!\\$1='FF_LIBERATION_SANS';!\" /etc/gforge/local.inc");
+		system("perl -spi -e \"s!//(.gantt_title_font_style=.*)!\\$1!\" /etc/gforge/local.inc");
+		system("perl -spi -e \"s!//(.gantt_title_font_size=.*)!\\$1!\" /etc/gforge/local.inc");
+		system("perl -spi -e \"s!//(.gantt_task_font_family)='FF_ARIAL';!\\$1='FF_LIBERATION_SANS';!\" /etc/gforge/local.inc");
+		system("perl -spi -e \"s!//(.gantt_task_font_style=.*)!\\$1!\" /etc/gforge/local.inc");
+		system("perl -spi -e \"s!//(.gantt_task_font_size=.*)!\\$1!\" /etc/gforge/local.inc");
+	}
 	print "\n";

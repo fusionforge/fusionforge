@@ -203,8 +203,8 @@ function install()
 			run('su - postgres -c "psql '.$gforge_db.' -c \\"GRANT ALL on '.$table.' TO '.$gforge_user.';\\""');
 		}
 	} else {
-		show(" * Creating FTS default configuation (Full Text Search)");
-		run("su - postgres -c \"psql $gforge_db < $gforge_lib_dir/db/FTS-20081108.sql\" >> /tmp/gforge-import.log");
+#		show(" * Creating FTS default configuation (Full Text Search)");
+#		run("su - postgres -c \"psql $gforge_db < $gforge_lib_dir/db/FTS-20081108.sql\" >> /tmp/gforge-import.log");
 	}
 
 
