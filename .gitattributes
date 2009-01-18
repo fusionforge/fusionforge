@@ -15,6 +15,7 @@ gforge/common/include/database-mysql.php -text
 gforge/common/include/group_section_texts.php -text
 gforge/common/include/rbac_texts.php -text
 gforge/contrib/cmd-line-prototype.tar.gz -text
+gforge/cron.gforge -text
 gforge/cronjobs/ftp_create_group_access.php -text
 gforge/cronjobs/gforge-db-backup.sh -text
 gforge/cronjobs/homedirs.php -text
