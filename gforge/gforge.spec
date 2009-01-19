@@ -43,6 +43,7 @@ Requires: php-jpgraph php-gd
 Requires: libnss-pgsql >= 1.4
 Requires: mailman
 Requires: nscd
+Requires: gettext
  
 BuildRequires: perl
 
@@ -219,9 +220,11 @@ if [ "$1" -eq "1" ]; then
 
 	# generating and updating site admin password
 	%randstr SITEADMIN_PASSWORD 8
-
-	echo "$SITEADMIN_PASSWORD" > %{GFORGE_CONF_DIR}/siteadmin.pass
-	chmod 0600 %{GFORGE_CONF_DIR}/siteadmin.pass
+	
+	# updating admin_password in gforge.conf
+	perl -pi -e "
+		s#^admin_password=.*#admin_password="$SITEADMIN_PASSWORD"#g" %{GFORGE_CONF_DIR}/gforge.conf
+	
 	SITEADMIN_PASSWORD=`echo -n $SITEADMIN_PASSWORD | md5sum | awk '{print $1}'`
 
 	# creating gforge database user
@@ -330,7 +333,7 @@ if [ "$1" -eq "0" ]; then
 	# dropping gforge users
 	su -l postgres -s /bin/sh -c "dropuser %{dbuser} >/dev/null 2>&1 ; dropuser gforge_nss >/dev/null 2>&1 ; dropuser gforge_mta >/dev/null 2>&1"
 	
-	for file in siteadmin.pass local.pl httpd.secrets local.inc httpd.conf httpd.vhosts database.inc ; do
+	for file in local.pl httpd.secrets local.inc httpd.conf httpd.vhosts database.inc ; do
 		rm -f %{GFORGE_CONF_DIR}/$file
 	done
 	# Remove PostgreSQL access
