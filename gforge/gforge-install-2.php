@@ -106,10 +106,10 @@
 	system("mkdir -p /opt/jpgraph");
 	system("mkdir -p scmtarballs");
 	system("mkdir -p scmsnapshots");
-	if (!is_file("/usr/bin/php4"))
+	/*if (!is_file("/usr/bin/php4"))
 	{
 		symlink("/usr/bin/php", "/usr/bin/php4");
-	}
+	}*/
 
 	//#project vhost space
 	system("mkdir -p homedirs");
