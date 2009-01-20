@@ -390,7 +390,7 @@ $ <userinput>php5 -i | fgrep php.ini</userinput>
 		</section>
 		<section id="web-server">
 			<title>Configuring the Web Server (Apache)</title>
-			<para>Find what system user and group are used by Apache server and change <varname>$sys_apache_user</varname> and <varname>$sys_apache_group</varname> (in GForge configuration) respectively.</para>
+			<para>Find what system user and group are used by Apache server and change <varname>$sys_apache_user</varname> and <varname>$sys_apache_group</varname> (in GForge configuration) respectively in /etc/gforge/local.inc.</para>
 			<para>You should decide where to put GForge configuration of Apache.  It's best if own configuration file that is included by main Apache configuration is used.  Consult documentation of your distribution on recommended ways for doing this.</para>
 			<para>You may use <filename>etc/gforge-httpd.conf.example</filename> as template for your configuration.  The rest of the section is guide to making GForge virtual host configuration for Apache from scratch.  All is inside the following template:</para>
 <programlisting>
@@ -430,8 +430,8 @@ ErrorLog  "|/usr/bin/cronolog <replaceable>/var/log/gforge</replaceable>/gforge/
 				<listitem>
 					<para>Set up document root:</para>
 <programlisting>
-DocumentRoot "<replaceable>/var/www/gforge</replaceable>/www"
-&lt;Directory "<replaceable>/var/www/gforge</replaceable>/www"&gt;
+DocumentRoot "<replaceable>/opt/gforge</replaceable>/www"
+&lt;Directory "<replaceable>/opt/gforge</replaceable>/www"&gt;
     Options        FollowSymLinks
     AllowOverride  None
     Order          allow,deny
@@ -442,7 +442,7 @@ DocumentRoot "<replaceable>/var/www/gforge</replaceable>/www"
 				</listitem>
 				<listitem>
 					<para>Configuring PHP for Apache</para>
-					<para>Ensure that PHP module is loaded.  You may need to consult your distribution manual. Typical lines that load and configure PHP module are like this:</para>
+					<para>Ensure that PHP module is loaded (this is automaticaly made when you install php with rpm or deb).  You may need to consult your distribution manual. Typical lines that load and configure PHP module are like this:</para>
 <programlisting>
 LoadModule php_module	modules/libphp.so
 AddModule mod_php.c
@@ -488,16 +488,26 @@ AcceptPathInfo on
 				</listitem>
 				<listitem>
 					<para>Set up PHP module:</para>
+					<para>If the register_globals variable is set to On in your php.ini, add this line in your conf apache :</para>
 <programlisting>
 php_flag   register_globals Off
-php_flag   magic_quotes_gpc On
+</programlisting>
+<para>If the files_uploads variable is not set to On in your php.ini, add this line in your conf apache :</para>
+<programlisting>
 php_flag   files_uploads    On
-php_value  include_path     ".:/etc/gforge:<replaceable>/var/www/gforge</replaceable>:<replaceable>/var/www/gforge</replaceable>/www/include"
+</programlisting>
+<para>If the AddDefaultCharset variable is not set to UTF-8 in your httpd.conf, add this line in your conf apache :</para>
+<programlisting>
 php_value  default_charset  "UTF-8"
+</programlisting>
+<para>Add these lines in your conf apache </para>
+<programlisting>
+php_flag   magic_quotes_gpc On
+php_value  include_path     ".:/etc/gforge:<replaceable>/opt/gforge</replaceable>:<replaceable>/opt/gforge</replaceable>/www/include"
 </programlisting>
 				</listitem>
 				<listitem>
-					<para>Set up directory index script name:</para>
+					<para>Set up directory index script name (this is automaticaly made when you install php with rpm or deb) :</para>
 <programlisting>
 DirectoryIndex index.php
 </programlisting>
