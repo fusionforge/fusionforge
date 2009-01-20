@@ -36,7 +36,7 @@
 			<listitem><para><ulink url="http://www.apache.org/">Apache</ulink> 2.2 or later</para></listitem>
 			<listitem><para><ulink url="http://www.openssl.org/">openssl</ulink> 0.9.4 or later</para></listitem>
 			<listitem><para><ulink url="http://www.openssl.org/">mod_ssl</ulink> 2.4.10 or later (included in Apache 2.0 and later)</para></listitem>
-			<listitem><para><ulink url="http://www.php.net/">PHP</ulink> 5.2 or later (php4 with the command line interface support & php5.1 should work)</para></listitem>
+			<listitem><para><ulink url="http://www.php.net/">PHP</ulink> 5.2 or later (php4 with the command line interface support and php5.1 should work)</para></listitem>
 			<listitem><para>php-pgsql (enable it with <literal>--with-pgsql</literal> when building PHP, or install it as package)</para></listitem>
 			<listitem><para>php-mbstring (enable it with <literal>--with-mbstring</literal> when building PHP, or install it as package)</para></listitem>
 		</orderedlist>
@@ -80,7 +80,7 @@
 			<para>The manual installation of GForge is documented below. Be sure to follow each step carefully, check the forums for frequently asked questions, and ask your Apache, Mailman, and PostgreSQL installation questions in the corresponding mailing lists rather than on the GForge forums where little help is available.</para>
 		</section>
 		<section>
-			<title>Installing on Debian</title>
+			<title>Installing Gforge on Debian</title>
 			<para>
 				You can simply add lines found at <ulink url="http://people.debian.org/~bayle/"/> or <ulink url="http://roland.mas.free.fr/"/> to <filename>/etc/apt/sources.list</filename> and type <command>apt-get install gforge</command> to install a working GForge system, thanks to Christian Bayle and Roland Mas.
 			</para>
@@ -89,11 +89,12 @@
 			</para>
 		</section>
 		<section>
-			<title>Installing on RPM-based systems</title>
+			<title>Installing Gforge on RPM-based systems</title>
 			<para>Guillaume Smet makes <ulink url="http://people.openwide.fr/~gsmet/gforge/rpm/">RPM packages for installing GForge</ulink>. If you are using Fedora Core or Red Hat Enterprise Linux, you may want to try them.</para>
 		</section>
 		<section>
-			<title>Installing GForge</title>
+			<title>Installing GForge oneself on a linux distribution</title>
+			<para>To install GForge, follow these steps (as root):</para>
 			<section>
 				<title>Directory Layout</title>
 				<para>Instructions below assume that gforge is unpacked into <filename class="directory"><replaceable>/opt/gforge</replaceable></filename>.  There are some other directories where GForge stores files. In this installation guide, they are put in <filename class="directory">/var/www</filename> too.</para>
@@ -102,54 +103,38 @@
 				</note>
 			</section>
 			<section>
-				<title>Unpacking</title>
-				<para>To install GForge, follow these steps (as root):</para>
-<screen>
-# <userinput>tar -xjvf gforge-4.7-svn6744.tar.bz2</userinput>
-# <userinput>cd gforge-4.7-svn6744</userinput>
-# <userinput>mkdir -p /opt/gforge</userinput>
-# <userinput>cp -r *<replaceable>/opt/gforge</replaceable></userinput>
-</screen>
-			</section>
-			<section>
-				<title>Checking out from Branch_4_5</title>
-				<para>Alternative way to get GForge 4.5.3 is to check out from Branch_4_5 in CVS. This gets latest fixes as well.  Each of the plugins need to be checked out separately.</para>
-				<screen>
-$ <userinput>CVSROOT=:pserver:anonymous@cvs.gforge.org:/cvsroot/gforge; export CVSROOT</userinput>
-$ <userinput>cvs checkout -P -rBranch_4_5 gforge</userinput>
-$ <userinput>mkdir gforge/plugins</userinput>
-$ <userinput>cd gforge/plugins</userinput>
-
-$ <userinput>cvs checkout -P -rBranch_4_5 gforge-plugin-scmcvs</userinput>
-$ <userinput>ln -s gforge-plugin-scmcvs scmcvs</userinput>
-
-$ <userinput>cvs checkout -P -rBranch_4_5 gforge-plugin-scmsvn</userinput>
-$ <userinput>ln -s gforge-plugin-scmsvn scmsvn</userinput>
-
-$ <userinput>cvs checkout -P -rBranch_4_5 gforge-plugin-cvstracker</userinput>
-$ <userinput>ln -s gforge-plugin-cvstracker cvstracker</userinput>
-
-$ <userinput>cd ../www</userinput>
-$ <userinput>mkdir plugins</userinput>
-$ <userinput>cd plugins</userinput>
-$ <userinput>ln -s ../../plugins/scmcvs/www scmcvs</userinput>
-$ <userinput>ln -s ../../plugins/scmsvn/www scmsvn</userinput>
-$ <userinput>ln -s ../../plugins/cvstracker/www cvstracker</userinput>
-				</screen>
+				<title>Getting the source</title>
+				<para>There is two ways to get the sources from Gforge : </para>
 				<section>
-					<title>Updating checked out Branch_4_5</title>
-					<para>To get latest updates in <literal>Branch_4_5</literal>, run the following commands:</para>
+					<title>With the tarball available on https://gforge.org/frs/?group_id=1</title>
+					<para>Unpacking : </para>
+	<screen>
+	# <userinput>tar -xjvf gforge-4.7-svn6744.tar.bz2</userinput>
+	# <userinput>cd gforge-4.7-svn6744</userinput>
+	# <userinput>mkdir -p /opt/gforge</userinput>
+	# <userinput>cp -r *<replaceable>/opt/gforge</replaceable></userinput>
+	</screen>
+				</section>
+				<section>
+					<title>Checking out from the SVN repository with tag v4_7 </title>
+					<para>Alternative way to get GForge 4.7 is to check out with tag v4_7 from SVN. This gets latest fixes as well.</para>
 					<screen>
-$ <userinput>cd gforge</userinput>
-$ <userinput>cvs -q update -Pd</userinput>
-$ <userinput>cd plugins/gforge-plugin-scmcvs</userinput>
-$ <userinput>cvs -q update -Pd</userinput>
-$ <userinput>cd ../gforge-plugin-scmsvn</userinput>
-$ <userinput>cvs -q update -Pd</userinput>
-$ <userinput>cd ../gforge-plugin-cvstracker</userinput>
-$ <userinput>cvs -q update -Pd</userinput>
+	$ <userinput>svn checkout --username anonsvn https://svn.gforge.org/svn/gforge/tags/v4_7</userinput>
+		
+	$ <userinput>cd gforge/www/plugins</userinput>
+	$ <userinput>ln -s ../../plugins/scmcvs/www scmcvs</userinput>
+	$ <userinput>ln -s ../../plugins/scmsvn/www scmsvn</userinput>
+	$ <userinput>ln -s ../../plugins/cvstracker/www cvstracker</userinput>
 					</screen>
-					<para>To monitor latest changes in GForge, including <literal>Branch_4_5</literal>, subscribe to <ulink url="http://lists.gforge.org/mailman/listinfo/gforge-commits">gforge-commits mailing list</ulink>.</para>
+					<section>
+						<title>Updating checked out Branch_4_5</title>
+						<para>To get latest updates in <literal>Branch_4_5</literal>, run the following commands:</para>
+						<screen>
+	$ <userinput>cd gforge</userinput>
+	$ <userinput>svn -q update</userinput>
+						</screen>
+						<para>To monitor latest changes in GForge, subscribe to <ulink url="http://lists.gforge.org/mailman/listinfo/gforge-commits">gforge-commits mailing list</ulink>.</para>
+					</section>
 				</section>
 			</section>
 			<section>
@@ -297,7 +282,7 @@ ERROR:  permission denied for schema public
 		<section>
 			<title>Configuring DNS Server (BIND)</title>
 			<para>GForge needs its own domain.  In example GForge configuration file, it's <literal>gforge.<replaceable>company.com</replaceable></literal>.  You should search for <replaceable>company.com</replaceable> in example GForge configuration file and replace it with your domain name.</para>
-			<para>Here some example configuration files for BIND are presented that can help you if you are not familiar with BIND but it's not meant to be complete. Don't ask BIND-related questions in GForge forums &ndash; consult documentation that come with your distribution and search in Internet.  Distributions put files in different places and so there are no file locations here.  The example configuration below is only quick start example and doesn't include reverse mapping.</para>
+			<para>Here some example configuration files for BIND are presented that can help you if you are not familiar with BIND but it's not meant to be complete. Don't ask BIND-related questions in GForge forums, consult documentation that come with your distribution and search in Internet.  Distributions put files in different places and so there are no file locations here.  The example configuration below is only quick start example and doesn't include reverse mapping.</para>
 			<section>
 				<title>DNS Requirements</title>
 				<para>It's required to have the bind package installed </para>
@@ -382,10 +367,10 @@ zone "gforge.company.com" {
 				<listitem>
 					<para><emphasis>Serving Web pages</emphasis>.  In this case, PHP is usually used as module and its configuration is in virtual host configuration, as shown later in the document.  If you prefer to configure <filename>php.ini</filename>, the following directives are required by GForge:</para>
 <programlisting>
-register_globals = Off
+<!-- register_globals = Off-->
 magic_quotes_gpc = On
 file_uploads = On
-include_path=".:<replaceable>/var/www/gforge</replaceable>:<replaceable>/var/www/gforge</replaceable>/www/include:/etc/gforge"
+include_path=".:<replaceable>/opt/gforge</replaceable>:<replaceable>/opt/gforge</replaceable>/www/include:/etc/gforge"
 </programlisting>
 				</listitem>
 				<listitem>
@@ -1056,8 +1041,8 @@ cvspserver      2401/udp
 			<title>SVN</title>
 			<section>
 				<title>Overview</title>
-				<para>SVN is also managed via plugin &ndash; the scmsvn plugin is included and activated by default in GForge. As with scmcvs, you have to move the <filename>scmcvs/etc/plugins/*</filename> files to <filename>/etc/gforge/plugins/*</filename> and may have to make minor modifications for your specific setup.</para>
-				<para>There are two ways to manage SVN &ndash; one is to have SVN over DAV and the other is to have SVN over SSH just as you do with CVS. If you choose to use DAV, you will need the <filename class="libraryfile">mod_auth_gforge</filename> library compiled and installed in your apache and the appropriate virtual host settings in your <filename>httpd.conf</filename>. <filename class="libraryfile">mod_auth_gforge</filename> is available from gforge.org. The cronjobs to manage SVN are in <filename class="directory">cronjobs/dav-svn/</filename> and so are sample <filename>httpd.conf</filename> virtual host settings. Each of these cronjobs has configuration parameters which you may have to edit manually for your specific system.</para>
+				<para>SVN is also managed via plugin. The scmsvn plugin is included and activated by default in GForge. As with scmcvs, you have to move the <filename>scmcvs/etc/plugins/*</filename> files to <filename>/etc/gforge/plugins/*</filename> and may have to make minor modifications for your specific setup.</para>
+				<para>There are two ways to manage SVN. One is to have SVN over DAV and the other is to have SVN over SSH just as you do with CVS. If you choose to use DAV, you will need the <filename class="libraryfile">mod_auth_gforge</filename> library compiled and installed in your apache and the appropriate virtual host settings in your <filename>httpd.conf</filename>. <filename class="libraryfile">mod_auth_gforge</filename> is available from gforge.org. The cronjobs to manage SVN are in <filename class="directory">cronjobs/dav-svn/</filename> and so are sample <filename>httpd.conf</filename> virtual host settings. Each of these cronjobs has configuration parameters which you may have to edit manually for your specific system.</para>
 				<para>Configuring svnserv for svn-over-ssh:
 					<itemizedlist>
 						<listitem>
