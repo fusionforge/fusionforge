@@ -302,7 +302,7 @@ if [ "$1" -eq "1" ]; then
  		useradd -m -s /bin/false anonymous
  	fi
  
- 	[ ! -f /usr/bin/php4 ] && ln -s /usr/bin/php /usr/bin/php4
+ 	# [ ! -f /usr/bin/php4 ] && ln -s /usr/bin/php /usr/bin/php4
  	
  	chroot=`grep '^gforge_chroot:' /etc/gforge/gforge.conf | sed 's/.*:\s*\(.*\)/\1/'`
  	if [ ! -d /var/lib/gforge/chroot/ ] ; then
