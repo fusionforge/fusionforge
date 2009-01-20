@@ -7,6 +7,7 @@
 //	The /var/lib/gforge/dumps/mailman-aliases file will then be read by the mailaliases.php file
 //
 
+require dirname(__FILE__).'/../../www/env.inc.php';
 require $gfwww.'include/squal_pre.php';
 require $gfcommon.'include/cron_utils.php';
 
