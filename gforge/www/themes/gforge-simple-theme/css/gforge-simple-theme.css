@@ -50,11 +50,11 @@ top-margin:0px;
 
 div#toolscontent{margin: 0 210px;padding: 1em 10px}
 
-div#content TEXTAREA, INPUT, SELECT, OPTION  {
+div#headercontent TEXTAREA, INPUT, SELECT, OPTION  {
 	FONT: 9px Lucida Grande, Tahoma, sans-serif;
 }
 
-div#content{margin: 0 170px;padding: 1em 10px }
+div#headercontent{margin: 0 170px;padding: 1em 10px }
 
 
 /* style for footer */

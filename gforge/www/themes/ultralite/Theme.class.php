@@ -62,7 +62,7 @@ class Theme extends Layout {
 		<p align=left>
 		<?php echo $this->outerTabs($params); ?>
 		<?php
-		if ($params['group']) {
+		if (isset($params['group']) && $params['group']) {
 		?>
 		<?php
 		echo $this->projectTabs($params['toptab'],$params['group']);

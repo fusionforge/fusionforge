@@ -165,7 +165,7 @@ if (session_loggedin()) {
 ?>
 </div>
 
-<div id="content"><br />
+<div id="headercontent"><br />
 <?php echo $this->searchBox();
 ?></div>
 
@@ -611,12 +611,12 @@ function projectTabs($toptab,$group) {
 		if ($selected==$i){
 			$this->selected_title = $TABS_TITLES[$i];
 			$this->selected_dir = $TABS_DIRS[$i];
-			$this->selected_id = $TABS_IDS[$i];
+			//$this->selected_id = $TABS_IDS[$i];
 			$return .= util_make_link ($TABS_DIRS[$i],$TABS_TITLES[$i],array('id'=>'gforge-project-selected'));
 
 		}
 		else{
-			if ($TABS_IDS[$i]==''){
+			if (!isset($TABS_IDS[$i]) || $TABS_IDS[$i]==''){
 				$return .= util_make_link ($TABS_DIRS[$i],$TABS_TITLES[$i],array('id'=>'gforge-project-std','title'=>$TABS_TITLES[$i]));
 
 			}

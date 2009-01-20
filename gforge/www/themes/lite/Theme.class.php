@@ -50,6 +50,8 @@ class Theme extends Layout {
 		$this->FONTCOLOR_HTMLBOX_TITLE = '#C6BCBF';
 		// The content font color
 		$this->FONTCOLOR_CONTENT = '#000000';
+
+		$this->FONTSIZE='small';
 		//The smaller font size
 		$this->FONTSIZE_SMALLER='x-small';
 		//The smallest font size
@@ -142,7 +144,7 @@ class Theme extends Layout {
 <?php
 
 
-if ($params['group']) {
+if (isset($params['group']) && $params['group']) {
 			?>
 				<div class="union_menu" >
 				</div>	
@@ -328,7 +330,7 @@ vironment" border="0" /></a>
 		} else {
 		        $selected=0;
 		}
-		if (!$this->COLOR_SELECTED_TAB) {
+		if (!isset($this->COLOR_SELECTED_TAB)) {
 		        $this->COLOR_SELECTED_TAB= '#e0e0e0';
 		}
 		echo $this->tabGenerator($TABS_DIRS,$TABS_TITLES,false,$selected,$this->COLOR_SELECTED_TAB,'100%');
