@@ -18,6 +18,8 @@ $res = db_query(
 	.'WHERE is_public=1 AND status=\'A\' '
         .'ORDER BY group_id',$limit);
 
-rss20_dump_project_result_set($res,$GLOBALS['sys_default_name'].' Full Project Listing');
+//rss20_dump_project_result_set($res,$GLOBALS['sys_default_name'].' Full Project Listing');
+// quick and dirty fix
+rss_dump_project_result_set($res,$GLOBALS['sys_default_name'].' Full Project Listing');
 ?>
 </rss>
