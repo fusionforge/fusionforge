@@ -32,7 +32,7 @@ documentor_path=/tmp
 documentor_vers=phpdocumentor-1.3.0rc3
 
 #
-# GFORGE
+# FUSIONFORGE
 #
 clngf:		# Clean debian files of FUSIONFORGE build                         #
 	@rm -f gforge*.deb sourceforge*.deb gforge*.changes gforge*.upload gforge*.build gforge*.dsc gforge*[^g].tar.gz gforge*.diff.gz gforge*.asc
@@ -123,7 +123,7 @@ $(LOCALREPO)/conf/distributions:
 	echo "Architectures: i386 source" ; \
 	echo "Origin: gforge.eu" ; \
 	echo "Version: 4.7" ; \
-	echo "Description: My GForge $$dist repository" ; \
+	echo "Description: My $(FUSIONFORGE) $$dist repository" ; \
 	echo "SignWith: yes" ; \
 	echo "" ; done >> $(LOCALREPO)/conf/distributions
 
