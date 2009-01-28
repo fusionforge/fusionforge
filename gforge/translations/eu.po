@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-15 15:15+0100\n"
-"PO-Revision-Date: 2009-01-26 03:15+0200\n"
+"PO-Revision-Date: 2009-01-27 03:01+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: eu\n"
@@ -86,7 +86,7 @@ msgstr "Foroa sortzean gertatutako akatsa"
 
 #: common/forum/Forum.class.php:231
 msgid "Invalid forum group identifier"
-msgstr ""
+msgstr "Foro talde identifikatzaile baliogabea"
 
 #: common/forum/Forum.class.php:459 common/forum/Forum.class.php:492
 #: common/frs/FRSPackage.class.php:268 common/frs/FRSPackage.class.php:302
@@ -180,7 +180,7 @@ msgstr "ForumMessage::fetchData() MessageID baliogabea"
 
 #: common/forum/ForumMessage.class.php:589
 msgid "Invalid Message ID"
-msgstr ""
+msgstr "Mezu ID baliogabea"
 
 #: common/frs/FRSFile.class.php:94
 msgid "FRSFile Name Must Be At Least 3 Characters"
@@ -288,6 +288,8 @@ msgstr "Zure proiektua deskriba ezazu era ulergarriagoan."
 msgid ""
 "Your project description is too long. Please make it smaller than 256 bytes."
 msgstr ""
+"Zure proiektu azalpena luzeegia da. Mesedez egin ezazu 256 byte baino "
+"laburragoa."
 
 #: common/include/Group.class.php:313
 msgid "You have not chosen a license"
@@ -299,22 +301,22 @@ msgstr "Gatazka sortzen duten lizentzien aukeraketa"
 
 #: common/include/Group.class.php:319
 msgid "Please give more comprehensive licensing description"
-msgstr "Mesedez, lizentzia deskriba ezazu modu ulergarriagoan.\""
+msgstr "Mesedez, lizentzia deskriba ezazu modu ulergarriagoan"
 
 #: common/include/Group.class.php:364
 #, php-format
 msgid "ERROR: Could not create group: %s"
-msgstr ""
+msgstr "ERROREA: Ezin da taldea sortu: %s"
 
 #: common/include/Group.class.php:371
 #, php-format
 msgid "ERROR: Could not get group id: %s"
-msgstr ""
+msgstr "ERROREA: Ezin da talde id-a eskuratu: %s"
 
 #: common/include/Group.class.php:385
 #, php-format
 msgid "ERROR: Could not add admin to newly created group: %s"
-msgstr ""
+msgstr "ERROREA: Ezin da administratzailea gehitu talde sortu berrira: %s"
 
 #: common/include/Group.class.php:427 common/include/Group.class.php:500
 msgid "Could not get permission."
@@ -323,7 +325,7 @@ msgstr "Ezin duzu baimena lortu"
 #: common/include/Group.class.php:447
 #, php-format
 msgid "ERROR: DB: Could not change group properties: %s"
-msgstr ""
+msgstr "ERROREA: DB: Ezin dira talde baimenak aldatu: %s"
 
 #: common/include/Group.class.php:511
 msgid "Invalid Group Name"
@@ -333,14 +335,16 @@ msgstr "Talde izen baliogabea"
 #, php-format
 msgid "New Doc Address Appeared Invalid: %s"
 msgid_plural "New Doc Addresses Appeared Invalid: %s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Dokumentu berri helbidea baliogabea dirudi: %s"
+msgstr[1] "Dokumentu berri helbideak baliogabeak dirudite: %s"
 
 #: common/include/Group.class.php:570
 msgid ""
 "Error updating project information: Maximum length for Project Description "
 "is 255 chars."
 msgstr ""
+"Errorea proiektu argibideak eguneratzean: Proiektu azalpenaren gehienezko "
+"luzera 255 karakterekoa da."
 
 #: common/include/Group.class.php:614
 #, php-format
@@ -354,19 +358,19 @@ msgstr "Egoera aldaketa baliogabea"
 #: common/include/Group.class.php:712
 #, php-format
 msgid "ERROR: DB: Could not change group status: %s"
-msgstr ""
+msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
 
 #: common/include/Group.class.php:881
 msgid "Couldn't insert SCM_BOX to database"
-msgstr ""
+msgstr "Ezin da SCM_BOX txertatu datu-basean"
 
 #: common/include/Group.class.php:885
 msgid "SCM Box can't be empty"
-msgstr ""
+msgstr "SCM kutxa ezin da hutsik egon"
 
 #: common/include/Group.class.php:1307
 msgid "Cannot Delete System Group"
-msgstr ""
+msgstr "Rzin da sistema taldea ezabatu"
 
 #: common/include/Group.class.php:1337
 #, php-format
@@ -427,12 +431,12 @@ msgstr "ERROREA: Erabiltzailea ez da existitzen"
 #: common/include/Group.class.php:1703
 #, php-format
 msgid "ERROR: User not removed: %s"
-msgstr ""
+msgstr "ERROREA: Erabiltzailea ez da ezabatu: %s"
 
 #: common/include/Group.class.php:1717
 #, php-format
 msgid "ERROR: DB: artifact: %s"
-msgstr ""
+msgstr "ERROREA: DB: Artefaktua: %s"
 
 #: common/include/Group.class.php:1750 common/include/Group.class.php:1761
 #, php-format
@@ -449,19 +453,17 @@ msgid "Role: %s"
 msgstr "Rola: %s"
 
 #: common/include/Group.class.php:1866
-#, fuzzy
 msgid "Error getting member object"
-msgstr "Akatsa taldea sortzen"
+msgstr "Errorea partaide objektua eskuratzean"
 
 #: common/include/Group.class.php:1869
-#, fuzzy, php-format
+#, php-format
 msgid "Error getting member object: %s"
-msgstr "Akatsa taldea sortzen"
+msgstr "Errorea partaide objektua eskuratzean: %s"
 
 #: common/include/Group.class.php:1909
-#, fuzzy
 msgid "Group already active"
-msgstr "Kontua ez dago aktibatua oraindik"
+msgstr "Taldea dagoeneko aktibo dago"
 
 #: common/include/Group.class.php:1928
 #, fuzzy
@@ -506,7 +508,7 @@ msgstr ""
 
 #: common/include/Group.class.php:2079 common/include/Group.class.php:2153
 msgid "Group does not have any administrators."
-msgstr ""
+msgstr "Taldeak ez du administratzailerik."
 
 #: common/include/Group.class.php:2088
 #, fuzzy, php-format
@@ -2069,7 +2071,7 @@ msgstr "Ez mugatu proiektuen ikusteko era hurrengo kategorietan"
 #: plugins/projects_hierarchy/www/softwaremap.php:133
 #: www/softwaremap/trove_list.php:120
 msgid "Remove This Filter"
-msgstr "Filtro hau ezabatu"
+msgstr "Ezabatu iragazki hau"
 
 #: plugins/projects_hierarchy/www/softwaremap.php:194
 #: www/softwaremap/trove_list.php:175 www/trove/index.php:142
@@ -11383,13 +11385,13 @@ msgid "Message Body"
 msgstr "Mezuaren edukia"
 
 #: www/tracker/admin/form-addextrafield.php:6
-#, fuzzy, php-format
+#, php-format
 msgid "Manage Custom Fields for %s"
-msgstr "Posta zerrendak %1$s -entzako"
+msgstr "Kudeatu %s-ren eremu pertsonlizatuak"
 
 #: www/tracker/admin/form-addextrafield.php:22
 msgid "Custom Fields Defined"
-msgstr ""
+msgstr "Eremu pertsonalizatu ezarriak"
 
 #: www/tracker/admin/form-addextrafield.php:24
 #: www/tracker/admin/form-addextrafieldoption.php:23
@@ -11398,38 +11400,38 @@ msgstr ""
 
 #: www/tracker/admin/form-addextrafield.php:25
 msgid "Add Options"
-msgstr ""
+msgstr "Gehitu aukerak"
 
 #: www/tracker/admin/form-addextrafield.php:39
 msgid "Copy"
-msgstr ""
+msgstr "Kopiatu"
 
 #: www/tracker/admin/form-addextrafield.php:71
 msgid "add choices"
-msgstr ""
+msgstr "gehitu aukerak"
 
 #: www/tracker/admin/form-addextrafield.php:79
 msgid "You have not defined any custom fields"
-msgstr ""
+msgstr "Ez duzu eremu pertsonalizaturik zehaztu"
 
 #: www/tracker/admin/form-addextrafield.php:82
 msgid "Add New Custom Field"
-msgstr ""
+msgstr "Gehitu eremu pertsonalizatu berria"
 
 #: www/tracker/admin/form-addextrafield.php:87
 #: www/tracker/admin/form-updateextrafield.php:29
 msgid "Custom Field Name"
-msgstr ""
+msgstr "Eremu pertsonalizatu izena"
 
 #: www/tracker/admin/form-addextrafield.php:90
 #: www/tracker/admin/form-updateextrafield.php:42
 msgid "Field alias"
-msgstr ""
+msgstr "Eremu ezizena"
 
 #: www/tracker/admin/form-addextrafield.php:94
 #: www/tracker/admin/form-updateextrafield.php:22
 msgid "Type of custom field"
-msgstr ""
+msgstr "Eremu pertsonalizatu mota"
 
 #: www/tracker/admin/form-addextrafield.php:104
 msgid "Box type technician"
@@ -11462,15 +11464,15 @@ msgstr ""
 
 #: www/tracker/admin/form-addextrafield.php:120
 msgid "Download default template"
-msgstr ""
+msgstr "Deskargatu lehenetsitako txantiloia"
 
 #: www/tracker/admin/form-addextrafield.php:121
 msgid "Add/Update template"
-msgstr ""
+msgstr "Gehitu/eguneratu txatiloia"
 
 #: www/tracker/admin/form-addextrafield.php:122
 msgid "Delete template"
-msgstr ""
+msgstr "Ezabatu txantiloia"
 
 #: www/tracker/admin/form-addextrafieldoption.php:14
 #, php-format
@@ -11701,27 +11703,27 @@ msgstr "Zure lehentasunak aukeratu: iraungitze denbora, posta elektronikoa"
 
 #: www/tracker/admin/updates.php:21
 msgid "Error inserting a custom field"
-msgstr ""
+msgstr "Errorea pertsonalizatutako eremua txertatzerakoan"
 
 #: www/tracker/admin/updates.php:24
 msgid "Extra field inserted"
-msgstr ""
+msgstr "Eremu gehigarria txertatua"
 
 #: www/tracker/admin/updates.php:44
 msgid "Custom Field Deleted"
-msgstr ""
+msgstr "Eremu pertsonalizatua ezabatua"
 
 #: www/tracker/admin/updates.php:69 www/tracker/admin/updates.php:167
 msgid "Error inserting an element"
-msgstr ""
+msgstr "Errorea elementu bat txertatzerakoan"
 
 #: www/tracker/admin/updates.php:72
 msgid "Element inserted"
-msgstr ""
+msgstr "Elementua txertatua"
 
 #: www/tracker/admin/updates.php:91
 msgid "Error inserting"
-msgstr "Akatsa sartzean"
+msgstr "Akatsa txertatzean"
 
 #: www/tracker/admin/updates.php:94
 msgid "Canned Response Inserted"
@@ -11824,25 +11826,24 @@ msgid "No items found"
 msgstr "Ez dira erregistroak aurkitzen"
 
 #: www/tracker/deleteartifact.php:12
-#, fuzzy
 msgid "Delete artifact"
-msgstr "Fitxeroa ezabatu"
+msgstr "Ezabatu artefaktua"
 
 #: www/tracker/deleteartifact.php:26
 msgid "Are you sure you want to delete this artifact?"
-msgstr ""
+msgstr "Ziur zaude artefaktu hau ezabatu nahi duzula?"
 
 #: www/tracker/deleteartifact.php:30
 msgid "Yes, I want to delete this artifact"
-msgstr ""
+msgstr "Bai, artefaktu hau ezabatu nahi dut"
 
 #: www/tracker/detail.php:12
 msgid "Detail"
-msgstr "Erregistroaren ikusteko era zehaztua"
+msgstr "Xehetasunak"
 
 #: www/tracker/detail.php:39 www/tracker/mod.php:57 www/tracker/query.php:239
 msgid "Save Changes"
-msgstr ""
+msgstr "Gorde aldaketak"
 
 #: www/tracker/detail.php:89 www/tracker/mod-limited.php:132
 #: www/tracker/mod.php:183
@@ -11860,12 +11861,12 @@ msgstr ""
 
 #: www/tracker/detail.php:149 www/tracker/mod-limited.php:149
 msgid "Attached Files"
-msgstr "Fitxeroak atxeki"
+msgstr "Erantsitako fitxategiak"
 
 #: www/tracker/detail.php:173 www/tracker/mod-limited.php:177
 #: www/tracker/mod.php:267
 msgid "No Files Currently Attached"
-msgstr "Ez daude atxekitako fitxerorik"
+msgstr "Ez dago erantsitako fitxategirik"
 
 #: www/tracker/detail.php:188 www/tracker/detail.php:192
 #: www/tracker/mod-limited.php:192 www/tracker/mod.php:283
@@ -12036,38 +12037,36 @@ msgid "Item Successfully Created"
 msgstr "Arrakastaz sortutako artikulua"
 
 #: www/tracker/tracker.php:270 www/tracker/tracker.php:289
-#, fuzzy
 msgid "Comment added"
-msgstr "Azalpenak"
+msgstr "Iruzkina gehiturik"
 
 #: www/tracker/tracker.php:325
-#, fuzzy
 msgid "File Upload: Error"
-msgstr "Akats ezezaguna fitxategia igotzean."
+msgstr "Fitxategi igoera: Errorea"
 
 #: www/tracker/tracker.php:328
 msgid "File Upload: Successful"
-msgstr "Arrakastaz bidalitako fitxeroa"
+msgstr "Fitxategi igoera: Arrakasta"
 
 #: www/tracker/tracker.php:347
 msgid "File Delete:"
-msgstr "Fitxeroa ezabatu"
+msgstr "Fitxategia ezabatu:"
 
 #: www/tracker/tracker.php:350
 msgid "File Delete: Successful"
-msgstr "Arrakastaz ezabatutako fitxeroa"
+msgstr "Fitxategi ezabatzea: Arrakasta"
 
 #: www/tracker/tracker.php:432
 msgid "Confirmation failed. Artifact not deleted"
-msgstr ""
+msgstr "Berrespenak huts egin du. Artefaktua ez da ezabatu"
 
 #: www/tracker/tracker.php:436
 msgid "Artifact Delete Failed"
-msgstr ""
+msgstr "Huts artefaktua ezabatzean"
 
 #: www/tracker/tracker.php:438
 msgid "Artifact Deleted Successfully"
-msgstr ""
+msgstr "Artefaktua behar bezala ezabatu da"
 
 #: www/trove/TroveCategory.class.php:70 www/trove/TroveCategory.class.php:77
 #, fuzzy
@@ -12076,12 +12075,11 @@ msgstr "Ez dago kategoria hau"
 
 #: www/trove/TroveCategory.class.php:105
 msgid "Empty strings"
-msgstr ""
+msgstr "Kate hutsak"
 
 #: www/trove/TroveCategory.class.php:117
-#, fuzzy
 msgid "Cannot update"
-msgstr "Eguneratze masiboa"
+msgstr "Ezin da eguneratu"
 
 #: www/trove/admin/trove_cat_add.php:41
 #, fuzzy
@@ -12099,24 +12097,20 @@ msgid "New category short name (no spaces, Unix-like): "
 msgstr "Kategoria berriaren izen motza (espaziorik gabe, unix erara)"
 
 #: www/trove/admin/trove_cat_add.php:89 www/trove/admin/trove_cat_edit.php:91
-#, fuzzy
 msgid "New category full name (80 characters max): "
-msgstr "Kategoria berriaren izen osoa (80 karaktere)"
+msgstr "Kategoria berriaren izen osoa (muga 80 karaktere):"
 
 #: www/trove/admin/trove_cat_add.php:91 www/trove/admin/trove_cat_edit.php:94
-#, fuzzy
 msgid "New category description (255 characters max): "
-msgstr "Kategoria berriaren deskripzioa (255 karaktere)"
+msgstr "Kategoria berriaren azalpena (muga 255 karaktere):"
 
 #: www/trove/admin/trove_cat_edit.php:97
-#, fuzzy
 msgid "update"
-msgstr "Eguneratua"
+msgstr "eguneratu"
 
 #: www/trove/admin/trove_cat_edit.php:97
-#, fuzzy
 msgid "delete"
-msgstr "Ezabatu"
+msgstr "ezabatu"
 
 #: www/trove/include/trove.php:242
 #, fuzzy, php-format
@@ -12136,16 +12130,15 @@ msgid "Limiting View"
 msgstr "Gunea ikusteko erak"
 
 #: www/trove/index.php:66
-#, fuzzy
 msgid "Remove Filter"
-msgstr "Filtro hau ezabatu"
+msgstr "Ezabatu iragazkia"
 
 #: www/trove/index.php:161
-#, fuzzy, php-format
+#, php-format
 msgid "<strong>%d</strong> project in result set."
 msgid_plural "<strong>%d</strong> projects in result set."
-msgstr[0] "<strong>%1$s</strong> proiektu kategoria honetan."
-msgstr[1] "<strong>%1$s</strong> proiektu kategoria honetan."
+msgstr[0] "<strong>%d</strong> proiektu kategoria honetan."
+msgstr[1] "<strong>%d</strong> proiektu kategoria honetan."
 
 #: www/trove/index.php:168
 #, php-format
@@ -12153,9 +12146,12 @@ msgid "Displaying %d project per page. Projects sorted by activity ranking."
 msgid_plural ""
 "Displaying %d projects per page. Projects sorted by activity ranking."
 msgstr[0] ""
+"Orrialdeko proiektu %d bistaratzen. Proiektuak aktibitate mailaz "
+"ordenaturik."
 msgstr[1] ""
+"Orrialdeko %d proiektu bistaratzen. Proiektuak aktibitate mailaz "
+"ordenaturik."
 
 #: www/users:35
-#, fuzzy
 msgid "No User Name Provided"
-msgstr "Erabiltzailearen izena"
+msgstr "Ez da erabiltzaile-izenik eman"
