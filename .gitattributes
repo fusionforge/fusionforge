@@ -1,6 +1,5 @@
 * text=auto !eol
 /.bzrignore -text
-/foo -text
 gforge/INSTALL.restricted -text
 gforge/backend/shell/apache.sh svneol=native#unset
 gforge/common/docman/Parsedata.class.php -text
