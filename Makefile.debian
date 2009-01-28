@@ -1,18 +1,19 @@
 #! /usr/bin/make -f
+FUSIONFORGE=FusionForge
 
 list:
 	@echo ======================================================================================
 	@echo '=                    Available target are listed below                               ='
 	@echo '=                    Today only to build debian pakages and orig tarballs            ='
 	@echo ======================================================================================
-	@cat Makefile.debian | grep '^.*:.*#$$' | sed 's/^\(.*:\).*#\(.*\)#$$/\1		\2/'
+	@cat Makefile.debian | grep '^.*:.*#$$' | sed 's/FUSIONFORGE/$(FUSIONFORGE)/' | sed 's/^\(.*:\).*#\(.*\)#$$/\1		\2/'
+	@echo ======================================================================================
 
-all: allgf                         # Build gforge #
-clean: cleangf                     # Clean gforge #
-allor: orig origcvs origsvn        # Build gforge orig tarball #
-cleanor:                           # Clean gforge orig tarball #
+clean: cleangf                     # Clean FUSIONFORGE #
+allor: orig origcvs origsvn        # Build FUSIONFORGE orig tarball #
+clnor:                             # Clean FUSIONFORGE orig tarball #
 	rm -f gforge*orig.tar.gz
-allgf: orig cleangf build          # Build gforge and orig tarballs #
+allgf: orig cleangf build          # Build FUSIONFORGE and orig tarballs #
 allup: upload                      # Upload all using dput and optional where=<server> #
 
 dchcmd=dch -i
@@ -33,17 +34,17 @@ documentor_vers=phpdocumentor-1.3.0rc3
 #
 # GFORGE
 #
-cleangf:		# Clean debian files of gforge build                         #
+clngf:		# Clean debian files of FUSIONFORGE build                         #
 	@rm -f gforge*.deb sourceforge*.deb gforge*.changes gforge*.upload gforge*.build gforge*.dsc gforge*[^g].tar.gz gforge*.diff.gz gforge*.asc
 	@echo cleangf Done
-build:			# Build debian gforge packages                               #
+build:			# Build debian FUSIONFORGE packages                               #
 	cd gforge ; debclean; $(dchcmd) ; find . -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | cpio -pdumvB ../gforge-$(gfversion)
 	cd gforge-$(gfversion); debuild $(debuildopts); fakeroot debian/rules clean
 	rm -rf gforge-$(gfversion)
-upload:			# Upload gforge packages on where=<server> using dput        #
+upload:			# Upload FUSIONFORGE packages on where=<server> using dput        #
 	dput $(where) gforge*.changes
 
-orig: gforge_$(gfversion).orig.tar.gz                                 # Make gforge orig file                                      #
+orig: gforge_$(gfversion).orig.tar.gz                                 # Make FUSIONFORGE orig file                                      #
 gforge_$(gfversion).orig.tar.gz:
 	cd gforge ; debclean; find . -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -pdumvB ../gforge-$(gfversion)
 	tar cvzf gforge_$(gfversion).orig.tar.gz gforge-$(gfversion)
@@ -73,7 +74,7 @@ DISTRIBLIST=etch lenny sid
 svnbuildtest:
 	@echo "Will build gforge_$(gfversion)-$(MINOR)$(DISTRIB)"
 
-svnbuild:		# This is the one you should use #
+svnbuild:		# ***** This is the one you should use ***** #
 	for dist in $(DISTRIBLIST); do \
 	make -f Makefile.debian svnbuilddist DISTRIB=$$dist ; \
 	done
