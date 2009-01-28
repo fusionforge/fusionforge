@@ -8,12 +8,15 @@ msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-15 15:15+0100\n"
-"PO-Revision-Date: 2009-01-15 15:24+0100\n"
-"Last-Translator: Roland Mas <lolando@debian.org>\n"
+"PO-Revision-Date: 2009-01-26 03:15+0200\n"
+"Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 1.2.0\n"
 
 #: common/docman/Document.class.php:121 common/docman/Document.class.php:456
 #: common/pm/ProjectGroup.class.php:140 common/pm/ProjectGroup.class.php:355
@@ -71,12 +74,11 @@ msgstr "Foroaren deskribapenak gutxienez 10 karaktere izan behar ditu."
 
 #: common/forum/Forum.class.php:139 common/forum/Forum.class.php:580
 msgid "Illegal Characters in Forum Name"
-msgstr ""
+msgstr "Karaktere baliogabeak foro izenean"
 
 #: common/forum/Forum.class.php:154
-#, fuzzy
 msgid "Mailing List Exists with same name"
-msgstr "Posta Zerrendaren Izena:"
+msgstr "Badago izen horretako posta-zerrenda bat"
 
 #: common/forum/Forum.class.php:189
 msgid "Error Adding Forum"
@@ -88,9 +90,8 @@ msgstr ""
 
 #: common/forum/Forum.class.php:459 common/forum/Forum.class.php:492
 #: common/frs/FRSPackage.class.php:268 common/frs/FRSPackage.class.php:302
-#, fuzzy
 msgid "You can only monitor if you are logged in"
-msgstr "Monitorizatzeko izenpetua egon behar duzu."
+msgstr "Monitorizatzeko saio hasia izan behar duzu."
 
 #: common/forum/Forum.class.php:477
 msgid "Unable To Add Monitor"
@@ -123,9 +124,8 @@ msgid "Forum"
 msgstr "Foroa"
 
 #: common/forum/ForumFactory.class.php:146
-#, fuzzy
 msgid "Forum not found"
-msgstr "Inkesta ez da ageri"
+msgstr "Foroa ez da ageri"
 
 #: common/forum/ForumMessage.class.php:70
 msgid "ForumMessage:: No Valid Forum Object"
@@ -219,7 +219,6 @@ msgstr ""
 #: common/include/Error.class.php:130 common/include/Group.class.php:432
 #: common/include/Group.class.php:505 www/include/exit.php:38
 #: www/news/admin/index.php:353
-#, fuzzy
 msgid "Permission denied."
 msgstr "Baimena ukatu da"
 
@@ -233,9 +232,8 @@ msgid "Missing Parameters"
 msgstr "Parametroak falta dira"
 
 #: common/include/Group.class.php:234
-#, fuzzy
 msgid "Group Not Found"
-msgstr "Fitxeroa ez da aurkitu"
+msgstr "Taldea ez da aurkitu"
 
 #: common/include/Group.class.php:250
 #: plugins/mediawiki/usr/share/mediawiki1.7/includes/GFProject.class.php:178
@@ -247,7 +245,6 @@ msgstr "Fitxeroa ez da aurkitu"
 #: www/survey/admin/show_results_csv.php:37
 #: www/survey/admin/show_results_individual.php:40
 #: www/survey/admin/survey.php:40
-#, fuzzy
 msgid "Permission denied"
 msgstr "Baimena ukatu da"
 
@@ -265,9 +262,8 @@ msgid "Invalid full name"
 msgstr "Izen osoa baliogabea"
 
 #: common/include/Group.class.php:295
-#, fuzzy
 msgid "Invalid Unix name"
-msgstr "Unix izena baliogabea"
+msgstr "Unix izen baliogabea"
 
 #: common/include/Group.class.php:298
 msgid "Unix name already taken"
@@ -294,9 +290,8 @@ msgid ""
 msgstr ""
 
 #: common/include/Group.class.php:313
-#, fuzzy
 msgid "You have not chosen a license"
-msgstr "Ez du lizentzia mota aukeratu"
+msgstr "Ez duzu lizentzia mota aukeratu"
 
 #: common/include/Group.class.php:316
 msgid "Conflicting licenses choice"
@@ -322,7 +317,6 @@ msgid "ERROR: Could not add admin to newly created group: %s"
 msgstr ""
 
 #: common/include/Group.class.php:427 common/include/Group.class.php:500
-#, fuzzy
 msgid "Could not get permission."
 msgstr "Ezin duzu baimena lortu"
 
@@ -332,9 +326,8 @@ msgid "ERROR: DB: Could not change group properties: %s"
 msgstr ""
 
 #: common/include/Group.class.php:511
-#, fuzzy
 msgid "Invalid Group Name"
-msgstr "Unix taldearen izena:"
+msgstr "Talde izen baliogabea"
 
 #: common/include/Group.class.php:518
 #, php-format
@@ -350,14 +343,13 @@ msgid ""
 msgstr ""
 
 #: common/include/Group.class.php:614
-#, fuzzy, php-format
+#, php-format
 msgid "Error updating project information: %s"
-msgstr "Proiektuen mapako informazioa"
+msgstr "Errorea proiektu argibideak eguneratzean: %s"
 
 #: common/include/Group.class.php:701
-#, fuzzy
 msgid "Invalid Status Change"
-msgstr "Erabiltzaile ez da baliozkoa"
+msgstr "Egoera aldaketa baliogabea"
 
 #: common/include/Group.class.php:712
 #, php-format
@@ -392,9 +384,9 @@ msgid "Not Object: ProjectGroup: %d"
 msgstr "Ezin dut mezu nagusia eguneratu"
 
 #: common/include/Group.class.php:1391
-#, fuzzy, php-format
+#, php-format
 msgid "Could Not Delete News Forum: %d"
-msgstr "Ezin izan da eragiketa gauzatu"
+msgstr "Ezin da berri foroa ezabatu: %d"
 
 #: common/include/Group.class.php:1425
 #, php-format
@@ -425,14 +417,12 @@ msgid "ERROR: Could Not Add User To Group: %s"
 msgstr ""
 
 #: common/include/Group.class.php:1603 common/include/Group.class.php:1626
-#, fuzzy
 msgid "Error Getting Role Object"
-msgstr "Akatsa taldea sortzen"
+msgstr "Errorea arau objektua eskuratzean"
 
 #: common/include/Group.class.php:1656
-#, fuzzy
 msgid "ERROR: User does not exist"
-msgstr "Ez dago kategoria hau"
+msgstr "ERROREA: Erabiltzailea ez da existitzen"
 
 #: common/include/Group.class.php:1703
 #, php-format
@@ -450,14 +440,13 @@ msgid "ERROR: DB: project_assigned_to %d: %s"
 msgstr ""
 
 #: common/include/Group.class.php:1800
-#, fuzzy
 msgid "Could Not Get Role"
-msgstr "Ezin izan da eragiketa gauzatu"
+msgstr "Ezin izan da rola eskuratu"
 
 #: common/include/Group.class.php:1803 common/include/Group.class.php:1808
-#, fuzzy, php-format
+#, php-format
 msgid "Role: %s"
-msgstr "Rola"
+msgstr "Rola: %s"
 
 #: common/include/Group.class.php:1866
 #, fuzzy
