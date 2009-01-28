@@ -102,8 +102,11 @@ tarballs:
 pbuilderenv: pbuilder pbuilder/base-$(DISTRIB).tgz
 	@echo "Ready for $(DISTRIB)"
 
-pbuilder/base-$(DISTRIB).tgz: 
+pbuilder/base-$(DISTRIB).tgz: /usr/sbin/pbuilder
 	sudo /usr/sbin/pbuilder create --debug --distribution $(DISTRIB) --basetgz $(CURDIR)/pbuilder/base-$(DISTRIB).tgz
+
+/usr/sbin/pbuilder:
+	sudo apt-get install pbuilder
 
 pbuilder:
 	mkdir pbuilder
