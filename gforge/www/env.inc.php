@@ -7,6 +7,8 @@
  * 
  */
 
+$ff_version = '4.7';
+
 # In case of errors, let output be clean.
 $gfRequestTime = microtime( true );
 

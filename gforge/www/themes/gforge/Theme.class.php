@@ -215,10 +215,10 @@ class Theme extends Layout {
   </tr>
 </table>  
  
-<!-- PLEASE LEAVE "Powered By GForge" on your site -->
+<!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
 <br />
 <center>
-<a href="http://gforge.org/"><img src="/images/pow-gforge.png" alt="Powered By GForge Collaborative Development Environment" border="0" /></a>
+<a href="http://fusionforge.org/"><img src="/images/pow-gforge.png" alt="Powered By FusionForge" border="0" /></a>
 </center>
 
 <?php
