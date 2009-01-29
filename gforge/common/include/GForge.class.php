@@ -24,6 +24,9 @@
 require_once $gfcommon.'include/Error.class.php';
 class GForge extends Error {
 
+	$this->software_name = 'FusionForge' ;
+	$this->software_version = '4.7' ;
+
 	/**
 	 *	GForge - GForge object constructor
 	 */
