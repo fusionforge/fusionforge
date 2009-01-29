@@ -114,7 +114,7 @@ function stats_downloads_total() {
 function show_sitestats() {
 	$gforge = new GForge();
 	$return = '';
-	$return .= _('Hosted Projects').': <strong>'.number_format($gforge->getNumberOfHostedProjects()).'</strong>';
+	$return .= _('Hosted Projects').': <strong>'.number_format($gforge->getNumberOfPublicHostedProjects()).'</strong>';
 	$return .= '<br />'._('Registered Users').': <strong>'.number_format($gforge->getNumberOfActiveUsers()).'</strong>';
 	return $return;
 }

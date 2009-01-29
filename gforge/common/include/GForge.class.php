@@ -32,8 +32,17 @@ class GForge extends Error {
 		return true;
 	}
 
-	function getNumberOfHostedProjects() {
+	function getNumberOfPublicHostedProjects() {
 		$res=db_query("SELECT count(*) AS count FROM groups WHERE status='A' AND is_public=1");	
+		if (!$res || db_numrows($res) < 1) {
+			$this->setError('Unable to get hosted project count: '.db_error());
+			return false;
+		}
+		return $this->parseCount($res);
+	}
+
+	function getNumberOfHostedProjects() {
+		$res=db_query("SELECT count(*) AS count FROM groups WHERE status='A'");	
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('Unable to get hosted project count: '.db_error());
 			return false;
