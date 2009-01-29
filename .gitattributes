@@ -2974,6 +2974,7 @@ gforge/www/docman/include/vtemplate.class.php -text
 gforge/www/docman/search.php -text
 gforge/www/docman/search.tpl.html -text
 gforge/www/env.inc.php -text
+gforge/www/export/rss20_version.php -text
 gforge/www/favicon.ico svneol=native#unset
 gforge/www/forum/admin/ForumAdmin.class.php -text
 gforge/www/forum/include/AttachManager.class.php -text
