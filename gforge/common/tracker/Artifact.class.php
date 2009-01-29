@@ -1191,8 +1191,23 @@ class Artifact extends Error {
 			$changes=array();
 		}
 		
-		$body = $this->ArtifactType->getName() ." item #". $this->getID() .", was opened at ". date( _('Y-m-d H:i'), $this->getOpenDate() ). 
-			"\nYou can respond by visiting: ".
+		$sess = session_get_user() ;
+		if ($type == 1) { // Initial opening
+			if ($sess) {
+				$body = $this->ArtifactType->getName() ." item #". $this->getID() .", was opened at ". date( _('Y-m-d H:i'), $this->getOpenDate() ) . " by " . $sess->getRealName () ;
+			} else {
+				$body = $this->ArtifactType->getName() ." item #". $this->getID() .", was opened at ". date( _('Y-m-d H:i'), $this->getOpenDate() ) ;
+			}
+		} else {
+			if ($sess) {
+				$body = $this->ArtifactType->getName() ." item #". $this->getID() .", was changed at ". date( _('Y-m-d H:i'), $this->getOpenDate() ) . " by " . $sess->getRealName ();
+			} else {
+				$body = $this->ArtifactType->getName() ." item #". $this->getID() .", was changed at ". date( _('Y-m-d H:i'), $this->getOpenDate() ) ;
+			}
+		}
+			      
+
+		$body .= "\nYou can respond by visiting: ".
 			"\n".util_make_url ('/tracker/?func=detail&atid='. $this->ArtifactType->getID() .
 					    "&aid=". $this->getID() .
 					    "&group_id=". $this->ArtifactType->Group->getID()) .
