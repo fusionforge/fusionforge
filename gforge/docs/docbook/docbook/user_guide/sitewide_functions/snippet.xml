@@ -1,7 +1,7 @@
 <section id="ug_sitewide_snippet">
 	<title>Snippet Library</title>
 	<para>
-		The Snippet Library function of GForge is very interesting; it allows to collect all the type of information/knowledge which is not a complete piece of code and which is usually difficult to organize/share.
+		The Snippet Library function of FusionForge is very interesting; it allows to collect all the type of information/knowledge which is not a complete piece of code and which is usually difficult to organize/share.
 	</para>
 	<para>
 		A typical example are sophisticated shell commands, javascript functions, perl one-liner, SQL expressions that perform special queries, an algorithm, etc.

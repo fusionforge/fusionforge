@@ -1,6 +1,6 @@
 <section id="ug_introduction">
 	<title>Introduction</title>
-	<para>This manual explains how to use the GForge software.</para>
+	<para>This manual explains how to use the FusionForge software.</para>
 	<para>The manual is divided in 4 parts:</para>
 	<section>
 		<title>Getting Started</title>
@@ -8,12 +8,12 @@
 	</section>
 	<section>
 		<title>User specific functions</title>
-		<para>This section describes the functions of GForge that are relative to the user's section.</para>
+		<para>This section describes the functions of FusionForge that are relative to the user's section.</para>
 		<para>This document describes the user's homepage, how to modify user settings, how to handle user ratings, skill profiles and Diary and Notes.</para>
 	</section>
 	<section>
 		<title>Project specific functions</title>
-	      <para>This chapter explains the project specific functions of GForge.</para>
+	      <para>This chapter explains the project specific functions of FusionForge.</para>
 		<variablelist>
 			<varlistentry>
 				<term><link linkend="ug_project_project_summary">Project Summary</link></term>
@@ -101,7 +101,7 @@
 			<varlistentry>
 				<term><link linkend="ug_sitewide_project_help">Project Help</link></term>
 				<listitem>
-					<para>This document describes how to use the Project help function of GForge.</para>
+					<para>This document describes how to use the Project help function of FusionForge.</para>
 				</listitem>
 			</varlistentry>
 		</variablelist>

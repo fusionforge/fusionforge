@@ -19,7 +19,7 @@
 			Before you can add/modify existing surveys, you need to administer the questions for your surveys. Questions are global for all surveys.
 		</para>
 		<para>
-			GForge surveys handle the following question types:
+			FusionForge surveys handle the following question types:
 		</para>
 		<orderedlist>
 			<listitem>

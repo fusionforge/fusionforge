@@ -13,7 +13,7 @@
 			Trackers are referred to as <quote>Artifact Types</quote> and individual pieces of data are <quote>Artifacts</quote>. <quote>Bugs</quote> might be an Artifact Type, while a bug report would be an Artifact. You can create as many Artifact Types as you want, but remember you need to set up categories, groups, and permission for each type, which can get time-consuming.
 		</para>
 		<para>
-			When a project is created, GForge creates automatically 4 trackers:
+			When a project is created, FusionForge creates automatically 4 trackers:
 		</para>
 		<variablelist>
 			<varlistentry>
@@ -336,7 +336,7 @@
           <title>Managing trackers via CLI (Command-Line Interface)</title>
 
                 <para>We give here some basic examples of CLI commands. For more information,
-                      please consult the GForge Command-line interface (CLI) documentation.</para>
+                      please consult the FusionForge Command-line interface (CLI) documentation.</para>
 
                 <section id="ug_project_tracker_cli_login">
                 <title>Logging in with CLI</title>
