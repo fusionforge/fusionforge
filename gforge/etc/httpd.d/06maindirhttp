@@ -63,5 +63,9 @@
             Order allow,deny
 	    allow from all
         </Directory>
+
+	<LimitExcept GET POST HEAD>
+	    deny from all
+        </LimitExcept>
 </VirtualHost>
 

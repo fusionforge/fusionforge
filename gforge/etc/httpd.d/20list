@@ -28,4 +28,8 @@
   <IfModule apache_ssl.c>
     SSLDisable
   </IfModule>
+
+  <LimitExcept GET POST HEAD>
+    deny from all
+  </LimitExcept>
 </VirtualHost>
