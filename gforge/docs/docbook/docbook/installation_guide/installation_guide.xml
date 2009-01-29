@@ -105,48 +105,44 @@
 			<section>
 				<title>Getting the source</title>
 				<para>There is two ways to get the sources from Gforge : </para>
-				<section>
-					<title>With the tarball available on https://gforge.org/frs/?group_id=1</title>
-					<para>Unpacking : </para>
-	<screen>
+<screen>
 	# <userinput>tar -xjvf gforge-4.7-svn6744.tar.bz2</userinput>
 	# <userinput>cd gforge-4.7-svn6744</userinput>
 	# <userinput>mkdir -p /opt/gforge</userinput>
 	# <userinput>cp -r *<replaceable>/opt/gforge</replaceable></userinput>
-	</screen>
-				</section>
-				<section>
-					<title>Checking out from the SVN repository with tag v4_7 </title>
-					<para>Alternative way to get GForge 4.7 is to check out with tag v4_7 from SVN. This gets latest fixes as well.</para>
-					<screen>
-	$ <userinput>svn checkout --username anonsvn https://svn.gforge.org/svn/gforge/tags/v4_7</userinput>
-		
-	$ <userinput>cd gforge/www/plugins</userinput>
-	$ <userinput>ln -s ../../plugins/scmcvs/www scmcvs</userinput>
-	$ <userinput>ln -s ../../plugins/scmsvn/www scmsvn</userinput>
-	$ <userinput>ln -s ../../plugins/cvstracker/www cvstracker</userinput>
-					</screen>
-					<section>
-						<title>Updating checked out Branch_4_5</title>
-						<para>To get latest updates in <literal>Branch_4_5</literal>, run the following commands:</para>
-						<screen>
-	$ <userinput>cd gforge</userinput>
-	$ <userinput>svn -q update</userinput>
-						</screen>
-						<para>To monitor latest changes in GForge, subscribe to <ulink url="http://lists.gforge.org/mailman/listinfo/gforge-commits">gforge-commits mailing list</ulink>.</para>
-					</section>
-				</section>
+</screen>
 			</section>
 			<section>
-				<title>Fixing access rights</title>
-				<para>You may want to make sure that permissions are correct (replace <replaceable>apache-group</replaceable> with the system group used by Apache server):</para>
+					<title>Checking out from the SVN repository with tag v4_7 </title>
+					<para>Alternative way to get GForge 4.7 is to check out with tag v4_7 from SVN. This gets latest fixes as well.</para>
 				<screen>
+	$ <userinput>svn checkout --username anonsvn https://svn.gforge.org/svn/gforge/tags/v4_7</userinput>
+
+	$ <userinput>cd gforge/www/plugins</userinput>
+$ <userinput>ln -s ../../plugins/scmcvs/www scmcvs</userinput>
+$ <userinput>ln -s ../../plugins/scmsvn/www scmsvn</userinput>
+$ <userinput>ln -s ../../plugins/cvstracker/www cvstracker</userinput>
+				</screen>
+				<section>
+					<title>Updating checked out Branch_4_5</title>
+					<para>To get latest updates in <literal>Branch_4_5</literal>, run the following commands:</para>
+					<screen>
+$ <userinput>cd gforge</userinput>
+	$ <userinput>svn -q update</userinput>
+					</screen>
+						<para>To monitor latest changes in GForge, subscribe to <ulink url="http://lists.gforge.org/mailman/listinfo/gforge-commits">gforge-commits mailing list</ulink>.</para>
+				</section>
+				<section>
+					<title>Fixing access rights</title>
+					<para>You may want to make sure that permissions are correct (replace <replaceable>apache-group</replaceable> with the system group used by Apache server):</para>
+					<screen>
 # <userinput>cd /opt/gforge</userinput>
 # <userinput>chown -R root:<replaceable>apache-group</replaceable> .</userinput>
 # <userinput>chmod -R 644 .</userinput>
 # <userinput>find -type d | xargs chmod 755</userinput>
 # <userinput>chmod -R 755 cronjobs</userinput>
-				</screen>
+					</screen>
+				</section>
 			</section>
 			<section>
 				<title>GForge Config File</title>
@@ -192,12 +188,17 @@ $sys_plugins_path="<replaceable>/var/www/gforge</replaceable>/plugins/";
 			<section>
 				<title>PostgreSQL Requirements</title>
 				<para>You to have installed the following packages for </para>
-					<orderedlist>
-						<listitem>a CentOS or Red Hat 5 or Fedora: postgresql, postgresql-libs, postgresql-server, postgresql-contrib</listitem>
-						<listitem>a Debian: postgresql, postgresql-contrib</listitem>
-						<listitem>a Red Hat 4 : postgresql, postgresql-contrib</listitem>
-					</orderedlist>
-
+				<orderedlist>
+					<listitem>
+							<para>a CentOS or Red Hat 5 or Fedora: postgresql, postgresql-libs, postgresql-server, postgresql-contrib</para>
+					</listitem>
+					<listitem>
+							<para>a Debian: postgresql, postgresql-contrib</para>
+					</listitem>
+					<listitem>
+							<para>a Red Hat 4 : postgresql, postgresql-contrib</para>
+					</listitem>
+				</orderedlist>
 			</section>
 			<section>
 				<title>Initialization of PostgreSQL</title>
@@ -223,14 +224,11 @@ $ <userinput>psql template1</userinput>
 <screen>
 local all postgres ident sameuser
 </screen>
-<para>If you went just to install postgresql on your server be sure that there is only this line in your <filename>pg_hba.conf</filename> (comment the others)</para>
-<screen>local all all ident sameuser</screen>
 				<para>GForge uses <literal>gforge</literal> PostgreSQL user to connect to <literal>gforge</literal> database by using password.  (You can change that name by editing <filename>local.inc</filename>.)  In order this to work, assure that you have the following line in your <filename>pg_hba.conf</filename> (before other <literal>host</literal> directives):</para>
 <screen>
 host gforge gforge 127.0.0.1 255.255.255.255 md5
 </screen>
 				<para>This line assumes that GForge will always use local PostgreSQL database (<literal>localhost</literal>).  If this is not the case, consult PostgreSQL manual for ways to allow connection.</para>
-				
 				<!-- <para>The following option should be set in <filename>postgresql.conf</filename> because connection to <literal>localhost</literal> uses TCP/IP:</para>
 <screen>
 tcpip_socket = true
@@ -263,11 +261,6 @@ $ <userinput>createlang plpgsql gforge</userinput>
 <screen>
 $ <userinput>cd <replaceable>/opt/gforge</replaceable>/db</userinput>
 $ <userinput>psql -a -U gforge -W -h localhost -f gforge.sql gforge &amp;&gt; /tmp/gforge.sql.log</userinput>
-$ <userinput>exit</userinput>
-</screen>
-<para>It is required that the postgresql service is up on each reboot</para>
-<screen>
-$ <userinput>chkconfig postgresql on</userinput>
 </screen>
 				<note>
 					<para>You may experience the following errors.  They are harmless and you can safely ignore them:</para>
@@ -283,11 +276,7 @@ ERROR:  permission denied for schema public
 			<title>Configuring DNS Server (BIND)</title>
 			<para>GForge needs its own domain.  In example GForge configuration file, it's <literal>gforge.<replaceable>company.com</replaceable></literal>.  You should search for <replaceable>company.com</replaceable> in example GForge configuration file and replace it with your domain name.</para>
 			<para>Here some example configuration files for BIND are presented that can help you if you are not familiar with BIND but it's not meant to be complete. Don't ask BIND-related questions in GForge forums, consult documentation that come with your distribution and search in Internet.  Distributions put files in different places and so there are no file locations here.  The example configuration below is only quick start example and doesn't include reverse mapping.</para>
-			<section>
-				<title>DNS Requirements</title>
-				<para>It's required to have the bind package installed </para>
-			</section>
-			
+			<para>For DNS, you need to have the bind package installed</para>
 			<para>New subdomain in <literal>gforge.<replaceable>company.com</replaceable></literal> should be created.  In <replaceable>company.com</replaceable> zone file, it may look like that:</para>
 <screen>
 gforge          IN      NS      ns.gforge.<replaceable>company.com</replaceable>.
