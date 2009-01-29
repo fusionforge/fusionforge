@@ -1,11 +1,21 @@
 #!/bin/sh
 #
-# Wrapper for GForge installation
+# Simple wrapper for FusionForge installation
 #
-# aljeux <aljeux@free.fr>
+# Usage: ./install.sh <hostname>
 #
+# This will install all the fusionforge code in /opt/gforge
+# Configuration is stored in /etc/gforge
+#
+# Currently supported:
+# * Red Hat 4 / CentOS 4
+# * Red Hat 5 / CentOS 5
+#
+# Author: aljeux <aljeux@free.fr>
+#
+
 if [ $# -ne 1  ]; then
-	echo 1>&2 Usage: $0  hostname
+	echo 1>&2 Usage: $0 hostname
 	exit 127
 fi
 
@@ -25,11 +35,11 @@ then
 fi
 if [ $distrib = "Red" ]
 then
-        deps="RHEL5"
+	deps="RHEL5"
 fi
 if [ $distrib = "Fedora" ]
 then
-        deps="FEDORA"
+	deps="FEDORA"
 fi
 
 
