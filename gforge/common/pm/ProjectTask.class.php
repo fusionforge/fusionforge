@@ -1121,7 +1121,10 @@ class ProjectTask extends Error {
 					      "&group_id=".$this->ProjectGroup->Group->getID().
 					      "&group_project_id=".$this->ProjectGroup->getID());
 
-		$subject="[Task #". $this->getID() .'] '.
+		$subject=sprintf (_('[%1$s - %2$s] [Task #%3$d] '),
+				  $this->ProjectGroup->Group->getUnixName(),
+				  $this->ProjectGroup->getName(),
+				  $this->getID()) .
 			util_unconvert_htmlspecialchars( $this->getSummary() );
 
 		util_handle_message(array_unique($ids),$subject,$body,$this->ProjectGroup->getSendAllPostsTo());
