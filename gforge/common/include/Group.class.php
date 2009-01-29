@@ -340,7 +340,7 @@ class Group extends Error {
 					register_purpose,
 					register_time,
 					license_other,
-                                        enable_anonscm
+                                        enable_anonscm,
 					rand_hash
 				)
 				VALUES (
