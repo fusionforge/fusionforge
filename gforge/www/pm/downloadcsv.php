@@ -41,6 +41,10 @@ dependenton5_linktype
 require_once $gfcommon.'include/User.class.php';
 require_once $gfcommon.'pm/ProjectTaskFactory.class.php';
 
+header('Content-type: text/comma-separated-values');
+list($year,$month) = explode('-', date('Y-m'));
+header('Content-disposition: filename="task_report-'.$year.'-'.month.'.csv"');
+
 $ptf = new ProjectTaskFactory($pg);
 if (!$ptf || !is_object($ptf)) {
     exit_error('Error','Could Not Get ProjectTaskFactory');
