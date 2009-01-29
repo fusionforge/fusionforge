@@ -20,11 +20,11 @@ my $gid_add = 10000 ;
 &db_connect;
 
 # Dump the Groups Table information
-$query = "select group_id,group_id+".$gid_add.",unix_group_name,status from groups";
+$query = "select group_id,group_id+".$gid_add.",unix_group_name,status,is_public from groups";
 $c = $dbh->prepare($query);
 $c->execute();
 
-while(my ($group_id, $unix_gid, $group_name, $status) = $c->fetchrow()) {
+while(my ($group_id, $unix_gid, $group_name, $status, $is_public) = $c->fetchrow()) {
 
 	my $new_query = "select users.user_name AS user_name FROM users,user_group WHERE users.user_id=user_group.user_id AND group_id=$group_id";
 	my $d = $dbh->prepare($new_query);
@@ -36,7 +36,7 @@ while(my ($group_id, $unix_gid, $group_name, $status) = $c->fetchrow()) {
 	   $user_list .= "$user_name,";
 	}
 
-	$grouplist = "$group_name:$status:$unix_gid:$user_list\n";
+	$grouplist = "$group_name:$status:$unix_gid:$is_public:$user_list\n";
 	$grouplist =~ s/,$//;
 
 	push @group_array, $grouplist;
@@ -50,7 +50,7 @@ write_array_file($file_dir."/dumps/group_dump", @group_array);
 system("chmod o-r,g-r $file_dir/dumps/group_dump");
 
 my $group_file = $file_dir . "/dumps/group_dump";
-my ($gname, $gstatus, $gid, $userlist);
+my ($gname, $gstatus, $gid, $is_public, $userlist);
 
 # Open up all the files that we need.
 @groupdump_array = open_array_file($group_file);
@@ -61,17 +61,17 @@ my ($gname, $gstatus, $gid, $userlist);
 if($verbose) {print ("\n\n	Processing Groups\n\n")};
 while ($ln = pop(@groupdump_array)) {
 	chop($ln);
-	($gname, $gstatus, $gid, $userlist) = split(":", $ln);
+	($gname, $gstatus, $gid, $is_public, $userlist) = split(":", $ln);
 	
 	$userlist =~ tr/A-Z/a-z/;
 
 	$group_exists = (-d $grpdir_prefix .'/'. $gname);
 
 	if ($gstatus eq 'A' && $group_exists) {
-		update_group($gid, $gname, $userlist);
+		update_group($gid, $gname, $is_public, $userlist);
 	
 	} elsif ($gstatus eq 'A' && !$group_exists) {
-		add_group($gid, $gname, $userlist);
+		add_group($gid, $gname, $is_public, $userlist);
 	
 	} elsif ($gstatus eq 'D' && $group_exists) {
 		delete_group($gname);
@@ -87,27 +87,41 @@ while ($ln = pop(@groupdump_array)) {
 # Group Add Function
 #############################
 sub add_group {  
-	my ($gid, $gname, $userlist) = @_;
+	my ($gid, $gname, $is_public, $userlist) = @_;
 	my ($log_dir, $cgi_dir, $ht_dir);
+
+	my ($default_perms) ;
+        my ($file_default_perms) ;
+        my ($default_page) ;
 	
 	$group_dir = $grpdir_prefix."/".$gname;
 	$log_dir = $group_dir."/log";
 	$cgi_dir = $group_dir."/cgi-bin";
 	$ht_dir = $group_dir."/htdocs";
 
+        if ($is_public) {
+            $default_perms = 2775 ;
+            $file_default_perms = 664;
+	    $default_page = "/usr/lib/gforge/lib/default_page.php" ;
+        } else {
+            $default_perms = 2770 ;
+            $file_default_perms = 660;
+	    $default_page = "/usr/lib/gforge/lib/private_default_page.php" ;
+        }
+	
 	if ($verbose) {print("Making a Group for : $gname\n")};
 		
-	mkdir $group_dir, 2775;
-	mkdir $log_dir, 2775;
-	mkdir $cgi_dir, 2775;
-	mkdir $ht_dir, 2775;
-	# system("cp /usr/lib/gforge/lib/default_page.php $ht_dir/index.php");
+	mkdir $group_dir, $default_perms ;
+	mkdir $log_dir, $default_perms ;
+	mkdir $cgi_dir, $default_perms ;
+	mkdir $ht_dir, $default_perms ;
+	system("cp $default_page $ht_dir/index.php");
 	# perl is sometime fucked to create with right permission
-	system("chmod 2775 $group_dir");
-	system("chmod 2775 $log_dir");
-	system("chmod 2775 $cgi_dir");
-	system("chmod 2775 $ht_dir");
-	system("chmod 664 $ht_dir/index.php");
+	system("chmod $default_perms $group_dir");
+	system("chmod $default_perms $log_dir");
+	system("chmod $default_perms $cgi_dir");
+	system("chmod $default_perms $ht_dir");
+	system("chmod $file_default_perms $ht_dir/index.php");
 	chown $dummy_uid, $gid, ($group_dir, $log_dir, $cgi_dir, $ht_dir);
 	chown $dummy_uid, $gid, ("$ht_dir/index.php");
 }
@@ -116,21 +130,28 @@ sub add_group {
 # Group Update Function
 #############################
 sub update_group {
-	my ($gid, $gname, $userlist) = @_;
+	my ($gid, $gname, $is_public, $userlist) = @_;
 	my ($log_dir, $cgi_dir, $ht_dir);
 	my ($realuid, $realgid);
+	my ($default_perms);
 	
 	$group_dir = $grpdir_prefix.'/'.$gname;
 	$log_dir = $group_dir."/log";
 	$cgi_dir = $group_dir."/cgi-bin";
 	$ht_dir = $group_dir."/htdocs";
 
+	if ($is_public) {
+	    $default_perms = 2775 ;
+	} else {
+	    $default_perms = 2771 ;
+	}
+
 	if ($verbose) {print("Updating Group: $gname\n")};
 		
-	system("chmod 2775 $group_dir");
-	system("chmod 2775 $log_dir");
-	system("chmod 2775 $cgi_dir");
-	system("chmod 2775 $ht_dir");
+	system("chmod $default_perms $group_dir");
+	system("chmod $default_perms $log_dir");
+	system("chmod $default_perms $cgi_dir");
+	system("chmod $default_perms $ht_dir");
 	chown $dummy_uid, $gid, ($group_dir, $log_dir, $cgi_dir, $ht_dir);
 	
 	my $realuid=get_file_owner_uid($group_dir);

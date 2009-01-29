@@ -90,7 +90,8 @@ if (getStringFromRequest('submit')) {
 			$license_other,
 			$purpose,
 			'shell1',
-			$scm_host
+			$scm_host,
+			$is_public
 		);
 		if ($res && $sys_use_scm) {
 			$res = $group->setPluginUse($scm,true);
@@ -196,6 +197,16 @@ echo license_selectbox('license',$license);
 
 ?>
 
+<p><input type="radio" name="is_public" value="1" 
+	<?php if (!isset($is_public) || $is_public) {echo ' checked';} ?> 
+   >
+   <?php echo _('Public'); ?>
+</p>
+<p><input type="radio" name="is_public" value="0" 
+	<?php if (isset ($is_public) && !$is_public) {echo ' checked';} ?> 
+   >
+   <?php echo _('Private'); ?>
+</p>
 
 <div align="center">
 <input type="submit" name="submit" value="<?php echo _('Submit') ?>"/> <input type="submit" name="i_disagree" value="<?php echo _('Cancel') ?>"/>

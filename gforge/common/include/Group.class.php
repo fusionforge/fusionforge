@@ -282,7 +282,7 @@ class Group extends Error {
 	 *  @param	string	The 'other' license to use if any.
 	 *  @param	string	The purpose of the group.
 	 */
-	function create(&$user, $full_name, $unix_name, $description, $license, $license_other, $purpose, $unix_box='shell1', $scm_box='cvs1') {
+	function create(&$user, $full_name, $unix_name, $description, $license, $license_other, $purpose, $unix_box='shell1', $scm_box='cvs1', $is_public=1) {
 		// $user is ignored - anyone can create pending group
 
 		if ($this->getID()!=0) {
@@ -340,11 +340,12 @@ class Group extends Error {
 					register_purpose,
 					register_time,
 					license_other,
+                                        enable_anonscm
 					rand_hash
 				)
 				VALUES (
 					'".htmlspecialchars($full_name)."',
-					1,
+					'$is_public',
 					'$unix_name',
 					'".htmlspecialchars($description)."',
 					'$unix_name.".$GLOBALS['sys_default_domain']."',
@@ -356,6 +357,7 @@ class Group extends Error {
 					'".htmlspecialchars($purpose)."',
 					".time().",
 					'".htmlspecialchars($license_other)."',
+					'$is_public',
 					'".md5($random_num)."'
 				)
 			");
@@ -492,7 +494,7 @@ class Group extends Error {
 		$use_pm,$use_pm_depend_box,$use_scm,$use_news,$use_docman,
 		$new_doc_address,$send_all_docs,$logo_image_id,
 		$enable_pserver,$enable_anonscm,
-		$use_ftp,$use_tracker,$use_frs,$use_stats) {
+			$use_ftp,$use_tracker,$use_frs,$use_stats,$is_public) {
 
 		$perm =& $this->getPermission($user);
 
@@ -588,6 +590,7 @@ class Group extends Error {
 				use_scm='$use_scm',
 				use_news='$use_news',
 				use_docman='$use_docman',
+                                is_public='$is_public',
 				new_doc_address='$new_doc_address',
 				send_all_docs='$send_all_docs',
 		";
