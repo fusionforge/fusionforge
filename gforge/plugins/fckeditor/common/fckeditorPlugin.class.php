@@ -98,7 +98,7 @@ class fckeditorPlugin extends Plugin {
 				}
 				if ($use_system_fckeditor) {
 					$oFCKeditor->BasePath = util_make_url ('/fckeditor/');
-					$oFCKeditor->Config['CustomConfigurationsPath'] = "/plugins/fckeditor/config.js"  ;
+					$oFCKeditor->Config['CustomConfigurationsPath'] = "/plugins/fckeditor/fckconfig.js"  ;
 				} else {
 					$oFCKeditor->BasePath = util_make_url('/plugins/' . $this->name . '/');
 				}
