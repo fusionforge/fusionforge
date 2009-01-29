@@ -3,7 +3,9 @@
 # $Id$
 #
 # Create the mailing-lists from the database
-# Roland Mas <lolando@debian.org>
+# Copyright 2001-2003, 2009 Roland Mas <lolando@debian.org>
+# Copyright 2003, 2004, Christian Bayle <bayle@debian.org>
+# Copyright 2005, INRIA (David Margery and Soraya Arias)
 
 use DBI ;
 use strict ;
@@ -30,7 +32,8 @@ eval {
                      mail_group_list.list_name,
                      users.user_name,
                      mail_group_list.password,
-                     mail_group_list.description
+                     mail_group_list.description,
+                     mail_group_list.is_public
               FROM mail_group_list, users
               WHERE mail_group_list.status = 1
                     AND mail_group_list.list_admin = users.user_id" ; # Status = 1: list just created on the website
@@ -43,10 +46,10 @@ eval {
 
     foreach $line (@lines) {
 	@array = @{$line} ;
-	my ($group_list_id, $listname, $user_name, $password, $description) ;
+	my ($group_list_id, $listname, $user_name, $password, $description, $is_public) ;
 	my ($tmp) ;
 
-	($group_list_id, $listname, $user_name, $password, $description)= @array ;
+	($group_list_id, $listname, $user_name, $password, $description, $is_public)= @array ;
 	my $cmd = "/usr/sbin/newlist -q $listname $user_name\@$sys_users_host $password >/dev/null 2>&1" ;
 	#print "cmd = <$cmd>\n" ;
 	system ($cmd) ;
@@ -65,6 +68,20 @@ eval {
 	open CONFIG, ">>$tmp" ;
 	print CONFIG "description = \"$description\"\n" ;
 	print CONFIG "host_name = '$sys_lists_host'\n" ;
+	if (!$is_public) {
+	    print CONFIG "archive_private = True\n" ;
+	    print CONFIG "advertised = False\n" ;
+	    print CONFIG "subscribe_policy = 3\n" ;
+	    ## Reject mails sent by non-members
+	    print CONFIG "generic_nonmember_action = 2\n";
+	    ## Do not forward auto discard message
+	    print CONFIG "forward_auto_discards = 0\n";
+	} else {
+	    print CONFIG "archive_private = False\n" ;
+	    print CONFIG "advertised = True\n" ;
+	    print CONFIG "subscribe_policy = 1\n" ;
+	}
+
 	close CONFIG ;
 	$cmd = "/usr/lib/mailman/bin/config_list -i $tmp $listname" ;
 	#print "cmd = <$cmd>\n" ;
