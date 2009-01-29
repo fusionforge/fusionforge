@@ -8,6 +8,7 @@
  *
  * @version   $Id$
  */
+require_once $gfcommon.'include/GForge.class.php';
 
 class Theme extends Layout {
 
@@ -171,11 +172,16 @@ if (isset($params['group']) && $params['group']) {
 
 		<!-- end inner body row -->
 </div> <!-- end of content -->
-<!-- PLEASE LEAVE "Powered By GForge" on your site -->
+<!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
 <br />
 <center>
-<a href="http://gforge.org/"><img src="<?php echo util_make_url ('/images/pow-gforge.png'); ?>" alt="Powered By GForge Collaborative Development En
-vironment" border="0" /></a>
+<a href="http://fusionforge.org/"><img src="<?php echo util_make_url ('/images/pow-gforge.png'); ?>" alt="Powered By FusionForge" border="0" /></a>
+<?php
+		    $forge = GForge() ;
+	    printf (_('This site is running %1$s version %2$d'),
+		    $forge->software_name,
+		    $forge->software_version) ;
+?>
 </center>
 
 </body>

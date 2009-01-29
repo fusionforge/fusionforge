@@ -14,6 +14,7 @@
  */
 
 require_once $gfwww.'search/include/SearchManager.class.php';
+require_once $gfcommon.'include/GForge.class.php';
 
 class Theme extends Error {
 
@@ -208,11 +209,19 @@ function footer($params){
 	$this->footerEnd($params);
 
 }
-function footerEnd($params) { ?> <!-- PLEASE LEAVE "Powered By GForge" on your site -->
+function footerEnd($params) { ?> <!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
 <div id="footer"><a href="http://gforge.org/"><img
 	src="<?php echo util_make_url ('/images/pow-gforge.png'); ?>"
-	alt="Powered By GForge Collaborative Development Environment"
-	border="0" /></a></div>
+	alt="Powered By FusionForge"
+	border="0" /></a>
+<br />
+<?php
+		    $forge = GForge() ;
+	    printf (_('This site is running %1$s version %2$s'),
+		    $forge->software_name,
+		    $forge->software_version) ;
+?>
+</div>
 <?php
 global $sys_show_source;
 if ($sys_show_source) {

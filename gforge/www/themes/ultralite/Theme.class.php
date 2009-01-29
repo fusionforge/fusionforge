@@ -1,4 +1,7 @@
 <?php
+
+require_once $gfcommon.'include/GForge.class.php';
+
 class Theme extends Layout {
 	/**
 	 * Theme() - Constructor
@@ -138,12 +141,18 @@ class Theme extends Layout {
 	function footer($params) {
 		?>
 		<!-- end main body row -->
-		<!-- PLEASE LEAVE "Powered By GForge" on your site -->
+		<!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
 		<br />
 		<center>
-		<a href="http://gforge.org/">Powered By GForge Collaborative Development Environment</a>
+		<a href="http://fusionforge.org/">Powered By FusionForge</a><br />
+<?php
+			$forge = GForge() ;
+		printf (_('This site is running %1$s version %2$d'),
+			$forge->software_name,
+			$forge->software_version) ;
+?>
 		</center>
-		<?php
+<?php		
 		global $sys_show_source;
 		if ($sys_show_source) {
 			echo util_make_link ('/source.php?file='.getStringFromServer('SCRIPT_NAME'),_('Show Source'),array('class'=>'showsource'));
