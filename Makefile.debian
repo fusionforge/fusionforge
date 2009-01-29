@@ -1,5 +1,6 @@
 #! /usr/bin/make -f
 FUSIONFORGE=FusionForge
+ORIGIN=debian.fusionforge.org
 
 list:
 	@echo ======================================================================================
@@ -66,8 +67,14 @@ gforge/docs/phpdoc/docs:
 #
 DISTRIB=etch
 MINOR=1
-LOCALREPO=/var/www/debian-gforge
+LOCALREPO=/var/www/debian-fusionforge
+LOCALREPOUBU=/var/www/ubuntu-fusionforge
 DISTRIBLIST=etch lenny sid
+UBUNTULIST=gutsy hardy intrepid
+UBUNTUOP=--mirror http://archive.ubuntu.com/ubuntu --debootstrap debootstrap
+UBUNTUOP=--mirror http://localhost/ubuntu --debootstrap debootstrap
+DEBUG=--debug
+DEBUG=
 
 svnbuildtest:
 	@echo "Will build gforge_$(gfversion)-$(MINOR)$(DISTRIB)"
@@ -75,6 +82,11 @@ svnbuildtest:
 svnbuild:		# ***** This is the one you should use ***** #
 	for dist in $(DISTRIBLIST); do \
 	make -f Makefile.debian svnbuilddist DISTRIB=$$dist ; \
+	done
+
+svnbuildubu:            # ***** This is the one to build ubuntu packages ***** #
+	for dist in $(UBUNTULIST); do \
+	make -f Makefile.debian svnbuilddist DISTRIB=$$dist DISTROOP="$(UBUNTUOP)" LOCALREPO=$(LOCALREPOUBU) DISTRIBLIST="$(UBUNTULIST)" ; \
 	done
 
 svnbuilddist: pbuilderenv localrepo result/gforge_$(gfversion)-$(MINOR)$(DISTRIB)_i386.changes
@@ -102,7 +114,7 @@ pbuilderenv: pbuilder pbuilder/base-$(DISTRIB).tgz
 	@echo "Ready for $(DISTRIB)"
 
 pbuilder/base-$(DISTRIB).tgz: /usr/sbin/pbuilder
-	sudo /usr/sbin/pbuilder create --debug --distribution $(DISTRIB) --basetgz $(CURDIR)/pbuilder/base-$(DISTRIB).tgz
+	sudo /usr/sbin/pbuilder create $(DEBUG) --distribution $(DISTRIB) --basetgz $(CURDIR)/pbuilder/base-$(DISTRIB).tgz $(DISTROOP)
 
 /usr/sbin/pbuilder:
 	sudo apt-get install pbuilder
@@ -119,7 +131,7 @@ $(LOCALREPO)/conf/distributions:
 	echo "Components: main" ; \
 	echo "UDebComponents: main" ; \
 	echo "Architectures: i386 source" ; \
-	echo "Origin: gforge.eu" ; \
+	echo "Origin: $(ORIGIN)" ; \
 	echo "Version: 4.7" ; \
 	echo "Description: My $(FUSIONFORGE) $$dist repository" ; \
 	echo "SignWith: yes" ; \
@@ -129,5 +141,5 @@ $(LOCALREPO)/conf:
 	mkdir $(LOCALREPO)/conf
 
 $(LOCALREPO):
-	sudo mkdir /var/www/debian-gforge
-	sudo chown `id -u`.`id -g` /var/www/debian-gforge
+	sudo mkdir $(LOCALREPO)
+	sudo chown `id -u`.`id -g` $(LOCALREPO)
