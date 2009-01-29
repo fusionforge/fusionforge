@@ -7,7 +7,7 @@ require $gfwww.'include/squal_pre.php';
 # Begin configuration
 $svnlook = '/usr/bin/svnlook';
 #$commit_email_pl = '/usr/share/subversion/hook-scripts/commit-email.pl';
-$commit_email_pl = direname(__FILE__).'/commit-email.pl';
+$commit_email_pl = dirname(__FILE__).'/commit-email.pl';
 # End configuration
 
 if(!file_exists($svnlook) || !file_exists($commit_email_pl)) { die("Missing required executables."); }
