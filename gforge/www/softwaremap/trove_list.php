@@ -285,9 +285,9 @@ for ($i_proj=1;$i_proj<=$querytotalcount;$i_proj++) {
 	if ($row_grp && $viewthisrow) {
 		print '<table border="0" cellpadding="0" width="100%"><tr valign="top"><td colspan="2">';
 		print "$i_proj. " ;
-		print url_make_link_g ($row_grp['unix_group_name'],
-				       $row_grp['group_id'],
-				       "<strong>".htmlspecialchars($row_grp['group_name'])."</strong> ");
+		print util_make_link_g ($row_grp['unix_group_name'],
+					$row_grp['group_id'],
+					"<strong>".htmlspecialchars($row_grp['group_name'])."</strong> ");
 		if ($row_grp['short_description']) {
 			print "- " . htmlspecialchars($row_grp['short_description']);
 		}
