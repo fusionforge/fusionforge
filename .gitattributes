@@ -3396,6 +3396,8 @@ htdocs/key -text
 htdocs/main.css -text
 htdocs/mib.html -text
 htdocs/mirror -text
+htdocs/tabber.css -text
+htdocs/tabber.js -text
 tools/export-tracker.tcl -text
 tools/make-mo.sh -text
 tools/update-gettext-files.sh -text
