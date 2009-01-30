@@ -181,6 +181,11 @@ function debug($message) {
 db_begin();
 
 $pluginid = get_plugin_id($pluginname);
+if($pluginid === NULL) {
+	debug("Plugin ".$pluginname." is not registered or an error occured while accessing the database.");
+	db_rollback();
+	exit;
+}
 
 if (@$ARGV[1] && @$ARGV[2] && @$ARGV[3]) {
 	//$ARGV[1] = Year
@@ -419,14 +424,13 @@ function get_plugin_id($pluginname){
 					$pluginname."'");	
 	if (!$res) {
 		$err .=  "Error! Database Query Failed: ".db_error();
-		db_rollback();
-		exit;
+		return NULL;
 	}
 	if ($row =& db_fetch_array($res)) {
-		$plugin_id = $row[0];
+		return $row[0];
 	}
- 
-	return $plugin_id;
+
+	return NULL; 
 }
 
 
