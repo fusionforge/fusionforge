@@ -46,7 +46,7 @@ deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian intrepid main</pre>
 				<pre>apt-get update ; apt-get install fusionforge</pre>
 			</div>
 			<div class="tabbertab" title="Install CD">
-				<h4>Install CD is <a href="http://www.planetforge.org/downloads/" >Here</a></h4>
+				<iframe id="installcd" src="http://www.planetforge.org/downloads/" name="InstallCD" frameborder="0" height="50%" width="100%" scrolling="auto"></iframe>
 			</div>
 			<div class="tabbertab" title="Chat">
 				<h5>For more info you can join FusionForge developpers on IRC at:</h5>
