@@ -63,9 +63,9 @@ if (!$rel) {
 #forum messages
 $sql="INSERT INTO project_counts_weekly_tmp ";
 if ($sys_database_type == 'mysql') {
-	$sql.="SELECT forum_group_list.group_id,'forum',log(3 * count(forum.msg_id)) AS count ";
+	$sql.="SELECT forum_group_list.group_id,'forum',3*log(1+count(forum.msg_id)) AS count ";
 } else {
-	$sql.="SELECT forum_group_list.group_id,'forum',log(3 * count(forum.msg_id)::float) AS count ";
+	$sql.="SELECT forum_group_list.group_id,'forum',3*log(1+count(forum.msg_id)::float) AS count ";
 }
 $sql.="
 FROM forum,forum_group_list 
@@ -82,9 +82,9 @@ if (!$rel) {
 #project manager tasks
 $sql="INSERT INTO project_counts_weekly_tmp ";
 if ($sys_database_type == 'mysql') {
-	$sql.="SELECT project_group_list.group_id,'tasks',log(4 * count(project_task.project_task_id)) AS count ";
+	$sql.="SELECT project_group_list.group_id,'tasks',4*log(1+count(project_task.project_task_id)) AS count ";
 } else {
-	$sql.="SELECT project_group_list.group_id,'tasks',log(4 * count(project_task.project_task_id)::float) AS count ";
+	$sql.="SELECT project_group_list.group_id,'tasks',4*log(1+count(project_task.project_task_id)::float) AS count ";
 }
 $sql.="
 FROM project_task,project_group_list 
@@ -102,9 +102,9 @@ if (!$rel) {
 #bugs
 $sql="INSERT INTO project_counts_weekly_tmp ";
 if ($sys_database_type == 'mysql') {
-	$sql.="SELECT agl.group_id,'bugs',log(3 * count(*)) AS count ";
+	$sql.="SELECT agl.group_id,'bugs',3*log(1+count(*)) AS count ";
 } else {
-	$sql.="SELECT agl.group_id,'bugs',log(3 * count(*)::float) AS count ";
+	$sql.="SELECT agl.group_id,'bugs',3*log(1+count(*)::float) AS count ";
 }
 $sql.="
 FROM artifact_group_list agl,artifact a
@@ -125,9 +125,9 @@ if (!$rel) {
 #patches
 $sql="INSERT INTO project_counts_weekly_tmp ";
 if ($sys_database_type == 'mysql') {
-	$sql.="SELECT agl.group_id,'patches',log(10 * count(*)) AS count ";
+	$sql.="SELECT agl.group_id,'patches',10*log(1+count(*)) AS count ";
 } else {
-	$sql.="SELECT agl.group_id,'patches',log(10 * count(*)::float) AS count ";
+	$sql.="SELECT agl.group_id,'patches',10*log(1+count(*)::float) AS count ";
 }
 $sql.="
 FROM artifact_group_list agl,artifact a
@@ -148,9 +148,9 @@ if (!$rel) {
 #support
 $sql="INSERT INTO project_counts_weekly_tmp ";
 if ($sys_database_type == 'mysql') {
-	$sql.="SELECT agl.group_id,'support',log(5 * count(*)) AS count ";
+	$sql.="SELECT agl.group_id,'support',5*log(1+count(*)) AS count ";
 } else {
-	$sql.="SELECT agl.group_id,'support',log(5 * count(*)::float) AS count ";
+	$sql.="SELECT agl.group_id,'support',5*log(1+count(*)::float) AS count ";
 }
 $sql.="
 FROM artifact_group_list agl,artifact a
@@ -171,9 +171,9 @@ if (!$rel) {
 #cvs commits
 $sql="INSERT INTO project_counts_weekly_tmp ";
 if ($sys_database_type == 'mysql') {
-	$sql.="SELECT group_id,'cvs',log(sum(commits)) AS count ";
+	$sql.="SELECT group_id,'cvs',log(1+sum(commits)) AS count ";
 } else {
-	$sql.="SELECT group_id,'cvs',log(sum(commits)::float) AS count ";
+	$sql.="SELECT group_id,'cvs',log(1+sum(commits)::float) AS count ";
 }
 $sql.="
 FROM stats_cvs_group 
@@ -188,7 +188,7 @@ if (!$rel) {
 
 #developers
 #$sql="INSERT INTO project_counts_weekly_tmp 
-#SELECT group_id,'developers',log(5.0*count(*)) AS count FROM user_group GROUP BY group_id";
+#SELECT group_id,'developers',5*log(1+count(*)) AS count FROM user_group GROUP BY group_id";
 #$err .= "\n\n".$sql;
 #$rel = db_query($sql);
 
@@ -217,9 +217,9 @@ db_begin();
 #file downloads
 $sql="INSERT INTO project_counts_weekly_tmp ";
 if ($sys_database_type == 'mysql') {
-	$sql.="SELECT group_id,'downloads', log(.3 * sum(downloads)) AS downloads ";
+	$sql.="SELECT group_id,'downloads', .3*log(1+sum(downloads)) AS downloads ";
 } else {
-	$sql.="SELECT group_id,'downloads', log(.3 * sum(downloads)::float) AS downloads ";
+	$sql.="SELECT group_id,'downloads', .3*log(1+sum(downloads)::float) AS downloads ";
 }
 $sql.="
 FROM frs_dlstats_group_vw
