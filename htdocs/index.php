@@ -8,7 +8,7 @@
 	<body>
 		<h1>FusionForge home page</h1>
 		<blockquote>
-			<h4>[<a HREF="http://packages.qa.debian.org/g/gforge.html">GForge package</a> |
+			<h4>[<a HREF="http://packages.qa.debian.org/g/gforge.html">Forge package</a> |
 			<a HREF="http://fusionforge.org">FusionForge Project</a> |
 			<a href="http://wiki.planetforge.org/">PlanetForge Wiki</a> |
 			<a href="http://planetforge.org/">PlanetForge Agregator</a> ]</h4>
