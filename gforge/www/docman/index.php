@@ -33,7 +33,7 @@ function docman_recursive_display($docgroup) {
 			echo "
 		['".'<span class="JSCookTreeFolderClosed"><i><img alt="" src="\' + ctThemeXPBase + \'folder1.gif" /></i></span><span class="JSCookTreeFolderOpen"><i><img alt="" src="\' + ctThemeXPBase + \'folderopen1.gif"></i></span>'."', '".$dg->getName()."', '#', '', '',";
 			docman_recursive_display($dg->getID());
-			if (is_array($nested_docs[$dg->getID()])) {
+			if (isset($nested_docs[$dg->getID()]) && is_array($nested_docs[$dg->getID()])) {
 				foreach ($nested_docs[$dg->getID()] as $d) {
 					$docurl=util_make_url ('/docman/view.php/'.$group_id.'/'.$d->getID().'/'.$d->getFileName());
 					$docname=addslashes($d->getName())." (".$d->getFileName().")";
