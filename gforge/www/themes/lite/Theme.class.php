@@ -8,7 +8,7 @@
  *
  * @version   $Id$
  */
-require_once $gfcommon.'include/GForge.class.php';
+require_once $gfcommon.'include/FusionForge.class.php';
 
 class Theme extends Layout {
 
@@ -69,9 +69,9 @@ class Theme extends Layout {
 	 */
 	function header($params) {
 		if (!$params['title']) {
-			$params['title'] = "GForge";
+			$params['title'] = "FusionForge";
 		} else {
-			$params['title'] = "GForge: " . $params['title'];
+			$params['title'] = "FusionForge: " . $params['title'];
 		}
 		echo '<?xml version="1.0" encoding="utf-8"?>'."\n";
 		?>
@@ -177,7 +177,7 @@ if (isset($params['group']) && $params['group']) {
 <center>
 <a href="http://fusionforge.org/"><img src="<?php echo util_make_url ('/images/pow-gforge.png'); ?>" alt="Powered By FusionForge" border="0" /></a>
 <?php
-		    $forge = GForge() ;
+		    $forge = FusionForge() ;
 	    printf (_('This site is running %1$s version %2$d'),
 		    $forge->software_name,
 		    $forge->software_version) ;

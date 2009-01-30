@@ -14,7 +14,7 @@
  */
  
 require_once $gfcommon.'include/constants.php';
-require_once $gfcommon.'include/GForge.class.php';
+require_once $gfcommon.'include/FusionForge.class.php';
 require_once $gfwww.'search/include/SearchManager.class.php';
 
 class Layout extends Error {
@@ -274,7 +274,7 @@ if (isset($params['group']) && $params['group']) {
 <a href="http://fusionforge.org/"><img src="/images/pow-gforge.png" alt="Powered By FusionForge" border="0" /></a>
 <br />
 <?php
-			$forge = GForge() ;
+			$forge = FusionForge() ;
 		printf (_('This site is running %1$s version %2$d'),
 			$forge->software_name,
 			$forge->software_version) ;

@@ -1,6 +1,6 @@
 <?php
 
-require_once $gfcommon.'include/GForge.class.php';
+require_once $gfcommon.'include/FusionForge.class.php';
 
 class Theme extends Layout {
 	/**
@@ -146,7 +146,7 @@ class Theme extends Layout {
 		<center>
 		<a href="http://fusionforge.org/">Powered By FusionForge</a><br />
 <?php
-			$forge = GForge() ;
+			$forge = FusionForge() ;
 		printf (_('This site is running %1$s version %2$d'),
 			$forge->software_name,
 			$forge->software_version) ;

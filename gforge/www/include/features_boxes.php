@@ -11,7 +11,7 @@
 
 //require_once('../env.inc.php');
 //require_once('pre.php');
-require_once $gfcommon.'include/GForge.class.php';
+require_once $gfcommon.'include/FusionForge.class.php';
 
 function show_features_boxes() {
 	GLOBAL $HTML,$sys_use_ratings;
@@ -112,7 +112,7 @@ function stats_downloads_total() {
 }
 
 function show_sitestats() {
-	$gforge = new GForge();
+	$gforge = new FusionForge();
 	$return = '';
 	$return .= _('Hosted Projects').': <strong>'.number_format($gforge->getNumberOfPublicHostedProjects()).'</strong>';
 	$return .= '<br />'._('Registered Users').': <strong>'.number_format($gforge->getNumberOfActiveUsers()).'</strong>';

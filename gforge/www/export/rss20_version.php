@@ -1,12 +1,13 @@
 <?php
-// export projects list in RSS 2.0
-// Author: Scott Grayban <sgrayban@borgnet.us>
-//
+
+// Export software version in RSS 2.0
+// Author: Christian Bayle <bayle@debian.org>
+
 include "../env.inc.php";
 include "pre.php";
-require_once $gfcommon.'include/GForge.class.php';
+require_once $gfcommon.'include/FusionForge.class.php';
 
-$forge=new GForge();
+$forge=new FusionForge();
 $vers=$forge->software_version;
 $name=$forge->software_name;
 $date=gmdate('D, d M Y g:i:s',time())." GMT";
