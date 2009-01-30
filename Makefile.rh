@@ -8,11 +8,11 @@ list:
 	@cat Makefile.rh | grep '^.*:.*#$$' | sed 's/^\(.*:\).*#\(.*\)#$$/\1		\2/'
 
 #Do it all
-all: gforge allplugins dist          # Build gforge and plugins #
-clean: cleangf cleanplugins   # Clean gforge and plugins #
+all: fusionforge allplugins dist          # Build fusionforge and plugins #
+clean: cleanff cleanplugins   # Clean fusionforge and plugins #
 
 #GForge
-gforge: cleangf build          # Build gforge #
+fusionforge: cleanff build          # Build fusionforge #
 
 #Plugins 
 #allplugins: cvsplugin cvstrackerplugin ldapextauthplugin
@@ -26,7 +26,7 @@ cvsplugin: cleancvs buildcvs  # package cvs plugin #
 #ldapextauthplugin: cleanldapextauth buildldapextauth  # package ldapextauth plugin #
 #externalsearchplugin: cleanexternalsearch buildexternalsearch  # package externalsearch plugin #
 
-RPM_TMP=/tmp/gforge-build
+RPM_TMP=/tmp/fusionforge-build
 
 # build a custom rpmmacro file and rpmrc to point to it for rpmbuild
 rpmrc:
@@ -51,18 +51,18 @@ dist: rpmprep
 	-mkdir ./dist 2> /dev/null
 	mv ./*.bz2 $(RPM_TMP)/RPMS/noarch/*.rpm ./dist
 #
-# GFORGE
+# FUSIONFORGE
 #
-target cleangf build : override version=$(shell grep '^Version:' gforge/gforge.spec | sed 's/.*:\s*\(.*\)/\1/')
+target cleanff build : override version=$(shell grep '^Version:' gforge/gforge.spec | sed 's/.*:\s*\(.*\)/\1/')
 
-cleangf:		# Clean files of gforge build                         #
-	@rm -rf gforge-$(version).tar.bz2 gforge-$(version)
-	@echo cleangf Done
-build: rpmprep		# Build rpm gforge packages                               #
-	cd gforge ;mv plugins ../;find . -type f | grep -v '/CVS/' | grep -v '/.svn/' | grep -v contrib | grep -v debian | grep -v docs/phpdoc/docs | cpio -pdumvB ../gforge-$(version)
+cleanff:		# Clean files of fusionforge build                         #
+	@rm -rf fusionforge-$(version).tar.bz2 fusionforge-$(version)
+	@echo cleanff Done
+build: rpmprep		# Build rpm fusionforge packages                               #
+	cd gforge ;mv plugins ../;find . -type f | grep -v '/CVS/' | grep -v '/.svn/' | grep -v contrib | grep -v debian | grep -v docs/phpdoc/docs | cpio -pdumvB ../fusionforge-$(version)
 	cp gforge/rpm-specific/patches/gforge-4.0-deb_rpm.patch .
-	tar cvjf gforge-$(version).tar.bz2 gforge-$(version)
-	rpmbuild -ta --rcfile rpmrc gforge-$(version).tar.bz2
+	tar cvjf fusionforge-$(version).tar.bz2 fusionforge-$(version)
+	rpmbuild -ta --rcfile rpmrc fusionforge-$(version).tar.bz2
 
 #
 # CVS PLUGIN
@@ -70,12 +70,12 @@ build: rpmprep		# Build rpm gforge packages                               #
 target cleancvs buildcvs : override version=$(shell grep '^Version:' plugins/scmcvs/gforge-plugin-scmcvs.spec | sed 's/.*:\s*\(.*\)/\1/')
 
 cleancvs:               # Clean files of gforge-plugin-scmcvs build           #
-	@rm -rf gforge-plugin-scmcvs-$(version).tar.bz2 gforge-plugin-scmcvs-$(version)
+	@rm -rf fusionforge-plugin-scmcvs-$(version).tar.bz2 fusionforge-plugin-scmcvs-$(version)
 	@echo cleancvs Done
-buildcvs: rpmprep               # Build rpm gforge-plugin-scmcvs package                  #
-	cd plugins/scmcvs ; find . -type f | grep -v '/CVS/' | grep -v '/.svn/' | grep -v contrib | grep -v debian | cpio -pdumvB ../../gforge-plugin-scmcvs-$(version)
-	tar cvjf gforge-plugin-scmcvs-$(version).tar.bz2 gforge-plugin-scmcvs-$(version)
-	rpmbuild -ta --rcfile rpmrc gforge-plugin-scmcvs-$(version).tar.bz2 
+buildcvs: rpmprep               # Build rpm fusionforge-plugin-scmcvs package                  #
+	cd plugins/scmcvs ; find . -type f | grep -v '/CVS/' | grep -v '/.svn/' | grep -v contrib | grep -v debian | cpio -pdumvB ../../fusionforge-plugin-scmcvs-$(version)
+	tar cvjf fusionforge-plugin-scmcvs-$(version).tar.bz2 fusionforge-plugin-scmcvs-$(version)
+	rpmbuild -ta --rcfile rpmrc fusionforge-plugin-scmcvs-$(version).tar.bz2
 
 #
 # SVN PLUGIN

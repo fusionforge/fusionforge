@@ -20,8 +20,8 @@
 %define gfuser			gforge
 %define gfgroup			gforge
 
-Summary: GForge Collaborative Development Environment
-Name: gforge
+Summary: FusionForge Collaborative Development Environment
+Name: fusionforge
 Version: 4.7
 Release: %{release}
 BuildArch: noarch
