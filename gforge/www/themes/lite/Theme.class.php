@@ -177,8 +177,8 @@ if (isset($params['group']) && $params['group']) {
 <center>
 <a href="http://fusionforge.org/"><img src="<?php echo util_make_url ('/images/pow-gforge.png'); ?>" alt="Powered By FusionForge" border="0" /></a>
 <?php
-		    $forge = FusionForge() ;
-	    printf (_('This site is running %1$s version %2$d'),
+		    $forge = new FusionForge() ;
+	    printf (_('This site is running %1$s version %2$s'),
 		    $forge->software_name,
 		    $forge->software_version) ;
 ?>

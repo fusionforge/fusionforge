@@ -222,7 +222,7 @@ class Theme extends Layout {
 <a href="http://fusionforge.org/"><img src="/images/pow-gforge.png" alt="Powered By FusionForge" border="0" /></a>
 <br />
 <?php
-		    $forge = FusionForge() ;
+		    $forge = new FusionForge() ;
 	    printf (_('This site is running %1$s version %2$s'),
 		    $forge->software_name,
 		    $forge->software_version) ;

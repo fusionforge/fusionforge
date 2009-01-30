@@ -15,7 +15,7 @@ class Theme extends Layout {
 	 * @param	array	Header parameters array
 	 */
 	function header($params) {
-		if ($_POST['selectmenu'] == "yes")
+		if (isset($_POST['selectmenu']) && ($_POST['selectmenu'] == "yes"))
 		{
 		header("Location:".$_POST['menuList']);		
 		}
@@ -146,8 +146,8 @@ class Theme extends Layout {
 		<center>
 		<a href="http://fusionforge.org/">Powered By FusionForge</a><br />
 <?php
-			$forge = FusionForge() ;
-		printf (_('This site is running %1$s version %2$d'),
+			$forge = new FusionForge() ;
+		printf (_('This site is running %1$s version %2$s'),
 			$forge->software_name,
 			$forge->software_version) ;
 ?>
@@ -248,7 +248,7 @@ class Theme extends Layout {
 
 	function tabGenerator($TABS_DIRS,$TABS_TITLES,$nested=false,$selected=false,$sel_tab_bgcolor='WHITE',$total_width='100%') {
 		$count=count($TABS_DIRS);
-		$return .= '
+		$return = '
 		<form name="menuForm" method="POST" action="/">
 		<select name="menuList">';
 		for ($i=0; $i<$count; $i++) {
