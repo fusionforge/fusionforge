@@ -8,11 +8,11 @@
 	<body>
 		<h1>FusionForge home page</h1>
 		<blockquote>
-			<h4>[<a HREF="http://packages.qa.debian.org/g/gforge.html">Forge package</a> |
+			<h5>[<a HREF="http://packages.qa.debian.org/g/gforge.html">Forge package</a> |
 			<a HREF="http://fusionforge.org">FusionForge Project</a> |
 			<a href="http://wiki.planetforge.org/">PlanetForge Wiki</a> |
 			<a href="http://planetforge.org/">PlanetForge Agregator</a> |
-			<a href="mib.html">IRC Chat</a> ]</h4>
+			<a href="mib.html">IRC Chat</a> ]</h5>
 			<br>
 			<h4>For debian you should create /etc/apt/sources.list.d/fusionforge file containing one of:</h4>
 
