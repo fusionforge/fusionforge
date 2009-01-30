@@ -22,7 +22,7 @@ class Theme_gforge extends WikiTheme {
 	function footer() {
 		global $HTML;
 		
-		$HTML->footer();
+		$HTML->footer(null);
 		
 	}
 }
