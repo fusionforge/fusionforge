@@ -53,12 +53,12 @@ deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian intrepid main</pre>
 				<pre>irc.freenode.net channel #fusionforge </pre>
 				<script>
 				function bigit() {
-					document.getElementById('myiframe').width = '800, *';
-					document.getElementById('myiframe').height = '800, *';
+					document.getElementById('myiframe').width = '100%, *';
+					document.getElementById('myiframe').height = '100%, *';
 				}
 				function smallit() {
-					document.getElementById('myiframe').width = '800, *';
-					document.getElementById('myiframe').height = '200, *';
+					document.getElementById('myiframe').width = '100%, *';
+					document.getElementById('myiframe').height = '40%, *';
 				}
 				</script>
 				<h6>Join #fusionforge on irc.freenode.net. Choose a nick and enter password if you have one. </h6>
@@ -66,7 +66,7 @@ deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian intrepid main</pre>
 					<input id="mybutton1" type="button" onClick=bigit() value="Big Window">
 					<input id="mybutton2" type="button" onClick=smallit() value="Small Window">
 				</form>
-				<iframe id="myiframe" width=800 height=200 scrolling=no style="border:0" src="http://embed.mibbit.com/?server=irc.freenode.net&channel=%23fusionforge&noServerNotices=true&noServerMotd=true&promptPass=true"></iframe>
+				<iframe id="myiframe" width=100% height=40% scrolling=no style="border:0" src="http://embed.mibbit.com/?server=irc.freenode.net&channel=%23fusionforge&noServerNotices=true&noServerMotd=true&promptPass=true"></iframe>
 			</div>
 		</div>
 	</blockquote>
