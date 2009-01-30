@@ -3389,6 +3389,13 @@ gforge/www/trove/admin/trove_cat_list.php -text
 gforge/www/trove/include/trove.php -text
 gforge/www/trove/include/utils.php -text
 gforge/www/trove/index.php -text
+htdocs/favicon.ico -text
+htdocs/gforge47etch.jpg -text
+htdocs/index.php -text
+htdocs/key -text
+htdocs/main.css -text
+htdocs/mib.html -text
+htdocs/mirror -text
 tools/export-tracker.tcl -text
 tools/make-mo.sh -text
 tools/update-gettext-files.sh -text

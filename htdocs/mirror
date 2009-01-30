@@ -1,0 +1,3 @@
+#! /bin/sh
+debmirror /var/www/gforge.eu/debian --method=http --host=debian.fusionforge.org -r debian -d lenny,etch,sid -a i386 -s main -v --progress
+debmirror /var/www/gforge.eu/ubuntu --method=http --host=debian.fusionforge.org -r ubuntu -d hardy,gutsy,intrepid -a i386 -s main -v --progress
