@@ -3019,7 +3019,7 @@ gforge/www/images/ic/write16w.png -text
 gforge/www/images/ic/xmail16w.png -text
 gforge/www/images/icon.png -text
 gforge/www/images/msg.png -text
-gforge/www/images/pow-gforge.png -text
+gforge/www/images/pow-fusionforge.png -text svneol=unset#unset
 gforge/www/images/sf-for-debian.png -text
 gforge/www/images/smiles/icon_arrow.gif -text
 gforge/www/images/smiles/icon_biggrin.gif -text
@@ -3241,7 +3241,7 @@ gforge/www/themes/gforge/images/box-topleft.png -text
 gforge/www/themes/gforge/images/box-topright.png -text
 gforge/www/themes/gforge/images/clear.png -text
 gforge/www/themes/gforge/images/header/top-logo.blank.gif -text
-gforge/www/themes/gforge/images/header/top-logo.gif -text
+gforge/www/themes/gforge/images/header/top-logo.png -text svneol=unset#unset
 gforge/www/themes/gforge/images/header/top-middle.gif -text
 gforge/www/themes/gforge/images/header/top-right.gif -text
 gforge/www/themes/gforge/images/ic/adddoc12.png -text

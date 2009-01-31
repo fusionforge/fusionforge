@@ -175,7 +175,7 @@ if (isset($params['group']) && $params['group']) {
 <!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
 <br />
 <center>
-<a href="http://fusionforge.org/"><img src="<?php echo util_make_url ('/images/pow-gforge.png'); ?>" alt="Powered By FusionForge" border="0" /></a>
+<a href="http://fusionforge.org/"><img src="<?php echo util_make_url ('/images/pow-fusionforge.png'); ?>" alt="Powered By FusionForge" border="0" /></a>
 <?php
 		    $forge = new FusionForge() ;
 	    printf (_('This site is running %1$s version %2$s'),

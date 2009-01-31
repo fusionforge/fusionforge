@@ -211,7 +211,7 @@ function footer($params){
 }
 function footerEnd($params) { ?> <!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
 <div id="footer"><a href="http://gforge.org/"><img
-	src="<?php echo util_make_url ('/images/pow-gforge.png'); ?>"
+	src="<?php echo util_make_url ('/images/pow-fusionforge.png'); ?>"
 	alt="Powered By FusionForge"
 	border="0" /></a>
 <br />

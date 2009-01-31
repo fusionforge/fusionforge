@@ -155,7 +155,7 @@ class Theme extends Layout {
 <div class="header">
   <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-		  <td class="topLeft"><?php echo util_make_link ('/', html_image('header/top-logo.gif',205,54,array('border'=>'0'))); ?></td>
+		  <td class="topLeft"><?php echo util_make_link ('/', html_image('header/top-logo.png',300,54,array('border'=>'0'))); ?></td>
         <td class="middleRight"><?php echo $this->searchBox(); ?></td>
         <td class="middleRight"><?php
         if (session_loggedin()) {
@@ -219,7 +219,7 @@ class Theme extends Layout {
 <!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
 <br />
 <center>
-<a href="http://fusionforge.org/"><img src="/images/pow-gforge.png" alt="Powered By FusionForge" border="0" /></a>
+<a href="http://fusionforge.org/"><img src="/images/pow-fusionforge.png" alt="Powered By FusionForge" border="0" /></a>
 <br />
 <?php
 		    $forge = new FusionForge() ;

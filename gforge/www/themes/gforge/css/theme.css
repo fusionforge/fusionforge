@@ -149,9 +149,9 @@ a.bottomTabSelected:hover {
 
 .header h1 a {
   display: block;
-  width: 205px;
+  width: 300px;
   height: 55px;
-  background: transparent url("../images/header/top-logo.gif") no-repeat;
+  background: transparent url("../images/header/top-logo.png") no-repeat;
   text-indent: -700em;
   text-decoration: none;
 }

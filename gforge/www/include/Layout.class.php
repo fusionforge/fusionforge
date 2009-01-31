@@ -271,7 +271,7 @@ if (isset($params['group']) && $params['group']) {
 <!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
 <br />
 <center>
-<a href="http://fusionforge.org/"><img src="/images/pow-gforge.png" alt="Powered By FusionForge" border="0" /></a>
+<a href="http://fusionforge.org/"><img src="/images/pow-fusionforge.png" alt="Powered By FusionForge" border="0" /></a>
 <br />
 <?php
 			$forge = new FusionForge() ;
