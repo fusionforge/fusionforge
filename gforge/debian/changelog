@@ -1,4 +1,4 @@
-gforge (4.7~rc3+svn6839-1) experimental; urgency=low
+gforge (4.7~rc3+svn6843-1) experimental; urgency=low
 
   * New SVN snapshot.
   * Made PostgreSQL dependency stricter: some of the views only work with
