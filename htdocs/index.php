@@ -14,8 +14,14 @@
 	</head>
 	<body>
 	<blockquote>
-		<div align="center">
-		<img src="fusionforge-resized-transp.png" />
+
+		<table border="0" width="100%" bgcolor=black cellspacing="0" cellpadding="0">
+		<tr>
+				<td class="topLeft"><a href="https://fusionforge.org/"><img src="top-logo.png" border="0" alt="" width="300" height="54" /></a></td>
+				<td width="100%" background="box-grad2.png"></td>
+		</tr>
+		</table>
+
 		<h4>[<a HREF="http://packages.qa.debian.org/g/gforge.html">Forge package</a> |
 		<a HREF="http://fusionforge.org">FusionForge Project</a> |
 		<a href="http://wiki.planetforge.org/">PlanetForge Wiki</a> |
@@ -23,6 +29,9 @@
 		</div>
 
 		<div id="tabber" class="tabber" >
+			<div class="tabbertab" title="FusionForge">
+				<div align="center"><img src="fusionforge-resized-transp.png" /></div>
+			</div>
 			<div class="tabbertab" title="Debian">
 				<h4>For debian you should create /etc/apt/sources.list.d/fusionforge file containing one of:</h4>
 				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian lenny main
