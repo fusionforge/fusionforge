@@ -3390,6 +3390,7 @@ gforge/www/trove/include/trove.php -text
 gforge/www/trove/include/utils.php -text
 gforge/www/trove/index.php -text
 htdocs/favicon.ico -text
+htdocs/fusionforge-resized-transp.png -text
 htdocs/gforge47etch.jpg -text
 htdocs/index.php -text
 htdocs/key -text

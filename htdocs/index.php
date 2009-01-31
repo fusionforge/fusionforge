@@ -12,7 +12,7 @@
 	</head>
 	<body>
 	<blockquote>
-		<h1>FusionForge home page</h1>
+		<div align="center"><img src="fusionforge-resized-transp.png" /></div>
 		<h4>[<a HREF="http://packages.qa.debian.org/g/gforge.html">Forge package</a> |
 		<a HREF="http://fusionforge.org">FusionForge Project</a> |
 		<a href="http://wiki.planetforge.org/">PlanetForge Wiki</a> |
