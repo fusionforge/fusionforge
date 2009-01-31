@@ -142,19 +142,19 @@ function install()
 	} else {
 		$gforge_db = trim(fgets($STDIN));
 		if (strlen($gforge_db) == 0) {
-			$gforge_db = 'fforge';
+			$gforge_db = 'gforge';
 		}
 	}
 	show(" ...using '$gforge_db'");
 
-	show(' * Enter the Database Username (fforge): ');
+	show(' * Enter the Database Username (gforge): ');
 
 	if (getenv('FFORGE_USER')) {
 		$gforge_user = getenv('FFORGE_USER');
 	} else {
 		$gforge_user = trim(fgets($STDIN));
 		if (strlen($gforge_user) == 0) {
-			$gforge_user = 'fforge';
+			$gforge_user = 'gforge';
 		}
 	}
 	show(" ...using '$gforge_user'");
@@ -190,34 +190,34 @@ function install()
 	show(" * Creating '$gforge_db' Database...");
 	run("su $susufix $gforge_user -c \"createdb $gforge_db\"", true);
 
-	# Detect postgresql version, load tsearch2 for pg < 8.3
-	$pg_version = explode(' ', shell_exec("postgres --version"));
-	$pgv = $pg_version[2];
-
-	if (preg_match('/^(7\.|8\.1|8\.2)/', $pgv)) {
-		show(" * Dumping tsearch2 Database Into '$gforge_db' DB");
-		run("su - postgres -c \"psql $gforge_db < $tsearch2_sql\" >> /tmp/gforge-import.log");
-
-		$tables = array('pg_ts_cfg', 'pg_ts_cfgmap', 'pg_ts_dict', 'pg_ts_parser');
-		foreach ($tables as $table) {
-			run('su - postgres -c "psql '.$gforge_db.' -c \\"GRANT ALL on '.$table.' TO '.$gforge_user.';\\""');
-		}
-	} else {
-#		show(" * Creating FTS default configuation (Full Text Search)");
-#		run("su - postgres -c \"psql $gforge_db < $gforge_lib_dir/db/FTS-20081108.sql\" >> /tmp/gforge-import.log");
-	}
+//	# Detect postgresql version, load tsearch2 for pg < 8.3
+//	$pg_version = explode(' ', shell_exec("postgres --version"));
+//	$pgv = $pg_version[2];
+//
+//	if (preg_match('/^(7\.|8\.1|8\.2)/', $pgv)) {
+//		show(" * Dumping tsearch2 Database Into '$gforge_db' DB");
+//		run("su - postgres -c \"psql $gforge_db < $tsearch2_sql\" >> /tmp/gforge-import.log");
+//
+//		$tables = array('pg_ts_cfg', 'pg_ts_cfgmap', 'pg_ts_dict', 'pg_ts_parser');
+//		foreach ($tables as $table) {
+//			run('su - postgres -c "psql '.$gforge_db.' -c \\"GRANT ALL on '.$table.' TO '.$gforge_user.';\\""');
+//		}
+//	} else {
+//		show(" * Creating FTS default configuation (Full Text Search)");
+//		run("su - postgres -c \"psql $gforge_db < $gforge_lib_dir/db/FTS-20081108.sql\" >> /tmp/gforge-import.log");
+//	}
 
 
 	show(' * Dumping FusionForge DB');
 	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/gforge.sql\" >> /tmp/gforge-import.log");
 
-	show(' * Dumping FusionForge FTI DB');
-	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI.sql\" >> /tmp/gforge-import.log");
-	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20050315.sql\" >> /tmp/gforge-import.log");
-	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20050401.sql\" >> /tmp/gforge-import.log");
-	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20050530.sql\" >> /tmp/gforge-import.log");
-	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20060130.sql\" >> /tmp/gforge-import.log");
-	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20061025.sql\" >> /tmp/gforge-import.log");
+//	show(' * Dumping FusionForge FTI DB');
+//	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI.sql\" >> /tmp/gforge-import.log");
+//	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20050315.sql\" >> /tmp/gforge-import.log");
+//	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20050401.sql\" >> /tmp/gforge-import.log");
+//	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20050530.sql\" >> /tmp/gforge-import.log");
+//	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20060130.sql\" >> /tmp/gforge-import.log");
+//	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20061025.sql\" >> /tmp/gforge-import.log");
 
 	show(" * Enter the Admin Username (fforgeadmin): ");
 	if (getenv('FFORGE_ADMIN_USER')) {
