@@ -1,8 +1,8 @@
 <section id="cg_cvs_repository">
-	<title id="cg_cvs_repository.title">GForge CVS repository</title>
+	<title id="cg_cvs_repository.title">FusionForge CVS repository</title>
 	<section>
 		<title>Anonymous access</title>
-		<para>You can check out the GForge CVS repository through anonymous CVS with the following instructions.</para>
+		<para>You can check out the FusionForge CVS repository through anonymous CVS with the following instructions.</para>
 		<para>
 			The module you wish to check out must be specified as the &lt;modulename&gt;.
 			When prompted for a password for anonymous, simply press the <keycap>Enter</keycap> key.
@@ -15,30 +15,30 @@ cvs co <modulename>
 	</section>
 	<section>
 		<title>Modules in CVS repository</title>
-		<para>The following CVS modules are available in GForge repository.</para>
+		<para>The following CVS modules are available in FusionForge repository.</para>
 		<variablelist>
 			<varlistentry>
 				<term>gforge</term>
 				<listitem>
-					<para>Main module. Contains GForge software.</para>
+					<para>Main module. Contains FusionForge software.</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
 				<term>tools</term>
 				<listitem>
-					<para>Contains tools which may be useful for GForge developers, translators and administrators.</para>
+					<para>Contains tools which may be useful for FusionForge developers, translators and administrators.</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
 				<term>gforge-plugin-helloworld</term>
 				<listitem>
-					<para>Helloworld plugin to help developers understand plugin management in GForge.</para>
+					<para>Helloworld plugin to help developers understand plugin management in FusionForge.</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
 				<term>gforge-plugin-eirc</term>
 				<listitem>
-					<para>EIRC plugin for GForge (java based IRC client in GForge).</para>
+					<para>EIRC plugin for FusionForge (java based IRC client in FusionForge).</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
@@ -62,7 +62,7 @@ cvs co <modulename>
 			<varlistentry>
 				<term>gforge-theme-(classic|darkaqua|debian|forged|kde|querencia|savannah|ultralite)</term>
 				<listitem>
-					<para>Themes for GForge. They may be outdated.</para>
+					<para>Themes for FusionForge. They may be outdated.</para>
 				</listitem>
 			</varlistentry>
 		</variablelist>

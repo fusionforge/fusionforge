@@ -116,7 +116,7 @@
 				<term>Monitor forum</term>
 				<listitem>
 					<para>You can select to monitor the forum by clicking on the <emphasis>Monitor Forum</emphasis> button.</para>
-					<para>If this option is enabled, every post to the forum will be sent to you by email. This allows you to be informed about new messages without being logged on to GForge. The name of the monitored forum will appear in the users homepage in the section Monitored Forums.</para>
+					<para>If this option is enabled, every post to the forum will be sent to you by email. This allows you to be informed about new messages without being logged on to FusionForge. The name of the monitored forum will appear in the users homepage in the section Monitored Forums.</para>
 				</listitem>
 			</varlistentry>
 		</variablelist>

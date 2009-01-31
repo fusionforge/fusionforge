@@ -1,18 +1,18 @@
 <section id="cg_howto_localization">
 	<title>Localization howto</title>
 	<section>
-		<title>GForge localization system and status</title>
+		<title>FusionForge localization system and status</title>
 		<para>
-			This short HOWTO explains how you can customize your local installation of GForge.
+			This short HOWTO explains how you can customize your local installation of FusionForge.
 		</para>
 		<para>
-			First, a quick course on the internationalisation system present in GForge.
+			First, a quick course on the internationalisation system present in FusionForge.
 		</para>
 		<para>
 			The texts you can read on the web pages are not hard-coded.
 			Instead, they are displayed as results of a function of several parameters.
 			One of these parameters is the language in which you wish to display a piece of information, and another is some handle to identify the information you want to display.
-			In GForge, this handle is made up of the <quote>page name</quote> and the <quote>category</quote> strings.
+			In FusionForge, this handle is made up of the <quote>page name</quote> and the <quote>category</quote> strings.
 		</para>
 		<para>
 			Knowing all the needed info, the function displays the appropriate text. How appropriate is this text?  Well, that depends. First, a basic set of texts is loaded. Historically, this set is loaded in English. This set of texts makes the Base class, storing texts for all known <quote>handles</quote>.
@@ -23,9 +23,9 @@
 		<para>
 			The language files are located in the <filename>www/include/languages</filename> directory.
 		</para>
-		<para>The following languages are available in GForge :</para>
+		<para>The following languages are available in FusionForge :</para>
 		<itemizedlist>
-			<listitem><para>The English language, being the original one in which GForge was written, is obviously complete.</para></listitem>
+			<listitem><para>The English language, being the original one in which FusionForge was written, is obviously complete.</para></listitem>
 			<listitem><para>The french translation is complete.</para></listitem>
 			<listitem><para>The Spanish (Castillan) translation is complete.</para></listitem>
 			<listitem><para>The Korean translation used to be complete.</para></listitem>
@@ -34,7 +34,7 @@
 			<listitem><para>The Catalan translation is a work in progress.</para></listitem>
 		</itemizedlist>
 		<para>
-			You might consider translating GForge into your language. If you do so, please also consider submitting your translated file to us so that future releases of GForge include your translated file by default.
+			You might consider translating FusionForge into your language. If you do so, please also consider submitting your translated file to us so that future releases of FusionForge include your translated file by default.
 		</para>
 	</section>
 	<section>
@@ -74,7 +74,7 @@ INSERT INTO supported_languages
 				</warning>
 			</listitem>
 			<listitem>
-				<para>Submit the translation to the GForge project</para>
+				<para>Submit the translation to the FusionForge project</para>
 			</listitem>
 		</orderedlist>
 	</section>
@@ -100,7 +100,7 @@ INSERT INTO supported_languages
 	<section>
 		<title>Updating a translation</title>
 		<para>
-			GForge is constantly developed and so translation files are regularly outdated. Thus translations should be regularly updated to be uptodate.
+			FusionForge is constantly developed and so translation files are regularly outdated. Thus translations should be regularly updated to be uptodate.
 		</para>
 		<para>
 			If you are maintaining a translation file, you may find useful <filename>language_file_merger.php</filename> script you can find in tools module (see <xref linkend="cg_cvs_repository" endterm="cg_cvs_repository.title" /> for more information).
@@ -117,10 +117,10 @@ INSERT INTO supported_languages
 	<section>
 		<title>Text content customization</title>
 		<para>
-			The text content can be somewhat customized. The GForge internationalisation system already provides a way to have different texts depending on user choice.
+			The text content can be somewhat customized. The FusionForge internationalisation system already provides a way to have different texts depending on user choice.
 		</para>
 		<para>
-			You might want to change page footers, or contact pages, or host names, or whatever you need to integrate your GForge your target audience (company, organisation, or even your own personal GForge).
+			You might want to change page footers, or contact pages, or host names, or whatever you need to integrate your FusionForge your target audience (company, organisation, or even your own personal FusionForge).
 		</para>
 		<para>
 			The way you should usually go when you have to customize some text is the following:

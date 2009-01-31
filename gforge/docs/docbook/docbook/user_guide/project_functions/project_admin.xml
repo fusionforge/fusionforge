@@ -6,7 +6,7 @@
 	<section id="ug_project_project_admin_page">
 		<title>The Project Admin Page</title>
 		<para>
-			The Project Admin web page is where all the administration of the project is done from. To get there, log into GForge, and select the project from your personal page. This will bring you to the <guimenuitem>Project Summary</guimenuitem> page.
+			The Project Admin web page is where all the administration of the project is done from. To get there, log into FusionForge, and select the project from your personal page. This will bring you to the <guimenuitem>Project Summary</guimenuitem> page.
 		</para>
 		<para>
 			The Project admin page is available by clicking on the Admin tab.
@@ -83,7 +83,7 @@
 			<listitem><para>Statistics</para></listitem>
 		</itemizedlist>
 		<para>
-			It is also possible to change the home page (eg, it is possible to set up a web page on another machine, which has other information). In this case, the summary page will remain on GForge, pointing to the project, and the <emphasis>Home Page</emphasis> link will point to the pages specified in the Homepage Link field.
+			It is also possible to change the home page (eg, it is possible to set up a web page on another machine, which has other information). In this case, the summary page will remain on FusionForge, pointing to the project, and the <emphasis>Home Page</emphasis> link will point to the pages specified in the Homepage Link field.
 		</para>
 		<para>
 			You can also change the descriptive group name and the short description. If desired you can add an email address to which all Bugs, Patches, Support Requests and Task Assignments will be sent. This could be a Mailing list or just an email address.
