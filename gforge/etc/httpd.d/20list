@@ -29,7 +29,7 @@
     SSLDisable
   </IfModule>
 
-  <LimitExcept GET POST HEAD>
-    deny from all
-  </LimitExcept>
+  RewriteEngine on
+  RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK)
+  RewriteRule .* - [F]
 </VirtualHost>
