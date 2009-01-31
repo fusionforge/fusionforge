@@ -14,12 +14,13 @@
 	</head>
 	<body>
 	<blockquote>
-		<div align="center"><img src="fusionforge-resized-transp.png" /></div>
+		<div align="center">
+		<img src="fusionforge-resized-transp.png" />
 		<h4>[<a HREF="http://packages.qa.debian.org/g/gforge.html">Forge package</a> |
 		<a HREF="http://fusionforge.org">FusionForge Project</a> |
 		<a href="http://wiki.planetforge.org/">PlanetForge Wiki</a> |
 		<a href="http://planetforge.org/">PlanetForge Agregator</a>]</h4>
-			
+		</div>
 
 		<div id="tabber" class="tabber" >
 			<div class="tabbertab" title="Debian">
