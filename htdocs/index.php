@@ -4,6 +4,8 @@
 		<link rel="shortcut icon" href="favicon.ico">
 		<title>FusionForge home page</title>
 		<style type="text/css" media="screen,projection">/*<![CDATA[*/ @import "main.css"; /*]]>*/</style>
+		<link rel="stylesheet" type="text/css" href="https://fusionforge.org/themes/css/gforge.css" />
+		<link rel="stylesheet" type="text/css" href="https://fusionforge.org/themes/gforge/css/theme.css" />
 		<script type="text/javascript" src="tabber.js"></script>
 		<link rel="stylesheet" href="tabber.css" TYPE="text/css" MEDIA="screen">
 		<script type="text/javascript">
@@ -16,8 +18,7 @@
 		<h4>[<a HREF="http://packages.qa.debian.org/g/gforge.html">Forge package</a> |
 		<a HREF="http://fusionforge.org">FusionForge Project</a> |
 		<a href="http://wiki.planetforge.org/">PlanetForge Wiki</a> |
-		<a href="http://planetforge.org/">PlanetForge Agregator</a> |
-		<a href="mib.html">IRC Chat</a> ]</h4>
+		<a href="http://planetforge.org/">PlanetForge Agregator</a>]</h4>
 			
 
 		<div id="tabber" class="tabber" >
@@ -45,13 +46,36 @@ deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian intrepid main</pre>
 				<h5>then run the usual</h5>
 				<pre>apt-get update ; apt-get install fusionforge</pre>
 			</div>
+			<div class="tabbertab" title="RedHat / CentOS">
+				<h4>For Redhat or CentOS, just download the <a href="https://fusionforge.org/frs/?group_id=6">latest tarball</a> from the project</h4>
+				<p>Unpack the archive:</p>
+				<pre>tar jxf fusionforge-4.7.tar.bz2
+cd fusionforge-4.7</pre>
+				<p>Add run the installation script:</p>
+				<pre>./install.sh &lt;hostname&gt;</pre>
+				<p>Note: A Yum repository for RPM based packages is under contruction.</p>
+			</div>
 			<div class="tabbertab" title="Install CD">
 				<iframe id="installcd" src="http://<?php echo $_SERVER['SERVER_NAME']; ?>/installcd/" name="InstallCD" frameborder="0" height="50%" width="100%" scrolling="auto"></iframe>
 				<!--
 				<iframe id="installcd" src="http://www.planetforge.org/downloads/" name="InstallCD" frameborder="0" height="50%" width="100%" scrolling="auto"></iframe>
 				-->
 			</div>
-			<div class="tabbertab" title="Chat">
+			<div class="tabbertab" title="Demo">
+				<h4>You can try the latest svn build of FusionForge 4.7 on a demo website.</h4>
+				<p>URL: <a href="http://fusionforgedemo.no-ip.org/">http://fusionforgedemo.no-ip.org/</a></p>
+				
+				<p>Please be aware that this machine is recreated every day, 
+				so all your projects, tests and messages will be destroyed.</p>
+
+				<P>To login, use <b>ffadmin</b> as login and <b>ffadmin</b> as password. 
+				One logged, you will get full admin rights.</p>
+			</div>
+			<div class="tabbertab" title="VMWare image">
+				<h4>You can download a precreated VMWare image.</h4>
+				<p><a href="http://aljeux.free.fr/fusionforge/files/gf47centos52.zip">gf47centos52.zip</a></p>
+			</div>
+			<div class="tabbertab" title="Online help">
 				<h5>For more info you can join FusionForge developpers on IRC at:</h5>
 				<pre>irc.freenode.net channel #fusionforge </pre>
 				<script>

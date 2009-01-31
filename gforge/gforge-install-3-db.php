@@ -62,7 +62,7 @@ else
 # Fedora9 (an maybe newer) requires running initdb
 if ($pgservice == '/etc/init.d/postgresql') {
 	if (!is_dir("/var/lib/pgsql/data/base")) {
-		run("service postgresql initdb");
+		run("service postgresql initdb &>/dev/null", true);
 	}
 }
 

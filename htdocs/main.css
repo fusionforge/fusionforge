@@ -43,7 +43,8 @@ body {
 	background: #f9f9f9 url(headbg.jpg) 0 0 no-repeat;
 */
 	font: sans-serif;
-	background: #f9f9f9 url(gforge47etch.jpg) 0 0 ;
+/*	background: #f9f9f9 url(gforge47etch.jpg) 0 0 ; */
+	background: #f9f9f9;
 	color: black;
 	margin: 0;
 	padding: 0;
