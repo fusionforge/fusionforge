@@ -59,12 +59,12 @@ else
 	die("ERROR: Could not find Postgresql init script\n");
 }
 
-// # Fedora9 (an maybe newer) requires running initdb
-// if ($pgservice == '/etc/init.d/postgresql') {
-// 	if (!is_dir("/var/lib/pgsql/data/base")) {
-// 		run("service postgresql initdb");
-// 	}
-// }
+# Fedora9 (an maybe newer) requires running initdb
+if ($pgservice == '/etc/init.d/postgresql') {
+	if (!is_dir("/var/lib/pgsql/data/base")) {
+		run("service postgresql initdb");
+	}
+}
 
 // Might fail if it's already running, so we'll ingnore the result
 run("$pgservice start", true);
