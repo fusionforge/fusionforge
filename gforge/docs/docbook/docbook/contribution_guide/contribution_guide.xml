@@ -29,7 +29,7 @@
 	<xi:include href="&coding_standards;" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="&templating;" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="&howto_documentation;" xmlns:xi="http://www.w3.org/2001/XInclude" />
-	<xi:include href="&howto_localization;" xmlns:xi="http://www.w3.org/2001/XInclude" />
+<!-- <xi:include href="&howto_localization;" xmlns:xi="http://www.w3.org/2001/XInclude" />  -->
 	<xi:include href="&howto_xhtml;" xmlns:xi="http://www.w3.org/2001/XInclude" />
 
 </article>
