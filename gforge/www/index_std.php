@@ -48,7 +48,8 @@ echo $HTML->boxBottom();
 
 <td width="35%" valign="top">
 <?php echo $HTML->boxTop('Getting FusionForge'); ?>
-<strong>Download:</strong><br />
+<p />
+<strong><?php print _('Download'); ?></strong><br />
 <?php print _('<a href="http://fusionforge.org/project/showfiles.php?group_id=6">FusionForge archive</a>'); ?><br />
 <?php print _('<a href="http://postgresql.org/">PostgreSQL</a>'); ?><br />
 <?php print _('<a href="http://www.php.net/">PHP</a>'); ?><br />
