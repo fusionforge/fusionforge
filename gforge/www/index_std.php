@@ -50,11 +50,13 @@ echo $HTML->boxBottom();
 <?php echo $HTML->boxTop('Getting FusionForge'); ?>
 <p />
 <strong><?php print _('Download'); ?></strong><br />
-<?php print _('<a href="http://fusionforge.org/project/showfiles.php?group_id=6">FusionForge archive</a>'); ?><br />
+<?php print _('<a href="http://fusionforge.fusionforge.org/">FusionForge archive</a>'); ?><br />
+<!-- 
 <?php print _('<a href="http://postgresql.org/">PostgreSQL</a>'); ?><br />
 <?php print _('<a href="http://www.php.net/">PHP</a>'); ?><br />
 <?php print _('<a href="http://www.apache.org/">Apache</a>'); ?><br />
 <?php print _('<a href="http://www.gnu.org/software/mailman/">Mailman</a> <i>(optional)</i>'); ?><br />
+-->
 <p />
 <strong><?php print _('Get Help'); ?></strong><br />
 <a href="http://fusionforge.org/mail/?group_id=6"><?php print _('Mailing lists'); ?></a><br />
