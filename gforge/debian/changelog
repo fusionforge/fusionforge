@@ -1,4 +1,4 @@
-gforge (4.7~rc3+svn6863-1) experimental; urgency=low
+gforge (4.7~rc3+svn6864-1) experimental; urgency=low
 
   [ Roland Mas ]
   * New SVN snapshot.
@@ -8,7 +8,7 @@ gforge (4.7~rc3+svn6863-1) experimental; urgency=low
   [ Christian Bayle ]
   * Enable apache2 mod rewrite 
 
- -- Roland Mas <lolando@debian.org>  Sun, 01 Feb 2009 15:39:31 +0100
+ -- Roland Mas <lolando@debian.org>  Sun, 01 Feb 2009 15:44:51 +0100
 
 gforge (4.7~rc2-7) unstable; urgency=high
 
