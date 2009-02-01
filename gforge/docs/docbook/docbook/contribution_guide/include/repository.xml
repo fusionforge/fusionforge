@@ -1,0 +1,31 @@
+<section id="cg_repository">
+	<title id="cg_repository.title">FusionForge repository</title>
+	<section>
+		<title>Anonymous access</title>
+		<para>You can check out the FusionForge repository from fusionforge.org.</para>
+		<para>
+			The module you wish to check out must be specified as the &lt;modulename&gt;.
+		</para>
+<programlisting><![CDATA[
+TO BE COMPLETED
+]]></programlisting>
+	</section>
+	<section>
+		<title>Modules in repository</title>
+		<para>The following modules are available in FusionForge repository.</para>
+		<variablelist>
+			<varlistentry>
+				<term>gforge</term>
+				<listitem>
+					<para>Main module. Contains FusionForge software.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>tools</term>
+				<listitem>
+					<para>Contains tools which may be useful for FusionForge developers, translators and administrators.</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+</section>

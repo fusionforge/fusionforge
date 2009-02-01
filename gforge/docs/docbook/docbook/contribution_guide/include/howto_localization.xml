@@ -103,7 +103,7 @@ INSERT INTO supported_languages
 			FusionForge is constantly developed and so translation files are regularly outdated. Thus translations should be regularly updated to be uptodate.
 		</para>
 		<para>
-			If you are maintaining a translation file, you may find useful <filename>language_file_merger.php</filename> script you can find in tools module (see <xref linkend="cg_cvs_repository" endterm="cg_cvs_repository.title" /> for more information).
+			If you are maintaining a translation file, you may find useful <filename>language_file_merger.php</filename> script you can find in tools module (see <xref linkend="cg_repository" endterm="cg_repository.title" /> for more information).
 		</para>
 		<para>
 			You can use the following command to merge your outdated language file with Base.tab :
