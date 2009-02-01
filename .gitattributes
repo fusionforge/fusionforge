@@ -1,6 +1,7 @@
 * text=auto !eol
 /.bzrignore -text
 gforge/INSTALL.restricted -text
+gforge/NEWS -text
 gforge/backend/shell/apache.sh svneol=native#unset
 gforge/common/docman/Parsedata.class.php -text
 gforge/common/docman/engine/majwords.php -text

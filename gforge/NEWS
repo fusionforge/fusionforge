@@ -1,0 +1,48 @@
+Release notes for FusionForge 4.7
+---------------------------------
+
+This is the first public release of FusionForge.  FusionForge is based
+on GForge, and started as an identical copy, with only a name change
+to avoid confusion with the proprietary versions of GForge (known as
+GForge Advanced Server or GForge AS).  As such, it benefits from
+mature code and known-good infrastructure, and builds on it for the
+future.
+
+This 4.7 release is focused on bringing the recent evolutions out to
+the community in an official stable release.  This should provide a
+solid base as a starting point for community-based development, making
+it easier for enhancements to be maintained.  The FusionForge name was
+chosen to reflect this: this is a community effort, and we hope to
+hear about your improvements.  Contributing these improvements would
+make their future long-term maintenance easier for everyone.
+
+Major changes since previous versions (of GForge) include:
+-  Support for PHP5.
+-  Support for PostgreSQL 8.x.
+-  Translations are now managed by gettext.
+-  Support for several configurations running on the same code.
+-  Improved security, no need for PHP register_globals.
+-  Available as full install CD.
+-  New wiki plugins (using MediaWiki or phpWiki).
+-  New online_help plugin.
+-  New phpwebcalendar plugin.
+-  New project hierarchy plugin.
+
+Things to keep in mind when installing:
+- FusionForge is based on GForge, and the renaming is quite recent.
+  So the code still contains lots of references to GForge.  This will
+  be fixed as time passes.
+- Full text search using the primitives provided by PostgreSQL 8.3
+  isn't quite complete yet.
+- Not all plugins are packaged for all distributions yet.
+
+Things to keep in mind when upgrading:
+- Since internationalisation was changed from a hand-made system to
+  standard gettext, locally customised translations will no longer
+  override standard ones.  This will be addressed in a future release.
+
+For more up-to-date information, please visit http://fusionforge.org/
+or http://fusionforge.fusionforge.org/ -- you can even join us on IRC
+from there!
+
+ -- The FusionForge development team
