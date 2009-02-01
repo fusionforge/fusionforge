@@ -72,8 +72,9 @@ href="http://www.debian.org/"><strong>Debian</strong></a>/<a
 href="http://www.ubuntulinux.com/"><strong>Ubuntu</strong></a> and <a
 href="http://www.redhat.com/"><strong>Red Hat</strong></a>/<a
 href="http://www.fedoraproject.org/"><strong>Fedora</strong></a> is in
-progress.  Users of these systems will soon be able to "apt-get
-install fusionforge" and get a complete FusionForge system.
+progress.  Users of these systems will soon be able to install the
+"fusionforge" package through yum or apt-get and get a complete
+FusionForge system.
 '); ?><p />
 <?php
 echo $HTML->boxBottom();
