@@ -700,6 +700,10 @@ gforge/plugins/mediawiki/usr/share/mediawiki1.7/skins/gforge/wiki.png -text
 gforge/plugins/mediawiki/www/index.php -text
 gforge/plugins/online_help/common/online_help-init.php -text
 gforge/plugins/online_help/common/online_helpPlugin.class.php -text
+gforge/plugins/online_help/www/ar01s01s01.html -text
+gforge/plugins/online_help/www/ar01s01s02.html -text
+gforge/plugins/online_help/www/ar01s01s03.html -text
+gforge/plugins/online_help/www/ar01s01s04.html -text
 gforge/plugins/online_help/www/bk01s01s01.html -text
 gforge/plugins/online_help/www/bk01s01s02.html -text
 gforge/plugins/online_help/www/bk01s01s03.html -text
