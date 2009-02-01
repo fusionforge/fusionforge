@@ -126,8 +126,7 @@ install: build
 	cp -r www $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/
 	rm $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/plugins/mediawiki
 	rm $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/plugins/*
-	install -m 644 deb-specific/index_std.php $(CURDIR)/debian/gforge-web-apache2/etc/gforge/custom/
-	rm $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/index_std.php
+	install -m 644 www/index_std.php $(CURDIR)/debian/gforge-web-apache2/etc/gforge/custom/
 	find $(CURDIR)/debian/gforge-web-apache2 -name \*.uu -type f | xargs rm -f
 	rm -f $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/themes/gforge/COPYING
 	find $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www -type d -exec chmod 0755 {} \;
