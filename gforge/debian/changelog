@@ -1,14 +1,14 @@
-gforge (4.7~rc3+svn6864-1) experimental; urgency=low
+gforge (4.7-1) experimental; urgency=low
 
   [ Roland Mas ]
-  * New SVN snapshot.
+  * New upstream release.
   * Made PostgreSQL dependency stricter: some of the views only work with
     versions >= 8.1 (closes: #498811).
 
   [ Christian Bayle ]
   * Enable apache2 mod rewrite 
 
- -- Roland Mas <lolando@debian.org>  Sun, 01 Feb 2009 15:44:51 +0100
+ -- Roland Mas <lolando@debian.org>  Sun, 01 Feb 2009 19:22:16 +0100
 
 gforge (4.7~rc2-7) unstable; urgency=high
 
