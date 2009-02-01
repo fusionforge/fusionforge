@@ -1,7 +1,6 @@
 <?php
 
 require_once $gfwww.'include/Layout.class.php';
-require_once $gfcommon.'include/FusionForge.class.php';
 
 define('THEME_DIR', util_make_url ('/themes/gforge'));
 
@@ -218,17 +217,9 @@ class Theme extends Layout {
  
 <!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
 <br />
-<center>
+<div align="right">
 <a href="http://fusionforge.org/"><img src="<?php echo util_make_url ('/images/pow-fusionforge.png'); ?>" alt="Powered By FusionForge" border="0" /></a>
-<br />
-<?php
-		    $forge = new FusionForge() ;
-	    printf (_('This site is running %1$s version %2$s'),
-		    $forge->software_name,
-		    $forge->software_version) ;
-?>
-
-</center>
+</div>
 
 <?php
 global $sys_show_source;

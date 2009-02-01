@@ -14,7 +14,6 @@
  */
 
 require_once $gfwww.'search/include/SearchManager.class.php';
-require_once $gfcommon.'include/FusionForge.class.php';
 
 class Theme extends Error {
 
@@ -214,13 +213,6 @@ function footerEnd($params) { ?> <!-- PLEASE LEAVE "Powered By FusionForge" on y
 	src="<?php echo util_make_url ('/images/pow-fusionforge.png'); ?>"
 	alt="Powered By FusionForge"
 	border="0" /></a>
-<br />
-<?php
-		    $forge = new FusionForge() ;
-	    printf (_('This site is running %1$s version %2$s'),
-		    $forge->software_name,
-		    $forge->software_version) ;
-?>
 </div>
 <?php
 global $sys_show_source;

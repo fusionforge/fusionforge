@@ -1,7 +1,5 @@
 <?php
 
-require_once $gfcommon.'include/FusionForge.class.php';
-
 class Theme extends Layout {
 	/**
 	 * Theme() - Constructor
@@ -143,15 +141,9 @@ class Theme extends Layout {
 		<!-- end main body row -->
 		<!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
 		<br />
-		<center>
+		<div align="right">
 		<a href="http://fusionforge.org/">Powered By FusionForge</a><br />
-<?php
-			$forge = new FusionForge() ;
-		printf (_('This site is running %1$s version %2$s'),
-			$forge->software_name,
-			$forge->software_version) ;
-?>
-		</center>
+		</div>
 <?php		
 		global $sys_show_source;
 		if ($sys_show_source) {

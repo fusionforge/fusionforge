@@ -8,7 +8,6 @@
  *
  * @version   $Id$
  */
-require_once $gfcommon.'include/FusionForge.class.php';
 
 class Theme extends Layout {
 
@@ -174,15 +173,9 @@ if (isset($params['group']) && $params['group']) {
 </div> <!-- end of content -->
 <!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
 <br />
-<center>
+<div align="right">
 <a href="http://fusionforge.org/"><img src="<?php echo util_make_url ('/images/pow-fusionforge.png'); ?>" alt="Powered By FusionForge" border="0" /></a>
-<?php
-		    $forge = new FusionForge() ;
-	    printf (_('This site is running %1$s version %2$s'),
-		    $forge->software_name,
-		    $forge->software_version) ;
-?>
-</center>
+</div>
 
 </body>
 </html>
