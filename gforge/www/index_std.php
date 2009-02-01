@@ -4,6 +4,7 @@ require_once $gfcommon.'include/FusionForge.class.php';
 <!-- whole page table -->
 <table width="100%" cellpadding="5" cellspacing="0" border="0">
 <tr><td width="65%" valign="top">
+<div align="center"><img src="<?php echo util_make_url ('/images/fusionforge-resized.png') ?>" /></div>
 	  <h3><?php print _('FusionForge helps you manage the entire development life cycle'); ?></h3>
 <p>
 
