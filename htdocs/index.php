@@ -45,12 +45,12 @@ deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian sid main</pre>
 			</div>
 			<div class="tabbertab" title="Ubuntu">
 				<h4>For ubuntu you should create /etc/apt/sources.list.d/fusionforge file containing one of:</h4>
-				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian gutsy main
-deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian gutsy main</pre>
-				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian hardy main
-deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian hardy main</pre>
-				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian intrepid main
-deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian intrepid main</pre>
+				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu gutsy main
+deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu gutsy main</pre>
+				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu hardy main
+deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu hardy main</pre>
+				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu intrepid main
+deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu intrepid main</pre>
 				<h5>You may have to add the archive key by running:</h5>
 				<pre>wget -q http://<?php echo $_SERVER['SERVER_NAME']; ?>/key -O- | sudo apt-key add -</pre>
 				<h5>then run the usual</h5>
