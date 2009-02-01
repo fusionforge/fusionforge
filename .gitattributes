@@ -86,6 +86,7 @@ gforge/etc/local.d/60bbcode -text
 gforge/gforge-install-2.php -text
 gforge/gforge-install-3-db.php -text
 gforge/gforge-install.sh -text
+gforge/image-sources/README -text
 gforge/image-sources/fusionforge-logo.xcf -text svneol=unset#unset
 gforge/image-sources/pow-fusionforge.xcf -text svneol=unset#unset
 gforge/image-sources/top-logo.xcf -text svneol=unset#unset
@@ -2986,6 +2987,7 @@ gforge/www/images/blank.png -text
 gforge/www/images/clear.png -text
 gforge/www/images/debian-sf-icon.png -text
 gforge/www/images/favicon.ico svneol=native#unset
+gforge/www/images/fusionforge-resized.png -text svneol=unset#unset
 gforge/www/images/gantt.png -text
 gforge/www/images/gforge.jpg svneol=native#unset
 gforge/www/images/ic/caret.png -text
@@ -3280,7 +3282,6 @@ gforge/www/themes/gforge/images/ic/trash-x.png -text
 gforge/www/themes/gforge/images/ic/trash.png -text
 gforge/www/themes/gforge/images/ic/write16w.png -text
 gforge/www/themes/gforge/images/ic/xmail16w.png -text
-gforge/www/themes/gforge/images/icon.png -text svneol=unset#unset
 gforge/www/themes/gforge/images/t.png -text
 gforge/www/themes/gforge/images/t2.png -text
 gforge/www/themes/gforge/images/toptab-new/left.gif -text

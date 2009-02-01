@@ -112,8 +112,8 @@ class Theme extends Layout {
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title><?php echo $params['title']; ?></title>
-    <link rel="icon" type="image/png" href="<?php echo $this->imgroot; ?>icon.png"/>
-    <link rel="shortcut icon" href="<?php echo $this->imgroot; ?>icon.png"/>
+    <link rel="icon" type="image/png" href="<?php echo util_make_url('/images/icon.png'); ?>"/>
+    <link rel="shortcut icon" type="image/png" href="<?php echo util_make_url('/images/icon.png'); ?>"/>
     <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="<?php echo util_make_url ('/export/rss_sfnews.php'); ?>" type="application/rss+xml"/>
     <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="<?php echo util_make_url ('/export/rss20_news.php'); ?>" type="application/rss+xml"/>
     <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - New Projects RSS" href="<?php echo util_make_url ('/export/rss_sfprojects.php'); ?>" type="application/rss+xml"/>
@@ -219,7 +219,7 @@ class Theme extends Layout {
 <!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
 <br />
 <center>
-<a href="http://fusionforge.org/"><img src="/images/pow-fusionforge.png" alt="Powered By FusionForge" border="0" /></a>
+<a href="http://fusionforge.org/"><img src="<?php echo util_make_url ('/images/pow-fusionforge.png'); ?>" alt="Powered By FusionForge" border="0" /></a>
 <br />
 <?php
 		    $forge = new FusionForge() ;
