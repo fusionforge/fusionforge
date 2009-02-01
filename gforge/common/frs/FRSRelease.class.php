@@ -286,16 +286,16 @@ class FRSRelease extends Error {
 		$subject = sprintf (_('[%1$s Release] %2$s'),
 				    $this->FRSPackage->Group->getUnixName(),
 				    $this->FRSPackage->getName());
-		$text = stripcslashes(sprintf(_("Project %1$s (%2$s) has released a new version of package \"%3$s\".
+		$text = stripcslashes(sprintf(_('Project %1$s (%2$s) has released a new version of package "%3$s".
 You can download it by following this link:
 
 %4$s
 
 You receive this email because you requested to be notified when new
-versions of this package were released. If you don't wish to be
+versions of this package were released. If you don\'t wish to be
 notified in the future, please login to %5$s and click this link:
 
-%6$s"),
+%6$s'),
 					      $this->FRSPackage->Group->getPublicName(),
 					      $this->FRSPackage->Group->getUnixName(),
 					      $this->FRSPackage->getName(),
