@@ -154,7 +154,7 @@ class Theme extends Layout {
 <div class="header">
   <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-		  <td class="topLeft"><?php echo util_make_link ('/', html_image('header/top-logo.png',300,54,array('border'=>'0'))); ?></td>
+		  <td class="topLeft"><?php echo util_make_link ('/', html_image('header/top-logo.png',192,54,array('border'=>'0'))); ?></td>
         <td class="middleRight"><?php echo $this->searchBox(); ?></td>
         <td class="middleRight"><?php
         if (session_loggedin()) {
