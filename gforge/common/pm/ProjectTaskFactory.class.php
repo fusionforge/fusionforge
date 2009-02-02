@@ -176,11 +176,11 @@ class ProjectTaskFactory extends Error {
 
 		//if assigned to selected, and more to where clause
 		if ($this->assigned_to) {
-+			if (is_array ($this->assigned_to)) {
-+				$assigned_str="AND project_assigned_to.assigned_to_id IN (".join ($this->assigned_to,', ').")";
-+			} else {
-+				$assigned_str="AND project_assigned_to.assigned_to_id='".$this->assigned_to."'";
-+			}
+			if (is_array ($this->assigned_to)) {
+				$assigned_str="AND project_assigned_to.assigned_to_id IN (".join ($this->assigned_to,', ').")";
+			} else {
+				$assigned_str="AND project_assigned_to.assigned_to_id='".$this->assigned_to."'";
+			}
 			$assigned_str2=',project_assigned_to';
 			$assigned_str3='project_task_vw.project_task_id=project_assigned_to.project_task_id AND';
 
