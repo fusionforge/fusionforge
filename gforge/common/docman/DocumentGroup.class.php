@@ -2,9 +2,8 @@
 /**
  * FusionForge document manager
  *
- * Copyright 2000, Quentin Cregan
- * Copyright 2002, GForge, LLC
- * Copyright 2003, Tim Perdue
+ * Copyright 2000, Quentin Cregan/Sourceforge
+ * Copyright 2002, Tim Perdue/GForge, LLC
  *
  * This file is part of FusionForge.
  *
