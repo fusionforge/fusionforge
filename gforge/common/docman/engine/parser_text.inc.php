@@ -1,10 +1,25 @@
 <?php
 /**
- * GForge Doc Search Utilities
+ * FusionForge document search engine
  *
+ * Copyright 2005, Fabio Bertagnin
+ *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation; either version 2 of the License,
+ * or (at your option) any later version.
  * 
- * Fabio Bertagnin November 2005
+ * FusionForge is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
  *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+ * USA
  */
 
 function parser_text($fichin)
@@ -60,5 +75,10 @@ function print_debug ($text)
 	echo "$text <br />\n";
 	ob_flush();
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>
