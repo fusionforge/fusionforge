@@ -62,10 +62,11 @@ if (!$res_new || db_numrows($res_new) < 1) {
 
 	print '
 		<table width="100%" cellpadding="0" cellspacing="0" border="0">';
+	$seen = array();
 	for ($i=0; $i<$rows; $i++) {
 		$row_new = db_fetch_array($res_new);
 		// avoid dupulicates of different file types
-		if (!(@$G_RELEASE["$row_new[group_id]"])) {
+		if (!isset($seen[$row_new['group_id']])) {
 			print '
 			<tr valign="top">
 				<td colspan="2">'.
@@ -105,7 +106,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 				<hr />
 				</td>
 			</tr>';
-		$G_RELEASE["$row_new[group_id]"] = 1;
+		$seen[$row_new['group_id']] = 1;
 		}
 	}
 

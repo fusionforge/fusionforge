@@ -86,8 +86,9 @@ $res = db_query("SELECT groups.group_name AS group_name,"
 
 // ## item outputs
 $outputtotal = 0;
+$seen = array();
 while ($row = db_fetch_array($res)) {
-	if (!$G_RELEASE["$row[filerelease_id]"]) {
+	if (!isset ($seen[$row['filerelease_id']])) {
 		print "  <item>\n";
 		print "   <title>".htmlspecialchars($row['package_name'])." ".htmlspecialchars($row['module_name'])."</title>\n";
 		print "   <link>http://".$GLOBALS['sys_default_domain']."/project/showfiles.php?group_id=".$row['group_id']."&amp;release_id=".$row['filerelease_id']."</link>\n";
@@ -100,7 +101,7 @@ while ($row = db_fetch_array($res)) {
 		$outputtotal++;
 	}
 	// eliminate dupes, only do $limit of these
-	$G_RELEASE["$row[filerelease_id]"] = 1;
+	$seen[$row['filerelease_id']] = 1;
 	if ($outputtotal >= $limit) break;
 }
 // ## end output
