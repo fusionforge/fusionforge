@@ -40,7 +40,7 @@ function rss_description ($in) {
 // row and which result will be appended to description element
 function rss_dump_project_result_set ($res,$title,$desription='',$callback=0) {
         if (!$desription) $desription=$title;
-	// ## one time output
+	// one time output
 	print " <channel>\n";
 	print "  <copyright>Copyright 1999-2000 VA Linux Systems, Inc.</copyright>\n";
 	print "  <pubDate>".gmdate('D, d M Y g:i:s',time())." GMT</pubDate>\n";
@@ -50,7 +50,8 @@ function rss_dump_project_result_set ($res,$title,$desription='',$callback=0) {
 	print "  <webMaster>webmaster@$GLOBALS[sys_default_domain]</webMaster>\n";
 	print "  <language>en-us</language>\n";
 
-	// ## item outputs
+	// item outputs
+	$addendum = '' ;
 	while ($row = db_fetch_array($res)) {
                 if ($callback) {
                 	$addendum=$callback($row);
@@ -64,7 +65,7 @@ function rss_dump_project_result_set ($res,$title,$desription='',$callback=0) {
 		print "</description>\n";
 		print "  </item>\n";
 	}
-	// ## end output
+	// end output
 	print " </channel>\n";
 }
 
