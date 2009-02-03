@@ -1,37 +1,25 @@
 <?php   
 /**
- *	Group object
+ * FusionForge groups
  *
- *	Sets up database results and preferences for a group and abstracts this info.
+ * Copyright 1999-2001, VA Linux Systems, Inc.
  *
- *	Foundry.class.php and Project.class.php call this.
+ * This file is part of FusionForge.
  *
- *	Project.class.php contains all the deprecated API from the old group.php file
- *
- *	DEPENDS on user.php being present and setup properly
- *
- *	GENERALLY YOU SHOULD NEVER INSTANTIATE THIS OBJECT DIRECTLY
- *	USE group_get_object() to instantiate properly
- *
- * @version   $Id$
- * @author Tim Perdue <tperdue@valinux.com>
- * @date 2000-08-28
- *
- * This file is part of GForge.
- *
- * GForge is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * GForge is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation; either version 2 of the License,
+ * or (at your option) any later version.
+ * 
+ * FusionForge is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+ * USA
  */
 
 require_once $gfcommon.'tracker/ArtifactTypes.class.php';
