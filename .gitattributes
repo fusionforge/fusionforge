@@ -792,6 +792,8 @@ gforge/plugins/quota_management/www/index.php -text
 gforge/plugins/quota_management/www/quota.php -text
 gforge/plugins/quota_management/www/quota_admin.php -text
 gforge/plugins/quota_management/www/quota_project.php -text
+gforge/plugins/scmbzr/common/BzrPlugin.class.php -text
+gforge/plugins/scmbzr/common/scmbzr-init.php -text
 gforge/plugins/scmcvs/gforge-plugin-scmcvs.spec -text
 gforge/plugins/scmsvn/cronjobs/update_users.php -text
 gforge/plugins/scmsvn/db/scmsvn-init-mysql.sql -text
