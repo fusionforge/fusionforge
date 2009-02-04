@@ -1,7 +1,7 @@
 <?php
 /** FusionForge Subversion plugin
  *
- * Copyright 2003-2009, Roland Mas <lolando@debian.org>
+ * Copyright 2003-2009, Roland Mas
  * Copyright 2004, GForge, LLC
  *
  * This file is part of FusionForge.

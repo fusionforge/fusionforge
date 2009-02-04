@@ -1,7 +1,7 @@
 <?php
 /** FusionForge CVS plugin
  *
- * Copyright 2004-2009, Roland Mas <lolando@debian.org>
+ * Copyright 2004-2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
