@@ -3416,6 +3416,12 @@ htdocs/robots.txt -text
 htdocs/tabber.css -text
 htdocs/tabber.js -text
 htdocs/top-logo.png -text
+tests/AllTests.php -text
+tests/code/syntax/AllTests.php -text
+tests/code/syntax/SyntaxTests.php -text
+tests/unit/AllTests.php -text
+tests/unit/utils/AllTests.php -text
+tests/unit/utils/UtilsTests.php -text
 tools/export-tracker.tcl -text
 tools/make-mo.sh -text
 tools/update-gettext-files.sh -text
