@@ -64,6 +64,9 @@ class BzrPlugin extends SCM {
 		case 'scm_stats':
 			$this->getStats ($params) ;
 			break;
+		case 'scm_createrepo':
+			$this->createOrUpdateRepo ($params) ;
+			break;
 		case 'scm_plugin':
 			$scm_plugins=& $params['scm_plugins'];
 			$scm_plugins[]=$this->name;
@@ -284,13 +287,22 @@ class BzrPlugin extends SCM {
 
 		$repo = $this->bzr_root . '/' . $project->getUnixName() ;
 		$unix_group = 'scm_' . $project->getUnixName() ;
-		$pipe = popen ("bzr info $repo", "r") ;
-		$line = fgets ($pipe) ;
-		fclose ($pipe) ;
+
+		$repo_exists = false ;
+		if (is_dir ($repo)) {
+			$pipe = popen ("bzr info $repo 2>/dev/null", "r") ;
+			$line = fgets ($pipe) ;
+			fclose ($pipe) ;
 		
-		if (preg_match ("^Shared repository", $line) == 0) {
+			if (preg_match ("/^Shared repository/", $line) != 0) {
+				$repo_exists = true ;
+			}
+		}
+		
+		if (!$repo_exists) {
 			system ("bzr init-repo --no-trees $repo") ;
 		}
+
 		system ("chgrp -R $unix_group $repo") ;
 		if ($project->enableAnonSCM()) {
 			system ("chmod -R g+wXs,o+rX-w $repo") ;

@@ -1,7 +1,7 @@
 <?php
  
 $default_bzr_server = $GLOBALS['sys_scm_host'];
-$bzr_root = 'bzr';
+$bzr_root = '/var/lib/gforge/chroot/bzrroot';
 $enabled_by_default = false;
 
 // Local Variables:

@@ -52,3 +52,6 @@ INCLUDE_PATH=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www:/usr/share/gfo
 # Daily incremental backup to /backup
 # we have to discuss this 
 #15 23 * * * root [ -x /usr/lib/gforge/bin/gforge-db-backup.sh ] && /usr/lib/gforge/bin/gforge-db-backup.sh > /dev/null 2>&1
+
+# Create SCM repositories
+0 * * * * root [ -x /usr/lib/gforge/bin/create_scm_repos.php ] && /usr/lib/gforge/bin/create_scm_repos.php > /dev/null 2>&1
