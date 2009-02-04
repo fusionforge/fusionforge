@@ -31,8 +31,8 @@ class SVNPlugin extends SCM {
 		$this->hooks[] = 'scm_page';
 		$this->hooks[] = 'scm_admin_update';
 		$this->hooks[] = 'scm_admin_page';
-// to be revised		
  		$this->hooks[] = 'scm_stats';
+		$this->hooks[] = 'scm_createrepo';
 		$this->hooks[] = 'scm_plugin';
 
 		require_once $gfconfig.'plugins/scmsvn/config.php' ;
@@ -67,6 +67,9 @@ class SVNPlugin extends SCM {
 			break ;
 		case 'scm_stats':
 			$this->getStats ($params) ;
+			break;
+		case 'scm_createrepo':
+			$this->createOrUpdateRepo ($params) ;
 			break;
 		case 'scm_plugin':
 			$scm_plugins=& $params['scm_plugins'];
@@ -276,6 +279,42 @@ class SVNPlugin extends SCM {
 			echo '</tr>';
 			echo $HTML->listTableBottom();
 			echo '<hr size="1" />';
+		}
+	}
+
+	function createOrUpdateRepo ($params) {
+		return true ;   // Disabled for now
+
+		$group_id = $params['group_id'] ;
+
+		$project =& group_get_object($group_id);
+		if (!$project || !is_object($project)) {
+			return false;
+		} elseif ($project->isError()) {
+			return false;
+		}
+               
+		if (! $project->usesPlugin ($this->name)) {
+			return false;
+		}
+
+		$repo = $this->svn_root . '/' . $project->getUnixName() ;
+		$unix_group = 'scm_' . $project->getUnixName() ;
+
+		$repo_exists = false ;
+		if (is_dir ($repo) && is_file ("$repo/format")) {
+			$repo_exists = true ;
+		}
+               
+		if (!$repo_exists) {
+			system ("svnadmin create --fs-type fsfs $repo") ;
+		}
+
+		system ("chgrp -R $unix_group $repo") ;
+		if ($project->enableAnonSCM()) {
+			system ("chmod -R g+wXs,o+rX-w $repo") ;
+		} else {
+			system ("chmod -R g+wXs,o-rwx $repo") ;
 		}
 	}
   }
