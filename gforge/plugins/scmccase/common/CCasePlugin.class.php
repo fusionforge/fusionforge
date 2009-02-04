@@ -32,6 +32,7 @@ class CCasePlugin extends SCM {
 		$this->hooks[] = "scm_admin_update";
 		$this->hooks[] = "scm_admin_page";
 		$this->hooks[] = "scm_stats";
+		$this->hooks[] = "scm_createrepo";
 		$this->hooks[] = "scm_plugin";
 
 		require_once $gfconfig.'plugins/scmccase/config.php' ;
@@ -60,6 +61,9 @@ class CCasePlugin extends SCM {
 			break ;
 		case "scm_stats":
 			$this->display_stats ($params) ;
+			break;
+		case 'scm_createrepo':
+			$this->createOrUpdateRepo ($params) ;
 			break;
 		case "scm_plugin":
 			$scm_plugins=& $params['scm_plugins'];
@@ -194,6 +198,25 @@ class CCasePlugin extends SCM {
 		}
 		$res = db_query($sql);
 		db_commit () ;
+	}
+
+	function createOrUpdateRepo ($params) {
+		return true ;   // Disabled for now
+
+		$group_id = $params['group_id'] ;
+
+		$project =& group_get_object($group_id);
+		if (!$project || !is_object($project)) {
+			return false;
+		} elseif ($project->isError()) {
+			return false;
+		}
+               
+		if (! $project->usesPlugin ($this->name)) {
+			return false;
+		}
+
+		// TODO (by someone who uses ClearCase): trigger repository creation
 	}
   }
 
