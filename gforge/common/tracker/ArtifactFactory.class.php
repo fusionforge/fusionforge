@@ -223,7 +223,7 @@ class ArtifactFactory extends Error {
 		if (is_null($max_rows) || $max_rows < 0) {
 			$max_rows=50;
 		}
-		if ($default_query) {
+		if (isset ($default_query)) {
 			$this->max_rows=0;
 		} else {
 			$this->max_rows=$max_rows;

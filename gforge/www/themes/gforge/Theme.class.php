@@ -394,6 +394,7 @@ if ($sys_show_source) {
 	$TABS_DIRS = array_merge($TABS_DIRS, $PLUGIN_TABS_DIRS);
 
 	$user_is_super=false;
+	$selected = 0 ;
 	if (session_loggedin()) {
 		$projectmaster =& group_get_object(GROUP_IS_MASTER);
 		$projectstats =& group_get_object(GROUP_IS_STATS);
