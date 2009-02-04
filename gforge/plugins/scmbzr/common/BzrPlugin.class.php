@@ -265,7 +265,22 @@ class BzrPlugin extends SCM {
 			echo '<hr size="1" />';
 		}
 	}
-}
+
+	function createOrUpdateRepo ($group_id) {
+		$project =& group_get_object($group_id);
+		if (!$project || !is_object($project)) {
+			return false;
+		} elseif ($project->isError()) {
+			return false;
+		}
+		
+		if (! $project->usesPlugin ($this->name)) {
+			return false;
+		}
+		
+		
+	}
+  }
 
 // Local Variables:
 // mode: php
