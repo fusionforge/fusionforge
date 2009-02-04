@@ -3412,6 +3412,7 @@ htdocs/key -text
 htdocs/main.css -text
 htdocs/mib.html -text
 htdocs/mirror -text
+htdocs/robots.txt -text
 htdocs/tabber.css -text
 htdocs/tabber.js -text
 htdocs/top-logo.png -text
