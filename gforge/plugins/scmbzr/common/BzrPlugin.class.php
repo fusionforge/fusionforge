@@ -291,7 +291,11 @@ class BzrPlugin extends SCM {
 			system ("bzr init-repo --no-trees $repo") ;
 		}
 		system ("chgrp -R $unix_group $repo") ;
-		system ("chmod -R g+wXs $repo") ;
+		if ($project->enableAnonSCM()) {
+			system ("chmod -R g+wXs,o+rX-w $repo") ;
+		} else {
+			system ("chmod -R g+wXs,o-rwx $repo") ;
+		}
 	}
   }
 
