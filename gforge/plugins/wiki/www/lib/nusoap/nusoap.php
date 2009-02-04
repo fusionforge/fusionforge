@@ -36,7 +36,7 @@ http://www.nusphere.com
 /* load classes
 
 // necessary classes
-require_once('class.soapclient.php');
+require_once('class.nusoapclient.php');
 require_once('class.soap_val.php');
 require_once('class.soap_parser.php');
 require_once('class.soap_fault.php');
@@ -3611,24 +3611,24 @@ class soap_parser extends nusoap_base {
 
 /**
 *
-* soapclient higher level class for easy usage.
+* nusoapclient higher level class for easy usage.
 *
 * usage:
 *
 * // instantiate client with server info
-* $soapclient = new soapclient( string path [ ,boolean wsdl] );
+* $nusoapclient = new nusoapclient( string path [ ,boolean wsdl] );
 *
 * // call method, get results
-* echo $soapclient->call( string methodname [ ,array parameters] );
+* echo $nusoapclient->call( string methodname [ ,array parameters] );
 *
 * // bye bye client
-* unset($soapclient);
+* unset($nusoapclient);
 *
 * @author   Dietrich Ayala <dietrich@ganx4.com>
 * @version  v 0.6.3
 * @access   public
 */
-class soapclient extends nusoap_base  {
+class nusoapclient extends nusoap_base  {
 
     var $username = '';
     var $password = '';
@@ -3664,7 +3664,7 @@ class soapclient extends nusoap_base  {
      * @param	int $portName optional portName in WSDL document
      * @access   public
      */
-    function soapclient($endpoint,$wsdl = false){
+    function nusoapclient($endpoint,$wsdl = false){
         $this->endpoint = $endpoint;
 
         // make values
@@ -4057,7 +4057,7 @@ class soapclient extends nusoap_base  {
                 }
             }
             $r = rand();
-            $evalStr = 'class soap_proxy_'.$r.' extends soapclient {
+            $evalStr = 'class soap_proxy_'.$r.' extends nusoapclient {
 				'.$evalStr.'
 			}';
             //print "proxy class:<pre>$evalStr</pre>";
