@@ -86,6 +86,12 @@ install: build
 	find $(CURDIR)/debian/gforge-plugin-scmsvn/usr/share/gforge/plugins/scmsvn/cronjobs/ -type f | xargs chmod 0755
 	cp -r plugins/scmsvn/etc/plugins/scmsvn/* $(CURDIR)/debian/gforge-plugin-scmsvn/etc/gforge/plugins/scmsvn/
 
+	# gforge-plugin-scmbzr
+	# cp -r plugins/scmbzr/bin/* $(CURDIR)/debian/gforge-plugin-scmbzr/usr/lib/gforge/plugins/scmbzr/bin/
+	cp -r plugins/scmbzr/common/* $(CURDIR)/debian/gforge-plugin-scmbzr/usr/share/gforge/plugins/scmbzr/common/
+	# cp -r plugins/scmbzr/cronjobs/* $(CURDIR)/debian/gforge-plugin-scmbzr/usr/share/gforge/plugins/scmbzr/cronjobs/
+	# cp -r plugins/scmbzr/etc/plugins/scmbzr/* $(CURDIR)/debian/gforge-plugin-scmbzr/etc/gforge/plugins/scmbzr/
+
 	# gforge-plugin-mediawiki
 	cp -r plugins/mediawiki/common/* $(CURDIR)/debian/gforge-plugin-mediawiki/usr/share/gforge/plugins/mediawiki/common/
 	cp -r plugins/mediawiki/www/* $(CURDIR)/debian/gforge-plugin-mediawiki/usr/share/gforge/www/plugins/mediawiki/

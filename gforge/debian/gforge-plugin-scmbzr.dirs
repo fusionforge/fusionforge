@@ -1,0 +1,6 @@
+etc/gforge/httpd.d
+etc/gforge/plugins/scmbzr
+usr/lib/gforge/plugins/scmbzr/bin
+usr/share/gforge/plugins/scmbzr/cronjobs
+usr/share/gforge/plugins/scmbzr/common
+var/lib/gforge/chroot/bzrroot

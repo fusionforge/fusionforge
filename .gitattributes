@@ -48,6 +48,7 @@ gforge/debian/compat -text
 gforge/debian/gforge-plugin-mediawiki.dirs -text
 gforge/debian/gforge-plugin-mediawiki.postinst -text
 gforge/debian/gforge-plugin-mediawiki.prerm -text
+gforge/debian/gforge-plugin-scmbzr.dirs -text
 gforge/debian/gforge-plugin-scmcvs.cron.d -text
 gforge/debian/gforge-plugin-scmcvs.dirs -text
 gforge/debian/gforge-plugin-scmcvs.postinst -text
