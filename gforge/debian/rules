@@ -90,7 +90,7 @@ install: build
 	# cp -r plugins/scmbzr/bin/* $(CURDIR)/debian/gforge-plugin-scmbzr/usr/lib/gforge/plugins/scmbzr/bin/
 	cp -r plugins/scmbzr/common/* $(CURDIR)/debian/gforge-plugin-scmbzr/usr/share/gforge/plugins/scmbzr/common/
 	# cp -r plugins/scmbzr/cronjobs/* $(CURDIR)/debian/gforge-plugin-scmbzr/usr/share/gforge/plugins/scmbzr/cronjobs/
-	# cp -r plugins/scmbzr/etc/plugins/scmbzr/* $(CURDIR)/debian/gforge-plugin-scmbzr/etc/gforge/plugins/scmbzr/
+	cp -r plugins/scmbzr/etc/plugins/scmbzr/* $(CURDIR)/debian/gforge-plugin-scmbzr/etc/gforge/plugins/scmbzr/
 
 	# gforge-plugin-mediawiki
 	cp -r plugins/mediawiki/common/* $(CURDIR)/debian/gforge-plugin-mediawiki/usr/share/gforge/plugins/mediawiki/common/

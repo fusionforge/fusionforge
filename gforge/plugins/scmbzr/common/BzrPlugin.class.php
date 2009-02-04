@@ -105,43 +105,44 @@ class BzrPlugin extends SCM {
 				print '<p>';
 				print _("To check out one of these branches:") ;
 				print "<br />" ;
-				print '<tt>bzr checkout http://' . $project->getSCMBox(). '/' . $this->svn_root .'/'. $project->getUnixName() .'<i>'._('branchname').'</i></tt>') ;
-			print '</p>';
-		}
-		
-		// Developer Access
-		echo _('<p><b>Developer Bazaar Access via SSH</b></p><p>Only project developers can access the Bazaar branches tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
-		print '<p><tt>bzr checkout bzr+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. $this->svn_root .'/'. $project->getUnixName().'/'._('branchname').'</tt></p>' ;
-		
-		// Bazaar Snapshot
-		if ($displaySvnBrowser) {
-			$filename=$project->getUnixName().'-scm-latest.tar.gz';
-			if (file_exists($sys_scm_snapshots_path.'/'.$filename)) {
-				print '<p>[' ;
-				print util_make_link ("/snapshots.php?group_id=$group_id",
-						      _('Download The Nightly Bazaar Tree Snapshot')
-					) ;
-				print ']</p>';
+				print '<tt>bzr checkout http://' . $project->getSCMBox(). '/' . $this->svn_root .'/'. $project->getUnixName() .'<i>'._('branchname').'</i></tt>' ;
+				print '</p>';
 			}
+		
+			// Developer Access
+			echo _('<p><b>Developer Bazaar Access via SSH</b></p><p>Only project developers can access the Bazaar branches tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
+			print '<p><tt>bzr checkout bzr+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. $this->svn_root .'/'. $project->getUnixName().'/'._('branchname').'</tt></p>' ;
+		
+			// Bazaar Snapshot
+			if ($displaySvnBrowser) {
+				$filename=$project->getUnixName().'-scm-latest.tar.gz';
+				if (file_exists($sys_scm_snapshots_path.'/'.$filename)) {
+					print '<p>[' ;
+					print util_make_link ("/snapshots.php?group_id=$group_id",
+							      _('Download The Nightly Bazaar Tree Snapshot')
+						) ;
+					print ']</p>';
+				}
+			}
+		
+			print '</td><td width="35%" valign="top">' ;
+			// Bazaar Browsing
+		
+			echo $HTML->boxTop(_('Repository History'));
+			echo _('Not implemented yet');
+			/*				echo $this->getDetailedStats(array('group_id'=>$group_id)).'<p>';
+			 if ($displaySvnBrowser) {
+			 echo _('<b>Browse the Bazaar Tree</b><p>Browsing the Bazaar tree gives you a great view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
+			 echo '<p>[' ;
+			 echo util_make_link ("/scm/viewvc.php/?root=".$project->getUnixName(),
+			 _('Browse Bazaar Repository')
+			 ) ;
+			 echo ']</p>' ;
+			 }
+			*/
+			echo $HTML->boxBottom();
+			print '</td></tr></table>' ;
 		}
-		
-		print '</td><td width="35%" valign="top">' ;
-		// Bazaar Browsing
-		
-		echo $HTML->boxTop(_('Repository History'));
-		echo _('Not implemented yet');
-		/*				echo $this->getDetailedStats(array('group_id'=>$group_id)).'<p>';
-		 if ($displaySvnBrowser) {
-		 echo _('<b>Browse the Bazaar Tree</b><p>Browsing the Bazaar tree gives you a great view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
-		 echo '<p>[' ;
-		 echo util_make_link ("/scm/viewvc.php/?root=".$project->getUnixName(),
-		 _('Browse Bazaar Repository')
-		 ) ;
-		 echo ']</p>' ;
-		 }
-		*/
-		echo $HTML->boxBottom();
-		print '</td></tr></table>' ;
 	}
 	
 	function AdminUpdate ($params) {
