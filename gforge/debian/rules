@@ -126,6 +126,7 @@ install: build
 	find $(CURDIR)/debian/gforge-common/usr/share/gforge/common -type f -exec chmod 0644 {} \;
 	find $(CURDIR)/debian/gforge-common/usr/share/gforge/common/docman/engine/ -type f -name \*.php -not -name \*.inc.php -exec chmod 0755 {} \;
 	find $(CURDIR)/debian/gforge-common/usr/share/gforge/common/docman/engine/ -type f -name \*.sh -exec chmod 0755 {} \;
+	install -m 755 cronjobs/create_scm_repos.php $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 	cp -r locales/* $(CURDIR)/debian/gforge-common/usr/share/locale/
 
 	# gforge/debian/gforge-web-apache2
