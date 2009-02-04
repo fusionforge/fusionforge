@@ -65,8 +65,8 @@ if ( $perm->isAdmin() ) {
 		_('Operation Not Permitted'),
 		sprintf (_('You cannot remove yourself from this project, because you are admin of it. You should ask other admin to reset your admin privilege first. If you are the only admin of the project, please consider posting availability notice to <a href="%s">Help Wanted Board</a> and be ready to pass admin privilege to interested party.'),
 			 util_make_url ("/people/")
-			); 
-	);
+			)
+		);
 }
 
 echo site_user_header(array('title'=>_('Quitting Project')));

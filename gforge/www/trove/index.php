@@ -188,7 +188,7 @@ if ($querytotalcount > $TROVE_BROWSELIMIT) {
 $html_limit .= '</span>';
 
 print $html_limit."<hr />\n";
-*/
+
 ?><table border="0" cellpadding="0" width="100%"><?php
 while($project = db_fetch_array($projectsResult)) {
 	?>

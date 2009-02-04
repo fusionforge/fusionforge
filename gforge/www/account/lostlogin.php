@@ -86,7 +86,7 @@ if (getStringFromRequest("submit")) {
 
 		$HTML->header(array('title'=>"Password changed"));
 		printf (_('<h2>Password changed</h2><p>Congratulations, you have re-set your account password. You may <a href="%1$s">login</a> to the site now.</p>',
-			  util_make_url ("/account/login.php"));
+			  util_make_url ("/account/login.php")));
 		$HTML->footer(array());
 		exit();
 	}
