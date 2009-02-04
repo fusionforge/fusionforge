@@ -152,6 +152,7 @@ class ArtifactFactory extends Error {
 				//default to open
 				$_assigned_to=0;
 				$_status=1;
+				$_changed=0;
 			}
 		}
 
@@ -206,6 +207,7 @@ class ArtifactFactory extends Error {
 					$u->deletePreference('art_query'.$this->ArtifactType->getID());
 				}
 			}
+			$_changed=0;
 		}
 
 		$this->sort=$_sort_ord;
