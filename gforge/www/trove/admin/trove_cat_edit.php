@@ -74,7 +74,7 @@ switch($do) {
 	Main Code
 */
 
-site_admin_header(array('title'=>_('Site Admin: Trove - Category List')) ;
+site_admin_header(array('title'=>_('Site Admin: Trove - Category List'))) ;
 ?>
 
 <table width="100%" border="0">
