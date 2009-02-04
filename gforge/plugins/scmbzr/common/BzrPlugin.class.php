@@ -32,6 +32,7 @@ class BzrPlugin extends SCM {
 		$this->hooks[] = 'scm_admin_page';
  		$this->hooks[] = 'scm_stats';
 		$this->hooks[] = 'scm_plugin';
+		$this->hooks[] = 'scm_createrepo';
 
 		require_once $gfconfig.'plugins/scmbzr/config.php' ;
 		
@@ -266,7 +267,9 @@ class BzrPlugin extends SCM {
 		}
 	}
 
-	function createOrUpdateRepo ($group_id) {
+	function createOrUpdateRepo ($params) {
+		$group_id = $params['group_id'] ;
+
 		$project =& group_get_object($group_id);
 		if (!$project || !is_object($project)) {
 			return false;
@@ -277,8 +280,18 @@ class BzrPlugin extends SCM {
 		if (! $project->usesPlugin ($this->name)) {
 			return false;
 		}
+
+		$repo = $this->bzr_root . '/' . $project->getUnixName() ;
+		$unix_group = 'scm_' . $project->getUnixName() ;
+		$pipe = popen ("bzr info $repo", "r") ;
+		$line = fgets ($pipe) ;
+		fclose ($pipe) ;
 		
-		
+		if (preg_match ("^Shared repository", $line) == 0) {
+			system ("bzr init-repo --no-trees $repo") ;
+		}
+		system ("chgrp -R $unix_group $repo") ;
+		system ("chmod -R g+wXs $repo") ;
 	}
   }
 
