@@ -1,5 +1,5 @@
 <?php
-  /** FusionForge Bazaar plugin
+  /** FusionForge CVS plugin
    *
    * Copyright 2004-2009, Roland Mas <lolando@debian.org>
    *
@@ -32,7 +32,7 @@ class CVSPlugin extends SCM {
 		$this->hooks[] = 'scm_admin_update';
 		$this->hooks[] = 'scm_admin_page';
 		$this->hooks[] = 'scm_stats';
-
+		$this->hooks[] = 'scm_createrepo' ;
 		$this->hooks[] = 'scm_plugin';
 
 		require_once $GLOBALS['gfconfig'].'plugins/scmcvs/config.php' ;
@@ -70,6 +70,9 @@ class CVSPlugin extends SCM {
 			break ;
 		case 'scm_stats':
 			$this->getStats ($params) ;
+			break;
+		case 'scm_createrepo':
+			$this->createOrUpdateRepo ($params) ;
 			break;
 		case 'scm_plugin':
 			$scm_plugins=& $params['scm_plugins'];
@@ -263,6 +266,42 @@ class CVSPlugin extends SCM {
 			echo '</tr>';
 			echo $HTML->listTableBottom();
 			echo '<hr size="1" />';
+		}
+	}
+
+	function createOrUpdateRepo ($params) {
+		return true ;	// Disabled for now
+
+		$group_id = $params['group_id'] ;
+
+		$project =& group_get_object($group_id);
+		if (!$project || !is_object($project)) {
+			return false;
+		} elseif ($project->isError()) {
+			return false;
+		}
+		
+		if (! $project->usesPlugin ($this->name)) {
+			return false;
+		}
+
+		$repo = $this->cvs_root . '/' . $project->getUnixName() ;
+		$unix_group = 'scm_' . $project->getUnixName() ;
+
+		$repo_exists = false ;
+		if (is_dir ($repo) && is_dir ("$repo/CVSROOT")) {
+			$repo_exists = true ;
+		}
+		
+		if (!$repo_exists) {
+			system ("cvs -d$repo init") ;
+		}
+
+		system ("chgrp -R $unix_group $repo") ;
+		if ($project->enableAnonSCM()) {
+			system ("chmod -R g+wXs,o+rX-w $repo") ;
+		} else {
+			system ("chmod -R g+wXs,o-rwx $repo") ;
 		}
 	}
   }
