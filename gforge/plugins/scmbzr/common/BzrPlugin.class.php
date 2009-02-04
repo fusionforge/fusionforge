@@ -30,7 +30,6 @@ class BzrPlugin extends SCM {
 		$this->hooks[] = 'scm_page';
 		$this->hooks[] = 'scm_admin_update';
 		$this->hooks[] = 'scm_admin_page';
-// to be revised		
  		$this->hooks[] = 'scm_stats';
 		$this->hooks[] = 'scm_plugin';
 
@@ -88,73 +87,62 @@ class BzrPlugin extends SCM {
 			// project enables anonymous Bazaar
 			$displayBzrBrowser = $project->enableAnonSCM();
 
-			// ######################## Table for summary info
-			?>
-			<table width="100%">
-			<tr valign="top">
-				<td width="65%">
-				<?php
-				print _('<p>Documentation for Bazaar (sometimes referred to as "bzr") is available <a href="http://doc.bazaar-vcs.org/latest/en/user-guide/index.html">here</a>.</p>');
-
-				// Anonymous Bazaar Instructions
-				if ($project->enableAnonSCM()) {
-					print _("<p><b>Anonymous Bazaar Access</b></p><p>This project's Bazaar repository can be accessed anonymously through HTTP.</p>");
-					print '<p>';
-					print _("A list of available branches can be obtained with the following command:") ;
-					print "<br />" ;
-					print '<tt>bzr branches http://' . $project->getSCMBox(). '/' . $this->svn_root .'/'. $project->getUnixName() .'</tt>';
-					print '</p>';
-					print '<p>';
-					print _("To check out one of these branches:") ;
-					print "<br />" ;
-					print '<tt>bzr checkout http://' . $project->getSCMBox(). '/' . $this->svn_root .'/'. $project->getUnixName() .'<i>'._('branchname').'</i></tt>') ;
-					print '</p>';
-				}
-	
-				// Developer Access
-				echo _('<p><b>Developer Bazaar Access via SSH</b></p><p>Only project developers can access the Bazaar branches tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
-				print '<p><tt>bzr checkout bzr+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. $this->svn_root .'/'. $project->getUnixName().'/'._('branchname').'</tt></p>' ;
-				}
-
-				// Bazaar Snapshot
-				if ($displaySvnBrowser) {
-					$filename=$project->getUnixName().'-scm-latest.tar.gz';
-					if (file_exists($sys_scm_snapshots_path.'/'.$filename)) {
-						print '<p>[' ;
-						print util_make_link ("/snapshots.php?group_id=$group_id",
-								      _('Download The Nightly Bazaar Tree Snapshot')
-							) ;
-						print ']</p>';
-					}
-				}
-				?>
-				</td>
-
-				<td width="35%" valign="top">
-				<?php
-				// Bazaar Browsing
-
-				echo $HTML->boxTop(_('Repository History'));
-				echo _('Not implemented yet');
-					  /*				echo $this->getDetailedStats(array('group_id'=>$group_id)).'<p>';
-				if ($displaySvnBrowser) {
-					echo _('<b>Browse the Bazaar Tree</b><p>Browsing the Bazaar tree gives you a great view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
-					echo '<p>[' ;
-					echo util_make_link ("/scm/viewvc.php/?root=".$project->getUnixName(),
-							     _('Browse Bazaar Repository')
-						) ;
-					echo ']</p>' ;
-				}
-					  */
-				echo $HTML->boxBottom();
-				?>
-				</td>
-			</tr>
-			</table>
-			<?php
+			// Table for summary info
+			print ('<table width="100%">
+				 <tr valign="top">
+				 <td width="65%">') ;
+			print _('<p>Documentation for Bazaar (sometimes referred to as "bzr") is available <a href="http://doc.bazaar-vcs.org/latest/en/user-guide/index.html">here</a>.</p>');
+			
+			// Anonymous Bazaar Instructions
+			if ($project->enableAnonSCM()) {
+				print _("<p><b>Anonymous Bazaar Access</b></p><p>This project's Bazaar repository can be accessed anonymously through HTTP.</p>");
+				print '<p>';
+				print _("A list of available branches can be obtained with the following command:") ;
+				print "<br />" ;
+				print '<tt>bzr branches http://' . $project->getSCMBox(). '/' . $this->svn_root .'/'. $project->getUnixName() .'</tt>';
+				print '</p>';
+				print '<p>';
+				print _("To check out one of these branches:") ;
+				print "<br />" ;
+				print '<tt>bzr checkout http://' . $project->getSCMBox(). '/' . $this->svn_root .'/'. $project->getUnixName() .'<i>'._('branchname').'</i></tt>') ;
+			print '</p>';
 		}
+		
+		// Developer Access
+		echo _('<p><b>Developer Bazaar Access via SSH</b></p><p>Only project developers can access the Bazaar branches tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
+		print '<p><tt>bzr checkout bzr+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. $this->svn_root .'/'. $project->getUnixName().'/'._('branchname').'</tt></p>' ;
+		
+		// Bazaar Snapshot
+		if ($displaySvnBrowser) {
+			$filename=$project->getUnixName().'-scm-latest.tar.gz';
+			if (file_exists($sys_scm_snapshots_path.'/'.$filename)) {
+				print '<p>[' ;
+				print util_make_link ("/snapshots.php?group_id=$group_id",
+						      _('Download The Nightly Bazaar Tree Snapshot')
+					) ;
+				print ']</p>';
+			}
+		}
+		
+		print '</td><td width="35%" valign="top">' ;
+		// Bazaar Browsing
+		
+		echo $HTML->boxTop(_('Repository History'));
+		echo _('Not implemented yet');
+		/*				echo $this->getDetailedStats(array('group_id'=>$group_id)).'<p>';
+		 if ($displaySvnBrowser) {
+		 echo _('<b>Browse the Bazaar Tree</b><p>Browsing the Bazaar tree gives you a great view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
+		 echo '<p>[' ;
+		 echo util_make_link ("/scm/viewvc.php/?root=".$project->getUnixName(),
+		 _('Browse Bazaar Repository')
+		 ) ;
+		 echo ']</p>' ;
+		 }
+		*/
+		echo $HTML->boxBottom();
+		print '</td></tr></table>' ;
 	}
-
+	
 	function AdminUpdate ($params) {
 		$group =& group_get_object($params['group_id']);
 		if (!$group || !is_object($group)) {
@@ -186,8 +174,8 @@ class BzrPlugin extends SCM {
 		if ( $group->usesPlugin ( $this->name ) && $group->isPublic()) {
 			?>
 			<p><input type="checkbox" name="scmbzr_enable_anon_bzr" value="1" <?php echo $this->c($group->enableAnonSCM()); ?> /><strong><?php echo _('Enable Anonymous Access') ?></strong></p>
-			<?php
-		}
+																		      <?php
+																		      }
 	}
 
 	function getStats ($params) {
@@ -239,7 +227,7 @@ class BzrPlugin extends SCM {
 				_('Name'),
 				_('Adds'),
 				_('Updates')
-			);
+				);
 			echo $HTML->listTableTop($tableHeaders);
 
 			$i = 0;
@@ -257,7 +245,7 @@ class BzrPlugin extends SCM {
 			}
 			list($commit_num, $add_num) = $this->getTotalStats($group_id);
 			if ($commit_num > $total['commits'] ||
-				$add_num > $total['adds']) {
+			    $add_num > $total['adds']) {
 				echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
 				echo '<td width="50%">' .
 					_('Unknown') .
