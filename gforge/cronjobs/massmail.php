@@ -108,7 +108,7 @@ if (!$table_mapping[$type]) {
 
 $subj = db_result($mail_res, 0, 'subject');
 $mail_id = db_result($mail_res, 0, 'id');
-
+$body =  db_result($mail_res, 0, 'message');
 //$err .= "Got mail to send: ".$subj."\n";
 
 $sql = "SELECT DISTINCT users.user_id,users.user_name,users.realname,users.email,users.confirm_hash
