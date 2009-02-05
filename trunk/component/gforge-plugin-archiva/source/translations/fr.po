@@ -1,0 +1,67 @@
+#: plugincore/include/ArchivaPlugin.class.php:48 pluginwww/index.php:63
+#: pluginwww/index.php:76 pluginwww/index.php:83 pluginwww/index.php:91
+#: pluginwww/index.php:99 pluginwww/index.php:102 pluginwww/index.php:111
+msgid "title_site_admin"
+msgstr "Administration du plugin Archiva"
+
+#: pluginwww/index.php:41
+msgid "empty_remote_url"
+msgstr "L'URL spécifiée est vide."
+
+#: pluginwww/index.php:48
+msgid "empty_admin_username"
+msgstr "L'identifiant spécifié est vide."
+
+#: pluginwww/index.php:55
+msgid "empty_admin_password"
+msgstr "Le mot de passe spécifié est vide."
+
+#: pluginwww/index.php:63 pluginwww/index.php:76 pluginwww/index.php:83
+#: pluginwww/index.php:91 pluginwww/index.php:99
+msgid "database_error"
+msgstr "Une erreur est survenue lors de l'accès à la base de données."
+
+#: pluginwww/index.php:106
+msgid "back_to_site_admin"
+msgstr "Retour à l'administration du plugin Archiva."
+
+#: pluginwww/index.php:112
+msgid "plugin_config"
+msgstr "Configuration du plugin"
+
+#: pluginwww/index.php:115
+msgid "remote_url"
+msgstr "Serveur"
+
+#: pluginwww/index.php:117
+#, php-format
+msgid "remote_url_info"
+msgstr "URL du serveur Archiva, par example \"http://%1$s:8080/archiva/\""
+
+#: pluginwww/index.php:121
+msgid "admin_username"
+msgstr "Identifiant"
+
+#: pluginwww/index.php:123
+msgid "admin_username_info"
+msgstr "Identifiant de l'administrateur Archiva"
+
+#: pluginwww/index.php:127
+msgid "admin_password"
+msgstr "Mot de passe"
+
+#: pluginwww/index.php:129
+msgid "admin_password_info"
+msgstr "Mot de passe de l'administrateur Archiva"
+
+#: pluginwww/index.php:134
+msgid "submit_archiva_config"
+msgstr "Envoyer"
+
+#: pluginwww/index.php:136
+msgid "archiva_admin"
+msgstr "Administration d'Archiva"
+
+#: pluginwww/index.php:138
+msgid "click_here"
+msgstr "Cliquez ici"

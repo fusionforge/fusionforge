@@ -1,0 +1,85 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-01-11 19:31+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: plugincore/include/ArchivaPlugin.class.php:48 pluginwww/index.php:63
+#: pluginwww/index.php:76 pluginwww/index.php:83 pluginwww/index.php:91
+#: pluginwww/index.php:99 pluginwww/index.php:102 pluginwww/index.php:111
+msgid "title_site_admin"
+msgstr ""
+
+#: pluginwww/index.php:41
+msgid "empty_remote_url"
+msgstr ""
+
+#: pluginwww/index.php:48
+msgid "empty_admin_username"
+msgstr ""
+
+#: pluginwww/index.php:55
+msgid "empty_admin_password"
+msgstr ""
+
+#: pluginwww/index.php:63 pluginwww/index.php:76 pluginwww/index.php:83
+#: pluginwww/index.php:91 pluginwww/index.php:99
+msgid "database_error"
+msgstr ""
+
+#: pluginwww/index.php:106
+msgid "back_to_site_admin"
+msgstr ""
+
+#: pluginwww/index.php:112
+msgid "plugin_config"
+msgstr ""
+
+#: pluginwww/index.php:115
+msgid "remote_url"
+msgstr ""
+
+#: pluginwww/index.php:117
+#, php-format
+msgid "remote_url_info"
+msgstr ""
+
+#: pluginwww/index.php:121
+msgid "admin_username"
+msgstr ""
+
+#: pluginwww/index.php:123
+msgid "admin_username_info"
+msgstr ""
+
+#: pluginwww/index.php:127
+msgid "admin_password"
+msgstr ""
+
+#: pluginwww/index.php:129
+msgid "admin_password_info"
+msgstr ""
+
+#: pluginwww/index.php:134
+msgid "submit_archiva_config"
+msgstr ""
+
+#: pluginwww/index.php:136
+msgid "archiva_admin"
+msgstr ""
+
+#: pluginwww/index.php:138
+msgid "click_here"
+msgstr ""

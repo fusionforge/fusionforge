@@ -1,0 +1,62 @@
+Subversion to Mantis plugin for GForge
+**************************************
+
+
+How to configure and enable the plugin ?
+----------------------------------------
+
+This plugin does not require any configuration, you just need to
+enable it at the site and project level.
+
+To enable or disable the link, a cronjob is run evey hour past 5
+to check the groups using the scmsvn plugin.
+
+If a group has the mantis and svn2mantis plugins enabled, the
+cronjob add (if not already there) 3 lines in the hooks/post-commit
+file of the repository:
+  # BEGIN gforge svn2mantis plugin
+  /usr/bin/wget -O - --no-proxy --header='PassPhrase: <passphrase of the private key file>' http[s]://<host name>/plugins/svn2mantis/commit.php?group_id=<group id>\&revision=$2
+  # END gforge svn2mantis plugin
+
+If the mantis or svn2mantis plugins are not enabled, the cronjob
+removes the following lines and what is between them:
+  # BEGIN gforge svn2mantis plugin
+  # END gforge svn2mantis plugin
+
+
+How to use the plugin ?
+-----------------------
+
+When a Subversion commit happens, the hooks-post-commit file
+is executed and calls the commit.php script through wget.
+
+The commit.php script checks every line of the log for the
+following pattern:
+  MANTIS[:<Mantis project id>]:[F]<Bug id>[ [F]<Bug id>[...]]
+
+<Mantis project id>: identifier of a Mantis project.
+                     ATTENTION: this identifier can be found in
+                     the URL of the Mantis plugin for GForge display tab:
+                     http://gforge.example.com/plugins/mantis/proxy/<Mantis project id>/
+
+<Bug id>: identifier of a Mantis bug.
+
+A pattern must be on a single line, and nothing else may be on that line.
+
+Multiple patterns can be present on different lines of the log,
+allowing to use different Mantis projects.
+
+A pattern can contain multiple bug identifiers.
+
+A bug identifier can be precedeed by a 'F': the Mantis bug will be considered
+fixed, and its status and resolution modified accordingly to the
+source_control_set_status_to and source_control_set_resolution_to parameters
+of the Mantis configuration.
+
+If you have a Mantis project with identifier 67 and want to fix bug 145
+and only add a note for bugs 151 and 203, add the following line in your
+commit message:
+  MANTIS:67:F145 151 203
+If you have a single Mantis projectin your GForge group, you can omit the
+Mantis project identifier:
+  MANTIS:F145 151 203

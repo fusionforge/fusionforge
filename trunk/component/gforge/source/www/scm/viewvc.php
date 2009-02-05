@@ -8,7 +8,7 @@
  * Copyright (c) Xerox Corporation, CodeX / CodeX Team, 2001,2002. All Rights Reserved.
  * http://codex.xerox.com
  *
- * @version   $Id: viewvc.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: viewvc.php 6672 2008-11-19 19:23:39Z aljeux $
  */
 
 // make sure we're not compressing output if we are making a tarball
@@ -131,7 +131,7 @@ if (viewcvs_is_html()) {
 	// If we output html and we found the mbstring extension, we
 	// should try to encode the output of ViewCVS in UTF-8
 	if (extension_loaded('mbstring')) {
-		$encoding = mb_detect_encoding($content);
+		$encoding = mb_detect_encoding($content, 'UTF-8, ISO-8859-1');
 		if($encoding != 'UTF-8') {
 			$content = mb_convert_encoding($content, 'UTF-8', $encoding);
 		}

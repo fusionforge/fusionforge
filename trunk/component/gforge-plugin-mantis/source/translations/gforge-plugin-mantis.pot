@@ -1,0 +1,538 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-01-16 02:20+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: gforgewww/pm/add_task.php:21 pluginwww/addpm.php:47 pluginwww/addpm.php:66
+#: pluginwww/addpm.php:81 pluginwww/addpm.php:86 pluginwww/addpm.php:91
+#: pluginwww/addpm.php:104 pluginwww/addpm.php:126
+msgid "title"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:33
+msgid "category"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:34
+msgid "admin"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:38 gforgewww/pm/add_task.php:125
+#: gforgewww/pm/add_task.php:139
+msgid "submit"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:44
+msgid "percent_complete"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:48
+msgid "priority"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:55
+msgid "summary"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:62
+msgid "details"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:73 gforgewww/pm/add_task.php:134
+msgid "hours"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:80
+msgid "start_date"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:87
+msgid "date_note"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:88
+msgid "view_calendar"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:95
+msgid "end_date"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:109
+msgid "assigned_to"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:115
+msgid "dependent"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:119
+msgid "dependent_note"
+msgstr ""
+
+#: gforgewww/pm/task.php:88
+msgid "task_created_successfully"
+msgstr ""
+
+#: gforgewww/pm/task.php:120 gforgewww/pm/task.php:213
+msgid "task_updated_successfully"
+msgstr ""
+
+#: gforgewww/pm/task.php:237
+msgid "task_added_relationship"
+msgstr ""
+
+#: gforgewww/pm/task.php:278
+msgid "task_delete_failed_confirm"
+msgstr ""
+
+#: gforgewww/pm/task.php:282
+msgid "task_delete_failed"
+msgstr ""
+
+#: gforgewww/pm/task.php:284
+msgid "task_deleted_successfully"
+msgstr ""
+
+#: plugincore/include/MantisPlugin.class.php:72
+msgid "tab_title"
+msgstr ""
+
+#: plugincore/include/MantisPlugin.class.php:87
+msgid "use_mantis"
+msgstr ""
+
+#: plugincore/include/MantisPlugin.class.php:108 pluginwww/admin.php:50
+#: pluginwww/admin.php:55 pluginwww/admin.php:64 pluginwww/admin.php:66
+#: pluginwww/admin.php:67
+msgid "title_admin"
+msgstr ""
+
+#: plugincore/include/MantisPlugin.class.php:112 pluginwww/siteAdmin.php:49
+#: pluginwww/siteAdmin.php:59 pluginwww/siteAdmin.php:95
+#: pluginwww/siteAdmin.php:102 pluginwww/siteAdmin.php:115
+#: pluginwww/siteAdmin.php:125 pluginwww/siteAdmin.php:143
+#: pluginwww/siteAdmin.php:155 pluginwww/siteAdmin.php:174
+#: pluginwww/siteAdmin.php:181 pluginwww/siteAdmin.php:189
+#: pluginwww/siteAdmin.php:203 pluginwww/siteAdmin.php:207
+#: pluginwww/siteAdmin.php:211 pluginwww/siteAdmin.php:215
+#: pluginwww/siteAdmin.php:223 pluginwww/siteAdmin.php:231
+#: pluginwww/siteAdmin.php:239 pluginwww/siteAdmin.php:247
+#: pluginwww/siteAdmin.php:252 pluginwww/siteAdmin.php:255
+#: pluginwww/siteAdmin.php:264
+msgid "title_site_admin"
+msgstr ""
+
+#: plugincore/include/MantisPlugin.class.php:158
+msgid "affected_mantis_items"
+msgstr ""
+
+#: plugincore/include/MantisPlugin.class.php:190 pluginwww/addpm.php:91
+#: pluginwww/addpm.php:104 pluginwww/admin.php:64
+#: pluginwww/createProject.php:69 pluginwww/createProjectAction.php:107
+#: pluginwww/deleteProjectAction.php:98 pluginwww/editProject.php:85
+#: pluginwww/editProjectAction.php:122 pluginwww/siteAdmin.php:49
+#: pluginwww/siteAdmin.php:59 pluginwww/siteAdmin.php:95
+#: pluginwww/siteAdmin.php:102 pluginwww/siteAdmin.php:115
+#: pluginwww/siteAdmin.php:125 pluginwww/siteAdmin.php:143
+#: pluginwww/siteAdmin.php:155 pluginwww/siteAdmin.php:174
+#: pluginwww/siteAdmin.php:181 pluginwww/siteAdmin.php:189
+#: pluginwww/siteAdmin.php:203 pluginwww/siteAdmin.php:207
+#: pluginwww/siteAdmin.php:211 pluginwww/siteAdmin.php:215
+#: pluginwww/siteAdmin.php:223 pluginwww/siteAdmin.php:231
+#: pluginwww/siteAdmin.php:239 pluginwww/siteAdmin.php:247
+#: pluginwww/siteAdmin.php:252
+msgid "database_error"
+msgstr ""
+
+#: plugincore/include/MantisPlugin.class.php:214
+msgid "no_mantis_items_assigned"
+msgstr ""
+
+#: plugincore/include/synchronizefunctions.php:47
+#, php-format
+msgid "sync_error_users"
+msgstr ""
+
+#: plugincore/include/synchronizefunctions.php:55
+msgid "sync_error_servers"
+msgstr ""
+
+#: plugincore/include/synchronizefunctions.php:65
+#, php-format
+msgid "sync_error_project"
+msgstr ""
+
+#: plugincore/include/synchronizefunctions.php:70
+#, php-format
+msgid "sync_error_roles"
+msgstr ""
+
+#: plugincore/include/synchronizefunctions.php:78
+msgid "sync_error_projects"
+msgstr ""
+
+#: plugincore/translations.php:4
+msgid "udpate_project"
+msgstr ""
+
+#: plugincore/translations.php:7
+msgid "error_mantis_project"
+msgstr ""
+
+#: plugincore/translations.php:10
+msgid "error_mantis_project_id"
+msgstr ""
+
+#: plugincore/translations.php:13
+msgid "display_project"
+msgstr ""
+
+#: plugincore/translations.php:16
+msgid "no_project_available"
+msgstr ""
+
+#: plugincore/translations.php:19
+msgid "title_display_error"
+msgstr ""
+
+#: plugincore/translations.php:22
+msgid "title_display_project"
+msgstr ""
+
+#: plugincore/translations.php:25
+msgid "authentication_failure"
+msgstr ""
+
+#: pluginwww/addpm.php:47 pluginwww/addpm.php:66
+#: pluginwww/deleteProject.php:54 pluginwww/deleteProjectAction.php:60
+#: pluginwww/editProject.php:55 pluginwww/editProjectAction.php:60
+#: pluginwww/editRoles.php:60 pluginwww/editRolesAction.php:60
+msgid "incorrect_project_id"
+msgstr ""
+
+#: pluginwww/addpm.php:86 pluginwww/admin.php:55
+#: pluginwww/createProject.php:54 pluginwww/createProjectAction.php:61
+#: pluginwww/deleteProject.php:74 pluginwww/deleteProjectAction.php:80
+#: pluginwww/editProject.php:75 pluginwww/editProjectAction.php:80
+#: pluginwww/editRoles.php:80 pluginwww/editRolesAction.php:80
+#: pluginwww/synchronize.php:59
+msgid "not_enabled"
+msgstr ""
+
+#: pluginwww/addpm.php:147
+msgid "create_task"
+msgstr ""
+
+#: pluginwww/addpm.php:152
+msgid "no_trackers"
+msgstr ""
+
+#: pluginwww/admin.php:68
+msgid "create_project"
+msgstr ""
+
+#: pluginwww/admin.php:71
+msgid "projects_list"
+msgstr ""
+
+#: pluginwww/admin.php:79
+msgid "edit_project"
+msgstr ""
+
+#: pluginwww/admin.php:81 pluginwww/editProjectAction.php:145
+msgid "edit_roles"
+msgstr ""
+
+#: pluginwww/admin.php:83
+msgid "delete_project"
+msgstr ""
+
+#: pluginwww/admin.php:89
+msgid "synchronize_projects"
+msgstr ""
+
+#: pluginwww/createProject.php:49 pluginwww/createProject.php:54
+#: pluginwww/createProject.php:69 pluginwww/createProject.php:73
+#: pluginwww/createProject.php:75 pluginwww/createProject.php:77
+#: pluginwww/createProjectAction.php:56 pluginwww/createProjectAction.php:61
+#: pluginwww/createProjectAction.php:127 pluginwww/createProjectAction.php:129
+#: pluginwww/editProject.php:89
+msgid "title_create"
+msgstr ""
+
+#: pluginwww/createProject.php:73 pluginwww/editProject.php:89
+msgid "no_instance_declared"
+msgstr ""
+
+#: pluginwww/createProject.php:80 pluginwww/editProject.php:96
+msgid "name"
+msgstr ""
+
+#: pluginwww/createProject.php:82 pluginwww/editProject.php:98
+msgid "description"
+msgstr ""
+
+#: pluginwww/createProject.php:84 pluginwww/editProject.php:100
+#: pluginwww/siteAdmin.php:267
+msgid "url"
+msgstr ""
+
+#: pluginwww/createProject.php:94 pluginwww/editProject.php:117
+#: pluginwww/siteAdmin.php:299
+msgid "visibility"
+msgstr ""
+
+#: pluginwww/createProject.php:95 pluginwww/editProject.php:118
+#: pluginwww/siteAdmin.php:303
+msgid "public"
+msgstr ""
+
+#: pluginwww/createProject.php:96 pluginwww/editProject.php:119
+#: pluginwww/siteAdmin.php:305
+msgid "private"
+msgstr ""
+
+#: pluginwww/createProject.php:98 pluginwww/editProject.php:120
+#: pluginwww/siteAdmin.php:307
+msgid "status"
+msgstr ""
+
+#: pluginwww/createProject.php:100 pluginwww/editProject.php:122
+#: pluginwww/siteAdmin.php:310
+msgid "development"
+msgstr ""
+
+#: pluginwww/createProject.php:101 pluginwww/editProject.php:123
+#: pluginwww/siteAdmin.php:311
+msgid "release"
+msgstr ""
+
+#: pluginwww/createProject.php:102 pluginwww/editProject.php:124
+#: pluginwww/siteAdmin.php:312
+msgid "stable"
+msgstr ""
+
+#: pluginwww/createProject.php:103 pluginwww/editProject.php:125
+#: pluginwww/siteAdmin.php:313
+msgid "obsolete"
+msgstr ""
+
+#: pluginwww/createProject.php:105 pluginwww/editProject.php:127
+#: pluginwww/siteAdmin.php:316
+msgid "css"
+msgstr ""
+
+#: pluginwww/createProject.php:106 pluginwww/editProject.php:128
+#: pluginwww/siteAdmin.php:318
+msgid "css_info"
+msgstr ""
+
+#: pluginwww/createProject.php:111
+msgid "submit_create_project"
+msgstr ""
+
+#: pluginwww/createProject.php:114 pluginwww/createProjectAction.php:133
+#: pluginwww/deleteProject.php:92 pluginwww/deleteProjectAction.php:135
+#: pluginwww/editProject.php:136 pluginwww/editProjectAction.php:147
+#: pluginwww/editRoles.php:163 pluginwww/editRolesAction.php:111
+#: pluginwww/synchronize.php:88
+msgid "backto"
+msgstr ""
+
+#: pluginwww/createProjectAction.php:79 pluginwww/editProjectAction.php:97
+msgid "create_forbidden_characters"
+msgstr ""
+
+#: pluginwww/createProjectAction.php:112 pluginwww/deleteProjectAction.php:109
+#: pluginwww/editProjectAction.php:127
+#, php-format
+msgid "mantis_error"
+msgstr ""
+
+#: pluginwww/deleteProject.php:39 pluginwww/deleteProject.php:54
+#: pluginwww/deleteProject.php:69 pluginwww/deleteProject.php:74
+#: pluginwww/deleteProject.php:81 pluginwww/deleteProjectAction.php:45
+#: pluginwww/deleteProjectAction.php:60 pluginwww/deleteProjectAction.php:75
+#: pluginwww/deleteProjectAction.php:80 pluginwww/deleteProjectAction.php:117
+#: pluginwww/deleteProjectAction.php:119
+msgid "title_delete"
+msgstr ""
+
+#: pluginwww/deleteProject.php:39 pluginwww/deleteProjectAction.php:45
+#: pluginwww/editProject.php:40 pluginwww/editProjectAction.php:45
+#: pluginwww/editRoles.php:45 pluginwww/editRolesAction.php:45
+msgid "missing_project_id"
+msgstr ""
+
+#: pluginwww/deleteProject.php:85 pluginwww/deleteProject.php:87
+msgid "confirm_delete"
+msgstr ""
+
+#: pluginwww/deleteProject.php:89
+msgid "submit_delete_project"
+msgstr ""
+
+#: pluginwww/deleteProjectAction.php:103 pluginwww/deleteProjectAction.php:115
+msgid "not_deleted"
+msgstr ""
+
+#: pluginwww/deleteProjectAction.php:124
+msgid "successfully_deleted"
+msgstr ""
+
+#: pluginwww/editProject.php:40 pluginwww/editProject.php:55
+#: pluginwww/editProject.php:70 pluginwww/editProject.php:75
+#: pluginwww/editProject.php:85 pluginwww/editProject.php:91
+#: pluginwww/editProject.php:93 pluginwww/editProjectAction.php:45
+#: pluginwww/editProjectAction.php:60 pluginwww/editProjectAction.php:75
+#: pluginwww/editProjectAction.php:80 pluginwww/editProjectAction.php:130
+#: pluginwww/editProjectAction.php:132
+msgid "title_edit"
+msgstr ""
+
+#: pluginwww/editProject.php:114
+#, php-format
+msgid "instance_not_declared"
+msgstr ""
+
+#: pluginwww/editProject.php:133
+msgid "submit_edit_project"
+msgstr ""
+
+#: pluginwww/editProjectAction.php:137
+msgid "successfully_updated"
+msgstr ""
+
+#: pluginwww/editRoles.php:45 pluginwww/editRoles.php:60
+#: pluginwww/editRoles.php:75 pluginwww/editRoles.php:80
+#: pluginwww/editRoles.php:89 pluginwww/editRoles.php:93
+#: pluginwww/editRoles.php:97 pluginwww/editRoles.php:99
+#: pluginwww/editRoles.php:100 pluginwww/editRolesAction.php:45
+#: pluginwww/editRolesAction.php:60 pluginwww/editRolesAction.php:75
+#: pluginwww/editRolesAction.php:80 pluginwww/editRolesAction.php:99
+#: pluginwww/editRolesAction.php:100
+msgid "title_edit_roles"
+msgstr ""
+
+#: pluginwww/editRoles.php:89
+msgid "error_reading_gforge_roles"
+msgstr ""
+
+#: pluginwww/editRoles.php:93
+msgid "error_reading_mantis_roles"
+msgstr ""
+
+#: pluginwww/editRoles.php:97
+msgid "error_reading_roles_mapping"
+msgstr ""
+
+#: pluginwww/editRoles.php:108
+msgid "gforge_role"
+msgstr ""
+
+#: pluginwww/editRoles.php:109
+msgid "mantis_role"
+msgstr ""
+
+#: pluginwww/editRoles.php:129
+msgid "default_role"
+msgstr ""
+
+#: pluginwww/editRoles.php:150
+msgid "submit_edit_roles"
+msgstr ""
+
+#: pluginwww/editRoles.php:158
+msgid "undefined_gforge_roles"
+msgstr ""
+
+#: pluginwww/editRolesAction.php:103
+msgid "roles_update_success"
+msgstr ""
+
+#: pluginwww/editRolesAction.php:107
+msgid "roles_update_failure"
+msgstr ""
+
+#: pluginwww/siteAdmin.php:70 pluginwww/siteAdmin.php:130
+#, php-format
+msgid "empty_url"
+msgstr ""
+
+#: pluginwww/siteAdmin.php:81
+#, php-format
+msgid "url_is_used"
+msgstr ""
+
+#: pluginwww/siteAdmin.php:85
+msgid "url_is_used_item"
+msgstr ""
+
+#: pluginwww/siteAdmin.php:120
+#, php-format
+msgid "url_already_exists"
+msgstr ""
+
+#: pluginwww/siteAdmin.php:259
+msgid "back_to_site_admin"
+msgstr ""
+
+#: pluginwww/siteAdmin.php:265
+msgid "mantis_urls"
+msgstr ""
+
+#: pluginwww/siteAdmin.php:269
+#, php-format
+msgid "url_info"
+msgstr ""
+
+#: pluginwww/siteAdmin.php:279
+msgid "submit_modify_url"
+msgstr ""
+
+#: pluginwww/siteAdmin.php:284
+msgid "submit_remove_url"
+msgstr ""
+
+#: pluginwww/siteAdmin.php:293
+msgid "submit_add_url"
+msgstr ""
+
+#: pluginwww/siteAdmin.php:297
+msgid "mantis_settings"
+msgstr ""
+
+#: pluginwww/siteAdmin.php:328
+msgid "submit_mantis_settings"
+msgstr ""
+
+#: pluginwww/siteAdmin.php:329
+msgid "reset_mantis_settings"
+msgstr ""
+
+#: pluginwww/synchronize.php:54 pluginwww/synchronize.php:59
+#: pluginwww/synchronize.php:66
+msgid "title_sync"
+msgstr ""
+
+#: pluginwww/synchronize.php:69
+msgid "sync_success"
+msgstr ""
+
+#: pluginwww/synchronize.php:73
+msgid "sync_failed"
+msgstr ""

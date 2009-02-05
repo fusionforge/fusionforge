@@ -27,10 +27,11 @@
 
 // The novaforge/auth.php file MUST be included before pre.php,
 // in order to properly declare the variables of apibull/config.php
-// If not, pre.php will include MantisPlugin.class in a function,
+// If not, pre.php will include MantisPlugin.class.php in a function,
 // and the sys_auth_* variables will exist but will eb empty
+require_once ('../../env.inc.php');
 require_once ("common/novaforge/auth.php");
-require_once ("pre.php");
+require_once ($gfwww.'include/pre.php');
 require_once ("common/novaforge/log.php");
 require_once ("plugins/mantis/include/gforgefunctions.php");
 require_once ("plugins/mantis/include/mantisfunctions.php");
@@ -41,7 +42,7 @@ if (session_loggedin () == false)
 }
 if ((isset ($project_id) == false) || ($project_id <= 0))
 {
-	exit_error ($Language->getText ("gforge-plugin-mantis", "title_delete"), $Language->getText ("gforge-plugin-mantis", "missing_project_id"));
+	exit_error (dgettext ("gforge-plugin-mantis", "title_delete"), dgettext ("gforge-plugin-mantis", "missing_project_id"));
 }
 if (getProject ($project_id,
                 $group_id,
@@ -56,7 +57,7 @@ if (getProject ($project_id,
                 $project_css_regex_3,
                 $project_css_regex_4) == false)
 {
-	exit_error ($Language->getText ("gforge-plugin-mantis", "title_delete"), $Language->getText ("gforge-plugin-mantis", "incorrect_project_id"));
+	exit_error (dgettext ("gforge-plugin-mantis", "title_delete"), dgettext ("gforge-plugin-mantis", "incorrect_project_id"));
 }
 if ((isset ($group_id) == false) || ($group_id <= 0))
 {
@@ -71,12 +72,12 @@ else
 {
 	if ($group->isError () == true)
 	{
-		exit_error ($Language->getText ("gforge-plugin-mantis", "title_delete"), $group->getErrorMessage ());
+		exit_error (dgettext ("gforge-plugin-mantis", "title_delete"), $group->getErrorMessage ());
 	}
 }
 if ($group->usesPlugin ("mantis") == false)
 {
-	exit_error ($Language->getText ("gforge-plugin-mantis", "title_delete"), $Language->getText ("gforge-plugin-mantis", "not_enabled"));
+	exit_error (dgettext ("gforge-plugin-mantis", "title_delete"), dgettext ("gforge-plugin-mantis", "not_enabled"));
 }
 $perm = &$group->getPermission (session_get_user ());
 if ($perm->isAdmin () == false)
@@ -94,33 +95,33 @@ if ((isset ($sure) == true)
 		if (deleteRolesMapping ($project_id) == false)
 		{
 			$ok = false;
-			$error = $Language->getText ("gforge-plugin-mantis", "database_error");
+			$error = dgettext ("gforge-plugin-mantis", "database_error");
 		}
 		if (deleteProject ($project_id) == false)
 		{
 			$ok = false;
-			$error .=  $Language->getText ("gforge-plugin-mantis", "not_deleted");
+			$error .=  dgettext ("gforge-plugin-mantis", "not_deleted");
 		}
 	}
 	else
 	{
 		$ok = false;
-		$error = $Language->getText ("gforge-plugin-mantis", "mantis_error", $project_url);
+		$error = sprintf( dgettext ( "gforge-plugin-mantis" ,  "mantis_error" ) , $project_url );
 	}
 }
 else
 {
 	$ok = false;
-	$error =  $Language->getText ("gforge-plugin-mantis", "not_deleted");
+	$error =  dgettext ("gforge-plugin-mantis", "not_deleted");
 }
-site_project_header (array ("title" => $Language->getText ("gforge-plugin-mantis", "title_delete"), "group" => $group_id, "toptab" => "admin"));
+site_project_header (array ("title" => dgettext ("gforge-plugin-mantis", "title_delete"), "group" => $group_id, "toptab" => "admin"));
 ?>
-<h2><? echo $Language->getText ("gforge-plugin-mantis", "title_delete") ?></h2>
+<h2><? echo dgettext ("gforge-plugin-mantis", "title_delete") ?></h2>
 <?
 if ($ok == true)
 {
 ?>
-	<h2><? echo $Language->getText ("gforge-plugin-mantis", "successfully_deleted"); ?></h2>
+	<h2><? echo dgettext ("gforge-plugin-mantis", "successfully_deleted"); ?></h2>
 <?
 }
 else
@@ -131,5 +132,5 @@ else
 }
 ?>
 <p>
-<a href="admin.php?group_id=<?php echo $group_id; ?>"><?php echo $Language->getText ("gforge-plugin-mantis", "backto"); ?></a>
+<a href="admin.php?group_id=<?php echo $group_id; ?>"><?php echo dgettext ("gforge-plugin-mantis", "backto"); ?></a>
 <? site_project_footer (array ()); ?>

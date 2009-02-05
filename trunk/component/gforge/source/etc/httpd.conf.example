@@ -79,6 +79,9 @@ UseCanonicalName Off
 	<Location /users>
 		ForceType application/x-httpd-php
 	</Location>
+        <Location /wiki/g>
+                ForceType application/x-httpd-php
+        </Location>
 
 	# 404 Error document
 	ErrorDocument 404 /404.php
@@ -138,6 +141,9 @@ UseCanonicalName Off
 	<Location /users>
 		ForceType application/x-httpd-php
 	</Location>
+        <Location /wiki/g>
+                ForceType application/x-httpd-php
+        </Location>
 
 	# 404 Error document
 	ErrorDocument 404 /404.php

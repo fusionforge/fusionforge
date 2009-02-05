@@ -1,10 +1,40 @@
-gforge (4.6.99+svn6585-1) unstable; urgency=low
+gforge (4.7~rc2+svn6766-1) experimental; urgency=low
 
-  * Added support for nss shadow
-  * Commented allusers and allgroups entries in nss config as a workaround
-  for failing postgreqsl restart, also changed getent calls in install-chroot.sh
+  * New SVN snapshot.
+  * Made PostgreSQL dependency stricter: some of the views only work with
+    versions >= 8.1 (closes: #498811).
 
- -- Christian Bayle <bayle@debian.org>  Fri, 15 Aug 2008 20:05:16 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 16 Jan 2009 11:02:47 +0100
+
+gforge (4.7~rc2-7) unstable; urgency=high
+
+  * Fixed yet another SQL injection vulnerability due to insufficient
+    input sanitizing (CVE-2008-2381).
+
+ -- Roland Mas <lolando@debian.org>  Wed, 17 Dec 2008 15:26:59 +0100
+
+gforge (4.7~rc2-6) unstable; urgency=high
+
+  * Removed gforge-plugins-extra binary package (closes: #504758).  I
+    can't promise to do security support for it, and it's quite
+    susceptible to security holes since it ships local copies of PHP
+    libraries.
+
+ -- Roland Mas <lolando@debian.org>  Sat, 15 Nov 2008 20:06:46 +0100
+
+gforge (4.7~rc2-5) unstable; urgency=high
+
+  * Fix several SQL injection vulnerabilities due to insufficient input
+    sanitizing.
+
+ -- Roland Mas <lolando@debian.org>  Mon, 06 Oct 2008 16:12:50 +0200
+
+gforge (4.7~rc2-4) unstable; urgency=low
+
+  * gforge-plugin-scmsvn: display SVN instructions corresponding to the
+    actual Debian setup (SSH, no DAV).
+
+ -- Roland Mas <lolando@debian.org>  Mon, 22 Sep 2008 11:49:23 +0200
 
 gforge (4.7~rc2-3) unstable; urgency=low
 
@@ -18,6 +48,14 @@ gforge (4.7~rc2-2) unstable; urgency=low
   * Fixed chroot setup on amd64 (closes: #495728).
 
  -- Roland Mas <lolando@debian.org>  Sun, 31 Aug 2008 20:33:58 +0200
+
+gforge (4.7~rc2-1-svn6585) unstable; urgency=low
+
+  * Added support for nss shadow
+  * Commented allusers and allgroups entries in nss config as a workaround
+  for failing postgreqsl restart, also changed getent calls in install-chroot.sh
+
+ -- Christian Bayle <bayle@debian.org>  Fri, 15 Aug 2008 20:05:16 +0200
 
 gforge (4.7~rc2-1) unstable; urgency=low
 

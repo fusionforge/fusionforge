@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Novaforge is a registered trade mark from Bull S.A.S
+ * Copyright (C) 2007 Bull S.A.S.
+ * 
+ * http://novaforge.org/
+ *
+ *
+ * This file has been developped within the Novaforge(TM) project from Bull S.A.S
+ * and contributed back to GForge community.
+ *
+ * GForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this file; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+-->
+
+<!-- Auteur: Emeric Vernat -->
+<project basedir="." default="all" name="NovaMonitor">
+	<!-- Initialisation des tâches -->
+	<target name="init">
+		<echo message="-- Script Ant NovaMonitor --" level="info" />
+		<echo message="Basedir: ${basedir}" level="info" />
+		<echo message="Ant file: ${ant.file}" level="info" />
+		<echo message="Ant home: ${ant.home}" level="info" />
+		<echo message="${ant.version}" level="info" />
+		<echo message="${java.runtime.name}, ${java.runtime.version}" level="info" />
+		<echo message="${os.name} ${sun.os.patch.level}, ${os.arch}/${sun.arch.data.model}" level="info" />
+		<tstamp>
+			<format property="TODAY_FR" pattern="dd MMMM yyyy HH:mm:ss" locale="fr,FR" />
+		</tstamp>
+		<echo message="${TODAY_FR}" level="info" />
+
+		<pathconvert property="class.path">
+			<path>
+				<fileset dir="src/main/lib">
+					<include name="javaee-api-5.jar" />
+					<include name="log4j-1.2.15.jar" />
+				</fileset>
+				<fileset dir="src/main/test-webapp/WEB-INF/lib">
+					<include name="jrobin-1.5.9.1.jar" />
+					<include name="iText-2.1.4.jar" />
+					<include name="xstream-1.3.1.jar" />
+				</fileset>
+			</path>
+		</pathconvert>
+	</target>
+
+	<!-- Compilation -->
+	<target name="build" depends="init">
+		<echo message="Compilation" level="info" />
+		<mkdir dir="build" />
+		<javac encoding="UTF-8" debug="on" deprecation="on" nowarn="off" source="1.5" target="1.5" 
+			srcdir="src" destdir="build" classpath="${class.path}">
+				<compilerarg value="-Xlint"/>
+		</javac>
+	</target>
+
+	<!-- Nettoyage du répertoire de compilation, de documentation, du jar et du war -->
+	<target name="clean" depends="init">
+		<echo message="Nettoyage du répertoire de compilation, de documentation, du jar et du war" level="info" />
+		<delete dir="build" />
+		<delete dir="doc" />
+		<delete file="monitoring.jar" />
+		<delete file="monitoring.war" />
+	</target>
+
+	<!-- Construction du jar -->
+	<target name="jar" depends="build">
+		<echo message="Construction du jar" level="info" />
+		<delete file="monitoring.jar" />
+		<jar destfile="monitoring.jar">
+			<zipfileset dir="build" />
+			<zipfileset dir="src/main/resources" />
+			<zipfileset file="LICENSE" />
+			<zipfileset file="src/site/apt/user_guide.apt" />
+			<manifest>
+				<attribute name="Built-By" value="${user.name}" />
+				<attribute name="Built-Date" value="${TODAY_FR}" />
+				<section name="monitoring">
+					<attribute name="Implementation-Title" value="NovaMonitor" />
+					<attribute name="Implementation-Vendor" value="Emeric Vernat, Bull" />
+				</section>
+			</manifest>
+		</jar>
+	</target>
+
+	<!-- Construction du war -->
+	<target name="war" depends="build">
+		<echo message="Construction du war" level="info" />
+		<delete file="monitoring.war" />
+		<jar destfile="monitoring.war">
+			<zipfileset dir="build" prefix="WEB-INF/classes" />
+			<zipfileset dir="src/main/resources" prefix="WEB-INF/classes" />
+			<zipfileset file="src/main/test-webapp/WEB-INF/lib/*.jar" prefix="WEB-INF/lib" />
+			<zipfileset file="../novamonitor-collector-server/src/main/webapp/WEB-INF/**.*" prefix="WEB-INF" />
+			<zipfileset file="LICENSE" />
+			<zipfileset file="src/site/apt/user_guide.apt" />
+			<manifest>
+				<attribute name="Built-By" value="${user.name}" />
+				<attribute name="Built-Date" value="${TODAY_FR}" />
+				<section name="monitoring">
+					<attribute name="Implementation-Title" value="NovaMonitor" />
+					<attribute name="Implementation-Vendor" value="Emeric Vernat, Bull" />
+				</section>
+			</manifest>
+		</jar>
+	</target>
+
+	<!-- Construction de la javadoc (api public) -->
+	<target name="javadoc" depends="init,build">
+		<echo message="Construction de la javadoc" level="info" />
+		<macrodef name="myjavadoc">
+			<attribute name="destdir" />
+			<attribute name="windowtitle" />
+			<attribute name="classpath" />
+			<element name="javadoc-elements" implicit="true" />
+			<sequential>
+				<echo message="@{windowtitle}" level="info" />
+				<delete dir="@{destdir}" />
+				<javadoc destdir="@{destdir}" windowtitle="@{windowtitle}" classpath="@{classpath}" 
+					encoding="UTF-8" charset="UTF-8" access="public" 
+					author="on" version="on" use="on" maxmemory="128m">
+					<link offline="true" href="http://java.sun.com/javase/6/docs/api/" packagelistloc="./j2se/" />
+					<link offline="true" href="http://java.sun.com/javaee/5/docs/api/" packagelistloc="./j2ee/" />
+					<doctitle>
+						<![CDATA[@{windowtitle}]]>
+					</doctitle>
+					<javadoc-elements />
+				</javadoc>
+			</sequential>
+		</macrodef>
+
+		<myjavadoc destdir="doc" windowtitle="NovaMonitor" classpath="${class.path}">
+			<packageset dir="src/main/java" />
+		</myjavadoc>
+	</target>
+
+	<!-- Construction du zip -->
+	<target name="zip" depends="clean,jar,war,javadoc">
+		<echo message="Construction du zip" level="info" />
+		<delete file="monitoring.zip" />
+		<zip destfile="monitoring.zip">
+			<zipfileset dir="." excludes="**/classes/**,build/**,target/**,monitoring.zip" />
+		</zip>
+	</target>
+
+	<!-- Tout (zip, clean) -->
+	<target name="all" depends="zip">
+		<antcall target="clean" />
+	</target>
+</project>

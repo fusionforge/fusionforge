@@ -28,7 +28,7 @@
  * Mantis plugin for GForge
  */
 
-require_once ("plugins/mantis/include/MantisPlugin.class");
+require_once ("plugins/mantis/include/MantisPlugin.class.php");
 
 register_plugin (new MantisPlugin ());
 ?>

@@ -7,6 +7,7 @@
 //	The /var/lib/gforge/dumps/mailman-aliases file will then be read by the mailaliases.php file
 //
 
+require dirname(__FILE__).'/../../www/env.inc.php';
 require $gfwww.'include/squal_pre.php';
 require $gfcommon.'include/cron_utils.php';
 
@@ -54,7 +55,7 @@ $err .= db_error();
 $rows=db_numrows($res);
 $err .= "$rows rows returned from query\n";
 
-$h1 = fopen("/var/lib/gforge/dumps/mailman-aliases","w");
+$h1 = fopen($sys_var_path.'/dumps/mailman-aliases',"w");
 
 $mailingListIds = array();
 
@@ -65,8 +66,6 @@ for ($i=0; $i<$rows; $i++) {
 	$listpassword = db_result($res,$i,'password');
 	$grouplistid = db_result($res,$i,'group_list_id');
 	$public = db_result($res,$i,'is_public');
-	
-	$is_commits_list = preg_match('/-commits$/', $listname);
 	
 	// Here we assume that the privatize_list.py script is located in the same dir as this script
 	$script_dir = dirname(__FILE__);
@@ -84,22 +83,13 @@ for ($i=0; $i<$rows; $i++) {
 echo $err;
 			continue;
 		} else {
-			if ($is_commits_list) {
-				// Make the *-commits list public
-				$err .= "Making ".$listname." public: ".$publicize_cmd."\n";
-				passthru($publicize_cmd,$publicizeFailed);
-			} else {
-				// Privatize the new list
-				$err .= "Privatizing ".$listname.": ".$privatize_cmd."\n";
-				passthru($privatize_cmd,$privatizeFailed);
-			}
+			// Privatize the new list
+			$err .= "Privatizing ".$listname.": ".$privatize_cmd."\n";
+			passthru($privatize_cmd,$privatizeFailed);
 		}
 		$mailingListIds[] = $grouplistid;
 	} else {	// Old list
-		if ($is_commits_list) {
-			$err .= "Making ".$listname." public: ".$publicize_cmd."\n";
-			passthru($publicize_cmd,$publicizeFailed);
-		} elseif (!$public) {
+		if (!$public) {
 			// Privatize only if it is marked as private
 			$err .= "Privatizing ".$listname.": ".$privatize_cmd."\n";
 			passthru($privatize_cmd,$privatizeFailed);
@@ -168,7 +158,7 @@ for($k = 0; $k < $rows; $k++) {
 		$res1 = db_query("UPDATE deleted_mailing_lists SET isdeleted = 1 WHERE mailing_list_name = '$deleted_mail_list'");
 		$err .= db_error();
 	}else{
-		$err .= "Colud not remove the list $deleted_mail_list \n";
+		$err .= "Could not remove the list $deleted_mail_list \n";
 	}
 }
 

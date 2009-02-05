@@ -25,8 +25,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-include_once ("common/novaforge/proxy/ProxyConfig.class");
-include_once ("common/novaforge/proxy/ProxyRequest.class");
-include_once ("common/novaforge/proxy/ProxyHttpHeader.class");
-include_once ("common/novaforge/proxy/ProxyReponse.class");
+include_once ("common/novaforge/proxy/ProxyConfig.class.php");
+include_once ("common/novaforge/proxy/ProxyRequest.class.php");
+include_once ("common/novaforge/proxy/ProxyHttpHeader.class.php");
+include_once ("common/novaforge/proxy/ProxyReponse.class.php");
 ?>

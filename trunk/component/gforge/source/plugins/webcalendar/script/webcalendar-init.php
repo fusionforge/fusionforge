@@ -17,7 +17,7 @@ $fichier_conf = "<?\n" .
 		"\nuser_inc: user.php" .
 		"\n?>" ;
 
-$handle = fopen($sys_plugins_path . $pluginname . "/www/includes/settings.php", "w");
+$handle = fopen($sys_plugins_path . '/' . $pluginname . "/www/includes/settings.php", "w");
 fwrite($handle,$fichier_conf);
 fclose($handle);
 

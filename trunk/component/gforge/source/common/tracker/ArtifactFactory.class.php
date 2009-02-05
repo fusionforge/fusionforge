@@ -5,7 +5,7 @@
  * Copyright 2002 GForge, LLC
  * http://gforge.org/
  *
- * @version   $Id: ArtifactFactory.class.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: ArtifactFactory.class.php 6761 2009-01-15 17:35:34Z lo-lan-do $
  *
  * This file is part of GForge.
  *
@@ -94,7 +94,7 @@ class ArtifactFactory extends Error {
 	 *	@param	array	Array of extra fields & elements to limit the query to.
 	 */
 	function setup($offset,$order_col,$sort,$max_rows,$set,$_assigned_to,$_status,$_extra_fields=array()) {
-//echo "<BR>offset: $offset| order: $order|max_rows: $max_rows|_assigned_to: $_assigned_to|_status: $_status";
+//echo "<br />offset: $offset| order: $order|max_rows: $max_rows|_assigned_to: $_assigned_to|_status: $_status";
 
 		if ((!$offset) || ($offset < 0)) {
 			$this->offset=0;
@@ -293,10 +293,10 @@ class ArtifactFactory extends Error {
 					continue;
 				}
 				if (is_array($vals[$i]) && !empty($vals[$i])) {
-					$vals[$i]=implode(',',$vals[$i]);
+					$vals[$i]=implode("','",$vals[$i]);
 				}
 				$ef_table_str.=", artifact_extra_field_data aefd$i ";
-				$ef_where_str.=" AND aefd$i.extra_field_id='".$keys[$i]."' AND aefd$i.field_data IN (".$vals[$i].") AND aefd$i.artifact_id=artifact_vw.artifact_id ";
+				$ef_where_str.=" AND aefd$i.extra_field_id='".$keys[$i]."' AND aefd$i.field_data IN ('".$vals[$i]."') AND aefd$i.artifact_id=artifact_vw.artifact_id ";
 			}
 		} else {
 			$ef_table_str='';

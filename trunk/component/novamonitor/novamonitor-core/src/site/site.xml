@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project>
+	<body>
+		<!--
+			http://maven.apache.org/plugins/maven-site-plugin/examples/sitedescriptor.html
+			<menu ref="parent" />
+		-->
+		<menu name="Overview">
+			<item name="Introduction" href="index.html"/>
+			<item name="User Guide" href="user_guide.html"/>
+			<item name="NovaMonitor Map" href="NovaMonitor map.odp"/>
+			<item name="Tâches" href="Fonctions NovaMonitor.odt" />
+		</menu>
+		<menu ref="reports"/>
+	</body>
+</project>

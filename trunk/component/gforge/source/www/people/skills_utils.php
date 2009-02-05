@@ -5,7 +5,7 @@
  *
  * Copyright 2002 (c) Silicon and Software Systems (S3)
  *
- * @version   $Id: skills_utils.php 6240 2007-11-26 21:42:48Z lo-lan-do $
+ * @version   $Id: skills_utils.php 6623 2008-10-06 12:55:00Z lo-lan-do $
  *
  */
 
@@ -101,9 +101,9 @@ function displayUserSkills($user_id, $allowEdit) {
 function handle_multi_edit($skill_ids) {
 	global $HTML;
 	$numSkills = count($skill_ids);
-	$SQL = "select * from skills_data where skills_data_id in(".$skill_ids[0];
+	$SQL = "select * from skills_data where skills_data_id in(".(int)$skill_ids[0];
 	for($i = 1; $i < $numSkills; $i++) {
-		$SQL .= ", ".$skill_ids[$i];
+		$SQL .= ", ".(int)$skill_ids[$i];
 	}
 	$SQL .= ")";
 	

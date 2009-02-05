@@ -1,0 +1,204 @@
+<?php
+/*
+ *
+ * Novaforge is a registered trade mark from Bull S.A.S
+ * Copyright (C) 2007 Bull S.A.S.
+ * 
+ * http://novaforge.org/
+ *
+ *
+ * This file has been developped within the Novaforge(TM) project from Bull S.A.S
+ * and contributed back to GForge community.
+ *
+ * GForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this file; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
+require_once ('../../env.inc.php');
+require_once ($gfwww."include/pre.php");
+require_once ("www/admin/admin_utils.php");
+require_once ("common/include/session.php");
+require_once ("common/novaforge/log.php");
+require_once ("common/novaforge/proxy.php");
+require_once ("plugins/archiva/include/functions.php");
+
+define ("ARCHIVA_COOKIE_PREFIX", "GFORGE_RP_ARCHIVA_");
+define ("ARCHIVA_LOCAL_PATH", "/plugins/archiva/proxy/");
+define ("ARCHIVA_SIGNON_COOKIE", "rbkSignon");
+
+function authenticateArchiva ($remote_url, $admin_username, $admin_password)
+{
+	global
+		$sys_use_ssl,
+		$sys_default_domain,
+		$Language;
+
+	if (array_key_exists (ARCHIVA_COOKIE_PREFIX . ARCHIVA_SIGNON_COOKIE, $_COOKIE) == false)
+	{
+		$config = new ProxyConfig ($remote_url, $sys_use_ssl, $sys_default_domain, ARCHIVA_LOCAL_PATH, ARCHIVA_COOKIE_PREFIX);
+		$request = new ProxyRequest ($config);
+		$post_array = array ();
+	        $post_array ["username"] = $admin_username;
+        	$post_array ["password"] = $admin_password;
+		$url = "security/login.action?username=" . $admin_username . "&password=" . $admin_password . "&method:login=Login";
+		if ($request->getServHttpReponse ($url, array (), array (), array (), array ()) == false)
+		{
+			log_error ("Error while authenticating with the archiva server", __FILE__, __FUNCTION__);
+			exit_error (dgettext ("gforge-plugin-archiva", "title_display"), dgettext ("gforge-plugin-archiva", "archiva_authent_error"));
+		}
+		else
+		{
+			$httpHeader = new ProxyHttpHeader ($config, $request->httpHeader);
+			$httpHeader->fetchHeader ();
+			$cookies = $httpHeader->getHeaderParam ("Set-Cookie");
+			if (($cookies == null) || (is_array ($cookies) == false) || (count ($cookies) <= 0))
+			{
+				log_error ("The archiva server did not return any cookie", __FILE__, __FUNCTION__);
+				exit_error (dgettext ("gforge-plugin-archiva", "title_display"), dgettext ("gforge-plugin-archiva", "archiva_authent_cookies"));
+			}
+			else
+			{
+				$found = false;
+				foreach ($cookies as $cookie)
+				{
+					$cookie = trim ($cookie);
+					if (strpos ($cookie, ARCHIVA_SIGNON_COOKIE . "=") === 0)
+					{
+						$found = true;
+						$pos = strpos ($cookie, ";");
+						if (($pos !== false) && ($pos >= (strlen (ARCHIVA_SIGNON_COOKIE) + 1)))
+						{
+							$_COOKIE [ARCHIVA_COOKIE_PREFIX . ARCHIVA_SIGNON_COOKIE] = trim (substr ($cookie, strlen (ARCHIVA_SIGNON_COOKIE) + 1, $pos - (strlen (ARCHIVA_SIGNON_COOKIE) + 1)));
+						}
+						else
+						{
+							$_COOKIE [ARCHIVA_COOKIE_PREFIX . ARCHIVA_SIGNON_COOKIE] = trim (substr ($cookie, strlen (ARCHIVA_SIGNON_COOKIE) + 1));
+						}
+					}
+					if ($found == true)
+					{
+						break;
+					}
+				}
+				if ($found == false)
+				{
+					log_error ("The Archiva server did not return the authentication cookie", __FILE__, __FUNCTION__);
+					exit_error (dgettext ("gforge-plugin-archiva", "title_display"), dgettext ("gforge-plugin-archiva", "archiva_authent_cookie"));
+				}
+			}
+		}
+	}
+}
+
+function callArchiva ($remote_url, $path, &$html_page, &$content)
+{
+	global
+		$sys_use_ssl,
+		$sys_default_domain,
+		$Language;
+
+	$html_page = true;
+	$content = "";
+	$config = new ProxyConfig ($remote_url, $sys_use_ssl, $sys_default_domain, ARCHIVA_LOCAL_PATH, ARCHIVA_COOKIE_PREFIX);
+	$request = new ProxyRequest ($config);
+	if ((isset ($path) == false) || (strlen (trim ($path)) <= 0))
+	{
+		$path = "";
+	}
+	if ($request->getServHttpReponse ($path, null, null, null, null) == false)
+	{
+		exit_error (dgettext ("gforge-plugin-archiva", "title_display"), dgettext ("gforge-plugin-archiva", "archiva_error"));
+	}
+	else
+	{
+		$httpHeader = new ProxyHttpHeader ($config, $request->httpHeader);
+		$httpHeader->fetchHeader ();
+		$httpHeader->sendHeader ();
+		if ($httpHeader->isHeaderOfHtmlPage () == true)
+		{
+			$response = new ProxyReponse ($config, $request->httpHtml);
+			$response->changeLink ();
+			$response->deleteHtmlHeader ();
+			$content = $httpHeader->changeCharset ($response->reponse, "UTF-8");
+		}
+		else
+		{
+			$html_page = false;
+			if ($httpHeader->isHeaderOfCssPage () == true)
+			{
+				$response = new ProxyReponse ($config, $request->httpHtml);
+				$array_patterns = array ();
+				$array_replacements = array ();
+				addRegEx ("/..\/images\// ==> /plugins/archiva/proxy/images/", $array_patterns, $array_replacements);
+				addRegEx ("/^(body|img|table|select|input|th|code|p|dl|dt|a:link|a:active|blockquote)[,\s][^}]*}/m ==> /* Removed */", $array_patterns, $array_replacements);
+				$response->replacePatterns ($array_patterns, $array_replacements);
+				$content = $response->reponse;
+			}
+			else
+			{
+				$content = $request->httpHtml;
+			}
+		}
+	}
+}
+
+function addRegEx ($regular_expresion, &$array_patterns, &$array_replacements)
+{
+	if ((isset ($regular_expresion) == true)
+	&&  (strlen (trim (html_entity_decode ($regular_expresion))) > 0))
+	{
+		$pair = explode ("==>", $regular_expresion, 2);
+		if (($pair !== false)
+		&&  (count ($pair) == 2)
+		&&  (strlen (trim ($pair [0])) > 0)
+		&&  (strlen (trim ($pair [1])) > 0))
+		{
+			$array_patterns [] = trim ($pair [0]);
+			$array_replacements [] = trim ($pair [1]);
+		}
+		else
+		{
+			log_warning ("Format of '" . $regular_expresion . "' regular expresion is incorrect", __FILE__, __FUNCTION__);
+		}
+	}
+}
+
+session_require (array ("group" => "1", "admin_flags" => "A"));
+if ((getArchivaConfigEntry ("remote_url", $remote_url) == false)
+||  (getArchivaConfigEntry ("admin_username", $admin_username) == false)
+||  (getArchivaConfigEntry ("admin_password", $admin_password) == false))
+{
+	log_error ("Error while getting the parameters to call the Archiva server", __FILE__, __FUNCTION__);
+	exit_error (dgettext ("gforge-plugin-archiva", "title_display"), dgettext ("gforge-plugin-archiva", "archiva_config_error"));
+}
+if ((isset ($remote_url) == false) || (empty ($remote_url) == true)
+||  (isset ($admin_username) == false) || (empty ($admin_username) == true)
+||  (isset ($admin_password) == false) || (empty ($admin_password) == true))
+{
+	log_error ("At least one configuration parameter is missing or empty", __FILE__, __FUNCTION__);
+	exit_error (dgettext ("gforge-plugin-archiva", "title_display"), dgettext ("gforge-plugin-archiva", "archiva_config_empty"));
+}
+authenticateArchiva ($remote_url, $admin_username, $admin_password);
+$path = trim (substr ($_SERVER ["REQUEST_URI"], strlen ($_SERVER ["SCRIPT_NAME"]) + 1));
+callArchiva ($remote_url, $path, $html_page, $content);
+if ($html_page == true)
+{
+	site_admin_header (array ("title" => dgettext ("gforge-plugin-archiva", "title_display")));
+}
+echo $content;
+if ($html_page == true)
+{
+	site_admin_footer (array ());
+}
+?>

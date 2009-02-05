@@ -1,0 +1,69 @@
+#!/bin/sh
+#---------------------------------------------------------------------------
+# Novaforge is a registered trade mark from Bull S.A.S
+# Copyright (C) 2007 Bull S.A.S.
+# 
+# http://novaforge.org/
+#
+#
+# This file has been developped within the Novaforge(TM) project from Bull S.A.S
+# and contributed back to GForge community.
+#
+# GForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# GForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#---------------------------------------------------------------------------
+
+# Source functions
+if [ -e %DATADIR%/%NAME%/config/util/functions ] ; then
+	. %DATADIR%/%NAME%/config/util/functions
+else
+	echo "File '%DATADIR%/%NAME%/config/util/functions' is missing"
+	exit 1
+fi
+init_variables $*
+source_init_parameters
+if [ $EXIT -eq 0 ] ; then
+	source_config_parameters
+fi
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Creating plugin tables in database"
+	NUMBER=`psql -At -c "SELECT COUNT(tablename) FROM pg_tables WHERE tablename='plugin_report_javancss'" 2>/dev/null`
+	if [ $? -eq 0 ] ; then
+		if [ "$NUMBER" = "0" ] ; then
+			psql -q -f %DATADIR%/%NAME%/plugins/%PLUGIN_NAME%/db/%PLUGIN_NAME%-delete.sql >> /dev/null 2>&1
+			psql -q -f %DATADIR%/%NAME%/plugins/%PLUGIN_NAME%/db/%PLUGIN_NAME%-init.sql >> /dev/null 2>&1
+			if [ $? -ne 0 ] ; then
+				echo -e "$PREFIX_CHAR -> Error while creating tables"
+				EXIT=1
+			fi
+		else
+			if [ "$NUMBER" = "1" ] ; then
+				echo -e "$PREFIX_CHAR -> Tables already exist"
+			else
+				echo -e "$PREFIX_CHAR -> Bad number of tables ($NUMBER instead of 1)"
+				EXIT=1
+			fi
+		fi
+	else
+		echo -e "$PREFIX_CHAR -> Error while searching tables"
+		EXIT=1
+	fi
+fi
+if [ $EXIT -eq 0 ] ; then
+	register_plugin %PLUGIN_NAME% "%FRIENDLY_NAME% Report Plugin"
+fi
+if [ $EXIT -eq 0 ] ; then
+	restore_plugin_config %PLUGIN_NAME%
+fi
+exit $EXIT

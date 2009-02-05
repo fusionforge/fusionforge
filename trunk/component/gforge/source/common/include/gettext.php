@@ -13,7 +13,7 @@
  *
  * http://gforge.org
  *
- * @version $Id: gettext.php 6269 2007-11-29 22:12:36Z aljeux $
+ * @version $Id: gettext.php 6734 2009-01-13 13:50:26Z lo-lan-do $
  */
 
 /**
@@ -161,7 +161,7 @@ function lang_id_to_language_name ($lang_id) {
 
 function language_name_to_lang_id ($language) {
 	$res = db_query('SELECT language_id FROM supported_languages WHERE classname=\''.$language.'\'');
-	return db_result($res, 0, 'classname');
+	return db_result($res, 0, 'language_id');
 }
 
 function setup_gettext_from_browser() {
@@ -185,7 +185,12 @@ function setup_gettext_from_langname ($lang) {
 function setup_gettext_from_locale ($locale) {
 	setlocale(LC_ALL, $locale);
 	setlocale (LC_TIME, _('en_US'));
-	bindtextdomain('gforge', '/usr/share/locale/');
+	
+	if (isset($GLOBALS['sys_gettext_path'])) {
+		bindtextdomain('gforge', $GLOBALS['sys_gettext_path']);
+	} else {
+		bindtextdomain('gforge', '/usr/share/locale/');
+	}
 	textdomain('gforge');
 }
 

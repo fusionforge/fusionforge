@@ -6,7 +6,7 @@
  * The rest Copyright 2002-2004 (c) GForge Team
  * http://gforge.org/
  *
- * @version   $Id: show_results_comments.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: show_results_comments.php 6747 2009-01-14 11:08:58Z lo-lan-do $
  *
  * This file is part of GForge.
  *
@@ -67,7 +67,7 @@ Function  ShowResultComments($result) {
 
 		echo "</tr>";
 	}
-	echo "</table>"; //</td></tr></TABLE>";
+	echo "</table>"; //</td></tr></table>";
 }
 
 $sql="SELECT question FROM survey_questions WHERE question_id='$question_id'";

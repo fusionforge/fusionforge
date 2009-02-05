@@ -1,0 +1,106 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>selenium_test_admin</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">selenium_test_admin</td></tr>
+</thead><tbody>
+<!--Config : Project Name-->
+<tr>
+	<td>store</td>
+	<td>Super phpBB</td>
+	<td>nomProjetNovaforge</td>
+</tr>
+<!--Config : project ID-->
+<tr>
+	<td>store</td>
+	<td>6</td>
+	<td>idProjetNovaforge</td>
+</tr>
+<!--Config : Instance ID-->
+<tr>
+	<td>store</td>
+	<td>83</td>
+	<td>phpBBInstanceID</td>
+</tr>
+<!--Opening the category management-->
+<tr>
+	<td>open</td>
+	<td>/plugins/phpbb/managecategory.php?group_id=${idProjetNovaforge}&instance_id=${phpBBInstanceID}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>javascript{'TestCat_'+(Math.round(100000*Math.random())) }</td>
+	<td>randomCatName</td>
+</tr>
+<!--Add a new random category-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=[Ajouter une catégorie]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>post_name</td>
+	<td>${randomCatName}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>send</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>${randomCatName}</td>
+	<td></td>
+</tr>
+<!--Rename the recently added category-->
+<tr>
+	<td>store</td>
+	<td>javascript{'TestCatRenamed_'+(Math.round(1000000*Math.random())) }</td>
+	<td>randomRenameCat</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[contains(@href, 'cat_name=${randomCatName}') and contains(@href,'action=rename')  and contains(@href,'group_id=${idProjetNovaforge}')  and contains(@href,'instance_id=${phpBBInstanceID}') ]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>post_name</td>
+	<td>${randomRenameCat}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>send</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>${randomRenameCat}</td>
+	<td></td>
+</tr>
+<!--Delete the recently renamed category-->
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[contains(@href, 'cat_name=${randomRenameCat}') and contains(@href,'action=delete') and contains(@href,'group_id=${idProjetNovaforge}') and contains(@href,'instance_id=${phpBBInstanceID}') ]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>post_yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>${randomRenameCat}</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

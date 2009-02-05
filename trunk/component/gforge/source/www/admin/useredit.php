@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  *
- * @version   $Id: useredit.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: useredit.php 6610 2008-09-18 11:51:17Z aljeux $
  *
  * This file is part of GForge.
  *
@@ -257,8 +257,7 @@ while ($row_cat = db_fetch_array($res_cat)) {
 }
 
 echo $GLOBALS['HTML']->listTableBottom();
-
-html_feedback_bottom($feedback);
+echo '<br />';
 
 site_admin_footer(array());
 

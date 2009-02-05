@@ -46,14 +46,23 @@
 %define apache_group apache
 %if %{dist} == "rhel4"
 %define bash_version 3.0
+%define httpd_version 2.0.52
+%define mysql_version 4.1.7
+%define php_version 4.3.9
 %define sed_version 4.1.2
 %endif
 %if %{dist} == "rhel5"
 %define bash_version 3.2
+%define httpd_version 2.2.3
+%define mysql_version 5.0.45
+%define php_version 5.1.6
 %define sed_version 4.1.5
 %endif
 %if %{unsupported_dist} == 1
 %define bash_version 999
+%define httpd_version 999
+%define mysql_version 999
+%define php_version 999
 %define sed_version 999
 %endif
 

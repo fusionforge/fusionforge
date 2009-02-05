@@ -5,7 +5,7 @@
  * Copyright 2002 GForge, LLC
  * http://gforge.org/
  *
- * @version   $Id: ganttpage.php 6235 2007-11-24 12:18:54Z lo-lan-do $
+ * @version   $Id: ganttpage.php 6689 2008-12-07 21:11:51Z aljeux $
  */
 /*
 
@@ -62,6 +62,13 @@ $cat_id_arr[]='0';  //this will be the 'any' row
 
 $cat_name_arr=util_result_column_to_array($res_cat,1);
 $cat_name_arr[]=_('Any');
+
+$_category_id = getIntFromRequest('_category_id');
+$_order = getIntFromRequest('_order');
+$_resolution = getIntFromRequest('_resolution');
+$_size = getIntFromRequest('_size');
+$_status = getStringFromRequest('_status');
+$_order = getStringFromRequest('_order');
 
 $cat_box=html_build_select_box_from_arrays ($cat_id_arr,$cat_name_arr,'_category_id',$_category_id,true,_('None')._('None'));
 

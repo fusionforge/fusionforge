@@ -1,0 +1,116 @@
+#---------------------------------------------------------------------------
+# Novaforge is a registered trade mark from Bull S.A.S
+# Copyright (C) 2007 Bull S.A.S.
+# 
+# http://novaforge.org/
+#
+#
+# This file has been developped within the Novaforge(TM) project from Bull S.A.S
+# and contributed back to GForge community.
+#
+# GForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# GForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#---------------------------------------------------------------------------
+
+gforge-plugin-novafrs	bad_filemane	Le nom du fichier ne convient pas. Celui-ci doit etre identique au précédent.
+gforge-plugin-novafrs	archive	Archiver la version précédente.
+gforge-plugin-novafrs	noWriteAuth	Vous n'avez pas les droits de modifier ou d'ajouter un fichier dans ce dossier.
+gforge-plugin-novafrs	noDeleteAuth	Vous n'avez pas les droits nécessaires pour supprimer  un fichier dans ce dossier.
+gforge-plugin-novafrs	copyBranch	Copier une branche
+gforge-plugin-novafrs	manageAuth	Gérer les autorisations
+gforge-plugin-novafrs	menuChrono	Chronos
+gforge-plugin-novafrs	chrono	Chrono
+gforge-plugin-novafrs	deleted	Supprimé
+gforge-plugin-novafrs	updateDate	Mise à jour de la fiche
+gforge-plugin-novafrs	propagateAuth	Propager l'autorisation au(x) sous-dossier(s) ?
+gforge-plugin-novafrs	infoDefaultAuth	* Les autorisations précédées d'un astérisque sont les autorisations par défaut
+gforge-plugin-novafrs	authLabel1	Aucun
+gforge-plugin-novafrs	authLabel2	Lecture
+gforge-plugin-novafrs	authLabel3	Ecriture
+gforge-plugin-novafrs	authLabel4	Suppression
+gforge-plugin-novafrs	copyBranchToCopy	Branche à recopier
+gforge-plugin-novafrs	copyBranchName	Libellé de la nouvelle branche
+gforge-plugin-novafrs	displayHistory	Afficher l'historique des versions
+gforge-plugin-novafrs	observation	Observations
+gforge-plugin-novafrs	status	Statut
+gforge-plugin-novafrs	title	Titre
+gforge-plugin-novafrs	author	Auteur
+gforge-plugin-novafrs	writingDate	Date rédaction
+gforge-plugin-novafrs	frtype	Type de fichier
+gforge-plugin-novafrs	reference	Référence
+gforge-plugin-novafrs	version	Version
+gforge-plugin-novafrs	date	Date
+gforge-plugin-novafrs	name	Nom
+gforge-plugin-novafrs	description	Description
+gforge-plugin-novafrs	viewURL	Accéder à l'URL
+gforge-plugin-novafrs	fr_unique	Un fichier ayant le même nom existe déjà dans le dossier.
+gforge-plugin-novafrs	group_unique	Un dossier ayant le même nom existe déjà dans ce dossier.
+gforge-plugin-novafrs	delete_fr	Supprimer ce fichier
+gforge-plugin-novafrs	adminDir	Gérer les dossiers
+gforge-plugin-novafrs	language	Langue
+gforge-plugin-novafrs	viewCard	fiche détaillée
+gforge-plugin-novafrs	delete_group	Supprimer ce dossier
+gforge-plugin-novafrs	head_file	Fichier
+gforge-plugin-novafrs	head_type	Type
+gforge-plugin-novafrs	head_size	Taille
+gforge-plugin-novafrs	head_modif_by	Statut MAJ par
+gforge-plugin-novafrs	head_the	le
+gforge-plugin-novafrs	error_invalid_file_attack	Tentative d'atteindre un fichier non valide $1
+gforge-plugin-novafrs	error_no_frs	Ce projet n'a pas de fichier visible
+gforge-plugin-novafrs	error_no_groups_defined	Aucun dossier défini
+gforge-plugin-novafrs	submit_new	Soumettre un nouveau fichier
+gforge-plugin-novafrs	turned_off	Ce projet a désactivé la gestion de fichiers
+gforge-plugin-novafrs	view_fr	Voir les fichiers
+gforge-plugin-novafrs	add_frs	[ Ajouter un fichier ici ]
+gforge-plugin-novafrs	add_edit_frgroups	Ajouter/Éditer des dossiers
+gforge-plugin-novafrs	section_admin_main	Projet $1
+gforge-plugin-novafrs	title_admin	Administration de la gestion de fichiers
+gforge-plugin-novafrs	section_admin_groups	Gérer les dossiers
+gforge-plugin-novafrs	delete	Supprimer
+gforge-plugin-novafrs	delete_warning	Vous êtes sur le point de supprimer définitivement ce fichier.
+gforge-plugin-novafrs	delete_warning_group	Vous êtes sur le point de supprimer définitivement ce dossier.
+gforge-plugin-novafrs	really_sure	Je confirme vraiment
+gforge-plugin-novafrs	sure	Je confirme
+gforge-plugin-novafrs	state	Etat
+gforge-plugin-novafrs	upload	Optionnel : Uploader un nouveau fichier
+gforge-plugin-novafrs	upload_ftp	Ou choisir un fichier préalablement uploadé sur $1 par FTP
+gforge-plugin-novafrs	upload_url	Spécifier une URL externe pour le fichier
+gforge-plugin-novafrs	add_group	Ajouter un dossier&nbsp;
+gforge-plugin-novafrs	editgroups_description	Le nom du dossier sera utilisé comme titre. Il doit donc être formaté en conséquence.
+gforge-plugin-novafrs	edit_group	Modifier un dossier
+gforge-plugin-novafrs	group_id	Identifiant
+gforge-plugin-novafrs	group_name	Nom du dossier
+gforge-plugin-novafrs	group_parent	Appartient à
+gforge-plugin-novafrs	new_group_name	Nouveau nom du dossier&nbsp;
+gforge-plugin-novafrs	new_group_parent	Appartient à
+gforge-plugin-novafrs	error_min_title_length	Le titre doit avoir au moins 5 caractères
+gforge-plugin-novafrs	no_frs	Aucun fichier trouvé
+gforge-plugin-novafrs	invalid_frid	Fichier : identifiant non valide
+gforge-plugin-novafrs	invalid_id	Dossier : identifiant non valide
+gforge-plugin-novafrs	invalid_parent_id	Dossier : identifiant du parent non valide
+gforge-plugin-novafrs	name_required	Dossier : le nom est obligatoire
+gforge-plugin-novafrs	all_languages	Toutes les langues
+gforge-plugin-novafrs	no_file_data_text	Pas de fichier à afficher - N° de fichier invalide ou inactif
+gforge-plugin-novafrs	no_file_data_title	Pas de données dans le fichier
+gforge-plugin-novafrs	title_display	Gestionnaire de fichiers
+gforge-plugin-novafrs	error_blank_file	Erreur en prenant un fichier vide
+gforge-plugin-novafrs	file	Fichier
+gforge-plugin-novafrs	group	Dossier auquel rattacher le fichier
+gforge-plugin-novafrs	no_valid_group	Aucun dossier n'a été sélectionné
+gforge-plugin-novafrs	submit	Soumettre les informations
+gforge-plugin-novafrs	submitted_successfully	Le fichier a été soumis avec succès
+gforge-plugin-novafrs	upload_file	Télécharger sur le serveur
+gforge-plugin-novafrs	or_upload_url	OU spécifier une URL externe pour le fichier
+gforge-plugin-novafrs	tab_title	Fichiers
+gforge-plugin-novafrs	use_novafrs	Gestionnaire de fichiers NovaForge

@@ -10,7 +10,7 @@ creates a repository and controls access to it depending on the role
 settings of the project.
 </p>
 <p>
-Additional Tools:show_features_boshow_features_boxesshow_features_boxesxes
+Additional Features:
 </p>
 <ul>
 	<li>Manage File Releases</li>
@@ -79,12 +79,11 @@ echo $HTML->boxMiddle('Getting GForge');
 
 ?>
 <strong>Download:</strong><br />
-<a href="http://gforge.org/project/showfiles.php?group_id=1">GForge4.5</a><br />
+<a href="http://gforge.org/project/showfiles.php?group_id=1">GForge archive</a><br />
 <a href="http://postgresql.org/">PostgreSQL</a><br />
-<a href="http://www.php.net/">PHP 4.x</a><br />
+<a href="http://www.php.net/">PHP</a><br />
 <a href="http://www.apache.org/">Apache</a><br />
-<a href="http://www.gnu.org/software/mailman/">Mailman *</a><br />
-* optional
+<a href="http://www.gnu.org/software/mailman/">Mailman</a> <i>(optional)</i><br />
 <p />
 <strong>Get Help</strong><br />
 <a href="http://gforgegroup.com/"><strong>GForge Group Professional Services</strong></a><br />

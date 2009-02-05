@@ -1,0 +1,52 @@
+#---------------------------------------------------------------------------
+# Novaforge is a registered trade mark from Bull S.A.S
+# Copyright (C) 2007 Bull S.A.S.
+# 
+# http://novaforge.org/
+#
+#
+# This file has been developped within the Novaforge(TM) project from Bull S.A.S
+# and contributed back to GForge community.
+#
+# GForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# GForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#---------------------------------------------------------------------------
+
+#
+# Archiva message catalog (French)
+#
+
+gforge-plugin-archiva	title_site_admin	Administration du plugin Archiva
+gforge-plugin-archiva	database_error	Une erreur est survenue lors de l'accès à la base de données.
+gforge-plugin-archiva	empty_remote_url	L'URL spécifiée est vide.
+gforge-plugin-archiva	empty_admin_username	L'identifiant spécifié est vide.
+gforge-plugin-archiva	empty_admin_password	Le mot de passe spécifié est vide.
+gforge-plugin-archiva	back_to_site_admin	Retour à l'administration du plugin Archiva.
+gforge-plugin-archiva	plugin_config	Configuration du plugin
+gforge-plugin-archiva	remote_url	Serveur
+gforge-plugin-archiva	remote_url_info	URL du serveur Archiva, par example "http://$1:8080/archiva/"
+gforge-plugin-archiva	admin_username	Identifiant
+gforge-plugin-archiva	admin_username_info	Identifiant de l'administrateur Archiva
+gforge-plugin-archiva	admin_password	Mot de passe
+gforge-plugin-archiva	admin_password_info	Mot de passe de l'administrateur Archiva
+gforge-plugin-archiva	submit_archiva_config	Envoyer
+gforge-plugin-archiva	archiva_admin	Administration d'Archiva
+gforge-plugin-archiva	click_here	Cliquez ici
+gforge-plugin-archiva	title_display	Administration d'Archiva
+gforge-plugin-archiva	archiva_authent_error	Erreur lors de l'authentification avec le serveur Archiva
+gforge-plugin-archiva	archiva_authent_cookies	Le serveur Archiva n'a retourné aucun cookie
+gforge-plugin-archiva	archiva_authent_cookie	Le serveur Archiva n'a pas retourné le cookie d'authentification
+gforg-plugin-archiva	archiva_error	Erreur lors de l'appel du serveur Archiva
+gforge-plugin-archiva	archiva_config_error	Erreur lors de l'obention de le configuration depuis la base de données
+gforge-plugin-archiva	archiva_config_empty	Au moins un des paramètres de configuration n'est pas défini ou vide

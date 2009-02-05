@@ -6,7 +6,7 @@
  * The rest Copyright 2002-2005 (c) GForge Team
  * http://gforge.org/
  *
- * @version   $Id: cvs.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: cvs.php 6750 2009-01-14 22:16:59Z lo-lan-do $
  *
  * This file is part of GForge.
  *
@@ -25,12 +25,15 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+require dirname(__FILE__).'/../../env.inc.php';
 require $gfwww.'include/squal_pre.php';
 require $gfcommon.'include/cron_utils.php';
 require_once $gfcommon.'mail/MailingList.class.php';
 require_once $gfcommon.'mail/MailingListFactory.class.php';
 
 require_once $gfcommon.'include/SCM.class.php' ;
+
+$err='';
 
 setup_plugin_manager () ;
 
@@ -278,6 +281,7 @@ function add_acl_check($unix_group_name) {
 
 function update_cvs_repositories() {
 	global $cvsdir_prefix;
+	global $err;
 
 	$res = db_query("select groups.group_id,groups.unix_group_name,groups.enable_anonscm,groups.enable_pserver".
 		" FROM groups, plugins, group_plugin".
@@ -352,6 +356,28 @@ function update_cvs_repositories() {
 			add_acl_check($project->getUnixName());
 		}
 	}
+
+	//
+        // Move CVS trees for deleted groups
+        //
+        $res8 = db_query("SELECT unix_group_name FROM deleted_groups WHERE isdeleted = 0;");
+        $err .= db_error();
+        $rows    = db_numrows($res8);
+        for($k = 0; $k < $rows; $k++) {
+                $deleted_group_name = db_result($res8,$k,'unix_group_name');
+
+                if(!is_dir($cvsdir_prefix."/.deleted"))
+                        system("mkdir ".$cvsdir_prefix."/.deleted");
+
+                system("mv -f $cvsdir_prefix/$deleted_group_name/ $cvsdir_prefix/.deleted/");
+                system("chown -R root:root $cvsdir_prefix/.deleted/$deleted_group_name");
+                system("chmod -R o-rwx $cvsdir_prefix/.deleted/$deleted_group_name");
+
+
+                $res9 = db_query("UPDATE deleted_groups set isdeleted = 1 WHERE unix_group_name = '$deleted_group_name';" );
+                $err .= db_error();
+        }
+
 }
 
 
@@ -364,6 +390,8 @@ function update_cvs_repositories() {
 
 
 */
+$err = "";
+
 if(is_dir($cvsdir_prefix)) {
 	update_cvs_repositories();
 } else {

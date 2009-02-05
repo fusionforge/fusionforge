@@ -1,0 +1,67 @@
+#: plugincore/include/ReportPlugin.class.php:38
+msgid "tab_title"
+msgstr "Report"
+
+#: plugincore/include/ReportPlugin.class.php:53
+msgid "use_report"
+msgstr "Use report Plugin"
+
+#: pluginwww/index.php:64
+msgid "all_modules"
+msgstr "Tous les modules"
+
+#: pluginwww/index.php:170
+msgid "quality_objectives_synthesis"
+msgstr "Synth&egrave;se des objectifs qualit&eacute;s"
+
+#: pluginwww/index.php:184
+msgid "table_quality_objective"
+msgstr "Objectifs qualit&eacute;s"
+
+#: pluginwww/index.php:185
+msgid "table_quality_objective_rate"
+msgstr "Note"
+
+#: pluginwww/index.php:199
+msgid "table_metriques_title"
+msgstr "Metriques"
+
+#: pluginwww/index.php:205
+msgid "table_metriques_number_of_package"
+msgstr "Nombre de paquetages"
+
+#: pluginwww/index.php:209
+msgid "table_metriques_number_of_class"
+msgstr "Nombre de classes"
+
+#: pluginwww/index.php:213
+msgid "table_metriques_number_of_methods"
+msgstr "Nombre de methodes"
+
+#: pluginwww/index.php:228
+msgid "table_objective_criteria"
+msgstr "Crit&egrave;re"
+
+#: pluginwww/index.php:229
+msgid "table_objective_rate"
+msgstr "Note"
+
+#: pluginwww/index.php:230
+msgid "table_objective_coef"
+msgstr "Coef"
+
+#: pluginwww/index.php:231
+msgid "table_objective_rates_1"
+msgstr "Notes <2"
+
+#: pluginwww/index.php:232
+msgid "table_objective_rates_2"
+msgstr "Notes <3"
+
+#: pluginwww/index.php:233
+msgid "table_objective_rates_3"
+msgstr "Notes <4"
+
+#: pluginwww/index.php:234
+msgid "table_objective_rates_4"
+msgstr "Notes =4"

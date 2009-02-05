@@ -321,12 +321,6 @@ if(@$_SESSION['cat'] != 't'){
 				print '<br />Activity Ranking: <strong>'. number_format($row_grp['ranking'],2) .'</strong>';
 				print '<br />Register Date: <strong>'.date(_('Y-m-d H:i'),$row_grp['register_time']).'</strong>';
 				print '</span></td></tr>';
-		/*
-		                if ($row_grp['jobs_count']) {
-		                	print '<tr><td colspan="2" align="center">'
-		                              .'<a href="/people/?group_id='.$row_grp['group_id'].'">[This project needs help]</a></td></td>';
-		                }
-		*/
 		                print '</table>';
 				print '<hr />';
 			} // end if for row and range chacking

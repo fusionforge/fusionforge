@@ -21,7 +21,7 @@ TARBALL_COMPONENT=""
 
 # Tarball version
 # Default: SVN version
-TARBALL_VERSION="2.9"
+TARBALL_VERSION="2.10"
 
 # Files or directories to exclude from tarball
 EXCLUDE_FROM_TARBALL=""

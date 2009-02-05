@@ -25,8 +25,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once ("pre.php");
-require_once ("www/pm/include/ProjectGroupHTML.class");
+require_once ('../../env.inc.php');
+require_once ($gfwww.'include/pre.php');
+require_once ("www/pm/include/ProjectGroupHTML.class.php");
 require_once ("common/novaforge/log.php");
 require_once ("plugins/mantis/include/gforgefunctions.php");
 
@@ -43,7 +44,7 @@ if ((isset ($mantis_url) == false) || (strlen ($mantis_url) <= 0)
 $result = db_query ("SELECT project_id FROM plugin_mantis_project WHERE url='" . $mantis_url . "' AND mantis_id='" . $mantis_id . "'");
 if (($result === false) || (db_numrows ($result) != 1))
 {
-	exit_error ($Language->getText ("pm_addtask", "title"), $Language->getText ("gforge-plugin-mantis", "incorrect_project_id"));
+	exit_error (dgettext ("pm_addtask", "title"), dgettext ("gforge-plugin-mantis", "incorrect_project_id"));
 }
 else
 {
@@ -62,7 +63,7 @@ if (getProject ($project_id,
                 $project_css_regex_3,
                 $project_css_regex_4) == false)
 {
-	exit_error ($Language->getText ("pm_addtask", "title"), $Language->getText ("gforge-plugin-mantis", "incorrect_project_id"));
+	exit_error (dgettext ("pm_addtask", "title"), dgettext ("gforge-plugin-mantis", "incorrect_project_id"));
 }
 if ((isset ($group_id) == false) || ($group_id <= 0))
 {
@@ -77,17 +78,17 @@ else
 {
 	if ($group->isError () == true)
 	{
-		exit_error ($Language->getText ("pm_addtask", "title"), $group->getErrorMessage ());
+		exit_error (dgettext ("pm_addtask", "title"), $group->getErrorMessage ());
 	}
 }
 if ($group->usesPlugin ("mantis") == false)
 {
-	exit_error ($Language->getText ("pm_addtask", "title"), $Language->getText ("gforge-plugin-mantis", "not_enabled"));
+	exit_error (dgettext ("pm_addtask", "title"), dgettext ("gforge-plugin-mantis", "not_enabled"));
 }
 $result = db_query ("SELECT role_id FROM user_group WHERE user_id=" . user_getid () . " and group_id=" . $group->getID ());
 if (($result === false) || (db_numrows ($result) != 1))
 {
-	exit_error ($Language->getText ("pm_addtask", "title"), $Language->getText ("gforge-plugin-mantis", "database_error"));
+	exit_error (dgettext ("pm_addtask", "title"), dgettext ("gforge-plugin-mantis", "database_error"));
 }
 else
 {
@@ -100,7 +101,7 @@ if (array_key_exists ("pm", $role->role_values) == true)
 	$result = db_query ($query);
 	if ($result === false)
 	{
-		exit_error ($Language->getText ("pm_addtask", "title"), $Language->getText ("gforge-plugin-mantis", "database_error"));
+		exit_error (dgettext ("pm_addtask", "title"), dgettext ("gforge-plugin-mantis", "database_error"));
 	}
 	else
 	{
@@ -122,7 +123,7 @@ else
 {
 	log_error ("Error while getting the task 'pm' ", __FILE__, __FUNCTION__);
 }
-pm_header (array ("title" => $Language->getText ("pm_addtask", "title"), "pagename" => "pm_addtask"));
+pm_header (array ("title" => dgettext ("pm_addtask", "title"), "pagename" => "pm_addtask"));
 if (count ($array_trackers) > 0)
 {
 	$bug_url = "http";
@@ -143,12 +144,12 @@ if (count ($array_trackers) > 0)
 	}
 	echo "</select>\n";
 	echo "<br>\n";
-	echo "<input type=\"submit\" name=\"add_task\" value=\"" . $Language->getText ("tracker_taskmgr", "create_task") . "\">\n";
+	echo "<input type=\"submit\" name=\"add_task\" value=\"" . dgettext ("tracker_taskmgr", "create_task") . "\">\n";
 	echo "</form>\n";
 }
 else
 {
-	echo ($Language->getText ("tracker", "no_trackers"));
+	echo (dgettext ("tracker", "no_trackers"));
 }
 pm_footer (array ());
 ?>

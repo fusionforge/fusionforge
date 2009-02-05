@@ -1,0 +1,244 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-01-16 10:46+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: plugincore/common/PluginPhpBBIHM.class.php:15
+msgid "yes"
+msgstr ""
+
+#: plugincore/common/PluginPhpBBIHM.class.php:16
+msgid "no"
+msgstr ""
+
+#: plugincore/common/PluginPhpBBIHM.class.php:61 pluginwww/admin.php:58
+msgid "add_new_instance"
+msgstr ""
+
+#: plugincore/common/PluginPhpBBIHM.class.php:63
+msgid "edit_instance"
+msgstr ""
+
+#: plugincore/common/PluginPhpBBIHM.class.php:69
+#: plugincore/common/PluginPhpBBIHM.class.php:286
+msgid "name"
+msgstr ""
+
+#: plugincore/common/PluginPhpBBIHM.class.php:70
+msgid "url"
+msgstr ""
+
+#: plugincore/common/PluginPhpBBIHM.class.php:71
+msgid "encoding"
+msgstr ""
+
+#: plugincore/common/PluginPhpBBIHM.class.php:72
+#: plugincore/common/PluginPhpBBIHM.class.php:285
+#: plugincore/common/PluginPhpBBIHM.class.php:347
+msgid "send"
+msgstr ""
+
+#: plugincore/common/PluginPhpBBIHM.class.php:175
+#: plugincore/common/PluginPhpBBIHM.class.php:178
+msgid "bookmarks"
+msgstr ""
+
+#: plugincore/common/PluginPhpBBIHM.class.php:176
+msgid "subject"
+msgstr ""
+
+#: plugincore/common/PluginPhpBBIHM.class.php:177
+msgid "last_update"
+msgstr ""
+
+#: plugincore/common/PluginPhpBBIHM.class.php:179
+msgid "not_read"
+msgstr ""
+
+#: plugincore/common/PluginPhpBBIHM.class.php:180
+msgid "no_bookmarks"
+msgstr ""
+
+#: plugincore/common/PluginPhpBBIHM.class.php:240
+msgid "list_subcat_of"
+msgstr ""
+
+#: plugincore/common/PluginPhpBBIHM.class.php:241
+msgid "rename"
+msgstr ""
+
+#: plugincore/common/PluginPhpBBIHM.class.php:242
+msgid "delete"
+msgstr ""
+
+#: plugincore/common/PluginPhpBBIHM.class.php:243 pluginwww/applyrule.php:57
+#: pluginwww/instance.php:61 pluginwww/managecategory.php:57
+msgid "apply_rule"
+msgstr ""
+
+#: plugincore/common/PluginPhpBBIHM.class.php:283 pluginwww/applyrule.php:56
+#: pluginwww/instance.php:60 pluginwww/managecategory.php:56
+msgid "add_category"
+msgstr ""
+
+#: plugincore/common/PluginPhpBBIHM.class.php:284
+msgid "rename_category"
+msgstr ""
+
+#: plugincore/common/PluginPhpBBIHM.class.php:325
+msgid "select_rule"
+msgstr ""
+
+#: plugincore/common/PluginPhpBBIHM.class.php:346
+msgid "apply_rule_role"
+msgstr ""
+
+#: plugincore/include/PhpBBPlugin.class.php:72
+msgid "active_plugin"
+msgstr ""
+
+#: plugincore/include/PhpBBPlugin.class.php:91 pluginwww/admin.php:57
+#: pluginwww/applyrule.php:54 pluginwww/instance.php:58
+#: pluginwww/managecategory.php:54 pluginwww/synchronize.php:59
+msgid "administration_phpbb"
+msgstr ""
+
+#: plugincore/translations.php:4
+msgid "delete_instance"
+msgstr ""
+
+#: plugincore/translations.php:7
+msgid "edit_parameters"
+msgstr ""
+
+#: plugincore/translations.php:10
+msgid "manage_category"
+msgstr ""
+
+#: plugincore/translations.php:13
+msgid "ROLE_FORUM_BOT"
+msgstr ""
+
+#: plugincore/translations.php:16
+msgid "ROLE_FORUM_FULL"
+msgstr ""
+
+#: plugincore/translations.php:19
+msgid "ROLE_FORUM_LIMITED"
+msgstr ""
+
+#: plugincore/translations.php:22
+msgid "ROLE_FORUM_LIMITED_POLLS"
+msgstr ""
+
+#: plugincore/translations.php:25
+msgid "ROLE_FORUM_NOACCESS"
+msgstr ""
+
+#: plugincore/translations.php:28
+msgid "ROLE_FORUM_ONQUEUE"
+msgstr ""
+
+#: plugincore/translations.php:31
+msgid "ROLE_FORUM_POLLS"
+msgstr ""
+
+#: plugincore/translations.php:34
+msgid "ROLE_FORUM_READONLY"
+msgstr ""
+
+#: plugincore/translations.php:37
+msgid "ROLE_FORUM_STANDARD"
+msgstr ""
+
+#: pluginwww/access.php:43 pluginwww/admin.php:49 pluginwww/applyrule.php:46
+#: pluginwww/instance.php:50 pluginwww/managecategory.php:46
+#: pluginwww/synchronize.php:49
+msgid "not_activated_plugin"
+msgstr ""
+
+#: pluginwww/access.php:89
+msgid "error_authenticate"
+msgstr ""
+
+#: pluginwww/admin.php:59
+msgid "synchronize_data"
+msgstr ""
+
+#: pluginwww/admin.php:60
+msgid "no_instance_registred"
+msgstr ""
+
+#: pluginwww/applyrule.php:55 pluginwww/instance.php:59
+#: pluginwww/managecategory.php:55 pluginwww/synchronize.php:58
+msgid "back"
+msgstr ""
+
+#: pluginwww/instance.php:62
+msgid "updating_instance_failed"
+msgstr ""
+
+#: pluginwww/instance.php:63
+msgid "fields_empty"
+msgstr ""
+
+#: pluginwww/instance.php:64
+msgid "question_delete_instance"
+msgstr ""
+
+#: pluginwww/instance.php:65
+msgid "error_create_instance"
+msgstr ""
+
+#: pluginwww/instance.php:66
+msgid "error_remove_instance"
+msgstr ""
+
+#: pluginwww/instance.php:67
+msgid "error_not_valide_url"
+msgstr ""
+
+#: pluginwww/managecategory.php:58
+msgid "question_delete_category"
+msgstr ""
+
+#: pluginwww/managecategory.php:59
+msgid "flied_name_empty"
+msgstr ""
+
+#: pluginwww/managecategory.php:60
+msgid "error_create_category"
+msgstr ""
+
+#: pluginwww/managecategory.php:61
+msgid "error_rename_category"
+msgstr ""
+
+#: pluginwww/managecategory.php:62
+msgid "error_delete_category"
+msgstr ""
+
+#: pluginwww/managecategory.php:63
+msgid "no_subcat_registred"
+msgstr ""
+
+#: pluginwww/synchronize.php:60
+msgid "question_synchronize"
+msgstr ""
+
+#: pluginwww/synchronize.php:61
+msgid "end_synchronize"
+msgstr ""

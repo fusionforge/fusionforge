@@ -7,7 +7,7 @@
   * Copyright 1999-2001 (c) VA Linux Systems
   * http://sourceforge.net
   *
-  * @version   $Id: index.php 6506 2008-05-27 20:56:57Z aljeux $
+  * @version   $Id: index.php 6747 2009-01-14 11:08:58Z lo-lan-do $
   *
   */
 
@@ -45,7 +45,7 @@ RSS/XML Exports
 <li><a href="rss_sfprojects.php"><?php echo $GLOBALS['sys_name']; ?> Full Project Listing</a>
 (<a href="http://my.netscape.com/publish/formats/rss-spec-0.91.html">RSS 0.91</a>,
 <a href="http://my.netscape.com/publish/formats/rss-0.91.dtd">&lt;rss-0.91.dtd&gt;</a>)</li>
-<li><A href="rss20_projects.php"><?php print $GLOBALS['sys_name'] ?> Full Project Listing</a>
+<li><a href="rss20_projects.php"><?php print $GLOBALS['sys_name'] ?> Full Project Listing</a>
 (<a href="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</a>)</li>
 <li><a href="trove_tree.php"><?php echo $GLOBALS['sys_name']; ?> Trove Categories Tree</a>
 (<a href="http://www.w3.org/XML">XML</a>,<a href="trove_tree_0.1.dtd">&lt;trove_tree_0.1.dtd&gt;</a>)</li>

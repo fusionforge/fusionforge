@@ -28,7 +28,7 @@
  * Based on the "debian" theme, which is apparantly :-
  * 		Copyright 1999-2001 (c) VA Linux Systems
  *
- * @version   $Id: Theme.class.php 6430 2008-03-11 20:32:11Z aljeux $
+ * @version   $Id: Theme.class.php 6781 2009-01-20 18:11:55Z aljeux $
  */
 
 class Theme extends Layout {
@@ -43,6 +43,13 @@ class Theme extends Layout {
 
 		$this->Layout();
 
+		// The HTML box background color
+		$this->COLOR_HTMLBOX_BACK = '#B6B6B6';
+
+		// height of a tab (ie the size of the background image), 23 is specified in the
+		// style guide and so the background images were drawn for that size, changing
+		// this will lead to the images being cropped or tiled, either will look bad.
+		$this->TAB_HEIGHT=23;
 	}
 
 	/**
@@ -107,7 +114,7 @@ class Theme extends Layout {
 <?php
 
 
-		  if ($params['group']) {
+		  if (isset($params['group']) && $params['group']) {
 
 ?>
 			<tr>
@@ -221,9 +228,9 @@ class Theme extends Layout {
 			case 0:
 				return ' bgcolor="#FFFFFF"';
 			case 1:
-				return ' bgcolor="' . $this->COLOR_LTBACK1 . '"';
+				return ' bgcolor="#DDDDDD"';
 			case 2:
-				return ' bgcolor="' . $this->COLOR_LTBACK2 . '"';
+				return ' bgcolor="#B6B6B6"';
 		}
 	}
 
@@ -286,7 +293,7 @@ class Theme extends Layout {
 		$count=count($TABS_DIRS);
 		$width=intval((100/($count+1)));
 		$space=intval($width/2);
-		$return .= '
+		$return = '
 
 		<!-- tabGenerator -->
 

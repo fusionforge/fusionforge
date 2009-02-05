@@ -89,7 +89,7 @@ BuildRoot:	%{_tmppath}/%{gforge_name}-plugin-%{plugin_name}-%{version}-%{release
 
 Summary:	Mantis plugin for %{gforge_friendly_name}
 Name:		%{gforge_name}-plugin-%{plugin_name}
-Version:	2.9
+Version:	2.10
 Release:	1.%{dist}
 License:	GPL
 Group:		Applications/Internet
@@ -97,6 +97,7 @@ URL:		http://novaforge.frec.bull.fr/projects/novaforge/
 Requires:	getdist >= %{getdist_version}
 Requires:	%{gforge_name} >= %{gforge_version}-%{gforge_release}
 Requires:	%{gforge_name}-plugin-apibull >= %{gforge_plugin_apibull_version}-%{gforge_plugin_apibull_release}
+Requires: gettext
 
 %description
 This RPM installs the Mantis plugin of %{gforge_friendly_name}.
@@ -198,6 +199,13 @@ touch %{buildroot}%{_sysconfdir}/httpd/conf.d/%{gforge_name}-plugin-%{plugin_nam
 %{__install} -d %{buildroot}%{_datadir}/%{gforge_name}/www/plugins/%{plugin_name}
 %{__install} pluginwww/* %{buildroot}%{_datadir}/%{gforge_name}/www/plugins/%{plugin_name}/
 
+# Install /usr/share/locale
+if [ -e "locale" ] ; then
+	%{__install} -d %{buildroot}%{_datadir}/locale
+	%{__cp} -a locale/* %{buildroot}%{_datadir}/locale/
+	%find_lang %{name}
+fi
+
 # Install /usr/share/gforge/override
 %{__install} -d %{buildroot}%{_datadir}/%{gforge_name}/override
 pushd %{buildroot}%{_datadir}/%{gforge_name}
@@ -241,7 +249,7 @@ ENDTEXT
 	exit 1
 fi
 
-%files
+%files -f %{name}.lang
 %defattr(-,root,root)
 %doc LICENSE
 %attr(0644,root,root) %{_sysconfdir}/cron.d/%{gforge_name}-plugin-%{plugin_name}
@@ -258,7 +266,11 @@ fi
 %{_localstatedir}/lib/%{gforge_name}/config/plugin-%{plugin_name}
 
 %changelog
-* Fri Oct 31 2008 Gregory Cuellar <gregory.cuellar@bull.net> 4.7.1-1.1
+* Mon Feb 02 2009 Jean-Yves Cronier <jean-yves.cronier@bull.net> 2.10.1
+- Migration update (*.class -> *.class.php) 
+- i18n
+
+* Fri Oct 31 2008 Gregory Cuellar <gregory.cuellar@bull.net> 2.9.1
 - Update to RHEL 5
 - Requires gforge >= 4.7.1-1.1
 - Requires gforge-plugin-apibull >= 1.11-2

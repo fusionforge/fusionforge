@@ -5,7 +5,7 @@
  * Copyright 2002 GForge, LLC
  * http://gforge.org/
  *
- * @version   $Id: forum.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: forum.php 6747 2009-01-14 11:08:58Z lo-lan-do $
  */
 
 
@@ -384,7 +384,7 @@ if ($forum_id) {
 		//
 		//	Viewing an entire message forum in a given format
 		//
-		echo '<CENTER><h3>'._('Start New Thread').'</h3></CENTER>';
+		echo '<center><h3>'._('Start New Thread').'</h3></center>';
 		$fh->showPostForm();
 	}
 */

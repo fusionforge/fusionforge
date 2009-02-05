@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head><title>Monitoring sur /test_FRCLS0804</title>
+<link rel='stylesheet' href='?resource=monitoring.css' type='text/css'/>
+<script type='text/javascript'>
+function showHide(id){
+  if (document.getElementById(id).style.display=='none') {
+    document.getElementById(id).style.display='inline';
+  } else {
+    document.getElementById(id).style.display='none';
+  }
+}
+</script>
+</head><body>
+<h3><img width='24' height='24' src='?resource=systemmonitor.png' alt='Stats'/>
+Statistiques de monitoring mesurées le 21/11/08 12:14 depuis le 21/11/08 12:13 sur /test_FRCLS0804</h3>
+<div align='center'>
+<div class='noPrint'>
+<a href='?period=jour'>Actualiser</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Choix de graphiques :&nbsp;&nbsp;&nbsp;
+<a href='?period=jour'>Jour</a>&nbsp;&nbsp;&nbsp;
+<a href='?period=semaine'>Semaine</a>&nbsp;&nbsp;&nbsp;
+<a href='?period=mois'>Mois</a>&nbsp;&nbsp;&nbsp;
+<a href='?period=annee'>Année</a>
+</div>
+<a href='?zoom=2&amp;graph=usedMemory&amp;period=jour&amp;zoom=true'><img src='?zoom=1&amp;graph=usedMemory&amp;period=jour' alt="Mémoire utilisée"/></a>
+<a href='?zoom=2&amp;graph=cpu&amp;period=jour&amp;zoom=true'><img src='?zoom=1&amp;graph=cpu&amp;period=jour' alt="% CPU"/></a>
+<a href='?zoom=2&amp;graph=httpSessions&amp;period=jour&amp;zoom=true'><img src='?zoom=1&amp;graph=httpSessions&amp;period=jour' alt="Sessions http"/></a>
+<br/>
+<a href='?zoom=2&amp;graph=httpHitsRate&amp;period=jour&amp;zoom=true'><img src='?zoom=1&amp;graph=httpHitsRate&amp;period=jour' alt="Hits http par minute"/></a>
+<a href='?zoom=2&amp;graph=httpMeanTimes&amp;period=jour&amp;zoom=true'><img src='?zoom=1&amp;graph=httpMeanTimes&amp;period=jour' alt="Temps http moyens (ms)"/></a>
+<a href='?zoom=2&amp;graph=httpSystemErrors&amp;period=jour&amp;zoom=true'><img src='?zoom=1&amp;graph=httpSystemErrors&amp;period=jour' alt="% d'erreurs http"/></a>
+<br/>
+<a href='?zoom=2&amp;graph=sqlHitsRate&amp;period=jour&amp;zoom=true'><img src='?zoom=1&amp;graph=sqlHitsRate&amp;period=jour' alt="Hits sql par minute"/></a>
+<a href='?zoom=2&amp;graph=sqlMeanTimes&amp;period=jour&amp;zoom=true'><img src='?zoom=1&amp;graph=sqlMeanTimes&amp;period=jour' alt="Temps sql moyens (ms)"/></a>
+<a href='?zoom=2&amp;graph=sqlSystemErrors&amp;period=jour&amp;zoom=true'><img src='?zoom=1&amp;graph=sqlSystemErrors&amp;period=jour' alt="% d'erreurs sql"/></a>
+</div>
+<h3><img width='24' height='24' src='?resource=dbweb.png' alt='http'/>Statistiques http</h3>
+Aucune requête
+<h3><img width='24' height='24' src='?resource=db.png' alt='sql'/>Statistiques sql</h3>
+Aucune requête
+<h3><img width='24' height='24' src='?resource=systeminfo.png' alt='Informations systèmes'/>
+Informations système</h3>
+<table align='left' border='0' cellspacing='0' cellpadding='2' summary='Informations système'>
+<tr><td>Mémoire java utilisée: </td><td>10 Mo / 63 Mo</td></tr>
+<tr><td>Nb de sessions http: </td><td>1</td></tr>
+</table>
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="javascript:{showHide('detailsJava');window.scrollTo(0,document.body.scrollHeight);}" class='noPrint'>+/- Détails</a>
+<br/><br/>
+<table id='detailsJava' style='display: none;' align='left' border='0' cellspacing='0' cellpadding='2' summary='Détails système'>
+<tr><td>Host: </td><td>FRCLS0804@129.185.218.182</td></tr>
+<tr><td>OS: </td><td>Windows XP Service Pack 2, x86/32 (2 coeurs)</td></tr>
+<tr><td>Java: </td><td>Java(TM) 2 Runtime Environment, Standard Edition, 1.5.0_15-b04</td></tr>
+<tr><td>Serveur: </td><td>Apache Tomcat/6.0.18</td></tr>
+<tr><td>Contexte webapp: </td><td>/test</td></tr>
+<tr><td>Démarrage: </td><td>21/11/08 11:57</td></tr>
+<tr><td valign='top'>Gestion mémoire: </td><td>Non heap memory = 14 Mo,<br/>Garbage collection time = 947 ms,<br/>Process cpu time = 12343 ms,<br/>Committed virtual memory = 42 Mo,<br/>Free physical memory = 1684 Mo,<br/>Total physical memory = 2047 Mo,<br/>Free swap space = 3831 Mo,<br/>Total swap space = 4095 Mo</td></tr>
+<tr><td valign='top'>Base de données: </td><td>jdbc/TestDB: jdbc:mysql://129.185.214.103:3306/mediavision?socketTimeout=5000&amp;connectTimeout=5000<br/>MySQL, 5.0.67-community-nt<br/>Driver JDBC: MySQL-AB JDBC Driver, mysql-connector-java-5.1.5 ( Revision: ${svn.Revision} )</td></tr>
+</table>
+</body></html>

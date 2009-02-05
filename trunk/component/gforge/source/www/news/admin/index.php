@@ -6,7 +6,7 @@
  * The rest Copyright 2002-2004 (c) GForge Team
  * http://gforge.org/
  *
- * @version   $Id: index.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: index.php 6631 2008-10-06 18:53:32Z aljeux $
  *
  * This file is part of GForge.
  *
@@ -136,6 +136,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="30" maxlength="60"><br />
 		<strong>'._('Details').'</strong>'.notepad_button('document.forms[1].details').'<br />';
 		
+		$GLOBALS['editor_was_set_up']=false;
 		$params = array () ;
 		$params['name'] = 'details';
 		$params['width'] = "600";
@@ -143,7 +144,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		$params['group'] = $group_id;
 		$params['body'] = db_result($result,0,'details');
 		plugin_hook("text_editor",$params);
-		if (!isset($GLOBALS['editor_was_set_up'])) {
+		if (!$GLOBALS['editor_was_set_up']) {
 			//if we don't have any plugin for text editor, display a simple textarea edit box
 			echo '<textarea name="details" rows="5" cols="50" wrap="soft">'.db_result($result,0,'details').'</textarea><br />';
 		}
@@ -280,6 +281,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="30" maxlength="60" /><br />
 		<strong>'._('Details').':</strong><br />';
 		
+		$GLOBALS['editor_was_set_up']=false;
 		$params = array () ;
 		$params['name'] = 'details';
 		$params['width'] = "600";
@@ -288,7 +290,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		$params['body'] = db_result($result,0,'details');
 		plugin_hook("text_editor",$params);
 		if (!$GLOBALS['editor_was_set_up']) {
-			//if we don�t have any plugin for text editor, display a simple textarea edit box
+			//if we don't have any plugin for text editor, display a simple textarea edit box
 			echo '<textarea name="details" rows="5" cols="50" wrap="soft">'.db_result($result,0,'details').'</textarea><br />';
 		}
 		unset($GLOBALS['editor_was_set_up']);		

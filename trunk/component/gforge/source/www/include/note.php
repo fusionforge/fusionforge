@@ -6,7 +6,7 @@
  * Copyright 2003 FUJITSU PRIME SOFTWARE TECHNOLOGIES LIMITED
  * http://www.pst.fujitsu.com/
  *
- * @version   $Id: note.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: note.php 6617 2008-09-24 19:07:55Z aljeux $
  *
  * This file is part of GForge.
  *
@@ -59,7 +59,7 @@ function notepad_func() {
 '<script language="JavaScript" type="text/javascript">'.
 "\n<!--\n".
 'function notepad_window_param(form, wrap, rows, cols) {'.
-'   notepad_php = "/notepad.php";'.
+'   notepad_php = "'.util_make_url("/notepad.php").'";'.
 '   notepad_url = notepad_php + "?form="+form + "&wrap=" + wrap +'.
 '                "&rows=" + rows + "&cols=" + cols;'.
 '     notepad_title = \'GForgeNotepad\';'.

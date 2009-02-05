@@ -15,11 +15,11 @@
 
 	Total rewrite in OO and GForge coding guidelines 12/2002 by Tim Perdue
 */
-
-require_once('pre.php');
-require_once('www/pm/include/ProjectGroupHTML.class');
-require_once('www/pm/include/ProjectTaskHTML.class');
-require_once('common/pm/ProjectGroupFactory.class');
+require_once('../../env.inc.php');
+require_once($gfwww.'include/pre.php');
+require_once('www/pm/include/ProjectGroupHTML.class.php');
+require_once('www/pm/include/ProjectTaskHTML.class.php');
+require_once('common/pm/ProjectGroupFactory.class.php');
 
 if (!$group_id || !$group_project_id) {
 	exit_missing_param();
@@ -85,7 +85,7 @@ switch ($func) {
 						exit_error('ERROR','addRelatedArtifacts():: '.$pt->getErrorMessage());
 					}
 				}
-				$feedback=$Language->getText('pm_addtask','task_created_successfully');
+				$feedback=dgettext('pm_addtask','task_created_successfully');
 				include 'www/pm/browse_task.php';
 			}
 		} else {
@@ -117,7 +117,7 @@ switch ($func) {
 						exit_error('ERROR','removeRelatedArtifacts():: '.$pt->getErrorMessage());
 					}
 				}
-				$feedback=$Language->getText('pm_addtask','task_updated_successfully');
+				$feedback=dgettext('pm_addtask','task_updated_successfully');
 				include 'www/pm/browse_task.php';
 			}
 		} else {
@@ -210,7 +210,7 @@ switch ($func) {
 				}
 			}
 			if (!$was_error) {
-				$feedback = $Language->getText('pm_addtask','task_updated_successfully');
+				$feedback = dgettext('pm_addtask','task_updated_successfully');
 			}
 			include 'www/pm/browse_task.php';
 			break;
@@ -234,7 +234,7 @@ switch ($func) {
 			if (!$pt->addRelatedArtifacts($add_artifact_id)) {
 				exit_error('ERROR','addRelatedArtifacts():: '.$pt->getErrorMessage());
 			} else {
-				$feedback=$Language->getText('pm_addtask','task_added_relationship');
+				$feedback=dgettext('pm_addtask','task_added_relationship');
 				include 'www/pm/browse_task.php';
 
 			}
@@ -275,13 +275,13 @@ switch ($func) {
 				exit_error('Error', $pt->getErrorMessage());
 			}
 			if (!$confirm_delete) {
-				$feedback .= $Language->getText('pm_deletetask','task_delete_failed_confirm');
+				$feedback .= dgettext('pm_deletetask','task_delete_failed_confirm');
 			} else {
 				$deletion = $pt->delete(true);
 				if (!$deletion) {
-					$feedback .= $Language->getText('pm_deletetask','task_delete_failed') . ': '.$pt->getErrorMessage();
+					$feedback .= dgettext('pm_deletetask','task_delete_failed') . ': '.$pt->getErrorMessage();
 				} else {
-					$feedback .= $Language->getText('pm_deletetask','task_deleted_successfully');
+					$feedback .= dgettext('pm_deletetask','task_deleted_successfully');
 				}
 			}
 			include 'www/pm/browse_task.php';

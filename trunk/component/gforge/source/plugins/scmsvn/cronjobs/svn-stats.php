@@ -1,5 +1,4 @@
 #! /usr/bin/php5 -f
-
 <?php
 /**
 * This file is part of GForge.
@@ -20,6 +19,7 @@
 * along with GForge; if not, write to the Free Software
 * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
 */
+require dirname(__FILE__).'/../../env.inc.php';
 require_once $gfwww.'include/squal_pre.php';
 require_once $gfcommon.'include/cron_utils.php';
 require_once $gfconfig.'plugins/scmsvn/config.php';

@@ -1,0 +1,7 @@
+# Afin de ne pas spécifier l'extension des fichiers dans les URI
+Options +MultiViews
+
+# Protection du fichier de configuration
+<Files configuration.ini>
+	Deny from all
+</Files>

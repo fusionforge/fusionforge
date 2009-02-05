@@ -1,4 +1,4 @@
-# $Id: include.pl 6494 2008-05-14 14:03:44Z lo-lan-do $
+# $Id: include.pl 6613 2008-09-18 18:12:56Z aljeux $
 #
 # include.pl - Include file for all the perl scripts that contains reusable functions
 #
@@ -34,7 +34,7 @@ sub parse_local_inc {
 sub db_connect ( ) {
     &parse_local_inc;
 
-    $dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname","$sys_dbuser","$sys_dbpasswd") ;
+    $dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname;host=$sys_dbhost","$sys_dbuser","$sys_dbpasswd") ;
     if (! $dbh) {
 	die "Error while connecting to database: $!" ;
     }

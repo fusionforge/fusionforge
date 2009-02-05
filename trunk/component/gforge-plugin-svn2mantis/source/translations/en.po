@@ -1,0 +1,3 @@
+#: plugincore/include/svn2mantisPlugin.class.php:57
+msgid "use_svn2mantis"
+msgstr "Notification of Subersion commits to Mantis"

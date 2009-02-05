@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  *
- * @version   $Id: bookmark_add.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: bookmark_add.php 6605 2008-09-15 20:05:34Z aljeux $
  *
  * This file is part of GForge.
  *
@@ -35,7 +35,7 @@ $bookmark_title = trim(getStringFromRequest('bookmark_title'));
 
 if (getStringFromRequest('submit') && $bookmark_url && $bookmark_title) {
 
-	printf(_('Added bookmark for <strong>%1$s</strong> with title <strong>%2$s</strong>'), $bookmark_url, $bookmark_title).".<p>&nbsp;</p>";
+	printf(_('Added bookmark for <strong>%1$s</strong> with title <strong>%2$s</strong>'), htmlspecialchars(stripslashes($bookmark_url)),htmlspecialchars(stripslashes($bookmark_title))).".<p>&nbsp;</p>";
 
 	bookmark_add ($bookmark_url, $bookmark_title);
 	print "<a href=\"$bookmark_url\">"._('Visit the bookmarked page')."</a> - ";

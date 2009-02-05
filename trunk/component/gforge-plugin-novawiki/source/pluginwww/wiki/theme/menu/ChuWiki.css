@@ -1,0 +1,265 @@
+/*
+////////////////////////////////////////////////////////////////////////////////
+// ***** BEGIN LICENSE BLOCK *****
+// This file is part of ChuWiki.
+// Copyright (c) 2004 Vincent Robert and contributors. All rights
+// reserved.
+//
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA//
+//
+// ***** END LICENSE BLOCK *****
+////////////////////////////////////////////////////////////////////////////////
+*/
+
+html
+{
+	background: #EEE;
+	margin: 0;
+	padding: 0;
+}
+
+body
+{
+	font-family: Trebuchet MS, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 90%;
+	margin: 1em;
+	padding: 0;
+}
+
+code, pre
+{
+	font-family: monospace;
+	font-size: 1.2em;
+}
+
+pre{
+	border: 1px solid #BBB;
+	background: #DDD;
+	margin: 1em;
+	padding: 1em;
+	overflow: auto;
+}
+
+blockquote{
+	border-left: 1ex solid #ccc;
+	padding-left: 1ex;
+}
+
+p{
+	text-align: justify;
+}
+
+li{
+	margin-top: 0.25em;
+	margin-bottom: 0.25em;
+}
+
+table{
+	border-collapse: collapse;
+}
+
+td, th{
+	border: 1px solid #000;
+}
+
+dt
+{
+    margin-top: 0.5em;
+}
+
+q::before{
+	content: "\ab\a0";
+}
+q::after{
+	content: "\a0\bb";
+}
+q[lang]::after{
+	content: "\a0\bb\a0[" attr(lang) "]";
+}
+
+a[hreflang]::after{
+	content: "\a0[" attr(hreflang) "]";
+}
+
+/* Titre
+************************************************************/
+#Logo
+{
+    font-size: 2em;
+    color: #999;
+    line-height: 1em;
+    margin: 0;
+}
+
+h1
+{
+	font-family: "Trebuchet MS", Verdana, "Bitstream Vera Sans", sans-serif;
+	color: #111;
+	margin: 0;
+}
+
+h2
+{
+    color: #119;
+    border-bottom: 1px solid #119;
+}
+
+h3
+{
+	color: #191;
+	font-weight: normal;
+}
+
+/* Barre d'outils
+************************************************************/
+#UtilsSeparator
+{
+	display: none;
+}
+
+#Utils
+{
+	position: absolute;
+	font-size: 90%;
+	padding: 5px 0;
+	margin: 0;
+	right: 1em;
+	top: 1em;
+}
+
+#Utils li{
+	display: inline;
+	padding: 4px 0;
+}
+
+#Utils li a{
+	border: 1px solid #666;
+	-moz-border-radius: 5px 5px 4px 4px;
+	background: #F2F2F2 url(../default/gfx/tb.png) repeat-x;
+	padding: 4px 8px;
+	color: #333;
+	text-decoration: none;
+}
+
+#Utils li a:hover{
+	color: #000;
+	background: #EEE url(../default/gfx/tbh.png) repeat-x;
+	border-color: #000;
+}
+
+/* Contenu
+************************************************************/
+#Content
+{
+	float: right;
+	background: #fff;
+	color: #000;
+	border: 1px solid #CCC;
+	padding: 1em;
+	margin: 0.5em 0 1em 0ex;
+	width: 75%;
+}
+
+#Content.Preview{
+	background: #FFF url(../default/gfx/preview.png) no-repeat right top;
+}
+
+/* Menu
+************************************************************/
+#Menu
+{
+	margin: 0.5em 0 0 0;
+	padding: 0;
+    width: 20%;
+	font-size: 80%;
+}
+#Menu ul
+{
+	background: #fff;
+	border: 1px solid #CCC;
+	color: #000;
+	padding: 0.5em 0;
+	margin: 0 0 1em 0;
+}
+#Menu li
+{
+	display: inline;
+}
+#Menu li a
+{
+	display: block;
+	padding: 0.2em 1ex;
+}
+#Menu li a:hover
+{
+	color: #000;
+	background: #eee;
+}
+
+#Menu h2
+{
+	background: #F2F2F2 url(../default/gfx/tb.png) repeat-x;
+	font-size: 1.2em;
+	text-align: center;
+	border-bottom: 0;
+	padding: 0 8px;
+	margin: 0;
+    color: #000;
+	text-decoration: none;
+	border: 1px solid #CCC;
+	border-bottom: 0;
+}
+
+/* Edit Mode
+************************************************************/
+#Wiki{
+	border: 1px solid #CCC;
+	width: 100%;
+}
+
+textarea, select{
+	border: 0;
+	margin: 0;
+	width: 100%;
+	font-family: Trebuchet MS, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 90%;
+	border: 1px solid #ccc;
+}
+
+#Rules
+{
+	background: #fff;
+	border: 1px solid #CCC;
+	padding: 1em;
+	font-size: 90%;
+}
+
+#Rules dt
+{
+    margin-top: 1em;
+}
+
+#Rules dt code
+{
+    color: #191;
+}
+
+/* Footer
+************************************************************/
+#footer{
+	text-align: center;
+	font-weight: bold;
+	color: #AAA;
+}

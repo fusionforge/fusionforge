@@ -760,6 +760,13 @@ done
 %{__install} cronjobs/auth_unix.php %{buildroot}%{_datadir}/%{name}/cronjobs/
 %{__install} cronjobs/create_home_dirs.php %{buildroot}%{_datadir}/%{name}/cronjobs/
 
+# Install /usr/share/locale
+if [ -e "locale" ] ; then
+	%{__install} -d %{buildroot}%{_datadir}/locale
+	%{__cp} -a locale/* %{buildroot}%{_datadir}/locale/
+	%find_lang %{name}
+fi
+
 # Install /usr/share/gforge/db
 %{__install} -d %{buildroot}%{_datadir}/%{name}/db
 %{__install} db/gforge-pgsql7.3.sql %{buildroot}%{_datadir}/%{name}/db/%{name}.sql
@@ -907,7 +914,7 @@ if [ -x %{_initrddir}/xinetd ] ; then
 	%{_initrddir}/xinetd condrestart >> /dev/null 2>&1
 fi
 
-%files
+%files -f %{name}.lang
 %defattr(-,root,root)
 %doc AUTHORS* Change* COPYING* INSTALL
 %attr(0644,root,root) %{_sysconfdir}/cron.d/%{name}

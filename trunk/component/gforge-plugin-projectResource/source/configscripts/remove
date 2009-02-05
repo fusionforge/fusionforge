@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Source functions
+if [ -e %DATADIR%/%NAME%/config/util/functions ] ; then
+	. %DATADIR%/%NAME%/config/util/functions
+else
+	exit 0
+fi
+init_variables $*
+source_init_parameters
+#
+# Save plugin config
+#
+save_plugin_config %PLUGIN_NAME%
+#
+# Unregister plugin
+#
+unregister_plugin %PLUGIN_NAME%
+#
+# Ignore previous errors
+#
+exit 0

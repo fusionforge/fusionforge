@@ -1,0 +1,414 @@
+#!/bin/bash
+#---------------------------------------------------------------------------
+# Novaforge is a registered trade mark from Bull S.A.S
+# Copyright (C) 2007 Bull S.A.S.
+# 
+# http://novaforge.org/
+#
+#
+# This file has been developped within the Novaforge(TM) project from Bull S.A.S
+# and contributed back to GForge community.
+#
+# GForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# GForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#---------------------------------------------------------------------------
+
+#
+# functions
+#
+
+# Initialize variables
+init_variables ()
+{
+	PREFIX_CHAR="#"
+	EXIT=0
+	if [ -n "$1" ] ; then
+		PREFIX_CHAR=$1
+	fi
+}
+
+# Read config parameters
+source_config_parameters ()
+{
+	echo -e "$PREFIX_CHAR Reading config parameters from file '%SYSCONFDIR%/%NAME%/.config'"
+	DB_NAME=""
+	if [ -e %SYSCONFDIR%/%NAME%/.config ] ; then
+		. %SYSCONFDIR%/%NAME%/.config
+		if [ -z "$DB_NAME" ] ; then
+			echo -e "$PREFIX_CHAR -> Parameter DB_NAME is empty or not defined"
+			EXIT=1
+		fi
+	else
+		echo -e "$PREFIX_CHAR -> No file to read from"
+	fi
+}
+
+# Stop service
+# Parameters:
+#   Service name
+stop_service ()
+{
+	SERVICE_NAME=$1
+	echo -e "$PREFIX_CHAR Stopping service $SERVICE_NAME"
+	if [ -x %INITRDDIR%/$SERVICE_NAME ] ; then
+		service $SERVICE_NAME stop >> /dev/null 2>&1
+		if [ $? -ne 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Error while stopping"
+		fi
+	else
+		echo -e "$PREFIX_CHAR -> Script '%INITRDDIR%/$SERVICE_NAME' does not exist"
+	fi
+}
+
+# Start service
+# Parameters:
+#   Service name
+start_service ()
+{
+	SERVICE_NAME=$1
+	echo -e "$PREFIX_CHAR Starting service $SERVICE_NAME"
+	if [ -x %INITRDDIR%/$SERVICE_NAME ] ; then
+		service $SERVICE_NAME start >> /dev/null 2>&1
+		if [ $? -ne 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Error while starting"
+			EXIT=1
+		fi
+	else
+		echo -e "$PREFIX_CHAR -> Script '%INITRDDIR%/$SERVICE_NAME' does not exist"
+		EXIT=1
+	fi
+}
+
+# Restart service
+# Parameters:
+#   Service name
+restart_service ()
+{
+	SERVICE_NAME=$1
+	echo -e "$PREFIX_CHAR Restarting service $SERVICE_NAME"
+	if [ -x %INITRDDIR%/$SERVICE_NAME ] ; then
+		service $SERVICE_NAME restart >> /dev/null 2>&1
+		if [ $? -ne 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Error while restarting"
+			EXIT=1
+		fi
+	else
+		echo -e "$PREFIX_CHAR -> Script '%INITRDDIR%/$SERVICE_NAME' does not exist"
+		EXIT=1
+	fi
+}
+
+# Display a right-padded item
+# Parameters:
+#   Item string
+#   padding size
+display_padded_item ()
+{
+	echo -en "`echo "$1         " | cut -c1-$2`"
+}
+
+
+#
+# Constants
+#
+
+DB_USER="%PLUGIN_NAME%"
+
+# Variables
+MYSQL_PASSWORD=""
+DB_NAME=""
+CREATE_DB=""
+DB_PASSWORD=""
+MYSQLD_STOPPED=0
+
+init_variables "#"
+echo -e "$PREFIX_CHAR$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR %NAME% : configuration"
+echo -e "$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR This script will generate configuration files."
+echo -e "$PREFIX_CHAR"
+echo -e "$PREFIX_CHAR -> Continue ('y' or 'n') ?"
+echo -en "$PREFIX_CHAR -> "
+read CHOICE
+if [ "$CHOICE" != "y" ]; then
+	EXIT=1
+fi
+#
+# Read configuration
+#
+source_config_parameters
+
+#
+# Get password of MySQL's root
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Please type the password of MySQL 'root' user ('q' to quit)"
+	echo -en "$PREFIX_CHAR -> "
+	read CHOICE
+	if [ "$CHOICE" = "q" ] ; then
+		EXIT=1
+	else
+		MYSQL_PASSWORD=$CHOICE
+	fi
+fi
+#
+# Ask whether to create a DB or not
+#
+if [ $EXIT -eq 0 ] ; then
+	if [ -n "$DB_NAME" -a -e %LOCALSTATEDIR%/lib/mysql/$DB_NAME ] ; then
+		CREATE_DB="n"
+	else
+		CREATE_DB="y"
+	fi
+	echo -e "$PREFIX_CHAR Do you want to create a new database (default: '$CREATE_DB', 'y', 'n' or 'q' to quit) ?"
+	echo -en "$PREFIX_CHAR -> "
+	read CHOICE
+	if [ "$CHOICE" = "q" ] ; then
+		EXIT=1
+	else
+		if [ -n "$CHOICE" ] ; then
+			if [ "$CHOICE" = "y" -o "$CHOICE" = "n" ] ; then
+				CREATE_DB=$CHOICE
+			else
+				echo -e "$PREFIX_CHAR -> Invalid choice"
+				EXIT=1
+			fi
+		fi
+	fi
+fi
+#
+# Ask the name of the DB to use or create
+#
+if [ $EXIT -eq 0 ] ; then
+	if [ "$CREATE_DB" = "n" ] ; then
+		echo -e "$PREFIX_CHAR Please select the %NAME% database"
+		DATABASES=`find %LOCALSTATEDIR%/lib/mysql -type d -printf "%P "`
+		if [ $? -eq 0 ] ; then
+			SIZE=`echo $DATABASES | awk '{print NF}'`
+			NUMBER=1
+			for DATABASE in $DATABASES ; do
+				echo -en "$PREFIX_CHAR "
+				display_padded_item $NUMBER 3
+				echo -e $DATABASE
+				(( NUMBER+=1 ))
+			done
+			if [ -n "$DB_NAME" -a -e %LOCALSTATEDIR%/lib/mysql/$DB_NAME ] ; then
+				echo -e "$PREFIX_CHAR -> %NAME% Database (default: '$DB_NAME', '1' to '$SIZE' or 'q' to quit) ?"
+			else
+				DB_NAME=""
+				echo -e "$PREFIX_CHAR -> %NAME% Database ('1' to '$SIZE' or 'q' to quit) ?"
+			fi
+			echo -en "$PREFIX_CHAR -> "
+			read CHOICE
+			if [ "$CHOICE" = "q" ] ; then
+				EXIT=1
+			else
+				if [ -n "$CHOICE" ] ; then
+					expr $CHOICE \>= 1 > /dev/null 2>&1
+					if [ $? -eq 0 ] ; then
+						expr $CHOICE \<= $SIZE >> /dev/null 2>&1
+						if [ $? -ne 0 ] ; then
+							echo -e "$PREFIX_CHAR -> Value is greater than $SIZE"
+							EXIT=1
+						else
+							DB_NAME=`echo $DATABASES | awk '{print $'$CHOICE'}'`
+						fi
+					else
+						echo -e "$PREFIX_CHAR -> Value is lower than 1 or not an integer"
+						EXIT=1
+					fi
+				else
+					if [ -z "$DB_NAME" ] ; then
+						echo -e "$PREFIX_CHAR -> Invalid choice"
+						EXIT=1
+					fi
+				fi
+			fi
+		else
+			echo "$PREFIX_CHAR -> Error while searching available databases"
+			EXIT=1
+		fi
+	else
+		if [ -z "$DB_NAME" ] ; then
+			DB_NAME="gforge_plugin_novacontinuum_webdav"
+		fi
+		echo -e "$PREFIX_CHAR Please type the name of the %NAME% database to create (default: '$DB_NAME', 'q' to quit) ?"
+		echo -en "$PREFIX_CHAR -> "
+		read CHOICE
+		if [ "$CHOICE" = "q" ] ; then
+			EXIT=1
+		else
+			if [ -n "$CHOICE" ] ; then
+				DB_NAME=$CHOICE
+			fi
+			if [ -d %LOCALSTATEDIR%/lib/mysql/$DB_NAME ] ; then
+				echo -e "$PREFIX_CHAR -> Database '$DB_NAME' already exists"
+				EXIT=1
+			fi
+		fi
+	fi
+fi
+#
+# Confirm
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Checking parameters"
+	echo -e "$PREFIX_CHAR   Database name        : $DB_NAME"
+	echo -e "$PREFIX_CHAR   Create database      : $CREATE_DB"
+	echo -e "$PREFIX_CHAR -> Accept ('y' or 'n') ?"
+	echo -en "$PREFIX_CHAR -> "
+	read CHOICE
+	if [ "$CHOICE" != "y" ] ; then
+		EXIT=1
+	fi
+fi
+#
+# Save configuration
+#
+if [ $EXIT -eq 0 ] ; then
+	mkdir -p %SYSCONFDIR%/%NAME%/
+	chown root.root %SYSCONFDIR%/%NAME%/
+	chmod 600 %SYSCONFDIR%/%NAME%/
+	echo -e "$PREFIX_CHAR Saving configuration in file '%SYSCONFDIR%/%NAME%/.config'"
+	echo -e "DB_NAME=$DB_NAME" >> %SYSCONFDIR%/%NAME%/.config
+	chown root.root %SYSCONFDIR%/%NAME%/.config
+	chmod 600 %SYSCONFDIR%/%NAME%/.config
+fi
+
+#
+# Generate password of MySQL user
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Generating password of MySQL user '$DB_USER'"
+	DB_PASSWORD="`pwgen -N 1 -c -n -s`"
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while generating password"
+		EXIT=1
+	fi
+fi
+
+
+#
+# Create configuration file
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Creating configuration file '%DATADIR%/%GFORGE_NAME%/plugins/%PLUGIN_NAME%/include/webdavsrv/webdav.php'"
+	sed \
+		-e "s|@db_name@|$DB_NAME|g" \
+		-e "s|@db_user@|$DB_USER|g" \
+		-e "s|@db_password@|$DB_PASSWORD|g" \
+		%DATADIR%/%GFORGE_NAME%/plugins/%PLUGIN_NAME%/db/webdav.php > %DATADIR%/%GFORGE_NAME%/plugins/%PLUGIN_NAME%/include/webdavsrv/webdav.php
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while creating file '%DATADIR%/%GFORGE_NAME%/plugins/%PLUGIN_NAME%/include/webdavsrv/webdav.php' from '%DATADIR%/%GFORGE_NAME%/plugins/%PLUGIN_NAME%/db/webdav.php'"
+		EXIT=1
+	fi
+	chown root.%APACHE_GROUP% %DATADIR%/%GFORGE_NAME%/plugins/%PLUGIN_NAME%/include/webdavsrv/webdav.php
+	chmod 640 %DATADIR%/%GFORGE_NAME%/plugins/%PLUGIN_NAME%/include/webdavsrv/webdav.php
+fi
+#
+# Stop mysqld service
+#
+if [ $EXIT -eq 0 ] ; then
+	if [ "$CREATE_DB" = "y" ] ; then
+		stop_service mysqld
+		if [ $EXIT -eq 0 ] ; then
+			MYSQLD_STOPPED=1
+		fi
+	fi
+fi
+#
+# Create database
+#
+if [ $EXIT -eq 0 ] ; then
+	if [ "$CREATE_DB" = "y" ] ; then
+		echo -e "$PREFIX_CHAR Creating database '$DB_NAME'"
+		mkdir %LOCALSTATEDIR%/lib/mysql/$DB_NAME
+		if [ $? -ne 0 ] ; then
+			echo -e "$PREFIX_CHAR -> Error while creating directory '%LOCALSTATEDIR%/lib/mysql/$DB_NAME'"
+			EXIT=1
+		else 
+			tar -xzf %DATADIR%/%GFORGE_NAME%/plugins/%PLUGIN_NAME%/db/webdav-database.tar.gz -C %LOCALSTATEDIR%/lib/mysql/$DB_NAME
+			if [ $? -ne 0 ] ; then
+				echo -e "$PREFIX_CHAR -> Error while extracting archive"
+				EXIT=1
+			else
+				chown -R mysql.mysql %LOCALSTATEDIR%/lib/mysql/$DB_NAME
+				chmod -R ug+rw %LOCALSTATEDIR%/lib/mysql/$DB_NAME
+				chmod -R o-rwx %LOCALSTATEDIR%/lib/mysql/$DB_NAME
+			fi
+		fi
+	fi
+fi
+#
+# Start mysqld service
+#
+if [ $MYSQLD_STOPPED -eq 1 ] ; then
+	start_service mysqld
+fi
+#
+# Revoke rights of MySQL user
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Revoking MySQL user '$DB_USER' rights"
+	if [ -n "$MYSQL_PASSWORD" ]; then
+		OPTION="--password=$MYSQL_PASSWORD"
+	else
+		OPTION=""
+	fi
+	echo -n "REVOKE ALL ON *.* FROM '$DB_USER'@'localhost';" | mysql --database=mysql --user=root $OPTION >> /dev/null 2>&1
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while revoking MySQL user rights (warning)"
+	fi
+fi
+#
+# Delete MySQL user
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Deleting MySQL user '$DB_USER'"
+	echo -n "DELETE FROM user WHERE User='$DB_USER' AND Host='localhost'; FLUSH PRIVILEGES;" | mysql --database=mysql --user=root $OPTION >> /dev/null 2>&1
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while deleting MySQL user"
+		EXIT=1
+	fi
+fi
+
+#
+# Create MySQL user
+#
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR Creating MySQL user '$DB_USER'"
+	echo -n "GRANT ALL ON $DB_NAME.* TO '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASSWORD';" | mysql --database=mysql --user=root $OPTION >> /dev/null 2>&1
+	if [ $? -ne 0 ] ; then
+		echo -e "$PREFIX_CHAR -> Error while creating MySQL user"
+		EXIT=1
+	fi
+fi
+
+#
+# Restart httpd service
+#
+if [ $EXIT -eq 0 ] ; then
+	restart_service httpd
+fi
+echo -e "$PREFIX_CHAR"
+if [ $EXIT -eq 0 ] ; then
+	echo -e "$PREFIX_CHAR -> Success !"
+	echo -e "$PREFIX_CHAR"
+	echo -e "$PREFIX_CHAR Please note:"
+	echo -e "$PREFIX_CHAR   * file '%SYSCONFDIR%/%NAME%/.config' contains the config parameters (used to generate all other config files)"
+else
+	echo -e "$PREFIX_CHAR -> Failure !"
+fi
+echo -e "$PREFIX_CHAR$PREFIX_CHAR"
+exit $EXIT

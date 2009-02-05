@@ -118,7 +118,7 @@ if (db_numrows($res_db) > 0)
 		<input type="hidden" name="group_id" value="<?php echo $q["group_id"]; ?>" />
 		<tr>
 			<td style="border-top:thin solid #808080"><?php echo $q["group_id"]; ?></td>
-			<td style="border-top:thin solid #808080"><a href="/project/admin/quota.php?group_id=<?php echo $q["group_id"]; ?>">
+			<td style="border-top:thin solid #808080"><a href="<?php echo util_make_url ('/project/admin/quota.php?group_id='.$q['group_id']); ?>">
 				<?php echo $q["unix_name"]; ?>
 			</a></td>
 			<td style="border-top:thin solid #808080"><?php echo $q["name"]; ?></td>

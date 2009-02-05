@@ -27,10 +27,11 @@
 
 // The novaforge/auth.php file MUST be included before pre.php,
 // in order to properly declare the variables of apibull/config.php
-// If not, pre.php will include MantisPlugin.class in a function,
+// If not, pre.php will include MantisPlugin.class.php in a function,
 // and the sys_auth_* variables will exist but will eb empty
+require_once ('../../env.inc.php');
 require_once ("common/novaforge/auth.php");
-require_once ("pre.php");
+require_once ($gfwww.'include/pre.php');
 require_once ("common/novaforge/log.php");
 require_once ("plugins/mantis/include/gforgefunctions.php");
 require_once ("plugins/mantis/include/mantisfunctions.php");
@@ -52,12 +53,12 @@ else
 {
 	if ($group->isError () == true)
 	{
-		exit_error ($Language->getText ("gforge-plugin-mantis", "title_create"), $group->getErrorMessage ());
+		exit_error (dgettext ("gforge-plugin-mantis", "title_create"), $group->getErrorMessage ());
 	}
 }
 if ($group->usesPlugin ("mantis") == false)
 {
-	exit_error ($Language->getText ("gforge-plugin-mantis", "title_create"), $Language->getText ("gforge-plugin-mantis", "not_enabled"));
+	exit_error (dgettext ("gforge-plugin-mantis", "title_create"), dgettext ("gforge-plugin-mantis", "not_enabled"));
 }
 $perm = &$group->getPermission (session_get_user ());
 if ($perm->isAdmin () == false)
@@ -75,7 +76,7 @@ if ((strpos ($name, ">") !== false)
 ||  (strpos ($description, ">") !== false)
 ||  (strpos ($description, "<") !== false))
 {
-	$error = $Language->getText ("gforge-plugin-mantis", "create_forbidden_characters");
+	$error = dgettext ("gforge-plugin-mantis", "create_forbidden_characters");
 }
 else
 {
@@ -103,12 +104,12 @@ else
 		}
 		else
 		{
-			$error = $Language->getText ("gforge-plugin-mantis", "database_error");
+			$error = dgettext ("gforge-plugin-mantis", "database_error");
 		}
 	}
 	else
 	{
-		$error = $Language->getText ("gforge-plugin-mantis", "mantis_error", $url);
+		$error = sprintf( dgettext ( "gforge-plugin-mantis" ,  "mantis_error" ) , $url );
 	}
 }
 if ($ok == true)
@@ -123,13 +124,13 @@ if ($ok == true)
 }
 else
 {
-	site_project_header (array ("title" => $Language->getText ("gforge-plugin-mantis", "title_create"), "group" => $group_id, "toptab" => "admin"));
+	site_project_header (array ("title" => dgettext ("gforge-plugin-mantis", "title_create"), "group" => $group_id, "toptab" => "admin"));
 ?>
-<h2><? echo $Language->getText ("gforge-plugin-mantis", "title_create"); ?></h2>
+<h2><? echo dgettext ("gforge-plugin-mantis", "title_create"); ?></h2>
 <p>
 <? echo $error; ?>
 <p>
-<a href="admin.php?group_id=<? echo $group_id; ?>"><? echo $Language->getText ("gforge-plugin-mantis", "backto"); ?></a>
+<a href="admin.php?group_id=<? echo $group_id; ?>"><? echo dgettext ("gforge-plugin-mantis", "backto"); ?></a>
 
 <?
 	site_project_footer (array ());

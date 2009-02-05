@@ -1,0 +1,7 @@
+#: plugincore/include/novawikiPlugin.class.php:84
+msgid "tab_title"
+msgstr "NovaWiki"
+
+#: plugincore/include/novawikiPlugin.class.php:98
+msgid "use_novawiki"
+msgstr "Use novawiki Plugin"

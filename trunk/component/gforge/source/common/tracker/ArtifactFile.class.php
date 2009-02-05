@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  *
- * @version   $Id: ArtifactFile.class.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: ArtifactFile.class.php 6747 2009-01-14 11:08:58Z lo-lan-do $
  *
  * This file is part of GForge.
  *
@@ -124,7 +124,7 @@ class ArtifactFile extends Error {
 		//	data validation
 		//
 		if (!$filename || !$filetype || !$filesize || !$bin_data) {
-			//echo '<P>|'.$filename.'|'.$filetype.'|'.$filesize.'|'.$bin_data.'|';
+			//echo '<p>|'.$filename.'|'.$filetype.'|'.$filesize.'|'.$bin_data.'|';
 			$this->setError(_('ArtifactFile: File name, type, size, and data are required'));
 			return false;
 		}

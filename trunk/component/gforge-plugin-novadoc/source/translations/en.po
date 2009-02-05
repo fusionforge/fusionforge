@@ -1,0 +1,424 @@
+#: plugincore/include/AuthView.class.php:36
+msgid "authLabel1"
+msgstr "None"
+
+#: plugincore/include/AuthView.class.php:37
+msgid "authLabel2"
+msgstr "Read"
+
+#: plugincore/include/AuthView.class.php:38
+msgid "authLabel3"
+msgstr "Write"
+
+#: plugincore/include/AuthView.class.php:39
+msgid "authLabel4"
+msgstr "Delete"
+
+#: plugincore/include/AuthView.class.php:51
+msgid "propagateAuth"
+msgstr "Propagate the autorization to the children ?"
+
+#: plugincore/include/AuthView.class.php:222
+msgid "infoDefaultAuth"
+msgstr "* The authorizations preceded by an asterisk are the default authorizations"
+
+#: plugincore/include/AuthView.class.php:223
+#: plugincore/include/DocumentCardView.class.php:360
+msgid "submit"
+msgstr "Submit Information"
+
+#: plugincore/include/Document.class.php:132
+#: plugincore/include/Document.class.php:201
+msgid "doc_unique"
+msgstr "A document with the same name already exists in the branch."
+
+#: plugincore/include/Document.class.php:196
+#: plugincore/include/Document.class.php:654
+msgid "error_min_title_length"
+msgstr "Title must be at least 5 characters"
+
+#: plugincore/include/Document.class.php:288
+#: plugincore/include/Document.class.php:309
+#: plugincore/include/Document.class.php:344
+msgid "invalid_docid"
+msgstr "Document: invalid ID"
+
+#: plugincore/include/DocumentCardView.class.php:86
+msgid "displayHistory"
+msgstr "Display the history"
+
+#: plugincore/include/DocumentCardView.class.php:91
+#: plugincore/include/DocumentCardView.class.php:251
+msgid "date"
+msgstr "Date"
+
+#: plugincore/include/DocumentCardView.class.php:92
+#: plugincore/include/DocumentCardView.class.php:205 pluginwww/chronos.php:129
+msgid "version"
+msgstr "Version"
+
+#: plugincore/include/DocumentCardView.class.php:93
+#: plugincore/include/DocumentCardView.class.php:220
+#: plugincore/include/DocumentTreeView.class.php:173 pluginwww/chronos.php:138
+msgid "status"
+msgstr "Status"
+
+#: plugincore/include/DocumentCardView.class.php:94
+#: plugincore/include/DocumentCardView.class.php:188 pluginwww/chronos.php:114
+msgid "title"
+msgstr "Title"
+
+#: plugincore/include/DocumentCardView.class.php:120
+#: plugincore/include/DocumentTreeView.class.php:228 pluginwww/chronos.php:65
+msgid "viewCard"
+msgstr "view card"
+
+#: plugincore/include/DocumentCardView.class.php:177
+msgid "file"
+msgstr "File"
+
+#: plugincore/include/DocumentCardView.class.php:179
+msgid "viewURL"
+msgstr "View File URL"
+
+#: plugincore/include/DocumentCardView.class.php:189 pluginwww/chronos.php:117
+msgid "author"
+msgstr "Author"
+
+#: plugincore/include/DocumentCardView.class.php:194
+#: plugincore/include/DocumentCardView.class.php:253 pluginwww/chronos.php:120
+msgid "description"
+msgstr "Description"
+
+#: plugincore/include/DocumentCardView.class.php:199 pluginwww/chronos.php:123
+msgid "writingDate"
+msgstr "Writing date"
+
+#: plugincore/include/DocumentCardView.class.php:200 pluginwww/chronos.php:132
+msgid "doctype"
+msgstr "Doc. type"
+
+#: plugincore/include/DocumentCardView.class.php:206 pluginwww/chronos.php:135
+msgid "reference"
+msgstr "Reference"
+
+#: plugincore/include/DocumentCardView.class.php:212
+#: plugincore/include/utils.php:119
+msgid "language"
+msgstr "Language"
+
+#: plugincore/include/DocumentCardView.class.php:227
+msgid "state"
+msgstr "State"
+
+#: plugincore/include/DocumentCardView.class.php:232
+msgid "delete_doc"
+msgstr "Delete this document"
+
+#: plugincore/include/DocumentCardView.class.php:242
+msgid "observation"
+msgstr "Observations"
+
+#: plugincore/include/DocumentCardView.class.php:252
+msgid "name"
+msgstr "Name"
+
+#: plugincore/include/DocumentCardView.class.php:277
+msgid "group"
+msgstr "Group that document belongs in"
+
+#: plugincore/include/DocumentCardView.class.php:305
+msgid "editdocs_upload_url"
+msgstr "Specify an outside URL where the file will be referenced"
+
+#: plugincore/include/DocumentCardView.class.php:312
+msgid "upload"
+msgstr "OPTIONAL: Upload new file"
+
+#: plugincore/include/DocumentCardView.class.php:319
+msgid "archive"
+msgstr "Archive previous version."
+
+#: plugincore/include/DocumentCardView.class.php:323
+#, php-format
+msgid "upload_ftp"
+msgstr "OR choose one form FTP %1$s"
+
+#: plugincore/include/DocumentCardView.class.php:336
+msgid "upload_file"
+msgstr "Upload File"
+
+#: plugincore/include/DocumentCardView.class.php:344
+msgid "upload_url"
+msgstr "OR specify an outside URL where the file will be referenced"
+
+#: plugincore/include/DocumentCardView.class.php:382
+#: pluginwww/admin/index.php:261
+msgid "delete_warning"
+msgstr "You are about to permanently delete this document."
+
+#: plugincore/include/DocumentCardView.class.php:384
+#: pluginwww/admin/index.php:263 pluginwww/admin/index.php:283
+msgid "sure"
+msgstr "I'm Sure."
+
+#: plugincore/include/DocumentCardView.class.php:386
+#: pluginwww/admin/index.php:266 pluginwww/admin/index.php:285
+msgid "delete"
+msgstr "Delete"
+
+#: plugincore/include/DocumentFactory.class.php:190
+msgid "no_docs"
+msgstr "No Documents Found"
+
+#: plugincore/include/DocumentGroupDocs.class.php:109
+msgid "group_unique"
+msgstr "A branch with the same name already exists in the branch."
+
+#: plugincore/include/DocumentGroupDocs.class.php:128
+msgid "name_required"
+msgstr "Group: name is required"
+
+#: plugincore/include/DocumentGroupDocs.class.php:136
+#: plugincore/include/DocumentGroupDocs.class.php:271
+msgid "invalid_parent_id"
+msgstr "Group: invalid parent ID"
+
+#: plugincore/include/DocumentGroupDocs.class.php:197
+msgid "invalid_id"
+msgstr "Group: invalid ID"
+
+#: plugincore/include/DocumentTreeView.class.php:172
+msgid "head_file"
+msgstr "Document"
+
+#: plugincore/include/DocumentTreeView.class.php:174
+msgid "head_modif_by"
+msgstr "Modified by"
+
+#: plugincore/include/DocumentTreeView.class.php:175
+msgid "head_the"
+msgstr "the"
+
+#: plugincore/include/novadocPlugin.class.php:92
+msgid "tab_title"
+msgstr "Documents"
+
+#: plugincore/include/novadocPlugin.class.php:106
+msgid "use_novadoc"
+msgstr "NovaForge document manager"
+
+#: plugincore/include/utils.php:49 pluginwww/admin/auth.php:99
+#: pluginwww/admin/index.php:60 pluginwww/admin/index.php:95
+#: pluginwww/admin/index.php:118 pluginwww/admin/index.php:300
+#: pluginwww/admin/index.php:305 pluginwww/card.php:45 pluginwww/card.php:50
+#: pluginwww/card.php:107 pluginwww/card.php:121 pluginwww/card.php:128
+#: pluginwww/card.php:270 pluginwww/card.php:274 pluginwww/card.php:288
+#: pluginwww/card.php:290 pluginwww/card.php:296 pluginwww/card.php:310
+#: pluginwww/card.php:327 pluginwww/card.php:354 pluginwww/index.php:41
+#: pluginwww/index.php:46
+msgid "error"
+msgstr ""
+
+#: plugincore/include/utils.php:49
+msgid "turned_off"
+msgstr "This project has turned off the Doc Manager"
+
+#: plugincore/include/utils.php:55
+msgid "view_doc"
+msgstr "View Documents"
+
+#: plugincore/include/utils.php:57
+msgid "menuChrono"
+msgstr "Chronos"
+
+#: plugincore/include/utils.php:69
+msgid "submit_new"
+msgstr "Submit New Document"
+
+#: plugincore/include/utils.php:74
+msgid "copyBranch"
+msgstr "Copy Branch"
+
+#: plugincore/include/utils.php:76
+msgid "adminDir"
+msgstr "Manage Branches"
+
+#: plugincore/include/utils.php:85
+msgid "manageAuth"
+msgstr "Manage Authorizations"
+
+#: plugincore/include/utils.php:121
+msgid "all_languages"
+msgstr "All Languages"
+
+#: plugincore/include/utils.php:129
+msgid "go"
+msgstr ""
+
+#: plugincore/include/utils.php:192
+msgid "add_docs"
+msgstr "[Add document here]"
+
+#: pluginwww/admin/auth.php:127 pluginwww/admin/copy.php:51
+#: pluginwww/admin/index.php:140 pluginwww/admin/index.php:219
+#: pluginwww/admin/index.php:256 pluginwww/admin/index.php:276
+#: pluginwww/admin/index.php:312
+msgid "title_admin"
+msgstr "Documents manager administration"
+
+#: pluginwww/admin/copy.php:68
+msgid "copyBranchToCopy"
+msgstr "Branch to copy"
+
+#: pluginwww/admin/copy.php:76
+msgid "copyBranchName"
+msgstr "New branch name"
+
+#: pluginwww/admin/index.php:60 pluginwww/admin/index.php:95
+#: pluginwww/card.php:121 pluginwww/card.php:274
+msgid "noWriteAuth"
+msgstr "You don't have the rights to edit or add a document in this branch."
+
+#: pluginwww/admin/index.php:85 pluginwww/card.php:261
+msgid "update_successful"
+msgstr ""
+
+#: pluginwww/admin/index.php:102
+msgid "create_successful"
+msgstr ""
+
+#: pluginwww/admin/index.php:105 pluginwww/card.php:374
+msgid "deleted"
+msgstr ""
+
+#: pluginwww/admin/index.php:118 pluginwww/card.php:354
+msgid "noDeleteAuth"
+msgstr "You don't have the rights to delete a document in this branch."
+
+#: pluginwww/admin/index.php:142
+msgid "section_admin_groups"
+msgstr "Manage groups"
+
+#: pluginwww/admin/index.php:158
+msgid "group_id"
+msgstr "ID"
+
+#: pluginwww/admin/index.php:159 pluginwww/admin/index.php:226
+msgid "group_name"
+msgstr "Group Name"
+
+#: pluginwww/admin/index.php:169
+msgid "error_no_groups_defined"
+msgstr "No Document Groups defined"
+
+#: pluginwww/admin/index.php:172
+msgid "add_group"
+msgstr "Add a group"
+
+#: pluginwww/admin/index.php:176
+msgid "new_group_name"
+msgstr "New Group Name"
+
+#: pluginwww/admin/index.php:181
+msgid "new_group_parent"
+msgstr "Belongs to"
+
+#: pluginwww/admin/index.php:186
+msgid "add"
+msgstr ""
+
+#: pluginwww/admin/index.php:190 pluginwww/admin/index.php:241
+msgid "editgroups_description"
+msgstr "Group name will be used as a title, so it should be formatted correspondingly."
+
+#: pluginwww/admin/index.php:221
+msgid "edit_group"
+msgstr "Edit a group"
+
+#: pluginwww/admin/index.php:231
+msgid "group_parent"
+msgstr "Belongs to"
+
+#: pluginwww/admin/index.php:237
+msgid "edit"
+msgstr ""
+
+#: pluginwww/admin/index.php:246
+msgid "delete_group"
+msgstr "Delete this branch"
+
+#: pluginwww/admin/index.php:264
+msgid "really_sure"
+msgstr "I'm Really Sure."
+
+#: pluginwww/admin/index.php:281
+msgid "delete_warning_group"
+msgstr "You are about to permanently delete this branch."
+
+#: pluginwww/admin/index.php:315
+#, php-format
+msgid "section_admin_main"
+msgstr "Project %1$s"
+
+#: pluginwww/admin/index.php:317
+msgid "add_edit_docgroups"
+msgstr "Add/Edit Document Groups"
+
+#: pluginwww/admin/index.php:323
+msgid "error_no_docs"
+msgstr "This project has no visible documents"
+
+#: pluginwww/card.php:128
+#, php-format
+msgid "error_invalid_file_attack"
+msgstr "Invalid file attack attempt %1$s"
+
+#: pluginwww/card.php:134
+msgid "bad_filemane"
+msgstr "Filename does not match. Please submit the same file."
+
+#: pluginwww/card.php:153
+msgid "error_on_update"
+msgstr ""
+
+#: pluginwww/card.php:270
+msgid "no_valid_group"
+msgstr "No valid Document Group was selected"
+
+#: pluginwww/card.php:288
+msgid "error_blank_document"
+msgstr "Error getting blank document"
+
+#: pluginwww/card.php:296
+msgid "invalid_filename"
+msgstr ""
+
+#: pluginwww/card.php:332
+msgid "submitted_successfully"
+msgstr "Document submitted sucessfully"
+
+#: pluginwww/card.php:338 pluginwww/card.php:380 pluginwww/card.php:405
+#: pluginwww/chronos.php:47 pluginwww/index.php:88
+msgid "title_display"
+msgstr "Documents manager"
+
+#: pluginwww/chronos.php:95
+msgid "docDeleted"
+msgstr "Deleted"
+
+#: pluginwww/chronos.php:111
+msgid "chrono"
+msgstr "Chrono"
+
+#: pluginwww/chronos.php:126
+msgid "updateDate"
+msgstr "Update date"
+
+#: pluginwww/view.php:86
+msgid "no_document_data_title"
+msgstr "No document data"
+
+#: pluginwww/view.php:86
+msgid "no_document_data_text"
+msgstr "No document to display - invalid or inactive document number"

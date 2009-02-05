@@ -3,7 +3,7 @@
 /**
  * Copyright 1999-2001 (c) VA Linux Systems
  *
- * @version   $Id: project_cleanup.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: project_cleanup.php 6676 2008-11-25 20:51:57Z aljeux $
  *
  * This file is part of GForge.
  *
@@ -22,6 +22,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
+require dirname(__FILE__).'/../www/env.inc.php';
 require $gfwww.'include/squal_pre.php';
 require $gfcommon.'include/cron_utils.php';
 

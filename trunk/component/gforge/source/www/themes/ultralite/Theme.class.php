@@ -27,7 +27,7 @@ class Theme extends Layout {
 		<!DOCTYPE html
 		PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="<?php echo _('en') ?>">
+		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo _('en') ?>" lang="<?php echo _('en') ?>">
 		<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title><?php echo $params['title']; ?></title>
@@ -35,7 +35,7 @@ class Theme extends Layout {
 		
 		<body>
 		<p align=left>
-		<?php echo util_make_link ('/',_('GForge')); ?></h2></a>
+		<?php echo util_make_link ('/',_('Home')); ?></h2></a>
 		</p>
 		<p align=right>
 		<?php
@@ -62,7 +62,7 @@ class Theme extends Layout {
 		<p align=left>
 		<?php echo $this->outerTabs($params); ?>
 		<?php
-		if ($params['group']) {
+		if (isset($params['group']) && $params['group']) {
 		?>
 		<?php
 		echo $this->projectTabs($params['toptab'],$params['group']);

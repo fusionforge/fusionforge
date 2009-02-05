@@ -1,0 +1,35 @@
+
+<!-- IF S_NO_DISPLAY_BOOKMARKS -->
+
+    <RESPONSE STATUS="success">
+        <BOOKMARK MESSAGE="{L_BOOKMARKS_DISABLED}" />
+    </RESPONSE>
+
+<!-- ELSE -->
+
+<!-- IF .topicrow -->
+
+    <RESPONSE STATUS="success">
+        <!-- BEGIN topicrow -->
+
+        <!-- IF topicrow.S_UNREAD_TOPIC -->
+        <BOOKMARK NAME="{topicrow.TOPIC_TITLE}"
+            URL="{topicrow.U_VIEW_TOPIC}" READ="false"
+            LAST_URL="{topicrow.U_LAST_POST}" DATE="{topicrow.LAST_POST_TIME}" />
+        <!-- ELSE -->
+        <BOOKMARK NAME="{topicrow.TOPIC_TITLE}"
+            URL="{topicrow.U_VIEW_TOPIC}" READ="true"
+            LAST_URL="{topicrow.U_LAST_POST}" DATE="{topicrow.LAST_POST_TIME}" />
+        <!-- ENDIF -->
+        <!-- END topicrow -->
+    </RESPONSE>
+
+<!-- ELSE -->
+
+    <RESPONSE STATUS="success">
+        <BOOKMARK MESSAGE="{L_NO_BOOKMARKS}" />
+    </RESPONSE>
+
+<!-- ENDIF -->
+
+<!-- ENDIF -->

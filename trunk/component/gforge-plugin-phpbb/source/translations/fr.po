@@ -1,0 +1,226 @@
+#: plugincore/common/PluginPhpBBIHM.class.php:15
+msgid "yes"
+msgstr "oui"
+
+#: plugincore/common/PluginPhpBBIHM.class.php:16
+msgid "no"
+msgstr "non"
+
+#: plugincore/common/PluginPhpBBIHM.class.php:61 pluginwww/admin.php:58
+msgid "add_new_instance"
+msgstr "Ajouter une nouvelle instance"
+
+#: plugincore/common/PluginPhpBBIHM.class.php:63
+msgid "edit_instance"
+msgstr "Modifier une instance"
+
+#: plugincore/common/PluginPhpBBIHM.class.php:69
+#: plugincore/common/PluginPhpBBIHM.class.php:286
+msgid "name"
+msgstr "Nom"
+
+#: plugincore/common/PluginPhpBBIHM.class.php:70
+msgid "url"
+msgstr "URL"
+
+#: plugincore/common/PluginPhpBBIHM.class.php:71
+msgid "encoding"
+msgstr "Encodage"
+
+#: plugincore/common/PluginPhpBBIHM.class.php:72
+#: plugincore/common/PluginPhpBBIHM.class.php:285
+#: plugincore/common/PluginPhpBBIHM.class.php:347
+msgid "send"
+msgstr "Envoyer"
+
+#: plugincore/common/PluginPhpBBIHM.class.php:175
+#: plugincore/common/PluginPhpBBIHM.class.php:178
+msgid "bookmarks"
+msgstr "Forum surveillés PhpBB"
+
+#: plugincore/common/PluginPhpBBIHM.class.php:176
+msgid "subject"
+msgstr "Sujets"
+
+#: plugincore/common/PluginPhpBBIHM.class.php:177
+msgid "last_update"
+msgstr "Dernières mises à jour"
+
+#: plugincore/common/PluginPhpBBIHM.class.php:179
+msgid "not_read"
+msgstr "Non lu"
+
+#: plugincore/common/PluginPhpBBIHM.class.php:180
+msgid "no_bookmarks"
+msgstr "Vous ne surveillez pas de forum"
+
+#: plugincore/common/PluginPhpBBIHM.class.php:240
+msgid "list_subcat_of"
+msgstr "Liste des sous catégories de"
+
+#: plugincore/common/PluginPhpBBIHM.class.php:241
+msgid "rename"
+msgstr "Renommer"
+
+#: plugincore/common/PluginPhpBBIHM.class.php:242
+msgid "delete"
+msgstr "Supprimer"
+
+#: plugincore/common/PluginPhpBBIHM.class.php:243 pluginwww/applyrule.php:57
+#: pluginwww/instance.php:61 pluginwww/managecategory.php:57
+msgid "apply_rule"
+msgstr "Affecter des droits"
+
+#: plugincore/common/PluginPhpBBIHM.class.php:283 pluginwww/applyrule.php:56
+#: pluginwww/instance.php:60 pluginwww/managecategory.php:56
+msgid "add_category"
+msgstr "Ajouter une catégorie"
+
+#: plugincore/common/PluginPhpBBIHM.class.php:284
+msgid "rename_category"
+msgstr "Renommer la catégorie"
+
+#: plugincore/common/PluginPhpBBIHM.class.php:325
+msgid "select_rule"
+msgstr "Sélectionnez une règle"
+
+#: plugincore/common/PluginPhpBBIHM.class.php:346
+msgid "apply_rule_role"
+msgstr "Affecter les droits aux rôles suivants"
+
+#: plugincore/include/PhpBBPlugin.class.php:72
+msgid "active_plugin"
+msgstr "Activer le plugin : Forum PhpBB"
+
+#: plugincore/include/PhpBBPlugin.class.php:91 pluginwww/admin.php:57
+#: pluginwww/applyrule.php:54 pluginwww/instance.php:58
+#: pluginwww/managecategory.php:54 pluginwww/synchronize.php:59
+msgid "administration_phpbb"
+msgstr "Administrer le forum PhpBB"
+
+#: plugincore/translations.php:4
+msgid "delete_instance"
+msgstr "Supprimer l'instance"
+
+#: plugincore/translations.php:7
+msgid "edit_parameters"
+msgstr "Modifier les param&eacute;tres"
+
+#: plugincore/translations.php:10
+msgid "manage_category"
+msgstr "G&eacute;rer les cat&eacute;gories"
+
+#: plugincore/translations.php:13
+msgid "ROLE_FORUM_BOT"
+msgstr "Accès robots"
+
+#: plugincore/translations.php:16
+msgid "ROLE_FORUM_FULL"
+msgstr "Accès total"
+
+#: plugincore/translations.php:19
+msgid "ROLE_FORUM_LIMITED"
+msgstr "Accès limité"
+
+#: plugincore/translations.php:22
+msgid "ROLE_FORUM_LIMITED_POLLS"
+msgstr "Accès limité + Sondages"
+
+#: plugincore/translations.php:25
+msgid "ROLE_FORUM_NOACCESS"
+msgstr "Aucun accès"
+
+#: plugincore/translations.php:28
+msgid "ROLE_FORUM_ONQUEUE"
+msgstr "Attente de modération"
+
+#: plugincore/translations.php:31
+msgid "ROLE_FORUM_POLLS"
+msgstr "Accès standard + Sondages"
+
+#: plugincore/translations.php:34
+msgid "ROLE_FORUM_READONLY"
+msgstr "Accès en lecture uniquement"
+
+#: plugincore/translations.php:37
+msgid "ROLE_FORUM_STANDARD"
+msgstr "Accès standard"
+
+#: pluginwww/access.php:43 pluginwww/admin.php:49 pluginwww/applyrule.php:46
+#: pluginwww/instance.php:50 pluginwww/managecategory.php:46
+#: pluginwww/synchronize.php:49
+msgid "not_activated_plugin"
+msgstr "Le plugin PhpBB n'est pas activé pour ce projet"
+
+#: pluginwww/access.php:89
+msgid "error_authenticate"
+msgstr "Erreur d'authentification"
+
+#: pluginwww/admin.php:59
+msgid "synchronize_data"
+msgstr "Synchroniser les données"
+
+#: pluginwww/admin.php:60
+msgid "no_instance_registred"
+msgstr "Aucune instance n'est enregistrée"
+
+#: pluginwww/applyrule.php:55 pluginwww/instance.php:59
+#: pluginwww/managecategory.php:55 pluginwww/synchronize.php:58
+msgid "back"
+msgstr "Retour"
+
+#: pluginwww/instance.php:62
+msgid "updating_instance_failed"
+msgstr "Mise à jour échouée"
+
+#: pluginwww/instance.php:63
+msgid "fields_empty"
+msgstr "Tous les champs doivent être remplis !!"
+
+#: pluginwww/instance.php:64
+msgid "question_delete_instance"
+msgstr "Voulez vous supprimer l'instance"
+
+#: pluginwww/instance.php:65
+msgid "error_create_instance"
+msgstr "Error lors de la création de l'instance"
+
+#: pluginwww/instance.php:66
+msgid "error_remove_instance"
+msgstr "Error lors de la suppression de l'instance"
+
+#: pluginwww/instance.php:67
+msgid "error_not_valide_url"
+msgstr "l'URL que vous avez fourni n'est pas valide"
+
+#: pluginwww/managecategory.php:58
+msgid "question_delete_category"
+msgstr "Voulez vous supprimer cette catégorie ? Tous les sujets seront supprimés"
+
+#: pluginwww/managecategory.php:59
+msgid "flied_name_empty"
+msgstr "Le nom doit être rempli !!"
+
+#: pluginwww/managecategory.php:60
+msgid "error_create_category"
+msgstr "Erreur lors de la création de la catégorie !!"
+
+#: pluginwww/managecategory.php:61
+msgid "error_rename_category"
+msgstr "Erreur lors du renommage de la catégorie !!"
+
+#: pluginwww/managecategory.php:62
+msgid "error_delete_category"
+msgstr "Erreur lors du suppression de la catégorie !!"
+
+#: pluginwww/managecategory.php:63
+msgid "no_subcat_registred"
+msgstr "Aucune sous catégorie n'est enregistrée"
+
+#: pluginwww/synchronize.php:60
+msgid "question_synchronize"
+msgstr "Voulez vous synchroniser les données ?"
+
+#: pluginwww/synchronize.php:61
+msgid "end_synchronize"
+msgstr "Synchronisation terminée"

@@ -1,0 +1,116 @@
+#---------------------------------------------------------------------------
+# Novaforge is a registered trade mark from Bull S.A.S
+# Copyright (C) 2007 Bull S.A.S.
+# 
+# http://novaforge.org/
+#
+#
+# This file has been developped within the Novaforge(TM) project from Bull S.A.S
+# and contributed back to GForge community.
+#
+# GForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# GForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#---------------------------------------------------------------------------
+
+gforge-plugin-novafrs	bad_filemane	Filename does not match. Please submit the same file.
+gforge-plugin-novafrs	archive	Archive previous version
+gforge-plugin-novafrs	noWriteAuth	You don't have the rights to edit or add a file in this branch.
+gforge-plugin-novafrs	noDeleteAuth	You don't have the rights to delete a file in this branch.
+gforge-plugin-novafrs	copyBranch	Copy branch
+gforge-plugin-novafrs	manageAuth	Manage authorizations
+gforge-plugin-novafrs	menuChrono	Chronos
+gforge-plugin-novafrs	chrono	Chrono
+gforge-plugin-novafrs	deleted	Deleted
+gforge-plugin-novafrs	updateDate	Update date
+gforge-plugin-novafrs	propagateAuth	Propagate the autorization to the children ?
+gforge-plugin-novafrs	infoDefaultAuth	* The authorizations preceded by an asterisk are the default authorizations
+gforge-plugin-novafrs	authLabel1	None
+gforge-plugin-novafrs	authLabel2	Read
+gforge-plugin-novafrs	authLabel3	Write
+gforge-plugin-novafrs	authLabel4	Delete
+gforge-plugin-novafrs	copyBranchToCopy	Branch to copy
+gforge-plugin-novafrs	copyBranchName	New branch name
+gforge-plugin-novafrs	displayHistory	Display history
+gforge-plugin-novafrs	status	Status
+gforge-plugin-novafrs	observation	Observations
+gforge-plugin-novafrs	title	Title
+gforge-plugin-novafrs	author	Author
+gforge-plugin-novafrs	writingDate	Writing date
+gforge-plugin-novafrs	frtype	File type
+gforge-plugin-novafrs	reference	Reference
+gforge-plugin-novafrs	version	Version
+gforge-plugin-novafrs	date	Date
+gforge-plugin-novafrs	name	Name
+gforge-plugin-novafrs	description	Description
+gforge-plugin-novafrs	viewURL	View File URL
+gforge-plugin-novafrs	fr_unique	A file with the same name already exists in the branch.
+gforge-plugin-novafrs	group_unique	A branch with the same name already exists in the branch.
+gforge-plugin-novafrs	delete_fr	Delete this file
+gforge-plugin-novafrs	adminDir	Manage branches
+gforge-plugin-novafrs	language	Language    
+gforge-plugin-novafrs	viewCard	view card
+gforge-plugin-novafrs	delete_group	Delete this branch
+gforge-plugin-novafrs	head_file	File
+gforge-plugin-novafrs	head_type	Type
+gforge-plugin-novafrs	head_size	Size
+gforge-plugin-novafrs	head_modif_by	Modified by
+gforge-plugin-novafrs	head_the	the
+gforge-plugin-novafrs	error_invalid_file_attack	Invalid file attack attempt $1
+gforge-plugin-novafrs	error_no_frs	This project has no visible files
+gforge-plugin-novafrs	error_no_groups_defined	No group defined
+gforge-plugin-novafrs	submit_new	Submit new file
+gforge-plugin-novafrs	turned_off	This project has turned off the fr Manager
+gforge-plugin-novafrs	view_fr	View Files
+gforge-plugin-novafrs	add_edit_frgroups	Add/edit groups
+gforge-plugin-novafrs	section_admin_main	Project $1
+gforge-plugin-novafrs	add_frs	[Add file here]
+gforge-plugin-novafrs	title_admin	File manager administration
+gforge-plugin-novafrs	section_admin_groups	Manage groups
+gforge-plugin-novafrs	upload_url	Specify an outside URL where the file will be referenced
+gforge-plugin-novafrs	state	State
+gforge-plugin-novafrs	upload	OPTIONAL: Upload new file
+gforge-plugin-novafrs	upload_ftp	OR choose one form FTP $1
+gforge-plugin-novafrs	add_group	Add a group
+gforge-plugin-novafrs	editgroups_description	Group name will be used as a title, so it should be formatted correspondingly.
+gforge-plugin-novafrs	edit_group	Edit a group
+gforge-plugin-novafrs	group_id	ID
+gforge-plugin-novafrs	group_name	Group name
+gforge-plugin-novafrs	group_parent	Belongs to
+gforge-plugin-novafrs	new_group_name	New Group Name
+gforge-plugin-novafrs	new_group_parent	Belongs to
+gforge-plugin-novafrs	delete_warning	You are about to permanently delete this file.
+gforge-plugin-novafrs	delete_warning_group	You are about to permanently delete this branch.
+gforge-plugin-novafrs	sure	I'm Sure.
+gforge-plugin-novafrs	really_sure	I'm Really Sure.
+gforge-plugin-novafrs	delete	Delete
+gforge-plugin-novafrs	error_min_title_length	Title must be at least 5 characters
+gforge-plugin-novafrs	no_frs	No file found
+gforge-plugin-novafrs	invalid_frid	File: invalid ID
+gforge-plugin-novafrs	invalid_id	Group: invalid ID
+gforge-plugin-novafrs	invalid_parent_id	Group: invalid parent ID
+gforge-plugin-novafrs	name_required	Group: name is required
+gforge-plugin-novafrs	all_languages	All Languages
+gforge-plugin-novafrs	no_file_data_text	No file to display - invalid or inactive file number
+gforge-plugin-novafrs	no_file_data_title	No file data
+gforge-plugin-novafrs	title_display	File Manager
+gforge-plugin-novafrs	or_upload_url	OR specify an outside URL where the file will be referenced
+gforge-plugin-novafrs	error_blank_file	Error getting blank file
+gforge-plugin-novafrs	file	File
+gforge-plugin-novafrs	group	Group that file belongs in
+gforge-plugin-novafrs	no_valid_group	No valid file Group was selected
+gforge-plugin-novafrs	submit	Submit information
+gforge-plugin-novafrs	submitted_successfully	file submitted sucessfully
+gforge-plugin-novafrs	upload_file	Upload File	
+gforge-plugin-novafrs	tab_title	Files
+gforge-plugin-novafrs	use_novafrs	NovaForge file manager

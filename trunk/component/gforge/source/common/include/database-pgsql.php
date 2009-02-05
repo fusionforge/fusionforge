@@ -5,7 +5,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  *
- * @version   $Id: database-pgsql.php 6422 2008-03-09 23:02:59Z cbayle $
+ * @version   $Id: database-pgsql.php 6628 2008-10-06 14:21:06Z lo-lan-do $
  *
  * This file is part of GForge.
  *
@@ -119,8 +119,11 @@ function db_query($qstring,$limit='-1',$offset=0,$dbserver=SYS_DB_PRIMARY) {
 	global $QUERY_COUNT;
 	$QUERY_COUNT++;
 
+	if (!$limit || !is_numeric($limit) || $limit < 0) {
+		$limit=0;
+	}
 	if ($limit > 0) {
-		if (!$offset || $offset < 0) {
+		if (!$offset || !is_numeric($offset) || $offset < 0) {
 			$offset=0;
 		}
 		$qstring=$qstring." LIMIT $limit OFFSET $offset";

@@ -5,7 +5,7 @@
  * Copyright 2002 GForge, LLC
  * http://gforge.org/
  *
- * @version   $Id: ProjectTask.class.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: ProjectTask.class.php 6688 2008-12-07 20:58:24Z aljeux $
  *
  * This file is part of GForge.
  *
@@ -593,6 +593,8 @@ class ProjectTask extends Error {
 		//
 		if ($this->getID()) {
 			$addstr=" AND project_task_id <> '". $this->getID() ."' ";
+		} else {
+			$addstr='';
 		}
 		$sql="SELECT project_task_id,summary 
 		FROM project_task 
@@ -790,7 +792,8 @@ class ProjectTask extends Error {
 	 */
 	function &getDependentOn() {
 		if (!$this->getID()) {
-			return array();
+			$this->dependon = array();
+			return $this->dependon;
 		}
 		if (!$this->dependon) {
 			$res=db_query("SELECT is_dependent_on_task_id,link_type
@@ -854,7 +857,8 @@ class ProjectTask extends Error {
 	 */
 	function &getAssignedTo() {
 		if (!$this->getID()) {
-			return array();
+			$this->assignedto = array();
+			return $this->assignedto;
 		}
 		if (!$this->assignedto) {
 			$this->assignedto =& util_result_column_to_array(db_query("SELECT assigned_to_id 

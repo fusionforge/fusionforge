@@ -6,7 +6,7 @@
  * The rest Copyright 2002-2004 (c) GForge Team
  * http://gforge.org/
  *
- * @version   $Id: show_results.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: show_results.php 6747 2009-01-14 11:08:58Z lo-lan-do $
  *
  * This file is part of GForge.
  *
@@ -68,11 +68,11 @@ if ($survey_id) {
     $s = new Survey($g, $survey_id);
 		
     if (!$s || !is_object($s)) {
-	echo "<h3>"._('Error'). ' Can not get Survey' ."</H3>";
+	echo "<h3>"._('Error'). ' Can not get Survey' ."</h3>";
 	$sh->footer(array());
 	exit;
     } else if ( $s->isError()) {
-	echo "<h3>"._('Error'). $s->getErrorMessage() ."</H3>";
+	echo "<h3>"._('Error'). $s->getErrorMessage() ."</h3>";
 	$sh->footer(array());
 	exit;
     }
@@ -83,9 +83,9 @@ if ($survey_id) {
 	/* Create a Survey Question for general purpose */
 	$sq = new SurveyQuestion($g, $question_id);
 	if (!$sq || !is_object($sq)) {
-	    echo "<h3>"._('Error'). ' Can not get Survey Question' ."</H3>";
+	    echo "<h3>"._('Error'). ' Can not get Survey Question' ."</h3>";
 	} else if ( $sq->isError()) {
-	    echo "<h3>"._('Error'). $sq->getErrorMessage() ."</H3>";
+	    echo "<h3>"._('Error'). $sq->getErrorMessage() ."</h3>";
 	} else {
 	    showResult($sh, $s, $sq, 1, 0, $graph);
 	}
@@ -132,9 +132,9 @@ function ShowResult(&$SurveyHTML, &$Survey, &$Question, $show_comment=0, $q_num=
     /* Get results */
     $srf = new SurveyResponseFactory(&$Survey, &$Question);
     if (!$srf || !is_object($srf)) {
-	echo "<h3>"._('Error'). ' Can not get Survey Response Factory' ."</H3>";
+	echo "<h3>"._('Error'). ' Can not get Survey Response Factory' ."</h3>";
     } else if ( $srf->isError()) {
-	echo "<h3>"._('Error'). $srf->getErrorMessage() ."</H3>";
+	echo "<h3>"._('Error'). $srf->getErrorMessage() ."</h3>";
     } else {
         /* Show result in HTML*/ 
 	echo ($SurveyHTML->ShowResult($srf, $show_comment, $q_num, $graph));

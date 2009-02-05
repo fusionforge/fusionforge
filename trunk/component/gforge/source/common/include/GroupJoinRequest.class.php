@@ -4,7 +4,7 @@
  *
  * Copyright 2005 (c) GForge Group
  *
- * @version   $Id: GroupJoinRequest.class.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: GroupJoinRequest.class.php 6711 2008-12-17 15:02:09Z lo-lan-do $
  *
  * This file is part of Gforge.
  *
@@ -148,7 +148,7 @@ class GroupJoinRequest extends Error {
 
 		$sql="INSERT INTO group_join_request (group_id,user_id,comments,request_date)
 			VALUES ('".$this->Group->getID()."','".$user_id."',
-			'".htmlspecialchars($comments)."','".time()."')";
+			'".addslashes(htmlspecialchars($comments))."','".time()."')";
 		$result=db_query($sql);
 		if (!$result || db_affected_rows($result) < 1) {
 			$this->setError('GroupJoinRequest::create() Posting Failed '.db_error());

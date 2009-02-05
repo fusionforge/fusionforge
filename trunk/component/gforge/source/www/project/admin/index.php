@@ -8,7 +8,7 @@
  *
  * Copyright 2004 GForge, LLC
  *
- * @version   $Id: index.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: index.php 6631 2008-10-06 18:53:32Z aljeux $
  * @author Tim Perdue tim@gforge.org
  *
  * This file is part of GForge.
@@ -319,7 +319,7 @@ if (count($reqs) < 1) {
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
 		<input type="hidden" name="submit" value="y" />
 		<input type="hidden" name="form_userid" value="<?php echo $user->getId(); ?>" />
-		<tr><td><input type="hidden" name="form_unix_name" value="<?php echo $user->getUnixName(); ?>" /><?php echo util_make_link_u ($user->getUnixName(),$user->getId,$user->getRealName()); ?></td>
+		<tr><td><input type="hidden" name="form_unix_name" value="<?php echo $user->getUnixName(); ?>" /><?php echo util_make_link_u ($user->getUnixName(),$user->getId(),$user->getRealName()); ?></td>
 		<td><?php echo role_box($group_id,'role_id',$row_memb['role_id']); ?>
 			<input type="submit" name="acceptpending" value="<?php echo _('Accept') ?>" />
 			<input type="submit" name="rejectpending" value="<?php echo _('Reject') ?>" /></td>

@@ -6,7 +6,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * http://sourceforge.net
  *
- * @version   $Id: browse.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: browse.php 6747 2009-01-14 11:08:58Z lo-lan-do $
  */
 require_once $gfcommon.'tracker/ArtifactFactory.class.php';
 require_once $gfcommon.'tracker/ArtifactQuery.class.php';
@@ -461,7 +461,7 @@ if ($art_arr && count($art_arr) > 0) {
 
 			<tr><td colspan="3" align="MIDDLE"><input type="SUBMIT" name="submit" value="'._('Mass update').'"></td></tr>
 
-			</TABLE>
+			</table>
 		</form>';
 	}
 

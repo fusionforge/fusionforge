@@ -1,3 +1,42 @@
+2009-01-15  Roland Mas  <lolando@debian.org>
+
+	* common/tracker/ArtifactFactory.class.php: Fixed syntax of an SQL
+	query used when there's a user-defined query.
+
+2009-01-14  Roland Mas  <lolando@debian.org>
+
+	* www/docman/admin/index.php: Fixed the types expected from the
+	query parameters (based on patch #5630 from Mickaël Bridard).
+
+	* various files all over the place: Converted a few links to make
+	use of util_make_link and util_make_url functions.  We should be
+	almost done now.
+
+2009-01-13  Roland Mas  <lolando@debian.org>
+
+	* various files all over the place: Converted a few links to make
+	use of util_make_link and util_make_url functions.
+
+	* www/trove/*: Redo gettext transition that had somehow gotten
+	lost.
+
+	* plugins/wiki/www/u: Remove call to the old $Language->getText()
+	API.
+
+	* common/include/gettext.php: Fixed language_name_to_lang_id()
+	function (patch #5629 from Mickaël Bridard).
+
+2008-11-25  Roland Mas  <lolando@debian.org>
+
+	* common/include/GroupJoinRequest.class.php: Properly escape the
+	comments value to avoid an SQL injection
+	vulnerability (CVE-2008-2381).
+
+2008-09-18  Roland Mas  <lolando@debian.org>
+
+	* plugins/scmcvs/sbin/cvs-pserver: Reimplemented repository
+	listing with find rather than ls.  Large performance gain.
+
 2008-09-03  Roland Mas  <lolando@debian.org>
 
 	* common/tracker/ArtifactType.class.php: Fixed PostgreSQL 8.3

@@ -1,0 +1,58 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Selenuim_test_ReverseProxy</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Selenuim_test_ReverseProxy</td></tr>
+</thead><tbody>
+<!--Config : Project Name-->
+<tr>
+	<td>store</td>
+	<td>Super phpBB</td>
+	<td>nomProjetNovaforge</td>
+</tr>
+<!--Config : project ID-->
+<tr>
+	<td>store</td>
+	<td>7</td>
+	<td>idProjetNovaforge</td>
+</tr>
+<!--Config : Instance ID-->
+<tr>
+	<td>store</td>
+	<td>80</td>
+	<td>phpBBInstanceID</td>
+</tr>
+<!--Config : NovaForge user name of the current tester-->
+<tr>
+	<td>store</td>
+	<td>admin</td>
+	<td>currentTestUser</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/plugins/phpbb/access.php/${idProjetNovaforge}/${phpBBInstanceID}/index.php</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=MAster</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>${nomProjetNovaforge}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//a[@accesskey="l"]</td>
+	<td>Logout [ ${currentTestUser} ]</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

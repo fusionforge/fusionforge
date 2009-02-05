@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  *
- * @version   $Id: index.php 6556 2008-06-23 19:13:45Z aljeux $
+ * @version   $Id: index.php 6658 2008-10-29 20:06:17Z aljeux $
  *
  * This file is part of GForge.
  *
@@ -26,6 +26,8 @@
 require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once $gfcommon.'include/timezones.php';
+
+$feedback = '';
 
 if (!session_loggedin()) {
 	exit_not_logged_in();
@@ -74,9 +76,7 @@ if (getStringFromRequest('submit')) {
 	}
 */
 	// Refresh page if language or theme changed
-	if ($language != $u->getLanguage() || $theme_id != $u->getThemeID()) {
-		$refresh = 1;
-	}
+	$refresh = ($language != $u->getLanguage() || $theme_id != $u->getThemeID());
 
 	if (!$u->update($firstname, $lastname, $language, $timezone, $mail_site, $mail_va, $use_ratings,
 		$jabber_address,$jabber_only,$theme_id,$address,$address2,$phone,$fax,$title,$ccode)) {

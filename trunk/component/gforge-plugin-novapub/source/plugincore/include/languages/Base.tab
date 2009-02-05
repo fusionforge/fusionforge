@@ -1,0 +1,91 @@
+#---------------------------------------------------------------------------
+# Novaforge is a registered trade mark from Bull S.A.S
+# Copyright (C) 2007 Bull S.A.S.
+#
+# http://novaforge.org/
+#
+#
+# This file has been developped within the Novaforge(TM) project from Bull S.A.S
+# and contributed back to GForge community.
+#
+# GForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# GForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#---------------------------------------------------------------------------
+
+#
+# Publisher message catalog (Base)
+#
+
+gforge-plugin-novapub	title_admin	Administration of publishing projects
+gforge-plugin-novapub	title_site_admin	Administration of publishing plugin
+gforge-plugin-novapub	database_error	An error occured while accessing the database.
+gforge-plugin-novapub	empty_url	The specified URL is empty.
+gforge-plugin-novapub	url_is_used	The '$1' instance is used by the following projects:
+gforge-plugin-novapub	url_is_used_item	publishing project '$1' of group '$2'
+gforge-plugin-novapub	url_already_exists	The '$1' instance already exists.
+gforge-plugin-novapub	back_to_site_admin	Return to administration of publishing plugin.
+gforge-plugin-novapub	available_urls	Available publishing instances
+gforge-plugin-novapub	url	Publishing instance
+gforge-plugin-novapub	url_info	URL of publishing server, for example "http://$1/novaforge-publisher"
+gforge-plugin-novapub	submit_update_url	Update
+gforge-plugin-novapub	submit_deleet_url	Remove
+gforge-plugin-novapub	submit_add_url	Add
+gforge-plugin-novapub	use_novapub	NovaForge publishing
+gforge-plugin-novapub	not_enabled	The publishing plugin is not enabled for this project.
+gforge-plugin-novapub	create_project	Create a project
+gforge-plugin-novapub	projects_list	Projects
+gforge-plugin-novapub	edit_project	Edit project
+gforge-plugin-novapub	delete_project	Delete project
+gforge-plugin-novapub	title_create	Create a publishing project
+gforge-plugin-novapub	no_instance_declared	No publishing instance declared, please contact the administrator.
+gforge-plugin-novapub	error_reading_gforge_roles	An error occured while reading GForge roles.
+gforge-plugin-novapub	undefined_gforge_roles	GForge roles are not defined.
+gforge-plugin-novapub	role_not_declared	Warning: role '$1' is currently used but is not declared anymore.
+gforge-plugin-novapub	project_name	Project name
+gforge-plugin-novapub	project_instance	Publishing instance
+gforge-plugin-novapub	project_role	Publishing role
+gforge-plugin-novapub	submit_create	Create project
+gforge-plugin-novapub	back_to_admin	Return to administration of publishing projects.
+gforge-plugin-novapub	project_already_exists	A publishing project already exists for name '$1'.
+gforge-plugin-novapub	create_project_success	The '$1' publishing project has been created.
+gforge-plugin-novapub	create_project_failure	An error occured while creating the '$1' publishing project.
+gforge-plugin-novapub	title_edit	Edit a publishing project
+gforge-plugin-novapub	missing_project_id	The publishing project identifier is missing.
+gforge-plugin-novapub	incorrect_project_id	The publishing project identifier is incorrect.
+gforge-plugin-novapub	instance_not_declared	Warning: publishing instance '$1' is currently used but is not declared anymore, please contact the administrator.
+gforge-plugin-novapub	submit_edit	Update project
+gforge-plugin-novapub	edit_project_success	The '$1' publishing project has been updated.
+gforge-plugin-novapub	edit_project_failure	An error occured while updating the '$1' publishing project.
+gforge-plugin-novapub	title_delete	Delete a publishing project
+gforge-plugin-novapub	confirm_delete	Confirm delete
+gforge-plugin-novapub	confirm_delete	Confirm delete
+gforge-plugin-novapub	submit_delete	Delete project
+gforge-plugin-novapub	delete_project_success	The '$1' publishing project has been deleted.
+gforge-plugin-novapub	delete_project_failure	An error occured while deleting the '$1' publishing project.
+gforge-plugin-novapub	publish_error_getting_params	Error while getting parameters for project '$1' of group '$2'
+gforge-plugin-novapub	publish_error_getting_xml	Error while getting XML for project '$1' of group '$2'
+gforge-plugin-novapub	publish_error_calling_auth	Error while calling authentication at URL '$1auth.php' for project '$2' of group '$3'
+gforge-plugin-novapub	publish_error_calling_step_1	Error while calling step 1 at URL '$1step_1.php' for project '$2' of group '$3'
+gforge-plugin-novapub	publish_error_expat_step_1	Error while parsing step 1 response at line $1, column $2 (code $3: $4) for project '$5' of group '$6'
+gforge-plugin-novapub	publish_error_parsing_step_1	Error while parsing step 1 response for project '$1' of group '$2'
+gforge-plugin-novapub	publish_error_publish_files	Error while publishing files for project '$1' of group '$2'
+gforge-plugin-novapub	publish_error_calling_step_2	Error while calling step 2 at URL '$1step_2.php' for project '$2' of group '$3'
+gforge-plugin-novapub	publish_error_expat_step_2	Error while parsing step 2 response at line $1, column $2 (code $3: $4) for project '$5' of group '$6'
+gforge-plugin-novapub	publish_error_parsing_step_2	Error while parsing step 2 response for project '$1' of group '$2'
+gforge-plugin-novapub	publish_error_loop_detected	Loop detected for file '$1' of plugin '$2' for project '$3' of group '$4'
+gforge-plugin-novapub	publish_error_publish_file	Error while publishing file '$1' of plugin '$2' for project '$3' of group '$4'
+gforge-plugin-novapub	publish_error_remote	Remote error for project '$1' of group '$2': $3
+gforge-plugin-novapub	publish_error_class	Error while instanciating class for file '$1' of plugin '$2' for project '$3' of group '$4'
+gforge-plugin-novapub	publish_error_filename	Error while getting filename for file '$1' of plugin '$2' for project '$3' of group '$4'
+gforge-plugin-novapub	publish_error_calling_upload	Error while calling upload at URL '$1upload.php' with file '$2/$3' of plugin '$4' for project '$5' of group '$6'

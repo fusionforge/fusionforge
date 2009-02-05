@@ -4,7 +4,7 @@
  *
  * Copyright 2004 (c) GForge LLC
  *
- * @version   $Id: roleedit.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: roleedit.php 6619 2008-10-05 17:47:43Z aljeux $
  * @author Tim Perdue tim@gforge.org
  * @date 2004-03-16
  *
@@ -37,6 +37,8 @@ session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
 $role_id = getStringFromRequest('role_id');
 $data = getStringFromRequest('data');
+
+$feedback='';
 
 //
 //	The observer is a special role, which is actually

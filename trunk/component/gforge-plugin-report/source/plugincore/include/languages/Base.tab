@@ -1,0 +1,20 @@
+gforge-plugin-report	tab_title	Report
+gforge-plugin-report	use_report	Use report Plugin
+gforge-plugin-report	all_modules	All modules
+
+
+gforge-plugin-report	quality_objectives_synthesis	Summary of quality goals
+
+gforge-plugin-report	table_quality_objective	Quality goals
+gforge-plugin-report	table_quality_objective_rate	Rate
+gforge-plugin-report	table_metriques_title	Unit
+gforge-plugin-report	table_metriques_number_of_package	Number of packages
+gforge-plugin-report	table_metriques_number_of_class	Number of classes
+gforge-plugin-report	table_metriques_number_of_methods	Number of methods
+gforge-plugin-report	table_objective_criteria	Criteria
+gforge-plugin-report	table_objective_rate	Note
+gforge-plugin-report	table_objective_coef	Coef
+gforge-plugin-report	table_objective_rates_1	Rates <2
+gforge-plugin-report	table_objective_rates_2	Rates <3
+gforge-plugin-report	table_objective_rates_3	Rates <4
+gforge-plugin-report	table_objective_rates_4	Rates =4

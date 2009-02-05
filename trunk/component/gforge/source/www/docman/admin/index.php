@@ -5,7 +5,7 @@
  * Copyright 2002 GForge, LLC
  * http://gforge.org/
  *
- * @version   $Id: index.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: index.php 6749 2009-01-14 13:58:46Z lo-lan-do $
  */
 
 
@@ -59,7 +59,7 @@ $upload_dir = $sys_ftp_upload_dir . "/" . $g->getUnixName();
 
 if (getStringFromRequest('submit')) {
 	if ($editdoc) {
-		$doc_group = getStringFromRequest('doc_group');
+		$doc_group = getIntFromRequest('doc_group');
 		$title = getStringFromRequest('title');
 		$description = getStringFromRequest('description');
 		$language_id = getIntFromRequest('language_id');
@@ -110,8 +110,8 @@ if (getStringFromRequest('submit')) {
 		$feedback = _('Updated successfully');
 
 	} elseif (getStringFromRequest('editgroup')) {
-		$doc_group = getStringFromRequest('doc_group');
-		$groupname = getIntFromRequest('groupname');
+		$doc_group = getIntFromRequest('doc_group');
+		$groupname = getStringFromRequest('groupname');
 		$parent_doc_group = getIntFromRequest('parent_doc_group');
 		
 		$dg = new DocumentGroup($g,$doc_group);
@@ -220,6 +220,7 @@ if ($editdoc && $docid) {
 		//echo '<input type="hidden" name="editor" value="editor">';
 		echo _('Edit the contents to your desire or leave them as they are to remain unmodified.');
 		/*
+		$GLOBALS['editor_was_set_up']=false;
 		$params = array () ;
 		$params['name'] = 'data';
 		$params['width'] = "800";
@@ -393,8 +394,8 @@ if ($editdoc && $docid) {
 //	Edit a specific doc group
 //
 //
-} elseif (getStringFromRequest('editgroup') && getStringFromRequest('doc_group')) {
-	$doc_group = getStringFromRequest('doc_group');
+} elseif (getStringFromRequest('editgroup') && getIntFromRequest('doc_group')) {
+	$doc_group = getIntFromRequest('doc_group');
 	
 	$dg = new DocumentGroup($g,$doc_group);
 	if ($dg->isError()) {

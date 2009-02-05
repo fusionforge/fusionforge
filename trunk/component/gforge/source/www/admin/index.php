@@ -9,7 +9,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  *
- * @version   $Id: index.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: index.php 6687 2008-12-07 20:57:12Z aljeux $
  *
  * This file is part of GForge.
  *
@@ -59,7 +59,6 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 		<form name="usersrch" action="search.php" method="post">
 		<?php echo _('Search <em>(userid, username, realname, email)</em>'); ?>:
 		<input type="text" name="search" />
-		<input type="hidden" name="substr" value="1" />
 		<input type="hidden" name="usersearch" value="1" />
 		<input type="submit" value="<?php echo _('get'); ?>" />
 		</form>
@@ -92,9 +91,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 <ul>
 	<li><a href="grouplist.php"><?php echo _('Display Full Group List/Edit Groups'); ?></a></li>
 
-	<li>
-	<?php
-	echo _('Display Groups Beginning with :').' ';
+	<li><?php echo _('Display Groups Beginning with :').' ';
 	for ($i=0; $i < count($abc_array); $i++) {
 		echo '<a href="grouplist.php?group_name_search='.$abc_array[$i].'">'.$abc_array[$i].'</a>|';
 	}
@@ -103,7 +100,6 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 		<form name="gpsrch" action="search.php" method="post">
 		<?php echo _('Search <em>(groupid, group unix name, full name)</em>'); ?>:
 		<input type="text" name="search" />
-		<input type="hidden" name="substr" value="1" />
 		<input type="hidden" name="groupsearch" value="1" />
 		<input type="submit" value="<?php echo _('get'); ?>" />
 		</form>

@@ -1,0 +1,114 @@
+#---------------------------------------------------------------------------
+# Novaforge is a registered trade mark from Bull S.A.S
+# Copyright (C) 2007 Bull S.A.S.
+# 
+# http://novaforge.org/
+#
+#
+# This file has been developped within the Novaforge(TM) project from Bull S.A.S
+# and contributed back to GForge community.
+#
+# GForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# GForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#---------------------------------------------------------------------------
+
+gforge-plugin-novadoc	bad_filemane	Le nom du fichier ne convient pas. Celui-ci doit etre identique au précédent.
+gforge-plugin-novadoc	archive	Archiver la version précédente.
+gforge-plugin-novadoc	noWriteAuth	Vous n'avez pas les droits de modifier ou d'ajouter un document dans ce dossier.
+gforge-plugin-novadoc	noDeleteAuth	Vous n'avez pas les droits nécessaires pour supprimer  un document dans ce dossier.
+gforge-plugin-novadoc	copyBranch	Copier une branche
+gforge-plugin-novadoc	manageAuth	Gérer les autorisations
+gforge-plugin-novadoc	menuChrono	Chronos
+gforge-plugin-novadoc	chrono	Chrono
+gforge-plugin-novadoc	docDeleted	Supprimé
+gforge-plugin-novadoc	updateDate	Mise à jour de la fiche
+gforge-plugin-novadoc	propagateAuth	Propager l'autorisation au(x) sous-dossier(s) ?
+gforge-plugin-novadoc	infoDefaultAuth	* Les autorisations précédées d'un astérisque sont les autorisations par défaut
+gforge-plugin-novadoc	authLabel1	Aucun
+gforge-plugin-novadoc	authLabel2	Lecture
+gforge-plugin-novadoc	authLabel3	Ecriture
+gforge-plugin-novadoc	authLabel4	Suppression
+gforge-plugin-novadoc	copyBranchToCopy	Branche à recopier
+gforge-plugin-novadoc	copyBranchName	Libellé de la nouvelle branche
+gforge-plugin-novadoc	displayHistory	Afficher l'historique des versions
+gforge-plugin-novadoc	observation	Observations
+gforge-plugin-novadoc	status	Statut
+gforge-plugin-novadoc	title	Titre
+gforge-plugin-novadoc	author	Auteur
+gforge-plugin-novadoc	writingDate	Date rédaction
+gforge-plugin-novadoc	doctype	Type de document
+gforge-plugin-novadoc	reference	Référence
+gforge-plugin-novadoc	version	Version
+gforge-plugin-novadoc	date	Date
+gforge-plugin-novadoc	name	Nom
+gforge-plugin-novadoc	description	Description
+gforge-plugin-novadoc	viewURL	Accéder à l'URL
+gforge-plugin-novadoc	doc_unique	Un document ayant le même nom existe déjà dans le dossier.
+gforge-plugin-novadoc	group_unique	Un dossier ayant le même nom existe déjà dans ce dossier.
+gforge-plugin-novadoc	delete_doc	Supprimer ce document
+gforge-plugin-novadoc	adminDir	Gérer les dossiers
+gforge-plugin-novadoc	language	Langue
+gforge-plugin-novadoc	viewCard	fiche détaillée
+gforge-plugin-novadoc	delete_group	Supprimer ce dossier
+gforge-plugin-novadoc	head_file	Document
+gforge-plugin-novadoc	head_modif_by	Statut MAJ par
+gforge-plugin-novadoc	head_the	le
+gforge-plugin-novadoc	error_invalid_file_attack	Tentative d'atteindre un fichier invalide $1
+gforge-plugin-novadoc	error_no_docs	Ce projet n'a pas de document visible
+gforge-plugin-novadoc	error_no_groups_defined	Aucun dossier de document défini
+gforge-plugin-novadoc	submit_new	Soumettre un nouveau document
+gforge-plugin-novadoc	turned_off	Ce projet a désactivé la gestion de documents
+gforge-plugin-novadoc	view_doc	Voir les documents
+gforge-plugin-novadoc	add_docs	[ Ajouter un document ici ]
+gforge-plugin-novadoc	add_edit_docgroups	Ajouter/Éditer des dossiers
+gforge-plugin-novadoc	title_admin	Administration du gestionnaire de documents
+gforge-plugin-novadoc	section_admin_main	Projet $1
+gforge-plugin-novadoc	section_admin_groups	Gérer les dossiers
+gforge-plugin-novadoc	delete	Supprimer
+gforge-plugin-novadoc	delete_warning	Vous êtes sur le point de supprimer définitivement ce document.
+gforge-plugin-novadoc	delete_warning_group	Vous êtes sur le point de supprimer définitivement ce dossier.
+gforge-plugin-novadoc	really_sure	Je confirme vraiment
+gforge-plugin-novadoc	sure	Je confirme
+gforge-plugin-novadoc	state	Etat
+gforge-plugin-novadoc	upload	Optionnel : Uploader un nouveau fichier
+gforge-plugin-novadoc	upload_ftp	Ou choisir un fichier préalablement uploadé sur $1 par FTP
+gforge-plugin-novadoc	editdocs_upload_url	Spécifier une URL externe pour le fichier
+gforge-plugin-novadoc	add_group	Ajouter un dossier&nbsp;
+gforge-plugin-novadoc	editgroups_description	Le nom du dossier sera utilisé comme titre. Il doit donc être formaté en conséquence.
+gforge-plugin-novadoc	edit_group	Modifier un dossier
+gforge-plugin-novadoc	group_id	Identifiant
+gforge-plugin-novadoc	group_name	Nom du dossier
+gforge-plugin-novadoc	group_parent	Appartient à
+gforge-plugin-novadoc	new_group_name	Nouveau nom du dossier&nbsp;
+gforge-plugin-novadoc	new_group_parent	Appartient à
+gforge-plugin-novadoc	error_min_title_length	Le titre doit avoir au moins 5 caractères
+gforge-plugin-novadoc	no_docs	Aucun document trouvé
+gforge-plugin-novadoc	invalid_docid	Document : identifiant non valide
+gforge-plugin-novadoc	invalid_id	Dossier : identifiant non valide
+gforge-plugin-novadoc	invalid_parent_id	Dossier : identifiant du parent non valide
+gforge-plugin-novadoc	name_required	Dossier : le nom est obligatoire
+gforge-plugin-novadoc	all_languages	Toutes les langues
+gforge-plugin-novadoc	no_document_data_text	Pas de document à afficher - N° de document invalide ou inactif
+gforge-plugin-novadoc	no_document_data_title	Pas de données dans le document
+gforge-plugin-novadoc	title_display	Gestionnaire de documents
+gforge-plugin-novadoc	error_blank_document	Erreur en prenant un document vide
+gforge-plugin-novadoc	file	Fichier
+gforge-plugin-novadoc	group	Dossier auquel rattacher le document
+gforge-plugin-novadoc	no_valid_group	Aucun dossier n'a été sélectionné
+gforge-plugin-novadoc	submit	Soumettre les informations
+gforge-plugin-novadoc	submitted_successfully	Le document a été soumis avec succès
+gforge-plugin-novadoc	upload_file	Télécharger sur le serveur
+gforge-plugin-novadoc	upload_url	OU spécifier une URL externe pour le document
+gforge-plugin-novadoc	tab_title	Documents
+gforge-plugin-novadoc	use_novadoc	Gestionnaire de documents NovaForge

@@ -27,10 +27,11 @@
 
 // The novaforge/auth.php file MUST be included before pre.php,
 // in order to properly declare the variables of apibull/config.php
-// If not, pre.php will include MantisPlugin.class in a function,
+// If not, pre.php will include MantisPlugin.class.php in a function,
 // and the sys_auth_* variables will exist but will eb empty
+require_once ('../../env.inc.php');
 require_once ("common/novaforge/auth.php");
-require_once ("pre.php");
+require_once ($gfwww.'include/pre.php');
 require_once ("plugins/mantis/include/synchronizefunctions.php");
 
 if (session_loggedin () == false)
@@ -50,26 +51,26 @@ else
 {
 	if ($group->isError () == true)
 	{
-		exit_error ($Language->getText ("gforge-plugin-mantis", "title_sync"), $group->getErrorMessage ());
+		exit_error (dgettext ("gforge-plugin-mantis", "title_sync"), $group->getErrorMessage ());
 	}
 }
 if ($group->usesPlugin ("mantis") == false)
 {
-	exit_error ($Language->getText ("gforge-plugin-mantis", "title_sync"), $Language->getText ("gforge-plugin-mantis", "not_enabled"));
+	exit_error (dgettext ("gforge-plugin-mantis", "title_sync"), dgettext ("gforge-plugin-mantis", "not_enabled"));
 }
 $perm = &$group->getPermission (session_get_user ());
 if ($perm->isAdmin () == false)
 {
 	exit_permission_denied ();
 }
-site_project_header (array ("title" => $Language->getText ("gforge-plugin-mantis", "title_sync"), "group" => $group_id, "toptab" => "admin"));
+site_project_header (array ("title" => dgettext ("gforge-plugin-mantis", "title_sync"), "group" => $group_id, "toptab" => "admin"));
 if (synchronize ($group_id, $array_errors) == true)
 {
-	echo "<h2>" . $Language->getText ("gforge-plugin-mantis", "sync_success") . "</h2>";
+	echo "<h2>" . dgettext ("gforge-plugin-mantis", "sync_success") . "</h2>";
 }
 else
 {
-	echo "<h2>" . $Language->getText ("gforge-plugin-mantis", "sync_failed") . "</h2>";
+	echo "<h2>" . dgettext ("gforge-plugin-mantis", "sync_failed") . "</h2>";
 	if (count ($array_errors) > 0)
 	{
 		echo "<ul>\n";
@@ -84,5 +85,5 @@ else
 }
 ?>
 <p>
-<a href="admin.php?group_id=<? echo $group_id; ?>"><? echo $Language->getText ("gforge-plugin-mantis", "backto"); ?></a>
+<a href="admin.php?group_id=<? echo $group_id; ?>"><? echo dgettext ("gforge-plugin-mantis", "backto"); ?></a>
 <? site_project_footer (array ()); ?>

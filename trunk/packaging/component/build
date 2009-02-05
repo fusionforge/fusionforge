@@ -32,6 +32,7 @@ BIN_RPM="/bin/rpm"
 BIN_RPMBUILD="/usr/bin/rpmbuild"
 BIN_SVN="/usr/bin/svn"
 BIN_TAR="/bin/tar"
+BIN_MSGFMT="/usr/bin/msgfmt"
 
 #
 # Parameters
@@ -42,6 +43,7 @@ SVN_COMPONENT=""
 SVN_VERSION=""
 SVN_RELEASE=""
 SVN_BRANCH=""
+TANSLATION_DIR_SOURCE="translations"
 
 #
 # Internal variables
@@ -80,6 +82,11 @@ POST_RPM_SCRIPT=""
 #
 # Functions
 #
+
+pause(){
+	echo -e "$1"
+  read -p "Press any key to continue ..."
+}
 
 invert_string()
 # $1: string to invert
@@ -179,6 +186,10 @@ readconfig()
 		fi
 		if [ ! -x $BIN_SVN ] ; then
 			$BIN_ECHO "-> Binary '$BIN_SVN' is missing"
+			EXIT=1
+		fi
+		if [ ! -x $BIN_MSGFMT ] ; then
+			$BIN_ECHO "-> Binary '$BIN_MSGFMT' is missing"
 			EXIT=1
 		fi
 	fi
@@ -335,6 +346,9 @@ readconfig()
 					EXIT=1
 				fi
 			fi
+			if [ -z "$TANSLATION_DIR_SOURCE" ] ; then
+				$BIN_ECHO "-> Missing parameter : TANSLATION_DIR_SOURCE"
+			fi
 		else
 			$BIN_ECHO "-> File '$TMP_DIR/config' is missing"
 			EXIT=1
@@ -468,6 +482,9 @@ getfiles()
 			if [ $? -ne 0 ] ; then
 				$BIN_ECHO "-> Error while checkouting URL '$SVN_URL/$SVN_PATH_SOURCE'"
 				EXIT=1
+			fi
+			if [ $EXIT -eq 0 ] ; then
+				build_mo $SVN_COMPONENT $TANSLATION_DIR_SOURCE
 			fi
 			popd >> /dev/null 2>&1
 		fi
@@ -620,6 +637,50 @@ copyrpms()
 	fi
 	if [ $EXIT -eq 0 ] ; then
 		$BIN_ECHO "-> OK"
+	fi
+}
+
+build_mo()
+# $1: Domain Name (plugin name)
+# $2: *.po translation files directory
+{
+	DOMAINE_NAME=$1
+	SOURCE_PO=$2
+	TARGET_MO=locale
+	
+	if [ $EXIT -eq 0 ] ; then
+		$BIN_ECHO "Generating *.mo translation Files for $DOMAINE_NAME (in `pwd`)" 
+		
+		if [[ ( -e "$SOURCE_PO" ) &&  ! ( -d "$SOURCE_PO" ) ]] ; then
+			$BIN_ECHO "-> Source '$SOURCE_PO' must be a directory"
+			EXIT=1
+		fi
+		
+		
+		if [ -e "$TARGET_MO" ] ; then
+			$BIN_ECHO "-> Target '$TARGET_MO' must not exist"
+			EXIT=1
+		fi
+	fi
+		
+	if [ $EXIT -eq 0 ] ; then
+		if [ ! -e "$SOURCE_PO" ] ; then
+			$BIN_ECHO "No translations provided"
+		else
+			pushd $SOURCE_PO >> /dev/null 2>&1
+			languages=$(ls *.po|cut -f1 -d.)
+			popd >> /dev/null 2>&1
+			
+			for lang in $languages; do
+				poSourceFile=$SOURCE_PO/$lang.po
+				moTargetDir=$TARGET_MO/$lang/LC_MESSAGES
+				moTargetFile=$moTargetDir/$DOMAINE_NAME.mo
+				
+				$BIN_MKDIR -p $moTargetDir
+				$BIN_MSGFMT $poSourceFile -o $moTargetFile
+				$BIN_ECHO "translations  $lang ($poSourceFile) installed: to $moTargetFile"
+			done
+		fi
 	fi
 }
 

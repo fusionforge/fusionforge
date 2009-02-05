@@ -5,7 +5,7 @@
  *
  * Copyright 2004 (c) GForge LLC
  *
- * @version   $Id: reporting_cron.php 6576 2008-07-20 17:33:10Z lo-lan-do $
+ * @version   $Id: reporting_cron.php 6676 2008-11-25 20:51:57Z aljeux $
  * @author Tim Perdue tim@gforge.org
  * @date 2003-03-16
  *
@@ -26,7 +26,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require $gfwww.'squal_pre.php';
+require dirname(__FILE__).'/../www/env.inc.php';
+require $gfwww.'include/squal_pre.php';
 require $gfcommon.'include/cron_utils.php';
 require $gfcommon.'reporting/ReportSetup.class.php';
 

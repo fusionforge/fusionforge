@@ -5,7 +5,7 @@
  * Copyright 2002 GForge, LLC
  * http://gforge.org/
  *
- * @version   $Id: ProjectTaskFactory.class.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: ProjectTaskFactory.class.php 6747 2009-01-14 11:08:58Z lo-lan-do $
  *
  * This file is part of GForge.
  *
@@ -94,7 +94,7 @@ class ProjectTaskFactory extends Error {
 	 *	@param	string	What view mode the screen should be in.
 	 */
 	function setup($offset,$order,$max_rows,$set,$_assigned_to,$_status,$_category_id,$_view='') {
-//echo "<BR>offset: $offset| order: $order|max_rows: $max_rows|_assigned_to: $_assigned_to|_status: $_status|_category_id: $_category_id +";
+//echo "<br />offset: $offset| order: $order|max_rows: $max_rows|_assigned_to: $_assigned_to|_status: $_status|_category_id: $_category_id +";
 		if ((!$offset) || ($offset < 0)) {
 			$this->offset=0;
 		} else {

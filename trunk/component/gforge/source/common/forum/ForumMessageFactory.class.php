@@ -5,7 +5,7 @@
  * Copyright 2002 GForge, LLC
  * http://gforge.org/
  *
- * @version   $Id: ForumMessageFactory.class.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: ForumMessageFactory.class.php 6747 2009-01-14 11:08:58Z lo-lan-do $
  *
  * This file is part of GForge.
  *
@@ -87,7 +87,7 @@ class ForumMessageFactory extends Error {
 	 *	@param	int	Whether to set these prefs into the database - use "custom".
 	 */
 	function setup($offset,$style,$max_rows,$set) {
-//echo "<BR>offset: $offset| style: $style|max_rows: $max_rows|set: $set+";
+//echo "<br />offset: $offset| style: $style|max_rows: $max_rows|set: $set+";
 		if ((!$offset) || ($offset < 0)) {
 			$this->offset=0;
 		} else {

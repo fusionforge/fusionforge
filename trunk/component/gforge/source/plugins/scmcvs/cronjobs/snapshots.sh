@@ -13,7 +13,7 @@ if [  $(id -u) != 0 ] ; then
     exec su -c "$0 $1"
 fi
 
-CVSROOT=/var/lib/gforge/chroot/cvsroot
+CVSROOT=/cvsroot
 SCMSNAPSHOTSDIR=/var/lib/gforge/scmsnapshots
 TMPDIR=/tmp
 

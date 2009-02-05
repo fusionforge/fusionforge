@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>net.bull.novaforge.novamonitor</groupId>
+	<artifactId>novamonitor-parent</artifactId>
+	<version>1.3.0</version>
+	<packaging>pom</packaging>
+	<name>NovaMonitor</name>
+	<description>Monitoring d'applications java EE</description>
+	<inceptionYear>2008</inceptionYear>
+	<developers>
+		<developer>
+			<name>Emeric Vernat</name>
+			<email>emeric.vernat@bull.net</email>
+		</developer>
+	</developers>
+	<licenses>
+		<license>
+			<name>GPL</name>
+		</license>
+	</licenses>
+	<scm>
+		<connection>scm:svn:http://novaforge.bull.net/svn/novaforge-v1/nova12/trunk/component/novamonitor/</connection>
+		<developerConnection>scm:svn:http://novaforge.bull.net/svn/novaforge-v1/nova12/trunk/component/novamonitor/</developerConnection>
+		<url>http://novaforge.bull.net/svn/novaforge-v1/nova12/trunk/component/novamonitor/</url>
+	</scm>
+	<organization>
+		<name>Bull NovaForge</name>
+		<url>http://www.novaforge.org</url>
+	</organization>
+	<modules>
+		<module>novamonitor-core</module>
+		<module>novamonitor-collector-server</module>
+		<module>novamonitor-test-webapp</module>
+	</modules>
+	<properties>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<build>
+		<!--
+			/!\ Maven >= 2.1 :
+			http://docs.codehaus.org/display/MAVENUSER/POM+Element+for+Source+File+Encoding
+
+			<sourceEncoding>UTF-8</sourceEncoding>
+		-->
+		<plugins>
+			<!-- Configuration compilation -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

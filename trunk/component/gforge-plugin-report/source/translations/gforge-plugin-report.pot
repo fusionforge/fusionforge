@@ -1,0 +1,85 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-01-16 11:49+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: plugincore/include/ReportPlugin.class.php:38
+msgid "tab_title"
+msgstr ""
+
+#: plugincore/include/ReportPlugin.class.php:53
+msgid "use_report"
+msgstr ""
+
+#: pluginwww/index.php:64
+msgid "all_modules"
+msgstr ""
+
+#: pluginwww/index.php:170
+msgid "quality_objectives_synthesis"
+msgstr ""
+
+#: pluginwww/index.php:184
+msgid "table_quality_objective"
+msgstr ""
+
+#: pluginwww/index.php:185
+msgid "table_quality_objective_rate"
+msgstr ""
+
+#: pluginwww/index.php:199
+msgid "table_metriques_title"
+msgstr ""
+
+#: pluginwww/index.php:205
+msgid "table_metriques_number_of_package"
+msgstr ""
+
+#: pluginwww/index.php:209
+msgid "table_metriques_number_of_class"
+msgstr ""
+
+#: pluginwww/index.php:213
+msgid "table_metriques_number_of_methods"
+msgstr ""
+
+#: pluginwww/index.php:228
+msgid "table_objective_criteria"
+msgstr ""
+
+#: pluginwww/index.php:229
+msgid "table_objective_rate"
+msgstr ""
+
+#: pluginwww/index.php:230
+msgid "table_objective_coef"
+msgstr ""
+
+#: pluginwww/index.php:231
+msgid "table_objective_rates_1"
+msgstr ""
+
+#: pluginwww/index.php:232
+msgid "table_objective_rates_2"
+msgstr ""
+
+#: pluginwww/index.php:233
+msgid "table_objective_rates_3"
+msgstr ""
+
+#: pluginwww/index.php:234
+msgid "table_objective_rates_4"
+msgstr ""

@@ -255,7 +255,7 @@ class RatingsUser {
                 {
                     $r1 = $rating1[$dimension]->get_rating();
                     $r2 = $rating2[$dimension]->get_rating();
-                    // print "co-rating with " . $user->getId() . " $page $r1 $r2<BR>";
+                    // print "co-rating with " . $user->getId() . " $page $r1 $r2<br />";
 
                     $r1 -= $mean1;
                     $r2 -= $mean2;
@@ -278,7 +278,7 @@ class RatingsUser {
         // Pearson similarity
             $sim = array($sum12 / (sqrt($sum11) * sqrt($sum22)), $n);
 
-        // print "sim is " . $sim[0] . "<BR><BR>";
+        // print "sim is " . $sim[0] . "<br /><br />";
 
         // memoize result
         $this->_pearson_sims[$user->getId()][$dimension] = $sim;
@@ -288,11 +288,11 @@ class RatingsUser {
     function knn_uu_predict($pagename, &$neighbors, $dimension = 0)
     {
         /*
-        print "<PRE>";
+        print "<pre>";
         var_dump($this->_pearson_sims);
         var_dump($this->_ratings);
-        print "</PRE>";
-        print "pred for $pagename<BR>";
+        print "</pre>";
+        print "pred for $pagename<br />";
         */
         $total = 0;
         $total_sim = 0;
@@ -319,9 +319,9 @@ class RatingsUser {
                     if ($n_items < 50)
                         $sim *= $n_items / 50;
                     /*
-                    print "neighbor is " . $nbor->getId() . "<BR>";
-                    print "weighted sim is " . $sim . "<BR>";
-                    print "dev from mean is " . ($nbor->get_rating($pagename, $dimension) - $nbor->mean_rating($dimension)) . "<BR>";
+                    print "neighbor is " . $nbor->getId() . "<br />";
+                    print "weighted sim is " . $sim . "<br />";
+                    print "dev from mean is " . ($nbor->get_rating($pagename, $dimension) - $nbor->mean_rating($dimension)) . "<br />";
                     */
                     $total += $sim * ($nbor->get_rating($pagename, $dimension) - $nbor->mean_rating($dimension));
                     $total_sim += abs($sim);
@@ -331,9 +331,9 @@ class RatingsUser {
 
         $my_mean = $this->mean_rating($dimension);
         /*
-        print "your mean is $my_mean<BR>";
-        print "pred dev from mean is " . ($total_sim == 0 ? -1 : ($total / $total_sim)) . "<BR>";
-        print "pred is " . ($total_sim == 0 ? -1 : ($total / $total_sim + $my_mean)) . "<BR><BR>";
+        print "your mean is $my_mean<br />";
+        print "pred dev from mean is " . ($total_sim == 0 ? -1 : ($total / $total_sim)) . "<br />";
+        print "pred is " . ($total_sim == 0 ? -1 : ($total / $total_sim + $my_mean)) . "<br /><br />";
         */
         // XXX: what to do if no neighbors have rated pagename?
         return ($total_sim == 0 ? 0 : ($total / $total_sim + $my_mean));
@@ -343,7 +343,7 @@ class RatingsUser {
     {
         if (!$this->_ratings_loaded || $force)
         {
-            // print "load " . $this->getId() . "<BR>";
+            // print "load " . $this->getId() . "<br />";
             $this->_ratings = array();
             $this->_num_ratings = 0;
             // only signed-in users have ratings (XXX: authenticated?)

@@ -10,7 +10,7 @@
  *
  * Geoffrey Herteg, August 29, 2000
  *
- * @version   $Id: Theme.class.php 6566 2008-06-30 18:18:49Z aljeux $
+ * @version   $Id: Theme.class.php 6781 2009-01-20 18:11:55Z aljeux $
  */
 
 require_once $gfwww.'search/include/SearchManager.class.php';
@@ -77,7 +77,7 @@ class Theme extends Error {
 	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo _('en') ?>"
 	lang="<?php echo _('en') ?>">
 
 <head>
@@ -145,7 +145,7 @@ function header($params) {
 
 <div id="container">
 <div id="logo">
-<h1><?php echo util_make_link ('/',_('Goto GForge')); ?></h1>
+<h1><?php echo util_make_link ('/',_('Home')); ?></h1>
 </div>
 <div id="util">
 <?php
@@ -165,7 +165,7 @@ if (session_loggedin()) {
 ?>
 </div>
 
-<div id="content"><br />
+<div id="headercontent"><br />
 <?php echo $this->searchBox();
 ?></div>
 
@@ -611,12 +611,12 @@ function projectTabs($toptab,$group) {
 		if ($selected==$i){
 			$this->selected_title = $TABS_TITLES[$i];
 			$this->selected_dir = $TABS_DIRS[$i];
-			$this->selected_id = $TABS_IDS[$i];
+			//$this->selected_id = $TABS_IDS[$i];
 			$return .= util_make_link ($TABS_DIRS[$i],$TABS_TITLES[$i],array('id'=>'gforge-project-selected'));
 
 		}
 		else{
-			if ($TABS_IDS[$i]==''){
+			if (!isset($TABS_IDS[$i]) || $TABS_IDS[$i]==''){
 				$return .= util_make_link ($TABS_DIRS[$i],$TABS_TITLES[$i],array('id'=>'gforge-project-std','title'=>$TABS_TITLES[$i]));
 
 			}

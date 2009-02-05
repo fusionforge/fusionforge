@@ -8,6 +8,7 @@
  * @version   $Id
  */
 
+require dirname(__FILE__).'/../../env.inc.php';
 require $gfwww.'include/squal_pre.php';
 require_once $gfcommon.'include/cron_utils.php';
 
@@ -43,8 +44,8 @@ $repos_co = '/var/svn-co';
 $repos_type = '';
 
 //the name of the access_file
-$access_file = "/var/lib/gforge/svnroot-access";
-$password_file = "/var/lib/gforge/svnroot-authfile";
+$access_file = $sys_var_path.'/svnroot-access';
+$password_file = $sys_var_path.'/svnroot-authfile';
 
 /*
 	This script create the gforge dav/svn/docman repositories
@@ -52,7 +53,7 @@ $password_file = "/var/lib/gforge/svnroot-authfile";
 
 
 
-$err .= "Creating Groups at ". $svn."\n";
+$err = "Creating Groups at ". $svn."\n";
 
 if (empty($sys_apache_user) || empty($sys_apache_group)) {
 	$err .=  "Error! sys_apache_user Is Not Set Or sys_apache_group Is Not Set!";
@@ -201,12 +202,14 @@ function add2AccessFile($group_id) {
 	$project = &group_get_object($group_id);
 	$result = "[". $project->getUnixName(). ":/]\n";
 	$users= &$project->getMembers();
-	foreach($users as $user ) {
-		$perm = &$project->getPermission($user);
-		if ( $perm->isCVSWriter() ) {
-			$result.= $user->getUnixName() . "= rw\n";
-		} else if ( $perm->isCVSReader() ) {
-			$result.= $user->getUnixName() . "= r\n";
+	if(isset ($users) ) {
+		foreach($users as $user ) {
+			$perm = &$project->getPermission($user);
+			if ( $perm->isCVSWriter() ) {
+				$result.= $user->getUnixName() . "= rw\n";
+			} else if ( $perm->isCVSReader() ) {
+				$result.= $user->getUnixName() . "= r\n";
+			}
 		}
 	}
 	if ( $project->enableAnonSCM() ) {
@@ -282,7 +285,7 @@ function add_svn_mail_to_repository($unix_group_name,$repos) {
 	if($FOut) {
 		$Line .= '
 #begin added by svncommitemail
-'.$sys_plugins_path.'/svncommitemail/bin/commit-email.pl '.$repos.' "$2" '.$unix_group_name.'-commits@'.$sys_lists_host.'
+php '.$sys_plugins_path.'/svncommitemail/bin/commit-email.php '.$repos.' "$2" '.$unix_group_name.'-commits@'.$sys_lists_host.'
 #end added by svncommitemail';
 		fwrite($FOut,$Line);
 		`chmod +x $repos'/hooks/post-commit'`;

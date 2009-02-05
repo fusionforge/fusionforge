@@ -139,15 +139,20 @@ class MediaWikiPlugin extends Plugin {
 			$text = $params['text'];
 			//check if the user has the plugin activated
 			if ($user->usesPlugin($this->name)) {
-				echo '	<p>
-					<a href="/mediawiki/index.php/User:' . $user->getUnixName() . '">' . _('View Personal MediaWiki') .'</a></p>';
+				echo '	<p>' ;
+				echo util_make_link ("/plugins/helloworld/index.php?id=$userid&type=user&pluginname=".$this->name,
+						     _('View Personal MediaWiki')
+					);
+				echo '</p>';
 			}
 		} elseif ($hookname == "project_admin_plugins") {
 			// this displays the link in the project admin options page to it's  MediaWiki administration
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
-				echo '<a href="/mediawiki/index.php?title=' . $group->getUnixName() . '&action=edit' . '">' . _('View the MediaWiki Administration') . '</a><br />';
+				echo util_make_link ("/plugins/projects_hierarchy/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
+						     _('View the MediaWiki Administration')
+				echo '</p>';
 			}
 		}												    
 		elseif ($hookname == "session_before_login") {

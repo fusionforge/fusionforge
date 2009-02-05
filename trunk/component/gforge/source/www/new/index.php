@@ -7,7 +7,7 @@
   * Copyright 1999-2001 (c) VA Linux Systems
   * http://sourceforge.net
   *
-  * @version   $Id: index.php 6506 2008-05-27 20:56:57Z aljeux $
+  * @version   $Id: index.php 6628 2008-10-06 14:21:06Z lo-lan-do $
   *
   */
 
@@ -19,7 +19,7 @@ $HTML->header(array("title"=>_('New File Releases')));
 
 $offset = getIntFromRequest('offset');
 
-if ( !$offset || $offset < 0 ) {
+if ( !$offset || $offset < 0 || !is_numeric($offset) ) {
 	$offset = 0;
 }
 

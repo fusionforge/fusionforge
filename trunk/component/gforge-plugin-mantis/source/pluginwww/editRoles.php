@@ -27,10 +27,11 @@
 
 // The novaforge/auth.php file MUST be included before pre.php,
 // in order to properly declare the variables of apibull/config.php
-// If not, pre.php will include MantisPlugin.class in a function,
+// If not, pre.php will include MantisPlugin.class.php in a function,
 // and the sys_auth_* variables will exist but will eb empty
+require_once ('../../env.inc.php');
 require_once ("common/novaforge/auth.php");
-require_once ("pre.php");
+require_once ($gfwww.'include/pre.php');
 require_once ("common/novaforge/log.php");
 require_once ("plugins/mantis/include/gforgefunctions.php");
 require_once ("plugins/mantis/include/mantisfunctions.php");
@@ -41,7 +42,7 @@ if (session_loggedin () == false)
 }
 if ((isset ($project_id) == false) || ($project_id <= 0))
 {
-	exit_error ($Language->getText ("gforge-plugin-mantis", "title_edit_roles"), $Language->getText ("gforge-plugin-mantis", "missing_project_id"));
+	exit_error (dgettext ("gforge-plugin-mantis", "title_edit_roles"), dgettext ("gforge-plugin-mantis", "missing_project_id"));
 }
 if (getProject ($project_id,
                 $group_id,
@@ -56,7 +57,7 @@ if (getProject ($project_id,
                 $project_css_regex_3,
                 $project_css_regex_4) == false)
 {
-	exit_error ($Language->getText ("gforge-plugin-mantis", "title_edit_roles"), $Language->getText ("gforge-plugin-mantis", "incorrect_project_id"));
+	exit_error (dgettext ("gforge-plugin-mantis", "title_edit_roles"), dgettext ("gforge-plugin-mantis", "incorrect_project_id"));
 }
 if ((isset ($group_id) == false) || ($group_id <= 0))
 {
@@ -71,12 +72,12 @@ else
 {
 	if ($group->isError () == true)
 	{
-		exit_error ($Language->getText ("gforge-plugin-mantis", "title_edit_roles"), $group->getErrorMessage ());
+		exit_error (dgettext ("gforge-plugin-mantis", "title_edit_roles"), $group->getErrorMessage ());
 	}
 }
 if ($group->usesPlugin ("mantis") == false)
 {
-	exit_error ($Language->getText ("gforge-plugin-mantis", "title_edit_roles"), $Language->getText ("gforge-plugin-mantis", "not_enabled"));
+	exit_error (dgettext ("gforge-plugin-mantis", "title_edit_roles"), dgettext ("gforge-plugin-mantis", "not_enabled"));
 }
 $perm = &$group->getPermission (session_get_user ());
 if ($perm->isAdmin () == false)
@@ -85,18 +86,18 @@ if ($perm->isAdmin () == false)
 }
 if (getGForgeRoles ($group_id, $array_gforge_roles) == false)
 {
-	exit_error ($Language->getText ("gforge-plugin-mantis", "title_edit_roles"), $Language->getText ("gforge-plugin-mantis", "error_reading_gforge_roles"));
+	exit_error (dgettext ("gforge-plugin-mantis", "title_edit_roles"), dgettext ("gforge-plugin-mantis", "error_reading_gforge_roles"));
 }
 if (getMantisRoles ($project_url, $project_mantis_id, $array_mantis_roles) == false)
 {
-	exit_error ($Language->getText ("gforge-plugin-mantis", "title_edit_roles"), $Language->getText ("gforge-plugin-mantis", "error_reading_mantis_roles"));
+	exit_error (dgettext ("gforge-plugin-mantis", "title_edit_roles"), dgettext ("gforge-plugin-mantis", "error_reading_mantis_roles"));
 }
 if (getRolesMapping ($project_id, $array_roles_mapping) == false)
 {
-	exit_error ($Language->getText ("gforge-plugin-mantis", "title_edit_roles"), $Language->getText ("gforge-plugin-mantis", "error_reading_roles_mapping"));
+	exit_error (dgettext ("gforge-plugin-mantis", "title_edit_roles"), dgettext ("gforge-plugin-mantis", "error_reading_roles_mapping"));
 }
-site_project_header (array ("title" => $Language->getText ("gforge-plugin-mantis", "title_edit_roles"), "group" => $group_id, "toptab" => "admin"));
-echo "<h2>" . $Language->getText ("gforge-plugin-mantis", "title_edit_roles") . "</h2>";
+site_project_header (array ("title" => dgettext ("gforge-plugin-mantis", "title_edit_roles"), "group" => $group_id, "toptab" => "admin"));
+echo "<h2>" . dgettext ("gforge-plugin-mantis", "title_edit_roles") . "</h2>";
 if (count ($array_gforge_roles) > 0)
 {
 ?>
@@ -104,8 +105,8 @@ if (count ($array_gforge_roles) > 0)
 <input type="hidden" name="project_id" value="<? echo $project_id ?>">
 <table>
 	<tr>
-		<td><strong><? echo $Language->getText ("gforge-plugin-mantis", "gforge_role"); ?></strong></td>
-		<td><strong><? echo $Language->getText ("gforge-plugin-mantis", "mantis_role"); ?></strong></td>
+		<td><strong><? echo dgettext ("gforge-plugin-mantis", "gforge_role"); ?></strong></td>
+		<td><strong><? echo dgettext ("gforge-plugin-mantis", "mantis_role"); ?></strong></td>
 	</tr>
 <?
 	foreach ($array_gforge_roles as $gforge_id => $gforge_name)
@@ -125,7 +126,7 @@ if (count ($array_gforge_roles) > 0)
 				$mantis_role_id_selected = 0;
 				$selected = " selected";
 			}
-?>				<option value="default"<? echo $selected; ?>><? echo $Language->getText ("gforge-plugin-mantis", "default_role"); ?></option>
+?>				<option value="default"<? echo $selected; ?>><? echo dgettext ("gforge-plugin-mantis", "default_role"); ?></option>
 <?
 			foreach ($array_mantis_roles as $mantis_role_id => $mantis_role_name)
 			{
@@ -146,7 +147,7 @@ if (count ($array_gforge_roles) > 0)
 	</tr><?
 	}
 ?>	<tr>
-		<td colspan="2"><input type="submit" name="submit" value="<? echo $Language->getText ("gforge-plugin-mantis", "submit_edit_roles"); ?>"></td>
+		<td colspan="2"><input type="submit" name="submit" value="<? echo dgettext ("gforge-plugin-mantis", "submit_edit_roles"); ?>"></td>
 	</tr>
 </table>
 </form>
@@ -154,10 +155,10 @@ if (count ($array_gforge_roles) > 0)
 }
 else
 {
-?><h2><? echo $Language->getText ("gforge-plugin-mantis", "undefined_gforge_roles"); ?></h2>
+?><h2><? echo dgettext ("gforge-plugin-mantis", "undefined_gforge_roles"); ?></h2>
 <?
 }
 ?>
 <p>
-<a href="admin.php?group_id=<? echo $group_id; ?>"><? echo $Language->getText ("gforge-plugin-mantis", "backto"); ?></a>
+<a href="admin.php?group_id=<? echo $group_id; ?>"><? echo dgettext ("gforge-plugin-mantis", "backto"); ?></a>
 <? site_project_footer (array ()); ?>

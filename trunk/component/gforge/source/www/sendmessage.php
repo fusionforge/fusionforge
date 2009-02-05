@@ -6,7 +6,7 @@
  * The rest Copyright 2002-2004 (c) GForge Team
  * http://gforge.org/
  *
- * @version   $Id: sendmessage.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: sendmessage.php 6686 2008-12-07 20:56:32Z aljeux $
  *
  * This file is part of GForge.
  *
@@ -25,7 +25,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once('../env.inc.php');
+require_once('./env.inc.php');
 require_once $gfwww.'include/pre.php';
 
 $toaddress = getStringFromRequest('toaddress');
@@ -119,24 +119,25 @@ $HTML->header(array('title'=>$GLOBALS['sys_name'].' Staff'));
 
 ?>
 
-<p />
+<p>
 <?php echo _('In an attempt to reduce spam, we are using this form to send email.<p />Fill it out accurately and completely or the receiver may not be able to respond.<p /><span class="important"><b>IF YOU ARE WRITING FOR HELP:</b> Did you read the site documentation? Did you include your <b>user_id</b> and <b>user_name?</b> If you are writing about a project, include your <b>project id</b> (<b>group_id</b>) and <b>Project Name</b>.</span>'); ?>
-<p />
+</p>
+
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
-<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
+<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
 <input type="hidden" name="toaddress" value="<?php echo $toaddress; ?>" />
 <input type="hidden" name="touser" value="<?php echo $touser; ?>" />
-
-<strong><?php echo _('Your Name') ?>:</strong><br />
+<p />
+<strong><?php echo _('Your Name').utils_requiredField() ?> :</strong><br />
 <input type="text" name="name" size="40" maxlength="40" value="<?php echo $name ?>" />
 <p />
-<strong><?php echo _('Your Email Address') ?>:</strong><br />
+<strong><?php echo _('Your Email Address').utils_requiredField() ?> :</strong><br />
 <input type="text" name="email" size="40" maxlength="255" value="<?php echo $email ?>" />
 <p />
-<strong><?php echo _('Subject') ?>:</strong><br />
+<strong><?php echo _('Subject').utils_requiredField() ?> :</strong><br />
 <input type="text" name="subject" size="60" maxlength="255" value="" />
 <p />
-<strong><?php echo _('Message') ?>:</strong><br />
+<strong><?php echo _('Message').utils_requiredField() ?> :</strong><br />
 <textarea name="body" rows="15" cols="60"></textarea>
 <p />
 <div align="center">

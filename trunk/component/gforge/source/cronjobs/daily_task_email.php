@@ -5,7 +5,7 @@
  *
  * Copyright 2004 GForge, LLC
  *
- * @version   $Id: daily_task_email.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: daily_task_email.php 6677 2008-11-29 16:50:24Z aljeux $
  *
  * This file is part of GForge.
  *
@@ -24,9 +24,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
+require dirname(__FILE__).'/../www/env.inc.php';
 require_once $gfwww.'include/squal_pre.php';
 require_once $gfcommon.'pm/ProjectTasksForUser.class.php';
 require_once $gfcommon.'include/cron_utils.php';
+
+$err = '';
 
 //
 //  Set up this script to run as the site admin

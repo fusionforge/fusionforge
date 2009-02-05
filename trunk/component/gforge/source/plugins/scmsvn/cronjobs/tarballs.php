@@ -1,17 +1,17 @@
 #! /usr/bin/php5 -f
 <?php
 
-$verbose=0;
-$scmname='scmroot';
-// For portability, if hot-backup.py path vary from one distro to another add some path
-// in the next line
-putenv("PATH=/usr/lib/subversion:".getenv('PATH'));
-$BACKUPPROG='hot-backup.py';
-
+require dirname(__FILE__).'/../../env.inc.php';
 require $gfwww.'include/squal_pre.php';
 require $gfcommon.'include/cron_utils.php';
 
+$verbose=0;
+$scmname='scmroot';
+$hot_backup = $sys_opt_path.'/cronjobs/hot-backup.py';
+
 $sys_scm_root_path = "$sys_chroot$svndir_prefix";
+
+putenv('SVN_PATH='.dirname(`which svn`));
 
 if(!isset($sys_scm_root_path)) {
 	$err = 'You have to define $svndir_prefix and possibly $sys_chroot variable in your config file.';
@@ -22,16 +22,17 @@ if(!isset($sys_scm_root_path)) {
 } elseif(!is_dir($sys_scm_tarballs_path) || !is_writable($sys_scm_tarballs_path)) {
 	$err = $sys_scm_tarballs_path.' is not a directory or is not writable.';
 } else {
+	$output='';
 	if ($handle = opendir($sys_scm_root_path)) {
 		if ($verbose) echo "Scanning $sys_scm_root_path\n";
 		chdir($sys_scm_root_path);
 		while (false !== ($file = readdir($handle))) {
 			chdir($sys_scm_root_path);
-			if ($file != "." && $file != ".." && is_dir($file) && $file != "cvs-locks") {
+			if ($file != "." && $file != ".." && is_dir($file) && $file != "cvs-locks" && $file != '.deleted') {
 				if ($verbose) echo "Creating $sys_scm_tarballs_path/$file-$scmname.tar.gz\n";
 				mkdir("$sys_scm_tarballs_path/$file");
 				chdir($sys_scm_root_path);
-				exec("$BACKUPPROG $file $sys_scm_tarballs_path/$file 2>&1", $output);
+				exec("$hot_backup $file $sys_scm_tarballs_path/$file 2>&1", $output);
 				chdir($sys_scm_tarballs_path);
 				exec("tar czf $sys_scm_tarballs_path/$file-$scmname.tar.gz.new $file 2>&1", $output);
 

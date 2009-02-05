@@ -29,13 +29,13 @@ class GforgeWikiPlugin extends Plugin {
 		$this->name = "wiki" ;
 		$this->text = "Wiki" ; // To show in the tabs, use...
 		$this->installdir = 'wiki';
-		$this->hooks[] = "user_personal_links";//to make a link to the user's personal wiki
-		$this->hooks[] = "usermenu" ;
+//		$this->hooks[] = "user_personal_links";//to make a link to the user's personal wiki
+//		$this->hooks[] = "usermenu" ;
 		$this->hooks[] = "groupmenu";
 		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
 		$this->hooks[] = "groupisactivecheckboxpost" ; // 
-		$this->hooks[] = "userisactivecheckbox" ; // The "use ..." checkbox in user account
-		$this->hooks[] = "userisactivecheckboxpost" ; // 
+//		$this->hooks[] = "userisactivecheckbox" ; // The "use ..." checkbox in user account
+//		$this->hooks[] = "userisactivecheckboxpost" ; // 
 		$this->hooks[] = 'search_engines';
 		$this->hooks[] = 'full_search_engines';
 		$this->hooks[] = 'cssfile';
@@ -135,8 +135,10 @@ class GforgeWikiPlugin extends Plugin {
 			$user_name = $user->getUnixName();
 			//check if the user has the plugin activated
 			if ($user->usesPlugin($this->name)) {
-				echo '	<p>
-					<a href="/wiki/u/'.urlencode($user_name).'/HomePage">' . _('View personal wiki') .'</a></p>';
+				echo '	<p>' ;
+				echo util_make_link ('/wiki/u/'.urlencode($user_name).'/HomePage',
+						     _('View personal wiki'));
+				echo '</p>';
 			}
 		} elseif ($hookname == 'search_engines') {
 			// FIXME: when the hook is called, the group_id is not set.
@@ -169,9 +171,9 @@ class GforgeWikiPlugin extends Plugin {
 			}
 		} elseif ($hookname == 'cssfile') {
 			if (strncmp($_SERVER['REQUEST_URI'], '/wiki/', 6) == 0) {
-				echo '<link rel="stylesheet" type="text/css" href="/wiki/themes/gforge/phpwiki.css" media="screen" />';
-				echo "\n".'    <link rel="alternate stylesheet" type="text/css" href="/wiki/themes/gforge/phpwiki-fullscreen.css" media="screen" title="Fullscreen" />';
-				echo "\n".'    <link rel="stylesheet" type="text/css" href="/wiki/themes/gforge/phpwiki-print.css" media="print" />';
+				echo '<link rel="stylesheet" type="text/css" href="' . util_make_url ('/wiki/themes/gforge/phpwiki.css') . '" media="screen" />';
+				echo "\n".'    <link rel="alternate stylesheet" type="text/css" href="' . util_make_url ('/wiki/themes/gforge/phpwiki-fullscreen.css') . '" media="screen" title="Fullscreen" />';
+				echo "\n".'    <link rel="stylesheet" type="text/css" href="' . util_make_url ('/wiki/themes/gforge/phpwiki-print.css') . '" media="print" />';
 				echo "\n".'    <base href="'.PHPWIKI_BASE_URL.'" />';
 			}
 		}		

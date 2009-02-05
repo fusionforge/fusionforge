@@ -17,7 +17,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  *
- * @version   $Id: User.class.php 6589 2008-08-18 14:30:33Z lo-lan-do $
+ * @version   $Id: User.class.php 6691 2008-12-07 22:10:32Z aljeux $
  * @author Tim Perdue tperdue@valinux.com
  * @date 2000-10-11
  *
@@ -1157,7 +1157,7 @@ Enjoy the site.
 		/*
 			First check to see if we have already fetched the preferences
 		*/
-		if ($this->user_pref) {
+		if (isset($this->user_pref)) {
 			//echo "\n\nPrefs were fetched already";
 			if (isset($this->user_pref["$preference_name"])) {
 				//we have fetched prefs - return part of array

@@ -1,0 +1,63 @@
+	-----
+	NovaMonitor : monitoring d'applications java EE
+	-----
+	Auteur : Emeric Vernat, Bull (emeric.vernat@bull.net)
+	-----
+	2009-01-01
+	-----
+
+~~ http://maven.apache.org/doxia/references/apt-format.html
+
+NovaMonitor : monitoring d'applications java EE
+
+[images/screenshot.png]
+
+	({{{sample/monitoring.htm} Sample page }})
+	
+	Cet outil de monitoring a pour but de monitorer les serveurs d'applications Java / JEE en recette et en production. Ce n'est pas un outil de simulation de requêtes utilisateur, c'est un outil de mesure et de statistiques sur le fonctionnement réel d'une application selon l'usage qui en est fait par les utilisateurs.
+
+	* Le monitoring inclut des courbes de synthèse montrant l'évolution au fil du temps des indicateurs suivants :
+
+	* Nombre d'exécutions, Temps d'exécutions moyens et pourcentage d'erreurs pour les requêtes HTTP
+
+	* Nombre d'exécutions, Temps d'exécutions moyens et pourcentage d'erreurs pour les requêtes SQL
+
+	* Mémoire Java
+
+	* CPU Java
+
+	* Nombre de sessions utilisateurs
+
+	* Nombre de connexions jdbc
+
+	[]
+	
+	Ces courbes peuvent être visualisées sur la journée en cours, la semaine, le mois ou l'année.
+
+	Le monitoring inclut des statistiques sur les compteurs définis (à l'heure d'aujourd'hui requêtes HTTP, requêtes SQL et méthodes de façades métiers si EJB3) avec pour chaque compteur :
+
+	* Une synthèse globale indiquant le nombre d'exécutions global, le temps d'exécution moyen, le pourcentage d'erreurs. 
+
+	* Et le pourcentage du temps passé dans les requêtes dont le temps moyen dépasse un seuil d'alerte paramétrable. 
+
+	* Et la liste complète des requêtes, agrégées sans les paramètres dynamiques, avec pour chacune le nombre d'exécutions, le temps d'exécution moyen, le pourcentage d'erreurs ainsi qu'une courbe d'évolution dans le temps des temps d'exécution. 
+
+	* De plus, chaque requête HTTP indique la taille du flux de réponse, le nombre moyen d'exécutions SQL et le temps d'exécution SQL moyen. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	[]
+

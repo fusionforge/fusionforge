@@ -3,5 +3,5 @@
 #
 
 JAVA_HEAP=128
-JAVA_HOME=/usr/java/jdk1.5.0_15/
+JAVA_HOME=/usr/java/default
 HTTP_PORT=8080

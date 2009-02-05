@@ -1,0 +1,3749 @@
+#: plugincore/include/NovaContinuumPlugin.class.php:92
+msgid "tab_title"
+msgstr "novacontinuum"
+
+#: plugincore/include/NovaContinuumPlugin.class.php:107
+msgid "use_novacontinuum"
+msgstr "Use novacontinuum Plugin"
+
+#: plugincore/include/NovaContinuumPlugin.class.php:128
+#: plugincore/include/admin/views/addbuilddef.php:2
+#: plugincore/include/admin/views/addproject.php:2
+#: plugincore/include/admin/views/default.php:2
+#: plugincore/include/admin/views/deletebuilddef.php:1
+#: plugincore/include/admin/views/deleteprivateinstance.php:1
+#: plugincore/include/admin/views/deleteproject.php:1
+#: plugincore/include/admin/views/releaseproject.php:2
+#: plugincore/include/admin/views/releaseproject_access_control.php:2
+#: plugincore/include/admin/views/showbuildresult.php:2
+#: plugincore/include/admin/views/showbuildresults.php:2
+#: plugincore/include/admin/views/showprojectdetails.php:2
+#: plugincore/include/user/views/deletesite.php:1
+#: plugincore/include/user/views/showbuildresult.php:2
+#: plugincore/include/user/views/showbuildresults.php:2
+#: plugincore/include/user/views/showprojectdetails.php:2
+#: pluginwww/admin/index.php:46 pluginwww/admin/index.php:51
+#: pluginwww/admin/index.php:79
+msgid "title_admin"
+msgstr "Administration des projets Continuum"
+
+#: plugincore/include/NovaContinuumPlugin.class.php:132
+#: plugincore/include/admin/views/addnotifier.php:1
+#: plugincore/include/admin/views/deletenotifier.php:1
+#: plugincore/include/siteAdmin/views/addinstallation.php:1
+#: plugincore/include/siteAdmin/views/addinstance.php:2
+#: plugincore/include/siteAdmin/views/addprofile.php:1
+#: plugincore/include/siteAdmin/views/addproxy.php:2
+#: plugincore/include/siteAdmin/views/addschedule.php:1
+#: plugincore/include/siteAdmin/views/default.php:1
+#: plugincore/include/siteAdmin/views/deleteinstallation.php:1
+#: plugincore/include/siteAdmin/views/deleteinstance.php:1
+#: plugincore/include/siteAdmin/views/deleteprofile.php:1
+#: plugincore/include/siteAdmin/views/deleteproxy.php:1
+#: plugincore/include/siteAdmin/views/deleteschedule.php:1
+#: plugincore/include/siteAdmin/views/optioninstance.php:2
+#: pluginwww/siteAdmin/index.php:38
+msgid "title_site_admin"
+msgstr "Administration du plugin Nova Continuum"
+
+#: plugincore/include/NovaContinuumPlugin.class.php:138
+msgid "your_continuum_projects"
+msgstr ""
+
+#: plugincore/include/NovaContinuumPlugin.class.php:168
+#: plugincore/include/NovaContinuumPlugin.class.php:180
+msgid "no_project_assigned"
+msgstr ""
+
+#: plugincore/include/NovaContinuumPlugin.class.php:171
+#: plugincore/include/user/views/default.php:33
+msgid "not_reachable_instance"
+msgstr ""
+
+#: plugincore/include/NovaContinuumPlugin.class.php:174
+msgid "no_selected_instance"
+msgstr ""
+
+#: plugincore/include/admin/controller.php:663
+msgid "prepare_username_not_valid"
+msgstr ""
+
+#: plugincore/include/admin/controller.php:671
+msgid "prepare_password_not_valid"
+msgstr ""
+
+#: plugincore/include/admin/controller.php:673
+msgid "prepare_password_empty"
+msgstr ""
+
+#: plugincore/include/admin/views/addbuilddef.php:7
+#: plugincore/include/admin/views/addproject.php:7
+#: plugincore/include/admin/views/deletebuilddef.php:6
+#: plugincore/include/admin/views/deleteprivateinstance.php:6
+#: plugincore/include/admin/views/deleteproject.php:6
+#: plugincore/include/admin/views/releaseproject.php:7
+#: plugincore/include/admin/views/releaseproject_access_control.php:7
+#: plugincore/include/admin/views/showbuildresult.php:6
+#: plugincore/include/admin/views/showbuildresults.php:6
+#: plugincore/include/admin/views/showprojectdetails.php:6
+#: plugincore/include/user/views/deletesite.php:11
+#: plugincore/include/user/views/showbuildresult.php:6
+#: plugincore/include/user/views/showbuildresults.php:12
+#: plugincore/include/user/views/showprojectdetails.php:6
+msgid "return_admin"
+msgstr ""
+
+#: plugincore/include/admin/views/addbuilddef.php:15
+#: plugincore/include/commonviews/projects.php:17
+msgid "add_build_definition"
+msgstr ""
+
+#: plugincore/include/admin/views/addbuilddef.php:17
+msgid "edit_build_definition"
+msgstr ""
+
+#: plugincore/include/admin/views/addbuilddef.php:30
+msgid "form_add_build_def_goals"
+msgstr ""
+
+#: plugincore/include/admin/views/addbuilddef.php:34
+msgid "form_add_build_def_arguments"
+msgstr ""
+
+#: plugincore/include/admin/views/addbuilddef.php:38
+msgid "form_add_build_def_build_file"
+msgstr ""
+
+#: plugincore/include/admin/views/addbuilddef.php:42
+msgid "form_add_build_def_schedule"
+msgstr ""
+
+#: plugincore/include/admin/views/addbuilddef.php:58
+msgid "form_add_build_def_profile"
+msgstr ""
+
+#: plugincore/include/admin/views/addbuilddef.php:76
+msgid "form_add_build_def_build_fresh"
+msgstr ""
+
+#: plugincore/include/admin/views/addbuilddef.php:80
+msgid "form_add_build_def_always_build"
+msgstr ""
+
+#: plugincore/include/admin/views/addnotifier.php:18
+#: plugincore/include/admin/views/deletenotifier.php:17
+#: plugincore/include/siteAdmin/views/addinstallation.php:25
+#: plugincore/include/siteAdmin/views/addinstance.php:7
+#: plugincore/include/siteAdmin/views/addprofile.php:16
+#: plugincore/include/siteAdmin/views/addproxy.php:7
+#: plugincore/include/siteAdmin/views/addschedule.php:16
+#: plugincore/include/siteAdmin/views/deleteinstallation.php:17
+#: plugincore/include/siteAdmin/views/deleteinstance.php:6
+#: plugincore/include/siteAdmin/views/deleteprofile.php:17
+#: plugincore/include/siteAdmin/views/deleteproxy.php:6
+#: plugincore/include/siteAdmin/views/deleteschedule.php:17
+#: plugincore/include/siteAdmin/views/optioninstance.php:17
+msgid "return_site_admin"
+msgstr ""
+
+#: plugincore/include/admin/views/addnotifier.php:26
+#: plugincore/include/commonviews/projects.php:159
+#: plugincore/include/user/views/showprojectdetails.php:90
+msgid "add_notifier"
+msgstr ""
+
+#: plugincore/include/admin/views/addnotifier.php:28
+msgid "edit_notifier"
+msgstr ""
+
+#: plugincore/include/admin/views/addnotifier.php:50
+msgid "form_add_notifier_address"
+msgstr ""
+
+#: plugincore/include/admin/views/addnotifier.php:55
+msgid "form_add_notifier_sendOnSuccess"
+msgstr ""
+
+#: plugincore/include/admin/views/addnotifier.php:59
+msgid "form_add_notifier_sendOnFailure"
+msgstr ""
+
+#: plugincore/include/admin/views/addnotifier.php:63
+msgid "form_add_notifier_sendOnError"
+msgstr ""
+
+#: plugincore/include/admin/views/addnotifier.php:67
+msgid "form_add_notifier_sendOnWarning"
+msgstr ""
+
+#: plugincore/include/admin/views/addnotifier.php:71
+msgid "form_add_notifier_enabled"
+msgstr ""
+
+#: plugincore/include/admin/views/addproject.php:15
+#: plugincore/include/commonviews/projects.php:81
+msgid "add_project"
+msgstr ""
+
+#: plugincore/include/admin/views/addproject.php:17
+msgid "edit_project"
+msgstr ""
+
+#: plugincore/include/admin/views/addproject.php:29
+msgid "form_add_project_name"
+msgstr ""
+
+#: plugincore/include/admin/views/addproject.php:33
+msgid "form_add_project_url"
+msgstr ""
+
+#: plugincore/include/admin/views/addproject.php:37
+msgid "form_add_project_user"
+msgstr ""
+
+#: plugincore/include/admin/views/addproject.php:43
+msgid "form_add_project_password"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:10
+msgid "group_admin_instance_management"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:22
+msgid "option_private_instance"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:25
+msgid "edit_private_instance"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:28
+#: plugincore/include/admin/views/deleteprivateinstance.php:10
+#: plugincore/include/translations.php:25
+msgid "delete_private_instance"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:32
+msgid "add_private_instance"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:35
+msgid "download_private_instance"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:111
+msgid "group_admin_role_management"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:121
+msgid "group_admin_col_role"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:122
+msgid "group_admin_col_manage_roles"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:123
+msgid "group_admin_col_all"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:124
+msgid "group_admin_col_none"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:125
+msgid "group_admin_col_manage_private_instance"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:126
+msgid "group_admin_col_select_instance"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:127
+msgid "group_admin_col_manage_build_def"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:128
+msgid "group_admin_col_run_build_def"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:129
+msgid "group_admin_col_read_maven_site"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:130
+msgid "group_admin_col_write_maven_site"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:131
+msgid "group_admin_col_release_project"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:132
+msgid "group_admin_col_manage_project"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:133
+msgid "group_admin_col_run_project"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:134
+msgid "group_admin_col_run_continuum_project"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:135
+msgid "group_admin_col_show_build_result"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:136
+msgid "group_admin_col_show_project_detail"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:137
+msgid "group_admin_col_view"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:167
+msgid "group_admin_lbl_guest"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:186
+msgid "submit_update_roles"
+msgstr ""
+
+#: plugincore/include/admin/views/deletebuilddef.php:10
+msgid "delete_build_def"
+msgstr ""
+
+#: plugincore/include/admin/views/deletebuilddef.php:17
+msgid "confirm_delete_build_def"
+msgstr ""
+
+#: plugincore/include/admin/views/deletebuilddef.php:23
+#: plugincore/include/admin/views/deletenotifier.php:48
+#: plugincore/include/admin/views/deleteprivateinstance.php:22
+#: plugincore/include/admin/views/deleteproject.php:23
+#: plugincore/include/siteAdmin/views/deleteinstallation.php:44
+#: plugincore/include/siteAdmin/views/deleteinstance.php:22
+#: plugincore/include/siteAdmin/views/deleteprofile.php:44
+#: plugincore/include/siteAdmin/views/deleteproxy.php:22
+#: plugincore/include/siteAdmin/views/deleteschedule.php:44
+#: plugincore/include/user/views/deletesite.php:27
+msgid "confirm_delete"
+msgstr ""
+
+#: plugincore/include/admin/views/deletenotifier.php:21
+msgid "delete_notifier"
+msgstr ""
+
+#: plugincore/include/admin/views/deletenotifier.php:35
+msgid "confirm_delete_notifier"
+msgstr ""
+
+#: plugincore/include/admin/views/deleteprivateinstance.php:17
+msgid "confirm_delete_private_instance"
+msgstr ""
+
+#: plugincore/include/admin/views/deleteproject.php:10
+msgid "delete_project"
+msgstr ""
+
+#: plugincore/include/admin/views/deleteproject.php:17
+msgid "confirm_delete_project"
+msgstr ""
+
+#: plugincore/include/admin/views/releaseproject.php:16
+msgid "release_project"
+msgstr ""
+
+#: plugincore/include/admin/views/releaseproject.php:35
+msgid "form_release_project_tag_url"
+msgstr ""
+
+#: plugincore/include/admin/views/releaseproject.php:39
+msgid "form_release_add_tag_to_project_list"
+msgstr ""
+
+#: plugincore/include/admin/views/releaseproject.php:43
+#: plugincore/include/translations.php:79
+msgid "form_release_project_tag"
+msgstr ""
+
+#: plugincore/include/admin/views/releaseproject.php:47
+msgid "form_release_project_new_version"
+msgstr ""
+
+#: plugincore/include/admin/views/releaseproject.php:57
+msgid "submit_release_project"
+msgstr ""
+
+#: plugincore/include/admin/views/releaseproject.php:70
+msgid "form_release_project_group_id"
+msgstr ""
+
+#: plugincore/include/admin/views/releaseproject.php:74
+msgid "form_release_project_artifact_id"
+msgstr ""
+
+#: plugincore/include/admin/views/releaseproject.php:78
+msgid "form_release_project_version"
+msgstr ""
+
+#: plugincore/include/admin/views/releaseproject.php:88
+msgid "form_release_project_modules"
+msgstr ""
+
+#: plugincore/include/admin/views/releaseproject_access_control.php:16
+msgid "release_project_access_control"
+msgstr ""
+
+#: plugincore/include/admin/views/releaseproject_access_control.php:34
+msgid "form_release_project_scmuser"
+msgstr ""
+
+#: plugincore/include/admin/views/releaseproject_access_control.php:40
+msgid "form_release_project_scmpassword"
+msgstr ""
+
+#: plugincore/include/admin/views/releaseproject_access_control.php:45
+msgid "submit_release_project_access_control"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:24
+#: plugincore/include/user/views/showbuildresult.php:27
+msgid "build_result"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:31
+#: plugincore/include/user/views/showbuildresult.php:34
+msgid "build_result_start_time"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:37
+#: plugincore/include/user/views/showbuildresult.php:40
+msgid "build_result_end_time"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:43
+#: plugincore/include/user/views/showbuildresult.php:46
+msgid "build_result_time"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:49
+#: plugincore/include/user/views/showbuildresult.php:52
+msgid "build_result_trigger"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:52
+#: plugincore/include/user/views/showbuildresult.php:55
+msgid "build_result_trigger_forced"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:54
+#: plugincore/include/user/views/showbuildresult.php:57
+msgid "build_result_trigger_planned"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:58
+#: plugincore/include/user/views/showbuildresult.php:61
+msgid "build_result_state"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:62
+#: plugincore/include/user/views/showbuildresult.php:65
+msgid "build_result_build_number"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:71
+#: plugincore/include/user/views/showbuildresult.php:74
+msgid "build_result_used_def"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:77
+#: plugincore/include/user/views/showbuildresult.php:80
+msgid "build_result_build_def_goals"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:81
+#: plugincore/include/user/views/showbuildresult.php:84
+msgid "build_result_build_def_arguments"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:85
+#: plugincore/include/user/views/showbuildresult.php:88
+msgid "build_result_build_def_schedule"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:94
+#: plugincore/include/user/views/showbuildresult.php:97
+msgid "build_result_error"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:100
+#: plugincore/include/user/views/showbuildresult.php:103
+msgid "build_result_success"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresults.php:20
+#: plugincore/include/user/views/showbuildresults.php:27
+msgid "build_results"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresults.php:28
+#: plugincore/include/admin/views/showprojectdetails.php:27
+#: plugincore/include/user/views/showbuildresults.php:35
+#: plugincore/include/user/views/showprojectdetails.php:30
+msgid "project_details_name"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresults.php:32
+#: plugincore/include/admin/views/showprojectdetails.php:31
+#: plugincore/include/user/views/showbuildresults.php:39
+#: plugincore/include/user/views/showprojectdetails.php:34
+msgid "project_details_group_id"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresults.php:36
+#: plugincore/include/admin/views/showprojectdetails.php:35
+#: plugincore/include/user/views/showbuildresults.php:43
+#: plugincore/include/user/views/showprojectdetails.php:38
+msgid "project_details_artifact_id"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresults.php:40
+#: plugincore/include/admin/views/showprojectdetails.php:39
+#: plugincore/include/user/views/showbuildresults.php:47
+#: plugincore/include/user/views/showprojectdetails.php:42
+msgid "project_details_version"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresults.php:44
+#: plugincore/include/admin/views/showprojectdetails.php:51
+#: plugincore/include/user/views/showbuildresults.php:51
+#: plugincore/include/user/views/showprojectdetails.php:54
+msgid "project_details_projectgroup_name"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresults.php:48
+#: plugincore/include/admin/views/showprojectdetails.php:55
+#: plugincore/include/user/views/showbuildresults.php:55
+#: plugincore/include/user/views/showprojectdetails.php:58
+msgid "project_details_last_build"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresults.php:61
+#: plugincore/include/user/views/showbuildresults.php:68
+msgid "build_results_head_number"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresults.php:62
+#: plugincore/include/user/views/showbuildresults.php:69
+msgid "build_results_head_starttime"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresults.php:63
+#: plugincore/include/user/views/showbuildresults.php:70
+msgid "build_results_head_endtime"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresults.php:64
+#: plugincore/include/user/views/showbuildresults.php:71
+msgid "build_results_head_time"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresults.php:65
+#: plugincore/include/user/views/showbuildresults.php:72
+msgid "build_results_head_state"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresults.php:66
+#: plugincore/include/user/views/showbuildresults.php:73
+msgid "build_results_head_def_desc"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresults.php:67
+#: plugincore/include/user/views/showbuildresults.php:74
+msgid "build_results_head_result"
+msgstr ""
+
+#: plugincore/include/admin/views/showprojectdetails.php:19
+#: plugincore/include/user/views/showprojectdetails.php:22
+msgid "project_details"
+msgstr ""
+
+#: plugincore/include/admin/views/showprojectdetails.php:43
+#: plugincore/include/user/views/showprojectdetails.php:46
+msgid "project_details_scm_url"
+msgstr ""
+
+#: plugincore/include/admin/views/showprojectdetails.php:47
+#: plugincore/include/user/views/showprojectdetails.php:50
+msgid "project_details_scm_tag"
+msgstr ""
+
+#: plugincore/include/admin/views/showprojectdetails.php:66
+#: plugincore/include/user/views/showprojectdetails.php:69
+msgid "project_details_developpers"
+msgstr ""
+
+#: plugincore/include/admin/views/showprojectdetails.php:82
+#: plugincore/include/user/views/showprojectdetails.php:85
+msgid "project_details_notifiers"
+msgstr ""
+
+#: plugincore/include/admin/views/showprojectdetails.php:94
+#: plugincore/include/commonviews/projects.php:176
+#: plugincore/include/user/views/showprojectdetails.php:105
+msgid "project_details_notifiers_by"
+msgstr ""
+
+#: plugincore/include/admin/views/showprojectdetails.php:101
+#: plugincore/include/commonviews/projects.php:183
+#: plugincore/include/user/views/showprojectdetails.php:112
+msgid "project_details_notifiers_success"
+msgstr ""
+
+#: plugincore/include/admin/views/showprojectdetails.php:104
+#: plugincore/include/commonviews/projects.php:186
+#: plugincore/include/user/views/showprojectdetails.php:115
+msgid "project_details_notifiers_failure"
+msgstr ""
+
+#: plugincore/include/admin/views/showprojectdetails.php:107
+#: plugincore/include/commonviews/projects.php:189
+#: plugincore/include/user/views/showprojectdetails.php:118
+msgid "project_details_notifiers_warning"
+msgstr ""
+
+#: plugincore/include/admin/views/showprojectdetails.php:110
+#: plugincore/include/commonviews/projects.php:192
+#: plugincore/include/user/views/showprojectdetails.php:121
+msgid "project_details_notifiers_error"
+msgstr ""
+
+#: plugincore/include/admin/views/showprojectdetails.php:117
+#: plugincore/include/admin/views/showprojectdetails.php:121
+#: plugincore/include/commonviews/projects.php:199
+#: plugincore/include/commonviews/projects.php:203
+#: plugincore/include/user/views/showprojectdetails.php:128
+#: plugincore/include/user/views/showprojectdetails.php:132
+msgid "project_details_notifiers_separator"
+msgstr ""
+
+#: plugincore/include/admin/views/showprojectdetails.php:142
+#: plugincore/include/user/views/showprojectdetails.php:170
+msgid "project_details_dependencies"
+msgstr ""
+
+#: plugincore/include/commonviews/mavensites.php:8
+msgid "consult_maven_site"
+msgstr ""
+
+#: plugincore/include/commonviews/mavensites.php:26
+msgid "delete_maven_site_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/mavensites.php:33
+#: plugincore/include/commonviews/mavensites.php:54
+msgid "consult_maven_site_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:12
+msgid "group_admin_build_def_management"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:37
+msgid "edit_build_def_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:46
+msgid "unset_defaut_build_def_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:50
+msgid "set_defaut_build_def_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:51
+msgid "delete_build_def_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:61
+msgid "run_build_def_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:76
+msgid "group_admin_project_management"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:97
+msgid "edit_project_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:98
+msgid "delete_project_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:105
+msgid "build_project_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:112
+msgid "release_project_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:126
+msgid "show_build_results_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:133
+msgid "build_sub_project_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:140
+msgid "show_project_details_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:155
+msgid "group_admin_notifiers_management"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:209
+#: plugincore/include/user/views/showprojectdetails.php:138
+msgid "project_details_notifiers_from_project"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:211
+#: plugincore/include/user/views/showprojectdetails.php:140
+msgid "project_details_notifiers_from_user"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:220
+#: plugincore/include/user/views/showprojectdetails.php:149
+msgid "edit_notifier_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:221
+#: plugincore/include/user/views/showprojectdetails.php:150
+msgid "delete_notifier_tooltip"
+msgstr ""
+
+#: plugincore/include/dto/ProjectRelease.php:52
+#: plugincore/include/dto/ProjectRelease.php:102
+msgid "prepare_read_pom_error"
+msgstr ""
+
+#: plugincore/include/dto/ProjectRelease.php:165
+msgid "prepare_module_update_error"
+msgstr ""
+
+#: plugincore/include/dto/ProjectRelease.php:175
+msgid "prepare_module_read_pom_error"
+msgstr ""
+
+#: plugincore/include/services/ServicesManager.php:853
+msgid "consult_maven_site_date_format"
+msgstr ""
+
+#: plugincore/include/services/ServicesManager.php:941
+msgid "release_tag_prepare"
+msgstr ""
+
+#: plugincore/include/services/ServicesManager.php:944
+msgid "release_can_t_create_dir"
+msgstr ""
+
+#: plugincore/include/services/ServicesManager.php:950
+msgid "release_url_access_error"
+msgstr ""
+
+#: plugincore/include/services/ServicesManager.php:957
+msgid "release_tag_update"
+msgstr ""
+
+#: plugincore/include/services/ServicesManager.php:961
+msgid "release_can_t_commit"
+msgstr ""
+
+#: plugincore/include/services/ServicesManager.php:965
+msgid "release_tag_creation"
+msgstr ""
+
+#: plugincore/include/services/ServicesManager.php:968
+msgid "release_can_t_copy"
+msgstr ""
+
+#: plugincore/include/services/ServicesManager.php:974
+msgid "release_new_version_prepare"
+msgstr ""
+
+#: plugincore/include/services/ServicesManager.php:977
+msgid "release_can_t_commit_new_version"
+msgstr ""
+
+#: plugincore/include/services/ServicesManager.php:995
+msgid "project_not_prepared"
+msgstr ""
+
+#: plugincore/include/services/ServicesManager.php:1029
+msgid "prepare_error_checkout"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstallation.php:33
+msgid "add_installation"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstallation.php:35
+msgid "edit_installation"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstallation.php:57
+msgid "form_add_installation_name"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstallation.php:64
+msgid "form_add_installation_var_name"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstallation.php:72
+msgid "form_add_installation_type"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstallation.php:84
+msgid "form_add_installation_var_value"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstance.php:19
+#: plugincore/include/siteAdmin/views/default.php:26
+msgid "add_instance"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstance.php:21
+msgid "edit_instance"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstance.php:38
+msgid "form_add_instance_name"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstance.php:43
+msgid "form_add_instance_url"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstance.php:47
+msgid "form_add_instance_user"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstance.php:51
+msgid "form_add_instance_password"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstance.php:56
+msgid "form_add_instance_maxUse"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstance.php:60
+msgid "form_add_instance_isEnabled"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstance.php:65
+msgid "form_add_instance_proxy"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstance.php:68
+msgid "form_add_instance_proxy_none"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addprofile.php:24
+#: plugincore/include/siteAdmin/views/optioninstance.php:132
+msgid "add_profile"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addprofile.php:26
+msgid "edit_profile"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addprofile.php:48
+msgid "form_add_profile_name"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addprofile.php:77
+msgid "form_add_profile_jdk"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addprofile.php:80
+msgid "form_add_profile_jdk_none"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addprofile.php:92
+msgid "form_add_profile_builder"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addprofile.php:95
+msgid "form_add_profile_builder_none"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addprofile.php:107
+msgid "form_add_profile_var_envs"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addprofile.php:171
+msgid "form_add_profile_add_env_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addprofile.php:178
+msgid "form_add_profile_remove_env_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addproxy.php:15
+#: plugincore/include/siteAdmin/views/default.php:114
+msgid "add_proxy"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addproxy.php:17
+msgid "edit_proxy"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addproxy.php:28
+msgid "form_add_proxy_name"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addproxy.php:32
+msgid "form_add_proxy_host"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addproxy.php:36
+msgid "form_add_proxy_port"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addproxy.php:40
+msgid "form_add_proxy_user"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addproxy.php:44
+msgid "form_add_proxy_password"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:24
+msgid "add_schedule"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:26
+msgid "edit_schedule"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:48
+msgid "form_add_schedule_name"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:52
+msgid "form_add_schedule_description"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:56
+msgid "form_add_schedule_cronExpression"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:57
+msgid "form_add_schedule_cronExpression_syntaxe"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:61
+msgid "form_add_schedule_cronExpression_seconde"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:65
+msgid "form_add_schedule_cronExpression_minute"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:69
+msgid "form_add_schedule_cronExpression_hour"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:73
+msgid "form_add_schedule_cronExpression_day_of_month"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:77
+msgid "form_add_schedule_cronExpression_month"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:81
+msgid "form_add_schedule_cronExpression_day_of_week"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:85
+msgid "form_add_schedule_cronExpression_year"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:89
+msgid "form_add_schedule_max_time"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:93
+msgid "form_add_schedule_wait_time"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:98
+msgid "form_add_schedule_activated"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:3
+msgid "global_configuration"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:9
+msgid "form_configuration_allow_private_instance"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:13
+msgid "disallow_private_instance_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:15
+msgid "allow_private_instance_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:21
+msgid "instances_list"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:35
+msgid "instance_col_name"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:38
+msgid "instance_col_url"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:41
+msgid "instance_col_user"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:44
+msgid "instance_col_proxy"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:47
+msgid "instance_col_working"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:50
+msgid "instance_col_nb_group"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:53
+msgid "instance_col_actions"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:94
+msgid "option_instance_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:96
+msgid "edit_instance_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:97
+msgid "delete_instance_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:100
+msgid "disable_instance_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:102
+msgid "enable_instance_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:110
+msgid "proxy_list"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:123
+msgid "proxy_col_name"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:126
+msgid "proxy_col_host"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:129
+msgid "proxy_col_port"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:132
+msgid "proxy_col_user"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:135
+msgid "proxy_col_actions"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:150
+msgid "edit_proxy_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:151
+msgid "delete_proxy_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/deleteinstallation.php:21
+msgid "delete_installation"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/deleteinstallation.php:31
+msgid "confirm_delete_installation"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/deleteinstance.php:10
+msgid "delete_instance"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/deleteinstance.php:17
+msgid "confirm_delete_instance"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/deleteprofile.php:21
+msgid "delete_profile"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/deleteprofile.php:31
+msgid "confirm_delete_profile"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/deleteproxy.php:10
+msgid "delete_proxy"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/deleteproxy.php:17
+msgid "confirm_delete_proxy"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/deleteschedule.php:21
+msgid "delete_schedule"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/deleteschedule.php:31
+msgid "confirm_delete_schedule"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:27
+msgid "manage_schedule_instance"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:32
+msgid "add_schedule_instance"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:40
+msgid "manage_schedule_instance_col_name"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:41
+msgid "manage_schedule_instance_col_desc"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:42
+msgid "manage_schedule_instance_col_waittime"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:43
+msgid "manage_schedule_instance_col_cron"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:44
+msgid "manage_schedule_instance_col_maxtime"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:45
+msgid "manage_schedule_instance_col_activated"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:63
+msgid "disable_schedule_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:65
+msgid "enable_schedule_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:69
+msgid "edit_schedule_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:70
+msgid "delete_schedule_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:81
+msgid "manage_installation"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:86
+msgid "add_installation_tool"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:88
+msgid "add_installation_var"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:97
+msgid "manage_installation_col_name"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:98
+msgid "manage_installation_col_var_name"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:99
+msgid "manage_installation_col_type"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:100
+msgid "manage_installation_col_var_value"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:115
+msgid "edit_installation_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:116
+msgid "delete_installation_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:127
+msgid "manage_profiles"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:141
+msgid "manage_profile_col_name"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:142
+msgid "manage_profile_col_jdk"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:143
+msgid "manage_profile_col_builder"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:144
+msgid "manage_profile_col_env_var"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:167
+msgid "edit_profile_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:168
+msgid "delete_profile_tooltip"
+msgstr ""
+
+#: plugincore/include/translations.php:7
+msgid "title_helloworld"
+msgstr "Hello world !!!"
+
+#: plugincore/include/translations.php:10
+msgid "submit_add_instance"
+msgstr ""
+
+#: plugincore/include/translations.php:13
+msgid "submit_edit_instance"
+msgstr ""
+
+#: plugincore/include/translations.php:16
+msgid "submit_add_proxy"
+msgstr ""
+
+#: plugincore/include/translations.php:19
+msgid "submit_edit_proxy"
+msgstr ""
+
+#: plugincore/include/translations.php:22
+msgid "submit_update_configuration"
+msgstr ""
+
+#: plugincore/include/translations.php:28
+msgid "submit_add_project"
+msgstr ""
+
+#: plugincore/include/translations.php:31
+msgid "submit_edit_project"
+msgstr ""
+
+#: plugincore/include/translations.php:34
+msgid "build_definitions"
+msgstr ""
+
+#: plugincore/include/translations.php:37
+msgid "projects"
+msgstr ""
+
+#: plugincore/include/translations.php:40
+msgid "default_build_def"
+msgstr ""
+
+#: plugincore/include/translations.php:43
+msgid "submit_add_build_def"
+msgstr ""
+
+#: plugincore/include/translations.php:46
+msgid "submit_edit_build_def"
+msgstr ""
+
+#: plugincore/include/translations.php:49
+msgid "notifiers"
+msgstr ""
+
+#: plugincore/include/translations.php:52
+msgid "submit_add_schedule"
+msgstr ""
+
+#: plugincore/include/translations.php:55
+msgid "submit_edit_schedule"
+msgstr ""
+
+#: plugincore/include/translations.php:58
+msgid "submit_add_notifier"
+msgstr ""
+
+#: plugincore/include/translations.php:61
+msgid "submit_edit_notifier"
+msgstr ""
+
+#: plugincore/include/translations.php:64
+msgid "submit_edit_installation"
+msgstr ""
+
+#: plugincore/include/translations.php:67
+msgid "submit_add_installation"
+msgstr ""
+
+#: plugincore/include/translations.php:70
+msgid "submit_add_profile"
+msgstr ""
+
+#: plugincore/include/translations.php:73
+msgid "submit_edit_profile"
+msgstr ""
+
+#: plugincore/include/translations.php:76
+msgid "form_release_project_tag_base"
+msgstr ""
+
+#: plugincore/include/translations.php:82
+msgid "webwork.date"
+msgstr ""
+
+#: plugincore/include/translations.php:85
+msgid "message.success"
+msgstr ""
+
+#: plugincore/include/translations.php:88
+msgid "message.failed"
+msgstr ""
+
+#: plugincore/include/translations.php:91
+msgid "message.error"
+msgstr ""
+
+#: plugincore/include/translations.php:94
+msgid "enabled"
+msgstr ""
+
+#: plugincore/include/translations.php:97
+msgid "disabled"
+msgstr ""
+
+#: plugincore/include/translations.php:100
+msgid "cancel"
+msgstr ""
+
+#: plugincore/include/translations.php:103
+msgid "submit"
+msgstr ""
+
+#: plugincore/include/translations.php:106
+msgid "edit"
+msgstr ""
+
+#: plugincore/include/translations.php:109
+msgid "delete"
+msgstr ""
+
+#: plugincore/include/translations.php:112
+msgid "build"
+msgstr ""
+
+#: plugincore/include/translations.php:115
+msgid "release"
+msgstr ""
+
+#: plugincore/include/translations.php:118
+msgid "save"
+msgstr ""
+
+#: plugincore/include/translations.php:121
+msgid "add"
+msgstr ""
+
+#: plugincore/include/translations.php:124
+msgid "back"
+msgstr ""
+
+#: plugincore/include/translations.php:127
+msgid "workingCopy"
+msgstr ""
+
+#: plugincore/include/translations.php:130
+msgid "builds"
+msgstr ""
+
+#: plugincore/include/translations.php:133
+msgid "info"
+msgstr ""
+
+#: plugincore/include/translations.php:136
+msgid "or"
+msgstr ""
+
+#: plugincore/include/translations.php:139
+msgid "selectAll"
+msgstr ""
+
+#: plugincore/include/translations.php:142
+msgid "unselectAll"
+msgstr ""
+
+#: plugincore/include/translations.php:145
+msgid "sort.descending"
+msgstr ""
+
+#: plugincore/include/translations.php:148
+msgid "sort.ascending"
+msgstr ""
+
+#: plugincore/include/translations.php:151
+msgid "top.logo.default"
+msgstr ""
+
+#: plugincore/include/translations.php:154
+msgid "bottom.version.number"
+msgstr ""
+
+#: plugincore/include/translations.php:157
+msgid "menu.continuum.about"
+msgstr ""
+
+#: plugincore/include/translations.php:160
+msgid "menu.continuum.showProjects"
+msgstr ""
+
+#: plugincore/include/translations.php:163
+msgid "menu.continuum.showProjectGroups"
+msgstr ""
+
+#: plugincore/include/translations.php:166
+msgid "menu.addProject"
+msgstr ""
+
+#: plugincore/include/translations.php:169
+msgid "menu.add.m2Project"
+msgstr ""
+
+#: plugincore/include/translations.php:172
+msgid "menu.add.m1Project"
+msgstr ""
+
+#: plugincore/include/translations.php:175
+msgid "menu.add.antProject"
+msgstr ""
+
+#: plugincore/include/translations.php:178
+msgid "menu.add.shellProject"
+msgstr ""
+
+#: plugincore/include/translations.php:181
+msgid "menu.administration"
+msgstr ""
+
+#: plugincore/include/translations.php:184
+msgid "menu.administration.configuration"
+msgstr ""
+
+#: plugincore/include/translations.php:187
+msgid "menu.administration.appearance"
+msgstr ""
+
+#: plugincore/include/translations.php:190
+msgid "menu.administration.profile"
+msgstr ""
+
+#: plugincore/include/translations.php:193
+msgid "menu.administration.installations"
+msgstr ""
+
+#: plugincore/include/translations.php:196
+msgid "menu.administration.schedules"
+msgstr ""
+
+#: plugincore/include/translations.php:199
+msgid "menu.administration.users"
+msgstr ""
+
+#: plugincore/include/translations.php:202
+msgid "menu.administration.userGroups"
+msgstr ""
+
+#: plugincore/include/translations.php:205
+msgid "menu.administration.buildDefinitionTemplates"
+msgstr ""
+
+#: plugincore/include/translations.php:208
+msgid "menu.account.options"
+msgstr ""
+
+#: plugincore/include/translations.php:211
+msgid "user.edit.account"
+msgstr ""
+
+#: plugincore/include/translations.php:214
+msgid "menu.administration.queues"
+msgstr ""
+
+#: plugincore/include/translations.php:217
+msgid "error.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:220
+msgid "error.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:223
+msgid "error.exception.message"
+msgstr ""
+
+#: plugincore/include/translations.php:226
+msgid "error.message"
+msgstr ""
+
+#: plugincore/include/translations.php:229
+msgid "error.403.title"
+msgstr ""
+
+#: plugincore/include/translations.php:232
+msgid "error.403.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:235
+msgid "error.403.message"
+msgstr ""
+
+#: plugincore/include/translations.php:238
+msgid "error.404.title"
+msgstr ""
+
+#: plugincore/include/translations.php:241
+msgid "error.404.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:244
+msgid "error.404.message"
+msgstr ""
+
+#: plugincore/include/translations.php:247
+msgid "error.500.title"
+msgstr ""
+
+#: plugincore/include/translations.php:250
+msgid "error.500.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:253
+msgid "error.500.message"
+msgstr ""
+
+#: plugincore/include/translations.php:256
+msgid "about.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:259
+msgid "about.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:262
+msgid "about.version.label"
+msgstr ""
+
+#: plugincore/include/translations.php:265
+msgid "about.version.number"
+msgstr ""
+
+#: plugincore/include/translations.php:268
+msgid "about.buildnumber.label"
+msgstr ""
+
+#: plugincore/include/translations.php:271
+msgid "about.buildnumber"
+msgstr ""
+
+#: plugincore/include/translations.php:274
+msgid "login.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:277
+msgid "login.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:280
+msgid "login.username"
+msgstr ""
+
+#: plugincore/include/translations.php:283
+msgid "login.password"
+msgstr ""
+
+#: plugincore/include/translations.php:286
+msgid "login.rememberMe"
+msgstr ""
+
+#: plugincore/include/translations.php:289
+msgid "login.submit"
+msgstr ""
+
+#: plugincore/include/translations.php:292
+msgid "summary.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:295
+msgid "summary.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:298
+msgid "summary.projectTable.name"
+msgstr ""
+
+#: plugincore/include/translations.php:301
+msgid "summary.projectTable.version"
+msgstr ""
+
+#: plugincore/include/translations.php:304
+msgid "summary.projectTable.build"
+msgstr ""
+
+#: plugincore/include/translations.php:307
+msgid "summary.projectTable.group"
+msgstr ""
+
+#: plugincore/include/translations.php:310
+msgid "summary.projectTable.lastBuildDateTime"
+msgstr ""
+
+#: plugincore/include/translations.php:313
+msgid "summary.buildAll"
+msgstr ""
+
+#: plugincore/include/translations.php:316
+msgid "summary.buildHistory"
+msgstr ""
+
+#: plugincore/include/translations.php:319
+msgid "summary.buildNow"
+msgstr ""
+
+#: plugincore/include/translations.php:322
+msgid "groups.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:325
+msgid "groups.page.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:328
+msgid "groups.table.name"
+msgstr ""
+
+#: plugincore/include/translations.php:331
+msgid "groups.table.groupId"
+msgstr ""
+
+#: plugincore/include/translations.php:334
+msgid "groups.table.totalProjects"
+msgstr ""
+
+#: plugincore/include/translations.php:337
+msgid "groups.table.summary"
+msgstr ""
+
+#: plugincore/include/translations.php:340
+msgid "groups.page.list.empty"
+msgstr ""
+
+#: plugincore/include/translations.php:343
+msgid "groups.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:346
+msgid "groups.manage.label"
+msgstr ""
+
+#: plugincore/include/translations.php:349
+msgid "groups.confirmation.message"
+msgstr ""
+
+#: plugincore/include/translations.php:352
+msgid "projectGroup.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:355
+msgid "projectGroup.information.title"
+msgstr ""
+
+#: plugincore/include/translations.php:358
+msgid "projectGroup.name.label"
+msgstr ""
+
+#: plugincore/include/translations.php:361
+msgid "projectGroup.groupId.label"
+msgstr ""
+
+#: plugincore/include/translations.php:364
+msgid "projectGroup.description.label"
+msgstr ""
+
+#: plugincore/include/translations.php:367
+msgid "projectGroup.projects.title"
+msgstr ""
+
+#: plugincore/include/translations.php:370
+msgid "projectGroup.tab.summary"
+msgstr ""
+
+#: plugincore/include/translations.php:373
+msgid "projectGroup.tab.members"
+msgstr ""
+
+#: plugincore/include/translations.php:376
+msgid "projectGroup.tab.buildDefinitions"
+msgstr ""
+
+#: plugincore/include/translations.php:379
+msgid "projectGroup.tab.notifiers"
+msgstr ""
+
+#: plugincore/include/translations.php:382
+msgid "projectGroup.actions.title"
+msgstr ""
+
+#: plugincore/include/translations.php:385
+msgid "projectGroup.release.error.emptyGroup"
+msgstr ""
+
+#: plugincore/include/translations.php:388
+msgid "projectGroup.release.error.severalParentProjects"
+msgstr ""
+
+#: plugincore/include/translations.php:391
+msgid "projectGroup.release.error.projectNotInSuccess"
+msgstr ""
+
+#: plugincore/include/translations.php:394
+msgid "projectGroup.deleteGroup"
+msgstr ""
+
+#: plugincore/include/translations.php:397
+msgid "projectGroup.buildGroup"
+msgstr ""
+
+#: plugincore/include/translations.php:400
+msgid "projectGroup.buildGroupNow"
+msgstr ""
+
+#: plugincore/include/translations.php:403
+msgid "projectGroup.deleteProjects"
+msgstr ""
+
+#: plugincore/include/translations.php:406
+msgid "projectGroup.buildProjects"
+msgstr ""
+
+#: plugincore/include/translations.php:409
+msgid "projectGroup.cancelBuilds"
+msgstr ""
+
+#: plugincore/include/translations.php:412
+msgid "projectGroup.buildsStatut.title"
+msgstr ""
+
+#: plugincore/include/translations.php:415
+msgid "projectGroup.buildsStatut.errors"
+msgstr ""
+
+#: plugincore/include/translations.php:418
+msgid "projectGroup.buildsStatut.failures"
+msgstr ""
+
+#: plugincore/include/translations.php:421
+msgid "projectGroup.buildsStatut.success"
+msgstr ""
+
+#: plugincore/include/translations.php:424
+msgid "projectGroup.buildDefinition.label"
+msgstr ""
+
+#: plugincore/include/translations.php:427
+msgid "projectGroup.addProject.label"
+msgstr ""
+
+#: plugincore/include/translations.php:430
+msgid "projectGroup.releaseNow"
+msgstr ""
+
+#: plugincore/include/translations.php:433
+msgid "projectGroup.members.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:436
+msgid "projectGroup.members.users.title"
+msgstr ""
+
+#: plugincore/include/translations.php:439
+msgid "projectGroup.members.users.search.label"
+msgstr ""
+
+#: plugincore/include/translations.php:442
+msgid "projectGroup.members.users.search.button"
+msgstr ""
+
+#: plugincore/include/translations.php:445
+msgid "projectGroup.members.user.role.administrator"
+msgstr ""
+
+#: plugincore/include/translations.php:448
+msgid "projectGroup.members.user.role.developer"
+msgstr ""
+
+#: plugincore/include/translations.php:451
+msgid "projectGroup.members.user.role.user"
+msgstr ""
+
+#: plugincore/include/translations.php:454
+msgid "projectGroup.add.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:457
+msgid "projectGroup.add.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:460
+msgid "projectGroup.error.name.required"
+msgstr ""
+
+#: plugincore/include/translations.php:463
+msgid "projectGroup.error.name.cannot.be.spaces"
+msgstr ""
+
+#: plugincore/include/translations.php:466
+msgid "projectGroup.error.name.already.exists"
+msgstr ""
+
+#: plugincore/include/translations.php:469
+msgid "projectGroup.error.groupId.required"
+msgstr ""
+
+#: plugincore/include/translations.php:472
+msgid "projectGroup.error.groupId.cannot.be.spaces"
+msgstr ""
+
+#: plugincore/include/translations.php:475
+msgid "projectGroup.error.groupId.already.exists"
+msgstr ""
+
+#: plugincore/include/translations.php:478
+msgid "projectGroup.edit.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:481
+msgid "projectGroup.edit.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:484
+msgid "projectGroup.edit.section.projects.title"
+msgstr ""
+
+#: plugincore/include/translations.php:487
+msgid "projectGroup.edit.project.name"
+msgstr ""
+
+#: plugincore/include/translations.php:490
+msgid "projectGroup.edit.move.to.group"
+msgstr ""
+
+#: plugincore/include/translations.php:493
+msgid "project.in.checkout.queue.error"
+msgstr ""
+
+#: plugincore/include/translations.php:496
+msgid "configuration.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:499
+msgid "configuration.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:502
+msgid "configuration.guest.label"
+msgstr ""
+
+#: plugincore/include/translations.php:505
+msgid "configuration.guest.value"
+msgstr ""
+
+#: plugincore/include/translations.php:508
+msgid "configuration.workingDirectory.label"
+msgstr ""
+
+#: plugincore/include/translations.php:511
+msgid "configuration.buildOutputDirectory.label"
+msgstr ""
+
+#: plugincore/include/translations.php:514
+msgid "configuration.deploymentRepositoryDirectory.label"
+msgstr ""
+
+#: plugincore/include/translations.php:517
+msgid "configuration.baseUrl.label"
+msgstr ""
+
+#: plugincore/include/translations.php:520
+msgid "configuration.submit.edit"
+msgstr ""
+
+#: plugincore/include/translations.php:523
+msgid "configuration.guest.message"
+msgstr ""
+
+#: plugincore/include/translations.php:526
+msgid "configuration.workingDirectory.message"
+msgstr ""
+
+#: plugincore/include/translations.php:529
+msgid "configuration.buildOutputDirectory.message"
+msgstr ""
+
+#: plugincore/include/translations.php:532
+msgid "configuration.deploymentRepositoryDirectory.message"
+msgstr ""
+
+#: plugincore/include/translations.php:535
+msgid "configuration.baseUrl.message"
+msgstr ""
+
+#: plugincore/include/translations.php:538
+msgid "configuration.companyName.message"
+msgstr ""
+
+#: plugincore/include/translations.php:541
+msgid "configuration.companyLogo.message"
+msgstr ""
+
+#: plugincore/include/translations.php:544
+msgid "configuration.companyUrl.message"
+msgstr ""
+
+#: plugincore/include/translations.php:547
+msgid "add.project.field.required.error"
+msgstr ""
+
+#: plugincore/include/translations.php:550
+msgid "add.project.unknown.host.error"
+msgstr ""
+
+#: plugincore/include/translations.php:553
+msgid "add.project.connect.error"
+msgstr ""
+
+#: plugincore/include/translations.php:556
+msgid "add.project.malformed.url.error"
+msgstr ""
+
+#: plugincore/include/translations.php:559
+msgid "add.project.xml.parse.error"
+msgstr ""
+
+#: plugincore/include/translations.php:562
+msgid "add.project.extend.error"
+msgstr ""
+
+#: plugincore/include/translations.php:565
+msgid "add.project.missing.pom.error"
+msgstr ""
+
+#: plugincore/include/translations.php:568
+msgid "add.project.missing.groupid.error"
+msgstr ""
+
+#: plugincore/include/translations.php:571
+msgid "add.project.missing.artifactid.error"
+msgstr ""
+
+#: plugincore/include/translations.php:574
+msgid "add.project.missing.version.error"
+msgstr ""
+
+#: plugincore/include/translations.php:577
+msgid "add.project.missing.name.error"
+msgstr ""
+
+#: plugincore/include/translations.php:580
+msgid "add.project.missing.repository.error"
+msgstr ""
+
+#: plugincore/include/translations.php:583
+msgid "add.project.missing.scm.error"
+msgstr ""
+
+#: plugincore/include/translations.php:586
+msgid "add.project.missing.scm.connection.error"
+msgstr ""
+
+#: plugincore/include/translations.php:589
+msgid "add.project.missing.notifier.type.error"
+msgstr ""
+
+#: plugincore/include/translations.php:592
+msgid "add.project.missing.notifier.configuration.error"
+msgstr ""
+
+#: plugincore/include/translations.php:595
+msgid "add.project.metadata.transfer.error"
+msgstr ""
+
+#: plugincore/include/translations.php:598
+msgid "add.project.validation.protocol.not_allowed"
+msgstr ""
+
+#: plugincore/include/translations.php:601
+msgid "add.project.unauthorized.error"
+msgstr ""
+
+#: plugincore/include/translations.php:604
+msgid "add.project.artifact.not.found.error"
+msgstr ""
+
+#: plugincore/include/translations.php:607
+msgid "add.project.project.building.error"
+msgstr ""
+
+#: plugincore/include/translations.php:610
+msgid "add.project.unknown.error"
+msgstr ""
+
+#: plugincore/include/translations.php:613
+msgid "add.project.nogroup.error"
+msgstr ""
+
+#: plugincore/include/translations.php:616
+msgid "add.m1.project.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:619
+msgid "add.m1.project.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:622
+msgid "add.m1.project.m1PomUrl.label"
+msgstr ""
+
+#: plugincore/include/translations.php:625
+msgid "add.m1.project.m1PomUrl.username.label"
+msgstr ""
+
+#: plugincore/include/translations.php:628
+msgid "add.m1.project.m1PomUrl.password.label"
+msgstr ""
+
+#: plugincore/include/translations.php:631
+msgid "add.m1.project.m1PomUrl.message"
+msgstr ""
+
+#: plugincore/include/translations.php:634
+msgid "add.m1.project.m1PomUrl.error"
+msgstr ""
+
+#: plugincore/include/translations.php:637
+msgid "add.m1.project.m1PomFile.label"
+msgstr ""
+
+#: plugincore/include/translations.php:640
+msgid "add.m1.project.m1PomFile.message"
+msgstr ""
+
+#: plugincore/include/translations.php:643
+msgid "add.m1.project.m1PomFile.error"
+msgstr ""
+
+#: plugincore/include/translations.php:646
+msgid "add.m1.project.projectGroup"
+msgstr ""
+
+#: plugincore/include/translations.php:649
+msgid "add.m1.project.buildDefinitionTemplate"
+msgstr ""
+
+#: plugincore/include/translations.php:652
+msgid "add.m1.project.defaultBuildDefinition"
+msgstr ""
+
+#: plugincore/include/translations.php:655
+msgid "add.m2.project.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:658
+msgid "add.m2.project.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:661
+msgid "add.m2.project.m2PomUrl.label"
+msgstr ""
+
+#: plugincore/include/translations.php:664
+msgid "add.m2.project.m2PomUrl.username.label"
+msgstr ""
+
+#: plugincore/include/translations.php:667
+msgid "add.m2.project.m2PomUrl.password.label"
+msgstr ""
+
+#: plugincore/include/translations.php:670
+msgid "add.m2.project.m2PomUrl.message"
+msgstr ""
+
+#: plugincore/include/translations.php:673
+msgid "add.m2.project.m2PomUrl.error"
+msgstr ""
+
+#: plugincore/include/translations.php:676
+msgid "add.m2.project.m2PomFile.label"
+msgstr ""
+
+#: plugincore/include/translations.php:679
+msgid "add.m2.project.m2PomFile.message"
+msgstr ""
+
+#: plugincore/include/translations.php:682
+msgid "add.m2.project.m2PomFile.error"
+msgstr ""
+
+#: plugincore/include/translations.php:685
+msgid "add.m2.project.projectGroup"
+msgstr ""
+
+#: plugincore/include/translations.php:688
+msgid "add.m2.project.upload.modules.error"
+msgstr ""
+
+#: plugincore/include/translations.php:691
+msgid "add.m2.project.nonRecursiveProject"
+msgstr ""
+
+#: plugincore/include/translations.php:694
+msgid "add.m2.project.buildDefinitionTemplate"
+msgstr ""
+
+#: plugincore/include/translations.php:697
+msgid "add.m2.project.defaultBuildDefinition"
+msgstr ""
+
+#: plugincore/include/translations.php:700
+msgid "add.shell.project.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:703
+msgid "add.shell.project.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:706
+msgid "add.ant.project.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:709
+msgid "add.ant.project.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:712
+msgid "projectName.label"
+msgstr ""
+
+#: plugincore/include/translations.php:715
+msgid "projectName.error"
+msgstr ""
+
+#: plugincore/include/translations.php:718
+msgid "projectName.already.exist.error"
+msgstr ""
+
+#: plugincore/include/translations.php:721
+msgid "projectName.message"
+msgstr ""
+
+#: plugincore/include/translations.php:724
+msgid "projectScm.label"
+msgstr ""
+
+#: plugincore/include/translations.php:727
+msgid "projectScm.error"
+msgstr ""
+
+#: plugincore/include/translations.php:730
+msgid "projectScm.message"
+msgstr ""
+
+#: plugincore/include/translations.php:733
+msgid "projectScmUrl.label"
+msgstr ""
+
+#: plugincore/include/translations.php:736
+msgid "projectScmUrl.error"
+msgstr ""
+
+#: plugincore/include/translations.php:739
+msgid "projectScmUrl.message"
+msgstr ""
+
+#: plugincore/include/translations.php:742
+msgid "projectScmUsername.label"
+msgstr ""
+
+#: plugincore/include/translations.php:745
+msgid "projectScmUsername.message"
+msgstr ""
+
+#: plugincore/include/translations.php:748
+msgid "projectScmPassword.label"
+msgstr ""
+
+#: plugincore/include/translations.php:751
+msgid "projectScmPassword.message"
+msgstr ""
+
+#: plugincore/include/translations.php:754
+msgid "projectScmTag.label"
+msgstr ""
+
+#: plugincore/include/translations.php:757
+msgid "projectScmTag.message"
+msgstr ""
+
+#: plugincore/include/translations.php:760
+msgid "projectVersion.label"
+msgstr ""
+
+#: plugincore/include/translations.php:763
+msgid "projectVersion.error"
+msgstr ""
+
+#: plugincore/include/translations.php:766
+msgid "projectVersion.message"
+msgstr ""
+
+#: plugincore/include/translations.php:769
+msgid "projectScmUseCache.label"
+msgstr ""
+
+#: plugincore/include/translations.php:772
+msgid "add.project.buildDefinitionTemplate"
+msgstr ""
+
+#: plugincore/include/translations.php:775
+msgid "add.project.defaultBuildDefinition"
+msgstr ""
+
+#: plugincore/include/translations.php:778
+msgid "deleteProject.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:781
+msgid "deleteProject.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:784
+msgid "deleteProject.confirmation.message"
+msgstr ""
+
+#: plugincore/include/translations.php:787
+msgid "projectView.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:790
+msgid "projectView.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:793
+msgid "projectView.project.name"
+msgstr ""
+
+#: plugincore/include/translations.php:796
+msgid "projectView.project.version"
+msgstr ""
+
+#: plugincore/include/translations.php:799
+msgid "projectView.project.scmUrl"
+msgstr ""
+
+#: plugincore/include/translations.php:802
+msgid "projectView.project.scmTag"
+msgstr ""
+
+#: plugincore/include/translations.php:805
+msgid "projectView.project.group"
+msgstr ""
+
+#: plugincore/include/translations.php:808
+msgid "projectView.project.lastBuildDateTime"
+msgstr ""
+
+#: plugincore/include/translations.php:811
+msgid "projectView.buildDefinitions"
+msgstr ""
+
+#: plugincore/include/translations.php:814
+msgid "projectView.buildDefinition.goals"
+msgstr ""
+
+#: plugincore/include/translations.php:817
+msgid "projectView.buildDefinition.arguments"
+msgstr ""
+
+#: plugincore/include/translations.php:820
+msgid "projectView.buildDefinition.buildFile"
+msgstr ""
+
+#: plugincore/include/translations.php:823
+msgid "projectView.buildDefinition.profile"
+msgstr ""
+
+#: plugincore/include/translations.php:826
+msgid "projectView.buildDefinition.schedule"
+msgstr ""
+
+#: plugincore/include/translations.php:829
+msgid "projectView.buildDefinition.type"
+msgstr ""
+
+#: plugincore/include/translations.php:832
+msgid "projectView.buildDefinition.alwaysBuild"
+msgstr ""
+
+#: plugincore/include/translations.php:835
+msgid "buildDefinition.profile.label"
+msgstr ""
+
+#: plugincore/include/translations.php:838
+msgid "projectView.buildDefinition.from"
+msgstr ""
+
+#: plugincore/include/translations.php:841
+msgid "projectView.buildDefinition.default"
+msgstr ""
+
+#: plugincore/include/translations.php:844
+msgid "projectView.buildDefinition.buildFresh"
+msgstr ""
+
+#: plugincore/include/translations.php:847
+msgid "projectView.buildDefinition.description"
+msgstr ""
+
+#: plugincore/include/translations.php:850
+msgid "projectView.notifiers"
+msgstr ""
+
+#: plugincore/include/translations.php:853
+msgid "projectView.notifier.type"
+msgstr ""
+
+#: plugincore/include/translations.php:856
+msgid "projectView.notifier.recipient"
+msgstr ""
+
+#: plugincore/include/translations.php:859
+msgid "projectView.notifier.events"
+msgstr ""
+
+#: plugincore/include/translations.php:862
+msgid "projectView.notifier.from"
+msgstr ""
+
+#: plugincore/include/translations.php:865
+msgid "projectView.dependencies"
+msgstr ""
+
+#: plugincore/include/translations.php:868
+msgid "projectView.dependency.name"
+msgstr ""
+
+#: plugincore/include/translations.php:871
+msgid "projectView.dependency.groupId"
+msgstr ""
+
+#: plugincore/include/translations.php:874
+msgid "projectView.dependency.artifactId"
+msgstr ""
+
+#: plugincore/include/translations.php:877
+msgid "projectView.dependency.version"
+msgstr ""
+
+#: plugincore/include/translations.php:880
+msgid "projectView.usedBy"
+msgstr ""
+
+#: plugincore/include/translations.php:883
+msgid "projectView.developers"
+msgstr ""
+
+#: plugincore/include/translations.php:886
+msgid "projectView.developer.name"
+msgstr ""
+
+#: plugincore/include/translations.php:889
+msgid "projectView.developer.email"
+msgstr ""
+
+#: plugincore/include/translations.php:892
+msgid "projectView.username"
+msgstr ""
+
+#: plugincore/include/translations.php:895
+msgid "projectView.role.view"
+msgstr ""
+
+#: plugincore/include/translations.php:898
+msgid "projectView.role.edit"
+msgstr ""
+
+#: plugincore/include/translations.php:901
+msgid "projectView.role.delete"
+msgstr ""
+
+#: plugincore/include/translations.php:904
+msgid "projectView.role.build"
+msgstr ""
+
+#: plugincore/include/translations.php:907
+msgid "projectView.role.administer"
+msgstr ""
+
+#: plugincore/include/translations.php:910
+msgid "projectEdit.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:913
+msgid "projectEdit.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:916
+msgid "projectEdit.project.name.label"
+msgstr ""
+
+#: plugincore/include/translations.php:919
+msgid "projectEdit.project.version.label"
+msgstr ""
+
+#: plugincore/include/translations.php:922
+msgid "projectEdit.project.scmUrl.label"
+msgstr ""
+
+#: plugincore/include/translations.php:925
+msgid "projectEdit.project.scmUsername.label"
+msgstr ""
+
+#: plugincore/include/translations.php:928
+msgid "projectEdit.project.scmPassword.label"
+msgstr ""
+
+#: plugincore/include/translations.php:931
+msgid "projectEdit.project.scmUseCache.label"
+msgstr ""
+
+#: plugincore/include/translations.php:934
+msgid "projectEdit.project.scmTag.label"
+msgstr ""
+
+#: plugincore/include/translations.php:937
+msgid "buildDefinition.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:940
+msgid "buildDefinition.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:943
+msgid "buildDefinition.buildFile.ant.label"
+msgstr ""
+
+#: plugincore/include/translations.php:946
+msgid "buildDefinition.buildFile.shell.label"
+msgstr ""
+
+#: plugincore/include/translations.php:949
+msgid "buildDefinition.buildFile.maven.label"
+msgstr ""
+
+#: plugincore/include/translations.php:952
+msgid "buildDefinition.goals.ant.label"
+msgstr ""
+
+#: plugincore/include/translations.php:955
+msgid "buildDefinition.goals.maven.label"
+msgstr ""
+
+#: plugincore/include/translations.php:958
+msgid "buildDefinition.arguments.label"
+msgstr ""
+
+#: plugincore/include/translations.php:961
+msgid "buildDefinition.buildFresh.label"
+msgstr ""
+
+#: plugincore/include/translations.php:964
+msgid "buildDefinition.type.label"
+msgstr ""
+
+#: plugincore/include/translations.php:967
+msgid "buildDefinition.defaultForProject.label"
+msgstr ""
+
+#: plugincore/include/translations.php:970
+msgid "buildDefinition.schedule.label"
+msgstr ""
+
+#: plugincore/include/translations.php:973
+msgid "buildDefinition.description.label"
+msgstr ""
+
+#: plugincore/include/translations.php:976
+msgid "buildDefinition.alwaysBuild.label"
+msgstr ""
+
+#: plugincore/include/translations.php:979
+msgid "buildDefinition.noname.save.error.message"
+msgstr ""
+
+#: plugincore/include/translations.php:982
+msgid "buildDefinition.duplicatename.save.error.message"
+msgstr ""
+
+#: plugincore/include/translations.php:985
+msgid "buildDefinitionSummary.projectGroup.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:988
+msgid "deleteBuildDefinition.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:991
+msgid "deleteBuildDefinition.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:994
+msgid "deleteBuildDefinition.confirmation.message"
+msgstr ""
+
+#: plugincore/include/translations.php:997
+msgid "deleteNotifier.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1000
+msgid "deleteNotifier.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1003
+msgid "deleteNotifier.confirmation.message"
+msgstr ""
+
+#: plugincore/include/translations.php:1006
+msgid "notifier.page.add.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1009
+msgid "notifier.section.add.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1012
+msgid "notifier.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1015
+msgid "notifier.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1018
+msgid "notifier.type.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1021
+msgid "notifier.mail.recipient.address.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1024
+msgid "notifier.mail.recipient.committers.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1027
+msgid "notifier.irc.host.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1030
+msgid "notifier.irc.port.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1033
+msgid "notifier.irc.channel.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1036
+msgid "notifier.irc.nick.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1039
+msgid "notifier.irc.alternateNick.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1042
+msgid "notifier.irc.username.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1045
+msgid "notifier.irc.fullName.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1048
+msgid "notifier.irc.password.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1051
+msgid "notifier.irc.isSSL.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1054
+msgid "notifier.jabber.host.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1057
+msgid "notifier.jabber.port.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1060
+msgid "notifier.jabber.login.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1063
+msgid "notifier.jabber.password.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1066
+msgid "notifier.jabber.domainName.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1069
+msgid "notifier.jabber.address.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1072
+msgid "notifier.jabber.isSslConnection.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1075
+msgid "notifier.jabber.isGroup.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1078
+msgid "notifier.msn.login.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1081
+msgid "notifier.msn.password.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1084
+msgid "notifier.msn.address.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1087
+msgid "notifier.wagon.url.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1090
+msgid "notifier.wagon.id.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1093
+msgid "notifier.event.sendOnSuccess"
+msgstr ""
+
+#: plugincore/include/translations.php:1096
+msgid "notifier.event.sendOnFailure"
+msgstr ""
+
+#: plugincore/include/translations.php:1099
+msgid "notifier.event.sendOnError"
+msgstr ""
+
+#: plugincore/include/translations.php:1102
+msgid "notifier.event.sendOnWarning"
+msgstr ""
+
+#: plugincore/include/translations.php:1105
+msgid "buildResults.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1108
+msgid "buildResults.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1111
+msgid "buildResults.buildNumber"
+msgstr ""
+
+#: plugincore/include/translations.php:1114
+msgid "buildResults.startTime"
+msgstr ""
+
+#: plugincore/include/translations.php:1117
+msgid "buildResults.endTime"
+msgstr ""
+
+#: plugincore/include/translations.php:1120
+msgid "buildResults.duration"
+msgstr ""
+
+#: plugincore/include/translations.php:1123
+msgid "buildResults.startedSince"
+msgstr ""
+
+#: plugincore/include/translations.php:1126
+msgid "buildResults.state"
+msgstr ""
+
+#: plugincore/include/translations.php:1129
+msgid "buildResults.buildDefinition.description"
+msgstr ""
+
+#: plugincore/include/translations.php:1132
+msgid "buildResult.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1135
+msgid "buildResult.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1138
+msgid "buildResult.startTime"
+msgstr ""
+
+#: plugincore/include/translations.php:1141
+msgid "buildResult.endTime"
+msgstr ""
+
+#: plugincore/include/translations.php:1144
+msgid "buildResult.duration"
+msgstr ""
+
+#: plugincore/include/translations.php:1147
+msgid "buildResult.startedSince"
+msgstr ""
+
+#: plugincore/include/translations.php:1150
+msgid "buildResult.trigger"
+msgstr ""
+
+#: plugincore/include/translations.php:1153
+msgid "buildResult.state"
+msgstr ""
+
+#: plugincore/include/translations.php:1156
+msgid "buildResult.buildNumber"
+msgstr ""
+
+#: plugincore/include/translations.php:1159
+msgid "buildResult.buildError"
+msgstr ""
+
+#: plugincore/include/translations.php:1162
+msgid "buildResult.buildOutput"
+msgstr ""
+
+#: plugincore/include/translations.php:1165
+msgid "buildResult.noOutput"
+msgstr ""
+
+#: plugincore/include/translations.php:1168
+msgid "buildResult.changes"
+msgstr ""
+
+#: plugincore/include/translations.php:1171
+msgid "buildResult.noChanges"
+msgstr ""
+
+#: plugincore/include/translations.php:1174
+msgid "buildResult.changes.author"
+msgstr ""
+
+#: plugincore/include/translations.php:1177
+msgid "buildResult.changes.date"
+msgstr ""
+
+#: plugincore/include/translations.php:1180
+msgid "buildResult.changes.comment"
+msgstr ""
+
+#: plugincore/include/translations.php:1183
+msgid "buildResult.changes.files"
+msgstr ""
+
+#: plugincore/include/translations.php:1186
+msgid "buildResult.scmResult.changes"
+msgstr ""
+
+#: plugincore/include/translations.php:1189
+msgid "buildResult.scmResult.noChanges"
+msgstr ""
+
+#: plugincore/include/translations.php:1192
+msgid "buildResult.scmResult.changes.author"
+msgstr ""
+
+#: plugincore/include/translations.php:1195
+msgid "buildResult.scmResult.changes.date"
+msgstr ""
+
+#: plugincore/include/translations.php:1198
+msgid "buildResult.scmResult.changes.comment"
+msgstr ""
+
+#: plugincore/include/translations.php:1201
+msgid "buildResult.scmResult.changes.files"
+msgstr ""
+
+#: plugincore/include/translations.php:1204
+msgid "buildResult.dependencies.changes"
+msgstr ""
+
+#: plugincore/include/translations.php:1207
+msgid "buildResult.dependencies.noChanges"
+msgstr ""
+
+#: plugincore/include/translations.php:1210
+msgid "buildResult.dependencies.groupId"
+msgstr ""
+
+#: plugincore/include/translations.php:1213
+msgid "buildResult.dependencies.artifactId"
+msgstr ""
+
+#: plugincore/include/translations.php:1216
+msgid "buildResult.dependencies.version"
+msgstr ""
+
+#: plugincore/include/translations.php:1219
+msgid "buildResult.changesSinceLastSuccess"
+msgstr ""
+
+#: plugincore/include/translations.php:1222
+msgid "buildResult.generatedReports.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1225
+msgid "buildResult.generatedReports.surefire"
+msgstr ""
+
+#: plugincore/include/translations.php:1228
+msgid "buildResult.buildOutput.text"
+msgstr ""
+
+#: plugincore/include/translations.php:1231
+msgid "buildResult.buildDefinition"
+msgstr ""
+
+#: plugincore/include/translations.php:1234
+msgid "buildResult.buildDefinition.ant.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1237
+msgid "buildResult.buildDefinition.shell.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1240
+msgid "buildResult.buildDefinition.maven.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1243
+msgid "buildResult.buildDefinition.goals"
+msgstr ""
+
+#: plugincore/include/translations.php:1246
+msgid "buildResult.buildDefinition.arguments"
+msgstr ""
+
+#: plugincore/include/translations.php:1249
+msgid "buildResult.buildDefinition.buildFresh"
+msgstr ""
+
+#: plugincore/include/translations.php:1252
+msgid "buildResult.buildDefinition.alwaysBuild"
+msgstr ""
+
+#: plugincore/include/translations.php:1255
+msgid "buildResult.buildDefinition.defaultForProject"
+msgstr ""
+
+#: plugincore/include/translations.php:1258
+msgid "buildResult.buildDefinition.schedule"
+msgstr ""
+
+#: plugincore/include/translations.php:1261
+msgid "buildResult.buildDefinition.profileName"
+msgstr ""
+
+#: plugincore/include/translations.php:1264
+msgid "buildResult.buildDefinition.description"
+msgstr ""
+
+#: plugincore/include/translations.php:1267
+msgid "buildResult.trigger.0"
+msgstr ""
+
+#: plugincore/include/translations.php:1270
+msgid "buildResult.trigger.1"
+msgstr ""
+
+#: plugincore/include/translations.php:1273
+msgid "buildResult.state.1"
+msgstr ""
+
+#: plugincore/include/translations.php:1276
+msgid "buildResult.state.2"
+msgstr ""
+
+#: plugincore/include/translations.php:1279
+msgid "buildResult.state.3"
+msgstr ""
+
+#: plugincore/include/translations.php:1282
+msgid "buildResult.state.4"
+msgstr ""
+
+#: plugincore/include/translations.php:1285
+msgid "buildResult.state.6"
+msgstr ""
+
+#: plugincore/include/translations.php:1288
+msgid "buildResult.state.7"
+msgstr ""
+
+#: plugincore/include/translations.php:1291
+msgid "buildResult.state.8"
+msgstr ""
+
+#: plugincore/include/translations.php:1294
+msgid "buildResult.state.9"
+msgstr ""
+
+#: plugincore/include/translations.php:1297
+msgid "buildResult.state.10"
+msgstr ""
+
+#: plugincore/include/translations.php:1300
+msgid "workingCopy.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1303
+msgid "workingCopy.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1306
+msgid "workingCopy.currentFile.text"
+msgstr ""
+
+#: plugincore/include/translations.php:1309
+msgid "schedules.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1312
+msgid "schedules.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1315
+msgid "schedules.table.name"
+msgstr ""
+
+#: plugincore/include/translations.php:1318
+msgid "schedules.table.description"
+msgstr ""
+
+#: plugincore/include/translations.php:1321
+msgid "schedules.table.delay"
+msgstr ""
+
+#: plugincore/include/translations.php:1324
+msgid "schedules.table.cronExpression"
+msgstr ""
+
+#: plugincore/include/translations.php:1327
+msgid "schedules.table.active"
+msgstr ""
+
+#: plugincore/include/translations.php:1330
+msgid "schedules.table.maxJobExecutionTime"
+msgstr ""
+
+#: plugincore/include/translations.php:1333
+msgid "schedules.confirmation.message"
+msgstr ""
+
+#: plugincore/include/translations.php:1336
+msgid "addSchedule.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1339
+msgid "addSchedule.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1342
+msgid "editSchedule.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1345
+msgid "editSchedule.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1348
+msgid "schedule.name.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1351
+msgid "schedule.name.message"
+msgstr ""
+
+#: plugincore/include/translations.php:1354
+msgid "schedule.description.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1357
+msgid "schedule.description.message"
+msgstr ""
+
+#: plugincore/include/translations.php:1360
+msgid "schedule.cronExpression.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1363
+msgid "schedule.cronExpression.message"
+msgstr ""
+
+#: plugincore/include/translations.php:1366
+msgid "schedule.maxJobExecutionTime.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1369
+msgid "schedule.maxJobExecutionTime.message"
+msgstr ""
+
+#: plugincore/include/translations.php:1372
+msgid "schedule.quietPeriod.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1375
+msgid "schedule.quietPeriod.message"
+msgstr ""
+
+#: plugincore/include/translations.php:1378
+msgid "schedule.enabled.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1381
+msgid "schedule.enabled.message"
+msgstr ""
+
+#: plugincore/include/translations.php:1384
+msgid "schedule.second.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1387
+msgid "schedule.minute.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1390
+msgid "schedule.hour.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1393
+msgid "schedule.dayOfMonth.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1396
+msgid "schedule.month.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1399
+msgid "schedule.dayOfWeek.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1402
+msgid "schedule.year.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1405
+msgid "schedule.remove.error"
+msgstr ""
+
+#: plugincore/include/translations.php:1408
+msgid "surefireReport.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1411
+msgid "surefireReport.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1414
+msgid "surefireReport.summary"
+msgstr ""
+
+#: plugincore/include/translations.php:1417
+msgid "surefireReport.tests"
+msgstr ""
+
+#: plugincore/include/translations.php:1420
+msgid "surefireReport.errors"
+msgstr ""
+
+#: plugincore/include/translations.php:1423
+msgid "surefireReport.failures"
+msgstr ""
+
+#: plugincore/include/translations.php:1426
+msgid "surefireReport.successRate"
+msgstr ""
+
+#: plugincore/include/translations.php:1429
+msgid "surefireReport.time"
+msgstr ""
+
+#: plugincore/include/translations.php:1432
+msgid "surefireReport.packageList"
+msgstr ""
+
+#: plugincore/include/translations.php:1435
+msgid "surefireReport.testCases"
+msgstr ""
+
+#: plugincore/include/translations.php:1438
+msgid "surefireReport.package"
+msgstr ""
+
+#: plugincore/include/translations.php:1441
+msgid "surefireReport.class"
+msgstr ""
+
+#: plugincore/include/translations.php:1444
+msgid "surefireReport.testCase"
+msgstr ""
+
+#: plugincore/include/translations.php:1447
+msgid "surefireReport.failureDetails"
+msgstr ""
+
+#: plugincore/include/translations.php:1450
+msgid "releaseProject.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1453
+msgid "releaseProject.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1456
+msgid "releaseProject.prepareReleaseOption"
+msgstr ""
+
+#: plugincore/include/translations.php:1459
+msgid "releaseProject.performReleaseOption"
+msgstr ""
+
+#: plugincore/include/translations.php:1462
+msgid "releaseProject.provideReleaseParameters"
+msgstr ""
+
+#: plugincore/include/translations.php:1465
+msgid "releasePrepare.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1468
+msgid "releasePrepare.parameters"
+msgstr ""
+
+#: plugincore/include/translations.php:1471
+msgid "releasePrepare.releaseVersion"
+msgstr ""
+
+#: plugincore/include/translations.php:1474
+msgid "releasePrepare.nextDevelopmentVersion"
+msgstr ""
+
+#: plugincore/include/translations.php:1477
+msgid "releasePerform.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1480
+msgid "releasePerform.parameters"
+msgstr ""
+
+#: plugincore/include/translations.php:1483
+msgid "releaseInProgress.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1486
+msgid "releaseInProgress.status"
+msgstr ""
+
+#: plugincore/include/translations.php:1489
+msgid "releaseInProgress.phase"
+msgstr ""
+
+#: plugincore/include/translations.php:1492
+msgid "releaseInProgress.viewOutput"
+msgstr ""
+
+#: plugincore/include/translations.php:1495
+msgid "releaseViewResult.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1498
+msgid "releaseViewResult.summary"
+msgstr ""
+
+#: plugincore/include/translations.php:1501
+msgid "releaseViewResult.startTime"
+msgstr ""
+
+#: plugincore/include/translations.php:1504
+msgid "releaseViewResult.endTime"
+msgstr ""
+
+#: plugincore/include/translations.php:1507
+msgid "releaseViewResult.state"
+msgstr ""
+
+#: plugincore/include/translations.php:1510
+msgid "releaseViewResult.success"
+msgstr ""
+
+#: plugincore/include/translations.php:1513
+msgid "releaseViewResult.error"
+msgstr ""
+
+#: plugincore/include/translations.php:1516
+msgid "releaseViewResult.output"
+msgstr ""
+
+#: plugincore/include/translations.php:1519
+msgid "releaseViewResult.noOutput"
+msgstr ""
+
+#: plugincore/include/translations.php:1522
+msgid "user.username.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1525
+msgid "user.username.message"
+msgstr ""
+
+#: plugincore/include/translations.php:1528
+msgid "user.fullName.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1531
+msgid "user.fullName.message"
+msgstr ""
+
+#: plugincore/include/translations.php:1534
+msgid "user.email.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1537
+msgid "user.email.message"
+msgstr ""
+
+#: plugincore/include/translations.php:1540
+msgid "user.password.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1543
+msgid "user.passwordTwo.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1546
+msgid "user.passwordTwo.message"
+msgstr ""
+
+#: plugincore/include/translations.php:1549
+msgid "user.userGroup.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1552
+msgid "user.userGroup.message"
+msgstr ""
+
+#: plugincore/include/translations.php:1555
+msgid "userGroup.name.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1558
+msgid "userGroup.name.message"
+msgstr ""
+
+#: plugincore/include/translations.php:1561
+msgid "userGroup.description.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1564
+msgid "userGroup.description.message"
+msgstr ""
+
+#: plugincore/include/translations.php:1567
+msgid "profilesList.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1570
+msgid "profilesList.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1573
+msgid "profile.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1576
+msgid "profile.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1579
+msgid "profile.name.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1582
+msgid "profile.jdk.name.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1585
+msgid "profile.jdk.name.message"
+msgstr ""
+
+#: plugincore/include/translations.php:1588
+msgid "profile.jdk.path.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1591
+msgid "profile.jdk.path.message"
+msgstr ""
+
+#: plugincore/include/translations.php:1594
+msgid "profile.no.installations"
+msgstr ""
+
+#: plugincore/include/translations.php:1597
+msgid "profile.name.already.exists"
+msgstr ""
+
+#: plugincore/include/translations.php:1600
+msgid "profile.name.required"
+msgstr ""
+
+#: plugincore/include/translations.php:1603
+msgid "installationsList.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1606
+msgid "installationsList.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1609
+msgid "installation.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1612
+msgid "installation.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1615
+msgid "installation.name.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1618
+msgid "installation.type.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1621
+msgid "installation.value.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1624
+msgid "installation.varName.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1627
+msgid "installation.jdk.type.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1630
+msgid "installation.maven2.type.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1633
+msgid "installation.maven1.type.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1636
+msgid "installation.envvar.type.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1639
+msgid "installation.ant.type.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1642
+msgid "installation.automaticProfile.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1645
+msgid "installation.name.duplicate"
+msgstr ""
+
+#: plugincore/include/translations.php:1648
+msgid "installationTypeChoice.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1651
+msgid "installationTypeChoice.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1654
+msgid "installationTypeChoice.action.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1657
+msgid "installationTypeChoice.tool.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1660
+msgid "installationTypeChoice.envar.label"
+msgstr ""
+
+#: plugincore/include/translations.php:1663
+msgid "buildDefinition.templates.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1666
+msgid "buildDefinition.templates.continuum.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1669
+msgid "buildDefinition.templates.goals"
+msgstr ""
+
+#: plugincore/include/translations.php:1672
+msgid "buildDefinition.templates.arguments"
+msgstr ""
+
+#: plugincore/include/translations.php:1675
+msgid "buildDefinition.templates.buildFile"
+msgstr ""
+
+#: plugincore/include/translations.php:1678
+msgid "buildDefinition.templates.schedule"
+msgstr ""
+
+#: plugincore/include/translations.php:1681
+msgid "buildDefinition.templates.profile"
+msgstr ""
+
+#: plugincore/include/translations.php:1684
+msgid "buildDefinition.templates.buildFresh"
+msgstr ""
+
+#: plugincore/include/translations.php:1687
+msgid "buildDefinition.templates.alwaysBuild"
+msgstr ""
+
+#: plugincore/include/translations.php:1690
+msgid "buildDefinition.templates.description"
+msgstr ""
+
+#: plugincore/include/translations.php:1693
+msgid "buildDefinition.templates.type"
+msgstr ""
+
+#: plugincore/include/translations.php:1696
+msgid "buildDefinition.templates.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1699
+msgid "buildDefinition.templates.buildDefinitions.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1702
+msgid "buildDefinition.template.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1705
+msgid "buildDefinition.template.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1708
+msgid "buildDefinition.template.name"
+msgstr ""
+
+#: plugincore/include/translations.php:1711
+msgid "buildDefinition.template.buildDefinition.goals"
+msgstr ""
+
+#: plugincore/include/translations.php:1714
+msgid "buildDefinition.template.buildDefinition.arguments"
+msgstr ""
+
+#: plugincore/include/translations.php:1717
+msgid "buildDefinition.template.buildDefinition.buildFile"
+msgstr ""
+
+#: plugincore/include/translations.php:1720
+msgid "buildDefinition.template.buildDefinition.schedule"
+msgstr ""
+
+#: plugincore/include/translations.php:1723
+msgid "buildDefinition.template.buildDefinition.profile"
+msgstr ""
+
+#: plugincore/include/translations.php:1726
+msgid "buildDefinition.template.buildDefinition.buildFresh"
+msgstr ""
+
+#: plugincore/include/translations.php:1729
+msgid "buildDefinition.template.buildDefinition.default"
+msgstr ""
+
+#: plugincore/include/translations.php:1732
+msgid "buildDefinition.template.buildDefinition.description"
+msgstr ""
+
+#: plugincore/include/translations.php:1735
+msgid "buildDefinition.template.buildDefinition.type"
+msgstr ""
+
+#: plugincore/include/translations.php:1738
+msgid "buildDefinitionTemplate.name"
+msgstr ""
+
+#: plugincore/include/translations.php:1741
+msgid "buildDefinitionTemplate.available.builddefinitions"
+msgstr ""
+
+#: plugincore/include/translations.php:1744
+msgid "buildDefinitionTemplate.available.builddefinitions.used"
+msgstr ""
+
+#: plugincore/include/translations.php:1747
+msgid "buildDefinitionTemplate.builddefinitions.define"
+msgstr ""
+
+#: plugincore/include/translations.php:1750
+msgid "buildQueue.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1753
+msgid "buildQueue.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1756
+msgid "buildQueue.empty"
+msgstr ""
+
+#: plugincore/include/translations.php:1759
+msgid "buildQueue.currentTask.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1762
+msgid "buildQueue.currentTask.projectName"
+msgstr ""
+
+#: plugincore/include/translations.php:1765
+msgid "buildQueue.currentTask.buildDefinition"
+msgstr ""
+
+#: plugincore/include/translations.php:1768
+msgid "buildQueue.no.currentTaks"
+msgstr ""
+
+#: plugincore/include/translations.php:1771
+msgid "buildQueue.removeEntries"
+msgstr ""
+
+#: plugincore/include/translations.php:1774
+msgid "checkoutQueue.currentTask.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1777
+msgid "checkoutQueue.currentTask.projectName"
+msgstr ""
+
+#: plugincore/include/translations.php:1780
+msgid "checkoutQueue.no.currentTaks"
+msgstr ""
+
+#: plugincore/include/translations.php:1783
+msgid "checkoutQueue.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1786
+msgid "checkoutQueue.empty"
+msgstr ""
+
+#: plugincore/include/translations.php:1789
+msgid "checkoutQueue.removeEntries"
+msgstr ""
+
+#: plugincore/include/translations.php:1792
+msgid "buildResult.delete.confirmation.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1795
+msgid "buildResult.delete.confirmation.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1798
+msgid "buildResult.delete.confirmation.message"
+msgstr ""
+
+#: plugincore/include/translations.php:1801
+msgid "buildResult.cannot.delete"
+msgstr ""
+
+#: plugincore/include/translations.php:1804
+msgid "legend.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1807
+msgid "legend.buildNow"
+msgstr ""
+
+#: plugincore/include/translations.php:1810
+msgid "legend.buildHistory"
+msgstr ""
+
+#: plugincore/include/translations.php:1813
+msgid "legend.buildInProgress"
+msgstr ""
+
+#: plugincore/include/translations.php:1816
+msgid "legend.workingCopy"
+msgstr ""
+
+#: plugincore/include/translations.php:1819
+msgid "legend.checkingOutBuild"
+msgstr ""
+
+#: plugincore/include/translations.php:1822
+msgid "legend.queuedBuild"
+msgstr ""
+
+#: plugincore/include/translations.php:1825
+msgid "legend.cancelBuild"
+msgstr ""
+
+#: plugincore/include/translations.php:1828
+msgid "legend.delete"
+msgstr ""
+
+#: plugincore/include/translations.php:1831
+msgid "legend.edit"
+msgstr ""
+
+#: plugincore/include/translations.php:1834
+msgid "legend.release"
+msgstr ""
+
+#: plugincore/include/translations.php:1837
+msgid "legend.buildInSuccess"
+msgstr ""
+
+#: plugincore/include/translations.php:1840
+msgid "legend.buildInFailure"
+msgstr ""
+
+#: plugincore/include/translations.php:1843
+msgid "legend.buildInError"
+msgstr ""
+
+#: plugincore/include/translations.php:1846
+msgid "wait.addprocessing.processing"
+msgstr ""
+
+#: plugincore/include/translations.php:1849
+msgid "deleteProjects.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1852
+msgid "deleteProjects.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1855
+msgid "deleteProjects.confirmation.message"
+msgstr ""
+
+#: plugincore/include/translations.php:1858
+msgid "deleteBuildEnv.page.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1861
+msgid "deleteBuildEnv.section.title"
+msgstr ""
+
+#: plugincore/include/translations.php:1864
+msgid "deleteBuildEnv.confirmation.message"
+msgstr ""
+
+#: plugincore/include/user/views/default.php:2
+msgid "title"
+msgstr ""
+
+#: plugincore/include/user/views/default.php:18
+msgid "admin_link"
+msgstr ""
+
+#: plugincore/include/user/views/default.php:26
+msgid "selected_instance"
+msgstr ""
+
+#: plugincore/include/user/views/default.php:31
+msgid "reachable_instance"
+msgstr ""
+
+#: plugincore/include/user/views/default.php:36
+msgid "not_selected_instance"
+msgstr ""
+
+#: plugincore/include/user/views/deletesite.php:15
+msgid "delete_site_maven"
+msgstr ""
+
+#: plugincore/include/user/views/deletesite.php:21
+msgid "confirm_delete_site_maven"
+msgstr ""
+
+#: plugincore/include/user/views/showbuildresults.php:94
+msgid "show_build_result_tooltip"
+msgstr ""
+
+#: pluginwww/admin/index.php:51
+msgid "not_enabled"
+msgstr ""

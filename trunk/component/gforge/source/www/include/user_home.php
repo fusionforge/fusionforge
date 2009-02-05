@@ -53,7 +53,7 @@ $HTML->header(array('title'=>_('Developer Profile')));
 <tr valign="top">
 	<td><?php echo _('Your Email Address') ?>: </td>
 	<td>
-	<strong><?php util_make_link ('/sendmessage.php?touser='.$user_id, str_replace('@',' @nospam@ ',$user->getEmail())); ?></strong>
+	<strong><?php echo util_make_link ('/sendmessage.php?touser='.$user_id, str_replace('@',' @nospam@ ',$user->getEmail())); ?></strong>
 	</td>
 </tr>
 <?php if ($user->getJabberAddress()) { ?>
@@ -110,8 +110,11 @@ $HTML->header(array('title'=>_('Developer Profile')));
 		"WHERE user_id='". $user_id ."' AND is_public=1");
 	echo _('Diary/Note entries:').' '.db_result($res,0,0).'
 	<p/>'.util_make_link ('/developer/diary.php?diary_user='.$user_id,_('View Diary & Notes')).'</p>
-	<p/>
-	<a href="'.util_make_url ('/developer/monitor.php?diary_user='.$user_id) .'">'. html_image("ic/check.png",'15','13',array(),0) ._('Monitor this Diary').'</a></p>';
+	<p/>';
+	echo util_make_url ('/developer/monitor.php?diary_user='.$user_id,
+			    html_image("ic/check.png",'15','13',array(),0) ._('Monitor this Diary')
+		) ;
+	echo '</p>';
 	$hookparams['user_id'] = $user_id;
 	plugin_hook("user_personal_links",$hookparams);
 	
@@ -162,19 +165,22 @@ $me = session_get_user();
 if ($sys_use_ratings) {
 if ($user->usesRatings() && (!$me || $me->usesRatings())) { 
 
-printf(_('<P>If you are familiar with this user, please take a moment to rate him/her on the following criteria. Keep in mind, that your rating will be visible to the user and others.</P><P>The %1$s Peer Rating system is based on concepts from <A HREF="http://www.advogato.com/">Advogato.</A> The system has been re-implemented and expanded in a few ways.</P>'), $GLOBALS['sys_name']);
+printf(_('<p>If you are familiar with this user, please take a moment to rate him/her on the following criteria. Keep in mind, that your rating will be visible to the user and others.</p><p>The %1$s Peer Rating system is based on concepts from <a href="http://www.advogato.com/">Advogato.</a> The system has been re-implemented and expanded in a few ways.</p>'), $GLOBALS['sys_name']);
 ?>
 
 	<div align="center">
         <?php echo vote_show_user_rate_box ($user_id, $me?$me->getID():0); ?>
 	</div>
 
-<?php printf(_('<P>The Peer rating box shows all rating averages (and response levels) for each individual criteria. Due to the math and processing required to do otherwise, these numbers incoporate responses from both "trusted" and "non-trusted" users.</P><UL><LI>The "Sitewide Rank" field shows the user\'s rank compared to all ranked %1$s users.</LI><LI>The "Aggregate Score" shows an average, weighted overall score, based on trusted-responses only.</LI><LI>The "Personal Importance" field shows the weight that users ratings of other developers will be given (between 1 and 1.5) -- higher rated user\'s responses are given more weight.</LI></UL><P><I>If you would like to opt-out from peer rating system (this will affect your ability to both rate and be rated), refer to <a href="/account/">your account maintenance page</A>. If you choose not to participate, your ratings of other users will be permanently deleted and the \'Peer Rating\' box will disappear from your user page. </I></P>'), $GLOBALS['sys_name']);
+		  <?php printf(_('<p>The Peer rating box shows all rating averages (and response levels) for each individual criteria. Due to the math and processing required to do otherwise, these numbers incoporate responses from both "trusted" and "non-trusted" users.</p><ul><li>The "Sitewide Rank" field shows the user\'s rank compared to all ranked %1$s users.</li><li>The "Aggregate Score" shows an average, weighted overall score, based on trusted-responses only.</li><li>The "Personal Importance" field shows the weight that users ratings of other developers will be given (between 1 and 1.5) -- higher rated user\'s responses are given more weight.</li></ul><p><i>If you would like to opt-out from peer rating system (this will affect your ability to both rate and be rated), refer to <a href="%2$s">your account maintenance page</a>. If you choose not to participate, your ratings of other users will be permanently deleted and the \'Peer Rating\' box will disappear from your user page. </i></p>'),
+			       $GLOBALS['sys_name'],
+			       util_make_url ("/account/"));
 
 } else if ($me && !$me->usesRatings()) { ?>
 <p/>
 <em>
-<?php echo _('You opted-out from peer rating system, otherwise you would have a chance to rate the user. Refer to <a href="/account/">your account maintenance page</a> for more information.'); ?>
+		<?php printf (_('You opted-out from peer rating system, otherwise you would have a chance to rate the user. Refer to <a href="%1$s">your account maintenance page</a> for more information.'),
+			      util_make_url ("/account")); ?>
 </em>
 <p/>
 <?php }

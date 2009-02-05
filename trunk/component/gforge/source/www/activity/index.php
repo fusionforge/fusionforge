@@ -5,7 +5,7 @@
  * Copyright 2006 (c) GForge, LLC
  * http://gforge.org
  *
- * @version   $Id: index.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: index.php 6682 2008-12-02 20:19:07Z aljeux $
  */
 
 
@@ -112,7 +112,7 @@ if ($rows<1) {
 	<td><?php echo $multiselect; ?></td>
 	<td valign="top"><input name="start_date" value="<?php echo date(_('Y-m-d'),$begin); ?>" size="10" maxlength="10" /></td>
 	<td valign="top"><input name="end_date" value="<?php echo date(_('Y-m-d'),$end); ?>" size="10" maxlength="10" /></td>
-	<td valign="top"><input type="submit" name="submit" value="Submit"/></td>
+	<td valign="top"><input type="submit" name="submit" value="<?php echo _('Submit'); ?>"/></td>
 </tr>
 </table>
 </form>

@@ -25,7 +25,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once ("pre.php");
+require_once ('../../env.inc.php');
+require_once ($gfwww.'include/pre.php');
 require_once ("www/admin/admin_utils.php");
 require_once ("common/include/session.php");
 require_once ("plugins/mantis/include/gforgefunctions.php");
@@ -45,7 +46,7 @@ if ((isset ($action) == true))
 				if (updateDefaultEntry ("url", $url, $old_url) == false)
 				{
 					db_rollback ();
-					exit_error ($Language->getText ("gforge-plugin-mantis", "title_site_admin"), $Language->getText ("gforge-plugin-mantis", "database_error"));
+					exit_error (dgettext ("gforge-plugin-mantis", "title_site_admin"), dgettext ("gforge-plugin-mantis", "database_error"));
 				}
 				else
 				{
@@ -55,7 +56,7 @@ if ((isset ($action) == true))
 					{	
 						log_error ("Function db_query() failed with query '" . $query . "': " . db_error (), __FILE__, __FUNCTION__);
 						db_rollback ();
-						exit_error ($Language->getText ("gforge-plugin-mantis", "title_site_admin"), $Language->getText ("gforge-plugin-mantis", "database_error"));
+						exit_error (dgettext ("gforge-plugin-mantis", "title_site_admin"), dgettext ("gforge-plugin-mantis", "database_error"));
 					}
 					else
 					{
@@ -66,7 +67,7 @@ if ((isset ($action) == true))
 			}
 			else
 			{
-				$error_submit = "<h3>". $Language->getText ("gforge-plugin-mantis", "empty_url", $url) ."</h3>";
+				$error_submit = "<h3>". sprintf( dgettext ( "gforge-plugin-mantis" ,  "empty_url" ) , $url ) ."</h3>";
 			}
 			break;
 		case "removeURL" :
@@ -77,11 +78,11 @@ if ((isset ($action) == true))
 				$numrows = db_numrows ($result);
 				if ($numrows > 0)
 				{
-					$error_submit = "<h3>".$Language->getText ("gforge-plugin-mantis", "url_is_used", $url). "</h3>\n<ul>\n";
+					$error_submit = "<h3>".sprintf( dgettext ( "gforge-plugin-mantis" ,  "url_is_used" ) , $url ). "</h3>\n<ul>\n";
 					$index = 0;
 					while ($index < $numrows)
 					{
-						$error_submit .= "<li>" . $Language->getText ("gforge-plugin-mantis", "url_is_used_item", array (db_result ($result, $index, 0), db_result ($result, $index, 1))) . "</li>\n";
+						$error_submit .= "<li>" . dgettext ("gforge-plugin-mantis", "url_is_used_item", array (db_result ($result, $index, 0), db_result ($result, $index, 1))) . "</li>\n";
 						$index++;
 
 					}
@@ -91,14 +92,14 @@ if ((isset ($action) == true))
 				{
 					if (deleteDefaultEntry ("url", $url) == false)
 					{
-						exit_error ($Language->getText ("gforge-plugin-mantis", "title_site_admin"), $Language->getText ("gforge-plugin-mantis", "database_error"));
+						exit_error (dgettext ("gforge-plugin-mantis", "title_site_admin"), dgettext ("gforge-plugin-mantis", "database_error"));
 					}
 				}
 			}	
 			else
 			{
 				log_error ("Function db_query() failed with query '" . $query . "': " . db_error (), __FILE__,__FUNCTION__);
-				exit_error ($Language->getText ("gforge-plugin-mantis", "title_site_admin"), $Language->getText ("gforge-plugin-mantis", "database_error"));
+				exit_error (dgettext ("gforge-plugin-mantis", "title_site_admin"), dgettext ("gforge-plugin-mantis", "database_error"));
 			}
 			break;
 		case "addUrl" :
@@ -111,22 +112,22 @@ if ((isset ($action) == true))
 					{
 						if (addDefaultEntry ("url", $url) == false)
 						{
-							exit_error ($Language->getText ("gforge-plugin-mantis", "title_site_admin"), $Language->getText ("gforge-plugin-mantis", "database_error"));
+							exit_error (dgettext ("gforge-plugin-mantis", "title_site_admin"), dgettext ("gforge-plugin-mantis", "database_error"));
 						}
 					}
 					else
 					{
-						$error_submit = "<h3>". $Language->getText ("gforge-plugin-mantis", "url_already_exists", $url) ."</h3>";
+						$error_submit = "<h3>". sprintf( dgettext ( "gforge-plugin-mantis" ,  "url_already_exists" ) , $url ) ."</h3>";
 					}
 				}
 				else
 				{
-					 exit_error ($Language->getText ("gforge-plugin-mantis", "title_site_admin"), $Language->getText ("gforge-plugin-mantis", "database_error"));
+					 exit_error (dgettext ("gforge-plugin-mantis", "title_site_admin"), dgettext ("gforge-plugin-mantis", "database_error"));
 				}
 			}	
 			else
 			{
-				$error_submit = "<h3>". $Language->getText ("gforge-plugin-mantis", "empty_url", $url) ."</h3>";
+				$error_submit = "<h3>". sprintf( dgettext ( "gforge-plugin-mantis" ,  "empty_url" ) , $url ) ."</h3>";
 			}
 			break;
 		case "changeValues" :
@@ -139,7 +140,7 @@ if ((isset ($action) == true))
 				||  (deleteDefaultEntry ("css_regex_3") == false)
 				||  (deleteDefaultEntry ("css_regex_4") == false))
 				{
-					exit_error ($Language->getText ("gforge-plugin-mantis", "title_site_admin"), $Language->getText ("gforge-plugin-mantis", "database_error"));
+					exit_error (dgettext ("gforge-plugin-mantis", "title_site_admin"), dgettext ("gforge-plugin-mantis", "database_error"));
 				}
 			}
 			else
@@ -151,7 +152,7 @@ if ((isset ($action) == true))
 				||  (updateDefaultEntry ("css_regex_3", trim ($css_regex_3)) == false)
 				||  (updateDefaultEntry ("css_regex_4", trim ($css_regex_4)) == false))
 				{
-					exit_error ($Language->getText ("gforge-plugin-mantis", "title_site_admin"), $Language->getText ("gforge-plugin-mantis", "database_error"));
+					exit_error (dgettext ("gforge-plugin-mantis", "title_site_admin"), dgettext ("gforge-plugin-mantis", "database_error"));
 				}
 			}	
 			break;
@@ -170,14 +171,14 @@ if ((getDefaultEntry ("status", $status) == false)
 ||  (getDefaultEntry ("css_regex_3", $css_regex_3) == false)
 ||  (getDefaultEntry ("css_regex_4", $css_regex_4) == false))
 {
-	exit_error ($Language->getText ("gforge-plugin-mantis", "title_site_admin"),$Language->getText ("gforge-plugin-mantis", "database_error"));
+	exit_error (dgettext ("gforge-plugin-mantis", "title_site_admin"),dgettext ("gforge-plugin-mantis", "database_error"));
 }
 if (isset ($visibility) == false)
 {
 	$visibility = 1;
 	if (addDefaultEntry ("visibility", $visibility) == false)
 	{
-		exit_error ($Language->getText ("gforge-plugin-mantis", "title_site_admin"), $Language->getText ("gforge-plugin-mantis", "database_error"));
+		exit_error (dgettext ("gforge-plugin-mantis", "title_site_admin"), dgettext ("gforge-plugin-mantis", "database_error"));
 	}
 }
 if (isset ($status) == false)
@@ -185,7 +186,7 @@ if (isset ($status) == false)
 	$status = "D";
 	if (addDefaultEntry ("status", $status) == false)
 	{
-		exit_error ($Language->getText ("gforge-plugin-mantis", "title_site_admin"), $Language->getText ("gforge-plugin-mantis", "database_error"));	
+		exit_error (dgettext ("gforge-plugin-mantis", "title_site_admin"), dgettext ("gforge-plugin-mantis", "database_error"));	
 	}
 }
 if ((isset ($css_regex_1) == false)
@@ -199,19 +200,19 @@ if ((isset ($css_regex_1) == false)
 	$css_regex_4 = "";
 	if (addDefaultEntry ("css_regex_1", addslashes ($css_regex_1)) == false)
 	{
-		exit_error ($Language->getText ("gforge-plugin-mantis", "title_site_admin"), $Language->getText ("gforge-plugin-mantis", "database_error"));
+		exit_error (dgettext ("gforge-plugin-mantis", "title_site_admin"), dgettext ("gforge-plugin-mantis", "database_error"));
 	}
 	if (addDefaultEntry ("css_regex_2", $css_regex_2) == false)
 	{
-		exit_error ($Language->getText ("gforge-plugin-mantis", "title_site_admin"), $Language->getText ("gforge-plugin-mantis", "database_error"));
+		exit_error (dgettext ("gforge-plugin-mantis", "title_site_admin"), dgettext ("gforge-plugin-mantis", "database_error"));
 	}
 	if (addDefaultEntry ("css_regex_3", $css_regex_3) == false)
 	{
-		exit_error ($Language->getText ("gforge-plugin-mantis", "title_site_admin"), $Language->getText ("gforge-plugin-mantis", "database_error"));
+		exit_error (dgettext ("gforge-plugin-mantis", "title_site_admin"), dgettext ("gforge-plugin-mantis", "database_error"));
 	}
 	if (addDefaultEntry ("css_regex_4", $css_regex_4) == false)
 	{
-		exit_error ($Language->getText ("gforge-plugin-mantis", "title_site_admin"), $Language->getText ("gforge-plugin-mantis", "database_error"));
+		exit_error (dgettext ("gforge-plugin-mantis", "title_site_admin"), dgettext ("gforge-plugin-mantis", "database_error"));
 	}
 }
 if (isset ($css_regex_1) == false)
@@ -219,7 +220,7 @@ if (isset ($css_regex_1) == false)
 	$css_regex_1 = "";
 	if (addDefaultEntry ("css_regex_1", $css_regex_1) == false)
 	{
-		exit_error ($Language->getText ("gforge-plugin-mantis", "title_site_admin"), $Language->getText ("gforge-plugin-mantis", "database_error"));
+		exit_error (dgettext ("gforge-plugin-mantis", "title_site_admin"), dgettext ("gforge-plugin-mantis", "database_error"));
 	}
 }
 if (isset ($css_regex_2) == false)
@@ -227,7 +228,7 @@ if (isset ($css_regex_2) == false)
 	$css_regex_2 = "";
 	if (addDefaultEntry ("css_regex_2", $css_regex_2) == false)
 	{
-		exit_error ($Language->getText ("gforge-plugin-mantis", "title_site_admin"), $Language->getText ("gforge-plugin-mantis", "database_error"));
+		exit_error (dgettext ("gforge-plugin-mantis", "title_site_admin"), dgettext ("gforge-plugin-mantis", "database_error"));
 	}
 }
 if (isset ($css_regex_3) == false)
@@ -235,7 +236,7 @@ if (isset ($css_regex_3) == false)
 	$css_regex_3 = "";
 	if (addDefaultEntry ("css_regex_3", $css_regex_3) == false)
 	{
-		exit_error ($Language->getText ("gforge-plugin-mantis", "title_site_admin"), $Language->getText ("gforge-plugin-mantis", "database_error"));
+		exit_error (dgettext ("gforge-plugin-mantis", "title_site_admin"), dgettext ("gforge-plugin-mantis", "database_error"));
 	}
 }
 if (isset ($css_regex_4) == false)
@@ -243,29 +244,29 @@ if (isset ($css_regex_4) == false)
 	$css_regex_4 = "";
 	if (addDefaultEntry ("css_regex_4", $css_regex_4) == false)
 	{
-		exit_error ($Language->getText ("gforge-plugin-mantis", "title_site_admin"), $Language->getText ("gforge-plugin-mantis", "database_error"));
+		exit_error (dgettext ("gforge-plugin-mantis", "title_site_admin"), dgettext ("gforge-plugin-mantis", "database_error"));
 	}
 }
 if (getDefaultEntries ("url", $urls) == false)
 {
-	exit_error ($Language->getText ("gforge-plugin-mantis", "title_site_admin"),$Language->getText ("gforge-plugin-mantis", "database_error"));
+	exit_error (dgettext ("gforge-plugin-mantis", "title_site_admin"),dgettext ("gforge-plugin-mantis", "database_error"));
 }
 $nb_url = count ($urls);
-site_admin_header (array ("title" => $Language->getText ("gforge-plugin-mantis", "title_site_admin")));
+site_admin_header (array ("title" => dgettext ("gforge-plugin-mantis", "title_site_admin")));
 if (strlen ($error_submit) > 0)
 {
 	echo $error_submit;
-	echo "\n<p>\n<a href=\"" . $PHP_SELF . "\">" . $Language->getText ("gforge-plugin-mantis", "back_to_site_admin") ."</a>";
+	echo "\n<p>\n<a href=\"" . $PHP_SELF . "\">" . dgettext ("gforge-plugin-mantis", "back_to_site_admin") ."</a>";
 }
 else
 {
 ?>
-<h2><? echo $Language->getText ("gforge-plugin-mantis", "title_site_admin"); ?><h2>
-<? echo $HTML->boxMiddle ($Language->getText ("gforge-plugin-mantis", "mantis_urls"), false, false); ?>
+<h2><? echo dgettext ("gforge-plugin-mantis", "title_site_admin"); ?><h2>
+<? echo $HTML->boxMiddle (dgettext ("gforge-plugin-mantis", "mantis_urls"), false, false); ?>
 <p>
-<b><? echo $Language->getText ("gforge-plugin-mantis", "url"); ?></b>
+<b><? echo dgettext ("gforge-plugin-mantis", "url"); ?></b>
 <br>
-<? echo ($Language->getText ("gforge-plugin-mantis", "url_info",$_SERVER["SERVER_NAME"]));?>
+<? echo (sprintf( dgettext ( "gforge-plugin-mantis" ,  "url_info" ) ,$_SERVER["SERVER_NAME"] ));?>
 <table>
 <?
 	for ($i = 0; $i < $nb_url; $i++)
@@ -275,12 +276,12 @@ else
 		<input type="hidden" name="action" value="changeURL">
 		<input type="hidden" name="old_url" value="<? echo $urls [$i]; ?>">
 		<td><input size="40" maxlength="128" type="text" name="url" value="<? echo $urls [$i]; ?>"></td>
-		<td><input type="submit" name="changeURL" value="<? echo $Language->getText ("gforge-plugin-mantis", "submit_modify_url"); ?>"></td>
+		<td><input type="submit" name="changeURL" value="<? echo dgettext ("gforge-plugin-mantis", "submit_modify_url"); ?>"></td>
 		</form>
 		<form action="<? echo $PHP_SELF; ?>" method="post">
 		<input type="hidden" name="action" value="removeURL">
 		<input type="hidden" name="url" value="<? echo $urls [$i]; ?>">
-		<td><input type="submit" name="removeURL" value="<? echo $Language->getText ("gforge-plugin-mantis", "submit_remove_url"); ?>"></td>
+		<td><input type="submit" name="removeURL" value="<? echo dgettext ("gforge-plugin-mantis", "submit_remove_url"); ?>"></td>
 		</form>
 	</tr>
 <?
@@ -289,32 +290,32 @@ else
 		<form action="<? echo "$PHP_SELF"; ?>" method="post">
 		<input type="hidden" name="action" value="addUrl">
 		<td><input size="40" maxlength="128" type="text" name="url"></td>
-		<td><input type="submit" name="updateURL" value="<? echo $Language->getText ("gforge-plugin-mantis", "submit_add_url"); ?>"></td>
+		<td><input type="submit" name="updateURL" value="<? echo dgettext ("gforge-plugin-mantis", "submit_add_url"); ?>"></td>
 		</form>
 	</tr>
 </table>
-<? echo $HTML->boxMiddle ($Language->getText ("gforge-plugin-mantis", "mantis_settings"), false, false); ?>
+<? echo $HTML->boxMiddle (dgettext ("gforge-plugin-mantis", "mantis_settings"), false, false); ?>
 <p>
-<b><? echo $Language->getText ("gforge-plugin-mantis", "visibility"); ?></b>
+<b><? echo dgettext ("gforge-plugin-mantis", "visibility"); ?></b>
 <br>
 <form action="<? echo "$PHP_SELF"; ?>" name="Udapte" method="post">
 <input type="hidden" name="action" value="changeValues">
-<input type="radio" name="visibility" value="1" <? if ($visibility == 1) { echo " checked"; } ?>><? echo $Language->getText ("gforge-plugin-mantis", "public");?>
+<input type="radio" name="visibility" value="1" <? if ($visibility == 1) { echo " checked"; } ?>><? echo dgettext ("gforge-plugin-mantis", "public");?>
 <br>
-<input type="radio" name="visibility" value="0" <? if ($visibility == 0) { echo " checked"; } ?>><? echo ($Language->getText ("gforge-plugin-mantis", "private"));?>
+<input type="radio" name="visibility" value="0" <? if ($visibility == 0) { echo " checked"; } ?>><? echo (dgettext ("gforge-plugin-mantis", "private"));?>
 <p>
-<b><? echo $Language->getText ("gforge-plugin-mantis", "status"); ?></b>
+<b><? echo dgettext ("gforge-plugin-mantis", "status"); ?></b>
 <br>
 <select name="status">
-<option value="D"<? if ($status == "D"){echo " selected";}?>><? echo $Language->getText ("gforge-plugin-mantis", "development");?></option>
-<option value="R"<? if ($status == "R"){echo " selected";}?>><? echo $Language->getText ("gforge-plugin-mantis", "release");?></option>
-<option value="S"<? if ($status == "S"){echo " selected";}?>><? echo $Language->getText ("gforge-plugin-mantis", "stable");?></option>
-<option value="O"<? if ($status == "O"){echo " selected";}?>><? echo $Language->getText ("gforge-plugin-mantis", "obsolete");?></option>
+<option value="D"<? if ($status == "D"){echo " selected";}?>><? echo dgettext ("gforge-plugin-mantis", "development");?></option>
+<option value="R"<? if ($status == "R"){echo " selected";}?>><? echo dgettext ("gforge-plugin-mantis", "release");?></option>
+<option value="S"<? if ($status == "S"){echo " selected";}?>><? echo dgettext ("gforge-plugin-mantis", "stable");?></option>
+<option value="O"<? if ($status == "O"){echo " selected";}?>><? echo dgettext ("gforge-plugin-mantis", "obsolete");?></option>
 </select>
 <p>
-<b><? echo ($Language->getText ("gforge-plugin-mantis", "css")); ?></b>
+<b><? echo (dgettext ("gforge-plugin-mantis", "css")); ?></b>
 <br>
-<? echo ($Language->getText ("gforge-plugin-mantis", "css_info"));?>
+<? echo (dgettext ("gforge-plugin-mantis", "css_info"));?>
 <br>
 <input size="80" type="text" name="css_regex_1" value="<? echo $css_regex_1; ?>">
 <br>
@@ -324,8 +325,8 @@ else
 <br>
 <input size="80"  type="text" name="css_regex_4" value="<? echo $css_regex_4; ?>">
 <br>
-<input type="submit" name="setValues" value="<? echo ($Language->getText ("gforge-plugin-mantis", "submit_mantis_settings")); ?>" />
-<input type="submit" name="resetValues" value="<? echo ($Language->getText ("gforge-plugin-mantis", "reset_mantis_settings")); ?>" />
+<input type="submit" name="setValues" value="<? echo (dgettext ("gforge-plugin-mantis", "submit_mantis_settings")); ?>" />
+<input type="submit" name="resetValues" value="<? echo (dgettext ("gforge-plugin-mantis", "reset_mantis_settings")); ?>" />
 </form>
 <?php
 }

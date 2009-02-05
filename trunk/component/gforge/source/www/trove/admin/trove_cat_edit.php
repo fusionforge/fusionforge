@@ -41,7 +41,7 @@ $categoryId = getIntFromGet('trove_cat_id');
 $category = new TroveCategory($categoryId);
 
 if($category->isError()) {
-	exit_error($Language->getText('global','error'), $category->getErrorMessage());
+	exit_error(_('ERROR'), $category->getErrorMessage());
 }
 
 $do = getStringFromRequest('do');
@@ -71,111 +71,30 @@ switch($do) {
 }
 
 /*
-if ($GLOBALS["submit"]) {
-
-	$newroot = trove_getrootcat($GLOBALS['form_parent']);
-
-	if ($GLOBALS[form_shortname]) {
-		if ($form_trove_cat_id == $form_parent) {
-			exit_error($Language->getText(
-								'admin_trove_cat_edit','error_tove_equal_parent'),
-								db_error()
-			);
-		} else {
-			$res = db_query("
-				UPDATE trove_cat
-				SET	shortname='".htmlspecialchars($form_shortname)."',
-					fullname='".htmlspecialchars($form_fullname)."',
-					description='".htmlspecialchars($form_description)."',
-					parent='$form_parent',
-					version='".date("Ymd",time())."01',
-					root_parent='$newroot'
-				WHERE trove_cat_id='$form_trove_cat_id'
-			");
-		}
-
-		if (!$res || db_affected_rows($res)<1) {
-			exit_error(
-				$Language->getText('admin_trove_cat_edit','error_in_trove_operation'),
-				db_error()
-			);
-		}
-	}
-	// update full paths now
-	if($newroot!=0) {
-		trove_genfullpaths($newroot,trove_getfullname($newroot),$newroot);
-		trove_updaterootparent($form_trove_cat_id,$newroot);
-	}
-	else {
-		trove_genfullpaths($form_trove_cat_id,trove_getfullname($form_trove_cat_id),$form_trove_cat_id);
-		trove_updaterootparent($form_trove_cat_id,$form_trove_cat_id);
-	}
-	db_query("update trove_group_link set trove_cat_root=(select root_parent from trove_cat where trove_cat_id=trove_group_link.trove_cat_id)");
-
-	session_redirect("/admin/trove/trove_cat_list.php");
-}
-
-if ($GLOBALS["delete"]) {
-	if ($form_trove_cat_id==$default_trove_cat){
-		exit_error( $Language->getText('admin_trove_cat_edit','error_in_trove_operation_cant_delete'));
-	}
-	$sql = "select count(*) from trove_group_link where trove_cat_id='$form_trove_cat_id'";
-	$res = db_numrows(db_query($sql));
-	if ($res > 0) {
-		exit_error($Language->getText('admin_trove_cat_edit','error_in_trove_operation'), $Language->getText('admin_trove_cat_edit','error_in_trove_operation_cant_delete_in_use'));
-	}
-	
-	$res = db_query("
-		SELECT trove_cat_id FROM trove_cat WHERE parent='$form_trove_cat_id'
-	");
-
-	if (!$res) {
-		exit_error( $Language->getText('admin_trove_cat_edit','error_in_trove_operation'), db_error());
-	}
-	if (db_numrows($res)>0) {
-		exit_error( $Language->getText('admin_trove_cat_edit','cant_delete_has_subcategories'), db_error());
-	} else {
-		$res=db_query(" DELETE FROM trove_treesums WHERE trove_cat_id='$form_trove_cat_id'");
-		if (!$res || db_affected_rows($res)<1) {
-			 exit_error( $Language->getText('admin_trove_cat_edit','error_in_trove_operation'), db_error());
-		}
-		$res=db_query(" DELETE FROM trove_cat WHERE trove_cat_id='$form_trove_cat_id'");
-		if (!$res || db_affected_rows($res)<1) {
-			exit_error( $Language->getText('admin_trove_cat_edit','error_in_trove_operation'), db_error());
-		}
-		$res=db_query(" DELETE FROM trove_group_link WHERE trove_cat_id='$form_trove_cat_id'");
-		if (!$res) {
-			exit_error( $Language->getText('admin_trove_cat_edit','error_in_trove_operation'), db_error());
-		}
-	}
-	session_redirect("/admin/trove/trove_cat_list.php");
-}
-*/
-/*
 	Main Code
 */
 
-site_admin_header(array('title'=>$Language->getText('admin_trove_cat_edit','title')));
+site_admin_header(array('title'=>_('Site Admin: Trove - Category List')) ;
 ?>
 
 <table width="100%" border="0">
 	<tr>
 		<td width="60%" valign="top">
-<h3><?php echo $Language->getText('admin_trove_cat_edit','edit_trove_category'); ?></h3>
+		  <h3><?php echo _('Site Admin: Trove - Edit Category'); ?></h3>
 
 <form action="trove_cat_edit.php?trove_cat_id=<?php echo $category->getId(); ?>" method="post">
 <input type="hidden" name="do" value="updateCategory" />
 
-<p><?php echo $Language->getText('admin_trove_cat_edit','new_category_short_name'); ?>:
+		  <p><?php echo _('New category short name (no spaces, Unix-like): '); ?>
 <br /><input type="text" name="shortName" value="<?php echo $category->getShortName(); ?>" /></p>
 
-<p><?php echo $Language->getText('admin_trove_cat_edit','new_category_full_name'); ?>:
+		  <p><?php echo _('New category full name (80 characters max): '); ?>
 <br /><input type="text" name="fullName" value="<?php echo $category->getFullName(); ?>" /></p>
 
-<p><?php echo $Language->getText('admin_trove_cat_edit','new_category_description'); ?>:
+		  <p><?php echo _('New category description (255 characters max): '); ?>
 <br /><input type="text" name="description" size="80" value="<?php echo $category->getDescription(); ?>" /></p>
 
-<br /><input type="submit" name="submit" value="<?php echo $Language->getText('admin_trove_cat_edit','update'); ?>" /><input type="submit" name="delete" value="<?php echo $Language->getText('admin_trove_cat_edit','delete'); ?>" />
+<br /><input type="submit" name="submit" value="<?php echo _('update'); ?>" /><input type="submit" name="delete" value="<?php echo _('delete'); ?>" />
 </form>
 <?php
 	$tableHeaders = array(
@@ -218,7 +137,7 @@ site_admin_header(array('title'=>$Language->getText('admin_trove_cat_edit','titl
 	</form>
 <form>
 <h3>Move the category</h3>
-<p><?php echo $Language->getText('admin_trove_cat_edit','parent_category'); ?>
+		  <p><?php echo _('Parent Category: '); ?>
 <br /><select name="form_parent">
 <?php
 // generate list of possible parents

@@ -24,7 +24,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once ("pre.php");
+require_once ('../../env.inc.php');
+require_once ($gfwww.'include/pre.php');
 require_once ("common/novaforge/log.php");
 require_once ("plugins/mantis/include/gforgefunctions.php");
 require_once ("plugins/mantis/include/mantisfunctions.php");
@@ -46,12 +47,12 @@ else
 {
 	if ($group->isError () == true)
 	{
-		exit_error ($Language->getText ("gforge-plugin-mantis", "title_admin"), $group->getErrorMessage ());
+		exit_error (dgettext ("gforge-plugin-mantis", "title_admin"), $group->getErrorMessage ());
 	}
 }
 if ($group->usesPlugin ("mantis") == false)
 {
-	exit_error ($Language->getText ("gforge-plugin-mantis", "title_admin"), $Language->getText ("gforge-plugin-mantis", "not_enabled"));
+	exit_error (dgettext ("gforge-plugin-mantis", "title_admin"), dgettext ("gforge-plugin-mantis", "not_enabled"));
 }
 $perm = &$group->getPermission (session_get_user ());
 if ($perm->isAdmin () == false)
@@ -60,14 +61,14 @@ if ($perm->isAdmin () == false)
 }
 if (getProjects ($group->getID (), $array_ids, $array_names) == false)
 {
-	exit_error ($Language->getText ("gforge-plugin-mantis", "title_admin"), $Language->getText ("gforge-plugin-mantis", "database_error"));
+	exit_error (dgettext ("gforge-plugin-mantis", "title_admin"), dgettext ("gforge-plugin-mantis", "database_error"));
 }
-site_project_header (array ("title" => $Language->getText ("gforge-plugin-mantis", "title_admin"), "group" => $group_id, "toptab" => "admin"));
-echo "<h2>" . $Language->getText ("gforge-plugin-mantis", "title_admin") . "</h2>";
-echo $GLOBALS ["HTML"]->boxTop ("<a href=\"createProject.php?group_id=" .$group->getID () . "\">" . $Language->getText ("gforge-plugin-mantis", "create_project") . "</a>");
+site_project_header (array ("title" => dgettext ("gforge-plugin-mantis", "title_admin"), "group" => $group_id, "toptab" => "admin"));
+echo "<h2>" . dgettext ("gforge-plugin-mantis", "title_admin") . "</h2>";
+echo $GLOBALS ["HTML"]->boxTop ("<a href=\"createProject.php?group_id=" .$group->getID () . "\">" . dgettext ("gforge-plugin-mantis", "create_project") . "</a>");
 if ((count ($array_ids) > 0) && (count ($array_names) == count ($array_ids)))
 {
-	echo $GLOBALS ["HTML"]->boxMiddle ($Language->getText ("gforge-plugin-mantis", "projects_list"));
+	echo $GLOBALS ["HTML"]->boxMiddle (dgettext ("gforge-plugin-mantis", "projects_list"));
 	echo "<table>";
 	$index = 0;
 	while ($index < count ($array_ids))
@@ -75,17 +76,17 @@ if ((count ($array_ids) > 0) && (count ($array_names) == count ($array_ids)))
 ?>
 <tr>
 <td><b><? echo $array_names [$index]; ?></b></td>
-<td><a href="editProject.php?project_id=<? echo $array_ids [$index]; ?>"><? echo $Language->getText ("gforge-plugin-mantis", "edit_project"); ?></a></td>
+<td><a href="editProject.php?project_id=<? echo $array_ids [$index]; ?>"><? echo dgettext ("gforge-plugin-mantis", "edit_project"); ?></a></td>
 <td>&nbsp;</td>
-<td><a href="editRoles.php?project_id=<? echo $array_ids [$index]; ?>"><? echo $Language->getText ("gforge-plugin-mantis", "edit_roles"); ?></a></td>
+<td><a href="editRoles.php?project_id=<? echo $array_ids [$index]; ?>"><? echo dgettext ("gforge-plugin-mantis", "edit_roles"); ?></a></td>
 <td>&nbsp;</td>
-<td><a href="deleteProject.php?project_id=<? echo $array_ids [$index]; ?>"><? echo $Language->getText ("gforge-plugin-mantis", "delete_project"); ?></a></td>
+<td><a href="deleteProject.php?project_id=<? echo $array_ids [$index]; ?>"><? echo dgettext ("gforge-plugin-mantis", "delete_project"); ?></a></td>
 </tr>
 <?
 		$index++;
 	}
 	echo "</table>\n";
-	echo $GLOBALS ["HTML"]->boxMiddle ("<a href=\"synchronize.php?group_id=" . $group->getID () . "\">" . $Language->getText ("gforge-plugin-mantis", "synchronize_projects") . "</a>");
+	echo $GLOBALS ["HTML"]->boxMiddle ("<a href=\"synchronize.php?group_id=" . $group->getID () . "\">" . dgettext ("gforge-plugin-mantis", "synchronize_projects") . "</a>");
 }
 echo $GLOBALS ["HTML"]->boxBottom ();
 site_project_footer (array ());

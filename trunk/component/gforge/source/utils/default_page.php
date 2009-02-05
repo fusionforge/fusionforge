@@ -2,14 +2,14 @@
 // Default Web Page for groups that haven't setup their page yet
 // Please replace this file with your own website
 //
-// $Id: default_page.php 5943 2007-03-09 05:55:22Z robertn $
+// $Id: default_page.php 6747 2009-01-14 11:08:58Z lo-lan-do $
 //
 $headers = getallheaders();
 ?>
-<HTML>
-<HEAD>
-<TITLE>SourceForge: Welcome</TITLE>
-</HEAD>
+<html>
+<head>
+<title>SourceForge: Welcome</title>
+</head>
 
 <BODY bgcolor=#FFFFFF topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" marginheight="0" marginwidth="0">
 
@@ -17,14 +17,14 @@ $headers = getallheaders();
 <table width="100%" border=0 cellspacing=0 cellpadding=2 bgcolor="737b9c">
   <tr>
     <td><SPAN class=maintitlebar>&nbsp;&nbsp;
-      <A class=maintitlebar href="http://sourceforge.net/"><strong>Home</strong></a> | 
-      <A class=maintitlebar href="http://sourceforge.net/about.php"><strong>About</strong></a> | 
-      <A class=maintitlebar href="http://sourceforge.net/partners.php"><strong>Partners</strong></a> |
-      <A class=maintitlebar href="http://sourceforge.net/contact.php"><strong>Contact Us</strong></a> |
-      <A class=maintitlebar href="http://sourceforge.net/account/logout.php"><strong>Logout</strong></a></SPAN></td>
+      <a class=maintitlebar href="http://sourceforge.net/"><strong>Home</strong></a> | 
+      <a class=maintitlebar href="http://sourceforge.net/about.php"><strong>About</strong></a> | 
+      <a class=maintitlebar href="http://sourceforge.net/partners.php"><strong>Partners</strong></a> |
+      <a class=maintitlebar href="http://sourceforge.net/contact.php"><strong>Contact Us</strong></a> |
+      <a class=maintitlebar href="http://sourceforge.net/account/logout.php"><strong>Logout</strong></a></span></td>
     </td>
   </tr>
-</TABLE>
+</table>
 <!-- end top strip -->
 
 <!-- top title table -->
@@ -38,32 +38,32 @@ $headers = getallheaders();
     </td><!-- right of logo -->
   </tr>
   <tr><td bgcolor="#543a48" colspan=2><img src="http://sourceforge.net/images/blank.png" height=2 vspace=0></td></tr>
-</TABLE>
+</table>
 <!-- end top title table -->
 
 <!-- center table -->
 <table width="100%" border="0" cellspacing="0" cellpadding="2" bgcolor="#FFFFFF" align="center">
   <tr>
     <td>
-      <CENTER><br />
+      <center><br />
       <h1>Welcome to http://<?php print $headers['Host']; ?>/</h1>
       <p>We're Sorry but this Project hasn't yet uploaded their personal webpage yet.<br />
-      Please check back soon for updates or visit <a href="http://sourceforge.net/">SourceForge</a></P><br />
-      </CENTER>
+      Please check back soon for updates or visit <a href="http://sourceforge.net/">SourceForge</a></p><br />
+      </center>
     </td>
   </tr>
-</TABLE>
+</table>
 <!-- end center table -->
 
 <!-- footer table -->
 <table width="100%" border="0" cellspacing="0" cellpadding="2" bgcolor="737b9c">
   <tr>
     <td style="text-align:center"><FONT color="#ffffff"><SPAN class="titlebar">
-      All trademarks and copyrights on this page are properties of their respective owners. Forum comments are owned by the poster. The rest is copyright &copy; 1999-2000 VA Linux Systems, Inc.</SPAN></FONT>
+      All trademarks and copyrights on this page are properties of their respective owners. Forum comments are owned by the poster. The rest is copyright &copy; 1999-2000 VA Linux Systems, Inc.</span></FONT>
     </td>
   </tr>
-</TABLE>
+</table>
 
 <!-- end footer table -->
-</BODY>
-</HTML>
+</body>
+</html>

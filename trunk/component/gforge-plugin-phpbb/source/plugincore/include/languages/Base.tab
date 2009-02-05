@@ -1,0 +1,90 @@
+#/**
+#  *
+#  * PhpBB message catalog (English)
+#  *
+#  */
+
+#	common data
+gforge-plugin-phpbb	yes	yes
+gforge-plugin-phpbb	no	no
+gforge-plugin-phpbb	send	Send
+gforge-plugin-phpbb	encoding	Encoding
+gforge-plugin-phpbb	url	URL
+gforge-plugin-phpbb	name	Name
+gforge-plugin-phpbb	back	Go back
+
+#	PluginPhpBB.class
+gforge-plugin-phpbb	active_plugin	Use PhpBB forum
+gforge-plugin-phpbb	administration_phpbb	PhpBB forum Admin
+gforge-plugin-phpbb	add_new_instance	Add new instance
+gforge-plugin-phpbb	edit_instance	Edit instance parameters
+
+#	PluginPhpBBIHM.class display_instance display_instance_form
+gforge-plugin-phpbb	delete_instance	Delete instance
+gforge-plugin-phpbb	edit_parameters	Edit parameters
+gforge-plugin-phpbb	manage_category	Manage categories
+
+
+#	PluginPhpBBIHM.class display_bookmarks
+gforge-plugin-phpbb	bookmarks	Monitored PhpBB forums
+gforge-plugin-phpbb	subject	Topics
+gforge-plugin-phpbb	last_update	Last updates
+gforge-plugin-phpbb	not_read	Not read
+gforge-plugin-phpbb	no_bookmarks	You have no bookmaks
+
+#	PluginPhpBBIHM.class display_subcat display_subcat_form
+gforge-plugin-phpbb	rename	Rename
+gforge-plugin-phpbb	delete	Delete
+gforge-plugin-phpbb	apply_rule	Apply rule
+gforge-plugin-phpbb	add_category	Add a category
+gforge-plugin-phpbb	rename_category	Rename category
+
+#	PluginPhpBBIHM.class build_select display_rules_affect
+gforge-plugin-phpbb	select_rule	Choose a rule
+gforge-plugin-phpbb	apply_rule_role	Apply rules to the following roles
+
+#	admin.php
+gforge-plugin-phpbb	not_activated_plugin	This project is not activated for PhpBB forum
+gforge-plugin-phpbb	synchronize_data	Synchronize data
+gforge-plugin-phpbb	no_instance_registred	None instance registered
+
+#	applyrule.php 
+gforge-plugin-phpbb	ROLE_FORUM_BOT	Bot Access
+gforge-plugin-phpbb	ROLE_FORUM_FULL	Full Access
+gforge-plugin-phpbb	ROLE_FORUM_LIMITED	Limited Access
+gforge-plugin-phpbb	ROLE_FORUM_LIMITED_POLLS	Limited Access + Polls
+gforge-plugin-phpbb	ROLE_FORUM_NOACCESS	No Access
+gforge-plugin-phpbb	ROLE_FORUM_ONQUEUE	On Moderation Queue
+gforge-plugin-phpbb	ROLE_FORUM_POLLS	Standard Access + Polls
+gforge-plugin-phpbb	ROLE_FORUM_READONLY	Read Only Access
+gforge-plugin-phpbb	ROLE_FORUM_STANDARD	Standard Access
+
+#	instance.php 
+gforge-plugin-phpbb	updating_instance_failed	Update failed
+gforge-plugin-phpbb	fields_empty	Every fields must be filled
+gforge-plugin-phpbb	question_delete_instance	Would you like to delete this instance ?
+gforge-plugin-phpbb	error_create_instance	Error occurred while creating the instance
+gforge-plugin-phpbb	error_remove_instance	Error occurred while renaming the instance
+gforge-plugin-phpbb	error_not_valide_url	The URL is not valid
+
+#	managecategegory.php
+gforge-plugin-phpbb	list_subcat_of	Sub-categories list of 
+gforge-plugin-phpbb	question_delete_category	Would you like to delete this category ? Every topics will be destroyed
+gforge-plugin-phpbb	flied_name_empty	the name must be filled
+gforge-plugin-phpbb	error_create_category	Error occurred while creating the category !!
+gforge-plugin-phpbb	error_rename_category	Error occurred while renaming the category !!
+gforge-plugin-phpbb	error_delete_category	Error occurred while deleting the category !!
+gforge-plugin-phpbb	question_synchronize	Would you like to synchronize data ?
+gforge-plugin-phpbb	no_subcat_registred	None sub categories registered 
+
+#	synchronize.php
+
+gforge-plugin-phpbb	end_synchronize	Synchronization succeeded
+
+#	access.php 
+gforge-plugin-phpbb	error_authenticate	Error while authenticating with PhpBB
+
+
+
+
+

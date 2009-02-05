@@ -4,16 +4,6 @@
 // GForge Universal Site Modifications
 // by David HM Spector <spector@zeitgeist.com>
 //
-// Really Important Safety Tip: --> DO NOT LEAVE ANY WHITE
-// SPACE AFTER THE CLOSING PHP TAG AT THE END OF THIS FILE!
-//
-// Doing so will really confuse the software and cause
-// 1) cookies to fail and 2) HTML page headers to fail
-// which will give you some preally hard-to-debug problems.
-// Why? PHP is a *pre-processor* -- anything that's not PHP gets
-// emitted as part of the HTML stream and processed by the browser,
-// so white space is meaningful!
-//
 // GForge global paths
 //
 $sys_etc_path='/etc/gforge';
@@ -304,21 +294,8 @@ $sys_force_login=0;
 // Place for customized files
 $sys_custom_path=$sys_etc_path.'/custom';
 
-//
-// Localization caching Configuration
-//
-
-// Enable localization caching system
-$sys_localization_enable_caching = true;
-
-// Create a directory, which is writable by your webserver, but not
-// within its document root (does not fall under www/ in the tarball)
-// Your php.ini file may have to be modified to allow writing outside
-// the webserver's directory
-$sys_localization_cache_path = "$sys_var_path/localizationcache/";
-
-// Enable timestamp checking (if disabled, you have to remove manually cache files on update)
-$sys_localization_enable_timestamp_checking = true;
+// Gettext files (default: /usr/share/locale).
+$sys_gettext_path=$sys_opt_path.'/locales';
 
 //
 // Plugins configuration
@@ -326,5 +303,4 @@ $sys_localization_enable_timestamp_checking = true;
 // Path to plugins directory
 $sys_plugins_path="$sys_opt_path/plugins/";
 
-// End of customizations -- place nothing after the closing PHP tag!
-?>
+// End of customizations -- place nothing after this line

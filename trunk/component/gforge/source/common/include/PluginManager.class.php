@@ -6,7 +6,7 @@
  *
  * This file is copyright (c) Roland Mas <lolando@debian.org>, 2002
  *
- * @version   $Id: PluginManager.class.php 6591 2008-08-18 14:59:56Z lo-lan-do $
+ * @version   $Id: PluginManager.class.php 6674 2008-11-24 18:31:38Z aljeux $
  *
  * This file is part of GForge.
  *
@@ -96,11 +96,11 @@ class PluginManager extends Error {
 		
 		$plugins_data = $this->GetPlugins() ;
 		$include_path = $GLOBALS['sys_plugins_path'] ;
-		$filename = $include_path . $p_name . "/common/".$p_name."-init.php" ;
+		$filename = $include_path . '/'. $p_name . "/common/".$p_name."-init.php" ;
 		if (file_exists ($filename)) {
 			require_once ($filename) ;
 		} else { //if we didn't found it in common/ it may be an old plugin that has it's files in include/							
-			$filename = $include_path . $p_name . "/include/".$p_name."-init.php" ;
+			$filename = $include_path . '/' . $p_name . "/include/".$p_name."-init.php" ;
 			if (file_exists ($filename)) {
 				require_once ($filename) ;
 			} else {

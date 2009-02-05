@@ -1,0 +1,20 @@
+gforge-plugin-report	tab_title	Rapport
+gforge-plugin-report	use_report	Activer le plugin Rapport
+gforge-plugin-report	all_modules	Tous les modules
+
+
+gforge-plugin-report	quality_objectives_synthesis	Synth&egrave;se des objectifs qualit&eacute;s
+
+gforge-plugin-report	table_quality_objective	Objectifs qualit&eacute;s
+gforge-plugin-report	table_quality_objective_rate	Note
+gforge-plugin-report	table_metriques_title	Metriques
+gforge-plugin-report	table_metriques_number_of_package	Nombre de paquetages
+gforge-plugin-report	table_metriques_number_of_class	Nombre de classes
+gforge-plugin-report	table_metriques_number_of_methods	Nombre de methodes
+gforge-plugin-report	table_objective_criteria	Crit&egrave;re
+gforge-plugin-report	table_objective_rate	Note
+gforge-plugin-report	table_objective_coef	Coef
+gforge-plugin-report	table_objective_rates_1	Notes <2
+gforge-plugin-report	table_objective_rates_2	Notes <3
+gforge-plugin-report	table_objective_rates_3	Notes <4
+gforge-plugin-report	table_objective_rates_4	Notes =4

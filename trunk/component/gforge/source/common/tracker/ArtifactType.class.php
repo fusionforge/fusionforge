@@ -6,7 +6,7 @@
  * The rest Copyright 2002-2004 (c) GForge Team
  * http://gforge.org/
  *
- * @version   $Id: ArtifactType.class.php 6602 2008-09-04 13:06:39Z lo-lan-do $
+ * @version   $Id: ArtifactType.class.php 6633 2008-10-06 19:32:46Z aljeux $
  *
  * This file is part of GForge.
  *
@@ -741,12 +741,14 @@ class ArtifactType extends Error {
 			return '';
 		}
 		if (is_array($choiceid)) {
-			$choiceid=implode(',',$choiceid);
+			$choiceid=implode(',', array_map('intval', $choiceid));
+		} else {
+			$choiceid=intval($choiceid);
 		}
 		if ($choiceid == 100) {
 			return 'None';
 		}
-		if (!$this->element_name["$choiceid"]) {
+		if (!isset($this->element_name["$choiceid"])) {
 			$sql="select element_id,extra_field_id,element_name
 				FROM artifact_extra_field_elements
 				WHERE element_id IN ($choiceid)";

@@ -1,0 +1,114 @@
+#---------------------------------------------------------------------------
+# Novaforge is a registered trade mark from Bull S.A.S
+# Copyright (C) 2007 Bull S.A.S.
+# 
+# http://novaforge.org/
+#
+#
+# This file has been developped within the Novaforge(TM) project from Bull S.A.S
+# and contributed back to GForge community.
+#
+# GForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# GForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#---------------------------------------------------------------------------
+
+gforge-plugin-novadoc	bad_filemane	Filename does not match. Please submit the same file.
+gforge-plugin-novadoc	archive	Archive previous version.
+gforge-plugin-novadoc	noWriteAuth	You don't have the rights to edit or add a document in this branch.
+gforge-plugin-novadoc	noDeleteAuth	You don't have the rights to delete a document in this branch.
+gforge-plugin-novadoc	copyBranch	Copy Branch
+gforge-plugin-novadoc	manageAuth	Manage Authorizations
+gforge-plugin-novadoc	menuChrono	Chronos
+gforge-plugin-novadoc	chrono	Chrono
+gforge-plugin-novadoc	docDeleted	Deleted
+gforge-plugin-novadoc	updateDate	Update date
+gforge-plugin-novadoc	propagateAuth	Propagate the autorization to the children ?
+gforge-plugin-novadoc	infoDefaultAuth	* The authorizations preceded by an asterisk are the default authorizations
+gforge-plugin-novadoc	authLabel1	None
+gforge-plugin-novadoc	authLabel2	Read
+gforge-plugin-novadoc	authLabel3	Write
+gforge-plugin-novadoc	authLabel4	Delete
+gforge-plugin-novadoc	copyBranchToCopy	Branch to copy
+gforge-plugin-novadoc	copyBranchName	New branch name
+gforge-plugin-novadoc	displayHistory	Display the history
+gforge-plugin-novadoc	status	Status
+gforge-plugin-novadoc	observation	Observations
+gforge-plugin-novadoc	title	Title
+gforge-plugin-novadoc	author	Author
+gforge-plugin-novadoc	writingDate	Writing date
+gforge-plugin-novadoc	doctype	Doc. type
+gforge-plugin-novadoc	reference	Reference
+gforge-plugin-novadoc	version	Version
+gforge-plugin-novadoc	date	Date
+gforge-plugin-novadoc	name	Name
+gforge-plugin-novadoc	description	Description
+gforge-plugin-novadoc	viewURL	View File URL
+gforge-plugin-novadoc	doc_unique	A document with the same name already exists in the branch.
+gforge-plugin-novadoc	group_unique	A branch with the same name already exists in the branch.
+gforge-plugin-novadoc	delete_doc	Delete this document
+gforge-plugin-novadoc	adminDir	Manage Branches
+gforge-plugin-novadoc	language	Language    
+gforge-plugin-novadoc	viewCard	view card
+gforge-plugin-novadoc	delete_group	Delete this branch
+gforge-plugin-novadoc	head_file	Document
+gforge-plugin-novadoc	head_modif_by	Modified by
+gforge-plugin-novadoc	head_the	the
+gforge-plugin-novadoc	error_invalid_file_attack	Invalid file attack attempt $1
+gforge-plugin-novadoc	error_no_docs	This project has no visible documents
+gforge-plugin-novadoc	error_no_groups_defined	No Document Groups defined
+gforge-plugin-novadoc	submit_new	Submit New Document
+gforge-plugin-novadoc	turned_off	This project has turned off the Doc Manager
+gforge-plugin-novadoc	view_doc	View Documents
+gforge-plugin-novadoc	add_edit_docgroups	Add/Edit Document Groups
+gforge-plugin-novadoc	title_admin	Documents manager administration
+gforge-plugin-novadoc	section_admin_main	Project $1
+gforge-plugin-novadoc	add_docs	[Add document here]
+gforge-plugin-novadoc	section_admin_groups Manage groups
+gforge-plugin-novadoc	editdocs_upload_url	Specify an outside URL where the file will be referenced
+gforge-plugin-novadoc	state	State
+gforge-plugin-novadoc	upload	OPTIONAL: Upload new file
+gforge-plugin-novadoc	upload_ftp	OR choose one form FTP $1
+gforge-plugin-novadoc	add_group	Add a group
+gforge-plugin-novadoc	editgroups_description	Group name will be used as a title, so it should be formatted correspondingly.
+gforge-plugin-novadoc	edit_group	Edit a group
+gforge-plugin-novadoc	group_id	ID
+gforge-plugin-novadoc	group_name	Group Name
+gforge-plugin-novadoc	group_parent	Belongs to
+gforge-plugin-novadoc	new_group_name	New Group Name
+gforge-plugin-novadoc	new_group_parent	Belongs to
+gforge-plugin-novadoc	delete_warning	You are about to permanently delete this document.
+gforge-plugin-novadoc	delete_warning_group	You are about to permanently delete this branch.
+gforge-plugin-novadoc	sure	I'm Sure.
+gforge-plugin-novadoc	really_sure	I'm Really Sure.
+gforge-plugin-novadoc	delete	Delete
+gforge-plugin-novadoc	error_min_title_length	Title must be at least 5 characters
+gforge-plugin-novadoc	no_docs	No Documents Found
+gforge-plugin-novadoc	invalid_docid	Document: invalid ID
+gforge-plugin-novadoc	invalid_id	Group: invalid ID
+gforge-plugin-novadoc	invalid_parent_id	Group: invalid parent ID
+gforge-plugin-novadoc	name_required	Group: name is required
+gforge-plugin-novadoc	all_languages	All Languages
+gforge-plugin-novadoc	no_document_data_text	No document to display - invalid or inactive document number
+gforge-plugin-novadoc	no_document_data_title	No document data
+gforge-plugin-novadoc	title_display	Documents manager
+gforge-plugin-novadoc	upload_url	OR specify an outside URL where the file will be referenced
+gforge-plugin-novadoc	error_blank_document	Error getting blank document
+gforge-plugin-novadoc	file	File
+gforge-plugin-novadoc	group	Group that document belongs in
+gforge-plugin-novadoc	no_valid_group	No valid Document Group was selected
+gforge-plugin-novadoc	submit	Submit Information
+gforge-plugin-novadoc	submitted_successfully	Document submitted sucessfully
+gforge-plugin-novadoc	upload_file	Upload File	
+gforge-plugin-novadoc	tab_title	Documents
+gforge-plugin-novadoc	use_novadoc	NovaForge document manager

@@ -1,3 +1,5 @@
+SET client_min_messages TO warning;
+
 -- ********** Create auxiliar tables ********** 
 
 CREATE TABLE artifact_idx (
@@ -142,11 +144,11 @@ FROM users ORDER BY user_id;
 
 CREATE INDEX users_idxFTI ON users_idx USING gist(vectors);
 
-VACUUM FULL ANALYZE;
+-- VACUUM FULL ANALYZE;
 
 -- ********** Create trigger function to update idx tables ********** 
 
-CREATE OR REPLACE FUNCTION update_vectors() RETURNS OPAQUE AS '
+CREATE OR REPLACE FUNCTION update_vectors() RETURNS TRIGGER AS '
 DECLARE
 table_name TEXT;
 BEGIN
@@ -182,7 +184,7 @@ BEGIN
 	ELSIF table_name = ''forum'' THEN
 		IF TG_OP = ''INSERT'' THEN
 			INSERT INTO forum_idx (msg_id, group_id, vectors) (SELECT f.msg_id, g.group_id, to_tsvector(\'default\', coalesce(f.subject,\'\') ||\' \'|| 
-			coalesce(f.body,\'\')) AS vectors FROM forum f, forum_group_list g WHERE f.group_forum_id = g.group_forum_id AND f.msg_id = NEW.msg_id)
+			coalesce(f.body,\'\')) AS vectors FROM forum f, forum_group_list g WHERE f.group_forum_id = g.group_forum_id AND f.msg_id = NEW.msg_id);
 		ELSIF TG_OP = ''UPDATE'' THEN
 			UPDATE forum_idx SET vectors=to_tsvector(\'default\', coalesce(NEW.subject,\'\') ||\' \'|| coalesce(NEW.body,\'\')) WHERE msg_id=NEW.msg_id;
 		ELSIF TG_OP = ''DELETE'' THEN
@@ -408,7 +410,7 @@ CREATE OR REPLACE FUNCTION doc_data_search(text, integer, text, boolean) RETURNS
 			WHERE doc_data.doc_group = doc_groups.doc_group
 			AND doc_data.group_id = $2
 			AND doc_groups.doc_group IN (\'$3\')
-			AND doc_data.stateid IN = 1
+			AND doc_data.stateid = 1
 			AND doc_data.docid IN (SELECT docid FROM doc_data_idx, to_tsquery($1) AS q
 			WHERE group_id = $2 AND vectors @@ q ORDER BY rank(vectors, q) DESC) LOOP
 				RETURN NEXT data;
@@ -440,6 +442,13 @@ CREATE OR REPLACE FUNCTION doc_data_search(text, integer, text, boolean) RETURNS
 	RETURN;
 	END;'
 LANGUAGE 'plpgsql';
+
+CREATE TYPE forums_results AS (msg_id integer,
+        subject text,
+        post_date integer,
+        realname character varying(32),
+        forum_name text
+);
 
 CREATE OR REPLACE FUNCTION forums_search(text, integer, text, boolean) RETURNS SETOF forums_results AS '
 	DECLARE

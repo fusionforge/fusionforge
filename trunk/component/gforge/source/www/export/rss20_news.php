@@ -63,9 +63,9 @@ $sql = "SELECT forum_id,summary,post_date,details,g.group_id,g.group_name,u.real
         AND u.user_id=news_bytes.submitted_by
         AND g.is_public='1'
         AND g.status='A'
+        AND news_bytes.is_approved <> '4'
         $where
-        order by post_date desc";
-        $res = db_query($sql, $limit);
+        ORDER BY post_date DESC";
 
 $res = db_query($sql, $limit);
 

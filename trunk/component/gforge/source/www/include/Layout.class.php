@@ -10,7 +10,7 @@
  *
  * Geoffrey Herteg, August 29, 2000
  *
- * @version   $Id: Layout.class.php 6566 2008-06-30 18:18:49Z aljeux $
+ * @version   $Id: Layout.class.php 6756 2009-01-15 13:19:29Z lo-lan-do $
  */
  
 require_once $gfcommon.'include/constants.php';
@@ -71,7 +71,7 @@ class Layout extends Error {
 	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="<?php echo _('en') ?>">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo _('en') ?>" lang="<?php echo _('en') ?>">
 
   <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -1071,7 +1071,7 @@ echo db_error();
 		<form name="quicknavform">
 			<select name="quicknav" onChange="location.href=document.quicknavform.quicknav.value">';
 				$ret .= '
-				<option value="">Quick Jump To...</option>';
+				<option value="">'._('Quick Jump To...').'</option>';
 				for ($i=0; $i<db_numrows($res); $i++) {
 					$ret .= '
 				<option value="'.util_make_url_g (db_result($res,$i,'unix_group_name'),db_result($res,$i,'group_id')).'">'.db_result($res,$i,'group_name').'</option>';

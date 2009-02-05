@@ -1,0 +1,20 @@
+#: source/plugincore/include/NovaMonitorPlugin.class.php:42
+#: source/pluginwww/index.php:17
+msgid "Monitor"
+msgstr "Monitor"
+
+#: source/plugincore/include/NovaMonitorPlugin.class.php:56
+msgid "Monitoring d'applications Novaforge"
+msgstr "Application monitoring"
+
+#: source/pluginwww/index.php:33
+msgid "error"
+msgstr "Error"
+
+#: source/pluginwww/index.php:33
+msgid "Le plugin novamonitor n'est pas activ&eacute; pour ce projet."
+msgstr "'novamonitor' plugin is not activated for this project."
+
+#: source/pluginwww/index.php:65
+msgid "Ouvrir le monitoring &agrave; l'ext&eacute;rieur"
+msgstr "Launch monitoring outside"

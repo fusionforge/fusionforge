@@ -6,7 +6,7 @@
  * The rest Copyright 2002-2004 (c) GForge Team
  * http://gforge.org/
  *
- * @version   $Id: index.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: index.php 6747 2009-01-14 11:08:58Z lo-lan-do $
  *
  * This file is part of GForge.
  *
@@ -52,7 +52,7 @@ $sh->header(array('title'=>_('Survey')));
 $sf = new SurveyFactory($g);
 $ss = & $sf->getSurveys();
 if (!$ss) {
-    echo '<H2>' . (_('No Survey is found')) . '</H2>';
+    echo '<h2>' . (_('No Survey is found')) . '</h2>';
 } else {
     echo($sh->showSurveys($ss, 0, 0, 1, 1, 1, 0));
 }

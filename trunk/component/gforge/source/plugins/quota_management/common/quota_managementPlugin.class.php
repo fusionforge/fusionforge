@@ -119,15 +119,21 @@ class quota_managementPlugin extends Plugin {
 			$text = $params['text'];
 			//check if the user has the plugin activated
 			if ($user->usesPlugin($this->name)) {
-				echo '	<p>
-					<a href="/plugins/quota_management/index.php?id=' . $userid . '&type=user&pluginname=' . $this->name . '">' . _('View Personal quota_management') .'</a></p>';
+				echo '	<p>' ;
+				echo util_make_link ("/plugins/quota_management/index.php?id=$userid&type=user&pluginname=".$this->name,
+						     _('View Personal quota_management')
+					) ;
+				echo '</p>';
 			}
 		} elseif ($hookname == "project_admin_plugins") {
 			// this displays the link in the project admin options page to it´s  quota_management administration
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
-				echo '<a href="/plugins/quota_management/index.php?id=' . $group->getID() . '&type=admin&pluginname=' . $this->name . '">' . _('View the quota_management Administration') . '</a><br />';
+				echo util_make_link ('/plugins/quota_management/index.php?id='.$group->getID().'&type=admin&pluginname='.$this->name,
+						     _('View the quota_management Administration')
+					) ;
+				echo '<br />';
 			}
 		}												    
 		elseif ($hookname == "blahblahblah") {
@@ -137,7 +143,9 @@ class quota_managementPlugin extends Plugin {
 			// www/admin/index.php line 167
 			// ...
 			?>
-			 <li><a href="/plugins/quota_management/quota.php"><?php echo _('Ressources usage and quota'); ?></a></li>
+			<li><?php echo util_make_link ("/plugins/quota_management/quota.php",
+						       _('Ressources usage and quota')
+				); ?></li>
 			<?php
 		} 
 		elseif ($hookname == "quota_label_project_admin") {

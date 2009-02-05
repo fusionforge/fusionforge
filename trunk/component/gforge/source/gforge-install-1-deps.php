@@ -1,4 +1,4 @@
-#!/usr/bin/php -f
+#!/usr/bin/php
 <?php
 /**
  * GForge Installation Dependency Setup
@@ -40,38 +40,15 @@ function INFO($message)
     $myLog.=$message;
 }
 
-function installRedhat($version) {
-	if ($version == 3) {
-		INFO("Installing packages: Executing YUM. Please wait...\n\n\n");
-		passthru("yum -y install httpd php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php-pgsql subversion mod_dav_svn postfix rcs php-gd mod_ssl wget ssh");
-	} else {
-		INFO("Installing packages: Executing YUM. Please wait...\n\n\n");
-		passthru("yum -y install httpd php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php-pgsql subversion mod_dav_svn postfix rcs php-gd mod_ssl wget inetd");
-	}
-
-	INFO("Restarting PostgreSQL\n");
-	passthru("/etc/init.d/postgresql stop");
-	passthru("/etc/init.d/postgresql start");
+function installRedhat() {
+	INFO("Installing packages: Executing YUM. Please wait...\n\n\n");
+	passthru("yum -y install httpd php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php-pgsql subversion mod_dav_svn postfix rcs php-gd mod_ssl wget openssh inetd which liberation-fonts");
 }
 
-function installRHEL() {
+function installRHEL4() {
 
 	INFO("Installing packages: Executing UP2DATE. Please wait...\n\n\n");
 	passthru("up2date --install php php-gd php-pgsql mailman postgresql-server postgresql-contrib rcs cvs httpd subversion perl-URI mod_dav_svn ssh postfix mod_ssl wget");
-
-	INFO("Restarting PostgreSQL\n");
-	passthru("/etc/init.d/postgresql stop");
-	passthru("/etc/init.d/postgresql start");
-}
-
-function installRHEL5() {
-
-	INFO("Installing packages: Executing YUM. Please wait...\n\n\n");
-	passthru("yum -y install php php-gd php-pgsql mailman postgresql-server postgresql-contrib rcs cvs httpd subversion perl-URI mod_dav_svn ssh postfix mod_ssl wget");
-
-	INFO("Restarting PostgreSQL\n");
-	passthru("service postgresql stop");
-	passthru("service postgresql start");
 }
 
 function installDebian() {
@@ -85,10 +62,10 @@ function installDebian() {
 function installSUSE() {
 
 	INFO("Installing Packages with yast");
-	passthru("yast -i apache2-prefork php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php5-pgsql subversion apache-mod_dav_svn ssh postfix rcs php5-gd mod_ssl perl-IPC-Run php5-curl wget subversion-server xinetd apache2-mod_php5");
+	passthru("yast -i apache2-prefork php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php4-pgsql subversion apache-mod_dav_svn ssh postfix rcs php4-gd mod_ssl perl-IPC-Run php4-curl wget subversion-server xinetd apache2-mod_php4");
 
-	INFO("Fixing php5 installation");
-	passthru("cp /usr/lib/apache2-prefork/libphp5.so /usr/lib/apache2/mod_php.so");
+	INFO("Fixing php4 installation");
+	passthru("cp /usr/lib/apache2-prefork/libphp4.so /usr/lib/apache2/mod_php.so");
 
 	INFO("Restarting APACHE");
 	passthru("/etc/init.d/apache2 start");
@@ -111,19 +88,16 @@ function installArk() {
 }
 
 if (count($argv) < 2) {
-	echo "Usage: pre-install.php [RHEL4|RHEL5|DEBIANSARGE|FC3|FC4|ARK|SUSE]\n";
+	echo "Usage: gforge-preinstall.php [RHEL4|RHEL5|DEBIAN|FEDORA|CENTOS|ARK|SUSE]\n";
+	//check_version();
 } else {
     $platform = $argv[1];
 
-	if ($platform == 'FC3') {
-		installRedhat(3);
-	} elseif ($platform == 'FC4') {
-		installRedhat(4);
+	if ($platform == 'FEDORA' || $platform == 'CENTOS' || $platform == 'RHEL5') {
+		installRedhat();
 	} elseif ($platform == 'RHEL4') {
-		installRHEL();
-	} elseif ($platform == 'RHEL5') {
-		installRHEL5();
-	} elseif ($platform == 'DEBIANSARGE') {
+		installRHEL4();
+	} elseif ($platform == 'DEBIAN') {
 		installDebian(); /* Debian and friends */
 	} elseif ($platform == 'SUSE') {
 		installSUSE();

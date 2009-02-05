@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>Monitoring sur /test_FRCLS0804</title>
+<link rel="stylesheet" href="monitoring_fichiers/monitoring.htm" type="text/css">
+<script type="text/javascript">
+function showHide(id){
+  if (document.getElementById(id).style.display=='none') {
+    document.getElementById(id).style.display='inline';
+  } else {
+    document.getElementById(id).style.display='none';
+  }
+}
+</script>
+</head><body>
+<h3><img src="monitoring_fichiers/monitoring_013.png" alt="Stats" height="24" width="24">
+Statistiques de monitoring mesurées le 21/11/08 12:12 depuis le 21/11/08 12:11 sur /test_FRCLS0804</h3>
+<div align="center">
+<div class="noPrint">
+<a href="http://localhost:8080/test/monitoring?period=jour">Actualiser</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Choix de graphiques :&nbsp;&nbsp;&nbsp;
+<a href="http://localhost:8080/test/monitoring?period=jour">Jour</a>&nbsp;&nbsp;&nbsp;
+<a href="http://localhost:8080/test/monitoring?period=semaine">Semaine</a>&nbsp;&nbsp;&nbsp;
+<a href="http://localhost:8080/test/monitoring?period=mois">Mois</a>&nbsp;&nbsp;&nbsp;
+<a href="http://localhost:8080/test/monitoring?period=annee">Année</a>
+</div>
+<a href="http://localhost:8080/test/monitoring?zoom=2&amp;graph=usedMemory&amp;period=jour&amp;zoom=true"><img src="monitoring_fichiers/monitoring_007.png" alt="Mémoire utilisée"></a>
+<a href="http://localhost:8080/test/monitoring?zoom=2&amp;graph=cpu&amp;period=jour&amp;zoom=true"><img src="monitoring_fichiers/monitoring_002.png" alt="% CPU"></a>
+<a href="http://localhost:8080/test/monitoring?zoom=2&amp;graph=httpSessions&amp;period=jour&amp;zoom=true"><img src="monitoring_fichiers/monitoring_010.png" alt="Sessions http"></a>
+<br>
+<a href="http://localhost:8080/test/monitoring?zoom=2&amp;graph=httpHitsRate&amp;period=jour&amp;zoom=true"><img src="monitoring_fichiers/monitoring_012.png" alt="Hits http par minute"></a>
+<a href="http://localhost:8080/test/monitoring?zoom=2&amp;graph=httpMeanTimes&amp;period=jour&amp;zoom=true"><img src="monitoring_fichiers/monitoring.png" alt="Temps http moyens (ms)"></a>
+<a href="http://localhost:8080/test/monitoring?zoom=2&amp;graph=httpSystemErrors&amp;period=jour&amp;zoom=true"><img src="monitoring_fichiers/monitoring_008.png" alt="% d'erreurs http"></a>
+<br>
+<a href="http://localhost:8080/test/monitoring?zoom=2&amp;graph=sqlHitsRate&amp;period=jour&amp;zoom=true"><img src="monitoring_fichiers/monitoring_006.png" alt="Hits sql par minute"></a>
+<a href="http://localhost:8080/test/monitoring?zoom=2&amp;graph=sqlMeanTimes&amp;period=jour&amp;zoom=true"><img src="monitoring_fichiers/monitoring_003.png" alt="Temps sql moyens (ms)"></a>
+<a href="http://localhost:8080/test/monitoring?zoom=2&amp;graph=sqlSystemErrors&amp;period=jour&amp;zoom=true"><img src="monitoring_fichiers/monitoring_009.png" alt="% d'erreurs sql"></a>
+</div>
+<h3><img src="monitoring_fichiers/monitoring_004.png" alt="http" height="24" width="24">Statistiques http</h3>
+<table summary="http global" border="1" cellpadding="2" cellspacing="0" width="100%">
+<tbody><tr><th>Requête</th><th>% du temps cumulé</th><th>Hits</th><th>Temps moyen (ms)</th><th>Temps max (ms)</th><th>Ecart-type</th><th>% d'erreur système</th><th>Taille moyenne (Ko)</th></tr>
+<tr><td>http global</td> <td align="right">100</td> <td align="right">8</td> <td align="right"><span class="info">228</span></td> <td align="right">1093</td> <td align="right">433</td> <td align="right">12,50</td> <td align="right">1</td></tr>
+<tr class="odd"><td>http warning</td> <td align="right">100</td> <td align="right">2</td> <td align="right"><span class="warning">914</span></td> <td align="right">1093</td> <td align="right">253</td> <td align="right">0,00</td> <td align="right">0</td></tr>
+<tr><td>http severe</td> <td align="right">0</td> <td align="right">0</td> <td align="right"><span class="info">-1</span></td> <td align="right">0</td> <td align="right">-1</td> <td align="right">0,00</td> <td align="right">0</td></tr>
+</tbody></table>
+<div align="right">
+12 hits/min sur 7 requêtes
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="javascript:showHide('detailshttp');" class="noPrint">+/- Détails</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="http://localhost:8080/test/monitoring?clear=http" class="noPrint">Réinitialiser</a>
+</div>
+<div id="detailshttp" style="display: none;">
+<table summary="http" border="1" cellpadding="2" cellspacing="0" width="100%">
+<tbody><tr><th>Requête</th><th>% du temps cumulé</th><th>Hits</th><th>Temps moyen (ms)</th><th>Temps max (ms)</th><th>Ecart-type</th><th>% d'erreur système</th><th>Taille moyenne (Ko)</th></tr>
+<tr><td><a class="tooltip" href="http://localhost:8080/test/monitoring?zoom=2&amp;graph=http5b6f693588fcf8333fdab51f5c78abd4d7db5dea&amp;period=jour&amp;zoom=true" onmouseover="document.getElementById('http5b6f693588fcf8333fdab51f5c78abd4d7db5dea').src='?graph=http5b6f693588fcf8333fdab51f5c78abd4d7db5dea&amp;period=jour'; this.onmouseover=null;"><em><img src="monitoring_fichiers/monitoring_002.htm" id="http5b6f693588fcf8333fdab51f5c78abd4d7db5dea" alt="graph"></em>/jsp/slower.jsp GET</a></td> <td align="right">59</td> <td align="right">1</td> <td align="right"><span class="warning">1093</span></td> <td align="right">1093</td> <td align="right">0</td> <td align="right">0,00</td> <td align="right">0</td></tr>
+<tr class="odd"><td><a class="tooltip" href="http://localhost:8080/test/monitoring?zoom=2&amp;graph=httpb9a7d02bb22f54a9ab9db647fa883f1f07d174cb&amp;period=jour&amp;zoom=true" onmouseover="document.getElementById('httpb9a7d02bb22f54a9ab9db647fa883f1f07d174cb').src='?graph=httpb9a7d02bb22f54a9ab9db647fa883f1f07d174cb&amp;period=jour'; this.onmouseover=null;"><em><img src="monitoring_fichiers/monitoring_002.htm" id="httpb9a7d02bb22f54a9ab9db647fa883f1f07d174cb" alt="graph"></em>/jsp/slow.jsp GET</a></td> <td align="right">40</td> <td align="right">1</td> <td align="right"><span class="warning">735</span></td> <td align="right">735</td> <td align="right">0</td> <td align="right">0,00</td> <td align="right">0</td></tr>
+<tr><td><a class="tooltip" href="http://localhost:8080/test/monitoring?zoom=2&amp;graph=http9b051a0212745888c373b46ee5f27d9d6d905d45&amp;period=jour&amp;zoom=true" onmouseover="document.getElementById('http9b051a0212745888c373b46ee5f27d9d6d905d45').src='?graph=http9b051a0212745888c373b46ee5f27d9d6d905d45&amp;period=jour'; this.onmouseover=null;"><em><img src="monitoring_fichiers/monitoring_002.htm" id="http9b051a0212745888c373b46ee5f27d9d6d905d45" alt="graph"></em>/ GET</a></td> <td align="right">0</td> <td align="right">1</td> <td align="right"><span class="info">0</span></td> <td align="right">0</td> <td align="right">0</td> <td align="right">0,00</td> <td align="right">0</td></tr>
+<tr class="odd"><td><a class="tooltip" href="http://localhost:8080/test/monitoring?zoom=2&amp;graph=http05513966ec4358d2f249de6b779570ec811b39ca&amp;period=jour&amp;zoom=true" onmouseover="document.getElementById('http05513966ec4358d2f249de6b779570ec811b39ca').src='?graph=http05513966ec4358d2f249de6b779570ec811b39ca&amp;period=jour'; this.onmouseover=null;"><em><img src="monitoring_fichiers/monitoring_002.htm" id="http05513966ec4358d2f249de6b779570ec811b39ca" alt="graph"></em>/NovaForge_installation.txt GET</a></td> <td align="right">0</td> <td align="right">2</td> <td align="right"><span class="info">0</span></td> <td align="right">0</td> <td align="right">0</td> <td align="right">0,00</td> <td align="right">5</td></tr>
+<tr><td><a class="tooltip" href="http://localhost:8080/test/monitoring?zoom=2&amp;graph=httpd058b509002482fd409222dfb9875906d01f53b9&amp;period=jour&amp;zoom=true" onmouseover="document.getElementById('httpd058b509002482fd409222dfb9875906d01f53b9').src='?graph=httpd058b509002482fd409222dfb9875906d01f53b9&amp;period=jour'; this.onmouseover=null;"><em><img src="monitoring_fichiers/monitoring_002.htm" id="httpd058b509002482fd409222dfb9875906d01f53b9" alt="graph"></em>/jsp/fast.jsp GET</a></td> <td align="right">0</td> <td align="right">1</td> <td align="right"><span class="info">0</span></td> <td align="right">0</td> <td align="right">0</td> <td align="right">0,00</td> <td align="right">0</td></tr>
+<tr class="odd"><td><a class="tooltip" href="http://localhost:8080/test/monitoring?zoom=2&amp;graph=http9073f7eb29af271f2ae8c1a25bc801b11174eeca&amp;period=jour&amp;zoom=true" onmouseover="document.getElementById('http9073f7eb29af271f2ae8c1a25bc801b11174eeca').src='?graph=http9073f7eb29af271f2ae8c1a25bc801b11174eeca&amp;period=jour'; this.onmouseover=null;"><em><img src="monitoring_fichiers/monitoring_002.htm" id="http9073f7eb29af271f2ae8c1a25bc801b11174eeca" alt="graph"></em>Error404</a></td> <td align="right">0</td> <td align="right">1</td> <td align="right"><span class="info">0</span></td> <td align="right">0</td> <td align="right">0</td> <td align="right">100,00</td> <td align="right">0</td></tr>
+<tr><td><a class="tooltip" href="http://localhost:8080/test/monitoring?zoom=2&amp;graph=http4ce75198f49385f5fc5f22eac3dd521d79244ddc&amp;period=jour&amp;zoom=true" onmouseover="document.getElementById('http4ce75198f49385f5fc5f22eac3dd521d79244ddc').src='?graph=http4ce75198f49385f5fc5f22eac3dd521d79244ddc&amp;period=jour'; this.onmouseover=null;"><em><img src="monitoring_fichiers/monitoring_002.htm" id="http4ce75198f49385f5fc5f22eac3dd521d79244ddc" alt="graph"></em>/jsp/needsSession.jsp GET</a></td> <td align="right">0</td> <td align="right">1</td> <td align="right"><span class="info">0</span></td> <td align="right">0</td> <td align="right">0</td> <td align="right">0,00</td> <td align="right">0</td></tr>
+</tbody></table>
+</div>
+<h3><img src="monitoring_fichiers/monitoring_011.png" alt="sql" height="24" width="24">Statistiques sql</h3>
+Aucune requête
+<h3><img src="monitoring_fichiers/monitoring_005.png" alt="Informations systèmes" height="24" width="24">
+Informations système</h3>
+<table summary="Informations système" align="left" border="0" cellpadding="2" cellspacing="0">
+<tbody><tr><td>Mémoire java utilisée: </td><td>12 Mo / 63 Mo</td></tr>
+<tr><td>Nb de sessions http: </td><td>1</td></tr>
+</tbody></table>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="javascript:{showHide('detailsJava');window.scrollTo(0,document.body.scrollHeight);}" class="noPrint">+/- Détails</a>
+<br><br>
+<table id="detailsJava" style="display: none;" summary="Détails système" align="left" border="0" cellpadding="2" cellspacing="0">
+<tbody><tr><td>Host: </td><td>FRCLS0804@129.185.218.182</td></tr>
+<tr><td>OS: </td><td>Windows XP Service Pack 2, x86/32 (2 coeurs)</td></tr>
+<tr><td>Java: </td><td>Java(TM) 2 Runtime Environment, Standard Edition, 1.5.0_15-b04</td></tr>
+<tr><td>Serveur: </td><td>Apache Tomcat/6.0.18</td></tr>
+<tr><td>Contexte webapp: </td><td>/test</td></tr>
+<tr><td>Démarrage: </td><td>21/11/08 11:57</td></tr>
+<tr><td valign="top">Gestion mémoire: </td><td>Non heap memory = 14 Mo,<br>Garbage collection time = 845 ms,<br>Process cpu time = 11375 ms,<br>Committed virtual memory = 43 Mo,<br>Free physical memory = 1682 Mo,<br>Total physical memory = 2047 Mo,<br>Free swap space = 3825 Mo,<br>Total swap space = 4095 Mo</td></tr>
+<tr><td valign="top">Base de données: </td><td>jdbc/TestDB: jdbc:mysql://129.185.214.103:3306/mediavision?socketTimeout=5000&amp;connectTimeout=5000<br>MySQL, 5.0.67-community-nt<br>Driver JDBC: MySQL-AB JDBC Driver, mysql-connector-java-5.1.5 ( Revision: ${svn.Revision} )</td></tr>
+</tbody></table>
+</body></html>

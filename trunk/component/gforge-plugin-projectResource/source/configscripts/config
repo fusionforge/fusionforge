@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# Source functions
+if [ -e %DATADIR%/%NAME%/config/util/functions ] ; then
+	. %DATADIR%/%NAME%/config/util/functions
+else
+	echo "File '%DATADIR%/%NAME%/config/util/functions' is missing"
+	exit 1
+fi
+init_variables $*
+source_init_parameters
+if [ $EXIT -eq 0 ] ; then
+	source_config_parameters
+fi
+if [ $EXIT -eq 0 ] ; then
+	register_plugin %PLUGIN_NAME% "Projet Ressource"
+fi
+if [ $EXIT -eq 0 ] ; then
+	restore_plugin_config %PLUGIN_NAME%
+fi
+exit $EXIT

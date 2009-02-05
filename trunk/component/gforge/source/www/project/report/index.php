@@ -243,7 +243,7 @@ while ( $row_memb=db_fetch_array($res_memb) ) {
 	}
 	echo '
 		<tr>
-			<td><BR></td>
+			<td><br /></td>
 		</tr>';
 }
 

@@ -1,8 +1,10 @@
+SET client_min_messages TO warning;
+
 BEGIN;
 
 DROP FUNCTION update_vectors() CASCADE;
 
-CREATE OR REPLACE FUNCTION update_vectors() RETURNS OPAQUE AS '
+CREATE OR REPLACE FUNCTION update_vectors() RETURNS TRIGGER AS '
 DECLARE
 table_name TEXT;
 BEGIN

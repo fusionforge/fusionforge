@@ -3,7 +3,7 @@
 /**
  * Copyright 1999-2001 (c) VA Linux Systems
  *
- * @version   $Id: db_trove_maint.php 6588 2008-08-18 14:07:18Z lo-lan-do $
+ * @version   $Id: db_trove_maint.php 6747 2009-01-14 11:08:58Z lo-lan-do $
  *
  * This file is part of GForge.
  *
@@ -22,6 +22,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
+require dirname(__FILE__).'/../www/env.inc.php';
 require $gfwww.'include/squal_pre.php';	
 require $gfcommon.'include/cron_utils.php';
 
@@ -74,6 +75,10 @@ CREATE TABLE "trove_treesums" (
 db_begin(SYS_DB_TROVE);
 
 db_query("DELETE FROM trove_agg;", -1, 0, SYS_DB_TROVE);
+
+if ( ! isset($sys_private_trove_view) ) {
+	$sys_private_trove_view = 0;
+}
 
 if ($sys_private_trove_view == 1) {
 	// Show public *and* private groups
@@ -191,7 +196,7 @@ while (list($k,$v) = each($sum_totals)) {
 //	$err .= "<tr><td>$k</td><td>$v</td></tr>\n";
 
 }
-//$err .= "</TABLE>";
+//$err .= "</table>";
 
 db_commit(SYS_DB_TROVE);
 

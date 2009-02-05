@@ -5,7 +5,7 @@
  * Copyright 2002 GForge, LLC
  * http://gforge.org/
  *
- * @version   $Id: index.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: index.php 6747 2009-01-14 11:08:58Z lo-lan-do $
  */
 /*
 
@@ -57,7 +57,7 @@ if ($perm->isPMAdmin()) {
 }
 
 if (count($pg_arr) < 1 || $pg_arr == false) {
-	echo '<p>'._('<H1>No Subprojects Found</H1><P><B>No subprojects have been set up, or you cannot view them.<P><span class="important">The Admin for this project will have to set up projects using the admin page</span></B>').'</p>';
+	echo '<p>'._('<h1>No Subprojects Found</h1><p><b>No subprojects have been set up, or you cannot view them.<p><span class="important">The Admin for this project will have to set up projects using the admin page</span></b>').'</p>';
 } else {
 	echo '
 	<p>'._('Choose a Subproject and you can browse/edit/add tasks to it.').'</p>';

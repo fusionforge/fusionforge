@@ -1,0 +1,520 @@
+#: gforgewww/pm/add_task.php:21 pluginwww/addpm.php:47 pluginwww/addpm.php:66
+#: pluginwww/addpm.php:81 pluginwww/addpm.php:86 pluginwww/addpm.php:91
+#: pluginwww/addpm.php:104 pluginwww/addpm.php:126
+msgid "title"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:33
+msgid "category"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:34
+msgid "admin"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:38 gforgewww/pm/add_task.php:125
+#: gforgewww/pm/add_task.php:139
+msgid "submit"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:44
+msgid "percent_complete"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:48
+msgid "priority"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:55
+msgid "summary"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:62
+msgid "details"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:73 gforgewww/pm/add_task.php:134
+msgid "hours"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:80
+msgid "start_date"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:87
+msgid "date_note"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:88
+msgid "view_calendar"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:95
+msgid "end_date"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:109
+msgid "assigned_to"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:115
+msgid "dependent"
+msgstr ""
+
+#: gforgewww/pm/add_task.php:119
+msgid "dependent_note"
+msgstr ""
+
+#: gforgewww/pm/task.php:88
+msgid "task_created_successfully"
+msgstr ""
+
+#: gforgewww/pm/task.php:120 gforgewww/pm/task.php:213
+msgid "task_updated_successfully"
+msgstr ""
+
+#: gforgewww/pm/task.php:237
+msgid "task_added_relationship"
+msgstr ""
+
+#: gforgewww/pm/task.php:278
+msgid "task_delete_failed_confirm"
+msgstr ""
+
+#: gforgewww/pm/task.php:282
+msgid "task_delete_failed"
+msgstr ""
+
+#: gforgewww/pm/task.php:284
+msgid "task_deleted_successfully"
+msgstr ""
+
+#: plugincore/include/MantisPlugin.class.php:72
+msgid "tab_title"
+msgstr "Mantis"
+
+#: plugincore/include/MantisPlugin.class.php:87
+msgid "use_mantis"
+msgstr "Gestionnaire de bogues Mantis"
+
+#: plugincore/include/MantisPlugin.class.php:108 pluginwww/admin.php:50
+#: pluginwww/admin.php:55 pluginwww/admin.php:64 pluginwww/admin.php:66
+#: pluginwww/admin.php:67
+msgid "title_admin"
+msgstr "Administration des projets Mantis"
+
+#: plugincore/include/MantisPlugin.class.php:112 pluginwww/siteAdmin.php:49
+#: pluginwww/siteAdmin.php:59 pluginwww/siteAdmin.php:95
+#: pluginwww/siteAdmin.php:102 pluginwww/siteAdmin.php:115
+#: pluginwww/siteAdmin.php:125 pluginwww/siteAdmin.php:143
+#: pluginwww/siteAdmin.php:155 pluginwww/siteAdmin.php:174
+#: pluginwww/siteAdmin.php:181 pluginwww/siteAdmin.php:189
+#: pluginwww/siteAdmin.php:203 pluginwww/siteAdmin.php:207
+#: pluginwww/siteAdmin.php:211 pluginwww/siteAdmin.php:215
+#: pluginwww/siteAdmin.php:223 pluginwww/siteAdmin.php:231
+#: pluginwww/siteAdmin.php:239 pluginwww/siteAdmin.php:247
+#: pluginwww/siteAdmin.php:252 pluginwww/siteAdmin.php:255
+#: pluginwww/siteAdmin.php:264
+msgid "title_site_admin"
+msgstr "Administration du plugin Mantis"
+
+#: plugincore/include/MantisPlugin.class.php:158
+msgid "affected_mantis_items"
+msgstr "Mes bogues Mantis assignés"
+
+#: plugincore/include/MantisPlugin.class.php:190 pluginwww/addpm.php:91
+#: pluginwww/addpm.php:104 pluginwww/admin.php:64
+#: pluginwww/createProject.php:69 pluginwww/createProjectAction.php:107
+#: pluginwww/deleteProjectAction.php:98 pluginwww/editProject.php:85
+#: pluginwww/editProjectAction.php:122 pluginwww/siteAdmin.php:49
+#: pluginwww/siteAdmin.php:59 pluginwww/siteAdmin.php:95
+#: pluginwww/siteAdmin.php:102 pluginwww/siteAdmin.php:115
+#: pluginwww/siteAdmin.php:125 pluginwww/siteAdmin.php:143
+#: pluginwww/siteAdmin.php:155 pluginwww/siteAdmin.php:174
+#: pluginwww/siteAdmin.php:181 pluginwww/siteAdmin.php:189
+#: pluginwww/siteAdmin.php:203 pluginwww/siteAdmin.php:207
+#: pluginwww/siteAdmin.php:211 pluginwww/siteAdmin.php:215
+#: pluginwww/siteAdmin.php:223 pluginwww/siteAdmin.php:231
+#: pluginwww/siteAdmin.php:239 pluginwww/siteAdmin.php:247
+#: pluginwww/siteAdmin.php:252
+msgid "database_error"
+msgstr "Une erreur est survenue lors de l'accès à la base de données."
+
+#: plugincore/include/MantisPlugin.class.php:214
+msgid "no_mantis_items_assigned"
+msgstr "Aucun bogue ne vous est confiée."
+
+#: plugincore/include/synchronizefunctions.php:47
+#, php-format
+msgid "sync_error_users"
+msgstr "Erreur lors de la synchronisation des utilisateurs du serveur Mantis %1$s."
+
+#: plugincore/include/synchronizefunctions.php:55
+msgid "sync_error_servers"
+msgstr "Erreur lors de l'obtention de la liste des serveurs Mantis."
+
+#: plugincore/include/synchronizefunctions.php:65
+#, php-format
+msgid "sync_error_project"
+msgstr "Erreur lors de la synchronisation du projet Mantis %1$s."
+
+#: plugincore/include/synchronizefunctions.php:70
+#, php-format
+msgid "sync_error_roles"
+msgstr "Erreur lors de la synchronisation des rôles du projet %1$s."
+
+#: plugincore/include/synchronizefunctions.php:78
+msgid "sync_error_projects"
+msgstr "Erreur lors de l'obtention de la liste des projets Mantis."
+
+#: plugincore/translations.php:4
+msgid "udpate_project"
+msgstr "Mettre à jour"
+
+#: plugincore/translations.php:7
+msgid "error_mantis_project"
+msgstr "Le projet Mantis n'existe pas."
+
+#: plugincore/translations.php:10
+msgid "error_mantis_project_id"
+msgstr "Le plugin_mantis_project_id n'est pas renseigné."
+
+#: plugincore/translations.php:13
+msgid "display_project"
+msgstr "Afficher"
+
+#: plugincore/translations.php:16
+msgid "no_project_available"
+msgstr "Aucun projet n'est défini."
+
+#: plugincore/translations.php:19
+msgid "title_display_error"
+msgstr "Plugin Mantis"
+
+#: plugincore/translations.php:22
+msgid "title_display_project"
+msgstr "Projet Mantis %1$s"
+
+#: plugincore/translations.php:25
+msgid "authentication_failure"
+msgstr "Une erreur est survenue lors de l'authentification sur le serveur Mantis %1$s."
+
+#: pluginwww/addpm.php:47 pluginwww/addpm.php:66
+#: pluginwww/deleteProject.php:54 pluginwww/deleteProjectAction.php:60
+#: pluginwww/editProject.php:55 pluginwww/editProjectAction.php:60
+#: pluginwww/editRoles.php:60 pluginwww/editRolesAction.php:60
+msgid "incorrect_project_id"
+msgstr "L'identifiant du projet Mantis est incorrect."
+
+#: pluginwww/addpm.php:86 pluginwww/admin.php:55
+#: pluginwww/createProject.php:54 pluginwww/createProjectAction.php:61
+#: pluginwww/deleteProject.php:74 pluginwww/deleteProjectAction.php:80
+#: pluginwww/editProject.php:75 pluginwww/editProjectAction.php:80
+#: pluginwww/editRoles.php:80 pluginwww/editRolesAction.php:80
+#: pluginwww/synchronize.php:59
+msgid "not_enabled"
+msgstr "Le plugin Mantis n'est pas activé pour ce projet."
+
+#: pluginwww/addpm.php:147
+msgid "create_task"
+msgstr ""
+
+#: pluginwww/addpm.php:152
+msgid "no_trackers"
+msgstr ""
+
+#: pluginwww/admin.php:68
+msgid "create_project"
+msgstr "Créer un projet"
+
+#: pluginwww/admin.php:71
+msgid "projects_list"
+msgstr "Projets"
+
+#: pluginwww/admin.php:79
+msgid "edit_project"
+msgstr "Editer le projet"
+
+#: pluginwww/admin.php:81 pluginwww/editProjectAction.php:145
+msgid "edit_roles"
+msgstr "Editer les rôles"
+
+#: pluginwww/admin.php:83
+msgid "delete_project"
+msgstr "Supprimer le projet"
+
+#: pluginwww/admin.php:89
+msgid "synchronize_projects"
+msgstr "Synchroniser les projets"
+
+#: pluginwww/createProject.php:49 pluginwww/createProject.php:54
+#: pluginwww/createProject.php:69 pluginwww/createProject.php:73
+#: pluginwww/createProject.php:75 pluginwww/createProject.php:77
+#: pluginwww/createProjectAction.php:56 pluginwww/createProjectAction.php:61
+#: pluginwww/createProjectAction.php:127 pluginwww/createProjectAction.php:129
+#: pluginwww/editProject.php:89
+msgid "title_create"
+msgstr "Création d'un projet Mantis"
+
+#: pluginwww/createProject.php:73 pluginwww/editProject.php:89
+msgid "no_instance_declared"
+msgstr "Aucune instance de Mantis n'est déclarée, veuillez contacter l'administrateur."
+
+#: pluginwww/createProject.php:80 pluginwww/editProject.php:96
+msgid "name"
+msgstr "Nom"
+
+#: pluginwww/createProject.php:82 pluginwww/editProject.php:98
+msgid "description"
+msgstr "Description"
+
+#: pluginwww/createProject.php:84 pluginwww/editProject.php:100
+#: pluginwww/siteAdmin.php:267
+msgid "url"
+msgstr "Instance de Mantis"
+
+#: pluginwww/createProject.php:94 pluginwww/editProject.php:117
+#: pluginwww/siteAdmin.php:299
+msgid "visibility"
+msgstr "Visibilité du projet"
+
+#: pluginwww/createProject.php:95 pluginwww/editProject.php:118
+#: pluginwww/siteAdmin.php:303
+msgid "public"
+msgstr "Public"
+
+#: pluginwww/createProject.php:96 pluginwww/editProject.php:119
+#: pluginwww/siteAdmin.php:305
+msgid "private"
+msgstr "Privé"
+
+#: pluginwww/createProject.php:98 pluginwww/editProject.php:120
+#: pluginwww/siteAdmin.php:307
+msgid "status"
+msgstr "Statut du projet"
+
+#: pluginwww/createProject.php:100 pluginwww/editProject.php:122
+#: pluginwww/siteAdmin.php:310
+msgid "development"
+msgstr "Développement"
+
+#: pluginwww/createProject.php:101 pluginwww/editProject.php:123
+#: pluginwww/siteAdmin.php:311
+msgid "release"
+msgstr "Release"
+
+#: pluginwww/createProject.php:102 pluginwww/editProject.php:124
+#: pluginwww/siteAdmin.php:312
+msgid "stable"
+msgstr "Stable"
+
+#: pluginwww/createProject.php:103 pluginwww/editProject.php:125
+#: pluginwww/siteAdmin.php:313
+msgid "obsolete"
+msgstr "Obsolete"
+
+#: pluginwww/createProject.php:105 pluginwww/editProject.php:127
+#: pluginwww/siteAdmin.php:316
+msgid "css"
+msgstr "Modèles de substitution des CSS (expressions régulières)"
+
+#: pluginwww/createProject.php:106 pluginwww/editProject.php:128
+#: pluginwww/siteAdmin.php:318
+msgid "css_info"
+msgstr "Format : &quot;modèle ==> substitut&quot; (voir le <a href=\"http://www.php.net/manual/fr/function.preg-replace.php\" target=\"_blank\">manuel PHP</a>)."
+
+#: pluginwww/createProject.php:111
+msgid "submit_create_project"
+msgstr "Créer le projet"
+
+#: pluginwww/createProject.php:114 pluginwww/createProjectAction.php:133
+#: pluginwww/deleteProject.php:92 pluginwww/deleteProjectAction.php:135
+#: pluginwww/editProject.php:136 pluginwww/editProjectAction.php:147
+#: pluginwww/editRoles.php:163 pluginwww/editRolesAction.php:111
+#: pluginwww/synchronize.php:88
+msgid "backto"
+msgstr "Retour à l'administration des projets Mantis."
+
+#: pluginwww/createProjectAction.php:79 pluginwww/editProjectAction.php:97
+msgid "create_forbidden_characters"
+msgstr "Le nom et/ou la description contiennent des caractères interdits (&quot;&lt;&quot; et &quot;&gt;&quot;)."
+
+#: pluginwww/createProjectAction.php:112 pluginwww/deleteProjectAction.php:109
+#: pluginwww/editProjectAction.php:127
+#, php-format
+msgid "mantis_error"
+msgstr "Une erreur est survenue lors de l'appel du serveur Mantis %1$s."
+
+#: pluginwww/deleteProject.php:39 pluginwww/deleteProject.php:54
+#: pluginwww/deleteProject.php:69 pluginwww/deleteProject.php:74
+#: pluginwww/deleteProject.php:81 pluginwww/deleteProjectAction.php:45
+#: pluginwww/deleteProjectAction.php:60 pluginwww/deleteProjectAction.php:75
+#: pluginwww/deleteProjectAction.php:80 pluginwww/deleteProjectAction.php:117
+#: pluginwww/deleteProjectAction.php:119
+msgid "title_delete"
+msgstr "Suppression d'un projet Mantis"
+
+#: pluginwww/deleteProject.php:39 pluginwww/deleteProjectAction.php:45
+#: pluginwww/editProject.php:40 pluginwww/editProjectAction.php:45
+#: pluginwww/editRoles.php:45 pluginwww/editRolesAction.php:45
+msgid "missing_project_id"
+msgstr "L'identifiant du projet Mantis est absent."
+
+#: pluginwww/deleteProject.php:85 pluginwww/deleteProject.php:87
+msgid "confirm_delete"
+msgstr "Confirmer la suppression"
+
+#: pluginwww/deleteProject.php:89
+msgid "submit_delete_project"
+msgstr "Supprimer le projet"
+
+#: pluginwww/deleteProjectAction.php:103 pluginwww/deleteProjectAction.php:115
+msgid "not_deleted"
+msgstr "le projet Mantis n'a pas été supprimé."
+
+#: pluginwww/deleteProjectAction.php:124
+msgid "successfully_deleted"
+msgstr "Le projet Mantis a été supprimé avec succès."
+
+#: pluginwww/editProject.php:40 pluginwww/editProject.php:55
+#: pluginwww/editProject.php:70 pluginwww/editProject.php:75
+#: pluginwww/editProject.php:85 pluginwww/editProject.php:91
+#: pluginwww/editProject.php:93 pluginwww/editProjectAction.php:45
+#: pluginwww/editProjectAction.php:60 pluginwww/editProjectAction.php:75
+#: pluginwww/editProjectAction.php:80 pluginwww/editProjectAction.php:130
+#: pluginwww/editProjectAction.php:132
+msgid "title_edit"
+msgstr "Edition d'un projet Mantis"
+
+#: pluginwww/editProject.php:114
+#, php-format
+msgid "instance_not_declared"
+msgstr "Attention : l'instance de Mantis '%1$s' est actuellement utilisée mais n'est plus déclarée, veuillez contacter l'administrateur."
+
+#: pluginwww/editProject.php:133
+msgid "submit_edit_project"
+msgstr "Mettre à jour le projet"
+
+#: pluginwww/editProjectAction.php:137
+msgid "successfully_updated"
+msgstr "Le projet Mantis a été mis à jour avec succès."
+
+#: pluginwww/editRoles.php:45 pluginwww/editRoles.php:60
+#: pluginwww/editRoles.php:75 pluginwww/editRoles.php:80
+#: pluginwww/editRoles.php:89 pluginwww/editRoles.php:93
+#: pluginwww/editRoles.php:97 pluginwww/editRoles.php:99
+#: pluginwww/editRoles.php:100 pluginwww/editRolesAction.php:45
+#: pluginwww/editRolesAction.php:60 pluginwww/editRolesAction.php:75
+#: pluginwww/editRolesAction.php:80 pluginwww/editRolesAction.php:99
+#: pluginwww/editRolesAction.php:100
+msgid "title_edit_roles"
+msgstr "Edition de la correspondance des rôles d'un projet Mantis"
+
+#: pluginwww/editRoles.php:89
+msgid "error_reading_gforge_roles"
+msgstr "Une erreur est survenue lors de la lecture des rôles GForge."
+
+#: pluginwww/editRoles.php:93
+msgid "error_reading_mantis_roles"
+msgstr "Une erreur est survenue lors de la lecture des rôles Mantis."
+
+#: pluginwww/editRoles.php:97
+msgid "error_reading_roles_mapping"
+msgstr "Une erreur est survenue lors de la lecture de la correspondance des rôles."
+
+#: pluginwww/editRoles.php:108
+msgid "gforge_role"
+msgstr "Rôle GForge"
+
+#: pluginwww/editRoles.php:109
+msgid "mantis_role"
+msgstr "Rôle Mantis"
+
+#: pluginwww/editRoles.php:129
+msgid "default_role"
+msgstr "Défaut"
+
+#: pluginwww/editRoles.php:150
+msgid "submit_edit_roles"
+msgstr "Mettre à jour la correspondance des rôles"
+
+#: pluginwww/editRoles.php:158
+msgid "undefined_gforge_roles"
+msgstr "Les rôles GForge ne sont pas définis."
+
+#: pluginwww/editRolesAction.php:103
+msgid "roles_update_success"
+msgstr "La correpondance des rôles a été mise à jour."
+
+#: pluginwww/editRolesAction.php:107
+msgid "roles_update_failure"
+msgstr "Erreur lors de la mise à jour de la correspondance des rôles."
+
+#: pluginwww/siteAdmin.php:70 pluginwww/siteAdmin.php:130
+#, php-format
+msgid "empty_url"
+msgstr "L'URL spécifiée est vide."
+
+#: pluginwww/siteAdmin.php:81
+#, php-format
+msgid "url_is_used"
+msgstr "L'instance '%1$s' est utilisée par les projets suivants :"
+
+#: pluginwww/siteAdmin.php:85
+msgid "url_is_used_item"
+msgstr "projet Mantis '%1$s' du projet '%2$s'"
+
+#: pluginwww/siteAdmin.php:120
+#, php-format
+msgid "url_already_exists"
+msgstr "L'instance '%1$s' existe déja."
+
+#: pluginwww/siteAdmin.php:259
+msgid "back_to_site_admin"
+msgstr "Retour à l'administration du plugin Mantis."
+
+#: pluginwww/siteAdmin.php:265
+msgid "mantis_urls"
+msgstr "Instances Mantis disponibles"
+
+#: pluginwww/siteAdmin.php:269
+#, php-format
+msgid "url_info"
+msgstr "URL du serveur Mantis, par exemple \"http://%1$s/mantis/\""
+
+#: pluginwww/siteAdmin.php:279
+msgid "submit_modify_url"
+msgstr "Modifier"
+
+#: pluginwww/siteAdmin.php:284
+msgid "submit_remove_url"
+msgstr "Supprimer"
+
+#: pluginwww/siteAdmin.php:293
+msgid "submit_add_url"
+msgstr "Ajouter"
+
+#: pluginwww/siteAdmin.php:297
+msgid "mantis_settings"
+msgstr "Paramètres initiaux"
+
+#: pluginwww/siteAdmin.php:328
+msgid "submit_mantis_settings"
+msgstr "Sauvegarder"
+
+#: pluginwww/siteAdmin.php:329
+msgid "reset_mantis_settings"
+msgstr "Réinitialiser"
+
+#: pluginwww/synchronize.php:54 pluginwww/synchronize.php:59
+#: pluginwww/synchronize.php:66
+msgid "title_sync"
+msgstr "Synchroniser les projets Mantis"
+
+#: pluginwww/synchronize.php:69
+msgid "sync_success"
+msgstr "Les projets Mantis ont été synchronisé avec succès."
+
+#: pluginwww/synchronize.php:73
+msgid "sync_failed"
+msgstr "La synchronisation des projet Mantis a échoué."

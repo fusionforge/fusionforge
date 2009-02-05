@@ -1,0 +1,296 @@
+#: plugincore/include/functions.php:295
+msgid "publish_error_class"
+msgstr "Erreur lors de l'instanciation de la classe pour el fichier '%1$s' du plugin '%2$s' pour le projet '%3$s' du groupe '%4$s'"
+
+#: plugincore/include/functions.php:303
+msgid "publish_error_filename"
+msgstr "Erreur lors de l'obtention du nom du fichier '%1$s' du plugin '%2$s' pour le projet '%3$s' du groupe '%4$s'"
+
+#: plugincore/include/functions.php:311
+msgid "publish_error_calling_upload"
+msgstr "Erreurr lors de l'appel de l'upload à l'URL '%1$supload.php' avec le fichier '%2$s/%3$s' du plugin '%4$s' pour le projet '%5$s' du groupe '%6$s'"
+
+#: plugincore/include/functions.php:319 plugincore/include/functions.php:435
+msgid "publish_error_remote"
+msgstr "Erreur distante pour le projet '%1$s' du groupe '%2$s' : %3$s"
+
+#: plugincore/include/functions.php:360 plugincore/include/functions.php:401
+msgid "publish_error_calling_step_2"
+msgstr "Erreur lors de l'appel de l'étape 2 à l'URL '%1$sstep_2.php' pour le projet '%2$s' du groupe '%3$s'"
+
+#: plugincore/include/functions.php:378
+#, php-format
+msgid "publish_error_expat_step_2"
+msgstr "Erreur lors de l'interprétation de la réponse de l'étape 2 à la ligne %1$s, colonne %2$s (code %3$s: %4$s) pour le projet '%5$s' du groupe '%6$s'"
+
+#: plugincore/include/functions.php:389
+msgid "publish_error_parsing_step_2"
+msgstr "Erreur lors de l'interprétation de la réponse de l'étape 2 pour le projet '%1$s' du groupe '%2$s'"
+
+#: plugincore/include/functions.php:423
+msgid "publish_error_publish_file"
+msgstr "Erreur lors de la publication du fichier '%1$s' du plugin '%2$s' pour le projet '%3$s' du groupe '%4$s'"
+
+#: plugincore/include/functions.php:469
+msgid "publish_error_getting_params"
+msgstr "Erreur lors de l'obtention des paramètres du projet '%1$s' du groupe '%2$s'"
+
+#: plugincore/include/functions.php:477
+msgid "publish_error_getting_xml"
+msgstr "Erreur lors de l'obtention du flux XML du projet '%1$s' du groupe '%2$s'"
+
+#: plugincore/include/functions.php:490
+msgid "publish_error_calling_auth"
+msgstr "Erreur lors de l'authentication sur l'URL '%1$sauth.php' pour le projet '%2$s' du groupe '%3$s'"
+
+#: plugincore/include/functions.php:498
+msgid "publish_error_calling_step_1"
+msgstr "Erreur lors de l'appel de l'étape 1 sur l'URL '%1$sstep_1.php' pour le projet '%2$s' du groupe '%3$s'"
+
+#: plugincore/include/functions.php:513
+#, php-format
+msgid "publish_error_expat_step_1"
+msgstr "Erreur lors de l'interprétation de la réponse de l'étape 1 à la ligne %1$s, colonne %2$s (code %3$s: %4$s) pour le projet '%5$s' du groupe '%6$s'"
+
+#: plugincore/include/functions.php:523
+msgid "publish_error_parsing_step_1"
+msgstr "Erreur lors de l'interprétation de la réponse de l'étape 1 pour le projet '%1$s' du groupe '%2$s'"
+
+#: plugincore/include/functions.php:540
+msgid "publish_error_publish_files"
+msgstr "Erreur lors de la publication des fichiers du projet '%1$s' du groupe '%2$s'"
+
+#: plugincore/include/novapubPlugin.class.php:59
+msgid "use_novapub"
+msgstr "Publication NovaForge"
+
+#: plugincore/include/novapubPlugin.class.php:80 pluginwww/admin.php:64
+#: pluginwww/admin.php:65
+msgid "title_admin"
+msgstr "Administration des projets de publication"
+
+#: plugincore/include/novapubPlugin.class.php:84 pluginwww/site_admin.php:50
+#: pluginwww/site_admin.php:60 pluginwww/site_admin.php:76
+#: pluginwww/site_admin.php:86 pluginwww/site_admin.php:122
+#: pluginwww/site_admin.php:129 pluginwww/site_admin.php:136
+#: pluginwww/site_admin.php:139 pluginwww/site_admin.php:148
+msgid "title_site_admin"
+msgstr "Administration du plugin de publication"
+
+#: plugincore/translations.php:4
+msgid "submit_deleet_url"
+msgstr ""
+
+#: plugincore/translations.php:7 pluginwww/delete.php:77
+#: pluginwww/delete.php:79
+msgid "confirm_delete"
+msgstr "Confirmer la suppression"
+
+#: plugincore/translations.php:10
+msgid "publish_error_loop_detected"
+msgstr "Boucle détectéepour le fichier '%1$s' du plugin '%2$s' pour le projet '%3$s' du groupe '%4$s'"
+
+#: pluginwww/admin.php:48 pluginwww/admin.php:53 pluginwww/admin.php:62
+#: pluginwww/create.php:48 pluginwww/create.php:53 pluginwww/create.php:62
+#: pluginwww/create.php:66 pluginwww/create.php:70 pluginwww/create.php:74
+#: pluginwww/create.php:76 pluginwww/create.php:78
+#: pluginwww/create_action.php:48 pluginwww/create_action.php:53
+#: pluginwww/create_action.php:66 pluginwww/create_action.php:68
+#: pluginwww/create_action.php:70
+msgid "title_create"
+msgstr "Création d'un projet de publication"
+
+#: pluginwww/admin.php:53 pluginwww/create.php:53
+#: pluginwww/create_action.php:53 pluginwww/delete.php:65
+#: pluginwww/delete_action.php:65 pluginwww/edit.php:65
+#: pluginwww/edit_action.php:65
+msgid "not_enabled"
+msgstr "Le plugin de publication n'est pas activé pour ce projet."
+
+#: pluginwww/admin.php:62 pluginwww/create.php:62
+#: pluginwww/create_action.php:66 pluginwww/edit.php:74
+#: pluginwww/site_admin.php:50 pluginwww/site_admin.php:60
+#: pluginwww/site_admin.php:76 pluginwww/site_admin.php:86
+#: pluginwww/site_admin.php:122 pluginwww/site_admin.php:129
+#: pluginwww/site_admin.php:136
+msgid "database_error"
+msgstr "Erreur lors de l'accès à la base de données."
+
+#: pluginwww/admin.php:66
+msgid "create_project"
+msgstr "Créer un projet"
+
+#: pluginwww/admin.php:69
+msgid "projects_list"
+msgstr "Projets"
+
+#: pluginwww/admin.php:77
+msgid "edit_project"
+msgstr "Editer le projet"
+
+#: pluginwww/admin.php:79
+msgid "delete_project"
+msgstr "Supprimer le projet"
+
+#: pluginwww/create.php:66 pluginwww/edit.php:78
+msgid "no_instance_declared"
+msgstr "Aucune instance de publication n'est déclarée, veuillez contacter l'administrateur."
+
+#: pluginwww/create.php:70 pluginwww/edit.php:82
+msgid "error_reading_gforge_roles"
+msgstr "Erreur lors de la lecture des rôles GForge."
+
+#: pluginwww/create.php:74 pluginwww/edit.php:86
+msgid "undefined_gforge_roles"
+msgstr "Les rôles GForge ne sont pas définis."
+
+#: pluginwww/create.php:81 pluginwww/edit.php:93
+msgid "project_name"
+msgstr "Nom du projet"
+
+#: pluginwww/create.php:83 pluginwww/edit.php:95
+msgid "project_instance"
+msgstr "Instance de publication"
+
+#: pluginwww/create.php:92 pluginwww/edit.php:112
+msgid "project_role"
+msgstr "Rôle de publication"
+
+#: pluginwww/create.php:103
+msgid "submit_create"
+msgstr "Créer le projet"
+
+#: pluginwww/create.php:106 pluginwww/create_action.php:92
+#: pluginwww/delete.php:84 pluginwww/delete_action.php:87
+#: pluginwww/edit.php:133 pluginwww/edit_action.php:87
+msgid "back_to_admin"
+msgstr "Retour à l'administration des projets de publication."
+
+#: pluginwww/create_action.php:77
+#, php-format
+msgid "project_already_exists"
+msgstr "Un projet de publication existe déjà pour le nom '%1$s'."
+
+#: pluginwww/create_action.php:83
+#, php-format
+msgid "create_project_success"
+msgstr "Le projet de publication '%1$s' a été créé."
+
+#: pluginwww/create_action.php:87
+#, php-format
+msgid "create_project_failure"
+msgstr "Erreur lors de la création du projet de publication '%1$s'."
+
+#: pluginwww/delete.php:37 pluginwww/delete.php:45 pluginwww/delete.php:60
+#: pluginwww/delete.php:65 pluginwww/delete.php:72 pluginwww/delete.php:74
+#: pluginwww/delete_action.php:37 pluginwww/delete_action.php:45
+#: pluginwww/delete_action.php:60 pluginwww/delete_action.php:65
+#: pluginwww/delete_action.php:72 pluginwww/delete_action.php:74
+msgid "title_delete"
+msgstr "Supprimer le projet"
+
+#: pluginwww/delete.php:37 pluginwww/delete_action.php:37
+#: pluginwww/edit.php:37 pluginwww/edit_action.php:37
+msgid "missing_project_id"
+msgstr "L'identifiant du projet de publication est absent."
+
+#: pluginwww/delete.php:45 pluginwww/delete_action.php:45
+#: pluginwww/edit.php:45 pluginwww/edit_action.php:45
+msgid "incorrect_project_id"
+msgstr "L'identifiant du projet de publication est incorrect."
+
+#: pluginwww/delete.php:81
+msgid "submit_delete"
+msgstr "Supprimer le projet"
+
+#: pluginwww/delete_action.php:79
+#, php-format
+msgid "delete_project_success"
+msgstr "Le projet de publication '%1$s' a été supprimé."
+
+#: pluginwww/delete_action.php:83
+#, php-format
+msgid "delete_project_failure"
+msgstr "Erreur lors de la suppression du projet de publication '%1$s'."
+
+#: pluginwww/edit.php:37 pluginwww/edit.php:45 pluginwww/edit.php:60
+#: pluginwww/edit.php:65 pluginwww/edit.php:74 pluginwww/edit.php:78
+#: pluginwww/edit.php:82 pluginwww/edit.php:86 pluginwww/edit.php:88
+#: pluginwww/edit.php:90 pluginwww/edit_action.php:37
+#: pluginwww/edit_action.php:45 pluginwww/edit_action.php:60
+#: pluginwww/edit_action.php:65 pluginwww/edit_action.php:72
+#: pluginwww/edit_action.php:74
+msgid "title_edit"
+msgstr "Edition d'un projet de publication"
+
+#: pluginwww/edit.php:109
+#, php-format
+msgid "instance_not_declared"
+msgstr "Attention : l'instance de publication '%1$s' est actuellement utilisée mais n'est plus déclarée, veuillez contacter l'administrateur."
+
+#: pluginwww/edit.php:126
+#, php-format
+msgid "role_not_declared"
+msgstr "Attention : le rôle '%1$s' est actuellement utilisé mais n'est plus déclaré."
+
+#: pluginwww/edit.php:130
+msgid "submit_edit"
+msgstr "Mettre à jour le projet"
+
+#: pluginwww/edit_action.php:79
+#, php-format
+msgid "edit_project_success"
+msgstr "Le projet de publication '%1$s' a été mis à jour."
+
+#: pluginwww/edit_action.php:83
+#, php-format
+msgid "edit_project_failure"
+msgstr "Erreur lors de la mise à jour du projet de publication '%1$s'."
+
+#: pluginwww/site_admin.php:55
+#, php-format
+msgid "url_already_exists"
+msgstr "L'instance '%1$s' existe déjà."
+
+#: pluginwww/site_admin.php:65 pluginwww/site_admin.php:97
+#, php-format
+msgid "empty_url"
+msgstr "L'URL spécifiée est vide."
+
+#: pluginwww/site_admin.php:108
+#, php-format
+msgid "url_is_used"
+msgstr "L'instance '%1$s' est utilisée par les projets suivants :"
+
+#: pluginwww/site_admin.php:112
+msgid "url_is_used_item"
+msgstr "projet de publication '%1$s' du projet '%2$s'"
+
+#: pluginwww/site_admin.php:143
+msgid "back_to_site_admin"
+msgstr "Retour à l'administration du plugin de publication."
+
+#: pluginwww/site_admin.php:149
+msgid "available_urls"
+msgstr "Instances de publication disponibles"
+
+#: pluginwww/site_admin.php:151
+msgid "url"
+msgstr "Instance de publication"
+
+#: pluginwww/site_admin.php:153
+#, php-format
+msgid "url_info"
+msgstr "URL du serveur de publication, par exemple \"http://%1$s/novaforge-publisher\""
+
+#: pluginwww/site_admin.php:163
+msgid "submit_update_url"
+msgstr "Modifier"
+
+#: pluginwww/site_admin.php:168
+msgid "submit_delete_url"
+msgstr "Supprimer"
+
+#: pluginwww/site_admin.php:177
+msgid "submit_add_url"
+msgstr "Ajouter"

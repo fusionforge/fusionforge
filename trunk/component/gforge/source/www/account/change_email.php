@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  *
- * @version   $Id: change_email.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: change_email.php 6657 2008-10-28 20:49:08Z aljeux $
  *
  * This file is part of GForge.
  *
@@ -67,7 +67,7 @@ Please visit the following URL to complete the email change:
 
  -- the %1$s staff'), 
 					 $GLOBALS['sys_name'],
-					 util_make_url ('/account/change_email-complete.php?ch=_'.$confirm_hash), ));
+					 util_make_url ('/account/change_email-complete.php?ch=_'.$confirm_hash)));
 
 	util_send_message($newemail,sprintf(_('%1$s Verification'), $GLOBALS['sys_name']),$message);
 

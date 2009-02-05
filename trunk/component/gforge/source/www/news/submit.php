@@ -6,7 +6,7 @@
  * The rest Copyright 2002-2004 (c) GForge Team
  * http://gforge.org/
  *
- * @version   $Id: submit.php 6600 2008-09-01 20:56:10Z aljeux $
+ * @version   $Id: submit.php 6631 2008-10-06 18:53:32Z aljeux $
  *
  * This file is part of GForge.
  *
@@ -118,6 +118,7 @@ if (session_loggedin()) {
 		<p>
 		<strong>'._('Details').':</strong>'.notepad_button('document.forms[1].details').utils_requiredField().'<br />';
 	
+	$GLOBALS['editor_was_set_up']=false;
 	$params = array() ;
 	$params['name'] = 'details';
 	$params['width'] = "600";
@@ -125,7 +126,7 @@ if (session_loggedin()) {
 	$params['body'] = "";
 	$params['group'] = $group_id;
 	plugin_hook("text_editor",$params);
-	if (!isset($GLOBALS['editor_was_set_up'])) {
+	if (!$GLOBALS['editor_was_set_up']) {
 		//if we don't have any plugin for text editor, display a simple textarea edit box
 		echo '<textarea name="details" rows="5" cols="50"></textarea><br />';
 	}

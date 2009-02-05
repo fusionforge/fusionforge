@@ -106,7 +106,7 @@ class Theme extends Layout {
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="<?php echo _('en'); ?>">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo _('en') ?>" lang="<?php echo _('en'); ?>">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -441,6 +441,13 @@ if ($sys_show_source) {
             $selected=array_search('/reporting/',$TABS_DIRS);
         } elseif (strstr(getStringFromServer('REQUEST_URI'),'/admin/') && $user_is_super) {
             $selected=array_search('/admin/',$TABS_DIRS);
+        } elseif (count($PLUGIN_TABS_DIRS)>0) {
+            foreach ($PLUGIN_TABS_DIRS as $PLUGIN_TABS_DIRS_VALUE) {
+               if (strstr(getStringFromServer('REQUEST_URI'),$PLUGIN_TABS_DIRS_VALUE)) {
+                   $selected=array_search($PLUGIN_TABS_DIRS_VALUE,$TABS_DIRS);
+                   break;
+               }
+            }
         } else {
             $selected=0;
         }

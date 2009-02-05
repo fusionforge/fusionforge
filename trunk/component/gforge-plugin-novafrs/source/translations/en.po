@@ -1,0 +1,425 @@
+#: plugincore/include/AuthView.class.php:36
+msgid "authLabel1"
+msgstr "None"
+
+#: plugincore/include/AuthView.class.php:37
+msgid "authLabel2"
+msgstr "Read"
+
+#: plugincore/include/AuthView.class.php:38
+msgid "authLabel3"
+msgstr "Write"
+
+#: plugincore/include/AuthView.class.php:39
+msgid "authLabel4"
+msgstr "Delete"
+
+#: plugincore/include/AuthView.class.php:51
+msgid "propagateAuth"
+msgstr "Propagate the autorization to the children ?"
+
+#: plugincore/include/AuthView.class.php:221
+msgid "infoDefaultAuth"
+msgstr "* The authorizations preceded by an asterisk are the default authorizations"
+
+#: plugincore/include/AuthView.class.php:222
+#: plugincore/include/FileCardView.class.php:368
+msgid "submit"
+msgstr "Submit information"
+
+#: plugincore/include/File.class.php:133 plugincore/include/File.class.php:202
+msgid "fr_unique"
+msgstr "A file with the same name already exists in the branch."
+
+#: plugincore/include/File.class.php:197 plugincore/include/File.class.php:654
+msgid "error_min_title_length"
+msgstr "Title must be at least 5 characters"
+
+#: plugincore/include/File.class.php:289 plugincore/include/File.class.php:310
+#: plugincore/include/File.class.php:345
+msgid "invalid_frid"
+msgstr "File: invalid ID"
+
+#: plugincore/include/FileCardView.class.php:89
+msgid "displayHistory"
+msgstr "Display history"
+
+#: plugincore/include/FileCardView.class.php:94
+#: plugincore/include/FileCardView.class.php:259
+msgid "date"
+msgstr "Date"
+
+#: plugincore/include/FileCardView.class.php:95
+#: plugincore/include/FileCardView.class.php:213 pluginwww/chronos.php:125
+msgid "version"
+msgstr "Version"
+
+#: plugincore/include/FileCardView.class.php:96
+#: plugincore/include/FileCardView.class.php:228
+#: plugincore/include/FileTreeView.class.php:176 pluginwww/chronos.php:134
+msgid "status"
+msgstr "Status"
+
+#: plugincore/include/FileCardView.class.php:97
+#: plugincore/include/FileCardView.class.php:191 pluginwww/chronos.php:110
+msgid "title"
+msgstr "Title"
+
+#: plugincore/include/FileCardView.class.php:123
+#: plugincore/include/FileTreeView.class.php:245 pluginwww/chronos.php:62
+msgid "viewCard"
+msgstr "view card"
+
+#: plugincore/include/FileCardView.class.php:180
+msgid "file"
+msgstr "File"
+
+#: plugincore/include/FileCardView.class.php:182
+msgid "viewURL"
+msgstr "View File URL"
+
+#: plugincore/include/FileCardView.class.php:192 pluginwww/chronos.php:113
+msgid "author"
+msgstr "Author"
+
+#: plugincore/include/FileCardView.class.php:197
+#: plugincore/include/FileCardView.class.php:261 pluginwww/chronos.php:116
+msgid "description"
+msgstr "Description"
+
+#: plugincore/include/FileCardView.class.php:202 pluginwww/chronos.php:119
+msgid "writingDate"
+msgstr "Writing date"
+
+#: plugincore/include/FileCardView.class.php:206 pluginwww/chronos.php:128
+msgid "frtype"
+msgstr "File type"
+
+#: plugincore/include/FileCardView.class.php:214 pluginwww/chronos.php:131
+msgid "reference"
+msgstr "Reference"
+
+#: plugincore/include/FileCardView.class.php:220
+#: plugincore/include/utils.php:119
+msgid "language"
+msgstr "Language"
+
+#: plugincore/include/FileCardView.class.php:235
+msgid "state"
+msgstr "State"
+
+#: plugincore/include/FileCardView.class.php:240
+msgid "delete_fr"
+msgstr "Delete this file"
+
+#: plugincore/include/FileCardView.class.php:250
+msgid "observation"
+msgstr "Observations"
+
+#: plugincore/include/FileCardView.class.php:260
+msgid "name"
+msgstr "Name"
+
+#: plugincore/include/FileCardView.class.php:285
+msgid "group"
+msgstr "Group that file belongs in"
+
+#: plugincore/include/FileCardView.class.php:313
+msgid "upload_url"
+msgstr "Specify an outside URL where the file will be referenced"
+
+#: plugincore/include/FileCardView.class.php:320
+msgid "upload"
+msgstr "OPTIONAL: Upload new file"
+
+#: plugincore/include/FileCardView.class.php:327
+msgid "archive"
+msgstr "Archive previous version"
+
+#: plugincore/include/FileCardView.class.php:331
+#, php-format
+msgid "upload_ftp"
+msgstr "OR choose one form FTP %1$s"
+
+#: plugincore/include/FileCardView.class.php:344
+msgid "upload_file"
+msgstr "Upload File"
+
+#: plugincore/include/FileCardView.class.php:352
+msgid "or_upload_url"
+msgstr "OR specify an outside URL where the file will be referenced"
+
+#: plugincore/include/FileCardView.class.php:390 pluginwww/admin/index.php:258
+msgid "delete_warning"
+msgstr "You are about to permanently delete this file."
+
+#: plugincore/include/FileCardView.class.php:392 pluginwww/admin/index.php:260
+#: pluginwww/admin/index.php:280
+msgid "sure"
+msgstr "I'm Sure."
+
+#: plugincore/include/FileCardView.class.php:394 pluginwww/admin/index.php:263
+#: pluginwww/admin/index.php:282
+msgid "delete"
+msgstr "Delete"
+
+#: plugincore/include/FileFactory.class.php:191
+msgid "no_frs"
+msgstr "No file found"
+
+#: plugincore/include/FileGroupFrs.class.php:109
+msgid "group_unique"
+msgstr "A branch with the same name already exists in the branch."
+
+#: plugincore/include/FileGroupFrs.class.php:128
+msgid "name_required"
+msgstr "Group: name is required"
+
+#: plugincore/include/FileGroupFrs.class.php:136
+#: plugincore/include/FileGroupFrs.class.php:273
+msgid "invalid_parent_id"
+msgstr "Group: invalid parent ID"
+
+#: plugincore/include/FileGroupFrs.class.php:199
+msgid "invalid_id"
+msgstr "Group: invalid ID"
+
+#: plugincore/include/FileTreeView.class.php:173
+msgid "head_file"
+msgstr "File"
+
+#: plugincore/include/FileTreeView.class.php:174
+msgid "head_type"
+msgstr "Type"
+
+#: plugincore/include/FileTreeView.class.php:175
+msgid "head_size"
+msgstr "Size"
+
+#: plugincore/include/FileTreeView.class.php:177
+msgid "head_modif_by"
+msgstr "Modified by"
+
+#: plugincore/include/FileTreeView.class.php:178
+msgid "head_the"
+msgstr "the"
+
+#: plugincore/include/novafrsPlugin.class.php:92
+msgid "tab_title"
+msgstr "Files"
+
+#: plugincore/include/novafrsPlugin.class.php:106
+msgid "use_novafrs"
+msgstr "NovaForge file manager"
+
+#: plugincore/include/utils.php:49 pluginwww/admin/auth.php:98
+#: pluginwww/admin/index.php:57 pluginwww/admin/index.php:92
+#: pluginwww/admin/index.php:115 pluginwww/admin/index.php:297
+#: pluginwww/admin/index.php:302 pluginwww/card.php:44 pluginwww/card.php:49
+#: pluginwww/card.php:106 pluginwww/card.php:120 pluginwww/card.php:128
+#: pluginwww/card.php:271 pluginwww/card.php:275 pluginwww/card.php:289
+#: pluginwww/card.php:291 pluginwww/card.php:298 pluginwww/card.php:313
+#: pluginwww/card.php:331 pluginwww/card.php:358 pluginwww/index.php:40
+#: pluginwww/index.php:45
+msgid "error"
+msgstr ""
+
+#: plugincore/include/utils.php:49
+msgid "turned_off"
+msgstr "This project has turned off the fr Manager"
+
+#: plugincore/include/utils.php:55
+msgid "view_fr"
+msgstr "View Files"
+
+#: plugincore/include/utils.php:57
+msgid "menuChrono"
+msgstr "Chronos"
+
+#: plugincore/include/utils.php:69
+msgid "submit_new"
+msgstr "Submit new file"
+
+#: plugincore/include/utils.php:74
+msgid "copyBranch"
+msgstr "Copy branch"
+
+#: plugincore/include/utils.php:76
+msgid "adminDir"
+msgstr "Manage branches"
+
+#: plugincore/include/utils.php:85
+msgid "manageAuth"
+msgstr "Manage authorizations"
+
+#: plugincore/include/utils.php:121
+msgid "all_languages"
+msgstr "All Languages"
+
+#: plugincore/include/utils.php:129
+msgid "go"
+msgstr ""
+
+#: plugincore/include/utils.php:192
+msgid "add_frs"
+msgstr "[Add file here]"
+
+#: pluginwww/admin/auth.php:125 pluginwww/admin/copy.php:47
+#: pluginwww/admin/index.php:137 pluginwww/admin/index.php:216
+#: pluginwww/admin/index.php:253 pluginwww/admin/index.php:273
+#: pluginwww/admin/index.php:309
+msgid "title_admin"
+msgstr "File manager administration"
+
+#: pluginwww/admin/copy.php:64
+msgid "copyBranchToCopy"
+msgstr "Branch to copy"
+
+#: pluginwww/admin/copy.php:72
+msgid "copyBranchName"
+msgstr "New branch name"
+
+#: pluginwww/admin/index.php:57 pluginwww/admin/index.php:92
+#: pluginwww/card.php:120 pluginwww/card.php:275
+msgid "noWriteAuth"
+msgstr "You don't have the rights to edit or add a file in this branch."
+
+#: pluginwww/admin/index.php:82 pluginwww/card.php:262
+msgid "update_successful"
+msgstr ""
+
+#: pluginwww/admin/index.php:99
+msgid "create_successful"
+msgstr ""
+
+#: pluginwww/admin/index.php:102 pluginwww/card.php:378
+#: pluginwww/chronos.php:91
+msgid "deleted"
+msgstr "Deleted"
+
+#: pluginwww/admin/index.php:115 pluginwww/card.php:358
+msgid "noDeleteAuth"
+msgstr "You don't have the rights to delete a file in this branch."
+
+#: pluginwww/admin/index.php:139
+msgid "section_admin_groups"
+msgstr "Manage groups"
+
+#: pluginwww/admin/index.php:155
+msgid "group_id"
+msgstr "ID"
+
+#: pluginwww/admin/index.php:156 pluginwww/admin/index.php:223
+msgid "group_name"
+msgstr "Group name"
+
+#: pluginwww/admin/index.php:166
+msgid "error_no_groups_defined"
+msgstr "No group defined"
+
+#: pluginwww/admin/index.php:169
+msgid "add_group"
+msgstr "Add a group"
+
+#: pluginwww/admin/index.php:173
+msgid "new_group_name"
+msgstr "New Group Name"
+
+#: pluginwww/admin/index.php:178
+msgid "new_group_parent"
+msgstr "Belongs to"
+
+#: pluginwww/admin/index.php:183
+msgid "add"
+msgstr ""
+
+#: pluginwww/admin/index.php:187 pluginwww/admin/index.php:238
+msgid "editgroups_description"
+msgstr "Group name will be used as a title, so it should be formatted correspondingly."
+
+#: pluginwww/admin/index.php:218
+msgid "edit_group"
+msgstr "Edit a group"
+
+#: pluginwww/admin/index.php:228
+msgid "group_parent"
+msgstr "Belongs to"
+
+#: pluginwww/admin/index.php:234
+msgid "edit"
+msgstr ""
+
+#: pluginwww/admin/index.php:243
+msgid "delete_group"
+msgstr "Delete this branch"
+
+#: pluginwww/admin/index.php:261
+msgid "really_sure"
+msgstr "I'm Really Sure."
+
+#: pluginwww/admin/index.php:278
+msgid "delete_warning_group"
+msgstr "You are about to permanently delete this branch."
+
+#: pluginwww/admin/index.php:312
+#, php-format
+msgid "section_admin_main"
+msgstr "Project %1$s"
+
+#: pluginwww/admin/index.php:314
+msgid "add_edit_frgroups"
+msgstr "Add/edit groups"
+
+#: pluginwww/admin/index.php:319
+msgid "error_no_frs"
+msgstr "This project has no visible files"
+
+#: pluginwww/card.php:128
+#, php-format
+msgid "error_invalid_file_attack"
+msgstr "Invalid file attack attempt %1$s"
+
+#: pluginwww/card.php:134
+msgid "bad_filemane"
+msgstr "Filename does not match. Please submit the same file."
+
+#: pluginwww/card.php:153
+msgid "error_on_update"
+msgstr ""
+
+#: pluginwww/card.php:271
+msgid "no_valid_group"
+msgstr "No valid file Group was selected"
+
+#: pluginwww/card.php:289
+msgid "error_blank_file"
+msgstr "Error getting blank file"
+
+#: pluginwww/card.php:298
+msgid "invalid_filename"
+msgstr ""
+
+#: pluginwww/card.php:336
+msgid "submitted_successfully"
+msgstr "file submitted sucessfully"
+
+#: pluginwww/card.php:342 pluginwww/card.php:384 pluginwww/card.php:409
+#: pluginwww/chronos.php:44 pluginwww/index.php:88
+msgid "title_display"
+msgstr "File Manager"
+
+#: pluginwww/chronos.php:107
+msgid "chrono"
+msgstr "Chrono"
+
+#: pluginwww/chronos.php:122
+msgid "updateDate"
+msgstr "Update date"
+
+#: pluginwww/view.php:83
+msgid "no_file_data_title"
+msgstr "No file data"
+
+#: pluginwww/view.php:83
+msgid "no_file_data_text"
+msgstr "No file to display - invalid or inactive file number"

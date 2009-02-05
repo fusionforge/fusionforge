@@ -3,7 +3,7 @@
 %define dbuser			gforge
 
 %if %{?hostname:0}%{!?hostname:1}
-	%define hostname localhost
+	%define hostname `hostname`
 %endif
 %if %{?sitename:0}%{!?sitename:1}
 	%define sitename MyForge
@@ -22,7 +22,7 @@
 
 Summary: GForge Collaborative Development Environment
 Name: gforge
-Version: 4.1
+Version: 4.7
 Release: %{release}
 BuildArch: noarch
 License: GPL
@@ -36,7 +36,16 @@ Patch1000: gforge-4.0-deb_rpm.patch
 AutoReqProv: off
 Requires: /bin/sh, /bin/bash
 Requires: perl, perl-DBI, perl-HTML-Parser
-Requires: gforge-lib-jpgraph
+Requires: cronolog
+Requires: php-jpgraph php-gd
+#update sys_path_to_jpgraph in gforge.conf if you remove this line
+#Requires: /var/www/jpgraph/jpgraph.php
+Requires: libnss-pgsql >= 1.4
+Requires: mailman
+Requires: nscd
+Requires: gettext
+ 
+BuildRequires: perl
 
 # RedHat specific - distribution specific (fc = Fedora Core (or RHEL4 and Centos 4) - rh9 = RHL 9 - el3 = RHEL 3 or CentOS 3)
 %if "%{_vendor}" == "redhat"
@@ -114,7 +123,7 @@ web-based administration.
 
 %define GFORGE_DIR		%{_datadir}/gforge
 %define GFORGE_CONF_DIR		%{_sysconfdir}/gforge
-%define GFORGE_LANG_DIR		%{GFORGE_CONF_DIR}/languages-local
+%define GFORGE_LANG_DIR         %{_libdir}/gforge/translations
 %define GFORGE_LIB_DIR		%{_libdir}/gforge/lib
 %define GFORGE_DB_DIR		%{_libdir}/gforge/db
 %define GFORGE_BIN_DIR		%{_libdir}/gforge/bin
@@ -148,7 +157,6 @@ install -m 755 -d $RPM_BUILD_ROOT/%{UPLOAD_DIR}
 install -m 755 -d $RPM_BUILD_ROOT/%{CACHE_DIR}
 install -m 755 -d $RPM_BUILD_ROOT/%{SCM_TARBALLS_DIR}
 install -m 755 -d $RPM_BUILD_ROOT/%{PLUGINS_LIB_DIR}
-
 install -m 755 -d $RPM_BUILD_ROOT/%{SBIN_DIR}
 install -m 755 -d $RPM_BUILD_ROOT/%{HTTPD_CONF_DIR}/conf.d
 install -m 755 -d $RPM_BUILD_ROOT/%{CROND_DIR}
@@ -159,6 +167,8 @@ for i in common cronjobs etc rpm-specific utils www ; do
 done
 install -m 750 setup $RPM_BUILD_ROOT/%{GFORGE_DIR}/
 chmod 755 $RPM_BUILD_ROOT/%{GFORGE_DIR}/utils/fill-in-the-blanks.pl
+chmod 755 $RPM_BUILD_ROOT/%{GFORGE_DIR}/utils/install-nsspgsql.sh
+chmod 755 $RPM_BUILD_ROOT/%{GFORGE_DIR}/www/scm/viewvc/bin/cgi/viewvc.cgi
 
 cp -rp db/. $RPM_BUILD_ROOT/%{GFORGE_DB_DIR}/
 cp -p deb-specific/sf-2.6-complete.sql $RPM_BUILD_ROOT/%{GFORGE_DB_DIR}/
@@ -171,13 +181,14 @@ for i in db-upgrade.pl register-plugin unregister-plugin register-theme unregist
 done
 
 # configuring apache
-install -m 644 rpm-specific/conf/vhost.conf $RPM_BUILD_ROOT/%{HTTPD_CONF_DIR}/conf.d/gforge.conf
+## use post install setup script instead
+install -m 644 rpm-specific/httpd.d/gforge.conf $RPM_BUILD_ROOT/%{HTTPD_CONF_DIR}/conf.d/gforge.conf
 
 # configuring GForge
 install -m 600 rpm-specific/conf/gforge.conf $RPM_BUILD_ROOT/%{GFORGE_CONF_DIR}/
 install -m 750 rpm-specific/scripts/gforge-config $RPM_BUILD_ROOT/%{SBIN_DIR}/
-if ls rpm-specific/languages/*.tab &> /dev/null; then
-	cp rpm-specific/languages/*.tab $RPM_BUILD_ROOT/%{GFORGE_LANG_DIR}/
+if ls translations/*.po &> /dev/null; then
+        cp translations/*.po $RPM_BUILD_ROOT/%{GFORGE_LANG_DIR}/
 fi
 cp -rp rpm-specific/custom $RPM_BUILD_ROOT/%{GFORGE_CONF_DIR}
 
@@ -186,14 +197,15 @@ install -m 664 rpm-specific/cron.d/gforge $RPM_BUILD_ROOT/%{CROND_DIR}/
 
 %pre
 %startpostgresql
-if su -l postgres -s /bin/sh -c 'psql template1 -c "SHOW tcpip_socket;"' | grep " off" &> /dev/null; then
-	echo "###"
-	echo "# You should set tcpip_socket = true in your /var/lib/pgsql/data/postgresql.conf"
-	echo "# before installing GForge and restart PostgreSQL."
-	echo "# Then you should be able to install GForge RPM."
-	echo "###"
-	exit 1
-fi
+#tcpip_socket is no more use with postgres 8.x
+#if su -l postgres -s /bin/sh -c 'psql template1 -c "SHOW tcpip_socket;"' | grep " off" &> /dev/null; then
+#	echo "###"
+#	echo "# You should set tcpip_socket = true in your /var/lib/pgsql/data/postgresql.conf"
+#	echo "# before installing GForge and restart PostgreSQL."
+#	echo "# Then you should be able to install GForge RPM."
+#	echo "###"
+#	exit 1
+#fi
 if ! id -u %gfuser >/dev/null 2>&1; then
 	groupadd -r %{gfgroup}
 	useradd -r -g %{gfgroup} -d %{GFORGE_DIR} -s /bin/bash -c "GForge User" %{gfuser}
@@ -208,9 +220,11 @@ if [ "$1" -eq "1" ]; then
 
 	# generating and updating site admin password
 	%randstr SITEADMIN_PASSWORD 8
-
-	echo "$SITEADMIN_PASSWORD" > %{GFORGE_CONF_DIR}/siteadmin.pass
-	chmod 0600 %{GFORGE_CONF_DIR}/siteadmin.pass
+	
+	# updating admin_password in gforge.conf
+	perl -pi -e "
+		s#^admin_password=.*#admin_password="$SITEADMIN_PASSWORD"#g" %{GFORGE_CONF_DIR}/gforge.conf
+	
 	SITEADMIN_PASSWORD=`echo -n $SITEADMIN_PASSWORD | md5sum | awk '{print $1}'`
 
 	# creating gforge database user
@@ -223,8 +237,8 @@ if [ "$1" -eq "1" ]; then
 	# updating PostgreSQL configuration
 	if ! grep -i '^ *host.*%{dbname}.*' /var/lib/pgsql/data/pg_hba.conf >/dev/null 2>&1; then
 		echo 'host %{dbname} %{dbuser} 127.0.0.1 255.255.255.255 md5' >> /var/lib/pgsql/data/pg_hba.conf
-		echo 'local %{dbname} gforge_nss md5' >> /var/lib/pgsql/data/pg_hba.conf
-		echo 'local %{dbname} gforge_mta md5' >> /var/lib/pgsql/data/pg_hba.conf
+		echo 'host %{dbname} gforge_nss 127.0.0.1 255.255.255.255 trust' >> /var/lib/pgsql/data/pg_hba.conf
+ 		echo 'host %{dbname} gforge_mta 127.0.0.1 255.255.255.255 trust' >> /var/lib/pgsql/data/pg_hba.conf
 		%reloadpostgresql
 	fi
 
@@ -251,7 +265,25 @@ if [ "$1" -eq "1" ]; then
 		s/SYSTEM_NAME/"%{sitename}"/g;
 		s/RANDOM_ID/"$SESSID"/g;
 		s/HOST_NAME/"%{hostname}"/g" %{GFORGE_CONF_DIR}/gforge.conf
-	perl -pi -e "s/HOST_NAME/%{hostname}/g" %{HTTPD_CONF_DIR}/conf.d/gforge.conf
+		
+	#admin email
+ 	adminemail=$(echo "%{adminemail}"| sed 's|@|\\\@|g')
+ 	perl -pi -e "
+ 		s/SERVER_ADMIN/"$adminemail"/g" %{GFORGE_CONF_DIR}/gforge.conf
+ 
+ 	#path of jpgraph.php
+ 	path_jpgraph=$(rpm -ql php-jpgraph | grep jpgraph.php)
+ 	perl -pi -e "
+		s#^sys_path_to_jpgraph=.*#sys_path_to_jpgraph=$path_jpgraph#g" %{GFORGE_CONF_DIR}/gforge.conf
+ 	
+ 	#wrong 20list http template for mailman on rpm
+ 	rm -f %{GFORGE_CONF_DIR}/httpd.d/20list
+ 	
+ 	perl -pi -e "
+ 		s#^GFORGE_CONF_DIR=.*#GFORGE_CONF_DIR="%{GFORGE_CONF_DIR}"#g" %{SBIN_DIR}/gforge-config
+ 
+ 	## plugins installs apache templates in GFORGE_CONF_DIR
+ 	ln -s %{GFORGE_DIR}/etc/httpd.d %{GFORGE_CONF_DIR}/httpd.d
 	
 	# initializing configuration
 	%{SBIN_DIR}/gforge-config
@@ -260,22 +292,48 @@ if [ "$1" -eq "1" ]; then
 	su -l %{gfuser} -c "%{GFORGE_BIN_DIR}/db-upgrade.pl 2>&1" | grep -v ^NOTICE
 	su -l postgres -c "psql -c 'UPDATE groups SET register_time=EXTRACT(EPOCH FROM NOW());' %{dbname} >/dev/null 2>&1"
 	%changepassword $SITEADMIN_PASSWORD
+	
+	# creation *.mo files for gettext
+        for l in eu bg ca zh_TW nl en eo fr de el he id it ja ko la nb pl pt_BR pt ru zh_CN es sv th ; do mkdir -p /usr/share/locale/$l/LC_MESSAGES && msgfmt -o /usr/share/locale/$l/LC_MESSAGES/gforge.mo %{GFORGE_LANG_DIR}/$l.po ; done
 
 	%gracefulhttpd
+	
+	if ! id -u anonymous >/dev/null 2>&1; then
+ 		useradd -m -s /bin/false anonymous
+ 	fi
+ 
+ 	# [ ! -f /usr/bin/php4 ] && ln -s /usr/bin/php /usr/bin/php4
+ 	
+ 	chroot=`grep '^gforge_chroot:' /etc/gforge/gforge.conf | sed 's/.*:\s*\(.*\)/\1/'`
+ 	if [ ! -d /var/lib/gforge/chroot/ ] ; then
+		mkdir -p /var/lib/gforge/chroot/
+	fi
+	
+	ln -s %{GFORGE_DIR}/www/env.inc.php %{PLUGINS_LIB_DIR}
+	
+	#Configuration de libnss-pgsql
+	ln -s %{GFORGE_DIR}/utils/install-nsspgsql.sh /usr/sbin
+	install-nsspgsql.sh setup
+
 else
 	# upgrading database
 	su -l %{gfuser} -c "%{GFORGE_BIN_DIR}/db-upgrade.pl 2>&1" | grep -v ^NOTICE
 
 	# updating configuration
 	%{SBIN_DIR}/gforge-config || :
+	
+	# creation *.mo files for gettext
+        for l in eu bg ca zh_TW nl en eo fr de el he id it ja ko la nb pl pt_BR pt ru zh_CN es sv th ; do mkdir -p /usr/share/locale/$l/LC_MESSAGES && msgfmt -o /usr/share/locale/$l/LC_MESSAGES/gforge.mo %{GFORGE_LANG_DIR}/$l.po ; done
 fi
+
+%preun
 
 %postun
 if [ "$1" -eq "0" ]; then
 	# dropping gforge users
 	su -l postgres -s /bin/sh -c "dropuser %{dbuser} >/dev/null 2>&1 ; dropuser gforge_nss >/dev/null 2>&1 ; dropuser gforge_mta >/dev/null 2>&1"
 	
-	for file in siteadmin.pass local.pl httpd.secrets local.inc httpd.conf httpd.vhosts database.inc ; do
+	for file in local.pl httpd.secrets local.inc httpd.conf httpd.vhosts database.inc ; do
 		rm -f %{GFORGE_CONF_DIR}/$file
 	done
 	# Remove PostgreSQL access
@@ -286,8 +344,15 @@ if [ "$1" -eq "0" ]; then
 	# Remove user/group
 	if id -u %{gfuser} >/dev/null 2>&1; then
 		userdel %{gfuser} >/dev/null 2>&1
-		groupdel %{gfgroup} 2>/dev/null || :
+		groupdel %{gfgroup} >/dev/null 2>&1
 	fi
+	
+	if ! id -u anonymous >/dev/null 2>&1; then
+ 		userdel anonymous 2>/dev/null || :
+ 	fi
+ 
+ 	[ -L /usr/bin/php4 ] && rm -f /usr/bin/php4
+
 fi
 
 %clean
@@ -300,7 +365,7 @@ fi
 %attr(0660, %{httpduser}, gforge) %config(noreplace) %{GFORGE_CONF_DIR}/gforge.conf
 %attr(0750, root, root) %{SBIN_DIR}/gforge-config
 %attr(0640, %{httpduser}, %{httpdgroup}) %config(noreplace) %{HTTPD_CONF_DIR}/conf.d/gforge.conf
-%attr(0664, root, root) %config(noreplace) %{CROND_DIR}/gforge
+%attr(0644, root, root) %{CROND_DIR}/gforge
 %attr(0775, %{httpduser}, %{httpdgroup}) %dir %{UPLOAD_DIR}
 %attr(0775, %{httpduser}, %{httpdgroup}) %dir %{CACHE_DIR}
 %{GFORGE_DIR}
@@ -308,7 +373,7 @@ fi
 %{GFORGE_LIB_DIR}
 %{GFORGE_DB_DIR}
 %{GFORGE_LANG_DIR}
-%{GFORGE_CONF_DIR}/custom
+%{GFORGE_CONF_DIR}
 %{SCM_TARBALLS_DIR}
 
 %changelog

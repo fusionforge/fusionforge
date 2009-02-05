@@ -119,13 +119,13 @@ function format_describe_methods_result($response) {
          }
       }
    }
-   $buf .= "</table><H2>Types</H2><TABLE><table bgcolor='#dddddd' align='center' border=1 width=100%>";
+   $buf .= "</table><h2>Types</h2><table><table bgcolor='#dddddd' align='center' border=1 width=100%>";
    $buf .= "<tr><td colspan=3>";
 
    $buf .= do_params($typeList, true);
 
    $buf .= "</td></tr>";
-   $buf .= "</TABLE>";
+   $buf .= "</table>";
 
    return $buf;
 }

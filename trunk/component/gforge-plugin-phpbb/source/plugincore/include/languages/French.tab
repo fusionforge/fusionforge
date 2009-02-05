@@ -1,0 +1,90 @@
+#/**
+#  *
+#  * PhpBB message catalog (French)
+#  *
+#  */
+
+#	common data
+gforge-plugin-phpbb	yes	oui
+gforge-plugin-phpbb	no	non
+gforge-plugin-phpbb	send	Envoyer
+gforge-plugin-phpbb	encoding	Encodage
+gforge-plugin-phpbb	url	URL
+gforge-plugin-phpbb	name	Nom
+gforge-plugin-phpbb	back	Retour
+
+#	PluginPhpBB.class
+gforge-plugin-phpbb	active_plugin	Activer le plugin : Forum PhpBB
+gforge-plugin-phpbb	administration_phpbb	Administrer le forum PhpBB
+gforge-plugin-phpbb	add_new_instance	Ajouter une nouvelle instance
+gforge-plugin-phpbb	edit_instance	Modifier une instance
+
+#	PluginPhpBBIHM.class display_instance display_instance_form
+gforge-plugin-phpbb	delete_instance	Supprimer l'instance
+gforge-plugin-phpbb	edit_parameters	Modifier les param&eacute;tres
+gforge-plugin-phpbb	manage_category	G&eacute;rer les cat&eacute;gories
+
+
+#	PluginPhpBBIHM.class display_bookmarks
+gforge-plugin-phpbb	bookmarks	Forum surveillés PhpBB
+gforge-plugin-phpbb	subject	Sujets
+gforge-plugin-phpbb	last_update	Dernières mises à jour
+gforge-plugin-phpbb	not_read	Non lu
+
+#	PluginPhpBBIHM.class display_subcat display_subcat_form
+gforge-plugin-phpbb	rename	Renommer
+gforge-plugin-phpbb	delete	Supprimer
+gforge-plugin-phpbb	apply_rule	Affecter des droits
+gforge-plugin-phpbb	add_category	Ajouter une catégorie
+gforge-plugin-phpbb	rename_category	Renommer la catégorie
+gforge-plugin-phpbb	no_bookmarks	Vous ne surveillez pas de forum
+
+#	PluginPhpBBIHM.class build_select display_rules_affect
+gforge-plugin-phpbb	select_rule	Sélectionnez une règle
+gforge-plugin-phpbb	apply_rule_role	Affecter les droits aux rôles suivants
+
+#	admin.php
+gforge-plugin-phpbb	not_activated_plugin	Le plugin PhpBB n'est pas activé pour ce projet 
+gforge-plugin-phpbb	synchronize_data	Synchroniser les données
+gforge-plugin-phpbb	no_instance_registred	Aucune instance n'est enregistrée
+
+#	applyrule.php 
+gforge-plugin-phpbb	ROLE_FORUM_BOT	Accès robots
+gforge-plugin-phpbb	ROLE_FORUM_FULL	Accès total
+gforge-plugin-phpbb	ROLE_FORUM_LIMITED	Accès limité
+gforge-plugin-phpbb	ROLE_FORUM_LIMITED_POLLS	Accès limité + Sondages
+gforge-plugin-phpbb	ROLE_FORUM_NOACCESS	Aucun accès
+gforge-plugin-phpbb	ROLE_FORUM_ONQUEUE	Attente de modération
+gforge-plugin-phpbb	ROLE_FORUM_POLLS	Accès standard + Sondages
+gforge-plugin-phpbb	ROLE_FORUM_READONLY	Accès en lecture uniquement
+gforge-plugin-phpbb	ROLE_FORUM_STANDARD	Accès standard
+
+#	instance.php 
+gforge-plugin-phpbb	updating_instance_failed	Mise à jour échouée
+gforge-plugin-phpbb	fields_empty	Tous les champs doivent être remplis !!
+gforge-plugin-phpbb	question_delete_instance	Voulez vous supprimer l'instance
+gforge-plugin-phpbb	error_create_instance	Error lors de la création de l'instance
+gforge-plugin-phpbb	error_remove_instance	Error lors de la suppression de l'instance
+gforge-plugin-phpbb	error_not_valide_url	l'URL que vous avez fourni n'est pas valide
+
+#	managecategegory.php
+gforge-plugin-phpbb	list_subcat_of	Liste des sous catégories de 
+gforge-plugin-phpbb	question_delete_category	Voulez vous supprimer cette catégorie ? Tous les sujets seront supprimés
+gforge-plugin-phpbb	flied_name_empty	Le nom doit être rempli !!
+gforge-plugin-phpbb	error_create_category	Erreur lors de la création de la catégorie !!
+gforge-plugin-phpbb	error_rename_category	Erreur lors du renommage de la catégorie !!
+gforge-plugin-phpbb	error_delete_category	Erreur lors du suppression de la catégorie !!
+gforge-plugin-phpbb	question_synchronize	Voulez vous synchroniser les données ?
+gforge-plugin-phpbb	no_subcat_registred	Aucune sous catégorie n'est enregistrée
+
+#	synchronize.php
+
+gforge-plugin-phpbb	end_synchronize	Synchronisation terminée
+
+#	access.php 
+gforge-plugin-phpbb	error_authenticate	Erreur d'authentification 
+
+
+
+
+

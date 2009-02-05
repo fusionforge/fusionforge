@@ -6,20 +6,25 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * http://sourceforge.net
  *
- * @version   $Id: logger.php 6102 2007-09-30 20:42:31Z aljeux $
+ * @version   $Id: logger.php 6628 2008-10-06 14:21:06Z lo-lan-do $
  */
 
 /*
 	Determine group
 */
-
-if (isset($group_id) && $group_id) {
+$group_id=getIntFromRequest('group_id');
+$form_grp=getIntFromRequest('form_grp');
+if (isset($group_id) && is_numeric($group_id) && $group_id) {
 	$log_group=$group_id;
-} else if (isset($form_grp) && $form_grp) {
+} else if (isset($form_grp) && is_numeric($form_grp) && $form_grp) {
 	$log_group=$form_grp;
 } else if (isset($group_name) && $group_name) {
 	$group =& group_get_object_by_name($group_name);
-	if ($group) $log_group=$group->getID();
+	if ($group) {
+		$log_group=$group->getID();
+	} else {
+		$log_group=0;
+	}
 } else {
 	//
 	//

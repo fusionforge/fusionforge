@@ -45,7 +45,6 @@ class TroveCategoryLabel extends Error {
 		global $Language;
 		$this->Error();
 		if (!$category || !is_object($category)) {
-			//$this->setError($Language->getText('general', 'error_no_valid_group_object', array('MailingList')));
 			return false;
 		}
 		if ($category->isError()) {
@@ -63,7 +62,6 @@ class TroveCategoryLabel extends Error {
 			} else {
 				$this->dataArray =& $dataArray;
 				if ($this->dataArray['category_id'] != $this->category->getId()) {
-					//$this->setError($Language->getText('general', 'error_group_id'));
 					$this->dataArray = null;
 					return false;
 				}
@@ -91,7 +89,6 @@ class TroveCategoryLabel extends Error {
 		echo db_error();
 		if (!$result) {
 			db_rollback();
-			//$this->setError($Language->getText('general', 'error_creating', array($Language->getText('mail_common', 'mailing_list'))).db_error());
 			return false;
 		}
 		$this->labelId = db_insertid($result, 'trove_category_labels', 'label_id');
@@ -111,7 +108,6 @@ class TroveCategoryLabel extends Error {
 			);
 
 		if (!$res || db_numrows($res) < 1) {
-			//$this->setError($Language->getText('general', 'error_getting', array($Language->getText('mail_common', 'mailing_list'))));
 			return false;
 		}
 		$this->dataArray =& db_fetch_array($res);

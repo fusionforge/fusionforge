@@ -1,0 +1,442 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-01-15 09:53+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: plugincore/include/AuthView.class.php:36
+msgid "authLabel1"
+msgstr ""
+
+#: plugincore/include/AuthView.class.php:37
+msgid "authLabel2"
+msgstr ""
+
+#: plugincore/include/AuthView.class.php:38
+msgid "authLabel3"
+msgstr ""
+
+#: plugincore/include/AuthView.class.php:39
+msgid "authLabel4"
+msgstr ""
+
+#: plugincore/include/AuthView.class.php:51
+msgid "propagateAuth"
+msgstr ""
+
+#: plugincore/include/AuthView.class.php:222
+msgid "infoDefaultAuth"
+msgstr ""
+
+#: plugincore/include/AuthView.class.php:223
+#: plugincore/include/DocumentCardView.class.php:360
+msgid "submit"
+msgstr ""
+
+#: plugincore/include/Document.class.php:132
+#: plugincore/include/Document.class.php:201
+msgid "doc_unique"
+msgstr ""
+
+#: plugincore/include/Document.class.php:196
+#: plugincore/include/Document.class.php:654
+msgid "error_min_title_length"
+msgstr ""
+
+#: plugincore/include/Document.class.php:288
+#: plugincore/include/Document.class.php:309
+#: plugincore/include/Document.class.php:344
+msgid "invalid_docid"
+msgstr ""
+
+#: plugincore/include/DocumentCardView.class.php:86
+msgid "displayHistory"
+msgstr ""
+
+#: plugincore/include/DocumentCardView.class.php:91
+#: plugincore/include/DocumentCardView.class.php:251
+msgid "date"
+msgstr ""
+
+#: plugincore/include/DocumentCardView.class.php:92
+#: plugincore/include/DocumentCardView.class.php:205 pluginwww/chronos.php:129
+msgid "version"
+msgstr ""
+
+#: plugincore/include/DocumentCardView.class.php:93
+#: plugincore/include/DocumentCardView.class.php:220
+#: plugincore/include/DocumentTreeView.class.php:173 pluginwww/chronos.php:138
+msgid "status"
+msgstr ""
+
+#: plugincore/include/DocumentCardView.class.php:94
+#: plugincore/include/DocumentCardView.class.php:188 pluginwww/chronos.php:114
+msgid "title"
+msgstr ""
+
+#: plugincore/include/DocumentCardView.class.php:120
+#: plugincore/include/DocumentTreeView.class.php:228 pluginwww/chronos.php:65
+msgid "viewCard"
+msgstr ""
+
+#: plugincore/include/DocumentCardView.class.php:177
+msgid "file"
+msgstr ""
+
+#: plugincore/include/DocumentCardView.class.php:179
+msgid "viewURL"
+msgstr ""
+
+#: plugincore/include/DocumentCardView.class.php:189 pluginwww/chronos.php:117
+msgid "author"
+msgstr ""
+
+#: plugincore/include/DocumentCardView.class.php:194
+#: plugincore/include/DocumentCardView.class.php:253 pluginwww/chronos.php:120
+msgid "description"
+msgstr ""
+
+#: plugincore/include/DocumentCardView.class.php:199 pluginwww/chronos.php:123
+msgid "writingDate"
+msgstr ""
+
+#: plugincore/include/DocumentCardView.class.php:200 pluginwww/chronos.php:132
+msgid "doctype"
+msgstr ""
+
+#: plugincore/include/DocumentCardView.class.php:206 pluginwww/chronos.php:135
+msgid "reference"
+msgstr ""
+
+#: plugincore/include/DocumentCardView.class.php:212
+#: plugincore/include/utils.php:119
+msgid "language"
+msgstr ""
+
+#: plugincore/include/DocumentCardView.class.php:227
+msgid "state"
+msgstr ""
+
+#: plugincore/include/DocumentCardView.class.php:232
+msgid "delete_doc"
+msgstr ""
+
+#: plugincore/include/DocumentCardView.class.php:242
+msgid "observation"
+msgstr ""
+
+#: plugincore/include/DocumentCardView.class.php:252
+msgid "name"
+msgstr ""
+
+#: plugincore/include/DocumentCardView.class.php:277
+msgid "group"
+msgstr ""
+
+#: plugincore/include/DocumentCardView.class.php:305
+msgid "editdocs_upload_url"
+msgstr ""
+
+#: plugincore/include/DocumentCardView.class.php:312
+msgid "upload"
+msgstr ""
+
+#: plugincore/include/DocumentCardView.class.php:319
+msgid "archive"
+msgstr ""
+
+#: plugincore/include/DocumentCardView.class.php:323
+#, php-format
+msgid "upload_ftp"
+msgstr ""
+
+#: plugincore/include/DocumentCardView.class.php:336
+msgid "upload_file"
+msgstr ""
+
+#: plugincore/include/DocumentCardView.class.php:344
+msgid "upload_url"
+msgstr ""
+
+#: plugincore/include/DocumentCardView.class.php:382
+#: pluginwww/admin/index.php:261
+msgid "delete_warning"
+msgstr ""
+
+#: plugincore/include/DocumentCardView.class.php:384
+#: pluginwww/admin/index.php:263 pluginwww/admin/index.php:283
+msgid "sure"
+msgstr ""
+
+#: plugincore/include/DocumentCardView.class.php:386
+#: pluginwww/admin/index.php:266 pluginwww/admin/index.php:285
+msgid "delete"
+msgstr ""
+
+#: plugincore/include/DocumentFactory.class.php:190
+msgid "no_docs"
+msgstr ""
+
+#: plugincore/include/DocumentGroupDocs.class.php:109
+msgid "group_unique"
+msgstr ""
+
+#: plugincore/include/DocumentGroupDocs.class.php:128
+msgid "name_required"
+msgstr ""
+
+#: plugincore/include/DocumentGroupDocs.class.php:136
+#: plugincore/include/DocumentGroupDocs.class.php:271
+msgid "invalid_parent_id"
+msgstr ""
+
+#: plugincore/include/DocumentGroupDocs.class.php:197
+msgid "invalid_id"
+msgstr ""
+
+#: plugincore/include/DocumentTreeView.class.php:172
+msgid "head_file"
+msgstr ""
+
+#: plugincore/include/DocumentTreeView.class.php:174
+msgid "head_modif_by"
+msgstr ""
+
+#: plugincore/include/DocumentTreeView.class.php:175
+msgid "head_the"
+msgstr ""
+
+#: plugincore/include/novadocPlugin.class.php:92
+msgid "tab_title"
+msgstr ""
+
+#: plugincore/include/novadocPlugin.class.php:106
+msgid "use_novadoc"
+msgstr ""
+
+#: plugincore/include/utils.php:49 pluginwww/admin/auth.php:99
+#: pluginwww/admin/index.php:60 pluginwww/admin/index.php:95
+#: pluginwww/admin/index.php:118 pluginwww/admin/index.php:300
+#: pluginwww/admin/index.php:305 pluginwww/card.php:45 pluginwww/card.php:50
+#: pluginwww/card.php:107 pluginwww/card.php:121 pluginwww/card.php:128
+#: pluginwww/card.php:270 pluginwww/card.php:274 pluginwww/card.php:288
+#: pluginwww/card.php:290 pluginwww/card.php:296 pluginwww/card.php:310
+#: pluginwww/card.php:327 pluginwww/card.php:354 pluginwww/index.php:41
+#: pluginwww/index.php:46
+msgid "error"
+msgstr ""
+
+#: plugincore/include/utils.php:49
+msgid "turned_off"
+msgstr ""
+
+#: plugincore/include/utils.php:55
+msgid "view_doc"
+msgstr ""
+
+#: plugincore/include/utils.php:57
+msgid "menuChrono"
+msgstr ""
+
+#: plugincore/include/utils.php:69
+msgid "submit_new"
+msgstr ""
+
+#: plugincore/include/utils.php:74
+msgid "copyBranch"
+msgstr ""
+
+#: plugincore/include/utils.php:76
+msgid "adminDir"
+msgstr ""
+
+#: plugincore/include/utils.php:85
+msgid "manageAuth"
+msgstr ""
+
+#: plugincore/include/utils.php:121
+msgid "all_languages"
+msgstr ""
+
+#: plugincore/include/utils.php:129
+msgid "go"
+msgstr ""
+
+#: plugincore/include/utils.php:192
+msgid "add_docs"
+msgstr ""
+
+#: pluginwww/admin/auth.php:127 pluginwww/admin/copy.php:51
+#: pluginwww/admin/index.php:140 pluginwww/admin/index.php:219
+#: pluginwww/admin/index.php:256 pluginwww/admin/index.php:276
+#: pluginwww/admin/index.php:312
+msgid "title_admin"
+msgstr ""
+
+#: pluginwww/admin/copy.php:68
+msgid "copyBranchToCopy"
+msgstr ""
+
+#: pluginwww/admin/copy.php:76
+msgid "copyBranchName"
+msgstr ""
+
+#: pluginwww/admin/index.php:60 pluginwww/admin/index.php:95
+#: pluginwww/card.php:121 pluginwww/card.php:274
+msgid "noWriteAuth"
+msgstr ""
+
+#: pluginwww/admin/index.php:85 pluginwww/card.php:261
+msgid "update_successful"
+msgstr ""
+
+#: pluginwww/admin/index.php:102
+msgid "create_successful"
+msgstr ""
+
+#: pluginwww/admin/index.php:105 pluginwww/card.php:374
+msgid "deleted"
+msgstr ""
+
+#: pluginwww/admin/index.php:118 pluginwww/card.php:354
+msgid "noDeleteAuth"
+msgstr ""
+
+#: pluginwww/admin/index.php:142
+msgid "section_admin_groups"
+msgstr ""
+
+#: pluginwww/admin/index.php:158
+msgid "group_id"
+msgstr ""
+
+#: pluginwww/admin/index.php:159 pluginwww/admin/index.php:226
+msgid "group_name"
+msgstr ""
+
+#: pluginwww/admin/index.php:169
+msgid "error_no_groups_defined"
+msgstr ""
+
+#: pluginwww/admin/index.php:172
+msgid "add_group"
+msgstr ""
+
+#: pluginwww/admin/index.php:176
+msgid "new_group_name"
+msgstr ""
+
+#: pluginwww/admin/index.php:181
+msgid "new_group_parent"
+msgstr ""
+
+#: pluginwww/admin/index.php:186
+msgid "add"
+msgstr ""
+
+#: pluginwww/admin/index.php:190 pluginwww/admin/index.php:241
+msgid "editgroups_description"
+msgstr ""
+
+#: pluginwww/admin/index.php:221
+msgid "edit_group"
+msgstr ""
+
+#: pluginwww/admin/index.php:231
+msgid "group_parent"
+msgstr ""
+
+#: pluginwww/admin/index.php:237
+msgid "edit"
+msgstr ""
+
+#: pluginwww/admin/index.php:246
+msgid "delete_group"
+msgstr ""
+
+#: pluginwww/admin/index.php:264
+msgid "really_sure"
+msgstr ""
+
+#: pluginwww/admin/index.php:281
+msgid "delete_warning_group"
+msgstr ""
+
+#: pluginwww/admin/index.php:315
+#, php-format
+msgid "section_admin_main"
+msgstr ""
+
+#: pluginwww/admin/index.php:317
+msgid "add_edit_docgroups"
+msgstr ""
+
+#: pluginwww/admin/index.php:323
+msgid "error_no_docs"
+msgstr ""
+
+#: pluginwww/card.php:128
+#, php-format
+msgid "error_invalid_file_attack"
+msgstr ""
+
+#: pluginwww/card.php:134
+msgid "bad_filemane"
+msgstr ""
+
+#: pluginwww/card.php:153
+msgid "error_on_update"
+msgstr ""
+
+#: pluginwww/card.php:270
+msgid "no_valid_group"
+msgstr ""
+
+#: pluginwww/card.php:288
+msgid "error_blank_document"
+msgstr ""
+
+#: pluginwww/card.php:296
+msgid "invalid_filename"
+msgstr ""
+
+#: pluginwww/card.php:332
+msgid "submitted_successfully"
+msgstr ""
+
+#: pluginwww/card.php:338 pluginwww/card.php:380 pluginwww/card.php:405
+#: pluginwww/chronos.php:47 pluginwww/index.php:88
+msgid "title_display"
+msgstr ""
+
+#: pluginwww/chronos.php:95
+msgid "docDeleted"
+msgstr ""
+
+#: pluginwww/chronos.php:111
+msgid "chrono"
+msgstr ""
+
+#: pluginwww/chronos.php:126
+msgid "updateDate"
+msgstr ""
+
+#: pluginwww/view.php:86
+msgid "no_document_data_title"
+msgstr ""
+
+#: pluginwww/view.php:86
+msgid "no_document_data_text"
+msgstr ""

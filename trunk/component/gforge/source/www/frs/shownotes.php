@@ -6,7 +6,7 @@
  * The rest Copyright 2002-2004 (c) GForge Team
  * http://gforge.org/
  *
- * @version   $Id: shownotes.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: shownotes.php 6623 2008-10-06 12:55:00Z lo-lan-do $
  *
  * This file is part of GForge.
  *
@@ -35,7 +35,6 @@ $result=db_query("SELECT frs_release.notes,frs_release.changes,
 		frs_release.preformatted,frs_release.name,frs_package.group_id,frs_package.is_public
 		FROM frs_release,frs_package 
 		WHERE frs_release.package_id=frs_package.package_id 
-		$pub_sql
 		AND frs_release.release_id='$release_id'");
 
 if (!$result || db_numrows($result) < 1) {

@@ -7,7 +7,7 @@
   * Copyright 1999-2001 (c) VA Linux Systems
   * http://sourceforge.net
   *
-  * @version   $Id: trove_list.php 6506 2008-05-27 20:56:57Z aljeux $
+  * @version   $Id: trove_list.php 6746 2009-01-14 10:09:30Z lo-lan-do $
   *
   */
 
@@ -141,15 +141,11 @@ for ($i=0;$i<$folders_len;$i++) {
 	print "&nbsp; ";
 	// no anchor for current cat
 	if ($folders_ids[$i] != $form_cat) {
-		print '<a href="'.util_make_url ('/softwaremap/trove_list.php?form_cat=' .$folders_ids[$i].$discrim_url).'">';
+		print util_make_link ('/softwaremap/trove_list.php?form_cat=' .$folders_ids[$i].$discrim_url,
+				      $folders[$i]
+			) ;
 	} else {
-		print '<strong>';
-	}
-	print $folders[$i];
-	if ($folders_ids[$i] != $form_cat) {
-		print '</a>';
-	} else {
-		print '</strong>';
+		print '<strong>'.$folders[$i].'</strong>';
 	}
 	print "<br />\n";
 }
@@ -201,10 +197,8 @@ while ($row_rootcat = db_fetch_array($res_rootcat)) {
 		echo html_image('ic/ofolder15.png','15','13',array());
 		print ('&nbsp; <strong>'.$row_rootcat['fullname']."</strong>\n");
 	} else {
-		print ('<a href="'.util_make_url ('/softwaremap/trove_list.php?form_cat=' .$row_rootcat['trove_cat_id'].$discrim_url).'">');
-		echo html_image('ic/cfolder15.png','15','13',array());
-		print ('&nbsp; '.$row_rootcat['fullname']."\n");
-		print ('</a>');
+		print util_make_link ('/softwaremap/trove_list.php?form_cat=' .$row_rootcat['trove_cat_id'].$discrim_url,
+				      html_image('ic/cfolder15.png','15','13',array()).'&nbsp; '.$row_rootcat['fullname']);
 	}
 }
 print '</td></tr></table>';
@@ -259,13 +253,14 @@ if ($querytotalcount > $TROVE_BROWSELIMIT) {
 	// display all the numbers
 	for ($i=1;$i<=ceil($querytotalcount/$TROVE_BROWSELIMIT);$i++) {
 		$html_limit .= ' ';
-		if ($page != $i) {
-			$html_limit .= '<a href="'.util_make_url ('/softwaremap/trove_list.php?form_cat='.$form_cat.$discrim_url.'&page='.$i).'">';
-		} else $html_limit .= '<strong>';
-		$html_limit .= '&lt;'.$i.'&gt;';
-		if ($page != $i) {
-			$html_limit .= '</a>';
-		} else $html_limit .= '</strong>';
+		$displayed_i = '&lt;'.$i.'&gt;';
+		if ($page == $i) {
+			$html_limit .= "<strong>$displayed_i</strong>" ;
+		} else {
+			$html_limit .= util_make_link ('/softwaremap/trove_list.php?form_cat='.$form_cat.$discrim_url.'&page='.$i,
+						       $displayed_i
+				) ;
+		}
 		$html_limit .= ' ';
 	}
 }
@@ -289,7 +284,9 @@ for ($i_proj=1;$i_proj<=$querytotalcount;$i_proj++) {
 
 	if ($row_grp && $viewthisrow) {
 		print '<table border="0" cellpadding="0" width="100%"><tr valign="top"><td colspan="2">';
-		print "$i_proj. <a href=\"/projects/". strtolower($row_grp['unix_group_name']) ."/\"><strong>"
+		print "$i_proj. " ;
+		print url_make_link_g ($row_grp['unix_group_name'], $row_grp['group_id']) ;
+		print "<strong>"
 			.htmlspecialchars($row_grp['group_name'])."</strong></a> ";
 		if ($row_grp['short_description']) {
 			print "- " . htmlspecialchars($row_grp['short_description']);
@@ -306,12 +303,6 @@ for ($i_proj=1;$i_proj<=$querytotalcount;$i_proj++) {
 		print '<br />Activity Ranking: <strong>'. number_format($row_grp['ranking'],2) .'</strong>';
 		print '<br />Register Date: <strong>'.date(_('Y-m-d H:i'),$row_grp['register_time']).'</strong>';
 		print '</span></td></tr>';
-/*
-                if ($row_grp['jobs_count']) {
-                	print '<tr><td colspan="2" style="text-align:center">'
-                              .'<a href="/people/?group_id='.$row_grp['group_id'].'">[This project needs help]</a></td></td>';
-                }
-*/
                 print '</table>';
 		print '<hr />';
 	} // end if for row and range chacking

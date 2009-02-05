@@ -6,7 +6,7 @@
  * Copyright 2002-2004 GForge, LLC
  * http://gforge.org/
  *
- * @version   $Id: mailaliases.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: mailaliases.php 6780 2009-01-20 18:06:23Z aljeux $
  *
  * This file is part of GForge.
  *
@@ -25,6 +25,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+require dirname(__FILE__).'/../../www/env.inc.php';
 require $gfwww.'include/squal_pre.php';
 require $gfcommon.'include/cron_utils.php';
 
@@ -56,6 +57,7 @@ $php_command = "/usr/bin/php -d include_path=".ini_get("include_path");
 
 $aliases_orig = file("/etc/aliases");
 $aliases = array();
+$err = '';
 
 for ($i=0; $i < count($aliases_orig); $i++) {
 	$line = trim($aliases_orig[$i]);
@@ -135,20 +137,19 @@ if ($sys_use_tracker) {
 	}
 }
 
-if ($sys_use_mail && file_exists("/var/lib/gforge/dumps/mailman-aliases")) {
+if ($sys_use_mail && file_exists($sys_var_path.'/dumps/mailman-aliases')) {
 	//
 	//	Read in the mailman aliases
 	//
-	$h2 = fopen("/var/lib/gforge/dumps/mailman-aliases","r");
-	$mailmancontents = fread($h2,filesize("/var/lib/gforge/dumps/mailman-aliases"));
+	$h2 = fopen($sys_var_path.'/dumps/mailman-aliases',"r");
+	$mailmancontents = fread($h2,filesize($sys_var_path.'/dumps/mailman-aliases'));
 	$mailmanlines = explode("\n",$mailmancontents);
 	for	($k = 0; $k < count($mailmanlines); $k++) {
 		$mailmanline = explode(":",$mailmanlines[$k], 2);
 		
 		$alias = trim($mailmanline[0]);
-		$command = trim($mailmanline[1]);
-		
 		if (empty($alias)) continue;
+		$command = trim($mailmanline[1]);
 		
 		if (array_key_exists($alias, $aliases)) {
 			// A GForge alias was found outside the markers

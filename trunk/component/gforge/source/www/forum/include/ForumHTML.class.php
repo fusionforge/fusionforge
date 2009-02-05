@@ -5,7 +5,7 @@
  * Copyright 2002 GForge, LLC
  * http://gforge.org/
  *
- * @version   $Id: ForumHTML.class.php 6599 2008-09-01 19:35:24Z aljeux $
+ * @version   $Id: ForumHTML.class.php 6738 2009-01-13 15:35:04Z lo-lan-do $
  */
 
 
@@ -488,7 +488,8 @@ class ForumHTML extends Error {
 		<br>
 		<strong><?php echo _('Message:'); ?></strong><?php echo notepad_button('document.forms[1].body') ?><?php echo utils_requiredField(); ?><br />
 		<?php
-                $params = array() ;
+		$GLOBALS['editor_was_set_up']=false;
+		$params = array() ;
 		$params['body'] = $body;
 		$params['width'] = "800";
 		$params['height'] = "500";
@@ -560,14 +561,14 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 
 		<?php
 		$GLOBALS['editor_was_set_up']=false;
-                $params = array();
+		$params = array();
 		$params['body'] = $body;
 		$params['width'] = "800";
 		$params['height'] = "500";
 		$params['group'] = $group_id;
 		plugin_hook("text_editor",$params);
 		if (!$GLOBALS['editor_was_set_up']) {
-			//if we don�t have any plugin for text editor, display a simple textarea edit box
+			//if we don't have any plugin for text editor, display a simple textarea edit box
 			echo '<textarea name="body"  rows="10" cols="50" wrap="soft">' . $body . '</textarea>';
 		}
 		unset($GLOBALS['editor_was_set_up']);
@@ -597,7 +598,7 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 
 } elseif ($this->Forum->allowAnonymous()) {
 	echo '<span class="error">';
-	printf(_('You could post if you were <a href="%1$s">logged in</a>'), util_make_url ('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))));
+	printf(_('You could post if you were <a href="%1$s">logged in</a>.'), util_make_url ('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))));
 } elseif (!session_loggedin()) {
 	echo '
 			<span class="error">'.sprintf(_('Please <a href="%1$s">log in</a>'), util_make_url('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI')))).'</span><br/></p>';

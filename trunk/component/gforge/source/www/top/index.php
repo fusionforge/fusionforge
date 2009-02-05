@@ -6,7 +6,7 @@
  * The rest Copyright 2002-2004 (c) GForge Team
  * http://gforge.org/
  *
- * @version   $Id: index.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: index.php 6747 2009-01-14 11:08:58Z lo-lan-do $
  *
  * This file is part of GForge.
  *
@@ -31,7 +31,7 @@ require_once $gfwww.'include/pre.php';
 $HTML->header(array('title'=>_('Top Projects')));
 ?>
 
-<p><strong><?php printf(_('Top %1$s project'), $GLOBALS['sys_name']); ?></strong></P>
+<p><strong><?php printf(_('Top %1$s project'), $GLOBALS['sys_name']); ?></strong></p>
 
 <p><?php printf(_('We track many project usage statistics on %1$s, and display here the top ranked projects in several categories.'), $GLOBALS['sys_name']); ?>
 <ul>

@@ -1,0 +1,166 @@
+
+
+Les Fichiers du composant publication
+========================================
+
+component-publication-novaforge.tgz 	(partie NF du composant)
+component-publication-cms.tgz 		(partie SPiP du composant)
+
+
+plugin publication pour NovaForge
+---------------------------------
+
+/usr/share/gforge/plugins/publication/
+
+	cronjobs/
+		publication_cron.php		<= traitements itératifs de publication
+		gforge-plugin-publication.sh	<= appelé par la tache cron
+
+	include/
+		Snoopy.class.php			<= utilitaire de Submit Http
+		languages/			<= RESERVED FOR FUTUR USED
+		languages/Base.tab		<= RESERVED FOR FUTUR USED
+		PublicationManager.php		<= moteur de publication generique
+		constantes.php			<= constantes
+		config_api.php			<= classes de lecture/recuperation des paramètres de config
+		publication-init.php		<= script d'initialisation du plugin dans NF
+		upload_client.php		<= partie envoyant le flux en upload httpd
+		PublicationPlugin.class.php		<= classes generale du plugin dans NF	
+		config_log.php			<= classe pour logguer coté NF
+		Publication_novadocs.php	<= traitement de publication specifique a docs
+		Publication_novafrs.php		<= traitement de publication specifique a frs
+
+
+/usr/share/gforge/www/plugins/publication/
+		admin.php			<= script (a finir) permettant l'edition de la config (BD)
+
+/var/lib/gforge/home/groups/
+		projetx1/publication.conf	<= configuration de la publication pour un projet
+
+/etc/gforge/plugins/publication/
+		config.php			<= configuration generale de la publication FOR FUTUR USED
+		publication.conf.template	<= fichier template recopié a chaque activation 
+						du plugin pour un nouveau projet APRES passage des crons
+						"create home dirs"		
+
+/etc/cron.d/
+		gforge-plugin-publication.cron	<= description du cronjob
+
+
+plugin NovaForge pour SpiP
+-------------------------------
+[pre-requis (yum install) php-domxml + redemarrage httpd)
+
+/etc/publication/
+		config.php		<= definition du repertoire temporaire et du rep de publication
+
+/usr/share/gforge/www/spip/		<= path du moteur spip
+		exchange.php		<= url "xml2" dans le protocole	(voir specs)	
+		publication_utils.php	<= sert aux methodes communes
+		upload_server.php	<= partie traitant/recevant le flux en upload httpd
+		config_log.php		<= classe pour logguer coté spip
+		example.php		<= exemple de page html cote spip recuperant les elements d'un noeud
+		view.php		<= scipt appelé coté spip pour avoir les elements publiés d'un noeud
+		flux.php		<= url "xml1" dans le protocole	(voir specs)
+		
+		
+		
+		
+		
+		
+Configuration  du composant publication
+========================================
+
+cote NovaForge
+------------------
+-> creation d'un projet + approuver
+-> faire passer le cron "create home dir"
+-> activation du plugin	"publication"
+-> activation des plugins "novadoc" et "novafrs"
+-> editer le fichier /var/lib/gforge/home/groups/<nom_du_projet>/publication.conf
+	- url_XML1 et url_XML2 pointent respectivement vers le bon script flux.php et exchange.php
+		(voir protocole dans les specs)
+	- publication_plugins liste les plugins pour lesquels on va demander la publication sur ce projet
+		(séparés par une virgule, pas d'espace).
+-> ajouter un role nommé "spip" pour le projet (via interface web d'admin du projet/membres)
+
+
+cote SPiP
+------------------
+-> editer le fichier /etc/publication/config.php
+	
+	-- définir le répertoire "temporaire" et le repertoire de "publication".
+	
+	NB : lors d'une transaction : un numero unique xxxxx est généré, 
+	et des repertoires sont créés :
+		 <rep_temporaire>/pubIDxxxxxxxx/
+		 <rep_temporaire>/pubIDxxxxxxxx/novadoc
+		 <rep_temporaire>/pubIDxxxxxxxx/novafrs ...
+		 	
+	lorsque les uploads sont terminés, ces repertoires sont recopiés dans le <rep_de_publication>
+		<rep_publication>/<nom_projet>/novafrs
+		<rep_publication>/<nom_projet>/novadoc
+	
+	NB <rep_publication>/<nom_projet> doit etre créé et cédé à apache:apache avec 755
+	sinon les fichiers restent dans le repertoire temporaire
+		
+	NB2: a ce stade, les fichiers temporaires ne sont pas supprimés
+
+
+	-- définir le prefix utilisé dans l'url pour le telechargement des fichiers/docs
+	$URL_PUBLICATION_PREFIX 
+	
+	http://<mon_spip_site>/<prefix>/<projectname>/<plugintype>/<nom_fichier>
+	
+	
+	
+	exemple : 
+		 [...]/spip/sites/mon_site/ est l'url du site spip
+		 [...]/spip/sites/mon_site/publicfiles est le lieu (lien symboliques, 
+		 	ou rewrite d'adresse etc) ou sont accessibles les fichiers par cette URL 
+		 /mnt/spip/pub est le lieu REEL de stockage reel des fichiers publiés 
+		 	(publicfiles pointe vers ce rep)
+		 /tmp/spip etant le repertoire temporaire d'upload
+		 		 
+		 
+		on devra faire le lien
+			ln -s /mnt/spip/pub [...]/spip/sites/mon_site/publicfiles
+		
+		et configurer comme suit : 
+			$PUBLICATION_PATH = /mnt/spip/pub
+			$TEMPORARY_PATH = /tmp/spip/
+			$URL_PUBLICATION_PREFIX = "/publicfiles"
+		
+		
+		
+		
+Fonctionnement du composant publication
+========================================
+
+cote NovaForge
+------------------
+-> dans l'onglet Fichiers (novafrs), gerer les dossiers : creer qq repertoires
+-> soumettre un nouveau fichier...
+-> dans l'onglet Fichiers (novafrs), sur la page d'autorisation des dossiers 
+placer les repertoires parents du fichier ajouté, en "lecture" pour le role "spip"
+
+
+-> console : lancer la commande
+	/usr/share/gforge/plugins/publication/cronjobs/gforge-plugin-publication.sh
+
+-> voir les logs :
+	/var/log/gforge/cron
+	/var/log/httpd/error.log
+
+
+cote SPiP
+------------------
+-> visualiser le contenu du repertoire de publication (en ligne de commande)
+-> editer la page example.php pour donner les parametres exemple : nom du projet , nom du dossier
+-> appeler la page example.php pour voir en mode HTML (<LI>) les elements publiés du noeud dont le nom est definit ci dessus
+
+-> voir les logs :
+	/var/log/httpd/error.log
+
+
+

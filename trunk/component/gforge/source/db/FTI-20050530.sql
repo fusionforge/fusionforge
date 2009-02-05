@@ -1,9 +1,4 @@
-CREATE TYPE forums_results AS (msg_id integer,
-	subject text,
-	post_date integer,
-	realname character varying(32),
-	forum_name text
-);
+SET client_min_messages TO warning;
 
 CREATE OR REPLACE FUNCTION forums_search(text, integer, text, boolean) RETURNS SETOF forums_results AS '
 	DECLARE

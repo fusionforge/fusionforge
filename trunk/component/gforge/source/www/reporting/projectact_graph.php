@@ -4,7 +4,7 @@
  *
  * Copyright 2004 (c) GForge LLC
  *
- * @version   $Id: projectact_graph.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: projectact_graph.php 6609 2008-09-18 11:41:40Z aljeux $
  * @author Tim Perdue tim@gforge.org
  * @date 2003-03-16
  *
@@ -149,8 +149,8 @@ if ($area=='tracker') {
 //
 //	Titles
 //
-$graph->title->Set("Project Activity For: ".$g->getPublicName(). 
-	" (".date('m/d/Y',$report->getStartDate()) ."-". date('m/d/Y',$report->getEndDate()) .")");
+$graph->title->Set("Project Activity For: ".util_unconvert_htmlspecialchars($g->getPublicName()). 
+	" (".date('Y-m-d',$report->getStartDate()) ." to ". date('Y-m-d',$report->getEndDate()) .")");
 $graph->subtitle->Set($sys_name);
 //$graph->xaxis-> title->Set("Date" );
 //$graph->yaxis-> title->Set("Number" ); 

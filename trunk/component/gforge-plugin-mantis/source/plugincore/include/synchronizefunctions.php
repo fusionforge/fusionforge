@@ -44,7 +44,7 @@ function synchronize ($group_id,
 			if (synchronizeUsers ($array_urls [$index], $group_id) == false)
 			{
 				$ok = false;
-				$array_errors [] = $Language->getText ("gforge-plugin-mantis", "sync_error_users", $array_urls [$index]);
+				$array_errors [] = sprintf( dgettext ( "gforge-plugin-mantis" ,  "sync_error_users" ) , $array_urls [$index] );
 			}
 			$index++;
 		}
@@ -52,7 +52,7 @@ function synchronize ($group_id,
 	else
 	{
 		$ok = false;
-		$array_errors [] = $Language->getText ("gforge-plugin-mantis", "sync_error_servers");
+		$array_errors [] = dgettext ("gforge-plugin-mantis", "sync_error_servers");
 	}
 	if (getProjects ($group_id, $array_project_ids, $array_names) == true)
 	{
@@ -62,12 +62,12 @@ function synchronize ($group_id,
 			if (synchronizeProject ($array_project_ids [$index]) == false)
 			{
 				$ok = false;
-				$array_errors [] = $Language->getText ("gforge-plugin-mantis", "sync_error_project", $array_names [$index]);
+				$array_errors [] = sprintf( dgettext ( "gforge-plugin-mantis" ,  "sync_error_project" ) , $array_names [$index] );
 			}
 			if (synchronizeRoles ($array_project_ids [$index]) == false)
 			{
 				$ok = false;
-				$array_errors [] = $Language->getText ("gforge-plugin-mantis", "sync_error_roles", $array_names [$index]);
+				$array_errors [] = sprintf( dgettext ( "gforge-plugin-mantis" ,  "sync_error_roles" ) , $array_names [$index] );
 			}
 			$index++;
 		}
@@ -75,7 +75,7 @@ function synchronize ($group_id,
 	else
 	{
 		$ok = false;
-		$array_errors [] = $Language->getText ("gforge-plugin-mantis", "sync_error_projects");
+		$array_errors [] = dgettext ("gforge-plugin-mantis", "sync_error_projects");
 	}
 	return $ok;
 }

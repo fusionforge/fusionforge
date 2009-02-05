@@ -39,7 +39,7 @@ function parse_ical ( $cal_file ) {
     //echo "Orig:<br><pre>$data</pre><br/><br/>\n";
     $data = preg_replace ( "/[\r\n]+ /", "", $data );
     $data = preg_replace ( "/[\r\n]+/", "\n", $data );
-    //echo "Data:<br><pre>$data</pre><P>";
+    //echo "Data:<br><pre>$data</pre><p>";
 
     // reflect the section where we are in the file:
     // VEVENT, VTODO, VJORNAL, VFREEBUSY, VTIMEZONE

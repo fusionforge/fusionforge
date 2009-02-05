@@ -6,7 +6,7 @@
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2002 (c) Silicon and Software Systems (S3)
  *
- * @version   $Id: editprofile.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: editprofile.php 6747 2009-01-14 11:08:58Z lo-lan-do $
  *
  */
 
@@ -302,7 +302,7 @@ if (session_loggedin()) {
 					"<td>".html_build_select_box_from_arrays($monthArrayVals,$monthArray, "endM", date("m"), false, "").
 						html_build_select_box_from_arrays($yearArray,$yearArray, "endY", 0, false, "")."</td>".
 				"</tr>".
-			"</TABLE>".
+			"</table>".
 				
 				"<table border=0 >";
 
@@ -332,7 +332,7 @@ if (session_loggedin()) {
 		echo '<form action="'.getStringFromServer('PHP_SELF').'" METHOD="POST">';
 		displayUserSkills(user_getid(), 1); 
 		echo '</form>';				
-		echo '</TABLE>';
+		echo '</table>';
 
 	}
 

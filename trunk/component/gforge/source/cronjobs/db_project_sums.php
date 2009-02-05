@@ -5,7 +5,7 @@
  * The rest Copyright 2002-2004 (c) GForge Team
  * http://gforge.org/
  *
- * @version   $Id: db_project_sums.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: db_project_sums.php 6730 2009-01-12 20:54:29Z aljeux $
  *
  * This file is part of GForge.
  *
@@ -24,6 +24,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+require dirname(__FILE__).'/../www/env.inc.php';
 require $gfwww.'include/squal_pre.php';
 require $gfcommon.'include/cron_utils.php';
 
@@ -117,7 +118,7 @@ if ($sys_database_type == 'mysql') {
 	$sql.="SELECT group_id,'mail'::text AS type,count(*) AS count ";
 }
 $sql.="
-	FROM mail_group_list WHERE is_public != 9
+	FROM mail_group_list WHERE is_public = 1
 	GROUP BY group_id,type;";
 
 $res=db_query($sql);

@@ -26,7 +26,7 @@
 
 require_once ("common/novaforge/auth.php");
 require_once ("common/novaforge/log.php");
-require_once ("plugins/mantis/include/ResponseParser.class");
+require_once ("plugins/mantis/include/ResponseParser.class.php");
 
 function createMantisProject ($url,
                               &$id,

@@ -4,7 +4,7 @@
  *
  * Copyright 2004 (c) GForge LLC
  *
- * @version   $Id: useract.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: useract.php 6747 2009-01-14 11:08:58Z lo-lan-do $
  * @author Tim Perdue tim@gforge.org
  * @date 2003-03-16
  *
@@ -57,7 +57,7 @@ for ($i=0; $i<count($abc_array); $i++) {
 	if ($sw == $abc_array[$i]) {
 		echo '<strong>'.$abc_array[$i].'</strong>&nbsp;';
 	} else { 
-		echo '<a href="useract.php?sw='.$abc_array[$i].'">'.$abc_array[$i].'</A>&nbsp;';
+		echo '<a href="useract.php?sw='.$abc_array[$i].'">'.$abc_array[$i].'</a>&nbsp;';
 	}
 }
 
