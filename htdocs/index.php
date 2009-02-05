@@ -59,10 +59,10 @@ deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu intrepid main</pre>
 			<div class="tabbertab" title="RedHat / CentOS">
 				<h4>For Redhat or CentOS, just download the <a href="https://fusionforge.org/frs/?group_id=6">latest tarball</a> from the project</h4>
 				<p>Unpack the archive:</p>
-				<pre>tar jxf fusionforge-4.7.tar.bz2
-cd fusionforge-4.7</pre>
+				<pre>tar jxf fusionforge-4.7.1.tar.bz2
+cd fusionforge-4.7.1</pre>
 				<p>Add run the installation script:</p>
-				<pre>./install.sh &lt;hostname&gt;</pre>
+				<pre>sh ./install.sh &lt;hostname&gt;</pre>
 				<p>Note: A Yum repository for RPM based packages is under contruction.</p>
 			</div>
 			<div class="tabbertab" title="Install CD">
@@ -82,8 +82,16 @@ cd fusionforge-4.7</pre>
 				One logged, you will get full admin rights.</p>
 			</div>
 			<div class="tabbertab" title="VMWare image">
-				<h4>You can download a precreated VMWare image.</h4>
+				<h4>You can download a precreated VMWare image (version: 4.7.1).</h4>
 				<p><a href="http://aljeux.free.fr/fusionforge/files/gf47centos52.zip">gf47centos52.zip</a></p>
+				<p>Root password is : <b>fusionforge</b></p>
+				<p>Once logged as root, get the ip address of the machine with the following command:</p>
+				<pre>ifconfig eth0</pre>
+				<p>The IP address is displayed next to the 'inet adr:' field.</p>
+				<p>Then, edit your /etc/hosts file to add 'centos52.local with the IP (example with IP 192.168.0.51)</p>
+				<pre>192.168.0.51  centos52.local</pre>
+				<p>You can then point your browser to <a href="http://centos52.local">http://centos52.local/</a></p>
+				<p>The FusionForge admin account is: <b>ffadmin</b> (and password: <b>ffadmin</b>).</p>
 			</div>
 			<div class="tabbertab" title="Sources">
 				<h4>FusionForge is currently managed with Subversion.</h4>
