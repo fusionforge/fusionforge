@@ -276,18 +276,18 @@ function util_handle_message($id_arr,$subject,$body,$extra_emails='',$extra_jabb
 				$address['email'][]=db_result($res,$i,'email');
 			}
 		}
-		if (count($address['email']) > 0) {
-			$extra_email1=implode($address['email'],',').',';
+		if (isset ($address['email']) && count($address['email']) > 0) {
+			$extra_emails=implode($address['email'],',').',' . $extra_emails;
 		}
-		if (count($address['jabber_address']) > 0) {
-			$extra_jabber1=implode($address['jabber_address'],',').',';
+		if (isset ($address['jabber_address']) && count($address['jabber_address']) > 0) {
+			$extra_jabbers=implode($address['jabber_address'],',').','.$extra_jabbers;
 		}
 	}
-	if ($extra_email1 || $extra_emails) {
-		util_send_message('',$subject,$body,$from,$extra_email1.$extra_emails);
+	if ($extra_emails) {
+		util_send_message('',$subject,$body,$from,$extra_emails);
 	}
-	if ($extra_jabber1 || $extra_jabbers) {
-		util_send_jabber($extra_jabber1.$extra_jabbers,$subject,$body);
+	if ($extra_jabbers) {
+		util_send_jabber($extra_jabbers,$subject,$body);
 	}
 }
 
