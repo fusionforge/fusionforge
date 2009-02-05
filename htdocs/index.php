@@ -85,20 +85,25 @@ cd fusionforge-4.7</pre>
 				<h4>You can download a precreated VMWare image.</h4>
 				<p><a href="http://aljeux.free.fr/fusionforge/files/gf47centos52.zip">gf47centos52.zip</a></p>
 			</div>
-			<div class="tabbertab" title="Source control">
+			<div class="tabbertab" title="Sources">
 				<h4>FusionForge is currently managed with Subversion.</h4>
 
 				<p>Anonymous read-only access:<br />
 				<tt>svn checkout svn://scm.fusionforge.org/fusionforge/trunk fusionforge-trunk</tt></p>
 				<p>Read/write access (for project members):<br />
 				<tt>svn checkout svn+ssh://scm.fusionforge.org/srv/svn/fusionforge/trunk fusionforge-trunk</tt></p>
-				<p>Anonymous read-only Bazaar gateway:<br />
+				<p>Anonymous read-only Bazaar gateway (updated hourly):<br />
 				<tt>bzr checkout http://scm.fusionforge.org/bzr/fusionforge/svn-trunk-ro fusionforge-trunk</tt></p>
 
 				<p>Git gateway:<br />
 				<tt>git clone git@github.com:yourlogin/fusionforge.git</tt></p>
 
 				<p>(Note to project members: due to virtualisation on the server, SSH needs to be accessed on port 20022.)</p>
+			</div>
+			<div class="tabbertab" title="Wiki">
+				<h4>FusionForge currently uses the PlanetForge wiki.</h4>
+
+				<p><a href="http://wiki.planetforge.org/index.php/FusionForge">Browse the wiki</a></p>
 			</div>
 			<div class="tabbertab" title="Online help">
 				<h5>For more info you can join FusionForge developpers on IRC at:</h5>
