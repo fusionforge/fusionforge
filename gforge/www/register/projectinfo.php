@@ -63,6 +63,7 @@ if (getStringFromRequest('submit')) {
 	$description = trim(getStringFromRequest('description'));
 	$unix_name = strtolower(getStringFromRequest('unix_name'));
 	$scm = getStringFromRequest('scm');
+	$is_public = getIntFromRequest('is_public');
 	$feedback = "";
 
 	if ($sys_use_scm && !$scm) {
