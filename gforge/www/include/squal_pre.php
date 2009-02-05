@@ -20,7 +20,7 @@ if (!isset($no_gz_buffer) || !$no_gz_buffer) {
     ob_start("ob_gzhandler");
 }
 
-require_once 'env.inc.php' ;
+require_once ('../env.inc.php') ;
 require $gfcgfile;
 require $gfcommon.'include/constants.php';
 require_once $gfcommon.'include/database-'.$sys_database_type.'.php';

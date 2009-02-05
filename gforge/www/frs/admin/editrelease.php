@@ -143,6 +143,8 @@ if (getStringFromRequest('step2')) {
 	$userfile = getUploadedFile('userfile');
 	$userfile_name = $userfile['name'];
 	$type_id = getIntFromRequest('type_id');
+	$release_date = getStringFromRequest('release_date');
+	$release_date = strtotime($release_date);
 	$processor_id = getStringFromRequest('processor_id');
 	// Build a Unix time value from the supplied Y-m-d value
 	$group_unix_name=group_getunixname($group_id);

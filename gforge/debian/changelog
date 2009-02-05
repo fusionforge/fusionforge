@@ -1,8 +1,14 @@
-gforge (4.7+scmbzr-1) experimental; urgency=low
+gforge (4.7.1+svn-0) experimental; urgency=low
 
   * New package: gforge-plugin-scmbzr (not complete yet!).
 
- -- Roland Mas <lolando@debian.org>  Wed, 04 Feb 2009 17:53:58 +0100
+ -- Roland Mas <lolando@debian.org>  Thu, 05 Feb 2009 22:14:45 +0100
+
+gforge (4.7.1-1) experimental; urgency=low
+
+  * New upstream release.
+
+ -- Roland Mas <lolando@debian.org>  Thu, 05 Feb 2009 21:01:10 +0100
 
 gforge (4.7-1) experimental; urgency=low
 
