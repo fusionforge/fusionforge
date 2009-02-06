@@ -3097,17 +3097,6 @@ gforge/www/plugins/quota_management -text
 gforge/www/plugins/scmcvs -text
 gforge/www/plugins/svntracker -text
 gforge/www/plugins/webcalendar -text
-gforge/www/scm/viewvc/lib/accept.pyc svneol=native#unset
-gforge/www/scm/viewvc/lib/compat.pyc svneol=native#unset
-gforge/www/scm/viewvc/lib/config.pyc svneol=native#unset
-gforge/www/scm/viewvc/lib/debug.pyc svneol=native#unset
-gforge/www/scm/viewvc/lib/ezt.pyc svneol=native#unset
-gforge/www/scm/viewvc/lib/idiff.pyc svneol=native#unset
-gforge/www/scm/viewvc/lib/popen.pyc svneol=native#unset
-gforge/www/scm/viewvc/lib/sapi.pyc svneol=native#unset
-gforge/www/scm/viewvc/lib/vclib/__init__.pyc svneol=native#unset
-gforge/www/scm/viewvc/lib/vclib/svn/__init__.pyc svneol=native#unset
-gforge/www/scm/viewvc/lib/viewvc.pyc svneol=native#unset
 gforge/www/scm/viewvc/templates/docroot/images/annotate.png -text
 gforge/www/scm/viewvc/templates/docroot/images/back.png -text
 gforge/www/scm/viewvc/templates/docroot/images/back_small.png -text
