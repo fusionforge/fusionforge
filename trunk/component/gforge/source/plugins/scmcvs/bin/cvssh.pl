@@ -1,6 +1,6 @@
 #! /usr/bin/perl -w
 #
-# $Id: cvssh.pl 5772 2006-10-08 19:07:32Z cbayle $
+# $Id$
 #
 # "Shell" for a restricted account, limiting the available commands
 # Roland Mas, debian-sf (Sourceforge for Debian)

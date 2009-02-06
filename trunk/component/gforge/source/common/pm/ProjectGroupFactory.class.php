@@ -1,36 +1,27 @@
 <?php
 /**
- * GForge Project Management Facility
+ * FusionForge project manager
  *
- * Copyright 2002 GForge, LLC
- * http://gforge.org/
+ * Copyright 1999-2000, Tim Perdue/Sourceforge
+ * Copyright 2002, Tim Perdue/GForge, LLC
  *
- * @version   $Id: ProjectGroupFactory.class.php 6602 2008-09-04 13:06:39Z lo-lan-do $
+ * This file is part of FusionForge.
  *
- * This file is part of GForge.
- *
- * GForge is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * GForge is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation; either version 2 of the License,
+ * or (at your option) any later version.
+ * 
+ * FusionForge is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+ * USA
  */
-/*
-
-	Project/Task Manager
-	By Tim Perdue, Sourceforge, 11/99
-	Heavy rewrite by Tim Perdue April 2000
-
-	Total rewrite in OO and GForge coding guidelines 12/2002 by Tim Perdue
-*/
 
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'pm/ProjectGroup.class.php';

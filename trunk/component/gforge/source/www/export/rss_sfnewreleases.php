@@ -8,7 +8,7 @@
   * Copyright 1999-2001 (c) VA Linux Systems
   * http://sourceforge.net
   *
-  * @version   $Id: rss_sfnewreleases.php 6506 2008-05-27 20:56:57Z aljeux $
+  * @version   $Id: rss_sfnewreleases.php 6900 2009-02-03 09:23:14Z lolando $
   *
   */
 
@@ -57,8 +57,9 @@ print "  <webMaster>webmaster@$GLOBALS[sys_default_domain]</webMaster>\n";
 print "  <language>en-us</language>\n";
 // ## item outputs
 $outputtotal = 0;
+$seen = array() ;
 while ($row = db_fetch_array($res)) {
-	if (!$G_RELEASE["$row[group_id]"]) {
+	if (!isset ($seen[$row['group_id']])) {
 		print "  <item>\n";
 		print "   <title>".htmlspecialchars($row['group_name'])."</title>\n";
 		print "   <link>http://$GLOBALS[sys_default_domain]/project/showfiles.php?group_id=$row[group_id]</link>\n";
@@ -66,8 +67,8 @@ while ($row = db_fetch_array($res)) {
 		print "  </item>\n";
 		$outputtotal++;
 	}
-	// ## eliminate dupes, only do $limit of these
-	$G_RELEASE["$row[group_id]"] = 1;
+	// eliminate dupes, only do $limit of these
+	$seen[$row['group_id']] = 1;
 	if ($outputtotal >= $limit) break;
 }
 // ## end output

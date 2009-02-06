@@ -5,7 +5,7 @@
  *
  * Copyright 2004 (c) GForge LLC
  *
- * @version   $Id: reporting_cron.php 6676 2008-11-25 20:51:57Z aljeux $
+ * @version   $Id$
  * @author Tim Perdue tim@gforge.org
  * @date 2003-03-16
  *

@@ -6,7 +6,7 @@
  *
  * http://gforge.org
  *
- * @version $Id: GroupSearchEngine.class.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version $Id$
  */
 
 require_once $gfwww.'search/include/engines/SearchEngine.class.php';

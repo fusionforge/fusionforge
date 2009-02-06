@@ -10,7 +10,7 @@
  *
  * Geoffrey Herteg, August 29, 2000
  *
- * @version   $Id: Layout.class.php 6756 2009-01-15 13:19:29Z lo-lan-do $
+ * @version   $Id$
  */
  
 require_once $gfcommon.'include/constants.php';
@@ -267,11 +267,11 @@ if (isset($params['group']) && $params['group']) {
 
 	function footerEnd($params) { ?>
 
-<!-- PLEASE LEAVE "Powered By GForge" on your site -->
+<!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
 <br />
-<center>
-<a href="http://gforge.org/"><img src="/images/pow-gforge.png" alt="Powered By GForge Collaborative Development Environment" border="0" /></a>
-</center>
+<div align="right">
+<a href="http://fusionforge.org/"><img src="<?php echo util_make_url ('/images/pow-fusionforge.png'); ?>" alt="Powered By FusionForge" border="0" /></a>
+</div>
 
 <?php
 	global $sys_show_source;

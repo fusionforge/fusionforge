@@ -7,7 +7,7 @@
  * The rest Copyright 2002-2004 (c) GForge Team
  * http://gforge.org/
  *
- * @version   $Id: index.php 6747 2009-01-14 11:08:58Z lo-lan-do $
+ * @version   $Id$
  *
  * This file is part of GForge.
  *

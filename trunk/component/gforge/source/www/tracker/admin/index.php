@@ -4,7 +4,7 @@
 // Copyright 1999-2000 (c) The SourceForge Crew
 // http://sourceforge.net
 //
-// $Id: index.php 6648 2008-10-27 20:52:49Z aljeux $
+// $Id$
 
 require_once('../../env.inc.php');
 require_once $gfwww.'include/pre.php';

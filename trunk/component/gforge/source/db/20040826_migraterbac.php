@@ -6,7 +6,7 @@
  * Copyright 2004 GForge, LLC
  * http://gforge.org/
  *
- * @version   $Id: 20040826_migraterbac.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id$
  *
  * This file is part of GForge.
  *

@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #
-# $Id: dns_conf.pl 4059 2005-03-03 21:38:26Z cbayle $
+# $Id$
 #
 use DBI;
 use POSIX qw(strftime);

@@ -5,7 +5,7 @@
  *
  * Copyright 2004 GForge, LLC
  *
- * @version   $Id: daily_task_email.php 6677 2008-11-29 16:50:24Z aljeux $
+ * @version   $Id$
  *
  * This file is part of GForge.
  *

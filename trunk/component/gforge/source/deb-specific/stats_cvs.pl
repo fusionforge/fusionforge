@@ -7,7 +7,7 @@
 #  * '~/CVSROOT/history' file, and create and fill the sql table with 
 #  * modified, and added to each project.
 #  *
-#  * @version   $Id: stats_cvs.pl 2553 2004-01-10 00:29:39Z cbayle $
+#  * @version   $Id$
 #  *
 #  */
 

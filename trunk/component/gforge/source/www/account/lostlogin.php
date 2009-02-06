@@ -6,7 +6,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  *
- * @version   $Id: lostlogin.php 6746 2009-01-14 10:09:30Z lo-lan-do $
+ * @version   $Id: lostlogin.php 6933 2009-02-04 20:32:57Z lolando $
  *
  * This file is part of GForge.
  *
@@ -86,7 +86,7 @@ if (getStringFromRequest("submit")) {
 
 		$HTML->header(array('title'=>"Password changed"));
 		printf (_('<h2>Password changed</h2><p>Congratulations, you have re-set your account password. You may <a href="%1$s">login</a> to the site now.</p>',
-			  util_make_url ("/account/login.php"));
+			  util_make_url ("/account/login.php")));
 		$HTML->footer(array());
 		exit();
 	}

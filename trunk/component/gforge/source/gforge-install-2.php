@@ -1,7 +1,7 @@
 #!/usr/bin/php
 <?php
 /**
- * GForge Installation Dependency Setup
+ * FusionForge Installation Dependency Setup
  *
  * Copyright 2006 GForge, LLC
  * http://gforge.org/
@@ -230,7 +230,7 @@
 	}
 
 	foreach ($apacheconffiles as $apacheconffile) {
-		echo('Setting GForge Include For Apache...');
+		echo('Setting FusionForge Include For Apache...');
 		system("grep \"^Include /etc/gforge/httpd.conf\" $apacheconffile > /dev/null", $ret);
 		if ($ret == 1) {
 			system("echo \"Include /etc/gforge/httpd.conf\" >> $apacheconffile");

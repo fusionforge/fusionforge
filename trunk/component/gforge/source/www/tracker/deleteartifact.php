@@ -5,7 +5,7 @@
  * Copyright 2002 GForge, LLC
  * http://gforge.org/
  *
- * @version   $Id: deleteartifact.php 5994 2007-03-16 10:11:34Z robertn $
+ * @version   $Id$
  *
  */
 

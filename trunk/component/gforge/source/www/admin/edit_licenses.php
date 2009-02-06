@@ -6,7 +6,7 @@
  * The rest Copyright 2002-2004 (c) GForge Team
  * http://gforge.org/
  *
- * @version   $Id: edit_licenses.php 6554 2008-06-20 19:20:29Z aljeux $
+ * @version   $Id$
  *
  * This file is part of GForge.
  *

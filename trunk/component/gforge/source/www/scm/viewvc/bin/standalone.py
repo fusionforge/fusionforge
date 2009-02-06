@@ -17,7 +17,7 @@ on the local machine to generate ViewVC web pages.
 
 __author__ = "Peter Funk <pf@artcom-gmbh.de>"
 __date__ = "11 November 2001"
-__version__ = "$Revision: 5517 $"
+__version__ = "$Revision$"
 __credits__ = """Guido van Rossum, for an excellent programming language.
 Greg Stein, for writing ViewCVS in the first place.
 Ka-Ping Yee, for the GUI code and the framework stolen from pydoc.py.

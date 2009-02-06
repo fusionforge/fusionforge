@@ -2,7 +2,7 @@
 /**
  * Copyright 1999-2001 (c) VA Linux Systems
  *
- * @version   $Id: stats_site.inc 2683 2004-02-18 09:18:27Z gsmet $
+ * @version   $Id$
  *
  * This file is part of GForge.
  *

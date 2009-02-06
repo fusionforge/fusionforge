@@ -1,6 +1,6 @@
 #! /bin/sh
 # 
-# $Id: install-ftp.sh 6468 2008-04-03 22:44:43Z cbayle $
+# $Id$
 #
 # Configure Proftpd for GForge
 # Christian Bayle, Roland Mas, debian-sf (GForge for Debian)

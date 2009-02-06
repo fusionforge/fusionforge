@@ -8,7 +8,7 @@
  *
  * http://gforge.org
  *
- * @version $Id: ProjectRssSearchRenderer.class.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version $Id$
  */
 
 require_once $gfwww.'search/include/renderers/RssSearchRenderer.class.php';

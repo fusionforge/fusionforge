@@ -111,8 +111,8 @@ class Theme extends Layout {
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title><?php echo $params['title']; ?></title>
-    <link rel="icon" type="image/png" href="<?php echo $this->imgroot; ?>icon.png"/>
-    <link rel="shortcut icon" href="<?php echo $this->imgroot; ?>icon.png"/>
+    <link rel="icon" type="image/png" href="<?php echo util_make_url('/images/icon.png'); ?>"/>
+    <link rel="shortcut icon" type="image/png" href="<?php echo util_make_url('/images/icon.png'); ?>"/>
     <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="<?php echo util_make_url ('/export/rss_sfnews.php'); ?>" type="application/rss+xml"/>
     <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="<?php echo util_make_url ('/export/rss20_news.php'); ?>" type="application/rss+xml"/>
     <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - New Projects RSS" href="<?php echo util_make_url ('/export/rss_sfprojects.php'); ?>" type="application/rss+xml"/>
@@ -154,7 +154,7 @@ class Theme extends Layout {
 <div class="header">
   <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
-		  <td class="topLeft"><?php echo util_make_link ('/', html_image('header/top-logo.gif',205,54,array('border'=>'0'))); ?></td>
+		  <td class="topLeft"><?php echo util_make_link ('/', html_image('header/top-logo.png',192,54,array('border'=>'0'))); ?></td>
         <td class="middleRight"><?php echo $this->searchBox(); ?></td>
         <td class="middleRight"><?php
         if (session_loggedin()) {
@@ -215,11 +215,11 @@ class Theme extends Layout {
   </tr>
 </table>  
  
-<!-- PLEASE LEAVE "Powered By GForge" on your site -->
+<!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
 <br />
-<center>
-<a href="http://gforge.org/"><img src="/images/pow-gforge.png" alt="Powered By GForge Collaborative Development Environment" border="0" /></a>
-</center>
+<div align="right">
+<a href="http://fusionforge.org/"><img src="<?php echo util_make_url ('/images/pow-fusionforge.png'); ?>" alt="Powered By FusionForge" border="0" /></a>
+</div>
 
 <?php
 global $sys_show_source;
@@ -394,6 +394,7 @@ if ($sys_show_source) {
 	$TABS_DIRS = array_merge($TABS_DIRS, $PLUGIN_TABS_DIRS);
 
 	$user_is_super=false;
+	$selected = 0 ;
 	if (session_loggedin()) {
 		$projectmaster =& group_get_object(GROUP_IS_MASTER);
 		$projectstats =& group_get_object(GROUP_IS_STATS);

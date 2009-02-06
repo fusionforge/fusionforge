@@ -6,7 +6,7 @@
  *
  * Copyright 2003 (c) GForge, LLC
  *
- * @version   $Id: svn-create.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id$
  *
  * This file is part of GForge.
  *

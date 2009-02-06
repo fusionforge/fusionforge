@@ -21,7 +21,6 @@
      <?=$SEP?><?= Button(array('action'=>'LikePages'),_("LikePages"),$page->getName()) ?></li>
      <?=$SEP?><?= Button(array('action'=>'BackLinks'), _("BackLinks"),$page->getName()) ?></li>
     <?php } ?>
-   <?=$SEP?><?= WikiLink(_("UpLoad"), "","UpLoad") ?></li>
     <?php if (!empty($user) && $user->isAdmin()) { ?>
      <?=$SEP?><?= WikiLink(_("PhpWikiAdministration"), "","Admin") ?></li>
     <?php } ?>

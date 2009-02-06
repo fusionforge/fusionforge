@@ -6,7 +6,7 @@
  * The rest Copyright 2002-2004 (c) GForge Team
  * http://gforge.org/
  *
- * @version   $Id: news_admin_utils.php 6433 2008-03-11 22:54:02Z cbayle $
+ * @version   $Id$
  *
  * This file is part of GForge.
  *

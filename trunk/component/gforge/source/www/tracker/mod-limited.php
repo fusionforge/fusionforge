@@ -6,7 +6,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * http://sourceforge.net
  *
- * @version   $Id: mod-limited.php 6536 2008-05-31 14:04:29Z aljeux $
+ * @version   $Id$
  */
 
 

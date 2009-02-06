@@ -4,7 +4,7 @@
  *
  * Copyright 2004 GForge, LLC
  *
- * @version   $Id: acl.php 6675 2008-11-25 19:36:27Z aljeux $
+ * @version   $Id$
  *
  * This file is part of GForge.
  *

@@ -7,7 +7,7 @@
  * The rest Copyright 2002-2004 (c) GForge Team
  * http://gforge.org/
  *
- * @version   $Id: editgroupinfo.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: editgroupinfo.php 6803 2009-01-29 19:10:39Z lolando $
  *
  * This file is part of GForge.
  *
@@ -60,6 +60,7 @@ if (getStringFromRequest('submit')) {
 	$use_tracker = getStringFromRequest('use_tracker');
 	$use_frs = getStringFromRequest('use_frs');
 	$use_stats = getStringFromRequest('use_stats');
+	$is_public = getStringFromRequest('is_public');
 	$new_doc_address = getStringFromRequest('new_doc_address');
 	$send_all_docs = getStringFromRequest('send_all_docs');
   
@@ -84,7 +85,8 @@ if (getStringFromRequest('submit')) {
 		$use_ftp,
 		$use_tracker,
 		$use_frs,
-		$use_stats
+		$use_stats,
+		$is_public
 	);
 	
 	//100 $logo_image_id
@@ -136,6 +138,15 @@ $images_res = db_query("
 <?php echo _('Homepage Link') ?>:<br />
 <tt>http://</tt><input type="text" name="form_homepage" size="40" value="<?php echo $group->getHomePage(); ?>" />
 </p>
+
+<?php
+       echo '<p>' ;
+echo _('Visibility: ');
+       echo html_build_select_box_from_arrays(
+               array('0','1'),
+               array(  _('Private'), _('Public') ),
+               'is_public', $group->isPublic(), false); 
+?>
 
 <?php
 /* NOT ACTIVE YET

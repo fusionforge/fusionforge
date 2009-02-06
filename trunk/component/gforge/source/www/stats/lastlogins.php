@@ -9,7 +9,7 @@
   * Copyright 1999-2001 (c) VA Linux Systems
   * http://sourceforge.net
   *
-  * @version   $Id: lastlogins.php 6506 2008-05-27 20:56:57Z aljeux $
+  * @version   $Id$
   *
   */
 

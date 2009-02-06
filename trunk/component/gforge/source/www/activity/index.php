@@ -5,7 +5,7 @@
  * Copyright 2006 (c) GForge, LLC
  * http://gforge.org
  *
- * @version   $Id: index.php 6682 2008-12-02 20:19:07Z aljeux $
+ * @version   $Id$
  */
 
 

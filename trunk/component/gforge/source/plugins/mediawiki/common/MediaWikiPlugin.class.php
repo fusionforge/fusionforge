@@ -151,7 +151,7 @@ class MediaWikiPlugin extends Plugin {
 			$group = &group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
 				echo util_make_link ("/plugins/projects_hierarchy/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
-						     _('View the MediaWiki Administration')
+						     _('View the MediaWiki Administration'));
 				echo '</p>';
 			}
 		}												    

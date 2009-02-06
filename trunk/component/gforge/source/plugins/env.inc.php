@@ -1,1 +1,1 @@
-link ../www/env.inc.php
+../www/env.inc.php

@@ -3,7 +3,7 @@
 	<section>
 		<title>Coding Example</title>
 		<para>
-			The following code examples demonstrate how all coding on GForge is going to be done in the future. The first example shows the <quote>switchbox</quote> page (taken from <filename>www/tracker/index.php</filename>) - where the various objects are included, instantiated and checked for errors every step of the way.
+			The following code examples demonstrate how all coding on FusionForge is going to be done in the future. The first example shows the <quote>switchbox</quote> page (taken from <filename>www/tracker/index.php</filename>) - where the various objects are included, instantiated and checked for errors every step of the way.
 		</para>
 		<para>
 			Once the objects are instantiated, the template file can be included. In this example, the template file is detail.php (example2).
@@ -15,28 +15,28 @@
 <programlisting><![CDATA[
 <?php
 /**
- * GForge Tracker Facility
+ * FusionForge Tracker Facility
  *
  * Portions Copyright 1999-2000 (c) The SourceForge Crew
- * Copyright 2002-2004 (c) The GForge Teem
+ * Copyright 2002-2004 (c) The FusionForge Teem
  * http://gforge.org/
  * 
- * @version $Id: templating.xml 3437 2004-10-08 20:30:59Z gsmet $
+ * @version $Id$
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 

@@ -5,7 +5,7 @@
 // Copyright 1999, 2000, 2001 (c) VA Linux Systems, Inc.
 // http://sourceforge.net
 //
-// $Id: doc_utils.php 2683 2004-02-18 09:18:27Z gsmet $
+// $Id$
 //
 
 // colorized link to a file with CVS history

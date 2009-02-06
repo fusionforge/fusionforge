@@ -5,7 +5,7 @@
  * Copyright 2004 GForge, LLC
  * http://gforge.org/
  *
- * @version   $Id: msp.php 6602 2008-09-04 13:06:39Z lo-lan-do $
+ * @version   $Id$
  */
 
 require_once $gfwww.'include/squal_pre.php';

@@ -1,23 +1,25 @@
 <?php
-
 /**
- * TimeEntry.class.php - Main time entry class
+ * FusionForge reporting system
  *
- * This file is part of GForge.
+ * Copyright 2003-2004, Tim Perdue/GForge, LLC
  *
- * GForge is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
+ * This file is part of FusionForge.
  *
- * GForge is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation; either version 2 of the License,
+ * or (at your option) any later version.
+ * 
+ * FusionForge is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+ * USA
  */
 
 /**
@@ -34,7 +36,7 @@ require_once $gfcommon.'include/Error.class.php';
  *
  * @author Tony Bibbs <tony@geeklog.net>
  * @copyright Copyright 2005, Tony Bibbs
- * @version: $Id: TimeEntry.class.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version: $Id$
  * @todo This is just a wrapper to the existing procedural methods.  At some point someone will
  * want to move that implementation here.
  * @todo I'm sure this isn't code per the gForge coding standards.  This should be fixed.

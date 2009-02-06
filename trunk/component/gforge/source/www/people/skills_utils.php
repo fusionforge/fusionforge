@@ -5,7 +5,7 @@
  *
  * Copyright 2002 (c) Silicon and Software Systems (S3)
  *
- * @version   $Id: skills_utils.php 6623 2008-10-06 12:55:00Z lo-lan-do $
+ * @version   $Id$
  *
  */
 

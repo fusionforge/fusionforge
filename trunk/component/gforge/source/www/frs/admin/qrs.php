@@ -5,7 +5,7 @@
  * Copyright 2002 GForge, LLC
  * http://gforge.org/
  *
- * @version   $Id: qrs.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id$
  */
 
 require_once('../../env.inc.php');
@@ -50,6 +50,7 @@ if (getStringFromRequest('submit')) {
 	$release_changes = getStringFromRequest('release_changes');
 	$preformatted = getStringFromRequest('preformatted');
 	$ftp_filename = getStringFromRequest('ftp_filename');
+	$feedback = '' ;
 	if ($sys_use_ftpuploads && $ftp_filename && util_is_valid_filename($ftp_filename) && is_file($upload_dir.'/'.$ftp_filename)) {
 		//file was uploaded already via ftp
 		//use setuid prog to chown it

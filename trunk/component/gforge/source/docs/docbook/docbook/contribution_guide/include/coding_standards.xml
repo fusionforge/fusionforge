@@ -33,7 +33,7 @@
 				Every file should start with a comment block describing its purpose, version, author and a copyright message. The comment block should be a block comment in standard JavaDoc format along with a CVS Id tag. While all JavaDoc tags are allowed, only the tags in the examples below will be parsed by PHPdoc.
 			</para>
 			<para>
-				GForge contains a mixed copyright. For files that have been changed since the GForge fork, the following header should be used:
+				FusionForge contains a mixed copyright. For files that have been changed since the FusionForge fork, the following header should be used:
 			</para>
 <programlisting><![CDATA[
 /**
@@ -44,7 +44,7 @@
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2002 (c) their respective authors
  *
- * @version   $Id: coding_standards.xml 2720 2004-03-02 16:58:43Z gsmet $
+ * @version   $Id$
  *
  */
 ]]></programlisting>
@@ -94,7 +94,7 @@
 	<section>
 		<title>Templating</title>
 		<para>
-			In the GForge system, PHP itself is used as the template language.  To make the templating clearer, template files should be separated out and included once objects and database results are established. Detailed examples are in the docs repository and <link linkend="cg_templating">here</link>.
+			In the FusionForge system, PHP itself is used as the template language.  To make the templating clearer, template files should be separated out and included once objects and database results are established. Detailed examples are in the docs repository and <link linkend="cg_templating">here</link>.
 		</para>
 		<para>
 			Variables in the templates are presented surrounded by <markup> &lt;?php ?&gt;</markup> tags instead of the {} tags that some other template libraries would use. The end result is the same, with less bloat and more efficient code.

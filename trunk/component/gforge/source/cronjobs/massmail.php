@@ -11,7 +11,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2003 (c) GForge, LLC
  *
- * @version   $Id: massmail.php 6680 2008-11-29 19:21:25Z aljeux $
+ * @version   $Id$
  *
  * This file is part of GForge.
  *
@@ -108,7 +108,7 @@ if (!$table_mapping[$type]) {
 
 $subj = db_result($mail_res, 0, 'subject');
 $mail_id = db_result($mail_res, 0, 'id');
-
+$body =  db_result($mail_res, 0, 'message');
 //$err .= "Got mail to send: ".$subj."\n";
 
 $sql = "SELECT DISTINCT users.user_id,users.user_name,users.realname,users.email,users.confirm_hash

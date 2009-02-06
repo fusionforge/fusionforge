@@ -5,7 +5,7 @@
 #  * Copyright 1999-2001 (c) VA Linux Systems
 #  * http://gforge.net
 #  *
-#  * @version   $Id: stats_projects_logparse.pl 6214 2007-11-21 18:10:55Z lo-lan-do $
+#  * @version   $Id$
 #  *
 #  */
 

@@ -4,7 +4,7 @@
  *
  * Copyright 2004 (c) GForge LLC
  *
- * @version   $Id: roleedit.php 6619 2008-10-05 17:47:43Z aljeux $
+ * @version   $Id$
  * @author Tim Perdue tim@gforge.org
  * @date 2004-03-16
  *

@@ -8,7 +8,7 @@ diff -Nur -x '*.orig' -x '*.rej' gforge-3.0pre9/utils/create-cvs-repository.sh m
 +# (c)1999 SourceForge Development Team
 +# Released under the GPL, 1999
 +#
-+# @version	$Id: gforge-3.0-cronjobs.patch 2683 2004-02-18 09:18:27Z gsmet $
++# @version	$Id$
 +#
 +
 +CVS="cvs"
@@ -85,7 +85,7 @@ diff -Nur -x '*.orig' -x '*.rej' gforge-3.0pre9/utils/create-cvs-tarballs.sh mez
 +# 24 January 2003
 +# Michael Jennings
 +#
-+# @version	$Id: gforge-3.0-cronjobs.patch 2683 2004-02-18 09:18:27Z gsmet $
++# @version	$Id$
 +#
 +
 +CVS="cvs"

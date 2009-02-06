@@ -5,7 +5,7 @@
  * Copyright 2004 (c) GForge, LLC
  * http://gforge.org
  *
- * @version   $Id: pm.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id$
  *
  * This file is part of GForge.
  *

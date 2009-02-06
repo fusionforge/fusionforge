@@ -9,7 +9,7 @@
   *
   * Copyright Francisco Gimeno <kikov@kikov.org>
   *
-  * @version $Id: newcommit.php 6506 2008-05-27 20:56:57Z aljeux $
+  * @version $Id$
   */
 /**
  * This script takes some POST variables.It makes a check and it

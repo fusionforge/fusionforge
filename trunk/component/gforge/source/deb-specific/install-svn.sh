@@ -1,6 +1,6 @@
 #! /bin/sh
 # 
-# $Id: install-svn.sh 5784 2006-10-09 23:23:37Z cbayle $
+# $Id$
 #
 # Configure Subversion for Sourceforge
 # Roland Mas, Gforge

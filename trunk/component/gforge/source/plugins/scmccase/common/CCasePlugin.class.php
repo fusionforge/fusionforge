@@ -1,26 +1,25 @@
 <?php
-/** Clear Case plugin for Gforge
- * Copyright 2003 Roland Mas <lolando@debian.org>
- * Copyright 2004 Roland Mas <roland@gnurandal.com> 
- *                The Gforge Group, LLC <http://gforgegroup.com/>
- * Based on the CVS plugin, which was derived from Gforge, which was
- * derived from Sourceforge
+/** FusionForge ClearCase plugin
  *
- * This file is not part of Gforge
+ * Copyright 2003-2009, Roland Mas
+ * Copyright 2004, GForge, LLC
  *
- * This plugin, like Gforge, is free software; you can redistribute it
- * and/or modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2 of
- * the License, or (at your option) any later version.
+ * This file is part of FusionForge.
  *
- * GForge is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation; either version 2 of the License,
+ * or (at your option) any later version.
+ * 
+ * FusionForge is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+ * USA
  */
 
 class CCasePlugin extends SCM {
@@ -33,6 +32,7 @@ class CCasePlugin extends SCM {
 		$this->hooks[] = "scm_admin_update";
 		$this->hooks[] = "scm_admin_page";
 		$this->hooks[] = "scm_stats";
+		$this->hooks[] = "scm_createrepo";
 		$this->hooks[] = "scm_plugin";
 
 		require_once $gfconfig.'plugins/scmccase/config.php' ;
@@ -62,6 +62,9 @@ class CCasePlugin extends SCM {
 		case "scm_stats":
 			$this->display_stats ($params) ;
 			break;
+		case 'scm_createrepo':
+			$this->createOrUpdateRepo ($params) ;
+			break;
 		case "scm_plugin":
 			$scm_plugins=& $params['scm_plugins'];
 			$scm_plugins[]=$this->name;
@@ -79,73 +82,57 @@ class CCasePlugin extends SCM {
 		if ($project->usesPlugin ("scmccase")) {
 			$vob_tag = ereg_replace ("GROUPNAME", $project->getUnixName (), $this->tag_pattern) ;
 	
-		 print '<h2>Clear Case</h2>
-		                <p>Documentation for Clear Case is probably available somewhere.
+			print '<h2>ClearCase</h2>
+		                <p>Documentation for ClearCase is probably available somewhere.
                                 </p>' ;
 
+			// Table for summary info
 
-// ######################## table for summary info
+			print '<table width="100%"><tr valign="top"><td width="65%">' ;
 
-?>
-<table width="100%">
-	<tr valign="top">
-		<td width="65%">
-<?php
-// ############################ developer access
+			// Developer access
 			
-	 echo "<b>".print(_('Clear Case Access'))."</b>" ;
+			echo "<b>".print(_('ClearCase Access'))."</b>" ;
 
-	 print "<p>Either mount the VOB with <tt>cleartool mount $vob_tag</tt> or
-	 select the <tt>$vob_tag</tt> VOB in your Clear Case Explorer.
-	 </p>" ;
+			print "<p>" ;
+			printf (_('Either mount the VOB with <tt>cleartool mount %1$s</tt> or select the <tt>%1$s</tt> VOB in your ClearCase Explorer.'),
+				$vob_tag) ;
+			print "</p>" ;
 
-// ################## summary info
+			// Summary info
 
-?>
+			print '</td><td width="35%">' ;
 
-		</td>
-		<td width="35%">
+			// CCase Browsing
 
-<?php
+			$anonymous = 1;
+			if (session_loggedin()) {
+				$perm =& $project->getPermission(session_get_user());
+				$anonymous = !$perm->isMember();
+			}
+			
+			if ($project->enableAnonCVS() || !$anonymous) {
+				echo $HTML->boxTop(_('History'));
+				
+				echo '<b>'._('Browse the ClearCase tree').'</b><p>'._('Browsing the ClearCase tree gives you a great view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.').'</p>' ;
+				
+				$browse_url = "http://" . $this->GetGroupServer($group_id) . "/ccweb" ;
+				// $browse_url = $browse_url . "?vob_tag=".$vob_tag ;
+				echo "<p>" ;
+				printf (_('<a href="%1$s">Browse</a> CCase tree'),
+					$browse_url) ;
+				echo "</p>" ;
 
-// ############################## CCase Browsing
+				echo $HTML->boxBottom();
+			}
 
-$anonymous = 1;
-if (session_loggedin()) {
-   $perm =& $project->getPermission(session_get_user());
-   $anonymous = !$perm->isMember();
-}
- 
-if ($project->enableAnonCVS() || !$anonymous) {
-	echo $HTML->boxTop(_('History'));
-
-	echo '<b>'._('Browse the Clear Case tree').'</b><p>'._('Browsing the Clear Case tree gives you a great view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.').'</p>' ;
-
-	$browse_url = "http://" . $this->GetGroupServer($group_id) . "/ccweb" ;
-	// $browse_url = $browse_url . "?vob_tag=".$vob_tag ;
-	echo "<p><a href=\"$browse_url\">Browse</a> CCase tree</p>" ;
-
-       echo $HTML->boxBottom();
-}
-
-?>
-		</td>
-	</tr>
-</table>
-
-<?php
-
-// ************************************************
-
-
-
+			print '</td></tr></table>' ;
 		}
-
 	}
-
+	
 	function scm_admin_update ($params) {
 		$group =& group_get_object($params['group_id']);
-
+		
 		if ($params['scmccase_ccase_server'] && $params['scmccase_ccase_server'] != "") {
 			$this->SetGroupServer ($params['group_id'], $params['scmccase_ccase_server']) ;
 		} else {
@@ -155,11 +142,9 @@ if ($project->enableAnonCVS() || !$anonymous) {
 
 	function display_scm_admin_page ($params) {
 		$group =& group_get_object($params['group_id']);
-
+		
 		if ( $group->usesPlugin ( $this->name ) ) {
-?>
-			<input type="text" name="scmccase_ccase_server" value="<?php echo $this->GetGroupServer ($params['group_id']) ?>"> <strong>Clear Case server</strong><br /><br />
-<?php
+			print '<input type="text" name="scmccase_ccase_server" value="'.$this->GetGroupServer ($params['group_id']).'"> <strong>'._('ClearCase server').'</strong><br /><br />' ;
 		}
 	}
 
@@ -183,7 +168,7 @@ if ($project->enableAnonCVS() || !$anonymous) {
 		printf(ngettext("commit","commits",$commit_count),$commit_count);
 		echo ', <strong>'.$add_count.'</strong> '; 
 		printf(ngettext("add","adds",$add_count),$add_count);
-		echo ' )';
+		echo ')';
 	}
 	
 
@@ -214,7 +199,26 @@ if ($project->enableAnonCVS() || !$anonymous) {
 		$res = db_query($sql);
 		db_commit () ;
 	}
-}
+
+	function createOrUpdateRepo ($params) {
+		return true ;   // Disabled for now
+
+		$group_id = $params['group_id'] ;
+
+		$project =& group_get_object($group_id);
+		if (!$project || !is_object($project)) {
+			return false;
+		} elseif ($project->isError()) {
+			return false;
+		}
+               
+		if (! $project->usesPlugin ($this->name)) {
+			return false;
+		}
+
+		// TODO (by someone who uses ClearCase): trigger repository creation
+	}
+  }
 
 // Local Variables:
 // mode: php

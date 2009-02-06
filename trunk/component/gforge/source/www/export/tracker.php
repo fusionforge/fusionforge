@@ -10,7 +10,7 @@
   * http://sourceforge.net
   *
   * @author		Darrell Brogdon <dbrogdon@valinux.com>
-  * @version	$Id: tracker.php 6506 2008-05-27 20:56:57Z aljeux $
+  * @version	$Id$
   *
   */
 

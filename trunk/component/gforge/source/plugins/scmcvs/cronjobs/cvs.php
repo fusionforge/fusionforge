@@ -6,7 +6,7 @@
  * The rest Copyright 2002-2005 (c) GForge Team
  * http://gforge.org/
  *
- * @version   $Id: cvs.php 6750 2009-01-14 22:16:59Z lo-lan-do $
+ * @version   $Id$
  *
  * This file is part of GForge.
  *

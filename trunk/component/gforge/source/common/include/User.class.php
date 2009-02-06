@@ -1,41 +1,25 @@
 <?php
 /**
- * GFUser class
+ * FusionForge user management
  *
- * Sets up database results and preferences for a user and abstracts this info
+ * Copyright 1999-2001, VA Linux Systems, Inc.
  *
- *  You can now optionally pass in a db result
- *  handle. If you do, it re-uses that query
- *  to instantiate the objects
+ * This file is part of FusionForge.
  *
- *  IMPORTANT! That db result must contain all fields
- *  from users table or you will have problems
- *
- * GENERALLY YOU SHOULD NEVER INSTANTIATE THIS OBJECT DIRECTLY
- * USE user_get_object() to instantiate properly - this will pool the objects
- * and increase efficiency
- *
- * Copyright 1999-2001 (c) VA Linux Systems
- *
- * @version   $Id: User.class.php 6691 2008-12-07 22:10:32Z aljeux $
- * @author Tim Perdue tperdue@valinux.com
- * @date 2000-10-11
- *
- * This file is part of GForge.
- *
- * GForge is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * GForge is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation; either version 2 of the License,
+ * or (at your option) any later version.
+ * 
+ * FusionForge is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+ * USA
  */
 
 require_once $gfwww.'include/vote_function.php';

@@ -6,7 +6,7 @@
  * The rest Copyright 2002-2004 (c) GForge Team
  * http://gforge.org/
  *
- * @version   $Id: shownotes.php 6623 2008-10-06 12:55:00Z lo-lan-do $
+ * @version   $Id$
  *
  * This file is part of GForge.
  *

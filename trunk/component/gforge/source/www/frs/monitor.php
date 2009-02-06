@@ -5,7 +5,7 @@
  * Copyright 2002 GForge, LLC
  * http://gforge.org/
  *
- * @version   $Id: monitor.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id$
  */
 
 require_once('../env.inc.php');

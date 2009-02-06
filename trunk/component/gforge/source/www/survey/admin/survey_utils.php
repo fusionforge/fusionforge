@@ -6,7 +6,7 @@
  * The rest Copyright 2002-2004 (c) GForge Team
  * http://gforge.org/
  *
- * @version   $Id: survey_utils.php 6243 2007-11-26 21:59:26Z lo-lan-do $
+ * @version   $Id$
  *
  * This file is part of GForge.
  *

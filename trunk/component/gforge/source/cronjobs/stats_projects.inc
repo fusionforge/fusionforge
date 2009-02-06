@@ -2,7 +2,7 @@
 /**
  * Copyright 1999-2001 (c) VA Linux Systems
  *
- * @version   $Id: stats_projects.inc 5943 2007-03-09 05:55:22Z robertn $
+ * @version   $Id$
  *
  * This file is part of GForge.
  *

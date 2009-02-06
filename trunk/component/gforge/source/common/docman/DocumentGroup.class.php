@@ -1,37 +1,27 @@
 <?php
 /**
- * GForge Doc Mgr Facility
+ * FusionForge document manager
  *
- * Copyright 2002 GForge, LLC
- * http://gforge.org/
+ * Copyright 2000, Quentin Cregan/Sourceforge
+ * Copyright 2002, Tim Perdue/GForge, LLC
  *
- * @version   $Id: DocumentGroup.class.php 6506 2008-05-27 20:56:57Z aljeux $
+ * This file is part of FusionForge.
  *
- * This file is part of GForge.
- *
- * GForge is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * GForge is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation; either version 2 of the License,
+ * or (at your option) any later version.
+ * 
+ * FusionForge is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+ * USA
  */
-
-
-/*
-	Document Manager
-
-	by Quentin Cregan, SourceForge 06/2000
-
-	Complete OO rewrite by Tim Perdue 1/2003
-*/
 
 require_once $gfcommon.'include/Error.class.php';
 

@@ -4,7 +4,7 @@
  *
  * Copyright 2005 (c) GForge LLC
  *
- * @version   $Id: index.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id$
  * @author Tim Perdue tim@gforge.org
  * @date 2004-05-19
  *

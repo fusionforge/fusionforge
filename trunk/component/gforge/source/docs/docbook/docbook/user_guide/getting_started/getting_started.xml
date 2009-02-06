@@ -1,9 +1,9 @@
 <section id="ug_getting_started">
 	<title>Getting Started</title>
 	<section id="ug_getting_started_homepage">
-		<title>GForge homepage</title>
+		<title>FusionForge homepage</title>
 		<para>
-			Connect with your browser to GForge. This can be either <ulink url="http://gforge.org">http://gforge.org</ulink> or a locally-installed version of the software.
+			Connect with your browser to FusionForge. This can be either <ulink url="http://gforge.org">http://gforge.org</ulink> or a locally-installed version of the software.
 		</para>
 	</section>
 	<section id="ug_getting_started_new_user">
@@ -19,7 +19,7 @@
 				<term>Login Name</term>
 				<listitem>
 					<para>
-						You should select an unique user name to access to the system. The name should not contain uppercase letters and usually is a combination of your name and your surname; e.g. jdoe for John Doe.  Also, the user name cannot match that of an existing system user account - i.e., you can't have a GForge user named 'root'.
+						You should select an unique user name to access to the system. The name should not contain uppercase letters and usually is a combination of your name and your surname; e.g. jdoe for John Doe.  Also, the user name cannot match that of an existing system user account - i.e., you can't have a FusionForge user named 'root'.
 					</para>
 				</listitem>
 			</varlistentry>
@@ -41,7 +41,7 @@
 			<varlistentry>
 				<term>Language Choice</term>
 				<listitem>
-					<para>Select here your preferred language. This choice does not influence only the language in which GForge will speak to you, but also some local specific data display, like dates, etc.</para>
+					<para>Select here your preferred language. This choice does not influence only the language in which FusionForge will speak to you, but also some local specific data display, like dates, etc.</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
@@ -54,14 +54,14 @@
 				<term>Email Address</term>
 				<listitem>
 					<para>You should insert your email address here.</para>
-					<para>The email address should be correct, GForge will send you a confirmation email for your subscription. If the email address you're inserting here is wrong, you'll never receive the confirmation email and the account you're registering will never be activated.</para>
-					<para>When you receive the confirmation email, you must connect to GForge using the provided URL in the email. This is the only way to become a registered user.</para>
+					<para>The email address should be correct, FusionForge will send you a confirmation email for your subscription. If the email address you're inserting here is wrong, you'll never receive the confirmation email and the account you're registering will never be activated.</para>
+					<para>When you receive the confirmation email, you must connect to FusionForge using the provided URL in the email. This is the only way to become a registered user.</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
 				<term>Receive Email about Site Updates</term>
 				<listitem>
-					<para>If you check this, you'll periodically receive information about the GForge site. The traffic is very low, it is recommended that you activate this option.</para>
+					<para>If you check this, you'll periodically receive information about the FusionForge site. The traffic is very low, it is recommended that you activate this option.</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
@@ -74,7 +74,7 @@
 	</section>
 	<section id="ug_getting_started_new_project">
 		<title>Registering a new project</title>
-		<para>To register a new project, connect to GForge,
+		<para>To register a new project, connect to FusionForge,
 		login and go to My Page section. You have a <emphasis>Register
 		Project</emphasis> link in the menu at the top of the
 		page.</para>
@@ -84,7 +84,7 @@
 			<varlistentry>
 				<term>Project Full Name</term>
 				<listitem>
-					<para>The Name of the Project: eg. GForge Master project</para>
+					<para>The Name of the Project: eg. FusionForge Master project</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
@@ -114,15 +114,15 @@
 						<listitem><para>its length must be between 3 and 15 characters</para></listitem>
 						<listitem><para>only lowercase letters, numbers and dashes are accepted</para></listitem> 
 					</orderedlist>
-					<para>The Unix name will be used for your website, the CVS Repository and the shell access for GForge.</para>
+					<para>The Unix name will be used for your website, the CVS Repository and the shell access for FusionForge.</para>
 					<note>
 						<para>The Unix name will never change. Once a project is set up with its Unix name, the name cannot be changed.</para>
 					</note>
 				</listitem>
 			</varlistentry>
 		</variablelist>
-		<para>Click on the <emphasis>I agree</emphasis> button to register the project. Your project is now registered on GForge; but you cannot yet access it. It has to be approved from the site administrators.</para>
-		<para>When the project is approved, you'll receive an email from GForge confirming that the project is active.</para>
+		<para>Click on the <emphasis>I agree</emphasis> button to register the project. Your project is now registered on FusionForge; but you cannot yet access it. It has to be approved from the site administrators.</para>
+		<para>When the project is approved, you'll receive an email from FusionForge confirming that the project is active.</para>
 	</section>
 	<section id="ug_getting_started_login">
 		<title>Login</title>
@@ -131,6 +131,6 @@
 	</section>
 	<section id="ug_getting_started_logout">
 		<title>Logout</title>
-		<para>To log out from GForge, click on the <emphasis>Logout</emphasis> link on the top right of your browser window.</para>
+		<para>To log out from FusionForge, click on the <emphasis>Logout</emphasis> link on the top right of your browser window.</para>
 	</section>
 </section>

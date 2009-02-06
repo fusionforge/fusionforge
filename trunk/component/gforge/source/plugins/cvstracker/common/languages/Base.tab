@@ -7,7 +7,7 @@
 #  *                2004 (c) Francisco Gimeno <kikov@kikov.org>
 #  * http://sourceforge.net
 #  *
-#  * @version   $Id: Base.tab 5335 2006-02-17 18:14:55Z marcelo $
+#  * @version   $Id$
 #  *
 #  */
 plugin_cvstracker	title	Links to related CVS commits

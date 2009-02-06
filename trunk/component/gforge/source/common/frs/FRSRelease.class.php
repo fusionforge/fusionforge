@@ -1,29 +1,26 @@
 <?php
 /**
- * GForge File Release Facility
+ * FusionForge file release system
  *
- * Copyright 2002 GForge, LLC
- * http://gforge.org/
+ * Copyright 2002, Tim Perdue/GForge, LLC
  *
- * @version   $Id: FRSRelease.class.php 6506 2008-05-27 20:56:57Z aljeux $
+ * This file is part of FusionForge.
  *
- * This file is part of GForge.
- *
- * GForge is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * GForge is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation; either version 2 of the License,
+ * or (at your option) any later version.
+ * 
+ * FusionForge is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+ * USA
  */
-
 
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'frs/FRSFile.class.php';
@@ -286,16 +283,16 @@ class FRSRelease extends Error {
 		$subject = sprintf (_('[%1$s Release] %2$s'),
 				    $this->FRSPackage->Group->getUnixName(),
 				    $this->FRSPackage->getName());
-		$text = stripcslashes(sprintf(_("Project %1$s (%2$s) has released a new version of package \"%3$s\".
+		$text = stripcslashes(sprintf(_('Project %1$s (%2$s) has released a new version of package "%3$s".
 You can download it by following this link:
 
 %4$s
 
 You receive this email because you requested to be notified when new
-versions of this package were released. If you don't wish to be
+versions of this package were released. If you don\'t wish to be
 notified in the future, please login to %5$s and click this link:
 
-%6$s"),
+%6$s'),
 					      $this->FRSPackage->Group->getPublicName(),
 					      $this->FRSPackage->Group->getUnixName(),
 					      $this->FRSPackage->getName(),

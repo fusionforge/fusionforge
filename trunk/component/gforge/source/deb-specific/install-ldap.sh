@@ -1,6 +1,6 @@
 #! /bin/bash
 #
-# $Id: install-ldap.sh 5658 2006-09-14 22:32:09Z cbayle $
+# $Id$
 #
 # Configure LDAP for GForge
 # Christian Bayle, Roland Mas

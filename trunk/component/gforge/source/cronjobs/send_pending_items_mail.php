@@ -1,7 +1,7 @@
 #! /usr/bin/php
 <?php
 /**
- * $Id: send_pending_items_mail.php 6506 2008-05-27 20:56:57Z aljeux $
+ * $Id$
  *
  *	send_pending_items_mail.php
  *

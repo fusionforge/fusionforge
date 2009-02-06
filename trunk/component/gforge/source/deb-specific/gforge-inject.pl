@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Id: gforge-inject.pl 3112 2004-07-21 20:39:34Z cbayle $
+# $Id$
 #
 # Debian-specific script to inject local user/group data into the Sourceforge database
 # Roland Mas <lolando@debian.org>

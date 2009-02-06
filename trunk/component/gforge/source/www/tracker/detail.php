@@ -6,7 +6,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * http://sourceforge.net
  *
- * @version   $Id: detail.php 6536 2008-05-31 14:04:29Z aljeux $
+ * @version   $Id$
  */
 
 echo $ath->header(array ('title'=>_('Detail').': '.$ah->getID(). ' '.util_unconvert_htmlspecialchars($ah->getSummary()),'atid'=>$ath->getID()));
@@ -52,7 +52,15 @@ echo notepad_func();
 			<td></td>
 		</tr>
 		<tr>
-			<td><strong><?php echo _('Submitted by') ?>:</strong><br />
+	                <td>
+			<strong><?php echo _('Submitted by') ?>:</strong><br />
+			<?php echo $ah->getSubmittedRealName();
+			if($ah->getSubmittedBy() != 100) {
+				$submittedUnixName = $ah->getSubmittedUnixName();
+				$submittedBy = $ah->getSubmittedBy();
+				?>
+				(<tt><?php echo util_make_link_u ($submittedUnixName,$submittedBy,$submittedUnixName); ?></tt>)
+			<?php } ?>
 			</td>
 			<td><strong><?php echo _('Assigned to') ?>:</strong><br />
 			<?php echo $ah->getAssignedRealName(); ?> (<?php echo $ah->getAssignedUnixName(); ?>)</td>

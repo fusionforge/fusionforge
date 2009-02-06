@@ -6,7 +6,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * http://sourceforge.net
  *
- * @version   $Id: browse.php 6747 2009-01-14 11:08:58Z lo-lan-do $
+ * @version   $Id$
  */
 require_once $gfcommon.'tracker/ArtifactFactory.class.php';
 require_once $gfcommon.'tracker/ArtifactQuery.class.php';
@@ -61,18 +61,20 @@ $max_rows = @getStringFromRequest('max_rows',$max_rows);
 $set = @getStringFromRequest('set',$set);
 $_assigned_to = @getStringFromRequest('_assigned_to',$_assigned_to);
 $_status = @getStringFromRequest('_status',$_status);
+$_extra_fields = array() ;
+$aux_extra_fields = array() ;
 if ($set == 'custom') {
 	//
 	//may be past in next/prev url
 	//
-	if ($_GET['extra_fields'][$ath->getCustomStatusField()]) {
+	if (isset($_GET['extra_fields'][$ath->getCustomStatusField()])) {
 		$_extra_fields[$ath->getCustomStatusField()] = $_GET['extra_fields'][$ath->getCustomStatusField()];
-	} else {
+	} elseif (isset($_POST['extra_fields'][$ath->getCustomStatusField()])) {
 		$_extra_fields[$ath->getCustomStatusField()] = $_POST['extra_fields'][$ath->getCustomStatusField()];
 	}
 }
 
-if (@is_array($_extra_fields)){
+if (is_array($_extra_fields)){
 	$keys=array_keys($_extra_fields);
 	foreach ($keys as $key) {
 		if ($_extra_fields[$key] != 'Array') {
@@ -264,7 +266,7 @@ echo $ath->getBrowseInstructions();
 if ($art_arr && count($art_arr) > 0) {
 
 	if ($set=='custom') {
-		$set .= '&_assigned_to='.$_assigned_to.'&_status='.$_status.'&extra_fields['.$ath->getCustomStatusField().']='.$extra_fields[$ath->getCustomStatusField()].'&_sort_col='.$_sort_col.'&_sort_ord='.$_sort_ord;
+		$set .= '&_assigned_to='.$_assigned_to.'&_status='.$_status.'&extra_fields['.$ath->getCustomStatusField().']='.$_extra_fields[$ath->getCustomStatusField()].'&_sort_col='.$_sort_col.'&_sort_ord='.$_sort_ord;
 	}
 
 

@@ -6,7 +6,7 @@
  * Copyright 2003 FUJITSU PRIME SOFTWARE TECHNOLOGIES LIMITED
  * http://www.pst.fujitsu.com/
  *
- * @version   $Id: note.php 6617 2008-09-24 19:07:55Z aljeux $
+ * @version   $Id$
  *
  * This file is part of GForge.
  *

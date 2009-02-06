@@ -3,7 +3,7 @@
 --	Copyright 1999-2001 (c) VA Linux Systems
 --	http://sourceforge.net
 --
---	$Id: replication-slave.sql 1293 2003-01-01 00:57:41Z cbayle $	
+--	$Id$	
 --
 
 CREATE TABLE "stats_site" (

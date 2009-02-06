@@ -1,7 +1,7 @@
 #!/usr/bin/php
 <?php
 /**
- * GForge Installation Dependency Setup
+ * FusionForge Installation Dependency Setup
  *
  * Copyright 2006 GForge, LLC
  * http://gforge.org/
@@ -33,7 +33,7 @@ define ('RED', "\033[01;31m" );
 $STDOUT = fopen('php://stdout','w');
 $STDIN = fopen('php://stdin','r');
 
-show("\n-=# Welcome to GForge DB-Installer v4.7 #=-");
+show("\n-=# Welcome to FusionForge DB-Installer v4.7 #=-");
 
 //TO DO: add dependency check
 //if (!run("php check-deps.php", true)) {
@@ -59,12 +59,12 @@ else
 	die("ERROR: Could not find Postgresql init script\n");
 }
 
-// # Fedora9 (an maybe newer) requires running initdb
-// if ($pgservice == '/etc/init.d/postgresql') {
-// 	if (!is_dir("/var/lib/pgsql/data/base")) {
-// 		run("service postgresql initdb");
-// 	}
-// }
+# Fedora9 (an maybe newer) requires running initdb
+if ($pgservice == '/etc/init.d/postgresql') {
+	if (!is_dir("/var/lib/pgsql/data/base")) {
+		run("service postgresql initdb &>/dev/null", true);
+	}
+}
 
 // Might fail if it's already running, so we'll ingnore the result
 run("$pgservice start", true);
@@ -137,8 +137,8 @@ function install()
 
 	show("\n * Enter the Database Name (gforge): ");
 
-	if (getenv('GFORGE_DB')) {
-		$gforge_db = getenv('GFORGE_DB');
+	if (getenv('FFORGE_DB')) {
+		$gforge_db = getenv('FFORGE_DB');
 	} else {
 		$gforge_db = trim(fgets($STDIN));
 		if (strlen($gforge_db) == 0) {
@@ -149,8 +149,8 @@ function install()
 
 	show(' * Enter the Database Username (gforge): ');
 
-	if (getenv('GFORGE_USER')) {
-		$gforge_user = getenv('GFORGE_USER');
+	if (getenv('FFORGE_USER')) {
+		$gforge_user = getenv('FFORGE_USER');
 	} else {
 		$gforge_user = trim(fgets($STDIN));
 		if (strlen($gforge_user) == 0) {
@@ -160,8 +160,8 @@ function install()
 	show(" ...using '$gforge_user'");
 
 	show(" * Modifying DB Access Permissions...");
-	if (!file_exists("$PGHBA.gforge.backup")) {
-		run("cp $PGHBA $PGHBA.gforge.backup", true);
+	if (!file_exists("$PGHBA.fforge.backup")) {
+		run("cp $PGHBA $PGHBA.fforge.backup", true);
 	}
 	run("echo \"# GFORGE\nlocal all all trust\" > $PGHBA");
 	show(' * Restarting PostgreSQL...');
@@ -190,50 +190,50 @@ function install()
 	show(" * Creating '$gforge_db' Database...");
 	run("su $susufix $gforge_user -c \"createdb $gforge_db\"", true);
 
-	# Detect postgresql version, load tsearch2 for pg < 8.3
-	$pg_version = explode(' ', shell_exec("postgres --version"));
-	$pgv = $pg_version[2];
+//	# Detect postgresql version, load tsearch2 for pg < 8.3
+//	$pg_version = explode(' ', shell_exec("postgres --version"));
+//	$pgv = $pg_version[2];
+//
+//	if (preg_match('/^(7\.|8\.1|8\.2)/', $pgv)) {
+//		show(" * Dumping tsearch2 Database Into '$gforge_db' DB");
+//		run("su - postgres -c \"psql $gforge_db < $tsearch2_sql\" >> /tmp/gforge-import.log");
+//
+//		$tables = array('pg_ts_cfg', 'pg_ts_cfgmap', 'pg_ts_dict', 'pg_ts_parser');
+//		foreach ($tables as $table) {
+//			run('su - postgres -c "psql '.$gforge_db.' -c \\"GRANT ALL on '.$table.' TO '.$gforge_user.';\\""');
+//		}
+//	} else {
+//		show(" * Creating FTS default configuation (Full Text Search)");
+//		run("su - postgres -c \"psql $gforge_db < $gforge_lib_dir/db/FTS-20081108.sql\" >> /tmp/gforge-import.log");
+//	}
 
-	if (preg_match('/^(7\.|8\.1|8\.2)/', $pgv)) {
-		show(" * Dumping tsearch2 Database Into '$gforge_db' DB");
-		run("su - postgres -c \"psql $gforge_db < $tsearch2_sql\" >> /tmp/gforge-import.log");
 
-		$tables = array('pg_ts_cfg', 'pg_ts_cfgmap', 'pg_ts_dict', 'pg_ts_parser');
-		foreach ($tables as $table) {
-			run('su - postgres -c "psql '.$gforge_db.' -c \\"GRANT ALL on '.$table.' TO '.$gforge_user.';\\""');
-		}
-	} else {
-#		show(" * Creating FTS default configuation (Full Text Search)");
-#		run("su - postgres -c \"psql $gforge_db < $gforge_lib_dir/db/FTS-20081108.sql\" >> /tmp/gforge-import.log");
-	}
-
-
-	show(' * Dumping GForge DB');
+	show(' * Dumping FusionForge DB');
 	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/gforge.sql\" >> /tmp/gforge-import.log");
 
-	show(' * Dumping GForge FTI DB');
-	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI.sql\" >> /tmp/gforge-import.log");
-	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20050315.sql\" >> /tmp/gforge-import.log");
-	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20050401.sql\" >> /tmp/gforge-import.log");
-	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20050530.sql\" >> /tmp/gforge-import.log");
-	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20060130.sql\" >> /tmp/gforge-import.log");
-	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20061025.sql\" >> /tmp/gforge-import.log");
+//	show(' * Dumping FusionForge FTI DB');
+//	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI.sql\" >> /tmp/gforge-import.log");
+//	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20050315.sql\" >> /tmp/gforge-import.log");
+//	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20050401.sql\" >> /tmp/gforge-import.log");
+//	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20050530.sql\" >> /tmp/gforge-import.log");
+//	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20060130.sql\" >> /tmp/gforge-import.log");
+//	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20061025.sql\" >> /tmp/gforge-import.log");
 
-	show(" * Enter the Admin Username (gforgeadmin): ");
-	if (getenv('GFORGE_ADMIN_USER')) {
-		$admin_user = getenv('GFORGE_ADMIN_USER');
+	show(" * Enter the Admin Username (fforgeadmin): ");
+	if (getenv('FFORGE_ADMIN_USER')) {
+		$admin_user = getenv('FFORGE_ADMIN_USER');
 	} else {
 		$admin_user = trim(fgets($STDIN));
 
 		if (strlen($admin_user) == 0) {
-			$admin_user = 'gforgeadmin';
+			$admin_user = 'fforgeadmin';
 		}
 	}
 	show(" ...using '$admin_user'");
 
-	if (getenv('GFORGE_ADMIN_PASSWORD')) {
+	if (getenv('FFORGE_ADMIN_PASSWORD')) {
 		$bad_pwd = false;
-		$pwd1 = getenv('GFORGE_ADMIN_PASSWORD');
+		$pwd1 = getenv('FFORGE_ADMIN_PASSWORD');
 	} else {
 		$retries = 0;
 		$bad_pwd = true;
@@ -300,7 +300,7 @@ function install()
 	}
 
 
-	show(' * Saving database configuration in GForge config file');
+	show(' * Saving database configuration in FForge config file');
 	$data = file_get_contents("$gforge_etc_dir/local.inc");
 	$lines = explode("\n",$data);
 	$config = '';
@@ -414,4 +414,3 @@ function run($command, $ignore = false) {
 
 install();
 ?>
-

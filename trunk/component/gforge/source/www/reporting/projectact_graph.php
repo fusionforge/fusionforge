@@ -4,7 +4,7 @@
  *
  * Copyright 2004 (c) GForge LLC
  *
- * @version   $Id: projectact_graph.php 6609 2008-09-18 11:41:40Z aljeux $
+ * @version   $Id$
  * @author Tim Perdue tim@gforge.org
  * @date 2003-03-16
  *

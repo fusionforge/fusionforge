@@ -6,7 +6,7 @@
  * Portions Copyright 2004 (c) Francisco Gimeno <kikov @nospam@ kikov.org>
  * The rest Copyright 2005 (c) Daniel Perez <danielperez.arg@gmail.com>
  *
- * @version $Id: fckeditor-init.php 6516 2008-05-28 20:32:48Z cbayle $
+ * @version $Id$
  *
  * This file is part of GForge-plugin-fckeditor
  *

@@ -6,7 +6,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * http://sourceforge.net
  *
- * @version   $Id: Theme.class.php 6781 2009-01-20 18:11:55Z aljeux $
+ * @version   $Id$
  */
 
 class Theme extends Layout {
@@ -68,9 +68,9 @@ class Theme extends Layout {
 	 */
 	function header($params) {
 		if (!$params['title']) {
-			$params['title'] = "GForge";
+			$params['title'] = "FusionForge";
 		} else {
-			$params['title'] = "GForge: " . $params['title'];
+			$params['title'] = "FusionForge: " . $params['title'];
 		}
 		echo '<?xml version="1.0" encoding="utf-8"?>'."\n";
 		?>
@@ -171,12 +171,11 @@ if (isset($params['group']) && $params['group']) {
 
 		<!-- end inner body row -->
 </div> <!-- end of content -->
-<!-- PLEASE LEAVE "Powered By GForge" on your site -->
+<!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
 <br />
-<center>
-<a href="http://gforge.org/"><img src="<?php echo util_make_url ('/images/pow-gforge.png'); ?>" alt="Powered By GForge Collaborative Development En
-vironment" border="0" /></a>
-</center>
+<div align="right">
+<a href="http://fusionforge.org/"><img src="<?php echo util_make_url ('/images/pow-fusionforge.png'); ?>" alt="Powered By FusionForge" border="0" /></a>
+</div>
 
 </body>
 </html>

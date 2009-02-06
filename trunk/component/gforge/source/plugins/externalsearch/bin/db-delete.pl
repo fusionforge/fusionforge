@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Id: db-delete.pl 3933 2005-02-19 13:04:45Z gsmet $
+# $Id$
 #
 # Debian-specific script to delete plugin-specific tables
 # Roland Mas <lolando@debian.org>

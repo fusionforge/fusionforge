@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Id: db-upgrade.pl 3370 2004-09-23 21:11:22Z lo-lan-do $
+# $Id$
 #
 # Debian-specific script to upgrade the database between releases
 # Roland Mas <lolando@debian.org>

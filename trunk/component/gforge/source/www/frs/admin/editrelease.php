@@ -6,7 +6,7 @@
  * The rest Copyright 2002-2004 (c) GForge Team
  * http://gforge.org/
  *
- * @version   $Id: editrelease.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id$
  *
  * This file is part of GForge.
  *
@@ -143,6 +143,8 @@ if (getStringFromRequest('step2')) {
 	$userfile = getUploadedFile('userfile');
 	$userfile_name = $userfile['name'];
 	$type_id = getIntFromRequest('type_id');
+	$release_date = getStringFromRequest('release_date');
+	$release_date = strtotime($release_date);
 	$processor_id = getStringFromRequest('processor_id');
 	// Build a Unix time value from the supplied Y-m-d value
 	$group_unix_name=group_getunixname($group_id);

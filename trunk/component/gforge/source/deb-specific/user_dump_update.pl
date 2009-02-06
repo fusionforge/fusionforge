@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #
-# $Id: user_dump_update.pl 5658 2006-09-14 22:32:09Z cbayle $
+# $Id$
 #
 # dump_database.pl - script to dump data from the database to flat files so the ofher perl
 #		     scripts can process it without needing to access the database.

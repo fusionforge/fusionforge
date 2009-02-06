@@ -1,6 +1,6 @@
 #! /bin/bash
 # 
-# $Id: install-db.sh 6584 2008-08-14 21:04:40Z cbayle $
+# $Id$
 #
 # Configure postgresql database for GForge
 # Roland Mas, gforge

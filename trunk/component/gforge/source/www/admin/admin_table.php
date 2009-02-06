@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  *
- * @version   $Id: admin_table.php 6635 2008-10-22 18:27:48Z aljeux $
+ * @version   $Id$
  *
  * This file is part of GForge.
  *

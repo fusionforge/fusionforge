@@ -1,26 +1,25 @@
 <?php
-/** Subversion plugin for Gforge
- * Copyright 2003 Roland Mas <lolando@debian.org>
- * Copyright 2004 Roland Mas <roland@gnurandal.com> 
- *				The Gforge Group, LLC <http://gforgegroup.com/>
- * Based on the CVS plugin, which was derived from Gforge, which was
- * derived from Sourceforge
+/** FusionForge Subversion plugin
  *
- * This file is not part of Gforge
+ * Copyright 2003-2009, Roland Mas
+ * Copyright 2004, GForge, LLC
  *
- * This plugin, like Gforge, is free software; you can redistribute it
- * and/or modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2 of
- * the License, or (at your option) any later version.
+ * This file is part of FusionForge.
  *
- * GForge is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation; either version 2 of the License,
+ * or (at your option) any later version.
+ * 
+ * FusionForge is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+ * USA
  */
 
 class SVNPlugin extends SCM {
@@ -32,8 +31,8 @@ class SVNPlugin extends SCM {
 		$this->hooks[] = 'scm_page';
 		$this->hooks[] = 'scm_admin_update';
 		$this->hooks[] = 'scm_admin_page';
-// to be revised		
  		$this->hooks[] = 'scm_stats';
+		$this->hooks[] = 'scm_createrepo';
 		$this->hooks[] = 'scm_plugin';
 
 		require_once $gfconfig.'plugins/scmsvn/config.php' ;
@@ -69,6 +68,9 @@ class SVNPlugin extends SCM {
 		case 'scm_stats':
 			$this->getStats ($params) ;
 			break;
+		case 'scm_createrepo':
+			$this->createOrUpdateRepo ($params) ;
+			break;
 		case 'scm_plugin':
 			$scm_plugins=& $params['scm_plugins'];
 			$scm_plugins[]=$this->name;
@@ -101,75 +103,64 @@ class SVNPlugin extends SCM {
 				}
 			}
 
-			// ######################## Table for summary info
-			?>
-			<table width="100%">
-			<tr valign="top">
-				<td width="65%">
-				<?php
-				print _('<p>Documentation for Subversion (sometimes referred to as "SVN") is available <a href="http://svnbook.red-bean.com/">here</a>.</p>');
+			// Table for summary info
+			print '<table width="100%"><tr valign="top"><td width="65%">' ;
+			print _('<p>Documentation for Subversion (sometimes referred to as "SVN") is available <a href="http://svnbook.red-bean.com/">here</a>.</p>');
 
-				// ######################## Anonymous SVN Instructions
-				if ($project->enableAnonSCM()) {
-					print _('<p><b>Anonymous Subversion Access</b></p><p>This project\'s SVN repository can be checked out through anonymous access with the following command(s).</p>');
-					print '<p>';
-					if ($this->use_ssh) {
-						print '<tt>svn checkout svn://'.$project->getSCMBox().'/'.$this->svn_root.'/'.$project->getUnixName().'</tt><br />';
-					}
-					if ($this->use_dav) {
-						print '<tt>svn checkout --username anonsvn http'.(($this->use_ssl) ? 's' : '').'://' . $project->getSCMBox(). '/' . $this->svn_root .'/'. $project->getUnixName() .'</tt><br/><br/>';
-						print _('The password is \'anonsvn\'').'<br/>';
-					}
-					print '</p>';
-				}
-	
-				// ######################## Developer Access
+			// Anonymous SVN Instructions
+			if ($project->enableAnonSCM()) {
+				print _('<p><b>Anonymous Subversion Access</b></p><p>This project\'s SVN repository can be checked out through anonymous access with the following command(s).</p>');
+				print '<p>';
 				if ($this->use_ssh) {
-					echo _('<p><b>Developer Subversion Access via SSH</b></p><p>Only project developers can access the SVN tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
-					print '<p><tt>svn checkout svn+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. $this->svn_root .'/'. $project->getUnixName().'</tt></p>' ;
+					print '<tt>svn checkout svn://'.$project->getSCMBox().'/'.$this->svn_root.'/'.$project->getUnixName().'</tt><br />';
 				}
 				if ($this->use_dav) {
-					echo _('<p><b>Developer Subversion Access via DAV</b></p><p>Only project developers can access the SVN tree via this method. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
-					print '<p><tt>svn checkout --username <i>'._('developername').'</i> http'.(($this->use_ssl) ? 's' : '').'://'. $project->getSCMBox() .'/'. $this->svn_root .'/'.$project->getUnixName().'</tt></p>' ;
+					print '<tt>svn checkout --username anonsvn http'.(($this->use_ssl) ? 's' : '').'://' . $project->getSCMBox(). '/' . $this->svn_root .'/'. $project->getUnixName() .'</tt><br/><br/>';
+					print _('The password is \'anonsvn\'').'<br/>';
 				}
+				print '</p>';
+			}
+	
+			// Developer Access
+			if ($this->use_ssh) {
+				echo _('<p><b>Developer Subversion Access via SSH</b></p><p>Only project developers can access the SVN tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
+				print '<p><tt>svn checkout svn+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. $this->svn_root .'/'. $project->getUnixName().'</tt></p>' ;
+			}
+			if ($this->use_dav) {
+				echo _('<p><b>Developer Subversion Access via DAV</b></p><p>Only project developers can access the SVN tree via this method. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
+				print '<p><tt>svn checkout --username <i>'._('developername').'</i> http'.(($this->use_ssl) ? 's' : '').'://'. $project->getSCMBox() .'/'. $this->svn_root .'/'.$project->getUnixName().'</tt></p>' ;
+			}
 
-				// ######################## SVN Snapshot
-				if ($displaySvnBrowser) {
-					$filename=$project->getUnixName().'-scm-latest.tar.gz';
-					if (file_exists($sys_scm_snapshots_path.'/'.$filename)) {
-						print '<p>[' ;
-						print util_make_link ("/snapshots.php?group_id=$group_id",
-								      _('Download The Nightly SVN Tree Snapshot')
-							) ;
-						print ']</p>';
-					}
-				}
-				?>
-				</td>
-
-				<td width="35%" valign="top">
-				<?php
-				// ######################## SVN Browsing
-				echo $HTML->boxTop(_('Repository History'));
-				echo $this->getDetailedStats(array('group_id'=>$group_id)).'<p>';
-				if ($displaySvnBrowser) {
-					echo _('<b>Browse the Subversion Tree</b><p>Browsing the SVN tree gives you a great view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
-					echo '<p>[' ;
-					echo util_make_link ("/scm/viewvc.php/?root=".$project->getUnixName(),
-							     _('Browse Subversion Repository')
+			// SVN Snapshot
+			if ($displaySvnBrowser) {
+				$filename=$project->getUnixName().'-scm-latest.tar.gz';
+				if (file_exists($sys_scm_snapshots_path.'/'.$filename)) {
+					print '<p>[' ;
+					print util_make_link ("/snapshots.php?group_id=$group_id",
+							      _('Download The Nightly SVN Tree Snapshot')
 						) ;
-					echo ']</p>' ;
+					print ']</p>';
 				}
+			}
+			print '</td><td width="35%" valign="top">' ;
 
-				echo $HTML->boxBottom();
-				?>
-				</td>
-			</tr>
-			</table>
-			<?php
+			// SVN Browsing
+			echo $HTML->boxTop(_('Repository History'));
+			echo $this->getDetailedStats(array('group_id'=>$group_id)).'<p>';
+			if ($displaySvnBrowser) {
+				echo _('<b>Browse the Subversion Tree</b><p>Browsing the SVN tree gives you a great view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
+				echo '<p>[' ;
+				echo util_make_link ("/scm/viewvc.php/?root=".$project->getUnixName(),
+						     _('Browse Subversion Repository')
+					) ;
+				echo ']</p>' ;
+			}
+			
+			echo $HTML->boxBottom();
+			print '</td></tr></table>' ;
 		}
 	}
-
+	
 	function AdminUpdate ($params) {
 		$group =& group_get_object($params['group_id']);
 		if (!$group || !is_object($group)) {
@@ -177,7 +168,7 @@ class SVNPlugin extends SCM {
 		} elseif ($group->isError()) {
 			return false;
 		}
-
+		
 		if ( $group->usesPlugin ( $this->name ) ) {
 			if ($params['scmsvn_enable_anon_svn']) {
 				$group->SetUsesAnonSCM(true);
@@ -186,7 +177,7 @@ class SVNPlugin extends SCM {
 			}
 		}
 	}
-
+	
 	// This function is used to render checkboxes below
 	function c($v) {
 		if ($v) {
@@ -195,16 +186,14 @@ class SVNPlugin extends SCM {
 			return '';
 		}
 	}
-
+	
 	function getAdminPage ($params) {
 		$group =& group_get_object($params['group_id']);
 		if ( $group->usesPlugin ( $this->name ) && $group->isPublic()) {
-			?>
-			<p><input type="checkbox" name="scmsvn_enable_anon_svn" value="1" <?php echo $this->c($group->enableAnonSCM()); ?> /><strong><?php echo _('Enable Anonymous Access') ?></strong></p>
-			<?php
+			print '<p><input type="checkbox" name="scmsvn_enable_anon_svn" value="1" '.$this->c($group->enableAnonSCM()).' /><strong>'._('Enable Anonymous Access').'</strong></p>';
 		}
 	}
-
+	
 	function getStats ($params) {
 		$group_id = $params['group_id'] ;
 		$project =& group_get_object($group_id);
@@ -213,13 +202,13 @@ class SVNPlugin extends SCM {
 		} elseif ($project->isError()) {
 			return false;
 		}
-
+		
 		if ($project->usesPlugin ($this->name)) {
 			list($commit_num, $add_num) = $this->getTotalStats($group_id);
 			echo ' (SVN: '.sprintf(_('<strong>%1$s</strong> updates, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).')';
 		}
 	}
-
+	
 	// Get the total stats for a group
 	function getTotalStats($group_id) {
 		$result = db_query("
@@ -236,11 +225,11 @@ class SVNPlugin extends SCM {
 		}
 		return array($commit_num, $add_num);
 	}
-
+	
 	function getDetailedStats ($params) {
 		global $HTML;
 		$group_id = $params['group_id'] ;
-
+		
 		$result = db_query('
 			SELECT u.realname, u.user_name, u.user_id, sum(commits) as commits, sum(adds) as adds, sum(adds+commits) as combined
 			FROM stats_cvs_user s, users u
@@ -254,12 +243,12 @@ class SVNPlugin extends SCM {
 				_('Name'),
 				_('Adds'),
 				_('Updates')
-			);
+				);
 			echo $HTML->listTableTop($tableHeaders);
-
+			
 			$i = 0;
 			$total = array('adds' => 0, 'commits' => 0);
-
+			
 			while($data = db_fetch_array($result)) {
 				echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
 				echo '<td width="50%">' ;
@@ -272,7 +261,7 @@ class SVNPlugin extends SCM {
 			}
 			list($commit_num, $add_num) = $this->getTotalStats($group_id);
 			if ($commit_num > $total['commits'] ||
-				$add_num > $total['adds']) {
+			    $add_num > $total['adds']) {
 				echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
 				echo '<td width="50%">' .
 					_('Unknown') .
@@ -292,7 +281,43 @@ class SVNPlugin extends SCM {
 			echo '<hr size="1" />';
 		}
 	}
-}
+
+	function createOrUpdateRepo ($params) {
+		return true ;   // Disabled for now
+
+		$group_id = $params['group_id'] ;
+
+		$project =& group_get_object($group_id);
+		if (!$project || !is_object($project)) {
+			return false;
+		} elseif ($project->isError()) {
+			return false;
+		}
+               
+		if (! $project->usesPlugin ($this->name)) {
+			return false;
+		}
+
+		$repo = $this->svn_root . '/' . $project->getUnixName() ;
+		$unix_group = 'scm_' . $project->getUnixName() ;
+
+		$repo_exists = false ;
+		if (is_dir ($repo) && is_file ("$repo/format")) {
+			$repo_exists = true ;
+		}
+               
+		if (!$repo_exists) {
+			system ("svnadmin create --fs-type fsfs $repo") ;
+		}
+
+		system ("chgrp -R $unix_group $repo") ;
+		if ($project->enableAnonSCM()) {
+			system ("chmod -R g+wXs,o+rX-w $repo") ;
+		} else {
+			system ("chmod -R g+wXs,o-rwx $repo") ;
+		}
+	}
+  }
 
 // Local Variables:
 // mode: php

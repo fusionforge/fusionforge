@@ -6,7 +6,7 @@
  * Copyright 2002-2004 GForge, LLC
  * http://gforge.org/
  *
- * @version   $Id: mailaliases.php 6780 2009-01-20 18:06:23Z aljeux $
+ * @version   $Id$
  *
  * This file is part of GForge.
  *

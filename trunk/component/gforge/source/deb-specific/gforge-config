@@ -1,6 +1,6 @@
 #! /bin/sh
 #
-# $Id: gforge-config 6592 2008-08-18 19:36:24Z cbayle $
+# $Id$
 #
 # Parse all template files and expand them into real files
 # Roland Mas, debian-sf (Sourceforge for Debian)

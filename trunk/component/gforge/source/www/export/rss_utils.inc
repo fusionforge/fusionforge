@@ -8,10 +8,12 @@
   * Copyright 1999-2001 (c) VA Linux Systems
   * http://sourceforge.net
   *
-  * @version   $Id: rss_utils.inc 6433 2008-03-11 22:54:02Z cbayle $
+  * @version   $Id: rss_utils.inc 6907 2009-02-03 19:28:14Z lolando $
   *
   */
 
+require_once('../env.inc.php');
+require_once $gfwww.'include/pre.php';    // Initial db and session library, opens session
 
 function rss_setscheme() {
 	if ($GLOBALS['scheme'] == "netscape") {
@@ -38,7 +40,7 @@ function rss_description ($in) {
 // row and which result will be appended to description element
 function rss_dump_project_result_set ($res,$title,$desription='',$callback=0) {
         if (!$desription) $desription=$title;
-	// ## one time output
+	// one time output
 	print " <channel>\n";
 	print "  <copyright>Copyright 1999-2000 VA Linux Systems, Inc.</copyright>\n";
 	print "  <pubDate>".gmdate('D, d M Y g:i:s',time())." GMT</pubDate>\n";
@@ -48,21 +50,22 @@ function rss_dump_project_result_set ($res,$title,$desription='',$callback=0) {
 	print "  <webMaster>webmaster@$GLOBALS[sys_default_domain]</webMaster>\n";
 	print "  <language>en-us</language>\n";
 
-	// ## item outputs
+	// item outputs
+	$addendum = '' ;
 	while ($row = db_fetch_array($res)) {
                 if ($callback) {
                 	$addendum=$callback($row);
                 }
 		print "  <item>\n";
 		print "   <title>".htmlspecialchars($row['group_name'])."</title>\n";
-		print "   <link>".util_make_url_p ($row['unix_group_name'],$row['group_id'])."</link>\n";
+		print "   <link>".util_make_url_g ($row['unix_group_name'],$row['group_id'])."</link>\n";
 		print "   <description>";
 		print ereg_replace(" *\r*\n *"," ",rss_description($row['short_description']));
                 print $addendum;
 		print "</description>\n";
 		print "  </item>\n";
 	}
-	// ## end output
+	// end output
 	print " </channel>\n";
 }
 

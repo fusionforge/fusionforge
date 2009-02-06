@@ -3,7 +3,7 @@
 /**
  * Backup SITE job
  *
- * @version   $Id: backup_site.php 6680 2008-11-29 19:21:25Z aljeux $
+ * @version   $Id$
  *
  * This file is part of GForge.
  *

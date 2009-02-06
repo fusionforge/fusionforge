@@ -1,27 +1,25 @@
 <?php
 /**
- * GForge Tracker Facility
+ * FusionForge trackers
  *
- * Copyright 2002 GForge, LLC
- * http://gforge.org/
+ * Copyright 2002, GForge, LLC
  *
- * @version   $Id: ArtifactFactory.class.php 6761 2009-01-15 17:35:34Z lo-lan-do $
+ * This file is part of FusionForge.
  *
- * This file is part of GForge.
- *
- * GForge is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * GForge is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation; either version 2 of the License,
+ * or (at your option) any later version.
+ * 
+ * FusionForge is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+ * USA
  */
 
 require_once $gfcommon.'include/Error.class.php';
@@ -154,6 +152,7 @@ class ArtifactFactory extends Error {
 				//default to open
 				$_assigned_to=0;
 				$_status=1;
+				$_changed=0;
 			}
 		}
 
@@ -208,6 +207,7 @@ class ArtifactFactory extends Error {
 					$u->deletePreference('art_query'.$this->ArtifactType->getID());
 				}
 			}
+			$_changed=0;
 		}
 
 		$this->sort=$_sort_ord;
@@ -223,7 +223,7 @@ class ArtifactFactory extends Error {
 		if (is_null($max_rows) || $max_rows < 0) {
 			$max_rows=50;
 		}
-		if ($default_query) {
+		if (isset ($default_query)) {
 			$this->max_rows=0;
 		} else {
 			$this->max_rows=$max_rows;
@@ -372,5 +372,10 @@ class ArtifactFactory extends Error {
 	}
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

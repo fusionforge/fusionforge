@@ -2,7 +2,7 @@
 #
 #  Check proper installation of LDAP replication 
 #  by pfalcon@sourceforge.net 2001-01-16
-#  $Id: ldap-check-replica 1221 2002-12-23 13:17:23Z lo-lan-do $
+#  $Id$
 #
 
 require("include.pl");  # Include all the predefined functions

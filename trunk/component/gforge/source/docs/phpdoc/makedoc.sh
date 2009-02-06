@@ -1,5 +1,5 @@
 #!/bin/bash
-# $Id: makedoc.sh 3807 2005-01-16 14:12:59Z cbayle $ 
+# $Id$ 
 
 #/**
 #  * makedoc - PHPDocumentor script to save your settings

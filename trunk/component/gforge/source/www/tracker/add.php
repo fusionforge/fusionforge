@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems; 2005 GForge, LLC
  * http://gforge.org/
  *
- * @version   $Id: add.php 6416 2008-03-08 22:29:07Z cbayle $
+ * @version   $Id$
  *
  * This file is part of GForge.
  *

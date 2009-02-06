@@ -5,7 +5,7 @@
  * Copyright 2002 GForge, LLC
  * http://gforge.org/
  *
- * @version   $Id: ForumHTML.class.php 6738 2009-01-13 15:35:04Z lo-lan-do $
+ * @version   $Id$
  */
 
 

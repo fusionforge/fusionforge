@@ -1,4 +1,5 @@
 <?php
+
 class Theme extends Layout {
 	/**
 	 * Theme() - Constructor
@@ -12,7 +13,7 @@ class Theme extends Layout {
 	 * @param	array	Header parameters array
 	 */
 	function header($params) {
-		if ($_POST['selectmenu'] == "yes")
+		if (isset($_POST['selectmenu']) && ($_POST['selectmenu'] == "yes"))
 		{
 		header("Location:".$_POST['menuList']);		
 		}
@@ -138,12 +139,12 @@ class Theme extends Layout {
 	function footer($params) {
 		?>
 		<!-- end main body row -->
-		<!-- PLEASE LEAVE "Powered By GForge" on your site -->
+		<!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
 		<br />
-		<center>
-		<a href="http://gforge.org/">Powered By GForge Collaborative Development Environment</a>
-		</center>
-		<?php
+		<div align="right">
+		<a href="http://fusionforge.org/">Powered By FusionForge</a><br />
+		</div>
+<?php		
 		global $sys_show_source;
 		if ($sys_show_source) {
 			echo util_make_link ('/source.php?file='.getStringFromServer('SCRIPT_NAME'),_('Show Source'),array('class'=>'showsource'));
@@ -239,7 +240,7 @@ class Theme extends Layout {
 
 	function tabGenerator($TABS_DIRS,$TABS_TITLES,$nested=false,$selected=false,$sel_tab_bgcolor='WHITE',$total_width='100%') {
 		$count=count($TABS_DIRS);
-		$return .= '
+		$return = '
 		<form name="menuForm" method="POST" action="/">
 		<select name="menuList">';
 		for ($i=0; $i<$count; $i++) {

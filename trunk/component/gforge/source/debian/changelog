@@ -1,10 +1,26 @@
-gforge (4.7~rc2+svn6766-1) experimental; urgency=low
+gforge (4.7.1+svn-0) experimental; urgency=low
 
-  * New SVN snapshot.
+  * New package: gforge-plugin-scmbzr (not complete yet!).
+
+ -- Roland Mas <lolando@debian.org>  Thu, 05 Feb 2009 22:14:45 +0100
+
+gforge (4.7.1-1) experimental; urgency=low
+
+  * New upstream release.
+
+ -- Roland Mas <lolando@debian.org>  Thu, 05 Feb 2009 21:01:10 +0100
+
+gforge (4.7-1) experimental; urgency=low
+
+  [ Roland Mas ]
+  * New upstream release.
   * Made PostgreSQL dependency stricter: some of the views only work with
     versions >= 8.1 (closes: #498811).
 
- -- Roland Mas <lolando@debian.org>  Fri, 16 Jan 2009 11:02:47 +0100
+  [ Christian Bayle ]
+  * Enable apache2 mod rewrite 
+
+ -- Roland Mas <lolando@debian.org>  Sun, 01 Feb 2009 19:22:16 +0100
 
 gforge (4.7~rc2-7) unstable; urgency=high
 

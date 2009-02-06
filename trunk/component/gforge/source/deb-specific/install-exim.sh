@@ -1,6 +1,6 @@
 #! /bin/sh
 # 
-# $Id: install-exim.sh 4099 2005-03-05 17:56:46Z cbayle $
+# $Id$
 #
 # Configure Exim for GForge
 # Christian Bayle, Roland Mas, debian-sf (GForge for Debian)

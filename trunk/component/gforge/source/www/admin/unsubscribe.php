@@ -7,7 +7,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  *
- * @version   $Id: unsubscribe.php 6548 2008-06-07 15:22:36Z aljeux $
+ * @version   $Id$
  *
  * This file is part of GForge.
  *

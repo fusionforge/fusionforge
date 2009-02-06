@@ -3,30 +3,29 @@
  * SOAP Group Include - this file contains wrapper functions for the SOAP interface
  *
  * Copyright 2004 (c) GForge, LLC
- * http://gforge.org
  *
- * @version   $Id: group.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id$
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'include/Group.class.php';
-require_once $gfcommon.'include/GForge.class.php';
+require_once $gfcommon.'include/FusionForge.class.php';
 
 // Add The definition of a group object
 $server->wsdl->addComplexType(
@@ -115,10 +114,10 @@ function &getGroupsByName($session_ser,$group_names) {
 // use as a way to get group names for use in getGroupsByName
 function &getPublicProjectNames($session_ser) {
 	continue_session($session_ser);
-	$gforge = new GForge();
-	$result = $gforge->getPublicProjectNames();
-	if ($gforge->isError()) {
-		$errMsg = 'Could Not Get Public Group Names: '.$gforge->getErrorMessage();
+	$forge = new FusionForge();
+	$result = $forge->getPublicProjectNames();
+	if ($forge->isError()) {
+		$errMsg = 'Could Not Get Public Group Names: '.$forge->getErrorMessage();
 		return new soap_fault ('2003','group',$errMsg,$errMsg);
 	}
 	return $result;

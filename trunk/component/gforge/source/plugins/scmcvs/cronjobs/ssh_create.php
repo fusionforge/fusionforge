@@ -6,7 +6,7 @@
  * The rest Copyright 2002-2005 (c) GForge Team
  * http://gforge.org/
  *
- * @version   $Id: ssh_create.php 6677 2008-11-29 16:50:24Z aljeux $
+ * @version   $Id$
  *
  * This file is part of GForge.
  *

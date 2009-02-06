@@ -56,6 +56,9 @@ extends WikiPlugin
     }
 
     function run($dbi, $argstr, &$request, $basepage) {
+	$disablemsg = HTML();
+	$disablemsg->pushContent(HTML::h2("Upload is temporarily disabled."),HTML::br());
+	return $disablemsg;
         $this->disallowed_extensions = explode("\n",
 "ad[ep]
 asd

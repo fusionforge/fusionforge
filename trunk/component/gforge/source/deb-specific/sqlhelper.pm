@@ -1,4 +1,4 @@
-# $Id: sqlhelper.pm 6210 2007-11-21 18:07:18Z lo-lan-do $
+# $Id$
 #
 # A few SQL helper functions
 #

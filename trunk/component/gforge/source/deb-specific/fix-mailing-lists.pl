@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Id: fix-mailing-lists.pl 6210 2007-11-21 18:07:18Z lo-lan-do $
+# $Id$
 #
 # Fix the mailing-lists if they have been broken in previous versions
 # Roland Mas <lolando@debian.org>

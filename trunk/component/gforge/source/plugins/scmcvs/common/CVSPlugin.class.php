@@ -1,4 +1,25 @@
 <?php
+/** FusionForge CVS plugin
+ *
+ * Copyright 2004-2009, Roland Mas
+ *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation; either version 2 of the License,
+ * or (at your option) any later version.
+ * 
+ * FusionForge is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+ * USA
+ */
 
 class CVSPlugin extends SCM {
 	function CVSPlugin () {
@@ -11,7 +32,7 @@ class CVSPlugin extends SCM {
 		$this->hooks[] = 'scm_admin_update';
 		$this->hooks[] = 'scm_admin_page';
 		$this->hooks[] = 'scm_stats';
-
+		$this->hooks[] = 'scm_createrepo' ;
 		$this->hooks[] = 'scm_plugin';
 
 		require_once $GLOBALS['gfconfig'].'plugins/scmcvs/config.php' ;
@@ -50,6 +71,9 @@ class CVSPlugin extends SCM {
 		case 'scm_stats':
 			$this->getStats ($params) ;
 			break;
+		case 'scm_createrepo':
+			$this->createOrUpdateRepo ($params) ;
+			break;
 		case 'scm_plugin':
 			$scm_plugins=& $params['scm_plugins'];
 			$scm_plugins[]=$this->name;
@@ -87,62 +111,52 @@ class CVSPlugin extends SCM {
 				}
 			}
 
-			// ######################## Table for summary info
-			?>
-			<table width="100%">
-			<tr valign="top">
-				<td width="65%">
-			 	<?php
-				// ######################## Anonymous CVS Instructions
-				if ($project->enableAnonSCM()){
-					echo _('<p><b>Anonymous CVS Access</b></p><p>This project\'s CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <i>modulename</i>. When prompted for a password for <i>anonymous</i>, simply press the Enter key.</p>');
-					print '
+			// Table for summary info
+			print '<table width="100%"><tr valign="top"><td width="65%">' ;
+
+			// Anonymous CVS Instructions
+			if ($project->enableAnonSCM()){
+				echo _('<p><b>Anonymous CVS Access</b></p><p>This project\'s CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <i>modulename</i>. When prompted for a password for <i>anonymous</i>, simply press the Enter key.</p>');
+				print '
 						<p>
 						<tt>cvs -d :pserver:anonymous@' . $cvsrootend.' login</tt><br/>
 						<tt>cvs -d :pserver:anonymous@' . $cvsrootend.' checkout <em>'._('modulename').'</em></tt>
 						</p>';
-				}
-
-				// ######################## Developer Access
-				echo _('<p><b>Developer CVS Access via SSH</b></p><p>Only project developers can access the CVS tree via this method. SSH must be installed on your client machine. Substitute <i>modulename</i> and <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
-				print '
+			}
+			
+			// Developer Access
+			echo _('<p><b>Developer CVS Access via SSH</b></p><p>Only project developers can access the CVS tree via this method. SSH must be installed on your client machine. Substitute <i>modulename</i> and <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
+			print '
 					<p>
 					<tt>export CVS_RSH=ssh</tt><br/>
 					<tt>cvs -d :ext:<em>'._('developername').'</em>@'.$cvsrootend.' checkout <em>'._('modulename').'</em></tt>
 					</p>';
-
-				// ######################## CVS Snapshot
-				if ($displayCvsBrowser) {
-					print '<p>[' ;
-					print util_make_link ("/snapshots.php?group_id=$group_id",
-							      _('Download The Nightly CVS Tree Snapshot')
-						) ;
-					print ']</p>';
-	 			}
-				?>
-				</td>
-
-				<td width="35%" valign="top">
-				<?php
-				// ######################## CVS Browsing 
-				echo $HTML->boxTop(_('Repository History'));
-				echo $this->getDetailedStats(array('group_id'=>$group_id)).'<p>';
-				if ($displayCvsBrowser){
-					echo _('<b>Browse the CVS Tree</b><p>Browsing the CVS tree gives you a great view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
-					echo '<p>[' ;
-					echo util_make_link ("/scm/viewvc.php/?root=".$project->getUnixName(),
-							     _('Browse CVS Repository')
-						) ;
-					echo ']</p>' ;
-					$hook_params['project_name'] = $project->getUnixName();
-					plugin_hook ("cvs_stats", $hook_params) ;
-				}
-				echo $HTML->boxBottom();
-				?>
-				</td>
-			</tr>
-			</table>
-			<?php
+			
+			// CVS Snapshot
+			if ($displayCvsBrowser) {
+				print '<p>[' ;
+				print util_make_link ("/snapshots.php?group_id=$group_id",
+						      _('Download The Nightly CVS Tree Snapshot')
+					) ;
+				print ']</p>';
+			}
+			print '</td><td width="35%" valign="top">' ;
+			
+			// CVS Browsing 
+			echo $HTML->boxTop(_('Repository History'));
+			echo $this->getDetailedStats(array('group_id'=>$group_id)).'<p>';
+			if ($displayCvsBrowser){
+				echo _('<b>Browse the CVS Tree</b><p>Browsing the CVS tree gives you a great view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
+				echo '<p>[' ;
+				echo util_make_link ("/scm/viewvc.php/?root=".$project->getUnixName(),
+						     _('Browse CVS Repository')
+					) ;
+				echo ']</p>' ;
+				$hook_params['project_name'] = $project->getUnixName();
+				plugin_hook ("cvs_stats", $hook_params) ;
+			}
+			echo $HTML->boxBottom();
+			print '</td></tr></table>' ;
 		}	
 	}
 
@@ -154,19 +168,19 @@ class CVSPlugin extends SCM {
 			return false;
 		}
 		if ($group->usesPlugin($this->name)) {
- 			if ($params['scmcvs_enable_anoncvs']) {
+			if ($params['scmcvs_enable_anoncvs']) {
 				$group->SetUsesAnonSCM(true);
 			} else {
 				$group->SetUsesAnonSCM(false);
- 			}
- 			if ($params['scmcvs_enable_pserver']) {
+			}
+			if ($params['scmcvs_enable_pserver']) {
 				$group->SetUsesPserver(true);
 			} else {
 				$group->SetUsesPserver(false);
- 			}
+			}
 		}
 	}
-
+	
 	// This function is used to render checkboxes below
 	function c($v) {
 		if ($v) {
@@ -178,15 +192,11 @@ class CVSPlugin extends SCM {
 
 	function getAdminPage ($params) {
 		$group =& group_get_object($params['group_id']);
-
+		
 		if ($group->usesPlugin($this->name)) {
-			?>
-			<p>
-			<input type="checkbox" name="scmcvs_enable_anoncvs" value="1" <?php echo $this->c($group->enableAnonSCM()); ?> /><strong><?php echo _('Enable Anonymous Access') ?></strong>
-			<br />
-			<input type="checkbox" name="scmcvs_enable_pserver" value="1" <?php echo $this->c($group->enablePserver()); ?> /><strong><?php echo _('Enable pserver') ?></strong>
-			</p>
-			<?php
+			print '<p>
+			<input type="checkbox" name="scmcvs_enable_anoncvs" value="1" '.$this->c($group->enableAnonSCM()).' /><strong>'._('Enable Anonymous Access').'</strong><br />
+			<input type="checkbox" name="scmcvs_enable_pserver" value="1" '.$this->c($group->enablePserver()).' /><strong>'._('Enable pserver').'</strong></p>' ;
 		}
 	}
 
@@ -233,12 +243,12 @@ class CVSPlugin extends SCM {
 				_('Name'),
 				_('Adds'),
 				_('Commits')
-			);
+				);
 			echo $HTML->listTableTop($tableHeaders);
-
+			
 			$i = 0;
 			$total = array('adds' => 0, 'commits' => 0);
-
+			
 			while($data = db_fetch_array($result)) {
 				echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
 				echo '<td width="50%">' ;
@@ -258,7 +268,43 @@ class CVSPlugin extends SCM {
 			echo '<hr size="1" />';
 		}
 	}
-}
+
+	function createOrUpdateRepo ($params) {
+		return true ;	// Disabled for now
+
+		$group_id = $params['group_id'] ;
+
+		$project =& group_get_object($group_id);
+		if (!$project || !is_object($project)) {
+			return false;
+		} elseif ($project->isError()) {
+			return false;
+		}
+		
+		if (! $project->usesPlugin ($this->name)) {
+			return false;
+		}
+
+		$repo = $this->cvs_root . '/' . $project->getUnixName() ;
+		$unix_group = 'scm_' . $project->getUnixName() ;
+
+		$repo_exists = false ;
+		if (is_dir ($repo) && is_dir ("$repo/CVSROOT")) {
+			$repo_exists = true ;
+		}
+		
+		if (!$repo_exists) {
+			system ("cvs -d$repo init") ;
+		}
+
+		system ("chgrp -R $unix_group $repo") ;
+		if ($project->enableAnonSCM()) {
+			system ("chmod -R g+wXs,o+rX-w $repo") ;
+		} else {
+			system ("chmod -R g+wXs,o-rwx $repo") ;
+		}
+	}
+  }
 
 // Local Variables:
 // mode: php

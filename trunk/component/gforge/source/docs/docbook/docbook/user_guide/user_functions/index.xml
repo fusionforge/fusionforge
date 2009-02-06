@@ -65,13 +65,13 @@
 
 	</section>
 	<section id="ug_user_changing_language">
-		<title>Changing the language on GForge</title>
+		<title>Changing the language on FusionForge</title>
                 <para>You have two possibilities:</para>
                 <orderedlist>
                     <listitem><para>If you want to change the language for your account, then go to
                                     My Page -&gt; Account Maintenance and then, select &lt;your language&gt; 
                                     as language. And submit.</para></listitem>
-                    <listitem><para>If you want your language for accessing GForge (even without being logged), 
+                    <listitem><para>If you want your language for accessing FusionForge (even without being logged), 
                                     then it's defined in the configuration of your browser. You should 
                                     see a preferred list of language somewhere.</para></listitem>
                 </orderedlist>
@@ -112,7 +112,7 @@
 			The Diary and Notes section allows you to simulate a basic agenda. You can insert a subject and a description of the item and select if the item is public or private.
 		</para>
 		<para>
-			If the item is public, every user of GForge can view and monitor this item.
+			If the item is public, every user of FusionForge can view and monitor this item.
 		</para>
 	</section>
 </section>

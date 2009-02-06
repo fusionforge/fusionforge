@@ -68,8 +68,8 @@ BASIC CLIENT USAGE EXAMPLE
 
 require_once('nusoap.php');
 $parameters = array('name'=>'dietrich');
-$soapclient = new soapclient('http://someSOAPServer.com/hello.php');
-echo $soapclient->call('hello',$parameters);
+$nusoapclient = new nusoapclient('http://someSOAPServer.com/hello.php');
+echo $nusoapclient->call('hello',$parameters);
 
 ?>
 
@@ -79,8 +79,8 @@ WSDL CLIENT USAGE EXAMPLE
 
 require_once('nusoap.php');
 $parameters = array('dietrich');
-$soapclient = new soapclient('http://someSOAPServer.com/hello.wsdl','wsdl');
-echo $soapclient->call('hello',$parameters);
+$nusoapclient = new nusoapclient('http://someSOAPServer.com/hello.wsdl','wsdl');
+echo $nusoapclient->call('hello',$parameters);
 
 ?>
 
@@ -89,8 +89,8 @@ PROXY CLIENT USAGE EXAMPLE (only works w/ wsdl)
 <?php
 
 require_once('nusoap.php');
-$soapclient = new soapclient('http://someSOAPServer.com/hello.wsdl','wsdl');
-$soap_proxy = $soapclient->getProxy();
+$nusoapclient = new nusoapclient('http://someSOAPServer.com/hello.wsdl','wsdl');
+$soap_proxy = $nusoapclient->getProxy();
 echo $soap_proxy->hello('dietrich');
 
 ?>

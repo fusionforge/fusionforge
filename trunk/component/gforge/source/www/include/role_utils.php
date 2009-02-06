@@ -2,7 +2,7 @@
 /*
  * Copyright 2004 GForge, LLC
  *
- * @version   $Id: role_utils.php 3252 2004-08-04 16:18:44Z tperdue $
+ * @version   $Id$
  * @author Tim Perdue tim@gforge.org
  *
  * This file is part of GForge.

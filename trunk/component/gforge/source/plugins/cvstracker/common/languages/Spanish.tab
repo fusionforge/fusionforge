@@ -7,7 +7,7 @@
 #  *                2004 (c) Francisco Gimeno <kikov@kikov.org>
 #  * http://sourceforge.net
 #  *
-#  * @version   $Id: Spanish.tab 4824 2005-10-25 15:11:40Z lcorso $
+#  * @version   $Id$
 #  *
 #  */
 plugin_cvstracker	title	Enlaces a los commits de CVS relacionados

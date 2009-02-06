@@ -86,6 +86,12 @@ install: build
 	find $(CURDIR)/debian/gforge-plugin-scmsvn/usr/share/gforge/plugins/scmsvn/cronjobs/ -type f | xargs chmod 0755
 	cp -r plugins/scmsvn/etc/plugins/scmsvn/* $(CURDIR)/debian/gforge-plugin-scmsvn/etc/gforge/plugins/scmsvn/
 
+	# gforge-plugin-scmbzr
+	# cp -r plugins/scmbzr/bin/* $(CURDIR)/debian/gforge-plugin-scmbzr/usr/lib/gforge/plugins/scmbzr/bin/
+	cp -r plugins/scmbzr/common/* $(CURDIR)/debian/gforge-plugin-scmbzr/usr/share/gforge/plugins/scmbzr/common/
+	# cp -r plugins/scmbzr/cronjobs/* $(CURDIR)/debian/gforge-plugin-scmbzr/usr/share/gforge/plugins/scmbzr/cronjobs/
+	cp -r plugins/scmbzr/etc/plugins/scmbzr/* $(CURDIR)/debian/gforge-plugin-scmbzr/etc/gforge/plugins/scmbzr/
+
 	# gforge-plugin-mediawiki
 	cp -r plugins/mediawiki/common/* $(CURDIR)/debian/gforge-plugin-mediawiki/usr/share/gforge/plugins/mediawiki/common/
 	cp -r plugins/mediawiki/www/* $(CURDIR)/debian/gforge-plugin-mediawiki/usr/share/gforge/www/plugins/mediawiki/
@@ -120,14 +126,14 @@ install: build
 	find $(CURDIR)/debian/gforge-common/usr/share/gforge/common -type f -exec chmod 0644 {} \;
 	find $(CURDIR)/debian/gforge-common/usr/share/gforge/common/docman/engine/ -type f -name \*.php -not -name \*.inc.php -exec chmod 0755 {} \;
 	find $(CURDIR)/debian/gforge-common/usr/share/gforge/common/docman/engine/ -type f -name \*.sh -exec chmod 0755 {} \;
+	install -m 755 cronjobs/create_scm_repos.php $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 	cp -r locales/* $(CURDIR)/debian/gforge-common/usr/share/locale/
 
 	# gforge/debian/gforge-web-apache2
 	cp -r www $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/
 	rm $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/plugins/mediawiki
 	rm $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/plugins/*
-	install -m 644 deb-specific/index_std.php $(CURDIR)/debian/gforge-web-apache2/etc/gforge/custom/
-	rm $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/index_std.php
+	install -m 644 www/index_std.php $(CURDIR)/debian/gforge-web-apache2/etc/gforge/custom/
 	find $(CURDIR)/debian/gforge-web-apache2 -name \*.uu -type f | xargs rm -f
 	rm -f $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/themes/gforge/COPYING
 	find $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www -type d -exec chmod 0755 {} \;
@@ -140,9 +146,6 @@ install: build
 	install -m 755 utils/install-apache.sh $(CURDIR)/debian/gforge-web-apache2/usr/lib/gforge/bin/
 	install -m 755 deb-specific/create-vhosts.sh $(CURDIR)/debian/gforge-web-apache2/usr/lib/gforge/bin/
 	install -m 755 deb-specific/prepare-vhosts-file.pl $(CURDIR)/debian/gforge-web-apache2/usr/lib/gforge/bin/
-	install -m 644 deb-specific/index_std.php $(CURDIR)/debian/gforge-web-apache2/etc/gforge/custom/
-
-	
 
 	# viewvc rights
 	find $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/scm/viewvc -type f -exec chmod 0644 {} \;

@@ -10,7 +10,7 @@
  *
  * Geoffrey Herteg, August 29, 2000
  *
- * @version   $Id: Theme.class.php 6781 2009-01-20 18:11:55Z aljeux $
+ * @version   $Id$
  */
 
 require_once $gfwww.'search/include/SearchManager.class.php';
@@ -208,11 +208,12 @@ function footer($params){
 	$this->footerEnd($params);
 
 }
-function footerEnd($params) { ?> <!-- PLEASE LEAVE "Powered By GForge" on your site -->
-<div id="footer"><a href="http://gforge.org/"><img
-	src="<?php echo util_make_url ('/images/pow-gforge.png'); ?>"
-	alt="Powered By GForge Collaborative Development Environment"
-	border="0" /></a></div>
+function footerEnd($params) { ?> <!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
+<div id="footer"><a href="http://fusionforge.org/"><img
+	src="<?php echo util_make_url ('/images/pow-fusionforge.png'); ?>"
+	alt="Powered By FusionForge"
+	border="0" /></a>
+</div>
 <?php
 global $sys_show_source;
 if ($sys_show_source) {

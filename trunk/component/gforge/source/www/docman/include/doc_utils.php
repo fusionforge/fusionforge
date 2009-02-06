@@ -6,7 +6,7 @@
  * The rest Copyright 2002-2004 (c) GForge Team
  * http://gforge.org/
  *
- * @version   $Id: doc_utils.php 6465 2008-03-28 22:55:07Z cbayle $
+ * @version   $Id$
  *
  * This file is part of GForge.
  *

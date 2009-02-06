@@ -11,7 +11,7 @@
   <tr>
     <td>
       <strong><font size=+1>SourceForge: Engine Team Documentation</font></strong><br />
-      <font size="-1">$Id: index.php 2683 2004-02-18 09:18:27Z gsmet $<br />
+      <font size="-1">$Id$<br />
       SourceForge Engine Team [<a href="mailto:alexandria-devel@sourceforge.net">email</a>]</font>
     </td>
     <td>

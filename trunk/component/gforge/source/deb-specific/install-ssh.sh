@@ -1,6 +1,6 @@
 #! /bin/sh
 # 
-# $Id: install-ssh.sh 1221 2002-12-23 13:17:23Z lo-lan-do $
+# $Id$
 #
 # Configure SSH for Sourceforge
 # Christian Bayle, Roland Mas, debian-sf (Sourceforge for Debian)

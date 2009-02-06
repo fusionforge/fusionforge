@@ -1,4 +1,4 @@
-# $Id: sqlparser.pm 6503 2008-05-21 12:48:19Z lo-lan-do $
+# $Id$
 #
 # A state machine to turn an SQL file into list of requests
 # (represented by an array of strings)

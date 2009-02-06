@@ -5,13 +5,13 @@
 // Copyright 1999-2001 (c) VA Linux Systems
 // http://sourceforge.net
 //
-// $Id: features_boxes.php 6596 2008-08-19 20:29:41Z cbayle $
+// $Id: features_boxes.php 6866 2009-02-01 15:00:28Z lolando $
 //
 // Attempt to set up the include path, to fix problems with relative includes
 
 //require_once('../env.inc.php');
 //require_once('pre.php');
-require_once $gfcommon.'include/GForge.class.php';
+require_once $gfcommon.'include/FusionForge.class.php';
 
 function show_features_boxes() {
 	GLOBAL $HTML,$sys_use_ratings;
@@ -112,9 +112,9 @@ function stats_downloads_total() {
 }
 
 function show_sitestats() {
-	$gforge = new GForge();
+	$gforge = new FusionForge();
 	$return = '';
-	$return .= _('Hosted Projects').': <strong>'.number_format($gforge->getNumberOfHostedProjects()).'</strong>';
+	$return .= _('Hosted Projects').': <strong>'.number_format($gforge->getNumberOfPublicHostedProjects()).'</strong>';
 	$return .= '<br />'._('Registered Users').': <strong>'.number_format($gforge->getNumberOfActiveUsers()).'</strong>';
 	return $return;
 }
@@ -178,7 +178,7 @@ function show_highest_ranked_projects() {
 	} else {
 		$return='';
 		while ($row=db_fetch_array($result)) {
-			$return .= '<strong>( '.number_format(substr($row['percentile'],0,5),1).'% )</strong>'
+			$return .= '<strong>('.number_format(substr($row['percentile'],0,5),1).'%)</strong> '
 				.util_make_link_g ($row['unix_group_name'],$row['group_id'],$row['group_name'])
 				.'<br />';
 		}

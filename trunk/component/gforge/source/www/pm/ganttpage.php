@@ -5,7 +5,7 @@
  * Copyright 2002 GForge, LLC
  * http://gforge.org/
  *
- * @version   $Id: ganttpage.php 6689 2008-12-07 21:11:51Z aljeux $
+ * @version   $Id$
  */
 /*
 

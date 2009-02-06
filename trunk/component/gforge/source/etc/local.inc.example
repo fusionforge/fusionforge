@@ -1,23 +1,23 @@
 <?php
 // PLEASE DO NOT REMOVE THIS LINE
 
-// GForge Universal Site Modifications
+// FusionForge Universal Site Modifications
 // by David HM Spector <spector@zeitgeist.com>
 //
-// GForge global paths
+// FusionForge global paths
 //
 $sys_etc_path='/etc/gforge';
 $sys_opt_path='/opt/gforge';
 $sys_var_path='/var/lib/gforge';
 
 //
-// Gforge database type
+// FusionForge database type
 //
 //$sys_database_type='mysql';
 $sys_database_type='pgsql';
 
 //
-// GForge hostnames
+// FusionForge hostnames
 //
 // Hostnames should be fully qualified domain names (FQDNs); using short names
 // would be prettier but would stop you from distributing your SourceForge
@@ -225,7 +225,7 @@ $sys_urlroot="$sys_opt_path/www/";
 $sys_urlprefix="";
 
 // Name of the system as a whole (needed by various utils and titles)
-$sys_name='MyGForge';
+$sys_name='MyForge';
 
 // Mailman base installation directory
 $sys_path_to_mailman='/usr/lib/mailman';

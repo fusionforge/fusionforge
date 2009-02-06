@@ -172,9 +172,6 @@ class GforgeWikiPlugin extends Plugin {
 		} elseif ($hookname == 'cssfile') {
 			if (strncmp($_SERVER['REQUEST_URI'], '/wiki/', 6) == 0) {
 				echo '<link rel="stylesheet" type="text/css" href="' . util_make_url ('/wiki/themes/gforge/phpwiki.css') . '" media="screen" />';
-				echo "\n".'    <link rel="alternate stylesheet" type="text/css" href="' . util_make_url ('/wiki/themes/gforge/phpwiki-fullscreen.css') . '" media="screen" title="Fullscreen" />';
-				echo "\n".'    <link rel="stylesheet" type="text/css" href="' . util_make_url ('/wiki/themes/gforge/phpwiki-print.css') . '" media="print" />';
-				echo "\n".'    <base href="'.PHPWIKI_BASE_URL.'" />';
 			}
 		}		
 	}

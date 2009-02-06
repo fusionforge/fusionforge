@@ -81,7 +81,7 @@ while ($row = db_fetch_array($res)) {
 	}
 	print "   <description>".rss_description($row['details'])."</description>\n";
 	print "   <author>".$row['user_name']."@".$GLOBALS['sys_users_host']." (".$row['realname'].")</author>\n";
-	print "   <pubDate>".gmdate('D, d M Y G:i:s',$row['date'])." GMT</pubDate>\n";
+	print "   <pubDate>".gmdate('D, d M Y G:i:s',$row['post_date'])." GMT</pubDate>\n";
 	if ($row['group_id'] != $sys_news_group) {
 		print "   <guid>http://".$GLOBALS['sys_default_domain']."/forum/forum.php?forum_id=".$row['forum_id']."</guid>\n";
 	} else {

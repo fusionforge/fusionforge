@@ -1,37 +1,25 @@
 <?php   
 /**
- *	Group object
+ * FusionForge groups
  *
- *	Sets up database results and preferences for a group and abstracts this info.
+ * Copyright 1999-2001, VA Linux Systems, Inc.
  *
- *	Foundry.class.php and Project.class.php call this.
+ * This file is part of FusionForge.
  *
- *	Project.class.php contains all the deprecated API from the old group.php file
- *
- *	DEPENDS on user.php being present and setup properly
- *
- *	GENERALLY YOU SHOULD NEVER INSTANTIATE THIS OBJECT DIRECTLY
- *	USE group_get_object() to instantiate properly
- *
- * @version   $Id: Group.class.php 6589 2008-08-18 14:30:33Z lo-lan-do $
- * @author Tim Perdue <tperdue@valinux.com>
- * @date 2000-08-28
- *
- * This file is part of GForge.
- *
- * GForge is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * GForge is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation; either version 2 of the License,
+ * or (at your option) any later version.
+ * 
+ * FusionForge is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+ * USA
  */
 
 require_once $gfcommon.'tracker/ArtifactTypes.class.php';
@@ -282,7 +270,7 @@ class Group extends Error {
 	 *  @param	string	The 'other' license to use if any.
 	 *  @param	string	The purpose of the group.
 	 */
-	function create(&$user, $full_name, $unix_name, $description, $license, $license_other, $purpose, $unix_box='shell1', $scm_box='cvs1') {
+	function create(&$user, $full_name, $unix_name, $description, $license, $license_other, $purpose, $unix_box='shell1', $scm_box='cvs1', $is_public=1) {
 		// $user is ignored - anyone can create pending group
 
 		if ($this->getID()!=0) {
@@ -340,11 +328,12 @@ class Group extends Error {
 					register_purpose,
 					register_time,
 					license_other,
+                                        enable_anonscm,
 					rand_hash
 				)
 				VALUES (
 					'".htmlspecialchars($full_name)."',
-					1,
+					'$is_public',
 					'$unix_name',
 					'".htmlspecialchars($description)."',
 					'$unix_name.".$GLOBALS['sys_default_domain']."',
@@ -356,6 +345,7 @@ class Group extends Error {
 					'".htmlspecialchars($purpose)."',
 					".time().",
 					'".htmlspecialchars($license_other)."',
+					'$is_public',
 					'".md5($random_num)."'
 				)
 			");
@@ -492,7 +482,7 @@ class Group extends Error {
 		$use_pm,$use_pm_depend_box,$use_scm,$use_news,$use_docman,
 		$new_doc_address,$send_all_docs,$logo_image_id,
 		$enable_pserver,$enable_anonscm,
-		$use_ftp,$use_tracker,$use_frs,$use_stats) {
+			$use_ftp,$use_tracker,$use_frs,$use_stats,$is_public) {
 
 		$perm =& $this->getPermission($user);
 
@@ -588,6 +578,7 @@ class Group extends Error {
 				use_scm='$use_scm',
 				use_news='$use_news',
 				use_docman='$use_docman',
+                                is_public='$is_public',
 				new_doc_address='$new_doc_address',
 				send_all_docs='$send_all_docs',
 		";

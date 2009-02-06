@@ -5,7 +5,7 @@
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright (c) GForge, LLC
  *
- * @version   $Id: db_stats_agg.php 6676 2008-11-25 20:51:57Z aljeux $
+ * @version   $Id$
  *
  * This file is part of GForge.
  *

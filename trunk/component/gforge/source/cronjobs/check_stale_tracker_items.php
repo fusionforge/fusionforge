@@ -9,7 +9,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  *
- * @version   $Id: check_stale_tracker_items.php 6676 2008-11-25 20:51:57Z aljeux $
+ * @version   $Id$
  * @author Darrell Brogdon dbrogdon@valinux.com
  * @date 2001-04-20
  *

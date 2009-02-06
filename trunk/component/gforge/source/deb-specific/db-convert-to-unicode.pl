@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Id: db-convert-to-unicode.pl 3112 2004-07-21 20:39:34Z cbayle $
+# $Id$
 #
 # Debian-specific script to upgrade the database between releases
 # Roland Mas <lolando@debian.org>

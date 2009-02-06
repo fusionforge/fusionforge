@@ -4,7 +4,7 @@
  *
  * Copyright 2004 (c) GForge LLC
  *
- * @version   $Id: usertime.php 6747 2009-01-14 11:08:58Z lo-lan-do $
+ * @version   $Id$
  * @author Tim Perdue tim@gforge.org
  * @date 2003-03-16
  *

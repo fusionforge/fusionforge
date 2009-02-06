@@ -11,7 +11,7 @@
  *	
  * Copyright 2004 (c) GForge LLC
  *
- * @version   $Id: projtitl.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id$
  * @author Tim Perdue tim@gforge.org
  * @date 2004-03-16
  *

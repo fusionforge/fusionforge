@@ -22,7 +22,7 @@
  * along with GForge-plugin-cvstracker; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  *
- * @version $Id: post.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version $Id$
  */
 /**
  *

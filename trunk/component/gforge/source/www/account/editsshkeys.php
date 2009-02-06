@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  *
- * @version   $Id: editsshkeys.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: editsshkeys.php 6808 2009-01-29 19:11:11Z lolando $
  *
  * This file is part of GForge.
  *
@@ -27,6 +27,31 @@ require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once $gfcommon.'include/account.php';
 
+/**
+ * Simple function that tries to check the validity of public ssh keys with a regexp.
+ * Exits with an error message if an invalid key is found.
+ *
+ * \param keys A string with a set of keys to check. Each key is delimited by a carriage return.
+ */
+function checkKeys($keys) {
+	$key = strtok($keys,"\n");
+	
+	while ($key !== false) {
+		$key = trim($key);
+		if ((strlen($key) > 0) && ($key[0] != '#')) {
+			/* The encoded key is made of 0-9, A-Z ,a-z, +, / (base 64) characters,
+			 ends with zero or up to three '=' and the length must be >= 512 bits (157 base64 characters).
+			 The whole key ends with an optional comment. */
+			if ( preg_match("@^ssh-(rsa|dss)\s+[A-Za-z0-9+/]{157,}={0,2}(\s+.*)?$@", $key) === 0 ) { // Warning: we must use === for the test
+				$msg = sprintf (_('The following key has a wrong format: |%s|.  Please, correct it by going back to the previous page.'),
+						htmlspecialchars($key));
+				exit_error('Error',  $msg);
+			}
+		}
+		$key = strtok("\n");
+	}
+}
+
 session_require(array('isloggedin'=>1));
 $u =& user_get_object(user_getid());
 if (!$u || !is_object($u)) {
@@ -37,6 +62,7 @@ if (!$u || !is_object($u)) {
 
 if (getStringFromRequest('submit')) {
 	$authorized_keys = getStringFromRequest('authorized_keys');
+	checkKeys ($authorized_keys);
 
 	if (!$u->setAuthorizedKeys($authorized_keys)) {
 		exit_error(

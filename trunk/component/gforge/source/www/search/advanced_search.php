@@ -7,7 +7,7 @@
  *
  * http://gforge.org
  *
- * @version $Id: advanced_search.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version $Id$
  */
 
 require_once('../env.inc.php');

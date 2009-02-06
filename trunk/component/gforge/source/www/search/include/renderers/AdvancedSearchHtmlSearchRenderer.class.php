@@ -7,7 +7,7 @@
  *
  * http://gforge.org
  *
- * @version $Id: AdvancedSearchHtmlSearchRenderer.class.php 6541 2008-06-03 18:21:53Z aljeux $
+ * @version $Id$
  */
 
 require_once $gfwww.'include/pre.php';

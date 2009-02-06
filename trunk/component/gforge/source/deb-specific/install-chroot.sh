@@ -1,6 +1,6 @@
 #! /bin/sh
 # 
-# $Id: install-chroot.sh 6602 2008-09-04 13:06:39Z lo-lan-do $
+# $Id$
 #
 # [Blah blah blah, here should be a description of what this script does]
 # Christian Bayle, Roland Mas, debian-sf (Sourceforge for Debian)

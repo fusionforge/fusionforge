@@ -6,7 +6,7 @@
  *
  * Copyright 2002 (c) GFORGE LLC
  *
- * @version   $Id: 20021213_doc_data-migrate.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id$
  */
 
 require $gfwww.'include/squal_pre.php';

@@ -5,7 +5,7 @@
 ]>
 <article lang="en-US" id="installation_guide">
 	<articleinfo>
-		<title>GForge Installation Guide</title>
+		<title>FusionForge Installation Guide</title>
 		<authorgroup>
 			&reinhard_spisser;
 			&tom_copeland;
@@ -19,16 +19,16 @@
 			Hardware requirements are dependent on the number of users that will use the system and how active those users are.
 		</para>
 		<para>	
-			For instance, an installation of GForge hosts over 450 users and over 140 projects on a single CPU Pentium 2.4GHz machine with 512 MB of RAM.
+			For instance, an installation of FusionForge hosts over 450 users and over 140 projects on a single CPU Pentium 2.4GHz machine with 512 MB of RAM.
 		</para>
 		<para>
-			You can find additionnal information about hardware used by several installations of GForge in the <ulink url="http://gforge.org/docman/view.php/1/52/gforge-sites.html">GForge sites list maintained by Tom Copeland</ulink>.
+			You can find additionnal information about hardware used by several installations of FusionForge in the <ulink url="http://gforge.org/docman/view.php/1/52/gforge-sites.html">FusionForge sites list maintained by Tom Copeland</ulink>.
 		</para>
 	</section>
 	<section>
 		<title>Software Requirements</title>
 		<para>
-			GForge should work correctly on any system configured like this:
+			FusionForge should work correctly on any system configured like this:
 		</para>
 		<orderedlist>
 			<listitem><para>Linux Operating System</para></listitem>
@@ -55,13 +55,13 @@
 		</para>
 		<itemizedlist>
 			<listitem>
-				<para>Debian GNU/Linux 3.1 (Sarge)</para>
+				<para>Debian GNU/Linux 5.0 (Lenny)</para>
 			</listitem>
 			<listitem>
-				<para>RedHat Enterprise Linux 3 with bundled packages except for a compiled GNU Mailman</para>
+				<para>CentOS 4 &amp; 5</para>
 			</listitem>
 			<listitem>
-				<para>RedHat Linux 9 with bundled packages except for a compiled GNU Mailman</para>
+				<para>RedHat Enterprise Linux 4 &amp; 5</para>
 			</listitem>
 		</itemizedlist>
 	</section>
@@ -70,87 +70,83 @@
 		<section>
 			<title>Overview</title>
 			<important>
-				<para>The <filename>INSTALL</filename> file in GForge package and <filename>README</filename> files in plugin directories are the authoritive sources for installation instructions and they should have more precedence over this guide.</para>
+				<para>The <filename>INSTALL</filename> file in FusionForge package and <filename>README</filename> files in plugin directories are the authoritive sources for installation instructions and they should have more precedence over this guide.</para>
 			</important>
 			<note>
-				<para>This installation guide is for GForge 4.7.</para>
+				<para>This installation guide is for FusionForge 4.7.</para>
 			</note>
-			<para>GForge has a lot of different pieces touching a lot of different components in the system. Cronjobs are required to maintain the system, touching lots of files on a daily and hourly basis, including <filename>/etc/*</filename> system files.</para>
+			<para>FusionForge has a lot of different pieces touching a lot of different components in the system. Cronjobs are required to maintain the system, touching lots of files on a daily and hourly basis, including <filename>/etc/*</filename> system files.</para>
 			<para>The plugins that now manage the CVS and SVN functionality have made installation slightly harder because even more files have to be moved into place during installation.</para>
-			<para>The manual installation of GForge is documented below. Be sure to follow each step carefully, check the forums for frequently asked questions, and ask your Apache, Mailman, and PostgreSQL installation questions in the corresponding mailing lists rather than on the GForge forums where little help is available.</para>
+			<para>The manual installation of FusionForge is documented below. Be sure to follow each step carefully, check the forums for frequently asked questions, and ask your Apache, Mailman, and PostgreSQL installation questions in the corresponding mailing lists rather than on the FusionForge forums where little help is available.</para>
 		</section>
 		<section>
-			<title>Installing Gforge on Debian</title>
+			<title>Installing FusionForge on Debian</title>
 			<para>
-				You can simply add lines found at <ulink url="http://people.debian.org/~bayle/"/> or <ulink url="http://roland.mas.free.fr/"/> to <filename>/etc/apt/sources.list</filename> and type <command>apt-get install gforge</command> to install a working GForge system, thanks to Christian Bayle and Roland Mas.
+				You can simply add lines found at <ulink url="http://debian.fusionforge.org/"/> to <filename>/etc/apt/sources.list</filename> and type <command>apt-get install fusionforge</command> to install a working FusionForge system, thanks to Christian Bayle and Roland Mas.
 			</para>
 			<para>
-				Note that GForge is now part of official Debian, and so you can find it in all debian mirrors all other the planet. Package versions of GForge may lag behind upstream versions. From scratch install snapshot are also available for a guided installation.
+				Note that FusionForge will soon be part of official Debian, and so you will find it in all debian mirrors all other the planet. Package versions of FusionForge may lag behind upstream versions. From scratch install snapshot are also available for a guided installation.
 			</para>
 		</section>
 		<section>
 			<title>Installing Gforge on RPM-based systems</title>
-			<para>Guillaume Smet makes <ulink url="http://people.openwide.fr/~gsmet/gforge/rpm/">RPM packages for installing GForge</ulink>. If you are using Fedora Core or Red Hat Enterprise Linux, you may want to try them.</para>
+			<para>RPM should be available soon, see <ulink url="http://fusionforge.org/"/> website for availability.</para>
 		</section>
 		<section>
-			<title>Installing GForge oneself on a linux distribution</title>
-			<para>To install GForge, follow these steps (as root):</para>
+			<title>Installing FusionForge oneself on a linux distribution</title>
+			<para>To install FusionForge, follow these steps (as root):</para>
 			<section>
 				<title>Directory Layout</title>
-				<para>Instructions below assume that gforge is unpacked into <filename class="directory"><replaceable>/opt/gforge</replaceable></filename>.  There are some other directories where GForge stores files. In this installation guide, they are put in <filename class="directory">/var/www</filename> too.</para>
+				<para>Instructions below assume that gforge is unpacked into <filename class="directory"><replaceable>/opt/gforge</replaceable></filename>.  There are some other directories where FusionForge stores files. In this installation guide, they are put in <filename class="directory">/var/www</filename> too.</para>
 				<note>
-					<para>If you want to be <ulink url="http://www.pathname.com/fhs/">FHS</ulink>-compliant, GForge should be unpacked into <filename class="directory">/usr/local/share/gforge</filename>, and directories for storing files should be in <filename class="directory">/var/lib/gforge</filename> or <filename class="directory">/var/local/gforge</filename>. You may use symbolic links to physically place files in FHS-compliant places and still use directory paths that are presented in this manual.</para>
+					<para>If you want to be <ulink url="http://www.pathname.com/fhs/">FHS</ulink>-compliant, FusionForge should be unpacked into <filename class="directory">/usr/local/share/gforge</filename>, and directories for storing files should be in <filename class="directory">/var/lib/gforge</filename> or <filename class="directory">/var/local/gforge</filename>. You may use symbolic links to physically place files in FHS-compliant places and still use directory paths that are presented in this manual.</para>
 				</note>
 			</section>
 			<section>
 				<title>Getting the source</title>
-				<para>There is two ways to get the sources from Gforge : </para>
-				<section>
-					<title>With the tarball available on https://gforge.org/frs/?group_id=1</title>
-					<para>Unpacking : </para>
-	<screen>
-	# <userinput>tar -xjvf gforge-4.7-svn6744.tar.bz2</userinput>
-	# <userinput>cd gforge-4.7-svn6744</userinput>
+				<para>There is two ways to get the sources from FusionForge : </para>
+<screen>
+	# <userinput>tar -xjvf fusionforge-4.7.tar.bz2</userinput>
+	# <userinput>cd fusionforge-4.7</userinput>
 	# <userinput>mkdir -p /opt/gforge</userinput>
 	# <userinput>cp -r *<replaceable>/opt/gforge</replaceable></userinput>
-	</screen>
-				</section>
-				<section>
-					<title>Checking out from the SVN repository with tag v4_7 </title>
-					<para>Alternative way to get GForge 4.7 is to check out with tag v4_7 from SVN. This gets latest fixes as well.</para>
-					<screen>
-	$ <userinput>svn checkout --username anonsvn https://svn.gforge.org/svn/gforge/tags/v4_7</userinput>
-		
-	$ <userinput>cd gforge/www/plugins</userinput>
-	$ <userinput>ln -s ../../plugins/scmcvs/www scmcvs</userinput>
-	$ <userinput>ln -s ../../plugins/scmsvn/www scmsvn</userinput>
-	$ <userinput>ln -s ../../plugins/cvstracker/www cvstracker</userinput>
-					</screen>
-					<section>
-						<title>Updating checked out Branch_4_5</title>
-						<para>To get latest updates in <literal>Branch_4_5</literal>, run the following commands:</para>
-						<screen>
-	$ <userinput>cd gforge</userinput>
-	$ <userinput>svn -q update</userinput>
-						</screen>
-						<para>To monitor latest changes in GForge, subscribe to <ulink url="http://lists.gforge.org/mailman/listinfo/gforge-commits">gforge-commits mailing list</ulink>.</para>
-					</section>
-				</section>
+</screen>
 			</section>
 			<section>
-				<title>Fixing access rights</title>
-				<para>You may want to make sure that permissions are correct (replace <replaceable>apache-group</replaceable> with the system group used by Apache server):</para>
+					<title>Checking out from the SVN repository with tag v4_7 </title>
+					<para>Alternative way to get FusionForge 4.7 is to check out with tag v4_7 from SVN. This gets latest fixes as well.</para>
 				<screen>
+	$ <userinput>svn checkout --username anonsvn https://svn.gforge.org/svn/gforge/tags/v4_7</userinput>
+
+	$ <userinput>cd gforge/www/plugins</userinput>
+$ <userinput>ln -s ../../plugins/scmcvs/www scmcvs</userinput>
+$ <userinput>ln -s ../../plugins/scmsvn/www scmsvn</userinput>
+$ <userinput>ln -s ../../plugins/cvstracker/www cvstracker</userinput>
+				</screen>
+				<section>
+					<title>Updating checked out Branch_4_5</title>
+					<para>To get latest updates in <literal>Branch_4_5</literal>, run the following commands:</para>
+					<screen>
+$ <userinput>cd gforge</userinput>
+	$ <userinput>svn -q update</userinput>
+					</screen>
+						<para>To monitor latest changes in FusionForge, subscribe to <ulink url="http://lists.gforge.org/mailman/listinfo/gforge-commits">gforge-commits mailing list</ulink>.</para>
+				</section>
+				<section>
+					<title>Fixing access rights</title>
+					<para>You may want to make sure that permissions are correct (replace <replaceable>apache-group</replaceable> with the system group used by Apache server):</para>
+					<screen>
 # <userinput>cd /opt/gforge</userinput>
 # <userinput>chown -R root:<replaceable>apache-group</replaceable> .</userinput>
 # <userinput>chmod -R 644 .</userinput>
 # <userinput>find -type d | xargs chmod 755</userinput>
 # <userinput>chmod -R 755 cronjobs</userinput>
-				</screen>
+					</screen>
+				</section>
 			</section>
 			<section>
-				<title>GForge Config File</title>
-				<para>In the GForge distribution, you will find <filename>etc/local.inc.example</filename>. Copy it to <filename>/etc/gforge/local.inc</filename> and edit all of the settings.  In later sections, there is more information about specific configuration settings.  Usually, you will want to make it readable only by webserver user (see <xref linkend="web-server"/> for <replaceable>apache-user</replaceable> and <replaceable>apache-group</replaceable>):</para>
+				<title>FusionForge Config File</title>
+				<para>In the FusionForge distribution, you will find <filename>etc/local.inc.example</filename>. Copy it to <filename>/etc/gforge/local.inc</filename> and edit all of the settings.  In later sections, there is more information about specific configuration settings.  Usually, you will want to make it readable only by webserver user (see <xref linkend="web-server"/> for <replaceable>apache-user</replaceable> and <replaceable>apache-group</replaceable>):</para>
 <programlisting>
 # <userinput>mkdir /etc/gforge</userinput>
 # <userinput>chown root: /etc/gforge</userinput>
@@ -161,7 +157,7 @@
 </programlisting>
 			</section>
 			<section>
-				<title>Configuring GForge</title>
+				<title>Configuring FusionForge</title>
 				<para>Open <filename>/etc/gforge/local.inc</filename>, configuring the following basic parameters:</para>
 				<orderedlist>
 					<listitem>
@@ -192,12 +188,17 @@ $sys_plugins_path="<replaceable>/var/www/gforge</replaceable>/plugins/";
 			<section>
 				<title>PostgreSQL Requirements</title>
 				<para>You to have installed the following packages for </para>
-					<orderedlist>
-						<listitem>a CentOS or Red Hat 5 or Fedora: postgresql, postgresql-libs, postgresql-server, postgresql-contrib</listitem>
-						<listitem>a Debian: postgresql, postgresql-contrib</listitem>
-						<listitem>a Red Hat 4 : postgresql, postgresql-contrib</listitem>
-					</orderedlist>
-
+				<orderedlist>
+					<listitem>
+							<para>a CentOS or Red Hat 5 or Fedora: postgresql, postgresql-libs, postgresql-server, postgresql-contrib</para>
+					</listitem>
+					<listitem>
+							<para>a Debian: postgresql, postgresql-contrib</para>
+					</listitem>
+					<listitem>
+							<para>a Red Hat 4 : postgresql, postgresql-contrib</para>
+					</listitem>
+				</orderedlist>
 			</section>
 			<section>
 				<title>Initialization of PostgreSQL</title>
@@ -223,14 +224,11 @@ $ <userinput>psql template1</userinput>
 <screen>
 local all postgres ident sameuser
 </screen>
-<para>If you went just to install postgresql on your server be sure that there is only this line in your <filename>pg_hba.conf</filename> (comment the others)</para>
-<screen>local all all ident sameuser</screen>
-				<para>GForge uses <literal>gforge</literal> PostgreSQL user to connect to <literal>gforge</literal> database by using password.  (You can change that name by editing <filename>local.inc</filename>.)  In order this to work, assure that you have the following line in your <filename>pg_hba.conf</filename> (before other <literal>host</literal> directives):</para>
+				<para>FusionForge uses <literal>gforge</literal> PostgreSQL user to connect to <literal>gforge</literal> database by using password.  (You can change that name by editing <filename>local.inc</filename>.)  In order this to work, assure that you have the following line in your <filename>pg_hba.conf</filename> (before other <literal>host</literal> directives):</para>
 <screen>
 host gforge gforge 127.0.0.1 255.255.255.255 md5
 </screen>
-				<para>This line assumes that GForge will always use local PostgreSQL database (<literal>localhost</literal>).  If this is not the case, consult PostgreSQL manual for ways to allow connection.</para>
-				
+				<para>This line assumes that FusionForge will always use local PostgreSQL database (<literal>localhost</literal>).  If this is not the case, consult PostgreSQL manual for ways to allow connection.</para>
 				<!-- <para>The following option should be set in <filename>postgresql.conf</filename> because connection to <literal>localhost</literal> uses TCP/IP:</para>
 <screen>
 tcpip_socket = true
@@ -242,14 +240,14 @@ tcpip_socket = true
 			</section>
 			<section>
 				<title>Importing Database</title>
-				<para>Create GForge database user:</para>
+				<para>Create FusionForge database user:</para>
 <screen>
 # <userinput>su - postgres</userinput>
 $ <userinput>psql template1</userinput>
 template1=# <userinput>CREATE USER gforge NOCREATEUSER NOCREATEDB</userinput>
 template1-# <userinput>PASSWORD '<replaceable>gforge-password</replaceable>';</userinput>
 </screen>
-				<para>Create GForge database:</para>
+				<para>Create FusionForge database:</para>
 <screen>
 template1=# <userinput>CREATE DATABASE gforge OWNER gforge ENCODING 'UNICODE';</userinput>
 template1=# <userinput>\q</userinput>
@@ -263,11 +261,6 @@ $ <userinput>createlang plpgsql gforge</userinput>
 <screen>
 $ <userinput>cd <replaceable>/opt/gforge</replaceable>/db</userinput>
 $ <userinput>psql -a -U gforge -W -h localhost -f gforge.sql gforge &amp;&gt; /tmp/gforge.sql.log</userinput>
-$ <userinput>exit</userinput>
-</screen>
-<para>It is required that the postgresql service is up on each reboot</para>
-<screen>
-$ <userinput>chkconfig postgresql on</userinput>
 </screen>
 				<note>
 					<para>You may experience the following errors.  They are harmless and you can safely ignore them:</para>
@@ -281,13 +274,9 @@ ERROR:  permission denied for schema public
 		</section>
 		<section>
 			<title>Configuring DNS Server (BIND)</title>
-			<para>GForge needs its own domain.  In example GForge configuration file, it's <literal>gforge.<replaceable>company.com</replaceable></literal>.  You should search for <replaceable>company.com</replaceable> in example GForge configuration file and replace it with your domain name.</para>
-			<para>Here some example configuration files for BIND are presented that can help you if you are not familiar with BIND but it's not meant to be complete. Don't ask BIND-related questions in GForge forums, consult documentation that come with your distribution and search in Internet.  Distributions put files in different places and so there are no file locations here.  The example configuration below is only quick start example and doesn't include reverse mapping.</para>
-			<section>
-				<title>DNS Requirements</title>
-				<para>It's required to have the bind package installed </para>
-			</section>
-			
+			<para>FusionForge needs its own domain.  In example FusionForge configuration file, it's <literal>gforge.<replaceable>company.com</replaceable></literal>.  You should search for <replaceable>company.com</replaceable> in example FusionForge configuration file and replace it with your domain name.</para>
+			<para>Here some example configuration files for BIND are presented that can help you if you are not familiar with BIND but it's not meant to be complete. Don't ask BIND-related questions in FusionForge forums, consult documentation that come with your distribution and search in Internet.  Distributions put files in different places and so there are no file locations here.  The example configuration below is only quick start example and doesn't include reverse mapping.</para>
+			<para>For DNS, you need to have the bind package installed</para>
 			<para>New subdomain in <literal>gforge.<replaceable>company.com</replaceable></literal> should be created.  In <replaceable>company.com</replaceable> zone file, it may look like that:</para>
 <screen>
 gforge          IN      NS      ns.gforge.<replaceable>company.com</replaceable>.
@@ -365,7 +354,7 @@ zone "gforge.company.com" {
 			<para>PHP is used in two ways:</para>
 			<orderedlist>
 				<listitem>
-					<para><emphasis>Serving Web pages</emphasis>.  In this case, PHP is usually used as module and its configuration is in virtual host configuration, as shown later in the document.  If you prefer to configure <filename>php.ini</filename>, the following directives are required by GForge:</para>
+					<para><emphasis>Serving Web pages</emphasis>.  In this case, PHP is usually used as module and its configuration is in virtual host configuration, as shown later in the document.  If you prefer to configure <filename>php.ini</filename>, the following directives are required by FusionForge:</para>
 <programlisting>
 <!-- register_globals = Off-->
 magic_quotes_gpc = On
@@ -390,9 +379,9 @@ $ <userinput>php5 -i | fgrep php.ini</userinput>
 		</section>
 		<section id="web-server">
 			<title>Configuring the Web Server (Apache)</title>
-			<para>Find what system user and group are used by Apache server and change <varname>$sys_apache_user</varname> and <varname>$sys_apache_group</varname> (in GForge configuration) respectively in /etc/gforge/local.inc.</para>
-			<para>You should decide where to put GForge configuration of Apache.  It's best if own configuration file that is included by main Apache configuration is used.  Consult documentation of your distribution on recommended ways for doing this.</para>
-			<para>You may use <filename>etc/gforge-httpd.conf.example</filename> as template for your configuration.  The rest of the section is guide to making GForge virtual host configuration for Apache from scratch.  All is inside the following template:</para>
+			<para>Find what system user and group are used by Apache server and change <varname>$sys_apache_user</varname> and <varname>$sys_apache_group</varname> (in FusionForge configuration) respectively in /etc/gforge/local.inc.</para>
+			<para>You should decide where to put FusionForge configuration of Apache.  It's best if own configuration file that is included by main Apache configuration is used.  Consult documentation of your distribution on recommended ways for doing this.</para>
+			<para>You may use <filename>etc/gforge-httpd.conf.example</filename> as template for your configuration.  The rest of the section is guide to making FusionForge virtual host configuration for Apache from scratch.  All is inside the following template:</para>
 <programlisting>
 NameVirtualHost <replaceable>1.2.3.4</replaceable>
 &lt;VirtualHost <replaceable>1.2.3.4</replaceable>&gt;
@@ -536,12 +525,12 @@ noreply: /dev/null
 			<para>You may want to consider adding <literal>MX</literal> (mail exchanger) resource records for the above domain names.  This is meaningful only if you want fallback mail routes or if firewall doesn't allow incoming port 25 for the server.</para>
 			<section>
 				<title>Mail gateways to forum and tracker</title>
-				<para>When forum or tracker is monitored, replying to monitor mails are processed by mail gateways.  These gateways use GForge configuration file <filename>/etc/gforge/local.inc</filename> so that they can access database but the problem is that they run with different user than that of Apache.  So if you want to use these gateways, you'll have to change access mode of <filename>local.inc</filename>.</para>
+				<para>When forum or tracker is monitored, replying to monitor mails are processed by mail gateways.  These gateways use FusionForge configuration file <filename>/etc/gforge/local.inc</filename> so that they can access database but the problem is that they run with different user than that of Apache.  So if you want to use these gateways, you'll have to change access mode of <filename>local.inc</filename>.</para>
 			</section>
 		</section>
 		<section>
 			<title>File Release System (FRS)</title>
-			<para>Create a directory (e.g. <filename class="directory"><replaceable>/var/lib/gforge</replaceable>/download</filename>) and make it owned by the webserver user.  This directory will be referenced in the GForge Config File <filename>/etc/gforge/local.inc</filename> as <varname>$sys_upload_dir</varname>.</para>
+			<para>Create a directory (e.g. <filename class="directory"><replaceable>/var/lib/gforge</replaceable>/download</filename>) and make it owned by the webserver user.  This directory will be referenced in the FusionForge Config File <filename>/etc/gforge/local.inc</filename> as <varname>$sys_upload_dir</varname>.</para>
 <screen>
 # <userinput>mkdir <replaceable>/var/lib/gforge</replaceable>/download</userinput>
 # <userinput>chown -R <replaceable>apache-user</replaceable> <replaceable>/var/lib/gforge</replaceable>/download</userinput>
@@ -552,7 +541,7 @@ noreply: /dev/null
 		</section>
 		<section>
 			<title>Configuring GNU Mailman</title>
-			<para>GNU Mailman is used to help manage the GForge mailing lists.  Mailman is frequently installed in <filename class="directory">/usr/lib/mailman</filename> but sometimes it can be found in <filename class="directory">/var/mailman</filename>.  You should change GForge configuration variable <varname>$sys_path_to_mailman</varname> to that Mailman directory.</para>
+			<para>GNU Mailman is used to help manage the FusionForge mailing lists.  Mailman is frequently installed in <filename class="directory">/usr/lib/mailman</filename> but sometimes it can be found in <filename class="directory">/var/mailman</filename>.  You should change FusionForge configuration variable <varname>$sys_path_to_mailman</varname> to that Mailman directory.</para>
 			<para>Cronjobs for Mailman are located in <filename>cronjobs/mail/*</filename>.  <filename>cronjobs/mail/mailing_lists_create.php</filename> is used obviously to create new mailing lists.</para>
 			<para>For all problems with Mailman installation and use, contact the Mailman mailing lists for help.</para>
 			<para>To install it:</para>
@@ -561,7 +550,7 @@ noreply: /dev/null
 					<para>Install a GNU Mailman package or compile it</para>
 				</listitem>
 				<listitem>
-					<para>Don't integrate Mailman with Postfix (or other MTA) by delegating it generation of alias-style file.  GForge generates such file.  But you'll need to put mail aliases in <filename>/etc/aliases</filename> for the required standard <literal>mailman</literal> mailing list.  Create it with:</para>
+					<para>Don't integrate Mailman with Postfix (or other MTA) by delegating it generation of alias-style file.  FusionForge generates such file.  But you'll need to put mail aliases in <filename>/etc/aliases</filename> for the required standard <literal>mailman</literal> mailing list.  Create it with:</para>
 <screen>
 # <userinput><replaceable>/usr/lib/mailman/bin</replaceable>/newlist mailman</userinput>
 </screen>
@@ -621,7 +610,7 @@ noreply: /dev/null
 # <userinput>mkdir <replaceable>/var/www</replaceable>/scmtarballs</userinput>
 # <userinput>mkdir <replaceable>/var/www</replaceable>/scmsnapshots</userinput>
 </screen>
-			<para>These directories correspond to GForge configuration variables <varname>$sys_scm_tarballs_path</varname> and <varname>$sys_scm_snapshots_path</varname>.</para>
+			<para>These directories correspond to FusionForge configuration variables <varname>$sys_scm_tarballs_path</varname> and <varname>$sys_scm_snapshots_path</varname>.</para>
 			<note>
 				<para>For FHS-compliance, use <filename class="directory">/var/local/gforge/scmtarballs</filename> and <filename class="directory">/var/local/gforge/scmsnapshots</filename>.</para>
 			</note>
@@ -646,7 +635,7 @@ noreply: /dev/null
 # <userinput>cp /etc/group /etc/group.org</userinput>
 </screen>
 			<note>
-				<para>There are two other ways to authenticate GForge users: LDAP and NSS with PostgreSQL backend.  They are not discussed in this guide.</para>
+				<para>There are two other ways to authenticate FusionForge users: LDAP and NSS with PostgreSQL backend.  They are not discussed in this guide.</para>
 			</note>
 			<caution>
 				<para>The <filename>cronjobs/cvs-cron/usergroup.php</filename> cron script will meddle with your <filename>/etc/passwd</filename>, <filename>/etc/group</filename>, and <filename>/etc/shadow</filename> files. By default, this cron will save these files with a <literal>.new</literal> extension. You will have to edit the cron script to remove the <literal>.new</literal> extension, but you must make sure that it is properly generating your files or your server could be unusable.</para>
@@ -667,7 +656,7 @@ noreply: /dev/null
 		</section>
 		<section>
 			<title>Verifying the Installation</title>
-			<para>To verify if everything was installed correctly, use the browser and connect to GForge. You should see the GForge homepage. You will need to either disable CVS and SVN plugins in some way, or configure them before making the first test.</para>
+			<para>To verify if everything was installed correctly, use the browser and connect to FusionForge. You should see the FusionForge homepage. You will need to either disable CVS and SVN plugins in some way, or configure them before making the first test.</para>
 			<note>
 				<para>If you get an <computeroutput>Error: Could Not Connect to Database</computeroutput>, check if you have followed all installation instructions for the database.  Also, you can experiment with making the settings in <filename>pg_hba.conf</filename> a bit more trusting - for example, change the last work of the second line from <literal>md5</literal> to <literal>trust</literal>.</para>
 			</note>
@@ -676,9 +665,9 @@ noreply: /dev/null
 			<title>Creating the Admin User</title>
 			<para>Site admins are anyone who is an admin of <literal>group_id</literal>=1.</para>
 			<orderedlist>
-				<listitem><para>Connect to GForge and register a new account.</para></listitem>
+				<listitem><para>Connect to FusionForge and register a new account.</para></listitem>
 				<listitem><para>Insert a valid email address; this will be used for the account confirmation.</para></listitem>
-				<listitem><para>Open your e-mail client, wait for the email from GForge site and follow the link that appears on the message.</para></listitem>
+				<listitem><para>Open your e-mail client, wait for the email from FusionForge site and follow the link that appears on the message.</para></listitem>
 				<listitem>
 					<para>Verify in Account Maintenance the user id of the user registered.</para>
 					<para>Usually this is 102, but you can verify this by running the following SQL query via the PostgreSQL <command>psql</command> utility:</para>
@@ -688,16 +677,16 @@ gforge=> <userinput>SELECT user_id FROM users WHERE user_name='<replaceable>YOUR
 </screen>
 				</listitem>
 				<listitem>
-					<para>Now set up the newly added user to be a GForge administrator:</para>
+					<para>Now set up the newly added user to be a FusionForge administrator:</para>
 <screen>
 gforge=> <userinput>INSERT INTO user_group (user_id,group_id,admin_flags)</userinput>
 gforge-> <userinput>VALUES (<replaceable>102</replaceable>,1,'A');</userinput>
 </screen>
 				</listitem>
 			</orderedlist>
-			<para>One of the first string as GForge administrator is to initialize once the reporting tables from Reporting tab.</para>
+			<para>One of the first string as FusionForge administrator is to initialize once the reporting tables from Reporting tab.</para>
 			<note>
-				<para>Once you have set up this user as an administrator, you can use GForge web interface to add more administrators.</para>
+				<para>Once you have set up this user as an administrator, you can use FusionForge web interface to add more administrators.</para>
 			</note>
 		</section>
 		<section>
@@ -719,10 +708,10 @@ gforge-> <userinput>VALUES (<replaceable>102</replaceable>,1,'A');</userinput>
 			<title>Optional Features</title>
 			<section>
 				<title>Project webs</title>
-				<para>Each project can have its own virtual host <literal><replaceable>projectname</replaceable>.projects.gforge.<replaceable>company.com</replaceable></literal>.  Location of project files is configured with <varname>$groupdir_prefix</varname> variable in GForge configuration file.  Each project has directory with project's name and contains <filename class="directory">htdocs</filename> subdirectory where Web files are placed.  Project directories are created by <filename>cronjobs/cvs-cron/usergroup.php</filename>.</para>
+				<para>Each project can have its own virtual host <literal><replaceable>projectname</replaceable>.projects.gforge.<replaceable>company.com</replaceable></literal>.  Location of project files is configured with <varname>$groupdir_prefix</varname> variable in FusionForge configuration file.  Each project has directory with project's name and contains <filename class="directory">htdocs</filename> subdirectory where Web files are placed.  Project directories are created by <filename>cronjobs/cvs-cron/usergroup.php</filename>.</para>
 				<section>
 					<title>DNS Server Configuration (BIND)</title>
-					<para>Project virtual hosts require new DNS zone.  Making this new zone is similar to making DNS zone for GForge itself.</para>
+					<para>Project virtual hosts require new DNS zone.  Making this new zone is similar to making DNS zone for FusionForge itself.</para>
 					<orderedlist>
 						<listitem>
 							<para>Declare new zone in <literal>gforge.<replaceable>company.com</replaceable></literal> zone:</para>
@@ -780,7 +769,7 @@ test.projects.gforge.<replaceable>company.com</replaceable> has address <replace
 <programlisting>
 #
 #	WARNING - security is degraded by having this
-#	on the same machine as the primary GForge
+#	on the same machine as the primary FusionForge
 #
 NameVirtualHost <replaceable>1.2.3.4</replaceable>
 &lt;VirtualHost <replaceable>1.2.3.4</replaceable>&gt;
@@ -850,7 +839,7 @@ $ <userinput>psql -U gforge -W -h localhost -f FTI-20050530.sql gforge</userinpu
 </screen>
 					</listitem>
 					<listitem>
-						<para>Enable Full Text Indexing by setting <varname>$sys_use_fti</varname> in GForge Configuration File <filename>local.inc</filename>.</para>
+						<para>Enable Full Text Indexing by setting <varname>$sys_use_fti</varname> in FusionForge Configuration File <filename>local.inc</filename>.</para>
 					</listitem>
 				</itemizedlist>
 			</section>
@@ -888,7 +877,7 @@ $sys_dbpasswd = 'p455w0rd' ;
 			</section>
 			<section>
 				<title>Jabber Support</title>
-				<para>GForge supports the sending of messages to jabber accounts. To accomplish this, you must have a user account setup on the jabber server that gforge can connect to and send messages.</para>
+				<para>FusionForge supports the sending of messages to jabber accounts. To accomplish this, you must have a user account setup on the jabber server that gforge can connect to and send messages.</para>
 				<para>Once you have that user account, server, and password set up, just edit <filename>/etc/gforge/local.inc</filename> and add the information to the jabber section.</para>
 			</section>
 			<section>
@@ -901,7 +890,7 @@ $sys_dbpasswd = 'p455w0rd' ;
 	<section>
 		<title>Plugins</title>
 		<note>
-			<para>Since GForge 4.0, plugins are necessary as source code management is now provided by plugins (SCM* plugins).</para>
+			<para>Since FusionForge 4.0, plugins are necessary as source code management is now provided by plugins (SCM* plugins).</para>
 		</note>
 		<para>For each plugin, you can find an <filename>INSTALL</filename> file in the plugin tarball.</para>
 		<section>
@@ -954,7 +943,7 @@ echo "UseNewInfoFmtStrings=yes" >> $repositorypath/CVSROOT/config
 				</warning>
 				<orderedlist>
 					<listitem>
-						<para>Create default location for CVS repositories (<varname>$cvsdir_prefix</varname> in GForge configuration file):</para>
+						<para>Create default location for CVS repositories (<varname>$cvsdir_prefix</varname> in FusionForge configuration file):</para>
 <screen>
 # <userinput>mkdir <replaceable>/cvsroot</replaceable></userinput>
 </screen>
@@ -986,12 +975,12 @@ echo "UseNewInfoFmtStrings=yes" >> $repositorypath/CVSROOT/config
 </screen>
 					</listitem>
 					<listitem>
-						<para>Edit GForge Config File <filename>/etc/gforge/local.inc</filename> and change <varname>$sys_path_to_scmweb</varname> to be <filename class="directory"><replaceable>/var/www/gforge</replaceable>/plugins/scmcvs/cgi-bin</filename>.</para>
+						<para>Edit FusionForge Config File <filename>/etc/gforge/local.inc</filename> and change <varname>$sys_path_to_scmweb</varname> to be <filename class="directory"><replaceable>/var/www/gforge</replaceable>/plugins/scmcvs/cgi-bin</filename>.</para>
 					</listitem>
 					<listitem>
 						<para>You may have to edit <filename>/etc/gforge/plugins/scmcvs/cvsweb.conf</filename> to change the cvsroot location:</para>
 <screen>
-'gforge'  => ['GForge-CVS', '<replaceable>/cvsroot/</replaceable>'],
+'gforge'  => ['FusionForge-CVS', '<replaceable>/cvsroot/</replaceable>'],
 </screen>
 					</listitem>
 					<listitem>
@@ -1051,7 +1040,7 @@ cvspserver      2401/udp
 			<title>SVN</title>
 			<section>
 				<title>Overview</title>
-				<para>SVN is also managed via plugin. The scmsvn plugin is included and activated by default in GForge. As with scmcvs, you have to move the <filename>scmcvs/etc/plugins/*</filename> files to <filename>/etc/gforge/plugins/*</filename> and may have to make minor modifications for your specific setup.</para>
+				<para>SVN is also managed via plugin. The scmsvn plugin is included and activated by default in FusionForge. As with scmcvs, you have to move the <filename>scmcvs/etc/plugins/*</filename> files to <filename>/etc/gforge/plugins/*</filename> and may have to make minor modifications for your specific setup.</para>
 				<para>There are two ways to manage SVN. One is to have SVN over DAV and the other is to have SVN over SSH just as you do with CVS. If you choose to use DAV, you will need the <filename class="libraryfile">mod_auth_gforge</filename> library compiled and installed in your apache and the appropriate virtual host settings in your <filename>httpd.conf</filename>. <filename class="libraryfile">mod_auth_gforge</filename> is available from gforge.org. The cronjobs to manage SVN are in <filename class="directory">cronjobs/dav-svn/</filename> and so are sample <filename>httpd.conf</filename> virtual host settings. Each of these cronjobs has configuration parameters which you may have to edit manually for your specific system.</para>
 				<para>Configuring svnserv for svn-over-ssh:
 					<itemizedlist>
@@ -1126,7 +1115,7 @@ $conn = pg_connect(
 		<para>Q: When I click on <quote>/projects/</quote> or <quote>/users/</quote> links, I get the source code instead of the page I expected.</para>
 		<para>A: As shown in the example <filename>httpd.conf</filename> files above, you may have to switch to using the <literal>&lt;Files&gt;</literal> or <literal>&lt;Location&gt;</literal> directives depending on your server version.</para>
 
-		<para>Q: How do I backup GForge?</para>
+		<para>Q: How do I backup FusionForge?</para>
 		<para>A: The only proper way to backup the gforge database is with <command>pg_dump</command>.  Any attempt to backup the filesystem while pgsql is running will result in a useless and corrupt backup. You can backup CVS trees using <command>tar</command> as long as they are not actively and heavily used during the backup. Mailman and the FRS uploads dir can also be backed up with <command>tar</command>.</para>
 
 		<para>Q: Any time i enter an apostrophe in a text box, i get a parse error</para>

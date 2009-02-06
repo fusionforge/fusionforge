@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2000 (c) The SourceForge Crew
  *
- * $Id: grouplist.php 6565 2008-06-30 17:58:41Z aljeux $
+ * $Id$
  *
  * This file is part of GForge.
  *

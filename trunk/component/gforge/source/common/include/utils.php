@@ -1,28 +1,26 @@
 <?php
 /**
- * utils.php - Misc utils common to all aspects of the site
+ * FusionForge miscellaneous utils
  *
- * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 1999-2001, VA Linux Systems, Inc.
  *
- * @version   $Id: utils.php 6519 2008-05-28 21:44:27Z cbayle $
+ * This file is part of FusionForge.
  *
- * This file is part of GForge.
- *
- * GForge is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * GForge is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation; either version 2 of the License,
+ * or (at your option) any later version.
+ * 
+ * FusionForge is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+ * USA
  */
-
 
 /**
  * removeCRLF() - remove any Carriage Return-Line Feed from a string. 
@@ -276,18 +274,18 @@ function util_handle_message($id_arr,$subject,$body,$extra_emails='',$extra_jabb
 				$address['email'][]=db_result($res,$i,'email');
 			}
 		}
-		if (count($address['email']) > 0) {
-			$extra_email1=implode($address['email'],',').',';
+		if (isset ($address['email']) && count($address['email']) > 0) {
+			$extra_emails=implode($address['email'],',').',' . $extra_emails;
 		}
-		if (count($address['jabber_address']) > 0) {
-			$extra_jabber1=implode($address['jabber_address'],',').',';
+		if (isset ($address['jabber_address']) && count($address['jabber_address']) > 0) {
+			$extra_jabbers=implode($address['jabber_address'],',').','.$extra_jabbers;
 		}
 	}
-	if ($extra_email1 || $extra_emails) {
-		util_send_message('',$subject,$body,$from,$extra_email1.$extra_emails);
+	if ($extra_emails) {
+		util_send_message('',$subject,$body,$from,$extra_emails);
 	}
-	if ($extra_jabber1 || $extra_jabbers) {
-		util_send_jabber($extra_jabber1.$extra_jabbers,$subject,$body);
+	if ($extra_jabbers) {
+		util_send_jabber($extra_jabbers,$subject,$body);
 	}
 }
 
@@ -745,7 +743,7 @@ function ShowResultSet($result,$title='',$linkify=false,$displayHeaders=true,$he
  *
  */
 function validate_email ($address) {
-	return (ereg('^[-!#$%&\'*+\\./0-9=?A-Z^_`a-z{|}~]+'. '@'. '[-!#$%&\'*+\\/0-9=?A-Z^_`a-z{|}~]+\.' . '[-!#$%&\'*+\\./0-9=?A-Z^_`a-z{|}~]+$', $address));
+	return (ereg('^[-!#$%&\'*+\\./0-9=?A-Z^_`a-z{|}~]+'. '@'. '[-!#$%&\'*+\\/0-9=?A-Z^_`a-z{|}~]+\.' . '[-!#$%&\'*+\\./0-9=?A-Z^_`a-z{|}~]+$', $address) !== false);
 }
 
 /**

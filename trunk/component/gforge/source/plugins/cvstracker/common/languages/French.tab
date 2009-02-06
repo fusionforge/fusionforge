@@ -6,7 +6,7 @@
 #  * Copyright 2004 (c) Guillaume Smet <guillaume-gforge@smet.org>
 #  * http://gforge.org
 #  *
-#  * @version   $Id: French.tab 4824 2005-10-25 15:11:40Z lcorso $
+#  * @version   $Id$
 #  *
 #  */
 plugin_cvstracker	title	Liens vers les commits CVS

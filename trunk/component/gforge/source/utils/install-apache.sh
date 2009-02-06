@@ -1,6 +1,6 @@
 #! /bin/sh
 # 
-# $Id: install-apache.sh 6483 2008-04-24 20:23:29Z lo-lan-do $
+# $Id$
 #
 # Configure apache for GForge
 # Christian Bayle, Roland Mas, debian-sf (GForge for Debian)
@@ -194,6 +194,7 @@ case "$1" in
 				#not enabling env module, part of base in apache2
 				DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod vhost_alias || true
 				DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod headers || true
+				DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod rewrite || true
 
 				LINK=`ls -l /etc/$flavour/conf.d/gforge.httpd.conf | sed 's/.*-> \(.*\)$/\1/'`
 				if [ "$LINK" != "$GFORGE_ETC_LIST" ] ; then 

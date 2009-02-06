@@ -1,6 +1,6 @@
 #! /bin/sh
 # 
-# $Id: install-postfix.sh 6571 2008-07-20 17:29:38Z lo-lan-do $
+# $Id$
 #
 # Configure Postfix for GForge
 # Julien Goodwin

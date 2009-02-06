@@ -83,6 +83,7 @@ case "$1" in
 	DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod env || true
 	DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod vhost_alias || true
 	DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod headers || true
+	DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod rewrite || true
 	
 	# Enable the Gforge configuration
 	if [ -e /etc/apache2/conf.d/gforge.httpd.conf ] ; then

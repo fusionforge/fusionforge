@@ -2,7 +2,7 @@
 /**
  * Copyright 2005 (c) GForge Group, LLC; Anthony J. Pugliese,
  *
- * @version   $Id: query.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id$
  *
  * This file is part of GForge.
  *

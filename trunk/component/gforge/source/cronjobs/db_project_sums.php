@@ -5,7 +5,7 @@
  * The rest Copyright 2002-2004 (c) GForge Team
  * http://gforge.org/
  *
- * @version   $Id: db_project_sums.php 6730 2009-01-12 20:54:29Z aljeux $
+ * @version   $Id$
  *
  * This file is part of GForge.
  *

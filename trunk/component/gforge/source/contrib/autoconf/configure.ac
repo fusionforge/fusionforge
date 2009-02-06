@@ -1,4 +1,4 @@
-dnl $Id: configure.ac 1642 2003-02-03 00:51:09Z offer $
+dnl $Id$
 dnl
 dnl finger of blame -> Richard Offer.
 dnl
@@ -20,7 +20,7 @@ Copyright (c) 2003 Richard Offer. All rights reserved.
   Any local macros are licensed under the BSD license
 ])
 
-AC_REVISION($Id: configure.ac 1642 2003-02-03 00:51:09Z offer $)
+AC_REVISION($Id$)
 
 
 

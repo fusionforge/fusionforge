@@ -6,7 +6,7 @@
  * The rest Copyright 2002-2005 (c) GForge Team
  * http://gforge.org/
  *
- * @version   $Id: usergroup.php 6557 2008-06-23 19:34:48Z aljeux $
+ * @version   $Id$
  *
  * This file is part of GForge.
  *

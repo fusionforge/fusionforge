@@ -4,7 +4,7 @@
  *
  * Copyright 2004 (c) GForge LLC
  *
- * @version   $Id: scm_utils.php 6240 2007-11-26 21:42:48Z lo-lan-do $
+ * @version   $Id$
  * @author Tim Perdue tim@gforge.org
  * @date 2005-04-16
  *

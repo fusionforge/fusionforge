@@ -1,6 +1,6 @@
 #! /bin/sh
 # 
-# $Id: install-dns.sh 3112 2004-07-21 20:39:34Z cbayle $
+# $Id$
 #
 # Configure Bind 9 for GForge
 # Christian Bayle, Roland Mas, debian-sf (GForge for Debian)

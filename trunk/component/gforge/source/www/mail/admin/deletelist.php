@@ -6,7 +6,7 @@
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2003-2004 (c) Guillaume Smet - Open Wide
  *
- * @version $Id: deletelist.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version $Id$
  */
 
 require_once('../../env.inc.php');
