@@ -240,7 +240,7 @@ setupinout(){
 		readdefault $CONFFILEIN.new
 	fi
 	
-	if [ "$interact" == true ]
+	if [ "$interact" = true ]
 	then
 		echo "Enter values or type enter for defaults:"
 		# Here is the fun II
@@ -265,7 +265,7 @@ setupinout(){
 	
 	# Fill in the blanks
 	EXCLUDEVHOST=' -not -name 55vhost'
-	if [ "$dovhost" == true ]
+	if [ "$dovhost" = true ]
 	then
 		EXCLUDEVHOST='' 		
 	fi
@@ -294,12 +294,12 @@ setupinout(){
 		$BINDIR/fill-in-the-blanks.pl $i $ETCDIR/`basename $i`.gforge-new $CONFFILEOUT
 	done
 	
-	if [ $listen80 == false ]
+	if [ $listen80 = false ]
 	then
 		rm -f $ETCDIR/00listen80.gforge-new
 	fi
 
-	if [ $usessl == false -o -z "$(findkey)" -o -z "$(findcrt)" ]
+	if [ $usessl = false -o -z "$(findkey)" -o -z "$(findcrt)" ]
 	then
 		echo "SSL Disabled"
 		rm -f $ETCDIR/[0-9][0-9]*.ssl.gforge-new
