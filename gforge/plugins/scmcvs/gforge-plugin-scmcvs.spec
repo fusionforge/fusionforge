@@ -10,7 +10,7 @@ License: GPL
 Group: Development/Tools
 Source: %{name}-%{version}.tar.bz2
 AutoReqProv: off
-Requires: gforge >= 4.7
+Requires: fusionforge >= 4.7
 Requires: perl perl-URI
 Requires: cvs >= 1.11
 #update etc/plugins/scmcvs/config.php $cvs_binary_version before updating cvs to 1.12
