@@ -309,7 +309,7 @@ if [ "$1" -eq "1" ]; then
 		mkdir -p /var/lib/gforge/chroot/
 	fi
 	
-	ln -s %{GFORGE_DIR}/www/env.inc.php %{PLUGINS_LIB_DIR}
+	ln -s %{GFORGE_DIR}/www/env.inc.php %{PLUGINS_LIB_DIR}/env.inc.php
 	
 	#Configuration de libnss-pgsql
 	ln -s %{GFORGE_DIR}/utils/install-nsspgsql.sh /usr/sbin
