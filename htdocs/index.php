@@ -106,7 +106,8 @@ cd fusionforge-4.7.1</pre>
 				<tt>bzr checkout http://scm.fusionforge.org/bzr/fusionforge/svn-trunk-ro fusionforge-trunk</tt></p>
 
 				<p>Git gateway:<br />
-				<tt>git clone git@github.com:yourlogin/fusionforge.git</tt></p>
+				See aljeux tree on github at <a href="http://github.com/aljeux/fusionforge/tree/master">http://github.com/aljeux/fusionforge/tree/master</a>.<br/>
+				You can fork the tree and send a pull request to get your changes back in fusionforge.	
 
 				<p>(Note to project members: due to virtualisation on the server, SSH needs to be accessed on port 20022.)</p>
 			</div>
