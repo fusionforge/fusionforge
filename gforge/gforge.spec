@@ -193,7 +193,7 @@ fi
 cp -rp rpm-specific/custom $RPM_BUILD_ROOT/%{GFORGE_CONF_DIR}
 
 # setting crontab
-install -m 664 rpm-specific/cron.d/gforge $RPM_BUILD_ROOT/%{CROND_DIR}/
+install -m 664 rpm-specific/cron.d/fusion/fusionforge $RPM_BUILD_ROOT/%{CROND_DIR}/
 
 %pre
 %startpostgresql
@@ -365,7 +365,7 @@ fi
 %attr(0660, %{httpduser}, gforge) %config(noreplace) %{GFORGE_CONF_DIR}/gforge.conf
 %attr(0750, root, root) %{SBIN_DIR}/gforge-config
 %attr(0640, %{httpduser}, %{httpdgroup}) %config(noreplace) %{HTTPD_CONF_DIR}/conf.d/gforge.conf
-%attr(0644, root, root) %{CROND_DIR}/gforge
+%attr(0644, root, root) %{CROND_DIR}/fusionforge
 %attr(0775, %{httpduser}, %{httpdgroup}) %dir %{UPLOAD_DIR}
 %attr(0775, %{httpduser}, %{httpdgroup}) %dir %{CACHE_DIR}
 %{GFORGE_DIR}
