@@ -41,7 +41,8 @@ deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian sid main</pre>
 				<h5>You may have to add the archive key by running:</h5>
 				<pre>wget -q http://<?php echo $_SERVER['SERVER_NAME']; ?>/key -O- | sudo apt-key add -</pre>
 				<h5>then run the usual</h5>
-				<pre>apt-get update ; apt-get install fusionforge</pre>
+				<pre>apt-get update ; apt-get install gforge</pre>
+				<p>(The packages haven't been renamed to fusionforge yet)</p>
 			</div>
 			<div class="tabbertab" title="Ubuntu">
 				<h4>For ubuntu you should create /etc/apt/sources.list.d/fusionforge file containing one of:</h4>
@@ -54,7 +55,8 @@ deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu intrepid main</pre>
 				<h5>You may have to add the archive key by running:</h5>
 				<pre>wget -q http://<?php echo $_SERVER['SERVER_NAME']; ?>/key -O- | sudo apt-key add -</pre>
 				<h5>then run the usual</h5>
-				<pre>apt-get update ; apt-get install fusionforge</pre>
+				<pre>apt-get update ; apt-get install gforge</pre>
+				<p>(The packages haven't been renamed to fusionforge yet)</p>
 			</div>
 			<div class="tabbertab" title="RedHat / CentOS">
 				<h4>For Redhat or CentOS, just download the <a href="https://fusionforge.org/frs/?group_id=6">latest tarball</a> from the project</h4>
