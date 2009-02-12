@@ -71,7 +71,7 @@ It also provides a specific version of CVSWeb wrapped in GForge CDE.
 
 # installing crontab
 install -m 755 -d $RPM_BUILD_ROOT/%{CROND_DIR}/
-#install -m 644 rpm-specific/cron.d/%{name} $RPM_BUILD_ROOT/%{CROND_DIR}/
+install -m 644 cron.d/%{name} $RPM_BUILD_ROOT/%{CROND_DIR}/
 
 # copying all needed stuff to %{PLUGIN_LIB}
 install -m 755 -d $RPM_BUILD_ROOT/%{PLUGIN_LIB}
