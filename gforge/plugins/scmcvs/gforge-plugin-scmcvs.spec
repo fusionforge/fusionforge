@@ -2,7 +2,7 @@
 %{!?release:%define release 1}
 
 Summary: CVS Plugin for GForge CDE
-Name: gforge-plugin-%{plugin}
+Name: fusionforge-plugin-%{plugin}
 Version: 4.7
 Release: %{release}
 BuildArch: noarch
