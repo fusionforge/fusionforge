@@ -16,6 +16,7 @@ gforge/common/include/database-mysql.php -text
 gforge/common/include/group_section_texts.php -text
 gforge/common/include/rbac_texts.php -text
 gforge/contrib/cmd-line-prototype.tar.gz -text
+gforge/cron.d/fusionforge -text
 gforge/cron.gforge -text
 gforge/cronjobs/create_scm_repos.php -text
 gforge/cronjobs/ftp_create_group_access.php -text
@@ -781,6 +782,7 @@ gforge/plugins/scmbzr/common/scmbzr-init.php -text
 gforge/plugins/scmbzr/etc/plugins/scmbzr/config.php -text
 gforge/plugins/scmcvs/cron.d/fusionforge-plugin-scmcvs -text
 gforge/plugins/scmcvs/gforge-plugin-scmcvs.spec -text
+gforge/plugins/scmsvn/cron.d/fusionforge-plugin-scmsvn -text
 gforge/plugins/scmsvn/cronjobs/update_users.php -text
 gforge/plugins/scmsvn/db/scmsvn-init-mysql.sql -text
 gforge/plugins/svncommitemail/bin/commit-email.php -text

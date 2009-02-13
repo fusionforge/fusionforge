@@ -1,0 +1,44 @@
+#
+# GForge
+# Copyright 1999-2001 (c) VA Linux Systems
+# Copyright 2002-2004 (c) GForge, LLC, Ognyan Kulev
+# http://gforge.org/
+#
+# @version   $Id: gforge 6750 2009-01-14 22:16:59Z lo-lan-do $
+#
+
+# Change path to the GForge directory.
+FUSIONFORGE="/usr/share/gforge"
+
+# Change paths to the GForge directory.
+# Don't reference $GFORGE because this won't work!
+# You may need to change the pathname to php CLI (command line interface)
+PHP="/usr/bin/php -q -d include_path=.:/etc/gforge:/usr/share/gforge:/usr/share/gforge/www/include"
+
+# Don't mail command output to anyone.
+MAILTO=""
+
+#
+#       Create the blank svn trees for SVN-over-DAV
+#       (all repositories owned by apache)
+#
+21 * * * * root $PHP $FUSIONFORGE/plugins/scmsvn/cronjobs/create_svn.php
+
+#
+#       Create SVN snapshots
+#
+# SVNROOT and SCMSNAPSHOTSDIR variables are hard-coded in the script, so
+# you'll have to edit the script if necessary.
+#
+35 3 * * * root /bin/sh $FUSIONFORGE/plugins/scmsvn/cronjobs/snapshots.sh generate
+
+#
+#       Daily SVN stats collection
+#
+20 1 * * * root $PHP $FUSIONFORGE/plugins/scmsvn/cronjobs/svn-stats.php
+
+#
+#       Create SVN tarballs
+#
+5 3 * * * root $PHP $FUSIONFORGE/plugins/scmsvn/cronjobs/tarballs.php
+
