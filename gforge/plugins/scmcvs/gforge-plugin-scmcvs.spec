@@ -106,10 +106,10 @@ install -m 664 etc/plugins/%{plugin}/cvsweb.conf $RPM_BUILD_ROOT/%{PLUGIN_CONF}/
 
 %post
 if [ "$1" = "1" ] ; then
-		#if not the env.inc.php include-path isn't correct
-		ln -s /usr/lib/gforge/plugins/ /usr/share/gforge/plugins
-		
-		[ ! -f /bin/cvssh ] && ln -s %{PLUGIN_LIB}/bin/cvssh.pl /bin/cvssh
+	# link the plugin www rep to be accessed by web
+	ln -s %{PLUGIN_LIB}/www %{GFORGE_DIR}/www/plugins/%{name}
+
+	[ ! -f /bin/cvssh ] && ln -s %{PLUGIN_LIB}/bin/cvssh.pl /bin/cvssh
 
         #GF_DOMAIN=$(grep ^domain_name= %{GFORGE_CONF_DIR}/gforge.conf | cut -d= -f2-)
         #perl -pi -e "
@@ -122,14 +122,14 @@ if [ "$1" = "1" ] ; then
         perl -pi -e "
 		s/sys_use_scm=false/sys_use_scm=true/g" %{GFORGE_CONF_DIR}/gforge.conf
 		
-		# initializing configuration
-		%{SBIN_DIR}/gforge-config
-		
-		chroot=`grep '^gforge_chroot:' /etc/gforge/gforge.conf | sed 's/.*:\s*\(.*\)/\1/'`
- 		if [ ! -d /var/lib/gforge/chroot/cvsroot/ ] ; then
-			mkdir -p /var/lib/gforge/chroot/cvsroot/
-		fi
-		ln -s /var/lib/gforge/chroot/cvsroot /cvsroot
+	# initializing configuration
+	%{SBIN_DIR}/gforge-config
+	
+	chroot=`grep '^gforge_chroot:' /etc/gforge/gforge.conf | sed 's/.*:\s*\(.*\)/\1/'`
+	if [ ! -d /var/lib/gforge/chroot/cvsroot/ ] ; then
+		mkdir -p /var/lib/gforge/chroot/cvsroot/
+	fi
+	ln -s /var/lib/gforge/chroot/cvsroot /cvsroot
 else
         # upgrade
         :

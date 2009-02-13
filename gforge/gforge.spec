@@ -165,6 +165,10 @@ install -m 755 -d $RPM_BUILD_ROOT/%{CROND_DIR}
 for i in common cronjobs etc rpm-specific utils www ; do
 	cp -rp $i $RPM_BUILD_ROOT/%{GFORGE_DIR}/
 done
+
+#create a repository to link the plugins web pages
+install -m 755 -d $RPM_BUILD_ROOT/%{GFORGE_DIR}/www/plugins
+
 install -m 750 setup $RPM_BUILD_ROOT/%{GFORGE_DIR}/
 chmod 755 $RPM_BUILD_ROOT/%{GFORGE_DIR}/utils/fill-in-the-blanks.pl
 chmod 755 $RPM_BUILD_ROOT/%{GFORGE_DIR}/utils/install-nsspgsql.sh
@@ -310,6 +314,9 @@ if [ "$1" -eq "1" ]; then
 	fi
 	
 	ln -s %{GFORGE_DIR}/www/env.inc.php %{PLUGINS_LIB_DIR}/env.inc.php
+	
+	#if not the env.inc.php include-path isn't correct
+        ln -s %{PLUGINS_LIB_DIR} %{GFORGE_DIR}/plugins
 	
 	#Configuration de libnss-pgsql
 	ln -s %{GFORGE_DIR}/utils/install-nsspgsql.sh /usr/sbin
