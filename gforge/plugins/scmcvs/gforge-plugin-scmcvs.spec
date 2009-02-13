@@ -167,7 +167,7 @@ fi
 #%{PLUGIN_LIB}/rpm-specific
 %{PLUGIN_LIB}/www
 %{PLUGIN_LIB}/cronjobs
-#%{CROND_DIR}/%{name}
+%{CROND_DIR}/%{name}
 
 %changelog
 * Mon Jan 09 2006 Nicolas Quienot <nquienot@linagora.com>

@@ -197,7 +197,7 @@ fi
 cp -rp rpm-specific/custom $RPM_BUILD_ROOT/%{GFORGE_CONF_DIR}
 
 # setting crontab
-install -m 664 rpm-specific/cron.d/fusion/fusionforge $RPM_BUILD_ROOT/%{CROND_DIR}/
+install -m 664 rpm-specific/cron.d/fusionforge $RPM_BUILD_ROOT/%{CROND_DIR}/
 
 %pre
 %startpostgresql
