@@ -216,7 +216,7 @@ class LdapextauthPlugin extends Plugin {
 				$mappedinfo = plugin_ldapextauth_mapping ($ldapentry) ;
 				
 				// Insert into DB
-				$u = new User () ;
+				$u = new GFUser () ;
 
 				$unix_name = $loginname ;
 				$firstname = '' ;
