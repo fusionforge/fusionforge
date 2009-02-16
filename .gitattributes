@@ -1345,18 +1345,14 @@ trunk/component/gforge/source/plugins/eirc/EIRC-1.0.2+free.tar.gz -text
 trunk/component/gforge/source/plugins/env.inc.php -text
 trunk/component/gforge/source/plugins/fckeditor/common/fckeditorPlugin.class.php -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/css/behaviors/hiddenfield.gif -text
-trunk/component/gforge/source/plugins/fckeditor/www/editor/css/images/Thumbs.db -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/css/images/fck_anchor.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/css/images/fck_flashlogo.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/css/images/fck_pagebreak.gif -text
-trunk/component/gforge/source/plugins/fckeditor/www/editor/dialog/common/images/Thumbs.db -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/dialog/common/images/locked.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/dialog/common/images/reset.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/dialog/common/images/unlocked.gif -text
-trunk/component/gforge/source/plugins/fckeditor/www/editor/dialog/fck_about/Thumbs.db -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/dialog/fck_about/logo_fckeditor.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/dialog/fck_about/logo_fredck.gif -text
-trunk/component/gforge/source/plugins/fckeditor/www/editor/dialog/fck_template/images/Thumbs.db -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/dialog/fck_template/images/template1.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/dialog/fck_template/images/template2.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/dialog/fck_template/images/template3.gif -text
@@ -1368,8 +1364,6 @@ trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/d
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/default/images/FolderOpened.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/default/images/FolderOpened32.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/default/images/FolderUp.gif -text
-trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/default/images/Thumbs.db -text
-trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/Thumbs.db -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/ai.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/avi.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/bmp.gif -text
@@ -1396,7 +1390,6 @@ trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/d
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/xls.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/xml.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/zip.gif -text
-trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/Thumbs.db -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/ai.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/avi.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/bmp.gif -text
@@ -1451,12 +1444,10 @@ trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/m
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/FolderOpened.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/FolderOpened32.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/FolderUp.gif -text
-trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/Thumbs.db -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/close.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/delete.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/edit.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/editImage.gif -text
-trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/icons/32/Thumbs.db -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/icons/32/ai.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/icons/32/avi.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/icons/32/bmp.gif -text
@@ -1483,7 +1474,6 @@ trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/m
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/icons/32/xls.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/icons/32/xml.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/icons/32/zip.gif -text
-trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/icons/Thumbs.db -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/icons/ai.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/icons/avi.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/icons/bmp.gif -text
@@ -1511,16 +1501,13 @@ trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/m
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/icons/xml.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/icons/zip.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/spacer.gif -text
-trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/toolbar/Thumbs.db -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/toolbar/close.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/toolbar/crop.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/toolbar/flip.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/toolbar/resize.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/toolbar/rotate.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/filemanager/browser/mcpuk/images/toolbar/save.gif -text
-trunk/component/gforge/source/plugins/fckeditor/www/editor/images/Thumbs.db -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/images/anchor.gif -text
-trunk/component/gforge/source/plugins/fckeditor/www/editor/images/smiley/fun/Thumbs.db -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/images/smiley/fun/aiua.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/images/smiley/fun/ak.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/images/smiley/fun/alien.gif -text
@@ -1608,7 +1595,6 @@ trunk/component/gforge/source/plugins/fckeditor/www/editor/images/smiley/fun/ylt
 trunk/component/gforge/source/plugins/fckeditor/www/editor/images/smiley/fun/yopyopyop.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/images/smiley/fun/youpi.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/images/smiley/fun/zoor.gif -text
-trunk/component/gforge/source/plugins/fckeditor/www/editor/images/smiley/msn/Thumbs.db -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/images/smiley/msn/angel_smile.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/images/smiley/msn/angry_smile.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/images/smiley/msn/broken_heart.gif -text
@@ -1633,7 +1619,6 @@ trunk/component/gforge/source/plugins/fckeditor/www/editor/images/smiley/msn/wha
 trunk/component/gforge/source/plugins/fckeditor/www/editor/images/smiley/msn/wink_smile.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/images/spacer.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/plugins/placeholder/placeholder.gif -text
-trunk/component/gforge/source/plugins/fckeditor/www/editor/skins/default/images/Thumbs.db -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/skins/default/images/toolbar.arrowright.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/skins/default/images/toolbar.buttonarrow.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/skins/default/images/toolbar.collapse.gif -text
@@ -1641,7 +1626,6 @@ trunk/component/gforge/source/plugins/fckeditor/www/editor/skins/default/images/
 trunk/component/gforge/source/plugins/fckeditor/www/editor/skins/default/images/toolbar.expand.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/skins/default/images/toolbar.separator.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/skins/default/images/toolbar.start.gif -text
-trunk/component/gforge/source/plugins/fckeditor/www/editor/skins/default/toolbar/Thumbs.db -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/skins/default/toolbar/about.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/skins/default/toolbar/anchor.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/skins/default/toolbar/bgcolor.gif -text
@@ -1711,7 +1695,6 @@ trunk/component/gforge/source/plugins/fckeditor/www/editor/skins/default/toolbar
 trunk/component/gforge/source/plugins/fckeditor/www/editor/skins/default/toolbar/universalkey.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/skins/default/toolbar/unlink.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/skins/default/toolbar/unorderedlist.gif -text
-trunk/component/gforge/source/plugins/fckeditor/www/editor/skins/office2003/images/Thumbs.db -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/skins/office2003/images/toolbar.arrowright.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/skins/office2003/images/toolbar.bg.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/skins/office2003/images/toolbar.buttonarrow.gif -text
@@ -1795,7 +1778,6 @@ trunk/component/gforge/source/plugins/fckeditor/www/editor/skins/office2003/tool
 trunk/component/gforge/source/plugins/fckeditor/www/editor/skins/office2003/toolbar/universalkey.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/skins/office2003/toolbar/unlink.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/skins/office2003/toolbar/unorderedlist.gif -text
-trunk/component/gforge/source/plugins/fckeditor/www/editor/skins/silver/images/Thumbs.db -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/skins/silver/images/toolbar.arrowright.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/skins/silver/images/toolbar.buttonarrow.gif -text
 trunk/component/gforge/source/plugins/fckeditor/www/editor/skins/silver/images/toolbar.buttonbg.gif -text
