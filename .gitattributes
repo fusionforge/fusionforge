@@ -781,7 +781,7 @@ gforge/plugins/scmbzr/common/BzrPlugin.class.php -text
 gforge/plugins/scmbzr/common/scmbzr-init.php -text
 gforge/plugins/scmbzr/etc/plugins/scmbzr/config.php -text
 gforge/plugins/scmcvs/cron.d/fusionforge-plugin-scmcvs -text
-gforge/plugins/scmcvs/gforge-plugin-scmcvs.spec -text
+gforge/plugins/scmcvs/fusionforge-plugin-scmcvs.spec -text
 gforge/plugins/scmsvn/cron.d/fusionforge-plugin-scmsvn -text
 gforge/plugins/scmsvn/cronjobs/update_users.php -text
 gforge/plugins/scmsvn/db/scmsvn-init-mysql.sql -text

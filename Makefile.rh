@@ -58,7 +58,7 @@ dist: rpmprep
 #
 # FUSIONFORGE
 #
-target cleanff build : override version=$(shell grep '^Version:' gforge/gforge.spec | sed 's/.*:\s*\(.*\)/\1/')
+target cleanff build : override version=$(shell grep '^Version:' gforge/fusionforge.spec | sed 's/.*:\s*\(.*\)/\1/')
 
 cleanff:		# Clean files of fusionforge build                         #
 	@rm -rf fusionforge-$(version).tar.bz2 fusionforge-$(version)
@@ -72,7 +72,7 @@ build: rpmprep		# Build rpm fusionforge packages                               #
 #
 # CVS PLUGIN
 #
-target cleancvs buildcvs : override version=$(shell grep '^Version:' plugins/scmcvs/gforge-plugin-scmcvs.spec | sed 's/.*:\s*\(.*\)/\1/')
+target cleancvs buildcvs : override version=$(shell grep '^Version:' plugins/scmcvs/fusionforge-plugin-scmcvs.spec | sed 's/.*:\s*\(.*\)/\1/')
 
 cleancvs:               # Clean files of gforge-plugin-scmcvs build           #
 	@rm -rf fusionforge-plugin-scmcvs-$(version).tar.bz2 fusionforge-plugin-scmcvs-$(version)
