@@ -379,6 +379,7 @@ fi
 %{GFORGE_LANG_DIR}
 %{GFORGE_CONF_DIR}
 %{SCM_TARBALLS_DIR}
+%{PLUGINS_LIB_DIR}
 
 %changelog
 * Wed Jun 29 2005 Open Wide <guillaume.smet@openwide.fr>

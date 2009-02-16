@@ -107,7 +107,7 @@ install -m 664 etc/plugins/%{plugin}/cvsweb.conf $RPM_BUILD_ROOT/%{PLUGIN_CONF}/
 %post
 if [ "$1" = "1" ] ; then
 	# link the plugin www rep to be accessed by web
-	ln -s %{PLUGIN_LIB}/www %{GFORGE_DIR}/www/plugins/%{name}
+	ln -s %{PLUGIN_LIB}/www %{GFORGE_DIR}/www/plugins/%{plugin}
 
 	[ ! -f /bin/cvssh ] && ln -s %{PLUGIN_LIB}/bin/cvssh.pl /bin/cvssh
 

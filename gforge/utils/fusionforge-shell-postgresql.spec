@@ -96,9 +96,11 @@ fi
 
 %postun
 if [ "$1" = "0" ] ; then
-        #suppression des fichiers de conf créés par install-nsspgsql.sh
+        #reconfiguration de gforge
+	#suppression des fichiers de conf créés par install-nsspgsql.sh
         #suppression du user gforge_nss
         #suppression de gforge_nss 127.0.0.1 255.255.255.255 trust dans /var/lib/pgsql/data/pg_hba.conf
+	#activation du cron usergroup.php
 else
         # upgrade
         :
