@@ -28,7 +28,8 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-root
 
 #Globals defines for gforge
 %define GFORGE_DIR              %{_datadir}/gforge
-%define SBIN_DIR				%{_sbindir}
+%define SBIN_DIR		%{_sbindir}
+%define CROND_DIR               %{_sysconfdir}/cron.d
 
 %description
 GForge provides many tools to aid collaboration in a
@@ -74,6 +75,15 @@ if [ "$1" = "1" ] ; then
 	#Configuration de libnss-pgsql
 	ln -s %{GFORGE_DIR}/utils/install-nsspgsql.sh %{SBIN_DIR}/
 	install-nsspgsql.sh setup
+
+	#if plugin scmcvs is installed, comment the cron usergroup.php
+	if [ ! "$(rpm -qa fusionforge-plugin-scmcvs)" = "" ]; then
+		#echo "plugin scmcvs installed"
+		if [ "$(grep 'usergroup.php' %{CROND_DIR}/fusionforge-plugin-scmcvs | grep '#')" = "" ]; then
+			#echo "I comment the cron if it is un comment"
+			sed -i "s/^\(.*usergroup.php.*\)/#\1/" %{CROND_DIR}/fusionforge-plugin-scmcvs
+		fi
+	fi
 else
         # upgrade
         :

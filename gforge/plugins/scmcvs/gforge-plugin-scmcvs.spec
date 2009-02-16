@@ -125,11 +125,11 @@ if [ "$1" = "1" ] ; then
 	# initializing configuration
 	%{SBIN_DIR}/gforge-config
 	
-	chroot=`grep '^gforge_chroot:' /etc/gforge/gforge.conf | sed 's/.*:\s*\(.*\)/\1/'`
-	if [ ! -d /var/lib/gforge/chroot/cvsroot/ ] ; then
-		mkdir -p /var/lib/gforge/chroot/cvsroot/
+	CHROOT=`grep '^gforge_chroot=' %{GFORGE_CONF_DIR}/gforge.conf | sed 's/.*=\s*\(.*\)/\1/'`
+	if [ ! -d $CHROOT/cvsroot ] ; then
+		mkdir -p $CHROOT/cvsroot
 	fi
-	ln -s /var/lib/gforge/chroot/cvsroot /cvsroot
+	ln -s $CHROOT/cvsroot /cvsroot
 else
         # upgrade
         :

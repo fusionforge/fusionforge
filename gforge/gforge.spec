@@ -40,9 +40,9 @@ Requires: cronolog
 Requires: php-jpgraph php-gd
 #update sys_path_to_jpgraph in gforge.conf if you remove this line
 #Requires: /var/www/jpgraph/jpgraph.php
-Requires: libnss-pgsql >= 1.4
+#Requires: libnss-pgsql >= 1.4
 Requires: mailman
-Requires: nscd
+#Requires: nscd
 Requires: gettext
  
 BuildRequires: perl
@@ -305,9 +305,9 @@ if [ "$1" -eq "1" ]; then
  
  	# [ ! -f /usr/bin/php4 ] && ln -s /usr/bin/php /usr/bin/php4
  	
- 	chroot=`grep '^gforge_chroot:' /etc/gforge/gforge.conf | sed 's/.*:\s*\(.*\)/\1/'`
- 	if [ ! -d /var/lib/gforge/chroot/ ] ; then
-		mkdir -p /var/lib/gforge/chroot/
+ 	CHROOT=`grep '^gforge_chroot=' %{GFORGE_CONF_DIR}/gforge.conf | sed 's/.*=\s*\(.*\)/\1/'`
+ 	if [ ! -d $CHROOT ] ; then
+		mkdir -p $CHROOT
 	fi
 	
 	ln -s %{GFORGE_DIR}/www/env.inc.php %{PLUGINS_LIB_DIR}/env.inc.php
