@@ -7,7 +7,7 @@
  *
  * Copyright 2002 (C) GForge Development Team
  *
- * @version   $Id$
+ * @version   $Id:$
  *
  */
 

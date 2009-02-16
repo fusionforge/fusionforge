@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2000 (c) The SourceForge Crew
  *
- * $Id$
+ * $Id:$
  *
  * This file is part of GForge.
  *

@@ -6,7 +6,7 @@
  * The rest Copyright 2002-2004 (c) GForge Team
  * http://gforge.org/
  *
- * @version   $Id$
+ * @version   $Id:$
  *
  * This file is part of GForge.
  *
