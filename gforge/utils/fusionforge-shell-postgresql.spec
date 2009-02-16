@@ -30,6 +30,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-root
 %define GFORGE_DIR              %{_datadir}/gforge
 %define SBIN_DIR		%{_sbindir}
 %define CROND_DIR               %{_sysconfdir}/cron.d
+%define GFORGE_CONF_DIR         %{_sysconfdir}/gforge
 
 %description
 GForge provides many tools to aid collaboration in a
@@ -62,8 +63,12 @@ install -m 755 install-nsspgsql.sh $RPM_BUILD_ROOT/%{GFORGE_DIR}/utils/install-n
 %post
 if [ "$1" = "1" ] ; then
 	
+	# configuring gforge
+	perl -pi -e "
+		s/^sys_account_manager_type=.*/sys_account_manager_type=pgsql/g" %{GFORGE_CONF_DIR}/gforge.conf
+
 	# creating gforge database user
-	GFORGEDATABASE_PASSWORD=$(grep ^db_password= /etc/gforge/gforge.conf | cut -d= -f2-)
+	GFORGEDATABASE_PASSWORD=$(grep ^db_password= %{GFORGE_CONF_DIR}/gforge.conf | cut -d= -f2-)
 	su -l postgres -c "psql -c \"CREATE USER gforge_nss WITH PASSWORD '$GFORGEDATABASE_PASSWORD' NOCREATEUSER\" %{dbname} >/dev/null 2>&1"
 	
 	# updating PostgreSQL configuration
