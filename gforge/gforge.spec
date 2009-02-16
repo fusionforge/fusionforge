@@ -165,13 +165,12 @@ install -m 755 -d $RPM_BUILD_ROOT/%{CROND_DIR}
 for i in common cronjobs etc rpm-specific utils www ; do
 	cp -rp $i $RPM_BUILD_ROOT/%{GFORGE_DIR}/
 done
-
 #create a repository to link the plugins web pages
 install -m 755 -d $RPM_BUILD_ROOT/%{GFORGE_DIR}/www/plugins
 
 install -m 750 setup $RPM_BUILD_ROOT/%{GFORGE_DIR}/
 chmod 755 $RPM_BUILD_ROOT/%{GFORGE_DIR}/utils/fill-in-the-blanks.pl
-chmod 755 $RPM_BUILD_ROOT/%{GFORGE_DIR}/utils/install-nsspgsql.sh
+#chmod 755 $RPM_BUILD_ROOT/%{GFORGE_DIR}/utils/install-nsspgsql.sh
 chmod 755 $RPM_BUILD_ROOT/%{GFORGE_DIR}/www/scm/viewvc/bin/cgi/viewvc.cgi
 
 cp -rp db/. $RPM_BUILD_ROOT/%{GFORGE_DB_DIR}/
@@ -235,13 +234,11 @@ if [ "$1" -eq "1" ]; then
 	%randstr GFORGEDATABASE_PASSWORD 8
 
 	su -l postgres -c "psql -c \"CREATE USER %{dbuser} WITH PASSWORD '$GFORGEDATABASE_PASSWORD' NOCREATEUSER\" %{dbname} >/dev/null 2>&1"
-	su -l postgres -c "psql -c \"CREATE USER gforge_nss WITH PASSWORD '$GFORGEDATABASE_PASSWORD' NOCREATEUSER\" %{dbname} >/dev/null 2>&1"
 	su -l postgres -c "psql -c \"CREATE USER gforge_mta WITH PASSWORD '$GFORGEDATABASE_PASSWORD' NOCREATEUSER\" %{dbname} >/dev/null 2>&1"
 	
 	# updating PostgreSQL configuration
 	if ! grep -i '^ *host.*%{dbname}.*' /var/lib/pgsql/data/pg_hba.conf >/dev/null 2>&1; then
 		echo 'host %{dbname} %{dbuser} 127.0.0.1 255.255.255.255 md5' >> /var/lib/pgsql/data/pg_hba.conf
-		echo 'host %{dbname} gforge_nss 127.0.0.1 255.255.255.255 trust' >> /var/lib/pgsql/data/pg_hba.conf
  		echo 'host %{dbname} gforge_mta 127.0.0.1 255.255.255.255 trust' >> /var/lib/pgsql/data/pg_hba.conf
 		%reloadpostgresql
 	fi
@@ -319,8 +316,8 @@ if [ "$1" -eq "1" ]; then
         ln -s %{PLUGINS_LIB_DIR} %{GFORGE_DIR}/plugins
 	
 	#Configuration de libnss-pgsql
-	ln -s %{GFORGE_DIR}/utils/install-nsspgsql.sh /usr/sbin
-	install-nsspgsql.sh setup
+	#ln -s %{GFORGE_DIR}/utils/install-nsspgsql.sh /usr/sbin
+	#install-nsspgsql.sh setup
 
 else
 	# upgrading database
