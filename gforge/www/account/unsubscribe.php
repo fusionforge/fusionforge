@@ -51,10 +51,10 @@ if (db_numrows($res_user) < 1) {
 
 $row_user = db_fetch_array($res_user);
 $user =& user_get_object($row_user['user_id'], $res_user);
-if (!$u || !is_object($u)) {
+if (!$user || !is_object($user)) {
     exit_error('Error','Could Not Get User');
-} elseif ($u->isError()) {
-    exit_error('Error',$u->getErrorMessage());
+} elseif ($user->isError()) {
+    exit_error('Error',$user->getErrorMessage());
 }
 
 $all=getStringFromRequest('all');
