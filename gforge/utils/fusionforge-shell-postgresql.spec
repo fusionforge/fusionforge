@@ -68,14 +68,14 @@ if [ "$1" = "1" ] ; then
 		s/^sys_account_manager_type=.*/sys_account_manager_type=pgsql/g" %{GFORGE_CONF_DIR}/gforge.conf
 
 	# creating gforge database user
-	GFORGEDATABASE_PASSWORD=$(grep ^db_password= %{GFORGE_CONF_DIR}/gforge.conf | cut -d= -f2-)
-	su -l postgres -c "psql -c \"CREATE USER gforge_nss WITH PASSWORD '$GFORGEDATABASE_PASSWORD' NOCREATEUSER\" %{dbname} >/dev/null 2>&1"
+	#GFORGEDATABASE_PASSWORD=$(grep ^db_password= %{GFORGE_CONF_DIR}/gforge.conf | cut -d= -f2-)
+	#su -l postgres -c "psql -c \"CREATE USER gforge_nss WITH PASSWORD '$GFORGEDATABASE_PASSWORD' NOCREATEUSER\" %{dbname} >/dev/null 2>&1"
 	
 	# updating PostgreSQL configuration
-	if ! grep -i '^ *host.*gforge_nss.*' /var/lib/pgsql/data/pg_hba.conf >/dev/null 2>&1; then
-		echo 'host %{dbname} gforge_nss 127.0.0.1 255.255.255.255 trust' >> /var/lib/pgsql/data/pg_hba.conf
-		%reloadpostgresql
-	fi
+	#if ! grep -i '^ *host.*gforge_nss.*' /var/lib/pgsql/data/pg_hba.conf >/dev/null 2>&1; then
+	#	echo 'host %{dbname} gforge_nss 127.0.0.1 255.255.255.255 trust' >> /var/lib/pgsql/data/pg_hba.conf
+	#	%reloadpostgresql
+	#fi
 	
 	#Configuration de libnss-pgsql
 	ln -s %{GFORGE_DIR}/utils/install-nsspgsql.sh %{SBIN_DIR}/

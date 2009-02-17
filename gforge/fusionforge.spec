@@ -234,12 +234,14 @@ if [ "$1" -eq "1" ]; then
 	%randstr GFORGEDATABASE_PASSWORD 8
 
 	su -l postgres -c "psql -c \"CREATE USER %{dbuser} WITH PASSWORD '$GFORGEDATABASE_PASSWORD' NOCREATEUSER\" %{dbname} >/dev/null 2>&1"
+	su -l postgres -c "psql -c \"CREATE USER gforge_nss WITH PASSWORD '$GFORGEDATABASE_PASSWORD' NOCREATEUSER\" %{dbname} >/dev/null 2>&1"
 	su -l postgres -c "psql -c \"CREATE USER gforge_mta WITH PASSWORD '$GFORGEDATABASE_PASSWORD' NOCREATEUSER\" %{dbname} >/dev/null 2>&1"
 	
 	# updating PostgreSQL configuration
 	if ! grep -i '^ *host.*%{dbname}.*' /var/lib/pgsql/data/pg_hba.conf >/dev/null 2>&1; then
 		echo 'host %{dbname} %{dbuser} 127.0.0.1 255.255.255.255 md5' >> /var/lib/pgsql/data/pg_hba.conf
  		echo 'host %{dbname} gforge_mta 127.0.0.1 255.255.255.255 trust' >> /var/lib/pgsql/data/pg_hba.conf
+		echo 'host %{dbname} gforge_nss 127.0.0.1 255.255.255.255 trust' >> /var/lib/pgsql/data/pg_hba.conf
 		%reloadpostgresql
 	fi
 
