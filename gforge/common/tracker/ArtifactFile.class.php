@@ -255,7 +255,7 @@ class ArtifactFile extends Error {
 	 *
 	 *	@return binary.
 	 */
-	function &getData() {
+	function getData() {
 		return base64_decode($this->data_array['bin_data']);
 	}
 
