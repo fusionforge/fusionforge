@@ -42,6 +42,26 @@ db_query("DELETE FROM user_group WHERE EXISTS (SELECT user_id FROM users ".
 "WHERE status='P' and add_date < '$then' AND users.user_id=user_group.user_id)");
 $err .= db_error();
 
+$result = db_query("SELECT user_id, email FROM users WHERE status='P' and add_date < '$then'");
+if (db_numrows($result)) {
+
+  // Plugins subsystem
+  require_once('common/include/Plugin.class.php') ;
+  require_once('common/include/PluginManager.class.php') ;
+
+  // SCM-specific plugins subsystem
+  require_once('common/include/SCM.class.php') ;
+
+  setup_plugin_manager () ;
+
+  while ($row = db_fetch_array($result)) {
+    $hook_params = array();
+    $hook_params['user'] = &user_get_object($row['user_id']);
+    $hook_params['user_id'] = $row['user_id'];
+    plugin_hook ("user_delete", $hook_params);
+  }
+}
+
 db_query("DELETE FROM users WHERE status='P' and add_date < '$then'");
 $err .= db_error();
 
