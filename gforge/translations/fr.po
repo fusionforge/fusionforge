@@ -6821,8 +6821,7 @@ msgid ""
 "View project <a href=\"%1$s\" >Statistics</a> or <a href=\"%2$s\">Activity</"
 "a>"
 msgstr ""
-"Voir les <a href=\\\"%1$s\\\">statistiques</a> ou le <a href=\\\"%2$s\\"
-"\">rapport d'activité</a> pour le projet."
+"Voir les <a href=\"%1$s\">statistiques</a> ou le <a href=\"%2$s\">rapport d'activité</a> pour le projet."
 
 #: www/include/project_home.php:73
 #, php-format
