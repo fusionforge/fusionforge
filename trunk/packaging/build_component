@@ -195,7 +195,8 @@ if [ $EXIT -eq 0 ] ; then
 	#$BIN_SVN checkout --username $SVN_USER --password $SVN_PASS $SVN_URL/tags/packaging/$VERSION/component . >> /dev/null 2>&1
 	$BIN_SVN checkout --username $SVN_USER --password $SVN_PASS $SVN_URL/trunk/packaging/component . >> /dev/null 2>&1
 	if [ $? -ne 0 ] ; then
-		$BIN_ECHO "-> Error while checkouting URL '$SVN_URL/tags/packaging/$VERSION/component'"
+		#$BIN_ECHO "-> Error while checkouting URL '$SVN_URL/tags/packaging/$VERSION/component'"
+		$BIN_ECHO "-> Error while checkouting URL '$SVN_URL/trunk/packaging/component'"
 		EXIT=1
 	fi
 	popd >> /dev/null 2>&1
