@@ -334,7 +334,14 @@ buildcomponent()
 	fi
 	if [ $EXIT -eq 0 ] ; then
 		pushd $TMP_DIR/packaging >> /dev/null 2>&1
-		COMPONENT_SVN_PATH_PACKAGING="tags/packaging/$VERSION/component"
+		case "$COMPONENT_SVN_LOCATION" in
+			trunk)
+				COMPONENT_SVN_PATH_PACKAGING="trunk/packaging/component"
+				;;
+			*)
+				COMPONENT_SVN_PATH_PACKAGING="$COMPONENT_SVN_LOCATION/packaging/$VERSION/component"
+				;;
+		esac
 		$BIN_ECHO -e "\n\n\n$BIN_SVN checkout --username $SVN_USER --password $SVN_PASS $SVN_URL/$COMPONENT_SVN_PATH_PACKAGING .\n\n\n" >> $SVN_LOG
 		$BIN_SVN checkout --username $SVN_USER --password $SVN_PASS $SVN_URL/$COMPONENT_SVN_PATH_PACKAGING . >> $SVN_LOG 2>&1
 		if [ $? -ne 0 ] ; then

@@ -175,9 +175,17 @@ if [ $EXIT -eq 0 ] ; then
 fi
 if [ $EXIT -eq 0 ] ; then
 	pushd $TMP_DIR/packaging >> /dev/null 2>&1
-	$BIN_SVN checkout --username $SVN_USER --password $SVN_PASS $SVN_URL/tags/packaging/$VERSION/delivery . >> /dev/null 2>&1
+	case "$SVN_LOCATION" in
+		trunk)
+			SVN_PATH_DELIVERY="trunk/packaging/delivery"
+			;;
+		*)
+			SVN_PATH_DELIVERY="$SVN_LOCATION/packaging/$VERSION/delivery"
+			;;
+	esac
+	$BIN_SVN checkout --username $SVN_USER --password $SVN_PASS $SVN_URL/$SVN_PATH_DELIVERY . >> /dev/null 2>&1
 	if [ $? -ne 0 ] ; then
-		$BIN_ECHO "-> Error while checkouting URL '$SVN_URL/tags/packaging/$VERSION/delivery'"
+		$BIN_ECHO "-> Error while checkouting URL '$SVN_URL/$SVN_PATH_DELIVERY'"
 		EXIT=1
 	fi
 	popd >> /dev/null 2>&1
