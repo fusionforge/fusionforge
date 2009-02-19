@@ -9,4 +9,3 @@ var/lib/gforge
 var/lib/gforge/tmp
 var/lib/gforge/etc
 var/lib/gforge/db
-var/lib/gforge/download

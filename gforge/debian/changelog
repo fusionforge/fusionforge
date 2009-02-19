@@ -2,8 +2,10 @@ gforge (4.7.1-1+) experimental; urgency=low
 
   * Fixed bashisms in /usr/lib/gforge/bin/setup, thanks to Gonéri Le
     Bouder (Closes: #514768).
+  * Fixed permissions of /var/lib/gforge/download (needs to belong to
+    www-data).
 
- -- Roland Mas <lolando@debian.org>  Tue, 10 Feb 2009 19:57:41 +0100
+ -- Roland Mas <lolando@debian.org>  Thu, 19 Feb 2009 18:24:47 +0100
 
 gforge (4.7.1-1) experimental; urgency=low
 

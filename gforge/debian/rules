@@ -135,6 +135,7 @@ install: build
 	# Remove empty theme directories
 	for i in $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/themes/* ; do [ -d $$i ] && [ $$(find $$i -type f | wc -l) = 0 ] && rm -rf $$i || true ; done
 
+	chown www-data  $(CURDIR)/debian/gforge-web-apache2/var/lib/gforge/download
 	install -o www-data -m 755 -d $(CURDIR)/debian/gforge-web-apache2/var/cache/gforge
 	install -m 755 utils/install-apache.sh $(CURDIR)/debian/gforge-web-apache2/usr/lib/gforge/bin/
 	install -m 755 deb-specific/create-vhosts.sh $(CURDIR)/debian/gforge-web-apache2/usr/lib/gforge/bin/
