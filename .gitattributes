@@ -5029,6 +5029,7 @@ trunk/component/phpbb/source/src/includes/auth/auth_novaforge.php -text
 trunk/component/pwgen/package/config -text
 trunk/component/pwgen/package/pwgen.spec -text
 trunk/component/pwgen/source/tarballs/pwgen-2.05.tar.gz -text
+trunk/delivery/fusionforge/package/config -text
 trunk/delivery/gforge/package/config -text
 trunk/delivery/novaforge/package/config -text
 trunk/docs/Videos/Packaging/packaging.htm -text
