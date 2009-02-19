@@ -13,14 +13,13 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * http://sourceforge.net
  *
- * @version   $Id: squal_pre.php 6949 2009-02-05 21:15:33Z lolando $
+ * @version   $Id: squal_pre.php 6960 2009-02-10 19:06:39Z lolando $
  */
 
 if (!isset($no_gz_buffer) || !$no_gz_buffer) {
     ob_start("ob_gzhandler");
 }
 
-require_once ('../env.inc.php') ;
 require $gfcgfile;
 require $gfcommon.'include/constants.php';
 require_once $gfcommon.'include/database-'.$sys_database_type.'.php';

@@ -56,22 +56,22 @@ function choose_language_from_context () {
 	}
 
 	// Try with the browser's preferred language
-	$matches = array();
-	preg_match_all('/([a-z]{2}(?:-[a-z]{2})?)(?:;q=([0-9\.]{1,4}))?/',
-		       getStringFromServer ('HTTP_ACCEPT_LANGUAGE'),
-		       $matches,
-		       PREG_SET_ORDER);
-	$languages = array();
-	$languagesCount = count($matches);
-	if($languagesCount > 0) {
-		$delta = 0.009/$languagesCount;
+	$ranges = explode (',', getStringFromServer ('HTTP_ACCEPT_LANGUAGE')) ;
+	$languages = array() ; $lcount = count ($ranges) ;
+	if ($lcount > 0) {
+		$delta = 0.009/$lcount ;
+		$i = 0 ;
 		
-		for($i = 0, $max = count($matches); $i < $max; $i++) {
-			$languageCode = $matches[$i][1];
-			$quality = (!isset($matches[$i][2]) || empty($matches[$i][2])) ? '1' : $matches[$i][2];
-			$languages[$languageCode] = $quality + $delta * ($languagesCount - $i);
+		foreach ($ranges as $p) {
+			if (preg_match ('/(.*);q=(.*)/', $p, $matches)) {
+				$l = $matches[1] ;
+				$w = $matches[2] ;
+				$languages[$l] = $w + $delta * ($lcount - $i) ;
+			} else {
+				$languages[$p] = 1 + $delta * ($lcount - $i) ;
+			}
+			$i++ ;
 		}
-		
 		arsort($languages, SORT_NUMERIC);
 		$languages = array_keys($languages);
 		

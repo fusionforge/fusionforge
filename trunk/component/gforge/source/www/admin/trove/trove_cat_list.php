@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  *
- * @version   $Id: trove_cat_list.php 6506 2008-05-27 20:56:57Z aljeux $
+ * @version   $Id: trove_cat_list.php 6988 2009-02-17 13:24:15Z lolando $
  *
  * This file is part of GForge.
  *
@@ -51,7 +51,7 @@ function printnode ($nodeid,$text) {
 	$res_child = db_query("
 		SELECT trove_cat_id,fullname FROM trove_cat 
 		WHERE parent='$nodeid'
-		AND trove_cat_id!=0;
+		AND trove_cat_id!=0 ORDER BY fullname;
 	");
 	while ($row_child = db_fetch_array($res_child)) {
 		printnode($row_child["trove_cat_id"],$row_child["fullname"]);

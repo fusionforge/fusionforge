@@ -1235,6 +1235,7 @@ trunk/component/gforge/source/configscripts/plugin-svntracker.config -text
 trunk/component/gforge/source/configscripts/plugin-svntracker.destroy -text
 trunk/component/gforge/source/configscripts/plugin-svntracker.remove -text
 trunk/component/gforge/source/contrib/cmd-line-prototype.tar.gz -text
+trunk/component/gforge/source/cron.d/fusionforge -text
 trunk/component/gforge/source/cron.gforge -text
 trunk/component/gforge/source/crond/gforge -text
 trunk/component/gforge/source/crond/gforge-auth-unix -text
@@ -1318,6 +1319,7 @@ trunk/component/gforge/source/docs/images/sflogo2-105a.png -text
 trunk/component/gforge/source/etc/httpd.d/01common.ssl -text
 trunk/component/gforge/source/etc/httpd.d/21list.ssl -text
 trunk/component/gforge/source/etc/local.d/60bbcode -text
+trunk/component/gforge/source/fusionforge.spec -text
 trunk/component/gforge/source/gforge-install-2.php -text
 trunk/component/gforge/source/gforge-install-3-db.php -text
 trunk/component/gforge/source/gforge-install.sh -text
@@ -2022,7 +2024,9 @@ trunk/component/gforge/source/plugins/quota_management/www/quota_project.php -te
 trunk/component/gforge/source/plugins/scmbzr/common/BzrPlugin.class.php -text
 trunk/component/gforge/source/plugins/scmbzr/common/scmbzr-init.php -text
 trunk/component/gforge/source/plugins/scmbzr/etc/plugins/scmbzr/config.php -text
-trunk/component/gforge/source/plugins/scmcvs/gforge-plugin-scmcvs.spec -text
+trunk/component/gforge/source/plugins/scmcvs/cron.d/fusionforge-plugin-scmcvs -text
+trunk/component/gforge/source/plugins/scmcvs/fusionforge-plugin-scmcvs.spec -text
+trunk/component/gforge/source/plugins/scmsvn/cron.d/fusionforge-plugin-scmsvn -text
 trunk/component/gforge/source/plugins/scmsvn/cronjobs/update_users.php -text
 trunk/component/gforge/source/plugins/scmsvn/db/scmsvn-init-mysql.sql -text
 trunk/component/gforge/source/plugins/svncommitemail/bin/commit-email.php -text
@@ -4178,6 +4182,7 @@ trunk/component/gforge/source/plugins/wiki/www/uploads/highlight-emacs.css -text
 trunk/component/gforge/source/plugins/wiki/www/uploads/index.php -text
 trunk/component/gforge/source/plugins/wiki/www/wiki -text
 trunk/component/gforge/source/plugins/wiki/www/www -text
+trunk/component/gforge/source/rpm-specific/cron.d/fusionforge -text
 trunk/component/gforge/source/rpm-specific/custom/.keepme -text svneol=unset#application/octet-stream
 trunk/component/gforge/source/rpm-specific/httpd.d/gforge.conf -text
 trunk/component/gforge/source/rpm-specific/languages/.keepme -text svneol=unset#application/octet-stream
@@ -4228,6 +4233,7 @@ trunk/component/gforge/source/utils/fixscripts/upgrade_bug_data.php -text
 trunk/component/gforge/source/utils/fixscripts/upgrade_filerelease_data.php -text
 trunk/component/gforge/source/utils/fixscripts/upgrade_forum_data.php -text
 trunk/component/gforge/source/utils/fixscripts/upgrade_task_data.php -text
+trunk/component/gforge/source/utils/fusionforge-shell-postgresql.spec -text
 trunk/component/gforge/source/utils/grap.c -text
 trunk/component/gforge/source/utils/include.pl -text
 trunk/component/gforge/source/utils/install-nsspgsql.sh -text

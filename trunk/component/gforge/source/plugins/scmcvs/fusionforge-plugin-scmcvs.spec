@@ -2,7 +2,7 @@
 %{!?release:%define release 1}
 
 Summary: CVS Plugin for GForge CDE
-Name: gforge-plugin-%{plugin}
+Name: fusionforge-plugin-%{plugin}
 Version: 4.7
 Release: %{release}
 BuildArch: noarch
@@ -10,7 +10,7 @@ License: GPL
 Group: Development/Tools
 Source: %{name}-%{version}.tar.bz2
 AutoReqProv: off
-Requires: gforge >= 4.7
+Requires: fusionforge >= 4.7
 Requires: perl perl-URI
 Requires: cvs >= 1.11
 #update etc/plugins/scmcvs/config.php $cvs_binary_version before updating cvs to 1.12
@@ -71,7 +71,7 @@ It also provides a specific version of CVSWeb wrapped in GForge CDE.
 
 # installing crontab
 install -m 755 -d $RPM_BUILD_ROOT/%{CROND_DIR}/
-#install -m 644 rpm-specific/cron.d/%{name} $RPM_BUILD_ROOT/%{CROND_DIR}/
+install -m 644 cron.d/%{name} $RPM_BUILD_ROOT/%{CROND_DIR}/
 
 # copying all needed stuff to %{PLUGIN_LIB}
 install -m 755 -d $RPM_BUILD_ROOT/%{PLUGIN_LIB}
@@ -106,10 +106,10 @@ install -m 664 etc/plugins/%{plugin}/cvsweb.conf $RPM_BUILD_ROOT/%{PLUGIN_CONF}/
 
 %post
 if [ "$1" = "1" ] ; then
-		#if not the env.inc.php include-path isn't correct
-		ln -s /usr/lib/gforge/plugins/ /usr/share/gforge/plugins
-		
-		[ ! -f /bin/cvssh ] && ln -s %{PLUGIN_LIB}/bin/cvssh.pl /bin/cvssh
+	# link the plugin www rep to be accessed by web
+	ln -s %{PLUGIN_LIB}/www %{GFORGE_DIR}/www/plugins/%{plugin}
+
+	[ ! -f /bin/cvssh ] && ln -s %{PLUGIN_LIB}/bin/cvssh.pl /bin/cvssh
 
         #GF_DOMAIN=$(grep ^domain_name= %{GFORGE_CONF_DIR}/gforge.conf | cut -d= -f2-)
         #perl -pi -e "
@@ -122,14 +122,14 @@ if [ "$1" = "1" ] ; then
         perl -pi -e "
 		s/sys_use_scm=false/sys_use_scm=true/g" %{GFORGE_CONF_DIR}/gforge.conf
 		
-		# initializing configuration
-		%{SBIN_DIR}/gforge-config
-		
-		chroot=`grep '^gforge_chroot:' /etc/gforge/gforge.conf | sed 's/.*:\s*\(.*\)/\1/'`
- 		if [ ! -d /var/lib/gforge/chroot/cvsroot/ ] ; then
-			mkdir -p /var/lib/gforge/chroot/cvsroot/
-		fi
-		ln -s /var/lib/gforge/chroot/cvsroot /cvsroot
+	# initializing configuration
+	%{SBIN_DIR}/gforge-config
+	
+	CHROOT=`grep '^gforge_chroot=' %{GFORGE_CONF_DIR}/gforge.conf | sed 's/.*=\s*\(.*\)/\1/'`
+	if [ ! -d $CHROOT/cvsroot ] ; then
+		mkdir -p $CHROOT/cvsroot
+	fi
+	ln -s $CHROOT/cvsroot /cvsroot
 else
         # upgrade
         :
@@ -167,7 +167,7 @@ fi
 #%{PLUGIN_LIB}/rpm-specific
 %{PLUGIN_LIB}/www
 %{PLUGIN_LIB}/cronjobs
-#%{CROND_DIR}/%{name}
+%{CROND_DIR}/%{name}
 
 %changelog
 * Mon Jan 09 2006 Nicolas Quienot <nquienot@linagora.com>
