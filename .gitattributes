@@ -1241,7 +1241,9 @@ trunk/component/gforge/source/crond/gforge -text
 trunk/component/gforge/source/crond/gforge-auth-unix -text
 trunk/component/gforge/source/crond/gforge-plugin-scmcvs -text
 trunk/component/gforge/source/crond/gforge-plugin-scmsvn -text
+trunk/component/gforge/source/cronjobs/auth_unix.php -text
 trunk/component/gforge/source/cronjobs/calculate_user_metric.php -text
+trunk/component/gforge/source/cronjobs/create_home_dirs.php -text
 trunk/component/gforge/source/cronjobs/create_scm_repos.php -text
 trunk/component/gforge/source/cronjobs/db_trove_maint.php -text
 trunk/component/gforge/source/cronjobs/ftp_create_group_access.php -text
