@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-01 15:35+0100\n"
-"PO-Revision-Date: 2009-01-27 03:01+0200\n"
+"PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: eu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 1.2.0\n"
 
@@ -43,7 +43,7 @@ msgstr "Dokumentu multzoa: izena behar da"
 #: common/docman/DocumentGroup.class.php:114
 #: common/docman/DocumentGroup.class.php:222
 msgid "DocumentGroup: Invalid DocumentGroup parent ID"
-msgstr ""
+msgstr "DokumentuTaldea: DokumentuTalde gura ID baliogabea"
 
 #: common/docman/DocumentGroup.class.php:157
 msgid "DocumentGroup: Invalid DocumentGroup ID"
@@ -189,6 +189,8 @@ msgstr "FRSFile Izenak gutxienez 3 karaktere izan behar ditu"
 #: common/frs/FRSFile.class.php:98
 msgid "Filename can only be alphanumeric and \"-\" \"_\" \".\" characters."
 msgstr ""
+"Fitxategi izenek alfanumerikoak eta \"-\" \"_\" \".\" karaktereak bakarrik eduki "
+"ditzakete."
 
 #: common/frs/FRSFile.class.php:108
 msgid "FRSFile Appears to be invalid"
@@ -214,7 +216,7 @@ msgstr "FRSPackage::Update: Paketearen izena soilik alfanumérikoa izan liteke"
 #: common/frs/FRSRelease.class.php:286
 #, php-format
 msgid "[%1$s Release] %2$s"
-msgstr ""
+msgstr "[%1$s Bertsioa] %2$s"
 
 #: common/include/Error.class.php:130 common/include/Group.class.php:434
 #: common/include/Group.class.php:507 www/include/exit.php:38
