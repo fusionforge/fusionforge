@@ -5,8 +5,6 @@
  * Data migration for the doc_manager - between pre6 and pre7
  *
  * Copyright 2002 (c) GFORGE LLC
- *
- * @version   $Id$
  */
 
 require $gfwww.'include/squal_pre.php';

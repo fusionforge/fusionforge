@@ -3,8 +3,6 @@
 --	Copyright 1999-2001 (c) VA Linux Systems
 --	http://sourceforge.net
 --
---	$Id$	
---
 
 CREATE USER backend WITH PASSWORD 'xxxxx' NOCREATEDB NOCREATEUSER;
 

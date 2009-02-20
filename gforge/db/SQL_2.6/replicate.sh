@@ -4,8 +4,6 @@
 # Copyright 1999-2001 (c) VA Linux Systems
 # http://sourceforge.net 
 #
-# $Id$	
-#
 
 MasterInit alexandria
 SlaveInit --host=sf-db2 stats

@@ -3,8 +3,6 @@
 --	Copyright 1999-2001 (c) VA Linux Systems
 --	http://sourceforge.net
 --
---	$Id$	
---
 
 COPY stats_site WITH OIDS TO '/home/tperdue/dumpfiles/stats_site.dump';
 COPY stats_project WITH OIDS TO '/home/tperdue/dumpfiles/stats_project.dump';
