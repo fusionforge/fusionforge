@@ -5,8 +5,6 @@
  * Portions Copyright 2004 (c) Roland Mas <99.roland.mas @nospam@ aist.enst.fr>
  * The rest Copyright 2004 (c) Francisco Gimeno <kikov @nospam@ kikov.org>
  *
- * @version $Id: svntracker-init.php,v 1.1 2005/10/11 18:46:40 danper Exp $
- *
  * This file is part of GForge-plugin-svntracker
  *
  * GForge-plugin-svntracker is free software; you can redistribute it

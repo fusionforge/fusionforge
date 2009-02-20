@@ -17,7 +17,6 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  *
- * @version   $Id: User.class.php 5278 2006-02-09 16:25:13Z danper $
  * @author Tim Perdue tperdue@valinux.com
  * @date 2000-10-11
  *

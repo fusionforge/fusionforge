@@ -10,7 +10,6 @@
  * 	This script creates/updates the users and passwords associated
  *	with the gforge subversion repositories.
  *
- * @version   $Id
  */
 
 require $gfwww.'include/squal_pre.php';

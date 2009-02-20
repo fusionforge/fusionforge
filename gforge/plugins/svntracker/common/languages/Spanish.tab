@@ -7,8 +7,6 @@
 #  *                2004 (c) Francisco Gimeno <kikov@kikov.org>
 #  * http://sourceforge.net
 #  *
-#  * @version   $Id: Spanish.tab,v 1.1 2005/10/11 18:46:41 danper Exp $
-#  *
 #  */
 plugin_svntracker	title	Enlaces a los commits de SVN relacionados
 plugin_svntracker	file	Nombre del Fichero

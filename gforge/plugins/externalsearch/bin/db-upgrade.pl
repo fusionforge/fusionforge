@@ -1,7 +1,5 @@
 #!/usr/bin/perl -w
 #
-# $Id$
-#
 # Debian-specific script to upgrade the database between releases
 # Roland Mas <lolando@debian.org>
 

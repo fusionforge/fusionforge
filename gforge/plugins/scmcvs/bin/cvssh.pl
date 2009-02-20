@@ -1,7 +1,5 @@
 #! /usr/bin/perl -w
 #
-# $Id$
-#
 # "Shell" for a restricted account, limiting the available commands
 # Roland Mas, debian-sf (Sourceforge for Debian)
 #

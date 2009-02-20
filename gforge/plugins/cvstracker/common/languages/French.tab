@@ -6,8 +6,6 @@
 #  * Copyright 2004 (c) Guillaume Smet <guillaume-gforge@smet.org>
 #  * http://gforge.org
 #  *
-#  * @version   $Id$
-#  *
 #  */
 plugin_cvstracker	title	Liens vers les commits CVS
 plugin_cvstracker	file	Nom du fichier

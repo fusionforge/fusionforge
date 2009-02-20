@@ -7,8 +7,6 @@
 #  *                2004 (c) Francisco Gimeno <kikov@kikov.org>
 #  * http://sourceforge.net
 #  *
-#  * @version   $Id: Base.tab,v 1.1 2005/10/11 18:46:41 danper Exp $
-#  *
 #  */
 plugin_svntracker	title	Links to related SVN commits
 plugin_svntracker	file	Filename

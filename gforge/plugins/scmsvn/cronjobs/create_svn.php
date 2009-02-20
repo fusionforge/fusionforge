@@ -5,7 +5,6 @@
  *
  * Francisco Gimeno <kikov@fco-gimeno.com>
  *
- * @version   $Id
  */
 
 require dirname(__FILE__).'/../../env.inc.php';

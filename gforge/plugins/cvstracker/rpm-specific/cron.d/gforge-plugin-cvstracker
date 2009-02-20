@@ -3,8 +3,6 @@
 # Copyright 2005 (c) Guillaume Smet
 # http://gforge.org/
 #
-# @version   $Id: gforge,v 1.2 2004/12/07 16:12:24 gsmet Exp $
-#
 
 # Change path to the GForge directory.
 GFORGE="/usr/share/gforge"

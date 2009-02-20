@@ -1,7 +1,5 @@
 #!/usr/bin/perl -w
 #
-# $Id: db-upgrade.pl,v 1.1.1.1 2005/09/22 17:32:56 rhertzog Exp $
-#
 # Debian-specific script to upgrade the database between releases
 # Roland Mas <lolando@debian.org>
 #

@@ -6,8 +6,6 @@
  * The rest Copyright 2002-2005 (c) GForge Team
  * http://gforge.org/
  *
- * @version   $Id$
- *
  * This file is part of GForge.
  *
  * GForge is free software; you can redistribute it and/or modify

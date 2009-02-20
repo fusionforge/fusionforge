@@ -5,7 +5,6 @@
  * Copyright 2004 (c) Francisco Gimeno <kikov @nospam@ kikov.org>
  * Copyright 2005 (c) Guillaume Smet <guillaume-gforge@smet.org>
  *
- * @version $Id$
  * This file is part of GForge-plugin-cvstracker
  *
  * GForge-plugin-cvstracker is free software; you can redistribute it

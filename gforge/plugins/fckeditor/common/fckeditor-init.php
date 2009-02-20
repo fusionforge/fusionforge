@@ -6,8 +6,6 @@
  * Portions Copyright 2004 (c) Francisco Gimeno <kikov @nospam@ kikov.org>
  * The rest Copyright 2005 (c) Daniel Perez <danielperez.arg@gmail.com>
  *
- * @version $Id$
- *
  * This file is part of GForge-plugin-fckeditor
  *
  * GForge-plugin-fckeditor is free software; you can redistribute it

@@ -5,8 +5,6 @@
  * Portions Copyright 2004 (c) Roland Mas <99.roland.mas @nospam@ aist.enst.fr>
  * The rest Copyright 2004 (c) Francisco Gimeno <kikov @nospam@ kikov.org>
  *
- * @version $Id$
- *
  * This file is part of GForge-plugin-cvstracker
  *
  * GForge-plugin-cvstracker is free software; you can redistribute it

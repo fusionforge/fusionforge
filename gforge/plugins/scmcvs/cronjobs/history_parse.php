@@ -10,7 +10,6 @@ require $gfcommon.'include/cron_utils.php';
  * '~/CVSROOT/history' file, building agregate stats on the number of
  * checkouts, commits, and adds to each project over the past 24 hours.
  *
- * @version	 $Id$
  */
 
 $ARGV = $GLOBALS['argv'];

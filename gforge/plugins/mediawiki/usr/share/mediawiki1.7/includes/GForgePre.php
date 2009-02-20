@@ -6,7 +6,6 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * http://sourceforge.net
  *
- * @version   $Id: pre.php 5498 2006-05-18 13:06:12Z tperdue $
  */
 
 // escaping lib

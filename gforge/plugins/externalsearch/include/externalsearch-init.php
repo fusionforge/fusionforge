@@ -6,7 +6,6 @@
  *
  * http://gforge.org
  *
- * @version $Id$
  */
 
 global $gfplugins;

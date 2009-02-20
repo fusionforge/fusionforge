@@ -6,8 +6,6 @@
 #  * Copyright 2004 (c) Guillaume Smet <guillaume-gforge@smet.org>
 #  * http://gforge.org
 #  *
-#  * @version   $Id: French.tab,v 1.1 2005/10/11 18:46:41 danper Exp $
-#  *
 #  */
 plugin_svntracker	title	Liens vers les commits SVN
 plugin_svntracker	file	Nom du fichier

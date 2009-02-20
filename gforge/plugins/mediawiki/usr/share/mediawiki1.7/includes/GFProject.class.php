@@ -13,7 +13,6 @@
  *	GENERALLY YOU SHOULD NEVER INSTANTIATE THIS OBJECT DIRECTLY
  *	USE group_get_object() to instantiate properly
  *
- * @version   $Id: Group.class.php 4707 2005-10-04 11:53:48Z danper $
  * @author Tim Perdue <tperdue@valinux.com>
  * @date 2000-08-28
  *

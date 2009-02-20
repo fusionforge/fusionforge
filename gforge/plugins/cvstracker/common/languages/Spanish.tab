@@ -7,8 +7,6 @@
 #  *                2004 (c) Francisco Gimeno <kikov@kikov.org>
 #  * http://sourceforge.net
 #  *
-#  * @version   $Id$
-#  *
 #  */
 plugin_cvstracker	title	Enlaces a los commits de CVS relacionados
 plugin_cvstracker	file	Nombre del Fichero

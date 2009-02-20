@@ -5,7 +5,6 @@
  * Copyright 2004 (c) Francisco Gimeno <kikov @nospam@ kikov.org>
  * Copyright 2005 (c) Guillaume Smet <guillaume-gforge@smet.org>
  *
- * @version $Id: svntrackerPlugin.class.php,v 1.6 2005/08/18 19:35:57 kikov Exp $
  * This file is part of GForge-plugin-svntracker
  *
  * GForge-plugin-svntracker is free software; you can redistribute it

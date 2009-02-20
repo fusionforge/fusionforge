@@ -1,7 +1,5 @@
 #!/usr/bin/perl -w
 #
-# $Id$
-#
 # Debian-specific script to delete plugin-specific tables
 # Roland Mas <lolando@debian.org>
 
