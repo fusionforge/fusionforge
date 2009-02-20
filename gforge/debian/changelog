@@ -4,14 +4,15 @@ gforge (4.7.1+svn-0) experimental; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Thu, 05 Feb 2009 22:14:45 +0100
 
-gforge (4.7.1-1+) experimental; urgency=low
+gforge (4.7.1-2) experimental; urgency=low
 
+  * New upstream snapshot (SVN r7012 in the 4.7 branch).
   * Fixed bashisms in /usr/lib/gforge/bin/setup, thanks to Gonéri Le
     Bouder (Closes: #514768).
   * Fixed permissions of /var/lib/gforge/download (needs to belong to
     www-data).
 
- -- Roland Mas <lolando@debian.org>  Thu, 19 Feb 2009 18:24:47 +0100
+ -- Roland Mas <lolando@debian.org>  Fri, 20 Feb 2009 14:19:05 +0100
 
 gforge (4.7.1-1) experimental; urgency=low
 
