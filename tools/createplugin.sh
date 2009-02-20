@@ -31,8 +31,6 @@ echo Creating $plugdir/bin/db-delete.pl
 cat > $plugdir/bin/db-delete.pl <<FIN
 #!/usr/bin/perl -w
 #
-# \$Id$
-#
 # Debian-specific script to delete plugin-specific tables
 # Roland Mas <lolando@debian.org>
 
@@ -223,8 +221,6 @@ FIN
 echo Creating $plugdir/bin/db-upgrade.pl
 cat > $plugdir/bin/db-upgrade.pl <<FIN
 #!/usr/bin/perl -w
-#
-# \$Id$
 #
 # Debian-specific script to upgrade the database between releases
 # Roland Mas <lolando@debian.org>

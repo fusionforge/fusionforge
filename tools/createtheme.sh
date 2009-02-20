@@ -287,8 +287,6 @@ cat > $themedir/www/themes/$minus/Theme.class <<FIN
  * SourceForge: Breaking Down the Barriers to Open Source Development
  * Copyright 1999-2001 (c) VA Linux Systems
  * http://sourceforge.net
- *
- * @version   \$Id$
  */
 
 class Theme extends Layout {
