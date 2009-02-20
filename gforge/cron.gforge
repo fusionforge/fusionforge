@@ -4,9 +4,6 @@
 # Copyright 2002-2004 (c) GForge, LLC, Ognyan Kulev
 # http://gforge.org/
 #
-# @version   $Id: crontab.in 5835 2006-10-24 20:11:03Z marcelo $
-#
-#
 # YOUR php.ini FOR PHP CLI MUST HAVE APPROPRIATE include_path
 
 # Change path to the GForge directory.
