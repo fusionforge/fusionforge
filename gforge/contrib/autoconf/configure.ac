@@ -1,4 +1,3 @@
-dnl $Id$
 dnl
 dnl finger of blame -> Richard Offer.
 dnl
@@ -20,7 +19,7 @@ Copyright (c) 2003 Richard Offer. All rights reserved.
   Any local macros are licensed under the BSD license
 ])
 
-AC_REVISION($Id$)
+AC_REVISION(3.0)
 
 
 

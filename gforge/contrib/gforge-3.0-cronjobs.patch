@@ -1,14 +1,12 @@
 diff -Nur -x '*.orig' -x '*.rej' gforge-3.0pre9/utils/create-cvs-repository.sh mezzanine_patched_gforge-3.0pre9/utils/create-cvs-repository.sh
 --- gforge-3.0pre9/utils/create-cvs-repository.sh	Wed Dec 31 19:00:00 1969
 +++ mezzanine_patched_gforge-3.0pre9/utils/create-cvs-repository.sh	Fri Jan 24 18:19:03 2003
-@@ -0,0 +1,72 @@
+@@ -0,0 +1,70 @@
 +#!/bin/sh
 +#
 +# CVS Repository Tool
 +# (c)1999 SourceForge Development Team
 +# Released under the GPL, 1999
-+#
-+# @version	$Id$
 +#
 +
 +CVS="cvs"
@@ -77,15 +75,13 @@ diff -Nur -x '*.orig' -x '*.rej' gforge-3.0pre9/utils/create-cvs-repository.sh m
 diff -Nur -x '*.orig' -x '*.rej' gforge-3.0pre9/utils/create-cvs-tarballs.sh mezzanine_patched_gforge-3.0pre9/utils/create-cvs-tarballs.sh
 --- gforge-3.0pre9/utils/create-cvs-tarballs.sh	Wed Dec 31 19:00:00 1969
 +++ mezzanine_patched_gforge-3.0pre9/utils/create-cvs-tarballs.sh	Fri Jan 24 18:15:00 2003
-@@ -0,0 +1,44 @@
+@@ -0,0 +1,42 @@
 +#!/bin/sh
 +#
 +# Create tarballs of individual CVS repositories nightly
 +#
 +# 24 January 2003
 +# Michael Jennings
-+#
-+# @version	$Id$
 +#
 +
 +CVS="cvs"
