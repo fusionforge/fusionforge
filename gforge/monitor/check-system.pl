@@ -2,9 +2,6 @@
 #
 # Perl Script to Check the SystemDaemon to see if things are
 # doing okay..
-#
-# $Id$
-#
 
 use IO::Socket;
 use Fcntl;

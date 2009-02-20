@@ -1,9 +1,7 @@
 #!/usr/bin/perl -w
 #
 # System Monitor Scripts
-# 
-# $Id$
-#
+
 use IO::Socket;
 use Fcntl;
 use strict;
