@@ -1,7 +1,5 @@
 #! /bin/sh
 #
-# $Id$
-#
 # Configure Exim4 for GForge
 # Christian Bayle, Roland Mas, debian-sf (GForge for Debian)
 # Converted to Exim4 by Guillem Jover

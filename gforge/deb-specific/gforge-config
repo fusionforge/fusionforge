@@ -1,7 +1,5 @@
 #! /bin/sh
 #
-# $Id$
-#
 # Parse all template files and expand them into real files
 # Roland Mas, debian-sf (Sourceforge for Debian)
 #

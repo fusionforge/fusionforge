@@ -1,7 +1,5 @@
 #! /bin/bash
 # 
-# $Id$
-#
 # Configure postgresql database for GForge
 # Roland Mas, gforge
 

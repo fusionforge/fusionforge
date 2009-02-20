@@ -1,7 +1,5 @@
 #!/usr/bin/perl -w
 #
-# $Id$
-#
 # Create the mailing-lists from the database
 # Copyright 2001-2003, 2009 Roland Mas <lolando@debian.org>
 # Copyright 2003, 2004, Christian Bayle <bayle@debian.org>

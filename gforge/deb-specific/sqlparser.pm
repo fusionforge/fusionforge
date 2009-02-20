@@ -1,5 +1,3 @@
-# $Id$
-#
 # A state machine to turn an SQL file into list of requests
 # (represented by an array of strings)
 #

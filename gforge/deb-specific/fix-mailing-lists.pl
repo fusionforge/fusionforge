@@ -1,7 +1,5 @@
 #!/usr/bin/perl -w
 #
-# $Id$
-#
 # Fix the mailing-lists if they have been broken in previous versions
 # Roland Mas <lolando@debian.org>
 

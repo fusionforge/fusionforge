@@ -1,7 +1,5 @@
 #!/usr/bin/perl
 #
-# $Id: svn_dump.pl 4336 2005-05-06 21:22:13Z mpeltier $
-#
 # svn_dump.pl - script to dump data from the database 
 #		       inspired from sourceforge scripts
 # Christian Bayle <bayle@debian.org>

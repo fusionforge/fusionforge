@@ -1,13 +1,8 @@
 #!/usr/bin/perl
-#/**
-#  *
-#  * SourceForge: Breaking Down the Barriers to Open Source Development
-#  * Copyright 1999-2001 (c) VA Linux Systems
-#  * http://gforge.net
-#  *
-#  * @version   $Id$
-#  *
-#  */
+#
+# SourceForge: Breaking Down the Barriers to Open Source Development
+# Copyright 1999-2001 (c) VA Linux Systems
+# http://gforge.net
 
 use DBI;
 use Time::Local;

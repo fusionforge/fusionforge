@@ -1,7 +1,5 @@
 #!/usr/bin/perl
 #
-# $Id: cvs_update.pl 4979 2005-11-16 18:43:42Z cbayle $
-#
 # cvs_update.pl - script to update cvs from the database dump
 #		       inspired from sourceforge scripts
 # Christian Bayle <bayle@debian.org>

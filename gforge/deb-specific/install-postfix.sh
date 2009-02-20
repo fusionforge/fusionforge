@@ -1,7 +1,5 @@
 #! /bin/sh
 # 
-# $Id$
-#
 # Configure Postfix for GForge
 # Julien Goodwin
 # Based of install-exim.sh by: Christian Bayle, Roland Mas, debian-sf (GForge for Debian)

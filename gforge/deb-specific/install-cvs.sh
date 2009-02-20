@@ -1,7 +1,5 @@
 #! /bin/sh
 # 
-# $Id: install-cvs.sh,v 1.3 2004/07/21 22:00:26 cbayle Exp $
-#
 # Configure CVS for Sourceforge
 # Christian Bayle, Roland Mas, debian-sf (Sourceforge for Debian)
 

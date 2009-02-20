@@ -1,7 +1,5 @@
 #! /bin/sh
 # 
-# $Id$
-#
 # [Blah blah blah, here should be a description of what this script does]
 # Christian Bayle, Roland Mas, debian-sf (Sourceforge for Debian)
 

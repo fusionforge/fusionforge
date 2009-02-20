@@ -1,15 +1,11 @@
 #!/usr/bin/perl
-#/**
-#  *
-#  * stats_cvs.pl - NIGHTLY SCRIPT
-#  *
-#  * Recurses through the /cvsroot directory tree and parses each projects
-#  * '~/CVSROOT/history' file, and create and fill the sql table with 
-#  * modified, and added to each project.
-#  *
-#  * @version   $Id: stats_cvs.pl 4590 2005-08-28 14:51:51Z  $
-#  *
-#  */
+#
+#
+# stats_cvs.pl - NIGHTLY SCRIPT
+#
+# Recurses through the /cvsroot directory tree and parses each projects
+# '~/CVSROOT/history' file, and create and fill the sql table with 
+# modified, and added to each project.
 
 # For the files
 #use strict;

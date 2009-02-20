@@ -1,7 +1,5 @@
 #!/usr/bin/perl -w
 #
-# $Id$
-#
 # Debian-specific script to inject local user/group data into the Sourceforge database
 # Roland Mas <lolando@debian.org>
 

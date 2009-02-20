@@ -1,7 +1,5 @@
 #!/usr/bin/perl
 #
-# $Id: svn_update.pl 5615 2006-07-23 13:03:57Z lo-lan-do $
-#
 # svn_update.pl - script to update svn
 #		       inspired from sourceforge scripts
 # Roland Mas <lolando@debian.org>

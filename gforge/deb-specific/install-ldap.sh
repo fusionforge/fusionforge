@@ -1,7 +1,5 @@
 #! /bin/bash
 #
-# $Id$
-#
 # Configure LDAP for GForge
 # Christian Bayle, Roland Mas
 # Initially written for debian-sf (Sourceforge for Debian)

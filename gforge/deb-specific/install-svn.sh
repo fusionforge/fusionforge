@@ -1,7 +1,5 @@
 #! /bin/sh
 # 
-# $Id$
-#
 # Configure Subversion for Sourceforge
 # Roland Mas, Gforge
 

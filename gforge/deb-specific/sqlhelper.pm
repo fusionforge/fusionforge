@@ -1,5 +1,3 @@
-# $Id$
-#
 # A few SQL helper functions
 #
 ### AUTHOR/COPYRIGHT

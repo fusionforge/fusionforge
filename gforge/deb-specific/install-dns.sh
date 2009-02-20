@@ -1,7 +1,5 @@
 #! /bin/sh
 # 
-# $Id$
-#
 # Configure Bind 9 for GForge
 # Christian Bayle, Roland Mas, debian-sf (GForge for Debian)
 

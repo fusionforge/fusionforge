@@ -1,7 +1,5 @@
 #! /bin/sh
 # 
-# $Id$
-#
 # Configure SSH for Sourceforge
 # Christian Bayle, Roland Mas, debian-sf (Sourceforge for Debian)
 
