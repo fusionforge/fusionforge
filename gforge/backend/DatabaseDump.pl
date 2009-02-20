@@ -4,8 +4,7 @@
 # Copyright 1999-2000 (c) The SourceForge Crew
 # http://sourceforge.net
 #
-# $Id$
-#
+
 use DBI;
 use Sys::Hostname;
 use POSIX qw(strftime);
