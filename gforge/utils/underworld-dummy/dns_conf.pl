@@ -1,7 +1,5 @@
 #!/usr/bin/perl
-#
-# $Id$
-#
+
 use DBI;
 use POSIX qw(strftime);
 

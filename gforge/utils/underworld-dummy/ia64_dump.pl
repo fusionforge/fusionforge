@@ -1,7 +1,5 @@
 #!/usr/bin/perl
 #
-# $Id$
-#
 # dump_database.pl - script to dump data from the database to flat files so the ofher perl
 #		     scripts can process it without needing to access the database.
 use DBI;

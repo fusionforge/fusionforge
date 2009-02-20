@@ -1,5 +1,3 @@
-# $Id$
-#
 # include.pl - Include file for all the perl scripts that contains reusable functions
 #
 

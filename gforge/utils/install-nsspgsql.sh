@@ -1,7 +1,5 @@
 #! /bin/bash
 #
-# $Id: install-nsspgsql.sh 6586 2008-08-15 21:28:43Z cbayle $
-#
 # Configure LDAP for GForge
 # Christian Bayle, Roland Mas
 # Initially written for debian-sf (Sourceforge for Debian)

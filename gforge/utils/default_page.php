@@ -2,8 +2,6 @@
 // Default Web Page for groups that haven't setup their page yet
 // Please replace this file with your own website
 //
-// $Id$
-//
 $headers = getallheaders();
 ?>
 <html>

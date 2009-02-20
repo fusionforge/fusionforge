@@ -1,7 +1,5 @@
 #!/usr/bin/perl
-#
-# $Id$
-#
+
 use DBI;
 
 require("../include.pl");  # Include all the predefined functions

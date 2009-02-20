@@ -2,8 +2,6 @@
 #
 #  Check proper installation of LDAP replication 
 #  by pfalcon@sourceforge.net 2001-01-16
-#  $Id$
-#
 
 require("include.pl");  # Include all the predefined functions
 &parse_local_inc;

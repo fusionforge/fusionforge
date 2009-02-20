@@ -1,7 +1,5 @@
 #!/usr/bin/perl
 #
-# $Id$
-#
 # mailing_list_dump.pl - Script to suck data outta the database to be processed on the mail
 #                        mail server to create mailing lists
 use DBI;

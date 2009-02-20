@@ -2,8 +2,6 @@
 #
 #  Delete user entry from LDAP
 #  by pfalcon@users.sourceforge.net 2000-10-18
-#  $Id$
-#
 
 require("include.pl");  # Include all the predefined functions
 &parse_local_inc;
