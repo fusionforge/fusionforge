@@ -4,8 +4,6 @@
 # Copyright 2002-2004 (c) GForge, LLC, Ognyan Kulev
 # http://gforge.org/
 #
-# @version   $Id: fusionforge 6968 2009-02-12 15:57:33Z neymanna $
-#
 
 # Change path to the GForge directory.
 FUSIONFORGE="/usr/share/gforge"
