@@ -36,7 +36,6 @@ require_once $gfcommon.'include/Error.class.php';
  *
  * @author Tony Bibbs <tony@geeklog.net>
  * @copyright Copyright 2005, Tony Bibbs
- * @version: $Id$
  * @todo This is just a wrapper to the existing procedural methods.  At some point someone will
  * want to move that implementation here.
  * @todo I'm sure this isn't code per the gForge coding standards.  This should be fixed.
