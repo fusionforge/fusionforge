@@ -1,7 +1,5 @@
 <?php
 /*
- * $Id: view_m.php,v 1.41 2005/03/06 23:26:35 umcesrjones Exp $
- *
  * Page Description:
  * Display a month view with users side by side.
  *

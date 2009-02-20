@@ -1,7 +1,6 @@
 #!/usr/bin/php -q
 <?php
-/* $Id: send_reminders.php,v 1.21.2.3 2006/06/07 15:10:46 cknudsen Exp $
- *
+/*
  * Description:
  * This is a command-line script that will send out any email
  * reminders that are due.

@@ -5,8 +5,6 @@
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2003 (c) Guillaume Smet
  *
- * @version   $Id$
- *
  */
 
 

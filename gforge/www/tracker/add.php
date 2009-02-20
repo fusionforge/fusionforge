@@ -5,8 +5,6 @@
  * Copyright 1999-2001 (c) VA Linux Systems; 2005 GForge, LLC
  * http://gforge.org/
  *
- * @version   $Id$
- *
  * This file is part of GForge.
  *
  * GForge is free software; you can redistribute it and/or modify

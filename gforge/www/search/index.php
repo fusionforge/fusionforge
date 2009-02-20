@@ -8,7 +8,6 @@
  *
  * http://gforge.org
  *
- * @version $Id$
  */
 
 

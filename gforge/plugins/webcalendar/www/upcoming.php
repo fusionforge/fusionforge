@@ -1,7 +1,5 @@
 <?php
 /*
- * $Id: upcoming.php,v 1.18.2.2 2006/03/17 00:53:23 cknudsen Exp $
- *
  * Description:
  * This script is intended to be used outside of normal WebCalendar
  * use, typically as an iframe in another page.

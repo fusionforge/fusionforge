@@ -6,7 +6,6 @@
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2003-2004 (c) GForge
  *
- * @version $Id$
  */
 
 $no_gz_buffer=true;

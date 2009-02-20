@@ -1,7 +1,5 @@
 <?php
 /*
- * $Id: view_t.php,v 1.38 2005/03/06 23:06:21 umcesrjones Exp $
- *
  * Page Description:
  * This page will display a timebar for a week or month as
  * specified by timeb

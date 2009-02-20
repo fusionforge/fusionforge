@@ -4,7 +4,6 @@
  *
  * Copyright 2004 (c) GForge LLC
  *
- * @version   $Id: del_father.php,v 1.0 2006/10/10 15:00:00 fregnier Exp $
  * @author Fabien Regnier fabien.regnier@sogeti.com
  * @date 2006-10-10
  *

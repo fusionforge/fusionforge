@@ -9,7 +9,6 @@
   *
   * Copyright Francisco Gimeno <kikov@kikov.org>
   *
-  * @version $Id$
   */
 /**
  * This script takes some POST variables.It makes a check and it

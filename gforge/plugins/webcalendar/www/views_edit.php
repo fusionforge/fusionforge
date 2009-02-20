@@ -1,7 +1,5 @@
 <?php
 /*
- * $Id: views_edit.php,v 1.28 2005/03/24 20:56:35 umcesrjones Exp $
- *
  * Page Description:
  *	This page displays the views that the user currently owns and
 	* allows new ones to be created

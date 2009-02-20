@@ -2,10 +2,7 @@
 /**
  * GForge Doc Search engine
  *
- * 
  * Fabio Bertagnin November 2005
- *
- * @version   $Id: 04_IMPROVDOC_75_document_specific_search_engine.dpatch,v 1.1 2006/01/11 17:02:45 fabio Exp $
  */
 
 

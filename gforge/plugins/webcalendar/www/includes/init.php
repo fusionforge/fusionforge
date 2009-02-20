@@ -34,7 +34,6 @@
  * Also, for month.php, day.php, week.php, week_details.php:
  * - {@link send_no_cache_header()};
  *
- * @version $Id: init.php,v 1.53.2.1 2005/07/14 23:00:37 cknudsen Exp $
  * @package WebCalendar
  *
  */

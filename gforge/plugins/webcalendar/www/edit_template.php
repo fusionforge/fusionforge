@@ -1,7 +1,5 @@
 <?php
 /*
- * $Id: edit_template.php,v 1.9.2.1 2005/11/28 22:22:51 cknudsen Exp $
- *
  * Page Description:
  *	This page will present the HTML form to edit an entry
  *	in the cal_report table, and this page will also process the

@@ -3,7 +3,6 @@
  * Project Statistics Page
  * Copyright 2003 GForge, LLC
  *
- * @version   $Id$
  */
 
 

@@ -17,8 +17,6 @@
 	This structure is mirrored for groups & nonusers
 */
 
-/* $Id $ */
-
 include_once $gfplugins.'webcalendar/www/includes/init.php';
 
 if ( empty ( $login) || $login == "__public__" ) {

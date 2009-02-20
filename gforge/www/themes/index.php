@@ -4,7 +4,6 @@
  *
  * Copyright 2002 (c) GFORGE LLC
  *
- * @version   $Id$
  */
 
 

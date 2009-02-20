@@ -1,7 +1,5 @@
 <?php
 /*
- * $Id: login.php,v 1.2 2004/08/03 01:14:22 cknudsen Exp $
- *
  * Description:
  * 	Provides login mechanism for web service clients.
  */

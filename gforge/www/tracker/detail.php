@@ -6,7 +6,6 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * http://sourceforge.net
  *
- * @version   $Id$
  */
 
 echo $ath->header(array ('title'=>_('Detail').': '.$ah->getID(). ' '.util_unconvert_htmlspecialchars($ah->getSummary()),'atid'=>$ath->getID()));

@@ -6,7 +6,6 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * http://sourceforge.net
  *
- * @version   $Id: trove.php,v 1.47 2001/06/22 19:06:15 dbrogdon Exp $
  */
 
 // ################################## Trove Globals

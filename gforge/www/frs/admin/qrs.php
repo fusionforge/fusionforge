@@ -5,7 +5,6 @@
  * Copyright 2002 GForge, LLC
  * http://gforge.org/
  *
- * @version   $Id$
  */
 
 require_once('../../env.inc.php');

@@ -13,7 +13,6 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * http://sourceforge.net
  *
- * @version   $Id$
  */
 
 if (!isset($no_gz_buffer) || !$no_gz_buffer) {

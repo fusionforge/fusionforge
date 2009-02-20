@@ -1,7 +1,5 @@
 <?php
 /*
- * $Id: 
- *
  * Description:
  * Loads appropriate import file parser and processes the data returned
  *    Currently supported:

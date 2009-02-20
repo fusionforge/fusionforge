@@ -28,7 +28,6 @@
  * Based on the "debian" theme, which is apparantly :-
  * 		Copyright 1999-2001 (c) VA Linux Systems
  *
- * @version   $Id$
  */
 
 class Theme extends Layout {

@@ -9,8 +9,6 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  *
- * @version   $Id$
- *
  * This file is part of GForge.
  *
  * GForge is free software; you can redistribute it and/or modify

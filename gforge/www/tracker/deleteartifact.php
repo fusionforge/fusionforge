@@ -5,8 +5,6 @@
  * Copyright 2002 GForge, LLC
  * http://gforge.org/
  *
- * @version   $Id$
- *
  */
 
 $ath->header(array ('title'=>_('Delete artifact').': '.$ah->getID(). ' - ' . $ah->getSummary(),'atid'=>$ath->getID()));

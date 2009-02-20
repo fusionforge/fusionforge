@@ -1,7 +1,5 @@
 <?php
 /*
- * $Id: edit_report_handler.php,v 1.11.2.1 2006/01/05 14:22:34 umcesrjones Exp $
- *
  * Page Description:
  *	This page will handle the form submission from edit_report.php
  *	and either add, update or delete a report.

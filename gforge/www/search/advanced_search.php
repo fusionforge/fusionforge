@@ -7,7 +7,6 @@
  *
  * http://gforge.org
  *
- * @version $Id$
  */
 
 require_once('../env.inc.php');

@@ -6,8 +6,6 @@
  * Copyright 2003 FUJITSU PRIME SOFTWARE TECHNOLOGIES LIMITED
  * http://www.pst.fujitsu.com/
  *
- * @version   $Id$
- *
  * This file is part of GForge.
  *
  * GForge is free software; you can redistribute it and/or modify

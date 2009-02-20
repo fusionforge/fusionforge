@@ -4,8 +4,6 @@
  *
  * Copyright 2004 (c) GForge, LLC
  *
- * @version   $Id$
- *
  * This file is part of FusionForge.
  *
  * FusionForge is free software; you can redistribute it and/or modify

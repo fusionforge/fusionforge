@@ -10,8 +10,6 @@
  * Copyright 2004 (c) Guillaume Smet
  * http://gforge.org/
  *
- * @version   $Id$
- *
  * This file is part of GForge.
  *
  * GForge is free software; you can redistribute it and/or modify

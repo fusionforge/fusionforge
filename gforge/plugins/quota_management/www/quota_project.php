@@ -6,8 +6,6 @@
  * The rest Copyright 2002-2004 (c) GForge Team
  * http://gforge.org/
  *
- * @version   $Id: 08_IMPROVQUOTA_90_quota_management.dpatch,v 1.1 2006/01/11 17:02:45 fabio Exp $
- *
  * This file is part of GForge.
  *
  * GForge is free software; you can redistribute it and/or modify

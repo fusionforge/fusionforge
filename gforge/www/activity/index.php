@@ -5,7 +5,6 @@
  * Copyright 2006 (c) GForge, LLC
  * http://gforge.org
  *
- * @version   $Id$
  */
 
 

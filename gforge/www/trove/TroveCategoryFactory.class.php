@@ -6,8 +6,6 @@
  * Copyright 2004 Guillaume Smet / Open Wide
  * http://gforge.org/
  *
- * @version   $Id$
- *
  * This file is part of GForge.
  *
  * GForge is free software; you can redistribute it and/or modify

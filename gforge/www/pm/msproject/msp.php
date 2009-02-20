@@ -5,7 +5,6 @@
  * Copyright 2004 GForge, LLC
  * http://gforge.org/
  *
- * @version   $Id$
  */
 
 require_once $gfwww.'include/squal_pre.php';

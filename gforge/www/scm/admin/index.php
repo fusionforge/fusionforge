@@ -4,7 +4,6 @@
  *
  * Copyright 2004 (c) Roland Mas, GForge LLC
  *
- * @version   $Id$
  * @author Tim Perdue tim@gforge.org
  * @date 2004-05-19
  *

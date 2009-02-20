@@ -1,10 +1,7 @@
 <?php
 /**
  *
- *
  * Copyright 1999-2000 (c) The SourceForge Crew
- *
- * $Id$
  *
  * This file is part of GForge.
  *

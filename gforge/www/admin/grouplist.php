@@ -4,8 +4,6 @@
  *
  * Copyright 1999-2000 (c) The SourceForge Crew
  *
- * $Id$
- *
  * This file is part of GForge.
  *
  * GForge is free software; you can redistribute it and/or modify

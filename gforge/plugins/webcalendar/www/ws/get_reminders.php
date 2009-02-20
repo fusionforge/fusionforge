@@ -1,7 +1,5 @@
 <?php
 /*
- * $Id: get_reminders.php,v 1.1 2004/06/24 02:18:30 cknudsen Exp $
- *
  * Description:
  *	Web Service functionality for reminders.
  *	Uses XML (but not SOAP at this point since that would be

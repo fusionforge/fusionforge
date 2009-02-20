@@ -6,8 +6,6 @@
  *
  * Copyright 2002 (c) GForge Development Team
  *
- * @version   $Id$
- *
  * @todo some locales start the week with "Monday", and not "Sunday".
  * @todo display holidays.
  */

@@ -5,8 +5,6 @@
  *
  * Copyright 2002 (c) Silicon and Software Systems (S3)
  *
- * @version   $Id$
- *
  */
 
 function displayUserSkills($user_id, $allowEdit) {

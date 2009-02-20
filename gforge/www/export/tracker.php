@@ -10,8 +10,6 @@
   * http://sourceforge.net
   *
   * @author		Darrell Brogdon <dbrogdon@valinux.com>
-  * @version	$Id$
-  *
   */
 
 require_once('../env.inc.php');

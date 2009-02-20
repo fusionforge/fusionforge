@@ -8,8 +8,6 @@
   * Copyright 1999-2001 (c) VA Linux Systems
   * http://sourceforge.net
   *
-  * @version   $Id$
-  *
   */
 
 require_once('../env.inc.php');

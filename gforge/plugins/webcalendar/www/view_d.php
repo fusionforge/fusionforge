@@ -1,7 +1,5 @@
 <?php
 /*
- * $Id: view_d.php,v 1.38 2005/03/06 23:06:20 umcesrjones Exp $
- *
  * Page Description:
  * Display a timebar view of a single day.
  *

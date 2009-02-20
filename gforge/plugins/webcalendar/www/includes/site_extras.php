@@ -7,8 +7,6 @@ if ( ! empty ( $PHP_SELF ) && preg_match ( "/\/includes\//", $PHP_SELF ) ) {
     die ( "You can't access this file directly!" );
 }
 /*
- * $Id: site_extras.php,v 1.12 2005/02/08 01:35:45 cknudsen Exp $
- *
  * Page Description:
  *	This file can be used to define extra information associated with a
  *	calender entry.

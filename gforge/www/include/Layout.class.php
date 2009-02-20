@@ -10,7 +10,6 @@
  *
  * Geoffrey Herteg, August 29, 2000
  *
- * @version   $Id$
  */
  
 require_once $gfcommon.'include/constants.php';

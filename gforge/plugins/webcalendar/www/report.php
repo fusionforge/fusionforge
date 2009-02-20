@@ -1,7 +1,5 @@
 <?php
 /*
- * $Id: report.php,v 1.27.2.4 2006/01/05 14:22:34 umcesrjones Exp $
- *
  * Page Description:
  * This page will either list all reports available to the current
  * user (if report id not specified) or display a report (if the

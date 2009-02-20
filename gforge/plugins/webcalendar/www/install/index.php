@@ -1,7 +1,5 @@
 <?php
 /*
- * $Id: index.php,v 1.17.2.3 2005/12/09 21:26:39 cknudsen Exp $
- *
  * Page Description:
  * Main page for install/config of db settings.
  * This page is used to create/update includes/settings.php.

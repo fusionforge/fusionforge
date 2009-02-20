@@ -8,7 +8,6 @@
  * Copyright (c) Xerox Corporation, CodeX / CodeX Team, 2001,2002. All Rights Reserved.
  * http://codex.xerox.com
  *
- * @version   $Id$
  */
 
 // make sure we're not compressing output if we are making a tarball

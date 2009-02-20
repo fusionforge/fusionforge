@@ -6,7 +6,6 @@
  *
  * http://gforge.org
  *
- * @version $Id$
  */
  
 require_once $gfwww.'search/include/renderers/HtmlGroupSearchRenderer.class.php';

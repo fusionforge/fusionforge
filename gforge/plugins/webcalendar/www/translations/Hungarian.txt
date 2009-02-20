@@ -9,7 +9,6 @@
 #	Laszlo Csecsy <_boobaa_at_ajrg_point_hu_>
 # Last updated on 2005-05-31
 #
-# $Id: Hungarian.txt,v 1.19.4.1 2006/04/05 12:57:44 cknudsen Exp $
 # Translation last updated on 04-05-2006
 
 

@@ -6,8 +6,6 @@
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2002 (c) Silicon and Software Systems (S3)
  *
- * @version   $Id$
- *
  */
 
 require_once('../env.inc.php');

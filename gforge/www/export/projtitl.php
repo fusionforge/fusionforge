@@ -11,7 +11,6 @@
  *	
  * Copyright 2004 (c) GForge LLC
  *
- * @version   $Id$
  * @author Tim Perdue tim@gforge.org
  * @date 2004-03-16
  *

@@ -1,7 +1,5 @@
 <?php
 /*
- * $Id: import.php,v 1.28 2005/04/22 20:23:49 jhoov Exp $
- *
  * Page Description:
  *	This page will present the user with forms for submitting
  *	a data file to import.

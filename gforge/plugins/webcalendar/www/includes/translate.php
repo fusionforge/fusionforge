@@ -7,7 +7,6 @@
  * Although there is a PHP gettext() function, I prefer to use this home-grown
  * translate function since it is simpler to work with.
  *
- * @version $Id: translate.php,v 1.15 2005/03/08 14:24:51 umcesrjones Exp $
  * @package WebCalendar
  */
 

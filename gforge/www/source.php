@@ -7,8 +7,6 @@
  *
  * Copyright 2002 (C) GForge Development Team
  *
- * @version   $Id$
- *
  */
 
 require_once('env.inc.php');

@@ -1,7 +1,5 @@
 <?php
 /*
- * $Id: view_w.php,v 1.37 2005/03/06 23:08:40 umcesrjones Exp $
- *
  * Page Description:
  * Display view of a week with users side by side.
  *

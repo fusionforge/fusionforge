@@ -2,7 +2,6 @@
 /*
  * Copyright 2004 GForge, LLC
  *
- * @version   $Id$
  * @author Tim Perdue tim@gforge.org
  *
  * This file is part of GForge.

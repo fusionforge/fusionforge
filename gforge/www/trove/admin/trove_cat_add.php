@@ -7,8 +7,6 @@
   * Copyright 1999-2001 (c) VA Linux Systems
   * http://sourceforge.net
   *
-  * @version   $Id: trove_cat_add.php,v 1.17 2001/04/10 16:10:30 pfalcon Exp $
-  *
   */
 
 require_once('pre.php');

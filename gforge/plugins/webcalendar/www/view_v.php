@@ -1,7 +1,5 @@
 <?php
 /*
- * $Id: view_v.php,v 1.33 2005/03/06 23:26:35 umcesrjones Exp $
- *
  * Page Description:
  * This page will display the month "view" with all users's events
  * on the same calendar.  (The other month "view" displays each user

@@ -5,8 +5,6 @@
 // Copyright 1999-2001 (c) VA Linux Systems
 // http://sourceforge.net
 //
-// $Id$
-//
 // Attempt to set up the include path, to fix problems with relative includes
 
 //require_once('../env.inc.php');

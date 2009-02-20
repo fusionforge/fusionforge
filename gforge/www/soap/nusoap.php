@@ -1,8 +1,6 @@
 <?php
 
 /*
- $Id$
-
  NuSOAP - Web Services Toolkit for PHP
 
  Copyright (c) 2002 NuSphere Corporation
@@ -55,7 +53,6 @@ require_once 'class.soap_server.php';*/
  * nusoap_base
  *
  * @author   Dietrich Ayala <dietrich@ganx4.com>
- * @version  $Id$
  * @access   public
  */
 class nusoap_base {

@@ -1,7 +1,5 @@
 <?php
 /*
- * $Id: export_handler.php,v 1.29.2.5 2006/01/28 22:40:51 umcesrjones Exp $
- *
  * Description:
  *	Handler for exporting webcalendar events to various formats.
  *

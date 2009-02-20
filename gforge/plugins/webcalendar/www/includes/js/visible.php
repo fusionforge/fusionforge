@@ -1,7 +1,5 @@
 <?php
 /*
- * $Id
- *
  * The functions in this file can be used to make elements visible or
  * hidden on the page.
  */

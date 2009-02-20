@@ -1,7 +1,5 @@
 <?php
 /*
- * $Id: edit_entry.php,v 1.91.2.2 2006/03/15 03:14:54 umcesrjones Exp $
- *
  * Description:
  * Presents page to edit/add an event
  *

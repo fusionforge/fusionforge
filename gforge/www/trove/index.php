@@ -7,8 +7,6 @@
   * Copyright 1999-2001 (c) VA Linux Systems
   * http://sourceforge.net
   *
-  * @version   $Id: trove_list.php,v 1.160 2001/05/22 16:12:12 pfalcon Exp $
-  *
   */
 
 require_once('../env.inc.php');

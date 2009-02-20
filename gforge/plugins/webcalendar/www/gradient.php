@@ -1,7 +1,5 @@
 <?php
 /*
- * $Id: gradient.php,v 1.5 2005/01/19 13:54:13 cknudsen Exp $
- *
  * Description:
  *	Generate a gradient image for use as a background image.
  *	Requires gd module.

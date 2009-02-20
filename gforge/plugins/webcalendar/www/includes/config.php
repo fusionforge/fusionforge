@@ -13,7 +13,6 @@
  * WebCalendar.  Version 0.9.45 and later requires editing the settings.php
  * file instead.)
  *
- * @version $Id: config.php,v 1.53.2.15 2006/06/07 15:27:20 cknudsen Exp $
  * @package WebCalendar
  */
 

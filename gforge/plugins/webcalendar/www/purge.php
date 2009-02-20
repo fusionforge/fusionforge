@@ -1,7 +1,5 @@
 <?php
 /*
- * $Id: purge.php,v 1.31 2005/02/22 01:29:58 cknudsen Exp $
- *
  * Description:
  *	Purge events page and handler.
  *	When an event is deleted from a user's calendar, it is marked

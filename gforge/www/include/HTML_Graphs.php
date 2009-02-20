@@ -5,8 +5,6 @@
  * http://sourceforge.net
  *
  * @author		Tim Perdue <tperdue@valnux.com>
- * @version		$Id$
- * @date		$Date$
  *
  * Ryan T. Sammartino made several changes to make the output XHTML 1.0
  * Transitional.

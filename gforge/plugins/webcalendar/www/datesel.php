@@ -1,5 +1,4 @@
 <?php
-/* $Id: datesel.php,v 1.31 2005/03/11 13:59:51 cknudsen Exp $ */
 include_once $gfplugins.'webcalendar/www/includes/init.php';
 
 // month and year are being overwritten so we will copy vars to fix.
