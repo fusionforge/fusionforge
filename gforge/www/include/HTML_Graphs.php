@@ -13,10 +13,6 @@
 /*
 #######################################################################
 #
-#   $Source$
-#	$Revision$
-#   $State$
-#
 #      Revision 1.5  1998/11/05 06:15:52  pdavis
 #      Added error_reporting setting per Jean-Pierre Arneodo's request.
 #      (Though redundant) Added html_graph_init() to initialize vars array.
