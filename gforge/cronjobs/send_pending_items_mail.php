@@ -1,8 +1,6 @@
 #! /usr/bin/php
 <?php
 /**
- * $Id$
- *
  *	send_pending_items_mail.php
  *
  *	Sends mail out for all pending tracker and pm items

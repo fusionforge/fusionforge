@@ -9,7 +9,6 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  *
- * @version   $Id$
  * @author Darrell Brogdon dbrogdon@valinux.com
  * @date 2001-04-20
  *

@@ -5,7 +5,6 @@
  *
  * Copyright 2004 GForge, LLC
  *
- * @version   $Id$
  * @author Tim Perdue tim@gforge.org
  * @author Sung Kim 
  * @author Francisco Gimeno <kikov@kikov.org>

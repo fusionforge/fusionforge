@@ -3,8 +3,6 @@
 /**
  * Copyright 2003 (c) GFDL
  *
- * @version   $Id$
- *
  * This file is part of FMS.
  *
  * FMS is free software; you can redistribute it and/or modify

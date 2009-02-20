@@ -6,8 +6,6 @@
  * The rest Copyright 2002-2005 (c) GForge Team
  * http://gforge.org/
  *
- * @version   $Id: homedirs.php 6714 2008-12-17 15:47:33Z neymanna $
- *
  * This file is part of GForge.
  *
  * GForge is free software; you can redistribute it and/or modify

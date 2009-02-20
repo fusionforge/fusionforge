@@ -3,8 +3,6 @@
 /**
  * Backup SITE job
  *
- * @version   $Id$
- *
  * This file is part of GForge.
  *
  * GForge is free software; you can redistribute it and/or modify

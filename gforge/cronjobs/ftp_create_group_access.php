@@ -5,8 +5,6 @@
  * Fabio Bertagnin nov 2005
  * fbertatnin@mail.transiciel.com
  *
- * @version   $Id: 06_IMPROVSFTP_80_ftp_improvement.dpatch,v 1.1 2006/01/11 17:02:45 fabio Exp $
- *
  * This file is part of GForge.
  *
  * GForge is free software; you can redistribute it and/or modify
