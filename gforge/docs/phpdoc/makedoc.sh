@@ -1,5 +1,4 @@
 #!/bin/bash
-# $Id$ 
 
 #/**
 #  * makedoc - PHPDocumentor script to save your settings

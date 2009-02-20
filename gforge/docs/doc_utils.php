@@ -5,8 +5,6 @@
 // Copyright 1999, 2000, 2001 (c) VA Linux Systems, Inc.
 // http://sourceforge.net
 //
-// $Id$
-//
 
 // colorized link to a file with CVS history
 // @param threshold age when quicklink is no longer highlighted (default is one week)
