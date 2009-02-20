@@ -75,13 +75,14 @@ function charData($parser, $chars) {
 			$end_time, $time_ok, $date_key, $user_list;
 	switch ($last_tag) {
 		case "AUTHOR":
-			$last_user = strtolower(trim($chars));
+			$last_user = ereg_replace ('[^a-z0-9_-]', '', 
+						   strtolower (trim ($chars))) ;
 			// We can save time by looking up users and caching them
 			if (!array_key_exists($last_user, $user_list)) {
 				// trying to get user id from user name
 				$user_res = db_query("SELECT user_id FROM users WHERE " .
-									"user_name='$last_user'");
-	            if ($user_row = db_fetch_array($user_res)) {
+						     "user_name='$last_user'");
+				if ($user_row = db_fetch_array($user_res)) {
 					$user_list[$last_user] = $user_row[0];
 				} else {
 					// We don't know about them, so give them the 
