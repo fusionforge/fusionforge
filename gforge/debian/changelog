@@ -51,7 +51,7 @@ gforge (4.7~rc2-6) unstable; urgency=high
 gforge (4.7~rc2-5) unstable; urgency=high
 
   * Fix several SQL injection vulnerabilities due to insufficient input
-    sanitizing.
+    sanitizing (CVE-2008-6187, CVE-2008-6188; CVE-2008-6189).
 
  -- Roland Mas <lolando@debian.org>  Mon, 06 Oct 2008 16:12:50 +0200
 
