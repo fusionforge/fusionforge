@@ -13,10 +13,18 @@
 # $7: branch identifier
 
 #
-# Environment variable that MUST be defined
+# Environment variable that don't have to be defined anymore
+# default values are set if not
 # by the calling script
 #
 # SVN_URL SVN_USER SVN_PASS
+# Set vars to get from anonymous svn as a default
+SVN_URL=${SVN_URL:-svn://scm.fusionforge.org/fusionforge}
+SVN_USER=${SVN_USER:-nouser}
+SVN_PASS=${SVN_PASS:-nopass}
+echo "SVN_URL=$SVN_URL"
+echo "SVN_USER=$SVN_USER"
+echo "SVN_PASS=$SVN_PASS"
 
 #
 # Source functions
