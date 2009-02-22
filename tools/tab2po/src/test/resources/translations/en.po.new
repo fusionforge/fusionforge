@@ -1,0 +1,1279 @@
+#: plugincore/include/NovaContinuumPlugin.class.php:92
+msgid "tab_title"
+msgstr "novacontinuum"
+
+#: plugincore/include/NovaContinuumPlugin.class.php:107
+msgid "use_novacontinuum"
+msgstr "Use novacontinuum Plugin"
+
+#: plugincore/include/NovaContinuumPlugin.class.php:128
+#: plugincore/include/admin/views/addbuilddef.php:2
+#: plugincore/include/admin/views/addproject.php:2
+#: plugincore/include/admin/views/default.php:2
+#: plugincore/include/admin/views/deletebuilddef.php:1
+#: plugincore/include/admin/views/deleteprivateinstance.php:1
+#: plugincore/include/admin/views/deleteproject.php:1
+#: plugincore/include/admin/views/releaseproject.php:2
+#: plugincore/include/admin/views/releaseproject_access_control.php:2
+#: plugincore/include/admin/views/showbuildresult.php:2
+#: plugincore/include/admin/views/showbuildresults.php:2
+#: plugincore/include/admin/views/showprojectdetails.php:2
+#: plugincore/include/user/views/deletesite.php:1
+#: plugincore/include/user/views/showbuildresult.php:2
+#: plugincore/include/user/views/showbuildresults.php:2
+#: plugincore/include/user/views/showprojectdetails.php:2
+#: pluginwww/admin/index.php:44 pluginwww/admin/index.php:49
+#: pluginwww/admin/index.php:79 pluginwww/admin/index.php:81
+msgid "title_admin"
+msgstr "Administration des projets Continuum"
+
+#: plugincore/include/NovaContinuumPlugin.class.php:132
+#: plugincore/include/admin/views/addnotifier.php:1
+#: plugincore/include/admin/views/deletenotifier.php:1
+#: plugincore/include/siteAdmin/views/addinstallation.php:1
+#: plugincore/include/siteAdmin/views/addinstance.php:2
+#: plugincore/include/siteAdmin/views/addprofile.php:1
+#: plugincore/include/siteAdmin/views/addproxy.php:2
+#: plugincore/include/siteAdmin/views/addschedule.php:1
+#: plugincore/include/siteAdmin/views/default.php:1
+#: plugincore/include/siteAdmin/views/deleteinstallation.php:1
+#: plugincore/include/siteAdmin/views/deleteinstance.php:1
+#: plugincore/include/siteAdmin/views/deleteprofile.php:1
+#: plugincore/include/siteAdmin/views/deleteproxy.php:1
+#: plugincore/include/siteAdmin/views/deleteschedule.php:1
+#: plugincore/include/siteAdmin/views/optioninstance.php:2
+#: pluginwww/siteAdmin/index.php:37
+msgid "title_site_admin"
+msgstr "Administration du plugin Nova Continuum"
+
+#: plugincore/include/NovaContinuumPlugin.class.php:138
+msgid "your_continuum_projects"
+msgstr ""
+
+#: plugincore/include/NovaContinuumPlugin.class.php:168
+#: plugincore/include/NovaContinuumPlugin.class.php:180
+msgid "no_project_assigned"
+msgstr ""
+
+#: plugincore/include/NovaContinuumPlugin.class.php:171
+#: plugincore/include/user/views/default.php:33
+msgid "not_reachable_instance"
+msgstr ""
+
+#: plugincore/include/NovaContinuumPlugin.class.php:174
+msgid "no_selected_instance"
+msgstr ""
+
+#: plugincore/include/admin/controller.php:663
+msgid "prepare_username_not_valid"
+msgstr ""
+
+#: plugincore/include/admin/controller.php:671
+msgid "prepare_password_not_valid"
+msgstr ""
+
+#: plugincore/include/admin/controller.php:673
+msgid "prepare_password_empty"
+msgstr ""
+
+#: plugincore/include/admin/views/addbuilddef.php:7
+#: plugincore/include/admin/views/addproject.php:7
+#: plugincore/include/admin/views/deletebuilddef.php:6
+#: plugincore/include/admin/views/deleteprivateinstance.php:6
+#: plugincore/include/admin/views/deleteproject.php:6
+#: plugincore/include/admin/views/releaseproject.php:7
+#: plugincore/include/admin/views/releaseproject_access_control.php:7
+#: plugincore/include/admin/views/showbuildresult.php:6
+#: plugincore/include/admin/views/showbuildresults.php:6
+#: plugincore/include/admin/views/showprojectdetails.php:6
+#: plugincore/include/user/views/deletesite.php:11
+#: plugincore/include/user/views/showbuildresult.php:6
+#: plugincore/include/user/views/showbuildresults.php:12
+#: plugincore/include/user/views/showprojectdetails.php:6
+msgid "return_admin"
+msgstr ""
+
+#: plugincore/include/admin/views/addbuilddef.php:15
+#: plugincore/include/commonviews/projects.php:17
+msgid "add_build_definition"
+msgstr ""
+
+#: plugincore/include/admin/views/addbuilddef.php:17
+msgid "edit_build_definition"
+msgstr ""
+
+#: plugincore/include/admin/views/addbuilddef.php:30
+msgid "form_add_build_def_goals"
+msgstr ""
+
+#: plugincore/include/admin/views/addbuilddef.php:34
+msgid "form_add_build_def_arguments"
+msgstr ""
+
+#: plugincore/include/admin/views/addbuilddef.php:38
+msgid "form_add_build_def_build_file"
+msgstr ""
+
+#: plugincore/include/admin/views/addbuilddef.php:42
+msgid "form_add_build_def_schedule"
+msgstr ""
+
+#: plugincore/include/admin/views/addbuilddef.php:58
+msgid "form_add_build_def_profile"
+msgstr ""
+
+#: plugincore/include/admin/views/addbuilddef.php:76
+msgid "form_add_build_def_build_fresh"
+msgstr ""
+
+#: plugincore/include/admin/views/addbuilddef.php:80
+msgid "form_add_build_def_always_build"
+msgstr ""
+
+#: plugincore/include/admin/views/addnotifier.php:18
+#: plugincore/include/admin/views/deletenotifier.php:17
+#: plugincore/include/siteAdmin/views/addinstallation.php:25
+#: plugincore/include/siteAdmin/views/addinstance.php:7
+#: plugincore/include/siteAdmin/views/addprofile.php:16
+#: plugincore/include/siteAdmin/views/addproxy.php:7
+#: plugincore/include/siteAdmin/views/addschedule.php:16
+#: plugincore/include/siteAdmin/views/deleteinstallation.php:17
+#: plugincore/include/siteAdmin/views/deleteinstance.php:6
+#: plugincore/include/siteAdmin/views/deleteprofile.php:17
+#: plugincore/include/siteAdmin/views/deleteproxy.php:6
+#: plugincore/include/siteAdmin/views/deleteschedule.php:17
+#: plugincore/include/siteAdmin/views/optioninstance.php:17
+msgid "return_site_admin"
+msgstr ""
+
+#: plugincore/include/admin/views/addnotifier.php:26
+#: plugincore/include/commonviews/projects.php:159
+#: plugincore/include/user/views/showprojectdetails.php:90
+msgid "add_notifier"
+msgstr ""
+
+#: plugincore/include/admin/views/addnotifier.php:28
+msgid "edit_notifier"
+msgstr ""
+
+#: plugincore/include/admin/views/addnotifier.php:50
+msgid "form_add_notifier_address"
+msgstr ""
+
+#: plugincore/include/admin/views/addnotifier.php:55
+msgid "form_add_notifier_sendOnSuccess"
+msgstr ""
+
+#: plugincore/include/admin/views/addnotifier.php:59
+msgid "form_add_notifier_sendOnFailure"
+msgstr ""
+
+#: plugincore/include/admin/views/addnotifier.php:63
+msgid "form_add_notifier_sendOnError"
+msgstr ""
+
+#: plugincore/include/admin/views/addnotifier.php:67
+msgid "form_add_notifier_sendOnWarning"
+msgstr ""
+
+#: plugincore/include/admin/views/addnotifier.php:71
+msgid "form_add_notifier_enabled"
+msgstr ""
+
+#: plugincore/include/admin/views/addproject.php:15
+#: plugincore/include/commonviews/projects.php:81
+msgid "add_project"
+msgstr ""
+
+#: plugincore/include/admin/views/addproject.php:17
+msgid "edit_project"
+msgstr ""
+
+#: plugincore/include/admin/views/addproject.php:29
+msgid "form_add_project_name"
+msgstr ""
+
+#: plugincore/include/admin/views/addproject.php:33
+msgid "form_add_project_url"
+msgstr ""
+
+#: plugincore/include/admin/views/addproject.php:37
+msgid "form_add_project_user"
+msgstr ""
+
+#: plugincore/include/admin/views/addproject.php:43
+msgid "form_add_project_password"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:10
+msgid "group_admin_instance_management"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:22
+msgid "option_private_instance"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:25
+msgid "edit_private_instance"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:28
+#: plugincore/include/admin/views/deleteprivateinstance.php:10
+msgid "delete_private_instance"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:32
+msgid "add_private_instance"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:35
+msgid "download_private_instance"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:111
+msgid "group_admin_role_management"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:121
+msgid "group_admin_col_role"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:122
+msgid "group_admin_col_manage_roles"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:123
+msgid "group_admin_col_all"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:124
+msgid "group_admin_col_none"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:125
+msgid "group_admin_col_manage_private_instance"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:126
+msgid "group_admin_col_select_instance"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:127
+msgid "group_admin_col_manage_build_def"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:128
+msgid "group_admin_col_run_build_def"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:129
+msgid "group_admin_col_read_maven_site"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:130
+msgid "group_admin_col_write_maven_site"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:131
+msgid "group_admin_col_release_project"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:132
+msgid "group_admin_col_manage_project"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:133
+msgid "group_admin_col_run_project"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:134
+msgid "group_admin_col_run_continuum_project"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:135
+msgid "group_admin_col_show_build_result"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:136
+msgid "group_admin_col_show_project_detail"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:137
+msgid "group_admin_col_view"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:167
+msgid "group_admin_lbl_guest"
+msgstr ""
+
+#: plugincore/include/admin/views/default.php:186
+msgid "submit_update_roles"
+msgstr ""
+
+#: plugincore/include/admin/views/deletebuilddef.php:10
+msgid "delete_build_def"
+msgstr ""
+
+#: plugincore/include/admin/views/deletebuilddef.php:17
+msgid "confirm_delete_build_def"
+msgstr ""
+
+#: plugincore/include/admin/views/deletebuilddef.php:23
+#: plugincore/include/admin/views/deletenotifier.php:48
+#: plugincore/include/admin/views/deleteprivateinstance.php:22
+#: plugincore/include/admin/views/deleteproject.php:23
+#: plugincore/include/siteAdmin/views/deleteinstallation.php:44
+#: plugincore/include/siteAdmin/views/deleteinstance.php:22
+#: plugincore/include/siteAdmin/views/deleteprofile.php:44
+#: plugincore/include/siteAdmin/views/deleteproxy.php:22
+#: plugincore/include/siteAdmin/views/deleteschedule.php:44
+#: plugincore/include/user/views/deletesite.php:27
+msgid "confirm_delete"
+msgstr ""
+
+#: plugincore/include/admin/views/deletenotifier.php:21
+msgid "delete_notifier"
+msgstr ""
+
+#: plugincore/include/admin/views/deletenotifier.php:35
+msgid "confirm_delete_notifier"
+msgstr ""
+
+#: plugincore/include/admin/views/deleteprivateinstance.php:17
+msgid "confirm_delete_private_instance"
+msgstr ""
+
+#: plugincore/include/admin/views/deleteproject.php:10
+msgid "delete_project"
+msgstr ""
+
+#: plugincore/include/admin/views/deleteproject.php:17
+msgid "confirm_delete_project"
+msgstr ""
+
+#: plugincore/include/admin/views/releaseproject.php:16
+msgid "release_project"
+msgstr ""
+
+#: plugincore/include/admin/views/releaseproject.php:35
+msgid "form_release_project_tag_url"
+msgstr ""
+
+#: plugincore/include/admin/views/releaseproject.php:39
+msgid "form_release_add_tag_to_project_list"
+msgstr ""
+
+#: plugincore/include/admin/views/releaseproject.php:43
+msgid "form_release_project_tag"
+msgstr ""
+
+#: plugincore/include/admin/views/releaseproject.php:47
+msgid "form_release_project_new_version"
+msgstr ""
+
+#: plugincore/include/admin/views/releaseproject.php:57
+msgid "submit_release_project"
+msgstr ""
+
+#: plugincore/include/admin/views/releaseproject.php:70
+msgid "form_release_project_group_id"
+msgstr ""
+
+#: plugincore/include/admin/views/releaseproject.php:74
+msgid "form_release_project_artifact_id"
+msgstr ""
+
+#: plugincore/include/admin/views/releaseproject.php:78
+msgid "form_release_project_version"
+msgstr ""
+
+#: plugincore/include/admin/views/releaseproject.php:88
+msgid "form_release_project_modules"
+msgstr ""
+
+#: plugincore/include/admin/views/releaseproject_access_control.php:16
+msgid "release_project_access_control"
+msgstr ""
+
+#: plugincore/include/admin/views/releaseproject_access_control.php:34
+msgid "form_release_project_scmuser"
+msgstr ""
+
+#: plugincore/include/admin/views/releaseproject_access_control.php:40
+msgid "form_release_project_scmpassword"
+msgstr ""
+
+#: plugincore/include/admin/views/releaseproject_access_control.php:45
+msgid "submit_release_project_access_control"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:24
+#: plugincore/include/user/views/showbuildresult.php:27
+msgid "build_result"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:31
+#: plugincore/include/user/views/showbuildresult.php:34
+msgid "build_result_start_time"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:37
+#: plugincore/include/user/views/showbuildresult.php:40
+msgid "build_result_end_time"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:43
+#: plugincore/include/user/views/showbuildresult.php:46
+msgid "build_result_time"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:49
+#: plugincore/include/user/views/showbuildresult.php:52
+msgid "build_result_trigger"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:52
+#: plugincore/include/user/views/showbuildresult.php:55
+msgid "build_result_trigger_forced"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:54
+#: plugincore/include/user/views/showbuildresult.php:57
+msgid "build_result_trigger_planned"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:58
+#: plugincore/include/user/views/showbuildresult.php:61
+msgid "build_result_state"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:62
+#: plugincore/include/user/views/showbuildresult.php:65
+msgid "build_result_build_number"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:71
+#: plugincore/include/user/views/showbuildresult.php:74
+msgid "build_result_used_def"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:77
+#: plugincore/include/user/views/showbuildresult.php:80
+msgid "build_result_build_def_goals"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:81
+#: plugincore/include/user/views/showbuildresult.php:84
+msgid "build_result_build_def_arguments"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:85
+#: plugincore/include/user/views/showbuildresult.php:88
+msgid "build_result_build_def_schedule"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:94
+#: plugincore/include/user/views/showbuildresult.php:97
+msgid "build_result_error"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresult.php:100
+#: plugincore/include/user/views/showbuildresult.php:103
+msgid "build_result_success"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresults.php:20
+#: plugincore/include/user/views/showbuildresults.php:27
+msgid "build_results"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresults.php:28
+#: plugincore/include/admin/views/showprojectdetails.php:27
+#: plugincore/include/user/views/showbuildresults.php:35
+#: plugincore/include/user/views/showprojectdetails.php:30
+msgid "project_details_name"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresults.php:32
+#: plugincore/include/admin/views/showprojectdetails.php:31
+#: plugincore/include/user/views/showbuildresults.php:39
+#: plugincore/include/user/views/showprojectdetails.php:34
+msgid "project_details_group_id"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresults.php:36
+#: plugincore/include/admin/views/showprojectdetails.php:35
+#: plugincore/include/user/views/showbuildresults.php:43
+#: plugincore/include/user/views/showprojectdetails.php:38
+msgid "project_details_artifact_id"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresults.php:40
+#: plugincore/include/admin/views/showprojectdetails.php:39
+#: plugincore/include/user/views/showbuildresults.php:47
+#: plugincore/include/user/views/showprojectdetails.php:42
+msgid "project_details_version"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresults.php:44
+#: plugincore/include/admin/views/showprojectdetails.php:51
+#: plugincore/include/user/views/showbuildresults.php:51
+#: plugincore/include/user/views/showprojectdetails.php:54
+msgid "project_details_projectgroup_name"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresults.php:48
+#: plugincore/include/admin/views/showprojectdetails.php:55
+#: plugincore/include/user/views/showbuildresults.php:55
+#: plugincore/include/user/views/showprojectdetails.php:58
+msgid "project_details_last_build"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresults.php:61
+#: plugincore/include/user/views/showbuildresults.php:68
+msgid "build_results_head_number"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresults.php:62
+#: plugincore/include/user/views/showbuildresults.php:69
+msgid "build_results_head_starttime"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresults.php:63
+#: plugincore/include/user/views/showbuildresults.php:70
+msgid "build_results_head_endtime"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresults.php:64
+#: plugincore/include/user/views/showbuildresults.php:71
+msgid "build_results_head_time"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresults.php:65
+#: plugincore/include/user/views/showbuildresults.php:72
+msgid "build_results_head_state"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresults.php:66
+#: plugincore/include/user/views/showbuildresults.php:73
+msgid "build_results_head_def_desc"
+msgstr ""
+
+#: plugincore/include/admin/views/showbuildresults.php:67
+#: plugincore/include/user/views/showbuildresults.php:74
+msgid "build_results_head_result"
+msgstr ""
+
+#: plugincore/include/admin/views/showprojectdetails.php:19
+#: plugincore/include/user/views/showprojectdetails.php:22
+msgid "project_details"
+msgstr ""
+
+#: plugincore/include/admin/views/showprojectdetails.php:43
+#: plugincore/include/user/views/showprojectdetails.php:46
+msgid "project_details_scm_url"
+msgstr ""
+
+#: plugincore/include/admin/views/showprojectdetails.php:47
+#: plugincore/include/user/views/showprojectdetails.php:50
+msgid "project_details_scm_tag"
+msgstr ""
+
+#: plugincore/include/admin/views/showprojectdetails.php:66
+#: plugincore/include/user/views/showprojectdetails.php:69
+msgid "project_details_developpers"
+msgstr ""
+
+#: plugincore/include/admin/views/showprojectdetails.php:82
+#: plugincore/include/user/views/showprojectdetails.php:85
+msgid "project_details_notifiers"
+msgstr ""
+
+#: plugincore/include/admin/views/showprojectdetails.php:94
+#: plugincore/include/commonviews/projects.php:176
+#: plugincore/include/user/views/showprojectdetails.php:105
+msgid "project_details_notifiers_by"
+msgstr ""
+
+#: plugincore/include/admin/views/showprojectdetails.php:101
+#: plugincore/include/commonviews/projects.php:183
+#: plugincore/include/user/views/showprojectdetails.php:112
+msgid "project_details_notifiers_success"
+msgstr ""
+
+#: plugincore/include/admin/views/showprojectdetails.php:104
+#: plugincore/include/commonviews/projects.php:186
+#: plugincore/include/user/views/showprojectdetails.php:115
+msgid "project_details_notifiers_failure"
+msgstr ""
+
+#: plugincore/include/admin/views/showprojectdetails.php:107
+#: plugincore/include/commonviews/projects.php:189
+#: plugincore/include/user/views/showprojectdetails.php:118
+msgid "project_details_notifiers_warning"
+msgstr ""
+
+#: plugincore/include/admin/views/showprojectdetails.php:110
+#: plugincore/include/commonviews/projects.php:192
+#: plugincore/include/user/views/showprojectdetails.php:121
+msgid "project_details_notifiers_error"
+msgstr ""
+
+#: plugincore/include/admin/views/showprojectdetails.php:117
+#: plugincore/include/admin/views/showprojectdetails.php:121
+#: plugincore/include/commonviews/projects.php:199
+#: plugincore/include/commonviews/projects.php:203
+#: plugincore/include/user/views/showprojectdetails.php:128
+#: plugincore/include/user/views/showprojectdetails.php:132
+msgid "project_details_notifiers_separator"
+msgstr ""
+
+#: plugincore/include/admin/views/showprojectdetails.php:142
+#: plugincore/include/user/views/showprojectdetails.php:170
+msgid "project_details_dependencies"
+msgstr ""
+
+#: plugincore/include/commonviews/mavensites.php:8
+msgid "consult_maven_site"
+msgstr ""
+
+#: plugincore/include/commonviews/mavensites.php:23
+msgid "delete_maven_site_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/mavensites.php:30
+#: plugincore/include/commonviews/mavensites.php:51
+msgid "consult_maven_site_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:12
+msgid "group_admin_build_def_management"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:37
+msgid "edit_build_def_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:46
+msgid "unset_defaut_build_def_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:50
+msgid "set_defaut_build_def_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:51
+msgid "delete_build_def_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:61
+msgid "run_build_def_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:76
+msgid "group_admin_project_management"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:97
+msgid "edit_project_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:98
+msgid "delete_project_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:105
+msgid "build_project_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:112
+msgid "release_project_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:126
+msgid "show_build_results_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:133
+msgid "build_sub_project_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:140
+msgid "show_project_details_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:155
+msgid "group_admin_notifiers_management"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:209
+#: plugincore/include/user/views/showprojectdetails.php:138
+msgid "project_details_notifiers_from_project"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:211
+#: plugincore/include/user/views/showprojectdetails.php:140
+msgid "project_details_notifiers_from_user"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:220
+#: plugincore/include/user/views/showprojectdetails.php:149
+msgid "edit_notifier_tooltip"
+msgstr ""
+
+#: plugincore/include/commonviews/projects.php:221
+#: plugincore/include/user/views/showprojectdetails.php:150
+msgid "delete_notifier_tooltip"
+msgstr ""
+
+#: plugincore/include/dto/ProjectRelease.php:52
+#: plugincore/include/dto/ProjectRelease.php:102
+msgid "prepare_read_pom_error"
+msgstr ""
+
+#: plugincore/include/dto/ProjectRelease.php:165
+msgid "prepare_module_update_error"
+msgstr ""
+
+#: plugincore/include/dto/ProjectRelease.php:175
+msgid "prepare_module_read_pom_error"
+msgstr ""
+
+#: plugincore/include/services/ServicesManager.php:851
+msgid "consult_maven_site_date_format"
+msgstr ""
+
+#: plugincore/include/services/ServicesManager.php:939
+msgid "release_tag_prepare"
+msgstr ""
+
+#: plugincore/include/services/ServicesManager.php:942
+msgid "release_can_t_create_dir"
+msgstr ""
+
+#: plugincore/include/services/ServicesManager.php:948
+msgid "release_url_access_error"
+msgstr ""
+
+#: plugincore/include/services/ServicesManager.php:955
+msgid "release_tag_update"
+msgstr ""
+
+#: plugincore/include/services/ServicesManager.php:959
+msgid "release_can_t_commit"
+msgstr ""
+
+#: plugincore/include/services/ServicesManager.php:963
+msgid "release_tag_creation"
+msgstr ""
+
+#: plugincore/include/services/ServicesManager.php:966
+msgid "release_can_t_copy"
+msgstr ""
+
+#: plugincore/include/services/ServicesManager.php:972
+msgid "release_new_version_prepare"
+msgstr ""
+
+#: plugincore/include/services/ServicesManager.php:975
+msgid "release_can_t_commit_new_version"
+msgstr ""
+
+#: plugincore/include/services/ServicesManager.php:993
+msgid "project_not_prepared"
+msgstr ""
+
+#: plugincore/include/services/ServicesManager.php:1027
+msgid "prepare_error_checkout"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstallation.php:33
+msgid "add_installation"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstallation.php:35
+msgid "edit_installation"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstallation.php:57
+msgid "form_add_installation_name"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstallation.php:64
+msgid "form_add_installation_var_name"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstallation.php:72
+msgid "form_add_installation_type"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstallation.php:84
+msgid "form_add_installation_var_value"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstance.php:19
+#: plugincore/include/siteAdmin/views/default.php:26
+msgid "add_instance"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstance.php:21
+msgid "edit_instance"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstance.php:38
+msgid "form_add_instance_name"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstance.php:43
+msgid "form_add_instance_url"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstance.php:47
+msgid "form_add_instance_user"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstance.php:51
+msgid "form_add_instance_password"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstance.php:56
+msgid "form_add_instance_maxUse"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstance.php:60
+msgid "form_add_instance_isEnabled"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstance.php:65
+msgid "form_add_instance_proxy"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addinstance.php:68
+msgid "form_add_instance_proxy_none"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addprofile.php:24
+#: plugincore/include/siteAdmin/views/optioninstance.php:132
+msgid "add_profile"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addprofile.php:26
+msgid "edit_profile"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addprofile.php:48
+msgid "form_add_profile_name"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addprofile.php:77
+msgid "form_add_profile_jdk"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addprofile.php:80
+msgid "form_add_profile_jdk_none"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addprofile.php:92
+msgid "form_add_profile_builder"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addprofile.php:95
+msgid "form_add_profile_builder_none"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addprofile.php:107
+msgid "form_add_profile_var_envs"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addprofile.php:171
+msgid "form_add_profile_add_env_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addprofile.php:178
+msgid "form_add_profile_remove_env_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addproxy.php:15
+#: plugincore/include/siteAdmin/views/default.php:114
+msgid "add_proxy"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addproxy.php:17
+msgid "edit_proxy"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addproxy.php:28
+msgid "form_add_proxy_name"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addproxy.php:32
+msgid "form_add_proxy_host"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addproxy.php:36
+msgid "form_add_proxy_port"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addproxy.php:40
+msgid "form_add_proxy_user"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addproxy.php:44
+msgid "form_add_proxy_password"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:24
+msgid "add_schedule"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:26
+msgid "edit_schedule"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:48
+msgid "form_add_schedule_name"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:52
+msgid "form_add_schedule_description"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:56
+msgid "form_add_schedule_cronExpression"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:57
+msgid "form_add_schedule_cronExpression_syntaxe"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:61
+msgid "form_add_schedule_cronExpression_seconde"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:65
+msgid "form_add_schedule_cronExpression_minute"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:69
+msgid "form_add_schedule_cronExpression_hour"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:73
+msgid "form_add_schedule_cronExpression_day_of_month"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:77
+msgid "form_add_schedule_cronExpression_month"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:81
+msgid "form_add_schedule_cronExpression_day_of_week"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:85
+msgid "form_add_schedule_cronExpression_year"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:89
+msgid "form_add_schedule_max_time"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:93
+msgid "form_add_schedule_wait_time"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/addschedule.php:98
+msgid "form_add_schedule_activated"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:3
+msgid "global_configuration"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:9
+msgid "form_configuration_allow_private_instance"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:13
+msgid "disallow_private_instance_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:15
+msgid "allow_private_instance_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:21
+msgid "instances_list"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:35
+msgid "instance_col_name"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:38
+msgid "instance_col_url"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:41
+msgid "instance_col_user"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:44
+msgid "instance_col_proxy"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:47
+msgid "instance_col_working"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:50
+msgid "instance_col_nb_group"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:53
+msgid "instance_col_actions"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:94
+msgid "option_instance_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:96
+msgid "edit_instance_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:97
+msgid "delete_instance_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:100
+msgid "disable_instance_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:102
+msgid "enable_instance_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:110
+msgid "proxy_list"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:123
+msgid "proxy_col_name"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:126
+msgid "proxy_col_host"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:129
+msgid "proxy_col_port"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:132
+msgid "proxy_col_user"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:135
+msgid "proxy_col_actions"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:150
+msgid "edit_proxy_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/default.php:151
+msgid "delete_proxy_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/deleteinstallation.php:21
+msgid "delete_installation"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/deleteinstallation.php:31
+msgid "confirm_delete_installation"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/deleteinstance.php:10
+msgid "delete_instance"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/deleteinstance.php:17
+msgid "confirm_delete_instance"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/deleteprofile.php:21
+msgid "delete_profile"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/deleteprofile.php:31
+msgid "confirm_delete_profile"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/deleteproxy.php:10
+msgid "delete_proxy"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/deleteproxy.php:17
+msgid "confirm_delete_proxy"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/deleteschedule.php:21
+msgid "delete_schedule"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/deleteschedule.php:31
+msgid "confirm_delete_schedule"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:27
+msgid "manage_schedule_instance"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:32
+msgid "add_schedule_instance"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:40
+msgid "manage_schedule_instance_col_name"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:41
+msgid "manage_schedule_instance_col_desc"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:42
+msgid "manage_schedule_instance_col_waittime"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:43
+msgid "manage_schedule_instance_col_cron"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:44
+msgid "manage_schedule_instance_col_maxtime"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:45
+msgid "manage_schedule_instance_col_activated"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:63
+msgid "disable_schedule_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:65
+msgid "enable_schedule_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:69
+msgid "edit_schedule_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:70
+msgid "delete_schedule_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:81
+msgid "manage_installation"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:86
+msgid "add_installation_tool"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:88
+msgid "add_installation_var"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:97
+msgid "manage_installation_col_name"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:98
+msgid "manage_installation_col_var_name"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:99
+msgid "manage_installation_col_type"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:100
+msgid "manage_installation_col_var_value"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:115
+msgid "edit_installation_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:116
+msgid "delete_installation_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:127
+msgid "manage_profiles"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:141
+msgid "manage_profile_col_name"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:142
+msgid "manage_profile_col_jdk"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:143
+msgid "manage_profile_col_builder"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:144
+msgid "manage_profile_col_env_var"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:167
+msgid "edit_profile_tooltip"
+msgstr ""
+
+#: plugincore/include/siteAdmin/views/optioninstance.php:168
+msgid "delete_profile_tooltip"
+msgstr ""
+
+#: plugincore/include/user/views/default.php:2
+msgid "title"
+msgstr ""
+
+#: plugincore/include/user/views/default.php:18
+msgid "admin_link"
+msgstr ""
+
+#: plugincore/include/user/views/default.php:26
+msgid "selected_instance"
+msgstr ""
+
+#: plugincore/include/user/views/default.php:31
+msgid "reachable_instance"
+msgstr ""
+
+#: plugincore/include/user/views/default.php:36
+msgid "not_selected_instance"
+msgstr ""
+
+#: plugincore/include/user/views/deletesite.php:15
+msgid "delete_site_maven"
+msgstr ""
+
+#: plugincore/include/user/views/deletesite.php:21
+msgid "confirm_delete_site_maven"
+msgstr ""
+
+#: plugincore/include/user/views/showbuildresults.php:94
+msgid "show_build_result_tooltip"
+msgstr ""
+
+#: pluginwww/admin/index.php:49
+msgid "not_enabled"
+msgstr ""
+
+#: pluginwww/admin/index.php:79
+msgid "database_error"
+msgstr ""

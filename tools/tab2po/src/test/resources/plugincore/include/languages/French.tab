@@ -1,0 +1,1166 @@
+#---------------------------------------------------------------------------
+# Novaforge is a registered trade mark from Bull S.A.S
+# Copyright (C) 2007 Bull S.A.S.
+# 
+# http://novaforge.org/
+#
+#
+# This file has been developped within the Novaforge(TM) project from Bull S.A.S
+# and contributed back to GForge community.
+#
+# GForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# GForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#---------------------------------------------------------------------------
+
+gforge-plugin-novacontinuum	title_helloworld	Salut le monde !!!
+gforge-plugin-novacontinuum	tab_title	Nova Continuum
+gforge-plugin-novacontinuum	use_novacontinuum	Utiliser le plugin Nova Continuum
+gforge-plugin-novacontinuum	title_site_admin	Administration du plugin Nova Continuum
+gforge-plugin-novacontinuum	title_admin	Administration des projets Continuum
+gforge-plugin-novacontinuum	title	Consultation des projets Continuum
+gforge-plugin-novacontinuum	admin_link	Administration
+gforge-plugin-novacontinuum	your_continuum_projects	Vos Projets Continuum
+gforge-plugin-novacontinuum	no_project_assigned	Vous n'avez pas de projet Continuum
+gforge-plugin-novacontinuum	not_reachable_instance	L'instance s&eacute;lection&eacute;e n'est pas active.
+gforge-plugin-novacontinuum	reachable_instance	L'instance s&eacute;lection&eacute;e est active.
+gforge-plugin-novacontinuum	not_selected_instance	Aucune instance n'est s&eacute;lection&eacute;e
+gforge-plugin-novacontinuum	selected_instance	&Eacute;tat de l'instance s&eacute;lection&eacute;e
+gforge-plugin-novacontinuum	no_selected_instance	Aucune instance Continuum s&eacute;lection&eacute;e.
+gforge-plugin-novacontinuum	not_enabled	Le plugin Continuum n'est pas activé pour ce projet.
+gforge-plugin-novacontinuum	database_error	Une erreur est survenue lors de l'accès à la base de données.
+gforge-plugin-novacontinuum	instances_list	Instances Continuum disponibles
+gforge-plugin-novacontinuum	proxy_list	Proxy HTTP disponibles
+gforge-plugin-novacontinuum	add_instance	Ajouter une instance Continuum
+gforge-plugin-novacontinuum	add_proxy	Ajouter un proxy HTTP
+gforge-plugin-novacontinuum	instance_col_name	Nom
+gforge-plugin-novacontinuum	instance_col_url	Url
+gforge-plugin-novacontinuum	instance_col_user	Utilisateur
+gforge-plugin-novacontinuum	instance_col_proxy	Proxy HTTP
+gforge-plugin-novacontinuum	instance_col_working	Actif
+gforge-plugin-novacontinuum	instance_col_nb_group	Nombre de groupes
+gforge-plugin-novacontinuum	instance_col_actions	Actions
+gforge-plugin-novacontinuum	proxy_col_name	Nom
+gforge-plugin-novacontinuum	proxy_col_host	IP/DNS
+gforge-plugin-novacontinuum	proxy_col_port	Port
+gforge-plugin-novacontinuum	proxy_col_user	Utilisateur
+gforge-plugin-novacontinuum	proxy_col_actions	Actions
+gforge-plugin-novacontinuum	return_site_admin	Retour
+gforge-plugin-novacontinuum	submit_add_instance	Ajouter l'instance
+gforge-plugin-novacontinuum	form_add_instance_name	Nom : 
+gforge-plugin-novacontinuum	form_add_instance_url	Url : 
+gforge-plugin-novacontinuum	form_add_instance_user	Utilisateur : 
+gforge-plugin-novacontinuum	form_add_instance_password	Mot de passe :
+gforge-plugin-novacontinuum	form_add_instance_maxUse	Maximum de groupe (0 illimit&eacute) :
+gforge-plugin-novacontinuum	form_add_instance_isEnabled	Activation :
+gforge-plugin-novacontinuum	form_add_instance_proxy	Proxy :
+gforge-plugin-novacontinuum	form_add_instance_proxy_none	Aucun
+gforge-plugin-novacontinuum	edit_instance	Mise &agrave; jour de l'instance Continuum
+gforge-plugin-novacontinuum	submit_edit_instance	Mettre &agrave; jour l'instance
+gforge-plugin-novacontinuum	confirm_delete_instance	Etes-vous certain de vouloir supprimer l'instance $1 ?
+gforge-plugin-novacontinuum	delete_instance	Suppression de l'instance Continuum
+gforge-plugin-novacontinuum	delete_proxy	Suppression du proxy HTTP
+gforge-plugin-novacontinuum	confirm_delete_proxy	Etes-vous certain de vouloir supprimer le proxy HTTP $1 ?
+gforge-plugin-novacontinuum	confirm_delete	Oui
+gforge-plugin-novacontinuum	submit_add_proxy	Ajouter le proxy HTTP
+gforge-plugin-novacontinuum	submit_edit_proxy	Mettre &agrave; jour le proxy HTTP
+gforge-plugin-novacontinuum	edit_proxy	Mise &agrave; jour du Proxy HTTP
+gforge-plugin-novacontinuum	form_add_proxy_name	Nom :
+gforge-plugin-novacontinuum	form_add_proxy_host	IP/DNS :
+gforge-plugin-novacontinuum	form_add_proxy_port	port :
+gforge-plugin-novacontinuum	form_add_proxy_user	Utilisateur :
+gforge-plugin-novacontinuum	form_add_proxy_password	Mot de passe : 
+gforge-plugin-novacontinuum	global_configuration	Configuration g&eacute;n&eacute;rale
+gforge-plugin-novacontinuum	form_configuration_allow_private_instance	Authoriser les instances priv&eacute;es ?
+gforge-plugin-novacontinuum	submit_update_configuration	Mettre &agrave; jour la configuration
+gforge-plugin-novacontinuum	group_admin_role_management	Gestion des r&ocirc;les
+gforge-plugin-novacontinuum	group_admin_lbl_guest	Invit&eacute;s
+gforge-plugin-novacontinuum	group_admin_col_role	R&ocirc;les
+gforge-plugin-novacontinuum	group_admin_col_manage_roles	Gestion des r&ocirc;les
+gforge-plugin-novacontinuum	group_admin_col_all	Tous
+gforge-plugin-novacontinuum	group_admin_col_none	Aucun
+gforge-plugin-novacontinuum	group_admin_col_manage_private_instance	Gestion des instances priv&eacute;es
+gforge-plugin-novacontinuum	group_admin_col_select_instance	S&eacute;l&eacute;ction de l'instance
+gforge-plugin-novacontinuum	group_admin_col_manage_build_def	Gestion des d&eacute;finitions de construction
+gforge-plugin-novacontinuum	group_admin_col_run_build_def	Lancement des d&eacute;finitions de construction
+gforge-plugin-novacontinuum	group_admin_col_read_maven_site	Consulter les sites maven
+gforge-plugin-novacontinuum	group_admin_col_write_maven_site	Ajouter des sites maven
+gforge-plugin-novacontinuum	group_admin_col_manage_project	Gestion des projets
+gforge-plugin-novacontinuum	group_admin_col_run_project	Lancement des projets
+gforge-plugin-novacontinuum	group_admin_col_run_continuum_project	Lancement des projets continuum
+gforge-plugin-novacontinuum	group_admin_col_show_build_result	Affichage des r&eacute;sultats de construction
+gforge-plugin-novacontinuum	group_admin_col_show_project_detail	Affichage du d&eacute;tail des projets
+gforge-plugin-novacontinuum	group_admin_col_view	Vue
+gforge-plugin-novacontinuum	submit_update_roles	Mettre &agrave; jour les r&ocirc;les
+gforge-plugin-novacontinuum	group_admin_instance_management	S&eacute;l&eacute;ction de l'instance Continuum
+gforge-plugin-novacontinuum	group_admin_build_def_management	Gestion des d&eacute;finitions de construction
+gforge-plugin-novacontinuum	group_admin_project_management	Gestion des projets Maven 2
+gforge-plugin-novacontinuum	group_admin_notifiers_management	Gestion des alertes
+gforge-plugin-novacontinuum	add_private_instance	Ajouter une instance priv&eacute;e
+gforge-plugin-novacontinuum	download_private_instance	T&eacute;l&eacute;charger une instance priv&eacute;e
+gforge-plugin-novacontinuum	add_project	Ajouter un projet
+gforge-plugin-novacontinuum	edit_private_instance	 Mettre &agrave; jour l'instance priv&eacute;e
+gforge-plugin-novacontinuum	option_private_instance	G&eacute;rer les options de l'instance priv&eacute;e
+gforge-plugin-novacontinuum	delete_private_instance	 Supprimer l'instance priv&eacute;e
+gforge-plugin-novacontinuum	return_admin	Retour
+gforge-plugin-novacontinuum	delete_private_instance	Suppression de l'instance priv&eacute;e
+gforge-plugin-novacontinuum	confirm_delete_private_instance	Etes-vous certain de vouloir supprimer l'instance priv&eacute;e du projet $1 ?
+gforge-plugin-novacontinuum	edit_project	Mettre &agrave; jour le projet
+gforge-plugin-novacontinuum	form_add_project_name	Nom :
+gforge-plugin-novacontinuum	form_add_project_url	URL :
+gforge-plugin-novacontinuum	form_add_project_user	Utilisateur :
+gforge-plugin-novacontinuum	form_add_project_password	Mot de passe :	
+gforge-plugin-novacontinuum	submit_add_project	Ajouter le projet
+gforge-plugin-novacontinuum	submit_edit_project	Mettre &agrave; jour le projet
+gforge-plugin-novacontinuum	build_definitions	D&eacute;finitions des constructions
+gforge-plugin-novacontinuum	projects	Projets
+gforge-plugin-novacontinuum	delete_project	Suppression du projet
+gforge-plugin-novacontinuum	confirm_delete_project	Etes-vous certain de vouloir supprimer le projet $1 ?
+gforge-plugin-novacontinuum	add_build_definition	Ajouter une d&eacute;finition de construction
+gforge-plugin-novacontinuum	default_build_def	d&eacute;faut
+gforge-plugin-novacontinuum	delete_build_def	Suppression de la d&eacute;finition de construction
+gforge-plugin-novacontinuum	confirm_delete_build_def	Etes-vous certain de vouloir supprimer la d&eacute;finition de construction $1 ?
+gforge-plugin-novacontinuum	delete_schedule	Suppression de la planification
+gforge-plugin-novacontinuum	confirm_delete_schedule	Etes-vous certain de vouloir supprimer la planification $1 ?
+gforge-plugin-novacontinuum	edit_build_definition	Mettre &agrave; jour la d&eacute;finition de construction
+gforge-plugin-novacontinuum	form_add_build_def_goals	Goals :
+gforge-plugin-novacontinuum	form_add_build_def_arguments	Arguments :
+gforge-plugin-novacontinuum	form_add_build_def_schedule	Planification :
+gforge-plugin-novacontinuum	form_add_build_def_build_fresh	Extraction compl&egrave;te
+gforge-plugin-novacontinuum	form_add_build_def_always_build	Toujours construire
+gforge-plugin-novacontinuum	form_add_build_def_build_file	Nom du fichier POM :
+gforge-plugin-novacontinuum	form_add_build_def_profile	Profil :
+gforge-plugin-novacontinuum	submit_add_build_def	Ajouter la d&eacute;finition de construction
+gforge-plugin-novacontinuum	submit_edit_build_def	Mettre &agrave; jour la d&eacute;finition de construction
+gforge-plugin-novacontinuum	project_details	D&eacute;tail du projet Continuum : $1
+gforge-plugin-novacontinuum	project_details_name	Nom du projet:
+gforge-plugin-novacontinuum	project_details_group_id	Groupe ID:
+gforge-plugin-novacontinuum	project_details_artifact_id	Artifact ID:
+gforge-plugin-novacontinuum	project_details_version	Version:
+gforge-plugin-novacontinuum	project_details_scm_url	URL du gestionnaire de sources:
+gforge-plugin-novacontinuum	project_details_scm_tag	Branche/Tag du gestionnaire de sources:
+gforge-plugin-novacontinuum	project_details_projectgroup_name	Groupe:
+gforge-plugin-novacontinuum	project_details_last_build	Date de la derni&egrave;re construction:
+gforge-plugin-novacontinuum	project_details_developpers	D&eacute;veloppeurs :
+gforge-plugin-novacontinuum	project_details_dependencies	D&eacute;pendances :
+gforge-plugin-novacontinuum	project_details_notifiers	Alertes :
+gforge-plugin-novacontinuum	project_details_notifiers_by	Par $1 :
+gforge-plugin-novacontinuum	project_details_notifiers_success	Success
+gforge-plugin-novacontinuum	project_details_notifiers_failure	Failures
+gforge-plugin-novacontinuum	project_details_notifiers_warning	Warnings
+gforge-plugin-novacontinuum	project_details_notifiers_error	Errors
+gforge-plugin-novacontinuum	project_details_notifiers_separator	/
+gforge-plugin-novacontinuum	notifiers	Alertes
+gforge-plugin-novacontinuum	build_results	R&eacute;sultats de constructions pour $1
+gforge-plugin-novacontinuum	build_results_head_number	Construction #
+gforge-plugin-novacontinuum	build_results_head_starttime	Date de d&eacute;but
+gforge-plugin-novacontinuum	build_results_head_endtime	Date de fin
+gforge-plugin-novacontinuum	build_results_head_time	Dur&eacute;e
+gforge-plugin-novacontinuum	build_results_head_state	&Eacute;tat
+gforge-plugin-novacontinuum	build_results_head_def_desc	Description de la d&eacute;finition de construction
+gforge-plugin-novacontinuum	build_results_head_result
+gforge-plugin-novacontinuum	build_result	R&eacute;sultat de constructions pour $1 du $2
+gforge-plugin-novacontinuum	build_result_error	Erreur de construction
+gforge-plugin-novacontinuum	build_result_success	Sortie
+gforge-plugin-novacontinuum	build_result_used_def	D&eacute;finition de construction utilis&eacute;e
+gforge-plugin-novacontinuum	build_result_start_time	Date de d&eacute;but:
+gforge-plugin-novacontinuum	build_result_end_time	Date de fin:
+gforge-plugin-novacontinuum	build_result_time	Dur&eacute;e:
+gforge-plugin-novacontinuum	build_result_trigger	D&eacute;clencheur de la construction:
+gforge-plugin-novacontinuum	build_result_state	&Eacute;tat:
+gforge-plugin-novacontinuum	build_result_build_number	Construction #:
+gforge-plugin-novacontinuum	build_result_trigger_forced	Forc&eacute;e
+gforge-plugin-novacontinuum	build_result_trigger_planned	Planifi&eacute;e
+gforge-plugin-novacontinuum	build_result_build_def_goals	Goals
+gforge-plugin-novacontinuum	build_result_build_def_arguments	Arguments
+gforge-plugin-novacontinuum	build_result_build_def_schedule	Planification
+gforge-plugin-novacontinuum	manage_schedule_instance	Gestion des planifications
+gforge-plugin-novacontinuum	manage_schedule_instance_col_name	Nom
+gforge-plugin-novacontinuum	manage_schedule_instance_col_desc	Description
+gforge-plugin-novacontinuum	manage_schedule_instance_col_waittime	P&eacute;riode d&#146;attente
+gforge-plugin-novacontinuum	manage_schedule_instance_col_cron	Expression cron
+gforge-plugin-novacontinuum	manage_schedule_instance_col_maxtime	Temp d&#146;ex&eacute;cution max.
+gforge-plugin-novacontinuum	manage_schedule_instance_col_activated	Activer
+gforge-plugin-novacontinuum	add_schedule_instance	Ajout d&#146;une Planification
+gforge-plugin-novacontinuum	add_schedule	Ajouter une planification
+gforge-plugin-novacontinuum	edit_schedule	Mettre &agrave; jour la planification
+gforge-plugin-novacontinuum	form_add_schedule_name	Nom :
+gforge-plugin-novacontinuum	form_add_schedule_description	Description :
+gforge-plugin-novacontinuum	form_add_schedule_cronExpression	Expression Cron
+gforge-plugin-novacontinuum	form_add_schedule_cronExpression_syntaxe	Syntaxe
+gforge-plugin-novacontinuum	form_add_schedule_cronExpression_seconde	Seconde:  	
+gforge-plugin-novacontinuum	form_add_schedule_cronExpression_minute	Minute: 	
+gforge-plugin-novacontinuum	form_add_schedule_cronExpression_hour	Heure: 	
+gforge-plugin-novacontinuum	form_add_schedule_cronExpression_day_of_month	Jour du mois: 	
+gforge-plugin-novacontinuum	form_add_schedule_cronExpression_month	Mois: 	
+gforge-plugin-novacontinuum	form_add_schedule_cronExpression_day_of_week	Jour de la semaine: 	
+gforge-plugin-novacontinuum	form_add_schedule_cronExpression_year	Ann&eacute;e [optionnelle]:
+gforge-plugin-novacontinuum	form_add_schedule_max_time	Temp d&#146;ex&eacute;cution du travail maximum :
+gforge-plugin-novacontinuum	form_add_schedule_wait_time	P&eacute;riode d&#146;attente
+gforge-plugin-novacontinuum	form_add_schedule_activated	Activ&eacute;
+gforge-plugin-novacontinuum	submit_add_schedule	Ajouter la planification
+gforge-plugin-novacontinuum	submit_edit_schedule	Mettre &agrave; jour la planification
+gforge-plugin-novacontinuum	project_details_notifiers_from_project	Projet
+gforge-plugin-novacontinuum	project_details_notifiers_from_user	Utilisateur
+gforge-plugin-novacontinuum	add_notifier	Ajouter une alerte
+gforge-plugin-novacontinuum	edit_notifier	Mettre &agrave; jour l&#146;alerte
+gforge-plugin-novacontinuum	form_add_notifier_address
+gforge-plugin-novacontinuum	form_add_notifier_sendOnSuccess	Success
+gforge-plugin-novacontinuum	form_add_notifier_sendOnFailure	Failures
+gforge-plugin-novacontinuum	form_add_notifier_sendOnWarning	Warnings
+gforge-plugin-novacontinuum	form_add_notifier_sendOnError	Errors
+gforge-plugin-novacontinuum	form_add_notifier_enabled	Activ&eacute;
+gforge-plugin-novacontinuum	submit_add_notifier	Ajouter l&#146;alerte
+gforge-plugin-novacontinuum	submit_edit_notifier	Mettre &agrave; jour l&#146;alerte
+gforge-plugin-novacontinuum	delete_notifier	Suppression de l&#146;alerte
+gforge-plugin-novacontinuum	confirm_delete_notifier	Etes-vous certain de vouloir supprimer l&#146;alerte $1 ?
+gforge-plugin-novacontinuum	consult_maven_site	Consultation des sites Maven
+gforge-plugin-novacontinuum	consult_maven_site_date_format	$3/$2/$1
+gforge-plugin-novacontinuum	consult_maven_site_tooltip	Consulter le site Maven
+gforge-plugin-novacontinuum	delete_maven_site_tooltip	Supprimer le site Maven
+gforge-plugin-novacontinuum	delete_site_maven	Suppression du site Maven
+gforge-plugin-novacontinuum	confirm_delete_site_maven	Etes-vous certain de vouloir supprimer le site Maven du $1 ?
+gforge-plugin-novacontinuum	edit_build_def_tooltip	Mettre &agrave; jour la d&eacute;finition de construction
+gforge-plugin-novacontinuum	unset_defaut_build_def_tooltip	D&eacute;activer la d&eacute;finition de construction par d&eacute;faut
+gforge-plugin-novacontinuum	set_defaut_build_def_tooltip	Activer la d&eacute;finition de construction par d&eacute;faut
+gforge-plugin-novacontinuum	delete_build_def_tooltip	Supprimer la d&eacute;finition de construction
+gforge-plugin-novacontinuum	run_build_def_tooltip	Construire avec la d&eacute;finition de construction
+gforge-plugin-novacontinuum	edit_project_tooltip	Mettre &agrave; jour le projet
+gforge-plugin-novacontinuum	delete_project_tooltip	Supprimer le projet
+gforge-plugin-novacontinuum	build_project_tooltip	Construire le projet
+gforge-plugin-novacontinuum	show_build_results_tooltip	Afficher les r&eacute;sultats de construction
+gforge-plugin-novacontinuum	build_sub_project_tooltip	Construire le projet
+gforge-plugin-novacontinuum	show_project_details_tooltip	Afficher les d&eacute;tails du projet
+gforge-plugin-novacontinuum	edit_notifier_tooltip	Mettre &agrave; jour l&#146;alerte
+gforge-plugin-novacontinuum	delete_notifier_tooltip	Supprimer l&#146;alerte
+gforge-plugin-novacontinuum	show_build_result_tooltip	Afficher le r&eacute;sultat de construction
+gforge-plugin-novacontinuum	disallow_private_instance_tooltip	Interdire les instance priv&eacute;e
+gforge-plugin-novacontinuum	allow_private_instance_tooltip	Authoriser les instance priv&eacute;e
+gforge-plugin-novacontinuum	option_instance_tooltip	G&eacute;rer les options de l'instance
+gforge-plugin-novacontinuum	edit_instance_tooltip	Mettre &agrave; jour l'instance
+gforge-plugin-novacontinuum	delete_instance_tooltip	Supprimer l'instance
+gforge-plugin-novacontinuum	disable_instance_tooltip	D&eacute;sactiver l'instance
+gforge-plugin-novacontinuum	enable_instance_tooltip	Activer l'instance
+gforge-plugin-novacontinuum	edit_proxy_tooltip	Mettre &agrave; jour le proxy HTTP
+gforge-plugin-novacontinuum	delete_proxy_tooltip	Supprimer	le proxy HTTP
+gforge-plugin-novacontinuum	disable_schedule_tooltip	D&eacute;sactiver la planification
+gforge-plugin-novacontinuum	enable_schedule_tooltip	Activer la planification
+gforge-plugin-novacontinuum	edit_schedule_tooltip	Mettre &agrave; jour la planification
+gforge-plugin-novacontinuum	delete_schedule_tooltip	Supprimer la planification
+gforge-plugin-novacontinuum	confirm_delete_installation	Etes-vous certain de vouloir supprimer l&#146;installation $1 ?
+gforge-plugin-novacontinuum	delete_installation	Suppression de l&#146;installation
+gforge-plugin-novacontinuum	add_installation	Ajouter l&#146;installation
+gforge-plugin-novacontinuum	edit_installation	Mettre &agrave; jour l&#146;installation
+gforge-plugin-novacontinuum	submit_edit_installation	Mettre &agrave; jour l&#146;installation
+gforge-plugin-novacontinuum	submit_add_installation	Ajouter l&#146;installation
+gforge-plugin-novacontinuum	form_add_installation_name	Nom :
+gforge-plugin-novacontinuum	form_add_installation_var_name	Nom de variable d&#146;environnement :
+gforge-plugin-novacontinuum	form_add_installation_type	Type :
+gforge-plugin-novacontinuum	form_add_installation_var_value	Valeur/Chemin :
+gforge-plugin-novacontinuum	edit_installation_tooltip	Mettre &agrave; jour l&#146;installation
+gforge-plugin-novacontinuum	delete_installation_tooltip	Supprimer l&#146;installation
+gforge-plugin-novacontinuum	manage_installation_col_var_value	Valeur/Chemin
+gforge-plugin-novacontinuum	manage_installation_col_type	Type
+gforge-plugin-novacontinuum	manage_installation_col_var_name	Nom de variable d&#146;environnement
+gforge-plugin-novacontinuum	manage_installation_col_name	Nom
+gforge-plugin-novacontinuum	manage_installation	Gestion des installations
+gforge-plugin-novacontinuum	add_installation_tool	Ajouter un outils
+gforge-plugin-novacontinuum	add_installation_var	Ajouter une variable d&#146;environnement
+gforge-plugin-novacontinuum	manage_profiles	Gestion des profils
+gforge-plugin-novacontinuum	add_profile	Ajouter un profil
+gforge-plugin-novacontinuum	manage_profile_col_name	Nom
+gforge-plugin-novacontinuum	manage_profile_col_jdk	Jdk
+gforge-plugin-novacontinuum	manage_profile_col_builder	Constructeur
+gforge-plugin-novacontinuum	manage_profile_col_env_var	Variables d&#146;environnement
+gforge-plugin-novacontinuum	edit_profile_tooltip	Mettre &agrave; jour la variable d&#146;environnement
+gforge-plugin-novacontinuum	delete_profile_tooltip	Supprimer la variable d&#146;environnement
+gforge-plugin-novacontinuum	confirm_delete_profile	Etes-vous certain de vouloir supprimer le profil $1 ?
+gforge-plugin-novacontinuum	delete_profile	Suppression du profil
+gforge-plugin-novacontinuum	edit_profile	Mettre &agrave; jour le profil
+gforge-plugin-novacontinuum	form_add_profile_name	Nom :
+gforge-plugin-novacontinuum	form_add_profile_jdk	Jdk :
+gforge-plugin-novacontinuum	form_add_profile_jdk_none	Aucun :
+gforge-plugin-novacontinuum	form_add_profile_builder	Constructeur :
+gforge-plugin-novacontinuum	form_add_profile_builder_none	Aucun :
+gforge-plugin-novacontinuum	form_add_profile_var_envs	Variables <br />d&#146;environnement :
+gforge-plugin-novacontinuum	form_add_profile_add_env_tooltip	Ajouter la variable d&#146;environnement
+gforge-plugin-novacontinuum	form_add_profile_remove_env_tooltip	Retirer la variable d&#146;environnement
+gforge-plugin-novacontinuum	submit_add_profile	Ajouter le profil
+gforge-plugin-novacontinuum	submit_edit_profile	Mettre &agrave; jour le profil
+gforge-plugin-novacontinuum	release_project_tooltip	Figer la version
+gforge-plugin-novacontinuum	release_project	Figer la version
+gforge-plugin-novacontinuum	form_release_project_scmuser	Utilisateur GCL :
+gforge-plugin-novacontinuum	form_release_project_scmpassword	Mot de passe GCL :
+gforge-plugin-novacontinuum	form_release_project_tag	Tag :
+gforge-plugin-novacontinuum	form_release_project_tag_base	Tag Base :
+gforge-plugin-novacontinuum	prepare_error_checkout	La pr&eacute;paration a echou&eacute;, checkout impossible :
+gforge-plugin-novacontinuum	prepare_read_pom_error	Erreur lors de la lecture du fichier POM
+gforge-plugin-novacontinuum	prepare_module_update_error	Erreur lors de la r&eacute;cup&eacute;ration du module : '$1'
+gforge-plugin-novacontinuum	prepare_module_read_pom_error	Erreur lors de la lecture du fichier POM du module : '$1'
+gforge-plugin-novacontinuum	release_project_access_control	Identification requise :
+gforge-plugin-novacontinuum	submit_release_project_access_control	Ok
+gforge-plugin-novacontinuum	prepare_username_not_valid	L'utilisateur n'est pas valide
+gforge-plugin-novacontinuum	prepare_password_not_valid	Le mot de passe n'est pas valide
+gforge-plugin-novacontinuum	prepare_password_empty	L'utilisateur ne peux &ecirc;tre vide
+gforge-plugin-novacontinuum	form_release_project_group_id	Groupd ID :
+gforge-plugin-novacontinuum	form_release_project_artifact_id	Artifact ID :
+gforge-plugin-novacontinuum	form_release_project_version	Version :
+gforge-plugin-novacontinuum	form_release_project_modules	Modules :
+gforge-plugin-novacontinuum	form_release_project_tag_url	Url des tag :
+gforge-plugin-novacontinuum	form_release_project_tag	Tag :
+gforge-plugin-novacontinuum	form_release_project_new_version	Nouvelle version :
+gforge-plugin-novacontinuum	submit_release_project	Figer la version
+gforge-plugin-novacontinuum	project_not_prepared	Le projet n'a pas &eacute;t&eacute; pr&eacute;par&eacute;.
+gforge-plugin-novacontinuum	release_url_access_error	L'url '$1' n'est pas accessible.
+gforge-plugin-novacontinuum	release_tag_prepare	"Creation du repertoire de Tag"
+gforge-plugin-novacontinuum	release_tag_update	"Preparation de la version '$1'"
+gforge-plugin-novacontinuum	release_tag_creation	"Creation du tag '$1'"
+gforge-plugin-novacontinuum	release_new_version_prepare	"Preparation de la nouvelle version $1"
+gforge-plugin-novacontinuum	release_can_t_create_dir	Impossible de cr&eacute;er le repertoire projet dans tags
+gforge-plugin-novacontinuum	release_can_t_commit	Impossible de livrer les informations pour le tag
+gforge-plugin-novacontinuum	release_can_t_copy	Impossible de cr&eacute;er le tag
+gforge-plugin-novacontinuum	release_can_t_commit_new_version	Impossible de livrer la nouvelle version
+gforge-plugin-novacontinuum	form_release_add_tag_to_project_list	Ajouter le tag :
+gforge-plugin-novacontinuum	group_admin_col_release_project	Figer les versions
+########################################
+########################################
+####                                ####
+#### Message d'erreurs de continuum ####
+####                                ####
+########################################
+########################################
+
+
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+# Translation by Damien Blugeon.
+
+## version $Id: Continuum_fr.properties 698342 2008-09-23 20:35:13Z evenisse $
+
+# ----------------------------------------------------------------------
+# COMMONS
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	webwork.date	dd MMM yyyy HH:mm:ss z
+
+gforge-plugin-novacontinuum	message.success	Succ&egrave;s
+gforge-plugin-novacontinuum	message.failed	Echec
+gforge-plugin-novacontinuum	message.error	Erreur
+gforge-plugin-novacontinuum	enabled	Activ&eacute;
+gforge-plugin-novacontinuum	disabled	D&eacute;sactiv&eacute;
+gforge-plugin-novacontinuum	cancel	Annuler
+gforge-plugin-novacontinuum	submit	Soumettre
+gforge-plugin-novacontinuum	edit	Editer
+gforge-plugin-novacontinuum	delete	Supprimer
+gforge-plugin-novacontinuum	build	Construire
+gforge-plugin-novacontinuum	release	Faire une ''release''
+gforge-plugin-novacontinuum	save	Sauvegarder
+gforge-plugin-novacontinuum	add	Ajouter
+gforge-plugin-novacontinuum	back	Retour
+gforge-plugin-novacontinuum	workingCopy	Copie de travail
+gforge-plugin-novacontinuum	builds	Constructions
+gforge-plugin-novacontinuum	info	Informations sur le projet
+gforge-plugin-novacontinuum	or	OU
+gforge-plugin-novacontinuum	selectAll	S&eacute;lectionner tous
+gforge-plugin-novacontinuum	unselectAll	D&eacute;selectionner tous
+gforge-plugin-novacontinuum	sort.descending	Tri d&eacute;croissant
+gforge-plugin-novacontinuum	sort.ascending	Tri croissant
+
+# ----------------------------------------------------------------------
+# Page: Top
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	top.logo.default	[Le logo de votre entreprise]
+# ----------------------------------------------------------------------
+# Page: Bottom
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	bottom.version.number	${pom.parent.parent.version}
+
+# ----------------------------------------------------------------------
+# Page: Menu
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	menu.continuum.about	A propos
+gforge-plugin-novacontinuum	menu.continuum.showProjects	Afficher les projets
+gforge-plugin-novacontinuum	menu.continuum.showProjectGroups	Groupes de projets
+gforge-plugin-novacontinuum	menu.addProject	Ajouter un projet
+gforge-plugin-novacontinuum	menu.add.m2Project	Projet Maven 2.0.X
+gforge-plugin-novacontinuum	menu.add.m1Project	Projet Maven 1.x
+gforge-plugin-novacontinuum	menu.add.antProject	Projet Ant
+gforge-plugin-novacontinuum	menu.add.shellProject	Projet Console
+gforge-plugin-novacontinuum	menu.administration	Administration
+gforge-plugin-novacontinuum	menu.administration.configuration	Configuration
+gforge-plugin-novacontinuum	menu.administration.appearance	Apparence
+gforge-plugin-novacontinuum	menu.administration.profile	Environnement de Build
+gforge-plugin-novacontinuum	menu.administration.installations	Installations
+gforge-plugin-novacontinuum	menu.administration.schedules	Planifications
+gforge-plugin-novacontinuum	menu.administration.users	Utilisateurs
+gforge-plugin-novacontinuum	menu.administration.userGroups	Groupes d&#146;utilisateurs
+gforge-plugin-novacontinuum	menu.administration.buildDefinitionTemplates	Mod&egrave;les de d&eacute;f. des contructions
+gforge-plugin-novacontinuum	menu.account.options	Mon compte
+gforge-plugin-novacontinuum	user.edit.account	Editer les informations utilisateur
+gforge-plugin-novacontinuum	menu.administration.queues	Files d&#146;attente
+
+# ----------------------------------------------------------------------
+# Page: error
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	error.page.title	Page d&#146;erreur
+gforge-plugin-novacontinuum	error.section.title	Une erreur interne s&#146;est produite
+gforge-plugin-novacontinuum	error.exception.message	Message de l&#146;exception : 
+gforge-plugin-novacontinuum	error.message	Le serveur n&#146;&eacute;tait pas en mesure d&#146;ex&eacute;cuter la demande.  Merci d&#146;essayer ult&eacute;rieurement. Contacter l&#146;administrateur si le probl&egrave;me persiste.
+gforge-plugin-novacontinuum	error.403.title	Erreur 403
+gforge-plugin-novacontinuum	error.403.section.title	Ressource interdite
+gforge-plugin-novacontinuum	error.403.message	L&#146;URL demand&eacute; est une page interdite.
+gforge-plugin-novacontinuum	error.404.title	Erreur 404
+gforge-plugin-novacontinuum	error.404.section.title	Ressource non trouv&eacute;e
+gforge-plugin-novacontinuum	error.404.message	L&#146;URL demand&eacute;e ne peut &ecirc;tre trouv&eacute;e.
+gforge-plugin-novacontinuum	error.500.title	Erreur 500
+gforge-plugin-novacontinuum	error.500.section.title	Erreur interne
+gforge-plugin-novacontinuum	error.500.message	L&#146;URL demand&eacute;e a produit une erreur interne.
+
+# ----------------------------------------------------------------------
+# Page: About
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	about.page.title	Continuum - A propos
+gforge-plugin-novacontinuum	about.section.title	A propos de Continuum
+gforge-plugin-novacontinuum	about.version.label	Version
+gforge-plugin-novacontinuum	about.version.number	${project.version}
+gforge-plugin-novacontinuum	about.buildnumber.label	Build Number
+gforge-plugin-novacontinuum	about.buildnumber	${buildNumber}
+
+
+# ----------------------------------------------------------------------
+# Page: Login
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	login.page.title	Continuum - Authentification
+gforge-plugin-novacontinuum	login.section.title	Authentification
+gforge-plugin-novacontinuum	login.username	Nom d&#146;utilisateur
+gforge-plugin-novacontinuum	login.password	Mot de passe
+gforge-plugin-novacontinuum	login.rememberMe	Se souvenir de moi
+gforge-plugin-novacontinuum	login.submit	Connexion
+
+# ----------------------------------------------------------------------
+# Page: Summary
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	summary.page.title	Continuum - Bilan
+gforge-plugin-novacontinuum	summary.section.title	Projets Continuum
+gforge-plugin-novacontinuum	summary.projectTable.name	Nom du projet
+gforge-plugin-novacontinuum	summary.projectTable.version	Version
+gforge-plugin-novacontinuum	summary.projectTable.build	Construire
+gforge-plugin-novacontinuum	summary.projectTable.group	Groupe
+gforge-plugin-novacontinuum	summary.projectTable.lastBuildDateTime	Date de la derni&egrave;re construction
+gforge-plugin-novacontinuum	summary.buildAll	Tout contruire
+gforge-plugin-novacontinuum	summary.buildHistory	Historique des constructions
+gforge-plugin-novacontinuum	summary.buildNow	Construire maintenant
+
+# ----------------------------------------------------------------------
+# Page: Group Summary
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	groups.page.title	Continuum - Bilan du Groupe
+gforge-plugin-novacontinuum	groups.page.section.title	Groupes de projets
+gforge-plugin-novacontinuum	groups.table.name	Nom
+gforge-plugin-novacontinuum	groups.table.groupId	Id&nbsp;du&nbsp;groupe
+gforge-plugin-novacontinuum	groups.table.totalProjects	Total
+gforge-plugin-novacontinuum	groups.table.summary	Bilan
+gforge-plugin-novacontinuum	groups.page.list.empty	La liste des groupes de projets est vide.
+gforge-plugin-novacontinuum	groups.section.title	Groupe de projet :
+gforge-plugin-novacontinuum	groups.manage.label	G&eacute;rer le Groupe
+gforge-plugin-novacontinuum	groups.confirmation.message	Etes vous s&ucirc;r de vouloir supprimer le groupe de projets "{0}" ?
+
+# ----------------------------------------------------------------------
+# Page: Project Group
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	projectGroup.page.title	Continuum - Groupe de projets
+gforge-plugin-novacontinuum	projectGroup.information.title	Information sur le groupe de projets
+gforge-plugin-novacontinuum	projectGroup.name.label	Nom du groupe de projets
+gforge-plugin-novacontinuum	projectGroup.groupId.label	Id du groupe de projets
+gforge-plugin-novacontinuum	projectGroup.description.label	Description
+gforge-plugin-novacontinuum	projectGroup.projects.title	Membres du projet
+gforge-plugin-novacontinuum	projectGroup.tab.summary	Bilan du groupe de projets
+gforge-plugin-novacontinuum	projectGroup.tab.members	Membres
+gforge-plugin-novacontinuum	projectGroup.tab.buildDefinitions	D&eacute;finitions des constructions
+gforge-plugin-novacontinuum	projectGroup.tab.notifiers	Alertes
+gforge-plugin-novacontinuum	projectGroup.actions.title	Actions sur le groupe
+gforge-plugin-novacontinuum	projectGroup.release.error.emptyGroup	Ne peut pas faire la "release" d&#146;un groupe vide
+gforge-plugin-novacontinuum	projectGroup.release.error.severalParentProjects	Ne peut pas faire la "release" de deux projets parents ou plus qui sont dans le m&ecirc;me groupe de projets en m&ecirc;me temps.
+gforge-plugin-novacontinuum	projectGroup.release.error.projectNotInSuccess	Ne peut pas faire la "release" du groupe de projet : un ou plusieurs projets dans le groupe n&#146;ont pas pu &ecirc;tre construit avec succ&egrave;s.
+gforge-plugin-novacontinuum	projectGroup.deleteGroup	Supprimer groupe
+gforge-plugin-novacontinuum	projectGroup.buildGroup	Construire tous les projets
+gforge-plugin-novacontinuum	projectGroup.buildGroupNow	Construire le groupe maintenant
+gforge-plugin-novacontinuum	projectGroup.deleteProjects	Supprimer projet(s)
+gforge-plugin-novacontinuum	projectGroup.buildProjects	Construire projet(s)
+gforge-plugin-novacontinuum	projectGroup.cancelBuilds	Annuler construction(s)
+gforge-plugin-novacontinuum	projectGroup.buildsStatut.title	Aperçu du r&eacute;sultat de la derni&egrave;re construction du groupe de projets
+gforge-plugin-novacontinuum	projectGroup.buildsStatut.errors	Erreurs
+gforge-plugin-novacontinuum	projectGroup.buildsStatut.failures	Echec
+gforge-plugin-novacontinuum	projectGroup.buildsStatut.success	Succ&egrave;s
+gforge-plugin-novacontinuum	projectGroup.buildDefinition.label	D&eacute;finitions de la construction par d&eacute;fault
+gforge-plugin-novacontinuum	projectGroup.addProject.label	Ajouter un nouveau projet
+gforge-plugin-novacontinuum	projectGroup.releaseNow	Release du groupe
+
+# ----------------------------------------------------------------------
+# Page: Project Group - Members
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	projectGroup.members.section.title	Projects membres du group {0}
+gforge-plugin-novacontinuum	projectGroup.members.users.title	Utilisateurs
+gforge-plugin-novacontinuum	projectGroup.members.users.search.label	Recherche d&#146;utilisateur
+gforge-plugin-novacontinuum	projectGroup.members.users.search.button	Recherche
+gforge-plugin-novacontinuum	projectGroup.members.user.role.administrator	Administrateur
+gforge-plugin-novacontinuum	projectGroup.members.user.role.developer	D&eacute;veloppeur
+gforge-plugin-novacontinuum	projectGroup.members.user.role.user	Utilisateur
+
+# ----------------------------------------------------------------------
+# Page: Add Project Group
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	projectGroup.add.page.title	Continuum - Ajouter un groupe de projets
+gforge-plugin-novacontinuum	projectGroup.add.section.title	Ajouter un groupe de projets
+gforge-plugin-novacontinuum	projectGroup.error.name.required	Le nom du groupe de projets est obligatoire.
+gforge-plugin-novacontinuum	projectGroup.error.name.cannot.be.spaces	Le nom du groupe de projets ne peut pas contenir uniquement des espaces.
+gforge-plugin-novacontinuum	projectGroup.error.name.already.exists	Le nom du groupe de projets existe d&eacute;j&agrave;.
+gforge-plugin-novacontinuum	projectGroup.error.groupId.required	L&#146;Id du groupe de projets est obligatoire.
+gforge-plugin-novacontinuum	projectGroup.error.groupId.cannot.be.spaces	L&#146;Id du groupe de projets ne peut pas contenir uniquement des espaces.
+gforge-plugin-novacontinuum	projectGroup.error.groupId.already.exists	L&#146;Id du groupe de projets existe d&eacute;j&agrave;.
+
+# ----------------------------------------------------------------------
+# Page: Edit Project Group
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	projectGroup.edit.page.title	Continuum - Mise &agrave; jour du groupe de projets
+gforge-plugin-novacontinuum	projectGroup.edit.section.title	Mise &agrave; jour du groupe de projets
+gforge-plugin-novacontinuum	projectGroup.edit.section.projects.title	Projets
+gforge-plugin-novacontinuum	projectGroup.edit.project.name	Nom du projet
+gforge-plugin-novacontinuum	projectGroup.edit.move.to.group	D&eacute;placer vers un groupe
+gforge-plugin-novacontinuum	project.in.checkout.queue.error	Ne peut pas &eacute;diter ce groupe de projets. Des projets qui sont des membres de ce groupe de projets sont en cours de r&eacute;cup&eacute;ration du gestionnaire de sources.
+
+# ----------------------------------------------------------------------
+# Page: Configuration
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	configuration.page.title	Continuum - Configuration
+gforge-plugin-novacontinuum	configuration.section.title	Configuration g&eacute;n&eacute;rale
+gforge-plugin-novacontinuum	configuration.guest.label	Invit&eacute;s
+gforge-plugin-novacontinuum	configuration.guest.value	L&#146;utilisateur invit&eacute; est <strong style="color: green;">{0}</strong>
+gforge-plugin-novacontinuum	configuration.workingDirectory.label	R&eacute;pertoire de travail
+gforge-plugin-novacontinuum	configuration.buildOutputDirectory.label	R&eacute;pertoire des logs de construction
+gforge-plugin-novacontinuum	configuration.deploymentRepositoryDirectory.label	R&eacute;pertoire du repository de d&eacute;ploiement
+gforge-plugin-novacontinuum	configuration.baseUrl.label	URL de base
+gforge-plugin-novacontinuum	configuration.submit.edit	Editer
+gforge-plugin-novacontinuum	configuration.guest.message	Activ&eacute;/D&eacute;sactiv&eacute; l&#146;utilisateur invit&eacute;
+gforge-plugin-novacontinuum	configuration.workingDirectory.message	Entrer le r&eacute;pertoire de travail de l&#146;application web Continuum
+gforge-plugin-novacontinuum	configuration.buildOutputDirectory.message	Entrer le r&eacute;pertoire de sortie de l&#146;application web Continuum
+gforge-plugin-novacontinuum	configuration.deploymentRepositoryDirectory.message	Entrer le r&eacute;pertoire de d&eacute;ploiment de l&#146;application web Continuum
+gforge-plugin-novacontinuum	configuration.baseUrl.message	Entrer l&#146;URL de base de l&#146;application web Continuum
+gforge-plugin-novacontinuum	configuration.companyName.message	Entrer le nom de l&#146;entreprise
+gforge-plugin-novacontinuum	configuration.companyLogo.message	Entrer le logo de l&#146;entreprise
+gforge-plugin-novacontinuum	configuration.companyUrl.message	Entrer l&#146;URL de base du site officiel de la soci&eacute;t&eacute;
+
+# ----------------------------------------------------------------------
+# Page: Add Project
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	add.project.field.required.error	L&#146;URL du fichier POM ou l&#146;upload du fichier POM est obligatoire.
+gforge-plugin-novacontinuum	add.project.unknown.host.error	L&#146;h&ocirc;te sp&eacute;cifi&eacute; est inconnu ou inaccessible.
+gforge-plugin-novacontinuum	add.project.connect.error	Impossible de contacter le serveur distant
+gforge-plugin-novacontinuum	add.project.malformed.url.error	L&#146;URL fournie est malform&eacute;e.
+gforge-plugin-novacontinuum	add.project.xml.parse.error	Le contenu XML du fichier POM ne peut &ecirc;tre pars&eacute;.
+gforge-plugin-novacontinuum	add.project.extend.error	Impossible d&#146;utiliser un fichier POM avec un &eacute;l&eacute;ment "extend".
+gforge-plugin-novacontinuum	add.project.missing.pom.error	Le fichier POM n&#146;existe pas. Le fichier POM que vous avez sp&eacute;cifi&eacute; ou un de ses modules n&#146;existe pas.
+gforge-plugin-novacontinuum	add.project.missing.groupid.error	L&#146;&eacute;l&eacute;ment "groupId" est manquant dans le fichier POM.
+gforge-plugin-novacontinuum	add.project.missing.artifactid.error	L&#146;&eacute;l&eacute;ment "artifactId" est manquant dans le fichier POM.
+gforge-plugin-novacontinuum	add.project.missing.version.error	L&#146;&eacute;l&eacute;ment "version" est manquant dans le fichier POM.
+gforge-plugin-novacontinuum	add.project.missing.name.error	L&#146;&eacute;l&eacute;ment "name" est manquant dans le fichier POM.
+gforge-plugin-novacontinuum	add.project.missing.repository.error	L&#146;&eacute;l&eacute;ment "repository" est manquant dans le fichier POM.
+gforge-plugin-novacontinuum	add.project.missing.scm.error	L&#146;&eacute;l&eacute;ment "scm" est manquant dans le fichier POM, projet 
+gforge-plugin-novacontinuum	add.project.missing.scm.connection.error	Le sous-&eacute;l&eacute;ment "connection est manquant dans le fichier POM.
+gforge-plugin-novacontinuum	add.project.missing.notifier.type.error	Le sous-&eacute;l&eacute;ment "type" dans l&#146;&eacute;l&eacute;ment "notifier" est manquant dans le fichier POM.
+gforge-plugin-novacontinuum	add.project.missing.notifier.configuration.error	Le sous-&eacute;l&eacute;ment "configuration" dans l'&eacute;l&eacute;ment "notifier" est manquant dans le fichier POM.
+gforge-plugin-novacontinuum	add.project.metadata.transfer.error	Le transfert des meta-donnn&eacute;es a &eacute;chou&eacute;.
+gforge-plugin-novacontinuum	add.project.validation.protocol.not_allowed	La ressource sp&eacute;cifi&eacute; n&#146;est pas un fichier ou le protocol utilis&eacute; n&#146;est pas authoris&eacute;.
+gforge-plugin-novacontinuum	add.project.unauthorized.error	Vous n&#146;&ecirc;tes pas autoris&eacute; &agrave; acc&eacute;der &agrave; l&#146;URL demand&eacute;e. Merci de v&eacute;rifier que le nom d&#146;utilisateur et le mot de passe fournis sont corrects
+gforge-plugin-novacontinuum	add.project.artifact.not.found.error	Artefact manquant lors de la tentative de construction du pom. V&eacute;rifier que le pom parent est disponible ou ajouter-le en premier dans Continuum.
+gforge-plugin-novacontinuum	add.project.project.building.error	Erreur inconnue lors de la tentative de construction du pom.
+gforge-plugin-novacontinuum	add.project.unknown.error	La ressource sp&eacute;cifi&eacute;e ne peut &ecirc;tre contact&eacute;e. S&#146;il vous pla&icirc;t, r&eacute;essayer ult&eacute;rieurement ou contacter votre administrateur.
+gforge-plugin-novacontinuum	add.project.nogroup.error	Aucun groupe de projet sp&eacute;cifi&eacute;.
+
+# ----------------------------------------------------------------------
+# Page: AddMavenOneProject
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	add.m1.project.page.title	Continuum - Ajouter un Projet Maven 1
+gforge-plugin-novacontinuum	add.m1.project.section.title	Ajouter un Projet Maven 1.x
+gforge-plugin-novacontinuum	add.m1.project.m1PomUrl.label	Url du Pom M1
+gforge-plugin-novacontinuum	add.m1.project.m1PomUrl.username.label	Nom d&#146;utilisateur
+gforge-plugin-novacontinuum	add.m1.project.m1PomUrl.password.label	Mot de passe
+gforge-plugin-novacontinuum	add.m1.project.m1PomUrl.message	Entrez l&#146;URL du pom Maven 1. Fournissez le nom d&#146;utilisateur et le mot de passe si c&#146;est une ressource s&eacute;curis&eacute;e.
+gforge-plugin-novacontinuum	add.m1.project.m1PomUrl.error	Vous devez entrer une URL valide
+gforge-plugin-novacontinuum	add.m1.project.m1PomFile.label	Uploader un fichier POM
+gforge-plugin-novacontinuum	add.m1.project.m1PomFile.message	 Entrer le nom local du fichier pom(version Maven 1) &agrave; uploader
+gforge-plugin-novacontinuum	add.m1.project.m1PomFile.error	Vous devez entrer une URL valide
+gforge-plugin-novacontinuum	add.m1.project.projectGroup	Groupe du projet
+gforge-plugin-novacontinuum	add.m1.project.buildDefinitionTemplate	Mod&egrave;le de d&eacute;finition de la contruction
+gforge-plugin-novacontinuum	add.m1.project.defaultBuildDefinition	D&eacute;faut
+
+# ----------------------------------------------------------------------
+# Page: AddMavenTwoProject
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	add.m2.project.page.title	Continuum - Ajouter un Projet Maven 2
+gforge-plugin-novacontinuum	add.m2.project.section.title	Ajouter un Projet Maven 2.0+
+gforge-plugin-novacontinuum	add.m2.project.m2PomUrl.label	URL du POM
+gforge-plugin-novacontinuum	add.m2.project.m2PomUrl.username.label	Nom d&#146;utilisateur
+gforge-plugin-novacontinuum	add.m2.project.m2PomUrl.password.label	Mot de passe
+gforge-plugin-novacontinuum	add.m2.project.m2PomUrl.message	 Entrez l&#146;URL du pom Maven 2. Fournissez le nom d&#146;utilisateur et le mot de passe si c&#146;est une ressource s&eacute;curis&eacute;e.
+gforge-plugin-novacontinuum	add.m2.project.m2PomUrl.error	Vous devez entrer une URL valide
+gforge-plugin-novacontinuum	add.m2.project.m2PomFile.label	Uploader un fichier POM
+gforge-plugin-novacontinuum	add.m2.project.m2PomFile.message	 Entrer le nom local du fichier pom(version Maven 2) &agrave; uploader (fonctionne uniquement avec un projet sans modules).
+gforge-plugin-novacontinuum	add.m2.project.m2PomFile.error	Vous devez entrer une URL valide
+gforge-plugin-novacontinuum	add.m2.project.projectGroup	Groupe du projet
+# TODO: remove this part once uploading of an m2 project with modules is supported ( CONTINUUM-1098 )
+gforge-plugin-novacontinuum	add.m2.project.upload.modules.error	Ne peut pas uploader un projet Maven 2 avec modules.
+gforge-plugin-novacontinuum	add.m2.project.nonRecursiveProject	Pour les projets multi modules, charger uniquement la racine comme une construction r&eacute;cursive
+gforge-plugin-novacontinuum	add.m2.project.buildDefinitionTemplate	Mod&egrave;le de d&eacute;finition de la contruction
+gforge-plugin-novacontinuum	add.m2.project.defaultBuildDefinition	D&eacute;faut
+
+# ----------------------------------------------------------------------
+# Page: AddProject (ant or shell)
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	add.shell.project.page.title	Continuum - Ajouter un projet console
+gforge-plugin-novacontinuum	add.shell.project.section.title	Continuum - Ajouter un projet console
+gforge-plugin-novacontinuum	add.ant.project.page.title	Continuum - Ajouter un projet Ant
+gforge-plugin-novacontinuum	add.ant.project.section.title	Ajouter un projet Ant
+
+gforge-plugin-novacontinuum	projectName.label	Nom du projet
+gforge-plugin-novacontinuum	projectName.error	Vous devez fournir un nom de projet
+gforge-plugin-novacontinuum	projectName.already.exist.error	Le nom du projet existe d&eacute;j&agrave;
+gforge-plugin-novacontinuum	projectName.message	Entrer le nom du projet
+
+gforge-plugin-novacontinuum	projectScm.label	SCM
+gforge-plugin-novacontinuum	projectScm.error	Vous devez selectionner un gestionnaire de sources (SCM)
+gforge-plugin-novacontinuum	projectScm.message	Choisir un gestionnaire de sources (SCM)
+
+gforge-plugin-novacontinuum	projectScmUrl.label	URL du gestionnaire de sources
+gforge-plugin-novacontinuum	projectScmUrl.error	Vous devez fournir une URL de gestionnaire de sources (SCM)
+gforge-plugin-novacontinuum	projectScmUrl.message	Entrer <a href="http://maven.apache.org/scm/scm-url-format.html">URL de gestionnaire de sources au format de Maven</a>
+
+gforge-plugin-novacontinuum	projectScmUsername.label	Nom d&#146;utilisateur du gestionnaire de sources
+gforge-plugin-novacontinuum	projectScmUsername.message	Entrer le nom d&#146;utilisateur du gestionnaire de sources 
+
+gforge-plugin-novacontinuum	projectScmPassword.label	Mot de passe du gestionnaire de sources
+gforge-plugin-novacontinuum	projectScmPassword.message	Entrer le mot de passe du gestionnaire de sources 
+
+gforge-plugin-novacontinuum	projectScmTag.label	Branche/Tag du gestionnaire de sources
+gforge-plugin-novacontinuum	projectScmTag.message	Entrer la/le branche/tag du gestionnaire de sources (Pour subversion, le nom du tag doit &ecirc;tre dans le format du gestionnaire version et non pas dans ce champ)
+
+gforge-plugin-novacontinuum	projectVersion.label	Version
+gforge-plugin-novacontinuum	projectVersion.error	Vous devez fournir une version
+gforge-plugin-novacontinuum	projectVersion.message	Entrer la version du projet
+
+gforge-plugin-novacontinuum	projectScmUseCache.label	Utiliser le cache d&#146;authentification du gestionnaire de sources
+gforge-plugin-novacontinuum	add.project.buildDefinitionTemplate	Mod&egrave;le de d&eacute;finition de la contruction
+gforge-plugin-novacontinuum	add.project.defaultBuildDefinition	D&eacute;faut
+
+# ----------------------------------------------------------------------
+# Page: DeleteProject
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	deleteProject.page.title	Continuum - Supprimer un projet Continuum
+gforge-plugin-novacontinuum	deleteProject.section.title	Supprimer un projet Continuum
+gforge-plugin-novacontinuum	deleteProject.confirmation.message	Etes vous s&ucirc;r de vouloir supprimer le projet "{0}" ?
+
+# ----------------------------------------------------------------------
+# Page: ProjectView
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	projectView.page.title	Continuum - Projet Continuum
+gforge-plugin-novacontinuum	projectView.section.title	Projet Continuum
+gforge-plugin-novacontinuum	projectView.project.name	Nom du projet
+gforge-plugin-novacontinuum	projectView.project.version	Version
+gforge-plugin-novacontinuum	projectView.project.scmUrl	URL du gestionnaire de sources
+gforge-plugin-novacontinuum	projectView.project.scmTag	Branche/Tag du gestionnaire de sources
+gforge-plugin-novacontinuum	projectView.project.group	Groupe
+gforge-plugin-novacontinuum	projectView.project.lastBuildDateTime	Date de la derni&egrave;re construction
+gforge-plugin-novacontinuum	projectView.buildDefinitions	D&eacute;finitions des constructions
+gforge-plugin-novacontinuum	projectView.buildDefinition.goals	Goals
+gforge-plugin-novacontinuum	projectView.buildDefinition.arguments	Arguments
+gforge-plugin-novacontinuum	projectView.buildDefinition.buildFile	Fichier de construction
+gforge-plugin-novacontinuum	projectView.buildDefinition.profile	Environnement de Build
+gforge-plugin-novacontinuum	projectView.buildDefinition.schedule	Planification
+gforge-plugin-novacontinuum	projectView.buildDefinition.type	Type
+gforge-plugin-novacontinuum	projectView.buildDefinition.alwaysBuild	Toujours Construire
+gforge-plugin-novacontinuum	buildDefinition.profile.label	Environnement de Build
+gforge-plugin-novacontinuum	projectView.buildDefinition.from	De
+gforge-plugin-novacontinuum	projectView.buildDefinition.default	Par d&eacute;faut
+gforge-plugin-novacontinuum	projectView.buildDefinition.buildFresh	Extraction compl&egrave;te
+gforge-plugin-novacontinuum	projectView.buildDefinition.description	Description
+gforge-plugin-novacontinuum	projectView.notifiers	Alertes
+gforge-plugin-novacontinuum	projectView.notifier.type	Type
+gforge-plugin-novacontinuum	projectView.notifier.recipient	Destinataire
+gforge-plugin-novacontinuum	projectView.notifier.events	&Eacute;v&eacute;nements
+gforge-plugin-novacontinuum	projectView.notifier.from	De
+gforge-plugin-novacontinuum	projectView.dependencies	D&eacute;pendances
+gforge-plugin-novacontinuum	projectView.dependency.name	Nom
+gforge-plugin-novacontinuum	projectView.dependency.groupId	Id du groupe
+gforge-plugin-novacontinuum	projectView.dependency.artifactId	Id de l'artefact
+gforge-plugin-novacontinuum	projectView.dependency.version	Version
+gforge-plugin-novacontinuum	projectView.usedBy	Utilis&eacute; par
+gforge-plugin-novacontinuum	projectView.developers	D&eacute;veloppeurs
+gforge-plugin-novacontinuum	projectView.developer.name	Nom
+gforge-plugin-novacontinuum	projectView.developer.email	Email
+gforge-plugin-novacontinuum	projectView.username	Nom d&#146;utilisateur
+gforge-plugin-novacontinuum	projectView.role.view	Affichage
+gforge-plugin-novacontinuum	projectView.role.edit	Editer
+gforge-plugin-novacontinuum	projectView.role.delete	Supprimer
+gforge-plugin-novacontinuum	projectView.role.build	Construire
+gforge-plugin-novacontinuum	projectView.role.administer	Administrer
+
+# ----------------------------------------------------------------------
+# Page: ProjectEdit
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	projectEdit.page.title	Continuum - Mettre &agrave; jour un projet Continuum
+gforge-plugin-novacontinuum	projectEdit.section.title	Mettre &agrave; jour un projet Continuum
+gforge-plugin-novacontinuum	projectEdit.project.name.label	Nom du projet
+gforge-plugin-novacontinuum	projectEdit.project.version.label	Version
+gforge-plugin-novacontinuum	projectEdit.project.scmUrl.label	URL du gestionnaire de sources
+gforge-plugin-novacontinuum	projectEdit.project.scmUsername.label	Nom d&#146;utilisateur du gestionnaire de sources
+gforge-plugin-novacontinuum	projectEdit.project.scmPassword.label	Mot de passe du gestionnaire de sources
+gforge-plugin-novacontinuum	projectEdit.project.scmUseCache.label	Utiliser le cache d&#146;authentification du gestionnaire de sources
+gforge-plugin-novacontinuum	projectEdit.project.scmTag.label	Branche/Tag du gestionnaire de sources
+
+# ----------------------------------------------------------------------
+# Page: BuildDefinitionEdit
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	buildDefinition.page.title	Continuum - Ajouter/Editer une d&eacute;finition de construction
+gforge-plugin-novacontinuum	buildDefinition.section.title	Ajouter/Editer une d&eacute;finition de construction
+gforge-plugin-novacontinuum	buildDefinition.buildFile.ant.label	Scripts de g&eacute;n&eacute;ration Ant
+gforge-plugin-novacontinuum	buildDefinition.buildFile.shell.label	Excutable console
+gforge-plugin-novacontinuum	buildDefinition.buildFile.maven.label	Nom du fichier POM
+gforge-plugin-novacontinuum	buildDefinition.goals.ant.label	Cibles
+gforge-plugin-novacontinuum	buildDefinition.goals.maven.label	Goals
+gforge-plugin-novacontinuum	buildDefinition.arguments.label	Arguments
+gforge-plugin-novacontinuum	buildDefinition.buildFresh.label	Extraction compl&egrave;te (Ex&eacute;cuter toujours une extraction &agrave; la place d&#146;une mise &agrave; jour)
+gforge-plugin-novacontinuum	buildDefinition.type.label	Type
+gforge-plugin-novacontinuum	buildDefinition.defaultForProject.label	Est-ce par d&eacute;faut?
+gforge-plugin-novacontinuum	buildDefinition.schedule.label	Planification
+gforge-plugin-novacontinuum	buildDefinition.description.label	Description
+gforge-plugin-novacontinuum	buildDefinition.alwaysBuild.label	Toujours construire
+gforge-plugin-novacontinuum	buildDefinition.noname.save.error.message	Il y a eu une erreur lors de l&#146;enregistrement de la planification, aucun nom de programme fourni.
+gforge-plugin-novacontinuum	buildDefinition.duplicatename.save.error.message	Il y a eu une erreur lors de l&#146;enregistrement de la planification, un programme avec le m&ecirc;me nom existe d&eacute;j&agrave;.
+
+# ----------------------------------------------------------------------
+# Page: BuildSummary
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	buildDefinitionSummary.projectGroup.section.title	D&eacute;finition de construction du groupe de projets {0}
+
+
+# ----------------------------------------------------------------------
+# Page: DeleteBuildDefinition
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	deleteBuildDefinition.page.title	Continuum - Supprimer une d&eacute;finition de construction
+gforge-plugin-novacontinuum	deleteBuildDefinition.section.title	Supprimer une d&eacute;finition de construction
+gforge-plugin-novacontinuum	deleteBuildDefinition.confirmation.message	Etes-vous s&ucirc;r de vouloir supprimer la d&eacute;finition de contruction avec la description "{1}", de goals "{2}" et d&#146;id "{0}" ?
+
+# ----------------------------------------------------------------------
+# Page: DeleteNotifier
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	deleteNotifier.page.title	Continuum - Supprimer une alerte
+gforge-plugin-novacontinuum	deleteNotifier.section.title	Supprimer une alerte
+gforge-plugin-novacontinuum	deleteNotifier.confirmation.message	Etes vous s&ucirc;r de vouloir supprimer l'alerte {0} avec le destinataire "{1}"?
+
+# ----------------------------------------------------------------------
+# Page: Notifier
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	notifier.page.add.title	Continuum - Ajouter une alerte
+gforge-plugin-novacontinuum	notifier.section.add.title	Ajouter une alerte
+gforge-plugin-novacontinuum	notifier.page.title	Continuum - Ajouter/Editer l'alerte {0}
+gforge-plugin-novacontinuum	notifier.section.title	Ajouter/Editer l'alerte {0}
+gforge-plugin-novacontinuum	notifier.type.label	Type
+gforge-plugin-novacontinuum	notifier.mail.recipient.address.label	Adresse email du destinataire
+gforge-plugin-novacontinuum	notifier.mail.recipient.committers.label	Envoyer un email aux derniers contributeurs
+gforge-plugin-novacontinuum	notifier.irc.host.label	H&ocirc;te IRC
+gforge-plugin-novacontinuum	notifier.irc.port.label	Port IRC
+gforge-plugin-novacontinuum	notifier.irc.channel.label	Canal IRC
+gforge-plugin-novacontinuum	notifier.irc.nick.label	Pseudonyme (la valeur par d&eacute;faut est 'continuum')
+gforge-plugin-novacontinuum	notifier.irc.alternateNick.label	Pseudonyme alternatif (la valeur par d&eacute;faut est 'continuum_')
+gforge-plugin-novacontinuum	notifier.irc.username.label	Nom d&#146;utilisateur (la valeur par d&eacute;faut est le pseudonyme)
+gforge-plugin-novacontinuum	notifier.irc.fullName.label	Nom complet (la valeur par d&eacute;faut est le pseudonyme)
+gforge-plugin-novacontinuum	notifier.irc.password.label	Mot de passe
+gforge-plugin-novacontinuum	notifier.irc.isSSL.label	SSL
+gforge-plugin-novacontinuum	notifier.jabber.host.label	H&ocirc;te Jabber
+gforge-plugin-novacontinuum	notifier.jabber.port.label	Port Jabber
+gforge-plugin-novacontinuum	notifier.jabber.login.label	Nom d&#146;utilisateur Jabber
+gforge-plugin-novacontinuum	notifier.jabber.password.label	Mot de passe Jabber
+gforge-plugin-novacontinuum	notifier.jabber.domainName.label	Nom de domaine Jabber
+gforge-plugin-novacontinuum	notifier.jabber.address.label	Addresse de destination Jabber
+gforge-plugin-novacontinuum	notifier.jabber.isSslConnection.label	Est-ce une connection SSL?
+gforge-plugin-novacontinuum	notifier.jabber.isGroup.label	Est-ce un groupe Jabber?
+gforge-plugin-novacontinuum	notifier.msn.login.label	Nom d&#146;utilisateur MSN
+gforge-plugin-novacontinuum	notifier.msn.password.label	Mot de passe MSN
+gforge-plugin-novacontinuum	notifier.msn.address.label	Adresse MSN de destination
+gforge-plugin-novacontinuum	notifier.wagon.url.label	Url du site du projet
+gforge-plugin-novacontinuum	notifier.wagon.id.label	Id du serveur (d&eacute;finis dans votre fichier settings.xml pour authentification)
+gforge-plugin-novacontinuum	notifier.event.sendOnSuccess	Envoyer en cas de succ&egrave;s
+gforge-plugin-novacontinuum	notifier.event.sendOnFailure	Envoyer en cas d&#146;&eacute;chec
+gforge-plugin-novacontinuum	notifier.event.sendOnError	Envoyer en cas d&#146;erreur 
+gforge-plugin-novacontinuum	notifier.event.sendOnWarning	Envoyer en cas d&#146;avertissement 
+
+# ----------------------------------------------------------------------
+# Page: BuildResults
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	buildResults.page.title	Continuum - r&eacute;sultats de constructions
+gforge-plugin-novacontinuum	buildResults.section.title	R&eacute;sultats de constructions pour {0}
+gforge-plugin-novacontinuum	buildResults.buildNumber	Construction #
+gforge-plugin-novacontinuum	buildResults.startTime	Date de d&eacute;but
+gforge-plugin-novacontinuum	buildResults.endTime	Date de fin
+gforge-plugin-novacontinuum	buildResults.duration	Dur&eacute;e
+gforge-plugin-novacontinuum	buildResults.startedSince	D&eacute;marr&eacute; depuis
+gforge-plugin-novacontinuum	buildResults.state	&Eacute;tat
+gforge-plugin-novacontinuum	buildResults.buildDefinition.description	Description de la d&eacute;finition de construction
+
+# ----------------------------------------------------------------------
+# Page: BuildResults
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	buildResult.page.title	Continuum - R&eacute;sultat de construction
+gforge-plugin-novacontinuum	buildResult.section.title	R&eacute;sultat de la construction pour {0}
+gforge-plugin-novacontinuum	buildResult.startTime	Date de d&eacute;but
+gforge-plugin-novacontinuum	buildResult.endTime	Date de fin
+gforge-plugin-novacontinuum	buildResult.duration	Dur&eacute;e
+gforge-plugin-novacontinuum	buildResult.startedSince	D&eacute;marr&eacute; depuis
+gforge-plugin-novacontinuum	buildResult.trigger	D&eacute;clencheur de la construction
+gforge-plugin-novacontinuum	buildResult.state	&Eacute;tat
+gforge-plugin-novacontinuum	buildResult.buildNumber	Construction #
+gforge-plugin-novacontinuum	buildResult.buildError	Erreur de construction
+gforge-plugin-novacontinuum	buildResult.buildOutput	Sortie
+gforge-plugin-novacontinuum	buildResult.noOutput	Aucune Sortie.
+gforge-plugin-novacontinuum	buildResult.changes	Modifications
+gforge-plugin-novacontinuum	buildResult.noChanges	Aucune modification
+gforge-plugin-novacontinuum	buildResult.changes.author	Auteur
+gforge-plugin-novacontinuum	buildResult.changes.date	Date
+gforge-plugin-novacontinuum	buildResult.changes.comment	Commentaire
+gforge-plugin-novacontinuum	buildResult.changes.files	Fichiers
+gforge-plugin-novacontinuum	buildResult.scmResult.changes	Modifications du gestionnaire de sources
+gforge-plugin-novacontinuum	buildResult.scmResult.noChanges	Aucune modification du gestionnaire de sources
+gforge-plugin-novacontinuum	buildResult.scmResult.changes.author	Auteur
+gforge-plugin-novacontinuum	buildResult.scmResult.changes.date	Date
+gforge-plugin-novacontinuum	buildResult.scmResult.changes.comment	Commentaire
+gforge-plugin-novacontinuum	buildResult.scmResult.changes.files	Fichiers
+gforge-plugin-novacontinuum	buildResult.dependencies.changes	Modifications des d&eacute;pendances
+gforge-plugin-novacontinuum	buildResult.dependencies.noChanges	Aucune modification dans les d&eacute;pendances
+gforge-plugin-novacontinuum	buildResult.dependencies.groupId	Id du groupe
+gforge-plugin-novacontinuum	buildResult.dependencies.artifactId	Id de l&#146;artefact
+gforge-plugin-novacontinuum	buildResult.dependencies.version	Version
+gforge-plugin-novacontinuum	buildResult.changesSinceLastSuccess	Autres modifications depuis le derni&egrave;r succ&egrave;s
+gforge-plugin-novacontinuum	buildResult.generatedReports.title	Rapports g&eacute;n&eacute;r&eacute;s
+gforge-plugin-novacontinuum	buildResult.generatedReports.surefire	Rapport Surefire
+gforge-plugin-novacontinuum	buildResult.buildOutput.text	T&eacute;l&eacute;charger au format texte
+gforge-plugin-novacontinuum	buildResult.buildDefinition	D&eacute;finition de construction utilis&eacute;e
+gforge-plugin-novacontinuum	buildResult.buildDefinition.ant.label	Scripts de g&eacute;n&eacute;ration Ant
+gforge-plugin-novacontinuum	buildResult.buildDefinition.shell.label	Excutable console
+gforge-plugin-novacontinuum	buildResult.buildDefinition.maven.label	Nom du fichier POM
+gforge-plugin-novacontinuum	buildResult.buildDefinition.goals	Goals
+gforge-plugin-novacontinuum	buildResult.buildDefinition.arguments	Arguments
+gforge-plugin-novacontinuum	buildResult.buildDefinition.buildFresh	Extraction compl&egrave;te
+gforge-plugin-novacontinuum	buildResult.buildDefinition.alwaysBuild	Toujours construire
+gforge-plugin-novacontinuum	buildResult.buildDefinition.defaultForProject	Est-ce par d&eacute;faut ?
+gforge-plugin-novacontinuum	buildResult.buildDefinition.schedule	Planification
+gforge-plugin-novacontinuum	buildResult.buildDefinition.profileName	Environnement de Build
+gforge-plugin-novacontinuum	buildResult.buildDefinition.description	Description
+
+# From ContinuumProjectState
+gforge-plugin-novacontinuum	buildResult.trigger.0	Planifi&eacute;e
+gforge-plugin-novacontinuum	buildResult.trigger.1	Forc&eacute;e
+gforge-plugin-novacontinuum	buildResult.state.1	Nouveau
+gforge-plugin-novacontinuum	buildResult.state.2	OK
+gforge-plugin-novacontinuum	buildResult.state.3	Echec
+gforge-plugin-novacontinuum	buildResult.state.4	Erreur
+gforge-plugin-novacontinuum	buildResult.state.6	Construction en cours
+gforge-plugin-novacontinuum	buildResult.state.7	Extraction en cours
+gforge-plugin-novacontinuum	buildResult.state.8	Mise &agrave; jour en cours
+gforge-plugin-novacontinuum	buildResult.state.9	Avertissement
+gforge-plugin-novacontinuum	buildResult.state.10	Extraction termin&eacute;e
+
+# ----------------------------------------------------------------------
+# Page: WorkingCopy
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	workingCopy.page.title	Continuum - Copie de travail
+gforge-plugin-novacontinuum	workingCopy.section.title	Copie de travail de {0}
+gforge-plugin-novacontinuum	workingCopy.currentFile.text	T&eacute;l&eacute;charger au format texte
+
+# ----------------------------------------------------------------------
+# Page: Schedules
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	schedules.page.title	Continuum - Planifications
+gforge-plugin-novacontinuum	schedules.section.title	Planifications
+gforge-plugin-novacontinuum	schedules.table.name	Nom
+gforge-plugin-novacontinuum	schedules.table.description	Description
+gforge-plugin-novacontinuum	schedules.table.delay	P&eacute;riode d'attente
+gforge-plugin-novacontinuum	schedules.table.cronExpression	Expression cron
+gforge-plugin-novacontinuum	schedules.table.active	Activer
+gforge-plugin-novacontinuum	schedules.table.maxJobExecutionTime	Temp d'ex&eacute;cution max.
+gforge-plugin-novacontinuum	schedules.confirmation.message	Etes vous s&ucirc;r de vouloir supprimer la planification "{0}" ?
+
+# ----------------------------------------------------------------------
+# Page: Add/EditSchedule
+# ----------------------------------------------------------------------
+
+gforge-plugin-novacontinuum	addSchedule.page.title	Continuum - Ajouter une planification
+gforge-plugin-novacontinuum	addSchedule.section.title	Ajouter une planification
+gforge-plugin-novacontinuum	editSchedule.page.title	Continuum - Editer une planification
+gforge-plugin-novacontinuum	editSchedule.section.title	Editer une planification
+gforge-plugin-novacontinuum	schedule.name.label	Nom
+gforge-plugin-novacontinuum	schedule.name.message	Entrer le nom de la planification
+gforge-plugin-novacontinuum	schedule.description.label	Description
+gforge-plugin-novacontinuum	schedule.description.message	Entrer une description pour la planification
+gforge-plugin-novacontinuum	schedule.cronExpression.label	Expression Cron
+gforge-plugin-novacontinuum	schedule.cronExpression.message	Entrer l&#146;expression Cron Le format est d&eacute;crit l&agrave; : <a href="http://www.opensymphony.com/quartz/api/org/quartz/CronTrigger.html" target="_blank">Syntaxe<a>
+gforge-plugin-novacontinuum	schedule.maxJobExecutionTime.label	Temp d&#146;ex&eacute;cution du travail maximum
+gforge-plugin-novacontinuum	schedule.maxJobExecutionTime.message	Entrer le nombre maximal de secondes que le travail peut prendre pour s&#146;executer dans cette planification avant d&#146;&ecirc;tre tu&eacute;.
+gforge-plugin-novacontinuum	schedule.quietPeriod.label	P&eacute;riode d&#146;attente (secondes)
+gforge-plugin-novacontinuum	schedule.quietPeriod.message	Enter une p&eacute;riode d&#146;attente pour cette p&eacute;riode
+gforge-plugin-novacontinuum	schedule.enabled.label	Activ&eacute;
+gforge-plugin-novacontinuum	schedule.enabled.message	Activer/D&eacute;sactiver la planification
+gforge-plugin-novacontinuum	schedule.second.label	Seconde
+gforge-plugin-novacontinuum	schedule.minute.label	Minute
+gforge-plugin-novacontinuum	schedule.hour.label	Heure
+gforge-plugin-novacontinuum	schedule.dayOfMonth.label	Jour du mois
+gforge-plugin-novacontinuum	schedule.month.label	Mois
+gforge-plugin-novacontinuum	schedule.dayOfWeek.label	Jour de la semaine
+gforge-plugin-novacontinuum	schedule.year.label	Ann&eacute;e [optionnelle]
+gforge-plugin-novacontinuum	schedule.remove.error	La planification ne peut &ecirc;tre supprim&eacute;e, c&#146;est probablement parce qu&#146;elle est utilis&eacute;e par une d&eacute;finition de construction.
+
+# ----------------------------------------------------------------------
+# Page: SurefireReport
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	surefireReport.page.title	Continuum - Rapport Surefire
+gforge-plugin-novacontinuum	surefireReport.section.title	Rapport Surefire pour {0} la construction num&eacute;ro {1}
+gforge-plugin-novacontinuum	surefireReport.summary	Bilan
+gforge-plugin-novacontinuum	surefireReport.tests	Tests
+gforge-plugin-novacontinuum	surefireReport.errors	Erreurs
+gforge-plugin-novacontinuum	surefireReport.failures	&Eacute;checs
+gforge-plugin-novacontinuum	surefireReport.successRate	Taux de r&eacute;ussite
+gforge-plugin-novacontinuum	surefireReport.time	Temps
+gforge-plugin-novacontinuum	surefireReport.packageList	Liste de paquets
+gforge-plugin-novacontinuum	surefireReport.testCases	Cas de test
+gforge-plugin-novacontinuum	surefireReport.package	Nom du paquet
+gforge-plugin-novacontinuum	surefireReport.class	Classe
+gforge-plugin-novacontinuum	surefireReport.testCase	Cas de test
+gforge-plugin-novacontinuum	surefireReport.failureDetails	D&eacute;tails de l&#146;echec
+
+# ----------------------------------------------------------------------
+# Page: Continuum Release Support
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	releaseProject.page.title	Continuum - Faire une "release" du Projet
+gforge-plugin-novacontinuum	releaseProject.section.title	Choisir le "Goal" de "release" pour {0}
+gforge-plugin-novacontinuum	releaseProject.prepareReleaseOption	Pr&eacute;parer le projet pour la "release"
+gforge-plugin-novacontinuum	releaseProject.performReleaseOption	Effectuer la "release" du projet
+gforge-plugin-novacontinuum	releaseProject.provideReleaseParameters	Fournir les param&ecirc;tres de la "release"
+gforge-plugin-novacontinuum	releasePrepare.section.title	Pr&eacute;parer le projet pour la "release"
+gforge-plugin-novacontinuum	releasePrepare.parameters	Param&ecirc;tres de la pr&eacute;paration de la "release"
+gforge-plugin-novacontinuum	releasePrepare.releaseVersion	Version de la "release"*
+gforge-plugin-novacontinuum	releasePrepare.nextDevelopmentVersion	Prochaine version de d&eacute;veloppement*
+gforge-plugin-novacontinuum	releasePerform.section.title	Effectuer la "release" du projet
+gforge-plugin-novacontinuum	releasePerform.parameters	Param&ecirc;tres de la r&eacute;alisation de la "release"
+gforge-plugin-novacontinuum	releaseInProgress.section.title	Ex&eacute;cution du "Release Goal"
+gforge-plugin-novacontinuum	releaseInProgress.status	Statut
+gforge-plugin-novacontinuum	releaseInProgress.phase	Phase de "release"
+gforge-plugin-novacontinuum	releaseInProgress.viewOutput	Affichage de la sortie
+gforge-plugin-novacontinuum	releaseViewResult.section.title	Bilan de la "release" du Project
+gforge-plugin-novacontinuum	releaseViewResult.summary	D&eacute;tails de la "release" du Projet
+gforge-plugin-novacontinuum	releaseViewResult.startTime	Date de d&eacute;but
+gforge-plugin-novacontinuum	releaseViewResult.endTime	Date de fin
+gforge-plugin-novacontinuum	releaseViewResult.state	&Eacute;tat
+gforge-plugin-novacontinuum	releaseViewResult.success	SUCCES
+gforge-plugin-novacontinuum	releaseViewResult.error	ERREUR
+gforge-plugin-novacontinuum	releaseViewResult.output	Sortie de l&#146;ex&eacute;cution de la "release"
+gforge-plugin-novacontinuum	releaseViewResult.noOutput	Aucune Sortie
+
+# ----------------------------------------------------------------------
+# Page: User
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	user.username.label	Nom d&#146;utilisateur
+gforge-plugin-novacontinuum	user.username.message	Entrer le nom d&#146;utilisateur
+gforge-plugin-novacontinuum	user.fullName.label	Nom complet
+gforge-plugin-novacontinuum	user.fullName.message	Entrer le nom complet de l&#146;utilisateur
+gforge-plugin-novacontinuum	user.email.label	Email
+gforge-plugin-novacontinuum	user.email.message	Entrer l&#146;adresse mail de l&#146;utilisateur
+gforge-plugin-novacontinuum	user.password.label	Mot de passe
+gforge-plugin-novacontinuum	user.passwordTwo.label	Confirmer le mot de passe
+gforge-plugin-novacontinuum	user.passwordTwo.message	Les mots de passe doivent correspondre
+gforge-plugin-novacontinuum	user.userGroup.label	Groupe d&#146;utilisateurs
+gforge-plugin-novacontinuum	user.userGroup.message	S&eacute;lectionner un groupe d&#146;utilisateurs
+
+# ----------------------------------------------------------------------
+# Page: User Group
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	userGroup.name.label	Nom
+gforge-plugin-novacontinuum	userGroup.name.message	Entrer le nom du groupe d&#146;utilisateurs
+gforge-plugin-novacontinuum	userGroup.description.label	Description
+gforge-plugin-novacontinuum	userGroup.description.message	Entrer la description
+
+# ----------------------------------------------------------------------
+# Page: Profiles List
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	profilesList.page.title	Environnements de Build
+gforge-plugin-novacontinuum	profilesList.section.title	Environnements de Build
+
+# ----------------------------------------------------------------------
+# Page: Profile Edit
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	profile.page.title	Continuum - Environnement de Build
+gforge-plugin-novacontinuum	profile.section.title	Environnement de Build
+gforge-plugin-novacontinuum	profile.name.label	Nom de l'environnement de Build
+gforge-plugin-novacontinuum	profile.jdk.name.label	Nom du JDK
+gforge-plugin-novacontinuum	profile.jdk.name.message	Le nom du JDK
+gforge-plugin-novacontinuum	profile.jdk.path.label	Chemin du JDK
+gforge-plugin-novacontinuum	profile.jdk.path.message	Le Chemin du JDK (Valeur de JAVA_HOME)
+gforge-plugin-novacontinuum	profile.no.installations	Aucune installation disponible
+gforge-plugin-novacontinuum	profile.name.already.exists	Un environnement de Build avec le meme nom existe deja.
+gforge-plugin-novacontinuum	profile.name.required	Vous devez sp&eacute;cifier un nom.
+
+# ----------------------------------------------------------------------
+# Page: Installations List
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	installationsList.page.title	Installations
+gforge-plugin-novacontinuum	installationsList.section.title	Installations
+
+# ----------------------------------------------------------------------
+# Page: Installation Edit
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	installation.page.title	Continuum - Installation
+gforge-plugin-novacontinuum	installation.section.title	Continuum - Installation
+gforge-plugin-novacontinuum	installation.name.label	Nom
+gforge-plugin-novacontinuum	installation.type.label	Type
+gforge-plugin-novacontinuum	installation.value.label	Valeur/Chemin
+gforge-plugin-novacontinuum	installation.varName.label	Nom de variable d&#146;environnement
+gforge-plugin-novacontinuum	installation.jdk.type.label	JDK
+gforge-plugin-novacontinuum	installation.maven2.type.label	Maven 2
+gforge-plugin-novacontinuum	installation.maven1.type.label	Maven 1
+gforge-plugin-novacontinuum	installation.envvar.type.label	ariable d&#146;environnement
+gforge-plugin-novacontinuum	installation.ant.type.label	ANT
+gforge-plugin-novacontinuum	installation.automaticProfile.label	Cr&eacute;er un Environnement de Build avec le nom de l&#146;installation
+gforge-plugin-novacontinuum	installation.name.duplicate	Une Installation avec le meme nom existe deja.
+
+# ----------------------------------------------------------------------
+# Page: Installations Type Choice
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	installationTypeChoice.page.title	 Continuum - Choix du type de l&#146;installation
+gforge-plugin-novacontinuum	installationTypeChoice.section.title	Choix du type de l&#146;installation
+gforge-plugin-novacontinuum	installationTypeChoice.action.label	Type de l&#146;installation
+gforge-plugin-novacontinuum	installationTypeChoice.tool.label	Outil
+gforge-plugin-novacontinuum	installationTypeChoice.envar.label	Variable d&#146;environnement 
+
+# ----------------------------------------------------------------------
+# Page: Build Definitions Templates Summary
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	buildDefinition.templates.page.title	Continuum - Mod&egrave;les de d&eacute;finitions de construction
+gforge-plugin-novacontinuum	buildDefinition.templates.continuum.section.title	D&eacute;finition de construction par d&eacute;faut de Continuum
+gforge-plugin-novacontinuum	buildDefinition.templates.goals	Goals
+gforge-plugin-novacontinuum	buildDefinition.templates.arguments	Arguments
+gforge-plugin-novacontinuum	buildDefinition.templates.buildFile	Fichier de construction
+gforge-plugin-novacontinuum	buildDefinition.templates.schedule	Planification
+gforge-plugin-novacontinuum	buildDefinition.templates.profile	Environnement de Build
+gforge-plugin-novacontinuum	buildDefinition.templates.buildFresh	Extraction compl&egrave;te
+gforge-plugin-novacontinuum	buildDefinition.templates.alwaysBuild	Toujours construire
+gforge-plugin-novacontinuum	buildDefinition.templates.description	Description
+gforge-plugin-novacontinuum	buildDefinition.templates.type	Type
+gforge-plugin-novacontinuum	buildDefinition.templates.section.title	Mod&egrave;les disponibles
+gforge-plugin-novacontinuum	buildDefinition.templates.buildDefinitions.section.title	D&eacute;finitions des constructions disponibles
+
+# ----------------------------------------------------------------------
+# Page: Edit Build Definition Template
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	buildDefinition.template.page.title	Continuum - Mod&egrave;le de d&eacute;finitions de construction
+gforge-plugin-novacontinuum	buildDefinition.template.section.title	Mod&egrave;le de d&eacute;finition de lacontruction
+gforge-plugin-novacontinuum	buildDefinition.template.name	Nom
+gforge-plugin-novacontinuum	buildDefinition.template.buildDefinition.goals	Goals
+gforge-plugin-novacontinuum	buildDefinition.template.buildDefinition.arguments	Arguments
+gforge-plugin-novacontinuum	buildDefinition.template.buildDefinition.buildFile	Fichier de construction
+gforge-plugin-novacontinuum	buildDefinition.template.buildDefinition.schedule	Planification
+gforge-plugin-novacontinuum	buildDefinition.template.buildDefinition.profile	Environnement de Build
+gforge-plugin-novacontinuum	buildDefinition.template.buildDefinition.buildFresh	Extraction compl&egrave;te ?
+gforge-plugin-novacontinuum	buildDefinition.template.buildDefinition.default	D&eacute;faut
+gforge-plugin-novacontinuum	buildDefinition.template.buildDefinition.description	Description
+gforge-plugin-novacontinuum	buildDefinition.template.buildDefinition.type	Type
+gforge-plugin-novacontinuum	buildDefinitionTemplate.name	Nom
+gforge-plugin-novacontinuum	buildDefinitionTemplate.available.builddefinitions	--- D&eacute;finitions des constructions disponibles ---
+gforge-plugin-novacontinuum	buildDefinitionTemplate.available.builddefinitions.used	--- D&eacute;finitions de construction utilis&eacute;es ---
+gforge-plugin-novacontinuum	buildDefinitionTemplate.builddefinitions.define	Configurer les d&eacute;finitions de constructions utilis&eacute;es
+
+# ----------------------------------------------------------------------
+# Page: Build Queue
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	buildQueue.page.title	Continuum - Liste de constructions
+gforge-plugin-novacontinuum	buildQueue.section.title	Continuum - Liste de constructions
+gforge-plugin-novacontinuum	buildQueue.empty	La Liste de constructions est vide
+gforge-plugin-novacontinuum	buildQueue.currentTask.section.title	Construction en cours
+gforge-plugin-novacontinuum	buildQueue.currentTask.projectName	Nom du Projet
+gforge-plugin-novacontinuum	buildQueue.currentTask.buildDefinition	D&eacute;finition de la construction
+gforge-plugin-novacontinuum	buildQueue.no.currentTaks	Aucune construction en cours
+gforge-plugin-novacontinuum	buildQueue.removeEntries	Annuler les entr&eacute;es
+gforge-plugin-novacontinuum	checkoutQueue.currentTask.section.title	Extraction en cours
+gforge-plugin-novacontinuum	checkoutQueue.currentTask.projectName	Nom du projet
+gforge-plugin-novacontinuum	checkoutQueue.no.currentTaks	Aucune extraction en cours
+gforge-plugin-novacontinuum	checkoutQueue.section.title	Extractions en attente
+gforge-plugin-novacontinuum	checkoutQueue.empty	La liste des extractions en attente est vide
+gforge-plugin-novacontinuum	checkoutQueue.removeEntries	Annuler les entr&eacute;es
+
+# ----------------------------------------------------------------------
+# Page: Confirm Delete BuildResult(s)
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	buildResult.delete.confirmation.page.title	Continuum - Supprimer les r&eacute;sultats de contructions
+gforge-plugin-novacontinuum	buildResult.delete.confirmation.section.title	Supprimer les r&eacute;sultats de contructions
+gforge-plugin-novacontinuum	buildResult.delete.confirmation.message	Voulez-vous vraiment supprimer les r&eacute;sultats de construction {0}&nbsp;? 
+gforge-plugin-novacontinuum	buildResult.cannot.delete	Impossible de supprimer un r&eacute;sultat de construction qui est actuellement en construction.
+
+# ----------------------------------------------------------------------
+# Legend
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	legend.title	L&eacute;gende
+gforge-plugin-novacontinuum	legend.buildNow	Construire maintenant
+gforge-plugin-novacontinuum	legend.buildHistory	Historique
+gforge-plugin-novacontinuum	legend.buildInProgress	Construction en cours
+gforge-plugin-novacontinuum	legend.workingCopy	Copie de travail
+gforge-plugin-novacontinuum	legend.checkingOutBuild	Extraction en cours
+gforge-plugin-novacontinuum	legend.queuedBuild	Construction en attente
+gforge-plugin-novacontinuum	legend.cancelBuild	Annuler construction
+gforge-plugin-novacontinuum	legend.delete	Supprimer
+gforge-plugin-novacontinuum	legend.edit	Editer
+gforge-plugin-novacontinuum	legend.release	Faire une &#146;release&#146;
+gforge-plugin-novacontinuum	legend.buildInSuccess	Construction r&eacute;ussie
+gforge-plugin-novacontinuum	legend.buildInFailure	Construction en &eacute;chec
+gforge-plugin-novacontinuum	legend.buildInError	Construction en erreur
+
+
+# ----------------------------------------------------------------------
+# Page: Wait
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	wait.addprocessing.processing	L'ajout du projet est en cours ...
+
+# ----------------------------------------------------------------------
+# Page: DeleteProjects
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	deleteProjects.page.title	Continuum - Supprimer des projets Continuum
+gforge-plugin-novacontinuum	deleteProjects.section.title	Supprimer des projets Continuum
+gforge-plugin-novacontinuum	deleteProjects.confirmation.message	Etes vous s&ucirc;r de vouloir supprimer les projets "{0}" ?
+
+# ----------------------------------------------------------------------
+# Page: Confirm Delete Build Env
+# ----------------------------------------------------------------------
+gforge-plugin-novacontinuum	deleteBuildEnv.page.title	Continuum - Supprimer des Build Environment
+gforge-plugin-novacontinuum	deleteBuildEnv.section.title	Supprimer un Build Environment
+gforge-plugin-novacontinuum	deleteBuildEnv.confirmation.message	Etes vous s&ucirc;r de vouloir supprimer le Build Environment "{0}" ?
