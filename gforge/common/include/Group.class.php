@@ -1526,10 +1526,10 @@ class Group extends Error {
 		/*
 			get user id for this user's unix_name
 		*/
-		if (eregi('[^0-9]',$user_unix_name)) {
-			$res_newuser = db_query("SELECT * FROM users WHERE user_name='". strtolower($user_unix_name) ."'");
-		} else {
+		if (preg_match('/^\d/',$user_unix_name)) {
 			$res_newuser = db_query("SELECT * FROM users WHERE user_id='". intval($user_unix_name) ."'");
+		} else {
+			$res_newuser = db_query("SELECT * FROM users WHERE user_name='". strtolower($user_unix_name) ."'");
 		}
 		if (db_numrows($res_newuser) > 0) {
 			//
