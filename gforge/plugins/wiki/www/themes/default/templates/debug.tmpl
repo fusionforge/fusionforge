@@ -16,10 +16,10 @@
 </div>
 </td><td>
 <span class="debug"><?=fmt("Page Execution took %s seconds", $RUNTIMER->getStats())?>
-<? $mem = getMemoryUsage(); 
+<?php $mem = getMemoryUsage();
 if ($mem) { ?>
 <?= fmt(", Memory: %s", $mem) ?>
-<? } ?>
+<?php } ?>
 </span>
 </td></tr></table>
 <?php // This keeps the valid XHTML! icons from "hanging off the bottom of the screen" ?>

@@ -106,7 +106,7 @@ and create a PHP file like this:
 <title>Make a directory</title>
 </head>
 
-<?
+<?php
 
    /* 
       I created this to set up server-writable files

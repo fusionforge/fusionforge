@@ -11,7 +11,7 @@ pm_header(array('title'=>_('Upload data into the task manager.'),'group_project_
 ?>
 <?php echo _('This page lets you choose a file, in .csv format, and upload it so it can be inserted in the current subproject.'); ?>
 <p>
-<form enctype="multipart/form-data" method="post" action="<?php echo getStringFromServer('PHP_SELF')?>?group_project_id=<? echo $group_project_id ?>&amp;group_id=<? echo $group_id ?>&amp;func=postuploadcsv">
+<form enctype="multipart/form-data" method="post" action="<?php echo getStringFromServer('PHP_SELF')?>?group_project_id=<?php echo $group_project_id ?>&amp;group_id=<?php echo $group_id ?>&amp;func=postuploadcsv">
 <?php echo _('Choose a file in the proper .csv format for uploading.'); ?><br />
 <input type="file" name="userfile"  size="30" />
 <input type="submit" name="submit" value="submit">

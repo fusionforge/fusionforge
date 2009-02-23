@@ -12,7 +12,7 @@ backgroundcolor[7] = '#8888aa';
 function changebg(color) { document.bgColor = backgroundcolor[color]; }
 //--></script>
 </head><body bgcolor="#8888aa">
-<?
+<?php
 $dir = opendir(".");
 while($fileName = readdir($dir)) 
 if (!(strcmp(substr($fileName, -4), ".png")))

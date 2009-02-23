@@ -1,4 +1,4 @@
-<?
+<?php
 /*
  * This script will alter the webcal_user table to allow 32 character passwords
  * and convert user passwords to PHP md5 passwords.

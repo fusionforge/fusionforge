@@ -113,7 +113,7 @@ extends WikiPlugin
         foreach ($plugins as $pluginName) {
             // instantiate a plugin
             $pluginName = str_replace(".php", "", $pluginName);
-            $temppluginclass = "<? plugin $pluginName ?>"; // hackish
+            $temppluginclass = "<?php plugin $pluginName ?>"; // hackish
             $p = $w->getPlugin($pluginName, false); // second arg?
             // trap php files which aren't WikiPlugin~s
             if (!strtolower(substr(get_parent_class($p), 0, 10)) == 'wikiplugin') {

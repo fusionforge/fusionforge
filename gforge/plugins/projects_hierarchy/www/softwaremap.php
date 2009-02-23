@@ -386,7 +386,7 @@ else {
 			//add files dtress.css, dtree.js et du dossier img
 				d = new dTree('d');	
 				d.add(0,-1,'<?php echo _('Project Tree');?>');
-				<?
+				<?php
 				reset($arbre);
 				//construction automatique de l'arbre format : (num_fils, num_pere,nom,nom_unix)
 				while (list($key2, $sons2) = each($arbre)) {

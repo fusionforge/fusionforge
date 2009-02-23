@@ -26,7 +26,7 @@ $Sep = HTML::raw("<li>");
       <?php $talk = new WikiPageName($page->getName()); ?>
       <?=$Sep?><?= Button(array(),_("Article"), $talk->getParent()) ?>
     <?php } ?>
-    <? if ( $user->isSignedIn() ) { ?>
+    <?php if ( $user->isSignedIn() ) { ?>
      <?php if ($user->isAdmin() or mayAccessPage('change', $page->getName())) { ?>
       <?=$Sep?><?= Button($page->get('locked') ? 'unlock' : 'lock') ?>
      <?php if (ENABLE_PAGEPERM and mayAccessPage('change', $page->getName())) { ?>
