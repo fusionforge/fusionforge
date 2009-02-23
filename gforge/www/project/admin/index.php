@@ -61,7 +61,7 @@ if (getStringFromRequest('submit')) {
 	if (getStringFromRequest('adduser')) {
 		/*
 			add user to this project
-		*/
+		 */
 		$form_unix_name = getStringFromRequest('form_unix_name');
 		$user_object = &user_get_object_by_name($form_unix_name);
 		if (!$user_object) {
@@ -70,7 +70,7 @@ if (getStringFromRequest('submit')) {
 			$user_id = $user_object->getID();
 			$role_id = getIntFromRequest('role_id');
 			if (!$group->addUser($form_unix_name,$role_id)) {
-				$feedback .= $group->getErrorMessage();
+				$feedback = $group->getErrorMessage();
 			} else {
 				$feedback = _('User Added Successfully');
 
@@ -96,7 +96,7 @@ if (getStringFromRequest('submit')) {
 		*/
 		$user_id = getIntFromRequest('user_id');
 		if (!$group->removeUser($user_id)) {
-			$feedback .= $group->getErrorMessage();
+			$feedback = $group->getErrorMessage();
 		} else {
 			$feedback = _('User Removed Successfully');
 			//plugin webcal
@@ -113,7 +113,7 @@ if (getStringFromRequest('submit')) {
 		$user_id = getIntFromRequest('user_id');
 		$role_id = getIntFromRequest('role_id');
 		if (!$group->updateUser($user_id,$role_id)) {
-			$feedback .= $group->getErrorMessage();
+			$feedback = $group->getErrorMessage();
 		} else {
 			$feedback = _('User updated successfully');
 			//plugin webcal
@@ -132,16 +132,16 @@ if (getStringFromRequest('submit')) {
 		$form_unix_name = getStringFromRequest('form_unix_name');
 		$role_id = getIntFromRequest('role_id');
 		if (!$group->addUser($form_unix_name,$role_id)) {
-			$feedback .= $group->getErrorMessage();
+			$feedback = $group->getErrorMessage();
 		} else {
 			$gjr=new GroupJoinRequest($group,$form_userid);
 			if (!$gjr || !is_object($gjr) || $gjr->isError()) {
-				$feedback .= 'Error Getting GroupJoinRequest';
+				$feedback = 'Error Getting GroupJoinRequest';
 			} else {
 				$gjr->send_accept_mail();
 				$gjr->delete(true);
+				$feedback = _('User Added Successfully');
 			}
-			$feedback = _('User Added Successfully');
 		}
 	} elseif (getStringFromRequest('rejectpending')) {
 		/*
@@ -150,12 +150,12 @@ if (getStringFromRequest('submit')) {
 		$form_userid = getIntFromRequest('form_userid');
 		$gjr=new GroupJoinRequest($group,$form_userid);
 		if (!$gjr || !is_object($gjr) || $gjr->isError()) {
-			$feedback .= 'Error Getting GroupJoinRequest';
+			$feedback = 'Error Getting GroupJoinRequest';
 		} else {
 			if (!$gjr->reject()) {
 				exit_error('Error',$gjr->getErrorMessage());
 			} else {
-				$feedback .= 'Rejected';
+				$feedback = 'Rejected';
 			}
 		}
 	} 
