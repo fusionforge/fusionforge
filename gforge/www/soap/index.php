@@ -6,6 +6,8 @@ require_once '../env.inc.php';
 require_once $gfwww.'include/squal_pre.php';
 require_once $gfcommon.'include/gettext.php';
 
+ini_set('memory_limit','32M');
+
 $uri = 'http://'.$sys_default_domain;
 // 1. include client and server
 require_once $gfwww.'soap/nusoap.php';
