@@ -64,21 +64,26 @@ $HTML->header(array('title'=>_('Developer Profile')));
 </tr>
 <?php } ?>
 
+<?php if ($user->getAddress() || $user->getAddress2()) { ?>
 <tr valign="top">
 	<td><?php echo _('Address:'); ?></td>
 	<td><?php echo $user->getAddress().'<br/>'.$user->getAddress2(); ?></td>
 </tr>
+<?php } ?>
 
+<?php if ($user->getPhone()) { ?>
 <tr valign="top">
 	<td><?php echo _('Phone:'); ?></td>
 	<td><?php echo $user->getPhone(); ?></td>
 </tr>
+<?php } ?>
 
+<?php if ($user->getFax()) { ?>
 <tr valign="top">
 	<td><?php echo _('FAX:'); ?></td>
 	<td><?php echo $user->getFax(); ?></td>
 </tr>
-
+<?php } ?>
 <?php } ?>
 
 <tr>
