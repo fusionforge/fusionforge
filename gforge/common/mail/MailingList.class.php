@@ -144,8 +144,7 @@ class MailingList extends Error {
 			return false;
 		}
 
-			
-		$listPassword = substr(md5($GLOBALS['session_hash'] . time() . rand(0,40000)), 0, 16);
+		$listPassword = substr(md5($GLOBALS['session_ser'] . time() . rand(0,40000)), 0, 16);
 		
 		$sql = 'INSERT INTO mail_group_list '
 			. '(group_id, list_name, is_public, password, list_admin, status, description) VALUES ('
