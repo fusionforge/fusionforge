@@ -257,7 +257,7 @@ echo $HTML->boxBottom();
 			users.user_name,user_group.admin_flags,user_group.role_id
 			FROM users,user_group 
 			WHERE users.user_id=user_group.user_id 
-			AND user_group.group_id='$group_id' ORDER BY user_id");
+			AND user_group.group_id='$group_id' ORDER BY users.lastname,users.firstname");
 
 		echo '
 		<table width="100%" border="0">
