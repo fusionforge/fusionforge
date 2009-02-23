@@ -55,13 +55,13 @@ if ($role_id=='observer') {
 		if (!$role->update($data)) {
 			$feedback = $role->getErrorMessage();
 		} else {
-			$feedback = ' Successfully Updated Role ';
+			$feedback = _('Successfully Updated Role');
 		}
 	}
 } else {
 	$role = new Role(group_get_object($group_id),$role_id);
 	if (!$role || !is_object($role)) {
-		exit_error('Error','Could Not Get Role');
+		exit_error('Error',_('Could Not Get Role'));
 	} elseif ($role->isError()) {
 		exit_error('Error',$role->getErrorMessage());
 	}
@@ -73,13 +73,13 @@ if ($role_id=='observer') {
 			if (!$role_id) {
 				$feedback = $role->getErrorMessage();
 			} else {
-				$feedback = ' Successfully Created New Role ';
+				$feedback = _('Successfully Created New Role');
 			}
 		} else {
 			if (!$role->update($role_name,$data)) {
 				$feedback = $role->getErrorMessage();
 			} else {
-				$feedback = ' Successfully Updated Role ';
+				$feedback = _('Successfully Updated Role');
 			}
 		}
 		//plugin webcal
