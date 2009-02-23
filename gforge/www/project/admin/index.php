@@ -181,7 +181,7 @@ project_admin_header(array('title'=>$adminheadertitle, 'group'=>$group->getID())
 <p><?php echo _('Homepage Link:&nbsp;') ?><strong><?php echo $group->getHomepage(); ?></strong></p>
 
 <?php
-	global $sys_use_shell;
+	global $sys_use_shell, $sys_use_trove;
 	if ($sys_use_shell) {
 ?> 
 <p><?php echo _('Group shell (SSH) server:&nbsp;') ?><strong><?php echo $group->getUnixName().'.'.$GLOBALS['sys_default_domain']; ?></strong></p>
@@ -196,9 +196,13 @@ project_admin_header(array('title'=>$adminheadertitle, 'group'=>$group->getID())
 <?php	} ?>
 
 <hr />
+<?php	if($sys_use_trove) { ?>
 <p>
 <h4><?php echo _('Trove Categorization:&nbsp;') ?><?php echo util_make_link ('/project/admin/group_trove.php?group_id='. $group->getID(),'['._('Edit').']'); ?></h4>
 </p>
+        <?php } //end of use_trove condition
+?>
+
 <?php
 echo $HTML->boxMiddle(_('Tool Admin').'');
 
