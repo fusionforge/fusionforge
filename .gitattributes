@@ -3414,6 +3414,7 @@ tests/unit/utils/AllTests.php -text
 tests/unit/utils/UtilsTests.php -text
 tools/export-tracker.tcl -text
 tools/make-mo.sh -text
+tools/simulate_cron.pl -text
 tools/tab2po/.classpath -text
 tools/tab2po/.project -text
 tools/tab2po/.settings/org.eclipse.jdt.core.prefs -text
