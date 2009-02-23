@@ -64,28 +64,31 @@ if (getStringFromRequest('submit')) {
 		*/
 		$form_unix_name = getStringFromRequest('form_unix_name');
 		$user_object = &user_get_object_by_name($form_unix_name);
-		$user_id = $user_object->getID();
-		$role_id = getIntFromRequest('role_id');
-		if (!$group->addUser($form_unix_name,$role_id)) {
-			$feedback .= $group->getErrorMessage();
+		if (!$user_object) {
+			$feedback = sprintf(_('Failed to find user %s'), $form_unix_name);
 		} else {
-			$feedback = _('User Added Successfully');
+			$user_id = $user_object->getID();
+			$role_id = getIntFromRequest('role_id');
+			if (!$group->addUser($form_unix_name,$role_id)) {
+				$feedback .= $group->getErrorMessage();
+			} else {
+				$feedback = _('User Added Successfully');
 
-			//plugin webcal
-			//change assistant for webcal
-			$params[0] = getIntFromRequest('user_id');
-			$params[1] = getIntFromRequest('group_id');
-			plugin_hook('change_cal_permission',$params);
-			$group_id = getIntFromRequest('group_id');
+				//plugin webcal
+				//change assistant for webcal
+				$params[0] = getIntFromRequest('user_id');
+				$params[1] = getIntFromRequest('group_id');
+				plugin_hook('change_cal_permission',$params);
+				$group_id = getIntFromRequest('group_id');
 
-			//if the user have requested to join this group
-			//we should remove him from the request list
-			//since it has already been added
-			$gjr=new GroupJoinRequest($group,$user_id);
-			if ($gjr || is_object($gjr) || !$gjr->isError()) {
-				$gjr->delete(true);
+				//if the user have requested to join this group
+				//we should remove him from the request list
+				//since it has already been added
+				$gjr=new GroupJoinRequest($group,$user_id);
+				if ($gjr || is_object($gjr) || !$gjr->isError()) {
+					$gjr->delete(true);
+				}
 			}
-
 		}
 	} else if (getStringFromRequest('rmuser')) {
 		/*
