@@ -37,8 +37,6 @@ session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 $role_id = getStringFromRequest('role_id');
 $data = getStringFromRequest('data');
 
-$feedback='';
-
 //
 //	The observer is a special role, which is actually
 //	just controlling the is_public/allow anon flags
@@ -55,9 +53,9 @@ if ($role_id=='observer') {
 
 	if (getStringFromRequest('submit')) {
 		if (!$role->update($data)) {
-			$feedback .= $role->getErrorMessage();
+			$feedback = $role->getErrorMessage();
 		} else {
-			$feedback .= ' Successfully Updated Role ';
+			$feedback = ' Successfully Updated Role ';
 		}
 	}
 } else {
@@ -73,15 +71,15 @@ if ($role_id=='observer') {
 		if (!$role_id) {
 			$role_id=$role->create($role_name,$data);
 			if (!$role_id) {
-				$feedback .= $role->getErrorMessage();
+				$feedback = $role->getErrorMessage();
 			} else {
-				$feedback .= ' Successfully Created New Role ';
+				$feedback = ' Successfully Created New Role ';
 			}
 		} else {
 			if (!$role->update($role_name,$data)) {
-				$feedback .= $role->getErrorMessage();
+				$feedback = $role->getErrorMessage();
 			} else {
-				$feedback .= ' Successfully Updated Role ';
+				$feedback = ' Successfully Updated Role ';
 			}
 		}
 		//plugin webcal
