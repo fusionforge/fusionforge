@@ -640,16 +640,17 @@ function &getDocumentGroups($session_ser,$group_id) {
 //
 function documentsGroup_to_soap($dg_arr) {
 	$return = array();
-		
-	for ($i=0; $i<count($dg_arr); $i++) {
-		if ($dg_arr[$i]->isError()) {
-				//skip if error
-		} else {	
-			$return[]=array(
-				'doc_group_id'=>$dg_arr[$i]->getID(),
-				'parent_doc_group'=>$dg_arr[$i]->getParentID(),
-				'groupname'=>$dg_arr[$i]->getName()
-			);
+	if (is_array($dg_arr) && count($dg_arr) > 0) {
+		for ($i=0; $i<count($dg_arr); $i++) {
+			if ($dg_arr[$i]->isError()) {
+					//skip if error
+			} else {
+				$return[]=array(
+					'doc_group_id'=>$dg_arr[$i]->getID(),
+					'parent_doc_group'=>$dg_arr[$i]->getParentID(),
+					'groupname'=>$dg_arr[$i]->getName()
+				);
+			}
 		}
 	}
 	return $return;

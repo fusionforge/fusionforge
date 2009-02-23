@@ -140,48 +140,51 @@ function queries_to_soap($queries) {
 	$result = array();
 //	print_r($queries[1]->getExtraFields());
 //	die();
-	for ($i=0; $i < count($queries); $i++) {
-		$artifactQuery =& $queries[$i];
-		
-		// transform the extra fields data
-		$extra_fields = array();
-		$queryExtraFields = $artifactQuery->getExtraFields();
-		foreach ($queryExtraFields as $extra_field_id => $values) {
-			// $value may be a int. We wrap it in an array.
-			if (!is_array($values)) $values = array($values);
-			$extra_fields[] = array(
-								"extra_field_id"	=> $extra_field_id,
-								"values"			=> $values
-								);
-		}
-		
-		$assignee = $artifactQuery->getAssignee();
-		// this is a hack, ArtifactQuery::getAssignee sometimes returns an int and
-		// sometimes it returns an array
-		if (!is_array($assignee)) {
-			if (is_numeric($assignee)) {	// a single ID
-				$assignee = array($assignee);	// wrap in an array
-			} else {
-				$assignee = array();
+
+	if (is_array($queries) && count($queries) > 0) {
+		for ($i=0; $i < count($queries); $i++) {
+			$artifactQuery =& $queries[$i];
+
+			// transform the extra fields data
+			$extra_fields = array();
+			$queryExtraFields = $artifactQuery->getExtraFields();
+			foreach ($queryExtraFields as $extra_field_id => $values) {
+				// $value may be a int. We wrap it in an array.
+				if (!is_array($values)) $values = array($values);
+				$extra_fields[] = array(
+									"extra_field_id"	=> $extra_field_id,
+									"values"			=> $values
+									);
 			}
+
+			$assignee = $artifactQuery->getAssignee();
+			// this is a hack, ArtifactQuery::getAssignee sometimes returns an int and
+			// sometimes it returns an array
+			if (!is_array($assignee)) {
+				if (is_numeric($assignee)) {	// a single ID
+					$assignee = array($assignee);	// wrap in an array
+				} else {
+					$assignee = array();
+				}
+			}
+
+			$result[] = array(
+						"artifact_query_id"	=> $artifactQuery->getID(),
+						"name"		=> $artifactQuery->getName(),
+						"fields"	=> array(
+										"sortcol"	=> $artifactQuery->getSortCol(),
+										"sortord"	=> $artifactQuery->getSortOrd(),
+										"moddaterange"	=> $artifactQuery->getModDateRange(),
+										"assignee"	=> $assignee,
+										"status"	=> $artifactQuery->getStatus(),
+										"extra_fields"	=> $extra_fields,
+										"opendaterange"	=> $artifactQuery->getOpenDateRange(),
+										"closedaterange"	=> $artifactQuery->getCloseDateRange()
+										),
+						);
 		}
-	
-		$result[] = array(
-					"artifact_query_id"	=> $artifactQuery->getID(),
-					"name"		=> $artifactQuery->getName(),
-					"fields"	=> array(
-									"sortcol"	=> $artifactQuery->getSortCol(),
-									"sortord"	=> $artifactQuery->getSortOrd(),
-									"moddaterange"	=> $artifactQuery->getModDateRange(),
-									"assignee"	=> $assignee,
-									"status"	=> $artifactQuery->getStatus(),
-									"extra_fields"	=> $extra_fields,
-									"opendaterange"	=> $artifactQuery->getOpenDateRange(),
-									"closedaterange"	=> $artifactQuery->getCloseDateRange()
-									),
-					);
 	}
-	
+
 	return $result;
 }
 
@@ -283,7 +286,7 @@ $server->wsdl->addComplexType(
 	'SOAP-ENC:Array',
 	array(),
 	array(
-		array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'xsd:int[]')
+		array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:ArrayOfint')
 	),
 	'xsd:int'
 ); 

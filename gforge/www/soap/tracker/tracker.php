@@ -517,51 +517,53 @@ function &getArtifactTypes($session_ser,$group_id) {
 function artifacttype_to_soap($at_arr) {
 	$return = array();
 
-	for ($i=0; $i<count($at_arr); $i++) {
-		if ($at_arr[$i]->isError()) {
-			//skip if error
-		} else {
-			// Get list of extra fields for this artifact
-			$extrafields = array();
-			$tmpextrafields = $at_arr[$i]->getExtraFields();
-			foreach ($tmpextrafields as $extrafield) {
-				$aefobj = new ArtifactExtraField($at_arr[$i], $extrafield["extra_field_id"]);
+	if (is_array($at_arr) && count($at_arr) > 0) {
+		for ($i=0; $i<count($at_arr); $i++) {
+			if ($at_arr[$i]->isError()) {
+				//skip if error
+			} else {
+				// Get list of extra fields for this artifact
+				$extrafields = array();
+				$tmpextrafields = $at_arr[$i]->getExtraFields();
+				foreach ($tmpextrafields as $extrafield) {
+					$aefobj = new ArtifactExtraField($at_arr[$i], $extrafield["extra_field_id"]);
 
-				// array of available values
-				$avtmp = $aefobj->getAvailableValues();
-				$avs = array();
-				for ($j=0; $j < count($avtmp); $j++) {
-					$avs[$j]["element_id"] = $avtmp[$j]["element_id"];
-					$avs[$j]["element_name"] = $avtmp[$j]["element_name"];
-					$avs[$j]["status_id"] = $avtmp[$j]["status_id"];
+					// array of available values
+					$avtmp = $aefobj->getAvailableValues();
+					$avs = array();
+					for ($j=0; $j < count($avtmp); $j++) {
+						$avs[$j]["element_id"] = $avtmp[$j]["element_id"];
+						$avs[$j]["element_name"] = $avtmp[$j]["element_name"];
+						$avs[$j]["status_id"] = $avtmp[$j]["status_id"];
+					}
+
+					$extrafields[] = array(
+						"extra_field_id"=> $aefobj->getID(),
+						"field_name"	=> $aefobj->getName(),
+						"field_type"	=> $aefobj->getType(),
+						"attribute1"	=> $aefobj->getAttribute1(),
+						"attribute2"	=> $aefobj->getAttribute2(),
+						"is_required"	=> $aefobj->isRequired(),
+						"alias"			=> $aefobj->getAlias(),
+						"available_values"	=> $avs,
+						"default_selected_id" => 0		//TODO (not implemented yet)
+					);
 				}
 
-				$extrafields[] = array(
-					"extra_field_id"=> $aefobj->getID(),
-					"field_name"	=> $aefobj->getName(),
-					"field_type"	=> $aefobj->getType(),
-					"attribute1"	=> $aefobj->getAttribute1(),
-					"attribute2"	=> $aefobj->getAttribute2(),
-					"is_required"	=> $aefobj->isRequired(),
-					"alias"			=> $aefobj->getAlias(),
-					"available_values"	=> $avs,
-					"default_selected_id" => 0		//TODO (not implemented yet)
+				$return[]=array(
+					'group_artifact_id'=>$at_arr[$i]->data_array['group_artifact_id'],
+					'group_id'=>$at_arr[$i]->data_array['group_id'],
+					'name'=>$at_arr[$i]->data_array['name'],
+					'description'=>$at_arr[$i]->data_array['description'],
+					'is_public'=>$at_arr[$i]->data_array['is_public'],
+					'allow_anon'=>$at_arr[$i]->data_array['allow_anon'],
+					'due_period'=>$at_arr[$i]->data_array['due_period'],
+					'datatype'=>$at_arr[$i]->data_array['datatype'],
+					'status_timeout'=>$at_arr[$i]->data_array['status_timeout'],
+					'extra_fields' => $extrafields,
+					'custom_status_field' => $at_arr[$i]->data_array['custom_status_field']
 				);
 			}
-
-			$return[]=array(
-				'group_artifact_id'=>$at_arr[$i]->data_array['group_artifact_id'],
-				'group_id'=>$at_arr[$i]->data_array['group_id'],
-				'name'=>$at_arr[$i]->data_array['name'],
-				'description'=>$at_arr[$i]->data_array['description'],
-				'is_public'=>$at_arr[$i]->data_array['is_public'],
-				'allow_anon'=>$at_arr[$i]->data_array['allow_anon'],
-				'due_period'=>$at_arr[$i]->data_array['due_period'],
-				'datatype'=>$at_arr[$i]->data_array['datatype'],
-				'status_timeout'=>$at_arr[$i]->data_array['status_timeout'],
-				'extra_fields' => $extrafields,
-				'custom_status_field' => $at_arr[$i]->data_array['custom_status_field']
-			);
 		}
 	}
 	return $return;
@@ -749,55 +751,54 @@ function getArtifact($session_ser,$group_id,$group_artifact_id,$artifact_id) {
 //
 function artifacts_to_soap($at_arr) {
 	$return = array();
-	for ($i=0; $i<count($at_arr); $i++) {
-		// return only the first 100
-		if ($i == 100) break;
-		
-		if ($at_arr[$i]->isError()) {
-			//skip if error
-		} else {
-//NEEDS THOROUGH COMMENTS AND EXPLANATION
-	//***********
-	// Retrieving the artifact details
-	//**checks whether there is any artifact details exists for this object, if not continue with next loop
+	if (is_array($at_arr) && count($at_arr) > 0) {
+		for ($i=0; $i<count($at_arr); $i++) {
+			if ($at_arr[$i]->isError()) {
+				//skip if error
+			} else {
+	//NEEDS THOROUGH COMMENTS AND EXPLANATION
+		//***********
+		// Retrieving the artifact details
+		//**checks whether there is any artifact details exists for this object, if not continue with next loop
 
-			if(count($at_arr[$i]) < 1) { continue; }
-			$flddata=array();
-			$fldelementdata=array();
-			$extrafieldsdata=array();
-			$extrafieldsdata=$at_arr[$i]->getExtraFieldData();
+				if(count($at_arr[$i]) < 1) { continue; }
+				$flddata=array();
+				$fldelementdata=array();
+				$extrafieldsdata=array();
+				$extrafieldsdata=$at_arr[$i]->getExtraFieldData();
 
-			//********
-			//** Retrieving the extra field data and the element data
-			//** checks whether there is any extra fields data available for this artifact
-			//** and checks for the extra element data for the multiselect and checkbox type
-			if(is_array($extrafieldsdata) && count($extrafieldsdata)>0) {
-				while(list($ky,$vl)=each($extrafieldsdata)) {
-					$fldarr=array();
-					if(is_array($extrafieldsdata[$ky])) {
-						//** Retrieving the multiselect and checkbox type data element
-						$fldarr=array('extra_field_id'=>$ky,'field_data'=>implode(",",$extrafieldsdata[$ky]));
-					} else {
-						//** Retrieving the extra field data
-						$fldarr=array('extra_field_id'=>$ky,'field_data'=>$vl);
+				//********
+				//** Retrieving the extra field data and the element data
+				//** checks whether there is any extra fields data available for this artifact
+				//** and checks for the extra element data for the multiselect and checkbox type
+				if(is_array($extrafieldsdata) && count($extrafieldsdata)>0) {
+					while(list($ky,$vl)=each($extrafieldsdata)) {
+						$fldarr=array();
+						if(is_array($extrafieldsdata[$ky])) {
+							//** Retrieving the multiselect and checkbox type data element
+							$fldarr=array('extra_field_id'=>$ky,'field_data'=>implode(",",$extrafieldsdata[$ky]));
+						} else {
+							//** Retrieving the extra field data
+							$fldarr=array('extra_field_id'=>$ky,'field_data'=>$vl);
+						}
+						$flddata[]=$fldarr;
+						unset($fldarr);
 					}
-					$flddata[]=$fldarr;
-					unset($fldarr);
 				}
+				$return[]=array(
+					'artifact_id'=>$at_arr[$i]->data_array['artifact_id'],
+					'group_artifact_id'=>$at_arr[$i]->data_array['group_artifact_id'],
+					'status_id'=>$at_arr[$i]->data_array['status_id'],
+					'priority'=>$at_arr[$i]->data_array['priority'],
+					'submitted_by'=>$at_arr[$i]->data_array['submitted_by'],
+					'assigned_to'=>$at_arr[$i]->data_array['assigned_to'],
+					'open_date'=>$at_arr[$i]->data_array['open_date'],
+					'close_date'=>$at_arr[$i]->data_array['close_date'],
+					'summary'=>$at_arr[$i]->data_array['summary'],
+					'details'=>$at_arr[$i]->data_array['details'],
+					'extra_fields'=>$flddata
+				);
 			}
-			$return[]=array(
-				'artifact_id'=>$at_arr[$i]->data_array['artifact_id'],
-				'group_artifact_id'=>$at_arr[$i]->data_array['group_artifact_id'],
-				'status_id'=>$at_arr[$i]->data_array['status_id'],
-				'priority'=>$at_arr[$i]->data_array['priority'],
-				'submitted_by'=>$at_arr[$i]->data_array['submitted_by'],
-				'assigned_to'=>$at_arr[$i]->data_array['assigned_to'],
-				'open_date'=>$at_arr[$i]->data_array['open_date'],
-				'close_date'=>$at_arr[$i]->data_array['close_date'],
-				'summary'=>$at_arr[$i]->data_array['summary'],
-				'details'=>$at_arr[$i]->data_array['details'],
-				'extra_fields'=>$flddata
-			);
 		}
 	}
 	return $return;

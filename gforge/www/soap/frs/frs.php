@@ -24,6 +24,8 @@
 
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'frs/FRSFile.class.php';
+require_once $gfcommon.'frs/FRSFileType.class';
+require_once $gfcommon.'frs/FRSFileProcessorType.class';
 require_once $gfcommon.'frs/FRSPackage.class.php';
 require_once $gfcommon.'frs/FRSRelease.class.php';
 
@@ -59,6 +61,63 @@ $server->register(
 		'group_id'=>'xsd:int'),
 	array('getPackagesResponse'=>'tns:ArrayOfFRSPackage'),
 		$uri,$uri.'#getPackages','rpc','encoded'
+);
+
+$server->wsdl->addComplexType(
+	'FRSFileType',
+	'complexType',
+	'struct',
+	'sequence',
+	'',
+	array(
+	'type_id' => array('name'=>'type_id', 'type' => 'xsd:int'),
+	'name' => array('name'=>'name', 'type' => 'xsd:string'),
+	)
+);
+$server->wsdl->addComplexType(
+	'ArrayOfFRSFileType',
+	'complexType',
+	'array',
+	'',
+	'SOAP-ENC:Array',
+	array(),
+	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:FRSFileType[]')),
+	'tns:FRSFileType'
+);
+
+$server->register(
+	'getFileTypes',
+	array('session_ser'=>'xsd:string'),
+	array('getFileTypeResponse'=>'tns:ArrayOfFRSFileType'),
+		$uri,$uri.'#getFileTypes','rpc','encoded'
+);
+
+$server->wsdl->addComplexType(
+	'FRSFileProcessorType',
+	'complexType',
+	'struct',
+	'sequence',
+	'',
+	array(
+	'processor_id' => array('name'=>'processor_id', 'type' => 'xsd:int'),
+	'name' => array('name'=>'name', 'type' => 'xsd:string'),
+	)
+);
+$server->wsdl->addComplexType(
+	'ArrayOfFRSFileProcessorType',
+	'complexType',
+	'array',
+	'',
+	'SOAP-ENC:Array',
+	array(),
+	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:FRSFileProcessorType[]')),
+	'tns:FRSFileProcessorType'
+);
+$server->register(
+	'getFileProcessorTypes',
+	array('session_ser'=>'xsd:string'),
+	array('getFileProcessorTypeResponse'=>'tns:ArrayOfFRSFileProcessorType'),
+		$uri,$uri.'#getFileProcessorTypes','rpc','encoded'
 );
 
 $server->register(
@@ -209,20 +268,33 @@ function getPackages($session_ser,$group_id) {
 function packages_to_soap(&$pkg_arr) {
 	$return = array();
 
-	for ($i=0; $i<count($pkg_arr); $i++) {
-		if ($pkg_arr[$i]->isError()) {
-			//skip if error
-		} else {
-			$return[]=array(
-				'package_id' => $pkg_arr[$i]->getID(), 
-				'name' => $pkg_arr[$i]->getName(),
-				'status_id' => $pkg_arr[$i]->getStatus(), 
-				'is_public' => $pkg_arr[$i]->isPublic()
-			);
+	if (is_array($pkg_arr) && count($pkg_arr) > 0) {
+		for ($i=0; $i<count($pkg_arr); $i++) {
+			if ($pkg_arr[$i]->isError()) {
+				//skip if error
+			} else {
+				$return[]=array(
+					'package_id' => $pkg_arr[$i]->getID(),
+					'name' => $pkg_arr[$i]->getName(),
+					'status_id' => $pkg_arr[$i]->getStatus(),
+					'is_public' => $pkg_arr[$i]->isPublic()
+				);
+			}
 		}
 	}
-	
 	return $return;
+}
+
+function getFileTypes($session_ser) {
+	continue_session($session_ser);
+	$pkg_arr = get_frs_filetypes();
+	return filetypes_to_soap($pkg_arr);
+}
+
+function getFileProcessorTypes($session_ser) {
+	continue_session($session_ser);
+	$pkg_arr = get_frs_fileprocessortypes();
+	return fileprocessortypes_to_soap($pkg_arr);
 }
 
 function addPackage($session_ser,$group_id,$package_name,$is_public) {
@@ -266,18 +338,20 @@ function getReleases($session_ser,$group_id,$package_id) {
 function releases_to_soap(&$release_arr) {
 	$return = array();
 
-	for ($i=0; $i<count($release_arr); $i++) {
-		if ($release_arr[$i]->isError()) {
-			//skip if error
-		} else {
-			$return[]=array(
-				'release_id' => $release_arr[$i]->getID(), 
-				'name' => $release_arr[$i]->getName(),
-				'notes' => $release_arr[$i]->getNotes(),
-				'changes' => $release_arr[$i]->getChanges(),
-				'status_id' => $release_arr[$i]->getStatus(), 
-				'release_date' => $release_arr[$i]->getReleaseDate()
-			);
+	if (is_array($release_arr) && count($release_arr) > 0) {
+		for ($i=0; $i<count($release_arr); $i++) {
+			if ($release_arr[$i]->isError()) {
+				//skip if error
+			} else {
+				$return[]=array(
+					'release_id' => $release_arr[$i]->getID(),
+					'name' => $release_arr[$i]->getName(),
+					'notes' => $release_arr[$i]->getNotes(),
+					'changes' => $release_arr[$i]->getChanges(),
+					'status_id' => $release_arr[$i]->getStatus(),
+					'release_date' => $release_arr[$i]->getReleaseDate()
+				);
+			}
 		}
 	}
 	
@@ -341,23 +415,61 @@ function getFiles($session_ser,$group_id,$package_id,$release_id) {
 function files_to_soap($files_arr) {
 	$return = array();
 
-	for ($i=0; $i<count($files_arr); $i++) {
-		if ($files_arr[$i]->isError()) {
-			//skip if error
-		} else {
-			$return[]=array(
-				'file_id' => $files_arr[$i]->getID(), 
-				'name' => $files_arr[$i]->getName(),
-				'size' => $files_arr[$i]->getSize(),
-				'type' => $files_arr[$i]->getFileType(),
-				'processor' => $files_arr[$i]->getProcessor(),
-				'downloads' => $files_arr[$i]->getDownloads(),
-				'release' => $files_arr[$i]->getReleaseTime(),
-				'date' => $files_arr[$i]->getPostDate(),
-			);
+	if (is_array($files_arr) && count($files_arr) > 0) {
+		for ($i=0; $i<count($files_arr); $i++) {
+			if ($files_arr[$i]->isError()) {
+				//skip if error
+			} else {
+				$return[]=array(
+					'file_id' => $files_arr[$i]->getID(),
+					'name' => $files_arr[$i]->getName(),
+					'size' => $files_arr[$i]->getSize(),
+					'type' => $files_arr[$i]->getFileType(),
+					'processor' => $files_arr[$i]->getProcessor(),
+					'downloads' => $files_arr[$i]->getDownloads(),
+					'release' => $files_arr[$i]->getReleaseTime(),
+					'date' => $files_arr[$i]->getPostDate(),
+				);
+			}
 		}
 	}
 	
+	return $return;
+}
+
+function filetypes_to_soap($files_arr) {
+	$return = array();
+
+	if (is_array($files_arr) && count($files_arr) > 0) {
+		for ($i=0; $i<count($files_arr); $i++) {
+			if ($files_arr[$i]->isError()) {
+				//skip if error
+			} else {
+				$return[]=array(
+					'type_id' => $files_arr[$i]->getID(),
+					'name' => $files_arr[$i]->getName(),
+				);
+			}
+		}
+	}
+	return $return;
+}
+
+function fileprocessortypes_to_soap($files_arr) {
+	$return = array();
+
+	if (is_array($files_arr) && count($files_arr) > 0) {
+		for ($i=0; $i<count($files_arr); $i++) {
+			if ($files_arr[$i]->isError()) {
+				//skip if error
+			} else {
+				$return[]=array(
+					'processor_id' => $files_arr[$i]->getID(),
+					'name' => $files_arr[$i]->getName(),
+				);
+			}
+		}
+	}
 	return $return;
 }
 
