@@ -556,7 +556,7 @@ class Group extends Error {
 			$homepage=$GLOBALS['sys_default_domain'].'/projects/'.$this->getUnixName().'/';
 		}
 
-		if (strlen($short_description)>255) {
+		if (strlen(htmlspecialchars($short_description))>255) {
 			$this->setError(_('Error updating project information: Maximum length for Project Description is 255 chars.'));
 			return false;
 		}
