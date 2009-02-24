@@ -87,10 +87,10 @@ $HTML->header(array('title'=>'User Account Registration'));
 if (isset($feedback)) {
 	print "<p><span class=\"error\">$feedback $register_error</span>";
 } 
-if (!isset($timezone) || empty($timezone) || !eregi('^[-a-z0-9_/]*?$', $timezone)) {
+if (!isset($timezone) || empty($timezone) || !preg_match('/^[-\w]+$/', $timezone)) {
 	$timezone = (isset($sys_default_timezone) ? $sys_default_timezone : 'GMT');
 }
-if (!isset($ccode) || empty($ccode) || !eregi('^[a-z][a-z]$', $ccode)) {
+if (!isset($ccode) || empty($ccode) || !preg_match('/^\w{2}$/', $ccode)) {
 	$ccode = $sys_default_country_code;
 }
 ?>
