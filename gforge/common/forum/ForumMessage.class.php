@@ -641,20 +641,27 @@ class ForumMessage extends Error {
 		if (!count($ids) > 0 && !$this->Forum->getSendAllPostsTo()) {
 			return true;
 		}
-			
-		$body = "\nRead and respond to this message at: ".
-			"\n".util_make_url ('/forum/message.php?msg_id='.$this->getID()).
-		"\nOr by replying to this e-mail entering your response between the following markers: ".
-			"\n".FORUM_MAIL_MARKER.
+
+		// use system default language
+		setup_gettext_from_sys_lang();
+
+		$body = sprintf(_("\nRead and respond to this message at: ".
+			"\n%s".
+			"\nOr by replying to this e-mail entering your response between the following markers: ".
+			"\n%s".
 			"\n(enter your response here)".
-			"\n".FORUM_MAIL_MARKER.
+			"\n%s".
 			"\n\n".
-		"\nBy: " . $this->getPosterRealName() . "\n";
+			"\nBy: %s\n"),
+		util_make_url ('/forum/message.php?msg_id='.$this->getID()),
+		FORUM_MAIL_MARKER,
+		FORUM_MAIL_MARKER,
+		$this->getPosterRealName());
 		
 		if ($has_attach) {
 			//if there's an attachment for the message, make it note.
 			//Note: We can't give a link for the attachment here because it hasn't been created yet (first the message needs to be created
-			$body .= "A file has been uploaded with this message\n\n";
+			$body .= _("A file has been uploaded with this message")."\n\n";
 		} else {
 			$body .= "\n";
 		}
@@ -663,11 +670,15 @@ class ForumMessage extends Error {
 		$text = $sanitizer->convertNeededTagsForEmail($text);
 		$text= strip_tags($this->removebbcode(util_line_wrap($text)));
 		$text = $sanitizer->convertExtendedCharsForEmail($text);
-		$body .= $text .
-		"\n\n______________________________________________________________________".
-		"\nYou are receiving this email because you elected to monitor this forum.".
-		"\nTo stop monitoring this forum, login to ".$GLOBALS['sys_name']." and visit: ".
-			"\n".util_make_url('/forum/monitor.php?forum_id='.$this->Forum->getID().'&group_id='.$this->Forum->Group->getID().'&stop=1');
+		$body .= sprintf(
+			"%s\n\n______________________________________________________________________\n".
+			_("You are receiving this email because you elected to monitor this forum.".
+			"\nTo stop monitoring this forum, login to %s and visit: \n%s\n"),
+			$text,
+			$GLOBALS['sys_name'],
+			util_make_url('/forum/monitor.php?forum_id='.$this->Forum->getID().
+			'&group_id='.$this->Forum->Group->getID().'&stop=1')
+		);
 
 		//$extra_headers = 'Reply-to: '.$this->Forum->getUnixName().'@'.$GLOBALS['sys_default_domain'];
 		$extra_headers = "Return-Path: <noreply@".$GLOBALS['sys_default_domain'].">\n";
@@ -691,11 +702,14 @@ class ForumMessage extends Error {
 			$bccres = db_query($sql);
 		}
 		$BCC =& implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
-//echo $BCC;
+		//echo $BCC;
 		$User = user_get_object($this->getPosterID());
+
 		util_send_message('',$subject,$body,"noreply@".$GLOBALS['sys_default_domain'],$BCC,'Forum',$extra_headers);
 		//util_send_message('',$subject,$body,$User->getEmail(),$BCC,$this->getPosterRealName(),$extra_headers);
-//		util_handle_message(array_unique($ids),$subject,$body,$this->Forum->getSendAllPostsTo(),'','forumgateway@'.$GLOBALS[sys_default_domain]);
+		//		util_handle_message(array_unique($ids),$subject,$body,$this->Forum->getSendAllPostsTo(),'','forumgateway@'.$GLOBALS[sys_default_domain]);
+		// Switch back to the user language settings
+		setup_gettext_from_browser();
 		return true;
 	}
 	
