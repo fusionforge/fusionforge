@@ -137,39 +137,69 @@ function report_group_box($name='g_id', $selected='1') {
 	return html_build_select_box($res, $name, $selected, false);
 }
 
-function report_area_box($name='area', $selected='1') {
-	$arr[]='tracker';
-	$arr[]='forum';
-	$arr[]='docman';
-	$arr[]='taskman';
-	$arr[]='downloads';
+function report_area_box($name='area', $selected='1', $Group=false) {
+  if ($Group) {
+    $sys_use_tracker = $Group->usesTracker();
+    $sys_use_forum = $Group->usesForum();
+    $sys_use_docman = $Group->usesDocman();
+    $sys_use_pm = $Group->usesPM();
+    $sys_use_frs = $Group->usesFRS();
+  } else {
+    $sys_use_tracker = $GLOBALS['sys_use_tracker'];
+    $sys_use_forum = $GLOBALS['sys_use_forum'];
+    $sys_use_docman = $GLOBALS['sys_use_docman'];
+    $sys_use_pm = $GLOBALS['sys_use_pm'];
+    $sys_use_frs = $GLOBALS['sys_use_frs'];
+  }
+  if ($sys_use_tracker) {
+    $arr[]='tracker';
+    $arr2[]=_('Tracker');
+  }
+  if ($sys_use_forum) {
+    $arr[]='forum';
+    $arr2[]=_('Forums');
+  }
+  if ($sys_use_docman) {
+    $arr[]='docman';
+    $arr2[]=_('Docs');
+  }
+  if ($sys_use_pm) {
+    $arr[]='taskman';
+    $arr2[]=_('Tasks');
+  }
+  if ($sys_use_frs) {
+    $arr[]='downloads';
+    $arr2[]=_('Downloads');
+  }
 
-	$arr2[]=_('Tracker');
-	$arr2[]=_('Forums');
-	$arr2[]=_('Docs');
-	$arr2[]=_('Tasks');
-	$arr2[]=_('Downloads');
 	return html_build_select_box_from_arrays ($arr,$arr2,$name,$selected,false);
 }
 
 function report_tracker_box($name='datatype', $selected='1') {
-	$arr[]=_('Bugs');
-	$arr[]=_('Support');
-	$arr[]=_('Patches');
-	$arr[]=_('Feature Requests');
-	$arr[]=_('Other Trackers');
-	$arr[]=_('Forum Messages');
-	$arr[]=_('Tasks');
-	$arr[]=_('Downloads');
-
-	$arr2[]='1';
-	$arr2[]='2';
-	$arr2[]='3';
-	$arr2[]='4';
-	$arr2[]='0';
-	$arr2[]='5';
-	$arr2[]='6';
-	$arr2[]='7';
+  if ($GLOBALS['sys_use_tracker']) {
+    $arr[]=_('Bugs');
+    $arr[]=_('Support');
+    $arr[]=_('Patches');
+    $arr[]=_('Feature Requests');
+    $arr[]=_('Other Trackers');
+    $arr2[]='1';
+    $arr2[]='2';
+    $arr2[]='3';
+    $arr2[]='4';
+    $arr2[]='0';
+  }
+  if ($GLOBALS['sys_use_forum']) {
+    $arr[]=_('Forum Messages');
+    $arr2[]='5';
+  }
+  if ($GLOBALS['sys_use_pm']) {
+    $arr[]=_('Tasks');
+    $arr2[]='6';
+  }
+  if ($GLOBALS['sys_use_frs']) {
+    $arr[]=_('Downloads');
+    $arr2[]='7';
+  }
 	return html_build_select_box_from_arrays ($arr2,$arr,$name,$selected,false);
 }
 

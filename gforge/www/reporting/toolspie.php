@@ -34,7 +34,7 @@ if ($report->isError()) {
 	exit_error($report->getErrorMessage());
 }
 
-if (!$start) {
+if (!isset($start)) {
 	$z =& $report->getMonthStartArr();
 	$start = $z[count($z)-1];
 }
