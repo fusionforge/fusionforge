@@ -150,6 +150,13 @@ function &group_get_objects_by_name($groupname_arr) {
 	return group_get_objects($arr);
 }
 
+function &group_get_object_by_publicname($groupname) {
+	$res=db_query("SELECT * FROM groups WHERE group_name ILIKE '" .
+		htmlspecialchars($groupname) . "'");
+
+       return group_get_object(db_result($res,0,'group_id'),$res);
+}
+
 class Group extends Error {
 	/**
 	 * Associative array of data from db.
@@ -281,6 +288,9 @@ class Group extends Error {
 			return false;
 		} else if (strlen(htmlspecialchars($full_name))>50) {
 			$this->setError(_('Full name is too long'));
+			return false;
+		} else if ($group=group_get_object_by_publicname($full_name)) {
+			$this->setError(_('Full name already taken'));
 			return false;
 		} else if (!account_groupnamevalid($unix_name)) {
 			$this->setError(_('Invalid Unix name'));
