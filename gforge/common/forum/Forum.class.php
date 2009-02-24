@@ -124,7 +124,7 @@ class Forum extends Error {
 			$this->setError(_('Forum Description Must Be At Least 10 Characters'));
 			return false;
 		}
-		if (eregi('[^_\.0-9a-z-]',$forum_name)) {
+		if (preg_match('[^_\.0-9a-z-]',$forum_name)) {
 			$this->setError(_('Illegal Characters in Forum Name'));
 			return false;
 		}
