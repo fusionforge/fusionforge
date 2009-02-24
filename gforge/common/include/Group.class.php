@@ -277,7 +277,10 @@ class Group extends Error {
 			$this->setError(_('Group::create: Group object already exists'));
 			return false;
 		} else if (strlen($full_name)<3) {
-			$this->setError(_('Invalid full name'));
+			$this->setError(_('Full name is too short'));
+			return false;
+		} else if (strlen(htmlspecialchars($full_name))>50) {
+			$this->setError(_('Full name is too long'));
 			return false;
 		} else if (!account_groupnamevalid($unix_name)) {
 			$this->setError(_('Invalid Unix name'));
