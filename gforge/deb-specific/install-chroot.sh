@@ -109,7 +109,7 @@ FIN
 	[ -f /etc/pam.d/su ] && cp /etc/pam.d/su $CHROOTDIR/etc/pam.d
 	[ -f /etc/pam.d/cvs ] && cp /etc/pam.d/cvs $CHROOTDIR/etc/pam.d
 	[ -f /etc/pam.d/other ] && cp /etc/pam.d/other $CHROOTDIR/etc/pam.d
-	cp /etc/pam.d/common* $CHROOTDIR/etc/pam.d
+	[ "`ls /etc/pam.d/common* 2>/dev/null`" ] && cp /etc/pam.d/common* $CHROOTDIR/etc/pam.d
 	cp /lib/libpam* $CHROOTDIR/lib
 	
 	cp /lib/libnss_files* $CHROOTDIR/lib
