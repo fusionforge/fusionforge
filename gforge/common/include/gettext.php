@@ -190,6 +190,17 @@ function setup_gettext_from_langname ($lang) {
 	setup_gettext_from_locale ($locale) ;
 }
 
+function setup_gettext_from_sys_lang () {
+
+	$lang = "English";
+	if ($GLOBALS['sys_lang']) {
+		$lang = $GLOBALS['sys_lang'] ;
+	}
+
+	$locale = language_name_to_locale_code($lang).'.utf8';
+	setup_gettext_from_locale ($locale) ;
+}
+
 function setup_gettext_from_locale ($locale) {
 	setlocale(LC_ALL, $locale);
 	setlocale (LC_TIME, _('en_US'));

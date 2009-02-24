@@ -182,7 +182,12 @@ class Forum extends Error {
 		$this->fetchData($this->group_forum_id);
 		if ($create_default_message) {
 			$fm=new ForumMessage($this);
-			if (!$fm->create("Welcome to ".$forum_name,"Welcome to ".$forum_name)) {
+			// Use the system side default language
+			setup_gettext_from_sys_lang ();
+			$string=sprintf(_('Welcome to %1$s'), $forum_name);
+			// and switch back to the user preference
+			setup_gettext_from_browser ();
+			if (!$fm->create($string, $string)) {
 				$this->setError($fm->getErrorMessage());
 				return false;
 			}
