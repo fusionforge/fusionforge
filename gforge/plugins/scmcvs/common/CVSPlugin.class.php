@@ -168,12 +168,12 @@ class CVSPlugin extends SCM {
 			return false;
 		}
 		if ($group->usesPlugin($this->name)) {
-			if ($params['scmcvs_enable_anoncvs']) {
+			if (array_key_exists('scmcvs_enable_anoncvs', $params)){
 				$group->SetUsesAnonSCM(true);
 			} else {
 				$group->SetUsesAnonSCM(false);
 			}
-			if ($params['scmcvs_enable_pserver']) {
+			if (array_key_exists('scmcvs_enable_pserver', $params)){
 				$group->SetUsesPserver(true);
 			} else {
 				$group->SetUsesPserver(false);
