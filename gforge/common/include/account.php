@@ -70,7 +70,7 @@ function account_namevalid($name) {
 	if (eregi("^((root)|(bin)|(daemon)|(adm)|(lp)|(sync)|(shutdown)|(halt)|(mail)|(news)"
 		. "|(uucp)|(operator)|(games)|(mysql)|(httpd)|(nobody)|(dummy)"
 		. "|(www)|(cvs)|(shell)|(ftp)|(irc)|(debian)|(ns)|(download))$",$name)) {
-		$GLOBALS['register_error'] = "Name is reserved.";
+		$GLOBALS['register_error'] = _('Name is reserved.');
 		return 0;
 	}
 	if ( exec("getent passwd $name") != "" ){
