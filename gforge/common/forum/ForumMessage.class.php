@@ -635,79 +635,81 @@ class ForumMessage extends Error {
 	function sendNotice($has_attach=false) {
 		$ids =& $this->Forum->getMonitoringIDs();
 
-		//
-		//	See if there is anyone to send messages to
-		//
-		if (!count($ids) > 0 && !$this->Forum->getSendAllPostsTo()) {
-			return true;
+		$recipients = array ();
+		foreach ($ids as $id) {
+			$recipient = user_get_object ($id) ;
+			$recipients[] = $recipient ;
+		}
+		if ($this->Forum->getSendAllPostsTo()) {
+			$recipients[] = $this->Forum->getSendAllPostsTo() ;
 		}
 
-		// use system default language
-		setup_gettext_from_sys_lang();
-
-		$body = sprintf(_("\nRead and respond to this message at: ".
-			"\n%s".
-			"\nOr by replying to this e-mail entering your response between the following markers: ".
-			"\n%s".
-			"\n(enter your response here)".
-			"\n%s".
-			"\n\n".
-			"\nBy: %s\n"),
-		util_make_url ('/forum/message.php?msg_id='.$this->getID()),
-		FORUM_MAIL_MARKER,
-		FORUM_MAIL_MARKER,
-		$this->getPosterRealName());
-		
-		if ($has_attach) {
-			//if there's an attachment for the message, make it note.
-			//Note: We can't give a link for the attachment here because it hasn't been created yet (first the message needs to be created
-			$body .= _("A file has been uploaded with this message")."\n\n";
-		} else {
-			$body .= "\n";
-		}
-		$sanitizer = new TextSanitizer();
-		$text = $this->getBody();
-		$text = $sanitizer->convertNeededTagsForEmail($text);
-		$text= strip_tags($this->removebbcode(util_line_wrap($text)));
-		$text = $sanitizer->convertExtendedCharsForEmail($text);
-		$body .= sprintf(
-			"%s\n\n______________________________________________________________________\n".
-			_("You are receiving this email because you elected to monitor this forum.".
-			"\nTo stop monitoring this forum, login to %s and visit: \n%s\n"),
-			$text,
-			$GLOBALS['sys_name'],
-			util_make_url('/forum/monitor.php?forum_id='.$this->Forum->getID().
-			'&group_id='.$this->Forum->Group->getID().'&stop=1')
-		);
-
-		//$extra_headers = 'Reply-to: '.$this->Forum->getUnixName().'@'.$GLOBALS['sys_default_domain'];
-		$extra_headers = "Return-Path: <noreply@".$GLOBALS['sys_default_domain'].">\n";
-		$extra_headers .= "Errors-To: <noreply@".$GLOBALS['sys_default_domain'].">\n";
-		$extra_headers .= "Sender: <noreply@".$GLOBALS['sys_default_domain'].">\n";
-		$extra_headers .= "Reply-To: ".$this->Forum->getReturnEmailAddress()."\n";
-		$extra_headers .= "Precedence: Bulk\n"
-			."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getId()."@".$GLOBALS['sys_default_domain'].">\n"
-			."List-Help: ".util_make_url ('/forum/forum.php?id='.$this->Forum->getId())."\n"
-			."Message-Id: <forumpost".$this->getId()."@".$GLOBALS['sys_default_domain'].">";
-		$parentid = $this->getParentId();
-		if (!empty($parentid)) {
- 			$extra_headers .= "\nIn-Reply-To: ".$this->Forum->getReturnEmailAddress()."\n"
-				."References: <forumpost".$this->getParentId()."@".$GLOBALS['sys_default_domain'].">";
+		if (count ($recipients) == 0) {
+			return true ;
 		}
 
-		$subject="[" . $this->Forum->getUnixName() ."][".$this->getID()."] ".util_unconvert_htmlspecialchars($this->getSubject());
-		if (count($ids) != 0) {
-			// maybe we have no monitoring ids. this was causing a transaction to be aborted because of being called everytime
-			$sql="SELECT email FROM users WHERE status='A' AND user_id IN ('".implode($ids,'\',\'')."')";
-			$bccres = db_query($sql);
-		}
-		$BCC =& implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
-		//echo $BCC;
-		$User = user_get_object($this->getPosterID());
+		foreach ($recipients as $recipient) {
+			if (is_a ($recipient, 'GFUser')) {
+				setup_gettext_for_user ($recipient) ;
+				$dest_email = $recipient->getEmail ();
+			} else {
+				setup_gettext_from_sys_lang ();
+				$dest_email = $recipient ;
+			}
 
-		util_send_message('',$subject,$body,"noreply@".$GLOBALS['sys_default_domain'],$BCC,'Forum',$extra_headers);
-		//util_send_message('',$subject,$body,$User->getEmail(),$BCC,$this->getPosterRealName(),$extra_headers);
-		//		util_handle_message(array_unique($ids),$subject,$body,$this->Forum->getSendAllPostsTo(),'','forumgateway@'.$GLOBALS[sys_default_domain]);
+			$body = sprintf(_("\nRead and respond to this message at: ".
+					  "\n%1$ss".
+					  "\nOr by replying to this e-mail entering your response between the following markers: ".
+					  "\n%2$s".
+					  "\n(enter your response here)".
+					  "\n%2$s".
+					  "\n\n".
+					  "\nBy: %3$s\n"),
+					util_make_url ('/forum/message.php?msg_id='.$this->getID()),
+					FORUM_MAIL_MARKER,
+					$this->getPosterRealName());
+			
+			if ($has_attach) {
+				//if there's an attachment for the message, make it note.
+				//Note: We can't give a link for the attachment here because it hasn't been created yet (first the message needs to be created
+				$body .= _("A file has been uploaded with this message.")."\n\n";
+			} else {
+				$body .= "\n";
+			}
+			$sanitizer = new TextSanitizer();
+			$text = $this->getBody();
+			$text = $sanitizer->convertNeededTagsForEmail($text);
+			$text= strip_tags($this->removebbcode(util_line_wrap($text)));
+			$text = $sanitizer->convertExtendedCharsForEmail($text);
+			$body .= sprintf(
+				"%s\n\n______________________________________________________________________\n".
+				_("You are receiving this email because you elected to monitor this forum.".
+				  "\nTo stop monitoring this forum, login to %s and visit: \n%s\n"),
+				$text,
+				$GLOBALS['sys_name'],
+				util_make_url('/forum/monitor.php?forum_id='.$this->Forum->getID().
+					      '&group_id='.$this->Forum->Group->getID().'&stop=1')
+				);
+
+			$extra_headers = "Return-Path: <noreply@".$GLOBALS['sys_default_domain'].">\n";
+			$extra_headers .= "Errors-To: <noreply@".$GLOBALS['sys_default_domain'].">\n";
+			$extra_headers .= "Sender: <noreply@".$GLOBALS['sys_default_domain'].">\n";
+			$extra_headers .= "Reply-To: ".$this->Forum->getReturnEmailAddress()."\n";
+			$extra_headers .= "Precedence: Bulk\n"
+				."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getId()."@".$GLOBALS['sys_default_domain'].">\n"
+				."List-Help: ".util_make_url ('/forum/forum.php?id='.$this->Forum->getId())."\n"
+				."Message-Id: <forumpost".$this->getId()."@".$GLOBALS['sys_default_domain'].">";
+			$parentid = $this->getParentId();
+			if (!empty($parentid)) {
+				$extra_headers .= "\nIn-Reply-To: ".$this->Forum->getReturnEmailAddress()."\n"
+					."References: <forumpost".$this->getParentId()."@".$GLOBALS['sys_default_domain'].">";
+			}
+			
+			$subject="[" . $this->Forum->getUnixName() ."][".$this->getID()."] ".util_unconvert_htmlspecialchars($this->getSubject());
+
+			util_send_message($dest_email,$subject,$body,"noreply@".$GLOBALS['sys_default_domain'],'Forum',$extra_headers);
+		}
+
 		// Switch back to the user language settings
 		setup_gettext_from_browser();
 		return true;
