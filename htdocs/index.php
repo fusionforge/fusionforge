@@ -99,9 +99,9 @@ cd fusionforge-4.7.1</pre>
 				<h4>FusionForge is currently managed with Subversion.</h4>
 
 				<p>Anonymous read-only access:<br />
-				<tt>svn checkout svn://scm.fusionforge.org/fusionforge/trunk fusionforge-trunk</tt></p>
+				<tt>svn checkout svn://scm.fusionforge.org/svnroot/fusionforge/trunk fusionforge-trunk</tt></p>
 				<p>Read/write access (for project members):<br />
-				<tt>svn checkout svn+ssh://scm.fusionforge.org/srv/svn/fusionforge/trunk fusionforge-trunk</tt></p>
+				<tt>svn checkout svn+ssh://scm.fusionforge.org/svnroot/fusionforge/trunk fusionforge-trunk</tt></p>
 				<p>Anonymous read-only Bazaar gateway (updated hourly):<br />
 				<tt>bzr checkout http://scm.fusionforge.org/bzr/fusionforge/svn-trunk-ro fusionforge-trunk</tt></p>
 
