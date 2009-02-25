@@ -711,7 +711,7 @@ class ForumMessage extends Error {
 		}
 
 		// Switch back to the user language settings
-		setup_gettext_from_browser();
+		setup_gettext_from_context();
 		return true;
 	}
 	

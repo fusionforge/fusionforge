@@ -159,7 +159,7 @@ if (session_loggedin()) {
 require_once $gfcommon.'include/gettext.php';
 require_once $gfcommon.'include/group_section_texts.php';
 
-setup_gettext_from_browser() ;
+setup_gettext_from_context();
 
 /*
 

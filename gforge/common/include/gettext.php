@@ -172,7 +172,7 @@ function language_name_to_lang_id ($language) {
 	return db_result($res, 0, 'language_id');
 }
 
-function setup_gettext_from_browser() {
+function setup_gettext_from_context() {
 	setup_gettext_from_langname (choose_language_from_context ());
 }
 

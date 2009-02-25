@@ -495,7 +495,7 @@ function session_continue($sessionKey) {
 	global $session_ser;
 	$session_ser = $sessionKey;
 	session_set();
-	setup_gettext_from_browser() ;
+	setup_gettext_from_context();
 	$LUSER =& session_get_user();
 	if (!is_object($LUSER) || $LUSER->isError()) {
 		return false;

@@ -189,7 +189,7 @@ require_once $gfcommon.'include/gettext.php';
 if (!$sys_lang) {
 	$sys_lang="English";
 }
-setup_gettext_from_browser() ;
+setup_gettext_from_context();
 
 /*
 

@@ -186,7 +186,7 @@ class Forum extends Error {
 			setup_gettext_from_sys_lang ();
 			$string=sprintf(_('Welcome to %1$s'), $forum_name);
 			// and switch back to the user preference
-			setup_gettext_from_browser ();
+			setup_gettext_from_context();
 			if (!$fm->create($string, $string)) {
 				$this->setError($fm->getErrorMessage());
 				return false;

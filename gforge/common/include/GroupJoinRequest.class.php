@@ -259,7 +259,7 @@ Comments by the user:
 			if (! $ret) { return $ret; }
 
 		}
-		setup_gettext_from_browser () ;
+		setup_gettext_from_context();
 		return true ;
 	}
 
@@ -274,7 +274,7 @@ Comments by the user:
 		$subject = sprintf(_('Request to Join Project %1$s'), $this->Group->getPublicName());
 		$body = sprintf(_('Your request to join the %1$s project was denied by an administrator.'), $this->Group->getPublicName());
 		util_send_message($user->getEmail(),$subject,$body);
-		setup_gettext_from_browser () ;
+		setup_gettext_from_context();
 		return $this->delete(1);
 	}
 
@@ -288,7 +288,7 @@ Comments by the user:
 		$subject = sprintf(_('Request to Join Project %1$s'), $this->Group->getPublicName());
 		$body = sprintf(_('Your request to join the %1$s project was granted by an administrator.'), $this->Group->getPublicName());
 		util_send_message($user->getEmail(),$subject,$body);
-		setup_gettext_from_browser () ;
+		setup_gettext_from_context();
 	}
 
 	/**

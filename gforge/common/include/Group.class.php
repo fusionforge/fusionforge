@@ -1935,18 +1935,18 @@ class Group extends Error {
 		if (!$ats || !is_object($ats)) {
 			$this->setError(_('Error creating ArtifactTypes object'));
 			db_rollback();
-			setup_gettext_from_browser ();
+			setup_gettext_from_context();
 			return false;
 		} else if ($ats->isError()) {
 			$this->setError(sprintf (_('ATS%d: %s'), 1, $ats->getErrorMessage()));
 			db_rollback();
-			setup_gettext_from_browser ();
+			setup_gettext_from_context();
 			return false;
 		}
 		if (!$ats->createTrackers()) {
 			$this->setError(sprintf (_('ATS%d: %s'), 2, $ats->getErrorMessage()));
 			db_rollback();
-			setup_gettext_from_browser ();
+			setup_gettext_from_context();
 			return false;
 		}
 
@@ -1959,21 +1959,21 @@ class Group extends Error {
 		if (!$f->create(_('Open-Discussion'),_('General Discussion'),1,'',1,0)) {
 			$this->setError(sprintf (_('F%d: %s'), 1, $f->getErrorMessage()));
 			db_rollback();
-			setup_gettext_from_browser ();
+			setup_gettext_from_context();
 			return false;
 		}
 		$f = new Forum($this);
 		if (!$f->create(_('Help'),_('Get Public Help'),1,'',1,0)) {
 			$this->setError(sprintf (_('F%d: %s'), 2, $f->getErrorMessage()));
 			db_rollback();
-			setup_gettext_from_browser ();
+			setup_gettext_from_context();
 			return false;
 		}
 		$f = new Forum($this);
 		if (!$f->create(_('Developers'),_('Project Developer Discussion'),0,'',1,0)) {
 			$this->setError(sprintf (_('F%d: %s'), 3, $f->getErrorMessage()));
 			db_rollback();
-			setup_gettext_from_browser ();
+			setup_gettext_from_context();
 			return false;
 		}
 
@@ -1986,7 +1986,7 @@ class Group extends Error {
 		if (!$dg->create(_('Uncategorized Submissions'))) {
 			$this->setError(sprintf(_('DG: %s'),$dg->getErrorMessage()));
 			db_rollback();
-			setup_gettext_from_browser ();
+			setup_gettext_from_context();
 			return false;
 		}
 
@@ -1999,7 +1999,7 @@ class Group extends Error {
 		if (!$frs->create($this->getUnixName())) {
 			$this->setError(sprintf(_('FRSP: %s'),$frs->getErrorMessage()));
 			db_rollback();
-			setup_gettext_from_browser ();
+			setup_gettext_from_context();
 			return false;
 		}
 
@@ -2012,14 +2012,14 @@ class Group extends Error {
 		if (!$pg->create(_('To Do'),_('Things We Have To Do'),1)) {
 			$this->setError(sprintf(_('PG%d: %s'),1,$pg->getErrorMessage()));
 			db_rollback();
-			setup_gettext_from_browser ();
+			setup_gettext_from_context();
 			return false;
 		}
 		$pg = new ProjectGroup($this);
 		if (!$pg->create(_('Next Release'),_('Items For Our Next Release'),1)) {
 			$this->setError(sprintf(_('PG%d: %s'),2,$pg->getErrorMessage()));
 			db_rollback();
-			setup_gettext_from_browser ();
+			setup_gettext_from_context();
 			return false;
 		}
 
@@ -2035,7 +2035,7 @@ class Group extends Error {
 			if (!$role->createDefault($todo[$c])) {
 				$this->setError(sprintf(_('R%d: %s'),$c,$role->getErrorMessage()));
 				db_rollback();
-				setup_gettext_from_browser ();
+				setup_gettext_from_context();
 				return false;
 			}
 		}
@@ -2058,13 +2058,13 @@ class Group extends Error {
 			if (!$mlist->create('commits',_('Commits'),1,$idadmin_group)) {
 				$this->setError(sprintf(_('ML: %s'),$mlist->getErrorMessage()));
 				db_rollback();
-				setup_gettext_from_browser ();
+				setup_gettext_from_context();
 				return false;
 			}
 		}
 
 		// Switch back to user preference
-		setup_gettext_from_browser ();
+		setup_gettext_from_context();
 
 		db_commit();
 
@@ -2146,7 +2146,7 @@ if there is anything we can do to help you.
 	
 			util_send_message($row_admins['email'], sprintf(_('%1$s Project Approved'), $GLOBALS['sys_name']), $message);
 
-			setup_gettext_from_browser () ;
+			setup_gettext_from_context();
 		}
 
 		return true;
@@ -2202,7 +2202,7 @@ Reasons for negative decision:
 			}
 
 			util_send_message($row_admins['email'], sprintf(_('%1$s Project Denied'), $GLOBALS['sys_name']), $response);
-			setup_gettext_from_browser () ;
+			setup_gettext_from_context();
 		}
 
 		return true;
@@ -2265,7 +2265,7 @@ Please visit the following URL to approve or reject this project:
 						       $submitter->getRealName(), 
 						       $submitter->getUnixName()));
 			util_send_message($admin_email, sprintf(_('New %1$s Project Submitted'), $GLOBALS['sys_name']), $message);
-			setup_gettext_from_browser () ;
+			setup_gettext_from_context();
 		}
 		
 
@@ -2281,7 +2281,7 @@ License: %4$s
 The %1$s admin team will now examine your project submission.  You will be notified of their decision.'), $GLOBALS['sys_name'], $this->getPublicName(), util_unconvert_htmlspecialchars($this->getRegistrationPurpose()), $this->getLicenseName(), $GLOBALS['sys_default_domain']));
 				
 		util_send_message($email, sprintf(_('New %1$s Project Submitted'), $GLOBALS['sys_name']), $message);
-		setup_gettext_from_browser () ;
+		setup_gettext_from_context();
 		
 		return true;
 	}

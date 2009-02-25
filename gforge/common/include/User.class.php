@@ -329,7 +329,7 @@ class GFUser extends Error {
 			if ($send_mail) {
 				setup_gettext_from_lang_id($language_id);
 				$this->sendRegistrationEmail();
-				setup_gettext_from_browser() ;
+				setup_gettext_from_context();
 			}
 
 			db_commit();
