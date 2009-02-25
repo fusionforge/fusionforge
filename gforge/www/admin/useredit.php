@@ -50,7 +50,7 @@ if (getStringFromRequest('delete_user') != '' && getStringFromRequest('confirm_d
 			$u->getErrorMessage()
 		);
 	} else {
-		$feedback .= _('Deleted (D)').'<br />';
+		$feedback = _('Deleted (D)').'<br />';
 	}
 
 } elseif (getStringFromRequest('action') == "update_user" && getStringFromRequest('delete_user') == '') {
@@ -76,9 +76,9 @@ if (getStringFromRequest('delete_user') != '' && getStringFromRequest('confirm_d
 	}
 	
 	if ($u->isError()) {
-		$feedback .= $u->getErrorMessage();
+		$feedback = $u->getErrorMessage();
 	} else {
-		$feedback .= _('Updated').'<br />';
+		$feedback = _('Updated').'<br />';
 	}
 
 }
