@@ -133,7 +133,7 @@ class Theme extends Layout {
 	// generic_header_start() - Start a generic HTML header
 	function generic_header_start($params) {
 
-		global $G_SESSION, $Language, $sys_name;
+		global $G_SESSION, $sys_name;
 
 		if (!$params['title']) {
 			$params['title'] = $GLOBALS['sys_name'];
@@ -145,9 +145,9 @@ class Theme extends Layout {
 	"http://www.w3.org/TR/REC-html40/loose.dtd">
 
 <!-- Server: <?php echo $sys_name; ?> -->
-<html lang="<?php echo $Language->getLanguageCode(); ?>">
+<html lang="<?php echo _('en') ?>">
   <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $Language->getEncoding(); ?>">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <TITLE><?php echo $params['title']; ?></TITLE>
 	<SCRIPT language="JavaScript">
 	<!--
@@ -176,7 +176,7 @@ class Theme extends Layout {
 
 	function generic_footer($params) {
 
-	        global $IS_DEBUG,$QUERY_COUNT,$Language;
+	        global $IS_DEBUG,$QUERY_COUNT;
         	if ($IS_DEBUG && user_ismember(1,'A')) {
 	                echo "<CENTER><B><FONT COLOR=RED>Query Count: $QUERY_COUNT</FONT
 ></B></CENTER>";
@@ -189,10 +189,6 @@ Copyright (C) 2000, 2001, 2002 Free Software Foundation, Inc., 59 Temple Place -
 Verbatim copying and distribution of this entire article is permitted in any medium, provided this notice is preserved.
 
 </p>&nbsp;
-<span class="center">
-<? echo $Language->getText('general', 'footer'); ?>
-</span>
-
 </body>
 </html>
         <?php

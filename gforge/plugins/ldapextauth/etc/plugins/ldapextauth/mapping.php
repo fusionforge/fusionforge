@@ -1,7 +1,6 @@
 <?php
 
 function plugin_ldapextauth_mapping ($entry) {
-	global $Language;
 	$result = array () ;
 	
 	$result['firstname'] = $entry['givenname'][0] ;
@@ -9,7 +8,6 @@ function plugin_ldapextauth_mapping ($entry) {
 	$result['email'] = $entry['uid'][0] . '@' . $GLOBALS['sys_default_domain'] ;
 	//$result['email'] = $entry['mail'][0] ; // AD
 	// You may also want to customise $result['language_id']
-	//$result['language_id']=$Language->getLanguageId();
 	// You may also want to customise $result['timezone']
 	//$result['timezone']=$GLOBALS['sys_default_timezone'];
 	// You may also want to customise $result['jabber_address']

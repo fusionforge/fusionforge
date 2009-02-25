@@ -83,7 +83,6 @@ class TroveCategory extends Error {
 	 *	@return	boolean	success.
 	 */
 	function fetchData($categoryId) {
-		global $Language;
 		$res=db_query("SELECT *
 			FROM trove_cat
 			WHERE trove_cat_id='".$categoryId."'", -1, 0, SYS_DB_TROVE);
@@ -144,7 +143,6 @@ class TroveCategory extends Error {
 	}
 	
 	function getLocalizedLabel() {
-		global $Language;
 		$languageId = choose_language_from_context();
 		$label = $this->getLabel($languageId);
 		if($label) {

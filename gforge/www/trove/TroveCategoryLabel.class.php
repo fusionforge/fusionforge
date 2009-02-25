@@ -40,7 +40,6 @@ class TroveCategoryLabel extends Error {
 	var $dataArray = false;
 
 	function TroveCategoryLabel(& $category, $labelId = false, $dataArray = false) {
-		global $Language;
 		$this->Error();
 		if (!$category || !is_object($category)) {
 			return false;
@@ -70,7 +69,6 @@ class TroveCategoryLabel extends Error {
 	}
 
 	function create($label, $languageId) {
-		global $Language;
 		if(strlen($label) == 0) {
 			// set error
 			return false;
@@ -98,7 +96,6 @@ class TroveCategoryLabel extends Error {
 	}
 	
 	function fetchData($labelId) {
-		global $Language;
 		$res=db_query("SELECT trove_category_labels.*, supported_languages.name AS language_name FROM trove_category_labels, supported_languages "
 			. "WHERE trove_category_labels.label_id='".$labelId."' "
 			. "AND trove_category_labels.category_id='". $this->category->getId() ."' "
@@ -114,7 +111,6 @@ class TroveCategoryLabel extends Error {
 	}
 
 	function remove() {
-		global $Language;
 		db_begin();
 		$res = db_query('DELETE FROM trove_category_labels WHERE label_id='.$this->labelId);
 		if(!res || db_affected_rows($res) != 1) {

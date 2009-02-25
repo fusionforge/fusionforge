@@ -949,7 +949,7 @@ class ${fullname}Plugin extends Plugin {
 	}
 
 	function CallHook (\$hookname, \$params) {
-		global \$Language, \$G_SESSION, \$HTML ;
+		global \$G_SESSION, \$HTML ;
 		if (\$hookname == "usermenu") {
 			\$text = "${fullname}" ;
 			if (\$G_SESSION->usesPlugin("$minus")) {

@@ -345,7 +345,6 @@ class Theme extends Layout {
 	 * @param	array	Header parameters array
 	 */
 	function header(\$params) {
-		global \$Language;
 
 		if (!\$params['title']) {
 			\$params['title'] = "GForge";
@@ -355,9 +354,9 @@ class Theme extends Layout {
 		?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 
-<html lang="<?php echo \$Language->getLanguageCode(); ?>">
+<html lang="<?php echo _('en') ?>">
   <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=<?php echo \$Language->getEncoding(); ?>">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<TITLE><?php echo \$params['title']; ?></TITLE>
 	<SCRIPT language="JavaScript">
 	<!--

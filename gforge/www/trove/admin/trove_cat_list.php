@@ -20,7 +20,6 @@ session_require(array('group'=>'1','admin_flags'=>'A'));
 
 // print current node, then all subnodes
 function printnode ($nodeid,$text) {
-	global $Language;
 	print ('<br />');
 
 	for ($i=0;$i<$GLOBALS[depth];$i++) {

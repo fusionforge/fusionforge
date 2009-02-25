@@ -146,7 +146,7 @@ class LdapextauthPlugin extends Plugin {
 			// User not found in LDAP => Account invalid
 			@ldap_unbind($this->ldap_conn);
 			debuglog("LDAP: Wrong password according to LDAP ($loginname)");
-			$feedback=$Language->getText('session','invalidpasswd');
+			$feedback=_('Invalid Password Or User Name');
 			$GLOBALS['ldap_auth_failed']=true;
 			return false ;
 		}
