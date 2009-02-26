@@ -283,14 +283,7 @@ class Group extends Error {
 		if ($this->getID()!=0) {
 			$this->setError(_('Group::create: Group object already exists'));
 			return false;
-		} else if (strlen($full_name)<3) {
-			$this->setError(_('Full name is too short'));
-			return false;
-		} else if (strlen(htmlspecialchars($full_name))>50) {
-			$this->setError(_('Full name is too long'));
-			return false;
-		} else if ($group=group_get_object_by_publicname($full_name)) {
-			$this->setError(_('Full name already taken'));
+		} else if (!$this->validateFullName($full_name)) {
 			return false;
 		} else if (!account_groupnamevalid($unix_name)) {
 			$this->setError(_('Invalid Unix name'));
@@ -510,8 +503,7 @@ class Group extends Error {
 		}
 
 		// Validate some values
-		if (!$group_name) {
-			$this->setError(_('Invalid Group Name'));
+		if (!$this->validateFullName($group_name)) {
 			return false;
 		}
 
@@ -2285,6 +2277,34 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		
 		return true;
 	}
+
+
+
+
+/**
+ *	validateFullName - Validate the group name
+ *
+ *	@param	string	Group name.
+ *
+ *	@return	an error false and set an error is the group name is invalide otherwise return true
+ */
+	function validateFullName($full_name) {
+		if (strlen($full_name)<3) {
+			$this->setError(_('Full name is too short'));
+			return false;
+		} else if (strlen(htmlspecialchars($full_name))>50) {
+			$this->setError(_('Full name is too long'));
+			return false;
+		} else if ($group=group_get_object_by_publicname($full_name)) {
+			$this->setError(_('Full name already taken'));
+			return false;
+		}
+		return true;
+	}
+
+
+
+
 }
 
 /**
