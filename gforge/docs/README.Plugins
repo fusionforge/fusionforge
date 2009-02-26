@@ -417,5 +417,16 @@ had been written.
   Locations  : common/include/Role.class.php
   Description: Provides a way to extend the way user information are stored
 
+  hook Name  : outermenu
+  Parameters : DIRS - A reference to the array of tab URLs
+               TITLES - A reference to the array of tab titles
+  Location   : www/include/Layout.class.php
+  Description: Used to provide a plugin specific tab in main menu.
+
+  Hook Name  : project_public_area
+  Parameters : group_id - The numeric ID of the group
+  Locations  : www/include/project_home.php
+  Description: Used to provide plugin specific infos on a group's
+               public area.
 
   -- Roland Mas <lolando@debian.org>
