@@ -277,13 +277,13 @@ class Group extends Error {
 	 *  @param	string	The 'other' license to use if any.
 	 *  @param	string	The purpose of the group.
 	 */
-	function create(&$user, $full_name, $unix_name, $description, $license, $license_other, $purpose, $unix_box='shell1', $scm_box='cvs1', $is_public=1) {
+	function create(&$user, $group_name, $unix_name, $description, $license, $license_other, $purpose, $unix_box='shell1', $scm_box='cvs1', $is_public=1) {
 		// $user is ignored - anyone can create pending group
 
 		if ($this->getID()!=0) {
 			$this->setError(_('Group::create: Group object already exists'));
 			return false;
-		} else if (!$this->validateFullName($full_name)) {
+		} else if (!$this->validateGroupName($group_name)) {
 			return false;
 		} else if (!account_groupnamevalid($unix_name)) {
 			$this->setError(_('Invalid Unix name'));
@@ -338,7 +338,7 @@ class Group extends Error {
 					rand_hash
 				)
 				VALUES (
-					'".htmlspecialchars($full_name)."',
+					'".htmlspecialchars($group_name)."',
 					'$is_public',
 					'$unix_name',
 					'".htmlspecialchars($description)."',
@@ -391,7 +391,7 @@ class Group extends Error {
 			$hook_params = array ();
 			$hook_params['group'] = $this;
 			$hook_params['group_id'] = $this->getID();
-			$hook_params['group_name'] = $full_name;
+			$hook_params['group_name'] = $group_name;
 			$hook_params['unix_group_name'] = $unix_name;
 			plugin_hook ("group_create", $hook_params);
 			
@@ -503,7 +503,7 @@ class Group extends Error {
 		}
 
 		// Validate some values
-		if (!$this->validateFullName($group_name)) {
+		if (!$this->validateGroupName($group_name)) {
 			return false;
 		}
 
@@ -2282,21 +2282,21 @@ The %1$s admin team will now examine your project submission.  You will be notif
 
 
 /**
- *	validateFullName - Validate the group name
+ *	validateGroupName - Validate the group name
  *
  *	@param	string	Group name.
  *
  *	@return	an error false and set an error is the group name is invalide otherwise return true
  */
-	function validateFullName($full_name) {
-		if (strlen($full_name)<3) {
-			$this->setError(_('Full name is too short'));
+	function validateGroupName($group_name) {
+		if (strlen($group_name)<3) {
+			$this->setError(_('Group name is too short'));
 			return false;
-		} else if (strlen(htmlspecialchars($full_name))>50) {
-			$this->setError(_('Full name is too long'));
+		} else if (strlen(htmlspecialchars($group_name))>50) {
+			$this->setError(_('Group name is too long'));
 			return false;
-		} else if ($group=group_get_object_by_publicname($full_name)) {
-			$this->setError(_('Full name already taken'));
+		} else if ($group=group_get_object_by_publicname($group_name)) {
+			$this->setError(_('Group name already taken'));
 			return false;
 		}
 		return true;
