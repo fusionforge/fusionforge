@@ -91,6 +91,8 @@ if ($role_id=='observer') {
 
 project_admin_header(array('title'=>_('Edit Role'),'group'=>$group_id));
 
+$group = group_get_object($group_id);
+
 //
 //	If observer role, show title
 //
@@ -131,12 +133,20 @@ echo $HTML->listTableTop($titles);
 $j = 0;
 $keys = array_keys($role->role_values);
 for ($i=0; $i<count($keys); $i++) {
+        if ((!$group->usesForum() && ereg("forum", $keys[$i])) ||
+                (!$group->usesTracker() && ereg("tracker", $keys[$i])) ||
+                (!$group->usesPM() && ereg("pm", $keys[$i])) ||
+                (!$group->usesFRS() && ereg("frs", $keys[$i])) ||
+                (!$group->usesSCM() && ereg("scm", $keys[$i])) ||
+                (!$group->usesDocman() && ereg("docman", $keys[$i]))) {
+
+                //We don't display modules not used
 
 
 //
 //	Handle forum settings for all roles
 //
-	if ($keys[$i] == 'forum' || $keys[$i] == 'forumpublic' || $keys[$i] == 'forumanon') {
+	} elseif ($keys[$i] == 'forum' || $keys[$i] == 'forumpublic' || $keys[$i] == 'forumanon') {
 
 		if ($keys[$i] == 'forumanon') {
 			//skip as we have special case below
