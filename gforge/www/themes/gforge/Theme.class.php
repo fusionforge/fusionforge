@@ -157,8 +157,9 @@ class Theme extends Layout {
 		  <td class="topLeft"><?php echo util_make_link ('/', html_image('header/top-logo.png',192,54,array('border'=>'0'))); ?></td>
         <td class="middleRight"><?php echo $this->searchBox(); ?></td>
         <td class="middleRight"><?php
-        if (session_loggedin()) {
-        	echo util_make_link ('/account/logout.php', _('Log Out'));
+	if (session_loggedin()) {
+		$u =& user_get_object(user_getid());
+		echo util_make_link ('/account/logout.php', sprintf("%s (%s)", _('Log Out'), $u->getRealName()));
         	echo ' | ';
         	echo util_make_link ('/account/', _('My Account'));
         } else {

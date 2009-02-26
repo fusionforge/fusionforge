@@ -122,7 +122,9 @@ class Theme extends Layout {
 		<td align="right"><?php echo $this->searchBox(); ?></td>
 		<td align="right"><?php
 			if (session_loggedin()) {
-				echo util_make_link ('/account/logout.php',_('Logout')); ?><br /><?php
+				$u =& user_get_object(user_getid());
+				echo util_make_link ('/account/logout.php', sprintf("%s (%s)", _('Log Out'), $u->getRealName()));
+				?><br /><?php
 				echo util_make_link ('/account/',_('My Account')); ?><br /><?php
 			} else { 
 				echo util_make_link ('/account/login.php',_('Login')); ?><br /><?php

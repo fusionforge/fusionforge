@@ -149,7 +149,8 @@ function header($params) {
 <div id="util">
 <?php
 if (session_loggedin()) {
-	echo util_make_link ('/account/logout.php',_('Log Out'));
+	$u =& user_get_object(user_getid());
+	echo util_make_link ('/account/logout.php', sprintf("%s (%s)", _('Log Out'), $u->getRealName()));
 	echo '<br />';
 	echo util_make_link ('/account/',_('My Account'));
 	echo '<br />';

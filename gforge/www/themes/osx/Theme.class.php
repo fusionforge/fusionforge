@@ -75,7 +75,11 @@ class Theme extends Layout {
 		<td style="text-align:right"><?php
 			if (session_loggedin()) {
 				?>
-				<b><?php echo util_make_link ('/account/logout.php',_('Log Out')); ?></b><br />
+				<b><?php
+
+				$u =& user_get_object(user_getid());
+				echo util_make_link ('/account/logout.php', sprintf("%s (%s)", _('Log Out'), $u->getRealName()));
+					?></b><br />
 				<b><?php echo util_make_link ('/account/',_('My Account')); ?></b><?php
 			} else {
 				?>
