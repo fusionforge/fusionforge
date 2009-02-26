@@ -39,7 +39,7 @@ if (getStringFromRequest('submit')) {
 		exit_error(_('Error'),_('Invalid email address.'));
 	}
 
-	$confirm_hash = substr(md5($session_hash . time()),0,16);
+	$confirm_hash = substr(md5($GLOBALS['session_ser'] . time()),0,16);
 
 	$u =& user_get_object(user_getid());
 	if (!$u || !is_object($u)) {
