@@ -404,6 +404,18 @@ had been written.
                Unlike the groupmenu hook, this hook should use the PrintSubMenu
                method to display the tab itself.
 
+  Hook Name  : role_get
+  Locations  : common/include/Role.class.php
+  Description: Provides a place to read role from another subsystem (LDAP, DB,
+               etc...)
+
+  Hook Name  : role_update
+  Locations  : common/include/Role.class.php
+  Description: Triggered when new a role is updated
+
+  Hook Name  : role_setuser
+  Locations  : common/include/Role.class.php
+  Description: Provides a way to extend the way user information are stored
 
 
   -- Roland Mas <lolando@debian.org>

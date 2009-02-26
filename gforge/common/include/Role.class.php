@@ -64,6 +64,12 @@ class Role extends Error {
 			return false;
 		}
 		$this->Group =& $Group;
+
+		$hook_params = array ();
+		$hook_params['role'] =& $this;
+		plugin_hook ("role_get", $hook_params);
+
+
 		if (!$role_id) {
 			//setting up an empty object
 			//probably going to call create()
@@ -444,6 +450,14 @@ class Role extends Error {
 			}
 
 //		}
+
+		$hook_params = array ();
+		$hook_params['role'] =& $this;
+		$hook_params['role_id'] = $this->getID();
+		$hook_params['data'] = $data;
+		plugin_hook ("role_update", $hook_params);
+
+
 		db_commit();
 		$this->fetchData($this->getID());
 		return true;
@@ -597,6 +611,14 @@ class Role extends Error {
 			}
 
 	//	}
+
+		$hook_params = array ();
+		$hook_params['role'] =& $this;
+		$hook_params['role_id'] = $this->getID();
+		$hook_params['user_id'] = $user_id;
+		plugin_hook ("role_setuser", $hook_params);
+
+
 		db_commit();
 		return true;
 
