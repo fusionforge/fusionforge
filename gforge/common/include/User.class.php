@@ -3,6 +3,7 @@
  * FusionForge user management
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -38,7 +39,8 @@ $USER_OBJ=array();
 function &user_get_object_by_name($user_name,$res=false) {
 	$user_name = strtolower($user_name);
 	if (!$res) {
-		$res=db_query("SELECT * FROM users WHERE user_name='$user_name'");
+		$res = db_query_params ('SELECT * FROM users WHERE user_name=$1',
+					array ($user_name)) ;
 	}
 	return user_get_object(db_result($res,0,'user_id'),$res);
 }
@@ -65,7 +67,8 @@ function &user_get_object($user_id,$res=false) {
 		if ($res) {
 			//the db result handle was passed in
 		} else {
-			$res=db_query("SELECT * FROM users WHERE user_id='$user_id'");
+			$res = db_query_params ('SELECT * FROM users WHERE user_id=$1',
+						array ($user_id)) ;
 		}
 		if (!$res || db_numrows($res) < 1) {
 			$USER_OBJ["_".$user_id."_"]=false;
@@ -95,8 +98,8 @@ function &user_get_objects($id_arr) {
 		}
 	}
 	if (count($fetch) > 0) {
-		$sql="SELECT * FROM users WHERE user_id IN ('".implode($fetch,'\',\'') ."')";
-		$res=db_query($sql);
+		$res = db_query_params ('SELECT * FROM users WHERE user_id = ANY ($1)',
+					array (db_int_array_to_any_clause ($fetch))) ;
 		while ($arr =& db_fetch_array($res)) {
 			$USER_OBJ["_".$arr['user_id']."_"] = new GFUser($arr['user_id'],$arr);
 			$return[] =& $USER_OBJ["_".$arr['user_id']."_"];
@@ -106,7 +109,8 @@ function &user_get_objects($id_arr) {
 }
 
 function &user_get_objects_by_name($username_arr) {
-	$res=db_query("SELECT user_id FROM users WHERE user_name IN ('".implode($username_arr,'\',\'')."')");
+	$res = db_query_params ('SELECT user_id FROM users WHERE user_name = ANY ($1)',
+				array (db_string_array_to_any_clause ($username_arr))) ;
 	$arr =& util_result_column_to_array($res,0);
 	return user_get_objects($arr);
 }
@@ -257,12 +261,14 @@ class GFUser extends Error {
 		} else {
 			$jabber_only=1;
 		}
-		if (db_numrows(db_query("SELECT user_id FROM users WHERE user_name LIKE '$unix_name'")) > 0) {
+		if (db_numrows(db_query_params('SELECT user_id FROM users WHERE user_name LIKE $1',
+					       array ($unix_name))) > 0) {
 			$this->setError(_('That username already exists.'));
 			return false;
 		}
 		if ($GLOBALS['sys_require_unique_email']) {
-			if (db_numrows(db_query("SELECT user_id FROM users WHERE email ILIKE '$email' OR email_new ILIKE '$email'")) > 0) {
+			if (db_numrows(db_query_params('SELECT user_id FROM users WHERE email ILIKE $1 OR email_new ILIKE $1',
+						       array ($email))) > 0) {
 				$this->setError(_('User with this email already exists - use people search to recover your login.'));
 				return false;
 			}
@@ -270,37 +276,31 @@ class GFUser extends Error {
 		// if we got this far, it must be good
 		$confirm_hash = substr(md5($password1 . rand() . microtime()),0,16);
 		db_begin();
-		$sql="INSERT INTO users (user_name,user_pw,unix_pw,realname,firstname,lastname,email,add_date,
-			status,confirm_hash,mail_siteupdates,mail_va,language,timezone,jabber_address,jabber_only,
-			unix_box,address,address2,phone,fax,title,ccode,theme_id) 
-			VALUES ('$unix_name',
-			'". md5($password1) . "',
-			'". account_genunixpw($password1) . "',
-			'". htmlspecialchars($firstname.' '.$lastname). "',
-			'". htmlspecialchars($firstname). "',
-			'". htmlspecialchars($lastname). "',
-			'$email',
-			'" . time() . "',
-			'P',
-			'$confirm_hash',
-			'". (($mail_site)?"1":"0") . "',
-			'". (($mail_va)?"1":"0") . "',
-			'$language_id',
-			'$timezone',
-			'$jabber_address',
-			'$jabber_only',
-			'$unix_box',
-			'". htmlspecialchars($address) ."',
-			'". htmlspecialchars($address2) ."',
-			'". htmlspecialchars($phone) ."',
-			'". htmlspecialchars($fax) ."',
-			'". htmlspecialchars($title) ."',
-			'$ccode',
-			'$theme_id')";
-
-
-		$result=db_query($sql);
-	
+		$result = db_query_params ('INSERT INTO users (user_name,user_pw,unix_pw,realname,firstname,lastname,email,add_date,status,confirm_hash,mail_siteupdates,mail_va,language,timezone,jabber_address,jabber_only,unix_box,address,address2,phone,fax,title,ccode,theme_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24)',
+					   array ($unix_name,
+						  md5($password1),
+						  account_genunixpw($password1),
+						  htmlspecialchars($firstname.' '.$lastname),
+						  htmlspecialchars($firstname),
+						  htmlspecialchars($lastname),
+						  $email,
+						  time(),
+						  'P',
+						  $confirm_hash,
+						  (($mail_site)?"1":"0"),
+						  (($mail_va)?"1":"0"),
+						  $language_id,
+						  $timezone,
+						  $jabber_address,
+						  $jabber_only,
+						  $unix_box,
+						  htmlspecialchars($address),
+						  htmlspecialchars($address2),
+						  htmlspecialchars($phone),
+						  htmlspecialchars($fax),
+						  htmlspecialchars($title),
+						  $ccode,
+						  $theme_id)) ;
 		if (!$result) {
 			$this->setError(_('Insert Failed') .db_error().$sql);
 			db_rollback();
@@ -388,25 +388,29 @@ Enjoy the site.
 			}
 
 			db_begin();
-			$res = db_query("DELETE FROM artifact_monitor WHERE user_id='".$this->getID()."' ");
+			$res = db_query_params ('DELETE FROM artifact_monitor WHERE user_id=$1',
+						array ($this->getID())) ;
 			if (!$res) {
 				$this->setError('ERROR - Could Not Delete From artifact_monitor: '.db_error());
 				db_rollback();
 				return false;
 			}
-			$res = db_query("DELETE FROM artifact_type_monitor WHERE user_id='".$this->getID()."' ");
+			$res = db_query_params ('DELETE FROM artifact_type_monitor WHERE user_id=$1',
+						array ($this->getID())) ;
 			if (!$res) {
 				$this->setError('ERROR - Could Not Delete From artifact_type_monitor: '.db_error());
 				db_rollback();
 				return false;
 			}
-			$res = db_query("DELETE FROM forum_monitored_forums WHERE user_id='".$this->getID()."' ");
+			$res = db_query_params ('DELETE FROM forum_monitored_forums WHERE user_id=$1',
+						array ($this->getID())) ;
 			if (!$res) {
 				$this->setError('ERROR - Could Not Delete From forum_monitored_forums: '.db_error());
 				db_rollback();
 				return false;
 			}				
-			$res = db_query("DELETE FROM filemodule_monitor WHERE user_id='".$this->getID()."' ");
+			$res = db_query_params ('DELETE FROM filemodule_monitor WHERE user_id=$1',
+						array ($this->getID())) ;
 			if (!$res) {
 				$this->setError('ERROR - Could Not Delete From filemodule_monitor: '.db_error());
 				db_rollback();
@@ -464,28 +468,46 @@ Enjoy the site.
 
 		db_begin();
 
-		$res = db_query("
+		$res = db_query_params ('
 			UPDATE users
 			SET
-			realname='".htmlspecialchars($firstname . ' ' .$lastname)."',
-			firstname='".htmlspecialchars($firstname)."',
-			lastname='".htmlspecialchars($lastname)."',
-			language='$language_id',
-			timezone='$timezone',
-			mail_siteupdates=$mail_site,
-			mail_va=$mail_va,
-			block_ratings='$block_ratings',
-			jabber_address='$jabber_address',
-			jabber_only='$jabber_only',
-			address='". htmlspecialchars($address) ."',
-			address2='". htmlspecialchars($address2) ."',
-			phone='". htmlspecialchars($phone) ."',
-			fax='". htmlspecialchars($fax) ."',
-			title='". htmlspecialchars($title) ."',
-			ccode='$ccode',
-			theme_id='$theme_id'
-			WHERE user_id='".$this->getID()."'
-		");
+			realname=$1,
+			firstname=$2,
+			lastname=$3,
+			language=$4,
+			timezone=$5,
+			mail_siteupdates=$6,
+			mail_va=$7,
+			block_ratings=$8,
+			jabber_address=$9,
+			jabber_only=$10,
+			address=$11,
+			address2=$12,
+			phone=$13,
+			fax=$14,
+			title=$15,
+			ccode=$16,
+			theme_id=$17,
+			WHERE user_id=$18',
+					array (
+						htmlspecialchars($firstname . ' ' .$lastname),
+						htmlspecialchars($firstname),
+						htmlspecialchars($lastname),
+						$language_id,
+						$timezone,
+						$mail_site,
+						$mail_va,
+						$block_ratings,
+						$jabber_address,
+						$jabber_only,
+						htmlspecialchars($address) ,
+						htmlspecialchars($address2) ,
+						htmlspecialchars($phone) ,
+						htmlspecialchars($fax) ,
+						htmlspecialchars($title) ,
+						$ccode,
+						$theme_id,
+						$this->getID())) ;
 
 		if (!$res) {
 			$this->setError('ERROR - Could Not Update User Object: '.db_error());
@@ -522,7 +544,8 @@ Enjoy the site.
 	 *	@return boolean success;
 	 */
 	function fetchData($user_id) {
-		$res=db_query("SELECT * FROM users WHERE user_id='$user_id'");
+		$res = db_query_params ('SELECT * FROM users WHERE user_id=$1',
+					array ($user_id)) ;
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('GFUser::fetchData()::'.db_error());
 			return false;
@@ -566,9 +589,9 @@ Enjoy the site.
 		}
 
 		db_begin();
-		$res=db_query("UPDATE users 
-			SET status='$status' 
-			WHERE user_id='". $this->getID()."'");
+		$res = db_query_params ('UPDATE users SET status=$1 WHERE user_id=$2',
+					array ($status,
+					       $this->getID())) ;
 
 		if (!$res) {
 			$this->setError('ERROR - Could Not Update User Status: '.db_error());
@@ -578,7 +601,8 @@ Enjoy the site.
 			$this->data_array['status']=$status;
 			if ($status == 'D') {
 				// Remove this user from all groups
-				$res = db_query(" DELETE FROM user_group WHERE user_id='".$this->getID()."' ");
+				$res = db_query_params ('DELETE FROM user_group WHERE user_id=$1',
+							array ($this->getID())) ;
 				if (!$res) {
 					$this->setError('ERROR - Could Not Propogate Deleted Status: '.db_error());
 					db_rollback();
@@ -637,11 +661,9 @@ Enjoy the site.
 	function setUnixStatus($status) {
 		global $SYS;
 		db_begin();
-		$res=db_query("
-			UPDATE users 
-			SET unix_status='$status' 
-			WHERE user_id='". $this->getID()."'
-		");
+		$res = db_query_params ('UPDATE users SET unix_status=$1 WHERE user_id=$2',
+					array ($status,
+					       $this->getID())) ;
 
 		if (!$res) {
 			$this->setError('ERROR - Could Not Update User Unix Status: '.db_error());
@@ -756,11 +778,9 @@ Enjoy the site.
 		}
 
 		db_begin();
-		$res=db_query("
-			UPDATE users 
-			SET email='$email' 
-			WHERE user_id='". $this->getID()."'
-		");
+		$res = db_query_params ('UPDATE users SET email=$1 WHERE user_id=$2',
+					array ($email,
+					       $this->getID())) ;
 
 		if (!$res) {
 			$this->setError('ERROR - Could Not Update User Email: '.db_error());
@@ -798,18 +818,16 @@ Enjoy the site.
 		}
 
 		if ($GLOBALS['sys_require_unique_email']) {
-			if (db_numrows(db_query("SELECT user_id FROM users WHERE email ILIKE '$email' OR email_new ILIKE '$email'")) > 0) {
+			if (db_numrows(db_query_params ('SELECT user_id FROM users WHERE email ILIKE $1 OR email_new ILIKE $1',
+							array ($email))) > 0) {
 				$this->setError(_('User with this email already exists.'));
 			return false;
 			}
 		}
-		$res=db_query("
-			UPDATE users
-			SET confirm_hash='$hash',
-			email_new='$email'
-			WHERE user_id='".$this->getID()."'
-		");
-
+		$res = db_query_params ('UPDATE users SET confirm_hash=$1, email_new=$2 WHERE user_id=$3',
+					array ($hash,
+					       $email,
+					       $this->getID())) ;
 		if (!$res) {
 			$this->setError('ERROR - Could Not Update User Email And Hash: '.db_error());
 			return false;
@@ -906,12 +924,9 @@ Enjoy the site.
 		}
 
 		db_begin();
-		$res=db_query("
-			UPDATE users 
-			SET shell='$shell' 
-			WHERE user_id='". $this->getID()."'
-		");
-
+		$res = db_query_params ('UPDATE users SET shell=$1 WHERE user_id=$2',
+					array ($shell,
+					       $this->getID())) ;
 		if (!$res) {
 			$this->setError('ERROR - Could Not Update User Unix Shell: '.db_error());
 			db_rollback();
@@ -1029,10 +1044,8 @@ Enjoy the site.
 	 *	@return array	Array of groups.
 	 */
 	function &getGroups() {
-		$sql="SELECT group_id
-			FROM user_group
-			WHERE user_id='". $this->getID() ."'";
-		$res=db_query($sql);
+		$res = db_query_params ('SELECT group_id FROM user_group WHERE user_id=$1',
+					array ($this->getID())) ;
 		$arr =& util_result_column_to_array($res,0);	
 		return group_get_objects($arr);
 	}
@@ -1058,12 +1071,9 @@ Enjoy the site.
 		$keys = ereg_replace("\n+", "\n", $keys); // Remove empty lines
 		$keys = ereg_replace("\n", "###", $keys); // Convert EOL to marker
 
-		$res=db_query("
-			UPDATE users 
-			SET authorized_keys='$keys'
-			WHERE user_id='".$this->getID()."'
-		");
-
+		$res = db_query_params ('UPDATE users SET authorized_keys=$1 WHERE user_id=$2',
+					array ($keys,
+					       $this->getID())) ;
 		if (!$res) {
 			$this->setError('ERROR - Could Not Update User SSH Keys');
 			return false;
@@ -1082,8 +1092,9 @@ Enjoy the site.
 		$this->is_logged_in=$val;
 		if ($val) {
 			//if this is the logged in user, see if they are a super user
-			$sql="SELECT count(*) AS count FROM user_group WHERE user_id='". $this->getID() ."' AND group_id='1' AND admin_flags='A'";
-			$result=db_query($sql);
+			$result = db_query_params ('SELECT count(*) AS count FROM user_group WHERE user_id=$1 AND group_id=1 AND admin_flags=$2',
+						   array ($this->getID(),
+							  'A'))) ;
 			if (!$result) {
 				$this->is_super_user=false;
 				return;
@@ -1111,9 +1122,9 @@ Enjoy the site.
 	function deletePreference($preference_name) {
 		$preference_name=strtolower(trim($preference_name));
 		unset($this->user_pref["$preference_name"]);
-		$res= db_query("DELETE FROM user_preferences 
-			WHERE user_id='". $this->getID() ."'
-			AND preference_name='$preference_name'");
+		$res = db_query_params ('DELETE FROM user_preferences WHERE user_id=$1 AND preference_name=$2',
+					array ($this->getID(),
+					       $preference_name)) ;
 		return $res;
 	}
 
@@ -1129,16 +1140,22 @@ Enjoy the site.
 		//delete pref if not value passed in
 		unset($this->user_pref);
 		if (!isset($value)) {
-			$result=db_query("DELETE FROM user_preferences WHERE 
-				user_id='". $this->getID() ."' AND preference_name='$preference_name'");
+			$result = db_query_params ('DELETE FROM user_preferences WHERE user_id=$1 AND preference_name=$2',
+						   array ($this->getID(),
+							  $preference_name)) ;
 		} else {
-			$result=db_query("UPDATE user_preferences SET preference_value='$value',set_date='". time() ."' ".
-				"WHERE user_id='". $this->getID() ."' ".
-				"AND preference_name='$preference_name'");
+			$result = db_query_params ('UPDATE user_preferences SET preference_value=$1,set_date=$2	WHERE user_id=$3 AND preference_name=$4',
+						   array ($value,
+							  time(),
+							  $this->getID(),
+							  $preference_name)) ;
 			if (db_affected_rows($result) < 1) {
 				//echo db_error();
-				$result=db_query("INSERT INTO user_preferences (user_id,preference_name,preference_value,set_date) ".
-					"VALUES ('". $this->getID() ."','$preference_name','$value','". time() ."')");
+				$result = db_query_params ('INSERT INTO user_preferences (user_id,preference_name,preference_value,set_date) VALUES ($1,$2,$3,$4)',
+							   array ($this->getID(),
+								  $preference_name,
+								  $value,
+								  time())) ;
 				return $result;
 			}
 		}
@@ -1166,8 +1183,8 @@ Enjoy the site.
 			}
 		} else {
 			//we haven't returned prefs - go to the db
-			$result=db_query("SELECT preference_name,preference_value FROM user_preferences ".
-				"WHERE user_id='". $this->getID() ."'");
+			$result = db_query_params ('SELECT preference_name,preference_value FROM user_preferences WHERE user_id=$1',
+						   array ($this->getID())) ;
 			if (db_numrows($result) < 1) {
 				//echo "\n\nNo Prefs Found";
 				return false;
@@ -1204,14 +1221,13 @@ Enjoy the site.
 		}
 
 		db_begin();
-		$unix_pw = account_genunixpw($passwd);
+		$md5_pw = md5 ($passwd) ;
+		$unix_pw = account_genunixpw($passwd) ;
 
-		$res=db_query("
-			UPDATE users
-			SET user_pw='" . md5($passwd) . "',
-			unix_pw='$unix_pw'
-			WHERE user_id='".$this->getID()."'
-		");
+		$res = db_query_params ('UPDATE users SET user_pw=$1, unix_pw=$2 WHERE user_id=$3',
+					array ($md5_pw,
+					       $unix_pw,
+					       $this->getID())) ;
 
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError('ERROR - Could Not Change User Password: '.db_error());
@@ -1254,11 +1270,12 @@ Enjoy the site.
 	function getPlugins() {
 		if (!isset($this->plugins_data)) {
 			$this->plugins_data = array () ;
-			$sql="SELECT user_plugin.plugin_id, plugins.plugin_name
-				FROM user_plugin, plugins
-				WHERE user_plugin.user_id=".$this->getID()."
-					AND user_plugin.plugin_id = plugins.plugin_id" ;
-			$res=db_query($sql);
+			$sql="" ;
+			$res = db_query_params ('SELECT user_plugin.plugin_id, plugins.plugin_name
+			                         FROM user_plugin, plugins
+                                                 WHERE user_plugin.user_id=$1
+                                                   AND user_plugin.plugin_id=plugins.plugin_id',
+						array ($this->getID())) ;
 			$rows = db_numrows($res);
 
 			for ($i=0; $i<$rows; $i++) {
@@ -1297,10 +1314,8 @@ Enjoy the site.
 			// State is already good, returning
 			return true ;
 		}
-		$sql="SELECT plugin_id
-			FROM plugins
-			WHERE plugin_name = '" . $pluginname . "'" ;
-		$res=db_query($sql);
+		$res = db_query_params ('SELECT plugin_id FROM plugins WHERE plugin_name=$1',
+					array ($pluginname)) ;
 		$rows = db_numrows($res);
 		if ($rows == 0) {
 			// Error: no plugin by that name
@@ -1310,16 +1325,13 @@ Enjoy the site.
 		// Invalidate cache
 		unset ($this->plugins_data) ;
 		if ($val) {
-			$sql="INSERT INTO user_plugin (user_id, plugin_id)
-				VALUES (". $this->getID() . ", ". $plugin_id .")" ;
-			$res=db_query($sql);
-			return $res ;
+			return db_query_params ('INSERT INTO user_plugin (user_id,plugin_id) VALUES ($1,$2)',
+						array ($this->getID(),
+						       $plugin_id)) ;
 		} else {
-			$sql="DELETE FROM user_plugin
-				WHERE user_id = ". $this->getID() . "
-				AND plugin_id = ". $plugin_id ;
-			$res=db_query($sql);
-			return $res ;
+			return db_query_params ('DELETE FROM user_plugin WHERE user_id=$1 AND plugin_id=$2',
+						array ($this->getID(),
+						       $plugin_id)) ;
 		}
 	}
 
@@ -1347,21 +1359,13 @@ Enjoy the site.
 	 */
 	function unsubscribeFromMailings($all=false) {
 		$res1 = $res2 = $res3 = true;
-		$res1 = db_query("
-			UPDATE users
-			SET mail_siteupdates=0,
-				mail_va=0
-			WHERE user_id='".$this->getID()."'
-		");
+		$res1 = db_query_params ('UPDATE users SET mail_siteupdates=0, mail_va=0 WHERE user_id=$1',
+					 array ($this->getID())) ;
 		if ($all) {
-			$res2 = db_query("
-				DELETE FROM forum_monitored_forums
-				WHERE user_id='".$this->getID()."'
-			");
-			$res3 = db_query("
-				DELETE FROM filemodule_monitor
-				WHERE user_id='".$this->getID()."'
-			");
+			$res2 = db_query_params ('DELETE FROM forum_monitored_forums WHERE user_id=$1',
+						 array ($this->getID())) ;
+			$res3 = db_query_params ('DELETE FROM filemodule_monitor WHERE user_id=$1',
+						 array ($this->getID())) ;
 		}
 
 		return $res1 && $res2 && $res3;
@@ -1386,7 +1390,8 @@ Enjoy the site.
 //	An optimization in session_getdata lets us pre-fetch this in most cases.....
 //
 		if (!$this->data_array['dirname']) {
-			$res=db_query("SELECT dirname FROM themes WHERE theme_id='".$this->getThemeID()."'");
+			$res = db_query_params ('SELECT dirname FROM themes WHERE theme_id=$1',
+						array ($this->getThemeID())) ;
 			$this->theme=db_result($res,0,'dirname');
 		} else {
 			$this->theme=$this->data_array['dirname'];
