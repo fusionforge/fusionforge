@@ -440,7 +440,7 @@ class Role extends Error {
 						       $data['docman'][0],
 						       $data['scm'][0],
 						       $data['frs'][0],
-						       $data['trackeradmin'][0];
+						       $data['trackeradmin'][0],
 						       $this->getID())) ;
 			if (!$res) {
 				$this->setError('update::usergroup::'.db_error());

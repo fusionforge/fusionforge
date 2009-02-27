@@ -1094,7 +1094,7 @@ Enjoy the site.
 			//if this is the logged in user, see if they are a super user
 			$result = db_query_params ('SELECT count(*) AS count FROM user_group WHERE user_id=$1 AND group_id=1 AND admin_flags=$2',
 						   array ($this->getID(),
-							  'A'))) ;
+							  'A')) ;
 			if (!$result) {
 				$this->is_super_user=false;
 				return;
