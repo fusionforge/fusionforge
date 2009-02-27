@@ -109,11 +109,14 @@ Requires: perl-DBD-Pg, php-pgsql
 	%define gracefulhttpd() service httpd graceful >/dev/null 2>&1
 %endif
 
+Provides: gforge = %{Version}
+
 %description
-GForge is a web-based Collaborative Development Environment offering
-easy access to CVS, mailing lists, bug tracking, message
-boards/forums, task management, permanent file archival, and total
-web-based administration.
+FusionForge provides many tools to aid collaboration in a
+development project, such as bug-tracking, task management,
+mailing-lists, SCM repository, forums, support request helper,
+web/FTP hosting, release management, etc. All these services are
+integrated into one web site and managed through a web interface.
 
 # Macro for generating an environment variable (%1) with %2 random characters
 %define randstr() %1=`perl -e 'for ($i = 0, $bit = "!", $key = ""; $i < %2; $i++) {while ($bit !~ /^[0-9A-Za-z]$/) { $bit = chr(rand(90) + 32); } $key .= $bit; $bit = "!"; } print "$key";'`
@@ -196,7 +199,7 @@ fi
 cp -rp rpm-specific/custom $RPM_BUILD_ROOT/%{GFORGE_CONF_DIR}
 
 # setting crontab
-install -m 664 rpm-specific/cron.d/fusionforge $RPM_BUILD_ROOT/%{CROND_DIR}/
+install -m 664 cron.d/fusionforge $RPM_BUILD_ROOT/%{CROND_DIR}/
 
 %pre
 %startpostgresql
@@ -275,7 +278,7 @@ if [ "$1" -eq "1" ]; then
  		s/SERVER_ADMIN/"$adminemail"/g" %{GFORGE_CONF_DIR}/gforge.conf
  
  	#path of jpgraph.php
- 	path_jpgraph=$(rpm -ql php-jpgraph | grep jpgraph.php)
+ 	path_jpgraph=$(rpm -ql php-jpgraph | grep jpgraph.php | sed 's/\(.*\)jpgraph.php/\1/')
  	perl -pi -e "
 		s#^sys_path_to_jpgraph=.*#sys_path_to_jpgraph=$path_jpgraph#g" %{GFORGE_CONF_DIR}/gforge.conf
  	

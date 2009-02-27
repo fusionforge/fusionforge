@@ -130,6 +130,16 @@ if [ "$1" = "1" ] ; then
 		mkdir -p $CHROOT/cvsroot
 	fi
 	ln -s $CHROOT/cvsroot /cvsroot
+
+	#if sys_account_manager_type=pgsql, comment the cron usergroup.php
+	SYS_ACCOUNT_MANAGER_TYPE=`grep '^sys_account_manager_type=' %{GFORGE_CONF_DIR}/gforge.conf | sed 's/.*=\s*\(.*\)/\1/'`
+	if [ $SYS_ACCOUNT_MANAGER_TYPE = "pgsql" ]; then
+		#echo "plugin scmcvs installed"
+		if [ "$(grep 'usergroup.php' %{CROND_DIR}/fusionforge-plugin-scmcvs | grep '#')" = "" ]; then
+			#echo "I comment the cron if it is un comment"
+			sed -i "s/^\(.*usergroup.php.*\)/#\1/" %{CROND_DIR}/fusionforge-plugin-scmcvs
+		fi
+	fi
 else
         # upgrade
         :
