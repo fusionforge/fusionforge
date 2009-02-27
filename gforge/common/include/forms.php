@@ -41,8 +41,7 @@ function form_generate_key() {
 			$sql = "SELECT * FROM form_keys WHERE `key`='".$key."'";
 			$res=db_query($sql);
 		} else {
-			$sql = 'SELECT * FROM form_keys WHERE key=$1';
-			$res=db_query_params ($sql, array ($key));
+			$res = db_query_params ('SELECT * FROM form_keys WHERE key=$1', array ($key));
 		}
 		if (!db_numrows($res)) {
 			$is_new=true;	
@@ -77,8 +76,7 @@ function form_key_is_valid($key) {
 		$sql = "SELECT * FROM form_keys WHERE `key`='$key' and is_used=0 FOR UPDATE";
 		$res=db_query($sql);
 	} else {
-		$sql = 'SELECT * FROM form_keys WHERE key=$1 and is_used=0 FOR UPDATE';
-		$res=db_query_params($sql, array ($key));
+		$res = db_query_params ('SELECT * FROM form_keys WHERE key=$1 and is_used=0 FOR UPDATE', array ($key));
 	}
 	if (!$res || !db_numrows($res)) {
 		db_rollback();
@@ -88,8 +86,7 @@ function form_key_is_valid($key) {
 		$sql = "UPDATE form_keys SET is_used=1 WHERE `key`='$key'";
 		$res=db_query($sql);
 	} else {
-		$sql = 'UPDATE form_keys SET is_used=1 WHERE key=$1';
-		$res=db_query_params ($sql, array ($key));
+		$res = db_query_params ('UPDATE form_keys SET is_used=1 WHERE key=$1', array ($key));
 	}
 	if (!$res) {
 		db_rollback();
@@ -114,8 +111,7 @@ function form_release_key($key) {
 		$sql = "SELECT * FROM form_keys WHERE `key`='$key' FOR UPDATE";
 		$res=db_query($sql);
 	} else {
-		$sql = 'SELECT * FROM form_keys WHERE key=$1 FOR UPDATE';
-		$res=db_query_params($sql, array ($key));
+		$res = db_query_params ('SELECT * FROM form_keys WHERE key=$1 FOR UPDATE', array ($key));
 	}
 	if (!$res || !db_numrows($res)) {
 		db_rollback();
@@ -125,8 +121,7 @@ function form_release_key($key) {
 		$sql = "UPDATE form_keys SET is_used=0 WHERE `key`='$key'";
 		$res=db_query($sql);
 	} else {
-		$sql = 'UPDATE form_keys SET is_used=0 WHERE key=$1';
-		$res=db_query_params ($sql, array ($key));
+		$res = db_query_params ('UPDATE form_keys SET is_used=0 WHERE key=$1', array ($key));
 	}
 	if (!$res) {
 		db_rollback();

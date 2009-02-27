@@ -1222,7 +1222,7 @@ Enjoy the site.
 
 		db_begin();
 		$md5_pw = md5 ($passwd) ;
-		$unix_pw = account_genunixpw($passwd) ;
+		$unix_pw = account_genunixpw ($passwd) ;
 
 		$res = db_query_params ('UPDATE users SET user_pw=$1, unix_pw=$2 WHERE user_id=$3',
 					array ($md5_pw,

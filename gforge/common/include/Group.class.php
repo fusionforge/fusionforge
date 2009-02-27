@@ -374,7 +374,7 @@ class Group extends Error {
 			//
 			// Now, make the user an admin
 			//
-			$res=db_query_params ('INSERT INTO user_group ( user_id, group_id, admin_flags,
+			$res=db_query_params ('INSERT INTO user_group (user_id, group_id, admin_flags,
 				cvs_flags, artifact_flags, forum_flags, role_id)
 				VALUES ($1, $2, $3, $4, $5, $6, $7)', 
 					      array ($user->getID(),
@@ -1364,7 +1364,7 @@ class Group extends Error {
 		//	Delete FRS Packages
 		//
 		//$frspf = new FRSPackageFactory($this);
-		$res = db_query_params ('SELECT * FROM frs_package WHERE group_id=$A',
+		$res = db_query_params ('SELECT * FROM frs_package WHERE group_id=$1',
 					array ($this->getID())) ;
 //echo 'frs_package'.db_error();
 		//$frsp_arr =& $frspf->getPackages();
@@ -1525,12 +1525,12 @@ class Group extends Error {
 	/**
 	 *	addUser - controls adding a user to a group.
 	 *  
-	 *  @param	string	Unix name of the user to add OR integer user_id.
+	 *      @param	string	Unix name of the user to add OR integer user_id.
 	 *	@param	int	The role_id this user should have.
 	 *	@return	boolean	success.
 	 *	@access public.
 	 */
-	function addUser($user_unix_name,$role_id) {
+	function addUser($user_identifier,$role_id) {
 		global $SYS;
 		/*
 			Admins can add users to groups
@@ -1546,10 +1546,10 @@ class Group extends Error {
 		/*
 			get user id for this user's unix_name
 		*/
-		if (is_int ($user_unix_name)) {
-			$res_newuser = db_query_params ('SELECT * FROM users WHERE user_id=$1', array ($user_unix_name)) ;
+		if (is_int ($user_identifier)) { // user_id or user_name
+			$res_newuser = db_query_params ('SELECT * FROM users WHERE user_id=$1', array ($user_identifier)) ;
 		} else {
-			$res_newuser = db_query_params ('SELECT * FROM users WHERE user_name=$1', array ($user_unix_name)) ;
+			$res_newuser = db_query_params ('SELECT * FROM users WHERE user_name=$1', array ($user_identifier)) ;
 		}
 		if (db_numrows($res_newuser) > 0) {
 			//
@@ -1689,7 +1689,7 @@ class Group extends Error {
 		//
 		//	audit trail
 		//
-		$this->addHistory('Added User',$user_unix_name);
+		$this->addHistory('Added User',$user_identifier);
 		db_commit();
 		return true;
 	}

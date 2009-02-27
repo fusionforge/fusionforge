@@ -81,8 +81,8 @@ class Stats extends Error {
 	*/
 	function getTopMessagesPosted() {
 		return db_query_params ('SELECT g.unix_group_name, g.group_name, SUM(s.msg_posted) AS items FROM stats_project s, groups g WHERE s.group_id=g.group_id AND g.is_public=1 AND g.status=$1 GROUP BY g.unix_group_name, g.group_name ORDER BY items DESC',
-					array ('A')
-					, 100) ;
+					array ('A'),
+					100) ;
 	}
 
 	/**

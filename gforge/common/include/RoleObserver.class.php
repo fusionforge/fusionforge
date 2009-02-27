@@ -239,14 +239,6 @@ class RoleObserver extends Error {
 						if ($updated['forum'][$uref_id]) {
 							continue;
 						}
-						$sql="UPDATE forum_group_list
-							SET 
-							is_public='".$data['forumpublic'][$uref_id]."',
-							allow_anonymous='".$data['forumanon'][$uref_id]."'
-							WHERE
-							group_forum_id='$uref_id'
-							AND group_id='".$this->Group->getID()."'";
-//echo "\n<br>$sql";
 						$res = db_query_params ('UPDATE forum_group_list SET is_public=$1, allow_anonymous=$2 WHERE group_forum_id=$3 AND group_id=$4',
 									array ($data['forumpublic'][$uref_id],
 									       $data['forumanon'][$uref_id],
