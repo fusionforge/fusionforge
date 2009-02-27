@@ -3,6 +3,7 @@
  * FusionForge cron job utilities
  *
  * Copyright 2003, GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -55,9 +56,10 @@ $cron_arr[25]='homedirs.php';
 $cron_arr[26]='update_users.php';
 
 function cron_entry($job,$output) {
-	$sql="INSERT INTO cron_history (rundate,job,output) 
-		values ('".time()."','$job','".addslashes($output)."')";
-	return db_query($sql);
+	$sql='INSERT INTO cron_history (rundate,job,output) 
+		values ($1, $2, $3)' ;
+	return db_query_params ($sql,
+				array (time(), $job, $output));
 }
 
 function cron_debug($string) {

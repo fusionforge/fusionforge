@@ -2,7 +2,7 @@
 /**
  * FusionForge plugin system
  *
- * Copyright 2002, Roland Mas
+ * Copyright 2002-2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -47,8 +47,8 @@ class PluginManager extends Error {
 	function GetPlugins () {
 		if (!isset($this->plugins_data)) {
 			$this->plugins_data = array () ;
-			$sql = "SELECT plugin_id, plugin_name FROM plugins" ;
-			$res = db_query($sql);
+			$res = db_query_params ('SELECT plugin_id, plugin_name FROM plugins',
+						array ());
 			$rows = db_numrows($res);
 			for ($i=0; $i<$rows; $i++) {
 				$plugin_id = db_result($res,$i,'plugin_id');

@@ -3,6 +3,7 @@
  * FusionForge top-level information
  *
  * Copyright 2002, GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -41,7 +42,8 @@ class FusionForge extends Error {
 	}
 
 	function getNumberOfPublicHostedProjects() {
-		$res=db_query("SELECT count(*) AS count FROM groups WHERE status='A' AND is_public=1");	
+		$res = db_query_params ('SELECT count(*) AS count FROM groups WHERE status=$1 AND is_public=1',
+				      array ('A'));	
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('Unable to get hosted project count: '.db_error());
 			return false;
@@ -50,7 +52,8 @@ class FusionForge extends Error {
 	}
 
 	function getNumberOfHostedProjects() {
-		$res=db_query("SELECT count(*) AS count FROM groups WHERE status='A'");	
+		$res = db_query_params ('SELECT count(*) AS count FROM groups WHERE status=$1',
+					array ('A'));	
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('Unable to get hosted project count: '.db_error());
 			return false;
@@ -59,7 +62,8 @@ class FusionForge extends Error {
 	}
 
 	function getNumberOfActiveUsers() {
-	  $res = db_query("SELECT count(*) AS count FROM users WHERE status='A' and user_id != 100");
+		$res = db_query_params ('SELECT count(*) AS count FROM users WHERE status=$1 and user_id != 100',
+					array ('A'));
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('Unable to get user count: '.db_error());
 			return false;
@@ -69,25 +73,24 @@ class FusionForge extends Error {
 
 
 	function getPublicProjectNames() {
-		$res = db_query("SELECT unix_group_name FROM groups WHERE status='A' AND is_public=1");
+		$res = db_query_params ('SELECT unix_group_name FROM groups WHERE status=$1 AND is_public=1',
+					array ('A'));
 		if (!$res) {
 			$this->setError('Unable to get list of public projects: '.db_error());
 			return false;
 		}
 		$rows=db_numrows($res);
 		$result = array();
-    for ($i=0; $i<$rows; $i++) {
+		for ($i=0; $i<$rows; $i++) {
 			$result[$i] = db_result($res, $i, 'unix_group_name');
-    }
+		}
 		return $result;
 	}
 	
 	function parseCount($res) {
-    $row_count = db_fetch_array($res);
-    return $row_count['count'];
+		$row_count = db_fetch_array($res);
+		return $row_count['count'];
 	}
-
-
 }
 
 // Local Variables:

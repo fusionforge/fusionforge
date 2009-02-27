@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2002-2004, GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -141,9 +142,9 @@ class Permission extends Error {
 	 *	@access private.
 	 */
 	function fetchData() {
-		$res=db_query("SELECT * FROM user_group 
-			WHERE user_id='". $this->User->getID() ."' 
-			AND group_id='". $this->Group->getID() ."'");
+		$res = db_query_params ('SELECT * FROM user_group WHERE user_id=$1 AND group_id=$2',
+					array ($this->User->getID(),
+					       $this->Group->getID())) ;
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('Permission: User Not Found');
 
@@ -210,10 +211,9 @@ class Permission extends Error {
 			return $this->is_site_admin;
 		}
 
-		$res = db_query("SELECT count(*) AS count FROM user_group
-			WHERE user_id='". $this->User->getID() ."'
-			AND group_id='1'
-			AND admin_flags='A'");
+		$res = db_query_params ('SELECT count(*) AS count FROM user_group WHERE user_id=$1 AND group_id=1 AND admin_flags=$2',
+					array ($this->User->getID(),
+					       'A')) ;
 		$row_count = db_fetch_array($res);
 		$this->is_site_admin = $res && $row_count['count'] > 0;
 		db_free_result($res);

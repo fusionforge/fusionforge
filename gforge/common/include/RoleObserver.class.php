@@ -3,6 +3,7 @@
  * FusionForge observer role
  *
  * Copyright 2004, GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -86,9 +87,8 @@ class RoleObserver extends Error {
 		//
 		//	Forum is_public/allow_anon
 		//
-		$res=db_query("SELECT group_forum_id,is_public,allow_anonymous 
-			FROM forum_group_list 
-			WHERE group_id='".$this->Group->getID()."'");
+		$res = db_query_params ('SELECT group_forum_id,is_public,allow_anonymous FROM forum_group_list WHERE group_id=$1',
+					array ($this->Group->getID())) ;
 		while ($arr =& db_fetch_array($res)) {
 			$this->setting_array['forumpublic'][$arr['group_forum_id']] = $arr['is_public'];
 			$this->setting_array['forumanon'][$arr['group_forum_id']] = $arr['allow_anonymous'];
@@ -97,9 +97,8 @@ class RoleObserver extends Error {
 		//
 		//	Task Manager is_public/allow_anon
 		//
-		$res=db_query("SELECT group_project_id,is_public
-			FROM project_group_list 
-			WHERE group_id='".$this->Group->getID()."'");
+		$res = db_query_params ('SELECT group_project_id,is_public FROM project_group_list WHERE group_id=$1',
+					array ($this->Group->getID())) ;
 		while ($arr =& db_fetch_array($res)) {
 			$this->setting_array['pmpublic'][$arr['group_project_id']] = $arr['is_public'];
 		}
@@ -107,9 +106,8 @@ class RoleObserver extends Error {
 		//
 		//	Tracker is_public/allow_anon
 		//
-		$res=db_query("SELECT group_artifact_id,is_public,allow_anon
-			FROM artifact_group_list 
-			WHERE group_id='".$this->Group->getID()."'");
+		$res = db_query_params ('SELECT group_artifact_id,is_public,allow_anon FROM artifact_group_list WHERE group_id=$1',
+					array ($this->Group->getID())) ;
 		while ($arr =& db_fetch_array($res)) {
 			$this->setting_array['trackerpublic'][$arr['group_artifact_id']] = $arr['is_public'];
 			$this->setting_array['trackeranon'][$arr['group_artifact_id']] = $arr['allow_anon'];
@@ -118,9 +116,8 @@ class RoleObserver extends Error {
 		//
 		//	FRS packages can be public/private now
 		//
-		$res=db_query("SELECT package_id,is_public
-			FROM frs_package
-			WHERE group_id='".$this->Group->getID()."'");
+		$res = db_query_params ('SELECT package_id,is_public FROM frs_package WHERE group_id=$1',
+					array ($this->Group->getID())) ;
 		while ($arr =& db_fetch_array($res)) {
 			$this->setting_array['frspackage'][$arr['package_id']] = $arr['is_public'];
 		}
@@ -222,12 +219,10 @@ class RoleObserver extends Error {
 							// private if we change a group to private.
 							$data['scmpublic'][0]=0;
 						}
-						$sql="UPDATE groups
-							SET
-							enable_anonscm='".$data['scmpublic'][0]."',
-							is_public='".$data['projectpublic'][0]."'
-							WHERE group_id='".$this->Group->getID()."'";
-							$res=db_query($sql);
+						$res = db_query_params ('UPDATE groups SET enable_anonscm=$1, is_public=$2 WHERE group_id=$3',
+									array ($data['scmpublic'][0],
+									       $data['projectpublic'][0],
+									       $this->Group->getID())) ;
 							if (!$res) {
 								$this->setError('update::group::'.db_error());
 								db_rollback();
@@ -252,7 +247,11 @@ class RoleObserver extends Error {
 							group_forum_id='$uref_id'
 							AND group_id='".$this->Group->getID()."'";
 //echo "\n<br>$sql";
-						$res=db_query($sql);
+						$res = db_query_params ('UPDATE forum_group_list SET is_public=$1, allow_anonymous=$2 WHERE group_forum_id=$3 AND group_id=$4',
+									array ($data['forumpublic'][$uref_id],
+									       $data['forumanon'][$uref_id],
+									       $uref_id,
+									       $this->Group->getID())) ;
 						$updated['forum'][$uref_id]=1;
 						if (!$res) {
 							$this->setError('update::forum::'.db_error());
@@ -260,15 +259,10 @@ class RoleObserver extends Error {
 							return false;
 						}
 					} elseif ($usection_name == 'pmpublic') {
-
-						$sql="UPDATE project_group_list
-							SET 
-							is_public='$uvalue'
-							WHERE
-							group_project_id='$uref_id'
-							AND group_id='".$this->Group->getID()."'";
-//echo "\n<br>$sql";
-						$res=db_query($sql);
+						$res = db_query_params ('UPDATE project_group_list SET is_public=$1 WHERE group_project_id=$2 AND group_id=$3',
+									array ($uvalue,
+									       $uref_id,
+									       $this->Group->getID())) ;
 						if (!$res) {
 							$this->setError('update::pm::'.db_error());
 							db_rollback();
@@ -276,15 +270,10 @@ class RoleObserver extends Error {
 						}
 
 					} elseif ($usection_name == 'frspackage') {
-
-						$sql="UPDATE frs_package
-							SET 
-							is_public='$uvalue'
-							WHERE
-							package_id='$uref_id'
-							AND group_id='".$this->Group->getID()."'";
-//echo "\n<br>$sql";
-						$res=db_query($sql);
+						$res = db_query_params ('UPDATE frs_package SET is_public=$1 WHERE package_id=$2 AND group_id=$3',
+									array ($uvalue,
+									       $uref_id,
+									       $this->Group->getID())) ;
 						if (!$res) {
 							$this->setError('update::frspackage::'.db_error());
 							db_rollback();
@@ -298,15 +287,11 @@ class RoleObserver extends Error {
 						if ($updated['tracker'][$uref_id]) {
 							continue;
 						}
-						$sql="UPDATE artifact_group_list
-							SET
-							is_public='".$data['trackerpublic'][$uref_id]."',
-							allow_anon='".$data['trackeranon'][$uref_id]."'
-							WHERE
-							group_artifact_id='$uref_id'
-							AND group_id='".$this->Group->getID()."'";
-//echo "\n<br>$sql";
-						$res=db_query($sql);
+						$res = db_query_params ('UPDATE artifact_group_list SET is_public=$1, allow_anon=$2 WHERE group_artifact_id=$3 AND group_id=$4',
+									array ($uvalue,
+									       $data['trackerpublic'][$uref_id],
+									       $data['trackeranon'][$uref_id],
+									       $this->Group->getID())) ;
 						$updated['tracker'][$uref_id]=1;
 						if (!$res) {
 							$this->setError('update::tracker::'.db_error());

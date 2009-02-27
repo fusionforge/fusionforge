@@ -3,6 +3,7 @@
  * FusionForge form management
  *
  * Copyright 2005, GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -38,10 +39,11 @@ function form_generate_key() {
 		$key = md5(microtime() + rand() + $_SERVER["REMOTE_ADDR"]);
 	    if ( $sys_database_type == "mysql" ) {
 			$sql = "SELECT * FROM form_keys WHERE `key`='".$key."'";
+			$res=db_query($sql);
 		} else {
-			$sql = "SELECT * FROM form_keys WHERE key='".$key."'";
+			$sql = 'SELECT * FROM form_keys WHERE key=$1';
+			$res=db_query_params ($sql, array ($key));
 		}
-		$res=db_query($sql);
 		if (!db_numrows($res)) {
 			$is_new=true;	
 		}
@@ -49,7 +51,7 @@ function form_generate_key() {
 	if ( $sys_database_type == "mysql" ) {
 		$res = db_query("INSERT INTO form_keys (`key`,is_used,creation_date) VALUES ('".$key."',0,".time().")");
 	} else {
-		$res = db_query("INSERT INTO form_keys (key,is_used,creation_date) VALUES ('".$key."',0,".time().")");
+		$res = db_query_params('INSERT INTO form_keys (key,is_used,creation_date) VALUES ($1, 0, $2)', array ($key,time()));
 	}
 	if (!$res) {
 		db_rollback();
@@ -73,20 +75,22 @@ function form_key_is_valid($key) {
 	db_begin();
 	if ( $sys_database_type == "mysql" ) {
 		$sql = "SELECT * FROM form_keys WHERE `key`='$key' and is_used=0 FOR UPDATE";
+		$res=db_query($sql);
 	} else {
-		$sql = "SELECT * FROM form_keys WHERE key='$key' and is_used=0 FOR UPDATE";
+		$sql = 'SELECT * FROM form_keys WHERE key=$1 and is_used=0 FOR UPDATE';
+		$res=db_query_params($sql, array ($key));
 	}
-	$res=db_query($sql);
 	if (!$res || !db_numrows($res)) {
 		db_rollback();
 		return false;
 	}
 	if ( $sys_database_type == "mysql" ) {
 		$sql = "UPDATE form_keys SET is_used=1 WHERE `key`='$key'";
+		$res=db_query($sql);
 	} else {
-		$sql = "UPDATE form_keys SET is_used=1 WHERE key='$key'";
+		$sql = 'UPDATE form_keys SET is_used=1 WHERE key=$1';
+		$res=db_query_params ($sql, array ($key));
 	}
-	$res=db_query($sql);
 	if (!$res) {
 		db_rollback();
 		return false;
@@ -108,18 +112,21 @@ function form_release_key($key) {
 	db_begin();
 	if ( $sys_database_type == "mysql" ) {
 		$sql = "SELECT * FROM form_keys WHERE `key`='$key' FOR UPDATE";
+		$res=db_query($sql);
 	} else {
-		$sql = "SELECT * FROM form_keys WHERE key='$key' FOR UPDATE";
+		$sql = 'SELECT * FROM form_keys WHERE key=$1 FOR UPDATE';
+		$res=db_query_params($sql, array ($key));
 	}
-	$res=db_query($sql);
 	if (!$res || !db_numrows($res)) {
 		db_rollback();
 		return false;
 	}
 	if ( $sys_database_type == "mysql" ) {
 		$sql = "UPDATE form_keys SET is_used=0 WHERE `key`='$key'";
+		$res=db_query($sql);
 	} else {
-		$sql = "UPDATE form_keys SET is_used=0 WHERE key='$key'";
+		$sql = 'UPDATE form_keys SET is_used=0 WHERE key=$1';
+		$res=db_query_params ($sql, array ($key));
 	}
 	$res=db_query($sql);
 	if (!$res) {

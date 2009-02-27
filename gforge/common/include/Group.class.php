@@ -3,6 +3,7 @@
  * FusionForge groups
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -50,7 +51,7 @@ $LICENSE_NAMES=array();
 function & group_get_licenses() {
 	global $LICENSE_NAMES;
 	if(empty($LICENSE_NAMES)) {
-		$result = db_query('select * from licenses');
+		$result = db_query_params ('select * from licenses', array());
 		while($data = db_fetch_array($result)) {
 			$LICENSE_NAMES[$data['license_id']] = $data['license_name'];
 		}
@@ -88,7 +89,7 @@ function &group_get_object($group_id,$res=false) {
 		if ($res) {
 			//the db result handle was passed in
 		} else {
-			$res=db_query("SELECT * FROM groups WHERE group_id='$group_id'");
+			$res = db_query_params ('SELECT * FROM groups WHERE group_id=$1', array ($group_id)) ;
 		}
 		if (!$res || db_numrows($res) < 1) {
 			$GROUP_OBJ["_".$group_id."_"]=false;
@@ -129,7 +130,8 @@ function &group_get_objects($id_arr) {
 		}
 	}
 	if (count($fetch) > 0) {
-		$res=db_query("SELECT * FROM groups WHERE group_id IN ('".implode($fetch,'\',\'') ."')");
+		$res=db_query_params ('SELECT * FROM groups WHERE group_id = ANY ($1)',
+				      array (db_int_array_to_any_clause ($fetech))) ;
 		while ($arr =& db_fetch_array($res)) {
 			$GROUP_OBJ["_".$arr['group_id']."_"] = new Group($arr['group_id'],$arr);
 			$return[] =& $GROUP_OBJ["_".$arr['group_id']."_"];
@@ -139,20 +141,21 @@ function &group_get_objects($id_arr) {
 }
 
 function &group_get_object_by_name($groupname) {
-	$res=db_query("SELECT * FROM groups WHERE unix_group_name='$groupname'");
+	$res=db_query_params('SELECT * FROM groups WHERE unix_group_name=$1', array ($groupname)) ;
 	return group_get_object(db_result($res,0,'group_id'),$res);
 }
 
 function &group_get_objects_by_name($groupname_arr) {
-	$sql="SELECT group_id FROM groups WHERE unix_group_name IN ('".implode($groupname_arr,'\',\'')."')";
-	$res=db_query($sql);
+	$res=db_query_params ('SELECT group_id FROM groups WHERE unix_group_name = ANY ($1)',
+			      array (db_string_array_to_any_clause ($groupname_arr))
+		);
 	$arr =& util_result_column_to_array($res,0);
 	return group_get_objects($arr);
 }
 
 function &group_get_object_by_publicname($groupname) {
-	$res=db_query("SELECT * FROM groups WHERE group_name ILIKE '" .
-		htmlspecialchars($groupname) . "'");
+	$res=db_query_params ('SELECT * FROM groups WHERE group_name ILIKE $1',
+			      array ($groupname)) ;
 
        return group_get_object(db_result($res,0,'group_id'),$res);
 }
@@ -255,7 +258,8 @@ class Group extends Error {
 	 *	@param	int	The group_id.
 	 */
 	function fetchData($group_id) {
-		$res = db_query("SELECT * FROM groups WHERE group_id='$group_id'");
+		$res = db_query_params ('SELECT * FROM groups WHERE group_id=$1',
+					array ($group_id));
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(sprintf(_('fetchData():: %s'),db_error()));
 			return false;
@@ -288,7 +292,8 @@ class Group extends Error {
 		} else if (!account_groupnamevalid($unix_name)) {
 			$this->setError(_('Invalid Unix name'));
 			return false;
-		} else if (db_numrows(db_query("SELECT group_id FROM groups WHERE unix_group_name='$unix_name'")) > 0) {
+		} else if (db_numrows(db_query_params('SELECT group_id FROM groups WHERE unix_group_name=$1',
+						      array ($unix_name))) > 0) {
 			$this->setError(_('Unix name already taken'));
 			return false;
 		} else if (strlen($purpose)<10) {
@@ -319,7 +324,7 @@ class Group extends Error {
 	
 			db_begin();
 	
-			$res = db_query("
+			$res = db_query_params ('
 				INSERT INTO groups (
 					group_name,
 					is_public,
@@ -337,25 +342,22 @@ class Group extends Error {
                                         enable_anonscm,
 					rand_hash
 				)
-				VALUES (
-					'".htmlspecialchars($group_name)."',
-					'$is_public',
-					'$unix_name',
-					'".htmlspecialchars($description)."',
-					'$unix_name.".$GLOBALS['sys_default_domain']."',
-					'$unix_name.".$GLOBALS['sys_default_domain']."',
-					'P',
-					'$unix_box',
-					'$scm_box',
-					'$license',
-					'".htmlspecialchars($purpose)."',
-					".time().",
-					'".htmlspecialchars($license_other)."',
-					'$is_public',
-					'".md5($random_num)."'
-				)
-			");
-	
+				VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)',
+						array ($group_name,
+						       $is_public,
+						       $unix_name,
+						       htmlspecialchars($description),
+						       $unix_name.".".$GLOBALS['sys_default_domain'],
+						       $unix_name.".".$GLOBALS['sys_default_domain'],
+						       'P',
+						       $unix_box,
+						       $scm_box,
+						       $license,
+						       htmlspecialchars($purpose),
+						       time(),
+						       htmlspecialchars($license_other),
+						       $is_public,
+						       md5($random_num)	)) ;
 			if (!$res || db_affected_rows($res) < 1) {
 				$this->setError(sprintf(_('ERROR: Could not create group: %s'),db_error()));
 				db_rollback();
@@ -372,11 +374,16 @@ class Group extends Error {
 			//
 			// Now, make the user an admin
 			//
-			$sql="INSERT INTO user_group ( user_id, group_id, admin_flags,
+			$res=db_query_params ('INSERT INTO user_group ( user_id, group_id, admin_flags,
 				cvs_flags, artifact_flags, forum_flags, role_id)
-				VALUES ( ".$user->getID().", '$id', 'A', 1, 2, 2, 1)";
-	
-			$res=db_query($sql);
+				VALUES ($1, $2, $3, $4, $5, $6, $7)', 
+					      array ($user->getID(),
+						     $id,
+						     'A',
+						     1,
+						     2,
+						     2,
+						     1));
 			if (!$res || db_affected_rows($res) < 1) {
 				$this->setError(sprintf(_('ERROR: Could not add admin to newly created group: %s'),db_error()));
 				db_rollback();
@@ -431,13 +438,17 @@ class Group extends Error {
 
 		db_begin();
 
-		$res = db_query("
+		$res = db_query_params ('
 			UPDATE groups
-			SET is_public='$is_public',
-				license='$license',type_id='$type_id',
-				unix_box='$unix_box',http_domain='$http_domain'
-			WHERE group_id='".$this->getID()."'
-		");
+			SET is_public=$1, license=$2, type_id=$3,
+				unix_box=$4, http_domain=$5
+			WHERE group_id=$6',
+					array ($is_public,
+					       $license,
+					       $type_id,
+					       $unix_box,
+					       $http_domain,
+					       $this->getID())) ;
 
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError(_('ERROR: DB: Could not change group properties: %s'),db_error());
@@ -474,20 +485,10 @@ class Group extends Error {
 	 *	update - Update number of common properties.
 	 *
 	 *	Unlike updateAdmin(), this function accessible to project admin.
-	 *
-	 *	@param	object	User requesting operation (for access control).
-	 *	@param	bool	Whether group is publicly accessible (0/1).
-	 *	@param	string	Project's license (string ident).
-	 *	@param	int		Group type (1-project, 2-foundry).
-	 *	@param	string	Machine on which group's home directory located.
-	 *	@param	string	Domain which serves group's WWW.
-	 *	@return int	status.
-	 *	@access public.
 	 */
 	function update(&$user, $group_name,$homepage,$short_description,$use_mail,$use_survey,$use_forum,
-		$use_pm,$use_pm_depend_box,$use_scm,$use_news,$use_docman,
-		$new_doc_address,$send_all_docs,$logo_image_id,
-		$enable_pserver,$enable_anonscm,
+			$use_pm,$use_pm_depend_box,$use_scm,$use_news,$use_docman,
+			$new_doc_address,$send_all_docs,$logo_image_id,
 			$use_ftp,$use_tracker,$use_frs,$use_stats,$is_public) {
 
 		$perm =& $this->getPermission($user);
@@ -569,42 +570,45 @@ class Group extends Error {
 		db_begin();
 
 		//XXX not yet actived logo_image_id='$logo_image_id', 
-		$sql = "
-			UPDATE groups
-			SET 
-				group_name='".htmlspecialchars($group_name)."',
-				homepage='$homepage',
-				short_description='".htmlspecialchars($short_description)."',
-				use_mail='$use_mail',
-				use_survey='$use_survey',
-				use_forum='$use_forum',
-				use_pm='$use_pm',
-				use_pm_depend_box='$use_pm_depend_box',
-				use_scm='$use_scm',
-				use_news='$use_news',
-				use_docman='$use_docman',
-                                is_public='$is_public',
-				new_doc_address='$new_doc_address',
-				send_all_docs='$send_all_docs',
-		";
-		if ($enable_pserver != '') {
-		$sql .= "
-				enable_pserver='$enable_pserver',
-		";
-		}
-		if ($enable_anonscm != '') {
-		$sql .= "
-				enable_anonscm='$enable_anonscm',
-		";
-		}
-		$sql .= "
-				use_ftp='$use_ftp',
-				use_tracker='$use_tracker',
-				use_frs='$use_frs',
-				use_stats='$use_stats'
-			WHERE group_id='".$this->getID()."'
-		";
-		$res = db_query($sql);
+		$res = db_query_params ('UPDATE groups
+			SET 	group_name=$1,
+				homepage=$2,
+				short_description=$3,
+				use_mail=$4,
+				use_survey=$5,
+				use_forum=$6,
+				use_pm=$7,
+				use_pm_depend_box=$8,
+				use_scm=$9,
+				use_news=$10,
+				use_docman=$11,
+                                is_public=$12,
+				new_doc_address=$13,
+				send_all_docs=$14,
+				use_ftp=$15,
+				use_tracker=$16,
+				use_frs=$17,
+				use_stats=$18
+			WHERE group_id=$19',
+					array (htmlspecialchars($group_name),
+					       $homepage,
+					       htmlspecialchars($short_description),
+					       $use_mail,
+					       $use_survey,
+					       $use_forum,
+					       $use_pm,
+					       $use_pm_depend_box,
+					       $use_scm,
+					       $use_news,
+					       $use_docman,
+					       $is_public,
+					       $new_doc_address,
+					       $send_all_docs,
+					       $use_ftp,
+					       $use_tracker,
+					       $use_frs,
+					       $use_stats,
+					       $this->getID() )) ;
 
 		if (!$res) {
 			$this->setError(sprintf(_('Error updating project information: %s'), db_error()));
@@ -700,9 +704,9 @@ class Group extends Error {
 
 		db_begin();
 
-		$res = db_query("UPDATE groups
-			SET status='$status'
-			WHERE group_id='". $this->getID()."'");
+		$res = db_query_params ('UPDATE groups
+			SET status=$1
+			WHERE group_id=$2', array ($status, $this->getID())) ;
 
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError(sprintf(_('ERROR: DB: Could not change group status: %s'),db_error()));
@@ -865,8 +869,7 @@ class Group extends Error {
 	function setSCMBox($scm_box) {
 		if ($scm_box) {
 			db_begin();
-			$sql = "UPDATE groups SET scm_box = '$scm_box' WHERE group_id = ".$this->getID();
-			$res = db_query($sql);
+			$res = db_query_params ('UPDATE groups SET scm_box=$1 WHERE group_id=$2', array ($scm_box, $this->getID ()));
 			if ($res) {
 				$this->addHistory('scm_box', $this->data_array['scm_box']);
 				$this->data_array['scm_box']=$scm_box;
@@ -945,8 +948,8 @@ class Group extends Error {
 	 */
 	function &getAdmins() {
 		// this function gets all group admins in order to send Jabber and mail messages
-		$q = "SELECT user_id FROM user_group WHERE admin_flags = 'A' AND group_id = ".$this->getID();
-		$res = db_query($q);
+		$res = db_query_params ('SELECT user_id FROM user_group WHERE admin_flags=$1 AND group_id=$2',
+				       array ('A', $this->getID()));
 		$user_ids=util_result_column_to_array($res);
 		return user_get_objects($user_ids);
 	}
@@ -973,8 +976,8 @@ class Group extends Error {
 	function SetUsesAnonSCM ($booleanparam) {
 		db_begin () ;
 		$booleanparam = $booleanparam ? 1 : 0 ;
-		$sql = "UPDATE groups SET enable_anonscm = $booleanparam WHERE group_id = ".$this->getID() ;
-		$res = db_query($sql);
+		$res = db_query_params ('UPDATE groups SET enable_anonscm=$1 WHERE group_id=$2',
+					array ($booleanparam, $this->getID()));
 		if ($res) {
 			$this->data_array['enable_anonscm']=$booleanparam;
 			db_commit () ;
@@ -1000,8 +1003,8 @@ class Group extends Error {
 	function SetUsesPserver ($booleanparam) {
 		db_begin () ;
 		$booleanparam = $booleanparam ? 1 : 0 ;
-		$sql = "UPDATE groups SET enable_pserver = $booleanparam WHERE group_id = ".$this->getID() ;
-		$res = db_query($sql);
+		$res = db_query_params ('UPDATE groups SET enable_pserver=$1 WHERE group_id=$2',
+					array ($booleanparam, $this->getID()));
 		if ($res) {
 			$this->data_array['enable_pserver']=$booleanparam;
 			db_commit () ;
@@ -1168,11 +1171,10 @@ class Group extends Error {
 	function getPlugins() {
 		if (!isset($this->plugins_data)) {
 			$this->plugins_data = array () ;
-			$sql="SELECT group_plugin.plugin_id, plugins.plugin_name
-							  FROM group_plugin, plugins
-				  WHERE group_plugin.group_id=".$this->getID()."
-								AND group_plugin.plugin_id = plugins.plugin_id" ;
-			$res=db_query($sql);
+			$res = db_query_params ('SELECT group_plugin.plugin_id, plugins.plugin_name
+						 FROM group_plugin, plugins
+                                                 WHERE group_plugin.group_id=$1
+						   AND group_plugin.plugin_id=plugins.plugin_id', array ($this->getID()));
 			$rows = db_numrows($res);
 
 			for ($i=0; $i<$rows; $i++) {
@@ -1211,10 +1213,8 @@ class Group extends Error {
 			// State is already good, returning
 			return true ;
 		}
-		$sql="SELECT plugin_id
-			  FROM plugins
-			  WHERE plugin_name = '" . $pluginname . "'" ;
-		$res=db_query($sql);
+		$res = db_query_params ('SELECT plugin_id FROM plugins WHERE plugin_name=$1',
+					array ($pluginname));
 		$rows = db_numrows($res);
 		if ($rows == 0) {
 			// Error: no plugin by that name
@@ -1224,15 +1224,14 @@ class Group extends Error {
 		// Invalidate cache
 		unset ($this->plugins_data) ;
 		if ($val) {
-			$sql="INSERT INTO group_plugin (group_id, plugin_id)
-							  VALUES (". $this->getID() . ", ". $plugin_id .")" ;
-			$res=db_query($sql);
+			$res = db_query_params ('INSERT INTO group_plugin (group_id, plugin_id) VALUES ($1, $2)',
+						array ($this->getID(),
+						       $plugin_id));
 			return $res ;
 		} else {
-			$sql="DELETE FROM group_plugin
-				WHERE group_id = ". $this->getID() . "
-				AND plugin_id = ". $plugin_id ;
-			$res=db_query($sql);
+			$res = db_query_params ('DELETE FROM group_plugin WHERE group_id=$1 AND plugin_id=$2',
+						array ($this->getID(),
+						       $plugin_id));
 			return $res ;
 		}
 	}
@@ -1365,7 +1364,8 @@ class Group extends Error {
 		//	Delete FRS Packages
 		//
 		//$frspf = new FRSPackageFactory($this);
-		$res=db_query("SELECT * FROM frs_package WHERE group_id='".$this->getID()."'");
+		$res = db_query_params ('SELECT * FROM frs_package WHERE group_id=$A',
+					array ($this->getID())) ;
 //echo 'frs_package'.db_error();
 		//$frsp_arr =& $frspf->getPackages();
 		while ($arr = db_fetch_array($res)) {
@@ -1380,36 +1380,43 @@ class Group extends Error {
 		//	Delete news
 		//
 		$news_group=&group_get_object($GLOBALS['sys_news_group']);
-		$res=db_query("SELECT forum_id FROM news_bytes WHERE group_id='".$this->getID()."'");
+		$res = db_query_params ('SELECT forum_id FROM news_bytes WHERE group_id=$1',
+					array ($this->getID())) ;
 		for ($i=0; $i<db_numrows($res); $i++) {
 			$Forum = new Forum($news_group,db_result($res,$i,'forum_id'));
 			if (!$Forum->delete(1,1)) {
 				printf (_("Could Not Delete News Forum: %d"),$Forum->getID());
 			}
 		}
-		$res=db_query("DELETE FROM news_bytes WHERE group_id='".$this->getID()."'");
+		$res = db_query_params ('DELETE FROM news_bytes WHERE group_id=$1',
+					array ($this->getID())) ;
 
 		//
 		//	Delete docs
 		//
-		$res=db_query("DELETE FROM doc_data WHERE group_id='".$this->getID()."'");
+		$res = db_query_params ('DELETE FROM doc_data WHERE group_id=$1',
+					array ($this->getID())) ;
 //echo 'doc_data'.db_error();
-		$res=db_query("DELETE FROM doc_groups WHERE group_id='".$this->getID()."'");
+		$res = db_query_params ('DELETE FROM doc_groups WHERE group_id=$1',
+					array ($this->getID())) ;
 //echo 'doc_groups'.db_error();
 		//
 		//	Delete group history
 		//
-		$res=db_query("DELETE FROM group_history WHERE group_id='".$this->getID()."'");
+		$res = db_query_params ('DELETE FROM group_history WHERE group_id=$1',
+					array ($this->getID())) ;
 //echo 'group_history'.db_error();
 		//
 		//	Delete group plugins
 		//
-		$res=db_query("DELETE FROM group_plugin WHERE group_id='".$this->getID()."'");
+		$res = db_query_params ('DELETE FROM group_plugin WHERE group_id=$1',
+					array ($this->getID())) ;
 //echo 'group_plugin'.db_error();
 		//
 		//	Delete group cvs stats
 		//
-		$res=db_query("DELETE FROM stats_cvs_group WHERE group_id='".$this->getID()."'");
+		$res = db_query_params ('DELETE FROM stats_cvs_group WHERE group_id=$1',
+					array ($this->getID())) ;
 //echo 'stats_cvs_group'.db_error();
 		//
 		//	Delete Surveys
@@ -1455,18 +1462,23 @@ class Group extends Error {
 		//
 		//	Delete trove
 		//
-		$res=db_query("DELETE FROM trove_group_link WHERE group_id='".$this->getID()."'");
-		$res=db_query("DELETE FROM trove_agg WHERE group_id='".$this->getID()."'");
+		$res = db_query_params ('DELETE FROM trove_group_link WHERE group_id=$1',
+					array ($this->getID())) ;
+		$res = db_query_params ('DELETE FROM trove_agg WHERE group_id=$1',
+					array ($this->getID())) ;
 		//
 		//	Delete counters
 		//
-		$res=db_query("DELETE FROM project_sums_agg WHERE group_id='".$this->getID()."'");
+		$res = db_query_params ('DELETE FROM project_sums_agg WHERE group_id=$1',
+					array ($this->getID())) ;
 //echo 'project_sums_agg'.db_error();
-		$res=db_query("INSERT INTO deleted_groups (
-		unix_group_name,delete_date,isdeleted) VALUES 
-		('".$this->getUnixName()."','".time()."','0')");
+		$res = db_query_params ('INSERT INTO deleted_groups (unix_group_name,delete_date,isdeleted) VALUES ($1, $2, $3)',
+					array ($this->getUnixName(),
+					       time(),
+					       0)) ;
 //echo 'InsertIntoDeleteQueue'.db_error();
-		$res=db_query("DELETE FROM groups WHERE group_id='".$this->getID()."'");
+		$res = db_query_params ('DELETE FROM groups WHERE group_id=$1',
+					array ($this->getID())) ;
 //echo 'DeleteGroup'.db_error();
 		db_commit();
 		if (!$res) {
@@ -1487,11 +1499,14 @@ class Group extends Error {
 		//
 		//	Delete reporting
 		//
-		$res=db_query("DELETE FROM rep_group_act_weekly WHERE group_id='".$this->getID()."'");
-//echo 'rep_group_act_weekly'.db_error();
-		$res=db_query("DELETE FROM rep_group_act_monthly WHERE group_id='".$this->getID()."'");
+		$res = db_query_params ('DELETE FROM rep_group_act_monthly WHERE group_id=$1',
+					array ($this->getID())) ;
 //echo 'rep_group_act_monthly'.db_error();
-		$res=db_query("DELETE FROM rep_group_act_daily WHERE group_id='".$this->getID()."'");
+		$res = db_query_params ('DELETE FROM rep_group_act_weekly WHERE group_id=$1',
+					array ($this->getID())) ;
+//echo 'rep_group_act_weekly'.db_error();
+		$res = db_query_params ('DELETE FROM rep_group_act_daily WHERE group_id=$1',
+					array ($this->getID())) ;
 //echo 'rep_group_act_daily'.db_error();
 		unset($this->data_array);
 		return true;
@@ -1531,10 +1546,10 @@ class Group extends Error {
 		/*
 			get user id for this user's unix_name
 		*/
-		if (preg_match('/^\d/',$user_unix_name)) {
-			$res_newuser = db_query("SELECT * FROM users WHERE user_id='". intval($user_unix_name) ."'");
+		if (is_int ($user_unix_name)) {
+			$res_newuser = db_query_params ('SELECT * FROM users WHERE user_id=$1', array ($user_unix_name)) ;
 		} else {
-			$res_newuser = db_query("SELECT * FROM users WHERE user_name='". strtolower($user_unix_name) ."'");
+			$res_newuser = db_query_params ('SELECT * FROM users WHERE user_name=$1', array ($user_unix_name)) ;
 		}
 		if (db_numrows($res_newuser) > 0) {
 			//
@@ -1554,18 +1569,29 @@ class Group extends Error {
 			//
 			//	if not already a member, add them
 			//
-			$res_member = db_query("SELECT user_id 
+			$res_member = db_query_params ('SELECT user_id 
 				FROM user_group 
-				WHERE user_id='$user_id' AND group_id='". $this->getID() ."'");
+				WHERE user_id=$1 AND group_id=$2',
+						       array ($user_id, $this->getID())) ;
 
 			if (db_numrows($res_member) < 1) {
 				//
 				//	Create this user's row in the user_group table
 				//
-				$res=db_query("INSERT INTO user_group 
+				$res = db_query_params ('INSERT INTO user_group 
 					(user_id,group_id,admin_flags,forum_flags,project_flags,
 					doc_flags,cvs_flags,member_role,release_flags,artifact_flags)
-					VALUES ('$user_id','". $this->getID() ."','','0','0','0','1','100','0','0')");
+					VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)',
+							array ($user_id,
+							       $this->getID(),
+							       '',
+							       0,
+							       0,
+							       0,
+							       1,
+							       100,
+							       0,
+							       0)) ;
 
 				//verify the insert worked
 				if (!$res || db_affected_rows($res) < 1) {
@@ -1692,9 +1718,9 @@ class Group extends Error {
 		}
 	
 		db_begin();
-		$res=db_query("DELETE FROM user_group 
-			WHERE group_id='".$this->getID()."' 
-			AND user_id='$user_id'");
+		$res = db_query_params ('DELETE FROM user_group WHERE group_id=$1 AND user_id=$2', 
+					array ($this->getID(),
+					       $user_id)) ;
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError(sprintf(_('ERROR: User not removed: %s'),db_error()));
 			db_rollback();
@@ -1703,12 +1729,13 @@ class Group extends Error {
 			//
 			//	reassign open artifacts to id=100
 			//
-			$res=db_query("UPDATE artifact SET assigned_to='100' 
+			$res = db_query_params ('UPDATE artifact SET assigned_to=100
 				WHERE group_artifact_id 
 				IN (SELECT group_artifact_id 
 				FROM artifact_group_list 
-				WHERE group_id='".$this->getID()."') 
-				AND status_id='1' AND assigned_to='$user_id'");
+				WHERE group_id=$1 AND status_id=1 AND assigned_to=$2)',
+						array ($this->getID(),
+						       $user_id)) ;
 			if (!$res) {
 				$this->setError(sprintf(_('ERROR: DB: artifact: %s'),db_error()));
 				db_rollback();
@@ -1733,26 +1760,30 @@ class Group extends Error {
 					$res = db_next_result();
 				}
 			} else {
-				$res=db_query("DELETE FROM project_assigned_to
+				$res = db_query_params ('DELETE FROM project_assigned_to
 					WHERE project_task_id IN (SELECT pt.project_task_id 
 					FROM project_task pt, project_group_list pgl, project_assigned_to pat 
 					WHERE pt.group_project_id = pgl.group_project_id 
 					AND pat.project_task_id=pt.project_task_id
-					AND pt.status_id='1' AND pgl.group_id='".$this->getID()."'
-					AND pat.assigned_to_id='$user_id') 
-					AND assigned_to_id='100'");
+					AND pt.status_id=1 AND pgl.group_id=$1,
+					AND pat.assigned_to_id=$2)
+					AND assigned_to_id=100',
+							array ($this->getID(),
+							       $user_id)) ;
 			}
 			if (!$res) {
 				$this->setError(sprintf(_('ERROR: DB: project_assigned_to %d: %s'),1,db_error()));
 				db_rollback();
 				return false;
 			}
-			$res=db_query("UPDATE project_assigned_to SET assigned_to_id='100' 
+			$res = db_query_params ('UPDATE project_assigned_to SET assigned_to_id=100
 				WHERE project_task_id IN (SELECT pt.project_task_id 
 				FROM project_task pt, project_group_list pgl 
 				WHERE pt.group_project_id = pgl.group_project_id 
-				AND pt.status_id='1' AND pgl.group_id='".$this->getID()."') 
-				AND assigned_to_id='$user_id'");
+				AND pt.status_id=1 AND pgl.group_id=$1) 
+				AND assigned_to_id=$2',
+						array ($this->getID(),
+						       $user_id)) ;
 			if (!$res) {
 				$this->setError(sprintf(_('ERROR: DB: project_assigned_to %d: %s'),2,db_error()));
 				db_rollback();
@@ -1824,11 +1855,13 @@ class Group extends Error {
 	 *	@access public.
 	 */
 	function addHistory($field_name, $old_value) {
-		$sql="
-			INSERT INTO group_history(group_id,field_name,old_value,mod_by,adddate) 
-			VALUES ('". $this->getID() ."','$field_name','$old_value','". user_getid() ."','".time()."')
-		";
-		return db_query($sql);
+		return db_query_params ('INSERT INTO group_history(group_id,field_name,old_value,mod_by,adddate) 
+			VALUES ($1,$2,$3,$4,$5)',
+					array ($this->getID(),
+					       $field_name,
+					       $old_value,
+					       user_getid(),
+					       time()));
 	}		  
 
 	/**
@@ -1840,17 +1873,16 @@ class Group extends Error {
 	 *	@access private.
 	 */
 	function activateUsers() {
-
+		
 		/*
-			Activate member(s) of the project
+		 Activate member(s) of the project
 		*/
-
-		$member_res = db_query("SELECT user_id, role_id
-			FROM user_group
-			WHERE group_id='".$this->getID()."'");
-
+		
+		$member_res = db_query_params ('SELECT user_id, role_id FROM user_group	WHERE group_id=$1',
+					       array ($this->getID())) ;
+		
 		$rows = db_numrows($member_res);
-
+		
 		if ($rows > 0) {
 
 			for ($i=0; $i<$rows; $i++) {
@@ -1883,9 +1915,8 @@ class Group extends Error {
 	 */
 	function &getMembers() {
 		if (!isset($this->membersArr)) {
-			$res=db_query("SELECT users.* FROM users
-				INNER JOIN user_group ON users.user_id=user_group.user_id
-				WHERE user_group.group_id='".$this->getID()."'");
+			$res = db_query_params ('SELECT users.* FROM users INNER JOIN user_group ON users.user_id=user_group.user_id WHERE user_group.group_id=$1',
+						array ($this->getID())) ;
 			while ($arr =& db_fetch_array($res)) {
 				$this->membersArr[] =& new GFUser($arr['user_id'],$arr);
 			}
@@ -2032,8 +2063,9 @@ class Group extends Error {
 			}
 		}
 
-		$admin_group = db_query("SELECT user_id FROM user_group 
-		WHERE group_id=".$this->getID()." AND admin_flags='A'");
+		$admin_group = db_query_params ('SELECT user_id FROM user_group WHERE group_id=$1 AND admin_flags=$2',
+						array ($this->getID(),
+						       'A')) ;
 		if (db_numrows($admin_group) > 0) {
 			$idadmin_group = db_result($admin_group,0,'user_id');
 		} else {
@@ -2082,13 +2114,14 @@ class Group extends Error {
 	 *	@access public.
 	 */
 	function sendApprovalEmail() {
-		$res_admins = db_query("
+		$res_admins = db_query_params ('
 			SELECT users.user_name,users.email,users.language,users.user_id
 			FROM users,user_group
 			WHERE users.user_id=user_group.user_id
-			AND user_group.group_id='".$this->getID()."'
-			AND user_group.admin_flags='A'
-		");
+			AND user_group.group_id=$1
+			AND user_group.admin_flags=$2',
+					       array ($this->getID(),
+						      'A')) ;
 
 		if (db_numrows($res_admins) < 1) {
 			$this->setError(_("Group does not have any administrators."));
@@ -2157,13 +2190,12 @@ if there is anything we can do to help you.
 	 *	@access public.
 	 */
 	function sendRejectionEmail($response_id, $message="zxcv") {
-		$res_admins = db_query("
+		$res_admins = db_query_params ('
 			SELECT u.email, u.language, u.user_id
 			FROM users u, user_group ug
-			WHERE ug.group_id='".$this->getID()."'
-			AND u.user_id=ug.user_id;
-		");
-
+			WHERE ug.group_id=$1
+			AND u.user_id=ug.user_id',
+					       array ($this->getID())) ;
 		if (db_numrows($res_admins) < 1) {
 			$this->setError(_("Group does not have any administrators."));
 			return false;
@@ -2186,11 +2218,10 @@ Reasons for negative decision:
 			if ($response_id == 0) {
 				$response .= stripcslashes($message);
 			} else {
-				$response .= db_result(db_query("
-				SELECT response_text
-				FROM canned_responses
-				WHERE response_id='$response_id'
-			"), 0, "response_text");
+				$response .= db_result (
+					db_query_params('SELECT response_text FROM canned_responses WHERE response_id=$1', array ($response_id)),
+					0,
+					"response_text");
 			}
 
 			util_send_message($row_admins['email'], sprintf(_('%1$s Project Denied'), $GLOBALS['sys_name']), $response);
@@ -2212,9 +2243,8 @@ Reasons for negative decision:
 	 */
 	function sendNewProjectNotificationEmail() {
 		// Get the user who wants to register the project
-		$res = db_query("SELECT u.user_id
-				 FROM users u, user_group ug
-				 WHERE ug.group_id='".$this->getID()."' AND u.user_id=ug.user_id;");
+		$res = db_query_params ('SELECT user_id FROM user_group WHERE group_id=$1',
+					array ($this->getID())) ;
 
 		if (db_numrows($res) < 1) {
 			$this->setError(_("Could not find user who has submitted the project."));
@@ -2224,11 +2254,12 @@ Reasons for negative decision:
 		$submitter =& user_get_object(db_result($res,0,'user_id'));
 
 
-		$res = db_query("SELECT users.email, users.language, users.user_id
-	 			FROM users,user_group
+		$res = db_query_params ('SELECT users.email, users.language, users.user_id
+	 			FROM users, user_group
 				WHERE group_id=1 
-				AND user_group.admin_flags='A'
-				AND users.user_id=user_group.user_id;");
+				AND user_group.admin_flags=$1
+				AND users.user_id=user_group.user_id',
+					array ('A'));
 		
 		if (db_numrows($res) < 1) {
 			$this->setError(_("There is no administrator to send the mail."));
@@ -2378,11 +2409,9 @@ function getUnixStatus() {
 function setUnixStatus($status) {
 	global $SYS;
 	db_begin();
-	$res=db_query("
-		UPDATE groups 
-		SET unix_status='$status' 
-		WHERE group_id='". $this->getID()."'
-	");
+	$res = db_query_params ('UPDATE groups SET unix_status=$1 WHERE group_id=$2',
+				array ($status,
+				       $this->getID())) ;
 
 	if (!$res) {
 		$this->setError(sprintf(_('ERROR - Could Not Update Group Unix Status: %s'),db_error()));

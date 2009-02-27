@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2003-2004, Guillaume Smet
- * Copyright 2007, Roland Mas
+ * Copyright 2007-2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -77,7 +77,7 @@ function choose_language_from_context () {
 		
 		for( $i=0, $max = sizeof($languages); $i < $max; $i++){
 			$languageCode = $languages[$i];
-			$res = db_query("select classname from supported_languages where language_code = '".addslashes($languageCode)."'");
+			$res = db_query_params ('select classname from supported_languages where language_code=$1', array ($languageCode)) ;
 			if (db_numrows($res) > 0) {
 				return db_result($res,0,'classname');
 			}
@@ -85,7 +85,7 @@ function choose_language_from_context () {
 			// If so, try to strip it and look for for main language only
 			if (strstr($languageCode, '-')) {
 				$languageCode = substr($languageCode, 0, 2);
-				$res = db_query("select classname from supported_languages where language_code = '".addslashes($languageCode)."'");
+				$res = db_query_params ('select classname from supported_languages where language_code=$1', array ($languageCode)) ;
 				if (db_numrows($res) > 0) {
 					return db_result($res,0,'classname');
 				}
@@ -163,12 +163,12 @@ function locale_code_to_language_name ($loc) {
 }
 
 function lang_id_to_language_name ($lang_id) {
-	$res = db_query('SELECT classname FROM supported_languages WHERE language_id=\''.$lang_id.'\'');
+	$res = db_query_params ('SELECT classname FROM supported_languages WHERE language_id=$1', array ($lang_id));
 	return db_result($res, 0, 'classname');
 }
 
 function language_name_to_lang_id ($language) {
-	$res = db_query('SELECT language_id FROM supported_languages WHERE classname=\''.$language.'\'');
+	$res = db_query_params ('SELECT language_id FROM supported_languages WHERE classname=$1', array ($language)) ;
 	return db_result($res, 0, 'language_id');
 }
 

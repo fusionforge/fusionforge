@@ -3,6 +3,7 @@
  * FusionForge roles
  *
  * Copyright 2004, GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -111,10 +112,9 @@ class Role extends Error {
 		}
 
 		db_begin();
-		$sql="INSERT INTO role (group_id,role_name) 
-			VALUES ('".$this->Group->getID()."','".htmlspecialchars($role_name)."')";
-//echo "\n<br>$sql";
-		$res=db_query($sql);
+		$res = db_query_params ('INSERT INTO role (group_id, role_name) VALUES ($1, $2)',
+					array ($this->Group->getID(),
+					       htmlspecialchars($role_name))) ;
 		if (!$res) {
 			$this->setError('create::'.db_error());
 			db_rollback();
@@ -143,8 +143,11 @@ class Role extends Error {
 				}
 				$sql="INSERT INTO role_setting (role_id,section_name,ref_id,value) 
 					values ('$role_id','$usection_name', '$uref_id','$uvalue')";
-//echo "\n<br>$sql";
-				$res=db_query($sql);
+				$res = db_query_params ('INSERT INTO role_setting (role_id,section_name,ref_id,value) VALUES ($1,$2,$3,$4)',
+							array ($role_id,
+							       $usection_name,
+							       $uref_id,
+							       $uvalue)) ;
 				if (!$res) {
 					$this->setError('create::insertsetting::'.db_error());
 					db_rollback();
@@ -171,9 +174,8 @@ class Role extends Error {
 		for ($i=0; $i<count($keys); $i++) {
 
 			if ($keys[$i] == 'forum') {
-				$res=db_query("SELECT group_forum_id 
-					FROM forum_group_list 
-					WHERE group_id='".$this->Group->getID()."'");
+				$res = db_query_params ('SELECT group_forum_id FROM forum_group_list WHERE group_id=$1',
+							array ($this->Group->getID())) ;
 				if (!$res) {
 					$this->setError('Error: Forum'.db_error());
 					return false;
@@ -182,9 +184,8 @@ class Role extends Error {
 					$data[$keys[$i]][db_result($res,$j,'group_forum_id')]= $arr[$keys[$i]];
 				}
 			} elseif ($keys[$i] == 'pm') {
-				$res=db_query("SELECT group_project_id 
-					FROM project_group_list 
-					WHERE group_id='".$this->Group->getID()."'");
+				$res = db_query_params ('SELECT group_project_id FROM project_group_list WHERE group_id=$1',
+							array ($this->Group->getID())) ;
 				if (!$res) {
 					$this->setError('Error: TaskMgr'.db_error());
 					return false;
@@ -193,9 +194,8 @@ class Role extends Error {
 					$data[$keys[$i]][db_result($res,$j,'group_project_id')]= $arr[$keys[$i]];
 				}
 			} elseif ($keys[$i] == 'tracker') {
-				$res=db_query("SELECT group_artifact_id 
-					FROM artifact_group_list 
-					WHERE group_id='".$this->Group->getID()."'");
+				$res = db_query_params ('SELECT group_artifact_id FROM artifact_group_list WHERE group_id=$1',
+							array ($this->Group->getID())) ;
 				if (!$res) {
 					$this->setError('Error: Tracker'.db_error());
 					return false;
@@ -223,13 +223,15 @@ class Role extends Error {
 	function fetchData($role_id) {
 		unset($this->data_array);
 		unset($this->setting_array);
-		$res=db_query("SELECT * FROM role WHERE role_id='$role_id'");
+		$res = db_query_params ('SELECT * FROM role WHERE role_id=$1',
+					array ($role_id)) ;
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('Role::fetchData()::'.db_error());
 			return false;
 		}
 		$this->data_array =& db_fetch_array($res);
-		$res=db_query("SELECT * FROM role_setting WHERE role_id='$role_id'");
+		$res = db_query_params ('SELECT * FROM role_setting WHERE role_id=$1',
+					array ($role_id)) ;
 		if (!$res) {
 			$this->setError('Role::fetchData()::'.db_error());
 			return false;
@@ -304,12 +306,10 @@ class Role extends Error {
 		db_begin();
 
 		if ($this->getName() != stripslashes($role_name)) {
-			$sql="UPDATE role
-				SET role_name='".htmlspecialchars($role_name)."'
-				WHERE group_id='".$this->Group->getID()."'
-				AND role_id='".$this->getID()."'";
-//echo "\n<br>$sql";
-			$res=db_query($sql);
+			$res = db_query_params ('UPDATE role SET role_name=$1 WHERE group_id=$2 AND role_id=$3',
+						array (htmlspecialchars($role_name),
+						       $this->Group->getID(),
+						       $this->getID())) ;
 			if (!$res || db_affected_rows($res) < 1) {
 				$this->setError('update::name::'.db_error());
 				db_rollback();
@@ -335,18 +335,17 @@ class Role extends Error {
 				//	See if this setting changed. If so, then update it
 				//
 //				if ($this->getVal($usection_name,$uref_id) != $uvalue) {
-					$sql="UPDATE role_setting 
-						SET value='$uvalue' 
-						WHERE role_id='".$this->getID()."' 
-						AND section_name='$usection_name'
-						AND ref_id='$uref_id'";
-//echo "\n<br>$sql";
-					$res=db_query($sql);
-					if (!$res  || db_affected_rows($res) < 1) {
-						$sql="INSERT INTO role_setting (role_id,section_name,ref_id,value) 
-						values ('".$this->getID()."','$usection_name', '$uref_id','$uvalue')";
-//echo "\n<br>$sql";
-						$res=db_query($sql);
+					$res = db_query_params ('UPDATE role_setting SET value=$1 WHERE role_id=$2 AND section_name=$3 AND ref_id=$4',
+								array ($uvalue,
+								       $this->getID(),
+								       $usection_name,
+								       $uref_id)) ;
+					if (!$res || db_affected_rows($res) < 1) {
+						$res = db_query_params ('INSERT INTO role_setting (role_id, section_name, ref_id, value) VALUES ($1, $2, $3, $4)',
+									array ($this->getID(),
+									       $usecrion_name,
+									       $uref_id,
+									       $uvalue)) ;
 						if (!$res) {
 							$this->setError('update::rolesettinginsert::'.db_error());
 							db_rollback();
@@ -359,9 +358,8 @@ class Role extends Error {
 						//$update_usergroup=true;
 
 						//iterate all users with this role
-						$res=db_query("SELECT user_id
-							FROM user_group 
-							WHERE role_id='".$this->getID()."'");
+						$res = db_query_params ('SELECT user_id	FROM user_group WHERE role_id=$1',
+									array ($this->getID())) ;
 						for ($z=0; $z<db_numrows($res); $z++) {
 
 							//TODO - Shell should be separate flag
@@ -370,11 +368,9 @@ class Role extends Error {
 							//  else - restricted.
 							//
 							$cvs_flags=$data['scm'][0];
-							$sql="UPDATE user_group
-								SET cvs_flags=".$cvs_flags." 
-								WHERE user_id=".db_result($res,$z,'user_id')." AND role_id=".$this->getID();
-							//echo '<h1>'.$data['scm'][0].'::'.$sql.'</h1>';
-							$res2=db_query($sql);
+							$res2 = db_query_params ('UPDATE user_group SET cvs_flags=$1 WHERE user_id=$2',
+										 array ($cvs_flags,
+											db_result($res,$z,'user_id')));
 							if (!$res2) {
 								$this->setError('update::scm::'.db_error());
 								db_rollback();
@@ -431,18 +427,23 @@ class Role extends Error {
 			}
 		}
 //		if ($update_usergroup) {
-			$sql="UPDATE user_group 
-				SET
-				admin_flags='".$data['projectadmin'][0]."',
-				forum_flags='".$data['forumadmin'][0]."',
-				project_flags='".$data['pmadmin'][0]."',
-				doc_flags='".$data['docman'][0]."',
-				cvs_flags='".$data['scm'][0]."',
-				release_flags='".$data['frs'][0]."',
-				artifact_flags='".$data['trackeradmin'][0]."'
-				WHERE role_id='".$this->getID()."'";
-//echo "\n<br>$sql";
-			$res=db_query($sql);
+			$res = db_query_params ('UPDATE user_group
+                               SET admin_flags=$1,
+   				   forum_flags=$2,
+   				   project_flags=$3,
+   				   doc_flags=$4,
+   				   cvs_flags=$5,
+   				   release_flags=$-,
+   				   artifact_flags=$7,
+   				WHERE role_id=$8',
+   						array ($data['projectadmin'][0],
+						       $data['forumadmin'][0],
+						       $data['pmadmin'][0],
+						       $data['docman'][0],
+						       $data['scm'][0],
+						       $data['frs'][0],
+						       $data['trackeradmin'][0];
+						       $this->getID())) ;
 			if (!$res) {
 				$this->setError('update::usergroup::'.db_error());
 				db_rollback();
@@ -476,9 +477,9 @@ class Role extends Error {
 		//
 		//	See if role is actually changing
 		//
-		$res=db_query("SELECT role_id FROM user_group 
-			WHERE user_id='$user_id' 
-			AND group_id='".$this->Group->getID()."'");
+		$res = db_query_params ('SELECT role_id FROM user_group WHERE user_id=$1 AND group_id=$2',
+					array ($user_id,
+					       $this->Group->getID())) ;
 		$old_roleid=db_result($res,0,0);
 		if ($this->getID() == $old_roleid) {
 			db_commit();
@@ -525,12 +526,10 @@ class Role extends Error {
 						//  else - restricted.
 						//
 						$cvs_flags=$this->getVal('scm',0);
-						$sql="UPDATE user_group
-							SET cvs_flags=".$cvs_flags." 
-							WHERE user_id=".$user_id."
-							AND group_id='".$this->Group->getID()."'";
-						//echo '<h1>'.$cvs_flags.'::'.$sql.'</h1>';
-						$res2=db_query($sql);
+						$res2 = db_query_params ('UPDATE user_group SET cvs_flags=$1 WHERE user_id=$2 AND group_id=$3',
+									 array ($cvs_flags,
+										$user_id,
+										$this->Group->getID())) ;
 						if (!$res2) {
 							$this->setError('update::scm::'.db_error());
 							db_rollback();
@@ -589,21 +588,26 @@ class Role extends Error {
 			}
 		}
 	//	if ($update_usergroup) {
-			$sql="UPDATE user_group 
-				SET
-				admin_flags='".$this->getVal('projectadmin',0)."',
-				forum_flags='".$this->getVal('forumadmin',0)."',
-				project_flags='".$this->getVal('pmadmin',0)."',
-				doc_flags='".$this->getVal('docman',0)."',
-				cvs_flags='".$this->getVal('scm',0)."',
-				release_flags='".$this->getVal('frs',0)."',
-				artifact_flags='".$this->getVal('trackeradmin',0)."',
-				role_id='".$this->getID()."'
-				WHERE 
-				user_id='".$user_id."'
-				AND group_id='".$this->Group->getID()."'";
-//echo "\n<br>$sql";
-			$res=db_query($sql);
+			$res = db_query_params ('UPDATE user_group
+                               SET admin_flags=$1,
+   				   forum_flags=$2,
+   				   project_flags=$3,
+   				   doc_flags=$4,
+   				   cvs_flags=$5,
+   				   release_flags=$-,
+   				   artifact_flags=$7,
+   				   role_id=$8
+                               WHERE user_id=$9 AND group_id=10',
+   						array ($this->getVal('projectadmin',0),
+						       $this->getVal('forumadmin',0),
+						       $this->getVal('pmadmin',0),
+						       $this->getVal('docman',0),
+						       $this->getVal('scm',0),
+						       $this->getVal('frs',0),
+						       $this->getVal('trackeradmin',0),
+						       $this->getID(),
+						       $user_id,
+						       $this->Group->getID()));
 			if (!$res) {
 				$this->setError('update::usergroup::'.db_error());
 				db_rollback();

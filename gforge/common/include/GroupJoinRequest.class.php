@@ -3,6 +3,7 @@
  * FusionForge
  *
  * Copyright 2005, GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -25,36 +26,12 @@
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'include/Validator.class.php';
 
-/*
-function &groupjoinrequest_get_object($group_id,$user_id,$data=false) {
-	global $GROUPJOINREQUEST_OBJ;
-	if (!isset($GROUPJOINREQUEST_OBJ["_".$group_id."_".$user_id."_"])) {
-		if ($data) {
-			//the db result handle was passed in
-		} else {
-			$res=db_query("SELECT * FROM group_join_request
-				WHERE group_id='$group_id' AND user_id='$user_id'");
-
-			if (db_numrows($res) <1 ) {
-				$GROUPJOINREQUEST_OBJ["_".$group_id."_".$user_id."_"]=false;
-				return false;
-			}
-			$data =& db_fetch_array($res);
-
-		}
-		$grp =& group_get_object($group_id);
-		$GROUPJOINREQUEST_OBJ["_".$group_id."_".$user_id."_"]= new GroupJoinRequest($grp,$user_id,$data);
-
-	}
-
-	return $GROUPJOINREQUEST_OBJ["_".$group_id."_".$user_id."_"];
-}
-*/
 function &get_group_join_requests($Group) {
 	if (!$Group || !is_object($Group) || $Group->isError()) {
 		return false;
 	} else {
-		$res=db_query("SELECT * FROM group_join_request WHERE group_id='".$Group->getID()."'");
+		$res = db_query_params ('SELECT * FROM group_join_request WHERE group_id=$1',
+					array ($Group->getID())) ;
 		while ($arr = db_fetch_array($res)) {
 			$reqs[] = new GroupJoinRequest($Group,$arr['user_id'],$arr);
 		}
@@ -136,8 +113,9 @@ class GroupJoinRequest extends Error {
 		}
 
 		// Check if user has already submitted a request
-		$sql = "SELECT * FROM group_join_request WHERE group_id='".$this->Group->getID()."' AND user_id='".$user_id."'";
-		$result = db_query($sql);
+		$result = db_query_params ('SELECT * FROM group_join_request WHERE group_id=$1 AND user_id=$2',
+					   array ($this->Group->getID(),
+						  $user_id)) ;
 		if (db_numrows($result)) {
 			$this->setError(_('You have already sent a request to the project administrators. Please wait for their reply.'));
 			return false;
@@ -145,10 +123,12 @@ class GroupJoinRequest extends Error {
 
 		db_begin();
 
-		$sql="INSERT INTO group_join_request (group_id,user_id,comments,request_date)
-			VALUES ('".$this->Group->getID()."','".$user_id."',
-			'".addslashes(htmlspecialchars($comments))."','".time()."')";
-		$result=db_query($sql);
+		$result = db_query_params ('INSERT INTO group_join_request (group_id,user_id,comments,request_date)
+			VALUES ($1, $2, $3, $4)',
+					   array ($this->Group->getID(),
+						  $user_id,
+						  htmlspecialchars ($comments),
+						  time())) ;
 		if (!$result || db_affected_rows($result) < 1) {
 			$this->setError('GroupJoinRequest::create() Posting Failed '.db_error());
 			db_rollback();
@@ -173,10 +153,9 @@ class GroupJoinRequest extends Error {
 	 *  @return     boolean success.
 	 */
 	function fetchData($group_id,$user_id) {
-	        $res=db_query("SELECT * FROM group_join_request
-	                WHERE
-					user_id='$user_id'
-	        		AND group_id='". $this->Group->getID() ."'");
+	        $res = db_query_params ('SELECT * FROM group_join_request WHERE user_id=$1 AND group_id=$2',
+					array ($user_id,
+					       $this->Group->getID())) ;
 	        if (!$res || db_numrows($res) < 1) {
 	                $this->setError('GroupJoinRequest::fetchData() Invalid ID '.db_error());
 	                return false;
@@ -313,9 +292,9 @@ Comments by the user:
 			$this->setPermissionDeniedError();
 			return false;
 		} else {
-			$res=db_query("DELETE FROM group_join_request WHERE 
-				group_id='".$this->Group->getID()."' 
-				AND user_id='".$this->getUserId()."'");
+			$res = db_query_params ('DELETE FROM group_join_request WHERE group_id=$1 AND user_id=$2',
+						array ($this->Group->getID(),
+						       $this->getUserId()));
 			if (!$res || db_affected_rows($res) < 1) {
 				$this->setError('Could Not Delete: '.db_error());
 			} else {
