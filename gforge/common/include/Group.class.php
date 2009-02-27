@@ -343,7 +343,7 @@ class Group extends Error {
 					rand_hash
 				)
 				VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)',
-						array ($group_name,
+						array (htmlspecialchars ($group_name),
 						       $is_public,
 						       $unix_name,
 						       htmlspecialchars($description),
