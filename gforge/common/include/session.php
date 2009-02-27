@@ -3,7 +3,7 @@
  * FusionForge session management
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
- * Copyright 2001-2002, Roland Mas
+ * Copyright 2001-2002, 2009, Roland Mas
  * Copyright 2004-2005, GForge, LLC
  *
  * This file is part of FusionForge.
@@ -148,18 +148,14 @@ function session_login_valid_dbonly ($loginname, $passwd, $allowpending) {
 	global $feedback,$userstatus;
 
 	//  Try to get the users from the database using user_id and (MD5) user_pw
-	$res = db_query("
-		SELECT user_id,status,unix_pw
-		FROM users
-		WHERE user_name='$loginname' 
-		AND user_pw='".md5($passwd)."'
-	");
+	$res = db_query_params ('SELECT user_id,status,unix_pw FROM users WHERE user_name=$1 AND user_pw=$2',
+				array ($loginname,
+				       md5($passwd))) ;
 	if (!$res || db_numrows($res) < 1) {
 		// No user whose MD5 passwd matches the MD5 of the provided passwd
 		// Selecting by user_name only
-		$res = db_query("SELECT user_id,status,unix_pw
-					FROM users
-					WHERE user_name='$loginname'");
+		$res = db_query_params ('SELECT user_id,status,unix_pw FROM users WHERE user_name=$1',
+					array ($loginname)) ;
 		if (!$res || db_numrows($res) < 1) {
 			// No user by that name
 			$feedback=_('Invalid Password Or User Name');
@@ -178,36 +174,35 @@ function session_login_valid_dbonly ($loginname, $passwd, $allowpending) {
 			// User exists, (crypt) unix_pw matches
 			// Update the (MD5) user_pw and retry authentication
 			// It should work, except for status errors
-			$res = db_query ("UPDATE users
-				SET user_pw='" . md5($passwd) . "'
-				WHERE user_id='".$usr['user_id']."'");
+			$res = db_query_params ('UPDATE users SET user_pw=$1 WHERE user_id=$2',
+						array (md5($passwd),
+						       $usr['user_id'])) ;
 			return session_login_valid_dbonly($loginname, $passwd, $allowpending) ;
 		}
 	} else {
 		// If we're here, then the user has typed a password matching the (MD5) user_pw
 		// Let's check whether it also matches the (crypt) unix_pw
 		$usr = db_fetch_array($res);
-/*
+
 		if (crypt ($passwd, $usr['unix_pw']) != $usr['unix_pw']) {
 			// The (crypt) unix_pw does not match
 			if ($usr['unix_pw'] == '') {
 				// Empty unix_pw, we'll take the MD5 as authoritative
 				// Update the (crypt) unix_pw and retry authentication
 				// It should work, except for status errors
-				$res = db_query ("UPDATE users
-					SET unix_pw='" . account_genunixpw($passwd) . "'
-					WHERE user_id='".$usr['user_id']."'");
+				$res = db_query_params ('UPDATE users SET unix_pw=$1 WHERE user_id=$2',
+							array (account_genunixpw($passwd),
+							       $usr['user_id'])) ;
 				return session_login_valid_dbonly($loginname, $passwd, $allowpending) ;
 			} else {
 				// Invalidate (MD5) user_pw, refuse authentication
-				$res = db_query ("UPDATE users
-					SET user_pw='OUT OF DATE'
-					WHERE user_id='".$usr['user_id']."'");
+				$res = db_query_params ('UPDATE users SET user_pw=$1 WHERE user_id=$2',
+							array ('OUT OF DATE',
+							       $usr['user_id'])) ;
 				$feedback=_('Invalid Password Or User Name');
 				return false;
 			}
 		}
-*/
 
 		// Yay.  The provided password matches both fields in the database.
 		// Let's check the status of this user
@@ -392,15 +387,11 @@ function session_set_new($user_id) {
 	session_cookie("session_ser", $cookie, "", $GLOBALS['sys_session_expire']);
 	$session_ser=$cookie;
 
-	db_query("
-		INSERT INTO user_session (session_hash, ip_addr, time, user_id) 
-		VALUES (
-			'".session_get_session_cookie_hash($cookie)."', 
-			'".getStringFromServer('REMOTE_ADDR')."',
-			'".time()."',
-			$user_id
-		)
-	");
+	db_query_params ('INSERT INTO user_session (session_hash,ip_addr,time,user_id) VALUES ($1,$2,$3,$4)',
+			 array (session_get_session_cookie_hash($cookie),
+				getStringFromServer('REMOTE_ADDR'),
+				time(),
+				$user_id)) ;
 
 	// check uniqueness of the session_hash in the database
 	// 
@@ -428,15 +419,12 @@ function session_set_new($user_id) {
  *	@access private
  */
 function session_getdata($user_id) {
-	$res=db_query("SELECT
-		u.*,sl.language_id, sl.name, sl.filename, sl.classname, sl.language_code, t.dirname, t.fullname
-		FROM users u,
-		supported_languages sl,
-		themes t
-		WHERE u.language=sl.language_id 
-		AND u.theme_id=t.theme_id
-		AND u.user_id='$user_id'");
-	return $res;
+	return db_query_params ('SELECT u.*,sl.language_id, sl.name, sl.filename, sl.classname, sl.language_code, t.dirname, t.fullname
+                                 FROM users u, supported_languages sl, themes t
+                                 WHERE u.language=sl.language_id 
+                                   AND u.theme_id=t.theme_id
+                                   AND u.user_id=$1',
+				array ($user_id)) ;
 }
 
 /**

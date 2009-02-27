@@ -128,7 +128,6 @@ function form_release_key($key) {
 		$sql = 'UPDATE form_keys SET is_used=0 WHERE key=$1';
 		$res=db_query_params ($sql, array ($key));
 	}
-	$res=db_query($sql);
 	if (!$res) {
 		db_rollback();
 		return false;

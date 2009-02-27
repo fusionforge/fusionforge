@@ -3,6 +3,7 @@
  * FusionForge miscellaneous utils
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -253,9 +254,9 @@ function util_handle_message($id_arr,$subject,$body,$extra_emails='',$extra_jabb
 	if (count($id_arr) < 1) {
 
 	} else {
-		$res=db_query("SELECT user_id, jabber_address,email,jabber_only
-			FROM users WHERE user_id IN (". implode($id_arr,',') .")");
-		$rows=db_numrows($res);
+		$res = db_query_params ('SELECT user_id,jabber_address,email,jabber_only FROM users WHERE user_id = ANY ($1)',
+					array (db_int_array_to_any_clause ($id_arr))) ;
+		$rows = db_numrows($res) ;
 
 		for ($i=0; $i<$rows; $i++) {
 			if (db_result($res, $i, 'user_id') == 100) {
