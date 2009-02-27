@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2002, GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -213,7 +214,7 @@ function db_begin($dbserver=SYS_DB_PRIMARY) {
 	// programmatical transaction
 	$_sys_db_transaction_level++;
 	if ($_sys_db_transaction_level == 1) {
-		return db_query("BEGIN WORK", -1, 0, $dbserver);
+		return db_query_params ("BEGIN WORK", array(), -1, 0, $dbserver);
 	}
 
 	return true;
@@ -238,7 +239,7 @@ function db_commit($dbserver=SYS_DB_PRIMARY) {
 	// programmatical transaction ends
 	$_sys_db_transaction_level--;
 	if ($_sys_db_transaction_level == 0) {
-		return db_query("COMMIT", -1, 0, $dbserver);
+		return db_query_params ("COMMIT", array(), -1, 0, $dbserver);
 	}
 
 	return true;
@@ -263,7 +264,7 @@ function db_rollback($dbserver=SYS_DB_PRIMARY) {
 	// programmatical transaction ends
 	$_sys_db_transaction_level--;
 	if ($_sys_db_transaction_level == 0) {
-		return db_query("ROLLBACK", -1, 0, $dbserver);
+		return db_query_params ("ROLLBACK", array(), -1, 0, $dbserver);
 	}
 
 	return true;
@@ -373,7 +374,7 @@ function db_fetch_array($qhandle) {
 function db_insertid($qhandle,$table_name,$pkey_field_name,$dbserver=SYS_DB_PRIMARY) {
 	$sql="SELECT max($pkey_field_name) AS id FROM $table_name";
 	//echo $sql;
-	$res=db_query($sql, -1, 0, $dbserver);
+	$res = db_query_params ($sql, array(), -1, 0, $dbserver);
 	if (db_numrows($res) >0) {
 		return db_result($res,0,'id');
 	} else {
@@ -403,30 +404,30 @@ function system_cleanup() {
 	global $_sys_db_transaction_level;
 	if ($_sys_db_transaction_level > 0) {
 		echo "Open transaction detected!!!";
-		db_query("ROLLBACK");
+		db_query_params ("ROLLBACK", array ());
 	}
 }
 
 function db_drop_table_if_exists ($tn) {
-	$sql = "SELECT COUNT(*) FROM pg_class WHERE relname='$tn';";
-	$rel = db_query($sql);
+	$rel = db_query_params ('SELECT COUNT(*) FROM pg_class WHERE relname=$1 and relkind=$2',
+				array ($tn, 'r'));
 	echo db_error();
 	$count = db_result($rel,0,0);
 	if ($count != 0) {
-		$sql = "DROP TABLE $tn;";
-		$rel = db_query ($sql);
+		$sql = "DROP TABLE $tn";
+		$rel = db_query_params ($sql, array ());
 		echo db_error();
 	}
 }
 
 function db_drop_sequence_if_exists ($tn) {
-	$sql = "SELECT COUNT(*) FROM pg_class WHERE relname='$tn';";
-	$rel = db_query($sql);
+	$rel = db_query_params ('SELECT COUNT(*) FROM pg_class WHERE relname=$1 and relkind=$2',
+				array ($tn, 'S'));
 	echo db_error();
 	$count = db_result($rel,0,0);
 	if ($count != 0) {
-		$sql = "DROP SEQUENCE $tn;";
-		$rel = db_query ($sql);
+		$sql = "DROP SEQUENCE $tn";
+		$rel = db_query_params ($sql, array ());
 		echo db_error();
 	}
 }
