@@ -442,6 +442,15 @@ function db_int_array_to_any_clause ($arr) {
 	return $res ;
 }
 
+function db_string_array_to_any_clause ($arr) {
+	$arr2 = array () ;
+	foreach ($arr as $cur) {
+		$arr2[] = pg_escape_string ($cur) ;
+	}
+	$res = "{'" . implode ("','", $arr2) . "'}" ;
+	return $res ;
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
