@@ -431,6 +431,17 @@ function db_drop_sequence_if_exists ($tn) {
 	}
 }
 
+function db_int_array_to_any_clause ($arr) {
+	$arr2 = array () ;
+	foreach ($arr as $cur) {
+		if (is_int ($limit)) {
+			$arr2[] = $cur ;
+		}
+	}
+	$res = "{" . implode (",", $arr2) . "}" ;
+	return $res ;
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
