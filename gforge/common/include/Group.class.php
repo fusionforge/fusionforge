@@ -155,7 +155,7 @@ function &group_get_objects_by_name($groupname_arr) {
 
 function &group_get_object_by_publicname($groupname) {
 	$res=db_query_params ('SELECT * FROM groups WHERE group_name ILIKE $1',
-			      array ($groupname)) ;
+			      array (htmlspecialchars ($groupname))) ;
 
        return group_get_object(db_result($res,0,'group_id'),$res);
 }
