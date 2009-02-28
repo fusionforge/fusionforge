@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-23 22:27+0100\n"
+"POT-Creation-Date: 2009-02-28 11:44+0100\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,15 +60,15 @@ msgstr ""
 msgid "Group_id in db result does not match Group Object"
 msgstr ""
 
-#: common/forum/Forum.class.php:120 common/forum/Forum.class.php:561
+#: common/forum/Forum.class.php:120 common/forum/Forum.class.php:566
 msgid "Forum Name Must Be At Least 3 Characters"
 msgstr ""
 
-#: common/forum/Forum.class.php:124 common/forum/Forum.class.php:565
+#: common/forum/Forum.class.php:124 common/forum/Forum.class.php:570
 msgid "Forum Description Must Be At Least 10 Characters"
 msgstr ""
 
-#: common/forum/Forum.class.php:128 common/forum/Forum.class.php:569
+#: common/forum/Forum.class.php:128 common/forum/Forum.class.php:574
 msgid "Illegal Characters in Forum Name"
 msgstr ""
 
@@ -80,28 +80,34 @@ msgstr ""
 msgid "Error Adding Forum"
 msgstr ""
 
-#: common/forum/Forum.class.php:220
+#: common/forum/Forum.class.php:187 www/account/first.php:29
+#: www/help/index.php:29
+#, php-format
+msgid "Welcome to %1$s"
+msgstr ""
+
+#: common/forum/Forum.class.php:225
 msgid "Invalid forum group identifier"
 msgstr ""
 
-#: common/forum/Forum.class.php:448 common/forum/Forum.class.php:481
+#: common/forum/Forum.class.php:453 common/forum/Forum.class.php:486
 #: common/frs/FRSPackage.class.php:266 common/frs/FRSPackage.class.php:300
 msgid "You can only monitor if you are logged in"
 msgstr ""
 
-#: common/forum/Forum.class.php:466
+#: common/forum/Forum.class.php:471
 msgid "Unable To Add Monitor"
 msgstr ""
 
-#: common/forum/Forum.class.php:511
+#: common/forum/Forum.class.php:516
 msgid "You Can Only Save Your Place If You Are Logged In"
 msgstr ""
 
-#: common/forum/Forum.class.php:530
+#: common/forum/Forum.class.php:535
 msgid "Forum::savePlace()"
 msgstr ""
 
-#: common/forum/Forum.class.php:596 common/include/Error.class.php:163
+#: common/forum/Forum.class.php:601 common/include/Error.class.php:163
 #: common/mail/MailingList.class.php:246 www/news/admin/index.php:87
 #: www/news/admin/index.php:205 www/news/admin/index.php:216
 #: www/news/admin/index.php:238
@@ -177,6 +183,25 @@ msgstr ""
 msgid "Invalid Message ID"
 msgstr ""
 
+#: common/forum/ForumMessage.class.php:660
+#, php-format
+msgid ""
+"\n"
+"Read and respond to this message at: "
+msgstr ""
+
+#: common/forum/ForumMessage.class.php:675
+msgid "A file has been uploaded with this message."
+msgstr ""
+
+#: common/forum/ForumMessage.class.php:686
+#, php-format
+msgid ""
+"You are receiving this email because you elected to monitor this forum.\n"
+"To stop monitoring this forum, login to %s and visit: \n"
+"%s\n"
+msgstr ""
+
 #: common/frs/FRSFile.class.php:92
 msgid "FRSFile Name Must Be At Least 3 Characters"
 msgstr ""
@@ -226,13 +251,13 @@ msgid ""
 "%6$s"
 msgstr ""
 
-#: common/include/Error.class.php:126 common/include/Group.class.php:422
-#: common/include/Group.class.php:495 www/include/exit.php:37
+#: common/include/Error.class.php:126 common/include/Group.class.php:435
+#: common/include/Group.class.php:502 www/include/exit.php:37
 #: www/news/admin/index.php:351
 msgid "Permission denied."
 msgstr ""
 
-#: common/include/Error.class.php:143 common/include/User.class.php:248
+#: common/include/Error.class.php:143 common/include/User.class.php:252
 #: www/tracker/tracker.php:74
 msgid "Invalid Email Address"
 msgstr ""
@@ -241,11 +266,11 @@ msgstr ""
 msgid "Missing Parameters"
 msgstr ""
 
-#: common/include/Group.class.php:222
+#: common/include/Group.class.php:232
 msgid "Group Not Found"
 msgstr ""
 
-#: common/include/Group.class.php:238
+#: common/include/Group.class.php:248
 #: plugins/mediawiki/usr/share/mediawiki1.7/includes/GFProject.class.php:177
 #: www/survey/admin/add_question.php:35 www/survey/admin/add_survey.php:36
 #: www/survey/admin/edit_question.php:37 www/survey/admin/edit_survey.php:37
@@ -258,264 +283,308 @@ msgstr ""
 msgid "Permission denied"
 msgstr ""
 
-#: common/include/Group.class.php:253
+#: common/include/Group.class.php:264
 #, php-format
 msgid "fetchData():: %s"
 msgstr ""
 
-#: common/include/Group.class.php:277
+#: common/include/Group.class.php:288
 msgid "Group::create: Group object already exists"
 msgstr ""
 
-#: common/include/Group.class.php:280
-msgid "Invalid full name"
-msgstr ""
-
-#: common/include/Group.class.php:283
+#: common/include/Group.class.php:293
 msgid "Invalid Unix name"
 msgstr ""
 
-#: common/include/Group.class.php:286
+#: common/include/Group.class.php:297
 msgid "Unix name already taken"
 msgstr ""
 
-#: common/include/Group.class.php:289
+#: common/include/Group.class.php:300
 msgid ""
 "Please describe your Registration Purpose in a more comprehensive manner"
 msgstr ""
 
-#: common/include/Group.class.php:292
+#: common/include/Group.class.php:303
 msgid ""
 "The Registration Purpose text is too long. Please make it smaller than 1500 "
 "bytes."
 msgstr ""
 
-#: common/include/Group.class.php:295
+#: common/include/Group.class.php:306
 msgid "Describe in a more comprehensive manner your project."
 msgstr ""
 
-#: common/include/Group.class.php:298
+#: common/include/Group.class.php:309
 msgid ""
 "Your project description is too long. Please make it smaller than 256 bytes."
 msgstr ""
 
-#: common/include/Group.class.php:301
+#: common/include/Group.class.php:312
 msgid "You have not chosen a license"
 msgstr ""
 
-#: common/include/Group.class.php:304
+#: common/include/Group.class.php:315
 msgid "Conflicting licenses choice"
 msgstr ""
 
-#: common/include/Group.class.php:307
+#: common/include/Group.class.php:318
 msgid "Please give more comprehensive licensing description"
 msgstr ""
 
-#: common/include/Group.class.php:354
+#: common/include/Group.class.php:362
 #, php-format
 msgid "ERROR: Could not create group: %s"
 msgstr ""
 
-#: common/include/Group.class.php:361
+#: common/include/Group.class.php:369
 #, php-format
 msgid "ERROR: Could not get group id: %s"
 msgstr ""
 
-#: common/include/Group.class.php:375
+#: common/include/Group.class.php:388
 #, php-format
 msgid "ERROR: Could not add admin to newly created group: %s"
 msgstr ""
 
-#: common/include/Group.class.php:417 common/include/Group.class.php:490
+#: common/include/Group.class.php:430 common/include/Group.class.php:497
 msgid "Could not get permission."
 msgstr ""
 
-#: common/include/Group.class.php:437
+#: common/include/Group.class.php:454
 #, php-format
 msgid "ERROR: DB: Could not change group properties: %s"
 msgstr ""
 
-#: common/include/Group.class.php:501
-msgid "Invalid Group Name"
-msgstr ""
-
-#: common/include/Group.class.php:508
+#: common/include/Group.class.php:514
 #, php-format
 msgid "New Doc Address Appeared Invalid: %s"
 msgid_plural "New Doc Addresses Appeared Invalid: %s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: common/include/Group.class.php:560
+#: common/include/Group.class.php:566
 msgid ""
 "Error updating project information: Maximum length for Project Description "
 "is 255 chars."
 msgstr ""
 
-#: common/include/Group.class.php:605
+#: common/include/Group.class.php:614
 #, php-format
 msgid "Error updating project information: %s"
 msgstr ""
 
-#: common/include/Group.class.php:692
+#: common/include/Group.class.php:701
 msgid "Invalid Status Change"
 msgstr ""
 
-#: common/include/Group.class.php:703
+#: common/include/Group.class.php:712
 #, php-format
 msgid "ERROR: DB: Could not change group status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:872
+#: common/include/Group.class.php:880
 msgid "Couldn't insert SCM_BOX to database"
 msgstr ""
 
-#: common/include/Group.class.php:876
+#: common/include/Group.class.php:884
 msgid "SCM Box can't be empty"
 msgstr ""
 
-#: common/include/Group.class.php:1298
+#: common/include/Group.class.php:1302
 msgid "Cannot Delete System Group"
 msgstr ""
 
-#: common/include/Group.class.php:1328
+#: common/include/Group.class.php:1332
 #, php-format
 msgid "Not Object: ArtifactType: %d"
 msgstr ""
 
-#: common/include/Group.class.php:1340
+#: common/include/Group.class.php:1344
 #, php-format
 msgid "Not Object: Forum: %d"
 msgstr ""
 
-#: common/include/Group.class.php:1353
+#: common/include/Group.class.php:1357
 #, php-format
 msgid "Not Object: ProjectGroup: %d"
 msgstr ""
 
-#: common/include/Group.class.php:1382
+#: common/include/Group.class.php:1388
 #, php-format
 msgid "Could Not Delete News Forum: %d"
 msgstr ""
 
-#: common/include/Group.class.php:1416
+#: common/include/Group.class.php:1428
 #, php-format
 msgid "Not Object: Survey: %d"
 msgstr ""
 
-#: common/include/Group.class.php:1429
+#: common/include/Group.class.php:1441
 #, php-format
 msgid "Not Object: SurveyQuestion: %d"
 msgstr ""
 
-#: common/include/Group.class.php:1442
+#: common/include/Group.class.php:1454
 #, php-format
 msgid "Not Object: MailingList: %d"
 msgstr ""
 
-#: common/include/Group.class.php:1446
+#: common/include/Group.class.php:1458
 msgid "Could not properly delete the mailing list"
 msgstr ""
 
-#: common/include/Group.class.php:1539
+#: common/include/Group.class.php:1559
 msgid "User is not active. Only active users can be added."
 msgstr ""
 
-#: common/include/Group.class.php:1567
+#: common/include/Group.class.php:1598
 #, php-format
 msgid "ERROR: Could Not Add User To Group: %s"
 msgstr ""
 
-#: common/include/Group.class.php:1594 common/include/Group.class.php:1617
+#: common/include/Group.class.php:1625 common/include/Group.class.php:1648
 msgid "Error Getting Role Object"
 msgstr ""
 
-#: common/include/Group.class.php:1647
+#: common/include/Group.class.php:1678
 msgid "ERROR: User does not exist"
 msgstr ""
 
-#: common/include/Group.class.php:1694
+#: common/include/Group.class.php:1725
 #, php-format
 msgid "ERROR: User not removed: %s"
 msgstr ""
 
-#: common/include/Group.class.php:1708
+#: common/include/Group.class.php:1740
 #, php-format
 msgid "ERROR: DB: artifact: %s"
 msgstr ""
 
-#: common/include/Group.class.php:1741 common/include/Group.class.php:1752
+#: common/include/Group.class.php:1775 common/include/Group.class.php:1788
 #, php-format
 msgid "ERROR: DB: project_assigned_to %d: %s"
 msgstr ""
 
-#: common/include/Group.class.php:1791 www/project/admin/roleedit.php:64
+#: common/include/Group.class.php:1827 www/project/admin/roleedit.php:64
 msgid "Could Not Get Role"
 msgstr ""
 
-#: common/include/Group.class.php:1794 common/include/Group.class.php:1799
+#: common/include/Group.class.php:1830 common/include/Group.class.php:1835
 #, php-format
 msgid "Role: %s"
 msgstr ""
 
-#: common/include/Group.class.php:1857
+#: common/include/Group.class.php:1894
 msgid "Error getting member object"
 msgstr ""
 
-#: common/include/Group.class.php:1860
+#: common/include/Group.class.php:1897
 #, php-format
 msgid "Error getting member object: %s"
 msgstr ""
 
-#: common/include/Group.class.php:1900
+#: common/include/Group.class.php:1936
 msgid "Group already active"
 msgstr ""
 
-#: common/include/Group.class.php:1919
+#: common/include/Group.class.php:1959
 msgid "Error creating ArtifactTypes object"
 msgstr ""
 
-#: common/include/Group.class.php:1923 common/include/Group.class.php:1928
+#: common/include/Group.class.php:1964 common/include/Group.class.php:1970
 #, php-format
 msgid "ATS%d: %s"
 msgstr ""
 
-#: common/include/Group.class.php:1940 common/include/Group.class.php:1946
-#: common/include/Group.class.php:1952
+#: common/include/Group.class.php:1982
+msgid "Open-Discussion"
+msgstr ""
+
+#: common/include/Group.class.php:1982
+msgid "General Discussion"
+msgstr ""
+
+#: common/include/Group.class.php:1983 common/include/Group.class.php:1990
+#: common/include/Group.class.php:1997
 #, php-format
 msgid "F%d: %s"
 msgstr ""
 
-#: common/include/Group.class.php:1964
+#: common/include/Group.class.php:1989
+msgid "Help"
+msgstr ""
+
+#: common/include/Group.class.php:1989
+msgid "Get Public Help"
+msgstr ""
+
+#: common/include/Group.class.php:1996 www/include/project_home.php:118
+#: www/stats/site_stats_utils.php:484
+msgid "Developers"
+msgstr ""
+
+#: common/include/Group.class.php:1996
+msgid "Project Developer Discussion"
+msgstr ""
+
+#: common/include/Group.class.php:2009
+msgid "Uncategorized Submissions"
+msgstr ""
+
+#: common/include/Group.class.php:2010
 #, php-format
 msgid "DG: %s"
 msgstr ""
 
-#: common/include/Group.class.php:1976
+#: common/include/Group.class.php:2023
 #, php-format
 msgid "FRSP: %s"
 msgstr ""
 
-#: common/include/Group.class.php:1988 common/include/Group.class.php:1994
+#: common/include/Group.class.php:2035
+msgid "To Do"
+msgstr ""
+
+#: common/include/Group.class.php:2035
+msgid "Things We Have To Do"
+msgstr ""
+
+#: common/include/Group.class.php:2036 common/include/Group.class.php:2043
 #, php-format
 msgid "PG%d: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2009
+#: common/include/Group.class.php:2042
+msgid "Next Release"
+msgstr ""
+
+#: common/include/Group.class.php:2042
+msgid "Items For Our Next Release"
+msgstr ""
+
+#: common/include/Group.class.php:2059
 #, php-format
 msgid "R%d: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2031
+#: common/include/Group.class.php:2082
+#: plugins/scmcvs/common/CVSPlugin.class.php:245 www/activity/index.php:70
+#: www/tracker/detail.php:187 www/tracker/mod-limited.php:183
+#: www/tracker/mod.php:274
+msgid "Commits"
+msgstr ""
+
+#: common/include/Group.class.php:2083
 #, php-format
 msgid "ML: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2070 common/include/Group.class.php:2144
+#: common/include/Group.class.php:2127 common/include/Group.class.php:2200
 msgid "Group does not have any administrators."
 msgstr ""
 
-#: common/include/Group.class.php:2079
+#: common/include/Group.class.php:2136
 #, php-format
 msgid ""
 "Your project registration for %4$s has been approved.\n"
@@ -551,12 +620,12 @@ msgid ""
 "-- the %4$s crew"
 msgstr ""
 
-#: common/include/Group.class.php:2115
+#: common/include/Group.class.php:2172
 #, php-format
 msgid "%1$s Project Approved"
 msgstr ""
 
-#: common/include/Group.class.php:2152
+#: common/include/Group.class.php:2208
 #, php-format
 msgid ""
 "Your project registration for %3$s has been denied.\n"
@@ -568,20 +637,20 @@ msgid ""
 "\n"
 msgstr ""
 
-#: common/include/Group.class.php:2172
+#: common/include/Group.class.php:2227
 #, php-format
 msgid "%1$s Project Denied"
 msgstr ""
 
-#: common/include/Group.class.php:2196
+#: common/include/Group.class.php:2250
 msgid "Could not find user who has submitted the project."
 msgstr ""
 
-#: common/include/Group.class.php:2210
+#: common/include/Group.class.php:2265
 msgid "There is no administrator to send the mail."
 msgstr ""
 
-#: common/include/Group.class.php:2219
+#: common/include/Group.class.php:2274
 #, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -595,12 +664,12 @@ msgid ""
 "%5$s"
 msgstr ""
 
-#: common/include/Group.class.php:2235 common/include/Group.class.php:2251
+#: common/include/Group.class.php:2290 common/include/Group.class.php:2306
 #, php-format
 msgid "New %1$s Project Submitted"
 msgstr ""
 
-#: common/include/Group.class.php:2243
+#: common/include/Group.class.php:2298
 #, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -613,29 +682,41 @@ msgid ""
 "notified of their decision."
 msgstr ""
 
-#: common/include/Group.class.php:2336
+#: common/include/Group.class.php:2324
+msgid "Group name is too short"
+msgstr ""
+
+#: common/include/Group.class.php:2327
+msgid "Group name is too long"
+msgstr ""
+
+#: common/include/Group.class.php:2330
+msgid "Group name already taken"
+msgstr ""
+
+#: common/include/Group.class.php:2417
 #, php-format
 msgid "ERROR - Could Not Update Group Unix Status: %s"
 msgstr ""
 
-#: common/include/GroupJoinRequest.class.php:134
+#: common/include/GroupJoinRequest.class.php:111
 msgid "You are already a member of this project."
 msgstr ""
 
-#: common/include/GroupJoinRequest.class.php:142
+#: common/include/GroupJoinRequest.class.php:120
 msgid ""
 "You have already sent a request to the project administrators. Please wait "
 "for their reply."
 msgstr ""
 
-#: common/include/GroupJoinRequest.class.php:246
-#: common/include/GroupJoinRequest.class.php:274
-#: common/include/GroupJoinRequest.class.php:288
+#: common/include/GroupJoinRequest.class.php:225
+#: common/include/GroupJoinRequest.class.php:253
+#: common/include/GroupJoinRequest.class.php:267
 #, php-format
 msgid "Request to Join Project %1$s"
 msgstr ""
 
-#: common/include/GroupJoinRequest.class.php:248
+#: common/include/GroupJoinRequest.class.php:227
 #, php-format
 msgid ""
 "%1$s has requested to join your project. \n"
@@ -645,57 +726,57 @@ msgid ""
 "%3$s"
 msgstr ""
 
-#: common/include/GroupJoinRequest.class.php:275
+#: common/include/GroupJoinRequest.class.php:254
 #, php-format
 msgid "Your request to join the %1$s project was denied by an administrator."
 msgstr ""
 
-#: common/include/GroupJoinRequest.class.php:289
+#: common/include/GroupJoinRequest.class.php:268
 #, php-format
 msgid "Your request to join the %1$s project was granted by an administrator."
 msgstr ""
 
-#: common/include/User.class.php:215
+#: common/include/User.class.php:219
 msgid "You must supply a theme"
 msgstr ""
 
-#: common/include/User.class.php:219
+#: common/include/User.class.php:223
 msgid "You must supply a username"
 msgstr ""
 
-#: common/include/User.class.php:223
+#: common/include/User.class.php:227
 msgid "You must supply a first name"
 msgstr ""
 
-#: common/include/User.class.php:227
+#: common/include/User.class.php:231
 msgid "You must supply a last name"
 msgstr ""
 
-#: common/include/User.class.php:231
+#: common/include/User.class.php:235
 msgid "You must supply a password"
 msgstr ""
 
-#: common/include/User.class.php:235
+#: common/include/User.class.php:239
 msgid "Passwords do not match"
 msgstr ""
 
-#: common/include/User.class.php:239
+#: common/include/User.class.php:243
 msgid "Invalid Password:"
 msgstr ""
 
-#: common/include/User.class.php:244
+#: common/include/User.class.php:248
 msgid "Invalid Unix Name."
 msgstr ""
 
-#: common/include/User.class.php:252 common/include/User.class.php:456
+#: common/include/User.class.php:256 common/include/User.class.php:460
 msgid "Invalid Jabber Address"
 msgstr ""
 
-#: common/include/User.class.php:261 common/include/account.php:77
+#: common/include/User.class.php:266 common/include/account.php:77
 msgid "That username already exists."
 msgstr ""
 
-#: common/include/User.class.php:266
+#: common/include/User.class.php:272
 msgid ""
 "User with this email already exists - use people search to recover your "
 "login."
@@ -730,7 +811,7 @@ msgstr ""
 msgid "%1$s Account Registration"
 msgstr ""
 
-#: common/include/User.class.php:794
+#: common/include/User.class.php:775 common/include/User.class.php:823
 msgid "User with this email already exists."
 msgstr ""
 
@@ -754,6 +835,10 @@ msgstr ""
 msgid "Illegal character in name."
 msgstr ""
 
+#: common/include/account.php:73
+msgid "Name is reserved."
+msgstr ""
+
 #: common/include/account.php:81
 msgid "Name is reserved for CVS."
 msgstr ""
@@ -766,16 +851,16 @@ msgstr ""
 msgid "Group name cannot contain underscore for DNS reasons."
 msgstr ""
 
-#: common/include/gettext.php:195 www/soap/index.php:153
+#: common/include/gettext.php:206 www/soap/index.php:155
 msgid "en_US"
 msgstr ""
 
 #: common/include/group_section_texts.php:30
-#: common/reporting/report_utils.php:148
+#: common/reporting/report_utils.php:160
 #: plugins/quota_management/www/quota_project.php:91
-#: www/include/Layout.class.php:550 www/include/project_home.php:288
-#: www/themes/gforge-simple-theme/Theme.class.php:521
-#: www/themes/gforge/Theme.class.php:512
+#: www/include/Layout.class.php:551 www/include/project_home.php:288
+#: www/themes/gforge-simple-theme/Theme.class.php:522
+#: www/themes/gforge/Theme.class.php:513
 msgid "Forums"
 msgstr ""
 
@@ -784,16 +869,16 @@ msgid "Trackers"
 msgstr ""
 
 #: common/include/group_section_texts.php:32 common/include/rbac_texts.php:86
-#: common/include/rbac_texts.php:87 common/reporting/report_utils.php:150
-#: common/reporting/report_utils.php:162 www/include/Layout.class.php:572
+#: common/include/rbac_texts.php:87 common/reporting/report_utils.php:168
+#: common/reporting/report_utils.php:196 www/include/Layout.class.php:573
 #: www/include/project_home.php:322
 #: www/project/stats/project_stats_utils.php:83
 #: www/project/stats/project_stats_utils.php:142
 #: www/project/stats/project_stats_utils.php:198
 #: www/stats/site_stats_utils.php:267 www/stats/site_stats_utils.php:377
 #: www/stats/site_stats_utils.php:432
-#: www/themes/gforge-simple-theme/Theme.class.php:546
-#: www/themes/gforge/Theme.class.php:534
+#: www/themes/gforge-simple-theme/Theme.class.php:547
+#: www/themes/gforge/Theme.class.php:535
 #: www/themes/ultralite/Theme.class.php:103
 msgid "Tasks"
 msgstr ""
@@ -803,25 +888,25 @@ msgid "Documentations"
 msgstr ""
 
 #: common/include/group_section_texts.php:34 common/include/rbac_texts.php:95
-#: www/frs/include/frs_utils.php:90 www/include/Layout.class.php:616
-#: www/themes/gforge-simple-theme/Theme.class.php:595
-#: www/themes/gforge/Theme.class.php:578
+#: www/frs/include/frs_utils.php:90 www/include/Layout.class.php:617
+#: www/themes/gforge-simple-theme/Theme.class.php:596
+#: www/themes/gforge/Theme.class.php:579
 msgid "Files"
 msgstr ""
 
 #: common/include/group_section_texts.php:35
 #: plugins/quota_management/www/quota_project.php:76 www/activity/index.php:65
 #: www/activity/index.php:165 www/admin/index.php:124
-#: www/include/Layout.class.php:593 www/news/index.php:35
-#: www/news/submit.php:100 www/themes/gforge-simple-theme/Theme.class.php:570
-#: www/themes/gforge/Theme.class.php:555
+#: www/include/Layout.class.php:594 www/news/index.php:35
+#: www/news/submit.php:100 www/themes/gforge-simple-theme/Theme.class.php:571
+#: www/themes/gforge/Theme.class.php:556
 msgid "News"
 msgstr ""
 
 #: common/include/rbac_texts.php:30 common/include/rbac_texts.php:33
 #: common/include/rbac_texts.php:35 common/include/rbac_texts.php:37
 #: common/include/rbac_texts.php:41 common/include/rbac_texts.php:43
-#: www/frs/admin/index.php:199 www/project/admin/editgroupinfo.php:145
+#: www/frs/admin/index.php:199 www/project/admin/editgroupinfo.php:142
 #: www/register/projectinfo.php:207
 msgid "Private"
 msgstr ""
@@ -829,7 +914,7 @@ msgstr ""
 #: common/include/rbac_texts.php:31 common/include/rbac_texts.php:34
 #: common/include/rbac_texts.php:38 common/include/rbac_texts.php:42
 #: common/include/rbac_texts.php:44 www/frs/admin/index.php:198
-#: www/project/admin/editgroupinfo.php:145 www/register/projectinfo.php:202
+#: www/project/admin/editgroupinfo.php:142 www/register/projectinfo.php:202
 msgid "Public"
 msgstr ""
 
@@ -874,16 +959,16 @@ msgstr ""
 #: www/docman/include/doc_utils.php:83
 #: www/forum/include/ForumHTML.class.php:95
 #: www/forum/include/ForumHTML.class.php:106 www/frs/include/frs_utils.php:91
-#: www/include/Layout.class.php:445 www/include/Layout.class.php:533
+#: www/include/Layout.class.php:446 www/include/Layout.class.php:534
 #: www/mail/mail_utils.php:34 www/news/news_utils.php:59
 #: www/pm/include/ProjectGroupHTML.class.php:73 www/pm/index.php:53
 #: www/scm/include/scm_utils.php:53 www/survey/include/SurveyHTML.class.php:54
 #: www/survey/include/SurveyHTML.class.php:74 www/survey/survey_utils.php:53
 #: www/survey/survey_utils.php:77
-#: www/themes/gforge-simple-theme/Theme.class.php:405
-#: www/themes/gforge-simple-theme/Theme.class.php:504
-#: www/themes/gforge/Theme.class.php:407 www/themes/gforge/Theme.class.php:496
-#: www/themes/lite/Theme.class.php:285 www/tracker/add.php:64
+#: www/themes/gforge-simple-theme/Theme.class.php:406
+#: www/themes/gforge-simple-theme/Theme.class.php:505
+#: www/themes/gforge/Theme.class.php:408 www/themes/gforge/Theme.class.php:497
+#: www/themes/lite/Theme.class.php:287 www/tracker/add.php:64
 #: www/tracker/admin/ind.php:75
 #: www/tracker/include/ArtifactTypeHtml.class.php:66 www/tracker/ind.php:27
 #: www/tracker/mod.php:127 www/tracker/mod.php:177
@@ -949,11 +1034,11 @@ msgid "Project"
 msgstr ""
 
 #: common/include/rbac_texts.php:90 common/include/rbac_texts.php:91
-#: common/reporting/report_utils.php:147 www/include/Layout.class.php:557
+#: common/reporting/report_utils.php:156 www/include/Layout.class.php:558
 #: www/include/project_home.php:260 www/include/project_home.php:261
 #: www/pm/include/ProjectTaskHTML.class.php:97
-#: www/themes/gforge-simple-theme/Theme.class.php:529
-#: www/themes/gforge/Theme.class.php:519 www/tracker/admin/ind.php:94
+#: www/themes/gforge-simple-theme/Theme.class.php:530
+#: www/themes/gforge/Theme.class.php:520 www/tracker/admin/ind.php:94
 #: www/tracker/ind.php:43
 msgid "Tracker"
 msgstr ""
@@ -975,10 +1060,10 @@ msgid "Project Admin"
 msgstr ""
 
 #: common/include/rbac_texts.php:98 common/include/rbac_texts.php:99
-#: www/include/Layout.class.php:600 www/include/project_home.php:351
+#: www/include/Layout.class.php:601 www/include/project_home.php:351
 #: www/scm/include/scm_utils.php:52
-#: www/themes/gforge-simple-theme/Theme.class.php:578
-#: www/themes/gforge/Theme.class.php:562
+#: www/themes/gforge-simple-theme/Theme.class.php:579
+#: www/themes/gforge/Theme.class.php:563
 msgid "SCM"
 msgstr ""
 
@@ -990,44 +1075,46 @@ msgstr ""
 msgid "Missing Password Or Users Name"
 msgstr ""
 
-#: common/include/session.php:165 common/include/session.php:175
+#: common/include/session.php:161 common/include/session.php:171
+#: common/include/session.php:202
+#: plugins/ldapextauth/include/LdapExtAuthPlugin.class.php:149
 #: plugins/ldapextauth/include/LdapExtAuthPlugin.class.php:200
 #: plugins/ldapextauth/include/LdapExtAuthPlugin.class.php:307
 msgid "Invalid Password Or User Name"
 msgstr ""
 
-#: common/include/session.php:222
+#: common/include/session.php:217
 msgid "Account Suspended"
 msgstr ""
 
-#: common/include/session.php:227
+#: common/include/session.php:222
 msgid "Account Pending"
 msgstr ""
 
-#: common/include/session.php:232
+#: common/include/session.php:227
 msgid "Account Deleted"
 msgstr ""
 
-#: common/include/session.php:237
+#: common/include/session.php:232
 msgid "Account Not Active"
 msgstr ""
 
-#: common/include/session.php:410 www/account/lostlogin.php:47
+#: common/include/session.php:401 www/account/lostlogin.php:47
 #: www/account/lostlogin.php:53 www/account/lostlogin.php:68
 #: www/account/lostlogin.php:75 www/account/lostlogin.php:92
 #: www/pm/calendar.php:83 www/pm/calendar.php:87 www/pm/calendar.php:89
 #: www/pm/calendar.php:94 www/pm/calendar.php:96 www/pm/calendar.php:107
 #: www/survey/rating_resp.php:53 www/trove/TroveCategory.class.php:75
-#: www/trove/TroveCategory.class.php:103 www/trove/TroveCategory.class.php:115
+#: www/trove/TroveCategory.class.php:102 www/trove/TroveCategory.class.php:114
 #: www/trove/admin/trove_cat_edit.php:42
 msgid "ERROR"
 msgstr ""
 
-#: common/include/utils.php:97
+#: common/include/utils.php:98
 msgid "UTF-8"
 msgstr ""
 
-#: common/include/utils.php:475
+#: common/include/utils.php:476
 msgid "Priority Colors"
 msgstr ""
 
@@ -1136,7 +1223,7 @@ msgstr ""
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:52
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:50
 #: www/snippet/detail.php:70 www/snippet/detail.php:158
-#: www/soap/tracker/tracker.php:1131 www/softwaremap/trove_list.php:302
+#: www/soap/tracker/tracker.php:1132 www/softwaremap/trove_list.php:302
 #: www/stats/lastlogins.php:49 www/tracker/browse.php:332
 #: www/tracker/detail.php:45 www/tracker/detail.php:126
 #: www/tracker/detail.php:127 www/tracker/downloadcsv.php:74
@@ -1159,11 +1246,11 @@ msgstr ""
 msgid "Successfully Added"
 msgstr ""
 
-#: common/reporting/report_utils.php:27 www/include/Layout.class.php:449
+#: common/reporting/report_utils.php:27 www/include/Layout.class.php:450
 #: www/pm/include/ProjectGroupHTML.class.php:71
 #: www/scm/include/scm_utils.php:54
-#: www/themes/gforge-simple-theme/Theme.class.php:415
-#: www/themes/gforge/Theme.class.php:411 www/themes/lite/Theme.class.php:289
+#: www/themes/gforge-simple-theme/Theme.class.php:416
+#: www/themes/gforge/Theme.class.php:412 www/themes/lite/Theme.class.php:291
 #: www/tracker/include/ArtifactTypeHtml.class.php:56
 msgid "Reporting"
 msgstr ""
@@ -1231,21 +1318,21 @@ msgstr ""
 msgid "Y-m"
 msgstr ""
 
-#: common/reporting/report_utils.php:149 www/include/Layout.class.php:579
+#: common/reporting/report_utils.php:164 www/include/Layout.class.php:580
 #: www/include/project_home.php:304
-#: www/themes/gforge-simple-theme/Theme.class.php:554
-#: www/themes/gforge/Theme.class.php:541
+#: www/themes/gforge-simple-theme/Theme.class.php:555
+#: www/themes/gforge/Theme.class.php:542
 msgid "Docs"
 msgstr ""
 
-#: common/reporting/report_utils.php:151 common/reporting/report_utils.php:163
+#: common/reporting/report_utils.php:172 common/reporting/report_utils.php:200
 #: www/stats/site_stats_utils.php:262 www/stats/site_stats_utils.php:373
 #: www/stats/site_stats_utils.php:427 www/stats/site_stats_utils.php:483
 #: www/top/toplist.php:37 www/top/toplist.php:53
 msgid "Downloads"
 msgstr ""
 
-#: common/reporting/report_utils.php:156
+#: common/reporting/report_utils.php:180
 #: www/project/stats/project_stats_utils.php:79
 #: www/project/stats/project_stats_utils.php:138
 #: www/project/stats/project_stats_utils.php:194
@@ -1254,7 +1341,7 @@ msgstr ""
 msgid "Bugs"
 msgstr ""
 
-#: common/reporting/report_utils.php:157
+#: common/reporting/report_utils.php:181
 #: www/project/stats/project_stats_utils.php:80
 #: www/project/stats/project_stats_utils.php:139
 #: www/project/stats/project_stats_utils.php:195
@@ -1263,7 +1350,7 @@ msgstr ""
 msgid "Support"
 msgstr ""
 
-#: common/reporting/report_utils.php:158
+#: common/reporting/report_utils.php:182
 #: www/project/stats/project_stats_utils.php:81
 #: www/project/stats/project_stats_utils.php:140
 #: www/project/stats/project_stats_utils.php:196
@@ -1272,15 +1359,15 @@ msgstr ""
 msgid "Patches"
 msgstr ""
 
-#: common/reporting/report_utils.php:159
+#: common/reporting/report_utils.php:183
 msgid "Feature Requests"
 msgstr ""
 
-#: common/reporting/report_utils.php:160
+#: common/reporting/report_utils.php:184
 msgid "Other Trackers"
 msgstr ""
 
-#: common/reporting/report_utils.php:161
+#: common/reporting/report_utils.php:192
 msgid "Forum Messages"
 msgstr ""
 
@@ -1420,8 +1507,8 @@ msgstr ""
 #: www/news/admin/index.php:258 www/people/viewjob.php:107
 #: www/pm/include/ProjectGroupHTML.class.php:39
 #: www/project/admin/database.php:45 www/project/admin/database.php:47
-#: www/project/admin/editgroupinfo.php:37
-#: www/project/admin/editgroupinfo.php:40 www/project/report/index.php:120
+#: www/project/admin/editgroupinfo.php:36
+#: www/project/admin/editgroupinfo.php:39 www/project/report/index.php:120
 #: www/scm/viewvc.php:51 www/sendmessage.php:33 www/sendmessage.php:43
 #: www/sendmessage.php:48 www/snapshots.php:23 www/snapshots.php:26
 #: www/snippet/addversion.php:64 www/snippet/browse.php:49
@@ -2401,12 +2488,6 @@ msgstr ""
 msgid "<strong>%1$s</strong> commits, <strong>%2$s</strong> adds"
 msgstr ""
 
-#: plugins/scmcvs/common/CVSPlugin.class.php:245 www/activity/index.php:70
-#: www/tracker/detail.php:187 www/tracker/mod-limited.php:183
-#: www/tracker/mod.php:274
-msgid "Commits"
-msgstr ""
-
 #: plugins/scmsvn/common/SVNPlugin.class.php:108
 msgid ""
 "<p>Documentation for Subversion (sometimes referred to as \"SVN\") is "
@@ -2643,15 +2724,10 @@ msgstr ""
 #: www/mail/admin/index.php:180 www/mail/admin/index.php:230
 #: www/people/people_utils.php:182 www/people/people_utils.php:332
 #: www/pm/admin/index.php:367 www/pm/calendar.php:277
-#: www/project/admin/database.php:231 www/project/admin/editgroupinfo.php:338
+#: www/project/admin/database.php:231 www/project/admin/editgroupinfo.php:335
 #: www/project/admin/index.php:269 www/project/admin/index.php:281
 #: www/reporting/timecategory.php:97 www/scm/admin/index.php:110
 msgid "Update"
-msgstr ""
-
-#: www/account/first.php:29 www/help/index.php:29
-#, php-format
-msgid "Welcome to %1$s"
 msgstr ""
 
 #: www/account/first.php:31
@@ -2814,7 +2890,7 @@ msgid "Login with SSL"
 msgstr ""
 
 #: www/account/login.php:59 www/account/verify.php:99
-#: www/admin/userlist.php:64 www/themes/lite/Theme.class.php:128
+#: www/admin/userlist.php:64 www/themes/lite/Theme.class.php:130
 msgid "Login"
 msgstr ""
 
@@ -2959,7 +3035,7 @@ msgstr ""
 #: www/pm/add_task.php:139 www/pm/admin/index.php:221
 #: www/pm/admin/index.php:267 www/pm/admin/index.php:306
 #: www/pm/deletetask.php:36 www/pm/mod_task.php:37 www/pm/mod_task.php:195
-#: www/project/admin/editimages.php:231 www/project/admin/roleedit.php:258
+#: www/project/admin/editimages.php:231 www/project/admin/roleedit.php:268
 #: www/project/request.php:67 www/register/projectinfo.php:211
 #: www/survey/include/SurveyHTML.class.php:537 www/tracker/add.php:26
 #: www/tracker/add.php:55 www/tracker/add.php:117
@@ -3090,9 +3166,9 @@ msgid ""
 msgstr ""
 
 #: www/activity/index.php:46 www/activity/index.php:105
-#: www/activity/index.php:123 www/include/Layout.class.php:544
-#: www/themes/gforge-simple-theme/Theme.class.php:514
-#: www/themes/gforge/Theme.class.php:506
+#: www/activity/index.php:123 www/include/Layout.class.php:545
+#: www/themes/gforge-simple-theme/Theme.class.php:515
+#: www/themes/gforge/Theme.class.php:507
 msgid "Activity"
 msgstr ""
 
@@ -3182,7 +3258,7 @@ msgstr ""
 #: www/admin/trove/trove_cat_list.php:44 www/docman/admin/index.php:380
 #: www/pm/mod_task.php:228 www/reporting/timeadd.php:187
 #: www/reporting/timecategory.php:99 www/trove/admin/trove_cat_add.php:91
-#: www/trove/admin/trove_cat_list.php:33
+#: www/trove/admin/trove_cat_list.php:32
 msgid "Add"
 msgstr ""
 
@@ -3255,7 +3331,7 @@ msgstr ""
 #: www/tracker/admin/form-addextrafield.php:33
 #: www/tracker/admin/form-addextrafield.php:56
 #: www/tracker/admin/form-addextrafieldoption.php:32
-#: www/trove/admin/trove_cat_list.php:36
+#: www/trove/admin/trove_cat_list.php:35
 msgid "Edit"
 msgstr ""
 
@@ -4160,11 +4236,11 @@ msgid "Parent Category:"
 msgstr ""
 
 #: www/admin/trove/trove_cat_list.php:62 www/trove/admin/trove_cat_edit.php:75
-#: www/trove/admin/trove_cat_list.php:54
+#: www/trove/admin/trove_cat_list.php:53
 msgid "Site Admin: Trove - Category List"
 msgstr ""
 
-#: www/admin/trove/trove_cat_list.php:66 www/trove/admin/trove_cat_list.php:58
+#: www/admin/trove/trove_cat_list.php:66 www/trove/admin/trove_cat_list.php:57
 msgid "Browse Trove Tree"
 msgstr ""
 
@@ -4799,15 +4875,15 @@ msgstr ""
 msgid "Submit Information"
 msgstr ""
 
-#: www/docman/search.php:90 www/include/Layout.class.php:792
-#: www/include/Layout.class.php:816
+#: www/docman/search.php:90 www/include/Layout.class.php:793
+#: www/include/Layout.class.php:817
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:53
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:41
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:41
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:45
-#: www/search/index.php:69 www/themes/gforge-simple-theme/Theme.class.php:675
-#: www/themes/gforge-simple-theme/Theme.class.php:693
-#: www/themes/gforge/Theme.class.php:761 www/themes/gforge/Theme.class.php:785
+#: www/search/index.php:69 www/themes/gforge-simple-theme/Theme.class.php:676
+#: www/themes/gforge-simple-theme/Theme.class.php:694
+#: www/themes/gforge/Theme.class.php:762 www/themes/gforge/Theme.class.php:786
 #: www/themes/ultralite/Theme.class.php:133
 msgid "Search"
 msgstr ""
@@ -5145,6 +5221,14 @@ msgstr ""
 msgid "No forum chosen"
 msgstr ""
 
+#: www/forum/include/AttachManager.class.php:144
+msgid "Could Not Get Forum Object"
+msgstr ""
+
+#: www/forum/include/AttachManager.class.php:157
+msgid "No attachment found"
+msgstr ""
+
 #: www/forum/include/AttachManager.class.php:175
 #: www/forum/include/AttachManager.class.php:261
 #: www/forum/include/AttachManager.class.php:303
@@ -5191,7 +5275,7 @@ msgstr ""
 msgid "Posted by"
 msgstr ""
 
-#: www/forum/include/ForumHTML.class.php:68 www/include/Layout.class.php:526
+#: www/forum/include/ForumHTML.class.php:68 www/include/Layout.class.php:527
 #: www/my/diary.php:152 www/my/index.php:74 www/my/index.php:116
 #: www/my/index.php:163 www/pm/browse_task.php:106
 #: www/project/report/index.php:136
@@ -5199,8 +5283,8 @@ msgstr ""
 #: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:35
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:36
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:36
-#: www/themes/gforge-simple-theme/Theme.class.php:497
-#: www/themes/gforge/Theme.class.php:489 www/tracker/add.php:73
+#: www/themes/gforge-simple-theme/Theme.class.php:498
+#: www/themes/gforge/Theme.class.php:490 www/tracker/add.php:73
 #: www/tracker/browse.php:141 www/tracker/browse.php:291
 #: www/tracker/detail.php:72 www/tracker/mod-limited.php:113
 #: www/tracker/mod.php:155 www/tracker/query.php:160
@@ -6112,132 +6196,132 @@ msgstr ""
 msgid "en"
 msgstr "pl"
 
-#: www/include/Layout.class.php:149
-#: www/themes/gforge-simple-theme/Theme.class.php:152
-#: www/themes/gforge/Theme.class.php:161 www/themes/osx/Theme.class.php:78
-#: www/themes/ultralite/Theme.class.php:45
+#: www/include/Layout.class.php:150
+#: www/themes/gforge-simple-theme/Theme.class.php:153
+#: www/themes/gforge/Theme.class.php:162 www/themes/lite/Theme.class.php:126
+#: www/themes/osx/Theme.class.php:81 www/themes/ultralite/Theme.class.php:45
 msgid "Log Out"
 msgstr ""
 
-#: www/include/Layout.class.php:150
-#: www/themes/gforge-simple-theme/Theme.class.php:154
-#: www/themes/gforge/Theme.class.php:163 www/themes/lite/Theme.class.php:126
-#: www/themes/osx/Theme.class.php:79 www/themes/ultralite/Theme.class.php:46
+#: www/include/Layout.class.php:151
+#: www/themes/gforge-simple-theme/Theme.class.php:155
+#: www/themes/gforge/Theme.class.php:164 www/themes/lite/Theme.class.php:128
+#: www/themes/osx/Theme.class.php:83 www/themes/ultralite/Theme.class.php:46
 msgid "My Account"
 msgstr ""
 
-#: www/include/Layout.class.php:152
-#: www/themes/gforge-simple-theme/Theme.class.php:157
-#: www/themes/gforge/Theme.class.php:165 www/themes/osx/Theme.class.php:82
+#: www/include/Layout.class.php:153
+#: www/themes/gforge-simple-theme/Theme.class.php:158
+#: www/themes/gforge/Theme.class.php:166 www/themes/osx/Theme.class.php:86
 #: www/themes/ultralite/Theme.class.php:50
 msgid "Log In"
 msgstr ""
 
-#: www/include/Layout.class.php:154
-#: www/themes/gforge-simple-theme/Theme.class.php:160
-#: www/themes/gforge/Theme.class.php:168 www/themes/lite/Theme.class.php:129
-#: www/themes/osx/Theme.class.php:83 www/themes/ultralite/Theme.class.php:51
+#: www/include/Layout.class.php:155
+#: www/themes/gforge-simple-theme/Theme.class.php:161
+#: www/themes/gforge/Theme.class.php:169 www/themes/lite/Theme.class.php:131
+#: www/themes/osx/Theme.class.php:87 www/themes/ultralite/Theme.class.php:51
 msgid "New Account"
 msgstr ""
 
-#: www/include/Layout.class.php:278
-#: www/themes/gforge-simple-theme/Theme.class.php:219
-#: www/themes/gforge/Theme.class.php:228
+#: www/include/Layout.class.php:279
+#: www/themes/gforge-simple-theme/Theme.class.php:220
+#: www/themes/gforge/Theme.class.php:229
 msgid "Show source"
 msgstr ""
 
-#: www/include/Layout.class.php:416
+#: www/include/Layout.class.php:417
 #: www/themes/gforge-simple-theme/Theme.class.php:147
-#: www/themes/gforge-simple-theme/Theme.class.php:358
-#: www/themes/gforge/Theme.class.php:378 www/themes/lite/Theme.class.php:264
+#: www/themes/gforge-simple-theme/Theme.class.php:359
+#: www/themes/gforge/Theme.class.php:379 www/themes/lite/Theme.class.php:266
 #: www/themes/ultralite/Theme.class.php:39
 msgid "Home"
 msgstr ""
 
-#: www/include/Layout.class.php:417
-#: www/themes/gforge-simple-theme/Theme.class.php:362
-#: www/themes/gforge/Theme.class.php:379 www/themes/lite/Theme.class.php:265
+#: www/include/Layout.class.php:418
+#: www/themes/gforge-simple-theme/Theme.class.php:363
+#: www/themes/gforge/Theme.class.php:380 www/themes/lite/Theme.class.php:267
 msgid "My&nbsp;Page"
 msgstr ""
 
-#: www/include/Layout.class.php:419
-#: www/themes/gforge-simple-theme/Theme.class.php:371
-#: www/themes/gforge/Theme.class.php:381 www/themes/lite/Theme.class.php:267
+#: www/include/Layout.class.php:420
+#: www/themes/gforge-simple-theme/Theme.class.php:372
+#: www/themes/gforge/Theme.class.php:382 www/themes/lite/Theme.class.php:269
 msgid "Project&nbsp;Tree"
 msgstr ""
 
-#: www/include/Layout.class.php:422
-#: www/themes/gforge-simple-theme/Theme.class.php:380
-#: www/themes/gforge/Theme.class.php:384 www/themes/lite/Theme.class.php:270
+#: www/include/Layout.class.php:423
+#: www/themes/gforge-simple-theme/Theme.class.php:381
+#: www/themes/gforge/Theme.class.php:385 www/themes/lite/Theme.class.php:272
 msgid "Code&nbsp;Snippets"
 msgstr ""
 
-#: www/include/Layout.class.php:425
-#: www/themes/gforge-simple-theme/Theme.class.php:389
-#: www/themes/gforge/Theme.class.php:387 www/themes/lite/Theme.class.php:273
+#: www/include/Layout.class.php:426
+#: www/themes/gforge-simple-theme/Theme.class.php:390
+#: www/themes/gforge/Theme.class.php:388 www/themes/lite/Theme.class.php:275
 msgid "Project&nbsp;Openings"
 msgstr ""
 
-#: www/include/Layout.class.php:565 www/include/project_home.php:312
-#: www/themes/gforge-simple-theme/Theme.class.php:538
-#: www/themes/gforge/Theme.class.php:527
+#: www/include/Layout.class.php:566 www/include/project_home.php:312
+#: www/themes/gforge-simple-theme/Theme.class.php:539
+#: www/themes/gforge/Theme.class.php:528
 msgid "Lists"
 msgstr ""
 
-#: www/include/Layout.class.php:586 www/include/project_home.php:342
+#: www/include/Layout.class.php:587 www/include/project_home.php:342
 #: www/include/project_home.php:343 www/survey/include/SurveyHTML.class.php:53
 #: www/survey/survey_utils.php:52
-#: www/themes/gforge-simple-theme/Theme.class.php:562
-#: www/themes/gforge/Theme.class.php:548
+#: www/themes/gforge-simple-theme/Theme.class.php:563
+#: www/themes/gforge/Theme.class.php:549
 msgid "Surveys"
 msgstr ""
 
-#: www/include/Layout.class.php:798
+#: www/include/Layout.class.php:799
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:76
-#: www/themes/gforge-simple-theme/Theme.class.php:679
-#: www/themes/gforge/Theme.class.php:767
+#: www/themes/gforge-simple-theme/Theme.class.php:680
+#: www/themes/gforge/Theme.class.php:768
 msgid "Advanced search"
 msgstr ""
 
-#: www/include/Layout.class.php:821
-#: www/themes/gforge-simple-theme/Theme.class.php:694
-#: www/themes/gforge/Theme.class.php:790
+#: www/include/Layout.class.php:822
+#: www/themes/gforge-simple-theme/Theme.class.php:695
+#: www/themes/gforge/Theme.class.php:791
 msgid "with all words"
 msgstr ""
 
-#: www/include/Layout.class.php:824
-#: www/themes/gforge-simple-theme/Theme.class.php:695
-#: www/themes/gforge/Theme.class.php:793
+#: www/include/Layout.class.php:825
+#: www/themes/gforge-simple-theme/Theme.class.php:696
+#: www/themes/gforge/Theme.class.php:794
 msgid "with one word"
 msgstr ""
 
-#: www/include/Layout.class.php:869 www/themes/gforge/Theme.class.php:839
+#: www/include/Layout.class.php:870 www/themes/gforge/Theme.class.php:840
 msgid "Search in"
 msgstr ""
 
-#: www/include/Layout.class.php:870 www/include/Layout.class.php:901
-#: www/themes/gforge-simple-theme/Theme.class.php:697
-#: www/themes/gforge-simple-theme/Theme.class.php:753
-#: www/themes/gforge/Theme.class.php:840 www/themes/gforge/Theme.class.php:871
+#: www/include/Layout.class.php:871 www/include/Layout.class.php:902
+#: www/themes/gforge-simple-theme/Theme.class.php:698
+#: www/themes/gforge-simple-theme/Theme.class.php:754
+#: www/themes/gforge/Theme.class.php:841 www/themes/gforge/Theme.class.php:872
 msgid "Select"
 msgstr ""
 
-#: www/include/Layout.class.php:870 www/include/Layout.class.php:901
+#: www/include/Layout.class.php:871 www/include/Layout.class.php:902
 #: www/stats/site_stats_utils.php:125
-#: www/themes/gforge-simple-theme/Theme.class.php:697
-#: www/themes/gforge-simple-theme/Theme.class.php:753
-#: www/themes/gforge/Theme.class.php:840 www/themes/gforge/Theme.class.php:871
+#: www/themes/gforge-simple-theme/Theme.class.php:698
+#: www/themes/gforge-simple-theme/Theme.class.php:754
+#: www/themes/gforge/Theme.class.php:841 www/themes/gforge/Theme.class.php:872
 msgid "all"
 msgstr ""
 
-#: www/include/Layout.class.php:870 www/include/Layout.class.php:901
-#: www/themes/gforge-simple-theme/Theme.class.php:697
-#: www/themes/gforge-simple-theme/Theme.class.php:753
-#: www/themes/gforge/Theme.class.php:840 www/themes/gforge/Theme.class.php:871
+#: www/include/Layout.class.php:871 www/include/Layout.class.php:902
+#: www/themes/gforge-simple-theme/Theme.class.php:698
+#: www/themes/gforge-simple-theme/Theme.class.php:754
+#: www/themes/gforge/Theme.class.php:841 www/themes/gforge/Theme.class.php:872
 msgid "none"
 msgstr ""
 
-#: www/include/Layout.class.php:1073
+#: www/include/Layout.class.php:1074
 msgid "Quick Jump To..."
 msgstr ""
 
@@ -6412,10 +6496,6 @@ msgstr ""
 
 #: www/include/project_home.php:112
 msgid "Project Admins"
-msgstr ""
-
-#: www/include/project_home.php:118 www/stats/site_stats_utils.php:484
-msgid "Developers"
 msgstr ""
 
 #: www/include/project_home.php:130
@@ -6595,11 +6675,11 @@ msgstr ""
 msgid "Trove Software Map"
 msgstr ""
 
-#: www/include/trove.php:288 www/trove/include/trove.php:285
+#: www/include/trove.php:288 www/trove/include/trove.php:284
 msgid "(Now Filtering)"
 msgstr ""
 
-#: www/include/trove.php:296 www/trove/include/trove.php:294
+#: www/include/trove.php:296 www/trove/include/trove.php:293
 msgid "[Filter]"
 msgstr ""
 
@@ -8534,7 +8614,7 @@ msgstr ""
 msgid "Choose a file in the proper .csv format for uploading."
 msgstr ""
 
-#: www/project/admin/database.php:45 www/project/admin/editgroupinfo.php:38
+#: www/project/admin/database.php:45 www/project/admin/editgroupinfo.php:37
 #: www/snapshots.php:24 www/tarballs.php:25
 msgid "Error creating group"
 msgstr ""
@@ -8593,91 +8673,91 @@ msgstr ""
 msgid "There are no databases currently allocated to this group"
 msgstr ""
 
-#: www/project/admin/editgroupinfo.php:95
+#: www/project/admin/editgroupinfo.php:92
 msgid "Group information updated"
 msgstr ""
 
-#: www/project/admin/editgroupinfo.php:103
+#: www/project/admin/editgroupinfo.php:100
 msgid "Edit Group Info"
 msgstr ""
 
-#: www/project/admin/editgroupinfo.php:124
+#: www/project/admin/editgroupinfo.php:121
 msgid "Descriptive Group Name"
 msgstr ""
 
-#: www/project/admin/editgroupinfo.php:129
+#: www/project/admin/editgroupinfo.php:126
 msgid ""
 "Short Description (255 Character Max, HTML will be stripped from this "
 "description)"
 msgstr ""
 
-#: www/project/admin/editgroupinfo.php:136
+#: www/project/admin/editgroupinfo.php:133
 msgid "Homepage Link"
 msgstr ""
 
-#: www/project/admin/editgroupinfo.php:142
+#: www/project/admin/editgroupinfo.php:139
 msgid "Visibility: "
 msgstr ""
 
-#: www/project/admin/editgroupinfo.php:162
+#: www/project/admin/editgroupinfo.php:159
 msgid "Active Features"
 msgstr ""
 
-#: www/project/admin/editgroupinfo.php:190
+#: www/project/admin/editgroupinfo.php:187
 msgid "Use Mailing Lists"
 msgstr ""
 
-#: www/project/admin/editgroupinfo.php:203
+#: www/project/admin/editgroupinfo.php:200
 msgid "Use Surveys"
 msgstr ""
 
-#: www/project/admin/editgroupinfo.php:216
+#: www/project/admin/editgroupinfo.php:213
 msgid "Use Forums"
 msgstr ""
 
-#: www/project/admin/editgroupinfo.php:229
+#: www/project/admin/editgroupinfo.php:226
 msgid "Use Project/Task Manager"
 msgstr ""
 
-#: www/project/admin/editgroupinfo.php:242
+#: www/project/admin/editgroupinfo.php:239
 msgid "Use SCM"
 msgstr ""
 
-#: www/project/admin/editgroupinfo.php:255
+#: www/project/admin/editgroupinfo.php:252
 msgid "Use News"
 msgstr ""
 
-#: www/project/admin/editgroupinfo.php:268
+#: www/project/admin/editgroupinfo.php:265
 msgid "Use Doc Mgr"
 msgstr ""
 
-#: www/project/admin/editgroupinfo.php:281
+#: www/project/admin/editgroupinfo.php:278
 msgid "Use FTP"
 msgstr ""
 
-#: www/project/admin/editgroupinfo.php:294
+#: www/project/admin/editgroupinfo.php:291
 msgid "Use Tracker"
 msgstr ""
 
-#: www/project/admin/editgroupinfo.php:307
+#: www/project/admin/editgroupinfo.php:304
 msgid "Use File Release System"
 msgstr ""
 
-#: www/project/admin/editgroupinfo.php:316
+#: www/project/admin/editgroupinfo.php:313
 msgid "Use Statistics"
 msgstr ""
 
-#: www/project/admin/editgroupinfo.php:328
+#: www/project/admin/editgroupinfo.php:325
 msgid ""
 "If you wish, you can provide default email addresses to which new "
 "submissions will be sent"
 msgstr ""
 
-#: www/project/admin/editgroupinfo.php:329
+#: www/project/admin/editgroupinfo.php:326
 msgid "New Document Submissions"
 msgstr ""
 
-#: www/project/admin/editgroupinfo.php:331
+#: www/project/admin/editgroupinfo.php:328
 msgid "(send on all updates)"
 msgstr ""
 
@@ -8868,7 +8948,7 @@ msgstr ""
 msgid "Observer"
 msgstr ""
 
-#: www/project/admin/index.php:289 www/project/admin/roleedit.php:98
+#: www/project/admin/index.php:289 www/project/admin/roleedit.php:100
 msgid "Edit Observer"
 msgstr ""
 
@@ -8899,7 +8979,7 @@ msgstr ""
 
 #: www/project/admin/index.php:345 www/project/admin/massadd.php:76
 #: www/project/admin/massfinish.php:67 www/project/admin/roleedit.php:92
-#: www/project/admin/roleedit.php:104
+#: www/project/admin/roleedit.php:106
 msgid "Edit Role"
 msgstr ""
 
@@ -8988,36 +9068,36 @@ msgstr ""
 msgid "Successfully Created New Role"
 msgstr ""
 
-#: www/project/admin/roleedit.php:99
+#: www/project/admin/roleedit.php:101
 msgid ""
 "Use this page to edit the permissions and access levels of non-members of "
 "your project. Non-members includes users who are not logged in."
 msgstr ""
 
-#: www/project/admin/roleedit.php:102
+#: www/project/admin/roleedit.php:104
 msgid "New Role"
 msgstr ""
 
-#: www/project/admin/roleedit.php:106
+#: www/project/admin/roleedit.php:108
 msgid ""
 "Use this page to edit your project's Roles. Note that each member has at "
 "least as much access as the Observer. For example, if the Observer can read "
 "CVS, so can any other role in the project."
 msgstr ""
 
-#: www/project/admin/roleedit.php:115
+#: www/project/admin/roleedit.php:117
 msgid "Role Name"
 msgstr ""
 
-#: www/project/admin/roleedit.php:120
+#: www/project/admin/roleedit.php:122
 msgid "Section"
 msgstr ""
 
-#: www/project/admin/roleedit.php:121
+#: www/project/admin/roleedit.php:123
 msgid "Subsection"
 msgstr ""
 
-#: www/project/admin/roleedit.php:122
+#: www/project/admin/roleedit.php:124
 msgid "Setting"
 msgstr ""
 
@@ -10877,10 +10957,6 @@ msgstr ""
 msgid "default_font"
 msgstr ""
 
-#: www/themes/lite/Theme.class.php:125
-msgid "Logout"
-msgstr ""
-
 #: www/themes/ultralite/Theme.class.php:150
 msgid "Show Source"
 msgstr ""
@@ -11710,11 +11786,11 @@ msgstr ""
 msgid "That Trove category does not exist."
 msgstr ""
 
-#: www/trove/TroveCategory.class.php:103
+#: www/trove/TroveCategory.class.php:102
 msgid "Empty strings"
 msgstr ""
 
-#: www/trove/TroveCategory.class.php:115
+#: www/trove/TroveCategory.class.php:114
 msgid "Cannot update"
 msgstr ""
 
@@ -11746,7 +11822,7 @@ msgstr ""
 msgid "delete"
 msgstr ""
 
-#: www/trove/include/trove.php:241
+#: www/trove/include/trove.php:240
 #, php-format
 msgid ""
 "This project has not yet categorized itself in the <a href=\"%s\">Trove "
