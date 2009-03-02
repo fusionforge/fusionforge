@@ -82,37 +82,51 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 */
 	function getResult() {
 		$html = '';
-		
-		$forumsRenderer		= new ForumsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
-		$trackersRenderer	= new TrackersHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
-		$tasksRenderer		= new TasksHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
-		$docsRenderer		= new DocsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
-		$frsRenderer 		= new FrsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
-		$newsRenderer		= new NewsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
-		
+
+		$Group =& group_get_object($this->groupId);
+
+		if ($Group->usesForum()) {
+			$forumsRenderer		= new ForumsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
+		}
+		if ($Group->usesTracker()) {
+			$trackersRenderer	= new TrackersHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
+		}
+		if ($Group->usesPM()) {
+			$tasksRenderer		= new TasksHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
+		}
+		if ($Group->usesDocman()) {
+			$docsRenderer		= new DocsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
+		}
+		if ($Group->usesFRS()) {
+			$frsRenderer 		= new FrsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
+		}
+		if ($Group->usesNews()) {
+			$newsRenderer		= new NewsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
+		}
+
 		$validLength = (strlen($this->words) >= 3);
 
-		if ($validLength || (is_numeric($this->words) && $trackersRenderer->searchQuery->implementsSearchById())) {
+		if (isset($trackersRenderer) && ($validLength || (is_numeric($this->words) && $trackersRenderer->searchQuery->implementsSearchById()))) {
 			$html .= $this->getPartResult($trackersRenderer, 'short_tracker', _('Tracker Search Results'));
 		}
 
-		if ($validLength || (is_numeric($this->words) && $forumsRenderer->searchQuery->implementsSearchById())) {
+		if (isset($forumsRenderer) && ($validLength || (is_numeric($this->words) && $forumsRenderer->searchQuery->implementsSearchById()))) {
 			$html .= $this->getPartResult($forumsRenderer, 'short_forum', _('Forum Search Results'));
 		}
 
-		if ($validLength || (is_numeric($this->words) && $tasksRenderer->searchQuery->implementsSearchById())) {
+		if (isset($tasksRenderer) && ($validLength || (is_numeric($this->words) && $tasksRenderer->searchQuery->implementsSearchById()))) {
 			$html .= $this->getPartResult($tasksRenderer, 'short_pm', _('Task Search Results'));
 		}
 
-		if ($validLength || (is_numeric($this->words) && $docsRenderer->searchQuery->implementsSearchById())) {
+		if (isset($docsRenderer) && ($validLength || (is_numeric($this->words) && $docsRenderer->searchQuery->implementsSearchById()))) {
 			$html .= $this->getPartResult($docsRenderer, 'short_docman', _('Documentation Search Results'));
 		}
-		
-		if ($validLength || (is_numeric($this->words) && $frsRenderer->searchQuery->implementsSearchById())) {
-			$html .= $this->getPartResult($newsRenderer, 'short_files', _('Files Search Results'));
+
+		if (isset($frsRenderer) && ($validLength || (is_numeric($this->words) && $frsRenderer->searchQuery->implementsSearchById()))) {
+			$html .= $this->getPartResult($frsRenderer, 'short_files', _('Files Search Results'));
 		}
 
-		if ($validLength || (is_numeric($this->words) && $newsRenderer->searchQuery->implementsSearchById())) {
+		if (isset($newsRenderer) && ($validLength || (is_numeric($this->words) && $newsRenderer->searchQuery->implementsSearchById()))) {
 			$html .= $this->getPartResult($newsRenderer, 'short_news', _('News Search Results'));
 		}
 
