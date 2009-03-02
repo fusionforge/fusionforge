@@ -11,7 +11,7 @@
 $gfRequestTime = microtime( true );
 
 @ini_set( 'memory_limit', '20M' );
-@ini_set( "display_errors", true );
+@ini_set( "display_errors", false );
 
 error_reporting( E_ALL );
 
