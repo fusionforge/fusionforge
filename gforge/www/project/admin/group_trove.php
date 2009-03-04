@@ -39,7 +39,7 @@ if (getStringFromRequest('submit') && getStringFromRequest('root1')) {
 	 if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit();
 	 }
-	group_add_history ('Changed Trove',$group_id,$group_id);
+	group_add_history ('Changed Trove', '', $group_id);
 
 	// there is at least a $root1[xxx]
 	$allroots = array();
