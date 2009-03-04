@@ -20,7 +20,7 @@ gfminor=$(shell head -1 gforge/debian/changelog | sed 's/.*(.[^+-]*[+-]\(.*\)).*
 svnrev=$(shell LANG=C svn info | grep Revision | cut -d: -f2| sed 's/ //g')
 MINOR=-svn$(svnrev)+
 
-default: cowbuilddeb
+#default: cowbuilddeb
 
 #make -f Makefile.debian cowbuilddist XDISTRIB=2squeeze LOCALREPO=$(LOCALREPODEB)
 
@@ -66,13 +66,13 @@ cowbuildtest:
 	@echo "Will build gforge_$(gfversion)$(MINOR)$(DISTRIB)"
 
 cowbuilddeb:		# ***** This is the one to build debian packages ***** #
-	for dist in $(DEBIANLIST); do \
+	@for dist in $(DEBIANLIST); do \
 	make -f Makefile.debian cowbuilddist XDISTRIB=$$dist DISTROOP="$(DEBIANOP)" LOCALREPO=$(LOCALREPODEB) DISTRIBLIST="$(DEBIANLIST)"; \
 	done
 
 cowbuildubu:            # ***** This is the one to build ubuntu packages ***** #
-	for dist in $(UBUNTULIST); do \
-	make -f Makefile.debian svnbuilddist XDISTRIB=$$dist DISTROOP="$(UBUNTUOP)" LOCALREPO=$(LOCALREPOUBU) DISTRIBLIST="$(UBUNTULIST)" ; \
+	@for dist in $(UBUNTULIST); do \
+	make -f Makefile.debian cowbuilddist XDISTRIB=$$dist DISTROOP="$(UBUNTUOP)" LOCALREPO=$(LOCALREPOUBU) DISTRIBLIST="$(UBUNTULIST)" ; \
 	done
 
 cowbuilddist: cowbuilderenv localrepo $(BUILDFILES) $(BUILDRESULT)/gforge_$(gfversion)$(MINOR)$(XDISTRIB)_i386.changes
