@@ -1,4 +1,4 @@
-Gforge now uses GNU gettext for its internationalisation system,
+FusionForge now uses GNU gettext for its internationalisation system,
 instead of the previous home-grown system (the *.tab files).
 
 How it works
@@ -22,14 +22,14 @@ string, a translated string in the appropriate language.
   The PO files are then turned into MO (Machine Object) files, which
 contain the same information, only in a binary format not meant for
 human editing.  These MO files are installed onto the server where
-Gforge runs, and gettext finds and uses them at runtime to convert
+FusionForge runs, and gettext finds and uses them at runtime to convert
 strings from English to another language -- if a string is missing in
 the PO file, the English string is displayed.
 
   So, the initial workflow is:
 
-        *.php ---\
-                  -> gforge.pot -> *.po -> *.mo
+        *.php -------\
+                      -> gforge.pot -> *.po -> *.mo
         *.class.php -/
 
   Now what happens when the source files are modified, new strings are
@@ -46,10 +46,10 @@ changes in meaning, and maybe update.
 
   The "update" workflow is therefore:
 
-        *.php ---\
-                  -> new gforge.pot -\
+        *.php -------\
+                      -> new gforge.pot -\
         *.class.php -/                    -> new *.po -> new *.mo
-                     old *.po -------/
+                         old *.po -------/
 
 How to use it when coding -- basic
 ----------------------------------
@@ -58,7 +58,7 @@ To simply display a translated string, just use the _() function on a
 hardcoded string.  For instance, to display a welcome message, you'd
 use the following:
 ,----
-| echo _('Welcome to Gforge!') ;
+| echo _('Welcome to FusionForge!') ;
 `----
 
   If you need to use a parameter, your best bet is to use printf
@@ -158,21 +158,21 @@ the concept of "domains".
 beginning of the program needs to tell gettext to use such-and-such
 domain, whose *.mo files can be found in such-and-such location of the
 filesystem.  The very next instruction is usually a declaration that
-one domain is to be used as default -- in Gforge, that domain is
+one domain is to be used as default -- in FusionForge, that domain is
 "gforge", and it corresponds to the various gforge.mo files, which
 will usually be /usr/share/locale/*/LC_MESSAGES/gforge.mo.  Strings
 from the default domain can be translated by the _() function (or the
 gettext() function, same thing).
 
   If you want to access strings from another domain (maybe to re-use
-translations from a library, or because your Gforge plugin has its own
-strings), you need to specify what domain when invoking gettext, by
-using the dgettext() function.  It takes an extra parameter before the
-string to be translated, which is the domain name.  One could thus
-envision the following code:
+translations from a library, or because your FusionForge plugin has
+its own strings), you need to specify what domain when invoking
+gettext, by using the dgettext() function.  It takes an extra
+parameter before the string to be translated, which is the domain
+name.  One could thus envision the following code:
 ,----
 | echo dgettext('gforge-plugin-superduper',
-|               'Thank you for using the SuperDuper Gforge plugin.') ;
+|               'Thank you for using the SuperDuper FusionForge plugin.') ;
 `----
 
   (There's also a dngettext() function, for those times when you need
@@ -212,3 +212,11 @@ so on.
   Notable examples of these applications include POedit (a Gtk-based
 app), Kbabel (this ones is Qt), and Pootle (web-based).  Emacs
 aficionados will, no doubt, use their favourite editor's PO-mode.
+
+  Note that the Debian internationalisation team have been kind enough
+to host FusionForge translations on their Pootle instance.  It is
+therefore recommended that translators register an account on
+https://pootle.debian.net/ and use it for their work.  Pootle has a
+web-based interface, but it also allows translators to download and
+upload the *.po files for those who prefer working locally with the
+other tools.
