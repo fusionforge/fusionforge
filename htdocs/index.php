@@ -105,8 +105,8 @@ cd fusionforge-4.7.1</pre>
 				<p>Anonymous read-only Bazaar gateway (updated hourly):<br />
 				<tt>bzr checkout http://scm.fusionforge.org/bzr/fusionforge/svn-trunk-ro fusionforge-trunk</tt></p>
 
-				<p>Anonymous read-only Git gateway (updated hourly):<br />
-				<tt>git clone git://scm.fusionforge.org/fusionforge/fusionforge.git</tt></p>
+<!--				<p>Anonymous read-only Git gateway (updated hourly):<br />
+<tt>git clone git://scm.fusionforge.org/fusionforge/fusionforge.git</tt></p>-->
 
 				<p>Github:<br />
 				See aljeux tree on github at <a href="http://github.com/aljeux/fusionforge/tree/master">http://github.com/aljeux/fusionforge/tree/master</a>.<br/>
