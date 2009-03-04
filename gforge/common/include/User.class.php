@@ -765,6 +765,11 @@ Enjoy the site.
 	 *	@return boolean success.
 	 */
 	function setEmail($email) {
+
+		if (!strcasecmp($this->getEmail(), $email)) {
+			return true;
+		}
+
 		if (!$email || !validate_email($email)) {
 			$this->setError('ERROR: Invalid Email');
 			return false;
