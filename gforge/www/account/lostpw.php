@@ -64,7 +64,7 @@ to change your password:
 <%2$s>
 
  -- the %1$s staff
-'), util_make_url ($GLOBALS['sys_name'], "/account/lostlogin.php?ch=_".$confirm_hash)));
+'), $GLOBALS['sys_name'], util_make_url ("/account/lostlogin.php?ch=_".$confirm_hash)));
 
 		util_send_message($u->getEmail(),sprintf(_('%1$s Verification'), $GLOBALS['sys_name']),$message);
 
