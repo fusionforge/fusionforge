@@ -85,7 +85,14 @@ if (getStringFromRequest('submit')) {
 $HTML->header(array('title'=>'User Account Registration'));
 
 if (isset($feedback)) {
-	print "<p><span class=\"error\">$feedback $register_error</span>";
+
+	print "<p><span class=\"error\">$feedback";
+
+	if (isset($register_error)) {
+		print " $register_error</span>";
+	}
+
+	print "</span>";
 } 
 if (!isset($timezone) || empty($timezone) || !preg_match('/^[-a-zA-Z0-9_/.+]+$/', $timezone)) {
 	$timezone = (isset($sys_default_timezone) ? $sys_default_timezone : 'GMT');
