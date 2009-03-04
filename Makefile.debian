@@ -21,7 +21,8 @@ svnrev=$(shell LANG=C svn info | grep Revision | cut -d: -f2| sed 's/ //g')
 MINOR=-svn$(svnrev)+
 
 default: cowbuilddeb
-	#make -f Makefile.debian cowbuilddist XDISTRIB=2squeeze LOCALREPO=$(LOCALREPODEB)
+
+#make -f Makefile.debian cowbuilddist XDISTRIB=2squeeze LOCALREPO=$(LOCALREPODEB)
 
 list:
 	@echo ======================================================================================
@@ -75,6 +76,7 @@ cowbuildubu:            # ***** This is the one to build ubuntu packages ***** #
 	done
 
 cowbuilddist: cowbuilderenv localrepo $(BUILDFILES) $(BUILDRESULT)/gforge_$(gfversion)$(MINOR)$(XDISTRIB)_i386.changes
+	@echo "Building $(BUILDRESULT)/gforge_$(gfversion)$(MINOR)$(XDISTRIB)_i386.changes"
 
 $(BUILDRESULT)/gforge_$(gfversion)$(MINOR)$(XDISTRIB)_i386.changes: $(BUILDFILES)/gforge_$(gfversion)$(MINOR)$(XDISTRIB).dsc
 	cd $(BUILDFILES) ; sudo cowbuilder --build --basepath $(CURDIR)/cowbuilder/base-$(DISTRIB).cow --configfile $(CURDIR)/cowbuilder/config $(BUILDFILES)/gforge_$(gfversion)$(MINOR)$(XDISTRIB).dsc
