@@ -89,7 +89,7 @@ if (isset($feedback)) {
 	print "<p><span class=\"error\">$feedback";
 
 	if (isset($register_error)) {
-		print " $register_error</span>";
+		print " $register_error";
 	}
 
 	print "</span>";
