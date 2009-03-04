@@ -94,7 +94,7 @@ if (isset($feedback)) {
 
 	print "</span>";
 } 
-if (!isset($timezone) || empty($timezone) || !preg_match('/^[-a-zA-Z0-9_/.+]+$/', $timezone)) {
+if (!isset($timezone) || empty($timezone) || !preg_match('/^[-a-zA-Z0-9_\/\.+]+$/', $timezone)) {
 	$timezone = (isset($sys_default_timezone) ? $sys_default_timezone : 'GMT');
 }
 if (!isset($ccode) || empty($ccode) || !preg_match('/^[a-zA-Z]{2}$/', $ccode)) {
