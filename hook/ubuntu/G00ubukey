@@ -1,0 +1,4 @@
+#! /bin/sh
+# Add universe required by cowbuilder
+grep "main$" /etc/apt/sources.list | sed 's/main/universe/' >> /etc/apt/sources.list
+cat /etc/apt/sources.list

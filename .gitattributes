@@ -3383,6 +3383,7 @@ gforge/www/trove/admin/trove_cat_list.php -text
 gforge/www/trove/include/trove.php -text
 gforge/www/trove/include/utils.php -text
 gforge/www/trove/index.php -text
+hook/ubuntu/G00ubukey -text
 htdocs/box-grad2.png -text
 htdocs/favicon.ico -text
 htdocs/fusionforge-resized-transp.png -text
