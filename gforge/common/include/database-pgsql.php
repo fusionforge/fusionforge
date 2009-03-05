@@ -435,7 +435,7 @@ function db_drop_sequence_if_exists ($tn) {
 function db_int_array_to_any_clause ($arr) {
 	$arr2 = array () ;
 	foreach ($arr as $cur) {
-		if (is_int ($limit)) {
+		if (is_int ($cur)) {
 			$arr2[] = $cur ;
 		}
 	}
