@@ -9,14 +9,15 @@ COWBUILDERBASE=$(CURDIR)/builder/cow
 PBUILDERTGZ=$(CURDIR)/builder/tgz
 TARBALLS=$(CURDIR)/tarballs
 APTCACHE=$(CURDIR)/builder/cache
-XDISTRIB=2squeeze
 DISTRIB=$(shell echo $(XDISTRIB) | cut -c2-)
 LOCALREPODEB=/var/www/debian-fusionforge
 LOCALREPOUBU=/var/www/ubuntu-fusionforge
 DEBIANLIST=1lenny 2squeeze 3sid
 DEBIANLISTP=1etch
-UBUNTULIST=1gutsy 1hardy 1intrepid 1jaunty
+DEBLIST=$(DEBIANLIST) $(DEBIANLISTP)
+UBUNTULIST=1hardy 1intrepid 1jaunty
 UBUNTULISTP=1gutsy
+UBULIST=$(UBUNTULIST) $(UBUNTULISTP)
 # Try if a local mirror is available
 UBUNTUOP=$(shell wget -q -S http://localhost/ubuntu -O /dev/null && echo "--mirror http://localhost/ubuntu" || echo "--mirror http://archive.ubuntu.com/ubuntu") --debootstrap debootstrap
 
@@ -35,6 +36,16 @@ list:
 	@echo ======================================================================================
 	@cat Makefile.debian | grep '^.*:.*#$$' | sed 's/FUSIONFORGE/$(FUSIONFORGE)/' | sed 's/^\(.*:\).*#\(.*\)#$$/\1		\2/'
 	@echo ======================================================================================
+
+#
+# Simple targets
+#
+lenny:    # Simply build lenny packages #
+	make -f Makefile.debian cowbuilddist XDISTRIB=1lenny
+
+intrepid: # Simply build intrepid packages #
+	make -f Makefile.debian cowbuilddist XDISTRIB=1intrepid DISTROOP="$(UBUNTUOP)" HOOK="--hookdir $(CURDIR)/hook/ubuntu"
+
 
 documentor_path=/tmp
 documentor_vers=phpdocumentor-1.3.0rc3
@@ -69,43 +80,52 @@ DEBBUILDOPTS=
 
 all: cowbuilddeb cowbuildubu # ***** Build all package for debian and ubuntu ***** #
 
+deploy: repodeb repoubu # ***** Deploy packages in Debian and Ubuntu repositories ***** #
+
+repodeb:
+	@for dist in $(DEBIANLIST); do \
+	make -f Makefile.debian localrepo reprepro XDISTRIB=$$dist LOCALREPO=$(LOCALREPODEB) DISTRIBLIST="$(DEBLIST)" ; \
+	done
+
+repoubu:
+	@for dist in $(UBUNTULIST); do \
+	make -f Makefile.debian localrepo reprepro XDISTRIB=$$dist LOCALREPO=$(LOCALREPOUBU) DISTRIBLIST="$(UBULIST)" ; \
+	done
+
 cowbuildtest:
 	@echo "Will build gforge_$(gfversion)$(MINOR)$(DISTRIB)"
 
-cowbuilddeb:		# ***** This is the one to cowbuild debian packages ***** #
+cowbuilddeb: # ***** This is the one to cowbuild debian packages ***** #
 	@for dist in $(DEBIANLIST); do \
-	make -f Makefile.debian cowbuilddist XDISTRIB=$$dist DISTROOP="$(DEBIANOP)" LOCALREPO=$(LOCALREPODEB) ; \
+	make -f Makefile.debian cowbuilddist XDISTRIB=$$dist DISTROOP="$(DEBIANOP)" ; \
 	done
 
-cowbuildubu:            # ***** This is the one to cowbuild ubuntu packages ***** #
+cowbuildubu: # ***** This is the one to cowbuild ubuntu packages ***** #
 	@for dist in $(UBUNTULIST); do \
-	make -f Makefile.debian cowbuilddist XDISTRIB=$$dist DISTROOP="$(UBUNTUOP)" LOCALREPO=$(LOCALREPOUBU) HOOK="--no-cowdancer-update --hookdir $(CURDIR)/hook/ubuntu"; \
+	make -f Makefile.debian cowbuilddist XDISTRIB=$$dist DISTROOP="$(UBUNTUOP)" HOOK="--hookdir $(CURDIR)/hook/ubuntu"; \
 	done
 
-pbuilddeb:              # ***** This is the one to pbuild debian packages ***** #
+pbuilddeb: # pbuild debian packages (less recommended) #
 	@for dist in $(DEBIANLISTP); do \
 	make -f Makefile.debian pbuilddist XDISTRIB=$$dist DISTROOP="$(DEBIANOP)" LOCALREPO=$(LOCALREPODEB) ; \
 	done
 
-pbuildubu:              # ***** This is the one to pbuild ubuntu packages ***** #
+pbuildubu: # pbuild ubuntu packages (less recommended) #
 	@for dist in $(UBUNTULISTP); do \
 	make -f Makefile.debian pbuilddist XDISTRIB=$$dist DISTROOP="$(UBUNTUOP)" LOCALREPO=$(LOCALREPOUBU) ; \
 	done
 
-cowbuilddist: cowbuilderenv localrepo $(BUILDFILES) $(BUILDRESULT)/gforge_$(gfversion)$(MINOR)$(XDISTRIB)_i386.changes
+cowbuilddist: cowbuilderenv $(BUILDFILES) $(BUILDRESULT)/gforge_$(gfversion)$(MINOR)$(XDISTRIB)_i386.changes
 	@echo "Building $(BUILDRESULT)/gforge_$(gfversion)$(MINOR)$(XDISTRIB)_i386.changes"
 
-pbuilddist: pbuilderenv localrepo $(BUILDFILES) $(BUILDRESULT)/gforge_$(gfversion)$(MINOR)$(XDISTRIB)+p_i386.changes
+pbuilddist: pbuilderenv $(BUILDFILES) $(BUILDRESULT)/gforge_$(gfversion)$(MINOR)$(XDISTRIB)+p_i386.changes
 	@echo "Building $(BUILDRESULT)/gforge_$(gfversion)$(MINOR)$(XDISTRIB)+p_i386.changes"
 
 $(BUILDRESULT)/gforge_$(gfversion)$(MINOR)$(XDISTRIB)_i386.changes: $(BUILDFILES)/gforge_$(gfversion)$(MINOR)$(XDISTRIB).dsc
-	cd $(BUILDFILES) ; sudo cowbuilder --build --basepath $(COWBUILDERBASE)/base-$(DISTRIB).cow --configfile $(COWBUILDERBASE)/config $(BUILDFILES)/gforge_$(gfversion)$(MINOR)$(XDISTRIB).dsc
+	cd $(BUILDFILES) ; sudo /usr/sbin/cowbuilder --build --basepath $(COWBUILDERBASE)/base-$(DISTRIB).cow --configfile $(COWBUILDERBASE)/config $(BUILDFILES)/gforge_$(gfversion)$(MINOR)$(XDISTRIB).dsc
 
 $(BUILDRESULT)/gforge_$(gfversion)$(MINOR)$(XDISTRIB)+p_i386.changes: $(BUILDFILES)/gforge_$(gfversion)$(MINOR)$(XDISTRIB)+p.dsc
-	cd $(BUILDFILES) ; sudo pbuilder --build --basetgz $(PBUILDERTGZ)/base-$(DISTRIB).tgz --configfile $(PBUILDERTGZ)/config $(BUILDFILES)/gforge_$(gfversion)$(MINOR)$(XDISTRIB)+p.dsc
-
-	# Install in repository
-	#TODO#cd $(BUILDRESULT); reprepro -Vb $(LOCALREPO) include $(DISTRIB) gforge_$(gfversion)$(MINOR)$(XDISTRIB)_i386.changes
+	cd $(BUILDFILES) ; sudo /usr/sbin/pbuilder --build --basetgz $(PBUILDERTGZ)/base-$(DISTRIB).tgz --configfile $(PBUILDERTGZ)/config $(BUILDFILES)/gforge_$(gfversion)$(MINOR)$(XDISTRIB)+p.dsc
 
 $(BUILDFILES)/gforge_$(gfversion)$(MINOR)$(XDISTRIB).dsc: $(BUILDFILES)/gforge_$(gfversion).orig.tar.gz
 	cd gforge ; debclean
@@ -167,13 +187,19 @@ ubukey:
 
 localrepo: $(LOCALREPO) $(LOCALREPO)/conf $(LOCALREPO)/conf/distributions
 	
+reprepro: $(LOCALREPO)/pool/main/g/gforge/gforge_$(gfversion)$(MINOR)$(XDISTRIB).dsc # Install in repository
+
+$(LOCALREPO)/pool/main/g/gforge/gforge_$(gfversion)$(MINOR)$(XDISTRIB).dsc:
+	cd $(BUILDRESULT); reprepro -Vb $(LOCALREPO) include $(DISTRIB) gforge_$(gfversion)$(MINOR)$(XDISTRIB)_i386.changes
+
 $(LOCALREPO)/conf/distributions:
-	for dist in $(DISTRIBLIST); do \
+	for xdist in $(DISTRIBLIST) ; do \
+	dist=`echo $$xdist | cut -c2-` ; \
 	echo "Codename: $$dist" ; \
 	echo "Suite: $$dist" ; \
 	echo "Components: main" ; \
 	echo "UDebComponents: main" ; \
-	echo "Architectures: i386 source" ; \
+	echo "Architectures: amd64 i386 source" ; \
 	echo "Origin: $(ORIGIN)" ; \
 	echo "Version: 4.7" ; \
 	echo "Description: My $(FUSIONFORGE) $$dist repository" ; \
