@@ -82,12 +82,12 @@ all: cowbuilddeb cowbuildubu # ***** Build all package for debian and ubuntu ***
 
 deploy: repodeb repoubu # ***** Deploy packages in Debian and Ubuntu repositories ***** #
 
-repodeb:
+repodeb: cowbuilddeb
 	@for dist in $(DEBIANLIST); do \
 	make -f Makefile.debian localrepo reprepro XDISTRIB=$$dist LOCALREPO=$(LOCALREPODEB) DISTRIBLIST="$(DEBLIST)" ; \
 	done
 
-repoubu:
+repoubu: cowbuildubu
 	@for dist in $(UBUNTULIST); do \
 	make -f Makefile.debian localrepo reprepro XDISTRIB=$$dist LOCALREPO=$(LOCALREPOUBU) DISTRIBLIST="$(UBULIST)" ; \
 	done
