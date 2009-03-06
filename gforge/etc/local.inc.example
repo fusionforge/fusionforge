@@ -159,6 +159,7 @@ $sys_use_snippet=true;
 $sys_use_ssl=false;
 $sys_use_people=true;
 $sys_use_shell=true;
+$sys_use_private_project=true;
 
 // Enable/Disable user ratings
 $sys_use_ratings=true;

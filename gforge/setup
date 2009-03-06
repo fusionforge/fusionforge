@@ -110,6 +110,7 @@ computedefault(){
 	DEFAULTsys_use_project_vhost=true
 	DEFAULTsys_use_project_database=false
 	DEFAULTsys_use_project_multimedia=false
+	DEFAULTsys_use_private_project=true
 	DEFAULTsys_project_reg_restricted=false
 	DEFAULTsys_user_reg_restricted=false
 	DEFAULTsys_localinc=$ETCDIR/local.inc

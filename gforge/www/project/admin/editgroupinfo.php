@@ -135,12 +135,16 @@ $images_res = db_query("
 </p>
 
 <?php
-       echo '<p>' ;
-echo _('Visibility: ');
-       echo html_build_select_box_from_arrays(
+	if ($sys_use_private_project) {
+		echo '<p>' ;
+		echo _('Visibility: ');
+		echo html_build_select_box_from_arrays(
                array('0','1'),
                array(  _('Private'), _('Public') ),
-               'is_public', $group->isPublic(), false); 
+               'is_public', $group->isPublic(), false);
+	} else {
+		echo "<input type=hidden name=\"is_public\" value=\"1\">";
+	}
 ?>
 
 <?php

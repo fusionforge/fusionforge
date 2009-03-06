@@ -197,17 +197,23 @@ echo license_selectbox('license',$license);
 	}
 
 ?>
+<?php
+	if ($sys_use_private_project) {
+		echo "<p><input type=\"radio\" name=\"is_public\" value=\"1\" ";
+		if (!isset($is_public) || $is_public) {
+			echo ' checked';
+		}
+		echo ">". _('Public')."</p>";
 
-<p><input type="radio" name="is_public" value="1" 
-	<?php if (!isset($is_public) || $is_public) {echo ' checked';} ?> 
-   >
-   <?php echo _('Public'); ?>
-</p>
-<p><input type="radio" name="is_public" value="0" 
-	<?php if (isset ($is_public) && !$is_public) {echo ' checked';} ?> 
-   >
-   <?php echo _('Private'); ?>
-</p>
+		echo "<p><input type=\"radio\" name=\"is_public\" value=\"0\" ";
+		if (isset ($is_public) && !$is_public) {
+			echo ' checked';
+		}
+		echo ">". _('Private')."</p>";
+	} else {
+		echo "<input type=\"hidden\" name=\"is_public\" value=\"1\">";
+	}
+?>
 
 <div align="center">
 <input type="submit" name="submit" value="<?php echo _('Submit') ?>"/> <input type="submit" name="i_disagree" value="<?php echo _('Cancel') ?>"/>
