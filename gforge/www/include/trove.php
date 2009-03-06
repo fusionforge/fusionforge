@@ -307,6 +307,59 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats) {
 }
 
 /**
+ * trove_getcatcompletelisting() - Gets complete discriminator listing for a group
+ *
+ * @param		int		The group ID
+ */
+function trove_getcatcompletelisting($group_id) {
+	global $discrim_url;
+	global $form_cat;
+	global $Language;
+
+	$res_trovecat = db_query("
+		SELECT trove_cat.fullpath AS fullpath,
+			trove_cat.fullpath_ids AS fullpath_ids,
+			trove_cat.trove_cat_id AS trove_cat_id
+		FROM trove_cat,trove_group_link
+		WHERE trove_cat.trove_cat_id=trove_group_link.trove_cat_id
+		AND trove_group_link.group_id='$group_id'
+		ORDER BY trove_cat.fullpath");
+
+	$return = '';
+	if (db_numrows($res_trovecat) < 1) {
+		$return .= $Language->getText('trove','not_categorized')
+			.' <a href="/softwaremap/trove_list.php">'
+			. $Language->getText('trove','title')
+			.'</a>.<p />';
+	} else {
+		$return .= '<ul>';
+		$need_close_ul_tag = 1;
+	}
+
+	while ($row_trovecat = db_fetch_array($res_trovecat)) {
+		$return .= '<li>';
+		$folders = explode(" :: ",$row_trovecat['fullpath']);
+		$folders_ids = explode(" :: ",$row_trovecat['fullpath_ids']);
+		$folders_len = count($folders);
+		// if first in discrim print root category
+		for ($i=0;$i<$folders_len;$i++)
+		{
+			$return .= '<a href="/softwaremap/trove_list.php?form_cat='.$folders_ids[$i].$discrim_url.'">'.$folders[$i].'</a>';
+			if ($i != $folders_len-1)
+			{
+				$return .= " : ";
+			}
+		}
+		$return .= '</li>';
+	}
+	if ($need_close_ul_tag)
+	{
+		$return .= '</ul>';
+	}
+	return $return;
+}
+
+/**
  * trove_getfullname() - Returns cat fullname
  *
  * @param		int		The node
