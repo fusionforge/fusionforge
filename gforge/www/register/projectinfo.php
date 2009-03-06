@@ -155,6 +155,8 @@ echo license_selectbox('license',$license);
 </textarea>
 
 <?php echo _('<h3>4. Project Public Description</h3><p>This is the description of your project which will be shown on the Project Summary page, in search results, etc. It should not be as comprehensive and formal as Project Purpose description (step 2), so feel free to use concise and catchy wording. Maximum length is 255 chars.</p>')?>
+<br />
+<br />
 <textarea name="description" cols="70" rows="5">
 <?php echo htmlspecialchars(stripslashes($description)); ?>
 </textarea>
