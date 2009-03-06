@@ -93,12 +93,11 @@ if (!session_loggedin()) {
 
 						util_send_message($to, $subject, $body, $to, $tolist);
 
-						$feedback .= " email sent - ($rows) people monitoring ";
 
 					} else {
-						$feedback .= ' email not sent - no one monitoring ';
 						echo db_error();
 					}
+					$feedback .= " ".sprintf(ngettext("email not sent - no one monitoring","email sent - %s people monitoring",$rows), $rows);
 
 				} else {
 					//don't send an email to monitoring users
