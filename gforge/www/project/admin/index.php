@@ -256,7 +256,7 @@ echo $HTML->boxBottom();
 
 		*/
 
-		$res_memb = db_query("SELECT users.realname,users.user_id,
+		$res_memb = db_query("SELECT users.realname,users.user_id,users.status,
 			users.user_name,user_group.admin_flags,user_group.role_id
 			FROM users,user_group 
 			WHERE users.user_id=user_group.user_id 
@@ -271,12 +271,20 @@ echo $HTML->boxBottom();
 
 while ($row_memb=db_fetch_array($res_memb)) {
 
+		if ($row_memb['status']=='P') {
+			$status = "<span class=\"pending\">"._("Pending (P)")."</span>";
+		} else if ($row_memb['status']=='S') {
+			$status = "<span class=\"suspended\">"._("Suspended (S)")."</span>";
+		} else {
+			$status = "";
+		}
+
 		echo '
 			<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 			<input type="hidden" name="submit" value="y" />
 			<input type="hidden" name="user_id" value="'.$row_memb['user_id'].'" />
 			<input type="hidden" name="group_id" value="'. $group_id .'" />
-			<td>'.$row_memb['realname'].' ('.$row_memb['user_name'].')</td>
+			<td>'.$row_memb['realname'].' ('.$row_memb['user_name'].') '.$status.'</td>
 			<td>'.role_box($group_id,'role_id',$row_memb['role_id']).'</td>
 			<td><input type="submit" name="updateuser" value="'._('Update').'"></td>
 			<td><input type="submit" name="rmuser" value="'._('Remove').'"></td>
