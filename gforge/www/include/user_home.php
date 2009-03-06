@@ -115,7 +115,7 @@ $HTML->header(array('title'=>_('Developer Profile')));
 	echo _('Diary/Note entries:').' '.db_result($res,0,0).'
 	<p/>'.util_make_link ('/developer/diary.php?diary_user='.$user_id,_('View Diary & Notes')).'</p>
 	<p/>';
-	echo util_make_url ('/developer/monitor.php?diary_user='.$user_id,
+	echo util_make_link ('/developer/monitor.php?diary_user='.$user_id,
 			    html_image("ic/check.png",'15','13',array(),0) ._('Monitor this Diary')
 		) ;
 	echo '</p>';
