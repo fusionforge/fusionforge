@@ -483,7 +483,7 @@ class ForumHTML extends Error {
 		<td valign="top"><br>
 		<strong><?php echo _('Subject:'); ?></strong><?php echo utils_requiredField(); ?><br />
 		<input type="text" name="subject" value="<?php echo $subject; ?>"
-			size="45" maxlength="45" /> <br>
+			size="70" /> <br>
 		<br>
 		<strong><?php echo _('Message:'); ?></strong><?php echo notepad_button('document.forms[1].body') ?><?php echo utils_requiredField(); ?><br />
 		<?php
@@ -496,7 +496,7 @@ class ForumHTML extends Error {
 		plugin_hook("text_editor",$params);
 		if (!$GLOBALS['editor_was_set_up']) {
 			//if we don't have any plugin for text editor, display a simple textarea edit box
-			echo '<textarea name="body"  rows="10" cols="50">' . $body . '</textarea>';
+			echo '<textarea name="body"  rows="10" cols="70">' . $body . '</textarea>';
 		}
 		unset($GLOBALS['editor_was_set_up']);
 		?> <br>
@@ -554,7 +554,7 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 		<td valign="top"><br>
 		<strong><?php echo _('Subject:'); ?></strong><?php echo utils_requiredField(); ?><br />
 		<input type="text" name="subject" value="<?php echo $subject; ?>"
-			size="45" maxlength="45" /> <br>
+			size="70" /> <br>
 		<br>
 		<strong><?php echo _('Message:'); ?></strong><?php echo notepad_button('document.forms[1].body') ?><?php echo utils_requiredField(); ?><br />
 
@@ -568,7 +568,7 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 		plugin_hook("text_editor",$params);
 		if (!$GLOBALS['editor_was_set_up']) {
 			//if we don't have any plugin for text editor, display a simple textarea edit box
-			echo '<textarea name="body"  rows="10" cols="50" wrap="soft">' . $body . '</textarea>';
+			echo '<textarea name="body"  rows="10" cols="70" wrap="soft">' . $body . '</textarea>';
 		}
 		unset($GLOBALS['editor_was_set_up']);
 		?> <?php //$text_support->displayTextField('body'); ?> <br>
