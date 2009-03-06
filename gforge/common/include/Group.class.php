@@ -504,8 +504,10 @@ class Group extends Error {
 		}
 
 		// Validate some values
-		if (!$this->validateGroupName($group_name)) {
-			return false;
+		if ($this->getPublicName() != $group_name) {
+			if (!$this->validateGroupName($group_name)) {
+				return false;
+			}
 		}
 
 		if ($new_doc_address) {
