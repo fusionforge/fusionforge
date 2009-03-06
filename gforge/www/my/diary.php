@@ -84,13 +84,21 @@ if (!session_loggedin()) {
 							$tolist=implode(util_result_column_to_array($result),', ');
 							
 							$to = ''; // send to noreply@
-							$subject = "[ SF User Notes: ". $u->getRealName() ."] ".stripslashes($summary);
-							
-							$body = util_line_wrap(stripslashes($details)).
-								"\n\n______________________________________________________________________".
-								"\nYou are receiving this email because you elected to monitor this user.".
-								"\nTo stop monitoring this user, login to ".$GLOBALS['sys_name']." and visit: ".
-								"\nhttp://".$GLOBALS['sys_default_domain']."/developer/monitor.php?diary_user=". user_getid();
+							$subject = sprintf (_("[%s User Notes: %s] %s"),
+									    $GLOBALS['sys_name'],
+									    $u->getRealName(),
+									    stripslashes($summary)) ;
+							$body = util_line_wrap(stripslashes($details)) ;
+							$body .= _("
+
+______________________________________________________________________
+You are receiving this email because you elected to monitor this user.
+To stop monitoring this user, login to %s and visit the following link:
+
+%s
+",
+								   $GLOBALS['sys_name'],
+								   util_make_url ("/developer/monitor.php?diary_user=". user_getid())) ;
 							
 							util_send_message($to, $subject, $body, $to, $tolist);
 							
