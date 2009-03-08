@@ -31,6 +31,10 @@ define ("GREEN", "\033[01;32m" );
 define ("NORMAL", "\033[00m" );
 define ("RED", "\033[01;31m" );
 
+function printUsage() {
+	echo "Usage: gforge-install-1-deps [RHEL4|RHEL5|DEBIAN|FEDORA|CENTOS|ARK|SUSE|OPENSUSE]\n";
+}
+
 function INFO($message)
 {
     global $depth, $myLog;
@@ -74,8 +78,20 @@ function installSUSE() {
 	INFO("Restarting PostgreSQL");
 	passthru("/etc/init.d/postgresql stop");
 	passthru("/etc/init.d/postgresql start");
+
 	INFO("Starting Apache");
 	passthru("/etc/init.d/apache2 start");
+}
+
+function installOPENSUSE() {
+
+	INFO("Installing Packages with yast");
+	passthru("yast -i apache2-prefork apache2-mod_php5 cvs mailman perl-IPC-Run perl-URI php5 php5-curl php5-gd php5-gettext php5-pgsql postfix postgresql postgresql-contrib postgresql-libs postgresql-server rcs openssh subversion subversion-server wget xinetd viewvc");
+
+	INFO("Restarting PostgreSQL...");
+	passthru("rcpostgresql restart");
+	INFO("Restarting Apache...");
+	passthru("rcapache2 restart");
 }
 
 function installArk() {
@@ -88,24 +104,41 @@ function installArk() {
 }
 
 if (count($argv) < 2) {
-	echo "Usage: gforge-preinstall.php [RHEL4|RHEL5|DEBIAN|FEDORA|CENTOS|ARK|SUSE]\n";
-	//check_version();
-} else {
-    $platform = $argv[1];
-
-	if ($platform == 'FEDORA' || $platform == 'CENTOS' || $platform == 'RHEL5') {
-		installRedhat();
-	} elseif ($platform == 'RHEL4') {
-		installRHEL4();
-	} elseif ($platform == 'DEBIAN') {
-		installDebian(); /* Debian and friends */
-	} elseif ($platform == 'SUSE') {
-		installSUSE();
-	} elseif ($platform == 'ARK') {
-		installArk();
+	if ( is_file('/etc/SuSE-release') ) {
+		if ( exec('grep openSUSE /etc/SuSE-release') ) {
+			$platform = 'OPENSUSE';
+			echo "detected OPENSUSE platform\n";
+		} else {
+			$platform = 'SUSE';
+			echo "detected SUSE platform\n";
+		}
 	} else {
-		echo 'UNSUPPORTED PLATFORM';
+		printUsage();
 	}
+} else {
+	if ($argv[1] == '-h' || $argv[1] == '--help') {
+		printUsage();
+		exit();
+	} else {
+		$platform = $argv[1];
+		echo "setting up dependencies for $platform\n";
+	}
+}
+
+if ($platform == 'FEDORA' || $platform == 'CENTOS' || $platform == 'RHEL5') {
+	installRedhat();
+} elseif ($platform == 'RHEL4') {
+	installRHEL4();
+} elseif ($platform == 'DEBIAN') {
+	installDebian(); /* Debian and friends */
+} elseif ($platform == 'SUSE') {
+	installSUSE();
+} elseif ($platform == 'OPENSUSE') {
+	installOPENSUSE();
+} elseif ($platform == 'ARK') {
+	installArk();
+} else {
+	echo 'UNSUPPORTED PLATFORM\n';
 }
 
 ?>
