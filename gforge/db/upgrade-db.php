@@ -1,5 +1,9 @@
 #! /usr/bin/php5 -f
 <?php
+
+require_once dirname(__FILE__).'/../www/env.inc.php';
+require_once $gfwww.'include/squal_pre.php';
+
 /** 
 * Sets up CLI environment based on SAPI and PHP version 
 */ 
@@ -25,8 +29,6 @@ if (version_compare(phpversion(), '4.3.0', '<') || php_sapi_name() == 'cgi') {
        'fclose(STDIN); fclose(STDOUT); fclose(STDERR); return true;') 
        ); 
 }
-
-require_once $gfwww.'include/squal_pre.php';
 
 $db_path = './';
 $date = -1;
