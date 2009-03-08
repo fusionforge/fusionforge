@@ -10,8 +10,9 @@
 # Currently supported:
 # * Red Hat 4 / CentOS 4
 # * Red Hat 5 / CentOS 5
+# * OpenSuSE 11 (contributed by Martin Bernreuther)
 #
-# Author: aljeux <aljeux@free.fr>
+# Author: Alain Peyrat <aljeux@free.fr>
 #
 
 if [ $# -ne 1  ]; then
@@ -26,20 +27,25 @@ if [ -f "/etc/redhat-release" ]
 then
 	type="redhat"
 	distrib=`awk '{print $1}' /etc/redhat-release`
+elif [ -f "/etc/SuSE-release" ]
+then
+	type="suse"
+	distrib=`awk '{print $1}' /etc/SuSE-release | head -n 1`
 fi
 
 
 if [ $distrib = "CentOS" ]
 then
 	deps="CENTOS"
-fi
-if [ $distrib = "Red" ]
+elif [ $distrib = "Red" ]
 then
 	deps="RHEL5"
-fi
-if [ $distrib = "Fedora" ]
+elif [ $distrib = "Fedora" ]
 then
 	deps="FEDORA"
+elif [ $distrib = "openSUSE" ]
+then
+	deps="OPENSUSE"
 fi
 
 
@@ -69,8 +75,34 @@ then
 	echo "IMPORTANT: Service iptables (firewall) disabled, please reconfigure after";
 
 	exit 0;
+elif [ $type = "suse" ]
+then
+	yast -i php5
+	php gforge-install-1-deps.php $deps
+	php gforge-install-2.php "$hostname" wwwrun www
+	php gforge-install-3-db.php
+
+	php /opt/gforge/db/startpoint.php 4.7
+
+	# Post installation fixes.
+	perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/httpd/conf/httpd.conf
+	perl -spi -e 's/^LoadModule/#LoadModule/g' /etc/gforge/httpd.conf
+
+	chkconfig httpd on
+	chkconfig postgresql on
+	#chkconfig iptables off
+
+	rcapache2 restart
+	rcSuSEfirewall2 stop
+
+	cp cron.gforge /etc/cron.d
+	rccron reload
+
+#	echo "IMPORTANT: Service SuSEfirewall2 stopped, please reconfigure after";
+
+	exit 0;
 else
-	echo "Only Red Hat, Fedora or CentOS are supported by this script.";
+	echo "Only Red Hat, Fedora or CentOS and OpenSUSE are supported by this script.";
 	echo "See INSTALL for normal installation";
 	exit 1;
 fi
