@@ -21,8 +21,9 @@ if [ $# -ne 1  ]; then
 fi
 
 hostname=$1
-
 type="";
+msg="";
+
 if [ -f "/etc/redhat-release" ]
 then
 	type="redhat"
@@ -48,61 +49,75 @@ then
 	deps="OPENSUSE"
 fi
 
+if [ -d "/opt/gforge" ]
+then
+	mode="update"
+	echo "Upgrading previous installation ...";
+else
+	mode="install"
+	echo "Installing FusionForge ...";
+fi
 
 if [ $type = "redhat" ]
 then
 	yum -y install php
 	php gforge-install-1-deps.php $deps
 	php gforge-install-2.php "$hostname" apache apache
-	php gforge-install-3-db.php
 
-	php /opt/gforge/db/startpoint.php 4.7
+	if [ $mode = "install" ]
+	then
+		php gforge-install-3-db.php
+		php /opt/gforge/db/startpoint.php 4.7
 
-	# Post installation fixes.
-	perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/httpd/conf/httpd.conf
-	perl -spi -e 's/^LoadModule/#LoadModule/g' /etc/gforge/httpd.conf 
+		# Post installation fixes.
+		perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/httpd/conf/httpd.conf
+		perl -spi -e 's/^LoadModule/#LoadModule/g' /etc/gforge/httpd.conf
 
-	chkconfig httpd on
-	chkconfig postgresql on
-	chkconfig iptables off
+		chkconfig httpd on
+		chkconfig postgresql on
+		chkconfig iptables off
 
-	service httpd restart
-	service iptables stop
+		service httpd restart
+		service iptables stop
+		msg="IMPORTANT: Service iptables (firewall) disabled, please reconfigure after"
 
-	cp cron.gforge /etc/cron.d
-	service crond reload
-
-	echo "IMPORTANT: Service iptables (firewall) disabled, please reconfigure after";
-
-	exit 0;
+		cp cron.gforge /etc/cron.d
+		service crond reload
+	else
+		php /opt/gforge/db/upgrade-db.php
+	fi
 elif [ $type = "suse" ]
 then
 	yast -i php5
 	php gforge-install-1-deps.php $deps
 	php gforge-install-2.php "$hostname" wwwrun www
-	php gforge-install-3-db.php
 
-	php /opt/gforge/db/startpoint.php 4.7
+	if [ $mode = "install" ]
+	then
+		php gforge-install-3-db.php
+		php /opt/gforge/db/startpoint.php 4.7
 
-	# Post installation fixes.
-	perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/httpd/conf/httpd.conf
-	perl -spi -e 's/^LoadModule/#LoadModule/g' /etc/gforge/httpd.conf
+		# Post installation fixes.
+		perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/httpd/conf/httpd.conf
+		perl -spi -e 's/^LoadModule/#LoadModule/g' /etc/gforge/httpd.conf
 
-	chkconfig httpd on
-	chkconfig postgresql on
-	#chkconfig iptables off
+		chkconfig httpd on
+		chkconfig postgresql on
 
-	rcapache2 restart
-	rcSuSEfirewall2 stop
+		rcapache2 restart
+		rcSuSEfirewall2 stop
+		msg="IMPORTANT: Service SuSEfirewall2 stopped, please reconfigure after"
 
-	cp cron.gforge /etc/cron.d
-	rccron reload
-
-#	echo "IMPORTANT: Service SuSEfirewall2 stopped, please reconfigure after";
-
-	exit 0;
+		cp cron.gforge /etc/cron.d
+		rccron reload
+	else
+		php /opt/gforge/db/upgrade-db.php
+	fi
 else
 	echo "Only Red Hat, Fedora or CentOS and OpenSUSE are supported by this script.";
 	echo "See INSTALL for normal installation";
 	exit 1;
 fi
+
+echo $smg;
+exit 0;
