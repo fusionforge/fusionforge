@@ -73,7 +73,7 @@
 	//     exit 2
 	//fi
 	
-	//ARREGLAR ESTO
+
 	exec("getent group $args[3] > /dev/null", $arr, $t);
 	if ($t != 0) {
 	 	echo "invalid apache group";
@@ -98,18 +98,13 @@
 	}
 	echo "OK\n";
 
-	//system("mv * /opt/gforge");
+
 	system("cp -r * /opt/gforge");
-	//cd /var/lib/gforge
+
 	chdir("/var/lib/gforge");
 	system("mkdir -p uploads");
-	system("mkdir -p /opt/jpgraph");
 	system("mkdir -p scmtarballs");
 	system("mkdir -p scmsnapshots");
-	/*if (!is_file("/usr/bin/php4"))
-	{
-		symlink("/usr/bin/php", "/usr/bin/php4");
-	}*/
 
 	//#project vhost space
 	system("mkdir -p homedirs");
@@ -119,20 +114,21 @@
 		symlink("/home/groups", "homedirs/groups");
 	}
 
-	//#Create default location for SVN repositories
+	// Create default location for SVN repositories
 	system("mkdir -p svnroot");
 	if (!is_dir("/svnroot"))
 	{
 		symlink("/var/lib/gforge/svnroot", "/svnroot");
 	}
 
-	#Create default location for CVS repositories
+	// Create default location for CVS repositories
 	system("mkdir -p cvsroot");
 	if (!is_dir("/cvsroot"))
 	{
 		symlink("/var/lib/gforge/cvsroot", "/cvsroot");
 	}
-	#create default dumps dir 
+
+	// Create default dumps dir
 	system("mkdir -p /var/lib/gforge/dumps");
 
 	//cd /opt/gforge
@@ -144,10 +140,14 @@
 	//echo "linea 2\n";
 	system("chmod 755 /bin/cvssh.pl");
 
-	//#Create default location for gforge config files
+	// Create default location for gforge config files
 	system("mkdir -p /etc/gforge");
-	system("cp etc/local.inc.example /etc/gforge/local.inc");
-	system("cp etc/gforge-httpd.conf.example /etc/gforge/httpd.conf");
+	if (!is_file("/etc/gforge/local.inc")) {
+		system("cp etc/local.inc.example /etc/gforge/local.inc");
+	}
+	if (!is_file("/etc/gforge/httpd.conf")) {
+		system("cp etc/gforge-httpd.conf.example /etc/gforge/httpd.conf");
+	}
 
 	////#copy the scmcvs plugin config to /etc/gforge/
 	//if (!is_dir("/etc/gforge/plugins/scmcvs"))
@@ -250,7 +250,7 @@
 	{
 		system("mkdir -p plugins");
 	}
-	//cd plugins
+
 	chdir("plugins");
 	if (!is_dir("cvstracker"))
 	{
