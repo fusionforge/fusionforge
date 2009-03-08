@@ -88,7 +88,7 @@ function helloworld_User_Header($params) {
             <input type="hidden" name="update_user_mantis" value="true">
             <input type="submit" name="Mettre à jour votre compte Mantis" value="Mettre à jour votre compte Mantis">
             </form>            
-            <?
+            <?php
             if ($_REQUEST["init_user_mantis"]) {
                 insert_mantis_user($id);
             } elseif ($_REQUEST["init_user_mantis"]) {

@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * This file maps symbolic values to localised texts for the group subsections

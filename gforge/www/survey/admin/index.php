@@ -56,7 +56,7 @@ $sh->footer(array());
 ?>
 </p>
 
-<?
+<?php
 
 // Local Variables:
 // mode: php

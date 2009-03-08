@@ -104,7 +104,7 @@ class Theme extends Error {
 			echo $activity;
 		}
 		?>
-		<?
+		<?php
 
 		/* check if a personalized css stylesheet exist, if yes include only
 		 this stylesheet
@@ -185,7 +185,7 @@ if (isset($params['group']) && $params['group']) {
 	?>
 <div id="projecttabscontainer">
 <div id="projecttabs-left"></div>
-<div id="projecttabs-content"><?echo $this->projectTabs($params['toptab'],$params['group']);?>
+<div id="projecttabs-content"><?php echo $this->projectTabs($params['toptab'],$params['group']);?>
 </div>
 <div id="projecttabs-right"></div>
 </div>

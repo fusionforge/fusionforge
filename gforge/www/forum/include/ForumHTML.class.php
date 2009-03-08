@@ -463,7 +463,7 @@ class ForumHTML extends Error {
 			echo notepad_func();
 			?>
 <div align="center">
-	 <form enctype="multipart/form-data" action="<? echo util_make_url ('/forum/admin/index.php') ?>"
+	 <form enctype="multipart/form-data" action="<?php echo util_make_url ('/forum/admin/index.php') ?>"
 	method="post"><?php $objid = $this->Forum->getID();?> <input
 	type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" /> <input
 	type="hidden" name="forum_id" value="<?php echo $objid; ?>" /> <input
@@ -540,7 +540,7 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 		?>
 <div align="center">
 <form "enctype="multipart/form-data"
-	action="<? echo util_make_url ('/forum/forum.php?forum_id='.$this->Forum->getID().'&group_id='.$group_id); ?>"
+	action="<?php echo util_make_url ('/forum/forum.php?forum_id='.$this->Forum->getID().'&group_id='.$group_id); ?>"
 	method="post"><?php $objid = $this->Forum->getID();?> <input
 	type="hidden" name="post_message" value="y" /> <input type="hidden"
 	name="thread_id" value="<?php echo $thread_id; ?>" /> <input

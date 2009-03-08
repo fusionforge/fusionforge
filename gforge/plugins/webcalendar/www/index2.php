@@ -16,7 +16,7 @@ if ($group_id > 5) { // add '> 5' if you won't a calendar for the admin groups
 		if($belong > 0){
 	?>	
 	<iframe src="<?php echo util_make_url('/plugins/webcalendar/login.php?type=group&group_id='.$group_id); ?>" border=no scrolling="yes" width="100%" height="700"></iframe>	
-	<?
+	<?php
 		} else {
 			print _('You are not allowed to see this calendar.');	
 		}	

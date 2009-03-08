@@ -20,7 +20,7 @@ for (var n = 0; n < backgroundcolor.length; n++)
 ' <a href="#" onMouseOver="javascript:changebg(' + n + ')">' + backgroundcolor[n] + '</a>'
 ); }
 //--></script>
-<?
+<?php
 
 function find_pngs($dir) {
   $file_list = '';

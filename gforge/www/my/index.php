@@ -62,7 +62,7 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 	$tabcnt=0;	
 	?>
 <script type="text/javascript" src="<?php echo util_make_url ('/tabber/tabber.js'); ?>"></script>
-<div id="tabber" class="tabber" <? plugin_hook('call_user_js');?>>
+<div id="tabber" class="tabber" <?php plugin_hook('call_user_js');?>>
 <div class="tabbertab" 
 title="<?php echo _('Assigned Artifacts'); ?>">
 	<?php
