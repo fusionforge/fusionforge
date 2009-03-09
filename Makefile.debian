@@ -1,136 +1,209 @@
 #! /usr/bin/make -f
+
 FUSIONFORGE=FusionForge
+PKGNAME=gforge
+PKGLETTER=$(shell echo $(PKGNAME) | cut -c1)
 ORIGIN=debian.fusionforge.org
+BUILDPLACE=$(CURDIR)/builder/buildplace
+BUILDFILES=$(CURDIR)/builder/buildfiles
+BUILDRESULT=$(CURDIR)/result
+COWBUILDERBASE=$(CURDIR)/builder/cow
+PBUILDERTGZ=$(CURDIR)/builder/tgz
+TARBALLS=$(CURDIR)/tarballs
+APTCACHE=$(CURDIR)/builder/cache
+DISTRIB=$(shell echo $(XDISTRIB) | cut -c2-)
+LOCALREPODEB=/var/www/debian-fusionforge
+LOCALREPOUBU=/var/www/ubuntu-fusionforge
+DEBIANLIST=1lenny 2squeeze 3sid
+DEBIANLISTP=1etch
+DEBLIST=$(DEBIANLIST) $(DEBIANLISTP)
+UBUNTULIST=1hardy 1intrepid 1jaunty
+UBUNTULISTP=1gutsy
+UBULIST=$(UBUNTULIST) $(UBUNTULISTP)
+# Try if a local mirror is available
+UBUNTUOP=$(shell wget -q -S http://localhost/ubuntu -O /dev/null && echo "--mirror http://localhost/ubuntu" || echo "--mirror http://archive.ubuntu.com/ubuntu") --debootstrap debootstrap
+
+gfversion=$(shell head -1 $(PKGNAME)/debian/changelog | sed 's/.*(\(.[^+-]*\).*).*/\1/')
+gfminor=$(shell head -1 $(PKGNAME)/debian/changelog | sed 's/.*(.[^+-]*[+-]\(.*\)).*/\1/')
+svnrev=$(shell LANG=C svn info | grep Revision | cut -d: -f2| sed 's/ //g')
+MINOR=-brc$(svnrev)+
+
+default: list
+
+#default: cowbuilddeb
+
+#make -f Makefile.debian cowbuilddist XDISTRIB=2squeeze LOCALREPO=$(LOCALREPODEB)
 
 list:
 	@echo ======================================================================================
 	@echo '=                    Available target are listed below                               ='
-	@echo '=                    Today only to build debian pakages and orig tarballs            ='
 	@echo ======================================================================================
 	@cat Makefile.debian | grep '^.*:.*#$$' | sed 's/FUSIONFORGE/$(FUSIONFORGE)/' | sed 's/^\(.*:\).*#\(.*\)#$$/\1		\2/'
 	@echo ======================================================================================
 
-clean: cleangf                     # Clean FUSIONFORGE #
-allor: orig origcvs origsvn        # Build FUSIONFORGE orig tarball #
-clnor:                             # Clean FUSIONFORGE orig tarball #
-	rm -f gforge*orig.tar.gz
-allgf: orig cleangf build          # Build FUSIONFORGE and orig tarballs #
-allup: upload                      # Upload all using dput and optional where=<server> #
+#
+# Simple targets
+#
+lenny:    # Simply build lenny packages #
+	make -f Makefile.debian cowbuilddist XDISTRIB=1lenny
 
-dchcmd=dch -v 4.5.6-1 -D unstable "New Upstream version"
-dchcmd=dch -i
-dchcmd=dch
-dchcmd=""
-debuildopts=-sa
-debuildopts=-sa -us -uc
-debuildopts=-us -uc
-gfversion=$(shell head -1 gforge/debian/changelog | sed 's/.*(\(.*\)-.*).*/\1/'| sed 's/+something/+z/')
-gfminor=$(shell head -1 gforge/debian/changelog | sed 's/.*(.*-\(.*\)).*/\1/')
-where=localhost
+intrepid: # Simply build intrepid packages #
+	make -f Makefile.debian cowbuilddist XDISTRIB=1intrepid DISTROOP="$(UBUNTUOP)" HOOK="--hookdir $(CURDIR)/hook/ubuntu"
+
+
 documentor_path=/tmp
 documentor_vers=phpdocumentor-1.3.0rc3
 
 #
 # FUSIONFORGE
 #
-clngf:		# Clean debian files of FUSIONFORGE build                         #
-	@rm -f gforge*.deb sourceforge*.deb gforge*.changes gforge*.upload gforge*.build gforge*.dsc gforge*[^g].tar.gz gforge*.diff.gz gforge*.asc
-	@echo cleangf Done
-build:			# Build debian FUSIONFORGE packages                               #
-	cd gforge ; debclean; $(dchcmd) ; find . -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | cpio -pdumvB ../gforge-$(gfversion)
-	cd gforge-$(gfversion); debuild $(debuildopts); fakeroot debian/rules clean
-	rm -rf gforge-$(gfversion)
-upload:			# Upload FUSIONFORGE packages on where=<server> using dput        #
-	dput $(where) gforge*.changes
 
-orig: gforge_$(gfversion).orig.tar.gz                                 # Make FUSIONFORGE orig file                                      #
-gforge_$(gfversion).orig.tar.gz:
-	cd gforge ; debclean; find . -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -pdumvB ../gforge-$(gfversion)
-	tar cvzf gforge_$(gfversion).orig.tar.gz gforge-$(gfversion)
-	rm -rf gforge-$(gfversion)
+orig: $(TARBALLS)/$(PKGNAME)_$(gfversion).orig.tar.gz    # Make FUSIONFORGE orig file                                      #
+
 #
 # PHPDOCUMENTOR
 #
-phpdoc: phpdocumentor_get phpdocumentor_unpack $(documentor_path)/$(documentor_vers)/patched gforge/docs/phpdoc/docs # Get phpdocumentor, install phpdocumentor, build gforge phpdoc     #
+phpdoc: phpdocumentor_get phpdocumentor_unpack $(documentor_path)/$(documentor_vers)/patched $(PKGNAME)/docs/phpdoc/docs # Get phpdocumentor, install phpdocumentor, build $(PKGNAME) phpdoc     #
 	
 phpdocumentor_get:
 	[ ! -f $(documentor_path)/$(documentor_vers).tar.gz ] && cd $(documentor_path) && wget http://heanet.dl.sourceforge.net/sourceforge/phpdocu/$(documentor_vers).tar.gz || true
 phpdocumentor_unpack:
 	[ ! -d $(documentor_path)/$(documentor_vers) ] && cd $(documentor_path) && tar xvzf $(documentor_vers).tar.gz || true
 $(documentor_path)/$(documentor_vers)/patched:
-	cd $(documentor_path)/ && patch -p2 < $(CURDIR)/gforge/docs/phpdoc/manageclass.patch && touch $(documentor_path)/$(documentor_vers)/patched 
-gforge/docs/phpdoc/docs:
-	cd gforge/docs/phpdoc/ && ./makedoc.sh
+	cd $(documentor_path)/ && patch -p2 < $(CURDIR)/$(PKGNAME)/docs/phpdoc/manageclass.patch && touch $(documentor_path)/$(documentor_vers)/patched 
+$(PKGNAME)/docs/phpdoc/docs:
+	cd $(PKGNAME)/docs/phpdoc/ && ./makedoc.sh
 
 #
-# Build with pbuilder
+# Build with cowbuilder or pbuilder
 #
-DISTRIB=etch
-MINOR=1
-LOCALREPO=/var/www/debian-fusionforge
-LOCALREPOUBU=/var/www/ubuntu-fusionforge
-DISTRIBLIST=etch lenny sid
-UBUNTULIST=gutsy hardy intrepid
-UBUNTUOP=--mirror http://archive.ubuntu.com/ubuntu --debootstrap debootstrap
-UBUNTUOP=--mirror http://localhost/ubuntu --debootstrap debootstrap
 DEBUG=--debug
 DEBUG=
+DEBBUILDOPTS=--debbuildopts -sa 
+DEBBUILDOPTS=
 
-svnbuildtest:
-	@echo "Will build gforge_$(gfversion)-$(MINOR)$(DISTRIB)"
+all: cowbuilddeb cowbuildubu # ***** Build all package for debian and ubuntu ***** #
 
-svnbuild:		# ***** This is the one you should use ***** #
-	for dist in $(DISTRIBLIST); do \
-	make -f Makefile.debian svnbuilddist DISTRIB=$$dist ; \
+deploy: repodeb repoubu # ***** Deploy packages in Debian and Ubuntu repositories ***** #
+
+repodeb: cowbuilddeb
+	@for dist in $(DEBIANLIST); do \
+	make -f Makefile.debian localrepo reprepro XDISTRIB=$$dist LOCALREPO=$(LOCALREPODEB) DISTRIBLIST="$(DEBLIST)" ; \
 	done
 
-svnbuildubu:            # ***** This is the one to build ubuntu packages ***** #
-	for dist in $(UBUNTULIST); do \
-	make -f Makefile.debian svnbuilddist DISTRIB=$$dist DISTROOP="$(UBUNTUOP)" LOCALREPO=$(LOCALREPOUBU) DISTRIBLIST="$(UBUNTULIST)" ; \
+repoubu: cowbuildubu
+	@for dist in $(UBUNTULIST); do \
+	make -f Makefile.debian localrepo reprepro XDISTRIB=$$dist LOCALREPO=$(LOCALREPOUBU) DISTRIBLIST="$(UBULIST)" ; \
 	done
 
-svnbuilddist: pbuilderenv localrepo result/gforge_$(gfversion)-$(MINOR)$(DISTRIB)_i386.changes
+cowbuildtest:
+	@echo "Will build $(PKGNAME)_$(gfversion)$(MINOR)$(DISTRIB)"
 
-result/gforge_$(gfversion)-$(MINOR)$(DISTRIB)_i386.changes: tarballs/gforge_$(gfversion).orig.tar.gz 
-	# Save changelog
-	cp gforge/debian/changelog . 
+cowbuilddeb: # ***** This is the one to cowbuild debian packages ***** #
+	@for dist in $(DEBIANLIST); do \
+	make -f Makefile.debian cowbuilddist XDISTRIB=$$dist DISTROOP="$(DEBIANOP)" ; \
+	done
+
+cowbuildubu: # ***** This is the one to cowbuild ubuntu packages ***** #
+	@for dist in $(UBUNTULIST); do \
+	make -f Makefile.debian cowbuilddist XDISTRIB=$$dist DISTROOP="$(UBUNTUOP)" HOOK="--hookdir $(CURDIR)/hook/ubuntu"; \
+	done
+
+pbuilddeb: # pbuild debian packages (less recommended) #
+	@for dist in $(DEBIANLISTP); do \
+	make -f Makefile.debian pbuilddist XDISTRIB=$$dist DISTROOP="$(DEBIANOP)" LOCALREPO=$(LOCALREPODEB) ; \
+	done
+
+pbuildubu: # pbuild ubuntu packages (less recommended) #
+	@for dist in $(UBUNTULISTP); do \
+	make -f Makefile.debian pbuilddist XDISTRIB=$$dist DISTROOP="$(UBUNTUOP)" LOCALREPO=$(LOCALREPOUBU) ; \
+	done
+
+cowbuilddist: cowbuilderenv $(BUILDFILES) $(BUILDRESULT)/$(PKGNAME)_$(gfversion)$(MINOR)$(XDISTRIB)_i386.changes
+	@echo "Building $(BUILDRESULT)/$(PKGNAME)_$(gfversion)$(MINOR)$(XDISTRIB)_i386.changes"
+
+pbuilddist: pbuilderenv $(BUILDFILES) $(BUILDRESULT)/$(PKGNAME)_$(gfversion)$(MINOR)$(XDISTRIB)+p_i386.changes
+	@echo "Building $(BUILDRESULT)/$(PKGNAME)_$(gfversion)$(MINOR)$(XDISTRIB)+p_i386.changes"
+
+$(BUILDRESULT)/$(PKGNAME)_$(gfversion)$(MINOR)$(XDISTRIB)_i386.changes: $(BUILDFILES)/$(PKGNAME)_$(gfversion)$(MINOR)$(XDISTRIB).dsc
+	cd $(BUILDFILES) ; sudo /usr/sbin/cowbuilder --build --basepath $(COWBUILDERBASE)/base-$(DISTRIB).cow --configfile $(COWBUILDERBASE)/config $(BUILDFILES)/$(PKGNAME)_$(gfversion)$(MINOR)$(XDISTRIB).dsc
+
+$(BUILDRESULT)/$(PKGNAME)_$(gfversion)$(MINOR)$(XDISTRIB)+p_i386.changes: $(BUILDFILES)/$(PKGNAME)_$(gfversion)$(MINOR)$(XDISTRIB)+p.dsc
+	cd $(BUILDFILES) ; sudo /usr/sbin/pbuilder --build --basetgz $(PBUILDERTGZ)/base-$(DISTRIB).tgz --configfile $(PBUILDERTGZ)/config $(BUILDFILES)/$(PKGNAME)_$(gfversion)$(MINOR)$(XDISTRIB)+p.dsc
+
+$(BUILDFILES)/$(PKGNAME)_$(gfversion)$(MINOR)$(XDISTRIB).dsc: $(BUILDFILES)/$(PKGNAME)_$(gfversion).orig.tar.gz
+	cd $(PKGNAME) ; debclean
+	find $(PKGNAME) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -pdumB $(BUILDFILES)/
 	# Set version for given distrib
-	cd gforge; dch -v $(gfversion)-$(MINOR)$(DISTRIB) -D UNRELEASED "This is $(DISTRIB) autobuild"
-	perl -pi -e "s/UNRELEASED/$(DISTRIB)/" gforge/debian/changelog
-	# Build the package
-	cd gforge; svn-buildpackage --svn-ignore --svn-builder="pdebuild --debbuildopts -sa --buildresult $(CURDIR)/result -- --basetgz $(CURDIR)/pbuilder/base-$(DISTRIB).tgz"
-	# Restore changelog
-	mv changelog gforge/debian/changelog
-	# Install in repository
-	cd result; reprepro -Vb $(LOCALREPO) include $(DISTRIB) gforge_$(gfversion)-$(MINOR)$(DISTRIB)_i386.changes
+	cd $(BUILDFILES)/$(PKGNAME); dch -b -v $(gfversion)$(MINOR)$(XDISTRIB) -D UNRELEASED "This is $(DISTRIB) autobuild"
+	perl -pi -e "s/UNRELEASED/$(DISTRIB)/" $(BUILDFILES)/$(PKGNAME)/debian/changelog
+	cd $(BUILDFILES) ; dpkg-source -b $(PKGNAME)
+	rm -rf $(BUILDFILES)/$(PKGNAME)
 
-tarballs/gforge_$(gfversion).orig.tar.gz: tarballs
-	debclean; find gforge -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -o -H ustar | gzip > tarballs/gforge_$(gfversion).orig.tar.gz
+$(BUILDFILES)/$(PKGNAME)_$(gfversion)$(MINOR)$(XDISTRIB)+p.dsc: $(BUILDFILES)/$(PKGNAME)_$(gfversion).orig.tar.gz
+	cd $(PKGNAME) ; debclean
+	find $(PKGNAME) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -pdumB $(BUILDFILES)/
+	# Set version for given distrib
+	cd $(BUILDFILES)/$(PKGNAME); dch -b -v $(gfversion)$(MINOR)$(XDISTRIB)+p -D UNRELEASED "This is $(DISTRIB) autobuild"
+	perl -pi -e "s/UNRELEASED/$(DISTRIB)/" $(BUILDFILES)/$(PKGNAME)/debian/changelog
+	cd $(BUILDFILES) ; dpkg-source -b $(PKGNAME)
+	rm -rf $(BUILDFILES)/$(PKGNAME)
+
+$(BUILDFILES)/$(PKGNAME)_$(gfversion).orig.tar.gz: $(TARBALLS)/$(PKGNAME)_$(gfversion).orig.tar.gz
+	cp $(TARBALLS)/$(PKGNAME)_$(gfversion).orig.tar.gz $(BUILDFILES)
+
+$(TARBALLS)/$(PKGNAME)_$(gfversion).orig.tar.gz: $(TARBALLS)
+	debclean; find $(PKGNAME) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -o -H ustar | gzip > $(TARBALLS)/$(PKGNAME)_$(gfversion).orig.tar.gz
 	
-tarballs:
-	mkdir tarballs
 
-pbuilderenv: pbuilder pbuilder/base-$(DISTRIB).tgz
+pbuilderenv: $(PBUILDERTGZ) $(PBUILDERTGZ)/base-$(DISTRIB).tgz
 	@echo "Ready for $(DISTRIB)"
 
-pbuilder/base-$(DISTRIB).tgz: /usr/sbin/pbuilder
-	sudo /usr/sbin/pbuilder create $(DEBUG) --distribution $(DISTRIB) --basetgz $(CURDIR)/pbuilder/base-$(DISTRIB).tgz $(DISTROOP)
+cowbuilderenv: $(COWBUILDERBASE) $(COWBUILDERBASE)/base-$(DISTRIB).stamp
+	@echo "Ready for $(DISTRIB)"
+
+$(PBUILDERTGZ)/base-$(DISTRIB).tgz: $(PBUILDERTGZ)/config
+	sudo /usr/sbin/pbuilder --create --distribution $(DISTRIB) --basetgz $(PBUILDERTGZ)/base-$(DISTRIB).tgz --configfile $(PBUILDERTGZ)/config $(DISTROOP)
+
+$(COWBUILDERBASE)/base-$(DISTRIB).stamp: $(COWBUILDERBASE)/config
+	sudo /usr/sbin/cowbuilder --create $(HOOK) --distribution $(DISTRIB) --basepath $(COWBUILDERBASE)/base-$(DISTRIB).cow --configfile $(COWBUILDERBASE)/config $(DISTROOP)
+	touch $(COWBUILDERBASE)/base-$(DISTRIB).stamp
+
+$(PBUILDERTGZ)/config: /usr/sbin/pbuilder
+	echo "APTCACHE=$(APTCACHE)" > $(PBUILDERTGZ)/config
+	echo "BUILDPLACE=$(BUILDPLACE)" >> $(PBUILDERTGZ)/config
+	echo "BUILDRESULT=$(BUILDRESULT)" >> $(PBUILDERTGZ)/config
+
+$(COWBUILDERBASE)/config: /usr/sbin/cowbuilder
+	echo "APTCACHE=$(APTCACHE)" > $(COWBUILDERBASE)/config
+	echo "BUILDPLACE=$(BUILDPLACE)" >> $(COWBUILDERBASE)/config
+	echo "BUILDRESULT=$(BUILDRESULT)" >> $(COWBUILDERBASE)/config
 
 /usr/sbin/pbuilder:
 	sudo apt-get install pbuilder
 
-pbuilder:
-	mkdir pbuilder
+ubukey:
+	gpg --keyserver keyserver.ubuntu.com --recv-keys 40976EAF437D05B5
+	gpg --export --armor 40976EAF437D05B5 | sudo apt-key add -
+
+/usr/sbin/cowbuilder:
+	sudo apt-get install cowdancer
 
 localrepo: $(LOCALREPO) $(LOCALREPO)/conf $(LOCALREPO)/conf/distributions
 	
+reprepro: $(LOCALREPO)/pool/main/$(PKGLETTER)/$(PKGNAME)/$(PKGNAME)_$(gfversion)$(MINOR)$(XDISTRIB).dsc # Install in repository
+
+$(LOCALREPO)/pool/main/g/$(PKGNAME)/$(PKGNAME)_$(gfversion)$(MINOR)$(XDISTRIB).dsc:
+	cd $(BUILDRESULT); reprepro -Vb $(LOCALREPO) include $(DISTRIB) $(PKGNAME)_$(gfversion)$(MINOR)$(XDISTRIB)_i386.changes
+
 $(LOCALREPO)/conf/distributions:
-	for dist in $(DISTRIBLIST); do \
+	for xdist in $(DISTRIBLIST) ; do \
+	dist=`echo $$xdist | cut -c2-` ; \
 	echo "Codename: $$dist" ; \
 	echo "Suite: $$dist" ; \
 	echo "Components: main" ; \
 	echo "UDebComponents: main" ; \
-	echo "Architectures: i386 source" ; \
+	echo "Architectures: amd64 i386 source" ; \
 	echo "Origin: $(ORIGIN)" ; \
 	echo "Version: 4.7" ; \
 	echo "Description: My $(FUSIONFORGE) $$dist repository" ; \
@@ -139,6 +212,18 @@ $(LOCALREPO)/conf/distributions:
 
 $(LOCALREPO)/conf:
 	mkdir $(LOCALREPO)/conf
+
+$(TARBALLS):
+	mkdir -p $(TARBALLS)
+
+$(BUILDFILES):
+	mkdir -p $(BUILDFILES)
+
+$(COWBUILDERBASE):
+	mkdir -p $(COWBUILDERBASE)
+
+$(PBUILDERTGZ):
+	mkdir -p $(PBUILDERTGZ)
 
 $(LOCALREPO):
 	sudo mkdir $(LOCALREPO)
