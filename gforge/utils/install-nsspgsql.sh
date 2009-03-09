@@ -1,7 +1,5 @@
 #! /bin/bash
 #
-# $Id: install-nsspgsql.sh 6586 2008-08-15 21:28:43Z cbayle $
-#
 # Configure LDAP for GForge
 # Christian Bayle, Roland Mas
 # Initially written for debian-sf (Sourceforge for Debian)
@@ -46,7 +44,8 @@ configure_libnss_pgsql(){
 ### NSS Configuration for Gforge
 
 #----------------- DB connection
-connectionstring = hostaddr=127.0.0.1 user=$db_user_nss password=$db_password dbname=$db_name
+connectionstring = user=$db_user_nss dbname=$db_name
+#connectionstring = hostaddr=127.0.0.1 user=$db_user_nss password=$db_password dbname=$db_name
 
 #----------------- NSS queries
 getpwnam        = SELECT login AS username,passwd,gecos,('/var/lib/gforge/chroot/home/users/' || login) AS homedir,shell,uid,gid FROM nss_passwd WHERE login = \$1
@@ -62,7 +61,8 @@ EOF
 ### NSS Configuration for Gforge
 
 #----------------- DB connection
-shadowconnectionstring = user=gforge_nss password=$db_password dbname=$db_name
+shadowconnectionstring = user=gforge_nss dbname=$db_name
+#shadowconnectionstring = hostaddr=127.0.0.1 user=gforge_nss password=$db_password dbname=$db_name
 
 #----------------- NSS queries
 shadowbyname    = SELECT login AS shadow_name, passwd AS shadow_passwd, 14087 AS shadow_lstchg, 0 AS shadow_min, 99999 AS shadow_max, 7 AS shadow_warn, '' AS shadow_inact, '' AS shadow_expire, '' AS shadow_flag FROM nss_passwd WHERE login = \$1
