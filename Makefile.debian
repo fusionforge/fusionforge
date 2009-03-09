@@ -193,7 +193,7 @@ localrepo: $(LOCALREPO) $(LOCALREPO)/conf $(LOCALREPO)/conf/distributions
 	
 reprepro: $(LOCALREPO)/pool/main/$(PKGLETTER)/$(PKGNAME)/$(PKGNAME)_$(gfversion)$(MINOR)$(XDISTRIB).dsc # Install in repository
 
-$(LOCALREPO)/pool/main/g/$(PKGNAME)/$(PKGNAME)_$(gfversion)$(MINOR)$(XDISTRIB).dsc:
+$(LOCALREPO)/pool/main/$(PKGLETTER)/$(PKGNAME)/$(PKGNAME)_$(gfversion)$(MINOR)$(XDISTRIB).dsc: $(BUILDRESULT)/$(PKGNAME)_$(gfversion)$(MINOR)$(XDISTRIB)_i386.changes
 	cd $(BUILDRESULT); reprepro -Vb $(LOCALREPO) include $(DISTRIB) $(PKGNAME)_$(gfversion)$(MINOR)$(XDISTRIB)_i386.changes
 
 $(LOCALREPO)/conf/distributions:
