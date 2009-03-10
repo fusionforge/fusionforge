@@ -351,7 +351,7 @@ function trove_getcatcompletelisting($group_id) {
 		}
 		$return .= '</li>';
 	}
-	if ($need_close_ul_tag)
+	if (isset($need_close_ul_tag) && $need_close_ul_tag)
 	{
 		$return .= '</ul>';
 	}
