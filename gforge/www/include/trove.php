@@ -327,10 +327,9 @@ function trove_getcatcompletelisting($group_id) {
 
 	$return = '';
 	if (db_numrows($res_trovecat) < 1) {
-		$return .= $Language->getText('trove','not_categorized')
-			.' <a href="/softwaremap/trove_list.php">'
-			. $Language->getText('trove','title')
-			.'</a>.<p />';
+		$return .= _('This project has not yet categorized itself in the').' '
+			.util_make_link ('/softwaremap/trove_list.php',_('Trove Software Map'))
+			.'<p />';
 	} else {
 		$return .= '<ul>';
 		$need_close_ul_tag = 1;
