@@ -655,7 +655,7 @@ function site_user_header($params) {
 	echo $HTML->header($params);
 	echo html_feedback_top((isset($GLOBALS['feedback']) ? $GLOBALS['feedback'] : ''));
 	echo ($HTML->beginSubMenu());
-	if ($sys_use_diary) { 
+	if ($GLOBALS['sys_use_diary']) {
 		echo ($HTML->printSubMenu(
 			array(_('My Personal Page'),
 				_('Diary &amp; Notes'),
