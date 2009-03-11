@@ -110,7 +110,7 @@ cd fusionforge-4.7.1</pre>
 
 				<p>Github:<br />
 				See aljeux tree on github at <a href="http://github.com/aljeux/fusionforge/tree/master">http://github.com/aljeux/fusionforge/tree/master</a>.<br/>
-				You can fork the tree and send a pull request to get your changes back in fusionforge.	
+				You can fork the tree and send a pull request to get your changes back in fusionforge.
 
 				<p>(Note to project members: due to virtualisation on the server, SSH needs to be accessed on port 20022.)</p>
 			</div>
