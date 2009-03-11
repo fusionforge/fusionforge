@@ -655,15 +655,25 @@ function site_user_header($params) {
 	echo $HTML->header($params);
 	echo html_feedback_top((isset($GLOBALS['feedback']) ? $GLOBALS['feedback'] : ''));
 	echo ($HTML->beginSubMenu());
-	echo ($HTML->printSubMenu(
-		array(_('My Personal Page'),
-			_('Diary &amp; Notes'),
-			_('Account Maintenance'),
-			_('Register Project')),
-		array('/my/',
-			'/my/diary.php',
-			'/account/',
-			'/register/')));
+	if ($sys_use_diary) { 
+		echo ($HTML->printSubMenu(
+			array(_('My Personal Page'),
+				_('Diary &amp; Notes'),
+				_('Account Maintenance'),
+				_('Register Project')),
+			array('/my/',
+				'/my/diary.php',
+				'/account/',
+				'/register/')));
+	} else {
+		echo ($HTML->printSubMenu(
+			array(_('My Personal Page'),
+				_('Account Maintenance'),
+				_('Register Project')),
+			array('/my/',
+				'/account/',
+				'/register/')));
+	}
 	plugin_hook ("usermenu", false) ;
 	echo ($HTML->endSubMenu());
 }

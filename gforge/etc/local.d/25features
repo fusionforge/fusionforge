@@ -19,6 +19,7 @@ $sys_use_ssl={sys_use_ssl};
 $sys_use_people={sys_use_people};
 $sys_use_shell={sys_use_shell};
 $sys_use_private_project={sys_use_private_project};
+$sys_use_diary={sys_use_diary};
 
 // Enable/Disable user ratings
 $sys_use_ratings={sys_use_ratings};

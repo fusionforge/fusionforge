@@ -106,6 +106,7 @@ computedefault(){
 	DEFAULTsys_use_ssl=false
 	DEFAULTsys_use_people=true
 	DEFAULTsys_use_ftpuploads=false
+	DEFAULTsys_use_diary=true
 	DEFAULTsys_use_gateways=true
 	DEFAULTsys_use_project_vhost=true
 	DEFAULTsys_use_project_database=false
