@@ -40,7 +40,6 @@ if (!$start) {
 
 site_project_header(array('title'=>_('Project Activity').' '.$group->getPublicName(),'group'=>$group_id,'toptab'=>'home'));
 
-if ($area && !is_numeric($area)) { $area = 1; }
 if ($SPAN && !is_numeric($SPAN)) { $SPAN = 1; }
 if ($start && !is_numeric($start)) { $start = false; }
 if ($end && !is_numeric($end)) { $end = false; }
