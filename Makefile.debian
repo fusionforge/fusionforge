@@ -4,6 +4,7 @@ FUSIONFORGE=FusionForge
 PKGNAME=gforge
 PKGLETTER=$(shell echo $(PKGNAME) | cut -c1)
 ORIGIN=debian.fusionforge.org
+BRANCH=$(shell [ "$(basename $(pwd))" = "trunk" ] && echo svn || echo brc)
 BUILDPLACE=$(CURDIR)/builder/buildplace
 BUILDFILES=$(CURDIR)/builder/buildfiles
 BUILDRESULT=$(CURDIR)/result
@@ -12,7 +13,6 @@ PBUILDERTGZ=$(CURDIR)/builder/tgz
 TARBALLS=$(CURDIR)/tarballs
 APTCACHE=$(CURDIR)/builder/cache
 DISTRIB=$(shell echo $(XDISTRIB) | cut -c2-)
-BRANCH=$(shell [ "$(basename $(pwd))"="trunk" ] && echo svn || echo brc)
 LOCALREPODEB=/var/www/debian-fusionforge-$(BRANCH)
 LOCALREPOUBU=/var/www/ubuntu-fusionforge-$(BRANCH)
 DEBIANLIST=1lenny 2squeeze 3sid
