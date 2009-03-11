@@ -54,7 +54,7 @@ rpmprep: rpmrc rpmmacro
 
 dist: rpmprep
 	-mkdir ./dist 2> /dev/null
-	mv ./*.bz2 $(RPM_TMP)/RPMS/noarch/*.rpm ./dist
+	mv ./*.bz2 $(RPM_TMP)/SRPMS/*.rpm ./dist
 #
 # FUSIONFORGE
 #
@@ -67,7 +67,7 @@ build: rpmprep		# Build rpm fusionforge packages                               #
 	cd gforge ;mv plugins ../;mkdir ../utils;mv utils/install-nsspgsql.sh ../utils/;mv utils/fusionforge-shell-postgresql.spec ../utils/;find . -type f | grep -v '/CVS/' | grep -v '/.svn/' | grep -v contrib | grep -v debian | grep -v docs/phpdoc/docs | cpio -pdumvB ../fusionforge-$(version)
 	cp gforge/rpm-specific/patches/gforge-4.0-deb_rpm.patch .
 	tar cvjf fusionforge-$(version).tar.bz2 fusionforge-$(version)
-	rpmbuild -ta --rcfile rpmrc fusionforge-$(version).tar.bz2
+	rpmbuild -ts --nodeps --rcfile rpmrc fusionforge-$(version).tar.bz2
 
 #
 # CVS PLUGIN
@@ -80,7 +80,7 @@ cleancvs:               # Clean files of gforge-plugin-scmcvs build           #
 buildcvs: rpmprep               # Build rpm fusionforge-plugin-scmcvs package                  #
 	cd plugins/scmcvs ; find . -type f | grep -v '/CVS/' | grep -v '/.svn/' | grep -v contrib | grep -v debian | cpio -pdumvB ../../fusionforge-plugin-scmcvs-$(version)
 	tar cvjf fusionforge-plugin-scmcvs-$(version).tar.bz2 fusionforge-plugin-scmcvs-$(version)
-	rpmbuild -ta --rcfile rpmrc fusionforge-plugin-scmcvs-$(version).tar.bz2
+	rpmbuild -ts --nodeps --rcfile rpmrc fusionforge-plugin-scmcvs-$(version).tar.bz2
 
 #
 # SVN PLUGIN
@@ -150,6 +150,6 @@ cleanlibnsspgsql:               # Clean files of fusionforge-shell-postgresql   
 buildlibnsspgsql: rpmprep               # Build rpm fusionforge-shell-postgresql package                  #
 	cd utils; find . -type f | grep -v '/CVS/' | grep -v '/.svn/' | grep -v contrib | grep -v debian | cpio -pdumvB ../fusionforge-shell-postgresql-$(version)
 	tar cvjf fusionforge-shell-postgresql-$(version).tar.bz2 fusionforge-shell-postgresql-$(version)
-	rpmbuild -ta --rcfile rpmrc fusionforge-shell-postgresql-$(version).tar.bz2
+	rpmbuild -ts --nodeps --rcfile rpmrc fusionforge-shell-postgresql-$(version).tar.bz2
 
 
