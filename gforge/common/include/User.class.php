@@ -487,7 +487,7 @@ Enjoy the site.
 			fax=$14,
 			title=$15,
 			ccode=$16,
-			theme_id=$17,
+			theme_id=$17
 			WHERE user_id=$18',
 					array (
 						htmlspecialchars($firstname . ' ' .$lastname),
