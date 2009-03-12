@@ -38,7 +38,6 @@
 
 require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
-require_once $gfcommon.'include/license.php';
 require_once $gfcommon.'scm/SCMFactory.class.php';
 //
 //	Test if restricted project registration
@@ -56,8 +55,6 @@ if (getStringFromRequest('submit')) {
 
 	$full_name = trim(getStringFromRequest('full_name'));
 	$purpose = trim(getStringFromRequest('purpose'));
-	$license = trim(getStringFromRequest('license'));
-	$license_other = trim(getStringFromRequest('license_other'));
 	$description = trim(getStringFromRequest('description'));
 	$unix_name = strtolower(getStringFromRequest('unix_name'));
 	$scm = getStringFromRequest('scm');
@@ -85,8 +82,6 @@ if (getStringFromRequest('submit')) {
 			$full_name,
 			$unix_name,
 			$description,
-			$license,
-			$license_other,
 			$purpose,
 			'shell1',
 			$scm_host,
@@ -117,8 +112,6 @@ if (getStringFromRequest('submit')) {
 } else {
 	$full_name = '';
 	$purpose = '';
-	$license = '';
-	$license_other = '';
 	$description = '';
 	$unix_name = '';
 	$scm = '';
@@ -143,25 +136,14 @@ site_header(array('title'=>_('Project Information')));
 <?php echo htmlspecialchars(stripslashes($purpose)); ?>
 </textarea>
 
-<?php printf(_('<h3>3. License</h3>'), $GLOBALS['sys_name']) ?>
-
-<?php
-echo license_selectbox('license',$license);
-?>
-<?php echo _('<p>If you selected "other", please provide an explanation along with a description of your license. Realize that other licenses may not be approved. Also, it may take additional time to make a decision for such project, since we will need to check that license is compatible with the OpenSource definition.</p>') ?>
-<br />
-<textarea name="license_other" cols="60" rows="5">
-<?php echo htmlspecialchars(stripslashes($license_other)); ?>
-</textarea>
-
-<?php echo _('<h3>4. Project Public Description</h3><p>This is the description of your project which will be shown on the Project Summary page, in search results, etc. It should not be as comprehensive and formal as Project Purpose description (step 2), so feel free to use concise and catchy wording. Maximum length is 255 chars.</p>')?>
+<?php echo _('<h3>3. Project Public Description</h3><p>This is the description of your project which will be shown on the Project Summary page, in search results, etc. It should not be as comprehensive and formal as Project Purpose description (step 2), so feel free to use concise and catchy wording. Maximum length is 255 chars.</p>')?>
 <br />
 <br />
 <textarea name="description" cols="70" rows="5">
 <?php echo htmlspecialchars(stripslashes($description)); ?>
 </textarea>
 
-<?php printf(_('<h3>5. Project Unix Name</h3>In addition to full project name, you will need to choose short,"Unix" name for your project.<p/> The "Unix Name" has several restrictions because it is used in so many places around the site. They are:<ul><li>Cannot match the unix name of any other project</li><li>Must be between 3 and 15 characters in length</li><li>Must be in lower case</li><li>Can only contain characters, numbers, and dashes</li><li>Must be a valid unix username</li><li>Cannot match one of our reserved domains</li><li>Unix name will never change for this project</li></ul><p/>Your unix name is important, however, because it will be used for many things, including:<ul><li>A web site at <tt>unixname.%1$s</tt></li><li>A CVS Repository root of <tt>/cvsroot/unixname</tt> at <tt>cvs.unixname.%1$s</tt></li><li>Shell access to <tt>unixname.%1$s</tt></li><li>Search engines throughout the site</li></ul><p/>Unix Name:<br/>'), $GLOBALS['sys_default_domain']) ?>
+<?php printf(_('<h3>4. Project Unix Name</h3>In addition to full project name, you will need to choose short,"Unix" name for your project.<p/> The "Unix Name" has several restrictions because it is used in so many places around the site. They are:<ul><li>Cannot match the unix name of any other project</li><li>Must be between 3 and 15 characters in length</li><li>Must be in lower case</li><li>Can only contain characters, numbers, and dashes</li><li>Must be a valid unix username</li><li>Cannot match one of our reserved domains</li><li>Unix name will never change for this project</li></ul><p/>Your unix name is important, however, because it will be used for many things, including:<ul><li>A web site at <tt>unixname.%1$s</tt></li><li>A CVS Repository root of <tt>/cvsroot/unixname</tt> at <tt>cvs.unixname.%1$s</tt></li><li>Shell access to <tt>unixname.%1$s</tt></li><li>Search engines throughout the site</li></ul><p/>Unix Name:<br/>'), $GLOBALS['sys_default_domain']) ?>
 
 <input type="text" maxlength="15" size="15" name="unix_name" value="<?php echo htmlspecialchars(stripslashes($unix_name)); ?>"/>
 

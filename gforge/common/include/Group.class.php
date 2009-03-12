@@ -277,11 +277,9 @@ class Group extends Error {
 	 *  @param	string	The full name of the user.
 	 *  @param	string	The Unix name of the user.
 	 *  @param	string	The new group description.
-	 *  @param	int	The ID of the license to use.
-	 *  @param	string	The 'other' license to use if any.
 	 *  @param	string	The purpose of the group.
 	 */
-	function create(&$user, $group_name, $unix_name, $description, $license, $license_other, $purpose, $unix_box='shell1', $scm_box='cvs1', $is_public=1) {
+	function create(&$user, $group_name, $unix_name, $description, $purpose, $unix_box='shell1', $scm_box='cvs1', $is_public=1) {
 		// $user is ignored - anyone can create pending group
 
 		if ($this->getID()!=0) {
@@ -308,15 +306,6 @@ class Group extends Error {
 		} else if (strlen($description)>255) {
 			$this->setError(_('Your project description is too long. Please make it smaller than 256 bytes.'));
 			return false;
-		} else if (!$license) {
-			$this->setError(_('You have not chosen a license'));
-			return false;
-		} else if ($license!=GROUP_LICENSE_OTHER && $license_other) {
-			$this->setError(_('Conflicting licenses choice'));
-			return false;
-		} else if ($license==GROUP_LICENSE_OTHER && strlen($license_other)<50) {
-			$this->setError(_('Please give more comprehensive licensing description'));
-			return false;
 		} else {
 
 			srand((double)microtime()*1000000);
@@ -335,14 +324,12 @@ class Group extends Error {
 					status,
 					unix_box,
 					scm_box,
-					license,
 					register_purpose,
 					register_time,
-					license_other,
                                         enable_anonscm,
 					rand_hash
 				)
-				VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)',
+				VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)',
 						array (htmlspecialchars ($group_name),
 						       $is_public,
 						       $unix_name,
@@ -352,10 +339,8 @@ class Group extends Error {
 						       'P',
 						       $unix_box,
 						       $scm_box,
-						       $license,
 						       htmlspecialchars($purpose),
 						       time(),
-						       htmlspecialchars($license_other),
 						       $is_public,
 						       md5($random_num)	)) ;
 			if (!$res || db_affected_rows($res) < 1) {
@@ -416,14 +401,13 @@ class Group extends Error {
 	 *
 	 *	@param	object	User requesting operation (for access control).
 	 *	@param	bool	Whether group is publicly accessible (0/1).
-	 *	@param	string	Project's license (string ident).
 	 *	@param	int		Group type (1-project, 2-foundry).
 	 *	@param	string	Machine on which group's home directory located.
 	 *	@param	string	Domain which serves group's WWW.
 	 *	@return status.
 	 *	@access public.
 	 */
-	function updateAdmin(&$user, $is_public, $license, $type_id, $unix_box, $http_domain) {
+	function updateAdmin(&$user, $is_public, $type_id, $unix_box, $http_domain) {
 		$perm =& $this->getPermission($user);
 
 		if (!$perm || !is_object($perm)) {
@@ -440,11 +424,10 @@ class Group extends Error {
 
 		$res = db_query_params ('
 			UPDATE groups
-			SET is_public=$1, license=$2, type_id=$3,
-				unix_box=$4, http_domain=$5
-			WHERE group_id=$6',
+			SET is_public=$1, type_id=$2,
+				unix_box=$3, http_domain=$4
+			WHERE group_id=$5',
 					array ($is_public,
-					       $license,
 					       $type_id,
 					       $unix_box,
 					       $http_domain,
@@ -459,9 +442,6 @@ class Group extends Error {
 		// Log the audit trail
 		if ($is_public != $this->isPublic()) {
 			$this->addHistory('is_public', $this->isPublic());
-		}
-		if ($license != $this->data_array['license']) {
-			$this->addHistory('license', $this->data_array['license']);
 		}
 		if ($type_id != $this->data_array['type_id']) {
 			$this->addHistory('type_id', $this->data_array['type_id']);
@@ -2277,15 +2257,13 @@ Reasons for negative decision:
 
 Project Full Name:  %2$s
 Submitted Description: %3$s
-License: %4$s
-Submitter: %6$s (%7$s)
+Submitter: %5$s (%6$s)
 
 Please visit the following URL to approve or reject this project:
-%5$s'),
+%4$s'),
 						       $GLOBALS['sys_name'],
 						       $this->getPublicName(),
 						       util_unconvert_htmlspecialchars($this->getRegistrationPurpose()),
-						       $this->getLicenseName(), 
 						       util_make_url ('/admin/approve-pending.php'),
 						       $submitter->getRealName(), 
 						       $submitter->getUnixName()));
@@ -2301,9 +2279,8 @@ Please visit the following URL to approve or reject this project:
 
 Project Full Name:  %2$s
 Submitted Description: %3$s
-License: %4$s
 
-The %1$s admin team will now examine your project submission.  You will be notified of their decision.'), $GLOBALS['sys_name'], $this->getPublicName(), util_unconvert_htmlspecialchars($this->getRegistrationPurpose()), $this->getLicenseName(), $GLOBALS['sys_default_domain']));
+The %1$s admin team will now examine your project submission.  You will be notified of their decision.'), $GLOBALS['sys_name'], $this->getPublicName(), util_unconvert_htmlspecialchars($this->getRegistrationPurpose()), $GLOBALS['sys_default_domain']));
 				
 		util_send_message($email, sprintf(_('New %1$s Project Submitted'), $GLOBALS['sys_name']), $message);
 		setup_gettext_from_context();

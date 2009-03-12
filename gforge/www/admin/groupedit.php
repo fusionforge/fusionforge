@@ -23,7 +23,6 @@
 
 require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
-require_once $gfcommon.'include/license.php';
 require_once $gfwww.'admin/admin_utils.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
 
@@ -38,7 +37,7 @@ if (!$group || !is_object($group)) {
 }
 
 // This function performs very update
-function do_update(&$group, $is_public, $status, $license,
+function do_update(&$group, $is_public, $status,
 		   $group_type, $unix_box, $http_domain, $scm_box='') {
 	global $feedback;
 
@@ -50,7 +49,7 @@ function do_update(&$group, $is_public, $status, $license,
 		return false;
 	}
 
-	if (!$group->updateAdmin(session_get_user(), $is_public, $license, $group_type, $unix_box, $http_domain)) {
+	if (!$group->updateAdmin(session_get_user(), $is_public, $group_type, $unix_box, $http_domain)) {
 		$feedback .= $group->getErrorMessage();
 		db_rollback();
 		return false;
@@ -72,12 +71,11 @@ function do_update(&$group, $is_public, $status, $license,
 if (getStringFromRequest('submit')) {
 	$form_public = getStringFromRequest('form_public');
 	$form_status = getStringFromRequest('form_status');
-	$form_license = getStringFromRequest('form_license');
 	$form_box = getStringFromRequest('form_box');
 	$form_domain = getStringFromRequest('form_domain');
 	$form_scm_box = getStringFromRequest('form_scm_box');
 
-	do_update($group, $form_public, $form_status, $form_license,
+	do_update($group, $form_public, $form_status, 
 		  1, $form_box, $form_domain, $form_scm_box);
 
 } else if (getStringFromRequest('resend')) {
@@ -159,27 +157,6 @@ if($status == 'P') {
 </td>
 </tr>
 
-<tr>
-<td>
-<?php echo _('License:'); ?>
-</td>
-<td>
-<?php
-	echo license_selectbox('form_license',$group->getLicense());
-?>
-</td>
-</tr>
-<?php
-if ($group->getLicense() == GROUP_LICENSE_OTHER) {
-?>
-<tr>
-<td><?php echo _('License Other:'); ?>
-</td>
-<td>
-<?php echo $group->getLicenseOther(); ?>
-</td>
-</tr>
-<?php } ?> 
 <?php
 	global $sys_use_shell;
 	if ($sys_use_shell) {
