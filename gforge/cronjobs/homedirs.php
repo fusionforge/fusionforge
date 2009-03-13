@@ -55,6 +55,7 @@ require_once dirname(__FILE__).'/../www/env.inc.php';
 require_once $gfwww.'include/squal_pre.php';
 require $gfcommon.'include/cron_utils.php';
 
+setup_gettext_from_sys_lang();	
 define('USER_DEFAULT_GROUP','users');
 //error variable
 $err = '';
@@ -152,10 +153,18 @@ foreach($groups as $group) {
 		//$contents=str_replace('<group_id>',$g->getID(),$contents);
 		//$contents=str_replace('<group_name>',$g->getUnixName(),$contents);
 
+		$contents=str_replace('##comment##', _('Default Web Page for groups that haven\'t setup their page yet'), $contents);
+		$contents=str_replace('##purpose##', _('Please replace this file with your own website'), $contents);
+		$contents=str_replace('##welcome_to##', sprintf(_('Welcome to %s'), $g->getPublicName()), $contents);
+		$contents=str_replace('##body##',
+			sprintf(
+				_("We're Sorry but this Project hasn't yet uploaded their personal webpage yet. <br /> Please check back soon for updates or visit <a href=\"%s\">the project page</a>."),
+				"http://".$GLOBALS['sys_default_domain'].'/projects/'.$g->getUnixName()),
+			$contents);
 		//
 		//	Write the file back out to the project home dir
 		//
-		$fw=fopen($groupdir_prefix."/".$group."/htdocs/index.php",'w');
+		$fw=fopen($groupdir_prefix."/".$group."/htdocs/index.html",'w');
 		fwrite($fw,$contents);
 		fclose($fw);
 		
