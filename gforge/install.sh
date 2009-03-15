@@ -15,6 +15,9 @@
 # Author: Alain Peyrat <aljeux@free.fr>
 #
 
+
+#hostname="`hostname`.`dnsdomainname`"
+
 if [ $# -ne 1  ]; then
 	echo 1>&2 Usage: $0 hostname
 	exit 127
@@ -98,13 +101,22 @@ then
 		php /opt/gforge/db/startpoint.php 4.7
 
 		# Post installation fixes.
-		perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/httpd/conf/httpd.conf
+		#perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/apache2/httpd.conf
 		perl -spi -e 's/^LoadModule/#LoadModule/g' /etc/gforge/httpd.conf
 
-		chkconfig httpd on
-		chkconfig postgresql on
+		chkconfig -s apache2 on
+		chkconfig -s postgresql on
+
+		# Apache settings: modules
+		for m in dav dav_svn authz_svn ssl; do
+			a2enmod $m
+			a2enflag $m
+		done
+		echo "Virtual hosts for ${hostname}:"
+		httpd2 -S -DSSL 2>&1 | grep ${hostname}
 
 		rcapache2 restart
+
 		rcSuSEfirewall2 stop
 		msg="IMPORTANT: Service SuSEfirewall2 stopped, please reconfigure after"
 
@@ -119,5 +131,6 @@ else
 	exit 1;
 fi
 
-echo $smg;
+echo "check /etc/gforge/local.inc for ${hostname} specific FusionForge settings"
+echo -e $msg;
 exit 0;
