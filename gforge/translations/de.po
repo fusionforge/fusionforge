@@ -882,8 +882,7 @@ msgid ""
 "\n"
 "<%2$s>\n"
 "\n"
-"(If you don't see any URL above, it is likely due to a bug in your mail "
-"client.\n"
+"(If you don't see any URL above, it is likely due to a bug in your mail client.\n"
 "Use one below, but make sure it is entered as the single line.)\n"
 "\n"
 "%2$s\n"
@@ -907,7 +906,7 @@ msgstr ""
 "\n"
 "Viel Spaß mit der Seite.\n"
 "\n"
-"-- Die %4$s Leitung\n"
+"-- Die %3$s Leitung\n"
 
 #: common/include/User.class.php:366
 #, php-format
@@ -4237,7 +4236,7 @@ msgstr[1] ""
 #: www/admin/pluginman.php:82 www/admin/pluginman.php:114
 #, php-format
 msgid "Plugin %1$s updated Successfully"
-msgstr ""
+msgstr "Plugin %1$s erfolgreich aktualisiert."
 
 #: www/admin/pluginman.php:94
 msgid ""
