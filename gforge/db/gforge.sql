@@ -86,7 +86,8 @@ CREATE TABLE doc_data (
     filename text,
     filetype text,
     group_id integer,
-    filesize integer DEFAULT 0 NOT NULL
+    filesize integer DEFAULT 0 NOT NULL,
+    data_words text DEFAULT ''::text NOT NULL
 );
 
 
