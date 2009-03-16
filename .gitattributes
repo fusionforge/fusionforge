@@ -2980,6 +2980,7 @@ gforge/www/docman/search.php -text
 gforge/www/docman/search.tpl.html -text
 gforge/www/env.inc.php -text
 gforge/www/export/rss20_version.php -text
+gforge/www/export/search_plugin.php -text
 gforge/www/favicon.ico svneol=native#unset
 gforge/www/forum/admin/ForumAdmin.class.php -text
 gforge/www/forum/include/AttachManager.class.php -text
@@ -3025,6 +3026,7 @@ gforge/www/images/ic/write16w.png -text
 gforge/www/images/ic/xmail16w.png -text
 gforge/www/images/icon.png -text
 gforge/www/images/msg.png -text
+gforge/www/images/opensearchdescription.png -text svneol=unset#unset
 gforge/www/images/pow-fusionforge.png -text svneol=unset#unset
 gforge/www/images/sf-for-debian.png -text
 gforge/www/images/smiles/icon_arrow.gif -text

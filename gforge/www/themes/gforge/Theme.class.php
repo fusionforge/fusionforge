@@ -113,10 +113,7 @@ class Theme extends Layout {
     <title><?php echo $params['title']; ?></title>
     <link rel="icon" type="image/png" href="<?php echo util_make_url('/images/icon.png'); ?>"/>
     <link rel="shortcut icon" type="image/png" href="<?php echo util_make_url('/images/icon.png'); ?>"/>
-    <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="<?php echo util_make_url ('/export/rss_sfnews.php'); ?>" type="application/rss+xml"/>
-    <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="<?php echo util_make_url ('/export/rss20_news.php'); ?>" type="application/rss+xml"/>
-    <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - New Projects RSS" href="<?php echo util_make_url ('/export/rss_sfprojects.php'); ?>" type="application/rss+xml"/>
-
+		<?php $this->headerLink(); ?>
     <script language="JavaScript" type="text/javascript">
     <!--
 

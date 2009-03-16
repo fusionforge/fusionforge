@@ -14,7 +14,7 @@
 
 require_once $gfwww.'search/include/SearchManager.class.php';
 
-class Theme extends Error {
+class Theme extends Layout {
 
 	/**
 	 * The default main page content
@@ -83,19 +83,7 @@ class Theme extends Error {
 <meta http-equiv="Content-Type"
 	content="text/html; charset=utf-8" />
 <title><?php echo $params['title']; ?></title>
-<link rel="alternate"
-	title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS"
-	href="<?php echo util_make_url ('/export/rss_sfnews.php'); ?>"
-	type="application/rss+xml" />
-<link rel="alternate"
-	title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS 2.0"
-	href="<?php echo util_make_url ('/export/rss20_news.php'); ?>"
-	type="application/rss+xml" />
-<link rel="alternate"
-	title="<?php echo $GLOBALS['sys_name']; ?> - New Projects RSS"
-	href="<?php echo util_make_url ('/export/rss_sfprojects.php'); ?>"
-	type="application/rss+xml" />
-
+		<?php $this->headerLink(); ?>
 		<?php	if (isset($GLOBALS['group_id'])) {
 			$activity = '<link rel="alternate" title="'.$GLOBALS['sys_name'].' - New Activity RSS" href="'.
 			util_make_url ('/export/rss20_activity.php?group_id='.$GLOBALS['group_id']).

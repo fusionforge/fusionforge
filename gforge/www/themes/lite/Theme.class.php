@@ -78,6 +78,7 @@ class Theme extends Layout {
   <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<title><?php echo $params['title']; ?></title>
+	<?php $this->headerLink(); ?>
 	<link rel="stylesheet" type="text/css" href="<?php echo util_make_url ('/themes/lite/css/theme.css'); ?>" />
 	<script type="text/javascript">
 	<!--

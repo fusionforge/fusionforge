@@ -53,6 +53,17 @@ class Layout extends Error {
 	}
 
 	/**
+	 *	headerLink() - common code for all themes
+	 *
+	 */
+	function headerLink() {
+		echo '<link rel="alternate" title="'.$GLOBALS['sys_name'].' - Project News Highlights RSS" href="'.util_make_url ('/export/rss_sfnews.php').'" type="application/rss+xml"/>';
+		echo '<link rel="alternate" title="'.$GLOBALS['sys_name'].' - Project News Highlights RSS 2.0" href="'.util_make_url ('/export/rss20_news.php').'" type="application/rss+xml"/>';
+		echo '<link rel="alternate" title="'.$GLOBALS['sys_name'].' - New Projects RSS" href="'.util_make_url ('/export/rss_sfprojects.php').'" type="application/rss+xml"/>';
+		echo '<link rel="search"  title="'.$GLOBALS['sys_name'].'" href="'.util_make_url ('/export/search_plugin.php').'" type="application/opensearchdescription+xml"/>';
+	}
+
+	/**
 	 *	headerStart() - common code for all themes
 	 *
 	 * @param	array	Header parameters array
@@ -75,9 +86,7 @@ class Layout extends Error {
   <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title><?php echo $params['title']; ?></title>
-	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="<?php echo util_make_url ('/export/rss_sfnews.php'); ?>" type="application/rss+xml"/>
-	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS 2.0" href="<?php echo  util_make_url ('/export/rss20_news.php'); ?>" type="application/rss+xml"/>
-	<link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - New Projects RSS" href="<?php echo util_make_url ('/export/rss_sfprojects.php'); ?>" type="application/rss+xml"/>
+	<?php $this->headerLink(); ?>
 	
 	<?php	if (isset($GLOBALS['group_id'])) { 
 			$activity = '<link rel="alternate" title="' . $GLOBALS['sys_name'] . ' - New Activity RSS" href="'. util_make_url ('/export/rss20_activity.php?group_id='.$GLOBALS['group_id']).'" type="application/rss+xml"/>';
