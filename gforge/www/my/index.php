@@ -262,6 +262,7 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 	*/
 	echo $HTML->boxTop(_('My Bookmarks'),false,false);
 
+	echo '<a href="'.util_make_url ('/my/bookmark_add.php').'">'._('Add bookmark').'</a><br/><br/>';
 	$result = db_query("SELECT bookmark_url, bookmark_title, bookmark_id from user_bookmarks where ".
 		"user_id='". user_getid() ."' ORDER BY bookmark_title");
 	$rows=db_numrows($result);
