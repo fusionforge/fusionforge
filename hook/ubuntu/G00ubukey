@@ -1,4 +1,5 @@
 #! /bin/sh
 # Add universe required by cowbuilder
-grep "main$" /etc/apt/sources.list | sed 's/main/universe/' >> /etc/apt/sources.list
+#grep "main$" /etc/apt/sources.list | sed 's/main/universe/' >> /etc/apt/sources.list
+grep jaunty /etc/apt/sources.list | sed 's/jaunty/jaunty-updates/' >> /etc/apt/sources.list
 cat /etc/apt/sources.list

@@ -40,7 +40,7 @@ UBUHOOK="--hookdir $(CURDIR)/hook/ubuntu"
 # Some doc found there http://wiki.debian.org/cowbuilder
 # Hook are not anymore necessary, but I keep as an example
 UBUHOOK="--components 'main universe' --debootstrapopts --exclude=udev,pcmciautils,initramfs-tools"
-UBUHOOK=--components "main universe"
+UBUHOOK=--components "main universe" --hookdir $(CURDIR)/hook/ubuntu
 
 ORIGFILE=$(PKGNAME)_$(gfversion).orig.tar.gz
 DSCFILE=$(PKGNAME)_$(gfversion)$(MINOR).dsc
