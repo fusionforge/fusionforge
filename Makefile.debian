@@ -4,7 +4,7 @@ FUSIONFORGE=FusionForge
 PKGNAME=gforge
 PKGLETTER=$(shell echo $(PKGNAME) | cut -c1)
 ORIGIN=debian.fusionforge.org
-BRANCH=$(shell [ "$(basename $(pwd))" = "trunk" ] && echo svn || echo brc)
+BRANCH=$(shell [ "$(shell echo $(basename $(CURDIR)) | sed 's/.*runk/trunk/')" = "trunk" ] && echo svn || echo brc)
 BUILDPLACE=$(CURDIR)/builder/buildplace
 BUILDFILES=$(CURDIR)/builder/buildfiles
 BUILDRESULT=$(CURDIR)/result
@@ -64,7 +64,7 @@ default: list
 
 list:
 	@echo ======================================================================================
-	@echo '=                    Available target are listed below $(BRANCH)                    ='
+	@echo '=                    Available target are listed below ($(BRANCH))                  ='
 	@echo ======================================================================================
 	@cat Makefile.debian | grep '^.*:.*#$$' | sed 's/FUSIONFORGE/$(FUSIONFORGE)/' | sed 's/^\(.*:\).*#\(.*\)#$$/\1		\2/'
 	@echo ======================================================================================
