@@ -61,6 +61,7 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 	?>
 <script type="text/javascript" src="<?php echo util_make_url ('/tabber/tabber.js'); ?>"></script>
 <div id="tabber" class="tabber" <?php plugin_hook('call_user_js');?>>
+<?php if ($GLOBALS['sys_use_tracker']) { ?>
 <div class="tabbertab" 
 title="<?php echo _('Assigned Artifacts'); ?>">
 	<?php
@@ -101,7 +102,8 @@ title="<?php echo _('Assigned Artifacts'); ?>">
 	echo $HTML->listTableBottom();
 ?>
 </div>
-  
+<? } ?>  
+<?php if ($GLOBALS['sys_use_pm']) { ?>
 <div class="tabbertab" 
 title="<?php echo _('Assigned Tasks'); ?>">
 <?php
@@ -152,6 +154,8 @@ title="<?php echo _('Assigned Tasks'); ?>">
 	echo $HTML->listTableBottom();
 ?>
 </div>
+<?php } ?>
+<?php if ($GLOBALS['sys_use_tracker']) { ?>
 <div class="tabbertab" 
 title="<?php echo _('Submitted Artifacts'); ?>">
 <?php
@@ -162,6 +166,7 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 	$order_name_arr[]=_('Priority');
 	$order_name_arr[]=_('Summary');
 	echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
+	$artifactsForUser = new ArtifactsForUser(session_get_user());
 	$submittedArtifacts =& $artifactsForUser->getSubmittedArtifactsByGroup();
 	if (count($submittedArtifacts) > 0) {
 		$i=0;
@@ -186,75 +191,81 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 	echo $HTML->listTableBottom();
 ?>
 </div>
+<?php } ?>
+<?php if ($GLOBALS['sys_use_forum'] || $GLOBALS['sys_use_frs']) { ?>
 <div class="tabbertab" title="<?php echo _('Monitored Items'); ?>" >
 <?php
 	/*
 		Forums that are actively monitored
 	*/
-	$tabcnt++;
-	$last_group=0;
-	$order_name_arr=array();
-	$order_name_arr[]=_('Remove');
-	$order_name_arr[]=_('Monitored Forums');
-	echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
-	$forumsForUser = new ForumsForUser(session_get_user());
-	$forums = $forumsForUser->getMonitoredForums();
-	if (count($forums) < 1) {
-		echo '<tr><td colspan="2" bgcolor="#FFFFFF"><center><strong>'._('You are not monitoring any forums.').'</strong></center></td></tr>';
-	} else {
-		echo '<tr><td colspan="2" bgcolor="#FFFFFF"><center><strong>'.util_make_link ('/forum/myforums.php',_('My Monitored Forums')).'</strong></center></td></tr>';
-		foreach ($forums as $f) {
-			$group = $f->getGroup();
-			if ($group->getID() != $last_group) {
+	if ($GLOBALS['sys_use_forum']) {
+		$tabcnt++;
+		$last_group=0;
+		$order_name_arr=array();
+		$order_name_arr[]=_('Remove');
+		$order_name_arr[]=_('Monitored Forums');
+		echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
+		$forumsForUser = new ForumsForUser(session_get_user());
+		$forums = $forumsForUser->getMonitoredForums();
+		if (count($forums) < 1) {
+			echo '<tr><td colspan="2" bgcolor="#FFFFFF"><center><strong>'._('You are not monitoring any forums.').'</strong></center></td></tr>';
+		} else {
+			echo '<tr><td colspan="2" bgcolor="#FFFFFF"><center><strong>'.util_make_link ('/forum/myforums.php',_('My Monitored Forums')).'</strong></center></td></tr>';
+			foreach ($forums as $f) {
+				$group = $f->getGroup();
+				if ($group->getID() != $last_group) {
+					echo '
+					<tr '. $HTML->boxGetAltRowStyle(1) .'><td colspan="2">'.util_make_link ('/forum/?group_id='.$group->getID(),$group->getPublicName()).'</td></tr>';
+				}
+
 				echo '
-				<tr '. $HTML->boxGetAltRowStyle(1) .'><td colspan="2">'.util_make_link ('/forum/?group_id='.$group->getID(),$group->getPublicName()).'</td></tr>';
+				<tr '. $HTML->boxGetAltRowStyle(0) .'><td align="center"><a href="'.util_make_url ('/forum/monitor.php?forum_id='.$f->getID().'&amp;stop=1&amp;group_id='.$group->getID()).'"><img src="'. $HTML->imgroot . '/ic/trash.png" height="16" width="16" '.
+				'border="0" alt="" /></a></td><td width="99%">'.util_make_link ('/forum/forum.php?forum_id='.$f->getID(),$f->getName()).'</td></tr>';
+
+				$last_group= $group->getID();
 			}
-
-			echo '
-			<tr '. $HTML->boxGetAltRowStyle(0) .'><td align="center"><a href="'.util_make_url ('/forum/monitor.php?forum_id='.$f->getID().'&amp;stop=1&amp;group_id='.$group->getID()).'"><img src="'. $HTML->imgroot . '/ic/trash.png" height="16" width="16" '.
-			'border="0" alt="" /></a></td><td width="99%">'.util_make_link ('/forum/forum.php?forum_id='.$f->getID(),$f->getName()).'</td></tr>';
-
-			$last_group= $group->getID();
 		}
+		echo $HTML->listTableBottom();
 	}
-	echo $HTML->listTableBottom();
-
 	/*
 		Filemodules that are actively monitored
 	*/
-	$last_group=0;
-	$tabcnt++;
-	$order_name_arr=array();
-	$order_name_arr[]=_('Remove');
-	$order_name_arr[]=_('Monitored FileModules');
-	echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
+	if ($GLOBALS['sys_use_frs']) {
+		$last_group=0;
+		$tabcnt++;
+		$order_name_arr=array();
+		$order_name_arr[]=_('Remove');
+		$order_name_arr[]=_('Monitored FileModules');
+		echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
 
-	$sql="SELECT groups.group_name,groups.unix_group_name,groups.group_id,frs_package.name,filemodule_monitor.filemodule_id ".
-		"FROM groups,filemodule_monitor,frs_package ".
-		"WHERE groups.group_id=frs_package.group_id AND groups.status = 'A' ".
-		"AND frs_package.package_id=filemodule_monitor.filemodule_id ".
-		"AND filemodule_monitor.user_id='".user_getid()."' ORDER BY group_name DESC";
-	$result=db_query($sql);
-	$rows=db_numrows($result);
-	if (!$result || $rows < 1) {
-		echo '<tr><td colspan="2" bgcolor="#FFFFFF"><center><strong>'._('You are not monitoring any files.').'</strong></center></td></tr>';
-	} else {
-		for ($i=0; $i<$rows; $i++) {
-			if (db_result($result,$i,'group_id') != $last_group) {
+		$sql="SELECT groups.group_name,groups.unix_group_name,groups.group_id,frs_package.name,filemodule_monitor.filemodule_id ".
+			"FROM groups,filemodule_monitor,frs_package ".
+			"WHERE groups.group_id=frs_package.group_id AND groups.status = 'A' ".
+			"AND frs_package.package_id=filemodule_monitor.filemodule_id ".
+			"AND filemodule_monitor.user_id='".user_getid()."' ORDER BY group_name DESC";
+		$result=db_query($sql);
+		$rows=db_numrows($result);
+		if (!$result || $rows < 1) {
+			echo '<tr><td colspan="2" bgcolor="#FFFFFF"><center><strong>'._('You are not monitoring any files.').'</strong></center></td></tr>';
+		} else {
+			for ($i=0; $i<$rows; $i++) {
+				if (db_result($result,$i,'group_id') != $last_group) {
+					echo '
+					<tr '. $HTML->boxGetAltRowStyle($i) .'><td colspan="2">'.util_make_link_g (db_result($result,$i,'unix_group_name'),db_result($result,$i,'group_id'),db_result($result,$i,'group_name')).'</td></tr>';
+				}
 				echo '
-				<tr '. $HTML->boxGetAltRowStyle($i) .'><td colspan="2">'.util_make_link_g (db_result($result,$i,'unix_group_name'),db_result($result,$i,'group_id'),db_result($result,$i,'group_name')).'</td></tr>';
-			}
-			echo '
-			<tr '. $HTML->boxGetAltRowStyle($i) .'><td style="text-align:center"><a href="'.util_make_url ('/frs/monitor.php?filemodule_id='.db_result($result,$i,'filemodule_id').'&amp;group_id='.db_result($result,$i,'group_id').'&amp;stop=1').'"><img src="'. $HTML->imgroot.'/ic/trash.png" height="16" width="16" '.
-			'border="0" alt=""/></a></td><td width="99%">'.util_make_link ('/frs/?group_id='.db_result($result,$i,'group_id'),db_result($result,$i,'name')).'</td></tr>';
+				<tr '. $HTML->boxGetAltRowStyle($i) .'><td style="text-align:center"><a href="'.util_make_url ('/frs/monitor.php?filemodule_id='.db_result($result,$i,'filemodule_id').'&amp;group_id='.db_result($result,$i,'group_id').'&amp;stop=1').'"><img src="'. $HTML->imgroot.'/ic/trash.png" height="16" width="16" '.
+				'border="0" alt=""/></a></td><td width="99%">'.util_make_link ('/frs/?group_id='.db_result($result,$i,'group_id'),db_result($result,$i,'name')).'</td></tr>';
 
-			$last_group=db_result($result,$i,'group_id');
+				$last_group=db_result($result,$i,'group_id');
+			}
 		}
+		echo $HTML->listTableBottom();
 	}
-	echo $HTML->listTableBottom();
 ?>
 </div>
-
+<?php } ?>
+<?php if ($GLOBALS['sys_use_bookmarks']) { ?>
 <div class="tabbertab" title="<?php echo _('My Bookmarks'); ?>" >
 <?php
 	/*
@@ -284,6 +295,7 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 	echo $HTML->boxBottom();
 ?>
 </div>
+<?php } ?>
 <div class="tabbertab" title="<?php echo _('Projects'); ?>" >
 <?php
 

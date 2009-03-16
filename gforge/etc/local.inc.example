@@ -161,6 +161,7 @@ $sys_use_people=true;
 $sys_use_shell=true;
 $sys_use_private_project=true;
 $sys_use_diary=true;
+$sys_use_bookmarks=true;
 
 // Enable/Disable user ratings
 $sys_use_ratings=true;
