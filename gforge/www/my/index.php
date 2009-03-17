@@ -102,7 +102,7 @@ title="<?php echo _('Assigned Artifacts'); ?>">
 	echo $HTML->listTableBottom();
 ?>
 </div>
-<? } ?>  
+<?php } ?>
 <?php if ($GLOBALS['sys_use_pm']) { ?>
 <div class="tabbertab" 
 title="<?php echo _('Assigned Tasks'); ?>">

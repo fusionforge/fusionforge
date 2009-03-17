@@ -77,9 +77,9 @@ function showHelp() {
 >> GForge language file merge utility, by Hunte Swee<hunte@users.sourceforge.net> and Guillaume Smet<guillaume-gforge@smet.org><<
 
 Usage:
-<?=$self?> <GForge root directory> <Target language> 1>merge.tab 2>merge.log
+<?php echo $self?> <GForge root directory> <Target language> 1>merge.tab 2>merge.log
 Example:
-<?=$self?> /usr/share/gforge SimplifiedChinese 1>merge.tab 2>merge.log
+<?php echo $self?> /usr/share/gforge SimplifiedChinese 1>merge.tab 2>merge.log
 
 <?php
 }

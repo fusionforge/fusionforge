@@ -2,7 +2,7 @@
 
 
 //create the config file for webcalendar
-$fichier_conf = "<?\n" . 
+$fichier_conf = "<?php\n" .
 		"install_password: 764b9c698569b4e77fd69db363fef414" .
 		"\ndb_type: postgresql" .
 		"\ndb_host: ".$sys_gfdbhost.
