@@ -1,3 +1,7 @@
 #! /bin/sh
-debmirror /var/lib/gforge/chroot/home/groups/fusionforge/htdocs/debian --method=http --host=debian.fusionforge.org -r debian -d lenny,etch,sid -a i386 -s main -v --progress
-debmirror /var/lib/gforge/chroot/home/groups/fusionforge/htdocs/ubuntu --method=http --host=debian.fusionforge.org -r ubuntu -d hardy,gutsy,intrepid -a i386 -s main -v --progress
+
+debmirror /var/lib/gforge/chroot/home/groups/fusionforge/htdocs/debian-trk --method=http --host=debian.fusionforge.org -r debian -d lenny,squeeze,sid -a i386,amd64 -s main -v --progress
+debmirror /var/lib/gforge/chroot/home/groups/fusionforge/htdocs/ubuntu-trk --method=http --host=debian.fusionforge.org -r ubuntu -d gutsy,intrepid,jaunty -a i386,amd64 -s main -v --progress
+
+debmirror /var/lib/gforge/chroot/home/groups/fusionforge/htdocs/debian-brc --method=http --host=debian.fusionforge.org -r debian-brc -d lenny,squeeze,sid -a i386,amd64 -s main -v --progress
+debmirror /var/lib/gforge/chroot/home/groups/fusionforge/htdocs/ubuntu-brc --method=http --host=debian.fusionforge.org -r ubuntu-brc -d gutsy,intrepid,jaunty -a i386,amd64 -s main -v --progress
