@@ -194,9 +194,14 @@ class CVSPlugin extends SCM {
 		$group =& group_get_object($params['group_id']);
 		
 		if ($group->usesPlugin($this->name)) {
-			print '<p>
-			<input type="checkbox" name="scmcvs_enable_anoncvs" value="1" '.$this->c($group->enableAnonSCM()).' /><strong>'._('Enable Anonymous Access').'</strong><br />
-			<input type="checkbox" name="scmcvs_enable_pserver" value="1" '.$this->c($group->enablePserver()).' /><strong>'._('Enable pserver').'</strong></p>' ;
+			print '<p>';
+			if ($group->isPublic()) {
+				print '<input type="checkbox" name="scmcvs_enable_anoncvs" value="1" '.$this->c($group->enableAnonSCM()).'/><strong>'._('Enable Anonymous Access').'</strong><br />';
+			} else {
+				print '<input type="checkbox" name="scmcvs_enable_anoncvs" value="1" '.$this->c($group->enableAnonSCM()).' DISABLED/>'._('Enable Anonymous Access').' <strong>'._("You project is private and so, you can't turn Anonymous Access on").'</strong><br />';
+
+			}
+			print '<input type="checkbox" name="scmcvs_enable_pserver" value="1" '.$this->c($group->enablePserver()).' /><strong>'._('Enable pserver').'</strong></p>' ;
 		}
 	}
 
