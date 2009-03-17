@@ -34,10 +34,27 @@
 			</div>
 			<div class="tabbertab" title="Debian">
 				<h4>For debian you should create /etc/apt/sources.list.d/fusionforge file containing one of:</h4>
+				<h4><a href="debian/">Release</a></h4>
 				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian lenny main
 deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian lenny main</pre>
+				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian squeeze main
+deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian squeeze main</pre>
 				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian sid main
 deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian sid main</pre>
+				<h4><a href="debian-brc/">Branch Build</a></h4>
+				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian-brc lenny main
+deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian-brc lenny main</pre>
+				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian-brc squeeze main
+deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian-brc squeeze main</pre>
+				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian-brc sid main
+deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian-brc sid main</pre>
+				<h4><a href="debian-trk/">Trunk Build</a></h4>
+				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian-trk lenny main
+deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian-trk lenny main</pre>
+				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian-trk squeeze main
+deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian-trk squeeze main</pre>
+				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian-trk sid main
+deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian-trk sid main</pre>
 				<h5>You may have to add the archive key by running:</h5>
 				<pre>wget -q http://<?php echo $_SERVER['SERVER_NAME']; ?>/key -O- | sudo apt-key add -</pre>
 				<h5>then run the usual</h5>
@@ -46,12 +63,27 @@ deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian sid main</pre>
 			</div>
 			<div class="tabbertab" title="Ubuntu">
 				<h4>For ubuntu you should create /etc/apt/sources.list.d/fusionforge file containing one of:</h4>
-				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu gutsy main
-deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu gutsy main</pre>
+				<h4><a href="ubuntu/">Release</a></h4>
 				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu hardy main
 deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu hardy main</pre>
 				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu intrepid main
 deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu intrepid main</pre>
+				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu jaunty main
+deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu jaunty main</pre>
+				<h4><a href="ubuntu-brc/">Branch Build</a></h4>
+				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu-brc hardy main
+deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu-brc hardy main</pre>
+				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu-brc intrepid main
+deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu-brc intrepid main</pre>
+				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu-brc jaunty main
+deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu-brc jaunty main</pre>
+				<h4><a href="ubuntu-trk/">Trunk Build</a></h4>
+				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu-trk hardy main
+deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu-trk hardy main</pre>
+				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu-trk intrepid main
+deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu-trk intrepid main</pre>
+				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu-trk jaunty main
+deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu-trk jaunty main</pre>
 				<h5>You may have to add the archive key by running:</h5>
 				<pre>wget -q http://<?php echo $_SERVER['SERVER_NAME']; ?>/key -O- | sudo apt-key add -</pre>
 				<h5>then run the usual</h5>
