@@ -858,6 +858,8 @@ if (isset($params['group']) && $params['group']) {
 	}
 	
 	function createUnderSections($sectionsArray) {
+		global $group_subsection_names;
+
 		$countLines = 0;
 		foreach ($sectionsArray as $section) {
 			if(is_array($section)) {
