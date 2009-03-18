@@ -1781,6 +1781,13 @@ class Group extends Error {
 				db_rollback();
 				return false;
 			}
+
+			$hook_params['group'] = $this;
+			$hook_params['group_id'] = $this->getID();
+			$hook_params['user'] = &user_get_object($user_id);
+			$hook_params['user_id'] = $user_id;
+			plugin_hook ("group_removeuser", $hook_params);
+
 			//audit trail
 			$this->addHistory('Removed User',$user_id);
 		}
@@ -1818,11 +1825,6 @@ class Group extends Error {
 			return false;
 		}
 		
-		$hook_params['group'] = $this;
-		$hook_params['group_id'] = $this->getID();
-		$hook_params['user'] = &user_get_object($user_id);
-		$hook_params['user_id'] = $user_id;
-		plugin_hook ("group_removeuser", $hook_params);
 		
 		$this->addHistory('Updated User',$user_id);
 		return true;
