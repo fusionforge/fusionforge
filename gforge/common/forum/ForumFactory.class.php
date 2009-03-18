@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2000, Tim Perdue/Sourceforge
  * Copyright 2002, Tim Perdue/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -82,17 +83,20 @@ class ForumFactory extends Error {
 		if ($this->forums) {
 			return $this->forums;
 		}
-		if (session_loggedin()) {
-			$perm =& $this->Group->getPermission( session_get_user() );
-			if (!$perm || !is_object($perm) || !$perm->isMember()) {
-				$public_flag='=1';
-				$exists = '';
-			} else {
-				$public_flag='<3';
-				if ($perm->isForumAdmin()) {
-					$exists='';
+
+		
+		if ($sys_database_type == "mysql") {
+			if (session_loggedin()) {
+				$perm =& $this->Group->getPermission( session_get_user() );
+				if (!$perm || !is_object($perm) || !$perm->isMember()) {
+					$public_flag='=1';
+					$exists = '';
 				} else {
-					$exists=" AND group_forum_id IN (SELECT role_setting.ref_id
+					$public_flag='<3';
+					if ($perm->isForumAdmin()) {
+						$exists='';
+					} else {
+						$exists=" AND group_forum_id IN (SELECT role_setting.ref_id
 					FROM role_setting, user_group
 					WHERE role_setting.value::integer >= 0
                                           AND role_setting.section_name = 'forum'
@@ -100,14 +104,13 @@ class ForumFactory extends Error {
                                           
    					  AND user_group.role_id = role_setting.role_id
 					  AND user_group.user_id='".user_getid()."') ";
+					}
 				}
+			} else {
+				$public_flag='=1';
+				$exists = '';
 			}
-		} else {
-			$public_flag='=1';
-			$exists = '';
-		}
-
-		if ($sys_database_type == "mysql") {
+			
 			$sql="SELECT fgl.*,
 					(SELECT count(*) AS `count`
 						FROM (
@@ -115,32 +118,80 @@ class ForumFactory extends Error {
 						) AS tmp
 						WHERE tmp.group_forum_id = fgl.group_forum_id
 					) AS threads 
-				FROM forum_group_list_vw AS fgl";
-		} else {
-			$sql="SELECT *
-				FROM forum_group_list_vw";
-		}
-		$sql .= "
+			FROM forum_group_list_vw AS fgl
 			WHERE group_id='". $this->Group->getID() ."' 
 			AND is_public $public_flag 
 			$exists
 			ORDER BY group_forum_id;";
-
-		$result = db_query ($sql);
-
-		$rows = db_numrows($result);
-
-		if (!$result) {
-			$this->setError(_('Forum not found').' : '.db_error());
-			$this->forums = false;
-		} else {
-			while ($arr = db_fetch_array($result)) {
-				$this->forums[] = new Forum($this->Group, $arr['group_forum_id'], $arr);
+			
+			$result = db_query ($sql);
+			
+			$rows = db_numrows($result);
+			
+			if (!$result) {
+				$this->setError(_('Forum not found').' : '.db_error());
+				$this->forums = false;
+			} else {
+				while ($arr = db_fetch_array($result)) {
+					$this->forums[] = new Forum($this->Group, $arr['group_forum_id'], $arr);
+				}
 			}
-		}
-		return $this->forums;
-	}
+			return $this->forums;
+		} else {	// Not MySQL
+			if (session_loggedin()) {
+				$perm =& $this->Group->getPermission( session_get_user() );
+				if (!$perm || !is_object($perm) || !$perm->isMember()) {
+					$result = db_query_params ('SELECT * FROM forum_group_list_vw
+WHERE group_id=$1
+AND is_public=1
+ORDER BY group_forum_id',
+								   array ($this->Group->getID())) ;
+				} else {
+					$public_flag='<3';
+					if ($perm->isForumAdmin()) {
+						$result = db_query_params ('SELECT * FROM forum_group_list_vw
+WHERE group_id=$1
+AND is_public < 3
+ORDER BY group_forum_id',
+									   array ($this->Group->getID())) ;
+					} else {
+						$result = db_query_params ('SELECT * FROM forum_group_list_vw
+WHERE group_id=$1
+AND is_public < 3
+AND group_forum_id IN (SELECT role_setting.ref_id
+                         FROM role_setting, user_group
+		       WHERE role_setting.value::integer >= 0
+                         AND role_setting.section_name = $2
+                         AND role_setting.ref_id=forum_group_list_vw.group_forum_id
+			 AND user_group.role_id = role_setting.role_id
+			 AND user_group.user_id=$3)
+ORDER BY group_forum_id',
+									   array ($this->Group->getID(),
+										  'forum',
+										  user_getid())) ;
+					}
+				}
+			} else {
+				$result = db_query_params ('SELECT * FROM forum_group_list_vw
+WHERE group_id=$1
+AND is_public=1
+ORDER BY group_forum_id',
+							   array ($this->Group->getID())) ;
+			}
 
+			$rows = db_numrows($result);
+
+			if (!$result) {
+				$this->setError(_('Forum not found').' : '.db_error());
+				$this->forums = false;
+			} else {
+				while ($arr = db_fetch_array($result)) {
+					$this->forums[] = new Forum($this->Group, $arr['group_forum_id'], $arr);
+				}
+			}
+			return $this->forums;
+		}
+	}
 }
 
 // Local Variables:

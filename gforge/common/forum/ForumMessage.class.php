@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2000, Tim Perdue/Sourceforge
  * Copyright 2002, Tim Perdue/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -115,12 +116,17 @@ class ForumMessage extends Error {
 			}
 		}
 		
-		$sql="INSERT INTO forum_pending_messages (group_forum_id,posted_by,subject,
-		body,post_date,is_followup_to,thread_id,most_recent_date) 
-		VALUES ('". $this->Forum->getID() ."', '$user_id', '". htmlspecialchars($subject) ."', 
-		'". $body ."', '". time() ."','$is_followup_to','$thread_id','". time() ."')";
-
-		$result=db_query($sql);
+		$result = db_query_params ('INSERT INTO forum_pending_messages (group_forum_id,posted_by,subject,
+		body,post_date,is_followup_to,thread_id,most_recent_date) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
+					   array ($this->Forum->getID(),
+						  $user_id,
+						  htmlspecialchars($subject),
+						  $body,
+						  time(),
+						  $is_followup_to,
+						  $thread_id,
+						  time ())) ;
+);
 		if (!$result || db_affected_rows($result) < 1) {
 			$this->setError(_('ForumMessage::create() Posting Failed').' '.db_error());
 			db_rollback();
@@ -171,8 +177,9 @@ class ForumMessage extends Error {
 			//  increment the parent's followup count if necessary
 			//
 			db_begin();
-			$res4=db_query("UPDATE forum SET most_recent_date='". time() ."' 
-				WHERE thread_id='$thread_id' AND is_followup_to='0'");
+			$res4 = db_query_params ('UPDATE forum SET most_recent_date=$1 WHERE thread_id=$2 AND is_followup_to=0',
+						 array (time(),
+							$thread_id)) ;
 			if (!$res4 || db_affected_rows($res4) < 1) {
 				$this->setError(_('Couldn\'t Update Master Thread parent with current time'));
 				db_rollback();
@@ -181,8 +188,9 @@ class ForumMessage extends Error {
 				//
 				//  mark the parent with followups as an optimization later
 				//
-				$res3=db_query("UPDATE forum SET has_followups='1',most_recent_date='". time() ."' 
-					WHERE msg_id='$is_followup_to'");
+				$res3 = db_query_params ('UPDATE forum SET has_followups=1,most_recent_date=$1 WHERE msg_id=$2',
+							 array (time(),
+								$is_followup_to)) ;
 				if (!$res3) {
 					$this->setError(_('Could Not Update Parent'));
 					db_rollback();
@@ -194,12 +202,16 @@ class ForumMessage extends Error {
 			
 			
 		db_begin();
-		$sql="INSERT INTO forum (group_forum_id,posted_by,subject,
-		body,post_date,is_followup_to,thread_id,most_recent_date) 
-		VALUES ('". $group_forum_id ."', '$posted_by', '". htmlspecialchars($subject) ."', 
-		'". $body ."', '". $post_date ."','$is_followup_to','$thread_id','". $most_recent_date ."')";
+		$result = db_query_params ('INSERT INTO forum (group_forum_id,posted_by,subject,body,post_date,is_followup_to,thread_id,most_recent_date) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
+					   array ($group_forum_id,
+						  $posted_by,
+						  htmlspecialchars($subject),
+						  $body,
+						  $post_date,
+						  $is_followup_to,
+						  $thread_id,
+						  $most_recent_date)) ;
 
-		$result=db_query($sql);
 		if (!$result || db_affected_rows($result) < 1) {
 			$this->setError(_('ForumMessage::create() Posting Failed').' '.db_error());
 			db_rollback();
@@ -253,8 +265,9 @@ class ForumMessage extends Error {
 			//
 			//  increment the parent's followup count if necessary
 			//
-			$res4=db_query("UPDATE forum SET most_recent_date='". time() ."' 
-				WHERE thread_id='$thread_id' AND is_followup_to='0'");
+			$res4 = db_query_params ('UPDATE forum SET most_recent_date=$1 WHERE thread_id=$2 AND is_followup_to=0',
+						 array (time(),
+							$thread_id)) ;
 			if (!$res4 || db_affected_rows($res4) < 1) {
 				$this->setError(_('Couldn\'t Update Master Thread parent with current time'));
 				db_rollback();
@@ -263,8 +276,9 @@ class ForumMessage extends Error {
 				//
 				//  mark the parent with followups as an optimization later
 				//
-				$res3=db_query("UPDATE forum SET has_followups='1',most_recent_date='". time() ."' 
-					WHERE msg_id='$is_followup_to'");
+				$res3 = db_query_params ('UPDATE forum SET has_followups=1,most_recent_date=$1 WHERE msg_id=$2',
+							 array (time(),
+								$is_followup_to)) ;
 				if (!$res3) {
 					$this->setError(_('Could Not Update Parent'));
 					db_rollback();
@@ -273,12 +287,15 @@ class ForumMessage extends Error {
 			}
 		}
 		
-		$sql="INSERT INTO forum (group_forum_id,posted_by,subject,
-			body,post_date,is_followup_to,thread_id,most_recent_date) 
-			VALUES ('". $this->Forum->getID() ."', '$user_id', '". htmlspecialchars($subject) ."', 
-			'". $body ."', '". time() ."','$is_followup_to','$thread_id','". time() ."')";
-
-		$result=db_query($sql);
+		$result = db_query_params ('INSERT INTO forum (group_forum_id,posted_by,subject,body,post_date,is_followup_to,thread_id,most_recent_date) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
+					   array ($this->Forum->getID(),
+						  $user_id,
+						  htmlspecialchars($subject),
+						  $body,
+						  time(),
+						  $is_followup_to,
+						  $thread_id,
+						  time())) ;
 		if (!$result || db_affected_rows($result) < 1) {
 			$this->setError(_('ForumMessage::create() Posting Failed').' '.db_error());
 			db_rollback();
@@ -349,23 +366,6 @@ class ForumMessage extends Error {
 			$is_followup_to=0; 
 		}
 
-		//see if that message has been posted already for all the idiots that double-post
-		//we shouldn't need this, the double post checker functions solve this issue now
-		/*$res3=db_query("SELECT * FROM forum 
-			WHERE is_followup_to='$is_followup_to' 
-			AND body='".  htmlspecialchars($body) ."'
-			AND subject='".  htmlspecialchars($subject) ."' 
-			AND group_forum_id='". $this->Forum->getId() ."' 
-			AND posted_by='$user_id'");
-
-		if (db_numrows($res3) > 0) {
-			//already posted this message
-			$this->setError(_('You appear to be double-posting this message, since it has the same subject and followup information as a prior post.'));
-			return false;
-		} else {
-			echo db_error();
-		}*/
-
 		db_begin();
 		
 		//now we check the moderation status of the forum and act accordingly
@@ -401,9 +401,9 @@ class ForumMessage extends Error {
 	 *  @return boolean	success.
 	 */
 	function fetchData($msg_id) {
-		$res=db_query("SELECT * FROM forum_user_vw
-			WHERE msg_id='$msg_id'
-			AND group_forum_id='". $this->Forum->getID() ."'");
+		$res = db_query_params ('SELECT * FROM forum_user_vw WHERE msg_id=$1 AND group_forum_id=$2',
+					array ($msg_id,
+					       $this->Forum->getID())) ;
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('ForumMessage::fetchData() Invalid MessageID').db_error());
 			return false;
@@ -420,9 +420,9 @@ class ForumMessage extends Error {
 	 *  @return boolean	success.
 	 */
 	function fetchModeratedData($msg_id) {
-		$res=db_query("SELECT * FROM forum_pending_user_vw
-			WHERE msg_id='$msg_id'
-			AND group_forum_id='". $this->Forum->getID() ."'");
+		$res = db_query_params ('SELECT * FROM forum_pending_user_vw WHERE msg_id=$1 AND group_forum_id=$2',
+					array ($msg_id,
+					       $this->Forum->getID())) ;
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('ForumMessage::fetchData() Invalid MessageID').db_error());
 			return false;
@@ -557,11 +557,13 @@ class ForumMessage extends Error {
 	
 	function hasAttach() {
 		if ($this->isPending()) {
-			$sql = "SELECT attachmentid FROM forum_pending_attachment WHERE msg_id='$this->getID()'";
+			$res = db_query_params ('SELECT attachmentid FROM forum_pending_attachment WHERE msg_id=$1',
+						array ($this->getID())) ;
 		} else {
-			$sql = "SELECT attachmentid FROM forum_attachment WHERE msg_id='$this->getID()'";
+			$res = db_query_params ('SELECT attachmentid FROM forum_attachment WHERE msg_id=$1',
+						array ($this->getID())) ;
 		}
-		if ((db_numrows(db_query($sql)) > 0 )) {
+		if (db_numrows($res) > 0) {
 			return true;
 		}
 		return false;		
@@ -590,25 +592,25 @@ class ForumMessage extends Error {
 			$this->setPermissionDeniedError();
 			return false;
 		}*/
-
-		$sql="SELECT msg_id FROM forum 
-			WHERE is_followup_to='$msg_id' 
-			AND group_forum_id='".$this->Forum->getID()."'";
-		$result=db_query($sql);
+		$result = db_query_params ('SELECT msg_id FROM forum 
+			WHERE is_followup_to=$1
+			AND group_forum_id=$2',
+					   array ($msg_id,
+						  $this->Forum->getID())) ;
 		$rows=db_numrows($result);
 		$count=1;
-		
 
 		for ($i=0;$i<$rows;$i++) {
 			$msg = new ForumMessage($this->Forum,db_result($result,$i,'msg_id'));
 			$count += $msg->delete();
 		}
-		$sql="DELETE FROM forum 
-			WHERE msg_id='$msg_id' 
-			AND group_forum_id='".$this->Forum->getID()."'";
-		$toss=db_query($sql);
-		$sql = "DELETE FROM forum_attachment where msg_id='$msg_id'";
-		$res = db_query($res);
+		$toss = db_query_params ('DELETE FROM forum 
+			WHERE msg_id=$1
+			AND group_forum_id=$2',
+					 array ($msg_id,
+						$this->Forum->getID())) ;
+		$res = db_query_params ('DELETE FROM forum_attachment where msg_id=$1',
+					array ($msg_id));
 
 		return $count;
 
@@ -763,8 +765,9 @@ class ForumMessage extends Error {
 
 		$subject="[" . $this->Forum->getUnixName() ."][".$this->getID()."] ".util_unconvert_htmlspecialchars($this->getSubject());
 		if (count($ids) != 0) {
-			$sql="SELECT email FROM users WHERE status='A' AND user_id IN ('".implode($ids,'\',\'')."')";
-			$bccres = db_query($sql);
+			$bccres = db_query_params ('SELECT email FROM users WHERE status=$1 AND user_id = ANY ($2)',
+						   array ('A',
+							  db_int_array_to_any_clause ($ids))) ;
 		}
 		
 		$BCC =& implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
@@ -794,12 +797,20 @@ class ForumMessage extends Error {
 		$subject = htmlspecialchars($subject);
 		$body = $body;
 		$msg_id = $this->getID();
-		$sql="UPDATE forum 
-			SET group_forum_id='$group_forum_id' , posted_by='$posted_by' , subject='$subject',
-			body='$body', post_date='$post_date' , is_followup_to='$is_followup_to' ,
-			thread_id='$thread_id',most_recent_date='$most_recent_date'
-			WHERE msg_id='$msg_id'";
-		$res = db_query($sql);
+		$res = db_query_params ('UPDATE forum 
+			SET group_forum_id=$1, posted_by=$2, subject=$3,
+			body=$4, post_date=$4, is_followup_to=$6,
+			thread_id=$7, most_recent_date=$8
+			WHERE msg_id=$9',
+					array ($group_forum_id,
+					       $posted_by,
+					       $subject,
+					       $body,
+					       $post_date,
+					       $is_followup_to,
+					       $thread_id,
+					       $most_recent_date,
+					       $msg_id)) ;
 		if (!$res) {
 			$this->setError(db_error());
 			return false;
@@ -859,8 +870,9 @@ class ForumMessage extends Error {
 	
 			$subject="[" . $this->Forum->getUnixName() ."][".$this->getID()."] ".util_unconvert_htmlspecialchars($this->getSubject());
 			if (count($ids) != 0) {
-				$sql="SELECT email FROM users WHERE status='A' AND user_id IN ('".implode($ids,'\',\'')."')";
-				$bccres = db_query($sql);
+				$bccres = db_query_params ('SELECT email FROM users WHERE status=$1 AND user_id = ANY ($2)',
+							   array ('A',
+								  db_int_array_to_any_clause ($ids))) ;
 			}
 			$BCC =& implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
 			$User = user_get_object($this->getPosterID());

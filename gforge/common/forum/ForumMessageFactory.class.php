@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2000, Tim Perdue/Sourceforge
  * Copyright 2002, Tim Perdue/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -159,16 +160,24 @@ class ForumMessageFactory extends Error {
 		if ($this->forum_messages) {
 			return $this->forum_messages;
 		}
-		if ($thread_id) {
-			$thread_sql=" AND thread_id='$thread_id' ";
+		if (isset ($thread_id) && is_int ($thread_id)) {
+			$result = db_query_params ('SELECT * FROM forum_user_vw 
+		WHERE group_forum_id=$1
+                  AND thread_id=$2
+		ORDER BY most_recent_date DESC',
+						   array ($this->Forum->getID(),
+							  $thread_id),
+						   $this->max_rows+25,
+						   $this->offset);
+		} else {
+			$result = db_query_params ('SELECT * FROM forum_user_vw 
+		WHERE group_forum_id=$1
+		ORDER BY most_recent_date DESC',
+						   array ($this->Forum->getID()),
+						   $this->max_rows+25,
+						   $this->offset);
 		}
 
-		$sql="SELECT * FROM forum_user_vw 
-		WHERE group_forum_id='".$this->Forum->getID()."' 
-		$thread_sql 
-		ORDER BY most_recent_date DESC";
-
-		$result=db_query($sql,($this->max_rows+25),$this->offset);
 		$rows = db_numrows($result);
 		$this->fetched_rows=$rows;
 		if (!$result || $rows < 1) {
@@ -191,15 +200,23 @@ class ForumMessageFactory extends Error {
 		if ($this->forum_messages) {
 			return $this->forum_messages;
 		}
-		if ($thread_id) {
-			$thread_sql=" AND thread_id='$thread_id' ";
+		if (isset ($thread_id) && is_int ($thread_id)) {
+			$result = db_query_params ('SELECT * FROM forum_user_vw 
+		WHERE group_forum_id=$1
+                  AND thread_id=$2
+		ORDER BY most_recent_date DESC',
+						   array ($this->Forum->getID(),
+							  $thread_id),
+						   $this->max_rows+25,
+						   $this->offset);
+		} else {
+			$result = db_query_params ('SELECT * FROM forum_user_vw 
+		WHERE group_forum_id=$1
+		ORDER BY most_recent_date DESC',
+						   array ($this->Forum->getID()),
+						   $this->max_rows+25,
+						   $this->offset);
 		}
-		$sql="SELECT * FROM forum_user_vw 
-		WHERE group_forum_id='".$this->Forum->getID()."' 
-		$thread_sql 
-		ORDER BY most_recent_date DESC";
-
-		$result=db_query($sql,($this->max_rows+25),$this->offset);
 		$rows = db_numrows($result);
 		$this->fetched_rows=$rows;
 		if (!$result || $rows < 1) {
@@ -222,15 +239,24 @@ class ForumMessageFactory extends Error {
 		if ($this->forum_messages) {
 			return $this->forum_messages;
 		}
-		if ($thread_id) {
-			$thread_sql=" AND thread_id='$thread_id' ";
+		if (isset ($thread_id) && is_int ($thread_id)) {
+			$result = db_query_params ('SELECT * FROM forum_user_vw 
+		WHERE group_forum_id=$1
+                  AND thread_id=$2
+		ORDER BY msg_id DESC',
+						   array ($this->Forum->getID(),
+							  $thread_id),
+						   $this->max_rows+25,
+						   $this->offset);
+		} else {
+			$result = db_query_params ('SELECT * FROM forum_user_vw 
+		WHERE group_forum_id=$1
+		ORDER BY msg_id DESC',
+						   array ($this->Forum->getID()),
+						   $this->max_rows+25,
+						   $this->offset);
 		}
-		$sql="SELECT * FROM forum_user_vw 
-		WHERE group_forum_id='".$this->Forum->getID()."' 
-		$thread_sql 
-		ORDER BY msg_id DESC";
 
-		$result=db_query($sql,($this->max_rows+1),$this->offset);
 		$rows = db_numrows($result);
 		$this->fetched_rows=$rows;
 		if (!$result || $rows < 1) {

@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2000, Tim Perdue/Sourceforge
  * Copyright 2002, Tim Perdue/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -56,13 +57,14 @@ class ForumsForUser extends Error {
 	*/
 	function getMonitoredForums() {
 		$forums = array();
-		$sql="SELECT groups.group_name,groups.group_id,forum_group_list.group_forum_id,forum_group_list.forum_name ".
-		     "FROM groups,forum_group_list,forum_monitored_forums ".
-		     "WHERE groups.group_id=forum_group_list.group_id AND groups.status ='A' ".
-		     "AND forum_group_list.group_forum_id=forum_monitored_forums.forum_id ".
-		     "AND forum_monitored_forums.user_id='".$this->User->getID()."' ORDER BY group_name DESC";
-
-		$result=db_query($sql);
+		$result = db_query_params ('SELECT groups.group_name,groups.group_id,forum_group_list.group_forum_id,forum_group_list.forum_name
+		     FROM groups,forum_group_list,forum_monitored_forums
+		     WHERE groups.group_id=forum_group_list.group_id AND groups.status=$1
+		     AND forum_group_list.group_forum_id=forum_monitored_forums.forum_id
+		     AND forum_monitored_forums.user_id=$2
+                     ORDER BY group_name DESC',
+					   array ('A',
+						  $this->User->getID())) ;
 		$rows=db_numrows($result);
 		if ($rows < 1) {
 		        return $forums;

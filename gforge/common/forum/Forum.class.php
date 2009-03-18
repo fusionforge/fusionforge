@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2000, Tim Perdue/Sourceforge
  * Copyright 2002, Tim Perdue/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -137,7 +138,10 @@ class Forum extends Error {
 		}
 
 		$project_name = $this->Group->getUnixName();
-		$result_list_samename = db_query('SELECT 1 FROM mail_group_list WHERE list_name = \''.$project_name.'-'.$forum_name.'\' AND group_id='.$this->Group->getID().''); 
+		$result_list_samename = db_query_params ('SELECT 1 FROM mail_group_list WHERE list_name=$1 AND group_id=$2',
+
+							 array ($project_name.'-'.$forum_name,
+								$this->Group->getID())) ; 
 
 		if (db_numrows($result_list_samename) > 0){
 			$this->setError(_('Mailing List Exists with same name'));	
@@ -163,16 +167,15 @@ class Forum extends Error {
 			}
 		}
 
-		$sql="INSERT INTO forum_group_list (group_id,forum_name,is_public,description,send_all_posts_to,allow_anonymous,moderation_level)
-			VALUES ('".$this->Group->getId()."',
-			'". strtolower($forum_name) ."',
-			'$is_public',
-			'". htmlspecialchars($description) ."',
-			'$send_all_posts_to',
-			'$allow_anonymous','$moderation_level')";
-
 		db_begin();
-		$result=db_query($sql);
+		$result = db_query_params('INSERT INTO forum_group_list (group_id,forum_name,is_public,description,send_all_posts_to,allow_anonymous,moderation_level) VALUES ($1,$2,$3,$4,$5,$6,$7)',
+					  array ($this->Group->getID(),
+						 strtolower($forum_name),
+						 $is_public,
+						 htmlspecialchars($description),
+						 $send_all_posts_to,
+						 $allow_anonymous,
+						 $moderation_level)) ;
 		if (!$result) {
 			db_rollback();
 			$this->setError(_('Error Adding Forum').db_error());
@@ -216,11 +219,11 @@ class Forum extends Error {
 					) AS threads 
 				FROM forum_group_list_vw AS fgl
 				WHERE group_forum_id='$group_forum_id'";
+			$res = db_query ($sql);
 		} else {
-			$sql="SELECT * FROM forum_group_list_vw
-				WHERE group_forum_id='$group_forum_id'";
+			$res = db_query_params ('SELECT * FROM forum_group_list_vw WHERE group_forum_id=$1',
+						array ($group_forum_id)) ;
 		}
-		$res=db_query($sql);
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('Invalid forum group identifier'));
 			return false;
@@ -264,10 +267,11 @@ class Forum extends Error {
 				return false;
 			}
 			$sql="select @res";
+			$result = db_query ($sql);
 		} else {
-			$sql="SELECT nextval('forum_thread_seq')";
+			$result = db_query_params ('SELECT nextval($1)',
+						   array ('forum_thread_seq')) ;
 		}
-		$result=db_query($sql);
 		if (!$result || db_numrows($result) < 1) {
 			echo db_error();
 			return false;
@@ -294,9 +298,10 @@ class Forum extends Error {
 			return $this->save_date;
 		} else {
 			if (session_loggedin()) {
-				$sql="SELECT save_date FROM forum_saved_place
-					WHERE user_id='".user_getid()."' AND forum_id='". $this->getID() ."';";
-				$result = db_query($sql);
+				$result = db_query_params ('SELECT save_date FROM forum_saved_place WHERE user_id=$1 AND forum_id=$2',
+							   array (user_getid(),
+								  $this->getID())) ;
+);
 				if ($result && db_numrows($result) > 0) {
 					$this->save_date=db_result($result,0,'save_date');
 					return $this->save_date;
@@ -400,8 +405,8 @@ class Forum extends Error {
 	 *	@return	array	The array of user_id's.
 	 */
 	function getMonitoringIDs() {
-		$sql="SELECT user_id FROM forum_monitored_forums WHERE forum_id='".$this->getID()."'";
-		$result=db_query($sql);
+		$result = db_query_params ('SELECT user_id FROM forum_monitored_forums WHERE forum_id=$1',
+					   array ($this->getID())) ;
 		return util_result_column_to_array($result);
 	}
 	
@@ -411,13 +416,13 @@ class Forum extends Error {
 	 *	@return	array 	The array of user_id's.
 	 */
 	function getForumAdminIDs() {
-		$sql = "SELECT user_group.user_id
-                        FROM user_group, role_setting
-                        WHERE role_setting.section_name='forum'
-                          AND role_setting.ref_id='".$this->getID()."'
-                          AND role_setting.value::integer > 1
-                          AND user_group.role_id = role_setting.role_id";
-		$result = db_query($sql);
+		$result = db_query_params ('SELECT user_group.user_id FROM user_group, role_setting
+			WHERE role_setting.section_name=$1
+			  AND role_setting.ref_id=$2
+			  AND role_setting.value::integer > 1
+			  AND user_group.role_id = role_setting.role_id',
+					   array ('forum',
+						  $this->getID())) ;
 		return util_result_column_to_array($result);
 	}
 	
@@ -453,9 +458,9 @@ class Forum extends Error {
 			$this->setError(_('You can only monitor if you are logged in'));
 			return false;
 		}
-		$sql="SELECT * FROM forum_monitored_forums
-			WHERE user_id='".user_getid()."' AND forum_id='".$this->getID()."';";
-		$result = db_query($sql);
+		$result = db_query_params ('SELECT * FROM forum_monitored_forums WHERE user_id=$1 AND forum_id=$2',
+					   array (user_getid(),
+						  $this->getID())) ;
 
 		if (!$result || db_numrows($result) < 1) {
 			/*
@@ -465,7 +470,9 @@ class Forum extends Error {
 			$sql="INSERT INTO forum_monitored_forums (forum_id,user_id)
 				VALUES ('".$this->getID()."','".user_getid()."')";
 
-			$result = db_query($sql);
+			$result = db_query_params ('INSERT INTO forum_monitored_forums (forum_id,user_id) VALUES ($1,$2)',
+						   array ($this->getID(),
+							  user_getid())) ;
 
 			if (!$result) {
 				$this->setError(_('Unable To Add Monitor').' : '.db_error());
@@ -486,9 +493,9 @@ class Forum extends Error {
 			$this->setError(_('You can only monitor if you are logged in'));
 			return false;
 		}
-		$sql="DELETE FROM forum_monitored_forums
-			WHERE user_id='".user_getid()."' AND forum_id='".$this->getID()."';";
-		return db_query($sql);
+		return db_query_params ('DELETE FROM forum_monitored_forums WHERE user_id=$1 AND forum_id=$2',
+					array (user_getid(),
+					       $this->getID())) ;
 	}
 
 	/**
@@ -500,8 +507,9 @@ class Forum extends Error {
 		if (!session_loggedin()) {
 			return false;
 		}
-		$sql="SELECT count(*) AS count FROM forum_monitored_forums WHERE user_id='".user_getid()."' AND forum_id='".$this->getID()."';";
-		$result = db_query($sql);
+		$result = db_query_params ('SELECT count(*) AS count FROM forum_monitored_forums WHERE user_id=$1 AND forum_id=$2',
+					   array (user_getid(),
+						  $this->getID())) ;
 		$row_count = db_fetch_array($result);
 		return $result && $row_count['count'] > 0;
 	}
@@ -516,20 +524,19 @@ class Forum extends Error {
 			$this->setError(_('You Can Only Save Your Place If You Are Logged In'));
 			return false;
 		}
-		$sql="SELECT * FROM forum_saved_place
-			WHERE user_id='".user_getid()."' AND forum_id='".$this->getID()."'";
-
-		$result = db_query($sql);
+		$result = db_query_params ('SELECT * FROM forum_saved_place WHERE user_id=$1 AND forum_id=$2',
+					   array (user_getid(),
+						  $this->getID())) ;
 
 		if (!$result || db_numrows($result) < 1) {
 			/*
 				User is not already monitoring thread, so
 				insert a row so monitoring can begin
 			*/
-			$sql="INSERT INTO forum_saved_place (forum_id,user_id,save_date)
-				VALUES ('".$this->getID()."','".user_getid()."','".time()."')";
-
-			$result = db_query($sql);
+			$result = db_query_params ('INSERT INTO forum_saved_place (forum_id,user_id,save_date) VALUES ($1,$2,$3)',
+						   array ($this->getID(),
+							  user_getid(),
+							  time())) ;
 
 			if (!$result) {
 				$this->setError(_('Forum::savePlace()').': '.db_error());
@@ -537,10 +544,10 @@ class Forum extends Error {
 			}
 
 		} else {
-			$sql="UPDATE forum_saved_place
-				SET save_date='".time()."'
-				WHERE user_id='".user_getid()."' AND forum_id='".$this->getID()."'";
-			$result = db_query($sql);
+			$result = db_query_params ('UPDATE forum_saved_place SET save_date=$1 WHERE user_id=$2 AND forum_id=$3',
+						   array (time(),
+							  user_getid(),
+							  $this->getID())) ;
 
 			if (!$result) {
 				$this->setError('Forum::savePlace() '.db_error());
@@ -587,16 +594,24 @@ class Forum extends Error {
 			return false;
 		}
 
-		$res=db_query("UPDATE forum_group_list SET
-			forum_name='". strtolower($forum_name) ."',
-			description='". htmlspecialchars($description) ."',
-			send_all_posts_to='".$send_all_posts_to ."',
-			allow_anonymous='" .$allow_anonymous . "',
-			moderation_level='" .$moderation_level . "',
-			is_public='" .$is_public . "'
-			WHERE group_id='".$this->Group->getID()."'
-			AND group_forum_id='".$this->getID()."'");
-
+		$res = db_query_params ('UPDATE forum_group_list SET
+			forum_name=$1,
+			description=$2,
+			send_all_posts_to=$3,
+			allow_anonymous=$4,
+			moderation_level=$5,
+			is_public=$6
+			WHERE group_id=$7,
+			AND group_forum_id=$8',
+					array (strtolower($forum_name),
+					       htmlspecialchars($description),
+					       $send_all_posts_to,
+					       $allow_anonymous,
+					       $moderation_level,
+					       $is_public,
+					       $this->Group->getID(),
+					       $this->getID())) ;
+		
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError(_('Error On Update:').': '.db_error());
 			return false;
@@ -621,30 +636,22 @@ class Forum extends Error {
 			return false;
 		}
 		db_begin();
-		db_query("DELETE FROM forum_agg_msg_count
-			WHERE group_forum_id='".$this->getID()."'");
+		db_query_params ('DELETE FROM forum_agg_msg_count WHERE group_forum_id=$1',
+				 array ($this->getID())) ;
 //echo '1'.db_error();
-		db_query("DELETE FROM forum_monitored_forums
-			WHERE forum_id='".$this->getID()."'");
+		db_query_params ('DELETE FROM forum_monitored_forums WHERE forum_id=$1',
+				 array ($this->getID())) ;
 //echo '2'.db_error();
-		db_query("DELETE FROM forum_saved_place
-			WHERE forum_id='".$this->getID()."'");
+		db_query_params ('DELETE FROM forum_saved_place WHERE forum_id=$1',
+				 array ($this->getID())) ;
 //echo '3'.db_error();
-		$res = db_query("SELECT msg_id from forum where group_forum_id='".$this->getID()."'");//get the messages for this forum, to delete its attachments
-		$delete_ids = array();
-		for ($i=0;$i<db_numrows($res);$i++) {
-			$aux = db_fetch_array($res);
-			$delete_ids[] = $aux[0];
-		}
-		foreach ($delete_ids as $id) {
-			db_query("DELETE FROM forum_attachment where msg_id='$id'");
-		}
-		
-		db_query("DELETE FROM forum
-			WHERE group_forum_id='".$this->getID()."'");
+		db_query_params ('DELETE FROM forum_attachment WHERE msg_id IN (SELECT msg_id from forum where group_forum_id=$1)',
+					array ($this->getID())) ;
+		db_query_params ('DELETE FROM forum WHERE group_forum_id=$1',
+				 array ($this->getID())) ;
 //echo '4'.db_error();
-		db_query("DELETE FROM forum_group_list
-			WHERE group_forum_id='".$this->getID()."'");
+		db_query_params ('DELETE FROM forum_group_list WHERE group_forum_id=$1',
+				 array ($this->getID())) ;
 //echo '5'.db_error();
 		db_commit();
 		return true;
@@ -765,13 +772,16 @@ class Forum extends Error {
 			return -1;
 		} else {
 			if (!isset($this->current_user_perm)) {
-				$sql="SELECT role_setting.value::integer
+				$res = db_query_params ('SELECT role_setting.value::integer
 				FROM role_setting, user_group
-				WHERE role_setting.ref_id='". $this->getID() ."'
-				AND user_group.role_id = role_setting.role_id
-                                AND user_group.user_id='".user_getid()."'
-                                AND role_setting.section_name='forum'";
-				$this->current_user_perm=db_result(db_query($sql),0,0);
+				WHERE role_setting.ref_id=$1
+				AND user_group.role_id=role_setting.role_id
+                                AND user_group.user_id=$2
+                                AND role_setting.section_name=$3',
+							array ($this->getID(),
+							       user_getid(),
+							       'forum')) ;
+				$this->current_user_perm=db_result($res,0,0);
 
 				// Return no access if no access rights defined.
 				if (!$this->current_user_perm)
