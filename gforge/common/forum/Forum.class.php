@@ -301,7 +301,6 @@ class Forum extends Error {
 				$result = db_query_params ('SELECT save_date FROM forum_saved_place WHERE user_id=$1 AND forum_id=$2',
 							   array (user_getid(),
 								  $this->getID())) ;
-);
 				if ($result && db_numrows($result) > 0) {
 					$this->save_date=db_result($result,0,'save_date');
 					return $this->save_date;

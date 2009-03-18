@@ -158,7 +158,7 @@ class Document extends Error {
 						htmlspecialchars($title),
 						htmlspecialchars($description),
 						time(),
-						$doc_group
+						$doc_group,
 						$doc_initstatus,
 						$doc_language_id,
 						$filename,

@@ -126,7 +126,6 @@ class ForumMessage extends Error {
 						  $is_followup_to,
 						  $thread_id,
 						  time ())) ;
-);
 		if (!$result || db_affected_rows($result) < 1) {
 			$this->setError(_('ForumMessage::create() Posting Failed').' '.db_error());
 			db_rollback();
