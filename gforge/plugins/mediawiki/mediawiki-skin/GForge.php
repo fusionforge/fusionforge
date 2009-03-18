@@ -13,41 +13,61 @@
 if( !defined( 'MEDIAWIKI' ) )
 	die( -1 );
 
-/** */
-require_once('includes/SkinTemplate.php');
-$GLOBALS['sys_dbhost'] = $headers['GForgeDbhost'] || getenv('sys_gfdbhost');
-$GLOBALS['sys_dbport'] = $headers['GForgeDbport'] || getenv('sys_gfdbport');
-$GLOBALS['sys_dbname'] = $headers['GForgeDbname'] || getenv('sys_gfdbname');
-$GLOBALS['sys_dbuser'] = $headers['GForgeDbuser'] || getenv('sys_gfdbuser');
-$GLOBALS['sys_dbpasswd'] = $headers['GForgeDbpasswd'] || getenv('sys_gfdbpasswd');
 $no_gz_buffer = 1 ;
 require_once ('/etc/gforge/local.inc') ;
+require_once '/usr/share/gforge/www/env.inc.php';
+$GLOBALS['sys_dbhost'] = $sys_dbhost ;
+$GLOBALS['sys_dbport'] = $sys_dbport ;
+$GLOBALS['sys_dbname'] = $sys_dbname ;
+$GLOBALS['sys_dbuser'] = $sys_dbuser ;
+$GLOBALS['sys_dbpasswd'] = $sys_dbpasswd ;
+$GLOBALS['sys_plugins_path'] = $sys_plugins_path ;
+$GLOBALS['sys_urlprefix'] = $sys_urlprefix ;
+$GLOBALS['sys_use_ssl'] = $sys_use_ssl ;
+$GLOBALS['sys_default_domain'] = $sys_default_domain ;
+$GLOBALS['sys_custom_path'] = $sys_custom_path ;
+$GLOBALS['gfwww'] = $gfwww ;
+$GLOBALS['gfplugins'] = $gfplugins ;
+$GLOBALS['sys_lang'] = $sys_lang ;
+require_once $gfwww.'include/pre.php';
 $GLOBALS['sys_urlroot'] = $sys_urlroot;
 $GLOBALS['sys_session_key'] = $sys_session_key;
 $GLOBALS['sys_session_expire'] = $sys_session_expire;
-require_once $gfwww.'include/pre.php';
 $GLOBALS['REMOTE_ADDR'] = getStringFromServer('REMOTE_ADDR') ;
 $GLOBALS['HTTP_USER_AGENT'] = getStringFromServer('HTTP_USER_AGENT') ;
 
+require_once('includes/SkinTemplate.php');
 function GforgeRegisterMWHook() {
 	$GLOBALS['wgHooks']['AutoAuthenticate'][]='GforgeMWAuth';
 }
-function GforgeMWAuth( &$param='default' ) {
-	$s = session_check_session_cookie(getStringFromCookie ('session_ser'));
-	if ($s) {
-		$u = user_get_object($s);
-		// print "Logged in as ".$u->getUnixName()." (according to gforge) ";
-		$mwu = User::newFromId(User::idFromName(ucfirst($u->getUnixName())));
-		$mwu->loadFromDatabase();
-		$mwu->SetupSession();
-		$mwu->SetCookies();
-	} else {
-		// print "Not logged in (according to gforge) ";
-		$mwu = User::loadFromSession() ;
-		if ($mwu->isLoggedIn()) {
-			$mwu->logout() ;
-		}
-	}
+function GforgeMWAuth( &$user ) {
+        $s = session_check_session_cookie (getStringFromCookie ('session_ser'));
+        if ($s) {
+                $u = user_get_object ($s);
+                // print "Logged in as ".$u->getUnixName()." (according to gforge) ";
+                $mwname = ucfirst($u->getUnixName ()) ;
+                $mwu = User::newFromName ($mwname);
+                if($mwu->getID() == 0) {
+                        $mwu->addToDatabase ();
+                        $mwu->setPassword (User::randomPassword());
+                        $mwu->setRealName ($u->getRealName ()) ;
+                        $mwu->setToken ();
+                } else {
+                        $mwu->loadFromDatabase ();
+                }
+                $mwu->setCookies ();
+                $mwu->saveSettings ();
+
+                $user = $mwu ;
+                return true ;	// Ignored by MW, but required anyway
+        } else {
+                // print "Not logged in (according to gforge) ";
+                $mwu = User::loadFromSession () ;
+                if ($mwu->isLoggedIn ()) {
+                        $mwu->logout () ;
+                }
+                return false ;	// Ignored by MW, but required anyway
+        }
 }
 /**
  * Inherit main code from SkinTemplate, set the CSS and template filter.
@@ -324,4 +344,10 @@ class GForgeTemplate extends QuickTemplate {
 	wfRestoreWarnings();
 	} // end of execute() method
 } // end of class
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

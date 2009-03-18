@@ -1,3 +1,9 @@
+gforge (4.7.1-2+1) experimental; urgency=low
+
+  * Fixed mediawiki plugin for Mediawiki 1.12.
+
+ -- Roland Mas <lolando@debian.org>  Wed, 18 Mar 2009 15:43:49 +0100
+
 gforge (4.7.1-2) experimental; urgency=low
 
   * New upstream snapshot (SVN r7012 in the 4.7 branch).
