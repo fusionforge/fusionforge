@@ -3,14 +3,12 @@
 require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
- * Simple math test class.
+ * Syntax test class.
  *
- * @package   Example
- * @author    Manuel Pichler <mapi@phpundercontrol.org>
- * @copyright 2007-2008 Manuel Pichler. All rights reserved.
- * @license   http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @version   Release: 0.4.7
- * @link      http://www.phpundercontrol.org/
+ * @package   SyntaxTests
+ * @author    Alain Peyrat <aljeux@free.fr>
+ * @copyright 2009 Alain Peyrat. All rights reserved.
+ * @license   http://www.opensource.org/licenses/gpl-license.php  GPL License
  */
 class Syntax_Tests extends PHPUnit_Framework_TestCase
 {
@@ -20,6 +18,15 @@ class Syntax_Tests extends PHPUnit_Framework_TestCase
     public function testPhpSyntax()
     {
 	$output = `find ../gforge -name '*.php' -type f  -exec php -l {} \; | grep -v '^No syntax errors detected'`;
+	$this->assertEquals('', $output);
+    }
+
+    /**
+     * Validate all php code with isutf8.
+     */
+    public function testUTF8Chars()
+    {
+	$output = `find ../gforge -name '*.php' -type f  -exec isutf8 {} \;`;
 	$this->assertEquals('', $output);
     }
 }
