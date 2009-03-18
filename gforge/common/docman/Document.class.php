@@ -191,7 +191,7 @@ class Document extends Error {
 	function fetchData($docid) {
 		$res = db_query_params ('SELECT * FROM docdata_vw WHERE docid=$1 AND group_id=$2',
 					array ($docid,
-					       $this->Group->getID());
+					       $this->Group->getID()));
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('Document:: Invalid docid'));
 			return false;
