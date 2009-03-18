@@ -4,6 +4,7 @@
  *
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -149,24 +150,23 @@ class Document extends Error {
 
 		$filesize = strlen($data);
 
-		$sql="INSERT INTO doc_data (group_id,title,description,createdate,doc_group,
-			stateid,language_id,filename,filetype,filesize,data,data_words,created_by)
-			VALUES ('".$this->Group->getId()."',
-			'". htmlspecialchars($title) ."',
-			'". htmlspecialchars($description) ."',
-			'". time() ."',
-			'$doc_group',
-			'$doc_initstatus',
-			'$language_id',
-			'$filename',
-			'$filetype',
-			'$filesize',
-			'". base64_encode(stripslashes($data)) ."',
-			'$kwords',
-			'$user_id')";
-
 		db_begin();
-		$result=db_query($sql);
+		$result = db_query_params('INSERT INTO doc_data (group_id,title,description,createdate,doc_group,
+			stateid,language_id,filename,filetype,filesize,data,data_words,created_by)
+                        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)',
+					  array($this->Group->getId(),
+						htmlspecialchars($title),
+						htmlspecialchars($description),
+						time(),
+						$doc_group
+						$doc_initstatus,
+						$doc_language_id,
+						$filename,
+						$filetype,
+						$filesize,
+						base64_encode(stripslashes($data)),
+						$kwords,
+						$user_id));
 		if (!$result) {
 			$this->setError('Error Adding Document: '.db_error());
 			db_rollback();
@@ -189,9 +189,9 @@ class Document extends Error {
 	 *	@return	boolean	success
 	 */
 	function fetchData($docid) {
-		$res=db_query("SELECT * FROM docdata_vw
-			WHERE docid='$docid'
-			AND group_id='". $this->Group->getID() ."'");
+		$res = db_query_params ('SELECT * FROM docdata_vw WHERE docid=$1 AND group_id=$2',
+					array ($docid,
+					       $this->Group->getID());
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('Document:: Invalid docid'));
 			return false;
@@ -398,7 +398,8 @@ class Document extends Error {
 		//
 		//	Because this could be a large string, we only fetch if we actually need it
 		//
-		$res=db_query("SELECT data FROM doc_data WHERE docid='".$this->getID()."'");
+		$res = db_query_params ('SELECT data FROM doc_data WHERE docid=$1',
+					array ($this->getID())) ;
 		return base64_decode(db_result($res,0,'data'));
 	}
 	
@@ -457,28 +458,47 @@ class Document extends Error {
 			$this->setPermissionDeniedError();
 			return false;
 		}
-		if ($data) {
-			$filesize = strlen($data);
-			$datastr="data='". base64_encode(stripslashes($data)) ."', filesize='".$filesize."',";
-		}
 
-		$res=db_query("UPDATE doc_data SET
-			title='". htmlspecialchars($title) ."',
-			description='". htmlspecialchars($description) ."',
-			stateid='$stateid',
-			doc_group='$doc_group',
-			filetype='$filetype',
-			filename='$filename',
-			$datastr
-			language_id='$language_id',
-			updatedate='". time() ."'
-			WHERE group_id='".$this->Group->getID()."'
-			AND docid='".$this->getID()."'");
-
+		$res = db_query_params ('UPDATE doc_data SET
+			title=$1,
+			description=$2,
+			stateid=$3,
+			doc_group=$4,
+			filetype=$5,
+			filename=$6,
+			language_id=$7,
+			updatedate=$8
+			WHERE group_id=$9
+			AND docid=$10',
+					array (htmlspecialchars($title),
+					       htmlspecialchars($description),
+					       $stateid,
+					       $doc_group,
+					       $filetype,
+					       $filename,
+					       $language_id,
+					       time(),
+					       $this->Group->getID(),
+					       $this->getID())) ;
+		
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setOnUpdateError(db_error());
 			return false;
 		}
+
+		if ($data) {
+			$res = db_query_params ('UPDATE doc_data SET data=$1, filesize=$2 WHERE group_id=$3 AND docid=$4',
+						array (base64_encode(stripslashes($data)),
+						       strlen($data),
+						       $this->Group->getID(),
+						       $this->getID())) ;
+			
+			if (!$res || db_affected_rows($res) < 1) {
+				$this->setOnUpdateError(db_error());
+				return false;
+			}
+		}
+		
 		$this->sendNotice(false);
 		return true;
 	}
@@ -512,8 +532,9 @@ class Document extends Error {
 			return false;
 		}
 		
-		$sql = 'DELETE FROM doc_data WHERE docid='.$this->getID();
-		$result = db_query($sql);
+		$sql = ;
+		$result = db_query_params ('DELETE FROM doc_data WHERE docid=$1',
+					   array ($this->getID())) ;
 		if (!$result) {
 			$this->setError('Error Deleting Document: '.db_error());
 			db_rollback();

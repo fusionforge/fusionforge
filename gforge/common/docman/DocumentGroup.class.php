@@ -4,6 +4,7 @@
  *
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002, Tim Perdue/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -99,7 +100,9 @@ class DocumentGroup extends Error {
 		
 		if ($parent_doc_group) {
 			// check if parent group exists
-			$res=db_query("SELECT * FROM doc_groups WHERE doc_group='$parent_doc_group' AND group_id=".$this->Group->getID());
+			$res = db_query_params ('SELECT * FROM doc_groups WHERE doc_group=$1 AND group_id=$2',
+						array ($parent_doc_group,
+						       $this->Group->getID())) ;
 			if (!$res || db_numrows($res) < 1) {
 				$this->setError(_('DocumentGroup: Invalid DocumentGroup parent ID'));
 				return false;
@@ -114,9 +117,10 @@ class DocumentGroup extends Error {
 			return false;
 		}
 		
-		$sql="INSERT INTO doc_groups (group_id,groupname,parent_doc_group)
-			VALUES ('".$this->Group->getID()."','".htmlspecialchars($name)."','".$parent_doc_group."')";
-		$result=db_query($sql);
+		$result = db_query_params ('INSERT INTO doc_groups (group_id,groupname,parent_doc_group) VALUES ($1, $2, $3)',
+					   array ($this->Group->getID(),
+						  htmlspecialchars($name),
+						  $parent_doc_group)) ;
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
 		} else {
@@ -142,7 +146,8 @@ class DocumentGroup extends Error {
 	 *	@return boolean.
 	 */
 	function fetchData($id) {
-		$res=db_query("SELECT * FROM doc_groups WHERE doc_group='$id'");
+		$res = db_query_params ('SELECT * FROM doc_groups WHERE doc_group=$1',
+					array ($id)) ;
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('DocumentGroup: Invalid DocumentGroup ID'));
 			return false;
@@ -207,7 +212,9 @@ class DocumentGroup extends Error {
 		
 		if ($parent_doc_group) {
 			// check if parent group exists
-			$res=db_query("SELECT * FROM doc_groups WHERE doc_group='$parent_doc_group' AND group_id=".$this->Group->getID());
+			$res = db_query_params ('SELECT * FROM doc_groups WHERE doc_group=$1 AND group_id=$2',
+						array ($parent_doc_group,
+						       $this->Group->getID())) ;
 			if (!$res || db_numrows($res) < 1) {
 				$this->setError(_('DocumentGroup: Invalid DocumentGroup parent ID'));
 				return false;
@@ -216,12 +223,11 @@ class DocumentGroup extends Error {
 			$parent_doc_group=0;
 		}
 
-		$sql="UPDATE doc_groups
-			SET groupname='".htmlspecialchars($name)."',
-			parent_doc_group='".$parent_doc_group."'
-			WHERE doc_group='". $this->getID() ."'
-			AND group_id='".$this->Group->getID()."'";
-		$result=db_query($sql);
+		$result = db_query_params ('UPDATE doc_groups SET groupname=$1, parent_doc_group=$2 WHERE doc_group=$3 AND group_id=$4',
+					   array(htmlspecialchars($name),
+						 $parent_doc_group,
+						 $this->getID(),
+						 $this->Group->getID())) ;
 		if ($result && db_affected_rows($result) > 0) {
 			return true;
 		} else {

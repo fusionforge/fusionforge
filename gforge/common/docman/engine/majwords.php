@@ -4,6 +4,7 @@
  * FusionForge document search engine
  *
  * Copyright 2005, Fabio Bertagnin
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -35,9 +36,9 @@ $p = new Parsedata ("$sys_engine_path");
 
 $timestarttrait = microtime_float();
 // documents list
-$sql = "SELECT docid, group_id, filename, title, createdate, filename, description, filetype, data FROM doc_data \n";
 $resarr = array();
-$result=db_query($sql);
+$result = db_query_params ('SELECT docid, group_id, filename, title, createdate, filename, description, filetype, data FROM doc_data',
+			   array());
 if ($result)
 {
 	while ($arr = db_fetch_array($result))
@@ -57,7 +58,9 @@ foreach ($resarr as $item)
 	$res = $p->get_parse_data ($data1, $item["title"], $item["description"], $item["filetype"]);
 	$len = strlen($res);
 	$sql = "UPDATE doc_data SET data_words = '$res' WHERE docid = $item[docid] ";
-	db_query($sql);
+	db_query_params ('UPDATE doc_data SET data_words=$1 WHERE docid=$2',
+			 array ($res,
+				$item['docid'])) ;
 	$timeend = microtime_float();
 	$timetrait = $timeend - $timestart;
 	print_debug ("analyze $item[filename]  type=$item[filetype]  octets in=$lenin  octets out=$len   time=$timetrait sec");

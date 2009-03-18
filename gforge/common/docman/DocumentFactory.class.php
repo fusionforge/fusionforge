@@ -4,6 +4,7 @@
  *
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -240,8 +241,8 @@ class DocumentFactory extends Error {
 	 */
 	function getFromDB() {
 		$this->Documents = array();
-		$sql = 'SELECT * FROM docdata_vw ORDER BY title';
-		$result = db_query($sql);
+		$result = db_query_params ('SELECT * FROM docdata_vw ORDER BY title',
+					   array());
 		if (!$result) {
 			exit_error('Error', db_error());
 		}
@@ -260,11 +261,11 @@ class DocumentFactory extends Error {
 	 * getStates - Return an array of states that have documents associated to them
 	 */
 	function getUsedStates() {
-		$sql = "SELECT DISTINCT doc_states.stateid,doc_states.name 
+		$result = db_query_params ('SELECT DISTINCT doc_states.stateid,doc_states.name 
 			FROM doc_states,doc_data
 			WHERE doc_data.stateid=doc_states.stateid
-			ORDER BY doc_states.name ASC";
-		$result = db_query($sql);
+			ORDER BY doc_states.name ASC',
+					   array());
 		if (!$result) {
 			exit_error('error', db_error());
 		}

@@ -4,6 +4,7 @@
  *
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -78,11 +79,8 @@ class DocumentGroupFactory extends Error {
 			return $this->nested_groups;
 		}
 		
-		$sql="SELECT * FROM doc_groups
-		WHERE group_id='".$this->Group->getID()."' 
-		ORDER BY groupname ASC";
-
-		$result=db_query($sql);
+		$result = db_query_params ('SELECT * FROM doc_groups WHERE group_id=$1 ORDER BY groupname ASC',
+					   array ($this->Group->getID())) ;
 		$rows = db_numrows($result);
 		
 		if (!$result || $rows < 1) {
@@ -115,13 +113,10 @@ class DocumentGroupFactory extends Error {
 			return $this->flat_groups;
 		}
 		
-		$sql="SELECT * FROM doc_groups
-		WHERE group_id='".$this->Group->getID()."' 
-		ORDER BY groupname ASC";
-
-		$result=db_query($sql);
+		$result = db_query_params ('SELECT * FROM doc_groups WHERE group_id=$1 ORDER BY groupname ASC',
+					   array ($this->Group->getID())) ;
 		$rows = db_numrows($result);
-		
+
 		if (!$result || $rows < 1) {
 			$this->setError('No Groups Found '.db_error());
 			return false;
