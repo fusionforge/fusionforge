@@ -432,7 +432,7 @@ class Role extends Error {
    				   doc_flags=$4,
    				   cvs_flags=$5,
    				   release_flags=$6,
-   				   artifact_flags=$7,
+   				   artifact_flags=$7
    				WHERE role_id=$8',
    						array ($data['projectadmin'][0],
 						       $data['forumadmin'][0],
@@ -443,7 +443,7 @@ class Role extends Error {
 						       $data['trackeradmin'][0],
 						       $this->getID())) ;
 			if (!$res) {
-				$this->setError('update::usergroup::'.db_error());
+				$this->setError('::update::usergroup::'.db_error());
 				db_rollback();
 				return false;
 			}
@@ -607,7 +607,7 @@ class Role extends Error {
 						       $user_id,
 						       $this->Group->getID()));
 			if (!$res) {
-				$this->setError('update::usergroup::'.db_error());
+				$this->setError('::update::usergroup::'.db_error());
 				db_rollback();
 				return false;
 			}
