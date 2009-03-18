@@ -137,7 +137,7 @@ if (is_file("/etc/mediawiki-extensions/extensions.php")) {
 }
 
 $wgShowIPinHeader=false;
-require_once $gfplugins.'mediawiki/usr/share/mediawiki1.7/includes/GForgeAuthentication.php';
+require_once $gfplugins.'mediawiki/usr/share/mediawiki/includes/GForgeAuthentication.php';
 $wgAuth = new GForgeAuthenticationPlugin();
 # 'AutoAuthenticate': called to authenticate users on external/environmental means
 # $user: writes user object to this parameter
