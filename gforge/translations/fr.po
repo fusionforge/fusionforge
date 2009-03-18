@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-28 11:44+0100\n"
-"PO-Revision-Date: 2009-01-18 17:49+0200\n"
-"Last-Translator: Christian Perrier <bubulle@debian.org>\n"
+"PO-Revision-Date: 2009-03-18 16:54+0100\n"
+"Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <aljeux@free.fr>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Pootle 1.2.0\n"
+"X-Generator: Pootle 1.2.1\n"
 "X-Poedit-Language: French\n"
 "X-Poedit-Country: FRANCE\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -201,12 +201,11 @@ msgstr "Identifiant de message invalide"
 msgid ""
 "\n"
 "Read and respond to this message at: "
-msgstr ""
+msgstr "\nPour lire ce message en détail et y répondre :"
 
 #: common/forum/ForumMessage.class.php:675
-#, fuzzy
 msgid "A file has been uploaded with this message."
-msgstr "Cette page requiert qu'un fichier soit spécifié."
+msgstr "Un fichier a été joint à ce message."
 
 #: common/forum/ForumMessage.class.php:686
 #, php-format
@@ -215,6 +214,9 @@ msgid ""
 "To stop monitoring this forum, login to %s and visit: \n"
 "%s\n"
 msgstr ""
+"Vous recevez ce message suite à votre choix de surveiller ce forum.\n"
+"Pour interrompre la surveillance, connectez-vous à %s et suivez ce lien :\n"
+"%s\n"
 
 #: common/frs/FRSFile.class.php:92
 msgid "FRSFile Name Must Be At Least 3 Characters"
@@ -266,6 +268,16 @@ msgid ""
 "\n"
 "%6$s"
 msgstr ""
+"Le projet %1$s (%2$s) a publié une nouvelle version de\n"
+"son paquet « %3$s ».  Vous pouvez le télécharger en suivant ce lien :\n"
+"\n"
+"%4$s\n"
+"\n"
+"Vous avez reçu ce message suite à votre demande d'être notifié lorsque\n"
+"de nouvelles versions de ce paquet sont publiées.  Si vous souhaitez\n"
+"interrompre ces notifications, connectez-vous à %5$s et suivez ce lien :\n"
+"\n"
+"%6$s"
 
 #: common/include/Error.class.php:126 common/include/Group.class.php:435
 #: common/include/Group.class.php:502 www/include/exit.php:37
@@ -523,13 +535,12 @@ msgid "ATS%d: %s"
 msgstr "ATS%d: %s"
 
 #: common/include/Group.class.php:1982
-#, fuzzy
 msgid "Open-Discussion"
-msgstr "Forums de discussion :"
+msgstr "Discussion ouverte"
 
 #: common/include/Group.class.php:1982
 msgid "General Discussion"
-msgstr ""
+msgstr "Discussions générales"
 
 #: common/include/Group.class.php:1983 common/include/Group.class.php:1990
 #: common/include/Group.class.php:1997
@@ -538,14 +549,12 @@ msgid "F%d: %s"
 msgstr "F%d: %s"
 
 #: common/include/Group.class.php:1989
-#, fuzzy
 msgid "Help"
 msgstr "Aide"
 
 #: common/include/Group.class.php:1989
-#, fuzzy
 msgid "Get Public Help"
-msgstr "Aide"
+msgstr "Obtenir de l'aide"
 
 #: common/include/Group.class.php:1996 www/include/project_home.php:118
 #: www/stats/site_stats_utils.php:484
@@ -553,14 +562,12 @@ msgid "Developers"
 msgstr "Développeurs"
 
 #: common/include/Group.class.php:1996
-#, fuzzy
 msgid "Project Developer Discussion"
-msgstr "Tous les développeurs"
+msgstr "Discussion entre développeurs du projet"
 
 #: common/include/Group.class.php:2009
-#, fuzzy
 msgid "Uncategorized Submissions"
-msgstr "Soumission de nouveaux documents&nbsp;"
+msgstr "Soumissions non catégorisées"
 
 #: common/include/Group.class.php:2010
 #, php-format
@@ -574,11 +581,11 @@ msgstr "FRSP: %s"
 
 #: common/include/Group.class.php:2035
 msgid "To Do"
-msgstr ""
+msgstr "À faire"
 
 #: common/include/Group.class.php:2035
 msgid "Things We Have To Do"
-msgstr ""
+msgstr "Tâches en attente"
 
 #: common/include/Group.class.php:2036 common/include/Group.class.php:2043
 #, php-format
@@ -586,14 +593,12 @@ msgid "PG%d: %s"
 msgstr "PG%d: %s"
 
 #: common/include/Group.class.php:2042
-#, fuzzy
 msgid "Next Release"
-msgstr "Sorties plus recentes"
+msgstr "Prochaine version"
 
 #: common/include/Group.class.php:2042
-#, fuzzy
 msgid "Items For Our Next Release"
-msgstr "Derniers fichiers publiés"
+msgstr "Tâches à faire avant la prochaine version"
 
 #: common/include/Group.class.php:2059
 #, php-format
@@ -773,19 +778,16 @@ msgstr ""
 "candidature. Vous serez tenu informé de sa décision."
 
 #: common/include/Group.class.php:2324
-#, fuzzy
 msgid "Group name is too short"
-msgstr "La question n'est pas assez longue"
+msgstr "Le nom du group est trop court"
 
 #: common/include/Group.class.php:2327
-#, fuzzy
 msgid "Group name is too long"
-msgstr "Nom du groupe (cliquez pour modifier)"
+msgstr "Le nom du group est trop long"
 
 #: common/include/Group.class.php:2330
-#, fuzzy
 msgid "Group name already taken"
-msgstr "Nom Unix déjà pris"
+msgstr "Le nom du groupe est déjà pris"
 
 #: common/include/Group.class.php:2417
 #, php-format
@@ -934,9 +936,8 @@ msgid "%1$s Account Registration"
 msgstr "%1$s - Inscription"
 
 #: common/include/User.class.php:775 common/include/User.class.php:823
-#, fuzzy
 msgid "User with this email already exists."
-msgstr "Ce nom d'utilisateur existe déjà."
+msgstr "Il existe déjà un utilisateur avec cette adresse email."
 
 #: common/include/account.php:34
 msgid "Password must be at least 6 characters."
@@ -959,9 +960,8 @@ msgid "Illegal character in name."
 msgstr "Caractère interdit dans le nom."
 
 #: common/include/account.php:73
-#, fuzzy
 msgid "Name is reserved."
-msgstr "Nom réservé pour CVS."
+msgstr "Ce nom est réservé."
 
 #: common/include/account.php:81
 msgid "Name is reserved for CVS."
@@ -1383,7 +1383,7 @@ msgstr "d/m/Y H:i"
 #: common/pm/ProjectTask.class.php:1114
 #, php-format
 msgid "[%1$s - %2$s] [Task #%3$d] "
-msgstr ""
+msgstr "[%1$s - %2$s] [Tâche #%3$d] "
 
 #: common/reporting/TimeEntry.class.php:91 www/reporting/timeadd.php:99
 msgid "Successfully Added"
@@ -2471,52 +2471,39 @@ msgid "Home, Ftp"
 msgstr "Répertoire personnel et FTP"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:98
-#, fuzzy
 msgid ""
 "<p>Documentation for Bazaar (sometimes referred to as \"bzr\") is available "
 "<a href=\"http://doc.bazaar-vcs.org/latest/en/user-guide/index.html\">here</"
 "a>.</p>"
-msgstr ""
-"<p>La documentation de Subversion (que l'on appelle parfois « SVN ») est "
-"disponible <a href=\\\"http://svnbook.red-bean.com/\\\">ici</a> (en anglais)."
-"</p>"
+msgstr "<p>La documentation de Bazaar (que l'on appelle parfois « bzr ») est disponible <a href=\\\"http://doc.bazaar-vcs.org/latest/\\\">ici</a> (en anglais).</p>"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:102
-#, fuzzy
 msgid ""
 "<p><b>Anonymous Bazaar Access</b></p><p>This project's Bazaar repository can "
 "be accessed anonymously through HTTP.</p>"
-msgstr ""
-"<p><b>Accès anonyme au dépôt Subversion</b></p><p>Le dépôt Subversion de ce "
-"projet est accessible de manière anonyme grâce aux commandes suivantes.</p>"
+msgstr "<p><b>Accès anonyme au dépôt Bazaar</b></p><p>Le dépôt Bazaar de ce projet est accessible de manière anonyme par HTTP.</p>"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:104
 msgid ""
 "A list of available branches can be obtained with the following command:"
-msgstr ""
+msgstr "La commande suivante permet d'obtenir la liste des branches disponibles :"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:109
 msgid "To check out one of these branches:"
-msgstr ""
+msgstr "Pour obtenir une copie de travail de l'une de ces branches :"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:111
 #: plugins/scmbzr/common/BzrPlugin.class.php:117
 msgid "branchname"
-msgstr ""
+msgstr "nomdebranche"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:116
-#, fuzzy
 msgid ""
 "<p><b>Developer Bazaar Access via SSH</b></p><p>Only project developers can "
 "access the Bazaar branches tree via this method. SSH must be installed on "
 "your client machine. Substitute <i>developername</i> with the proper values. "
 "Enter your site password when prompted.</p>"
-msgstr ""
-"<p><b>Accès Subversion via SSH pour les développeurs</b></p><p>Cette méthode "
-"d'accès au dépôt est réservée aux développeurs du projet. SSH doit être "
-"installé sur votre poste client. La valeur <i>nom-du-développeur</i> devra "
-"être remplacée par votre identifiant de connexion. Vous pourrez avoir besoin "
-"de taper votre mot de passe.</p>"
+msgstr "<p><b>Accès Bazaar via SSH pour les développeurs</b></p><p>Cette méthode d'accès au dépôt est réservée aux développeurs du projet. SSH doit être installé sur votre poste client. La valeur <i>nom-du-développeur</i> devra être remplacée par votre identifiant de connexion. Vous pourrez avoir besoin de taper votre mot de passe.</p>"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:117
 #: plugins/scmcvs/common/CVSPlugin.class.php:132
@@ -2526,9 +2513,8 @@ msgid "developername"
 msgstr "nom-du-développeur"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:125
-#, fuzzy
 msgid "Download The Nightly Bazaar Tree Snapshot"
-msgstr "Télécharger une l'archive quotidienne du dépôt CVS"
+msgstr "Télécharger une archive quotidienne de l'arbre Bazaar"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:134
 #: plugins/scmcvs/common/CVSPlugin.class.php:146
@@ -2537,9 +2523,8 @@ msgid "Repository History"
 msgstr "Historique du dépôt"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:135
-#, fuzzy
 msgid "Not implemented yet"
-msgstr "En cours de création"
+msgstr "Pas encore implémenté"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:181
 #: plugins/scmcvs/common/CVSPlugin.class.php:198
@@ -2581,9 +2566,8 @@ msgid "Unknown"
 msgstr "Autres"
 
 #: plugins/scmccase/common/CCasePlugin.class.php:95
-#, fuzzy
 msgid "ClearCase Access"
-msgstr "Accès à Clear Case"
+msgstr "Accès à ClearCase"
 
 #: plugins/scmccase/common/CCasePlugin.class.php:98
 #, php-format
@@ -2598,20 +2582,15 @@ msgid "History"
 msgstr "Historique"
 
 #: plugins/scmccase/common/CCasePlugin.class.php:117
-#, fuzzy
 msgid "Browse the ClearCase tree"
-msgstr "Naviguer dans le dépôt Clear Case"
+msgstr "Naviguer dans le dépôt ClearCase"
 
 #: plugins/scmccase/common/CCasePlugin.class.php:117
-#, fuzzy
 msgid ""
 "Browsing the ClearCase tree gives you a great view into the current status "
 "of this project's code. You may also view the complete histories of any file "
 "in the repository."
-msgstr ""
-"Parcourir le dépôt CVS permet de naviguer dans l'état actuel du code de ce "
-"projet, mais également d'avoir accès à l'historique complet de chaque "
-"fichier présent dans le dépôt."
+msgstr "Parcourir le dépôt ClearCase permet de naviguer dans l'état actuel du code de ce projet, mais également d'avoir accès à l'historique complet de chaque fichier présent dans le dépôt."
 
 #: plugins/scmccase/common/CCasePlugin.class.php:122
 #, php-format
@@ -2619,9 +2598,8 @@ msgid "<a href=\"%1$s\">Browse</a> CCase tree"
 msgstr ""
 
 #: plugins/scmccase/common/CCasePlugin.class.php:147
-#, fuzzy
 msgid "ClearCase server"
-msgstr "Accès à Clear Case"
+msgstr "Serveur ClearCase"
 
 #: plugins/scmccase/common/CCasePlugin.class.php:168
 #, php-format
@@ -2953,7 +2931,7 @@ msgstr "Mise à jour du mot de passe"
 msgid ""
 "The following key has a wrong format: |%s|.  Please, correct it by going "
 "back to the previous page."
-msgstr ""
+msgstr "La clef suivante a un format invalide : |%s|.  Veuillez retourner la corriger sur la page précédente."
 
 #: www/account/editsshkeys.php:77
 msgid ""
@@ -5672,14 +5650,12 @@ msgid "No forum chosen"
 msgstr "Aucun forum choisi"
 
 #: www/forum/include/AttachManager.class.php:144
-#, fuzzy
 msgid "Could Not Get Forum Object"
-msgstr "Erreur lors de la création de l'objet ProjectGroup"
+msgstr "Erreur lors de la création de l'objet Forum"
 
 #: www/forum/include/AttachManager.class.php:157
-#, fuzzy
 msgid "No attachment found"
-msgstr "Aucun résultat trouvé"
+msgstr "Aucune pièce jointe trouvée"
 
 #: www/forum/include/AttachManager.class.php:175
 #: www/forum/include/AttachManager.class.php:261
@@ -7399,98 +7375,93 @@ msgid ""
 msgstr ""
 
 #: www/index_std.php:14
-#, fuzzy
 msgid "Additional Features:"
-msgstr "Services actifs&nbsp;"
+msgstr "Fonctionnalités supplémentaires :"
 
 #: www/index_std.php:16
-#, fuzzy
 msgid "Manage File Releases."
-msgstr "Sorties récentes"
+msgstr "Gestion des publications de fichiers."
 
 #: www/index_std.php:17
-#, fuzzy
 msgid "Document Management."
-msgstr "Gestionnaire de documentation"
+msgstr "Gestion de documentations."
 
 #: www/index_std.php:18
 msgid "News announcements."
-msgstr ""
+msgstr "Annonces et nouvelles."
 
 #: www/index_std.php:19
 msgid "Surveys for users and admins."
-msgstr ""
+msgstr "Sondages pour les utilisateurs et les administrateurs."
 
 #: www/index_std.php:20
 msgid ""
 "Issue tracking with \"unlimited\" numbers of categories, text fields, etc."
-msgstr ""
+msgstr "Suivi de problèmes sans limitation sur le nombre de catégories, de champs texte, etc."
 
 #: www/index_std.php:21
-#, fuzzy
 msgid "Task management."
-msgstr "Administration du gestionnaire de tâches"
+msgstr "Gestion de tâches."
 
 #: www/index_std.php:22
 msgid "Wiki (using MediaWiki or phpWiki)."
-msgstr ""
+msgstr "Wiki (avec MediaWiki ou phpWiki)."
 
 #: www/index_std.php:23
 msgid "A powerful plugin system to add new features."
-msgstr ""
+msgstr "Un système de greffons pour ajouter des fonctionnalités."
 
 #: www/index_std.php:25
 msgid "What's new in FusionForge 4.7"
-msgstr ""
+msgstr "Les nouveautés de FusionForge 4.7"
 
 #: www/index_std.php:28
 msgid "A new name to avoid confusion with proprietary versions of GForge."
-msgstr ""
+msgstr "Un nouveau nom, pour éviter la confusion avec les versions propriétaires de GForge."
 
 #: www/index_std.php:29
 msgid "Support for PHP5."
-msgstr ""
+msgstr "Support de PHP5."
 
 #: www/index_std.php:30
 msgid "Support for PostgreSQL 8.x."
-msgstr ""
+msgstr "Support de PostgreSQL 8.x."
 
 #: www/index_std.php:31
 msgid "Translations are now managed by gettext."
-msgstr ""
+msgstr "Gestion des traductions avec gettext."
 
 #: www/index_std.php:32
 msgid "Support for several configurations running on the same code."
-msgstr ""
+msgstr "Support de plusieurs instances sur la même base de code."
 
 #: www/index_std.php:33
 msgid "Improved security, no need for PHP register_globals."
-msgstr ""
+msgstr "Sécurité améliorée, plus besoin de register_globals de PHP."
 
 #: www/index_std.php:34
 msgid "Available as full install CD."
-msgstr ""
+msgstr "Disponible sous forme d'un CD d'installation."
 
 #: www/index_std.php:35
 msgid "New wiki plugins (using MediaWiki or phpWiki)."
-msgstr ""
+msgstr "Nouveaux greffons de wiki (avec MediaWiki ou phpWiki)."
 
 #: www/index_std.php:36
 msgid "New online_help plugin."
-msgstr ""
+msgstr "Nouveau greffon d'aide en ligne."
 
 #: www/index_std.php:37
 msgid "New phpwebcalendar plugin."
-msgstr ""
+msgstr "Nouveau greffon phpwebcalendar."
 
 #: www/index_std.php:38
-#, fuzzy
 msgid "New project hierarchy plugin."
-msgstr "Voir la hiérarchie de projets personnelle"
+msgstr "Nouveau greffon de hiérarchie de projets."
 
 #: www/index_std.php:53
 msgid "<a href=\"http://fusionforge.fusionforge.org/\">FusionForge archive</a>"
-msgstr ""
+msgstr "<a href=\"http://fusionforge.fusionforge.org/\">archive de FusionForge</a>"
 
 #: www/index_std.php:55
 msgid "<a href=\"http://postgresql.org/\">PostgreSQL</a>"
@@ -7508,36 +7479,31 @@ msgstr ""
 msgid ""
 "<a href=\"http://www.gnu.org/software/mailman/\">Mailman</a> <i>(optional)</"
 "i>"
-msgstr ""
+msgstr "<a href=\"http://www.gnu.org/software/mailman/\">Mailman</a> <i>(optionnel)</i>"
 
 #: www/index_std.php:62
-#, fuzzy
 msgid "Mailing lists"
-msgstr "Liste de diffusion"
+msgstr "Listes de diffusion"
 
 #: www/index_std.php:63
 msgid "Online help via IRC"
-msgstr ""
+msgstr "Aide en ligne par IRC"
 
 #: www/index_std.php:65
-#, fuzzy
 msgid "Contribute!"
-msgstr "Attribut"
+msgstr "Contribuer !"
 
 #: www/index_std.php:66
-#, fuzzy
 msgid "FusionForge Project Page"
-msgstr "Les projets les plus visités"
+msgstr "Page du projet de FusionForge"
 
 #: www/index_std.php:67
-#, fuzzy
 msgid "Bug Tracker"
-msgstr "Outil de suivi"
+msgstr "Suivi des bugs"
 
 #: www/index_std.php:68
-#, fuzzy
 msgid "Patch Submissions"
-msgstr "Soumission de nouveaux documents&nbsp;"
+msgstr "Soumission de correctifs"
 
 #: www/index_std.php:70
 msgid ""
@@ -9404,7 +9370,7 @@ msgstr "Lien vers la page d'accueil"
 
 #: www/project/admin/editgroupinfo.php:139
 msgid "Visibility: "
-msgstr ""
+msgstr "Visibilité :"
 
 #: www/project/admin/editgroupinfo.php:159
 msgid "Active Features"
@@ -9581,9 +9547,9 @@ msgstr ""
 "apportés à votre projet."
 
 #: www/project/admin/index.php:68
-#, fuzzy, php-format
+#, php-format
 msgid "Failed to find user %s"
-msgstr "Echec lors de l'ajout de la compétence"
+msgstr "Echec lors de la recherche de l'utilisateur %s"
 
 #: www/project/admin/index.php:75 www/project/admin/index.php:143
 msgid "User Added Successfully"
@@ -9803,14 +9769,12 @@ msgstr ""
 "documentations du projet.</dd></dl>"
 
 #: www/project/admin/roleedit.php:58 www/project/admin/roleedit.php:82
-#, fuzzy
 msgid "Successfully Updated Role"
-msgstr "Quota mis à jour"
+msgstr "Rôle mis à jour"
 
 #: www/project/admin/roleedit.php:76
-#, fuzzy
 msgid "Successfully Created New Role"
-msgstr "Élément créé avec succès"
+msgstr "Nouveau rôle créé avec succès"
 
 #: www/project/admin/roleedit.php:101
 msgid ""
@@ -12863,47 +12827,3 @@ msgstr[1] ""
 #: www/users:33
 msgid "No User Name Provided"
 msgstr "Aucun nom d'utilisateur n'a été fourni"
-
-#~ msgid "Invalid full name"
-#~ msgstr "Nom complet invalide"
-
-#~ msgid "Invalid Group Name"
-#~ msgstr "Nom de groupe invalide"
-
-#~ msgid "Logout"
-#~ msgstr "Se déconnecter"
-
-#~ msgid ""
-#~ "<p>%1$s is a <b>free service to <a href=\"http://www.opensource.org/"
-#~ "\">Open Source</a> developers</b> offering easy access to the best in "
-#~ "CVS, mailing lists, bug tracking, message boards/forums, task management, "
-#~ "site hosting, permanent file archival, full backups, and total web-based "
-#~ "administration.</p><p><b>Site Feedback and Participation</b></p><p>In "
-#~ "order to get the most out of %1$s, you'll need to <a href=\"%2$s"
-#~ "\">register as a site user</a>. This will allow you to participate fully "
-#~ "in all we have to offer. You may of course browse the site without "
-#~ "registering, but will not have access to participate fully.</p><p><b>Set "
-#~ "Up Your Own Project</b></p><p><a href=\"%2$s\">Register as a site user</"
-#~ "a>, then <a href=\"%3$s\">Login</a> and finally, <a href=\"%4$s"
-#~ "\">Register Your Project</a>.</p><p>Thanks... and enjoy the site.</p>"
-#~ msgstr ""
-#~ "<p>%1$s est un <b>service gratuit pour les développeurs <a\n"
-#~ "href=\"http://www.opensource.org/\">Open Source</a></b>, qui propose un\n"
-#~ "accès facilité à divers outils comme des outils de suivi de sources,\n"
-#~ "de listes de diffusion, de suivi de bugs, de forums, de gestion de\n"
-#~ "tâches, d'hébergement de sites, le tout avec une administration\n"
-#~ "entièrement par le web.</p><p><b>Participation au site et\n"
-#~ "retours</b></p><p>Pour tirer le meilleur parti de %1$s, il vous sera\n"
-#~ "nécessaire de vous <a href=\"%2$s\">enregistrer comme\n"
-#~ "un utilisateur du site</a>. Ceci vous permettra de participer\n"
-#~ "pleinement à tout ce que ce site peut vous offrir.  Vous pouvez bien\n"
-#~ "entendu naviguer sur le site sans vous enregistrer au préalable, mais\n"
-#~ "certaines fonctions seront désactivées.</p><p><b>Mettre en place votre\n"
-#~ "propre projet</b></p><p><a\n"
-#~ "href=\"%2$s\">Enregistrez-vous</a>, puis <a\n"
-#~ "href=\"%3$s\">connectez-vous</a> et <a\n"
-#~ "href=\"%4$s\">enregistrez votre projet</a>.</p><p>Merci... et\n"
-#~ "profitez du site !</p>"
-
-#~ msgid "GForge"
-#~ msgstr "GForge"
