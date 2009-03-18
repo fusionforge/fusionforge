@@ -532,7 +532,6 @@ class Document extends Error {
 			return false;
 		}
 		
-		$sql = ;
 		$result = db_query_params ('DELETE FROM doc_data WHERE docid=$1',
 					   array ($this->getID())) ;
 		if (!$result) {
