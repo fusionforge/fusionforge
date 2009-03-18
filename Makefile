@@ -10,5 +10,8 @@ switch:
 	@echo "=========================================================================="
 	@make -f Makefile.$(DIST)
 
+check:
+	cd tests ; php AllTests.php
+
 %:
 	@make -f Makefile.$(DIST) $@
