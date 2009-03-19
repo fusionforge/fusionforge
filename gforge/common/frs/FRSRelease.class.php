@@ -424,7 +424,7 @@ notified in the future, please login to %5$s and click this link:
 		$oldfilename = $this->getFileName();
 		if(!$this->fetchData($this->getID())){
 			db_rollback();
-			$this->setError('FRSRelease::update() Error Updating Release: Couldn´t fetch data');
+			$this->setError("FRSRelease::update() Error Updating Release: Couldn't fetch data");
 			return false;
 		}
 		$newfilename = $this->getFileName();
@@ -439,7 +439,7 @@ notified in the future, please login to %5$s and click this link:
 			} else {
 				if(!rename($olddirlocation,$newdirlocation)) {
 					db_rollback();
-					$this->setError('FRSRelease::update() Error Updating Release: Couldn´t rename dir');
+					$this->setError("FRSRelease::update() Error Updating Release: Couldn't rename dir");
 					return false;
 				}
 			}

@@ -32,13 +32,13 @@ Class TextSanitizer extends Error {
 	 *	@return  string		The output string
 	 */
 	function convertExtendedCharsForEmail($text) {
-		$text = str_replace("&acute;","'",$text); //it´s better to see that char in the email than the html entity
+		$text = str_replace("&acute;","'",$text); // it's better to see that char in the email than the html entity
 		$text = str_replace("&amp;","&",$text);
 		$text = str_replace("&quot;",'"',$text);
 		$text = str_replace("&nbsp;",' ',$text);
 		$text = str_replace("&lt;",'<',$text);
 		$text = str_replace("&gt;",'>',$text);
-		$text = str_replace("&deg;",'°',$text);
+		$text = str_replace("&deg;",'Â°',$text);
 		$text = str_replace("&lt;br&gt;","\n",$text);
 		$text = str_replace("&lt;br /&gt;","\n",$text);
 		return $text;

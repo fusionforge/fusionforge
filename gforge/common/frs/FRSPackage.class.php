@@ -175,7 +175,7 @@ class FRSPackage extends Error {
 
 			$newdirlocation = $GLOBALS['sys_upload_dir'].'/'.$this->Group->getUnixName().'/'.$this->getFileName();
 			exec("/bin/mkdir $newdirlocation",$out);
-			// this 2 should normally silently fail (because it´s called with the apache user) but if it´s root calling the create() method, then the owner and group for the directory should be changed
+			// this 2 should normally silently fail (because it's called with the apache user) but if it's root calling the create() method, then the owner and group for the directory should be changed
 			@chown($newdirlocation,$sys_apache_user);
 			@chgrp($newdirlocation,$sys_apache_group);
 			db_commit();
@@ -397,7 +397,7 @@ class FRSPackage extends Error {
 		$olddirname = $this->getFileName();
 		if(!$this->fetchData($this->getID())){
 			db_rollback();
-			$this->setError('FRSPackage::update() Error Updating Package: Couldn´t fetch data');
+			$this->setError("FRSPackage::update() Error Updating Package: Couldn't fetch data");
 			return false;
 		}
 		$newdirname = $this->getFileName();
@@ -412,7 +412,7 @@ class FRSPackage extends Error {
 			} else {
 				if(!@rename($olddirlocation,$newdirlocation)) {
 					db_rollback();
-					$this->setError('FRSPackage::update() Error Updating Package: Couldn´t rename dir');
+					$this->setError("FRSPackage::update() Error Updating Package: Couldn't rename dir");
 					return false;
 				}
 			}

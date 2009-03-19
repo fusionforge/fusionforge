@@ -18,7 +18,7 @@ class HTMLSupport extends Error {
 		$allowed = array ("&lt;b&gt;" => "<b>","&lt;/b&gt;" => "</b>","&lt;i&gt;" => "<i>","&lt;/i&gt;" => "</i>","&lt;u&gt;" => "<u>","&lt;/u&gt;" => "</u>",
 							"&lt;ul&gt;" => "<ul>","&lt;/ul&gt;" => "</ul>","&lt;li&gt;" => "<li>","&lt;/li&gt;" => "</li>",
 							"&lt;ol&gt;" => "<ol>","&lt;/ol&gt;" => "</ol>");
-		//for img tag it isn´t as simple as a conversion table
+		//for img tag it isn't as simple as a conversion table
 		preg_match_all('/&lt;img src=.*&gt;/', $text, $matches);
 		foreach ($matches[0] as $one) {
 			$one = html_entity_decode($one,ENT_QUOTES);
@@ -44,8 +44,8 @@ class HTMLSupport extends Error {
 		$trans_tbl[chr(146)] = '\'';
 		$trans_tbl[chr(147)] = '&';
 		$trans_tbl[chr(148)] = '&';
-		// è :
-		$trans_tbl[chr(142)] = 'è';
+		// Ã¨ :
+		$trans_tbl[chr(142)] = 'Ã¨';
 
 		$text = strtr ($text, $trans_tbl);	
 		//re-replace the allowed tags
