@@ -30,7 +30,7 @@
  *
  */
  
-//require ('local.inc'); we don´t need this file. also, in some installations this file cannot be accessed by the caller (perms problem)
+//require ('local.inc'); we don't need this file. also, in some installations this file cannot be accessed by the caller (perms problem)
 require $gfconfig.'plugins/cvstracker/config.php';
 require $gfplugins.'cvstracker/common/Snoopy.class.php';
 

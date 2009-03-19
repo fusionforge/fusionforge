@@ -26,7 +26,7 @@ class HelloWorldPlugin extends Plugin {
 		$this->Plugin() ;
 		$this->name = "helloworld" ;
 		$this->text = "HelloWorld!" ; // To show in the tabs, use...
-		$this->hooks[] = "user_personal_links";//to make a link to the user´s personal part of the plugin
+		$this->hooks[] = "user_personal_links";//to make a link to the user's personal part of the plugin
 		$this->hooks[] = "usermenu" ;
 		$this->hooks[] = "groupmenu" ;	// To put into the project tabs
 		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
@@ -41,7 +41,7 @@ class HelloWorldPlugin extends Plugin {
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
 			if ($G_SESSION->usesPlugin("helloworld")) {
-				$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we´re calling is the user one
+				$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we're calling is the user one
 				echo ' | ' . $HTML->PrintSubMenu (array ($text),
 						  array ('/plugins/helloworld/index.php' . $param ));				
 			}
@@ -59,7 +59,7 @@ class HelloWorldPlugin extends Plugin {
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
-				$params['DIRS'][]='/plugins/helloworld/index.php?type=group&id=' . $group_id . "&pluginname=" . $this->name; // we indicate the part we´re calling is the project one
+				$params['DIRS'][]='/plugins/helloworld/index.php?type=group&id=' . $group_id . "&pluginname=" . $this->name; // we indicate the part we're calling is the project one
 			} else {
 				$params['TITLES'][]=$this->text." is [Off]";
 				$params['DIRS'][]='';
@@ -127,7 +127,7 @@ class HelloWorldPlugin extends Plugin {
 			echo "</td>";
 			echo "</tr>";
 		} elseif ($hookname == "user_personal_links") {
-			// this displays the link in the user´s profile page to it´s personal HelloWorld (if you want other sto access it, youll have to change the permissions in the index.php
+			// this displays the link in the user's profile page to it's personal HelloWorld (if you want other sto access it, youll have to change the permissions in the index.php
 			$userid = $params['user_id'];
 			$user = user_get_object($userid);
 			$text = $params['text'];
@@ -140,7 +140,7 @@ class HelloWorldPlugin extends Plugin {
 				echo '</p>';
 			}
 		} elseif ($hookname == "project_admin_plugins") {
-			// this displays the link in the project admin options page to it´s  HelloWorld administration
+			// this displays the link in the project admin options page to it's  HelloWorld administration
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {

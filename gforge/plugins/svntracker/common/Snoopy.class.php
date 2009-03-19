@@ -685,13 +685,13 @@ class Snoopy
 							chr(176),
 							chr(39),
 							chr(128),
-							"ä",
-							"ö",
-							"ü",
-							"Ä",
-							"Ö",
-							"Ü",
-							"ß",
+							"Ã¤",
+							"Ã¶",
+							"Ã¼",
+							"Ã„",
+							"Ã–",
+							"Ãœ",
+							"ÃŸ",
 						);
 					
 		$text = preg_replace($search,$replace,$document);
@@ -956,7 +956,7 @@ class Snoopy
 			$cmdline_params .= " -m ".$this->read_timeout;
 		
 		$headerfile = uniqid(time());
-// TODO -> WE SHOULD MODIFY THE -K PARAMETER. THIS IS ONLY FOR TEST PURPOSES, AS WE DON´T HAVE A CERTIFICATE
+// TODO -> WE SHOULD MODIFY THE -K PARAMETER. THIS IS ONLY FOR TEST PURPOSES, AS WE DON'T HAVE A CERTIFICATE
 		@exec($this->curl_path." -D \"/tmp/$headerfile\"".$cmdline_params." -k ".$URI,$results,$return);
 		
 		if($return)

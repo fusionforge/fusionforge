@@ -137,7 +137,7 @@ if ($svn_tracker_debug) {
 $changed = explode("\n", $changed);
 
 foreach ($changed as $onefile) {
-	//we must see when it was last changed, and that´s previous revision
+	//we must see when it was last changed, and that's previous revision
 	$exit=0;
 	$actrev = $revision - 1;
 	if ($revision==0) {
