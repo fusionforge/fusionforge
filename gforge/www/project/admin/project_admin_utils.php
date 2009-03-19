@@ -74,7 +74,9 @@ function project_admin_header($params) {
 	if($GLOBALS['sys_use_project_database']) {
 		$labels[] = _('Database Admin');
 	}
-	$labels[] = _('Stats');
+	if ($project->usesStats()) {
+		$labels[] = _('Stats');
+	}
 	plugin_hook("quota_label_project_admin");
 	
 	//$links[] = '/project/admin/?group_id='.$group_id;

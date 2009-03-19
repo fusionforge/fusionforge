@@ -169,6 +169,7 @@ function show_highest_ranked_projects() {
 		"AND groups.is_public=1 ".
 		"AND groups.type_id=1  ".
 		"AND groups.status != 'D'  ".
+		"AND groups.use_stats=1  ".
 		"ORDER BY ranking ASC";
 	$result=db_query($sql,20);
 	if (!$result || db_numrows($result) < 1) {

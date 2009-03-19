@@ -221,7 +221,7 @@ function trove_catselectfull($node,$selected,$name) {
  * @param		bool	Whether filters have already been applied
  * @param		bool	Whether to print category links
  */
-function trove_getcatlisting($group_id,$a_filter,$a_cats) {
+function trove_getcatlisting($group_id,$a_filter,$a_cats,$a_complete) {
 	global $discrim_url;
 	global $expl_discrim;
 	global $form_cat;
@@ -258,7 +258,10 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats) {
 			if (!$isfirstdiscrim) {
 				$return .= "</li>\n";
 			}
-			$return .= ('<li> '.$folders[0].': ');
+			$return .= '<li>';
+			if ($a_complete==0) {
+				$return .= $folders[0].' : ';
+			}
 		}
 
 		// filter links, to add discriminators
@@ -271,16 +274,33 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats) {
 		}
 		// then print the stuff
 		if (array_key_exists($folders_ids[0], $proj_discrim_used)) {
-			$return .= ', ';
+			$return .= '</li><li>';
 		}
 
-		if ($a_cats) {
-			$return .= '<a href="'
-			.util_make_url ('/softwaremap/trove_list.php?form_cat='.$folders_ids[$folders_len-1].$discrim_url).'">';
-		}
-		$return .= ($folders[$folders_len-1]);
-		if ($a_cats) {
-			$return .= '</a>';
+		if ($a_complete) {
+			for ($i=0;$i<$folders_len;$i++) {
+				if ($a_cats) {
+					$return .= '<a href="'.util_make_url ('/softwaremap/trove_list.php?form_cat='.$folders_ids[$i].$discrim_url).'">';
+				}
+				$return .= ($folders[$i]);
+				if ($a_cats) {
+					$return .= '</a>';
+				}
+				if ($i!=$folders_len-1) {
+					$return .= " : ";
+				}
+			}
+		} else {
+			if ($a_cats) {
+				$return .= '<a href="'.util_make_url ('/softwaremap/trove_list.php?form_cat='.$folders_ids[$folders_len-1].$discrim_url).'">';
+			}
+			$return .= ($folders[$folders_len-1]);
+			if ($a_cats) {
+				$return .= '</a>';
+			}
+			if ($i!=$folders_len-1) {
+				$return .= " : ";
+			}
 		}
 
 		if ($a_filter) {
@@ -302,58 +322,6 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats) {
 	if ($need_close_ul_tag)
 	{
 		$return .= '</li></ul>';
-	}
-	return $return;
-}
-
-/**
- * trove_getcatcompletelisting() - Gets complete discriminator listing for a group
- *
- * @param		int		The group ID
- */
-function trove_getcatcompletelisting($group_id) {
-	global $discrim_url;
-	global $form_cat;
-	global $Language;
-
-	$res_trovecat = db_query("
-		SELECT trove_cat.fullpath AS fullpath,
-			trove_cat.fullpath_ids AS fullpath_ids,
-			trove_cat.trove_cat_id AS trove_cat_id
-		FROM trove_cat,trove_group_link
-		WHERE trove_cat.trove_cat_id=trove_group_link.trove_cat_id
-		AND trove_group_link.group_id='$group_id'
-		ORDER BY trove_cat.fullpath");
-
-	$return = '';
-	if (db_numrows($res_trovecat) < 1) {
-		$return .= _('This project has not yet categorized itself in the').' '
-			.util_make_link ('/softwaremap/trove_list.php',_('Trove Software Map'))
-			.'<p />';
-	} else {
-		$return .= '<ul>';
-		$need_close_ul_tag = 1;
-	}
-
-	while ($row_trovecat = db_fetch_array($res_trovecat)) {
-		$return .= '<li>';
-		$folders = explode(" :: ",$row_trovecat['fullpath']);
-		$folders_ids = explode(" :: ",$row_trovecat['fullpath_ids']);
-		$folders_len = count($folders);
-		// if first in discrim print root category
-		for ($i=0;$i<$folders_len;$i++)
-		{
-			$return .= '<a href="/softwaremap/trove_list.php?form_cat='.$folders_ids[$i].$discrim_url.'">'.$folders[$i].'</a>';
-			if ($i != $folders_len-1)
-			{
-				$return .= " : ";
-			}
-		}
-		$return .= '</li>';
-	}
-	if (isset($need_close_ul_tag) && $need_close_ul_tag)
-	{
-		$return .= '</ul>';
 	}
 	return $return;
 }

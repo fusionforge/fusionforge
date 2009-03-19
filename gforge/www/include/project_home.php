@@ -53,7 +53,7 @@ if ($project->getDescription()) {
 
 if($GLOBALS['sys_use_trove']) {
 	print "<br />\n";
-	print stripslashes(trove_getcatcompletelisting($group_id));
+	print stripslashes(trove_getcatlisting($group_id,0,1,1));
 }
 
 // registration date

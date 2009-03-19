@@ -294,14 +294,17 @@ for ($i_proj=1;$i_proj<=$querytotalcount;$i_proj++) {
 		// extra description
 		print '</span></td></tr><tr valign="top"><td>';
 		// list all trove categories
-		print trove_getcatlisting($row_grp['group_id'],1,0);
-
-		print '</span></td>'."\n".'<td style="text-align:right">'; // now the right side of the display
-		print 'Activity Percentile: <strong>'. number_format($row_grp['percentile'],2) .'</strong>';
-		print '<br />Activity Ranking: <strong>'. number_format($row_grp['ranking'],2) .'</strong>';
-		print '<br />Register Date: <strong>'.date(_('Y-m-d H:i'),$row_grp['register_time']).'</strong>';
-		print '</span></td></tr>';
-                print '</table>';
+		print trove_getcatlisting($row_grp['group_id'],1,0,1);
+		print '</span></td>'."\n";
+		print '<td style="text-align:right">'; // now the right side of the display
+		if (group_get_object($row_grp['group_id'])->usesStats()) {
+			print _('Activity Percentile:&nbsp;').'<strong>'. number_format($row_grp['percentile'],2) .'</strong>';
+			print '<br />'._('Activity Ranking:&nbsp;').' <strong>'. number_format($row_grp['ranking'],2) .'</strong>';
+		}
+		print '<br />'._('Registered:&nbsp;').' <strong>'.date(_('Y-m-d H:i'),$row_grp['register_time']).'</strong>';
+		print '</span></td>';
+		print '</tr>';
+		print '</table>';
 		print '<hr />';
 	} // end if for row and range chacking
 }
