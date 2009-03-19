@@ -16,7 +16,6 @@ echo "<h1>".$title."</h1>";
 		} else {
 			?>
 			<p><?php echo _('Creating useful generic messages can save you a lot of time when handling common artifact requests.') ?></p>
-			<p>
 			<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
 			<input type="hidden" name="update_canned" value="y" />
 			<input type="hidden" name="id" value="<?php echo $acr->getID(); ?>" />
@@ -27,7 +26,7 @@ echo "<h1>".$title."</h1>";
 			<textarea name="body" rows="30" cols="65" wrap="hard"><?php echo $acr->getBody(); ?></textarea></p>
 			<p>
 			<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
-			</form></p>
+			</form>
 			<?php
 		}
 		$ath->footer(array());

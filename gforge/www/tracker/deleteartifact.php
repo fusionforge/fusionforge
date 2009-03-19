@@ -14,7 +14,7 @@ $ath->header(array ('title'=>_('Delete artifact').': '.$ah->getID(). ' - ' . $ah
 ?>
 
 <form action="<?php echo getStringFromServer('PHP_SELF')."?aid=$aid&amp;group_id=$group_id"; ?>" method="post">
-<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
+<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
 <input type="hidden" name="func" value="postdeleteartifact" />
 <input type="hidden" name="atid" value="<?php echo $atid; ?>" />
 
@@ -25,7 +25,7 @@ $ath->header(array ('title'=>_('Delete artifact').': '.$ah->getID(). ' - ' . $ah
 			<h3>&quot;<?php echo $ah->getSummary(); ?>&quot;</h3></td>
 	</tr>
 	<tr align="center">
-		<td style="text-align:center"><input type="checkbox" value="1" name="confirm_delete"> <?php echo _('Yes, I want to delete this artifact'); ?></td>
+		<td align="center"><input type="checkbox" value="1" name="confirm_delete" /> <?php echo _('Yes, I want to delete this artifact'); ?></td>
 	</tr>
 	<tr>
 		<td style="text-align:center"><input type="submit" value="<?php echo _('Submit'); ?>" name="submit" /></td>

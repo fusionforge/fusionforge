@@ -50,7 +50,7 @@ echo "<h1>".$title."</h1>";
 		<textarea name="body" rows="30" cols="65" wrap="hard"></textarea></p>
 		<p>
 		<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
-		</form></p>
+		</form>
 		<?php
 
 		$ath->footer(array());

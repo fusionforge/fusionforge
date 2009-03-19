@@ -26,8 +26,7 @@
 				<h2>'.$title.'</h2>';
 
 			?>
-			<p>
-			<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
+			<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
 			<input type="hidden" name="update_opt" value="y" />
 			<input type="hidden" name="id" value="<?php echo $ao->getID(); ?>" />
 			<input type="hidden" name="boxid" value="<?php echo $boxid; ?>" />
@@ -48,7 +47,7 @@
 				</span></p>
 			<p>
 			<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
-			</form></p>
+			</form>
 			<?php
 			$ath->footer(array());
 		}

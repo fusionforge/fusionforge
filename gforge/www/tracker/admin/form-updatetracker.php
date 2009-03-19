@@ -5,29 +5,30 @@
 $ath->adminHeader(array ('title'=>sprintf(_('Modify A Group In %s'),$ath->getName())));
 
 		?>
+		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
 		<p>
-		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
 		<input type="hidden" name="update_type" value="y" />
-		<p>
 		<?php echo _('<strong>Name:</strong> (examples: meeting minutes, test results, RFP Docs)') ?><br />
 		<?php if ($ath->getDataType()) {
 			echo $ath->getName();
 		} else { 
 			?>
-			<input type="text" name="name" value="<?php echo $ath->getName(); ?>" /></p>
+			<input type="text" name="name" value="<?php echo $ath->getName(); ?>" />
 			<?php 
 		} 
 		?>
+		</p>
 		<p>
 		<strong><?php echo _('Description') ?>:</strong><br />
 		<?php if ($ath->getDataType()) {
 			echo $ath->getDescription();
 		} else {
 			?>
-			<input type="text" name="description" value="<?php echo $ath->getDescription(); ?>" size="50" /></p>
+			<input type="text" name="description" value="<?php echo $ath->getDescription(); ?>" size="50" />
 			<?php 
 		} 
 		?>
+		</p>
 		<p>
 		<strong><?php echo _('Send email on new submission to address') ?>:</strong><br />
 		<input type="text" name="email_address" value="<?php echo $ath->getEmailAddress(); ?>" /></p>
@@ -47,7 +48,7 @@ $ath->adminHeader(array ('title'=>sprintf(_('Modify A Group In %s'),$ath->getNam
 		<textarea name="browse_instructions" rows="10" cols="55" wrap="hard"><?php echo $ath->getBrowseInstructions(); ?></textarea></p>
 		<p>
 		<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
-		</form></p>
+		</form>
 		<?php
 
 		$ath->footer(array());
