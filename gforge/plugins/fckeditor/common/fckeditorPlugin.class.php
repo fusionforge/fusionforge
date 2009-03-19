@@ -2,7 +2,7 @@
 /**
  * GForge Plugin FCKeditor Plugin Class
  *
- * Copyright 2005 (c) Daniel A. Pérez <daniel@gforgegroup.com> , <danielperez.arg@gmail.com>
+ * Copyright 2005 (c) Daniel A. PÃ©rez <daniel@gforgegroup.com> , <danielperez.arg@gmail.com>
  *
  * This file is part of GForge-plugin-fckeditor
  *

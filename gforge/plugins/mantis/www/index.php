@@ -56,7 +56,7 @@ function helloworld_User_Header($params) {
 			if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the HelloWorld plugin active
 				exit_error("Error", "First activate the $pluginname plugin through the Project's Admin Interface");			
 			}
-			$userperm = $group->getPermission($user);//we¥ll check if the user belongs to the group (optional)
+			$userperm = $group->getPermission($user);//we'll check if the user belongs to the group (optional)
             /**
 			if ( !$userperm->IsMember()) {
 				exit_error("Access Denied", "You are not a member of this project");
@@ -86,7 +86,7 @@ function helloworld_User_Header($params) {
             </form>
             <form>
             <input type="hidden" name="update_user_mantis" value="true">
-            <input type="submit" name="Mettre ‡ jour votre compte Mantis" value="Mettre ‡ jour votre compte Mantis">
+            <input type="submit" name="Mettre √† jour votre compte Mantis" value="Mettre √† jour votre compte Mantis">
             </form>            
             <?php
             if ($_REQUEST["init_user_mantis"]) {
@@ -102,7 +102,7 @@ function helloworld_User_Header($params) {
 			if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the HelloWorld plugin active
 				exit_error("Error", "First activate the $pluginname plugin through the Project's Admin Interface");			
 			}
-			$userperm = $group->getPermission($user);//we¥ll check if the user belongs to the group
+			$userperm = $group->getPermission($user);//we'll check if the user belongs to the group
 			if ( !$userperm->IsMember()) {
 				exit_error("Access Denied", "You are not a member of this project");
 			}
@@ -110,7 +110,7 @@ function helloworld_User_Header($params) {
 			if ( $userperm->isAdmin() ) {
 				helloworld_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));    
 				// DO THE STUFF FOR THE PROJECT ADMINISTRATION PART HERE
-				echo "Nous y voil‡ dans l'administration du connecteur Mantis <font color=\"#ff0000\">ADMINISTRATION</font> <br>";
+				echo "Nous y voil√† dans l'administration du connecteur Mantis <font color=\"#ff0000\">ADMINISTRATION</font> <br>";
 				echo "Le serveur en question est " . $serveur_mantis; // $serveur_mantis comes from the config file in /etc
 			} else {
 				exit_error("Access Denied", "You are not a project Admin");
@@ -150,7 +150,7 @@ function update_mantis_user ($id) {
     $test = mysql_select_db($mantis_db_db,$mycn);
     $test = mysql_query($sql,$mycn);
     if ($test) {
-        echo "Mise ‡ jour dans Mantis BT OK";
+        echo "Mise √† jour dans Mantis BT OK";
     } else {
         echo "Echec d'insertion dans Mantis BT";
     }

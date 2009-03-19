@@ -26,7 +26,7 @@ class webcalendarPlugin extends Plugin {
 		$this->Plugin() ;
 		$this->name = "webcalendar" ;
 		$this->text = "Webcalendar" ; // To show in the tabs, use...
-		$this->hooks[] = "user_personal_links";//to make a link to the user´s personal part of the plugin
+		$this->hooks[] = "user_personal_links";//to make a link to the user's personal part of the plugin
 		$this->hooks[] = "usermenu" ;
 		$this->hooks[] = "groupmenu" ;	// To put into the project tabs
 		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
@@ -58,7 +58,7 @@ class webcalendarPlugin extends Plugin {
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
 			if ($G_SESSION->usesPlugin("webcalendar")) {
-				$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we´re calling is the user one
+				$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we're calling is the user one
 				echo ' | ' . $HTML->PrintSubMenu (array ($text),
 						  array (util_make_url('/plugins/webcalendar/index.php' . $param)));				
 			}
@@ -117,7 +117,7 @@ class webcalendarPlugin extends Plugin {
 			echo "</td>";
 			echo "</tr>";
 		} elseif ($hookname == "user_personal_links") {
-			// this displays the link in the user´s profile page to it´s personal webcalendar (if you want other sto access it, youll have to change the permissions in the index.php
+			// this displays the link in the user's profile page to it's personal webcalendar (if you want other sto access it, youll have to change the permissions in the index.php
 			$userid = $params['user_id'];
 			$user = user_get_object($userid);
 			$text = $params['text'];
@@ -127,7 +127,7 @@ class webcalendarPlugin extends Plugin {
 					'.util_make_link('/plugins/webcalendar/index.php?id=' . $userid . '&type=user&pluginname=' . $this->name,_('View Personal webcalendar')) .'</p>';
 			}
 		} elseif ($hookname == "project_admin_plugins") {
-			// this displays the link in the project admin options page to it´s  webcalendar administration
+			// this displays the link in the project admin options page to it's  webcalendar administration
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);
 			
