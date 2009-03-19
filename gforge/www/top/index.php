@@ -33,17 +33,19 @@ $HTML->header(array('title'=>_('Top Projects')));
 
 <p><?php printf(_('We track many project usage statistics on %1$s, and display here the top ranked projects in several categories.'), $GLOBALS['sys_name']); ?>
 <ul>
-<li><a href="mostactive.php?type=week"><?php echo _('Most Active This Week'); ?></a>
-<li><a href="mostactive.php"><?php echo _('Most Active All Time'); ?></a>
-<br />&nbsp;
-<li><a href="toplist.php?type=downloads"><?php echo _('Top Downloads'); ?></a>
-<br />&nbsp;
-<li><a href="toplist.php?type=pageviews_proj"><?php echo _('Top Project Pageviews'); ?></a> 
-<li><a href="toplist.php?type=forumposts_week"><?php echo _('Top Forum Post Counts'); ?></a>
+<li><a href="mostactive.php?type=week"><?php echo _('Most Active This Week'); ?></a></li>
+<li><a href="mostactive.php"><?php echo _('Most Active All Time'); ?></a></li>
+</ul>
+<ul>
+<li><a href="toplist.php?type=downloads"><?php echo _('Top Downloads'); ?></a></li>
+</ul>
+<ul>
+<li><a href="toplist.php?type=pageviews_proj"><?php echo _('Top Project Pageviews'); ?></a></li> 
+<li><a href="toplist.php?type=forumposts_week"><?php echo _('Top Forum Post Counts'); ?></a></li>
 
 <!--
-<li><a href="toplist.php?type=downloads_week"><?php echo _('Top Downloads (Past 7 Days)'); ?></a>
-<li><a href="topusers.php"><?php echo _('Highest Ranked Users'); ?></a>
+<li><a href="toplist.php?type=downloads_week"><?php echo _('Top Downloads (Past 7 Days)'); ?></a></li>
+<li><a href="topusers.php"><?php echo _('Highest Ranked Users'); ?></a></li>
 -->
 
 </ul>

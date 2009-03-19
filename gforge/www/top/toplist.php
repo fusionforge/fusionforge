@@ -71,8 +71,7 @@ while ($row_top = db_fetch_array($res_top)) {
 		.'</td><td>'.util_make_link_g (strtolower($row_top['unix_group_name']),@$row_top['group_id'],stripslashes($row_top['group_name']))
 		.'</td><td align="right">'.$row_top['items']
 		.'&nbsp;&nbsp;&nbsp;</td>'
-		.'<td align="right">';
-	print '&nbsp;&nbsp;&nbsp;</td></tr>
+		.'</tr>
 ';
 }
 

@@ -283,7 +283,7 @@ if (session_loggedin()) {
 		echo '<h2>'._('Add a new skill').'</h2>';
 		echo _('You can enter new skills you have acquired here. Please enter the start and finish dates as accurately as possible.').'<br />'.
 			 '<span class="required-field">'._('All fields are required!').'</span>';
-	   	echo '<form action="'.getStringFromServer('PHP_SELF').'" METHOD="POST">';
+		echo '<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
 	   	echo' <input type="hidden" name="form_key" value="'.form_generate_key().'">';
 		$cell_data = array();
 		$cell_data[] = array(_('Type'));
@@ -327,7 +327,7 @@ if (session_loggedin()) {
 		
 		echo '<h2>'._('Edit/Delete Your Skills').'</h2>
 		<table border="0" width="100%">';
-		echo '<form action="'.getStringFromServer('PHP_SELF').'" METHOD="POST">';
+		echo '<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
 		displayUserSkills(user_getid(), 1); 
 		echo '</form>';				
 		echo '</table>';
