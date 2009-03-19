@@ -33,10 +33,10 @@ if (getStringFromRequest('showform')) {
 	<body>
 	<h2>XML Parser</h2>
 	<p>
-	<form name="xmlparser" method="POST" action="<?php echo getStringFromServer('PHP_SELF'); ?>">
-	Text: <br>
+	<form name="xmlparser" method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>">
+	Text: <br />
 	<textarea name="document" cols="50" rows="10"></textarea>
-	<br>
+	<br />
 	<input type="hidden" name="parser" value="yes">
 	<input type="submit" value="Parser">
 	</form>

@@ -26,7 +26,7 @@ pm_header(array('title'=>_('Delete a Task'),'group_project_id'=>$group_project_i
 <table border="0" align="center">
 
 	<tr>
-		<td ><span class="veryimportant"><?php echo _('Are you sure you want to delete this task?'); ?></span></h3>
+		<td ><span class="veryimportant"><?php echo _('Are you sure you want to delete this task?'); ?></span>
 			<h3>&quot;<?php echo $pt->getSummary(); ?>&quot;</h3></td>
 	</tr>
 	<tr align="center">

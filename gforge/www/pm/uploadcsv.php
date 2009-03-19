@@ -9,16 +9,18 @@
 pm_header(array('title'=>_('Upload data into the task manager.'),'group_project_id'=>$group_project_id));
 
 ?>
-<?php echo _('This page lets you choose a file, in .csv format, and upload it so it can be inserted in the current subproject.'); ?>
 <p>
+<?php echo _('This page lets you choose a file, in .csv format, and upload it so it can be inserted in the current subproject.'); ?>
+</p>
+
 <form enctype="multipart/form-data" method="post" action="<?php echo getStringFromServer('PHP_SELF')?>?group_project_id=<?php echo $group_project_id ?>&amp;group_id=<?php echo $group_id ?>&amp;func=postuploadcsv">
 <?php echo _('Choose a file in the proper .csv format for uploading.'); ?><br />
 <input type="file" name="userfile"  size="30" />
-<input type="submit" name="submit" value="submit">
-</form></p>
-<p>
+<input type="submit" name="submit" value="submit" />
+</form>
+
 <h2>Record Layout</h2>
-<p>
+
 <table border="1">
 <tr><td><strong>Field Name</strong></td><td><strong>Description</strong></td></tr>
 <tr><td>project_task_id</td><td>this is the ID in gforge database</td></tr>
@@ -56,8 +58,7 @@ external application, such as MS Project. Primarily preserved for sorting purpos
 <tr><td>dependenton5_external_task_id</td><td>repetition of dependenton1</td></tr>
 <tr><td>dependenton5_linktype</td><td>repetition of dependenton1</td></tr>
 </table>
-</p>
-<br />
+<p />
 <?php
 pm_footer(array());
 ?>

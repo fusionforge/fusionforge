@@ -48,9 +48,7 @@ class ProjectTaskHTML extends ProjectTask {
 		$rows=db_numrows($result);
 
 		if ($rows > 0) {
-			echo '
-			<h3>'._('Tasks That Depend on This Task').'</h3>
-			<p>';
+			echo '<h3>'._('Tasks That Depend on This Task').'</h3>';
 
 			$title_arr=array();
 			$title_arr[]=_('Task Id');
@@ -69,8 +67,7 @@ class ProjectTaskHTML extends ProjectTask {
 			echo $GLOBALS['HTML']->listTableBottom();
 
 		} else {
-			echo '
-				<h3>'._('No Tasks are Dependent on This Task').'</h3>';
+			echo '<h3>'._('No Tasks are Dependent on This Task').'</h3>';
 			echo db_error();
 		}
 	}
@@ -88,9 +85,7 @@ class ProjectTaskHTML extends ProjectTask {
 				$is_admin=true;
 			}
 
-			echo '
-			<h3>'._('Related Tracker Items').'</h3>
-			<p>';
+			echo '<h3>'._('Related Tracker Items').'</h3>';
 
 			$title_arr=array();
 			$title_arr[]=_('Task Summary');
@@ -125,9 +120,7 @@ class ProjectTaskHTML extends ProjectTask {
 		$rows=db_numrows($result);
 
 		if ($rows > 0) {
-			echo '
-			<h3>'._('Followups').'</h3>
-			<p>';
+			echo '<h3>'._('Followups').'</h3>';
 
 			$title_arr=array();
 			$title_arr[]=_('Comment');
@@ -140,8 +133,8 @@ class ProjectTaskHTML extends ProjectTask {
 				echo '
 				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 					<td>'. nl2br(db_result($result, $i, 'body')).'</td>
-					<td valign="TOP">'.date(_('Y-m-d H:i'),db_result($result, $i, 'postdate')).'</td>
-					<td valign="TOP">'.db_result($result, $i, 'user_name').'</td></tr>';
+					<td valign="top">'.date(_('Y-m-d H:i'),db_result($result, $i, 'postdate')).'</td>
+					<td valign="top">'.db_result($result, $i, 'user_name').'</td></tr>';
 			}
 
 			echo $GLOBALS['HTML']->listTableBottom();
@@ -163,9 +156,7 @@ class ProjectTaskHTML extends ProjectTask {
 
 		if ($rows > 0) {
 
-			echo '
-			<h3>'._('Task Change History').'</h3>
-			<p>';
+			echo '<h3>'._('Task Change History').'</h3>';
 
 			$title_arr=array();
 			$title_arr[]=_('Field');
