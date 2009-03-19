@@ -17,8 +17,8 @@ class Syntax_Tests extends PHPUnit_Framework_TestCase
      */
     public function testPhpSyntax()
     {
-	$output = `find ../gforge -name '*.php' -type f  -exec php -l {} \; | grep -v '^No syntax errors detected'`;
-	$this->assertEquals('', $output);
+	    $output = `cd .. ; find gforge -name '*.php' -type f  -exec php -l {} \; | grep -v '^No syntax errors detected'`;
+	    $this->assertEquals('', $output);
     }
 
     /**
@@ -26,7 +26,16 @@ class Syntax_Tests extends PHPUnit_Framework_TestCase
      */
     public function testUTF8Chars()
     {
-	$output = `find ../gforge -name '*.php' -type f  -exec isutf8 {} \;`;
-	$this->assertEquals('', $output);
+	    $output = `cd .. ; find gforge -name '*.php' -type f  -exec isutf8 {} \;`;
+	    $this->assertEquals('', $output);
+    }
+
+    /**
+     * Ensure all PHP files use Unix-style line endings
+     */
+    public function testUnixLineEndings()
+    {
+	    $output = `cd .. ; find gforge -name '*.php' -type f | xargs pcregrep -l '\r$'`;
+	    $this->assertEquals('', $output);
     }
 }
