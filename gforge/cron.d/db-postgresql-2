@@ -1,0 +1,6 @@
+# Daily sweep of the HTTP log files for project activity
+15 0 * * * $FFUSER $FFCRON/stats_projects_logparse.pl
+
+# Daily mail for not approved news
+30 17 * * * root $FFCRON/get_news_notapproved.pl
+

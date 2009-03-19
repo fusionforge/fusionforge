@@ -1,16 +1,3 @@
-# THIS FILE IS GENERATED, PLEASE DON'T EDIT, RATHER USE Makefile
-FFCRON="/usr/share/gforge/cronjobs"
-FFUSER=gforge
-
-# Change paths to the GForge directory.
-# Don't reference $GFORGE because this won't work!
-# You may need to change the pathname to php CLI (command line interface)
-#INCLUDE_PATH=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www:/usr/share/gforge/common
-PHP="/usr/bin/php -q -d include_path=.:/etc/gforge:/usr/share/gforge:/usr/share/gforge/www/include"
-
-# Don't mail command output to anyone.
-MAILTO=""
-
 #
 # Regular cron jobs for the db-postgresql package
 #
@@ -56,23 +43,4 @@ MAILTO=""
 
 # Create SCM repositories
 0 * * * * root $PHP $FFCRON/create_scm_repos.php
-
-# Daily site backup
-0 2 * * *  root $PHP $FFCRON/backup_site.php
-
-#
-# IMPORTANT!! READ THE README.root file before continuing!
-#
-
-# Create the shell users accounts and groups home directories
-15 * * * * root $PHP $FFCRON/homedirs.php
-
-# Create the new mailing lists
-06 * * * * root $PHP $FFCRON/mail/mailing_lists_create.php
-
-# Create the /etc/aliases file
-08 * * * * root $PHP $FFCRON/mail/mailaliases.php
-
-# Send email to users with pending tasks
-#30 5 * * 1,2,3,4,5 root $PHP $FFCRON/daily_task_email.php
 
