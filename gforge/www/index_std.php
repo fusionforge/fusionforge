@@ -47,37 +47,7 @@ echo $HTML->boxBottom();
 </td>
 
 <td width="35%" valign="top">
-<?php echo $HTML->boxTop('Getting FusionForge'); ?>
-<p />
-<strong><?php print _('Download'); ?></strong><br />
-<?php print _('<a href="http://fusionforge.fusionforge.org/">FusionForge archive</a>'); ?><br />
-<!-- 
-<?php print _('<a href="http://postgresql.org/">PostgreSQL</a>'); ?><br />
-<?php print _('<a href="http://www.php.net/">PHP</a>'); ?><br />
-<?php print _('<a href="http://www.apache.org/">Apache</a>'); ?><br />
-<?php print _('<a href="http://www.gnu.org/software/mailman/">Mailman</a> <i>(optional)</i>'); ?><br />
--->
-<p />
-<strong><?php print _('Get Help'); ?></strong><br />
-<a href="http://fusionforge.org/mail/?group_id=6"><?php print _('Mailing lists'); ?></a><br />
-<a href="http://embed.mibbit.com/?server=irc.freenode.net&channel=%23fusionforge"><?php print _('Online help via IRC'); ?></a><br />
-<p />
-<strong><?php print _('Contribute!'); ?></strong><br />
-<a href="http://fusionforge.org/projects/fusionforge/"><?php print _('FusionForge Project Page'); ?></a><br />
-<a href="http://fusionforge.org/tracker/?atid=105&group_id=6&func=browse"><?php print _('Bug Tracker'); ?></a><br />
-<a href="http://fusionforge.org/tracker/?atid=107&group_id=6&func=browse"><?php print _('Patch Submissions'); ?></a><br />
-<p />
-<?php print _('Packaging for <a
-href="http://www.debian.org/"><strong>Debian</strong></a>/<a
-href="http://www.ubuntulinux.com/"><strong>Ubuntu</strong></a> and <a
-href="http://www.redhat.com/"><strong>Red Hat</strong></a>/<a
-href="http://www.fedoraproject.org/"><strong>Fedora</strong></a> is in
-progress.  Users of these systems will soon be able to install the
-"fusionforge" package through yum or apt-get and get a complete
-FusionForge system.
-'); ?><p />
 <?php
-echo $HTML->boxBottom();
 echo show_features_boxes();
 ?>
 
