@@ -113,7 +113,10 @@ class Theme extends Layout {
     <title><?php echo $params['title']; ?></title>
     <link rel="icon" type="image/png" href="<?php echo util_make_url('/images/icon.png'); ?>"/>
     <link rel="shortcut icon" type="image/png" href="<?php echo util_make_url('/images/icon.png'); ?>"/>
-		<?php $this->headerLink(); ?>
+    <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="<?php echo util_make_url ('/export/rss_sfnews.php'); ?>" type="application/rss+xml"/>
+    <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - Project News Highlights RSS" href="<?php echo util_make_url ('/export/rss20_news.php'); ?>" type="application/rss+xml"/>
+    <link rel="alternate" title="<?php echo $GLOBALS['sys_name']; ?> - New Projects RSS" href="<?php echo util_make_url ('/export/rss_sfprojects.php'); ?>" type="application/rss+xml"/>
+
     <script language="JavaScript" type="text/javascript">
     <!--
 
@@ -154,9 +157,8 @@ class Theme extends Layout {
 		  <td class="topLeft"><?php echo util_make_link ('/', html_image('header/top-logo.png',192,54,array('border'=>'0'))); ?></td>
         <td class="middleRight"><?php echo $this->searchBox(); ?></td>
         <td class="middleRight"><?php
-	if (session_loggedin()) {
-		$u =& user_get_object(user_getid());
-		echo util_make_link ('/account/logout.php', sprintf("%s (%s)", _('Log Out'), $u->getRealName()));
+        if (session_loggedin()) {
+        	echo util_make_link ('/account/logout.php', _('Log Out'));
         	echo ' | ';
         	echo util_make_link ('/account/', _('My Account'));
         } else {
