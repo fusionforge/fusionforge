@@ -4,3 +4,4 @@ gforge_*.orig.tar.gz
 gforge_*.diff.gz
 gforge_*.build
 gforge_*_source.changes
+tarballs
