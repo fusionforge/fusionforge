@@ -28,7 +28,7 @@ set -e
 case "$1" in
     configure)
 
-	/usr/sbin/gforge-config
+	gforge-config
         # Patch Exim configuration files
 	/usr/lib/gforge/bin/install-exim4.sh configure-files
 	if [ -f /etc/aliases.gforge-new ]

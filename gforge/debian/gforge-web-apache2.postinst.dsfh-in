@@ -69,7 +69,7 @@ case "$1" in
 	    fi
 	fi
 	
-        /usr/sbin/gforge-config
+        gforge-config
 
 	db_stop
         # Setup our Apache
@@ -92,7 +92,7 @@ case "$1" in
 	if [ -d /etc/apache2/sites-available ] && [ ! -e /etc/apache2/sites-available/gforge ] ; then
 	    ln -s /etc/gforge/httpd.conf /etc/apache2/sites-available/gforge
 	fi
-	/usr/sbin/a2ensite gforge
+	a2ensite gforge
 	
 	# Make Apache see these new changes
 	invoke-rc.d apache2 restart || true

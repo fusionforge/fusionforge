@@ -27,7 +27,7 @@ set -e
 
 case "$1" in
     configure)
-	/usr/sbin/gforge-config
+	gforge-config
 
         # Patch NSS configuration files
 	/usr/lib/gforge/bin/install-nsspgsql.sh configure-files

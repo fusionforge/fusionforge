@@ -56,7 +56,7 @@ case "$1" in
     configure)
 	add_onevar_mainconfile default_trove_cat 18
 
-	/usr/sbin/gforge-config
+	gforge-config
 
         # Patch DB configuration files
 	/usr/lib/gforge/bin/install-db.sh configure-files

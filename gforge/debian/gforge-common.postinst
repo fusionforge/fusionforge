@@ -32,7 +32,7 @@ case "$1" in
 	adduser --system --group --home /var/lib/gforge/chroot/cvsroot scm-gforge > /dev/null 2>&1
 	adduser --system --group --home /var/lib/gforge/chroot/cvsroot www-gforge > /dev/null 2>&1
 
-	/usr/sbin/gforge-config
+	gforge-config
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

@@ -25,18 +25,18 @@ set -e
 
 case "$1" in
     configure)
-	/usr/sbin/gforge-config
+	gforge-config
 
 	# Prepare database
 	su -s /bin/sh gforge -c '/usr/lib/gforge/bin/register-plugin scmsvn "Subversion"'
 	test -f /etc/default/apache2 && . /etc/default/apache2
 	if [ "$NO_START" != "0" ]; then
 		if [ -x /usr/sbin/apache ]; then
-			/usr/sbin/invoke-rc.d --quiet apache reload
+			invoke-rc.d --quiet apache reload
 		fi
 	else
 		if [ -x /usr/sbin/apache2 ]; then
-			/usr/sbin/invoke-rc.d --quiet apache2 reload
+			invoke-rc.d --quiet apache2 reload
 		fi
 	fi
 
