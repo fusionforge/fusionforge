@@ -22,7 +22,7 @@
 
 Summary: FusionForge Collaborative Development Environment
 Name: fusionforge
-Version: 4.7
+Version: 4.7.2
 Release: %{release}
 BuildArch: noarch
 License: GPL
