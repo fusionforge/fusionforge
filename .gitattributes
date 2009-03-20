@@ -3431,6 +3431,7 @@ tests/unit/utils/AllTests.php -text
 tests/unit/utils/UtilsTests.php -text
 tools/export-tracker.tcl -text
 tools/make-mo.sh -text
+tools/rpmdev-setuptree -text
 tools/simple-cdd/Makefile -text
 tools/simple-cdd/profiles/fusionforge.conf -text
 tools/simple-cdd/profiles/fusionforge.description -text

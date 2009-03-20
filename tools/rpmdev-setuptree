@@ -1,0 +1,99 @@
+#!/bin/sh
+#
+#	RPM-build-tree.txt
+#		also called: fedora-buildrpmtree, rpmdev-setuptree
+#
+#	Set up a 'plain userid' SRPM build environment
+#
+#		Home locale for this script:
+#	http://www.rpm.org/hintskinks/buildtree/RPM-build-tree.txt
+#		also: ftp://ftp.owlriver.com/pub/local/ORC/rpmbuild/
+#
+#	See also: http://freshrpms.net/docs/fight.html
+#
+#		based on a post:
+#	Date: Tue, 30 Jul 2002 17:00:21 +0200
+#	From: Ralf Ertzinger <ralf@camperquake.de>
+#	Reply-To: rpm-list@freshrpms.net
+#
+VER="0.06-050205"
+#	copyright (c) 2002 Owl River Company - Columbus OH
+#	info@owlriver.com -- GPL v.2 
+#
+#	rev 0.06 050205 IVA -- use the paths as defined in configuration
+#	rev 0.05 030814 RPH -- apply NIS extension per 
+#			nate at rj1.org (Nathan Owen)
+#		https://bugzilla.fedora.us/show_bug.cgi?id=594
+#	rev 0.04 030422 RPH -- change to vendor neutral 'rpmbuild' 
+#		path element
+#	rev 0.03 021210 RPH -- put the home in the right place 
+#		automatically
+#	rev 0.02 021207 RPH -- add %make macro for people using 
+#		Mandrake .spec files on non-Mandrake platforms
+#	initial 0.01 020731 RPH - initial release
+#
+[ "x$1" = "x-d" ] && {
+	DEBUG="y"
+	export DEBUG
+	shift 1
+	}
+#
+IAM=`id -un`
+# 	returns bare username
+#
+PASSWDDIR=`grep ^$IAM: /etc/passwd | awk -F":" '{print $6}'`
+HOMEDIR=${HOME:=$PASSWDDIR}
+[ ! -d $HOMEDIR ] && {
+	echo "ERROR: Home directory for user $IAM not found in /etc/passwd."
+	exit 1
+	}
+#	and home directory
+#
+#
+#
+RPMMACROS="$HOMEDIR/.rpmmacros"
+touch $RPMMACROS
+#
+TOPDIR="%_topdir"
+ISTOP=`grep -c ^$TOPDIR $RPMMACROS`
+[ $ISTOP -lt 1 ] && {
+	echo "%_topdir      %(echo \$HOME)/rpmbuild" >> $RPMMACROS
+	}
+#
+#MAKE="%make "
+#ISTOP=`grep -c ^$MAKE $RPMMACROS`
+#[ $ISTOP -lt 1 ] && {
+#	echo "$MAKE  make" >> $RPMMACROS
+#	}
+#
+MFLAGS="%_smp_mflags"
+ISTOP=`grep -c ^$MFLAGS $RPMMACROS`
+[ $ISTOP -lt 1 ] && {
+	echo "$MFLAGS  -j3" >> $RPMMACROS
+	}
+#
+ISTOP=`grep -c ^%__arch_install_post $RPMMACROS`
+[ $ISTOP -lt 1 ] && {
+	cat <<EOF >> $RPMMACROS
+%__arch_install_post \
+  /usr/lib/rpm/check-rpaths \
+  /usr/lib/rpm/check-buildroot
+EOF
+}
+RPMDIR=`rpm --eval "%{_rpmdir}"`
+SRCDIR=`rpm --eval "%{_sourcedir}"`
+SPECDIR=`rpm --eval "%{_specdir}"`
+SRPMDIR=`rpm --eval "%{_srcrpmdir}"`
+BUILDDIR=`rpm --eval "%{_builddir}"`
+[ "x$DEBUG" != "x" ] && {
+	echo "$IAM       $HOMEDIR    $RPMMACROS"
+	echo "$RPMDIR    $SRCDIR     $SPECDIR"
+	echo "$SRPMDIR   $BUILDDIR"
+	}
+#
+for i in $RPMDIR $SRCDIR $SPECDIR $SRPMDIR $BUILDDIR ; do 
+	[ ! -d $i ] && mkdir -p $i 
+done
+#
+exit 0
+#
