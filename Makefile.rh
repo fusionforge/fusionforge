@@ -60,7 +60,7 @@ RPMS_DIST=~/fusionforge_repo
 rpmprep:
 	-rm -Rf $(RPM_TMP)/*
 	-rm -Rf ~/.rpmmacros
-	rpmdev-setuptree
+	sh tools/rpmdev-setuptree
 	echo '%_tmppath %{_topdir}/TMP' >> ~/.rpmmacros
 	echo '%_buildroot %{_tmppath}/%{name}-root' >> ~/.rpmmacros
 	mkdir $(RPM_TMP)/TMP
