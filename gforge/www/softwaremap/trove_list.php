@@ -44,6 +44,17 @@ if (db_numrows($res_trove_cat) < 1) {
 
 $HTML->header(array('title'=>_('Software Map')));
 
+echo ($HTML->subMenu(
+		array(
+			_('Project Tree'),
+			_('Project List')
+		),
+		array(
+			'/softwaremap/trove_list.php',
+			'/softwaremap/full_list.php'
+		)
+	));
+
 echo'
 	<hr />';
 
