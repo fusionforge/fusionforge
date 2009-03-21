@@ -110,10 +110,18 @@ function stats_downloads_total() {
 }
 
 function show_sitestats() {
+	global $sys_use_trove;
 	$gforge = new FusionForge();
-	$return = '';
-	$return .= _('Hosted Projects').': <strong>'.number_format($gforge->getNumberOfPublicHostedProjects()).'</strong>';
-	$return .= '<br />'._('Registered Users').': <strong>'.number_format($gforge->getNumberOfActiveUsers()).'</strong>';
+	$return = _('Hosted Projects').': ';
+	if ($sys_use_trove) {
+		$return .= '<a href="softwaremap/full_list.php">';
+	}
+	$return .= '<strong>'.number_format($gforge->getNumberOfPublicHostedProjects()).'</strong>';
+	if ($sys_use_trove) {
+		$return .= '</a>';
+	}
+	$return .= '<br />'._('Registered Users').': <strong>'.
+		number_format($gforge->getNumberOfActiveUsers()).'</strong>';
 	return $return;
 }
 
@@ -134,8 +142,8 @@ function show_newest_projects() {
 			.'<br />';
 		}
 	}
-	/// TODO: Add more link to show all project
-	//$return .= '<div align="center">'.util_make_link ('/top/projlist.php','[ '._('More').' ]').'</div>';
+
+	$return .= '<div align="center">'.util_make_link ('/softwaremap/full_list.php','[ '._('More').' ]').'</div>';
 	return $return;
 }
 
