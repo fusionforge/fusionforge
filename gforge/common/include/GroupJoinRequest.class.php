@@ -99,7 +99,7 @@ class GroupJoinRequest extends Error {
 	function create($user_id,$comments) {
 		$v = new Validator();
 		$v->check($user_id, "user_id");
-		//$v->check($comments, "comments");
+		$v->check(trim($comments), "comments");
 		if (!$v->isClean()) {
 			$this->setError($v->formErrorMsg("Must include "));
 			return false;
