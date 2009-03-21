@@ -34,7 +34,7 @@
 			</div>
 			<div class="tabbertab" title="Debian">
 				<h4>For debian you should create /etc/apt/sources.list.d/fusionforge file containing one of:</h4>
-				<h4><a href="debian/">Release</a></h4>
+				<h4><a href="debian/">Release Build</a></h4>
 				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian lenny main
 deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian lenny main</pre>
 				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian squeeze main
@@ -63,7 +63,7 @@ deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/debian-trk sid main</pre>
 			</div>
 			<div class="tabbertab" title="Ubuntu">
 				<h4>For ubuntu you should create /etc/apt/sources.list.d/fusionforge file containing one of:</h4>
-				<h4><a href="ubuntu/">Release</a></h4>
+				<h4><a href="ubuntu/">Release Build</a></h4>
 				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu hardy main
 deb-src http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu hardy main</pre>
 				<pre>deb http://<?php echo $_SERVER['SERVER_NAME']; ?>/ubuntu intrepid main
