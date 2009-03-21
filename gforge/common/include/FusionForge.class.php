@@ -73,7 +73,7 @@ class FusionForge extends Error {
 
 
 	function getPublicProjectNames() {
-		$res = db_query_params ('SELECT unix_group_name FROM groups WHERE status=$1 AND is_public=1',
+		$res = db_query_params ('SELECT unix_group_name FROM groups WHERE status=$1 AND is_public=1 ORDER BY unix_group_name',
 					array ('A'));
 		if (!$res) {
 			$this->setError('Unable to get list of public projects: '.db_error());
