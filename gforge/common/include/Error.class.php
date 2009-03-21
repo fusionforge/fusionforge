@@ -193,9 +193,15 @@ class Error {
 	/**
 	 * setMissingParamsError() - sets an Group ID Error
 	 *  retrieves the localized error string for missing pparams
+	 *
+	 * @param	string  The name of the missing parameter
+	 *
 	 */
-	function setMissingParamsError(){
-		$this->setError(_('Missing Parameters'), ERROR__MISSING_PARAMS_ERROR);
+	function setMissingParamsError($param=''){
+		if ($param) {
+			$param = ': ' . $param;
+		}
+		$this->setError(_('Missing Parameters').$param, ERROR__MISSING_PARAMS_ERROR);
 	}
 	
 	/**
