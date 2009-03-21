@@ -85,7 +85,7 @@ class PluginManager extends Error {
 	}
 
 	/**
-	 * LoadPlugin() - load a specifig plugin
+	 * LoadPlugin() - load a specific plugin
 	 *
 	 */
 	function LoadPlugin ($p_name) {
@@ -133,6 +133,7 @@ class PluginManager extends Error {
 	 *
 	 */
 	function SetupHooks () {
+		$this->hooks_to_plugins = array();
 		foreach ($this->plugins_to_hooks as $p_name => $hook_list) {
 			foreach ($hook_list as $hook_name) {
 				if (!isset ($this->hooks_to_plugins[$hook_name])) {
