@@ -67,7 +67,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
     </li>
 </ul>
 <p>
-<strong><?php echo _('Group Maintenance'); ?></strong>
+<strong><?php echo _('Project Maintenance'); ?></strong>
 </p>
 <ul>
 	<li><?php
@@ -87,9 +87,9 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	?></li>
 </ul>
 <ul>
-	<li><a href="grouplist.php"><?php echo _('Display Full Group List/Edit Groups'); ?></a></li>
+	<li><a href="grouplist.php"><?php echo _('Display Full Project List/Edit Projects'); ?></a></li>
 
-	<li><?php echo _('Display Groups Beginning with :').' ';
+	<li><?php echo _('Display Projects Beginning with :').' ';
 	for ($i=0; $i < count($abc_array); $i++) {
 		echo '<a href="grouplist.php?group_name_search='.$abc_array[$i].'">'.$abc_array[$i].'</a>|';
 	}
@@ -105,9 +105,9 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 </ul>
 <ul>
 	<li><?php echo util_make_link ('/register/',_('Register New Project')); ?></li>
-	<li><?php echo _('Groups with status'); ?> <a href="approve-pending.php"><?php echo _('Pending (P)'); ?> <em><?php echo _('(New Project Approval)'); ?></em></a></li>
+	<li><?php echo _('Projects with status'); ?> <a href="approve-pending.php"><?php echo _('Pending (P)'); ?> <em><?php echo _('(New Project Approval)'); ?></em></a></li>
 	<li><form name="projectsearch" action="search.php">
-	<?php echo _('Groups with status'); ?>
+	<?php echo _('Projects with status'); ?>
 	<select name="status">
 			<option value="A"><?php echo _('Active (A)'); ?></option>
 			<option value="H"><?php echo _('Hold (H)'); ?></option>
@@ -117,7 +117,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	<input type="hidden" name="search" value="%"/>
 	<input type="submit" value="<?php echo _('Submit');?> "/>
 	</form></li>
-	<li><a href="search.php?groupsearch=1&amp;search=%&amp;is_public=0"><?php echo _('Private Groups'); ?></a></li>
+	<li><a href="search.php?groupsearch=1&amp;search=%&amp;is_public=0"><?php echo _('Private Projects'); ?></a></li>
 </ul>
 
 <p>
