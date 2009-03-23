@@ -2998,7 +2998,6 @@ gforge/www/export/search_plugin.php -text
 gforge/www/favicon.ico svneol=native#unset
 gforge/www/forum/admin/ForumAdmin.class.php -text
 gforge/www/forum/include/AttachManager.class.php -text
-gforge/www/gfginstaller.png -text
 gforge/www/images/blank.png -text
 gforge/www/images/clear.png -text
 gforge/www/images/debian-sf-icon.png -text
