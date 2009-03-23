@@ -1,5 +1,49 @@
 <?php
 /*
+ * Copyright (C) 2008 Alain Peyrat <aljeux@free.fr>
+ * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
+ *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation; either version 2 of the License,
+ * or (at your option) any later version.
+ * 
+ * FusionForge is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+ * USA
+ */
+
+/*
+ * Standard Alcatel-Lucent disclaimer for contributing to open source
+ *
+ * "The test suite ("Contribution") has not been tested and/or
+ * validated for release as or in products, combinations with products or
+ * other commercial use. Any use of the Contribution is entirely made at
+ * the user's own responsibility and the user can not rely on any features,
+ * functionalities or performances Alcatel-Lucent has attributed to the
+ * Contribution.
+ *
+ * THE CONTRIBUTION BY ALCATEL-LUCENT IS PROVIDED AS IS, WITHOUT WARRANTY
+ * OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, COMPLIANCE,
+ * NON-INTERFERENCE AND/OR INTERWORKING WITH THE SOFTWARE TO WHICH THE
+ * CONTRIBUTION HAS BEEN MADE, TITLE AND NON-INFRINGEMENT. IN NO EVENT SHALL
+ * ALCATEL-LUCENT BE LIABLE FOR ANY DAMAGES OR OTHER LIABLITY, WHETHER IN
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * CONTRIBUTION OR THE USE OR OTHER DEALINGS IN THE CONTRIBUTION, WHETHER
+ * TOGETHER WITH THE SOFTWARE TO WHICH THE CONTRIBUTION RELATES OR ON A STAND
+ * ALONE BASIS."
+ */
+
+/*
  * Create a initial database suitable for running the tests.
  * The initial database is made of:
  *  The initial database given by the package.
@@ -12,7 +56,7 @@ ini_set('memory_limit', '16M');
 require_once 'config.php';
 
 if ( !CONFIGURED ) {
-	print "File 'config.php' is not correctly configured, abording.\n";
+	print "File 'config.php' is not correctly configured, aborting.\n";
 	exit(1);
 }
 
@@ -64,10 +108,10 @@ db_query("INSERT INTO themes (theme_id, dirname, fullname, enabled)
              VALUES (5, 'alcatel-lucent', 'Alcatel-Lucent Theme', true)");
 
 // Install tsearch2 for phpwiki & patch it for safe backups.
-system("psql -q -Upostgres ".DB_NAME." < /usr/share/pgsql/contrib/tsearch2.sql >/dev/null 2>&1");
-system("psql -q -Upostgres ".DB_NAME." < /opt/gforge/acde/sql/20080408-regprocedure_update.sql");
-system("echo \"GRANT SELECT ON pg_ts_dict, pg_ts_parser, pg_ts_cfg, pg_ts_cfgmap TO gforge;\" | psql -q -Upostgres ".DB_NAME);
-system("echo \"UPDATE pg_ts_cfg set locale = 'en_US.UTF-8' WHERE ts_name = 'default';\" | psql -q -Upostgres ".DB_NAME);
+//system("psql -q -Upostgres ".DB_NAME." < /usr/share/pgsql/contrib/tsearch2.sql >/dev/null 2>&1");
+//system("psql -q -Upostgres ".DB_NAME." < /opt/gforge/acde/sql/20080408-regprocedure_update.sql");
+//system("echo \"GRANT SELECT ON pg_ts_dict, pg_ts_parser, pg_ts_cfg, pg_ts_cfgmap TO gforge;\" | psql -q -Upostgres ".DB_NAME);
+//system("echo \"UPDATE pg_ts_cfg set locale = 'en_US.UTF-8' WHERE ts_name = 'default';\" | psql -q -Upostgres ".DB_NAME);
 
 $files = glob("sql/*.sql");
 foreach ($files as $filename) {
