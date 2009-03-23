@@ -1,5 +1,7 @@
 #!/usr/bin/perl -w
 #
+# $Id$
+#
 # Debian-specific script to upgrade the database between releases
 # Roland Mas <lolando@debian.org>
 
@@ -19,12 +21,14 @@ use vars qw/$sys_default_domain $sys_scm_host $sys_download_host
     $sys_news_group $sys_dbhost $sys_dbname $sys_dbuser $sys_dbpasswd
     $sys_ldap_base_dn $sys_ldap_host $admin_login $admin_password
     $server_admin $domain_name $newsadmin_groupid $statsadmin_groupid
-    $skill_list/ ;
+    $skill_list $libdir $sqldir/ ;
 
 require ("/etc/gforge/local.pl") ; 
-require ("/usr/lib/gforge/lib/sqlparser.pm") ; # Our magic SQL parser
-require ("/usr/lib/gforge/lib/sqlhelper.pm") ; # Our SQL functions
-require ("/usr/lib/gforge/lib/include.pl");  # Some other functions
+$libdir="/usr/lib/gforge/lib";
+$sqldir="/usr/lib/gforge/db";
+require ("$libdir/sqlparser.pm") ; # Our magic SQL parser
+require ("$libdir/sqlhelper.pm") ; # Our SQL functions
+require ("$libdir/include.pl");  # Some other functions
 
 &debug ("You'll see some debugging info during this installation.") ;
 &debug ("Do not worry unless told otherwise.") ;
@@ -120,12 +124,12 @@ eval {
 	  $version = &get_db_version ;
 	  $target = "2.5.9999.1+global+data+done" ;
 	  if (&is_lesser ($version, $target)) {
-	      my @filelist = qw{ /usr/lib/gforge/db/sf-2.6-complete.sql } ;
+	      my @filelist = qw{ sf-2.6-complete.sql } ;
 	      # TODO: user_rating.sql
 
 	      foreach my $file (@filelist) {
 		  &debug ("Processing $file") ;
-		  @reqlist = @{ &parse_sql_file ($file) } ;
+		  @reqlist = @{ &parse_sql_file ($sqldir."/".$file) } ;
 
 		  foreach my $s (@reqlist) {
 		      $query = $s ;
@@ -389,7 +393,7 @@ eval {
 		  $sth->finish () ;
 	      }
 
-	      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/sf2.5-to-sf2.6.sql") } ;
+	      @reqlist = @{ &parse_sql_file ("$sqldir/sf2.5-to-sf2.6.sql") } ;
 	      foreach my $s (@reqlist) {
 		  $query = $s ;
 		  # debug $query ;
@@ -793,7 +797,7 @@ eval {
     if (&is_lesser ($version, $target)) {
       &debug ("Upgrading with 20021125.sql") ;
 
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021125.sql") } ;
+      @reqlist = @{ &parse_sql_file ("$sqldir/20021125.sql") } ;
       foreach my $s (@reqlist) {
 	  $query = $s ;
 	  # debug $query ;
@@ -813,7 +817,7 @@ eval {
     if (&is_lesser ($version, $target)) {
       &debug ("Upgrading with 20021212.sql") ;
 
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021212.sql") } ;
+      @reqlist = @{ &parse_sql_file ("$sqldir/20021212.sql") } ;
       foreach my $s (@reqlist) {
 	  $query = $s ;
 	  # debug $query ;
@@ -833,7 +837,7 @@ eval {
     if (&is_lesser ($version, $target)) {
       &debug ("Upgrading with 20021213.sql") ;
 
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021213.sql") } ;
+      @reqlist = @{ &parse_sql_file ("$sqldir/20021213.sql") } ;
       foreach my $s (@reqlist) {
 	  $query = $s ;
 	  # debug $query ;
@@ -882,7 +886,7 @@ eval {
     if (&is_lesser ($version, $target)) {
       &debug ("Upgrading with 20021214.sql") ;
 
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021214.sql") } ;
+      @reqlist = @{ &parse_sql_file ("$sqldir/20021214.sql") } ;
       foreach my $s (@reqlist) {
 	  $query = $s ;
 	  # debug $query ;
@@ -902,7 +906,7 @@ eval {
     if (&is_lesser ($version, $target)) {
       &debug ("Upgrading with 20021215.sql") ;
 
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021215.sql") } ;
+      @reqlist = @{ &parse_sql_file ("$sqldir/20021215.sql") } ;
       foreach my $s (@reqlist) {
 	  $query = $s ;
 	  # debug $query ;
@@ -922,7 +926,7 @@ eval {
     if (&is_lesser ($version, $target)) {
       &debug ("Upgrading with 20021216.sql") ;
 
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021216.sql") } ;
+      @reqlist = @{ &parse_sql_file ("$sqldir/20021216.sql") } ;
       foreach my $s (@reqlist) {
 	  $query = $s ;
 	  # debug $query ;
@@ -942,7 +946,7 @@ eval {
     if (&is_lesser ($version, $target)) {
       &debug ("Upgrading with 20021223.sql") ;
 
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021223.sql") } ;
+      @reqlist = @{ &parse_sql_file ("$sqldir/20021223.sql") } ;
       foreach my $s (@reqlist) {
 	  $query = $s ;
 	  # debug $query ;
@@ -962,7 +966,7 @@ eval {
     if (&is_lesser ($version, $target)) {
       &debug ("Upgrading with 20030102.sql") ;
 
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030102.sql") } ;
+      @reqlist = @{ &parse_sql_file ("$sqldir/20030102.sql") } ;
       foreach my $s (@reqlist) {
 	  $query = $s ;
 	  # debug $query ;
@@ -982,7 +986,7 @@ eval {
     if (&is_lesser ($version, $target)) {
       &debug ("Upgrading with 20030105.sql") ;
 
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030105.sql") } ;
+      @reqlist = @{ &parse_sql_file ("$sqldir/20030105.sql") } ;
       foreach my $s (@reqlist) {
 	  $query = $s ;
 	  # debug $query ;
@@ -1002,7 +1006,7 @@ eval {
     if (&is_lesser ($version, $target)) {
       &debug ("Upgrading with 20030107.sql") ;
 
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030107.sql") } ;
+      @reqlist = @{ &parse_sql_file ("$sqldir/20030107.sql") } ;
       foreach my $s (@reqlist) {
 	  $query = $s ;
 	  # debug $query ;
@@ -1022,7 +1026,7 @@ eval {
     if (&is_lesser ($version, $target)) {
       &debug ("Upgrading with 20030109.sql") ;
 
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030109.sql") } ;
+      @reqlist = @{ &parse_sql_file ("$sqldir/20030109.sql") } ;
       foreach my $s (@reqlist) {
 	  $query = $s ;
 	  # debug $query ;
@@ -1053,7 +1057,7 @@ eval {
 
       &debug ("Upgrading with 20030112.sql") ;
 
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030112.sql") } ;
+      @reqlist = @{ &parse_sql_file ("$sqldir/20030112.sql") } ;
       foreach my $s (@reqlist) {
 	  $query = $s ;
 	  # debug $query ;
@@ -1073,7 +1077,7 @@ eval {
     if (&is_lesser ($version, $target)) {
       &debug ("Upgrading with 20030113.sql") ;
 
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030113.sql") } ;
+      @reqlist = @{ &parse_sql_file ("$sqldir/20030113.sql") } ;
       foreach my $s (@reqlist) {
 	  $query = $s ;
 	  # debug $query ;
@@ -1093,7 +1097,7 @@ eval {
     if (&is_lesser ($version, $target)) {
       &debug ("Upgrading with 20030131.sql") ;
 
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030131.sql") } ;
+      @reqlist = @{ &parse_sql_file ("$sqldir/20030131.sql") } ;
       foreach my $s (@reqlist) {
 	  $query = $s ;
 	  # debug $query ;
@@ -1113,7 +1117,7 @@ eval {
     if (&is_lesser ($version, $target)) {
       &debug ("Upgrading with 20030209.sql") ;
 
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030209.sql") } ;
+      @reqlist = @{ &parse_sql_file ("$sqldir/20030209.sql") } ;
       foreach my $s (@reqlist) {
 	  $query = $s ;
 	  # debug $query ;
@@ -1133,7 +1137,7 @@ eval {
     if (&is_lesser ($version, $target)) {
       &debug ("Upgrading with 20030312.sql") ;
 
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030312.sql") } ;
+      @reqlist = @{ &parse_sql_file ("$sqldir/20030312.sql") } ;
       foreach my $s (@reqlist) {
 	  $query = $s ;
 	  # debug $query ;
@@ -1187,7 +1191,7 @@ eval {
     if (&is_lesser ($version, $target)) {
 	&debug ("Upgrading with 20030513.sql") ;
 
-	@reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030513.sql") } ;
+	@reqlist = @{ &parse_sql_file ("$sqldir/20030513.sql") } ;
 	foreach my $s (@reqlist) {
 	    $query = $s ;
 	    # debug $query ;
@@ -1219,7 +1223,7 @@ eval {
     if (&is_lesser ($version, $target)) {
 	&debug ("Upgrading with 20030822.sql") ;
 
-	@reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030822.sql") } ;
+	@reqlist = @{ &parse_sql_file ("$sqldir/20030822.sql") } ;
 	foreach my $s (@reqlist) {
 	    $query = $s ;
 	    # debug $query ;
@@ -1239,7 +1243,7 @@ eval {
     if (&is_lesser ($version, $target)) {
 	&debug ("Upgrading with 20031105.sql") ;
 
-	@reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20031105.sql") } ;
+	@reqlist = @{ &parse_sql_file ("$sqldir/20031105.sql") } ;
 	foreach my $s (@reqlist) {
 	    $query = $s ;
 	    # debug $query ;
@@ -1250,7 +1254,7 @@ eval {
 
 	&debug ("Upgrading with 20031124.sql") ;
 
-	@reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20031124.sql") } ;
+	@reqlist = @{ &parse_sql_file ("$sqldir/20031124.sql") } ;
 	foreach my $s (@reqlist) {
 	    $query = $s ;
 	    # debug $query ;
@@ -1270,7 +1274,7 @@ eval {
     if (&is_lesser ($version, $target)) {
 	&debug ("Upgrading with 20031129.sql") ;
 
-	@reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20031129.sql") } ;
+	@reqlist = @{ &parse_sql_file ("$sqldir/20031129.sql") } ;
 	foreach my $s (@reqlist) {
 	    $query = $s ;
 	    # debug $query ;
@@ -1293,7 +1297,7 @@ eval {
 	# They are independent anyway.
 	&debug ("Upgrading with 20031126.sql") ; 
 
-	@reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20031126.sql") } ;
+	@reqlist = @{ &parse_sql_file ("$sqldir/20031126.sql") } ;
 	foreach my $s (@reqlist) {
 	    $query = $s ;
 	    # debug $query ;
@@ -1313,7 +1317,7 @@ eval {
     if (&is_lesser ($version, $target)) {
 	&debug ("Upgrading with 20031205.sql") ; 
 
-	@reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20031205.sql") } ;
+	@reqlist = @{ &parse_sql_file ("$sqldir/20031205.sql") } ;
 	foreach my $s (@reqlist) {
 	    $query = $s ;
 	    # debug $query ;
@@ -1333,7 +1337,7 @@ eval {
     if (&is_lesser ($version, $target)) {
 	&debug ("Upgrading with 20040130.sql") ; 
 
-	@reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20040130.sql") } ;
+	@reqlist = @{ &parse_sql_file ("$sqldir/20040130.sql") } ;
 	foreach my $s (@reqlist) {
 	    $query = $s ;
 	    # debug $query ;
@@ -1353,7 +1357,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20040204.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20040204.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20040204.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -1373,7 +1377,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20040315.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20040315.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20040315.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -1393,7 +1397,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 200403251.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/200403251.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/200403251.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -1413,7 +1417,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 200403252.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/200403252.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/200403252.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -1433,7 +1437,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20040507.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20040507.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20040507.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -1453,7 +1457,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20040722.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20040722.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20040722.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -1473,7 +1477,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20040804.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20040804.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20040804.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -1493,7 +1497,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20040826.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20040826.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20040826.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -1702,7 +1706,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20040914.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20040914.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20040914.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -1722,7 +1726,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20041001.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20041001.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20041001.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -1742,7 +1746,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20041005.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20041005.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20041005.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -1762,7 +1766,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20041006.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20041006.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20041006.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -1782,7 +1786,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20041014.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20041014.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20041014.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -1802,7 +1806,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20041020.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20041020.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20041020.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -1824,7 +1828,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20040729.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20040729.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20040729.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -1867,7 +1871,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20041031.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20041031.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20041031.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -1903,7 +1907,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20041104.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20041104.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20041104.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -1923,7 +1927,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20041108.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20041108.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20041108.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -1943,7 +1947,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20041124.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20041124.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20041124.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -2017,7 +2021,7 @@ eval {
 #    if (&is_lesser ($version, $target)) {
 #        &debug ("Upgrading with 20041222-debian.sql") ;
 #
-#        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20041222-debian.sql") } ;
+#        @reqlist = @{ &parse_sql_file ("$sqldir/20041222-debian.sql") } ;
 #        foreach my $s (@reqlist) {
 #            $query = $s ;
 #            # debug $query ;
@@ -2037,7 +2041,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20050115.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20050115.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20050115.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -2077,7 +2081,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20050130.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20050130.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20050130.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -2097,7 +2101,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20050212.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20050212.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20050212.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -2117,7 +2121,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20050214-nss.sql valantine") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20050214-nss.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20050214-nss.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -2137,7 +2141,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20050224.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20050224.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20050224.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -2157,7 +2161,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20050225-nsssetup.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20050225-nsssetup.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20050225-nsssetup.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -2177,7 +2181,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20050311.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20050311.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20050311.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -2197,7 +2201,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20050315.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20050315.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20050315.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -2217,7 +2221,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20050325-1.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20050325-1.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20050325-1.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -2433,7 +2437,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20050325-3.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20050325-3.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20050325-3.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -2453,7 +2457,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20050605.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20050605.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20050605.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -2549,7 +2553,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20050628.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20050628.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20050628.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -2569,7 +2573,7 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20050711.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20050711.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20050711.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -2655,7 +2659,7 @@ eval {
 	    &drop_table_if_exists ($dbh, "rep_group_act_monthly") ;
 	    &drop_index_if_exists ($dbh, "repgroupactmonthly_monthly") ;
 
-	    @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/timetracking-init.sql") } ;
+	    @reqlist = @{ &parse_sql_file ("$sqldir/timetracking-init.sql") } ;
 	    foreach my $s (@reqlist) {
 		$query = $s ;
 		# debug $query ;
@@ -2906,7 +2910,7 @@ sub update_with_sql ( $ ) {
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with $sqldate.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/$sqldate.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/$sqldate.sql") } ;
         foreach my $s (@reqlist) {
             my $query = $s ;
             # debug $query ;
