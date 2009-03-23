@@ -158,7 +158,7 @@ while ($row_grp = db_fetch_array($res_grp)) {
 
 	<p />
 	<table><tr><td>
-	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+	<form name="approve.<?php echo $row_grp['unix_group_name'] ?>" action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 	<input type="hidden" name="action" value="activate" />
 	<input type="hidden" name="list_of_groups" value="<?php print $row_grp['group_id']; ?>" />
 	<input type="submit" name="submit" value="<?php echo _('Approve'); ?>" />
