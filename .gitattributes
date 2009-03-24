@@ -69,14 +69,11 @@ gforge/deb-specific/scmsvn/cronjobs/svn_update.pl -text
 gforge/debian/compat -text
 gforge/debian/gforge-plugin-mediawiki.postinst -text
 gforge/debian/gforge-plugin-mediawiki.prerm -text
-gforge/debian/gforge-plugin-scmcvs.cron.d -text
 gforge/debian/gforge-plugin-scmcvs.postinst -text
 gforge/debian/gforge-plugin-scmcvs.prerm -text
-gforge/debian/gforge-plugin-scmsvn.cron.d -text
 gforge/debian/gforge-plugin-scmsvn.postinst -text
 gforge/debian/gforge-plugin-scmsvn.prerm -text
 gforge/debian/gforge-web-apache2.config.dsfh-in -text
-gforge/debian/gforge-web-apache2.cron.d -text
 gforge/debian/gforge-web-apache2.dirs -text
 gforge/debian/gforge-web-apache2.docs -text
 gforge/debian/gforge-web-apache2.postinst.dsfh-in -text
