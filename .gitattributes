@@ -3439,6 +3439,8 @@ tests/code/syntax/SyntaxTests.php -text
 tests/func/AllTests.php -text
 tests/func/Forums/AllTests.php -text
 tests/func/Forums/forums.php -text
+tests/func/News/AllTests.php -text
+tests/func/News/news.php -text
 tests/func/README.TXT -text
 tests/func/Site/AllTests.php -text
 tests/func/Site/login.php -text
