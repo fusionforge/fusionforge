@@ -76,8 +76,8 @@ frs_admin_header(array('title'=>_('Release Edit/File Releases'),'group'=>$group_
 	<input type="hidden" name="release_id" value="'. $release_id .'" />
 	'._('You are about to permanently and irretrievably delete this release and its files!').'
 	<p>
-	<input type="checkbox" name="sure" value="1">'._('I\'m Sure').'<br />
-	<input type="checkbox" name="really_sure" value="1">'._('I\'m Really Sure').'<br />
+	<input type="checkbox" name="sure" value="1" />'._('I\'m Sure').'<br />
+	<input type="checkbox" name="really_sure" value="1" />'._('I\'m Really Sure').'<br />
 	<input type="submit" name="submit" value="'._('Delete').'" />
 	</form>';
 

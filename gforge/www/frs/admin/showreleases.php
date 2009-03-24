@@ -112,7 +112,7 @@ for ($i=0; $i<count($rs); $i++) {
 				$rs[$i]->getName().' ['._('Edit').']</a>
 				<a href="deleterelease.php?group_id='.$group_id
 				.'&amp;package_id='.$package_id
-				.'&amp;release_id='.$rs[$i]->getID().'">['._('Delete').']</td><td>'.
+				.'&amp;release_id='.$rs[$i]->getID().'">['._('Delete').']</a></td><td>'.
 				date('Y-m-d H:i',$rs[$i]->getReleaseDate()).'</td></tr>';
 }
 

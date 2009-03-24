@@ -59,16 +59,22 @@ if (!$frsp || !is_object($frsp)) {
 
 frs_admin_header(array('title'=>_('Release Edit/File Releases'),'group'=>$group_id));
 
-	echo '<strong>'.$frsp->getName().'</strong><p>';
+	echo '<p><strong>'.$frsp->getName().'</strong></p>';
 	echo '
 	<form action="/frs/admin/?group_id='.$group_id.'" method="post">
+	<p>
 	<input type="hidden" name="func" value="delete_package" />
 	<input type="hidden" name="package_id" value="'. $package_id .'" />
 	'._('You are about to permanently and irretrievably delete this package and all its releases and files!').'
-	<p>
-	<input type="checkbox" name="sure" value="1">'._('I\'m Sure').'<br />
-	<input type="checkbox" name="really_sure" value="1">'._('I\'m Really Sure').'<br />
+        </p> 
+        <p> 
+	<input type="checkbox" name="sure" value="1" />'._('I\'m Sure').'<br />
+        <br /> 
+	<input type="checkbox" name="really_sure" value="1" />'._('I\'m Really Sure').'<br />
+        </p>
+        <p>
 	<input type="submit" name="submit" value="'._('Delete').'" />
+        </p> 
 	</form>';
 
 frs_admin_footer();
