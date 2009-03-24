@@ -54,34 +54,28 @@ if (!$result || db_numrows($result) < 1) {
 
 	echo $HTML->boxTop(_('Notes:'));
 
-	echo '<h3>'._('Release Name:').' '.util_make_link ('/frs/?group_id='.db_result($result,0,'group_id'),db_result($result,0,'name')).'</h3>
-		<p>';
+	echo '<h3>'._('Release Name:').' '.
+		util_make_link ('/frs/?group_id='.db_result($result,0,'group_id').'&amp;release_id='.$release_id,db_result($result,0,'name')).'</h3>';
 
-/*
-	Show preformatted or plain notes/changes
-*/
+	/*
+	 Show preformatted or plain notes/changes
+	 */
 	if (db_result($result,0,'preformatted')) {
-		echo '<pre><strong>'._('Notes:').'</strong>
-'.db_result($result,0,'notes').'
-
-<hr />
-<strong>'._('Changes:').'</strong>
-'.db_result($result,0,'changes').'</pre>';
-
+		$opening = '<pre>';
+		$closing = '</pre>';
 	} else {
-		echo '<strong>'._('Notes:').'</strong>
-'.db_result($result,0,'notes').'
-
-<hr />
-<strong>'._('Changes:').'</strong>
-'.db_result($result,0,'changes') . '</p>';
-
+		$opening = '<p>';
+		$closing = '</p>';
 	}
 
+	echo $HTML->boxMiddle(_('Notes:'));
+	echo $opening.db_result($result,0,'notes').$closing;
+
+	echo $HTML->boxMiddle(_('Changes:'));
+	echo $opening.db_result($result,0,'changes').$closing;
 	echo $HTML->boxBottom();
 
 	frs_footer();
-
 }
 
 ?>
