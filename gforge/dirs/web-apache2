@@ -1,0 +1,10 @@
+etc/gforge/custom
+etc/gforge/languages-local
+etc/gforge/templates
+usr/share/gforge/bin
+usr/share/gforge/www
+var/lib/gforge/scmtarballs
+var/lib/gforge/scmsnapshots
+var/lib/gforge/download
+var/lib/gforge/etc
+var/cache/gforge

@@ -1,6 +1,6 @@
 etc/gforge
 etc/gforge/templates
-usr/lib/gforge/bin
+usr/share/gforge/bin
 var
 var/lib
 var/lib/gforge

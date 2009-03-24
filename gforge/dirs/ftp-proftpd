@@ -1,5 +1,5 @@
 etc/gforge/templates
-usr/lib/gforge/bin
+usr/share/gforge/bin
 var/lib/gforge/chroot
 var/lib/gforge/download
 var/lib/gforge/etc

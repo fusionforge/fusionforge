@@ -1,6 +1,6 @@
 etc/gforge/httpd.d
 etc/gforge/plugins/scmcvs
-usr/lib/gforge/plugins/scmcvs/bin
+usr/share/gforge/plugins/scmcvs/bin
 usr/share/gforge/plugins/scmcvs/sbin
 usr/share/gforge/plugins/scmcvs/cronjobs
 usr/share/gforge/plugins/scmcvs/common

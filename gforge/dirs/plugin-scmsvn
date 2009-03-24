@@ -1,6 +1,6 @@
 etc/gforge/httpd.d
 etc/gforge/plugins/scmsvn
-usr/lib/gforge/plugins/scmsvn/bin
+usr/share/gforge/plugins/scmsvn/bin
 usr/share/gforge/plugins/scmsvn/cronjobs
 usr/share/gforge/plugins/scmsvn/common
 var/lib/gforge/chroot/svnroot

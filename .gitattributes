@@ -67,16 +67,12 @@ gforge/deb-specific/scmcvs/cronjobs/cvs_update.pl -text
 gforge/deb-specific/scmsvn/cronjobs/svn_dump.pl -text
 gforge/deb-specific/scmsvn/cronjobs/svn_update.pl -text
 gforge/debian/compat -text
-gforge/debian/gforge-plugin-mediawiki.dirs -text
 gforge/debian/gforge-plugin-mediawiki.postinst -text
 gforge/debian/gforge-plugin-mediawiki.prerm -text
-gforge/debian/gforge-plugin-scmbzr.dirs -text
 gforge/debian/gforge-plugin-scmcvs.cron.d -text
-gforge/debian/gforge-plugin-scmcvs.dirs -text
 gforge/debian/gforge-plugin-scmcvs.postinst -text
 gforge/debian/gforge-plugin-scmcvs.prerm -text
 gforge/debian/gforge-plugin-scmsvn.cron.d -text
-gforge/debian/gforge-plugin-scmsvn.dirs -text
 gforge/debian/gforge-plugin-scmsvn.postinst -text
 gforge/debian/gforge-plugin-scmsvn.prerm -text
 gforge/debian/gforge-web-apache2.config.dsfh-in -text
@@ -95,6 +91,11 @@ gforge/debian/po/fi.po -text
 gforge/debian/po/gl.po -text
 gforge/debian/po/pt.po -text
 gforge/debian/po/ru.po -text
+gforge/dirs/plugin-mediawiki -text
+gforge/dirs/plugin-scmbzr -text
+gforge/dirs/plugin-scmcvs -text
+gforge/dirs/plugin-scmsvn -text
+gforge/dirs/web-apache2 -text
 gforge/docs/README.gettext -text
 gforge/docs/architecture/stats/stats-process.sda svneol=native#unset
 gforge/docs/docbook/build/.keepme -text svneol=unset#application/octet-stream
