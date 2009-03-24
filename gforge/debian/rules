@@ -37,7 +37,7 @@ conffiles: cronfiles dirsfiles installfiles
 
 debian/$(PACKAGE)-%.cron.d:
 	@echo "Creating $@"
-	@if [ "$@" = "$(PACKAGE)-db-postgresql.cron.d" ] ; then \
+	@if [ "$@" = "debian/$(PACKAGE)-db-postgresql.cron.d" ] ; then \
 	cat $(CURDIR)/cron.d/00phpcron > $@ ; \
 	cat $(CURDIR)/cron.d/db-postgresql >> $@ ; \
 	cat $(CURDIR)/cron.d/db-postgresql-2 >> $@ ; \
