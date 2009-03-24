@@ -1,0 +1,4 @@
+deb-specific/install-dns.sh            usr/share/gforge/bin/
+deb-specific/dns.head.template         var/lib/gforge/bind/
+deb-specific/dns.simple.template       var/lib/gforge/bind/
+deb-specific/dns_conf.pl               usr/share/gforge/bin/

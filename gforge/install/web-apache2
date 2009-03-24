@@ -1,0 +1,5 @@
+www                                 usr/share/gforge/
+www/index_std.php                   etc/gforge/custom/
+utils/install-apache.sh             usr/share/gforge/bin/
+deb-specific/create-vhosts.sh       usr/share/gforge/bin/
+deb-specific/prepare-vhosts-file.pl usr/share/gforge/bin/

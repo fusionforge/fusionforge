@@ -116,6 +116,19 @@ gforge/image-sources/fusionforge-logo.xcf -text svneol=unset#unset
 gforge/image-sources/pow-fusionforge.xcf -text svneol=unset#unset
 gforge/image-sources/top-logo.xcf -text svneol=unset#unset
 gforge/install.sh -text
+gforge/install/common -text
+gforge/install/db-postgresql -text
+gforge/install/dns-bind9 -text
+gforge/install/ftp-proftpd -text
+gforge/install/lists-mailman -text
+gforge/install/mta-exim4 -text
+gforge/install/mta-postfix -text
+gforge/install/plugin-mediawiki -text
+gforge/install/plugin-scmbzr -text
+gforge/install/plugin-scmcvs -text
+gforge/install/plugin-scmsvn -text
+gforge/install/shell-postgresql -text
+gforge/install/web-apache2 -text
 gforge/plugins/createplugin.sh -text
 gforge/plugins/cvstracker/db/cvstracker-init-mysql.sql -text
 gforge/plugins/cvstracker/gforge-plugin-cvstracker.spec -text svneol=unset#application/octet-stream
