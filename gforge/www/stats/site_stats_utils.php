@@ -259,13 +259,21 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 		<tr valign="top" align="right" class="tableheading">
 			<td><strong><?php echo _('Group Name'); ?></strong></td>
 			<td colspan="2"><strong><?php echo _('Page Views'); ?></strong></td>
+			<?php if ($GLOBALS['sys_use_frs']) { ?>
 			<td><strong><?php echo _('Downloads'); ?></strong></td>
+			<?php } ?>
+			<?php if ($GLOBALS['sys_use_tracker']) { ?>
 			<td colspan="2"><strong><?php echo _('Bugs'); ?></strong></td>
 			<td colspan="2"><strong><?php echo _('Support'); ?></strong></td>
 			<td colspan="2"><strong><?php echo _('Patches'); ?></strong></td>
 			<td colspan="2"><strong><?php echo _('All Trkr'); ?></strong></td>
+			<?php } ?>
+			<?php if ($GLOBALS['sys_use_pm']) { ?>
 			<td colspan="2"><strong><?php echo _('Tasks'); ?></strong></td>
+			<?php } ?>
+			<?php if ($GLOBALS['sys_use_cvs']) { ?>
 			<td colspan="3"><strong><?php echo _('CVS'); ?></strong></td>
+			<?php } ?>
 		</tr>
 
 		<?php
@@ -285,7 +293,10 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 			<td>&nbsp;</td>
 			<td><a href="<?php echo $uri_string; ?>site_views"><?php echo _('Site'); ?></a></td>
 			<td><a href="<?php echo $uri_string; ?>subdomain_views"><?php echo _('Subdomain'); ?></a></td>
+			<?php if ($GLOBALS['sys_use_frs']) { ?>
 			<td><a href="<?php echo $uri_string; ?>downloads"><?php echo _('Total'); ?></a></td>
+			<?php } ?>
+			<?php if ($GLOBALS['sys_use_tracker']) { ?>
 			<td><a href="<?php echo $uri_string; ?>bugs_opened"><?php echo _('Opn'); ?></a></td>
 			<td><a href="<?php echo $uri_string; ?>bugs_closed"><?php echo _('Cls'); ?></a></td>
 			<td><a href="<?php echo $uri_string; ?>support_opened"><?php echo _('Opn'); ?></a></td>
@@ -294,11 +305,16 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 			<td><a href="<?php echo $uri_string; ?>patches_closed"><?php echo _('Cls'); ?></a></td>
 			<td><a href="<?php echo $uri_string; ?>artifacts_opened"><?php echo _('Opn'); ?></a></td>
 			<td><a href="<?php echo $uri_string; ?>artifacts_closed"><?php echo _('Cls'); ?></a></td>
+			<?php } ?>
+			<?php if ($GLOBALS['sys_use_pm']) { ?>
 			<td><a href="<?php echo $uri_string; ?>tasks_opened"><?php echo _('Opn'); ?></a></td>
 			<td><a href="<?php echo $uri_string; ?>tasks_closed"><?php echo _('Cls'); ?></a></td>
+			<?php } ?>
+			<?php if ($GLOBALS['sys_use_scm']) { ?>
 			<td><a href="<?php echo $uri_string; ?>cvs_checkouts"><?php echo _('CO\'s'); ?></a></td>
 			<td><a href="<?php echo $uri_string; ?>cvs_commits"><?php echo _('Comm\'s'); ?></a></td>
 			<td><a href="<?php echo $uri_string; ?>cvs_adds"><?php echo _('Adds'); ?></a></td>
+			<?php } ?>
 			</tr>
 		<?php
 	
@@ -307,22 +323,30 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 			print	'<tr ' . $GLOBALS['HTML']->boxGetAltRowStyle($i) . ' align="right">'
 				. '<td>' . ($i + 1) . util_make_link ('/project/stats/?group_id='.$row["group_id"], $row["group_name"]) . '</td>'
 				. '<td>&nbsp;&nbsp;' . number_format( $row["site_views"],0 ) . '</td>'
-				. '<td>&nbsp;&nbsp;' . number_format( $row["subdomain_views"],0 ) . '</td>'
-				. '<td>&nbsp;&nbsp;' . number_format( $row["downloads"],0 ) . '</td>'
-				. '<td>&nbsp;&nbsp;' . number_format( $row["bugs_opened"],0 ) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format( $row["subdomain_views"],0 ) . '</td>';
+			if ($GLOBALS['sys_use_frs']) {
+				print '<td>&nbsp;&nbsp;' . number_format( $row["downloads"],0 ) . '</td>';
+			}
+			if ($GLOBALS['sys_use_tracker']) {
+				print '<td>&nbsp;&nbsp;' . number_format( $row["bugs_opened"],0 ) . '</td>'
 				. '<td>&nbsp;&nbsp;' . number_format( $row["bugs_closed"],0 ) . '</td>'
 				. '<td>&nbsp;&nbsp;' . number_format( $row["support_opened"],0 ) . '</td>'
 				. '<td>&nbsp;&nbsp;' . number_format( $row["support_closed"],0 ) . '</td>'
 				. '<td>&nbsp;&nbsp;' . number_format( $row["patches_opened"],0 ) . '</td>'
 				. '<td>&nbsp;&nbsp;' . number_format( $row["patches_closed"],0 ) . '</td>'
 				. '<td>&nbsp;&nbsp;' . number_format( $row["artifacts_opened"],0 ) . '</td>'
-				. '<td>&nbsp;&nbsp;' . number_format( $row["artifacts_closed"],0 ) . '</td>'
-				. '<td>&nbsp;&nbsp;' . number_format( $row["tasks_opened"],0 ) . '</td>'
-				. '<td>&nbsp;&nbsp;' . number_format( $row["tasks_opened"],0 ) . '</td>'
-				. '<td>&nbsp;&nbsp;' . number_format( $row["cvs_checkouts"],0 ) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format( $row["artifacts_closed"],0 ) . '</td>';
+			}
+			if ($GLOBALS['sys_use_pm']) {
+				print '<td>&nbsp;&nbsp;' . number_format( $row["tasks_opened"],0 ) . '</td>'
+				. '<td>&nbsp;&nbsp;' . number_format( $row["tasks_opened"],0 ) . '</td>';
+			}
+			if ($GLOBALS['sys_use_scm']) {
+				print '<td>&nbsp;&nbsp;' . number_format( $row["cvs_checkouts"],0 ) . '</td>'
 				. '<td>&nbsp;&nbsp;' . number_format( $row["cvs_commits"],0 ) . '</td>'
-				. '<td>&nbsp;&nbsp;' . number_format( $row["cvs_adds"],0 ) . '</td>'
-				. '</tr>' . "\n";
+				. '<td>&nbsp;&nbsp;' . number_format( $row["cvs_adds"],0 ) . '</td>';
+			}
+			print '</tr>' . "\n";
 			$i++;
 			$sum = stats_util_sum_array( $sum, $row );
 		}
@@ -502,4 +526,4 @@ function stats_site_aggregate( ) {
 // c-file-style: "bsd"
 // End:
 
-?>
+>
