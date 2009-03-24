@@ -28,7 +28,7 @@ case "$1" in
 	gforge-config
 
 	# Prepare database
-	su -s /bin/sh gforge -c '/usr/lib/gforge/bin/register-plugin scmcvs "CVS"'
+	su -s /bin/sh gforge -c '/usr/share/gforge/bin/register-plugin scmcvs "CVS"'
 	test -f /etc/default/apache2 && . /etc/default/apache2
 	if [ "$NO_START" != "0" ]; then
 		if [ -x /usr/sbin/apache ]; then
@@ -40,10 +40,10 @@ case "$1" in
 		fi
 	fi
         # Setup our CVS
-	/usr/lib/gforge/plugins/scmcvs/bin/install-cvs.sh configure
+	/usr/share/gforge/plugins/scmcvs/bin/install-cvs.sh configure
 
 	# Making user group and cvs update from database 
-	/usr/lib/gforge/plugins/scmcvs/bin/update-user-group-ssh.sh > /dev/null 2>&1
+	/usr/share/gforge/plugins/scmcvs/bin/update-user-group-ssh.sh > /dev/null 2>&1
 	rm -f /var/lib/gforge/dumps/*cvs*dump
 	su -s /bin/sh gforge -c /usr/share/gforge/plugins/scmcvs/cronjobs/cvs_dump.pl
 	/usr/share/gforge/plugins/scmcvs/cronjobs/cvs_update.pl

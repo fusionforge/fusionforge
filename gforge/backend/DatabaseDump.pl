@@ -9,7 +9,7 @@ use DBI;
 use Sys::Hostname;
 use POSIX qw(strftime);
 
-require ("/usr/lib/gforge/lib/include.pl") ; 
+require ("/usr/share/gforge/lib/include.pl") ; 
 
 &open_log_file;
 

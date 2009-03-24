@@ -2,9 +2,9 @@
 
 set -e
 
-su -s /bin/sh gforge -c /usr/lib/gforge/bin/prepare-vhosts-file.pl
+su -s /bin/sh gforge -c /usr/share/gforge/bin/prepare-vhosts-file.pl
 [ -f /var/lib/gforge/etc/templates/httpd.vhosts ] && \
-	/usr/lib/gforge/bin/fill-in-the-blanks.pl \
+	/usr/share/gforge/bin/fill-in-the-blanks.pl \
 		/var/lib/gforge/etc/templates/httpd.vhosts \
 		/var/lib/gforge/etc/httpd.vhosts \
 		/etc/gforge/gforge.conf

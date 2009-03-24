@@ -10,7 +10,7 @@ use vars qw/$dbh @reqlist $thdir $thname/ ;
 
 sub debug ( $ ) ;
 
-require ("/usr/lib/gforge/lib/include.pl") ; # Include all the predefined functions 
+require ("/usr/share/gforge/lib/include.pl") ; # Include all the predefined functions 
 
 &db_connect ;
 

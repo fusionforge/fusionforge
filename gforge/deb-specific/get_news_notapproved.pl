@@ -14,7 +14,7 @@ use Mail::Sendmail;
 
 use strict;
 
-require("/usr/lib/gforge/lib/include.pl");  # Include all predefined functions
+require("/usr/share/gforge/lib/include.pl");  # Include all predefined functions
 
 use vars qw/ $server_admin $sys_name $sys_default_domain /;
 

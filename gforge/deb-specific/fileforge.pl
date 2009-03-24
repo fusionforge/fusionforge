@@ -23,19 +23,19 @@ $homedir_prefix = "/var/lib/gforge/chroot/home/users/" ;
 
 # Check which mode we're in
 # Normal fileforge
-if ($0 eq "/usr/lib/gforge/bin/fileforge.pl") {
+if ($0 eq "/usr/share/gforge/bin/fileforge.pl") {
     &fileforge ;
     exit 0 ;
 }
 # Temporary moving of files (for quick release system)
-if ($0 eq "/usr/lib/gforge/bin/tmpfilemove.pl") {
+if ($0 eq "/usr/share/gforge/bin/tmpfilemove.pl") {
     &tmpfilemove ;
     exit 0 ;
 }
 # If we're not in one of these two modes, then fail
 print STDERR "You must call this script as one of:
-* /usr/lib/gforge/bin/fileforge.pl (normal execution)
-* /usr/lib/gforge/bin/tmpfilemove.pl (for QRS)" ;
+* /usr/share/gforge/bin/fileforge.pl (normal execution)
+* /usr/share/gforge/bin/tmpfilemove.pl (for QRS)" ;
 die "Unauthorized invocation '$0'" ;
 
 sub fileforge {

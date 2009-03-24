@@ -22,7 +22,7 @@ case "$1" in
     remove|deconfigure)
 	if [ -f /var/run/postgresql/.s.PGSQL.5432 ]
 	then
-		/usr/lib/gforge/bin/unregister-plugin scmsvn
+		/usr/share/gforge/bin/unregister-plugin scmsvn
 	else
 		echo "WARNING: GForge database not available to unregister scmsvn plugin"
 	fi

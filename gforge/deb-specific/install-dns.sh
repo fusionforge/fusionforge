@@ -41,7 +41,7 @@ EOF
 	    cp /var/lib/gforge/bind/dns.head /var/lib/gforge/bind/dns.zone
 	    chown -R gforge:gforge /var/lib/gforge/bind
 
-	    /usr/lib/gforge/bin/dns_conf.pl
+	    /usr/share/gforge/bin/dns_conf.pl
 	else
             [ -f /var/lib/gforge/bind/dns.head ] && echo "Removing /var/lib/gforge/bind/dns.head" && \
 	    rm /var/lib/gforge/bind/dns.head

@@ -24,8 +24,8 @@ use vars qw/$sys_default_domain $sys_scm_host $sys_download_host
     $skill_list $libdir $sqldir/ ;
 
 require ("/etc/gforge/local.pl") ; 
-$libdir="/usr/lib/gforge/lib";
-$sqldir="/usr/lib/gforge/db";
+$libdir="/usr/share/gforge/lib";
+$sqldir="/usr/share/gforge/db";
 require ("$libdir/sqlparser.pm") ; # Our magic SQL parser
 require ("$libdir/sqlhelper.pm") ; # Our SQL functions
 require ("$libdir/include.pl");  # Some other functions
@@ -2059,9 +2059,9 @@ eval {
 #
 # We got this at upgrade
 #
-#DBD::Pg::st execute failed: ERREUR:  la relation avec l'OID 387345 n'existe pas at /usr/lib/gforge/bin/db-upgrade.pl line 1970.
-#Transaction aborted because DBD::Pg::st execute failed: ERREUR:  la relation avec l'OID 387345 n'existe pas at /usr/lib/gforge/bin/db-upgrade.pl line 1970.
-#Transaction aborted because DBD::Pg::st execute failed: ERREUR:  la relation avec l'OID 387345 n'existe pas at /usr/lib/gforge/bin/db-upgrade.pl line 1970.
+#DBD::Pg::st execute failed: ERREUR:  la relation avec l'OID 387345 n'existe pas at /usr/share/gforge/bin/db-upgrade.pl line 1970.
+#Transaction aborted because DBD::Pg::st execute failed: ERREUR:  la relation avec l'OID 387345 n'existe pas at /usr/share/gforge/bin/db-upgrade.pl line 1970.
+#Transaction aborted because DBD::Pg::st execute failed: ERREUR:  la relation avec l'OID 387345 n'existe pas at /usr/share/gforge/bin/db-upgrade.pl line 1970.
 #Last SQL query was:
 #update project_task SET last_modified_date=EXTRACT(EPOCH FROM now())::integer;
 #(end of query)

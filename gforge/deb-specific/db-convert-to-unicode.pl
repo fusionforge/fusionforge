@@ -23,8 +23,8 @@ use vars qw/$sys_default_domain $sys_scm_host $sys_download_host
 sub debug ( $ ) ;
 sub convert_column_to_charset ( $$$$$ ) ;
 
-require ("/usr/lib/gforge/lib/include.pl") ; # Include a few predefined functions 
-require ("/usr/lib/gforge/lib/sqlparser.pm") ; # Our magic SQL parser
+require ("/usr/share/gforge/lib/include.pl") ; # Include a few predefined functions 
+require ("/usr/share/gforge/lib/sqlparser.pm") ; # Our magic SQL parser
 
 debug "You'll see some debugging info during this installation." ;
 debug "Do not worry unless told otherwise." ;

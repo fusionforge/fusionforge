@@ -8,7 +8,7 @@ use DBI;
 my($name,$passwd,$uid,$gid,$quota,$comment,$gcos,$dir,$shell) = getpwnam("gforge");
 $> = $uid;
 
-require("/usr/lib/gforge/lib/include.pl");  # Include all the predefined functions
+require("/usr/share/gforge/lib/include.pl");  # Include all the predefined functions
 
 my $verbose = 0;
 my $user_array = ();
@@ -100,11 +100,11 @@ sub add_group {
         if ($is_public) {
             $default_perms = 2775 ;
             $file_default_perms = 664;
-	    $default_page = "/usr/lib/gforge/lib/default_page.php" ;
+	    $default_page = "/usr/share/gforge/lib/default_page.php" ;
         } else {
             $default_perms = 2770 ;
             $file_default_perms = 660;
-	    $default_page = "/usr/lib/gforge/lib/private_default_page.php" ;
+	    $default_page = "/usr/share/gforge/lib/private_default_page.php" ;
         }
 	
 	if ($verbose) {print("Making a Group for : $gname\n")};

@@ -30,7 +30,7 @@ case "$1" in
 	gforge-config
 
         # Patch Proftpd configuration files
-	/usr/lib/gforge/bin/install-ftp.sh configure-files
+	/usr/share/gforge/bin/install-ftp.sh configure-files
 	if [ -f /etc/proftpd/proftpd.conf.gforge-new ]
 	then
 		ucf --debconf-ok /etc/proftpd/proftpd.conf.gforge-new /etc/proftpd/proftpd.conf
@@ -38,7 +38,7 @@ case "$1" in
 	fi
 
         # Setup our FTP
-	/usr/lib/gforge/bin/install-ftp.sh configure 
+	/usr/share/gforge/bin/install-ftp.sh configure 
 
         # Setup our FRS
 	chown www-data:www-data /var/lib/gforge/download

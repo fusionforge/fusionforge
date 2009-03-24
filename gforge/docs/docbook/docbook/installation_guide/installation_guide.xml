@@ -866,7 +866,7 @@ DEFINE("USE_CACHE", false);
 			<section>
 				<title>Perl</title>
 				<para>If you want to use some of the Perl scripts that access the database, you'll need the <literal>DBI</literal> and <literal>DBD::Pg</literal> Perl modules.  On Red Hat systems (and variants), you can get them by installing the <literal>libdbi</literal> and <literal>libdbd-pgsql</literal> packages.  On Debian systems (and variants), the packages are called <literal>libdbi-perl</literal> and <literal>libdbd-pg-perl</literal>.</para>
-				<para>You'll also need to install <filename>utils/include.pl</filename> to <filename class="directory">/usr/lib/gforge/lib/</filename>, and put some configuration variables into <filename class="directory">/etc/gforge/local.pl</filename>.  In particular, you'll need something like the following in <filename>local.pl</filename>:</para>
+				<para>You'll also need to install <filename>utils/include.pl</filename> to <filename class="directory">/usr/share/gforge/lib/</filename>, and put some configuration variables into <filename class="directory">/etc/gforge/local.pl</filename>.  In particular, you'll need something like the following in <filename>local.pl</filename>:</para>
 <programlisting>
 $sys_default_domain = 'gforge.company.com' ;
 $sys_dbhost = '192.168.12.34' ;

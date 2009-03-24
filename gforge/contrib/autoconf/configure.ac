@@ -50,7 +50,7 @@ dnl we should probably display a list of valid defaults (once there are more)
 			sys_upload_dir=/var/lib/gforge/download/
 
 			TOP_DIR=/usr/share/gforge
-			CGIBIN_DIR=/usr/lib/gforge/cgi-bin
+			CGIBIN_DIR=/usr/share/gforge/cgi-bin
 
 			sys_urlroot=/usr/share/gforge/www/
 			sys_ldap_admin_dn="admin,$LDAP_BASE_DN"

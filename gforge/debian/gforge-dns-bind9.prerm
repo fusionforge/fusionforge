@@ -23,7 +23,7 @@ case "$1" in
 	db_title "Unconfiguring Gforge"
 
 	# Unpatch Bind configuration files
-	/usr/lib/gforge/bin/install-dns.sh purge-files
+	/usr/share/gforge/bin/install-dns.sh purge-files
 	ucf --debconf-ok /etc/bind/named.conf.gforge-new /etc/bind/named.conf
 	rm /etc/bind/named.conf.gforge-new
 	ucf --purge /etc/bind/named.conf
@@ -32,7 +32,7 @@ case "$1" in
 	db_stop
 
         # DNS config removal
-	/usr/lib/gforge/bin/install-dns.sh purge
+	/usr/share/gforge/bin/install-dns.sh purge
 
 	;;
     upgrade|deconfigure|failed-upgrade)

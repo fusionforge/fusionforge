@@ -1,4 +1,13 @@
-gforge (4.7.2.99.1-1) experimental; urgency=low
+gforge (4.7.2.50-2) experimental; urgency=low
+
+  * Removed all files from /usr/lib/gforge and put them in /usr/share/gforge
+  * cron scripts ar now in /usr/share/gforge/cronjobs
+  * Now generate *.cron.d *.dirs *.install from cron.d/dirs/install dirs
+  * Use dh_install instead of copy in rules
+
+ -- Christian Bayle <bayle@debian.org>  Tue, 24 Mar 2009 00:38:26 +0100
+
+gforge (4.7.1.99.2-1) experimental; urgency=low
 
   * New package: gforge-plugin-scmbzr (not complete yet!).
 

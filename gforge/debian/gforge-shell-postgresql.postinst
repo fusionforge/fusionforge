@@ -30,7 +30,7 @@ case "$1" in
 	gforge-config
 
         # Patch NSS configuration files
-	/usr/lib/gforge/bin/install-nsspgsql.sh configure-files
+	/usr/share/gforge/bin/install-nsspgsql.sh configure-files
 	ucf --debconf-ok /etc/nss-pgsql.conf.gforge-new /etc/nss-pgsql.conf
 	ucf --debconf-ok /etc/nss-pgsql-root.conf.gforge-new /etc/nss-pgsql-root.conf
 	ucf --debconf-ok /etc/nsswitch.conf.gforge-new /etc/nsswitch.conf
@@ -39,7 +39,7 @@ case "$1" in
 	rm /etc/nsswitch.conf.gforge-new
 
 	# Install the chroot environment
-	/usr/lib/gforge/bin/install-chroot.sh configure
+	/usr/share/gforge/bin/install-chroot.sh configure
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

@@ -75,7 +75,7 @@ case "$1" in
         # Setup our Apache
 	touch /var/lib/gforge/etc/templates/httpd.vhosts  && \
 		chown gforge:gforge /var/lib/gforge/etc/templates/httpd.vhosts && \
-		/usr/lib/gforge/bin/create-vhosts.sh --norestart
+		/usr/share/gforge/bin/create-vhosts.sh --norestart
 
 	# Enable required modules
 	DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod php5 || true

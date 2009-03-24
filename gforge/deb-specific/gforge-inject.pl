@@ -26,7 +26,7 @@ use vars qw/$sys_default_domain $sys_scm_host $sys_download_host
     $skill_list/ ;
 
 sub debug ( $ ) ;
-require ("/usr/lib/gforge/lib/include.pl") ;
+require ("/usr/share/gforge/lib/include.pl") ;
 
 ###
 # Local customisation

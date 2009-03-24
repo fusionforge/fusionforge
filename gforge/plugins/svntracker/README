@@ -33,17 +33,17 @@ General instructions:
 
 1.2.1 Install the database
 	You'll find this file within this package. Just run it without parameters.
-        /usr/lib/gforge/plugins/svntracker/bin/db-upgrade.pl
+        /usr/share/gforge/plugins/svntracker/bin/db-upgrade.pl
 
 1.2.2 Register the plugin
 	You'll find the script register-plugin with your current Gforge installation. 
 Use it in the following way.
-        /usr/lib/gforge/bin/register-plugin svntracker "svntracker"
+        /usr/share/gforge/bin/register-plugin svntracker "svntracker"
 
 1.2.3 Install the cron file
    	You should install a cron file in /etc/cron.d/gforge-plugin-svntracker like this:
 
-   35 1 * * * root [ -x /usr/lib/gforge/plugins/svntracker/bin/update_postcommit.php ] && /usr/lib/gforge/plugins/svntracker/bin/update_postcommit.php -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include
+   35 1 * * * root [ -x /usr/share/gforge/plugins/svntracker/bin/update_postcommit.php ] && /usr/share/gforge/plugins/svntracker/bin/update_postcommit.php -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include
 
 1.2.4 Configure the plugin
 

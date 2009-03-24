@@ -88,7 +88,7 @@ permissions on the `siteadmin' project) via the web interface.
   If you need to add skills to the database after installation, you
 can use the sf-add-skill script.  Give it a skill (or a list of
 skills) and it'll insert it into the databse.  This script is located
-in /usr/lib/gforge/bin/.
+in /usr/share/gforge/bin/.
 
   For cvs to work you have to add a symlink doing
 ln -s /var/lib/gforge/chroot/cvsroot /cvsroot.

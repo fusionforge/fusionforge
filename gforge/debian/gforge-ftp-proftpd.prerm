@@ -22,7 +22,7 @@ case "$1" in
 	db_title "Unconfiguring Gforge"
 
 	# Unpatch Proftpd configuration files
-	/usr/lib/gforge/bin/install-ftp.sh purge-files
+	/usr/share/gforge/bin/install-ftp.sh purge-files
 	ucf --debconf-ok /etc/proftpd/proftpd.conf.gforge-new /etc/proftpd/proftpd.conf
 	rm /etc/proftpd/proftpd.conf.gforge-new
 	ucf --purge /etc/proftpd/proftpd.conf
@@ -31,7 +31,7 @@ case "$1" in
 	db_stop
 
         # FTP config removal
-	/usr/lib/gforge/bin/install-ftp.sh purge
+	/usr/share/gforge/bin/install-ftp.sh purge
 	;;
     upgrade|deconfigure|failed-upgrade)
         ;;

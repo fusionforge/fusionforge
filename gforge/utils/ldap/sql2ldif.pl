@@ -9,7 +9,7 @@
 use DBI;
 
 #require("base64.pl");  # Include all the predefined functions
-require("/usr/lib/gforge/lib/include.pl");  # Include all the predefined functions
+require("/usr/share/gforge/lib/include.pl");  # Include all the predefined functions
 $chroot="/var/lib/gforge/chroot";
 &db_connect;
 

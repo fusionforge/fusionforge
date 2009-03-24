@@ -10,12 +10,49 @@
 PACKAGE=gforge
 include /usr/share/dpatch/dpatch.make
 
+# This one should be declared like other when it will be unified with rpm
+CRONFILESLIST=debian/$(PACKAGE)-lists-mailman.cron.d debian/$(PACKAGE)-web-apache2.cron.d debian/$(PACKAGE)-db-postgresql.cron.d debian/$(PACKAGE)-dns-bind9.cron.d debian/$(PACKAGE)-plugin-scmcvs.cron.d debian/$(PACKAGE)-ftp-proftpd.cron.d debian/$(PACKAGE)-shell-postgresql.cron.d debian/$(PACKAGE)-plugin-scmsvn.cron.d
+DIRSFILESLIST=$(patsubst dirs/%,debian/$(PACKAGE)-%.dirs,$(wildcard dirs/[a-z]*))
+INSTALLFILESLIST=$(patsubst install/%,debian/$(PACKAGE)-%.install,$(wildcard install/[a-z]*))
+
+listecho: 
+	@echo $(CRONFILESLIST)
+	@echo $(DIRSFILESLIST)
+	@echo $(INSTALLFILESLIST)
+
 remove-binary-files:
 	# Remove files in contrib, especially binaries that break dpkg-source
 #	find contrib/ -name CVS -prune -not -name CVS -or -type f | xargs rm -f
 	# Also a few images
 #	rm -f www/themes/gforge/images/es_*
 	sh $(CURDIR)/deb-specific/manage-uufiles.sh clean
+
+cronfiles: $(CRONFILESLIST)
+
+dirsfiles: $(DIRSFILESLIST)
+
+installfiles: $(INSTALLFILESLIST)
+
+conffiles: cronfiles dirsfiles installfiles
+
+debian/$(PACKAGE)-%.cron.d:
+	@echo "Creating $@"
+	@if [ "$@" = "$(PACKAGE)-db-postgresql.cron.d" ] ; then \
+	cat $(CURDIR)/cron.d/00phpcron > $@ ; \
+	cat $(CURDIR)/cron.d/db-postgresql >> $@ ; \
+	cat $(CURDIR)/cron.d/db-postgresql-2 >> $@ ; \
+	else \
+		echo "copy $(CURDIR)/cron.d/$* to $@" ; \
+		cp $(CURDIR)/cron.d/$* $@ ; \
+	fi
+
+debian/$(PACKAGE)-%.dirs:
+	@echo "Creating $@"
+	cp $(CURDIR)/dirs/$* $@ 
+
+debian/$(PACKAGE)-%.install:
+	@echo "Creating $@"
+	cp $(CURDIR)/install/$* $@ 
 
 configure: configure-stamp debian/po/templates.pot
 configure-stamp: remove-binary-files
@@ -46,6 +83,9 @@ clean: remove-binary-files unpatch
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp configure-stamp
+	rm -f $(CURDIR)/debian/*.cron.d
+	rm -f $(CURDIR)/debian/*.dirs
+	rm -f $(CURDIR)/debian/*.install
 	rm -f cvssh.1 gforge-config.1
 
 	rm -rf locales/*
@@ -57,193 +97,44 @@ install: build
 	dh_testdir
 	dh_testroot
 	dh_clean -k
+
+	# Generate conffiles *.cron.d *.dirs *.install
+	$(CURDIR)/debian/rules conffiles
+
 	dh_installdirs
 
 	# Preprocess files with DSF-Helper
 	perl $(CURDIR)/deb-specific/dsf-helper.pl
 
-	# gforge
-	# (gforge is a meta-package and needs no files)
+	# Install files
+	#dh_install --fail-missing -X.svn -X.arch-ids -X.bzr -X.cvsignore --sourcedir=$(CURDIR)
+	dh_install -X.svn -X.arch-ids -X.bzr -X.cvsignore --sourcedir=$(CURDIR)
 
-	# gforge-plugin-scmcvs
-	install -m 755 deb-specific/install-cvs.sh     $(CURDIR)/debian/gforge-plugin-scmcvs/usr/lib/gforge/plugins/scmcvs/bin/
-	install -m 755 deb-specific/update-user-group-ssh.sh $(CURDIR)/debian/gforge-plugin-scmcvs/usr/lib/gforge/plugins/scmcvs/bin/
-	cp -r deb-specific/scmcvs/cronjobs/* $(CURDIR)/debian/gforge-plugin-scmcvs/usr/share/gforge/plugins/scmcvs/cronjobs
-	cp -r plugins/scmcvs/bin/* $(CURDIR)/debian/gforge-plugin-scmcvs/usr/lib/gforge/plugins/scmcvs/bin/
-	cp -r plugins/scmcvs/sbin/* $(CURDIR)/debian/gforge-plugin-scmcvs/usr/share/gforge/plugins/scmcvs/sbin/
-	chmod 755 $(CURDIR)/debian/gforge-plugin-scmcvs/usr/share/gforge/plugins/scmcvs/sbin/*
-	cp -r plugins/scmcvs/common/* $(CURDIR)/debian/gforge-plugin-scmcvs/usr/share/gforge/plugins/scmcvs/common/
-	cp -r plugins/scmcvs/cronjobs/* $(CURDIR)/debian/gforge-plugin-scmcvs/usr/share/gforge/plugins/scmcvs/cronjobs/
-	cp -r plugins/scmcvs/etc/plugins/scmcvs/* $(CURDIR)/debian/gforge-plugin-scmcvs/etc/gforge/plugins/scmcvs/
+	# Install few links
+	ln -s database-pgsql.php $(CURDIR)/debian/$(PACKAGE)-common/usr/share/$(PACKAGE)/common/include/database.php
+	ln -s /usr/share/mediawiki/skins/$(PACKAGE)/loader.php $(CURDIR)/debian/$(PACKAGE)-plugin-mediawiki/etc/mediawiki-extensions/extensions-available/GforgeAuth.php
 
-	# gforge-plugin-scmsvn
-	install -m 755 deb-specific/install-svn.sh     $(CURDIR)/debian/gforge-plugin-scmsvn/usr/lib/gforge/plugins/scmsvn/bin/
-	cp -r deb-specific/scmsvn/cronjobs/* $(CURDIR)/debian/gforge-plugin-scmsvn/usr/share/gforge/plugins/scmsvn/cronjobs
-	cp -r plugins/scmsvn/bin/* $(CURDIR)/debian/gforge-plugin-scmsvn/usr/lib/gforge/plugins/scmsvn/bin/
-	cp -r plugins/scmsvn/common/* $(CURDIR)/debian/gforge-plugin-scmsvn/usr/share/gforge/plugins/scmsvn/common/
-	cp -r plugins/scmsvn/cronjobs/* $(CURDIR)/debian/gforge-plugin-scmsvn/usr/share/gforge/plugins/scmsvn/cronjobs/
-	rm -f $(CURDIR)/debian/gforge-plugin-scmsvn/usr/share/gforge/plugins/scmsvn/cronjobs/README
-	find $(CURDIR)/debian/gforge-plugin-scmsvn/usr/share/gforge/plugins/scmsvn/cronjobs/ -type f | xargs chmod 0755
-	cp -r plugins/scmsvn/etc/plugins/scmsvn/* $(CURDIR)/debian/gforge-plugin-scmsvn/etc/gforge/plugins/scmsvn/
-
-	# gforge-plugin-scmbzr
-	# cp -r plugins/scmbzr/bin/* $(CURDIR)/debian/gforge-plugin-scmbzr/usr/lib/gforge/plugins/scmbzr/bin/
-	cp -r plugins/scmbzr/common/* $(CURDIR)/debian/gforge-plugin-scmbzr/usr/share/gforge/plugins/scmbzr/common/
-	# cp -r plugins/scmbzr/cronjobs/* $(CURDIR)/debian/gforge-plugin-scmbzr/usr/share/gforge/plugins/scmbzr/cronjobs/
-	cp -r plugins/scmbzr/etc/plugins/scmbzr/* $(CURDIR)/debian/gforge-plugin-scmbzr/etc/gforge/plugins/scmbzr/
-
-	# gforge-plugin-mediawiki
-	cp -r plugins/mediawiki/common/* $(CURDIR)/debian/gforge-plugin-mediawiki/usr/share/gforge/plugins/mediawiki/common/
-	cp -r plugins/mediawiki/www/* $(CURDIR)/debian/gforge-plugin-mediawiki/usr/share/gforge/www/plugins/mediawiki/
-	cp -r plugins/mediawiki/mediawiki-skin/* $(CURDIR)/debian/gforge-plugin-mediawiki/usr/share/mediawiki/skins/
-	cp -r plugins/mediawiki/etc/httpd.d/* $(CURDIR)/debian/gforge-plugin-mediawiki/usr/share/gforge/etc/httpd.d/
-	ln -s /usr/share/mediawiki/skins/gforge/loader.php $(CURDIR)/debian/gforge-plugin-mediawiki/etc/mediawiki-extensions/extensions-available/GforgeAuth.php
-
-	# gforge-common
-	install -m 644 etc/httpd.d/[0-9][0-9]*            $(CURDIR)/debian/gforge-common/usr/share/gforge/etc/httpd.d/
-	install -m 644 etc/httpd.d/httpd*                 $(CURDIR)/debian/gforge-common/usr/share/gforge/etc/httpd.d/
-	install -m 644 etc/local.d/[0-9][0-9]*            $(CURDIR)/debian/gforge-common/usr/share/gforge/etc/local.d/
-	install -m 644 etc/templates/*\.*                 $(CURDIR)/debian/gforge-common/usr/share/gforge/etc/templates/
-	install -m 755 setup                               $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
-	install -m 755 deb-specific/cvssh.pl               $(CURDIR)/debian/gforge-common/bin/cvssh
+	# Fix permissions
+	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -type f -exec chmod 644 {} \;  ; done
+	-chmod 755 $(CURDIR)/debian/*/*/*/*/bin/* $(CURDIR)/debian/*/*/*/*/cronjobs/* \
+		$(CURDIR)/debian/*/bin/*  $(CURDIR)/debian/*/usr/share/*/plugins/*/bin/* \
+		$(CURDIR)/debian/*/usr/share/*/plugins/*/cronjobs/*
 	#
-	install -m 755 deb-specific/install-chroot.sh     $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
-	install -m 755 deb-specific/install-ssh.sh        $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
-	install -m 755 utils/fill-in-the-blanks.pl        $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
-	install -m 755 deb-specific/gforge-config         $(CURDIR)/debian/gforge-common/usr/sbin/
-	install -m 644 utils/include.pl                   $(CURDIR)/debian/gforge-common/usr/lib/gforge/lib/
-	#
-	install -m 755 deb-specific/user_dump_update.pl   $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
-	install -m 755 deb-specific/group_dump_update.pl  $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
-#	install -m 644 cronjobs/cvs-cron/default_page.php $(CURDIR)/debian/gforge-common/usr/lib/gforge/lib/
-	install -m 755 deb-specific/ssh_dump_update.pl    $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
-	#
-	install -m 755 deb-specific/update-user-group-ssh.sh $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
-	#
-	cp -r common $(CURDIR)/debian/gforge-common/usr/share/gforge/
-	ln -s database-pgsql.php $(CURDIR)/debian/gforge-common/usr/share/gforge/common/include/database.php
-	find $(CURDIR)/debian/gforge-common/usr/share/gforge/common -type d -exec chmod 0755 {} \;
-	find $(CURDIR)/debian/gforge-common/usr/share/gforge/common -type f -exec chmod 0644 {} \;
-	find $(CURDIR)/debian/gforge-common/usr/share/gforge/common/docman/engine/ -type f -name \*.php -not -name \*.inc.php -exec chmod 0755 {} \;
-	find $(CURDIR)/debian/gforge-common/usr/share/gforge/common/docman/engine/ -type f -name \*.sh -exec chmod 0755 {} \;
-	install -m 755 cronjobs/create_scm_repos.php $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
-	cp -r locales/* $(CURDIR)/debian/gforge-common/usr/share/locale/
-
-	# gforge/debian/gforge-web-apache2
-	cp -r www $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/
-	rm $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/plugins/mediawiki
-	rm $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/plugins/*
-	install -m 644 www/index_std.php $(CURDIR)/debian/gforge-web-apache2/etc/gforge/custom/
-	find $(CURDIR)/debian/gforge-web-apache2 -name \*.uu -type f | xargs rm -f
-	rm -f $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/themes/gforge/COPYING
-	find $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www -type d -exec chmod 0755 {} \;
-	find $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www -type f -exec chmod 0644 {} \;
-	find $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www -name '*.py' -exec chmod 0755 {} \;
-	# Remove empty theme directories
-	for i in $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/themes/* ; do [ -d $$i ] && [ $$(find $$i -type f | wc -l) = 0 ] && rm -rf $$i || true ; done
-
-	chown www-data  $(CURDIR)/debian/gforge-web-apache2/var/lib/gforge/download
-	install -o www-data -m 755 -d $(CURDIR)/debian/gforge-web-apache2/var/cache/gforge
-	install -m 755 utils/install-apache.sh $(CURDIR)/debian/gforge-web-apache2/usr/lib/gforge/bin/
-	install -m 755 deb-specific/create-vhosts.sh $(CURDIR)/debian/gforge-web-apache2/usr/lib/gforge/bin/
-	install -m 755 deb-specific/prepare-vhosts-file.pl $(CURDIR)/debian/gforge-web-apache2/usr/lib/gforge/bin/
-
+	chmod 755 $(CURDIR)/debian/$(PACKAGE)-db-postgresql/usr/share/*/db/*.php
+	chmod 644 $(CURDIR)/debian/$(PACKAGE)-db-postgresql/usr/share/gforge/cronjobs/*.inc
 	# viewvc rights
-	find $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/scm/viewvc -type f -exec chmod 0644 {} \;
-	grep -ril '^#!' $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/scm/viewvc | xargs chmod 0755
-
-	# dojo toolkit
-	#chmod 0755 $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/dojo/src/storage/storage.sh
-
-	# move some files from gforge/debian/gforge-web-apache2 to gforge-common as there are needed by postgress upgrade
-	# these files should be moved one day in common/
-
-	mv $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/include/squal_pre.php \
-		$(CURDIR)/debian/gforge-common/usr/share/gforge/www/include
-	mv $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/include/squal_exit.php \
-		$(CURDIR)/debian/gforge-common/usr/share/gforge/www/include
-	mv $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/include/pre.php \
-		$(CURDIR)/debian/gforge-common/usr/share/gforge/www/include
-	mv $(CURDIR)/debian/gforge-web-apache2/usr/share/gforge/www/include/vote_function.php \
-		$(CURDIR)/debian/gforge-common/usr/share/gforge/www/include
-
-	# gforge-db-postgresql
-	install -m 644 deb-specific/sf-2.6-complete.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
-	install -m 644 deb-specific/sf2.5-to-sf2.6.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+	find $(CURDIR)/debian/$(PACKAGE)-web-apache2/usr/share/*/www/scm/viewvc -type f -exec chmod 0644 {} \;
+	grep -ril '^#!' $(CURDIR)/debian/$(PACKAGE)-web-apache2/usr/share/*/www/scm/viewvc | xargs chmod 0755
 	#
-	install -m 755 cronjobs/calculate_user_metric.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	install -m 755 cronjobs/db_trove_maint.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	install -m 755 cronjobs/project_cleanup.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	install -m 755 cronjobs/rating_stats.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	install -m 755 cronjobs/db_project_sums.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	install -m 755 cronjobs/check_stale_tracker_items.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	install -m 755 cronjobs/project_weekly_metric.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	install -m 755 cronjobs/rotate_activity.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	find $(CURDIR)/debian/$(PACKAGE)-common/usr/share/*/common/docman/engine/ -type f -name \*.php -not -name \*.inc.php -exec chmod 0755 {} \;
+	find $(CURDIR)/debian/$(PACKAGE)-common/usr/share/*/common/docman/engine/ -type f -name \*.sh -exec chmod 0755 {} \;
 	#
-	install -m 755 cronjobs/site_stats.php        $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	install -m 644 cronjobs/stats_site.inc        $(CURDIR)/debian/gforge-db-postgresql/usr/share/gforge/cronjobs/
-	install -m 644 cronjobs/stats_projects.inc    $(CURDIR)/debian/gforge-db-postgresql/usr/share/gforge/cronjobs/
+	rm -f $(CURDIR)/debian/$(PACKAGE)-plugin-scm*/usr/share/*/plugins/scm*/*/README
+	chmod 755 $(CURDIR)/debian/$(PACKAGE)-plugin-scmcvs/usr/share/*/plugins/scmcvs/sbin/*
+	# remove windows files
+	rm -rf $(CURDIR)/debian/$(PACKAGE)-web-apache2/usr/share/*/www/scm/viewvc/windows
 	#
-	install -m 755 cronjobs/reporting_cron.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	# 
-	install -m 755 cronjobs/db_stats_agg.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	install -m 755 cronjobs/massmail.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	install -m 755 cronjobs/vacuum.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	install -m 755 cronjobs/gforge-db-backup.sh $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	#
-	install -m 755 cronjobs/ftp_create_group_access.php $(CURDIR)/debian/gforge-ftp-proftpd/usr/lib/gforge/bin/
-	#
-	install -m 755 deb-specific/stats_projects_logparse.pl $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	install -m 755 deb-specific/get_news_notapproved.pl $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	install -m 755 deb-specific/install-db.sh $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	install -m 755 deb-specific/db-upgrade.pl $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	install -m 644 deb-specific/sqlparser.pm $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/lib/
-	install -m 644 deb-specific/sqlhelper.pm $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/lib/
-	install -m 755 deb-specific/sf-add-skill $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	install -m 755 deb-specific/register-theme $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	install -m 755 deb-specific/unregister-theme $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-
-	install -m 755 deb-specific/register-plugin $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
-	install -m 755 deb-specific/unregister-plugin $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
-	#
-	install -m 644 deb-specific/view_bug.sql      $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
-	install -m 644 deb-specific/view_patch.sql    $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
-	#
-	install -m 644 db/20021125.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
-	install -m 644 db/200212*.sql  $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
-	install -m 644 db/2003*.sql    $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
-	install -m 755 db/2004*php     $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
-	install -m 644 db/2004*.sql    $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
-	install -m 755 db/2005*php     $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
-	install -m 644 db/2005*.sql    $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
-	install -m 644 db/2006*.sql    $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
-	install -m 644 db/timetracking-init.sql    $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
-	install -m 644 db/20070924-forum-perm.sql    $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
-	install -m 644 db/20070924-project-perm.sql    $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
-	install -m 644 db/20070924-artifact-perm.sql    $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
-
-	# gforge-mta-exim4
-	install -m 755 deb-specific/install-exim4.sh $(CURDIR)/debian/gforge-mta-exim4/usr/lib/gforge/bin/
-
-	# gforge-mta-postfix
-	install -m 755 deb-specific/install-postfix.sh $(CURDIR)/debian/gforge-mta-postfix/usr/lib/gforge/bin/
-
-	# gforge-shell-postgresql
-	install -m 755 utils/install-nsspgsql.sh $(CURDIR)/debian/gforge-shell-postgresql/usr/lib/gforge/bin/
-
-	# gforge-ftp-proftpd
-	install -m 755 deb-specific/install-ftp.sh $(CURDIR)/debian/gforge-ftp-proftpd/usr/lib/gforge/bin/
-	install -m 644 deb-specific/sf-proftpd.conf $(CURDIR)/debian/gforge-ftp-proftpd/etc/gforge/
-
-	# gforge-dns-bind9
-	install -m 755 deb-specific/install-dns.sh $(CURDIR)/debian/gforge-dns-bind9/usr/lib/gforge/bin/
-	install -m 644 deb-specific/dns.head.template $(CURDIR)/debian/gforge-dns-bind9/var/lib/gforge/bind/
-	install -m 644 deb-specific/dns.simple.template $(CURDIR)/debian/gforge-dns-bind9/var/lib/gforge/bind/
-	install -m 755 deb-specific/dns_conf.pl $(CURDIR)/debian/gforge-dns-bind9/usr/lib/gforge/bin/
-
-	# gforge-lists-mailman
-	install -m 755 deb-specific/create-mailing-lists.pl $(CURDIR)/debian/gforge-lists-mailman/usr/lib/gforge/bin/
-	install -m 755 deb-specific/fix-mailing-lists.pl $(CURDIR)/debian/gforge-lists-mailman/usr/lib/gforge/bin/
+	rm -f $(CURDIR)/debian/$(PACKAGE)-web-apache2/usr/share/*/www/themes/gforge/COPYING
 
 	# Remove Snoopy class from binary packages (provided by libphp-snoopy)
 	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -name Snoopy.class.php | xargs rm -rf ; done
@@ -252,6 +143,7 @@ install: build
 	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -name .svn -or -name {arch} -or -name .arch-ids -or -name .bzr -or -name .cvsignore | xargs rm -rf ; done
 	# Also remove uuencoded files
 	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -name \*.uu | xargs echo rm ; done
+
 
 binary-indep: build install
 	dh_testdir
@@ -271,7 +163,7 @@ binary-indep: build install
 	#dh_link
 	dh_strip
 	dh_compress
-	#dh_fixperms
+	 dh_fixperms
 	#dh_makeshlibs
 	dh_installdeb
 	#dh_perl

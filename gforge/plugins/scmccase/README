@@ -11,9 +11,9 @@ Prerequisite:
 Installation:
 
 - files from etc/ go to /etc/gforge/plugins/scmsvn
-- files from bin/ go to /usr/lib/gforge/plugins/scmsvn/bin
-- files from common/ go to /usr/lib/gforge/plugins/scmsvn/common
-- files from db/ go to  /usr/lib/gforge/plugins/scmsvn/db
+- files from bin/ go to /usr/share/gforge/plugins/scmsvn/bin
+- files from common/ go to /usr/share/gforge/plugins/scmsvn/common
+- files from db/ go to  /usr/share/gforge/plugins/scmsvn/db
 
 Setup:
 
@@ -21,8 +21,8 @@ Setup:
 preferences (Clear Case server, and whether to enable Clear Case by
 default for new projects)
 - setup the crontab from debian/cron.d
-- /usr/lib/gforge/plugins/scmsvn/bin/db-upgrade.pl
-- /usr/lib/gforge/bin/register-plugin scmccase "Clear Case"
+- /usr/share/gforge/plugins/scmsvn/bin/db-upgrade.pl
+- /usr/share/gforge/bin/register-plugin scmccase "Clear Case"
 
  -- Roland Mas <lolando@debian.org>, Tue May 18 22:14:38 2004
 

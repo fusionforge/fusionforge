@@ -55,18 +55,18 @@ diff -Naur gforge-4.5.3n7/debian/gforge-db-postgresql.cron.d gforge-4.5.3n7-back
 @@ -46,3 +46,6 @@
  
  # Hourly update of quotas
- 0 * * * * root [ -x /usr/lib/gforge/bin/quota_update.pl ] && /usr/lib/gforge/bin/quota_update.pl > /dev/null 2>&1
+ 0 * * * * root [ -x /usr/share/gforge/bin/quota_update.pl ] && /usr/share/gforge/bin/quota_update.pl > /dev/null 2>&1
 +
 +# Daily incremental backup to /backup
-+15 23 * * * root [ -x /usr/lib/gforge/bin/gforge-db-backup.sh ] && /usr/lib/gforge/bin/gforge-db-backup.sh > /dev/null 2>&1
++15 23 * * * root [ -x /usr/share/gforge/bin/gforge-db-backup.sh ] && /usr/share/gforge/bin/gforge-db-backup.sh > /dev/null 2>&1
 diff -Naur gforge-4.5.3n7/debian/rules gforge-4.5.3n7-backups/debian/rules
 --- gforge-4.5.3n7/debian/rules	2005-11-21 09:57:21.789406200 +0100
 +++ gforge-4.5.3n7-backups/debian/rules	2005-11-21 10:08:29.533893608 +0100
 @@ -150,6 +150,7 @@
- 	install -m 755 cronjobs/massmail.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
- 	install -m 755 cronjobs/vacuum.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
- 	install -m 755 cronjobs/quota_update.pl $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-+	install -m 755 cronjobs/gforge-db-backup.sh $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
- 	install -m 755 deb-specific/stats_projects_logparse.pl $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
- 	install -m 755 deb-specific/get_news_notapproved.pl $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
- 	install -m 755 deb-specific/install-db.sh $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+ 	install -m 755 cronjobs/massmail.php $(CURDIR)/debian/gforge-db-postgresql/usr/share/gforge/bin/
+ 	install -m 755 cronjobs/vacuum.php $(CURDIR)/debian/gforge-db-postgresql/usr/share/gforge/bin/
+ 	install -m 755 cronjobs/quota_update.pl $(CURDIR)/debian/gforge-db-postgresql/usr/share/gforge/bin/
++	install -m 755 cronjobs/gforge-db-backup.sh $(CURDIR)/debian/gforge-db-postgresql/usr/share/gforge/bin/
+ 	install -m 755 deb-specific/stats_projects_logparse.pl $(CURDIR)/debian/gforge-db-postgresql/usr/share/gforge/bin/
+ 	install -m 755 deb-specific/get_news_notapproved.pl $(CURDIR)/debian/gforge-db-postgresql/usr/share/gforge/bin/
+ 	install -m 755 deb-specific/install-db.sh $(CURDIR)/debian/gforge-db-postgresql/usr/share/gforge/bin/

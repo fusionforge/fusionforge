@@ -557,7 +557,6 @@ msgstr "thajština"
 #. Type: select
 #. DefaultChoice
 #: ../dsf-helper/web-variables.templates:2002
-#| msgid "Default language:"
 msgid "English[ Default language]"
 msgstr "English"
 

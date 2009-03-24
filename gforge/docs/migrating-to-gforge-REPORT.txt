@@ -149,7 +149,7 @@ DESC: This document describes the process used to transition a working
    ** This of course only needs to be done if Step 5 indicates failure.
 
    # cd /var/lib/gforge/
-   # /usr/lib/gforge/bin/install-db.sh restore sf_dump_for_gforge.ko  
+   # /usr/share/gforge/bin/install-db.sh restore sf_dump_for_gforge.ko  
 
    ** Reinstall the gforge-db-postgresql Debian package (this will bring the
    ** database schema up-to-date.

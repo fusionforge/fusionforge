@@ -15,7 +15,7 @@
 use DBI;
 use Quota;
 
-require("/usr/lib/gforge/lib/include.pl");
+require("/usr/share/gforge/lib/include.pl");
 
 my $BLOCK_SIZE=$ENV{'BLOCK_SIZE'} || 1024;
 

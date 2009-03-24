@@ -6,7 +6,7 @@ use strict ;
 use vars qw/$dbh $ifile $ofile @ilist %hash $key $val $cur $line $dbh $sys_dbname $sys_dbuser $sys_dbpasswd $token/ ;
 
 require("/etc/gforge/local.pl"); 
-require ("/usr/lib/gforge/lib/include.pl") ; 
+require ("/usr/share/gforge/lib/include.pl") ; 
 
 %hash = () ;
 

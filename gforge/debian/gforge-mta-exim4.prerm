@@ -22,7 +22,7 @@ case "$1" in
 	db_title "Unconfiguring Gforge"
 
 	# Unpatch Exim configuration files
-	/usr/lib/gforge/bin/install-exim4.sh purge-files
+	/usr/share/gforge/bin/install-exim4.sh purge-files
 	ucf --debconf-ok /etc/aliases.gforge-new /etc/aliases
 	if [ -f /etc/exim4/exim4.conf.gforge-new ]
 	then
@@ -43,7 +43,7 @@ case "$1" in
 	db_stop
 
         # Exim config removal
-	/usr/lib/gforge/bin/install-exim4.sh purge
+	/usr/share/gforge/bin/install-exim4.sh purge
 	;;
     upgrade|deconfigure|failed-upgrade)
         ;;

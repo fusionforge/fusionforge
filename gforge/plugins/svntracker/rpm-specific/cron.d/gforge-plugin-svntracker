@@ -1,7 +1,7 @@
 
 # Change path to the GForge directory.
 GFORGE="/usr/share/gforge"
-GFORGE_PLUGINS="/usr/lib/gforge/plugins"
+GFORGE_PLUGINS="/usr/share/gforge/plugins"
 
 # Change paths to the GForge directory.
 # Don't reference $GFORGE because this won't work!

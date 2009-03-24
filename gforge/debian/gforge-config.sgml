@@ -63,7 +63,7 @@
     <para><command>&dhpackage;</command> replaces (or creates) the
       configuration files found in /etc/gforge with appropriate
       files derived from standard fill-in-the-blank templates (found
-      in /usr/lib/gforge/templates).  The values used to fill in
+      in /usr/share/gforge/templates).  The values used to fill in
       the blanks are taken from /etc/gforge.conf.
     </para>
 

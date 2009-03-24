@@ -15,7 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #. Type: string
 #. Description
@@ -44,7 +45,8 @@ msgstr "Сервер загрузок:"
 #. Type: string
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:6001
-msgid "Please enter the hostname of the server that will host the GForge packages."
+msgid ""
+"Please enter the hostname of the server that will host the GForge packages."
 msgstr "Введите имя сервера, на котором будут расположены пакеты GForge."
 
 #. Type: string
@@ -95,7 +97,8 @@ msgstr "IP-адрес:"
 msgid ""
 "Please enter the IP address of the server that will host the GForge "
 "installation."
-msgstr "Введите IP-адрес сервера, на котором будет располагаться установка GForge."
+msgstr ""
+"Введите IP-адрес сервера, на котором будет располагаться установка GForge."
 
 #. Type: string
 #. Description
@@ -264,7 +267,8 @@ msgstr "Имя системы GForge:"
 msgid ""
 "Please enter the name of the GForge system. It is used in various places "
 "throughout the system."
-msgstr "Введите имя системы GForge. Оно используется в разных местах по всей системе."
+msgstr ""
+"Введите имя системы GForge. Оно используется в разных местах по всей системе."
 
 #. Type: string
 #. Description
@@ -291,7 +295,8 @@ msgstr "Имя базы данных:"
 #. Type: string
 #. Description
 #: ../dsf-helper/dbhost-variables.templates:3001
-msgid "Please enter the name of the database that will host the GForge database."
+msgid ""
+"Please enter the name of the database that will host the GForge database."
 msgstr "Введите имя базы данных, которая будет содержать базу данных GForge."
 
 #. Type: string
@@ -331,8 +336,10 @@ msgstr "Введите пароль для подключения."
 #. Type: string
 #. Description
 #: ../dsf-helper/downloadhost-variables.templates:2001
-msgid "Please enter the host name of the server that will host the GForge packages."
-msgstr "Введите имя хоста сервера, на котором будут располагаться пакеты GForge."
+msgid ""
+"Please enter the host name of the server that will host the GForge packages."
+msgstr ""
+"Введите имя хоста сервера, на котором будут располагаться пакеты GForge."
 
 #. Type: string
 #. Description
@@ -402,7 +409,8 @@ msgstr "Сервер-перенаправитель пользовательск
 msgid ""
 "Please enter the host name of the server that will host the GForge user mail "
 "redirector."
-msgstr "Введите имя сервера, который будет перенаправлять почту пользователей GForge."
+msgstr ""
+"Введите имя сервера, который будет перенаправлять почту пользователей GForge."
 
 #. Type: select
 #. Choices
@@ -551,7 +559,6 @@ msgstr "тайский"
 #. Type: select
 #. DefaultChoice
 #: ../dsf-helper/web-variables.templates:2002
-#| msgid "Default language:"
 msgid "English[ Default language]"
 msgstr "русский"
 
@@ -576,8 +583,8 @@ msgstr "Тема по умолчанию:"
 #. Type: string
 #. Description
 #: ../dsf-helper/web-variables.templates:3001
-msgid "Please choose the default theme for web pages. This must be a valid name."
+msgid ""
+"Please choose the default theme for web pages. This must be a valid name."
 msgstr ""
 "Выберите тему по умолчанию для веб-страниц. Должно быть указано допустимое "
 "имя."
-

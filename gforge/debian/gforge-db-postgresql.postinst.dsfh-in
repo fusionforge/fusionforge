@@ -59,7 +59,7 @@ case "$1" in
 	gforge-config
 
         # Patch DB configuration files
-	/usr/lib/gforge/bin/install-db.sh configure-files
+	/usr/share/gforge/bin/install-db.sh configure-files
 	ucf --debconf-ok ${pg_hba_dir}/pg_hba.conf.gforge-new ${pg_hba_dir}/pg_hba.conf
 	rm ${pg_hba_dir}/pg_hba.conf.gforge-new
 
@@ -68,7 +68,7 @@ case "$1" in
 	invoke-rc.d ${pg_name} reload
 
         # Setup our DB
-	/usr/lib/gforge/bin/install-db.sh configure
+	/usr/share/gforge/bin/install-db.sh configure
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

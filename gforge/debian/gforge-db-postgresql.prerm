@@ -46,10 +46,10 @@ set -e
 case "$1" in
     remove)
         # Remove our database
-	/usr/lib/gforge/bin/install-db.sh purge
+	/usr/share/gforge/bin/install-db.sh purge
 
         # Unpatch DB configuration files
-	/usr/lib/gforge/bin/install-db.sh purge-files
+	/usr/share/gforge/bin/install-db.sh purge-files
 	ucf --debconf-ok ${pg_hba_dir}/pg_hba.conf.gforge-new ${pg_hba_dir}/pg_hba.conf
 	rm ${pg_hba_dir}/pg_hba.conf.gforge-new
 	ucf --purge ${pg_hba_dir}/pg_hba.conf

@@ -8,7 +8,7 @@ use DBI;
 my($name,$passwd,$uid,$gid,$quota,$comment,$gcos,$dir,$shell) = getpwnam("gforge");
 $> = $uid;
 
-require("/usr/lib/gforge/lib/include.pl");  # Include all the predefined functions
+require("/usr/share/gforge/lib/include.pl");  # Include all the predefined functions
 
 my $verbose = 0;
 my $user_array = ();

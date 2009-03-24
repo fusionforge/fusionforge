@@ -120,11 +120,11 @@ variable is shared with the cvs plugin as well, so that's why both cvsweb
 and viewcvs.cgi must be in the same location. gforge-install.sh takes care 
 of this step if you have viewvc installed in /opt/viewvc
 
-  Finally, the /usr/lib/gforge/www/plugins/scmsvn/viewcvs/ directory should 
+  Finally, the /usr/share/gforge/www/plugins/scmsvn/viewcvs/ directory should 
 be symlinked to the same location that you installed your viewvc/templates/docroot
 gforge-install.sh takes care of this step if you have viewvc installed in /opt/viewvc
 
-	cd /usr/lib/gforge/www/plugins/scmsvn/
+	cd /usr/share/gforge/www/plugins/scmsvn/
 	ln -s /opt/viewvc/templates/docroot viewcvs
 
 

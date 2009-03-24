@@ -30,7 +30,7 @@ case "$1" in
 
 	gforge-config
         # Patch Exim configuration files
-	/usr/lib/gforge/bin/install-exim4.sh configure-files
+	/usr/share/gforge/bin/install-exim4.sh configure-files
 	if [ -f /etc/aliases.gforge-new ]
 	then
 		ucf --debconf-ok /etc/aliases.gforge-new /etc/aliases

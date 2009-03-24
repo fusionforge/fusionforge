@@ -8,7 +8,7 @@
 use DBI;
 use Sys::Hostname;
 
-require("/usr/lib/gforge/lib/include.pl"); # Include all the predefined functions
+require("/usr/share/gforge/lib/include.pl"); # Include all the predefined functions
 
 my $group_array = ();
 my $verbose = 0;

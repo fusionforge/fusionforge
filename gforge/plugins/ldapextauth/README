@@ -10,15 +10,15 @@ Prerequisite:
 Installation:
 
 - files from etc/ go to /etc/gforge/plugins/ldapextauth
-- files from bin/ go to /usr/lib/gforge/plugins/ldapextauth/bin
-- files from include/ go to /usr/lib/gforge/plugins/ldapextauth/include
+- files from bin/ go to /usr/share/gforge/plugins/ldapextauth/bin
+- files from include/ go to /usr/share/gforge/plugins/ldapextauth/include
 
 Setup:
 
 - customise files in /etc/gforge/plugins/ldapextauth to match your
 LDAP installation (server, base DN, and mapping)
-- /usr/lib/gforge/plugins/ldapextauth/bin/db-upgrade.pl
-- /usr/lib/gforge/bin/register-plugin ldapextauth "LDAP external authentication"
+- /usr/share/gforge/plugins/ldapextauth/bin/db-upgrade.pl
+- /usr/share/gforge/bin/register-plugin ldapextauth "LDAP external authentication"
 
 Voilà, you can now log into Gforge with your existing loginname and
 password.  Your account will be created the first time you log in

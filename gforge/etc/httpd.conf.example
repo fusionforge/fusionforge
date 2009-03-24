@@ -70,7 +70,7 @@ UseCanonicalName Off
 		Include   /etc/httpd.secrets
 	</Directory>
 
-	ScriptAliasMatch ^/plugins/([^/]*)/cgi-bin/(.*) /usr/lib/gforge/plugins/$1/cgi-bin/$2
+	ScriptAliasMatch ^/plugins/([^/]*)/cgi-bin/(.*) /usr/share/gforge/plugins/$1/cgi-bin/$2
 
 	# Projects and Users script
 	<Location /projects>
@@ -132,7 +132,7 @@ UseCanonicalName Off
 		Include   /etc/httpd.secrets
 	</Directory>
 
-	ScriptAliasMatch ^/plugins/([^/]*)/cgi-bin/(.*) /usr/lib/gforge/plugins/$1/cgi-bin/$2
+	ScriptAliasMatch ^/plugins/([^/]*)/cgi-bin/(.*) /usr/share/gforge/plugins/$1/cgi-bin/$2
 
 	# Projects and Users script
 	<Location /projects>

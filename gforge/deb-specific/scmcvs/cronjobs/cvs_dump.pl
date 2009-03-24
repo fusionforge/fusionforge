@@ -8,7 +8,7 @@ use DBI;
 use Sys::Hostname;
 
 my $scm = 'scmcvs';
-require("/usr/lib/gforge/lib/include.pl");  # Include all the predefined functions
+require("/usr/share/gforge/lib/include.pl");  # Include all the predefined functions
 require("/etc/gforge/plugins/$scm/config.pl"); # Include plugin config vars
 
 my $group_array = ();

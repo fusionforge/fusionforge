@@ -22,7 +22,7 @@ case "$1" in
 	db_title "Unconfiguring Gforge"
 
 	# Unpatch Postfix configuration files
-	/usr/lib/gforge/bin/install-postfix.sh purge-files
+	/usr/share/gforge/bin/install-postfix.sh purge-files
 	ucf --debconf-ok /etc/aliases.gforge-new /etc/aliases
 	ucf --debconf-ok /etc/postfix/main.cf.gforge-new /etc/postfix/main.cf
 	rm /etc/aliases.gforge-new
@@ -34,7 +34,7 @@ case "$1" in
 	db_stop
 
         # Exim config removal
-	/usr/lib/gforge/bin/install-postfix.sh purge
+	/usr/share/gforge/bin/install-postfix.sh purge
 	;;
     upgrade|deconfigure|failed-upgrade)
         ;;

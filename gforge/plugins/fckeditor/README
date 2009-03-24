@@ -9,7 +9,7 @@ Prerequisite:
 
 Installation:
 
-- files from common/ go to /usr/lib/gforge/plugins/fckeditor/common
+- files from common/ go to /usr/share/gforge/plugins/fckeditor/common
 
 Setup:
 

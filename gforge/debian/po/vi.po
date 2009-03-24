@@ -549,7 +549,6 @@ msgstr "tiếng Thái"
 #. Type: select
 #. DefaultChoice
 #: ../dsf-helper/web-variables.templates:2002
-#| msgid "Default language:"
 msgid "English[ Default language]"
 msgstr "Tiếng Việt [Ngôn ngữ mặc định]"
 

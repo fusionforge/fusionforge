@@ -19,9 +19,9 @@ set -e
 
 case "$1" in
     remove|deconfigure)
-	/usr/lib/gforge/bin/unregister-plugin mediawiki
+	/usr/share/gforge/bin/unregister-plugin mediawiki
 	invoke-rc.d apache reload
-	# /usr/lib/gforge/plugins/mediawiki/bin/db-delete.pl
+	# /usr/share/gforge/plugins/mediawiki/bin/db-delete.pl
         ;;
     upgrade|failed-upgrade)
         ;;

@@ -52,7 +52,7 @@ computedefault(){
 	DEFAULTcronolog_path=$(findcronolog)
 	DEFAULTsys_sendmail_path=$(findsendmail)
 	DEFAULTsys_path_to_jpgraph=/usr/share/jpgraph/
-	DEFAULTsys_path_to_scmweb=/usr/lib/gforge/bin/
+	DEFAULTsys_path_to_scmweb=/usr/share/gforge/bin/
 	DEFAULTgforge_chroot=$CHROOT
 	DEFAULTgforge_etc=$ETCDIR
 	DEFAULTsys_custom_path=$ETCDIR/custom
@@ -463,14 +463,14 @@ do
 			shift
 			ETCDIR=/etc/gforge
 			ETCTEMPLATEDIR=/usr/share/gforge/etc
-			BINDIR=/usr/lib/gforge/bin
-			CGIDIR=/usr/lib/gforge/cgi-bin
+			BINDIR=/usr/share/gforge/bin
+			CGIDIR=/usr/share/gforge/cgi-bin
 			GFGDIR=''
 			HOMEPATH=/home/users
 			GROUPPATH=/home/groups
 			CHROOT=/var/lib/gforge/chroot
 			SHAREDIR=/usr/share/gforge
-			LIBDIR=/usr/lib/gforge
+			LIBDIR=/usr/share/gforge
 			CONFFILEOUTDIR=/etc/gforge
 			CONFFILEIN=/etc/gforge/gforge.conf
 			CONFFILEOUT=/etc/gforge/gforge.conf

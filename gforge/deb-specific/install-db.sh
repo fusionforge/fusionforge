@@ -188,7 +188,7 @@ EOF
 	fi
 
 	# Install/upgrade the database contents (tables and data)
-	su -s /bin/sh gforge -c /usr/lib/gforge/bin/db-upgrade.pl 2>&1  | grep -v ^NOTICE:
+	su -s /bin/sh gforge -c /usr/share/gforge/bin/db-upgrade.pl 2>&1  | grep -v ^NOTICE:
 	p=${PIPESTATUS[0]}
 	if [ $p != 0 ] ; then
 	    exit $p
