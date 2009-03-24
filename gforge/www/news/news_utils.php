@@ -70,6 +70,16 @@ function news_footer($params) {
 	$HTML->footer($params);
 }
 
+/**
+ * Display latest news for frontpage or news page.
+ *
+ * @param int  $group_id group_id of the news ($sys_news_group used if none given)
+ * @param int  $limit number of news to display (default: 10)
+ * @param bool $show_summaries (default: true)
+ * @param bool $allow_submit (default: true)
+ * @param bool $flat (default: false)
+ * @param int  $tail_headlines number of additional news to display in short (-1 for all the others, default: 0)
+ */
 function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_submit=true,$flat=false,$tail_headlines=0,$show_forum=true) {
 	global $sys_news_group;
 	if (!$group_id) {
@@ -95,7 +105,11 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 		AND groups.status='A'
 		ORDER BY post_date DESC";
 
-	$result=db_query($sql,$limit+$tail_headlines);
+	if ($tail_headlines == -1) {
+		$result=db_query($sql);
+	} else {
+		$result=db_query($sql,$limit+$tail_headlines);
+	}
 	$rows=db_numrows($result);
 	
 	$return = '';
@@ -104,7 +118,6 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 		$return .= _('No News Items Found');
 		$return .= db_error();
 	} else {
-		if (!$limit) $return .= '<ul>';
 		for ($i=0; $i<$rows; $i++) {
 			if ($show_summaries && $limit) {
 				//get the first paragraph of the story
@@ -178,7 +191,6 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 			}
 		}
 		if ($tail_headlines){
-		  if (!$limit) $return .= '</ul>';
 			$return .= '<hr width="100%" size="1" />'."\n";
 		}
 		if ($group_id != $sys_news_group) {
@@ -187,11 +199,13 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 			$archive_url=util_make_url ('/news/');
 		}
 
+		if ($tail_headlines != -1) {
 		if ($show_forum) {
 			$return .= '<div align="center">'
 				.'<a href="'.$archive_url.'">[' . _('News archive') . ']</a></div>';
 		} else {
 			$return .= '<div align="center">...</div>';
+			}
 		}
 	}
 

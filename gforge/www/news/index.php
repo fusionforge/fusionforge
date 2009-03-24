@@ -73,26 +73,7 @@ if ($rows < 1) {
 		<p>' . _('No items were found') . '</p>';
 	echo db_error();
 } else {
-	echo '<table width="100%" border="0">
-		<tr><td valign="top">';
-
-	for ($j = 0; $j < $rows; $j++) { 
-		echo '
-		<a href="'.util_make_url ('/forum/forum.php?forum_id='.db_result($result, $j, 'forum_id')).'">'.
-			html_image("ic/cfolder15.png","15","13",array("border"=>"0")) . ' &nbsp;'.
-			stripslashes(db_result($result, $j, 'summary')).'</a> ';
-		echo '
-		<br />';
-	}
-
-        if (getStringFromRequest('more')) {
-        	echo '<br /><a href="'
-                     .'?group_id='.$group_id.'&amp;limit='.$limit
-                     .'&amp;offset='. (string)($offset+$limit) .'">['._('Older headlines').']</a>';
-        }
-
-        echo '
-	</td></tr></table>';
+	echo news_show_latest($group_id,10,true,false,false,-1, true);
 }
 
 news_footer(array());
