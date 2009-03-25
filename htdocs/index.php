@@ -23,8 +23,8 @@
 		</table>
 
 		<h4>[<a HREF="http://packages.qa.debian.org/g/gforge.html">Forge package</a> |
-		<a HREF="http://fusionforge.org">FusionForge Project</a> |
-		<a href="http://wiki.planetforge.org/">PlanetForge Wiki</a> |
+		<a HREF="https://fusionforge.org">FusionForge Project</a> |
+		<a href="https://fusionforge.org/plugins/mediawiki/index.php?group_id=6">FusionForge Wiki</a> |
 		<a href="http://planetforge.org/">PlanetForge Agregator</a>]</h4>
 		</div>
 
@@ -147,9 +147,9 @@ cd fusionforge-4.7.1</pre>
 				<p>(Note to project members: due to virtualisation on the server, SSH needs to be accessed on port 20022.)</p>
 			</div>
 			<div class="tabbertab" title="Wiki">
-				<h4>FusionForge currently uses the PlanetForge wiki.</h4>
+				<h4>FusionForge has a wiki, managed by the Mediawiki plugin:</h4>
 
-				<p><a href="http://wiki.planetforge.org/index.php/FusionForge">Browse the wiki</a></p>
+				<p><a href="https://fusionforge.org/plugins/mediawiki/index.php?group_id=6">Browse the wiki</a></p>
 			</div>
 			<div class="tabbertab" title="Online help">
 				<h5>For more info you can join FusionForge developpers on IRC at:</h5>
