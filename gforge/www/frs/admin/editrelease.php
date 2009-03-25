@@ -100,10 +100,15 @@ if (getStringFromRequest('step1')) {
 		if (!is_uploaded_file($uploaded_notes['tmp_name'])) {
 			exit_error('Error','Attempted File Upload Attack');
 		}
-		$notes = addslashes(fread(fopen($uploaded_notes['tmp_name'],'r'),$uploaded_notes['size']));
-		if (strlen($notes) < 20) {
-			$feedback .= _('Release Notes Are Too Small');
+		if ($uploaded_notes['type'] !== 'text/plain') {
+			$feedback .= _('Release Notes Are not in Text');
 			$exec_changes = false;
+		} else {
+			$notes = addslashes(fread(fopen($uploaded_notes['tmp_name'],'r'),$uploaded_notes['size']));
+			if (strlen($notes) < 20) {
+				$feedback .= _('Release Notes Are Too Small');
+				$exec_changes = false;
+			}
 		}
 	} else {
 		$notes = $release_notes;
@@ -114,10 +119,15 @@ if (getStringFromRequest('step1')) {
 		if (!is_uploaded_file($uploaded_changes['tmp_name'])) {
 			exit_error('Error','Attempted File Upload Attack');
 		}
-		$changes = addslashes(fread(fopen($uploaded_changes['tmp_name'],'r'), $uploaded_changes['size']));
-		if (strlen($changes) < 20) {
-			$feedback .= _('Change Log Is Too Small');
+		if ($uploaded_notes['type'] !== 'text/plain') {
+			$feedback .= _('Change Log Is not in Text');
 			$exec_changes = false;
+		} else {
+			$changes = addslashes(fread(fopen($uploaded_changes['tmp_name'],'r'), $uploaded_changes['size']));
+			if (strlen($changes) < 20) {
+				$feedback .= _('Change Log Is Too Small');
+				$exec_changes = false;
+			}
 		}
 	} else {
 		$changes = $release_changes;
