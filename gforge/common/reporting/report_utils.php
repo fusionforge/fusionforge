@@ -237,6 +237,15 @@ function report_pie_arr($labels, $vals) {
 	
 }
 
+function report_package_box($group_id, $name='dev_id', $selected='') {
+
+	$sql = "SELECT package_id, name
+                FROM frs_package
+                WHERE frs_package.group_id = '$group_id'";
+	$res=db_query($sql);
+	return html_build_select_box($res, $name, $selected, false);
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

@@ -18,6 +18,7 @@ gforge/common/include/TextSanitizer.class.php -text
 gforge/common/include/database-mysql.php -text
 gforge/common/include/group_section_texts.php -text
 gforge/common/include/rbac_texts.php -text
+gforge/common/reporting/ReportDownloads.class.php -text
 gforge/contrib/cmd-line-prototype.tar.gz -text
 gforge/cron.d/00phpcron -text
 gforge/cron.d/Makefile -text
@@ -3008,6 +3009,7 @@ gforge/www/export/search_plugin.php -text
 gforge/www/favicon.ico svneol=native#unset
 gforge/www/forum/admin/ForumAdmin.class.php -text
 gforge/www/forum/include/AttachManager.class.php -text
+gforge/www/frs/reporting/downloads.php -text
 gforge/www/images/blank.png -text
 gforge/www/images/clear.png -text
 gforge/www/images/debian-sf-icon.png -text

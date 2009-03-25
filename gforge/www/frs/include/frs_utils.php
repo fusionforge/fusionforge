@@ -88,11 +88,13 @@ function frs_header($params) {
 			echo $HTML->subMenu(
 				array(
 					_('Files'),
-					_('Admin')
+					_('Admin'),
+					_('Reporting')
 				),
 				array(
 					'/frs/?group_id='.$group_id,
-					'/frs/admin/?group_id='.$group_id
+					'/frs/admin/?group_id='.$group_id,
+					'/frs/reporting/downloads.php?group_id='.$group_id
 				)
 			);
 		}
