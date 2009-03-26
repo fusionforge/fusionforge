@@ -1,3 +1,10 @@
+gforge (4.7.2-3) experimental; urgency=low
+
+  * Removed another error message from the mediawiki plugin for
+    non-connected users.
+
+ -- Roland Mas <lolando@debian.org>  Thu, 26 Mar 2009 18:36:40 +0100
+
 gforge (4.7.2-2) experimental; urgency=low
 
   * Removed automatic creation of the Mediawiki users on session opening
