@@ -1,17 +1,17 @@
 #! /bin/sh /usr/share/dpatch/dpatch-run
-## 99-unnamed.dpatch by Christian Bayle <bayle@debian.org> and/or Roland Mas <lolando@debian.org>
+## disable-dav.dpatch by Roland Mas <lolando@debian.org>
 ##
 ## All lines beginning with `## DP:' are a description of the patch.
-## DP: No description.
+## DP: Disable SVN-over-WebDAV
 
 @DPATCH@
 diff -urNad gforge~/plugins/scmsvn/etc/plugins/scmsvn/config.php gforge/plugins/scmsvn/etc/plugins/scmsvn/config.php
---- gforge~/plugins/scmsvn/etc/plugins/scmsvn/config.php	2008-03-19 20:21:12.000000000 +0100
-+++ gforge/plugins/scmsvn/etc/plugins/scmsvn/config.php	2008-09-22 11:39:39.000000000 +0200
-@@ -3,10 +3,10 @@
- //$default_svn_server = $GLOBALS['sys_default_domain'] ;
- //$default_svn_server = "svn." . $GLOBALS['sys_default_domain'] ;
- $default_svn_server = $GLOBALS['sys_scm_host'];
+--- gforge~/plugins/scmsvn/etc/plugins/scmsvn/config.php	2009-03-26 16:57:34.000000000 +0100
++++ gforge/plugins/scmsvn/etc/plugins/scmsvn/config.php	2009-03-26 17:14:01.000000000 +0100
+@@ -7,10 +7,10 @@
+ } else {
+ 	$default_svn_server = 'scm';
+ }
 -$use_ssh = false;
 -$use_dav = true;
 +$use_ssh = true;
