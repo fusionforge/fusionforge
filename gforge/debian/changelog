@@ -1,10 +1,12 @@
-gforge (4.7.2-1+1) experimental; urgency=low
+gforge (4.7.2-2) experimental; urgency=low
 
   * Removed automatic creation of the Mediawiki users on session opening
     (since it caused problems and users are authenticated on the fly when
     they access a MW page).
+  * Also removed a few error messages that were displayed above the wiki
+    pages.
 
- -- Roland Mas <lolando@debian.org>  Thu, 26 Mar 2009 16:25:50 +0100
+ -- Roland Mas <lolando@debian.org>  Thu, 26 Mar 2009 17:00:09 +0100
 
 gforge (4.7.2-1) experimental; urgency=low
 

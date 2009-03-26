@@ -1,6 +1,10 @@
 <?php
  
-$default_cvs_server = "cvs." . $GLOBALS['sys_default_domain'];
+if (isset ($GLOBALS['sys_scm_host'])) {
+	$default_cvs_server = "cvs." . $GLOBALS['sys_default_domain'];
+} else {
+	$default_cvs_server = 'scm';
+}
 $enabled_by_default = true;
 $cvs_binary_version='1.12';
 $use_ssl=false;
