@@ -8,12 +8,15 @@ msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-28 11:44+0100\n"
-"PO-Revision-Date: 2009-02-01 14:35+0100\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2009-03-26 16:15+0200\n"
+"Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 1.2.1\n"
 
 #: common/docman/Document.class.php:111 common/docman/Document.class.php:446
 #: common/pm/ProjectGroup.class.php:131 common/pm/ProjectGroup.class.php:346
@@ -40,7 +43,7 @@ msgstr "Dokumentgrupp: namn är obligatoriskt"
 #: common/docman/DocumentGroup.class.php:104
 #: common/docman/DocumentGroup.class.php:212
 msgid "DocumentGroup: Invalid DocumentGroup parent ID"
-msgstr ""
+msgstr "Dokumentgrupp: Ogiltigt dokumentgrupps-ID för föräldern"
 
 #: common/docman/DocumentGroup.class.php:147
 msgid "DocumentGroup: Invalid DocumentGroup ID"
@@ -70,11 +73,11 @@ msgstr "Forumbeskrivning måste ha minst 10 tecken"
 
 #: common/forum/Forum.class.php:128 common/forum/Forum.class.php:574
 msgid "Illegal Characters in Forum Name"
-msgstr ""
+msgstr "Ogiltiga tecken i forumnamn"
 
 #: common/forum/Forum.class.php:143
 msgid "Mailing List Exists with same name"
-msgstr ""
+msgstr "Sändlista med samma namn existerar"
 
 #: common/forum/Forum.class.php:178
 msgid "Error Adding Forum"
@@ -88,11 +91,10 @@ msgstr "Välkommen till %1$s"
 
 #: common/forum/Forum.class.php:225
 msgid "Invalid forum group identifier"
-msgstr ""
+msgstr "Ogiltig gruppidentitet för forum"
 
 #: common/forum/Forum.class.php:453 common/forum/Forum.class.php:486
 #: common/frs/FRSPackage.class.php:266 common/frs/FRSPackage.class.php:300
-#, fuzzy
 msgid "You can only monitor if you are logged in"
 msgstr "Du kan bara bevaka om du är inloggad"
 
@@ -129,7 +131,7 @@ msgstr "Forum"
 #: common/forum/ForumFactory.class.php:134
 #, fuzzy
 msgid "Forum not found"
-msgstr "Hittade inte undersökning"
+msgstr "Hittade inte forum"
 
 #: common/forum/ForumMessage.class.php:59
 msgid "ForumMessage:: No Valid Forum Object"
@@ -183,7 +185,7 @@ msgstr "ForumMessage::fetchData() Ogiltigt meddelande-ID"
 
 #: common/forum/ForumMessage.class.php:578
 msgid "Invalid Message ID"
-msgstr ""
+msgstr "Ogiltigt meddelande-id"
 
 #: common/forum/ForumMessage.class.php:660
 #, php-format
@@ -210,11 +212,11 @@ msgstr "FRS-fil, namn måste ha minst 3 tecken"
 
 #: common/frs/FRSFile.class.php:96
 msgid "Filename can only be alphanumeric and \"-\" \"_\" \".\" characters."
-msgstr ""
+msgstr "Filnamn får bara innehålla alfanumeriska värden samt \"-\" \"_\" \".\" ."
 
 #: common/frs/FRSFile.class.php:106
 msgid "FRSFile Appears to be invalid"
-msgstr "FRS-fil, verkar vara ogiltig"
+msgstr "FRS-fil verkar vara ogiltig"
 
 #: common/frs/FRSFile.class.php:126 common/frs/FRSFile.class.php:411
 msgid "That filename already exists in this project space"
@@ -256,9 +258,8 @@ msgstr ""
 #: common/include/Error.class.php:126 common/include/Group.class.php:435
 #: common/include/Group.class.php:502 www/include/exit.php:37
 #: www/news/admin/index.php:351
-#, fuzzy
 msgid "Permission denied."
-msgstr "Tillgång nekad"
+msgstr "Åtkomst nekad"
 
 #: common/include/Error.class.php:143 common/include/User.class.php:252
 #: www/tracker/tracker.php:74
@@ -270,9 +271,8 @@ msgid "Missing Parameters"
 msgstr "Parameterar saknas"
 
 #: common/include/Group.class.php:232
-#, fuzzy
 msgid "Group Not Found"
-msgstr "Hittar inte filen"
+msgstr "Hittar inte grupp"
 
 #: common/include/Group.class.php:248
 #: plugins/mediawiki/usr/share/mediawiki1.7/includes/GFProject.class.php:177
@@ -284,23 +284,21 @@ msgstr "Hittar inte filen"
 #: www/survey/admin/show_results_csv.php:35
 #: www/survey/admin/show_results_individual.php:38
 #: www/survey/admin/survey.php:40
-#, fuzzy
 msgid "Permission denied"
-msgstr "Tillgång nekad"
+msgstr "Åtkomst nekad"
 
 #: common/include/Group.class.php:264
 #, php-format
 msgid "fetchData():: %s"
-msgstr ""
+msgstr "fetchData():: %s"
 
 #: common/include/Group.class.php:288
 msgid "Group::create: Group object already exists"
-msgstr ""
+msgstr "Group::create: Gruppobjekt finns redan"
 
 #: common/include/Group.class.php:293
-#, fuzzy
 msgid "Invalid Unix name"
-msgstr "Ogiltigt unixnamn"
+msgstr "Ogiltigt Unixnamn"
 
 #: common/include/Group.class.php:297
 msgid "Unix name already taken"
