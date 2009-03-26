@@ -526,4 +526,4 @@ function stats_site_aggregate( ) {
 // c-file-style: "bsd"
 // End:
 
->
+?>
