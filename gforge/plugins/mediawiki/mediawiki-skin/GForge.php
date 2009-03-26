@@ -14,8 +14,8 @@ if( !defined( 'MEDIAWIKI' ) )
 	die( -1 );
 
 $no_gz_buffer = 1 ;
-require_once ('/etc/gforge/local.inc') ;
-require_once '/usr/share/gforge/www/env.inc.php';
+require ('/etc/gforge/local.inc') ;
+require ('/usr/share/gforge/www/env.inc.php') ;
 $GLOBALS['sys_dbhost'] = $sys_dbhost ;
 $GLOBALS['sys_dbport'] = $sys_dbport ;
 $GLOBALS['sys_dbname'] = $sys_dbname ;
@@ -29,14 +29,13 @@ $GLOBALS['sys_custom_path'] = $sys_custom_path ;
 $GLOBALS['gfwww'] = $gfwww ;
 $GLOBALS['gfplugins'] = $gfplugins ;
 $GLOBALS['sys_lang'] = $sys_lang ;
-require_once $gfwww.'include/pre.php';
+require ($gfwww.'include/pre.php') ;
 $GLOBALS['sys_urlroot'] = $sys_urlroot;
 $GLOBALS['sys_session_key'] = $sys_session_key;
 $GLOBALS['sys_session_expire'] = $sys_session_expire;
 $GLOBALS['REMOTE_ADDR'] = getStringFromServer('REMOTE_ADDR') ;
 $GLOBALS['HTTP_USER_AGENT'] = getStringFromServer('HTTP_USER_AGENT') ;
 
-require_once('includes/SkinTemplate.php');
 function GforgeRegisterMWHook() {
 	$GLOBALS['wgHooks']['AutoAuthenticate'][]='GforgeMWAuth';
 }

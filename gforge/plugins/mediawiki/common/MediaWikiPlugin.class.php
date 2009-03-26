@@ -35,7 +35,6 @@ class MediaWikiPlugin extends Plugin {
 		$this->hooks[] = "userisactivecheckbox" ; // The "use ..." checkbox in user account
 		$this->hooks[] = "userisactivecheckboxpost" ; //
 		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page for group
-		$this->hooks[] = "session_before_login" ; // to register GF users in the MW database
 	}
 
 	function CallHook ($hookname, $params) {
@@ -155,49 +154,6 @@ class MediaWikiPlugin extends Plugin {
 				echo '</p>';
 			}
 		}												    
-		elseif ($hookname == "session_before_login") {
-			$loginname = $params['loginname'] ;
-			$passwd = $params['passwd'] ;
-			if (! session_login_valid_dbonly ($loginname, $passwd, false)) {
-				return ;
-			}
-			$u = user_get_object_by_name ($loginname) ;
-			
-			define ('MEDIAWIKI', true);
-			if (is_file('/var/lib/mediawiki/LocalSettings.php')){
-                        	require_once ('/var/lib/mediawiki/LocalSettings.php');
-			} elseif (is_file('/var/lib/mediawiki1.10/LocalSettings.php')){
-                        	require_once ('/var/lib/mediawiki1.10/LocalSettings.php');
-			} else {
-				return 1;
-			}
-			if (is_dir('/usr/share/mediawiki')){
-				$mw_share_path="/usr/share/mediawiki";
-			} elseif (is_dir('/usr/share/mediawiki1.10')){
-				$mw_share_path="/usr/share/mediawiki1.10";
-			} else {
-				return 1;
-			}
-                        require_once ($mw_share_path.'/includes/Defines.php');
-                        require_once ($mw_share_path.'/includes/Exception.php');
-                        require_once ($mw_share_path.'/includes/GlobalFunctions.php');
-                        require_once ($mw_share_path.'/StartProfiler.php');
-                        require_once ($mw_share_path.'/includes/Database.php');
-
-                        $mwdb = new Database() ;
-                        $mwdb->open($wgDBserver, $wgDBuser, $wgDBpassword, $wgDBname) ;
-                        $sql = "select count(*) from user where user_name=?";
-                        $res = $mwdb->safeQuery ($sql, ucfirst($loginname));
-			$row = $mwdb->fetchRow ($res) ;
-			if ($row[0] == 1) {
-				$sql = "update user set user_password=?, user_email=?, user_real_name=? where user_name=?" ;
-				$res = $mwdb->safeQuery ($sql, md5($passwd), $u->getEmail(), $u->getRealName(), array(ucfirst($loginname))) ;
-			} else {
-				$sql = "insert into user (user_name, user_real_name, user_password, user_email, user_options) values (?, ?, ?, ?, ?)" ;
-				$res = $mwdb->safeQuery ($sql, array(ucfirst($loginname), $u->getRealName(), md5($passwd), $u->getEmail(), "skin=gforge\ncols=80\nrows=25")) ;
-			}
-		} 
-
 		elseif ($hookname == "blahblahblah") {
 			// ...
 		} 
