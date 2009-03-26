@@ -40,7 +40,12 @@ function GforgeRegisterMWHook() {
 	$GLOBALS['wgHooks']['AutoAuthenticate'][]='GforgeMWAuth';
 }
 function GforgeMWAuth( &$user ) {
-        $s = session_check_session_cookie (getStringFromCookie ('session_ser'));
+	$cookie = getStringFromCookie ('session_ser') ;
+        if ($cookie != '') {
+                $s = session_check_session_cookie ($cookie);
+        } else {
+                $s = false ;
+        }
         if ($s) {
                 $u = user_get_object ($s);
                 // print "Logged in as ".$u->getUnixName()." (according to gforge) ";
@@ -61,10 +66,6 @@ function GforgeMWAuth( &$user ) {
                 return true ;	// Ignored by MW, but required anyway
         } else {
                 // print "Not logged in (according to gforge) ";
-                $mwu = User::loadFromSession () ;
-                if ($mwu->isLoggedIn ()) {
-                        $mwu->logout () ;
-                }
                 return false ;	// Ignored by MW, but required anyway
         }
 }
