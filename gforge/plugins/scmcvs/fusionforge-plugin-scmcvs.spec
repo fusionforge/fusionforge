@@ -36,10 +36,10 @@ Requires: perl-IPC-Run
 %define GFORGE_DIR              %{_datadir}/gforge
 %define GFORGE_CONF_DIR         %{_sysconfdir}/gforge
 %define GFORGE_SBIN_DIR         %{_sbindir}
-#%define GFORGE_LIB_DIR          %{_libdir}/gforge/lib
-#%define GFORGE_DB_DIR           %{_libdir}/gforge/db
-%define GFORGE_BIN_DIR          %{_libdir}/gforge/bin
-%define PLUGINS_LIB_DIR         %{_libdir}/gforge/plugins
+#%define GFORGE_LIB_DIR          %{GFORGE_DIR}/lib
+#%define GFORGE_DB_DIR           %{GFORGE_DIR}/db
+%define GFORGE_BIN_DIR          %{GFORGE_DIR}/bin
+%define PLUGINS_LIB_DIR         %{GFORGE_DIR}/plugins
 %define PLUGINS_CONF_DIR        %{GFORGE_CONF_DIR}/plugins
 %define CROND_DIR               %{_sysconfdir}/cron.d
 %define SBIN_DIR				%{_sbindir}
@@ -81,12 +81,6 @@ done;
 chmod 755 $RPM_BUILD_ROOT/%{PLUGIN_LIB}/bin/*
 chmod 755 $RPM_BUILD_ROOT/%{PLUGIN_LIB}/sbin/*
 chmod 755 $RPM_BUILD_ROOT/%{PLUGIN_LIB}/cronjobs/cvscreate.sh
-
-# installing CVSWeb cgi
-#install -m 755 -d $RPM_BUILD_ROOT/%{GFORGE_BIN_DIR}/
-#install -m 755 cgi-bin/cvsweb $RPM_BUILD_ROOT/%{GFORGE_BIN_DIR}/
-#install -m 755 -d $RPM_BUILD_ROOT/%{PLUGIN_LIB}/cgi-bin/
-#install -m 755 cgi-bin/cvsweb $RPM_BUILD_ROOT/%{PLUGIN_LIB}/cgi-bin/
 
 # installing configuration file
 install -m 755 -d  $RPM_BUILD_ROOT/%{GFORGE_CONF_DIR}/

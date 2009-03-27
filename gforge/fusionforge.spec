@@ -126,11 +126,11 @@ integrated into one web site and managed through a web interface.
 
 %define GFORGE_DIR		%{_datadir}/gforge
 %define GFORGE_CONF_DIR		%{_sysconfdir}/gforge
-%define GFORGE_LANG_DIR         %{_libdir}/gforge/translations
-%define GFORGE_LIB_DIR		%{_libdir}/gforge/lib
-%define GFORGE_DB_DIR		%{_libdir}/gforge/db
-%define GFORGE_BIN_DIR		%{_libdir}/gforge/bin
-%define PLUGINS_LIB_DIR		%{_libdir}/gforge/plugins
+%define GFORGE_LANG_DIR         %{GFORGE_DIR}/translations
+%define GFORGE_LIB_DIR		%{GFORGE_DIR}/lib
+%define GFORGE_DB_DIR		%{GFORGE_DIR}/db
+%define GFORGE_BIN_DIR		%{GFORGE_DIR}/bin
+%define PLUGINS_LIB_DIR		%{GFORGE_DIR}/plugins
 %define PLUGINS_CONF_DIR	%{GFORGE_CONF_DIR}/plugins
 %define CACHE_DIR		/var/cache/gforge
 %define UPLOAD_DIR		/var/lib/gforge/upload
@@ -173,7 +173,6 @@ install -m 755 -d $RPM_BUILD_ROOT/%{GFORGE_DIR}/www/plugins
 
 install -m 750 setup $RPM_BUILD_ROOT/%{GFORGE_DIR}/
 chmod 755 $RPM_BUILD_ROOT/%{GFORGE_DIR}/utils/fill-in-the-blanks.pl
-#chmod 755 $RPM_BUILD_ROOT/%{GFORGE_DIR}/utils/install-nsspgsql.sh
 chmod 755 $RPM_BUILD_ROOT/%{GFORGE_DIR}/www/scm/viewvc/bin/cgi/viewvc.cgi
 
 cp -rp db/. $RPM_BUILD_ROOT/%{GFORGE_DB_DIR}/
@@ -196,7 +195,7 @@ install -m 750 rpm-specific/scripts/gforge-config $RPM_BUILD_ROOT/%{SBIN_DIR}/
 if ls translations/*.po &> /dev/null; then
         cp translations/*.po $RPM_BUILD_ROOT/%{GFORGE_LANG_DIR}/
 fi
-cp -rp rpm-specific/custom $RPM_BUILD_ROOT/%{GFORGE_CONF_DIR}
+#cp -rp rpm-specific/custom $RPM_BUILD_ROOT/%{GFORGE_CONF_DIR}
 
 # setting crontab
 install -m 664 cron.d/fusionforge $RPM_BUILD_ROOT/%{CROND_DIR}/
@@ -317,12 +316,8 @@ if [ "$1" -eq "1" ]; then
 	
 	ln -s %{GFORGE_DIR}/www/env.inc.php %{PLUGINS_LIB_DIR}/env.inc.php
 	
-	#if not the env.inc.php include-path isn't correct
-        ln -s %{PLUGINS_LIB_DIR} %{GFORGE_DIR}/plugins
-	
-	#Configuration de libnss-pgsql
-	#ln -s %{GFORGE_DIR}/utils/install-nsspgsql.sh /usr/sbin
-	#install-nsspgsql.sh setup
+	#if not the env.inc.php include-path isn't correct //not necessary if no more /usr/lib/gforge
+        #ln -s %{PLUGINS_LIB_DIR} %{GFORGE_DIR}/plugins
 
 else
 	# upgrading database
