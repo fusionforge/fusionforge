@@ -5,6 +5,7 @@
  *                The Gforge Group, LLC <http://gforgegroup.com/>
  * Copyright 2004 Christian Bayle <bayle@debian.org>
  * Copyright 2009 Alain Peyrat, Alcatel-Lucent
+ * Copyright 2009 Chris Dalzell, OpenGameForge.org
  *
  * This file is part of FusionForge
  *
@@ -35,6 +36,7 @@ class LdapextauthPlugin extends Plugin {
 		
 		$this->ldap_conn = false ;
 		$this->base_dn = '';
+		$this->user_dn = '';
 		$this->ldap_server = $sys_ldap_server ;
 		$this->ldap_port = $sys_ldap_port ;
 		$this->ldap_altserver = '';
@@ -46,6 +48,9 @@ class LdapextauthPlugin extends Plugin {
 		require_once $gfconfig.'plugins/ldapextauth/config.php' ;
 		if (isset($base_dn)) {
 			$this->base_dn = $base_dn ;
+		}
+		if (isset($user_dn)) {
+			$this->user_dn = $user_dn ;
 		}
 		if (isset($ldap_server)) {
 			$this->ldap_server = $ldap_server ;
@@ -61,9 +66,6 @@ class LdapextauthPlugin extends Plugin {
 		}
 		if (isset($ldap_start_tls)) {
 			$this->ldap_start_tls = $ldap_start_tls ;
-		}
-		if (isset($ldap_kind)) {
-			$this->ldap_kind = $ldap_kind ;
 		}
 		if (isset($ldap_bind_dn)) {
 			$this->ldap_bind_dn = $ldap_bind_dn;
@@ -125,22 +127,11 @@ class LdapextauthPlugin extends Plugin {
 			}
 		}
 
-		$dn = plugin_ldapextauth_getdn ($this, $loginname) ;
-		if(empty($dn)) {
-			@ldap_unbind($this->ldap_conn);
-			$GLOBALS['ldap_auth_failed']=true;
-			return false;
-		}
-		debuglog("LDAP: Using dn: $dn (searching)");
-
-		// Now get her info
-		if ($this->ldap_kind=="AD"){
-			$res = ldap_search ($this->ldap_conn, $this->base_dn, "sAMAccountName=".$loginname) ;
-		} else {
-			$res = ldap_search ($this->ldap_conn, $this->base_dn, $dn) ;
-			debuglog("LDAP: ldap_search ($this->ldap_conn, $this->base_dn, $dn)");
-			debuglog("LDAP: Search handle is: $res");
-		}
+		// Search LDAP for user account.
+		debuglog("LDAP: Searching for $loginname");
+		$res = ldap_search($this->ldap_conn, $this->base_dn, $this->user_dn . $loginname) ;
+		debuglog("LDAP: ldap_search ($this->ldap_conn, $this->base_dn, $this->user_dn . $loginname)");
+		debuglog("LDAP: Search handle is: $res");
 
 		if (!$res) {
 			// User not found in LDAP => Account invalid
@@ -170,7 +161,7 @@ class LdapextauthPlugin extends Plugin {
 		$u = user_get_object_by_name ($loginname) ;
 
 		if ($u) {
-			debuglog("LDAP: User is present in GForge database");
+			debuglog("LDAP: User is present in database");
 
 			// User exists in DB
 			if (@ldap_bind($this->ldap_conn, $dn, $raw_passwd)) {
@@ -331,7 +322,7 @@ class LdapextauthPlugin extends Plugin {
 		if ($this->ldap_start_tls) {
 			debuglog("LDAP: ldap_start_tls($this->ldap_conn)");
 			if (!ldap_start_tls($this->ldap_conn)) {
-				syslog(LOG_ERR, "GForge: LDAP start_tls failed: ".ldap_error($this->ldap_conn));
+				syslog(LOG_ERR, "FusionForge: LDAP start_tls failed: ".ldap_error($this->ldap_conn));
 				debuglog("LDAP: ldap_start_tls() failed: ".ldap_error($this->ldap_conn));
 				return false;
 			}
@@ -343,7 +334,7 @@ class LdapextauthPlugin extends Plugin {
 			debuglog("LDAP: ldap_bind() (application bind)");
 			if (!@ldap_bind($this->ldap_conn, $this->ldap_bind_dn, $this->ldap_bind_pwd)) {
 				debuglog("LDAP: ldap_bind() failed (application bind): ". ldap_error($this->ldap_conn));
-				syslog(LOG_ERR, "GForge:LDAP application bind failed, using DB login/passwd instead.");
+				syslog(LOG_ERR, "FusionForge:LDAP application bind failed, using DB login/passwd instead.");
 				return false;
 			}
 		}
@@ -357,10 +348,5 @@ function debuglog($msg) {
 	fwrite ($fp, $msg."\n");
 	fclose($fp);
 }
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:
 
 ?>
