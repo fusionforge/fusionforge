@@ -297,22 +297,22 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 			<td><a href="<?php echo $uri_string; ?>downloads"><?php echo _('Total'); ?></a></td>
 			<?php } ?>
 			<?php if ($GLOBALS['sys_use_tracker']) { ?>
-			<td><a href="<?php echo $uri_string; ?>bugs_opened"><?php echo _('Opn'); ?></a></td>
-			<td><a href="<?php echo $uri_string; ?>bugs_closed"><?php echo _('Cls'); ?></a></td>
-			<td><a href="<?php echo $uri_string; ?>support_opened"><?php echo _('Opn'); ?></a></td>
-			<td><a href="<?php echo $uri_string; ?>support_closed"><?php echo _('Cls'); ?></a></td>
-			<td><a href="<?php echo $uri_string; ?>patches_opened"><?php echo _('Opn'); ?></a></td>
-			<td><a href="<?php echo $uri_string; ?>patches_closed"><?php echo _('Cls'); ?></a></td>
-			<td><a href="<?php echo $uri_string; ?>artifacts_opened"><?php echo _('Opn'); ?></a></td>
-			<td><a href="<?php echo $uri_string; ?>artifacts_closed"><?php echo _('Cls'); ?></a></td>
+			<td><a href="<?php echo $uri_string; ?>bugs_opened"><?php echo _('Opened'); ?></a></td>
+			<td><a href="<?php echo $uri_string; ?>bugs_closed"><?php echo _('Closed'); ?></a></td>
+			<td><a href="<?php echo $uri_string; ?>support_opened"><?php echo _('Opened'); ?></a></td>
+			<td><a href="<?php echo $uri_string; ?>support_closed"><?php echo _('Closed'); ?></a></td>
+			<td><a href="<?php echo $uri_string; ?>patches_opened"><?php echo _('Opened'); ?></a></td>
+			<td><a href="<?php echo $uri_string; ?>patches_closed"><?php echo _('Closed'); ?></a></td>
+			<td><a href="<?php echo $uri_string; ?>artifacts_opened"><?php echo _('Opened'); ?></a></td>
+			<td><a href="<?php echo $uri_string; ?>artifacts_closed"><?php echo _('Closed'); ?></a></td>
 			<?php } ?>
 			<?php if ($GLOBALS['sys_use_pm']) { ?>
-			<td><a href="<?php echo $uri_string; ?>tasks_opened"><?php echo _('Opn'); ?></a></td>
-			<td><a href="<?php echo $uri_string; ?>tasks_closed"><?php echo _('Cls'); ?></a></td>
+			<td><a href="<?php echo $uri_string; ?>tasks_opened"><?php echo _('Opened'); ?></a></td>
+			<td><a href="<?php echo $uri_string; ?>tasks_closed"><?php echo _('Closed'); ?></a></td>
 			<?php } ?>
 			<?php if ($GLOBALS['sys_use_scm']) { ?>
-			<td><a href="<?php echo $uri_string; ?>cvs_checkouts"><?php echo _('CO\'s'); ?></a></td>
-			<td><a href="<?php echo $uri_string; ?>cvs_commits"><?php echo _('Comm\'s'); ?></a></td>
+			<td><a href="<?php echo $uri_string; ?>cvs_checkouts"><?php echo _('Checkouts'); ?></a></td>
+			<td><a href="<?php echo $uri_string; ?>cvs_commits"><?php echo _('Commits'); ?></a></td>
 			<td><a href="<?php echo $uri_string; ?>cvs_adds"><?php echo _('Adds'); ?></a></td>
 			<?php } ?>
 			</tr>
