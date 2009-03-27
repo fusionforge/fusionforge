@@ -465,11 +465,20 @@ class Group extends Error {
 	 *	update - Update number of common properties.
 	 *
 	 *	Unlike updateAdmin(), this function accessible to project admin.
+	 *
+	 *	@param	object	User requesting operation (for access control).
+	 *	@param	bool	Whether group is publicly accessible (0/1).
+	 *	@param	string	Project's license (string ident).
+	 *	@param	int		Group type (1-project, 2-foundry).
+	 *	@param	string	Machine on which group's home directory located.
+	 *	@param	string	Domain which serves group's WWW.
+	 *	@return int	status.
+	 *	@access public.
 	 */
 	function update(&$user, $group_name,$homepage,$short_description,$use_mail,$use_survey,$use_forum,
-			$use_pm,$use_pm_depend_box,$use_scm,$use_news,$use_docman,
-			$new_doc_address,$send_all_docs,$logo_image_id,
-			$use_ftp,$use_tracker,$use_frs,$use_stats,$is_public) {
+		$use_pm,$use_pm_depend_box,$use_scm,$use_news,$use_docman,
+		$new_doc_address,$send_all_docs,$logo_image_id,
+		$use_ftp,$use_tracker,$use_frs,$use_stats,$tags,$is_public) {
 
 		$perm =& $this->getPermission($user);
 
@@ -594,6 +603,11 @@ class Group extends Error {
 
 		if (!$res) {
 			$this->setError(sprintf(_('Error updating project information: %s'), db_error()));
+			db_rollback();
+			return false;
+		}
+
+		if ($this->setTags($tags) === false) {
 			db_rollback();
 			return false;
 		}
@@ -1244,6 +1258,60 @@ class Group extends Error {
 	 */
 	function getHomePage() {
 		return $this->data_array['homepage'];
+	}
+
+	/**
+	 *	getTags - Tags of this project.
+	 *
+	 *	@return	string	List of tags.
+	 */
+	function getTags() {
+		$sql = 'SELECT name FROM project_tags WHERE group_id = $1';
+		$res = db_query_params($sql, array($this->getID()));
+		return join(', ', util_result_column_to_array($res));
+	}
+
+	/**
+	 *	setTags - Set tags of this project.
+	 *
+	 *	@return	string	database result.
+	 */
+	function setTags($tags) {
+		global $Language;
+
+		db_begin();
+		$sql='DELETE FROM project_tags WHERE group_id=$1';
+		$res=db_query_params($sql, array($this->getID()));
+		if (!$res) {
+			$this->setError('Deleting old tags: '.db_error());
+			db_rollback();
+			return false;
+		}
+		$inserted = array();
+		$tags_array = split('[;,]', $tags);
+		foreach ($tags_array as $tag) {
+			$tag = stripslashes($tag);
+			$tag = preg_replace('/[\t\r\n]/', ' ', $tag);
+			// Allowed caracteres: [A-Z][a-z][0-9] -_&'#+.
+			if (preg_match('/[^[:alnum:]| |\-|_|\&|\'|#|\+|\.]/', $tag)) {
+				$this->setError(_('Bad tag name, you only can use the following characters: [A-Z][a-z][0-9]-_&\'#+. and space'));
+				db_rollback();
+				return false;
+			}
+			$tag = trim($tag);
+			$tag = addslashes($tag);
+			if ($tag == '' || array_search($tag, $inserted) !== false) continue;
+			$sql='INSERT INTO project_tags (group_id,name) VALUES ($1, $2)';
+			$res=db_query_params($sql, array($this->getID(), $tag));
+			if (!$res) {
+				$this->setError(_('Setting tags: ').db_error());
+				db_rollback();
+				return false;
+			}
+			$inserted[] = $tag;
+		}
+		db_commit();
+		return true;
 	}
 
 	/**

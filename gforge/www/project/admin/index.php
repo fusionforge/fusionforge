@@ -198,7 +198,11 @@ project_admin_header(array('title'=>$adminheadertitle, 'group'=>$group->getID())
 	<p>[ <?php echo util_make_link ('/tarballs.php?group_id='.$group_id,_('Download Your Nightly SCM Tree Tarball')) ?> ]</p>
 <?php	} ?>
 
-<hr />
+<p>
+<?php echo _('Tags') ?>:&nbsp;
+<?php echo $group->getTags(); ?>
+</p>
+
 <?php	if($sys_use_trove) { ?>
 <p>
 <h4><?php echo _('Trove Categorization:&nbsp;') ?><?php echo util_make_link ('/project/admin/group_trove.php?group_id='. $group->getID(),'['._('Edit').']'); ?></h4>

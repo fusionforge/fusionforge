@@ -9,6 +9,6 @@
   *
   */
 
-header('Location: trove_list.php');
+header('Location: tag_cloud.php');
 
 ?>

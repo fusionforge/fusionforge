@@ -1,0 +1,191 @@
+<?php
+/*
+ * Copyright (C) 2008-2009 Alcatel-Lucent
+ *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Gforge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
+
+/*
+ * Standard Alcatel-Lucent disclaimer for contributing to open source
+ *
+ * "The Tag Cloud ("Contribution") has not been tested and/or
+ * validated for release as or in products, combinations with products or
+ * other commercial use. Any use of the Contribution is entirely made at
+ * the user's own responsibility and the user can not rely on any features,
+ * functionalities or performances Alcatel-Lucent has attributed to the
+ * Contribution.
+ *
+ * THE CONTRIBUTION BY ALCATEL-LUCENT IS PROVIDED AS IS, WITHOUT WARRANTY
+ * OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, COMPLIANCE,
+ * NON-INTERFERENCE AND/OR INTERWORKING WITH THE SOFTWARE TO WHICH THE
+ * CONTRIBUTION HAS BEEN MADE, TITLE AND NON-INFRINGEMENT. IN NO EVENT SHALL
+ * ALCATEL-LUCENT BE LIABLE FOR ANY DAMAGES OR OTHER LIABLITY, WHETHER IN
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * CONTRIBUTION OR THE USE OR OTHER DEALINGS IN THE CONTRIBUTION, WHETHER
+ * TOGETHER WITH THE SOFTWARE TO WHICH THE CONTRIBUTION RELATES OR ON A STAND
+ * ALONE BASIS."
+ */
+
+require_once('../env.inc.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'include/trove.php';
+require_once $gfcommon.'include/tag_cloud.php';
+
+$HTML->header(array('title'=>_('Software Map'),'pagename'=>'softwaremap'));
+
+echo ($HTML->subMenu(
+	array(
+		_('Tag cloud'),
+		_('Project Tree'),
+		_('Project List')
+		),
+	array(
+		'/softwaremap/tag_cloud.php',
+		'/softwaremap/trove_list.php',
+		'/softwaremap/full_list.php'
+		)
+	));
+
+$selected_tag = getStringFromRequest('tag');
+$page = getIntFromRequest('page', 1);
+
+echo '<br /><center>' . tag_cloud(array('selected' => $selected_tag, 'nb_max' => 100)) . '</center><br /><br />';
+
+if ($selected_tag) {
+
+	$cond_rq = '';
+	$res_grp = db_query_params('
+		SELECT groups.group_id, group_name, unix_group_name, short_description, register_time
+		FROM project_tags, groups
+		WHERE name = $1
+		AND project_tags.group_id = groups.group_id
+		AND status = $2 AND is_public=1 AND type_id=1 AND register_time > 0
+		ORDER BY group_name ASC', 
+		array($selected_tag, 'A'), $TROVE_HARDQUERYLIMIT);
+	$querytotalcount = db_numrows($res_grp);
+	if ($querytotalcount > 0) {
+		while ($group = db_fetch_array($res_grp)) {
+			$groups[] = "'" . $group['group_id'] . "'";
+		}
+		$cond_rq = ' AND group_id IN (' . join(',', $groups) . ') ';
+		db_reset_result($res_grp);
+	}
+
+	echo db_error();
+
+	// #################################################################
+	// limit/offset display
+
+	// store this as a var so it can be printed later as well
+	$html_limit = '';
+	if ($querytotalcount == $TROVE_HARDQUERYLIMIT){
+		$html_limit .= sprintf(_('More than <strong>%1$s</strong> projects have <strong>%2$s</strong> as tag.'), $TROVE_HARDQUERYLIMIT, htmlspecialchars($selected_tag));
+	}
+	else {
+		$html_limit .= sprintf(_('<strong>%1$s</strong> projects in result set.'), $querytotalcount, htmlspecialchars($selected_tag));
+	}
+
+	// only display pages stuff if there is more to display
+	if ($querytotalcount > $TROVE_BROWSELIMIT) {
+		$html_limit .= ' Displaying '.$TROVE_BROWSELIMIT.' per page. Projects sorted by alphabetical order.<br />';
+
+		// display all the numbers
+		for ($i=1;$i<=ceil($querytotalcount/$TROVE_BROWSELIMIT);$i++) {
+			$html_limit .= ' ';
+			if ($page != $i) {
+				$html_limit .= '<a href="'.$_SERVER['PHP_SELF'];
+				$html_limit .= '?page='.$i;
+				$html_limit .= '">';
+			} else $html_limit .= '<strong>';
+			$html_limit .= '&lt;'.$i.'&gt;';
+			if ($page != $i) {
+				$html_limit .= '</a>';
+			} else $html_limit .= '</strong>';
+			$html_limit .= ' ';
+		}
+	}
+
+	print $html_limit."<hr />\n";
+
+	// #################################################################
+	// print actual project listings
+	// note that the for loop starts at 1, not 0
+	for ($i_proj=1;$i_proj<=$querytotalcount;$i_proj++) {
+		$row_grp = db_fetch_array($res_grp);
+
+		// check to see if row is in page range
+		if (($i_proj > (($page-1)*$TROVE_BROWSELIMIT)) && ($i_proj <= ($page*$TROVE_BROWSELIMIT))) {
+			$viewthisrow = 1;
+		} else {
+			$viewthisrow = 0;
+		}
+
+		if ($row_grp && $viewthisrow) {
+			print '<table border="0" cellpadding="0" width="100%">';
+			print '<tr valign="top"><td colspan="2">';
+			print "<a href=\"/projects/". strtolower($row_grp['unix_group_name']) ."/\"><strong>"
+			.$row_grp['group_name']."</strong></a> ";
+
+			if ($row_grp['short_description']) {
+				print "- " . $row_grp['short_description'];
+			}
+
+			// extra description
+			print '</td></tr>';
+			print '<tr valign="top"><td colspan="2">';
+			print _('Tags'). ':&nbsp;' . list_project_tag($row_grp['group_id']);
+			print '</td></tr>';
+			print '<tr valign="top"><td>';
+			// list all trove categories
+			print trove_getcatlisting($row_grp['group_id'],0,1,0);
+			print '</td>'."\n".'<td align="right">'; // now the right side of the display
+			$res = db_query_params('SELECT percentile, ranking
+					FROM project_weekly_metric
+					WHERE group_id=$1', array($row_grp['group_id']));
+			$nb_line = db_numrows($res);
+			if (! $nb_line) {
+				$percentile = 'N/A';
+				$ranking = 'N/A';
+			}
+			else {
+				$percentile = number_format(db_result($res, 0, 'percentile'));
+				$ranking = number_format(db_result($res, 0, 'ranking'));
+			}
+			print 'Activity Percentile: <strong>'. $percentile .'</strong>';
+			print '<br />Activity Ranking: <strong>'. $ranking .'</strong>';
+			print '<br />'._('Registered:&nbsp;').' <strong>'.date(_('Y-m-d H:i'),$row_grp['register_time']).'</strong>';
+			print '</td></tr>';
+			/*
+			 if ($row_grp['jobs_count']) {
+			 print '<tr><td colspan="2" align="center">'
+			 .'<a href="/people/?group_id='.$row_grp['group_id'].'">[This project needs help]</a></td></td>';
+			 }
+			 */
+			print '</table>';
+			print '<hr />';
+		} // end if for row and range chacking
+	}
+
+	// print bottom navigation if there are more projects to display
+	if ($querytotalcount > $TROVE_BROWSELIMIT) {
+		print $html_limit;
+	}
+}
+
+$HTML->footer(array());
+?>

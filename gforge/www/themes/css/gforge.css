@@ -367,5 +367,43 @@ A.lnkutility:visited { COLOR: #ffffff }
 A.lnkutility:active { COLOR: #ffffff }
 A.lnkutility:hover { COLOR: #ffffff }
 
+/* For tag cloud */
+.tag1 {
+ outline-style: none;
+ font-size: 10px;
+ margin-left: 0.3em;
+ margin-right: 0.3em;
+}
 
+.tag2 {
+ outline-style: none;
+ font-size: 12px;
+ margin-left: 0.3em;
+ margin-right: 0.3em;
+}
+
+.tag3 {
+ outline-style: none;
+ font-size: 14px;
+ margin-left: 0.3em;
+ margin-right: 0.3em;
+}
+
+.tag4 {
+ outline-style: none;
+ font-size: 16px;
+ margin-left: 0.3em;
+ margin-right: 0.3em;
+}
+
+.tag5 {
+ outline-style: none;
+ font-size: 18px;
+ margin-left: 0.3em;
+ margin-right: 0.3em;
+}
+
+.develtitle {
+ font-weight: bold;
+}
 

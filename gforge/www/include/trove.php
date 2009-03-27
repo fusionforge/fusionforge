@@ -220,6 +220,7 @@ function trove_catselectfull($node,$selected,$name) {
  * @param		int		The group ID
  * @param		bool	Whether filters have already been applied
  * @param		bool	Whether to print category links
+ * @param		bool	???
  */
 function trove_getcatlisting($group_id,$a_filter,$a_cats,$a_complete) {
 	global $discrim_url;

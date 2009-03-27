@@ -54,10 +54,12 @@ $HTML->header(array('title'=>_('Software Map'),'pagename'=>'softwaremap'));
 
 echo ($HTML->subMenu(
 		array(
+			_('Tag cloud'),
 			_('Project Tree'),
 			_('Project List')
 		),
 		array(
+			'/softwaremap/tag_cloud.php',
 			'/softwaremap/trove_list.php',
 			'/softwaremap/full_list.php'
 		)
@@ -138,7 +140,7 @@ for ($i_proj=1;$i_proj<=$querytotalcount;$i_proj++) {
 		// extra description
 		print '</td></tr><tr valign="top"><td>';
 		// list all trove categories
-		print trove_getcatlisting($row_grp['group_id'],0,1);
+		print trove_getcatlisting($row_grp['group_id'],0,1,0);
 		print '</td>';
 		print '<td align="right"><br />Register Date: <strong>'.date(_('Y-m-d H:i'),$row_grp['register_time']).'</strong></td>';
 		print '</tr>';

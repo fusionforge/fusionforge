@@ -57,7 +57,8 @@ if (getStringFromRequest('submit')) {
 	$use_tracker = getStringFromRequest('use_tracker');
 	$use_frs = getStringFromRequest('use_frs');
 	$use_stats = getStringFromRequest('use_stats');
-	$is_public = getStringFromRequest('is_public');
+	$tags = getStringFromRequest('form_tags');
+	$is_public = getIntFromRequest('is_public');
 	$new_doc_address = getStringFromRequest('new_doc_address');
 	$send_all_docs = getStringFromRequest('send_all_docs');
   
@@ -81,6 +82,7 @@ if (getStringFromRequest('submit')) {
 		$use_tracker,
 		$use_frs,
 		$use_stats,
+		$tags,
 		$is_public
 	);
 	
@@ -124,9 +126,14 @@ $images_res = db_query("
 
 <p>
 <?php echo _('Short Description (255 Character Max, HTML will be stripped from this description)') ?>:<br />
-<textarea cols="80" rows="3" wrap="virtual" name="form_shortdesc">
+<textarea cols="80" rows="3" name="form_shortdesc">
 <?php echo $group->getDescription(); ?>
 </textarea>
+</p>
+
+<p>
+<?php echo _('Tags') ?>:<br />
+<input type="text" name="form_tags" size="100" value="<?php echo $group->getTags(); ?>" />
 </p>
 
 <p>

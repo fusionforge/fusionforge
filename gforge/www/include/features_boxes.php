@@ -10,12 +10,17 @@
 //require_once('../env.inc.php');
 //require_once('pre.php');
 require_once $gfcommon.'include/FusionForge.class.php';
+require_once $gfcommon.'include/tag_cloud.php';
 
 function show_features_boxes() {
 	GLOBAL $HTML,$sys_use_ratings;
 	
 	$return = '';
-	$return .= $HTML->boxTop(sprintf(_('%1$s Statistics'), $GLOBALS['sys_name']),0);
+	$return .= $HTML->boxTop(_('Tag Cloud'));
+	$return .= '<center>';
+	$return .= tag_cloud();
+	$return .= '</center>';
+	$return .= $HTML->boxMiddle(sprintf(_('%1$s Statistics'), $GLOBALS['sys_name']),0);
 	$return .= show_sitestats();
 	$return .= $HTML->boxMiddle(_('Top Project Downloads'));
 	$return .= show_top_downloads();

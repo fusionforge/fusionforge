@@ -22,7 +22,9 @@ if (!$sys_use_trove) {
 	exit_disabled();
 }
 
-$form_cat = intval(getIntFromRequest('form_cat'));
+$form_cat = getIntFromRequest('form_cat');
+$page = getIntFromRequest('page',1);
+
 
 // assign default. 18 is 'topic'
 if (!$form_cat) {
@@ -46,10 +48,12 @@ $HTML->header(array('title'=>_('Software Map')));
 
 echo ($HTML->subMenu(
 		array(
+			_('Tag cloud'),
 			_('Project Tree'),
 			_('Project List')
 		),
 		array(
+			'/softwaremap/tag_cloud.php',
 			'/softwaremap/trove_list.php',
 			'/softwaremap/full_list.php'
 		)
@@ -237,14 +241,6 @@ $querytotalcount = db_numrows($res_grp);
 	
 // #################################################################
 // limit/offset display
-
-// no funny stuff with get vars
-
-$page = getStringFromRequest('page');
-
-if (!is_numeric($page)) {
-	$page = 1;
-}
 
 // store this as a var so it can be printed later as well
 $html_limit = '';

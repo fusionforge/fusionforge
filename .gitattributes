@@ -18,6 +18,7 @@ gforge/common/include/TextSanitizer.class.php -text
 gforge/common/include/database-mysql.php -text
 gforge/common/include/group_section_texts.php -text
 gforge/common/include/rbac_texts.php -text
+gforge/common/include/tag_cloud.php -text
 gforge/common/reporting/ReportDownloads.class.php -text
 gforge/contrib/cmd-line-prototype.tar.gz -text
 gforge/cron.d/00phpcron -text
@@ -56,6 +57,7 @@ gforge/db/20060216-nocommit.sql -text
 gforge/db/20070924-artifact-perm.sql -text
 gforge/db/20070924-forum-perm.sql -text
 gforge/db/20070924-project-perm.sql -text
+gforge/db/20090327_create_table_project_tags.sql -text
 gforge/db/FTI-20061025.sql -text
 gforge/db/gforge-data-mysql.sql -text
 gforge/db/gforge-struct-mysql.sql -text
@@ -3146,6 +3148,7 @@ gforge/www/search/include/engines/NewsGroupSearchEngine.class.php -text svneol=u
 gforge/www/search/include/engines/TasksGroupSearchEngine.class.php -text svneol=unset#application/octet-stream
 gforge/www/search/include/engines/TrackersGroupSearchEngine.class.php -text svneol=unset#application/octet-stream
 gforge/www/softwaremap/full_list.php -text
+gforge/www/softwaremap/tag_cloud.php -text
 gforge/www/tabber/example-ajax-0.html -text
 gforge/www/tabber/example-ajax-1.html -text
 gforge/www/tabber/example-ajax-2.html -text
