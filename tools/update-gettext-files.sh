@@ -21,26 +21,22 @@ fi
 
 locales=$(echo $locales | xargs -n 1 | sort)
 
-case $mode in
-    refresh)
-	rm translations/gforge.pot
+if [ $mode = "refresh" ] ; then
+    rm translations/gforge.pot
+    
+    find -type f -\( -name \*.php -or -name users -or -name projects -\) \
+	| grep -v -e {arch} -e svn-base \
+	| grep -v ^./plugins/wiki \
+	| LANG=C sort \
+	| xargs xgettext -d gforge -o translations/gforge.pot -L PHP --from-code=iso-8859-1    
 	
-	find -type f -\( -name \*.php -or -name users -or -name projects -\) \
-	    | grep -v -e {arch} -e svn-base \
-	    | grep -v ^./plugins/wiki \
-	    | LANG=C sort \
-	    | xargs xgettext -d gforge -o translations/gforge.pot -L PHP --from-code=iso-8859-1    
-	    
-	    for l in $locales ; do
-		echo "Processing $l..."
-		msgmerge -U translations/$l.po translations/gforge.pot
-	    done
-	    ;;
-
-    stats)
-	for l in $(echo $locales | xargs -n 1 | sort) ; do
-	    printf "* %5s: " $l
-	    msgfmt --statistics -o /dev/null translations/$l.po
+	for l in $locales ; do
+	    echo "Processing $l..."
+	    msgmerge -U translations/$l.po translations/gforge.pot
 	done
-	;;
-esac
+fi
+
+for l in $(echo $locales | xargs -n 1 | sort) ; do
+    printf "* %5s: " $l
+    msgfmt --statistics -o /dev/null translations/$l.po
+done
