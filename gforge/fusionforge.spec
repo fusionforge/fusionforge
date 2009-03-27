@@ -218,6 +218,8 @@ fi
 
 %post
 if [ "$1" -eq "1" ]; then
+
+	# TODO : USE install-db.sh
 	# creating the database
 	%startpostgresql
 	su -l postgres -s /bin/sh -c "createdb -E UNICODE %{dbname} >/dev/null 2>&1"
@@ -242,8 +244,8 @@ if [ "$1" -eq "1" ]; then
 	# updating PostgreSQL configuration
 	if ! grep -i '^ *host.*%{dbname}.*' /var/lib/pgsql/data/pg_hba.conf >/dev/null 2>&1; then
 		echo 'host %{dbname} %{dbuser} 127.0.0.1 255.255.255.255 md5' >> /var/lib/pgsql/data/pg_hba.conf
- 		echo 'host %{dbname} gforge_mta 127.0.0.1 255.255.255.255 trust' >> /var/lib/pgsql/data/pg_hba.conf
-		echo 'host %{dbname} gforge_nss 127.0.0.1 255.255.255.255 trust' >> /var/lib/pgsql/data/pg_hba.conf
+ 		echo 'local %{dbname} gforge_mta trust' >> /var/lib/pgsql/data/pg_hba.conf
+		echo 'local %{dbname} gforge_nss trust' >> /var/lib/pgsql/data/pg_hba.conf
 		%reloadpostgresql
 	fi
 
