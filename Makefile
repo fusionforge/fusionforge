@@ -3,6 +3,7 @@ DISTREDHAT=$(shell grep -qi 'Red Hat' /etc/issue && echo rh)
 DISTSUSE=$(shell grep -qi 'SuSE' /etc/issue && echo rh)
 DIST=$(DISTDEBIAN)$(DISTREDHAT)$(DISTSUSE)
 
+ARCHIVE=$(CURDIR)/depot
 BUILDRESULT=$(CURDIR)/result
 
 VER=$(shell LANG=C grep '>software_version' gforge/common/include/FusionForge.class.php | cut -d\' -f2)
@@ -32,8 +33,8 @@ buildtar:
 	find gforge -type f -or -type l | grep -v '/.svn/' | grep -v '^./debian' | grep -v '^./deb-specific' | grep -v '^./rpm-specific' | grep -v '^./gforge.spec' | grep -v '^./README.setup' | grep -v '^./setup' | cpio -pdumB /tmp/$(VERSION)
 	cd /tmp/$(VERSION)/gforge; for l in eu bg ca zh_TW nl en eo fr de el he id it ja ko la nb pl pt_BR pt ru zh_CN es sv th ; do mkdir -p locales/$$l/LC_MESSAGES && msgfmt -o locales/$$l/LC_MESSAGES/gforge.mo translations/$$l.po ; done
 	cd /tmp/; tar jcf $(BUILDRESULT)/$(VERSION).tar.bz2 $(VERSION)
-	cd /tmp/$(VERSION); tar zxf ~/depot/libphp-jpgraph_1.5.2.orig.tar.gz
-	cd /tmp/$(VERSION); patch -p0 < ~/depot/jpgraph-1.5.2-php5_and_liberation_fonts.patch
+	cd /tmp/$(VERSION); tar zxf $(ARCHIVE)/libphp-jpgraph_1.5.2.orig.tar.gz
+	cd /tmp/$(VERSION); patch -p0 < $(ARCHIVE)/jpgraph-1.5.2-php5_and_liberation_fonts.patch
 	cd /tmp/$(VERSION); mkdir jpgraph; mv jpgraph-1.5.2/src/* jpgraph; rm -fr jpgraph-1.5.2
 	cd /tmp; tar jcf $(BUILDRESULT)/$(VERSION)-allinone.tar.bz2 $(VERSION)
 	rm -fr /tmp/$(VERSION)
