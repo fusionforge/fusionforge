@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-28 11:44+0100\n"
-"PO-Revision-Date: 2009-03-18 16:54+0100\n"
+"PO-Revision-Date: 2009-03-27 11:00+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <aljeux@free.fr>\n"
 "Language: fr\n"
@@ -11310,21 +11310,21 @@ msgstr "Sous-domaines"
 #: www/stats/site_stats_utils.php:293 www/stats/site_stats_utils.php:295
 #: www/stats/site_stats_utils.php:297
 msgid "Opn"
-msgstr "**Opn"
+msgstr "Ouv."
 
 #: www/stats/site_stats_utils.php:290 www/stats/site_stats_utils.php:292
 #: www/stats/site_stats_utils.php:294 www/stats/site_stats_utils.php:296
 #: www/stats/site_stats_utils.php:298
 msgid "Cls"
-msgstr "**Cls"
+msgstr "Ferm."
 
 #: www/stats/site_stats_utils.php:299
 msgid "CO's"
-msgstr "**CO's"
+msgstr "Cop."
 
 #: www/stats/site_stats_utils.php:300
 msgid "Comm's"
-msgstr "**Comm's"
+msgstr "Val."
 
 #: www/stats/site_stats_utils.php:335
 msgid "Query returned no valid data."
