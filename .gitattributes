@@ -26,7 +26,6 @@ gforge/cron.d/Makefile -text
 gforge/cron.d/backup1 -text
 gforge/cron.d/backup2 -text
 gforge/cron.d/db-postgresql -text
-gforge/cron.d/db-postgresql-2 -text
 gforge/cron.d/dns-bind9 -text
 gforge/cron.d/ftp-proftpd -text
 gforge/cron.d/fusionforge -text

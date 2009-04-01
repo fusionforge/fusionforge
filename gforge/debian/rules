@@ -40,7 +40,6 @@ debian/$(PACKAGE)-%.cron.d:
 	@if [ "$@" = "debian/$(PACKAGE)-db-postgresql.cron.d" ] ; then \
 	cat $(CURDIR)/cron.d/00phpcron > $@ ; \
 	cat $(CURDIR)/cron.d/db-postgresql >> $@ ; \
-	cat $(CURDIR)/cron.d/db-postgresql-2 >> $@ ; \
 	else \
 		echo "copy $(CURDIR)/cron.d/$* to $@" ; \
 		cp $(CURDIR)/cron.d/$* $@ ; \
