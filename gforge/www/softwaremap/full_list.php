@@ -92,7 +92,7 @@ $html_limit .= sprintf(_('<strong>%1$s</strong> projects in result set.'), $quer
 
 // only display pages stuff if there is more to display
 if ($querytotalcount > $TROVE_BROWSELIMIT) {
-	$html_limit .= ' Displaying '.$TROVE_BROWSELIMIT.' per page. Projects sorted by alphabetical order.<br />';
+	$html_limit .= sprintf(_(' Displaying %1$s per page. Projects sorted by alphabetical order.'), $TROVE_BROWSELIMIT).'<br/>';
 
 	// display all the numbers
 	for ($i=1;$i<=ceil($querytotalcount/$TROVE_BROWSELIMIT);$i++) {
@@ -142,7 +142,7 @@ for ($i_proj=1;$i_proj<=$querytotalcount;$i_proj++) {
 		// list all trove categories
 		print trove_getcatlisting($row_grp['group_id'],0,1,0);
 		print '</td>';
-		print '<td align="right"><br />Register Date: <strong>'.date(_('Y-m-d H:i'),$row_grp['register_time']).'</strong></td>';
+		print '<td align="right"><br />'._('Register Date:').' <strong>'.date(_('Y-m-d H:i'),$row_grp['register_time']).'</strong></td>';
 		print '</tr>';
 /*
                 if ($row_grp['jobs_count']) {
