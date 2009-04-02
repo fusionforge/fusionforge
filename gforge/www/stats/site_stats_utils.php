@@ -256,7 +256,7 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 	if ( db_numrows( $res ) > 1 ) {
 
 		?>
-		<table width="100%" cellpadding="0" cellspacing="0" border="0">
+		<table width="100%" cellpadding="0" cellspacing="0" border="1">
 
 		<tr valign="top" align="right" class="tableheading">
 			<td><strong><?php echo _('Group Name'); ?></strong></td>
@@ -273,7 +273,7 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 			<?php if ($GLOBALS['sys_use_pm']) { ?>
 			<td colspan="2"><strong><?php echo _('Tasks'); ?></strong></td>
 			<?php } ?>
-			<?php if ($GLOBALS['sys_use_cvs']) { ?>
+			<?php if ($GLOBALS['sys_use_scm']) { ?>
 			<td colspan="3"><strong><?php echo _('CVS'); ?></strong></td>
 			<?php } ?>
 		</tr>
@@ -323,7 +323,7 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 		$i = $offset;	
 		while ( $row = db_fetch_array($res) ) {
 			print	'<tr ' . $GLOBALS['HTML']->boxGetAltRowStyle($i) . ' align="right">'
-				. '<td>' . ($i + 1) . util_make_link ('/project/stats/?group_id='.$row["group_id"], $row["group_name"]) . '</td>'
+				. '<td>' . ($i + 1)." " . util_make_link ('/project/stats/?group_id='.$row["group_id"], $row["group_name"]) . '</td>'
 				. '<td>&nbsp;&nbsp;' . number_format( $row["site_views"],0 ) . '</td>'
 				. '<td>&nbsp;&nbsp;' . number_format( $row["subdomain_views"],0 ) . '</td>';
 			if ($GLOBALS['sys_use_frs']) {
