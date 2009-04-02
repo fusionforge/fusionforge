@@ -51,3 +51,5 @@ db/timetracking-init.sql                usr/share/gforge/db/
 db/20070924-forum-perm.sql              usr/share/gforge/db/
 db/20070924-project-perm.sql            usr/share/gforge/db/
 db/20070924-artifact-perm.sql           usr/share/gforge/db/
+db/20090327_create_table_project_tags.sql     usr/share/gforge/db/
+db/20090402-add-projecttags-constraints.sql   usr/share/gforge/db/

@@ -2818,16 +2818,9 @@ eval {
       &debug ("Committing.") ;
       $dbh->commit () ;
     }
-
-    $version = &get_db_version ;
-    $target = "4.6.99-7" ;
-    if (&is_lesser ($version, $target)) {
-      &debug ("Create table for project's tags") ;
-      &update_with_sql("20090327_create_table_project_tags.sql","4.6.99-7");
-      &update_db_version ($target) ;
-      &debug ("Committing.") ;
-      $dbh->commit () ;
-    }
+    
+    &update_with_sql("20090327_create_table_project_tags","4.6.99-7");
+    &update_with_sql("20090402-add-projecttags-constraints","4.7.99-1");
 
     ########################### INSERT HERE #################################
 
