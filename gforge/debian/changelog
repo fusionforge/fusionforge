@@ -8,8 +8,9 @@ gforge (4.7.2.50-2) experimental; urgency=low
 
   [ Roland Mas ]
   * New package: gforge-plugin-scmbzr (not complete yet!).
+  * Fixed a bunch of lintian warnings.
 
- -- Roland Mas <lolando@debian.org>  Thu, 26 Mar 2009 17:29:27 +0100
+ -- Roland Mas <lolando@debian.org>  Thu, 02 Apr 2009 23:13:38 +0200
 
 gforge (4.7.2-4) experimental; urgency=low
 
