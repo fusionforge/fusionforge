@@ -175,10 +175,10 @@ class AttachManager extends Error {
 			$this->messages[] = _('Couldn\'t get message id');
 		} else {
 			$this->msg_id = db_result($result,0,0);
-			$sql = "INSERT INTO forum_attachment (userid, dateline, filename, filedata, filesize, visible, msg_id , filehash, mimetype)
+			$sql = "INSERT INTO forum_attachment (userid, dateline, filename, filedata, filesize, visible, msg_id , filehash)
 					VALUES 
 					( $userid , " . $dateline . ", '" . $filename . "',
-					'" .  $filedata . "', $filesize, $visible, $this->msg_id,  '" . $filehash . "', '" . $mimetype  . "')";
+					'" .  $filedata . "', $filesize, $visible, $this->msg_id,  '" . $filehash . "')";
 			if (db_query($sql)) {
 				$this->messages[] = _('File uploaded');
 			}	else {
@@ -265,10 +265,10 @@ class AttachManager extends Error {
 						$this->msg_id = db_result($result,0,0);
 					}
 				}
-				$sql = "INSERT INTO forum_pending_attachment (userid, dateline, filename, filedata, filesize, visible, msg_id , filehash, mimetype)
+				$sql = "INSERT INTO forum_pending_attachment (userid, dateline, filename, filedata, filesize, visible, msg_id , filehash)
 					VALUES 
 					( $user_id , " . time() . ", '" . addslashes($attachment_name) . "',
-					'" .  base64_encode($filestuff) . "', $attachment_size, 1, $this->msg_id,  '" . addslashes(md5($filestuff)) . "', '". addslashes($attachment_type) ."')";
+					'" .  base64_encode($filestuff) . "', $attachment_size, 1, $this->msg_id,  '" . addslashes(md5($filestuff)) ."')";
 				$res = db_query($sql);
 				if ($res) {
 					$this->messages[] = _('File uploaded');
@@ -283,7 +283,6 @@ class AttachManager extends Error {
 				$sql = "UPDATE forum_attachment SET dateline = '" . time() . "' , filedata = '" . base64_encode($filestuff) .  "' ,
 				 filename = '" . addslashes($attachment_name) . "' , 
 				 filehash = '" . addslashes(md5($filestuff)) . "' , 
-				 mimetype = '" . addslashes($attachment_type) . "' ,
 				 counter = '0' ,
 				 filesize = '" . $attachment_size . "' where attachmentid=$update";
 				if (db_query($sql)) {
@@ -307,10 +306,10 @@ class AttachManager extends Error {
 						$this->msg_id = db_result($result,0,0);
 					}
 				}
-				$sql = "INSERT INTO forum_attachment (userid, dateline, filename, filedata, filesize, visible, msg_id , filehash, mimetype)
+				$sql = "INSERT INTO forum_attachment (userid, dateline, filename, filedata, filesize, visible, msg_id , filehash)
 					VALUES 
 					( $user_id , " . time() . ", '" . addslashes($attachment_name) . "',
-					'" .  base64_encode($filestuff) . "', $attachment_size, 1, $this->msg_id,  '" . addslashes(md5($filestuff)) . "', '" . addslashes($attachment_type) . "')";
+					'" .  base64_encode($filestuff) . "', $attachment_size, 1, $this->msg_id,  '" . addslashes(md5($filestuff)) . "')";
 				$res = db_query($sql);
 				if ($res) {
 					$this->messages[] = _('File uploaded');
