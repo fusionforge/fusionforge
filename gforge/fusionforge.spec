@@ -1,4 +1,4 @@
-%define dbhost			localhost
+#%define dbhost			localhost
 %define dbname			gforge
 %define dbuser			gforge
 
@@ -240,13 +240,33 @@ if [ "$1" -eq "1" ]; then
 	su -l postgres -c "psql -c \"CREATE USER gforge_nss WITH PASSWORD '$GFORGEDATABASE_PASSWORD' NOCREATEUSER\" %{dbname} >/dev/null 2>&1"
 	su -l postgres -c "psql -c \"CREATE USER gforge_mta WITH PASSWORD '$GFORGEDATABASE_PASSWORD' NOCREATEUSER\" %{dbname} >/dev/null 2>&1"
 	
+	# replacing variables in configuration files
+        perl -pi -e "
+                s/DB_HOST/"%{dbhost}"/g;
+                s/DB_NAME/"%{dbname}"/g;
+                s/DB_USER/"%{dbuser}"/g;
+                s/DB_PASSWORD/"$GFORGEDATABASE_PASSWORD"/g;
+                s/SYSTEM_NAME/"%{sitename}"/g;
+                s/RANDOM_ID/"$SESSID"/g;
+                s/HOST_NAME/"%{hostname}"/g" %{GFORGE_CONF_DIR}/gforge.conf
+
+        #admin email
+        adminemail=$(echo "%{adminemail}"| sed 's|@|\\\@|g')
+        perl -pi -e "
+                s/SERVER_ADMIN/"$adminemail"/g" %{GFORGE_CONF_DIR}/gforge.conf
+	
 	# updating PostgreSQL configuration
-	if ! grep -i '^ *host.*%{dbname}.*' /var/lib/pgsql/data/pg_hba.conf >/dev/null 2>&1; then
-		echo 'host %{dbname} %{dbuser} 127.0.0.1 255.255.255.255 md5' >> /var/lib/pgsql/data/pg_hba.conf
- 		echo 'local %{dbname} gforge_mta md5md5md5md5md5' >> /var/lib/pgsql/data/pg_hba.conf
-		echo 'local %{dbname} gforge_nss trust' >> /var/lib/pgsql/data/pg_hba.conf
-		%reloadpostgresql
-	fi
+	#if ! grep -i '^ *host.*%{dbname}.*' /var/lib/pgsql/data/pg_hba.conf >/dev/null 2>&1; then
+	#	echo 'host %{dbname} %{dbuser} 127.0.0.1 255.255.255.255 md5' >> /var/lib/pgsql/data/pg_hba.conf
+ 	#	echo 'local %{dbname} gforge_mta md5md5md5md5md5' >> /var/lib/pgsql/data/pg_hba.conf
+	#	echo 'local %{dbname} gforge_nss trust' >> /var/lib/pgsql/data/pg_hba.conf
+	#	%reloadpostgresql
+	#fi
+
+	sh %{GFORGE_BIN_DIR}/install-db.sh configure-files
+        mv /var/lib/pgsql/data/pg_hba.conf /var/lib/pgsql/data/pg_hba.conf-orig
+        mv /var/lib/pgsql/data/pg_hba.conf.gforge-new /var/lib/pgsql/data/pg_hba.conf
+        %reloadpostgresql
 
 	# adding "noreply" alias
 	for i in /etc/postfix/aliases /etc/mail/aliases /etc/aliases ; do
@@ -262,21 +282,6 @@ if [ "$1" -eq "1" ]; then
 	# generating random session ID
 	%randstr SESSID 32
 
-	# replacing variables in configuration files
-	perl -pi -e "
-		s/DB_HOST/"%{dbhost}"/g;
-		s/DB_NAME/"%{dbname}"/g;
-		s/DB_USER/"%{dbuser}"/g;
-		s/DB_PASSWORD/"$GFORGEDATABASE_PASSWORD"/g;
-		s/SYSTEM_NAME/"%{sitename}"/g;
-		s/RANDOM_ID/"$SESSID"/g;
-		s/HOST_NAME/"%{hostname}"/g" %{GFORGE_CONF_DIR}/gforge.conf
-		
-	#admin email
- 	adminemail=$(echo "%{adminemail}"| sed 's|@|\\\@|g')
- 	perl -pi -e "
- 		s/SERVER_ADMIN/"$adminemail"/g" %{GFORGE_CONF_DIR}/gforge.conf
- 
  	#path of jpgraph.php
  	path_jpgraph=$(rpm -ql php-jpgraph | grep jpgraph.php | sed 's/\(.*\)jpgraph.php/\1/')
  	perl -pi -e "
