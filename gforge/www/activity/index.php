@@ -17,27 +17,49 @@ require_once $gfwww.'include/pre.php';
 	Written by dtype Oct. 1999
 */
 $group_id = getIntFromRequest("group_id");
-$begin = getStringFromRequest("start_date");
-$end = getStringFromRequest("end_date");
+$received_begin = getStringFromRequest("start_date");
+$received_end = getStringFromRequest("end_date");
 $show=getArrayFromRequest("show");
 
 $date_format = _('%Y-%m-%d') ;
 
-if (!$begin || $begin==0) {
+if (!$received_begin || $received_begin==0) {
 	$begin = (time()-(30*86400));
+	$rendered_begin = strftime($date_format, $begin) ;
 } else {
-	$begin = strptime ($begin, $date_format);
+	$tmp = strptime ($received_begin, $date_format);
+	if (!$tmp) {
+		$begin = (time()-(30*86400));
+		$rendered_begin = strftime($date_format, $begin) ;
+	} else {
+		$begin = mktime (0,0,0,$tmp['tm_mon']+1,$tmp['tm_mday'],$tmp['tm_year']);
+		$rendered_begin = $received_begin ;
+	}
 }
-if (!$end || $end==0) {
-	$end = time ();
+		
+if (!$received_end || $received_end==0) {
+	$end = time() ;
+	$rendered_end = strftime($date_format, $end) ;
 } else {
-	$end = strptime ($end, $date_format) + 86400;
+	$tmp = strptime ($received_end, $date_format);
+	if (!$tmp) {
+		$end = time() ;
+		$rendered_end = strftime($date_format, $end) ;
+	} else {
+		$end = mktime (0,0,0,$tmp['tm_mon']+1,$tmp['tm_mday'],$tmp['tm_year']) + 86400;
+		$rendered_end = $received_end ;
+	}
 }
+
 if ($begin > $end) {
-	$endtmp=$end;
+	$tmp=$end;
 	$end=$begin;
-	$begin=$endtmp;
+	$begin=$tmp;
+	$tmp=$rendered_end;
+	$rendered_end=$rendered_begin;
+	$rendered_begin=$tmp;
 }
+
 if (!$group_id) {
 	exit_no_group();
 }
@@ -112,8 +134,8 @@ if ($rows<1) {
 </tr>
 <tr>
 	<td><?php echo $multiselect; ?></td>
-	<td valign="top"><input name="start_date" value="<?php echo strftime($date_format,$begin); ?>" size="10" maxlength="10" /></td>
-	<td valign="top"><input name="end_date" value="<?php echo strftime($date_format,$end); ?>" size="10" maxlength="10" /></td>
+	<td valign="top"><input name="start_date" value="<?php echo $rendered_begin; ?>" size="10" maxlength="10" /></td>
+	<td valign="top"><input name="end_date" value="<?php echo $rendered_end; ?>" size="10" maxlength="10" /></td>
 	<td valign="top"><input type="submit" name="submit" value="<?php echo _('Submit'); ?>"/></td>
 </tr>
 </table>
