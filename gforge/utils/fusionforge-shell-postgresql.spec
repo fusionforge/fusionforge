@@ -32,6 +32,9 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-root
 %define CROND_DIR               %{_sysconfdir}/cron.d
 %define GFORGE_CONF_DIR         %{_sysconfdir}/gforge
 
+%define startnscd() service nscd status | grep '(pid' >/dev/null 2>&1 || service nscd start
+%define nscdonstart() chkconfig nscd on
+
 %description
 GForge provides many tools to aid collaboration in a
 development project, such as bug-tracking, task management,
@@ -80,6 +83,9 @@ if [ "$1" = "1" ] ; then
 	#Configuration de libnss-pgsql
 	ln -s %{GFORGE_DIR}/utils/install-nsspgsql.sh %{SBIN_DIR}/
 	install-nsspgsql.sh setup
+
+	%startnscd
+        %nscdonstart
 
 	#if plugin scmcvs is installed, comment the cron usergroup.php
 	if [ ! "$(rpm -qa fusionforge-plugin-scmcvs)" = "" ]; then
