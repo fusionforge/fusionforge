@@ -276,6 +276,7 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 			<?php if ($GLOBALS['sys_use_scm']) { ?>
 			<td colspan="3"><strong><?php echo _('CVS'); ?></strong></td>
 			<?php } ?>
+			<?php plugin_hook('stats_header_table'); ?>
 		</tr>
 
 		<?php
@@ -317,6 +318,7 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 			<td><a href="<?php echo $uri_string; ?>cvs_commits"><?php echo _('Commits'); ?></a></td>
 			<td><a href="<?php echo $uri_string; ?>cvs_adds"><?php echo _('Adds'); ?></a></td>
 			<?php } ?>
+			<?php plugin_hook('stats_detail_header_table'); ?>
 			</tr>
 		<?php
 	
@@ -348,6 +350,9 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 				. '<td>&nbsp;&nbsp;' . number_format( $row["cvs_commits"],0 ) . '</td>'
 				. '<td>&nbsp;&nbsp;' . number_format( $row["cvs_adds"],0 ) . '</td>';
 			}
+			$hook_params = array();
+			$hook_params['group_id'] = $row["group_id"];
+			plugin_hook('stats_data',$hook_params);
 			print '</tr>' . "\n";
 			$i++;
 			$sum = stats_util_sum_array( $sum, $row );
