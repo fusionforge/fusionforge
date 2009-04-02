@@ -13,7 +13,7 @@ require_once $gfcommon.'include/FusionForge.class.php';
 require_once $gfcommon.'include/tag_cloud.php';
 
 function show_features_boxes() {
-	GLOBAL $HTML,$sys_use_ratings;
+	GLOBAL $HTML,$sys_use_ratings,$sys_use_frs;
 	
 	$return = '';
 	$return .= $HTML->boxTop(_('Tag Cloud'));
@@ -22,8 +22,10 @@ function show_features_boxes() {
 	$return .= '</center>';
 	$return .= $HTML->boxMiddle(sprintf(_('%1$s Statistics'), $GLOBALS['sys_name']),0);
 	$return .= show_sitestats();
-	$return .= $HTML->boxMiddle(_('Top Project Downloads'));
-	$return .= show_top_downloads();
+	if ($sys_use_frs) {
+		$return .= $HTML->boxMiddle(_('Top Project Downloads'));
+		$return .= show_top_downloads();
+	}
 	if ($sys_use_ratings) {
 		$return .= $HTML->boxMiddle(_('Highest Ranked Users'));
 		$return .= show_highest_ranked_users();
