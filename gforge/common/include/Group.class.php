@@ -2103,17 +2103,6 @@ class Group extends Error {
 		//	Set Default Roles
 		//
 		//
-		$role = new Role($this);
-		$todo = array_keys($role->defaults);
-		for ($c=0; $c<count($todo); $c++) {
-			$role = new Role($this);
-			if (!$role->createDefault($todo[$c])) {
-				$this->setError(sprintf(_('R%d: %s'),$c,$role->getErrorMessage()));
-				db_rollback();
-				setup_gettext_from_context();
-				return false;
-			}
-		}
 
 		$admin_group = db_query_params ('SELECT user_id FROM user_group WHERE group_id=$1 AND admin_flags=$2',
 						array ($this->getID(),
@@ -2123,6 +2112,23 @@ class Group extends Error {
 		} else {
 			$idadmin_group = 1;
 		}
+
+		$role = new Role($this);
+		$todo = array_keys($role->defaults);
+		for ($c=0; $c<count($todo); $c++) {
+			$role = new Role($this);
+			if (! ($role_id = $role->createDefault($todo[$c]))) {
+				$this->setError(sprintf(_('R%d: %s'),$c,$role->getErrorMessage()));
+				db_rollback();
+				setup_gettext_from_context();
+				return false;
+			}
+			$role = new Role($this, $role_id);
+			if ($role->getVal('projectadmin',0)=='A') {
+				$role->setUser($idadmin_group);
+			}
+		}
+
 
 		//
 		//
