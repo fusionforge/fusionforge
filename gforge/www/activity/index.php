@@ -110,17 +110,6 @@ foreach ($show as $showthis) {
 }
 $multiselect=html_build_multiple_select_box_from_arrays($ids,$texts,'show[]',$show,5,false);
 
-$sql="SELECT * FROM activity_vw WHERE activity_date BETWEEN '".$begin."' AND '".$end."'
-	AND group_id='$group_id' AND section IN ('".implode("','",$show)."') ORDER BY activity_date DESC";
-//echo $sql;
-$res=db_query($sql);
-echo db_error();
-
-$rows=db_numrows($res);
-if ($rows<1) {
-	echo _('No Activity Found');
-} else {
-
 	?>
 <br />
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
@@ -142,6 +131,17 @@ if ($rows<1) {
 </form>
 <br />
 	<?php
+
+$sql="SELECT * FROM activity_vw WHERE activity_date BETWEEN '".$begin."' AND '".$end."'
+	AND group_id='$group_id' AND section IN ('".implode("','",$show)."') ORDER BY activity_date DESC";
+//echo $sql;
+$res=db_query($sql);
+echo db_error();
+
+$rows=db_numrows($res);
+if ($rows<1) {
+	echo _('No Activity Found');
+} else {
 
 	$theader=array();
 	$theader[]=_('Time');
