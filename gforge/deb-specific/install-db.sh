@@ -17,11 +17,13 @@ function get_pg_hba_dir() {
         if [ -d /etc/postgresql/${pg_version}/main/ ]
         then
                 export pg_hba_dir=/etc/postgresql/${pg_version}/main/
+		return
         fi
         # postgresql on redhat, fedora, centos
         if [ -d /var/lib/pgsql/data/ ]
         then
                 export pg_hba_dir=/var/lib/pgsql/data/
+		return
         fi
         echo "No pg_hba_dir found"
         echo "exiting without error, but gforge db will not work"
@@ -36,11 +38,13 @@ function get_pg_version() {
         if [ -f /usr/bin/pg_lsclusters ]
         then
                 pg_version=`/usr/bin/pg_lsclusters | grep 5432 | grep online | cut -d' ' -f1`
+		return
         fi
         # postgresql on redhat, fedora, centos
         if [ -f /var/lib/pgsql/data/PG_VERSION ]
         then
                 pg_version=`cat /var/lib/pgsql/data/PG_VERSION`
+		return
         fi
         echo "No database found online on port 5432"
         echo "Couldn't initialize or upgrade gforge database."
