@@ -184,7 +184,9 @@ function stats_site_project_result( $report, $orderby, $projects, $trove ) {
 */
 
 	if (!$orderby) {
-		$orderby = "group_name";
+		$orderby = "group_name ASC";
+	}else {
+		$orderby .= " DESC, group_name ASC";
 	}
 
 	if ($report == 'last_30') {
@@ -212,7 +214,7 @@ function stats_site_project_result( $report, $orderby, $projects, $trove ) {
 			s.group_id = g.group_id
 			$grp_str
 		GROUP BY g.group_id, g.group_name
-		ORDER BY $orderby DESC ";
+		ORDER BY $orderby";
 
 	} else {
 
@@ -238,10 +240,10 @@ function stats_site_project_result( $report, $orderby, $projects, $trove ) {
 		WHERE 
 			s.group_id = g.group_id
 			$grp_str
-		ORDER BY $orderby DESC ";
+		ORDER BY $orderby";
 	}
 
-	return db_query( $sql, 30, 0, SYS_DB_STATS);
+	return db_query( $sql, 0, 0, SYS_DB_STATS);
 
 }
 
