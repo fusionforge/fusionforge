@@ -2801,6 +2801,24 @@ eval {
         $dbh->commit () ;
     }
 
+    $version = &get_db_version ;
+    $target = "4.6.99-6" ;
+    if (&is_lesser ($version, $target)) {
+      &debug ("DROP UNIQUE INDEX never UNIQUE") ;
+      &drop_index_if_exists ($dbh, "statsaggsitebygrp_oid") ;
+      &drop_index_if_exists ($dbh, "statsprojectmetric_oid") ;
+      &drop_index_if_exists ($dbh, "statsagglogobygrp_oid") ;
+      &drop_index_if_exists ($dbh, "statsprojectdevelop_oid") ;
+      &drop_index_if_exists ($dbh, "statssubdpages_oid") ;
+      &drop_index_if_exists ($dbh, "statscvsgrp_oid") ;
+      &drop_index_if_exists ($dbh, "statsproject_oid") ;
+      &drop_index_if_exists ($dbh, "statssite_oid") ;
+      &drop_index_if_exists ($dbh, "statssitepgsbyday_oid") ;
+      &update_db_version ($target) ;
+      &debug ("Committing.") ;
+      $dbh->commit () ;
+    }
+
     ########################### INSERT HERE #################################
 
     &debug ("It seems your database $action went well and smoothly. That's cool.") ;
