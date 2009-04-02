@@ -5,9 +5,11 @@ locales=$(echo $locales | xargs -n 1 | sort)
 
 if [ -e gforge/translations/gforge.pot ] ; then        # We're in the parent dir
     cd gforge
-elif [ -e ../gforge/translations/gforge.pot ] ; then   # We're in tools/ or gforge/
+elif [ -e translations/gforge.pot ] ; then             # probably in gforge/
     cd ../gforge
-elif [ -e ../translations/gforge.pot ] ; then          # In a subdir of gforge
+elif [ -e ../gforge/translations/gforge.pot ] ; then   # in tools/ or tests/ or something
+    cd ../gforge
+elif [ -e ../translations/gforge.pot ] ; then          # In a subdir of gforge/
     cd ..
 else
     echo "Couldn't find translations directory..."
