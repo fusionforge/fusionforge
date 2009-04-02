@@ -16,6 +16,7 @@ Requires: cvs >= 1.11
 #update etc/plugins/scmcvs/config.php $cvs_binary_version before updating cvs to 1.12
 Requires: cvs < 1.12
 Requires: rcs
+Requires: nscd
 URL: http://www.gforge.org/
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 

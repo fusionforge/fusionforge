@@ -42,7 +42,6 @@ Requires: php-jpgraph php-gd
 #Requires: /var/www/jpgraph/jpgraph.php
 #Requires: libnss-pgsql >= 1.4
 Requires: mailman
-#Requires: nscd
 Requires: gettext
  
 BuildRequires: perl
@@ -244,7 +243,7 @@ if [ "$1" -eq "1" ]; then
 	# updating PostgreSQL configuration
 	if ! grep -i '^ *host.*%{dbname}.*' /var/lib/pgsql/data/pg_hba.conf >/dev/null 2>&1; then
 		echo 'host %{dbname} %{dbuser} 127.0.0.1 255.255.255.255 md5' >> /var/lib/pgsql/data/pg_hba.conf
- 		echo 'local %{dbname} gforge_mta trust' >> /var/lib/pgsql/data/pg_hba.conf
+ 		echo 'local %{dbname} gforge_mta md5md5md5md5md5' >> /var/lib/pgsql/data/pg_hba.conf
 		echo 'local %{dbname} gforge_nss trust' >> /var/lib/pgsql/data/pg_hba.conf
 		%reloadpostgresql
 	fi
