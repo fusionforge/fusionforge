@@ -29,7 +29,7 @@
 This file creates user / group permissions by editing 
 the /etc/passwd /etc/shadow and /etc/group files
 */
-require_once dirname(__FILE__).'/../../env.inc.php';
+require 'www/env.inc.php';
 require_once $gfwww.'include/squal_pre.php';
 require $gfcommon.'include/cron_utils.php';
 

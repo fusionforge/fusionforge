@@ -8,7 +8,7 @@
  * @version   $Id
  */
 
-require dirname(__FILE__).'/../../env.inc.php';
+require 'www/env.inc.php';
 require $gfwww.'include/squal_pre.php';
 require_once $gfcommon.'include/cron_utils.php';
 

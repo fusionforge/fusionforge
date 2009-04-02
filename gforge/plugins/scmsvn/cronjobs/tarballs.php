@@ -1,7 +1,7 @@
 #! /usr/bin/php5 -f
 <?php
 
-require dirname(__FILE__).'/../../env.inc.php';
+require 'www/env.inc.php';
 require $gfwww.'include/squal_pre.php';
 require $gfcommon.'include/cron_utils.php';
 

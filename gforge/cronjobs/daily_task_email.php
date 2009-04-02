@@ -24,7 +24,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
-require dirname(__FILE__).'/../www/env.inc.php';
+require 'www/env.inc.php';
 require_once $gfwww.'include/squal_pre.php';
 require_once $gfcommon.'pm/ProjectTasksForUser.class.php';
 require_once $gfcommon.'include/cron_utils.php';

@@ -53,7 +53,7 @@ creates a group home directory with a template in it.
 	</IfModule>
 </VirtualHost> 
 */
-require_once dirname(__FILE__).'/../www/env.inc.php';
+require 'www/env.inc.php';
 require_once $gfwww.'include/squal_pre.php';
 require $gfcommon.'include/cron_utils.php';
 
