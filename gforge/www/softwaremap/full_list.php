@@ -68,7 +68,7 @@ echo ($HTML->subMenu(
 $res_grp = db_query("
 	SELECT group_id, group_name, unix_group_name, short_description, register_time
 	FROM groups
-        WHERE status = 'A' AND is_public=1 AND type_id=1 AND register_time > 0 
+        WHERE status = 'A' AND is_public=1 AND type_id=1 AND group_id>4 AND register_time > 0 
 	ORDER BY group_name ASC
 ", $TROVE_HARDQUERYLIMIT);
 echo db_error();
@@ -79,7 +79,8 @@ $querytotalcount = db_numrows($res_grp);
 
 // no funny stuff with get vars
 
-if (!isset($page) || !is_numeric($page)) {
+$page = isset($_GET['page'])?$_GET['page']:FALSE;
+if (!is_numeric($page)) {
 	$page = 1;
 }
 
