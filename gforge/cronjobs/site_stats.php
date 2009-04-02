@@ -48,7 +48,7 @@ $rel = db_query($sql);
 $err .= db_error();
 $sql = "INSERT INTO stats_agg_logo_by_day 
 	SELECT day, count(*) 
-	FROM activity_log WHERE type=1 AND day='$yesterday_formatted' GROUP BY day";
+	FROM activity_log WHERE type=0 AND day='$yesterday_formatted' GROUP BY day";
 $rel = db_query($sql);
 $err .= db_error();
 
@@ -68,7 +68,7 @@ if ($sys_database_type == 'mysql') {
 	$sql .= "SELECT '$year$month'::int AS month, '$day'::int AS newday,group_id,count(*) AS count";
 }
 $sql.="
-	FROM activity_log WHERE type=1 AND day='$yesterday_formatted' GROUP BY month,newday,group_id";
+	FROM activity_log WHERE type=0 AND day='$yesterday_formatted' GROUP BY month,newday,group_id";
 $rel = db_query($sql);
 $err .= db_error();
 
