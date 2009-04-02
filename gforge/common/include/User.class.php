@@ -1408,6 +1408,38 @@ Enjoy the site.
 		}
 		return $this->theme;
 	}
+
+	/**
+	 *  getRole() - Get user Role object.
+	 *
+	 *  @param  object  group object
+	 *  @return object  Role object
+	 */
+	function getRole(&$group) {
+		if (!$group || !is_object($group)) {
+			$this->setError('User::getRole : Unable to get group object');
+			return false;
+		}
+		$sql = "SELECT role_id FROM user_group WHERE user_id=".$this->getID()." AND group_id = ".$group->getID();
+		$res = db_query($sql);
+		if (!$res) {
+			$this->setError('User::getRole::DB - Could Not get role_id '.db_error());
+			return false;
+		}
+		$role_id = db_result($res,0,'role_id');
+		//
+		//  Role setup
+		//
+		$role = new Role($group,$role_id);
+		if (!$role || !is_object($role)) {
+			$this->setError('Error Getting Role Object');
+			return false;
+		} elseif ($role->isError()) {
+			$this->setError('User::getRole::roleget::'.$role->getErrorMessage());
+			return false;
+		}
+		return $role;
+	}
 }
 
 /*
