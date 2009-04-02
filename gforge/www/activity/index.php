@@ -21,15 +21,17 @@ $begin = getStringFromRequest("start_date");
 $end = getStringFromRequest("end_date");
 $show=getArrayFromRequest("show");
 
+$date_format = _('%Y-%m-%d') ;
+
 if (!$begin || $begin==0) {
 	$begin = (time()-(30*86400));
 } else {
-	$begin = strtotime($begin);
+	$begin = strptime ($begin, $date_format);
 }
 if (!$end || $end==0) {
-	$end = time();
+	$end = time ();
 } else {
-	$end=strtotime($end)+86400;
+	$end = strptime ($end, $date_format) + 86400;
 }
 if ($begin > $end) {
 	$endtmp=$end;
@@ -110,8 +112,8 @@ if ($rows<1) {
 </tr>
 <tr>
 	<td><?php echo $multiselect; ?></td>
-	<td valign="top"><input name="start_date" value="<?php echo date(_('Y-m-d'),$begin); ?>" size="10" maxlength="10" /></td>
-	<td valign="top"><input name="end_date" value="<?php echo date(_('Y-m-d'),$end); ?>" size="10" maxlength="10" /></td>
+	<td valign="top"><input name="start_date" value="<?php echo strftime($date_format,$begin); ?>" size="10" maxlength="10" /></td>
+	<td valign="top"><input name="end_date" value="<?php echo strftime($date_format,$end); ?>" size="10" maxlength="10" /></td>
 	<td valign="top"><input type="submit" name="submit" value="<?php echo _('Submit'); ?>"/></td>
 </tr>
 </table>
@@ -129,11 +131,11 @@ if ($rows<1) {
 	$j=0;
 	$last_day = 0;
 	while ($arr =& db_fetch_array($res)) {
-		if ($last_day != date('Y-M-d',$arr['activity_date'])) {
+		if ($last_day != strftime($date_format,$arr['activity_date'])) {
 		//	echo $HTML->listTableBottom($theader);
-			echo '<tr class="tableheading"><td colspan="3">'.date(_('Y-m-d'),$arr['activity_date']).'</td></tr>';
+			echo '<tr class="tableheading"><td colspan="3">'.strftime($date_format,$arr['activity_date']).'</td></tr>';
 		//	echo $HTML->listTableTop($theader);
-			$last_day=date('Y-M-d',$arr['activity_date']);
+			$last_day=strftime($date_format,$arr['activity_date']);
 		}
 		switch ($arr['section']) {
 			case 'commit': {
