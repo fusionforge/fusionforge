@@ -371,7 +371,3 @@ CREATE TABLE webcal_report_template (
   cal_template_text TEXT,
   PRIMARY KEY ( cal_report_id, cal_template_type )
 );
-
-
-
-

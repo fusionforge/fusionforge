@@ -28,6 +28,12 @@ class Syntax_Tests extends PHPUnit_Framework_TestCase
     {
 	    $output = `cd .. ; find gforge -name '*.php' -type f  -exec isutf8 {} \;`;
 	    $this->assertEquals('', $output);
+	    $output = `cd .. ; find gforge -name '*.sql' -type f  -exec isutf8 {} \;`;
+	    $this->assertEquals('', $output);
+	    $output = `cd .. ; find gforge -name '*.sh' -type f  -exec isutf8 {} \;`;
+	    $this->assertEquals('', $output);
+	    $output = `cd .. ; find gforge -name '*.pl' -type f  -exec isutf8 {} \;`;
+	    $this->assertEquals('', $output);
     }
 
     /**
@@ -36,6 +42,12 @@ class Syntax_Tests extends PHPUnit_Framework_TestCase
     public function testUnixLineEndings()
     {
 	    $output = `cd .. ; find gforge -name '*.php' -type f | xargs pcregrep -l '\r$'`;
+	    $this->assertEquals('', $output);
+	    $output = `cd .. ; find gforge -name '*.sql' -type f | xargs pcregrep -l '\r$'`;
+	    $this->assertEquals('', $output);
+	    $output = `cd .. ; find gforge -name '*.sh' -type f | xargs pcregrep -l '\r$'`;
+	    $this->assertEquals('', $output);
+	    $output = `cd .. ; find gforge -name '*.pl' -type f | xargs pcregrep -l '\r$'`;
 	    $this->assertEquals('', $output);
     }
 }

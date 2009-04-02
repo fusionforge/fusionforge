@@ -1,4 +1,4 @@
---- Modification de la base gforge pour permettre la recherche dans le contenu des documents stockés
+--- Modification de la base gforge pour permettre la recherche dans le contenu des documents stockÃ©s
 --- Fabio Bertagnin - Transiciel Technologies
 --- fbertagnin@mail.transiciel.com
 --- 03/11/2005
