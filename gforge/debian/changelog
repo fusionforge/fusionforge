@@ -11,13 +11,14 @@ gforge (4.7.2.50-2) experimental; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Thu, 26 Mar 2009 17:29:27 +0100
 
-gforge (4.7.2-3+1) experimental; urgency=low
+gforge (4.7.2-3+2) experimental; urgency=low
 
   * Quick fix for a bug in uploading attachments to forum posts.  A proper
     fix requires a change in the DB schema, and will be implemented in
     trunk rather than in the 4.7 series.
+  * Removed database password from a world-readable file.
 
- -- Roland Mas <lolando@debian.org>  Thu, 02 Apr 2009 14:11:13 +0200
+ -- Roland Mas <lolando@debian.org>  Thu, 02 Apr 2009 14:41:34 +0200
 
 gforge (4.7.2-3) experimental; urgency=low
 
