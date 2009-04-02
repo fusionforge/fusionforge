@@ -197,7 +197,7 @@ eval {
 	  if (&is_lesser ($version, $target)) {
 	      &debug ("Inserting skills.") ;
 
-	      foreach my $skill (split /;/, $skill_list) {
+	      foreach my $skill (split m/;/, $skill_list) {
 		  push @reqlist, "INSERT INTO people_skill (name) VALUES ('$skill')" ;
 	      }
 
