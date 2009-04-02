@@ -11,7 +11,7 @@ gforge (4.7.2.50-2) experimental; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Thu, 26 Mar 2009 17:29:27 +0100
 
-gforge (4.7.2-3+4) experimental; urgency=low
+gforge (4.7.2-4) experimental; urgency=low
 
   * Quick fix for a bug in uploading attachments to forum posts.  A proper
     fix requires a change in the DB schema, and will be implemented in
@@ -23,7 +23,7 @@ gforge (4.7.2-3+4) experimental; urgency=low
     format for date input didn't match the one used for display (which
     depended on locale).
 
- -- Roland Mas <lolando@debian.org>  Thu, 02 Apr 2009 15:14:05 +0200
+ -- Roland Mas <lolando@debian.org>  Thu, 02 Apr 2009 16:41:35 +0200
 
 gforge (4.7.2-3) experimental; urgency=low
 
