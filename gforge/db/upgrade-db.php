@@ -63,7 +63,7 @@ if (!$res) { // db error
 }
 
 if (!apply_fixes($version)) {
-	show("ERROR apllying fixes!\n");
+	show("ERROR applying fixes!\n");
 	exit();
 }
 
