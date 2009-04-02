@@ -2819,6 +2819,16 @@ eval {
       $dbh->commit () ;
     }
 
+    $version = &get_db_version ;
+    $target = "4.6.99-7" ;
+    if (&is_lesser ($version, $target)) {
+      &debug ("Create table for project's tags") ;
+      &update_with_sql("20090327_create_table_project_tags.sql","4.6.99-7");
+      &update_db_version ($target) ;
+      &debug ("Committing.") ;
+      $dbh->commit () ;
+    }
+
     ########################### INSERT HERE #################################
 
     &debug ("It seems your database $action went well and smoothly. That's cool.") ;
