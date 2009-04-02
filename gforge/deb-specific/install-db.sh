@@ -9,6 +9,50 @@ exist_db(){
 	su -s /bin/sh postgres -c "psql $1 >/dev/null 2>&1 </dev/null"
 }
 
+# this function export in var pg_hba_dir the directory of postgresql
+# exit from this script if it do not find the directory of postgresql
+# TODO : try to use function getdist from novaforge
+function get_pg_hba_dir() {
+	# postgresql on debian
+        if [ -d /etc/postgresql/${pg_version}/main/ ]
+        then
+                export pg_hba_dir=/etc/postgresql/${pg_version}/main/
+        fi
+        # postgresql on redhat, fedora, centos
+        if [ -d /var/lib/pgsql/data/ ]
+        then
+                export pg_hba_dir=/var/lib/pgsql/data/
+        fi
+        echo "No pg_hba_dir found"
+        echo "exiting without error, but gforge db will not work"
+        exit 0
+}
+
+# this function export in var pg_version the version of postgresql
+# exit from this script if it do not find the version of postgresql
+# TODO : try to use function getdist from novaforge
+function get_pg_version() {
+        # postgresql on debian
+        if [ -f /usr/bin/pg_lsclusters ]
+        then
+                pg_version=`/usr/bin/pg_lsclusters | grep 5432 | grep online | cut -d' ' -f1`
+        fi
+        # postgresql on redhat, fedora, centos
+        if [ -f /var/lib/pgsql/data/PG_VERSION ]
+        then
+                pg_version=`cat /var/lib/pgsql/data/PG_VERSION`
+        fi
+        echo "No database found online on port 5432"
+        echo "Couldn't initialize or upgrade gforge database."
+        echo "Please see postgresql documentation"
+        echo "and run dpkg-reconfigure -plow gforge-db-postgresql"
+        echo "once the problem is solved"
+        echo "exiting without error, but gforge db will not work"
+        echo "right now"
+        exit 0
+}
+
+
 set -e
 
 if [ $(id -u) != 0 ] ; then
@@ -29,20 +73,8 @@ export LC_ALL=C
 # This is probably not te most elegant way to deal with database
 # I install or upgrade on the default cluster if it is online
 # or I quit gently with a big message
-pg_version=`/usr/bin/pg_lsclusters | grep 5432 | grep online | cut -d' ' -f1`
-if [ "x$pg_version" != "x" ] 
-then 
-    export pg_hba_dir=/etc/postgresql/${pg_version}/main/
-else
-    echo "No database found online on port 5432"
-    echo "Couldn't initialize or upgrade gforge database."
-    echo "Please see postgresql documentation"
-    echo "and run dpkg-reconfigure -plow gforge-db-postgresql"
-    echo "once the problem is solved"
-    echo "exiting without error, but gforge db will not work"
-    echo "right now"
-    exit 0
-fi
+get_pg_version
+get_pg_hba_dir
 
 case "$target" in
     default)
@@ -204,6 +236,9 @@ EOF
 	su -s /bin/sh postgres -c "dropdb $db_name" > /dev/null 2>&1 || true
 	su -s /bin/sh postgres -c "dropuser $db_user" > /dev/null 2>&1 || true
 	;;
+    #
+    # only only for migrating users of the sourceforge package
+    #
     dump)
 	if [ -e /etc/sourceforge/local.pl ] ; then
 	    db_name=$(perl -e'require "/etc/sourceforge/local.pl"; print "$sys_dbname\n";')
@@ -225,6 +260,9 @@ EOF
 	echo "Dumping $DB database in $DUMPFILE"
 	su -s /bin/sh $DB -c /usr/lib/postgresql/bin/pg_dump $DB > $DUMPFILE
 	;;
+    #
+    # only only for migrating users of the sourceforge package
+    #
     restore)
 	pg_name=postgresql-$pg_version
 	db_name=$(grep ^db_name= /etc/gforge/gforge.conf | cut -d= -f2-)

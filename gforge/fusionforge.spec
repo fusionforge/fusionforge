@@ -180,7 +180,7 @@ cp -p deb-specific/sf-2.6-complete.sql $RPM_BUILD_ROOT/%{GFORGE_DB_DIR}/
 for i in deb-specific/sqlhelper.pm deb-specific/sqlparser.pm utils/include.pl ; do
 	cp -p $i $RPM_BUILD_ROOT/%{GFORGE_LIB_DIR}/
 done
-for i in db-upgrade.pl register-plugin unregister-plugin register-theme unregister-theme ; do
+for i in db-upgrade.pl register-plugin unregister-plugin register-theme unregister-theme install-db.sh; do
 	install -m 755 deb-specific/$i $RPM_BUILD_ROOT/%{GFORGE_BIN_DIR}/
 done
 
@@ -263,7 +263,7 @@ if [ "$1" -eq "1" ]; then
 	#	%reloadpostgresql
 	#fi
 
-	sh %{GFORGE_BIN_DIR}/install-db.sh configure-files
+	%{GFORGE_BIN_DIR}/install-db.sh configure-files
         mv /var/lib/pgsql/data/pg_hba.conf /var/lib/pgsql/data/pg_hba.conf-orig
         mv /var/lib/pgsql/data/pg_hba.conf.gforge-new /var/lib/pgsql/data/pg_hba.conf
         %reloadpostgresql
