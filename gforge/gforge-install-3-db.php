@@ -190,22 +190,22 @@ function install()
 	show(" * Creating '$gforge_db' Database...");
 	run("su $susufix $gforge_user -c \"createdb $gforge_db\"", true);
 
-//	# Detect postgresql version, load tsearch2 for pg < 8.3
-//	$pg_version = explode(' ', shell_exec("postgres --version"));
-//	$pgv = $pg_version[2];
-//
-//	if (preg_match('/^(7\.|8\.1|8\.2)/', $pgv)) {
-//		show(" * Dumping tsearch2 Database Into '$gforge_db' DB");
-//		run("su - postgres -c \"psql $gforge_db < $tsearch2_sql\" >> /tmp/gforge-import.log");
-//
-//		$tables = array('pg_ts_cfg', 'pg_ts_cfgmap', 'pg_ts_dict', 'pg_ts_parser');
-//		foreach ($tables as $table) {
-//			run('su - postgres -c "psql '.$gforge_db.' -c \\"GRANT ALL on '.$table.' TO '.$gforge_user.';\\""');
-//		}
+	# Detect postgresql version, load tsearch2 for pg < 8.3
+	$pg_version = explode(' ', shell_exec("postgres --version"));
+	$pgv = $pg_version[2];
+
+	if (preg_match('/^(7\.|8\.1|8\.2)/', $pgv)) {
+		show(" * Dumping tsearch2 Database Into '$gforge_db' DB");
+		run("su - postgres -c \"psql $gforge_db < $tsearch2_sql\" >> /tmp/gforge-import.log");
+
+		$tables = array('pg_ts_cfg', 'pg_ts_cfgmap', 'pg_ts_dict', 'pg_ts_parser');
+		foreach ($tables as $table) {
+			run('su - postgres -c "psql '.$gforge_db.' -c \\"GRANT ALL on '.$table.' TO '.$gforge_user.';\\""');
+		}
 //	} else {
 //		show(" * Creating FTS default configuation (Full Text Search)");
 //		run("su - postgres -c \"psql $gforge_db < $gforge_lib_dir/db/FTS-20081108.sql\" >> /tmp/gforge-import.log");
-//	}
+	}
 
 
 	show(' * Dumping FusionForge DB');

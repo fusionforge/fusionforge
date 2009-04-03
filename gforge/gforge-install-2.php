@@ -149,6 +149,9 @@
 		system("cp etc/gforge-httpd.conf.example /etc/gforge/httpd.conf");
 	}
 
+	system("mkdir -p /etc/gforge/httpd.d");
+	system("cp plugins/*/etc/httpd.d/*.conf /etc/gforge/httpd.d");
+	
 	////#copy the scmcvs plugin config to /etc/gforge/
 	//if (!is_dir("/etc/gforge/plugins/scmcvs"))
 	//{
@@ -182,19 +185,19 @@
 				"aselectextauth"	=> "standard",
 				"cvssyncmail" 		=> "standard",
 				"cvstracker" 		=> "standard",
-				"eirc" 			=> "/opt/gforge/plugins/eirc/etc/*",
+				"eirc" 				=> "/opt/gforge/plugins/eirc/etc/*",
 				"externalsearch" 	=> "standard",
 				"fckeditor" 		=> "standard",
 				"helloworld" 		=> "standard",
 				"ldapextauth" 		=> "standard",
-				"mantis" 		=> "standard",
+				"mantis" 			=> "standard",
 				"mediawiki" 		=> "standard",
-				"scmccase" 		=> "standard",
-				"scmcvs" 		=> "standard",
-				"scmsvn" 		=> "standard",
+				"scmccase" 			=> "standard",
+				"scmcvs" 			=> "standard",
+				"scmsvn" 			=> "standard",
 				"svncommitemail" 	=> "standard",
 				"svntracker" 		=> "standard",
-
+				"wiki"				=> "standard"
 			);
 	//echo "Este es el array:\n";
 	//print_r($plugins_confFiles);

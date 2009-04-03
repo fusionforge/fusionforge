@@ -21,10 +21,6 @@ LoadModule authz_svn_module   modules/mod_authz_svn.so
 		ForceType application/x-httpd-php
 	</Location>
 
-	<Location "/wiki/g">
-		ForceType application/x-httpd-php
-	</Location>
-
 	#
 	#       mailman settings - may have to adjust
 	#
@@ -63,4 +59,5 @@ LoadModule authz_svn_module   modules/mod_authz_svn.so
 
 	php_value	include_path ".:/opt/gforge/www/include/:/opt/gforge:/etc/gforge/"
 
+	Include "/etc/gforge/httpd.d/*.conf"
 </VirtualHost>

@@ -85,6 +85,7 @@ then
 		msg="IMPORTANT: Service iptables (firewall) disabled, please reconfigure after"
 
 		cp cron.gforge /etc/cron.d
+		cp plugins/*/etc/cron.d/* /etc/cron.d/
 		service crond reload
 	else
 		php /opt/gforge/db/upgrade-db.php
@@ -121,6 +122,7 @@ then
 		msg="IMPORTANT: Service SuSEfirewall2 stopped, please reconfigure after"
 
 		cp cron.gforge /etc/cron.d
+		cp plugins/*/etc/cron.d/* /etc/cron.d/
 		rccron reload
 	else
 		php /opt/gforge/db/upgrade-db.php
