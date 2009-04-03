@@ -25,22 +25,22 @@ MAILTO=""
 25 7 * * * $FFUSER $PHP $FFCRON/reporting_cron.php
 
 # Recalculate user popularity metric
-10 1 * * * $FFUSER $PHP $FFCRON/calculate_user_metric.php
+25 1 * * * $FFUSER $PHP $FFCRON/calculate_user_metric.php
 
 # Daily recalculate of the sums under the trove map
-50 1 * * * $FFUSER $PHP $FFCRON/db_trove_maint.php
+30 1 * * * $FFUSER $PHP $FFCRON/db_trove_maint.php
 
 # Daily deletion of sessions, closing jobs, etc
-15 1 * * * $FFUSER $PHP $FFCRON/project_cleanup.php
+35 1 * * * $FFUSER $PHP $FFCRON/project_cleanup.php
 
 # Daily crunching of survey data and other associated ratings
-41 1 * * * $FFUSER $PHP $FFCRON/rating_stats.php
+40 1 * * * $FFUSER $PHP $FFCRON/rating_stats.php
 
 # Daily crunching of project summary data (counts)
-45 1 * * * $FFUSER $PHP $FFCRON/db_project_sums.php
+42 1 * * * $FFUSER $PHP $FFCRON/db_project_sums.php
 
 # Daily close pending artifacts
-57 1 * * * $FFUSER $PHP $FFCRON/check_stale_tracker_items.php
+43 1 * * * $FFUSER $PHP $FFCRON/check_stale_tracker_items.php
 
 # Daily project_weekly_metric recalc
 12 1 * * * $FFUSER $PHP $FFCRON/project_weekly_metric.php
@@ -52,13 +52,13 @@ MAILTO=""
 15 0 * * * $FFUSER $PHP $FFCRON/site_stats.php
 
 # Daily sweep of the stats into final tables
-15 7 * * * $FFUSER $PHP $FFCRON/db_stats_agg.php
+45 0 * * * $FFUSER $PHP $FFCRON/db_stats_agg.php
 
 # Hourly send pending massmailings, if any
-47 * * * * root $PHP $FFCRON/massmail.php
+48 * * * * root $PHP $FFCRON/massmail.php
 
-# VACUUM should be done after ALL OTHER JOBS
-40 2 * * * $FFUSER $PHP $FFCRON/vacuum.php
+# Weekly db vacuum (should be done after ALL OTHER JOBS)
+50 2 * * Mon $FFUSER $PHP $FFCRON/vacuum.php
 
 
 
