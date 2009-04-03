@@ -410,11 +410,11 @@ if (isset($params['group']) && $params['group']) {
 	}
 
 	function outerTabs($params) {
-		global $sys_use_trove,$sys_use_snippet,$sys_use_people;
+		global $sys_use_trove,$sys_use_snippet,$sys_use_people,$sys_use_project_tags, $sys_use_project_full_list;
 
 		$TABS_DIRS[]='/';
 		$TABS_DIRS[]='/my/';
-		if ($sys_use_trove) {
+		if ($sys_use_trove || $sys_use_project_tags || $sys_use_project_full_list) {
 			$TABS_DIRS[]='/softwaremap/';
 		}
 		if ($sys_use_snippet) {
@@ -425,8 +425,8 @@ if (isset($params['group']) && $params['group']) {
 		}
 		$TABS_TITLES[]=_('Home');
 		$TABS_TITLES[]=_('My&nbsp;Page');
-		if ($sys_use_trove) {
-			$TABS_TITLES[]=_('Project&nbsp;Tree');
+		if ($sys_use_trove || $sys_use_project_tags || $sys_use_project_full_list) {
+			$TABS_TITLES[]=_('Projects');
 		}
 		if ($sys_use_snippet) {
 			$TABS_TITLES[]=_('Code&nbsp;Snippets');

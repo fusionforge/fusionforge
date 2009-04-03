@@ -46,20 +46,29 @@ require_once $gfwww.'include/pre.php';
 require_once $gfwww.'include/trove.php';
 require_once $gfcommon.'include/tag_cloud.php';
 
+if (!$sys_use_project_tags) {
+	exit_disabled();
+}
+
 $HTML->header(array('title'=>_('Software Map'),'pagename'=>'softwaremap'));
 
-echo ($HTML->subMenu(
-	array(
-		_('Tag cloud'),
-		_('Project Tree'),
-		_('Project List')
-		),
-	array(
-		'/softwaremap/tag_cloud.php',
-		'/softwaremap/trove_list.php',
-		'/softwaremap/full_list.php'
-		)
-	));
+$subMenuTitle = array();
+$subMenuUrl = array();
+
+if ($GLOBALS['sys_use_project_tags']) {
+	$subMenuTitle[] = _('Tag cloud');
+	$subMenuUrl[] = '/softwaremap/tag_cloud.php';
+}
+
+if ($GLOBALS['sys_use_trove']) {
+	$subMenuTitle[] = _('Project Tree');
+	$subMenuUrl[] = '/softwaremap/trove_list.php';
+}
+
+$subMenuTitle[] = _('Project List');
+$subMenuUrl[] = '/softwaremap/full_list.php';
+
+echo ($HTML->subMenu($subMenuTitle, $subMenuUrl));
 
 $selected_tag = getStringFromRequest('tag');
 $page = getIntFromRequest('page', 1);

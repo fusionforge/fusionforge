@@ -162,6 +162,8 @@ $sys_use_shell=true;
 $sys_use_private_project=true;
 $sys_use_diary=true;
 $sys_use_bookmarks=true;
+$sys_use_project_tags=true;
+$sys_use_project_full_list=true;
 
 // Enable/Disable user ratings
 $sys_use_ratings=true;

@@ -46,24 +46,24 @@ require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once $gfwww.'include/trove.php';
 
-if (!$sys_use_trove) {
-	exit_disabled();
+$HTML->header(array('title'=>_('Software Map'),'pagename'=>'softwaremap'));
+$subMenuTitle = array();
+$subMenuUrl = array();
+
+if ($GLOBALS['sys_use_project_tags']) {
+	$subMenuTitle[] = _('Tag cloud');
+	$subMenuUrl[] = '/softwaremap/tag_cloud.php';
 }
 
-$HTML->header(array('title'=>_('Software Map'),'pagename'=>'softwaremap'));
+if ($GLOBALS['sys_use_trove']) {
+	$subMenuTitle[] = _('Project Tree');
+	$subMenuUrl[] = '/softwaremap/trove_list.php';
+}
 
-echo ($HTML->subMenu(
-		array(
-			_('Tag cloud'),
-			_('Project Tree'),
-			_('Project List')
-		),
-		array(
-			'/softwaremap/tag_cloud.php',
-			'/softwaremap/trove_list.php',
-			'/softwaremap/full_list.php'
-		)
-	));
+$subMenuTitle[] = _('Project List');
+$subMenuUrl[] = '/softwaremap/full_list.php';
+
+echo ($HTML->subMenu($subMenuTitle, $subMenuUrl));
 
 $res_grp = db_query("
 	SELECT group_id, group_name, unix_group_name, short_description, register_time

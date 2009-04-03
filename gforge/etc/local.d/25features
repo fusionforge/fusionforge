@@ -21,6 +21,8 @@ $sys_use_shell={sys_use_shell};
 $sys_use_private_project={sys_use_private_project};
 $sys_use_diary={sys_use_diary};
 $sys_use_bookmarks={sys_use_bookmarks};
+$sys_use_project_tags={sys_use_project_tags};
+$sys_use_project_full_list={sys_use_project_full_list};
 
 // Enable/Disable user ratings
 $sys_use_ratings={sys_use_ratings};

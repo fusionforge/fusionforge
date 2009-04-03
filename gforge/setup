@@ -108,6 +108,8 @@ computedefault(){
 	DEFAULTsys_use_ftpuploads=false
 	DEFAULTsys_use_diary=true
 	DEFAULTsys_use_bookmarks=true
+	DEFAULTsys_use_project_tags=true
+	DEFAULTsys_use_project_full_list=true
 	DEFAULTsys_use_gateways=true
 	DEFAULTsys_use_project_vhost=true
 	DEFAULTsys_use_project_database=false

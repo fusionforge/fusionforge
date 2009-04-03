@@ -46,18 +46,23 @@ if (db_numrows($res_trove_cat) < 1) {
 
 $HTML->header(array('title'=>_('Software Map')));
 
-echo ($HTML->subMenu(
-		array(
-			_('Tag cloud'),
-			_('Project Tree'),
-			_('Project List')
-		),
-		array(
-			'/softwaremap/tag_cloud.php',
-			'/softwaremap/trove_list.php',
-			'/softwaremap/full_list.php'
-		)
-	));
+$subMenuTitle = array();
+$subMenuUrl = array();
+
+if ($GLOBALS['sys_use_project_tags']) {
+	$subMenuTitle[] = _('Tag cloud');
+	$subMenuUrl[] = '/softwaremap/tag_cloud.php';
+}
+
+if ($GLOBALS['sys_use_trove']) {
+	$subMenuTitle[] = _('Project Tree');
+	$subMenuUrl[] = '/softwaremap/trove_list.php';
+}
+
+$subMenuTitle[] = _('Project List');
+$subMenuUrl[] = '/softwaremap/full_list.php';
+
+echo ($HTML->subMenu($subMenuTitle, $subMenuUrl));
 
 echo'
 	<hr />';

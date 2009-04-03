@@ -131,10 +131,12 @@ $images_res = db_query("
 </textarea>
 </p>
 
+<?php if ($GLOBALS['sys_use_project_tags']) { ?>
 <p>
 <?php echo _('Tags') ?>:<br />
 <input type="text" name="form_tags" size="100" value="<?php echo $group->getTags(); ?>" />
 </p>
+<?php } ?>
 
 <p>
 <?php echo _('Homepage Link') ?>:<br />

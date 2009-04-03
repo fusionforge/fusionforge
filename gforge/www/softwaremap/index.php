@@ -9,6 +9,12 @@
   *
   */
 
-header('Location: tag_cloud.php');
-
-?>
+require_once('../env.inc.php');
+require_once $gfwww.'include/pre.php';
+if ($GLOBALS['sys_use_project_tags']) {
+	header('Location: '.util_make_url('softwaremap/tag_cloud.php'));
+}elseif ($GLOBALS['sys_use_trove']){
+	header('Location: '.util_make_url('softwaremap/trove_list.php'));
+}else{
+header('Location: '.util_make_url('softwaremap/full_list.php'));
+}?>

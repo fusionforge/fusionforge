@@ -198,10 +198,12 @@ project_admin_header(array('title'=>$adminheadertitle, 'group'=>$group->getID())
 	<p>[ <?php echo util_make_link ('/tarballs.php?group_id='.$group_id,_('Download Your Nightly SCM Tree Tarball')) ?> ]</p>
 <?php	} ?>
 
-<p>
-<?php echo _('Tags') ?>:&nbsp;
-<?php echo $group->getTags(); ?>
-</p>
+<?php if ($GLOBALS['sys_use_project_tags']) { ?>
+	<p>
+	<?php echo _('Tags') ?>:&nbsp;
+	<?php echo $group->getTags(); ?>
+	</p>
+<?php } ?>
 
 <?php	if($sys_use_trove) { ?>
 <p>

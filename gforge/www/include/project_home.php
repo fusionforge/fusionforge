@@ -55,18 +55,20 @@ if ($project->getDescription()) {
 print "<br />\n";
 
 // Tag list
-$list_tag = list_project_tag($group_id);
-if ($list_tag) {
-	print '<p>' . _('Tags').':&nbsp;'. $list_tag . '</p>';
-}
-else {
-	$project =& group_get_object($group_id);
-	$perm =& $project->getPermission(session_get_user());
-	if ($perm->isAdmin()) {
-		print '<p><a href="/project/admin/editgroupinfo.php?group_id=' . $group_id . '" >' . _('No tag defined for this project') . '</a>.</p>';
+if ($GLOBALS['sys_use_project_tags']) {
+	$list_tag = list_project_tag($group_id);
+	if ($list_tag) {
+		print '<p>' . _('Tags').':&nbsp;'. $list_tag . '</p>';
 	}
 	else {
-		print '<p>' . _('No tag defined for this project') . '</p>';
+		$project =& group_get_object($group_id);
+		$perm =& $project->getPermission(session_get_user());
+		if ($perm->isAdmin()) {
+			print '<p><a href="/project/admin/editgroupinfo.php?group_id=' . $group_id . '" >' . _('No tag defined for this project') . '</a>.</p>';
+		}
+		else {
+			print '<p>' . _('No tag defined for this project') . '</p>';
+		}
 	}
 }
 
