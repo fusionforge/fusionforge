@@ -5,154 +5,108 @@
 # http://gforge.org/
 #
 # YOUR php.ini FOR PHP CLI MUST HAVE APPROPRIATE include_path
+FFUSER=gforge
 
 # Change path to the GForge directory.
 GFORGE="/opt/gforge"
+FFCRON="/opt/gforge/cronjobs"
 
+# You may need to change the pathname to php CLI (command line interface)
 PHP="/usr/bin/php -f"
 
 # Don't mail command output to anyone.
 MAILTO=""
 
 #
-#       recalculate user popularity metric
+# Regular cron jobs for the db-postgresql package
 #
-10 1 * * * gforge $PHP $GFORGE/cronjobs/calculate_user_metric.php
 
-#
-#  daily project_weekly_metric recalc
-#
-12 1 * * * gforge $PHP $GFORGE/cronjobs/project_weekly_metric.php
+# Daily reporting process
+25 7 * * * $FFUSER $PHP $FFCRON/reporting_cron.php
 
-#
-#   daily deletion of sessions, closing jobs, etc
-#
-15 1 * * * gforge $PHP $GFORGE/cronjobs/project_cleanup.php
+# Recalculate user popularity metric
+10 1 * * * $FFUSER $PHP $FFCRON/calculate_user_metric.php
 
-#
-#  daily crunching of survey data and other associated ratings
-#
-41 1 * * * gforge $PHP $GFORGE/cronjobs/rating_stats.php
+# Daily recalculate of the sums under the trove map
+50 1 * * * $FFUSER $PHP $FFCRON/db_trove_maint.php
 
-#
-#  daily crunching of project summary data (counts)
-#
-45 1 * * * gforge $PHP $GFORGE/cronjobs/db_project_sums.php
+# Daily deletion of sessions, closing jobs, etc
+15 1 * * * $FFUSER $PHP $FFCRON/project_cleanup.php
 
-#
-#   daily recalculate of the sums under the trove map
-#
-50 1 * * * gforge $PHP $GFORGE/cronjobs/db_trove_maint.php
+# Daily crunching of survey data and other associated ratings
+41 1 * * * $FFUSER $PHP $FFCRON/rating_stats.php
 
-#
-#	daily close pending artifacts
-#
-57 1 * * * gforge $PHP $GFORGE/cronjobs/check_stale_tracker_items.php
+# Daily crunching of project summary data (counts)
+45 1 * * * $FFUSER $PHP $FFCRON/db_project_sums.php
 
-#
-#      Daily site backup
-#
-0 2 * * *  root $PHP $GFORGE/cronjobs/backup_site.php
+# Daily close pending artifacts
+57 1 * * * $FFUSER $PHP $FFCRON/check_stale_tracker_items.php
 
-#
-#       VACUUM should be done after ALL OTHER JOBS
-#
-40 2 * * * gforge $PHP $GFORGE/cronjobs/vacuum.php
+# Daily project_weekly_metric recalc
+12 1 * * * $FFUSER $PHP $FFCRON/project_weekly_metric.php
 
-#
-#       Stats aggregation work
-#
-15 7 * * * gforge $PHP $GFORGE/cronjobs/db_stats_agg.php
+# Daily rotation of the activity_log
+0 0 * * * $FFUSER $PHP $FFCRON/rotate_activity.php
 
-#
-#       daily rotation of the activity_log
-#
-0 0 * * *  gforge $PHP $GFORGE/cronjobs/rotate_activity.php
+# Daily aggregating of the numbers
+15 0 * * * $FFUSER $PHP $FFCRON/site_stats.php
 
-#
-#       daily aggregating of the numbers
-#
-15 0 * * * gforge $PHP $GFORGE/cronjobs/site_stats.php
+# Daily sweep of the stats into final tables
+15 7 * * * $FFUSER $PHP $FFCRON/db_stats_agg.php
 
-#
 # Hourly send pending massmailings, if any
-#
-47 * * * * root $PHP $GFORGE/cronjobs/massmail.php
+47 * * * * root $PHP $FFCRON/massmail.php
 
-#
-#       Reporting Process
-#
-25 7 * * * gforge $PHP $GFORGE/cronjobs/reporting_cron.php
+# VACUUM should be done after ALL OTHER JOBS
+40 2 * * * $FFUSER $PHP $FFCRON/vacuum.php
 
-#
+
+
+# Daily site backup
+0 2 * * *  root $PHP $FFCRON/backup_site.php
+
 #
 #	IMPORTANT!! READ THE INSTALL file before continuing!
 #
-#
 
-#
-#       Create the new mailing lists
-#
-#06 * * * * root $PHP $GFORGE/cronjobs/mail/mailing_lists_create.php
+# Create the new mailing lists
+#06 * * * * root $PHP $FFCRON/mail/mailing_lists_create.php
 
-#
-#       Create the /etc/aliases file
-#
-#08 * * * * root $PHP $GFORGE/cronjobs/mail/mailaliases.php
+# Create the /etc/aliases file
+#08 * * * * root $PHP $FFCRON/mail/mailaliases.php
 
-#
-#   Send email to users with pending tasks
-#
-30 5 * * 1,2,3,4,5 root $PHP $GFORGE/cronjobs/daily_task_email.php
+# Send email to users with pending tasks
+30 5 * * 1,2,3,4,5 root $PHP $FFCRON/daily_task_email.php
 
-#
-#       Create the /etc/* files needed for CVS
-#
+# Create the /etc/* files needed for CVS
 10 * * * * root $PHP $GFORGE/plugins/scmcvs/cronjobs/usergroup.php
 
-#
-#       Upload the SSH key files needed for CVS
-#
+# Upload the SSH key files needed for CVS
 15 * * * * root $PHP $GFORGE/plugins/scmcvs/cronjobs/ssh_create.php
 
-#
-#       Create the blank cvs trees
-#
+# Create the blank cvs trees
 20 * * * * root $PHP $GFORGE/plugins/scmcvs/cronjobs/cvs.php
 
-#
-#       Create CVS tarballs
-#
+# Create CVS tarballs
 5 2 * * * root $PHP $GFORGE/plugins/scmcvs/cronjobs/tarballs.php
 
-#
-#       Create CVS snapshots
-#
+# Create CVS snapshots
 # CVSROOT and SCMSNAPSHOTSDIR variables are hard-coded in the script, so
 # you'll have to edit the script if necessary.
 #
 35 2 * * * root /bin/sh $GFORGE/plugins/scmcvs/cronjobs/snapshots.sh generate
 
-#
-#       Create the blank svn trees for SVN-over-DAV
-#       (all repositories owned by apache)
-#
+# Create the blank svn trees for SVN-over-DAV
+# (all repositories owned by apache)
 21 * * * * root $PHP $GFORGE/plugins/scmsvn/cronjobs/create_svn.php
 
-#
-#       Create SVN snapshots
-#
+# Create SVN snapshots
 # SVNROOT and SCMSNAPSHOTSDIR variables are hard-coded in the script, so
 # you'll have to edit the script if necessary.
-#
 35 3 * * * root /bin/sh $GFORGE/plugins/scmsvn/cronjobs/snapshots.sh generate
 
-#
-#       Daily SVN stats collection
-#
+# Daily SVN stats collection
 20 1 * * * root $PHP $GFORGE/plugins/scmsvn/cronjobs/svn-stats.php
 
-#
-#       Create SVN tarballs
-#
+# Create SVN tarballs
 5 3 * * * root $PHP $GFORGE/plugins/scmsvn/cronjobs/tarballs.php
