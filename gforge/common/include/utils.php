@@ -902,6 +902,8 @@ function readfile_chunked($filename, $returnBytes=true) {
     while (!feof($handle)) {
         $buffer = fread($handle, $chunksize);
         echo $buffer;
+	ob_flush() ;
+	flush () ;
         if ($returnBytes) {
             $byteCounter += strlen($buffer);
 		}
