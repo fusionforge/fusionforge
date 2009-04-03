@@ -89,7 +89,7 @@ if (isset($GLOBALS['error_msg'])) {
 }
 ?>
 
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+<form action="<?php echo util_make_url('/account/verify.php'); ?>" method="post">
 
 <p><?php echo _('Login name:'); ?>
 <br /><input type="text" name="loginname" /></p>

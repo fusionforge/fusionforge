@@ -99,7 +99,7 @@ printf (_('Welcome, %s. You may now change your password.'),$u->getUnixName());
 echo '</p>';
 ?>
 
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+<form action="<?php echo util_make_url('/account/lostlogin.php'); ?>" method="post">
 <p><?php echo _('New Password (min. 6 chars)'); ?>:
 <br /><input type="password" name="passwd" /></p>
 <p><?php echo _('New Password (repeat)'); ?>:

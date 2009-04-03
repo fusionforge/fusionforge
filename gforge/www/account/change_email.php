@@ -83,7 +83,7 @@ site_user_header(array('title'=>_('Email change')));
 echo _('<p>Changing your email address will require confirmation from your new email address, so that we can ensure we have a good email address on file.</p><p>We need to maintain an accurate email address for each user due to the level of access we grant via this account. If we need to reach a user for issues arriving from a shell or project account, it is important that we be able to do so.</p>  <p>Submitting the form below will mail a confirmation URL to the new email address. Visiting this link will complete the email change.</p>');
 ?>
 
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+<form action="<?php echo util_make_url('/account/change_email.php'); ?>" method="post">
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 <?php echo _('New Email Address:') ?>
 <input type="text" name="newemail" maxlength="255" />

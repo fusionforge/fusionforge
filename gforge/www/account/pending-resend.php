@@ -59,7 +59,7 @@ $HTML->header(array('title'=>'Pending-resend'));
 echo _('Fill in a user name and click \'Submit\' to resend the confirmation email');
 ?>
 
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+<form action="<?php echo util_make_url('/account/pending-resend.php'); ?>" method="post">
 <p><?php echo _('Login name:'); ?>
 <br /><input type="text" name="loginname" /></p>
 <p><input type="submit" name="submit" value="<?php echo _('Submit'); ?>" /></p>

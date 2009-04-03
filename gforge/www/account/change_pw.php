@@ -95,7 +95,7 @@ if (getStringFromRequest('submit')) {
 	site_user_header(array('title'=>_('Change Password')));
 	?>
 
-	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+	<form action="<?php echo util_make_url('/account/change_pw.php'); ?>" method="post">
 	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 	<p><?php echo _('Old Password') ?>:
 	<br /><input type="password" name="old_passwd" /></p>

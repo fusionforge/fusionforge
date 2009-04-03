@@ -92,7 +92,7 @@ if (getStringFromRequest('submit')) {
 
 site_user_header(array('title'=>_('Account Maintenance')));
 
-echo '<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
+echo '<form action="'.util_make_url('/account/').'" method="post">';
 echo '<input type="hidden" name="form_key" value="'.form_generate_key().'"/>';
 echo $HTML->boxTop(_('Account Maintenance'));
 

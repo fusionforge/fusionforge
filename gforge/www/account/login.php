@@ -94,7 +94,7 @@ if ($login && !$success) {
 	form_release_key(getStringFromRequest('form_key'));	
 	// Account Pending
 	if ($userstatus == "P") {
-		$feedback = sprintf(_('<p>Your account is currently pending your email confirmation.		Visiting the link sent to you in this email will activate your account.		<p>If you need this email resent, please click below and a confirmation		email will be sent to the email address you provided in registration.		<p><a href="%1$s">[Resend Confirmation Email]</a>		<br><hr>		<p>'), util_make_url ("pending-resend.php?form_user=".htmlspecialchars($form_loginname)));
+		$feedback = sprintf(_('<p>Your account is currently pending your email confirmation.		Visiting the link sent to you in this email will activate your account.		<p>If you need this email resent, please click below and a confirmation		email will be sent to the email address you provided in registration.		<p><a href="%1$s">[Resend Confirmation Email]</a>		<br><hr>		<p>'), util_make_url ("/account/pending-resend.php?form_user=".htmlspecialchars($form_loginname)));
 	} else {
 		if ($userstatus == "D") {
 			$feedback .= '<br />'.sprintf(_('<p>Your %1$s account has been removed by %1$s staff. This may occur for two reasons, either 1) you requested that your account be removed; or 2) some action has been performed using your account which has been seen as objectionable (i.e. you have breached the terms of service for use of your account) and your account has been revoked for administrative reasons. Should you have questions or concerns regarding this matter, please log a <a href="%2$s">support request</a>.</p><p>Thank you, <br><br>%1$s Staff</p>'), $GLOBALS['sys_name'], util_make_url ("/support/?group_id=1"));
@@ -108,7 +108,7 @@ if ($login && !$success) {
 <p>
 <span class="error"><?php echo _('Cookies must be enabled past this point.'); ?></span>
 </p>
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+<form action="<?php echo util_make_url('/account/login.php'); ?>" method="post">
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 <input type="hidden" name="return_to" value="<?php echo htmlspecialchars(stripslashes($return_to)); ?>" />
 <p>

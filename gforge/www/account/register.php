@@ -102,7 +102,7 @@ if (!isset($ccode) || empty($ccode) || !preg_match('/^[a-zA-Z]{2}$/', $ccode)) {
 }
 ?>
 
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+<form action="<?php echo util_make_url('/account/register.php'); ?>" method="post">
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 <p>
 <?php echo _('Login Name (do not use uppercase letters):'); echo utils_requiredField(); ?><br />
