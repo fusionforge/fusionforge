@@ -25,8 +25,8 @@ check:
 	cd tests ; php AllTests.php
 
 buildall: buildtar
-	make -f Makefile.debian all 
-	make -f Makefile.rh all 
+	-make -f Makefile.debian all
+	-make -f Makefile.rh all
 
 buildtar:
 	rm -fr /tmp/$(VERSION)
