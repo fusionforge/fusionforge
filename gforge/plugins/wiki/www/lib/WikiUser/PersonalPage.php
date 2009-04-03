@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-rcs_id('$Id: PersonalPage.php,v 1.7 2005/07/21 19:02:16 rurban Exp $');
+rcs_id('$Id: PersonalPage.php 6184 2008-08-22 10:33:41Z vargenau $');
 /* Copyright (C) 2004 ReiniUrban
  * This file is part of PhpWiki. Terms and Conditions see LICENSE. (GPL2)
  */
@@ -63,10 +63,7 @@ extends _PassUser
     }
 }
 
-// $Log: PersonalPage.php,v $
-// Revision 1.7  2005/07/21 19:02:16  rurban
-// fix typo
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.6  2005/06/22 05:36:52  rurban
 // looser isValidName method
 //

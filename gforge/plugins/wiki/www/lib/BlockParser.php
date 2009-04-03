@@ -1,6 +1,7 @@
-<?php rcs_id('$Id: BlockParser.php,v 1.55 2005/01/29 21:08:41 rurban Exp $');
+<?php rcs_id('$Id: BlockParser.php 6456 2009-01-27 14:25:00Z vargenau $');
 /* Copyright (C) 2002 Geoffrey T. Dairiki <dairiki@dairiki.org>
  * Copyright (C) 2004,2005 Reini Urban
+ * Copyright (C) 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  * 
@@ -21,10 +22,6 @@
 require_once('lib/HtmlElement.php');
 require_once('lib/CachedMarkup.php');
 require_once('lib/InlineParser.php');
-
-////////////////////////////////////////////////////////////////
-//
-//
 
 /**
  * Deal with paragraphs and proper, recursive block indents 
@@ -334,9 +331,6 @@ class Block_HtmlElement extends HtmlElement
     }
 
     function setTightness($top, $bottom) {
-	$this->setInClass('tightenable');
-	$this->setInClass('top', $top);
-	$this->setInClass('bottom', $bottom);
     }
 }
 
@@ -372,10 +366,18 @@ class ParsedBlock extends Block_HtmlElement {
     	static $_regexpset, $_block_types;
 
     	if (!is_object($_regexpset)) {
-            foreach (array('oldlists', 'list', 'dl', 'table_dl',
-                           'blockquote', 'heading', 'hr', 'pre', 'email_blockquote',
-                           'plugin', 'p')
-                     as $type) {
+            // nowiki_wikicreole must be before template_plugin
+	    $Block_types = array
+		    ('nowiki_wikicreole', 'template_plugin', 'oldlists', 'list', 'dl', 'table_dl', 'table_wikicreole', 'table_mediawiki',
+                     'blockquote', 'heading', 'heading_wikicreole', 'hr', 'pre', 'email_blockquote',
+		     'plugin', 'plugin_wikicreole', 'p');
+            // insert it before p!
+            if (ENABLE_MARKUP_DIVSPAN) {
+            	array_pop($Block_types);
+ 		$Block_types[] = 'divspan';
+ 		$Block_types[] = 'p';
+            }
+            foreach ($Block_types as $type) {
                 $class = "Block_$type";
                 $proto = new $class;
                 $this->_block_types[] = $proto;
@@ -384,6 +386,7 @@ class ParsedBlock extends Block_HtmlElement {
             $this->_regexpset = new AnchoredRegexpSet($this->_regexps);
             $_regexpset = $this->_regexpset;
             $_block_types = $this->_block_types;
+            unset($Block_types);
     	} else {
              $this->_regexpset = $_regexpset;
              $this->_block_types = $_block_types;
@@ -458,7 +461,6 @@ class TightSubBlock extends SubBlock {
         if (count($this->_content) == 1) {
             $elem = $this->_content[0];
             if (isa($elem, 'XmlElement') and $elem->getTag() == 'p') {
-                assert($elem->getAttr('class') == 'tightenable top bottom');
                 $this->setContent($elem->getContent());
             }
         }
@@ -473,7 +475,7 @@ class BlockMarkup {
     }
 
     function _setTightness ($top, $bot) {
-        $this->_element->setTightness($top, $bot);
+        // $this->_element->setTightness($top, $bot);
     }
 
     function merge ($followingBlock) {
@@ -502,6 +504,7 @@ class Block_blockquote extends BlockMarkup
         if (get_class($nextBlock) == get_class($this)) {
             assert ($nextBlock->_depth < $this->_depth);
             $nextBlock->_element->unshiftContent($this->_element);
+	    if (!empty($this->_tight_top))
             $nextBlock->_tight_top = $this->_tight_top;
             return $nextBlock;
         }
@@ -910,7 +913,7 @@ class Block_oldlists extends Block_list
 
 class Block_pre extends BlockMarkup
 {
-    var $_re = '<(?:pre|verbatim)>';
+    var $_re = '<(?:pre|verbatim|nowiki|noinclude)>';
 
     function _match (&$input, $m) {
         $endtag = '</' . substr($m->match, 1);
@@ -927,13 +930,48 @@ class Block_pre extends BlockMarkup
         }
         $input->advance();
         
-        $text = join("\n", $text);
+	if ($m->match == '<nowiki>')
+	    $text = join("<br>\n", $text);
+	else
+            $text = join("\n", $text);
         
         // FIXME: no <img>, <big>, <small>, <sup>, or <sub>'s allowed
         // in a <pre>.
-        if ($m->match == '<pre>')
+        if ($m->match == '<pre>') {
             $text = TransformInline($text);
+        }
+	if ($m->match == '<noinclude>') {
+	    $text = TransformText($text);
+	    $this->_element = new Block_HtmlElement('div', false, $text);
+	} else if ($m->match == '<nowiki>') {
+            $text = TransformInlineNowiki($text);
+	    $this->_element = new Block_HtmlElement('p', false, $text);
+	} else {
+            $this->_element = new Block_HtmlElement('pre', false, $text);
+	}
+        return true;
+    }
+}
+class Block_nowiki_wikicreole extends BlockMarkup
+{
+    var $_re = '{{{';
 
+    function _match (&$input, $m) {
+        $endtag = '}}}';
+        $text = array();
+        $pos = $input->getPos();
+
+        $line = $m->postmatch;
+        while (ltrim($line) != $endtag) {
+            $text[] = $line;
+            if (($line = $input->nextLine()) === false) {
+                $input->setPos($pos);
+                return false;
+            }
+        }
+        $input->advance();
+
+        $text = join("\n", $text);
         $this->_element = new Block_HtmlElement('pre', false, $text);
         return true;
     }
@@ -964,6 +1002,152 @@ class Block_plugin extends Block_pre
         $input->advance();
 
 	$this->_element = new Cached_PluginInvocation($pi);
+        return true;
+    }
+}
+
+class Block_plugin_wikicreole extends Block_pre
+{
+    // var $_re = '<<(?!\S)';
+    var $_re = '<<';
+
+    function _match (&$input, $m) {
+        $pos = $input->getPos();
+        $pi = "<?plugin " . $m->postmatch;
+        while (!preg_match('/(?<!'.ESCAPE_CHAR.')>>\s*$/', $pi)) {
+            if (($line = $input->nextLine()) === false) {
+                $input->setPos($pos);
+                return false;
+            }
+            $pi .= "\n$line";
+        }
+        $input->advance();
+
+        $pi = str_replace(">>", "?>", $pi);
+
+        $this->_element = new Cached_PluginInvocation($pi);
+        return true;
+    }
+}
+
+class Block_table_wikicreole extends Block_pre
+{
+    var $_re = '\s*\|';
+
+    function _match (&$input, $m) {
+        $pos = $input->getPos();
+        $pi = "|" . $m->postmatch;
+
+        $intable = true;
+        while ($intable) {
+            if (($line = $input->nextLine()) === false) {
+                $input->setPos($pos);
+                return false;
+            } 
+            if (!$line) {
+                $intable = false;
+                $trimline = $line;
+            } else {
+                $trimline = trim($line);
+                if ($trimline[0] != "|") {
+                    $intable = false;
+                }
+            }
+            $pi .= "\n$trimline";
+        }
+
+        $pi = '<'.'?plugin WikicreoleTable ' . $pi . '?'.'>';
+
+        $this->_element = new Cached_PluginInvocation($pi);
+        return true;
+    }
+}
+
+/** ENABLE_MARKUP_MEDIAWIKI_TABLE
+ *  Table syntax similar to Mediawiki
+ *  {|
+ * => <?plugin MediawikiTable
+ *  |}
+ * => ?>
+ */
+class Block_table_mediawiki extends Block_pre
+{
+    var $_re = '{\|';
+
+    function _match (&$input, $m) {
+        $pos = $input->getPos();
+        $pi = $m->postmatch;
+        while (!preg_match('/(?<!'.ESCAPE_CHAR.')\|}\s*$/', $pi)) {
+            if (($line = $input->nextLine()) === false) {
+                $input->setPos($pos);
+                return false;
+            }
+            $pi .= "\n$line";
+        }
+        $input->advance();
+
+        $pi = str_replace("\|}", "", $pi);
+        $pi = '<'.'?plugin MediawikiTable ' . $pi . '?'.'>';
+        $this->_element = new Cached_PluginInvocation($pi);
+        return true;
+    }
+}
+
+class Block_template_plugin extends Block_pre
+{
+    var $_re = '{{';
+
+    function _match (&$input, $m) {
+        $pos = $input->getPos();
+        // $pi = "<?plugin Template page=" . $m->postmatch;
+        $pi = $m->postmatch;
+        while (!preg_match('/(?<!'.ESCAPE_CHAR.')}}\s*$/', $pi)) {
+            if (($line = $input->nextLine()) === false) {
+                $input->setPos($pos);
+                return false;
+            }
+            $pi .= "\n$line";
+        }
+        $input->advance();
+
+        $pi = trim($pi);
+        $pi = trim($pi, "}}");
+
+        if (strpos($pi, "|") === false) {
+            $imagename = $pi;
+            $alt = "";
+        } else {
+            $imagename = substr($pi, 0, strpos($pi, "|"));
+            $alt = ltrim(strstr($pi, "|"), "|");
+        }
+
+        // It's not a Mediawiki template, it's a Wikicreole image
+        if (is_image($imagename)) {
+            $this->_element = LinkImage(UPLOAD_DATA_PATH . $imagename, $alt);
+            return true;
+        }
+
+        $pi = str_replace("\n", "", $pi);
+        $vars = '';
+
+        if (preg_match('/^(\S+?)\|(.*)$/', $pi, $_m)) {
+            $pi = $_m[1];
+            $vars = '"' . preg_replace('/\|/', '" "', $_m[2]) . '"';
+            $vars = preg_replace('/"(\S+)=([^"]*)"/', '\\1="\\2"', $vars);
+        }
+
+        // pi may contain a version number
+        // {{foo?version=5}}
+        // in that case, output is "page=foo rev=5"
+        if (strstr($pi, "?")) {
+            $pi = str_replace("?version=", "\" rev=\"", $page);
+        }
+
+        if ($vars)
+            $pi = '<'.'?plugin Template page="'.$pi.'" '.$vars . ' ?>';
+        else
+            $pi = '<'.'?plugin Template page="' . $pi . '" ?>';
+        $this->_element = new Cached_PluginInvocation($pi);
         return true;
     }
 }
@@ -1016,6 +1200,29 @@ class Block_heading extends BlockMarkup
     }
 }
 
+class Block_heading_wikicreole extends BlockMarkup
+{
+    var $_re = '={2,6}';
+    
+    function _match (&$input, $m) {
+        $tag = "h" . strlen($m->match);
+        // Remove spaces
+        $header = trim($m->postmatch);
+        // Remove '='s at the end so that Mediawiki syntax is recognized
+        $header = trim($header, "=");
+        $text = TransformInline(trim($header));
+        $input->advance();
+
+        $this->_element = new Block_HtmlElement($tag, false, $text);
+        
+        return true;
+    }
+
+    function _setTightness($top, $bot) {
+	// Don't tighten headers.
+    }
+}
+
 class Block_p extends BlockMarkup
 {
     var $_tag = 'p';
@@ -1042,7 +1249,7 @@ class Block_p extends BlockMarkup
         }
         return false;
     }
-            
+
     function finish () {
         $content = TransformInline(trim($this->_text));
         $p = new Block_HtmlElement('p', false, $content);
@@ -1050,6 +1257,64 @@ class Block_p extends BlockMarkup
         return $p;
     }
 }
+
+class Block_divspan extends BlockMarkup
+{
+    var $_re = '<(?im)(?: div|span)(?:[^>]*)?>';
+
+    function _match (&$input, $m) {
+    	if (substr($m->match,1,4) == 'span') {
+    	    $tag = 'span';
+	} else {
+    	    $tag = 'div';
+	}
+	// without last >
+        $argstr = substr(trim(substr($m->match,strlen($tag)+1)),0,-1); 
+        $pos = $input->getPos();
+        $pi  = $content = $m->postmatch;
+        while (!preg_match('/^(.*)\<\/'.$tag.'\>(.*)$/i', $pi, $me)) {
+            if ($pi != $content)
+                $content .= "\n$pi";
+            if (($pi = $input->nextLine()) === false) {
+                $input->setPos($pos);
+                return false;
+            }
+        }
+        if ($pi != $content)
+            $content .= $me[1]; // prematch
+        else
+            $content = $me[1];
+        $input->advance();
+        if (strstr($content, "\n"))
+            $content = TransformText($content);
+        else    
+            $content = TransformInline($content);
+        if (!$argstr) 
+            $args = false;
+        else {
+            $args = array();
+            while (preg_match("/(\w+)=(.+)/", $argstr, $m)) {
+            	$k = $m[1]; $v = $m[2];
+            	if (preg_match("/^\"(.+?)\"(.*)$/", $v, $m)) {
+            	    $v = $m[1];
+            	    $argstr = $m[2];
+            	} else {
+            	    preg_match("/^(\s+)(.*)$/", $v, $m);
+            	    $v = $m[1];
+            	    $argstr = $m[2];
+            	}
+                if (trim($k) and trim($v)) $args[$k] = $v;
+            }
+        }
+        $this->_element = new Block_HtmlElement($tag, $args, $content);
+        //$this->_element->setTightness($tag == 'span', $tag == 'span');
+        return true;
+    }
+    function _setTightness($top, $bot) {
+	// Don't tighten user <div|span>
+    }
+}
+
 
 ////////////////////////////////////////////////////////////////
 //
@@ -1067,7 +1332,10 @@ function TransformTextPre ($text, $markup = 2.0, $basepage=false) {
     if (!empty($markup) && $markup < 2.0) {
         $text = ConvertOldMarkup($text);
     }
-    
+    // WikiCreole
+    /*if (!empty($markup) && $markup == 3) {
+    	$text = ConvertFromCreole($text);
+    }*/
     // Expand leading tabs.
     $text = expand_tabs($text);
     //set_time_limit(3);
@@ -1080,7 +1348,7 @@ function TransformTextPre ($text, $markup = 2.0, $basepage=false) {
  * Transform the text of a page, and return an XmlContent,
  * suitable for printXml()-ing.
  */
-function TransformText ($text, $markup = 2.0, $basepage=false) {
+function TransformText ($text, $markup = 2.0, $basepage = false) {
     $output = TransformTextPre($text, $markup, $basepage);
     if ($basepage) {
         // This is for immediate consumption.
@@ -1090,40 +1358,6 @@ function TransformText ($text, $markup = 2.0, $basepage=false) {
     }
     return new XmlContent($output->getContent());
 }
-
-// $Log: BlockParser.php,v $
-// Revision 1.55  2005/01/29 21:08:41  rurban
-// update (C)
-//
-// Revision 1.54  2005/01/29 21:00:54  rurban
-// do not warn on empty nextBlock
-//
-// Revision 1.53  2005/01/29 20:36:44  rurban
-// very important php5 fix! clone objects
-//
-// Revision 1.52  2004/10/21 19:52:10  rurban
-// Patch #994487: Allow callers to get the parse tree for a page (danfr)
-//
-// Revision 1.51  2004/09/14 09:54:04  rurban
-// cache ParsedBlock::_initBlockTypes
-//
-// Revision 1.50  2004/09/08 13:38:00  rurban
-// improve loadfile stability by using markup=2 as default for undefined markup-style.
-// use more refs for huge objects.
-// fix debug=static issue in WikiPluginCached
-//
-// Revision 1.49  2004/07/02 09:55:58  rurban
-// more stability fixes: new DISABLE_GETIMAGESIZE if your php crashes when loading LinkIcons: failing getimagesize in old phps; blockparser stabilized
-//
-// Revision 1.48  2004/06/21 06:30:16  rurban
-// revert to prev references
-//
-// Revision 1.47  2004/06/20 15:30:04  rurban
-// get_class case-sensitivity issues
-//
-// Revision 1.46  2004/06/20 14:42:53  rurban
-// various php5 fixes (still broken at blockparser)
-//
 
 // (c-file-style: "gnu")
 // Local Variables:

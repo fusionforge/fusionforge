@@ -1,8 +1,10 @@
 <?php //-*-php-*-
-rcs_id('$Id: AdoDb.php,v 1.8 2006/03/19 16:26:40 rurban Exp $');
+rcs_id('$Id: AdoDb.php 6184 2008-08-22 10:33:41Z vargenau $');
 /* Copyright (C) 2004 ReiniUrban
  * This file is part of PhpWiki. Terms and Conditions see LICENSE. (GPL2)
  */
+
+include_once("lib/WikiUser/Db.php");
 
 class _AdoDbPassUser
 extends _DbPassUser
@@ -55,7 +57,7 @@ extends _DbPassUser
                 }
             }
         }
-        if ($this->_HomePagehandle) {
+        if (!empty($this->_HomePagehandle)) {
             if ($restored_from_page = $this->_prefs->retrieve
                 ($this->_HomePagehandle->get('pref'))) {
                 $updated = $this->_prefs->updatePrefs($restored_from_page);
@@ -160,7 +162,7 @@ extends _DbPassUser
         // reasons
         if (empty($this->_authcreate) and $dbi->getAuthParam('auth_create')) {
             $this->_authcreate = $this->prepare($dbi->getAuthParam('auth_create'),
-                                                array("userid", "password"));
+                                                array("password", "userid"));
         }
         if (!empty($this->_authcreate) and 
             isset($GLOBALS['HTTP_POST_VARS']['auth']) and
@@ -222,7 +224,10 @@ extends _DbPassUser
             elseif (isset($rs->fields[0]))
                 $okay = $rs->fields[0];
             else {
-                $okay = reset($rs->fields);
+                if (is_array($rs->fields))
+                    $okay = reset($rs->fields);
+                else
+                    $okay = false;
             }
             $rs->Close();
             $result = !empty($okay);
@@ -271,7 +276,16 @@ extends _DbPassUser
     }
 }
 
-// $Log: AdoDb.php,v $
+// $Log: not supported by cvs2svn $
+// Revision 1.11  2007/08/25 18:51:25  rurban
+// protect _HomePagehandle
+//
+// Revision 1.10  2007/05/30 21:53:52  rurban
+// add userid to authcreate
+//
+// Revision 1.9  2006/12/22 17:25:23  rurban
+// forgot why
+//
 // Revision 1.8  2006/03/19 16:26:40  rurban
 // fix DBAUTH arguments to be position independent, fixes bug #1358973
 //

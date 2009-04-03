@@ -1,0 +1,18 @@
+Date: Mon, 16 Jun 2008 14:15:24 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
+X-Rcs-Id: $Id: RecentNewPages 6184 2008-08-22 10:33:41Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=RecentNewPages;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=iso-8859-1
+Content-Transfer-Encoding: binary
+
+Here's a list of recently created new pages on this wiki. <em>(See
+<strong>[RecentChanges]</strong> for all recent edits and changes).</em>
+
+--------
+<?plugin RecentChanges days||=7 daylist=1,3,7,30,90,0 only_new||=1 show_deleted||=1 ?>
+
+----
+[CategoryActionPage]

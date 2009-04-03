@@ -1,7 +1,7 @@
 <?php // -*-php-*-
-rcs_id('$Id: Template.php,v 1.9 2007/03/04 14:09:13 rurban Exp $');
+rcs_id('$Id: Template.php 6429 2009-01-22 17:03:37Z vargenau $');
 /*
- Copyright 2005 $ThePhpWikiProgrammingTeam
+ Copyright 2005,2007 $ThePhpWikiProgrammingTeam
 
  This file is part of PhpWiki.
 
@@ -34,16 +34,18 @@ rcs_id('$Id: Template.php,v 1.9 2007/03/04 14:09:13 rurban Exp $');
  * We only support named parameters, not numbered ones as in mediawiki, and 
  * the placeholder is %%var%% and not {{{var}}} as in mediawiki.
  *
- * The following predefined variables are automatically expanded if existing:
- *   pagename
- *   mtime     - last modified date + time
- *   ctime     - creation date + time
- *   author    - last author
- *   owner     
- *   creator   - first author
+ * The following predefined uppercase variables are automatically expanded if existing:
+ *   PAGENAME
+ *   MTIME     - last modified date + time
+ *   CTIME     - creation date + time
+ *   AUTHOR    - last author
+ *   OWNER     
+ *   CREATOR   - first author
  *   SERVER_URL, DATA_PATH, SCRIPT_NAME, PHPWIKI_BASE_URL and BASE_URL
  *
- * <noinclude> .. </noinclude> is stripped
+ * <noinclude> .. </noinclude>     is stripped from the template expansion.
+ * <includeonly> .. </includeonly> is only expanded in pages using the template, 
+ *                                 not in the template itself.
  *
  * See also:
  * - ENABLE_MARKUP_TEMPLATE = true: (lib/InlineParser.php)
@@ -66,7 +68,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.9 $");
+                            "\$Revision: 6429 $");
     }
 
     function getDefaultArguments() {
@@ -83,6 +85,7 @@ extends WikiPlugin
     	$this->vars[$name] = $value;
     	return $name != 'action';
     }
+
     // TODO: check if page can really be pulled from the args, or if it is just the basepage. 
     function getWikiPageLinks($argstr, $basepage) {
         $args = $this->getArgs($argstr);
@@ -128,27 +131,37 @@ extends WikiPlugin
             $r = $p->getCurrentRevision();
         }
         $initial_content = $r->getPackedContent();
-        $c = explode("\n", $initial_content);
 
         if ($args['section']) {
+            $c = explode("\n", $initial_content);
             $c = extractSection($args['section'], $c, $page, $quiet, $args['sectionhead']);
             $initial_content = implode("\n", $c);
         }
-
+	// exclude from expansion
         if (preg_match('/<noinclude>.+<\/noinclude>/s', $initial_content)) {
             $initial_content = preg_replace("/<noinclude>.+?<\/noinclude>/s", "", 
                                             $initial_content);
         }
+	// only in expansion
+	$initial_content = preg_replace("/<includeonly>(.+)<\/includeonly>/s", "\\1",
+					$initial_content);
 	$this->doVariableExpansion($initial_content, $vars, $basepage, $request);
 
         array_push($included_pages, $page);
 
-        include_once('lib/BlockParser.php');
-        $content = TransformText($initial_content, $r->get('markup'), $page);
+        // If content is single-line, call TransformInline, else call TransformText
+        $initial_content = trim($initial_content, "\n");
+        if (preg_match("/\n/", $initial_content)) {
+            include_once('lib/BlockParser.php');
+            $content = TransformText($initial_content, $r->get('markup'), $page);
+        } else {
+            include_once('lib/InlineParser.php');
+            $content = TransformInline($initial_content, $r->get('markup'), $page);
+        }
 
         array_pop($included_pages);
 
-        return HTML::div(array('class' => 'template'), $content);
+        return $content;
     }
 
     /**
@@ -202,35 +215,6 @@ extends WikiPlugin
 	return $content;
     }
 };
-
-// $Log: Template.php,v $
-// Revision 1.9  2007/03/04 14:09:13  rurban
-// silence missing page warning
-//
-// Revision 1.8  2007/01/25 07:42:29  rurban
-// Changed doVariableExpansion API. Uppercase default vars. Use str_replace.
-//
-// Revision 1.7  2007/01/04 16:42:41  rurban
-// Improve vars passing. Use new method allow_undeclared_arg to allow arbitrary args for the template. Fix doVariableExpansion: use a ref. Fix pagename. Put away \b in regex.
-//
-// Revision 1.6  2007/01/03 21:24:06  rurban
-// protect page in links. new doVariableExpansion() for CreatePage. preg_quote custom vars.
-//
-// Revision 1.5  2006/04/17 17:28:21  rurban
-// honor getWikiPageLinks change linkto=>relation
-//
-// Revision 1.4  2005/09/11 13:30:22  rurban
-// improve comments
-//
-// Revision 1.3  2005/09/10 20:43:19  rurban
-// support <noinclude>
-//
-// Revision 1.2  2005/09/10 20:07:16  rurban
-// fix BASE_URL
-//
-// Revision 1.1  2005/09/10 19:59:38  rurban
-// Parametrized page inclusion ala mediawiki
-//
 
 // For emacs users
 // Local Variables:

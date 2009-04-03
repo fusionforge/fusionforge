@@ -44,12 +44,8 @@ $locale["%s is disallowed on this wiki."] =
    "%s se rechaza en este wiki.";
 $locale["%s is empty"] =
    "%s es vacío";
-$locale["%s is listed at %s"] =
-   "%s se enumera en %s";
 $locale["%s is missing"] =
    "%s falta";
-$locale["%s is not writable"] =
-   "%s no es escribible";
 $locale["%s is not writable."] =
    "%s no es escribible.";
 $locale["%s not found"] =
@@ -114,8 +110,6 @@ $locale["Access for you is forbidden to %s."] =
    "Tenga acceso para usted se prohíbe %s.";
 $locale["Add Comment"] =
    "Agregue El Comentario";
-$locale["Add a Comment"] =
-   "Agregue un comentario";
 $locale["Add this ACL"] =
    "Agregue este ACL";
 $locale["AddCategory"] =
@@ -136,8 +130,6 @@ $locale["AllUsers"] =
    "TodasLasUsuarios";
 $locale["Allow / Deny"] =
    "Permita/Niegue";
-$locale["Already deleted"] =
-   "Suprimido ya";
 $locale["An unnamed PhpWiki"] =
    "Un PhpWiki sin un nombre";
 $locale["Anonymous Users"] =
@@ -154,8 +146,6 @@ $locale["Author will be logged as %s."] =
    "Registrarán al autor como %s.";
 $locale["BOGO"] =
    "BOGO";
-$locale["Back to the previous page."] =
-   "De nuevo a la página anterior.";
 $locale["BackLinks"] =
    "AcoplamientosTraseros";
 $locale["BackLinks for %s"] =
@@ -178,12 +168,12 @@ $locale["CalendarPlugin"] =
    "CalendarioPlugin";
 $locale["Cancel"] =
    "Cancelar";
-$locale["Cancel rating"] =
-   "Cancelar";
 $locale["Cannot create directory '%s'"] =
    "No puede crear el directorio '%s'";
 $locale["Cannot open AUTH_GROUP_FILE %s"] =
    "No puede abrir AUTH_GROUP_FILE %s";
+$locale["Category"] =
+   "Categoría";
 $locale["CategoryCategory"] =
    "CategoriaCategoria";
 $locale["CategoryGroup"] =
@@ -268,8 +258,6 @@ $locale["Differences between %s and %s of %s."] =
    "Diferencias entre %s y %s de %s.";
 $locale["Discussion"] =
    "Discusión";
-$locale["Download the page contents"] =
-   "Descargue el contenido de la página";
 $locale["Dump pages as XHTML"] =
    "Páginas de la descarga como XHTML";
 $locale["Dump to directory"] =
@@ -300,8 +288,6 @@ $locale["Either %s is missing or DATABASE_TYPE != '%s'"] =
    "Cualquier %s es que falta o DATABASE_TYPE != '%s'";
 $locale["Email Verification"] =
    "Verificación Del Email";
-$locale["Embedded image"] =
-   "Imagen encajada";
 $locale["Empty Preferences or format of UserPreferences cookie not recognised."] =
    "Preferencias o formato vacías de la galleta de UsuarioPreferencias no reconocido.";
 $locale["Empty link to: %s"] =
@@ -334,8 +320,6 @@ $locale["Given password ignored."] =
    "Contraseña no hecho caso.";
 $locale["Go"] =
    "Aceptar";
-$locale["GoodStyle"] =
-   "BuenEstilo";
 $locale["Grant"] =
    "Concesión";
 $locale["Group %s does not exist"] =
@@ -408,8 +392,6 @@ $locale["Invalid password or userid."] =
    "Contraseña o userid inválida.";
 $locale["Invalid password."] =
    "Contraseña inválido.";
-$locale["Invalid username '%s' for LDAP Auth"] =
-   "Username inválido ' %s' para LDAP Auth";
 $locale["Invalid username."] =
    "Username inválido.";
 $locale["Italic text"] =
@@ -520,8 +502,6 @@ $locale["Note:"] =
    "Nota:";
 $locale["Old UserPage %s without stored password updated with empty password. Set a password in your UserPreferences."] =
    "Viejo UserPage %s sin la contraseña almacenada puesta al día con contraseña vacía. Fije una contraseña en su UsuarioPreferencias.";
-$locale["OldTextFormattingRules"] =
-   "ViejoReglasDeFormatoDeTexto";
 $locale["Older page:"] =
    "Página más viejo:";
 $locale["Oops! Revision %s of %s seems to have been deleted!"] =
@@ -676,8 +656,6 @@ $locale["Search & Replace"] =
    "Busque Y Substituya";
 $locale["See %s tips for editing."] =
    "%s tips para editar.";
-$locale["Select"] =
-   "Selecto";
 $locale["Serialized file %s"] =
    "Archivo serializado %s";
 $locale["Set Password"] =
@@ -714,8 +692,6 @@ $locale["Someone has edited the page!"] =
    "¡Alguien ha modificado la página!";
 $locale["Sorry for the inconvenience."] =
    "Disculpe la inconveniencia.";
-$locale["Sorry, this page is not in the database."] =
-   "Apesadumbrada, esta página no está en la base de datos.";
 $locale["Sort by %s"] =
    "Clase por %s";
 $locale["Spam Prevention"] =
@@ -726,16 +702,12 @@ $locale["String \"%s\" not found."] =
    "Secuencia \"%s\" no encontrado.";
 $locale["SubPages of %s:"] =
    "PáginasSecundaria de %s:";
-$locale["Substring \"%s\" found %s times. Replace with \"%s\"?"] =
-   "Subsecuencia \"%s\" tiempos encontrados de %s.  Substituya por \"%s\"?";
 $locale["Summary"] =
    "Comentarios";
 $locale["Supported handlers are: %s"] =
    "Los tratantes apoyados son: %s";
 $locale["Synopsis"] =
    "Sinopsis";
-$locale["TextFormattingRules"] =
-   "ReglasDeFormatoDeTexto";
 $locale["Thank you for editing %s."] =
    "Gracias por editar %s.";
 $locale["Thanks for participating!"] =
@@ -800,6 +772,8 @@ $locale["Too many external links."] =
    "También muchos acoplamientos externos.";
 $locale["Top & bottom toolbars"] =
    "Toolbars superiores y inferiores";
+$locale["Topic"] =
+   "Asunto";
 $locale["Type word above:"] =
    "Mecanografíe la palabra arriba:";
 $locale["Typed in verification word mismatch ... are you a bot?"] =
@@ -814,8 +788,6 @@ $locale["Unable to connect to IMAP server "] =
    "Incapaz conectar con el IMAP el servidor ";
 $locale["Unable to connect to LDAP server %s"] =
    "Incapaz conectar con el servidor %s de LDAP";
-$locale["Unable to load: %s"] =
-   "Incapaz cargar:  %s";
 $locale["Undefined method %s for special group %s"] =
    "Método indefinido %s para el grupo especial %s";
 $locale["Undo"] =
@@ -850,8 +822,6 @@ $locale["Upgrade"] =
    "Mejora";
 $locale["Upload File"] =
    "Archivo Del Upload";
-$locale["Upload error: file only partially recieved"] =
-   "Error del upload: el archivo recieved solamente parcialmente";
 $locale["Upload error: file too big"] =
    "Error del upload: archivo demasiado grande";
 $locale["Upload error: no file selected"] =
@@ -910,16 +880,12 @@ $locale["You forgot to set ENCRYPTED_PASSWD to true. Please update your config/c
    "Usted se olvidó de fijar ENCRYPTED_PASSWD para verdad. Ponga al día por favor su config/config.ini";
 $locale["You must be an administrator to %s."] =
    "Usted debe ser administrador %s.";
-$locale["You must log in to %s."] =
-   "Usted debe abrirse una sesión %s.";
 $locale["You must sign in to %s."] =
    "Usted debe firmar adentro %s.";
 $locale["You must specify a directory to dump to"] =
    "Usted debe especificar un directorio para descargar a";
 $locale["You must wait for moderator approval."] =
    "Usted debe esperar la aprobación del asesor.";
-$locale["You searched for: "] =
-   "Usted buscó para: ";
 $locale["You stored an empty password in your '%s' page."] =
    "Usted almacenó una contraseña vacía en su página de '%s'.";
 $locale["Your WikiDB DB backend '%s' cannot be used for DbSession."] =
@@ -1004,12 +970,8 @@ $locale["minutes"] =
    "minutas";
 $locale["missing required version argument"] =
    "parámetro requerido de la versión que falta";
-$locale["mode"] =
-   "modo";
 $locale["n/a"] =
    "n/a";
-$locale["name"] =
-   "Nombre";
 $locale["no page content"] =
    "ningún contenido de la página";
 $locale["not authenticated"] =

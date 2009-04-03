@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-rcs_id('$Id: Db.php,v 1.4 2006/03/07 21:05:24 rurban Exp $');
+rcs_id('$Id: Db.php 6184 2008-08-22 10:33:41Z vargenau $');
 /* Copyright (C) 2004 ReiniUrban
  * This file is part of PhpWiki. Terms and Conditions see LICENSE. (GPL2)
  */
@@ -97,10 +97,7 @@ extends _PassUser
 
 }
 
-// $Log: Db.php,v $
-// Revision 1.4  2006/03/07 21:05:24  rurban
-// add PdoDbPassUser
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.3  2005/06/10 06:11:56  rurban
 // special validname method
 //

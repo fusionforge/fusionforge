@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: ModeratedPage.php,v 1.4 2005/01/29 19:52:09 rurban Exp $');
+rcs_id('$Id: ModeratedPage.php 6185 2008-08-22 11:40:14Z vargenau $');
 /*
  Copyright 2004,2005 $ThePhpWikiProgrammingTeam
  
@@ -45,7 +45,7 @@ extends WikiPlugin
     }
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.4 $");
+                            "\$Revision: 6185 $");
     }
     function getDefaultArguments() {
         return array('page'          => '[pagename]',
@@ -60,7 +60,7 @@ extends WikiPlugin
     function run($dbi, $argstr, &$request, $basepage) {
         $args = $this->getArgs($argstr, $request);
 
-        // handle moderation request from the email
+        // Handle moderation request from urls sent by email
         if (!empty($args['id']) and !empty($args['pass'])) {
             if (!$args['page'])
                 return $this->error("No page specified");
@@ -70,6 +70,15 @@ extends WikiPlugin
                     $moderation = $moderated['data'][$args['id']];
                     // handle defaults:
                     //   approve or reject
+                    if ($request->isPost()) {
+                    	$button = $request->getArg('ModeratedPage');
+                    	if (isset($button['reject']))
+                    	    return $this->reject($request, $args, $moderation);
+                    	elseif (isset($button['approve']))
+                    	    return $this->approve($request, $args, $moderation);
+                    	else  
+                    	    return $this->error("Wrong button pressed");   
+                    }
                     if ($args['pass'] == 'approve')
                         return $this->approve($request, $args, $moderation);
                     elseif ($args['pass'] == 'reject')
@@ -112,8 +121,11 @@ extends WikiPlugin
         foreach ($args['moderators'] as $userid) {
             $users[$userid] = 0;
         }
+        require_once("lib/MailNotify.php");
+        $mail = new MailNotify($page->getName());
+        
         list($args['emails'], $args['moderators']) = 
-            $page->getPageChangeEmails(array($page->getName() => $users));
+            $mail->getPageChangeEmails(array($page->getName() => $users));
 
         if (!empty($args['require_access'])) {
             $args['require_access'] = preg_split("/\s*,\s*/", $args['require_access']);
@@ -137,12 +149,12 @@ extends WikiPlugin
         $action_page = $request->getPage(_("ModeratedPage"));
         $status = $this->getSiteStatus($request, $action_page);
         if (is_array($status)) {
-            if (!empty($status['emails'])) {
+            if (empty($status['emails'])) {
                 trigger_error(_("ModeratedPage: No emails for the moderators defined"), 
                               E_USER_WARNING);
                 return false;
             }
-            $page->set('moderation', array('_status' => $status));
+            $page->set('moderation', array('status' => $status));
             return $this->notice(
                        fmt("ModeratedPage status update:\n  Moderators: '%s'\n  require_access: '%s'", 
                        join(',', $status['moderators']), $status['require_access']));
@@ -161,12 +173,13 @@ extends WikiPlugin
     function lock_add(&$request, &$page, &$action_page) {
         $status = $this->getSiteStatus($request, $action_page);
         if (is_array($status)) {
-            if (!empty($status['emails'])) {
+            if (empty($status['emails'])) {
+            	// We really should present such warnings prominently.
                 trigger_error(_("ModeratedPage: No emails for the moderators defined"), 
                               E_USER_WARNING);
                 return false;
             }
-            $page->set('moderation', array('_status' => $status));
+            $page->set('moderation', array('status' => $status));
             return $this->notice(
                        fmt("ModeratedPage status update: '%s' is now a ModeratedPage.\n  Moderators: '%s'\n  require_access: '%s'", 
                        $page->getName(), join(',', $status['moderators']), $status['require_access']));
@@ -183,11 +196,12 @@ extends WikiPlugin
     function generateId() {
         better_srand();
         $s = "";
-        for ($i = 1; $i <= 16; $i++) {
+        for ($i = 1; $i <= 25; $i++) {
             $r = function_exists('mt_rand') ? mt_rand(55, 90) : rand(55, 90);
             $s .= chr(($r < 65) ? ($r-17) : $r);
         }
-        return $s;
+        $len = $r = function_exists('mt_rand') ? mt_rand(15, 25) : rand(15,25);
+        return substr(base64_encode($s),3,$len);
     }
 
     /** 
@@ -199,58 +213,69 @@ extends WikiPlugin
     	$action = $request->getArg('action');
     	$moderated = $page->get('moderated');
     	// cached version, need re-lock of each page to update moderators
-    	if (!empty($moderated['_status'])) 
-    	    $status = $moderated['_status'];
+    	if (!empty($moderated['status'])) 
+    	    $status = $moderated['status'];
     	else {
             $action_page = $request->getPage(_("ModeratedPage"));
             $status = $this->getSiteStatus($request, $action_page);
-            $moderated['_status'] = $status;
+            $moderated['status'] = $status;
     	}
-        if (!empty($status['emails'])) {
-            trigger_error(_("ModeratedPage: No emails for the moderators defined"), E_USER_WARNING);
+        if (empty($status['emails'])) {
+            trigger_error(_("ModeratedPage: No emails for the moderators defined"),
+                          E_USER_WARNING);
             return true;
         }
         // which action?
         if (!empty($status['require_access']) 
             and !in_array(action2access($action), $status['require_access']))
             return false; // allow and fall through, not moderated
-        if (!empty($status['require_level']) and $request->_user->_level >= $status['require_level'])
+        if (!empty($status['require_level']) 
+            and $request->_user->_level >= $status['require_level'])
             return false; // allow and fall through, not moderated
         // else all post actions are moderated by default
     	if (1) /* or in_array($action, array('edit','remove','rename')*/ {
-    	    //$moderated = $page->get('moderated');
     	    $id = $this->generateId();
-    	    while (!empty($moderated[$id])) $id = $this->generateId(); // avoid duplicates
+    	    while (!empty($moderated['data'][$id])) $id = $this->generateId(); // avoid duplicates
     	    $moderated['id'] = $id; 		// overwrite current id
+    	    $tempuser = $request->_user;
+	    if (isset($tempuser->_HomePagehandle))
+		unset($tempuser->_HomePagehandle);
     	    $moderated['data'][$id] = array( 	// add current request
     	                                    'timestamp' => time(),
     	    	          		    'userid' => $request->_user->getId(),
-                                            'args' => $request->getArgs(),
-                                            'user'   => serialize($request->_user),
+                                            'args'   => $request->getArgs(),
+                                            'user'   => serialize( $tempuser ),
                                             );
-            $this->_tokens['CONTENT'] = HTML::div(array('class' => 'wikitext'),
-            					  fmt("%s: action forwarded to moderator %s", 
-                                                      $action, 
-                                                      join(", ", $status['moderators'])
-                                                      ));
-	    // send email
+            $this->_tokens['CONTENT'] = 
+                HTML::div(array('class' => 'wikitext'),
+                          fmt("%s: action forwarded to moderator %s", 
+                              $action, 
+                              join(", ", $status['moderators'])
+                              ));
+	    // Send email
+	    require_once("lib/MailNotify.php");
             $pagename = $page->getName();
+	    $mailer = new MailNotify($pagename);
             $subject = "[".WIKI_NAME.'] '.$action.': '._("ModeratedPage").' '.$pagename;
-            if (mail(join(",", $status['emails']), 
-                     $subject, 
+            $content = 	"You are approved as Moderator of the ".WIKI_NAME. " wiki.\n".
+		     "Someone wanted to edit a moderated page, which you have to approve or reject.\n\n".
                      $action.': '._("ModeratedPage").' '.$pagename."\n"
-                     . serialize($moderated['data'][$id])
+                     //. serialize($moderated['data'][$id])
                      ."\n<".WikiURL($pagename, array('action' => _("ModeratedPage"), 
                                                      'id' => $id, 'pass' => 'approve'), 1).">"
                      ."\n<".WikiURL($pagename, array('action' => _("ModeratedPage"), 
-                                                     'id' => $id, 'pass' => 'reject'), 1).">\n"
-                     )) {
+                                                     'id' => $id, 'pass' => 'reject'), 1).">\n";
+	    $mailer->emails = $mailer->userids = $status['emails'];
+	    $mailer->from = $request->_user->_userid;
+            if ($mailer->sendMail($subject, $content, "Moderation notice")) {
                 $page->set('moderated', $moderated);
                 return false; // pass thru
             } else {
-            	//FIXME: This msg get lost on the edit redirect
+                //DELETEME!
+                $page->set('moderated', $moderated);
+            	//FIXME: This msg gets lost on the edit redirect
                 trigger_error(_("ModeratedPage Notification Error: Couldn't send email"), 
-                              E_USER_WARNING);
+                              E_USER_ERROR);
                 return true;
             }
     	}
@@ -264,47 +289,132 @@ extends WikiPlugin
      * Better we display a post form for verification.
      */
     function approve(&$request, $args, &$moderation) {
-        // check id, convert to POST, continue
         if ($request->isPost()) {
-            $this->error("ModeratedPage::approve not yet implemented");
+	    // this is unsafe because we dont know if it will succeed. but we tried.
+	    $this->cleanup_and_notify($request, $args, $moderation);
+            // start from scratch, dispatch the action as in lib/main to the action handler
+	    $request->discardOutput();
+            $oldargs = $request->args;	
+            $olduser = $request->_user;	
+            $request->args = $moderation['args'];
+            $request->_user->_userid = $moderation['userid']; // keep current perms but fake the id.
+	    // TODO: fake author ip also
+            extract($request->args);
+            $method = "action_$action";
+            if (method_exists($request, $method)) {
+                $request->{$method}();
+            }
+            elseif ($page = $this->findActionPage($action)) {
+                $this->actionpage($page);
+            }
+            else {
+                $this->finish(fmt("%s: Bad action", $action));
+            }
+	    // now we are gone and nobody brings us back here.
+
+	    //$moderated['data'][$id]->args->action+edit(array)+...
+	    //                              timestamp,user(obj)+userid
+	    // handle $moderated['data'][$id]['args']['action']
         } else {
             return $this->_approval_form($request, $args, $moderation, 'approve');
         }
     }
+
     /** 
      * Handle admin-side moderation resolve.
      */
     function reject(&$request, $args, &$moderation) {
         // check id, delete action
         if ($request->isPost()) {
-            $this->error("ModeratedPage::reject not yet implemented");
+	    // clean up and notify the requestor. Mabye: store and revert to have a diff later on?
+	    $this->cleanup_and_notify($request, $args, $moderation);
         } else {
             return $this->_approval_form($request, $args, $moderation, 'reject');
         }
     }
 
+    function cleanup_and_notify (&$request, $args, &$moderation) {
+	$pagename = $moderation['args']['pagename'];
+	$page = $request->_dbi->getPage($pagename);
+	$pass = $args['pass'];     // accept or reject
+	$reason = $args['reason']; // summary why
+	$user = $moderation['args']['user'];
+	$action = $moderation['args']['action'];
+	$id = $args['id'];
+	unset($moderation['data'][$id]);
+	unset($moderation['id']);
+	$page->set('moderation', $moderation);
+
+	// TODO: Notify the user, only if the user has an email:
+	if ($email = $user->getPref('email')) {
+	    $action_page = $request->getPage(_("ModeratedPage"));
+	    $status = $this->getSiteStatus($request, $action_page);
+	    require_once("lib/MailNotify.php");
+	    $mailer = new MailNotify($pagename);
+	    $subject = "[".WIKI_NAME."] $pass $action "._("ModeratedPage").': '.$pagename;
+	    $mailer->from = $request->_user->UserFrom();
+	    $content = sprintf(_("%s approved your wiki action from %s"),
+				 $mailer->from,CTime($moderation['timestamp']))
+		."\n\n"
+		."Decision: ".$pass
+		."Reason: ".$reason
+		."\n<".WikiURL($pagename).">\n";
+	    $mailer->emails = $mailer->userids = $email;
+	    $mailer->sendMail($subject, $content, "Approval notice");
+	}
+    }
+
     function _approval_form(&$request, $args, $moderation, $pass='approve') {
         $header = HTML::h3(_("Please approve or reject this request:"));
+        
         $loader = new WikiPluginLoader();
         $BackendInfo = $loader->getPlugin("_BackendInfo");
-        $content = HTML::table(array('border' => 1,
+        $table = HTML::table(array('border' => 1,
                                      'cellpadding' => 2,
                                      'cellspacing' => 0));
+        $content = $table;
+	$diff = '';
+	if ($moderation['args']['action'] == 'edit') {
+	    $pagename = $moderation['args']['pagename'];
+	    $p = $request->_dbi->getPage($pagename);
+	    $rev = $p->getCurrentRevision(true);
+	    $curr_content = $rev->getPackedContent();
+	    $new_content = $moderation['args']['edit']['content'];
+	    include_once("lib/difflib.php");
+	    $diff2 = new Diff($curr_content, $new_content);
+	    $fmt = new UnifiedDiffFormatter(/*$context_lines*/);
+	    $diff  = $pagename . " Current Version " . 
+		Iso8601DateTime($p->get('mtime')) . "\n";
+	    $diff .= $pagename . " Edited Version " .  
+		Iso8601DateTime($moderation['timestamp']) . "\n";
+	    $diff .= $fmt->format($diff2);
+	}
+        $content->pushContent($BackendInfo->_showhash("Request", 
+        		array('User'      => $moderation['userid'],
+        		      'When'      => CTime($moderation['timestamp']),
+        		      'Pagename'  => $pagename,
+        		      'Action'    => $moderation['args']['action'],
+        		      'Diff'      => HTML::pre($diff))));                            
+        $content_dbg = $table;
 	$myargs  = $args;
         $BackendInfo->_fixupData($myargs);
-        $content->pushContent($BackendInfo->_showhash("request args", $myargs));
+        $content_dbg->pushContent($BackendInfo->_showhash("raw request args", $myargs));
         $BackendInfo->_fixupData($moderation);
-        $content->pushContent($BackendInfo->_showhash("moderation data", $moderation));
+        $content_dbg->pushContent($BackendInfo->_showhash("raw moderation data", $moderation));
+        $reason = HTML::div(_("Reason: "), HTML::textarea(array('name' => 'reason')));
         $approve = Button('submit:ModeratedPage[approve]', _("Approve"), 
                           $pass == 'approve' ? 'wikiadmin' : 'button');
         $reject  = Button('submit:ModeratedPage[reject]', _("Reject"),
                           $pass == 'reject' ? 'wikiadmin' : 'button');
+	$args['action'] = _("ModeratedPage");
         return HTML::form(array('action' => $request->getPostURL(),
                                 'method' => 'post'),
                           $header,
-                          $content,
-                          ENABLE_PAGEPERM ? ''
-                          : HiddenInputs(array('require_authority_for_post' => WIKIAUTH_ADMIN)),
+                          $content, HTML::p(""), $content_dbg,
+			  $reason,
+                          ENABLE_PAGEPERM 
+                            ? ''
+                            : HiddenInputs(array('require_authority_for_post' => WIKIAUTH_ADMIN)),
                           HiddenInputs($args),
                           $pass == 'approve' ? HTML::p($approve, $reject) 
                           		     : HTML::p($reject, $approve));
@@ -336,7 +446,13 @@ extends WikiPlugin
     
 };
 
-// $Log: ModeratedPage.php,v $
+// $Log: not supported by cvs2svn $
+// Revision 1.6  2007/01/07 18:45:46  rurban
+// Finish 3/3 of the functionality, the Moderators approve and reject, Fix some logical flaws with !empty($status[emails]). Generate a better ID
+//
+// Revision 1.5  2006/08/15 13:41:08  rurban
+// just aesthetics
+//
 // Revision 1.4  2005/01/29 19:52:09  rurban
 // more work on the last part
 //

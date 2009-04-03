@@ -16,7 +16,7 @@
 // |          Sebastian Bergmann <sb@sebastian-bergmann.de>               |
 // +----------------------------------------------------------------------+
 //
-// $Id: imgfile.php,v 1.3 2004/04/26 20:44:36 rurban Exp $
+// $Id: imgfile.php 6209 2008-08-26 15:30:39Z vargenau $
 
 require_once('Cache/Container.php');
 
@@ -24,7 +24,7 @@ require_once('Cache/Container.php');
 * Stores cache contents in a file.
 *
 * @author   Ulf Wendel  <ulf.wendel@phpdoc.de>
-* @version  $Id: imgfile.php,v 1.3 2004/04/26 20:44:36 rurban Exp $
+* @version  $Id: imgfile.php 6209 2008-08-26 15:30:39Z vargenau $
 */
 class Cache_Container_file extends Cache_Container {
 

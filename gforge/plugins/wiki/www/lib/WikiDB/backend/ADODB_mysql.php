@@ -1,23 +1,27 @@
 <?php // -*-php-*-
-rcs_id('$Id: ADODB_mysql.php,v 1.15 2005/04/10 10:43:25 rurban Exp $');
+rcs_id('$Id: ADODB_mysql.php 6184 2008-08-22 10:33:41Z vargenau $');
 
 require_once('lib/WikiDB/backend/ADODB.php');
 
 /*
  * PROBLEM: mysql seems to be the simpliest (or most stupid) db on earth. 
  * (tested with 4.0.18)
+ * See http://sql-info.de/mysql/gotchas.html for mysql specific quirks.
+ *
  * Whenever a table is write-locked, you cannot even write to other unrelated 
  * tables. So it seems that we have to lock all tables!
  * As workaround we try it with application locks, uniquely named locks, 
  * to prevent from concurrent writes of locks with the same name.
  * The lock name is a strcat of the involved tables.
+ * 
+ * See also http://use.perl.org/~Smylers/journal/34246 for strict mode and warnings.
  */
 define('DO_APP_LOCK',true);
 define('DO_FULL_LOCK',false);
 
 /**
  * WikiDB layer for ADODB-mysql, called by lib/WikiDB/ADODB.php.
- * Now with support for the newer adodb library, the adodb extension library 
+ * Now with support for the newer ADODB library, the ADODB extension library 
  * and more database drivers.
  * To use transactions use the mysqlt driver: "mysqlt:..."
  * 
@@ -31,7 +35,8 @@ extends WikiDB_backend_ADODB
      */
     function WikiDB_backend_ADODB_mysql($dbparams) {
         $this->WikiDB_backend_ADODB($dbparams);
-
+        if (!$this->_dbh->_connectionID) return;
+        
         $this->_serverinfo = $this->_dbh->ServerInfo();
         if (!empty($this->_serverinfo['version'])) {
             $arr = explode('.',$this->_serverinfo['version']);
@@ -89,12 +94,12 @@ extends WikiDB_backend_ADODB
     }
 
     /**
-     * Lock tables. As fine-grained application lock, which locks only the same transaction
-     * (conflicting updates and edits), and as full table write lock.
+     * Lock tables. As fine-grained application lock, which locks only the 
+     * same transaction (conflicting updates and edits), and as full table 
+     * write lock.
      *
      * New: which tables as params,
      *      support nested locks via app locks
-     *
      */
     function _lock_tables($tables, $write_lock = true) {
     	if (!$tables) return;
@@ -162,6 +167,9 @@ extends WikiDB_backend_ADODB
             }
         }
         
+	// attributes play this game.
+        if ($pagename === '') return 0;
+
         $dbh = &$this->_dbh;
         $page_tbl = $this->_table_names['page_tbl'];
         $query = sprintf("SELECT id FROM $page_tbl WHERE pagename=%s",

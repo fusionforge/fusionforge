@@ -1,6 +1,37 @@
 <?php  // -*-html-*-
-  rcs_id('$Id: head.tmpl,v 1.22 2005/01/25 07:15:47 rurban Exp $');
+  rcs_id('$Id: head.tmpl 6204 2008-08-26 15:12:03Z vargenau $');
 ?>
+<head>
+<?php if (ENABLE_XHTML_XML and strstr($request->get('HTTP_ACCEPT'),'application/xhtml+xml')) { ?>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=<?=$charset?>" />
+<?php } else { ?>
+<meta http-equiv="Content-Type" content="text/html; charset=<?=$charset?>" />
+<?php } ?>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Language" content="<?=$GLOBALS['LANG']?>" />
+<?php $ROBOTS_CONTENT = isset($ROBOTS_META) ? $ROBOTS_META : "noindex,nofollow"; ?>
+<meta name="robots" content="<?= $ROBOTS_CONTENT ?>" />
+<?php if (!empty($PAGE_DESCRIPTION)) { ?>
+<meta name="description" content="<?=$PAGE_DESCRIPTION?>" />
+<?php } ?>
+<?php if (!empty($PAGE_KEYWORDS)) { ?>
+<meta name="keywords" content="<?=$PAGE_KEYWORDS?>" />
+<?php } ?>
+<meta name="language" content="<?=$GLOBALS['LANG']?>" />
+<meta name="document-type" content="Public" />
+<meta name="document-rating" content="General" />
+<meta name="generator" content="PhpWiki" />
+<meta name="PHPWIKI_VERSION" content="<?=PHPWIKI_VERSION?>" />
+<base href="<?=PHPWIKI_BASE_URL?>" />
+<link rel="shortcut icon" href="<?=$WikiTheme->getImageURL('favicon.ico')?>" />
+<?php /**
+       * Additional navigation links are provided here in the html header for browsers
+       * which support them: Mozilla, iCab, Amaya (and certain versions of Opera??).
+       *
+       * See http://www.w3.org/TR/html401/struct/links.html#edef-LINK
+       *     http://www.euronet.nl/~tekelenb/WWW/LINK/index.html
+       */ ?>
+<?php /* The next few lines are wrapped in an odd manner to allow gettext string extraction: cd locale;make */ ?>
 <link rel="home" title="<?=HOME_PAGE?>" href="<?=WikiURL(HOME_PAGE)?>" />
 <link rel="help" title="<?=
 _("HowToUseWiki")?>" href="<?=WikiURL(
@@ -16,8 +47,8 @@ _("FindPage"))?>" />
        * Translated pages could go here too.
        */
       if (!empty($revision)) {
-          $args = $request->getargs();
-          $action = $args['action'];
+          $args = $request->getArgs();
+          $action = empty($args['action']) ? 'browse' : $args['action'];
           if (!($action == "viewsource")) {
             $alternatelinkTitle = fmt("%s: %s", _("View Source"), $page->getName());
             $alternatelinkUrl = WikiURL($revision, array('action' => 'viewsource'));
@@ -36,6 +67,8 @@ _("FindPage"))?>" />
 ?>
 <link rel="alternate" type="application/rss+xml" title="RSS" href="<?=WikiURL(
 _("RecentChanges"), array('format' => 'rss'))?>" />
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="<?=WikiURL(
+_("RecentChanges"), array('format' => 'atom'))?>" />
 <?php /**
        * Add some user-specific links.
        */ ?>
@@ -48,7 +81,7 @@ _("SandBox"))?>" />
 _("WikiWikiWeb")?>" href="<?=WikiURL(
 _("WikiWikiWeb"))?>" />
 <?php } ?>
-
+<link rel="alternate" type="application/x-wiki" title="Edit this page!" href="<?= WikiURL($page,array('action'=>'edit')) ?>" />
 <?php if ($user->isAdmin()) {
       /* Only for the Administrator */ ?>
 <link rel="bookmark" title="<?=
@@ -88,7 +121,16 @@ _("UserPreferences"))?>" />
 </head>
 <?php
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -                         
-// $Log: head.tmpl,v $
+// $Log: not supported by cvs2svn $
+// Revision 1.25  2007/09/01 13:24:55  rurban
+// add atom link to header
+//
+// Revision 1.24  2007/07/14 12:06:27  rurban
+// aesthetic request: remove ?action=edit after edit
+//
+// Revision 1.23  2005/10/10 20:02:54  rurban
+// add one more header
+//
 // Revision 1.22  2005/01/25 07:15:47  rurban
 // fix ROBOTS_META warning, break xgettext strings, add log as comment
 //

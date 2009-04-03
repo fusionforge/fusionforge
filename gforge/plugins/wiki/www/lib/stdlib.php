@@ -1,6 +1,7 @@
-<?php //rcs_id('$Id: stdlib.php,v 1.251 2006/03/19 15:01:00 rurban Exp $');
+<?php //rcs_id('$Id: stdlib.php 6460 2009-01-28 09:44:44Z rurban $');
 /*
- Copyright 1999,2000,2001,2002,2004,2005 $ThePhpWikiProgrammingTeam
+ Copyright 1999-2008 $ThePhpWikiProgrammingTeam
+ Copyright 2008 Marc-Etienne Vargenau, Alcatel-Lucent
 
  This file is part of PhpWiki.
 
@@ -28,6 +29,7 @@
     IsSafeURL($url)
     LinkURL ($url, $linktext)
     LinkImage ($url, $alt)
+    ImgObject ($img, $url)
 
     SplitQueryArgs ($query_args)
     LinkPhpwikiURL ($url, $text, $basepage)
@@ -55,7 +57,7 @@
     file_mtime ($filename)
     sort_file_mtime ($a, $b)
     class fileSet {fileSet($directory, $filepattern = false), 
-                   getFiles($exclude=false, $sortby=false, $limit=false) }
+                   getFiles($exclude='', $sortby='', $limit='') }
     class ListRegexExpand { listMatchCallback($item, $key),  
                             expandRegex ($index, &$pages) }
 
@@ -82,13 +84,28 @@
     firstNWordsOfContent ($n, $content)
     extractSection ($section, $content, $page, $quiet = false, $sectionhead = false)
     isExternalReferrer()
+    
+    charset_convert($from, $to, $data)
+    string_starts_with($string, $prefix)
+    string_ends_with($string, $suffix)
+    array_remove($arr,$value)
+    longer_timeout($secs=30)
+    printSimpleTrace($bt)
+    getMemoryUsage()
+    binary_search($needle, $haystack)
+    is_localhost($url)
+    javascript_quote_string($s)
+    isSerialized($s)
+    parse_attributes($line)
+    is_image ($filename)
+    compute_tablecell ($table, $i, $j, $imax, $jmax)
 
   function: LinkInterWikiLink($link, $linktext)
   moved to: lib/interwiki.php
   function: linkExistingWikiWord($wikiword, $linktext, $version)
-  moved to: lib/Theme.php
+  moved to: lib/WikiTheme.php
   function: LinkUnknownWikiWord($wikiword, $linktext)
-  moved to: lib/Theme.php
+  moved to: lib/WikiTheme.php
   function: UpdateRecentChanges($dbi, $pagename, $isnewpage) 
   gone see: lib/plugin/RecentChanges.php
 */
@@ -157,6 +174,7 @@ function GetCookieName() {
  * @return string The absolute URL to the page passed as $pagename.
  */
 function WikiURL($pagename, $args = '', $get_abs_url = false) {
+    global $request, $WikiTheme;
     $anchor = false;
     
     if (is_object($pagename)) {
@@ -176,13 +194,13 @@ function WikiURL($pagename, $args = '', $get_abs_url = false) {
             $pagename = $pagename->name;
         }
     }
-    if (!$get_abs_url and DEBUG and $GLOBALS['request']->getArg('start_debug')) {
+    if (!$get_abs_url and DEBUG and $request->getArg('start_debug')) {
     	if (!$args)
-    	    $args = 'start_debug=' . $GLOBALS['request']->getArg('start_debug');
+    	    $args = 'start_debug=' . $request->getArg('start_debug');
     	elseif (is_array($args))
-    	    $args['start_debug'] = $GLOBALS['request']->getArg('start_debug');
+    	    $args['start_debug'] = $request->getArg('start_debug');
     	else 
-    	    $args .= '&amp;start_debug=' . $GLOBALS['request']->getArg('start_debug');
+    	    $args .= '&start_debug=' . $request->getArg('start_debug');
     }
     if (is_array($args)) {
         $enc_args = array();
@@ -198,13 +216,25 @@ function WikiURL($pagename, $args = '', $get_abs_url = false) {
         $args = join('&', $enc_args);
     }
 
-    if (USE_PATH_INFO or !empty($GLOBALS['WikiTheme']->HTML_DUMP_SUFFIX)) {
+    if (USE_PATH_INFO or !empty($WikiTheme->HTML_DUMP_SUFFIX)) {
         $url = $get_abs_url ? (SERVER_URL . VIRTUAL_PATH . "/") : "";
-        $url = $url . preg_replace('/%2f/i', '/', rawurlencode($pagename));
-        if (!empty($GLOBALS['WikiTheme']->HTML_DUMP_SUFFIX))
-            $url .= $GLOBALS['WikiTheme']->HTML_DUMP_SUFFIX;
-        if ($args)
-            $url .= "?$args";
+	$base = preg_replace('/%2f/i', '/', rawurlencode($pagename));
+	$url .= $base;
+        if (!empty($WikiTheme->HTML_DUMP_SUFFIX)) {
+	    if (!empty($WikiTheme->VALID_LINKS) and $request->getArg('action') == 'pdf') {
+	    	if (!in_array($pagename, $WikiTheme->VALID_LINKS))
+	    	    $url = '';
+	    	else    
+		    $url = $base . $WikiTheme->HTML_DUMP_SUFFIX;
+	    } else {
+		$url .= $WikiTheme->HTML_DUMP_SUFFIX;
+		if ($args)
+		    $url .= "?$args";
+	    }
+        } else {
+	    if ($args)
+		$url .= "?$args";
+	}
     }
     else {
         $url = $get_abs_url ? SERVER_URL . SCRIPT_NAME : basename(SCRIPT_NAME);
@@ -280,11 +310,11 @@ function IconForLink($protocol_or_url) {
 
 /**
  * Glue icon in front of or after text.
- * Pref: 'noLinkIcons'  - ignore icon if set
- * Theme: 'LinkIcons'   - 'yes'   at front
- *                      - 'no'    display no icon
- *                      - 'front' display at left
- *                      - 'after' display at right
+ * Pref: 'noLinkIcons'      - ignore icon if set
+ * WikiTheme: 'LinkIcons'   - 'yes'   at front
+ *                          - 'no'    display no icon
+ *                          - 'front' display at left
+ *                          - 'after' display at right
  *
  * @param string $protocol_or_url Protocol or URL.  Used to determine the
  * proper icon.
@@ -380,46 +410,66 @@ function LinkURL($url, $linktext = '') {
  *
  * Syntax: [image.png size=50% border=n align= hspace= vspace= width= height=]
  * Disallows sizes which are too small. 
- * Spammers may use such (typically invisible) image attributes to higher their GoogleRank.
+ * Spammers may use such (typically invisible) image attributes to raise their GoogleRank.
  *
  * Handle embeddable objects, like svg, class, vrml, swf, svgz, pdf, avi, wmv especially.
  */
-function LinkImage($url, $alt = false) {
+function LinkImage($url, $alt = "") {
     $force_img = "png|jpg|gif|jpeg|bmp|pl|cgi";
     // Disallow tags in img src urls. Typical CSS attacks.
     // FIXME: Is this needed (or sufficient?)
+    // FIXED: This was broken for moniker:TP30 test/image.png => url="moniker:TP30" attr="test/image.png"
+    $ori_url = $url;
     if(! IsSafeURL($url)) {
         $link = HTML::strong(HTML::u(array('class' => 'baduri'),
                                      _("BAD URL -- remove all of <, >, \"")));
+        return $link;
     } else {
-        // support new syntax: [image.jpg size=50% border=n]
-        if (!preg_match("/\.(".$force_img.")/i", $url))
-            $ori_url = $url;
-        $arr = split(' ',$url);
-        if (count($arr) > 1) {
-            $url = $arr[0];
-        }
+        // support new syntax: [prefix/image.jpg size=50% border=n]
+        //if (!preg_match("/\.(".$force_img.")/i", $url))
         if (empty($alt)) $alt = basename($url);
-        $link = HTML::img(array('src' => $url, 'alt' => $alt, 'title' => $alt));
+	$arr = split(' ',$url);
+	if (!empty($arr)) $url = $arr[0];
+        if ($alt == "") {
+            $link = HTML::img(array('src' => $url, 'alt' => $alt));
+        } else {
+            $link = HTML::img(array('src' => $url, 
+                                    'alt' => $alt, 'title' => $alt));
+        }
         if (count($arr) > 1) {
+	    $url = $arr[0];
             array_shift($arr);
             foreach ($arr as $attr) {
                 if (preg_match('/^size=(\d+%)$/',$attr,$m)) {
                     $link->setAttr('width',$m[1]);
                     $link->setAttr('height',$m[1]);
                 }
-                if (preg_match('/^size=(\d+)x(\d+)$/',$attr,$m)) {
+                elseif (preg_match('/^size=(\d+)x(\d+)$/',$attr,$m)) {
                     $link->setAttr('width',$m[1]);
                     $link->setAttr('height',$m[2]);
                 }
-                if (preg_match('/^border=(\d+)$/',$attr,$m))
+                elseif (preg_match('/^width=(\d+[%p]?x?)$/',$attr,$m))
+                    $link->setAttr('width',$m[1]);
+                elseif (preg_match('/^height=(\d+[%p]?x?)$/',$attr,$m))
+                    $link->setAttr('height',$m[1]);
+                elseif (preg_match('/^border=(\d+)$/',$attr,$m))
                     $link->setAttr('border',$m[1]);
-                if (preg_match('/^align=(\w+)$/',$attr,$m))
+                elseif (preg_match('/^align=(\w+)$/',$attr,$m))
                     $link->setAttr('align',$m[1]);
-                if (preg_match('/^hspace=(\d+)$/',$attr,$m))
+                elseif (preg_match('/^hspace=(\d+)$/',$attr,$m))
                     $link->setAttr('hspace',$m[1]);
-                if (preg_match('/^vspace=(\d+)$/',$attr,$m))
+                elseif (preg_match('/^vspace=(\d+)$/',$attr,$m))
                     $link->setAttr('vspace',$m[1]);
+		else {
+		    $url .= ' '.$attr;
+		    if(! IsSafeURL($url)) {
+			$link = HTML::strong(HTML::u(array('class' => 'baduri'),
+						     _("BAD URL -- remove all of <, >, \"")));
+			return $link;
+		    } else {
+			$link->setAttr('src', $url);
+		    }
+		}
             }
         }
         // Check width and height as spam countermeasure
@@ -434,13 +484,36 @@ function LinkImage($url, $alt = false) {
                 return '';
             }
         } else {
+            $size = 0;	
+            // Prepare for getimagesize($url)
+            // $url only valid for external urls, otherwise local path
             // Older php versions crash here with certain png's: 
             // confirmed for 4.1.2, 4.1.3, 4.2.3; 4.3.2 and 4.3.7 are ok
             //   http://phpwiki.sourceforge.net/demo/themes/default/images/http.png
             // See http://bugs.php.net/search.php?cmd=display&search_for=getimagesize
-            if (!check_php_version(4,3) and preg_match("/^http.+\.png$/i",$url))
+            if (DISABLE_GETIMAGESIZE)
+                ;
+            elseif (! preg_match("/\.$force_img$/i", $url))
+            	;  // only valid image extensions or scripts assumed to generate images
+            elseif (!check_php_version(4,3) and preg_match("/^http.+\.png$/i",$url))
                 ; // it's safe to assume that this will fail.
-            elseif (!DISABLE_GETIMAGESIZE and ($size = @getimagesize($url))) {
+            elseif (preg_match("/^http/",$url)) { // external url
+            	$size = @getimagesize($url); 
+            } else { // local file
+                if (file_exists($file = NormalizeLocalFileName($url))) {  // here
+            	    $size = @getimagesize($file);
+                } elseif (file_exists(NormalizeLocalFileName(urldecode($url)))) {
+            	    $size = @getimagesize($file);
+            	    $link->setAttr('src', rawurldecode($url));
+                } elseif (string_starts_with($url, getUploadDataPath())) { // there
+            	    $file = substr($file, strlen(getUploadDataPath()));	
+            	    $size = @getimagesize(getUploadFilePath().rawurldecode($file));
+            	    $link->setAttr('src', getUploadDataPath() . rawurldecode($file));
+            	} else { // elsewhere
+            	    $size = @getimagesize($request->get('DOCUMENT_ROOT').urldecode($url));
+            	}
+            }
+            if ($size) {
                 $width  = $size[0];
                 $height = $size[1];
                 if (($width < 3 and $height < 10) 
@@ -460,7 +533,7 @@ function LinkImage($url, $alt = false) {
      * Note: Allow cgi's (pl,cgi) returning images.
      */
     if (!preg_match("/\.(".$force_img.")/i", $url)) {
-        //HTML::img(array('src' => $url, 'alt' => $alt, 'title' => $alt));
+        // HTML::img(array('src' => $url, 'alt' => $alt, 'title' => $alt));
         // => HTML::object(array('src' => $url)) ...;
         return ImgObject($link, $ori_url);
     }
@@ -468,26 +541,58 @@ function LinkImage($url, $alt = false) {
 }
 
 /**
- * <object> / <embed> tags instead of <img> for all non-image extensions allowed via INLINE_IMAGES
+ * <object> / <embed> tags instead of <img> for all non-image extensions 
+ * in INLINE_IMAGES.
  * Called by LinkImage(), not directly.
- * Syntax: [image.svg size=50% border=n align= hspace= vspace= width= height=]
- * $alt may be an alternate img
+ * Syntax:  [image.svg size=50% alt=image.gif border=n align= hspace= vspace= width= height=]
+ * Samples: [Upload:song.mp3 type=audio/mpeg width=200 height=10]
+ *   $alt may be an alternate img
  * TODO: Need to unify with WikiPluginCached::embedObject()
  *
  * Note that Safari 1.0 will crash with <object>, so use only <embed>
  *   http://www.alleged.org.uk/pdc/2002/svg-object.html
+ *
+ * Allowed object tags:
+ *   DATA=URI (object data) 
+ *   CLASSID=URI (location of implementation) 
+ *   ARCHIVE=CDATA (archive files) 
+ *   CODEBASE=URI (base URI for CLASSID, DATA, ARCHIVE) 
+ *   WIDTH=Length (object width) 
+ *   HEIGHT=Length (object height) 
+ *   NAME=CDATA (name for form submission) 
+ *   USEMAP=URI (client-side image map) 
+ *   TYPE=ContentType (content-type of object) 
+ *   CODETYPE=ContentType (content-type of code) 
+ *   STANDBY=Text (message to show while loading) 
+ *   TABINDEX=NUMBER (position in tabbing order) 
+ *   DECLARE (do not instantiate object)
+ * The rest is added as <param name="" value="" /> tags
  */
 function ImgObject($img, $url) {
     // get the url args: data="sample.svgz" type="image/svg+xml" width="400" height="300"
     $args = split(' ', $url);
+    $params = array();
     if (count($args) >= 1) {
         $url = array_shift($args);
+	$found = array();
         foreach ($args as $attr) {
-            if (preg_match('/^type=(\S+)$/',$attr,$m))
-                $img->setAttr('type', $m[1]);
-            if (preg_match('/^data=(\S+)$/',$attr,$m))
-                $img->setAttr('data', $m[1]);
+	    foreach (explode(",","data,classid,archive,codebase,name,usemap,type,".
+			     "codetype,standby,tabindex,declare") as $param)
+	    {
+		if (preg_match("/^$param=(\S+)$/i",$attr,$m)) {
+		    $img->setAttr($param, $m[1]);
+		    $found[$attr]++;
+		    break;
+		}
+	    }
         }
+	// now all remaing args are added as <param> to the object
+        foreach ($args as $attr) {
+	    if (!$found[$attr] and preg_match("/^(\S+)=(\S+)$/i",$attr,$m)) {
+		$params[] = HTML::param(array('name'  => $m[1],
+                                              'value' => $m[2]));
+	    }
+	}
     }
     $type = $img->getAttr('type');
     if (!$type) {
@@ -495,13 +600,17 @@ function ImgObject($img, $url) {
         if (function_exists('mime_content_type'))
             $type = mime_content_type($url);
     }
-    $link = HTML::object(array_merge($img->_attr, array('src' => $url, 'type' => $type)));
-    $link->setAttr('class', 'inlineobject');
-    if (isBrowserSafari()) {
-        return HTML::embed($link->_attr);
+    $object = HTML::object(array_merge($img->_attr, array('src' => $url, 'type' => $type)),
+    			$img->_content);
+    $object->setAttr('class', 'inlineobject');
+    if ($params) {
+	foreach ($params as $param) $object->pushContent($param);
     }
-    $link->pushContent(HTML::embed($link->_attr));
-    return $link;
+    if (isBrowserSafari()) {
+        return HTML::embed($object->_attr, $object->_content);
+    }
+    $object->pushContent(HTML::embed($object->_attr));
+    return $object;
 }
 
 
@@ -656,14 +765,15 @@ class WikiPageName
         if (is_string($name)) {
             $this->shortName = $name;
             if (strstr($name, ':')) {
-                list($moniker, $this->shortName) = split (":", $name, 2);
+                list($moniker, $shortName) = split (":", $name, 2);
 	  	$map = getInterwikiMap(); // allow overrides to custom maps
                 if (isset($map->_map[$moniker])) {
                     $url = $map->_map[$moniker];
                     if (strstr($url, '%s'))
-                        $url = sprintf($url, $this->shortName);
+                        $url = sprintf($url, $shortName);
                     else
-                        $url .= $this->shortName;
+                        $url .= $shortName;
+                    $this->url = $url;
                     // expand Talk or User, but not to absolute urls!
                     if (strstr($url, '//')) {
                         if ($moniker == 'Talk')
@@ -673,8 +783,10 @@ class WikiPageName
                     } else {
                         $name = $url;
                     }
-                    if (strstr($name, '?'))
-                        list($name, $dummy) = split("?", $name, 2);
+                    if (strstr($shortName, '?')) {
+                        list($shortName, $dummy) = split("\?", $shortName, 2);
+		    }
+                    $this->shortName = $shortName;
                 }
             }
 	    // FIXME: We should really fix the cause for "/PageName" in the WikiDB
@@ -756,7 +868,13 @@ class WikiPageName
         return substr($name, 1);
     }
 
-
+    /**
+     * Compress internal white-space to single space character.
+     *
+     * This leads to problems with loading a foreign charset pagename, 
+     * which cannot be deleted anymore, because unknown chars are compressed.
+     * So BEFORE importing a file _check must be done !!!
+     */
     function _check($pagename) {
         // Compress internal white-space to single space character.
         $pagename = preg_replace('/[\s\xa0]+/', ' ', $orig = $pagename);
@@ -764,7 +882,7 @@ class WikiPageName
             $this->_warnings[] = _("White space converted to single space");
     
         // Delete any control characters.
-        if (DATABASE_TYPE == 'cvs' or DATABASE_TYPE == 'file') {
+        if (DATABASE_TYPE == 'cvs' or DATABASE_TYPE == 'file' or DATABASE_TYPE == 'flatfile') {
             $pagename = preg_replace('/[\x00-\x1f\x7f\x80-\x9f]/', '', $orig = $pagename);
             if ($pagename != $orig)
                 $this->_errors[] = _("Control characters not allowed");
@@ -792,8 +910,11 @@ class WikiPageName
         }
 
         // disallow some chars only on file and cvs
-        if ((DATABASE_TYPE == 'cvs' or DATABASE_TYPE == 'file') 
-            and preg_match('/(:|\.\.)/', $pagename, $m)) {
+        if ((DATABASE_TYPE == 'cvs' 
+            or DATABASE_TYPE == 'file' 
+            or DATABASE_TYPE == 'flatfile') 
+            and preg_match('/(:|\.\.)/', $pagename, $m)) 
+        {
             $this->_warnings[] = sprintf(_("Illegal chars %s removed"), $m[1]);
             $pagename = str_replace('..', '', $pagename);
             $pagename = str_replace(':', '', $pagename);
@@ -989,7 +1110,7 @@ function ConvertOldMarkup ($text, $markup_type = "block") {
                 preg_match('/^\[\s*(\d+)\s*\]/', $block, $m);
                 $footnum = $m[1];
                 $block = substr($block, strlen($m[0]));
-                $prefix = "#[|ftnt_${footnum}]~[[${footnum}|#ftnt_ref_${footnum}]~] ";
+                $prefix = "#[|ftnt_".${footnum}."]~[[".${footnum}."|#ftnt_ref_".${footnum}."]~] ";
             }
             elseif ($block[0] == '<') {
                 // Plugin.
@@ -1088,8 +1209,9 @@ function SplitPagename ($page) {
         }
         // Split numerals from following letters.
         $RE[] = '/(\d)([[:alpha:]])/';
-        // Split at subpage seperators. TBD in Theme.php
+        // Split at subpage seperators. TBD in WikiTheme.php
         $RE[] = "/([^${sep}]+)(${sep})/";
+        $RE[] = "/(${sep})([^${sep}]+)/";
         
         foreach ($RE as $key)
             $RE[$key] = pcre_fix_posix_classes($key);
@@ -1384,7 +1506,7 @@ class fileSet {
      * (This was a function LoadDir in lib/loadsave.php)
      * See also http://www.php.net/manual/en/function.readdir.php
      */
-    function getFiles($exclude=false, $sortby=false, $limit=false) {
+    function getFiles($exclude='', $sortby='', $limit='') {
         $list = $this->_fileList;
 
         if ($sortby) {
@@ -1422,8 +1544,9 @@ class fileSet {
     function fileSet($directory, $filepattern = false) {
         $this->_fileList = array();
         $this->_pattern = $filepattern;
-        if ($filepattern)
+        if ($filepattern) {
             $this->_pcre_pattern = glob_to_pcre($this->_pattern);
+        }
         $this->_case = !isWindows();
         $this->_pathsep = '/';
 
@@ -1490,9 +1613,9 @@ function glob_to_pcre ($glob) {
         return $glob;
     // preg_replace cannot handle "\\\\\\2" so convert \\ to \xff
     $glob = strtr($glob, "\\", "\xff");
-    $glob = str_replace("/", '\/', $glob);
+    $glob = str_replace("/", "\\/", $glob);
     // first convert some unescaped expressions to pcre style: . => \.
-    $special = ".^$";
+    $special = '.^$';
     $re = preg_replace('/([^\xff])?(['.preg_quote($special).'])/', 
                        "\\1\xff\\2", $glob);
 
@@ -1504,11 +1627,15 @@ function glob_to_pcre ($glob) {
     if (!preg_match('/[\?\*]$/', $glob))
         $re = $re . '$';
 
+    // Fixes Bug 1182997
     // .*? handled above, now escape the rest
     //while (strcspn($re, $escape) != strlen($re)) // loop strangely needed
     $re = preg_replace('/([^\xff])(['.preg_quote($escape, "/").'])/', 
                        "\\1\xff\\2", $re);
-    return strtr($re, "\xff", "\\");
+    // Problem with 'Date/Time' => 'Date\/Time' => 'Date\xff\/Time' => 'Date\/Time'
+    // 'plugin/*.php'
+    $re = preg_replace('/\xff/', '', $re);
+    return $re;
 }
 
 function glob_match ($glob, $against, $case_sensitive = true) {
@@ -1537,7 +1664,7 @@ function explodeList($input, $allnames, $glob_style = true, $case_sensitive = tr
 
 // echo implode(":",explodeList("Test*",array("xx","Test1","Test2")));
 function explodePageList($input, $include_empty=false, $sortby='pagename', 
-			 $limit=false, $exclude=false) {
+			 $limit='', $exclude='') {
     include_once("lib/PageList.php");
     return PageList::explodePageList($input, $include_empty, $sortby, $limit, $exclude);
 }
@@ -1731,6 +1858,13 @@ class Alert {
         if ($buttons === false)
             $buttons = array();
 
+	if (is_array($body)) {
+	    $html = HTML::ol();
+	    foreach ($body as $li) {
+		$html->pushContent(HTML::li($li));
+	    }
+	    $body = $html;
+	}
         $this->_tokens = array('HEADER' => $head, 'CONTENT' => $body);
         $this->_buttons = $buttons;
     }
@@ -1853,13 +1987,7 @@ function fixTitleEncoding( $s ) {
     $locharset = strtolower($charset);
 
     if( $locharset != "utf-8" and $ishigh and $isutf )
-        // if charset == 'iso-8859-1' then simply use utf8_decode()
-        if ($locharset == 'iso-8859-1')
-            return utf8_decode( $s );
-        else
-            // TODO: check for iconv support
-            return iconv( "UTF-8", $charset, $s );
-
+	$s = charset_convert('UTF-8', $locharset, $s);
     if ($locharset == "utf-8" and $ishigh and !$isutf )
         return utf8_encode( $s );
 
@@ -1966,7 +2094,7 @@ function firstNWordsOfContent( $n, $content ) {
 function extractSection ($section, $content, $page, $quiet = false, $sectionhead = false) {
     $qsection = preg_replace('/\s+/', '\s+', preg_quote($section, '/'));
 
-    if (preg_match("/ ^(!{1,})\\s*$qsection" // section header
+    if (preg_match("/ ^(!{1,}|={2,})\\s*$qsection" // section header
                    . "  \\s*$\\n?"           // possible blank lines
                    . "  ( (?: ^.*\\n? )*? )" // some lines
                    . "  (?= ^\\1 | \\Z)/xm", // sec header (same or higher level) (or EOF)
@@ -1985,6 +2113,36 @@ function extractSection ($section, $content, $page, $quiet = false, $sectionhead
     return array(sprintf(_("<%s: no such section>"), $mesg));
 }
 
+// Extract the first $sections sections of the page
+function extractSections ($sections, $content, $page, $quiet = false, $sectionhead = false) {
+
+    $mycontent = $content;
+    $result = "";
+
+    while ($sections > 0) {
+
+        if (preg_match("/ ^(!{1,})\\s*(.*)\\n"   // section header
+                       . "  \\s*$\\n?"           // possible blank lines
+                       . "  ( (?: ^.*\\n? )*? )" // some lines
+                       . "  ( ^\\1 (.|\\n)* | \\Z)/xm", // sec header (same or higher level) (or EOF)
+                       implode("\n", $mycontent),
+                       $match)) {
+            $section = $match[2];
+            // Strip trailing blanks lines and ---- <hr>s
+            $text = preg_replace("/\\s*^-{4,}\\s*$/m", "", $match[3]);
+            if ($sectionhead)
+                $text = $match[1] . $section ."\n". $text;
+            $result .= $text; 
+
+            $mycontent = explode("\n", $match[4]);
+            $sections--;
+            if ($sections === 0) {
+                return explode("\n", $result);
+            }
+        }
+    }
+}
+
 // use this faster version: only load ExternalReferrer if we came from an external referrer
 function isExternalReferrer(&$request) {
     if ($referrer = $request->get('HTTP_REFERER')) {
@@ -1994,6 +2152,7 @@ function isExternalReferrer(&$request) {
         $se = new SearchEngines();
         return $se->parseSearchQuery($referrer);
     }
+    //if (DEBUG) return array('query' => 'wiki');
     return false;
 }
 
@@ -2002,11 +2161,35 @@ function isExternalReferrer(&$request) {
  */
 function loadPhpExtension($extension) {
     if (!extension_loaded($extension)) {
-        $soname = (isWindows() ? 'php_' : '') . $extension . (isWindows() ? '.dll' : '.so');
+	$isWindows = (substr(PHP_OS,0,3) == 'WIN');
+        $soname = ($isWindows ? 'php_' : '') 
+	        . $extension 
+	        . ($isWindows ? '.dll' : '.so');
         if (!@dl($soname))
             return false;
     }
     return extension_loaded($extension);
+}
+
+function charset_convert($from, $to, $data) {
+    //global $CHARSET;
+    //$wikicharset = strtolower($CHARSET);
+    //$systemcharset = strtolower(get_cfg_var('iconv.internal_encoding')); // 'iso-8859-1';
+    if (strtolower($from) == 'utf-8' and strtolower($to) == 'iso-8859-1')
+	return utf8_decode($data);
+    if (strtolower($to) == 'utf-8' and strtolower($from) == 'iso-8859-1')
+	return utf8_encode($data);
+
+    if (loadPhpExtension("iconv")) {
+	$tmpdata = iconv($from, $to, $data);
+	if (!$tmpdata)
+	    trigger_error("charset conversion $from => $to failed. Wrong source charset?", E_USER_WARNING);
+	else
+	    $data = $tmpdata;
+    } else {
+	trigger_error("The iconv extension cannot be loaded", E_USER_WARNING);
+    }
+    return $data;
 }
 
 function string_starts_with($string, $prefix) {
@@ -2014,6 +2197,9 @@ function string_starts_with($string, $prefix) {
 }
 function string_ends_with($string, $suffix) {
     return (substr($string, -strlen($suffix)) == $suffix);
+}
+function array_remove($arr,$value) {
+   return array_values(array_diff($arr,array($value)));
 }
 
 /** 
@@ -2031,27 +2217,32 @@ function longer_timeout($secs = 30) {
 
 function printSimpleTrace($bt) {
     //print_r($bt);
-    echo "Traceback:\n";
-    foreach ($bt as $i => $elem) {
-        if (!array_key_exists('file', $elem)) {
-            continue;
-        }
-        echo join(" ",array_values($elem)),"\n";
-        //print "  " . $elem['file'] . ':' . $elem['line'] . " " .$elem['function']"\n";
+    echo "\nTraceback:\n";
+    if (function_exists('debug_print_backtrace')) { // >= 5
+	debug_print_backtrace();
+    } else {
+	foreach ($bt as $i => $elem) {
+	    if (!array_key_exists('file', $elem)) {
+		continue;
+	    }
+	    //echo join(" ",array_values($elem)),"\n";
+	    echo "  ",$elem['file'],':',$elem['line']," ",$elem['function'],"\n";
+	}
     }
 }
 
 /**
- * Return the used process memory (in byte?)
- * Enable the section which will work for you. (They are very slow)
+ * Return the used process memory, in bytes.
+ * Enable the section which will work for you. They are very slow.
  * Special quirks for Windows: Requires cygwin.
  */
 function getMemoryUsage() {
+    //if (!(DEBUG & _DEBUG_VERBOSE)) return;
     if (function_exists('memory_get_usage') and memory_get_usage()) {
         return memory_get_usage();
-    } elseif (function_exists('getrusage') and ($u = getrusage()) and !empty($u['ru_maxrss'])) {
+    } elseif (function_exists('getrusage') and ($u = @getrusage()) and !empty($u['ru_maxrss'])) {
         $mem = $u['ru_maxrss'];
-    } elseif (substr(PHP_OS,0,3) == 'WIN') { // requires a newer cygwin
+    } elseif (substr(PHP_OS,0,3) == 'WIN') { // may require a newer cygwin
         // what we want is the process memory only: apache or php (if CGI)
         $pid = getmypid();
         $memstr = '';
@@ -2059,14 +2250,14 @@ function getMemoryUsage() {
  	if (function_exists('win32_ps_list_procs')) {
 	    $info = win32_ps_stat_proc($pid);
 	    $memstr = $info['mem']['working_set_size'];
-	} else {
+	} elseif(0) {
 	    // This works only if it's a cygwin process (apache or php).
 	    // Requires a newer cygwin
-	    //$memstr = exec("cat /proc/$pid/statm |cut -f1");
+	    $memstr = exec("cat /proc/$pid/statm |cut -f1");
 
 	    // if it's native windows use something like this: 
-	    //   (requires pslist from sysinternals.com)
-	    $memstr = exec("pslist $pid|grep -A1 Mem|sed 1d|perl -ane\"print \$"."F[5]\"");
+	    //   (requires pslist from sysinternals.com, grep, sed and perl)
+	    //$memstr = exec("pslist $pid|grep -A1 Mem|sed 1d|perl -ane\"print \$"."F[5]\"");
         }
         return (integer) trim($memstr);
     } elseif (1) {
@@ -2081,382 +2272,248 @@ function getMemoryUsage() {
     }
 }
 
-// $Log: stdlib.php,v $
-// Revision 1.251  2006/03/19 15:01:00  rurban
-// sf.net patch #1333957 by Matt Brown: Authentication cookie identical across all wikis on a host
-//
-// Revision 1.250  2006/03/07 20:45:44  rurban
-// wikihash for php-5.1
-//
-// Revision 1.249  2005/10/30 14:24:33  rurban
-// move rand_ascii_readable from Captcha to stdlib
-//
-// Revision 1.248  2005/10/29 14:18:30  uckelman
-// Added is_a() deprecation note.
-//
-// Revision 1.247  2005/10/10 20:31:21  rurban
-// fix win32ps call
-//
-// Revision 1.246  2005/10/10 19:38:48  rurban
-// add win32ps
-//
-// Revision 1.245  2005/09/18 16:01:09  rurban
-// trick to send the correct gzipped Content-Length
-//
-// Revision 1.244  2005/09/11 13:24:33  rurban
-// fix shortname, dont quote twice in ListRegexExpand
-//
-// Revision 1.243  2005/08/06 15:01:38  rurban
-// workaround php VBASIC alike limitation: allow integer pagenames
-//
-// Revision 1.242  2005/08/06 13:07:04  rurban
-// quote paths correctly (not the best method though)
-//
-// Revision 1.241  2005/05/06 16:54:19  rurban
-// support optional EXTERNAL_LINK_TARGET, default: _blank
-//
-// Revision 1.240  2005/04/23 11:15:49  rurban
-// handle allowed inlined objects within INLINE_IMAGES
-//
-// Revision 1.239  2005/04/01 16:11:42  rurban
-// just whitespace
-//
-// Revision 1.238  2005/03/04 16:29:14  rurban
-// Fixed bug #994994 (escape / in glob)
-// Optimized glob_to_pcre within fileSet() matching.
-//
-// Revision 1.237  2005/02/12 17:22:18  rurban
-// locale update: missing . : fixed. unified strings
-// proper linebreaks
-//
-// Revision 1.236  2005/02/08 13:41:32  rurban
-// add rand_ascii
-//
-// Revision 1.235  2005/02/04 11:54:48  rurban
-// fix Talk: names
-//
-// Revision 1.234  2005/02/03 05:09:25  rurban
-// Talk: + User: fix
-//
-// Revision 1.233  2005/02/02 20:40:12  rurban
-// fix Talk: and User: names and links
-//
-// Revision 1.232  2005/02/02 19:34:09  rurban
-// more maps: Talk, User
-//
-// Revision 1.231  2005/01/30 19:48:52  rurban
-// enable ps memory on unix
-//
-// Revision 1.230  2005/01/25 07:10:51  rurban
-// add getMemoryUsage to stdlib
-//
-// Revision 1.229  2005/01/21 11:51:22  rurban
-// changed (c)
-//
-// Revision 1.228  2005/01/17 20:28:30  rurban
-// Allow more pagename chars: Limit only on certain backends.
-// Re-Allow : and ; and control chars on non-file backends.
-//
-// Revision 1.227  2005/01/14 18:32:08  uckelman
-// ConvertOldMarkup did not properly handle links containing pairs of pairs
-// of underscores. (E.g., [http://example.com/foo__bar__.html] would be
-// munged by the regex for bold text.) Now '__' in links are hidden prior to
-// conversion of '__' into '<strong>', and then unhidden afterwards.
-//
-// Revision 1.226  2004/12/26 17:12:06  rurban
-// avoid stdargs in url, php5 fixes
-//
-// Revision 1.225  2004/12/22 19:02:29  rurban
-// fix glob for starting * or ?
-//
-// Revision 1.224  2004/12/20 12:11:50  rurban
-// fix "lib/stdlib.php:1348: Warning[2]: Compilation failed: unmatched parentheses at offset 2"
-//   not reproducable other than on sf.net, but this seems to fix it.
-//
-// Revision 1.223  2004/12/18 16:49:29  rurban
-// fix RPC for !USE_PATH_INFO, add debugging helper
-//
-// Revision 1.222  2004/12/17 16:40:45  rurban
-// add not yet used url helper
-//
-// Revision 1.221  2004/12/06 19:49:58  rurban
-// enable action=remove which is undoable and seeable in RecentChanges: ADODB ony for now.
-// renamed delete_page to purge_page.
-// enable action=edit&version=-1 to force creation of a new version.
-// added BABYCART_PATH config
-// fixed magiqc in adodb.inc.php
-// and some more docs
-//
-// Revision 1.220  2004/11/30 17:47:41  rurban
-// added mt_srand, check for native isa
-//
-// Revision 1.219  2004/11/26 18:39:02  rurban
-// new regex search parser and SQL backends (90% complete, glob and pcre backends missing)
-//
-// Revision 1.218  2004/11/25 08:28:48  rurban
-// support exclude
-//
-// Revision 1.217  2004/11/16 17:31:03  rurban
-// re-enable old block markup conversion
-//
-// Revision 1.216  2004/11/11 18:31:26  rurban
-// add simple backtrace on such general failures to get at least an idea where
-//
-// Revision 1.215  2004/11/11 14:34:12  rurban
-// minor clarifications
-//
-// Revision 1.214  2004/11/11 11:01:20  rurban
-// fix loadPhpExtension
-//
-// Revision 1.213  2004/11/01 10:43:57  rurban
-// seperate PassUser methods into seperate dir (memory usage)
-// fix WikiUser (old) overlarge data session
-// remove wikidb arg from various page class methods, use global ->_dbi instead
-// ...
-//
-// Revision 1.212  2004/10/22 09:15:39  rurban
-// Alert::show has no arg anymore
-//
-// Revision 1.211  2004/10/22 09:05:11  rurban
-// added longer_timeout (HttpClient)
-// fixed warning
-//
-// Revision 1.210  2004/10/14 21:06:02  rurban
-// fix dumphtml with USE_PATH_INFO (again). fix some PageList refs
-//
-// Revision 1.209  2004/10/14 19:19:34  rurban
-// loadsave: check if the dumped file will be accessible from outside.
-// and some other minor fixes. (cvsclient native not yet ready)
-//
-// Revision 1.208  2004/10/12 13:13:20  rurban
-// php5 compatibility (5.0.1 ok)
-//
-// Revision 1.207  2004/09/26 12:21:40  rurban
-// removed old log entries.
-// added persistent start_debug on internal links and DEBUG
-// added isExternalReferrer (not yet used)
-//
-// Revision 1.206  2004/09/25 16:28:36  rurban
-// added to TOC, firstNWordsOfContent is now plugin compatible, added extractSection
-//
-// Revision 1.205  2004/09/23 13:59:35  rurban
-// Before removing a page display a sample of 100 words.
-//
-// Revision 1.204  2004/09/17 13:19:15  rurban
-// fix LinkPhpwikiURL bug reported in http://phpwiki.sourceforge.net/phpwiki/KnownBugs
-// by SteveBennett.
-//
-// Revision 1.203  2004/09/16 08:00:52  rurban
-// just some comments
-//
-// Revision 1.202  2004/09/14 10:11:44  rurban
-// start 2nd Id with ...Plugin2
-//
-// Revision 1.201  2004/09/14 10:06:42  rurban
-// generate iterated plugin ids, set plugin span id also
-//
-// Revision 1.200  2004/08/05 17:34:26  rurban
-// move require to sortby branch
-//
-// Revision 1.199  2004/08/05 10:38:15  rurban
-// fix Bug #993692:  Making Snapshots or Backups doesn't work anymore
-// in CVS version.
-//
-// Revision 1.198  2004/07/02 10:30:36  rurban
-// always disable getimagesize for < php-4.3 with external png's
-//
-// Revision 1.197  2004/07/02 09:55:58  rurban
-// more stability fixes: new DISABLE_GETIMAGESIZE if your php crashes when loading LinkIcons: failing getimagesize in old phps; blockparser stabilized
-//
-// Revision 1.196  2004/07/01 08:51:22  rurban
-// dumphtml: added exclude, print pagename before processing
-//
-// Revision 1.195  2004/06/29 08:52:22  rurban
-// Use ...version() $need_content argument in WikiDB also:
-// To reduce the memory footprint for larger sets of pagelists,
-// we don't cache the content (only true or false) and
-// we purge the pagedata (_cached_html) also.
-// _cached_html is only cached for the current pagename.
-// => Vastly improved page existance check, ACL check, ...
-//
-// Now only PagedList info=content or size needs the whole content, esp. if sortable.
-//
-// Revision 1.194  2004/06/29 06:48:04  rurban
-// Improve LDAP auth and GROUP_LDAP membership:
-//   no error message on false password,
-//   added two new config vars: LDAP_OU_USERS and LDAP_OU_GROUP with GROUP_METHOD=LDAP
-//   fixed two group queries (this -> user)
-// stdlib: ConvertOldMarkup still flawed
-//
-// Revision 1.193  2004/06/28 13:27:03  rurban
-// CreateToc disabled for old markup and Apache2 only
-//
-// Revision 1.192  2004/06/28 12:47:43  rurban
-// skip if non-DEBUG and old markup with CreateToc
-//
-// Revision 1.191  2004/06/25 14:31:56  rurban
-// avoid debug_skip warning
-//
-// Revision 1.190  2004/06/25 14:29:20  rurban
-// WikiGroup refactoring:
-//   global group attached to user, code for not_current user.
-//   improved helpers for special groups (avoid double invocations)
-// new experimental config option ENABLE_XHTML_XML (fails with IE, and document.write())
-// fixed a XHTML validation error on userprefs.tmpl
-//
-// Revision 1.189  2004/06/20 09:45:35  rurban
-// php5 isa fix (wrong strtolower)
-//
-// Revision 1.188  2004/06/16 10:38:58  rurban
-// Disallow refernces in calls if the declaration is a reference
-// ("allow_call_time_pass_reference clean").
-//   PhpWiki is now allow_call_time_pass_reference = Off clean,
-//   but several external libraries may not.
-//   In detail these libs look to be affected (not tested):
-//   * Pear_DB odbc
-//   * adodb oracle
-//
-// Revision 1.187  2004/06/14 11:31:37  rurban
-// renamed global $Theme to $WikiTheme (gforge nameclash)
-// inherit PageList default options from PageList
-//   default sortby=pagename
-// use options in PageList_Selectable (limit, sortby, ...)
-// added action revert, with button at action=diff
-// added option regex to WikiAdminSearchReplace
-//
-// Revision 1.186  2004/06/13 13:54:25  rurban
-// Catch fatals on the four dump calls (as file and zip, as html and mimified)
-// FoafViewer: Check against external requirements, instead of fatal.
-// Change output for xhtmldumps: using file:// urls to the local fs.
-// Catch SOAP fatal by checking for GOOGLE_LICENSE_KEY
-// Import GOOGLE_LICENSE_KEY and FORTUNE_DIR from config.ini.
-//
-// Revision 1.185  2004/06/11 09:07:30  rurban
-// support theme-specific LinkIconAttr: front or after or none
-//
-// Revision 1.184  2004/06/04 20:32:53  rurban
-// Several locale related improvements suggested by Pierrick Meignen
-// LDAP fix by John Cole
-// reanable admin check without ENABLE_PAGEPERM in the admin plugins
-//
-// Revision 1.183  2004/06/01 10:22:56  rurban
-// added url_get_contents() used in XmlParser and elsewhere
-//
-// Revision 1.182  2004/05/25 12:40:48  rurban
-// trim the pagename
-//
-// Revision 1.181  2004/05/25 10:18:44  rurban
-// Check for UTF-8 URLs; Internet Explorer produces these if you
-// type non-ASCII chars in the URL bar or follow unescaped links.
-// Fixes sf.net bug #953949
-// src: languages/Language.php:checkTitleEncoding() from mediawiki
-//
-// Revision 1.180  2004/05/18 16:23:39  rurban
-// rename split_pagename to SplitPagename
-//
-// Revision 1.179  2004/05/18 16:18:37  rurban
-// AutoSplit at subpage seperators
-// RssFeed stability fix for empty feeds or broken connections
-//
-// Revision 1.178  2004/05/12 10:49:55  rurban
-// require_once fix for those libs which are loaded before FileFinder and
-//   its automatic include_path fix, and where require_once doesn't grok
-//   dirname(__FILE__) != './lib'
-// upgrade fix with PearDB
-// navbar.tmpl: remove spaces for IE &nbsp; button alignment
-//
-// Revision 1.177  2004/05/08 14:06:12  rurban
-// new support for inlined image attributes: [image.jpg size=50x30 align=right]
-// minor stability and portability fixes
-//
-// Revision 1.176  2004/05/08 11:25:15  rurban
-// php-4.0.4 fixes
-//
-// Revision 1.175  2004/05/06 17:30:38  rurban
-// CategoryGroup: oops, dos2unix eol
-// improved phpwiki_version:
-//   pre -= .0001 (1.3.10pre: 1030.099)
-//   -p1 += .001 (1.3.9-p1: 1030.091)
-// improved InstallTable for mysql and generic SQL versions and all newer tables so far.
-// abstracted more ADODB/PearDB methods for action=upgrade stuff:
-//   backend->backendType(), backend->database(),
-//   backend->listOfFields(),
-//   backend->listOfTables(),
-//
-// Revision 1.174  2004/05/06 12:02:05  rurban
-// fix sf.net bug#949002: [ Link | ] assertion
-//
-// Revision 1.173  2004/05/03 15:00:31  rurban
-// added more database upgrading: session.sess_ip, page.id autp_increment
-//
-// Revision 1.172  2004/04/26 20:44:34  rurban
-// locking table specific for better databases
-//
-// Revision 1.171  2004/04/19 23:13:03  zorloc
-// Connect the rest of PhpWiki to the IniConfig system.  Also the keyword regular expression is not a config setting
-//
-// Revision 1.170  2004/04/19 18:27:45  rurban
-// Prevent from some PHP5 warnings (ref args, no :: object init)
-//   php5 runs now through, just one wrong XmlElement object init missing
-// Removed unneccesary UpgradeUser lines
-// Changed WikiLink to omit version if current (RecentChanges)
-//
-// Revision 1.169  2004/04/15 21:29:48  rurban
-// allow [0] with new markup: link to page "0"
-//
-// Revision 1.168  2004/04/10 02:30:49  rurban
-// Fixed gettext problem with VIRTUAL_PATH scripts (Windows only probably)
-// Fixed "cannot setlocale..." (sf.net problem)
-//
-// Revision 1.167  2004/04/02 15:06:55  rurban
-// fixed a nasty ADODB_mysql session update bug
-// improved UserPreferences layout (tabled hints)
-// fixed UserPreferences auth handling
-// improved auth stability
-// improved old cookie handling: fixed deletion of old cookies with paths
-//
-// Revision 1.166  2004/04/01 15:57:10  rurban
-// simplified Sidebar theme: table, not absolute css positioning
-// added the new box methods.
-// remaining problems: large left margin, how to override _autosplitWikiWords in Template only
-//
-// Revision 1.165  2004/03/24 19:39:03  rurban
-// php5 workaround code (plus some interim debugging code in XmlElement)
-//   php5 doesn't work yet with the current XmlElement class constructors,
-//   WikiUserNew does work better than php4.
-// rewrote WikiUserNew user upgrading to ease php5 update
-// fixed pref handling in WikiUserNew
-// added Email Notification
-// added simple Email verification
-// removed emailVerify userpref subclass: just a email property
-// changed pref binary storage layout: numarray => hash of non default values
-// print optimize message only if really done.
-// forced new cookie policy: delete pref cookies, use only WIKI_ID as plain string.
-//   prefs should be stored in db or homepage, besides the current session.
-//
-// Revision 1.164  2004/03/18 21:41:09  rurban
-// fixed sqlite support
-// WikiUserNew: PHP5 fixes: don't assign $this (untested)
-//
-// Revision 1.163  2004/03/17 18:41:49  rurban
-// just reformatting
-//
-// Revision 1.162  2004/03/16 15:43:08  rurban
-// make fileSet sortable to please PageList
-//
-// Revision 1.161  2004/03/12 15:48:07  rurban
-// fixed explodePageList: wrong sortby argument order in UnfoldSubpages
-// simplified lib/stdlib.php:explodePageList
-//
-// Revision 1.160  2004/02/28 21:14:08  rurban
-// generally more PHPDOC docs
-//   see http://xarch.tu-graz.ac.at/home/rurban/phpwiki/xref/
-// fxied WikiUserNew pref handling: empty theme not stored, save only
-//   changed prefs, sql prefs improved, fixed password update,
-//   removed REPLACE sql (dangerous)
-// moved gettext init after the locale was guessed
-// + some minor changes
-//
+/**
+ * @param var $needle
+ * @param array $haystack one-dimensional numeric array only, no hash
+ * @return integer
+ * @desc Feed a sorted array to $haystack and a value to search for to $needle.
+             It will return false if not found or the index where it was found.
+  From dennis.decoene@moveit.be http://www.php.net/array_search
+*/
+function binary_search($needle, $haystack) {
+    $high = count($haystack);
+    $low = 0;
+   
+    while (($high - $low) > 1) {
+        $probe = floor(($high + $low) / 2);
+        if ($haystack[$probe] < $needle) {
+            $low = $probe;
+        } elseif ($haystack[$probe] == $needle) {
+            $high = $low = $probe;
+        } else {
+            $high = $probe;
+        }
+    }
+
+    if ($high == count($haystack) || $haystack[$high] != $needle) {
+        return false;
+    } else {
+        return $high;
+    }
+}
+
+function is_localhost($url = false) {
+    if (!$url) {
+    	global $HTTP_SERVER_VARS;
+    	return $HTTP_SERVER_VARS['SERVER_ADDR'] == '127.0.0.1';
+    }
+}
+
+/**
+ * Take a string and quote it sufficiently to be passed as a Javascript
+ * string between ''s
+ */
+function javascript_quote_string($s) {
+    return str_replace("'", "\'", $s);
+}
+
+function isSerialized($s) {
+    return (!empty($s) and (strlen($s) > 3) and (substr($s,1,1) == ':'));
+}
+
+/**
+ * Take a string and return an array of pairs (attribute name, attribute value)
+ *
+ * We allow attributes with or without double quotes (")
+ * Attribute-value pairs may be separated by space or comma
+ * border=1, cellpadding="5"
+ * border=1 cellpadding="5"
+ * style="font-family: sans-serif; border-top:1px solid #dddddd;"
+ * What will not work is style with comma inside, e. g.
+ / style="font-family: Verdana, Arial, Helvetica, sans-serif"
+ */
+function parse_attributes($line) {
+    if (empty($line)) return array();
+    $line = strtolower($line);
+    $line = str_replace(",", "", $line);
+    $attr_chunks = preg_split("/\s* \s*/", $line);
+    $options = array();
+    foreach ($attr_chunks as $attr_pair) {
+        if (empty($attr_pair)) continue;
+        $key_val = preg_split("/\s*=\s*/", $attr_pair);
+        if (!empty($key_val[1]))
+            $options[trim($key_val[0])] = trim(str_replace("\"", "", $key_val[1]));
+    }
+    return $options;
+}
+
+/**
+ * Returns true if the filename ends with an image suffix.
+ * Uses INLINE_IMAGES if defined, else "png|jpg|jpeg|gif"
+ */
+function is_image ($filename) {
+
+    if (defined('INLINE_IMAGES')) {
+        $inline_images = INLINE_IMAGES;
+    } else {
+        $inline_images = "png|jpg|jpeg|gif";
+    }
+
+    foreach (explode("|", $inline_images) as $suffix) {
+        if (string_ends_with($filename, "." . $suffix)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
+ * Compute cell in spreadsheet table
+ * $table: two-dimensional table
+ * $i and $j: indexes of cell to compute
+ * $imax and $jmax: table dimensions
+ */
+function compute_tablecell ($table, $i, $j, $imax, $jmax) {
+
+    // What is implemented:
+    // @@=SUM(R)@@ : sum of cells in current row
+    // @@=SUM(C)@@ : sum of cells in current column
+    // @@=AVERAGE(R)@@ : average of cells in current row
+    // @@=AVERAGE(C)@@ : average of cells in current column
+    // @@=MAX(R)@@ : maximum value of cells in current row
+    // @@=MAX(C)@@ : maximum value of cells in current column
+    // @@=MIN(R)@@ : minimum value of cells in current row
+    // @@=MIN(C)@@ : minimum value of cells in current column
+    // @@=COUNT(R)@@ : number of cells in current row
+    //                (numeric or not, excluding headers and current cell)
+    // @@=COUNT(C)@@ : number of cells in current column
+    //                (numeric or not, excluding headers and current cell)
+
+    $result=0;
+    $counter=0;
+    $found=false;
+
+    if (strpos($table[$i][$j], "@@=SUM(C)@@") !== false) {
+        for ($index=0; $index<$imax; $index++) {
+            if (is_numeric($table[$index][$j])) {
+                $result += $table[$index][$j];
+            }
+        }
+        return str_replace("@@=SUM(C)@@", $result, $table[$i][$j]);
+
+    } else if (strpos($table[$i][$j], "@@=SUM(R)@@") !== false) {
+        for ($index=0; $index<$jmax; $index++) {
+            if (is_numeric($table[$i][$index])) {
+                $result += $table[$i][$index];
+            }
+        }
+        return str_replace("@@=SUM(R)@@", $result, $table[$i][$j]);
+
+    } else if (strpos($table[$i][$j], "@@=AVERAGE(C)@@") !== false) {
+        for ($index=0; $index<$imax; $index++) {
+            if (is_numeric($table[$index][$j])) {
+                $result += $table[$index][$j];
+                $counter++;
+            }
+        }
+        $result=$result/$counter;
+        return str_replace("@@=AVERAGE(C)@@", $result, $table[$i][$j]);
+
+    } else if (strpos($table[$i][$j], "@@=AVERAGE(R)@@") !== false) {
+        for ($index=0; $index<$jmax; $index++) {
+            if (is_numeric($table[$i][$index])) {
+                $result += $table[$i][$index];
+                $counter++;
+            }
+        }
+        $result=$result/$counter;
+        return str_replace("@@=AVERAGE(R)@@", $result, $table[$i][$j]);
+
+    } else if (strpos($table[$i][$j], "@@=MAX(C)@@") !== false) {
+        for ($index=0; $index<$imax; $index++) {
+            if (is_numeric($table[$index][$j])) {
+                if (!$found) {
+                    $found=true;
+                    $result=$table[$index][$j];
+                } else {
+                    $result = max($result, $table[$index][$j]);
+                }
+            }
+        }
+        if (!$found) {
+            $result="";
+        }
+        return str_replace("@@=MAX(C)@@", $result, $table[$i][$j]);
+
+    } else if (strpos($table[$i][$j], "@@=MAX(R)@@") !== false) {
+        for ($index=0; $index<$jmax; $index++) {
+            if (is_numeric($table[$i][$index])) {
+                if (!$found) {
+                    $found=true;
+                    $result=$table[$i][$index];
+                } else {
+                    $result = max($result, $table[$i][$index]);
+                }
+            }
+        }
+        if (!$found) {
+            $result="";
+        }
+        return str_replace("@@=MAX(R)@@", $result, $table[$i][$j]);
+
+    } else if (strpos($table[$i][$j], "@@=MIN(C)@@") !== false) {
+        for ($index=0; $index<$imax; $index++) {
+            if (is_numeric($table[$index][$j])) {
+                if (!$found) {
+                    $found=true;
+                    $result=$table[$index][$j];
+                } else {
+                    $result = min($result, $table[$index][$j]);
+                }
+            }
+        }
+        if (!$found) {
+            $result="";
+        }
+        return str_replace("@@=MIN(C)@@", $result, $table[$i][$j]);
+
+    } else if (strpos($table[$i][$j], "@@=MIN(R)@@") !== false) {
+        for ($index=0; $index<$jmax; $index++) {
+            if (is_numeric($table[$i][$index])) {
+                if (!$found) {
+                    $found=true;
+                    $result=$table[$i][$index];
+                } else {
+                    $result = min($result, $table[$i][$index]);
+                }
+            }
+        }
+        if (!$found) {
+            $result="";
+        }
+        return str_replace("@@=MIN(R)@@", $result, $table[$i][$j]);
+
+    } else if (strpos($table[$i][$j], "@@=COUNT(C)@@") !== false) {
+        for ($index=0; $index<$imax; $index++) {
+            if (!string_starts_with(trim($table[$index][$j]), "=")) { // exclude header
+                $counter++;
+            }
+        }
+        $result = $counter-1; // exclude self
+        return str_replace("@@=COUNT(C)@@", $result, $table[$i][$j]);
+
+    } else if (strpos($table[$i][$j], "@@=COUNT(R)@@") !== false) {
+        for ($index=0; $index<$jmax; $index++) {
+            if (!string_starts_with(trim($table[$i][$index]), "=")) { // exclude header
+                $counter++;
+            }
+        }
+        $result = $counter-1; // exclude self
+        return str_replace("@@=COUNT(R)@@", $result, $table[$i][$j]);
+    }
+
+    return $table[$i][$j];
+}
 
 // (c-file-style: "gnu")
 // Local Variables:

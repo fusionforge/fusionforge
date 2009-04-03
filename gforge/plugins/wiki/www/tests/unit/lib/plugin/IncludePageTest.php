@@ -23,7 +23,7 @@ class IncludePageTest extends phpwiki_TestCase {
     function testOldTextFormattingRules() {
         global $request;
 
-	$pagename = 'OldTextFormattingRules';
+	$pagename = 'Help/OldTextFormattingRules';
     	$this->_ensure_loaded($pagename);
         $dbi = $request->getDbh();
         $p = $dbi->getPage($pagename);
@@ -37,7 +37,7 @@ class IncludePageTest extends phpwiki_TestCase {
     function testTextFormattingRules() {
         global $request;
 
-	$pagename = 'TextFormattingRules';
+	$pagename = 'Help/TextFormattingRules';
     	$this->_ensure_loaded($pagename);
         $dbi = $request->getDbh();
         $p = $dbi->getPage($pagename);
@@ -52,7 +52,7 @@ class IncludePageTest extends phpwiki_TestCase {
      */
     function testIncludePageSynopsis() {
         global $request;
-	$pagename = 'TextFormattingRules';
+	$pagename = 'Help/TextFormattingRules';
 
         $lp = new WikiPlugin_IncludePage();
         $this->assertEquals("IncludePage", $lp->getName());

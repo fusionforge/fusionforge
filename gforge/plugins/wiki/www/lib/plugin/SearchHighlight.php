@@ -1,7 +1,7 @@
 <?php // -*-php-*-
-rcs_id('$Id: SearchHighlight.php,v 1.1 2004/09/26 14:58:36 rurban Exp $');
+rcs_id('$Id: SearchHighlight.php 6185 2008-08-22 11:40:14Z vargenau $');
 /*
-Copyright 2004 $ThePhpWikiProgrammingTeam
+Copyright 2004,2007 $ThePhpWikiProgrammingTeam
 
 This file is NOT part of PhpWiki.
 
@@ -23,12 +23,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 require_once("lib/TextSearchQuery.php");
 require_once("lib/PageList.php");
 
-/** When someone is referred from a search engine like Google, Yahoo
+/** 
+ * When someone is referred from a search engine like Google, Yahoo
  * or our own fulltextsearch, the terms they search for are highlighted.
  * See http://wordpress.org/about/shots/1.2/plugins.png
  *
- * Could be hooked from lib/display.php (but then not possible for actionpages) 
- * or at request->flush or on a template. (if google referrer, search)
+ * This plugin is normally just used to print a header through an action page.
+ * The highlighting is done through InlineParser automatically if ENABLE_SEARCHHIGHLIGHT is enabled.
+ * If hits = 1, then the list of found terms is also printed.
  */
 class WikiPlugin_SearchHighlight
 extends WikiPlugin
@@ -43,11 +45,14 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.1 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
-        return array('s'        => false,
+        // s, engine and engine_url are picked from the request
+        return array('noheader' => false,    //don't print the header
+                     'hits'     => false,    //print the list of lines with lines terms additionally
+                     's'        => false,
                      'case_exact' => false,  //not yet supported
                      'regex'    => false,    //not yet supported
                      );
@@ -55,43 +60,59 @@ extends WikiPlugin
 
     function run($dbi, $argstr, &$request, $basepage) {
         $args = $this->getArgs($argstr, $request);
+        if (empty($args['s']) and isset($request->_searchhighlight)) {
+            $args['s'] = $request->_searchhighlight['query'];
+        }
         if (empty($args['s']))
             return '';
-
         extract($args);
-
-        $query = new TextSearchQuery($s, $case_exact, $regex);
-        //$pages = $dbi->fullSearch($query);
-        $lines = array();
-        $hilight_re = $query->getHighlightRegexp();
-        $page = $request->getPage();
-        return $this->showhits($page, $hilight_re);
+        $html = HTML();
+        if (!$noheader and isset($request->_searchhighlight)) {
+            $engine = $request->_searchhighlight['engine'];
+            $html->pushContent(HTML::div(array('class' => 'search-context'),
+            				 fmt("%s: Found %s through %s", 
+            				     $basepage,
+                                             $request->_searchhighlight['query'], 
+                                             $engine)));
+        }
+        if ($hits) {
+            $query = new TextSearchQuery($s, $case_exact, $regex);
+            $lines = array();
+            $hilight_re = $query->getHighlightRegexp();
+            $page = $request->getPage();
+            $html->pushContent($this->showhits($page, $hilight_re));
+        }
+        return $html;
     }
 
     function showhits($page, $hilight_re) {
         $current = $page->getCurrentRevision();
         $matches = preg_grep("/$hilight_re/i", $current->getContent());
-        $html = array();
+        $html = HTML::dl();
         foreach ($matches as $line) {
             $line = $this->highlight_line($line, $hilight_re);
-            $html[] = HTML::dd(HTML::small(array('class' => 'search-context'),
-                                           $line));
+            $html->pushContent(HTML::dd(array('class' => 'search-context'),
+                                        HTML::small($line)));
         }
         return $html;
     }
 
     function highlight_line ($line, $hilight_re) {
+        $html = HTML();
         while (preg_match("/^(.*?)($hilight_re)/i", $line, $m)) {
             $line = substr($line, strlen($m[0]));
-            $html[] = $m[1];    // prematch
-            $html[] = HTML::strong(array('class' => 'search-term'), $m[2]); // match
+            // prematch + match
+            $html->pushContent($m[1], HTML::strong(array('class' => 'search-term'), $m[2])); 
         }
-        $html[] = $line;        // postmatch
+        $html->pushContent($line);       // postmatch
         return $html;
     }
 };
 
-// $Log: SearchHighlight.php,v $
+// $Log: not supported by cvs2svn $
+// Revision 1.2  2007/01/20 15:53:51  rurban
+// Rewrite of SearchHighlight: through ActionPage and InlineParser
+//
 // Revision 1.1  2004/09/26 14:58:36  rurban
 // naive SearchHighLight implementation
 //

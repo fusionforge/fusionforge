@@ -1,0 +1,35 @@
+Date: Sat, 24 Jan 2009 20:18:24 +0100
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
+X-Rcs-Id: $Id: Help%2FWikiPollPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FWikiPollPlugin;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=iso-8859-1
+Content-Transfer-Encoding: binary
+
+The *~WikiPoll* [[Help:WikiPlugin|plugin]] provides configurable polls.
+
+== Usage
+<verbatim>
+<?plugin WikiPoll arguments
+    questions
+?>
+</verbatim>
+
+== Arguments
+
+page _(default: current pagename)_:
+  The page to execute upon.
+
+== Example
+
+See example in [PhpWikiPoll].
+
+== Author
+* [Reini Urban|PhpWiki:ReiniUrban]
+
+== See Also
+
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]

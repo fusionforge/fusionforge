@@ -1,5 +1,5 @@
 <?php // -*-html-*- ?>
-<!-- $Id: userprefs.tmpl,v 1.57 2005/06/05 05:38:02 rurban Exp $ -->
+<!-- $Id: userprefs.tmpl 6204 2008-08-26 15:12:03Z vargenau $ -->
 <?php
 // Todo: Move the logic and code to the plugin
 // This is very experimental and the read-only part an ugly hack so far.
@@ -13,9 +13,10 @@ if ($request->isActionPage($request->getArg('pagename'))
     $isForm = false;
 }
 $time = time();
-$user = &$request->getUser();
-$pref = &$request->_prefs;
+$user =& $request->getUser();
+$pref =& $request->_prefs;
 
+if (!$pref) return;
 $offset = $pref->get('timeOffset');
 $serverTime = $time - $offset * 3600;
 if ( $isForm )
@@ -239,7 +240,7 @@ if ($errmsg) $msg = HTML(HTML::h4(array('class' => 'errors'), $errmsg),HTML::hr(
 <?php if ($isForm) { ?>
   <hr />
   <p><?=Button("submit:", _("Update Preferences"), 'wikiadmin')?>
-  <?=Button("submit:delete", _("Remove Preferences"), 'wikiadmin')?>
+  <?=Button("submit:delete", _("Reset Preferences"), 'wikiadmin')?>
   <?=Button("submit:cancel", _("Cancel"), 'button')?></p>
 
 <?= HiddenInputs($request->getArgs(), false, array('pref')) ?>

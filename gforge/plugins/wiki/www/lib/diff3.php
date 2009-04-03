@@ -1,5 +1,5 @@
 <?php
-rcs_id('$Id: diff3.php,v 1.5 2002/08/20 16:51:46 rurban Exp $');
+rcs_id('$Id: diff3.php 6184 2008-08-22 10:33:41Z vargenau $');
 // diff3.php
 //
 // A class for computing three way diffs

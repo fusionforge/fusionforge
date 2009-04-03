@@ -17,7 +17,7 @@
 // | Maintainer: Daniel Convissor <danielc@php.net>                       |
 // +----------------------------------------------------------------------+
 //
-// $Id: dbase.php,v 1.1 2004/06/21 08:39:38 rurban Exp $
+// $Id: dbase.php 6184 2008-08-22 10:33:41Z vargenau $
 
 
 // XXX legend:
@@ -31,7 +31,7 @@ require_once 'DB/common.php';
  * extension.
  *
  * @package  DB
- * @version  $Id: dbase.php,v 1.1 2004/06/21 08:39:38 rurban Exp $
+ * @version  $Id: dbase.php 6184 2008-08-22 10:33:41Z vargenau $
  * @category Database
  * @author   Stig Bakken <ssb@php.net>
  */

@@ -59,7 +59,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.2 $");
+                            "\$Revision: 6193 $");
     }
 
     // Establish default values for each of this plugin's arguments.

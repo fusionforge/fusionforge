@@ -1,4 +1,4 @@
--- $Id: oci8-destroy.sql,v 1.2 2005/02/27 09:33:05 rurban Exp $
+-- $Id: oci8-destroy.sql 6203 2008-08-26 13:23:56Z vargenau $
 
 set verify off
 set feedback off
@@ -7,7 +7,7 @@ set feedback off
 -- Prefix for table names.
 --
 -- You should set this to the same value you specify for
--- DATABASE_PREFIX in config.ini
+-- $DBParams['prefix'] in index.php.
 --
 -- You have to use a prefix, because some phpWiki tablenames are 
 -- Oracle reserved words!

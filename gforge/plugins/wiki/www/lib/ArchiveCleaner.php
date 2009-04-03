@@ -1,4 +1,23 @@
-<?php rcs_id('$Id: ArchiveCleaner.php,v 1.4 2004/06/29 08:52:22 rurban Exp $');
+<?php 
+rcs_id('$Id: ArchiveCleaner.php 6184 2008-08-22 10:33:41Z vargenau $');
+/* Copyright (C) 2002 Geoffrey T. Dairiki <dairiki@dairiki.org>
+ *
+ * This file is part of PhpWiki.
+ * 
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 class ArchiveCleaner
 {
@@ -13,7 +32,7 @@ class ArchiveCleaner
         $page = $revision->getPage();
         $author_id = $revision->get('author_id');
 
-        $previous = $page->getRevisionBefore($revision);
+        $previous = $page->getRevisionBefore($revision, false);
 
         return !empty($author_id)
             && $author_id == $previous->get('author_id');
@@ -26,10 +45,15 @@ class ArchiveCleaner
     }
         
     function cleanPageRevisions($page) {
+        $INFINITY = 0x7fffffff;
 
         $expire = &$this->expire_params;
         foreach (array('major', 'minor', 'author') as $class)
             $counter[$class] = new ArchiveCleaner_Counter($expire[$class]);
+        // shortcut to keep all    
+        if (($counter['minor']->min_keep == $INFINITY) 
+            and ($counter['major']->min_keep == $INFINITY))
+            return;
 
         $authors_seen = array();
         
@@ -85,6 +109,9 @@ class ArchiveCleaner_Counter
 
         if ($this->keep > $this->max_keep)
             $this->keep = $this->max_keep;
+        if ($this->min_keep == $INFINITY) { // shortcut to keep all
+            $this->max_keep = $this->keep = $this->min_age = $this->max_age = $INFINITY;
+        }
         if ($this->min_keep > $this->keep)
             $this->min_keep = $this->keep;
 
@@ -123,6 +150,9 @@ class ArchiveCleaner_Counter
     }
         
     function keep($revision) {
+    	$INFINITY = 0x7fffffff;
+    	if ($this->min_keep == $INFINITY)
+    	    return true;
         $count = ++$this->count;
         $age = $this->computeAge($revision);
         
@@ -134,6 +164,10 @@ class ArchiveCleaner_Counter
     }
 }
 
+// $Log: not supported by cvs2svn $
+// Revision 1.7  2005/10/29 08:57:57  rurban
+// added (c)
+//
 
 // Local Variables:
 // mode: php

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: TeX2png.php,v 1.3 2004/11/01 10:43:59 rurban Exp $');
+rcs_id('$Id: TeX2png.php 6185 2008-08-22 11:40:14Z vargenau $');
 /*
  Copyright 2004 Pierrick Meignen
 */
@@ -35,7 +35,7 @@ extends WikiPlugin
     }
     
     function getVersion() {
-        return preg_replace("/[Revision: $]/", '',"\$Revision: 1.3 $");
+        return preg_replace("/[Revision: $]/", '',"\$Revision: 6185 $");
     }
     
     function getDefaultArguments() {
@@ -170,7 +170,7 @@ extends WikiPlugin
                 $this->createTexFile($texfile, $text);     
                 $this->createPngFile($this->imagepath, $imagename);
             } else {
-                $error_html = _("TeX directory not writable.");
+                $error_html = _("TeX imagepath not writable.");
                 trigger_error($error_html, E_USER_NOTICE);
             }
         }
@@ -220,7 +220,7 @@ extends WikiPlugin
     }
 };
 
-// $Log: TeX2png.php,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.3  2004/11/01 10:43:59  rurban
 // seperate PassUser methods into seperate dir (memory usage)
 // fix WikiUser (old) overlarge data session

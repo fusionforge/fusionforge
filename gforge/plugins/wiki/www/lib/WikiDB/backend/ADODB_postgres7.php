@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: ADODB_postgres7.php,v 1.3 2005/10/31 16:49:02 rurban Exp $');
+rcs_id('$Id: ADODB_postgres7.php 6184 2008-08-22 10:33:41Z vargenau $');
 
 require_once('lib/WikiDB/backend/ADODB.php');
 
@@ -9,10 +9,9 @@ if (!defined("USE_BYTEA"))     // see schemas/psql-initialize.sql
 
 /**
  * WikiDB layer for ADODB-postgres (7 or 8), called by lib/WikiDB/ADODB.php.
- * Pending changes from CVS HEAD:
+ * Changes 1.3.12: 
  *  - use Foreign Keys and ON DELETE CASCADE.
  *  - bytea blob type
- *  - tsearch2
  * 
  * @author: Reini Urban
  */
@@ -24,6 +23,7 @@ extends WikiDB_backend_ADODB
      */
     function WikiDB_backend_ADODB_postgres7($dbparams) {
         $this->WikiDB_backend_ADODB($dbparams);
+        if (!$this->_dbh->_connectionID) return;
 
         $this->_serverinfo = $this->_dbh->ServerInfo();
         if (!empty($this->_serverinfo['version'])) {
@@ -36,8 +36,11 @@ extends WikiDB_backend_ADODB
 
     /**
      * Pack tables.
+     * NOTE: Only the table owner can do this. Either fix the schema or setup autovacuum.
      */
     function optimize() {
+        return 0; 	// if the wikiuser is not the table owner
+
         foreach ($this->_table_names as $table) {
             $this->_dbh->Execute("VACUUM ANALYZE $table");
         }

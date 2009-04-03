@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: JabberPresence.php,v 1.3 2004/11/21 11:59:26 rurban Exp $');
+rcs_id('$Id: JabberPresence.php 6185 2008-08-22 11:40:14Z vargenau $');
 /**
  * A simple Jabber presence WikiPlugin.
  * http://wiki.crao.net/index.php/JabberPr%E9sence/Source
@@ -30,7 +30,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.3 $");
+                            "\$Revision: 6185 $");
     }
 
     // Establish default values for each of this plugin's arguments.

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: RecentComments.php,v 1.3 2004/05/14 20:55:03 rurban Exp $');
+rcs_id('$Id: RecentComments.php 6185 2008-08-22 11:40:14Z vargenau $');
 
 /**
  * List of basepages with recently added comments.
@@ -18,7 +18,7 @@ extends WikiPlugin_RecentChanges
     }
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.3 $");
+                            "\$Revision: 6185 $");
     }
     function getDefaultArguments() {
     	//php-4.0.4pl1 breaks at the parent:: line even if the 
@@ -34,6 +34,7 @@ extends WikiPlugin_RecentChanges
 
     function format ($changes, $args) {
         $fmt = new _RecentChanges_CommentFormatter($args);
+	$fmt->action = _("RecentComments");
         return $fmt->format($changes);
     }
 
@@ -135,7 +136,7 @@ class RecentCommentsRevisionIterator extends WikiDB_PageRevisionIterator
 
 }
 
-// $Log: RecentComments.php,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.3  2004/05/14 20:55:03  rurban
 // simplified RecentComments
 //

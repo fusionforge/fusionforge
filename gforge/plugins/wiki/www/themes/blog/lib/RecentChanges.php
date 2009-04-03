@@ -1,4 +1,4 @@
-<?php rcs_id('$Id: RecentChanges.php,v 1.2 2005/02/02 19:14:14 rurban Exp $');
+<?php rcs_id('$Id: RecentChanges.php 6204 2008-08-26 15:12:03Z vargenau $');
 /*
  * Extensions/modifications to the stock RecentChanges (and PageHistory) format.
  */
@@ -41,10 +41,7 @@ extends _PageHistory_HtmlFormatter
 }
 */
 
-// $Log: RecentChanges.php,v $
-// Revision 1.2  2005/02/02 19:14:14  rurban
-// more blog hacks
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.1  2004/12/15 17:47:32  rurban
 // fix RecentChanges links
 // fix footer layout

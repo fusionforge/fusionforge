@@ -1,4 +1,4 @@
-$Id: README,v 1.4 2004/06/19 12:13:57 rurban Exp $
+$Id: README 6206 2008-08-26 15:20:22Z vargenau $
 
 TODO: certain blocks are repeated over and over. For example, editing
 a page is always the same set of links to follow, but this info is

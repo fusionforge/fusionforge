@@ -1,7 +1,7 @@
 <?php // -*-php-*-
-rcs_id('$Id: PageHistory.php,v 1.30 2004/06/14 11:31:39 rurban Exp $');
+rcs_id('$Id: PageHistory.php 6248 2008-09-07 15:13:56Z vargenau $');
 /**
- Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
+ Copyright 1999, 2000, 2001, 2002, 2007 $ThePhpWikiProgrammingTeam
 
  This file is part of PhpWiki.
 
@@ -22,7 +22,7 @@ rcs_id('$Id: PageHistory.php,v 1.30 2004/06/14 11:31:39 rurban Exp $');
 
 /**
  */
-require_once('lib/plugin/RecentChanges.php');
+require_once("lib/plugin/RecentChanges.php");
 
 class _PageHistory_PageRevisionIter
 extends WikiDB_PageRevisionIterator
@@ -87,11 +87,18 @@ extends _RecentChanges_HtmlFormatter
         return true;
     }
 
-    function title() {
-        return array(fmt("PageHistory for %s",
+    function headline() {
+        return HTML(fmt("PageHistory for %s",
                          WikiLink($this->_args['page'])),
                      "\n",
-                     $this->rss_icon());
+                     $this->rss_icon(),
+		     $this->rss2_icon(),
+		     $this->atom_icon(),
+		     $this->rdf_icon());
+    }
+
+    function title() {
+        return "PageHistory:".$this->_args['page'];
     }
 
     function empty_message () {
@@ -117,7 +124,9 @@ extends _RecentChanges_HtmlFormatter
 
         $pagename = $this->_args['page'];
 
-        $html[] = _RecentChanges_HtmlFormatter::format($changes);
+        $fmt = _RecentChanges_HtmlFormatter::format($changes);
+	$fmt->action = _("PageHistory");
+	$html[] = $fmt;
 
         $html[] = HTML::input(array('type'  => 'hidden',
                                     'name'  => 'action',
@@ -168,6 +177,7 @@ extends _RecentChanges_HtmlFormatter
     }
 
     function format_revision ($rev) {
+	global $WikiTheme;
         $class = 'rc-' . $this->importance($rev);
 
         $time = $this->time($rev);
@@ -177,18 +187,30 @@ extends _RecentChanges_HtmlFormatter
                                           "(" . _("minor edit") . ")"));
         }
         else {
-            $time = HTML::strong(array('class' => 'pageinfo-majoredit'), $time);
+            $time = HTML::span(array('class' => 'pageinfo-majoredit'), $time);
             $minor_flag = '';
         }
-
-        return HTML::li(array('class' => $class),
-                        $this->diffLink($rev), ' ',
-                        $this->pageLink($rev), ' ',
-                        $time, ' ',
-                        $this->summaryAsHTML($rev),
-                        ' ... ',
-                        $this->authorLink($rev),
-                        $minor_flag);
+        $line = HTML::li(array('class' => $class));
+	if (isa($WikiTheme,'WikiTheme_MonoBook')) {
+	    $line->pushContent(
+			       $this->diffLink($rev), ' ',
+			       $this->pageLink($rev), ' ',
+			       $time,' ',$this->date($rev), ' . . ',
+			       $this->authorLink($rev),' ',
+			       $this->authorContribs($rev),' ',
+			       $this->summaryAsHTML($rev),' ',
+			       $minor_flag);
+	} else {
+	    $line->pushContent(
+			       $this->diffLink($rev), ' ',
+			       $this->pageLink($rev), ' ',
+			       $time, ' ',
+			       $this->summaryAsHTML($rev),
+			       ' ... ',
+			       $this->authorLink($rev),
+			       $minor_flag);
+	}
+	return $line;
     }
 }
 
@@ -253,7 +275,7 @@ extends WikiPlugin_RecentChanges
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.30 $");
+                            "\$Revision: 6248 $");
     }
 
     function getDefaultArguments() {
@@ -281,6 +303,7 @@ extends WikiPlugin_RecentChanges
         $page = $dbi->getPage($args['page']);
         $iter = $page->getAllRevisions();
         $params = $this->getMostRecentParams($args);
+        if (empty($args['days'])) unset($params['since']);
         return new _PageHistory_PageRevisionIter($iter, $params);
     }
 
@@ -297,6 +320,7 @@ extends WikiPlugin_RecentChanges
         }
 
         $fmt = new $fmt_class($args);
+	$fmt->action = _("PageHistory");
         return $fmt->format($changes);
     }
 
@@ -317,53 +341,6 @@ extends WikiPlugin_RecentChanges
         return $this->format($this->getChanges($dbi, $args), $args);
     }
 };
-
-// $Log: PageHistory.php,v $
-// Revision 1.30  2004/06/14 11:31:39  rurban
-// renamed global $Theme to $WikiTheme (gforge nameclash)
-// inherit PageList default options from PageList
-//   default sortby=pagename
-// use options in PageList_Selectable (limit, sortby, ...)
-// added action revert, with button at action=diff
-// added option regex to WikiAdminSearchReplace
-//
-// Revision 1.29  2004/05/18 16:23:40  rurban
-// rename split_pagename to SplitPagename
-//
-// Revision 1.28  2004/02/17 12:11:36  rurban
-// added missing 4th basepage arg at plugin->run() to almost all plugins. This caused no harm so far, because it was silently dropped on normal usage. However on plugin internal ->run invocations it failed. (InterWikiSearch, IncludeSiteMap, ...)
-//
-// Revision 1.27  2003/02/27 22:48:44  dairiki
-// Fixes invalid HTML generated by PageHistory plugin.
-//
-// (<noscript> is block-level and not allowed within <p>.)
-//
-// Revision 1.26  2003/02/27 21:15:14  dairiki
-// Javascript fix.
-//
-// Fix so that you can never have more than two checkboxes checked. (If this
-// happens, all but the current checkbox are unchecked.)
-//
-// It used to be that one could view a PageHistory, check two boxes to view
-// a diff, then hit the back button.  (The originally checked two boxes are
-// still checked at this point.)  Checking a third box resulted in viewing
-// a diff between a quasi-random pair of versions selected from the three
-// which were selected.   Now clicking the third box results in the first
-// two being unchecked.
-//
-// Revision 1.25  2003/02/17 02:19:01  dairiki
-// Fix so that PageHistory will work when the current revision
-// of a page has been "deleted".
-//
-// Revision 1.24  2003/01/18 21:49:00  carstenklapp
-// Code cleanup:
-// Reformatting & tabs to spaces;
-// Added copyleft, getVersion, getDescription, rcs_id.
-//
-// Revision 1.23  2003/01/04 23:27:39  carstenklapp
-// New: Gracefully handle non-existant pages. Added copyleft;
-// getVersion() for PluginManager.
-//
 
 // (c-file-style: "gnu")
 // Local Variables:

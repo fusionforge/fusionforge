@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: Diff.php,v 1.3 2005/09/30 18:53:10 uckelman Exp $');
+rcs_id('$Id: Diff.php 6185 2008-08-22 11:40:14Z vargenau $');
 /**
  Copyright 1999, 2000, 2001, 2002, 2004 $ThePhpWikiProgrammingTeam
 
@@ -27,7 +27,8 @@ rcs_id('$Id: Diff.php,v 1.3 2005/09/30 18:53:10 uckelman Exp $');
  * Would make sense to see arbitrary diff's between any files or revisions.
  */
 
-require_once('lib/difflib.php');
+//require_once('lib/difflib.php');
+require_once('lib/diff.php');
 
 class WikiPlugin_Diff
 extends WikiPlugin {
@@ -42,7 +43,7 @@ extends WikiPlugin {
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.3 $");
+                            "\$Revision: 6185 $");
     }
 
     // Establish default values for each of this plugin's arguments.
@@ -199,229 +200,7 @@ extends WikiPlugin {
     }
 };
 
-class _HWLDF_WordAccumulator {
-    function _HWLDF_WordAccumulator () {
-        $this->_lines = array();
-        $this->_line = false;
-        $this->_group = false;
-        $this->_tag = '~begin';
-    }
-
-    function _flushGroup ($new_tag) {
-        if ($this->_group !== false) {
-            if (!$this->_line)
-                $this->_line = HTML();
-            $this->_line->pushContent($this->_tag
-                                      ? new HtmlElement($this->_tag,
-                                                        $this->_group)
-                                      : $this->_group);
-        }
-        $this->_group = '';
-        $this->_tag = $new_tag;
-    }
-
-    function _flushLine ($new_tag) {
-        $this->_flushGroup($new_tag);
-        if ($this->_line)
-            $this->_lines[] = $this->_line;
-        $this->_line = HTML();
-    }
-
-    function addWords ($words, $tag = '') {
-        if ($tag != $this->_tag)
-            $this->_flushGroup($tag);
-
-        foreach ($words as $word) {
-            // new-line should only come as first char of word.
-            if (!$word)
-                continue;
-            if ($word[0] == "\n") {
-                $this->_group .= PrintXML(HTML::raw('&nbsp;'));
-                $this->_flushLine($tag);
-                $word = substr($word, 1);
-            }
-            assert(!strstr($word, "\n"));
-            $this->_group .= $word;
-        }
-    }
-
-    function getLines() {
-        $this->_flushLine('~done');
-        return $this->_lines;
-    }
-}
-
-class WordLevelDiff extends MappedDiff
-{
-    function WordLevelDiff ($orig_lines, $final_lines) {
-        list ($orig_words, $orig_stripped) = $this->_split($orig_lines);
-        list ($final_words, $final_stripped) = $this->_split($final_lines);
-
-
-        $this->MappedDiff($orig_words, $final_words,
-                          $orig_stripped, $final_stripped);
-    }
-
-    function _split($lines) {
-        // FIXME: fix POSIX char class.
-        if (!preg_match_all('/ ( [^\S\n]+ | [[:alnum:]]+ | . ) (?: (?!< \n) [^\S\n])? /xs',
-                            implode("\n", $lines),
-                            $m)) {
-            return array(array(''), array(''));
-        }
-        return array($m[0], $m[1]);
-    }
-
-    function orig () {
-        $orig = new _HWLDF_WordAccumulator;
-
-        foreach ($this->edits as $edit) {
-            if ($edit->type == 'copy')
-                $orig->addWords($edit->orig);
-            elseif ($edit->orig)
-                $orig->addWords($edit->orig, 'del');
-        }
-        return $orig->getLines();
-    }
-
-    function _final () {
-        $final = new _HWLDF_WordAccumulator;
-
-        foreach ($this->edits as $edit) {
-            if ($edit->type == 'copy')
-                $final->addWords($edit->final);
-            elseif ($edit->final)
-                $final->addWords($edit->final, 'ins');
-        }
-        return $final->getLines();
-    }
-}
-
-/**
- * HTML unified diff formatter.
- *
- * This class formats a diff into a CSS-based
- * unified diff format.
- *
- * Within groups of changed lines, diffs are highlit
- * at the character-diff level.
- */
-class HtmlUnifiedDiffFormatter extends UnifiedDiffFormatter
-{
-    function HtmlUnifiedDiffFormatter($context_lines = 4) {
-        $this->UnifiedDiffFormatter($context_lines);
-    }
-
-    function _start_diff() {
-        $this->_top = HTML::div(array('class' => 'diff'));
-    }
-    function _end_diff() {
-        $val = $this->_top;
-        unset($this->_top);
-        return $val;
-    }
-
-    function _start_block($header) {
-        $this->_block = HTML::div(array('class' => 'block'),
-                                  HTML::tt($header));
-    }
-
-    function _end_block() {
-        $this->_top->pushContent($this->_block);
-        unset($this->_block);
-    }
-
-    function _lines($lines, $class, $prefix = false, $elem = false) {
-        if (!$prefix)
-            $prefix = HTML::raw('&nbsp;');
-        $div = HTML::div(array('class' => 'difftext'));
-        foreach ($lines as $line) {
-            if ($elem)
-                $line = new HtmlElement($elem, $line);
-            $div->pushContent(HTML::div(array('class' => $class),
-                                        HTML::tt(array('class' => 'prefix'),
-                                                 $prefix),
-                                        $line, HTML::raw('&nbsp;')));
-        }
-        $this->_block->pushContent($div);
-    }
-
-    function _context($lines) {
-        $this->_lines($lines, 'context');
-    }
-    function _deleted($lines) {
-        $this->_lines($lines, 'deleted', '-', 'del');
-    }
-
-    function _added($lines) {
-        $this->_lines($lines, 'added', '+', 'ins');
-    }
-
-    function _changed($orig, $final) {
-        $diff = new WordLevelDiff($orig, $final);
-        $this->_lines($diff->orig(), 'original', '-');
-        $this->_lines($diff->_final(), 'final', '+');
-    }
-}
-
-/**
- * HTML table-based unified diff formatter.
- *
- * This class formats a diff into a table-based
- * unified diff format.  (Similar to what was produced
- * by previous versions of PhpWiki.)
- *
- * Within groups of changed lines, diffs are highlit
- * at the character-diff level.
- */
-class TableUnifiedDiffFormatter extends HtmlUnifiedDiffFormatter
-{
-    function TableUnifiedDiffFormatter($context_lines = 4) {
-        $this->HtmlUnifiedDiffFormatter($context_lines);
-    }
-
-    function _start_diff() {
-        $this->_top = HTML::table(array('width' => '100%',
-                                        'class' => 'diff',
-                                        'cellspacing' => 1,
-                                        'cellpadding' => 1,
-                                        'border' => 1));
-    }
-
-    function _start_block($header) {
-        $this->_block = HTML::table(array('width' => '100%',
-                                          'class' => 'block',
-                                          'cellspacing' => 0,
-                                          'cellpadding' => 1,
-                                          'border' => 0),
-                                    HTML::tr(HTML::td(array('colspan' => 2),
-                                                      HTML::tt($header))));
-    }
-
-    function _end_block() {
-        $this->_top->pushContent(HTML::tr(HTML::td($this->_block)));
-        unset($this->_block);
-    }
-
-    function _lines($lines, $class, $prefix = false, $elem = false) {
-        if (!$prefix)
-            $prefix = HTML::raw('&nbsp;');
-        $prefix = HTML::td(array('class' => 'prefix',
-                                 'width' => "1%"), $prefix);
-        foreach ($lines as $line) {
-            if (! trim($line))
-                $line = HTML::raw('&nbsp;');
-            elseif ($elem)
-                $line = new HtmlElement($elem, $line);
-            $this->_block->pushContent(HTML::tr(array('valign' => 'top'),
-                                                $prefix,
-                                                HTML::td(array('class' => $class),
-                                                         $line)));
-        }
-    }
-}
-
-// $Log: Diff.php,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.3  2005/09/30 18:53:10  uckelman
 // 'final' is a reserved keyword as of PHP5, so shouldn't be used as a
 //  function name here.

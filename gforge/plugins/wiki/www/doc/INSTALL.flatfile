@@ -106,7 +106,7 @@ and create a PHP file like this:
 <title>Make a directory</title>
 </head>
 
-<?php
+<?
 
    /* 
       I created this to set up server-writable files
@@ -136,4 +136,4 @@ phpwiki-talk list at phpwiki-talk@lists.sourceforge.net.
 Steve Wainstead
 swain@panix.com
 
-$Id: INSTALL.flatfile,v 1.2 2005/10/13 06:55:21 rurban Exp $
+$Id: INSTALL.flatfile 6202 2008-08-26 13:14:32Z vargenau $

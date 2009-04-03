@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: CategoryPage.php,v 1.2 2004/07/08 20:30:07 rurban Exp $');
+rcs_id('$Id: CategoryPage.php 6185 2008-08-22 11:40:14Z vargenau $');
 /**
  Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
 
@@ -20,7 +20,7 @@ rcs_id('$Id: CategoryPage.php,v 1.2 2004/07/08 20:30:07 rurban Exp $');
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#require_once('lib/InlineParser.php');
+//require_once('lib/InlineParser.php');
 require_once('lib/BlockParser.php');
 
 /**
@@ -50,7 +50,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.2 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {

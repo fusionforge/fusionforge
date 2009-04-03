@@ -1,7 +1,8 @@
 <?php // -*-php-*-
-rcs_id('$Id: WikiAdminRemove.php,v 1.30 2004/11/23 15:17:19 rurban Exp $');
+rcs_id('$Id: WikiAdminRemove.php 6286 2008-10-02 10:01:29Z vargenau $');
 /*
  Copyright 2002,2004 $ThePhpWikiProgrammingTeam
+ Copyright 2008 Marc-Etienne Vargenau, Alcatel-Lucent
 
  This file is part of PhpWiki.
 
@@ -46,7 +47,7 @@ extends WikiPlugin_WikiAdminSelect
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.30 $");
+                            "\$Revision: 6286 $");
     }
 
     function getDefaultArguments() {
@@ -217,13 +218,13 @@ extends WikiPlugin_WikiAdminSelect
         return HTML::form(array('action' => $request->getPostURL(),
                                 'method' => 'post'),
                           $header,
+                          $buttons,
                           $pagelist->getContent(),
                           HiddenInputs($request->getArgs(),
                                         false,
                                         array('admin_remove')),
                           HiddenInputs(array('admin_remove[action]' => $next_action,
-                                             'require_authority_for_post' => WIKIAUTH_ADMIN)),
-                          $buttons);
+                                             'require_authority_for_post' => WIKIAUTH_ADMIN)));
     }
 }
 
@@ -233,156 +234,6 @@ class _PageList_Column_remove extends _PageList_Column {
                       $page_handle->getName());
     }
 };
-
-
-// $Log: WikiAdminRemove.php,v $
-// Revision 1.30  2004/11/23 15:17:19  rurban
-// better support for case_exact search (not caseexact for consistency),
-// plugin args simplification:
-//   handle and explode exclude and pages argument in WikiPlugin::getArgs
-//     and exclude in advance (at the sql level if possible)
-//   handle sortby and limit from request override in WikiPlugin::getArgs
-// ListSubpages: renamed pages to maxpages
-//
-// Revision 1.29  2004/11/09 17:11:17  rurban
-// * revert to the wikidb ref passing. there's no memory abuse there.
-// * use new wikidb->_cache->_id_cache[] instead of wikidb->_iwpcache, to effectively
-//   store page ids with getPageLinks (GleanDescription) of all existing pages, which
-//   are also needed at the rendering for linkExistingWikiWord().
-//   pass options to pageiterator.
-//   use this cache also for _get_pageid()
-//   This saves about 8 SELECT count per page (num all pagelinks).
-// * fix passing of all page fields to the pageiterator.
-// * fix overlarge session data which got broken with the latest ACCESS_LOG_SQL changes
-//
-// Revision 1.28  2004/11/01 10:43:59  rurban
-// seperate PassUser methods into seperate dir (memory usage)
-// fix WikiUser (old) overlarge data session
-// remove wikidb arg from various page class methods, use global ->_dbi instead
-// ...
-//
-// Revision 1.27  2004/06/16 10:38:59  rurban
-// Disallow refernces in calls if the declaration is a reference
-// ("allow_call_time_pass_reference clean").
-//   PhpWiki is now allow_call_time_pass_reference = Off clean,
-//   but several external libraries may not.
-//   In detail these libs look to be affected (not tested):
-//   * Pear_DB odbc
-//   * adodb oracle
-//
-// Revision 1.26  2004/06/14 11:31:39  rurban
-// renamed global $Theme to $WikiTheme (gforge nameclash)
-// inherit PageList default options from PageList
-//   default sortby=pagename
-// use options in PageList_Selectable (limit, sortby, ...)
-// added action revert, with button at action=diff
-// added option regex to WikiAdminSearchReplace
-//
-// Revision 1.25  2004/06/13 15:33:20  rurban
-// new support for arguments owner, author, creator in most relevant
-// PageList plugins. in WikiAdmin* via preSelectS()
-//
-// Revision 1.24  2004/06/08 10:05:11  rurban
-// simplified admin action shortcuts
-//
-// Revision 1.23  2004/06/03 22:24:48  rurban
-// reenable admin check on !ENABLE_PAGEPERM, honor s=Wildcard arg, fix warning after Remove
-//
-// Revision 1.22  2004/05/16 22:07:35  rurban
-// check more config-default and predefined constants
-// various PagePerm fixes:
-//   fix default PagePerms, esp. edit and view for Bogo and Password users
-//   implemented Creator and Owner
-//   BOGOUSERS renamed to BOGOUSER
-// fixed syntax errors in signin.tmpl
-//
-// Revision 1.21  2004/05/04 16:34:22  rurban
-// prvent hidden p overwrite checked p
-//
-// Revision 1.20  2004/05/03 11:02:30  rurban
-// fix passing args from WikiAdminSelect to WikiAdminRemove
-//
-// Revision 1.19  2004/04/12 09:12:23  rurban
-// fix syntax errors
-//
-// Revision 1.18  2004/04/07 23:13:19  rurban
-// fixed pear/File_Passwd for Windows
-// fixed FilePassUser sessions (filehandle revive) and password update
-//
-// Revision 1.17  2004/03/17 20:23:44  rurban
-// fixed p[] pagehash passing from WikiAdminSelect, fixed problem removing pages with [] in the pagename
-//
-// Revision 1.16  2004/03/12 13:31:43  rurban
-// enforce PagePermissions, errormsg if not Admin
-//
-// Revision 1.15  2004/03/01 13:48:46  rurban
-// rename fix
-// p[] consistency fix
-//
-// Revision 1.14  2004/02/22 23:20:33  rurban
-// fixed DumpHtmlToDir,
-// enhanced sortby handling in PageList
-//   new button_heading th style (enabled),
-// added sortby and limit support to the db backends and plugins
-//   for paging support (<<prev, next>> links on long lists)
-//
-// Revision 1.13  2004/02/17 12:11:36  rurban
-// added missing 4th basepage arg at plugin->run() to almost all plugins. This caused no harm so far, because it was silently dropped on normal usage. However on plugin internal ->run invocations it failed. (InterWikiSearch, IncludeSiteMap, ...)
-//
-// Revision 1.12  2004/02/15 21:34:37  rurban
-// PageList enhanced and improved.
-// fixed new WikiAdmin... plugins
-// editpage, Theme with exp. htmlarea framework
-//   (htmlarea yet committed, this is really questionable)
-// WikiUser... code with better session handling for prefs
-// enhanced UserPreferences (again)
-// RecentChanges for show_deleted: how should pages be deleted then?
-//
-// Revision 1.11  2004/02/11 20:00:16  rurban
-// WikiAdmin... series overhaul. Rename misses the db backend methods yet. Chmod + Chwon still missing.
-//
-// Revision 1.9  2003/02/26 22:27:22  dairiki
-// Fix and refactor FrameInclude plugin (more or less).
-//
-// (This should now generate valid HTML.  Woohoo!)
-//
-// The output when using the Sidebar theme is ugly enough that it should
-// be considered broken.  (But the Sidebar theme appears pretty broken in
-// general right now.)
-//
-// (Personal comment (not to be taken personally): I must say that I
-// remain unconvinced of the usefulness of this plugin.)
-//
-// Revision 1.8  2003/02/17 17:23:59  dairiki
-// Disable plugin unless action='browse'.
-//
-// Add a header to the output, and adjust the HTML formatting a bit.
-//
-// Revision 1.7  2003/02/17 06:06:33  dairiki
-// Refactor & code cleanup.
-//
-// Added two new plugin arguments:
-//
-//   min_age - only display pages which have been "deleted" for at
-//             least this many days.  (Use min_age=none to get all
-//             pages, even non-deleted ones listed.)
-//
-//   max_age - automatically check the checkboxes of pages which
-//             have been "deleted" this many days or more.
-//
-// ("Deleted" means the current version of the page is empty.
-// For the most part, PhpWiki treats these "deleted" pages as
-// if they didn't exist --- but, of course, the PageHistory is
-// still available, allowing old versions of the page to be restored.)
-//
-// Revision 1.6  2003/02/16 19:47:17  dairiki
-// Update WikiDB timestamp when editing or deleting pages.
-//
-// Revision 1.5  2003/01/18 22:14:28  carstenklapp
-// Code cleanup:
-// Reformatting & tabs to spaces;
-// Added copyleft, getVersion, getDescription, rcs_id.
-//
 
 // Local Variables:
 // mode: php

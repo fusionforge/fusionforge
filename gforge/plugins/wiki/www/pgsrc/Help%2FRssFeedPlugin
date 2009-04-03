@@ -1,0 +1,58 @@
+Date: Sat, 24 Jan 2009 20:18:24 +0100
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
+X-Rcs-Id: $Id: Help%2FRssFeedPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FRssFeedPlugin;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=iso-8859-1
+Content-Transfer-Encoding: binary
+
+The *~RssFeed* [[Help:WikiPlugin|plugin]] allows to display external RSS feeds.
+
+== Usage
+
+<verbatim>
+<?plugin RssFeed url=http://somesite.tld/linktofeed.rss ?>
+</verbatim>
+
+== Arguments
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| url
+| RSS Feed URL
+| (empty)
+|-
+| feed
+| RSS Feed Name
+| (empty)
+|-
+| description
+| Description of the RSS Feed
+| (empty)
+|-
+| maxitem
+| Max. number of entries (0 = unlimited)
+| ~0
+|}
+
+== Examples
+
+=== ~PhpWikiRss feed for [PhpWiki:RecentChanges]
+
+<verbatim>
+<?plugin RssFeed feed=PhpWikiRss description="PhpWiki:RecentChanges"
+                 url=http://phpwiki.sourceforge.net/phpwiki/RecentChanges?format=rss ?>
+</verbatim>
+
+=== Example as sidebar box
+
+[PhpWikiDemo:sidebar/]
+
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]

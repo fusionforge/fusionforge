@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: backend.php,v 1.26 2005/11/14 22:24:33 rurban Exp $');
+rcs_id('$Id: backend.php 6184 2008-08-22 10:33:41Z vargenau $');
 
 /*
   Pagedata
@@ -36,7 +36,6 @@ rcs_id('$Id: backend.php,v 1.26 2005/11/14 22:24:33 rurban Exp $');
 /**
  * A WikiDB_backend handles the storage and retrieval of data for a WikiDB.
  *
- * A WikiDB_backend handles the storage and retrieval of data for a WikiDB.
  * It does not have to be this way, of course, but the standard WikiDB uses
  * a WikiDB_backend.  (Other WikiDB's could be written which use some other
  * method to access their underlying data store.)
@@ -45,7 +44,7 @@ rcs_id('$Id: backend.php,v 1.26 2005/11/14 22:24:33 rurban Exp $');
  * and flat DBM/hash based methods of data storage.
  *
  * Though it contains some default implementation of certain methods,
- * this is an abstract base class.  It is expected that most effificient
+ * this is an abstract base class.  It is expected that most efficient
  * backends will override nearly all the methods in this class.
  *
  * @access protected
@@ -87,7 +86,7 @@ class WikiDB_backend
      * will not affect the value of 'hits' (or whatever other meta-data
      * may have been stored for the page.)
      *
-     * To delete a particular piece of meta-data, set it's value to false.
+     * To delete a particular piece of meta-data, set its value to false.
      * <pre>
      *   $backend->update_pagedata($pagename, array('locked' => false)); 
      * </pre>
@@ -271,7 +270,7 @@ class WikiDB_backend
      * @return object A WikiDB_backend_iterator.
      */
     function get_links($pagename, $reversed, $include_empty=false,
-                       $sortby=false, $limit=false, $exclude=false) {
+                       $sortby='', $limit='', $exclude='') {
         //FIXME: implement simple (but slow) link finder.
         die("FIXME get_links");
     }
@@ -306,7 +305,7 @@ class WikiDB_backend
      *
      * @return object A WikiDB_backend_iterator.
      */
-    function get_all_pages($include_defaulted, $orderby=false, $limit=false, $exclude=false) {
+    function get_all_pages($include_defaulted, $orderby=false, $limit='', $exclude='') {
         trigger_error("virtual", E_USER_ERROR);
     }
         
@@ -328,8 +327,10 @@ class WikiDB_backend
      *
      * @see WikiDB::titleSearch
      */
-    function text_search($search, $fulltext=false, $sortby=false, $limit=false, $exclude=false) {
-        // This is method implements a simple linear search
+    function text_search($search, $fulltext=false, $sortby='', 
+			 $limit='', $exclude='') 
+    {
+        // This method implements a simple linear search
         // through all the pages in the database.
         //
         // It is expected that most backends will overload
@@ -338,8 +339,27 @@ class WikiDB_backend
         // ignore $limit
         $pages = $this->get_all_pages(false, $sortby, false, $exclude);
         return new WikiDB_backend_dumb_TextSearchIter($this, $pages, $search, $fulltext, 
-                                                      array('limit' => $limit, 
+                                                      array('limit'   => $limit, 
                                                             'exclude' => $exclude));
+    }
+
+
+    /**
+     *
+     * @access protected
+     * @param $pages     object A TextSearchQuery object.
+     * @param $linkvalue object A TextSearchQuery object for the linkvalues 
+     *                          (linkto, relation or backlinks or attribute values).
+     * @param $linktype  string One of the 4 linktypes.
+     * @param $relation  object A TextSearchQuery object or false.
+     * @param $options   array Currently ignored. hash of sortby, limit, exclude.
+     * @return object A WikiDB_backend_iterator.
+     * @see WikiDB::linkSearch
+     */
+    function link_search( $pages, $linkvalue, $linktype, $relation=false, $options=array() ) {
+        include_once('lib/WikiDB/backend/dumb/LinkSearchIter.php');
+        $pageiter = $this->text_search($pages);
+        return new WikiDB_backend_dumb_LinkSearchIter($this, $pageiter, $linkvalue, $linktype, $relation, $options);
     }
 
     /**
@@ -349,7 +369,7 @@ class WikiDB_backend
      * be returned in reverse order by hit count.
      *
      * @access protected
-     * @param $limit integer  No more than this many pages
+     * @param integer $limit No more than this many pages
      * @return object A WikiDB_backend_iterator.
      */
     function most_popular($limit, $sortby='-hits') {
@@ -384,7 +404,7 @@ class WikiDB_backend
         return new WikiDB_backend_dumb_MostRecentIter($this, $pages, $params);
     }
 
-    function wanted_pages($exclude_from='', $exclude='', $sortby=false, $limit=false) {
+    function wanted_pages($exclude_from='', $exclude='', $sortby='', $limit='') {
         include_once('lib/WikiDB/backend/dumb/WantedPagesIter.php');
         $allpages = $this->get_all_pages(true,false,false,$exclude_from);
         return new WikiDB_backend_dumb_WantedPagesIter($this, $allpages, $exclude, $sortby, $limit);
@@ -447,18 +467,37 @@ class WikiDB_backend
      *
      * @return boolean True iff database is in a consistent state.
      */
-    function check() {
+    function check($args=false) {
     }
 
     /**
-     * Put the database into a consistent state.
+     * Put the database into a consistent state 
+     * by reparsing and restoring all pages.
      *
      * This should put the database into a consistent state.
      * (I.e. rebuild indexes, etc...)
      *
      * @return boolean True iff successful.
      */
-    function rebuild() {
+    function rebuild($args=false) {
+	global $request;
+	$dbh = $request->getDbh();
+    	$iter = $dbh->getAllPages(false);
+        while ($page = $iter->next()) {
+	    $current = $page->getCurrentRevision(true);
+	    $pagename = $page->getName();
+	    $meta = $current->_data;
+	    $version = $current->getVersion();
+	    $content =& $meta['%content'];
+	    $formatted = new TransformedText($page, $content, $current->getMetaData());
+	    $type = $formatted->getType();
+	    $meta['pagetype'] = $type->getName();
+	    $links = $formatted->getWikiPageLinks(); // linkto => relation
+	    $this->lock(array('version','page','recent','link','nonempty'));
+	    $this->set_versiondata($pagename, $version, $meta);
+	    $this->set_links($pagename, $links);
+	    $this->unlock(array('version','page','recent','link','nonempty'));
+        }
     }
 
     function _parse_searchwords($search) {
@@ -560,6 +599,38 @@ class WikiDB_backend
     function isSQL () {
         return in_array(DATABASE_TYPE, array('SQL','ADODB','PDO'));
     }
+
+    function backendType() {
+        return DATABASE_TYPE;
+    }
+
+    function write_accesslog(&$entry) {
+        global $request;
+        if (!$this->isSQL()) return;
+        $dbh = &$this->_dbh;
+        $log_tbl = $entry->_accesslog->logtable;
+        // duration problem: sprintf "%f" might use comma e.g. "100,201" in european locales
+        $dbh->query("INSERT INTO $log_tbl"
+                    . " (time_stamp,remote_host,remote_user,request_method,request_line,request_args,"
+                    .   "request_uri,request_time,status,bytes_sent,referer,agent,request_duration)"
+                    . " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                    array(
+                          // Problem: date formats are backend specific. Either use unixtime as %d (long),
+                          // or the native timestamp format.
+                          $entry->time,
+                          $entry->host, 
+                          $entry->user,
+                          $entry->request_method,
+                          $entry->request,
+                          $entry->request_args,
+                          $entry->request_uri,
+                          $entry->_ncsa_time($entry->time), 
+                          $entry->status, 
+                          (int)$entry->size,
+                          $entry->referer,
+                          $entry->user_agent,
+                          $entry->duration));
+    }
 };
 
 /**
@@ -576,23 +647,41 @@ class WikiDB_backend_iterator
      *
      * This returns a hash. The hash may contain the following keys:
      * <dl>
-     * <dt> pagename <dt> (string) the page name
+     * <dt> pagename <dt> (string) the page name or linked page name on link iterators
      * <dt> version  <dt> (int) the version number
      * <dt> pagedata <dt> (hash) page meta-data (as returned from backend::get_pagedata().)
      * <dt> versiondata <dt> (hash) page meta-data (as returned from backend::get_versiondata().)
+     * <dt> linkrelation <dt> (string) the page naming the relation (e.g. isa:=page <=> isa)
      *
      * If this is a page iterator, it must contain the 'pagename' entry --- the others
      * are optional.
      *
      * If this is a version iterator, the 'pagename', 'version', <strong>and</strong> 'versiondata'
      * entries are mandatory.  ('pagedata' is optional.)
+     *
+     * If this is a link iterator, the 'pagename' is mandatory, 'linkrelation' is optional.
      */
     function next() {
         trigger_error("virtual", E_USER_ERROR);
     }
 
     function count() {
-        return count($this->_pages);
+    	if (!empty($this->_pages))
+	    return count($this->_pages);
+	else
+	    return 0;    
+    }
+
+    function asArray() {
+    	if (!empty($this->_pages)) {
+            reset($this->_pages);
+            return $this->_pages;
+    	} else {
+    	    $result = array();
+    	    while ($page = $this->next())
+    	        $result[] = $page;
+            return $result;
+    	}
     }
 
     /**
@@ -609,9 +698,9 @@ class WikiDB_backend_search
 {
     function WikiDB_backend_search($search, &$dbh) {
         $this->_dbh = $dbh;
-        $this->_case_exact =  $search->_case_exact;
+        $this->_case_exact = $search->_case_exact;
         $this->_stoplist   =& $search->_stoplist;
-        $this->_stoplisted = array();
+        $this->stoplisted = array();
     }
     function _quote($word) {
         return preg_quote($word, "/");
@@ -629,19 +718,20 @@ class WikiDB_backend_search
         return "preg_match(\"/\".$word.\"/\"".($this->_case_exact ? "i":"").")";
     }
     /* Eliminate stoplist words.
-       Keep a list of Stoplisted words to inform the poor user. */
+     *  Keep a list of Stoplisted words to inform the poor user. 
+     */
     function isStoplisted ($node) {
     	// check only on WORD or EXACT fulltext search
     	if ($node->op != 'WORD' and $node->op != 'EXACT')
     	    return false;
         if (preg_match("/^".$this->_stoplist."$/i", $node->word)) {
-            array_push($this->_stoplisted, $node->word);
+            array_push($this->stoplisted, $node->word);
             return true;
         }
         return false;
     }
     function getStoplisted($word) {
-        return $this->_stoplisted;
+        return $this->stoplisted;
     }
 }
 
@@ -673,6 +763,29 @@ class WikiDB_backend_search_sql extends WikiDB_backend_search
                                       : " OR LOWER(content) LIKE '$word'");
     }
 }
+
+// $Log: not supported by cvs2svn $
+// Revision 1.36  2008/03/17 19:13:22  rurban
+// define default $backend_type
+//
+// Revision 1.35  2007/08/25 18:17:46  rurban
+// rearrange access_log columns into natural order: request_args
+//
+// Revision 1.34  2007/07/14 12:03:51  rurban
+// just typo
+//
+// Revision 1.33  2007/06/07 21:35:04  rurban
+// fixed backend asArray access to iterators (DebugInfo with SQL)
+//
+// Revision 1.32  2007/02/17 14:14:41  rurban
+// enforce accesslog types
+//
+// Revision 1.31  2007/01/28 22:49:55  rurban
+// use backend specific SQL write_accesslog
+//
+// Revision 1.30  2007/01/02 13:20:26  rurban
+// added link_search. Clarify API: sortby,limit and exclude are strings.
+//
 
 // For emacs users
 // Local Variables:

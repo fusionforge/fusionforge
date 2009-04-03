@@ -1,4 +1,4 @@
--- $Id: mssql-destroy.sql,v 1.2 2005/02/27 09:33:05 rurban Exp $
+-- $Id: mssql-destroy.sql 6203 2008-08-26 13:23:56Z vargenau $
 
 DROP TABLE page;
 DROP TABLE version;
@@ -9,7 +9,7 @@ DROP TABLE session;
 
 DROP TABLE pref;
 --DROP TABLE user;
---DROP TABLE member;
+DROP TABLE member;
 
 -- wikilens theme
 DROP TABLE rating;

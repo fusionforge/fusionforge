@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: GoogleMaps.php,v 1.3 2005/09/18 16:11:40 rurban Exp $');
+rcs_id('$Id: GoogleMaps.php 6185 2008-08-22 11:40:14Z vargenau $');
 /**
  Copyright 2005 $ThePhpWikiProgrammingTeam
 
@@ -69,7 +69,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.3 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -153,10 +153,7 @@ var marker = createMarker(point, '".$markertext->asXml()."'); map.addOverlay(mar
     }
 };
 
-// $Log: GoogleMaps.php,v $
-// Revision 1.3  2005/09/18 16:11:40  rurban
-// fix syntax error
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.2  2005/09/11 13:29:56  rurban
 // remove InfoLink, wiki parse Infotext instead
 //

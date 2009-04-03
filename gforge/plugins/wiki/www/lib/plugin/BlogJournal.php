@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: BlogJournal.php,v 1.4 2005/11/21 20:56:23 rurban Exp $');
+rcs_id('$Id: BlogJournal.php 6185 2008-08-22 11:40:14Z vargenau $');
 /*
  * Copyright 2005 $ThePhpWikiProgrammingTeam
  */
@@ -28,7 +28,7 @@ extends WikiPlugin_WikiBlog
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.4 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -56,18 +56,19 @@ extends WikiPlugin_WikiBlog
             }
         }
         if (!$args['user'] or $args['user'] == ADMIN_USER) {
-            if (BLOG_EMPTY_DEFAULT_PREFIX)
+            if (BLOG_DEFAULT_EMPTY_PREFIX) {
                 $args['user'] = ''; 	    // "Blogs/day" pages 
-            else
+            } else {
                 $args['user'] = ADMIN_USER; // "Admin/Blogs/day" pages 
+            }
         }
         $parent = (empty($args['user']) ? '' : $args['user'] . SUBPAGE_SEPARATOR);
 
         $sp = HTML::Raw('&middot; ');
-        $prefix = $parent . $this->_blogPrefix('wikiblog');
+        $prefix = $base = $parent . $this->_blogPrefix('wikiblog');
         if ($args['month'])
             $prefix .= (SUBPAGE_SEPARATOR . $args['month']);
-        $pages = $dbi->titleSearch(new TextSearchQuery("^".$prefix, true, 'posix'));
+        $pages = $dbi->titleSearch(new TextSearchQuery("^".$prefix.SUBPAGE_SEPARATOR, true, 'posix'));
         $html = HTML(); $i = 0;
         while (($page = $pages->next()) and $i < $args['count']) {
             $rev = $page->getCurrentRevision(false);
@@ -77,8 +78,10 @@ extends WikiPlugin_WikiBlog
             //$html->pushContent(HTML::h3(WikiLink($page, 'known', $rev->get('summary'))));
             $html->pushContent($rev->getTransformedContent('wikiblog'));
         }
-        if ($args['user'] == $user->UserName())
-            $html->pushContent(WikiLink(_("WikiBlog"), 'known', "New entry"));
+        if ($args['user'] == $user->UserName() or $args['user'] == '')
+            $html->pushContent(Button(array('action'=>'WikiBlog',
+					    'mode'=>'add'), 
+				      _("New entry"), $base));
         if (!$i)
             return HTML(HTML::h3(_("No Blog Entries")), $html);
         if (!$args['noheader'])
@@ -89,7 +92,7 @@ extends WikiPlugin_WikiBlog
     }
 };
 
-// $Log: BlogJournal.php,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.4  2005/11/21 20:56:23  rurban
 // no duplicate headline and no direct page link anymore
 //

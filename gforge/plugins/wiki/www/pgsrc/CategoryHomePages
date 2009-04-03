@@ -1,9 +1,8 @@
-Date: Tue, 20 Aug 2002 22:53:22 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.4)
-X-Rcs-Id: $Id: CategoryHomePages,v 1.3 2002/12/29 00:32:34 carstenklapp Exp $
+Date: Wed, 1 Dec 2008 19:07:57 +0200
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
+X-Rcs-Id: $Id: CategoryHomePages 6349 2008-12-02 10:07:39Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=CategoryHomePages;
-  pgsrc_version="2 $Revision: 1.3 $";
   flags="";
   markup=2;
   charset=iso-8859-1
@@ -12,7 +11,4 @@ Content-Transfer-Encoding: binary
 <?plugin AllUsers include_empty=0 ?>
 
 ----
-
-CategoryCategory
-
-
+[CategoryCategory]

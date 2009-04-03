@@ -1,5 +1,5 @@
 # Go to a nonexistent page, create it.
-# $Id: AAC_MakeAutoTestPage.inputs,v 1.2 2002/01/29 22:15:27 wainstead Exp $
+# $Id: AAC_MakeAutoTestPage.inputs 6206 2008-08-26 15:20:22Z vargenau $
 
 type: starting_page
 start_url: index.php?AutoTest

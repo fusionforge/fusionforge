@@ -1,13 +1,13 @@
 <?php //-*-php-*-
-rcs_id('$Id: HttpAuth.php,v 1.5 2005/02/28 20:35:45 rurban Exp $');
+rcs_id('$Id: HttpAuth.php 6184 2008-08-22 10:33:41Z vargenau $');
 /* Copyright (C) 2004 ReiniUrban
  * This file is part of PhpWiki. Terms and Conditions see LICENSE. (GPL2)
  */
 
 /**
  * We have two possibilities here.
- * 1) The webserver location is already HTTP protected (usually Basic). Then just 
- *    use the username and do nothing.
+ * 1) The webserver location is already HTTP protected. Usually Basic, but also 
+ *    NTLM or Digest. Then just use this username and do nothing.
  * 2) The webserver location is not protected, so we enforce basic HTTP Protection
  *    by sending a 401 error and let the client display the login dialog.
  *    This makes only sense if HttpAuth is the last method in USER_AUTH_ORDER,
@@ -19,7 +19,7 @@ rcs_id('$Id: HttpAuth.php,v 1.5 2005/02/28 20:35:45 rurban Exp $');
 class _HttpAuthPassUser
 extends _PassUser
 {
-    function _HttpAuthPassUser($UserName='',$prefs=false) {
+    function _HttpAuthPassUser($UserName='', $prefs=false) {
         if ($prefs) $this->_prefs = $prefs;
         if (!isset($this->_prefs->_method))
            _PassUser::_PassUser($UserName);
@@ -28,10 +28,11 @@ extends _PassUser
         
         // Is this double check really needed? 
         // It is not expensive so we keep it for now.
-        if ($this->userExists())
+        if ($this->userExists()) {
             return $this;
-        else 
+        } else {
             return $GLOBALS['ForbiddenUser'];
+        }
     }
 
     // FIXME! This doesn't work yet!
@@ -55,6 +56,7 @@ extends _PassUser
         // Maybe we should random the realm to really force a logout. 
         // But the next login will fail.
         // better_srand(); $realm = microtime().rand();
+        // TODO: On AUTH_TYPE=NTLM this will fail. Only Basic supported so far.
         header('WWW-Authenticate: Basic realm="'.WIKI_NAME.'"');
         if (strstr(php_sapi_name(), 'apache'))
             header('HTTP/1.0 401 Unauthorized'); 
@@ -76,7 +78,7 @@ extends _PassUser
 	    return $GLOBALS['HTTP_ENV_VARS']['REMOTE_USER'];
 	if (!empty($GLOBALS['REMOTE_USER']))
 	    return $GLOBALS['REMOTE_USER'];
-	//IIS:
+	// IIS + Basic
 	if (!empty($_SERVER['HTTP_AUTHORIZATION'])) {
             list($userid, $passwd) = explode(':', 
                 base64_decode(substr($_SERVER['HTTP_AUTHORIZATION'], 6)));
@@ -87,8 +89,20 @@ extends _PassUser
     
     // force http auth authorization
     function userExists() {
+        if (!isset($_SERVER))
+            $_SERVER =& $GLOBALS['HTTP_SERVER_VARS'];
         $username = $this->_http_username();
-        if (empty($username) 
+        if (strstr($username, "\\") 
+            and isset($_SERVER['AUTH_TYPE']) 
+            and $_SERVER['AUTH_TYPE'] == 'NTLM')
+        {
+            // allow domain\user, change userid to domain/user
+            $username = str_ireplace("\\\\", "\\", $username); // php bug with _SERVER
+            $username = str_ireplace("\\", SUBPAGE_SEPARATOR, $username);
+            $this->_userid = str_ireplace("\\", SUBPAGE_SEPARATOR, $this->_userid);
+        }
+        // FIXME: if AUTH_TYPE = NTLM there's a domain\\name <> domain\name mismatch
+        if (empty($username)
             or strtolower($username) != strtolower($this->_userid)) 
         {
             $this->logout();
@@ -107,7 +121,7 @@ extends _PassUser
         return $this;
     }
     
-    // ignore password for now, this is checked by apache.
+    // ignore password, this is checked by the webservers http auth.
     function checkPass($submitted_password) {
         return $this->userExists() 
             ? ($this->isAdmin() ? WIKIAUTH_ADMIN : WIKIAUTH_USER)
@@ -119,7 +133,14 @@ extends _PassUser
     }
 }
 
-// $Log: HttpAuth.php,v $
+// $Log: not supported by cvs2svn $
+// Revision 1.7  2006/09/03 10:10:00  rurban
+// oops: reset this->_userid also
+//
+// Revision 1.6  2006/09/03 09:57:19  rurban
+// Support AUTH_TYPE=NTLM (Windows domain\username)
+// Workaround PHP _SERVER bug adding \\ => \\\\
+//
 // Revision 1.5  2005/02/28 20:35:45  rurban
 // linebreaks
 //

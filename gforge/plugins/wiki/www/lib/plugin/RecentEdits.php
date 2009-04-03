@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: RecentEdits.php,v 1.1 2004/04/21 04:29:10 rurban Exp $');
+rcs_id('$Id: RecentEdits.php 6185 2008-08-22 11:40:14Z vargenau $');
 
 require_once("lib/plugin/RecentChanges.php");
 
@@ -12,7 +12,7 @@ extends WikiPlugin_RecentChanges
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.1 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -38,12 +38,7 @@ extends WikiPlugin_RecentChanges
     }
 }
 
-// $Log: RecentEdits.php,v $
-// Revision 1.1  2004/04/21 04:29:10  rurban
-// Two convenient RecentChanges extensions
-//   RelatedChanges (only links from current page)
-//   RecentEdits (just change the default args)
-//
+// $Log: not supported by cvs2svn $
 
 // (c-file-style: "gnu")
 // Local Variables:

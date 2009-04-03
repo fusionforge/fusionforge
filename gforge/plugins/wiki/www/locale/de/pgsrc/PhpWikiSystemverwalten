@@ -1,10 +1,10 @@
-Date: Thu, 17 Jun 2004 13:22:00 +0200
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.11pre)
-X-Rcs-Id: $Id: PhpWikiSystemverwalten,v 1.21 2004/06/19 12:14:33 rurban Exp $
+Date: Wed, 3 Jan 2007 18:08:55 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.13)
+X-Rcs-Id: $Id: PhpWikiSystemverwalten 6193 2008-08-23 17:49:48Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiSystemverwalten;
   flags=PAGE_LOCKED;
-  pgsrc_version="2 $Revision: 1.21 $";
+  pgsrc_version="2 $Revision: 6193 $";
   markup=2;
   charset=iso-8859-1
 Content-Transfer-Encoding: binary
@@ -33,16 +33,28 @@ oder rufe die möglichen ~WikiAdmin Aktionen direkt auf:
 ----
 !!! Benutzerverwaltung
 
-Die PhpWiki:EmailVerification ist momentan nicht strikt, d.h. einige mögliche falsche Ergebnisse der automatischen Überprüfung auf gültige E-Mail Addressen kann hier verwaltet werden.
 
-  Dieser Link zeigt eine Liste aller mit E-Mail registrierten Benutzer, und Haken um die Verifizierung manuell zu ändern.
+Setze ein Benutzer Passwort zurück:
+
+  <?plugin-form PasswordReset textinput=user method=post ?>
+
+Email Verification:
+
+  Die PhpWiki:EmailVerification ist momentan nicht strikt, d.h. einige mögliche falsche Ergebnisse der 
+  automatischen Überprüfung auf gültige E-Mail Addressen kann hier verwaltet werden. Manche Domains oder 
+  Email server können nicht automatisch überprüft werden.
+
+  Dieser Link zeigt eine Liste aller mit E-Mail registrierten Benutzer, und Checkboxes um die 
+  Verifizierung manuell zu ändern.
 
   <?plugin WikiAdminUtils
            action=email-verification
            label="E-Mail Verifizierung"
    ?>
 
-To prevent from robots eating all possible ressources in a short time, blocking from certain IP's or not-well-behaving user agents can be defined below. See PhpWiki:HowToBlockRobots and MeatBall:SurgeProtector. _Note: Not yet enabled._
+Zugangsbeschränkungen (disabled):
+
+  To prevent from robots eating all possible ressources in a short time, blocking from certain IP's or not-well-behaving user agents can be defined below. See PhpWiki:HowToBlockRobots and MeatBall:SurgeProtector. _Note: Not yet enabled._
 
   <?plugin WikiAdminUtils
            action=access-restrictions
@@ -84,7 +96,7 @@ deiner Wahl herunterladen.
   <?plugin WikiForm action=dumpserial?>
 
 Nur die neuesten Versionen aller Seiten wird als Einzeldatei in dieses
-Verzeichnis geschrieben. Beachte, daß evtl. deine Benutzerrechte dazu
+Verzeichnis geschrieben. Beachte, dass evtl. deine Benutzerrechte dazu
 ausreichen müssen.
 
 -----------
@@ -205,6 +217,48 @@ might create one....
            action=purge-bad-pagenames
            label="WikiDB Bereinigen"
    ?> 
+
+
+!! Clean WikiDB of empty and unreferenced pages
+
+  *Warning!* This button will delete every empty and unreferenced page, without any possibility to restore them again.
+  This will disable the possibility to revert or get back any deleted page.
+
+  <?plugin WikiAdminUtils
+           action=purge-empty-pages
+           label="Purge all empty unreferenced pages"
+   ?>
+
+!! Convert cached_html to new SQL column
+
+  This is only needed on SQL or ADODB if you didn't do action=upgrade, but created the 
+  new page.cached_html field seperately, and now you want to move this data from 
+  page.pagedata over to page.cached_html.
+
+  <?plugin WikiAdminUtils
+           action=convert-cached-html
+           label="Convert cached_html"
+   ?>
+
+
+!! Check WikiDB
+
+  This button will check the Wiki page database for consistency. This can last several minutes.
+
+  <?plugin WikiAdminUtils
+           action=db-check
+           label="Check WikiDB"
+   ?>
+
+!! Rebuild WikiDB
+
+  This will retransform all pages and rebuild the Wiki database on consistency errors or parser updates. 
+  This can last several minutes, eat a lot of memory and possibly times out!!
+
+  <?plugin WikiAdminUtils
+           action=db-rebuild
+           label="Rebuild WikiDB"
+   ?>
 
 ----
 PhpWikiDokumentation

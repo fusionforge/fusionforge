@@ -1,4 +1,4 @@
--- $Id: mysql-initialize.sql,v 1.11 2006/06/10 12:02:18 rurban Exp $
+-- $Id: mysql-initialize.sql 6203 2008-08-26 13:23:56Z vargenau $
 
 CREATE TABLE page (
 	id              INT NOT NULL AUTO_INCREMENT,
@@ -43,8 +43,10 @@ CREATE TABLE nonempty (
 CREATE TABLE link (
 	linkfrom        INT NOT NULL,
         linkto          INT NOT NULL,
+        relation        INT DEFAULT 0,
 	INDEX (linkfrom),
-        INDEX (linkto)
+        INDEX (linkto),
+        INDEX (relation)
 );
 
 CREATE TABLE session (
@@ -70,10 +72,10 @@ CREATE TABLE session (
 -- in the DBAuthParam SQL statements also.
 
 CREATE TABLE pref (
-  	userid 	CHAR(48) BINARY NOT NULL UNIQUE,
+  	userid 	VARCHAR(48) BINARY NOT NULL UNIQUE,
   	prefs  	TEXT NULL DEFAULT '',
-  	passwd 	CHAR(48) BINARY DEFAULT '',
-	groupname CHAR(48) BINARY DEFAULT 'users',
+  	passwd 	VARCHAR(48) BINARY DEFAULT '',
+	groupname VARCHAR(48) BINARY DEFAULT 'users',
   	PRIMARY KEY (userid)
 );
 
@@ -124,7 +126,7 @@ CREATE INDEX rating_rateepage ON rating (rateepage);
 -- see http://www.outoforder.cc/projects/apache/mod_log_sql/docs-2.0/#id2756178
 CREATE TABLE accesslog (
         time_stamp    INT UNSIGNED,
-	remote_host   VARCHAR(50),
+	remote_host   VARCHAR(100),
 	remote_user   VARCHAR(50),
         request_method VARCHAR(10),
 	request_line  VARCHAR(255),
@@ -141,3 +143,9 @@ CREATE TABLE accesslog (
 CREATE INDEX log_time ON accesslog (time_stamp);
 CREATE INDEX log_host ON accesslog (remote_host);
 -- create extra indices on demand (usually referer. see plugin/AccessLogSql)
+
+-- upgrade to 1.3.13: ( forgotten in lib/upgrade.php! )
+-- ALTER TABLE accesslog CHANGE remote_host VARCHAR(100);
+
+-- ALTER TABLE link ADD relation INT DEFAULT 0;
+-- CREATE INDEX link_relation ON link (relation);

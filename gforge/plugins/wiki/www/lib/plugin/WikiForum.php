@@ -1,9 +1,9 @@
 <?php // -*-php-*-
-rcs_id('$Id: WikiForum.php,v 1.3 2004/06/14 11:31:39 rurban Exp $');
+rcs_id('$Id: WikiForum.php 6185 2008-08-22 11:40:14Z vargenau $');
 /*
  Copyright 2004 $ThePhpWikiProgrammingTeam
  
- This file is (not yet) part of PhpWiki.
+ This file is part of PhpWiki.
 
  PhpWiki is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -58,7 +58,7 @@ extends WikiPlugin_WikiBlog
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.3 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -135,7 +135,7 @@ extends WikiPlugin_WikiBlog
     }
 };
 
-// $Log: WikiForum.php,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.3  2004/06/14 11:31:39  rurban
 // renamed global $Theme to $WikiTheme (gforge nameclash)
 // inherit PageList default options from PageList

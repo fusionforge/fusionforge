@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: ADODB_oci8po.php,v 1.4 2005/11/14 22:24:33 rurban Exp $');
+rcs_id('$Id: ADODB_oci8po.php 6184 2008-08-22 10:33:41Z vargenau $');
 
 /**
  * Oracle extensions for the ADODB DB backend.
@@ -118,6 +118,32 @@ extends WikiDB_backend_ADODB
           print_r($d);
         }
         return unserialize($this->_dbh->BlobDecode($data));
+    }
+
+    function write_accesslog(&$entry) {
+        global $request;
+        $dbh = &$this->_dbh;
+        $log_tbl = $entry->_accesslog->logtable;
+        $dbh->query("INSERT INTO $log_tbl"
+                    . " (time_stamp,remote_host,remote_user,request_method,request_line,request_uri,"
+                    .   "request_args,request_time,status,bytes_sent,referer,agent,request_duration)"
+                    . " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                    array(
+                          // Problem: date formats are backend specific. Either use unixtime as %d (long),
+                          // or the native timestamp format.
+                          date('d-M-Y H:i:s', $entry->time),
+                          $entry->host, 
+                          $entry->user,
+                          $entry->request_method, 
+                          $entry->request, 
+                          $entry->request_uri,    
+                          $entry->request_args,
+                          $entry->_ncsa_time($entry->time), 
+                          $entry->status, 
+                          $entry->size,
+                          $entry->referer,
+                          $entry->user_agent,
+                          $entry->duration));
     }
 
 };

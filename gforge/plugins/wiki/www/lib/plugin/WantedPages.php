@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: WantedPages.php,v 1.16 2004/11/23 15:17:19 rurban Exp $');
+rcs_id('$Id: WantedPages.php 6185 2008-08-22 11:40:14Z vargenau $');
 /*
  Copyright (C) 2002, 2004 $ThePhpWikiProgrammingTeam
  
@@ -43,13 +43,14 @@ extends WikiPlugin
     }
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.16 $");
+                            "\$Revision: 6185 $");
     }
     function getDefaultArguments() {
         return array_merge
             (
              PageList::supportedArgs(),
              array('page'     => '[pagename]', // just for a single page.
+		   'withlinks' => 0,
                    'noheader' => false,
                    'exclude_from'  => _("PgsrcTranslation").','._("InterWikiMap"),
                    'limit'    => '100',
@@ -73,10 +74,20 @@ extends WikiPlugin
         // done.
         // TODO: Move this to backend/dumb/WantedPagesIter.php
 
-        if (!$page)
+        if (!$page and $withlinks) {
             $GLOBALS['WikiTheme']->addPageListColumn(
                 array('wanted' => array('_PageList_Column_WantedPages_wanted', 'custom:wanted', _("Wanted From"), 'left')));
-        $pagelist = new PageList($page ? '' : 'pagename,wanted', $exclude, $args); // search button?
+	    $info = "pagename,wanted";
+	} elseif ($page) {
+            //only get WantedPages links for one page
+	    $info = "";
+	} else {
+            // just link to links
+            $GLOBALS['WikiTheme']->addPageListColumn(
+                array('links' => array('_PageList_Column_WantedPages_links', 'custom:links', _("Links"), 'left')));
+	    $info = "pagename,links";
+	}
+        $pagelist = new PageList($info, $exclude, $args); // search button?
         $pagelist->_wpagelist = array();
 
         if (!$page) {
@@ -88,9 +99,13 @@ extends WikiPlugin
             	// ignore duplicates:
             	if (empty($pagelist->_wpagelist[$wanted]))
             	    $pagelist->addPage($wanted);
-            	$pagelist->_wpagelist[$wanted][] = $wantedfrom;
+            	if (!isset($pagelist->_wpagelist[$wanted]))
+            	    $pagelist->_wpagelist[$wanted][] = $wantedfrom;
+            	elseif (!in_array($wantedfrom, $pagelist->_wpagelist[$wanted]))
+            	    $pagelist->_wpagelist[$wanted][] = $wantedfrom;
             }
             $wanted_iter->free();
+            unset($wanted_iter);
             // update limit, but it's still a hack.
             $pagelist->_options['limit'] = "$offset," . min($pagelist->getTotal(), $maxcount);
         } elseif ($dbi->isWikiPage($page)) {
@@ -117,7 +132,8 @@ extends WikiPlugin
                 $pagelist->setCaption(sprintf(_("Wanted Pages in this wiki:")));
         }
         // reference obviously doesn't work, so force an update to add _wpagelist to parentobj
-        if (isset($pagelist->_columns[1]) and $pagelist->_columns[1]->_field == 'wanted')
+        if (isset($pagelist->_columns[1]) 
+            and in_array($pagelist->_columns[1]->_field, array('wanted','links')))
             $pagelist->_columns[1]->parentobj =& $pagelist;
         return $pagelist;
     }
@@ -131,7 +147,8 @@ class _PageList_Column_WantedPages_wanted extends _PageList_Column {
     }
     function _getValue(&$page, $revision_handle) {
     	$html = false;
-        foreach($this->parentobj->_wpagelist[$page->getName()] as $page) {
+	$pagename = $page->getName();
+        foreach ($this->parentobj->_wpagelist[$pagename] as $page) {
             if ($html)
                 $html->pushContent(', ', WikiLink($page));
             else 
@@ -141,7 +158,24 @@ class _PageList_Column_WantedPages_wanted extends _PageList_Column {
     }
 }
 
-// $Log: WantedPages.php,v $
+/*
+ * List of Links and link to ListLinks
+ */
+class _PageList_Column_WantedPages_links extends _PageList_Column {
+    function _PageList_Column_WantedPages_links (&$params) {
+        $this->parentobj =& $params[3];
+        $this->_PageList_Column($params[0],$params[1],$params[2]);
+    }
+    function _getValue(&$page, $revision_handle) {
+    	$html = false;
+	$pagename = $page->getName();
+	$count = count($this->parentobj->_wpagelist[$pagename]);
+        return LinkURL(WikiURL($page, array('action' => 'BackLinks'), false), 
+			fmt("(%d Links)", $count));
+    }
+}
+
+// $Log: not supported by cvs2svn $
 // Revision 1.16  2004/11/23 15:17:19  rurban
 // better support for case_exact search (not caseexact for consistency),
 // plugin args simplification:

@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-rcs_id('$Id: install.php,v 1.4 2005/09/15 05:56:12 rurban Exp $');
+rcs_id('$Id: install.php 6184 2008-08-22 10:33:41Z vargenau $');
 
 /*
  Copyright 2004 $ThePhpWikiProgrammingTeam
@@ -58,10 +58,7 @@ function run_install($part = '') {
 init_install();
 
 /**
- $Log: install.php,v $
- Revision 1.4  2005/09/15 05:56:12  rurban
- read configurator desc from config-dist.ini, update desc, fix some warnings
-
+ $Log: not supported by cvs2svn $
  Revision 1.3  2005/02/28 20:24:23  rurban
  _GET is different from HTPP_GET_VARS. use the correct one
 

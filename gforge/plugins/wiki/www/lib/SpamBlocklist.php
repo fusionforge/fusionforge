@@ -1,5 +1,5 @@
 <?php
-rcs_id('$Id: SpamBlocklist.php,v 1.1 2005/10/29 08:21:58 rurban Exp $');
+rcs_id('$Id: SpamBlocklist.php 6184 2008-08-22 10:33:41Z vargenau $');
 /* Copyright (C) 2005 Reini Urban
  *
  * This file is part of PhpWiki.
@@ -45,7 +45,7 @@ function stripDomainPrefixes($host) {
     }
     $host_2_elements = implode('.', $host_elements);
     if (empty($twoleveltlds)) {
-	$data = @file(dirname(__FILE__)."/../cfg/two-level-tlds");
+	$data = @file(dirname(__FILE__)."/../config/two-level-tlds");
 	$twoleveltlds = $data ? array_flip($data) : array();
     }
     if (array_key_exists($host_2_elements, $twoleveltlds))
@@ -62,7 +62,7 @@ function IsBlackListed($uri) {
     	                      /* "sbl-xbl.spamhaus.net" */
     static $whitelist = array();
     if (empty($whitelist)) { // list of domains
-	$data = @file(dirname(__FILE__)."/../cfg/whitelist");
+	$data = @file(dirname(__FILE__)."/../config/whitelist");
 	$whitelist = $data ? array_flip($data) : array();
     }
 
@@ -119,7 +119,7 @@ function BlackListDebug($host) {
 }
 */
 
-// $Log: SpamBlocklist.php,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.1  2005/10/29 08:21:58  rurban
 // ENABLE_SPAMBLOCKLIST:
 //   Check for links to blocked external tld domains in new edits, against

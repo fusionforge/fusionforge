@@ -1,5 +1,5 @@
 /**
- * $Id: phpwiki-modern.css,v 1.1 2002/03/06 02:21:16 carstenklapp Exp $
+ * $Id: phpwiki-modern.css 6474 2009-01-31 14:44:58Z vargenau $
  *
  * Inspiration for this stylesheet:
  *
@@ -7,7 +7,7 @@
  * http://www.apache.org/
  *
  * This incarnation of this stylesheet is a complete rewrite from the
- * ground up. It has not yet been tested against NS4.
+ * ground up.
  *
  * Mozilla's "DOM Inspector" Sidebar was an invaluable troubleshooting
  * tool for mapping the more complex CSS node selectors, such as those
@@ -448,6 +448,24 @@ div.errors {
   margin: 1ex 0;
   padding: 0.5ex 0.5em;
 }
+
+/* Hide the elements we put in just to get around NS4 bugs. */
+div.br { display: none; }
+
+/* This break NS4, but is necessary for IE4. */
+div.wikitext { width: auto; }
+
+/* Link icons */
+img.linkicon { vertical-align: middle; }
+img.rssicon  { vertical-align: baseline; }
+
+/****************************************************************
+ **
+ ** Diff Output
+ **
+ *****************************************************************/
+.diff .block div { position: relative; padding-left: 1.5em; } 
+.diff .prefix    { position: absolute; left: 0.5em; top: 0; }
 
 
 /* For emacs users

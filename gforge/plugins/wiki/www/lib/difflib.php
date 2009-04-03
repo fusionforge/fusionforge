@@ -1,5 +1,5 @@
 <?php
-rcs_id('$Id: difflib.php,v 1.12 2005/02/04 13:44:45 rurban Exp $');
+rcs_id('$Id: difflib.php 6184 2008-08-22 10:33:41Z vargenau $');
 
 // difflib.php
 //
@@ -909,10 +909,7 @@ class BlockDiffFormatter extends DiffFormatter
 }
 
 /**
- $Log: difflib.php,v $
- Revision 1.12  2005/02/04 13:44:45  rurban
- prevent from php5 nameclash
-
+ $Log: not supported by cvs2svn $
  Revision 1.11  2004/11/21 11:59:19  rurban
  remove final \n to be ob_cache independent
 

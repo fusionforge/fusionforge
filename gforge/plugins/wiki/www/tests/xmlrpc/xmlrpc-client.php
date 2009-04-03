@@ -171,11 +171,11 @@ function run_easy_tests($server, $debug=0, $output = null) {
 
     //global $wiki_dmap;
 
-    run_test($server, $debug, $output, "wiki.getRPCVersionSupported", '', 2);
+    run_test($server, $debug, $output, "wiki.getRPCVersionSupported", '', 1);
     
     // getRecentChanges of the last day:
-    // Note: crashes with dba on index.php, not on RPC2.php
-    //run_test($server, $debug, $output, "wiki.getRecentChanges", iso8601_encode(time()-86400));
+    // Note: may crash with dba on index.php, not on RPC2.php
+    run_test($server, $debug, $output, "wiki.getRecentChanges", iso8601_encode(time()-86400));
     
     run_test($server, $debug, $output, "wiki.getPage", "HomePage", "* What is a WikiWikiWeb? A description of this application. * Learn HowToUseWiki and learn about AddingPages. * Use the SandBox page to experiment with Wiki pages. * Please sign your name in RecentVisitors. * See RecentChanges for the latest page additions and changes. * Find out which pages are MostPopular. * Read the ReleaseNotes and RecentReleases. * Administer this wiki via PhpWikiAdministration. * See more PhpWikiDocumentation.");
     run_test($server, $debug, $output, "wiki.getPageVersion", array("HomePage", 1));

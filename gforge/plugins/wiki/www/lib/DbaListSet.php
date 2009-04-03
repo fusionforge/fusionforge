@@ -1,4 +1,4 @@
-<?php rcs_id('$Id: DbaListSet.php,v 1.3 2004/11/21 11:59:14 rurban Exp $');
+<?php rcs_id('$Id: DbaListSet.php 6184 2008-08-22 10:33:41Z vargenau $');
 
 class DbaListSet
 {

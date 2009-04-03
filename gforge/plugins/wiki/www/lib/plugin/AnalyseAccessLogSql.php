@@ -1,5 +1,5 @@
 <?php
-rcs_id('$Id: AnalyseAccessLogSql.php,v 1.1 2005/02/12 17:26:24 rurban Exp $');
+rcs_id('$Id: AnalyseAccessLogSql.php 6185 2008-08-22 11:40:14Z vargenau $');
 /*
  Copyright 2005 Charles Corrigan and $ThePhpWikiProgrammingTeam
 
@@ -60,43 +60,63 @@ extends WikiPlugin
 
         // get the correct name for the table
         //FIXME is there a more correct way to do this?
-        global $DBParams;
+        global $DBParams, $request;
         $accesslog = (!empty($DBParams['prefix']) ? $DBParams['prefix'] : '')."accesslog";
 
         $query = '';
-        if ($args['mode']=='referring_urls') {
+        $backend_type = $request->_dbi->_backend->backendType();
+        switch ($backend_type) {
+        case 'mysql': 
+            $Referring_URL = "left(referer,length(referer)-instr(reverse(referer),'?'))"; break;
+        case 'pgsql': 
+        case 'postgres7': 
+            $Referring_URL = "substr(referer,0,position('?' in referer))"; break;
+        default: 
+            $Referring_URL = "referer";
+        }
+        switch ($args['mode']) {
+        case 'referring_urls':
             if ($where_conditions<>'')
                 $where_conditions = 'WHERE '.$where_conditions.' ';
             $query = "SELECT "
-                ."left(referer,length(referer)-instr(reverse(referer),'?')) AS Referring_URL, "
-                ."count(*) AS Referral_Count "
-                ."FROM $accesslog "
-                .$where_conditions
-                ."GROUP BY Referring_URL";
-
-        } elseif ($args['mode']=='external_referers') {
+                . "$Referring_URL AS Referring_URL, "
+                . "count(*) AS Referral_Count "
+                . "FROM $accesslog "
+                . $where_conditions
+                . "GROUP BY Referring_URL";
+            break;
+        case 'external_referers':
             $args['local_referrers'] = 'false';
             $where_conditions = $this->_getWhereConditions($args);
             if ($where_conditions<>'')
                 $where_conditions = 'WHERE '.$where_conditions.' ';
             $query = "SELECT "
-                ."left(referer,length(referer)-instr(reverse(referer),'?')) AS Referring_URL, "
-                ."count(*) AS Referral_Count "
-                ."FROM $accesslog "
-                .$where_conditions
-                ."GROUP BY Referring_URL";
-
-        } elseif ($args['mode']=='referring_domains') {
+                . "$Referring_URL AS Referring_URL, "
+                . "count(*) AS Referral_Count "
+                . "FROM $accesslog "
+                . $where_conditions
+                . "GROUP BY Referring_URL";
+            break;
+        case 'referring_domains':
             if ($where_conditions<>'')
                 $where_conditions = 'WHERE '.$where_conditions.' ';
+            switch ($backend_type) {
+            case 'mysql': 
+                $Referring_Domain = "left(referer, if(locate('/', referer, 8) > 0,locate('/', referer, 8) -1, length(referer)))"; break;
+            case 'pgsql': 
+            case 'postgres7': 
+                $Referring_Domain = "substr(referer,0,8) || regexp_replace(substr(referer,8), '/.*', '')"; break;
+            default: 
+                $Referring_Domain = "referer"; break;
+            }
             $query = "SELECT "
-                ."left(referer, if(locate('/', referer, 8) > 0,locate('/', referer, 8) -1, length(referer))) AS Referring_Domain, "
-                ."count(*) AS Referral_Count "
-                ."FROM $accesslog "
-                .$where_conditions
-                ."GROUP BY Referring_Domain";
-
-        } elseif ($args['mode']=='remote_hosts') {
+                . "$Referring_Domain AS Referring_Domain, "
+                . "count(*) AS Referral_Count "
+                . "FROM $accesslog "
+                . $where_conditions
+                . "GROUP BY Referring_Domain";
+            break;
+        case 'remote_hosts':
             if ($where_conditions<>'')
                 $where_conditions = 'WHERE '.$where_conditions.' ';
             $query = "SELECT "
@@ -105,8 +125,8 @@ extends WikiPlugin
                 ."FROM $accesslog "
                 .$where_conditions
                 ."GROUP BY Remote_Host";
-
-        } elseif ($args['mode']=='users') {
+            break;
+        case 'users':
             if ($where_conditions<>'')
                 $where_conditions = 'WHERE '.$where_conditions.' ';
             $query = "SELECT "
@@ -114,9 +134,9 @@ extends WikiPlugin
                 ."count(*) AS Access_Count "
                 ."FROM $accesslog "
                 .$where_conditions
-                ."GROUP BY User";
-
-        } elseif ($args['mode']=='host_users') {
+                ."GROUP BY remote_user";
+            break;
+        case 'host_users':
             if ($where_conditions<>'')
                 $where_conditions = 'WHERE '.$where_conditions.' ';
             $query = "SELECT "
@@ -125,9 +145,9 @@ extends WikiPlugin
                 ."count(*) AS Access_Count "
                 ."FROM $accesslog "
                 .$where_conditions
-                ."GROUP BY Remote_Host, User";
-
-        } elseif ($args['mode']=="search_bots") {
+                ."GROUP BY remote_host, remote_user";
+            break;
+        case "search_bots":
             // This queries for all entries in the SQL access log table that
             // have a dns name that I know to be a web search engine crawler and
             // categorises the results into time buckets as per the list below
@@ -137,43 +157,52 @@ extends WikiPlugin
             // 3 - 1 week   - 604800   = 60 * 60 * 24 * 7
             // 4 - 1 month  - 2629800  = 60 * 60 * 24 * 365.25 / 12
             // 5 - 1 year   - 31557600 = 60 * 60 * 24 * 365.25
-            
             $now = time();
             $query = "SELECT "
-                ."IF($now-time_stamp<60, '"._("0 - last minute")."',"
-                  ."IF($now-time_stamp<3600, '"._("1 - 1 minute to 1 hour")."',"
-                    ."IF($now-time_stamp<86400, '"._("2 - 1 hour to 1 day")."',"
-                      ."IF($now-time_stamp<604800, '"._("3 - 1 day to 1 week")."',"
-                        ."IF($now-time_stamp<2629800, '"._("4 - 1 week to 1 month")."',"
-                          ."IF($now-time_stamp<31557600, '"._("5 - 1 month to 1 year")."'," 
-                            ."'"._("6 - more than 1 year")."')))))) AS 'Time_Scale', "
-                ."remote_host AS 'Remote_Host', "
-                ."count(*) AS 'Access_Count' "
+                ."CASE WHEN $now-time_stamp<60 THEN '"._("0 - last minute")."' ELSE "
+                  ."CASE WHEN $now-time_stamp<3600 THEN '"._("1 - 1 minute to 1 hour")."' ELSE "
+                    ."CASE WHEN $now-time_stamp<86400 THEN '"._("2 - 1 hour to 1 day")."' ELSE "
+                      ."CASE WHEN $now-time_stamp<604800 THEN '"._("3 - 1 day to 1 week")."' ELSE "
+                        ."CASE WHEN $now-time_stamp<2629800 THEN '"._("4 - 1 week to 1 month")."' ELSE "
+                          ."CASE WHEN $now-time_stamp<31557600 THEN '"._("5 - 1 month to 1 year")."' ELSE "
+                            ."'"._("6 - more than 1 year")."' END END END END END END AS Time_Scale, "
+                ."remote_host AS Remote_Host, "
+                ."count(*) AS Access_Count "
                 ."FROM $accesslog "
                 ."WHERE (remote_host LIKE '%googlebot.com' "
                 ."OR remote_host LIKE '%alexa.com' "
                 ."OR remote_host LIKE '%inktomisearch.com' "
                 ."OR remote_host LIKE '%msnbot.msn.com') "
                 .($where_conditions ? 'AND '.$where_conditions : '')
-                ."GROUP BY 'Time_Scale', 'Remote_Host'";
-            
-        } elseif ($args['mode']=="search_bots_hits") {
+                ."GROUP BY Time_Scale, remote_host";
+            break;
+        case "search_bots_hits":
             // This queries for all entries in the SQL access log table that
             // have a dns name that I know to be a web search engine crawler and
             // displays the URI that was hit.
             // If PHPSESSID appears in the URI, just display the URI to the left of this
-            
+            $sessname = session_name();
+            switch ($backend_type) {
+            case 'mysql': 
+                $Request_URI = "IF(instr(request_uri, '$sessname')=0, request_uri,left(request_uri, instr(request_uri, '$sessname')-2))";
+                break;
+            case 'pgsql': 
+            case 'postgres7': 
+                $Request_URI = "regexp_replace(request_uri, '$sessname.*', '')"; break;
+            default: 
+                $Request_URI = 'request_uri'; break;
+            }
             $now = time();
             $query = "SELECT "
-                ."IF($now-time_stamp<60, '"._("0 - last minute")."',"
-                  ."IF($now-time_stamp<3600, '"._("1 - 1 minute to 1 hour")."',"
-                    ."IF($now-time_stamp<86400, '"._("2 - 1 hour to 1 day")."',"
-                      ."IF($now-time_stamp<604800, '"._("3 - 1 day to 1 week")."',"
-                        ."IF($now-time_stamp<2629800, '"._("4 - 1 week to 1 month")."',"
-                          ."IF($now-time_stamp<31557600, '"._("5 - 1 month to 1 year")."'," 
-                            ."'"._("6 - more than 1 year")."')))))) AS 'Time_Scale', "
-                ."remote_host AS 'Remote_Host', "
-                ."IF(instr(request_uri, 'PHPSESS')=0, request_uri,left(request_uri, instr(request_uri, 'PHPSESS')-2)) AS 'Request_URI' "
+                ."CASE WHEN $now-time_stamp<60 THEN '"._("0 - last minute")."' ELSE "
+                  ."CASE WHEN $now-time_stamp<3600 THEN '"._("1 - 1 minute to 1 hour")."' ELSE "
+                    ."CASE WHEN $now-time_stamp<86400 THEN '"._("2 - 1 hour to 1 day")."' ELSE "
+                      ."CASE WHEN $now-time_stamp<604800 THEN '"._("3 - 1 day to 1 week")."' ELSE "
+                        ."CASE WHEN $now-time_stamp<2629800 THEN '"._("4 - 1 week to 1 month")."' ELSE "
+                          ."CASE WHEN $now-time_stamp<31557600 THEN '"._("5 - 1 month to 1 year")."' ELSE "
+                            ."'"._("6 - more than 1 year")."' END END END END END END AS Time_Scale, "
+                ."remote_host AS Remote_Host, "
+                ."$Request_URI AS Request_URI "
                 ."FROM $accesslog "
                 ."WHERE (remote_host LIKE '%googlebot.com' "
                 ."OR remote_host LIKE '%alexa.com' "
@@ -209,7 +238,7 @@ extends WikiPlugin
     function getDefaultArguments() {
         return array(
                      'mode'             => 'referring_domains',
-                     // referring_domains, referring_urls, remote_hosts, users, host_users
+                     // referring_domains, referring_urls, remote_hosts, users, host_users, search_bots, search_bots_hits
                      'caption'          => '', 
                      // blank means use the mode as the caption/title for the output
                      'local_referrers'  => 'true',  // only show external referring sites
@@ -229,7 +258,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.1 $");
+                            "\$Revision: 6185 $");
     }
 
     function run($dbi, $argstr, &$request, $basepage) {
@@ -320,11 +349,22 @@ extends WikiPlugin
         }
 
         if ($args['local_referrers']<>'true') {
+            global $request;
             if ($where_conditions<>'')
                 $where_conditions = $where_conditions.' AND ';
             $localhost = SERVER_URL;
             $len = strlen($localhost);
-            $where_conditions = $where_conditions."left(referer,$len)<>'$localhost'";
+            $backend_type = $request->_dbi->_backend->backendType();
+            switch ($backend_type) {
+            case 'mysql': 
+                $ref_localhost = "left(referer,$len)<>'$localhost'"; break;
+            case 'pgsql': 
+            case 'postgres7': 
+                $ref_localhost = "substr(referer,0,$len)<>'$localhost'"; break;
+            default: 
+                $ref_localhost = "";
+            }
+            $where_conditions = $where_conditions.$ref_localhost;
         }
 
         // The assumed contract is that there is a space at the end of the
@@ -347,7 +387,7 @@ extends WikiPlugin
 
 }
 
-// $Log: AnalyseAccessLogSql.php,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.1  2005/02/12 17:26:24  rurban
 // renamed to Sql. Added translations (inc not yet)
 //

@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-rcs_id('$Id: BogoLogin.php,v 1.6 2005/08/06 13:21:37 rurban Exp $');
+rcs_id('$Id: BogoLogin.php 6184 2008-08-22 10:33:41Z vargenau $');
 /* Copyright (C) 2004 ReiniUrban
  * This file is part of PhpWiki. Terms and Conditions see LICENSE. (GPL2)
  */
@@ -61,10 +61,7 @@ class _BogoLoginPassUser extends _PassUser {
     }
 }
 
-// $Log: BogoLogin.php,v $
-// Revision 1.6  2005/08/06 13:21:37  rurban
-// only cosmetics
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.5  2005/02/14 12:28:27  rurban
 // fix policy strict. Thanks to Mikhail Vladimirov
 //

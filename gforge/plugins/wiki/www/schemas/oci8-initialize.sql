@@ -1,4 +1,4 @@
--- $Id: oci8-initialize.sql,v 1.5 2005/10/12 06:08:37 rurban Exp $
+-- $Id: oci8-initialize.sql 6203 2008-08-26 13:23:56Z vargenau $
 
 set verify off
 set feedback off
@@ -53,6 +53,7 @@ define nonmt_id=&prefix.nonmt_id
 define link_tbl=&prefix.link
 define link_from=&prefix.link_from
 define link_to=&prefix.link_to
+define link_rel=&prefix.link_rel
 
 define session_tbl=&prefix.session
 define sess_id=&prefix.sess_id
@@ -90,6 +91,9 @@ CREATE TABLE &page_tbl (
 	CONSTRAINT &page_nm UNIQUE (pagename)
 );
 
+-- we use 0 <=> global_data to satisfy the relation = 0 constraint
+INSERT INTO &page_tbl VALUES (0,'global_data',0,'','');
+
 prompt Creating &version_tbl
 CREATE TABLE &version_tbl (
 	id		INT NOT NULL,
@@ -120,10 +124,12 @@ CREATE TABLE &nonempty_tbl (
 prompt Creating &link_tbl
 CREATE TABLE &link_tbl (
         linkfrom	INT NOT NULL,
-        linkto		INT NOT NULL
+        linkto		INT NOT NULL,
+        relation  	INT 
 );
 CREATE INDEX &link_from ON &link_tbl (linkfrom);
 CREATE INDEX &link_to   ON &link_tbl (linkto);
+CREATE INDEX &link_rel  ON &link_tbl (relation);
 
 prompt Creating &session_tbl
 CREATE TABLE &session_tbl (
@@ -148,17 +154,14 @@ CREATE TABLE &pref_tbl (
 	groupname CHAR(48) DEFAULT 'users',
 	CONSTRAINT &pref_id PRIMARY KEY (userid)
 );
--- ALTER TABLE pref ADD passwd 	CHAR(48) DEFAULT '';
--- ALTER TABLE pref ADD groupname CHAR(48) DEFAULT 'users';
 
 -- better use the extra pref table where such users can be created easily 
 -- without password.
-
 --prompt Creating &user_tbl
 --CREATE TABLE &user_tbl (
 --  	userid 	CHAR(48) NOT NULL,
---	prefs  	CLOB DEFAULT '',
 --  	passwd 	CHAR(48) DEFAULT '',
+--	prefs  	CLOB DEFAULT '',
 --	groupname CHAR(48) DEFAULT 'users',
 --  	CONSTRAINT &user_id PRIMARY KEY (userid)
 --);
@@ -193,16 +196,16 @@ prompt Creating &accesslog_tbl
 CREATE TABLE &accesslog_tbl (
 -- for OCI 9i+ use:   time_stamp TIMESTAMP,
         time_stamp    DATE,
-	remote_host   VARCHAR2(50),
+	remote_host   VARCHAR2(100),
 	remote_user   VARCHAR2(50),
         request_method VARCHAR2(10),
 	request_line  VARCHAR2(255),
 	request_args  VARCHAR2(255),
 	request_file  VARCHAR2(255),
 	request_uri   VARCHAR2(255),
-	request_time  DATE,
+	request_time  VARCHAR2(28),
 	status 	      NUMBER(4),
-	bytes_sent    NUMBER(4),
+	bytes_sent    NUMBER,
         referer       VARCHAR(255), 
 	agent         VARCHAR(255),
 	request_duration FLOAT

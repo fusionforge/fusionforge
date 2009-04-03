@@ -1,4 +1,4 @@
-<?php // $Id: index.php,v 1.1 2005/06/06 16:45:45 rurban Exp $ 
+<?php // $Id: index.php 6204 2008-08-26 15:12:03Z vargenau $ 
 	header( "Location: ../index.php?pagename=UpLoad" );
 	exit();
 ?>

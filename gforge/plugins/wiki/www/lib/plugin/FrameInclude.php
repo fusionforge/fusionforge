@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: FrameInclude.php,v 1.10 2004/06/14 11:31:39 rurban Exp $');
+rcs_id('$Id: FrameInclude.php 6248 2008-09-07 15:13:56Z vargenau $');
 /*
  Copyright 2002 $ThePhpWikiProgrammingTeam
 
@@ -58,7 +58,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.10 $");
+                            "\$Revision: 6248 $");
     }
 
     function getDefaultArguments() {
@@ -68,7 +68,7 @@ extends WikiPlugin
                       'title'       => false,
                       'rows'        => '18%,*,15%', // names: top, $name, bottom
                       'cols'        => '20%,*',     // names: left, $name
-                                                    // only useful on Theme "Sidebar"
+                                                    // only useful on WikiTheme "Sidebar"
                       'frameborder' => 1,
                       'marginwidth'  => false,
                       'marginheight' => false,
@@ -147,39 +147,6 @@ extends WikiPlugin
         $request->finish(); //noreturn
     }
 };
-
-// $Log: FrameInclude.php,v $
-// Revision 1.10  2004/06/14 11:31:39  rurban
-// renamed global $Theme to $WikiTheme (gforge nameclash)
-// inherit PageList default options from PageList
-//   default sortby=pagename
-// use options in PageList_Selectable (limit, sortby, ...)
-// added action revert, with button at action=diff
-// added option regex to WikiAdminSearchReplace
-//
-// Revision 1.9  2004/02/17 12:11:36  rurban
-// added missing 4th basepage arg at plugin->run() to almost all plugins. This caused no harm so far, because it was silently dropped on normal usage. However on plugin internal ->run invocations it failed. (InterWikiSearch, IncludeSiteMap, ...)
-//
-// Revision 1.8  2003/02/26 22:32:06  dairiki
-// Wups.  Delete disused cruft.
-//
-// Revision 1.7  2003/02/26 22:27:19  dairiki
-// Fix and refactor FrameInclude plugin (more or less).
-//
-// (This should now generate valid HTML.  Woohoo!)
-//
-// The output when using the Sidebar theme is ugly enough that it should
-// be considered broken.  (But the Sidebar theme appears pretty broken in
-// general right now.)
-//
-// (Personal comment (not to be taken personally): I must say that I
-// remain unconvinced of the usefulness of this plugin.)
-//
-// Revision 1.6  2003/01/18 21:41:01  carstenklapp
-// Code cleanup:
-// Reformatting & tabs to spaces;
-// Added copyleft, getVersion, getDescription, rcs_id.
-//
 
 // For emacs users
 // Local Variables:

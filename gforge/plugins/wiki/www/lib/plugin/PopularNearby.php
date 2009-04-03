@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: PopularNearby.php,v 1.5 2004/11/23 15:17:19 rurban Exp $');
+rcs_id('$Id: PopularNearby.php 6185 2008-08-22 11:40:14Z vargenau $');
 /*
  Copyright 2004 $ThePhpWikiProgrammingTeam
 
@@ -50,7 +50,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.5 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -156,15 +156,7 @@ function cmp_by_hits($a, $b) {
 }
 
 
-// $Log: PopularNearby.php,v $
-// Revision 1.5  2004/11/23 15:17:19  rurban
-// better support for case_exact search (not caseexact for consistency),
-// plugin args simplification:
-//   handle and explode exclude and pages argument in WikiPlugin::getArgs
-//     and exclude in advance (at the sql level if possible)
-//   handle sortby and limit from request override in WikiPlugin::getArgs
-// ListSubpages: renamed pages to maxpages
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.4  2004/05/01 18:02:41  rurban
 // 4.0.6 obviously cannot use methods as cmp function. so it must be a global func
 //

@@ -1,8 +1,0 @@
-<?php // -*-html-*-
-  rcs_id('$Id: bottom.tmpl,v 1.1 2004/12/19 17:34:19 rurban Exp $');
-?>
-<!-- Add your Disclaimer here -->
-<?php if (!$WikiTheme->DUMP_MODE) { ?>
-<?= $GLOBALS['ErrorManager']->getPostponedErrorsAsHTML() ?>
-<?php if (defined('DEBUG') and DEBUG & 1) { ?><?= Template('debug') ?><?php } ?>
-<?php } ?>

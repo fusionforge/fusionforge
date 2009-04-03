@@ -36,7 +36,7 @@ Notes:
 // <edd@usefulinc.com>
 //
 
-// $Id: xmlrpc_emu.inc,v 1.1 2004/12/10 00:12:14 rurban Exp $
+// $Id: xmlrpc_emu.inc 6209 2008-08-26 15:30:39Z vargenau $
 
 
 // Copyright (c) 1999,2000,2001 Edd Dumbill.
@@ -586,7 +586,7 @@ function val_to_php($xmlrpc_val) {
       // magic to let xmlprc-epi engine know about base64 and datetime types.
       $epi_type = $epiTypeMap[$type];
       if($epi_type) {
-         xmlrpc_set_type(&$php_val, $epi_type);
+         xmlrpc_set_type($php_val, $epi_type);
          // php_val may now be an object, if epi_type = base64 or datetime.
       }
       

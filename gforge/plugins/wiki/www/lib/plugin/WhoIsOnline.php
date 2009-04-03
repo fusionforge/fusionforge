@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: WhoIsOnline.php,v 1.11 2005/02/02 19:39:42 rurban Exp $');
+rcs_id('$Id: WhoIsOnline.php 6185 2008-08-22 11:40:14Z vargenau $');
 /*
  Copyright 2004 $ThePhpWikiProgrammingTeam
  
@@ -44,7 +44,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.11 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -102,8 +102,12 @@ extends WikiPlugin
         $num_online = 0; $num_guests = 0; $num_registered = 0;
         $registered = array(); $guests = array();
         $admins = array(); $uniquenames = array();
+	$sess_time = ini_get('session.gc_maxlifetime'); // in seconds
+	if (!$sess_time) $sess_time = 24*60;
         if (isset($request->_dbsession)) { // only ADODB and SQL backends
-            $dbsession = &$request->_dbsession;
+            $dbsession =& $request->_dbsession;
+            if (method_exists($dbsession->_backend, "gc"))
+                $dbsession->_backend->gc($sess_time);
             $sessions = $dbsession->currentSessions();
             //$num_online = count($sessions);
             $guestname = _("Guest");
@@ -165,8 +169,6 @@ extends WikiPlugin
         }
         $num_users = $num_guests + $num_registered;
 
-	$sess_time = ini_get('session.gc_maxlifetime'); // in seconds
-
         //TODO: get and sets max stats in global_data
         //$page = $dbi->getPage($request->getArg('pagename'));
         $stats = array(); $stats['max_online_num'] = 0;
@@ -198,7 +200,7 @@ extends WikiPlugin
     }
 };
 
-// $Log: WhoIsOnline.php,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.11  2005/02/02 19:39:42  rurban
 // better box layout
 //

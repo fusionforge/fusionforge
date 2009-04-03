@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: OrphanedPages.php,v 1.10 2004/07/09 13:05:34 rurban Exp $');
+rcs_id('$Id: OrphanedPages.php 6185 2008-08-22 11:40:14Z vargenau $');
 /**
  This file is part of PhpWiki.
 
@@ -42,7 +42,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.10 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -99,10 +99,7 @@ extends WikiPlugin
     }
 };
 
-// $Log: OrphanedPages.php,v $
-// Revision 1.10  2004/07/09 13:05:34  rurban
-// just aesthetics
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.9  2004/07/09 12:49:46  rurban
 // no limit, no sorting
 //

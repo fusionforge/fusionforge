@@ -1,7 +1,7 @@
 <?php // -*-php-*-
-rcs_id('$Id: PagePerm.php,v 1.40 2005/10/29 14:16:58 rurban Exp $');
+rcs_id('$Id: PagePerm.php,v 1.45 2007/09/15 12:26:43 rurban Exp $');
 /*
- Copyright 2004 $ThePhpWikiProgrammingTeam
+ Copyright 2004,2007 $ThePhpWikiProgrammingTeam
 
  This file is part of PhpWiki.
 
@@ -23,7 +23,7 @@ rcs_id('$Id: PagePerm.php,v 1.40 2005/10/29 14:16:58 rurban Exp $');
 /**
    Permissions per page and action based on current user, 
    ownership and group membership implemented with ACL's (Access Control Lists),
-   opposed to the simplier unix like ugo:rwx system.
+   opposed to the simplier unix-like ugo:rwx system.
    The previous system was only based on action and current user. (lib/main.php)
 
    Permissions may be inherited from its parent pages, a optional the 
@@ -86,7 +86,7 @@ function pagePermissions($pagename) {
             return array('inherited', pagePermissions(getParentPage($pagename)));
         }
     } elseif ($perm = getPagePermissions($page)) {
-        return array('page',$perm);
+        return array('page', $perm);
     // or no permissions defined; returned inherited permissions, to be displayed in gray
     } elseif ($pagename == '.') { // stop recursion in pathological case. 
     	// "." defined, without any acl
@@ -166,16 +166,30 @@ function action2access ($action) {
     case 'viewsource':
     case 'diff':
     case 'select':
-    case 'xmlrpc':
     case 'search':
     case 'pdf':
     case 'captcha':
-        return 'view';
     case 'zip':
-    case 'ziphtml':
+        return 'view';
+
     case 'dumpserial':
+	if (INSECURE_ACTIONS_LOCALHOST_ONLY and is_localhost())
+	    return 'dump';
+	else
+	    return 'view';
+
+    // performance and security relevant
+    case 'xmlrpc':
+    case 'soap':
+    case 'ziphtml':
     case 'dumphtml':
         return 'dump';
+
+    // invent a new access-perm massedit? or switch back to change, or keep it at edit?
+    case _("PhpWikiAdministration")."/"._("Rename"):
+    case _("PhpWikiAdministration")."/"._("Replace"):
+    case 'replace':
+    case 'rename':
     case 'revert':
     case 'edit':
         return 'edit';
@@ -188,15 +202,14 @@ function action2access ($action) {
         break;
     case 'upload':
     case 'loadfile': 
-        // probably create/edit but we cannot check all page permissions, can we?
+	// probably create/edit but we cannot check all page permissions, can we?
     case 'remove':
     case 'lock':
     case 'unlock':
     case 'upgrade':
     case 'chown':
     case 'setacl':
-    case 'rename':
-            return 'change';
+	return 'change';
     default:
         //Todo: Plugins should be able to override its access type
         if (isWikiWord($action))
@@ -264,7 +277,7 @@ function _requiredAuthorityForPagename($access, $pagename) {
  */
 function getParentPage($pagename) {
     if (isSubPage($pagename)) {
-        return subPageSlice($pagename,0);
+        return subPageSlice($pagename, 0);
     } else {
         return '.';
     }
@@ -293,7 +306,7 @@ function getAccessDescription($access) {
                                     'view'     => _("View this page and all subpages"),
                                     'edit'     => _("Edit this page and all subpages"),
                                     'create'   => _("Create a new (sub)page"),
-                                    'dump'     => _("Download the page contents"),
+                                    'dump'     => _("Download page contents"),
                                     'change'   => _("Change page attributes"),
                                     'remove'   => _("Remove this page"),
                                     );
@@ -359,15 +372,18 @@ class PagePermission {
      * Must translate the various special groups to the actual users settings 
      * (userid, group membership).
      */
-    function isAuthorized($access,$user) {
+    function isAuthorized($access, $user) {
+    	$allow = -1;
         if (!empty($this->perm{$access})) {
             foreach ($this->perm[$access] as $group => $bool) {
-                if ($this->isMember($user,$group)) {
+                if ($this->isMember($user, $group)) {
                     return $bool;
+                } elseif ($allow == -1) { // not a member and undecided: check other groups
+                    $allow = !$bool;
                 }
             }
         }
-        return -1; // undecided
+        return $allow; // undecided
     }
 
     /**
@@ -432,13 +448,21 @@ class PagePermission {
                       'list'   => array(ACL_EVERY => true),
                       'remove' => array(ACL_ADMIN => true,
                                         ACL_OWNER => true),
+                      'dump'   => array(ACL_ADMIN => true,
+                                        ACL_OWNER => true),
                       'change' => array(ACL_ADMIN => true,
                                         ACL_OWNER => true));
         if (ZIPDUMP_AUTH)
             $perm['dump'] = array(ACL_ADMIN => true,
                                   ACL_OWNER => true);
-        else
-            $perm['dump'] = array(ACL_EVERY => true);
+        elseif (INSECURE_ACTIONS_LOCALHOST_ONLY) {
+	    if (is_localhost())
+		$perm['dump'] = array(ACL_EVERY => true);
+	    else
+		$perm['dump'] = array(ACL_ADMIN => true);
+	}
+	else
+	    $perm['dump'] = array(ACL_EVERY => true);
         if (defined('REQUIRE_SIGNIN_BEFORE_EDIT') && REQUIRE_SIGNIN_BEFORE_EDIT)
             $perm['edit'] = array(ACL_SIGNED => true);
         // view:
@@ -728,6 +752,21 @@ class PagePermission {
 }
 
 // $Log: PagePerm.php,v $
+// Revision 1.45  2007/09/15 12:26:43  rurban
+// minor comment fix
+//
+// Revision 1.44  2007/09/12 19:34:31  rurban
+// revise INSECURE_ACTIONS_LOCALHOST_ONLY actions
+//
+// Revision 1.43  2007/09/01 13:24:23  rurban
+// add INSECURE_ACTIONS_LOCALHOST_ONLY. advanced security settings
+//
+// Revision 1.42  2007/08/25 18:03:34  rurban
+// change rename action from access perm change to edit: allow the signed in user to rename.
+//
+// Revision 1.41  2007/07/14 12:03:25  rurban
+// fix for mult. group membership: not a member and undecided: check other groups
+//
 // Revision 1.40  2005/10/29 14:16:58  rurban
 // unify message
 //

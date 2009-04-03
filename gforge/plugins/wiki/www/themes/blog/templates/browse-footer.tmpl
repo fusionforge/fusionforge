@@ -1,9 +1,9 @@
 <?php // -*-html-*-
-  rcs_id('$Id: browse-footer.tmpl,v 1.2 2004/12/15 17:47:32 rurban Exp $');
+  rcs_id('$Id: browse-footer.tmpl 6204 2008-08-26 15:12:03Z vargenau $');
 ?>
 <!--{{{ Edit Date-->
 <p class="editdate">
-<?php if( $page->getName() != "HomePage") { ?>
+<?php if( $page->getName() != _("HomePage")) { ?>
 <?= $WikiTheme->getOwnerMessage($page) ?>  <?= $WikiTheme->getLastModifiedMessage($revision) ?> <?= $WikiTheme->getAuthorMessage($revision) ?><br />
 <?php } ?>
-This site is powered by <a href="http://phpwiki.sourceforge.net">PhpWiki</a>. Page design based on <a href="http://binarybonsai.com/kubrick/">Kubrick</a>, adapted by <a href="http://the.taoofmac.com">Rui Carmo</a> from an original design by <a href="http://binarybonsai.com">Michael Heilemann</a>.</p><!--}}} Edit Date-->
+This site is powered by <a href="http://phpwiki.sourceforge.net">PhpWiki</a>. Page design based on <a href="http://binarybonsai.com/kubrick/">Kubrick</a>,<br />adapted by <a href="http://the.taoofmac.com">Rui Carmo</a> from an original design by <a href="http://binarybonsai.com">Michael Heilemann</a>.</p><!--}}} Edit Date-->

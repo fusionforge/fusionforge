@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: GoTo.php,v 1.4 2004/07/08 20:30:07 rurban Exp $');
+rcs_id('$Id: GoTo.php 6185 2008-08-22 11:40:14Z vargenau $');
 
 /**
  *  Display a form with text entry box and 'Go' button.
@@ -21,7 +21,12 @@ extends WikiPlugin
     function getDescription () {
         return _("Go to or create page.");
     }
-    
+
+    function getVersion() {
+        return preg_replace("/[Revision: $]/", '',
+                            "\$Revision: 6185 $");
+    }
+
     function getDefaultArguments() {
         return array('size' => 32);
     }
@@ -65,7 +70,7 @@ extends WikiPlugin
     }
 };
 
-// $Log: GoTo.php,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.4  2004/07/08 20:30:07  rurban
 // plugin->run consistency: request as reference, added basepage.
 // encountered strange bug in AllPages (and the test) which destroys ->_dbi

@@ -1,6 +1,6 @@
 /**
  *15 dec 2003
- *css crŽe pour le site http://www.crao.net
+ *css cree pour le site http://www.crao.net
  *L Lunati
  *
  */
@@ -165,7 +165,7 @@ p a.wiki-rc-action
 	background-color: transparent;
 	font: bolder 67px/50px  Verdana, Arial, Helvetica, sans-serif;
         letter-spacing: -0.1em;
-        font-variant: condensed;
+        /* font-variant: condensed; */
 }
 #logo img {
 	border: 0px; 
@@ -258,7 +258,7 @@ div.wikitext {
 	text-align: left;
 }
 blockquote.mail-style-quote {
-	border-left: #ff993;/* MODIFY-color */
+	border-left: #FF9933;/* MODIFY-color */
 	margin: 0em;
 	margin-bottom: 1em;
 	border: 1px solid #FF9933;/* MODIFY-color */
@@ -303,7 +303,6 @@ div.toolbar{
   background-color: #fff;
   border: 1px solid ButtonFace;
 }
-
 
 #navbuttons {
 	display: inline;
@@ -387,6 +386,11 @@ div.toolbar{
 	padding: 0px;
 	margin: 0px;
 	border: 0px none;
+}
+.search-context { background: white; font-style: oblique; }
+.search-term {
+  background: yellow;
+  font-weight: normal;
 }
 #livesearch {
   height: 13px;
@@ -593,15 +597,6 @@ h4, h5, h6 {  /* MODIFY-TXT */
  ******************************
  */
 
-/*
-*le lien rss HEADING
-*/
-.tightenable h2 {/* MODIFY-TXT */
-	font-size: 12px;
-	color: #888;
-	font-weight: bold;
-}
-
 /* rss feed */
 
 div.rss {
@@ -665,7 +660,7 @@ th.gridbutton {
   font-size: small;
   font-weight: normal;
   /*font-style: menu;*/
-  font-family: Tahoma, sans-serif, Arial, Helvetica;
+  font-family: Tahoma, Arial, Helvetica, sans-serif;
   height: 18px;
   margin: 5px 0px;
   float: none;
@@ -681,7 +676,7 @@ input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
   font-size: small;
   font-weight: normal;
   /*font-style: menu;*/
-  font-family: Tahoma, sans-serif, Arial, Helvetica;
+  font-family: Tahoma, Arial, Helvetica, sans-serif;
   background-color: threedlightshadow;
   color: black;
 }
@@ -762,13 +757,12 @@ textarea.wikiedit {
 	background-color: #ccc;
 }
 .editarea legend{
-	font-family: Verdana, Helvetica, Arial;
+	font-family: Verdana, Helvetica, Arial, sans-serif;
 	font-size: 1em;
 	line-height: 1em;
 	padding: 0.2em;
 	border: 1px solid #333;
 	background-color: #eee;
-	text-align:;
 }
 fieldset.editarea {
 	margin : 1ex;
@@ -806,7 +800,7 @@ fieldset.toolbar {
 	font-size: smaller;
 }
 .transclusion {
-	border: 1px solid grey;/* MODIFY-color */
+	border: 1px solid gray;/* MODIFY-color */
 	padding-left:  0.8em; 
 	padding-right: 0.8em; 
 	padding-top:     0px;
@@ -1025,7 +1019,7 @@ td.pageinfo { font-weight: bold; }
 	text-align			: center;
 	color				: #000;
 	background-color	: #FFF;
-	border				: solid 0px none;
+	border				: solid 0px;
 }
 /* reset post NN4 */
 /*/*/
@@ -1073,7 +1067,7 @@ strong > img.inlineimage{
 h2.wikiblog-heading {
 	font-size: 2em;
 	padding-bottom: 0.5em;
-	border-bottom: 2px solid grey;/* MODIFY-color */
+	border-bottom: 2px solid gray;/* MODIFY-color */
 }
 
 
@@ -1121,6 +1115,45 @@ div.errors {
 
 /* Hide NS4 bugs hack elements. */
 div.br { display: none; }
+
+/*
+ * table class="boxed"
+ * will put a border around the table (but not around the cells)
+ *
+ * table class="bordered"
+ * will put a border around the table and the cells
+ *
+ * In both cases, the caption will be bold and centered under the table
+ *
+ * In both cases, the headers (th) will have a "#d8d8d8" background
+ */
+
+table.boxed, table.bordered, table.bordered th, table.bordered td {
+    border-width: 1px;
+    border-style: solid;
+    border-collapse: collapse;
+    vertical-align: top;
+}
+
+table.boxed td, table.bordered td,
+table.boxed th, table.bordered th {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+table.boxed caption, table.bordered caption {
+    text-align: center;
+    font-weight: bold;
+    caption-side: bottom;
+    padding-top: 0.8em;
+}
+
+table.boxed th, table.bordered th {
+    font-weight: bold;
+    background-color: #d8d8d8;
+}
 
 /* For emacs users
  *

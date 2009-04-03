@@ -1,5 +1,5 @@
 # Ensure the home page comes up.
-# $Id: AAA_GetHomePage.inputs,v 1.2 2002/01/29 22:10:55 wainstead Exp $
+# $Id: AAA_GetHomePage.inputs 6206 2008-08-26 15:20:22Z vargenau $
 
 type: starting_page
 start_url: index.php

@@ -1,4 +1,4 @@
-<?php rcs_id('$Id: RssWriter2.php,v 1.2 2005/07/24 09:52:59 rurban Exp $');
+<?php rcs_id('$Id: RssWriter2.php 6184 2008-08-22 10:33:41Z vargenau $');
 /*
  * Code for creating RSS 2.0
  * Author: Reini Urban for PhpWiki
@@ -66,14 +66,13 @@ class RssWriter2 extends RssWriter
     function __spew() {
         header("Content-Type: application/rss+xml; charset=" . RSS_ENCODING);
         printf("<?xml version=\"1.0\" encoding=\"%s\"?>\n", RSS_ENCODING);
-        printf("<!-- generator=\"PhpWiki-%s\" -->\n", PHPWIKI_VERSION);
+        //printf("<!-- generator=\"PhpWiki-%s\" -->\n", PHPWIKI_VERSION);
         //RSS2 really is 0.92
-        //<!DOCTYPE rss SYSTEM "http://my.netscape.com/publish/formats/rss-0.92.dtd">
-        echo "<!DOCTYPE rss [<!ENTITY % HTMLlat1 PUBLIC \"-//W3C//ENTITIES Latin 1 for XHTML//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent\">\n";
-        echo "              %HTMLlat1;]>\n";
+        //echo '<!DOCTYPE rss SYSTEM "http://my.netscape.com/publish/formats/rss-0.92.dtd">',"\n";
+        //echo "<!DOCTYPE rss [<!ENTITY % HTMLlat1 PUBLIC \"-//W3C//ENTITIES Latin 1 for XHTML//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent\">\n";
+        //echo "              %HTMLlat1;]>\n";
         $this->printXML();
     }
-
 };
 
 // (c-file-style: "gnu")

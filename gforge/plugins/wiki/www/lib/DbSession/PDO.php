@@ -1,4 +1,4 @@
-<?php rcs_id('$Id: PDO.php,v 1.2 2006/02/22 20:56:24 rurban Exp $');
+<?php rcs_id('$Id: PDO.php 6184 2008-08-22 10:33:41Z vargenau $');
 
 /** 
  * Db sessions for PDO, based on pear DB Sessions.
@@ -124,6 +124,7 @@ extends DbSession
      * @access private
      */
     function write ($id, $sess_data) {
+        if (defined("WIKI_XMLRPC") or defined("WIKI_SOAP")) return;    	
         
         $dbh = $this->_connect();
         $table = $this->_table;
@@ -243,7 +244,7 @@ extends DbSession
     }
 }
 
-// $Log: PDO.php,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.2  2006/02/22 20:56:24  rurban
 // fix more refs
 //

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: SiteMap.php,v 1.15 2006/03/07 21:09:16 rurban Exp $');
+rcs_id('$Id: SiteMap.php 6185 2008-08-22 11:40:14Z vargenau $');
 /**
  Copyright 1999,2000,2001,2002,2004 $ThePhpWikiProgrammingTeam
 
@@ -57,7 +57,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.15 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -222,10 +222,7 @@ extends WikiPlugin
     }
 };
 
-// $Log: SiteMap.php,v $
-// Revision 1.15  2006/03/07 21:09:16  rurban
-// fix syntax error
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.13  2004/12/14 21:36:06  rurban
 // exclude is already handled by getArgs
 //

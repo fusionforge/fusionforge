@@ -1,0 +1,222 @@
+Date: Mon, 2 Feb 2009 5:18:24 +0100
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
+X-Rcs-Id: $Id: Help%2FMediawikiTablePlugin 6479 2009-02-02 13:36:07Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FMediawikiTablePlugin;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=iso-8859-1
+Content-Transfer-Encoding: binary
+
+The *~MediawikiTable* [[Help:WikiPlugin|plugin]] allows a user to specify a ##<table>## with (a subset of) the syntax used by Mediawiki.
+The plugin is not meant to be called directly, just use the syntax below to insert your table.
+
+== Mediawiki table syntax
+
+* The table starts with a line <b>{~|</b> and ends with a line <b>|~}</b>.
+* An optional table caption is made with a line starting with a pipe and a plus sign <b>|+</b> followed by the caption.
+* An optional table summary is made with a line starting with a pipe and an equal sign <b>|=</b> followed by the summary.
+* A table row starts with a pipe and a hyphen: <b>|-</b>.
+* A table cell starts with a pipe on a new line, or a double bar <b>||</b> on the same line.
+* A header table cell starts with an exclamation mark, or a double exclamation mark <b>!!</b> on the same line.
+
+The summary syntax is an extension to the Mediawiki syntax. 
+You can also simply put the summary as an attribute to the table.
+The summary is necessary to be able to create accessible tables.
+
+=== HTML attributes
+
+<?plugin RichTable
+* class="bordered"
+- style="font-weight:bold;background-color:#d8d8d8;", align=center
+|
+Attribute
+|
+Syntax
+-
+|
+For the table
+|
+{| border="1"
+-
+|
+For the caption
+|
+~|+ style="font-weight: bold;"
+-
+|
+For a row
+|
+~|- style="height:100px"
+-
+|
+For a cell
+|
+~| align="right" | Cell 2 (right aligned)
+?>
+
+The attributes might be put with or without double quotes.
+
+== Examples
+
+=== Example 1: simple table
+
+{| border="1", style="width: 100%"
+|+ style="font-weight: bold; font-size: 150%;" | This is the table caption
+|= This is the table summary
+|- style="white-space: nowrap"
+! Header 1
+! Header 2
+! Header 3
+|- style=height:100px
+| Cell I
+| <b>Cell II</b>,  in bold
+|align=right, width="100%" |Cell III
+|- bgcolor=#f0f0ff, align=center
+|Cell 1||Cell 2||Cell 3
+|}
+
+The above table is rendered from:
+
+<verbatim>
+{| border="1", style="width: 100%"
+|+ style="font-weight: bold; font-size: 150%;" | This is the table caption
+|= This is the table summary
+|- style="white-space: nowrap"
+! Header 1
+! Header 2
+! Header 3
+|- style=height:100px
+| Cell I
+| <b>Cell II</b>,  in bold
+|align=right, width="100%" |Cell III
+|- bgcolor=#f0f0ff, align=center
+|Cell 1||Cell 2||Cell 3
+|}
+</verbatim>
+
+=== Example 2: table with paragraphs, lists and plugins in cells
+
+{|
+|- style="white-space: nowrap"
+! Header 1
+! Header 2
+|- bgcolor=yellow
+| First paragraph.
+
+Second paragraph.
+|
+* One
+* Two
+* Three
+|- bgcolor=#f0f0ff, align=center
+|Current date || <<CurrentTime format=date>>
+|}
+
+The above table is rendered from:
+
+<verbatim>
+{|
+|- style="white-space: nowrap"
+! Header 1
+! Header 2
+|- bgcolor=yellow
+| First paragraph.
+
+Second paragraph.
+|
+* One
+* Two
+* Three
+|- bgcolor=#f0f0ff, align=center
+|Current date || <<CurrentTime format=date>>
+|}
+</verbatim>
+
+=== Example 3: nested tables
+
+<<MediawikiTable
+{| class="bordered", align=center
+|+ Outer table caption
+|-
+! Header A !! Header B
+|-
+| A numbered list:
+# one
+# two
+# three
+|
+This cell contains a nested table.
+ {| class="bordered"
+ |+ Inner table caption
+ |-
+ ! Header A
+ ! Header B
+ |-
+ | Inner A1
+ | Inner B1
+ |-
+ | Inner A2
+ | Inner B2
+ |}
+|-
+| A paragraph
+
+Another paragraph
+
+| A plain list:
+* apple
+* pear
+* apricot
+|}
+>>
+
+The above table is rendered from:
+
+<verbatim>
+<<MediawikiTable
+{| class="bordered", align=center
+|+ Outer table caption
+|-
+! Header A !! Header B
+|-
+| A numbered list:
+# one
+# two
+# three
+|
+This cell contains a nested table.
+ {| class="bordered"
+ |+ Inner table caption
+ |-
+ ! Header A
+ ! Header B
+ |-
+ | Inner A1
+ | Inner B1
+ |-
+ | Inner A2
+ | Inner B2
+ |}
+|-
+| A paragraph
+
+Another paragraph
+
+| A plain list:
+* apple
+* pear
+* apricot
+|}
+>>
+</verbatim>
+
+== Author
+
+Marc-Etienne Vargenau, Alcatel-Lucent
+
+== See Also
+* [[http://meta.wikimedia.org/wiki/Help:Table|Mediawiki table help page]]
+
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]

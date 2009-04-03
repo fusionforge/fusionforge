@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: MostRecentIter.php,v 1.6 2005/04/09 09:16:54 rurban Exp $');
+rcs_id('$Id: MostRecentIter.php 6209 2008-08-26 15:30:39Z vargenau $');
 
 require_once('lib/WikiDB/backend.php');
 
@@ -23,9 +23,13 @@ extends WikiDB_backend_iterator
         $this->_revisions = array();
         while ($page = $pages->next()) {
             $revs = $backend->get_all_revisions($page['pagename']);
-            while ($revision = &$revs->next()) {
+            while ($revision = $revs->next()) {
                 $vdata = &$revision['versiondata'];
+                if (!$vdata) continue;
                 assert(is_array($vdata));
+                if (empty($vdata['mtime'])) {
+		    $vdata['mtime'] = 0;
+		}
                 if (!empty($vdata['is_minor_edit'])) {
                     if (!$include_minor_revisions)
                         continue;
@@ -74,6 +78,11 @@ function WikiDB_backend_dumb_MostRecentIter_sortf_rev($a, $b) {
     $bcreated = $b['versiondata']['mtime'];
     return $acreated - $bcreated;
 }
+
+// $Log: not supported by cvs2svn $
+// Revision 1.8  2006/12/22 00:27:37  rurban
+// just add Log
+//
 
 // (c-file-style: "gnu")
 // Local Variables:

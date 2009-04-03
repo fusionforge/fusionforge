@@ -1,6 +1,6 @@
 <?php
 rcs_id('PHP Fortune - Made by henrik@aasted.org. HP: http://www.aasted.org');
-rcs_id('$Id: fortune.php,v 1.2 2004/11/21 11:59:20 rurban Exp $');
+rcs_id('$Id: fortune.php 6184 2008-08-22 10:33:41Z vargenau $');
 /* 
 Main methods to use:
  quoteFromDir($dir):
@@ -16,6 +16,8 @@ class Fortune {
     function quoteFromDir($dir) {
         $amount = 0;
         $index = 0;
+	$quotes = array();
+	$files = array();
 
         if ( $handle = opendir($dir) ) {
             while (false !== ($file = readdir($handle))) {
@@ -30,18 +32,18 @@ class Fortune {
                         $index++;					
                     }
                 }			
-		
             }
 	
             srand((double)microtime()*1000000);
             $index = rand(0, $amount);
             $i = 0;
 	
-            while ($quotes[$i] < $index)  {
-                $i++;	
-            }
-
-            return $this->getRandomQuote($dir . "/" .$files[$i]);
+	    if ($amount)
+		while ($quotes[$i] < $index)  {
+		    $i++;	
+		}
+	    if (!empty($files))
+		return $this->getRandomQuote($dir . "/" .$files[$i]);
         }
         return -1;
     }

@@ -1,31 +1,26 @@
 <?php // -*-html-*- ?>
-<!-- $Id: navbar.tmpl,v 1.6 2005/02/02 18:54:16 rurban Exp $ -->
+<!-- $Id: navbar.tmpl 6189 2008-08-22 13:18:48Z vargenau $ -->
 <!-- The top navigation/search bar -->
-<form action="<?= WikiURL(_("TitleSearch"))?>"
-      method="get" accept-charset="<?=$charset?>">
-  <div id="navbuttons">
-   <ul>
-    <?=$SEP?>
-    <?php if (strrchr($page->getName(), "/Discussion")) { ?>
-        <?= WikiLink(substr($page->getName(), 0, 
-                     strlen($page->getName()) - strlen("/Discussion")), "", 
-                     _("Go to Page")) ?>
-    <?php } else { ?>
-        <?= WikiLink($page->getName()."/Discussion", "", _("Discussion")) ?>
-    <?php } ?>
-    </li>
-   <?=$SEP?><?= WikiLink(_("HomePage"), "","HomePage") ?></li>
-   <?=$SEP?><?= WikiLink(_("RecentChanges"), "","News") ?></li>
-   <?=$SEP?><?= WikiLink(_("FindPage"), "","Search") ?></li>
+
+<?php 
+$curuserprefs = $user->getPreferences();
+?>
+
+   <tr><td class="submenu"><?= WikiLink(_("HomePage"), "","Home Page") ?></td></tr>
+      <tr><td class="submenu"><?= WikiLink(_("RecentChanges"), "","Recent Changes") ?></td></tr>
+      <tr><td class="submenu"><?= WikiLink(_("SpecialPages"), "","Special Pages") ?></td></tr>
+   <?php if ($curuserprefs->get('searchMenuItem')) { ?>
+     <tr><td class="submenu"><?= WikiLink(_("FindPage"), "","Search") ?></td></tr>
+   <?php } ?>
     <?php if (!empty($revision)) { ?>
-     <?=$SEP?><?= Button(array('action'=>'LikePages'),_("LikePages"),$page->getName()) ?></li>
-     <?=$SEP?><?= Button(array('action'=>'BackLinks'), _("BackLinks"),$page->getName()) ?></li>
+     <?php if (0) { ?>
+       <tr><td class="submenu"><?= Button(array('action'=>'LikePages'),_("Like Pages"),$page->getName()) ?></td></tr>
+     <?php } ?>
     <?php } ?>
+   <tr><td class="submenu"><?= WikiLink(_("UpLoad"), "","Upload File") ?></td></tr>
     <?php if (!empty($user) && $user->isAdmin()) { ?>
-     <?=$SEP?><?= WikiLink(_("PhpWikiAdministration"), "","Admin") ?></li>
+     <tr><td class="submenu"><?= WikiLink(_("PhpWikiAdministration"), "","Admin") ?></td></tr>
     <?php } ?>
     <?php if (!empty($user) && $user->isSignedIn()) { ?>
-     <?=$SEP?><?= WikiLink(_("UserPreferences"), "","Preferences") ?><?php } ?></li>
-    </ul>
-  </div>
-</form>
+     <tr><td class="submenu"><?= WikiLink(_("UserPreferences"), "","Preferences") ?></td></tr>
+    <?php } ?>

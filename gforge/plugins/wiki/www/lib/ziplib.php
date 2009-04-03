@@ -1,4 +1,4 @@
-<?php rcs_id('$Id: ziplib.php,v 1.46 2006/03/07 20:47:36 rurban Exp $');
+<?php rcs_id('$Id: ziplib.php 6184 2008-08-22 10:33:41Z vargenau $');
 
 /**
  * GZIP stuff.
@@ -189,8 +189,15 @@ function zip_inflate ($data, $crc32, $uncomp_size)
         $data = gzinflate($data);
         if (strlen($data) != $uncomp_size)
             trigger_error("not enough output from gzinflate", E_USER_ERROR);
-        if (zip_crc32($data) != $crc32)
-            trigger_error("CRC32 mismatch", E_USER_ERROR);
+        $zcrc32 = zip_crc32($data);
+        if ($zcrc32 < 0) { // force unsigned
+            $zcrc32 += 4294967296;
+        }
+        if ($crc32 < 0) { // force unsigned
+            $crc32 += 4294967296;
+        }
+        if ($zcrc32 != $crc32)
+            trigger_error("CRC32 mismatch: calculated=$zcrc32, expected=$crc32", E_USER_ERROR);
         return $data;
     }
     
@@ -256,6 +263,15 @@ class ZipWriter
         $zipname = addslashes($zipname);
         header("Content-Type: application/zip; name=\"$zipname\"");
         header("Content-Disposition: attachment; filename=\"$zipname\"");
+    }
+    
+    function addSrcFile ($target, $src, $attrib = false) {
+	if (empty($attrib['mtime']))
+	    $attrib = array('mtime' => filemtime($src), 'is_ascii' => 0);
+	if (check_php_version(4,3))
+	    $this->addRegularFile($target, file_get_contents($src), $attrib);
+	else
+	    $this->addRegularFile($target, join('', file($src)), $attrib);
     }
     
   function addRegularFile ($filename, $content, $attrib = false) {
@@ -579,6 +595,7 @@ function MimeifyPageRevision (&$page, &$revision) {
     $params = array('pagename'     => $page->getName(),
                     'flags'        => "",
                     'author'       => $revision->get('author'),
+                    'owner'        => $page->getOwner(),
                     'version'      => $revision->getVersion(),
                     'lastmodified' => $revision->get('mtime'));
     
@@ -797,7 +814,8 @@ function ParseMimeifiedPages ($data)
     $page        = array();
     $pagedata    = array();
     $versiondata = array();
-    $pagedata['date'] = strtotime($headers['date']);
+    if (isset($headers['date']))
+	$pagedata['date'] = strtotime($headers['date']);
 
     //DONE: support owner and acl
     foreach ($params as $key => $value) {
@@ -852,6 +870,18 @@ function ParseMimeifiedPages ($data)
         $data = QuotedPrintableDecode($data);
     else if ($encoding && $encoding != 'binary')
         ExitWiki( sprintf("Unknown %s", 'encoding type: $encoding') );
+
+    if (empty($params['charset']))
+        $params['charset'] = 'iso-8859-1';
+
+    // compare to target charset
+    if (strtolower($params['charset']) != strtolower($GLOBALS['charset'])) {
+    	$data = charset_convert($params['charset'], $GLOBALS['charset'], $data);
+    	//$page['pagename'] = charset_convert($params['charset'], $GLOBALS['charset'], $page['pagename']);
+	if (isset($versiondata['summary']))
+	    $versiondata['summary'] = charset_convert($params['charset'], $GLOBALS['charset'], $versiondata['summary']);
+
+    }
     
     $data .= GenerateFootnotesFromRefs($params);
     
@@ -862,7 +892,28 @@ function ParseMimeifiedPages ($data)
     return array($page);
 }
 
-// $Log: ziplib.php,v $
+// $Log: not supported by cvs2svn $
+// Revision 1.53  2007/05/19 14:41:14  rurban
+// add owner to header to set correct owner on input
+//
+// Revision 1.52  2007/05/15 16:36:36  rurban
+// nowarn on nosummary
+//
+// Revision 1.51  2007/03/27 07:12:06  rurban
+// Patch #1688929 by Erwann Penet: force $crc32 unsigned also
+//
+// Revision 1.50  2007/02/17 14:15:59  rurban
+// also charset convert summary
+//
+// Revision 1.49  2007/01/03 21:25:10  rurban
+// Use convert_charset()
+//
+// Revision 1.48  2006/12/22 17:44:15  rurban
+// support importing foreign charsets. e.g latin1 => utf8
+//
+// Revision 1.47  2006/10/08 12:32:26  rurban
+// workaround signed-unsigned issue (not solved). patch by Bob Apthorpe
+//
 // Revision 1.46  2006/03/07 20:47:36  rurban
 // MimeifyPageRevision refactoring. see loadsave
 //

@@ -1,5 +1,5 @@
 <?php
-rcs_id('$Id: removepage.php,v 1.26 2004/12/20 12:12:31 rurban Exp $');
+rcs_id('$Id: removepage.php 6234 2008-09-05 15:18:45Z vargenau $');
 require_once('lib/Template.php');
 
 function RemovePage (&$request) {
@@ -15,15 +15,14 @@ function RemovePage (&$request) {
     $current = $page->getCurrentRevision();
 
     if (!$current or !($version = $current->getVersion())) {
-        $html = HTML(HTML::h2(_("Already deleted")),
-                     HTML::p(_("Sorry, this page is not in the database.")));
+        $html = HTML::p(array('class' => 'error'), _("Sorry, this page does not exist."));
     }
     elseif (!$request->isPost() || !$request->getArg('verify')) {
 
         $removeB = Button('submit:verify', _("Remove Page"), 'wikiadmin');
         $cancelB = Button('submit:cancel', _("Cancel"), 'button'); // use generic wiki button look
 
-        $html = HTML(HTML::h2(fmt("You are about to remove '%s'!", $pagelink)),
+        $html = HTML(HTML::p(fmt("You are about to remove '%s'!", $pagelink)),
                      HTML::form(array('method' => 'post',
                                       'action' => $request->getPostURL()),
                                 HiddenInputs(array('currentversion' => $version,
@@ -45,7 +44,7 @@ function RemovePage (&$request) {
                                      $sample));
     }
     elseif ($request->getArg('currentversion') != $version) {
-        $html = HTML(HTML::h2(_("Someone has edited the page!")),
+        $html = HTML(HTML::p(array('class' => 'error'), (_("Someone has edited the page!"))),
                      HTML::p(fmt("Since you started the deletion process, someone has saved a new version of %s.  Please check to make sure you still want to permanently remove the page from the database.", $pagelink)));
     }
     else {
@@ -54,10 +53,7 @@ function RemovePage (&$request) {
         $dbi = $request->getDbh();
         $dbi->deletePage($pagename);
         $dbi->touch();
-        $link = HTML::a(array('href' => 'javascript:history.go(-2)'), 
-                        _("Back to the previous page."));
-        $html = HTML(HTML::h2(fmt("Removed page '%s' successfully.", $pagename)),
-        	     HTML::div($link), HTML::hr());
+        $html = HTML::div(array('class' => 'feedback'), fmt("Removed page '%s' successfully.", $pagename));
     }
 
     GeneratePage($html, _("Remove Page"));

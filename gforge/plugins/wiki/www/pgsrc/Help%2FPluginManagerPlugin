@@ -1,0 +1,69 @@
+Date: Sat, 24 Jan 2009 20:18:24 +0100
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
+X-Rcs-Id: $Id: Help%2FPluginManagerPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FPluginManagerPlugin;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=iso-8859-1
+Content-Transfer-Encoding: binary
+
+The *~PluginManager* [[Help:WikiPlugin|plugin]] provides a dynamic list of plugins on this wiki.
+
+== Usage
+
+<verbatim>
+  <?plugin PluginManager info=args ?>
+</verbatim>
+
+== Arguments
+
+info _(default: args)_:
+  Display the arguments also. Default: enabled
+  To disable use something like info=0
+
+== Configuration
+
+define('REQUIRE_ADMIN', true) in the sourcecode to disable general usage.
+
+== Example
+
+<verbatim>
+<?plugin PluginManager ?>
+</verbatim>
+
+PhpWiki lets you extend it with new functionality via a plugin
+mechanism. In short, you extend a PHP class we provide and customize
+it to print out the content you want. For more information see
+[Help:WikiPlugin], [Help:HelloWorldPlugin], and view the source of the files in
+<tt>lib/plugin</tt>.
+
+If there is no example page for the plugin, or you need more
+information, the best place to go is the source of the plugin. Under
+your wiki's root directory, the folder <tt>lib/plugin</tt> contains all the PHP
+files for the plugins.
+
+== External Requirements
+Some plugins require correctly configured PLUGIN_CACHED and external libraries 
+not provided with PhpWiki or PHP, such as 
+* [PHP with GD support | php-function:ref.image] for the [Help:text2pngPlugin], 
+* [LaTeX2HTML | ftp://ftp.dante.de/tex-archive/support/latex2html ] for the [Help:TexToPngPlugin] and [Help:TeX2pngPlugin],
+* [graphviz | http://graphviz.org/] for the [Help:GraphVizPlugin] and [Help:VisualWikiPlugin], 
+* [ploticus | http://ploticus.sourceforge.net/] for the [Help:PloticusPlugin], 
+* [phpweather | http://phpweather.sf.net] for the [Help:PhpWeatherPlugin],
+* [highlight | http://www.andre-simon.de/] for the [Help:SyntaxHighlighterPlugin],
+* a browser with [<iframe> support|http://www.cs.tut.fi/~jkorpela/html/iframe.html] for the [Help:TranscludePlugin],
+* USE_DB_SESSION = true (default for the peardb, adodb or dba backends) for the [WhoIsOnline|Help:WhoIsOnline] plugin,
+* --with-xml support (with expat or libxml2) for the [RssFeedPlugin|Help:RssFeedPlugin] (ProjectSummary, RecentReleases) and ~HtmlParser support (~ImportHtml, ~HtmlAreaEditing),
+* PHP Mail functionality (php.ini: SMTP + sendmail_from on Windows or sendmail_path) for email 
+  PhpWiki:PageChangeNotifications and ModeratedPage's,
+* a [Google license key | http://www.google.com/apis/] for the [Help:GooglePlugin], 
+* optionally an external recommender engine (none yet, php only so far) and the wikilens theme for the RateIt plugin,
+* optionally apache/mod_log_{my}sql for fast, external log analysis if ACCESS_LOG_SQL=1 (Referer, Abuse Prevention).
+  See <tt>lib/Request.php</tt> and http://www.outoforder.cc/projects/apache/mod_log_sql/
+
+== Author
+[Jeff Dairiki|PhpWiki:JeffDairiki] ?
+
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]

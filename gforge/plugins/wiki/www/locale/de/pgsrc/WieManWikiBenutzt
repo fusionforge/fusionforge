@@ -1,6 +1,6 @@
 Date: Sun, 27 Jan 2002 17:28:55 -0500
 Mime-Version: 1.0 (Produced by PhpWiki 1.3.2-jeffs-hacks)
-X-Rcs-Id: $Id: WieManWikiBenutzt,v 1.10 2004/05/09 00:57:32 rurban Exp $
+X-Rcs-Id: $Id: WieManWikiBenutzt 6193 2008-08-23 17:49:48Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=WieManWikiBenutzt;
   flags="";
@@ -31,7 +31,7 @@ Ich bin auch ein Absatz. Wir sind halt sehr kleine Absätze.
 
 * Eine horizontale Trennlinie bekommt man indem man vier oder mehr Bindestriche an den Anfang einer Zeile stellt:
 ----
-* Links kann man erzeugen, indem man einzelne Wörter, deren Anfangsbuchstabe groß geschrieben wird, zusammenfügt. Wenn du also etwa eine Seite darüber  schreiben willst, daß Arno Ratten mag, schreibst du: ArnoMagRatten. Falls die Seite noch nicht existiert erscheint dahinter ein Fragezeichen, das dir die Möglichkeit gibt die Seite zu erzeugen: DieseSeiteSollteNichtExistieren. (Und bitte verdirb das Beispiel nicht, indem du diese Seite erzeugst).
+* Links kann man erzeugen, indem man einzelne Wörter, deren Anfangsbuchstabe groß geschrieben wird, zusammenfügt. Wenn du also etwa eine Seite darüber  schreiben willst, dass Arno Ratten mag, schreibst du: ArnoMagRatten. Falls die Seite noch nicht existiert erscheint dahinter ein Fragezeichen, das dir die Möglichkeit gibt die Seite zu erzeugen: DieseSeiteSollteNichtExistieren. (Und bitte verdirb das Beispiel nicht, indem du diese Seite erzeugst).
 * Um externe Links zu setzen, kannst du einfach die Adresse eintippen und PhpWiki erzeugt einen passenden Link, z.B. http://www.diezeit.de/
 * Um Bilder einzufügen, schließt man deren Adresse in eckigen Klammern ein, wie hier: [[!http://www.deinhost.de/bilder/bild.png]. Falls die Adresse des Bildes nicht in eckigen Klammern steht, wird einfach nur die Adresse (nicht aber das Bild) angezeigt.
 * Jetzt kann es eigentlich schon mit dem SeitenErzeugen losgehen!

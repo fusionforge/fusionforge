@@ -18,7 +18,7 @@
 // | Maintainer: Daniel Convissor <danielc@php.net>                       |
 // +----------------------------------------------------------------------+
 //
-// $Id: common.php,v 1.5 2004/06/21 08:39:38 rurban Exp $
+// $Id: common.php 6184 2008-08-22 10:33:41Z vargenau $
 
 require_once 'PEAR.php';
 
@@ -27,7 +27,7 @@ require_once 'PEAR.php';
  * inherited by all such
  *
  * @package  DB
- * @version  $Id: common.php,v 1.5 2004/06/21 08:39:38 rurban Exp $
+ * @version  $Id: common.php 6184 2008-08-22 10:33:41Z vargenau $
  * @category Database
  * @author   Stig Bakken <ssb@php.net>
  * @author   Tomas V.V.Cox <cox@idecnet.com>

@@ -112,7 +112,7 @@ class GoogleSearchResults {
  *   absolute URL path.
  *
  *   <snippet> - A snippet which shows the query in context on the URL
- *   where it appears. This is formatted HTML and usually includes <b>
+ *   where it appears. This is formatted HTML and usually includes <B>
  *   tags within it. Note that the query term does not always appear
  *   in the snippet. Note: Query terms will be in highlighted in bold
  *   in the results, and line breaks will be included for proper text
@@ -166,8 +166,8 @@ class Google {
             $this->license_key = GOOGLE_LICENSE_KEY;
         require_once("lib/nusoap/nusoap.php");
 
-        $this->nusoapclient = new nusoapclient(SERVER_URL . NormalizeWebFileName("GoogleSearch.wsdl"), "wsdl");
-        $this->proxy = $this->nusoapclient->getProxy();
+        $this->soapclient = new soapclient(SERVER_URL . NormalizeWebFileName("GoogleSearch.wsdl"), "wsdl");
+        $this->proxy = $this->soapclient->getProxy();
         if ($maxResults > 10) $maxResults = 10;
         if ($maxResults < 1) $maxResults = 1;
         $this->maxResults = $maxResults;

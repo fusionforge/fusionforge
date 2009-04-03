@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: signin.tmpl,v 1.1 2004/12/19 17:34:19 rurban Exp $');
+rcs_id('$Id: signin.tmpl 6204 2008-08-26 15:12:03Z vargenau $');
 // signin only implicitly by clicking "Edit"
 if (empty($FORMNAME))
     $FORMNAME = 'signin';
@@ -11,7 +11,6 @@ else
   <?= HiddenInputs($request->getArgs(), false, array('auth')) ?>
 <?php }
 if ($user->isAuthenticated()) {
-    $Sep = $WikiTheme->getButtonSeparator();
     $SignOutB = $WikiTheme->makeButton(_("Sign Out"), "javascript:SignOut();", 'wikiaction');
     $SignOutJS = JavaScript('
     document.write(\'<input type="hidden" name="auth[logout]" value="0" />\');
@@ -23,7 +22,7 @@ if ($user->isAuthenticated()) {
     document.write(\''.AsXML($SignOutB).'\');');
 ?>
   <span class="signin"><?= fmt("Authenticated as %s", WikiLink($user->getAuthenticatedId(), 'auto')) ?>
-  <?=$Sep?><?=$SignOutJS?></span>
+  <?=$SEP?><?=$SignOutJS?></span>
   <noscript>
     <span class="signin"><?= Button("submit:auth[logout]", _("Sign Out"), 'wikiaction') ?></span>
   </noscript>

@@ -1,0 +1,62 @@
+Date: Sat, 24 Jan 2009 20:18:24 +0100
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
+X-Rcs-Id: $Id: Help%2FPageTrailPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FPageTrailPlugin;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=iso-8859-1
+Content-Transfer-Encoding: binary
+
+The *~PageTrail* [[Help:WikiPlugin|plugin]] displays the recently visited pages.
+
+== Usage
+
+Typically add to some template at the top or at the bottom. See themes/blog.
+
+<verbatim>
+<?plugin PageTrail ?>
+<?plugin PageTrail numberlinks=5 ?>
+<?plugin PageTrail invisible=1 ?>
+</verbatim>
+
+== Arguments
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| numberlinks
+| number of links to display
+| 5
+|-
+| invisible
+| 
+| false
+|-
+| duplicates
+| 
+| false
+|}
+
+== Optional Configuration
+
+define('PAGETRAIL_ARROW', " => ") in the sourcecode or add it to config.ini
+
+== Example
+
+<verbatim>
+<?plugin PageTrail ?>
+</verbatim>
+
+<?plugin PageTrail ?>
+
+== Author
+* [Carsten Klapp|PhpWiki:CarstenKlapp]
+
+== See Also
+
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]

@@ -1,5 +1,5 @@
 <?php // -*-php-*- ?>
-<!-- $Id: actionbar.tmpl,v 1.5 2005/09/11 15:23:08 rurban Exp $ -->
+<!-- $Id: actionbar.tmpl 6204 2008-08-26 15:12:03Z vargenau $ -->
 <div id="actionbar">
 
 <?php
@@ -9,6 +9,7 @@
   else
       $EditB = Button("viewsource", _("View Source"));
   // $EditB = fmt("%s of this page", $EditB);
+  if (empty($revision)) $revision = $page->getCurrentRevision(false);
 ?>
 
  <ul>
@@ -86,7 +87,7 @@
          <?plugin-form FullTextSearch formsize=20 ?>
        </li>
        <li>
-         <?php if (!empty($revision)) { ?>
+         <?php if ($revision) { ?>
            <?= Button("LikePages", _("LikePages")) ?>
          <?php } ?>
        </li>

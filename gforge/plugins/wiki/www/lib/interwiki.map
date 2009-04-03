@@ -1,3 +1,8 @@
+Category Category
+Help Help/
+Relation SearchRelations?s=
+Talk %s/Discussion
+User %s
 AIWiki http://www.ifi.unizh.ch/ailab/aiwiki/aiw.cgi?
 ALife http://news.alife.org/wiki/index.php?
 AbbeNormal http://www.ourpla.net/cgi-bin/pikie.cgi?
@@ -15,7 +20,6 @@ bsdWiki http://profile.sh/syswiki/index.php?
 C2find http://c2.com/cgi/wiki?FindPage&value=
 CLiki http://ww.telent.net/cliki/
 Cache http://www.google.com/search?q=cache:
-Category Category
 CmWiki http://www.ourpla.net/cgi-bin/wiki.pl?
 CreationMatters http://www.ourpla.net/cgi-bin/wiki.pl?
 CPAN http://search.cpan.org/
@@ -73,13 +77,15 @@ MuWeb http://www.dunstable.com/scripts/MuWebWeb?
 NetVillage http://www.netbros.com/?
 OpenWiki http://openwiki.com/?
 OrgPatterns http://www.bell-labs.com/cgi-user/OrgPatterns/OrgPatterns?
+OsFaq2 http://www.mega-tokyo.com/osfaq2/index.php/
 PPR http://c2.com/cgi/wiki?
 PangalacticOrg http://www.pangalactic.org/Wiki/
 PersonalTelco http://www.personaltelco.net/index.cgi/
 php-function http://www.php.net/%s
 php-lookup http://www.php.net/manual-lookup.php?pattern=
 PhpWiki http://phpwiki.sourceforge.net/phpwiki/
-PhpWikiCvs http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/phpwiki/phpwiki/
+PhpWikiCvs http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/pgsrc/%s?view=log
+PhpWikiSvn http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/pgsrc/%s?view=log
 PhpWikiDemo http://phpwiki.sourceforge.net/demo/
 PhpWikiTest http://phpwiki.sourceforge.net/test/
 Pikie http://pikie.darktech.org/cgi/pikie?
@@ -126,4 +132,3 @@ WikkiTikkiTavi http://tavi.sourceforge.net/
 WLUG http://www.wlug.org.nz/
 YpsiEyeball http://sknkwrks.dyndns.org:1957/writewiki/wiki.pl?
 ZWiki http://www.zwiki.org/
-OsFaq2 http://www.mega-tokyo.com/osfaq2/index.php/

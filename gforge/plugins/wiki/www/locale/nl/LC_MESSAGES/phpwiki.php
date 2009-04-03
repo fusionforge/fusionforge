@@ -44,8 +44,6 @@ $locale["Full text search results for '%s'"] =
    "Volledige tekst zoek resultaten naar '%s'";
 $locale["FullTextSearch"] =
    "VolledigeTekstZoek";
-$locale["GoodStyle"] =
-   "GoedeStijl";
 $locale["H"] =
    "H";
 $locale["Height"] =
@@ -92,8 +90,6 @@ $locale["Next"] =
    "Volgende";
 $locale["None"] =
    "Geen";
-$locale["OldTextFormattingRules"] =
-   "OudTekstFormatteringsRegels";
 $locale["Page Locked"] =
    "Sidan är Låst";
 $locale["Page Name"] =
@@ -152,8 +148,6 @@ $locale["Skipping"] =
    "Overgeslagen";
 $locale["Sorry for the inconvenience."] =
    "Excuses voor het ongemak.";
-$locale["TextFormattingRules"] =
-   "TekstFormatteringsRegels";
 $locale["Thank you for editing %s."] =
    "Bedankt voor het veranderen van %s.";
 $locale["The %d most popular pages of this wiki:"] =

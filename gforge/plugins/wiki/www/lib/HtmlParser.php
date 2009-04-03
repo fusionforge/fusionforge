@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: HtmlParser.php,v 1.3 2004/12/26 17:10:44 rurban Exp $');
+rcs_id('$Id: HtmlParser.php 6184 2008-08-22 10:33:41Z vargenau $');
 /**
  * HtmlParser Class: Conversion HTML => wikimarkup
  * Requires XmlParser, XmlElement and the expat (or now the libxml) library. This is all in core.
@@ -29,7 +29,7 @@ rcs_id('$Id: HtmlParser.php,v 1.3 2004/12/26 17:10:44 rurban Exp $');
  * Base class to implement html => wikitext converters,
  * extendable for various wiki syntax versions.
  * This is needed to be able to use htmlarea-alike editors, 
- * and to import HTML documents.
+ * and to import XML or HTML documents.
  *
  * See also php-html.sf.net for a php-only version, if 
  * you don't have the expat/libxml extension included.
@@ -267,6 +267,7 @@ extends HtmlParser
                   'sub'    => "wikify_default",
                   'nowiki' => "wikify_verbatim",
                   'verbatim' => "wikify_default",
+                  'noinclude' => "wikify_noinclude",
                   );
     }
 
@@ -326,6 +327,10 @@ extends HtmlParser
     function wikify_verbatim( $node ) {
         $contents = $this->elem_contents( $node );
         return "\n<verbatim>\n$contents\n</verbatim>";
+    }
+
+    function wikify_noinclude( $node ) {
+        return $this->elem_contents( $node );
     }
 
     function wikify_img( $node ) {
@@ -409,7 +414,7 @@ extends HtmlParser
     }
 }
 
-// $Log: HtmlParser.php,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.3  2004/12/26 17:10:44  rurban
 // just docs or whitespace
 //

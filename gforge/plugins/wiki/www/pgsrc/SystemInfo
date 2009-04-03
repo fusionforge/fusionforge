@@ -1,0 +1,14 @@
+Date: Mon, 19 Sep 2008 14:15:24 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
+X-Rcs-Id: $Id: SystemInfo 6289 2008-10-02 13:40:53Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=SystemInfo;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=iso-8859-1
+Content-Transfer-Encoding: binary
+
+<?plugin SystemInfo all ?>
+
+----
+[CategoryActionPage]

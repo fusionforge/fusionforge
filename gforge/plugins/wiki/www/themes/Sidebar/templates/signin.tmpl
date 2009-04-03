@@ -1,74 +1,22 @@
-<?php // -*-php-*-
-rcs_id('$Id: signin.tmpl,v 1.4 2004/06/14 11:26:51 rurban Exp $');
-
-if (empty($FORMNAME))
-    $FORMNAME = 'signin';
-else
-    $NOFORM = true;
-?>
-<?php if (empty($NOFORM)) { ?>
-  <form method="post" action="<?=$request->getPostURL()?>" accept-charset="<?=$charset?>" name="<?=$FORMNAME?>">
-  <?= HiddenInputs($request->getArgs(), false, array('auth')) ?>
+<!-- -*-php-*- -->
+<?php rcs_id('$Id: signin.tmpl 6409 2009-01-17 14:40:16Z rurban $'); ?>
+<div class="portlet" id="p-personal"><div class="pBody"><ul>
+<?php if ($user->isAuthenticated()) {
+     $sp = HTML::Raw("&nbsp;"); $id = $user->getAuthenticatedId(); ?>
+     <li id="pt-mypages"><?= WikiLink("RecentChangesMyPages", 'auto', HTML($sp,"MyPages",$sp)) ?></li>
+     <li id="pt-mychanges"><?= WikiLink("MyRecentChanges", 'auto', HTML($sp,"MyChanges",$sp)) ?></li>
+     <li id="pt-userpage"><?= WikiLink($id, 'auto', HTML($sp,$id,$sp)) ?></li>
+     <li id="pt-logout"><?= HTML::a(array('href'=>'?auth[logout]=1'), $sp,_("Logout"),$sp) ?></li>
+<?php } elseif (ALLOW_ANON_USER) {
+  $sp = HTML::Raw("&nbsp;"); $id = $user->getAuthenticatedId();
+  if ($id) { ?>
+    <li id="pt-userpage"><?= WikiLink($id, 'auto', HTML($sp,$id,$sp)) ?></li>
+  <?php } ?>
+  <!-- Login -->
+  <li id="pt-login"><?= HTML::a(array('href'=>'?auth[login]=1'),$sp,_("Login"),$sp) ?></li>
+<?php } else { ?>
+     <li id="pt-login"><a name="login"><?= _("Login required...") ?></a></li>
 <?php } ?>
-<?php
-if ($user->isAuthenticated()) {
-    $Sep = $WikiTheme->getButtonSeparator();
-    $SignOutB = $WikiTheme->makeButton(_("Sign Out"), "javascript:SignOut();", 'wikiaction');
-?>
-  <?= fmt("User: %s", WikiLink($user->getAuthenticatedId(), 'auto')) ?>
-  <?=$Sep?>
-  <script language="JavaScript" type="text/javascript"><!--
-    document.write('<input type="hidden" name="auth[logout]" value="0" />');
-    function SignOut() {
-      var form = document.forms["<?=$FORMNAME?>"];
-      form.elements["auth[logout]"].value = 1;
-      form.submit();
-    }
-    document.write('<?=$SignOutB?>'); // -->
-  </script>
-  <noscript>
-    <?= Button("submit:auth[logout]", _("Sign Out"), 'wikiaction') ?>
-  </noscript>
-<?php } else {
-    $SignInInput = HTML::input(array('type' => 'text',
-				     'name' => "auth[userid]",
-				     'size' => 12,
-				     'maxlength' => 256,
-				     'onchange' => "SignIn(this.form,false);"));
-    $SignInInput->addTooltip(_("Enter your UserId to sign in"));
-    $userid = $user->getId();
-    if ($user->isSignedIn())
-      echo sprintf(_("(User: %s)"),
-		   asXml(HTML::a(array(
-				       'href'=>'#',
-				       'title' => sprintf(_("Click to authenticate as %s"),$userid),
-				       'onclick'=>'SignIn(document.forms["'.$FORMNAME.'"],"'.$userid.'");'),
-				 $userid)));
-?>
-  <script type="text/javascript"> <!--
-     function SignIn(form,userid) {
-      <?php if (defined('EDITING_POLICY') and $request->_dbi->isWikiPage(EDITING_POLICY)) { ?>
-      if (window.focus) {
-        window.open('<?= WikiUrl(EDITING_POLICY) ?>',<!-- url -->
-                    'PleaseReadThisFirst',<!-- window name -->
-                    'width=600,height=430,scrollbars=yes,resizable=yes,toolbar=yes');
-      }
-      <?php } ?>
-      if (userid) {
-        form.elements["auth[userid]"].value = userid;
-      }
-      form.submit();
-    }
-    //-->
-  </script>
-  <?= Button("submit:auth[login]", _("Sign in as:"), 'wikiaction')?>
-  <?= $SignInInput ?>
-<?php /* // sf.net bug #950841 "Sign In:" button appears twice
-  <noscript>
-    <?= Button("submit:auth[login]", _("Sign in as:"), 'wikiaction')?>
-  </noscript>
-*/ ?>
-<?php } ?>
-<?php if (empty($NOFORM)) { ?>
-  </form>
-<?php } ?>
+  </ul>
+ </div>
+</div>

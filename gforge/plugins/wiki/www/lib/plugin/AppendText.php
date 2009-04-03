@@ -1,7 +1,7 @@
 <?php // -*-php-*-
-rcs_id('$Id: AppendText.php,v 1.7 2005/04/02 03:05:43 uckelman Exp $');
+rcs_id('$Id: AppendText.php 6185 2008-08-22 11:40:14Z vargenau $');
 /*
- Copyright 2004 $ThePhpWikiProgrammingTeam
+ Copyright 2004,2007 $ThePhpWikiProgrammingTeam
 
 This file is part of PhpWiki.
 
@@ -27,6 +27,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  * See http://sourceforge.net/mailarchive/message.php?msg_id=10141823
  * why not to use "text" as parameter. Nasty mozilla bug with mult. radio rows.
+ *
+ * Todo: multiple pages. e.g. AppendText s=~[CategoryINtime~] page=<!plugin TitleSearch intime !> 
  */
 class WikiPlugin_AppendText
 extends WikiPlugin
@@ -41,11 +43,12 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.7 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
         return array('page'     => '[pagename]',
+		     'pages'    => false,
                      's'        => '',  // Text to append.
                      'before'   => '',  // Add before (ignores after if defined)
                      'after'    => '',  // Add after line beginning with this
@@ -62,8 +65,20 @@ extends WikiPlugin
     function run($dbi, $argstr, &$request, $basepage) {
 
         $args = $this->getArgs($argstr, $request);
-        $pagename = $args['page'];
+	if (!$args['pages'] or !$request->isPost()) {
+	    return $this->_work($args['page'], $args, $dbi, $request);
+	} else {
+	    $html = HTML();
+	    if ($args['page'] != $basepage)
+		$html->pushContent("pages argument overrides page argument. ignored.",HTML::br());
+	    foreach ($args['pages'] as $pagename) {
+		$html->pushContent($this->_work($pagename, $args, $dbi, $request));
+	    }
+	    return $html;
+	}
+    }
 
+    function _work($pagename, $args, $dbi, &$request) {
         if (empty($args['s'])) {
             if ($request->isPost()) {
                 if ($pagename != _("AppendText"))
@@ -136,7 +151,7 @@ extends WikiPlugin
     }
 };
 
-// $Log: AppendText.php,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.7  2005/04/02 03:05:43  uckelman
 // Removed & from vars passed by reference (not needed, causes PHP to complain).
 //

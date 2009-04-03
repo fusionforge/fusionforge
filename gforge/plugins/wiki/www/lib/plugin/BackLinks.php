@@ -1,7 +1,7 @@
 <?php // -*-php-*-
-rcs_id('$Id: BackLinks.php,v 1.32 2004/12/06 19:50:05 rurban Exp $');
+rcs_id('$Id: BackLinks.php 6185 2008-08-22 11:40:14Z vargenau $');
 /**
- Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
+ Copyright 1999,2000,2001,2002,2006 $ThePhpWikiProgrammingTeam
 
  This file is part of PhpWiki.
 
@@ -37,7 +37,7 @@ extends WikiPlugin
     
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.32 $");
+                            "\$Revision: 6185 $");
     }
     
     function getDefaultArguments() {
@@ -47,6 +47,8 @@ extends WikiPlugin
              array('include_self' => false,
                    'noheader'     => false,
                    'page'         => '[pagename]',
+		   'linkmore'     => '',  // If count>0 and limit>0 display a link with 
+		     // the number of all results, linked to the given pagename.
                    ));
     }
 
@@ -54,6 +56,7 @@ extends WikiPlugin
     // info=mtime,hits,summary,version,author,locked,minor
     // exclude arg allows multiple pagenames exclude=HomePage,RecentChanges
     // NEW: info=count : number of links
+    // page=foo,bar : backlinks to both pages
     function run($dbi, $argstr, &$request, $basepage) {
         $args = $this->getArgs($argstr, $request);
         extract($args);
@@ -69,10 +72,36 @@ extends WikiPlugin
                 $args['types']['count'] = 
                     new _PageList_Column_BackLinks_count('count', _("#"), 'center');
         }
+	if (!empty($limit))
+	    $args['limit'] = $limit;
         $args['dosort'] = !empty($args['sortby']); // override DB sort (??)
         $pagelist = new PageList($info, $exclude, $args);
-        $p = $dbi->getPage($page);
-        $pagelist->addPages($p->getBackLinks(false, $sortby, $limit, $exclude));
+
+        // support logical AND: page1,page2
+	$pages = explodePageList($page);
+	$count = count($pages);
+	if (count($pages) > 1) {
+	    // AND: the intersection of all these pages
+	    $bl = array();
+	    foreach ($pages as $p) {
+		$dp = $dbi->getPage($p);
+		$bi = $dp->getBackLinks(false, $sortby, 0, $exclude);
+		while ($b = $bi->next()) {
+		    $name = $b->getName();
+	            if (isset($bl[$name]))
+	                $bl[$name]++;
+	            else 
+	                $bl[$name] = 1;   
+                } 
+	    }
+	    foreach ($bl as $b => $v)
+	        if ($v == $count)
+	            $pagelist->addPage($b);
+	} else {
+	    $p = $dbi->getPage($page);
+	    $pagelist->addPages($p->getBackLinks(false, $sortby, 0, $exclude));
+	}
+	$total = $pagelist->getTotal();
 
         // Localization note: In English, the differences between the
         // various phrases spit out here may seem subtle or negligible
@@ -82,7 +111,8 @@ extends WikiPlugin
         // distinction as it does with English in this case. :)
         if (!$noheader) {
             if ($page == $request->getArg('pagename')
-                and !$dbi->isWikiPage($page)) {
+                and !$dbi->isWikiPage($page)) 
+	    {
                     // BackLinks plugin is more than likely being called
                     // upon for an empty page on said page, while either
                     // 'browse'ing, 'create'ing or 'edit'ing.
@@ -95,7 +125,7 @@ extends WikiPlugin
                     if ($pagelist->isEmpty())
                         return HTML::p(fmt("No other page links to %s yet.", $pagelink));
                     
-                    if ($pagelist->getTotal() == 1)
+                    if ($total == 1)
                         $pagelist->setCaption(fmt("One page would link to %s:",
                                                   $pagelink));
                     // Some future localizations will actually require
@@ -106,18 +136,25 @@ extends WikiPlugin
                     //                               $pagelink));
                     else
                         $pagelist->setCaption(fmt("%s pages would link to %s:",
-                                                  $pagelist->getTotal(), $pagelink));
+                                                  $total, $pagelink));
             }
             else {
-                // BackLinks plugin is being displayed on a normal page.
-                $pagelink = WikiLink($page, 'auto');
+		if ($count) {
+		    $tmp_pages = $pages;
+		    $p = array_shift($tmp_pages);
+		    $pagelink = HTML(WikiLink($p, 'auto'));
+		    foreach ($tmp_pages as $p)
+		        $pagelink->pushContent(" ",_("AND")," ",WikiLink($p, 'auto')); 
+		} else
+            	    // BackLinks plugin is being displayed on a normal page.
+                    $pagelink = WikiLink($page, 'auto');
                 
                 if ($pagelist->isEmpty())
                     return HTML::p(fmt("No page links to %s.", $pagelink));
                 
                 //trigger_error("DEBUG: " . $pagelist->getTotal());
                 
-                if ($pagelist->getTotal() == 1)
+                if ($total == 1)
                     $pagelist->setCaption(fmt("One page links to %s:",
                                               $pagelink));
                 // Some future localizations will actually require
@@ -128,9 +165,15 @@ extends WikiPlugin
                 //                               $pagelink));
                 else
                     $pagelist->setCaption(fmt("%s pages link to %s:",
-                                              $pagelist->getTotal(), $pagelink));
+                                              $limit > 0 ? $total : _("Those"), 
+					      $pagelink));
             }
         }
+	if (!empty($args['linkmore']) 
+	    and $dbi->isWikiPage($args['linkmore'])
+	    and $limit > 0 and $total > $limit
+	    )
+	    $pagelist->addCaption(WikiLink($args['linkmore'], "auto", _("More...")));
         return $pagelist;
     }
     
@@ -145,7 +188,13 @@ class _PageList_Column_BackLinks_count extends _PageList_Column {
     }
 }
 
-// $Log: BackLinks.php,v $
+// $Log: not supported by cvs2svn $
+// Revision 1.34  2007/05/19 13:31:20  rurban
+// Fix AND warnings: de-perlify array access
+//
+// Revision 1.33  2007/01/04 16:46:22  rurban
+// Add linkmore. Support multiple pages logically AND them.
+//
 // Revision 1.32  2004/12/06 19:50:05  rurban
 // enable action=remove which is undoable and seeable in RecentChanges: ADODB ony for now.
 // renamed delete_page to purge_page.

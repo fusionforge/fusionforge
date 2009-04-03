@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: SqlResult.php,v 1.7 2005/02/27 12:37:14 rurban Exp $');
+rcs_id('$Id: SqlResult.php 6185 2008-08-22 11:40:14Z vargenau $');
 /*
  Copyright 2004 $ThePhpWikiProgrammingTeam
  
@@ -73,7 +73,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.7 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -148,8 +148,7 @@ extends WikiPlugin
             }
         } else { // unless PearDB use the included ADODB, regardless if dba, file or PDO, ...
             if ($DBParams['dbtype'] != 'ADODB') {
-                // require_once('lib/WikiDB/adodb/adodb-errorhandler.inc.php');
-                require_once('lib/WikiDB/adodb/adodb.inc.php');
+                require_once('lib/WikiDB/backend/ADODB.php');
             }
             $parsed = parseDSN($inidsn);
             $dbh = &ADONewConnection($parsed['phptype']); 
@@ -220,7 +219,7 @@ extends WikiPlugin
 
 };
 
-// $Log: SqlResult.php,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.7  2005/02/27 12:37:14  rurban
 // update comments
 //

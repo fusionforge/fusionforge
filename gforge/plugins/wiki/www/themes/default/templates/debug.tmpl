@@ -1,8 +1,8 @@
 <?php // -*-html-*-
-  rcs_id('$Id: debug.tmpl,v 1.17 2005/02/02 19:02:54 rurban Exp $');
+  rcs_id('$Id: debug.tmpl 6204 2008-08-26 15:12:03Z vargenau $');
 ?>
 <?php global $RUNTIMER; ?>
-<table width="%100" border="0" cellpadding="0" cellspacing="0">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
 <tr><td>
 <?php /* Note: The Portland theme's debug.tmpl overrides this file with it's own non-graphical variant. */ ?>
 <div id="xhtml-validator"><a href="http://validator.w3.org/check/referer" target="_top"><img
@@ -16,10 +16,9 @@
 </div>
 </td><td>
 <span class="debug"><?=fmt("Page Execution took %s seconds", $RUNTIMER->getStats())?>
-<?php $mem = getMemoryUsage();
-if ($mem) { ?>
-<?= fmt(", Memory: %s", $mem) ?>
-<?php } ?>
+<? $mem = @getMemoryUsage(); if ($mem) { ?>
+  <?= fmt(", Memory: %s", $mem) ?>
+<? } ?>
 </span>
 </td></tr></table>
 <?php // This keeps the valid XHTML! icons from "hanging off the bottom of the screen" ?>

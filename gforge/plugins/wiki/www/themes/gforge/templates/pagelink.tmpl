@@ -1,0 +1,31 @@
+<?php
+/**
+ * Themable paging "|<< <<   - i/sum - >> >>|" links
+ *
+ * $Id: pagelink.tmpl 6189 2008-08-22 13:18:48Z vargenau $ -->
+ * Variables: PREV, NEXT, PREV_LINK, NEXT_LINK,
+ * COUNT, OFFSET, SIZE
+ * More ideas: FIRST, LAST, ...
+ */
+if ($WikiTheme->DUMP_MODE) {
+  $PREV = false;
+  $NEXT = false;
+}
+?>
+<tr><td width="100%" colspan="<?= $COLS ?>">&nbsp;</td></tr>
+<tr><td width="100%" colspan="<?= $COLS ?>"><table style="border-width: 1px; border-style: solid; border-color: black; font-weight: bold;" width="100%"><tr class="wikipaging">
+  <td class="wikipaging<?= $PREV ? "-enabled" : "-disabled" ?>" align="left">
+      <?= $PREV ?  HTML::a(array('href'=>$FIRST_LINK),_("|<<")) : _("|<<") ?>
+      &nbsp;
+      <?= $PREV ?  HTML::a(array('href'=>$PREV_LINK),_("<< Prev")) : _("<<") ?>
+  </td>
+  <td class="wikipaging-enabled" align="center">
+      <?= fmt(" - %d / %d - ", $ACTPAGE, $NUMPAGES) ?>
+  </td>
+  <td class="wikipaging<?= $NEXT ? "-enabled" : "-disabled" ?>" align="right">
+      <?= $NEXT ?  HTML::a(array('href'=>$NEXT_LINK),_("Next >>"))  : _(">>") ?> 
+      &nbsp;
+      <?= $NEXT ?  HTML::a(array('href'=>$LAST_LINK),_(">>|")) : _(">>|") ?>
+  </td>
+</tr></table></td></tr>
+<tr><td width="100%" colspan="<?= $COLS ?>">&nbsp;</td></tr>

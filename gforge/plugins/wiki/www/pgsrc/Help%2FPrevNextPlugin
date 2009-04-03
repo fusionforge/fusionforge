@@ -1,0 +1,183 @@
+Date: Sat, 24 Jan 2009 20:18:24 +0100
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
+X-Rcs-Id: $Id: Help%2FPrevNextPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FPrevNextPlugin;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=iso-8859-1
+Content-Transfer-Encoding: binary
+
+The *~PrevLink* [[Help:WikiPlugin|plugin]] allows to display Previous and Next buttons on a wiki page for easy navigation.
+
+== Usage
+<verbatim>
+<?plugin PrevNext prev=PrevLink next=NextLink ?>
+</verbatim>
+
+== Arguments
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| <b>prev</b>
+| Link to the *Previous* page
+| empty
+|-
+| <b>next</b>
+| Link to the *Next* page
+| empty
+|-
+| <b>up</b>
+| Link to the *Up* page
+| empty
+|-
+| <b>contents</b>
+| Link to the *Contents* page
+| empty
+|-
+| <b>index</b>
+| Link to the *Index* page
+| empty
+|-
+| <b>first</b>
+| Link to the *First* page
+| empty
+|-
+| <b>last</b>
+| Link to the *Last* page
+| empty
+|-
+| <b>order</b>
+| Reorder the buttons: comma-delimited
+| empty
+|-
+| <b>order</b>
+| Can be ''left'', ''right'' or ''center''
+| left
+|-
+| <b>style</b>
+| Can be ''button'' or ''text''
+| button
+|-
+| <b>class</b>
+| Can be ''wikiaction'' or another class
+| wikiaction
+|}
+
+== Examples
+
+<verbatim>
+<?plugin PrevNext prev="Help/CreateTocPlugin" next="Help/MediawikiTablePlugin" ?>
+</verbatim>
+
+<?plugin PrevNext prev="Help/CreateTocPlugin" next="Help/MediawikiTablePlugin" ?>
+
+<verbatim>
+<?plugin PrevNext prev="Help/CreateTocPlugin"
+                  next="Help/MediawikiTablePlugin"
+                  contents="Help"
+?>
+</verbatim>
+
+<?plugin PrevNext prev="Help/CreateTocPlugin"
+                  next="Help/MediawikiTablePlugin"
+                  contents="Help"
+?>
+
+<verbatim>
+<?plugin PrevNext prev="Help/CreateTocPlugin"
+                  next="Help/MediawikiTablePlugin"
+                  contents="Help"
+                  align="right"
+?>
+</verbatim>
+
+<?plugin PrevNext prev="Help/CreateTocPlugin"
+                  next="Help/MediawikiTablePlugin"
+                  contents="Help"
+                  align="right"
+?>
+
+<verbatim>
+<?plugin PrevNext prev="Help/CreateTocPlugin"
+                  next="Help/MediawikiTablePlugin"
+                  contents="Help"
+                  align="center"
+?>
+</verbatim>
+
+<?plugin PrevNext prev="Help/CreateTocPlugin"
+                  next="Help/MediawikiTablePlugin"
+                  contents="Help"
+                  align="center"
+?>
+
+<verbatim>
+<?plugin PrevNext prev="Help/CreateTocPlugin"
+                  next="Help/MediawikiTablePlugin"
+                  up="Help"
+                  style="text"
+?>
+</verbatim>
+
+<?plugin PrevNext prev="Help/CreateTocPlugin"
+                  next="Help/MediawikiTablePlugin"
+                  up="Help"
+                  style="text"
+?>
+
+<verbatim>
+<?plugin PrevNext prev="Help/CreateTocPlugin"
+                  next="Help/MediawikiTablePlugin"
+                  index="Help"
+?>
+</verbatim>
+
+<?plugin PrevNext prev="Help/CreateTocPlugin"
+                  next="Help/MediawikiTablePlugin"
+                  index="Help"
+?>
+
+<verbatim>
+<?plugin PrevNext first="Help/AddCommentPlugin"
+                  prev="Help/CreateTocPlugin"
+                  next="Help/MediawikiTablePlugin"
+                  last="Help/YouTubePlugin"
+?>
+</verbatim>
+
+<?plugin PrevNext first="Help/AddCommentPlugin"
+                  prev="Help/CreateTocPlugin"
+                  next="Help/MediawikiTablePlugin"
+                  last="Help/YouTubePlugin"
+?>
+
+<verbatim>
+<?plugin PrevNext first="Help/AddCommentPlugin"
+                  prev="Help/CreateTocPlugin"
+                  next="Help/MediawikiTablePlugin"
+                  last="Help/YouTubePlugin"
+                  order="first,last,prev,next"
+?>
+</verbatim>
+
+<?plugin PrevNext first="Help/AddCommentPlugin"
+                  prev="Help/CreateTocPlugin"
+                  next="Help/MediawikiTablePlugin"
+                  last="Help/YouTubePlugin"
+                  order="first,last,prev,next"
+?>
+
+== Author
+* [Reini Urban|PhpWiki:ReiniUrban]
+
+== See Also
+* [PageGroup|Help:PageGroupPlugin], [[Help:WikiPlugin|plugin]] which automatically tries to extract the various links.
+
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+

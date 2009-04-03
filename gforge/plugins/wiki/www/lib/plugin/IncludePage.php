@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: IncludePage.php,v 1.27 2004/11/17 20:07:18 rurban Exp $');
+rcs_id('$Id: IncludePage.php 6185 2008-08-22 11:40:14Z vargenau $');
 /*
  Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
 
@@ -40,15 +40,17 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.27 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
         return array( 'page'    => false, // the page to include
                       'rev'     => false, // the revision (defaults to most recent)
                       'quiet'   => false, // if set, inclusion appears as normal content
+                      'bytes'   => false, // maximum number of bytes to include
                       'words'   => false, // maximum number of words to include
                       'lines'   => false, // maximum number of lines to include
+                      'sections' => false, // maximum number of sections to include
                       'section' => false, // include a named section
                       'sectionhead' => false // when including a named section show the heading
                       );
@@ -63,11 +65,12 @@ extends WikiPlugin
         }
         if (!$page or !$page->name)
             return false;
-        return array($page->name);
+        return array(array('linkto' => $page->name, 'relation' => 0));
     }
                 
     function run($dbi, $argstr, &$request, $basepage) {
-        extract($this->getArgs($argstr, $request));
+        $args = $this->getArgs($argstr, $request);
+        extract($args);
         if ($page) {
             // Expand relative page names.
             $page = new WikiPageName($page, $basepage);
@@ -81,7 +84,7 @@ extends WikiPlugin
         // TextFormattingRules).
         static $included_pages = array();
         if (in_array($page, $included_pages)) {
-            return $this->error(sprintf(_("recursive inclusion of page %s"),
+            return $this->error(sprintf(_("recursive inclusion of page %s ignored"),
                                         $page));
         }
 
@@ -96,18 +99,28 @@ extends WikiPlugin
             $r = $p->getCurrentRevision();
         }
         $c = $r->getContent();
-
-        if ($section)
-            $c = extractSection($section, $c, $page, $quiet, $sectionhead);
-        if ($lines)
-            $c = array_slice($c, 0, $lines);
-        if ($words)
-            $c = firstNWordsOfContent($words, $c);
+        
+        // follow redirects
+        if (preg_match('/<'.'\?plugin\s+RedirectTo\s+page=(\w+)\s+\?'.'>/', 
+                       implode("\n", $c), $m))
+        {
+            // trap recursive redirects
+            if (in_array($m[1], $included_pages)) {
+                return $this->error(sprintf(_("recursive inclusion of page %s ignored"),
+                                                $page.' => '.$m[1]));
+            }
+	    $page = $m[1];
+	    $p = $dbi->getPage($page);
+            $r = $p->getCurrentRevision();
+            $c = $r->getContent();   // array of lines
+        }
+        
+        $ct = $this->extractParts ($c, $page, $args);
 
         array_push($included_pages, $page);
 
         include_once('lib/BlockParser.php');
-        $content = TransformText(implode("\n", $c), $r->get('markup'), $page);
+        $content = TransformText($ct, $r->get('markup'), $page);
 
         array_pop($included_pages);
 
@@ -119,6 +132,41 @@ extends WikiPlugin
 
                     HTML::div(array('class' => 'transclusion'),
                               false, $content));
+    }
+    
+    /** 
+     * handles the arguments: section, sectionhead, lines, words, bytes,
+     * for UnfoldSubpages, IncludePage, ...
+     */
+    function extractParts ($c, $pagename, $args) {
+        extract($args);
+
+        if ($section) {
+            if ($sections) { 
+                $c = extractSection($section, $c, $pagename, $quiet, 1);
+            } else {
+                $c = extractSection($section, $c, $pagename, $quiet, $sectionhead);
+            }
+        }
+        if ($sections) {
+            $c = extractSections($sections, $c, $pagename, $quiet, 1);
+        }
+        if ($lines) {
+            $c = array_slice($c, 0, $lines);
+            $c[] = sprintf(_(" ... first %d lines"), $lines);
+        }
+        if ($words) {
+            $c = firstNWordsOfContent($words, $c);
+        }
+        if ($bytes) {
+            $ct = implode("\n", $c); // one string
+            if (strlen($ct) > $bytes) {
+                $ct = substr($c, 0, $bytes);
+                $c = array($ct, sprintf(_(" ... first %d bytes"), $bytes));
+            }
+        }
+        $ct = implode("\n", $c); // one string
+        return $ct;
     }
 };
 
@@ -147,7 +195,18 @@ extends WikiPlugin
 //   includes a plugin
 
 
-// $Log: IncludePage.php,v $
+// $Log: not supported by cvs2svn $
+// Revision 1.30  2008/07/02 17:48:01  vargenau
+// Fix mix-up of bytes and lines
+//
+// Revision 1.29  2007/06/03 21:58:51  rurban
+// Fix for Bug #1713784
+// Includes this patch and a refactoring.
+// RedirectTo is still not handled correctly.
+//
+// Revision 1.28  2006/04/17 17:28:21  rurban
+// honor getWikiPageLinks change linkto=>relation
+//
 // Revision 1.27  2004/11/17 20:07:18  rurban
 // just whitespace
 //

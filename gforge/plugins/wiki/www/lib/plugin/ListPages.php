@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: ListPages.php,v 1.10 2005/09/27 17:34:19 rurban Exp $');
+rcs_id('$Id: ListPages.php 6248 2008-09-07 15:13:56Z vargenau $');
 /*
  Copyright 2004 $ThePhpWikiProgrammingTeam
 
@@ -44,7 +44,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.10 $");
+                            "\$Revision: 6248 $");
     }
 
     function getDefaultArguments() {
@@ -69,7 +69,7 @@ extends WikiPlugin
         $args = $this->getArgs($argstr, $request);
         extract($args);
         // If the ratings table does not exist, or on dba it will break otherwise. 
-        // Check if Theme isa 'wikilens'
+        // Check if WikiTheme isa 'wikilens'
 	if ($info == 'pagename' and isa($GLOBALS['WikiTheme'], 'wikilens'))
 	    $info .= ",top3recs";
         if ($info)
@@ -145,10 +145,7 @@ class _PageList_Column_ListPages_count extends _PageList_Column {
     }
 }
 
-// $Log: ListPages.php,v $
-// Revision 1.10  2005/09/27 17:34:19  rurban
-// fix ListPages for non-SQL backends. Add top3recs as default only if ratings are available
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.9  2004/11/23 15:17:19  rurban
 // better support for case_exact search (not caseexact for consistency),
 // plugin args simplification:

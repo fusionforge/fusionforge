@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: PopUp.php,v 1.1 2004/11/24 19:03:30 rurban Exp $');
+rcs_id('$Id: PopUp.php 6185 2008-08-22 11:40:14Z vargenau $');
 /**
  Copyright 2004 Nicolas Noble <pixels@users.sf.net>
 
@@ -54,7 +54,7 @@ extends WikiPlugin
     }
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.1 $");
+                            "\$Revision: 6185 $");
     }
     function getDefaultArguments() {
         return array('link'        => "HomePage",
@@ -98,10 +98,7 @@ extends WikiPlugin
     }
 };
 
-// $Log: PopUp.php,v $
-// Revision 1.1  2004/11/24 19:03:30  rurban
-// new plugin by Nicolas Noble
-//
+// $Log: not supported by cvs2svn $
 //
 
 // For emacs users

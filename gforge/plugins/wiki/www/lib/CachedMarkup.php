@@ -1,7 +1,7 @@
 <?php 
-rcs_id('$Id: CachedMarkup.php,v 1.35 2005/04/23 11:18:58 rurban Exp $');
+rcs_id('$Id: CachedMarkup.php 6428 2009-01-21 15:35:18Z vargenau $');
 /* Copyright (C) 2002 Geoffrey T. Dairiki <dairiki@dairiki.org>
- * Copyright (C) 2004, 2005 $ThePhpWikiProgrammingTeam
+ * Copyright (C) 2004-2008 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  * 
@@ -20,6 +20,8 @@ rcs_id('$Id: CachedMarkup.php,v 1.35 2005/04/23 11:18:58 rurban Exp $');
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+require_once("lib/Units.php");
+
 class CacheableMarkup extends XmlContent {
 
     function CacheableMarkup($content, $basepage) {
@@ -33,8 +35,8 @@ class CacheableMarkup extends XmlContent {
     }
 
     function pack() {
-        if (function_exists('gzcompress'))
-            return gzcompress(serialize($this), 9);
+//        if (function_exists('gzcompress'))
+//            return gzcompress(serialize($this), 9);
         return serialize($this);
 
         // FIXME: probably should implement some sort of "compression"
@@ -59,7 +61,7 @@ class CacheableMarkup extends XmlContent {
                 // user our php lib. TESTME
                 include_once("ziplib.php");
                 $zip = new ZipReader($packed);
-                list(,$data,$§attrib) = $zip->readFile();
+                list(,$data,$attrib) = $zip->readFile();
                 return unserialize($data);
             }
         }
@@ -77,26 +79,21 @@ class CacheableMarkup extends XmlContent {
     
     /** Get names of wikipages linked to.
      *
-     * @return array
-     * A list of wiki page names (strings).
+     * @return array of hashes { linkto=>pagename, relation=>pagename }
      */
     function getWikiPageLinks() {
-        include_once('lib/WikiPlugin.php');
-        $ploader = new WikiPluginLoader();
-        
 	$links = array();
 	foreach ($this->_content as $item) {
 	    if (!isa($item, 'Cached_DynamicContent'))
                 continue;
-
             if (!($item_links = $item->getWikiPageLinks($this->_basepage)))
                 continue;
-            foreach ($item_links as $pagename)
-                if (is_string($pagename) and $pagename != '')
-                    $links[] = $pagename;
+            $links = array_merge($links, $item_links);
         }
-
-	return array_unique($links);
+        // array_unique has a bug with hashes! 
+        // set_links checks for duplicates, array_merge does not
+	//return array_unique($links);
+	return $links;
     }
 
     /** Get link info.
@@ -142,8 +139,10 @@ class CacheableMarkup extends XmlContent {
 		    $this->_append($subitem);
 		$this->_buf .= "</$item->_tag>";
 
-                if (!isset($this->_description) and $item->getTag() == 'p')
+                if (!$this->getDescription() and $item->getTag() == 'p') {
+                    // performance: when is this really needed?
                     $this->_glean_description($item->asString());
+                }
 	    }
 	    if (!$item->isInlineElement())
 		$this->_buf .= "\n";
@@ -263,10 +262,11 @@ class Cached_DynamicContent {
 }
 
 class XmlRpc_LinkInfo {
-    function XmlRpc_LinkInfo($page, $type, $href) {
+    function XmlRpc_LinkInfo($page, $type, $href, $relation = '') {
 	$this->page = $page;
 	$this->type = $type;
 	$this->href = $href;
+	$this->relation = $relation;
 	//$this->pageref = str_replace("/RPC2.php", "/index.php", $href);
     }
 }
@@ -285,11 +285,40 @@ class Cached_Link extends Cached_DynamicContent {
     function getLinkInfo($basepage) {
 	return new XmlRpc_LinkInfo($this->_getName($basepage),
                                    $this->_getType(),
-                                   $this->_getURL($basepage));
+                                   $this->_getURL($basepage),
+                                   $this->_getRelation($basepage));
     }
     
     function _getURL($basepage) {
 	return $this->_url;
+    }
+    function __getRelation($basepage) {
+	return $this->_relation;
+    }
+}
+/*
+ * Defer interwiki inline links. img src=upload:xx.png
+ * LinkImage($url, $alt = false)
+ */
+class Cached_InlinedImage extends Cached_DynamicContent {
+    function isInlineElement() {
+	return true;
+    }
+    function _getURL($basepage) {
+	return $this->_url;
+    }
+    // TODO: fix interwiki inline links in case of static dumps
+    function expand($basepage, &$markup) {
+	global $WikiTheme;
+    	$this->_basepage = $basepage;
+	$label = isset($this->_label) ? $this->_label : false;
+	if ($WikiTheme->DUMP_MODE) {
+            // In case of static dumps we need to check if we should
+            // inline the image or not: external: keep link, internal: copy locally
+	    return LinkImage($label);
+	} else {
+	    return LinkImage($label);
+	}
     }
 }
 
@@ -297,11 +326,16 @@ class Cached_WikiLink extends Cached_Link {
 
     function Cached_WikiLink ($page, $label = false, $anchor = false) {
 	$this->_page = $page;
+	/* ":DontStoreLink" */
+	if (substr($this->_page,0,1) == ':') {
+	    $this->_page = substr($this->_page,1);
+	    $this->_nolink = true;
+        }    
         if ($anchor)
             $this->_anchor = $anchor;
         if ($label and $label != $page)
             $this->_label = $label;
-        $this->_basepage = false;
+        $this->_basepage = false;    
     }
 
     function _getType() {
@@ -309,15 +343,18 @@ class Cached_WikiLink extends Cached_Link {
     }
     
     function getPagename($basepage) {
-	$page = new WikiPageName($this->_page, $basepage);
+        $page = new WikiPageName($this->_page, $basepage);
 	if ($page->isValid()) return $page->name;
 	else return false;
     }
 
     function getWikiPageLinks($basepage) {
         if ($basepage == '') return false;
-        if ($link = $this->getPagename($basepage)) return array($link);
-        else return false;
+	if (isset($this->_nolink)) return false;
+        if ($link = $this->getPagename($basepage)) 
+            return array(array('linkto' => $link, 'relation' => 0));
+        else 
+            return false;
     }
 
     function _getName($basepage) {
@@ -330,21 +367,31 @@ class Cached_WikiLink extends Cached_Link {
     }
 
     function expand($basepage, &$markup) {
-        $this->_basepage = $basepage;
+	global $WikiTheme;
+    	$this->_basepage = $basepage;
 	$label = isset($this->_label) ? $this->_label : false;
 	$anchor = isset($this->_anchor) ? (string)$this->_anchor : '';
         $page = new WikiPageName($this->_page, $basepage, $anchor);
+	if ($WikiTheme->DUMP_MODE and !empty($WikiTheme->VALID_LINKS)) {
+	    if (!in_array($this->_page, $WikiTheme->VALID_LINKS))
+		return HTML($label ? $label : $page->getName());
+	}
         if ($page->isValid()) return WikiLink($page, 'auto', $label);
 	else return HTML($label);
     }
 
     function asXML() {
+	global $WikiTheme;
 	$label = isset($this->_label) ? $this->_label : false;
 	$anchor = isset($this->_anchor) ? (string)$this->_anchor : '';
-        // need basepage for subpages like /Remove (within CreateTOC)
+	//TODO: need basepage for subpages like /Remove (within CreateTOC)
         $page = new WikiPageName($this->_page, $this->_basepage, $anchor);
+	if ($WikiTheme->DUMP_MODE and $WikiTheme->VALID_LINKS) {
+	    if (!in_array($this->_page, $WikiTheme->VALID_LINKS))
+		return $label ? $label : $page->getName();
+	}
 	$link = WikiLink($page, 'auto', $label);
-        return $link->asXML();
+	return $link->asXML();
     }
 
     function asString() {
@@ -361,7 +408,28 @@ class Cached_WikiLinkIfKnown extends Cached_WikiLink
     }
 
     function expand($basepage, &$markup) {
+	global $WikiTheme;
+	if ($WikiTheme->DUMP_MODE and $WikiTheme->VALID_LINKS) {
+	    if (!in_array($this->_page, $WikiTheme->VALID_LINKS))
+		return HTML($label ? $label : $page->getName());
+	}
         return WikiLink($this->_page, 'if_known');
+    }
+}    
+
+class Cached_SpellCheck extends Cached_WikiLink
+{
+    function Cached_SpellCheck ($word, $suggs) {
+	$this->_page = $word;
+	$this->suggestions = $suggs;
+    }
+
+    function expand($basepage, &$markup) {
+        $link = HTML::a(array('class' => 'spell-wrong', 
+			      'title' => 'SpellCheck: '.join(', ', $this->suggestions),
+			      'name' => $this->_page), 
+			$this->_page);
+        return $link;
     }
 }    
     
@@ -378,7 +446,12 @@ class Cached_PhpwikiURL extends Cached_DynamicContent
     }
 
     function expand($basepage, &$markup) {
+	global $WikiTheme;
         $label = isset($this->_label) ? $this->_label : false;
+	if ($WikiTheme->DUMP_MODE and $WikiTheme->VALID_LINKS) {
+	    if (!in_array($this->_page, $WikiTheme->VALID_LINKS))
+		return HTML($label ? $label : $page->getName());
+	}
         return LinkPhpwikiURL($this->_url, $label, $basepage);
     }
 
@@ -392,6 +465,161 @@ class Cached_PhpwikiURL extends Cached_DynamicContent
         if (isset($this->_label))
             return $this->_label;
         return $this->_url;
+    }
+}    
+
+/*
+ * Relations (::) are named links to pages.
+ * Attributes (:=) are named metadata per page, "named links to numbers with units". 
+ * We don't want to exhaust the linktable with numbers,
+ * since this would create empty pages per each value, 
+ * so we don't store the attributes as full relationlink. 
+ * But we do store the attribute name as relation with an empty pagename 
+ * to denote that this is an attribute, 
+ * and to enable a fast listRelations mode=attributes
+ */
+class Cached_SemanticLink extends Cached_WikiLink {
+
+    function Cached_SemanticLink ($url, $label=false) {
+	$this->_url = $url;
+        if ($label && $label != $url)
+            $this->_label = $label;
+        $this->_expandurl($this->_url);
+    }
+
+    function isInlineElement() {
+	return true;
+    }
+
+    function getPagename($basepage) {
+	if (!isset($this->_page)) return false;
+	$page = new WikiPageName($this->_page, $basepage);
+	if ($page->isValid()) return $page->name;
+	else return false;
+    }
+
+    /* Add relation to the link table.
+     * attributes have the _relation, but not the _page set.
+     */
+    function getWikiPageLinks($basepage) {
+        if ($basepage == '') return false;
+	if (!isset($this->_page) and isset($this->_attribute)) {
+            // An attribute: we store it in the basepage now, to fill the cache for page->save
+            // TODO: side-effect free query
+            $page = $GLOBALS['request']->getPage($basepage); 
+            $page->setAttribute($this->_relation, $this->_attribute);
+            $this->_page = $basepage;
+            return array(array('linkto' => '', 'relation' => $this->_relation));
+	}
+        if ($link = $this->getPagename($basepage)) 
+            return array(array('linkto' => $link, 'relation' => $this->_relation));
+        else
+            return false;
+    }
+
+    function _expandurl($url) {
+        $m = array();
+        if (!preg_match('/^ ([^:]+) (:[:=]) (.+) $/x', $url, $m)) {
+            return HTML::strong(array('class' => 'rawurl'),
+                                HTML::u(array('class' => 'baduri'),
+                                        _("BAD semantic relation link")));
+        }
+	$this->_relation = urldecode($m[1]);
+        $is_attribute = ($m[2] == ':=');
+        if ($is_attribute) {
+            $this->_attribute = urldecode($m[3]);
+	    // since this stored in the markup cache, we are extra sensible 
+	    // not to store false empty stuff.
+	    $units = new Units();
+            if (!DISABLE_UNITS and !$units->errcode) 
+	    {
+		$this->_attribute_base = $units->Definition($this->_attribute);
+		$this->_unit = $units->baseunit($this->_attribute);
+	    }
+        } else {
+	    $this->_page = urldecode($m[3]);
+        }
+	return $m;
+    }
+
+    function _expand($url, $label = false) {
+	global $WikiTheme;
+	$m = $this->_expandurl($url);
+        $class = 'wiki';
+        // do not link to the attribute value, but to the attribute
+        $is_attribute = ($m[2] == ':=');
+	if ($WikiTheme->DUMP_MODE and $WikiTheme->VALID_LINKS) {
+	    if (isset($this->_page) and !in_array($this->_page, $WikiTheme->VALID_LINKS))
+		return HTML($label ? $label : ($is_attribute ? $this->_relation : $this->_page));
+	}
+	if ($is_attribute)
+	    $title = isset($this->_attribute_base)
+		? sprintf(_("Attribute %s, base value: %s"), $this->_relation, $this->_attribute_base)
+		: sprintf(_("Attribute %s, value: %s"), $this->_relation, $this->_attribute);
+        if ($label) {
+            return HTML::span
+		(
+		 HTML::a(array('href'  => WikiURL($is_attribute ? $this->_relation : $this->_page),
+			       'class' => "wiki ".($is_attribute ? "attribute" : "relation"),
+			       'title' => $is_attribute 
+			       ? $title 
+			       : sprintf(_("Relation %s to page %s"), $this->_relation, $this->_page)),
+			 $label)
+		 );
+        } elseif ($is_attribute) {
+            return HTML::span
+		(
+		 HTML::a(array('href'  => WikiURL($this->_relation),
+			       'class' => "wiki attribute",
+			       'title' => $title),
+			 $url)
+		 );
+        } else {
+            return HTML::span
+		(
+		 HTML::a(array('href'  => WikiURL($this->_relation),
+			       'class' => "wiki relation"),
+			 $this->_relation),
+		 HTML::span(array('class'=>'relation-symbol'), $m[2]),
+		 HTML::a(array('href'  => WikiURL($this->_page),
+			       'class' => "wiki"),
+			 $this->_page)
+		 );
+        }
+    }
+
+    function expand($basepage, &$markup) {
+        $label = isset($this->_label) ? $this->_label : false;
+        return $this->_expand($this->_url, $label);
+    }
+
+    function asXML() {
+        $label = isset($this->_label) ? $this->_label : false;
+        $link = $this->_expand($this->_url, $label);
+        return $link->asXML();
+    }
+
+    function asString() {
+        if (isset($this->_label))
+            return $this->_label;
+        return $this->_url;
+    }
+}
+
+/** 
+ * Highlight found search engine terms
+ */
+class Cached_SearchHighlight extends Cached_DynamicContent
+{
+    function Cached_SearchHighlight ($word, $engine) {
+	$this->_word = $word;
+	$this->engine = $engine;
+    }
+
+    function expand($basepage, &$markup) {
+        return HTML::span(array('class' => 'search-term',
+                                'title' => _("Found by ") . $this->engine),
+                          $this->_word);
     }
 }    
     
@@ -421,7 +649,7 @@ class Cached_ExternalLink extends Cached_Link {
         if (GOOGLE_LINKS_NOFOLLOW) {
             // Ignores nofollow when the user who saved the page was authenticated. 
             $page = $request->getPage($basepage);
-            $current = $page->getCurrentRevision();
+            $current = $page->getCurrentRevision(false);
             if (!$current->get('author_id'))
                 $link->setAttr('rel', 'nofollow');
         }
@@ -429,7 +657,7 @@ class Cached_ExternalLink extends Cached_Link {
     }
 
     function asString() {
-        if (isset($this->_label))
+        if (isset($this->_label) and is_string($this->_label))
             return $this->_label;
         return $this->_url;
     }
@@ -443,19 +671,47 @@ class Cached_InterwikiLink extends Cached_ExternalLink {
             $this->_label = $label;
     }
 
+    function getPagename($basepage) {
+        list ($moniker, $page) = split (":", $this->_link, 2);
+	$page = new WikiPageName($page, $basepage);
+	if ($page->isValid()) return $page->name;
+	else return false;
+    }
+
+    function getWikiPageLinks($basepage) {
+        if ($basepage == '') return false;
+	/* ":DontStoreLink" */
+	if (substr($this->_link,0,1) == ':') return false;
+	/* store only links to valid pagenames */
+        if ($link = $this->getPagename($basepage)) 
+            return array(array('linkto' => $link, 'relation' => 0));
+        else return false; // dont store external links
+    }
+
     function _getName($basepage) {
 	$label = isset($this->_label) ? $this->_label : false;
-	return ($label and is_string($label)) ? $label : $link;
+	return ($label and is_string($label)) ? $label : $this->_link;
     }
     
+    /* there may be internal interwiki links also */
+    function _getType() {
+        return $this->getPagename(false) ? 'internal' : 'external';
+    }
+
     function _getURL($basepage) {
 	$link = $this->expand($basepage, $this);
 	return $link->getAttr('href');
     }
 
     function expand($basepage, &$markup) {
+	global $WikiTheme;
 	$intermap = getInterwikiMap();
 	$label = isset($this->_label) ? $this->_label : false;
+	//FIXME: check Upload: inlined images
+	if ($WikiTheme->DUMP_MODE and !empty($WikiTheme->VALID_LINKS)) {
+	    if (!in_array($this->_link, $WikiTheme->VALID_LINKS))
+		return HTML($label ? $label : $this->_link);
+	}
 	return $intermap->link($this->_link, $label);
     }
 
@@ -482,16 +738,24 @@ class Cached_UserLink extends Cached_WikiLink {
     }
 }
 
+/**
+ * 1.3.13: Previously stored was only _pi. 
+ * A fresh generated cache has now ->name and ->args also.
+ * main::isActionPage only checks the raw content.
+ */
 class Cached_PluginInvocation extends Cached_DynamicContent {
 
     function Cached_PluginInvocation ($pi) {
 	$this->_pi = $pi;
+	$loader = $this->_getLoader();
+        if (is_array($plugin_cmdline = $loader->parsePI($pi)) and $plugin_cmdline[1]) {
+            $this->pi_name = $plugin_cmdline[0]; // plugin, plugin-form, plugin-list, plugin-link
+            $this->name = $plugin_cmdline[1]->getName();
+            $this->args = $plugin_cmdline[2];
+        }
     }
 
     function setTightness($top, $bottom) {
-        $this->_tightenable = 0;
-        if ($top) $this->_tightenable |= 1;
-        if ($bottom) $this->_tightenable |= 2;
     }
     
     function isInlineElement() {
@@ -500,33 +764,13 @@ class Cached_PluginInvocation extends Cached_DynamicContent {
 
     function expand($basepage, &$markup) {
         $loader = $this->_getLoader();
-
         $xml = $loader->expandPI($this->_pi, $GLOBALS['request'], $markup, $basepage);
-        $div = HTML::div(array('class' => 'plugin'));
-        if (is_array($plugin_cmdline = $loader->parsePI($this->_pi)) and $plugin_cmdline[1])
-            $id = GenerateId($plugin_cmdline[1]->getName() . 'Plugin');
-        
-	if (isset($this->_tightenable)) {
-	    if ($this->_tightenable == 3) {
-                $span = HTML::span(array('class' => 'plugin'), $xml);
-                if (!empty($id))
-                    $span->setAttr('id', $id);
-	        return $span;
-            }
-	    $div->setInClass('tightenable');
-	    $div->setInClass('top', ($this->_tightenable & 1) != 0);
-	    $div->setInClass('bottom', ($this->_tightenable & 2) != 0);
-	}
-        if (!empty($id))
-            $div->setAttr('id', $id);
-	$div->pushContent($xml);
-	return $div;
+        return $xml;
     }
 
     function asString() {
         return $this->_pi;
     }
-
 
     function getWikiPageLinks($basepage) {
         $loader = $this->_getLoader();
@@ -544,6 +788,69 @@ class Cached_PluginInvocation extends Cached_DynamicContent {
         return $loader;
     }
 }
+
+// $Log: not supported by cvs2svn $
+// Revision 1.64  2008/03/21 20:35:52  rurban
+// Improve upon embedded ImgObject, such as [ *.mp3 ], objects.
+// Object tags now render as label correctly and param tags are also added.
+//
+// Revision 1.63  2008/03/17 19:03:08  rurban
+// protect $WikiTheme->VALID_LINKS
+//
+// Revision 1.62  2008/02/14 18:40:32  rurban
+// fix DUMP_MODE with LINKS
+//
+// Revision 1.61  2008/01/30 19:08:59  vargenau
+// Valid HTML code: we need a div, it might contain a table
+//
+// Revision 1.60  2007/09/15 12:28:46  rurban
+// Improve multi-page format handling: abstract _DumpHtmlToDir. get rid of non-external pdf, non-global VALID_LINKS
+//
+// Revision 1.59  2007/09/12 19:32:29  rurban
+// link only VALID_LINKS with pagelist HTML_DUMP
+//
+// Revision 1.58  2007/07/14 12:30:53  rurban
+// include => require
+//
+// Revision 1.57  2007/05/28 20:13:46  rurban
+// Overwrite all attributes at once at page->save to delete dangling meta
+//
+// Revision 1.56  2007/04/08 16:39:40  rurban
+// fix when DISABLE_UNITS = true (thanks to Walter Rafelsberger)
+// simplify title calculation
+//
+// Revision 1.55  2007/03/18 17:35:14  rurban
+// Fix :DontStoreLink
+//
+// Revision 1.54  2007/01/25 07:41:41  rurban
+// Print attribute in title. Use CSS formatting for ::=
+//
+// Revision 1.53  2007/01/21 23:26:52  rurban
+// Translate Found by
+//
+// Revision 1.52  2007/01/20 15:53:51  rurban
+// Rewrite of SearchHighlight: through ActionPage and InlineParser
+//
+// Revision 1.51  2007/01/20 11:24:53  rurban
+// add SpellCheck support
+//
+// Revision 1.50  2007/01/07 18:41:51  rurban
+// Fix fallback ZipReader syntax error. Use label=false. Add parsed plugin names to the stored tree.
+//
+// Revision 1.49  2007/01/04 16:40:35  rurban
+// Remove units object from CachedMarkup links, Store parsed linkinfo only: basevalue, baseunit.
+//
+// Revision 1.48  2007/01/03 21:22:08  rurban
+// Use Units for attributes. Store the unified base value as Cached_SemanticLink->_attribute_base in the wikimarkup and display it as title.
+//
+// Revision 1.47  2007/01/02 13:17:57  rurban
+// fix semantic page links and attributes, esp. attributes. they get stored as link to empty page also. tighten semantic url expander regex, omit want_content if not necessary
+//
+// Revision 1.46  2006/12/22 00:11:38  rurban
+// add seperate expandurl method, to simplify pagename parsing
+//
+// Revision 1.45  2006/10/12 06:33:50  rurban
+// decide later with which class to render this link (fixes interwiki link layout)
 
 // (c-file-style: "gnu")
 // Local Variables:

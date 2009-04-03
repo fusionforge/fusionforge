@@ -1,7 +1,7 @@
 <?php // -*-php-*-
-rcs_id('$Id: Request.php,v 1.105 2006/04/17 17:25:19 rurban Exp $');
+rcs_id('$Id: Request.php 6184 2008-08-22 10:33:41Z vargenau $');
 /*
- Copyright (C) 2002,2004,2005 $ThePhpWikiProgrammingTeam
+ Copyright (C) 2002,2004,2005,2006 $ThePhpWikiProgrammingTeam
  
  This file is part of PhpWiki.
 
@@ -47,7 +47,7 @@ class Request {
             break;
         }
         
-        $this->session = new Request_SessionVars; 
+        $this->session = new Request_SessionVars;
         $this->cookies = new Request_CookieVars;
         
         if (ACCESS_LOG or ACCESS_LOG_SQL) {
@@ -60,8 +60,13 @@ class Request {
     function get($key) {
         if (!empty($GLOBALS['HTTP_SERVER_VARS']))
             $vars = &$GLOBALS['HTTP_SERVER_VARS'];
-        else // cgi or other servers than Apache
-            $vars = &$GLOBALS['HTTP_ENV_VARS'];
+        elseif (!empty($GLOBALS['HTTP_ENV_VARS']))
+            $vars = &$GLOBALS['HTTP_ENV_VARS']; // cgi or other servers than Apache
+        else
+            trigger_error("Serious php configuration error!"
+                          ." No HTTP_SERVER_VARS and HTTP_ENV_VARS vars available."
+                          ." These should get defined in lib/prepend.php",
+                          E_USER_WARNING);
 
         if (isset($vars[$key]))
             return $vars[$key];
@@ -100,6 +105,11 @@ class Request {
         $get_args = $this->args;
         if ($args)
             $get_args = array_merge($get_args, $args);
+
+        // leave out empty arg values
+        foreach ($get_args as $g => $v) {
+            if ($v === false or $v === '') unset($get_args[$g]);
+        }
 
         // Err... good point...
         // sortby buttons
@@ -334,7 +344,7 @@ class Request {
         elseif (isCGI()) // necessary?
             $compress = false;
             
-        if ($this->getArg('start_debug'))
+        if ($this->getArg('start_debug') or $this->getArg('nocache'))
             $compress = false;
         
         // Should we compress even when apache_note is not available?
@@ -397,7 +407,7 @@ class Request {
 
     function discardOutput() {
         if (!empty($this->_is_buffering_output)) {
-            ob_clean();
+            if (ob_get_length()) ob_clean();
             $this->_is_buffering_output = false;
         } else {
             trigger_error("Not buffering output", E_USER_NOTICE);
@@ -412,13 +422,15 @@ class Request {
      * sections with ob_buffering.
      */
     function chunkOutput() {
-        if (!empty($this->_is_buffering_output) or 
-            (function_exists('ob_get_level') and @ob_get_level())) {
+        if (!empty($this->_is_buffering_output) 
+	    or 
+            (function_exists('ob_get_level') and @ob_get_level())) 
+	{
             $this->_do_chunked_output = true;
             if (empty($this->_ob_get_length)) $this->_ob_get_length = 0;
             $this->_ob_get_length += ob_get_length();
             while (@ob_end_flush());
-            ob_end_clean();
+            @ob_end_clean();
             ob_start();
         }
     }
@@ -573,6 +585,8 @@ class Request_SessionVars {
         $vars = &$GLOBALS['HTTP_SESSION_VARS'];
         if (isset($vars[$key]))
             return $vars[$key];
+        if (isset($_SESSION) and isset($_SESSION[$key])) // php-5.2
+            return $_SESSION[$key];
         return false;
     }
     
@@ -583,7 +597,7 @@ class Request_SessionVars {
             $GLOBALS[$key] = $val;
         }
         $vars[$key] = $val;
-        if (isset($_SESSION))
+        if (isset($_SESSION)) // php-5.2
             $_SESSION[$key] = $val;
         session_register($key);
     }
@@ -603,9 +617,12 @@ class Request_CookieVars {
     function get($key) {
         $vars = &$GLOBALS['HTTP_COOKIE_VARS'];
         if (isset($vars[$key])) {
-            @$val = unserialize(base64_decode($vars[$key]));
-            if (!empty($val))
-                return $val;
+            @$decode = base64_decode($vars[$key]);
+            if (strlen($decode) > 3 and substr($decode,1,1) == ':') {
+              @$val = unserialize($decode);
+              if (!empty($val))
+                  return $val;
+            }
             @$val = urldecode($vars[$key]);
             if (!empty($val))
                 return $val;
@@ -616,9 +633,12 @@ class Request_CookieVars {
     function get_old($key) {
         $vars = &$GLOBALS['HTTP_COOKIE_VARS'];
         if (isset($vars[$key])) {
-            @$val = unserialize(base64_decode($vars[$key]));
-            if (!empty($val))
+            @$decode = base64_decode($vars[$key]);
+            if (strlen($decode) > 3 and substr($decode,1,1) == ':') {
+              @$val = unserialize($decode);
+              if (!empty($val))
                 return $val;
+            }
             @$val = unserialize($vars[$key]);
             if (!empty($val))
                 return $val;
@@ -699,7 +719,7 @@ class Request_UploadedFile {
                 trigger_error(_("Upload error: file too big"), E_USER_WARNING);
                 break;
             case 3:
-                trigger_error(_("Upload error: file only partially recieved"), E_USER_WARNING);
+                trigger_error(_("Upload error: file only partially received"), E_USER_WARNING);
                 break;
             case 4:
                 trigger_error(_("Upload error: no file selected"), E_USER_WARNING);
@@ -718,11 +738,13 @@ class Request_UploadedFile {
                     $tmp_file = dirname(tempnam('', ''));
                 }
                 $tmp_file .= '/' . basename($fileinfo['tmp_name']);
-                /* but ending slash in php.ini upload_tmp_dir is required. */
+                /* ending slash in php.ini upload_tmp_dir is required. */
                 if (realpath(ereg_replace('/+', '/', $tmp_file)) != realpath($fileinfo['tmp_name'])) {
                     trigger_error(sprintf("Uploaded tmpfile illegal: %s != %s.",$tmp_file, $fileinfo['tmp_name']).
                     	          "\n".
-                    	          "Probably illegal TEMP environment or upload_tmp_dir setting.",
+                    	          "Probably illegal TEMP environment or upload_tmp_dir setting. ".
+                    	          "Esp. on WINDOWS be sure to set upload_tmp_dir in php.ini to use forward slashes and ".
+                    	          "end with a slash. upload_tmp_dir = \"C:/WINDOWS/TEMP/\" is good suggestion.",
                                   E_USER_ERROR);
                     return false;
                 } else {
@@ -1039,10 +1061,12 @@ class Request_AccessLogEntry
      * @param $size integer
      */
     function setSize ($size=0) {
-        $this->size = $size;
+        $this->size = (int)$size;
     }
     function setDuration ($seconds) {
-        $this->duration = $seconds;
+        // Pear DB does not correctly quote , in floats using ?. e.g. in european locales.
+        // Workaround:
+        $this->duration = strtr(sprintf("%f", $seconds),",",".");
     }
     
     /**
@@ -1117,7 +1141,7 @@ class Request_AccessLogEntry
     	
         $dbh =& $request->_dbi;
         if ($dbh and $dbh->isOpen() and $this->_accesslog->logtable) {
-            $log_tbl =& $this->_accesslog->logtable;
+            //$log_tbl =& $this->_accesslog->logtable;
             if ($request->get('REQUEST_METHOD') == "POST") {
                 // strangely HTTP_POST_VARS doesn't contain all posted vars.
           	if (check_php_version(4,2))
@@ -1133,24 +1157,12 @@ class Request_AccessLogEntry
             } else {
           	$this->request_args = $request->get('QUERY_STRING'); 
             }
+            $this->request_method = $request->get('REQUEST_METHOD');
+            $this->request_uri = $request->get('REQUEST_URI');
             // duration problem: sprintf "%f" might use comma e.g. "100,201" in european locales
-            $dbh->genericSqlQuery
-                (
-                 sprintf("INSERT INTO $log_tbl"
-                         . " (time_stamp,remote_host,remote_user,request_method,request_line,request_uri,"
-                         .   "request_args,request_time,status,bytes_sent,referer,agent,request_duration)"
-                         . " VALUES(%d,%s,%s,%s,%s,%s,%s,%s,%d,%d,%s,%s,'%s')",
-                     $this->time,
-                     $dbh->quote($this->host), $dbh->quote($this->user),
-                     $dbh->quote($request->get('REQUEST_METHOD')), $dbh->quote($this->request), 
-                     $dbh->quote($request->get('REQUEST_URI')), $dbh->quote($this->request_args),
-                     $dbh->quote($this->_ncsa_time($this->time)), $this->status, $this->size,
-                     $dbh->quote($this->referer),
-                     $dbh->quote($this->user_agent),
-                     $this->duration));
+            $dbh->_backend->write_accesslog($this);
         }
     }
-
 }
 
 /**
@@ -1349,7 +1361,47 @@ class HTTP_ValidatorSet {
 }
 
 
-// $Log: Request.php,v $
+// $Log: not supported by cvs2svn $
+// Revision 1.118  2008/03/22 21:45:34  rurban
+// Fixed a blocker for php-5.2. Somehow _SESSION is not copied from
+// HTTP_SESSION_VARS in prepend, so check it explicitly. User logins persist now.
+//
+// Revision 1.117  2008/03/17 19:08:29  rurban
+// get rid of @ error protection in unserialize
+//
+// Revision 1.116  2008/02/14 18:31:04  rurban
+// nocache to omit compress cache headers (fix async calls for rating images)
+//
+// Revision 1.115  2007/09/01 13:28:34  rurban
+// document pear DB problem
+//
+// Revision 1.114  2007/07/14 19:17:15  rurban
+// fix bug#1749950 float with ","
+//
+// Revision 1.113  2007/03/18 10:25:21  rurban
+// cast AccessLog types
+//
+// Revision 1.112  2007/01/28 22:49:55  rurban
+// use backend specific SQL write_accesslog
+//
+// Revision 1.111  2007/01/07 18:43:26  rurban
+// Explain failed UpLoad on Windows to the user.
+//
+// Revision 1.110  2007/01/04 16:45:10  rurban
+// Be more verbose in serious php problem.
+//
+// Revision 1.109  2006/12/22 00:24:09  rurban
+// silence empty obcache messages
+//
+// Revision 1.108  2006/11/29 19:49:48  rurban
+// quote the date
+//
+// Revision 1.107  2006/11/19 11:10:11  rurban
+// Patch from Bug# 1569424 by Bob Peele (bob.peele@oracle.com)
+//
+// Revision 1.106  2006/08/15 13:37:59  rurban
+// error on no long arrays
+//
 // Revision 1.105  2006/04/17 17:25:19  rurban
 // make the flush error go away. die
 //

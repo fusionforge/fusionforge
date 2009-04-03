@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: Utils.php,v 1.2 2004/11/15 16:00:02 rurban Exp $');
+rcs_id('$Id: Utils.php 6184 2008-08-22 10:33:41Z vargenau $');
 /*
  Copyright 2004 Mike Cassano
 
@@ -97,12 +97,7 @@ function notEmptyName($var) {
     return $var != "";
 }
 
-// $Log: Utils.php,v $
-// Revision 1.2  2004/11/15 16:00:02  rurban
-// enable RateIt imgPrefix: '' or 'Star' or 'BStar',
-// enable blue prediction icons,
-// enable buddy predictions.
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.1  2004/06/18 14:42:17  rurban
 // added wikilens libs (not yet merged good enough, some work for DanFr)
 // 

@@ -1,20 +1,30 @@
-<table width="100%">
+<table width="100%" cellpadding="0" cellspacing="0">
 <tr>
-<td valign="top" width="5%" class="toolpalettes">
-<?= Template('top') ?>
+<td nowrap="nowrap" valign="top">
+<br/>
+<br/>
+<span id="actionbuttons">
+<span class="wikiaction"><strong>Wiki Menu</strong></span>
+</span>
+<br />
+<div class="wikiaction">
+<table
+<?= Template('navbar') ?>
+</table>
+</div>
+</td>
+<td>&nbsp;</td>
+<td valign="top">
 <?php
 global $HIDE_TOOLBARS;
 if (!$HIDE_TOOLBARS) {
 ?>
-<br />
-<span class="tooltitle">Edition</span>
+<div class="toolpalettes">
 <div class="toolbar">
 <?= Template('actionbar') ?>
 </div>
+</div>
 <?php } ?>
-</td>
-<td class="toolpalettes">&nbsp;</td>
-<td valign="top" >
 <div id="content">
 <h1><?= $HEADER ?></h1>
 <br />

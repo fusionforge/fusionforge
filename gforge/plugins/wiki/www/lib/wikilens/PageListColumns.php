@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: PageListColumns.php,v 1.10 2005/09/30 18:41:39 uckelman Exp $');
+rcs_id('$Id: PageListColumns.php 6184 2008-08-22 10:33:41Z vargenau $');
 
 /*
  Copyright 2004 Mike Cassano
@@ -82,7 +82,7 @@ class _PageList_Column_coagreement extends _PageList_Column_custom
             $p = "error";	
         }   
         //FIXME: $WikiTheme->getImageURL()
-        return HTML::img(array('src' => "../images/" . $p . ".gif"));
+        return HTML::img(array('src' => $WikiTheme->getImageURL($p)));
     }
 }
 
@@ -96,7 +96,7 @@ class _PageList_Column_minmisery extends _PageList_Column_custom
 
     function _getValue ($page_handle, &$revision_handle) 
     {
-        global $request;
+        global $request, $WikiTheme;
 
         $pagename = $page_handle->getName();
 
@@ -105,8 +105,7 @@ class _PageList_Column_minmisery extends _PageList_Column_custom
         $dbi = $request->getDbh();	
         $p = MinMisery($dbi, $pagename, $this->_selectedBuddies, $active_userId);
        	$imgFix = floor($p * 2) / 2;
-        //FIXME: $WikiTheme->getImageURL()
-        return HTML::img(array('src' => "../images/" . $imgFix . ".png"));
+        return HTML::img(array('src' => $WikiTheme->getImageURL("Rateit" . $imgFix)));
     }
 }
 
@@ -121,7 +120,7 @@ class _PageList_Column_averagerating extends _PageList_Column_custom
 
     function _getValue ($page_handle, &$revision_handle) 
     {
-        global $request;
+        global $request, $WikiTheme;
 
         $pagename = $page_handle->getName();
 
@@ -132,8 +131,7 @@ class _PageList_Column_averagerating extends _PageList_Column_custom
       
         $imgFix = floor($p * 2) / 2;
         $html = HTML();
-        //FIXME: $WikiTheme->getImageURL()
-        $html->pushContent(HTML::img(array('src' => "../images/" . $imgFix . ".png")));
+        $html->pushContent(HTML::img(array('src' => $WikiTheme->getImageURL("Rateit" . $imgFix))));
         $html->pushContent($p);
         return $html;
     }
@@ -142,6 +140,7 @@ class _PageList_Column_averagerating extends _PageList_Column_custom
 /**
  * Show the value of a rating as a digit (or "-" if no value), given the
  * user who is the rater.
+ * This requires the RatingsUser as 5th paramater.
  */
 class _PageList_Column_ratingvalue extends _PageList_Column {
     var $_user;
@@ -150,13 +149,16 @@ class _PageList_Column_ratingvalue extends _PageList_Column {
     function _PageList_Column_ratingvalue ($params) {
     	$this->_pagelist =& $params[3];
         $this->_user =& $params[4];//$this->_pagelist->getOption('user');
-        assert(!empty($this->_user));
         $this->_PageList_Column($params[0], $params[1], $params[2]);
         $this->_dimension   = $this->_pagelist->getOption('dimension');
+        if (!$this->_dimension) $this->_dimension = 0;
     }
 
     function format ($pagelist, $page_handle, &$revision_handle) 
     {
+        if (empty($this->_user))
+            $this->_user =& RatingsUserFactory::getUser($GLOBALS['request']->_user->_userid);
+        assert(!empty($this->_user));
         $rating = $this->_getValue($page_handle, $revision_handle);
         $mean = $this->_user->mean_rating($this->_dimension);
         $td = HTML::td($this->_tdattr);
@@ -175,7 +177,7 @@ class _PageList_Column_ratingvalue extends _PageList_Column {
     {
         $pagename = $page_handle->getName();
 
-        $tu = & $this->_user;
+        $tu =& $this->_user;
         $rating = $tu->get_rating($pagename, $this->_dimension);
 
         // a dash (or *something*) arguably looks better than a big blank space
@@ -205,6 +207,7 @@ class _PageList_Column_ratingvalue extends _PageList_Column {
 
 /**
  * Ratings widget for the logged-in user and the given page
+ * This uses the column name "rating".
  */
 class _PageList_Column_ratingwidget extends _PageList_Column_custom 
 {
@@ -212,12 +215,13 @@ class _PageList_Column_ratingwidget extends _PageList_Column_custom
     	$this->_pagelist =& $params[3];
         $this->_PageList_Column($params[0], $params[1], $params[2]);
         $this->_dimension = $this->_pagelist->getOption('dimension');
+        if (!$this->_dimension) $this->_dimension = 0;
     }
 
     function format ($pagelist, $page_handle, &$revision_handle) {
         $plugin = new WikiPlugin_RateIt();
         $widget = $plugin->RatingWidgetHtml($page_handle->getName(), "", 
-                                            "pagerat", $this->_dimension, "small");
+                                            "Star", $this->_dimension, "small");
         $td = HTML::td($widget);
         $td->setAttr('nowrap', 'nowrap');
         return $td;
@@ -255,6 +259,7 @@ class _PageList_Column_prediction extends _PageList_Column
         $this->_pagelist =& $params[3];
         $this->_PageList_Column($params[0], $params[1], $params[2]);
         $this->_dimension = $this->_pagelist->getOption('dimension');;
+        if (!$this->_dimension) $this->_dimension = 0;
         $this->_users = $this->_pagelist->getOption('users');
     }
 
@@ -297,9 +302,9 @@ class _PageList_Column_top3recs extends _PageList_Column_custom
         global $request;
         $active_user = $request->getUser();
         if (is_string($active_user)) {
-        	//FIXME: try to find the bug at test.php which sets request->_user and ->_group
-        	trigger_error("request->getUser => string: $active_user", E_USER_WARNING);
-        	$active_user = new MockUser($active_user,true);
+	    //FIXME: try to find the bug at test.php which sets request->_user and ->_group
+	    trigger_error("request->getUser => string: $active_user", E_USER_WARNING);
+	    $active_user = new MockUser($active_user,true);
         }
         // No, I don't know exactly why, but this needs to be a reference for
         // the memoization in pearson_similarity and mean_rating to work
@@ -309,6 +314,7 @@ class _PageList_Column_top3recs extends _PageList_Column_custom
         if (!empty($params[3])) {
             $this->_pagelist =& $params[3];
             $this->_dimension = $this->_pagelist->getOption('dimension');
+            if (!$this->_dimension) $this->_dimension = 0;
             $this->_users = $this->_pagelist->getOption('users');
         }
     }
@@ -362,20 +368,32 @@ $WikiTheme->addPageListColumn
   (array
    (
     'numbacklinks' 
-    => array('_PageList_Column_numbacklinks','custom:numbacklinks', _("# things"), false),
+      => array('_PageList_Column_numbacklinks','custom:numbacklinks', 
+	       _("# things"), 'center'),
     'rating' 	   
-    => array('_PageList_Column_ratingwidget','custom:rating', _("Rate"), false),
+      => array('_PageList_Column_ratingwidget','custom:rating', 
+	       _("Rate"), false),
+    'ratingvalue'
+      => array('_PageList_Column_ratingvalue','custom:ratingvalue', 
+	       _("Rating"), 'center'),
     'coagreement'  
-    => array('_PageList_Column_coagreement','custom:coagreement', _("Go?"), 'center'),
+      => array('_PageList_Column_coagreement','custom:coagreement', 
+	       _("Go?"), 'center'),
     'minmisery'    
-    => array('_PageList_Column_minmisery','custom:minmisery', _("MinMisery"), 'center'),
+      => array('_PageList_Column_minmisery','custom:minmisery', 
+	       _("MinMisery"), 'center'),
     'averagerating' 
-    => array('_PageList_Column_averagerating','custom:averagerating', _("Avg. Rating"), 'left'),
+      => array('_PageList_Column_averagerating','custom:averagerating', 
+	       _("Avg. Rating"), 'left'),
     'top3recs'
-    => array('_PageList_Column_top3recs','custom:top3recs', _("Top Recommendations"), 'left'),
+      => array('_PageList_Column_top3recs','custom:top3recs', 
+	       _("Top Recommendations"), 'left'),
+    /*'prediction'
+      => array('_PageList_Column_prediction','custom:prediction', 
+                _("Prediction"), false),*/
     ));
 
-// $Log: PageListColumns.php,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.10  2005/09/30 18:41:39  uckelman
 // Fixed more passes-by-reference.
 //

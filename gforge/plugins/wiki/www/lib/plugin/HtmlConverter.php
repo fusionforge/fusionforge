@@ -1,23 +1,23 @@
 <?php // -*-php-*-
+rcs_id('$Id: HtmlConverter.php 6185 2008-08-22 11:40:14Z vargenau $');
 /*
- Copyright 2005 Wincor Nixdorf International GmbH
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
+ * Copyright 2005 Wincor Nixdorf International GmbH
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
@@ -38,7 +38,12 @@ class WikiPlugin_HtmlConverter extends WikiPlugin
     }
 
     function getDescription () {
-        return _("Convert HTML markup into wiki markup. (Version 0.5)");
+        return _("Convert HTML markup into wiki markup.");
+    }
+
+    function getVersion() {
+        return preg_replace("/[Revision: $]/", '',
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -63,7 +68,7 @@ class WikiPlugin_HtmlConverter extends WikiPlugin
                                                  'type' => 'file',
                                                  'size' => '50')));
         $contents->pushContent(HTML::raw(" "));
-        $contents->pushContent(HTML::input(array('value' => _("Upload"),
+        $contents->pushContent(HTML::input(array('value' => _("Convert"),
                                                  'type' => 'submit')));
         $form->pushContent($contents);
 
@@ -182,11 +187,7 @@ class WikiPlugin_HtmlConverter extends WikiPlugin
 		// strip attributes from <pre>-Tags and add a new-line before
 		$file = preg_replace ("_<pre(\s[^>]*|)>_iU", "\n<pre>", $file);    
 
-        $outputArea = HTML::textarea( array(
-        	'rows' => '30',
-			'cols' => '80',
-			'wrap' => 'virtual')
-		);
+        $outputArea = HTML::textarea(array('rows' => '30', 'cols' => '80'));
 		
 		$outputArea->pushContent( _($file));
 		$result->pushContent( $outputArea);

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: FuzzyPages.php,v 1.12 2004/11/23 15:17:19 rurban Exp $');
+rcs_id('$Id: FuzzyPages.php 6185 2008-08-22 11:40:14Z vargenau $');
 /*
  Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
 
@@ -47,7 +47,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.12 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -183,15 +183,7 @@ extends WikiPlugin
     }
 };
 
-// $Log: FuzzyPages.php,v $
-// Revision 1.12  2004/11/23 15:17:19  rurban
-// better support for case_exact search (not caseexact for consistency),
-// plugin args simplification:
-//   handle and explode exclude and pages argument in WikiPlugin::getArgs
-//     and exclude in advance (at the sql level if possible)
-//   handle sortby and limit from request override in WikiPlugin::getArgs
-// ListSubpages: renamed pages to maxpages
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.11  2004/02/17 12:11:36  rurban
 // added missing 4th basepage arg at plugin->run() to almost all plugins. This caused no harm so far, because it was silently dropped on normal usage. However on plugin internal ->run invocations it failed. (InterWikiSearch, IncludeSiteMap, ...)
 //

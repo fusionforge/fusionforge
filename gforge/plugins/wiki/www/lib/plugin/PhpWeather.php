@@ -69,7 +69,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.12 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -198,10 +198,7 @@ extends WikiPlugin
     }
 };
 
-// $Log: PhpWeather.php,v $
-// Revision 1.12  2004/06/01 16:46:42  rurban
-// Better error message. Search in /phpweather-2.2.1 and in /phpweather.
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.11  2004/05/01 15:59:29  rurban
 // more php-4.0.6 compatibility: superglobals
 //

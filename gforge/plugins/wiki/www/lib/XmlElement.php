@@ -1,4 +1,4 @@
-<?php rcs_id('$Id: XmlElement.php,v 1.38 2005/10/10 19:36:09 rurban Exp $');
+<?php rcs_id('$Id: XmlElement.php 6302 2008-10-15 08:07:42Z vargenau $');
 /**
  * Code for writing XML.
  * @package Markup
@@ -6,8 +6,8 @@
  *          Reini Urban (php5 tricks)
  *
  * WARNING: This module is very php5 sensitive. 
- *        Fixed for 1.3.9 and 1.3.11.
- *        With allow_call_time_pass_reference clean fixes.
+ *          Fixed for 1.3.9, 1.3.11 and 1.3.13 (php-5.2).
+ *          With allow_call_time_pass_reference clean fixes.
  */
 
 /**
@@ -93,8 +93,16 @@ class XmlContent
                 else
                     printf("==Object(%s)==", get_class($item));
             }
-            else
+            elseif (is_array($item)) {
+	        // DEPRECATED:
+        	// Use XmlContent objects instead of arrays for collections of XmlElements.
+        	trigger_error("Passing arrays to printXML() is deprecated: (" . AsXML($item, true) . ")",
+                      E_USER_NOTICE);
+        	foreach ($item as $x)
+            	    $this->printXML($x);
+            } else {
                 echo $this->_quote((string) $item);
+            }
         }
     }
 
@@ -108,6 +116,12 @@ class XmlContent
                     $xml .= $this->_quote($item->asString());
                 else
                     $xml .= sprintf("==Object(%s)==", get_class($item));
+            }
+            elseif (is_array($item)) {
+        	trigger_error("Passing arrays to ->asXML() is deprecated: (" . AsXML($item, true) . ")",
+                      E_USER_NOTICE);
+        	foreach ($item as $x)
+            	    $xml .= $this->asXML($x);
             }
             else
                 $xml .= $this->_quote((string) $item);
@@ -132,14 +146,25 @@ class XmlContent
         return $pdf;
     }
 
+    /* php-5.2 magic */
+    function __toString () {
+        return $this->asString();
+    }
+
     function asString () {
         $val = '';
         foreach ($this->_content as $item) {
             if (is_object($item)) {
-                if (method_exists($item, 'asString'))
-                    $val .= $item->asString();
-                else
+                if (method_exists($item, 'asString')) {
+                    $string = $item->asString();
+	            if (is_object($string)) {
+	            	; // ignore error so far: ImageLink labels
+	            } else {
+                        $val .= $this->_quote($item->asString());
+	            }
+                } else {
                     $val .= sprintf("==Object(%s)==", get_class($item));
+                }
             }
             else
                 $val .= (string) $item;
@@ -422,8 +447,17 @@ class RawXml {
         echo $this->_xml;
     }
 
+    /* php-5.2 magic */
+    function __toString () {
+        return $this->_xml;
+    }
+
     function asXML () {
         return $this->_xml;
+    }
+    
+    function asString () {
+    	return $this->_xml;
     }
 
     function isEmpty () {
@@ -490,18 +524,28 @@ class FormattedText {
             $args[] = AsString($arg);
         return call_user_func_array('sprintf', $args);
     }
+
+    /* php-5.2 magic */
+    function __toString () {
+        return $this->asString();
+    }
 }
 
 /**
  * PHP5 compatibility
  * Error[2048]: Non-static method XmlContent::_quote() should not be called statically
+ * Note: There's lot of room for performance increase if the right charset variant can 
+ * be created on load-time.
  */
 function XmlContent_quote ($string) {
     if (!$string) return $string;
-    if (check_php_version(4,1) and isset($GLOBALS['charset']))
+    if (check_php_version(4,1) and isset($GLOBALS['charset'])
+        and (!defined('IGNORE_CHARSET_NOT_SUPPORTED_WARNING') or !IGNORE_CHARSET_NOT_SUPPORTED_WARNING))
+    {
         return htmlspecialchars($string, ENT_COMPAT, $GLOBALS['charset']);
-    else
+    } else {
         return htmlspecialchars($string);
+    }
 }
 
 function PrintXML ($val /* , ... */ ) {
@@ -593,7 +637,6 @@ function AsString ($val) {
     return (string) $val;
 }
 
-
 function fmt ($fs /* , ... */) {
     $s = new FormattedText(false);
 
@@ -602,37 +645,6 @@ function fmt ($fs /* , ... */) {
     $s->_init($args);
     return $s;
 }
-
-// $Log: XmlElement.php,v $
-// Revision 1.38  2005/10/10 19:36:09  rurban
-// fix comment
-//
-// Revision 1.37  2005/01/25 07:04:27  rurban
-// case-sensitive for php5
-//
-// Revision 1.36  2004/12/06 19:49:56  rurban
-// enable action=remove which is undoable and seeable in RecentChanges: ADODB ony for now.
-// renamed delete_page to purge_page.
-// enable action=edit&version=-1 to force creation of a new version.
-// added BABYCART_PATH config
-// fixed magiqc in adodb.inc.php
-// and some more docs
-//
-// Revision 1.35  2004/11/21 11:59:18  rurban
-// remove final \n to be ob_cache independent
-//
-// Revision 1.34  2004/10/12 13:13:19  rurban
-// php5 compatibility (5.0.1 ok)
-//
-// Revision 1.33  2004/07/02 09:55:58  rurban
-// more stability fixes: new DISABLE_GETIMAGESIZE if your php crashes when loading LinkIcons: failing getimagesize in old phps; blockparser stabilized
-//
-// Revision 1.32  2004/06/20 15:30:05  rurban
-// get_class case-sensitivity issues
-//
-// Revision 1.31  2004/06/20 14:42:54  rurban
-// various php5 fixes (still broken at blockparser)
-//
 
 // (c-file-style: "gnu")
 // Local Variables:

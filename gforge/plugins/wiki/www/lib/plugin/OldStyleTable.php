@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: OldStyleTable.php,v 1.11 2005/09/14 05:56:21 rurban Exp $');
+rcs_id('$Id: OldStyleTable.php 6185 2008-08-22 11:40:14Z vargenau $');
 /**
  Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
 
@@ -55,7 +55,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.11 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -152,10 +152,7 @@ extends WikiPlugin
     }
 };
 
-// $Log: OldStyleTable.php,v $
-// Revision 1.11  2005/09/14 05:56:21  rurban
-// fixed OldStyleTables plugin with args
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.10  2004/06/14 11:31:39  rurban
 // renamed global $Theme to $WikiTheme (gforge nameclash)
 // inherit PageList default options from PageList

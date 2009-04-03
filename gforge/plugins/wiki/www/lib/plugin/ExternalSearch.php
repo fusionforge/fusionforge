@@ -1,7 +1,7 @@
 <?php // -*-php-*-
-rcs_id('$Id: ExternalSearch.php,v 1.12 2004/11/28 20:42:33 rurban Exp $');
+rcs_id('$Id: ExternalSearch.php 6185 2008-08-22 11:40:14Z vargenau $');
 /**
- Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
+ Copyright 1999,2000,2001,2002,2006 $ThePhpWikiProgrammingTeam
 
  This file is part of PhpWiki.
 
@@ -30,6 +30,8 @@ rcs_id('$Id: ExternalSearch.php,v 1.12 2004/11/28 20:42:33 rurban Exp $');
      useimage="http://www.geourl.org/maps/au.png"
      name="Go Godzilla All Over It"
  */
+if (!defined("EXTERNALSEARCH_DEFAULT_BUTTON_POSITION"))
+    define("EXTERNALSEARCH_DEFAULT_BUTTON_POSITION", "right");
 
 class WikiPlugin_ExternalSearch
 extends WikiPlugin
@@ -45,7 +47,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.12 $");
+                            "\$Revision: 6185 $");
     }
 
     function _getInterWikiUrl(&$request) {
@@ -69,7 +71,9 @@ extends WikiPlugin
                      'useimage' => false,
                      'width'    => false,
                      'height'   => false,
-                     'debug'    => false
+                     'debug'    => false,
+		     'button_position' => EXTERNALSEARCH_DEFAULT_BUTTON_POSITION,
+		     // 'left' or 'right'
                      );
     }
 
@@ -110,6 +114,10 @@ extends WikiPlugin
         $form->pushContent(HTML::input(array('type' => 'hidden',
                                              'name'  => 'url',
                                              'value' => $this->_url)));
+	$s = HTML::input(array('type' => 'text',
+			       'value' => $this->_s,
+			       'name'  => 's',
+			       'size'  => $formsize));
         if (!empty($args["useimage"])) {
             //FIXME: This does not work with Gecko
             $button = HTML::img(array('src' => $useimage, 'alt' => 'imagebutton'));
@@ -117,25 +125,36 @@ extends WikiPlugin
                 $button->setAttr('width',$width);
             if (!empty($height))
                 $button->setAttr('height',$height);
+            // on button_position => none display no input form
+	    if ($button_position == 'right')
+		$form->pushContent($s);
             $form->pushContent(HTML::button(array('type' => 'button',
                                                   'class' => 'button',
                                                   'value' => $this->_name,
                                                   ),
                                             $button));
+	    if ($button_position == 'left')
+		$form->pushContent($s);
         } else {
-            $form->pushContent(HTML::input(array('type' => 'submit',
-                                                 'class' => 'button',
-                                                 'value' => $this->_name)));
-            $form->pushContent(HTML::input(array('type' => 'text',
-                                                 'value' => $this->_s,
-                                                 'name'  => 's',
-                                                 'size'  => $formsize)));
+            if ($button_position != 'left' and $button_position != 'right')
+                return $this->error(fmt("Invalid argument: %s=%s", 
+                                        'button_position', $button_position));
+            $button = HTML::input(array('type' => 'submit',
+                                        'class' => 'button',
+                                        'value' => $this->_name));
+	    if ($button_position == 'left') {
+		$form->pushContent($button);
+		$form->pushContent($s);
+	    } elseif ($button_position == 'right') {
+		$form->pushContent($s);
+		$form->pushContent($button);
+	    }
         }
         return $form;
     }
 };
 
-// $Log: ExternalSearch.php,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.12  2004/11/28 20:42:33  rurban
 // Optimize PearDB _extract_version_data and _extract_page_data.
 //

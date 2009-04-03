@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-rcs_id('$Id: POP3.php,v 1.6 2005/04/23 11:17:41 rurban Exp $');
+rcs_id('$Id: POP3.php 6184 2008-08-22 10:33:41Z vargenau $');
 /* Copyright (C) 2004 $ThePhpWikiProgrammingTeam
  * This file is part of PhpWiki. Terms and Conditions see LICENSE. (GPL2)
  */
@@ -15,9 +15,11 @@ extends _IMAPPassUser {
     function checkPass($submitted_password) {
         if (!$this->isValidName()) {
             trigger_error(_("Invalid username."), E_USER_WARNING);
+	    if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this)."::checkPass => failed isValidName", E_USER_WARNING);
             return $this->_tryNextPass($submitted_password);
         }
         if (!$this->_checkPassLength($submitted_password)) {
+	    if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this)."::checkPass => failed checkPassLength", E_USER_WARNING);
             return WIKIAUTH_FORBIDDEN;
         }
         $userid = $this->_userid;
@@ -60,6 +62,7 @@ extends _IMAPPassUser {
                           E_USER_WARNING);
         }
         $this->_authmethod = 'POP3';
+	if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this)."::checkPass => $retval", E_USER_WARNING);
         if ($retval) {
             $this->_level = WIKIAUTH_USER;
         } else {
@@ -67,9 +70,14 @@ extends _IMAPPassUser {
         }
         return $this->_level;
     }
+
+    function __userExists() {
+	if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this)."::userExists => true (dummy)", E_USER_WARNING);
+        return true;
+    }
 }
 
-// $Log: POP3.php,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.6  2005/04/23 11:17:41  rurban
 // bug #1186291
 //

@@ -60,8 +60,6 @@ $locale["FullTextSearch"] =
    "Fulltextsökning";
 $locale["Go"] =
    "\"Gå till sidan\"";
-$locale["GoodStyle"] =
-   "BraStil";
 $locale["H"] =
    "H";
 $locale["Height"] =
@@ -140,8 +138,6 @@ $locale["String \"%s\" not found."] =
    "\"%s\" ingen funna.";
 $locale["Synopsis"] =
    "Översikt";
-$locale["TextFormattingRules"] =
-   "Textformateringsregler";
 $locale["Thank you for editing %s."] =
    "Tack för att du redigerade %s.";
 $locale["The %d most popular pages of this wiki:"] =
@@ -178,8 +174,6 @@ $locale["View Source: %s"] =
    "Visa Källkoden: %s";
 $locale["W"] =
    "B";
-$locale["Warning!"] =
-   "Varning!";
 $locale["Width"] =
    "Bredd";
 $locale["Your careful attention to detail is much appreciated."] =

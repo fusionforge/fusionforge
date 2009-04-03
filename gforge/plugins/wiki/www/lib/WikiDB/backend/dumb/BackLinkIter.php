@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: BackLinkIter.php,v 1.2 2001/09/19 03:24:36 wainstead Exp $');
+rcs_id('$Id: BackLinkIter.php 6209 2008-08-26 15:30:39Z vargenau $');
 
 require_once('lib/WikiDB/backend.php');
 

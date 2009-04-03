@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: SystemInfo.php,v 1.23 2005/10/03 16:48:09 rurban Exp $');
+rcs_id('$Id: SystemInfo.php 6264 2008-09-16 18:39:14Z vargenau $');
 /**
  Copyright (C) 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
 
@@ -57,8 +57,9 @@ extends WikiPluginCached
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.23 $");
+                            "\$Revision: 6264 $");
     }
+
     /* From lib/WikiPlugin.php:
      * If the plugin can deduce a modification time, or equivalent
      * sort of tag for it's content, then the plugin should
@@ -77,13 +78,12 @@ extends WikiPluginCached
                                  . WikiPluginCached::glueArgs($argarray) // all
                                  . ' ?>', $request, $this, $basepage);
     }
-    /*
+
     function getDefaultArguments() {
         return array(
-                     'seperator' => ' ', // on multiple args
+                     // 'seperator' => ' ', // on multiple args
                      );
     }
-    */
 
     function database() {
         global $request;
@@ -475,7 +475,7 @@ extends WikiPluginCached
                    'LC_ALL'  => create_function('','return setlocale(LC_ALL, 0);'),
                    'current_language' => create_function('','return $GLOBALS["LANG"];'),
                    'system_language' => create_function('','return DEFAULT_LANGUAGE;'),
-                   'current_theme' => create_function('','return $GLOBALS["Theme"]->_name;'),
+                   'current_theme' => create_function('','return $GLOBALS["WikiTheme"]->_name;'),
                    'system_theme'  => create_function('','return THEME;'),
                    // more here or as method.
                    '' => create_function('',"return 'dummy';")
@@ -570,84 +570,6 @@ function stddev(&$hits, $total = false) {
     unset($GLOBALS['mean']);
     return (float)sqrt(mean($r, $total) * ($n / (float)($n -1)));
 }
-
-// $Log: SystemInfo.php,v $
-// Revision 1.23  2005/10/03 16:48:09  rurban
-// add revstats and arg caching
-//
-// Revision 1.22  2004/12/26 17:10:44  rurban
-// just docs or whitespace
-//
-// Revision 1.21  2004/11/26 18:39:02  rurban
-// new regex search parser and SQL backends (90% complete, glob and pcre backends missing)
-//
-// Revision 1.20  2004/11/20 11:28:49  rurban
-// fix a yet unused PageList customPageListColumns bug (merge class not decl to _types)
-// change WantedPages to use PageList
-// change WantedPages to print the list of referenced pages, not just the count.
-//   the old version was renamed to WantedPagesOld
-//   fix and add handling of most standard PageList arguments (limit, exclude, ...)
-// TODO: pagename sorting, dumb/WantedPagesIter and SQL optimization
-//
-// Revision 1.19  2004/06/19 11:49:42  rurban
-// dont print db passwords
-//
-// Revision 1.18  2004/06/14 11:31:39  rurban
-// renamed global $Theme to $WikiTheme (gforge nameclash)
-// inherit PageList default options from PageList
-//   default sortby=pagename
-// use options in PageList_Selectable (limit, sortby, ...)
-// added action revert, with button at action=diff
-// added option regex to WikiAdminSearchReplace
-//
-// Revision 1.17  2004/05/08 14:06:13  rurban
-// new support for inlined image attributes: [image.jpg size=50x30 align=right]
-// minor stability and portability fixes
-//
-// Revision 1.16  2004/05/06 20:30:47  rurban
-// revert and removed some comments
-//
-// Revision 1.15  2004/05/03 11:40:42  rurban
-// put listAvailableLanguages() and listAvailableThemes() from SystemInfo and
-// UserPreferences into Themes.php
-//
-// Revision 1.14  2004/04/19 23:13:04  zorloc
-// Connect the rest of PhpWiki to the IniConfig system.  Also the keyword regular expression is not a config setting
-//
-// Revision 1.13  2004/04/18 01:11:52  rurban
-// more numeric pagename fixes.
-// fixed action=upload with merge conflict warnings.
-// charset changed from constant to global (dynamic utf-8 switching)
-//
-// Revision 1.12  2004/03/14 16:26:21  rurban
-// copyright line
-//
-// Revision 1.11  2004/03/13 19:24:21  rurban
-// fixed supported_languages() and supported_themes()
-//
-// Revision 1.10  2004/03/08 18:17:10  rurban
-// added more WikiGroup::getMembersOf methods, esp. for special groups
-// fixed $LDAP_SET_OPTIONS
-// fixed _AuthInfo group methods
-//
-// Revision 1.9  2004/02/17 12:11:36  rurban
-// added missing 4th basepage arg at plugin->run() to almost all plugins. This caused no harm so far, because it was silently dropped on normal usage. However on plugin internal ->run invocations it failed. (InterWikiSearch, IncludeSiteMap, ...)
-//
-// Revision 1.8  2003/02/24 01:36:26  dairiki
-// Don't use PHPWIKI_DIR unless it's defined.
-// (Also typo/bugfix in SystemInfo plugin.)
-//
-// Revision 1.7  2003/02/22 20:49:56  dairiki
-// Fixes for "Call-time pass by reference has been deprecated" errors.
-//
-// Revision 1.6  2003/02/21 23:01:11  dairiki
-// Fixes to support new $basepage argument of WikiPlugin::run().
-//
-// Revision 1.5  2003/01/18 22:08:01  carstenklapp
-// Code cleanup:
-// Reformatting & tabs to spaces;
-// Added copyleft, getVersion, getDescription, rcs_id.
-//
 
 // Local Variables:
 // mode: php

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: RecentReferrers.php,v 1.2 2004/11/07 18:34:29 rurban Exp $');
+rcs_id('$Id: RecentReferrers.php 6185 2008-08-22 11:40:14Z vargenau $');
 
 /**
  * Analyze our ACCESS_LOG
@@ -16,7 +16,7 @@ class WikiPlugin_RecentReferrers extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.2 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -58,10 +58,7 @@ class WikiPlugin_RecentReferrers extends WikiPlugin
     }
 }
 
-// $Log: RecentReferrers.php,v $
-// Revision 1.2  2004/11/07 18:34:29  rurban
-// more logging fixes
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.1  2004/11/06 04:52:29  rurban
 // simple version at first
 //

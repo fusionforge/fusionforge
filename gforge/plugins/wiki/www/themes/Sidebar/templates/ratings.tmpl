@@ -1,0 +1,8 @@
+<?php // -*-php-*-
+rcs_id('$Id: ratings.tmpl,v 1.1 2004/06/11 09:01:51 rurban Exp $');
+?>
+<!-- Ratings -->
+<?php if (!$WikiTheme->DUMP_MODE) {
+  $loader = new WikiPluginLoader();
+  printXML($loader->expandPI("<"."?plugin RateIt show=top ?".">", $request, $dbi->_markup));
+} ?>

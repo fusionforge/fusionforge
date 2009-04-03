@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-rcs_id('$Id: Template.php,v 1.73 2005/04/08 05:41:00 rurban Exp $');
+rcs_id('$Id: Template.php 6184 2008-08-22 10:33:41Z vargenau $');
 
 require_once("lib/ErrorManager.php");
 
@@ -22,6 +22,7 @@ class Template
             $oldtheme = $WikiTheme->_theme;
             list($themename, $name) = explode("/", $name);
             $WikiTheme->_theme = "themes/$themename";
+            $WikiTheme->_name = $name;
         }
         $this->_name = $name;
         $file = $WikiTheme->findTemplate($name);
@@ -40,7 +41,7 @@ class Template
         }
         $request->_TemplatesProcessed[$name] = 1;
         $this->_tmpl = fread($fp, filesize($file));
-        fclose($fp);
+        if ($fp) fclose($fp);
         //$userid = $request->_user->_userid;
         if (is_array($args))
             $this->_locals = $args;
@@ -132,6 +133,9 @@ class Template
             $user = $request->getUser();
         if (!isset($page))
             $page = $request->getPage();
+	// Speedup. I checked all templates
+        if (!isset($revision)) 
+	    $revision = false;
 
         global $WikiTheme, $RCS_IDS, $charset; 
         //$this->_dump_template();
@@ -231,7 +235,7 @@ function alreadyTemplateProcessed($name) {
  *
  * @param $content mixed html content to put into the page
  * @param $title string page title
- * @param $page_revision object A WikiDB_PageRevision object
+ * @param $page_revision object A WikiDB_PageRevision object or false
  * @param $args hash Extract args for top-level template
  *
  * @return string HTML expansion of template.
@@ -255,6 +259,7 @@ function GeneratePage($content, $title, $page_revision = false, $args = false) {
 
 /**
  * For dumping pages as html to a file.
+ * Used for action=dumphtml,action=ziphtml,format=pdf,format=xml
  */
 function GeneratePageasXML($content, $title, $page_revision = false, $args = false) {
     global $request;
@@ -270,18 +275,32 @@ function GeneratePageasXML($content, $title, $page_revision = false, $args = fal
     if (!isset($args['HEADER']))
         $args['HEADER'] = SplitPagename($title);
     
-    global $HIDE_TOOLBARS, $NO_BASEHREF, $HTML_DUMP;
+    global $HIDE_TOOLBARS, $NO_BASEHREF, $WikiTheme;
     $HIDE_TOOLBARS = true;
-    $HTML_DUMP = true;
+    if (!$WikiTheme->DUMP_MODE)
+	$WikiTheme->DUMP_MODE = 'HTML';
 
+    // FIXME: unfatal errors and login requirements
     $html = asXML(new Template('htmldump', $request, $args));
     
     $HIDE_TOOLBARS = false;
-    $HTML_DUMP = false;
+    //$WikiTheme->DUMP_MODE = false;
     return $html;
 }
 
-// $Log: Template.php,v $
+// $Log: not supported by cvs2svn $
+// Revision 1.78  2007/09/12 19:32:29  rurban
+// link only VALID_LINKS with pagelist HTML_DUMP
+//
+// Revision 1.77  2007/07/14 19:17:57  rurban
+// fix template inclusion with a recursion cycle leading e.g. to crashes in blog PageInfo
+//
+// Revision 1.76  2007/05/13 18:13:04  rurban
+// Protect against erronously closed template file
+//
+// Revision 1.75  2007/01/02 13:18:55  rurban
+// speed up Template expansion. revision only necessary. fixed all affected templates
+//
 // Revision 1.73  2005/04/08 05:41:00  rurban
 // fix Template("theme/name") inclusion
 //

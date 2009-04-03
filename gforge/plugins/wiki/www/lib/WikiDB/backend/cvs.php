@@ -1,5 +1,5 @@
 <?php
-rcs_id('$Id: cvs.php,v 1.26 2005/11/14 22:24:33 rurban Exp $');
+rcs_id('$Id: cvs.php 6184 2008-08-22 10:33:41Z vargenau $');
 /**
  * Backend for handling CVS repository. 
  *
@@ -388,7 +388,7 @@ extends WikiDB_backend
     }
 
     function get_links($pagename, $reversed=true, $include_empty=false,
-                       $sortby=false, $limit=false, $exclude=false)
+                       $sortby='', $limit='', $exclude='')
     {
         // TODO: ignores the $reversed argument and returns
         // TODO: the value of _links_ attribute of the meta information
@@ -406,14 +406,14 @@ extends WikiDB_backend
         return new WikiDB_backend_dumb_AllRevisionsIter($this, $pagename);
     } */
 
-    function get_all_pages($include_empty=false, $sortby=false, $limit=false) 
+    function get_all_pages($include_empty=false, $sortby='', $limit='') 
     {
         // FIXME: this ignores the parameters.
         return new Cvs_Backend_Array_Iterator(
                               $this->_getAllFileNamesInDir( $this->_docDir ));
     }
 
-    function text_search($search, $fullsearch = false, $orderby=false, $limit=false, $exclude=false) 
+    function text_search($search, $fullsearch = false, $orderby=false, $limit='', $exclude='') 
     {
         if ( $fullsearch ) {
             $iter = new Cvs_Backend_Full_Search_Iterator(

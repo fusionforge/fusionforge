@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-rcs_id('$Id: File.php,v 1.8 2006/03/07 18:03:51 rurban Exp $');
+rcs_id('$Id: File.php 6184 2008-08-22 10:33:41Z vargenau $');
 /* Copyright (C) 2004 ReiniUrban
  * This file is part of PhpWiki. Terms and Conditions see LICENSE. (GPL2)
  */
@@ -90,10 +90,7 @@ extends _PassUser
 
 }
 
-// $Log: File.php,v $
-// Revision 1.8  2006/03/07 18:03:51  rurban
-// fix storePass
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.7  2005/08/06 13:21:37  rurban
 // only cosmetics
 //

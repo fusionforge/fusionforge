@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: MostPopularIter.php,v 1.7 2004/01/25 08:17:29 rurban Exp $');
+rcs_id('$Id: MostPopularIter.php 6209 2008-08-26 15:30:39Z vargenau $');
 
 require_once('lib/WikiDB/backend.php');
 
@@ -18,7 +18,7 @@ extends WikiDB_backend_iterator
         $this->_pages = array();
         $pages = &$this->_pages;
 
-        while ($page = & $all_pages->next()) {
+        while ($page = $all_pages->next()) {
             if (!isset($page['pagedata']))
                 $page['pagedata'] = $backend->get_pagedata($page['pagename']);
             $pages[] = $page;
@@ -66,6 +66,8 @@ function WikiDB_backend_dumb_MostPopularIter_sortf_rev($a,$b) {
     return $ahits - $bhits;
 }
 
+// $Log: not supported by cvs2svn $
+
 // For emacs users
 // Local Variables:
 // mode: php
@@ -74,5 +76,4 @@ function WikiDB_backend_dumb_MostPopularIter_sortf_rev($a,$b) {
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
 // End:
-
 ?>

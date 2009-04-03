@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: WikiAdminSelect.php,v 1.23 2005/09/14 06:06:09 rurban Exp $');
+rcs_id('$Id: WikiAdminSelect.php 6242 2008-09-07 11:12:43Z vargenau $');
 /*
  Copyright 2002 $ThePhpWikiProgrammingTeam
 
@@ -46,7 +46,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.23 $");
+                            "\$Revision: 6242 $");
     }
 
     function getDefaultArguments() {
@@ -68,7 +68,7 @@ extends WikiPlugin
      * Default collector for all WikiAdmin* plugins.
      * preSelectS() is similar, but fills $this->_list
      */
-    function collectPages(&$list, &$dbi, $sortby, $limit=0, $exclude=false) {
+    function collectPages(&$list, &$dbi, $sortby, $limit=0, $exclude='') {
         $allPages = $dbi->getAllPages(0, $sortby, $limit, $exclude);
         while ($pagehandle = $allPages->next()) {
             $pagename = $pagehandle->getName();
@@ -79,10 +79,10 @@ extends WikiPlugin
     }
 
     /**
-     * Preselect a list of pagenames by the supporting the follwing args:
+     * Preselect a list of pagenames by the supporting the following args:
      * 's': comma-seperated list of pagename wildcards
      * 'author', 'owner', 'creator': from WikiDB_Page
-     * 'only: forgot what the diffrrence to 's' was.
+     * 'only: forgot what the difference to 's' was.
      * Sets $this->_list, which is picked up by collectPages() and is a default for p[]
      */
     function preSelectS (&$args, &$request) {
@@ -131,7 +131,7 @@ extends WikiPlugin
         // GetUrlToSelf() with all given params
         //$uri = $GLOBALS['HTTP_SERVER_VARS']['REQUEST_URI']; // without s would be better.
         //$uri = $request->getURLtoSelf();//false, array('verify'));
-        $form = HTML::form(array('action' => $request->getPostURL(), 'method' => 'POST'));
+        $form = HTML::form(array('action' => $request->getPostURL(), 'method' => 'post'));
         if ($request->getArg('WikiAdminSelect') == _("Go"))
             $p = false;
         else
@@ -244,124 +244,15 @@ extends WikiPlugin
             ; //return $action_result;
         }
     }
-}
 
-// $Log: WikiAdminSelect.php,v $
-// Revision 1.23  2005/09/14 06:06:09  rurban
-// use a sane limit of 150
-//
-// Revision 1.22  2004/12/06 19:50:05  rurban
-// enable action=remove which is undoable and seeable in RecentChanges: ADODB ony for now.
-// renamed delete_page to purge_page.
-// enable action=edit&version=-1 to force creation of a new version.
-// added BABYCART_PATH config
-// fixed magiqc in adodb.inc.php
-// and some more docs
-//
-// Revision 1.21  2004/11/23 15:17:20  rurban
-// better support for case_exact search (not caseexact for consistency),
-// plugin args simplification:
-//   handle and explode exclude and pages argument in WikiPlugin::getArgs
-//     and exclude in advance (at the sql level if possible)
-//   handle sortby and limit from request override in WikiPlugin::getArgs
-// ListSubpages: renamed pages to maxpages
-//
-// Revision 1.20  2004/10/04 23:39:34  rurban
-// just aesthetics
-//
-// Revision 1.19  2004/06/29 08:52:24  rurban
-// Use ...version() $need_content argument in WikiDB also:
-// To reduce the memory footprint for larger sets of pagelists,
-// we don't cache the content (only true or false) and
-// we purge the pagedata (_cached_html) also.
-// _cached_html is only cached for the current pagename.
-// => Vastly improved page existance check, ACL check, ...
-//
-// Now only PagedList info=content or size needs the whole content, esp. if sortable.
-//
-// Revision 1.18  2004/06/16 10:38:59  rurban
-// Disallow refernces in calls if the declaration is a reference
-// ("allow_call_time_pass_reference clean").
-//   PhpWiki is now allow_call_time_pass_reference = Off clean,
-//   but several external libraries may not.
-//   In detail these libs look to be affected (not tested):
-//   * Pear_DB odbc
-//   * adodb oracle
-//
-// Revision 1.17  2004/06/14 11:31:39  rurban
-// renamed global $Theme to $WikiTheme (gforge nameclash)
-// inherit PageList default options from PageList
-//   default sortby=pagename
-// use options in PageList_Selectable (limit, sortby, ...)
-// added action revert, with button at action=diff
-// added option regex to WikiAdminSearchReplace
-//
-// Revision 1.16  2004/06/13 15:33:20  rurban
-// new support for arguments owner, author, creator in most relevant
-// PageList plugins. in WikiAdmin* via preSelectS()
-//
-// Revision 1.15  2004/06/01 15:28:01  rurban
-// AdminUser only ADMIN_USER not member of Administrators
-// some RateIt improvements by dfrankow
-// edit_toolbar buttons
-//
-// Revision 1.14  2004/02/24 15:20:07  rurban
-// fixed minor warnings: unchecked args, POST => Get urls for sortby e.g.
-//
-// Revision 1.13  2004/02/22 23:20:33  rurban
-// fixed DumpHtmlToDir,
-// enhanced sortby handling in PageList
-//   new button_heading th style (enabled),
-// added sortby and limit support to the db backends and plugins
-//   for paging support (<<prev, next>> links on long lists)
-//
-// Revision 1.12  2004/02/19 22:05:57  rurban
-// Allow s arg from get requests (plugin-form as in PhpWikiAdministration)
-//
-// Revision 1.11  2004/02/17 12:11:36  rurban
-// added missing 4th basepage arg at plugin->run() to almost all plugins. This caused no harm so far, because it was silently dropped on normal usage. However on plugin internal ->run invocations it failed. (InterWikiSearch, IncludeSiteMap, ...)
-//
-// Revision 1.10  2004/02/15 21:34:37  rurban
-// PageList enhanced and improved.
-// fixed new WikiAdmin... plugins
-// editpage, Theme with exp. htmlarea framework
-//   (htmlarea yet committed, this is really questionable)
-// WikiUser... code with better session handling for prefs
-// enhanced UserPreferences (again)
-// RecentChanges for show_deleted: how should pages be deleted then?
-//
-// Revision 1.9  2004/02/12 13:05:50  rurban
-// Rename functional for PearDB backend
-// some other minor changes
-// SiteMap comes with a not yet functional feature request: includepages (tbd)
-//
-// Revision 1.8  2004/02/11 20:00:16  rurban
-// WikiAdmin... series overhaul. Rename misses the db backend methods yet. Chmod + Chwon still missing.
-//
-// Revision 1.7  2004/01/27 23:23:39  rurban
-// renamed ->Username => _userid for consistency
-// renamed mayCheckPassword => mayCheckPass
-// fixed recursion problem in WikiUserNew
-// fixed bogo login (but not quite 100% ready yet, password storage)
-//
-// Revision 1.6  2004/01/26 19:15:29  rurban
-// Interim fix
-//
-// Revision 1.5  2003/02/24 19:38:04  dairiki
-// Get rid of unused method Request::debugVars().
-//
-// Revision 1.4  2003/02/24 01:36:27  dairiki
-// Don't use PHPWIKI_DIR unless it's defined.
-// (Also typo/bugfix in SystemInfo plugin.)
-//
-// Revision 1.3  2003/02/22 20:49:56  dairiki
-// Fixes for "Call-time pass by reference has been deprecated" errors.
-//
-// Revision 1.2  2003/01/18 22:14:29  carstenklapp
-// Code cleanup:
-// Reformatting & tabs to spaces;
-// Added copyleft, getVersion, getDescription, rcs_id.
-//
+    function _tablePush(&$table, $first, $second) {
+        $table->pushContent(
+			    HTML::tr(
+				     HTML::td($first),
+				     HTML::td($second)));
+    }
+
+}
 
 // Local Variables:
 // mode: php

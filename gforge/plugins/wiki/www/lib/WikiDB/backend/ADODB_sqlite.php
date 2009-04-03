@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: ADODB_sqlite.php,v 1.2 2004/07/05 13:56:23 rurban Exp $');
+rcs_id('$Id: ADODB_sqlite.php 6184 2008-08-22 10:33:41Z vargenau $');
 
 require_once('lib/WikiDB/backend/ADODB.php');
 
@@ -20,8 +20,9 @@ extends WikiDB_backend_ADODB
         if (! file_exists($parsed['database'])) {
             // creating the empty database
             $db = $parsed['database'];
-            $schema = FindFile("schemas/sqlite.sql");
+            $schema = FindFile("schemas/sqlite-initialize.sql");
             `sqlite $db < $schema`;
+            `echo "CREATE USER wikiuser" | sqlite $db`;
         }
         $this->WikiDB_backend_ADODB($dbparams);
     }
@@ -35,6 +36,9 @@ extends WikiDB_backend_ADODB
             $row = $dbh->GetRow($query);
             return $row ? $row[0] : false;
         }
+	// attributes play this game.
+        if ($pagename === '') return 0;
+
         $row = $dbh->GetRow($query);
         if (! $row ) {
             // atomic version 	

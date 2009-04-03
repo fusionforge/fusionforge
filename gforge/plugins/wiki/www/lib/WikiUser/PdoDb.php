@@ -1,8 +1,10 @@
 <?php //-*-php-*-
-rcs_id('$Id: PdoDb.php,v 1.2 2005/06/10 06:12:36 rurban Exp $');
+rcs_id('$Id: PdoDb.php 6184 2008-08-22 10:33:41Z vargenau $');
 /* Copyright (C) 2004, 2005 ReiniUrban
  * This file is part of PhpWiki. Terms and Conditions see LICENSE. (GPL2)
  */
+
+include_once("lib/WikiUser/Db.php");
 
 class _PdoDbPassUser
 extends _DbPassUser
@@ -275,7 +277,7 @@ extends _DbPassUser
     }
 }
 
-// $Log: PdoDb.php,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.2  2005/06/10 06:12:36  rurban
 // finish missing db calls
 //

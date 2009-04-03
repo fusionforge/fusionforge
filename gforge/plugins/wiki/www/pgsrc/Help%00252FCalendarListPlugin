@@ -1,0 +1,124 @@
+Date: Sat, 24 Jan 2009 20:18:24 +0100
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
+X-Rcs-Id: $Id: Help%2FCalendarListPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FCalendarListPlugin;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=iso-8859-1
+Content-Transfer-Encoding: binary
+
+The *~CalendarList* [[Help:WikiPlugin|plugin]] is used in conjunction
+with the [Calendar|Help:CalendarPlugin] plugin.
+It was written for those who use a wiki as a
+[personal information manager|PhpWiki:PersonalWiki].
+
+Just click any date in the calendar, edit the for that date, then come back to
+this page. The event should be listed below the calendar.
+
+Honors now year + month args as start base - together with Calendar navigation.
+The behaviour before 2007 with last/next_n_days was to start now.
+
+== Usage
+
+<verbatim>
+<?plugin Calendar ?>
+<?plugin CalendarList ?>
+</verbatim>
+
+== Example 
+
+_Click any date and edit it, then return to this page_:
+
+<?plugin Calendar ?>
+
+<?plugin CalendarList ?>
+
+== Arguments
+
+<strong>year</strong>:
+
+  Specify the year for the calendar.  (Default: current year.)
+
+<strong>month</strong>:
+
+  Specify the month for the calendar.  (Default: current month.)
+
+<strong>prefix</strong>:
+
+   Default: Current Page
+
+<strong>date_format</strong>:
+
+  Default: '%Y-%m-%d'
+
+<strong>order</strong>:
+
+  Report sequence: "normal" or "reverse".
+  "reverse" displays newest dates first.
+
+  Default: PLUGIN_CALENDARLIST_ORDER
+
+<strong>month_offset</strong>:
+
+   => 0,
+
+=== Support ranges: next or last N days/events
+
+<strong>next_n_days</strong>:
+
+  next_n_days=60: Display entries for the next 60 days / 2 months.
+
+  Default: PLUGIN_CALENDARLIST_NEXT_N_DAYS (empty)
+
+<strong>next_n</strong>:
+
+  next_n=20: Display only the next 20 entries.
+
+  Ignored if next_n_days is defined.
+
+  Default: PLUGIN_CALENDARLIST_NEXT_N (empty)
+
+<strong>last_n_days</strong>:
+
+  last_n_days=60: Display entries for the last 60 days / 2 months.
+
+  Default: PLUGIN_CALENDARLIST_LAST_N_DAYS (empty)
+
+<strong>last_n</strong>:
+
+  last_n=20: Display only the last 20 entries.
+
+  Ignored if last_n_days is defined.
+
+  Default: PLUGIN_CALENDARLIST_LAST_N (empty)
+
+<strong>month_format</strong>:
+
+  How to display the Month.<br>
+  Default: '%B %Y'
+
+<strong>wday_format</strong>:
+
+  How to display the weekday, if supported by your strftime() function.<br>
+  Default: '%a'
+
+<strong>start_wday</strong>:
+
+  Start the week at Sunday or Monday<br>
+  Default: 1 for Monday
+
+== Config Options
+
+* PLUGIN_CALENDARLIST_ORDER       = normal
+* PLUGIN_CALENDARLIST_NEXT_N_DAYS = ''
+* PLUGIN_CALENDARLIST_NEXT_N      = ''
+* PLUGIN_CALENDARLIST_LAST_N_DAYS = ''
+* PLUGIN_CALENDARLIST_LAST_N      = ''
+
+== Author
+
+Derived from [Calendar|Help:CalendarPlugin] plugin by [Martin Norbäck|mailto:martin@safelogic.se].
+
+-----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]

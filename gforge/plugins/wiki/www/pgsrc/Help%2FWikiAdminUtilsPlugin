@@ -1,0 +1,48 @@
+Date: Sat, 24 Jan 2009 20:18:24 +0100
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
+X-Rcs-Id: $Id: Help%2FWikiAdminUtilsPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FWikiAdminUtilsPlugin;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=iso-8859-1
+Content-Transfer-Encoding: binary
+
+Some special actions for [PhpWikiAdministration].
+
+== Usage
+<verbatim>
+<?plugin WikiAdminUtils purge-cache ?>
+<?plugin WikiAdminUtils purge-bad-pagenames ?>
+<?plugin WikiAdminUtils purge-empty-pages ?>
+<?plugin WikiAdminUtils access-restrictions ?>
+<?plugin WikiAdminUtils action=email-verification ?>
+<?plugin WikiAdminUtils convert-cached-html ?>
+<?plugin WikiAdminUtils db-check ?>
+<?plugin WikiAdminUtils db-rebuild ?>
+</verbatim>
+
+== Arguments
+
+action:
+  special name.
+label:
+  button text.
+
+== Example
+
+<verbatim>
+<?plugin WikiAdminUtils purge-bad-pagenames ?>
+</verbatim>
+
+<?plugin WikiAdminUtils purge-bad-pagenames ?>
+
+== Authors
+* [Jeff Dairiki|PhpWiki:JeffDairiki] 
+* [Reini Urban|PhpWiki:ReiniUrban]
+
+== See Also
+* [PhpWikiAdministration]
+
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]

@@ -1,0 +1,16 @@
+Date: Mon, 1 Oct 2008 14:15:24 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
+X-Rcs-Id: $Id: AllUserPages 6288 2008-10-02 13:37:10Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=AllUserPages;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=iso-8859-1
+Content-Transfer-Encoding: binary
+
+Here is the list of *all user pages* on this Wiki (pages that were not created at initialisation of the wiki). [Show all pages|AllPages].
+
+<?plugin AllPages userpages=1 info||=mtime,author,hits limit||=1000 sortby=+pagename ?>
+
+----
+[CategoryActionPage]

@@ -15,11 +15,12 @@
  *
  * @author: Reini Urban
  */
-define ("WIKI_SOAP", "true");
+define ("WIKI_SOAP", true);
 
 include_once("./index.php");
 include_once("lib/main.php");
-require_once('lib/nusoap/nusoap.php');
+if (!loadExtension('soap'))
+    require_once('lib/nusoap/nusoap.php');
 
 /*
 // bypass auth and request loop for now.
@@ -62,8 +63,8 @@ function checkCredentials(&$server, &$credentials, $access, $pagename) {
     } else {
         $request->_user = new WikiUser($request, $credentials['username']);
     }
-    $request->_user->AuthCheck(array('userid' => $credentials['username'], 'passwd' => $credentials['password']));
-
+    $request->_user->AuthCheck(array('userid' => $credentials['username'], 
+				     'passwd' => $credentials['password']));
     if (! mayAccessPage ($access, $pagename))
         $server->fault(401,'',"no permission");
 }
@@ -77,17 +78,20 @@ $url = SERVER_URL . DATA_PATH . "/SOAP.php";
 // know the wdsl definitions.
 $server = new soap_server(/* 'PhpWiki.wdsl' */);
 // Now change the server url to ours, because in the wdsl is the original PhpWiki address
-//   <soap:address location="http://phpwiki.sourceforge.net/phpwiki/SOAP.php"/>
+//   <soap:address location="http://phpwiki.sourceforge.net/phpwiki/SOAP.php" />
 //   <soap:operation soapAction="http://phpwiki.sourceforge.net/phpwiki/SOAP.php" />
-/*
+
 $server->ports[$server->currentPort]['location'] = $url;
 $server->bindings[ $server->ports[$server->currentPort]['binding'] ]['endpoint'] = $url;
 $server->soapaction = $url; // soap_transport_http
-*/
 
 $actions = array('getPageContent','getPageRevision','getCurrentRevision',
 	         'getPageMeta','doSavePage','getAllPagenames',
-	         'getBackLinks','doTitleSearch','doFullTextSearch');
+	         'getBackLinks','doTitleSearch','doFullTextSearch',
+		 'getRecentChanges','listLinks','listPlugins',
+		 'getPluginSynopsis','callPlugin','listRelations',
+		 'linkSearch'
+		 );
 foreach ($actions as $action) {
     $server->register($actions);
     $server->operations[$actions]['soapaction'] = $url;
@@ -202,6 +206,147 @@ function doFullTextSearch($s, $credentials=false) {
         $pages[] = array('pagename' => $page->getName());
     }
     return $pages;
+}
+
+// require 'view' access to RecentChanges
+function getRecentChanges($limit=false, $since=false, $include_minor=false, $credentials=false) {
+    global $server;
+    checkCredentials($server,$credentials,'view',_("RecentChanges"));
+    $dbi = WikiDB::open($GLOBALS['DBParams']);
+    $params = array('limit' => $limit, 'since' => $since, 
+		    'include_minor_revisions' => $include_minor);
+    $page_iter = $dbi->mostRecent($params);
+    $pages = array();
+    while ($page = $page_iter->next()) {
+        $pages[] = array('pagename' => $page->getName(),
+			 'lastModified' => $page->get('mtime'),
+			 'author'  => $page->get('author'),
+			 'summary' => $page->get('summary'), // added with 1.3.13
+			 'version' => $page->getVersion()
+			 );
+    }
+    return $pages;
+}
+// require 'view' access
+function listLinks($pagename, $credentials=false) {
+    global $server;
+    checkCredentials($server,$credentials,'view',$pagename);
+    $dbi = WikiDB::open($GLOBALS['DBParams']);
+    $page = $dbi->getPage($pagename);
+    $linkiterator = $page->getPageLinks();
+    $links = array();
+    while ($currentpage = $linkiterator->next()) {
+	if ($currentpage->exists())
+	    $links[] = array('pagename' => $currentpage->getName());
+    }
+    return $links;
+}
+function listPlugins($credentials=false) {
+    global $server;
+    checkCredentials($server,$credentials,'change',_("HomePage"));
+    $plugin_dir = 'lib/plugin';
+    if (defined('PHPWIKI_DIR'))
+        $plugin_dir = PHPWIKI_DIR . "/$plugin_dir";
+    $pd = new fileSet($plugin_dir, '*.php');
+    $plugins = $pd->getFiles();
+    unset($pd);
+    sort($plugins);
+    $RetArray = array();
+    if (!empty($plugins)) {
+        require_once("lib/WikiPlugin.php");
+        $w = new WikiPluginLoader;
+        foreach ($plugins as $plugin) {
+            $pluginName = str_replace(".php", "", $plugin);
+            $p = $w->getPlugin($pluginName, false); // second arg?
+            // trap php files which aren't WikiPlugin~s: wikiplugin + wikiplugin_cached only
+            if (strtolower(substr(get_parent_class($p), 0, 10)) == 'wikiplugin') {
+                $RetArray[] = $pluginName;
+            }
+        }
+    }
+    return $RetArray;
+}
+function getPluginSynopsis($pluginname, $credentials=false) {
+    global $server;
+    checkCredentials($server,$credentials,'change',"Help/".$pluginname."Plugin");
+    require_once("lib/WikiPlugin.php");
+    $w = new WikiPluginLoader;
+    $synopsis = '';
+    $p = $w->getPlugin($pluginName, false); // second arg?
+    // trap php files which aren't WikiPlugin~s: wikiplugin + wikiplugin_cached only
+    if (strtolower(substr(get_parent_class($p), 0, 10)) == 'wikiplugin') {
+        $plugin_args = '';
+        $desc = $p->getArgumentsDescription();
+        $src = array("\n",'"',"'",'|','[',']','\\');
+        $replace = array('%0A','%22','%27','%7C','%5B','%5D','%5C');
+        $desc = str_replace("<br />",' ',$desc->asXML());
+        if ($desc)
+            $plugin_args = '\n'.str_replace($src, $replace, $desc);
+        $synopsis = "<?plugin ".$pluginName.$plugin_args."?>"; // args?
+    }
+    return $synopsis;
+}
+// only plugins returning pagelists will return something useful. so omit the html output
+function callPlugin($pluginname, $pluginargs, $credentials=false) {
+    global $server;
+    checkCredentials($server,$credentials,'change',"Help/".$pluginname."Plugin");
+
+    $basepage = '';;
+    require_once("lib/WikiPlugin.php");
+    $w = new WikiPluginLoader;
+    $p = $w->getPlugin($pluginName, false); // second arg?
+    $pagelist = $p->run($dbi, $pluginargs, $request, $basepage);
+    $pages = array();
+    if (is_object($pagelist) and isa($pagelist, 'PageList')) {
+	foreach ($pagelist->pageNames() as $name)
+	    $pages[] = array('pagename' => $name);
+    }
+    return $pages;
+}
+/** 
+ * array listRelations([ Integer option = 1 ])
+ *
+ * Returns an array of all available relation names.
+ *   option: 1 relations only ( with 0 also )
+ *   option: 2 attributes only
+ *   option: 3 both, all names of relations and attributes 
+ *   option: 4 unsorted, this might be added as bitvalue: 7 = 4+3. default: sorted
+ * For some semanticweb autofill methods.
+ *
+ * @author: Reini Urban
+ */
+function listRelations($option = 1, $credentials=false) {
+    global $server;
+    checkCredentials($server,$credentials,'view',_("HomePage"));
+    $also_attributes = $option & 2; 
+    $only_attributes = $option & 2 and !($option & 1); 
+    $sorted = !($option & 4);
+    return $dbh->listRelations($also_attributes,
+			       $only_attributes,
+			       $sorted);
+}
+// some basic semantic search
+function linkSearch($linktype, $search, $pages="*", $relation="*", $credentials=false) {
+    global $server;
+    checkCredentials($server,$credentials,'view',_("HomePage"));
+    $dbi = WikiDB::open($GLOBALS['DBParams']);
+    require_once("lib/TextSearchQuery.php");
+    $pagequery = new TextSearchQuery($pages);
+    $linkquery = new TextSearchQuery($search);
+    if ($linktype == 'relation') {
+	$relquery = new TextSearchQuery($relation);
+	$links = $dbi->_backend->link_search($pagequery, $linkquery, $linktype, $relquery);
+    } elseif ($linktype == 'attribute') { // only numeric search withh attributes!
+	$relquery = new TextSearchQuery($relation);
+	require_once("lib/SemanticWeb.php");
+	// search: "population > 1 million and area < 200 km^2" relation="*" pages="*"
+	$linkquery = new SemanticAttributeSearchQuery($search, $relation);
+	$links = $dbi->_backend->link_search($pagequery, $linkquery, $linktype, $relquery);
+    } else {
+	// we already do have forward and backlinks as SOAP
+	$links = $dbi->_backend->link_search($pagequery, $linkquery, $linktype);
+    }
+    return $links->asArray();
 }
 
 $server->service($GLOBALS['HTTP_RAW_POST_DATA']);

@@ -1,0 +1,38 @@
+Date: Sat, 24 Jan 2009 20:18:24 +0100
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
+X-Rcs-Id: $Id: Help%2FDeadEndPagesPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FDeadEndPagesPlugin;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=iso-8859-1
+Content-Transfer-Encoding: binary
+
+The *~DeadEndPages* [[Help:WikiPlugin|plugin]] returns a list of pages which are not linked to by any other page.
+It is simply an alias for [OrphanedPages|Help:OrphanedPages] plugin.
+
+== Usage
+<verbatim>
+  <?plugin DeadEndPages ?>
+</verbatim>
+
+== Arguments
+
+page _(default: current pagename)_:
+  The page to execute upon.
+
+== Example
+
+<verbatim>
+<?plugin DeadEndPages limit=10 ?>
+</verbatim>
+
+<?plugin DeadEndPages limit=10 ?>
+
+== Author
+[Reini Urban|PhpWiki:ReiniUrban]
+
+== See Also
+
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]

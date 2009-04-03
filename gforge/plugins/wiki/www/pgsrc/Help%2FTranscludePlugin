@@ -1,0 +1,65 @@
+Date: Sat, 24 Jan 2009 20:18:24 +0100
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
+X-Rcs-Id: $Id: Help%2FTranscludePlugin 6451 2009-01-24 21:40:21Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FTranscludePlugin;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=iso-8859-1
+Content-Transfer-Encoding: binary
+
+The *Transclude* [[Help:WikiPlugin|plugin]] can be used to embed include whole (external) web pages within a wiki page.
+
+== Arguments
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| src
+| The URL of the page to transclude
+| ''none''
+|-
+| title
+| The title of the page to transclude
+| ''Transcluded page''
+|-
+| height
+| The (initial) height of the transclusion frame. If, possible, after the transcluded page is loaded, the frame is resized via Javascript so that it fits the entire transcluded page. (See below for more.)
+| 450
+|-
+| quiet
+| If set, frame appears as normal content
+| false 
+|}
+
+== Bugs / Caveats
+
+o Pages are transcluded using =<iframe>= tags.  Older browsers do not
+  support ''iframe''s.  In that case the user will be presented with a
+  link to the transcluded material.
+
+o When possible, Javascript code is used to adjust the height of the
+  _iframe_ so that it fits the entire transcluded page.
+  Unfortunately, this seems possible only when the transcluded page
+  comes from the same server as the wiki page.  (This restriction is
+  due to security checks built in to the Javascript language.)
+
+o The recursion detection code does not currently work.  Be careful to
+  avoid recursive transclusions, or you'll be sorry (or at least
+  amused.)
+
+== Example
+
+<verbatim>
+<?plugin Transclude src="http://phpwiki.sourceforge.net/demo/ChangeLog" ?>
+</verbatim>
+
+will get you
+
+<?plugin Transclude src="http://phpwiki.sourceforge.net/demo/ChangeLog" ?>
+
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]

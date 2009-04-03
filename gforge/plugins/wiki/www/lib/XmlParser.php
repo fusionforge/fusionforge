@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: XmlParser.php,v 1.6 2004/11/03 16:34:11 rurban Exp $');
+rcs_id('$Id: XmlParser.php 6184 2008-08-22 10:33:41Z vargenau $');
 /**
  * Base XmlParser Class.
  * Requires the expat.so/.dll, usually enabled by default.
@@ -49,7 +49,7 @@ rcs_id('$Id: XmlParser.php,v 1.6 2004/11/03 16:34:11 rurban Exp $');
  */
 class XmlParser {
 
-    var $_parser, $root, $current;
+    var $_parser, $root, $current, $previous, $parent;
 
     function XmlParser($encoding = '') { //  "ISO-8859-1"
         if ($encoding)
@@ -108,7 +108,7 @@ class XmlParser {
         }
         if (!is_null($this->current)) {
             $this->current->_content[] =& $node;    // copy or ref?
-            $node->parent =& $this->current;       // ref
+            $node->previous =& $this->current;      // ref to parallel prev
         }
         $this->current =& $node;	  		// ref 
         if (empty($this->root)) {
@@ -118,7 +118,8 @@ class XmlParser {
     }
 
     function tag_close($parser, $name, $attrs='') {
-        //$this->parent = $this->current;   // copy!
+        $this->current->parent = $this->current;    // copy!
+        $this->current =& $this->current->parent;   // ref!
         //unset($this->current);
     }
 
@@ -148,10 +149,12 @@ class XmlParser {
                 trigger_error("Error parse url $file");
                 return;
             }
+            $content = "";
             while ($data = fread($fp, 4096))  {
-            	$this->parse($data, feof($fp));
+            	$content .= $data;
             }
             fclose($fp);
+            $this->parse($content);
         } else {
             // other url_fopen workarounds: curl, socket (http 80 only)
             $data = url_get_contents($file);
@@ -164,7 +167,10 @@ class XmlParser {
     }
 }
 
-// $Log: XmlParser.php,v $
+// $Log: not supported by cvs2svn $
+// Revision 1.7  2007/05/27 19:47:31  rurban
+// Disable chunkwise xml parsing because of php crashes
+//
 // Revision 1.6  2004/11/03 16:34:11  rurban
 // proper msg if rss connection is broken or no items found
 //

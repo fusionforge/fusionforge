@@ -1,4 +1,4 @@
-! Brief Example of Creating Your Own Theme
+! Brief Example of Creating Your Own WikiTheme
 
 To create or modify one of the existing themes:
 * Make a copy of one of the themes.
@@ -7,11 +7,11 @@ To create or modify one of the existing themes:
   same directory structure and modify them there instead of the
   originals.
 * Fix the name in themeinfo.php:
-  $Theme = new Theme('NewName');
-* or if you have to override some default Theme methods
-  class Theme_NewName extends Theme;
+  $WikiTheme = new WikiTheme('NewName');
+* or if you have to override some default WikiTheme methods
+  class WikiTheme_NewName extends WikiTheme;
   ...
-  $Theme = new Theme_NewName('NewName');
+  $WikiTheme = new WikiTheme_NewName('NewName');
 
 
 Note:
@@ -32,7 +32,7 @@ Other file extensions are reserved for future use (i.e. .tpl for Smarty or
 Only one template is called, ususally the "html.tmpl" template, 
 which includes all other templates then.
 
-Theme templates are regular xhtml, but the php parts within "<?" and "?>" 
+WikiTheme templates are regular xhtml, but the php parts within "<?" and "?>" 
 are treated especially by phpwiki. HTML entities within the php parts 
 should be created by our HtmlElement methods, which create well-formed 
 HTML objects. 

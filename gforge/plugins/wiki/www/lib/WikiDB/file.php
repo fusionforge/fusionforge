@@ -1,6 +1,6 @@
 <?php
 
-rcs_id( '$Id: file.php,v 1.6 2005/09/14 06:05:22 rurban Exp $' );
+rcs_id( '$Id: file.php 6184 2008-08-22 10:33:41Z vargenau $' );
 
 /**
  Copyright 1999, 2000, 2001, 2002, 2003 $ThePhpWikiProgrammingTeam
@@ -50,10 +50,7 @@ class WikiDB_file extends WikiDB
 }
 
 
-// $Log: file.php,v $
-// Revision 1.6  2005/09/14 06:05:22  rurban
-// unify /tmp warning message
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.5  2005/02/18 20:41:28  uckelman
 // Re-enabled /tmp warnings to save those who choose not to read the
 //  instructions.

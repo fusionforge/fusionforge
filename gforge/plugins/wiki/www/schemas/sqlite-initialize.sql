@@ -1,6 +1,6 @@
 -- http://www.hezmatt.org/~mpalmer/sqlite-phpwiki/sqlite.sql
 
--- $Id: sqlite-initialize.sql,v 1.3 2005/06/21 05:59:18 rurban Exp $
+-- $Id: sqlite-initialize.sql 6203 2008-08-26 13:23:56Z vargenau $
 
 CREATE TABLE page (
 	id              INTEGER PRIMARY KEY,
@@ -56,23 +56,19 @@ CREATE INDEX sessip_index ON session (sess_ip);
 
 CREATE TABLE pref (
   	userid 	CHAR(48) NOT NULL PRIMARY KEY,
-  	prefs  	TEXT NULL DEFAULT '',
+  	prefs  	MEDIUMTEXT NULL DEFAULT '',
   	passwd 	CHAR(48) DEFAULT '',
 	groupname CHAR(48) DEFAULT 'users'
 );
-CREATE INDEX pref_userid ON pref (userid);
--- update to 1.3.12: (see lib/upgrade.php)
--- ALTER TABLE pref ADD passwd 	CHAR(48) DEFAULT '';
--- ALTER TABLE pref ADD groupname CHAR(48) DEFAULT 'users';
 
---CREATE TABLE member (
---	userid    CHAR(48) NOT NULL,
---   	groupname CHAR(48) NOT NULL DEFAULT 'users',
---   	INDEX (userid),
---   	INDEX (groupname)
---);
---CREATE INDEX member_userid ON member (userid);
---CREATE INDEX member_groupname ON member (groupname);
+-- Use the member table, if you need it for n:m user-group relations,
+-- and adjust your DBAUTH_AUTH_ SQL statements.
+CREATE TABLE member (
+	userid    CHAR(48) NOT NULL,
+   	groupname CHAR(48) NOT NULL DEFAULT 'users'
+);
+CREATE INDEX member_userid ON member (userid);
+CREATE INDEX member_groupname ON member (groupname);
 
 -- only if you plan to use the wikilens theme
 CREATE TABLE rating (
@@ -93,7 +89,7 @@ CREATE INDEX rating_rateepage ON rating (rateepage);
 -- see http://www.outoforder.cc/projects/apache/mod_log_sql/docs-2.0/#id2756178
 CREATE TABLE accesslog (
         time_stamp    INTEGER UNSIGNED,
-	remote_host   VARCHAR(50),
+	remote_host   VARCHAR(100),
 	remote_user   VARCHAR(50),
         request_method VARCHAR(10),
 	request_line  VARCHAR(255),
@@ -110,3 +106,4 @@ CREATE TABLE accesslog (
 CREATE INDEX log_time ON accesslog (time_stamp);
 CREATE INDEX log_host ON accesslog (remote_host);
 -- create extra indices on demand (usually referer. see plugin/AccessLogSql)
+

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: VisualWiki.php,v 1.19 2005/10/12 06:19:31 rurban Exp $');
+rcs_id('$Id: VisualWiki.php 6185 2008-08-22 11:40:14Z vargenau $');
 /*
  Copyright (C) 2002 Johannes Große (Johannes Gro&szlig;e)
 
@@ -28,7 +28,7 @@ rcs_id('$Id: VisualWiki.php,v 1.19 2005/10/12 06:19:31 rurban Exp $');
  * @author Johannes Große
  * @version 0.9
  */
-define('VISUALWIKI_ALLOWOPTIONS', true);
+/* define('VISUALWIKI_ALLOWOPTIONS', true); */
 if (!defined('VISUALWIKI_ALLOWOPTIONS'))
     define('VISUALWIKI_ALLOWOPTIONS', false);
 
@@ -41,7 +41,8 @@ extends WikiPlugin_GraphViz
      * Sets plugin type to map production
      */
     function getPluginType() {
-        return ($GLOBALS['request']->getArg('debug')) ? PLUGIN_CACHED_IMG_ONDEMAND : PLUGIN_CACHED_MAP;
+        return ($GLOBALS['request']->getArg('debug')) ? PLUGIN_CACHED_IMG_ONDEMAND 
+	    					      : PLUGIN_CACHED_MAP;
     }
 
     /**
@@ -55,7 +56,7 @@ extends WikiPlugin_GraphViz
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.19 $");
+                            "\$Revision: 6185 $");
     }
 
     /**
@@ -161,9 +162,12 @@ extends WikiPlugin_GraphViz
         $this->extract_wikipages($dbi, $argarray);
         /* ($dbi,  $large, $recent, $refined, $backlink,
             $neighbour, $excludelist, $includelist, $color); */
-        return $this->invokeDot($argarray);
+    	$result = $this->invokeDot($argarray);
+        if (isa($result, 'HtmlElement'))
+            return array(false, $result);
+        else
+            return $result;
         /* => ($width, $height, $color, $shape, $text); */
-	
     }
 
     // ------------------------------------------------------------------------------------------
@@ -544,9 +548,8 @@ extends WikiPlugin_GraphViz
         $this->extract_wikipages($dbi, $argarray);
         list($imagehandle, $content['html']) = $this->invokeDot($argarray);
         // write to uploads and produce static url
-        $file_dir = defined('PHPWIKI_DIR') ? 
-            PHPWIKI_DIR . "/uploads" : "uploads";
-        $upload_dir = SERVER_URL . ((substr(DATA_PATH,0,1)=='/') ? '' : "/") . DATA_PATH . '/uploads/';
+        $file_dir = getUploadFilePath();
+        $upload_dir = getUploadDataPath();
         $tmpfile = tempnam($file_dir,"VisualWiki").".".$argarray['imgtype'];
         WikiPluginCached::writeImage($argarray['imgtype'], $imagehandle, $tmpfile);             
         ImageDestroy($imagehandle);
@@ -616,7 +619,14 @@ function interpolate($a, $b, $pos) {
     return $a + ($b - $a) * $pos;
 }
 
-// $Log: VisualWiki.php,v $
+// $Log: not supported by cvs2svn $
+// Revision 1.21  2007/01/04 16:43:00  rurban
+// Whitespace only
+//
+// Revision 1.20  2006/12/22 17:57:10  rurban
+// use getUploadxxxPath
+// improve error display
+//
 // Revision 1.19  2005/10/12 06:19:31  rurban
 // remove INCLUDED from EXCLUDED, includes override excludes.
 //

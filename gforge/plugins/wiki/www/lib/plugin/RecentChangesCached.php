@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: RecentChangesCached.php,v 1.4 2004/03/08 18:17:10 rurban Exp $');
+rcs_id('$Id: RecentChangesCached.php 6406 2009-01-17 14:31:56Z rurban $');
 /**
  Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
 
@@ -56,7 +56,7 @@ extends WikiPluginCached
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.4 $");
+                            "\$Revision: 6406 $");
     }
 
     function getDefaultArguments() {
@@ -67,16 +67,84 @@ extends WikiPluginCached
         return '+900'; // 15 minutes
     }
 
-    function getHtml($dbi, $argarray, $request, $basepage) {
+    // We don't go through pi parsing, instead we go directly to the 
+    // better plugin methods.
+    function getHtml($dbi, $args, $request, $basepage) {
+	$plugin = new WikiPlugin_RecentChanges();
+	$changes = $plugin->getChanges($dbi, $args);
+	return $plugin->format($changes, $args);
+	/*
         $loader = new WikiPluginLoader;
         return $loader->expandPI('<?plugin RecentChanges '
             . WikiPluginCached::glueArgs($argarray)
                                  . ' ?>', $request, $this, $basepage);
+        */
+    }
+    
+    // ->box is used to display a fixed-width, narrow version with common header.
+    // Just a limited list of pagenames, without date.
+    // This does not use ->run, to avoid pi construction and deconstruction
+    function box($args = false, $request = false, $basepage = false, $do_save = false) {
+        if (!$request) $request =& $GLOBALS['request'];
+        if (!isset($args['limit'])) $args['limit'] = 12;
+        $args['format'] = 'box';
+        $args['show_minor'] = false;
+        $args['show_major'] = true;
+        $args['show_deleted'] = 'sometimes';
+        $args['show_all'] = false;
+        $args['days'] = 90;
+        
+        $cache = $this->newCache();
+        if (is_array($args))
+            ksort($args);
+        $argscopy = $args;
+        unset($argscopy['limit']);
+        $this->_args =& $args;
+        $this->_type = $this->getPluginType();
+        $this->_static = false;
+
+        /* OLD: */
+        //list($id, $url) = $this->genUrl($cache, $args);
+        
+        /* NEW: This cache entry needs an update on major changes.
+         * So we should rather use an unique ID, because there will only be
+         * one global cached box.
+         */
+        $id = $cache->generateId(serialize(array("RecentChangesCachedBox", $argscopy)));
+        $content = $cache->get($id, 'imagecache');
+        if ($do_save || !$content || !$content['html']) {
+	    $this->resetError();
+	    $plugin = new WikiPlugin_RecentChanges();
+	    $title = WikiLink($this->getName(), '', SplitPagename($this->getName()));
+	    $changes = $plugin->getChanges($request->_dbi, $args);
+            $content['html'] = 
+                      $this->makeBox($title,
+                                     $plugin->format($changes, $args));
+            if ($errortext = $this->getError()) {
+                $this->printError($errortext, 'html');
+                return HTML();
+            }
+            $do_save = true;
+        }
+        if ($do_save) {
+            $content['args'] = md5($this->_pi);
+            $expire = $this->getExpire($request->_dbi, $content['args'], $request);
+            $cache->save($id, $content, $expire, 'imagecache');
+        }
+        if ($content['html'])
+            return $content['html'];
+        return HTML();
     }
 
-} // WikiPlugin_TexToPng
+    // force box cache update on major changes.
+    function box_update($args = false, $request = false, $basepage = false) {
+    	$this->box($args, $request, $basepage, true);
+    }
+    
+    
+} // WikiPlugin_RecentChangesCached
 
-// $Log: RecentChangesCached.php,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.4  2004/03/08 18:17:10  rurban
 // added more WikiGroup::getMembersOf methods, esp. for special groups
 // fixed $LDAP_SET_OPTIONS

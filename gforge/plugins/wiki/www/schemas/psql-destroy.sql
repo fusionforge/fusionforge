@@ -1,4 +1,4 @@
--- $Id: psql-destroy.sql,v 1.10 2006/05/18 06:08:33 rurban Exp $
+-- $Id: psql-destroy.sql,v 1.11 2006/12/23 11:48:58 rurban Exp $
 
 \set QUIET
 
@@ -29,10 +29,18 @@
 \set link_tbl		:prefix 'link'
 \set session_tbl	:prefix 'session'
 \set pref_tbl		:prefix 'pref'
-\set user_tbl	        :prefix 'user'
+--\set user_tbl	        :prefix 'user'
 \set member_tbl 	:prefix 'member'
 \set rating_tbl		:prefix 'rating'
 \set accesslog_tbl	:prefix 'accesslog'
+
+\set pagedata_tbl 	:prefix 'pagedata'
+\set versiondata_tbl 	:prefix 'versiondata'
+\set pageperm_tbl 	:prefix 'pageperm'
+\set existing_page_view :prefix 'existing_page'
+\set curr_page_view	:prefix 'curr_page'
+\set update_recent_fn	:prefix 'update_recent'
+\set prepare_rename_fn	:prefix 'prepare_rename_page'
 
 \echo Dropping table :version_tbl
 DROP TABLE :version_tbl CASCADE;
@@ -44,9 +52,9 @@ DROP TABLE :recent_tbl CASCADE;
 DROP TABLE :nonempty_tbl CASCADE;
 
 \echo Dropping experimental pagedata tables (not yet used)
-DROP TABLE pagedata CASCADE;
-DROP TABLE versiondata CASCADE;
-DROP TABLE pageperm CASCADE;
+DROP TABLE :pagedata_tbl CASCADE;
+DROP TABLE :versiondata_tbl CASCADE;
+DROP TABLE :pageperm_tbl CASCADE;
 
 \echo Dropping table :link_tbl
 DROP TABLE :link_tbl;
@@ -54,13 +62,11 @@ DROP TABLE :link_tbl;
 \echo Dropping table :rating_tbl
 DROP TABLE :rating_tbl;
 
-\set existing_page :prefix 'existing_page'
 \echo Dropping view :existing_page
-DROP VIEW :existing_page;
+DROP VIEW :existing_page_view;
 
-\set curr_page     :prefix 'curr_page'
 \echo Dropping view :curr_page
-DROP VIEW :curr_page;
+DROP VIEW :curr_page_view;
 
 \echo Dropping table :page_tbl
 DROP TABLE :page_tbl CASCADE;
@@ -73,7 +79,7 @@ DROP TABLE :member_tbl;
 DROP TABLE :pref_tbl;
 
 --\echo Dropping table :user_tbl
-DROP TABLE :user_tbl;
+--DROP TABLE :user_tbl;
 
 \echo Dropping table :session_tbl
 DROP TABLE :session_tbl;
@@ -82,5 +88,5 @@ DROP TABLE :session_tbl;
 DROP TABLE :accesslog_tbl;
 
 \echo Dropping stored procedures
-DROP FUNCTION update_recent (INT4, INT4);
-DROP FUNCTION prepare_rename_page (INT4, INT4);
+DROP FUNCTION :update_recent_fn (INT4, INT4);
+DROP FUNCTION :prepare_rename_fn (INT4, INT4);

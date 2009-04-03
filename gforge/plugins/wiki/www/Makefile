@@ -1,14 +1,24 @@
-# $Id: Makefile,v 1.9 2005/08/07 09:15:38 rurban Exp $
+# $Id: Makefile 6236 2008-09-07 10:19:23Z vargenau $
 # user-definable settings:
+VERSION=
 # for mysqladmin
 DBADMIN_USER=root
 DBADMIN_PASS=secret
 
-# etags (GNU Emacs 21.5.x)
-#ETAGS_STDIN = /usr/bin/etags -L -
-# etags (GNU Emacs 21.4.15)
-ETAGS_STDIN = /usr/bin/etags -
+# etags (GNU Emacs 21.4.x)
+ETAGS_21_5=$(shell etags --version|egrep "Ctags 5.[67]")
+ifeq ("$(ETAGS_21_5)", "")
+  ETAGS_STDIN = /usr/bin/etags -
+else
+  # new etags (GNU Emacs 21.5.x)
+  ETAGS_STDIN = /usr/bin/etags -L -
+endif
 
+ifeq ("$(VERSION)", "")
+  TARDIST = ../phpwiki.tar.bz2
+else
+  TARDIST = ../phpwiki-$(VERSION).tar.bz2
+endif
 DB_SQLITE_DBFILE = /tmp/phpwiki-sqlite.db
 
 # ****************************************************************************
@@ -45,12 +55,12 @@ endif
 # ****************************************************************************
 PHP_SRC := $(wildcard *.php ./lib/*.php ./lib/WikiDB/*.php ./lib/plugin/*.php)
 
-.PHONY: all install locale mysql pqsql sqlite dbtest install-config
+.PHONY: all install locale mysql pqsql sqlite dbtest install-config dist
 
 all:  TAGS
 
 TAGS:  $(PHP_SRC)
-	if [ -f $@ ]; then /usr/bin/mv -f $@ $@~; fi
+	if [ -f $@ ]; then /bin/mv -f $@ $@~; fi
 #	etags $(PHP_SRC)
 	/usr/bin/find . \( -type d -regex '\(^\./lib/pear\)\|\(^\./lib/WikiDB/adodb\)\|\(^\./lib/nusoap\)\|\(^\./lib/fpdf\)\|\(^\./locale/.*/LC_MESSAGES\)' \) -prune -o -type f -name \*.php | grep .php | $(ETAGS_STDIN)
 
@@ -115,3 +125,20 @@ ${DB_SQLITE_DBFILE}: schemas/sqlite.sql
 	echo ".dump" | sqlite ${DB_SQLITE_DBFILE} > dump.sql
 	mv ${DB_SQLITE_DBFILE} ${DB_SQLITE_DBFILE}.old
 	sqlite $(DB_SQLITE_DBFILE) < dump.sql
+
+dist: $(TARDIST)
+
+# --exclude='\.*'
+$(TARDIST) :
+	tar cfj $(TARDIST) --exclude=CVS \
+		--exclude=config.ini \
+		--exclude='*~'     \
+		--exclude='*.bak'  \
+		--exclude='*.orig' \
+		--exclude='*.rej'  \
+		--exclude=uploads  \
+		--exclude=.patches \
+		--exclude=TAGS     \
+		--exclude=TAGS.full \
+		--exclude='*.tar.bz2' \
+		.

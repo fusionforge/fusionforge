@@ -1,5 +1,5 @@
 <?php
-rcs_id('$Id: ExternalReferrer.php,v 1.3 2004/10/12 14:22:14 rurban Exp $');
+rcs_id('$Id: ExternalReferrer.php 6184 2008-08-22 10:33:41Z vargenau $');
 
 /** 
  * Detect external referrers
@@ -8,7 +8,7 @@ rcs_id('$Id: ExternalReferrer.php,v 1.3 2004/10/12 14:22:14 rurban Exp $');
  * Todo: 
  *   store all external referrers in (rotatable) log/db for a RecentReferrers plugin.
  */
-if (!function_exists('isExternalReferrer')) { // better define that in stdlib.php
+if (!function_exists('isExternalReferrer')) { // also defined in stdlib.php
   function isExternalReferrer(&$request) {
     if ($referrer = $request->get('HTTP_REFERER')) {
     	$home = SCRIPT_NAME; // was SERVER_URL, check sister wiki's: same host but other other script url
@@ -78,17 +78,20 @@ class SearchEngines {
      */
     function parseSearchQuery($url) {
         // test local referrers
-        if (DEBUG) {
-            $this->searchEngines[SERVER_URL] = array("engine" => "DEBUG", "query1" => "s=", "query2" => "", "url" => SCRIPT_NAME);
+        if (DEBUG & _DEBUG_REMOTE) {
+            $this->searchEngines[strtolower(SERVER_URL)] = array("engine" => "DEBUG", "query1" => "s=", "query2" => "", "url" => SCRIPT_NAME);
+            $this->searchEngines['http://localhost'] = array("engine" => "DEBUG", "query1" => "s=", "query2" => "", "url" => SCRIPT_NAME);
         }
+        $url = strtolower($url);
         $ref = $url;
         while (list($key,$var) = @each($this->searchEngines)) {
-            if (stristr($ref, $key)) {
+            if (strstr($ref, $key)) {
                 unset($ref);
                 $ref["engine"] = $var["engine"];
                 $query1 =  $var["query1"];
                 $query2 =  $var["query2"];
                 $ref["engine_url"] = $var["url"];
+                break;
             }
         }
         reset($this->searchEngines);
@@ -112,7 +115,10 @@ class SearchEngines {
     }
 }
 
-// $Log: ExternalReferrer.php,v $
+// $Log: not supported by cvs2svn $
+// Revision 1.4  2007/01/07 18:42:29  rurban
+// Update comment only
+//
 // Revision 1.3  2004/10/12 14:22:14  rurban
 // lib/ExternalReferrer.php:99: Notice[8]: Undefined index: query
 //

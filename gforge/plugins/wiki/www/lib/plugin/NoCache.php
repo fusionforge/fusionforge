@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: NoCache.php,v 1.3 2004/06/18 14:42:17 rurban Exp $');
+rcs_id('$Id: NoCache.php 6185 2008-08-22 11:40:14Z vargenau $');
 /*
  Copyright 2004 $ThePhpWikiProgrammingTeam
 
@@ -45,7 +45,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.3 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -60,10 +60,7 @@ extends WikiPlugin
     }
 };
 
-// $Log: NoCache.php,v $
-// Revision 1.3  2004/06/18 14:42:17  rurban
-// added wikilens libs (not yet merged good enough, some work for DanFr)
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.2  2004/02/25 16:21:25  rurban
 // fixed parse error on line 71
 //

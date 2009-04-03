@@ -1,9 +1,9 @@
 <?php // -*-php-*-
-rcs_id('$Id: pdf.php,v 1.7 2004/09/22 13:46:26 rurban Exp $');
+rcs_id('$Id: pdf.php 6184 2008-08-22 10:33:41Z vargenau $');
 /*
  Copyright (C) 2003 Olivier PLATHEY
  Copyright (C) 200? Don Sebà
- Copyright (C) 2004 Reini Urban
+ Copyright (C) 2004,2006,2007 Reini Urban
 
  This file is part of PhpWiki.
 
@@ -21,172 +21,107 @@ rcs_id('$Id: pdf.php,v 1.7 2004/09/22 13:46:26 rurban Exp $');
  along with PhpWiki; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */ 
-/*
- * Credits:
- * PDF functions taken from FPDF http://www.fpdf.org
- * Edited for PHPWebthings by Don Sebà 
- *   Feel free to edit , enhance the module, and please share it at http://www.phpdbform.com
- *   Keep PHPWT COOL submit your modules/themes/mods, it will help to improve ! :)
- * Changes for PhpWiki by Reini Urban
- */
 
-require_once('lib/fpdf.php');
-
-// http://phpwiki.sourceforge.net/phpwiki/PhpWikiToDocBookAndPDF
-// htmldoc or ghostscript + html2ps or docbook (dbdoclet, xsltproc, fop)
-// http://www.easysw.com/htmldoc
 //define("USE_EXTERNAL_HTML2PDF", "htmldoc --quiet --format pdf14 --jpeg --webpage --no-toc --no-title %s");
-
-class PDF extends FPDF {
-    var $B = 0;
-    var $I = 0;
-    var $U = 0;
-    var $HREF = '';
-
-    function PDF ($orientation='P', $unit='mm', $format='A4') {
-        $this->FPDF($orientation,$unit,$format);
-	//$this->SetCompression(false);
-    }
-
-    // Simple HTML to PDF converter
-    function ConvertFromHTML($html) {
-        $html = str_replace("\n",' ',$html);
-        $a = preg_split('/<(.*)>/U',$html,-1,PREG_SPLIT_DELIM_CAPTURE);
-        foreach($a as $i=>$e) {
-            if ($i % 2 == 0) {
-                //Text
-                if($this->HREF)
-                    $this->PutLink($this->HREF,$e);
-                else
-                    $this->Write(5,$e);
-            } else {
-                //Tag
-                if ($e{0} == '/')
-                    $this->CloseTag(strtoupper(substr($e,1)));
-                else {
-                    //Attributes
-                    $a2 = explode(' ',$e);
-                    $tag = strtoupper(array_shift($a2));
-                    $attr = array();
-                    foreach ($a2 as $v)
-                        if (ereg('^([^=]*)=["\']?([^"\']*)["\']?$',$v,$a3))
-                            $attr[strtoupper($a3[1])]=$a3[2];
-                    $this->OpenTag($tag,$attr);
-                }
-            }
-        }
-    }
-
-    function Header() {
-        $this->SetY(-15);
-        $this->SetFont('Arial','',9);
-	//URL - space from side - space from top - width
-	if (!DEBUG) {
-          $imgurl = $GLOBALS['WikiTheme']->_findFile("images/logo.png"); // header and wikilogo
-          if ($imgurl)
-            $this->Image($imgurl,3,3);
-        }
-        //Line break
-        //$this->Ln(30);
-    }
-
-    function Footer() {
-        //global $cfg, $config, $lang;
-        //1.5cm below top
-        $this->SetY(-15);
-        //Arial italic 8
-        $this->SetFont('arial','I',8);
-    }
-
-    function OpenTag($tag,$attr) {
-        if($tag=='B' or $tag=='I' or $tag=='U')
-            $this->SetStyle($tag,true);
-        if($tag=='A')
-            $this->HREF=$attr['HREF'];
-        if($tag=='BR')
-            $this->Ln(5);
-    }
-
-    function CloseTag($tag) {
-        if($tag=='B' or $tag=='I' or $tag=='U')
-            $this->SetStyle($tag,false);
-        if($tag=='A')
-            $this->HREF='';
-    }
-    
-    //Wijzig stijl en selecteer lettertype
-    function SetStyle($tag,$enable) {
-        $this->$tag+=($enable ? 1 : -1);
-        $style='';
-        foreach(array('B','I','U') as $s)
-            if($this->$s > 0)
-                $style .= $s;
-        $this->SetFont('',$style);
-    }
-
-    function PutLink($URL,$txt) {
-        // hyperlink as simple underlined text
-        $this->SetTextColor(0,0,255);
-        $this->SetStyle('U',true);
-        $this->Write(5,$txt,$URL);
-        $this->SetStyle('U',false);
-        $this->SetTextColor(0);
-    }
-}
-
-function ConvertAndDisplayPdf (&$request) {
+/**
+ * handler for format=pdf
+ * http://phpwiki.sourceforge.net/phpwiki/PhpWikiToDocBookAndPDF
+ * htmldoc or ghostscript + html2ps or docbook (dbdoclet, xsltproc, fop)
+ * http://www.easysw.com/htmldoc
+*/
+function ConvertAndDisplayPdfPageList (&$request, $pagelist, $args = array()) {
+    global $WikiTheme;
     if (empty($request->_is_buffering_output))
         $request->buffer_output(false/*'nocompress'*/);
     $pagename = $request->getArg('pagename');
     $dest = $request->getArg('dest');
-    //TODO: inline cached content: /getimg.php? => image.png
+    $request->setArg('dest',false);
+    $request->setArg('format',false);
+    include_once("lib/display.php");
+    include_once("lib/loadsave.php");
+
+    array_unshift($pagelist->_pages, $request->_dbi->getPage($pagename));
+    require_once("lib/WikiPluginCached.php");
+    $cache = new WikiPluginCached;
+    $cache->newCache();
+    $tmpfile = $cache->tempnam();
+    $tmpdir = dirname($tmpfile); 
+    unlink ($tmpfile);
+
+    $WikiTheme->DUMP_MODE = 'PDFHTML';
+    _DumpHtmlToDir($tmpdir, 
+    		   new WikiDB_Array_generic_iter($pagelist->_pages),
+    		   $request->getArg('exclude'));
+    $WikiTheme->DUMP_MODE = false;
+    return;
+}
+
+/*
+ * Main action handler: action=pdf
+ * TODO: inline cached content: /getimg.php? => image.png
+ * Just use an external exe.
+ */
+function ConvertAndDisplayPdf (&$request) {
+    global $WikiTheme;
+    if (empty($request->_is_buffering_output))
+        $request->buffer_output(false/*'nocompress'*/);
+    $pagename = $request->getArg('pagename');
+    $dest = $request->getArg('dest');
     // Disable CACHE
 
+    $WikiTheme->DUMP_MODE = true;
     include_once("lib/display.php");
-    displayPage($request);
+    // TODO: urldecode pagename to get rid of %20 in filename.pdf
+    displayPage($request, new Template('htmldump', $request));
     $html = ob_get_contents();
+    $WikiTheme->DUMP_MODE = false;
     
     // check hook for external converters
     if (defined('USE_EXTERNAL_HTML2PDF')
         and USE_EXTERNAL_HTML2PDF)
     {   // See http://phpwiki.sourceforge.net/phpwiki/PhpWikiToDocBookAndPDF
         // htmldoc or ghostscript + html2ps or docbook (dbdoclet, xsltproc, fop)
+        Header('Content-Type: application/pdf');
         $request->discardOutput();
         $request->buffer_output(false/*'nocompress'*/);
         require_once("lib/WikiPluginCached.php");
         $cache = new WikiPluginCached;
         $cache->newCache();
-        $tmpfile = $cache->tempnam();
+        $tmpfile = $cache->tempnam('pdf.html');
         $fp = fopen($tmpfile, "wb");
         fwrite($fp, $html);
         fclose($fp);
-        Header('Content-Type: application/pdf');
         passthru(sprintf(USE_EXTERNAL_HTML2PDF, $tmpfile));
         unlink($tmpfile);
-    } else {
-        // use fpdf:
-        if ($GLOBALS['LANG'] == 'ja') {
-            include_once("lib/fpdf/japanese.php");
-            $pdf = new PDF_Japanese;
-        } elseif ($GLOBALS['LANG'] == 'zh') {
-            include_once("lib/fpdf/chinese.php");
-            $pdf = new PDF_Chinese;
-        } else {
-            $pdf = new PDF;
-        }
-        $pdf->Open();
-        $pdf->AddPage();
-        $pdf->ConvertFromHTML($html);
-        $request->discardOutput();
-        $request->buffer_output(false/*'nocompress'*/);
-        $pdf->Output($pagename.".pdf", $dest ? $dest : 'I');
     }
+    // clean the hints errors
+    global $ErrorManager;
+    $ErrorManager->destroyPostponedErrors();
+    
     if (!empty($errormsg)) {
         $request->discardOutput();
     }
 }
 
-// $Log: pdf.php,v $
+// $Log: not supported by cvs2svn $
+// Revision 1.13  2007/09/15 12:28:46  rurban
+// Improve multi-page format handling: abstract _DumpHtmlToDir. get rid of non-external pdf, non-global VALID_LINKS
+//
+// Revision 1.12  2007/09/12 19:41:38  rurban
+// Enable format=pdf for pagelists (not yet finished)
+//
+// Revision 1.11  2007/02/17 14:14:55  rurban
+// fix pagename for lists
+//
+// Revision 1.10  2007/01/07 18:44:39  rurban
+// Add ConvertAndDisplayPdfPageList
+//
+// Revision 1.9  2006/09/06 06:02:05  rurban
+// omit actionbar from pdf
+//
+// Revision 1.8  2006/08/25 22:09:00  rurban
+// print pdf header earlier
+//
 // Revision 1.7  2004/09/22 13:46:26  rurban
 // centralize upload paths.
 // major WikiPluginCached feature enhancement:

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: RssFeed.php,v 1.10 2005/04/10 10:24:58 rurban Exp $');
+rcs_id('$Id: RssFeed.php 6272 2008-09-19 11:26:56Z vargenau $');
 /*
  Copyright 2003 Arnaud Fontaine
 
@@ -39,7 +39,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.10 $");
+                            "\$Revision: 6272 $");
     }
 
     // Establish default values for each of this plugin's arguments.
@@ -55,7 +55,11 @@ extends WikiPlugin
     function run($dbi, $argstr, &$request, $basepage) {
         extract($this->getArgs($argstr, $request));
 
-        $rss_parser = new RSSParser();
+        if (defined('CHARSET'))
+        	$rss_parser = new RSSParser(CHARSET);
+        else
+        	$rss_parser = new RSSParser();
+        
         if (!empty($url))
             $rss_parser->parse_url( $url, $debug );
 
@@ -119,34 +123,6 @@ extends WikiPlugin
     }
 
 };
-
-// $Log: RssFeed.php,v $
-// Revision 1.10  2005/04/10 10:24:58  rurban
-// fix for RSS feeds without detailled <item> tags:
-//   just list the <items> urls then (Bug #1180027)
-//
-// Revision 1.9  2004/11/03 16:34:10  rurban
-// proper msg if rss connection is broken or no items found
-//
-// Revision 1.8  2004/07/08 20:30:07  rurban
-// plugin->run consistency: request as reference, added basepage.
-// encountered strange bug in AllPages (and the test) which destroys ->_dbi
-//
-// Revision 1.7  2004/06/08 21:03:20  rurban
-// updated RssParser for XmlParser quirks (store parser object params in globals)
-//
-// Revision 1.6  2004/05/24 17:36:06  rurban
-// new interface
-//
-// Revision 1.5  2004/05/18 16:18:37  rurban
-// AutoSplit at subpage seperators
-// RssFeed stability fix for empty feeds or broken connections
-//
-// Revision 1.4  2004/04/18 01:11:52  rurban
-// more numeric pagename fixes.
-// fixed action=upload with merge conflict warnings.
-// charset changed from constant to global (dynamic utf-8 switching)
-//
 
 // For emacs users
 // Local Variables:

@@ -1,9 +1,10 @@
 <?php // -*-php-*-
-rcs_id('$Id: WikiAdminMarkup.php,v 1.1 2005/09/18 13:06:24 rurban Exp $');
+rcs_id('$Id: WikiAdminMarkup.php 6286 2008-10-02 10:01:29Z vargenau $');
 /*
  Copyright 2005 $ThePhpWikiProgrammingTeam
+ Copyright 2008 Marc-Etienne Vargenau, Alcatel-Lucent
 
- This file is not yet part of PhpWiki.
+ This file is part of PhpWiki.
 
  PhpWiki is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -43,7 +44,7 @@ extends WikiPlugin_WikiAdminSelect
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.1 $");
+                            "\$Revision: 6286 $");
     }
 
     function getDefaultArguments() {
@@ -164,6 +165,7 @@ extends WikiPlugin_WikiAdminSelect
         return HTML::form(array('action' => $request->getPostURL(),
                                 'method' => 'post'),
                           $header,
+                          $buttons,
                           $pagelist->getContent(),
                           HiddenInputs($request->getArgs(),
                                         false,
@@ -171,8 +173,7 @@ extends WikiPlugin_WikiAdminSelect
                           HiddenInputs(array('admin_markup[action]' => $next_action)),
                           ENABLE_PAGEPERM
                           ? ''
-                          : HiddenInputs(array('require_authority_for_post' => WIKIAUTH_ADMIN)),
-                          $buttons);
+                          : HiddenInputs(array('require_authority_for_post' => WIKIAUTH_ADMIN)));
     }
 
     function chmarkupForm(&$header, $post_args) {
@@ -184,12 +185,6 @@ extends WikiPlugin_WikiAdminSelect
         return $header;
     }
 }
-
-// $Log: WikiAdminMarkup.php,v $
-// Revision 1.1  2005/09/18 13:06:24  rurban
-// already added to 1.3.11
-//
-//
 
 // Local Variables:
 // mode: php

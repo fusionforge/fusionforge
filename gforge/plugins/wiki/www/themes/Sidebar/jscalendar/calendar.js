@@ -12,7 +12,7 @@
  * Read the entire license text here: http://www.gnu.org/licenses/lgpl.html
  */
 
-// $Id: calendar.js,v 1.1 2005/08/06 13:28:07 rurban Exp $
+// $Id: calendar.js 6204 2008-08-26 15:12:03Z vargenau $
 
 /** The Calendar object constructor. */
 Calendar = function (firstDayOfWeek, dateStr, onSelected, onClose) {
@@ -1818,7 +1818,7 @@ window._dynarch_popupCalendar = null;
  * Read the entire license text here: http://www.gnu.org/licenses/lgpl.html
  */
 
-// $Id: calendar.js,v 1.1 2005/08/06 13:28:07 rurban Exp $
+// $Id: calendar.js 6204 2008-08-26 15:12:03Z vargenau $
 
 /** The Calendar object constructor. */
 Calendar = function (firstDayOfWeek, dateStr, onSelected, onClose) {

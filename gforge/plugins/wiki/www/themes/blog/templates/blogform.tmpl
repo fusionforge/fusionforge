@@ -1,35 +1,29 @@
-<?php
-  rcs_id('$Id: blogform.tmpl,v 1.1 2004/12/14 21:30:37 rurban Exp $');
+<?php // -*- php -*-
+  rcs_id('$Id: blogform.tmpl 6211 2008-08-26 16:45:07Z vargenau $');
 ?>
 <div class="wikiblog wikiblog-form">
-<form action="<?=$request->getPostURL()?>" method="post" class="wikiaction"
-      accept-charset="<?=$charset?>">
-  <input type="hidden" name="blog[pagename]" value="<?=$PAGENAME?>" />
-  <?= HiddenInputs($request->getArgs()) ?>
-  <table class="wikiblog-form">
-     <caption><?=
-_("Add a Comment")
-?></caption>
-     <col class="label" width="1*" /><col class="input" width="100*" />
-     <tr><th align="right"><?=
-_("Summary").':'
-?></th>
-         <td><input class="wikitext" type="text" size="60"
-                    maxlength="256" name="blog[summary]" value="" /></td>
-     </tr>
-     <tr><th align="right"><?=
-_("Comment").':'
-?></th>
-         <td><textarea class="blogedit" rows="5" cols="60"
-                       name="blog[body]" wrap="virtual"></textarea></td>
-     </tr>
-     <tr><td colspan="2" align="center" class="submit-button"
-             ><input type="submit" value="<?=
-_("Add Comment")
-?>"
-                     name="blog[addblog]" class="wikiaction" /></td>
-     </tr>
-  </table>
+<form action="<?=$request->getPostURL()?>" method="post" name="editpage"
+      accept-charset="<?=$charset?>" id="wikiblog-form">
+  <input type="hidden" name="edit[pagename]" value="<?=$PAGENAME?>" />
+  <input type="hidden" name="mode" value="add" />
+  <div class="wikiblog-form">
+     <?= _("Headline").': ' ?><br />
+     <input id="wikiblog-summary" class="wikitext" type="text" style="width:540px" size="60"
+                   maxlength="256" name="edit[summary]" value="" />
+     <?= $EDIT_TOOLBAR ?>
+     <a name="editarea"></a>
+     <textarea id="edit-content" class="edit-content" rows="8" style="width:540px"
+               name="edit[content]"></textarea>
+     <br />
+     <input id="wikiblog-submit" type="submit" value="<?=_("Add Entry")?>"
+                     name="edit[save]" class="wikiaction" />
+  </div>
+
+<hr noshade="noshade" />
+<div id="newMarkup" class="wiki-edithelp">
+  <p><?= fmt("See %s tips for editing.", WikiLink(_("Help/GoodStyle"))) ?></p>
+  <?plugin IncludePage page=_("Help/TextFormattingRules") section=_("Synopsis") quiet=1?>
+</div>
+<?=$HIDDEN_INPUTS?>
 </form>
 </div>
-

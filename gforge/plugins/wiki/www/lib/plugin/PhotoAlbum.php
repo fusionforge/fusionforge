@@ -1,7 +1,7 @@
 <?php // -*-php-*-
-rcs_id('$Id: PhotoAlbum.php,v 1.14 2005/10/12 06:19:07 rurban Exp $');
+rcs_id('$Id: PhotoAlbum.php 6185 2008-08-22 11:40:14Z vargenau $');
 /*
- Copyright 2003, 2004, 2005 $ThePhpWikiProgrammingTeam
+ Copyright 2003,2004,2005,2007 $ThePhpWikiProgrammingTeam
  
  This file is part of PhpWiki.
 
@@ -42,6 +42,7 @@ rcs_id('$Id: PhotoAlbum.php,v 1.14 2005/10/12 06:19:07 rurban Exp $');
  *
  * "src": textfile of images or directory of images or a single image (local or remote)
  *      Local or remote e.g. http://myserver/images/MyPhotos.txt or http://myserver/images/
+ *      or /images/ or Upload:photos/
  *      Possible content of a valid textfile:
  *     photo-01.jpg; Me and my girlfriend
  *     photo-02.jpg
@@ -69,20 +70,22 @@ rcs_id('$Id: PhotoAlbum.php,v 1.14 2005/10/12 06:19:07 rurban Exp $');
 
 class ImageTile extends HtmlElement
 {
+    // go away, hack!
     function image_tile (/*...*/) {
         $el = new HTML ('img');
         $tag = func_get_args();
-        $params = "<img src='../ImageTile.php?url=". $tag[0]['src'];
+	$path = DATA_PATH . "/ImageTile.php";
+        $params = "<img src=\"$path?url=". $tag[0]['src'];
         if (!@empty($tag[0]['width']))
             $params .= "&width=" . $tag[0]['width'];
         if (!@empty($tag[0]['height']))
             $params .= "&height=" . $tag[0]['height'];
         if (!@empty($tag[0]['width']))
-            $params .= "' width='" . $tag[0]['width'];
+            $params .= '" width="' . $tag[0]['width'];
         if (!@empty($tag[0]['height']))
-            $params .= "' height='" . $tag[0]['height'];
+            $params .= '" height="' . $tag[0]['height'];
         
-        $params .= "' alt='" . $tag[0]['alt'] . "' />";
+        $params .= '" alt="' . $tag[0]['alt'] . '" />';
         return $el->raw ($params);
     }
 }
@@ -100,7 +103,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.14 $");
+                            "\$Revision: 6185 $");
     }
 
 // Avoid nameclash, so it's disabled. We allow any url.
@@ -199,11 +202,11 @@ extends WikiPlugin
             $attributes = array_merge($attributes, "alt");
             $attributes = array_merge($attributes, "nowrap");
             $cellwidth  = 'auto'; // else cell won't nowrap
-            $width      = 50;
+	    if ($width == 'auto') $width = 70;
         } elseif ($mode == 'list') {
             $numcols    = 1;
             $cellwidth  = "auto";
-            $width = 50;
+	    if ($width == 'auto') $width = 50;
         } elseif ($mode == 'slide' ) {
             $tableheight = 0; 
             $cell_width = 0;
@@ -283,27 +286,29 @@ display_slides();"));
                                   E_USER_NOTICE);
                 }
             }
-    
             $newwidth = $this->newSize($size[0], $width);
-            if (($mode == 'thumbs' || $mode == 'tiles' || $mode == 'list')) {
-                if (!empty($size[0]))
-                    $newheight = round (50 * $size[1] / $size[0]);
-                else  $newheight = '';
-                if ($height == 'auto') $height=150;
-            }
-            else
-                $newheight = $this->newSize($size[1], $height);
-                  
             if ($width != 'auto' && $newwidth > 0) {
                 $params = array_merge($params, array("width" => $newwidth));
             }
-            if ($height != 'auto' && $newheight > 0) {
-                $params = array_merge($params, array("height" => $newheight));
+            if (($mode == 'thumbs' || $mode == 'tiles' || $mode == 'list')) {
+                if (!empty($size[0])) {
+                    $newheight = round ($newwidth * $size[1] / $size[0]);
+		    $params['width'] = $newwidth;
+		    $params['height'] = $newheight;
+		} else  $newheight = '';
+                if ($height == 'auto') $height=150;
             }
+            else {
+                $newheight = $this->newSize($size[1], $height);
+		if ($height != 'auto' && $newheight > 0) {
+		    $params = array_merge($params, array("height" => $newheight));
+		}
+	    }
     
             // cell operations
             $cell = array('align'   => "center",
                           'valign'  => "top",
+			  'class'   => 'photoalbum cell',
                           'bgcolor' => "$color");
             if ($cellwidth != 'auto') {
                 if ($cellwidth == 'equal') {
@@ -319,16 +324,16 @@ display_slides();"));
                 $cell = array_merge($cell, array("nowrap" => "nowrap"));
             }
             //create url to display single larger version of image on page
-            $url     = WikiURL($request->getPage(),
-                               array("p" => basename($value["name"])))
+            $url = WikiURL($request->getPage(),
+			   array("p" => basename($value["name"])))
                 . "#"
                 . basename($value["name"]);
  
-            $b_url    = WikiURL($request->getPage(),
-                                array("h" => basename($value["name"])))
+            $b_url = WikiURL($request->getPage(),
+			     array("h" => basename($value["name"])))
                 . "#"
                 . basename($value["name"]);
-            $url_text   = $link 
+            $url_text = $link 
                 ? HTML::a(array("href" => "$url"), basename($value["desc"])) 
                 : basename($value["name"]);
             if (! $p) {
@@ -355,26 +360,23 @@ display_slides();"));
                                      HTML::a(array("href" => "$b_url"), HTML::img($params))) : HTML::img($params);
             }
             if ($mode == 'list')
-            $url_text = HTML::a(array("id" => basename($value["name"])),
+		$url_text = HTML::a(array("id" => basename($value["name"])),
                                       $url_text);
             // here we use different modes
             if ($mode == 'tiles') {
                 $row->pushContent(
                     HTML::td($cell,
-                    HTML::table(array("cellpadding" => 1, "border" => 0),
-                    HTML::tr(
-                             HTML::td(array("valign" => "top", "rowspan" => 2),
-                                            $url_image),
-                             HTML::td(array("valign" => "top", "nowrap" => 0),
-                                            HTML::span(array('class'=>'boldsmall'),
-                                                      ($url_text)),
-                                            HTML::br(),
-                                            HTML::span(array('class'=>'gensmall'),
-                                                       ($size[0].
-                                                       " x ".
-                                                       $size[1].
-                                                       " pixels")))
-                    ))));
+			     HTML::div(array('valign' => 'top'), $url_image),
+			     HTML::div(array('valign' => 'bottom'),
+				       HTML::span(array('class'=>'boldsmall'),
+						  ($url_text)),
+				       HTML::br(),
+				       HTML::span(array('class'=>'gensmall'),
+						  ($size[0].
+						   " x ".
+						   $size[1].
+						   " pixels"))))
+		    );
             } elseif ($mode == 'list') {
                 $desc = ($showdesc != 'none') ? $value["desc"] : '';
                 $row->pushContent(
@@ -465,7 +467,8 @@ display_slides();"));
             } elseif ($mode == 'row') {
                 $desc = ($showdesc != 'none') ? HTML::p($value["desc"]) : '';
                 $row->pushContent(
-                        HTML::table(array("style" => "display: inline"),
+				  HTML::table(array("style" => "display: inline", 
+						    'class' > "photoalbum row"),
                               HTML::tr(HTML::td($url_image)),
                               HTML::tr(HTML::td(array("class" => "gensmall",
                                                       "style" => "text-align: center; "
@@ -492,9 +495,10 @@ display_slides();"));
         $table_attributes = array("border"      => 0,
                                   "cellpadding" => 5,
                                   "cellspacing" => 2,
-                                  "width"       => $tablewidth);
+				  "class"       => "photoalbum",
+                                  "width"       => $tablewidth ? $tablewidth : "100%");
         
-        if (!@empty($tableheight))
+        if (!empty($tableheight))
             $table_attributes = array_merge($table_attributes,
                                             array("height"  => $tableheight));
         if ($mode != 'row')
@@ -549,6 +553,10 @@ display_slides();"));
      */
     function fromFile($src, &$photos, $webpath='') {
         $src_bak = $src;
+        if (preg_match("/^Upload:(.*)$/", $src, $m)) {
+            $src = getUploadFilePath() . $m[1];
+            $webpath = getUploadDataPath() . $m[1];
+        }
         //there has a big security hole... as loading config/config.ini !
         if (!preg_match('/(\.csv|\.jpg|\.jpeg|\.png|\.gif|\/)$/',$src)) {
            return $this->error(_("File extension for csv file has to be '.csv'"));
@@ -559,8 +567,11 @@ display_slides();"));
         if (preg_match('/^(http|ftp|https):\/\//i', $src)) {
             $contents = url_get_contents($src);
             $web_location = 1;
-        } else 
+        } else {
             $web_location = 0;
+            if (string_ends_with($src,"/"))
+               $src = substr($src,0,-1);
+        }
         if (!file_exists($src) and @file_exists(PHPWIKI_DIR . "/$src")) {
             $src = PHPWIKI_DIR . "/$src";
         }
@@ -630,7 +641,7 @@ display_slides();"));
             fclose ($fp);
         
         } elseif ($web_location == 1) {
-            //TODO: checks if the file is an image
+            //TODO: check if the file is an image
             $contents = preg_split('/\n/',$contents);
             while (list($key,$value) = each($contents)) {
                 $data = preg_split('/\;/',$value);
@@ -648,7 +659,7 @@ display_slides();"));
     }
 };
 
-// $Log: PhotoAlbum.php,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.14  2005/10/12 06:19:07  rurban
 // protect unsafe calls
 //

@@ -1,6 +1,6 @@
 Date: Sat, 8 Jan 2005 22:55:20 +0100
 Mime-Version: 1.0 (Produced by PhpWiki 1.3.11pre-20041223)
-X-Rcs-Id: $Id: AlteTextFormatierungsRegeln,v 1.3 2005/01/08 22:41:43 rurban Exp $
+X-Rcs-Id: $Id: AlteTextFormatierungsRegeln 6193 2008-08-23 17:49:48Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=AlteTextFormatierungsRegeln;
   flags=PAGE_LOCKED;
@@ -14,7 +14,7 @@ AlteTextFormatierungsRegeln%%%
 <strong>Listen:</strong>~* für Rasterpunkte u. Ebenen, # für numerierte Listen, <em><strong>;</strong> Das Wort <strong>:</strong> Die Wortbestimmung</em> für glossarähnliche Listen.%%%
 <strong>Querverweise:</strong> in ~GroßbuchstabenZusammenschreiben oder in eckige Klammern setzen ~[ein Link] oder URL ~[~http://cool.wiki.int/].%%%
 <strong>Fußnoten:</strong> Benutze ~[1],~[2],~[3],... wie diese hier #[|ftnt_ref_1]<sup>~[[1|#ftnt_1]~]</sup>. Siehe Fußnoten für das Ziel. (If the ~[ is in the first column, it is a footnote <em>definition</em> rather than a footnote <em>reference</em>.)
-<strong>Links verhindern:</strong> das Wort mit einem »~!« beginnen: ~!~NichtLinken, Links so angeben: ~[~[Text | URL] (zweimal »[«). Beachte, daß bei den neuen TextFormatierungsRegeln das Zeichen »~~« verwendet wird.%%%
+<strong>Links verhindern:</strong> das Wort mit einem »~!« beginnen: ~!~NichtLinken, Links so angeben: ~[~[Text | URL] (zweimal »[«). Beachte, dass bei den neuen TextFormatierungsRegeln das Zeichen »~~« verwendet wird.%%%
 <strong>Verschiedenes:</strong> »~!«, »~!~!«, »~!~!~!« für Überschriften, »%%<em></em>%« für Zeilenvorschubzeichen, u. »---<em></em>-« zeichnet eine Linie.%%%
 <strong>Tabellen:</strong> »|« in der ersten Zeile, »|« für weitere Spalten, »|>« rechtsbündig, »|<« linksbündig, »|^« zentriert (Vorgabe), »||« span columns, »|v« span rows
 

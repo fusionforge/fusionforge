@@ -1,5 +1,4 @@
 <?php
-
 /*
   This file is part of, or distributed with, libXMLRPC - a C library for 
   xml-encoded function calls.
@@ -69,7 +68,10 @@ function xu_query_http_post($request, $host, $uri, $port, $debug,
         $fsockopen = $secure ? "fsockopen_ssl" : "fsockopen";
 
         dbg1("opening socket to host: $host, port: $port, uri: $uri", $debug);
-        $query_fd = $fsockopen($host, $port, $errno, $errstr, 10);
+	if ($secure)
+        	$query_fd = fsockopen_ssl($host, $port, $errno, $errstr, 10);
+	else
+        	$query_fd = fsockopen($host, $port, $errno, $errstr, 10);
 
         if ($query_fd) {
 
@@ -90,9 +92,7 @@ function xu_query_http_post($request, $host, $uri, $port, $debug,
                 $request;
 
            dbg1("sending http request:</em><br /> <xmp>\n$http_request\n</xmp>", $debug);
-
            fputs($query_fd, $http_request, strlen($http_request));
-
            dbg1("receiving response...", $debug);
 
            $header_parsed = false;
@@ -193,7 +193,7 @@ function find_and_decode_xml($buf, $debug) {
  */
 function xu_rpc_http_concise($params) {
    $host = $uri = $port = $method = $args = $debug = null;
-   $timeout = $user = $pass = $secure = $debug = null;
+   $timeout = $user = $pass = $secure = $cookies = null;
 
    extract($params);
 
@@ -211,9 +211,27 @@ function xu_rpc_http_concise($params) {
    $response_buf = "";
    if ($host && $uri && $port) {
        $request_xml = xmlrpc_encode_request($method, $args, $output);
-       $response_buf = xu_query_http_post($request_xml, $host, $uri, $port, $debug,
-                                          $timeout, $user, $pass, $secure);
-
+       if (isWindows() and !check_php_version(4,3,0)) {
+       	   include_once("lib/HttpClient.php");
+	   $http = new HttpClient($host, $port);
+	   if ($timeout)
+	       $http->timeout = $timeout;
+	   $http->setDebug($debug);
+	   // todo: new auth and/or session cookies
+	   if ($user)
+	       $http->setAuthorization($user, $pass);
+	   if ($cookies)
+	       $http->setCookies($cookies);
+	   if ($http->post($uri, $request_xml))
+	       $response_buf = $http->content;
+	   else {
+	       $response_buf = $http->errormsg;
+	       return $response_buf;
+	   }
+       } else {
+	   $response_buf = xu_query_http_post($request_xml, $host, $uri, $port, $debug,
+					      $timeout, $user, $pass, $secure);
+       }
        $retval = find_and_decode_xml($response_buf, $debug);
    }
    return $retval;

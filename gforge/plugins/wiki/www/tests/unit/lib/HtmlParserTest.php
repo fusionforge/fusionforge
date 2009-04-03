@@ -1,5 +1,5 @@
 <?php
-rcs_id('$Id: HtmlParserTest.php,v 1.2 2004/07/09 12:29:26 rurban Exp $');
+rcs_id('$Id: HtmlParserTest.php 6208 2008-08-26 15:25:38Z vargenau $');
 
 /* Copyright (C) 2004, Reini Urban <rurban@x-ray.at>
  */
@@ -13,10 +13,10 @@ class HtmlParserTest extends phpwiki_TestCase {
 
     function testSimple() {
         $html2wiki = array(
-                           "<b>bold</b>"              => "*bold*",
-                           "<strong>strong</strong>"  => "*strong*",
-                           "<i>italic</i>"	     => "_italic_",
-                           "<em>emphasized</em>"     => "_emphasized_",
+                           "<B>bold</B>"              => "*bold*",
+                           "<STRONG>strong</STRONG>"  => "*strong*",
+                           "<I>italic</I>"	     => "_italic_",
+                           "<EM>emphasized</EM>"     => "_emphasized_",
                            "<HR>"		     => "----",
                            "<DT><DD>Indent</DD></DT>" => ";:Indent",
                            "<NOWIKI>nowiki</NOWIKI>"  => "<verbatim>\nnowiki\n</verbatim>",

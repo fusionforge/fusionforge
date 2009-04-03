@@ -1,7 +1,7 @@
 <?php // -*-php-*- ?>
-<!-- $Id: info.tmpl,v 1.3 2005/08/28 11:04:08 rurban Exp $ -->
+<!-- $Id: info.tmpl 6212 2008-08-26 16:51:42Z vargenau $ -->
 <?php
-
+if (empty($revision)) $revision = $page->getCurrentRevision(false);
 $modifed = $WikiTheme->formatDateTime($revision->get('mtime'));
 
 $author = $revision->get('author');
@@ -46,10 +46,10 @@ $markupVersion = ($markupVersion = $revision->get('markup'))
 $summary = HTML::textarea(array('name' => 'summary',
                                 'class' => 'summary',
                                 /* use fixed dimensions? */
-                                'rows' => $request->getPref('editHeight')/4,
-                                'cols' => $request->getPref('editWidth')/2,
+                                'rows' => intval($request->getPref('editHeight')/4),
+                                'cols' => intval($request->getPref('editWidth')/2),
                                 'readonly' => 'readonly',
-                                'wrap' => 'virtual'), /* for Netscape 4 */
+                               ),
                           $revision->get('summary'));
 
 if ($is_current = $revision->isCurrent()) {
@@ -185,7 +185,7 @@ if (0 and isSubPage($page->getName())) {
 
 <?php
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -                         
-// $Log: info.tmpl,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.3  2005/08/28 11:04:08  rurban
 // fix Article link, reorder Discussion before admin actions, use default SEP in info, custom Sep in actionbar
 //

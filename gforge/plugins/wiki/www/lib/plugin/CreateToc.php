@@ -1,7 +1,8 @@
 <?php // -*-php-*-
-rcs_id('$Id: CreateToc.php,v 1.34 2007/01/28 22:47:06 rurban Exp $');
+rcs_id('$Id: CreateToc.php 6230 2008-09-04 16:01:29Z vargenau $');
 /*
  Copyright 2004,2005 $ThePhpWikiProgrammingTeam
+ Copyright 2008 Marc-Etienne Vargenau, Alcatel-Lucent
 
  This file is part of PhpWiki.
 
@@ -21,12 +22,11 @@ rcs_id('$Id: CreateToc.php,v 1.34 2007/01/28 22:47:06 rurban Exp $');
  */
 
 /**
- * CreateToc:  Automatically link to headers
+ * CreateToc:  Create a Table of Contents and automatically link to headers
  *
  * Usage:   
- *  <?plugin CreateToc headers=!!!,!! with_toclink||=1 
- *                     jshide||=1 ?>
- * @author:  Reini Urban
+ *  <?plugin CreateToc arguments ?>
+ * @author:  Reini Urban, Marc-Etienne Vargenau
  *
  * Known problems: 
  * - MacIE will not work with jshide.
@@ -47,47 +47,79 @@ extends WikiPlugin
     }
 
     function getDescription() {
-        return _("Automatically link headers at the top");
+        return _("Create a Table of Contents and automatically link to headers");
     }
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.34 $");
+                            "\$Revision: 6230 $");
     }
 
     function getDefaultArguments() {
-        return array( 'pagename'  => '[pagename]', // TOC of another page here?
-                      // or headers=1,2,3 is also possible.
-                      'headers'   => "!!!,!!,!",   // "!!!"=>h1, "!!"=>h2, "!"=>h3
-                      'noheader'  => 0,            // omit <h1>Table of Contents</h1>
-                      'position'  => 'right',      // or left
-                      'with_toclink' => 0,         // link back to TOC
-                      'jshide'    => 0,            // collapsed TOC as DHTML button
-		      'extracollapse' => 1,        // provide an entry +/- link to collapse
-                      'liststyle' => 'dl',         // 'dl' or 'ul' or 'ol'
-                      'indentstr' => '&nbsp;&nbsp;',
-		      'with_counter' => 0,
-                      );
+        return array('extracollapse' => 1,            // provide an entry +/- link to collapse
+                     'firstlevelstyle' => 'number',   // 'number', 'letter' or 'roman'
+                     'headers'   =>  "1,2,3,4,5",     // "!!!"=>h2, "!!"=>h3, "!"=>h4
+                                                      // "1"=>h2, "2"=>h3, "3"=>h4, "4"=>h5, "5"=>h6
+                     'indentstr' => '&nbsp;&nbsp;',
+                     'jshide'    => 0,                // collapsed TOC as DHTML button
+                     'liststyle' => 'dl',             // 'dl' or 'ul' or 'ol'
+                     'noheader'  => 0,                // omit "Table of Contents" header
+                     'notoc'     => 0,                // do not display TOC, only number headers
+                     'pagename'  => '[pagename]',     // TOC of another page here?
+                     'position'  => 'full',           // full, right or left
+                     'width'     => '200px',
+                     'with_counter' => 0,
+                     'with_toclink' => 0,             // link back to TOC
+                    );
     }
     // Initialisation of toc counter
     function _initTocCounter() {
-        $counter = array(1=>1, 2=>0, 3=>0);
+        $counter = array(1=>0, 2=>0, 3=>0, 4=>0, 5=>0);
         return $counter;
     }
 
     // Update toc counter with a new title
     function _tocCounter(&$counter, $level) {
         $counter[$level]++;
-        $level--;
-        for($i = $level; $i > 0; $i--) {
-            $counter[$level] = 0;
+        for($i = $level+1; $i <= 5; $i++) {
+            $counter[$i] = 0;
+        }
+    }
+
+    function _roman_counter($number) {
+
+        $n = intval($number);
+        $result = '';
+
+        $lookup = array('C' => 100, 'XC' => 90, 'L' => 50, 'XL' => 40,
+                        'X' => 10, 'IX' => 9, 'V' => 5, 'IV' => 4, 'I' => 1);
+
+        foreach ($lookup as $roman => $value) {
+            $matches = intval($n / $value);
+            $result .= str_repeat($roman, $matches);
+            $n = $n % $value;
+        }
+        return $result;
+    }
+
+    function _letter_counter($number) {
+        if ($number <= 26) {
+            return chr(ord("A") + $number - 1);
+        } else {
+            return chr(ord("A") + ($number/26) - 1) . chr(ord("A") + ($number%26));
         }
     }
 
     // Get string corresponding to the current title
-    function _getCounter(&$counter, $level) {
-        $str=$counter[3];
-        for($i = 2; $i > 0; $i--) {
+    function _getCounter(&$counter, $level, $firstlevelstyle) {
+        if ($firstlevelstyle == 'roman') {
+            $str= $this->_roman_counter($counter[1]);
+        } else if ($firstlevelstyle == 'letter') {
+            $str= $this->_letter_counter($counter[1]);
+        } else {
+            $str=$counter[1];
+        }
+        for($i = 2; $i <= 5; $i++) {
             if($counter[$i] != 0)
                 $str .= '.'.$counter[$i];
         }
@@ -99,15 +131,24 @@ extends WikiPlugin
     		           array('\/','\.','\?','\*'), $heading);
     }
     
-    // Get HTML header corresponding to current level (level is set of !)
+    // Get HTML header corresponding to current level (level is set of ! or =)
     function _getHeader($level) {
-     	$count = substr_count($level,'!');
-     	switch ($count) {
-     	    case 1: $h = "h4"; break;
-   	    case 2: $h = "h3"; break;
-     	    case 3: $h = "h2"; break;
-     	}
-        return $h;
+
+        $count = substr_count($level,'!');
+        switch ($count) {
+            case 3: return "h2";
+            case 2: return "h3";
+            case 1: return "h4";
+        }
+        $count = substr_count($level,'=');
+        switch ($count) {
+            case 2: return "h2";
+            case 3: return "h3";
+            case 4: return "h4";
+            case 5: return "h5";
+            case 6: return "h6";
+        }
+        return "";
     }
 
     function _quote($heading) {
@@ -199,7 +240,7 @@ extends WikiPlugin
     
     // Feature request: proper nesting; multiple levels (e.g. 1,3)
     function extractHeaders (&$content, &$markup, $backlink=0, 
-                             $counter=0, $levels=false, $basepage='') 
+                             $counter=0, $levels=false, $firstlevelstyle='number', $basepage='')
     {
         if (!$levels) $levels = array(1,2);
         $tocCounter = $this->_initTocCounter();        
@@ -209,18 +250,26 @@ extends WikiPlugin
         $j = 0;
         for ($i=0; $i<count($content); $i++) {
             foreach ($levels as $level) {
-                if ($level < 1 or $level > 3) continue;
-                if (preg_match('/^\s*(!{'.$level.','.$level.'})([^!].*)$/',
-                               $content[$i], $match)) 
+                if ($level < 1 or $level > 5) continue;
+                $phpwikiclassiclevel = 4 -$level;
+                $wikicreolelevel = $level + 1;
+                if ($phpwikiclassiclevel < 1 or $phpwikiclassiclevel > 3) continue;
+                if ((preg_match('/^\s*(!{'.$phpwikiclassiclevel.','.$phpwikiclassiclevel.'})([^!].*)$/', $content[$i], $match))
+                 or (preg_match('/^\s*(={'.$wikicreolelevel.','.$wikicreolelevel.'})([^=].*)$/', $content[$i], $match)) )
                 {
                     $this->_tocCounter($tocCounter, $level);                	
                     if (!strstr($content[$i],'#[')) {
                         $s = trim($match[2]);
+                        // If it is Wikicreole syntax, remove '='s at the end
+                        if (string_starts_with($match[1], "=")) {
+                            $s = trim($s, "=");
+                            $s = trim($s);
+                        }
                         $anchor = $this->_nextAnchor($s);
                         $manchor = MangleXmlIdentifier($anchor);
                         $texts = $s;
                         if($counter) {
-                            $texts = $this->_getCounter($tocCounter, $level).' '.$s; 
+                            $texts = $this->_getCounter($tocCounter, $level, $firstlevelstyle).' '.$s;
                         }
                         $headers[] = array('text' => $texts, 
                                            'anchor' => $anchor, 
@@ -238,7 +287,7 @@ extends WikiPlugin
                             $x = $markup->_content[$j];
 			    $qheading = $this->_quote($s);
 			    if ($counter)
-				$counterString = $this->_getCounter($tocCounter, $level);
+				 $counterString = $this->_getCounter($tocCounter, $level, $firstlevelstyle);
                             if (($hstart === 0) && is_string($markup->_content[$j])) {
                                 if ($backlink) {
                                     if ($counter)
@@ -309,6 +358,9 @@ extends WikiPlugin
             //trigger_error(_("jshide set to 0 on Mac IE"), E_USER_NOTICE);
             $jshide = 0;
         }
+        if (($notoc) or ($liststyle == 'ol')) {
+            $with_counter = 1;
+        }
         $page = $dbi->getPage($pagename);
         $current = $page->getCurrentRevision();
         //FIXME: I suspect this only to crash with Apache2
@@ -320,12 +372,13 @@ extends WikiPlugin
         }
         $content = $current->getContent();
         $html = HTML::div(array('class' => 'toc', 'id'=>'toc'));
-        if ($liststyle == 'dl')
-            $list = HTML::dl(array('id'=>'toclist','class' => 'toc'));
-        elseif ($liststyle == 'ul')
-            $list = HTML::ul(array('id'=>'toclist','class' => 'toc'));
-        elseif ($liststyle == 'ol')
-            $list = HTML::ul(array('id'=>'toclist','class' => 'toc'));
+        if ($notoc) {
+            $html->setAttr('style','display:none;');
+        }
+        if (($position == "left") or ($position == "right")) {
+            $html->setAttr('style','float:'.$position.'; width:'.$width.';');
+        }
+        $list = HTML::div(array('id'=>'toclist'));
         if (!strstr($headers,",")) {
             $headers = array($headers);	
         } else {
@@ -339,7 +392,7 @@ extends WikiPlugin
                 $level = min(max(1, $hcount),3);
                 $levels[] = $level;
             } else {
-                $level = min(max(1, (int) $h), 3);
+                $level = min(max(1, (int) $h), 5);
                 $levels[] = $level;
             }
         }
@@ -347,64 +400,16 @@ extends WikiPlugin
             require_once("lib/InlineParser.php");
         if ($headers = $this->extractHeaders($content, $dbi->_markup, 
                                              $with_toclink, $with_counter, 
-                                             $levels, $basepage)) 
+                                             $levels, $firstlevelstyle, $basepage))
         {
-            $h2counter=0;
-            $h3counter=0;
-            $h4counter=0;
-	    $previous_level=1;
             foreach ($headers as $h) {
                 // proper heading indent
                 $level = $h['level'];
-                $indent = 3 - $level;
-		if ($level == $previous_level) {
-                    /* increment counter */
-		    if ($level == 3) {
-                        $h2counter++;
-                    } else if ($level == 2) {
-                        $h3counter++;
-                    } else {
-                        $h4counter++;
-                    }
-                } else {
-                    /* reset counter */ 
-		    if ((previous_level == 2) && ($level == 3)) { 
-		        $h2counter++;
-			$h3counter=0;
-			$h4counter=0;
-		    } else if ($previous_level == 1) { 
-		        if ($level == 3) { 
-		            $h2counter++; 
-			    $h3counter=0;
-			    $h4counter=0;
-                        }
-		        if ($level == 2) { 
-		            $h3counter++; 
-			    $h4counter=0;
-                        }
-		    }    
-		}
-
+                $indent = $level - 1;
                 $link = new WikiPageName($pagename,$page,$h['anchor']);
                 $li = WikiLink($link,'known',$h['text']);
-                if ($liststyle == 'dl') {
-                    $list->pushContent(HTML::dt(HTML::raw
-                        (str_repeat($indentstr,$indent)),$li));
-		} else if ($liststyle == 'ol') {
-                    if ($level == 3) {
-                        $prefix = $h2counter;
-                    } else if ($level == 2) {
-                        $prefix = $h2counter . "." . $h3counter;
-		    } else { 
-                        $prefix = $h2counter . "." . $h3counter . "." . $h4counter;
-		    }
-		    $prefix = str_repeat($indentstr,$indent) . $prefix . "&nbsp;";
-                    $list->pushContent(HTML::li(HTML::raw
-                        ($prefix),$li));
-		} else {
-                    $list->pushContent(HTML::li(HTML::raw
-                        (str_repeat($indentstr,$indent)),$li));
-		}
+                $list->pushContent(HTML::p(HTML::raw
+                       (str_repeat($indentstr,$indent)),$li));
             }
         }
 	$list->setAttr('style','display:'.($jshide?'none;':'block;'));
@@ -412,10 +417,10 @@ extends WikiPlugin
         $close = DATA_PATH.'/'.$WikiTheme->_findFile("images/folderArrowClosed.png");
 	$html->pushContent(Javascript("
 function toggletoc(a) {
-  toc=document.getElementById('toclist')
+  var toc=document.getElementById('toclist')
   //toctoggle=document.getElementById('toctoggle')
-  open='".$open."'
-  close='".$close."'
+  var open='".$open."'
+  var close='".$close."'
   if (toc.style.display=='none') {
     toc.style.display='block'
     a.title='"._("Click to hide the TOC")."'
@@ -426,6 +431,8 @@ function toggletoc(a) {
     a.src = close
   }
 }"));
+      if ($noheader) {
+      } else {
 	if ($extracollapse)
 	    $toclink = HTML(_("Table of Contents"),
 			    " ",
@@ -433,128 +440,29 @@ function toggletoc(a) {
 			    HTML::img(array(
                                             'id'=>'toctoggle',
                                             'class'=>'wikiaction',
-                                            'title'=>_("Click to display the TOC"),
-                                            'alt'=>_("Click to display the TOC"),
+                                            'title'=>_("Click to display to TOC"),
                                             'onclick'=>"toggletoc(this)",
-                                            'height' => 15,
-                                            'width' => 15,
                                             'border' => 0,
+                                            'alt' => 'toctoggle',
                                             'src' => $jshide ? $close : $open )));
 	else
 	    $toclink = HTML::a(array('name'=>'TOC',
 				     'class'=>'wikiaction',
 				     'title'=>_("Click to display"),
 				     'onclick'=>"toggletoc(this)"),
-			       _("Table Of Contents"),
+			       _("Table of Contents"),
 			       HTML::span(array('style'=>'display:none',
 						'id'=>'toctoggle')," "));
-	$html->pushContent(HTML::h4($toclink));
-        $html->pushContent($list);
-        return $html;
+	$html->pushContent(HTML::p(array('id'=>'toctitle'), $toclink));
+      }
+      $html->pushContent($list);
+      if (count($headers) == 0) {
+          // Do not display an empty TOC
+          $html->setAttr('style','display:none;');
+      }
+      return $html;
     }
 };
-
-// $Log: CreateToc.php,v $
-// Revision 1.34  2007/01/28 22:47:06  rurban
-// fix # back link
-//
-// Revision 1.33  2007/01/28 22:37:04  rurban
-// beautify +/- collapse icon
-//
-// Revision 1.32  2007/01/20 11:25:30  rurban
-// remove align
-//
-// Revision 1.31  2007/01/09 12:35:05  rurban
-// Change align to position. Add extracollapse. js now always active, jshide just denotes the initial state.
-//
-// Revision 1.30  2006/12/22 17:49:38  rurban
-// fix quoting
-//
-// Revision 1.29  2006/04/15 12:26:54  rurban
-// need basepage for subpages like /Remove (within CreateTOC)
-//
-// Revision 1.28  2005/10/12 06:15:25  rurban
-// just aesthetics
-//
-// Revision 1.27  2005/10/10 19:50:45  rurban
-// fix the missing formatting problems, add with_counter arg by ?? (20050106), Thanks to ManuelVacelet for the testcase
-//
-// Revision 1.26  2004/09/20 14:07:16  rurban
-// fix Constant toc_full_syntax already defined warning
-//
-// Revision 1.25  2004/07/08 20:30:07  rurban
-// plugin->run consistency: request as reference, added basepage.
-// encountered strange bug in AllPages (and the test) which destroys ->_dbi
-//
-// Revision 1.24  2004/06/28 13:27:03  rurban
-// CreateToc disabled for old markup and Apache2 only
-//
-// Revision 1.23  2004/06/28 13:13:58  rurban
-// CreateToc disabled for old markup
-//
-// Revision 1.22  2004/06/15 14:56:37  rurban
-// more allow_call_time_pass_reference false fixes
-//
-// Revision 1.21  2004/06/13 09:45:23  rurban
-// display bug workaround for MacIE browsers, jshide: 0
-//
-// Revision 1.20  2004/05/11 13:57:46  rurban
-// enable TOC_FULL_SYNTAX per default
-// don't <a name>$header</a> to disable css formatting for such anchors
-//   => <a name></a>$header
-//
-// Revision 1.19  2004/05/08 16:59:27  rurban
-// requires optional TOC_FULL_SYNTAX constnat to enable full link and
-// wikiword syntax in headers.
-//
-// Revision 1.18  2004/04/29 21:55:15  rurban
-// fixed TOC backlinks with USE_PATH_INFO false
-//   with_toclink=1, sf.net bug #940682
-//
-// Revision 1.17  2004/04/26 19:43:03  rurban
-// support most cases of header markup. fixed duplicate MangleXmlIdentifier name
-//
-// Revision 1.16  2004/04/26 14:46:14  rurban
-// better comments
-//
-// Revision 1.14  2004/04/21 04:29:50  rurban
-// write WikiURL consistently (not WikiUrl)
-//
-// Revision 1.12  2004/03/22 14:13:53  rurban
-// fixed links to equal named headers
-//
-// Revision 1.11  2004/03/15 09:52:59  rurban
-// jshide button: dynamic titles
-//
-// Revision 1.10  2004/03/14 20:30:21  rurban
-// jshide button
-//
-// Revision 1.9  2004/03/09 19:24:20  rurban
-// custom indentstr
-// h2 toc header
-//
-// Revision 1.8  2004/03/09 19:05:12  rurban
-// new liststyle arg. default: dl (no bullets)
-//
-// Revision 1.7  2004/03/09 11:51:54  rurban
-// support jshide=1: DHTML button hide/unhide TOC
-//
-// Revision 1.6  2004/03/09 10:25:37  rurban
-// slightly better formatted TOC indentation
-//
-// Revision 1.5  2004/03/09 08:57:10  rurban
-// convert space to "_" instead of "x20." in anchors
-// proper heading indent
-// handle duplicate headers
-// allow multiple headers like "!!!,!!" or "1,2"
-//
-// Revision 1.4  2004/03/02 18:21:29  rurban
-// typo: ref=>href
-//
-// Revision 1.1  2004/03/01 18:10:28  rurban
-// first version, without links, anchors and jscript folding
-//
-//
 
 // For emacs users
 // Local Variables:

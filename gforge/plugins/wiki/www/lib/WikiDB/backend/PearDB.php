@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: PearDB.php,v 1.92 2005/09/14 06:04:43 rurban Exp $');
+rcs_id('$Id: PearDB.php,v 1.109 2007/11/17 15:30:39 rurban Exp $');
 
 require_once('lib/WikiDB/backend.php');
 //require_once('lib/FileFinder.php');
@@ -34,7 +34,7 @@ extends WikiDB_backend
 
         // Install filter to handle bogus error notices from buggy DB.php's.
         // TODO: check the Pear_DB version, but how?
-        if (0) {
+        if (DEBUG) {
             global $ErrorManager;
             $ErrorManager->pushErrorHandler(new WikiMethodCb($this, '_pear_notice_filter'));
             $this->_pearerrhandler = true;
@@ -55,7 +55,10 @@ extends WikiDB_backend
         if (DB::isError($dbh)) {
             trigger_error(sprintf("Can't connect to database: %s",
                                   $this->_pear_error_message($dbh)),
-                          E_USER_ERROR);
+                          isset($dbparams['_tryroot_from_upgrade']) // hack!
+                            ? E_USER_WARNING : E_USER_ERROR);
+            if (isset($dbparams['_tryroot_from_upgrade']))
+                return;                
         }
         $dbh->setErrorHandling(PEAR_ERROR_CALLBACK,
                                array($this, '_pear_error_callback'));
@@ -70,7 +73,7 @@ extends WikiDB_backend
                     'nonempty_tbl' => $prefix . 'nonempty');
         $page_tbl = $this->_table_names['page_tbl'];
         $version_tbl = $this->_table_names['version_tbl'];
-        $p = strlen(PAGE_PREFIX)+1;
+        $p = strlen('_g'.$GLOBALS['group_id'].'_')+1;
         $this->page_tbl_fields = "$page_tbl.id AS id, substring($page_tbl.pagename from $p) AS pagename, $page_tbl.hits AS hits";
         $this->version_tbl_fields = "$version_tbl.version AS version, $version_tbl.mtime AS mtime, ".
             "$version_tbl.minor_edit AS minor_edit, $version_tbl.content AS content, $version_tbl.versiondata AS versiondata";
@@ -112,7 +115,7 @@ extends WikiDB_backend
     function is_wiki_page($pagename) {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
-        $pagename = PAGE_PREFIX.$pagename;
+        $pagename = '_g'.$GLOBALS['group_id'].'_'.$pagename;
         return $dbh->getOne(sprintf("SELECT $page_tbl.id as id"
                                     . " FROM $nonempty_tbl, $page_tbl"
                                     . " WHERE $nonempty_tbl.id=$page_tbl.id"
@@ -123,7 +126,7 @@ extends WikiDB_backend
     function get_all_pagenames() {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
-        $pat = PAGE_PREFIX;
+        $pat = '_g'.$GLOBALS['group_id'].'_';
         $p = strlen($pat)+1;
         return $dbh->getCol("SELECT substring(pagename from $p)"
                             . " FROM $nonempty_tbl, $page_tbl"
@@ -134,7 +137,7 @@ extends WikiDB_backend
     function numPages($filter=false, $exclude='') {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
-        $pat = PAGE_PREFIX;
+        $pat = '_g'.$GLOBALS['group_id'].'_';
         $p = strlen($pat)+1;
         return $dbh->getOne("SELECT count(*)"
                             . " FROM $nonempty_tbl, $page_tbl"
@@ -148,7 +151,7 @@ extends WikiDB_backend
         // Note that this will fail silently if the page does not
         // have a record in the page table.  Since it's just the
         // hit count, who cares?
-        $pagename = PAGE_PREFIX.$pagename;
+        $pagename = '_g'.$GLOBALS['group_id'].'_'.$pagename;
         $dbh->query(sprintf("UPDATE %s SET hits=hits+1 WHERE pagename='%s'",
                             $this->_table_names['page_tbl'],
                             $dbh->escapeSimple($pagename)));
@@ -161,7 +164,7 @@ extends WikiDB_backend
     function get_pagedata($pagename) {
         $dbh = &$this->_dbh;
         //trigger_error("GET_PAGEDATA $pagename", E_USER_NOTICE);
-        $pagename = PAGE_PREFIX.$pagename;
+        $pagename = '_g'.$GLOBALS['group_id'].'_'.$pagename;
         $result = $dbh->getRow(sprintf("SELECT hits,pagedata FROM %s WHERE pagename='%s'",
                                        $this->_table_names['page_tbl'],
                                        $dbh->escapeSimple($pagename)),
@@ -188,7 +191,7 @@ extends WikiDB_backend
             // Note that this will fail silently if the page does not
             // have a record in the page table.  Since it's just the
             // hit count, who cares?
-	        $pagename = PAGE_PREFIX.$pagename;
+	        $pagename = '_g'.$GLOBALS['group_id'].'_'.$pagename;
             $dbh->query(sprintf("UPDATE $page_tbl SET hits=%d WHERE pagename='%s'",
                                 $newdata['hits'], $dbh->escapeSimple($pagename)));
             return;
@@ -223,11 +226,11 @@ extends WikiDB_backend
                             $dbh->escapeSimple($this->_serialize($data)),
                             $dbh->escapeSimple($pagename)));
         */
-        $pagename = PAGE_PREFIX.$pagename;
-        $sth = $dbh->query("UPDATE $page_tbl"
-                           . " SET hits=?, pagedata=?"
-                           . " WHERE pagename=?",
-                           array($hits, $this->_serialize($data), $pagename));
+        $pagename = '_g'.$GLOBALS['group_id'].'_'.$pagename;
+        $dbh->query("UPDATE $page_tbl"
+                    . " SET hits=?, pagedata=?"
+                    . " WHERE pagename=?",
+                    array($hits, $this->_serialize($data), $pagename));
         $this->unlock(array($page_tbl));
     }
 
@@ -241,10 +244,10 @@ extends WikiDB_backend
     function set_cached_html($pagename, $data) {
         $dbh = &$this->_dbh;
         $page_tbl = $this->_table_names['page_tbl'];
-        $sth = $dbh->query("UPDATE $page_tbl"
-                           . " SET cached_html=?"
-                           . " WHERE pagename=?",
-                           array($data, $pagename));
+        $dbh->query("UPDATE $page_tbl"
+                    . " SET cached_html=?"
+                    . " WHERE pagename=?",
+                    array($data, $pagename));
     }
 
     function _get_pageid($pagename, $create_if_missing = false) {
@@ -258,9 +261,12 @@ extends WikiDB_backend
             }
         }
 
+	// attributes play this game.
+        if ($pagename === '') return 0;
+
         $dbh = &$this->_dbh;
         $page_tbl = $this->_table_names['page_tbl'];
-        $pagename = PAGE_PREFIX.$pagename;
+        $pagename = '_g'.$GLOBALS['group_id'].'_'.$pagename;
         
         $query = sprintf("SELECT id FROM $page_tbl WHERE pagename='%s'",
                          $dbh->escapeSimple($pagename));
@@ -273,6 +279,8 @@ extends WikiDB_backend
             $this->lock(array($page_tbl), true); // write lock
             $max_id = $dbh->getOne("SELECT MAX(id) FROM $page_tbl");
             $id = $max_id + 1;
+            // requires createSequence and on mysql lock the interim table ->getSequenceName
+            //$id = $dbh->nextId($page_tbl . "_id");
             $dbh->query(sprintf("INSERT INTO $page_tbl"
                                 . " (id,pagename,hits)"
                                 . " VALUES (%d,'%s',0)",
@@ -285,7 +293,7 @@ extends WikiDB_backend
     function get_latest_version($pagename) {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
-        $pagename = PAGE_PREFIX.$pagename;
+        $pagename = '_g'.$GLOBALS['group_id'].'_'.$pagename;
         return
             (int)$dbh->getOne(sprintf("SELECT latestversion"
                                       . " FROM $page_tbl, $recent_tbl"
@@ -297,7 +305,7 @@ extends WikiDB_backend
     function get_previous_version($pagename, $version) {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
-        $pagename = PAGE_PREFIX.$pagename;
+        $pagename = '_g'.$GLOBALS['group_id'].'_'.$pagename;
         
         return
             (int)$dbh->getOne(sprintf("SELECT version"
@@ -342,7 +350,7 @@ extends WikiDB_backend
                 . "$iscontent AS have_content";
         }
 
-        $pagename = PAGE_PREFIX.$pagename;
+        $pagename = '_g'.$GLOBALS['group_id'].'_'.$pagename;
         $result = $dbh->getRow(sprintf("SELECT $fields"
                                        . " FROM $page_tbl, $version_tbl"
                                        . " WHERE $page_tbl.id=$version_tbl.id"
@@ -358,6 +366,13 @@ extends WikiDB_backend
         if (!$query_result)
             return false;
 
+        /* Earlier versions (<= 1.3.7) stored the version data in base64.
+           This could be done here or in upgrade.
+        */
+        if (!strstr($query_result['versiondata'], ":")) {
+            $query_result['versiondata'] = 
+                base64_decode($query_result['versiondata']);
+        }
         $data = $this->_unserialize($query_result['versiondata']);
         
         $data['mtime'] = $query_result['mtime'];
@@ -404,19 +419,9 @@ extends WikiDB_backend
         $this->lock();
         $id = $this->_get_pageid($pagename, true);
 
-        // FIXME: optimize: mysql can do this with one REPLACE INTO (I think).
         $dbh->query(sprintf("DELETE FROM $version_tbl"
                             . " WHERE id=%d AND version=%d",
                             $id, $version));
-
-        /* mysql optimized version. 
-        $dbh->query(sprintf("INSERT INTO $version_tbl"
-                            . " (id,version,mtime,minor_edit,content,versiondata)"
-                            . " VALUES(%d,%d,%d,%d,'%s','%s')",
-                            $id, $version, $mtime, $minor_edit,
-                            $dbh->quoteSmart($content),
-                            $dbh->quoteSmart($this->_serialize($data))));
-        */
         // generic slow PearDB bind eh quoting.
         $dbh->query("INSERT INTO $version_tbl"
                     . " (id,version,mtime,minor_edit,content,versiondata)"
@@ -441,6 +446,7 @@ extends WikiDB_backend
         if ( ($id = $this->_get_pageid($pagename)) ) {
             $dbh->query("DELETE FROM $version_tbl"
                         . " WHERE id=$id AND version=$version");
+
             $this->_update_recent_table($id);
             // This shouldn't be needed (as long as the latestversion
             // never gets deleted.)  But, let's be safe.
@@ -482,9 +488,9 @@ extends WikiDB_backend
         
         $this->lock();
         if ( ($id = $this->_get_pageid($pagename, false)) ) {
-            $dbh->query("DELETE FROM $version_tbl  WHERE id=$id");
-            $dbh->query("DELETE FROM $recent_tbl   WHERE id=$id");
             $dbh->query("DELETE FROM $nonempty_tbl WHERE id=$id");
+            $dbh->query("DELETE FROM $recent_tbl   WHERE id=$id");
+            $dbh->query("DELETE FROM $version_tbl  WHERE id=$id");
             $dbh->query("DELETE FROM $link_tbl     WHERE linkfrom=$id");
             $nlinks = $dbh->getOne("SELECT COUNT(*) FROM $link_tbl WHERE linkto=$id");
             if ($nlinks) {
@@ -497,8 +503,6 @@ extends WikiDB_backend
                 $dbh->query("DELETE FROM $page_tbl WHERE id=$id");
                 $result = 1;
             }
-            $this->_update_recent_table();
-            $this->_update_nonempty_table();
         } else {
             $result = -1; // already purged or not existing
         }
@@ -523,27 +527,48 @@ extends WikiDB_backend
         $pageid = $this->_get_pageid($pagename, true);
 
         $dbh->query("DELETE FROM $link_tbl WHERE linkfrom=$pageid");
-
-		if ($links) {
-            foreach($links as $link) {
-                // avoid duplicates
-                if (isset($linkseen[$link]))
+	if ($links) {
+	    $linkseen = array();
+            foreach ($links as $link) {
+                $linkto = $link['linkto'];
+                if ($linkto === "") { // ignore attributes
                     continue;
-                $linkseen[$link] = true;
-                $linkid = $this->_get_pageid($link, true);
+                }
+                if ($link['relation'])
+                    $relation = $this->_get_pageid($link['relation'], true);
+                else 
+                    $relation = 0;
+                // avoid duplicates
+                if (isset($linkseen[$linkto]) and !$relation)
+                    continue;
+                if (!$relation)
+                    $linkseen[$linkto] = true;
+                $linkid = $this->_get_pageid($linkto, true);
+              	if (!$linkid) {
+               	    echo("No link for $linkto on page $pagename");
+               	    //printSimpleTrace(debug_backtrace());
+               	    trigger_error("No link for $linkto on page $pagename");
+                }
                 assert($linkid);
-                $dbh->query("INSERT INTO $link_tbl (linkfrom, linkto)"
-                            . " VALUES ($pageid, $linkid)");
+                $dbh->query("INSERT INTO $link_tbl (linkfrom, linkto, relation)"
+                            . " VALUES ($pageid, $linkid, $relation)");
             }
-		}
+	    unset($linkseen);
+	}
         $this->unlock();
     }
     
     /**
      * Find pages which link to or are linked from a page.
+     *
+     * TESTME relations: get_links is responsible to add the relation to the pagehash 
+     * as 'linkrelation' key as pagename. See WikiDB_PageIterator::next 
+     *   if (isset($next['linkrelation']))
      */
     function get_links($pagename, $reversed=true, $include_empty=false,
-                       $sortby=false, $limit=false, $exclude='') {
+                       $sortby='', $limit='', $exclude='', 
+                       $want_relations = false)
+    {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
 
@@ -552,19 +577,24 @@ extends WikiDB_backend
         else
             list($have,$want) = array('linker', 'linkee');
         $orderby = $this->sortby($sortby, 'db', array('pagename'));
-        if ($orderby) $orderby = ' ORDER BY $want.' . $orderby;
+        if ($orderby) $orderby = " ORDER BY $want." . $orderby;
         if ($exclude) // array of pagenames
             $exclude = " AND $want.pagename NOT IN ".$this->_sql_set($exclude);
         else 
             $exclude='';
 
-        $pat = PAGE_PREFIX;
+        $pat = '_g'.$GLOBALS['group_id'].'_';
         $p = strlen($pat)+1;
 
         $qpagename = $dbh->escapeSimple($pagename);
-        $sql = "SELECT DISTINCT $want.id AS id, substring($want.pagename from $p) AS pagename "
-            . " FROM $link_tbl, $page_tbl linker, $page_tbl linkee"
-            . (!$include_empty ? ", $nonempty_tbl" : '')
+        // MeV+APe 2007-11-14
+        // added "dummyname" so that database accepts "ORDER BY"
+        $sql = "SELECT DISTINCT $want.id AS id, substring($want.pagename from $p) AS pagename, $want.pagename AS dummyname,"
+            . ($want_relations ? " related.pagename as linkrelation" : " $want.hits AS hits")
+            . " FROM "
+            . (!$include_empty ? "$nonempty_tbl, " : '')
+            . " $page_tbl linkee, $page_tbl linker, $link_tbl "
+            . ($want_relations ? " JOIN $page_tbl related ON ($link_tbl.relation=related.id)" : '')
             . " WHERE linkfrom=linker.id AND linkto=linkee.id"
             . " AND $have.pagename='$pat$qpagename'"
             . " AND substring($want.pagename from 0 for $p) = '$pat'"
@@ -572,7 +602,6 @@ extends WikiDB_backend
             //. " GROUP BY $want.id"
             . $exclude
             . $orderby;
-
         if ($limit) {
             // extract from,count from limit
             list($from,$count) = $this->limit($limit);
@@ -597,20 +626,19 @@ extends WikiDB_backend
             list($have, $want) = array('linker', 'linkee');
         $qpagename = $dbh->escapeSimple($pagename);
         $qlink = $dbh->escapeSimple($link);
-        $row = $dbh->GetRow("SELECT IF($want.pagename,1,0) as result"
-                                . " FROM $link_tbl, $page_tbl linker, $page_tbl linkee, $nonempty_tbl"
-                                . " WHERE linkfrom=linker.id AND linkto=linkee.id"
-                                . " AND $have.pagename='$qpagename'"
-                                . " AND $want.pagename='$qlink'"
-                                . " LIMIT 1");
+        $row = $dbh->GetRow("SELECT CASE WHEN $want.pagename='$qlink' THEN 1 ELSE 0 END as result"
+                            . " FROM $link_tbl, $page_tbl linker, $page_tbl linkee, $nonempty_tbl"
+                            . " WHERE linkfrom=linker.id AND linkto=linkee.id"
+                            . " AND $have.pagename='$qpagename'"
+                            . " AND $want.pagename='$qlink'");
         return $row['result'];
     }
 
-    function get_all_pages($include_empty=false, $sortby=false, $limit=false, $exclude='') {
+    function get_all_pages($include_empty=false, $sortby='', $limit='', $exclude='') {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
 
-        $pat = PAGE_PREFIX;
+        $pat = '_g'.$GLOBALS['group_id'].'_';
         $p = strlen($pat)+1;
 
         $orderby = $this->sortby($sortby, 'db');
@@ -674,9 +702,10 @@ extends WikiDB_backend
         
     /**
      * Title search.
+     * Todo: exclude
      */
-    function text_search($search, $fulltext=false, $sortby=false, $limit=false, 
-                         $exclude=false) 
+    function text_search($search, $fulltext=false, $sortby='', $limit='', 
+                         $exclude='') 
     {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
@@ -707,8 +736,8 @@ extends WikiDB_backend
             $callback = new WikiMethodCb($searchobj, "_pagename_match_clause");
         }
         $search_clause = $search->makeSqlClauseObj($callback);
-
-        $pat = PAGE_PREFIX;
+        
+        $pat = '_g'.$GLOBALS['group_id'].'_';
         $p = strlen($pat)+1;
 
         $sql = "SELECT $fields FROM $table"
@@ -764,6 +793,8 @@ extends WikiDB_backend
     function most_popular($limit=20, $sortby='-hits') {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
+        $pat = '_g'.$GLOBALS['group_id'].'_';
+        $p = strlen($pat)+1;
         if ($limit < 0){ 
             $order = "hits ASC";
             $limit = -$limit;
@@ -784,6 +815,7 @@ extends WikiDB_backend
             . $this->page_tbl_fields
             . " FROM $nonempty_tbl, $page_tbl"
             . " WHERE $nonempty_tbl.id=$page_tbl.id" 
+            . " AND substring($page_tbl.pagename from 0 for $p) = '$pat'"
             . $where
             . $orderby;
          if ($limit) {
@@ -858,7 +890,7 @@ extends WikiDB_backend
         if ($pick)
             $where_clause .= " AND " . join(" AND ", $pick);
 
-        $pat = PAGE_PREFIX;
+        $pat = '_g'.$GLOBALS['group_id'].'_';
         $p = strlen($pat)+1;
 
         // FIXME: use SQL_BUFFER_RESULT for mysql?
@@ -880,9 +912,11 @@ extends WikiDB_backend
     /**
      * Find referenced empty pages.
      */
-    function wanted_pages($exclude_from='', $exclude='', $sortby=false, $limit=false) {
+    function wanted_pages($exclude_from='', $exclude='', $sortby='', $limit='') {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
+        $pat = '_g'.$GLOBALS['group_id'].'_';
+        $p = strlen($pat)+1;
         if ($orderby = $this->sortby($sortby, 'db', array('pagename','wantedfrom')))
             $orderby = 'ORDER BY ' . $orderby;
 
@@ -890,16 +924,21 @@ extends WikiDB_backend
             $exclude_from = " AND pp.pagename NOT IN ".$this->_sql_set($exclude_from);
         if ($exclude) // array of pagenames
             $exclude = " AND p.pagename NOT IN ".$this->_sql_set($exclude);
-        $sql = "SELECT p.pagename, pp.pagename as wantedfrom"
-            . " FROM $page_tbl p JOIN $link_tbl linked"
-            . " LEFT JOIN $page_tbl pp ON linked.linkto = pp.id"
-            . " LEFT JOIN $nonempty_tbl ne ON linked.linkto = ne.id" 
-            . " WHERE ne.id is NULL"
-	    .       " AND p.id = linked.linkfrom"
+
+        $p = strlen('_g'.$GLOBALS['group_id'].'_')+1;
+        $sql = "SELECT substring(p.pagename from $p) AS wantedfrom, substring(pp.pagename from $p) AS pagename"
+            . " FROM $page_tbl p, $link_tbl linked"
+            .   " LEFT JOIN $page_tbl pp ON linked.linkto = pp.id"
+            .   " LEFT JOIN $nonempty_tbl ne ON linked.linkto = ne.id"
+            . " WHERE ne.id IS NULL"
+            .       " AND p.id = linked.linkfrom"
+            .		" AND substring(p.pagename from 0 for $p) = '$pat'"
+            .		" AND substring(pp.pagename from 0 for $p) = '$pat'"
             . $exclude_from
             . $exclude
             . $orderby;
         if ($limit) {
+            // oci8 error: WHERE NULL = NULL appended
             list($from, $count) = $this->limit($limit);
             $result = $dbh->limitQuery($sql, $from, $count * 3);
         } else {
@@ -930,16 +969,16 @@ extends WikiDB_backend
                 // Cludge Alert!
                 // This page does not exist (already verified before), but exists in the page table.
                 // So we delete this page.
-                $dbh->query("DELETE FROM $page_tbl WHERE id=$new");
-                $dbh->query("DELETE FROM $version_tbl WHERE id=$new");
-                $dbh->query("DELETE FROM $recent_tbl WHERE id=$new");
                 $dbh->query("DELETE FROM $nonempty_tbl WHERE id=$new");
+                $dbh->query("DELETE FROM $recent_tbl WHERE id=$new");
+                $dbh->query("DELETE FROM $version_tbl WHERE id=$new");
                 // We have to fix all referring tables to the old id
                 $dbh->query("UPDATE $link_tbl SET linkfrom=$id WHERE linkfrom=$new");
                 $dbh->query("UPDATE $link_tbl SET linkto=$id WHERE linkto=$new");
+                $dbh->query("DELETE FROM $page_tbl WHERE id=$new");
             }
             $dbh->query(sprintf("UPDATE $page_tbl SET pagename='%s' WHERE id=$id",
-                                $dbh->escapeSimple(PAGE_PREFIX.$to)));
+                                $dbh->escapeSimple('_g'.$GLOBALS['group_id'].'_'.$to)));
         }
         $this->unlock();
         return $id;
@@ -1169,6 +1208,7 @@ extends WikiDB_backend
         } else {
             // TODO: try ADODB version?
             trigger_error("Unsupported dbtype and backend. Either switch to ADODB or check it manually.");
+            return false;
         }
     }
 };
@@ -1205,7 +1245,6 @@ extends WikiDB_backend_iterator
     }
     
     function next() {
-        $backend = &$this->_backend;
         if (!$this->_result)
             return false;
 
@@ -1223,6 +1262,13 @@ extends WikiDB_backend_iterator
             $this->_result->free();
             $this->_result = false;
         }
+    }
+
+    function asArray () {
+    	$result = array();
+    	while ($page = $this->next())
+    	    $result[] = $page;
+        return $result;
     }
 }
 
@@ -1261,12 +1307,59 @@ class WikiDB_backend_PearDB_search extends WikiDB_backend_search_sql
 }
 
 // $Log: PearDB.php,v $
+// Revision 1.109  2007/11/17 15:30:39  rurban
+// Fix Bug#1831881 by Marc-Etienne Vargenau. Fatal database error when sorting
+// columns
+//
+// Revision 1.108  2007/06/07 21:37:39  rurban
+// add native asArray methods to generic iters (for DebugInfo)
+//
+// Revision 1.107  2007/05/28 20:13:46  rurban
+// Overwrite all attributes at once at page->save to delete dangling meta
+//
+// Revision 1.106  2007/01/04 16:57:32  rurban
+// Clarify API: sortby,limit and exclude are strings. fix upgrade test connection
+//
+// Revision 1.105  2006/12/23 13:03:32  rurban
+// reorder deletion
+//
+// Revision 1.104  2006/12/23 11:44:56  rurban
+// deal with strict references and the order of deletion
+//
+// Revision 1.103  2006/12/03 17:11:53  rurban
+// #1535832 by matt brown: Check for base 64 encoded version data
+//
+// Revision 1.102  2006/12/02 21:57:27  rurban
+// fix WantedPages SQL: no JOIN
+// clarify first condition in CASE WHEN
+//
+// Revision 1.101  2006/11/29 19:49:05  rurban
+// fix CASE WHEN SQL syntax error from previous commit
+//
+// Revision 1.100  2006/11/19 13:59:11  rurban
+// Replace IF by CASE in exists_link()
+//
+// Revision 1.99  2006/10/08 12:40:51  rurban
+// minor cleanup: remove unused vars
+//
+// Revision 1.98  2006/06/03 08:50:41  rurban
+// revert wrong pear DB nextID() usage, our old is easier
+//
 // Revision 1.97  2006/05/14 12:28:03  rurban
 // mysql 5.x fix for wantedpages join
+//
+// Revision 1.96  2006/04/15 12:28:53  rurban
+// use pear nextID
+//
+// Revision 1.95  2006/02/22 21:52:28  rurban
+// whitespace only
 //
 // Revision 1.94  2005/11/14 22:24:33  rurban
 // fix fulltext search,
 // Eliminate stoplist words,
+// don't extract %pagedate twice in ADODB,
+// add SemanticWeb support: link(relation),
+// major postgresql update: stored procedures, tsearch2 for fulltext
 //
 // Revision 1.93  2005/10/10 19:42:15  rurban
 // fix wanted_pages SQL syntax

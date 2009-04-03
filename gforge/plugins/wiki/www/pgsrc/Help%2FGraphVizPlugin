@@ -1,0 +1,85 @@
+Date: Sat, 24 Jan 2009 20:18:24 +0100
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
+X-Rcs-Id: $Id: Help%2FGraphVizPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FGraphVizPlugin;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=iso-8859-1
+Content-Transfer-Encoding: binary
+
+The *~GraphViz* [[Help:WikiPlugin|plugin]] passes all its arguments to the grapviz =dot=
+binary and displays the result as cached image (PNG,GIF,SVG) or
+imagemap.  See http://www.graphviz.org/Documentation.php,
+esp. http://www.graphviz.org/doc/info/lang.html for the *dot* language
+specs.
+
+== Note
+  - We support all image types supported by GD so far, PNG most likely.
+  - On imgtype = imap, cpamx, ismap, cmap an additional mapfile will be produced.
+
+== Usage
+
+<verbatim>
+<?plugin GraphViz [options...]
+   multiline dot script ...
+?>
+</verbatim>
+
+== Arguments
+
+=imgtype= |
+  Default: png
+=alt= |
+  img alt text.
+=pages= |
+  <! plugin-list support !> encoded as pagename = ~[ URL = url ~]
+=exclude= |
+  Exclude pages
+=help= |
+  Display argument help.
+
+== Example
+
+<verbatim>
+<?plugin GraphViz
+digraph automata_0 {
+	size ="8.5, 11";
+	node  [ shape  = circle];
+	0 [ style = filled, color=lightgrey ];
+	2 [ shape = doublecircle ];
+	0 -> 2 [ label = "a " ];
+	0 -> 1 [ label = "other " ];
+	1 -> 2 [ label = "a " ];
+	1 -> 1 [ label = "other " ];
+	2 -> 2 [ label = "a " ];
+	2 -> 1 [ label = "other " ];
+	"Machine: a" [ shape = plaintext ];
+}
+?>
+</verbatim>
+
+is rendered as
+
+<?plugin GraphViz
+digraph automata_0 {
+	size ="8.5, 11";
+	node  [shape  = circle];
+	0 [ style = filled, color=lightgrey ];
+	2 [ shape = doublecircle ];
+	0 -> 2 [ label = "a " ];
+	0 -> 1 [ label = "other " ];
+	1 -> 2 [ label = "a " ];
+	1 -> 1 [ label = "other " ];
+	2 -> 2 [ label = "a " ];
+	2 -> 1 [ label = "other " ];
+	"Machine: a" [ shape = plaintext ];
+}
+?>
+
+== Author
+
+ [Reini Urban|PhpWiki:ReiniUrban]
+
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]

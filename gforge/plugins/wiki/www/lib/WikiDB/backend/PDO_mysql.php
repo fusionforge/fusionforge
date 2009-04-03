@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: PDO_mysql.php,v 1.3 2005/09/11 13:25:12 rurban Exp $');
+rcs_id('$Id: PDO_mysql.php 6226 2008-08-29 15:42:34Z vargenau $');
 
 /*
  Copyright 2005 $ThePhpWikiProgrammingTeam
@@ -150,10 +150,7 @@ extends WikiDB_backend_PDO
 
 }
 
-// $Log: PDO_mysql.php,v $
-// Revision 1.3  2005/09/11 13:25:12  rurban
-// enhance LIMIT support
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.2  2005/04/10 10:43:25  rurban
 // more mysql-4.1 quirks: add utf8 to the charset aliases table. (Bug #1180108)
 //

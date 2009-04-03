@@ -1,5 +1,7 @@
 <?php
 
+$locale[" ... first %d bytes"] =
+   " ... i primi %d byte";
 $locale[" Sorry, cannot merge."] =
    " Spiacente, non può fondersi.";
 $locale["%4d  %s\n"] =
@@ -18,8 +20,6 @@ $locale["%s bytes"] =
    "%s byte";
 $locale["%s days"] =
    "%s giorni";
-$locale["%s is listed at %s"] =
-   "%s è elencato a %s";
 $locale["%s not defined"] =
    "%s: non definito";
 $locale["%s not found"] =
@@ -31,9 +31,11 @@ $locale["%s on %s:"] =
 $locale["%s: %s"] =
    "%s: %s";
 $locale["%s: file not found"] =
-   "%s: archivio non trovato";
+   "%s: file non trovato";
 $locale["%s: not defined"] =
    "%s: non definito";
+$locale["'%s': corrupt file"] =
+   "'%s': file corrotto";
 $locale["(Copy your changes to the clipboard. You can try editing a different page or save your text in a text editor.)"] =
    "(Copia le tue modifiche nella clipboard. Potete provare a modificare un'altra pagina o registra il vostro testo in un editor di testo.)";
 $locale["(diff)"] =
@@ -53,7 +55,7 @@ $locale["... not found"] =
 $locale["1 day"] =
    "1 giorno";
 $locale["<no matches>"] =
-   "<nessun risultati>";
+   "<nessuna corrispondenza>";
 $locale["<none>"] =
    "<nessun>";
 $locale["<unknown>"] =
@@ -71,7 +73,7 @@ $locale["Anonymous Users"] =
 $locale["Authenticated Users"] =
    "Utenti Autenticati";
 $locale["Authenticated as %s"] =
-   "Authenticata a %s";
+   "Utente corrente: %s";
 $locale["Author"] =
    "Autore";
 $locale["Author will be logged as %s."] =
@@ -88,8 +90,8 @@ $locale["CalendarPlugin"] =
    "CalendarioPlugin";
 $locale["Cancel"] =
    "Annulla";
-$locale["Cancel rating"] =
-   "Annulla";
+$locale["Category"] =
+   "Categoria";
 $locale["CategoryGroup"] =
    "CategoriaGruppo";
 $locale["CategoryPage"] =
@@ -110,14 +112,20 @@ $locale["Couldn't connect to %s"] =
    "Non riesco a stabilire una connessione col database: %s";
 $locale["Create: %s"] =
    "Salvata: %s";
+$locale["Date Format"] =
+   "Formato della Data";
+$locale["DebugInfo"] =
+   "InfoDebug";
 $locale["Deleted"] =
    "Rimossa";
 $locale["Describe %s here."] =
-   "Descrivi %s qui.";
+   "Inserire qui il testo della pagina %s.";
 $locale["Diff"] =
-   "Diff";
+   "Differenze";
 $locale["Diff: %s"] =
    "Differenza di: %s";
+$locale["Differences between %s and %s of %s."] =
+   "Differenze tra %s e %s di %s.";
 $locale["Edit"] =
    "Modifica";
 $locale["Edit %s"] =
@@ -146,8 +154,6 @@ $locale["Go"] =
    "Vai";
 $locale["GoTo"] =
    "Vai";
-$locale["GoodStyle"] =
-   "BuonStile";
 $locale["H"] =
    "A";
 $locale["HasHomePage"] =
@@ -159,7 +165,7 @@ $locale["Home"] =
 $locale["HomePage"] =
    "PaginaPrincipale";
 $locale["HomePageAlias"] =
-   "PaginaPrincipaleAlias";
+   "AliasPaginaPrincipale";
 $locale["In the time since you started editing this page, another user has saved a new version of it."] =
    "Nel tempo da quando avete cominciato pubblicare questa pagina, un altro utente ha conservato una nuova versione di esso.";
 $locale["Include of '%s' failed."] =
@@ -177,13 +183,17 @@ $locale["Included from %s:"] =
 $locale["Insert"] =
    "Inserto";
 $locale["Insert Categories (double-click)"] =
-   "Inserto Categorias (doppio-scatto)";
+   "Inserimento Categorie (doppio-click)";
 $locale["Insert PageLink (double-click)"] =
    "Inserto Pagina (doppio-scatto)";
 $locale["Insert Plugin (double-click)"] =
    "Inserto Plugin (doppio-scatto)";
 $locale["Insert Template (double-click)"] =
    "Inserto Mascherina (doppio-scatto)";
+$locale["Insufficient permissions."] =
+   "Permessi insufficienti.";
+$locale["Invalid password or userid."] =
+   "Password o nome utente errati.";
 $locale["JabberPresence"] =
    "JabberPresenca";
 $locale["Last"] =
@@ -197,9 +207,11 @@ $locale["Last Summary"] =
 $locale["Last edited %s"] =
    "Ultima modifica %s";
 $locale["Last edited on %s"] =
-   "Ultima modifica su %s";
+   "Ultima modifica %s";
 $locale["LdapSearch"] =
    "LdapRicerca";
+$locale["LikePages"] =
+   "PagineSimili";
 $locale["LiveSearch"] =
    "RicercaLive";
 $locale["Lock"] =
@@ -238,10 +250,14 @@ $locale["Note:"] =
    "Nota:";
 $locale["Optimizing database"] =
    "Base di dati d'ottimizzazione";
+$locale["Other diffs:"] =
+   "Altre differenze:";
 $locale["Other version"] =
-   "Mostra il versione corrente";
+   "Altra versione";
 $locale["Overwrite All"] =
    "Scriva sopra Tutti";
+$locale["Owner"] =
+   "Proprietario";
 $locale["Owner: %s"] =
    "Owner: %s";
 $locale["Page %s not found."] =
@@ -249,7 +265,7 @@ $locale["Page %s not found."] =
 $locale["Page Locked"] =
    "Pagina Bloccata";
 $locale["Page Name"] =
-   "Nome Della Pagina";
+   "Nome della Pagina";
 $locale["Page change"] =
    "Cambiamento della pagina";
 $locale["Page now locked."] =
@@ -264,22 +280,32 @@ $locale["PageChange Notification Error: Couldn't send %s to %s"] =
    "Errore Di Notifica Del Cambiamento Della Pagina:  Non ha potuto trasmettere %s a %s";
 $locale["PageChange Notification of %s sent to %s"] =
    "Pagini la notifica del cambiamento di %s trasmesso a %s";
+$locale["PageHistory"] =
+   "StoricoPagina";
+$locale["PageInfo"] =
+   "InfoPagina";
 $locale["PhpWikiAdministration/Markup"] =
    "AmministrazioneDiPhpWiki/Disposizione";
 $locale["PhpWikiAdministration/Remove"] =
    "AmministrazioneDiPhpWiki/Rimuovi";
 $locale["Please check it through before saving."] =
-   "Controllilo prego attraverso prima del risparmio.";
+   "Si prega di controllarla nel dettaglio prima di salvare.";
 $locale["Plugin %s disabled."] =
    "Plugin '%s' inabiliti.";
 $locale["Plugin %s failed."] =
    "Plugin '%s' fallito.";
 $locale["Plugin %s: undefined"] =
    "Plugin '%s': non definito";
+$locale["PreferenceApp"] =
+   "PreferenzeApp";
+$locale["Preferences"] =
+   "Preferenze";
 $locale["PreferencesInfo"] =
    "PreferenzeInfo";
 $locale["PrevNext"] =
    "Seguente";
+$locale["Preview"] =
+   "Anteprima";
 $locale["Previous"] =
    "Precedente";
 $locale["Previous Author"] =
@@ -288,14 +314,18 @@ $locale["Previous Revision"] =
    "Precedente";
 $locale["Printer"] =
    "Stampante";
+$locale["PurgeHtmlCache"] =
+   "RimuoviDallaCacheHtml";
 $locale["RecentChanges"] =
-   "CambiamentiRecenti";
+   "ModificheRecenti";
+$locale["Related Changes"] =
+   "Modifiche Correlate";
 $locale["Related Links"] =
    "Collegamenti Relativi";
 $locale["Remove"] =
-   "Rimuovi";
+   "Cancella";
 $locale["Remove Page"] =
-   "Rimuovi la Pagina";
+   "Cancella la Pagina";
 $locale["Remove this page"] =
    "Rimuovi la pagina";
 $locale["Removed by: %s"] =
@@ -316,14 +346,16 @@ $locale["Search"] =
    "Ricerca";
 $locale["See %s tips for editing."] =
    "Vedere %s consigli per le modifiche.";
-$locale["Select"] =
-   "Prescelto";
 $locale["Show minor edits for:"] =
    "Mostrare le modifiche secondarie per:";
+$locale["Sign In"] =
+   "Login";
+$locale["Sign Out"] =
+   "Logout";
+$locale["Sign in as:"] =
+   "Username di login:";
 $locale["Signed Users"] =
    "Utenti Firmati";
-$locale["Signed as %s"] =
-   "Salvata a %s";
 $locale["Size"] =
    "Dimensione";
 $locale["Size:"] =
@@ -335,17 +367,15 @@ $locale["Someone has edited the page!"] =
 $locale["Sorry for the inconvenience."] =
    "Scusa per l'inconveniente.";
 $locale["Sort by %s"] =
-   "Sort di %s";
+   "Ordina per %s";
 $locale["String \"%s\" not found."] =
    "\"%s\" non trovato.";
 $locale["Summary"] =
    "Commenti";
 $locale["Synopsis"] =
-   "Sinossi";
-$locale["TextFormattingRules"] =
-   "RegoleDiFormattazioneDelTesto";
+   "Sommario";
 $locale["Thank you for editing %s."] =
-   "Grazie per le modifiche! %s.";
+   "La pagina %s <E8> stata modificata.";
 $locale["Thanks for adding this translation!"] =
    "Grazie per la translatione!";
 $locale["The %d most popular pages of this wiki:"] =
@@ -353,15 +383,15 @@ $locale["The %d most popular pages of this wiki:"] =
 $locale["This page has been locked by the administrator and cannot be edited."] =
    "Questa pagina è stata bloccata dall'amministratore e non può essere modificata.";
 $locale["This page has been locked by the administrator so your changes can not be saved."] =
-   "Questa pagina è stata bloccata dall'amministratore in modo da i vostri cambiamenti non possono essere salvati.";
+   "Spiacente, ma questa pagina è stata bloccata dall'amministratore,quindi le tue modifiche non possono essere salvate.";
 $locale["Time Zone"] =
    "Fuso Orario";
 $locale["Title Search"] =
-   "La ricerca su tutto il testo";
+   "Ricerca per Titolo";
 $locale["Title search results for '%s'"] =
    "Risultati della ricerca su tutto il testo per '%s'";
 $locale["TitleSearch"] =
-   "RicercaSuTutto";
+   "RicercaPerTitolo";
 $locale["Today"] =
    "Oggi";
 $locale["Transcluded from %s"] =
@@ -386,12 +416,12 @@ $locale["Version %s, saved on %s"] =
    "Versione %s, salvata su %s";
 $locale["Versions are identical"] =
    "Le versioni sono identiche";
+$locale["View Source: %s"] =
+   "Vedi il Sorgente: %s";
 $locale["View the current version"] =
    "Mostra il versione corrente";
 $locale["W"] =
    "L";
-$locale["Warning!"] =
-   "Avvertimento!";
 $locale["Warning:"] =
    "Avvertimento:";
 $locale["Width"] =
@@ -402,14 +432,16 @@ $locale["WikiAdminMarkup"] =
    "WikiAmministrazioneDisposizione";
 $locale["Yes"] =
    "Si";
+$locale["You are signed in as %s"] =
+   "Utente corrente: %s";
 $locale["Your careful attention to detail is much appreciated."] =
-   "La tua cura verso il dettaglio è molto apprezzata.";
+   "Si prega di controllare che le modifiche siano quelle volute. Grazie.";
 $locale["Your changes can not be saved as they are, since doing so would overwrite the other author's changes. So, your changes and those of the other author have been combined. The result is shown below."] =
    "I vostri cambiamenti non possono essere conservati mentre sono, dal fare in modo da scriverebbero sopra i cambiamenti dell'altro autore. Così, i vostri cambiamenti e quelli dell'altro autore sono stati uniti. Il risultato è indicato sotto.";
 $locale["Your home page is locked so your preferences cannot not be saved."] =
    "Questa pagina è stata bloccata dall'amministratore in modo da i vostri cambiamenti non possono essere salvati.";
 $locale["Your version"] =
-   "versione corrente";
+   "La versione corrente";
 $locale["authenticated"] =
    "autenticato";
 $locale["by %s"] =
@@ -424,8 +456,6 @@ $locale["from %s"] =
    "dalla %s";
 $locale["locked"] =
    "bloccata";
-$locale["name"] =
-   "Nome";
 $locale["not authenticated"] =
    "non autenticato";
 $locale["plain file %s"] =

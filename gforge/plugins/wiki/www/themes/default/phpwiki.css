@@ -1,5 +1,5 @@
 /**
- * $Id: phpwiki.css,v 1.49 2005/04/11 19:41:23 rurban Exp $
+ * $Id: phpwiki.css 6480 2009-02-02 14:13:24Z vargenau $
  *
  * This incarnation of this stylesheet is a complete rewrite from the
  * ground up.
@@ -8,13 +8,6 @@
  * tool for mapping the more complex CSS node selectors, such as those
  * used to reference the various CalendarPlugin elements.
  */
-
-/**
- * NS4 doesn't grok @import. This allows us to put things which
- * break NS4 in another file.
- */
-@import url(phpwiki-heavy.css);
-
 
 /**
  * General
@@ -62,7 +55,7 @@ div.wikitext pre { font-family: monospace; }
 div.wikitext {
   margin-top:    1ex;
   margin-bottom: 0.5ex;
-  background: white;
+  background-color: white;
   /* Netscape 4 requires this 1px border.
      Without it, the paper borders below cause
      the white background to disappear. */
@@ -81,7 +74,30 @@ div.wikitext {
    */
   clear: both;
 }
+/* for the login template */
+div#browse  {
+  margin-top:    1px;
+  margin-bottom: 0.5px;
+  /*background: #dddddd;*/
+}
+input#inp-openid {
+  background:  url('images/openid.png') bottom left no-repeat;
+  background-repeat: no-repeat;
+  padding-left: 18px !important;
+}
+
 /* .interwiki-map thead td { text-decoration: underline; } */
+
+/*
+** RecentChanges
+*/
+.pageinfo-majoredit { 
+	font-weight: bold;
+}
+.wiki-summary {
+  	font-size: 94%;
+  	font-style: italic;
+}
 
 /* Mozilla RecentChanges Sidebar */
 body.sidebar {
@@ -104,7 +120,7 @@ body.sidebar h2 { margin-top: 0; }
 div.wikiaction { background-color: #eee; }
 /* div.wikiadmin { background-color: #fee; } */
 form.wikiadmin div { background-color: #fee; }
-
+form.wikiformrich { background-color: #eee; }
 
 /**
  * Link styles
@@ -114,29 +130,45 @@ form.wikiadmin div { background-color: #fee; }
   /* font-weight: normal; */
   font-weight: bold;
 }
+.wiki relation, .named-wiki relation, .wiki attribute, .named-wiki attribute {
+  font-style: oblique;
+  /* font-weight: normal; */
+  font-weight: bold;
+}
+
+span.relation-symbol {
+    font-weight: bold;
+    font-family: monospace;
+    letter-spacing: 0.1em;
+}
 
 /* Action buttons */
 a.wikiaction, a.wikiadmin, a.wiki-rc-action, a.wikiunsafe,
 input.wikiaction, input.button, input.wikiadmin {
-  text-decoration: none;
-  font-family: Arial, Helvetica, sans-serif;
-  /* don't wrap text buttons */
-  white-space: nowrap;
-  /*font-size: inherit; */
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    /* don't wrap text buttons */
+    white-space: nowrap;
+    /* font-size: inherit; */
 }
 
-a.wikiaction, a.wikiaction:visited, input.wikiaction, input.button { background-color: #ddd; }
+a.wikiaction, a.wikiaction:visited, input.wikiaction, input.button { 
+    background-color: #ddd; 
+}
 
 .wikiunsafe { background-color: #fcc; }
 
-a.wikiadmin, a.wikiadmin:visited, input.wikiadmin  { background-color: #fdd; }
+a.wikiadmin, a.wikiadmin:visited, input.wikiadmin  { 
+    background-color: #fdd; 
+}
 
 /* Unknown links */
 .wikiunknown, .named-wikiunknown {
   font-weight: normal;
   font-size: 100%;
 }
- /* QuestionMark #600 */
+
+/* QuestionMark #600 */
 .wikiunknown a, .named-wikiunknown a {
   color: #447;
   background-color: #eee;
@@ -159,6 +191,10 @@ h1 .backlinks { text-decoration: underline; }
 .interwiki, i.interwiki .wikipage, em .interwiki .wikipage { font-style: oblique; }
 .interwiki .wikipage, i .interwiki, em .interwiki { font-style: normal; }
 
+/* image buttons */
+a.wikibutton, a.wikibutton:visited, input.wikibutton  { 
+    background-color: white; 
+}
 
 /**
  * headings: Georgia
@@ -186,7 +222,7 @@ caption { font-family: Arial, Helvetica, sans-serif; }
 th.gridbutton {
   background-color: ThreedLightShadow;
   color: black;
-  font-family: Tahoma, sans-serif, Arial, Helvetica;
+  font-family: Tahoma, Arial, Helvetica, sans-serif;
   font-size: small;
   font-weight: normal;
   /*font-style: menu;*/
@@ -280,9 +316,14 @@ textarea.wikiedit {
 #toolbar { padding:0px; }
 
 /**
+ * Search
+ */
+#searchholder { display: inline; }
+
+/**
  * Search Results
  */
-.search-context { background: white; }
+.search-context { background: white; font-style: oblique; }
 .search-term {
   background: yellow;
   font-weight: normal;
@@ -633,47 +674,6 @@ span.redirectfrom {
   padding-left: 1em;
 }
 
-
-/*
- * Vertical margins around block elements.
- */
-
-p { margin: 1em 0; }		/* Normal ("loose") paragraphs */
-li p, dd p, td p { margin: 1ex 0; } /* Paragraphs within lists are a little tighter. */
-  
-/* ul, ol, dl { margin: 0.2ex 0; }	/* A little room around lists. */
-/* li ul, li ol, li dl,
-dd ul, dd ol, dd dl { margin: 0 0; } /* but not around sub-lists. */
-
-/* Normal ("loose") list elements */
-li.tightenable { margin: 1em 0; }
-dt.tightenable { margin-top: 1em; }
-dd.tightenable { margin-bottom: 1.5ex; }
-
-  
-li.tightenable.top,
-dt.tightenable.top,
-dd.tightenable.top {
-  margin-top: 0.2ex;
-}
-li li.tightenable.top {
-  margin-top: 0;
-}
-li.tightenable.bottom,
-dd.tightenable.bottom {
-  margin-bottom: 0.2ex;
-}
-li li.tightenable.bottom {
-  margin-bottom: 0;
-}
-
-.tightenable.top {
-  margin-top: 0;
-}
-.tightenable.bottom {
-  margin-bottom: 0;
-}
-
 /*
  * "DL tables"
  */
@@ -686,12 +686,6 @@ li li.tightenable.bottom {
   border-bottom: 2px #444 solid;
   border-left: none; 
   border-right: none; 
-}
-.wiki-dl-table tr.tightenable.top {
-  border-top: 1px #444 solid;
-}
-.wiki-dl-table tr.tightenable.bottom {
-  border-bottom: 1px #444 solid;
 }
 .wiki-dl-table th,
 .wiki-dl-table td {
@@ -849,17 +843,28 @@ td.spacerow{background:#cad9ea;color:#000000}
 .forumline{background:#ffffff;color:#000000;border:1px solid #006699}
 
 /* Sidebar */
-.box { background:#ffffff; border: 1px solid #888888 }
-.box-title { font-weight: normal; /*font-size: 11pt; */ background-color: #ccc; color: black; /*font-style: menu;*/ text-align: center; }
-.box-data { width: 160px; font-size: 9pt; font-weight: normal; }
+.box { background:#ffffff; border: 1px solid silver }
+.box-title { font-family: Tahoma, Arial, Helvetica, sans-serif; font-weight: normal; /*font-size: 11pt; */ background-color: #ccc; color: black; /*font-style: menu;*/ text-align: center; border: none; padding: 2px 0 2px 0;}
+.box-data { width: 160px; font-size: 9pt; font-weight: normal; border: none; }
 .box-data .wiki { font-weight: normal; }
 td.sidebar { border-spacing: 0px; margin: 0ex;}
+
+/* plugin BoxRight */
+div.boxright {
+  width: 200px; 
+  right: 10px;
+  padding: 0.5em; 
+  float: right; 
+  border: thin solid #888888; 
+  padding: 0.5em;
+}
 
 /* RssFeed */
 div.rss { margin: 1em; padding: 1em; font-size: 0.9em; background-color: #eeeeee; border: thin dashed #aaa; }
 div.feed { color: #333; margin: -0.5em; margin-bottom: 0em; padding: 0.3em; font-weight: bold; background-color: #f2f2f2; font-size: 1.2em; }
 div.itemdesc {  padding-left: 1em; }
 div.rssitem { border-top: thin dashed #aaa; }
+a.rssicon { font-weight:normal; font-size:small; vertical-align:middle; }
 
 /* SqlResult */
 table.sqlresult { 
@@ -889,6 +894,232 @@ img.tex {
 .boldsmall {
   font-weight: bold;
   font-size: 11px;
+}
+
+
+.wikiwyg_toolbar {
+    background: #D3D3D3;
+    border: 1px outset;
+    letter-spacing: 0;
+    padding: 2px;
+}
+
+span.wikiwyg_control_link a {
+    padding-right: 8px;
+}
+
+.wikiwyg_button {
+    background: #D3D3D3;
+    border: 1px solid #D3D3D3;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    vertical-align: bottom;
+}
+
+.wikiwyg_button:hover {
+    border: 1px outset;
+}
+
+.wikiwyg_button:active {
+    border: 1px inset;
+}
+
+.wikiwyg_separator {
+    background: #D3D3D3;
+    border: 1px solid #D3D3D3;
+    width: 9px;
+    height: 20px;
+    vertical-align: bottom;
+}
+
+.wikiwyg_selector {
+    width: 70px;
+}
+
+.wikiwyg_wysiwyg table {
+    border-collapse: collapse;
+    margin-bottom: .2em;
+}
+
+.wikiwyg_wysiwyg table td {
+    border: 1px;
+    border-style: solid;
+    padding: .2em;
+    vertical-align: top;
+}
+
+/* Hide the elements we put in just to get around NS4 bugs. */
+div.br { display: none; }
+
+/* This makes spacings in NS4 too big. */
+.toolbar, div.toolbar { margin: 0.5ex 0ex; }
+
+/* This breaks NS4, but is necessary for IE4. */
+div.wikitext { width: auto; }
+
+/**
+ * General
+ */
+/* for NS4 */
+img { vertical-align: baseline; }
+input { margin: 0.1em; }
+input.numeric { text-align: right; }
+
+/**
+ * Wiki Forms
+ * 
+ * The div inside the wikiadmin upload form does not
+ * have a class yet, so it must be referenced indirectly
+ */
+/* div.wikiaction, div.wikiadmin { */
+div.wikiaction, form.wikiadmin div {
+  border-bottom: 1px solid #d8d8e7;
+  border-right:  1px solid #d8d8e7;
+  border-top:  1px solid #96a2ae;
+  border-left: 1px solid #96a2ae;
+
+  margin-top: 0.5ex;
+  margin-bottom: 0.5ex;
+  padding: 0.5ex 0.5em;
+  /* Emulate the display behaviour of a table, to shrink it's width.
+   * ie5.1Mac ignores this */
+  display: table;
+}
+
+/* Add space between the input field and following buttons, but not after the last button. */
+div.wikiaction input[type=text], div.wikiadmin input[type=text], form.wikiadmin input[type=file] { margin-right: 0.5em; }
+
+
+/**
+ * Links
+  border-top:  1px solid #b2b2d1;
+  border-left: 1px solid #d2d2f1;
+  border-bottom: 1px solid #86929e;
+  border-right:  1px solid #86929e;
+ */
+
+/* Make wikiaction links look like buttons */ 
+a.wikiaction, a.wikiadmin, a.wikiunsafe,
+input.wikiaction, input.wikiadmin, input.wikiunsafe, input.button {
+  color: black;
+/*
+  border-top:  1px solid #c6d2de;
+  border-left: 1px solid #c6d2de;
+  border-bottom: 1px solid #494f5d;
+  border-right:  1px solid #494f5d;
+
+  padding-top:    0.15ex;
+  padding-bottom: 0.25ex;
+  padding-left:  .5em;
+  padding-right: .5em;
+*/
+  border: 1px outset;
+  padding: 0.05ex 0.25em 0.1ex 0.25em;
+  height: auto;
+  width: auto;
+  /* Prevent buttons from overlapping when the toolbar is wrapped. */
+  line-height: 2.6ex;
+  /*margin: 2ex 0.2em;*/
+}
+
+div#navbuttons, div#signin, div#actionbuttons { line-height: 3.0ex; }
+
+/* QuestionMark */
+.wikiunknown a, .named-wikiunknown a {
+  border-top:  1px solid #c6d2de;
+  border-left: 1px solid #c6d2de;
+  border-bottom: 1px solid #a2a2a2;
+  border-right:  1px solid #a2a2a2;
+  padding-left:  1px;
+  padding-right: 1px;
+  padding-top: 1px;
+  margin-right: .15em;
+}
+
+/* Link icons */
+img.linkicon { vertical-align: middle; }
+
+
+/**
+ * Edit Page & View Source
+ */
+/* color: inherit; and background: inherit; display as lime in NS4 */
+
+/* http://www.aboutus.org/UniversalWikiEditButton */
+div#actionbuttons a#btn-edit {
+  background:  url('images/Edit-chalk-10g.png') bottom left no-repeat;
+  background-repeat: no-repeat;
+  padding-left: 20px !important;
+  padding-right: 0.5em !important;
+}
+/* image buttons */
+a.wikibutton, a.wikibutton:visited, input.wikibutton  { 
+  background-color: white;
+  border: 0;
+}
+
+/**
+ * Diff Output
+ */
+.diff .prefix {
+  position: relative;
+  left: -1em;
+}
+/* deleted & added words */
+.diff del, .diff ins {
+  padding-left: 1px;
+  padding-right: 1px;
+}
+
+/**
+ * Other
+ */
+/* PHP Warnings */
+div.errors { font-size: smaller }
+
+/*
+ * table class="boxed"
+ * will put a border around the table (but not around the cells)
+ *
+ * table class="bordered"
+ * will put a border around the table and the cells
+ *
+ * In both cases, the caption will be bold and centered under the table
+ *
+ * In both cases, the headers (th) will have a "#d8d8d8" background
+ */
+
+table.boxed, table.bordered, table.bordered th, table.bordered td {
+    border-width: 1px;
+    border-style: solid;
+    border-collapse: collapse;
+    vertical-align: top;
+}
+
+table.boxed td, table.bordered td,
+table.boxed th, table.bordered th {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+table.boxed caption, table.bordered caption {
+    text-align: center;
+    font-weight: bold;
+    caption-side: bottom;
+    padding-top: 0.8em;
+}
+
+table.boxed th, table.bordered th {
+    font-weight: bold;
+    background-color: #d8d8d8;
+}
+
+#edit-public, h1.firstHeading-public, h1.firstHeading-rating-public {
+	background-color: #ffce7b;
+	border: 1px solid #ffa500;
 }
 
 /* For emacs users

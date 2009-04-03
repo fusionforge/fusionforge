@@ -1,24 +1,24 @@
 <?php // -*-php-*-
-  $Sep = $WikiTheme->getButtonSeparator();
+if (empty($revision)) $revision = $page->getCurrentRevision(false);
 ?>
-<!-- $Id: actionbar.tmpl,v 1.1 2004/12/19 17:34:19 rurban Exp $ -->
+<!-- $Id: actionbar.tmpl 6204 2008-08-26 15:12:03Z vargenau $ -->
 <?= Button(array('action'=>'PageInfo'),_("PageInfo"),$page->getName()) ?>
-<?=$Sep?><?= Button("edit", $revision->isCurrent() ? _("Edit") : _("Edit Old Revision")) ?>
+<?=$SEP?><?= Button("edit", $revision->isCurrent() ? _("Edit") : _("Edit Old Revision")) ?>
 <?php if ($user->isAdmin() or mayAccessPage('change',$page->getName())) { ?>
-  <?=$Sep?><?= Button($page->get('locked') ? 'unlock' : 'lock') ?>
+  <?=$SEP?><?= Button($page->get('locked') ? 'unlock' : 'lock') ?>
   <?php if (ENABLE_PAGEPERM) { ?>
-     <?=$Sep?><?= Button('chown') ?>
-     <?=$Sep?><?= Button('setacl') ?>
+     <?=$SEP?><?= Button('chown') ?>
+     <?=$SEP?><?= Button('setacl') ?>
   <?php } ?>
 <?php } ?>
 <?php if ($user->isAdmin() or mayAccessPage('remove',$page->getName())) { ?>
-   <?=$Sep?><?= Button('remove') ?>
+   <?=$SEP?><?= Button('remove') ?>
 <?php } ?>
 <?php if (!empty($user) && $user->isAdmin()) { ?>
-  <?=$Sep?><?= WikiLink(_("PhpWikiAdministration"), "","Admin") ?>
+  <?=$SEP?><?= WikiLink(_("PhpWikiAdministration"), "","Admin") ?>
   <!-- Buttons really only for debugging. See info for more -->
-  <?=$Sep?><?= Button(_("PageHistory")) ?>
-  <?=$Sep?><?= Button("diff") ?>
-  <?=$Sep?><?= Button(_("PageDump")) ?>
+  <?=$SEP?><?= Button(_("PageHistory")) ?>
+  <?=$SEP?><?= Button("diff") ?>
+  <?=$SEP?><?= Button(_("PageDump")) ?>
   <!-- End debugging buttons -->
 <?php } ?>

@@ -1,9 +1,8 @@
-Date: Sun, 27 Jan 2002 17:28:55 -0500
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.2-jeffs-hacks)
-X-Rcs-Id: $Id: BackLinks,v 1.7 2002/12/29 00:32:34 carstenklapp Exp $
+Date: Mon, 16 Jun 2008 14:15:24 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
+X-Rcs-Id: $Id: BackLinks 6184 2008-08-22 10:33:41Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=BackLinks;
-  pgsrc_version="2 $Revision: 1.7 $";
   flags=PAGE_LOCKED;
   markup=2;
   charset=iso-8859-1
@@ -15,4 +14,13 @@ contain the title of this page?".
 
 ----
 
-<?plugin BackLinks exclude||='' include_self||=1 noheader||=0 page||='' info||='' ?>
+<?plugin BackLinks exclude||='' include_self||=1 noheader||=0 ?>
+
+----
+
+To display the list of pages which all contain multiple links use a pagelist as page argument.
+For example <tt><~?~plugin BackLinks page=Milk,Honey ?~></tt> would display all pages which 
+contain links to Milk AND Honey.
+
+----
+[CategoryActionPage]

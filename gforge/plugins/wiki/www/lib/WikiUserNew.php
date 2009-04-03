@@ -1,6 +1,6 @@
 <?php //-*-php-*-
-rcs_id('$Id: WikiUserNew.php,v 1.137 2006/05/03 06:05:37 rurban Exp $');
-/* Copyright (C) 2004,2005 $ThePhpWikiProgrammingTeam
+rcs_id('$Id: WikiUserNew.php,v 1.147 2007/09/15 12:55:56 rurban Exp $');
+/* Copyright (C) 2004,2005,2006,2007 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  * 
@@ -113,6 +113,13 @@ define('TIMEOFFSET_MIN_HOURS', -26);
 define('TIMEOFFSET_MAX_HOURS',  26);
 if (!defined('TIMEOFFSET_DEFAULT_HOURS')) define('TIMEOFFSET_DEFAULT_HOURS', 0);
 
+/* EMAIL VERIFICATION
+ * On certain nets or hosts the email domain cannot be determined automatically from the DNS.
+ * Provide some overrides here.
+ *    ( username @ ) domain => mail-domain
+ */
+$EMailHosts = array('avl.com' => 'mail.avl.com');
+
 /**
  * There are be the following constants in config/config.ini to 
  * establish login parameters:
@@ -202,8 +209,19 @@ function _determineBogoUserOrPassUser($UserName) {
         else { 
             $_PassUser = new _PassUser($UserName,
                                        isset($_BogoUser) ? $_BogoUser->_prefs : false);
-            if ($_PassUser->userExists() or $GLOBALS['request']->getArg('auth'))
-                return $_PassUser;
+            if ($_PassUser->userExists() or $GLOBALS['request']->getArg('auth')) {
+            	if (isset($GLOBALS['request']->_user_class))
+	    	    $class = $GLOBALS['request']->_user_class;
+            	elseif (strtolower(get_class($_PassUser)) == "_passuser")
+	    	    $class = $_PassUser->nextClass();
+	    	else
+		    $class = get_class($_PassUser);
+    		if ($user = new $class($UserName, $_PassUser->_prefs)) {
+	            return $user;
+            	} else {
+            	    return $_PassUser;
+            	}
+            }
         }
     }
     // No Bogo- or PassUser exists, or
@@ -227,7 +245,7 @@ function _determineBogoUserOrPassUser($UserName) {
  * 
  */
 function WikiUser ($UserName = '') {
-    global $ForbiddenUser;
+    global $ForbiddenUser, $HTTP_SESSION_VARS;
 
     //Maybe: Check sessionvar for username & save username into
     //sessionvar (may be more appropriate to do this in lib/main.php).
@@ -236,7 +254,7 @@ function WikiUser ($UserName = '') {
         // Found a user name.
         return _determineAdminUserOrOtherUser($UserName);
     }
-    elseif (!empty($_SESSION['userid'])) {
+    elseif (!empty($HTTP_SESSION_VARS['userid'])) {
         // Found a user name.
         $ForbiddenUser = new _ForbiddenUser($_SESSION['userid']);
         return _determineAdminUserOrOtherUser($_SESSION['userid']);
@@ -279,28 +297,29 @@ function WikiUserClassname() {
  * (on php4 it works ok, on php5 it's currently disallowed on the parser level)
  * that's why try it the hard way.
  */
-function UpgradeUser ($olduser, $user) {
-    if (isa($user,'_WikiUser') and isa($olduser,'_WikiUser')) {
-        // populate the upgraded class $olduser with the values from the new user object
+function UpgradeUser ($user, $newuser) {
+    if (isa($user,'_WikiUser') and isa($newuser,'_WikiUser')) {
+        // populate the upgraded class $newuser with the values from the current user object
         //only _auth_level, _current_method, _current_index,
         if (!empty($user->_level) and 
-            $user->_level > $olduser->_level)
-            $olduser->_level = $user->_level;
+            $user->_level > $newuser->_level)
+            $newuser->_level = $user->_level;
         if (!empty($user->_current_index) and
-            $user->_current_index > $olduser->_current_index) {
-            $olduser->_current_index = $user->_current_index;
-            $olduser->_current_method = $user->_current_method;
+            $user->_current_index > $newuser->_current_index) {
+            $newuser->_current_index = $user->_current_index;
+            $newuser->_current_method = $user->_current_method;
         }
         if (!empty($user->_authmethod))
-            $olduser->_authmethod = $user->_authmethod;
+            $newuser->_authmethod = $user->_authmethod;
+	$GLOBALS['request']->_user_class = get_class($newuser);
         /*
         foreach (get_object_vars($user) as $k => $v) {
             if (!empty($v)) $olduser->$k = $v;	
         }
         */
-        $olduser->hasHomePage(); // revive db handle, because these don't survive sessions
+        $newuser->hasHomePage(); // revive db handle, because these don't survive sessions
         //$GLOBALS['request']->_user = $olduser;
-        return $olduser;
+        return $newuser;
     } else {
         return false;
     }
@@ -323,7 +342,7 @@ function UserExists ($UserName) {
     if (isa($user,'_BogoUser'))
         $user = new _PassUser($UserName,$user->_prefs);
     $class = $user->nextClass();
-    if ($user = new $class($UserName,$user->_prefs)) {
+    if ($user = new $class($UserName, $user->_prefs)) {
         return $user->userExists($UserName);
     }
     $request->_user = $GLOBALS['ForbiddenUser'];
@@ -404,6 +423,17 @@ class _WikiUser
         return false;
     }
 
+    // 
+    function createHomePage() {
+        global $request;
+        $versiondata = array('author' => _("The PhpWiki programming team"));
+        $request->_dbi->save(_("Automatically created user homepage to be able to store UserPreferences.").
+        		     "\n{{Template/UserPage}}",
+                             1, $versiondata);
+        $request->_dbi->touch();                             
+        $this->_HomePagehandle = $request->getPage($this->_userid);
+    }
+    
     // innocent helper: case-insensitive position in _auth_methods
     function array_position ($string, $array) {
         $string = strtolower($string);
@@ -470,7 +500,7 @@ class _WikiUser
         if ($seperate_page) {
             $page = $request->getPage($pagename);
             $revision = $page->getCurrentRevision();
-            return GeneratePage($login,_("Sign In"),$revision);
+            return GeneratePage($login,_("Sign In"), $revision);
         } else {
             return $login->printExpansion();
         }
@@ -521,13 +551,14 @@ class _WikiUser
     }
 
     /* This is quite restrictive and not according the login description online. 
-       Any word char (A-Za-z0-9_), ".", "@" and "-"
-       The backends may loosen this.
+       Any word char (A-Za-z0-9_), " ", ".", "@" and "-"
+       The backends may loosen or tighten this.
     */
     function isValidName ($userid = false) {
         if (!$userid) $userid = $this->_userid;
+        if (!$userid) return false;
         return true; // XXX TODO Hack for GForge
-        return preg_match("/^[\w\.@\-]+$/",$userid) and strlen($userid) < 32;
+        return preg_match("/^[\-\w\.@ ]+$/U", $userid) and strlen($userid) < 32;
     }
 
     /**
@@ -544,6 +575,26 @@ class _WikiUser
         $require_level = max(0, min(WIKIAUTH_ADMIN, (int)$require_level));
 
         if ($logout) { // Log out
+	    if (LOGIN_LOG and is_writeable(LOGIN_LOG)) {
+		global $request;
+		$zone_offset = Request_AccessLogEntry::_zone_offset();
+		$ncsa_time = date("d/M/Y:H:i:s", time());
+		$entry = sprintf('%s - %s - [%s %s] "%s" %s - "%s" "%s"',
+				 (string) $request->get('REMOTE_HOST'),
+				 (string) $request->_user->_userid,
+				 $ncsa_time, $zone_offset, 
+				 "logout ".get_class($request->_user),
+				 "401",
+				 (string) $request->get('HTTP_REFERER'),
+				 (string) $request->get('HTTP_USER_AGENT')
+				 );
+		if (($fp = fopen(LOGIN_LOG, "a"))) {
+		    flock($fp, LOCK_EX);
+		    fputs($fp, "$entry\n");
+		    fclose($fp);
+		}
+		//error_log("$entry\n", 3, LOGIN_LOG);
+	    }
             if (method_exists($GLOBALS['request']->_user, "logout")) { //_HttpAuthPassUser
           	$GLOBALS['request']->_user->logout();
             }
@@ -560,6 +611,40 @@ class _WikiUser
             return _("Invalid username.");;
 
         $authlevel = $this->checkPass($passwd === false ? '' : $passwd);
+
+	if (LOGIN_LOG and is_writeable(LOGIN_LOG)) {
+	    global $request;
+	    $zone_offset = Request_AccessLogEntry::_zone_offset();
+	    $ncsa_time = date("d/M/Y:H:i:s", time());
+	    $manglepasswd = $passwd;
+	    for ($i=0; $i<strlen($manglepasswd); $i++) {
+		$c = substr($manglepasswd,$i,1);
+		if (ord($c) < 32) $manglepasswd[$i] = "<";
+		elseif ($c == '*') $manglepasswd[$i] = "*";
+		elseif ($c == '?') $manglepasswd[$i] = "?";
+		elseif ($c == '(') $manglepasswd[$i] = "(";
+		elseif ($c == ')') $manglepasswd[$i] = ")";
+		elseif ($c == "\\") $manglepasswd[$i] = "\\";
+		elseif (ord($c) < 127) $manglepasswd[$i] = "x";
+		elseif (ord($c) >= 127) $manglepasswd[$i] = ">";
+	    }
+	    $entry = sprintf('%s - %s - [%s %s] "%s" %s - "%s" "%s"',
+			     $request->get('REMOTE_HOST'),
+			     (string) $request->_user->_userid,
+			     $ncsa_time, $zone_offset, 
+			     "login $userid/$manglepasswd => $authlevel ".get_class($request->_user),
+			     $authlevel > 0 ? "200" : "403",
+			     (string) $request->get('HTTP_REFERER'),
+			     (string) $request->get('HTTP_USER_AGENT')
+			     );
+	    if (($fp = fopen(LOGIN_LOG, "a"))) {
+		flock($fp, LOCK_EX);
+		fputs($fp, "$entry\n");
+		fclose($fp);
+	    }
+	    //error_log("$entry\n", 3, LOGIN_LOG);
+	}
+
         if ($authlevel <= 0) { // anon or forbidden
             if ($passwd)
                 return _("Invalid password.");
@@ -829,8 +914,8 @@ extends _AnonUser
     function _PassUser($UserName='', $prefs=false) {
         //global $DBAuthParams, $DBParams;
         if ($UserName) {
-            if (!$this->isValidName($UserName))
-                return false;
+            /*if (!$this->isValidName($UserName))
+                return false;*/
             $this->_userid = $UserName;
             if ($this->hasHomePage())
                 $this->_HomePagehandle = $GLOBALS['request']->getPage($this->_userid);
@@ -1101,7 +1186,7 @@ extends _AnonUser
         _AnonUser::getPreferences();
         // User may have deleted cookie, retrieve from his
         // PersonalPage if there is one.
-        if ($this->_HomePagehandle) {
+        if (!empty($this->_HomePagehandle)) {
             if ($restored_from_page = $this->_prefs->retrieve
                 ($this->_HomePagehandle->get('pref'))) {
                 $updated = $this->_prefs->updatePrefs($restored_from_page,'init');
@@ -1136,7 +1221,14 @@ extends _AnonUser
         }
         if ($updated = _AnonUser::setPreferences($prefs, $id_only)) {
             // Encode only the _prefs array of the UserPreference object
-            if (!empty($this->_HomePagehandle) and !$id_only) {
+	    // If no DB method exists to store the prefs we must store it in the page, not in the cookies.
+            if (empty($this->_HomePagehandle)) {
+                $this->_HomePagehandle = $GLOBALS['request']->getPage($this->_userid);
+	    }
+            if (! $this->_HomePagehandle->exists() ) {
+                $this->createHomePage();
+            }
+	    if (!empty($this->_HomePagehandle) and !$id_only) {
                 $this->_HomePagehandle->set('pref', $this->_prefs->store());
             }
         }
@@ -1151,13 +1243,18 @@ extends _AnonUser
     // child methods obtain $stored_password from external auth.
     function userExists() {
         //if ($this->_HomePagehandle) return true;
-        $class = $this->nextClass();
-        while ($user = new $class($this->_userid, $this->_prefs)) {
+        if (strtolower(get_class($this)) == "_passuser") {
+            $class = $this->nextClass();
+            $user = new $class($this->_userid, $this->_prefs);
+        } else {
+            $user = $this;
+        }
+        while ($user) {
             if (!check_php_version(5))
                 eval("\$this = \$user;");
-            // /*PHP5 patch*/$this = $user;
-            UpgradeUser($this,$user);
+            $user = UpgradeUser($this, $user);
             if ($user->userExists()) {
+                $user = UpgradeUser($this, $user);
                 return true;
             }
             // prevent endless loop. does this work on all PHP's?
@@ -1307,14 +1404,15 @@ extends _AnonUser
             if (substr($class,-10) == "dbpassuser") $class = "_dbpassuser";
             $GLOBALS['USER_AUTH_ERROR'][$class] = 'nosuchuser';
         }
-        if (USER_AUTH_POLICY === 'strict') {
+        if (USER_AUTH_POLICY === 'strict'
+	    or USER_AUTH_POLICY === 'stacked') {
             $class = $this->nextClass();
-            while ($user = new $class($this->_userid,$this->_prefs)) {
+            while ($user = new $class($this->_userid, $this->_prefs)) {
                 if (!check_php_version(5))
                     eval("\$this = \$user;");
-                // /*PHP5 patch*/$this = $user;
-                //$user = UpgradeUser($this, $user);
+	        $user = UpgradeUser($this, $user);
                 if ($user->userExists()) {
+                    $user = UpgradeUser($this, $user);
                     return true;
                 }
                 $class = $this->nextClass();
@@ -1651,16 +1749,29 @@ extends _UserPreference
     	if (!empty($this->_init)) return;
         $verified = $this->getraw('emailVerified');
         // hack!
-        if (($value == 1 or $value === true) and $verified)
+        if (($value == 1 or $value === true) or $verified)
             return;
         if (!empty($value) and !$verified) {
             list($ok,$msg) = ValidateMail($value);
-            if ($ok and mail($value,"[".WIKI_NAME ."] "._("Email Verification"),
+            if (0 and $ok and mail($value,"[".WIKI_NAME ."] "._("Email Verification"),
                      sprintf(_("Welcome to %s!\nYour email account is verified and\nwill be used to send page change notifications.\nSee %s"),
-                             WIKI_NAME, WikiURL($GLOBALS['request']->getArg('pagename'),'',true))))
+                             WIKI_NAME, WikiURL($GLOBALS['request']->getArg('pagename'),'',true)))) {
                 $this->set('emailVerified',1);
+            } else {
+            	trigger_error($msg, E_USER_WARNING);
+            }
         }
     }
+
+    function get ($name) {
+      if (session_loggedin()) {
+                      $user = session_get_user();
+              return $user->getEmail();
+      } else {
+              parent::get($name);
+      }
+    }
+
 }
 
 /** Check for valid email address
@@ -1668,11 +1779,12 @@ extends _UserPreference
     Note: too strict, Bug #1053681
  */
 function ValidateMail($email, $noconnect=false) {
+    global $EMailHosts;
     $HTTP_HOST = $GLOBALS['request']->get('HTTP_HOST');
 
     // if this check is too strict (like invalid mail addresses in a local network only)
     // uncomment the following line:
-    // return array(true,"not validated");
+    //return array(true,"not validated");
     // see http://sourceforge.net/tracker/index.php?func=detail&aid=1053681&group_id=6121&atid=106121
 
     $result = array();
@@ -1706,6 +1818,9 @@ function ValidateMail($email, $noconnect=false) {
     $mailbox = "(?:$addr_spec|$phrase$route_addr)";
 
     $rfc822re = "/$lwsp*$mailbox/";
+    unset($domain, $route_addr, $route, $phrase, $addr_spec, $sub_domain, $localpart, 
+          $atom, $word, $quoted_string);
+    unset($dtext, $controls, $specials, $lwsp, $domain_literal);
 
     if (!preg_match($rfc822re, $email)) {
         $result[0] = false;
@@ -1713,7 +1828,7 @@ function ValidateMail($email, $noconnect=false) {
         return $result;
     }
     if ($noconnect)
-      return array(true,sprintf(_("E-Mail address '%s' is properly formatted"), $email));
+      return array(true, sprintf(_("E-Mail address '%s' is properly formatted"), $email));
 
     list ( $Username, $Domain ) = split ("@", $email);
     //Todo: getmxrr workaround on windows or manual input field to verify it manually
@@ -1721,6 +1836,9 @@ function ValidateMail($email, $noconnect=false) {
         $ConnectAddress = $MXHost[0];
     } else {
         $ConnectAddress = $Domain;
+	if (isset($EMailHosts[ $Domain ])) {
+            $ConnectAddress = $EMailHosts[ $Domain ];
+        }
     }
     $Connect = @fsockopen ( $ConnectAddress, 25 );
     if ($Connect) {
@@ -1773,6 +1891,8 @@ function ValidateMail($email, $noconnect=false) {
  */
 class UserPreferences
 {
+    var $notifyPagesAll;
+	
     function UserPreferences($saved_prefs = false) {
         // userid stored too, to ensure the prefs are being loaded for
         // the correct (currently signing in) userid if stored in a
@@ -1801,6 +1921,22 @@ class UserPreferences
                     'timeOffset'    => new _UserPreference_numeric(TIMEOFFSET_DEFAULT_HOURS,
                                                                    TIMEOFFSET_MIN_HOURS,
                                                                    TIMEOFFSET_MAX_HOURS),
+                    'ownModifications' => new _UserPreference_bool(),
+                    'majorModificationsOnly' => new _UserPreference_bool(),
+                    'diffMenuItem' => new _UserPreference_bool(),
+                    'pageInfoMenuItem' => new _UserPreference_bool(),
+                    'pdfMenuItem' => new _UserPreference_bool(),
+                    'lockMenuItem' => new _UserPreference_bool(),
+                    'chownMenuItem' => new _UserPreference_bool(),
+                    'setaclMenuItem' => new _UserPreference_bool(),
+                    'removeMenuItem' => new _UserPreference_bool(),
+                    'renameMenuItem' => new _UserPreference_bool(),
+                    'revertMenuItem' => new _UserPreference_bool(),
+                    'backLinksMenuItem' => new _UserPreference_bool(),
+                    'watchPageMenuItem' => new _UserPreference_bool(),
+                    'recentChangesMenuItem' => new _UserPreference_bool(),
+                    'searchMenuItem' => new _UserPreference_bool(),
+                    'specialPagesMenuItem' => new _UserPreference_bool(),
                     'relativeDates' => new _UserPreference_bool(),
                     'googleLink'    => new _UserPreference_bool(), // 1.3.10
                     'doubleClickEdit' => new _UserPreference_bool(), // 1.3.11
@@ -1952,6 +2088,15 @@ class UserPreferences
                     $prefs['passwd'] = $value;
             }
         }
+        
+        // Merge current notifyPages with notifyPagesAll
+        // notifyPages are pages to notify in the current project
+        // while $notifyPagesAll is used to store all the monitored pages.
+        if (isset($prefs['notifyPages'])) {
+        	$this->notifyPagesAll[PAGE_PREFIX] = $prefs['notifyPages'];
+        	$prefs['notifyPages'] = @serialize($this->notifyPagesAll);
+        }
+
         return $this->pack($prefs);
     }
 
@@ -1963,15 +2108,17 @@ class UserPreferences
         if (!is_array($packed)) return false;
         $prefs = array();
         foreach ($packed as $name => $packed_pref) {
-            if (is_string($packed_pref) and substr($packed_pref, 0, 2) == "O:") {
+            if (is_string($packed_pref)
+                and isSerialized($packed_pref)
+                and substr($packed_pref, 0, 2) == "O:")
+            {
                 //legacy: check if it's an old array of objects
                 // Looks like a serialized object. 
                 // This might fail if the object definition does not exist anymore.
                 // object with ->$name and ->default_value vars.
                 $pref =  @unserialize($packed_pref);
-                if (empty($pref))
-                    $pref = @unserialize(base64_decode($packed_pref));
-                $prefs[$name] = $pref->get($name);
+                if (is_object($pref))
+                    $prefs[$name] = $pref->get($name);
             // fix old-style prefs
             } elseif (is_numeric($name) and is_array($packed_pref)) {
             	if (count($packed_pref) == 1) {
@@ -1979,14 +2126,28 @@ class UserPreferences
             	    $prefs[$name] = $value;
             	}
             } else {
-                $prefs[$name] = @unserialize($packed_pref);
-                if (empty($prefs[$name]))
+                if (isSerialized($packed_pref))
+                    $prefs[$name] = @unserialize($packed_pref);
+                if (empty($prefs[$name]) and isSerialized(base64_decode($packed_pref)))
                     $prefs[$name] = @unserialize(base64_decode($packed_pref));
                 // patched by frederik@pandora.be
                 if (empty($prefs[$name]))
                     $prefs[$name] = $packed_pref;
             }
         }
+        
+        // Restore notifyPages from notifyPagesAll
+        // notifyPages are pages to notify in the current project
+        // while $notifyPagesAll is used to store all the monitored pages.
+        if (isset($prefs['notifyPages'])) {
+        	$this->notifyPagesAll = $prefs['notifyPages'];
+        	if (isset($this->notifyPagesAll[PAGE_PREFIX])) {
+        		$prefs['notifyPages'] = $this->notifyPagesAll[PAGE_PREFIX];
+        	} else {
+        		$prefs['notifyPages'] = '';
+        	}
+        }
+
         return $prefs;
     }
 
@@ -2108,6 +2269,41 @@ extends UserPreferences
 */
 
 // $Log: WikiUserNew.php,v $
+// Revision 1.148  2008/03/17 19:39:34  rurban
+// get rid of @ error protection in unserialize
+//
+// Revision 1.147  2007/09/15 12:55:56  rurban
+// Fix Bug#1795420 by Sven Ginka: Use /U in preg_match
+//
+// Revision 1.146  2007/08/25 18:34:08  rurban
+// add LOGIN_LOG to check possible external auth problems
+//
+// Revision 1.145  2007/06/07 16:56:27  rurban
+// protect against empty username
+//
+// Revision 1.144  2007/06/01 06:36:57  rurban
+// allow space in user names. backends should tighten it
+//
+// Revision 1.143  2007/05/24 18:37:53  rurban
+// silence AdminUser HomePagehandle warning
+//
+// Revision 1.142  2007/05/15 16:32:34  rurban
+// Refactor class upgrading at ->UserExists
+//
+// Revision 1.141  2007/05/13 18:31:24  rurban
+// Refactor UpgradeUser. Added EMailHosts
+//
+// Revision 1.140  2006/12/22 01:20:14  rurban
+// Automatically create a Users homepage, when no SQL method exists
+// not to rely on cookies.
+//
+// Revision 1.139  2006/09/03 09:55:37  rurban
+// Remove too early and too strict isValidName check in _PassUser. This really should be done in
+// the method, when we know it. This fixes NTLM auth. (userid=domain\user)
+//
+// Revision 1.138  2006/06/18 11:02:55  rurban
+// pref->value > -name, fix bug #1355533
+//
 // Revision 1.137  2006/05/03 06:05:37  rurban
 // Fix default preferences for editheight maxrows, by Manuel Vacelet.
 //

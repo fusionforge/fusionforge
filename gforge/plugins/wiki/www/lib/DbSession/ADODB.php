@@ -1,4 +1,4 @@
-<?php rcs_id('$Id: ADODB.php,v 1.2 2005/11/21 20:48:48 rurban Exp $');
+<?php rcs_id('$Id: ADODB.php 6184 2008-08-22 10:33:41Z vargenau $');
 /*
  Copyright 2005 $ThePhpWikiProgrammingTeam
 
@@ -147,6 +147,7 @@ extends DbSession
      * @access private
      */
     function write ($id, $sess_data) {
+        if (defined("WIKI_XMLRPC") or defined("WIKI_SOAP")) return;    	
         
         $dbh = $this->_connect();
         $table = $this->_table;
@@ -257,7 +258,7 @@ extends DbSession
     }
 }
 
-// $Log: ADODB.php,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.2  2005/11/21 20:48:48  rurban
 // fix ref warnings reported by schorni
 //

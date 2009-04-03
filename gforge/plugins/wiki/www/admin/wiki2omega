@@ -1,0 +1,191 @@
+#!/usr/bin/perl -w
+# Copyright (C) 2007 Reini Urban
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+
+=pod
+
+=head1 NAME
+
+wiki2omega [-u URL] WIKIDB
+
+=over 4
+
+=item B<WIKIDB>
+
+The first argument may be a phpwiki url, a directory or a single file.
+If it is an url the -url option is optional, otherwise mandatory.
+
+=item B<-url>
+
+The url prefix for the xapian database to be able to link to the result page.
+
+=item B<-man>
+
+Prints the manual page and exits.
+
+=back
+
+=head1 DESCRIPTION
+
+Convert a phpwiki database to a format recognizable for xapian scriptindex,
+to prepare a fulltext index.
+
+=head1 SYNOPSIS
+
+  # serial dump (see config.ini for DEFAULT_DUMP_DIR)
+  DEFAULT_DUMP_DIR = /var/www/wikidb/pgsrc
+  lwp-request -d http://localhost/phpwiki/?action=dumpserial
+  wiki2omega -u wiki $DEFAULT_DUMP_DIR | \
+    scriptindex /var/lib/omega/data/wiki /usr/share/omega/wiki2omega.script
+
+  # zip dump
+  wiki2omega http://localhost/phpwiki/ | \
+    scriptindex /var/lib/omega/data/wiki /usr/share/omega/wiki2omega.script
+
+  # single file
+  wiki2omega -u wiki /tmp/wikidump/HomePage | \
+    scriptindex /var/lib/omega/data/wiki /usr/share/omega/wiki2omega.script
+
+  # real life usage
+  DEFAULT_DUMP_DIR = /var/www/wikidb/pgsrc
+  nice /usr/bin/lwp-request -P -d -m GET "http://localhost/wiki/?action=dumpserial"
+  nice wiki2omega -u /wiki $DEFAULT_DUMP_DIR | \
+    scriptindex /var/lib/omega/data/wiki /var/lib/omega/scripts/wiki2index.script \
+    > /var/log/omega/updateindex-wiki.log
+
+=cut
+
+use strict;
+use Getopt::Long;
+use Pod::Usage;
+use Digest::MD5 qw(md5_hex);
+use constant AZ_OK => 0;
+
+my $man = 0;
+my $help = 0;
+my $db;
+my $wikiurl;
+
+GetOptions('help|?'  => \$help,
+	   'man'     => \$man,
+	   'url|u=s' => \$wikiurl,
+	  ) or pod2usage(2);
+pod2usage(1) if $help;
+pod2usage(-exitstatus => 0, -verbose => 2) if $man;
+
+sub urldecode ($) {
+  my $s = shift;
+  $s =~ s/%([A-F0-9][A-F0-9])/chr(hex($1))/eg;
+  return $s;
+}
+
+sub p ($) {
+  # my $title = shift;
+  my $content = shift;
+  my $hdr = 1;
+  my $headers = '';
+  my %hdr;
+  return unless $content;
+  $hdr{md5} = md5_hex($content);
+  $hdr{size} = length($content);
+  $hdr{language} = 'english';
+  @_ = split(/\n/, $content);
+ LINE: while ($_ = shift @_) {
+    s/\r$//;
+    if ($hdr) {
+	if (/^$/) {
+	  # headers finished, dump them
+	  my $title = $hdr{title};
+	  print "url=$wikiurl/$title\n";
+	  for my $h (keys %hdr) {
+	    print "$h=$hdr{$h}\n";
+	  }
+	  print "content";
+	  $hdr = 0;
+	  next LINE;
+	}
+	# ignore continuation lines
+	my $line = $_;
+	#while ($_ = shift @_) {
+	#  s/\r$//;
+	#  last unless /^[ \t]/;
+	#  $line .= $_;
+	#}
+	if ($line =~ s/^Date:\s*(.*?)\s*$/$1/i) {
+	  $hdr{date} = $line if length $line;
+	  #print "date=$line\n" if length $line;
+	} elsif ($line =~ s/  pagename=(.*?);$/$1/) {
+	  $hdr{title} = urldecode($line) if length $line;
+	} elsif ($line =~ s/  author=(.*?);$/$1/) {
+	  $hdr{author} = urldecode($line) if length $line;
+	} elsif ($line =~ s/  lastmodified=(.*?);$/$1/) {
+	  $hdr{lastmod} = $line if length $line;
+	  $hdr{date} = $line if length $line;
+	}
+    } else {
+      # the rest is the content:
+      # gather headers
+      if (/^\s*\!+(.+)$/) {
+	$headers .= "$1 ";
+      }
+      print "=",$_,"\n";
+    }
+  }
+  print "headers=$headers" if $headers;
+}
+
+unless ($wikiurl) {
+  $wikiurl = $db = shift or die "Syntax: $0 WIKIURL\n";
+} else {
+  $db = shift or die "Syntax: $0 -u WIKIURL DATABASE\n";
+}
+if ($db =~ /^http/) {
+  `wget -nv -O/tmp/wikidb.zip "$db?action=zip"`;
+  $db = "/tmp/wikidb.zip";
+}
+
+if ($db =~ /\.zip$/i) {
+  eval "require Archive::Zip;";
+  my $zip = Archive::Zip->new();
+  die 'wikidb.zip read error' unless $zip->read( $db ) == AZ_OK;
+  foreach my $member ($zip->members()) {
+    unless ($member->isDirectory()) {
+      my $page = $zip->contents($member);
+      p ($page);
+      print "\n";
+    }
+  }
+} elsif (-d $db) {
+  local $/;
+  @_ = glob "$db/*";
+  while (my $filename = shift @_) {
+    open IN, "< $filename";
+    my $content = <IN>;
+    p ($content);
+    print "\n";
+    close IN;
+  }
+} elsif (-f $db) {
+  local $/;
+  open IN, "< $db";
+  my $content = <IN>;
+  p ($content);
+  close IN;
+  print "\n";
+} else {
+  die "invalid argument";
+}
+

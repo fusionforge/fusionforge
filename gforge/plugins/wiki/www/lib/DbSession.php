@@ -1,4 +1,4 @@
-<?php rcs_id('$Id: DbSession.php,v 1.35 2005/08/07 10:51:11 rurban Exp $');
+<?php rcs_id('$Id: DbSession.php 6184 2008-08-22 10:33:41Z vargenau $');
 
 /**
  * Store sessions data in Pear DB / ADODB / dba / PDO, ....
@@ -62,10 +62,7 @@ class DbSession
     function quote($string) { return $string; }
 }
 
-// $Log: DbSession.php,v $
-// Revision 1.35  2005/08/07 10:51:11  rurban
-// reformatting
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.34  2005/08/07 10:08:33  rurban
 // dba simplification: no _backend in the subclass
 //

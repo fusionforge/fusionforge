@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: CustomPrefs.php,v 1.1 2004/06/18 14:42:17 rurban Exp $');
+rcs_id('$Id: CustomPrefs.php 6184 2008-08-22 10:33:41Z vargenau $');
 
 /**
  * Custom UserPreferences:
@@ -54,10 +54,7 @@ $WikiTheme->customUserPreferences
           ));
 
 
-// $Log: CustomPrefs.php,v $
-// Revision 1.1  2004/06/18 14:42:17  rurban
-// added wikilens libs (not yet merged good enough, some work for DanFr)
-// 
+// $Log: not supported by cvs2svn $ 
 
 // Local Variables:
 // mode: php

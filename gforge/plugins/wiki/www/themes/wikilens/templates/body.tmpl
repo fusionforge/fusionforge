@@ -1,0 +1,34 @@
+<?php // -*-php-*-
+rcs_id('$Id: body.tmpl 6204 2008-08-26 15:12:03Z vargenau $');
+?>
+<body<?= $WikiTheme->getMoreAttr('body') ?>>
+
+<table><tr><td colspan="2" class="header">
+<div id="header">
+  <?= Template('top') ?>
+</div>
+</td></tr>
+<tr valign="top"><td class="leftnav" width="120">
+<div class="toolbar">
+  <?= Template('navbar') ?>
+</div>
+<hr>
+<?plugin IncludePage page="LeftbarContent" quiet="true" ?>
+</td><td class="content">
+
+<!-- Page title -->
+<h1><?= $HEADER ?>
+<?php if (!empty($user) && $user->isSignedIn()) {
+  $loader = new WikiPluginLoader();
+  printXML(HTML::Raw("&nbsp;&nbsp;"));
+  printXML($loader->expandPI("<"."?plugin RateIt ?".">", $request, $dbi->_markup));
+} ?> </h1>
+
+<div id="content">
+
+<?= $CONTENT ?>
+
+</div>
+<?= Template('bottom') ?>
+</td></tr></table>
+</body>

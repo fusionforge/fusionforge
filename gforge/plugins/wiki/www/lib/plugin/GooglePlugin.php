@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: GooglePlugin.php,v 1.5 2004/06/13 14:30:26 rurban Exp $');
+rcs_id('$Id: GooglePlugin.php 6185 2008-08-22 11:40:14Z vargenau $');
 /**
  Copyright 2004 $ThePhpWikiProgrammingTeam
 
@@ -49,7 +49,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.5 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -122,10 +122,7 @@ extends WikiPlugin
     }
 };
 
-// $Log: GooglePlugin.php,v $
-// Revision 1.5  2004/06/13 14:30:26  rurban
-// security fix: check permissions in SearchReplace
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.4  2004/06/13 14:15:28  rurban
 // GooglePlugin now actually works (templated result missing)
 //

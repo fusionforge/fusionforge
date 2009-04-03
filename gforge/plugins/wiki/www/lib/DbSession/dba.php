@@ -1,9 +1,13 @@
-<?php rcs_id('$Id: dba.php,v 1.4 2006/02/22 20:56:24 rurban Exp $');
+<?php rcs_id('$Id: dba.php 6184 2008-08-22 10:33:41Z vargenau $');
 
 /** DBA Sessions
  *  session:
  *     Index: session_id
- *    Values: date : IP : data
+ *     Values: date : IP : data
+ *  Already open sessions, e.g. interim xmlrpc requests are
+ *  are treated specially. see write(). 
+ *  To avoid deadlocks in the session.db3 access,
+ *  the db is opened and closed for each access.
  * @author: Reini Urban.
  */
 class DbSession_dba
@@ -34,9 +38,8 @@ extends DbSession
             $directory = '/tmp';
             $prefix = 'wiki_';
             $dba_handler = 'gdbm';
-            $timeout = 20;
-            extract($DBParams);
-
+            $timeout = 12;
+            extract($DBParams); // overwrite the defaults
             $dbfile = "$directory/$prefix" . 'session' . '.' . $dba_handler;
             $dbh = new DbaDatabase($dbfile, 'c', $dba_handler);
             $this->_dbh = &$dbh;
@@ -45,8 +48,10 @@ extends DbSession
     }
 
     function _disconnect() {
-        if (isset($this->_dbh))
+        if (isset($this->_dbh)) {
             $this->_dbh->close();
+            unset($this->_dbh);
+        }
     }
 
     function open ($save_path, $session_name) {
@@ -55,8 +60,7 @@ extends DbSession
     }
 
     function close() {
-    	if ($this->_dbh)
-            $this->_dbh->close();
+        $this->_disconnect();
     }
 
     function read ($id) {
@@ -66,7 +70,7 @@ extends DbSession
             return false;
         }
         list(,,$packed) = explode(':', $result, 3);
-        // $this->_disconnect();
+        $this->_disconnect();
         if (strlen($packed) > 4000) {
             trigger_error("Overlarge session data!", E_USER_WARNING);
             $packed = '';
@@ -76,6 +80,8 @@ extends DbSession
     }
   
     function write ($id, $sess_data) {
+        if (defined("WIKI_XMLRPC") or defined("WIKI_SOAP")) return;
+
         $dbh = $this->_connect();
         $time = time();
         $ip = $GLOBALS['request']->get('REMOTE_ADDR');
@@ -84,14 +90,14 @@ extends DbSession
             $sess_data = '';
         }
         $dbh->set($id, $time.':'.$ip.':'.$sess_data);
-        //$this->_disconnect();
+        $this->_disconnect();
         return true;
     }
 
     function destroy ($id) {
         $dbh = $this->_connect();
         $dbh->delete($id);
-        //$this->_disconnect();
+        $this->_disconnect();
         return true;
     }
 
@@ -104,7 +110,7 @@ extends DbSession
             if ($date < $threshold)
                 $dbh->delete($id);
         }
-        //$this->_disconnect();
+        $this->_disconnect();
         return true;
     }
 
@@ -131,7 +137,7 @@ extends DbSession
     }
 }
 
-// $Log: dba.php,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.4  2006/02/22 20:56:24  rurban
 // fix more refs
 //

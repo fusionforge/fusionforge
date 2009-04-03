@@ -1,9 +1,9 @@
 Date: Sat, 5 Jun 2004 16:49:54 +0200
 Mime-Version: 1.0 (Produced by PhpWiki 1.3.10)
-X-Rcs-Id: $Id: InterWiki,v 1.6 2004/06/08 14:19:03 rurban Exp $
+X-Rcs-Id: $Id: InterWiki 6197 2008-08-25 12:33:05Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=InterWiki;
-  pgsrc_version="2 $Revision: 1.6 $";
+  pgsrc_version="2 $Revision: 6197 $";
   flags="";
   markup=2;
   charset=iso-8859-1
@@ -44,4 +44,4 @@ CategoryCategory.
 Le terme "InterWiki" se réfère aussi à un concept plus large. Voir 
 PhpWiki:InterWikiSearch pour plus de liens.
 ----
-DocumentationDePhpWiki
+[DocumentationDePhpWiki]

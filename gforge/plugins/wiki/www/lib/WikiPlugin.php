@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-rcs_id('$Id: WikiPlugin.php,v 1.61 2005/10/31 17:20:40 rurban Exp $');
+rcs_id('$Id: WikiPlugin.php 6184 2008-08-22 10:33:41Z vargenau $');
 
 class WikiPlugin
 {
@@ -87,7 +87,7 @@ class WikiPlugin
     function getVersion() {
         return _("n/a");
         //return preg_replace("/[Revision: $]/", '',
-        //                    "\$Revision: 1.61 $");
+        //                    "\$Revision: 1.67 $");
     }
 
     function getArgs($argstr, $request=false, $defaults=false) {
@@ -116,17 +116,17 @@ class WikiPlugin
             unset($argstr_args[$arg]);
             unset($argstr_defaults[$arg]);
         }
-
+        
         foreach (array_merge($argstr_args, $argstr_defaults) as $arg => $val) {
-            if ($request and $request->getArg('pagename') == _("PhpWikiAdministration") 
+	    // TODO: where the heck comes this from? Put the new method over there and peace.
+            /*if ($request and $request->getArg('pagename') == _("PhpWikiAdministration") 
                 and $arg == 'overwrite') // silence this warning
-                ;
-            else
-                trigger_error(sprintf(_("Argument '%s' not declared by plugin."),
-                                      $arg), E_USER_NOTICE);
+                ;*/
+            if ($this->allow_undeclared_arg($arg, $val))
+                $args[$arg] = $val;
         }
 
-        // add special handling of pages and exclude args to accept <! plugin-list !>
+        // Add special handling of pages and exclude args to accept <! plugin-list !>
         // and split explodePageList($args['exclude']) => array()
         // TODO : handle p[] pagehash
         foreach (array('pages', 'exclude') as $key) {
@@ -136,16 +136,6 @@ class WikiPlugin
                     : $args[$key]; // <! plugin-list !>
         }
 
-        // always override sortby,limit from the REQUEST. ignore defaults if defined as such.
-        foreach (array('sortby', 'limit') as $key) {
-            if (array_key_exists($key, $defaults)) {
-                if ($val = $request->getArg($key))
-                    $args[$key] = $val;
-                elseif (!empty($args[$key])) {
-                    $GLOBALS['request']->setArg($key, $args[$key]);
-                }
-            }
-        }
         return $args;
     }
 
@@ -165,7 +155,7 @@ class WikiPlugin
         $args = array();
         $defaults = array();
 	if (empty($argstr))
-            return array($args,$defaults);
+            return array($args, $defaults);
             
         $arg_p = '\w+';
         $op_p = '(?:\|\|)?=';
@@ -195,18 +185,29 @@ class WikiPlugin
             }
         }
         while (preg_match("/^$opt_ws $argspec_p $opt_ws/x", $argstr, $m)) {
-            @ list(,$arg,$op,$qq_val,$q_val,$gt_val,$word_val) = $m;
+            //@ list(,$arg,$op,$qq_val,$q_val,$gt_val,$word_val) = $m;
+            $count = count($m);
+            if ($count >= 7) {
+                list(, $arg, $op, $qq_val, $q_val, $gt_val, $word_val) = $m;
+            } elseif ($count == 6) {
+                list(, $arg, $op, $qq_val, $q_val, $gt_val) = $m;
+            } elseif ($count == 5) {
+                list(, $arg, $op, $qq_val, $q_val) = $m;
+            } elseif ($count == 4) {
+                list(, $arg, $op, $qq_val) = $m;
+            }
             $argstr = substr($argstr, strlen($m[0]));
-
             // Remove quotes from string values.
             if ($qq_val)
                 $val = stripslashes($qq_val);
-            elseif ($q_val)
+            elseif ($count > 4 and $q_val)
                 $val = stripslashes($q_val);
-            elseif ($gt_val)
+            elseif ($count >= 6 and $gt_val)
                 $val = _(stripslashes($gt_val));
-            else
+            elseif ($count >= 7)
                 $val = $word_val;
+            else 
+                $val = '';    
 
             if ($op == '=') {
                 $args[$arg] = $val;
@@ -235,19 +236,27 @@ class WikiPlugin
         trigger_error(sprintf(_("trailing cruft in plugin args: '%s'"),
                               $argstr), E_USER_NOTICE);
     }
+    
+    /* A plugin can override this to allow undeclared arguments.
+       Or to silence the warning.
+     */
+    function allow_undeclared_arg($name, $value) {
+        trigger_error(sprintf(_("Argument '%s' not declared by plugin."),
+                              $name), E_USER_NOTICE);
+	return false;
+    }
 
     /* handle plugin-list argument: use run(). */
     function makeList($plugin_args, $request, $basepage) {
         $dbi = $request->getDbh();
         $pagelist = $this->run($dbi, $plugin_args, $request, $basepage);
         $list = array();
-        if (is_object($pagelist) and isa($pagelist, 'PageList')) {
-            // table or list?
-            foreach ($pagelist->_pages as $page) {
-            	$list[] = $page->getName();
-            }
-        }
-        return $list;
+        if (is_object($pagelist) and isa($pagelist, 'PageList'))
+            return $pagelist->pageNames();
+        elseif (is_array($pagelist))
+            return $pagelist;
+        else    
+            return $list;
     }
 
     function getDefaultLinkArguments() {

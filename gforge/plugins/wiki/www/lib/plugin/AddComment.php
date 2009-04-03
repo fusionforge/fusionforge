@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: AddComment.php,v 1.8 2004/06/13 09:45:23 rurban Exp $');
+rcs_id('$Id: AddComment.php 6185 2008-08-22 11:40:14Z vargenau $');
 /*
  Copyright (C) 2004 $ThePhpWikiProgrammingTeam
  
@@ -22,7 +22,7 @@ rcs_id('$Id: AddComment.php,v 1.8 2004/06/13 09:45:23 rurban Exp $');
 
 /**
  * This plugin allows user comments attached to a page, similar to WikiBlog.
- * based on WikiBlog, no summary.
+ * Based on WikiBlog, no summary.
  *
  * TODO:
  * For admin user, put checkboxes beside comments to allow for bulk removal.
@@ -45,7 +45,7 @@ extends WikiPlugin_WikiBlog
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.8 $");
+                            "\$Revision: 6185 $");
     }
 
     // Arguments:
@@ -57,7 +57,7 @@ extends WikiPlugin_WikiBlog
     //
     //  mode - 'show'     - only show old comments
     //         'add'      - only show entry box for new comment
-    //         'show,add' - show old comments then entry box
+    //         'show,add' - show old comments, then entry box
     //         'add,show' - show entry box followed by list of comments
     //  jshide - boolean  - quick javascript expansion of the comments 
     //                      and addcomment box
@@ -125,9 +125,12 @@ function togglecomments(a) {
                 $div->pushContent($show);
                 break;
             case 'add':
-                $add = $this->showForm($request, $args, 'addcomment');
-                //if ($args['jshide']) $add->setAttr('style','display:none;');
-                $div->pushContent($add);
+		global $WikiTheme;
+		if (!$WikiTheme->DUMP_MODE) {
+		    $add = $this->showForm($request, $args, 'addcomment');
+		    //if ($args['jshide']) $add->setAttr('style','display:none;');
+		    $div->pushContent($add);
+		}
                 break;
             default:
                 return $this->error(sprintf("Bad mode ('%s')", $show));
@@ -139,7 +142,7 @@ function togglecomments(a) {
    
 };
 
-// $Log: AddComment.php,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.8  2004/06/13 09:45:23  rurban
 // display bug workaround for MacIE browsers, jshide: 0
 //

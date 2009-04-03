@@ -1,7 +1,7 @@
-<?php rcs_id('$Id: WikiPluginCached.php,v 1.19 2004/12/16 18:30:59 rurban Exp $');
+<?php rcs_id('$Id: WikiPluginCached.php 6184 2008-08-22 10:33:41Z vargenau $');
 /*
  Copyright (C) 2002 Johannes Große (Johannes Gro&szlig;e)
- Copyright (C) 2004 Reini Urban
+ Copyright (C) 2004,2007 Reini Urban
 
  This file is part of PhpWiki.
 
@@ -29,20 +29,17 @@
 require_once "lib/WikiPlugin.php";
 // require_once "lib/plugincache-config.php"; // replaced by config.ini settings!
 
-// Try the system pear class. See newCache()
-@require_once('Cache.php');
-
 // types:
 define('PLUGIN_CACHED_HTML', 0);         // cached html (extensive calculation)
 define('PLUGIN_CACHED_IMG_INLINE', 1);   // gd images
-define('PLUGIN_CACHED_MAP', 2);    	     // area maps
-define('PLUGIN_CACHED_SVG', 3);    	     // special SVG/SVGZ object
+define('PLUGIN_CACHED_MAP', 2);    	 // area maps
+define('PLUGIN_CACHED_SVG', 3);    	 // special SVG/SVGZ object
 define('PLUGIN_CACHED_SVG_PNG', 4);      // special SVG/SVGZ object with PNG fallback
-define('PLUGIN_CACHED_SWF', 5);    	     // special SWF (flash) object
-define('PLUGIN_CACHED_PDF', 6);    	     // special PDF object (inlinable?)
-define('PLUGIN_CACHED_PS', 7);    	     // special PS object (inlinable?)
+define('PLUGIN_CACHED_SWF', 5);    	 // special SWF (flash) object
+define('PLUGIN_CACHED_PDF', 6);    	 // special PDF object (inlinable?)
+define('PLUGIN_CACHED_PS', 7);    	 // special PS object (inlinable?)
 // boolean tests:
-define('PLUGIN_CACHED_IMG_ONDEMAND', 64); // don't cache
+define('PLUGIN_CACHED_IMG_ONDEMAND', 64);// don't cache
 define('PLUGIN_CACHED_STATIC', 128); 	 // make it available via /uploads/, not via /getimg.php?id=
 
 /**
@@ -85,7 +82,8 @@ class WikiPluginCached extends WikiPlugin
             'arguments'  => $argarray ) ); 
         $id = $cache->generateId( $plugincall );
         $plugincall_arg = rawurlencode($plugincall);
-        //$plugincall_arg = md5($plugincall); // will not work if plugin has to recreate content and cache is lost
+        //$plugincall_arg = md5($plugincall); 
+        // will not work if plugin has to recreate content and cache is lost
 
         $url = DATA_PATH . '/getimg.php?';
         if (($lastchar = substr($url,-1)) == '/') {
@@ -112,8 +110,8 @@ class WikiPluginCached extends WikiPlugin
             $url .= '/' . PLUGIN_CACHED_FILENAME_PREFIX . $id . '.img' 
                 . ($plugincall_arg ? '?args='.$plugincall_arg : '');
         }
-        if ($request->getArg("start_debug"))
-            $url .= "&amp;start_debug=1";
+        if ($request->getArg("start_debug") and (DEBUG & _DEBUG_REMOTE))
+            $url .= "&start_debug=1";
         return array($id, $url);
     } // genUrl
 
@@ -245,8 +243,8 @@ class WikiPluginCached extends WikiPlugin
                 break;
         }
         if ($do_save) {
-            $expire = $this->getExpire($dbi, $sortedargs, $request);
-            $content['args'] = $sortedargs;
+            $content['args'] = md5($this->_pi);
+            $expire = $this->getExpire($dbi, $content['args'], $request);
             $cache->save($id, $content, $expire, 'imagecache');
         }
         if ($content['html'])
@@ -786,12 +784,22 @@ class WikiPluginCached extends WikiPlugin
         return $content;
     }
 
-    function tempnam($prefix = false) {
+    function tempnam($prefix = "") {
+	if (preg_match("/^(.+)\.(\w{2,4})$/", $prefix, $m)) {
+	    $prefix = $m[1];
+	    $ext = ".".$m[2];
+	} else {
+	    $ext = isWindows()? ".tmp" : "";
+	}
         $temp = tempnam(isWindows() ? str_replace('/', "\\", PLUGIN_CACHED_CACHE_DIR) 
                                     : PLUGIN_CACHED_CACHE_DIR,
                        $prefix ? $prefix : PLUGIN_CACHED_FILENAME_PREFIX);
-        if (isWindows())
-            $temp = preg_replace("/\.tmp$/", "_tmp", $temp);
+        if (isWindows()) {
+	    if ($ext != ".tmp") unlink($temp);
+            $temp = preg_replace("/\.tmp$/", $ext, $temp);
+	} else {
+	    $temp .= $ext;
+	}
         return $temp;
     }
 
@@ -1064,10 +1072,31 @@ class WikiPluginCached extends WikiPlugin
         }
     }
 
+    function oldFilterThroughCmd_File($input, $commandLine) {
+	$ext = ".txt";
+	$tmpfile = tempnam(getUploadFilePath(), $ext);
+	$fp = fopen($tmpfile,'wb');
+	fwrite($fp, $input);
+	fclose($fp);
+	$cat = isWindows() ? 'cat' : 'type';
+	$pipe = popen("$cat \"$tmpfile\" | $commandLine", 'r');
+	if (!$pipe) {
+            print "pipe failed.";
+            return "";
+	}
+	$output = '';
+	while (!feof($pipe)) {
+            $output .= fread($pipe, 1024);
+	}
+	pclose($pipe);
+	unlink($tmpfile);
+	return $output;
+    }
+
     /* PHP versions < 4.3
      * TODO: via temp file looks more promising
      */
-    function OldFilterThroughCmd($input, $commandLine) {
+    function oldFilterThroughCmd($input, $commandLine) {
          $input = str_replace ("\\", "\\\\", $input);
          $input = str_replace ("\"", "\\\"", $input);
          $input = str_replace ("\$", "\\\$", $input);
@@ -1075,7 +1104,7 @@ class WikiPluginCached extends WikiPlugin
          $input = str_replace ("'", "\'", $input);
          //$input = str_replace (";", "\;", $input);
 
-         $pipe = popen("echo \"$input\"|$commandLine", 'r');
+         $pipe = popen("echo \"$input\" | $commandLine", 'r');
          if (!$pipe) {
             print "pipe failed.";
             return "";
@@ -1092,12 +1121,14 @@ class WikiPluginCached extends WikiPlugin
     function filterThroughCmd($source, $commandLine) {
         if (check_php_version(4,3,0))
             return $this->newFilterThroughCmd($source, $commandLine);
-        else 
+        elseif (strlen($source) < 255)
             return $this->oldFilterThroughCmd($source, $commandLine);
+        else
+            return $this->oldFilterThroughCmd_File($source, $commandLine);
     }
 
     /**
-     * Execute system command until the outfile $until exists.
+     * Execute system command and wait until the outfile $until exists.
      *
      * @param  cmd   string   command to be invoked
      * @param  until string   expected output filename
@@ -1128,11 +1159,22 @@ class WikiPluginCached extends WikiPlugin
         return $ok;
     }
 
-
 } // WikiPluginCached
 
 
-// $Log: WikiPluginCached.php,v $
+// $Log: not supported by cvs2svn $
+// Revision 1.24  2007/09/22 12:38:57  rurban
+// smaller cached args footprint
+//
+// Revision 1.23  2007/09/12 19:38:41  rurban
+// improve tempnam on windows, cleanup zero-sized files
+//
+// Revision 1.22  2007/01/25 07:42:09  rurban
+// Remove early Cache.php loader. Do it later and better.
+//
+// Revision 1.21  2007/01/20 11:24:23  rurban
+// Use cat/type for text pipe commands if input > 255 chars
+//
 // Revision 1.20  2005/09/26 06:28:46  rurban
 // beautify tempnam() on Windows. Move execute() from above here
 //

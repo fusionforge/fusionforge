@@ -1,5 +1,5 @@
 <?php
-rcs_id('$Id: FoafViewer.php,v 1.4 2004/07/08 20:30:07 rurban Exp $');
+rcs_id('$Id: FoafViewer.php 6185 2008-08-22 11:40:14Z vargenau $');
 
 //ini_set('include_path','.;C:/php/pear');
 
@@ -58,7 +58,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.4 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -217,11 +217,7 @@ extends WikiPlugin
 }
 
 
-// $Log: FoafViewer.php,v $
-// Revision 1.4  2004/07/08 20:30:07  rurban
-// plugin->run consistency: request as reference, added basepage.
-// encountered strange bug in AllPages (and the test) which destroys ->_dbi
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.3  2004/06/16 10:38:59  rurban
 // Disallow refernces in calls if the declaration is a reference
 // ("allow_call_time_pass_reference clean").

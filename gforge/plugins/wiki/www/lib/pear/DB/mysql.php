@@ -17,7 +17,7 @@
 // | Maintainer: Daniel Convissor <danielc@php.net>                       |
 // +----------------------------------------------------------------------+
 //
-// $Id: mysql.php,v 1.6 2004/06/21 08:39:38 rurban Exp $
+// $Id: mysql.php 6184 2008-08-22 10:33:41Z vargenau $
 
 
 // XXX legend:
@@ -39,7 +39,7 @@ require_once 'DB/common.php';
  * This is for MySQL versions 4.0 and below.
  *
  * @package  DB
- * @version  $Id: mysql.php,v 1.6 2004/06/21 08:39:38 rurban Exp $
+ * @version  $Id: mysql.php 6184 2008-08-22 10:33:41Z vargenau $
  * @category Database
  * @author   Stig Bakken <ssb@php.net>
  */

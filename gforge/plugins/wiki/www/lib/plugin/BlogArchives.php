@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: BlogArchives.php,v 1.5 2005/10/29 09:06:37 rurban Exp $');
+rcs_id('$Id: BlogArchives.php 6185 2008-08-22 11:40:14Z vargenau $');
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
  */
@@ -30,7 +30,7 @@ extends WikiPlugin_WikiBlog
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.5 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -61,7 +61,7 @@ extends WikiPlugin_WikiBlog
             }
         }
         if (!$args['user'] or $args['user'] == ADMIN_USER) {
-            if (BLOG_EMPTY_DEFAULT_PREFIX)
+            if (BLOG_DEFAULT_EMPTY_PREFIX)
                 $args['user'] = ''; 	    // "Blogs/day" pages 
             else
                 $args['user'] = ADMIN_USER; // "Admin/Blogs/day" pages 
@@ -135,7 +135,7 @@ extends WikiPlugin_WikiBlog
     }
 };
 
-// $Log: BlogArchives.php,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.5  2005/10/29 09:06:37  rurban
 // move common blog methods to WikiBlog
 //

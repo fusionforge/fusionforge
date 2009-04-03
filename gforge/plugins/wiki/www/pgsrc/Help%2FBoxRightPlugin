@@ -1,0 +1,51 @@
+Date: Sat, 24 Jan 2009 20:18:24 +0100
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
+X-Rcs-Id: $Id: Help%2FBoxRightPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FBoxRightPlugin;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=iso-8859-1
+Content-Transfer-Encoding: binary
+
+The *~BoxRight* [[Help:WikiPlugin|plugin]] displays its content as a wiki-formatted
+right-floating div box with border.
+
+If ENABLE_MARKUP_DIVSPAN is enabled then you can produce the same result with a simple =~<div~>=:
+
+~<~div class=boxright~> <br>
+<strong>Example text</strong>
+([What is a Wiki?|WikiWikiWeb])
+~</div~>
+
+<div class=boxright>
+<strong>Example text</strong>
+([What is a Wiki?|WikiWikiWeb])
+</div>
+
+== Typical Usage
+
+<verbatim>
+<?plugin BoxRight
+<strong>This Wiki</strong> ([What is a Wiki?|WikiWikiWeb]) is a place where problems and
+solutions are being documented.
+
+See [How to use this Wiki|Help/HowToUseWiki] for instructions.
+
+<em>Don't be afraid - it's easy and you can't break anything!</em>
+?>
+</verbatim>
+
+== Examples
+
+<?plugin BoxRight
+<strong>This Wiki</strong> ([What is a Wiki?|WikiWikiWeb]) is a place where problems and
+solutions are being documented.
+
+See [How to use this Wiki|Help/HowToUseWiki] for instructions.
+
+<em>Don't be afraid - it's easy and you can't break anything!</em>
+?>
+
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]

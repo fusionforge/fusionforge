@@ -1,6 +1,5 @@
 <?php
-rcs_id('$Id: IniConfig.php,v 1.94 2005/09/15 05:56:12 rurban Exp $');
-
+rcs_id('$Id: IniConfig.php 6280 2008-09-25 08:19:09Z vargenau $');
 /**
  * A configurator intended to read its config from a PHP-style INI file,
  * instead of a PHP file.
@@ -14,7 +13,7 @@ rcs_id('$Id: IniConfig.php,v 1.94 2005/09/15 05:56:12 rurban Exp $');
  * @author: Joby Walker, Reini Urban, Matthew Palmer
  */
 /*
- * Copyright 2004,2005 $ThePhpWikiProgrammingTeam
+ * Copyright 2004,2005,2006,2007 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -101,6 +100,13 @@ function save_dump($file) {
     fclose($fp);
 }
 
+function _check_int_constant(&$c) {
+  // if int value == string value, force int type
+  if (sprintf("%d",(int)$c) === $c) { // DEBUG & _DEBUG_bla
+    $c = (int)$c;
+  }
+}
+
 function IniConfig($file) {
 
     // check config/config.php dump for faster startup
@@ -148,8 +154,10 @@ function IniConfig($file) {
          'PLUGIN_CACHED_DATABASE', 'PLUGIN_CACHED_FILENAME_PREFIX',
          'PLUGIN_CACHED_HIGHWATER', 'PLUGIN_CACHED_LOWWATER', 'PLUGIN_CACHED_MAXLIFETIME',
          'PLUGIN_CACHED_MAXARGLEN', 'PLUGIN_CACHED_IMGTYPES',
+         'WYSIWYG_BACKEND', 'PLUGIN_MARKUP_MAP',
          // extra logic:
          'SERVER_NAME','SERVER_PORT','SCRIPT_NAME', 'DATA_PATH', 'PHPWIKI_DIR', 'VIRTUAL_PATH',
+	 'EXTERNAL_HTML2PDF_PAGELIST', 'PLUGIN_CACHED_CACHE_DIR'
          );
 
     // Optional values which need to be defined.
@@ -165,7 +173,8 @@ function IniConfig($file) {
          'GOOGLE_LICENSE_KEY','FORTUNE_DIR',
          'DISABLE_GETIMAGESIZE','DBADMIN_USER','DBADMIN_PASSWD',
          'SESSION_SAVE_PATH', 'TOOLBAR_PAGELINK_PULLDOWN', 'TOOLBAR_TEMPLATE_PULLDOWN',
-         'EXTERNAL_LINK_TARGET', 'ACCESS_LOG_SQL', 'ENABLE_MARKUP_TEMPLATE'
+         'EXTERNAL_LINK_TARGET', 'ACCESS_LOG_SQL', 'USE_EXTERNAL_HTML2PDF',
+	 'LOGIN_LOG','LDAP_SEARCH_FILTER'
          );
 
     // List of all valid config options to be define()d which take booleans.
@@ -183,9 +192,16 @@ function IniConfig($file) {
          'WARN_NONPUBLIC_INTERWIKIMAP', 'USE_PATH_INFO',
          'DISABLE_HTTP_REDIRECT',
          'PLUGIN_CACHED_USECACHE', 'PLUGIN_CACHED_FORCE_SYNCMAP',
-         'BLOG_EMPTY_DEFAULT_PREFIX', 'DATABASE_PERSISTENT',
+         'BLOG_DEFAULT_EMPTY_PREFIX', 'DATABASE_PERSISTENT',
          'ENABLE_DISCUSSION_LINK', 'ENABLE_CAPTCHA',
-         'USE_CAPTCHA_RANDOM_WORD'
+         'ENABLE_WYSIWYG', 'WYSIWYG_DEFAULT_PAGETYPE_HTML',
+         'DISABLE_MARKUP_WIKIWORD', 'ENABLE_MARKUP_COLOR', 'ENABLE_MARKUP_TEMPLATE',
+         'ENABLE_MARKUP_MEDIAWIKI_TABLE',
+         'ENABLE_MARKUP_DIVSPAN', 'USE_BYTEA', 'UPLOAD_USERDIR', 'DISABLE_UNITS',
+	 'ENABLE_SEARCHHIGHLIGHT', 'DISABLE_UPLOAD_ONLY_ALLOWED_EXTENSIONS',
+         'ENABLE_AUTH_OPENID', 'INSECURE_ACTIONS_LOCALHOST_ONLY',
+         'ENABLE_MAILNOTIFY', 'ENABLE_RECENTCHANGESBOX',
+         'ENABLE_PAGE_PUBLIC'
          );
 
     $rs = @parse_ini_file($file);
@@ -205,6 +221,7 @@ function IniConfig($file) {
             continue;
         }
         if (array_key_exists($item, $rs)) {
+            _check_int_constant($rs[$item]);
             define($item, $rs[$item]);
             unset($rs[$item]);
         //} elseif (array_key_exists($item, $rsdef)) {
@@ -214,7 +231,7 @@ function IniConfig($file) {
                            array('DATABASE_PREFIX', 'SERVER_NAME', 'SERVER_PORT',
                                  'SCRIPT_NAME', 'DATA_PATH', 'PHPWIKI_DIR', 'VIRTUAL_PATH',
                                  'LDAP_AUTH_HOST','IMAP_AUTH_HOST','POP3_AUTH_HOST',
-                                 'PLUGIN_CACHED_CACHE_DIR'))) 
+                                 'PLUGIN_CACHED_CACHE_DIR','EXTERNAL_HTML2PDF_PAGELIST'))) 
         {
             ;
         } elseif (!defined("_PHPWIKI_INSTALL_RUNNING")) {
@@ -248,7 +265,7 @@ function IniConfig($file) {
                                   'ALLOW_IMAP_LOGIN', 'ALLOW_USER_LOGIN',
                                   'REQUIRE_SIGNIN_BEFORE_EDIT',
                                   'WIKIDB_NOCACHE_MARKUP',
-                                  'COMPRESS_OUTPUT'
+                                  'COMPRESS_OUTPUT', 'USE_BYTEA'
                                   )))
         {
             ;
@@ -294,10 +311,12 @@ function IniConfig($file) {
             unset($rsdef[$item]);
         }
     }
-    if (!in_array(DATABASE_TYPE, array('SQL','ADODB','PDO','dba','file','cvs')))
+    $valid_database_types = array('SQL','ADODB','PDO','dba','file','flatfile','cvs','cvsclient');
+    if (!in_array(DATABASE_TYPE, $valid_database_types))
         trigger_error(sprintf("Invalid DATABASE_TYPE=%s. Choose one of %s", 
-                              DATABASE_TYPE, "SQL,ADODB,PDO,dba,file,cvs"), 
+                              DATABASE_TYPE, join(",", $valid_database_types)), 
                       E_USER_ERROR);
+    unset($valid_database_types);                  
     if (DATABASE_TYPE == 'PDO') {
         if (!check_php_version(5))
             trigger_error("Invalid DATABASE_TYPE=PDO. PDO requires at least php-5.0!", 
@@ -345,12 +364,13 @@ function IniConfig($file) {
     unset($item); unset($major); unset($max); 
     
     // User authentication
-    if (!isset($GLOBALS['USER_AUTH_ORDER']))
+    if (!isset($GLOBALS['USER_AUTH_ORDER'])) {
         if (isset($rs['USER_AUTH_ORDER']))
             $GLOBALS['USER_AUTH_ORDER'] = preg_split('/\s*:\s*/', 
                                                      $rs['USER_AUTH_ORDER']);
         else 
             $GLOBALS['USER_AUTH_ORDER'] = array("PersonalPage");
+    }
 
     // Now it's the external DB authentication stuff's turn
     if (in_array('Db', $GLOBALS['USER_AUTH_ORDER']) && empty($rs['DBAUTH_AUTH_DSN'])) {
@@ -385,7 +405,7 @@ function IniConfig($file) {
     }
     unset($rskey); unset($apkey);
 
-    // TODO: Currently unsupported on non-SQL
+    // TODO: Currently unsupported on non-SQL. Nice to have for RhNavPlugin
     // CHECKME: PDO
     if (!defined('ACCESS_LOG_SQL')) {
 	    if (array_key_exists('ACCESS_LOG_SQL', $rs)) {
@@ -401,6 +421,23 @@ function IniConfig($file) {
 	    }
     }
     
+    global $PLUGIN_MARKUP_MAP;
+    $PLUGIN_MARKUP_MAP = array();
+    if (defined('PLUGIN_MARKUP_MAP') and trim(PLUGIN_MARKUP_MAP) != "") {
+	$_map = preg_split('/\s+/', PLUGIN_MARKUP_MAP);
+	foreach ($_map as $v) {
+	    list($xml,$plugin) = split(':', $v);
+	    if (!empty($xml) and !empty($plugin))
+	        $PLUGIN_MARKUP_MAP[$xml] = $plugin;
+	}
+	unset($_map); unset($xml); unset($plugin); unset($v);
+    }
+
+    if (empty($rs['TEMP_DIR'])) {
+	$rs['TEMP_DIR'] = "/tmp";
+	if (getenv("TEMP"))
+	    $rs['TEMP_DIR'] = getenv("TEMP");
+    }
     // optional values will be set to '' to simplify the logic.
     foreach ($_IC_OPTIONAL_VALUE as $item) {
         if (defined($item)) {
@@ -408,13 +445,26 @@ function IniConfig($file) {
             continue;
         }
         if (array_key_exists($item, $rs)) {
+	    _check_int_constant($rs[$item]);
             define($item, $rs[$item]);
             unset($rs[$item]);
         } else 
             define($item, '');
     }
+
+    if (USE_EXTERNAL_HTML2PDF) {
+	$item = 'EXTERNAL_HTML2PDF_PAGELIST';
+        if (defined($item)) {
+            unset($rs[$item]);
+        } elseif (array_key_exists($item, $rs)) {
+            define($item, $rs[$item]);
+            unset($rs[$item]);
+        } elseif (array_key_exists($item, $rsdef)) {
+            define($item, $rsdef[$item]);
+	}
+    }
     unset($item); 
-    
+        
     // LDAP bind options
     global $LDAP_SET_OPTION;
     if (defined('LDAP_SET_OPTION') and LDAP_SET_OPTION) {
@@ -464,28 +514,26 @@ function IniConfig($file) {
     global $PLUGIN_CACHED_IMGTYPES;
     $PLUGIN_CACHED_IMGTYPES = preg_split('/\s*[|:]\s*/', PLUGIN_CACHED_IMGTYPES);
 
-    if (empty($rs['PLUGIN_CACHED_CACHE_DIR']) and !empty($rsdef['PLUGIN_CACHED_CACHE_DIR']))
-        $rs['PLUGIN_CACHED_CACHE_DIR'] = $rsdef['PLUGIN_CACHED_CACHE_DIR'];
-    if (empty($rs['PLUGIN_CACHED_CACHE_DIR'])) {
-        if (!empty($rs['INCLUDE_PATH'])) {
-            @ini_set('include_path', $rs['INCLUDE_PATH']);
+    if (!defined('PLUGIN_CACHED_CACHE_DIR')) {
+        if (empty($rs['PLUGIN_CACHED_CACHE_DIR']) and !empty($rsdef['PLUGIN_CACHED_CACHE_DIR']))
+            $rs['PLUGIN_CACHED_CACHE_DIR'] = $rsdef['PLUGIN_CACHED_CACHE_DIR'];
+        if (empty($rs['PLUGIN_CACHED_CACHE_DIR'])) {
+            if (!empty($rs['INCLUDE_PATH'])) {
+                @ini_set('include_path', $rs['INCLUDE_PATH']);
+                $GLOBALS['INCLUDE_PATH'] = $rs['INCLUDE_PATH'];
+            }
+            $rs['PLUGIN_CACHED_CACHE_DIR'] = TEMP_DIR . '/cache';
+            if (!FindFile($rs['PLUGIN_CACHED_CACHE_DIR'], 1)) { // [29ms]
+                FindFile(TEMP_DIR, false, 1);            // TEMP must exist!
+                mkdir($rs['PLUGIN_CACHED_CACHE_DIR'], 777);
+            }
+            // will throw an error if not exists.
+            define('PLUGIN_CACHED_CACHE_DIR', FindFile($rs['PLUGIN_CACHED_CACHE_DIR'],false,1)); 
+        } else {
+            define('PLUGIN_CACHED_CACHE_DIR', $rs['PLUGIN_CACHED_CACHE_DIR']);
+            // will throw an error if not exists.
+            FindFile(PLUGIN_CACHED_CACHE_DIR);
         }
-        if (empty($rs['TEMP_DIR'])) {
-            $rs['TEMP_DIR'] = "/tmp";
-            if (getenv("TEMP"))
-                $rs['TEMP_DIR'] = getenv("TEMP");
-        }
-        $rs['PLUGIN_CACHED_CACHE_DIR'] = $rs['TEMP_DIR'] . '/cache';
-        if (!FindFile($rs['PLUGIN_CACHED_CACHE_DIR'], 1)) { // [29ms]
-            FindFile($rs['TEMP_DIR'], false, 1);            // TEMP must exist!
-            mkdir($rs['PLUGIN_CACHED_CACHE_DIR'], 777);
-        }
-        // will throw an error if not exists.
-        define('PLUGIN_CACHED_CACHE_DIR', FindFile($rs['PLUGIN_CACHED_CACHE_DIR'],false,1)); 
-    } else {
-        define('PLUGIN_CACHED_CACHE_DIR', $rs['PLUGIN_CACHED_CACHE_DIR']);
-        // will throw an error if not exists.
-        FindFile(PLUGIN_CACHED_CACHE_DIR);
     }
 
     // process the rest of the config.ini settings:
@@ -493,6 +541,7 @@ function IniConfig($file) {
         if (defined($item)) {
             continue;
         } else {
+	    _check_int_constant($v);
             define($item, $v);
         }
     }
@@ -511,10 +560,21 @@ function IniConfig($file) {
     fixup_dynamic_configs($file); // [100ms]
 }
 
+function _ignore_unknown_charset_warning(&$error) {
+    //htmlspecialchars(): charset `iso-8859-2' not supported, assuming iso-8859-1
+    if (preg_match('/^htmlspecialchars\(\): charset \`.+\' not supported, assuming iso-8859-1/',
+                   $error->errstr)) {
+        $error->errno = 0;
+        return true;  // Ignore error
+    }
+    return false;
+}
+
 // moved from lib/config.php [1ms]
 function fixup_static_configs($file) {
     global $FieldSeparator, $charset, $WikiNameRegexp, $AllActionPages;
-    global $HTTP_SERVER_VARS, $DBParams, $LANG;
+    global $HTTP_SERVER_VARS, $DBParams, $LANG, $ErrorManager;
+
     // init FileFinder to add proper include paths
     FindFile("lib/interwiki.map",true);
     
@@ -522,7 +582,7 @@ function fixup_static_configs($file) {
     // chars in iso-8859-*
     // $FieldSeparator = "\263"; // this is a superscript 3 in ISO-8859-1.
     // $FieldSeparator = "\xFF"; // this byte should never appear in utf-8
-    // FIXME: get rid of constant. pref is dynamic and language specific
+    // Get rid of constant. pref is dynamic and language specific
     $charset = CHARSET;
     // Disabled: Let the admin decide which charset.
     //if (isset($LANG) and in_array($LANG,array('zh')))
@@ -532,17 +592,61 @@ function fixup_static_configs($file) {
     else
         $FieldSeparator = "\x81";
 
+    // Some exotic charsets are not supported by htmlspecialchars, which just prints an E_WARNING.
+    // Even on simple 8bit charsets, where just <>& need to be replaced. For iso-8859-[2-4] e.g.
+    // See <php-src>/ext/standard/html.c
+    // For performance reasons we require a magic constant to ignore this warning.
+    if (defined('IGNORE_CHARSET_NOT_SUPPORTED_WARNING') and IGNORE_CHARSET_NOT_SUPPORTED_WARNING) {
+        $ErrorManager->pushErrorHandler(new WikiFunctionCb('_ignore_unknown_charset_warning'));
+    }
+    // Used by SetupWiki to pull in required pages, if not translated, then in english.
+    // Also used by _WikiTranslation. Really important are only those which return pagelists 
+    // or contain basic functionality.
+    /*
+      All pages containing plugins of the same name as the filename:
+     */
     $AllActionPages = explode(':',
-                              'AllPages:BackLinks:CreatePage:DebugInfo:EditMetaData:FindPage:'
-                              .'FullRecentChanges:FullTextSearch:FuzzyPages:InterWikiSearch:'
-                              .'LikePages:MostPopular:'
-                              .'OrphanedPages:PageDump:PageHistory:PageInfo:RandomPage:RateIt:'
-                              .'RecentChanges:RecentEdits:RecentComments:RelatedChanges:TitleSearch:'
-                              .'TranslateText:UpLoad:UserPreferences:WantedPages:WhoIsOnline:'
-                              .'PhpWikiAdministration/Remove:PhpWikiAdministration/Chmod:'
-                              .'PhpWikiAdministration/Rename:PhpWikiAdministration/Replace:'
-                              .'PhpWikiAdministration/SetAcl:PhpWikiAdministration/Chown'
-                              );
+      'AllPages:AllUsers:AppendText:AuthorHistory:'
+      .'BackLinks:BlogArchives:BlogJournal:'
+      .'CreatePage:'
+      .'FindPage:FullTextSearch:FuzzyPages:'
+      .'InterWikiSearch:'
+      .'LikePages:LinkDatabase:LinkSearch:ListRelations:'
+      .'ModeratedPage:MostPopular:'
+      .'OrphanedPages:'
+      .'PageDump:PageHistory:PageInfo:PluginManager:'
+      .'RecentChanges:RecentComments:RelatedChanges:'
+      .'SearchHighlight:SemanticRelations:SemanticSearch:SystemInfo:'
+      .'TitleSearch:'
+      .'UpLoad:UriResolver:UserPreferences:'
+      .'WantedPages:WatchPage:WhoIsOnline:WikiAdminSelect:WikiBlog:'
+      // plus some derivations
+      .'AllPagesCreatedByMe:AllPagesLastEditedByMe:AllPagesOwnedByMe:AllUserPages:'
+      .'FullRecentChanges:'
+      .'LeastPopular:LockedPages:'
+      .'MyRecentEdits:MyRecentChanges:'
+      .'PhpWikiAdministration:'
+      .'PhpWikiAdministration/Chown:'
+      .'PhpWikiAdministration/Remove:'
+      .'PhpWikiAdministration/Rename:'
+      .'PhpWikiAdministration/Replace:'
+      .'PhpWikiAdministration/SetAcl:'
+      .'RecentChangesMyPages:RecentEdits:RecentNewPages:'
+      .'UserContribs');
+
+    // Add some some action pages depending on configuration
+    if (defined('DEBUG') and DEBUG) {
+       $AllActionPages[] = 'DebugInfo';
+       $AllActionPages[] = 'EditMetaData';
+       $AllActionPages[] = 'RandomPage'; // RandomPage does not work
+       $AllActionPages[] = 'SpellCheck'; // SpellCheck does not work
+    }
+    if (!defined('GFORGE') or !GFORGE) {
+       $AllActionPages[] = 'LdapSearch';
+       $AllActionPages[] = 'PasswordReset';
+       $AllActionPages[] = 'RateIt'; // RateIt works only in wikilens theme
+       $AllActionPages[] = 'TranslateText';
+    }
 
     // If user has not defined PHPWIKI_DIR, and we need it
     if (!defined('PHPWIKI_DIR') and !file_exists("themes/default")) {
@@ -664,14 +768,19 @@ function fixup_dynamic_configs($file) {
     global $WikiNameRegexp;
     global $HTTP_SERVER_VARS, $DBParams, $LANG;
 
-    if (defined('INCLUDE_PATH') and INCLUDE_PATH)
+    if (defined('INCLUDE_PATH') and INCLUDE_PATH) {
         @ini_set('include_path', INCLUDE_PATH);
+        $GLOBALS['INCLUDE_PATH'] = INCLUDE_PATH;
+    }
     if (defined('SESSION_SAVE_PATH') and SESSION_SAVE_PATH)
         @ini_set('session.save_path', SESSION_SAVE_PATH);
     if (!defined('DEFAULT_LANGUAGE'))   // not needed anymore
         define('DEFAULT_LANGUAGE', ''); // detect from client
 
-    update_locale(isset($LANG) ? $LANG : DEFAULT_LANGUAGE);
+    // Disable update_locale because Zend Debugger crash
+    if(! extension_loaded('Zend Debugger')) {
+        update_locale(isset($LANG) ? $LANG : DEFAULT_LANGUAGE);
+    }
     if (empty($LANG)) {
         if (!defined("DEFAULT_LANGUAGE") or !DEFAULT_LANGUAGE) {
             // TODO: defer this to WikiRequest::initializeLang()
@@ -744,7 +853,14 @@ function fixup_dynamic_configs($file) {
     foreach (array('SERVER_NAME','SERVER_PORT') as $var) {
         //FIXME: for CGI without _SERVER
         if (!defined($var) and !empty($HTTP_SERVER_VARS[$var]))
-            define($var, $HTTP_SERVER_VARS[$var]);
+            // IPV6 fix by matt brown, #1546571
+            // An IPv6 address must be surrounded by square brackets to form a valid server name.
+            if ($var == 'SERVER_NAME' &&
+                    strstr($HTTP_SERVER_VARS[$var], ':')) {
+                define($var, '[' . $HTTP_SERVER_VARS[$var] . ']');
+            } else {
+                define($var, $HTTP_SERVER_VARS[$var]);
+            }
     }
     if (!defined('SERVER_NAME')) define('SERVER_NAME', '127.0.0.1');
     if (!defined('SERVER_PORT')) define('SERVER_PORT', 80);
@@ -840,7 +956,7 @@ function fixup_dynamic_configs($file) {
 	    else
 	        define('PATH_INFO_PREFIX', '/');
     }
-    
+
     define('PHPWIKI_BASE_URL',
            SERVER_URL . (USE_PATH_INFO ? VIRTUAL_PATH . '/' : SCRIPT_NAME));
 
@@ -863,391 +979,6 @@ function fixup_dynamic_configs($file) {
         $HTTP_SERVER_VARS['REMOTE_HOST'] = gethostbyaddr($HTTP_SERVER_VARS['REMOTE_ADDR']);
 
 }
-
-// $Log: IniConfig.php,v $
-// Revision 1.97  2005/10/29 14:16:38  rurban
-// fix broken locale update
-//
-// Revision 1.96  2005/09/26 06:27:33  rurban
-// default locale fix Thomas Harding
-//
-// Revision 1.94  2005/09/15 05:56:12  rurban
-// read configurator desc from config-dist.ini, update desc, fix some warnings
-//
-// Revision 1.93  2005/09/14 05:57:19  rurban
-// make ENABLE_MARKUP_TEMPLATE optional
-//
-// Revision 1.92  2005/08/06 13:00:21  rurban
-// accept config.ini ACCESS_LOG_SQL = 0
-//
-// Revision 1.91  2005/06/30 04:53:46  rurban
-// use better /tmp/cache, dependent on TEMP_DIR and getenv("TEMP")
-//
-// Revision 1.90  2005/05/06 18:45:59  rurban
-// add TOOLBAR_TEMPLATE_PULLDOWN (AddTemplate icon)
-//
-// Revision 1.89  2005/05/06 16:54:18  rurban
-// support optional EXTERNAL_LINK_TARGET, default: _blank
-//
-// Revision 1.88  2005/04/25 20:17:13  rurban
-// captcha feature by Benjamin Drieu. Patch #1110699
-//
-// Revision 1.87  2005/04/08 18:11:50  rurban
-// guard against empty default INI values
-//
-// Revision 1.86  2005/04/06 06:41:05  rurban
-// add ENABLE_DISCUSSION_LINK dependency (to turn it off for 1.3.11)
-//
-// Revision 1.85  2005/03/27 20:36:16  rurban
-// configurator recursion fixes, dont print temp _dsn vars
-//
-// Revision 1.84  2005/03/27 18:23:40  rurban
-// compute locale only for setlocale and LC_ALL
-//
-// Revision 1.83  2005/02/28 21:24:32  rurban
-// ignore forbidden ini_set warnings. Bug #1117254 by Xavier Roche
-//
-// Revision 1.82  2005/02/28 20:14:19  rurban
-// prevent from recursion (configurator.php)
-//
-// Revision 1.81  2005/02/27 13:20:28  rurban
-// remove clsclient (typo and still exp)
-//
-// Revision 1.80  2005/02/26 17:47:57  rurban
-// configurator: add (c), support show=_part1 initial expand, enable
-//   ENABLE_FILE_OUTPUT, use part.id not name
-// install.php: fixed for multiple invocations (on various missing vars)
-// IniConfig: call install.php on more errors with expanded part.
-//
-// Revision 1.79  2005/02/11 14:45:44  rurban
-// support ENABLE_LIVESEARCH, enable PDO sessions
-//
-// Revision 1.78  2005/02/10 19:01:19  rurban
-// add PDO support
-//
-// Revision 1.77  2005/01/31 12:14:15  rurban
-// correct spelling
-//
-// Revision 1.76  2005/01/31 00:31:00  rurban
-// translate errmsg
-//
-// Revision 1.75  2005/01/30 21:52:09  rurban
-// print early warning on wrong DATABASE_TYPE
-//
-// Revision 1.74  2005/01/29 20:35:52  rurban
-// helper for local debugging (Zend Personal Edition)
-//
-// Revision 1.73  2005/01/25 06:51:37  rurban
-// new options: TOOLBAR_PAGELINK_PULLDOWN, DATABASE_PERSISTENT
-//
-// Revision 1.72  2005/01/13 07:29:27  rurban
-// Default ACCESS_LOG_SQL = 2 on SQL/ADODB
-//
-// Revision 1.71  2005/01/10 18:06:40  rurban
-// $LANG from DEFAULT_LANGUAGE
-//
-// Revision 1.70  2005/01/04 20:22:44  rurban
-// guess $LANG based on client
-//
-// Revision 1.69  2004/12/23 14:07:34  rurban
-// fix default language detection if DEFAULT_LANGUAGE=, collapse to 2char lang code, fix typo in @bindtextdomain
-//
-// Revision 1.68  2004/12/14 21:35:15  rurban
-// support new BLOG_EMPTY_DEFAULT_PREFIX
-//
-// Revision 1.67  2004/11/30 09:51:35  rurban
-// changed KEYWORDS from pageprefix to search term. added installer detection.
-//
-// Revision 1.66  2004/11/17 17:23:12  rurban
-// fixed chdir back from locale
-//
-// Revision 1.65  2004/11/11 10:31:26  rurban
-// Disable default options in config-dist.ini
-// Add new CATEGORY_GROUP_PAGE root page: Default: Translation of "CategoryGroup"
-// Clarify more options.
-//
-// Revision 1.64  2004/11/09 17:11:03  rurban
-// * revert to the wikidb ref passing. there's no memory abuse there.
-// * use new wikidb->_cache->_id_cache[] instead of wikidb->_iwpcache, to effectively
-//   store page ids with getPageLinks (GleanDescription) of all existing pages, which
-//   are also needed at the rendering for linkExistingWikiWord().
-//   pass options to pageiterator.
-//   use this cache also for _get_pageid()
-//   This saves about 8 SELECT count per page (num all pagelinks).
-// * fix passing of all page fields to the pageiterator.
-// * fix overlarge session data which got broken with the latest ACCESS_LOG_SQL changes
-//
-// Revision 1.63  2004/11/07 16:47:32  rurban
-// fix VIRTUAL_PATH
-//
-// Revision 1.62  2004/11/07 16:02:51  rurban
-// new sql access log (for spam prevention), and restructured access log class
-// dbh->quote (generic)
-// pear_db: mysql specific parts seperated (using replace)
-//
-// Revision 1.61  2004/11/06 17:01:30  rurban
-// unify DATABASE constants init as with DBAUTH
-//
-// Revision 1.60  2004/11/06 03:06:58  rurban
-// make use of dumped static config state in config/config.php (if writable)
-//
-// Revision 1.59  2004/11/05 20:53:35  rurban
-// login cleanup: better debug msg on failing login,
-// checked password less immediate login (bogo or anon),
-// checked olduser pref session error,
-// better PersonalPage without password warning on minimal password length=0
-//   (which is default now)
-//
-// Revision 1.58  2004/11/03 16:50:31  rurban
-// some new defaults and constants, renamed USE_DOUBLECLICKEDIT to ENABLE_DOUBLECLICKEDIT
-//
-// Revision 1.57  2004/11/01 10:43:55  rurban
-// seperate PassUser methods into seperate dir (memory usage)
-// fix WikiUser (old) overlarge data session
-// remove wikidb arg from various page class methods, use global ->_dbi instead
-// ...
-//
-// Revision 1.56  2004/10/21 20:20:53  rurban
-// From patch #970004 "Double clic to edit" by pixels.
-//
-// Revision 1.55  2004/10/14 19:23:58  rurban
-// remove debugging prints
-//
-// Revision 1.54  2004/10/14 17:13:01  rurban
-// use DATABASE_PREFIX
-//
-// Revision 1.53  2004/10/12 13:13:19  rurban
-// php5 compatibility (5.0.1 ok)
-//
-// Revision 1.52  2004/10/04 23:38:07  rurban
-// unittest fix
-//
-// Revision 1.51  2004/09/20 13:40:19  rurban
-// define all config.ini settings, only the supported will be taken from -default.
-// support USE_EXTERNAL_HTML2PDF renderer (htmldoc tested)
-//
-// Revision 1.50  2004/09/06 09:28:58  rurban
-// fix PLUGIN_CACHED_CACHE_DIR fallback logic. ini entry did not work before
-//
-// Revision 1.49  2004/07/13 13:07:27  rurban
-// improved DB_SESSION logic
-//
-// Revision 1.48  2004/07/05 13:09:37  rurban
-// ENABLE_RAW_HTML_LOCKEDONLY, ENABLE_RAW_HTML_SAFE
-//
-// Revision 1.47  2004/07/03 16:51:05  rurban
-// optional DBADMIN_USER:DBADMIN_PASSWD for action=upgrade (if no ALTER permission)
-// added atomic mysql REPLACE for PearDB as in ADODB
-// fixed _lock_tables typo links => link
-// fixes unserialize ADODB bug in line 180
-//
-// Revision 1.46  2004/07/02 09:55:58  rurban
-// more stability fixes: new DISABLE_GETIMAGESIZE if your php crashes when loading LinkIcons: failing getimagesize in old phps; blockparser stabilized
-//
-// Revision 1.45  2004/07/01 08:51:21  rurban
-// dumphtml: added exclude, print pagename before processing
-//
-// Revision 1.44  2004/06/29 08:52:22  rurban
-// Use ...version() $need_content argument in WikiDB also:
-// To reduce the memory footprint for larger sets of pagelists,
-// we don't cache the content (only true or false) and
-// we purge the pagedata (_cached_html) also.
-// _cached_html is only cached for the current pagename.
-// => Vastly improved page existance check, ACL check, ...
-//
-// Now only PagedList info=content or size needs the whole content, esp. if sortable.
-//
-// Revision 1.43  2004/06/29 06:48:02  rurban
-// Improve LDAP auth and GROUP_LDAP membership:
-//   no error message on false password,
-//   added two new config vars: LDAP_OU_USERS and LDAP_OU_GROUP with GROUP_METHOD=LDAP
-//   fixed two group queries (this -> user)
-// stdlib: ConvertOldMarkup still flawed
-//
-// Revision 1.42  2004/06/28 15:01:07  rurban
-// fixed LDAP_SET_OPTION handling, LDAP error on connection problem
-//
-// Revision 1.41  2004/06/25 14:29:17  rurban
-// WikiGroup refactoring:
-//   global group attached to user, code for not_current user.
-//   improved helpers for special groups (avoid double invocations)
-// new experimental config option ENABLE_XHTML_XML (fails with IE, and document.write())
-// fixed a XHTML validation error on userprefs.tmpl
-//
-// Revision 1.40  2004/06/22 07:12:48  rurban
-// removed USE_TAGLINES constant
-//
-// Revision 1.39  2004/06/21 16:22:28  rurban
-// add DEFAULT_DUMP_DIR and HTML_DUMP_DIR constants, for easier cmdline dumps,
-// fixed dumping buttons locally (images/buttons/),
-// support pages arg for dumphtml,
-// optional directory arg for dumpserial + dumphtml,
-// fix a AllPages warning,
-// show dump warnings/errors on DEBUG,
-// don't warn just ignore on wikilens pagelist columns, if not loaded.
-// RateIt pagelist column is called "rating", not "ratingwidget" (Dan?)
-//
-// Revision 1.38  2004/06/21 08:39:36  rurban
-// pear/Cache update from Cache-1.5.4 (added db and trifile container)
-// pear/DB update from DB-1.6.1 (mysql bugfixes, php5 compat, DB_PORTABILITY features)
-//
-// Revision 1.37  2004/06/19 12:32:37  rurban
-// new TEMP_DIR for ziplib
-//
-// Revision 1.36  2004/06/19 10:06:37  rurban
-// Moved lib/plugincache-config.php to config/*.ini
-// use PLUGIN_CACHED_* constants instead of global $CacheParams
-//
-// Revision 1.35  2004/06/15 09:15:52  rurban
-// IMPORTANT: fixed passwd handling for passwords stored in prefs:
-//   fix encrypted usage, actually store and retrieve them from db
-//   fix bogologin with passwd set.
-// fix php crashes with call-time pass-by-reference (references wrongly used
-//   in declaration AND call). This affected mainly Apache2 and IIS.
-//   (Thanks to John Cole to detect this!)
-//
-// Revision 1.34  2004/06/13 13:54:25  rurban
-// Catch fatals on the four dump calls (as file and zip, as html and mimified)
-// FoafViewer: Check against external requirements, instead of fatal.
-// Change output for xhtmldumps: using file:// urls to the local fs.
-// Catch SOAP fatal by checking for GOOGLE_LICENSE_KEY
-// Import GOOGLE_LICENSE_KEY and FORTUNE_DIR from config.ini.
-//
-// Revision 1.33  2004/06/08 19:48:16  rurban
-// fixed foreign setup: no ugly skipped msg for the GenericPages, load english actionpages if translated not found
-//
-// Revision 1.32  2004/06/08 10:54:46  rurban
-// better acl dump representation, read back acl and owner
-//
-// Revision 1.31  2004/06/06 16:58:51  rurban
-// added more required ActionPages for foreign languages
-// install now english ActionPages if no localized are found. (again)
-// fixed default anon user level to be 0, instead of -1
-//   (wrong "required administrator to view this page"...)
-//
-// Revision 1.30  2004/06/04 12:40:21  rurban
-// Restrict valid usernames to prevent from attacks against external auth or compromise
-// possible holes.
-// Fix various WikiUser old issues with default IMAP,LDAP,POP3 configs. Removed these.
-// Fxied more warnings
-//
-// Revision 1.29  2004/06/04 11:58:38  rurban
-// added USE_TAGLINES
-//
-// Revision 1.28  2004/06/03 20:42:49  rurban
-// fixed bad warning #964850
-//
-// Revision 1.27  2004/06/03 10:18:19  rurban
-// fix FileUser locking issues, new config ENABLE_PAGEPERM
-//
-// Revision 1.26  2004/06/02 18:01:45  rurban
-// init global FileFinder to add proper include paths at startup
-//   adds PHPWIKI_DIR if started from another dir, lib/pear also
-// fix slashify for Windows
-// fix USER_AUTH_POLICY=old, use only USER_AUTH_ORDER methods (besides HttpAuth)
-//
-// Revision 1.25  2004/05/27 17:49:05  rurban
-// renamed DB_Session to DbSession (in CVS also)
-// added WikiDB->getParam and WikiDB->getAuthParam method to get rid of globals
-// remove leading slash in error message
-// added force_unlock parameter to File_Passwd (no return on stale locks)
-// fixed adodb session AffectedRows
-// added FileFinder helpers to unify local filenames and DATA_PATH names
-// editpage.php: new edit toolbar javascript on ENABLE_EDIT_TOOLBAR
-//
-// Revision 1.24  2004/05/18 13:33:13  rurban
-// we already have a CGI function
-//
-// Revision 1.23  2004/05/17 17:43:29  rurban
-// CGI: no PATH_INFO fix
-//
-// Revision 1.22  2004/05/16 22:07:35  rurban
-// check more config-default and predefined constants
-// various PagePerm fixes:
-//   fix default PagePerms, esp. edit and view for Bogo and Password users
-//   implemented Creator and Owner
-//   BOGOUSERS renamed to BOGOUSER
-// fixed syntax errors in signin.tmpl
-//
-// Revision 1.21  2004/05/08 22:55:12  rurban
-// Fixed longstanding sf.net:demo problem. endless loop, caused by an empty definition of
-// WIKI_NAME_REGEXP. Exactly this constant wasn't checked for its default setting.
-//
-// Revision 1.20  2004/05/08 20:21:00  rurban
-// remove php tags in Log
-//
-// Revision 1.19  2004/05/08 19:55:29  rurban
-// support <span>inlined plugin-result</span>:
-//   if the plugin is parsed inside a line, use <span> instead of
-//   <div tightenable top bottom>
-//   e.g. for "This is the current Phpwiki <plugin SystemInfo version> version.
-//
-// Revision 1.18  2004/05/08 16:58:19  rurban
-// don't ignore some false config values (e.g. USE_PATH_INFO false was ignored)
-//
-// Revision 1.17  2004/05/06 19:26:15  rurban
-// improve stability, trying to find the InlineParser endless loop on sf.net
-//
-// remove end-of-zip comments to fix sf.net bug #777278 and probably #859628
-//
-// Revision 1.16  2004/05/02 15:10:05  rurban
-// new finally reliable way to detect if /index.php is called directly
-//   and if to include lib/main.php
-// new global AllActionPages
-// SetupWiki now loads all mandatory pages: HOME_PAGE, action pages, and warns if not.
-// WikiTranslation what=buttons for Carsten to create the missing MacOSX buttons
-// PageGroupTestOne => subpages
-// renamed PhpWikiRss to PhpWikiRecentChanges
-// more docs, default configs, ...
-//
-// Revision 1.15  2004/05/01 15:59:29  rurban
-// more php-4.0.6 compatibility: superglobals
-//
-// Revision 1.14  2004/04/29 23:25:12  rurban
-// re-ordered locale init (as in 1.3.9)
-// fixed loadfile with subpages, and merge/restore anyway
-//   (sf.net bug #844188)
-//
-// Revision 1.13  2004/04/29 21:54:05  rurban
-// typo
-//
-// Revision 1.12  2004/04/27 16:16:27  rurban
-// more subtle config problems with defaults
-//
-// Revision 1.11  2004/04/26 20:44:34  rurban
-// locking table specific for better databases
-//
-// Revision 1.10  2004/04/26 13:22:32  rurban
-// calculate bool old or dynamic constants later
-//
-// Revision 1.9  2004/04/26 12:15:01  rurban
-// check default config values
-//
-// Revision 1.8  2004/04/23 16:55:59  zorloc
-// If using Db auth and DBAUTH_AUTH_DSN is empty set DBAUTH_AUTH_DSN to $DBParams['dsn']
-//
-// Revision 1.7  2004/04/20 22:26:27  zorloc
-// Removed Pear_Config for parse_ini_file().
-//
-// Revision 1.6  2004/04/20 18:10:27  rurban
-// config refactoring:
-//   FileFinder is needed for WikiFarm scripts calling index.php
-//   config run-time calls moved to lib/IniConfig.php:fix_configs()
-//   added PHPWIKI_DIR smart-detection code (Theme finder)
-//   moved FileFind to lib/FileFinder.php
-//   cleaned lib/config.php
-//
-// Revision 1.5  2004/04/20 17:21:57  rurban
-// WikiFarm code: honor predefined constants
-//
-// Revision 1.4  2004/04/20 17:08:19  rurban
-// Some IniConfig fixes: prepend our private lib/pear dir
-//   switch from " to ' in the auth statements
-//   use error handling.
-// WikiUserNew changes for the new "'$variable'" syntax
-//   in the statements
-// TODO: optimization to put config vars into the session.
-//
 
 // (c-file-style: "gnu")
 // Local Variables:

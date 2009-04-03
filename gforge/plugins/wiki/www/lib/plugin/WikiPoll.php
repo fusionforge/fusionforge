@@ -1,7 +1,8 @@
 <?php // -*-php-*-
-rcs_id('$Id: WikiPoll.php,v 1.9 2004/06/16 10:38:59 rurban Exp $');
+rcs_id('$Id: WikiPoll.php 6306 2008-10-16 09:17:59Z vargenau $');
 /*
  Copyright 2004 $ThePhpWikiProgrammingTeam
+ Copyright 2008 Marc-Etienne Vargenau, Alcatel-lucent
  
  This file is part of PhpWiki.
 
@@ -33,10 +34,10 @@ rcs_id('$Id: WikiPoll.php,v 1.9 2004/06/16 10:38:59 rurban Exp $');
            question[4]="What wiki engine do you like most?"
              answer[4][1]="c2Wiki" answer[4][2]="MoinMoin" answer[4][3]="PhpWiki"
              answer[4][4]="usemod" answer[4][5]="Twiki" answer[4][5]="guiki"
-             answer[4][6]="Other"
+             answer[4][6]="Mediawiki" answer[4][7]="Other"
            question[5]="Which PhpWiki version do you use?"
-             answer[5][1]="1.2.x" answer[5][2]="1.3. 1-2" answer[5][3]="1.3.3-4"
-             answer[5][4]="1.3.5-8"
+             answer[5][1]="1.2.x" answer[5][2]="1.3.1-12" answer[5][3]="1.3.13"
+             answer[5][4]="1.3.14"
 ?>
  *
  * Administration:
@@ -65,7 +66,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.9 $");
+                            "\$Revision: 6306 $");
     }
 
     function getDefaultArguments() {
@@ -170,7 +171,7 @@ extends WikiPlugin
                 unset($poll['ip'][$ip]);
         }
         $html = HTML::form(array('action' => $request->getPostURL(),
-                                 'method' => 'POST'));
+                                 'method' => 'post'));
 
         if ($request->isPost()) {
             // checkme: check if all answers are answered
@@ -221,7 +222,7 @@ extends WikiPlugin
             $html->pushContent(HTML::p(
         	HTML::input(array('type' => 'submit',
                                   'name' => "WikiPoll",
-                                  'value' => _("Ok"))),
+                                  'value' => _("OK"))),
         	HTML::input(array('type' => 'reset',
                                   'name' => "reset",
                                   'value' => _("Reset")))));
@@ -328,45 +329,6 @@ extends WikiPlugin
     }
 
 };
-
-// $Log: WikiPoll.php,v $
-// Revision 1.9  2004/06/16 10:38:59  rurban
-// Disallow refernces in calls if the declaration is a reference
-// ("allow_call_time_pass_reference clean").
-//   PhpWiki is now allow_call_time_pass_reference = Off clean,
-//   but several external libraries may not.
-//   In detail these libs look to be affected (not tested):
-//   * Pear_DB odbc
-//   * adodb oracle
-//
-// Revision 1.8  2004/06/14 11:31:39  rurban
-// renamed global $Theme to $WikiTheme (gforge nameclash)
-// inherit PageList default options from PageList
-//   default sortby=pagename
-// use options in PageList_Selectable (limit, sortby, ...)
-// added action revert, with button at action=diff
-// added option regex to WikiAdminSearchReplace
-//
-// Revision 1.7  2004/05/01 15:59:29  rurban
-// more php-4.0.6 compatibility: superglobals
-//
-// Revision 1.6  2004/03/01 18:08:53  rurban
-// oops, checked in the debug version. revert to IP check on
-//
-// Revision 1.5  2004/03/01 16:11:13  rurban
-// graphical enhancement
-//
-// Revision 1.4  2004/02/26 01:42:27  rurban
-// don't cache this at all
-//
-// Revision 1.3  2004/02/24 03:54:46  rurban
-// lock page, more questions, new require_least arg
-//
-// Revision 1.2  2004/02/24 03:21:46  rurban
-// enabled require_all check in WikiPoll
-// better handling of <20 min visiting client: display results so far
-//
-//
 
 // For emacs users
 // Local Variables:

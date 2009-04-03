@@ -1,8 +1,8 @@
 <?php //-*-php-*-
-rcs_id('$Id: RatingsUser.php,v 1.5 2004/11/15 16:00:02 rurban Exp $');
+rcs_id('$Id: RatingsUser.php 6184 2008-08-22 10:33:41Z vargenau $');
 /* Copyright (C) 2004 Dan Frankowski
  *
- * This file is (not yet) part of PhpWiki.
+ * This file is part of PhpWiki.
  * 
  * PhpWiki is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -166,7 +166,12 @@ class RatingsUser {
     function get_rating($pagename, $dimension = 0)
     {
         // XXX: does this really want to do a full ratings load?  (scalability?)
-        $this->_load_ratings();
+        if (RATING_STORAGE == 'SQL')
+	    $this->_load_ratings();
+	else {
+	    $rdbi = $this->_get_rating_dbi();
+	    return $rdbi->metadata_get_rating($this->getId(), $pagename, $dimension);
+	}
 
         if ($this->has_rated($pagename, $dimension))
         {
@@ -255,7 +260,7 @@ class RatingsUser {
                 {
                     $r1 = $rating1[$dimension]->get_rating();
                     $r2 = $rating2[$dimension]->get_rating();
-                    // print "co-rating with " . $user->getId() . " $page $r1 $r2<br />";
+                    // print "co-rating with " . $user->getId() . " $page $r1 $r2<BR>";
 
                     $r1 -= $mean1;
                     $r2 -= $mean2;
@@ -278,7 +283,7 @@ class RatingsUser {
         // Pearson similarity
             $sim = array($sum12 / (sqrt($sum11) * sqrt($sum22)), $n);
 
-        // print "sim is " . $sim[0] . "<br /><br />";
+        // print "sim is " . $sim[0] . "<BR><BR>";
 
         // memoize result
         $this->_pearson_sims[$user->getId()][$dimension] = $sim;
@@ -288,11 +293,11 @@ class RatingsUser {
     function knn_uu_predict($pagename, &$neighbors, $dimension = 0)
     {
         /*
-        print "<pre>";
+        print "<PRE>";
         var_dump($this->_pearson_sims);
         var_dump($this->_ratings);
-        print "</pre>";
-        print "pred for $pagename<br />";
+        print "</PRE>";
+        print "pred for $pagename<BR>";
         */
         $total = 0;
         $total_sim = 0;
@@ -319,9 +324,9 @@ class RatingsUser {
                     if ($n_items < 50)
                         $sim *= $n_items / 50;
                     /*
-                    print "neighbor is " . $nbor->getId() . "<br />";
-                    print "weighted sim is " . $sim . "<br />";
-                    print "dev from mean is " . ($nbor->get_rating($pagename, $dimension) - $nbor->mean_rating($dimension)) . "<br />";
+                    print "neighbor is " . $nbor->getId() . "<BR>";
+                    print "weighted sim is " . $sim . "<BR>";
+                    print "dev from mean is " . ($nbor->get_rating($pagename, $dimension) - $nbor->mean_rating($dimension)) . "<BR>";
                     */
                     $total += $sim * ($nbor->get_rating($pagename, $dimension) - $nbor->mean_rating($dimension));
                     $total_sim += abs($sim);
@@ -331,9 +336,9 @@ class RatingsUser {
 
         $my_mean = $this->mean_rating($dimension);
         /*
-        print "your mean is $my_mean<br />";
-        print "pred dev from mean is " . ($total_sim == 0 ? -1 : ($total / $total_sim)) . "<br />";
-        print "pred is " . ($total_sim == 0 ? -1 : ($total / $total_sim + $my_mean)) . "<br /><br />";
+        print "your mean is $my_mean<BR>";
+        print "pred dev from mean is " . ($total_sim == 0 ? -1 : ($total / $total_sim)) . "<BR>";
+        print "pred is " . ($total_sim == 0 ? -1 : ($total / $total_sim + $my_mean)) . "<BR><BR>";
         */
         // XXX: what to do if no neighbors have rated pagename?
         return ($total_sim == 0 ? 0 : ($total / $total_sim + $my_mean));
@@ -343,7 +348,7 @@ class RatingsUser {
     {
         if (!$this->_ratings_loaded || $force)
         {
-            // print "load " . $this->getId() . "<br />";
+            // print "load " . $this->getId() . "<BR>";
             $this->_ratings = array();
             $this->_num_ratings = 0;
             // only signed-in users have ratings (XXX: authenticated?)
@@ -352,6 +357,7 @@ class RatingsUser {
             $dbi = $this->_get_rating_dbi();
 
             //$rating_iter = $dbi->sql_get_rating(null, $this->_userid, null);
+            //($dimension=null, $rater=null, $ratee=null, $orderby = null, $pageinfo = "ratee")
             $rating_iter = $dbi->get_rating_page(null, $this->_userid);
 
             while($rating = $rating_iter->next())
@@ -421,7 +427,7 @@ class _UserRating
     }
 }
 
-// $Log: RatingsUser.php,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.5  2004/11/15 16:00:02  rurban
 // enable RateIt imgPrefix: '' or 'Star' or 'BStar',
 // enable blue prediction icons,

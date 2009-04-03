@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-rcs_id('$Id: WikiCallback.php,v 1.3 2004/11/01 10:43:56 rurban Exp $');
+rcs_id('$Id: WikiCallback.php 6184 2008-08-22 10:33:41Z vargenau $');
 
 /**
  * A callback

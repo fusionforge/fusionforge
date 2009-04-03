@@ -3,7 +3,7 @@
 #  Write out a Makefile and a build.xml file based on the *.inputs files
 #  in the current directory. Steve Wainstead, April 2001.
 
-# $Id: makemakebuild.pl,v 1.3 2001/12/22 05:14:16 rurban Exp $
+# $Id: makemakebuild.pl 6206 2008-08-26 15:20:22Z vargenau $
 
 # read in all the input files, loop over each one and build up 
 # text blocks that we will subsitute into the skeletons for Makefile

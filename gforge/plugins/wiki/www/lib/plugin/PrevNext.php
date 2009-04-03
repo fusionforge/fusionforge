@@ -1,7 +1,8 @@
 <?php // -*-php-*-
-rcs_id('$Id: PrevNext.php,v 1.4 2004/06/14 11:31:39 rurban Exp $');
+rcs_id('$Id: PrevNext.php 6355 2008-12-13 19:19:17Z vargenau $');
 /**
  Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
+ Copyright 2008 Marc-Etienne Vargenau, Alcatel-Lucent
 
  This file is part of PhpWiki.
 
@@ -38,14 +39,13 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.4 $");
+                            "\$Revision: 6355 $");
     }
 
     function getDefaultArguments() {
         return array(
                      'prev'    => '',
                      'next'    => '',
-                     'up'      => '',
                      'contents' => '',
                      'index'   => '',
                      'up'      => '',
@@ -53,6 +53,7 @@ extends WikiPlugin
                      'last'    => '',
                      'order'   => '',
                      'style'   => 'button', // or 'text'
+                     'align'   => 'left', // or 'right', or 'center'
                      'class'   => 'wikiaction'
                      );
     }
@@ -80,11 +81,27 @@ extends WikiPlugin
 
         global $WikiTheme;
         $sep = $WikiTheme->getButtonSeparator();
-        $links = HTML();
+        if ($align == 'center') {
+            $tr = HTML::tr();
+            $links = HTML::table(array('cellpadding' => 0, 'cellspacing' => 0, 'width' => '100%'), $tr);
+        } else if ($align == 'right') {
+            $td = HTML::td(array('align' => $align));
+            $links = HTML::table(array('cellpadding' => 0, 'cellspacing' => 0, 'width' => '100%'), HTML::tr($td));
+        } else {
+            $links = HTML();
+        }
+
         if ($style == 'text') {
-            if (!$sep)
+            if (!$sep) {
                 $sep = " | "; // force some kind of separator
-            $links->pushcontent(" [ ");
+            }
+            if ($align == 'center') {
+                $tr->pushContent(HTML::td(array('align' => $align), " [ "));
+            } else if ($align == 'right') {
+                $td->pushcontent(" [ ");
+            } else {
+                $links->pushcontent(" [ ");
+            }
         }
         $last_is_text = false;
         $this_is_first = true;
@@ -95,56 +112,95 @@ extends WikiPlugin
                 if ($style == 'button') {
                     // localized version: _("Previous").gif
                     if ($imgurl = $WikiTheme->getButtonURL($label)) {
-                        if ($last_is_text)
-                            $links->pushContent($sep);
-                        $links->pushcontent(new ImageButton($label, $url,
-                                                            false, $imgurl));
+                        if ($last_is_text) {
+                            if ($align == 'center') {
+                                $tr->pushContent(HTML::td(array('align' => $align), $sep));
+                            } else if ($align == 'right') {
+                                $td->pushcontent($sep);
+                            } else {
+                                $links->pushcontent($sep);
+                            }
+                        }
+                        if ($align == 'center') {
+                            $tr->pushContent(HTML::td(array('align' => $align), new ImageButton($label, $url, false, $imgurl)));
+                        } else if ($align == 'right') {
+                            $td->pushContent(new ImageButton($label, $url, false, $imgurl));
+                        } else {
+                            $links->pushcontent(new ImageButton($label, $url, false, $imgurl));
+                        }
                         $last_is_text = false;
                         // generic version: prev.gif
                     } elseif ($imgurl = $WikiTheme->getButtonURL($dir)) {
-                        if ($last_is_text)
-                            $links->pushContent($sep);
-                        $links->pushContent(new ImageButton($label, $url,
-                                                            false, $imgurl));
+                        if ($last_is_text) {
+                            if ($align == 'center') {
+                                $tr->pushContent(HTML::td(array('align' => $align), $sep));
+                            } else if ($align == 'right') {
+                                $td->pushcontent($sep);
+                            } else {
+                                $links->pushcontent($sep);
+                            }
+                        }
+                        if ($align == 'center') {
+                            $tr->pushContent(HTML::td(array('align' => $align), new ImageButton($label, $url, false, $imgurl)));
+                        } else if ($align == 'right') {
+                            $td->pushContent(new ImageButton($label, $url, false, $imgurl));
+                        } else {
+                            $links->pushcontent(new ImageButton($label, $url, false, $imgurl));
+                        }
                         $last_is_text = false;
                     } else { // text only
-                        if (! $this_is_first)
-                            $links->pushContent($sep);
-                        $links->pushContent(new Button($label, $url, $class));
+                        if (! $this_is_first) {
+                            if ($align == 'center') {
+                                $tr->pushContent(HTML::td(array('align' => $align), $sep));
+                            } else if ($align == 'right') {
+                                $td->pushcontent($sep);
+                            } else {
+                                $links->pushcontent($sep);
+                            }
+                        }
+                        if ($align == 'center') {
+                            $tr->pushContent(HTML::td(array('align' => $align), new Button($label, $url, $class)));
+                        } else if ($align == 'right') {
+                            $td->pushContent(new Button($label, $url, $class));
+                        } else {
+                            $links->pushcontent(new Button($label, $url, $class));
+                        }
                         $last_is_text = true;
                     }
                 } else {
-                    if (! $this_is_first)
-                        $links->pushContent($sep);
-                    $links->pushContent(new Button($label, $url, $class));
+                    if (! $this_is_first) {
+                        if ($align == 'center') {
+                            $tr->pushContent(HTML::td(array('align' => $align), $sep));
+                        } else if ($align == 'right') {
+                            $td->pushcontent($sep);
+                        } else {
+                            $links->pushcontent($sep);
+                        }
+                    }
+                    if ($align == 'center') {
+                        $tr->pushContent(HTML::td(array('align' => $align), new Button($label, $url, $class)));
+                    } else if ($align == 'right') {
+                        $td->pushContent(new Button($label, $url, $class));
+                    } else {
+                        $links->pushcontent(new Button($label, $url, $class));
+                    }
                     $last_is_text = true;
                 }
                 $this_is_first = false;
             }
         }
-        if ($style == 'text')
-            $links->pushcontent(" ] ");
+        if ($style == 'text') {
+            if ($align == 'center') {
+                $tr->pushContent(HTML::td(array('align' => $align), " ] "));
+            } else if ($align == 'right') {
+                $td->pushcontent(" ] ");
+            } else {
+                $links->pushcontent(" ] ");
+            }
+        }
         return $links;
     }
 }
-
-// $Log: PrevNext.php,v $
-// Revision 1.4  2004/06/14 11:31:39  rurban
-// renamed global $Theme to $WikiTheme (gforge nameclash)
-// inherit PageList default options from PageList
-//   default sortby=pagename
-// use options in PageList_Selectable (limit, sortby, ...)
-// added action revert, with button at action=diff
-// added option regex to WikiAdminSearchReplace
-//
-// Revision 1.3  2004/02/17 12:11:36  rurban
-// added missing 4th basepage arg at plugin->run() to almost all plugins. This caused no harm so far, because it was silently dropped on normal usage. However on plugin internal ->run invocations it failed. (InterWikiSearch, IncludeSiteMap, ...)
-//
-// Revision 1.2  2003/01/18 22:01:43  carstenklapp
-// Code cleanup:
-// Reformatting & tabs to spaces;
-// Added copyleft, getVersion, getDescription, rcs_id.
-//
 
 // Local Variables:
 // mode: php

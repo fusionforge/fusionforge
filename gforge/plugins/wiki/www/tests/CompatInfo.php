@@ -2,7 +2,7 @@
 /* Get the Compatibility info for phpwiki
    http://pear.php.net/package/PHP_CompatInfo
 
-   $Id: CompatInfo.php,v 1.3 2004/11/03 16:47:09 rurban Exp $
+   $Id: CompatInfo.php 6206 2008-08-26 15:20:22Z vargenau $
 */
 /*
  * Copyright (C) 2004 Reini Urban <rurban@x-ray.at>
@@ -153,10 +153,7 @@ if ($debug) {
     echo "</pre>\n";
 }
 
-// $Log: CompatInfo.php,v $
-// Revision 1.3  2004/11/03 16:47:09  rurban
-// some unit tests fixes and updates
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.2  2004/08/24 00:27:29  rurban
 // Turn recursion on
 //

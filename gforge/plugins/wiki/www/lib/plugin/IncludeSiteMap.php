@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: IncludeSiteMap.php,v 1.2 2004/03/09 12:26:20 rurban Exp $');
+rcs_id('$Id: IncludeSiteMap.php 6186 2008-08-22 11:50:25Z vargenau $');
 /**
  Copyright 2003,2004 $ThePhpWikiProgrammingTeam
 
@@ -56,6 +56,12 @@ extends WikiPlugin_SiteMap
     return sprintf(_("Include recursively all linked pages starting at %s"),
 		   $this->_pagename);
   }
+
+  function getVersion() {
+      return preg_replace("/[Revision: $]/", '',
+                          "\$Revision: 6186 $");
+  }
+
   function getDefaultArguments() {
       return array('exclude'        => '',
                    'include_self'   => 0,
@@ -76,10 +82,7 @@ extends WikiPlugin_SiteMap
     }
 }
 
-// $Log: IncludeSiteMap.php,v $
-// Revision 1.2  2004/03/09 12:26:20  rurban
-// better docs how to disable words=50 limitation
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.1  2004/02/17 12:11:36  rurban
 // added missing 4th basepage arg at plugin->run() to almost all plugins. This caused no harm so far, because it was silently dropped on normal usage. However on plugin internal ->run invocations it failed. (InterWikiSearch, IncludeSiteMap, ...)
 //

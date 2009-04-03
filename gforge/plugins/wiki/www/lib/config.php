@@ -1,5 +1,5 @@
 <?php
-rcs_id('$Id: config.php,v 1.139 2006/03/19 14:50:42 rurban Exp $');
+rcs_id('$Id: config.php 6468 2009-01-31 12:13:51Z vargenau $');
 /*
  * NOTE: The settings here should probably not need to be changed.
  * The user-configurable settings have been moved to IniConfig.php
@@ -22,9 +22,12 @@ define ('_DEBUG_PAGELINKS', 2); // list the extraced pagelinks at the top of eac
 define ('_DEBUG_PARSER',    4); // verbose parsing steps
 define ('_DEBUG_TRACE',     8); // test php memory usage, prints php debug backtraces
 define ('_DEBUG_INFO',     16);
-define ('_DEBUG_APD',      32);
+define ('_DEBUG_APD',      32); // APD tracing/profiling
 define ('_DEBUG_LOGIN',    64); // verbose login debug-msg (settings and reason for failure)
-define ('_DEBUG_SQL',     128);
+define ('_DEBUG_SQL',     128); // force check db, force optimize, print some debugging logs
+define ('_DEBUG_REMOTE',  256); // remote debug into subrequests (xmlrpc, ajax, wikiwyg, ...) 
+				// or test local SearchHighlight.
+				// internal links have persistent ?start_debug=1 
 
 function isCGI() {
     return (substr(php_sapi_name(),0,3) == 'cgi' and 
@@ -67,16 +70,17 @@ function browserAgent() {
     return $HTTP_USER_AGENT;
 }
 function browserDetect($match) {
-    return strstr(browserAgent(), $match);
+    return strstr(strtolower(browserAgent()), strtolower($match));
 }
 // returns a similar number for Netscape/Mozilla (gecko=5.0)/IE/Opera features.
 function browserVersion() {
-    if (strstr(browserAgent(),    "Mozilla/4.0 (compatible; MSIE"))
-        return (float) substr(browserAgent(),30);
-    elseif (strstr(browserAgent(),"Mozilla/5.0 (compatible; Konqueror/"))
-        return (float) substr(browserAgent(),36);
+    $agent = browserAgent();
+    if (strstr($agent, "Mozilla/4.0 (compatible; MSIE"))
+        return (float) substr($agent, 30);
+    elseif (strstr($agent, "Mozilla/5.0 (compatible; Konqueror/"))
+        return (float) substr($agent, 36);
     else
-        return (float) substr(browserAgent(),8);
+        return (float) substr($agent, 8);
 }
 function isBrowserIE() {
     return (browserDetect('Mozilla/') and 
@@ -95,14 +99,6 @@ function isBrowserNetscape($version = false) {
     if ($version) return $agent and browserVersion() >= $version; 
     else return $agent;
 }
-// NS3 or less
-function isBrowserNS3() {
-    return (isBrowserNetscape() and browserVersion() < 4.0);
-}
-// NS4 or less
-function isBrowserNS4() {
-    return (isBrowserNetscape() and browserVersion() < 5.0);
-}
 // must omit display alternate stylesheets: konqueror 3.1.4
 // http://sourceforge.net/tracker/index.php?func=detail&aid=945154&group_id=6121&atid=106121
 function isBrowserKonqueror($version = false) {
@@ -112,8 +108,13 @@ function isBrowserKonqueror($version = false) {
 // MacOSX Safari has certain limitations. Need detection and patches.
 // * no <object>, only <embed>
 function isBrowserSafari($version = false) {
-    if ($version) return browserDetect('Safari/') and browserVersion() >= $version; 
-    return browserDetect('Safari/');
+    $found = browserDetect('spoofer') or browserDetect('applewebkit');
+    if ($version) return $found and browserVersion() >= $version; 
+    return $found;
+}
+function isBrowserOpera($version = false) {
+    if ($version) return browserDetect('Opera/') and browserVersion() >= $version; 
+    return browserDetect('Opera/');
 }
 
 
@@ -131,7 +132,7 @@ function guessing_lang ($languages=false) {
     	$languages = array("en","de","es","fr","it","ja","zh","nl","sv");
         // ignore possible "_<territory>" and codeset "ja.utf8"
         /*
-        require_once("lib/Theme.php");
+        require_once("lib/WikiTheme.php");
         $languages = listAvailableLanguages();
         if (defined('DEFAULT_LANGUAGE') and in_array(DEFAULT_LANGUAGE, $languages))
         {
@@ -486,6 +487,26 @@ if (!check_php_version(5)) {
     ');
 }
 
+/**
+ * array_diff_assoc() returns an array containing all the values from array1 that are not
+ * present in any of the other arguments. Note that the keys are used in the comparison 
+ * unlike array_diff(). In core since php-4.3.0
+ * Our fallback here supports only hashes and two args.
+ * $array1 = array("a" => "green", "b" => "brown", "c" => "blue");
+ * $array2 = array("a" => "green", "y" => "yellow", "r" => "red");
+ * => b => brown, c => blue
+ */
+if (!function_exists('array_diff_assoc')) {
+    function array_diff_assoc($a1, $a2) {
+    	$result = array();
+    	foreach ($a1 as $k => $v) {
+    	    if (!isset($a2[$k]) or !$a2[$k])
+    	        $result[$k] = $v;	
+    	}
+    	return $result;
+    }
+}
+
 /** 
  * wordwrap() might crash between 4.1.2 and php-4.3.0RC2, fixed in 4.3.0
  * See http://bugs.php.net/bug.php?id=20927 and 
@@ -552,194 +573,85 @@ function safe_wordwrap($str, $width=80, $break="\n", $cut=false) {
 }
 
 function getUploadFilePath() {
+
+    if (defined('UPLOAD_FILE_PATH')) {
+        // Force creation of the returned directory if it does not exist.
+        if (!file_exists(UPLOAD_FILE_PATH)) {
+            mkdir(UPLOAD_FILE_PATH, 0775);
+        }
+        if (string_ends_with(UPLOAD_FILE_PATH, "/") 
+            or string_ends_with(UPLOAD_FILE_PATH, "\\")) {
+            return UPLOAD_FILE_PATH;
+        } else {
+            return UPLOAD_FILE_PATH."/";
+        }
+    }
     return defined('PHPWIKI_DIR') 
         ? PHPWIKI_DIR . "/uploads/" 
         : realpath(dirname(__FILE__) . "/../uploads/");
 }
 function getUploadDataPath() {
-  return SERVER_URL . ((substr(DATA_PATH,0,1)=='/') ? '' : "/") . DATA_PATH . '/uploads/';
+    if (defined('UPLOAD_DATA_PATH')) {
+	return string_ends_with(UPLOAD_DATA_PATH, "/") 
+	    ? UPLOAD_DATA_PATH : UPLOAD_DATA_PATH."/";
+    }
+    return SERVER_URL . (string_ends_with(DATA_PATH, "/") ? '' : "/") 
+	 . DATA_PATH . '/uploads/';
 }
 
-// $Log: config.php,v $
-// Revision 1.139  2006/03/19 14:50:42  rurban
-// sf.net patch #1438442 by Matt Brown: Unitialised variable reference in config.php
-//
-// Revision 1.138  2006/03/07 20:45:43  rurban
-// wikihash for php-5.1
-//
-// Revision 1.137  2005/08/06 14:31:10  rurban
-// ensure absolute uploads path
-//
-// Revision 1.136  2005/05/06 16:49:24  rurban
-// Safari comment
-//
-// Revision 1.135  2005/04/01 15:22:20  rurban
-// Implement icase and regex options.
-// Change checkbox case message from "Case-Sensitive" to "Case-Insensitive"
-//
-// Revision 1.134  2005/03/27 18:23:39  rurban
-// compute locale only for setlocale and LC_ALL
-//
-// Revision 1.133  2005/02/08 13:26:59  rurban
-//  improve the locale splitter
-//
-// Revision 1.132  2005/02/07 15:39:02  rurban
-// another locale fix
-//
-// Revision 1.131  2005/02/05 15:32:09  rurban
-// force guessing_setlocale (again)
-//
-// Revision 1.130  2005/01/29 20:36:44  rurban
-// very important php5 fix! clone objects
-//
-// Revision 1.129  2005/01/08 22:53:50  rurban
-// hardcode list of langs (file access is slow)
-// fix client detection
-// set proper locale on empty locale
-//
-// Revision 1.128  2005/01/04 20:22:46  rurban
-// guess $LANG based on client
-//
-// Revision 1.127  2004/12/26 17:15:32  rurban
-// new reverse locale detection on DEFAULT_LANGUAGE="", ja default euc-jp again
-//
-// Revision 1.126  2004/12/20 16:05:00  rurban
-// gettext msg unification
-//
-// Revision 1.125  2004/11/21 11:59:18  rurban
-// remove final \n to be ob_cache independent
-//
-// Revision 1.124  2004/11/09 17:11:16  rurban
-// * revert to the wikidb ref passing. there's no memory abuse there.
-// * use new wikidb->_cache->_id_cache[] instead of wikidb->_iwpcache, to effectively
-//   store page ids with getPageLinks (GleanDescription) of all existing pages, which
-//   are also needed at the rendering for linkExistingWikiWord().
-//   pass options to pageiterator.
-//   use this cache also for _get_pageid()
-//   This saves about 8 SELECT count per page (num all pagelinks).
-// * fix passing of all page fields to the pageiterator.
-// * fix overlarge session data which got broken with the latest ACCESS_LOG_SQL changes
-//
-// Revision 1.123  2004/11/05 21:03:27  rurban
-// new DEBUG flag: _DEBUG_LOGIN (64)
-//   verbose login debug-msg (settings and reason for failure)
-//
-// Revision 1.122  2004/10/14 17:49:58  rurban
-// fix warning in safe_wordwrap
-//
-// Revision 1.121  2004/10/14 17:48:19  rurban
-// typo in safe_wordwrap
-//
-// Revision 1.120  2004/09/22 13:46:26  rurban
-// centralize upload paths.
-// major WikiPluginCached feature enhancement:
-//   support _STATIC pages in uploads/ instead of dynamic getimg.php? subrequests.
-//   mainly for debugging, cache problems and action=pdf
-//
-// Revision 1.119  2004/09/16 07:50:37  rurban
-// wordwrap() might crash between 4.1.2 and php-4.3.0RC2, fixed in 4.3.0
-// See http://bugs.php.net/bug.php?id=20927 and
-//     http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-1396
-// Improved version of wordwrap2() from the comments at http://www.php.net/wordwrap
-//
-// Revision 1.118  2004/07/13 14:03:31  rurban
-// just some comments
-//
-// Revision 1.117  2004/06/21 17:29:17  rurban
-// pear DB introduced a is_a requirement. so pear lost support for php < 4.2.0
-//
-// Revision 1.116  2004/06/21 08:39:37  rurban
-// pear/Cache update from Cache-1.5.4 (added db and trifile container)
-// pear/DB update from DB-1.6.1 (mysql bugfixes, php5 compat, DB_PORTABILITY features)
-//
-// Revision 1.115  2004/06/20 14:42:54  rurban
-// various php5 fixes (still broken at blockparser)
-//
-// Revision 1.114  2004/06/19 11:48:05  rurban
-// moved version check forwards: already needed in XmlElement::_quote
-//
-// Revision 1.113  2004/06/03 12:59:41  rurban
-// simplify translation
-// NS4 wrap=virtual only
-//
-// Revision 1.112  2004/06/02 18:01:46  rurban
-// init global FileFinder to add proper include paths at startup
-//   adds PHPWIKI_DIR if started from another dir, lib/pear also
-// fix slashify for Windows
-// fix USER_AUTH_POLICY=old, use only USER_AUTH_ORDER methods (besides HttpAuth)
-//
-// Revision 1.111  2004/05/17 17:43:29  rurban
-// CGI: no PATH_INFO fix
-//
-// Revision 1.110  2004/05/16 23:10:44  rurban
-// update_locale wrongly resetted LANG, which broke japanese.
-// japanese now correctly uses EUC_JP, not utf-8.
-// more charset and lang headers to help the browser.
-//
-// Revision 1.109  2004/05/08 14:06:12  rurban
-// new support for inlined image attributes: [image.jpg size=50x30 align=right]
-// minor stability and portability fixes
-//
-// Revision 1.108  2004/05/08 11:25:16  rurban
-// php-4.0.4 fixes
-//
-// Revision 1.107  2004/05/06 17:30:38  rurban
-// CategoryGroup: oops, dos2unix eol
-// improved phpwiki_version:
-//   pre -= .0001 (1.3.10pre: 1030.099)
-//   -p1 += .001 (1.3.9-p1: 1030.091)
-// improved InstallTable for mysql and generic SQL versions and all newer tables so far.
-// abstracted more ADODB/PearDB methods for action=upgrade stuff:
-//   backend->backendType(), backend->database(),
-//   backend->listOfFields(),
-//   backend->listOfTables(),
-//
-// Revision 1.106  2004/05/02 19:12:14  rurban
-// fix sf.net bug #945154 Konqueror alt css
-//
-// Revision 1.105  2004/05/02 15:10:06  rurban
-// new finally reliable way to detect if /index.php is called directly
-//   and if to include lib/main.php
-// new global AllActionPages
-// SetupWiki now loads all mandatory pages: HOME_PAGE, action pages, and warns if not.
-// WikiTranslation what=buttons for Carsten to create the missing MacOSX buttons
-// PageGroupTestOne => subpages
-// renamed PhpWikiRss to PhpWikiRecentChanges
-// more docs, default configs, ...
-//
-// Revision 1.104  2004/05/01 11:26:37  rurban
-// php-4.0.x support: array_key_exists (PHP 4 >= 4.1.0)
-//
-// Revision 1.103  2004/04/30 00:04:14  rurban
-// zh (chinese language) support
-//
-// Revision 1.102  2004/04/29 23:25:12  rurban
-// re-ordered locale init (as in 1.3.9)
-// fixed loadfile with subpages, and merge/restore anyway
-//   (sf.net bug #844188)
-//
-// Revision 1.101  2004/04/26 13:22:32  rurban
-// calculate bool old or dynamic constants later
-//
-// Revision 1.100  2004/04/26 12:15:01  rurban
-// check default config values
-//
-// Revision 1.99  2004/04/21 14:04:24  zorloc
-// 'Require lib/FileFinder.php' necessary to allow for call to FindLocalizedFile().
-//
-// Revision 1.98  2004/04/20 18:10:28  rurban
-// config refactoring:
-//   FileFinder is needed for WikiFarm scripts calling index.php
-//   config run-time calls moved to lib/IniConfig.php:fix_configs()
-//   added PHPWIKI_DIR smart-detection code (Theme finder)
-//   moved FileFind to lib/FileFinder.php
-//   cleaned lib/config.php
-//
-// Revision 1.97  2004/04/18 01:11:52  rurban
-// more numeric pagename fixes.
-// fixed action=upload with merge conflict warnings.
-// charset changed from constant to global (dynamic utf-8 switching)
-//
+/**
+ * htmlspecialchars doesn't support some special 8bit charsets, which we do want to support.
+ * Well it just prints a warning which we could circumvent.
+ * Note: unused, since php htmlspecialchars does the same, just prints a warning which we silence
+ */
+/*
+function htmlspecialchars_workaround($str, $quote=ENT_COMPAT, $charset='iso-8859-1') {
+    if (in_array(strtolower($charset), 
+                 array('iso-8859-2', 'iso8859-2', 'latin-2', 'latin2'))) 
+    {
+        if (! ($quote & ENT_NOQUOTES)) {
+            $str = str_replace("\"", "&quot;",
+                               $str);
+        }
+        if ($quote & ENT_QUOTES) {
+            $str = str_replace("\'", "&#039;",
+                               $str);
+        }
+        return str_replace(array("<", ">", "&"),
+                           array("&lt;", "&gt;", "&amp;"), $str);
+    }
+    else {
+        return htmlspecialchars($str, $quote, $charset);
+    }
+}
+*/
+
+/**
+ * htmlspecialchars doesn't support some special 8bit charsets, which we do want to support.
+ * Well it just prints a warning which we could circumvent.
+ * Note: unused, since php htmlspecialchars does the same, just prints a warning which we silence
+ */
+/*
+function htmlspecialchars_workaround($str, $quote=ENT_COMPAT, $charset='iso-8859-1') {
+    if (in_array(strtolower($charset), 
+                 array('iso-8859-2', 'iso8859-2', 'latin-2', 'latin2'))) 
+    {
+        if (! ($quote & ENT_NOQUOTES)) {
+            $str = str_replace("\"", "&quot;",
+                               $str);
+        }
+        if ($quote & ENT_QUOTES) {
+            $str = str_replace("\'", "&#039;",
+                               $str);
+        }
+        return str_replace(array("<", ">", "&"),
+                           array("&lt;", "&gt;", "&amp;"), $str);
+    }
+    else {
+        return htmlspecialchars($str, $quote, $charset);
+    }
+}
+*/
 
 // For emacs users
 // Local Variables:

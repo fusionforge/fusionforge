@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-rcs_id('$Id: Forbidden.php,v 1.2 2004/12/26 17:11:16 rurban Exp $');
+rcs_id('$Id: Forbidden.php 6184 2008-08-22 10:33:41Z vargenau $');
 /* Copyright (C) 2004 ReiniUrban
  * This file is part of PhpWiki. Terms and Conditions see LICENSE. (GPL2)
  */
@@ -16,10 +16,7 @@ extends _ForbiddenUser
     }
 }
 
-// $Log: Forbidden.php,v $
-// Revision 1.2  2004/12/26 17:11:16  rurban
-// just copyright
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.1  2004/11/05 18:11:38  rurban
 // required dummy file
 //

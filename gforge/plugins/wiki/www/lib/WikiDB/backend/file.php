@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: file.php,v 1.22 2004/12/06 19:50:04 rurban Exp $');
+rcs_id('$Id: file.php 6184 2008-08-22 10:33:41Z vargenau $');
 
 /**
  Copyright 1999, 2000, 2001, 2002, 2003 $ThePhpWikiProgrammingTeam
@@ -121,7 +121,7 @@ extends WikiDB_backend
     function _savePage($type, $pagename, $version, $data) {
         $filename = $this->_pagename2filename($type, $pagename, $version);
         if($fd = fopen($filename, 'a+b')) { 
-           $locked = flock($fd,2); #Exclusive blocking lock 
+            $locked = flock($fd,2); // Exclusive blocking lock 
            if (!$locked) { 
               ExitWiki("Timeout while obtaining lock. Please try again"); 
            }
@@ -129,7 +129,9 @@ extends WikiDB_backend
            rewind($fd);
            ftruncate($fd, 0);
            $pagedata = serialize($data);
-           fwrite($fd, $pagedata); 
+           $len = strlen($pagedata);
+           $num = fwrite($fd, $pagedata, $len); 
+           assert($num == $len);
            fclose($fd);
         } else {
            ExitWiki("Error while writing page '$pagename'");
@@ -517,7 +519,9 @@ extends WikiDB_backend
      * @return object A WikiDB_backend_iterator.
      */
     function get_links($pagename, $reversed=true, $include_empty=false,
-                       $sortby=false, $limit=false, $exclude=false) {
+                       $sortby='', $limit='', $exclude='',
+                       $want_relations=false) 
+    {
         if ($reversed == false)
             return new WikiDB_backend_file_iter($this, $this->_loadPageLinks($pagename));
 
@@ -529,7 +533,7 @@ extends WikiDB_backend
         foreach ($pagenames as $key => $val) {
             $links = $this->_loadPageLinks($key);
 	    foreach ($links as $key2 => $val2) {
-                if ($val2 == $pagename)
+                if ($val2['linkto'] == $pagename)
                     array_push($out, $key);
             }
         }
@@ -568,7 +572,7 @@ extends WikiDB_backend
      *
      * @return object A WikiDB_backend_iterator.
      */
-    function get_all_pages($include_empty=false, $sortby=false, $limit=false, $exclude=false) {
+    function get_all_pages($include_empty=false, $sortby='', $limit='', $exclude='') {
     	require_once("lib/PageList.php");
         $this->_loadLatestVersions();
         $a = array_keys($this->_latest_versions);
@@ -711,6 +715,9 @@ class WikiDB_backend_file_iter extends WikiDB_backend_iterator
         }
         
         $pn = $e[1];
+        if (is_array($pn) and isset($pn['linkto'])) { // support relation link iterator
+            $pn = $pn['linkto'];
+        }
         $pagedata = $this->_backend->get_pagedata($pn);
         // don't pass _cached_html via iterators
         if (isset($pagedata['_cached_html']))
@@ -718,6 +725,9 @@ class WikiDB_backend_file_iter extends WikiDB_backend_iterator
         unset($pagedata['pagename']);
         $rec = array('pagename' => $pn,
                      'pagedata' => $pagedata);
+        if (is_array($e[1])) {
+            $rec['linkrelation'] = $e[1]['relation'];
+        }
         //$rec['version'] = $backend->get_latest_version($pn);
         //$rec['versiondata'] = $backend->get_versiondata($pn, $rec['version'], true);
         return $rec;
@@ -734,7 +744,13 @@ class WikiDB_backend_file_iter extends WikiDB_backend_iterator
     }
 }
 
-// $Log: file.php,v $
+// $Log: not supported by cvs2svn $
+// Revision 1.24  2007/02/17 20:24:56  rurban
+// fix getLinks for relation and linkto
+//
+// Revision 1.23  2007/01/04 16:45:49  rurban
+// Clarify API: sortby,limit and exclude are strings.
+//
 // Revision 1.22  2004/12/06 19:50:04  rurban
 // enable action=remove which is undoable and seeable in RecentChanges: ADODB ony for now.
 // renamed delete_page to purge_page.

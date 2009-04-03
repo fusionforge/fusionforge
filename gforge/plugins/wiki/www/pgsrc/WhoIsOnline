@@ -1,12 +1,14 @@
-Date: Thu, 26 Feb 2004 19:17:53 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.8)
-X-Rcs-Id: $Id: WhoIsOnline,v 1.1 2004/03/14 16:34:22 rurban Exp $
+Date: Mon, 16 Jun 2008 14:15:24 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
+X-Rcs-Id: $Id: WhoIsOnline 6184 2008-08-22 10:33:41Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=WhoIsOnline;
-  flags="";
-  version=2;
+  flags=PAGE_LOCKED;
   markup=2;
   charset=iso-8859-1
 Content-Transfer-Encoding: binary
 
 <?plugin WhoIsOnline allow_detail=1 ?>
+
+----
+[CategoryActionPage]

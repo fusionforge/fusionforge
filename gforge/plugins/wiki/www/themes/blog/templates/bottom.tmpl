@@ -1,10 +1,10 @@
 <?php // -*-html-*-
-  rcs_id('$Id: bottom.tmpl,v 1.2 2004/12/15 17:47:32 rurban Exp $');
+  rcs_id('$Id: bottom.tmpl 6204 2008-08-26 15:12:03Z vargenau $');
 ?>
 <!--span id="bottom" style="margin-left: 25px"-->
 <!-- Add your Disclaimer here -->
 <?php if (!$WikiTheme->DUMP_MODE) { ?>
 <?= $GLOBALS['ErrorManager']->getPostponedErrorsAsHTML() ?>
-<?php if (defined('DEBUG') and DEBUG & 1) { ?><?= Template('debug') ?><?php } ?>
+<?php if (DEBUG & _DEBUG_VERBOSE) { ?><?= Template('debug') ?><?php } ?>
 <?php } ?>
 <!--/span-->

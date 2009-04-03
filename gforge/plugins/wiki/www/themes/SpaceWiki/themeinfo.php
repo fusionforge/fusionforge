@@ -1,6 +1,6 @@
 <?php // -*-php-*-
 
-rcs_id('$Id: themeinfo.php,v 1.5 2005/01/26 21:11:54 uckelman Exp $');
+rcs_id('$Id: themeinfo.php 6248 2008-09-07 15:13:56Z vargenau $');
 
 /**
  * This theme is by design completely css-based so unfortunately it
@@ -15,9 +15,10 @@ rcs_id('$Id: themeinfo.php,v 1.5 2005/01/26 21:11:54 uckelman Exp $');
  * remaining non-structural html elements from the html templates.
  */
 
-require_once('lib/Theme.php');
+require_once('lib/WikiTheme.php');
 
-class Theme_SpaceWiki extends Theme {
+class WikiTheme_SpaceWiki extends WikiTheme {
+
     function getRecentChangesFormatter ($format) {
         include_once($this->file('lib/RecentChanges.php'));
         if (preg_match('/^rss|^sidebar/', $format))
@@ -31,53 +32,56 @@ class Theme_SpaceWiki extends Theme {
             return false;       // use default
         return '_SpaceWiki_PageHistory_Formatter';
     }
+    
+    function load() {
+	// CSS file defines fonts, colors and background images for this
+	// style.  The companion '*-heavy.css' file isn't defined, it's just
+	// expected to be in the same directory that the base style is in.
+
+	$this->setDefaultCSS('SpaceWiki', 'SpaceWiki.css');
+	$this->addAlternateCSS(_("Printer"), 'phpwiki-printer.css', 'print, screen');
+	$this->addAlternateCSS(_("Modern"), 'phpwiki-modern.css');
+	$this->addAlternateCSS('PhpWiki', 'phpwiki.css');
+
+	/**
+	 * The logo image appears on every page and links to the HomePage.
+	 */
+	//$this->addImageAlias('logo', 'logo.png');
+	$this->addImageAlias('logo', 'Ufp-logo.jpg');
+	$this->addImageAlias('logo', WIKI_NAME . 'Logo.png');
+
+	/**
+	 * The Signature image is shown after saving an edited page. If this
+	 * is set to false then the "Thank you for editing..." screen will
+	 * be omitted.
+	 */
+	$this->addImageAlias('signature', 'lights.png');
+	$this->addImageAlias('signature', WIKI_NAME . "Signature.png");
+	// Uncomment this next line to disable the signature.
+	//$this->addImageAlias('signature', false);
+
+	$this->addImageAlias('hr', 'hr.png');
+
+	$this->setButtonSeparator(" ");
+
+	/**
+	 * WikiWords can automatically be split by inserting spaces between
+	 * the words. The default is to leave WordsSmashedTogetherLikeSo.
+	 */
+	//$this->setAutosplitWikiWords(false);
+
+	/**
+	 * The "stardate" format here is really just metricdate.24hourtime. A
+	 * "real" date2startdate conversion function might be fun but not very
+	 * useful on a wiki.
+	 */
+	$this->setTimeFormat("%H%M%S");
+	$this->setDateFormat("%Y%m%d"); // must not contain time
+
+    }
 }
 
-$WikiTheme = new Theme_SpaceWiki('SpaceWiki');
-
-// CSS file defines fonts, colors and background images for this
-// style.  The companion '*-heavy.css' file isn't defined, it's just
-// expected to be in the same directory that the base style is in.
-
-$WikiTheme->setDefaultCSS('SpaceWiki', 'SpaceWiki.css');
-$WikiTheme->addAlternateCSS(_("Printer"), 'phpwiki-printer.css', 'print, screen');
-$WikiTheme->addAlternateCSS(_("Modern"), 'phpwiki-modern.css');
-$WikiTheme->addAlternateCSS('PhpWiki', 'phpwiki.css');
-
-/**
- * The logo image appears on every page and links to the HomePage.
- */
-//$WikiTheme->addImageAlias('logo', 'logo.png');
-$WikiTheme->addImageAlias('logo', 'Ufp-logo.jpg');
-$WikiTheme->addImageAlias('logo', WIKI_NAME . 'Logo.png');
-
-/**
- * The Signature image is shown after saving an edited page. If this
- * is set to false then the "Thank you for editing..." screen will
- * be omitted.
- */
-$WikiTheme->addImageAlias('signature', 'lights.png');
-$WikiTheme->addImageAlias('signature', WIKI_NAME . "Signature.png");
-// Uncomment this next line to disable the signature.
-//$WikiTheme->addImageAlias('signature', false);
-
-$WikiTheme->addImageAlias('hr', 'hr.png');
-
-$WikiTheme->setButtonSeparator(" ");
-
-/**
- * WikiWords can automatically be split by inserting spaces between
- * the words. The default is to leave WordsSmashedTogetherLikeSo.
- */
-//$WikiTheme->setAutosplitWikiWords(false);
-
-/**
- * The "stardate" format here is really just metricdate.24hourtime. A
- * "real" date2startdate conversion function might be fun but not very
- * useful on a wiki.
- */
-$WikiTheme->setTimeFormat("%H%M%S");
-$WikiTheme->setDateFormat("%Y%m%d"); // must not contain time
+$WikiTheme = new WikiTheme_SpaceWiki('SpaceWiki');
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

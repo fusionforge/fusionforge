@@ -1,0 +1,98 @@
+Date: Sat, 24 Jan 2009 20:18:24 +0100
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
+X-Rcs-Id: $Id: Help%2FIncludePagePlugin 6451 2009-01-24 21:40:21Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FIncludePagePlugin;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=iso-8859-1
+Content-Transfer-Encoding: binary
+
+The *~IncludePage* [[Help:WikiPlugin|plugin]] will "include" other pages in this wiki. In the language of hypertext this is called <i>transclusion</i>. The pages will render in distinct tables. You can also load external pages in a more limited fashion with the [FrameInclude|Help:FrameIncludePlugin] plugin.
+
+== Usage
+<verbatim>
+<?plugin IncludePage page=OtherPage rev=6 quiet=1 words=50 lines=6 ?>
+</verbatim>
+
+== Arguments
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| <b>page</b>
+| The page to include
+| ''None'' (mandatory argument)
+|-
+| <b>rev</b>
+| the revision
+| defaults to most recent
+|-
+| <b>quiet</b>
+| if set, inclusion appears as normal content
+| false
+|-
+| <b>bytes</b>
+| maximum number of bytes to include
+| ''None'' (include all page)
+|-
+| <b>words</b>
+| maximum number of words to include
+| ''None'' (include all page)
+|-
+| <b>lines</b>
+| maximum number of lines to include
+| ''None'' (include all page)
+|-
+| <b>sections</b>
+| maximum number of sections to include
+| ''None'' (include all sections)
+|-
+| <b>section</b>
+| include a named section
+| ''None''
+|-
+| <b>sectionhead</b>
+| when including a named section show the heading
+| false
+|}
+
+== Examples
+
+=== ~IncludePage page=Help/~AllPagesPlugin
+<?plugin IncludePage page=Help/AllPagesPlugin ?>
+
+=== ~IncludePage page=Help/~AllPagesPlugin lines=6
+<?plugin IncludePage page=Help/AllPagesPlugin lines=6 ?>
+
+=== ~IncludePage page=Help/~AllPagesPlugin section="Arguments"
+<?plugin IncludePage page=Help/AllPagesPlugin section="Arguments" ?>
+
+=== ~IncludePage page=Help/~AllPagesPlugin section="Arguments" sectionhead=true
+<?plugin IncludePage page=Help/AllPagesPlugin section="Arguments" sectionhead=true ?>
+
+=== ~IncludePage page=Help/~AllPagesPlugin sections=2
+<?plugin IncludePage page=Help/AllPagesPlugin sections=2 ?>
+
+== Known bugs
+
+* [~RedirectTo|Help:RedirectToPlugin] plugin is not handled correctly.
+* Line and word limit doesn't work if the included page itself includes a plugin.
+
+== Authors
+
+* Joe Edelman
+* bug fixes by [Reini Urban|PhpWiki:ReiniUrban]
+* "sections" parameter implemented by Marc-Etienne Vargenau, Alcatel-Lucent
+
+== See Also
+
+* [Help:IncludePagesPlugin] (to include multiple pages)
+* [Help:TemplatePlugin] (to include a page with parameters)
+* [Help:FrameIncludePlugin] (to include an external page)
+
+-----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]

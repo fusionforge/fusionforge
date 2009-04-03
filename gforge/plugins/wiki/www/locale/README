@@ -218,7 +218,7 @@ before you can edit them.
 
    Date: Sun, 27 Jan 2002 17:28:55 -0500
    Mime-Version: 1.0 (Produced by PhpWiki 1.3.2-jeffs-hacks)
-   X-Rcs-Id: $Id: README,v 1.13 2005/01/08 22:41:42 rurban Exp $
+   X-Rcs-Id: $Id: README 6207 2008-08-26 15:22:07Z vargenau $
    Content-Type: application/x-phpwiki;
      pagename=Neueste%C4nderungen;
      flags=PAGE_LOCKED;
@@ -395,4 +395,4 @@ Arno Hollosi <ahollosi@mail.com>
 Carsten Klapp <carstenklapp@users.sourceforge.net>
 Reini Urban <rurban@x-ray.at>
 
-$Id: README,v 1.13 2005/01/08 22:41:42 rurban Exp $
+$Id: README 6207 2008-08-26 15:22:07Z vargenau $

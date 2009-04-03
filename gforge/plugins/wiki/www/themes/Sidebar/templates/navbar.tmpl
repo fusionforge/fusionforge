@@ -1,41 +1,77 @@
-<?php // -*-php-*-
-    rcs_id('$Id: navbar.tmpl,v 1.10 2005/04/06 06:41:05 rurban Exp $');
-    $split = $WikiTheme->_autosplitWikiWords;
-    $WikiTheme->setAutosplitWikiWords(true);
+<?php // -*-php-*- ?>
+<!-- $Id: navbar.tmpl 6410 2009-01-17 14:46:16Z rurban $ -->
+<?php
+// With MonoBook it is similar to Sidebar, named boxes at the left.
+// actionbuttons, navigation, search, toolbox
+$p = $WikiTheme->tooltipAccessKeyPrefix();
 ?>
-<!-- The top navigation/search bar -->
-<form action="<?= WikiURL(_("TitleSearch"))?>" target="_top"
-      method="get" accept-charset="<?=$charset?>" style="display:inline">
-<div id="navbuttons">
-<!-- &middot; ?= WikiLink(_("RecentChanges"), "button") ? -->
-<input type="hidden" name="auto_redirect" value="1" />
-<?php if (! USE_PATH_INFO) { ?>
-<input type="hidden" name="pagename" value="<?=_("TitleSearch")?>" />
-<?php } ?>
-<input type="text"  name="s" size="12" maxlength="256"
-             title='<?=_("Quick Search")?>'
-             onmouseover="window.status='<?=_("Quick Search")?>'; return true;"
-             onmouseout="window.status=''; return true;" /><? 
-// remove the class from the href AND img for the annoying box
-$button = Button(_("TitleSearch"));
-$button->setAttr('class', false);
-if (isset($button->_content[0])) $button->_content[0]->setAttr('class', false);
-echo $button->asXml();
-?><?=$SEP?><?= WikiLink(_("FindPage"), "button",_("Full Search")) ?>
-<?php 
-if (ENABLE_DISCUSSION_LINK) { // This requires Talk: map to end in "/Discussion"
-  if (!string_ends_with($page->getName(), _("Discussion"))) { ?>
-    <?=$SEP?><?= WikiLink(new WikiPagename('Talk:'.$page->getName(), $page->getName()), 
-               'button', _("Discussion")) ?>
-  <?php } else { ?>
-    <?=$SEP?><?= Button(array(),_("Article"),$page->getName()) ?>
-  <?php } ?>
-<?php } ?>
-<?php if (!empty($revision)) { ?>
-<?=$SEP?><?=Button(_("BackLinks")) ?>
-<?php } ?>
-<?php if (!empty($user) && $user->isAdmin()) { ?>
-<?=$SEP?><?= WikiLink(_("PhpWikiAdministration"), "button", _("Admin")) ?>
-<?php }
-$WikiTheme->setAutosplitWikiWords($split); ?></div>
-</form>
+<!-- The left navigation/search bar -->
+<!-- Here you should add favorite Links and Categories -->
+<div class="portlet" id="p-navigation">
+  <div class="_pBody">
+    <ul>
+      <li id="n-mainpage"><?= WikiLink(HOME_PAGE) ?></li>
+      <li><?= WikiLink("Help:HowToUseWiki","auto","How to use this Wiki") ?></li>
+      <li><?= WikiLink("Help:AddingPages","auto","Adding Pages") ?></li>
+      <li><?= WikiLink("CategoryCategory","auto","List all Categories") ?></li>
+    </ul>
+  </div>
+</div>
+
+<div class="portlet" id="p-nav1">
+  <h5><?= _("Main Categories")?></h5>
+  <div class="pBody">
+    <ul>
+      <li><?= WikiLink("TroubleShooting") ?></li>
+      <li><?= WikiLink("HowTo") ?></li>
+    </ul>
+  </div>
+</div>
+
+<div class="portlet" id="p-search">
+  <h5><?= _("Search")?></h5>
+  <div class="pBody">
+<?= Template("search",
+             array('SEARCH_BEFORE' => ''/*HTML::h5(WikiLink(_("FindPage")))*/,
+		   'SEARCH_AFTER'  => HTML::Raw('<br /><input type="submit" name="searchtype" value="title" class="searchButton" title="Press to perform a wiki title search">&nbsp;<input type="submit" name="searchtype" value="fulltext" class="searchButton" title="Wiki fulltext search">'))) ?>
+  </div>
+</div>
+
+<div class="portlet" id="p-tb">
+      <h5><?= _("Toolbox") ?><?= $WikiTheme->folderArrow('p-tb', 'Open') ?></h5>
+  <div class="pBody" id="p-tb-body">
+    <ul>
+    <li><? $link = WikiLink(_("RecentChanges"), "",_("RecentChanges")); $link->setAttr("accesskey","r"); $link->addTooltip(_("The list of recent changes in the wiki.")." [$p-r]"); ?><?= $link ?> </li>
+    <li><?= WikiLink(_("RecentNewPages"), "",_("RecentNewPages")) ?></li>
+    <?php if (!empty($revision)) { ?>
+      <li id="t-whatlinkshere"><?= Button(array('action'=>'BackLinks'), _("What links here"), $page->getName()) ?></li>
+    <?php } ?>
+    <?php if (!empty($user) && $user->isSignedIn()) { ?>
+      <li><? $link = WikiLink(_("UpLoad"),"",_("Upload file")); $link->setAttr("accesskey","u"); $link->addTooltip(_("Upload images or media files")." [$p-u]"); ?><?= $link ?></li>
+      <li><?= WikiLink(_("UserPreferences"), "",_("Preferences")) ?></li>
+    <?php } ?>
+    <li>
+      <?php $PrintableLink = $WikiTheme->makeButton(_("Printable version"), "javascript:PrinterStylesheet();", 'wikiaction'); ?>
+<script type="text/javascript"><!--
+document.write('<?= $PrintableLink ?>'); // -->
+</script>
+<noscript>
+  <?= $WikiTheme->makeButton(_("Printable version"), "?format=printable", 'wikiaction') ?>
+</noscript>
+</li>
+    <?php if (defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) { 
+      // Do not display the pdf icon
+      $btn = new Button(_("Display as Pdf"), WikiURL($page->getName(), array('action' => 'pdf')), 'wikiaction');
+      ?>
+      <li><?= $btn ?> &nbsp;&nbsp; <?= WikiLink("Help/Display as Pdf","",HTML::img(array('src'=>$WikiTheme->_findData('images/mini_help.png'),'border'=>0,'width'=>12,'height'=>13,'alt'=>'pdf-help','title'=>"How to generate multi-page PDFs"))) ?></li>
+    <?php } ?>
+    <li><?= WikiLink(_("AllPages")) ?></li>
+    <?php if (!empty($user) && $user->isAdmin()) { ?>
+      <li><?= WikiLink(_("PhpWikiAdministration"), "", _("Administration")) ?></li>
+    <?php } ?>
+  </ul>
+  </div>
+</div>
+<?= Template('rc') ?>
+<?= Template('tags') ?>
+<!-- end of the left (by default at least) column -->

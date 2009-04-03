@@ -1,5 +1,5 @@
 <?php // -*-html-*-
-rcs_id('$Id: top.tmpl,v 1.2 2005/02/02 19:14:14 rurban Exp $');
+rcs_id('$Id: top.tmpl 6204 2008-08-26 15:12:03Z vargenau $');
 ?>
 <div id="header">
 <?php if ( $request->getArg('action') == 'browse' ) { ?>
@@ -13,5 +13,6 @@ rcs_id('$Id: top.tmpl,v 1.2 2005/02/02 19:14:14 rurban Exp $');
 <div id="actionbar">
 <?= Template('actionbar') ?>
 </div>
+<div id="pagetrail"><p><?=_("Page Trail")?>: <?plugin PageTrail numberlinks=7 ?></p></div>
 <?php } ?>
 

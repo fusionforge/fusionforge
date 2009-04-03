@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: InterWikiSearch.php,v 1.8 2004/06/28 12:51:41 rurban Exp $');
+rcs_id('$Id: InterWikiSearch.php 6185 2008-08-22 11:40:14Z vargenau $');
 /**
  Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
 
@@ -37,11 +37,13 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.8 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
-        return array();
+        return array('s' => '',
+                     'formsize' => 30,
+        	    );
     }
 
     function run($dbi, $argstr, &$request, $basepage) {
@@ -120,7 +122,7 @@ extends PageType_interwikimap
 }
 
 
-// $Log: InterWikiSearch.php,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.8  2004/06/28 12:51:41  rurban
 // improved dumphtml and virgin setup
 //

@@ -101,4 +101,4 @@ Reini Urban, Steve Wainstead <swain@panix.com>
 
 Report bugs to phpwiki-talk@lists.sourceforge.net
 
-$Id: INSTALL.pgsql,v 1.7 2005/11/21 20:50:26 rurban Exp $
+$Id: INSTALL.pgsql 6202 2008-08-26 13:14:32Z vargenau $

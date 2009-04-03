@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: RelatedChanges.php,v 1.5 2005/01/25 03:50:54 uckelman Exp $');
+rcs_id('$Id: RelatedChanges.php 6185 2008-08-22 11:40:14Z vargenau $');
 
 /**
  * List of changes on all pages which are linked to from this page.
@@ -29,7 +29,7 @@ extends WikiPlugin_RecentChanges
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.5 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -129,10 +129,7 @@ class RelatedChangesRevisionIterator extends WikiDB_PageRevisionIterator
     }
 }
 
-// $Log: RelatedChanges.php,v $
-// Revision 1.5  2005/01/25 03:50:54  uckelman
-// pre_description is a member function, so call with $this->.
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.4  2005/01/24 23:15:27  uckelman
 // The extra description for RelatedChanges was appearing in RecentChanges
 // and PageHistory due to a bad test in _RecentChanges_HtmlFormatter. Fixed.

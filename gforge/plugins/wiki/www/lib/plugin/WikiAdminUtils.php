@@ -1,7 +1,7 @@
 <?php // -*-php-*-
-rcs_id('$Id: WikiAdminUtils.php,v 1.19 2006/04/15 12:27:40 rurban Exp $');
+rcs_id('$Id: WikiAdminUtils.php,v 1.26 2007/09/15 12:30:55 rurban Exp $');
 /**
- Copyright 2003, 2004 $ThePhpWikiProgrammingTeam
+ Copyright 2003,2004,2006 $ThePhpWikiProgrammingTeam
 
  This file is part of PhpWiki.
 
@@ -28,6 +28,8 @@ rcs_id('$Id: WikiAdminUtils.php,v 1.19 2006/04/15 12:27:40 rurban Exp $');
         access-restrictions
         email-verification
         convert-cached-html
+        db-check
+        db-rebuild
  */
 class WikiPlugin_WikiAdminUtils
 extends WikiPlugin
@@ -42,7 +44,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.19 $");
+                            "\$Revision: 1.26 $");
     }
 
     function getDefaultArguments() {
@@ -87,27 +89,33 @@ extends WikiPlugin
                           HiddenInputs($args, 'wikiadminutils'),
                           HiddenInputs(array('require_authority_for_post' =>
                                              WIKIAUTH_ADMIN)),
-                          HiddenInputs($request->getArgs()));
+                          HiddenInputs($request->getArgs(),false,array('action')));
     }
     
     function do_action(&$request, $args) {
         $method = strtolower('_do_' . str_replace('-', '_', $args['action']));
         if (!method_exists($this, $method))
-            return $this->error("Bad action");
+            return $this->error("Bad action $method");
 
         $message = call_user_func(array(&$this, $method), $request, $args);
 
         // display as seperate page or as alert?
-        $alert = new Alert(_("WikiAdminUtils says:"),
+        $alert = new Alert(fmt("WikiAdminUtils %s returned:", $args['action']),
                            $message,
-                           array(_("Okay") => $args['return_url']));
+                           array(_("Back") => $args['return_url']));
         $alert->show();         // noreturn
     }
 
     function _getLabel($action) {
-        $labels = array('purge-cache' => _("Purge Markup Cache"),
-                        'purge-bad-pagenames' => _("Purge all Pages With Invalid Names"),
-                        'purge-empty-pages' => _("Purge all empty, unreferenced Pages"));
+        $labels = array('purge-cache' 		=> _("Purge Markup Cache"),
+                        'purge-bad-pagenames' 	=> _("Purge all Pages With Invalid Names"),
+                        'purge-empty-pages' 	=> _("Purge all empty, unreferenced Pages"),
+                        'access-restrictions' 	=> _("Access Restrictions"),
+                        'email-verification' 	=> _("Email Verification"),
+                        'convert-cached-html' 	=> _("Convert cached_html"),
+                        'db-check' 		=> _("DB Check"),
+                        'db-rebuild' 		=> _("Db Rebuild")
+                        );
         return @$labels[$action];
     }
 
@@ -153,7 +161,10 @@ extends WikiPlugin
         $list = HTML::ol(array('align'=>'left'));
         $pages = $dbi->getAllPages('include_empty');
         while (($page = $pages->next())) {
-            if (!$page->exists() and ($links = $page->getBackLinks('include_empty')) and !$links->next()) {
+            if (!$page->exists() 
+                and ($links = $page->getBackLinks('include_empty')) 
+                     and !$links->next())
+            {
                 $pagename = $page->getName();
                 if ($pagename == 'global_data' or $pagename == '.') continue;
                 if ($dbi->purgePage($pagename))
@@ -194,6 +205,19 @@ extends WikiPlugin
         }
     }
 
+    function _do_db_check(&$request, $args) {
+	longer_timeout(180);
+        $dbh = $request->getDbh();
+	//FIXME: display result.
+        return $dbh->_backend->check($args);
+    }
+
+    function _do_db_rebuild(&$request, $args) {
+	longer_timeout(240);
+        $dbh = $request->getDbh();
+	//FIXME: display result.
+        return $dbh->_backend->rebuild($args);
+    }
 
     //TODO: We need a seperate plugin for this.
     //      Too many options.
@@ -209,6 +233,7 @@ extends WikiPlugin
         $email = new _PageList_Column_email('email',_("E-Mail"),'left');
         $emailVerified = new _PageList_Column_emailVerified('emailVerified',
                                                             _("Verification Status"),'center');
+        $pagelist->_columns[0]->_heading = _("Username");                                                    
         $pagelist->_columns[] = $email;
         $pagelist->_columns[] = $emailVerified;
         //This is the best method to find all users (Db and PersonalPage)
@@ -217,7 +242,10 @@ extends WikiPlugin
             $group = $request->getGroup();
 	    $allusers = $group->_allUsers();
 	} else {
-	    $allusers = array_keys($args['user']);
+            if (!empty($args['user']))
+                $allusers = array_keys($args['user']);
+            else 
+                $allusers = array();
 	}
         foreach ($allusers as $username) {
             if (ENABLE_USER_NEW)
@@ -240,7 +268,7 @@ extends WikiPlugin
                 $row->pushContent($email->format($pagelist, $prefs, $page_handle));
 		if (!empty($args['verify'])) {
 		    $prefs->_prefs['email']->set('emailVerified', 
-                                                 empty($args['verified'][$username]) ? 0 : 2);
+                                                 empty($args['verified'][$username]) ? 0 : true);
 		    $user->setPreferences($prefs);
 		}
                 $row->pushContent($emailVerified->format($pagelist, $prefs, $args['verify']));
@@ -248,9 +276,9 @@ extends WikiPlugin
             }
         }
         $request->_user = $current_user;
-        if (!empty($args['verify'])) {
+        if (!empty($args['verify']) or empty($pagelist->_rows)) {
             return HTML($pagelist->_generateTable(false));
-        } else {
+        } elseif (!empty($pagelist->_rows)) {
             $args['verify'] = 1;
 	    $args['return_url'] = $request->getURLtoSelf();
             return HTML::form(array('action' => $request->getPostURL(),

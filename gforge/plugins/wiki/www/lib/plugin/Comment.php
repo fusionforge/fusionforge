@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: Comment.php,v 1.2 2004/02/17 12:11:36 rurban Exp $');
+rcs_id('$Id: Comment.php 6185 2008-08-22 11:40:14Z vargenau $');
 /**
  * A WikiPlugin for putting comments in WikiPages
  *
@@ -29,7 +29,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.2 $");
+                            "\$Revision: 6185 $");
     }
 
     // No arguments here.
@@ -45,10 +45,7 @@ extends WikiPlugin
 
 };
 
-// $Log: Comment.php,v $
-// Revision 1.2  2004/02/17 12:11:36  rurban
-// added missing 4th basepage arg at plugin->run() to almost all plugins. This caused no harm so far, because it was silently dropped on normal usage. However on plugin internal ->run invocations it failed. (InterWikiSearch, IncludeSiteMap, ...)
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.1  2003/01/28 17:57:15  carstenklapp
 // Martin Geisler's clever Comment plugin.
 //

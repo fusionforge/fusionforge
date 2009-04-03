@@ -1,0 +1,25 @@
+Date: Mon, 21 Oct 2008 10:28:55 -0500
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20070828)
+Content-Type: application/x-phpwiki;
+  pagename=UpLoad;
+  markup=2;
+  charset=iso-8859-1
+Content-Transfer-Encoding: binary
+
+This page allows you to upload files that can later be used in the wiki. It is especially useful for uploading images.
+
+You give access to the uploaded file with the following syntax:
+* *~[~Upload:my_image.gif]* inlines the image
+* *~Upload:my_image.gif* shows a plain link
+* *~[ my image | ~Upload:my_image.gif ]* shows the image under a link named "my image".
+
+The uploaded files will be publicly accessible. They are stored in the Webdav subdirectory *www/uploads*. They can be used in the wiki, in the project web site and in blocks.
+
+If you want to delete an uploaded file, you have to access the Web DAV from your file browser (not your web browser). See [explanations|http://acos.alcatel-lucent.com/help/guide/ug_extensions_webdav.html].
+
+A link to the uploaded file will be displayed on this page. You can edit the page to remove the link if you like.
+
+<?plugin UpLoad ?>
+
+----
+[CategoryActionPage]

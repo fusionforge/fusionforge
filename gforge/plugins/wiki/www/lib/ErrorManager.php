@@ -1,4 +1,4 @@
-<?php rcs_id('$Id: ErrorManager.php,v 1.43 2005/04/11 19:41:23 rurban Exp $');
+<?php rcs_id('$Id: ErrorManager.php 6184 2008-08-22 10:33:41Z vargenau $');
 
 if (isset($GLOBALS['ErrorManager'])) return;
 
@@ -22,7 +22,8 @@ define ('EM_NOTICE_ERRORS', E_NOTICE | E_USER_NOTICE);
    Only where absolute speed is necessary you might want to turn 
    them off.
 */
-if (1 or (defined('DEBUG') and DEBUG))
+//also turn it on if phpwiki_version notes no release
+if (defined('DEBUG') and DEBUG)
     assert_options (ASSERT_ACTIVE, 1);
 else
     assert_options (ASSERT_ACTIVE, 0);
@@ -95,6 +96,15 @@ class ErrorManager
             PrintXML($this->_flush_errors());
         else
             echo $this->_flush_errors();
+    }
+    
+    /**
+     * Get rid of all pending error messages in case of all non-html
+     * - pdf or image - output.
+     * @access public
+     */
+    function destroyPostponedErrors () {
+    	$this->_postponed_errors = array();
     }
 
     /**
@@ -256,7 +266,7 @@ class ErrorManager
                 if (function_exists("debug_backtrace")) // >= 4.3.0
                     $error->printSimpleTrace(debug_backtrace());
             }
-            $this->_die($error);
+	    $this->_die($error);
         }
         else if (($error->errno & error_reporting()) != 0) {
             if  (($error->errno & $this->_postpone_mask) != 0) {
@@ -288,19 +298,21 @@ class ErrorManager
     }
 
     function warning($msg, $errno = E_USER_NOTICE) {
-        $this->handleError(new PhpWikiError($errno, $msg));
+        $this->handleError(new PhpWikiError($errno, $msg, '?', '?'));
     }
     
     /**
      * @access private
      */
     function _die($error) {
+        global $WikiTheme;
         //echo "\n\n<html><body>";
         $error->printXML();
         PrintXML($this->_flush_errors());
         if ($this->_fatal_handler)
             $this->_fatal_handler->call($error);
-        exit -1;
+	if (!$WikiTheme->DUMP_MODE)
+	    exit -1;
     }
 
     /**
@@ -356,7 +368,10 @@ function ErrorManager_errorHandler($errno, $errstr, $errfile, $errline)
       $GLOBALS['ErrorManager'] = new ErrorManager;
     }
 	
-    $error = new PhpErrorOnce($errno, $errstr, $errfile, $errline);
+    if (defined('DEBUG') and DEBUG)
+        $error = new PhpWikiError($errno, $errstr, $errfile, $errline);
+    else
+	$error = new PhpErrorOnce($errno, $errstr, $errfile, $errline);
     $GLOBALS['ErrorManager']->handleError($error);
 }
 
@@ -460,12 +475,17 @@ class PhpError {
         $errfile = preg_replace('|^' . preg_quote($dir) . '|', '', $this->errfile);
         $lines = explode("\n", $this->errstr);
         if (DEBUG & _DEBUG_VERBOSE) {
-          $msg = sprintf("%s:%d: %s[%d]: %s",
+          $msg = sprintf("%s:%d %s[%d]: %s",
                          $errfile, $this->errline,
                          $this->getDescription(), $this->errno,
                          array_shift($lines));
-        } else {
-          $msg = sprintf("%s:%d: %s: \"%s\"",
+        }/* elseif (! $this->isFatal()) {
+          $msg = sprintf("%s:%d %s: \"%s\"",
+                         $errfile, $this->errline,
+                         $this->getDescription(),
+                         array_shift($lines));
+        }*/ else {
+          $msg = sprintf("%s:%d %s: \"%s\"",
                          $errfile, $this->errline,
                          $this->getDescription(),
                          array_shift($lines));
@@ -532,8 +552,8 @@ class PhpWikiError extends PhpError {
      * @param $errno   int
      * @param $errstr  string
      */
-    function PhpWikiError($errno, $errstr) {
-        $this->PhpError($errno, $errstr, '?', '?');
+    function PhpWikiError($errno, $errstr, $errfile, $errline) {
+        $this->PhpError($errno, $errstr, $errfile, $errline);
     }
 
     function _getDetail() {
@@ -577,7 +597,7 @@ class PhpErrorOnce extends PhpError {
     
     function _getDetail($count=0) {
     	if (!$count) $count = $this->_count;
-	    $dir = defined('PHPWIKI_DIR') ? PHPWIKI_DIR : substr(dirname(__FILE__),0,-4);
+	$dir = defined('PHPWIKI_DIR') ? PHPWIKI_DIR : substr(dirname(__FILE__),0,-4);
         if (substr(PHP_OS,0,3) == 'WIN') {
            $dir = str_replace('/','\\',$dir);
            $this->errfile = str_replace('/','\\',$this->errfile);
@@ -587,16 +607,23 @@ class PhpErrorOnce extends PhpError {
         $errfile = preg_replace('|^' . preg_quote($dir) . '|', '', $this->errfile);
         if (is_string($this->errstr))
 	        $lines = explode("\n", $this->errstr);
-	    elseif (is_object($this->errstr))
+	elseif (is_object($this->errstr))
 	        $lines = array($this->errstr->asXML());
         $errtype = (DEBUG & _DEBUG_VERBOSE) ? sprintf("%s[%d]", $this->getDescription(), $this->errno)
                                             : sprintf("%s", $this->getDescription());
-        $msg = sprintf("%s:%d: %s: %s %s",
+        if ((DEBUG & _DEBUG_VERBOSE) or $this->isFatal()) {
+	    $msg = sprintf("%s:%d %s: %s %s",
                        $errfile, $this->errline,
                        $errtype,
                        array_shift($lines),
                        $count > 1 ? sprintf(" (...repeated %d times)",$count) : ""
                        );
+	} else {
+          $msg = sprintf("%s: \"%s\" %s",
+			 $errtype,
+			 array_shift($lines),
+			 $count > 1 ? sprintf(" (...repeated %d times)",$count) : "");
+	}
         $html = HTML::div(array('class' => $this->getHtmlClass()), 
                           HTML::p($msg));
         if ($lines) {
@@ -616,7 +643,32 @@ if (!isset($GLOBALS['ErrorManager'])) {
     $GLOBALS['ErrorManager'] = new ErrorManager;
 }
 
-// $Log: ErrorManager.php,v $
+// $Log: not supported by cvs2svn $
+// Revision 1.53  2008/03/17 19:04:05  rurban
+// added destroyPostponedErrors: Get rid of all pending error messages in case of all
+// non-html - pdf or image - output.
+//
+// Revision 1.52  2007/09/19 17:59:26  rurban
+// use duplicates to save memory with DEBUG
+//
+// Revision 1.51  2007/09/15 12:31:37  rurban
+// dont fatal on multi-page dumps
+//
+// Revision 1.50  2007/01/09 12:35:28  rurban
+// release ready: turn off assert
+//
+// Revision 1.49  2006/12/22 00:17:49  rurban
+// improve and unify error messages
+//
+// Revision 1.48  2006/03/19 14:29:40  rurban
+// sf.net patch #1438439 by Matt Brown: Only set no-cache headers when error output is generated
+//
+// Revision 1.47  2005/10/31 17:20:40  rurban
+// fix ConvertBefore
+//
+// Revision 1.46  2005/10/30 16:38:13  rurban
+// minor fixes
+//
 // Revision 1.45  2005/10/29 14:28:08  uckelman
 // existence of isa should be checked, not built-in is_a()
 //

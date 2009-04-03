@@ -9,10 +9,10 @@ function rcs_id ($id) {
     if (defined('DEBUG') and DEBUG)
         $GLOBALS['RCS_IDS'] .= "$id\n"; 
 }
-rcs_id('$Id: prepend.php,v 1.43 2005/09/14 06:06:43 rurban Exp $');
+rcs_id('$Id: prepend.php 6408 2009-01-17 14:33:24Z rurban $');
 
 // see lib/stdlib.php: phpwiki_version()
-define('PHPWIKI_VERSION', '1.3.12p3');
+define('PHPWIKI_VERSION', '1.3.14-20090116');
 
 /** 
  * Returns true if current php version is at mimimum a.b.c 
@@ -30,11 +30,28 @@ function check_php_version ($a = '0', $b = '0', $c = '0') {
   * We want to work with those old ones instead of the new superglobals, 
   * for easier coding.
   */
+/*
 foreach (array('SERVER','REQUEST','GET','POST','SESSION','ENV','COOKIE') as $k) {
-    if (!isset($GLOBALS['HTTP_'.$k.'_VARS']) and isset($GLOBALS['_'.$k]))
+    if (!isset($GLOBALS['HTTP_'.$k.'_VARS']) and isset($GLOBALS['_'.$k])) {
         $GLOBALS['HTTP_'.$k.'_VARS'] =& $GLOBALS['_'.$k];
+    }
+}
+*/
+// A new php-5.1.x feature: Turn off php-5.1.x auto_globals_jit = On, or use this mess below.
+if (empty($GLOBALS['HTTP_SERVER_VARS'])) {
+    $GLOBALS['HTTP_SERVER_VARS']  =& $_SERVER;
+    $GLOBALS['HTTP_ENV_VARS'] 	  =& $_ENV;
+    $GLOBALS['HTTP_GET_VARS'] 	  =& $_GET;
+    $GLOBALS['HTTP_POST_VARS'] 	  =& $_POST;
+    $GLOBALS['HTTP_SESSION_VARS'] =& $_SESSION;
+    $GLOBALS['HTTP_COOKIE_VARS']  =& $_COOKIE;
+    $GLOBALS['HTTP_REQUEST_VARS'] =& $_REQUEST;
 }
 unset($k);
+// catch connection failures on upgrade
+if (isset($GLOBALS['HTTP_GET_VARS']['action']) 
+    and $GLOBALS['HTTP_GET_VARS']['action'] == 'upgrade')
+    define('ADODB_ERROR_HANDLER_TYPE', E_USER_WARNING);
 
 // If your php was compiled with --enable-trans-sid it tries to
 // add a PHPSESSID query argument to all URL strings when cookie
@@ -50,6 +67,17 @@ unset($k);
 if (defined('DEBUG') and (DEBUG & 8) and extension_loaded("xdebug")) {
     xdebug_start_trace("trace"); // on Dbgp protocol add 2
     xdebug_enable();
+}
+if (defined('DEBUG') and (DEBUG & 32) and extension_loaded("apd")) {
+    apd_set_pprof_trace();
+    /*	FUNCTION_TRACE      1
+        ARGS_TRACE          2
+        ASSIGNMENT_TRACE    4
+        STATEMENT_TRACE     8
+        MEMORY_TRACE        16
+        TIMING_TRACE        32
+        SUMMARY_TRACE       64 */
+    //apd_set_session_trace(99);
 }
 
 // Used for debugging purposes

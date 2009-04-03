@@ -1,10 +1,9 @@
-Date: Sun, 24 Feb 2002 00:14:20 -0500
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.3-jeffs-hacks)
-X-Rcs-Id: $Id: WantedPages,v 1.2 2002/11/25 19:44:03 dairiki Exp $
+Date: Mon, 16 Jun 2008 14:15:24 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
+X-Rcs-Id: $Id: WantedPages 6184 2008-08-22 10:33:41Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=WantedPages;
-  flags="";
-  pgsrc_version="2 $Revision: 1.2 $";
+  flags=PAGE_LOCKED;
   markup=2;
   charset=iso-8859-1
 Content-Transfer-Encoding: binary
@@ -21,3 +20,6 @@ spaces or insert an escape character ~~.
 ----
 
 <?plugin WantedPages?>
+
+----
+[CategoryActionPage]

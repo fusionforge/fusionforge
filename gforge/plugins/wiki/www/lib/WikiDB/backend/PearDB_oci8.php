@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: PearDB_oci8.php,v 1.9 2005/11/14 22:24:33 rurban Exp $');
+rcs_id('$Id: PearDB_oci8.php 6184 2008-08-22 10:33:41Z vargenau $');
 
 /**
  * Oracle extensions for the Pear DB backend.
@@ -17,7 +17,8 @@ extends WikiDB_backend_PearDB_pgsql
     function WikiDB_backend_PearDB_oci8($dbparams) {
         // Backend constructor
         $this->WikiDB_backend_PearDB($dbparams);
-        
+        if (DB::isError($this->_dbh)) return;
+
         // Empty strings are NULLS
         $this->_expressions['notempty'] = "IS NOT NULL";
         $this->_expressions['iscontent'] = "DECODE(DBMS_LOB.GETLENGTH(content), NULL, 0, 0, 0, 1)";
@@ -33,7 +34,6 @@ extends WikiDB_backend_PearDB_pgsql
             DB_PORTABILITY_LOWERCASE | DB_PORTABILITY_NULL_TO_EMPTY | DB_PORTABILITY_NUMROWS);
     }
 
-            
     /**
      * Pack tables.
      */
@@ -63,6 +63,42 @@ extends WikiDB_backend_PearDB_pgsql
             $dbh->query("SET TRANSACTION READ ONLY");
         }
     }
+
+    function _quote($s) {
+        return base64_encode($s);
+    }
+
+    function _unquote($s) {
+        return base64_decode($s);
+    }
+
+    function write_accesslog(&$entry) {
+        global $request;
+        $dbh = &$this->_dbh;
+        $log_tbl = $entry->_accesslog->logtable;
+        // duration problem: sprintf "%f" might use comma e.g. "100,201" in european locales
+        $dbh->query("INSERT INTO $log_tbl"
+                    . " (time_stamp,remote_host,remote_user,request_method,request_line,request_uri,"
+                    .   "request_args,request_time,status,bytes_sent,referer,agent,request_duration)"
+                    . " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                    array(
+                          // Problem: date formats are backend specific. Either use unixtime as %d (long),
+                          // or the native timestamp format.
+                          date('d-M-Y H:i:s', $entry->time),
+                          $entry->host, 
+                          $entry->user,
+                          $entry->request_method, 
+                          $entry->request, 
+                          $entry->request_uri,    
+                          $entry->request_args,
+                          $entry->_ncsa_time($entry->time), 
+                          $entry->status, 
+                          $entry->size,
+                          $entry->referer,
+                          $entry->user_agent,
+                          $entry->duration));
+    }
+
 };
 
 class WikiDB_backend_PearDB_oci8_search
@@ -82,6 +118,15 @@ extends WikiDB_backend_PearDB_search
                 : "LOWER(pagename) LIKE '$page' OR DBMS_LOB.INSTR(content, '$exactword') > 0");
     }
 }
+
+// $Log: not supported by cvs2svn $
+// Revision 1.13  2007/01/04 16:41:14  rurban
+// Allow missing connection permissions on upgrade::_try_dbadmin_user.
+//
+// Revision 1.12  2006/12/22 00:27:37  rurban
+// just add Log
+//
+
 
 // (c-file-style: "gnu")
 // Local Variables:

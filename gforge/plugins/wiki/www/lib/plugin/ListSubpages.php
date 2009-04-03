@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: ListSubpages.php,v 1.6 2004/11/23 15:17:19 rurban Exp $');
+rcs_id('$Id: ListSubpages.php 6185 2008-08-22 11:40:14Z vargenau $');
 /*
  Copyright 2002 $ThePhpWikiProgrammingTeam
 
@@ -40,7 +40,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.6 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -76,7 +76,7 @@ extends WikiPlugin
         extract($args);
 
         $content = HTML();
-        $subpages = array_reverse($subpages);
+        //$subpages = array_reverse($subpages); // TODO: why?
         if ($maxpages) {
             $subpages = array_slice ($subpages, 0, $maxpages);
         }
@@ -122,7 +122,7 @@ class _PageList_Column_ListSubpages_count extends _PageList_Column {
     }
 }
 
-// $Log: ListSubpages.php,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.6  2004/11/23 15:17:19  rurban
 // better support for case_exact search (not caseexact for consistency),
 // plugin args simplification:

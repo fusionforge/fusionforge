@@ -1,5 +1,5 @@
 <!-- -*-html-*- -->
-<!-- $Id: editpage.tmpl,v 1.57 2005/05/06 17:53:20 rurban Exp $ -->
+<!-- $Id: editpage.tmpl 6458 2009-01-28 09:07:53Z rurban $ -->
 <?php if (isset($PREVIEW_CONTENT)) { ?>
   <p><strong><?=_("Preview only!  Changes not saved.")?></strong>
 <!-- FIXME: it would be nice to put a link to the #editarea anchor below,
@@ -37,14 +37,17 @@
     <tr><td><?= $EDIT_TOOLBAR ?></td>
         <td align="right"><div id="editarea-size">
     <?=_("Size").':'?>
-    <label for="pref[editHeight]"><b><?=_("H")?></b></label> <?=$HEIGHT_PREF?> 
-    <label for="pref[editWidth]"><b><?=_("W")?></b></label> <?=$WIDTH_PREF?>
+    <label for="pref-editHeight"><b><?=_("H")?></b></label> <?=$HEIGHT_PREF?> 
+    <label for="pref-editWidth"><b><?=_("W")?></b></label> <?=$WIDTH_PREF?>
     <noscript><?=Button("submit:", _("Adjust"), 'wikiaction')?></noscript>
   </div></td></tr></table>
+<?php if (!empty($WYSIWYG_B)) { ?>
+  <br /><div class="hint"><strong>Warning:</strong> Switching to the Wysiwyg editor will not keep your changes.</div>
+<?php } ?>
   <a name="editarea"></a><?=$EDIT_TEXTAREA?>
 <!-- FIXME: fix layout, move CSS to CSS -->
 <div class="toolbar" style="text-align: center;">
-  <label for="edit[summary]"><?=_("Summary").':'?></label> <?=$SUMMARY_INPUT?>
+  <label for="edit-summary"><?=_("Summary").':'?></label> <?=$SUMMARY_INPUT?>
 </div>
 <?php if (ENABLE_CAPTCHA) { ?>
 <div class="toolbar" style="text-align: center;">
@@ -56,22 +59,28 @@
        cellpadding="0" cellspacing="0" border="0">
 <tr valign="middle">
   <td> 
-    <?=$MINOR_EDIT_CB ?> <label for="edit[minor_edit]"><?=_("This is a minor change.")?></label><br />
-    <?=$OLD_MARKUP_CB?>  <label for="useOldMarkup"><?=_("Use old markup")?></label> <?=$OLD_MARKUP_CONVERT?>
+    <?=$MINOR_EDIT_CB ?> <label for="edit-minor_edit"><?=_("This is a minor change.")?></label><br />
+    <?=$OLD_MARKUP_CB ?> <label for="useOldMarkup"><?=_("Use old markup")?></label> <?=$OLD_MARKUP_CONVERT?>
   </td>
   <td align="center">
+    <?php if (!empty($WYSIWYG_B)){ ?>
+    <?=$WYSIWYG_B?><?=$SEP?>
+    <?php } ?>
     <?= $PREVIEW_B ?>
     <?php if ($SAVE_B)  { ?> 
       <?=$SEP?><?= $SAVE_B ?>
     <?php } ?>
+    <?=$SEP?><?= $CHANGES_B ?>
   </td>
   <td>&nbsp; <?=$AUTHOR_MESSAGE?></td>
 </tr>
 <tr>
   <td>
     <?php if ($user->isAdmin()) { ?> 
-    <?= $LOCKED_CB ?> <label for="edit[lock]"><?=_("Locked")?></label>
-    <?php } ?>
+    <?= $LOCKED_CB ?> <label for="edit-locked" title="<?=_("Make the page read-only?")?>"><?=_("Locked")?></label>
+    <?php if (ENABLE_PAGE_PUBLIC) { ?>
+    &nbsp;&nbsp;<?= $PUBLIC_CB ?> <label id="edit-public" for="edit-public" title="<?=_("Export to a seperate public area?")?>"><?=_("Public")?></label>
+    <?php }} ?>
   </td>
   <td colspan="2" align="right">
     <?php if (!$user->isAuthenticated()) { ?>
@@ -79,16 +88,10 @@
     <?php } ?>
   </td>
 </tr>
-<?php if (0) {
-// Not yet supported within the same request. 
-// Better use a button to the external UpLoad page. 
-// Or fix action=edit to handle the uploaded filename within the same request.
-?>
-<tr>
-  <td colspan="3"><?plugin UpLoad ?></td>
-</tr>
-<?php } ?>
 </table>
+<?=$HIDDEN_INPUTS?>
+</form>
+<div style="width:100%;text-align:center;"><?php /*plugin UpLoad autolink=0 mode=edit size=30 */?></div>
 
 <hr noshade="noshade" />
 
@@ -110,16 +113,14 @@ function showOldMarkupRules(show) {
 
 <div id="oldMarkup" class="wiki-edithelp">
 <!-- FIXME: do we need this at all?  If so, it could probably be moved to TextFormattingRules -->
-<p><?= fmt("See %s tips for editing.", WikiLink(_("GoodStyle"))) ?></p>
-<?plugin IncludePage page=_("OldTextFormattingRules") section=_("Synopsis") quiet=1?>
+<p><?= fmt("See %s tips for editing.", WikiLink(_("Help/GoodStyle"))) ?></p>
+<?plugin IncludePage page=_("Help/OldTextFormattingRules") section=_("Synopsis") quiet=1?>
 </div>
 <div id="newMarkup" class="wiki-edithelp">
 <!-- FIXME: do we need this at all?  If so, it could probably be moved to TextFormattingRules -->
-<p><?= fmt("See %s tips for editing.", WikiLink(_("GoodStyle"))) ?></p>
-<?plugin IncludePage page=_("TextFormattingRules") section=_("Synopsis") quiet=1?>
+<p><?= fmt("See %s tips for editing.", WikiLink(_("Help/GoodStyle"))) ?></p>
+<?plugin IncludePage page=_("Help/TextFormattingRules") section=_("Synopsis") quiet=1?>
 </div>
-<?=$HIDDEN_INPUTS?>
-</form>
 
 <script language="JavaScript1.3" type="text/javascript">
 <!--

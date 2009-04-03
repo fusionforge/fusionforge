@@ -1,0 +1,37 @@
+<!--{{{ LiveSearch --> <? // -*- php -*- ?>
+<div id="searchholder">
+<form id="searchform" name="searchform" action="<?= WikiURL(_("FindPage"))?>"
+      method="get" accept-charset="<?=$charset?>" style="display:inline" class="searchform">
+<?php 
+$s = $request->getArg('s') ? $request->getArg('s') : _("Search");
+$p = $WikiTheme->tooltipAccessKeyPrefix();
+if (! USE_PATH_INFO) { ?>
+<input type="hidden" name="pagename" value="<?= _("TitleSearch")?>" />
+<?php } ?>
+<?= $SEARCH_BEFORE ?> 
+<input type="hidden" name="action" value="search" />
+<input name="searchterm" size="18" maxlength="256"
+   value="<?=$s?>"
+   onfocus="if (this.value == '<?=_("Search")?>') {this.value = '';}"
+   onmouseout="window.status=''; return true;" 
+   onmouseover="window.status='<?=_("Quick Search")?>'; return true;"
+   accesskey="f"
+<?php if (0 and ENABLE_ACDROPDOWN) { ?>
+   class="dropdown" id="searchInput" title="<?=_("LiveSearch") . " [$p-f]"?>" 
+   style="width:115px;"
+   acdropdown="true" autocomplete_complete="false" autocomplete_matchsubstring="false"
+   autocomplete_list="xmlrpc:wiki.titleSearch [S] 4" />
+<?php } elseif (ENABLE_LIVESEARCH) { ?>
+   type="text" id="livesearch" title="<?=_("LiveSearch") . " [$p-f]"?>" 
+   onKeypress="liveSearchStart()"
+   onblur="setTimeout('closeResults()',2000); if (this.value == '') {this.value = '<?=_("Search")?>';}" />
+   <br/>
+   <div id="LSResult">
+   </div>
+<?php } else { ?>
+   type="text" id="search" 
+   title="<?=_("Search term(s)")  . " [$p-f]"?>" /> 
+<?php } ?> <?= $SEARCH_AFTER ?>
+</form>
+</div>
+<!--}}}-->

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: SyntaxHighlighter.php,v 1.7 2004/07/08 20:30:07 rurban Exp $');
+rcs_id('$Id: SyntaxHighlighter.php 6424 2009-01-21 09:35:42Z vargenau $');
 /**
  Copyright 2004 $ThePhpWikiProgrammingTeam
 
@@ -75,7 +75,7 @@ extends WikiPlugin
     }
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.7 $");
+                            "\$Revision: 6424 $");
     }
     function getDefaultArguments() {
         return array(
@@ -162,7 +162,7 @@ extends WikiPlugin
                 $html->pushContent($this->error(fmt("invalid %s ignored",'color')));
                 $color = false;
             }
-            if (!empty($color)) $args .= " --style $color -c ".FindFile("uploads")."/highlight-$color.css";
+            if (!empty($color)) $args .= " --style $color --inline-css";
             if (!empty($style)) $args .= " -F $style";
             $commandLine = HIGHLIGHT_EXE . "$args -q -X -f -S $syntax";
             if (check_php_version(4,3,0))
@@ -172,46 +172,13 @@ extends WikiPlugin
             if (empty($code))
                 return $this->error(fmt("Couldn't start commandline '%s'",$commandLine));
             $pre = HTML::pre(HTML::raw($code));
-            $pre->setAttr('class','tightenable top bottom');
             $html->pushContent($pre);
-            $css = $GLOBALS['WikiTheme']->_CSSlink('',empty($color) ? 'highlight.css' : "uploads/highlight-$color.css",'');
-            return HTML($css,$html);
+            return HTML($html);
         } else {
             return $this->error(fmt("empty source"));
         }
     }
 };
-
-// $Log: SyntaxHighlighter.php,v $
-// Revision 1.7  2004/07/08 20:30:07  rurban
-// plugin->run consistency: request as reference, added basepage.
-// encountered strange bug in AllPages (and the test) which destroys ->_dbi
-//
-// Revision 1.6  2004/06/29 18:47:40  rurban
-// use predefined constants, and added sf.net defaults
-//
-// Revision 1.5  2004/06/14 11:31:39  rurban
-// renamed global $Theme to $WikiTheme (gforge nameclash)
-// inherit PageList default options from PageList
-//   default sortby=pagename
-// use options in PageList_Selectable (limit, sortby, ...)
-// added action revert, with button at action=diff
-// added option regex to WikiAdminSearchReplace
-//
-// Revision 1.4  2004/05/18 14:49:52  rurban
-// Simplified strings for easier translation
-//
-// Revision 1.3  2004/05/14 17:33:12  rurban
-// new plugin RecentChanges
-//
-// Revision 1.2  2004/05/14 15:56:16  rurban
-// protect color argument, more error handling, added default css
-//
-// Revision 1.1  2004/05/14 14:55:52  rurban
-// Alec Thomas original plugin, which comes with highlight http://www.andre-simon.de/,
-// plus some extensions by Reini Urban
-//
-//
 
 // For emacs users
 // Local Variables:

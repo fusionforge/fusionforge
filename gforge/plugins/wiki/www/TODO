@@ -1,56 +1,55 @@
-2006-03-07 19:54:31 rurban
-TODO for 1.3.13:
+short-term TODO:
+* rename should check existing subpages and rename these also.
+* Sidebar: merge AVL theme (internal MonoBook derivate with customizable box states) with Sidebar
+* fix session loss on php-5.2 (with or without DB_SESSION)
+* clarify issues with pagenames: "," breaks PageList. Escape with "~" or "\"?
+* fix Wikiwys with prettyurl, link labels and killing plugin args
+* ImportMediaWiki, ImportRdf, ImportOwl, ExportMediaWiki, ExportRdf, ExportOwl
+* WikiUser/OpenID (from DokuWiki) - Status::in_work
+* more meta stuff: OpenSearch, format=dc (Dublin Core)
+* format=mm (FreeMind) for RecentChanges, SemanticWeb's and simple PageList's. 
+  See http://wikkawiki.org/FreeMind. Maybe format=mmap for the commercial MindMap.
+* format=printable (?) for non js/dom
+* WatchList (?)
+* Spellcheck AJAX backend (see DokuWiki)
+* GeSHi Highlighter plugin
+
+TODO for 1.4.0:
 architecture:
-* finish moacdropdown integration (xmlrpc)
-* the new Mailer class
-* maybe evaluate other Template solutions (Smarty or regex replacements)
-* add xml syntax for plugins: 
-  <IncludePagesPlugin pages=<!plugin-list BackLinks !> />
-  <BackLinkPlugin include_self=false />
-* SQL-Schema: add relation to link table, add relation to getPageLinks() extractor
+* Optimization: try template_lite or try simple regex replacements as before.
+* Add some xml syntax for plugins: 
+  <IncludePages pages=<!plugin-list BackLinks !> />
+  <BackLink include_self=false />
+  And/or fix PLUGIN_MARKUP_MAP aliases which break the InlineParser.
+* Fix postgresql stored procedures.
+* Move serialized data from page_data / version_data to seperate SQL columns.
+* WikiDB hooks. (?)
+* Content expansion hooks in transformer. (SearchHighlight)
+* Convert RecentChanges to PageList as source for format options. 
+  Generic rss, rdf handling.
+* embedd basic RDF in XHTML (dc, foaf, ...) for GRDDL. 
+* Do Microformats automatically? It's a stupid hack so support it only optionally.
+  ToDo: for Calendar, CalendarList, FoafPlugin
 
 new:
-* finish ModeratedPages
-* WYSIWYG (htmlarea3 + tinymce) integration into EditToolbar
+* stabilize WYSIWYG converters
 * HtmlParser and importer plugins (word, excel, html, interwiki)
-* SemanticWeb link parser+db update, plugins: SemanticRelations, SemanticSearch
-* TrackBack, PingBack services
-* Blog theme
-* FileInfoPlugin
+* SemanticWeb link parser+db update, plugins: SemanticSearchAdvanced, SPARQL (php5 only)
+  include or support rdfapi? or write our own Sparql parser? (see pOWL OntoWiki)
+* ATOM (experimentally done), TrackBack, PingBack services (take it from DokuWiki)
+* finish Blog theme
 * lang: mapping
-* add Help: and Relation: interwiki map entries (via upgrade also)
+* fix ENABLE_MARKUP_DIVSPAN
+* WikiUser/EMailConfirm (?)
 
 fixes:
+* fix pagelist nopage unification (store just key as names?)
 * pcre textsearch with multiple words: order-independency
 * SQL textsearch with multiple words: AND 
   (the two new failing unit tests)
 * fix textsearch optimize with "word -word -word"
-* add Help/ prefix to all documention pages, via upgrade also.
 
-and the rest of the sf.net buglist
-
------------------------
-2006-??
-
-FixMe:
-* check why template expansion is so slow (xml parsing and printing, ob + exec)
-*   upgrade => %BODY% in MonoBook
-* more httpauth tests: enforced, server-side ok
-* test reported personalpage auth problems
-* fix random PearDB mysql connection loss (fixed?)
-* fix SystemInfoPlugin dump failure
-* fix jscalendar in sidebar and blog (fixed?)
-* ModeratedPage 3/3 (GET=>POST, Preview?)
-* fix configurator.php (fixed?)
-* pagedata_cache on PageGroupTest/subpage (fixed?)
-  wrong PhpWikiAdmin/Chown owner display
-* re-enable pagedata_cache->next iterator (?, mem test)
-
-Improvements:
-* collapse page change notification on LoadAny (80%, missing: )
-* restrict certain action to groups: RawHtml (could be a define)
-* db.timeout: force mysql.connect_timeout = 60
-
+OLDER TODO's:
 Maybe (probably defer):
 * CalendarList/UnfoldSubpages/Blog changes should update links to the basepage.
 * Warn other editors

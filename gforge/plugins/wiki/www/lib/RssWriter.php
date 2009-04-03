@@ -1,4 +1,4 @@
-<?php rcs_id('$Id: RssWriter.php,v 1.12 2005/07/24 09:52:59 rurban Exp $');
+<?php rcs_id('$Id: RssWriter.php 6184 2008-08-22 10:33:41Z vargenau $');
 /*
  * Code for creating RSS 1.0.
  */
@@ -45,7 +45,7 @@ class RssWriter extends XmlElement
 	assert(!isset($this->_modules[$alias]));
 	$this->_modules[$alias] = $uri;
     }
-        
+
     // Args should include:
     //  'title', 'link', 'description'
     // and can include:
@@ -112,14 +112,13 @@ class RssWriter extends XmlElement
         $this->_finished = true;
     }
             
-
     /**
      * Write output to HTTP client.
      */
     function __spew() {
         header("Content-Type: application/xml; charset=" . RSS_ENCODING);
         printf("<?xml version=\"1.0\" encoding=\"%s\"?>\n", RSS_ENCODING);
-        printf("<!-- generator=\"PhpWiki-%s\" -->\n", PHPWIKI_VERSION);
+        //printf("<!-- generator=\"PhpWiki-%s\" -->\n", PHPWIKI_VERSION);
         $this->printXML();
     }
         
@@ -155,7 +154,12 @@ class RssWriter extends XmlElement
 	$out = array();
         foreach ($elements as $prop => $val) {
 	    $this->__check_predicate($prop);
-	    $out[] = new XmlElement($prop, false, $val);
+	    if (is_array($val))
+	        $out[] = new XmlElement($prop, $val);
+	    elseif (is_object($val))    
+		    $out[] = $val; 
+	    else
+	        $out[] = new XmlElement($prop, false, $val);
 	}
 	return $out;
     }
@@ -182,6 +186,70 @@ class RssWriter extends XmlElement
         return new XmlElement($predicate, $attr);
     }
 };
+
+/* Taken from mediawiki. 
+ * See http://www.atomenabled.org/developers/syndication/ 
+ */
+class AtomFeed extends RssWriter {
+  
+    // Args should include:
+    //  'title', 'link', 'description'
+    // and can include:
+    //  'URI'
+    function feed($properties, $uri = false) {
+    	global $LANG;
+    	$attr = array('xmlns' => 'http://www.w3.org/2005/Atom',
+        	      'version' => '0.3', // or 1.0
+        	      'lang' => $LANG);
+        $this->_channel = $this->__node('feed', $attr, $properties, $uri);
+    }
+
+    /**
+     * Write output to HTTP client.
+     */
+    function __spew() {
+        header("Content-Type: application/atom+xml; charset=" . RSS_ENCODING);
+        printf("<?xml version=\"1.0\" encoding=\"%s\"?>\n", RSS_ENCODING);
+        //printf("<!-- generator=\"PhpWiki-%s\" -->\n", PHPWIKI_VERSION);
+        $this->printXML();
+    }
+
+    /**
+     * Create a new entry
+     */
+    function __node($type, $attr, $properties, $uri = false) {
+	if (! $uri)
+	    $uri = $properties['link'];
+	//$attr['rdf:about'] = $this->__uniquify_uri($uri);
+	return new XmlElement($type, $attr,
+                              $this->__elementize($properties));
+    }
+
+    // Args should include:
+    //  'title', 'link', author, modified, issued, created, summary,
+    // and can include:
+    //  comment
+    function addItem($properties, $attr=false, $uri = false) {
+        $this->_items[] = $this->__node('entry', $attr, $properties, $uri);
+    }
+
+    /**
+     * Print it.
+     */
+    function finish() {
+        if (isset($this->_finished))
+            return;
+
+        $channel = &$this->_channel;
+        $items = &$this->_items;
+	if ($items)
+	    $channel->pushContent($items);
+	$this->pushContent($channel);
+
+        $this->__spew();
+        $this->_finished = true;
+    }
+}
 
 
 // (c-file-style: "gnu")

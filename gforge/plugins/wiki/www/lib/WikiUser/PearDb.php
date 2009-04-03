@@ -1,8 +1,9 @@
 <?php //-*-php-*-
-rcs_id('$Id: PearDb.php,v 1.10 2006/03/19 16:26:40 rurban Exp $');
+rcs_id('$Id: PearDb.php 6184 2008-08-22 10:33:41Z vargenau $');
 /* Copyright (C) 2004 ReiniUrban
  * This file is part of PhpWiki. Terms and Conditions see LICENSE. (GPL2)
  */
+include_once("lib/WikiUser/Db.php");
 
 class _PearDbPassUser
 extends _DbPassUser
@@ -153,8 +154,8 @@ extends _DbPassUser
             isset($GLOBALS['HTTP_POST_VARS']['auth']['passwd'])) 
         {
             $passwd = $GLOBALS['HTTP_POST_VARS']['auth']['passwd'];
-            $dbh->simpleQuery(sprintf($this->_authcreate, 
-                                      $dbh->quote($passwd), 
+            $dbh->simpleQuery(sprintf($this->_authcreate,
+                                      $dbh->quote($passwd),
                                       $dbh->quote($this->_userid)));
             return true;
         }
@@ -187,7 +188,7 @@ extends _DbPassUser
             $result = $this->_checkPass($submitted_password, $stored_password);
         } else {
             // be position independent
-            $okay = $dbh->getOne(sprintf($this->_authselect, 
+            $okay = $dbh->getOne(sprintf($this->_authselect,
                                          $dbh->quote($submitted_password),
                                          $dbh->quote($this->_userid)));
             $result = !empty($okay);
@@ -236,7 +237,10 @@ extends _DbPassUser
     }
 }
 
-// $Log: PearDb.php,v $
+// $Log: not supported by cvs2svn $
+// Revision 1.11  2007/05/30 21:53:52  rurban
+// add userid to authcreate
+//
 // Revision 1.10  2006/03/19 16:26:40  rurban
 // fix DBAUTH arguments to be position independent, fixes bug #1358973
 //

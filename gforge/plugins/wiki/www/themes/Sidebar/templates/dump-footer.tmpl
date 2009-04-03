@@ -1,0 +1,9 @@
+<?php // -*-php-*-
+  rcs_id('$Id: dump-footer.tmpl,v 1.4 2005/02/11 14:50:06 rurban Exp $');
+  if (empty($revision)) $revision = $page->getCurrentRevision();
+?>
+<hr class="printer" noshade="noshade" />
+<div class="visualClear"></div>
+<div><?= $WikiTheme->getOwnerMessage($page) ?>  <?= $WikiTheme->getLastModifiedMessage($revision) ?> <?= $WikiTheme->getAuthorMessage($revision) ?><br>
+This page was accessed <?= $page->get('hits') ?> times, and edited <?= $revision->getVersion() ?> times.</div>
+

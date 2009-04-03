@@ -8,7 +8,7 @@
  * sqlite -init /tmp/phpwiki-sqlite.db 
  * sqlite /tmp/phpwiki-sqlite.db < schemas/sqlite.sql
  */
-rcs_id('$Id: PearDB_sqlite.php,v 1.3 2004/07/08 15:35:17 rurban Exp $');
+rcs_id('$Id: PearDB_sqlite.php 6184 2008-08-22 10:33:41Z vargenau $');
 
 require_once('lib/WikiDB/backend/PearDB.php');
 

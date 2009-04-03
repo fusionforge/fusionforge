@@ -20,8 +20,6 @@ $locale["'%s': Bad page name"] =
    "'%s': ページ名が正しくありません";
 $locale["(diff)"] =
    "(差分)";
-$locale["(hist)"] =
-   "(履歴)";
 $locale["<no matches>"] =
    "<一致しません>";
 $locale["<none>"] =
@@ -32,8 +30,6 @@ $locale["<system theme>"] =
    "<システムテーマ>";
 $locale["Action page"] =
    "操作ページ";
-$locale["Add a Comment"] =
-   "コメント追加";
 $locale["Adjust"] =
    "調整";
 $locale["Admin"] =
@@ -424,8 +420,6 @@ $locale["View the current version"] =
    "現在のバージョンを表示する";
 $locale["W"] =
    "幅";
-$locale["Warning!"] =
-   "警告!";
 $locale["Warning: You are editing an old revision."] =
    "警告: あなたは古いリビジョンを編集しています。";
 $locale["Width"] =

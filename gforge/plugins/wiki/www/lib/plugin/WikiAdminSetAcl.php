@@ -1,7 +1,8 @@
 <?php // -*-php-*-
-rcs_id('$Id: WikiAdminSetAcl.php,v 1.23 2005/02/12 17:24:24 rurban Exp $');
+rcs_id('$Id: WikiAdminSetAcl.php,v 1.24 2007/07/14 12:05:15 rurban Exp $');
 /*
  Copyright 2004 $ThePhpWikiProgrammingTeam
+ Copyright 2008 Marc-Etienne Vargenau, Alcatel-Lucent
 
  This file is part of PhpWiki.
 
@@ -28,6 +29,10 @@ rcs_id('$Id: WikiAdminSetAcl.php,v 1.23 2005/02/12 17:24:24 rurban Exp $');
  *
  * KNOWN ISSUES:
  * Requires PHP 4.2 so far.
+ *
+ * TODO: UI to add custom group/username. 
+ * Currently it's easier to dump a page, fix it manually and 
+ * import it, than use Setacl
  */
 require_once('lib/PageList.php');
 require_once('lib/plugin/WikiAdminSelect.php');
@@ -45,7 +50,7 @@ extends WikiPlugin_WikiAdminSelect
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.23 $");
+                            "\$Revision: 1.24 $");
     }
 
     function getDefaultArguments() {
@@ -198,6 +203,7 @@ extends WikiPlugin_WikiAdminSelect
         return HTML::form(array('action' => $request->getPostURL(),
                                 'method' => 'post'),
                           $header,
+                          $buttons,
                           $pagelist->getContent(),
                           HiddenInputs( $req,
                                         false,
@@ -205,8 +211,7 @@ extends WikiPlugin_WikiAdminSelect
                           HiddenInputs(array('admin_setacl[action]' => $next_action)),
                           ENABLE_PAGEPERM
                           ? ''
-                          : HiddenInputs(array('require_authority_for_post' => WIKIAUTH_ADMIN)),
-                          $buttons);
+                          : HiddenInputs(array('require_authority_for_post' => WIKIAUTH_ADMIN)));
     }
 
     function setaclForm(&$header, $post_args, $pagehash) {
@@ -283,114 +288,6 @@ class _PageList_Column_perm extends _PageList_Column {
                                            $page_handle->get('group'));
     }
 };
-
-// $Log: WikiAdminSetAcl.php,v $
-// Revision 1.23  2005/02/12 17:24:24  rurban
-// locale update: missing . : fixed. unified strings
-// proper linebreaks
-//
-// Revision 1.22  2005/01/25 08:05:17  rurban
-// protect against !ENABLE_PAGEPERM
-//
-// Revision 1.21  2004/11/23 15:17:20  rurban
-// better support for case_exact search (not caseexact for consistency),
-// plugin args simplification:
-//   handle and explode exclude and pages argument in WikiPlugin::getArgs
-//     and exclude in advance (at the sql level if possible)
-//   handle sortby and limit from request override in WikiPlugin::getArgs
-// ListSubpages: renamed pages to maxpages
-//
-// Revision 1.20  2004/11/01 10:43:59  rurban
-// seperate PassUser methods into seperate dir (memory usage)
-// fix WikiUser (old) overlarge data session
-// remove wikidb arg from various page class methods, use global ->_dbi instead
-// ...
-//
-// Revision 1.19  2004/06/16 10:38:59  rurban
-// Disallow refernces in calls if the declaration is a reference
-// ("allow_call_time_pass_reference clean").
-//   PhpWiki is now allow_call_time_pass_reference = Off clean,
-//   but several external libraries may not.
-//   In detail these libs look to be affected (not tested):
-//   * Pear_DB odbc
-//   * adodb oracle
-//
-// Revision 1.18  2004/06/14 11:31:39  rurban
-// renamed global $Theme to $WikiTheme (gforge nameclash)
-// inherit PageList default options from PageList
-//   default sortby=pagename
-// use options in PageList_Selectable (limit, sortby, ...)
-// added action revert, with button at action=diff
-// added option regex to WikiAdminSearchReplace
-//
-// Revision 1.17  2004/06/13 15:33:20  rurban
-// new support for arguments owner, author, creator in most relevant
-// PageList plugins. in WikiAdmin* via preSelectS()
-//
-// Revision 1.16  2004/06/08 13:50:43  rurban
-// show getfacl and acl line
-//
-// Revision 1.15  2004/06/08 10:05:12  rurban
-// simplified admin action shortcuts
-//
-// Revision 1.14  2004/06/07 22:28:06  rurban
-// add acl field to mimified dump
-//
-// Revision 1.13  2004/06/04 20:32:54  rurban
-// Several locale related improvements suggested by Pierrick Meignen
-// LDAP fix by John Cole
-// reanable admin check without ENABLE_PAGEPERM in the admin plugins
-//
-// Revision 1.12  2004/06/03 22:24:48  rurban
-// reenable admin check on !ENABLE_PAGEPERM, honor s=Wildcard arg, fix warning after Remove
-//
-// Revision 1.11  2004/06/01 15:28:02  rurban
-// AdminUser only ADMIN_USER not member of Administrators
-// some RateIt improvements by dfrankow
-// edit_toolbar buttons
-//
-// Revision 1.10  2004/05/27 17:49:06  rurban
-// renamed DB_Session to DbSession (in CVS also)
-// added WikiDB->getParam and WikiDB->getAuthParam method to get rid of globals
-// remove leading slash in error message
-// added force_unlock parameter to File_Passwd (no return on stale locks)
-// fixed adodb session AffectedRows
-// added FileFinder helpers to unify local filenames and DATA_PATH names
-// editpage.php: new edit toolbar javascript on ENABLE_EDIT_TOOLBAR
-//
-// Revision 1.9  2004/05/24 17:34:53  rurban
-// use ACLs
-//
-// Revision 1.8  2004/05/16 22:32:54  rurban
-// setacl icons
-//
-// Revision 1.7  2004/05/16 22:07:35  rurban
-// check more config-default and predefined constants
-// various PagePerm fixes:
-//   fix default PagePerms, esp. edit and view for Bogo and Password users
-//   implemented Creator and Owner
-//   BOGOUSERS renamed to BOGOUSER
-// fixed syntax errors in signin.tmpl
-//
-// Revision 1.5  2004/04/07 23:13:19  rurban
-// fixed pear/File_Passwd for Windows
-// fixed FilePassUser sessions (filehandle revive) and password update
-//
-// Revision 1.4  2004/03/17 20:23:44  rurban
-// fixed p[] pagehash passing from WikiAdminSelect, fixed problem removing pages with [] in the pagename
-//
-// Revision 1.3  2004/03/12 13:31:43  rurban
-// enforce PagePermissions, errormsg if not Admin
-//
-// Revision 1.2  2004/02/24 04:02:07  rurban
-// Better warning messages
-//
-// Revision 1.1  2004/02/23 21:30:25  rurban
-// more PagePerm stuff: (working against 1.4.0)
-//   ACL editing and simplification of ACL's to simple rwx------ string
-//   not yet working.
-//
-//
 
 // Local Variables:
 // mode: php

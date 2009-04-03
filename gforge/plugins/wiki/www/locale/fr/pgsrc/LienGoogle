@@ -1,9 +1,9 @@
 Date: Sat, 5 Jun 2004 16:49:55 +0200
 Mime-Version: 1.0 (Produced by PhpWiki 1.3.10)
-X-Rcs-Id: $Id: LienGoogle,v 1.1 2004/06/08 14:19:03 rurban Exp $
+X-Rcs-Id: $Id: LienGoogle 6197 2008-08-25 12:33:05Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=LienGoogle;
-  pgsrc_version="2 $Revision: 1.1 $";
+  pgsrc_version="2 $Revision: 6197 $";
   markup=2;
   charset=iso-8859-1
 Content-Transfer-Encoding: binary
@@ -15,4 +15,4 @@ inconnues avec un lien vers Google:[pagename]. Par défaut : Off
 
 Voir MeatBall::GooglePrompt
 ----
-DocumentationDePhpWiki
+[DocumentationDePhpWiki]

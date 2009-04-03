@@ -1,5 +1,5 @@
 <?php
-
+// FIXME! This is a mess. Everything.
 require_once('lib/stdlib.php');
 
 $remove = 0;
@@ -9,14 +9,15 @@ if (preg_match('/^(http|ftp|https):\/\//i',$_REQUEST['url'])) {
     list($usec, $sec) = explode(" ", microtime());
     
     $fp = fopen('config/config.ini','r');
-    while($config = fgetcsv($fp,1024,';')) {
+    while ($config = fgetcsv($fp,1024,';')) {
         if (preg_match('/DATA_PATH/',$config[0])) {
             list($key,$value) = split('=',$config[0]);
             $data_path = trim($value).'/';
+	    break;
 	}
     }
     fclose($fp);
-    @mkdir($data_path."uploads/thumbs");
+    @mkdir($data_path."uploads/thumbs",0775);
     $file = $data_path."uploads/thumbs/image_" . ((float)$usec + (float)$sec);
     $source = url_get_contents($_REQUEST['url']);
 
@@ -116,8 +117,17 @@ if (empty($newidth)) $newidth = 50;
 $newheight = $_REQUEST['height'];
 if (empty($newheight)) $newheight = round($newwidth * ($height / $width)) ;
 
-$thumb = imagecreate($newwidth, $newheight);
-$img = imagecopyresampled($thumb, $img, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+// php-4.2.x is stupid enough to define on gd only a stub for imagecopyresampled.
+// So function_exists('imagecopyresampled') will fail.
+if (!extension_loaded('gd2') and (substr(PHP_OS,0,3) != 'WIN'))
+    loadPhpExtension('gd2');
+if (extension_loaded('gd2')) {
+    $thumb = imagecreatetruecolor($newwidth, $newheight);
+    $img = imagecopyresampled($thumb, $img, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+} else {
+    $thumb = imagecreate($newwidth, $newheight);
+    $img = imagecopyresized($thumb, $img, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+}
 
 if ($remove == 1) unlink ($file);
 
@@ -131,9 +141,11 @@ function show_plain () {
     exit();
 }
 
-
 /*
- $Log: ImageTile.php,v $
+ $Log: not supported by cvs2svn $
+ Revision 1.5  2007/01/04 16:44:18  rurban
+ mkdir 0775
+
  Revision 1.4  2005/10/31 17:03:19  rurban
  fix "r"
 

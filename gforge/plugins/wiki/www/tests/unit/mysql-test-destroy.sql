@@ -1,4 +1,4 @@
--- $Id: mysql-test-destroy.sql,v 1.1 2004/11/03 16:55:03 rurban Exp $
+-- $Id: mysql-test-destroy.sql 6206 2008-08-26 15:20:22Z vargenau $
 
 drop table if exists test_page;
 drop table if exists test_version;

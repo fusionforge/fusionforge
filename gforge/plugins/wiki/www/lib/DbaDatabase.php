@@ -1,4 +1,4 @@
-<?php rcs_id('$Id: DbaDatabase.php,v 1.18 2006/04/17 17:30:35 rurban Exp $');
+<?php rcs_id('$Id: DbaDatabase.php 6184 2008-08-22 10:33:41Z vargenau $');
 
 require_once('lib/ErrorManager.php');
 
@@ -11,7 +11,7 @@ class DbaDatabase
         $this->_handler = $handler;
         $this->_timeout = DBA_DATABASE_DEFAULT_TIMEOUT;
         $this->_dbh = false;
-        if (function_exists("dba_handlers")) { // since 4.3.0
+        if (function_exists("dba_handlers")) { // since php-4.3.0
             if (!in_array($handler, dba_handlers()))
                 $this->_error(
                     sprintf(
@@ -58,7 +58,7 @@ class DbaDatabase
             // "c" failed, try "w" instead.
             if (substr($mode,0,1) == "c" and file_exists($this->_file))
                 $mode = "w";
-            // conflict: wait some random time to unlock (see ethernet)
+            // conflict: wait some random time to unlock (as with ethernet)
             $secs = 0.5 + ((double)rand(1,32767)/32767);
             sleep($secs);
             $watchdog -= $secs;
@@ -140,7 +140,7 @@ class DbaDatabase
             }
         }
         else {
-            if (!dba_insert($key, $val, $this->_dbh))
+            if (!dba_insert($key, $val, $dbh))
                 return $this->_error("store[insert]($key)");
         }
     }
@@ -150,7 +150,7 @@ class DbaDatabase
             return $this->_error("sync()");
     }
 
-    function optimize () {
+    function optimize() {
         if (!dba_optimize($this->_dbh))
             return $this->_error("optimize()");
         return 1;
@@ -168,12 +168,22 @@ class DbaDatabase
             printf("%10s: %s\n", $key, $this->fetch($key));
     }
 
-    function _dba_open_error_handler ($error) {
+    function _dba_open_error_handler($error) {
         $this->_dba_open_error = $error;
         return true;
     }
 }
 
+// $Log: not supported by cvs2svn $
+// Revision 1.21  2006/09/06 05:42:54  rurban
+// unify dbh arg
+//
+// Revision 1.20  2006/08/15 13:35:33  rurban
+// just aesthetics
+//
+// Revision 1.19  2006/06/18 11:01:25  rurban
+// add rcsid log
+//
 
 // (c-file-style: "gnu")
 // Local Variables:

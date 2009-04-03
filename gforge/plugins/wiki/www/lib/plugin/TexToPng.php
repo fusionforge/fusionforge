@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: TexToPng.php,v 1.5 2004/06/19 10:06:38 rurban Exp $');
+rcs_id('$Id: TexToPng.php 6185 2008-08-22 11:40:14Z vargenau $');
 /**
  Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
 
@@ -105,7 +105,7 @@ class WikiPlugin_TexToPng extends WikiPluginCached
     
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.5 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -302,11 +302,7 @@ class WikiPlugin_TexToPng extends WikiPluginCached
     } // TexToImg
 } // WikiPlugin_TexToPng
 
-// $Log: TexToPng.php,v $
-// Revision 1.5  2004/06/19 10:06:38  rurban
-// Moved lib/plugincache-config.php to config/*.ini
-// use PLUGIN_CACHED_* constants instead of global $CacheParams
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.4  2003/01/18 22:08:01  carstenklapp
 // Code cleanup:
 // Reformatting & tabs to spaces;

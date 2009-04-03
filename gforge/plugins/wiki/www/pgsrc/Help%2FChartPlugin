@@ -1,0 +1,94 @@
+Date: Sat, 24 Jan 2009 8:15:24 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
+X-Rcs-Id: $Id: Help%2FChartPlugin 6436 2009-01-24 10:59:01Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FChartPlugin;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=iso-8859-1
+Content-Transfer-Encoding: binary
+
+The **Chart** [[Help:WikiPlugin|plugin]] allows to easily draw simple graphs on a wiki page.
+
+The browser must support SVG in order graphs to be displayed.
+
+== Usage ==
+<verbatim>
+<<Chart width=200 height=200 type=line color=green data="5, 7, 11, 3, 15" >>
+</verbatim>
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| <b>width</b>
+| Graph width in pixels
+| 200
+|-
+| <b>height</b>
+| Graph height in pixels
+| 200
+|-
+| <b>type</b>
+| line, bar or pie
+| line
+|-
+| <b>data</b>
+| Graph data: a list of numbers separated by comma
+| //none//
+|}
+
+== Examples ==
+
+=== Line chart ===
+
+<verbatim>
+<<Chart type=line
+        data="5, 7, 11, 3, 15"
+>>
+</verbatim>
+
+<<Chart type=line
+        data="5, 7, 11, 3, 15"
+>>
+
+=== Bar chart ===
+
+<verbatim>
+<<Chart type=bar
+        color=red
+        data="5, 7, 11, 3, 15"
+>>
+</verbatim>
+
+<<Chart type=bar
+        color=red
+        data="5, 7, 11, 3, 15"
+>>
+
+=== Pie chart ===
+
+<verbatim>
+<<Chart type=pie
+        color=blue
+        data="5, 7, 11, 3, 15"
+>>
+</verbatim>
+
+<<Chart type=pie
+        color=blue
+        data="5, 7, 11, 3, 15"
+>>
+
+== Author ==
+* Marc-Etienne Vargenau
+
+== See Also ==
+
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+

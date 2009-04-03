@@ -1,5 +1,5 @@
 <?php
-rcs_id('$Id: DeadEndPages.php,v 1.1 2004/05/27 12:10:31 rurban Exp $');
+rcs_id('$Id: DeadEndPages.php 6185 2008-08-22 11:40:14Z vargenau $');
 
 /**
  * Alias for OrphanedPages. Idea and name from mediawiki.
@@ -25,10 +25,7 @@ extends WikiPlugin_OrphanedPages
     }
 };
 
-// $Log: DeadEndPages.php,v $
-// Revision 1.1  2004/05/27 12:10:31  rurban
-// The mediawiki name for OrphanedPages. Just an alias.
-//
+// $Log: not supported by cvs2svn $
 //
 
 // Local Variables:

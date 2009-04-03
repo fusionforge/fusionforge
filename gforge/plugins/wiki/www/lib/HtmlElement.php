@@ -1,4 +1,4 @@
-<?php rcs_id('$Id: HtmlElement.php,v 1.47 2005/08/06 12:53:36 rurban Exp $');
+<?php rcs_id('$Id: HtmlElement.php 6248 2008-09-07 15:13:56Z vargenau $');
 /**
  * Code for writing the HTML subset of XML.
  * @author: Jeff Dairiki
@@ -63,8 +63,9 @@ class HtmlElement extends XmlElement
      *
      * @param $tooltip_text string The tooltip text.
      */
-    function addTooltip ($tooltip_text) {
+    function addTooltip ($tooltip_text, $accesskey = null) {
         $this->setAttr('title', $tooltip_text);
+	if ($accesskey) $this->setAccesskey($accesskey);
 
         // FIXME: this should be initialized from title by an onLoad() function.
         //        (though, that may not be possible.)
@@ -73,6 +74,23 @@ class HtmlElement extends XmlElement
                        sprintf('window.status="%s"; return true;',
                                addslashes($tooltip_text)));
         $this->setAttr('onmouseout', "window.status='';return true;");
+    }
+
+    function setAccesskey ($key) {
+	global $WikiTheme;
+	if (strlen($key) != 1) return;
+	$this->setAttr("accesskey", $key);
+
+        if (!empty($this->_attr['title'])) {
+	    if (preg_match("/\[(alt-)?(.)\]$/", $this->_attr['title'], $m))
+	    {
+		$this->_attr['title'] = preg_replace("/\[(alt-)?(.)\]$/", "[".$WikiTheme->tooltipAccessKeyPrefix()."-\\2]", $this->_attr['title']);
+	    } else  {
+		$this->_attr['title'] .= " [".$WikiTheme->tooltipAccessKeyPrefix()."-$key]";
+	    }
+	} else {
+	    $this->_attr['title'] = "[".$WikiTheme->tooltipAccessKeyPrefix()."-$key]";
+	}
     }
 
     function emptyTag () {
@@ -404,6 +422,14 @@ class HTML extends HtmlElement {
         $el = new HtmlElement('embed');
         return $el->_init2(func_get_args());
     }
+    function param (/*...*/) {
+        $el = new HtmlElement('param');
+        return $el->_init2(func_get_args());
+    }
+    function legend (/*...*/) {
+        $el = new HtmlElement('legend');
+        return $el->_init2(func_get_args());
+    }
 }
 
 define('HTMLTAG_EMPTY', 1);
@@ -533,116 +559,6 @@ function IfJavaScript($if_content = false, $else_content = false) {
     return HTML($html);
 }
     
-/**
- $Log: HtmlElement.php,v $
- Revision 1.47  2005/08/06 12:53:36  rurban
- beautify SCRIPT lines
-
- Revision 1.46  2005/01/25 06:50:33  rurban
- added label
-
- Revision 1.45  2005/01/10 18:05:56  rurban
- php5 case-sensitivity
-
- Revision 1.44  2005/01/08 20:58:19  rurban
- ending space after colgroup breaks _setTagProperty
-
- Revision 1.43  2004/11/21 11:59:14  rurban
- remove final \n to be ob_cache independent
-
- Revision 1.42  2004/09/26 17:09:23  rurban
- add SVG support for Ploticus (and hopefully all WikiPluginCached types)
- SWF not yet.
-
- Revision 1.41  2004/08/05 17:31:50  rurban
- more xhtml conformance fixes
-
- Revision 1.40  2004/06/25 14:29:17  rurban
- WikiGroup refactoring:
-   global group attached to user, code for not_current user.
-   improved helpers for special groups (avoid double invocations)
- new experimental config option ENABLE_XHTML_XML (fails with IE, and document.write())
- fixed a XHTML validation error on userprefs.tmpl
-
- Revision 1.39  2004/05/17 13:36:49  rurban
- Apply RFE #952323 "ExternalSearchPlugin improvement", but
-   with <button><img></button>
-
- Revision 1.38  2004/05/12 10:49:54  rurban
- require_once fix for those libs which are loaded before FileFinder and
-   its automatic include_path fix, and where require_once doesn't grok
-   dirname(__FILE__) != './lib'
- upgrade fix with PearDB
- navbar.tmpl: remove spaces for IE &nbsp; button alignment
-
- Revision 1.37  2004/04/26 20:44:34  rurban
- locking table specific for better databases
-
- Revision 1.36  2004/04/19 21:51:41  rurban
- php5 compatibility: it works!
-
- Revision 1.35  2004/04/19 18:27:45  rurban
- Prevent from some PHP5 warnings (ref args, no :: object init)
-   php5 runs now through, just one wrong XmlElement object init missing
- Removed unneccesary UpgradeUser lines
- Changed WikiLink to omit version if current (RecentChanges)
-
- Revision 1.34  2004/03/24 19:39:02  rurban
- php5 workaround code (plus some interim debugging code in XmlElement)
-   php5 doesn't work yet with the current XmlElement class constructors,
-   WikiUserNew does work better than php4.
- rewrote WikiUserNew user upgrading to ease php5 update
- fixed pref handling in WikiUserNew
- added Email Notification
- added simple Email verification
- removed emailVerify userpref subclass: just a email property
- changed pref binary storage layout: numarray => hash of non default values
- print optimize message only if really done.
- forced new cookie policy: delete pref cookies, use only WIKI_ID as plain string.
-   prefs should be stored in db or homepage, besides the current session.
-
- Revision 1.33  2004/03/18 22:32:33  rurban
- work to make it php5 compatible
-
- Revision 1.32  2004/02/15 21:34:37  rurban
- PageList enhanced and improved.
- fixed new WikiAdmin... plugins
- editpage, Theme with exp. htmlarea framework
-   (htmlarea yet committed, this is really questionable)
- WikiUser... code with better session handling for prefs
- enhanced UserPreferences (again)
- RecentChanges for show_deleted: how should pages be deleted then?
-
- Revision 1.31  2003/02/27 22:47:26  dairiki
- New functions in HtmlElement:
-
- JavaScript($js)
-    Helper for generating javascript.
-
- IfJavaScript($if_content, $else_content)
-    Helper for generating
-       <script>document.write('...')</script><noscript>...</noscript>
-    constructs.
-
- Revision 1.30  2003/02/17 06:02:25  dairiki
- Remove functions HiddenGets() and HiddenPosts().
-
- These functions were evil.  They didn't check the request method,
- so they often resulted in GET args being converted to POST args,
- etc...
-
- One of these is still used in lib/plugin/WikiAdminSelect.php,
- but, so far as I can tell, that code is both broken _and_ it
- doesn't do anything.
-
- Revision 1.29  2003/02/15 01:54:19  dairiki
- Added HTML::meta() for <meta> tag.
-
- Revision 1.28  2003/01/04 02:32:30  carstenklapp
- Added 'col' and 'colgroup' table elements used by PluginManager.
-
- */
-
 // (c-file-style: "gnu")
 // Local Variables:
 // mode: php

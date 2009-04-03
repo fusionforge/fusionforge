@@ -41,7 +41,7 @@ Notes:
 
 // by Edd Dumbill (C) 1999,2000
 // <edd@usefulinc.com>
-// $Id: xmlrpcs_emu.inc,v 1.3 2005/01/21 14:07:50 rurban Exp $
+// $Id: xmlrpcs_emu.inc 6209 2008-08-26 15:30:39Z vargenau $
 
 // License is granted to use or modify this software ("XML-RPC for PHP")
 // for commercial or non-commercial use provided the copyright of the author
@@ -170,6 +170,8 @@ class xmlrpc_server {
    function service() {
       global $HTTP_RAW_POST_DATA;
       $data = $HTTP_RAW_POST_DATA;
+      if (is_null($data))
+      	  trigger_error("empty \$HTTP_RAW_POST_DATA", E_USER_WARNING);
 
       // call server
       $payload = xmlrpc_server_call_method($this->xmlrpc_server, $data, $this->dmap, 

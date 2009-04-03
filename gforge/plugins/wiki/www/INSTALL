@@ -29,6 +29,12 @@ abstraction layer which is part of PHP. PhpWiki version 1.3.3 and later
 includes the necessary PEAR libraries and will use it if your system 
 PEAR library can not be found. For more information about PEAR 
 see <http://pear.php.net/>.
+PhpWiki version 1.3.7 and later includes the ADODB libraries and will
+use it for DATABASE_TYPE=ADODB. ADODB has more features, can use yet
+unsupported backends out of the box, and this is where SQL development
+happens. ADODB improvements are then backported to the stable PEAR
+backend (which often suffers from bad upstream PEAR libraries) and to
+PDO for php5.
 
 
 QUICK START INSTRUCTIONS
@@ -150,4 +156,4 @@ You can join this list at:
 
 FIN
 
-$Id: INSTALL,v 1.25 2005/04/03 16:52:50 uckelman Exp $
+$Id: INSTALL 6198 2008-08-26 09:14:36Z vargenau $

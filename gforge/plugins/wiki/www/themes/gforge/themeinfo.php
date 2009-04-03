@@ -1,54 +1,52 @@
 <?php
 rcs_id('$Id: themeinfo.php,v 1.5 2006/02/22 06:51:37 rurban Exp $');
-/**
- * tiny actionbar, only Edit (if signed in) and Info => PageInfo,
- *   all other Actionbars buttons in info.tmpl
- * old-style Sign In button
- * navbar also shorter labels and without buttons, just links
- */
 
-require_once('lib/Theme.php');
+require_once('lib/WikiTheme.php');
 
-class Theme_gforge extends WikiTheme {
+class WikiTheme_gforge extends WikiTheme {
 
-	function header() {
-		global $HTML, $TITLE, $group_id;
-		
-		$HTML->header(array('title'=> WIKI_NAME . ' - '.  AsString($TITLE) ,
-			'pagename'=> $TITLE, 'group' => $group_id, 'toptab' => 'wiki',
-			'css' => '/themes/alcatel/phpwiki.css" />'."\n".'	<base href="'.PHPWIKI_BASE_URL));
-	}
-	
-	function footer() {
-		global $HTML;
-		
-		$HTML->footer(null);
-		
-	}
+    function header() {
+        global $HTML, $group_id, $group_public_name, $request, $project;
+
+        $pagename = $request->getArg('pagename');
+
+        $submenu = Template('navbar');
+        
+        //group is private
+        if (!$project->isPublic()) {
+            //if it's a private group, you must be a member of that group
+            session_require(array('group'=>$group_id));
+        }
+
+        //for dead projects must be member of admin project
+        if (!$project->isActive()) {
+            //only SF group can view non-active, non-holding groups
+            session_require(array('group'=>'1'));
+        }
+
+                // FIXME: alcatel-lucent should not be hard-encoded here
+        $HTML->header(array('title'=> $group_public_name.': '.$pagename ,
+            'pagename'=> $pagename, 'group' => $group_id, 'toptab' => 'wiki',
+            'css' => '/themes/alcatel-lucent/phpwiki.css" />'."\n".'    <base href="'.PHPWIKI_BASE_URL,
+            'submenu' => $submenu->asXML()));
+    }
+    
+    function footer() {
+        global $HTML;
+        
+        $HTML->footer();
+        
+    }
 }
 
-$WikiTheme = new Theme_gforge('gforge');
-// CSS file defines fonts, colors and background images for this
-// style.  The companion '*-heavy.css' file isn't defined, it's just
-// expected to be in the same directory that the base style is in.
+$WikiTheme = new WikiTheme_gforge('gforge');
+// CSS file defines fonts, colors and background images for this style.
 
 // This should result in phpwiki-printer.css being used when
 // printing or print-previewing with style "PhpWiki" or "MacOSX" selected.
 $WikiTheme->setDefaultCSS('PhpWiki',
                        array(''      => 'phpwiki.css',
                              'print' => 'phpwiki-printer.css'));
-
-// This allows one to manually select "Printer" style (when browsing page)
-// to see what the printer style looks like.
-//$WikiTheme->addAlternateCSS(_("Printer"), 'phpwiki-printer.css', 'print, screen');
-//$WikiTheme->addAlternateCSS(_("Top & bottom toolbars"), 'phpwiki-topbottombars.css');
-//$WikiTheme->addAlternateCSS(_("Modern"), 'phpwiki-modern.css');
-
-//if (isBrowserIE()) {
-//    $WikiTheme->addMoreHeaders($WikiTheme->_CSSlink(0,
-//        $WikiTheme->_findFile('IEFixes.css'),'all'));
-//    $WikiTheme->addMoreHeaders("\n");
-//}
 
 /**
  * The logo image appears on every page and links to the HomePage.
@@ -68,7 +66,8 @@ $WikiTheme->addImageAlias('signature', false);
 /*
  * Link icons.
  */
-//$WikiTheme->setLinkIcon('http');
+// $WikiTheme->setLinkIconAttr('after');
+$WikiTheme->setLinkIcon('http');
 $WikiTheme->setLinkIcon('https');
 $WikiTheme->setLinkIcon('ftp');
 $WikiTheme->setLinkIcon('mailto');
@@ -76,7 +75,7 @@ $WikiTheme->setLinkIcon('mailto');
 //$WikiTheme->setLinkIcon('wikiuser');
 //$WikiTheme->setLinkIcon('*', 'url');
 
-$WikiTheme->setButtonSeparator(HTML::Raw("<li>"));
+$WikiTheme->setButtonSeparator("\n | ");
 
 /**
  * WikiWords can automatically be split by inserting spaces between
@@ -101,7 +100,7 @@ $WikiTheme->setAnonEditUnknownLinks(false);
  * Do not include the server's zone (%Z), times are converted to the
  * user's time zone.
  */
-$WikiTheme->setDateFormat("%B %d, %Y");
+$WikiTheme->setDateFormat("%d %B %Y");
 $WikiTheme->setTimeFormat("%H:%M");
 
 /*

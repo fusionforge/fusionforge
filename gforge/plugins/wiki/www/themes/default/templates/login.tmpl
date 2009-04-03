@@ -1,5 +1,5 @@
 <?php // -*-php-*- ?>
-<!-- $Id: login.tmpl,v 1.35 2004/11/05 21:03:27 rurban Exp $ -->
+<!-- $Id: login.tmpl 6204 2008-08-26 15:12:03Z vargenau $ -->
 <!-- The login form -->
 <?php if ($fail_message) { ?>
   <p><strong><?=$fail_message?></strong></p>
@@ -24,9 +24,9 @@ if (DEBUG & _DEBUG_LOGIN) {
               $t .= " ($fail)";
       }
     } else
-      $t .= sprintf("  USER_AUTH_ORDER: %s", join(" => ", $GLOBALS['USER_AUTH_ORDER']));
-    $t .= sprintf(",  USER_AUTH_POLICY: %s", USER_AUTH_POLICY)
-       . sprintf(",  PASSWORD_LENGTH_MINIMUM: %s", PASSWORD_LENGTH_MINIMUM);
+	$t .= sprintf("  USER_AUTH_ORDER: %s", join(" => ", $GLOBALS['USER_AUTH_ORDER']));
+        $t .= sprintf(",  USER_AUTH_POLICY: %s", USER_AUTH_POLICY)
+            . sprintf(",  PASSWORD_LENGTH_MINIMUM: %s", PASSWORD_LENGTH_MINIMUM);
   }
   echo asXML(HTML::div(array('class' => 'debug'),$t));
   echo "<br />\n";
@@ -66,13 +66,17 @@ if (ALLOW_BOGO_LOGIN && $require_level <= WIKIAUTH_BOGO) {
 <table cellspacing="4">
 <tr>
   <td align="right"><?= _("UserId:") ?></td>
-  <td><input type="text" name="auth[userid]" size="12" maxlength="256" value="<?=$userid?>" /></td>
+  <td><input type="text" name="auth[userid]" size="12" maxlength="256" value="<?=$userid?>" />
+    <?php if (ENABLE_AUTH_OPENID) { ?>
+    &nbsp;&nbsp;<?= _("or")?> <a href="http://openid.net/"><?= _("OpenID") ?></a>:<input type="text" id="inp-openid" name="openid_url" size="32" maxlength="256" value="<?=$userid?>" />
+    <?php } ?>
+</td>
 </tr>
 <tr>
   <td align="right"><?= _("Password:") ?></td>
   <td><input type="password" name="auth[passwd]" size="12" maxlength="256" /></td>
 </tr>
-<tr><td align="center" colspan="2">
+<tr><td></td><td align="left">
   <?=Button("submit:", _("Sign In"), 'wikiaction')?>
   <?php if (!$require_level) { ?>
     <?=Button("submit:auth[cancel]", _("Cancel"), 'button')?>

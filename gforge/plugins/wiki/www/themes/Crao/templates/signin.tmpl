@@ -1,22 +1,21 @@
 <?php // -*-html-*-
-     rcs_id('$Id: signin.tmpl,v 1.3 2005/10/30 14:27:53 rurban Exp $');
+rcs_id('$Id: signin.tmpl 6204 2008-08-26 15:12:03Z vargenau $');
 
-     if (empty($FORMNAME))
-         $FORMNAME = 'signin';
-     else
-         $NOFORM = true;
+if (empty($FORMNAME))
+    $FORMNAME = 'signin';
+else
+    $NOFORM = true;
 ?>
 <?php if (empty($NOFORM)) { ?>
-  <form method="post" action="<?= $request->getPostURL() ?>" accept-charset="<?=CHARSET?>" name="<?=$FORMNAME?>">
+  <form method="post" action="<?= $request->getPostURL() ?>" accept-charset="<?=$charset?>" name="<?=$FORMNAME?>">
   <?= HiddenInputs($request->getArgs(), false, array('auth')) ?>
 <?php } ?>
 <?php if ($user->isSignedIn()) {
-  $Sep = $WikiTheme->getButtonSeparator();
   $SignOutB = $WikiTheme->makeButton(_("Sign Out"), "javascript:SignOut();", 'wikiaction');
 ?>
 <span>
   <?= fmt("You are signed in as %s", WikiLink($user->getId(), 'auto')) ?>
-  <?=$Sep?>
+  <?=$SEP?>
 </span>
   <script language="JavaScript" type="text/javascript"><!--
     document.write('<input type="hidden" name="auth[logout]" value="0" />');
@@ -55,12 +54,7 @@
     ?>');
   </script>
   <?= $SignInInput ?>
-  <noscript>
-    <?= Button("submit:auth[login]", _("Sign In"), 'wikiaction')?>
-  </noscript>
-
 <?php } ?>
-
 <?php if (empty($NOFORM)) { ?>
   </form>
 <?php } ?>

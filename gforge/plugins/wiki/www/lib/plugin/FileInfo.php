@@ -1,7 +1,7 @@
 <?php // -*-php-*-
-rcs_id('$Id: FileInfo.php,v 1.4 2005/10/29 14:18:47 rurban Exp $');
+rcs_id('$Id: FileInfo.php 6185 2008-08-22 11:40:14Z vargenau $');
 /*
- Copyright 2005 $ThePhpWikiProgrammingTeam
+ Copyright 2005,2007 $ThePhpWikiProgrammingTeam
  
  This file is part of PhpWiki.
 
@@ -25,9 +25,9 @@ rcs_id('$Id: FileInfo.php,v 1.4 2005/10/29 14:18:47 rurban Exp $');
  * Only files relative and below to the uploads path can be handled.
  *
  * Usage:
- *   <?plugin FileVersion file=uploads/setup.exe display=version,date ?>
- *   <?plugin FileVersion file=uploads/setup.exe display=name,version,date 
- *                        format="%s (version: %s, date: %s)" ?>
+ *   <?plugin FileInfo file=Upload:setup.exe display=version,date ?>
+ *   <?plugin FileInfo file=Upload:setup.exe display=name,version,date 
+ *                     format="%s (version: %s, date: %s)" ?>
  *
  * @author: ReiniUrban
  */
@@ -45,36 +45,57 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.4 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
         return array(
                      'file'      => false, // relative path from PHPWIKI_DIR. (required)
-                     'display'   => false, // version,size,date,mtime,owner,name,path,dirname,link.  (required)
+                     'display'   => false, // version,phonysize,size,date,mtime,owner,name,path,dirname,link.  (required)
                      'format'    => false, // printf format string with %s only, all display modes 
+		     'quiet'     => false  // print no error if file not found
 		     			   // from above vars return strings (optional)
                     );
     }
 
     function run($dbi, $argstr, &$request, $basepage) {
-        extract($this->getArgs($argstr, $request));
+    	$args = $this->getArgs($argstr, $request);
+        extract($args);
         if (!$file)
             return $this->error(sprintf(_("A required argument '%s' is missing."), 'file'));
         if (!$display)
             return $this->error(sprintf(_("A required argument '%s' is missing."), 'display'));
-
+        if (string_starts_with($file, "Upload:")) {
+            $file = preg_replace("/^Upload:(.*)$/", getUploadFilePath()."\\1", $file);
+            $is_Upload = 1;
+        }
         $dir = getcwd();
-        chdir(PHPWIKI_DIR);
-	// sanify $file name
+        if (defined('PHPWIKI_DIR')) {
+            chdir(PHPWIKI_DIR);
+        }
 	if (!file_exists($file)) {
-	    trigger_error("file \"$file\" not found", E_USER_WARNING);
+	    if ($quiet)
+		return '';
+	    else
+		trigger_error("file \"$file\" not found", E_USER_WARNING);
 	}
+	// sanify $file name
 	$realfile = realpath($file);
-	if (!string_starts_with($realfile, realpath(getUploadDataPath())))
-	    return $this->error("invalid path \"$file\"");
-	else 
+	// Hmm, allow ADMIN to check a local file? Only if its locked
+	if (string_starts_with($realfile, realpath(getUploadDataPath()))) {
 	    $isuploaded = 1;
+	} else {
+	    $page = $dbi->getPage($basepage);
+	    $user = $request->getUser();
+	    if ($page->getOwner() != ADMIN_USER or !$page->get('locked')) {
+		// For convenience we warn the admin
+		if ($quiet and $user->isAdmin())
+		    return HTML::span(array('title' => _("Output suppressed. FileInfoPlugin with local files require a locked page.")),
+				      HTML::em(_("page not locked")));
+		else
+		    return $this->error("Invalid path \"$file\". Only ADMIN can allow local paths, and the page must be locked.");
+	    }
+	}
 	$s = array();
 	$modes = explode(",", $display);
 	foreach ($modes as $mode) {
@@ -84,20 +105,27 @@ extends WikiPlugin
 	    case 'phonysize':$s[] = $this->phonysize(filesize($file)); break;
 	    case 'date':     $s[] = strftime("%x %X", filemtime($file)); break;
 	    case 'mtime':    $s[] = filemtime($file); break;
+	    case 'owner':    $o = posix_getpwuid(fileowner($file)); $s[] = $o['name']; break;
+	    case 'group':    $o = posix_getgrgid(filegroup($file)); $s[] = $o['name']; break;
 	    case 'name':     $s[] = basename($file); break;
 	    case 'path':     $s[] = $file; break;
 	    case 'dirname':  $s[] = dirname($file); break;
 	    case 'magic':    $s[] = $this->magic($file); break;
 	    case 'mime-typ': $s[] = $this->mime_type($file); break;
 	    case 'link':    
-		if ($isuploaded) {
-		    $s[] = "[Upload:".basename($file)."]"; 
+		if ($is_Upload) {
+		    $s[] = " [".$args['file'] . "]"; 
+		} elseif ($isuploaded) {
+		    // will fail with user uploads
+		    $s[] = " [Upload:".basename($file)."]"; 
 		} else {
-		    $s[] = "[".basename($file)."]"; 
+		    $s[] = " [".basename($file)."] "; 
 		}
 		break;
 	    default:
-		return $this->error(sprintf(_("Unsupported argument: %s=%s"), 'display', $mode)); 
+		if (!$quiet)
+		    return $this->error(sprintf(_("Unsupported argument: %s=%s"), 'display', $mode)); 
+		else return '';
 		break;
 	    }
 	}
@@ -111,7 +139,7 @@ extends WikiPlugin
         $result = call_user_func_array("sprintf", $s);
 	if (in_array('link', $modes)) {
 	    require_once("lib/InlineParser.php");
-	    return TransformInline($result);
+	    return TransformInline($result, 2, $basepage);
 	} else {
 	    return $result;
 	}
@@ -282,7 +310,19 @@ struct VS_VERSIONINFO { struct VS_VERSIONINFO
 };
 
 /* 
- $Log: FileInfo.php,v $
+ $Log: not supported by cvs2svn $
+ Revision 1.8  2008/05/17 06:26:57  vargenau
+ Check PHPWIKI_DIR is defined
+
+ Revision 1.7  2007/08/25 18:06:05  rurban
+ fix Upload: links
+
+ Revision 1.6  2007/01/04 16:42:31  rurban
+ Add quiet argument. Allow local files if owner == ADMIN and page == locked.
+
+ Revision 1.5  2006/08/25 22:10:16  rurban
+ fix docs: FileVersion => FileInfo
+
  Revision 1.4  2005/10/29 14:18:47  rurban
  add display=phonysize
 

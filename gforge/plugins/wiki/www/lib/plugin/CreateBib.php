@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: CreateBib.php,v 1.1 2006/03/07 21:02:36 rurban Exp $');
+rcs_id('$Id: CreateBib.php 6185 2008-08-22 11:40:14Z vargenau $');
 /*
  Copyright 2004 $ThePhpWikiProgrammingTeam
 
@@ -42,7 +42,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.1 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -169,10 +169,7 @@ extends WikiPlugin
     }
 };
 
-// $Log: CreateBib.php,v $
-// Revision 1.1  2006/03/07 21:02:36  rurban
-// contributed by Lea Viljanen
-//
+// $Log: not supported by cvs2svn $
 // Based on CreateTOC
 
 // For emacs users

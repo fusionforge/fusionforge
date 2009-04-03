@@ -1,0 +1,14 @@
+<?php // -*-php-*- 
+rcs_id('$Id: signin.tmpl 6261 2008-09-14 10:37:29Z vargenau $');
+?>
+<!-- RecentChangesCached Box -->
+<div class="portlet" id="p-rc">
+  <h5><?= _("RecentChanges") ?> <?= $WikiTheme->folderArrow('p-rc', 'Closed') ?></h5>
+  <div class="pBody" id="p-rc-body" style="display:none;">
+<?php
+  require_once("lib/WikiTheme.php");
+  $box = new PluginSidebarBox("RecentChangesCached", array("limit"=>12));
+  printXml($box->format());
+?>
+  </div>
+</div>

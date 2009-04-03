@@ -1,7 +1,7 @@
 <?php // -*-php-*-
-rcs_id('$Id: PageType.php,v 1.45 2005/05/06 16:48:41 rurban Exp $');
+rcs_id('$Id: PageType.php 6184 2008-08-22 10:33:41Z vargenau $');
 /*
- Copyright 1999,2000,2001,2002,2003,2004,2005 $ThePhpWikiProgrammingTeam
+ Copyright 1999,2000,2001,2002,2003,2004,2005,2006 $ThePhpWikiProgrammingTeam
 
  This file is part of PhpWiki.
 
@@ -103,7 +103,7 @@ class PageType {
      * @param hash $meta Version meta-data
      * @return XmlContent The transformed page text.
      */
-    function transform($page, &$text, $meta) {
+    function transform(&$page, &$text, $meta) {
         $fmt_class = 'PageFormatter_' . $this->getName();
         $formatter = new $fmt_class($page, $meta);
         return $formatter->format($text);
@@ -118,10 +118,12 @@ class PageType_wikiblog extends PageType {}
 class PageType_comment extends PageType {}
 class PageType_wikiforum extends PageType {}
 
+class PageType_MediaWiki extends PageType {}
+
 /* To prevent from PHP5 Fatal error: Using $this when not in object context */
-function getInterwikiMap ($pagetext = false) {
+function getInterwikiMap ($pagetext=false, $force=false) {
     static $map;
-    if (empty($map))
+    if (empty($map) or $force)
         $map = new PageType_interwikimap($pagetext);
     return $map;
 }
@@ -167,6 +169,7 @@ class PageType_interwikimap extends PageType
     }
 
     function link ($link, $linktext = false) {
+	global $WikiTheme;
         list ($moniker, $page) = split (":", $link, 2);
         
         if (!isset($this->_map[$moniker])) {
@@ -175,11 +178,35 @@ class PageType_interwikimap extends PageType
         }
 
         $url = $this->_map[$moniker];
+	// localize Upload:links for WIKIDUMP
+	if (!empty($WikiTheme->DUMP_MODE) and $moniker == 'Upload') {
+	    global $request;
+	    include_once("lib/config.php");
+	    $url = getUploadFilePath();
+	    // calculate to a relative local path to /uploads for pdf images.
+	    $doc_root = $request->get("DOCUMENT_ROOT");
+    	    $ldir = NormalizeLocalFileName($url);
+            $wikiroot = NormalizeLocalFileName('');
+            if (isWindows()) {
+            	$ldir = strtolower($ldir);
+            	$doc_root = strtolower($doc_root);
+            	$wikiroot = strtolower($wikiroot);
+            }
+    	    if (string_starts_with($ldir, $doc_root)) {
+        	$link_prefix = substr($url, strlen($doc_root));
+    	    } elseif (string_starts_with($ldir, $wikiroot)) {
+        	$link_prefix = NormalizeWebFileName(substr($url, strlen($wikiroot)));
+	    }
+	}
         
         // Urlencode page only if it's a query arg.
         // FIXME: this is a somewhat broken heuristic.
-        $page_enc = strstr($url, '?') ? rawurlencode($page) : $page;
-
+        if ($moniker == 'Upload') {
+            $page_enc = $page;
+            $page = rawurldecode($page);
+        } else {
+            $page_enc = strstr($url, '?') ? rawurlencode($page) : $page;
+        }
         if (strstr($url, '%s'))
             $url = sprintf($url, $page_enc);
         else
@@ -187,7 +214,7 @@ class PageType_interwikimap extends PageType
 
         $link = HTML::a(array('href' => $url));
 
-        if (!$linktext) {
+	if (!$linktext) {
             $link->pushContent(PossiblyGlueIconToText('interwiki', "$moniker:"),
                                HTML::span(array('class' => 'wikipage'), $page));
             $link->setAttr('class', 'interwiki');
@@ -210,7 +237,7 @@ class PageType_interwikimap extends PageType
             $map[$m[1]] = $m[2];
         }
 
-        // Add virtual monikers Upload: Talk: User:
+        // Add virtual monikers: "Upload:" "Talk:" "User:", ":"
         // and expand special variables %u, %b, %d
 
         // Upload: Should be expanded later to user-specific upload dirs. 
@@ -224,6 +251,7 @@ class PageType_interwikimap extends PageType
         if (empty($map["User"])) {
             $map["User"] = "%s";
         }
+        // Talk:UserName => UserName/Discussion
         // Talk:PageName => PageName/Discussion as default, which might be overridden
         if (empty($map["Talk"])) {
             $pagename = $GLOBALS['request']->getArg('pagename');
@@ -255,10 +283,6 @@ class PageType_interwikimap extends PageType
                                              Iso8601DateTime());
         }
 
-        // Maybe add other monikers also - SemanticWeb link predicates
-        // Should they be defined in a RDF? (strict mode)
-        // Or should the SemanticWeb lib add it by itself? 
-        // (adding only a subset dependent on the context = model)
         return $map;
     }
 
@@ -316,7 +340,7 @@ class PageFormatter {
         // New policy: default = new markup (old crashes quite often)
     }
 
-    function _transform($text) {
+    function _transform(&$text) {
 	include_once('lib/BlockParser.php');
 	return TransformText($text, $this->_markup);
     }
@@ -342,10 +366,10 @@ class PageFormatter_wikitext extends PageFormatter
 class PageFormatter_interwikimap extends PageFormatter
 {
     function format($text) {
-        return HTML::div(array('class' => 'wikitext'), 
-                         $this->_transform($this->_getHeader($text)),
-                         $this->_formatMap($text),
-                         $this->_transform($this->_getFooter($text)));
+	return HTML::div(array('class' => 'wikitext'),
+			 $this->_transform($this->_getHeader($text)),
+			 $this->_formatMap($text),
+			 $this->_transform($this->_getFooter($text)));
     }
 
     function _getHeader($text) {
@@ -357,7 +381,7 @@ class PageFormatter_interwikimap extends PageFormatter
     }
     
     function _getMap($pagetext) {
-        $map = getInterwikiMap($pagetext);
+        $map = getInterwikiMap($pagetext, 'force');
         return $map->_map;
     }
     
@@ -502,7 +526,48 @@ class PageFormatter_pdf extends PageFormatter
         return $pdf;
     }
 }
-// $Log: PageType.php,v $
+
+class PageFormatter_MediaWiki extends PageFormatter
+{
+    function _transform(&$text) {
+	include_once('lib/BlockParser.php');
+	// Expand leading tabs.
+	$text = expand_tabs($text);
+
+        $input = new BlockParser_Input($text);
+        $output = $this->ParsedBlock($input);
+	return new XmlContent($output->getContent());
+    }
+
+    function format(&$text) {
+	return HTML::div(array('class' => 'wikitext'),
+			 $this->_transform($text));
+    }
+}
+
+
+// $Log: not supported by cvs2svn $
+// Revision 1.54  2007/09/12 19:35:29  rurban
+// Windows fix for local path detection
+//
+// Revision 1.53  2007/07/14 17:55:29  rurban
+// SemanticWeb.php
+//
+// Revision 1.52  2007/02/17 14:17:41  rurban
+// localize Upload:links for WIKIDUMP: esp. for pdf images
+//
+// Revision 1.51  2007/01/07 18:43:17  rurban
+// Disallow ":" as interwikmap and use it as proper LinkedBracket match.
+//
+// Revision 1.50  2007/01/04 16:44:57  rurban
+// Force interwiki updates and page edits
+//
+// Revision 1.49  2006/10/12 06:25:09  rurban
+// use the same class for $moniker == ""
+//
+// Revision 1.48  2006/10/08 12:38:11  rurban
+// New special interwiki link markup [:LinkTo] without storing the backlink
+//
 // Revision 1.47  2005/08/07 09:14:38  rurban
 // fix comments
 //

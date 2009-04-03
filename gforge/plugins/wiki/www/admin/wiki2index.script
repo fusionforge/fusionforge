@@ -1,0 +1,10 @@
+url     : field=url hash boolean=Q unique=Q
+title   : weight=3 index truncate=80 field=caption boolean=S
+date    : date=unix
+author  : field=author boolean=A
+language : field=language boolean=L
+headers : weight=2 index field=sample
+lastmod : field=lastmod value=1
+md5     : field=md5 value=2
+size    : field=size value=3
+content : index field=sample

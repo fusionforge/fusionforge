@@ -27,6 +27,7 @@
 	<message name="getRevisionResponse">
 		<part name="revision" type="xsd:double"/>
 	</message>
+
 	<message name="getPageMeta">
 		<part name="pagename" type="typens:PageMetadata"/>
 		<part name="credentials" type="typens:Credentials"/>
@@ -58,14 +59,78 @@
 		<part name="query" type="xsd:string"/>
 		<part name="credentials" type="typens:Credentials"/>
 	</message>
+	<message name="getRecentChanges">
+		<part name="limit" type="xsd:int"/>
+		<part name="since" type="xsd:int"/>
+		<part name="include_minor" type="xsd:int"/>
+		<part name="credentials" type="typens:Credentials"/>
+	</message>
+	<message name="listLinks">
+		<part name="pagename" type="xsd:string"/>
+		<part name="credentials" type="typens:Credentials"/>
+	</message>
+	<message name="listPlugins">
+		<part name="credentials" type="typens:Credentials"/>
+	</message>
+	<message name="callPlugin">
+		<part name="pluginname" type="xsd:string"/>
+		<part name="pluginargs" type="xsd:string"/>
+		<part name="credentials" type="typens:Credentials"/>
+	</message>
+	<message name="getPluginSynopsis">
+		<part name="pluginname" type="xsd:string"/>
+		<part name="credentials" type="typens:Credentials"/>
+	</message>
+	<message name="listRelations">
+		<part name="option" type="xsd:int"/>
+		<part name="credentials" type="typens:Credentials"/>
+	</message>
+	<message name="linkSearch">
+		<part name="linktype"  type="xsd:string"/>
+		<part name="search"    type="xsd:string"/>
+		<part name="pages"     type="xsd:string"/>
+		<part name="relation"  type="xsd:string"/>
+		<part name="credentials" type="typens:Credentials"/>
+	</message>
 
 	<message name="PagenameListResponse">
 		<part name="content" type="xsd:PagenameList"/>
 	</message>
+	<message name="RecentChangesResponse">
+		<part name="content" type="xsd:RecentChangesList"/>
+	</message>
+	<message name="StringListResponse">
+		<part name="content" type="xsd:StringList"/>
+	</message>
+	<message name="LinkSearchResponse">
+		<part name="content" type="xsd:RdfTripleList"/>
+	</message>
+	<message name="StringResponse">
+		<part name="content" type="xsd:string"/>
+	</message>
 
         <xsd:complexType name="PagenameList">
-          <xsd:all> 
+            <xsd:all> 
 		<part name="pagename" type="xsd:string"/>
+            </xsd:all>
+        </xsd:complexType> 
+        <xsd:complexType name="RdfTripleList">
+            <xsd:all> 
+		<part name="pagename" type="xsd:string"/>
+		<part name="relation" type="xsd:string"/>
+		<part name="target"   type="xsd:string"/>
+            </xsd:all>
+        </xsd:complexType> 
+        <xsd:complexType name="StringList">
+            <xsd:all type="xsd:string" /> 
+        </xsd:complexType> 
+        <xsd:complexType name="RecentChangesList">
+            <xsd:all>
+		<part name="pagename"     type="xsd:string"/>
+		<part name="lastModified" type="xsd:int"/>
+		<part name="author"       type="xsd:string"/>
+		<part name="summary"      type="xsd:string"/>
+		<part name="version"      type="xsd:int"/>
             </xsd:all>
         </xsd:complexType> 
         <xsd:complexType name="Credentials">
@@ -112,6 +177,34 @@
 		<operation name="doFullTextSearch">
 			<input message="tns:doFullTextSearch"/>
 			<output message="tns:PagenameListResponse"/>
+		</operation>
+		<operation name="getRecentChanges">
+			<input message="tns:getRecentChanges"/>
+			<output message="tns:RecentChangesResponse"/>
+		</operation>
+		<operation name="listLinks">
+			<input message="tns:listLinks"/>
+			<output message="tns:PagenameListResponse"/>
+		</operation>
+		<operation name="listPlugins">
+			<input message="tns:listPlugins"/>
+			<output message="tns:StringListResponse"/>
+		</operation>
+		<operation name="callPlugin">
+			<input message="tns:callPlugin"/>
+			<output message="tns:PagenameListResponse"/>
+		</operation>
+		<operation name="getPluginSynopsis">
+			<input message="tns:getPluginSynopsis"/>
+			<output message="tns:StringResponse"/>
+		</operation>
+		<operation name="listRelations">
+			<input message="tns:listRelations"/>
+			<output message="tns:StringListResponse"/>
+		</operation>
+		<operation name="linkSearch">
+			<input message="tns:callPlugin"/>
+			<output message="tns:LinkSearchResponse"/>
 		</operation>
 	</portType>
 

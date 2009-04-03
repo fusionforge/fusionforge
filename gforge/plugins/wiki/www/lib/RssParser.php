@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: RssParser.php,v 1.11 2005/04/10 10:24:58 rurban Exp $');
+rcs_id('$Id: RssParser.php 6184 2008-08-22 10:33:41Z vargenau $');
 /**
  * Simple RSSParser Class
  * Based on Duncan Gough RSSParser class
@@ -175,11 +175,7 @@ extends XmlParser {
     }
 }
 
-// $Log: RssParser.php,v $
-// Revision 1.11  2005/04/10 10:24:58  rurban
-// fix for RSS feeds without detailled <item> tags:
-//   just list the <items> urls then (Bug #1180027)
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.10  2005/01/22 11:45:09  rurban
 // docs
 //

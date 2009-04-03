@@ -1,5 +1,5 @@
 <?php
-rcs_id('$Id: Captcha.php,v 1.5 2005/10/31 16:44:13 rurban Exp $');
+rcs_id('$Id: Captcha.php 6184 2008-08-22 10:33:41Z vargenau $');
 /**
   Session Captcha v1.0
     by Gavin M. Roy <gmr@bteg.net>
@@ -59,13 +59,13 @@ class Captcha {
             $el['CAPTCHA_INPUT']
                 = HTML::input(array('type'  => 'text',
                                     'class' => 'wikitext',
-                                    'id'    => 'edit:captcha_input',
+                                    'id'    => 'edit-captcha_input',
                                     'name'  => 'edit[captcha_input]',
                                     'size'  => $this->length + 2,
                                     'maxlength' => 256));
             $url = WikiURL("", array("action"=>"captcha","id"=>time()), false);
             $el['CAPTCHA_IMAGE'] = "<img src=\"$url\" alt=\"captcha\" />";
-            $el['CAPTCHA_LABEL'] = '<label for="edit:captcha_input">'._("Type word above:").' </label>';
+            $el['CAPTCHA_LABEL'] = '<label for="edit-captcha_input">'._("Type word above:").' </label>';
         }
         return $el;
     }
@@ -175,7 +175,7 @@ class Captcha {
 
 }
 
-// $Log: Captcha.php,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.5  2005/10/31 16:44:13  rurban
 // fallback to PNG or GIF if JPEG support does not exist
 //

@@ -82,6 +82,7 @@ if (!empty($HTTP_SERVER_VARS) and $HTTP_SERVER_VARS["SERVER_NAME"] == 'phpwiki.s
 // available database backends to test:
 $database_backends = array(
                            'file',
+                           'flatfile', // not yet committed
                            'dba',
                            'SQL',   // default backend defined in the config.ini DSN
                            'ADODB', // same backend as defined in the config.ini DSN
@@ -99,7 +100,7 @@ if ((int)substr(phpversion(), 1) >= 5)
 //TODO: convert cvs test                           
 // For "cvs" see the seperate tests/unit_test_backend_cvs.php (cvs is experimental)
 //TODO: read some database values from config.ini, just use the "test_" prefix
-// "flatfile" testing occurs in "tests/unit/.testbox/"
+// "flatfile" testing occurs in "tests/unit/.testbox/flatfile"
 // "dba" needs the DATABASE_DBA_HANDLER, also in the .textbox directory
 //$database_dba_handler = (substr(PHP_OS,0,3) == 'WIN') ? "db3" : "gdbm";
 // "SQL" and "ADODB" need delete permissions to the test db
@@ -204,6 +205,7 @@ function purge_testbox() {
     $dir = $DBParams['directory'];
     switch ($DBParams['dbtype']) {
     case 'file':
+    case 'flatfile':
         assert(!empty($dir));
         foreach (array('latest_ver','links','page_data','ver_data') as $d) {
             purge_dir("$dir/$d");
@@ -212,7 +214,7 @@ function purge_testbox() {
     case 'SQL':
     case 'ADODB':
     case 'PDO':
-        foreach ($dbi->_backend->_table_names as $table) {
+        foreach (array_reverse($dbi->_backend->_table_names) as $table) {
             $dbi->genericSqlQuery("DELETE FROM $table");
         }
         break;
@@ -242,22 +244,27 @@ function html_option_form() {
 
     $form = HTML();
     $option = HTML::div(array('class' => 'option'), 
-                        HTML::span(array('style'=>'font-weight: bold','onDblClick'=>'flipAll(\'test[\')'), 'test: '),
+                        HTML::span(array('title' => 'doubleclick to (un)select all', 'style'=>'font-weight: bold; padding: 1px; border: 2px outset;','onDblClick'=>'flipAll(\'test[\')'), 
+                                   ' test: '),
                         HTML::br());
+    $i = 0;
     foreach ($GLOBALS['alltests'] as $s) {
-        $input = array('type' => 'checkbox', 'name' => 'test['.$s.']', 'value' => '1');
+        $id = preg_replace("/\W/", "", $s) . $i++;
+        $input = array('type' => 'checkbox', 'name' => 'test['.$s.']', 'value' => '1', 'id' => $id);
         if (in_array($s,$GLOBALS['runtests'])) $input['checked'] = 'checked';
-        $option->pushContent(HTML::input($input), $s, HTML::br());
+        $option->pushContent(HTML::input($input), HTML::label(array('for' => $id), $s), HTML::br());
     }
     $form->pushContent(HTML::td($option));
 
     $option = HTML::div(array('class' => 'option'), 
-                        HTML::span(array('style'=>'font-weight: bold','onDblClick'=>'flipAll(\'db[\')'), 'db: '),
+                        HTML::span(array('title' => 'doubleclick to (un)select all', 'style'=>'font-weight: bold; padding: 1px; border: 2px outset;', 'onDblClick'=>'flipAll(\'db[\')'), 
+                                   ' db: '),
                         HTML::br());
     foreach ($GLOBALS['database_backends'] as $s) {
-        $input = array('type' => 'checkbox', 'name' => 'db['.$s.']', 'value' => '1');
+        $id = preg_replace("/\W/", "", $s) . $i++;
+        $input = array('type' => 'checkbox', 'name' => 'db['.$s.']', 'value' => '1', 'id' => $id);
         if (in_array($s,$GLOBALS['run_database_backends'])) $input['checked'] = 'checked';
-        $option->pushContent(HTML::input($input), $s, HTML::br());
+        $option->pushContent(HTML::input($input), HTML::label(array('for' => $id), $s), HTML::br());
     }
     $form->pushContent(HTML::td($option));
 
@@ -296,9 +303,9 @@ function updateLevelEdit(formObj) {
    }
 }");
     $option = HTML::div(array('class' => 'option'),
-                        HTML::span(array('style'=>'font-weight: bold',
+                        HTML::span(array('title' => 'doubleclick to (un)select all', 'style'=>'font-weight: bold; padding: 1px; border: 2px outset;',
                                          'onDblClick'=>'flipAll(\'_debug[\')'), 
-                                   'debug: '),
+                                   ' debug: '),' ',
                         HTML::input(array('name'=>'debug','id'=>'debug',
                                           'value'=>$debug_level,'size'=>5)),
                         HTML::br());
@@ -310,16 +317,18 @@ function updateLevelEdit(formObj) {
                    'APD' 	=> 32,
                    'LOGIN' 	=> 64,
                    'SQL' 	=> 128,
+                   'REMOTE' 	=> 256,
                    ) as $s => $v) {
-        $input = array('type' => 'checkbox', 'name' => '_debug[]', 'value' => $v, 
+        $id = preg_replace("/\W/", "", $s) . $i++;
+        $input = array('type' => 'checkbox', 'name' => '_debug[]', 'value' => $v, 'id' => $id,
                        'onClick' => 'updateDebugEdit(this.form)');
         if ($debug_level & $v) $input['checked'] = 'checked';
-        $option->pushContent(HTML::input($input), "_DEBUG_".$s, HTML::br());
+        $option->pushContent(HTML::input($input), HTML::label(array('for' => $id), "_DEBUG_".$s), HTML::br());
     }
     $form->pushContent(HTML::td($option));
 
     $option = HTML::div(array('class' => 'option'), 
-                        HTML::span(array('style'=>'font-weight: bold'), "level: "),
+                        HTML::span(array('style'=>'font-weight: bold;'), "level: "),
                         HTML::input(array('name'=>'level','id'=>'level',
                                           'value'=>$user_level,'size'=>5)),
                         HTML::br());
@@ -330,10 +339,11 @@ function updateLevelEdit(formObj) {
                    'ADMIN' 	=> 10,
                    'UNOBTAINABLE'=> 100,
                    ) as $s => $v) {
-        $input = array('type' => 'radio', 'name' => '_level[]', 'value' => $v,
+        $id = preg_replace("/\W/", "", $s) . $i++;
+        $input = array('type' => 'radio', 'name' => '_level[]', 'value' => $v, 'id' => $id,
                        'onClick' => 'updateLevelEdit(this.form)');
         if ($user_level & $v) $input['checked'] = 'checked';
-        $option->pushContent(HTML::input($input), "WIKIAUTH_".$s, HTML::br());
+        $option->pushContent(HTML::input($input), HTML::label(array('for' => $id), "WIKIAUTH_".$s), HTML::br());
     }
     $form->pushContent(HTML::td($option));
 
@@ -343,7 +353,7 @@ function updateLevelEdit(formObj) {
       foreach ($GLOBALS['define'] as $s) {
         if (defined($s)) {
             $input = array('type' => 'edit', 'name' => $s, 'value' => constant($s));
-            $option->pushContent(HTML::input($input), $s, HTML::br());
+            $option->pushContent(HTML::input($input), HTML::label(array('for' => $id), $s), HTML::br());
         }
     }
     if (!empty($input))
@@ -381,12 +391,15 @@ $debug_level = 1; //was 9, _DEBUG_VERBOSE | _DEBUG_TRACE
 $user_level  = 1; // BOGO (conflicts with RateIt)
 // use argv (from cli) or tests (from browser) params to run only certain tests
 // avoid pear: Console::Getopt
-$alltests = array('InlineParserTest','HtmlParserTest',
-                  'PageListTest','ListPagesTest',
+$alltests = array(/* valid tests without clean virgin setup */
+                  'InlineParserTest','HtmlParserTest',
+                  'PageListTest','ListPagesTest','XmlRpcTest',
+                  /* virgin setup */
                   'SetupWiki',
+                  /* valid tests only with clean virgin setup */
                   'AllPagesTest','AllUsersTest','OrphanedPagesTest',
-                  'WantedPagesTest',
-                  'TextSearchTest','IncludePageTest',
+                  'WantedPagesTest','TextSearchTest','IncludePageTest',
+                  /* final tests which require all valid pages and consumes > 32MB */
                   'DumpHtml');
 // support db=file db=dba test=SetupWiki test=DumpHtml debug=num -dconstant=value
 // or  db=file,dba test=SetupWiki,DumpHtml debug=num -dconstant=value
@@ -593,7 +606,14 @@ foreach ($run_database_backends as $dbtype) {
 	$DBParams['dsn'] = preg_replace("/^([^:]+):/", substr($dbtype, 4).":", $DBParams['dsn']);
         echo "dsn: ",$DBParams['dsn'],"\n";
     }
+    // sqlite fix: 
+    if (preg_match('/sqlite$/', $dbtype)) {
+	$DBParams['dsn'] = preg_replace("/127\.0\.0\.1/", '', $DBParams['dsn']);
+        echo "dsn: ",$DBParams['dsn'],"\n";
+    }
     $DBParams['directory']            = $cur_dir . '/.testbox';
+    if ($dbtype == 'flatfile')
+        $DBParams['directory']        = $cur_dir . '/.testbox/flatfile';
     $DBParams['prefix']               = $database_prefix;
     // from config.ini
     //$DBParams['dba_handler']          = $database_dba_handler;
@@ -638,6 +658,20 @@ foreach ($run_database_backends as $dbtype) {
 
 if (isset($HTTP_SERVER_VARS['REQUEST_METHOD']))
     echo "</pre>\n";
+
+// $Log: not supported by cvs2svn $
+// Revision 1.46  2007/01/21 12:26:38  rurban
+// Improve UI (label, button)
+//
+// Revision 1.45  2007/01/04 16:48:15  rurban
+// Do sqlite
+//
+// Revision 1.44  2006/12/23 11:44:56  rurban
+// deal with strict references and the order of deletion
+//
+// Revision 1.43  2006/06/05 09:35:02  rurban
+// add experimental backend flatfile, minor fixes
+//
 
 // (c-file-style: "gnu")
 // Local Variables:

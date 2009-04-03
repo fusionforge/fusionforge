@@ -1,25 +1,24 @@
 <?php // -*-php-*- ?>
 <?= Template("default/info") ?>
 
-<div id="actionbuttons">
-    <ul>
+<div align="center">
+    <p>
     <?= Button("viewsource", _("View Source")) ?>
-    <?=$SEP?><?= Button("PageHistory", _("PageHistory")) ?></li>
-    <?=$SEP?><?= Button("AuthorHistory", _("AuthorHistory")) ?></li>
-    <?=$SEP?><?= Button("Diff") ?></li>
-    <?=$SEP?><?= Button(array('action'=>'diff','previous' => 'minor'),_("Diff previous Revision"),$page->getName()) ?></li>
-    <?=$SEP?><?= Button(array('action'=>'diff','previous' => 'author'),_("Diff previous Author"),$page->getName()) ?></li>
-    <?=$SEP?><?= Button("PageDump", _("PageDump")) ?></li>
+    <?=$SEP?><?= Button("PageHistory", _("PageHistory")) ?>
+    <?=$SEP?><?= Button("Diff") ?>
+    <?=$SEP?><?= Button(array('action'=>'diff','previous' => 'minor'),_("Diff previous Revision"),$page->getName()) ?>
+    <?=$SEP?><?= Button(array('action'=>'diff','previous' => 'author'),_("Diff previous Author"),$page->getName()) ?>
+    <?=$SEP?><?= Button("PageDump", _("PageDump")) ?>
   <?php if ((defined('DEBUG') && DEBUG) || $user->isAdmin()) { ?>
     <!-- Buttons really only for debugging -->
-    <?=$SEP?><?= Button("DebugInfo", _("DebugInfo")) ?></li>
+    <?=$SEP?><?= Button("DebugInfo", _("DebugInfo")) ?>
 <?php
     $PurgeCache = Button(array('nocache' => 'purge'),
                      _("PurgeHtmlCache"), $page->getName());
     $PurgeCache->addTooltip(_("Purge HTML cache for this page. Regenerate from WikiMarkup when next accessed."));
 ?>
-    <?=$SEP?><?= $PurgeCache ?></li>
-    </ul>
+    <?=$SEP?><?= $PurgeCache ?>
+    </p>
     <!-- End debugging buttons -->
   <?php } ?>
 </div>

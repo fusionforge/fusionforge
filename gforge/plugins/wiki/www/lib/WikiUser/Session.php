@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-rcs_id('$Id: Session.php,v 1.3 2004/12/26 17:11:17 rurban Exp $');
+rcs_id('$Id: Session.php 6184 2008-08-22 10:33:41Z vargenau $');
 /* Copyright (C) 2004 ReiniUrban
  * This file is part of PhpWiki. Terms and Conditions see LICENSE. (GPL2)
  */
@@ -55,10 +55,7 @@ extends _PassUser
     }
 }
 
-// $Log: Session.php,v $
-// Revision 1.3  2004/12/26 17:11:17  rurban
-// just copyright
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.2  2004/12/19 00:58:02  rurban
 // Enforce PASSWORD_LENGTH_MINIMUM in almost all PassUser checks,
 // Provide an errormessage if so. Just PersonalPage and BogoLogin not.

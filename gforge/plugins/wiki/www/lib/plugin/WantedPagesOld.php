@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: WantedPagesOld.php,v 1.1 2004/11/20 11:28:49 rurban Exp $');
+rcs_id('$Id: WantedPagesOld.php 6185 2008-08-22 11:40:14Z vargenau $');
 /*
  This file is part of PhpWiki.
 
@@ -39,7 +39,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.1 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -217,15 +217,7 @@ extends WikiPlugin
     }
 };
 
-// $Log: WantedPagesOld.php,v $
-// Revision 1.1  2004/11/20 11:28:49  rurban
-// fix a yet unused PageList customPageListColumns bug (merge class not decl to _types)
-// change WantedPages to use PageList
-// change WantedPages to print the list of referenced pages, not just the count.
-//   the old version was renamed to WantedPagesOld
-//   fix and add handling of most standard PageList arguments (limit, exclude, ...)
-// TODO: pagename sorting, dumb/WantedPagesIter and SQL optimization
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.12  2004/10/04 23:39:34  rurban
 // just aesthetics
 //

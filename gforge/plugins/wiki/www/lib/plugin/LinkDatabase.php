@@ -1,7 +1,7 @@
 <?php // -*-php-*-
-rcs_id('$Id: LinkDatabase.php,v 1.7 2004/12/26 17:17:25 rurban Exp $');
+rcs_id('$Id: LinkDatabase.php 6185 2008-08-22 11:40:14Z vargenau $');
 /**
- Copyright 2004 $ThePhpWikiProgrammingTeam
+ Copyright 2004,2007 $ThePhpWikiProgrammingTeam
 
  This file is part of PhpWiki.
 
@@ -33,6 +33,7 @@ require_once('lib/WikiPluginCached.php');
  *
  * TODO: Currently the meta-head tags disturb the touchgraph java browser a bit. 
  * Maybe add a theme without that much header tags.
+ * DONE: Convert " " to %20
  */
 class WikiPlugin_LinkDatabase
 extends WikiPluginCached
@@ -48,7 +49,7 @@ extends WikiPluginCached
     }
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.7 $");
+                            "\$Revision: 6185 $");
     }
     function getExpire($dbi, $argarray, $request) {
         return '+900'; // 15 minutes
@@ -100,7 +101,8 @@ extends WikiPluginCached
         } else {
             if (! $request->getArg('count'))  
                 $args['count'] = $dbi->numPages($args['include_empty'], $args['exclude_from']);
-            else $args['count'] = $request->getArg('count');
+            else 
+                $args['count'] = $request->getArg('count');
             $pages = $dbi->getAllPages($args['include_empty'], $args['sortby'], 
                                        $args['limit'], $args['exclude_from']);
         }
@@ -108,7 +110,9 @@ extends WikiPluginCached
             $args['types']['links'] = 
                 new _PageList_Column_LinkDatabase_links('links', _("Links"), 'left');
             $pagelist = new PageList($args['info'], $args['exclude_from'], $args);
+            //$pagelist->_addColumn("links");
             if (!$args['noheader']) $pagelist->setCaption($caption);
+            $pagelist->addPages($pages);
             return $pagelist;
         } elseif ($args['format'] == 'text') {
             $request->discardOutput();
@@ -117,11 +121,11 @@ extends WikiPluginCached
                 header("Content-Type: text/plain");
             $request->checkValidators();
             while ($page = $pages->next()) {
-                echo $page->getName();
+                echo preg_replace("/ /","%20",$page->getName());
                 $links = $page->getPageLinks(false, $args['sortby'], $args['limit'], 
                                              $args['exclude']);
                 while ($link = $links->next()) {
-                    echo " ", $link->getName();
+                    echo " ", preg_replace("/ /","%20",$link->getName());
                 }
                 echo "\n";
             }
@@ -182,7 +186,7 @@ class _PageList_Column_LinkDatabase_links extends _PageList_Column {
     }
 }
 
-// $Log: LinkDatabase.php,v $
+// $Log: not supported by cvs2svn $
 // Revision 1.7  2004/12/26 17:17:25  rurban
 // announce dumps - mult.requests to avoid request::finish, e.g. LinkDatabase, PdfOut, ...
 //

@@ -1,5 +1,5 @@
 /**
- * $Id: Hawaiian.css,v 1.27 2004/05/14 10:52:44 rurban Exp $
+ * $Id: Hawaiian.css 6469 2009-01-31 12:24:13Z vargenau $
  *
  * This incarnation of this stylesheet is a complete rewrite from the
  * ground up. It has not yet been tested against NS4.
@@ -8,13 +8,6 @@
  * tool for mapping the more complex CSS node selectors, such as those
  * used to reference the various CalendarPlugin elements.
  */
-
-/**
- * NS4 doesn't grok @import.  This allows us to put things which
- * break NS4 in another file. As of OmniWeb 4.1, OW now @imports :-(
- */
-@import url(Hawaiian-heavy.css);
-
 
 /**
  * General
@@ -426,6 +419,131 @@ div.errors {
 
 .clear-floats {
   clear: both;
+}
+
+/**
+ * Search Results
+ */
+.search-context { background: white; font-style: oblique; }
+.search-term {
+  background: yellow;
+  font-weight: normal;
+}
+#LSResult {
+  position: absolute;
+  text-align: left;
+  display: none;
+  z-index: 100;
+  background-color: white;
+  border: 1px solid #d0d0d0; 
+  font-size: 9px;
+  overflow: hidden;
+}
+#LSHighlight {
+  background-color: #f08000;
+}
+#LSResult .evenrow {
+  background-color: #f0f0f0;
+} 
+#LSREsult .oddrow {
+} 
+.LSEnd {
+  text-align: right;
+}
+.LSRow:hover {
+  background-color: white;
+}
+.LSRow {
+  padding: 1px;
+} 
+ul.LSRes {
+  margin: 0px;
+  padding: 0px;
+}
+li.LSRow {
+  margin: 0px;
+  list-style-image: none;
+}
+
+/* This makes spacings in NS4 too big. */
+.toolbar, div.toolbar { margin: 0.5ex 0ex; }
+
+/* Link icons */
+img.linkicon { vertical-align: middle; }
+
+
+/* This break NS4 (display does not go full width), but is necessary for IE4. */
+div.wikitext {
+  width: auto;
+  /* NS4 doesn't know about png with transparency so it renders the whole image solid black */
+  background: url("images/tchecker-white.png") repeat;
+}
+.wiki-edithelp {
+  /* NS4 doesn't know about png with transparency so it renders the whole image solid black */
+  background: url("images/tchecker-sand.png") repeat;
+}
+.wiki-edithelp p {
+  /* NS4 doesn't know about png with transparency so it renders the whole image solid black */
+  background: url("images/tchecker-white.png") repeat;
+}
+
+
+/**
+ * Diff Output
+ */
+.diff .block div { position: relative; padding-left: 1.5em; } 
+.diff .prefix    { position: absolute; left: 0.5em; top: 0; }
+
+
+/**
+ * Other
+ */
+div.errors {
+  /* NS4 doesn't know about png with transparency so it renders the whole image solid black */
+  background: url("images/tchecker-sand.png") repeat;
+}
+.debug {
+  /* NS4 doesn't know about png with transparency so it renders the whole image solid black */
+  background: url("images/tchecker-sand.png") repeat;
+}
+
+/*
+ * table class="boxed"
+ * will put a border around the table (but not around the cells)
+ *
+ * table class="bordered"
+ * will put a border around the table and the cells
+ *
+ * In both cases, the caption will be bold and centered under the table
+ *
+ * In both cases, the headers (th) will have a "#d8d8d8" background
+ */
+
+table.boxed, table.bordered, table.bordered th, table.bordered td {
+    border-width: 1px;
+    border-style: solid;
+    border-collapse: collapse;
+    vertical-align: top;
+}
+
+table.boxed td, table.bordered td,
+table.boxed th, table.bordered th {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+table.boxed caption, table.bordered caption {
+    text-align: center;
+    font-weight: bold;
+    caption-side: bottom;
+    padding-top: 0.8em;
+}
+
+table.boxed th, table.bordered th {
+    font-weight: bold;
+    background-color: #d8d8d8;
 }
 
 /* For emacs users

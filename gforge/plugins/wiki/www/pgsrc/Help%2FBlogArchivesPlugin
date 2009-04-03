@@ -1,0 +1,50 @@
+Date: Sat, 24 Jan 2009 20:18:24 +0100
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
+X-Rcs-Id: $Id: Help%2FBlogArchivesPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FBlogArchivesPlugin;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=iso-8859-1
+Content-Transfer-Encoding: binary
+
+The *~BlogArchives* [[Help:WikiPlugin|plugin]] lists monthly links for the current users blog if signed, or the ADMIN_USER's blog if not.
+
+== Usage
+
+<verbatim>
+<?plugin BlogArchives ?>
+</verbatim>
+
+== Arguments
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| <b>user</b>
+| Blog of given user
+| empty
+|-
+| <b>month</b>
+| List the blog titles per month
+| empty
+|}
+
+== Example
+
+<verbatim>
+<?plugin BlogArchives ?>
+</verbatim>
+
+<?plugin BlogArchives ?>
+
+== Author
+* [Reini Urban|PhpWiki:ReiniUrban]
+
+== See Also
+
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]

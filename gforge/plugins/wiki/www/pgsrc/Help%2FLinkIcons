@@ -1,0 +1,64 @@
+Date: Sat, 24 Jan 2009 20:18:24 +0100
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
+X-Rcs-Id: $Id: Help%2FLinkIcons 6451 2009-01-24 21:40:21Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FLinkIcons;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=iso-8859-1
+Content-Transfer-Encoding: binary
+
+~LinkIcons are an optional new feature of PhpWiki. When activated,
+icons will be displayed in front of URLs to indicate the type of link.
+
+* [themes/default/images/http.png]
+  http link
+* [themes/default/images/url.png]
+  generic internet link
+* [themes/default/images/interwiki.png]
+  InterWiki link
+* [themes/default/images/https.png]
+  https link
+* [themes/default/images/mailto.png]
+  mailto link
+* [themes/default/images/ftp.png]
+  ftp link
+
+__Note__: Some of the default icons use the alpha channel feature of
+the [PNG | http://www.libpng.org/pub/png/png-sitemap.html] image format
+for smooth rendering on any page color or textured background. Older
+browsers may not display all the images properly.
+
+== Examples
+
+The following examples will display with the above link icons only if
+the administrator has enabled this feature.
+
+=== InterWiki links
+
+* InterWiki link PhpWiki:InterWiki
+* A named InterWiki [read WhyWikiWorks at c2|Wiki:WhyWikiWorks].
+
+===URLs
+
+* Email address [PhpWiki-talk mailing list|mailto:phpwiki-talk@lists.sourceforge.net]
+* Normal http link [PhpWiki's Home Page|http://phpwiki.sourceforge.net/phpwiki/]
+* Secure http link [PhpWiki's Home Page|https://phpwiki.sourceforge.net/phpwiki/]
+* File transfer ftp://ftp.sourceforge.net/
+
+''A generic icon is shown for other less common link types.''
+
+* news://nntp.news.com
+* gopher://gopher.caltech.cmu.edu
+
+~LinkIcons will only display when the URL protocol is one which PhpWiki
+is allowed to link to. The following examples won't show any icons and
+PhpWiki won't automatically provide double-clickable links either,
+unless the administrator adds them:
+
+* bogus://oedipus.nostradamus.com
+* bolo://lgm.cheshire.org
+
+----
+
+[[PhpWikiDocumentation]]

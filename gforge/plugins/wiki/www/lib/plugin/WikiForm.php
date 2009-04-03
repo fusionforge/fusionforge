@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: WikiForm.php,v 1.16 2004/07/01 13:14:01 rurban Exp $');
+rcs_id('$Id: WikiForm.php 6185 2008-08-22 11:40:14Z vargenau $');
 /**
  Copyright 1999, 2000, 2001, 2002, 2004 $ThePhpWikiProgrammingTeam
 
@@ -36,7 +36,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.16 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -122,10 +122,7 @@ extends WikiPlugin
     }
 };
 
-// $Log: WikiForm.php,v $
-// Revision 1.16  2004/07/01 13:14:01  rurban
-// desc only
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.15  2004/06/22 07:12:49  rurban
 // removed USE_TAGLINES constant
 //

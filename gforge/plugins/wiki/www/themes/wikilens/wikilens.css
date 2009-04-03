@@ -1,0 +1,56 @@
+/**
+ * $Id: wikilens.css 6204 2008-08-26 15:12:03Z vargenau $
+ * We have two possibilities to override the default:
+ * 1. import is ns4 incompatible
+ * 2. add a 2nd css in themeinfo.php
+ */
+
+@import url(../default/phpwiki.css);
+
+/**
+ * WikiLens overrides
+ */
+body {
+  /* ivory #ffe #fffff0*/
+  background: #FEFEFE;
+  font-size: 90%; /* The default is too large. But enlarge monospace below */
+  margin: 0;
+}
+
+div.wikitext {
+  margin-top:    0px;
+  margin-bottom: 0px;
+  background: #FEFEFE;
+}
+
+td.leftnav {
+  background: #F3F3F7;
+  padding: 8px;
+  /* "paper" borders */
+  padding-left:  0.3em;
+  padding-right: 0.2em;
+  padding-top:    0.5ex;
+  padding-bottom: 0.5ex;
+  margin: 0px;
+  border-right: 1px lavender solid;
+  border-bottom: 1px lavender solid;
+  width: fixed;
+}
+
+#logo img {
+  margin: 0;
+  float: left;
+  border: 0;
+}
+
+#toolbar {
+  margin: 1.5ex 1em 0 1em;
+}
+
+/* For emacs users
+ *
+ * Local Variables:
+ * mode: c
+ * c-file-style: cc-mode
+ * End:
+ */

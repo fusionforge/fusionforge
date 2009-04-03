@@ -1,9 +1,8 @@
-Date: Sun, 27 Jan 2002 17:28:55 -0500
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.2-jeffs-hacks)
-X-Rcs-Id: $Id: PhpWiki,v 1.6 2002/12/29 00:32:34 carstenklapp Exp $
+Date: Sat, 24 Jan 2009 20:18:24 +0100
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
+X-Rcs-Id: $Id: PhpWiki 6451 2009-01-24 21:40:21Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=PhpWiki;
-  pgsrc_version="2 $Revision: 1.6 $";
   flags="";
   markup=2;
   charset=iso-8859-1
@@ -16,5 +15,4 @@ in action at http://phpwiki.sourceforge.net/phpwiki/ (and of course
 here too :-)).
 
 ----
-
-PhpWikiDocumentation
+[[PhpWikiDocumentation]]

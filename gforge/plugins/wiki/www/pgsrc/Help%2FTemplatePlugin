@@ -1,0 +1,136 @@
+Date: Sat, 24 Jan 2009 20:18:24 +0100
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
+X-Rcs-Id: $Id: Help%2FTemplatePlugin 6451 2009-01-24 21:40:21Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FTemplatePlugin;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=iso-8859-1
+Content-Transfer-Encoding: binary
+
+The *Template* [[Help:WikiPlugin|plugin]] allows to include text from a wiki page and replace certain placeholders by parameters.
+
+A template can be seen as a parametrized block. It is similiar to [CreatePage] with the template argument, but at run-time.
+
+There are two syntaxes to call a template, the usual Phpwiki syntax for plugins, and a more
+concise syntax similar to Mediawiki templates.
+
+== Usage
+
+<verbatim>
+<?plugin Template page=Templates/Footer?>
+<?plugin Template page=Templates/Film vars="title=SomeFilm&year=1999" ?>
+{{Templates/Film|title=SomeFilm|year=1999}}
+</verbatim>
+
+With a specific revision of the page:
+<verbatim>
+<?plugin Template page=somepage rev=5 ?>
+{{somepage?version=5}}
+</verbatim>
+
+If ENABLE_MARKUP_TEMPLATE is true, we support a Mediawiki-style syntax extension which maps
+<verbatim>
+{{TemplateFilm|title=Some Good Film|year=1999}}
+</verbatim>
+to
+<verbatim>
+<?plugin Template page=TemplateFilm vars="title=Some Good Film&year=1999" ?>
+</verbatim>
+
+== Arguments
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| <b>page</b>
+| pagename to be included as template
+| (empty)
+|-
+| <b>vars</b>
+| optional parameters to be expanded inside the template
+| (empty)
+|-
+| <b>rev</b>
+| page revision
+| most recent revision
+|-
+| <b>section</b>
+| just include a named section
+| (empty)
+|-
+| <b>sectionhead</b>
+| when including a named section show the heading
+| (empty)
+|}
+
+=== Parameter expansion
+
+  vars="var1=value1&var2=value2"
+
+We only support named parameters, not numbered ones as in Mediawiki, and
+the placeholder is %%var%% and not ~{~{~{var~}~}~} as in Mediawiki.
+
+The following predefined variables are automatically expanded if existing:
+{| class="bordered"
+|-
+| Variable
+| Description
+|-
+| pagename
+|
+|-
+| mtime
+| last modified date + time
+|-
+| ctime
+| creation date + time
+|-
+| author
+| last author
+|-
+| owner
+|
+|-
+| creator
+| first author
+|-
+| SERVER_URL
+|
+|-
+| DATA_PATH
+|
+|-
+| SCRIPT_NAME
+|
+|-
+| PHPWIKI_BASE_URL
+|
+|-
+| BASE_URL
+|
+|}
+
+== Inclusion
+
+<noinclude> .. </noinclude> is stripped.
+
+<includeonly> .. </includeonly> is only expanded in pages using the template, not in the template itself.
+
+== Examples
+
+Standard syntax:
+<verbatim>
+<?plugin Template page=TemplateExample vars="title=TestTitle" ?>
+</verbatim>
+
+Shorter syntax:
+<verbatim>
+{{TemplateExample|title=TestTitle}}
+</verbatim>
+
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]

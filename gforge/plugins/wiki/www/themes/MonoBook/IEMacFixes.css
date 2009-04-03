@@ -1,3 +1,7 @@
+/**
+ *  $Id: IEMacFixes.css 6413 2009-01-19 10:33:24Z vargenau $
+ */ 
+
 /* IE/Mac only fix stylesheet, imported from main.css */
 #portal-column-content {
     margin: 0 0 4.8em 0;

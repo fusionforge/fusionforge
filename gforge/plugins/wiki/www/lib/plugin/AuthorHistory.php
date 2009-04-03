@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: AuthorHistory.php,v 1.6 2004/06/14 11:31:38 rurban Exp $');
+rcs_id('$Id: AuthorHistory.php 6185 2008-08-22 11:40:14Z vargenau $');
 /**
  Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
 
@@ -76,7 +76,7 @@ extends WikiPlugin
     
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.6 $");
+                            "\$Revision: 6185 $");
     }
     
     function getDefaultArguments() {
@@ -245,15 +245,7 @@ extends WikiPlugin
     
 };
 
-// $Log: AuthorHistory.php,v $
-// Revision 1.6  2004/06/14 11:31:38  rurban
-// renamed global $Theme to $WikiTheme (gforge nameclash)
-// inherit PageList default options from PageList
-//   default sortby=pagename
-// use options in PageList_Selectable (limit, sortby, ...)
-// added action revert, with button at action=diff
-// added option regex to WikiAdminSearchReplace
-//
+// $Log: not supported by cvs2svn $
 // Revision 1.5  2004/02/28 21:14:08  rurban
 // generally more PHPDOC docs
 //   see http://xarch.tu-graz.ac.at/home/rurban/phpwiki/xref/

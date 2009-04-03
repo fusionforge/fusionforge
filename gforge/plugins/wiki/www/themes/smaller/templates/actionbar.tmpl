@@ -1,5 +1,6 @@
 <?php // -*-php-*-
-rcs_id('$Id: actionbar.tmpl,v 1.6 2005/04/23 11:43:44 rurban Exp $');
+rcs_id('$Id: actionbar.tmpl 6204 2008-08-26 15:12:03Z vargenau $');
+if (!$WikiTheme->DUMP_MODE) {
 // Only [Info] button when not signed in.
 // The rest behind Info
 ?>
@@ -13,19 +14,20 @@ rcs_id('$Id: actionbar.tmpl,v 1.6 2005/04/23 11:43:44 rurban Exp $');
 <tr valign="baseline">
   <td>
   <div id="actionbuttons">
-    <?php if ( $user->isSignedIn()) { ?>
-      <?php if ((!$page->get('locked') || $user->isAdmin()) and $revision) { ?>
-        <?= Button("edit", $revision->isCurrent() ? _("Edit") : _("Edit Old Revision")) ?>
-      <?php } else { ?>
-        <?= Button("viewsource", _("View Source")) ?>
+     <?php if ((!$page->get('locked') || $user->isAdmin()) and $revision) { ?>
+       <?= Button("edit", $revision->isCurrent() ? _("Edit") : _("Edit Old Revision")) ?>
+     <?php } else { ?>
+       <?= Button("viewsource", _("View Source")) ?>
      <?php } ?>
-     <?php if ($user->isAdmin() or mayAccessPage('change', $page->getName())) { ?>
-      <?=$SEP?><?= Button($page->get('locked') ? 'unlock' : 'lock') ?>
-      <?php if (ENABLE_PAGEPERM and mayAccessPage('change', $page->getName())) { ?>
+     <?php if ( $user->isSignedIn()) { ?>
+      <?php if ($user->isAdmin() or mayAccessPage('change', $page->getName())) { ?>
+       <?=$SEP?><?= Button($page->get('locked') ? 'unlock' : 'lock') ?>
+       <?php if (ENABLE_PAGEPERM and mayAccessPage('change', $page->getName())) { ?>
         <?=$SEP?><?= Button('chown') ?>
         <?=$SEP?><?= Button('setacl') ?>
+        <?=$SEP?><?= Button('rename') ?>
      <?php }} ?>
-     <?php if ($user->isAdmin() or mayAccessPage('remove', $page->getName())) { ?>
+     <?php if ($revision and ($user->isAdmin() or mayAccessPage('remove', $page->getName()))) { ?>
       <?=$SEP?><?= Button('revert',_("Revert"), $revision->isCurrent() ? $page->GetRevisionBefore() : $revision) ?>
       <?=$SEP?><?= Button('remove') ?>
      <?php } ?>
@@ -51,3 +53,4 @@ rcs_id('$Id: actionbar.tmpl,v 1.6 2005/04/23 11:43:44 rurban Exp $');
 <?php } ?>
 </tr>
 </table>
+<?php } ?>

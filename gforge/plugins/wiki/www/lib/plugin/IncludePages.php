@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: IncludePages.php,v 1.2 2005/09/30 18:41:39 uckelman Exp $');
+rcs_id('$Id: IncludePages.php 6185 2008-08-22 11:40:14Z vargenau $');
 /*
  Copyright 2004 $ThePhpWikiProgrammingTeam
 
@@ -22,8 +22,10 @@ rcs_id('$Id: IncludePages.php,v 1.2 2005/09/30 18:41:39 uckelman Exp $');
 
 /**
  * IncludePages: Include a list of multiple pages, based on IncludePage.
- * usage:   <?plugin IncludePages pages=<?plugin-list BackLinks ?> ?>
+ * usage:   <?plugin IncludePages pages=<!plugin-list BackLinks !> ?>
  * author:  ReiniUrban
+ * 
+ * Todo: follow RedirectTo
  */
 
 include_once("lib/plugin/IncludePage.php");
@@ -41,7 +43,7 @@ extends WikiPlugin_IncludePage
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.2 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -81,7 +83,10 @@ extends WikiPlugin_IncludePage
     }
 };
 
-// $Log: IncludePages.php,v $
+// $Log: not supported by cvs2svn $
+// Revision 1.3  2007/07/14 12:04:32  rurban
+// todo comment
+//
 // Revision 1.2  2005/09/30 18:41:39  uckelman
 // Fixed more passes-by-reference.
 //

@@ -1,7 +1,7 @@
 <?php // -*-php-*-
-rcs_id('$Id: FullTextSearch.php,v 1.26 2005/11/14 22:33:04 rurban Exp $');
+rcs_id('$Id: FullTextSearch.php 6185 2008-08-22 11:40:14Z vargenau $');
 /*
-Copyright 1999,2000,2001,2002,2004 $ThePhpWikiProgrammingTeam
+Copyright 1999,2000,2001,2002,2004,2005 $ThePhpWikiProgrammingTeam
 
 This file is part of PhpWiki.
 
@@ -24,10 +24,16 @@ require_once('lib/TextSearchQuery.php');
 require_once("lib/PageList.php");
 
 /**
- * Simple case insensitive fulltext search
- * TODO: case-sensitivity argument, regex argument
+ * Case insensitive fulltext search
+ * Options: case_exact, regex, hilight
+ *          Stoplist
  *
- * See https://sourceforge.net/tracker/index.php?func=detail&aid=927395&group_id=6121&atid=106121
+ * TODO: Hooks to search in external documents: ExternalTextSearch
+ *   Only uploaded: textfiles, PDF, HTML, DOC, XLS, ... or 
+ *   External apps: xapian-omages seems to be the best, over lucene.net, 
+ *   swish, nakamazu, ...
+ *
+ * See http://sf.net/tracker/index.php?aid=927395&group_id=6121&atid=106121
  * Wordaround to let the dead locks occur somewhat later:
  * increased the memory limit of PHP4 from 8 MB to 32 MB
  * php.ini: memory_limit = 32 MB
@@ -45,7 +51,7 @@ extends WikiPlugin
 
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.26 $");
+                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -56,10 +62,10 @@ extends WikiPlugin
                    'hilight'  => true,
                    'case_exact' => false,
                    'regex'    => 'auto',
+		   'sortby'   => '-hi_content',
                    'noheader' => false,
-                   'exclude'  => false,   //comma-seperated list of glob
-                   'limit'    => false,
-                   'quiet'    => false));  // be less verbose
+                   'exclude'  => false,   // comma-seperated list of glob
+                   'quiet'    => true));  // be less verbose
     }
 
     function run($dbi, $argstr, &$request, $basepage) {
@@ -74,11 +80,15 @@ extends WikiPlugin
         $lines = array();
         $hilight_re = $hilight ? $query->getHighlightRegexp() : false;
         $count = 0;
-        $found = 0;
 
         if ($quiet) { // see how easy it is with PageList...
-            $list = new PageList(false,$exclude,$args);
-            while ($page = $pages->next() and (!$limit or ($count < $limit))) {
+            unset($args['info']);
+            $args['listtype'] = 'dl';
+	    $args['types'] = array(new _PageList_Column_content
+	      ('rev:hi_content', _("Content"), "left", $s));
+            $list = new PageList(false, $exclude, $args);
+            $list->setCaption(fmt("Full text search results for '%s'", $s));
+            while ($page = $pages->next()) {
                 $list->addPage( $page );
             }
             return $list;
@@ -96,7 +106,7 @@ extends WikiPlugin
             $name = $page->getName();
             if ($exclude and in_array($name,$exclude)) continue;
             $count++;
-            $list->pushContent(HTML::dt(WikiLink($name)));
+            $list->pushContent(HTML::dt(WikiLink($page)));
             if ($hilight_re)
                 $list->pushContent($this->showhits($page, $hilight_re));
             unset($page);
@@ -139,7 +149,31 @@ extends WikiPlugin
     }
 };
 
-// $Log: FullTextSearch.php,v $
+/*
+ * List of Links and link to ListLinks
+ */
+class _PageList_Column_hilight extends _PageList_Column {
+    function _PageList_Column_WantedPages_links (&$params) {
+        $this->parentobj =& $params[3];
+        $this->_PageList_Column($params[0],$params[1],$params[2]);
+    }
+    function _getValue(&$page, $revision_handle) {
+    	$html = false;
+	$pagename = $page->getName();
+	$count = count($this->parentobj->_wpagelist[$pagename]);
+        return LinkURL(WikiURL($page, array('action' => 'BackLinks'), false), 
+			fmt("(%d Links)", $count));
+    }
+}
+
+
+// $Log: not supported by cvs2svn $
+// Revision 1.28  2007/06/07 17:02:42  rurban
+// fix display of pagenames containing ":" in certain lists
+//
+// Revision 1.27  2007/01/04 16:46:40  rurban
+// Only notes
+//
 // Revision 1.26  2005/11/14 22:33:04  rurban
 // print ignored stoplist words
 //

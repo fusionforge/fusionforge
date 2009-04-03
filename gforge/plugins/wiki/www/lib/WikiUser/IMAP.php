@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-rcs_id('$Id: IMAP.php,v 1.5 2005/04/25 19:46:08 rurban Exp $');
+rcs_id('$Id: IMAP.php 6184 2008-08-22 10:33:41Z vargenau $');
 /* Copyright (C) 2004 $ThePhpWikiProgrammingTeam
  * This file is part of PhpWiki. Terms and Conditions see LICENSE. (GPL2)
  */
@@ -14,10 +14,12 @@ extends _PassUser
 {
     function checkPass($submitted_password) {
         if (!$this->isValidName()) {
+	    if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this)."::checkPass => failed isValidName", E_USER_WARNING);
             trigger_error(_("Invalid username."),E_USER_WARNING);
             return $this->_tryNextPass($submitted_password);
         }
         if (!$this->_checkPassLength($submitted_password)) {
+	    if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this)."::checkPass => failed checkPassLength", E_USER_WARNING);
             return WIKIAUTH_FORBIDDEN;
         }
         $userid = $this->_userid;
@@ -26,6 +28,7 @@ extends _PassUser
         if ($mbox) {
             imap_close($mbox);
             $this->_authmethod = 'IMAP';
+	    if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this)."::checkPass => ok", E_USER_WARNING);
             $this->_level = WIKIAUTH_USER;
             return $this->_level;
         } else {
@@ -34,6 +37,7 @@ extends _PassUser
                               E_USER_WARNING);
             }
         }
+	if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this)."::checkPass => wrong", E_USER_WARNING);
 
         return $this->_tryNextPass($submitted_password);
     }
@@ -42,17 +46,24 @@ extends _PassUser
     function userExists() {
         return true;
 
-        if (checkPass($this->_prefs->get('passwd')))
+        if ($this->checkPass($this->_prefs->get('passwd'))) {
+	    if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this)."::userExists => true (pass ok)", E_USER_WARNING);
             return true;
+	}
+	if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this)."::userExists => false (pass wrong)", E_USER_WARNING);
         return $this->_tryNextUser();
     }
 
     function mayChangePass() {
+	if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this)."::mayChangePass => false", E_USER_WARNING);
         return false;
     }
 }
 
-// $Log: IMAP.php,v $
+// $Log: not supported by cvs2svn $
+// Revision 1.6  2006/08/25 22:35:50  rurban
+// fix checkPass call in userExists
+//
 // Revision 1.5  2005/04/25 19:46:08  rurban
 // trivial tuning by michael pruitt. Patch #1120185
 //

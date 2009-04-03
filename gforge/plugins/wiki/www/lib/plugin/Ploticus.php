@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: Ploticus.php,v 1.12 2004/12/13 14:37:22 rurban Exp $');
+rcs_id('$Id: Ploticus.php 6185 2008-08-22 11:40:14Z vargenau $');
 /*
  Copyright 2004 $ThePhpWikiProgrammingTeam
 
@@ -100,7 +100,7 @@ extends WikiPluginCached
     }
     function getVersion() {
         return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.12 $");
+                            "\$Revision: 6185 $");
     }
     function getDefaultArguments() {
         return array(
@@ -214,10 +214,10 @@ extends WikiPluginCached
                 $src .= $source;
                 $source = $src;
             }
-            $tempfile = $this->tempnam('Ploticus');
-            unlink($tempfile);
+            $tempfile = $this->tempnam('Ploticus','plo');
+            @unlink($tempfile);
             $gif = $argarray['device'];
-            $args = " -stdin -$gif -o $tempfile.$gif";
+            $args = "-$gif -o $tempfile.$gif";
             if (!empty($argarray['-csmap'])) {
             	$args .= " -csmap -mapfile $tempfile.map";
             	$this->_mapfile = "$tempfile.map";
@@ -228,22 +228,43 @@ extends WikiPluginCached
                 if (empty($HTTP_ENV_VARS['PLOTICUS_PREFABS'])) {
                     if (file_exists("/usr/share/ploticus"))
                         $HTTP_ENV_VARS['PLOTICUS_PREFABS'] = "/usr/share/ploticus";
+		    elseif (defined('PLOTICUS_PREFABS'))
+                        $HTTP_ENV_VARS['PLOTICUS_PREFABS'] = constant('PLOTICUS_PREFABS');
                 }
             	$args .= (" -prefab " . $argarray['-prefab']);
             }
-            $code = $this->filterThroughCmd($source, PLOTICUS_EXE . "$args");
+	    if (isWindows()) {
+		$fp = fopen("$tempfile.plo", "w");
+		fwrite ($fp, $source);
+		fclose($fp);
+		$code = $this->execute(PLOTICUS_EXE . " $tempfile.plo $args", $tempfile.".$gif");
+	    } else {
+		$code = $this->filterThroughCmd($source, PLOTICUS_EXE . " -stdin $args");
+		sleep(1);
+	    }
             //if (empty($code))
             //    return $this->error(fmt("Couldn't start commandline '%s'", $commandLine));
-            sleep(1);
-            if (! file_exists("$tempfile.$gif") ) {
+            if (! file_exists($tempfile.".$gif") ) {
                 $this->_errortext .= sprintf(_("%s error: outputfile '%s' not created"), 
                                              "Ploticus", "$tempfile.$gif");
-                $this->_errortext .= ("\ncmd-line: cat script | " . PLOTICUS_EXE . "$args");
+                if (isWindows())
+                    $this->_errortext .= ("\ncmd-line: " .PLOTICUS_EXE . " $tempfile.plo $args");
+                else    
+                    $this->_errortext .= ("\ncmd-line: cat script | ".PLOTICUS_EXE . " $args");    
+                @unlink("$tempfile.pl");
+		@unlink("$tempfile");
                 return false;
             }
             $ImageCreateFromFunc = "ImageCreateFrom$gif";
-            if (function_exists($ImageCreateFromFunc))
-                return $ImageCreateFromFunc( "$tempfile.$gif" );
+            if (function_exists($ImageCreateFromFunc)) {
+                $handle = $ImageCreateFromFunc( "$tempfile.$gif" );
+		if ($handle) {
+		    @unlink("$tempfile.$gif");
+		    @unlink("$tempfile.plo");
+		    @unlink("$tempfile");
+		    return $handle;
+		}    
+	    }
             return "$tempfile.$gif";
         } else {
             return $this->error(fmt("empty source"));
@@ -262,7 +283,10 @@ extends WikiPluginCached
     }
 };
 
-// $Log: Ploticus.php,v $
+// $Log: not supported by cvs2svn $
+// Revision 1.13  2007/01/02 13:22:33  rurban
+// support PLOTICUS_PREFABS config.ini setting
+//
 // Revision 1.12  2004/12/13 14:37:22  rurban
 // simplify msg for new GraphViz plugin
 //

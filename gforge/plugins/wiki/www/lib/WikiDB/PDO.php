@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: PDO.php,v 1.2 2005/08/06 13:20:05 rurban Exp $');
+rcs_id('$Id: PDO.php 6184 2008-08-22 10:33:41Z vargenau $');
 
 require_once('lib/WikiDB.php');
 

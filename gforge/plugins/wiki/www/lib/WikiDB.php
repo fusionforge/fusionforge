@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-rcs_id('$Id: WikiDB.php,v 1.135 2005/09/11 14:19:44 rurban Exp $');
+rcs_id('$Id: WikiDB.php 6373 2009-01-07 08:56:46Z rurban $');
 
 require_once('lib/PageType.php');
 
@@ -9,7 +9,7 @@ require_once('lib/PageType.php');
  *
  * @package WikiDB
  * @author Geoffrey T. Dairiki <dairiki@dairiki.org>
- *         Reini Urban
+ * Minor enhancements by Reini Urban
  */
 
 /**
@@ -51,7 +51,7 @@ class WikiDB {
      * @access public
      *
      * @param hash $dbparams Database configuration parameters.
-     * Some pertinent paramters are:
+     * Some pertinent parameters are:
      * <dl>
      * <dt> dbtype
      * <dd> The back-end type.  Current supported types are:
@@ -111,7 +111,7 @@ class WikiDB {
      * @see open()
      */
     function WikiDB (&$backend, $dbparams) {
-        $this->_backend = &$backend;
+        $this->_backend =& $backend;
         // don't do the following with the auth_dsn!
         if (isset($dbparams['auth_dsn'])) return;
         
@@ -122,8 +122,10 @@ class WikiDB {
         if ($this->get('_timestamp') === false)
             $this->touch();
         
-        //FIXME: devel checking.
-        //$this->_backend->check();
+        // devel checking.
+        if ((int)DEBUG & _DEBUG_SQL) {
+            $this->_backend->check();
+	}
     }
     
     /**
@@ -155,7 +157,7 @@ class WikiDB {
     function getPage($pagename) {
         static $error_displayed = false;
         $pagename = (string) $pagename;
-        if (DEBUG) {
+        if ((int)DEBUG) {
             if ($pagename === '') {
                 if ($error_displayed) return false;
                 $error_displayed = true;
@@ -186,15 +188,13 @@ class WikiDB {
      * manner in certain back-ends.
      *
      * @access public
-     *
      * @param string $pagename string Which page to check.
-     *
      * @return boolean True if the page actually exists with
      * non-default contents in the WikiDataBase.
      */
     function isWikiPage ($pagename) {
         $page = $this->getPage($pagename);
-        return $page->exists();
+        return ($page and $page->exists());
     }
 
     /**
@@ -206,8 +206,8 @@ class WikiDB {
      * Note: purgePage() effectively destroys all revisions of the page from the WikiDB. 
      *
      * @access public
-     *
      * @param string $pagename Name of page to delete.
+     * @see purgePage
      */
     function deletePage($pagename) {
     	// don't create empty revisions of already purged pages.
@@ -216,40 +216,11 @@ class WikiDB {
         else 
             $result = -1;
 
-        /* Generate notification emails? */
-        if (! $this->isWikiPage($pagename) and !isa($GLOBALS['request'],'MockRequest')) {
-            $notify = $this->get('notify');
-            if (!empty($notify) and is_array($notify)) {
-                global $request;
-                //TODO: deferr it (quite a massive load if you remove some pages).
-                //TODO: notification class which catches all changes,
-                //  and decides at the end of the request what to mail. 
-                //  (type, page, who, what, users, emails)
-                // could be used for PageModeration and RSS2 Cloud xml-rpc also.
-                $page = new WikiDB_Page($this, $pagename);
-                list($emails, $userids) = $page->getPageChangeEmails($notify);
-                if (!empty($emails)) {
-                    $from = $request->_user->getId();
-                    $editedby = sprintf(_("Removed by: %s"), $from);
-                    $emails = join(',', $emails);
-        			$headers = "From: $from <nobody>\r\n" .
-        				"Bcc: $emails\r\n" .
-        				"MIME-Version: 1.0\r\n" .
-        				"Content-Type: text/plain; charset=".CHARSET."; format=flowed\r\n" .
-        				"Content-Transfer-Encoding: 8bit";
-                    $subject = sprintf(_("Page removed %s"), urlencode($pagename));
-                    if (mail("<undisclosed-recipients>","[".WIKI_NAME."] ".$subject, 
-                             $subject."\n".
-                             $editedby."\n\n".
-                             "Deleted $pagename",
-                             $headers))
-                        trigger_error(sprintf(_("PageChange Notification of %s sent to %s"),
-                                              $pagename, join(',',$userids)), E_USER_NOTICE);
-                    else
-                        trigger_error(sprintf(_("PageChange Notification Error: Couldn't send %s to %s"),
-                                              $pagename, join(',',$userids)), E_USER_WARNING);
-                }
-            }
+        /* Generate notification emails */
+        if (ENABLE_MAILNOTIFY) {
+            include_once("lib/MailNotify.php");
+            $MailNotify = new MailNotify($pagename);
+            $MailNotify->onDeletePage ($this, $pagename);
         }
 
         //How to create a RecentChanges entry with explaining summary? Dynamically
@@ -266,6 +237,9 @@ class WikiDB {
 
     /**
      * Completely remove the page from the WikiDB, without undo possibility.
+     * @access public
+     * @param string $pagename Name of page to delete.
+     * @see deletePage
      */
     function purgePage($pagename) {
         $result = $this->_cache->purge_page($pagename);
@@ -280,16 +254,20 @@ class WikiDB {
      *
      * @access public
      *
-     * @param boolean $include_defaulted Normally pages whose most
+     * @param boolean $include_empty Optional. Normally pages whose most
      * recent revision has empty content are considered to be
      * non-existant. Unless $include_defaulted is set to true, those
      * pages will not be returned.
+     * @param string or false $sortby Optional. "+-column,+-column2". 
+     *		If false the result is faster in natural order.
+     * @param string or false $limit Optional. Encoded as "$offset,$count".
+     * 		$offset defaults to 0.
+     * @param string $exclude: Optional comma-seperated list of pagenames. 
      *
      * @return WikiDB_PageIterator A WikiDB_PageIterator which contains all pages
      *     in the WikiDB which have non-default contents.
      */
-    function getAllPages($include_empty=false, $sortby=false, $limit=false, 
-                         $exclude=false) 
+    function getAllPages($include_empty=false, $sortby='', $limit='', $exclude='') 
     {
         // HACK: memory_limit=8M will fail on too large pagesets. old php on unix only!
         if (USECACHE) {
@@ -309,8 +287,13 @@ class WikiDB {
     }
 
     /**
-     * $include_empty = true: include also empty pages
-     * exclude: comma-seperated list pagenames: TBD: array of pagenames
+     * @access public
+     *
+     * @param boolean $include_empty If true include also empty pages
+     * @param string $exclude: comma-seperated list of pagenames. 
+     * 			TBD: array of pagenames
+     * @return integer
+     * 
      */
     function numPages($include_empty=false, $exclude='') {
     	if (method_exists($this->_backend, 'numPages'))
@@ -333,19 +316,24 @@ class WikiDB {
      *
      * Pages are returned in alphabetical order whenever it is
      * practical to do so.
-     *
-     * FIXME: clarify $search syntax. provide glob=>TextSearchQuery converters
+     * TODO: Sort by ranking. Only postgresql with tsearch2 can do ranking so far.
      *
      * @access public
      * @param TextSearchQuery $search A TextSearchQuery object
+     * @param string or false $sortby Optional. "+-column,+-column2". 
+     *		If false the result is faster in natural order.
+     * @param string or false $limit Optional. Encoded as "$offset,$count".
+     * 		$offset defaults to 0.
+     * @param string $exclude: Optional comma-seperated list of pagenames. 
      * @return WikiDB_PageIterator A WikiDB_PageIterator containing the matching pages.
      * @see TextSearchQuery
      */
-    function titleSearch($search, $sortby='pagename', $limit=false, $exclude=false) {
+    function titleSearch($search, $sortby='pagename', $limit='', $exclude='') {
         $result = $this->_backend->text_search($search, false, $sortby, $limit, $exclude);
-        return new WikiDB_PageIterator($this, $result,
-                                       array('exclude' => $exclude,
-                                             'limit' => $limit));
+        $options = array('exclude' => $exclude,
+                         'limit'   => $limit);
+        //if (isset($result->_count)) $options['count'] = $result->_count;
+        return new WikiDB_PageIterator($this, $result, $options);
     }
 
     /**
@@ -357,14 +345,20 @@ class WikiDB {
      *
      * Pages are returned in alphabetical order whenever it is
      * practical to do so.
+     * TODO: Sort by ranking. Only postgresql with tsearch2 can do ranking so far.
      *
      * @access public
      *
      * @param TextSearchQuery $search A TextSearchQuery object.
+     * @param string or false $sortby Optional. "+-column,+-column2". 
+     *		If false the result is faster in natural order.
+     * @param string or false $limit Optional. Encoded as "$offset,$count".
+     * 		$offset defaults to 0.
+     * @param string $exclude: Optional comma-seperated list of pagenames. 
      * @return WikiDB_PageIterator A WikiDB_PageIterator containing the matching pages.
      * @see TextSearchQuery
      */
-    function fullSearch($search, $sortby='pagename', $limit=false, $exclude=false) {
+    function fullSearch($search, $sortby='pagename', $limit='', $exclude='') {
         $result = $this->_backend->text_search($search, true, $sortby, $limit, $exclude);
         return new WikiDB_PageIterator($this, $result,
                                        array('exclude' => $exclude,
@@ -383,6 +377,8 @@ class WikiDB {
      * @param integer $limit The maximum number of pages to return.
      * Set $limit to zero to return all pages.  If $limit < 0, pages will
      * be sorted in decreasing order of popularity.
+     * @param string or false $sortby Optional. "+-column,+-column2". 
+     *		If false the result is faster in natural order.
      *
      * @return WikiDB_PageIterator A WikiDB_PageIterator containing the matching
      * pages.
@@ -405,7 +401,8 @@ class WikiDB {
      * <dt> limit 
      *    <dd> (integer) At most this many revisions will be returned.
      * <dt> since
-     *    <dd> (integer) Only revisions since this time (unix-timestamp) will be returned. 
+     *    <dd> (integer) Only revisions since this time (unix-timestamp) 
+     *		will be returned. 
      * <dt> include_minor_revisions
      *    <dd> (boolean) Also include minor revisions.  (Default is not to.)
      * <dt> exclude_major_revisions
@@ -417,8 +414,8 @@ class WikiDB {
      *         for each page.
      * </dl>
      *
-     * @return WikiDB_PageRevisionIterator A WikiDB_PageRevisionIterator containing the
-     * matching revisions.
+     * @return WikiDB_PageRevisionIterator A WikiDB_PageRevisionIterator 
+     * containing the matching revisions.
      */
     function mostRecent($params = false) {
         $result = $this->_backend->most_recent($params);
@@ -428,13 +425,79 @@ class WikiDB {
     /**
      * @access public
      *
-     * @return Iterator A generic iterator containing rows of (duplicate) pagename, wantedfrom.
+     * @param string or false $sortby Optional. "+-column,+-column2". 
+     *		If false the result is faster in natural order.
+     * @param string or false $limit Optional. Encoded as "$offset,$count".
+     * 		$offset defaults to 0.
+     * @return Iterator A generic iterator containing rows of 
+     * 		(duplicate) pagename, wantedfrom.
      */
-    function wantedPages($exclude_from='', $exclude='', $sortby=false, $limit=false) {
+    function wantedPages($exclude_from='', $exclude='', $sortby='', $limit='') {
         return $this->_backend->wanted_pages($exclude_from, $exclude, $sortby, $limit);
         //return new WikiDB_PageIterator($this, $result);
     }
 
+    /**
+     * Generic interface to the link table. Esp. useful to search for rdf triples as in 
+     * SemanticSearch and ListRelations.
+     *
+     * @access public
+     *
+     * @param $pages  object A TextSearchQuery object.
+     * @param $search object A TextSearchQuery object.
+     * @param string $linktype One of "linkto", "linkfrom", "relation", "attribute".
+     *   linktype parameter:
+     * <dl>
+     * <dt> "linkto"
+     *    <dd> search for simple out-links
+     * <dt> "linkfrom"
+     *    <dd> in-links, i.e BackLinks
+     * <dt> "relation"
+     *    <dd> the first part in a <>::<> link 
+     * <dt> "attribute"
+     *    <dd> the first part in a <>:=<> link 
+     * </dl>
+     * @param $relation object An optional TextSearchQuery to match the 
+     * relation name. Ignored on simple in-out links.
+     *
+     * @return Iterator A generic iterator containing links to pages or values.
+     *                  hash of "pagename", "linkname", "linkvalue. 
+     */
+    function linkSearch($pages, $search, $linktype, $relation=false) {
+        return $this->_backend->link_search($pages, $search, $linktype, $relation);
+    }
+
+    /**
+     * Return a simple list of all defined relations (and attributes), mainly 
+     * for the SemanticSearch autocompletion.
+     *
+     * @access public
+     *
+     * @return array of strings
+     */
+    function listRelations($also_attributes=false, $only_attributes=false, $sorted=true) {
+        if (method_exists($this->_backend, "list_relations"))
+            return $this->_backend->list_relations($also_attributes, $only_attributes, $sorted);
+	// dumb, slow fallback. no iter, so simply define it here.
+        $relations = array();
+        $iter = $this->getAllPages();
+        while ($page = $iter->next()) {
+            $reliter = $page->getRelations();
+            $names = array();
+            while ($rel = $reliter->next()) {
+		// if there's no pagename it's an attribute
+                $names[] = $rel->getName();
+            }
+            $relations = array_merge($relations, $names);
+            $reliter->free();
+        }
+        $iter->free();
+	if ($sorted) {
+	    sort($relations);
+	    reset($relations);
+	}
+        return $relations;
+    }
 
     /**
      * Call the appropriate backend method.
@@ -455,31 +518,45 @@ class WikiDB {
             //update all WikiLinks in existing pages
             //non-atomic! i.e. if rename fails the links are not undone
             if ($updateWikiLinks) {
+		$lookbehind = "/(?<=[\W:])\Q";
+		$lookahead = "\E(?=[\W:])/";
+		if (!check_php_version(4,3,3)) {
+		    $lookbehind = "/(?<=[\W:])";
+		    $lookahead  = "(?=[\W:])/";
+		    $from = preg_quote($from, "/");
+		    $to   = preg_quote($to, "/");
+		}
                 require_once('lib/plugin/WikiAdminSearchReplace.php');
                 $links = $oldpage->getBackLinks();
                 while ($linked_page = $links->next()) {
-                    WikiPlugin_WikiAdminSearchReplace::replaceHelper($this,
-                                                                     $linked_page->getName(),
-                                                                     $from, $to);
+                    WikiPlugin_WikiAdminSearchReplace::replaceHelper
+			($this,
+			 $linked_page->getName(),
+			 $lookbehind.$from.$lookahead, $to, 
+			 true, true);
                 }
-// ape: Disabled to avoid recursive modification when renaming
-//      a page like 'PageApe' to 'PageApeTwo'.
-//
-//                $links = $newpage->getBackLinks();
-//                while ($linked_page = $links->next()) {
-//                    WikiPlugin_WikiAdminSearchReplace::replaceHelper($this,
-//                                                                     $linked_page->getName(),
-//                                                                     $from, $to);
-//                }
+                // FIXME: Disabled to avoid recursive modification when renaming 
+                // a page like 'PageFoo to 'PageFooTwo'
+                if (0) {
+                  $links = $newpage->getBackLinks();
+                  while ($linked_page = $links->next()) {
+                    WikiPlugin_WikiAdminSearchReplace::replaceHelper
+			($this,
+			 $linked_page->getName(),
+			 $lookbehind.$from.$lookahead, $to, 
+			 true, true);
+                  }
+                }
             }
             if ($oldpage->exists() and ! $newpage->exists()) {
                 if ($result = $this->_backend->rename_page($from, $to)) {
-                    //create a RecentChanges entry with explaining summary
+                    // create a RecentChanges entry with explaining summary
                     $page = $this->getPage($to);
                     $current = $page->getCurrentRevision();
                     $meta = $current->_data;
                     $version = $current->getVersion();
                     $meta['summary'] = sprintf(_("renamed from %s"), $from);
+		    unset($meta['mtime']); // force new date
                     $page->save($current->getPackedContent(), $version + 1, $meta);
                 }
             } elseif (!$oldpage->getCurrentRevision(false) and !$newpage->exists()) {
@@ -491,13 +568,12 @@ class WikiDB {
                           E_USER_WARNING);
         }
         /* Generate notification emails? */
-        if ($result and !isa($GLOBALS['request'], 'MockRequest')) {
+        if ($result and ENABLE_MAILNOTIFY and !isa($GLOBALS['request'], 'MockRequest')) {
             $notify = $this->get('notify');
             if (!empty($notify) and is_array($notify)) {
-                list($emails, $userids) = $oldpage->getPageChangeEmails($notify);
-                if (!empty($emails)) {
-                    $oldpage->sendPageRenameNotification($to, $meta, $emails, $userids);
-                }
+                include_once("lib/MailNotify.php");
+                $MailNotify = new MailNotify($from);
+                $MailNotify->onRenamePage ($this, $from, $to);
             }
         }
         return $result;
@@ -528,6 +604,15 @@ class WikiDB {
         $this->set('_timestamp', array(time(), $ts[1] + 1));
     }
 
+    /**
+     * Roughly similar to the float in phpwiki_version(). Set by action=upgrade.
+     */
+    function get_db_version() {
+        return (float) $this->get('_db_version');
+    }
+    function set_db_version($ver) {
+        return $this->set('_db_version', (float)$ver);
+    }
         
     /**
      * Access WikiDB global meta-data.
@@ -644,7 +729,7 @@ class WikiDB {
 
 
 /**
- * An abstract base class which representing a wiki-page within a
+ * A base class which representing a wiki-page within a
  * WikiDB.
  *
  * A WikiDB_Page contains a number (at least one) of
@@ -655,7 +740,7 @@ class WikiDB_Page
     function WikiDB_Page(&$wikidb, $pagename) {
         $this->_wikidb = &$wikidb;
         $this->_pagename = $pagename;
-        if (DEBUG) {
+        if ((int)DEBUG) {
             if (!(is_string($pagename) and $pagename != '')) {
                 if (function_exists("xdebug_get_function_stack")) {
                     echo "xdebug_get_function_stack(): "; var_dump(xdebug_get_function_stack());
@@ -812,7 +897,7 @@ class WikiDB_Page
      * @param hash $metadata Metadata for new revision.
      * All values in the hash should be scalars (strings or integers).
      *
-     * @param array $links List of pagenames which this page links to.
+     * @param hash $links List of linkto=>pagename, relation=>pagename which this page links to.
      *
      * @return WikiDB_PageRevision  Returns the new WikiDB_PageRevision object. If
      * $version was incorrect, returns false
@@ -895,11 +980,19 @@ class WikiDB_Page
      *
      * @param hash $meta  Meta-data for new revision.
      */
-    function save($wikitext, $version, $meta) {
-	$formatted = new TransformedText($this, $wikitext, $meta);
+    function save($wikitext, $version, $meta, $formatted = null) {
+	if (is_null($formatted))
+	    $formatted = new TransformedText($this, $wikitext, $meta);
         $type = $formatted->getType();
 	$meta['pagetype'] = $type->getName();
-	$links = $formatted->getWikiPageLinks();
+	$links = $formatted->getWikiPageLinks(); // linkto => relation
+        $attributes = array();
+        foreach ($links as $link) {
+            if ($link['linkto'] === "" and $link['relation']) {
+                $attributes[$link['relation']] = $this->getAttribute($link['relation']);
+            }
+        }
+        $meta['attribute'] = $attributes;
 
 	$backend = &$this->_wikidb->_backend;
 	$newrevision = $this->createRevision($version, $wikitext, $meta, $links);
@@ -911,195 +1004,37 @@ class WikiDB_Page
         //
         // We're doing this here rather than in createRevision because
         // postgresql can't optimize while locked.
-        if ((DEBUG & _DEBUG_SQL)
+        if (((int)DEBUG & _DEBUG_SQL)
 	    or (DATABASE_OPTIMISE_FREQUENCY > 0 and 
                 (time() % DATABASE_OPTIMISE_FREQUENCY == 0))) {
             if ($backend->optimize()) {
-                if (DEBUG)
+                if ((int)DEBUG)
                     trigger_error(_("Optimizing database"), E_USER_NOTICE);
             }
         }
 
         /* Generate notification emails? */
-        if (isa($newrevision, 'WikiDB_PageRevision')) {
+        if (ENABLE_MAILNOTIFY and isa($newrevision, 'WikiDB_PageRevision')) {
             // Save didn't fail because of concurrent updates.
             $notify = $this->_wikidb->get('notify');
-            if (!empty($notify) and is_array($notify) and !isa($GLOBALS['request'],'MockRequest')) {
-                list($emails, $userids) = $this->getPageChangeEmails($notify);
-                if (!empty($emails)) {
-                    $this->sendPageChangeNotification($wikitext, $version, $meta, $emails, $userids);
-                }
+            if (!empty($notify) 
+		and is_array($notify) 
+		and !isa($GLOBALS['request'],'MockRequest')) 
+	    {
+                include_once("lib/MailNotify.php");
+                $MailNotify = new MailNotify($newrevision->getName());
+		$MailNotify->onChangePage ($this->_wikidb, $wikitext, $version, $meta);
             }
             $newrevision->_transformedContent = $formatted;
         }
-
+        // more pagechange callbacks: (in a hackish manner for now)
+        if (ENABLE_RECENTCHANGESBOX and empty($meta['is_minor_edit'])) {
+            require_once("lib/WikiPlugin.php");
+            $w = new WikiPluginLoader;
+            $p = $w->getPlugin("RecentChangesCached", false);
+            $p->box_update(false, $GLOBALS['request'], $this->_pagename);
+        }
 	return $newrevision;
-    }
-
-    function getPageChangeEmails($notify) {
-        $emails = array(); $userids = array();
-        foreach ($notify as $page => $users) {
-            if (glob_match($page, $this->_pagename)) {
-                foreach ($users as $userid => $user) {
-                    if (!$user) { // handle the case for ModeratePage: no prefs, just userid's.
-                        global $request;
-                        $u = $request->getUser();
-                        if ($u->UserName() == $userid) {
-                            $prefs = $u->getPreferences();
-                        } else {
-                            // not current user
-                            if (ENABLE_USER_NEW) {
-                                $u = WikiUser($userid);
-                                $u->getPreferences();
-                                $prefs = &$u->_prefs;
-                            } else {
-                                $u = new WikiUser($GLOBALS['request'], $userid);
-                                $prefs = $u->getPreferences();
-                            }
-                        }
-                        $emails[] = $prefs->get('email');
-                        $userids[] = $userid;
-                    } else {
-                      if (!empty($user['verified']) and !empty($user['email'])) {
-                        $emails[]  = $user['email'];
-                        $userids[] = $userid;
-                      } elseif (!empty($user['email'])) {
-                        global $request;
-                        // do a dynamic emailVerified check update
-                        $u = $request->getUser();
-                        if ($u->UserName() == $userid) {
-                            if ($request->_prefs->get('emailVerified')) {
-                                $emails[] = $user['email'];
-                                $userids[] = $userid;
-                                $notify[$page][$userid]['verified'] = 1;
-                                $request->_dbi->set('notify', $notify);
-                            }
-                        } else {
-                            // not current user
-                            if (ENABLE_USER_NEW) {
-                                $u = WikiUser($userid);
-                                $u->getPreferences();
-                                $prefs = &$u->_prefs;
-                            } else {
-                                $u = new WikiUser($GLOBALS['request'], $userid);
-                                $prefs = $u->getPreferences();
-                            }
-                            if ($prefs->get('emailVerified')) {
-                                $emails[] = $user['email'];
-                                $userids[] = $userid;
-                                $notify[$page][$userid]['verified'] = 1;
-                                $request->_dbi->set('notify', $notify);
-                            }
-                        }
-                        // ignore verification
-                        /*
-                        if (DEBUG) {
-                            if (!in_array($user['email'],$emails))
-                                $emails[] = $user['email'];
-                        }
-                        */
-                    }
-                  }
-                }
-            }
-        }
-        $emails = array_unique($emails);
-        $userids = array_unique($userids);
-        return array($emails, $userids);
-    }
-
-    /**
-     * Send udiff for a changed page to multiple users.
-     * See rename and remove methods also
-     */
-    function sendPageChangeNotification(&$wikitext, $version, $meta, $emails, $userids) {
-        global $request;
-        if (@is_array($request->_deferredPageChangeNotification)) {
-            // collapse multiple changes (loaddir) into one email
-            $request->_deferredPageChangeNotification[] 
-		= array($this->_pagename, $emails, $userids);
-            return;
-        }
-        $backend = &$this->_wikidb->_backend;
-        //$backend = &$request->_dbi->_backend;
-        $subject = _("Page change").' '.urlencode($this->_pagename);
-        $previous = $backend->get_previous_version($this->_pagename, $version);
-        if (!isset($meta['mtime'])) $meta['mtime'] = time();
-        if ($previous) {
-            $difflink = WikiURL($this->_pagename, array('action'=>'diff'), true);
-            $cache = &$this->_wikidb->_cache;
-            //$cache = &$request->_dbi->_cache;
-            $this_content = explode("\n", $wikitext);
-            $prevdata = $cache->get_versiondata($this->_pagename, $previous, true);
-            if (empty($prevdata['%content']))
-                $prevdata = $backend->get_versiondata($this->_pagename, $previous, true);
-            $other_content = explode("\n", $prevdata['%content']);
-            
-            include_once("lib/difflib.php");
-            $diff2 = new Diff($other_content, $this_content);
-            //$context_lines = max(4, count($other_content) + 1,
-            //                     count($this_content) + 1);
-            $fmt = new UnifiedDiffFormatter(/*$context_lines*/);
-            $content  = $this->_pagename . " " . $previous . " " . 
-                Iso8601DateTime($prevdata['mtime']) . "\n";
-            $content .= $this->_pagename . " " . $version . " " .  
-                Iso8601DateTime($meta['mtime']) . "\n";
-            $content .= $fmt->format($diff2);
-            
-        } else {
-            $difflink = WikiURL($this->_pagename,array(),true);
-            $content = $this->_pagename . " " . $version . " " .  
-                Iso8601DateTime($meta['mtime']) . "\n";
-            $content .= _("New page");
-        }
-        $from = $request->_user->getId();
-        $editedby = sprintf(_("Edited by: %s"), $from);
-        $emails = join(',',$emails);
-        $headers = "From: $from <nobody>\r\n" .
-       		"Bcc: $emails\r\n" .
-       		"MIME-Version: 1.0\r\n" .
-       		"Content-Type: text/plain; charset=".CHARSET."; format=flowed\r\n" .
-       		"Content-Transfer-Encoding: 8bit";
-        if (mail("<undisclosed-recipients>",
-                 "[".WIKI_NAME."] ".$subject, 
-                 $subject."\n". $editedby."\n". $difflink."\n\n". $content,
-                 $headers))
-            trigger_error(sprintf(_("PageChange Notification of %s sent to %s"),
-                                  $this->_pagename, join(',',$userids)), E_USER_NOTICE);
-        else
-            trigger_error(sprintf(_("PageChange Notification Error: Couldn't send %s to %s"),
-                                  $this->_pagename, join(',',$userids)), E_USER_WARNING);
-    }
-
-    /** support mass rename / remove (not yet tested)
-     */
-    function sendPageRenameNotification($to, &$meta, $emails, $userids) {
-        global $request;
-        if (@is_array($request->_deferredPageRenameNotification)) {
-            $request->_deferredPageRenameNotification[] = array($this->_pagename, 
-                                                                $to, $meta, $emails, $userids);
-        } else {
-            $oldname = $this->_pagename;
-            $from = $request->_user->getId();
-            $editedby = sprintf(_("Edited by: %s"), $from);
-            $emails = join(',',$emails);
-            $subject = sprintf(_("Page rename %s to %s"), urlencode($oldname), urlencode($to));
-            $link = WikiURL($to, true);
-	        $headers = "From: $from <nobody>\r\n" .
-       			"Bcc: $emails\r\n" .
-       			"MIME-Version: 1.0\r\n" .
-        		"Content-Type: text/plain; charset=".CHARSET."; format=flowed\r\n" .
-        		"Content-Transfer-Encoding: 8bit";
-            if (mail("<undisclosed-recipients>",
-                     "[".WIKI_NAME."] ".$subject, 
-                     $subject."\n".$editedby."\n".$link."\n\n"."Renamed $from to $to",
-                     $headers))
-                trigger_error(sprintf(_("PageChange Notification of %s sent to %s"),
-                                      $oldname, join(',',$userids)), E_USER_NOTICE);
-            else
-                trigger_error(sprintf(_("PageChange Notification Error: Couldn't send %s to %s"),
-                                      $oldname, join(',',$userids)), E_USER_WARNING);
-        }
     }
 
     /**
@@ -1109,7 +1044,7 @@ class WikiDB_Page
      *
      * @return WikiDB_PageRevision The current WikiDB_PageRevision object. 
      */
-    function getCurrentRevision ($need_content = true) {
+    function getCurrentRevision ($need_content=true) {
         $backend = &$this->_wikidb->_backend;
         $cache = &$this->_wikidb->_cache;
         $pagename = &$this->_pagename;
@@ -1208,6 +1143,9 @@ class WikiDB_Page
     
     /**
      * Find pages which link to or are linked from a page.
+     * relations: $backend->get_links is responsible to add the relation to the pagehash 
+     * as 'linkrelation' key as pagename. See WikiDB_PageIterator::next 
+     *   if (isset($next['linkrelation']))
      *
      * @access public
      *
@@ -1216,29 +1154,53 @@ class WikiDB_Page
      * @return WikiDB_PageIterator A WikiDB_PageIterator containing
      * all matching pages.
      */
-    function getLinks ($reversed = true, $include_empty=false, $sortby=false, 
-                       $limit=false, $exclude=false) {
+    function getLinks ($reversed=true, $include_empty=false, $sortby='', 
+                       $limit='', $exclude='', $want_relations=false) 
+    {
         $backend = &$this->_wikidb->_backend;
         $result =  $backend->get_links($this->_pagename, $reversed, 
-                                       $include_empty, $sortby, $limit, $exclude);
+                                       $include_empty, $sortby, $limit, $exclude,
+                                       $want_relations);
         return new WikiDB_PageIterator($this->_wikidb, $result, 
                                        array('include_empty' => $include_empty,
-                                             'sortby' => $sortby, 
-                                             'limit' => $limit, 
-                                             'exclude' => $exclude));
+                                             'sortby'        => $sortby, 
+                                             'limit'         => $limit, 
+                                             'exclude'       => $exclude,
+                                             'want_relations'=> $want_relations));
     }
 
     /**
      * All Links from other pages to this page.
      */
-    function getBackLinks($include_empty=false, $sortby=false, $limit=false, $exclude=false) {
+    function getBackLinks($include_empty=false, $sortby='', $limit='', $exclude='', 
+                          $want_relations=false) 
+    {
         return $this->getLinks(true, $include_empty, $sortby, $limit, $exclude);
     }
     /**
      * Forward Links: All Links from this page to other pages.
      */
-    function getPageLinks($include_empty=false, $sortby=false, $limit=false, $exclude=false) {
+    function getPageLinks($include_empty=false, $sortby='', $limit='', $exclude='', 
+                          $want_relations=false) 
+    {
         return $this->getLinks(false, $include_empty, $sortby, $limit, $exclude);
+    }
+    /**
+     * Relations: All links from this page to other pages with relation <> 0. 
+     * is_a:=page or population:=number
+     */
+    function getRelations($sortby='', $limit='', $exclude='') {
+        $backend = &$this->_wikidb->_backend;
+        $result =  $backend->get_links($this->_pagename, false, true,
+                                       $sortby, $limit, $exclude, 
+                                       true);
+        // we do not care for the linked page versiondata, just the pagename and linkrelation
+        return new WikiDB_PageIterator($this->_wikidb, $result, 
+                                       array('include_empty' => true,
+                                             'sortby'        => $sortby, 
+                                             'limit'         => $limit, 
+                                             'exclude'       => $exclude,
+                                             'want_relations'=> true));
     }
     
     /**
@@ -1258,6 +1220,17 @@ class WikiDB_Page
         $iter->free();
         return false;
     }
+
+    /* Semantic relations are links with the relation pointing to another page,
+       the so-called "RDF Triple".
+       [San Diego] is%20a::city
+       => "At the page San Diego there is a relation link of 'is a' to the page 'city'."
+     */
+
+    /* Semantic attributes for a page. 
+       [San Diego] population:=1,305,736
+       Attributes are links with the relation pointing to another page.
+    */
             
     /**
      * Access WikiDB_Page non version-specific meta-data.
@@ -1278,8 +1251,8 @@ class WikiDB_Page
      *                  E.g. "owner.users"
      * <dt>'perm'  <dd> Permission flag to authorize read/write/execution of 
      *                  page-headers and content.
-     + <dt>'moderation'<dd> ModeratedPage data
-     * <dt>'score' <dd> Page score (not yet implement, do we need?)
+     + <dt>'moderation'<dd> ModeratedPage data. Handled by plugin/ModeratedPage
+     * <dt>'rating' <dd> Page rating. Handled by plugin/RateIt
      * </dl>
      *
      * @return scalar The requested value, or false if the requested data
@@ -1425,7 +1398,7 @@ class WikiDB_Page
     // May be empty. Either the stored owner (/Chown), or the first authorized author
     function getOwner() {
         if ($owner = $this->get('owner'))
-            return ($owner == "The PhpWiki programming team") ? ADMIN_USER : $owner;
+            return ($owner == _("The PhpWiki programming team")) ? ADMIN_USER : $owner;
         // check all revisions forwards for the first author_id
         $backend = &$this->_wikidb->_backend;
         $pagename = &$this->_pagename;
@@ -1433,7 +1406,7 @@ class WikiDB_Page
         for ($v=1; $v <= $latestversion; $v++) {
             $rev = $this->getRevision($v,false);
             if ($rev and $owner = $rev->get('author_id')) {
-            	return ($owner == "The PhpWiki programming team") ? ADMIN_USER : $owner;
+            	return ($owner == _("The PhpWiki programming team")) ? ADMIN_USER : $owner;
             }
         }
         return '';
@@ -1449,6 +1422,26 @@ class WikiDB_Page
     function getAuthor() {
         if ($current = $this->getCurrentRevision(false)) return $current->get('author_id');
         else return '';
+    }
+
+    /* Semantic Web value, not stored in the links.
+     * todo: unify with some unit knowledge
+     */
+    function setAttribute($relation, $value) {
+    	$attr = $this->get('attributes');
+    	if (empty($attr))
+    	    $attr = array($relation => $value);
+    	else
+    	    $attr[$relation] = $value;
+    	$this->set('attributes', $attr);
+    }
+
+    function getAttribute($relation) {
+    	$meta = $this->get('attributes');
+    	if (empty($meta))
+    	    return '';
+    	else
+    	    return $meta[$relation];
     }
 
 };
@@ -1633,9 +1626,10 @@ class WikiDB_PageRevision
      */
     function getPackedContent() {
         $data = &$this->_data;
-
         
-        if (empty($data['%content'])) {
+        if (empty($data['%content'])
+            || (!$this->_wikidb->isWikiPage($this->_pagename)
+                && $this->isCurrent())) {
             include_once('lib/InlineParser.php');
 
             // A feature similar to taglines at http://www.wlug.org.nz/
@@ -1647,9 +1641,16 @@ class WikiDB_PageRevision
             {
                 include_once("lib/fortune.php");
                 $fortune = new Fortune();
-                $quote = str_replace("\n<br>","\n", $fortune->quoteFromDir(FORTUNE_DIR));
-                return sprintf("<verbatim>\n%s</verbatim>\n\n"._("Describe %s here."), 
-                               $quote, "[" . WikiEscape($this->_pagename) . "]");
+		$quote = $fortune->quoteFromDir(FORTUNE_DIR);
+		if ($quote != -1)
+		    $quote = "<verbatim>\n"
+			. str_replace("\n<br>","\n", $quote)
+			. "</verbatim>\n\n";
+		else 
+		    $quote = "";
+                return $quote
+		    . sprintf(_("Describe %s here."), 
+			      "[" . WikiEscape($this->_pagename) . "]");
             }
             // Replace empty content with default value.
             return sprintf(_("Describe %s here."), 
@@ -1808,10 +1809,16 @@ class WikiDB_PageIterator
             return false;
 
         $pagename = &$next['pagename'];
-        if (!is_string($pagename)) { // Bug #1327912 fixed by Joachim Lous
-            $pagename = strval($pagename);
-        }
+	if (!is_string($pagename)) { // Bug #1327912 fixed by Joachim Lous
+	    /*if (is_array($pagename) && isset($pagename['linkto'])) {
+		$pagename = $pagename['linkto'];
+	    }
+            $pagename = strval($pagename);*/
+            trigger_error("WikiDB_PageIterator->next pagename", E_USER_WARNING);
+	}
         if (!$pagename) {
+            if (isset($next['linkrelation']) 
+                or isset($next['pagedata']['linkrelation'])) return false;	
             trigger_error('empty pagename in WikiDB_PageIterator::next()', E_USER_WARNING);
             var_dump($next);
             return false;
@@ -1826,7 +1833,12 @@ class WikiDB_PageIterator
                   and !$this->_options['include_empty'] and isset($next['id'])) {
             $this->_wikidb->_cache->_id_cache[$next['pagename']] = $next['id'];
         }
-        return new WikiDB_Page($this->_wikidb, $pagename);
+        $page = new WikiDB_Page($this->_wikidb, $pagename);
+        if (isset($next['linkrelation']))
+            $page->set('linkrelation', $next['linkrelation']);
+        if (isset($next['score']))
+            $page->score = $next['score'];
+        return $page;
     }
 
     /**
@@ -1844,12 +1856,14 @@ class WikiDB_PageIterator
     function free() {
         $this->_iter->free();
     }
-    
+    function reset() {
+        $this->_iter->reset();
+    }
     function asArray() {
     	$result = array();
     	while ($page = $this->next())
             $result[] = $page;
-        //$this->reset();
+        $this->reset();
         return $result;
     }
     
@@ -1936,19 +1950,19 @@ class WikiDB_PageRevisionIterator
         $pagename = $next['pagename'];
         $version = $next['version'];
         $versiondata = $next['versiondata'];
-        if (DEBUG) {
+        if ((int)DEBUG) {
             if (!(is_string($pagename) and $pagename != '')) {
                 trigger_error("empty pagename",E_USER_WARNING);
                 return false;
             }
         } else assert(is_string($pagename) and $pagename != '');
-        if (DEBUG) {
+        if ((int)DEBUG) {
             if (!is_array($versiondata)) {
                 trigger_error("empty versiondata",E_USER_WARNING);
                 return false;
             }
         } else assert(is_array($versiondata));
-        if (DEBUG) {
+        if ((int)DEBUG) {
             if (!($version > 0)) {
                 trigger_error("invalid version",E_USER_WARNING);
                 return false;
@@ -1995,12 +2009,15 @@ class WikiDB_Array_PageIterator
         reset($this->_pages);
     }
     function next() {
-        $c =& current($this->_pages);
+        $c = current($this->_pages);
         next($this->_pages);
         return $c !== false ? $this->_dbi->getPage($c) : false;
     }
     function count() {
         return count($this->_pages);
+    }
+    function reset() {
+    	reset($this->_pages);
     }
     function free() {}
     function asArray() {
@@ -2024,12 +2041,15 @@ class WikiDB_Array_generic_iter
             reset($this->_array);
     }
     function next() {
-        $c =& current($this->_array);
+        $c = current($this->_array);
         next($this->_array);
         return $c !== false ? $c : false;
     }
     function count() {
         return count($this->_array);
+    }
+    function reset() {
+    	reset($this->_array);
     }
     function free() {}
     function asArray() {
@@ -2154,8 +2174,11 @@ class WikiDB_cache
             $vdata = $this->_backend->get_versiondata($pagename, $version, $need_content);
             $readdata = true;
 	}
-        if ($readdata && $vdata && !empty($vdata['%pagedata'])) {
-            $this->_pagedata_cache[$pagename] =& $vdata['%pagedata'];
+        if ($readdata && is_array($vdata) && !empty($vdata['%pagedata'])) {
+            if (empty($this->_pagedata_cache)) 
+                $this->_pagedata_cache = array();
+            /* PHP Fatal error:  Cannot create references to/from string offsets nor overloaded objects in /var/www/html/phpwiki/lib/WikiDB.php on line 2180, referer: wiki/TitleSearch?s=and&auto_redirect=1 */
+            $this->_pagedata_cache[$pagename] = $vdata['%pagedata'];
         }
         return $vdata;
     }
@@ -2211,7 +2234,7 @@ function _sql_debuglog($msg, $newline=true, $shutdown=false) {
     static $i = 0;
     if (!$fp) {
         $stamp = strftime("%y%m%d-%H%M%S");
-        $fp = fopen("/tmp/sql-$stamp.log", "a");
+        $fp = fopen(TEMP_DIR."/sql-$stamp.log", "a");
         register_shutdown_function("_sql_debuglog_shutdown_function");
     } elseif ($shutdown) {
         fclose($fp);
@@ -2224,409 +2247,6 @@ function _sql_debuglog($msg, $newline=true, $shutdown=false) {
 function _sql_debuglog_shutdown_function() {
     _sql_debuglog('',false,true);
 }
-
-// $Log: WikiDB.php,v $
-// fix bug #1327912 numeric pagenames can break plugins (Joachim Lous)
-// pass stoplist through iterator
-//
-// Revision 1.137  2005/10/12 06:16:18  rurban
-// better From header
-//
-// Revision 1.136  2005/10/03 16:14:57  rurban
-// improve description
-//
-// Revision 1.135  2005/09/11 14:19:44  rurban
-// enable LIMIT support for fulltext search
-//
-// Revision 1.134  2005/09/10 21:28:10  rurban
-// applyFilters hack to use filters after methods, which do not support them (titleSearch)
-//
-// Revision 1.133  2005/08/27 09:39:10  rurban
-// dumphtml when not at admin page: dump the current or given page
-//
-// Revision 1.132  2005/08/07 10:10:07  rurban
-// clean whole version cache
-//
-// Revision 1.131  2005/04/23 11:30:12  rurban
-// allow emtpy WikiDB::getRevisionBefore(), for simplier templates (revert)
-//
-// Revision 1.130  2005/04/06 06:19:30  rurban
-// Revert the previous wrong bugfix #1175761: USECACHE was mixed with WIKIDB_NOCACHE_MARKUP.
-// Fix WIKIDB_NOCACHE_MARKUP in main (always set it) and clarify it in WikiDB
-//
-// Revision 1.129  2005/04/06 05:50:29  rurban
-// honor !USECACHE for _cached_html, fixes #1175761
-//
-// Revision 1.128  2005/04/01 16:11:42  rurban
-// just whitespace
-//
-// Revision 1.127  2005/02/18 20:43:40  uckelman
-// WikiDB::genericWarnings() is no longer used.
-//
-// Revision 1.126  2005/02/04 17:58:06  rurban
-// minor versioncache improvement. part 2/3 of Charles Corrigan cache patch. not sure about the 0/1 issue
-//
-// Revision 1.125  2005/02/03 05:08:39  rurban
-// ref fix by Charles Corrigan
-//
-// Revision 1.124  2005/01/29 20:43:32  rurban
-// protect against empty request: on some occasion this happens
-//
-// Revision 1.123  2005/01/25 06:58:21  rurban
-// reformatting
-//
-// Revision 1.122  2005/01/20 10:18:17  rurban
-// reformatting
-//
-// Revision 1.121  2005/01/04 20:25:01  rurban
-// remove old [%pagedata][_cached_html] code
-//
-// Revision 1.120  2004/12/23 14:12:31  rurban
-// dont email on unittest
-//
-// Revision 1.119  2004/12/20 16:05:00  rurban
-// gettext msg unification
-//
-// Revision 1.118  2004/12/13 13:22:57  rurban
-// new BlogArchives plugin for the new blog theme. enable default box method
-// for all plugins. Minor search improvement.
-//
-// Revision 1.117  2004/12/13 08:15:09  rurban
-// false is wrong. null might be better but lets play safe.
-//
-// Revision 1.116  2004/12/10 22:15:00  rurban
-// fix $page->get('_cached_html)
-// refactor upgrade db helper _convert_cached_html() to be able to call them from WikiAdminUtils also.
-// support 2nd genericSqlQuery param (bind huge arg)
-//
-// Revision 1.115  2004/12/10 02:45:27  rurban
-// SQL optimization:
-//   put _cached_html from pagedata into a new seperate blob, not huge serialized string.
-//   it is only rarelely needed: for current page only, if-not-modified
-//   but was extracted for every simple page iteration.
-//
-// Revision 1.114  2004/12/09 22:24:44  rurban
-// optimize on _DEBUG_SQL only. but now again on every 50th request, not just save.
-//
-// Revision 1.113  2004/12/06 19:49:55  rurban
-// enable action=remove which is undoable and seeable in RecentChanges: ADODB ony for now.
-// renamed delete_page to purge_page.
-// enable action=edit&version=-1 to force creation of a new version.
-// added BABYCART_PATH config
-// fixed magiqc in adodb.inc.php
-// and some more docs
-//
-// Revision 1.112  2004/11/30 17:45:53  rurban
-// exists_links backend implementation
-//
-// Revision 1.111  2004/11/28 20:39:43  rurban
-// deactivate pagecache overwrite: it is wrong
-//
-// Revision 1.110  2004/11/26 18:39:01  rurban
-// new regex search parser and SQL backends (90% complete, glob and pcre backends missing)
-//
-// Revision 1.109  2004/11/25 17:20:50  rurban
-// and again a couple of more native db args: backlinks
-//
-// Revision 1.108  2004/11/23 13:35:31  rurban
-// add case_exact search
-//
-// Revision 1.107  2004/11/21 11:59:16  rurban
-// remove final \n to be ob_cache independent
-//
-// Revision 1.106  2004/11/20 17:35:56  rurban
-// improved WantedPages SQL backends
-// PageList::sortby new 3rd arg valid_fields (override db fields)
-// WantedPages sql pager inexact for performance reasons:
-//   assume 3 wantedfrom per page, to be correct, no getTotal()
-// support exclude argument for get_all_pages, new _sql_set()
-//
-// Revision 1.105  2004/11/20 09:16:27  rurban
-// Fix bad-style Cut&Paste programming errors, detected by Charles Corrigan.
-//
-// Revision 1.104  2004/11/19 19:22:03  rurban
-// ModeratePage part1: change status
-//
-// Revision 1.103  2004/11/16 17:29:04  rurban
-// fix remove notification error
-// fix creation + update id_cache update
-//
-// Revision 1.102  2004/11/11 18:31:26  rurban
-// add simple backtrace on such general failures to get at least an idea where
-//
-// Revision 1.101  2004/11/10 19:32:22  rurban
-// * optimize increaseHitCount, esp. for mysql.
-// * prepend dirs to the include_path (phpwiki_dir for faster searches)
-// * Pear_DB version logic (awful but needed)
-// * fix broken ADODB quote
-// * _extract_page_data simplification
-//
-// Revision 1.100  2004/11/10 15:29:20  rurban
-// * requires newer Pear_DB (as the internal one): quote() uses now escapeSimple for strings
-// * ACCESS_LOG_SQL: fix cause request not yet initialized
-// * WikiDB: moved SQL specific methods upwards
-// * new Pear_DB quoting: same as ADODB and as newer Pear_DB.
-//   fixes all around: WikiGroup, WikiUserNew SQL methods, SQL logging
-//
-// Revision 1.99  2004/11/09 17:11:05  rurban
-// * revert to the wikidb ref passing. there's no memory abuse there.
-// * use new wikidb->_cache->_id_cache[] instead of wikidb->_iwpcache, to effectively
-//   store page ids with getPageLinks (GleanDescription) of all existing pages, which
-//   are also needed at the rendering for linkExistingWikiWord().
-//   pass options to pageiterator.
-//   use this cache also for _get_pageid()
-//   This saves about 8 SELECT count per page (num all pagelinks).
-// * fix passing of all page fields to the pageiterator.
-// * fix overlarge session data which got broken with the latest ACCESS_LOG_SQL changes
-//
-// Revision 1.98  2004/11/07 18:34:29  rurban
-// more logging fixes
-//
-// Revision 1.97  2004/11/07 16:02:51  rurban
-// new sql access log (for spam prevention), and restructured access log class
-// dbh->quote (generic)
-// pear_db: mysql specific parts seperated (using replace)
-//
-// Revision 1.96  2004/11/05 22:32:15  rurban
-// encode the subject to be 7-bit safe
-//
-// Revision 1.95  2004/11/05 20:53:35  rurban
-// login cleanup: better debug msg on failing login,
-// checked password less immediate login (bogo or anon),
-// checked olduser pref session error,
-// better PersonalPage without password warning on minimal password length=0
-//   (which is default now)
-//
-// Revision 1.94  2004/11/01 10:43:56  rurban
-// seperate PassUser methods into seperate dir (memory usage)
-// fix WikiUser (old) overlarge data session
-// remove wikidb arg from various page class methods, use global ->_dbi instead
-// ...
-//
-// Revision 1.93  2004/10/14 17:17:57  rurban
-// remove dbi WikiDB_Page param: use global request object instead. (memory)
-// allow most_popular sortby arguments
-//
-// Revision 1.92  2004/10/05 17:00:04  rurban
-// support paging for simple lists
-// fix RatingDb sql backend.
-// remove pages from AllPages (this is ListPages then)
-//
-// Revision 1.91  2004/10/04 23:41:19  rurban
-// delete notify: fix, @unset syntax error
-//
-// Revision 1.90  2004/09/28 12:50:22  rurban
-// https://sourceforge.net/forum/forum.php?thread_id=1150924&forum_id=18929
-//
-// Revision 1.89  2004/09/26 10:54:42  rurban
-// silence deferred check
-//
-// Revision 1.88  2004/09/25 18:16:40  rurban
-// unset more unneeded _cached_html. (Guess this should fix sf.net now)
-//
-// Revision 1.87  2004/09/25 16:25:40  rurban
-// notify on rename and remove (to be improved)
-//
-// Revision 1.86  2004/09/23 18:52:06  rurban
-// only fortune at create
-//
-// Revision 1.85  2004/09/16 08:00:51  rurban
-// just some comments
-//
-// Revision 1.84  2004/09/14 10:34:30  rurban
-// fix TransformedText call to use refs
-//
-// Revision 1.83  2004/09/08 13:38:00  rurban
-// improve loadfile stability by using markup=2 as default for undefined markup-style.
-// use more refs for huge objects.
-// fix debug=static issue in WikiPluginCached
-//
-// Revision 1.82  2004/09/06 12:08:49  rurban
-// memory_limit on unix workaround
-// VisualWiki: default autosize image
-//
-// Revision 1.81  2004/09/06 08:28:00  rurban
-// rename genericQuery to genericSqlQuery
-//
-// Revision 1.80  2004/07/09 13:05:34  rurban
-// just aesthetics
-//
-// Revision 1.79  2004/07/09 10:06:49  rurban
-// Use backend specific sortby and sortable_columns method, to be able to
-// select between native (Db backend) and custom (PageList) sorting.
-// Fixed PageList::AddPageList (missed the first)
-// Added the author/creator.. name to AllPagesBy...
-//   display no pages if none matched.
-// Improved dba and file sortby().
-// Use &$request reference
-//
-// Revision 1.78  2004/07/08 21:32:35  rurban
-// Prevent from more warnings, minor db and sort optimizations
-//
-// Revision 1.77  2004/07/08 19:04:42  rurban
-// more unittest fixes (file backend, metadata RatingsDb)
-//
-// Revision 1.76  2004/07/08 17:31:43  rurban
-// improve numPages for file (fixing AllPagesTest)
-//
-// Revision 1.75  2004/07/05 13:56:22  rurban
-// sqlite autoincrement fix
-//
-// Revision 1.74  2004/07/03 16:51:05  rurban
-// optional DBADMIN_USER:DBADMIN_PASSWD for action=upgrade (if no ALTER permission)
-// added atomic mysql REPLACE for PearDB as in ADODB
-// fixed _lock_tables typo links => link
-// fixes unserialize ADODB bug in line 180
-//
-// Revision 1.73  2004/06/29 08:52:22  rurban
-// Use ...version() $need_content argument in WikiDB also:
-// To reduce the memory footprint for larger sets of pagelists,
-// we don't cache the content (only true or false) and
-// we purge the pagedata (_cached_html) also.
-// _cached_html is only cached for the current pagename.
-// => Vastly improved page existance check, ACL check, ...
-//
-// Now only PagedList info=content or size needs the whole content, esp. if sortable.
-//
-// Revision 1.72  2004/06/25 14:15:08  rurban
-// reduce memory footprint by caching only requested pagedate content (improving most page iterators)
-//
-// Revision 1.71  2004/06/21 16:22:30  rurban
-// add DEFAULT_DUMP_DIR and HTML_DUMP_DIR constants, for easier cmdline dumps,
-// fixed dumping buttons locally (images/buttons/),
-// support pages arg for dumphtml,
-// optional directory arg for dumpserial + dumphtml,
-// fix a AllPages warning,
-// show dump warnings/errors on DEBUG,
-// don't warn just ignore on wikilens pagelist columns, if not loaded.
-// RateIt pagelist column is called "rating", not "ratingwidget" (Dan?)
-//
-// Revision 1.70  2004/06/18 14:39:31  rurban
-// actually check USECACHE
-//
-// Revision 1.69  2004/06/13 15:33:20  rurban
-// new support for arguments owner, author, creator in most relevant
-// PageList plugins. in WikiAdmin* via preSelectS()
-//
-// Revision 1.68  2004/06/08 21:03:20  rurban
-// updated RssParser for XmlParser quirks (store parser object params in globals)
-//
-// Revision 1.67  2004/06/07 19:12:49  rurban
-// fixed rename version=0, bug #966284
-//
-// Revision 1.66  2004/06/07 18:57:27  rurban
-// fix rename: Change pagename in all linked pages
-//
-// Revision 1.65  2004/06/04 20:32:53  rurban
-// Several locale related improvements suggested by Pierrick Meignen
-// LDAP fix by John Cole
-// reanable admin check without ENABLE_PAGEPERM in the admin plugins
-//
-// Revision 1.64  2004/06/04 16:50:00  rurban
-// add random quotes to empty pages
-//
-// Revision 1.63  2004/06/04 11:58:38  rurban
-// added USE_TAGLINES
-//
-// Revision 1.62  2004/06/03 22:24:41  rurban
-// reenable admin check on !ENABLE_PAGEPERM, honor s=Wildcard arg, fix warning after Remove
-//
-// Revision 1.61  2004/06/02 17:13:48  rurban
-// fix getRevisionBefore assertion
-//
-// Revision 1.60  2004/05/28 10:09:58  rurban
-// fix bug #962117, incorrect init of auth_dsn
-//
-// Revision 1.59  2004/05/27 17:49:05  rurban
-// renamed DB_Session to DbSession (in CVS also)
-// added WikiDB->getParam and WikiDB->getAuthParam method to get rid of globals
-// remove leading slash in error message
-// added force_unlock parameter to File_Passwd (no return on stale locks)
-// fixed adodb session AffectedRows
-// added FileFinder helpers to unify local filenames and DATA_PATH names
-// editpage.php: new edit toolbar javascript on ENABLE_EDIT_TOOLBAR
-//
-// Revision 1.58  2004/05/18 13:59:14  rurban
-// rename simpleQuery to genericQuery
-//
-// Revision 1.57  2004/05/16 22:07:35  rurban
-// check more config-default and predefined constants
-// various PagePerm fixes:
-//   fix default PagePerms, esp. edit and view for Bogo and Password users
-//   implemented Creator and Owner
-//   BOGOUSERS renamed to BOGOUSER
-// fixed syntax errors in signin.tmpl
-//
-// Revision 1.56  2004/05/15 22:54:49  rurban
-// fixed important WikiDB bug with DEBUG > 0: wrong assertion
-// improved SetAcl (works) and PagePerms, some WikiGroup helpers.
-//
-// Revision 1.55  2004/05/12 19:27:47  rurban
-// revert wrong inline optimization.
-//
-// Revision 1.54  2004/05/12 10:49:55  rurban
-// require_once fix for those libs which are loaded before FileFinder and
-//   its automatic include_path fix, and where require_once doesn't grok
-//   dirname(__FILE__) != './lib'
-// upgrade fix with PearDB
-// navbar.tmpl: remove spaces for IE &nbsp; button alignment
-//
-// Revision 1.53  2004/05/08 14:06:12  rurban
-// new support for inlined image attributes: [image.jpg size=50x30 align=right]
-// minor stability and portability fixes
-//
-// Revision 1.52  2004/05/06 19:26:16  rurban
-// improve stability, trying to find the InlineParser endless loop on sf.net
-//
-// remove end-of-zip comments to fix sf.net bug #777278 and probably #859628
-//
-// Revision 1.51  2004/05/06 17:30:37  rurban
-// CategoryGroup: oops, dos2unix eol
-// improved phpwiki_version:
-//   pre -= .0001 (1.3.10pre: 1030.099)
-//   -p1 += .001 (1.3.9-p1: 1030.091)
-// improved InstallTable for mysql and generic SQL versions and all newer tables so far.
-// abstracted more ADODB/PearDB methods for action=upgrade stuff:
-//   backend->backendType(), backend->database(),
-//   backend->listOfFields(),
-//   backend->listOfTables(),
-//
-// Revision 1.50  2004/05/04 22:34:25  rurban
-// more pdf support
-//
-// Revision 1.49  2004/05/03 11:16:40  rurban
-// fixed sendPageChangeNotification
-// subject rewording
-//
-// Revision 1.48  2004/04/29 23:03:54  rurban
-// fixed sf.net bug #940996
-//
-// Revision 1.47  2004/04/29 19:39:44  rurban
-// special support for formatted plugins (one-liners)
-//   like <small><plugin BlaBla ></small>
-// iter->asArray() helper for PopularNearby
-// db_session for older php's (no &func() allowed)
-//
-// Revision 1.46  2004/04/26 20:44:34  rurban
-// locking table specific for better databases
-//
-// Revision 1.45  2004/04/20 00:06:03  rurban
-// themable paging support
-//
-// Revision 1.44  2004/04/19 18:27:45  rurban
-// Prevent from some PHP5 warnings (ref args, no :: object init)
-//   php5 runs now through, just one wrong XmlElement object init missing
-// Removed unneccesary UpgradeUser lines
-// Changed WikiLink to omit version if current (RecentChanges)
-//
-// Revision 1.43  2004/04/18 01:34:20  rurban
-// protect most_popular from sortby=mtime
-//
-// Revision 1.42  2004/04/18 01:11:51  rurban
-// more numeric pagename fixes.
-// fixed action=upload with merge conflict warnings.
-// charset changed from constant to global (dynamic utf-8 switching)
-//
 
 // Local Variables:
 // mode: php

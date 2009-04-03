@@ -12,7 +12,7 @@ body {
   margin: 20px auto;
   padding: 0; 
   font-size: 75%; /* Resets 1em to 10px */
-  font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
+  font-family: 'Lucida Grande', Verdana, Arial, sans-serif;
   background-color: #d5d6d7;
   color: #333;
   background: url("images/kubrickbgcolor.png"); 
@@ -36,7 +36,7 @@ body {
   background-color: transparent;
   font: bolder 67px/50px  Verdana, Arial, Helvetica, sans-serif;
   letter-spacing: -0.1em;
-  font-variant: condensed; 
+  /*font-variant: condensed;*/ 
 }
 
 #yoursiteheader a:hover, #yoursiteheader a:link, #yoursiteheader a:visited {
@@ -47,7 +47,14 @@ body {
 #actionbar, #editbar {
   background: url("images/actionbarbg.png") no-repeat top center;
   width: 760px;
-  height: 40px;
+  /*height: 40px;*/
+}
+
+/* http://www.aboutus.org/UniversalWikiEditButton */
+div.actionbuttons a#btn-edit {
+  background:  url('images/Edit-chalk-10bo12.png') bottom left no-repeat;
+  background-repeat: no-repeat;
+  padding-left: 13px !important;
 }
 
 #LSResult {
@@ -108,6 +115,16 @@ li.LSRow {
   margin-left: 30px;
   vertical-align: middle;
 }
+
+#editarea-size {
+  font-size: 9px;
+  margin-top: 0px;
+  margin-left: 20px;
+  margin-right: 10px;
+}
+#editarea-size input {
+  font-size: 9px;
+}
  
 #actionbuttons a {
   padding-right: 0px;
@@ -115,7 +132,8 @@ li.LSRow {
 }
 
 #pagetrail {
-  margin-left: 19px;
+  margin-left: 19px; 
+  width: 540px;
 }
 
 #pagetrail p {
@@ -139,8 +157,10 @@ li.LSRow {
 
 #pagetitle, #pagetitle a {
   color: black;
+  padding-left: 20px;
   margin-top: 12px;
   margin-bottom: 4px;
+  width: 550px;
 }
 
 .indexLetterHeading {
@@ -150,7 +170,7 @@ li.LSRow {
 }
 
 div.wikitext {
-  margin-left: 25px;
+  /*margin-left: 25px;*/
   margin-top: 12px;
 }
 
@@ -179,6 +199,14 @@ div.comments {
   font-size: 0.81em;
 }
 
+#bottom {
+  font-size: 0.81em;
+  border: none;
+  width: 720px;
+  clear: both;
+  margin: 0 20px 0 20px;
+  /*text-align: center;*/
+}
 #footer {
   font-size: 0.81em;
   background-color: #eee;
@@ -190,7 +218,7 @@ div.comments {
   text-align: center;
 }
 
-#footer p {
+#footer p, #bottom p {
   margin: 0;
   padding: 0;
 /*  padding: 20px 0; */
@@ -219,25 +247,25 @@ div.comments {
 }
 
 small {
-  font-family: Arial, Helvetica, Sans-Serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 0.9em;
   line-height: 1.5em;
 }
 
 tt {
-  font-family: 'Andale Mono', 'Lucida Console', 'Courier New', monospaced;
+  font-family: 'Andale Mono', 'Lucida Console', 'Courier New', monospace;
   font-size: 1.05em;
 }
 
 pre {
   width: 486px;
   font-size: 10px;
-  font-family: 'Andale Mono', 'Lucida Console', 'Courier New', monospaced;
+  font-family: 'Andale Mono', 'Lucida Console', 'Courier New', monospace;
   overflow: hidden;
 }
 
 h1, h2, h3 {
-  font-family: 'Trebuchet MS', 'Lucida Grande', Verdana, Arial, Sans-Serif;
+  font-family: 'Trebuchet MS', 'Lucida Grande', Verdana, Arial, sans-serif;
   font-weight: bold;
 }
 
@@ -258,7 +286,7 @@ h2 {
 }
 
 #sidebar h2, #sidebar .box-title {
-  font-family: 'Lucida Grande', Verdana, Sans-Serif;
+  font-family: 'Lucida Grande', Verdana, sans-serif;
   font-size: 1.2em;
 }
 
@@ -299,13 +327,30 @@ tr.evenrow {
 .entry p a:visited {
   color: #b85b5a;
 }
-
+/* ie quirks */
 #sidebar {
-  font: 1em 'Lucida Grande', Verdana, Arial, Sans-Serif;
+  font: 1em 'Lucida Grande', Verdana, Arial, sans-serif;
+  left:585px;
+  position:absolute;
+  z-index: 2;
+  top: 260px;
   /* top, right, bottom, left */
-  padding: 20px 0 10px 0;
-  margin-left: 535px;
-  width: 200px;
+  padding: 0 10px 10px 0;
+  width: 155px;
+  border: none;
+  overflow: visible;
+  color: black;
+}
+#moz-sidebar {
+  font: 1em 'Lucida Grande', Verdana, Arial, sans-serif;
+  margin-left: 560px;
+  position:absolute;
+  z-index: 2;
+  top: 270px;
+  /* top, right, bottom, left */
+  padding: 0 10px 10px 0;
+  width: 155px;
+  background: white;
 }
 
 #sidebar form {
@@ -336,7 +381,7 @@ small, #sidebar ul ul li, #sidebar ul ol li, .nocomments, .postmetadata, blockqu
   }
   
 code {
-  font: 1.1em 'Courier New', Courier, Fixed;
+  font: 1.1em 'Courier New', Courier, monospace;
 }
 
 acronym, abbr, span.caps
@@ -387,42 +432,65 @@ a.named-interwiki {
 
 #searchholder {
   float: right;
-  height: 30px;
+  /*height: 30px;*/
   vertical-align: middle;
   margin-top: 10px;
-  margin-right: 35px;
+  margin-right: 30px;
 }
 
 #livesearch {
-  height: 13px;
-  width: 100px;
+  /*height: 16px;*/
+  width: 150px;
+  font-size:0.8em;
 }
 
-.narrowcolumn, #logincontent, #editcontent {
+#bodyContent {
   float: left;
   padding: 0 0 20px 25px;
   margin: 0px 0 0;
-  width: 490px;
-  }
+  width: 550px;
+  overflow: visible;
+  /* how to define minimal height? */
+  min-height: 490px;
+}
+.narrowcolumn, .wikiblog {
+  width: 550px !important;
+  /*max-width: 550px;*/
+}
+
+#editpage, #edit-content, .wiki-edithelp {
+  /* top, right, bottom, left */
+  padding: 0 0 20px 0;
+  /*margin: 0px 0 0;*/
+  width: 710px;
+  overflow: visible;
+}
+.wiki-edithelp { 
+  font-size: 0.81em; 
+}
+#wikiblog-form div.wiki-edithelp { 
+  width: 550px;
+  font-size:8pt;
+}
 
 .widecolumn {
   padding: 10px 0 20px 0;
   margin: 5px auto;
   width: 450px;
-  }
+}
   
 .post {
   margin: 0 0 40px;
   text-align: justify;
-  }
+}
 
 .widecolumn .post {
   margin: 0;
-  }
+}
 
 .narrowcolumn .postmetadata {
   padding-top: 5px;
-  }
+}
 
 .widecolumn .postmetadata {
   margin: 30px 0;
@@ -444,9 +512,12 @@ div.box-title, div.box-title a, div.box-title a:visited, div.box-title a:link {
   text-decoration: none;
   color: black;
 }
+div.box-data, div.box-data a, div.box-data a:visited, div.box-data a:link {
+  font-size:8pt; 
+}
 
 #sidebar h2, #sidebar .box-title {
-  margin: 5px 0 0;
+  margin: 5px 0 0 0;
   padding: 0;
   color: black;
   text-decoration: none;
@@ -575,17 +646,14 @@ ol li, #sidebar ul ol li {
   }
 /* End Entry Lists */
 
-/* correct identation for non-browse actions */
-body p, #editpage, #content table, #content .diff { 
-  margin-left: 40px;
-  margin-right: 20px;
-}
-
 /* Begin Form Elements */
 #searchform {
   text-align: right;
+  display: inline;
 }
-
+#wikiblog-summary { 
+  font-weight: bold;
+}
 /* End Form Elements */
 
 /* Begin Various Tags & Classes */
@@ -628,8 +696,273 @@ a img {
 }
 /* End Various Tags & Classes*/
 
+
+/**
+ * Diff Output
+ */
+/* main box */
+.diff {
+  margin-top:    1ex;
+  margin-bottom: 0.5ex;
+  background: white;
+  /* Netscape 4 requires this 1px border.
+     Without it, the paper borders below cause
+     the white background to disappear. */
+  border: 1px #ccc solid;
+  color: black;
+  border-top: 1px solid #494f5d;
+  border-left:  1px solid #494f5d;
+  border-bottom:  1px solid #c6d2de;
+  border-right: 1px solid #c6d2de;
+  padding-top:    1px;
+  padding-bottom: 1px;
+  padding-left:  .125em;
+  padding-right: .125em;
+  padding: 0;
+  /* "paper" borders */
+  /*border-top: 2px #d2d2d2 solid;
+  border-left:  2px #b2b2b2 solid;
+  border-bottom:  2px #e8e6df solid;
+  border-right: 2px #e8e6df solid;*/
+/*  padding-left:  0em; 
+  padding-bottom: 0ex;*/
+/*  border-style: inset;*/
+  /*This breaks Netscape 4: (display does not go full width).
+   * width: auto;
+   */
+  /* I'm not sure what the intent of this was, but it's
+   *  not valid CSS: */
+  /* display: editarea; */
+  clear: both;
+}
+.diff .block {
+  background: #ddd;
+  padding-left: 1em;
+  /* for NS4 */
+  /*border: none;*/
+}
+
+/* individual blocks */
+.diff .context {
+  background: white;
+  /* for NS4 */
+  border: none;
+}
+/* entire difftextblock */
+#difftext {
+  width: 710px;
+  margin-top:    0;
+  margin-bottom: 0;
+  background: white;
+  /* Netscape 4 requires this 1px border.
+     Without it, the paper borders below cause
+     the white background to disappear. */
+  border: 1px black solid;
+  /* "paper" borders */
+  border-top:  1px #e8e6df solid;
+  border-left: 1px #e8e6df solid;
+  border-bottom: 1px #d2d2d2 solid;
+  border-right:  1px #b2b2b2 solid;
+  padding-left:  0em; 
+  padding-right: 0em;
+  padding-top:    0ex;
+  padding-bottom: 0ex;
+  /*This breaks Netscape 4: (display does not go full width).
+   * width: auto;
+   */
+  clear: both;
+}
+/* + - line prefix */
+.diff .block tt {
+  font-weight: normal;
+  font-family: monospace;
+  color: black;
+  /* for NS4 */
+  margin-left: 0;
+  border: none;
+}
+/* changed words */
+.diff del, .diff ins {
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* blocks containing deleted or added words */
+.diff .original, .diff .deleted,
+.diff .final, .diff .added {
+  background: white;
+}
+/* blocks containing deleted words */
+.diff .original, .diff .deleted {
+  background: #fcc;
+  /* for NS4 */
+  border: none;
+}
+/* blocks containing added words */
+.diff .final, .diff .added {
+  background: #cfc;
+  /* for NS4 */
+  border: none;
+}
+
+/* These don't work in NS4 -- it completely ignores <del> and <ins>. */
+/* deleted words */
+.diff del { background: #f99; }
+/* added words */
+.diff ins { background: #9f9; }
+
+
+/**
+ * PageHistory, Info
+ */
+td.pageinfo { font-weight: bold; }
+.pageinfo-minoredit, .pageinfo-authorid {
+  font-size: smaller;
+  font-style: oblique;
+}
+
 #VisualWikiPlugin img {
-  width: 480px;
+  width: 520px;
   margin-left: 0;
   padding: 0;
+}
+
+/* plugin BoxRight */
+div.boxright {
+  width: 200px; 
+  right: 10px;
+  padding: 0.5em; 
+  float: right; 
+  border: thin solid #888888; 
+  padding: 0.5em;
+}
+
+/* RssFeed */
+div.rss { margin: 1em; padding: 1em; font-size: 0.9em; background-color: #eeeeee; border: thin dashed #aaa; }
+div.feed { color: #333; margin: -0.5em; margin-bottom: 0em; padding: 0.3em; font-weight: bold; background-color: #f2f2f2; font-size: 1.2em; }
+div.itemdesc {  padding-left: 1em; }
+div.rssitem { border-top: thin dashed #aaa; }
+
+/* SqlResult */
+table.sqlresult { 
+  border: 1px outset gray;
+  background: white;
+  margin: 0.5ex 0.5em;
+  padding: 1px;
+}
+.sqlresult tr.evenrow { background: #eee; }
+.sqlresult tr.oddrow  { background: white; }
+table.sqlresult td {
+  margin: 1px;
+  border: 1px solid gray;
+}
+
+/**
+ * TeX2png plugin
+ */
+img.tex { 
+  border: 0ex;
+  vertical-align: middle; 
+}
+
+/**
+ * PhotoAlbum plugin
+ */
+.boldsmall {
+  font-weight: bold;
+  font-size: 11px;
+}
+/* postnuke css:*/
+.gensmall{font-size:9px}
+.genmed{font-size:11px}
+
+.wikiwyg_toolbar {
+    background: #D3D3D3;
+    border: 1px outset;
+    letter-spacing: 0;
+    padding: 2px;
+}
+
+span.wikiwyg_control_link a {
+    padding-right: 8px;
+}
+
+.wikiwyg_button {
+    background: #D3D3D3;
+    border: 1px solid #D3D3D3;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    vertical-align: bottom;
+}
+
+.wikiwyg_button:hover {
+    border: 1px outset;
+}
+
+.wikiwyg_button:active {
+    border: 1px inset;
+}
+
+.wikiwyg_separator {
+    background: #D3D3D3;
+    border: 1px solid #D3D3D3;
+    width: 9px;
+    height: 20px;
+    vertical-align: bottom;
+}
+
+.wikiwyg_selector {
+    width: 70px;
+}
+
+.wikiwyg_wysiwyg table {
+    border-collapse: collapse;
+    margin-bottom: .2em;
+}
+
+.wikiwyg_wysiwyg table td {
+    border: 1px;
+    border-style: solid;
+    padding: .2em;
+    vertical-align: top;
+}
+
+/*
+ * table class="boxed"
+ * will put a border around the table (but not around the cells)
+ *
+ * table class="bordered"
+ * will put a border around the table and the cells
+ *
+ * In both cases, the caption will be bold and centered under the table
+ *
+ * In both cases, the headers (th) will have a "#d8d8d8" background
+ */
+
+table.boxed, table.bordered, table.bordered th, table.bordered td {
+    border-width: 1px;
+    border-style: solid;
+    border-collapse: collapse;
+    vertical-align: top;
+}
+
+table.boxed td, table.bordered td,
+table.boxed th, table.bordered th {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+table.boxed caption, table.bordered caption {
+    text-align: center;
+    font-weight: bold;
+    caption-side: bottom;
+    padding-top: 0.8em;
+}
+
+table.boxed th, table.bordered th {
+    font-weight: bold;
+    background-color: #d8d8d8;
 }

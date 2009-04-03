@@ -17,7 +17,7 @@
 // |          Chuck Hagenbuch <chuck@horde.org>                           |
 // +----------------------------------------------------------------------+
 //
-// $Id: db.php,v 1.1 2004/06/21 08:39:38 rurban Exp $
+// $Id: db.php 6209 2008-08-26 15:30:39Z vargenau $
 
 require_once 'DB.php';
 require_once 'Cache/Container.php';
@@ -52,7 +52,7 @@ require_once 'Cache/Container.php';
 * )
 *
 * @author   Sebastian Bergmann <sb@sebastian-bergmann.de>
-* @version  $Id: db.php,v 1.1 2004/06/21 08:39:38 rurban Exp $
+* @version  $Id: db.php 6209 2008-08-26 15:30:39Z vargenau $
 * @package  Cache
 */
 class Cache_Container_db extends Cache_Container {
