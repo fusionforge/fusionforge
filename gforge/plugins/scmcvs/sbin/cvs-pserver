@@ -4,6 +4,8 @@
 
 CHROOTDIR=/var/lib/gforge/chroot
 CVSROOT=cvsroot # without leading "/"!
+CVSREADONLYFS=yes
+export CVSREADONLYFS
 
 # Execute pserver
 cd $CHROOTDIR
