@@ -1,4 +1,4 @@
-gforge (4.7.2.50-2) experimental; urgency=low
+gforge (4.7.50-1) experimental; urgency=low
 
   [ Christian Bayle ]
   * Removed all files from /usr/lib/gforge and put them in /usr/share/gforge
