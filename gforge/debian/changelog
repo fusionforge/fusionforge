@@ -9,8 +9,9 @@ gforge (4.7.2.50-2) experimental; urgency=low
   [ Roland Mas ]
   * New package: gforge-plugin-scmbzr (not complete yet!).
   * Fixed a bunch of lintian warnings.
+  * Added logrotate configuration file for vhosts access logs.
 
- -- Roland Mas <lolando@debian.org>  Thu, 02 Apr 2009 23:13:38 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 03 Apr 2009 11:45:28 +0200
 
 gforge (4.7.2-4) experimental; urgency=low
 

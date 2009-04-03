@@ -64,6 +64,7 @@ gforge/db/gforge-data-mysql.sql -text
 gforge/db/gforge-struct-mysql.sql -text
 gforge/db/timetracking-init.sql -text
 gforge/deb-specific/fckeditor/config.js -text
+gforge/deb-specific/gforge.logrotate -text
 gforge/deb-specific/install-cvs.sh -text
 gforge/deb-specific/scmcvs/cronjobs/cvs-stats.pl -text
 gforge/deb-specific/scmcvs/cronjobs/cvs_dump.pl -text

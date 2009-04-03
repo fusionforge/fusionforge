@@ -1,6 +1,7 @@
 etc/gforge/custom
 etc/gforge/languages-local
 etc/gforge/templates
+etc/logrotate.d
 usr/share/gforge/bin
 usr/share/gforge/www
 var/lib/gforge/scmtarballs
