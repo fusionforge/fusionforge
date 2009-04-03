@@ -39,7 +39,7 @@
 48 * * * * root $PHP $FFCRON/massmail.php
 
 # Weekly db vacuum (should be done after ALL OTHER JOBS)
-50 2 * * Mon $FFUSER $PHP $FFCRON/vacuum.php
+50 2 * * 1 $FFUSER $PHP $FFCRON/vacuum.php
 
 # Create SCM repositories
 0 * * * * root $PHP $FFCRON/create_scm_repos.php
