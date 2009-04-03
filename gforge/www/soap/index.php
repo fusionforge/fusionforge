@@ -5,6 +5,7 @@ $no_gz_buffer=true;
 require_once '../env.inc.php';
 require_once $gfwww.'include/squal_pre.php';
 require_once $gfcommon.'include/gettext.php';
+require_once $gfcommon.'include/FusionForge.class.php';
 
 ini_set('memory_limit','32M');
 
@@ -78,6 +79,12 @@ $server->register(
 	$uri,
 	$uri.'#logout');
 
+$server->register(
+	'version',
+	array(),
+	array('versionResponse'=>'xsd:string'),
+	$uri,
+	$uri.'#version');
 //
 //	Include Group Functions
 //
@@ -126,7 +133,7 @@ if ($wsdl == "save") {
 }
 */
 
-if ($wsdl) {
+if (isset($wsdl)) {
 	echo $wsdl_data;
 	return;
 }
@@ -173,7 +180,16 @@ function logout($session_ser) {
 	session_logout();
    	return "OK";
 }
-
+i
+/**
+ * version - get the running version of FusionForge
+ * 
+ * @return	string 	the version of FusionForge running on the server
+ */
+function version() {
+	$ff = new FusionForge();
+	return $ff->software_version;
+}
 
 // 4. call the service method to initiate the transaction and send the response
 $HTTP_RAW_POST_DATA = isset($HTTP_RAW_POST_DATA) ? $HTTP_RAW_POST_DATA : '';
