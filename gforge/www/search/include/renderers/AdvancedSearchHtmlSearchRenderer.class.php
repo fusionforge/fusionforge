@@ -129,6 +129,31 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			$html .= $this->getPartResult($renderer, 'short_news', _('News Search Results'));
 		}
 
+		// This is quite complex but the goal is to extract all the 
+		// registered plugins to the hook 'search_engines' and call
+		// them.
+		$pluginManager = plugin_manager_get_object();
+		$searchManager = getSearchManager();
+		$engines = $searchManager->getAvailableSearchEngines();
+		
+		if (isset($pluginManager->hooks_to_plugins['search_engines'])) {
+			$p_list = $pluginManager->hooks_to_plugins['search_engines'];
+			foreach ($p_list as $p_name) {
+				$p_obj = $pluginManager->GetPluginObject($p_name);
+				$name = $p_obj->text;
+				if (in_array($p_name, $this->selectedParentSections)) {
+					reset($engines);
+					foreach($engines as $e) {
+						if ($e->type == $p_name) {		
+							$renderer = $e->getSearchRenderer($this->words, 
+								$this->offset, $this->isExact, $this->groupId);
+							$html .= $this->getPartResult($renderer, 'short_'.$p_name, $name);
+						}
+					}
+				}
+			}
+		}
+
 		return $html.'<br />'; 
 	}
 
@@ -213,6 +238,17 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			$undersections = FrsHtmlSearchRenderer::getSections($this->groupId);
 			if (count($undersections) > 0) {
 				$sections['short_files'] = $undersections;
+			}
+		}
+
+		$pluginManager = plugin_manager_get_object();
+		if (isset($pluginManager->hooks_to_plugins['search_engines'])) {
+			$p_list = $pluginManager->hooks_to_plugins['search_engines'];
+			foreach ($p_list as $p_name) {
+				if ($group->usesPlugin($p_name)) {
+					$p_obj = $pluginManager->GetPluginObject($p_name);
+					$sections[$p_obj->name] = true;
+				}
 			}
 		}
 
