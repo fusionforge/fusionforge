@@ -2,10 +2,7 @@
 FFCRON="/usr/share/gforge/cronjobs"
 FFUSER=gforge
 
-# Change paths to the GForge directory.
-# Don't reference $GFORGE because this won't work!
 # You may need to change the pathname to php CLI (command line interface)
-#INCLUDE_PATH=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www:/usr/share/gforge/common
 PHP="/usr/bin/php -q -d include_path=.:/etc/gforge:/usr/share/gforge:/usr/share/gforge/www/include"
 
 # Don't mail command output to anyone.
@@ -56,6 +53,15 @@ MAILTO=""
 
 # Create SCM repositories
 0 * * * * root $PHP $FFCRON/create_scm_repos.php
+
+# this cronjob analyse the apache log and instert them in the db table stats_subd_pages
+# this is not used in fusionforge IHM.
+# Daily sweep of the HTTP log files for project activity
+#15 0 * * * $FFUSER $FFCRON/stats_projects_logparse.pl
+
+# this cronjob send a mail to the admin with all news that have been posted less than 30 days and that have not be validated.
+# Daily mail for not approved news
+30 17 * * * root $FFCRON/get_news_notapproved.pl
 
 # Daily site backup
 0 2 * * *  root $PHP $FFCRON/backup_site.php
