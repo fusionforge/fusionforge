@@ -1,7 +1,7 @@
 #! /bin/sh
 # 
-# Configure Proftpd for GForge
-# Christian Bayle, Roland Mas, debian-sf (GForge for Debian)
+# Configure Proftpd for FusionForge
+# Christian Bayle, Roland Mas
 
 set -e
 
@@ -12,19 +12,20 @@ fi
 
 FTPROOT=/var/lib/gforge/chroot/ftproot
 GRPHOME=/var/lib/gforge/chroot/home/groups
+FTPCONF=/etc/proftpd/proftpd.conf
 
 case "$1" in
     configure-files)
-	cp -a /etc/proftpd/proftpd.conf /etc/proftpd/proftpd.conf.gforge-new
+	cp -a ${FTPCONF} ${FTPCONF}.gforge-new
         #
 	# This initialize FTP
 	#
-	if ! grep -q "^Include /etc/gforge/sf-proftpd.conf" /etc/proftpd/proftpd.conf.gforge-new ; then
-	    perl -pi -e "s/^/#SF#/" /etc/proftpd/proftpd.conf.gforge-new
-	    echo "### Previous lines commented by GForge install" >> /etc/proftpd/proftpd.conf.gforge-new
-	    echo "### Next lines inserted by GForge install" >> /etc/proftpd/proftpd.conf.gforge-new
-	    echo "ServerType standalone" >>/etc/proftpd/proftpd.conf.gforge-new
-	    echo "Include /etc/gforge/sf-proftpd.conf" >> /etc/proftpd/proftpd.conf.gforge-new
+	if ! grep -q "^Include /etc/gforge/sf-proftpd.conf" ${FTPCONF}.gforge-new ; then
+	    perl -pi -e "s/^/#SF#/" ${FTPCONF}.gforge-new
+	    echo "### Previous lines commented by GForge install" >> ${FTPCONF}.gforge-new
+	    echo "### Next lines inserted by GForge install" >> ${FTPCONF}.gforge-new
+	    echo "ServerType standalone" >>${FTPCONF}.gforge-new
+	    echo "Include /etc/gforge/sf-proftpd.conf" >> ${FTPCONF}.gforge-new
 	fi
 	;;
 
@@ -54,13 +55,13 @@ FIN
 	;;
     
     purge-files)
-	cp -a /etc/proftpd/proftpd.conf /etc/proftpd/proftpd.conf.gforge-new
-	if grep -q "### Next lines inserted by GForge install" /etc/proftpd/proftpd.conf.gforge-new ; then
-	    perl -pi -e "s/### Previous lines commented by GForge install\n//"  /etc/proftpd/proftpd.conf.gforge-new
-	    perl -pi -e "s/### Next lines inserted by GForge install\n//" /etc/proftpd/proftpd.conf.gforge-new
-	    perl -pi -e "s:^Include /etc/gforge/sf-proftpd.conf\n::" /etc/proftpd/proftpd.conf.gforge-new
-	    perl -pi -e "s:^ServerType standalone\n::" /etc/proftpd/proftpd.conf.gforge-new
-	    perl -pi -e "s/^#SF#//" /etc/proftpd/proftpd.conf.gforge-new
+	cp -a ${FTPCONF} ${FTPCONF}.gforge-new
+	if grep -q "### Next lines inserted by GForge install" ${FTPCONF}.gforge-new ; then
+	    perl -pi -e "s/### Previous lines commented by GForge install\n//"  ${FTPCONF}.gforge-new
+	    perl -pi -e "s/### Next lines inserted by GForge install\n//" ${FTPCONF}.gforge-new
+	    perl -pi -e "s:^Include /etc/gforge/sf-proftpd.conf\n::" ${FTPCONF}.gforge-new
+	    perl -pi -e "s:^ServerType standalone\n::" ${FTPCONF}.gforge-new
+	    perl -pi -e "s/^#SF#//" ${FTPCONF}.gforge-new
 	fi
 	;;
 
