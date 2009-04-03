@@ -180,7 +180,7 @@ function logout($session_ser) {
 	session_logout();
    	return "OK";
 }
-i
+
 /**
  * version - get the running version of FusionForge
  * 
