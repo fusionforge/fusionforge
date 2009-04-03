@@ -32,7 +32,7 @@ allmodules : libnsspgsql
 libnsspgsql : buildlibnsspgsql
 
 RPM_TMP=~/rpmbuild
-RPMS_DIST=~/fusionforge_repo
+BUILDRESULT=~/fusionforge_repo
 
 # build a custom rpmmacro file and rpmrc to point to it for rpmbuild
 #rpmrc:
@@ -66,8 +66,8 @@ rpmprep:
 	mkdir $(RPM_TMP)/TMP
 
 dist:
-	-mkdir -p $(RPMS_DIST)
-	cp $(RPM_TMP)/SRPMS/*.rpm $(RPMS_DIST)
+	-mkdir -p $(BUILDRESULT)
+	cp $(RPM_TMP)/SRPMS/*.rpm $(BUILDRESULT)
 
 #
 # FUSIONFORGE
