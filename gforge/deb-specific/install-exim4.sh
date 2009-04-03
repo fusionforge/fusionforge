@@ -141,7 +141,7 @@ forward_for_gforge_lists_admin:
 
 forward_for_gforge_lists_bounces:
   domains = $sys_lists_host
-  local_part_suffix = -bounces
+  local_part_suffix = -bounces : -bounces+*
   driver = redirect
   pipe_transport = address_pipe
   data = \${lookup pgsql {select bounces_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{\$value}}
@@ -150,7 +150,7 @@ forward_for_gforge_lists_bounces:
 
 forward_for_gforge_lists_confirm:
   domains = $sys_lists_host
-  local_part_suffix = -confirm
+  local_part_suffix = -confirm : -confirm+*
   driver = redirect
   pipe_transport = address_pipe
   data = \${lookup pgsql {select confirm_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{\$value}}
