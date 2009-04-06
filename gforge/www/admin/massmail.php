@@ -97,7 +97,7 @@ print '
 
 print '
 <form action="'.getStringFromServer('PHP_SELF').'" method="post">'
-.'<input type="hidden" name="form_key" value="'.form_generate_key().'">'
+.'<input type="hidden" name="form_key" value="'.form_generate_key().'" />'
 .'<strong>Target Audience:</strong>'.utils_requiredField().'<br />'.html_build_select_box_from_arrays(
 	array(0,'SITE','COMMNTY','DVLPR','ADMIN','ALL','SFDVLPR'),
 	array(

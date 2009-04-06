@@ -53,11 +53,10 @@ site_admin_header(array('title'=>_('Permanently Delete Project')));
 
 echo '<h2>'._('Permanently and irretrievably delete project').': '.$group->getPublicName().'</h2>' ;?>
 
-<p>
 <form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
-<input type="checkbox" value="1" name="sure"> <?php echo _('Confirm Delete'); ?><br />
-<input type="checkbox" value="1" name="reallysure"> <?php echo _('Confirm Delete'); ?><br />
-<input type="checkbox" value="1" name="reallyreallysure"> <?php echo _('Confirm Delete'); ?><br />
+<input type="checkbox" value="1" name="sure" /> <?php echo _('Confirm Delete'); ?><br />
+<input type="checkbox" value="1" name="reallysure" /> <?php echo _('Confirm Delete'); ?><br />
+<input type="checkbox" value="1" name="reallyreallysure" /> <?php echo _('Confirm Delete'); ?><br />
 
 <input type="submit" name="submit" value="<?php echo _('Permanently Delete'); ?>" />
 </form></p>

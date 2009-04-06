@@ -103,6 +103,7 @@ site_admin_header(array('title'=>_('Site Admin: User Info')));
 </td>
 </tr>
 
+<tr>
 <td>
 <?php echo _('User name:'); ?>
 </td>
@@ -111,6 +112,7 @@ site_admin_header(array('title'=>_('Site Admin: User Info')));
 </td>
 </tr>
 
+<tr>
 <td>
 <?php echo _('Real name'); ?>
 </td>
@@ -191,8 +193,8 @@ if ($u->getStatus() == 'D') {
 </tr>
 <?php if ($u->getStatus() != 'D') {	?>
 <tr>
-<td colspan="2"><input type="checkbox" name="confirm_delete" value="1"><?php echo _('I want to delete this user'); ?>
-&nbsp;<input type="submit" name="delete_user" value="<?php echo _('Delete'); ?>" /><br>&nbsp;
+<td colspan="2"><input type="checkbox" name="confirm_delete" value="1" /><?php echo _('I want to delete this user'); ?>
+&nbsp;<input type="submit" name="delete_user" value="<?php echo _('Delete'); ?>" /><br />&nbsp;
 </td>
 </tr>
 <?php } ?>
@@ -218,7 +220,6 @@ if ($u->getStatus() == 'D') {
 
 <hr />
 
-<p>
 <h3><?php echo _('Groups Membership'); ?></h3>
 
 <?php

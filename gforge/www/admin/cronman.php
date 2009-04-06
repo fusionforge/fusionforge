@@ -42,7 +42,7 @@ if (!$which || $which==100) {
 ?>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <?php echo html_build_select_box_from_arrays(array_keys($cron_arr), $cron_arr, 'which', $which,true,'Any'); ?>
-<input type="submit" name="submit" value="<?php echo _('Submit');?>">
+<input type="submit" name="submit" value="<?php echo _('Submit');?>" />
 </form>
 <?php
 
