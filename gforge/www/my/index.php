@@ -255,26 +255,27 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 				}
 				
 				$at_arr =& $atf->getArtifactTypes();
-				
-			
-				foreach($at_arr as $at) {
-					if (!$at->isMonitoring()) {
-						continue ;
-					}
-					$at_found++ ;
-					if ($group->getID() != $last_group) {
-						echo '
-					<tr '. $HTML->boxGetAltRowStyle(1) .'><td colspan="2">'.util_make_link ('/forum/?group_id='.$group->getID(),$group->getPublicName()).'</td></tr>';
-					}
-					$last_group = $group->getID() ;
 
-					echo '<tr '. $HTML->boxGetAltRowStyle(0) .'><td align="center">' ;
-					echo util_make_link ('/tracker/?group_id='.$group->getID().'&atid='.$at->getID().'&func=monitor',
-							     '<img src="'. $HTML->imgroot . '/ic/trash.png" height="16" width="16" '.'border="0" alt="'._('Stop monitoring').'" />') ;
-					echo '</td><td width="99%">' ;
-					echo util_make_link ('/tracker/?group_id='.$group->getID().'&atid='.$at->getID(),
-							     $at->getName()) ;
-					echo '</td></tr>';
+				if (count ($at_arr) >= 1) {
+					foreach($at_arr as $at) {
+						if (!$at->isMonitoring()) {
+							continue ;
+						}
+						$at_found++ ;
+						if ($group->getID() != $last_group) {
+							echo '
+					<tr '. $HTML->boxGetAltRowStyle(1) .'><td colspan="2">'.util_make_link ('/tracker/?group_id='.$group->getID(),$group->getPublicName()).'</td></tr>';
+						}
+						$last_group = $group->getID() ;
+						
+						echo '<tr '. $HTML->boxGetAltRowStyle(0) .'><td align="center">' ;
+						echo util_make_link ('/tracker/?group_id='.$group->getID().'&atid='.$at->getID().'&func=monitor',
+								     '<img src="'. $HTML->imgroot . '/ic/trash.png" height="16" width="16" '.'border="0" alt="'._('Stop monitoring').'" />') ;
+						echo '</td><td width="99%">' ;
+						echo util_make_link ('/tracker/?group_id='.$group->getID().'&atid='.$at->getID(),
+								     $at->getName()) ;
+						echo '</td></tr>';
+					}
 				}
 			}
 		}
