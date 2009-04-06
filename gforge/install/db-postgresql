@@ -23,8 +23,9 @@ cronjobs/gforge-db-backup.sh            usr/share/gforge/cronjobs/
 #
 cronjobs/ftp_create_group_access.php    usr/share/gforge/cronjobs/
 #
+cronjobs/get_news_notapproved.pl	usr/share/gforge/cronjobs/
+#
 deb-specific/stats_projects_logparse.pl usr/share/gforge/bin/
-deb-specific/get_news_notapproved.pl    usr/share/gforge/bin/
 deb-specific/install-db.sh              usr/share/gforge/bin/
 deb-specific/db-upgrade.pl              usr/share/gforge/bin/
 deb-specific/sqlparser.pm               usr/share/gforge/lib/
