@@ -30,8 +30,8 @@ buildall: buildtar
 
 buildtar:
 	rm -fr /tmp/$(VERSION)
-	find gforge -type f -or -type l | grep -v '/.svn/' | grep -v '^./debian' | grep -v '^./deb-specific' | grep -v '^./rpm-specific' | grep -v '^./gforge.spec' | grep -v '^./README.setup' | grep -v '^./setup' | cpio -pdumB /tmp/$(VERSION)
-	cd /tmp/$(VERSION)/gforge; utils/manage-translations.sh build
+	cd gforge; find . -type f -or -type l | grep -v '/.svn/' | grep -v '^./debian' | grep -v '^./deb-specific' | grep -v '^./rpm-specific' | grep -v '^./contrib' | grep -v '^./gforge.spec' | grep -v '^./README.setup' | grep -v '^./setup' | cpio -pdumB /tmp/$(VERSION)
+	cd /tmp/$(VERSION); utils/manage-translations.sh build
 	cd /tmp/; tar jcf $(BUILDRESULT)/$(VERSION).tar.bz2 $(VERSION)
 	cd /tmp/$(VERSION); tar zxf $(ARCHIVE)/libphp-jpgraph_1.5.2.orig.tar.gz
 	cd /tmp/$(VERSION); patch -p0 < $(ARCHIVE)/jpgraph-1.5.2-php5_and_liberation_fonts.patch
