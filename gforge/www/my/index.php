@@ -1,26 +1,27 @@
 <?php
 /**
- * GForge User's Personal Page
+ * FusionForge User's Personal Page
  *
- * Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2002-2004 (c) GForge Team
- * http://gforge.org/
+ * Copyright 1999-2001, VA Linux Systems, Inc.
+ * Copyright 2002-2004, GForge Team
+ * Copyright 2009, Roland Mas
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * GForge is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation; either version 2 of the License,
+ * or (at your option) any later version.
+ * 
+ * FusionForge is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+ * USA
  */
 
 require_once('../env.inc.php');
@@ -192,9 +193,96 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 ?>
 </div>
 <?php } ?>
-<?php if ($GLOBALS['sys_use_forum'] || $GLOBALS['sys_use_frs']) { ?>
+<?php if ($GLOBALS['sys_use_forum'] || $GLOBALS['sys_use_frs'] || $GLOBALS['sys_use_tracker']) { ?>
 <div class="tabbertab" title="<?php echo _('Monitored Items'); ?>" >
 <?php
+	/*
+		Trackers that are actively monitored
+	*/
+	if ($GLOBALS['sys_use_tracker']) {
+		$tabcnt++;
+		$last_group=0;
+
+		$display_col=array('summary'=>1,
+				   'changed'=>1,
+				   'status'=>0,
+				   'priority'=>1,
+				   'assigned_to'=>1,
+				   'submitted_by'=>1,
+				   'related_tasks'=>1);
+		
+		$order_name_arr=array();
+
+		$order_name_arr[]=_('Remove');
+		$order_name_arr[]=_('Monitored trackers');
+
+		echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
+		
+		$result = db_query_params ('SELECT groups.group_name,groups.group_id,groups.unix_group_name,groups.status,groups.type_id,user_group.admin_flags,role.role_name
+			FROM groups,user_group,role 
+			WHERE groups.group_id=user_group.group_id 
+			AND user_group.user_id=$1
+			AND groups.status=$2 
+			AND user_group.role_id=role.role_id 
+			ORDER BY group_name',
+					   array (user_getid(),
+						  'A')) ;
+		$rows = db_numrows ($result);
+		$at_found = 0;
+		if ($result && $rows >= 1) {
+			$last_group = -1 ;
+			for ($i=0; $i<$rows; $i++) {
+				$admin_flags = db_result($result, $i, 'admin_flags');
+				
+				if (db_result($result, $i, 'type_id')==2) {
+					$type = 'foundry';
+				} else {
+					$type = 'projects';
+				}
+				
+				$group_id = db_result($result,$i,'group_id');
+				
+				//  get the Group object
+				//
+				$group =& group_get_object($group_id);
+				if (!$group || !is_object($group) || $group->isError()) {
+					exit_no_group();
+				}
+				
+				$atf = new ArtifactTypeFactory($group);
+				if (!$group || !is_object($group) || $group->isError()) {
+					exit_error('Error','Could Not Get ArtifactTypeFactory');
+				}
+				
+				$at_arr =& $atf->getArtifactTypes();
+				
+			
+				foreach($at_arr as $at) {
+					if (!$at->isMonitoring()) {
+						continue ;
+					}
+					$at_found++ ;
+					if ($group->getID() != $last_group) {
+						echo '
+					<tr '. $HTML->boxGetAltRowStyle(1) .'><td colspan="2">'.util_make_link ('/forum/?group_id='.$group->getID(),$group->getPublicName()).'</td></tr>';
+					}
+					$last_group = $group->getID() ;
+
+					echo '<tr '. $HTML->boxGetAltRowStyle(0) .'><td align="center">' ;
+					echo util_make_link ('/tracker/?group_id='.$group->getID().'&atid='.$at->getID().'&func=monitor',
+							     '<img src="'. $HTML->imgroot . '/ic/trash.png" height="16" width="16" '.'border="0" alt="'._('Stop monitoring').'" />') ;
+					echo '</td><td width="99%">' ;
+					echo util_make_link ('/tracker/?group_id='.$group->getID().'&atid='.$at->getID(),
+							     $at->getName()) ;
+					echo '</td></tr>';
+				}
+			}
+		}
+		if (!$at_found) {
+			echo '<tr><td colspan="2" bgcolor="#FFFFFF"><center><strong>'._('You are not monitoring any trackers.').'</strong></center></td></tr>';
+		}
+		echo $HTML->listTableBottom();
+	}
 	/*
 		Forums that are actively monitored
 	*/
@@ -311,19 +399,15 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 
 	// Include both groups and foundries; developers should be similarly
 	// aware of membership in either.
-	$result = db_query("SELECT groups.group_name,"
-		. "groups.group_id,"
-		. "groups.unix_group_name,"
-		. "groups.status,"
-		. "groups.type_id,"
-		. "user_group.admin_flags,"
-		. "role.role_name "
-		. "FROM groups,user_group,role "
-		. "WHERE groups.group_id=user_group.group_id "
-		. "AND user_group.user_id='". user_getid() ."' "
-		. "AND groups.status='A' "
-		. "AND user_group.role_id=role.role_id "
-		. "ORDER BY group_name");
+	$result = db_query_params ('SELECT groups.group_name,groups.group_id,groups.unix_group_name,groups.status,groups.type_id,user_group.admin_flags,role.role_name
+		FROM groups,user_group,role 
+		WHERE groups.group_id=user_group.group_id 
+		AND user_group.user_id=$1
+		AND groups.status=$2 
+		AND user_group.role_id=role.role_id 
+		ORDER BY group_name',
+				   array (user_getid(),
+					  'A')) ;
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '<tr><td colspan="3" bgcolor="#FFFFFF"><strong>'._('You\'re not a member of any active projects').'</strong></td></tr>';
