@@ -125,7 +125,7 @@ integrated into one web site and managed through a web interface.
 
 %define GFORGE_DIR		%{_datadir}/gforge
 %define GFORGE_CONF_DIR		%{_sysconfdir}/gforge
-%define GFORGE_LANG_DIR         %{GFORGE_DIR}/translations
+%define GFORGE_LANG_DIR         %{_datadir}/locale
 %define GFORGE_LIB_DIR		%{GFORGE_DIR}/lib
 %define GFORGE_DB_DIR		%{GFORGE_DIR}/db
 %define GFORGE_BIN_DIR		%{GFORGE_DIR}/bin
@@ -191,25 +191,15 @@ install -m 644 rpm-specific/httpd.d/gforge.conf $RPM_BUILD_ROOT/%{HTTPD_CONF_DIR
 # configuring GForge
 install -m 600 rpm-specific/conf/gforge.conf $RPM_BUILD_ROOT/%{GFORGE_CONF_DIR}/
 install -m 750 rpm-specific/scripts/gforge-config $RPM_BUILD_ROOT/%{SBIN_DIR}/
-if ls translations/*.po &> /dev/null; then
-        cp translations/*.po $RPM_BUILD_ROOT/%{GFORGE_LANG_DIR}/
-fi
-#cp -rp rpm-specific/custom $RPM_BUILD_ROOT/%{GFORGE_CONF_DIR}
+
+#install *.mo
+cp -rp locales/* $RPM_BUILD_ROOT/%{GFORGE_LANG_DIR}/
 
 # setting crontab
 install -m 664 cron.d/fusionforge $RPM_BUILD_ROOT/%{CROND_DIR}/
 
 %pre
 %startpostgresql
-#tcpip_socket is no more use with postgres 8.x
-#if su -l postgres -s /bin/sh -c 'psql template1 -c "SHOW tcpip_socket;"' | grep " off" &> /dev/null; then
-#	echo "###"
-#	echo "# You should set tcpip_socket = true in your /var/lib/pgsql/data/postgresql.conf"
-#	echo "# before installing GForge and restart PostgreSQL."
-#	echo "# Then you should be able to install GForge RPM."
-#	echo "###"
-#	exit 1
-#fi
 if ! id -u %gfuser >/dev/null 2>&1; then
 	groupadd -r %{gfgroup}
 	useradd -r -g %{gfgroup} -d %{GFORGE_DIR} -s /bin/bash -c "GForge User" %{gfuser}
@@ -304,9 +294,6 @@ if [ "$1" -eq "1" ]; then
 	su -l postgres -c "psql -c 'UPDATE groups SET register_time=EXTRACT(EPOCH FROM NOW());' %{dbname} >/dev/null 2>&1"
 	%changepassword $SITEADMIN_PASSWORD
 	
-	# creation *.mo files for gettext
-        for l in eu bg ca zh_TW nl en eo fr de el he id it ja ko la nb pl pt_BR pt ru zh_CN es sv th ; do mkdir -p /usr/share/locale/$l/LC_MESSAGES && msgfmt -o /usr/share/locale/$l/LC_MESSAGES/gforge.mo %{GFORGE_LANG_DIR}/$l.po ; done
-
 	%gracefulhttpd
 	
 	if ! id -u anonymous >/dev/null 2>&1; then
@@ -332,8 +319,6 @@ else
 	# updating configuration
 	%{SBIN_DIR}/gforge-config || :
 	
-	# creation *.mo files for gettext
-        for l in eu bg ca zh_TW nl en eo fr de el he id it ja ko la nb pl pt_BR pt ru zh_CN es sv th ; do mkdir -p /usr/share/locale/$l/LC_MESSAGES && msgfmt -o /usr/share/locale/$l/LC_MESSAGES/gforge.mo %{GFORGE_LANG_DIR}/$l.po ; done
 fi
 
 %preun
