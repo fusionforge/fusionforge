@@ -24,8 +24,8 @@
 
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'frs/FRSFile.class.php';
-require_once $gfcommon.'frs/FRSFileType.class';
-require_once $gfcommon.'frs/FRSFileProcessorType.class';
+//require_once $gfcommon.'frs/FRSFileType.class.php';
+//require_once $gfcommon.'frs/FRSFileProcessorType.class.php';
 require_once $gfcommon.'frs/FRSPackage.class.php';
 require_once $gfcommon.'frs/FRSRelease.class.php';
 
