@@ -23,7 +23,6 @@
  */
 
 require_once $gfcommon.'include/Error.class.php';
-require_once $gfcommon.'include/database.php';
 require_once $gfcommon.'docman/Document.class.php';
 require_once $gfcommon.'docman/DocumentFactory.class.php';
 require_once $gfcommon.'docman/DocumentGroup.class.php';
