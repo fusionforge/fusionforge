@@ -10,8 +10,10 @@ gforge (4.7.50-1) experimental; urgency=low
   * New package: gforge-plugin-scmbzr (not complete yet!).
   * Fixed a bunch of lintian warnings.
   * Added logrotate configuration file for vhosts access logs.
+  * Fixed blackhole syntax for gforge-mta-exim4 so as not to require
+    file_transport.
 
- -- Roland Mas <lolando@debian.org>  Fri, 03 Apr 2009 11:45:28 +0200
+ -- Roland Mas <lolando@debian.org>  Mon, 06 Apr 2009 17:07:25 +0200
 
 gforge (4.7.2-4) experimental; urgency=low
 

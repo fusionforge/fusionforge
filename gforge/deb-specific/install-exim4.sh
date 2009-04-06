@@ -44,7 +44,7 @@ case "$1" in
     if [ "$noreply_to_bitbucket" = "true" ] ; then
       if ! grep -q "^noreply:" $cfg_aliases_gforge; then
 	echo "### Next line inserted by GForge install" >> $cfg_aliases_gforge
-	echo "noreply: /dev/null" >> $cfg_aliases_gforge
+	echo "noreply: :blackhole:" >> $cfg_aliases_gforge
       fi
     fi
 
