@@ -8,7 +8,7 @@
  * Copyright 2005 GForge, LLC
  * http://gforge.org/
  *
- * Daniel A. P�rez danielperez.arg@gmail.com
+ * Daniel A. Pérez danielperez.arg@gmail.com
  *
  * This file is part of GForge.
  *
@@ -161,7 +161,7 @@ function updateVars($vars,$filepath) {
 <!--<?php //echo _('Path were you store the plugin configuration folders. E.g. : /etc/gforge/plugins/'); ?>&nbsp;&nbsp;
 <input type="text" size="55" width="55" name="pluginpath" value="<?php //echo getStringFromRequest('pluginpath')?>"/>
 <input type="submit" name="changepath" value="<?php //echo _('Change'); ?>"/>
-<br>'-->
+<br />'-->
 <?php
 
 //if (getStringFromRequest('pluginpath')) {

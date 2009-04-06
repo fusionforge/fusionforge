@@ -41,7 +41,7 @@ function admin_table_add($table, $unit, $primary_key) {
 
 		echo '
 			<form name="add" action="'.getStringFromServer('PHP_SELF').'?function=postadd" method="post">
-			<input type="hidden" name="form_key" value="'.form_generate_key().'">
+			<input type="hidden" name="form_key" value="'.form_generate_key().'" />
 			<table>';
 
 		for ($i = 0; $i < $cols; $i++) {
