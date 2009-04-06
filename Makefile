@@ -24,10 +24,6 @@ switch:
 check:
 	cd tests ; php AllTests.php
 
-buildall: buildtar
-	-make -f Makefile.debian all
-	-make -f Makefile.rh all
-
 buildtar:
 	rm -fr /tmp/$(VERSION)
 	cd gforge; find . -type f -or -type l | grep -v '/.svn/' | grep -v '^./debian' | grep -v '^./deb-specific' | grep -v '^./rpm-specific' | grep -v '^./contrib' | grep -v '^./gforge.spec' | grep -v '^./README.setup' | grep -v '^./setup' | cpio -pdumB /tmp/$(VERSION)

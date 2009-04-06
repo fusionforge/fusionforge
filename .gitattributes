@@ -3595,7 +3595,10 @@ packaging/tag_delivery_create -text
 packaging/tag_delivery_delete -text
 packaging/tag_packaging_create -text
 packaging/tag_packaging_delete -text
+tests/AllFullTests.php -text
 tests/AllTests.php -text
+tests/build/tarball/AllTests.php -text
+tests/build/tarball/TarballTests.php -text
 tests/code/syntax/AllTests.php -text
 tests/code/syntax/SyntaxTests.php -text
 tests/func/AllTests.php -text
