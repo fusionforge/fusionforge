@@ -25,6 +25,7 @@ gforge/cron.d/00phpcron -text
 gforge/cron.d/Makefile -text
 gforge/cron.d/backup1 -text
 gforge/cron.d/backup2 -text
+gforge/cron.d/cron.fusionforge -text
 gforge/cron.d/db-postgresql -text
 gforge/cron.d/dns-bind9 -text
 gforge/cron.d/ftp-proftpd -text
@@ -36,7 +37,6 @@ gforge/cron.d/plugin-scmcvs -text
 gforge/cron.d/plugin-scmsvn -text
 gforge/cron.d/shell-postgresql -text
 gforge/cron.d/web-apache2 -text
-gforge/cron.gforge -text
 gforge/cronjobs/auth_unix.php -text
 gforge/cronjobs/create_home_dirs.php -text
 gforge/cronjobs/create_scm_repos.php -text
