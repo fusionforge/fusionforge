@@ -160,7 +160,13 @@ class Theme extends Layout {
         	echo ' | ';
         	echo util_make_link ('/account/', _('My Account'));
         } else {
-        	echo util_make_link ('/account/login.php', _('Log In'));
+			$url = '/account/login.php';
+        	if(getStringFromServer('REQUEST_METHOD') != 'POST') {
+        		$url .= '?return_to=';
+        		$url .= urlencode(getStringFromServer('REQUEST_URI'));
+        	}
+
+        	echo util_make_link ($url, _('Log In'));
         	echo ' | ';
         	if (!$GLOBALS['sys_user_reg_restricted']) {
         		echo util_make_link ('/account/register.php', _('New Account'));
@@ -721,7 +727,7 @@ if ($sys_show_source) {
         }
 
         print '
-        <form action="'.util_make_url ('/search/').'" method="get">
+        <form class="search" action="'.util_make_url ('/search/').'" method="get">
         <table border="0" cellpadding="0" cellspacing="0">
         <tr><td>
         <div align="center" style="font-size:smaller">';
