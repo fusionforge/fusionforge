@@ -1,0 +1,10 @@
+Source: @PACKAGE@
+Section: devel
+Priority: optional
+Maintainer: Roland Mas <lolando@debian.org>
+Uploaders: Christian Bayle <bayle@debian.org>
+Build-Depends-Indep: sharutils, docbook-to-man, devscripts
+Build-Depends: debhelper (>= 4.1.16), dpatch, perl, gettext
+Standards-Version: 3.8.1
+Homepage: http://fusionforge.org/
+Vcs-Bzr: http://bzr.debian.org/~lolando/bzr/gforge/debian/sid/

@@ -1,0 +1,6 @@
+Package: @PACKAGE@-mta-courier
+Architecture: all
+Depends: @PACKAGE@-common, @PACKAGE@-db-postgresql | @PACKAGE@-db, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, courier-mta, ${misc:Depends}
+Provides: @PACKAGE@-mta
+Conflicts: @PACKAGE@-mta
+Description: collaborative development tool - mail tools (using Courier)

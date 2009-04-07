@@ -1,0 +1,6 @@
+Package: @PACKAGE@
+Architecture: all
+Conflicts: sourceforge, gforge-cvs, @PACKAGE@-common (<< ${source:Version})
+Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, @PACKAGE@-common (=${source:Version}), @PACKAGE@-web-apache2 | @PACKAGE@-web, @PACKAGE@-db-postgresql | @PACKAGE@-db, @PACKAGE@-mta-exim4 | @PACKAGE@-mta, @PACKAGE@-shell-postgresql | @PACKAGE@-shell, @PACKAGE@-ftp-proftpd | @PACKAGE@-ftp, @PACKAGE@-lists-mailman | @PACKAGE@-lists, ${misc:Depends}
+Recommends: @PACKAGE@-plugin-scm
+Description: collaborative development tool - metapackage

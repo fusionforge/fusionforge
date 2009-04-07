@@ -1,0 +1,4 @@
+Package: @PACKAGE@-plugin-mediawiki
+Architecture: all
+Depends: @PACKAGE@-common (>= 4.6.99), @PACKAGE@-db-postgresql (>= 4.6.99) | @PACKAGE@-db, @PACKAGE@-web-apache2 (>= 4.6.99) | @PACKAGE@-web, mediawiki, ${misc:Depends}
+Description: Mediawiki plugin for FusionForge
