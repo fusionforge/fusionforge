@@ -75,6 +75,9 @@ list:
 lenny:    # Simply build lenny packages #
 	make cowbuilddeb DEBIANLIST=1lenny
 
+rlenny:
+	make repodeb DEBIANLIST=1lenny
+
 intrepid: # Simply build intrepid packages #
 	make cowbuildubu UBUNTULIST=1intrepid
 
