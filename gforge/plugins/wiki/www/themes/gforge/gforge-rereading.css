@@ -40,7 +40,7 @@
  * ALONE BASIS."
  */
 
-@import url(phpwiki-autonumbering.css);
+@import url(gforge-autonumbering.css);
 
 #content {
     counter-reset: paragraph;    /* Create a paragraph counter scope */
