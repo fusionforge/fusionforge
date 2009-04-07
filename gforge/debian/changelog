@@ -1,3 +1,10 @@
+gforge (4.7.2-4+1) experimental; urgency=low
+
+  * Small tweak in fr.po to fix links to statistics and project reporting
+    pages from the project summary page.
+
+ -- Roland Mas <lolando@debian.org>  Tue, 07 Apr 2009 18:30:02 +0200
+
 gforge (4.7.2-4) experimental; urgency=low
 
   * Quick fix for a bug in uploading attachments to forum posts.  A proper
