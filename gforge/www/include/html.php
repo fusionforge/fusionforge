@@ -658,13 +658,15 @@ function site_user_header($params) {
 	if ($GLOBALS['sys_use_diary']) {
 		echo ($HTML->printSubMenu(
 			array(_('My Personal Page'),
-				_('Diary &amp; Notes'),
-				_('Account Maintenance'),
-				_('Register Project')),
+			      _('Trackers dashboard'),
+			      _('Diary &amp; Notes'),
+			      _('Account Maintenance'),
+			      _('Register Project')),
 			array('/my/',
-				'/my/diary.php',
-				'/account/',
-				'/register/')));
+			      '/my/dashboard.php',
+			      '/my/diary.php',
+			      '/account/',
+			      '/register/')));
 	} else {
 		echo ($HTML->printSubMenu(
 			array(_('My Personal Page'),
