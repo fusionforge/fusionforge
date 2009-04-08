@@ -34,7 +34,11 @@ sub parse_local_inc {
 sub db_connect ( ) {
     &parse_local_inc;
 
-    $dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname;host=$sys_dbhost","$sys_dbuser","$sys_dbpasswd") ;
+    if ((defined $sys_dbhost) && ($sys_dbhost ne '')) {
+	$dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname;host=$sys_dbhost","$sys_dbuser","$sys_dbpasswd") ;
+    } else {
+	$dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname","$sys_dbuser","$sys_dbpasswd") ;
+    }	
     if (! $dbh) {
 	die "Error while connecting to database: $!" ;
     }
