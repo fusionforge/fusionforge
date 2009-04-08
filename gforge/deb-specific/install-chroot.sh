@@ -158,8 +158,9 @@ FIN
 root:x:0:0:Root:/:/bin/bash
 nobody:x:65534:65534:nobody:/:/bin/false
 FIN
-getent passwd sshd | sed "s:$CHROOTDIR::g" >> $CHROOTDIR/etc/passwd
-getent passwd scm-gforge | sed "s:$CHROOTDIR::g" >> $CHROOTDIR/etc/passwd
+	getent passwd sshd | sed "s:$CHROOTDIR::g" >> $CHROOTDIR/etc/passwd
+	getent passwd scm-gforge | sed "s:$CHROOTDIR::g" >> $CHROOTDIR/etc/passwd
+	getent passwd anonscm-gforge | sed "s:$CHROOTDIR::g" >> $CHROOTDIR/etc/passwd
 	cat > $CHROOTDIR/etc/shadow <<-FIN
 root:*:11142:0:99999:7:::
 nobody:*:11142:0:99999:7:::
