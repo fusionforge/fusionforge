@@ -34,6 +34,8 @@ case "$1" in
 	ucf --debconf-ok /etc/bind/named.conf.gforge-new /etc/bind/named.conf
 	rm /etc/bind/named.conf.gforge-new
 
+	db_stop
+
 	# Create the DNS zone
 	/usr/lib/gforge/bin/install-dns.sh configure
     ;;

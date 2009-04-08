@@ -1,8 +1,9 @@
-gforge (4.7.2-5+1) experimental; urgency=low
+gforge (4.7.2-5+2) experimental; urgency=low
 
   * Use Unix sockets to connect to the DB in the Perl scripts.
+  * Added db_stop to fix gforge-dns-bind9's postinst script from hanging.
 
- -- Roland Mas <lolando@debian.org>  Wed, 08 Apr 2009 11:08:52 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 08 Apr 2009 11:24:38 +0200
 
 gforge (4.7.2-5) experimental; urgency=low
 
