@@ -188,7 +188,7 @@ function install()
 	}
 
 	show(" * Creating '$gforge_db' Database...");
-	run("su $susufix $gforge_user -c \"createdb $gforge_db\"", true);
+	run("su $susufix $gforge_user -c \"createdb --encoding UNICODE $gforge_db\"", true);
 
 	# Detect postgresql version, load tsearch2 for pg < 8.3
 	$pg_version = explode(' ', shell_exec("postgres --version"));
