@@ -40,7 +40,7 @@
  * ALONE BASIS."
  */
 
-@import url(phpwiki.css);
+@import url(gforge.css);
 
 body {
     counter-reset: chapter;      /* Create a chapter counter scope */

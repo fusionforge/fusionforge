@@ -13,7 +13,7 @@ gforge (4.8.50-1) experimental; urgency=low
   * Fixed blackhole syntax for gforge-mta-exim4 so as not to require
     file_transport.
 
- -- Roland Mas <lolando@debian.org>  Mon, 06 Apr 2009 17:07:25 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 08 Apr 2009 20:50:20 +0200
 
 gforge (4.7.2-5+2) experimental; urgency=low
 
