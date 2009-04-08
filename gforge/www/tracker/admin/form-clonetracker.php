@@ -30,13 +30,12 @@
 
 				?>
 				<p><?php echo _('Choose the template tracker to clone. The site administrator will have to set up trackers with default values and set permissions properly so you can access them.') ?></p>
-				<p>
 				<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
 				<input type="hidden" name="clone_tracker" value="y" />
 				<p><strong><?php echo _('WARNING!!! Cloning this tracker will duplicate all the fields and all the elements from those fields into this tracker. There is nothing to prevent you from cloning multiple times or making a huge mess. You have been warned!') ?></strong></p>
 				<p><?php echo html_build_select_box_from_arrays($ids,$titles,'clone_id','',false); ?></p>
-				<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
-				</form></p>
+				<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
+				</form>
 				<?php
 				$ath->footer(array());
 			}
