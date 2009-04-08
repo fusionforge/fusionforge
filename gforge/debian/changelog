@@ -2,8 +2,9 @@ gforge (4.7.2-5+2) experimental; urgency=low
 
   * Use Unix sockets to connect to the DB in the Perl scripts.
   * Added db_stop to fix gforge-dns-bind9's postinst script from hanging.
+  * Also create anonscm-gforge user in the chroot, not only scm-gforge.
 
- -- Roland Mas <lolando@debian.org>  Wed, 08 Apr 2009 11:24:38 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 08 Apr 2009 17:42:15 +0200
 
 gforge (4.7.2-5) experimental; urgency=low
 
