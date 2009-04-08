@@ -51,7 +51,7 @@ extends _DbPassUser
                 return $this->_prefs;
             }
         }
-        if ($this->_HomePagehandle) {
+        if (isset($this->_HomePagehandle)) {
             if ($restored_from_page = $this->_prefs->retrieve
                 ($this->_HomePagehandle->get('pref'))) {
                 $updated = $this->_prefs->updatePrefs($restored_from_page);
