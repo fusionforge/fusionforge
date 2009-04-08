@@ -1815,7 +1815,7 @@ class Group extends Error {
 					FROM project_task pt, project_group_list pgl, project_assigned_to pat 
 					WHERE pt.group_project_id = pgl.group_project_id 
 					AND pat.project_task_id=pt.project_task_id
-					AND pt.status_id=1 AND pgl.group_id=$1,
+					AND pt.status_id=1 AND pgl.group_id=$1
 					AND pat.assigned_to_id=$2)
 					AND assigned_to_id=100',
 							array ($this->getID(),
