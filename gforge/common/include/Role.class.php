@@ -44,13 +44,8 @@ class Role extends Error {
 	'pm'=>array('-1','0','1','2','3'),
 	'webcal'=>array('0','1','2'));
 
-	var $defaults=array(
-		'Admin'=>array( 'projectadmin'=>'A', 'frs'=>'1', 'scm'=>'1', 'docman'=>'1', 'forumadmin'=>'2', 'forum'=>'2', 'trackeradmin'=>'2', 'tracker'=>'2', 'pmadmin'=>'2', 'pm'=>'2', 'webcal'=>'1' ),
-		'Senior Developer'=>array( 'projectadmin'=>'0', 'frs'=>'1', 'scm'=>'1', 'docman'=>'1', 'forumadmin'=>'2', 'forum'=>'2', 'trackeradmin'=>'2', 'tracker'=>'2', 'pmadmin'=>'2', 'pm'=>'2', 'webcal'=>'2' ),
-		'Junior Developer'=>array( 'projectadmin'=>'0', 'frs'=>'0', 'scm'=>'1', 'docman'=>'0', 'forumadmin'=>'0', 'forum'=>'1', 'trackeradmin'=>'0', 'tracker'=>'1', 'pmadmin'=>'0', 'pm'=>'1', 'webcal'=>'2' ),
-		'Doc Writer'=>array( 'projectadmin'=>'0', 'frs'=>'0', 'scm'=>'0', 'docman'=>'1', 'forumadmin'=>'0', 'forum'=>'1', 'trackeradmin'=>'0', 'tracker'=>'0', 'pmadmin'=>'0', 'pm'=>'0' , 'webcal'=>'2'),
-		'Support Tech'=>array( 'projectadmin'=>'0', 'frs'=>'0', 'scm'=>'0', 'docman'=>'1', 'forumadmin'=>'0', 'forum'=>'1', 'trackeradmin'=>'0', 'tracker'=>'2', 'pmadmin'=>'0', 'pm'=>'0' , 'webcal'=>'2')
-	);
+	var $defaults;
+
 	
 	/**
 	 *  Role($group,$id) - CONSTRUCTOR.
@@ -59,6 +54,20 @@ class Role extends Error {
 	 *  @param  int	 The role_id.
 	 */
 	function Role ($Group,$role_id=false) {
+		# Initialize the default group settings
+		if ($GLOBALS['default_roles']) {
+			$this->defaults=$GLOBALS['default_roles'];
+		} else {
+			$this->defaults=array(
+				'Admin'=>array( 'projectadmin'=>'A', 'frs'=>'1', 'scm'=>'1', 'docman'=>'1', 'forumadmin'=>'2', 'forum'=>'2', 'trackeradmin'=>'2', 'tracker'=>'2', 'pmadmin'=>'2', 'pm'=>'2', 'webcal'=>'1' ),
+				'Senior Developer'=>array( 'projectadmin'=>'0', 'frs'=>'1', 'scm'=>'1', 'docman'=>'1', 'forumadmin'=>'2', 'forum'=>'2', 'trackeradmin'=>'2', 'tracker'=>'2', 'pmadmin'=>'2', 'pm'=>'2', 'webcal'=>'2' ),
+				'Junior Developer'=>array( 'projectadmin'=>'0', 'frs'=>'0', 'scm'=>'1', 'docman'=>'0', 'forumadmin'=>'0', 'forum'=>'1', 'trackeradmin'=>'0', 'tracker'=>'1', 'pmadmin'=>'0', 'pm'=>'1', 'webcal'=>'2' ),
+				'Doc Writer'=>array( 'projectadmin'=>'0', 'frs'=>'0', 'scm'=>'0', 'docman'=>'1', 'forumadmin'=>'0', 'forum'=>'1', 'trackeradmin'=>'0', 'tracker'=>'0', 'pmadmin'=>'0', 'pm'=>'0' , 'webcal'=>'2'),
+				'Support Tech'=>array( 'projectadmin'=>'0', 'frs'=>'0', 'scm'=>'0', 'docman'=>'1', 'forumadmin'=>'0', 'forum'=>'1', 'trackeradmin'=>'0', 'tracker'=>'2', 'pmadmin'=>'0', 'pm'=>'0' , 'webcal'=>'2')
+			);
+		}
+
+
 		$this->Error();
 		if (!$Group || !is_object($Group) || $Group->isError()) {
 			$this->setError('Role::'.$Group->getErrorMessage());
