@@ -35,7 +35,7 @@ Patch1000: gforge-4.0-deb_rpm.patch
 
 AutoReqProv: off
 Requires: /bin/sh, /bin/bash
-Requires: perl, perl-DBI, perl-HTML-Parser
+Requires: perl, perl-DBI, perl-HTML-Parser, perl-Text-Autoformat, perl-Mail-Sendmail
 Requires: cronolog
 Requires: php-jpgraph php-gd
 #update sys_path_to_jpgraph in gforge.conf if you remove this line
@@ -346,7 +346,7 @@ if [ "$1" -eq "0" ]; then
  		userdel anonymous 2>/dev/null || :
  	fi
  
- 	[ -L /usr/bin/php4 ] && rm -f /usr/bin/php4
+ 	#[ -L /usr/bin/php4 ] && rm -f /usr/bin/php4
 
 fi
 
