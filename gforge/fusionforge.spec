@@ -364,13 +364,9 @@ fi
 %attr(0775, %{httpduser}, %{httpdgroup}) %dir %{UPLOAD_DIR}
 %attr(0775, %{httpduser}, %{httpdgroup}) %dir %{CACHE_DIR}
 %{GFORGE_DIR}
-%{GFORGE_BIN_DIR}
-%{GFORGE_LIB_DIR}
-%{GFORGE_DB_DIR}
 %{GFORGE_LANG_DIR}
 %{GFORGE_CONF_DIR}
 %{SCM_TARBALLS_DIR}
-%{PLUGINS_LIB_DIR}
 
 %changelog
 * Wed Jun 29 2005 Open Wide <guillaume.smet@openwide.fr>
