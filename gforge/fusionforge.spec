@@ -131,7 +131,7 @@ integrated into one web site and managed through a web interface.
 %define GFORGE_BIN_DIR		%{GFORGE_DIR}/bin
 %define PLUGINS_LIB_DIR		%{GFORGE_DIR}/plugins
 %define PLUGINS_CONF_DIR	%{GFORGE_CONF_DIR}/plugins
-%define CACHE_DIR		/var/cache/gforge
+#%define CACHE_DIR		/var/cache/gforge
 %define UPLOAD_DIR		/var/lib/gforge/upload
 %define SCM_TARBALLS_DIR	/var/lib/gforge/scmtarballs
 %define SCM_SNAPSHOTS_DIR	/var/lib/gforge/scmsnapshots
@@ -156,7 +156,7 @@ install -m 755 -d $RPM_BUILD_ROOT/%{GFORGE_LANG_DIR}
 install -m 755 -d $RPM_BUILD_ROOT/%{GFORGE_BIN_DIR}
 install -m 755 -d $RPM_BUILD_ROOT/%{GFORGE_LIB_DIR}
 install -m 755 -d $RPM_BUILD_ROOT/%{UPLOAD_DIR}
-install -m 755 -d $RPM_BUILD_ROOT/%{CACHE_DIR}
+#install -m 755 -d $RPM_BUILD_ROOT/%{CACHE_DIR}
 install -m 755 -d $RPM_BUILD_ROOT/%{SCM_TARBALLS_DIR}
 install -m 755 -d $RPM_BUILD_ROOT/%{PLUGINS_LIB_DIR}
 install -m 755 -d $RPM_BUILD_ROOT/%{SBIN_DIR}
@@ -362,7 +362,7 @@ fi
 %attr(0640, %{httpduser}, %{httpdgroup}) %config(noreplace) %{HTTPD_CONF_DIR}/conf.d/gforge.conf
 %attr(0644, root, root) %{CROND_DIR}/fusionforge
 %attr(0775, %{httpduser}, %{httpdgroup}) %dir %{UPLOAD_DIR}
-%attr(0775, %{httpduser}, %{httpdgroup}) %dir %{CACHE_DIR}
+#%attr(0775, %{httpduser}, %{httpdgroup}) %dir %{CACHE_DIR}
 %{GFORGE_DIR}
 %{GFORGE_LANG_DIR}
 %{GFORGE_CONF_DIR}
