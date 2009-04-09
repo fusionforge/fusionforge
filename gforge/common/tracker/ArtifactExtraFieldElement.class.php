@@ -106,6 +106,12 @@ class ArtifactExtraFieldElement extends Error {
 			$this->setPermissionDeniedError();
 			return false;
 		}
+		$sql = "SELECT element_name FROM artifact_extra_field_elements WHERE element_name='$name' AND extra_field_id=".$this->ArtifactExtraField->getID();
+		$res = db_query($sql);
+		if (db_numrows($res) > 0) {
+			$this->setError(_('Element name already exists'));
+			return false;
+		}
 		$sql="INSERT INTO artifact_extra_field_elements (extra_field_id,element_name,status_id) 
 			VALUES ('".$this->ArtifactExtraField->getID()."','".htmlspecialchars($name)."','$status_id')";
 		db_begin();
@@ -207,8 +213,14 @@ class ArtifactExtraFieldElement extends Error {
 			$this->setPermissionDeniedError();
 			return false;
 		}
-		if (!$name) {
+		if (trim($name) == '') {
 			$this->setMissingParamsError();
+			return false;
+		}
+		$sql = "SELECT element_name FROM artifact_extra_field_elements WHERE element_name='$name' AND extra_field_id=".$this->ArtifactExtraField->getID();
+		$res = db_query($sql);
+		if (db_numrows($res) > 0) {
+			$this->setError(_('Element name already exists'));
 			return false;
 		}   
 		if ($status_id) {
