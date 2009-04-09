@@ -120,6 +120,14 @@ class Role extends Error {
 			return false;
 		}
 
+		// Check if role_name is not already used.
+		$res = db_query_params('SELECT role_name FROM role WHERE group_id=$1 AND role_name=$2',
+			array ($this->Group->getID(), htmlspecialchars($role_name)));
+		if (db_numrows($res)) {
+			$this->setError('Cannot create a role with this name (already used)');
+			return false;
+		}
+
 		db_begin();
 		$res = db_query_params ('INSERT INTO role (group_id, role_name) VALUES ($1, $2)',
 					array ($this->Group->getID(),
@@ -161,6 +169,10 @@ class Role extends Error {
 					return false;
 				}
 			}
+		}
+		if (!$this->fetchData($role_id)) {
+			db_rollback();
+			return false;
 		}
 		db_commit();
 		return $role_id;
@@ -288,6 +300,32 @@ class Role extends Error {
 		return $this->setting_array[$section][$ref_id];
 	}
 
+	function setVal($section, $ref_id, $value) {
+		$this->setting_array[$section][$ref_id] = $value;
+		return $this->update( $this->getName(), $this->setting_array);
+	}
+
+	/**
+	 *	delVal - delete a value out of the array of settings for this role.
+	 *
+	 *	@param	string	The name of the role.
+	 *	@param	integer	The ref_id (ex: group_artifact_id, group_forum_id) for this item.
+	 */
+	function delVal($section, $ref_id) {
+		unset($this->setting_array[$section][$ref_id]);
+
+		$sql = 'DELETE FROM role_setting
+				WHERE role_id=$1
+				AND section_name=$2
+				AND ref_id=$3';
+		$res=db_query_params($sql, array($this->getID(), $section, $ref_id));
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setError('delVal($section, $ref_id)'.db_error());
+			return false;
+		}
+		return true;
+	}
+
 	/**
 	 *	update - update a new in the database.
 	 *
@@ -313,6 +351,15 @@ class Role extends Error {
 		db_begin();
 
 		if ($this->getName() != stripslashes($role_name)) {
+			// Check if role_name is not already used.
+			$res = db_query_params('SELECT role_name FROM role WHERE group_id=$1 AND role_name=$2',
+				array ($this->Group->getID(), htmlspecialchars($role_name)));
+			if (db_numrows($res)) {
+				$this->setError('Cannot create a role with this name (already used)');
+				db_rollback();
+				return false;
+			}
+
 			$res = db_query_params ('UPDATE role SET role_name=$1 WHERE group_id=$2 AND role_id=$3',
 						array (htmlspecialchars($role_name),
 						       $this->Group->getID(),
@@ -386,13 +433,13 @@ class Role extends Error {
 							// I have doubt the following is usefull
 							// This is probably buggy if used
 							if ($cvs_flags>1) {
-								if (!$SYS->sysUserSetAttribute($user_id,"debGforgeCvsShell","/bin/bash")) {
+								if (!$SYS->sysUserSetAttribute(db_result($res,$z,'user_id'),"debGforgeCvsShell","/bin/bash")) {
 									$this->setError($SYS->getErrorMessage());
 									db_rollback();
 									return false;
 								}
 							} else {
-								if (!$SYS->sysUserSetAttribute($user_id,"debGforgeCvsShell","/bin/cvssh")) {
+								if (!$SYS->sysUserSetAttribute(db_result($res,$z,'user_id'),"debGforgeCvsShell","/bin/cvssh")) {
 									$this->setError($SYS->getErrorMessage());
 									db_rollback();
 									return false;
