@@ -70,6 +70,7 @@ echo report_header('Main Page');
 <p>
 <?php
 
+plugin_hook ("reporting_reference", array());
 echo report_footer();
 
 ?>
