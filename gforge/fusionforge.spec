@@ -22,7 +22,7 @@
 
 Summary: FusionForge Collaborative Development Environment
 Name: fusionforge
-Version: 4.7
+Version: 4.8
 Release: %{release}
 BuildArch: noarch
 License: GPL
@@ -307,6 +307,11 @@ if [ "$1" -eq "1" ]; then
 		mkdir -p $CHROOT
 	fi
 	
+	GROUPS_DIR=`grep '^groupdir=' %{GFORGE_CONF_DIR}/gforge.conf | sed 's/.*=\s*\(.*\)/\1/'`
+	if [ ! -d ${CHROOT}${GROUPS_DIR} ] ; then
+                mkdir -p ${CHROOT}${GROUPS_DIR}
+        fi	
+
 	ln -s %{GFORGE_DIR}/www/env.inc.php %{PLUGINS_LIB_DIR}/env.inc.php
 	
 	#if not the env.inc.php include-path isn't correct //not necessary if no more /usr/lib/gforge

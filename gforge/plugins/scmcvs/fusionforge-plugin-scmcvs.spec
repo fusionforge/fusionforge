@@ -3,7 +3,7 @@
 
 Summary: CVS Plugin for GForge CDE
 Name: fusionforge-plugin-%{plugin}
-Version: 4.7
+Version: 4.8
 Release: %{release}
 BuildArch: noarch
 License: GPL
@@ -36,8 +36,6 @@ Requires: perl-IPC-Run
 %define GFORGE_DIR              %{_datadir}/gforge
 %define GFORGE_CONF_DIR         %{_sysconfdir}/gforge
 %define GFORGE_SBIN_DIR         %{_sbindir}
-#%define GFORGE_LIB_DIR          %{GFORGE_DIR}/lib
-#%define GFORGE_DB_DIR           %{GFORGE_DIR}/db
 %define GFORGE_BIN_DIR          %{GFORGE_DIR}/bin
 %define PLUGINS_LIB_DIR         %{GFORGE_DIR}/plugins
 %define PLUGINS_CONF_DIR        %{GFORGE_CONF_DIR}/plugins
@@ -88,12 +86,6 @@ cp -rp etc/* $RPM_BUILD_ROOT/%{GFORGE_CONF_DIR}/
 install -m 755 -d $RPM_BUILD_ROOT/%{PLUGIN_CONF}
 install -m 664 etc/plugins/%{plugin}/config.php $RPM_BUILD_ROOT/%{PLUGIN_CONF}/
 install -m 664 etc/plugins/%{plugin}/cvsweb.conf $RPM_BUILD_ROOT/%{PLUGIN_CONF}/
-
-# installing installation specific language files
-#install -m 755 -d $RPM_BUILD_ROOT/%{PLUGIN_CONF}/languages
-#if ls rpm-specific/languages/*.tab &> /dev/null; then
-#       cp rpm-specific/languages/*.tab $RPM_BUILD_ROOT/%{PLUGIN_CONF}/languages/
-#fi
 
 
 %pre
@@ -158,17 +150,11 @@ fi
 %doc AUTHORS COPYING README
 %attr(0664, %{httpduser}, %{gfgroup}) %config(noreplace) %{PLUGIN_CONF}/config.php
 %attr(0660, %{httpduser}, %{gfgroup}) %config(noreplace) %{PLUGIN_CONF}/cvsweb.conf
-#%attr(0755,root,root) %{GFORGE_BIN_DIR}/cvsweb
 %{GFORGE_CONF_DIR}/httpd.d
-#%{PLUGIN_CONF}/languages
 %{PLUGIN_CONF}/config.pl
 %{PLUGIN_LIB}/bin
 %{PLUGIN_LIB}/common
 %{PLUGIN_LIB}/sbin
-#%{PLUGIN_LIB}/cgi-bin
-#%{PLUGIN_LIB}/include
-#%{PLUGIN_LIB}/lib
-#%{PLUGIN_LIB}/rpm-specific
 %{PLUGIN_LIB}/www
 %{PLUGIN_LIB}/cronjobs
 %{CROND_DIR}/%{name}
