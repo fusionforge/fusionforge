@@ -658,18 +658,15 @@ class ForumMessage extends Error {
 				$dest_email = $recipient ;
 			}
 
-			$body = sprintf(_("\nRead and respond to this message at: ".
-					  "\n%1$ss".
-					  "\nOr by replying to this e-mail entering your response between the following markers: ".
-					  "\n%2$s".
-					  "\n(enter your response here)".
-					  "\n%2$s".
-					  "\n\n".
-					  "\nBy: %3$s\n"),
-					util_make_url ('/forum/message.php?msg_id='.$this->getID()),
-					FORUM_MAIL_MARKER,
-					$this->getPosterRealName());
-			
+			$body = sprintf(_("\nRead and respond to this message at: \n%s"), util_make_url ('/forum/message.php?msg_id='.$this->getID()));
+			if ($GLOBALS['sys_use_mail']) {
+				$body .= stripcslashes(sprintf(_('\nOr by replying to this e-mail entering your response between the following markers: '.
+					  '\n%1$s'.
+					  '\n(enter your response here)'.
+					  '\n%1$s'), FORUM_MAIL_MARKER));
+			}
+			$body .= sprintf(_("\n\n\nBy: %s\n"), $this->getPosterRealName());
+
 			if ($has_attach) {
 				//if there's an attachment for the message, make it note.
 				//Note: We can't give a link for the attachment here because it hasn't been created yet (first the message needs to be created
