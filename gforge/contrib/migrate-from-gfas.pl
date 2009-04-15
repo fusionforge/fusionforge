@@ -1,5 +1,8 @@
 #! /usr/bin/perl -w
 
+# GForge AS to FusionForge database migration script
+# Copyright 2009, Roland Mas
+
 # GForge AS database is gfas
 # FusionForge will be fusionforge
 
@@ -300,6 +303,36 @@ migrate_with_mapping ('forum_message, forum_thread', 'forum', $map, "where forum
 	die "Rolling back" ;
 } ;
 migrate_with_mapping ('forum_message, forum_thread', 'forum_pending_messages', $map, "where forum_message.is_approved = 'f' and forum_message.forum_thread_id = forum_thread.forum_thread_id") 
+    or do {
+	$dbhFF->rollback ;
+	die "Rolling back" ;
+} ;
+
+$map = {
+    'frs_package_id' => 'package_id',
+    'project_id' => 'group_id',
+    'package_name' => 'name',
+    'status_id' => 'status_id',
+    'is_public' => 'is_public',
+} ;
+migrate_with_mapping ('frs_package', 'frs_package', $map) 
+    or do {
+	$dbhFF->rollback ;
+	die "Rolling back" ;
+} ;
+
+$map = {
+    'frs_release_id' => 'release_id',
+    'frs_package_id' => 'package_id',
+    'release_name' => 'name',
+    'release_notes' => 'notes',
+    'changes' => 'changes',
+    'status_id' => 'status_id',
+    'preformatted' => 'preformatted',
+    'extract (epoch from release_date)::integer' => 'release_date',
+    'released_by' => 'released_by',
+} ;
+migrate_with_mapping ('frs_release', 'frs_release', $map, "where status_id != 0")
     or do {
 	$dbhFF->rollback ;
 	die "Rolling back" ;
