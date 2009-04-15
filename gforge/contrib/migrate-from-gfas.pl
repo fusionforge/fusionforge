@@ -123,6 +123,7 @@ migrate_with_mapping ('user_preference', 'user_preferences', $map) ;
 ### Migrate groups
 # First need to get rid of the template project
 $dbhFF->do ("delete from groups where group_id = 5") ;
+$dbhFF->do ("delete from forum_group_list where group_id = 5") ;
 
 $map = {
     'project_id' => 'group_id',
@@ -264,6 +265,45 @@ migrate_with_mapping ('trove_link, trove_category', 'trove_group_link', $map, "w
 	die "Rolling back" ;
 } ;
 
+### Forums
+$map = {
+    'forum_id' => 'group_forum_id',
+    'forum_name' => 'forum_name',
+    'is_public' => 'is_public',
+    'description' => 'description',
+    'send_all_posts_to' => 'send_all_posts_to',
+    'moderation_level' => 'moderation_level',
+    'ref_id' => 'group_id',
+} ;
+print STDERR "Migrating forums\n" ;
+migrate_with_mapping ('forum', 'forum_group_list', $map, "where section = 'project'") 
+    or do {
+	$dbhFF->rollback ;
+	die "Rolling back" ;
+} ;
+
+$map = {
+    'forum_message.forum_message_id' => 'msg_id',
+    'forum_message.forum_thread_id' => 'thread_id',
+    'forum_message.created_by' => 'posted_by',
+    'forum_message.subject' => 'subject',
+    'forum_message.body' => 'body',
+    'extract (epoch from forum_message.post_date)::integer' => 'post_date',
+    'forum_message.parent_forum_message_id' => 'is_followup_to',
+    'forum_thread.forum_id' => 'group_forum_id',
+    'extract (epoch from forum_thread.most_recent_date)::integer' => 'most_recent_date',
+} ;
+print STDERR "Migrating forum messages\n" ;
+migrate_with_mapping ('forum_message, forum_thread', 'forum', $map, "where forum_message.is_approved = 't' and forum_message.forum_thread_id = forum_thread.forum_thread_id") 
+    or do {
+	$dbhFF->rollback ;
+	die "Rolling back" ;
+} ;
+migrate_with_mapping ('forum_message, forum_thread', 'forum_pending_messages', $map, "where forum_message.is_approved = 'f' and forum_message.forum_thread_id = forum_thread.forum_thread_id") 
+    or do {
+	$dbhFF->rollback ;
+	die "Rolling back" ;
+} ;
 
 print STDERR "Migration script completed OK\n" ;
 $dbhFF->commit ; print STDERR "Committed\n" ;
