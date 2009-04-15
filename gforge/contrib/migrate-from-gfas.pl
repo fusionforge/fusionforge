@@ -14,6 +14,7 @@
 
 use DBI ;
 use Data::Dumper ;
+use MIME::Base64 ;
 # use strict ;
 
 use vars qw/$dbhAS $dbhFF $map @arrayAS $sthAS $sthFF/ ;
@@ -316,6 +317,7 @@ $map = {
     'status_id' => 'status_id',
     'is_public' => 'is_public',
 } ;
+print STDERR "Migrating files\n" ;
 migrate_with_mapping ('frs_package', 'frs_package', $map) 
     or do {
 	$dbhFF->rollback ;
@@ -339,7 +341,21 @@ migrate_with_mapping ('frs_release', 'frs_release', $map, "where status_id != 0"
 	die "Rolling back" ;
 } ;
 
-$sthAS = $dbhAS->prepare ("select filesystem.file_name, filesystem.ref_id, filesystem.file_size, filesystem.file_type, filesystem.posted_by, filesystem.download_count, extract (epoch from frs_release.release_date)::integer, frs_release.release_name, frs_package.package_name, project.unix_name from filesystem, frs_release, frs_package, project where filesystem.section = 'frsrelease' and filesystem.ref_id = frs_release.frs_release_id and frs_release.frs_package_id = frs_package.frs_package_id and frs_package.project_id = project.project_id and frs_release.status_id != 0") ;
+$sthAS = $dbhAS->prepare ("
+select filesystem.file_name_safe, filesystem.ref_id,
+filesystem.file_size, filesystem.file_type, filesystem.posted_by,
+filesystem.download_count, extract (epoch from
+frs_release.release_date)::integer, frs_release.release_name,
+frs_package.package_name, project.unix_name, filesystem.filesystem_id
+
+from filesystem, frs_release, frs_package, project
+
+where filesystem.section = 'frsrelease'
+and filesystem.ref_id = frs_release.frs_release_id
+and frs_release.frs_package_id = frs_package.frs_package_id
+and frs_package.project_id = project.project_id
+and frs_release.status_id != 0") ;
+
 $sthFF = $dbhFF->prepare ("insert into frs_file (filename, release_id, type_id, file_size, release_time, post_date, processor_id) values (?, ?, ?, ?, ?, ?, ?)") ;
 $sthAS->execute ;
 while (@arrayAS = $sthAS->fetchrow_array) {
@@ -353,6 +369,7 @@ while (@arrayAS = $sthAS->fetchrow_array) {
     my $releasename = $arrayAS[7] ;
     my $packagename = $arrayAS[8] ;
     my $projectname = $arrayAS[9] ;
+    my $fsid = $arrayAS[10] ;
 
     my $mimemap = {
 	'application/binary' => 9999,
@@ -378,13 +395,83 @@ while (@arrayAS = $sthAS->fetchrow_array) {
     my $destdir = "/var/lib/gforge/download/$projectname/$packagename/$releasename" ;
     my $destfile = "$destdir/$filename" ;
 
+    my $srcdir = "/tmp/filesystem/frsrelease/" . join ('/', split ('', sprintf ("%03d", substr ($fsid, 0, 3)))) . "/$fsid" ;
+    my $srcfile = "$srcdir/$filename" ;
+
+    # print "Copying $srcfile to $destfile\n" ;
+
     system "mkdir -p $destdir" ;
     system "touch $destfile" ; # Need to actually put the contents there...
+    # chown + chmod
 
     $sthFF->execute ($filename, $releaseid, $typeid, $filesize, $releasedate, $releasedate, 8000) ;
 }
 $sthAS->finish ;
 $sthFF->finish ;
 
+### Docman
+$map = {
+    'docman_folder_id' => 'doc_group',
+    'project_id' => 'group_id',
+    'folder_name' => 'groupname',
+    'parent_folder_id' => 'parent_doc_group',
+} ;
+print STDERR "Migrating docman\n" ;
+migrate_with_mapping ('docman_folder', 'doc_groups', $map)
+    or do {
+	$dbhFF->rollback ;
+	die "Rolling back" ;
+} ;
+
+
+
+$sthAS = $dbhAS->prepare ("
+select filesystem.file_name_safe, filesystem.filesystem_id,
+extract (epoch from docman_file_version.create_date)::integer,
+docman_file_version.created_by, docman_file.docman_folder_id,
+filesystem.file_type, filesystem.file_size, docman_folder.project_id,
+docman_folder.is_public
+
+from docman_file, docman_file_version, docman_folder, filesystem
+
+where filesystem.section='docmanfileversion'
+and filesystem.ref_id = docman_file_version.docman_file_version_id
+and docman_file_version.docman_file_id = docman_file.docman_file_id
+and docman_file.docman_folder_id = docman_folder.docman_folder_id
+and filesystem.file_type != 'URL'
+") ;
+$sthFF = $dbhFF->prepare ("insert into doc_data (doc_group, description, title, data, updatedate, createdate, created_by, filename, filetype, group_id, filesize, stateid) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)") ;
+$sthAS->execute ;
+while (@arrayAS = $sthAS->fetchrow_array) {
+    my $filename = $arrayAS[0] ;
+    my $fsid = $arrayAS[1] ;
+    my $createdate = $arrayAS[2] ;
+    my $createdby = $arrayAS[3] ;
+    my $docgroup = $arrayAS[4] ;
+    my $filetype = $arrayAS[5] ;
+    my $size = $arrayAS[6] ;
+    my $groupid = $arrayAS[7] ;
+    my $ispublic = $arrayAS[8] ;
+
+    my $srcdir = "/tmp/filesystem/docmanfileversion/" . join ('/', split ('', sprintf ("%03d", substr ($fsid, 0, 3)))) . "/$fsid" ;
+    my $srcfile = "$srcdir/$filename" ;
+
+    # print "Copying $srcfile to database\n" ;
+    my $data = '' ;
+#     open F, $srcfile;
+#     while (my $l = <F>) {
+# 	$data .= $l ;
+#     }
+#     close F ;
+#     $data =~ s/\\//g ;
+    $data = encode_base64 ($data) ;
+
+    my $stateid = $is_public ? 1 : 5 ;
+
+    $sthFF->execute ($docgroup, $filename, $filename, $data, $createdate, $createdate, $createdby, $filename, $filetype, $groupid, $size, $stateid) ;
+}
+$sthAS->finish ;
+$sthFF->finish ;
+
 print STDERR "Migration script completed OK\n" ;
-$dbhFF->commit ; print STDERR "Committed\n" ;
+# $dbhFF->commit ; print STDERR "Committed\n" ;
