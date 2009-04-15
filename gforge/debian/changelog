@@ -1,12 +1,16 @@
-gforge (4.7.2-6+3) experimental; urgency=low
+gforge (4.7.2-7) unstable; urgency=low
 
   * Added Debconf template translations for Spanish (closes: #519066).
   * Do not fail in prerm if the user removed the vhost file from Apache's
     config (closes: #516579).
   * Don't display the link to the SVN browser for projects where anonymous
     checkout is disabled since it won't work anyway (Closes: #514613).
+  * Updated Vcs-* fields in debian/control.
+  * Also replaced GForge with FusionForge in debian/control (although the
+    packages are still called gforge-* for now).
+  * First upload to unstable since the FusionForge 4.7 release.
 
- -- Roland Mas <lolando@debian.org>  Wed, 15 Apr 2009 14:45:40 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 15 Apr 2009 14:55:01 +0200
 
 gforge (4.7.2-6) experimental; urgency=low
 
