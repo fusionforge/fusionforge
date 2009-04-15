@@ -19,7 +19,7 @@ set -e
 
 case "$1" in
     remove)
-	a2dissite gforge
+	a2dissite gforge || true
 	rm -f /etc/apache2/sites-available/gforge
 	invoke-rc.d apache2 reload || true
 	;;
