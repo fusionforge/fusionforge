@@ -21,7 +21,7 @@ Description: collaborative development tool - metapackage
  web/FTP hosting, release management, etc. All these services are
  integrated into one web site and managed through a web interface.
  .
- This metapackage installs a complete GForge site.
+ This metapackage installs a complete FusionForge site.
 
 Package: gforge-common
 Architecture: all
@@ -212,14 +212,14 @@ Package: gforge-plugin-scmbzr
 Architecture: all
 Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, bzr, php5-cli, ${misc:Depends}
 Description: collaborative development tool - Bazaar plugin
- GForge provides many tools to aid collaboration in a
+ FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, SCM repository, forums, support request helper,
  web/FTP hosting, release management, etc. All these services are
  integrated into one web site and managed through a web interface.
  .
- This plugin contains the Bazaar subsystem of GForge. It allows each
- GForge project to have its own Bazaar repository, and gives some control
+ This plugin contains the Bazaar subsystem of FusionForge. It allows each
+ FusionForge project to have its own Bazaar repository, and gives some control
  over it to the project's administrator.
 Provides: gforge-plugin-scm
 
