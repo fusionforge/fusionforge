@@ -36,7 +36,7 @@ sub migrate_with_mapping ( $$$;$ ) {
     
     my $sql1 = "SELECT " . join (", ", @scols) . " FROM $tsrc $where" ;
     my $sth1 = $dbhAS->prepare ($sql1) ;
-    print STDERR Dumper $sql1 ;
+    # print STDERR Dumper $sql1 ;
 
     my $sql2 = "INSERT INTO $tdest (" . join (", ", map { $mapping->{$_} } @scols)
 	. ") VALUES (" . join (", ", map { "?" } @scols) . ")" ;
@@ -623,6 +623,43 @@ migrate_with_mapping ('tracker_query_field tqf, tracker_query tq, tracker t', 'a
 	die "Rolling back" ;
 } ;
 
+### Task managers
+$map = {
+    'tracker_id' => 'group_project_id',
+    'project_id' => 'group_id',
+    'tracker_name' => 'project_name',
+    'description' => 'description',
+    'is_public' => 'is_public',
+    'email_address' => 'send_all_posts_to',
+} ;
+print STDERR "Migrating task managers\n" ;
+migrate_with_mapping ('tracker', 'project_group_list', $map, 'where datatype=2')
+    or do {
+	$dbhFF->rollback ;
+	die "Rolling back" ;
+} ;
+
+$map = {
+    'ti.tracker_item_id' => 'project_task_id',
+    'ti.tracker_id' => 'group_project_id',
+    'case when ti.status_id = 0 then 2 else ti.status_id end' => 'status_id',
+    'ti.priority' => 'priority',
+    'ti.submitted_by' => 'created_by',
+    'extract (epoch from ti.open_date)::integer' => 'start_date',
+    'extract (epoch from ti.close_date)::integer' => 'end_date',
+    'ti.summary' => 'summary',
+    'ti.details' => 'details',
+    'extract (epoch from ti.last_modified_date)::integer' => 'last_modified_date',
+    'ti.parent_id' => 'parent_id',
+} ;
+migrate_with_mapping ('tracker_item ti, tracker t', 'project_task', $map, 'where ti.tracker_id = t.tracker_id and t.datatype = 2')
+    or do {
+	$dbhFF->rollback ;
+	die "Rolling back" ;
+} ;
+		      
+
+
 sub push_sequence_for_table {
     my $table = shift ;
     my $field = shift ;
@@ -665,6 +702,8 @@ print STDERR "Pushing sequences to appropriate values\n" ;
 &push_sequence_for_table ('artifact_extra_field_data', 'data_id', 'artifact_extra_field_data_data_id_seq') ;
 &push_sequence_for_table ('artifact_canned_responses', 'id', 'artifact_canned_response_id_seq') ;
 &push_sequence_for_table ('artifact_query', 'artifact_query_id', 'artifact_query_artifact_query_id_seq') ;
+&push_sequence_for_table ('project_group_list', 'group_project_id', 'project_group_list_pk_seq') ;
+&push_sequence_for_table ('project_task', 'project_task_id', 'project_task_pk_seq') ;
 
 print STDERR "Migration script completed OK\n" ;
-$dbhFF->commit ; print STDERR "Committed\n" ;
+# $dbhFF->commit ; print STDERR "Committed\n" ;
