@@ -68,6 +68,7 @@ gforge/debian/patches/unix-sockets-for-database.dpatch -text
 gforge/debian/patches/use-snoopy-from-distro.dpatch -text
 gforge/debian/po/cs.po -text
 gforge/debian/po/de.po -text
+gforge/debian/po/es.po -text
 gforge/debian/po/fi.po -text
 gforge/debian/po/gl.po -text
 gforge/debian/po/pt.po -text

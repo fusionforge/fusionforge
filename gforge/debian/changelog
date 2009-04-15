@@ -1,3 +1,9 @@
+gforge (4.7.2-6+1) experimental; urgency=low
+
+  * Added Debconf template translations for Spanish (closes: #519066).
+
+ -- Roland Mas <lolando@debian.org>  Wed, 15 Apr 2009 14:37:08 +0200
+
 gforge (4.7.2-6) experimental; urgency=low
 
   * Use Unix sockets to connect to the DB in the Perl scripts.
