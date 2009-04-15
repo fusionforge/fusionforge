@@ -228,6 +228,7 @@ Description: collaborative development tool - Bazaar plugin
  This plugin contains the Bazaar subsystem of FusionForge. It allows each
  FusionForge project to have its own Bazaar repository, and gives some control
  over it to the project's administrator.
+Provides: gforge-plugin-scm
 
 Package: gforge-plugin-mediawiki
 Architecture: all
