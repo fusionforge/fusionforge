@@ -657,6 +657,30 @@ migrate_with_mapping ('tracker_item ti, tracker t', 'project_task', $map, 'where
 	$dbhFF->rollback ;
 	die "Rolling back" ;
 } ;
+
+$sthAS = $dbhAS->prepare ("select tefd.field_data, ti.tracker_item_id from tracker_extra_field_data tefd, tracker_extra_field tef, tracker_item ti, tracker t where tefd.tracker_item_id = ti.tracker_item_id and ti.tracker_id = t.tracker_id and t.datatype = 2 and tefd.tracker_extra_field_id = tef.tracker_extra_field_id and field_name = 'Estimated Effort (Hours)'") ;
+$sthFF = $dbhFF->prepare ("update project_task set hours=? where project_task_id=?") ;
+$sthAS->execute ;
+while (@arrayAS = $sthAS->fetchrow_array) {
+    my $hours = $arrayAS[0] ;
+    my $ptid = $arrayAS[1] ;
+    next unless $hours =~ /^[0-9]+$/ ;
+    $sthFF->execute ($hours, $ptid) ;
+}
+$sthAS->finish ;
+$sthFF->finish ;
+		      
+$sthAS = $dbhAS->prepare ("select tefd.field_data, ti.tracker_item_id from tracker_extra_field_data tefd, tracker_extra_field tef, tracker_item ti, tracker t where tefd.tracker_item_id = ti.tracker_item_id and ti.tracker_id = t.tracker_id and t.datatype = 2 and tefd.tracker_extra_field_id = tef.tracker_extra_field_id and field_name = 'Percent Complete (0-100)'") ;
+$sthFF = $dbhFF->prepare ("update project_task set percent_complete=? where project_task_id=?") ;
+$sthAS->execute ;
+while (@arrayAS = $sthAS->fetchrow_array) {
+    my $percent = $arrayAS[0] ;
+    my $ptid = $arrayAS[1] ;
+    next unless $percent =~ /^[0-9]+$/ ;
+    $sthFF->execute ($percent, $ptid) ;
+}
+$sthAS->finish ;
+$sthFF->finish ;
 		      
 $map = {
     'tia.tracker_item_id' => 'project_task_id',
