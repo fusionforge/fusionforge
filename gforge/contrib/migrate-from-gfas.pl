@@ -473,5 +473,22 @@ while (@arrayAS = $sthAS->fetchrow_array) {
 $sthAS->finish ;
 $sthFF->finish ;
 
+### Mailing lists
+$map = {
+    'project_id' => 'group_id',
+    'list_name' => 'list_name',
+    'is_public' => 'is_public',
+    'list_password' => 'password',
+    'created_by' => 'list_admin',
+    'status' => 'status',
+    'list_description' => 'description',
+} ;
+print STDERR "Migrating mailing lists\n" ;
+migrate_with_mapping ('mailman', 'mail_group_list', $map)
+    or do {
+	$dbhFF->rollback ;
+	die "Rolling back" ;
+} ;
+
 print STDERR "Migration script completed OK\n" ;
 # $dbhFF->commit ; print STDERR "Committed\n" ;
