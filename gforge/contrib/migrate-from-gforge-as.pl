@@ -2,15 +2,40 @@
 
 # GForge AS to FusionForge database migration script
 # Copyright 2009, Roland Mas
+#
+# This file is part of FusionForge.
+#
+# FusionForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+# 
+# FusionForge is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with FusionForge; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+# USA
 
-# GForge AS database is gfas
-# FusionForge will be fusionforge
-
-# /etc/gforge/gforge.conf: db_name → fusionforge
-# gforge-config
-
-# su - postgres -c 'dropdb fusionforge'
+######
+# Usage:
+# 0. Backups!
+# 1. Rename the GForge AS database to "gfas"
+# 2. Create the initial FusionForge database as "gforge"
+# 3. Store a copy of the /var/lib/gforge/filesystem as /tmp/filesystem
+# 4. export DB_PW=foobar (the password of the databases)
+# 5. run migrate-from-gforge-as.pl
+# In case something breaks, to get back to step 2:
+# su - postgres -c 'dropdb gforge'
 # /usr/lib/gforge/bin/install-db.sh configure
+# 6. If no error appears, uncomment the last line of this script and re-run it
+######
+# This script isn't complete, but it migrates the most important data.
+# Feel free to adapt to your needs.
+######
 
 use DBI ;
 use Data::Dumper ;
@@ -22,7 +47,7 @@ require "/usr/lib/gforge/lib/sqlhelper.pm" ;
 use vars qw/$dbhAS $dbhFF $map @arrayAS $sthAS $sthFF/ ;
 
 $dbhAS = DBI->connect("DBI:Pg:dbname=gfas;host=localhost","gforge","$ENV{DB_PW}") ;
-$dbhFF = DBI->connect("DBI:Pg:dbname=fusionforge;host=localhost","gforge","$ENV{DB_PW}") ;
+$dbhFF = DBI->connect("DBI:Pg:dbname=gforge;host=localhost","gforge","$ENV{DB_PW}") ;
 
 $dbhFF->begin_work ;
 

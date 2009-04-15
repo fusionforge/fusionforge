@@ -21,7 +21,7 @@ gforge/common/include/rbac_texts.php -text
 gforge/common/include/tag_cloud.php -text
 gforge/common/reporting/ReportDownloads.class.php -text
 gforge/contrib/cmd-line-prototype.tar.gz -text
-gforge/contrib/migrate-from-gfas.pl -text
+gforge/contrib/migrate-from-gforge-as.pl -text
 gforge/control/000source -text
 gforge/control/010meta -text
 gforge/control/010meta.shortdesc -text
