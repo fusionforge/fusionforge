@@ -1,8 +1,10 @@
-gforge (4.7.2-6+1) experimental; urgency=low
+gforge (4.7.2-6+2) experimental; urgency=low
 
   * Added Debconf template translations for Spanish (closes: #519066).
+  * Do not fail in prerm if the user removed the vhost file from Apache's
+    config (closes: #516579).
 
- -- Roland Mas <lolando@debian.org>  Wed, 15 Apr 2009 14:37:08 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 15 Apr 2009 14:41:07 +0200
 
 gforge (4.7.2-6) experimental; urgency=low
 
