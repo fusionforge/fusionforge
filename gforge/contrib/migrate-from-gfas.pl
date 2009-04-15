@@ -524,7 +524,85 @@ $map = {
     'tia.assignee' => 'assigned_to',
     'case when ti.status_id = 0 then extract (epoch from ti.close_date)::integer else 0 end' => 'close_date'
 } ;
-migrate_with_mapping ('tracker_item ti, tracker_item_assignee tia, tracker t', 'artifact', $map, 'where t.datatype=1 and ti.tracker_id=t.tracker_id and tia.tracker_item_id=ti.tracker_item_id and tia.assignee = (select max(assignee) from tracker_item_assignee where tracker_item_id=ti.tracker_item_id)')
+migrate_with_mapping ('tracker_item ti, tracker_item_assignee tia, tracker t', 'artifact', $map, 'where t.datatype=1 and ti.tracker_id=t.tracker_id and tia.tracker_item_id=ti.tracker_item_id and tia.assignee = (select max(assignee) from tracker_item_assignee where tracker_item_id=ti.tracker_item_id)') # An artifact can't be assigned to several users in FusionForge, so we arbitrarily pick the one most recently created
+    or do {
+	$dbhFF->rollback ;
+	die "Rolling back" ;
+} ;
+
+$map = {
+    'tim.tracker_item_message_id' => 'id',
+    'tim.tracker_item_id' => 'artifact_id',
+    'tim.submitted_by' => 'submitted_by',
+    'extract (epoch from tim.adddate)::integer' => 'adddate',
+    'tim.body' => 'body',
+    '\'\'' => 'from_email',
+} ;
+migrate_with_mapping ('tracker_item_message tim, tracker_item ti, tracker t', 'artifact_message', $map, 'where tim.tracker_item_id = ti.tracker_item_id and ti.tracker_id = t.tracker_id and t.datatype = 1')
+    or do {
+	$dbhFF->rollback ;
+	die "Rolling back" ;
+} ;
+
+$map = {
+    'tef.tracker_extra_field_id' => 'extra_field_id',
+    'tef.tracker_id' => 'group_artifact_id',
+    'tef.field_name' => 'field_name',
+    'tef.field_type' => 'field_type',
+    'tef.attribute1' => 'attribute1',
+    'tef.attribute2' => 'attribute2',
+    'tef.is_required' => 'is_required',
+    'tef.field_name::text' => 'alias', # Cast is only a trick to have two different keys in the hash
+} ;
+migrate_with_mapping ('tracker_extra_field tef, tracker t', 'artifact_extra_field_list', $map, 'where tef.tracker_id = t.tracker_id and t.datatype = 1')
+    or do {
+	$dbhFF->rollback ;
+	die "Rolling back" ;
+} ;
+
+$map = {
+    'tefd.tracker_extra_field_data_id' => 'data_id',
+    'tefd.tracker_item_id' => 'artifact_id',
+    'tefd.field_data' => 'field_data',
+    'tefd.tracker_extra_field_id' => 'extra_field_id',
+} ;
+migrate_with_mapping ('tracker_extra_field_data tefd, tracker_item ti, tracker t', 'artifact_extra_field_data', $map, 'where tefd.tracker_item_id = ti.tracker_item_id and ti.tracker_id = t.tracker_id and t.datatype = 1')
+    or do {
+	$dbhFF->rollback ;
+	die "Rolling back" ;
+} ;
+
+$map = {
+    'tcr.tracker_canned_response_id' => 'id',
+    'tcr.title' => 'title',
+    'tcr.body' => 'body',
+    'tcr.tracker_id' => 'group_artifact_id',
+} ;
+migrate_with_mapping ('tracker_canned_response tcr, tracker t', 'artifact_canned_responses', $map, 'where tcr.tracker_id = t.tracker_id and t.datatype = 1')
+    or do {
+	$dbhFF->rollback ;
+	die "Rolling back" ;
+} ;
+
+$map = {
+    'tq.tracker_query_id' => 'artifact_query_id',
+    'tq.user_id' => 'user_id',
+    'tq.query_name' => 'query_name',
+    'tq.tracker_id' => 'group_artifact_id',
+} ;
+migrate_with_mapping ('tracker_query tq, tracker t', 'artifact_query', $map, 'where tq.tracker_id = t.tracker_id and t.datatype = 1')
+    or do {
+	$dbhFF->rollback ;
+	die "Rolling back" ;
+} ;
+
+$map = {
+    'tqf.tracker_query_id' => 'artifact_query_id',
+    'tqf.query_field_type' => 'query_field_type',
+    'tqf.query_field_id' => 'query_field_id',
+    'tqf.query_field_values' => 'query_field_values',
+} ;
+migrate_with_mapping ('tracker_query_field tqf, tracker_query tq, tracker t', 'artifact_query_fields', $map, 'where tqf.tracker_query_id = tq.tracker_query_id and tq.tracker_id = t.tracker_id and t.datatype = 1')
     or do {
 	$dbhFF->rollback ;
 	die "Rolling back" ;
