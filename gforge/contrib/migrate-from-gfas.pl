@@ -308,6 +308,7 @@ migrate_with_mapping ('forum_message, forum_thread', 'forum_pending_messages', $
 	die "Rolling back" ;
 } ;
 
+### File release system
 $map = {
     'frs_package_id' => 'package_id',
     'project_id' => 'group_id',
@@ -337,6 +338,53 @@ migrate_with_mapping ('frs_release', 'frs_release', $map, "where status_id != 0"
 	$dbhFF->rollback ;
 	die "Rolling back" ;
 } ;
+
+$sthAS = $dbhAS->prepare ("select filesystem.file_name, filesystem.ref_id, filesystem.file_size, filesystem.file_type, filesystem.posted_by, filesystem.download_count, extract (epoch from frs_release.release_date)::integer, frs_release.release_name, frs_package.package_name, project.unix_name from filesystem, frs_release, frs_package, project where filesystem.section = 'frsrelease' and filesystem.ref_id = frs_release.frs_release_id and frs_release.frs_package_id = frs_package.frs_package_id and frs_package.project_id = project.project_id and frs_release.status_id != 0") ;
+$sthFF = $dbhFF->prepare ("insert into frs_file (filename, release_id, type_id, file_size, release_time, post_date, processor_id) values (?, ?, ?, ?, ?, ?, ?)") ;
+$sthAS->execute ;
+while (@arrayAS = $sthAS->fetchrow_array) {
+    my $filename = $arrayAS[0] ;
+    my $releaseid = $arrayAS[1] ;
+    my $filesize = $arrayAS[2] ;
+    my $filetype = $arrayAS[3] ;
+    my $postedby = $arrayAS[4] ;
+    my $downloadcount = $arrayAS[5] ;
+    my $releasedate = $arrayAS[6] ;
+    my $releasename = $arrayAS[7] ;
+    my $packagename = $arrayAS[8] ;
+    my $projectname = $arrayAS[9] ;
+
+    my $mimemap = {
+	'application/binary' => 9999,
+	'application/gzip' => 3110,
+	'application/java-archive' => 5900,
+	'application/octet-stream' => 9999,
+	'application/ogg' => 9999,
+	'application/pdf' => 8300,
+	'application/x-compressed-tar' => 5900,
+	'application/x-gtar' => 5900,
+	'application/x-gzip' => 3110,
+	'application/x-java-archive' => 5900,
+	'application/x-msdos-program' => 9999,
+	'application/x-zip-compressed' => 3000,
+	'application/zip' => 3000,
+	'text/html' => 8200,
+    } ;
+    my $typeid = $mimemap->{$filetype} ;
+
+    $packagename =~ s/[^a-zA-Z0-9_.-]//g ;
+    $releasename =~ s/[^a-zA-Z0-9_.-]//g ;
+
+    my $destdir = "/var/lib/gforge/download/$projectname/$packagename/$releasename" ;
+    my $destfile = "$destdir/$filename" ;
+
+    system "mkdir -p $destdir" ;
+    system "touch $destfile" ; # Need to actually put the contents there...
+
+    $sthFF->execute ($filename, $releaseid, $typeid, $filesize, $releasedate, $releasedate, 8000) ;
+}
+$sthAS->finish ;
+$sthFF->finish ;
 
 print STDERR "Migration script completed OK\n" ;
 $dbhFF->commit ; print STDERR "Committed\n" ;
