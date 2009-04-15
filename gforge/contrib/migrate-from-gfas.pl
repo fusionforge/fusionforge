@@ -639,9 +639,28 @@ sub push_sequence_for_table {
 }
 
 print STDERR "Pushing sequences to appropriate values\n" ;
-### TODO
-# Lots of calls like the following:
 &push_sequence_for_table ('groups', 'group_id', 'groups_pk_seq') ;
+&push_sequence_for_table ('users', 'user_id', 'users_pk_seq') ;
+&push_sequence_for_table ('role', 'role_id', 'role_role_id_seq') ;
+&push_sequence_for_table ('user_group', 'user_group_id', 'user_group_pk_seq') ;
+&push_sequence_for_table ('trove_group_link', 'trove_group_id', 'trove_group_link_pk_seq') ;
+&push_sequence_for_table ('forum_group_list', 'group_forum_id', 'forum_group_list_pk_seq') ;
+&push_sequence_for_table ('forum', 'msg_id', 'forum_pk_seq') ;
+&push_sequence_for_table ('forum_pending_messages', 'msg_id', 'forum_pending_messages_msg_id_seq') ;
+&push_sequence_for_table ('frs_package', 'package_id', 'frs_package_pk_seq') ;
+&push_sequence_for_table ('frs_release', 'release_id', 'frs_release_pk_seq') ;
+&push_sequence_for_table ('frs_file', 'file_id', 'frs_file_pk_seq') ;
+&push_sequence_for_table ('doc_groups', 'doc_group', 'doc_groups_pk_seq') ;
+&push_sequence_for_table ('doc_data', 'docid', 'doc_data_pk_seq') ;
+&push_sequence_for_table ('mail_group_list', 'group_list_id', 'mail_group_list_pk_seq') ;
+&push_sequence_for_table ('artifact_group_list', 'group_artifact_id', 'artifact_grou_group_artifac_seq') ;
+&push_sequence_for_table ('artifact', 'artifact_id', 'artifact_artifact_id_seq') ;
+&push_sequence_for_table ('artifact_message', 'id', 'artifact_message_id_seq') ;
+&push_sequence_for_table ('artifact_extra_field_list', 'extra_field_id', 'artifact_extra_field_list_extra_field_id_seq') ;
+&push_sequence_for_table ('artifact_extra_field_elements', 'element_id', 'artifact_extra_field_elements_element_id_seq') ;
+&push_sequence_for_table ('artifact_extra_field_data', 'data_id', 'artifact_extra_field_data_data_id_seq') ;
+&push_sequence_for_table ('artifact_canned_responses', 'id', 'artifact_canned_response_id_seq') ;
+&push_sequence_for_table ('artifact_query', 'artifact_query_id', 'artifact_query_artifact_query_id_seq') ;
 
 print STDERR "Migration script completed OK\n" ;
 $dbhFF->commit ; print STDERR "Committed\n" ;
