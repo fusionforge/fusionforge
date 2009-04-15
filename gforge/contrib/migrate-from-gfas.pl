@@ -547,7 +547,6 @@ migrate_with_mapping ('tracker_item_message tim, tracker_item ti, tracker t', 'a
 	die "Rolling back" ;
 } ;
 
-### BROKEN?
 $map = {
     'tef.tracker_extra_field_id' => 'extra_field_id',
     'tef.tracker_id' => 'group_artifact_id',
@@ -556,9 +555,21 @@ $map = {
     'tef.attribute1' => 'attribute1',
     'tef.attribute2' => 'attribute2',
     'tef.is_required' => 'is_required',
-    'tef.field_name::text' => 'alias', # Cast is only a trick to have two different keys in the hash
+    'tef.alias' => 'alias',
 } ;
-migrate_with_mapping ('tracker_extra_field tef, tracker t', 'artifact_extra_field_list', $map, 'where tef.tracker_id = t.tracker_id and t.datatype = 1')
+migrate_with_mapping ('tracker_extra_field tef, tracker t', 'artifact_extra_field_list', $map, 'where tef.tracker_id = t.tracker_id and t.datatype = 1 and tef.field_type != 8') # FusionForge doesn't have a concept of "Found/Fixed in revision X"
+    or do {
+	$dbhFF->rollback ;
+	die "Rolling back" ;
+} ;
+
+$map = {
+    'tefe.element_id' => 'element_id',
+    'tefe.tracker_extra_field_id' => 'extra_field_id',
+    'tefe.element_name' => 'element_name',
+    'tefe.status_id' => 'status_id',
+} ;
+migrate_with_mapping ('tracker_extra_field_element tefe, tracker_extra_field tef, tracker t', 'artifact_extra_field_elements', $map, 'where tefe.tracker_extra_field_id = tef.tracker_extra_field_id and tef.tracker_id = t.tracker_id and t.datatype = 1 and tef.field_type != 8') # FusionForge doesn't have a concept of "Found/Fixed in revision X"
     or do {
 	$dbhFF->rollback ;
 	die "Rolling back" ;
@@ -570,7 +581,7 @@ $map = {
     'tefd.field_data' => 'field_data',
     'tefd.tracker_extra_field_id' => 'extra_field_id',
 } ;
-migrate_with_mapping ('tracker_extra_field_data tefd, tracker_item ti, tracker t', 'artifact_extra_field_data', $map, 'where tefd.tracker_item_id = ti.tracker_item_id and ti.tracker_id = t.tracker_id and t.datatype = 1')
+migrate_with_mapping ('tracker_extra_field_data tefd, tracker_extra_field tef, tracker_item ti, tracker t', 'artifact_extra_field_data', $map, 'where tefd.tracker_item_id = ti.tracker_item_id and ti.tracker_id = t.tracker_id and t.datatype = 1 and tefd.tracker_extra_field_id = tef.tracker_extra_field_id and tef.field_type != 8') # FusionForge doesn't have a concept of "Found/Fixed in revision X"
     or do {
 	$dbhFF->rollback ;
 	die "Rolling back" ;
