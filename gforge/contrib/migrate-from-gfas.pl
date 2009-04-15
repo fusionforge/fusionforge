@@ -658,6 +658,28 @@ migrate_with_mapping ('tracker_item ti, tracker t', 'project_task', $map, 'where
 	die "Rolling back" ;
 } ;
 		      
+$map = {
+    'tia.tracker_item_id' => 'project_task_id',
+    'tia.assignee' => 'assigned_to_id',
+} ;
+migrate_with_mapping ('tracker_item_assignee tia, tracker_item ti, tracker t', 'project_assigned_to', $map, 'where tia.tracker_item_id = ti.tracker_item_id and ti.tracker_id = t.tracker_id and t.datatype = 2')
+    or do {
+	$dbhFF->rollback ;
+	die "Rolling back" ;
+} ;
+
+$map = {
+    'tim.tracker_item_message_id' => 'project_message_id',
+    'tim.tracker_item_id' => 'project_task_id',
+    'tim.submitted_by' => 'posted_by',
+    'extract (epoch from tim.adddate)::integer' => 'postdate',
+    'tim.body' => 'body',
+} ;
+migrate_with_mapping ('tracker_item_message tim, tracker_item ti, tracker t', 'project_messages', $map, 'where tim.tracker_item_id = ti.tracker_item_id and ti.tracker_id = t.tracker_id and t.datatype = 2')
+    or do {
+	$dbhFF->rollback ;
+	die "Rolling back" ;
+} ;
 
 
 sub push_sequence_for_table {
@@ -704,6 +726,7 @@ print STDERR "Pushing sequences to appropriate values\n" ;
 &push_sequence_for_table ('artifact_query', 'artifact_query_id', 'artifact_query_artifact_query_id_seq') ;
 &push_sequence_for_table ('project_group_list', 'group_project_id', 'project_group_list_pk_seq') ;
 &push_sequence_for_table ('project_task', 'project_task_id', 'project_task_pk_seq') ;
+&push_sequence_for_table ('project_messages', 'project_message_id', 'project_messages_project_message_id_seq') ;
 
 print STDERR "Migration script completed OK\n" ;
 # $dbhFF->commit ; print STDERR "Committed\n" ;
