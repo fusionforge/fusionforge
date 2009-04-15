@@ -17,6 +17,8 @@ use Data::Dumper ;
 use MIME::Base64 ;
 # use strict ;
 
+require "/usr/lib/gforge/lib/sqlhelper.pm" ;
+
 use vars qw/$dbhAS $dbhFF $map @arrayAS $sthAS $sthFF/ ;
 
 $dbhAS = DBI->connect("DBI:Pg:dbname=gfas;host=localhost","gforge","$ENV{DB_PW}") ;
@@ -34,18 +36,18 @@ sub migrate_with_mapping ( $$$;$ ) {
     
     my $sql1 = "SELECT " . join (", ", @scols) . " FROM $tsrc $where" ;
     my $sth1 = $dbhAS->prepare ($sql1) ;
-    # print Dumper $sql1 ;
+    print STDERR Dumper $sql1 ;
 
     my $sql2 = "INSERT INTO $tdest (" . join (", ", map { $mapping->{$_} } @scols)
 	. ") VALUES (" . join (", ", map { "?" } @scols) . ")" ;
     my $sth2 = $dbhFF->prepare ($sql2) ;
-    # print Dumper $sql2 ;
+    # print STDERR Dumper $sql2 ;
 
     $sth1->execute ;
     while (my @arr = $sth1->fetchrow_array) {
 	unless ($sth2->execute (@arr)) {
-	    print "$sql2\n" ;
-	    print Dumper \@arr ;
+	    print STDERR "$sql2\n" ;
+	    print STDERR Dumper \@arr ;
 	    return 0;
 	}
     }
@@ -398,7 +400,7 @@ while (@arrayAS = $sthAS->fetchrow_array) {
     my $srcdir = "/tmp/filesystem/frsrelease/" . join ('/', split ('', sprintf ("%03d", substr ($fsid, 0, 3)))) . "/$fsid" ;
     my $srcfile = "$srcdir/$filename" ;
 
-    # print "Copying $srcfile to $destfile\n" ;
+    # print STDERR "Copying $srcfile to $destfile\n" ;
 
     system "mkdir -p $destdir" ;
     system "touch $destfile" ; # Need to actually put the contents there...
@@ -456,7 +458,7 @@ while (@arrayAS = $sthAS->fetchrow_array) {
     my $srcdir = "/tmp/filesystem/docmanfileversion/" . join ('/', split ('', sprintf ("%03d", substr ($fsid, 0, 3)))) . "/$fsid" ;
     my $srcfile = "$srcdir/$filename" ;
 
-    # print "Copying $srcfile to database\n" ;
+    # print STDERR "Copying $srcfile to database\n" ;
     my $data = '' ;
 #     open F, $srcfile;
 #     while (my $l = <F>) {
@@ -517,6 +519,7 @@ $map = {
     'ti.tracker_id' => 'group_artifact_id',
     'case when ti.status_id = 0 then 2 else ti.status_id end' => 'status_id',
     'ti.priority' => 'priority',
+    'ti.submitted_by' => 'submitted_by',
     'extract (epoch from ti.open_date)::integer' => 'open_date',
     'ti.summary' => 'summary',
     'ti.details' => 'details',
@@ -544,6 +547,7 @@ migrate_with_mapping ('tracker_item_message tim, tracker_item ti, tracker t', 'a
 	die "Rolling back" ;
 } ;
 
+### BROKEN?
 $map = {
     'tef.tracker_extra_field_id' => 'extra_field_id',
     'tef.tracker_id' => 'group_artifact_id',
@@ -608,5 +612,25 @@ migrate_with_mapping ('tracker_query_field tqf, tracker_query tq, tracker t', 'a
 	die "Rolling back" ;
 } ;
 
+sub push_sequence_for_table {
+    my $table = shift ;
+    my $field = shift ;
+    my $seqname = shift ;
+
+    my $sql = "SELECT max ($field) FROM $table" ;
+    my $sth = $dbhFF->prepare ($sql) ;
+    $sth->execute ;
+    while (my @arr = $sth->fetchrow_array) {
+	my $cur = $arr[0] ;
+	print STDERR "Pushing $seqname to $cur\n" ;
+	&bump_sequence_to ($dbhFF, $seqname, $cur) ;
+    }
+}
+
+print STDERR "Pushing sequences to appropriate values\n" ;
+### TODO
+# Lots of calls like the following:
+&push_sequence_for_table ('groups', 'group_id', 'groups_pk_seq') ;
+
 print STDERR "Migration script completed OK\n" ;
-# $dbhFF->commit ; print STDERR "Committed\n" ;
+$dbhFF->commit ; print STDERR "Committed\n" ;
