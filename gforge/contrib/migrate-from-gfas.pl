@@ -40,6 +40,7 @@ sub migrate_with_mapping ( $$$;$ ) {
     $sth1->execute ;
     while (my @arr = $sth1->fetchrow_array) {
 	unless ($sth2->execute (@arr)) {
+	    print "$sql2\n" ;
 	    print Dumper \@arr ;
 	    return 0;
 	}
@@ -49,7 +50,7 @@ sub migrate_with_mapping ( $$$;$ ) {
     return 1 ;
 }
 
-# Migrate users
+### Migrate users
 $map = {
     'user_id' => 'user_id',
     'unix_name' => 'user_name',
@@ -61,25 +62,27 @@ $map = {
     'confirm_hash' => 'confirm_hash',
     'email_new' => 'email_new',
     'timezone' => 'timezone',
-    'address' => 'address',
-    'address2' => 'address2',
+    "address" => 'address',
+    "address2" => 'address2',
     'phone' => 'phone',
     'fax' => 'fax',
-    'title' => 'title',
-    'firstname' => 'firstname',
-    'lastname' => 'lastname',
+    "title" => 'title',
+    "firstname" => 'firstname',
+    "lastname" => 'lastname',
+    "firstname || ' ' || lastname" => 'realname',
     'ccode' => 'ccode',
     'language_id' => 'language',
 } ;
-
+print STDERR "Migrating users\n" ;
 migrate_with_mapping ('public.user', 'users', $map, "where unix_name not in ('admin', 'None')") 
     or do {
 	$dbhFF->rollback ;
 	die "Rolling back" ;
 } ;
 
-$dbhFF->do ("update users set status='A' where status='2'") ;
-$dbhFF->do ("update users set status='N' where status='1'") ;
+print STDERR "Updating users\n" ;
+$dbhFF->do ("update users set status='A' where status='1'") ;
+$dbhFF->do ("update users set status='N' where status='2'") ;
 $dbhFF->do ("update users set status='P' where status='0'") ;
 # Order matters!
 $dbhFF->do ("update users set language = 23 where language = 4") ;
@@ -91,4 +94,176 @@ $dbhFF->do ("update users set language =  6 where language = 8") ;
 $dbhFF->do ("update users set language =  8 where language = 7") ;
 $dbhFF->do ("update users set language =  7 where language = 3") ;
 
-$dbhFF->commit ;
+foreach my $i (qw/address address2 title firstname lastname realname/) {
+    $dbhFF->do ("update users set $i=convert_from (convert (convert_to ($i, 'UTF8'), 'UTF8', 'ISO-8859-9'), 'UTF8') where $i LIKE '%Ã%'") or die $i ;
+}    
+
+$sthAS = $dbhAS->prepare ("select user_unix.user_id, unix_shell.path from user_unix, unix_shell where user_unix.unix_shell_id = unix_shell.unix_shell_id") ;
+$sthFF = $dbhFF->prepare ("update users set unix_status='A', shell=? where user_id=? and status='A'") ;
+$sthAS->execute ;
+while (@arrayAS = $sthAS->fetchrow_array) {
+    my $uid = $arrayAS[0] ;
+    my $shell = $arrayAS[1] ;
+    if ($shell eq '/bin/cvssh.pl') { $shell = '/bin/cvssh' ; }
+    $sthFF->execute ($shell, $uid) ;
+}
+$sthAS->finish ;
+$sthFF->finish ;
+
+### User preferences
+$map = {
+    'user_id' => 'user_id',
+    'preference_name' => 'preference_name',
+    'preference_value' => 'preference_value',
+    'extract (epoch from set_date)::integer' => 'set_date',
+} ;
+print STDERR "Migrating user preferences\n" ;
+migrate_with_mapping ('user_preference', 'user_preferences', $map) ;
+
+### Migrate groups
+# First need to get rid of the template project
+$dbhFF->do ("delete from groups where group_id = 5") ;
+
+$map = {
+    'project_id' => 'group_id',
+    "project_name" => 'group_name',
+    'unix_name' => 'unix_group_name',
+    'homepage_url' => 'homepage',
+    'is_public' => 'is_public',
+    'status' => 'status',
+    "substr (description, 0, 255)" => 'short_description',
+    "register_purpose" => 'register_purpose',
+    "register_license_other" => 'license_other',
+    'extract (epoch from create_date)::integer' => 'register_time',
+} ;
+print STDERR "Migrating groups\n" ;
+migrate_with_mapping ('project', 'groups', $map, "where project_id > 4") 
+    or do {
+	$dbhFF->rollback ;
+	die "Rolling back" ;
+} ;
+
+print STDERR "Updating groups\n" ;
+$dbhFF->do ("update groups set status='A' where status='1'") ;
+$dbhFF->do ("update groups set status='H' where status='3'") ;
+
+$map = {
+    'forum' => 'forum',
+    'tracker' => 'tracker',
+    'docman' => 'docman',
+    'news' => 'news',
+    'frs' => 'frs',
+    'mailman' => 'mail',
+    'scmcvs' => 'scm',
+    'scmsvn' => 'scm',
+} ;
+
+$sthAS = $dbhAS->prepare ("select project_plugin.project_id, count (plugin.plugin_id) from plugin, project_plugin where project_plugin.plugin_id = plugin.plugin_id and plugin.plugin_name=? group by project_plugin.project_id") ;
+foreach my $i (keys %$map) {
+    $dbhFF->do ("update groups set use_$map->{$i} = 0") ;
+
+    $sthAS->execute ($i) ;
+    $sthFF = $dbhFF->prepare ("update groups set use_$map->{$i} = ? where group_id = ?") ;
+    while (@arrayAS = $sthAS->fetchrow_array) {
+	my $project_id = $arrayAS[0] ;
+	my $count = $arrayAS[1] ;
+	$sthFF->execute ($count, $project_id) ;
+    }
+    $sthFF->finish ;
+}
+$sthAS->finish ;
+
+foreach my $i (qw/short_description group_name register_purpose license_other/) {
+    $dbhFF->do ("update groups set $i=convert_from (convert (convert_to ($i, 'UTF8'), 'UTF8', 'ISO-8859-9'), 'UTF8') where $i LIKE '%Ã%'") ;
+}    
+
+### Group memberships for users
+$map = {
+    'role_id' => 'role_id',
+    'project_id' => 'group_id',
+    'role_name' => 'role_name',
+} ;
+print STDERR "Migrating roles\n" ;
+migrate_with_mapping ('role', 'role', $map, "where project_id > 4") 
+    or do {
+	$dbhFF->rollback ;
+	die "Rolling back" ;
+} ;
+
+$map = {
+    'user_project.user_id' => 'user_id',
+    'user_project.project_id' => 'group_id', 
+    'user_project_role.role_id' => 'role_id',
+} ;
+print STDERR "Migrating group memberships\n" ;
+migrate_with_mapping ('user_project, user_project_role', 'user_group', $map, "where user_project.project_id > 4 and user_project.user_project_id = user_project_role.user_project_id") 
+    or do {
+	$dbhFF->rollback ;
+	die "Rolling back" ;
+} ;
+
+print STDERR "Updating siteadmin permissions\n" ;
+my $siteadmin_roleid = 1 ;
+$sthFF = $dbhFF->prepare ("select role_id from role where group_id=1 and role_name='Admin'") ;
+$sthFF->execute ;
+if (@arrayFF = $sthFF->fetchrow_array) {
+    $siteadmin_roleid = $arrayFF[0] ;
+}
+$sthFF->finish ;
+
+$sthFF = $dbhFF->prepare ("insert into user_group (user_id, group_id, role_id) values (?, 1, ?)") ;
+$sthAS = $dbhAS->prepare ("select user_id from site_admin where user_id != 101") ;
+$sthAS->execute ;
+while (@arrayAS = $sthAS->fetchrow_array) {
+    my $uid = $arrayAS[0] ;
+    $sthFF->execute ($uid, $siteadmin_roleid) ;
+}
+$sthAS->finish ;
+$sthFF->finish ;
+
+### Role settings
+$map = {
+    'role_id' => 'role_id',
+    'section' => 'section_name',
+    'ref_id' => 'ref_id',
+    'value' => 'value',
+} ;
+print STDERR "Migrating role settings\n" ;
+migrate_with_mapping ('role_setting', 'role_setting', $map, "where role_id in (select role_id from role where project_id > 4)") 
+    or do {
+	$dbhFF->rollback ;
+	die "Rolling back" ;
+} ;
+$dbhFF->do ("update role_setting set value='A' where value='1' and section_name='projectadmin'") ;
+$dbhFF->do ("update user_group set admin_flags=(select value from role_setting where role_setting.role_id = user_group.role_id and  section_name='projectadmin')") ;
+
+### Group join requests
+$map = {
+    'project_id' => 'group_id',
+    'user_id' => 'user_id',
+    "comments" => 'comments',
+    'extract (epoch from request_date)::integer' => 'request_date',
+} ;
+print STDERR "Migrating group join requests\n" ;
+migrate_with_mapping ('project_join_request', 'group_join_request', $map) 
+    or do {
+	$dbhFF->rollback ;
+	die "Rolling back" ;
+} ;
+
+### Not migrating trove map categories (default values are identical), only mappings
+$map = {
+    'trove_link.ref_id' => 'group_id', 
+    'trove_link.trove_category_id' => 'trove_cat_id',
+    'trove_category.root_trove_category_id' => 'trove_cat_root',
+} ;
+print STDERR "Migrating trove categorisation\n" ;
+migrate_with_mapping ('trove_link, trove_category', 'trove_group_link', $map, "where trove_link.trove_category_id = trove_category.trove_category_id and trove_link.section = 'project'") 
+    or do {
+	$dbhFF->rollback ;
+	die "Rolling back" ;
+} ;
+
+
+print STDERR "Migration script completed OK\n" ;
+$dbhFF->commit ; print STDERR "Committed\n" ;
