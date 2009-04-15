@@ -466,7 +466,7 @@ while (@arrayAS = $sthAS->fetchrow_array) {
 #     $data =~ s/\\//g ;
     $data = encode_base64 ($data) ;
 
-    my $stateid = $is_public ? 1 : 5 ;
+    my $stateid = $ispublic ? 1 : 5 ;
 
     $sthFF->execute ($docgroup, $filename, $filename, $data, $createdate, $createdate, $createdby, $filename, $filetype, $groupid, $size, $stateid) ;
 }
