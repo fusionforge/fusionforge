@@ -631,11 +631,15 @@ sub push_sequence_for_table {
     my $sql = "SELECT max ($field) FROM $table" ;
     my $sth = $dbhFF->prepare ($sql) ;
     $sth->execute ;
-    while (my @arr = $sth->fetchrow_array) {
-	my $cur = $arr[0] ;
+    my @arr = $sth->fetchrow_array ;
+    my $cur = $arr[0] ;
+    if ($cur) {
 	print STDERR "Pushing $seqname to $cur\n" ;
 	&bump_sequence_to ($dbhFF, $seqname, $cur) ;
+    } else {
+	print STDERR "Not pushing $seqname\n" ;
     }
+    $sth->finish ;
 }
 
 print STDERR "Pushing sequences to appropriate values\n" ;
