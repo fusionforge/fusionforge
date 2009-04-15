@@ -22,7 +22,7 @@
 
 Summary: FusionForge Collaborative Development Environment
 Name: fusionforge
-Version: 4.7
+Version: 4.8
 Release: %{release}
 BuildArch: noarch
 License: GPL
@@ -35,7 +35,7 @@ Patch1000: gforge-4.0-deb_rpm.patch
 
 AutoReqProv: off
 Requires: /bin/sh, /bin/bash
-Requires: perl, perl-DBI, perl-HTML-Parser
+Requires: perl, perl-DBI, perl-HTML-Parser, perl-Text-Autoformat, perl-Mail-Sendmail
 Requires: cronolog
 Requires: php-jpgraph php-gd
 #update sys_path_to_jpgraph in gforge.conf if you remove this line
@@ -131,7 +131,7 @@ integrated into one web site and managed through a web interface.
 %define GFORGE_BIN_DIR		%{GFORGE_DIR}/bin
 %define PLUGINS_LIB_DIR		%{GFORGE_DIR}/plugins
 %define PLUGINS_CONF_DIR	%{GFORGE_CONF_DIR}/plugins
-%define CACHE_DIR		/var/cache/gforge
+#%define CACHE_DIR		/var/cache/gforge
 %define UPLOAD_DIR		/var/lib/gforge/upload
 %define SCM_TARBALLS_DIR	/var/lib/gforge/scmtarballs
 %define SCM_SNAPSHOTS_DIR	/var/lib/gforge/scmsnapshots
@@ -156,7 +156,7 @@ install -m 755 -d $RPM_BUILD_ROOT/%{GFORGE_LANG_DIR}
 install -m 755 -d $RPM_BUILD_ROOT/%{GFORGE_BIN_DIR}
 install -m 755 -d $RPM_BUILD_ROOT/%{GFORGE_LIB_DIR}
 install -m 755 -d $RPM_BUILD_ROOT/%{UPLOAD_DIR}
-install -m 755 -d $RPM_BUILD_ROOT/%{CACHE_DIR}
+#install -m 755 -d $RPM_BUILD_ROOT/%{CACHE_DIR}
 install -m 755 -d $RPM_BUILD_ROOT/%{SCM_TARBALLS_DIR}
 install -m 755 -d $RPM_BUILD_ROOT/%{PLUGINS_LIB_DIR}
 install -m 755 -d $RPM_BUILD_ROOT/%{SBIN_DIR}
@@ -307,6 +307,11 @@ if [ "$1" -eq "1" ]; then
 		mkdir -p $CHROOT
 	fi
 	
+	GROUPS_DIR=`grep '^groupdir=' %{GFORGE_CONF_DIR}/gforge.conf | sed 's/.*=\s*\(.*\)/\1/'`
+	if [ ! -d ${CHROOT}${GROUPS_DIR} ] ; then
+                mkdir -p ${CHROOT}${GROUPS_DIR}
+        fi	
+
 	ln -s %{GFORGE_DIR}/www/env.inc.php %{PLUGINS_LIB_DIR}/env.inc.php
 	
 	#if not the env.inc.php include-path isn't correct //not necessary if no more /usr/lib/gforge
@@ -346,7 +351,7 @@ if [ "$1" -eq "0" ]; then
  		userdel anonymous 2>/dev/null || :
  	fi
  
- 	[ -L /usr/bin/php4 ] && rm -f /usr/bin/php4
+ 	#[ -L /usr/bin/php4 ] && rm -f /usr/bin/php4
 
 fi
 
@@ -362,15 +367,11 @@ fi
 %attr(0640, %{httpduser}, %{httpdgroup}) %config(noreplace) %{HTTPD_CONF_DIR}/conf.d/gforge.conf
 %attr(0644, root, root) %{CROND_DIR}/fusionforge
 %attr(0775, %{httpduser}, %{httpdgroup}) %dir %{UPLOAD_DIR}
-%attr(0775, %{httpduser}, %{httpdgroup}) %dir %{CACHE_DIR}
+#%attr(0775, %{httpduser}, %{httpdgroup}) %dir %{CACHE_DIR}
 %{GFORGE_DIR}
-%{GFORGE_BIN_DIR}
-%{GFORGE_LIB_DIR}
-%{GFORGE_DB_DIR}
 %{GFORGE_LANG_DIR}
 %{GFORGE_CONF_DIR}
 %{SCM_TARBALLS_DIR}
-%{PLUGINS_LIB_DIR}
 
 %changelog
 * Wed Jun 29 2005 Open Wide <guillaume.smet@openwide.fr>

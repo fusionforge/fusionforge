@@ -13,7 +13,7 @@ License: GPL
 Group: Development/Tools
 Source: %{name}-%{version}.tar.bz2
 AutoReqProv: off
-Requires: fusionforge >= 4.7
+Requires: fusionforge >= 4.8
 Requires: libnss-pgsql >= 1.4
 Requires: nscd
 #Requires: perl perl-URI
