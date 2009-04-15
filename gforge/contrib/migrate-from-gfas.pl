@@ -490,5 +490,45 @@ migrate_with_mapping ('mailman', 'mail_group_list', $map)
 	die "Rolling back" ;
 } ;
 
+### Trackers
+$map = {
+    'tracker_id' => 'group_artifact_id',
+    'project_id' => 'group_id',
+    'tracker_name' => 'name',
+    'description' => 'description',
+    'is_public' => 'is_public',
+    'not restrict_browse' => 'allow_anon',
+    'email_all_updates' => 'email_all_updates',
+    'email_address' => 'email_address',
+    'due_period' => 'due_period',
+    'submit_instructions' => 'submit_instructions',
+    'browse_instructions' => 'browse_instructions',
+    '0' => 'datatype',
+} ;
+print STDERR "Migrating trackers\n" ;
+migrate_with_mapping ('tracker', 'artifact_group_list', $map, 'where datatype=1')
+    or do {
+	$dbhFF->rollback ;
+	die "Rolling back" ;
+} ;
+
+$map = {
+    'ti.tracker_item_id' => 'artifact_id',
+    'ti.tracker_id' => 'group_artifact_id',
+    'case when ti.status_id = 0 then 2 else ti.status_id end' => 'status_id',
+    'ti.priority' => 'priority',
+    'extract (epoch from ti.open_date)::integer' => 'open_date',
+    'ti.summary' => 'summary',
+    'ti.details' => 'details',
+    'extract (epoch from ti.last_modified_date)::integer' => 'last_modified_date',
+    'tia.assignee' => 'assigned_to',
+    'case when ti.status_id = 0 then extract (epoch from ti.close_date)::integer else 0 end' => 'close_date'
+} ;
+migrate_with_mapping ('tracker_item ti, tracker_item_assignee tia, tracker t', 'artifact', $map, 'where t.datatype=1 and ti.tracker_id=t.tracker_id and tia.tracker_item_id=ti.tracker_item_id and tia.assignee = (select max(assignee) from tracker_item_assignee where tracker_item_id=ti.tracker_item_id)')
+    or do {
+	$dbhFF->rollback ;
+	die "Rolling back" ;
+} ;
+
 print STDERR "Migration script completed OK\n" ;
 # $dbhFF->commit ; print STDERR "Committed\n" ;
