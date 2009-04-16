@@ -15,6 +15,12 @@ gforge (4.8.50-1) experimental; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Wed, 08 Apr 2009 20:50:20 +0200
 
+gforge (4.7.2-7+1) unstable; urgency=low
+
+  * Added watch file.
+
+ -- Roland Mas <lolando@debian.org>  Thu, 16 Apr 2009 13:45:39 +0200
+
 gforge (4.7.2-7) unstable; urgency=low
 
   * Added Debconf template translations for Spanish (closes: #519066).
