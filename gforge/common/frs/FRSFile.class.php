@@ -3,6 +3,7 @@
  * FusionForge file release system
  *
  * Copyright 2002, Tim Perdue/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -117,11 +118,9 @@ class FRSFile extends Error {
 		//
 		//	Filename must be unique in this release
 		//
-		$resfile=db_query("SELECT filename 
-			FROM frs_file
-			WHERE 
-			filename='$name'
-			AND release_id='".$this->FRSRelease->getId()."'");
+		$resfile = db_query_params ('SELECT filename FROM frs_file WHERE filename=$1 AND release_id=$2',
+					    array ($name,
+						   $this->FRSRelease->getId())) ;
 		if (!$resfile || db_numrows($resfile) > 0) {
 			$this->setError(_('That filename already exists in this project space').' '.db_error());
 			return false;
@@ -181,7 +180,14 @@ class FRSFile extends Error {
 				'$type_id','$processor_id','$file_size','".time()."')";
 
 		db_begin();
-		$result=db_query($sql);
+		$result = db_query_params ('INSERT INTO frs_file(release_id,filename,release_time,type_id,processor_id,file_size,post_date) VALUES ($1,$2,$3,$4,$5,$6,$7)',
+					   array ($this->FRSRelease->getId(),
+						  $name,
+						  $release_time,
+						  $type_id,
+						  $processor_id,
+						  $file_size,
+						  time ())) ;
 		if (!$result) {
 			db_rollback();
 			$this->setError('FRSFile::create() Error Adding Release: '.db_error());
@@ -203,10 +209,9 @@ class FRSFile extends Error {
 	 *  @return boolean	success.
 	 */
 	function fetchData($file_id) {
-		$sql="SELECT * FROM frs_file_vw
-			WHERE file_id='$file_id'
-			AND release_id='". $this->FRSRelease->getID() ."'";
-		$res=db_query($sql);
+		$res = db_query_params ('SELECT * FROM frs_file_vw WHERE file_id=$1 AND release_id=$2',
+					array ($file_id,
+					       $this->FRSRelease->getID())) ;
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('FRSFile::fetchData()  Invalid file_id');
 			return false;
@@ -334,13 +339,16 @@ class FRSFile extends Error {
 			$this->FRSRelease->getFileName().'/'.
 			$this->getName();
 		unlink($file);
-		$result = db_query("DELETE FROM frs_file WHERE file_id='".$this->getID()."'");
+		$result = db_query_params ('DELETE FROM frs_file WHERE file_id=$1',
+					   array ($this->getID())) ;
 		if (!$result || db_affected_rows($result) < 1) {
 			$this->setError("frsDeleteFile()::2 ".db_error());
 			return false;
 		} else {
-			$res=db_query("DELETE FROM frs_dlstats_file WHERE file_id='".$this->getID()."'");
-			$res=db_query("DELETE FROM frs_dlstats_filetotal_agg WHERE file_id='".$this->getID()."'");
+			$res = db_query_params ('DELETE FROM frs_dlstats_file WHERE file_id=$1',
+						array ($this->getID())) ;
+			$res = db_query_params ('DELETE FROM frs_dlstats_filetotal_agg WHERE file_id=$1',
+						array ($this->getID())) ;
 			return true;
 		}
 	}
@@ -382,12 +390,12 @@ class FRSFile extends Error {
 
 		// Update database
 		db_begin();
-		$res=db_query("UPDATE frs_file SET
-			type_id='$type_id',
-			processor_id='$processor_id',
-			release_time='$release_time',
-			release_id='$release_id'
-			WHERE file_id='".$this->getID()."'");
+		$res = db_query_params ('UPDATE frs_file SET type_id=$1,processor_id=$2,release_time=$3,release_id=$4 WHERE file_id=$5',
+					array ($type_id,
+					       $processor_id,
+					       $release_time,
+					       $release_id,
+					       $this->getID())) ;
 
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError('FRSFile::update() Error On Update: '.db_error());

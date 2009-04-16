@@ -3,6 +3,7 @@
  * FusionForge file release system
  *
  * Copyright 2002, Tim Perdue/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -38,8 +39,8 @@ function &frsrelease_get_object($release_id, $data=false) {
 		if ($data) {
 					//the db result handle was passed in
 		} else {
-			$res=db_query("SELECT * FROM frs_release WHERE
-			release_id='$release_id'");
+			$res = db_query_params ('SELECT * FROM frs_release WHERE release_id=$1',
+						array ($release_id)) ;
 			if (db_numrows($res)<1 ) {
 				$FRSRELEASE_OBJ['_'.$release_id.'_']=false;
 				return false;
@@ -138,20 +139,24 @@ class FRSRelease extends Error {
 		if (!$release_date) {
 			$release_date=time();
 		}
-		$res=db_query("SELECT * FROM frs_release WHERE package_id='".$this->FRSPackage->getID()."'
-			AND name='".htmlspecialchars($name)."'");
+		$res = db_query_params ('SELECT * FROM frs_release WHERE package_id=$1 AND name=$2',
+					array ($this->FRSPackage->getID(),
+					       htmlspecialchars($name))) ;
 		if (db_numrows($res)) {
 			$this->setError('FRSRelease::create() Error Adding Release: Name Already Exists');
 			return false;
 		}
 
-		$sql="INSERT INTO frs_release(package_id,notes,changes,
-				preformatted,name,release_date,released_by,status_id)
-			VALUES ('".$this->FRSPackage->getId()."','".htmlspecialchars($notes)."','".htmlspecialchars($changes)."',
-				'$preformatted','".htmlspecialchars($name)."','$release_date','".user_getid()."','1')";
-
 		db_begin();
-		$result=db_query($sql);
+		$result=db_query_params ('INSERT INTO frs_release(package_id,notes,changes,preformatted,name,release_date,released_by,status_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
+					 array ($this->FRSPackage->getId(),
+						htmlspecialchars($notes),
+						htmlspecialchars($changes),
+						$preformatted,
+						htmlspecialchars($name),
+						$release_date,
+						user_getid(),
+						1)) ;
 		if (!$result) {
 			db_rollback();
 			$this->setError('FRSRelease::create() Error Adding Release: '.db_error());
@@ -176,10 +181,9 @@ class FRSRelease extends Error {
 	 *  @return	boolean	success.
 	 */
 	function fetchData($release_id) {
-		$sql="SELECT * FROM frs_release
-			WHERE release_id='$release_id'
-			AND package_id='". $this->FRSPackage->getID() ."'";
-		$res=db_query($sql);
+		$res = db_query_params ('SELECT * FROM frs_release WHERE release_id=$1 AND package_id=$2',
+					array ($release_id,
+					       $this->FRSPackage->getID())) ;
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('FRSRelease::fetchData()  Invalid release_id');
 			return false;
@@ -314,7 +318,8 @@ notified in the future, please login to %5$s and click this link:
 	function &getFiles() {
 		if (!is_array($this->release_files) || count($this->release_files) < 1) {
 			$this->release_files=array();
-			$res=db_query("SELECT * FROM frs_file_vw WHERE release_id='".$this->getID()."'");
+			$res = db_query_params ('SELECT * FROM frs_file_vw WHERE release_id=$1',
+						array ($this->getID())) ;
 			while ($arr = db_fetch_array($res)) {
 				$this->release_files[]=new FRSFile($this,$arr['file_id'],$arr);
 			}
@@ -359,8 +364,9 @@ notified in the future, please login to %5$s and click this link:
 		}
 		exec('rm -rf '.$dir);
 		
-		db_query("DELETE FROM frs_release WHERE release_id='".$this->getID()."'
-			AND package_id='".$this->FRSPackage->getID()."'");
+		db_query_params ('DELETE FROM frs_release WHERE release_id=$1 AND package_id=$2',
+				 array ($this->getID(),
+					$this->FRSPackage->getID())) ;
 		return true;
 	}
 
@@ -395,25 +401,27 @@ notified in the future, please login to %5$s and click this link:
 		}
 		
 		if($this->getName()!=htmlspecialchars($name)) {
-			$res=db_query("SELECT * FROM frs_release WHERE package_id='".$this->FRSPackage->getID()."'
-			AND name='".htmlspecialchars($name)."'");
+			$res = db_query_params ('SELECT * FROM frs_release WHERE package_id=$1 AND name=$2',
+						array ($this->FRSPackage->getID(),
+						       htmlspecialchars($name))) ;
 			if (db_numrows($res)) {
 				$this->setError('FRSRelease::create() Error Adding Release: Name Already Exists');
 				return false;
 			}
 		}		
 		db_begin();
-		$res=db_query("UPDATE frs_release
-			SET
-			name='".htmlspecialchars($name)."',
-			status_id='$status',
-			notes='".htmlspecialchars($notes)."',
-			changes='".htmlspecialchars($changes)."',
-			preformatted='$preformatted',
-			release_date='$release_date',
-			released_by='". user_getid() ."'
-			WHERE package_id='".$this->FRSPackage->getID()."'
-			AND release_id='".$this->getID()."'");
+		$res = db_query_params ('UPDATE frs_release SET	name=$1,status_id=$2,notes=$3,
+			changes=$4,preformatted=$5,release_date=$6,released_by=$7
+			WHERE package_id=$8 AND release_id=$9',
+					array (htmlspecialchars($name),
+					       $status,
+					       htmlspecialchars($notes),
+					       htmlspecialchars($changes),
+					       $preformatted,
+					       $release_date,
+					       user_getid(),
+					       $this->FRSPackage->getID(),
+					       $this->getID())) ;
 
 		if (!$res || db_affected_rows($res) < 1) {
 			db_rollback();
