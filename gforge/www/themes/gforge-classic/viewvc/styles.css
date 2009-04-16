@@ -2,18 +2,47 @@
 /***  ViewVC CSS Stylesheet ***/
 /*******************************/
 
-img { border: none; }
-table {
+/*** Standard Tags ***/
+.scm html, .scm body {
+  color: #000000;
+  background-color: #ffffff;
+}
+
+.scm a:link    { color: #0000ff; }
+.scm a:visited { color: #880088; }
+.scm a:active  { color: #0000ff; }
+
+.scm img { border: none; }
+.scm table {
   width: 100%;
   margin: 0; 
   border: none;
 }
-table.auto {
+.scm table.auto {
   width: auto;
 }
-form { margin: 0; }
+.scm table.fixed {
+  width: 100%;
+  table-layout: fixed;
+}
+.scm table.fixed td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.scm tr, .scm td, .scm th { vertical-align: top; }
+.scm form { margin: 0; }
 
-/** Navigation Headers ***/
+/*** Icons ***/
+.vc_icon {
+  width: 16px;
+  height: 16px;
+  border: none;
+  padding: 0 1px;
+}
+
+
+/*** Navigation Headers ***/
 .vc_navheader {
   background-color: #cccccc;
 }

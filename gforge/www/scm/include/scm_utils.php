@@ -61,7 +61,7 @@ function scm_header($params) {
 			);
 		}
 	}
-	echo '<div style="width:99%">';
+	echo '<div class="scm" style="width:99%">';
 }
 
 function scm_footer() {
