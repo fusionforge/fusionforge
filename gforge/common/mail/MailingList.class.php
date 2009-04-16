@@ -2,8 +2,9 @@
 /**
  * FusionForge mailing lists
  *
+ * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2003, Guillaume Smet
- * based on work Copyright 2002, Tim Perdue/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -130,14 +131,17 @@ class MailingList extends Error {
 			return false;
 		}
 
-		$result = db_query('SELECT 1 FROM mail_group_list WHERE lower(list_name)=\''.$realListName.'\'');
+		$result = db_query_params ('SELECT 1 FROM mail_group_list WHERE lower(list_name)=$1',
+					   array ($realListName)) ;
 
 		if (db_numrows($result) > 0) {
 			$this->setError(_('List Already Exists'));
 			return false;
 		}
 
-		$result_forum_samename = db_query('SELECT 1 FROM forum_group_list WHERE forum_name=\''.$listName.'\' AND group_id='.$this->Group->getID().'');
+		$result_forum_samename = db_query_params ('SELECT 1 FROM forum_group_list WHERE forum_name=$1 AND group_id=$2',
+							  array ($listName,
+								 $this->Group->getID())) ;
 
 		if (db_numrows($result_forum_samename) > 0){
 			$this->setError(_('Forum exists with the same name'));
@@ -146,18 +150,15 @@ class MailingList extends Error {
 
 		$listPassword = substr(md5($GLOBALS['session_ser'] . time() . rand(0,40000)), 0, 16);
 		
-		$sql = 'INSERT INTO mail_group_list '
-			. '(group_id, list_name, is_public, password, list_admin, status, description) VALUES ('
-			. $this->Group->getID(). ', '
-			. "'".$realListName."',"
-			. "'".$isPublic."',"
-			. "'".$listPassword."',"
-			. "'".$creator_id."',"
-			. "'".MAIL__MAILING_LIST_IS_REQUESTED."',"
-			. "'".$description."')";
-		
 		db_begin();
-		$result = db_query($sql);
+		$result = db_query_params ('INSERT INTO mail_group_list (group_id,list_name,is_public,password,list_admin,status,description) VALUES ($1,$2,$3,$4,$5,$6,$7)',
+					   array ($this->Group->getID(),
+						  $realListName,
+						  $isPublic,
+						  $listPassword,
+						  $creator_id,
+						  MAIL__MAILING_LIST_IS_REQUESTED,
+						  $description)) ;
 		
 		if (!$result) {
 			db_rollback();
@@ -209,9 +210,9 @@ Thank you for registering your project with %1$s.
 	 *	@return	boolean	success.
 	 */
 	function fetchData($groupListId) {
-		$res=db_query("SELECT * FROM mail_group_list "
-			. "WHERE group_list_id='".$groupListId."' "
-			. "AND group_id='". $this->Group->getID() ."'");
+		$res = db_query_params ('SELECT * FROM mail_group_list WHERE group_list_id=$1 AND group_id=$2',
+					array ($groupListId,
+					       $this->Group->getID())) ;
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(sprintf(_('Error Getting %1$s'), _('Error Getting %1$s')));
 			return false;
@@ -234,14 +235,13 @@ Thank you for registering your project with %1$s.
 			return false;
 		}
 		
-		$sql = "UPDATE mail_group_list 
-			SET is_public='".$isPublic."', 
-			description='". $description ."' 
-			WHERE group_list_id='".$this->groupMailingListId."' 
-			AND group_id='".$this->Group->getID()."'";
-			
-		$res = db_query($sql);
-
+		$res = db_query_params ('UPDATE mail_group_list SET is_public=$1, description=$2
+			                 WHERE group_list_id=$3 AND group_id=$4',
+					array ($isPublic,
+					       $description,
+					       $this->groupMailingListId,
+					       $this->Group->getID())) ;
+		
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError(_('Error On Update:').db_error());
 			return false;
@@ -371,15 +371,16 @@ Thank you for registering your project with %1$s.
 			$this->setPermissionDeniedError();
 			return false;
 		}
-		$sql="INSERT INTO deleted_mailing_lists (mailing_list_name,
-			delete_date,isdeleted) VALUES ('".$this->getName()."','".time()."','0')";
-		$res=db_query($sql);
+		$res = db_query_params ('INSERT INTO deleted_mailing_lists (mailing_list_name,delete_date,isdeleted) VALUES ($1,$2,$3)',
+					array ($this->getName(),
+					       time(),
+					       0)) ;
 		if (!$res) {
 			$this->setError('Could Not Insert Into Delete Queue: '.db_error());
 			return false;
 		}
-		$res=db_query("DELETE FROM mail_group_list WHERE 
-			group_list_id='".$this->getID()."'");
+		$res = db_query_params ('DELETE FROM mail_group_list WHERE group_list_id=$1',
+					array ($this->getID())) ;
 		if (!$res) {
 			$this->setError('Could Not Delete List: '.db_error());
 			return false;
