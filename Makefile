@@ -7,7 +7,7 @@ ARCHIVE=$(CURDIR)/depot
 BUILDRESULT=$(CURDIR)/result
 
 VER=$(shell LANG=C grep '>software_version' gforge/common/include/FusionForge.class.php | cut -d\' -f2)
-TAG=$(shell LANG=C svn log -r HEAD -l 1 | awk '{ if ($$1=="Tag-Release") print $$2}')
+TAG=$(shell LANG=C svn log -r HEAD -l 1 2>/dev/null | awk '{ if ($$1=="Tag-Release") print $$2}')
 ifeq ($(TAG),)
 	VERSION=fusionforge-$(VER)-$(shell LANG=C svn info | grep Revision | cut -d: -f2| sed 's/ //g')
 else
