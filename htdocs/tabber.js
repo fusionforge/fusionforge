@@ -1,4 +1,5 @@
 /*==================================================
+  $Id: tabber.js,v 1.9 2006/04/27 20:51:51 pat Exp $
   tabber.js by Patrick Fitzgerald pat@barelyfitz.com
 
   Documentation can be found at the following URL:
