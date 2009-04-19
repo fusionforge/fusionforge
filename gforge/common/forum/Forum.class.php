@@ -219,7 +219,7 @@ class Forum extends Error {
 					) AS threads 
 				FROM forum_group_list_vw AS fgl
 				WHERE group_forum_id='$group_forum_id'";
-			$res = db_query ($sql);
+			$res = db_query_mysql ($sql);
 		} else {
 			$res = db_query_params ('SELECT * FROM forum_group_list_vw WHERE group_forum_id=$1',
 						array ($group_forum_id)) ;
@@ -267,7 +267,7 @@ class Forum extends Error {
 				return false;
 			}
 			$sql="select @res";
-			$result = db_query ($sql);
+			$result = db_query_mysql ($sql);
 		} else {
 			$result = db_query_params ('SELECT nextval($1)',
 						   array ('forum_thread_seq')) ;
