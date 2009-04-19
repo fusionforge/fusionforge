@@ -124,7 +124,7 @@ class ForumFactory extends Error {
 			$exists
 			ORDER BY group_forum_id;";
 			
-			$result = db_query ($sql);
+			$result = db_query_mysql ($sql);
 			
 			$rows = db_numrows($result);
 			

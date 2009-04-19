@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2000, Tim Perdue/Sourceforge
  * Copyright 2002, Tim Perdue/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -84,36 +85,32 @@ class ProjectGroupFactory extends Error {
 		if (session_loggedin()) {
 			$perm =& $this->Group->getPermission( session_get_user() );
 			if (!$perm || !is_object($perm) || !$perm->isMember()) {
-				$public_flag='=1';
-				$exists = '';
+				$result = db_query_params ('SELECT * FROM project_group_list_vw WHERE group_id=$1 AND is_public=1 ORDER BY group_project_id',
+							   array ($this->Group->getID())) ;
 			} else {
-				$public_flag='<3';
 				if ($perm->isPMAdmin()) {
-					$exists='';
+					$result = db_query_params ('SELECT * FROM project_group_list_vw WHERE group_id=$1 AND is_public<3 ORDER BY group_project_id',
+								   array ($this->Group->getID())) ;
 				} else {
-					$exists=" AND group_project_id IN (SELECT role_setting.ref_id
-					FROM role_setting, user_group
-					WHERE role_setting.value::integer >= 0
-                                          AND role_setting.section_name = 'pm'
-                                          AND role_setting.ref_id=project_group_list_vw.group_project_id
-                                          
-   					  AND user_group.role_id = role_setting.role_id
-					  AND user_group.user_id='".user_getid()."') ";
+					$result = db_query_params ('SELECT * FROM project_group_list_vw
+	WHERE group_id=$1 AND is_public<3
+	  AND group_project_id IN (SELECT role_setting.ref_id
+			           FROM role_setting, user_group
+				   WHERE role_setting.value::integer >= 0
+                                     AND role_setting.section_name = $2
+                                     AND role_setting.ref_id=project_group_list_vw.group_project_id
+				     AND user_group.role_id = role_setting.role_id
+				     AND user_group.user_id=$3
+        ORDER BY group_project_id',
+								   array ($this->Group->getID(),
+									  'pm',
+									  user_getid())) ;
 				}
 			}
 		} else {
-			$public_flag='=1';
-			$exists = '';
+				$result = db_query_params ('SELECT * FROM project_group_list_vw WHERE group_id=$1 AND is_public=1 ORDER BY group_project_id',
+							   array ($this->Group->getID())) ;
 		}
-
-		$sql="SELECT *
-			FROM project_group_list_vw
-			WHERE group_id='". $this->Group->getID() ."' 
-			AND is_public $public_flag $exists
-			ORDER BY group_project_id;";
-
-		$result = db_query ($sql);
-
 		$rows = db_numrows($result);
 
 		if (!$result || $rows < 1) {

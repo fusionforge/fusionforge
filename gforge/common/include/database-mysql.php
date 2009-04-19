@@ -61,7 +61,7 @@ function db_connect() {
  *  @param		int		How many rows do you want returned
  *  @param		int		Of matching rows, return only rows starting here
  */
-function db_query($qstring, $limit = '-1', $offset = 0) {
+function db_query_mysql($qstring, $limit = '-1', $offset = 0) {
 	global $sys_dbname, $gfconn;
 
 	db_log_entry('db_query',"$qstring, $limit, $offset");
@@ -189,7 +189,7 @@ function db_next_result() {
  *	may cause unexpected behavior in databases that don't
  */
 function db_begin() {
-	return db_query("BEGIN WORK");
+	return db_query_mysql("BEGIN WORK");
 }
 
 /**
@@ -199,7 +199,7 @@ function db_begin() {
  * may cause unexpected behavior in databases that don't
  */
 function db_commit() {
-	return db_query("COMMIT");
+	return db_query_mysql("COMMIT");
 }
 
 /**
@@ -209,7 +209,7 @@ function db_commit() {
  * may cause unexpected behavior in databases that don't
  */
 function db_rollback() {
-	return db_query("ROLLBACK");
+	return db_query_mysql("ROLLBACK");
 }
 
 /**
@@ -355,13 +355,13 @@ function system_cleanup() {
 	global $_sys_db_transaction_level;
 	if ($_sys_db_transaction_level > 0) {
 		echo "Open transaction detected!!!";
-		db_query("ROLLBACK");
+		db_query_mysql("ROLLBACK");
 	}
 }
 
 function db_drop_table_if_exists ($tn) {
 	$sql = "DROP TABLE IF EXISTS $tn;";
-	$rel = db_query ($sql);
+	$rel = db_query_mysql ($sql);
 	echo db_error();
 }
 

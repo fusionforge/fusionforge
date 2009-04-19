@@ -39,7 +39,7 @@ function form_generate_key() {
 		$key = md5(microtime() + rand() + $_SERVER["REMOTE_ADDR"]);
 	    if ( $sys_database_type == "mysql" ) {
 			$sql = "SELECT * FROM form_keys WHERE `key`='".$key."'";
-			$res=db_query($sql);
+			$res=db_query_mysql($sql);
 		} else {
 			$res = db_query_params ('SELECT * FROM form_keys WHERE key=$1', array ($key));
 		}
@@ -48,7 +48,7 @@ function form_generate_key() {
 		}
 	}
 	if ( $sys_database_type == "mysql" ) {
-		$res = db_query("INSERT INTO form_keys (`key`,is_used,creation_date) VALUES ('".$key."',0,".time().")");
+		$res = db_query_mysql("INSERT INTO form_keys (`key`,is_used,creation_date) VALUES ('".$key."',0,".time().")");
 	} else {
 		$res = db_query_params('INSERT INTO form_keys (key,is_used,creation_date) VALUES ($1, 0, $2)', array ($key,time()));
 	}
@@ -80,7 +80,7 @@ function form_key_is_valid($key) {
 	db_begin();
 	if ( $sys_database_type == "mysql" ) {
 		$sql = "SELECT * FROM form_keys WHERE `key`='$key' and is_used=0 FOR UPDATE";
-		$res=db_query($sql);
+		$res=db_query_mysql($sql);
 	} else {
 		$res = db_query_params ('SELECT * FROM form_keys WHERE key=$1 and is_used=0 FOR UPDATE', array ($key));
 	}
@@ -90,7 +90,7 @@ function form_key_is_valid($key) {
 	}
 	if ( $sys_database_type == "mysql" ) {
 		$sql = "UPDATE form_keys SET is_used=1 WHERE `key`='$key'";
-		$res=db_query($sql);
+		$res=db_query_mysql($sql);
 	} else {
 		$res = db_query_params ('UPDATE form_keys SET is_used=1 WHERE key=$1', array ($key));
 	}
@@ -115,7 +115,7 @@ function form_release_key($key) {
 	db_begin();
 	if ( $sys_database_type == "mysql" ) {
 		$sql = "SELECT * FROM form_keys WHERE `key`='$key' FOR UPDATE";
-		$res=db_query($sql);
+		$res=db_query_mysql($sql);
 	} else {
 		$res = db_query_params ('SELECT * FROM form_keys WHERE key=$1 FOR UPDATE', array ($key));
 	}
@@ -125,7 +125,7 @@ function form_release_key($key) {
 	}
 	if ( $sys_database_type == "mysql" ) {
 		$sql = "UPDATE form_keys SET is_used=0 WHERE `key`='$key'";
-		$res=db_query($sql);
+		$res=db_query_mysql($sql);
 	} else {
 		$res = db_query_params ('UPDATE form_keys SET is_used=0 WHERE key=$1', array ($key));
 	}

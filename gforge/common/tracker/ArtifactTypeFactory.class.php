@@ -3,6 +3,7 @@
  * FusionForge trackers
  *
  * Copyright 2002, GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -90,35 +91,43 @@ class ArtifactTypeFactory extends Error {
 		if (session_loggedin()) {
 			$perm =& $this->Group->getPermission( session_get_user() );
 			if (!$perm || !is_object($perm) || !$perm->isMember()) {
-				$public_flag='=1';
-				$exists = '';
+				$result = db_query_params ('SELECT * FROM artifact_group_list_vw
+			WHERE group_id=$1
+			AND is_public=1
+			ORDER BY group_artifact_id ASC',
+							   array ($this->Group->getID())) ;
 			} else {
-				$public_flag='<3';
 				if ($perm->isArtifactAdmin()) {
-					$exists='';
+					$result = db_query_params ('SELECT * FROM artifact_group_list_vw
+			WHERE group_id=$1
+			AND is_public<3
+			ORDER BY group_artifact_id ASC',
+								   array ($this->Group->getID())) ;
 				} else {
-					$exists=" AND group_artifact_id IN (SELECT role_setting.ref_id
+					$result = db_query_params ('SELECT * FROM artifact_group_list_vw
+			WHERE group_id=$1
+			AND is_public<3
+                        AND group_artifact_id IN (SELECT role_setting.ref_id
 					FROM role_setting, user_group
 					WHERE role_setting.value::integer >= 0
-                                          AND role_setting.section_name = 'tracker'
+                                          AND role_setting.section_name = $2
                                           AND role_setting.ref_id=artifact_group_list_vw.group_artifact_id
                                           
    					  AND user_group.role_id = role_setting.role_id
-					  AND user_group.user_id='".user_getid()."') ";
+					  AND user_group.user_id = $3
+			ORDER BY group_artifact_id ASC',
+								   array ($this->Group->getID(),
+									  'tracker',
+									  user_getid ())) ;
 				}
 			}
 		} else {
-			$public_flag='=1';
-			$exists = '';
+			$result = db_query_params ('SELECT * FROM artifact_group_list_vw
+			WHERE group_id=$1
+			AND is_public=1
+			ORDER BY group_artifact_id ASC',
+						   array ($this->Group->getID())) ;
 		}
-
-		$sql="SELECT * FROM artifact_group_list_vw
-			WHERE group_id='". $this->Group->getID() ."'
-			AND is_public $public_flag
-			$exists
-			ORDER BY group_artifact_id ASC";
-
-		$result = db_query ($sql);
 
 		$rows = db_numrows($result);
 

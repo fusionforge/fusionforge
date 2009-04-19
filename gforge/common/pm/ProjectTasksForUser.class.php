@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2000, Tim Perdue/Sourceforge
  * Copyright 2002, Tim Perdue/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -54,9 +55,9 @@ class ProjectTasksForUser extends Error {
 	* @param the SQL query to use to fetch the tasks
 	*	@return	an array of ProjectTask objects
 	*/
-	function &getTasksFromSQL ($sql) {
+	function &getTasksFromSQLwithParams ($sql, $params) {
 		$tasks = array();
-		$result=db_query($sql);
+		$result = db_query_params ($sql, $params);
 		$rows=db_numrows($result);
 		for ($i=0; $i < $rows; $i++) {
 			$project_task_id = db_result($result,$i,'project_task_id');
@@ -73,7 +74,7 @@ class ProjectTasksForUser extends Error {
 	* @return an array of ProjectTask objects
 	*/
 	function &getTasksByGroupProjectName () {
-		$sql = "SELECT ptv.*,g.group_name,pgl.project_name 
+		return $this->getTasksFromSQLwithParams ('SELECT ptv.*,g.group_name,pgl.project_name 
 			FROM project_task_vw ptv,
 				project_assigned_to pat,
 				groups g,
@@ -82,16 +83,16 @@ class ProjectTasksForUser extends Error {
 				AND pgl.group_id=g.group_id
 				AND pgl.group_project_id=ptv.group_project_id
 				AND ptv.status_id=1
-				AND pat.assigned_to_id='".$this->User->getID()."'
-			ORDER BY group_name,project_name";
-		return $this->getTasksFromSQL($sql);
+				AND pat.assigned_to_id=$1
+			ORDER BY group_name,project_name',
+							 array ($this->User->getID())) ;
 	}
 	
 	function &getTasksForToday() {
 		$now = getdate();
 		$today = mktime (18, 00, 00, $now['mon'], $now['mday'], $now['year']);
 		
-		$sql = "SELECT ptv.*,g.group_name,pgl.project_name 
+		return $this->getTasksFromSQLwithParams ('SELECT ptv.*,g.group_name,pgl.project_name 
 			FROM project_task_vw ptv,
 				project_assigned_to pat,
 				groups g,
@@ -99,11 +100,12 @@ class ProjectTasksForUser extends Error {
 			WHERE ptv.project_task_id=pat.project_task_id
 				AND pgl.group_id=g.group_id
 				AND pgl.group_project_id=ptv.group_project_id
-				AND ptv.start_date < '$today'
+				AND ptv.start_date < $1
 				AND ptv.status_id=1
-				AND pat.assigned_to_id='".$this->User->getID()."'
-			ORDER BY group_name,project_name";
-		return $this->getTasksFromSQL($sql);
+				AND pat.assigned_to_id=$2
+			ORDER BY group_name,project_name',
+							 array ($today,
+								$this->User->getID())) ;
 	}
 }
 

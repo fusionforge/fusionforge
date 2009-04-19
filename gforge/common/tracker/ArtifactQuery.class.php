@@ -4,6 +4,7 @@
  *
  * Copyright 2005, Anthony J. Pugliese
  * Copyright 2005, GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -111,11 +112,11 @@ class ArtifactQuery extends Error {
 			return false;
 		}
 
-		$sql="INSERT INTO artifact_query (group_artifact_id,query_name,user_id) 
-			VALUES ('".$this->ArtifactType->getID()."','".htmlspecialchars($name)."','".user_getid()."')";
-
 		db_begin();
-		$result=db_query($sql);
+		$result = db_query_params ('INSERT INTO artifact_query (group_artifact_id,query_name,user_id) VALUES ($1,$2,$3)',
+					   array ($this->ArtifactType->getID(),
+						  htmlspecialchars($name),
+						  user_getid())) ;
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
 			$id=db_insertid($result,'artifact_query','artifact_query_id');
@@ -153,7 +154,8 @@ class ArtifactQuery extends Error {
 	 *	@return	boolean	success.
 	 */
 	function fetchData($id) {
-		$res=db_query("SELECT * FROM artifact_query WHERE artifact_query_id='$id'");
+			$res = db_query_params ('SELECT * FROM artifact_query WHERE artifact_query_id=$1',
+						array ($id)) ;
 		
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('ArtifactQuery: Invalid ArtifactQuery ID'.db_error());
@@ -161,7 +163,8 @@ class ArtifactQuery extends Error {
 		}
 		$this->data_array =& db_fetch_array($res);
 		db_free_result($res);
-		$res=db_query("SELECT * FROM artifact_query_fields WHERE artifact_query_id='$id'");
+			$res = db_query_params ('SELECT * FROM artifact_query_fields WHERE artifact_query_id=$1',
+						array ($id)) ;
 		unset($this->element_array);
 		while ($arr = db_fetch_array($res)) {
 			//
@@ -189,15 +192,19 @@ class ArtifactQuery extends Error {
 	 *
 	 */
 	function insertElements($id,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange,$closedaterange) {
-		$res=db_query("DELETE FROM artifact_query_fields WHERE artifact_query_id='$id'");
+		$res = db_query_params ('DELETE FROM artifact_query_fields WHERE artifact_query_id=$1',
+					array ($id)) ;
 		if (!$res) {
 			$this->setError('Deleting Old Elements: '.db_error());
 			return false;
 		}
 		$id = intval($id);
-		$res=db_query("INSERT INTO artifact_query_fields 
+		$res = db_query_params ('INSERT INTO artifact_query_fields 
 			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
-			VALUES ('$id','".ARTIFACT_QUERY_STATE."','0','".intval($status)."')");
+                        VALUES ($1,$2,0,$3)',
+					array ($id,
+					       ARTIFACT_QUERY_STATE,
+					       intval($status))) ;
 		if (!$res) {
 			$this->setError('Setting Status: '.db_error());
 			return false;
@@ -223,9 +230,12 @@ class ArtifactQuery extends Error {
 		}
 
 		//CSV LIST OF ASSIGNEES
-		$res=db_query("INSERT INTO artifact_query_fields 
+		$res = db_query_params ('INSERT INTO artifact_query_fields 
 			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
-			VALUES ('$id','".ARTIFACT_QUERY_ASSIGNEE."','0','".$assignee."')");
+			VALUES ($1,$2,0,$3)',
+					array ($id,
+					       ARTIFACT_QUERY_ASSIGNEE,
+					       $assignee)) ;
 		if (!$res) {
 			$this->setError('Setting Assignee: '.db_error());
 			return false;
@@ -236,9 +246,12 @@ class ArtifactQuery extends Error {
 			$this->setError('Invalid Mod Date Range');
 			return false;
 		}
-		$res=db_query("INSERT INTO artifact_query_fields 
+		$res = db_query_params ('INSERT INTO artifact_query_fields 
 			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
-			VALUES ('$id','".ARTIFACT_QUERY_MODDATE."','0','".$moddaterange."')");
+			VALUES ($1,$2,0,$3)',
+					array ($id,
+					       ARTIFACT_QUERY_MODDATE,
+					       $moddaterange)) ;
 		if (!$res) {
 			$this->setError('Setting Last Modified Date Range: '.db_error());
 			return false;
@@ -249,9 +262,12 @@ class ArtifactQuery extends Error {
 			$this->setError('Invalid Open Date Range');
 			return false;
 		}
-		$res=db_query("INSERT INTO artifact_query_fields 
+		$res = db_query_params ('INSERT INTO artifact_query_fields 
 			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
-			VALUES ('$id','".ARTIFACT_QUERY_OPENDATE."','0','".$opendaterange."')");
+			VALUES ($1,$2,0,$3)',
+					array ($id,
+					       ARTIFACT_QUERY_OPENDATE,
+					       $opendaterange)) ;
 		if (!$res) {
 			$this->setError('Setting Open Date Range: '.db_error());
 			return false;
@@ -262,25 +278,34 @@ class ArtifactQuery extends Error {
 			$this->setError('Invalid Close Date Range');
 			return false;
 		}
-		$res=db_query("INSERT INTO artifact_query_fields 
+		$res = db_query_params ('INSERT INTO artifact_query_fields 
 			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
-			VALUES ('$id','".ARTIFACT_QUERY_CLOSEDATE."','0','".$closedaterange."')");
+			VALUES ($1,$2,0,$3)',
+					array ($id,
+					       ARTIFACT_QUERY_CLOSEDATE,
+					       $closedaterange)) ;
 		if (!$res) {
 			$this->setError('Setting Close Date Range: '.db_error());
 			return false;
 		}
 
 		// SORT COLUMN
-		$res=db_query("INSERT INTO artifact_query_fields 
+		$res = db_query_params ('INSERT INTO artifact_query_fields 
 			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
-			VALUES ('$id','".ARTIFACT_QUERY_SORTCOL."','0','".$sort_col."')");
+			VALUES ($1,$2,0,$3)',
+					array ($id,
+					       ARTIFACT_QUERY_SORTCOL,
+					       $sort_col)) ;
 		if (!$res) {
 			$this->setError('Setting Sort Col: '.db_error());
 			return false;
 		}
-		$res=db_query("INSERT INTO artifact_query_fields 
+		$res = db_query_params ('INSERT INTO artifact_query_fields 
 			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
-			VALUES ('$id','".ARTIFACT_QUERY_SORTORD."','0','".$sort_ord."')");
+			VALUES ($1,$2,0,$3)',
+					array ($id,
+					       ARTIFACT_QUERY_SORTORD,
+					       $sort_ord)) ;
 		if (!$res) {
 			$this->setError('Setting Sort Order: '.db_error());
 			return false;
@@ -307,9 +332,13 @@ class ArtifactQuery extends Error {
 			} else {
 				$vals[$i] =	 intval($vals[$i]);
 			}
-			$res=db_query("INSERT INTO artifact_query_fields 
-				(artifact_query_id,query_field_type,query_field_id,query_field_values) 
-				VALUES ('$id','".ARTIFACT_QUERY_EXTRAFIELD."','".((int)$keys[$i]) ."','". $vals[$i] ."')");
+			$res = db_query_params ('INSERT INTO artifact_query_fields 
+			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
+			VALUES ($1,$2,$3,$4)',
+						array ($id,
+						       ARTIFACT_QUERY_EXTRAFIELD,
+						       intval ($keys[$i]),
+						       $vals[$i])) ;
 			if (!$res) {
 				$this->setError('Setting values: '.db_error());
 				return false;
@@ -450,13 +479,14 @@ class ArtifactQuery extends Error {
 			$this->setError(_('Query does not exist'));
 			return false;
 		}
-		$sql="UPDATE artifact_query
-			SET 
-			query_name='".htmlspecialchars($name)."'
-			WHERE artifact_query_id='".$this->getID()."'
-			AND user_id='".user_getid()."'";
 		db_begin();
-		$result=db_query($sql);
+		$result = db_query_params ('UPDATE artifact_query
+			SET query_name=$1
+			WHERE artifact_query_id=$2
+			AND user_id=$3',
+					   array (htmlspecialchars($name),
+						  $this->getID(),
+						  user_getid())) ;
 		if ($result && db_affected_rows($result) > 0) {
 			if (!$this->insertElements($this->getID(),$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange,$closedaterange)) {
 				db_rollback();
@@ -488,10 +518,12 @@ class ArtifactQuery extends Error {
 	}
 
 	function delete() {
-		$res=db_query("DELETE FROM artifact_query WHERE artifact_query_id='".$this->getID()."'
-            AND user_id='".user_getid()."'");
-		$res=db_query("DELETE FROM user_preferences WHERE preference_value='".$this->getID()."'
-            AND preference_name 'art_query".$this->ArtifactType->getID()."'");
+		$res = db_query_params ('DELETE FROM artifact_query WHERE artifact_query_id=$1 AND user_id=$2',
+					array ($this->getID(),
+					       user_getid())) ;
+		$res = db_query_params ('DELETE FROM user_preferences WHERE preference_value=$1 AND preference_name =$2',
+					array ($this->getID(),
+					       'art_query'.$this->ArtifactType->getID())) ;
 		unset($this->data_array);
 		unset($this->element_array);
 	}
@@ -504,8 +536,10 @@ class ArtifactQuery extends Error {
 	function Exist($name) {
 		$user_id = user_getid();
 		$art_id = $this->ArtifactType->getID();
-		$sql = "SELECT * FROM artifact_query WHERE group_artifact_id = '$art_id' AND query_name = '$name' AND user_id = '$user_id'";
-		$res = db_query($sql);
+		$res = db_query_params ('SELECT * FROM artifact_query WHERE group_artifact_id = $1 AND query_name = $2 AND user_id = $3',
+					array ($art_id,
+					       $name,
+					       $user_id)) ;
 		if (db_numrows($res)>0) {
 			return true;
 		} else {

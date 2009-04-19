@@ -3,6 +3,7 @@
  * FusionForge trackers
  *
  * Copyright 2002, GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -26,8 +27,6 @@ require_once $gfcommon.'include/Error.class.php';
 
 class ArtifactFromID extends Error {
 
-//artifact_vw
-
 	var $Group;
 	var $ArtifactType;
 	var $Artifact;
@@ -36,7 +35,8 @@ class ArtifactFromID extends Error {
 		if ($data) {
 			$art_arr =& $data;
 		} else {
-			$res=db_query("SELECT * FROM artifact_vw WHERE artifact_id='$id'");
+			$res = db_query_params ('SELECT * FROM artifact_vw WHERE artifact_id=$1',
+						array ($id)) ;
 			if (!$res || db_numrows($res) < 1) {
 				$this->setError("Invalid Artifact ID");
 				return false;

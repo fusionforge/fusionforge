@@ -52,11 +52,15 @@ class UNIX extends System {
 		if (!$user) {
 			return false;
 		} else {
-			$res=db_query("UPDATE users SET
-			unix_uid=user_id+".$this->UID_ADD.",
-			unix_gid=user_id+".$this->UID_ADD.",
-			unix_status='A'
-			WHERE user_id=$user_id");
+			$res = db_query_params ('UPDATE users SET
+			unix_uid=user_id+$1,
+			unix_gid=user_id+$2,
+			unix_status=$3
+			WHERE user_id=$4',
+						array ($this->UID_ADD,
+						       $this->UID_ADD,
+						       'A',
+						       $user_id)) ;
 	                if (!$res) {
 	                        $this->setError('ERROR - Could Not Update User UID/GID: '.db_error());
 	                        return false;
@@ -73,7 +77,9 @@ class UNIX extends System {
  	*
  	*/
 	function sysRemoveUser($user_id) {
-		$res=db_query("UPDATE users SET unix_status='N' WHERE user_id=$user_id");
+		$res = db_query_params ('UPDATE users SET unix_status=$1 WHERE user_id=$2',
+					array ('N',
+					       $user_id));
 		if (!$res) {
 			$this->setError('ERROR - Could Not Update User Unix Status: '.db_error());
 			return false;

@@ -3,6 +3,7 @@
  * FusionForge trackers
  *
  * Copyright 2004, Anthony J. Pugliese
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -121,13 +122,16 @@ class ArtifactExtraField extends Error {
 			return false;
 		}
 		
-		$sql="INSERT INTO artifact_extra_field_list (group_artifact_id,field_name,
-			field_type,attribute1,attribute2,is_required,alias) 
-			VALUES ('".$this->ArtifactType->getID()."','".htmlspecialchars($name)."',
-			'$field_type','$attribute1','$attribute2','$is_required','$alias')";
-
 		db_begin();
-		$result=db_query($sql);
+		$result = db_query_params ('INSERT INTO artifact_extra_field_list (group_artifact_id,field_name,field_type,attribute1,attribute2,is_required,alias) 
+			VALUES ($1,$2,$3,$4,$5,$6,$7)',
+					   array ($this->ArtifactType->getID(),
+						  htmlspecialchars($name),
+						  $field_type,
+						  $attribute1,
+						  $attribute2,
+						  $is_required,
+						  $alias));
 
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
@@ -147,35 +151,47 @@ class ArtifactExtraField extends Error {
 //
 //	Must insert some default statuses for each artifact
 //
-					$reso=db_query("INSERT INTO artifact_extra_field_elements(extra_field_id,element_name,status_id) 
-						values ('$id','Open','1')");
+					$reso = db_query_params ('INSERT INTO artifact_extra_field_elements(extra_field_id,element_name,status_id) VALUES ($1,$2,$3)',
+								 array ($id,
+									'Open',
+									1)) ;
 					if (!$reso) {
 						echo db_error();
 					} else {
 						$resoid=db_insertid($reso,'artifact_extra_field_elements','element_id');
-						db_query("INSERT INTO artifact_extra_field_data(artifact_id,field_data,extra_field_id) 
-							SELECT artifact_id,$resoid,$id FROM artifact 
-							WHERE group_artifact_id='".$this->ArtifactType->getID()."'
-							AND status_id=1");
+						db_query_params ('INSERT INTO artifact_extra_field_data(artifact_id,field_data,extra_field_id) 
+							SELECT artifact_id,$1,$2 FROM artifact 
+							WHERE group_artifact_id=$3
+							AND status_id=1',
+								 array ($resoid,
+									$id,
+									$this->ArtifactType->getID())) ;
 					}
-					$resc=db_query("INSERT INTO artifact_extra_field_elements(extra_field_id,element_name,status_id)
-						values ('$id','Closed','2')");
+					$resc = db_query_params ('INSERT INTO artifact_extra_field_elements(extra_field_id,element_name,status_id) VALUES ($1,$2,$3)',
+								 array ($id,
+									'Closed',
+									2)) ;
 					if (!$resc) {
 						echo db_error();
 					} else {
 						$rescid=db_insertid($resc,'artifact_extra_field_elements','element_id');
-						db_query("INSERT INTO artifact_extra_field_data(artifact_id,field_data,extra_field_id) 
-							SELECT artifact_id,$rescid,$id FROM artifact 
-							WHERE group_artifact_id='".$this->ArtifactType->getID()."'
-							AND status_id != 1");
+						db_query_params ('INSERT INTO artifact_extra_field_data(artifact_id,field_data,extra_field_id) 
+							SELECT artifact_id,$1,$2 FROM artifact 
+							WHERE group_artifact_id=$3
+							AND status_id != 1',
+								 array ($rescid,
+									$id,
+									$this->ArtifactType->getID())) ;
 					}
 				}
 			} elseif (strstr(ARTIFACT_EXTRAFIELD_FILTER_INT,$field_type) !== false) {
 //
 //	Must insert some default 100 rows for the data table so None queries will work right
 //
-				$resdefault=db_query("INSERT INTO artifact_extra_field_data(artifact_id,field_data,extra_field_id) 
-					SELECT artifact_id,100,$id FROM artifact WHERE group_artifact_id='".$this->ArtifactType->getID()."'");
+				$resdefault = db_query_params ('INSERT INTO artifact_extra_field_data(artifact_id,field_data,extra_field_id) 
+					SELECT artifact_id,100,$1 FROM artifact WHERE group_artifact_id=$2',
+							       array ($id,
+								      $this->ArtifactType->getID())) ;
 				if (!$resdefault) {
 					echo db_error();
 				}
@@ -197,7 +213,8 @@ class ArtifactExtraField extends Error {
 	 */
 	function fetchData($id) {
 		$this->id=$id;
-		$res=db_query("SELECT * FROM artifact_extra_field_list WHERE extra_field_id='$id'");
+		$res = db_query_params ('SELECT * FROM artifact_extra_field_list WHERE extra_field_id=$1',
+					array ($id)) ;
 		
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('ArtifactExtraField: Invalid ArtifactExtraField ID');
@@ -313,9 +330,8 @@ class ArtifactExtraField extends Error {
 	 *	@return array
 	 */
 	function getAvailableValues() {
-		$sql = "SELECT * FROM artifact_extra_field_elements WHERE extra_field_id=".$this->getID();
-		$res = db_query($sql);
-		
+		$res = db_query_params ('SELECT * FROM artifact_extra_field_elements WHERE extra_field_id=$1',
+					array ($this->getID()));
 		$return = array();
 		while ($row = db_fetch_array($res)) {
 			$return[] = $row;
@@ -358,16 +374,21 @@ class ArtifactExtraField extends Error {
 			return false;
 		}		
 
-		$sql="UPDATE artifact_extra_field_list 
-			SET 
-			field_name='".htmlspecialchars($name)."',
-			attribute1='$attribute1',
-			attribute2='$attribute2',
-			is_required='$is_required',
-			alias='$alias'
-			WHERE extra_field_id='". $this->getID() ."' 
-			AND group_artifact_id='".$this->ArtifactType->getID()."'";
-		$result=db_query($sql);
+		$result = db_query_params ('UPDATE artifact_extra_field_list 
+			SET field_name=$1,
+			attribute1=$2,
+			attribute2=$3,
+			is_required=$4,
+			alias=$5
+			WHERE extra_field_id=$6
+			AND group_artifact_id=$7',
+					   array (htmlspecialchars($name),
+						  $attribute1,
+						  $attribute2,
+						  $is_required,
+						  $alias,
+						  $this->getID(),
+						  $this->ArtifactType->getID())) ;
 		if ($result && db_affected_rows($result) > 0) {
 			return true;
 		} else {
@@ -390,17 +411,14 @@ class ArtifactExtraField extends Error {
 			return false;
 		}
 		db_begin();
-		$sql="DELETE FROM artifact_extra_field_data 
-			WHERE extra_field_id='".$this->getID()."'";
-		$result=db_query($sql);
+		$result = db_query_params ('DELETE FROM artifact_extra_field_data WHERE extra_field_id=$1',
+					   array ($this->getID())) ;
 		if ($result) {
-			$sql="DELETE FROM artifact_extra_field_elements
-				WHERE extra_field_id='".$this->getID()."'";
-			$result=db_query($sql);
+			$result = db_query_params ('DELETE FROM artifact_extra_field_elements WHERE extra_field_id=$1',
+						   array ($this->getID())) ;
 			if ($result) {
-				$sql="DELETE FROM artifact_extra_field_list
-                WHERE extra_field_id='".$this->getID()."'";
-				$result=db_query($sql);
+				$result = db_query_params ('DELETE FROM artifact_extra_field_list WHERE extra_field_id=$1',
+							   array ($this->getID())) ;
 				if ($result) {
 					if ($this->getType() == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 						if (!$this->ArtifactType->setCustomStatusField(0)) {
@@ -485,14 +503,19 @@ class ArtifactExtraField extends Error {
 		$serial = 1;
 		$conflict = false;	
 		do {
-			$sql = "SELECT * FROM artifact_extra_field_list ".
-					"WHERE LOWER(alias)='".$alias."' AND ".
-					"group_artifact_id=".$this->ArtifactType->getID();
 			if ($this->data_array['extra_field_id']) {
-				$sql .= " AND extra_field_id <> ".$this->data_array['extra_field_id'];
+				$res = db_query_params ('SELECT * FROM artifact_extra_field_list
+                                                         WHERE LOWER (alias)=$1
+                                                         AND group_artifact_id=$2
+                                                         AND extra_field_id <> $3',
+							array ($alias,
+							       $this->ArtifactType->getID(),
+							       $this->data_array['extra_field_id'])) ;
+			} else {
+				$res = db_query_params ('SELECT * FROM artifact_extra_field_list WHERE LOWER (alias)=$1 AND group_artifact_id=$2',
+							array ($alias,
+							       $this->ArtifactType->getID()));
 			}
-			$res = db_query($sql);
-
 			if (!$res) {
 				$this->setError(db_error());
 				return false;

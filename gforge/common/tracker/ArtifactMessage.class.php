@@ -3,6 +3,7 @@
  * FusionForge trackers
  *
  * Copyright 2004, GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -110,10 +111,13 @@ class ArtifactMessage extends Error {
 			}
 		}
 
-		$sql="insert into artifact_message (artifact_id,submitted_by,from_email,adddate,body) 
-			VALUES ('". $this->Artifact->getID() ."','$user_id','$by','". time() ."','". htmlspecialchars($body). "')";
-		$res = db_query($sql);
-
+		$res = db_query_params ('INSERT INTO artifact_message (artifact_id,submitted_by,from_email,adddate,body) 
+			VALUES ($1,$2,$3,$4,$5)',
+					array ($this->Artifact->getID(),
+					       $user_id,
+					       $by,
+					       time(),
+					       htmlspecialchars($body))) ;
 		if (!$res) {
 			$this->setError(db_error());
 			return false;
@@ -137,7 +141,8 @@ class ArtifactMessage extends Error {
 	 *	@return	boolean	success.
 	 */
 	function fetchData($id) {
-		$res=db_query("SELECT * FROM artifact_message_user_vw WHERE id='$id'");
+		$res = db_query_params ('SELECT * FROM artifact_message_user_vw WHERE id=$1',
+					array ($id)) ;
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('ArtifactMessage: Invalid ArtifactMessage ID');
 			return false;

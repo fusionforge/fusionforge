@@ -3,6 +3,7 @@
  * FusionForge trackers
  *
  * Copyright 2002, GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -62,15 +63,17 @@ class ArtifactQueryFactory extends Error {
 		return true;
 	}
 	
-	function& getArtifactQueries() {
+	function &getArtifactQueries() {
 		if (!is_null($this->ArtifactQueries)) {
 			return $this->ArtifactQueries;
 		}
 		
 		$this->ArtifactQueries = array();
 		
-		$res = db_query("SELECT * FROM artifact_query WHERE user_id='".user_getid()."' ".
-					"AND group_artifact_id='".$this->ArtifactType->getID()."'");
+		$res = db_query_params ('SELECT * FROM artifact_query WHERE user_id=$1
+					 AND group_artifact_id=$2',
+					array (user_getid(),
+					       $this->ArtifactType->getID())) ;
 		if (!$res) {
 			$this->setError("ArtifactQueryFactory:: Database error");
 		}
