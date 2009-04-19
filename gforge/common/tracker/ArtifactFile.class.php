@@ -3,6 +3,7 @@
  * FusionForge trackers
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -35,9 +36,10 @@ function &artifactfile_get_object($artifact_file_id,$data=false) {
 	global $ARTIFACTFILE_OBJ;
 	if (!isset($ARTIFACTFILE_OBJ["_".$artifact_file_id."_"])) {
 		if ($data) {
-		//the db result handle was passed in
+			//the db result handle was passed in
 		} else {
-			$res=db_query("SELECT * FROM artifact_file_user_vw WHERE id='$artifact_file_id'");
+			$res = db_query_params ('SELECT * FROM artifact_file_user_vw WHERE id=$1',
+						array ($artifact_file_id)) ;
 			if (db_numrows($res) <1 ) {
 				$ARTIFACTFILE_OBJ["_".$artifact_file_id."_"]=false;
 				return false;
@@ -145,11 +147,17 @@ class ArtifactFile extends Error {
 
 		db_begin();
 
-		$res=db_query("INSERT INTO artifact_file
+		$res = db_query_params ('INSERT INTO artifact_file
 			(artifact_id,description,bin_data,filename,filesize,filetype,adddate,submitted_by)
-			VALUES 
-			('".$this->Artifact->getID()."','$description','". base64_encode($bin_data) ."','$filename',
-			'$filesize','$filetype','". time() ."','$userid')"); 
+			VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
+					array ($this->Artifact->getID(),
+					       $description,
+					       base64_encode($bin_data),
+					       $filename,
+					       $filesize,
+					       $filetype,
+					       time(),
+					       $userid)) ; 
 
 		$id=db_insertid($res,'artifact_file','id');
 
@@ -187,7 +195,8 @@ class ArtifactFile extends Error {
 			$this->setPermissionDeniedError();
 			return false;
 		}
-		$res=db_query("DELETE FROM artifact_file WHERE id='". $this->getID() ."'");
+		$res = db_query_params ('DELETE FROM artifact_file WHERE id=$1',
+					array ($this->getID())) ;
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError('ArtifactFile: Unable to Delete');
 			return false;
@@ -204,7 +213,8 @@ class ArtifactFile extends Error {
 	 *	@return	boolean	success.
 	 */
 	function fetchData($id) {
-		$res=db_query("SELECT * FROM artifact_file_user_vw WHERE id='$id'");
+		$res = db_query_params ('SELECT * FROM artifact_file_user_vw WHERE id=$1',
+					array ($id)) ;
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('ArtifactFile: Invalid ArtifactFile ID');
 			return false;

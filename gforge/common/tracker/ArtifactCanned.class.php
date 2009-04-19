@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2002-2004, GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -96,12 +97,10 @@ class ArtifactCanned extends Error {
 			$this->setPermissionDeniedError();
 			return false;
 		}
-
-		$sql="INSERT INTO artifact_canned_responses (group_artifact_id,title,body) 
-			VALUES ('".$this->ArtifactType->getID()."',
-			'". htmlspecialchars($title) ."','". htmlspecialchars($body) ."')";
-
-		$result=db_query($sql);
+		$result = db_query_params ('INSERT INTO artifact_canned_responses (group_artifact_id,title,body) VALUES ($1,$2,$3)',
+					   array ($this->ArtifactType->getID(),
+						  htmlspecialchars($title),
+						  htmlspecialchars($body))) ;
 
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
@@ -128,7 +127,8 @@ class ArtifactCanned extends Error {
 	 *	@return	boolean	success.
 	 */
 	function fetchData($id) {
-		$res=db_query("SELECT * FROM artifact_canned_responses WHERE id='$id'");
+		$res = db_query_params ('SELECT * FROM artifact_canned_responses WHERE id=$1',
+					array ($id)) ;
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('ArtifactCanned: Invalid ArtifactCanned ID');
 			return false;
@@ -195,7 +195,13 @@ class ArtifactCanned extends Error {
 			SET title='". htmlspecialchars($title) ."',body='". htmlspecialchars($body) ."'
 			WHERE group_artifact_id='". $this->ArtifactType->getID() ."' AND id='". $this->getID() ."'";
 
-		$result=db_query($sql);
+		$result = db_query_params ('UPDATE artifact_canned_responses
+			SET title=$1,body=$2,
+			WHERE group_artifact_id=$3 AND id=$4',
+					   array (htmlspecialchars($title),
+						  htmlspecialchars($body),
+						  $this->ArtifactType->getID(),
+						  $this->getID())) ;
 
 		if ($result && db_affected_rows($result) > 0) {
 			return true;
