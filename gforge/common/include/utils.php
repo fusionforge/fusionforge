@@ -972,6 +972,14 @@ function util_make_url_g ($groupame, $group_id) {
 	}
 }
 
+function util_ensure_value_in_set ($value, $set) {
+	if (in_array ($value, $set)) {
+		return $value ;
+	} else {
+		return $set[0] ;
+	}
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

@@ -40,13 +40,7 @@ if (!$start) {
 
 site_project_header(array('title'=>_('Project Activity').' '.$group->getPublicName(),'group'=>$group_id,'toptab'=>'home'));
 
-if (($area != 'tracker')
-    && ($area != 'forum')
-    && ($area != 'docman')
-    && ($area != 'taskman')
-    && ($area != 'downloads')) {
-	$area = 'tracker' ;
-} ;
+$area = util_ensure_value_in_set ($area, aray ('tracker','forum','docman','taskman','downloads')) ;
 if ($SPAN && !is_numeric($SPAN)) { $SPAN = 1; }
 if ($start && !is_numeric($start)) { $start = false; }
 if ($end && !is_numeric($end)) { $end = false; }
