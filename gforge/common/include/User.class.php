@@ -776,7 +776,8 @@ Enjoy the site.
 		}
 
 		if ($GLOBALS['sys_require_unique_email']) {
-			if (db_numrows(db_query("SELECT user_id FROM users WHERE email ILIKE '$email' OR email_new ILIKE '$email'")) > 0) {
+			if (db_numrows(db_query_params('SELECT user_id FROM users WHERE email ILIKE $1 OR email_new ILIKE $2',
+						       array ($email, $email))) > 0) {
 				$this->setError(_('User with this email already exists.'));
 			return false;
 			}
@@ -1420,8 +1421,9 @@ Enjoy the site.
 			$this->setError('User::getRole : Unable to get group object');
 			return false;
 		}
-		$sql = "SELECT role_id FROM user_group WHERE user_id=".$this->getID()." AND group_id = ".$group->getID();
-		$res = db_query($sql);
+		$res = db_query_params ('SELECT role_id FROM user_group WHERE user_id=$1 AND group_id=$2',
+					array ($this->getID(),
+					       $group->getID())) ;
 		if (!$res) {
 			$this->setError('User::getRole::DB - Could Not get role_id '.db_error());
 			return false;

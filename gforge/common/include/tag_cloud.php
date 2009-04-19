@@ -98,11 +98,12 @@ function tag_cloud($params = '') {
 
 	$return = '';
 
-	$res = db_query("SELECT name,count(*) AS count
+	$res = db_query_params ('SELECT name,count(*) AS count
 					 FROM project_tags, groups
 					 WHERE project_tags.group_id = groups.group_id
-					 AND status = 'A' AND is_public=1 AND type_id=1 AND register_time > 0
-					 GROUP BY name ORDER BY count DESC");
+					 AND status = $1 AND is_public=1 AND type_id=1 AND register_time > 0
+					 GROUP BY name ORDER BY count DESC',
+				array ('A')) ;
 	if (db_numrows($res) > 0) {
 		$count_min = 0;
 		$count_max = 0;
