@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2002-2004, GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -44,7 +45,8 @@ define('ARTIFACT_MAIL_MARKER', '#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+');
 			if ($data) {
 				//the db result handle was passed in
 			} else {
-				$res=db_query("SELECT * FROM artifact_vw WHERE artifact_id='$artifact_id'");
+				$res = db_query_params ('SELECT * FROM artifact_vw WHERE artifact_id=$1',
+							array ($artifact_id)) ;
 				if (db_numrows($res) <1 ) {
 					$ARTIFACT_OBJ["_".$artifact_id."_"]=false;
 					return false;
@@ -226,13 +228,18 @@ class Artifact extends Error {
 
 		db_begin();
 
-		$sql="INSERT INTO artifact 
+		$res = db_query_params ('INSERT INTO artifact 
 			(group_artifact_id,status_id,priority,
 			submitted_by,assigned_to,open_date,summary,details) 
-			VALUES 
-			('".$this->ArtifactType->getID()."','$status_id','$priority',
-			'$user','$assigned_to','". time() ."','". htmlspecialchars($summary)."','". htmlspecialchars($details)."')";
-		$res=db_query($sql);
+			VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
+					array ($this->ArtifactType->getID(),
+					       $status_id,
+					       $priority,
+					       $user,
+					       $assigned_to,
+					       time(),
+					       htmlspecialchars($summary),
+					       htmlspecialchars($details))) ;
 		if (!$res) {
 			$this->setError('Artifact: '.db_error());
 			db_rollback();
@@ -278,8 +285,9 @@ class Artifact extends Error {
 	 *	@return	boolean	success.
 	 */
 	function fetchData($artifact_id) {
-		$res=db_query("SELECT * FROM artifact_vw 
-			WHERE artifact_id='$artifact_id' AND group_artifact_id='".$this->ArtifactType->getID()."'");
+		$res = db_query_params ('SELECT * FROM artifact_vw WHERE artifact_id=$1 AND group_artifact_id=$2',
+					array ($artifact_id,
+					       $this->ArtifactType->getID())) ;
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('Artifact: Invalid ArtifactID');
 			return false;
@@ -467,37 +475,43 @@ class Artifact extends Error {
 			return false;
 		}
 		db_begin();
-		$res = db_query("DELETE FROM artifact_extra_field_data WHERE artifact_id='".$this->getID()."'");
+		$res = db_query_params ('DELETE FROM artifact_extra_field_data WHERE artifact_id=$1',
+					array ($this->getID())) ;
 		if (!$res) {
 			$this->setError('Error deleting extra field data: '.db_error());
 			db_rollback();
 			return false;
 		}
-		$res = db_query("DELETE FROM artifact_file WHERE artifact_id='".$this->getID()."'");
+		$res = db_query_params ('DELETE FROM artifact_file WHERE artifact_id=$1',
+					array ($this->getID())) ;
 		if (!$res) {
 			$this->setError('Error deleting file from db: '.db_error());
 			db_rollback();
 			return false;
 		}
-		$res = db_query("DELETE FROM artifact_message WHERE artifact_id='".$this->getID()."'");
+		$res = db_query_params ('DELETE FROM artifact_message WHERE artifact_id=$1',
+					array ($this->getID())) ;
 		if (!$res) {
 			$this->setError('Error deleting message: '.db_error());
 			db_rollback();
 			return false;
 		}
-		$res = db_query("DELETE FROM artifact_history WHERE artifact_id='".$this->getID()."'");
+		$res = db_query_params ('DELETE FROM artifact_history WHERE artifact_id=$1',
+					array ($this->getID())) ;
 		if (!$res) {
 			$this->setError('Error deleting history: '.db_error());
 			db_rollback();
 			return false;
 		}
-		$res = db_query("DELETE FROM artifact_monitor WHERE artifact_id='".$this->getID()."'");
+		$res = db_query_params ('DELETE FROM artifact_monitor WHERE artifact_id=$1',
+					array ($this->getID())) ;
 		if (!$res) {
 			$this->setError('Error deleting monitor: '.db_error());
 			db_rollback();
 			return false;
 		}
-		$res = db_query("DELETE FROM artifact WHERE artifact_id='".$this->getID()."'");
+		$res = db_query_params ('DELETE FROM artifact WHERE artifact_id=$1',
+					array ($this->getID())) ;
 		if (!$res) {
 			$this->setError('Error deleting artifact: '.db_error());
 			db_rollback();
@@ -505,16 +519,18 @@ class Artifact extends Error {
 		}
 		
 		if ($this->getStatusID() == 1) {
-			$res = db_query("UPDATE artifact_counts_agg SET count=count-1,open_count=open_count-1
-				WHERE group_artifact_id='".$this->getID()."'");
+			$res = db_query_params ('UPDATE artifact_counts_agg SET count=count-1,open_count=open_count-1
+				WHERE group_artifact_id=$1',
+						array ($this->getID())) ;
 			if (!$res) {
 				$this->setError('Error updating artifact_counts_agg (1): '.db_error());
 				db_rollback();
 				return false;
 			}
 		} elseif ($this->getStatusID() == 2) {
-			$res = db_query("UPDATE artifact_counts_agg SET count=count-1
-				WHERE group_artifact_id='".$this->getID()."'");
+			$res = db_query_params ('UPDATE artifact_counts_agg SET count=count-1
+				WHERE group_artifact_id=$1',
+						array ($this->getID())) ;
 			if (!$res) {
 				$this->setError('Error updating artifact_counts_agg (2): '.db_error());
 				db_rollback();
@@ -549,14 +565,15 @@ class Artifact extends Error {
 
 		}
 
-		$res=db_query("SELECT * FROM artifact_monitor 
-			WHERE artifact_id='". $this->getID() ."' 
-			AND user_id='$user_id'");
+		$res = db_query_params ('SELECT * FROM artifact_monitor WHERE artifact_id=$1 AND user_id=$2',
+					array ($this->getID(),
+					       $user_id)) ;
 
 		if (!$res || db_numrows($res) < 1) {
 			//not yet monitoring
-			$res=db_query("INSERT INTO artifact_monitor (artifact_id,user_id) 
-				VALUES ('". $this->getID() ."','$user_id')");
+			$res = db_query_params ('INSERT INTO artifact_monitor (artifact_id,user_id) VALUES ($1,$2)',
+						array ($this->getID(),
+						       $user_id)) ;
 			if (!$res) {
 				$this->setError(db_error());
 				return false;
@@ -566,9 +583,11 @@ class Artifact extends Error {
 			}
 		} else {
 			//already monitoring - remove their monitor
-			db_query("DELETE FROM artifact_monitor 
-				WHERE artifact_id='". $this->getID() ."' 
-				AND user_id='$user_id'");
+			db_query_params ('DELETE FROM artifact_monitor 
+				WHERE artifact_id=$1
+				AND user_id=$2',
+					 array ($this->getID(),
+						$user_id)) ;
 			$this->setError(_('Artifact Monitoring Deactivated'));
 			return false;
 		}
@@ -578,8 +597,9 @@ class Artifact extends Error {
 		if (!session_loggedin()) {
 			return false;
 		}
-		$sql="SELECT count(*) AS count FROM artifact_monitor WHERE user_id='".user_getid()."' AND artifact_id='".$this->getID()."';";
-		$result = db_query($sql);
+		$result = db_query_params ('SELECT count(*) AS count FROM artifact_monitor WHERE user_id=$1 AND artifact_id=$2',
+					   array (user_getid(),
+						  $this->getID())) ;
 		$row_count = db_fetch_array($result);
 		return $result && $row_count['count'] > 0;
 	}
@@ -590,9 +610,8 @@ class Artifact extends Error {
 	 *  @return array of email addresses monitoring this Artifact.
 	 */
 	function getMonitorIds() {
-		$res=db_query("SELECT user_id
-			FROM artifact_monitor 
-			WHERE artifact_id='". $this->getID() ."'");
+		$res = db_query_params ('SELECT user_id	FROM artifact_monitor WHERE artifact_id=$1',
+					array ($this->getID())) ;
 		return array_unique(array_merge($this->ArtifactType->getMonitorIds(),util_result_column_to_array($res)));
 	}
 
@@ -602,11 +621,8 @@ class Artifact extends Error {
 	 *	@return database result set.
 	 */
 	function getHistory() {
-		$sql="SELECT * ".
-		"FROM artifact_history_user_vw ".
-		"WHERE artifact_id='". $this->getID() ."' ".
-		"ORDER BY entrydate DESC";
-		return db_query($sql);
+		return db_query_params ('SELECT * FROM artifact_history_user_vw WHERE artifact_id=$1 ORDER BY entrydate DESC',
+					array ($this->getID())) ;
 	}
 
 	/**
@@ -615,10 +631,8 @@ class Artifact extends Error {
 	 *	@return database result set.
 	 */
 	function getMessages() {
-		$sql="select * ".
-			"FROM artifact_message_user_vw ".
-			"WHERE artifact_id='". $this->getID() ."' ORDER BY adddate DESC";
-		return db_query($sql);
+		return db_query_params ('SELECT * FROM artifact_message_user_vw WHERE artifact_id=$1 ORDER BY adddate DESC',
+					array ($this->getID())) ;
 	}
 
 	/**
@@ -643,10 +657,8 @@ class Artifact extends Error {
 	 */
 	function &getFiles() {
 		if (!isset($this->files)) {
-			$sql="select * ".
-			"FROM artifact_file_user_vw ".
-			"WHERE artifact_id='". $this->getID() ."'";
-			$res=db_query($sql);
+			$res = db_query_params ('SELECT * FROM artifact_file_user_vw WHERE artifact_id=$1',
+						array ($this->getID())) ;
 			$rows=db_numrows($res);
 			if ($rows > 0) {
 				for ($i=0; $i < $rows; $i++) {
@@ -666,13 +678,13 @@ class Artifact extends Error {
 	 */
 	function getRelatedTasks() {
 		if (!$this->relatedtasks) {
-			$this->relatedtasks=
-			db_query("SELECT pt.group_project_id,pt.project_task_id,pt.summary,pt.start_date,pt.end_date,pgl.group_id
+			$this->relatedtasks = db_query_params ('SELECT pt.group_project_id,pt.project_task_id,pt.summary,pt.start_date,pt.end_date,pgl.group_id
 			FROM project_task pt, project_group_list pgl
 			WHERE pt.group_project_id = pgl.group_project_id AND
 			EXISTS (SELECT project_task_id FROM project_task_artifact
 				WHERE project_task_id=pt.project_task_id
-				AND artifact_id = ". $this->getID() . ")");
+				AND artifact_id = $1',
+							       array ($this->getID())) ;
 		}
 		return $this->relatedtasks;
 	}
@@ -712,9 +724,12 @@ class Artifact extends Error {
 			}
 		}
 
-		$sql="insert into artifact_message (artifact_id,submitted_by,from_email,adddate,body) ".
-			"VALUES ('". $this->getID() ."','$user_id','$by','". time() ."','". htmlspecialchars($body). "')";
-		$res = db_query($sql);
+		$res = db_query_params ('INSERT INTO artifact_message (artifact_id,submitted_by,from_email,adddate,body) VALUES ($1,$2,$3,$4,$5)',
+					array ($this->getID(),
+					       $user_id,
+					       $by,
+					       time(),
+					       htmlspecialchars($body))) ;
 		if ($send_followup) {
 			$this->mailFollowup(2,false);
 		}
@@ -735,9 +750,12 @@ class Artifact extends Error {
 		} else {
 			$user=user_getid();
 		}
-		$sql="insert into artifact_history(artifact_id,field_name,old_value,mod_by,entrydate) 
-			VALUES ('". $this->getID() ."','$field_name','".addslashes($old_value)."','$user','". time() ."')";
-		return db_query($sql);
+		return db_query_params ('INSERT INTO artifact_history(artifact_id,field_name,old_value,mod_by,entrydate) VALUES ($1,$2,$3,$4,$5)',
+					array ($this->getID(),
+					       $field_name,
+					       addslashes($old_value),
+					       $user,
+					       time())) ;
 	}
 
 	/**
@@ -806,7 +824,8 @@ class Artifact extends Error {
 		//
 		//	Get a lock on this row in the database
 		//
-		$lock=db_query("SELECT * FROM artifact WHERE artifact_id='".$this->getID()."' FOR UPDATE");
+		$lock = db_query_params ('SELECT * FROM artifact WHERE artifact_id=$1 FOR UPDATE',
+					 array ($this->getID())) ;
 		$artifact_type_id = $this->ArtifactType->getID();
 		//
 		//	Attempt to move this Artifact to a new ArtifactType
@@ -842,7 +861,8 @@ class Artifact extends Error {
 			//	exist in the new tracker. All extra_fields will be deleted and 
 			//	then set to 100 in the new tracker.
 			//
-			$res=db_query("DELETE FROM artifact_extra_field_data WHERE artifact_id='".$this->getID()."'");
+			$res = db_query_params ('DELETE FROM artifact_extra_field_data WHERE artifact_id=$1',
+						array ($this->getID())) ;
 			$extra_fields=array();
 		}
 		
@@ -1028,20 +1048,18 @@ class Artifact extends Error {
 				} elseif (($type == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) || ($type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX)) {
 					$extra_fields[$efid]=array('100');
 				} else {
-					$resdel=db_query("DELETE FROM artifact_extra_field_data
-					WHERE
-					artifact_id='".$this->getID()."'
-					AND extra_field_id='".$efid."'");
+					$resdel = db_query_params ('DELETE FROM artifact_extra_field_data WHERE artifact_id=$1 AND extra_field_id=$2',
+								   array ($this->getID(),
+									  $efid)) ;
 					continue;
 				}
 			}
 			//
 			//	get the old rows of data
 			//
-			$resd=db_query("SELECT * FROM artifact_extra_field_data
-				WHERE
-				artifact_id='".$this->getID()."'
-				AND extra_field_id='".$efid."'");
+			$resd = db_query_params ('SELECT * FROM artifact_extra_field_data WHERE artifact_id=$1 AND extra_field_id=$2',
+						 array ($this->getID(),
+							$efid)) ;
 			$rows=db_numrows($resd);
 			if ($resd && $rows) {
 //
@@ -1069,11 +1087,10 @@ class Artifact extends Error {
 							$this->addHistory($field_name, $this->ArtifactType->getElementName($deleted_values));
 						}
 						
-
-						$resdel=db_query("DELETE FROM artifact_extra_field_data
-						WHERE
-						artifact_id='".$this->getID()."'
-						AND extra_field_id='".$efid."'");
+						
+						$resdel = db_query_params ('DELETE FROM artifact_extra_field_data WHERE	artifact_id=$1 AND extra_field_id=$2',
+									   array ($this->getID(),
+										  $efid)) ;
 					} else {
 						continue;
 					}
@@ -1084,10 +1101,9 @@ class Artifact extends Error {
 					//element DID change - do a history entry
 					$field_name = $ef[$efid]['field_name'];
 					$changes["extra_fields"][$efid] = 1;
-					$resdel=db_query("DELETE FROM artifact_extra_field_data
-					WHERE
-					artifact_id='".$this->getID()."'
-					AND extra_field_id='".$efid."'");
+					$resdel = db_query_params ('DELETE FROM artifact_extra_field_data WHERE	artifact_id=$1 AND extra_field_id=$2',
+								   array ($this->getID(),
+									  $efid)) ;
 					if (($type == ARTIFACT_EXTRAFIELDTYPE_SELECT) || ($type == ARTIFACT_EXTRAFIELDTYPE_RADIO) || ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS)) {
 //don't add history for text fields
 						$this->addHistory($field_name,$this->ArtifactType->getElementName(db_result($resd,0,'field_data')));
@@ -1110,10 +1126,10 @@ class Artifact extends Error {
 					$multi_rows=true;
 					$count=count($extra_fields[$efid]);
 					for ($fin=0; $fin<$count; $fin++) {
-						$sql="INSERT INTO artifact_extra_field_data (artifact_id,extra_field_id,field_data) 
-							values ('".$this->getID()."','".$efid."',
-							'".$extra_fields[$efid][$fin]."')";
-						$res=db_query($sql);
+						$res = db_query_params ('INSERT INTO artifact_extra_field_data (artifact_id,extra_field_id,field_data) VALUES ($1,$2,$3)',
+									array ($this->getID(),
+									       $efid,
+									       $extra_fields[$efid][$fin])) ;
 						if (!$res) {
 							$this->setError('Artifact::updateExtraFields:: '.$sql.db_error());
 							return false;
@@ -1122,9 +1138,10 @@ class Artifact extends Error {
 				} else {
 					$multi_rows=false;
 					$count=1;
-					$res=db_query("INSERT INTO artifact_extra_field_data (artifact_id,extra_field_id,field_data) 
-						values ('".$this->getID()."','".$efid."',
-						'".htmlspecialchars($extra_fields[$efid])."')");
+					$res = db_query_params ('INSERT INTO artifact_extra_field_data (artifact_id,extra_field_id,field_data) VALUES ($1,$2,$3)',
+								array ($this->getID(),
+								       $efid,
+								       htmlspecialchars($extra_fields[$efid]))) ;
 					if (!$res) {
 						$this->setError('Artifact::updateExtraFields:: '.db_error());
 						return false;
@@ -1144,8 +1161,8 @@ class Artifact extends Error {
 	function &getExtraFieldData() {
 		if (!isset($this->extra_field_data)) {
 			$this->extra_field_data = array();
-			$res=db_query("SELECT * FROM artifact_extra_field_data 
-				WHERE artifact_id='".$this->getID()."' ORDER BY extra_field_id");
+			$res = db_query_params ('SELECT * FROM artifact_extra_field_data WHERE artifact_id=$1 ORDER BY extra_field_id',
+						array ($this->getID())) ;
 			$ef = $this->ArtifactType->getExtraFields();
 			while ($arr = db_fetch_array($res)) {
 				$type=$ef[$arr['extra_field_id']]['field_type'];
