@@ -3,6 +3,7 @@
  * FusionForge trackers
  *
  * Copyright 2002, GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -50,9 +51,9 @@ class ArtifactsForUser extends Error {
 	*	@param	sql	The sql that returns artifact_id
 	*	@return	Artifact[]	The array of Artifacts
 	*/
-	function & getArtifactsFromSQL($sql) {
+	function &getArtifactsFromSQLwithParams ($sql, $params) {
 		$artifacts = array();
-		$result=db_query($sql);
+		$result = db_query_params ($sql, $params);
 		$rows=db_numrows($result);
 		if ($rows<=0) {
 			return $artifacts;
@@ -74,10 +75,10 @@ class ArtifactsForUser extends Error {
 	*	getAssignedArtifacts	- Get the users's assigned artifacts
 	*	@return	Artifact[]	The array of Artifacts
 	*/
-	function & getAssignedArtifactsByGroup() {
-		$sql="SELECT * FROM artifact_vw av WHERE av.assigned_to=".$this->User->getID()."
-			AND av.status_id='1' ORDER BY av.group_artifact_id, av.artifact_id DESC";
-		return $this->getArtifactsFromSQL($sql);
+	function &getAssignedArtifactsByGroup() {
+		return $this->getArtifactsFromSQLwithParams('SELECT * FROM artifact_vw av WHERE av.assigned_to=$1 AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',
+							    array($this->User->getID())) ;
+								  
 	}
 
 	/**
@@ -85,13 +86,9 @@ class ArtifactsForUser extends Error {
 	*
 	*	@return Artifact[] The array of Artifacts
 	*/
-	function & getSubmittedArtifactsByGroup() {
-		$sql="SELECT *
-			FROM artifact_vw av
-			WHERE av.submitted_by=".$this->User->getID()."
-			AND av.status_id='1'
-			ORDER BY av.group_artifact_id, av.artifact_id DESC";
-		return $this->getArtifactsFromSQL($sql);
+	function &getSubmittedArtifactsByGroup() {
+		return $this->getArtifactsFromSQLwithParams('SELECT * FROM artifact_vw av WHERE av.submitted_by=$1 AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',
+							    array($this->User->getID())) ;
 	}
 }
 

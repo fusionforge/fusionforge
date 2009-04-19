@@ -3,6 +3,7 @@
  * FusionForge trackers
  *
  * Copyright 2004, Anthony J. Pugliese
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -106,10 +107,11 @@ class ArtifactExtraFieldElement extends Error {
 			$this->setPermissionDeniedError();
 			return false;
 		}
-		$sql="INSERT INTO artifact_extra_field_elements (extra_field_id,element_name,status_id) 
-			VALUES ('".$this->ArtifactExtraField->getID()."','".htmlspecialchars($name)."','$status_id')";
 		db_begin();
-		$result=db_query($sql);
+		$result = db_query_params ('INSERT INTO artifact_extra_field_elements (extra_field_id,element_name,status_id) VALUES ($1,$2,$3)',
+					   array ($this->ArtifactExtraField->getID(),
+						  htmlspecialchars($name),
+						  $status_id)) ;
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
 			$id=db_insertid($result,'artifact_extra_field_elements','element_id');
@@ -138,7 +140,8 @@ class ArtifactExtraFieldElement extends Error {
 	 *	@return	boolean	success.
 	 */
 	function fetchData($id) {
-		$res=db_query("SELECT * FROM artifact_extra_field_elements WHERE element_id='$id'");
+		$res = db_query_params ('SELECT * FROM artifact_extra_field_elements WHERE element_id=$1',
+					array ($id)) ;
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('ArtifactExtraField: Invalid ArtifactExtraFieldElement ID');
 			return false;
@@ -219,11 +222,12 @@ class ArtifactExtraFieldElement extends Error {
 		} else {
 			$status_id=0;
 		}
-		$sql="UPDATE artifact_extra_field_elements 
-			SET element_name='".htmlspecialchars($name)."',
-			status_id='$status_id' 
-			WHERE element_id='".$this->getID()."'"; 
-		$result=db_query($sql);
+		$result = db_query_params ('UPDATE artifact_extra_field_elements 
+			SET element_name=$1, status_id=$2
+			WHERE element_id=$3',
+					   array (htmlspecialchars($name),
+						  $status_id,
+						  $this->getID())) ;
 		if ($result && db_affected_rows($result) > 0) {
 			return true;
 		} else {

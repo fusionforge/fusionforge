@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2002-2004, GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -88,15 +89,10 @@ class Artifacts extends Error {
 		if (!$offset) {
 			$offset = 0;
 		}
-
-		$sql = "SELECT 
-					* 
-				FROM 
-					artifact_vw 
-				WHERE 
-					group_artifact_id='". $this->ArtifactType->getID() ."'";
-	
-		$res = db_query($sql,500,$offset);
+		$res = db_query_params ('SELECT * FROM artifact_vw WHERE group_artifact_id=$1',
+					array ($this->ArtifactType->getID()),
+					500,
+					$offset) ;
 
 		if (!$res) {
 			$this->setError('Could not get artifacts: ' . db_error());

@@ -3,6 +3,7 @@
  * FusionForge trackers
  *
  * Copyright 2004, Anthony J. Pugliese
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -97,10 +98,10 @@ class ArtifactBoxOptions extends Error {
 			$this->setPermissionDeniedError();
 			return false;
 		}
-		$sql="INSERT INTO artifact_group_selection_box_options (artifact_box_id,box_options_name) 
-			VALUES ('$id','".htmlspecialchars($name)."')";
+		$result = db_query_params ('INSERT INTO artifact_group_selection_box_options (artifact_box_id,box_options_name) VALUES ($1,$2)',
+					   array ($id,
+						  htmlspecialchars($name))) ;
 
-		$result=db_query($sql);
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
 			return true;
@@ -127,7 +128,8 @@ class ArtifactBoxOptions extends Error {
 	 *	@return	boolean	success.
 	 */
 	function fetchData($id) {
-		$res=db_query("SELECT * FROM artifact_group_selection_box_options WHERE id='$id'");
+		$res = db_query_params ('SELECT * FROM artifact_group_selection_box_options WHERE id=$1',
+					array ($id)) ;
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('ArtifactSelectionBox: Invalid Artifact ID');
 			return false;
@@ -193,11 +195,11 @@ class ArtifactBoxOptions extends Error {
 			$this->setMissingParamsError();
 			return false;
 		}   
-		$sql="UPDATE artifact_group_selection_box_options 
-			SET box_options_name='".htmlspecialchars($name)."' 
-			WHERE id='$id'"; 
-//			AND artifact_box_id='$boxid'";
-		$result=db_query($sql);
+		$result = db_query_params ('UPDATE artifact_group_selection_box_options 
+			SET box_options_name=$1
+			WHERE id=$2',
+					   array (htmlspecialchars($name),
+						  $id)) ;
 		if ($result && db_affected_rows($result) > 0) {
 			return true;
 		} else {

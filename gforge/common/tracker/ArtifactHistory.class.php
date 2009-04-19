@@ -3,6 +3,7 @@
  * FusionForge trackers
  *
  * Copyright 2004, GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -95,10 +96,12 @@ class ArtifactHistory extends Error {
 			$this->setPermissionDeniedError();
 			return false;
 		}
-		$sql="INSERT INTO artifact_category (group_artifact_id,category_name,auto_assign_to) 
-			VALUES ('".$this->Artifact->getID()."','".htmlspecialchars($name)."','$auto_assign_to')";
+		$result = db_query_params ('INSERT INTO artifact_category (group_artifact_id,category_name,auto_assign_to) 
+			VALUES ($1,$2,$3)',
+					   array ($this->Artifact->getID(),
+						  htmlspecialchars($name),
+						  $auto_assign_to)) ;
 
-		$result=db_query($sql);
 
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
@@ -121,7 +124,8 @@ class ArtifactHistory extends Error {
 	 *	@return	boolean	success.
 	 */
 	function fetchData($id) {
-		$res=db_query("SELECT * FROM artifact_category WHERE id='$id'");
+		$res = db_query_params ('SELECT * FROM artifact_category WHERE id=$1',
+					array ($id)) ;
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('ArtifactHistory: Invalid ArtifactHistory ID');
 			return false;

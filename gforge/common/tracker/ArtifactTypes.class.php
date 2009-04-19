@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2002-2004, GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -71,8 +72,9 @@ class ArtifactTypes extends Error {
 	function createTrackers() {
 
 		// first, check if trackers already exist
-		$res=db_query("SELECT * FROM artifact_group_list 
-			WHERE group_id='".$this->Group->getID()."' AND datatype > 0");
+		$res = db_query_params ('SELECT * FROM artifact_group_list 
+			WHERE group_id=$1 AND datatype > 0',
+					array ($this->Group->getID()));
 		if (db_numrows($res) > 0) {
 			return true;
 		}
