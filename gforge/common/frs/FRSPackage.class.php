@@ -3,6 +3,7 @@
  * FusionForge file release system
  *
  * Copyright 2002, Tim Perdue/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -26,7 +27,8 @@ require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'frs/FRSRelease.class.php';
 
 function &get_frs_packages($Group) {
-	$res=db_query("SELECT * FROM frs_package WHERE group_id='".$Group->getID()."'");
+	$res = db_query_params ('SELECT * FROM frs_package WHERE group_id=$1',
+				array ($Group->getID())) ;
 	if (db_numrows($res) < 1) {
 		return false;
 	}
@@ -50,8 +52,8 @@ function &frspackage_get_object($package_id, $data=false) {
 		if ($data) {
 			//the db result handle was passed in
 		} else {
-			$res=db_query("SELECT * FROM frs_package
-				WHERE package_id='$package_id'");
+			$res = db_query_params ('SELECT * FROM frs_package WHERE package_id=$1',
+						array ($package_id)) ;
 			if (db_numrows($res)<1) {
 				$FRSPACKAGE_OBJ['_'.$package_id.'_']=false;
 				return false;
@@ -144,18 +146,20 @@ class FRSPackage extends Error {
 			return false;
 		}
 
-		$res=db_query("SELECT * FROM frs_package WHERE group_id='".$this->Group->getID()."'
-			AND name='".htmlspecialchars($name)."'");
+		$res = db_query_params ('SELECT * FROM frs_package WHERE group_id=$1 AND name=$2',
+					array ($this->Group->getID(),
+					       htmlspecialchars($name))) ;
 		if (db_numrows($res)) {
 			$this->setError('FRSPackage::create() Error Adding Package: Name Already Exists');
 			return false;
 		}
 
-		$sql="INSERT INTO frs_package(group_id,name,status_id,is_public)
-			VALUES ('".$this->Group->getId()."','".htmlspecialchars($name)."','1','$is_public')";
-
 		db_begin();
-		$result=db_query($sql);
+		$result = db_query_params ('INSERT INTO frs_package(group_id,name,status_id,is_public) VALUES ($1,$2,$3,$4)',
+					   array ($this->Group->getId(),
+						  htmlspecialchars($name),
+						  1,
+						  $is_public)) ;
 		if (!$result) {
 			db_rollback();
 			$this->setError('FRSPackage::create() Error Adding Package: '.db_error());
@@ -190,9 +194,9 @@ class FRSPackage extends Error {
 	 *  @return boolean	success.
 	 */
 	function fetchData($package_id) {
-		$res=db_query("SELECT * FROM frs_package
-			WHERE package_id='$package_id'
-			AND group_id='". $this->Group->getID() ."'");
+		$res = db_query_params ('SELECT * FROM frs_package WHERE package_id=$1 AND group_id=$2',
+					array ($package_id,
+					       $this->Group->getID())) ;
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('FRSPackage::fetchData()  Invalid package_id'.db_error());
 			return false;
@@ -266,20 +270,18 @@ class FRSPackage extends Error {
 			$this->setError(_('You can only monitor if you are logged in'));
 			return false;
 		}
-		$sql="SELECT * FROM filemodule_monitor
-			WHERE user_id='".user_getid()."'
-			AND filemodule_id='".$this->getID()."';";
-		$result = db_query($sql);
+		$result = db_query_params ('SELECT * FROM filemodule_monitor WHERE user_id=$1 AND filemodule_id=$2',
+					   array (user_getid(),
+						  $this->getID())) ;
 
 		if (!$result || db_numrows($result) < 1) {
 			/*
 				User is not already monitoring thread, so
 				insert a row so monitoring can begin
 			*/
-			$sql="INSERT INTO filemodule_monitor (filemodule_id,user_id)
-				VALUES ('".$this->getID()."','".user_getid()."')";
-
-			$result = db_query($sql);
+			$result = db_query_params ('INSERT INTO filemodule_monitor (filemodule_id,user_id) VALUES ($1,$2)',
+						   array ($this->getID(),
+							  user_getid()));
 
 			if (!$result) {
 				$this->setError('Unable to add monitor: '.db_error());
@@ -300,10 +302,9 @@ class FRSPackage extends Error {
 			$this->setError(_('You can only monitor if you are logged in'));
 			return false;
 		}
-		$sql="DELETE FROM filemodule_monitor
-			WHERE user_id='".user_getid()."'
-			AND filemodule_id='".$this->getID()."';";
-		return db_query($sql);
+		return db_query_params ('DELETE FROM filemodule_monitor WHERE user_id=$1 AND filemodule_id=$2',
+					array (user_getid(),
+					       $this->getID())) ;
 	}
 
 	/**
@@ -312,8 +313,8 @@ class FRSPackage extends Error {
 	 *	@return int the count
 	 */
 	function getMonitorCount() {
-		$sql = "select count(*) as count from filemodule_monitor where filemodule_id = ".$this->getID();
-		$res = db_result(db_query($sql), 0, 0);
+		$res = db_result(db_query_params ('select count(*) as count from filemodule_monitor where filemodule_id=$1',
+						  array ($this->getID())), 0, 0);
 		if ($res < 0) {
 			$this->setError('FRSPackage::getMonitorCount() Error On querying monitor count: '.db_error());
 			return false;
@@ -334,7 +335,9 @@ class FRSPackage extends Error {
 			WHERE user_id='".user_getid()."'
 			AND filemodule_id='".$this->getID()."';";
 
-		$result = db_query($sql);
+		$result = db_query_params ('SELECT * FROM filemodule_monitor WHERE user_id=$1 AND filemodule_id=$2',
+					   array (user_getid(),
+						  $this->getID())) ;
 
 		if (!$result || db_numrows($result) < 1) {
 			return false;
@@ -349,9 +352,8 @@ class FRSPackage extends Error {
 	 *  @return	array	The array of user_id's.
 	 */
 	function &getMonitorIDs() {
-		$res=db_query("SELECT user_id
-			FROM filemodule_monitor
-			WHERE filemodule_id='".$this->getID()."'");
+		$res = db_query_params ('SELECT user_id FROM filemodule_monitor WHERE filemodule_id=$1',
+					array ($this->getID())) ;
 		return util_result_column_to_array($res);
 	}
 
@@ -375,19 +377,20 @@ class FRSPackage extends Error {
 			return false;
 		}		
 		if($this->getName()!=htmlspecialchars($name)) {
-			$res=db_query("SELECT * FROM frs_package WHERE group_id='".$this->Group->getID()."'
-			AND name='".htmlspecialchars($name)."'");
+			$res = db_query_params ('SELECT * FROM frs_package WHERE group_id=$1 AND name=$2',
+						array ($this->Group->getID(),
+						       htmlspecialchars($name))) ;
 			if (db_numrows($res)) {
 				$this->setError('FRSPackage::update() Error Updating Package: Name Already Exists');
 				return false;
 			}
 		}
 		db_begin();
-		$res=db_query("UPDATE frs_package SET
-			name='".htmlspecialchars($name)."',
-			status_id='$status'
-			WHERE group_id='".$this->Group->getID()."'
-			AND package_id='".$this->getID()."'");
+		$res = db_query_params ('UPDATE frs_package SET	name=$1, status_id=$2 WHERE group_id=$3 AND package_id=$4',
+					array (htmlspecialchars($name),
+					       $status,
+					       $this->Group->getID(),
+					       $this->getID())) ;
 		if (!$res || db_affected_rows($res) < 1) {
 			db_rollback();
 			$this->setError('FRSPackage::update() Error On Update: '.db_error());
@@ -429,7 +432,8 @@ class FRSPackage extends Error {
 	function &getReleases() {
 		if (!is_array($this->package_releases) || count($this->package_releases) < 1) {
 			$this->package_releases=array();
-			$res=db_query("SELECT * FROM frs_release WHERE package_id='".$this->getID()."'");
+			$res = db_query_params ('SELECT * FROM frs_release WHERE package_id=$1',
+						array ($this->getID())) ;
 			while ($arr = db_fetch_array($res)) {
 				$this->package_releases[]=new FRSRelease($this,$arr['release_id'],$arr);
 			}
@@ -473,8 +477,9 @@ class FRSPackage extends Error {
 		}
 		exec('rm -rf '.$dir);
 
-		db_query("DELETE FROM frs_package WHERE package_id='".$this->getID()."'
-			AND group_id='".$this->Group->getID()."'");
+		db_query_params ('DELETE FROM frs_package WHERE package_id=$1 AND group_id=$2',
+				 array ($this->getID(),
+					$this->Group->getID())) ;
 		return true;
 	}
 

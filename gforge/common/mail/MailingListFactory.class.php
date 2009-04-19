@@ -2,8 +2,9 @@
 /**
  * FusionForge mailing lists
  *
+ * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2003, Guillaume Smet
- * based on work Copyright 2002, Tim Perdue/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -91,14 +92,11 @@ class MailingListFactory extends Error {
 			$public_flag = MAIL__MAILING_LIST_IS_PRIVATE.', '.MAIL__MAILING_LIST_IS_PUBLIC;
 		}
 
-		$sql = 'SELECT * '
-			. 'FROM mail_group_list '
-			. 'WHERE group_id=\''.$this->Group->getID().'\' '
-			. 'AND is_public IN ('.$public_flag.') '
-			. 'ORDER BY list_name;';
-		
+		$result = db_query_params ('SELECT * FROM mail_group_list WHERE group_id=$1 AND is_public = ANY ($2) ORDER BY list_name',
 
-		$result = db_query($sql);
+					   array ($this->Group->getID(),
+						  db_int_array_to_any_clause (array (MAIL__MAILING_LIST_IS_PRIVATE,
+										     MAIL__MAILING_LIST_IS_PUBLIC)))) ;
 
 		if (!$result) {
 			$this->setError(sprintf(_('Error Getting %1$s'), _('Error Getting %1$s')).db_error());
