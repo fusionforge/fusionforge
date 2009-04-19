@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2000, Tim Perdue/Sourceforge
  * Copyright 2002, Tim Perdue/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -100,10 +101,9 @@ class ProjectCategory extends Error {
 			$this->setPermissionDeniedError();
 			return false;
 		}
-		$sql="INSERT INTO project_category (group_project_id,category_name) 
-			VALUES ('".$this->ProjectGroup->getID()."','".htmlspecialchars($name)."')";
-
-		$result=db_query($sql);
+		$result = db_query_params ('INSERT INTO project_category (group_project_id,category_name) VALUES ($1,$2)',
+					   array ($this->ProjectGroup->getID(),
+						  htmlspecialchars($name))) ;
 
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
@@ -130,7 +130,8 @@ class ProjectCategory extends Error {
 	 *	@return	boolean	success.
 	 */
 	function fetchData($id) {
-		$res=db_query("SELECT * FROM project_category WHERE category_id='$id'");
+		$res = db_query_params ('SELECT * FROM project_category WHERE category_id=$1',
+					array ($id)) ;
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('ProjectCategory: Invalid ProjectCategory ID');
 			return false;
@@ -187,7 +188,11 @@ class ProjectCategory extends Error {
 			SET category_name='".htmlspecialchars($name)."'
 			WHERE category_id='". $this->getID() ."' 
 			AND group_project_id='".$this->ProjectGroup->getID()."'";
-		$result=db_query($sql);
+		$result = db_query_params ('UPDATE project_category SET category_name=$1
+			WHERE category_id=$2 AND group_project_id=$3',
+					   array (htmlspecialchars($name),
+						  $this->getID(),
+						  $this->ProjectGroup->getID())) ;
 		if ($result && db_affected_rows($result) > 0) {
 			return true;
 		} else {

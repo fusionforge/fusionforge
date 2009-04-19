@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2000, Tim Perdue/Sourceforge
  * Copyright 2002, Tim Perdue/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -145,7 +146,7 @@ class ProjectTaskFactory extends Error {
 		}
 		$this->max_rows=$max_rows;
 	}
-
+	
 	/**
 	 *	getTasks - get an array of ProjectTask objects.
 	 *
@@ -156,62 +157,35 @@ class ProjectTaskFactory extends Error {
 			return $this->project_tasks;
 		}
 
-		//if status selected, and more to where clause
-		if ($this->status && ($this->status != 100)) {
-			//for open tasks, add status=100 to make sure we show all
-			$status_str="AND project_task_vw.status_id IN (".$this->status.(($this->status==1)?',100':'').")";
+		if ($this->order=='priority') {
+			$order = 'ORDER BY priority DESC' ;
 		} else {
-			//no status was chosen, so don't add it to where clause
-			$status_str='';
+			$order = "ORDER BY $this->order ASC" ;
 		}
 
-		//if assigned to selected, and more to where clause
 		if ($this->assigned_to) {
-			if (is_array ($this->assigned_to)) {
-				$assigned_str="AND project_assigned_to.assigned_to_id IN (".join ($this->assigned_to,', ').")";
-			} else {
-				$assigned_str="AND project_assigned_to.assigned_to_id='".$this->assigned_to."'";
-			}
-			$assigned_str2=',project_assigned_to';
-			$assigned_str3='project_task_vw.project_task_id=project_assigned_to.project_task_id AND';
-
+			$tat = $this->assigned_to ;
+			if (! is_array ($tat)) 
+				$tat = array ($tat) ;
+			
+			$result = db_query_params ('SELECT project_task_vw.*, project_task_external_order.external_id
+			FROM project_task_vw natural left join project_task_external_order, project_assigned_to
+			WHERE project_task_vw.project_task_id=project_assigned_to.project_task_id 
+                          AND project_task_vw.group_project_id = $1
+                          AND project_assigned_to.assigned_to_id = ANY ($2)' . $order,
+						   array ($this->ProjectGroup->getID(),
+							  db_int_array_to_any_clause ($tat)),
+						   $this->max_rows,
+						   $this->offset) ;
 		} else {
-			//no assigned to was chosen, so don't add it to where clause
-			$assigned_str='';
-			$assigned_str2='';
-			$assigned_str3='';
+			$result = db_query_params ('SELECT project_task_vw.*, project_task_external_order.external_id
+			FROM project_task_vw natural left join project_task_external_order
+			WHERE project_task_vw.group_project_id = $1' . $order,
+						   array ($this->ProjectGroup->getID()),
+						   $this->max_rows,
+						   $this->offset) ;
 		}
 
-		if ($this->category) {
-			$cat_str="AND project_task_vw.category_id='".$this->category."'";
-		} else {
-			$cat_str='';
-		}
-
-		//
-		//	sort using an external ID useful only to something like MS Project
-		//
-		if ($this->order=='external_id') {
-			$ext_str='natural left join project_task_external_order';
-			$ext_fld_str=',project_task_external_order.external_id';
-		} else {
-			$ext_str='';
-			$ext_fld_str='';
-		}
-
-/*
-select project_task_vw.*,project_assigned_to.* FROM project_task_vw,project_assigned_to 
-WHERE project_assigned_to.project_task_id=project_task_vw.project_task_id;
-*/
-		$sql="SELECT project_task_vw.* $ext_fld_str
-			FROM project_task_vw $ext_str $assigned_str2 
-			WHERE $assigned_str3 project_task_vw.group_project_id='". $this->ProjectGroup->getID() ."' 
-			$assigned_str $status_str $cat_str 
-			ORDER BY ".$this->order.(($this->order=='priority') ? ' DESC ':' ');
-
-//echo $sql;
-	
-		$result=db_query($sql,($this->max_rows),$this->offset);
 		$rows = db_numrows($result);
 		$this->fetched_rows=$rows;
 		if (db_error()) {
@@ -221,6 +195,21 @@ WHERE project_assigned_to.project_task_id=project_task_vw.project_task_id;
 
 		$this->project_tasks = array();
 		while ($arr =& db_fetch_array($result)) {
+			if ($this->status && ($this->status != 100)) {
+				if ($this->status == 1) {
+					if ($arr['status_id'] != 1 && $arr['status_id'] != 100)
+						continue ;
+				} else {
+					if ($arr['status_id'] != $this->status)
+						continue ;
+				}
+			}
+
+			if ($this->category) {
+				if ($arr['category_id'] != $this->category_id)
+					continue ;
+			}
+					
 			$this->project_tasks[] = new ProjectTask($this->ProjectGroup, $arr['project_task_id'], $arr);
 		}
 		return $this->project_tasks;

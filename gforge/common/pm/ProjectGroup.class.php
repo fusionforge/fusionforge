@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2000, Tim Perdue/Sourceforge
  * Copyright 2002, Tim Perdue/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -38,8 +39,8 @@ require_once $gfcommon.'include/Error.class.php';
 			if ($data) {
 				//the db result handle was passed in
 			} else {
-				$res=db_query("SELECT * FROM project_group_list_vw
-				WHERE group_project_id='$group_project_id'");
+				$res = db_query_params ('SELECT * FROM project_group_list_vw WHERE group_project_id=$1',
+							array ($group_project_id)) ;
 				if (db_numrows($res) <1 ) {
 					$PROJECTGROUP_OBJ["_".$group_project_id."_"]=false;
 					return false;
@@ -150,13 +151,13 @@ class ProjectGroup extends Error {
 			return false;
 		}
 
-		$sql="INSERT INTO project_group_list (group_id,project_name,is_public,
-			description,send_all_posts_to)
-			VALUES ('".$this->Group->getId()."','". htmlspecialchars($project_name) ."','$is_public',
-			'". htmlspecialchars($description) ."','$send_all_posts_to')";
-
 		db_begin();
-		$result=db_query($sql);
+		$result = db_query_params ('INSERT INTO project_group_list (group_id,project_name,is_public,description,send_all_posts_to) VALUES ($1,$2,$3,$4,$5)',
+					   array ($this->Group->getId(),
+						  htmlspecialchars($project_name),
+						  $is_public,
+						  htmlspecialchars($description),
+						  $send_all_posts_to)) ;
 		if (!$result) {
 			db_rollback();
 			$this->setError('Error Adding ProjectGroup: '.db_error());
@@ -176,9 +177,9 @@ class ProjectGroup extends Error {
 	 *  @return	boolean	success.
 	 */
 	function fetchData($group_project_id) {
-		$res=db_query("SELECT * FROM project_group_list_vw
-			WHERE group_project_id='$group_project_id'
-			AND group_id='". $this->Group->getID() ."'");
+		$res = db_query_params ('SELECT * FROM project_group_list_vw WHERE group_project_id=$1 AND group_id=$2',
+					array ($group_project_id,
+					       $this->Group->getID())) ;
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('ProjectGroup:: Invalid group_project_id');
 			return false;
@@ -267,8 +268,8 @@ class ProjectGroup extends Error {
 	 */
 	function getStatuses () {
 		if (!$this->statuses) {
-			$sql='SELECT * FROM project_status';
-			$this->statuses=db_query($sql);
+			$this->statuses = db_query_params ('SELECT * FROM project_status',
+							   array());
 		}
 		return $this->statuses;
 	}
@@ -280,10 +281,8 @@ class ProjectGroup extends Error {
 	 */
 	function getCategories () {
 		if (!$this->categories) {
-			$sql="SELECT category_id,category_name 
-				FROM project_category 
-				WHERE group_project_id='".$this->getID()."'";
-			$this->categories=db_query($sql);
+			$this->categories = db_query_params ('SELECT category_id,category_name FROM project_category WHERE group_project_id=$1',
+							     array ($this->getID()));
 		}
 		return $this->categories;
 	}
@@ -309,15 +308,17 @@ class ProjectGroup extends Error {
 	 */
 	function getTechnicians () {
 		if (!$this->technicians) {
-			$sql="SELECT users.user_id, users.realname 
+			$sql="";
+			$this->technicians = db_query_params ('SELECT users.user_id, users.realname 
 				FROM users, role_setting, user_group
 				WHERE users.user_id=user_group.user_id
                                 AND role_setting.role_id=user_group.role_id
-                                AND role_setting.ref_id='". $this->getID() ."' 
+                                AND role_setting.ref_id=$1
 				AND role_setting.value::integer IN (1,2) 
-                                AND role_setting.section_name='pm'
-				ORDER BY users.realname";
-			$this->technicians=db_query($sql);
+                                AND role_setting.section_name=$2
+				ORDER BY users.realname',
+							      array ($this->getID(),
+								     'pm')) ;
 		}
 		return $this->technicians;
 	}
@@ -365,13 +366,14 @@ class ProjectGroup extends Error {
 			return false;
 		}
 
-		$sql="UPDATE project_group_list SET
-			project_name='". htmlspecialchars($project_name) ."',
-			description='". htmlspecialchars($description) ."',
-			send_all_posts_to='$send_all_posts_to'
-			WHERE group_id='".$this->Group->getID()."'
-			AND group_project_id='".$this->getID()."'";
-		$res=db_query($sql);
+		$res = db_query_params ('UPDATE project_group_list SET project_name=$1,
+			description=$2,	send_all_posts_to=$3
+			WHERE group_id=$4 AND group_project_id=$5',
+					array (htmlspecialchars($project_name),
+					       htmlspecialchars($description),
+					       $send_all_posts_to,
+					       $this->Group->getID(),
+					       $this->getID())) ;
 
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError('Error On Update: '.db_error().$sql);
@@ -399,114 +401,112 @@ class ProjectGroup extends Error {
 
 		db_begin();
 
-                $sql = "DELETE FROM project_assigned_to
+                $res = db_query_params ('DELETE FROM project_assigned_to
 			WHERE EXISTS (SELECT project_task_id FROM project_task
-			WHERE group_project_id='".$this->getID()."'
-			AND project_task.project_task_id=project_assigned_to.project_task_id)";
-                $res = db_query($sql);
+			WHERE group_project_id=$1
+			AND project_task.project_task_id=project_assigned_to.project_task_id)',
+					array ($this->getID())) ;
 
                 if (!$res)
                 {
-                        $this->setError('DATABASE '.db_error().' QUERY='.$sql);
+                        $this->setError('DATABASE '.db_error());
                         return false;
                 }
 
-                $sql = "DELETE FROM project_dependencies
+		$res = db_query_params ('DELETE FROM project_dependencies
 			WHERE EXISTS (SELECT project_task_id FROM project_task
-			WHERE group_project_id='".$this->getID()."'
-			AND project_task.project_task_id=project_dependencies.project_task_id)";
-                $res = db_query($sql);
+			WHERE group_project_id=$1
+			AND project_task.project_task_id=project_dependencies.project_task_id)',
+					array ($this->getID())) ;
 
                 if (!$res)
                 {
-                        $this->setError('DATABASE '.db_error().' QUERY='.$sql);
+                        $this->setError('DATABASE '.db_error());
                         return false;
                 }
 
-                $sql = "DELETE FROM project_history
+		$res = db_query_params ('DELETE FROM project_history
 			WHERE EXISTS (SELECT project_task_id FROM project_task
-			WHERE group_project_id='".$this->getID()."'
-			AND project_task.project_task_id=project_history.project_task_id)";
-                $res = db_query($sql);
+			WHERE group_project_id=$1
+			AND project_task.project_task_id=project_history.project_task_id)',
+					array ($this->getID())) ;
 
                 if (!$res)
                 {
-                        $this->setError('DATABASE '.db_error().' QUERY='.$sql);
+                        $this->setError('DATABASE '.db_error());
                         return false;
                 }
 
-                $sql = "DELETE FROM project_messages
+                $res = db_query_params ('DELETE FROM project_messages
 			WHERE EXISTS (SELECT project_task_id FROM project_task
-			WHERE group_project_id='".$this->getID()."'
-			AND project_task.project_task_id=project_messages.project_task_id)";
-                $res = db_query($sql);
+			WHERE group_project_id=$1
+			AND project_task.project_task_id=project_messages.project_task_id)',
+					array ($this->getID())) ;
 
                 if (!$res)
                 {
-                        $this->setError('DATABASE '.db_error().' QUERY='.$sql);
+                        $this->setError('DATABASE '.db_error());
                         return false;
                 }
 
-                $sql = "DELETE FROM project_task_artifact
+                $res = db_query_params ('DELETE FROM project_task_artifact
 			WHERE EXISTS (SELECT project_task_id FROM project_task
-			WHERE group_project_id='".$this->getID()."'
-			AND project_task.project_task_id=project_task_artifact.project_task_id)";
-                $res = db_query($sql);
+			WHERE group_project_id=$1
+			AND project_task.project_task_id=project_task_artifact.project_task_id)',
+					array ($this->getID())) ;
 
                 if (!$res)
                 {
-                        $this->setError('DATABASE '.db_error().' QUERY='.$sql);
+                        $this->setError('DATABASE '.db_error());
                         return false;
                 }
 
-                $sql = "DELETE FROM rep_time_tracking
+                $res = db_query_params ('DELETE FROM rep_time_tracking
 			WHERE EXISTS (SELECT project_task_id FROM project_task
-			WHERE group_project_id='".$this->getID()."'
-			AND project_task.project_task_id=rep_time_tracking.project_task_id)";
-                $res = db_query($sql);
+			WHERE group_project_id=$1
+			AND project_task.project_task_id=rep_time_tracking.project_task_id)',
+					array ($this->getID())) ;
 
                 if (!$res)
                 {
-                        $this->setError('DATABASE '.db_error().' QUERY='.$sql);
+                        $this->setError('DATABASE '.db_error());
                         return false;
                 }
 
-                $sql = "DELETE FROM project_task
-			WHERE group_project_id='".$this->getID()."'";
-                $res = db_query($sql);
+                $res = db_query_params ('DELETE FROM project_task
+			WHERE group_project_id=$1',
+					array ($this->getID())) ;
 
                 if (!$res)
                 {
-                        $this->setError('DATABASE '.db_error().' QUERY='.$sql);
+                        $this->setError('DATABASE '.db_error());
                         return false;
                 }
 
-		$sql = "DELETE FROM project_category WHERE group_project_id='".$this->getID()."'";
-		$res = db_query($sql);
+		$res = db_query_params ('DELETE FROM project_category WHERE group_project_id=$1',
+					array ($this->getID())) ;
 
 		if (!$res)
 		{
-			$this->setError('DATABASE '.db_error().' QUERY='.$sql);
+			$this->setError('DATABASE '.db_error());
 			return false;
 		}
 
-                $sql = "DELETE FROM project_group_list
-			WHERE group_project_id='".$this->getID()."'";
-                $res = db_query($sql);
+		$res = db_query_params ('DELETE FROM project_group_list WHERE group_project_id=$1',
+					array ($this->getID())) ;
 
                 if (!$res)
                 {
-                        $this->setError('DATABASE '.db_error().' QUERY='.$sql);
+                        $this->setError('DATABASE '.db_error());
                         return false;
                 }
 
-                $sql = "DELETE FROM project_counts_agg
-			WHERE group_project_id='".$this->getID()."'";
-                $res = db_query($sql);
+		$res = db_query_params ('DELETE FROM project_counts_agg WHERE group_project_id=$1',
+					array ($this->getID())) ;
 
                 if (!$res)
                 {
-                        $this->setError('DATABASE '.db_error().' QUERY='.$sql);
+                        $this->setError('DATABASE '.db_error());
                         return false;
                 }
 
@@ -593,13 +593,16 @@ class ProjectGroup extends Error {
 			return -1;
 		} else {
 			if (!isset($this->current_user_perm)) {
-				$sql="SELECT role_setting.value::integer
+				$res = db_query_params ('SELECT role_setting.value::integer
 				FROM role_setting, user_group
-				WHERE role_setting.ref_id='". $this->getID() ."'
+				WHERE role_setting.ref_id=$1
 				AND user_group.role_id = role_setting.role_id
-                                AND user_group.user_id='".user_getid()."'
-                                AND role_setting.section_name='pm'";
-				$this->current_user_perm=db_result(db_query($sql),0,0);
+                                AND user_group.user_id=$2
+                                AND role_setting.section_name=$3',
+							array ($this->getID(),
+							       user_getid(),
+							       'pm')) ;
+				$this->current_user_perm=db_result($res,0,0);
 			}
 			return $this->current_user_perm;
 		}
