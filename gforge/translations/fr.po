@@ -2498,7 +2498,7 @@ msgid ""
 "available <a href=\"http://svnbook.red-bean.com/\">here</a>.</p>"
 msgstr ""
 "<p>La documentation de Subversion (que l'on appelle parfois « SVN ») est "
-"disponible <a href=\\\"http://svnbook.red-bean.com/\\\">ici</a> (en anglais)."
+"disponible <a href=\"http://svnbook.red-bean.com/\">ici</a> (en anglais)."
 "</p>"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:114
