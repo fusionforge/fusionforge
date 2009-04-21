@@ -114,7 +114,7 @@ class ArtifactTypeFactory extends Error {
                                           AND role_setting.ref_id=artifact_group_list_vw.group_artifact_id
                                           
    					  AND user_group.role_id = role_setting.role_id
-					  AND user_group.user_id = $3
+					  AND user_group.user_id = $3 )
 			ORDER BY group_artifact_id ASC',
 								   array ($this->Group->getID(),
 									  'tracker',

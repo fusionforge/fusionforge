@@ -195,7 +195,7 @@ class ProjectTask extends Error {
 
 		} else {
 			$res = db_query_params ('SELECT nextval($1) AS id', 
-						aarray ('project_task_pk_seq'));
+						array ('project_task_pk_seq'));
 			if (!$project_task_id=db_result($res,0,'id')) {
 				$this->setError( 'Could Not Get Next Project Task ID' );
 				db_rollback();
@@ -622,8 +622,7 @@ class ProjectTask extends Error {
 		FROM project_task 
 		WHERE group_project_id=$1
 		ORDER BY project_task_id DESC',
-						array ($this->ProjectGroup->getID(),
-						       $this->getID())) ;
+						array ($this->ProjectGroup->getID()));
 		}
 	}
 
@@ -633,7 +632,6 @@ class ProjectTask extends Error {
 	 *  @return database result set.
 	 */
 	function getHistory() {
-		$sql="";
 		return db_query_params ('SELECT * 
 		FROM project_history_user_vw 
 		WHERE project_task_id=$1
