@@ -45,52 +45,36 @@
 
 require_once 'config.php';
 require_once 'Testing/SeleniumGforge.php';
-require_once 'PHPUnit/Framework/TestCase.php';
 
-class CreateForum extends PHPUnit_Framework_TestCase
+class CreateForum extends FForge_SeleniumTestCase
 {
-	function setUp()
-	{
-		// Reload a fresh database before running this test suite.
-		system("php ".dirname(dirname(__FILE__))."/db_reload.php");
-
-		$this->verificationErrors = array();
-		$this->selenium = new Testing_SeleniumGforge($this, "*firefox", URL, SELENIUM_RC_HOST);
-		$result = $this->selenium->start();
-	}
-
-	function tearDown()
-	{
-		$this->selenium->stop();
-	}
-
 	function testSimplePost()
 	{
-		$this->selenium->createProject($this, 'ProjectA');
+		$this->createProject('ProjectA');
 					
 		// Create the first message (Message1/Text1).
-		$this->selenium->open( BASE );
-		$this->selenium->click("link=ProjectA");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->selenium->click("link=Forums");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->assertFalse($this->selenium->isTextPresent("Permission denied."));
-		$this->assertTrue($this->selenium->isTextPresent("open-discussion"));
-		$this->selenium->click("link=open-discussion");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->selenium->click("link=Start New Thread");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->selenium->type("subject", "Message1");
-		$this->selenium->type("body", "Text1");
-		$this->selenium->click("submit");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->assertTrue($this->selenium->isTextPresent("Message Posted Successfully"));
-		$this->selenium->click("link=Forums");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->assertTrue($this->selenium->isTextPresent("open-discussion"));
-		$this->selenium->click("link=open-discussion");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->assertTrue($this->selenium->isTextPresent("Message1"));
+		$this->open( BASE );
+		$this->click("link=ProjectA");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Forums");
+		$this->waitForPageToLoad("30000");
+		$this->assertFalse($this->isTextPresent("Permission denied."));
+		$this->assertTrue($this->isTextPresent("open-discussion"));
+		$this->click("link=open-discussion");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Start New Thread");
+		$this->waitForPageToLoad("30000");
+		$this->type("subject", "Message1");
+		$this->type("body", "Text1");
+		$this->click("submit");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Message Posted Successfully"));
+		$this->click("link=Forums");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("open-discussion"));
+		$this->click("link=open-discussion");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Message1"));
 	}
 }
 ?>

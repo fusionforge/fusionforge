@@ -45,67 +45,51 @@
 
 require_once 'config.php';
 require_once 'Testing/SeleniumGforge.php';
-require_once 'PHPUnit/Framework/TestCase.php';
 
-class ExportCSV extends PHPUnit_Framework_TestCase
+class ExportCSV extends FForge_SeleniumTestCase
 {
-	function setUp()
-	{
-		// Reload a fresh database before running this test suite.
-		system("php ".dirname(dirname(__FILE__))."/db_reload.php");
-
-		$this->verificationErrors = array();
-		$this->selenium = new Testing_SeleniumGforge($this, "*firefox", URL, SELENIUM_RC_HOST);
-		$result = $this->selenium->start();
-	}
-
-	function tearDown()
-	{
-		$this->selenium->stop();
-	}
-
 	function testexportCSV()
 	{
-		$this->selenium->createProject($this, 'ProjectA');
+		$this->createProject('ProjectA');
 
 		// Test: Create a simple bug report (Message1/Text1).
-		$this->selenium->open( BASE );
-		$this->selenium->click("link=ProjectA");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->selenium->click("link=Task Manager");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->assertTrue($this->selenium->isTextPresent("To Do"));
-		$this->assertTrue($this->selenium->isTextPresent("Next Release"));
-		$this->selenium->click("link=To Do");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->assertTrue($this->selenium->isTextPresent("No Matching Tasks found"));
+		$this->open( BASE );
+		$this->click("link=ProjectA");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Task Manager");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("To Do"));
+		$this->assertTrue($this->isTextPresent("Next Release"));
+		$this->click("link=To Do");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("No Matching Tasks found"));
 
-		$this->selenium->click("link=Add task");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->selenium->type("summary", "Task1: Hello Paris");
-		$this->selenium->type("details", "Hello Paris");
-		$this->selenium->type("hours", "10");
-		$this->selenium->click("submit");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->assertTrue($this->selenium->isTextPresent("Task Created Successfully"));
+		$this->click("link=Add task");
+		$this->waitForPageToLoad("30000");
+		$this->type("summary", "Task1: Hello Paris");
+		$this->type("details", "Hello Paris");
+		$this->type("hours", "10");
+		$this->click("submit");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Task Created Successfully"));
 
-		$this->selenium->click("link=Add task");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->selenium->type("summary", "Task2: Hello France");
-		$this->selenium->type("details", "Hello France");
-		$this->selenium->type("hours", "15");
-		$this->selenium->click("submit");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->assertTrue($this->selenium->isTextPresent("Task Created Successfully"));
+		$this->click("link=Add task");
+		$this->waitForPageToLoad("30000");
+		$this->type("summary", "Task2: Hello France");
+		$this->type("details", "Hello France");
+		$this->type("hours", "15");
+		$this->click("submit");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Task Created Successfully"));
 
-		$this->selenium->click("link=Add task");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->selenium->type("summary", "Task3: Hello World");
-		$this->selenium->type("details", "Hello World");
-		$this->selenium->type("hours", "20");
-		$this->selenium->click("submit");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->assertTrue($this->selenium->isTextPresent("Task Created Successfully"));
+		$this->click("link=Add task");
+		$this->waitForPageToLoad("30000");
+		$this->type("summary", "Task3: Hello World");
+		$this->type("details", "Hello World");
+		$this->type("hours", "20");
+		$this->click("submit");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Task Created Successfully"));
 	}
 }
 ?>

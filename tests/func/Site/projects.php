@@ -45,117 +45,103 @@
 
 require_once 'config.php';
 require_once 'Testing/SeleniumGforge.php';
-require_once 'PHPUnit/Framework/TestCase.php';
 
-class CreateProject extends PHPUnit_Framework_TestCase
+class CreateProject extends FForge_SeleniumTestCase
 {
-	function setUp()
-	{
-		// Reload a fresh database before running this test suite.
-		system("php ".dirname(dirname(__FILE__))."/db_reload.php");
-
-		$this->verificationErrors = array();
-		$this->selenium = new Testing_SeleniumGforge($this, "*firefox", URL, SELENIUM_RC_HOST);
-		$result = $this->selenium->start();
-	}
-
-	function tearDown()
-	{
-		$this->selenium->stop();
-	}
-
 	// Simple creation of a project by the admin user and
 	// approval of the creation just after.
 	// After creation, project is visible on the main page.
 	function testSimpleCreate()
 	{
-		$this->selenium->open( BASE );
-		$this->selenium->click("link=Log In");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->selenium->type("form_loginname", "admin");
-		$this->selenium->type("form_pw", "myadmin");
-		$this->selenium->click("login");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->selenium->click("link=My Page");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->selenium->click("link=Register Project");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->selenium->type("full_name", "ProjectA");
-		$this->selenium->type("purpose", "This is a simple description for project A");
-		$this->selenium->type("description", "This is the public description for project A.");
-		$this->selenium->type("unix_name", "projecta");
-		$this->selenium->click("submit");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->assertTrue($this->selenium->isTextPresent("Your project has been submitted"));
-		$this->assertTrue($this->selenium->isTextPresent("you will receive notification of their decision and further instructions"));
-		$this->selenium->click("link=Admin");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->selenium->click("link=Pending (P) (New Project Approval)");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->selenium->click("document.forms['approve.projecta'].submit");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->selenium->click("link=Home");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->assertTrue($this->selenium->isTextPresent("ProjectA"));
-		$this->selenium->click("link=ProjectA");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->assertTrue($this->selenium->isTextPresent("This is the public description for project A."));
-		$this->assertTrue($this->selenium->isTextPresent("This project has not yet categorized itself"));
+		$this->open( BASE );
+		$this->click("link=Log In");
+		$this->waitForPageToLoad("30000");
+		$this->type("form_loginname", "admin");
+		$this->type("form_pw", "myadmin");
+		$this->click("login");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=My Page");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Register Project");
+		$this->waitForPageToLoad("30000");
+		$this->type("full_name", "ProjectA");
+		$this->type("purpose", "This is a simple description for project A");
+		$this->type("description", "This is the public description for project A.");
+		$this->type("unix_name", "projecta");
+    	$this->click("//input[@name='scm' and @value='scmsvn']");
+		$this->click("submit");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Your project has been submitted"));
+		$this->assertTrue($this->isTextPresent("you will receive notification of their decision and further instructions"));
+		$this->click("link=Admin");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Pending (P) (New Project Approval)");
+		$this->waitForPageToLoad("30000");
+		$this->click("document.forms['approve.projecta'].submit");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Home");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("ProjectA"));
+		$this->click("link=ProjectA");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("This is the public description for project A."));
+		$this->assertTrue($this->isTextPresent("This project has not yet categorized itself"));
 	}
 
 	function testCharsCreateTestCase()
 	{
-		$this->selenium->open( BASE );
-		$this->selenium->click("link=Log In");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->selenium->type("form_loginname", "admin");
-		$this->selenium->type("form_pw", "myadmin");
-		$this->selenium->click("login");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->selenium->click("link=My Page");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->selenium->click("link=Register Project");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->selenium->type("full_name", "Project ' & B");
-		$this->selenium->type("purpose", "This is a & été simple description for project B");
-		$this->selenium->type("description", "This is & été the public description for project B.");
-		$this->selenium->type("unix_name", "projectb");
-		$this->selenium->click("submit");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->assertTrue($this->selenium->isTextPresent("Your project has been submitted"));
-		$this->assertTrue($this->selenium->isTextPresent("you will receive notification of their decision and further instructions"));
-		$this->selenium->click("link=Admin");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->selenium->click("link=Pending (P) (New Project Approval)");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->selenium->click("document.forms['approve.projectb'].submit");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->selenium->click("link=Home");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->assertTrue($this->selenium->isTextPresent("Project ' & B"));
-		$this->selenium->click("link=Project ' & B");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->assertTrue($this->selenium->isTextPresent("This is & été the public description for project B."));
+		$this->open( BASE );
+		$this->click("link=Log In");
+		$this->waitForPageToLoad("30000");
+		$this->type("form_loginname", "admin");
+		$this->type("form_pw", "myadmin");
+		$this->click("login");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=My Page");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Register Project");
+		$this->waitForPageToLoad("30000");
+		$this->type("full_name", "Project ' & B");
+		$this->type("purpose", "This is a & été simple description for project B");
+		$this->type("description", "This is & été the public description for project B.");
+		$this->type("unix_name", "projectb");
+    	$this->click("//input[@name='scm' and @value='scmsvn']");
+		$this->click("submit");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Your project has been submitted"));
+		$this->assertTrue($this->isTextPresent("you will receive notification of their decision and further instructions"));
+		$this->click("link=Admin");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Pending (P) (New Project Approval)");
+		$this->waitForPageToLoad("30000");
+		$this->click("document.forms['approve.projectb'].submit");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Home");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Project ' & B"));
+		$this->click("link=Project ' & B");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("This is & été the public description for project B."));
 	}
 
 	// Test removal of project.
 	// TODO: Test not finished as removal does not work.
 	function testRemoveProject()
 	{
-		$this->selenium->createProject($this, 'testal1');
+		$this->createProject('testal1');
 		
-		$this->selenium->click("link=Admin");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->selenium->click("link=Display Full Project List/Edit Projects");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->selenium->click("link=testal1");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->selenium->click("link=Permanently Delete Project");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->selenium->click("sure");
-		$this->selenium->click("reallysure");
-		$this->selenium->click("reallyreallysure");
-		$this->selenium->click("submit");
+		$this->click("link=Admin");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Display Full Project List/Edit Projects");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=testal1");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Permanently Delete Project");
+		$this->waitForPageToLoad("30000");
+		$this->click("sure");
+		$this->click("reallysure");
+		$this->click("reallyreallysure");
+		$this->click("submit");
 	}
 }
 ?>

@@ -45,65 +45,49 @@
 
 require_once 'config.php';
 require_once 'Testing/SeleniumGforge.php';
-require_once 'PHPUnit/Framework/TestCase.php';
 
-class LoginProcess extends PHPUnit_Framework_TestCase
+class LoginProcess extends FForge_SeleniumTestCase
 {
-	function setUp()
-	{
-		// Reload a fresh database before running this test suite.
-		system("php ".dirname(dirname(__FILE__))."/db_reload.php");
-
-		$this->verificationErrors = array();
-		$this->selenium = new Testing_SeleniumGforge($this, "*firefox", URL, SELENIUM_RC_HOST);
-		$result = $this->selenium->start();
-	}
-
-	function tearDown()
-	{
-		$this->selenium->stop();
-	}
-
 	// Simple creation of a project by the admin user and
 	// approval of the creation just after.
 	// After creation, project is visible on the main page.
 	function testLogin()
 	{
 		// Test with a normal login.
-		$this->selenium->open( BASE );
-		$this->selenium->click("link=Log In");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->selenium->type("form_loginname", "admin");
-		$this->selenium->type("form_pw", "myadmin");
-		$this->selenium->click("login");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->assertTrue($this->selenium->isTextPresent("ACOS Forge Admin"));
-		$this->assertTrue($this->selenium->isTextPresent("Log Out"));
-		$this->selenium->logout();
+		$this->open( BASE );
+		$this->click("link=Log In");
+		$this->waitForPageToLoad("30000");
+		$this->type("form_loginname", "admin");
+		$this->type("form_pw", "myadmin");
+		$this->click("login");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("ACOS Forge Admin"));
+		$this->assertTrue($this->isTextPresent("Log Out"));
+		$this->logout();
 				
 		// Test with an empty password.
-		$this->selenium->open( BASE );
-		$this->selenium->click("link=Log In");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->selenium->type("form_loginname", "admin");
-		$this->selenium->type("form_pw", "");
-		$this->selenium->click("login");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->assertTrue($this->selenium->isTextPresent("Missing Password Or Users Name"));
-		$this->assertFalse($this->selenium->isTextPresent("ACOS Forge Admin"));
-		$this->assertTrue($this->selenium->isTextPresent("Log In"));
+		$this->open( BASE );
+		$this->click("link=Log In");
+		$this->waitForPageToLoad("30000");
+		$this->type("form_loginname", "admin");
+		$this->type("form_pw", "");
+		$this->click("login");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Missing Password Or Users Name"));
+		$this->assertFalse($this->isTextPresent("ACOS Forge Admin"));
+		$this->assertTrue($this->isTextPresent("Log In"));
 		
 		// Test with a wrong password.
-		$this->selenium->open( BASE );
-		$this->selenium->click("link=Log In");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->selenium->type("form_loginname", "admin");
-		$this->selenium->type("form_pw", "awrongpassword");
-		$this->selenium->click("login");
-		$this->selenium->waitForPageToLoad("30000");
-		$this->assertTrue($this->selenium->isTextPresent("Invalid Password Or User Name"));
-		$this->assertFalse($this->selenium->isTextPresent("ACOS Forge Admin"));
-		$this->assertTrue($this->selenium->isTextPresent("Log In"));
+		$this->open( BASE );
+		$this->click("link=Log In");
+		$this->waitForPageToLoad("30000");
+		$this->type("form_loginname", "admin");
+		$this->type("form_pw", "awrongpassword");
+		$this->click("login");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Invalid Password Or User Name"));
+		$this->assertFalse($this->isTextPresent("ACOS Forge Admin"));
+		$this->assertTrue($this->isTextPresent("Log In"));
 		
 	}
 }

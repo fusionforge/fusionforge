@@ -44,26 +44,30 @@
  */
 
 require dirname(__FILE__).'/Selenium.php';
+require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
 
-class Testing_SeleniumGforge extends Testing_Selenium {
+// New class to use, next one is now obsolete.
+class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
+{
+    protected function setUp()
+    {
+		// Reload a fresh database before running this test suite.
+		system("php ".dirname(dirname(__FILE__))."/db_reload.php");
 
-	var $test;
+    	$this->setBrowser('*firefox');
+        $this->setBrowserUrl(URL);
+        $this->setHost(SELENIUM_RC_HOST);
+    }
 
-	function __construct($test, $browser, $browserUrl, $host = 'localhost', $port = 4444, $timeout = 30000)
-	{
-		$this->test = $test;
-		parent::__construct($browser, $browserUrl, $host, $port, $timeout);
-	}
+//	protected function waitForPageToLoad($timeout)
+//	{
+//		parent::waitForPageToLoad($timeout);
+//		$this->test->assertFalse($this->isTextPresent("Notice: Undefined variable:"));
+//		$this->test->assertFalse($this->isTextPresent("Notice: Undefined index:"));
+//		$this->test->assertFalse($this->isTextPresent("Warning: Missing argument"));
+//	}
 
-	function waitForPageToLoad($timeout)
-	{
-		parent::waitForPageToLoad($timeout);
-		$this->test->assertFalse($this->isTextPresent("Notice: Undefined variable:"));
-		$this->test->assertFalse($this->isTextPresent("Notice: Undefined index:"));
-		$this->test->assertFalse($this->isTextPresent("Warning: Missing argument"));
-	}
-
-	function login($username)
+    protected function login($username)
 	{
 		if ($username == 'admin') {
 			$password = 'myadmin';
@@ -80,19 +84,14 @@ class Testing_SeleniumGforge extends Testing_Selenium {
 		
 	}
 	
-	function logout()
+	protected function logout()
 	{
 //		$this->click("link=Log Out");
 		$this->open( BASE ."/account/logout.php" );
 		$this->waitForPageToLoad("30000");
 	}
-	
-	function swithUser($username)
-	{
-		$this->logout();
-		$this->login($username);
-	}
-	function createProject ($test, $name) {
+
+	protected function createProject ($name) {
 		$unix_name = strtolower($name);
 		
 		// Create a simple project.
@@ -111,10 +110,11 @@ class Testing_SeleniumGforge extends Testing_Selenium {
 		$this->type("purpose", "This is a simple description for $name");
 		$this->type("description", "This is the public description for $name.");
 		$this->type("unix_name", $unix_name);
+    	$this->click("//input[@name='scm' and @value='scmsvn']");
 		$this->click("submit");
 		$this->waitForPageToLoad("30000");
-		$test->assertTrue($this->isTextPresent("Your project has been submitted"));
-		$test->assertTrue($this->isTextPresent("you will receive notification of their decision and further instructions"));
+		$this->assertTrue($this->isTextPresent("Your project has been submitted"));
+		$this->assertTrue($this->isTextPresent("you will receive notification of their decision and further instructions"));
 		$this->click("link=Admin");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Pending (P) (New Project Approval)");
@@ -123,14 +123,20 @@ class Testing_SeleniumGforge extends Testing_Selenium {
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Home");
 		$this->waitForPageToLoad("30000");
-		$test->assertTrue($this->isTextPresent($name));
+		$this->assertTrue($this->isTextPresent($name));
 		$this->click("link=$name");
 		$this->waitForPageToLoad("30000");
-		$test->assertTrue($this->isTextPresent("This is the public description for $name."));
-		$test->assertTrue($this->isTextPresent("This project has not yet categorized itself"));
+		$this->assertTrue($this->isTextPresent("This is the public description for $name."));
+		$this->assertTrue($this->isTextPresent("This project has not yet categorized itself"));
 	}
 
-	function createUser ($login, $id)
+	protected function swithUser($username)
+	{
+		$this->logout();
+		$this->login($username);
+	}
+	
+	protected function createUser ($login, $id)
 	{
 		$this->open("/");
 		$this->click("link=Admin");
@@ -153,7 +159,6 @@ class Testing_SeleniumGforge extends Testing_Selenium {
 		$this->click("//a[contains(@href, 'userlist.php?action=activate&user_id=$id')]");
 		$this->waitForPageToLoad("30000");
 	}
-
 }
 
 ?>

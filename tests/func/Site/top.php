@@ -45,49 +45,34 @@
 
 require_once 'config.php';
 require_once 'Testing/SeleniumGforge.php';
-require_once 'PHPUnit/Framework/TestCase.php';
 
-class Top extends PHPUnit_Framework_TestCase
+class Top extends FForge_SeleniumTestCase
 {
-    function setUp()
-    {
-    	global $url;
-    	
-        $this->verificationErrors = array();
-		$this->selenium = new Testing_SeleniumGforge($this, "*firefox", URL, SELENIUM_RC_HOST);
-        $result = $this->selenium->start();
-    }
-
-    function tearDown()
-    {
-        $this->selenium->stop();
-    }
-
     function testWalkInTop()
     {
-    	$this->selenium->open( BASE );
+    	$this->open( BASE );
 
 		// Test that from the main page we access the most active this week.    
-	    $this->selenium->click("link=[ More ]");
-    	$this->selenium->waitForPageToLoad("30000");
-    	$this->assertTrue($this->selenium->isTextPresent("Most Active This Week"));
+	    $this->click("link=[ More ]");
+    	$this->waitForPageToLoad("30000");
+    	$this->assertTrue($this->isTextPresent("Most Active This Week"));
 
     	// Test that we can return back to all the tops.
-    	$this->selenium->click("link=[View Other Top Categories]");
-    	$this->selenium->waitForPageToLoad("30000");
-    	$this->assertTrue($this->selenium->isTextPresent("We track many project usage statistics"));
+    	$this->click("link=[View Other Top Categories]");
+    	$this->waitForPageToLoad("30000");
+    	$this->assertTrue($this->isTextPresent("We track many project usage statistics"));
 
     	// Test that we can go the view the most active all time.
-    	$this->selenium->click("link=Most Active All Time");
-    	$this->selenium->waitForPageToLoad("30000");
-    	$this->assertTrue($this->selenium->isTextPresent("Most Active All Time"));
+    	$this->click("link=Most Active All Time");
+    	$this->waitForPageToLoad("30000");
+    	$this->assertTrue($this->isTextPresent("Most Active All Time"));
 
     	// Return back to tops.
-    	$this->selenium->click("link=[View Other Top Categories]");
-    	$this->selenium->waitForPageToLoad("30000");
-    	$this->selenium->click("link=Top Downloads");
-    	$this->selenium->waitForPageToLoad("30000");
-    	$this->assertTrue($this->selenium->isTextPresent("Rank"));
+    	$this->click("link=[View Other Top Categories]");
+    	$this->waitForPageToLoad("30000");
+    	$this->click("link=Top Downloads");
+    	$this->waitForPageToLoad("30000");
+    	$this->assertTrue($this->isTextPresent("Rank"));
     }
 }
 ?>
