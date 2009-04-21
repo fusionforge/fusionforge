@@ -204,7 +204,7 @@ class ProjectTask extends Error {
 
 			$this->data_array['project_task_id']=$project_task_id;
 
-			$result = db_query_params ('INSERT INTO project_task (project_task_id,group_project_id,created_by,summary,details,start_date,end_date,status_id,category_id,priority,percent_complete,hours,duration,parent_id) VALUES ($1,$2,$3,$4,$5,$6,$7,8,$9,$10,$11,$12,$13,$14)',
+			$result = db_query_params ('INSERT INTO project_task (project_task_id,group_project_id,created_by,summary,details,start_date,end_date,status_id,category_id,priority,percent_complete,hours,duration,parent_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)',
 						   array ($project_task_id,
 							  $this->ProjectGroup->getID(),
 							  user_getid(),
