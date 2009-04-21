@@ -272,7 +272,7 @@ class pgsql extends System {
 			return false;
 		} else {
 			$res = db_query_params ('SELECT group_id FROM nss_groups WHERE group_id=$1',
-						aarray ($group_id));
+						array ($group_id));
 			if (db_numrows($res) == 0){
 				return false;
 			} else {

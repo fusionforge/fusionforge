@@ -100,7 +100,7 @@ class ProjectGroupFactory extends Error {
                                      AND role_setting.section_name = $2
                                      AND role_setting.ref_id=project_group_list_vw.group_project_id
 				     AND user_group.role_id = role_setting.role_id
-				     AND user_group.user_id=$3
+				     AND user_group.user_id=$3)
         ORDER BY group_project_id',
 								   array ($this->Group->getID(),
 									  'pm',
