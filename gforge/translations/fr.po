@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-27 12:03+0100\n"
-"PO-Revision-Date: 2009-03-27 11:00+0200\n"
+"PO-Revision-Date: 2009-04-21 08:48+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <aljeux@free.fr>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Pootle 1.2.1\n"
 "X-Poedit-Language: French\n"
@@ -721,7 +721,7 @@ msgid "There is no administrator to send the mail."
 msgstr "Il n'y a pas d'administrateur à qui envoyer le courrier"
 
 #: common/include/Group.class.php:2258
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "New %1$s Project Submitted\n"
 "\n"
@@ -736,11 +736,10 @@ msgstr ""
 "\n"
 "Nom long du projet :  %2$s\n"
 "Description fournie : %3$s\n"
-"License : %4$s\n"
-"Soumis par : %6$s (%7$s)\n"
+"Soumis par : %5$s (%6$s)\n"
 "\n"
 "Visitez l'URL suivante pour approuver ou refuser ce projet:\n"
-"%5$s"
+"%4$s"
 
 #: common/include/Group.class.php:2272 common/include/Group.class.php:2287
 #, php-format
@@ -748,7 +747,7 @@ msgid "New %1$s Project Submitted"
 msgstr "%1$s - Nouveau projet soumis"
 
 #: common/include/Group.class.php:2280
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "New %1$s Project Submitted\n"
 "\n"
@@ -1837,15 +1836,16 @@ msgstr "Surveillance arrêtée"
 #: cronjobs/homedirs.php:156
 msgid "Default Web Page for groups that haven't setup their page yet"
 msgstr ""
+"Page web par défaut pour les groupes qui n'ont pas encore défini de site."
 
 #: cronjobs/homedirs.php:157
 msgid "Please replace this file with your own website"
-msgstr ""
+msgstr "Veuillez remplacer ce fichier par votre propre site web."
 
 #: cronjobs/homedirs.php:158
-#, fuzzy, php-format
+#, php-format
 msgid "Welcome to %s"
-msgstr "Bienvenue sur %1$s"
+msgstr "Bienvenue sur %s"
 
 #: cronjobs/homedirs.php:161
 #, php-format
@@ -1854,6 +1854,9 @@ msgid ""
 "<br /> Please check back soon for updates or visit <a href=\"%s\">the "
 "project page</a>."
 msgstr ""
+"Nous sommes désolés, mais ce projet n'a pas encore publié de site web.<br "
+"/>Vous pouvez revenir sur cette page plus tard, ou vous diriger vers <a "
+"href=\"%s\">la page du projet</a> en attendant."
 
 #: cronjobs/massmail.php:140
 #, php-format
