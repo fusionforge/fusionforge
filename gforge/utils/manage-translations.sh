@@ -1,8 +1,5 @@
 #! /bin/sh -e
 
-locales="eu bg ca zh_TW nl en eo fr de el he id it ja ko la nb pl pt_BR pt ru zh_CN es sv th"
-locales=$(echo $locales | xargs -n 1 | sort)
-
 if [ -e gforge/translations/gforge.pot ] ; then        # We're in the parent dir
     cd gforge
 elif [ -e translations/gforge.pot ] ; then             # probably in gforge/ (or a renamed gforge/)
@@ -15,6 +12,11 @@ else
     echo "Couldn't find translations directory..."
     exit 1
 fi
+
+locales=$(ls translations/*.po \
+    | xargs -n1 -iFILE basename FILE .po \
+    | egrep '^[a-z][a-z](_[A-Z][A-Z]$)?' \
+    | sort)
 
 print_stats () {
     for l in $(echo $locales | xargs -n 1 | sort) ; do
