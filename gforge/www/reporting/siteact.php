@@ -46,7 +46,7 @@ if (!$start) {
 	$start = $z[count($z)-1];
 }
 
-$area = util_ensure_value_in_set ($area, aray ('tracker','forum','docman','taskman','downloads')) ;
+$area = util_ensure_value_in_set ($area, array ('tracker','forum','docman','taskman','downloads')) ;
 
 echo report_header(_('Site-Wide Activity'));
 

@@ -42,7 +42,7 @@ if (!$SPAN) {
 	$SPAN=1;
 }
 
-$area = util_ensure_value_in_set ($area, aray ('tracker','forum','docman','taskman','downloads')) ;
+$area = util_ensure_value_in_set ($area, array ('tracker','forum','docman','taskman','downloads')) ;
 
 //
 //	Create Report
