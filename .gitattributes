@@ -3667,7 +3667,7 @@ tests/func/Tasks/csv.php -text
 tests/func/Testing/Selenium.php -text
 tests/func/Testing/Selenium/Exception.php -text
 tests/func/Testing/SeleniumGforge.php -text
-tests/func/config.php -text
+tests/func/config.php.sample -text
 tests/func/db_reload.php -text
 tests/unit/AllTests.php -text
 tests/unit/utils/AllTests.php -text

@@ -17,7 +17,12 @@ java -jar selenium-server.jar -interactive
 On a debian system using iceweasel and java in /usr/lib/j2re1.5-sun:
 PATH=/usr/lib/j2re1.5-sun/bin:/usr/lib/iceweasel:/bin java -jar selenium-server.jar -interactive
 
-Second step, before launching tests, edit file 'tests/config.php'.
+Second step, before launching tests, copy file 'config.php.sample'
+to 'config.php' and edit the file.
+
+cp config.php.sample config.php
+vi config.php
+
 Once configured, run the test suite.
 
 # For PostgreSQL: (NOTE: seems no needed)
