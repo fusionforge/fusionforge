@@ -43,7 +43,6 @@
  * ALONE BASIS."
  */
 
-require_once 'config.php';
 require_once 'Testing/SeleniumGforge.php';
 
 class CreateProject extends FForge_SeleniumTestCase

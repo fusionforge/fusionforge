@@ -43,7 +43,6 @@
  * ALONE BASIS."
  */
 
-require_once 'config.php';
 require_once 'Testing/SeleniumGforge.php';
 
 class CreateNews extends FForge_SeleniumTestCase

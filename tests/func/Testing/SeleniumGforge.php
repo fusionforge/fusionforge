@@ -43,7 +43,7 @@
  * ALONE BASIS."
  */
 
-require dirname(__FILE__).'/Selenium.php';
+require_once 'config.php';
 require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
 
 // New class to use, next one is now obsolete.
