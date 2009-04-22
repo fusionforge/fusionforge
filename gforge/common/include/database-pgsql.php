@@ -147,6 +147,9 @@ function db_query_params($qstring,$params,$limit='-1',$offset=0,$dbserver=SYS_DB
 	global $QUERY_COUNT;
 	$QUERY_COUNT++;
 
+	if (get_magic_quotes_gpc() == true) {
+		$params = array_map('stripslashes',$params);
+	}
 	if (!$limit || !is_numeric($limit) || $limit < 0) {
 		$limit=0;
 	}
