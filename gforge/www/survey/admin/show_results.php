@@ -128,7 +128,7 @@ $sh->footer(array());
  */
 function ShowResult(&$SurveyHTML, &$Survey, &$Question, $show_comment=0, $q_num="", $graph=0) {
     /* Get results */
-    $srf = new SurveyResponseFactory(&$Survey, &$Question);
+    $srf = new SurveyResponseFactory($Survey, $Question);
     if (!$srf || !is_object($srf)) {
 	echo "<h3>"._('Error'). ' Can not get Survey Response Factory' ."</h3>";
     } else if ( $srf->isError()) {

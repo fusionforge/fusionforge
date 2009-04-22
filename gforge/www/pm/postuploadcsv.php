@@ -42,7 +42,7 @@ if (is_uploaded_file($input_file['tmp_name'])) {
 	
 }
 
-$res=&pm_import_tasks($group_project_id, &$tasks);
+$res=&pm_import_tasks($group_project_id, $tasks);
 
 if ($res['success']) {
 	$feedback .= 'Import Was Successful';
