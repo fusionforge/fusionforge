@@ -3664,8 +3664,6 @@ tests/func/Site/projects.php -text
 tests/func/Site/top.php -text
 tests/func/Tasks/AllTests.php -text
 tests/func/Tasks/csv.php -text
-tests/func/Testing/Selenium.php -text
-tests/func/Testing/Selenium/Exception.php -text
 tests/func/Testing/SeleniumGforge.php -text
 tests/func/config.php.sample -text
 tests/func/db_reload.php -text
