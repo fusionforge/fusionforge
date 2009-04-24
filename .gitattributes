@@ -3,6 +3,7 @@
 delivery/fusionforge/package/config -text
 delivery/gforge/package/config -text
 delivery/novaforge/package/config -text
+gforge/CHANGES -text
 gforge/INSTALL.restricted -text
 gforge/NEWS -text
 gforge/backend/shell/apache.sh svneol=native#unset
