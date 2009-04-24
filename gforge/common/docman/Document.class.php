@@ -160,7 +160,7 @@ class Document extends Error {
 						time(),
 						$doc_group,
 						$doc_initstatus,
-						$doc_language_id,
+						$language_id,
 						$filename,
 						$filetype,
 						$filesize,
