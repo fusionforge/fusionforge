@@ -7,11 +7,10 @@ gforge (4.7.50-1) experimental; urgency=low
   * Use dh_install instead of copy in rules
 
   [ Roland Mas ]
-  * New package: gforge-plugin-scmbzr (not complete yet!).
   * Fixed a bunch of lintian warnings.
   * Added logrotate configuration file for vhosts access logs.
 
- -- Roland Mas <lolando@debian.org>  Fri, 03 Apr 2009 11:45:28 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 24 Apr 2009 13:45:45 +0200
 
 gforge (4.7.2-7+1) unstable; urgency=low
 
