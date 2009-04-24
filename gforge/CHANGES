@@ -1,0 +1,5 @@
+FusionForge-4.8:
+* New classification by tags (aka tag cloud)
+* New reporting page on frs to view the downloads per package
+* List of all projects added in 'Project List'
+* New version of wiki plugin, using lastest svn code
