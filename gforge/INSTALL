@@ -1,36 +1,22 @@
-Installation of GForge is a non-trivial undertaking, since it integrates
+Installation of FusionForge is a non-trivial undertaking, since it integrates
 with so many different components across your system. A skilled sysadmin 
 is required to pull it off, or at the least a great deal of patience.
 
 The result of a complete installation means automatic creation of CVS 
 and Subversion repositories, and having access to them controlled by 
-GForge and stats gathered from them. ViewCVS (used for CVS and 
+FusionForge and stats gathered from them. ViewCVS (used for CVS and
 Subversion browsing) are two additional integration points.
-
-*
-*  PROFESSIONAL SUPPORT
-*
-*  If you need professional installation, support, etc:
-*  http://gforgegroup.com/
-*
 
 BASICS OF INSTALLATION
 ----------------------
 
 
-Installation has been drastically simplified in 4.6 as the installer 
-from GForge AS has been back-ported to the open source version to 
-make it easier to set up.
+For Ubuntu/Debian system, you should use the debian packaging, see
+the fusionforge.org website for the correct instructions.
 
-To do an installation, use a supported OS like Debian, Centos, 
-Fedora or Red Hat and start by installing PHP using your package
-manager.
+For an installation on CentOS or Red Hat, use the following command.
 
-yum -y install php
-php gforge-install-1-deps.php [CENTOS|RHEL5|RHEL4|FEDORA|DEBIAN]
-php gforge-install-2.php [yourhostname] [yourapacheuser] [yourapachegroup]
-php gforge-install-3-db.php
-crontab crontab.in
+install.sh <hostname with domain>
 
 That will install the bulk of the system and even set up a site admin
 user account for you.
@@ -48,7 +34,7 @@ of how the installation is done.
 OVERVIEW
 --------
 
-GForge has a lot of different pieces touching a lot of different components
+FusionForge has a lot of different pieces touching a lot of different components
 in the system. Cronjobs are required to maintain the system, touching lots 
 of files on a daily and hourly basis, including /etc/* system files.
 
@@ -56,7 +42,7 @@ The plugins that now manage the CVS and SVN functionality have made
 installation slightly harder because even more files have to be moved into
 place during installation.
 
-The manual installation of gforge is documented below. Be sure to follow 
+The manual installation of fusionforge is documented below. Be sure to follow
 each step carefully, check the forums for frequently asked questions, 
 and ask your Apache, mailman, and postgresql installation questions in the
 corresponding mailing lists rather than on the gforge forums where little
