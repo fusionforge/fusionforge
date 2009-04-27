@@ -160,7 +160,7 @@ $(BUILDRESULT)/$(PCHANGEFILE): $(BUILDFILES)/$(PDSCFILE)
 
 $(BUILDFILES)/$(DSCFILE): $(BUILDFILES)/$(ORIGFILE)
 	cd $(PKGNAME) ; debclean
-	find $(PKGNAME) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -pdumB $(BUILDFILES)/
+	find $(PKGNAME) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v '/.testbox/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -pdumB $(BUILDFILES)/
 	# Set version for given distrib
 	cd $(BUILDFILES)/$(PKGNAME); dch -b -v $(gfversion)$(MINOR) -D UNRELEASED "This is $(DISTRIB) autobuild"
 	perl -pi -e "s/UNRELEASED/$(DISTRIB)/" $(BUILDFILES)/$(PKGNAME)/debian/changelog
@@ -169,7 +169,7 @@ $(BUILDFILES)/$(DSCFILE): $(BUILDFILES)/$(ORIGFILE)
 
 $(BUILDFILES)/$(PDSCFILE): $(BUILDFILES)/$(ORIGFILE)
 	cd $(PKGNAME) ; debclean
-	find $(PKGNAME) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -pdumB $(BUILDFILES)/
+	find $(PKGNAME) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v '/.testbox/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -pdumB $(BUILDFILES)/
 	# Set version for given distrib
 	cd $(BUILDFILES)/$(PKGNAME); dch -b -v $(gfversion)$(MINOR)+p -D UNRELEASED "This is $(DISTRIB) autobuild"
 	perl -pi -e "s/UNRELEASED/$(DISTRIB)/" $(BUILDFILES)/$(PKGNAME)/debian/changelog
@@ -181,7 +181,7 @@ $(BUILDFILES)/$(ORIGFILE): $(TARBALLS)/$(ORIGFILE)
 
 $(TARBALLS)/$(ORIGFILE): $(TARBALLS)
 	cd $(PKGNAME) ; debclean
-	find $(PKGNAME) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -o -H ustar | gzip > $(TARBALLS)/$(ORIGFILE)
+	find $(PKGNAME) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v '/.testbox/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -o -H ustar | gzip > $(TARBALLS)/$(ORIGFILE)
 	
 
 pbuilderenv: $(PBUILDERTGZ) $(PBUILDERTGZ)/base-$(DISTRIB).tgz
