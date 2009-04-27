@@ -23,11 +23,7 @@ class Packages_Tests extends PHPUnit_Framework_TestCase
 	    $this->assertEquals(0, $retval);
     }
     
-    /*
-     * @todo: Test disabled until a solution is found to address svn build
-     * in debs.
-     */
-    public function skiptestBuildDeb()
+    public function testBuildDeb()
     {
 	    $tests = dirname( dirname( dirname( dirname (__FILE__)))); 
 	    $base = dirname( $tests );
