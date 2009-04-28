@@ -256,9 +256,7 @@ Comments by the user:
 					$comments);
 			$body = str_replace("\\n","\n",$body);
 
-			$ret = util_send_message($email,$subject,$body);
-			if (! $ret) { return $ret; }
-
+			util_send_message($email,$subject,$body);
 		}
 		setup_gettext_from_browser () ;
 		return true ;

@@ -1,8 +1,10 @@
 gforge (4.7.2-7+1) unstable; urgency=low
 
   * Added watch file.
+  * Fixed group join request only sending a notification email to one of
+    the project admins.
 
- -- Roland Mas <lolando@debian.org>  Thu, 16 Apr 2009 13:45:39 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 28 Apr 2009 21:28:27 +0200
 
 gforge (4.7.2-7) unstable; urgency=low
 
