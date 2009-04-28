@@ -256,3 +256,12 @@ $(PBUILDERTGZ):
 $(LOCALREPO):
 	sudo mkdir $(LOCALREPO)
 	sudo chown `id -u`.`id -g` $(LOCALREPO)
+
+clean: # Clean $(BUILDPLACE) $(BUILDFILES) $(TARBALLS) (intermediate files) #
+	rm -rf $(BUILDPLACE) $(BUILDFILES) $(TARBALLS) 
+
+cleanenv: # Clean $(COWBUILDERBASE) $(PBUILDERTGZ) (chroots)#
+	rm -rf $(COWBUILDERBASE) $(PBUILDERTGZ)
+
+cleancache: # Clean $(APTCACHE) (apt cache) #
+	rm -rf $(APTCACHE)
