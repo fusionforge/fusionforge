@@ -423,7 +423,7 @@ class pgsql extends System {
  	*
  	*/
 	function sysGroupAddUser($group_id,$user_id,$cvs_only=0) {
-		if (! sysGroupRemoveUser($group_id,$user_id,$cvs_only))
+		if (! $this->sysGroupRemoveUser($group_id,$user_id,$cvs_only))
 			return false;
 		$res1 = db_query_params ('INSERT INTO nss_usergroups (
 			SELECT
@@ -443,7 +443,7 @@ class pgsql extends System {
 			AND
 				groups.group_id=$4
 			AND
-				groups.status$5
+				groups.status =$5
 			AND
 				users.unix_status=$6
 			AND
