@@ -128,7 +128,7 @@ class SearchManager {
 		// Global search engine
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_SOFTWARE,
-			new GFSearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectHtmlSearchRenderer', _('Software/Group'))
+			new GFSearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectHtmlSearchRenderer', _('Project'))
 		);
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_PEOPLE,
@@ -144,7 +144,7 @@ class SearchManager {
 		// Rss search engines
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_SOFTWARE,
-			new GFSearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectRssSearchRenderer', _('Software/Group')),
+			new GFSearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectRssSearchRenderer', _('Project')),
 			SEARCH__OUTPUT_RSS
 		);
 		
