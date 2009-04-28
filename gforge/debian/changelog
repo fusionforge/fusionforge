@@ -1,5 +1,11 @@
 gforge (4.8.50-1) experimental; urgency=low
 
+  *
+  
+ -- Roland Mas <lolando@debian.org>  Tue, 28 Apr 2009 16:01:39 +0200
+  
+gforge (4.8~rc1-1) experimental; urgency=low
+
   [ Christian Bayle ]
   * Removed all files from /usr/lib/gforge and put them in /usr/share/gforge
   * cron scripts ar now in /usr/share/gforge/cronjobs
