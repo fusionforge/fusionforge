@@ -1,9 +1,16 @@
 gforge (4.8.50-1) experimental; urgency=low
 
-  *
+  * Fixed blackhole syntax for gforge-mta-exim4 so as not to require
+    file_transport.
   
  -- Roland Mas <lolando@debian.org>  Tue, 28 Apr 2009 16:01:39 +0200
   
+gforge (4.8~rc1-1+1) experimental; urgency=low
+
+  * New upstream snapshot.
+
+ -- Roland Mas <lolando@debian.org>  Tue, 28 Apr 2009 15:44:31 +0200
+
 gforge (4.8~rc1-1) experimental; urgency=low
 
   [ Christian Bayle ]
@@ -15,10 +22,9 @@ gforge (4.8~rc1-1) experimental; urgency=low
   [ Roland Mas ]
   * Fixed a bunch of lintian warnings.
   * Added logrotate configuration file for vhosts access logs.
-  * Fixed blackhole syntax for gforge-mta-exim4 so as not to require
-    file_transport.
+  * New upstream release candidate.
 
- -- Roland Mas <lolando@debian.org>  Fri, 24 Apr 2009 13:45:45 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 28 Apr 2009 15:33:18 +0200
 
 gforge (4.7.2-7+1) unstable; urgency=low
 
