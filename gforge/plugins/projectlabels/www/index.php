@@ -23,7 +23,7 @@ if ($func == 'addlabel') {
 		printf (_('Cannot insert new label: %s'),
 			db_error()) ;
 	} else {
-		echo _('Project label added');
+		echo _('Project label added.');
 	}
 	
 }
@@ -44,7 +44,7 @@ if ($func == 'delete') {
 				db_error()) ;
 			db_rollback () ;
 		} else {
-			echo _('Project label deleted');
+			echo _('Project label deleted.');
 			db_commit () ;
 		}
 	}
@@ -62,7 +62,7 @@ if ($func == 'addlabeltoproject') {
 		printf (_('Cannot add label onto project: %s'),
 			db_error()) ;
 	} else {
-		echo _('The label has been added to the project');
+		echo _('The label has been added to the project.');
 	}
 	
 }
@@ -74,7 +74,7 @@ if ($func == 'removelabelfromproject') {
 		printf (_('Cannot remove label: %s'),
 			db_error()) ;
 	} else {
-		echo _('The label has been removed from the project') ;
+		echo _('The label has been removed from the project.') ;
 	}
 	
 }
@@ -88,7 +88,7 @@ if ($func == 'editlabel') {
 		printf (_('Cannot modify label: %s'),
 			db_error()) ;
 	} else {
-		echo _('Label has been saved') ;
+		echo _('Label has been saved.') ;
 	}
 }
 if ($func == 'edit') {
