@@ -1,3 +1,10 @@
+gforge (4.7.2+extratabs-1) experimental; urgency=low
+
+  * New extratabs plugin.
+  * TODO : debian/rules, postinst, prerm, dirs.
+
+ --
+
 gforge (4.8.50-1) experimental; urgency=low
 
   * Fixed blackhole syntax for gforge-mta-exim4 so as not to require
