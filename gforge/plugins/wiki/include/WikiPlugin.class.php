@@ -64,11 +64,11 @@ class GforgeWikiPlugin extends Plugin {
 				return;
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
-				$params['DIRS'][]='/wiki/g/'.$project->getUnixName().'/HomePage';
+				$params['DIRS'][]=util_make_url ('/wiki/g/'.$project->getUnixName().'/HomePage') ;
 			} else {
 				$this->hooks["groupmenu"] = "";
 				//$params['TITLES'][]=$this->text." [Off]";
-				//$params['DIRS'][]='/plugins/wiki/index.php?off=true';
+				//$params['DIRS'][]=util_make_url ('/plugins/wiki/index.php?off=true') ;
 			}
 							
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );

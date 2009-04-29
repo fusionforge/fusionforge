@@ -49,7 +49,7 @@ class MediaWikiPlugin extends Plugin {
 		}
 		if ($hookname == "outermenu") {
 			$params['TITLES'][] = 'MediaWiki';
-			$params['DIRS'][] = '/mediawiki';
+			$params['DIRS'][] = util_make_url ('/mediawiki') ;
 		} elseif ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
 			if ($G_SESSION->usesPlugin("mediawiki")) {
@@ -69,7 +69,7 @@ class MediaWikiPlugin extends Plugin {
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
-				$params['DIRS'][]='/plugins/mediawiki/index.php?group_id=' . $project->getID(); 
+				$params['DIRS'][]=util_make_url ('/plugins/mediawiki/index.php?group_id=' . $project->getID()) ; 
 			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == "groupisactivecheckbox") {

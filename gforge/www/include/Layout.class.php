@@ -151,7 +151,7 @@ class Layout extends Error {
 <table border="0" width="100%" cellspacing="0" cellpadding="0" id="headertable">
 
 	<tr>
-		<td><a href="<?php echo util_make_url (''); ?>/"><?php echo html_image('logo.png',198,52,array('border'=>'0')); ?></a></td>
+		<td><a href="<?php echo util_make_url ('/'); ?>"><?php echo html_image('logo.png',198,52,array('border'=>'0')); ?></a></td>
 		<td><?php echo $this->searchBox(); ?></td>
 		<td align="right"><?php
 			if (session_loggedin()) {
@@ -412,16 +412,16 @@ if (isset($params['group']) && $params['group']) {
 	function outerTabs($params) {
 		global $sys_use_trove,$sys_use_snippet,$sys_use_people,$sys_use_project_tags, $sys_use_project_full_list;
 
-		$TABS_DIRS[]='/';
-		$TABS_DIRS[]='/my/';
+		$TABS_DIRS[]=util_make_url ('/');
+		$TABS_DIRS[]=util_make_url ('/my/');
 		if ($sys_use_trove || $sys_use_project_tags || $sys_use_project_full_list) {
-			$TABS_DIRS[]='/softwaremap/';
+			$TABS_DIRS[]=util_make_url ('/softwaremap/') ;
 		}
 		if ($sys_use_snippet) {
-			$TABS_DIRS[]='/snippet/';
+			$TABS_DIRS[]=util_make_url ('/snippet/') ;
 		}
 		if ($sys_use_people) {
-			$TABS_DIRS[]='/people/';
+			$TABS_DIRS[]=util_make_url ('/people/') ;
 		}
 		$TABS_TITLES[]=_('Home');
 		$TABS_TITLES[]=_('My&nbsp;Page');
@@ -451,11 +451,11 @@ if (isset($params['group']) && $params['group']) {
 
 			if ($permmaster->isAdmin()) {
 				$user_is_super=true;
-				$TABS_DIRS[]='/admin/';
+				$TABS_DIRS[]=util_make_url ('/admin/') ;
 				$TABS_TITLES[]=_('Admin');
 			}
 			if ($permstats->isMember()) {
-				$TABS_DIRS[]='/reporting/';
+				$TABS_DIRS[]=util_make_url ('/reporting/') ;
 				$TABS_TITLES[]=_('Reporting');
 			}
 		}
@@ -469,29 +469,29 @@ if (isset($params['group']) && $params['group']) {
 
 				} else {
 					if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
-						$TABS_DIRS[]='/project/?group_id'.$project->getId();
+						$TABS_DIRS[]=util_make_url ('/project/?group_id') .$project->getId();
 					} else {
-						$TABS_DIRS[]='/projects/'.$project->getUnixName().'/';
+						$TABS_DIRS[]=util_make_url ('/projects/') .$project->getUnixName().'/';
 					}
 					$TABS_TITLES[]=$project->getPublicName();
 					$selected=count($TABS_DIRS)-1;
 				}
 			}
-		} elseif (strstr(getStringFromServer('REQUEST_URI'),'/my/') || 
-				strstr(getStringFromServer('REQUEST_URI'),'/account/') || 
-				strstr(getStringFromServer('REQUEST_URI'),'/register/') ||  
-				strstr(getStringFromServer('REQUEST_URI'),'/themes/') ) {
-			$selected=array_search("/my/", $TABS_DIRS);
-		} elseif (strstr(getStringFromServer('REQUEST_URI'),'softwaremap')) {
-			$selected=array_search("/softwaremap/", $TABS_DIRS);
-		} elseif (strstr(getStringFromServer('REQUEST_URI'),'/snippet/')) {
-			$selected=array_search("/snippet/", $TABS_DIRS);
-		} elseif (strstr(getStringFromServer('REQUEST_URI'),'/people/')) {
-			$selected=array_search("/people/", $TABS_DIRS);
-		} elseif (strstr(getStringFromServer('REQUEST_URI'),'/reporting/')) {
-			$selected=array_search('/reporting/',$TABS_DIRS);
-		} elseif (strstr(getStringFromServer('REQUEST_URI'),'/admin/') && $user_is_super) {
-			$selected=array_search('/admin/',$TABS_DIRS);
+		} elseif (strstr(getStringFromServer('REQUEST_URI'),util_make_url ('/my/') ) || 
+			  strstr(getStringFromServer('REQUEST_URI'),util_make_url ('/account/') ) || 
+			  strstr(getStringFromServer('REQUEST_URI'),util_make_url ('/register/') ) ||  
+			  strstr(getStringFromServer('REQUEST_URI'),util_make_url ('/themes/') ) ) {
+			$selected=array_search(util_make_url ('/my/'), $TABS_DIRS);
+		} elseif (strstr(getStringFromServer('REQUEST_URI'),util_make_url ('softwaremap') )) {
+			$selected=array_search(util_make_url ('/softwaremap/'), $TABS_DIRS);
+		} elseif (strstr(getStringFromServer('REQUEST_URI'),util_make_url ('/snippet/') )) {
+			$selected=array_search(util_make_url ('/snippet/'), $TABS_DIRS);
+		} elseif (strstr(getStringFromServer('REQUEST_URI'),util_make_url ('/people/') )) {
+			$selected=array_search(util_make_url ('/people/'), $TABS_DIRS);
+		} elseif (strstr(getStringFromServer('REQUEST_URI'),util_make_url ('/reporting/') )) {
+			$selected=array_search(util_make_url ('/reporting/'),$TABS_DIRS);
+		} elseif (strstr(getStringFromServer('REQUEST_URI'),util_make_url ('/admin/') ) && $user_is_super) {
+			$selected=array_search(util_make_url ('/admin/'),$TABS_DIRS);
 		} elseif (count($PLUGIN_TABS_DIRS)>0) {
 			foreach ($PLUGIN_TABS_DIRS as $PLUGIN_TABS_DIRS_VALUE) {
 				if (strstr(getStringFromServer('REQUEST_URI'),$PLUGIN_TABS_DIRS_VALUE)) {
@@ -529,9 +529,9 @@ if (isset($params['group']) && $params['group']) {
 
 		// Summary
 		if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
-			$TABS_DIRS[]='/project/?group_id='. $project->getId();
+			$TABS_DIRS[]=util_make_url ('/project/?group_id=' . $project->getId());
 		} else {
-			$TABS_DIRS[]='/projects/'. $project->getUnixName() .'/';
+			$TABS_DIRS[]=util_make_url ('/projects/' . $project->getUnixName() .'/');
 		}
 		$TABS_TITLES[]=_('Summary');
 		(($toptab == 'home') ? $selected=(count($TABS_TITLES)-1) : '' );
@@ -539,7 +539,7 @@ if (isset($params['group']) && $params['group']) {
 		// Project Admin
 		$perm =& $project->getPermission( session_get_user() );
 		if ($perm->isAdmin()) {
-			$TABS_DIRS[]='/project/admin/?group_id='. $group;
+			$TABS_DIRS[]=util_make_url ('/project/admin/?group_id=' . $group);
 			$TABS_TITLES[]=_('Admin');
 			(($toptab == 'admin') ? $selected=(count($TABS_TITLES)-1) : '' );
 		}
@@ -550,20 +550,20 @@ if (isset($params['group']) && $params['group']) {
 
 		// Project Activity tab 
 
-		$TABS_DIRS[]='/activity/?group_id='. $group;
+		$TABS_DIRS[]=util_make_url ('/activity/?group_id=' . $group);
 		$TABS_TITLES[]=_('Activity');
 		(($toptab == 'activity') ? $selected=(count($TABS_TITLES)-1) : '' );
 
 		// Forums
 		if ($project->usesForum()) {
-			$TABS_DIRS[]='/forum/?group_id='.$group;
+			$TABS_DIRS[]=util_make_url ('/forum/?group_id='.$group);
 			$TABS_TITLES[]=_('Forums');
 			(($toptab == 'forums') ? $selected=(count($TABS_TITLES)-1) : '' );
 		}
 
 		// Artifact Tracking
 		if ($project->usesTracker()) {
-			$TABS_DIRS[]='/tracker/?group_id='.$group;
+			$TABS_DIRS[]=util_make_url ('/tracker/?group_id='.$group);
 			$TABS_TITLES[]=_('Tracker');
 			(($toptab == 'tracker' || $toptab == 'bugs' || $toptab == 'support' || $toptab == 'patch')
 				? $selected=(count($TABS_TITLES)-1) : '' );
@@ -571,42 +571,42 @@ if (isset($params['group']) && $params['group']) {
 
 		// Mailing Lists
 		if ($project->usesMail()) {
-			$TABS_DIRS[]='/mail/?group_id='.$group;
+			$TABS_DIRS[]=util_make_url ('/mail/?group_id='.$group);
 			$TABS_TITLES[]=_('Lists');
 			(($toptab == 'mail') ? $selected=(count($TABS_TITLES)-1) : '' );
 		}
 
 		// Project Manager
 		if ($project->usesPm()) {
-			$TABS_DIRS[]='/pm/?group_id='.$group;
+			$TABS_DIRS[]=util_make_url ('/pm/?group_id='.$group);
 			$TABS_TITLES[]=_('Tasks');
 			(($toptab == 'pm') ? $selected=(count($TABS_TITLES)-1) : '' );
 		}
 
 		// Doc Manager
 		if ($project->usesDocman()) {
-			$TABS_DIRS[]='/docman/?group_id='.$group;
+			$TABS_DIRS[]=util_make_url ('/docman/?group_id='.$group);
 			$TABS_TITLES[]=_('Docs');
 			(($toptab == 'docman') ? $selected=(count($TABS_TITLES)-1) : '' );
 		}
 
 		// Surveys
 		if ($project->usesSurvey()) {
-			$TABS_DIRS[]='/survey/?group_id='.$group;
+			$TABS_DIRS[]=util_make_url ('/survey/?group_id='.$group);
 			$TABS_TITLES[]=_('Surveys');
 			(($toptab == 'surveys') ? $selected=(count($TABS_TITLES)-1) : '' );
 		}
 
 		//newsbytes
 		if ($project->usesNews()) {
-			$TABS_DIRS[]='/news/?group_id='.$group;
+			$TABS_DIRS[]=util_make_url ('/news/?group_id='.$group);
 			$TABS_TITLES[]=_('News');
 			(($toptab == 'news') ? $selected=(count($TABS_TITLES)-1) : '' );
 		}
 
 		// SCM systems
 		if ($project->usesSCM()) {
-			$TABS_DIRS[]='/scm/?group_id='.$group;
+			$TABS_DIRS[]=util_make_url ('/scm/?group_id='.$group);
 			$TABS_TITLES[]=_('SCM');
 			(($toptab == 'scm') ? $selected=(count($TABS_TITLES)-1) : '' );
 		}
@@ -622,7 +622,7 @@ if (isset($params['group']) && $params['group']) {
 
 		// Downloads
 		if ($project->usesFRS()) {
-			$TABS_DIRS[]='/frs/?group_id='.$group;
+			$TABS_DIRS[]=util_make_url ('/frs/?group_id='.$group);
 			$TABS_TITLES[]=_('Files');
 			(($toptab == 'frs') ? $selected=(count($TABS_TITLES)-1) : '' );
 		}
@@ -672,7 +672,7 @@ if (isset($params['group']) && $params['group']) {
 				$return .= '
 					<td '.$rowspan.'valign="top" width="10" style="background:url('.$this->imgroot . 'theme-'.$inner.'-end-'.(($issel) ? '' : 'not').'selected.png)">'.
 						'<img src="'.$this->imgroot . 'clear.png" height="25" width="10" alt="" /></td>'.
-						'<td '.$rowspan.'style="background:url('.$this->imgroot . $bgimg.')" width="'.$width.'%" align="center">'.util_make_link ($TABS_DIRS[$i],$TABS_TITLES[$i],array('class'=>(($issel)?'tabsellink':'tablink'))).'</td>';
+					'<td '.$rowspan.'style="background:url('.$this->imgroot . $bgimg.')" width="'.$width.'%" align="center">'.util_make_link ($TABS_DIRS[$i],$TABS_TITLES[$i],array('class'=>(($issel)?'tabsellink':'tablink')),true).'</td>';
 			} elseif ($i==$count-1) {
 				//
 				//	this is the last tab, choose an image with name-end
@@ -687,7 +687,7 @@ if (isset($params['group']) && $params['group']) {
 				$return .= '
 					<td '.$rowspan.'colspan="2" valign="top" width="20" style="background:url('.$this->imgroot . 'theme-'.$inner.'-'.(($wassel) ? '' : 'not').'selected-'.(($issel) ? '' : 'not').'selected.png)">'.
 						'<img src="'.$this->imgroot . 'clear.png" height="2" width="20" alt="" /></td>'.
-						'<td '.$rowspan.'style="background:url('.$this->imgroot . $bgimg.')" width="'.$width.'%" align="center">'.util_make_link ($TABS_DIRS[$i],$TABS_TITLES[$i],array('class'=>(($issel)?'tabsellink':'tablink'))).'</td>';
+					'<td '.$rowspan.'style="background:url('.$this->imgroot . $bgimg.')" width="'.$width.'%" align="center">'.util_make_link ($TABS_DIRS[$i],$TABS_TITLES[$i],array('class'=>(($issel)?'tabsellink':'tablink')),true).'</td>';
 				//
 				//	Last graphic on right-side
 				//
@@ -709,7 +709,7 @@ if (isset($params['group']) && $params['group']) {
 				$return .= '
 					<td '.$rowspan.'colspan="2" valign="top" width="20" style="background:url('.$this->imgroot . 'theme-'.$inner.'-'.(($wassel) ? '' : 'not').'selected-'.(($issel) ? '' : 'not').'selected.png)">'.
 						'<img src="'.$this->imgroot . 'clear.png" height="2" width="20" alt="" /></td>'.
-						'<td '.$rowspan.'style="background:url('.$this->imgroot . $bgimg.')" width="'.$width.'%" align="center">'.util_make_link ($TABS_DIRS[$i],$TABS_TITLES[$i],array('class'=>(($issel)?'tabsellink':'tablink'))).'</td>';
+					'<td '.$rowspan.'style="background:url('.$this->imgroot . $bgimg.')" width="'.$width.'%" align="center">'.util_make_link ($TABS_DIRS[$i],$TABS_TITLES[$i],array('class'=>(($issel)?'tabsellink':'tablink')),true).'</td>';
 
 			}
 		}

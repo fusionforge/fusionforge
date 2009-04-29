@@ -76,7 +76,7 @@ class webcalendarPlugin extends Plugin {
 			}
 			if ( !$project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
-				$params['DIRS'][]='/plugins/webcalendar/index2.php?type=group&group_id='.$group_id;
+				$params['DIRS'][]=util_make_url ('/plugins/webcalendar/index2.php?type=group&group_id='.$group_id) ;
 				} else {
 				$params['TITLES'][]=$this->text." is [Off]";
 				$params['DIRS'][]='';

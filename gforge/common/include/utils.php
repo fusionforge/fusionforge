@@ -938,14 +938,18 @@ function util_make_url ($path) {
 	return $url ;
 }
 
-function util_make_link ($path, $text, $extra_params=false) {
+function util_make_link ($path, $text, $extra_params=false, $absolute=false) {
 	$ep = '' ;
 	if (is_array($extra_params)) {
 		foreach ($extra_params as $key => $value) {
 			$ep .= "$key=\"$value\" ";
 		}
 	}
-	return '<a ' . $ep . 'href="' . util_make_url ($path) . '">' . $text . '</a>' ;
+	if ($absolute) {
+		return '<a ' . $ep . 'href="' . $path . '">' . $text . '</a>' ;
+	} else {
+		return '<a ' . $ep . 'href="' . util_make_url ($path) . '">' . $text . '</a>' ;
+	}
 }
 
 function util_make_link_u ($username, $user_id,$text) {

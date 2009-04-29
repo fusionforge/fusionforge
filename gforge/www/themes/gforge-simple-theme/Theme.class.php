@@ -342,41 +342,38 @@ function outerTabs($params) {
 	global $sys_use_trove,$sys_use_snippet,$sys_use_people;
 
 	$selected=0;
-	$TABS_DIRS[]='/';
+	$TABS_DIRS[]=util_make_url ('/') ;
 	$TABS_IDS[]='home';
 	$TABS_TITLES[]=_('Home');
 
 	$TABS_IDS[]='my';
-	$TABS_DIRS[]='/my/';
+	$TABS_DIRS[]=util_make_url ('/my/') ;
 	$TABS_TITLES[]=_('My&nbsp;Page');
 	if (strstr(getStringFromServer('REQUEST_URI'),'/my/') || strstr(getStringFromServer('REQUEST_URI'),'/account/') ) {
 		$selected=count($TABS_DIRS)-1;
 	}
 
 	if ($sys_use_trove) {
-		$thistab='softwaremap';
 		$TABS_IDS[]='softwaremap';
-		$TABS_DIRS[]='/'.$thistab.'/';
+		$TABS_DIRS[]=util_make_url ('/softwaremap/') ;
 		$TABS_TITLES[]=_('Project&nbsp;Tree');
-		if (strstr(getStringFromServer('REQUEST_URI'),$thistab)){
+		if (strstr(getStringFromServer('REQUEST_URI'),util_make_url ('/softwaremap/'))) {
 			$selected=count($TABS_DIRS)-1;
 		}
 	}
 	if ($sys_use_snippet) {
-		$thistab='snippet';
-		$TABS_IDS[]=$thistab;
-		$TABS_DIRS[]='/'.$thistab.'/';
+		$TABS_IDS[]='snippet';
+		$TABS_DIRS[]=util_make_url ('/snippet/') ;
 		$TABS_TITLES[]=_('Code&nbsp;Snippets');
-		if (strstr(getStringFromServer('REQUEST_URI'),$thistab)){
+		if (strstr(getStringFromServer('REQUEST_URI'),util_make_url ('/snippet/'))) {
 			$selected=count($TABS_DIRS)-1;
 		}
 	}
 	if ($sys_use_people) {
-		$thistab='people';
-		$TABS_IDS[]=$thistab;
-		$TABS_DIRS[]='/'.$thistab.'/';
+		$TABS_IDS[]='people';
+		$TABS_DIRS[]=util_make_url ('/people/') ;
 		$TABS_TITLES[]=_('Project&nbsp;Openings');
-		if (strstr(getStringFromServer('REQUEST_URI'),$thistab)){
+		if (strstr(getStringFromServer('REQUEST_URI'),util_make_url ('/people/'))) {
 			$selected=count($TABS_DIRS)-1;
 		}
 	}
@@ -388,21 +385,19 @@ function outerTabs($params) {
 	$TABS_DIRS = array_merge($TABS_DIRS, $PLUGIN_TABS_DIRS);
 
 	if (user_ismember(1,'A')) {
-		$thistab='admin';
-		$TABS_IDS[]=$thistab;
-		$TABS_DIRS[]='/'.$thistab.'/';
+		$TABS_IDS[]='admin';
+		$TABS_DIRS[]=util_make_url ('/admin/') ;
 		$TABS_TITLES[]=_('Admin');
-		if (strstr(getStringFromServer('REQUEST_URI'),$thistab)){
+		if (strstr(getStringFromServer('REQUEST_URI'),util_make_url ('/admin/'))) {
 			$selected=count($TABS_DIRS)-1;
 		}
 
 	}
 	if (user_ismember($GLOBALS['sys_stats_group'])) {
-		$thistab='reporting';
-		$TABS_IDS[]=$thistab;
-		$TABS_DIRS[]='/'.$thistab.'/';
+		$TABS_IDS[]='reporting';
+		$TABS_DIRS[]=util_make_url ('/reporting/') ;
 		$TABS_TITLES[]=_('Reporting');
-		if (strstr(getStringFromServer('REQUEST_URI'),$thistab)){
+		if (strstr(getStringFromServer('REQUEST_URI'),util_make_url ('/reporting/'))) {
 			$selected=count($TABS_DIRS)-1;
 		}
 	}
@@ -478,9 +473,9 @@ function projectTabs($toptab,$group) {
 
 	// Summary
 	if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
-		$TABS_DIRS[]='/project/?group_id='.$group;
+		$TABS_DIRS[]=util_make_url('/project/?group_id='.$group);
 	} else {
-		$TABS_DIRS[]='/projects/'.$project->getUnixName();
+		$TABS_DIRS[]=util_make_url('/projects/'.$project->getUnixName());
 	}
 	$TABS_IDS[]='gforge-project-summary';
 	$TABS_TITLES[]=_('Summary');
@@ -488,7 +483,7 @@ function projectTabs($toptab,$group) {
 
 	if (user_ismember($group,'A')) {
 		// Project Admin
-		$TABS_DIRS[]='/project/admin/?group_id='. $group;
+		$TABS_DIRS[]=util_make_url('/project/admin/?group_id='. $group);
 		$TABS_IDS[]='gforge-project-admin';
 		$TABS_TITLES[]=_('Admin');
 		(($toptab == 'admin') ? $selected=(count($TABS_TITLES)-1) : '' );
@@ -498,14 +493,14 @@ function projectTabs($toptab,$group) {
 		$TABS_TITLES[]=_('Home Page');
 		*/
 
-	$TABS_DIRS[]='/activity/?group_id='. $group;
+	$TABS_DIRS[]=util_make_url('/activity/?group_id='. $group);
 	$TABS_IDS[]='gforge-project-activity';
 	$TABS_TITLES[]=_('Activity');
 	(($toptab == 'activity') ? $selected=(count($TABS_TITLES)-1) : '' );
 
 	// Forums
 	if ($project->usesForum()) {
-		$TABS_DIRS[]='/forum/?group_id='.$group;
+		$TABS_DIRS[]=util_make_url ('/forum/?group_id='.$group) ;
 		$TABS_IDS[]='gforge-project-forum';
 		$TABS_TITLES[]=_('Forums');
 		(($toptab == 'forums') ? $selected=(count($TABS_TITLES)-1) : '' );
@@ -513,7 +508,7 @@ function projectTabs($toptab,$group) {
 
 	// Artifact Tracking
 	if ($project->usesTracker()) {
-		$TABS_DIRS[]='/tracker/?group_id='.$group;
+		$TABS_DIRS[]=util_make_url ('/tracker/?group_id='.$group) ;
 		$TABS_IDS[]='gforge-project-tracker';
 		$TABS_TITLES[]=_('Tracker');
 		(($toptab == 'tracker' || $toptab == 'bugs' || $toptab == 'support' || $toptab == 'patch')
@@ -522,7 +517,7 @@ function projectTabs($toptab,$group) {
 
 	// Mailing Lists
 	if ($project->usesMail()) {
-		$TABS_DIRS[]='/mail/?group_id='.$group;
+		$TABS_DIRS[]=util_make_url ('/mail/?group_id='.$group) ;
 		$TABS_IDS[]='gforge-project-mail';
 		$TABS_TITLES[]=_('Lists');
 		(($toptab == 'mail') ? $selected=(count($TABS_TITLES)-1) : '' );
@@ -530,15 +525,15 @@ function projectTabs($toptab,$group) {
 
 	// Project Manager
 	if ($project->usesPm()) {
+		$TABS_DIRS[]=util_make_url ('/pm/?group_id='.$group) ;
 		$TABS_IDS[]='gforge-project-task';
-		$TABS_DIRS[]='/pm/?group_id='.$group;
 		$TABS_TITLES[]=_('Tasks');
 		(($toptab == 'pm') ? $selected=(count($TABS_TITLES)-1) : '' );
 	}
 
 	// Doc Manager
 	if ($project->usesDocman()) {
-		$TABS_DIRS[]='/docman/?group_id='.$group;
+		$TABS_DIRS[]=util_make_url ('/docman/?group_id='.$group) ;
 		$TABS_IDS[]='gforge-project-docman';
 		$TABS_TITLES[]=_('Docs');
 		(($toptab == 'docman') ? $selected=(count($TABS_TITLES)-1) : '' );
@@ -546,7 +541,7 @@ function projectTabs($toptab,$group) {
 
 	// Surveys
 	if ($project->usesSurvey()) {
-		$TABS_DIRS[]='/survey/?group_id='.$group;
+		$TABS_DIRS[]=util_make_url ('/survey/?group_id='.$group) ;
 		$TABS_IDS[]='gforge-project-survey';
 		$TABS_TITLES[]=_('Surveys');
 		(($toptab == 'surveys') ? $selected=(count($TABS_TITLES)-1) : '' );
@@ -554,16 +549,16 @@ function projectTabs($toptab,$group) {
 
 	//newsbytes
 	if ($project->usesNews()) {
+		$TABS_DIRS[]=util_make_url ('/news/?group_id='.$group) ;
 		$TABS_IDS[]='gforge-project-news';
-		$TABS_DIRS[]='/news/?group_id='.$group;
 		$TABS_TITLES[]=_('News');
 		(($toptab == 'news') ? $selected=(count($TABS_TITLES)-1) : '' );
 	}
 
 	// SCM systems
 	if ($project->usesSCM()) {
+		$TABS_DIRS[]=util_make_url ('/scm/?group_id='.$group) ;
 		$TABS_IDS[]='gforge-project-scm';
-		$TABS_DIRS[]='/scm/?group_id='.$group;
 		$TABS_TITLES[]=_('SCM');
 		(($toptab == 'scm') ? $selected=(count($TABS_TITLES)-1) : '' );
 	}
@@ -579,8 +574,8 @@ function projectTabs($toptab,$group) {
 
 	// Downloads
 	if ($project->usesFRS()) {
+		$TABS_DIRS[]=util_make_url ('/frs/?group_id='.$group) ;
 		$TABS_IDS[]='gforge-project-frs';
-		$TABS_DIRS[]='/frs/?group_id='.$group;
 		$TABS_TITLES[]=_('Files');
 		(($toptab == 'frs') ? $selected=(count($TABS_TITLES)-1) : '' );
 	}
@@ -601,16 +596,16 @@ function projectTabs($toptab,$group) {
 			$this->selected_title = $TABS_TITLES[$i];
 			$this->selected_dir = $TABS_DIRS[$i];
 			//$this->selected_id = $TABS_IDS[$i];
-			$return .= util_make_link ($TABS_DIRS[$i],$TABS_TITLES[$i],array('id'=>'gforge-project-selected'));
+			$return .= util_make_link ($TABS_DIRS[$i],$TABS_TITLES[$i],array('id'=>'gforge-project-selected'),true);
 
 		}
 		else{
 			if (!isset($TABS_IDS[$i]) || $TABS_IDS[$i]==''){
-				$return .= util_make_link ($TABS_DIRS[$i],$TABS_TITLES[$i],array('id'=>'gforge-project-std','title'=>$TABS_TITLES[$i]));
+				$return .= util_make_link ($TABS_DIRS[$i],$TABS_TITLES[$i],array('id'=>'gforge-project-std','title'=>$TABS_TITLES[$i]),true);
 
 			}
 			else {
-				$return .= util_make_link ($TABS_DIRS[$i],$TABS_TITLES[$i],array('id'=>$TABS_IDS[$i],'title'=>$TABS_TITLES[$i]));
+				$return .= util_make_link ($TABS_DIRS[$i],$TABS_TITLES[$i],array('id'=>$TABS_IDS[$i],'title'=>$TABS_TITLES[$i]),true);
 			}
 		}
 	}
