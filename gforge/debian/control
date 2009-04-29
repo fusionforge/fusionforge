@@ -241,3 +241,9 @@ Description: Mediawiki plugin for FusionForge
  .
  This plugin allows each project to embed Mediawiki under a tab.
 
+Package: gforge-plugin-extratabs
+Architecture: all
+Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db
+Description: Extratabs plugin for GForge
+ This plugin allows each project to define extra tabs with arbitrary
+ titles and links.

@@ -124,6 +124,13 @@ install: build
 	#
 	chmod 755 $(CURDIR)/debian/$(PACKAGE)-db-postgresql/usr/share/*/db/*.php
 	chmod 644 $(CURDIR)/debian/$(PACKAGE)-db-postgresql/usr/share/gforge/cronjobs/*.inc
+
+	# gforge-plugin-extratabs
+	cp -r plugins/extratabs/bin/* $(CURDIR)/debian/gforge-plugin-extratabs/usr/lib/gforge/plugins/extratabs/bin/
+	cp -r plugins/extratabs/common/* $(CURDIR)/debian/gforge-plugin-extratabs/usr/share/gforge/plugins/extratabs/common/
+	cp -r plugins/extratabs/db/* $(CURDIR)/debian/gforge-plugin-extratabs/usr/lib/gforge/plugins/extratabs/lib/
+	cp -r plugins/extratabs/www/* $(CURDIR)/debian/gforge-plugin-extratabs/usr/share/gforge/www/plugins/extratabs/
+
 	# viewvc rights
 	find $(CURDIR)/debian/$(PACKAGE)-web-apache2/usr/share/*/www/scm/viewvc -type f -exec chmod 0644 {} \;
 	grep -ril '^#!' $(CURDIR)/debian/$(PACKAGE)-web-apache2/usr/share/*/www/scm/viewvc | xargs chmod 0755

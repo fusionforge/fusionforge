@@ -1,9 +1,8 @@
 gforge (4.7.2+extratabs-1) experimental; urgency=low
 
   * New extratabs plugin.
-  * TODO : debian/rules, postinst, prerm, dirs.
 
- --
+ -- Roland Mas <lolando@debian.org>  Mon, 20 Apr 2009 09:43:27 +0200
 
 gforge (4.8.50-1) experimental; urgency=low
 

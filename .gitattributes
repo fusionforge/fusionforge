@@ -110,6 +110,9 @@ gforge/deb-specific/scmcvs/cronjobs/cvs_update.pl -text
 gforge/deb-specific/scmsvn/cronjobs/svn_dump.pl -text
 gforge/deb-specific/scmsvn/cronjobs/svn_update.pl -text
 gforge/debian/compat -text
+gforge/debian/gforge-plugin-extratabs.dirs -text
+gforge/debian/gforge-plugin-extratabs.postinst -text
+gforge/debian/gforge-plugin-extratabs.prerm -text
 gforge/debian/gforge-plugin-mediawiki.postinst -text
 gforge/debian/gforge-plugin-mediawiki.prerm -text
 gforge/debian/gforge-plugin-scmcvs.postinst -text
@@ -177,6 +180,8 @@ gforge/plugins/env.inc.php -text
 gforge/plugins/extratabs/README -text
 gforge/plugins/extratabs/bin/db-delete.pl -text
 gforge/plugins/extratabs/bin/db-upgrade.pl -text
+gforge/plugins/extratabs/common/ExtraTabsPlugin.class -text
+gforge/plugins/extratabs/common/extratabs-init.php -text
 gforge/plugins/extratabs/db/extratabs-init.sql -text
 gforge/plugins/extratabs/debian/changelog -text
 gforge/plugins/extratabs/debian/control -text
@@ -185,8 +190,6 @@ gforge/plugins/extratabs/debian/dirs -text
 gforge/plugins/extratabs/debian/postinst -text
 gforge/plugins/extratabs/debian/prerm -text
 gforge/plugins/extratabs/debian/rules -text
-gforge/plugins/extratabs/include/ExtraTabsPlugin.class -text
-gforge/plugins/extratabs/include/extratabs-init.php -text
 gforge/plugins/extratabs/www/index.php -text
 gforge/plugins/fckeditor/common/fckeditorPlugin.class.php -text
 gforge/plugins/fckeditor/www/editor/css/behaviors/hiddenfield.gif -text
