@@ -38,7 +38,9 @@ function show_features_boxes() {
 	$return .= show_highest_ranked_projects();
 	$return .= $HTML->boxMiddle(_('Recently Registered Projects'));
 	$return .= show_newest_projects();
-	plugin_hook ("features_boxes_bottom", array());
+	$hook_params = array () ;
+	$hook_params['returned_text'] = '' ;
+	plugin_hook ("features_boxes_bottom", &$hook_params);
 	$return .= $HTML->boxBottom(0);
 	return $return ;
 }
