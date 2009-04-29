@@ -27,9 +27,9 @@ CREATE TABLE "plugin_globalsearch_assoc_site" (
 );
 
 INSERT INTO plugin_globalsearch_assoc_site (title,link,onlysw,enabled,status_id,rank)
-VALUES ('FusionForge.org', 'https://fusionforge.org/', t, t, 1, 1) ;
+VALUES ('FusionForge.org', 'https://fusionforge.org/', 't', 't', 1, 1) ;
 INSERT INTO plugin_globalsearch_assoc_site (title,link,onlysw,enabled,status_id,rank)
-VALUES ('Alioth', 'https://alioth.debian.org/', t, t, 1, 2) ;
+VALUES ('Alioth', 'https://alioth.debian.org/', 't', 't', 1, 2) ;
 
 CREATE TABLE "plugin_globalsearch_assoc_site_project" (
   "assoc_site_id" integer DEFAULT '0' NOT NULL,
