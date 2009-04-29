@@ -126,7 +126,7 @@ install: build
 	chmod 644 $(CURDIR)/debian/$(PACKAGE)-db-postgresql/usr/share/gforge/cronjobs/*.inc
 
 	# gforge-plugin-extratabs
-	cp -r plugins/extratabs/bin/* $(CURDIR)/debian/gforge-plugin-extratabs/usr/lib/gforge/plugins/extratabs/bin/
+	install -m 755 plugins/extratabs/bin/* $(CURDIR)/debian/gforge-plugin-extratabs/usr/lib/gforge/plugins/extratabs/bin/
 	cp -r plugins/extratabs/common/* $(CURDIR)/debian/gforge-plugin-extratabs/usr/share/gforge/plugins/extratabs/common/
 	cp -r plugins/extratabs/db/* $(CURDIR)/debian/gforge-plugin-extratabs/usr/lib/gforge/plugins/extratabs/lib/
 	cp -r plugins/extratabs/www/* $(CURDIR)/debian/gforge-plugin-extratabs/usr/share/gforge/www/plugins/extratabs/
