@@ -452,22 +452,24 @@ class Forum extends Error {
 	 *
 	 *	@return	boolean	success.
 	 */
-	function setMonitor() {
-		if (!session_loggedin()) {
-			$this->setError(_('You can only monitor if you are logged in'));
-			return false;
+	function setMonitor ($u = -1) {
+		if ($u == -1) {
+			if (!session_loggedin()) {
+				$this->setError(_('You can only monitor if you are logged in'));
+				return false;
+			}
+			$u = user_getid() ;
 		}
 		$result = db_query_params ('SELECT * FROM forum_monitored_forums WHERE user_id=$1 AND forum_id=$2',
-					   array (user_getid(),
+					   array ($u,
 						  $this->getID())) ;
-
 		if (!$result || db_numrows($result) < 1) {
 			/*
 				User is not already monitoring thread, so
 				insert a row so monitoring can begin
 			*/
 			$sql="INSERT INTO forum_monitored_forums (forum_id,user_id)
-				VALUES ('".$this->getID()."','".user_getid()."')";
+				VALUES ('".$this->getID()."','$u')";
 
 			$result = db_query_params ('INSERT INTO forum_monitored_forums (forum_id,user_id) VALUES ($1,$2)',
 						   array ($this->getID(),
@@ -487,13 +489,16 @@ class Forum extends Error {
 	 *
 	 *	@return	boolean	success.
 	 */
-	function stopMonitor() {
-		if (!session_loggedin()) {
-			$this->setError(_('You can only monitor if you are logged in'));
-			return false;
+	function stopMonitor ($u = -1) {
+		if ($u == -1) {
+			if (!session_loggedin()) {
+				$this->setError(_('You can only monitor if you are logged in'));
+				return false;
+			}
+			$u = user_getid() ;
 		}
 		return db_query_params ('DELETE FROM forum_monitored_forums WHERE user_id=$1 AND forum_id=$2',
-					array (user_getid(),
+					array ($u,
 					       $this->getID())) ;
 	}
 

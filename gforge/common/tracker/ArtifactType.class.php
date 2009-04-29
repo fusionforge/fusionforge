@@ -545,23 +545,18 @@ class ArtifactType extends Error {
 	 *
 	 *  @return false - always false - always use the getErrorMessage() for feedback
 	 */
-	function setMonitor() {
-		if (session_loggedin()) {
-
-			$user_id=user_getid();
-			$user =& user_get_object(user_getid());
-
-		} else {
-
-			$this->setError(_('SetMonitor::Valid Email Address Required'));
-			return false;
-
+	function setMonitor ($user_id = -1) {
+		if ($user_id == -1) {
+			if (!session_loggedin()) {
+				$this->setError(_('You can only monitor if you are logged in'));
+				return false;
+			}
+			$user_id = user_getid() ;
 		}
 
 		$res = db_query_params ('SELECT * FROM artifact_type_monitor WHERE group_artifact_id=$1 AND user_id=$2',
 					array ($this->getID(),
 					       $user_id)) ;
-
 		if (!$res || db_numrows($res) < 1) {
 			//not yet monitoring
 			$res = db_query_params ('INSERT INTO artifact_type_monitor (group_artifact_id,user_id) VALUES ($1,$2)',
