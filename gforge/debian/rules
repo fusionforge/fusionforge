@@ -126,7 +126,7 @@ install: build
 	chmod 644 $(CURDIR)/debian/$(PACKAGE)-db-postgresql/usr/share/gforge/cronjobs/*.inc
 
 	# gforge-plugin-globalsearch
-	iinstall -m 755 plugins/globalsearch/bin/* $(CURDIR)/debian/gforge-plugin-globalsearch/usr/lib/gforge/plugins/globalsearch/bin/
+	install -m 755 plugins/globalsearch/bin/* $(CURDIR)/debian/gforge-plugin-globalsearch/usr/lib/gforge/plugins/globalsearch/bin/
 	cp -r plugins/globalsearch/lib/* $(CURDIR)/debian/gforge-plugin-globalsearch/usr/lib/gforge/plugins/globalsearch/lib/
 	cp -r plugins/globalsearch/common/* $(CURDIR)/debian/gforge-plugin-globalsearch/usr/share/gforge/plugins/globalsearch/common/
 	cp -r plugins/globalsearch/www/* $(CURDIR)/debian/gforge-plugin-globalsearch/usr/share/gforge/www/plugins/globalsearch/
