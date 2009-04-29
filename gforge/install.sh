@@ -84,7 +84,7 @@ then
 		service iptables stop
 		msg="IMPORTANT: Service iptables (firewall) disabled, please reconfigure after"
 
-		cp cron.d/cron.fusionforge /etc/cron.d
+		cp packaging/cron.d/cron.fusionforge /etc/cron.d
 		cp plugins/*/etc/cron.d/* /etc/cron.d/
 		service crond reload
 	else
@@ -121,7 +121,7 @@ then
 		rcSuSEfirewall2 stop
 		msg="IMPORTANT: Service SuSEfirewall2 stopped, please reconfigure after"
 
-		cp cron.d/cron.fusionforge /etc/cron.d
+		cp packaging/cron.d/cron.fusionforge /etc/cron.d
 		cp plugins/*/etc/cron.d/* /etc/cron.d/
 		rccron reload
 	else

@@ -196,7 +196,7 @@ install -m 750 rpm-specific/scripts/gforge-config $RPM_BUILD_ROOT/%{SBIN_DIR}/
 cp -rp locales/* $RPM_BUILD_ROOT/%{GFORGE_LANG_DIR}/
 
 # setting crontab
-install -m 664 cron.d/fusionforge $RPM_BUILD_ROOT/%{CROND_DIR}/
+install -m 664 packaging/cron.d/fusionforge $RPM_BUILD_ROOT/%{CROND_DIR}/
 
 %pre
 %startpostgresql

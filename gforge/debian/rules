@@ -12,8 +12,8 @@ include /usr/share/dpatch/dpatch.make
 
 # This one should be declared like other when it will be unified with rpm
 CRONFILESLIST=debian/$(PACKAGE)-lists-mailman.cron.d debian/$(PACKAGE)-web-apache2.cron.d debian/$(PACKAGE)-db-postgresql.cron.d debian/$(PACKAGE)-dns-bind9.cron.d debian/$(PACKAGE)-plugin-scmcvs.cron.d debian/$(PACKAGE)-ftp-proftpd.cron.d debian/$(PACKAGE)-shell-postgresql.cron.d debian/$(PACKAGE)-plugin-scmsvn.cron.d
-DIRSFILESLIST=$(patsubst dirs/%,debian/$(PACKAGE)-%.dirs,$(wildcard dirs/[a-z]*))
-INSTALLFILESLIST=$(patsubst install/%,debian/$(PACKAGE)-%.install,$(wildcard install/[a-z]*))
+DIRSFILESLIST=$(patsubst packaging/dirs/%,debian/$(PACKAGE)-%.dirs,$(wildcard packaging/dirs/[a-z]*))
+INSTALLFILESLIST=$(patsubst packaging/install/%,debian/$(PACKAGE)-%.install,$(wildcard packaging/install/[a-z]*))
 
 listecho: 
 	@echo $(CRONFILESLIST)
@@ -38,23 +38,23 @@ conffiles: cronfiles dirsfiles installfiles gencontrol
 debian/$(PACKAGE)-%.cron.d:
 	@echo "Creating $@"
 	@if [ "$@" = "debian/$(PACKAGE)-db-postgresql.cron.d" ] ; then \
-	cat $(CURDIR)/cron.d/00phpcron > $@ ; \
-	cat $(CURDIR)/cron.d/db-postgresql >> $@ ; \
+	cat $(CURDIR)/packaging/cron.d/00phpcron > $@ ; \
+	cat $(CURDIR)/packaging/cron.d/db-postgresql >> $@ ; \
 	else \
-		echo "copy $(CURDIR)/cron.d/$* to $@" ; \
-		cp $(CURDIR)/cron.d/$* $@ ; \
+		echo "copy $(CURDIR)/packaging/cron.d/$* to $@" ; \
+		cp $(CURDIR)/packaging/cron.d/$* $@ ; \
 	fi
 
 debian/$(PACKAGE)-%.dirs:
 	@echo "Creating $@"
-	cp $(CURDIR)/dirs/$* $@ 
+	cp $(CURDIR)/packaging/dirs/$* $@ 
 
 debian/$(PACKAGE)-%.install:
 	@echo "Creating $@"
-	cp $(CURDIR)/install/$* $@ 
+	cp $(CURDIR)/packaging/install/$* $@ 
 
 gencontrol:
-	ls $(CURDIR)/control/[0-9][0-9][0-9]* | grep -v shortdesc | while read file ; do cat $${file}; if [ -f $${file}.shortdesc ] ; then cat $(CURDIR)/control/AAAdesc; echo ' .'; cat $${file}.shortdesc; fi; echo '';  done | sed 's/@PACKAGE@/$(PACKAGE)/g' > $(CURDIR)/debian/control
+	ls $(CURDIR)/packaging/control/[0-9][0-9][0-9]* | grep -v shortdesc | while read file ; do cat $${file}; if [ -f $${file}.shortdesc ] ; then cat $(CURDIR)/packaging/control/AAAdesc; echo ' .'; cat $${file}.shortdesc; fi; echo '';  done | sed 's/@PACKAGE@/$(PACKAGE)/g' > $(CURDIR)/debian/control
 
 configure: configure-stamp debian/po/templates.pot
 configure-stamp: remove-binary-files
@@ -100,7 +100,7 @@ install: build
 	dh_testroot
 	dh_clean -k
 
-	# Generate conffiles *.cron.d *.dirs *.install
+	# Generate conffiles *.cron.d *.dirs *.install control
 	$(CURDIR)/debian/rules conffiles
 
 	dh_installdirs
