@@ -50,17 +50,17 @@ if (getStringFromRequest ('addtab') != '') {
 		  	 VALUES('$group_id','$newid','$tab_name','$tab_url')");
 
 	if (!$res || db_affected_rows($res) < 1) {
-		$feedback .= sprintf (_('Cannot insert new tab entry: %s'),
+		$feedback = sprintf (_('Cannot insert new tab entry: %s'),
 				      db_error());
 	} else {
-		$feedback .= _('Tab added');
+		$feedback = _('Tab added');
 	}
 } elseif (getStringFromRequest ('delete') != '') {
 	$res = db_query("DELETE FROM plugin_extratabs_main
 			 WHERE group_id='$group_id' AND
 			 index='$index'");
 	if (!$res || db_affected_rows($res) < 1) {
-		$feedback .= sprintf (_('Cannot delete tab entry: %s'),
+		$feedback = sprintf (_('Cannot delete tab entry: %s'),
 				      db_error());
 	} else {
 		$res = db_query("UPDATE plugin_extratabs_main
