@@ -1,3 +1,9 @@
+Not released yet:
+* New projectlabels plugin, to tag projects with snippets of
+  user-defined HTML
+* New extratabs plugin, to add tabs with links to arbitrary URLs
+* New globalsearch, allowing cross-forge searching of projects
+
 FusionForge-4.8:
 * New classification by tags (aka tag cloud)
 * New reporting page on frs to view the downloads per package
