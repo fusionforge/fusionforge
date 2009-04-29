@@ -51,8 +51,10 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 {
     protected function setUp()
     {
+	if (defined(DB_INIT_CMD)) {
 		// Reload a fresh database before running this test suite.
-		system("php ".dirname(dirname(__FILE__))."/db_reload.php");
+		system(DB_INIT_CMD);
+	}
 
     	$this->setBrowser('*firefox');
         $this->setBrowserUrl(URL);
