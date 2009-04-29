@@ -121,6 +121,9 @@ gforge/debian/gforge-plugin-globalsearch.postinst -text
 gforge/debian/gforge-plugin-globalsearch.prerm -text
 gforge/debian/gforge-plugin-mediawiki.postinst -text
 gforge/debian/gforge-plugin-mediawiki.prerm -text
+gforge/debian/gforge-plugin-projectlabels.dirs -text
+gforge/debian/gforge-plugin-projectlabels.postinst -text
+gforge/debian/gforge-plugin-projectlabels.prerm -text
 gforge/debian/gforge-plugin-scmcvs.postinst -text
 gforge/debian/gforge-plugin-scmcvs.prerm -text
 gforge/debian/gforge-plugin-scmsvn.postinst -text
