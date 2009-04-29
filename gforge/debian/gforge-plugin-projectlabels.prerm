@@ -19,8 +19,8 @@ set -e
 
 case "$1" in
     remove|deconfigure)
-        /usr/lib/gforge/bin/unregister-plugin projectlabels
-        /usr/lib/gforge/plugins/projectlabels/bin/db-delete.pl
+        /usr/share/gforge/bin/unregister-plugin projectlabels
+        /usr/share/gforge/plugins/projectlabels/bin/db-delete.pl
         ;;
     upgrade|failed-upgrade)
         ;;

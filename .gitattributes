@@ -121,7 +121,6 @@ gforge/debian/gforge-plugin-globalsearch.postinst -text
 gforge/debian/gforge-plugin-globalsearch.prerm -text
 gforge/debian/gforge-plugin-mediawiki.postinst -text
 gforge/debian/gforge-plugin-mediawiki.prerm -text
-gforge/debian/gforge-plugin-projectlabels.dirs -text
 gforge/debian/gforge-plugin-projectlabels.postinst -text
 gforge/debian/gforge-plugin-projectlabels.prerm -text
 gforge/debian/gforge-plugin-scmcvs.postinst -text
@@ -146,6 +145,7 @@ gforge/debian/watch -text
 gforge/dirs/plugin-extratabs -text
 gforge/dirs/plugin-globalsearch -text
 gforge/dirs/plugin-mediawiki -text
+gforge/dirs/plugin-projectlabels -text
 gforge/dirs/plugin-scmbzr -text
 gforge/dirs/plugin-scmcvs -text
 gforge/dirs/plugin-scmsvn -text
