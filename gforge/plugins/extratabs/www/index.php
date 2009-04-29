@@ -139,12 +139,17 @@ project_admin_header(array('title'=>$adminheadertitle, 'group'=>$group->getID())
 </form>
 </p>
 
+<?php
+	$res = db_query("SELECT * FROM plugin_extratabs_main WHERE group_id='$group_id' ORDER BY index ASC");
+$nbtabs = db_numrows($res) ;
+if ($nbtabs > 0) {
+	
+?>
+
+
 	<h3><?php echo _('Manage extra tabs') ;?></h3>
 <p>
 	<?php echo _('You can move and delete the tabs that you already added. Please note that those extra tabs can only appear on the right of the standard tabs. And you can only move them inside the set of extra tabs.') ;
-
-$res = db_query("SELECT * FROM plugin_extratabs_main
-		 WHERE group_id='$group_id' ORDER BY index ASC");
 
 ?></p><p>
 <form name="change_tab" action="<?php echo util_make_url ('/plugins/extratabs/'); ?>" method="post">
@@ -162,13 +167,16 @@ while ($row = db_fetch_array($res)) {
     }
 } ?>
 </select><br/><br/>
+	  <?php if ($nbtabs > 1) { ?>
 <input type="submit" name="up" value="<?php echo _('Move tab left') ?>" /><br/>
 <input type="submit" name="down" value="<?php echo _('Move tab right') ?>" /><br/>
+		  <?php } ?>
 <input type="submit" name="delete" value="<?php echo _('Delete tab') ?>" />
 </form>
 </p>
 
 <?php
+	  }
 project_admin_footer(array());
 
 // Local Variables:
