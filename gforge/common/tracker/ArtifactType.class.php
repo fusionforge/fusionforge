@@ -940,7 +940,7 @@ class ArtifactType extends Error {
 	 */
 	function getStatuses() {
 		if (!isset($this->status_res)) {
-			$this->status_res = db_query_params ('SELECT * FROM artifact_status');
+			$this->status_res = db_query_params ('SELECT * FROM artifact_status',array());
 		}
 		return $this->status_res;
 	}
@@ -1047,7 +1047,7 @@ class ArtifactType extends Error {
                                 AND role_setting.section_name=$3',
 										    array ($this->getID(),
 											   user_getid(),
-											   'tracker'))) ;
+											   'tracker')),0,0) ;
 			}
 			return $this->current_user_perm;
 		}

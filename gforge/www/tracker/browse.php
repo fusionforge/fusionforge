@@ -265,7 +265,10 @@ echo $ath->getBrowseInstructions();
 if ($art_arr && count($art_arr) > 0) {
 
 	if ($set=='custom') {
-		$set .= '&_assigned_to='.$_assigned_to.'&_status='.$_status.'&extra_fields['.$ath->getCustomStatusField().']='.$_extra_fields[$ath->getCustomStatusField()].'&_sort_col='.$_sort_col.'&_sort_ord='.$_sort_ord;
+		$set .= '&_assigned_to='.$_assigned_to.'&_status='.$_status.'&_sort_col='.$_sort_col.'&_sort_ord='.$_sort_ord;
+		if (array_key_exists($ath->getCustomStatusField(),$_extra_fields)) {
+			$set .= '&extra_fields['.$ath->getCustomStatusField().']='.$_extra_fields[$ath->getCustomStatusField()];
+		}
 	}
 
 
