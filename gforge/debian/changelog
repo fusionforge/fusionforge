@@ -5,8 +5,9 @@ gforge (4.8.50-1) experimental; urgency=low
   * New extratabs plugin from Adullact.
   * New globalsearch plugin allowing to publish lists of projects for
     other forges and to search for projects in remote forges.
+  * New projectlabels plugin from Adullact.
   
- -- Roland Mas <lolando@debian.org>  Wed, 29 Apr 2009 11:10:10 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 29 Apr 2009 11:54:57 +0200
   
 gforge (4.8~rc1-1+1) experimental; urgency=low
 

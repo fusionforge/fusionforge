@@ -1,0 +1,29 @@
+Presentation
+------------
+
+This plugin has been written for Gforge 4.5.  It allows the site
+administrator to define any number of "labels", and apply one of these
+labels to projects.  The labels are identified by a name and contain a
+chunk of text or HTML code.  That piece of text is then displayed next
+in the overview pages of projects that are appropriately labeled.
+
+The purpose is to visually highlight a few projects, such as a
+"project of the month", on their overview pages.
+
+Installation
+------------
+
+This is a valid Debian source package. You can use "fakeroot
+debian/rules binary" or "debuild -us -uc" to generate a Debian
+package.
+
+If you're not using Debian, then please read debian/rules and work out
+where the files need to be copied (it's very easy). :-)
+
+Contact
+-------
+
+This plugin has been written by Roland Mas <roland@gnurandal.com> for
+the Adullact.net Gforge.
+
+http://www.adullact.net/

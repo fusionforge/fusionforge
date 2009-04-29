@@ -267,3 +267,14 @@ Description: collaborative development tool - Global search plugin
  This plugin contains a cross-Gforge search engine.  You can declare a
  list of other Gforge sites, and search for projects hosted on these
  forges from your own.
+
+Package: gforge-plugin-projectlabels
+Architecture: all
+Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web
+Description: Project labels plugin for GForge
+ This plugin allows the site administrator to define labels and bits
+ of HTML to render them, and to stick these labels onto projects.  The
+ HTML is then displayed with the project description.
+ .
+ This can be used to highlight some projects on a forge, for instance
+ for a "project of the month".

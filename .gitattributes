@@ -841,6 +841,13 @@ gforge/plugins/online_help/www/ug_user_homepage.html -text
 gforge/plugins/online_help/www/ug_user_modifying_settings.html -text
 gforge/plugins/online_help/www/ug_user_ratings.html -text
 gforge/plugins/online_help/www/ug_user_skills.html -text
+gforge/plugins/projectlabels/README -text
+gforge/plugins/projectlabels/bin/db-delete.pl -text
+gforge/plugins/projectlabels/bin/db-upgrade.pl -text
+gforge/plugins/projectlabels/common/ProjectLabelsPlugin.class -text
+gforge/plugins/projectlabels/common/projectlabels-init.php -text
+gforge/plugins/projectlabels/db/projectlabels-init.sql -text
+gforge/plugins/projectlabels/www/index.php -text
 gforge/plugins/projects_hierarchy/AUTHORS -text
 gforge/plugins/projects_hierarchy/COPYING -text
 gforge/plugins/projects_hierarchy/ChangeLog -text
