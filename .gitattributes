@@ -61,6 +61,8 @@ gforge/control/170plugin-extratabs -text
 gforge/control/170plugin-extratabs.shortdesc -text
 gforge/control/180plugin-globalsearch -text
 gforge/control/180plugin-globalsearch.shortdesc -text
+gforge/control/190plugin-projectlabels -text
+gforge/control/190plugin-projectlabels.shortdesc -text
 gforge/control/AAAdesc -text
 gforge/control/Makefile -text
 gforge/cron.d/00phpcron -text
@@ -179,6 +181,7 @@ gforge/install/mta-postfix -text
 gforge/install/plugin-extratabs -text
 gforge/install/plugin-globalsearch -text
 gforge/install/plugin-mediawiki -text
+gforge/install/plugin-projectlabels -text
 gforge/install/plugin-scmbzr -text
 gforge/install/plugin-scmcvs -text
 gforge/install/plugin-scmsvn -text
