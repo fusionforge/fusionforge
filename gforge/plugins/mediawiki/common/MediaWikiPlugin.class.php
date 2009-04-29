@@ -26,15 +26,10 @@ class MediaWikiPlugin extends Plugin {
 		$this->Plugin() ;
 		$this->name = "mediawiki" ;
 		$this->text = "Mediawiki" ; // To show in the tabs, use...
-		$this->hooks[] = "user_personal_links";//to make a link to the user's personal part of the plugin
-		$this->hooks[] = "usermenu" ;
-		// $this->hooks[] = "outermenu" ;
+
 		$this->hooks[] = "groupmenu" ;	// To put into the project tabs
 		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
 		$this->hooks[] = "groupisactivecheckboxpost" ; //
-		$this->hooks[] = "userisactivecheckbox" ; // The "use ..." checkbox in user account
-		$this->hooks[] = "userisactivecheckboxpost" ; //
-		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page for group
 	}
 
 	function CallHook ($hookname, $params) {
@@ -47,16 +42,7 @@ class MediaWikiPlugin extends Plugin {
 		} else {
 			$group_id=null;
 		}
-		if ($hookname == "outermenu") {
-			$params['TITLES'][] = 'MediaWiki';
-			$params['DIRS'][] = util_make_url ('/mediawiki') ;
-		} elseif ($hookname == "usermenu") {
-			$text = $this->text; // this is what shows in the tab
-			if ($G_SESSION->usesPlugin("mediawiki")) {
-				echo ' | ' . $HTML->PrintSubMenu (array ($text),
-						  array ('/mediawiki/index.php?title=User:' . $G_SESSION->getUnixName() ));				
-			}
-		} elseif ($hookname == "groupmenu") {
+		if ($hookname == "groupmenu") {
 			$project = &group_get_object($group_id);
 			if (!$project || !is_object($project)) {
 				return;
@@ -98,62 +84,6 @@ class MediaWikiPlugin extends Plugin {
 			} else {
 				$group->setPluginUse ( $this->name, false );
 			}
-		} elseif ($hookname == "userisactivecheckbox") {
-			//check if user is active
-			// this code creates the checkbox in the user account manteinance page to activate/deactivate the plugin
-			$user = $params['user'];
-			echo "<tr>";
-			echo "<td>";
-			echo ' <input type="CHECKBOX" name="use_mediawikiplugin" value="1" ';
-			// CHECKED OR UNCHECKED?
-			if ( $user->usesPlugin ( $this->name ) ) {
-				echo "CHECKED";
- 			}
-			echo ">    Use ".$this->text." Plugin";
-			echo "</td>";
-			echo "</tr>";
-		} elseif ($hookname == "userisactivecheckboxpost") {
-			// this code actually activates/deactivates the plugin after the form was submitted in the user account manteinance page
-			$user = $params['user'];
-			$use_mediawikiplugin = getStringFromRequest('use_mediawikiplugin');
-			if ( $use_mediawikiplugin == 1 ) {
-				$user->setPluginUse ( $this->name );
-			} else {
-				$user->setPluginUse ( $this->name, false );
-			}
-			echo "<tr>";
-			echo "<td>";
-			echo ' <input type="CHECKBOX" name="use_mediawikiplugin" value="1" ';
-			// CHECKED OR UNCHECKED?
-			if ( $user->usesPlugin ( $this->name ) ) {
-				echo "CHECKED";
-			}
-			echo ">    Use ".$this->text." Plugin";
-			echo "</td>";
-			echo "</tr>";
-		} elseif ($hookname == "user_personal_links") {
-			// this displays the link in the user's profile page to it's personal MediaWiki (if you want other sto access it, youll have to change the permissions in the index.php
-			$userid = $params['user_id'];
-			$user = user_get_object($userid);
-			$text = $params['text'];
-			//check if the user has the plugin activated
-			if ($user->usesPlugin($this->name)) {
-				echo '	<p>' ;
-				echo util_make_link ("/plugins/helloworld/index.php?id=$userid&type=user&pluginname=".$this->name,
-						     _('View Personal MediaWiki')
-					);
-				echo '</p>';
-			}
-		} elseif ($hookname == "project_admin_plugins") {
-			// this displays the link in the project admin options page to it's  MediaWiki administration
-			$group_id = $params['group_id'];
-			$group = &group_get_object($group_id);
-			if ( $group->usesPlugin ( $this->name ) ) {
-				echo util_make_link ("/plugins/projects_hierarchy/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
-						     _('View the MediaWiki Administration'));
-				echo '</p>';
-			}
-		}												    
 		elseif ($hookname == "blahblahblah") {
 			// ...
 		} 
