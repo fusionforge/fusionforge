@@ -244,6 +244,12 @@ Description: Mediawiki plugin for FusionForge
 Package: gforge-plugin-extratabs
 Architecture: all
 Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 | gforge-web
-Description: Extratabs plugin for GForge
+Description: Extratabs plugin for FusionForge
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
  This plugin allows each project to define extra tabs with arbitrary
  titles and links.

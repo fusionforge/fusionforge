@@ -1,0 +1,4 @@
+Package: @PACKAGE@-plugin-extratabs
+Architecture: all
+Depends: @PACKAGE@-common (>= 4.6.99), @PACKAGE@-db-postgresql (>= 4.6.99) | @PACKAGE@-db, @PACKAGE@-web-apache2 (>= 4.6.99) | @PACKAGE@-web, ${misc:Depends}
+Description: Extratabs plugin for FusionForge

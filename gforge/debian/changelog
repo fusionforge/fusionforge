@@ -1,15 +1,10 @@
-gforge (4.7.2+extratabs-1) experimental; urgency=low
-
-  * New extratabs plugin.
-
- -- Roland Mas <lolando@debian.org>  Mon, 20 Apr 2009 09:43:27 +0200
-
 gforge (4.8.50-1) experimental; urgency=low
 
   * Fixed blackhole syntax for gforge-mta-exim4 so as not to require
     file_transport.
+  * New extratabs plugin from Adullact.
   
- -- Roland Mas <lolando@debian.org>  Tue, 28 Apr 2009 16:01:39 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 29 Apr 2009 10:30:11 +0200
   
 gforge (4.8~rc1-1+1) experimental; urgency=low
 

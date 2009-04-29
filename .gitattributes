@@ -57,6 +57,8 @@ gforge/control/150plugin-scmbzr -text
 gforge/control/150plugin-scmbzr.shortdesc -text
 gforge/control/160plugin-mediawiki -text
 gforge/control/160plugin-mediawiki.shortdesc -text
+gforge/control/170plugin-extratabs -text
+gforge/control/170plugin-extratabs.shortdesc -text
 gforge/control/AAAdesc -text
 gforge/control/Makefile -text
 gforge/cron.d/00phpcron -text
@@ -110,7 +112,6 @@ gforge/deb-specific/scmcvs/cronjobs/cvs_update.pl -text
 gforge/deb-specific/scmsvn/cronjobs/svn_dump.pl -text
 gforge/deb-specific/scmsvn/cronjobs/svn_update.pl -text
 gforge/debian/compat -text
-gforge/debian/gforge-plugin-extratabs.dirs -text
 gforge/debian/gforge-plugin-extratabs.postinst -text
 gforge/debian/gforge-plugin-extratabs.prerm -text
 gforge/debian/gforge-plugin-mediawiki.postinst -text
@@ -134,6 +135,7 @@ gforge/debian/po/gl.po -text
 gforge/debian/po/pt.po -text
 gforge/debian/po/ru.po -text
 gforge/debian/watch -text
+gforge/dirs/plugin-extratabs -text
 gforge/dirs/plugin-mediawiki -text
 gforge/dirs/plugin-scmbzr -text
 gforge/dirs/plugin-scmcvs -text
@@ -165,6 +167,7 @@ gforge/install/ftp-proftpd -text
 gforge/install/lists-mailman -text
 gforge/install/mta-exim4 -text
 gforge/install/mta-postfix -text
+gforge/install/plugin-extratabs -text
 gforge/install/plugin-mediawiki -text
 gforge/install/plugin-scmbzr -text
 gforge/install/plugin-scmcvs -text

@@ -1,4 +1,4 @@
-usr/lib/gforge/plugins/extratabs/bin
-usr/lib/gforge/plugins/extratabs/lib
+usr/share/gforge/plugins/extratabs/bin
+usr/share/gforge/plugins/extratabs/lib
 usr/share/gforge/www/plugins/extratabs
 usr/share/gforge/plugins/extratabs/common

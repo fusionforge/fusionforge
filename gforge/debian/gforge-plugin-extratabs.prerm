@@ -19,8 +19,8 @@ set -e
 
 case "$1" in
     remove|deconfigure)
-        /usr/lib/gforge/bin/unregister-plugin extratabs
-        /usr/lib/gforge/plugins/extratabs/bin/db-delete.pl
+        /usr/share/gforge/bin/unregister-plugin extratabs
+        /usr/share/gforge/plugins/extratabs/bin/db-delete.pl
         ;;
     upgrade|failed-upgrade)
         ;;
