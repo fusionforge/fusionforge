@@ -11,7 +11,6 @@ require_once $gfwww.'project/admin/project_admin_utils.php';
 require_once $gfcommon.'/include/FusionForge.class.php';
 
 $group_id = getIntFromRequest ('group_id') ;
-$func = getStringFromRequest ('func') ;
 
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
@@ -126,7 +125,8 @@ project_admin_header(array('title'=>$adminheadertitle, 'group'=>$group->getID())
 <p><?php echo _('You can add your own tabs in the menu bar with the form below.') ?></p>
 <p>
 
-<form name="new_tab" action="<?php echo util_make_url ('/plugins/extratabs/?group_id='.$group->getID()); ?>" method="post">
+<form name="new_tab" action="<?php echo util_make_url ('/plugins/extratabs/'); ?>" method="post">
+<input type="hidden" name="group_id" value="<?php echo $group->getID() ?>" />
 <input type="hidden" name="addtab" value="1" />
 <input type="hidden" name="newid" value="<?php echo $newid ?>" />
 	<strong><?php echo _('Name of the tab:') ?></strong>
@@ -147,7 +147,8 @@ $res = db_query("SELECT * FROM plugin_extratabs_main
 		 WHERE group_id='$group_id' ORDER BY index ASC");
 
 ?></p><p>
-<form name="change_tab" action="<?php echo util_make_url ('/plugins/extratabs?group_id='.$group->getID()); ?>" method="post">
+<form name="change_tab" action="<?php echo util_make_url ('/plugins/extratabs/'); ?>" method="post">
+<input type="hidden" name="group_id" value="<?php echo $group->getID() ?>" />
 <?php 
 	echo _('Tab to modify:')
 ?>
