@@ -1,0 +1,14 @@
+Source: gforge-plugin-extratabs
+Section: devel
+Priority: optional
+Maintainer: Roland Mas <lolando@debian.org>
+Build-Depends-Indep: debhelper (>> 4.0.0)
+Standards-Version: 3.6.2
+
+Package: gforge-plugin-extratabs
+Architecture: all
+Depends: gforge-common (>= 4.5.14), gforge-db-postgresql (>= 4.5.14) | gforge-db, gforge-web-apache (>= 4.5.14) | gforge-web
+Description: The Extra Tabs plugin for GForge
+ This module let each project add supplementary tabs in the project area.
+ Each project administrator can add new tabs, he can decide the name of
+ the tab and where it points to.

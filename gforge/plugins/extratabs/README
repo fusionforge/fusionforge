@@ -1,0 +1,41 @@
+
+Presentation
+------------
+
+This plugin has been written for Gforge 4.5. The plugin add a new page
+"Extra tabs" in the "group admin" page. There you can create new tabs that
+will appear on all project pages.
+
+The purpose is to let people point to external resources related to the
+project. For example, a project might use an external bugzilla and they
+want to point people there.
+
+The administrators of projects can now add such links. They must simply
+give an URL and a name.
+
+Installation
+------------
+
+This is valid Debian source package. You can use "fakeroot debian/rules
+binary" or "debuild -us -uc" to generate a Debian package.
+
+If you're not using Debian, then please read debian/rules and work out
+where the files need to be copied (it's very easy). :-)
+
+Requirements
+------------
+
+This plugin needs a hook called 'groupadminmenu' which has been added to
+the CVS repository after the release of Gforge 4.5:
+http://gforge.org/plugins/scmcvs/cvsweb.php/gforge/www/project/admin/project_admin_utils.php.diff?r1=1.18;r2=1.19;cvsroot=gforge
+
+You can apply this diff manually however if needed.
+
+Contact
+-------
+
+This plugin has been written by Raphael Hertzog <hertzog@debian.org>
+for the Adullact.net Gforge.
+
+http://www.adullact.net
+

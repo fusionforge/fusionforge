@@ -174,6 +174,20 @@ gforge/plugins/cvstracker/gforge-plugin-cvstracker.spec -text svneol=unset#appli
 gforge/plugins/cvstracker/rpm-specific/cron.d/gforge-plugin-cvstracker -text svneol=unset#application/octet-stream
 gforge/plugins/eirc/EIRC-1.0.2+free.tar.gz -text svneol=unset#unset
 gforge/plugins/env.inc.php -text
+gforge/plugins/extratabs/README -text
+gforge/plugins/extratabs/bin/db-delete.pl -text
+gforge/plugins/extratabs/bin/db-upgrade.pl -text
+gforge/plugins/extratabs/db/extratabs-init.sql -text
+gforge/plugins/extratabs/debian/changelog -text
+gforge/plugins/extratabs/debian/control -text
+gforge/plugins/extratabs/debian/copyright -text
+gforge/plugins/extratabs/debian/dirs -text
+gforge/plugins/extratabs/debian/postinst -text
+gforge/plugins/extratabs/debian/prerm -text
+gforge/plugins/extratabs/debian/rules -text
+gforge/plugins/extratabs/include/ExtraTabsPlugin.class -text
+gforge/plugins/extratabs/include/extratabs-init.php -text
+gforge/plugins/extratabs/www/index.php -text
 gforge/plugins/fckeditor/common/fckeditorPlugin.class.php -text
 gforge/plugins/fckeditor/www/editor/css/behaviors/hiddenfield.gif -text
 gforge/plugins/fckeditor/www/editor/css/images/fck_anchor.gif -text

@@ -1,0 +1,21 @@
+gforge-plugin-extratabs (1.0-2) experimental; urgency=low
+
+  * Really adopted the package, and changed the debian/control and
+    debian/copyright files accordingly.
+
+ -- Roland Mas <lolando@debian.org>  Tue, 13 Jun 2006 23:32:00 +0200
+
+gforge-plugin-extratabs (1.0-1) experimental; urgency=low
+
+  * Adopted package.  Thanks, Raphaël!
+  * Updated to match Gforge 4.5.14.
+  * Only try to restart the installed versions of Apache.
+
+ -- Roland Mas <lolando@debian.org>  Tue, 13 Jun 2006 22:54:18 +0200
+
+gforge-plugin-extratabs (1.0) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Raphael Hertzog <hertzog@debian.org>  Fri, 16 Sep 2005 13:45:56 +0200
+
