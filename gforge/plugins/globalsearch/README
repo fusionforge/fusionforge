@@ -1,0 +1,34 @@
+README
+------
+This is the readme file for GlobalSearch Gforge plugin.
+It contains an utility to be call in the crond that gets all 
+the RSS's from the list of projects set up in the DB.
+
+TODO                 - There is a TODO file
+
+ROADMAP
+        
+DESIRED FUNCTIONALITY 
+    1) Search in another gforge
+    2) Publish associated sites 
+    3) Ranking/categorizing associated sites
+    4) Local caching
+    5) Plugin integration with Gforge
+
+To test it: http://site.com/plugins/globalsearch/
+PHP code in /usr/share/gforge/www/plugins/globalsearch/*
+include php in /usr/lib/gforge/plugins/globalsearch/include/* 
+Script to fetch rss in /usr/lib/gforge/plugins/globalsearch/bin/*
+sql-init in /usr/lib/gforge/plugins/globalsearch/lib/*
+
+To get the projects of associated sites run (if you can't wait the daily cron):
+/usr/lib/gforge/plugins/globalsearch/bin/get_assoc_sites_projects.pl
+
+New hook for site admin needed:
+  /usr/share/gforge/www/admin/index.php
+  <?php plugin_hook("site_admin_option_hook", false); ?>
+
+See also de debian/README.Debian
+
+Use the sources and the mailing lists:
+  http://ourproject.org/projects/libreprojects

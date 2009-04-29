@@ -294,6 +294,41 @@
 
 	* gforge/www/themes/gforge/images/icon.png: New file.
 
+	* plugins/globalsearch: Unearthed plugin, dusted it a bit, and
+	ported it to the current Gforge codebase.
+
+	* plugins/globalsearch/lib/globalsearch-init.sql: Updated foreign
+	key constraints to current (8.2+) PostgreSQL.
+
+	* plugins/globalsearch/bin/db-delete.pl: Use functions defined in
+	sqlhelper.pm.
+
+	* plugins/globalsearch/common/GlobalsearchPlugin.class.php:
+	Renamed from globalsearch-plugin.class to stick with current
+	conventions.
+	* plugins/globalsearch/common/globalsearch-init.php: Update
+	accordingly.
+
+	* plugins/globalsearch/www/index.php: Gettextized file.
+	* plugins/globalsearch/www/globalsearch_stats_boxes.php: Ditto.
+
+	* plugins/globalsearch/www/index.php: Use functions to get
+	parameters from request.  Sanitise these parameters, and act
+	accordingly.
+
+	* plugins/globalsearch/common/globalsearch_edit_utils.php: Renamed
+	from www/admin_table_assoc_site.php, which shouldn't be accessible
+	from the web.
+	* plugins/globalsearch/www/edit_assoc_sites.php: Adapt accordingly.
+
+	* plugins/globalsearch/common/globalsearch_stats_boxes.php: Moved
+	here from www/ since this file shouldn't be available through the
+	web.
+	* plugins/globalsearch/www/index.php: Adapt accordingly.
+
+	* plugins/globalsearch/common/globalsearch_edit_utils.php: Large
+	rewrite for robustness.
+	
 2007-11-21  Roland Mas  <lolando@debian.org>
 
 	* deb-specific/stats_projects_logparse.pl: Parse IPv6 addresses as

@@ -114,6 +114,10 @@ gforge/deb-specific/scmsvn/cronjobs/svn_update.pl -text
 gforge/debian/compat -text
 gforge/debian/gforge-plugin-extratabs.postinst -text
 gforge/debian/gforge-plugin-extratabs.prerm -text
+gforge/debian/gforge-plugin-globalsearch.cron.d -text
+gforge/debian/gforge-plugin-globalsearch.dirs -text
+gforge/debian/gforge-plugin-globalsearch.postinst -text
+gforge/debian/gforge-plugin-globalsearch.prerm -text
 gforge/debian/gforge-plugin-mediawiki.postinst -text
 gforge/debian/gforge-plugin-mediawiki.prerm -text
 gforge/debian/gforge-plugin-scmcvs.postinst -text
@@ -706,6 +710,18 @@ gforge/plugins/fckeditor/www/editor/skins/silver/toolbar/undo.gif -text
 gforge/plugins/fckeditor/www/editor/skins/silver/toolbar/universalkey.gif -text
 gforge/plugins/fckeditor/www/editor/skins/silver/toolbar/unlink.gif -text
 gforge/plugins/fckeditor/www/editor/skins/silver/toolbar/unorderedlist.gif -text
+gforge/plugins/globalsearch/README -text
+gforge/plugins/globalsearch/TODO -text
+gforge/plugins/globalsearch/bin/db-delete.pl -text
+gforge/plugins/globalsearch/bin/db-upgrade.pl -text
+gforge/plugins/globalsearch/bin/get_assoc_sites_projects.pl -text
+gforge/plugins/globalsearch/common/GlobalsearchPlugin.class.php -text
+gforge/plugins/globalsearch/common/globalsearch-init.php -text
+gforge/plugins/globalsearch/common/globalsearch_edit_utils.php -text
+gforge/plugins/globalsearch/common/globalsearch_stats_boxes.php -text
+gforge/plugins/globalsearch/lib/globalsearch-init.sql -text
+gforge/plugins/globalsearch/www/edit_assoc_sites.php -text
+gforge/plugins/globalsearch/www/index.php -text
 gforge/plugins/ldapextauth/rpm-specific/.keepme -text svneol=unset#application/octet-stream
 gforge/plugins/mediawiki/README -text
 gforge/plugins/mediawiki/bin/db-delete.pl -text
