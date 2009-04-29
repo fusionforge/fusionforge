@@ -214,21 +214,6 @@ Description: collaborative development tool - Subversion plugin
  each FusionForge project to have its own Subversion repository, and gives
  some control over it to the project's administrator.
 
-# Package: gforge-plugin-scmbzr
-# Architecture: all
-# Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, bzr, php5-cli, ${misc:Depends}
-# Description: collaborative development tool - Bazaar plugin
-#  FusionForge provides many tools to aid collaboration in a
-#  development project, such as bug-tracking, task management,
-#  mailing-lists, SCM repository, forums, support request helper,
-#  web/FTP hosting, release management, etc. All these services are
-#  integrated into one web site and managed through a web interface.
-#  .
-#  This plugin contains the Bazaar subsystem of FusionForge. It allows each
-#  FusionForge project to have its own Bazaar repository, and gives some control
-#  over it to the project's administrator.
-# Provides: gforge-plugin-scm
-
 Package: gforge-plugin-mediawiki
 Architecture: all
 Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, mediawiki, ${misc:Depends}
@@ -243,7 +228,7 @@ Description: Mediawiki plugin for FusionForge
 
 Package: gforge-plugin-extratabs
 Architecture: all
-Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 | gforge-web
+Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, ${misc:Depends}
 Description: Extratabs plugin for FusionForge
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -256,25 +241,28 @@ Description: Extratabs plugin for FusionForge
 
 Package: gforge-plugin-globalsearch
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, libxml-rss-perl, libgetopt-mixed-perl, libdbi-perl, libwww-perl, libcrypt-ssleay-perl, libunicode-string-perl
-Description: collaborative development tool - Global search plugin
- GForge provides many tools to aid collaboration in a
+Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, libxml-rss-perl, libgetopt-mixed-perl, libdbi-perl, libwww-perl, libcrypt-ssleay-perl, libunicode-string-perl, ${misc:Depends}
+Description: Globalsearch plugin for FusionForge
+ FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, SCM repository, forums, support request helper,
  web/FTP hosting, release management, etc. All these services are
  integrated into one web site and managed through a web interface.
  .
- This plugin contains a cross-Gforge search engine.  You can declare a
- list of other Gforge sites, and search for projects hosted on these
- forges from your own.
+ This plugin contains a cross-FusionForge search engine.  You can
+ declare a list of other FusionForge sites, and search for projects
+ hosted on these forges from your own.
 
 Package: gforge-plugin-projectlabels
 Architecture: all
-Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web
-Description: Project labels plugin for GForge
- This plugin allows the site administrator to define labels and bits
- of HTML to render them, and to stick these labels onto projects.  The
- HTML is then displayed with the project description.
+Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, ${misc:Depends}
+Description: Projectlabels plugin for FusionForge
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
  .
  This can be used to highlight some projects on a forge, for instance
  for a "project of the month".
+
