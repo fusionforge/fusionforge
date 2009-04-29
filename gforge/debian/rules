@@ -125,12 +125,6 @@ install: build
 	chmod 755 $(CURDIR)/debian/$(PACKAGE)-db-postgresql/usr/share/*/db/*.php
 	chmod 644 $(CURDIR)/debian/$(PACKAGE)-db-postgresql/usr/share/gforge/cronjobs/*.inc
 
-	# gforge-plugin-globalsearch
-	install -m 755 plugins/globalsearch/bin/* $(CURDIR)/debian/gforge-plugin-globalsearch/usr/lib/gforge/plugins/globalsearch/bin/
-	cp -r plugins/globalsearch/lib/* $(CURDIR)/debian/gforge-plugin-globalsearch/usr/lib/gforge/plugins/globalsearch/lib/
-	cp -r plugins/globalsearch/common/* $(CURDIR)/debian/gforge-plugin-globalsearch/usr/share/gforge/plugins/globalsearch/common/
-	cp -r plugins/globalsearch/www/* $(CURDIR)/debian/gforge-plugin-globalsearch/usr/share/gforge/www/plugins/globalsearch/
-
 	# viewvc rights
 	find $(CURDIR)/debian/$(PACKAGE)-web-apache2/usr/share/*/www/scm/viewvc -type f -exec chmod 0644 {} \;
 	grep -ril '^#!' $(CURDIR)/debian/$(PACKAGE)-web-apache2/usr/share/*/www/scm/viewvc | xargs chmod 0755

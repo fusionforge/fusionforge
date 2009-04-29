@@ -1,0 +1,4 @@
+plugins/globalsearch/bin/*	usr/share/gforge/plugins/globalsearch/bin/
+plugins/globalsearch/lib/*	usr/share/gforge/plugins/globalsearch/lib/
+plugins/globalsearch/common/*	usr/share/gforge/plugins/globalsearch/common/
+plugins/globalsearch/www/*	usr/share/gforge/www/plugins/globalsearch/

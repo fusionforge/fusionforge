@@ -1,0 +1,4 @@
+Package: @PACKAGE@-plugin-globalsearch
+Architecture: all
+Depends: @PACKAGE@-common (>= 4.6.99), @PACKAGE@-db-postgresql (>= 4.6.99) | @PACKAGE@-db, @PACKAGE@-web-apache2 (>= 4.6.99) | @PACKAGE@-web, libxml-rss-perl, libgetopt-mixed-perl, libdbi-perl, libwww-perl, libcrypt-ssleay-perl, libunicode-string-perl, ${misc:Depends}
+Description: Globalsearch plugin for FusionForge
