@@ -33,13 +33,19 @@
   *
   */
 
-require_once('pre.php');
-require_once($GLOBALS['sys_plugins_path'].'/globalsearch/common/globalsearch_stats_boxes.php');
+require_once('../../env.inc.php');
+require_once $gfwww.'include/pre.php';
 
 $otherfreeknowledge = getIntFromRequest('otherfreeknowledge') ;
 $gwords = getStringFromRequest('gwords');
 $order = getStringFromRequest('order', 'rank');
-$offset = getStringFromRequest('offset');
+if (($order != 'rank')
+    && ($order != 'project_title')
+    && ($order != 'project_description')
+    && ($order != 'title')) {
+	$order = $rank ;
+}
+$offset = getIntFromRequest('offset');
 $gexact = getStringFromRequest('gexact');
 
 // Support for short aliases
@@ -49,13 +55,6 @@ if (!$otherfreeknowledge) {
 }
 else {
         $onlysw = "AND onlysw = 'f' ";
-}
-
-
-if ( ($order != "project_title") 
-     and ($order != "title") 
-     and ($order != "rank") ) {
-        $order = "rank";
 }
 
 function highlight_target_words($word_array,$text) {
@@ -72,7 +71,8 @@ echo "<p>";
 
 // show search box which will return results on
 // this very page (default is to open new window)
-echo globalsearch_box();
+$gsplugin = plugin_get_object ('globalsearch') ;
+echo $gsplugin->search_box ();
 
 /*
         Force them to enter at least three characters
@@ -126,7 +126,7 @@ $sql = "SELECT project_title, project_link, project_description, title, link "
         ."AND enabled = 't' AND status_id = 2 "
         .$onlysw
         ."AND (($gwords1) OR ($gwords2)) "
-        ."ORDER BY lower(".$order.")";
+        ."ORDER BY ".$order;
 
 $limit=25;
 
@@ -135,7 +135,8 @@ $rows = $rows_returned = db_numrows($result);
 
 if (!$result || $rows < 1) {
         $no_rows = 1;
-        echo "<h2>".sprintf (_("No matches found for %1$s"),$gwords)."</h2>";
+        echo "<h2>".sprintf (_('No matches found for %1$s'),
+			     $gwords)."</h2>";
         echo db_error();
 
 } else {
@@ -144,12 +145,16 @@ if (!$result || $rows < 1) {
                 $rows = $limit;
         }
 
-        echo "<h3>".sprintf (_("Search results for %1$s"),$gwords)."</h3><p>\n\n";
+        echo "<h3>".sprintf (_('Search results for %1$s'),
+			     $gwords)."</h3><p>\n\n";
 
         $title_arr = array();
-        $title_arr[] = '<a href="/plugins/globalsearch/?gwords='.urlencode($gwords).'&amp;order=project_title&amp;gexact='.$gexact.'">'._("Project Name").'</a>';
-        $title_arr[] = _('Description');
-        $title_arr[] = '<a href="/plugins/globalsearch/?gwords='.urlencode($gwords).'&amp;order=title&amp;gexact='.$gexact.'">'._("Site").'</a>';
+        $title_arr[] = util_make_link ('/plugins/globalsearch/?gwords='.urlencode($gwords).'&amp;order=project_title&amp;gexact='.$gexact,
+				       _("Project Name")) ;
+        $title_arr[] = util_make_link ('/plugins/globalsearch/?gwords='.urlencode($gwords).'&amp;order=project_description&amp;gexact='.$gexact,
+				       _('Description')) ;
+        $title_arr[] = util_make_link ('/plugins/globalsearch/?gwords='.urlencode($gwords).'&amp;order=title&amp;gexact='.$gexact,
+				       _('Forge')) ;
 
         echo $GLOBALS['HTML']->listTableTop($title_arr);
 

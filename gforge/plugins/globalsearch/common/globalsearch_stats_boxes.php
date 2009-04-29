@@ -23,25 +23,27 @@
  * USA
  */
 
-require_once('common/include/GForge.class.php');
+require_once ('../../../www/env.inc.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'/include/FusionForge.class.php';
 
 function show_globalsearch_stats_boxes() {
-        GLOBAL $HTML,$Language;
+        GLOBAL $HTML;
         
         $return = '';
         $return .= $HTML->boxTop(_("Global Search"));
         $return .= globalsearch_box();
-        $return .= $HTML->boxMiddle(_("Top associated sites stats"));
+        $return .= $HTML->boxMiddle(_("Top associated forges"));
         $return .= show_top_n_assocsites(5);
-        $return .= "<div align=\"center\">".sprintf(_("Total projects in associated sites: <b>%1$d</b>"),stats_get_total_projects_assoc_sites()). "</div>";
+        $return .= "<div align=\"center\">".sprintf(_("Total projects in associated forges: <b>%1$d</b>"),stats_get_total_projects_assoc_sites()). "</div>";
         $return .= $HTML->boxBottom();
         return $return;
 }
 
 function globalsearch_box() {
-        global $Language,$gwords,$gexact,$otherfreeknowledge;
+        global $gwords,$gexact,$otherfreeknowledge;
 
-        $return = 'Search in other associated sites:<br />
+        $return = 'Search in other associated forges:<br />
         <form method="post" action="/plugins/globalsearch/"/>
         <input width="100%" type="text" name="gwords" value="'.$gwords.'"/>
         <input type="submit" name="Search" value="'._("Search").'" /><br/>
@@ -58,8 +60,6 @@ function globalsearch_box() {
  */
 
 function show_top_n_assocsites($num_assocsites) {
-        global $Language;
-
         $res_top_n_assoc = db_query("
                 SELECT a.title, a.link, count(*) AS numprojects 
                 FROM plugin_globalsearch_assoc_site_project p, plugin_globalsearch_assoc_site a 
@@ -93,8 +93,6 @@ function show_top_n_assocsites($num_assocsites) {
  */
 
 function stats_get_total_projects_assoc_sites() {
-  global $Language;
-
         $res_count = db_query("SELECT count(*) AS numprojects FROM plugin_globalsearch_assoc_site_project p, plugin_globalsearch_assoc_site a WHERE p.assoc_site_id = a.assoc_site_id AND a.status_id = 2");
         if (db_numrows($res_count) > 0) {
                 $row_count = db_fetch_array($res_count);

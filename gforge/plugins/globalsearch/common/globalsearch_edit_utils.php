@@ -30,7 +30,7 @@
 function globalsearch_admin_table_add () {
         global $PHP_SELF;
 
-	echo _('Create a new associated site below');
+	echo _('Create a new associated forge below');
 	echo '<form name="add" action="'.$PHP_SELF.'?function=postadd" method="post">
                         <table>';
 
@@ -40,7 +40,7 @@ function globalsearch_admin_table_add () {
 	echo '<tr><td><strong>'._('Enabled').'</strong></td><td><input type="checkbox" checked name="enabled" value="t"/></td></tr>';
 	echo '<tr><td><strong>'._('Rank').'</strong></td><td><input type="text" name="rank" /></td></tr>';
 	
-	echo '</table><input type="submit" value="'._('Submit new associated site').'" /></form>
+	echo '</table><input type="submit" value="'._('Submit new associated forge').'" /></form>
                         <form name="cancel" action="'.$PHP_SELF.'" method="post">
                         <input type="submit" value="Cancel" />
                         </form>';
@@ -66,7 +66,7 @@ function globalsearch_admin_table_postadd () {
 VALUES ('$new_title', '$new_link', '$new_onlysw', '$new_enabled', '$new_rank')" ;
 
         if (db_query($sql)) {
-		echo _('Associated site successfully added.');
+		echo _('Associated forge successfully added.');
         } else {
                 echo db_error();
         }
@@ -88,7 +88,7 @@ function globalsearch_admin_table_confirmdelete ($id) {
 		$enabled   =  db_result ($result, 0, 'enabled');
 		$rank      =  db_result ($result, 0, 'rank', 1);
 
-                echo _('Are you sure you want to delete this associated site?') ;
+                echo _('Are you sure you want to delete this associated forge?') ;
 		echo '<table>';
 		echo '<tr><td><strong>'._('Title').'</strong></td><td>'.$title.'</td></tr>';
 		echo '<tr><td><strong>'._('Link').'</strong></td><td>'.$link.'</td></tr>';
@@ -114,7 +114,7 @@ function globalsearch_admin_table_confirmdelete ($id) {
  */
 function globalsearch_admin_table_delete ($id) {
         if (db_query("DELETE FROM plugin_globalsearch_assoc_site WHERE assoc_site_id=$id")) {
-		echo _('Associated site successfully deleted.');
+		echo _('Associated forge successfully deleted.');
         } else {
                 echo db_error();
         }
@@ -136,7 +136,7 @@ function globalsearch_admin_table_edit ($id) {
 		$old_enabled   =  db_result ($result, 0, 'enabled');
 		$old_rank      =  db_result ($result, 0, 'rank', 1);
 
-                echo _('Modify the associated site below');
+                echo _('Modify the associated forge below');
 		echo '<form name="edit" action="'.$PHP_SELF.'?function=postedit&amp;id='.$id.'" method="post">
                         <table>';
 
@@ -184,7 +184,7 @@ function globalsearch_admin_table_postedit ($id) {
         $sql .= "WHERE assoc_site_id=$id";
 
         if (db_query($sql)) {
-		echo _('Associated site successfully modified.');
+		echo _('Associated forge successfully modified.');
         } else {
                 echo db_error();
         }
@@ -201,14 +201,14 @@ function globalsearch_admin_table_show () {
                 $rows = db_numrows($result);
 
                 $cell_data=array();
-                $cell_data[]=array(ngettext('Associated site','Associated sites',$rows).' <a href="'.$PHP_SELF.'?function=add">'._('[add new]').'</a>',
+                $cell_data[]=array(ngettext('Associated forge','Associated forges',$rows).' <a href="'.$PHP_SELF.'?function=add">'._('[add new]').'</a>',
                         'colspan="8"');
 
                 echo '<table border="0" width="100%">';
                 echo $HTML->multiTableRow('',$cell_data, TRUE);
 
 		echo '<td width="5%"></td>';
-		echo '<td><strong>'._('Site ID').'</strong></td>';
+		echo '<td><strong>'._('Forge ID').'</strong></td>';
 		echo '<td><strong>'._('Title').'</strong></td>';
 		echo '<td><strong>'._('Link').'</strong></td>';
 		echo '<td><strong>'._('Software only').'</strong></td>';

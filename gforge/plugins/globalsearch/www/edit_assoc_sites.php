@@ -23,13 +23,15 @@
  * USA
  */
 
-require_once('pre.php');
+require_once('../../env.inc.php');
+require_once $gfwww.'include/pre.php';
+
 session_require(array('group'=>'1','admin_flags'=>'A'));
 include_once($GLOBALS['sys_plugins_path'].'/globalsearch/common/globalsearch_edit_utils.php');
 
-$HTML->header(array('title'=>_('Edit associated sites for global search')));
+$HTML->header(array('title'=>_('Edit associated forges for global search')));
 
-echo '<h3>'._('Edit associated sites for global search').'</h3>
+echo '<h3>'._('Edit associated forges for global search').'</h3>
 <p><a href="/admin/">'._("Site Admin Home").'</a></p>';
 
 $function = getStringFromRequest ('function');

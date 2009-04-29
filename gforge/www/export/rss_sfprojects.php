@@ -14,16 +14,18 @@ require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once $gfwww.'export/rss_utils.inc';
 
-$limit = getIntFromRequest('limit', 10);
-if ($limit > 100) $limit = 100;
+$showall = getIntFromRequest('showall', 0);
+if ($showall == 0) {
+	$limit = getIntFromRequest('limit', 10);
+	if ($limit > 100) $limit = 100;
+}
 
 header("Content-Type: text/plain");
 print '<?xml version="1.0"?>
 <!DOCTYPE rss SYSTEM "http://my.netscape.com/publish/formats/rss-0.91.dtd">
 <rss version="0.91">
 ';
-$res = db_query("
-	SELECT 
+$sql = "SELECT 
 		group_id,
 		group_name,
 		unix_group_name,
@@ -36,7 +38,13 @@ $res = db_query("
 	AND 
 		status='A' 
     ORDER BY 
-		group_id DESC",$limit);
+		group_id DESC" ;
+
+if ($showall) {
+	$res = db_query ($sql);
+} else {
+	$res = db_query ($sql, $limit);
+}
 
 rss_dump_project_result_set($res,$GLOBALS['sys_name'].' Full Project Listing');
 ?>

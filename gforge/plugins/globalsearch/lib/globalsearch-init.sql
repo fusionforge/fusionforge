@@ -26,11 +26,10 @@ CREATE TABLE "plugin_globalsearch_assoc_site" (
   CONSTRAINT "plugin_globalsearch_assoc_site_status_fkey" FOREIGN KEY (status_id) REFERENCES plugin_globalsearch_assoc_status(status_id)
 );
 
-COPY "plugin_globalsearch_assoc_site" FROM stdin;
-1	GForge.org	http://gforge.org/	t	t	1	1
-2	Alioth	https://alioth.debian.org/	t	t	1	2
-\.
-SELECT setval ('"plugin_globalsearch_assoc_site_pk_seq"', 2, false);
+INSERT INTO plugin_globalsearch_assoc_site (title,link,onlysw,enabled,status_id,rank)
+VALUES ('FusionForge.org', 'https://fusionforge.org/', t, t, 1, 1) ;
+INSERT INTO plugin_globalsearch_assoc_site (title,link,onlysw,enabled,status_id,rank)
+VALUES ('Alioth', 'https://alioth.debian.org/', t, t, 1, 2) ;
 
 CREATE TABLE "plugin_globalsearch_assoc_site_project" (
   "assoc_site_id" integer DEFAULT '0' NOT NULL,

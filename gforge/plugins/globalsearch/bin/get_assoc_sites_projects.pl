@@ -86,7 +86,7 @@ $dbh->commit or die $dbh->errstr;
 
 foreach $assoc_site (@results_array) {
         my ($assoc_site_id, $title, $link, $onlysw, $enabled, $status_id, $rank) = @{$assoc_site};
-        my $urlrss = $link."/export/rss_sfprojects.php";
+        my $urlrss = $link."/export/rss_sfprojects.php?showall=1";
         my $response = $ua->get($urlrss);
 	
         if ($response->is_success) {
