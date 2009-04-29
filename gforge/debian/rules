@@ -126,7 +126,7 @@ install: build
 	chmod 644 $(CURDIR)/debian/$(PACKAGE)-db-postgresql/usr/share/gforge/cronjobs/*.inc
 
 	# gforge-plugin-projectlabels
-	cp -r plugins/projectlabels/bin/* $(CURDIR)/debian/gforge-plugin-projectlabels/usr/lib/gforge/plugins/projectlabels/bin/
+	install -m 755 plugins/projectlabels/bin/* $(CURDIR)/debian/gforge-plugin-projectlabels/usr/lib/gforge/plugins/projectlabels/bin/
 	cp -r plugins/projectlabels/common/* $(CURDIR)/debian/gforge-plugin-projectlabels/usr/share/gforge/plugins/projectlabels/common/
 	cp -r plugins/projectlabels/db/* $(CURDIR)/debian/gforge-plugin-projectlabels/usr/lib/gforge/plugins/projectlabels/lib/
 	cp -r plugins/projectlabels/www/* $(CURDIR)/debian/gforge-plugin-projectlabels/usr/share/gforge/www/plugins/projectlabels/
