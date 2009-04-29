@@ -84,7 +84,7 @@ class MediaWikiPlugin extends Plugin {
 			} else {
 				$group->setPluginUse ( $this->name, false );
 			}
-		elseif ($hookname == "blahblahblah") {
+		} elseif ($hookname == "blahblahblah") {
 			// ...
 		} 
 	}
