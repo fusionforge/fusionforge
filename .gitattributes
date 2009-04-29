@@ -53,8 +53,6 @@ gforge/control/130plugin-scmcvs -text
 gforge/control/130plugin-scmcvs.shortdesc -text
 gforge/control/140plugin-scmsvn -text
 gforge/control/140plugin-scmsvn.shortdesc -text
-gforge/control/150plugin-scmbzr -text
-gforge/control/150plugin-scmbzr.shortdesc -text
 gforge/control/160plugin-mediawiki -text
 gforge/control/160plugin-mediawiki.shortdesc -text
 gforge/control/170plugin-extratabs -text
@@ -65,6 +63,8 @@ gforge/control/190plugin-projectlabels -text
 gforge/control/190plugin-projectlabels.shortdesc -text
 gforge/control/AAAdesc -text
 gforge/control/Makefile -text
+gforge/control/disabled-150plugin-scmbzr -text
+gforge/control/disabled-150plugin-scmbzr.shortdesc -text
 gforge/cron.d/00phpcron -text
 gforge/cron.d/Makefile -text
 gforge/cron.d/backup1 -text
