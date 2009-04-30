@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-29 12:42+0200\n"
+"POT-Creation-Date: 2009-04-30 16:17+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -198,11 +198,15 @@ msgstr ""
 #: common/forum/ForumMessage.class.php:663
 #, php-format
 msgid ""
-"\\nOr by replying to this e-mail entering your response between the "
-"following markers: \\n%1$s\\n(enter your response here)\\n%1$s"
+"\n"
+"Or reply to this e-mail entering your response between the following "
+"markers: \n"
+"%1$s\n"
+"(enter your response here)\n"
+"%1$s"
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:668
+#: common/forum/ForumMessage.class.php:669
 #, php-format
 msgid ""
 "\n"
@@ -211,12 +215,12 @@ msgid ""
 "By: %s\n"
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:673
+#: common/forum/ForumMessage.class.php:674
 #, fuzzy
 msgid "A file has been uploaded with this message."
 msgstr "Файл должен быть указан на этой странице."
 
-#: common/forum/ForumMessage.class.php:684
+#: common/forum/ForumMessage.class.php:685
 #, php-format
 msgid ""
 "You are receiving this email because you elected to monitor this forum.\n"
@@ -2417,14 +2421,6 @@ msgstr "Список изменений"
 #: plugins/mantis/include/MantisPlugin.class.php:144
 msgid "Mantis admin"
 msgstr "Управление переменными"
-
-#: plugins/mediawiki/common/MediaWikiPlugin.class.php:143
-msgid "View Personal MediaWiki"
-msgstr "Персональная энциклопедия"
-
-#: plugins/mediawiki/common/MediaWikiPlugin.class.php:153
-msgid "View the MediaWiki Administration"
-msgstr "Управление персональной энциклопедией"
 
 #: plugins/online_help/common/online_helpPlugin.class.php:84
 msgid "Get Help"
@@ -13345,6 +13341,12 @@ msgstr[2] ""
 #: www/users:33
 msgid "No User Name Provided"
 msgstr "Имя участника обязательно"
+
+#~ msgid "View Personal MediaWiki"
+#~ msgstr "Персональная энциклопедия"
+
+#~ msgid "View the MediaWiki Administration"
+#~ msgstr "Управление персональной энциклопедией"
 
 #~ msgid "View My Developer Profile"
 #~ msgstr "Смотреть мой профиль разработчика"

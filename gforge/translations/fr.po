@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-29 12:42+0200\n"
-"PO-Revision-Date: 2009-04-30 15:20+0200\n"
+"POT-Creation-Date: 2009-04-30 16:17+0200\n"
+"PO-Revision-Date: 2009-04-30 16:18+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <aljeux@free.fr>\n"
-"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Pootle 1.2.1\n"
 "X-Poedit-Language: French\n"
@@ -212,16 +212,20 @@ msgstr ""
 #: common/forum/ForumMessage.class.php:663
 #, php-format
 msgid ""
-"\\nOr by replying to this e-mail entering your response between the "
-"following markers: \\n%1$s\\n(enter your response here)\\n%1$s"
+"\n"
+"Or reply to this e-mail entering your response between the following "
+"markers: \n"
+"%1$s\n"
+"(enter your response here)\n"
+"%1$s"
 msgstr ""
 "\n"
-"Ou par e-mail en sasissant votre réponse entre les marqueurs suivants :\n"
+"Ou répondez par e-mail en saisissant votre réponse entre les marqueurs suivants :\n"
 "%1$s\n"
 "(tapez votre réponse ici)\n"
 "%1$s"
 
-#: common/forum/ForumMessage.class.php:668
+#: common/forum/ForumMessage.class.php:669
 #, php-format
 msgid ""
 "\n"
@@ -234,11 +238,11 @@ msgstr ""
 "\n"
 "Par : %s\n"
 
-#: common/forum/ForumMessage.class.php:673
+#: common/forum/ForumMessage.class.php:674
 msgid "A file has been uploaded with this message."
 msgstr "Un fichier a été joint à ce message."
 
-#: common/forum/ForumMessage.class.php:684
+#: common/forum/ForumMessage.class.php:685
 #, php-format
 msgid ""
 "You are receiving this email because you elected to monitor this forum.\n"
@@ -451,8 +455,8 @@ msgid ""
 "Bad tag name, you only can use the following characters: [A-Z][a-z][0-9]-_&'#"
 "+. and space"
 msgstr ""
-"Nom d'étiquette invalide.  Seuls les caractères suivants sont autorisés : "
-"[A-Z][a-z][0-9]-_&'#+. et l'espace."
+"Nom d'étiquette invalide.  Seuls les caractères suivants sont autorisés : [A-"
+"Z][a-z][0-9]-_&'#+. et l'espace."
 
 #: common/include/Group.class.php:1307
 msgid "Setting tags: "
@@ -2098,8 +2102,8 @@ msgid ""
 "those extra tabs can only appear on the right of the standard tabs. And you "
 "can only move them inside the set of extra tabs."
 msgstr ""
-"Vous pouvez déplacer et supprimer les onglets supplémentaires déjà ajoutés. "
-" Note : ces onglets supplémentaires apparaissent forcément à droite des "
+"Vous pouvez déplacer et supprimer les onglets supplémentaires déjà ajoutés.  "
+"Note : ces onglets supplémentaires apparaissent forcément à droite des "
 "onglets standard, et ne peuvent être déplacés qu'entre eux."
 
 #: plugins/extratabs/www/index.php:158
@@ -2438,14 +2442,6 @@ msgstr "Voir Mantis"
 #: plugins/mantis/include/MantisPlugin.class.php:144
 msgid "Mantis admin"
 msgstr "Administration de Mantis"
-
-#: plugins/mediawiki/common/MediaWikiPlugin.class.php:143
-msgid "View Personal MediaWiki"
-msgstr "Voir le Mediawiki personnel"
-
-#: plugins/mediawiki/common/MediaWikiPlugin.class.php:153
-msgid "View the MediaWiki Administration"
-msgstr "Voir l'administration de Mediawiki"
 
 #: plugins/online_help/common/online_helpPlugin.class.php:84
 msgid "Get Help"
@@ -3126,8 +3122,8 @@ msgid ""
 "Either mount the VOB with <tt>cleartool mount %1$s</tt> or select the <tt>%1"
 "$s</tt> VOB in your ClearCase Explorer."
 msgstr ""
-"Montez le VOB avec <tt>cleartool mount %1$s</tt> ou choisissez le VOB <tt>%"
-"1$s</tt> dans votre explorateur ClearCase."
+"Montez le VOB avec <tt>cleartool mount %1$s</tt> ou choisissez le VOB <tt>%1"
+"$s</tt> dans votre explorateur ClearCase."
 
 #: plugins/scmccase/common/CCasePlugin.class.php:115
 #: www/project/admin/history.php:34
@@ -3309,8 +3305,8 @@ msgid ""
 "prompted.</p>"
 msgstr ""
 "<p><b>Accès Subversion via DAV pour les développeurs</b></p><p>Cette méthode "
-"d'accès au dépôt est réservée aux développeurs du projet. Vous pourrez "
-"avoir besoin de taper votre mot de passe.</p>"
+"d'accès au dépôt est réservée aux développeurs du projet. Vous pourrez avoir "
+"besoin de taper votre mot de passe.</p>"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:145
 msgid ""
@@ -3544,14 +3540,13 @@ msgid ""
 msgstr ""
 "<p>Pour éviter d'avoir à saisir votre mot de passe à chaque fois que vous "
 "utilisez votre compte CVS/SSH, vous pouvez déposer votre clé publique ici et "
-"elles seront placées sur le serveur CVS dans votre fichier "
-"~/.ssh/authorized_keys. Cette opération s'effectue à l'aide d'une tâche "
-"programmée et n'est donc pas instantanée. Attendez vous à un délai d'une "
-"heure.</p><p>Pour générer une clé publique, utilisez le programme \"ssh-"
-"keygen\". La clé publique sera placée dans \"~/.ssh/identity.pub\" (protocole "
-"1) et dans \"~/.ssh/id_dsa.pub\" ou \"~/.ssh/id_rsa.pub\" (protocole 2). "
-"Consultez la documentation de SSH pour plus d'informations sur le partage de "
-"clés.</p>"
+"elles seront placées sur le serveur CVS dans votre fichier ~/.ssh/"
+"authorized_keys. Cette opération s'effectue à l'aide d'une tâche programmée "
+"et n'est donc pas instantanée. Attendez vous à un délai d'une heure.</"
+"p><p>Pour générer une clé publique, utilisez le programme \"ssh-keygen\". La "
+"clé publique sera placée dans \"~/.ssh/identity.pub\" (protocole 1) et dans "
+"\"~/.ssh/id_dsa.pub\" ou \"~/.ssh/id_rsa.pub\" (protocole 2). Consultez la "
+"documentation de SSH pour plus d'informations sur le partage de clés.</p>"
 
 #: www/account/editsshkeys.php:81
 msgid ""
@@ -7955,8 +7950,7 @@ msgstr "Sondage non trouvé"
 #: www/index_std.php:8
 msgid "FusionForge helps you manage the entire development life cycle"
 msgstr ""
-"FusionForge vous aide à suivre l'intégralité de votre cycle de "
-"développement."
+"FusionForge vous aide à suivre l'intégralité de votre cycle de développement."
 
 #: www/index_std.php:11
 msgid ""
@@ -10682,22 +10676,20 @@ msgid ""
 "li><li>Search engines throughout the site</li></ul><p/>Unix Name:<br/>"
 msgstr ""
 "<h3>4. Nom Unix du projet</h3>\n"
-"<p>En plus du nom complet du projet, vous devez choisir un nom « Unix » "
-"court.</p><p>Du fait de son utilisation à de nombreux endroits sur le site, "
-"le « nom Unix » est soumis à plusieurs restrictions :</p><ul><li>Il doit "
-"être unique</li><li>Il doit comprendre entre 3 et 15 caractères</li><li>Il "
-"ne peut contenir que des lettres (minuscules), des chiffres et des "
-"tirets</li><li>Il ne peut être choisi parmi certains noms "
-"réservés</li><li>Il ne changera pas tout au long de la vie du "
-"projet</li></ul>\n"
-"<p>Ce nom Unix est important, car il est utilisé des manières "
-"suivantes :</p>\n"
-"<ul><li>Pour construire l'adresse du site web du projet, <tt>nom-unix.%"
-"1$s</tt></li><li>Pour utiliser CVS, dans <tt>/cvsroot/nom-unix</tt> sur "
-"<tt>cvs.nom-unix.%1$s</tt> (ou équivalent pour un autre système de suivi de "
-"version)</li><li>Pour obtenir un accès shell sur <tt>nom-unix.%"
-"1$s</tt></li><li>Pour les recherches partout dans le site</li></ul><p>Nom "
-"Unix :<br/>"
+"<p>En plus du nom complet du projet, vous devez choisir un nom « Unix » court."
+"</p><p>Du fait de son utilisation à de nombreux endroits sur le site, le « "
+"nom Unix » est soumis à plusieurs restrictions :</p><ul><li>Il doit être "
+"unique</li><li>Il doit comprendre entre 3 et 15 caractères</li><li>Il ne "
+"peut contenir que des lettres (minuscules), des chiffres et des tirets</"
+"li><li>Il ne peut être choisi parmi certains noms réservés</li><li>Il ne "
+"changera pas tout au long de la vie du projet</li></ul>\n"
+"<p>Ce nom Unix est important, car il est utilisé des manières suivantes :</"
+"p>\n"
+"<ul><li>Pour construire l'adresse du site web du projet, <tt>nom-unix.%1$s</"
+"tt></li><li>Pour utiliser CVS, dans <tt>/cvsroot/nom-unix</tt> sur <tt>cvs."
+"nom-unix.%1$s</tt> (ou équivalent pour un autre système de suivi de version)"
+"</li><li>Pour obtenir un accès shell sur <tt>nom-unix.%1$s</tt></li><li>Pour "
+"les recherches partout dans le site</li></ul><p>Nom Unix :<br/>"
 
 #: www/register/projectinfo.php:156
 #, php-format
@@ -11715,8 +11707,8 @@ msgstr "Date d'enregistrement :"
 msgid ""
 "More than <strong>%1$s</strong> projects have <strong>%2$s</strong> as tag."
 msgstr ""
-"L'étiquette <strong>%2$s</strong> est utilisée sur plus de de <strong>%"
-"1$s</strong> projets."
+"L'étiquette <strong>%2$s</strong> est utilisée sur plus de de <strong>%1$s</"
+"strong> projets."
 
 #: www/softwaremap/trove_list.php:314
 msgid "Activity Ranking:&nbsp;"
@@ -13390,77 +13382,3 @@ msgstr[1] ""
 #: www/users:33
 msgid "No User Name Provided"
 msgstr "Aucun nom d'utilisateur n'a été fourni"
-
-#~ msgid "View My Developer Profile"
-#~ msgstr "Voir mon profil de développeur"
-
-#~ msgid "You have not chosen a license"
-#~ msgstr "Vous n'avez pas choisi de licence"
-
-#~ msgid "Conflicting licenses choice"
-#~ msgstr "Conflit dans le choix de licence"
-
-#~ msgid "Please give more comprehensive licensing description"
-#~ msgstr "Veuillez fournir une description plus précise de la licence."
-
-#~ msgid ""
-#~ "<a href=\"http://fusionforge.fusionforge.org/\">FusionForge archive</a>"
-#~ msgstr ""
-#~ "<a href=\"http://fusionforge.fusionforge.org/\">archive de FusionForge</a>"
-
-#~ msgid ""
-#~ "<a href=\"http://www.gnu.org/software/mailman/\">Mailman</a> <i>(optional)"
-#~ "</i>"
-#~ msgstr ""
-#~ "<a href=\"http://www.gnu.org/software/mailman/\">Mailman</a> <i>"
-#~ "(optionnel)</i>"
-
-#~ msgid "Mailing lists"
-#~ msgstr "Listes de diffusion"
-
-#~ msgid "Online help via IRC"
-#~ msgstr "Aide en ligne par IRC"
-
-#~ msgid "Contribute!"
-#~ msgstr "Contribuer !"
-
-#~ msgid "FusionForge Project Page"
-#~ msgstr "Page du projet de FusionForge"
-
-#~ msgid "Bug Tracker"
-#~ msgstr "Suivi des bugs"
-
-#~ msgid "Patch Submissions"
-#~ msgstr "Soumission de correctifs"
-
-#~ msgid "Older headlines"
-#~ msgstr "Anciennes annonces"
-
-#~ msgid "<h3>3. License</h3>"
-#~ msgstr "<h3>3. Licence</h3>"
-
-#~ msgid ""
-#~ "<p>If you selected \"other\", please provide an explanation along with a "
-#~ "description of your license. Realize that other licenses may not be "
-#~ "approved. Also, it may take additional time to make a decision for such "
-#~ "project, since we will need to check that license is compatible with the "
-#~ "OpenSource definition.</p>"
-#~ msgstr ""
-#~ "<p>Si vous avez choisi une autre licence, veuillez fournir ici une "
-#~ "description de cette licence, avec toutes les explications pertinentes.  "
-#~ "Notez que les licences non-standard peuvent mener au rejet des projets, "
-#~ "ou à un délai supplémentaire lors de leur approbation (puisqu'il faudra "
-#~ "plus de temps à l'équipe d'administration pour vérifier la compatibilité "
-#~ "de la licence avec la définition de l'Open Source).</p>"
-
-#~ msgid "Opn"
-#~ msgstr "Ouv."
-
-#~ msgid "Cls"
-#~ msgstr "Ferm."
-
-#~ msgid "CO's"
-#~ msgstr "Cop."
-
-#~ msgid "Comm's"
-#~ msgstr "Val."
