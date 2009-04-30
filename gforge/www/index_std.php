@@ -48,7 +48,7 @@ echo $HTML->boxBottom();
 
 <td width="35%" valign="top">
 <?php
-	show_features_boxes();
+echo show_features_boxes();
 ?>
 
 </td></tr></table>
