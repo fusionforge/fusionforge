@@ -40,7 +40,7 @@ function show_features_boxes() {
 	$return .= show_newest_projects();
 	$hook_params = array () ;
 	$hook_params['returned_text'] = '' ;
-	plugin_hook ("features_boxes_bottom", &$hook_params);
+	plugin_hook ("features_boxes_bottom", $hook_params);
 	$return .= $HTML->boxBottom(0);
 	return $return ;
 }
