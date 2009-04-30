@@ -98,7 +98,7 @@ $graph->title->Set("Commits By User (".date('m/d/Y',$start) ."-". date('m/d/Y',$
 $graph->subtitle->Set($sys_name);
 
 // Create the tracker open plot
-report_pie_arr(util_result_column_to_array($res,0), util_result_column_to_array($res,1));
+report_pie_arr(util_result_column_to_array($res,0), util_result_column_to_array($res,1), 0);
 
 $p1  = new PiePlot3D($pie_vals);
 $p1->ExplodeSlice (0);

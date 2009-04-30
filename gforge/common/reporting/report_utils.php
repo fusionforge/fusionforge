@@ -214,7 +214,7 @@ function report_time_category_box($name='category',$selected=false) {
 //
 //	Takes an array of labels and an array values and removes vals < 2% and sets up an "other"
 //
-function report_pie_arr($labels, $vals) {
+function report_pie_arr($labels, $vals, $format=1) {
 	global $pie_labels,$pie_vals;
 	//first get sum of all values
 	for ($i=0; $i<count($vals); $i++) {
@@ -226,13 +226,13 @@ function report_pie_arr($labels, $vals) {
 		if (($vals[$i]/$total) < .02) {
 			$rem += $vals[$i];
 		} else {
-			$pie_labels[]=util_unconvert_htmlspecialchars($labels[$i])." (". number_format($vals[$i],1) .") ";
-			$pie_vals[]=number_format($vals[$i],1);
+			$pie_labels[]=utf8_decode(util_unconvert_htmlspecialchars($labels[$i]))." (". number_format($vals[$i],$format) .") ";
+			$pie_vals[]=$vals[$i];
 		}
 	}
 	if ($rem > 0) {
-		$pie_labels[]='Other'." (". number_format($rem,1) .") ";
-		$pie_vals[]=number_format($rem,1);
+		$pie_labels[]=_('Other')." (". number_format($rem,$format) .") ";
+		$pie_vals[]=$rem;
 	}
 	
 }
