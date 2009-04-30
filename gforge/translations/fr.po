@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-04-29 12:42+0200\n"
-"PO-Revision-Date: 2009-04-21 08:48+0200\n"
+"PO-Revision-Date: 2009-04-30 15:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <aljeux@free.fr>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Pootle 1.2.1\n"
 "X-Poedit-Language: French\n"
@@ -199,14 +199,15 @@ msgid "Invalid Message ID"
 msgstr "Identifiant de message invalide"
 
 #: common/forum/ForumMessage.class.php:661
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "\n"
 "Read and respond to this message at: \n"
 "%s"
 msgstr ""
 "\n"
-"Pour lire ce message en détail et y répondre :"
+"Pour lire ce message en détail et y répondre :\n"
+"%s"
 
 #: common/forum/ForumMessage.class.php:663
 #, php-format
@@ -214,6 +215,11 @@ msgid ""
 "\\nOr by replying to this e-mail entering your response between the "
 "following markers: \\n%1$s\\n(enter your response here)\\n%1$s"
 msgstr ""
+"\n"
+"Ou par e-mail en sasissant votre réponse entre les marqueurs suivants :\n"
+"%1$s\n"
+"(tapez votre réponse ici)\n"
+"%1$s"
 
 #: common/forum/ForumMessage.class.php:668
 #, php-format
@@ -223,6 +229,10 @@ msgid ""
 "\n"
 "By: %s\n"
 msgstr ""
+"\n"
+"\n"
+"\n"
+"Par : %s\n"
 
 #: common/forum/ForumMessage.class.php:673
 msgid "A file has been uploaded with this message."
@@ -441,11 +451,12 @@ msgid ""
 "Bad tag name, you only can use the following characters: [A-Z][a-z][0-9]-_&'#"
 "+. and space"
 msgstr ""
+"Nom d'étiquette invalide.  Seuls les caractères suivants sont autorisés : "
+"[A-Z][a-z][0-9]-_&'#+. et l'espace."
 
 #: common/include/Group.class.php:1307
-#, fuzzy
 msgid "Setting tags: "
-msgstr "Paramètrage"
+msgstr "Réglage des étiquettes :"
 
 #: common/include/Group.class.php:1352
 msgid "Cannot Delete System Group"
@@ -1825,9 +1836,8 @@ msgstr "« %1$s » est un alias réservé. Veuillez choisir un autre nom."
 
 #: common/tracker/ArtifactExtraFieldElement.class.php:114
 #: common/tracker/ArtifactExtraFieldElement.class.php:227
-#, fuzzy
 msgid "Element name already exists"
-msgstr "Ce nom d'utilisateur existe déjà."
+msgstr "Ce nom d'élément existe déjà."
 
 #: common/tracker/ArtifactFile.class.php:130
 msgid "ArtifactFile: File name, type, size, and data are required"
@@ -2038,18 +2048,18 @@ msgid "Diff To"
 msgstr "Afficher les différences avec"
 
 #: plugins/extratabs/www/index.php:53
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot insert new tab entry: %s"
-msgstr "Impossible d'ajouter une base de données"
+msgstr "Impossible d'ajouter un nouvel onglet : %s"
 
 #: plugins/extratabs/www/index.php:56
 msgid "Tab added"
-msgstr ""
+msgstr "Onglet ajouté."
 
 #: plugins/extratabs/www/index.php:63
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot delete tab entry: %s"
-msgstr "Impossible d'ajouter une base de données"
+msgstr "Impossible de supprimer un onglet : %s"
 
 #: plugins/extratabs/www/index.php:117 www/project/admin/index.php:166
 #, php-format
@@ -2057,31 +2067,30 @@ msgid "Project Admin: %1$s"
 msgstr "Administration du projet %1$s"
 
 #: plugins/extratabs/www/index.php:124
-#, fuzzy
 msgid "Add new tabs"
-msgstr "Ajouter une nouvelle base de données"
+msgstr "Ajouter de nouveaux onglets"
 
 #: plugins/extratabs/www/index.php:125
 msgid "You can add your own tabs in the menu bar with the form below."
 msgstr ""
+"Vous pouvez ajouter vos propres onglets à la barre de menu avec le "
+"formulaire ci-dessous."
 
 #: plugins/extratabs/www/index.php:132
-#, fuzzy
 msgid "Name of the tab:"
-msgstr "Nombre de tâches commencées"
+msgstr "Nom de l'onglet :"
 
 #: plugins/extratabs/www/index.php:135
 msgid "URL of the tab:"
-msgstr ""
+msgstr "URL de l'onglet :"
 
 #: plugins/extratabs/www/index.php:138
-#, fuzzy
 msgid "Add tab"
-msgstr "Ajouter une tâche"
+msgstr "Ajouter un onglet"
 
 #: plugins/extratabs/www/index.php:150
 msgid "Manage extra tabs"
-msgstr ""
+msgstr "Gestion des onglets supplémentaires"
 
 #: plugins/extratabs/www/index.php:152
 msgid ""
@@ -2089,43 +2098,43 @@ msgid ""
 "those extra tabs can only appear on the right of the standard tabs. And you "
 "can only move them inside the set of extra tabs."
 msgstr ""
+"Vous pouvez déplacer et supprimer les onglets supplémentaires déjà ajoutés. "
+" Note : ces onglets supplémentaires apparaissent forcément à droite des "
+"onglets standard, et ne peuvent être déplacés qu'entre eux."
 
 #: plugins/extratabs/www/index.php:158
 msgid "Tab to modify:"
-msgstr ""
+msgstr "Onglet à modifier :"
 
 #: plugins/extratabs/www/index.php:171
 msgid "Move tab left"
-msgstr ""
+msgstr "Déplacer l'onglet vers la gauche"
 
 #: plugins/extratabs/www/index.php:172
 msgid "Move tab right"
-msgstr ""
+msgstr "Déplacer l'onglet vers la droite"
 
 #: plugins/extratabs/www/index.php:174
-#, fuzzy
 msgid "Delete tab"
-msgstr "Effacer"
+msgstr "Supprimer l'onglet"
 
 #: plugins/globalsearch/common/GlobalsearchPlugin.class.php:38
 msgid "Admin Associated Forges"
-msgstr ""
+msgstr "Gérer les forges partenaires"
 
 #: plugins/globalsearch/common/GlobalsearchPlugin.class.php:40
-#, fuzzy
 msgid "Associated Forges"
-msgstr "Durée horaire estimée"
+msgstr "Forges partenaires"
 
 #: plugins/globalsearch/common/GlobalsearchPlugin.class.php:50
 #: plugins/globalsearch/common/globalsearch_stats_boxes.php:34
-#, fuzzy
 msgid "Global Search"
-msgstr "Rechercher"
+msgstr "Recherche globale"
 
 #: plugins/globalsearch/common/GlobalsearchPlugin.class.php:52
 #: plugins/globalsearch/common/globalsearch_stats_boxes.php:36
 msgid "Top associated forges"
-msgstr ""
+msgstr "Forges partenaires les plus importantes"
 
 #: plugins/globalsearch/common/GlobalsearchPlugin.class.php:65
 #: plugins/globalsearch/common/globalsearch_stats_boxes.php:49
@@ -2145,26 +2154,23 @@ msgstr "Rechercher"
 #: plugins/globalsearch/common/GlobalsearchPlugin.class.php:66
 #: plugins/globalsearch/common/globalsearch_stats_boxes.php:50
 msgid "Extend search to include non-software projects"
-msgstr ""
+msgstr "Rechercher aussi parmi les projets autres que logiciels"
 
 #: plugins/globalsearch/common/GlobalsearchPlugin.class.php:67
 #: plugins/globalsearch/common/globalsearch_stats_boxes.php:51
-#, fuzzy
 msgid "Require all words"
-msgstr "tous les mots"
+msgstr "Rechercher tous les mots"
 
 #: plugins/globalsearch/common/GlobalsearchPlugin.class.php:87
 #: plugins/globalsearch/common/GlobalsearchPlugin.class.php:115
 #: plugins/globalsearch/common/globalsearch_stats_boxes.php:72
 #: plugins/globalsearch/common/globalsearch_stats_boxes.php:101
-#, fuzzy
 msgid "No stats available"
 msgstr "Pas de statistiques disponibles"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:33
-#, fuzzy
 msgid "Create a new associated forge below"
-msgstr "Créer un(e) nouveau(elle) %1$s ci-dessous :"
+msgstr "Créer une nouvelle forge partenaire ci-dessous"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:37
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:93
@@ -2196,17 +2202,15 @@ msgstr "Liens"
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:95
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:145
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:214
-#, fuzzy
 msgid "Software only"
-msgstr "Arbre des projets"
+msgstr "Uniquement les projets logiciels"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:40
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:96
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:146
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:215
-#, fuzzy
 msgid "Enabled"
-msgstr "Fin"
+msgstr "Activée"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:41
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:97
@@ -2217,22 +2221,19 @@ msgstr "Fin"
 #: www/project/stats/project_stats_utils.php:191 www/top/mostactive.php:52
 #: www/top/toplist.php:57 www/top/topusers.php:66
 msgid "Rank"
-msgstr "Ranc"
+msgstr "Rang"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:43
-#, fuzzy
 msgid "Submit new associated forge"
-msgstr "Soumettre un nouveau document"
+msgstr "Soumettre une nouvelle forge associée"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:69
-#, fuzzy
 msgid "Associated forge successfully added."
-msgstr "%1$s ajouté(e) avec succès."
+msgstr "Forge partenaire ajoutée avec succès."
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:91
-#, fuzzy
 msgid "Are you sure you want to delete this associated forge?"
-msgstr "Etes-vous sûr de vouloir supprimer cet élément ?"
+msgstr "Etes-vous sûr de vouloir supprimer cette forge partenaire ?"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:95
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:96
@@ -2304,77 +2305,67 @@ msgid "Cancel"
 msgstr "Annuler"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:117
-#, fuzzy
 msgid "Associated forge successfully deleted."
-msgstr "%1$s supprimé(e) avec succès."
+msgstr "Forge partenaire supprimée avec succès."
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:139
-#, fuzzy
 msgid "Modify the associated forge below"
-msgstr "Modifier le(la) %1$s ci-dessous :"
+msgstr "Modifier la forge partenaire ci-dessous"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:149
-#, fuzzy
 msgid "Submit changes"
 msgstr "Valider les changements"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:187
-#, fuzzy
 msgid "Associated forge successfully modified."
-msgstr "%1$s modifié(e) avec succès."
+msgstr "Forge partenaire modifiée avec succès."
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:204
 msgid "Associated forge"
 msgid_plural "Associated forges"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Forge partenaire"
+msgstr[1] "Forges partenaires"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:204
-#, fuzzy
 msgid "[add new]"
-msgstr "ajouter nouveau"
+msgstr "ajouter une nouvelle forge"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:211
 msgid "Forge ID"
-msgstr ""
+msgstr "Identifiant de la forge"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:224
-#, fuzzy
 msgid "[edit]"
 msgstr "[Modifier]"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:225
-#, fuzzy
 msgid "[delete]"
 msgstr "[Supprimer]"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:244
-#, fuzzy
 msgid "New"
-msgstr "Annonces"
+msgstr "Nouvelle"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:245
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:246
-#, fuzzy
 msgid "Error fetching data"
-msgstr "Erreur lors de l'ajout d'une base de données"
+msgstr "Erreur lors de la récupération des données"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:247
-#, fuzzy
 msgid "Error parsing data"
-msgstr "Erreur de mise à jour"
+msgstr "Erreur lors de l'analyse des données"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:248
 msgid "Unknown status ID"
-msgstr ""
+msgstr "Identifiant de statut inconnu"
 
 #: plugins/globalsearch/www/edit_assoc_sites.php:32
 #: plugins/globalsearch/www/edit_assoc_sites.php:34
 msgid "Edit associated forges for global search"
-msgstr ""
+msgstr "Modifier les forges partenaires pour la recherche globale"
 
 #: plugins/globalsearch/www/edit_assoc_sites.php:35
 #: www/admin/admin_table.php:296
@@ -2382,26 +2373,24 @@ msgid "Site Admin Home"
 msgstr "Accueil de l'administration du site"
 
 #: plugins/globalsearch/www/index.php:85
-#, fuzzy
 msgid "Search must be at least three characters"
-msgstr "Le mot de passe doit comporter au moins 6 caractères."
+msgstr "Le motif de recherche doit comporter au moins 3 caractères."
 
 #: plugins/globalsearch/www/index.php:91
 msgid "Enter Your Search Words Above"
-msgstr ""
+msgstr "Saisissez votre motif de recherche ci-dessus."
 
 #: plugins/globalsearch/www/index.php:138
-#, fuzzy, php-format
+#, php-format
 msgid "No matches found for %1$s"
-msgstr "Aucun résultat trouvé pour <em>%1$s</em>"
+msgstr "Aucun résultat trouvé pour %1$s."
 
 #: plugins/globalsearch/www/index.php:148
-#, fuzzy, php-format
+#, php-format
 msgid "Search results for %1$s"
-msgstr "Résultats de la recherche de <em>%1$s</em>"
+msgstr "Résultats de la recherche de %1$s."
 
 #: plugins/globalsearch/www/index.php:153
-#, fuzzy
 msgid "Project Name"
 msgstr "Nom du projet"
 
@@ -2421,9 +2410,8 @@ msgid "Description"
 msgstr "Description"
 
 #: plugins/globalsearch/www/index.php:157
-#, fuzzy
 msgid "Forge"
-msgstr "Plus..."
+msgstr "Forge"
 
 #: plugins/globalsearch/www/index.php:192
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:126
@@ -2464,152 +2452,135 @@ msgid "Get Help"
 msgstr "Aide"
 
 #: plugins/projectlabels/www/index.php:12
-#, fuzzy
 msgid "Project labels"
-msgstr "Liste de fichiers du projet"
+msgstr "Étiquettes de projet"
 
 #: plugins/projectlabels/www/index.php:23
 #, php-format
 msgid "Cannot insert new label: %s"
-msgstr ""
+msgstr "Échec lors de l'insertion d'une nouvelle étiquette : %s"
 
 #: plugins/projectlabels/www/index.php:26
-#, fuzzy
 msgid "Project label added."
-msgstr "Projets ajoutés"
+msgstr "Étiquette de projet ajoutée."
 
 #: plugins/projectlabels/www/index.php:36
 #: plugins/projectlabels/www/index.php:43
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot delete label: %s"
-msgstr "Vous ne pouvez pas supprimer un groupe système."
+msgstr "Échec lors de la suppression d'une étiquette : %s"
 
 #: plugins/projectlabels/www/index.php:47
-#, fuzzy
 msgid "Project label deleted."
-msgstr "Liste de fichiers du projet"
+msgstr "Étiquette de projet supprimée."
 
 #: plugins/projectlabels/www/index.php:62
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot add label onto project: %s"
-msgstr "Impossible d'ajouter une base de données"
+msgstr "Impossible d'ajouter une étiquette sur le projet : %s"
 
 #: plugins/projectlabels/www/index.php:65
-#, fuzzy
 msgid "The label has been added to the project."
-msgstr "Aucun paquet de fichiers n'a été défini pour ce projet."
+msgstr "L'étiquette a été ajoutée au projet."
 
 #: plugins/projectlabels/www/index.php:74
 #, php-format
 msgid "Cannot remove label: %s"
-msgstr ""
+msgstr "Impossible d'enlever l'étiquette : %s"
 
 #: plugins/projectlabels/www/index.php:77
-#, fuzzy
 msgid "The label has been removed from the project."
-msgstr "Aucun paquet de fichiers n'a été défini pour ce projet."
+msgstr "L'étiquette a été enlevée du projet."
 
 #: plugins/projectlabels/www/index.php:88
 #, php-format
 msgid "Cannot modify label: %s"
-msgstr ""
+msgstr "Impossible de modifier l'étiquette : %s."
 
 #: plugins/projectlabels/www/index.php:91
-#, fuzzy
 msgid "Label has been saved."
-msgstr "Le message a été envoyé"
+msgstr "L'étiquette a été modifiée."
 
 #: plugins/projectlabels/www/index.php:104
-#, fuzzy
 msgid "Label name:"
-msgstr "Nom complet"
+msgstr "Nom de l'étiquette :"
 
 #: plugins/projectlabels/www/index.php:106
 #: plugins/projectlabels/www/index.php:181
 msgid "Displayed text (or HTML) for the label:"
-msgstr ""
+msgstr "Texte (ou HTML) à afficher pour cette étiquette :"
 
 #: plugins/projectlabels/www/index.php:109
 #: plugins/projectlabels/www/index.php:128
 msgid "This label currently looks like this:"
-msgstr ""
+msgstr "Cette étiquette a actuellement l'apparence suivante :"
 
 #: plugins/projectlabels/www/index.php:110
-#, fuzzy
 msgid "Save this label"
-msgstr "Sauvegarder cette position"
+msgstr "Sauvegarder cette étiquette"
 
 #: plugins/projectlabels/www/index.php:123
-#, fuzzy
 msgid "Manage labels"
-msgstr "Gestion des publications de fichiers."
+msgstr "Gestion des étiquettes de projet"
 
 #: plugins/projectlabels/www/index.php:124
 msgid "You can edit the labels that you have already created."
-msgstr ""
+msgstr "Vous pouvez éditer les étiquettes déjà créées."
 
 #: plugins/projectlabels/www/index.php:136
-#, fuzzy
 msgid "This label is used on the following group:"
 msgid_plural "This label is used on the following groups:"
-msgstr[0] "Ce développeur fait partie des groupes suivants"
-msgstr[1] "Ce développeur fait partie des groupes suivants"
+msgstr[0] "Cette étiquette est utilisée sur le groupe suivant :"
+msgstr[1] "Cette étiquette est utilisée sur les groupes suivants :"
 
 #: plugins/projectlabels/www/index.php:147
-#, fuzzy
 msgid "[Remove this label]"
-msgstr "Supprimer ce filtre"
+msgstr "[Supprimer cette étiquette]"
 
 #: plugins/projectlabels/www/index.php:150
-#, fuzzy
 msgid "This label is not used on any group."
-msgstr "Ce développeur ne fait partie d'aucun projet"
+msgstr "Cette étiquette n'est utilisée sur aucun projet."
 
 #: plugins/projectlabels/www/index.php:154
 msgid "Unix name of the project:"
-msgstr ""
+msgstr "Nom Unix du projet :"
 
 #: plugins/projectlabels/www/index.php:157
-#, fuzzy
 msgid "Add label to project"
-msgstr "Ajouter un projet"
+msgstr "Ajouter l'étiquette au projet"
 
 #: plugins/projectlabels/www/index.php:162
-#, fuzzy
 msgid "[Edit this label]"
-msgstr "Modifier la table : %1$s"
+msgstr "[Modifier cette étiquette]"
 
 #: plugins/projectlabels/www/index.php:164
-#, fuzzy
 msgid "[Delete this label]"
-msgstr "Supprimer cette tâche"
+msgstr "[Supprimer cette étiquette]"
 
 #: plugins/projectlabels/www/index.php:172
-#, fuzzy
 msgid "Add new labels"
-msgstr "Ajout d'une tâche"
+msgstr "Ajouter de nouvelles étiquettes"
 
 #: plugins/projectlabels/www/index.php:173
 msgid "You can create new labels with the form below."
 msgstr ""
+"Vous pouvez créer de nouvelles étiquettes avec le formulaire ci-dessous."
 
 #: plugins/projectlabels/www/index.php:179
 msgid "Name of the label:"
-msgstr ""
+msgstr "Nom de l'étiquette :"
 
 #: plugins/projectlabels/www/index.php:180
-#, fuzzy
 msgid "potm"
-msgstr "rapport"
+msgstr "pdm"
 
 #: plugins/projectlabels/www/index.php:183
 msgid "<p><b>Project of the month!</b></p>"
-msgstr ""
+msgstr "<p><b>Projet du mois !</b></p>"
 
 #: plugins/projectlabels/www/index.php:185
-#, fuzzy
 msgid "Add label"
-msgstr "Date d'ajout"
+msgstr "Ajouter l'étiquette"
 
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:114
 msgid "View Personal projects_hierarchy"
@@ -3155,6 +3126,8 @@ msgid ""
 "Either mount the VOB with <tt>cleartool mount %1$s</tt> or select the <tt>%1"
 "$s</tt> VOB in your ClearCase Explorer."
 msgstr ""
+"Montez le VOB avec <tt>cleartool mount %1$s</tt> ou choisissez le VOB <tt>%"
+"1$s</tt> dans votre explorateur ClearCase."
 
 #: plugins/scmccase/common/CCasePlugin.class.php:115
 #: www/project/admin/history.php:34
@@ -3178,7 +3151,7 @@ msgstr ""
 #: plugins/scmccase/common/CCasePlugin.class.php:122
 #, php-format
 msgid "<a href=\"%1$s\">Browse</a> CCase tree"
-msgstr ""
+msgstr "<a href=\"%1$s\">Parcourir</a> l'arbre ClearCase"
 
 #: plugins/scmccase/common/CCasePlugin.class.php:147
 msgid "ClearCase server"
@@ -3227,18 +3200,17 @@ msgid "modulename"
 msgstr "nom-du-module"
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:129
-#, fuzzy
 msgid ""
 "<p><b>Developer CVS Access via SSH</b></p><p>Only project developers can "
 "access the CVS tree via this method. SSH must be installed on your client "
 "machine. Substitute <i>modulename</i> with the proper value. Enter your site "
 "password when prompted.</p>"
 msgstr ""
-"<p><b>Accès Subversion via SSH pour les développeurs</b></p><p>Cette méthode "
+"<p><b>Accès CVS via SSH pour les développeurs</b></p><p>Cette méthode "
 "d'accès au dépôt est réservée aux développeurs du projet. SSH doit être "
-"installé sur votre poste client. La valeur <i>nom-du-développeur</i> devra "
-"être remplacée par votre identifiant de connexion. Vous pourrez avoir besoin "
-"de taper votre mot de passe.</p>"
+"installé sur votre poste client. La valeur <i>nom-du-module</i> devra être "
+"remplacée par la valeur appropriée. Vous pourrez avoir besoin de taper votre "
+"mot de passe.</p>"
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:139
 msgid ""
@@ -3274,10 +3246,11 @@ msgstr "Parcourir le dépôt CVS"
 #: plugins/scmcvs/common/CVSPlugin.class.php:213
 msgid "You project is private and so, you can't turn Anonymous Access on"
 msgstr ""
+"Ce projet est privé, et il est donc impossible d'activer l'accès anonyme."
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:216
 msgid "Enable pserver"
-msgstr "Activer l'accès par le protole pserver"
+msgstr "Activer l'accès par le protocole pserver"
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:242
 #, php-format
@@ -3306,7 +3279,6 @@ msgid "The password is 'anonsvn'"
 msgstr "Le mot de passe à fournir est « anonsvn »."
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:127
-#, fuzzy
 msgid ""
 "<p><b>Developer Subversion Access via SSH</b></p><p>Only project developers "
 "can access the SVN tree via this method. SSH must be installed on your "
@@ -3314,9 +3286,8 @@ msgid ""
 msgstr ""
 "<p><b>Accès Subversion via SSH pour les développeurs</b></p><p>Cette méthode "
 "d'accès au dépôt est réservée aux développeurs du projet. SSH doit être "
-"installé sur votre poste client. La valeur <i>nom-du-développeur</i> devra "
-"être remplacée par votre identifiant de connexion. Vous pourrez avoir besoin "
-"de taper votre mot de passe.</p>"
+"installé sur votre poste client. Vous pourrez avoir besoin de taper votre "
+"mot de passe.</p>"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:133
 msgid ""
@@ -3332,16 +3303,14 @@ msgstr ""
 "de taper votre mot de passe.</p>"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:139
-#, fuzzy
 msgid ""
 "<p><b>Developer Subversion Access via DAV</b></p><p>Only project developers "
 "can access the SVN tree via this method. Enter your site password when "
 "prompted.</p>"
 msgstr ""
 "<p><b>Accès Subversion via DAV pour les développeurs</b></p><p>Cette méthode "
-"d'accès au dépôt est réservée aux développeurs du projet. La valeur <i>nom-"
-"du-développeur</i> devra être remplacée par votre identifiant de connexion. "
-"Vous pourrez avoir besoin de taper votre mot de passe.</p>"
+"d'accès au dépôt est réservée aux développeurs du projet. Vous pourrez "
+"avoir besoin de taper votre mot de passe.</p>"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:145
 msgid ""
@@ -3562,7 +3531,6 @@ msgstr ""
 "corriger sur la page précédente."
 
 #: www/account/editsshkeys.php:77
-#, fuzzy
 msgid ""
 "<p>To avoid having to type your password every time for your CVS/SSH "
 "developer account, you may upload your public key(s) here and they will be "
@@ -3576,13 +3544,14 @@ msgid ""
 msgstr ""
 "<p>Pour éviter d'avoir à saisir votre mot de passe à chaque fois que vous "
 "utilisez votre compte CVS/SSH, vous pouvez déposer votre clé publique ici et "
-"elles seront placées sur le serveur CVS dans votre fichier ~/.ssh/"
-"authorized_keys. Cette opération s'effectue à l'aide d'une tâche programmée "
-"et n'est donc pas instantanée. Attendez vous à un délai d'une heure.</"
-"p><p>Pour générer une clé publique, utilisez le programme ssh-keygen. La clé "
-"publique sera placée dans '~/.ssh/identity.pub' (protocole 1) et dans '~/."
-"ssh/id_dsa.pub' ou '~/.ssh/id_rsa.pub' (protocole 2). Consultez la "
-"documentation de SSH pour plus d'informations sur le partage de clés.</p>"
+"elles seront placées sur le serveur CVS dans votre fichier "
+"~/.ssh/authorized_keys. Cette opération s'effectue à l'aide d'une tâche "
+"programmée et n'est donc pas instantanée. Attendez vous à un délai d'une "
+"heure.</p><p>Pour générer une clé publique, utilisez le programme \"ssh-"
+"keygen\". La clé publique sera placée dans \"~/.ssh/identity.pub\" (protocole "
+"1) et dans \"~/.ssh/id_dsa.pub\" ou \"~/.ssh/id_rsa.pub\" (protocole 2). "
+"Consultez la documentation de SSH pour plus d'informations sur le partage de "
+"clés.</p>"
 
 #: www/account/editsshkeys.php:81
 msgid ""
@@ -3649,9 +3618,8 @@ msgid "Account options:"
 msgstr "Options du compte"
 
 #: www/account/index.php:108
-#, fuzzy
 msgid "View My Profile"
-msgstr "Affichage d'un profil de développeur"
+msgstr "Afficher mon profil"
 
 #: www/account/index.php:110
 msgid "Edit My Skills Profile"
@@ -4127,9 +4095,8 @@ msgstr ""
 "activé pour l'identification standard.</p>"
 
 #: www/activity/index.php:23
-#, fuzzy
 msgid "%Y-%m-%d"
-msgstr "d/m/Y"
+msgstr "%d/%m/%Y"
 
 #: www/activity/index.php:70 www/activity/index.php:145
 #: www/activity/index.php:193 www/include/Layout.class.php:554
@@ -4687,9 +4654,8 @@ msgid "Register a New User"
 msgstr "Enregistrer un nouvel utilisateur"
 
 #: www/admin/index.php:70
-#, fuzzy
 msgid "Project Maintenance"
-msgstr "Gestion des groupes"
+msgstr "Gestion des projets"
 
 #: www/admin/index.php:76
 #, php-format
@@ -4707,14 +4673,12 @@ msgid "Pending projects: <strong>%1$s</strong>"
 msgstr "Projets en attente : <strong>%1$s</strong>"
 
 #: www/admin/index.php:90
-#, fuzzy
 msgid "Display Full Project List/Edit Projects"
-msgstr "Afficher/Éditer les groupes"
+msgstr "Afficher la liste complète des projets ou éditer les projets"
 
 #: www/admin/index.php:92
-#, fuzzy
 msgid "Display Projects Beginning with :"
-msgstr "Afficher les groupes commençant par :&nbsp;"
+msgstr "Afficher les projets commençant par :"
 
 #: www/admin/index.php:99
 msgid "Search <em>(groupid, group unix name, full name)</em>"
@@ -4725,9 +4689,8 @@ msgid "Register New Project"
 msgstr "Nouveau projet"
 
 #: www/admin/index.php:108 www/admin/index.php:110
-#, fuzzy
 msgid "Projects with status"
-msgstr "Groupes au statut"
+msgstr "Projets au statut"
 
 #: www/admin/index.php:108
 msgid "(New Project Approval)"
@@ -4738,9 +4701,8 @@ msgid "Hold (H)"
 msgstr "Réservé (H)"
 
 #: www/admin/index.php:120
-#, fuzzy
 msgid "Private Projects"
-msgstr "Groupes privés"
+msgstr "Projets privés"
 
 #: www/admin/index.php:127
 msgid "Approve/Reject"
@@ -5922,7 +5884,6 @@ msgid "Go back"
 msgstr "Retour"
 
 #: www/export/search_plugin.php:18
-#, fuzzy
 msgid "Search in project"
 msgstr "Chercher dans le projet entier"
 
@@ -6520,18 +6481,16 @@ msgstr ""
 "ses fichiers !"
 
 #: www/frs/admin/editrelease.php:104
-#, fuzzy
 msgid "Release Notes Are not in Text"
-msgstr "Notes de version trop courtes"
+msgstr "Les notes de version doivent être du texte."
 
 #: www/frs/admin/editrelease.php:109
 msgid "Release Notes Are Too Small"
 msgstr "Notes de version trop courtes"
 
 #: www/frs/admin/editrelease.php:123
-#, fuzzy
 msgid "Change Log Is not in Text"
-msgstr "Journal trop petit."
+msgstr "Le journal des modifications doit être du texte."
 
 #: www/frs/admin/editrelease.php:128
 msgid "Change Log Is Too Small"
@@ -6966,9 +6925,8 @@ msgid "Monitoring Has Been Started"
 msgstr "Le suivi a démarré"
 
 #: www/frs/reporting/downloads.php:90
-#, fuzzy
 msgid "File Release Reporting"
-msgstr "Fichier mis à jour"
+msgstr "Rapports sur le système de publication de fichiers"
 
 #: www/frs/reporting/downloads.php:106 www/project/stats/index.php:61
 #: www/reporting/groupadded.php:58 www/reporting/groupcum.php:58
@@ -7507,9 +7465,8 @@ msgstr ""
 "cliquer deux fois."
 
 #: www/include/features_boxes.php:20
-#, fuzzy
 msgid "Tag Cloud"
-msgstr "Élément de suivi fermé"
+msgstr "Nuage d'étiquettes"
 
 #: www/include/features_boxes.php:24 www/include/features_boxes.php:26
 #, php-format
@@ -7577,9 +7534,8 @@ msgid "My Personal Page"
 msgstr "Ma page personnelle"
 
 #: www/include/html.php:661
-#, fuzzy
 msgid "Trackers dashboard"
-msgstr "Traceur mis à jour"
+msgstr "Tableau de bord des outils de suivi"
 
 #: www/include/html.php:662
 msgid "Diary &amp; Notes"
@@ -7610,14 +7566,12 @@ msgstr "Ce projet n'a pas encore soumis de description."
 
 #: www/include/project_home.php:61 www/project/admin/editgroupinfo.php:136
 #: www/project/admin/index.php:203 www/softwaremap/tag_cloud.php:160
-#, fuzzy
 msgid "Tags"
-msgstr "Tâche"
+msgstr "Étiquettes"
 
 #: www/include/project_home.php:67 www/include/project_home.php:70
-#, fuzzy
 msgid "No tag defined for this project"
-msgstr "Ce projet n'a pas d'offres en cours."
+msgstr "Ce projet n'a pas défini d'étiquettes."
 
 #: www/include/project_home.php:81 www/softwaremap/tag_cloud.php:180
 #: www/softwaremap/trove_list.php:316
@@ -8001,6 +7955,8 @@ msgstr "Sondage non trouvé"
 #: www/index_std.php:8
 msgid "FusionForge helps you manage the entire development life cycle"
 msgstr ""
+"FusionForge vous aide à suivre l'intégralité de votre cycle de "
+"développement."
 
 #: www/index_std.php:11
 msgid ""
@@ -8010,6 +7966,12 @@ msgid ""
 "repository and controls access to it depending on the role settings of the "
 "project."
 msgstr ""
+"FusionForge propose des outils pour faciliter la collaboration au sein de "
+"votre équipe de développement, avec des forums et des listes de diffusion, "
+"et des outils pour créer et contrôler l'accès à des systèmes de gestion de "
+"code source comme CVS et Subversion.  FusionForge crée automatiquement les "
+"dépôts et règle le contrôle d'accès en fonction des rôles définis à "
+"l'intérieur du projet."
 
 #: www/index_std.php:14
 msgid "Additional Features:"
@@ -8286,16 +8248,15 @@ msgstr "Page personnelle de %s"
 
 #: www/my/dashboard.php:46
 msgid "All trackers for my projects"
-msgstr ""
+msgstr "Tous les outils de suivi de mes projets"
 
 #: www/my/dashboard.php:62 www/my/index.php:414
 msgid "You're not a member of any active projects"
 msgstr "Vous ne faites partie d'aucun projet."
 
 #: www/my/dashboard.php:79
-#, fuzzy
 msgid "Changed"
-msgstr "Changement"
+msgstr "Modifié."
 
 #: www/my/dashboard.php:83 www/my/index.php:75 www/my/index.php:118
 #: www/my/index.php:167 www/pm/add_task.php:53 www/pm/browse_task.php:91
@@ -8341,10 +8302,10 @@ msgstr "Item ajouté."
 #: www/my/diary.php:87
 #, php-format
 msgid "[%s User Notes: %s] %s"
-msgstr ""
+msgstr "[Journal d'utilisateur %s : %s] %s"
 
 #: www/my/diary.php:92
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "\n"
 "\n"
@@ -8354,20 +8315,25 @@ msgid ""
 "\n"
 "%s\n"
 msgstr ""
-"Vous recevez ce message suite à votre choix de surveiller ce forum.\n"
+"\n"
+"\n"
+"______________________________________________________________________\n"
+"Vous recevez ce message suite à votre choix de surveiller le journal de cet "
+"utilisateur.\n"
 "Pour interrompre la surveillance, connectez-vous à %s et suivez ce lien :\n"
+"\n"
 "%s\n"
 
 #: www/my/diary.php:105
 #, php-format
 msgid "email sent to %s monitoring user"
 msgid_plural "email sent to %s monitoring users"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "message de notification envoyé à %s utilisateur."
+msgstr[1] "message de notification envoyé à %s utilisateurs."
 
 #: www/my/diary.php:110
 msgid "email not sent - no one monitoring"
-msgstr ""
+msgstr "aucun message de notification envoyé (personne ne surveille)."
 
 #: www/my/diary.php:122
 msgid "Error Adding Item"
@@ -8443,19 +8409,16 @@ msgid "Remove"
 msgstr "Enlever"
 
 #: www/my/index.php:217
-#, fuzzy
 msgid "Monitored trackers"
-msgstr "Éléments surveillés"
+msgstr "Outils de suivi surveillés"
 
 #: www/my/index.php:273
-#, fuzzy
 msgid "Stop monitoring"
 msgstr "Arrêter la surveillance"
 
 #: www/my/index.php:283
-#, fuzzy
 msgid "You are not monitoring any trackers."
-msgstr "Vous ne surveillez pas de fichier."
+msgstr "Vous ne surveillez pas d'outil de suivi."
 
 #: www/my/index.php:295
 msgid "Monitored Forums"
@@ -8474,9 +8437,8 @@ msgid "My Bookmarks"
 msgstr "Mes favoris"
 
 #: www/my/index.php:365
-#, fuzzy
 msgid "Add bookmark"
-msgstr "Édition d'un favori"
+msgstr "Ajouter un favori"
 
 #: www/my/index.php:371
 msgid "You currently do not have any bookmarks saved."
@@ -10689,7 +10651,6 @@ msgstr ""
 "strong></s>"
 
 #: www/register/projectinfo.php:139
-#, fuzzy
 msgid ""
 "<h3>3. Project Public Description</h3><p>This is the description of your "
 "project which will be shown on the Project Summary page, in search results, "
@@ -10697,14 +10658,14 @@ msgid ""
 "description (step 2), so feel free to use concise and catchy wording. "
 "Maximum length is 255 chars.</p>"
 msgstr ""
-"<h3>4. Description publique du projet</h3><p>C'est la description de votre "
+"<h3>3. Description publique du projet</h3><p>C'est la description de votre "
 "projet qui apparaîtra sur la page 'résumé du projet', dans les résultats des "
 "recherches, etc. Elle ne doit pas être aussi précise et étendue que la "
 "description du projet (étape 2), donc permettez-vous des formulation "
 "concises et des abréviations. La longueur maximale est de 255 caractères."
 
 #: www/register/projectinfo.php:146
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "<h3>4. Project Unix Name</h3>In addition to full project name, you will need "
 "to choose short,\"Unix\" name for your project.<p/> The \"Unix Name\" has "
@@ -10720,21 +10681,23 @@ msgid ""
 "unixname.%1$s</tt></li><li>Shell access to <tt>unixname.%1$s</tt></"
 "li><li>Search engines throughout the site</li></ul><p/>Unix Name:<br/>"
 msgstr ""
-"<h3>5. Nom Unix du projet</h3>\n"
-"<p>En plus du nom complet du projet, vous devez choisir un nom « Unix » court."
-"</p><p>Du fait de son utilisation à de nombreux endroits sur le site, le « "
-"nom Unix » est soumis à plusieurs restrictions :</p><ul><li>Il doit être "
-"unique</li><li>Il doit comprendre entre 3 et 15 caractères</li><li>Il ne "
-"peut contenir que des lettres (minuscules), des chiffres et des tirets</"
-"li><li>Il ne peut être choisi parmi certains noms réservés</li><li>Il ne "
-"changera pas tout au long de la vie du projet</li></ul>\n"
-"<p>Ce nom Unix est important, car il est utilisé des manières suivantes :</"
-"p>\n"
-"<ul><li>Pour construire l'adresse du site web du projet, <tt>nom-unix.%1$s</"
-"tt></li><li>Pour utiliser CVS, dans <tt>/cvsroot/nom-unix</tt> sur <tt>cvs."
-"nom-unix.%1$s</tt> (ou équivalent pour un autre système de suivi de version)"
-"</li><li>Pour obtenir un accès shell sur <tt>nom-unix.%1$s</tt></li><li>Pour "
-"les recherches partout dans le site</li></ul><p>Nom Unix<br/>"
+"<h3>4. Nom Unix du projet</h3>\n"
+"<p>En plus du nom complet du projet, vous devez choisir un nom « Unix » "
+"court.</p><p>Du fait de son utilisation à de nombreux endroits sur le site, "
+"le « nom Unix » est soumis à plusieurs restrictions :</p><ul><li>Il doit "
+"être unique</li><li>Il doit comprendre entre 3 et 15 caractères</li><li>Il "
+"ne peut contenir que des lettres (minuscules), des chiffres et des "
+"tirets</li><li>Il ne peut être choisi parmi certains noms "
+"réservés</li><li>Il ne changera pas tout au long de la vie du "
+"projet</li></ul>\n"
+"<p>Ce nom Unix est important, car il est utilisé des manières "
+"suivantes :</p>\n"
+"<ul><li>Pour construire l'adresse du site web du projet, <tt>nom-unix.%"
+"1$s</tt></li><li>Pour utiliser CVS, dans <tt>/cvsroot/nom-unix</tt> sur "
+"<tt>cvs.nom-unix.%1$s</tt> (ou équivalent pour un autre système de suivi de "
+"version)</li><li>Pour obtenir un accès shell sur <tt>nom-unix.%"
+"1$s</tt></li><li>Pour les recherches partout dans le site</li></ul><p>Nom "
+"Unix :<br/>"
 
 #: www/register/projectinfo.php:156
 #, php-format
@@ -11725,39 +11688,39 @@ msgstr "Coller le code ici"
 #: www/softwaremap/full_list.php:54 www/softwaremap/tag_cloud.php:59
 #: www/softwaremap/trove_list.php:53
 msgid "Tag cloud"
-msgstr ""
+msgstr "Nuage d'étiquettes"
 
 #: www/softwaremap/full_list.php:63 www/softwaremap/tag_cloud.php:68
 #: www/softwaremap/trove_list.php:62
-#, fuzzy
 msgid "Project List"
-msgstr "Projet %s"
+msgstr "Liste de projets"
 
 #: www/softwaremap/full_list.php:92 www/softwaremap/tag_cloud.php:109
-#, fuzzy, php-format
+#, php-format
 msgid "<strong>%1$s</strong> projects in result set."
-msgstr "<strong>%1$s</strong> projet trouvé."
+msgstr "<strong>%1$s</strong> projets trouvés."
 
 #: www/softwaremap/full_list.php:96
-#, fuzzy, php-format
+#, php-format
 msgid " Displaying %1$s per page. Projects sorted by alphabetical order."
-msgstr "Affichage de %d projet par page. Projets triés par niveau d'activité."
+msgstr ""
+"Affichage de %1$s projet par page. Projets triés par ordre alphabétique."
 
 #: www/softwaremap/full_list.php:146
-#, fuzzy
 msgid "Register Date:"
-msgstr "Inscrit"
+msgstr "Date d'enregistrement :"
 
 #: www/softwaremap/tag_cloud.php:106
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "More than <strong>%1$s</strong> projects have <strong>%2$s</strong> as tag."
-msgstr "(<strong>%1$s</strong> ouvert sur un total de <strong>%2$s</strong>)"
+msgstr ""
+"L'étiquette <strong>%2$s</strong> est utilisée sur plus de de <strong>%"
+"1$s</strong> projets."
 
 #: www/softwaremap/trove_list.php:314
-#, fuzzy
 msgid "Activity Ranking:&nbsp;"
-msgstr "Taux d'activité&nbsp;:&nbsp;"
+msgstr "Rang d'activité&nbsp;:&nbsp;"
 
 #: www/source.php:23
 msgid "Missing File Argument"
@@ -11914,9 +11877,8 @@ msgid "Subdomain"
 msgstr "Sous-domaines"
 
 #: www/stats/site_stats_utils.php:317
-#, fuzzy
 msgid "Checkouts"
-msgstr "Cases à cocher"
+msgstr "Extractions"
 
 #: www/stats/site_stats_utils.php:366
 msgid "Query returned no valid data."
