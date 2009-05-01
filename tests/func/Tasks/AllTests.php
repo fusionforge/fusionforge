@@ -50,8 +50,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 require_once 'PHPUnit/Framework.php';
 require_once 'PHPUnit/TextUI/TestRunner.php';
  
-require_once 'Tasks/csv.php';
-// ...
+require_once dirname(__FILE__).'/csv.php';
  
 class Tasks_AllTests
 {

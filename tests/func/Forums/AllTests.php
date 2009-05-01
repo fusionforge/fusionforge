@@ -50,8 +50,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 require_once 'PHPUnit/Framework.php';
 require_once 'PHPUnit/TextUI/TestRunner.php';
  
-require_once 'Forums/forums.php';
-// ...
+require_once dirname(__FILE__).'/forums.php';
  
 class Forums_AllTests
 {

@@ -43,7 +43,7 @@
  * ALONE BASIS."
  */
 
-require_once 'config.php';
+require_once 'func/config.php';
 require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
 
 // New class to use, next one is now obsolete.
@@ -51,7 +51,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 {
     protected function setUp()
     {
-	if (defined(DB_INIT_CMD)) {
+	if (defined('DB_INIT_CMD')) {
 		// Reload a fresh database before running this test suite.
 		system(DB_INIT_CMD);
 	}

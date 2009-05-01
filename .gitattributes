@@ -3700,6 +3700,7 @@ packaging/tag_packaging_create -text
 packaging/tag_packaging_delete -text
 tests/AllFullTests.php -text
 tests/AllTests.php -text
+tests/TarCentos52Tests.php -text
 tests/build/packages/AllTests.php -text
 tests/build/packages/BuildTests.php -text
 tests/code/syntax/AllTests.php -text
@@ -3717,8 +3718,14 @@ tests/func/Site/top.php -text
 tests/func/Tasks/AllTests.php -text
 tests/func/Tasks/csv.php -text
 tests/func/Testing/SeleniumGforge.php -text
+tests/func/Testing/SeleniumRemoteSuite.php -text
 tests/func/config.php.sample -text
+tests/func/config.php.tests -text
 tests/func/db_reload.php -text
+tests/scripts/start_vm.sh -text
+tests/scripts/start_vz.sh -text
+tests/scripts/stop_vm.sh -text
+tests/scripts/stop_vz.sh -text
 tests/unit/AllTests.php -text
 tests/unit/utils/AllTests.php -text
 tests/unit/utils/UtilsTests.php -text

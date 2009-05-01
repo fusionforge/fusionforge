@@ -1,0 +1,31 @@
+<?php
+/*
+ * DANGER DANGER DANGER DANGER DANGER DANGER DANGER DANGER DANGER 
+ * DANGER DANGER DANGER DANGER DANGER DANGER DANGER DANGER DANGER 
+ * 
+ * Running the test suite will drop your current database, this is
+ * to be used only on test environment.
+ * 
+ * DANGER DANGER DANGER DANGER DANGER DANGER DANGER DANGER DANGER 
+ * DANGER DANGER DANGER DANGER DANGER DANGER DANGER DANGER DANGER 
+ */
+
+// Host where selenium-rc is running
+define ('SELENIUM_RC_HOST', '192.168.0.204');
+
+// URL to access the application
+define ('URL', 'http://centos52.local/');
+
+// Base URL where FusionForge is installed
+define ('BASE', '');
+
+// Database connection parameters.
+define('DB_TYPE', 'pgsql');         // Values: mysql, pgsql
+define('DB_NAME', 'fforge');
+define('DB_USER', 'gforge');
+define('DB_PASSWORD', '@@FFDB_PASS@@');
+define('DB_INIT_CMD', "ssh root@centos52 'cd /tmp; php db_reload.php'");
+
+// Enter true when file is configured.
+define('CONFIGURED', true);
+?>

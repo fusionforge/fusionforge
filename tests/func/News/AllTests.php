@@ -51,7 +51,6 @@ require_once 'PHPUnit/Framework.php';
 require_once 'PHPUnit/TextUI/TestRunner.php';
  
 require_once dirname(__FILE__).'/news.php';
-// ...
  
 class News_AllTests
 {

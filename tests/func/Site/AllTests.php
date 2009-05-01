@@ -50,10 +50,9 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 require_once 'PHPUnit/Framework.php';
 require_once 'PHPUnit/TextUI/TestRunner.php';
  
-require_once 'Site/projects.php';
-require_once 'Site/top.php';
-require_once 'Site/login.php';
-// ...
+require_once dirname(__FILE__).'/projects.php';
+require_once dirname(__FILE__).'/top.php';
+require_once dirname(__FILE__).'/login.php';
  
 class Site_AllTests
 {
