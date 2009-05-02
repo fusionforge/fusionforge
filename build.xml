@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="fusionforge-trunk" default="build" basedir="..">
+  <target name="build" depends="clean,checkout,php-documentor,php-codesniffer,phpunit"/>
+  <target name="clean">
+    <exec executable="find" dir="${basedir}/build" failonerror="on">
+      <arg line="packages/ -type f -delete"/>
+    </exec>
+  </target>
+  <target name="checkout">
+    <exec executable="svn" dir="${basedir}/source" failonerror="on">
+      <arg line="up"/>
+    </exec>
+  </target>
+  <target name="php-documentor">
+    <exec executable="phpdoc" dir="${basedir}/source/gforge/common" logerror="on">
+      <arg line="--title '${ant.project.name}' -ue on -t ${basedir}/build/api -d . -tb '/usr/share/php/data/phpUnderControl/data/phpdoc' -o HTML:Phpuc:phpuc"/>
+    </exec>
+  </target>
+  <target name="php-codesniffer">
+    <exec executable="phpcs" dir="${basedir}/source/gforge/common" output="${basedir}/build/logs/checkstyle.xml" error="/tmp/checkstyle.error.log">
+      <arg line="--report=checkstyle --tab-width=4 --standard=PEAR ."/>
+    </exec>
+  </target>
+  <target name="phpunit">
+    <exec executable="phpunit" dir="${basedir}/source/tests" failonerror="on">
+      <arg line=" --log-xml ${basedir}/build/logs/phpunit.xml
+	--log-pmd ${basedir}/build/logs/phpunit.pmd.xml
+	--log-metrics ${basedir}/build/logs/phpunit.metrics.xml
+	--coverage-xml  ${basedir}/build/logs/phpunit.coverage.xml
+	--coverage-html ${basedir}/build/coverage
+	AllFullTests.php"/>
+    </exec>
+    <exec executable="phpunit" dir="${basedir}/source/tests" failonerror="on">
+      <arg line=" --log-xml ${basedir}/build/logs/phpunit2.xml
+	--log-pmd ${basedir}/build/logs/phpunit2.pmd.xml
+	--log-metrics ${basedir}/build/logs/phpunit2.metrics.xml
+	--coverage-xml  ${basedir}/build/logs/phpunit2.coverage.xml
+	--coverage-html ${basedir}/build/coverage2
+	TarCentos52Tests.php"/>
+    </exec>
+  </target>
+</project>
