@@ -107,6 +107,7 @@ class ArtifactFactory extends Error {
 			$_extra_fields=array();
 		}
 
+		$_changed=0;
 		if (!$set) {
 			/*
 				if no set is passed in, see if a preference was set
