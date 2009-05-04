@@ -2,7 +2,8 @@
 # debian/rules that uses debhelper.
 # GNU copyright 1997 to 1999 by Joey Hess (sample file)
 # Copyright 2000 to 2002 by Roland Mas and Christian Bayle for the Sourceforge package
-# Copyright 2002 to 2003 by Roland Mas and Christian Bayle for the Gforge package
+# Copyright 2002 to 2008 by Roland Mas and Christian Bayle for the Gforge package
+# Copyright 2008 to 2009 by Roland Mas and Christian Bayle for the FusionForge package
 
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
@@ -10,8 +11,7 @@
 PACKAGE=gforge
 include /usr/share/dpatch/dpatch.make
 
-# This one should be declared like other when it will be unified with rpm
-CRONFILESLIST=debian/$(PACKAGE)-lists-mailman.cron.d debian/$(PACKAGE)-web-apache2.cron.d debian/$(PACKAGE)-db-postgresql.cron.d debian/$(PACKAGE)-dns-bind9.cron.d debian/$(PACKAGE)-plugin-scmcvs.cron.d debian/$(PACKAGE)-ftp-proftpd.cron.d debian/$(PACKAGE)-shell-postgresql.cron.d debian/$(PACKAGE)-plugin-scmsvn.cron.d
+CRONFILESLIST=$(patsubst cron.d/%,debian/$(PACKAGE)-%.cron.d,$(wildcard cron.d/[a-z]*))
 DIRSFILESLIST=$(patsubst dirs/%,debian/$(PACKAGE)-%.dirs,$(wildcard dirs/[a-z]*))
 INSTALLFILESLIST=$(patsubst install/%,debian/$(PACKAGE)-%.install,$(wildcard install/[a-z]*))
 
@@ -21,10 +21,6 @@ listecho:
 	@echo $(INSTALLFILESLIST)
 
 remove-binary-files:
-	# Remove files in contrib, especially binaries that break dpkg-source
-#	find contrib/ -name CVS -prune -not -name CVS -or -type f | xargs rm -f
-	# Also a few images
-#	rm -f www/themes/gforge/images/es_*
 	sh $(CURDIR)/deb-specific/manage-uufiles.sh clean
 
 cronfiles: $(CRONFILESLIST)
