@@ -36,14 +36,7 @@ installfiles: $(INSTALLFILESLIST)
 conffiles: cronfiles dirsfiles installfiles
 
 debian/$(PACKAGE)-%.cron.d:
-	@echo "Creating $@"
-	@if [ "$@" = "debian/$(PACKAGE)-db-postgresql.cron.d" ] ; then \
-	cat $(CURDIR)/cron.d/00phpcron > $@ ; \
-	cat $(CURDIR)/cron.d/db-postgresql >> $@ ; \
-	else \
-		echo "copy $(CURDIR)/cron.d/$* to $@" ; \
-		cp $(CURDIR)/cron.d/$* $@ ; \
-	fi
+	sed -e 's/\$$FFUSER/gforge/g' $(CURDIR)/cron.d/$* > $@
 
 debian/$(PACKAGE)-%.dirs:
 	@echo "Creating $@"
