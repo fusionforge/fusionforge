@@ -21,13 +21,14 @@ gforge (4.8~rc1-1) experimental; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Tue, 28 Apr 2009 15:33:18 +0200
 
-gforge (4.7.2-7+1) unstable; urgency=low
+gforge (4.7.2-7+2) unstable; urgency=low
 
   * Added watch file.
+  * Fixed copyright file to mention FusionForge.
   * Fixed group join request only sending a notification email to one of
     the project admins.
 
- -- Roland Mas <lolando@debian.org>  Tue, 28 Apr 2009 21:28:27 +0200
+ -- Roland Mas <lolando@debian.org>  Mon, 04 May 2009 18:35:41 +0200
 
 gforge (4.7.2-7) unstable; urgency=low
 

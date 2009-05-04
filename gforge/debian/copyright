@@ -3,11 +3,21 @@ The "sourceforge" package was first debianised on Wed, 22 Nov 2000
 constant since then, and the package evolved a great deal.  It began
 to work, for a start, and then it evolved into GForge, what with the
 more recent versions of the Sourceforge software having been made
-proprietary.
+proprietary.  And then in early 2009 it evolved into FusionForge, what
+with the more recent versions of GForge having been rewritten as
+proprietary software without a name change.
+
+FusionForge is Copyright © 2009 by several people, including:
+Alain Peyrat            <aljeux@free.fr>
+Alexandre Neymann       <alexandre.neymann@dgfip.finances.gouv.fr>
+Christian Bayle         <bayle@debian.org>
+Roland Mas              <lolando@debian.org>
+Gonéri Le Bouder        <goneri.lebouder@atosorigin.com>
+Julien Heyman 		<julien.heyman@atosorigin.com>
+Olivier Meunier 	<olivier.meunier@centraliens.net>
 
 GForge itself is Copyright © 2000-2008 by a fair number of people,
 including:
-
 Tim Perdue              <tim@gforge.org>
 Roland Mas              <99.roland.mas@aist.enst.fr>
 Christian Bayle         <gforge@free.fr>
@@ -23,8 +33,8 @@ Ryan T. Sammartino
 Edward Ritter
 Michael Jennings
 
-Since GForge is initially a fork of Sourceforge, here's the copyright
-info for the Sourceforge software:
+Since FusionForge, and GForge before it, was initially a fork of
+Sourceforge, here's the copyright info for the Sourceforge software:
 ,----
 | The original sources were downloaded from http://www.sourceforge.net/
 | 
