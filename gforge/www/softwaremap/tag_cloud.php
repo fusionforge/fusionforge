@@ -57,16 +57,16 @@ $subMenuUrl = array();
 
 if ($GLOBALS['sys_use_project_tags']) {
 	$subMenuTitle[] = _('Tag cloud');
-	$subMenuUrl[] = util_make_url ('/softwaremap/tag_cloud.php');
+	$subMenuUrl[] = '/softwaremap/tag_cloud.php';
 }
 
 if ($GLOBALS['sys_use_trove']) {
 	$subMenuTitle[] = _('Project Tree');
-	$subMenuUrl[] = util_make_url ('/softwaremap/trove_list.php');
+	$subMenuUrl[] = '/softwaremap/trove_list.php';
 }
 
 $subMenuTitle[] = _('Project List');
-$subMenuUrl[] = util_make_url ('/softwaremap/full_list.php');
+$subMenuUrl[] = '/softwaremap/full_list.php';
 
 echo ($HTML->subMenu($subMenuTitle, $subMenuUrl));
 
