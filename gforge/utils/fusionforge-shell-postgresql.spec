@@ -6,7 +6,7 @@
 
 Summary: collaborative development tool - shell accounts (using PostgreSQL)
 Name: fusionforge-shell-postgresql
-Version: 4.7
+Version: 4.8
 Release: %{release}
 BuildArch: noarch
 License: GPL
