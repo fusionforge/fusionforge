@@ -32,7 +32,7 @@ installfiles: $(INSTALLFILESLIST)
 conffiles: cronfiles dirsfiles installfiles
 
 debian/$(PACKAGE)-%.cron.d:
-	sed -e 's/\$$FFUSER/gforge/g' $(CURDIR)/cron.d/$* > $@
+	(cat $(CURDIR)/cron.d/00phpcron ; sed -e 's/\$$FFUSER/gforge/g' $(CURDIR)/cron.d/$*) > $@
 
 debian/$(PACKAGE)-%.dirs:
 	@echo "Creating $@"
