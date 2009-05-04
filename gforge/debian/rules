@@ -33,7 +33,7 @@ conffiles: cronfiles dirsfiles installfiles gencontrol
 
 debian/$(PACKAGE)-%.cron.d:
 	@echo "Creating $@"
-	sed -e 's/\$$FFUSER/gforge/g' $(CURDIR)/packaging/cron.d/$* > $@
+	(cat $(CURDIR)/packaging/cron.d/00phpcron ; sed -e 's/\$$FFUSER/gforge/g' $(CURDIR)/packaging/cron.d/$*) > $@
 
 debian/$(PACKAGE)-%.dirs:
 	@echo "Creating $@"
