@@ -1,8 +1,10 @@
-gforge (4.8~rc1-1+1) experimental; urgency=low
+gforge (4.8~rc1-1+2) experimental; urgency=low
 
   * New upstream snapshot.
+  * install-chroot.sh: do not fail if device nodes can't be created (such
+    as when operating in a vserver).
 
- -- Roland Mas <lolando@debian.org>  Tue, 28 Apr 2009 15:44:31 +0200
+ -- Roland Mas <lolando@debian.org>  Mon, 04 May 2009 15:05:23 +0200
 
 gforge (4.8~rc1-1) experimental; urgency=low
 

@@ -81,9 +81,9 @@ case "$1" in
 	cp /lib/libcom_err* $CHROOTDIR/lib
 
 	# Create devices files
-	[ -c $CHROOTDIR/dev/null ] || mknod $CHROOTDIR/dev/null c 1 3
-	[ -c $CHROOTDIR/dev/urandom ] || mknod $CHROOTDIR/dev/urandom c 1 9
-	[ -c $CHROOTDIR/dev/console ] || mknod $CHROOTDIR/dev/console c 5 1
+	[ -c $CHROOTDIR/dev/null ] || mknod $CHROOTDIR/dev/null c 1 3 || true
+	[ -c $CHROOTDIR/dev/urandom ] || mknod $CHROOTDIR/dev/urandom c 1 9 || true
+	[ -c $CHROOTDIR/dev/console ] || mknod $CHROOTDIR/dev/console c 5 1 || true
 	# For /dev/log
 	if ! grep -q "^SYSLOGD.*/var/lib/gforge/chroot/dev/log.*" /etc/default/syslogd ; then 
 		echo '######################################################################################################'
