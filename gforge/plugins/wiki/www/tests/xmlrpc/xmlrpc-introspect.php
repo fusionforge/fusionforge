@@ -17,8 +17,8 @@ function format_describe_methods_result($response) {
    $typeList = $response[typeList];
    $methodList = $response[methodList];
 
-   usort(&$typeList, "name_cmp");
-   usort(&$methodList, "name_cmp");
+   usort($typeList, "name_cmp");
+   usort($methodList, "name_cmp");
 
    if ($methodList) {
       $buf .= "<big>Methods\n<ul>";

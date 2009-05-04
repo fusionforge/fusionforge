@@ -695,7 +695,7 @@ NATSOFT.DOMAIN =
 		} else if ($type == OCI_B_BLOB){
             //we have to create a new Descriptor here
             $_blob = OCINewDescriptor($this->_connectionID, OCI_D_LOB);
-            $rez = OCIBindByName($stmt[1], ":".$name, &$_blob, -1, OCI_B_BLOB);
+            $rez = OCIBindByName($stmt[1], ":".$name, $_blob, -1, OCI_B_BLOB);
             $rez = $_blob;
 		} else {
 			if ($type !== false) $rez = OCIBindByName($stmt[1],":".$name,$var,$size,$type);

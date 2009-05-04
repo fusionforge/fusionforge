@@ -171,11 +171,11 @@ function run_easy_tests($server, $debug=0, $output = null) {
                                                                                  ));
                                                                   
     $foo = "some base64 string";
-    xmlrpc_set_type(&$foo, "base64");
+    xmlrpc_set_type($foo, "base64");
     run_test($server, $debug, $output, "interopEchoTests.echoBase64", $foo);
 
     $foo="19980717T14:08:55";
-    xmlrpc_set_type(&$foo, "datetime");
+    xmlrpc_set_type($foo, "datetime");
     run_test($server, $debug, $output, "interopEchoTests.echoDate", $foo);
    
     run_no_param_test($server, $debug, $output, "interopEchoTests.noInParams");
