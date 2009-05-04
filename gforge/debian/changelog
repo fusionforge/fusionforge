@@ -1,4 +1,4 @@
-gforge (4.8~rc1-1+2) experimental; urgency=low
+gforge (4.8~rc1-2) experimental; urgency=low
 
   * New upstream snapshot.
   * install-chroot.sh: do not fail if device nodes can't be created (such
@@ -6,7 +6,7 @@ gforge (4.8~rc1-1+2) experimental; urgency=low
   * Fixed crontab syntax for -db-postgresql (cron doesn't interpolate the
     user column itself).
 
- -- Roland Mas <lolando@debian.org>  Mon, 04 May 2009 21:08:26 +0200
+ -- Roland Mas <lolando@debian.org>  Mon, 04 May 2009 22:16:11 +0200
 
 gforge (4.8~rc1-1) experimental; urgency=low
 
