@@ -106,25 +106,29 @@ if ($selected_tag) {
 		$html_limit .= sprintf(_('More than <strong>%1$s</strong> projects have <strong>%2$s</strong> as tag.'), $TROVE_HARDQUERYLIMIT, htmlspecialchars($selected_tag));
 	}
 	else {
-		$html_limit .= sprintf(_('<strong>%1$s</strong> projects in result set.'), $querytotalcount, htmlspecialchars($selected_tag));
+		$html_limit .= sprintf(ngettext('<strong>%d</strong> project in result set.',
+						'<strong>%d</strong> projects in result set.',
+						$querytotalcount),
+				       $querytotalcount) ;
 	}
 
 	// only display pages stuff if there is more to display
 	if ($querytotalcount > $TROVE_BROWSELIMIT) {
-		$html_limit .= ' Displaying '.$TROVE_BROWSELIMIT.' per page. Projects sorted by alphabetical order.<br />';
+		$html_limit .= ' ' ;
+		$html_limit .= sprintf (ngettext ('Displaying %d project per page. Projects sorted by alphabetical order.<br />',
+						  'Displaying %d projects per page. Projects sorted by alphabetical order.<br />',
+						  $TROVE_BROWSELIMIT),
+					$TROVE_BROWSELIMIT) ;
 
 		// display all the numbers
 		for ($i=1;$i<=ceil($querytotalcount/$TROVE_BROWSELIMIT);$i++) {
 			$html_limit .= ' ';
 			if ($page != $i) {
-				$html_limit .= '<a href="'.$_SERVER['PHP_SELF'];
-				$html_limit .= '?page='.$i;
-				$html_limit .= '">';
-			} else $html_limit .= '<strong>';
-			$html_limit .= '&lt;'.$i.'&gt;';
-			if ($page != $i) {
-				$html_limit .= '</a>';
-			} else $html_limit .= '</strong>';
+				$html_limit .= util_make_link ('/softwaremap/tag_cloud.php?tag='.$selected_tag.'&page='.$i,
+							       '&lt;'.$i.'&gt;');
+			} else {
+				$html_limit .= '<strong>&lt;'.$i.'&gt;</strong>';
+			}				
 			$html_limit .= ' ';
 		}
 	}
@@ -147,8 +151,8 @@ if ($selected_tag) {
 		if ($row_grp && $viewthisrow) {
 			print '<table border="0" cellpadding="0" width="100%">';
 			print '<tr valign="top"><td colspan="2">';
-			print "<a href=\"/projects/". strtolower($row_grp['unix_group_name']) ."/\"><strong>"
-			.$row_grp['group_name']."</strong></a> ";
+			print util_make_link ('/projects/'. strtolower($row_grp['unix_group_name']).'/',
+					      '<strong>'.$row_grp['group_name'].'</strong> ');
 
 			if ($row_grp['short_description']) {
 				print "- " . $row_grp['short_description'];
@@ -175,16 +179,17 @@ if ($selected_tag) {
 				$percentile = number_format(db_result($res, 0, 'percentile'));
 				$ranking = number_format(db_result($res, 0, 'ranking'));
 			}
-			print 'Activity Percentile: <strong>'. $percentile .'</strong>';
-			print '<br />Activity Ranking: <strong>'. $ranking .'</strong>';
-			print '<br />'._('Registered:&nbsp;').' <strong>'.date(_('Y-m-d H:i'),$row_grp['register_time']).'</strong>';
+			printf ('<br />'._('Activity Percentile: <strong>%3.0f</strong>'), $percentile);
+			printf ('<br />'._('Activity Ranking: <strong>%d</strong>'), $ranking);
+			printf ('<br />'._('Registered: <strong>%s</strong>'), 
+				date(_('Y-m-d H:i'),$row_grp['register_time']));
 			print '</td></tr>';
 			/*
 			 if ($row_grp['jobs_count']) {
 			 print '<tr><td colspan="2" align="center">'
-			 .'<a href="/people/?group_id='.$row_grp['group_id'].'">[This project needs help]</a></td></td>';
+			 .util_make_link ('/people/?group_id='.$row_grp['group_id'],_("[This project needs help]")).'</td></td>';
 			 }
-			 */
+			*/
 			print '</table>';
 			print '<hr />';
 		} // end if for row and range chacking
