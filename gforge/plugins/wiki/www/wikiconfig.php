@@ -43,6 +43,7 @@
  */
 
 define('GFORGE', true);
+define('USE_BYTEA', true);
 
 define('PATH_INFO_PREFIX', '/'.$group_name . '/');
 define('USE_PATH_INFO', true);
