@@ -3248,6 +3248,7 @@ gforge/translations/th.po -text
 gforge/translations/zh_CN.po -text
 gforge/translations/zh_TW.po -text
 gforge/utils/fusionforge-shell-postgresql.spec -text
+gforge/utils/inject-users.php -text
 gforge/utils/install-nsspgsql.sh -text
 gforge/utils/manage-translations.sh -text
 gforge/www/docman/include/vtemplate.class.php -text
