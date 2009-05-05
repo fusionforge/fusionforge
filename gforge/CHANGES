@@ -1,8 +1,17 @@
 Not released yet:
 * New projectlabels plugin, to tag projects with snippets of
-  user-defined HTML
+  user-defined HTML (developed for/sponsored by Adullact)
 * New extratabs plugin, to add tabs with links to arbitrary URLs
+  (Adullact again)
 * New globalsearch, allowing cross-forge searching of projects
+* Users can log in with their email address (in addition to login
+  name) if sys_require_unique_email is true (developed for/sponsored by AdaCore)
+* Site admin can now optionally enforce the acceptance of terms of use
+  on account creation (AdaCore again)
+* Site admin can now optionnally block anonymous downloads from the
+  FRS (AdaCore again)
+* New command-line scripts to inject users, groups and file releases
+  into the database from text files (AdaCore again)
 
 FusionForge-4.8:
 * New classification by tags (aka tag cloud)
