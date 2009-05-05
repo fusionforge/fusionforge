@@ -191,7 +191,7 @@ if ($sys_use_jabber) {
 </p>
 <?php if ($GLOBALS['sys_require_accept_conditions']) { ?>
 	<p>
-	<input type="checkbox" name="accept_conditions" value="0" />
+	<input type="checkbox" name="accept_conditions" value="1" />
 	<?php printf (_('Do you accept the <a href="%1$s">terms of use</a> for this site?'),
 		      util_make_url ('/terms.php')); ?>
 	</p>
