@@ -191,7 +191,7 @@ if ($sys_use_jabber) {
 <p>
 <input type="checkbox" name="accept_conditions" value="0" />
 				    <?php printf (_('Do you accept the <a href="%1$s">terms of use</a> for this site?'),
-						  util_make_url ('/')); ?>
+						  util_make_url ('/terms.php')); ?>
 </p>
 <p>
 <?php printf(_('Fields marked with %s are mandatory.'), utils_requiredField()); ?>
