@@ -54,9 +54,9 @@ function &user_get_object_by_name($user_name,$res=false) {
  *  @return a user object or false on failure
  *
  */
-function &user_get_object_by_email($email,$res=false) {
+function user_get_object_by_email($email,$res=false) {
 	if (!validate_email($email)
-	    || $GLOBALS['sys_require_unique_email']) {
+	    || !$GLOBALS['sys_require_unique_email']) {
 		return false ;
 	}
 	if (!$res) {
