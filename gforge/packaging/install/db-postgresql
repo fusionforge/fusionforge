@@ -58,3 +58,4 @@ db/20090402-forum-attachment-types.sql  usr/share/gforge/db/
 #
 utils/inject-users.php usr/share/gforge/bin/
 utils/inject-groups.php usr/share/gforge/bin/
+utils/inject-files.php usr/share/gforge/bin/
