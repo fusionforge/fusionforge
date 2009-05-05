@@ -24,17 +24,19 @@
 require (dirname (__FILE__).'/../www/env.inc.php');
 require $gfwww.'include/squal_pre.php';
 
-db_begin();
+db_begin ();
 
 /*
  * Line format:
  * login:email:fname:lname:password
  * password is cleartext
+ * login might be optional if sys_require_unique_email is true
 */
 
 $f = fopen ('users.txt', 'r') ;
 while (! feof ($f)) {
         $l = fgets ($f, 1024);
+	if ($l == "") { continue ; } ;
 	$array = explode (':', $l, 5) ;
 	$login = $array[0] ;
 	$email = $array[1] ;
@@ -44,17 +46,21 @@ while (! feof ($f)) {
 
 	$u = new GFUser () ;
 
-	$r = $user->create($login,$fname,$lname,$password,$password,$email,
+	$r = $u->create ($login, $fname, $lname, $password, $password, $email,
 			   1, 0, 1, 'UTC', '', '', 1);
 
-	if ($r) {
-		print "Error: ". $u->getErrorMessage() . "\n" ;
+	if (!$r) {
+		print "Error: ". $u->getErrorMessage () . "\n" ;
 		exit (1) ;
+		db_rollback () ;
 	}
+
+	$u->setStatus ('A') ;
 }
 fclose ($f);
 
-db_rollback() ;
+// If everything went well so far, we can commit
+db_commit () ;
 
 // Local Variables:
 // mode: php
