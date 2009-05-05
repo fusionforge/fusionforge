@@ -219,9 +219,11 @@ class GFUser extends Error {
 			$this->setError(_('You must supply a theme'));
 			return false;
 		}
-		if (!$unix_name) {
-			$this->setError(_('You must supply a username'));
-			return false;
+		if (! $GLOBALS['sys_require_unique_email']) {
+			if (!$unix_name) {
+				$this->setError(_('You must supply a username'));
+				return false;
+			}
 		}
 		if (!$firstname) {
 			$this->setError(_('You must supply a first name'));
@@ -243,11 +245,6 @@ class GFUser extends Error {
 			$this->setError(_('Invalid Password:'));
 			return false;
 		}
-		$unix_name=strtolower($unix_name);
-		if (!account_namevalid($unix_name)) {
-			$this->setError(_('Invalid Unix Name.'));
-			return false;
-		}
 		if (!validate_email($email)) {
 			$this->setError(_('Invalid Email Address'));
 			return false;
@@ -261,8 +258,8 @@ class GFUser extends Error {
 		} else {
 			$jabber_only=1;
 		}
-		if (db_numrows(db_query_params('SELECT user_id FROM users WHERE user_name LIKE $1',
-					       array ($unix_name))) > 0) {
+		if ($unix_name && db_numrows(db_query_params('SELECT user_id FROM users WHERE user_name LIKE $1',
+							     array ($unix_name))) > 0) {
 			$this->setError(_('That username already exists.'));
 			return false;
 		}
@@ -272,6 +269,44 @@ class GFUser extends Error {
 				$this->setError(_('User with this email already exists - use people search to recover your login.'));
 				return false;
 			}
+		}
+		if ($GLOBALS['sys_require_unique_email'] && !$unix_name) {
+			// Let's generate a loginname for the user
+			// ...based on the email address:
+			$email_array = explode ('@', $email, 2) ;
+			$email_u = $email_array [0] ;
+			$l = ereg_replace ('[^a-z0-9]', '', $email_u) ;
+			$l = substr ($l, 0, 15) ;
+			// Is the user part of the email address okay?
+			if (account_namevalid($l)
+			    && db_numrows(db_query("SELECT user_id FROM users WHERE user_name = '$l'")) == 0) {
+				$unix_name = $l ;
+			} else {
+				// No? What if we add a number at the end?
+				$i = 0 ;
+				while ($i < 1000) {
+					$c = substr ($l, 0, 15-strlen ("$i")) . "$i" ;
+					if (account_namevalid($c)
+					    && db_numrows(db_query("SELECT user_id FROM users WHERE user_name = '$c'")) == 0) {
+						$unix_name = $c ;
+						break;
+					}
+					$i++ ;
+				}
+			}
+			// If we're really unlucky, then let's go brute-force
+			while (!$unix_name) {
+				$c = substr (md5($email . rand()), 0, 15) ;
+				if (account_namevalid($c)
+				    && db_numrows(db_query("SELECT user_id FROM users WHERE user_name = '$c'")) == 0) {
+					$unix_name = $c ;
+				}
+			}
+		}
+		$unix_name=strtolower($unix_name);
+		if (!account_namevalid($unix_name)) {
+			$this->setError(_('Invalid Unix Name.'));
+			return false;
 		}
 		// if we got this far, it must be good
 		$confirm_hash = substr(md5($password1 . rand() . microtime()),0,16);

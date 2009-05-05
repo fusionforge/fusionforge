@@ -111,7 +111,12 @@ if (!isset($ccode) || empty($ccode) || !preg_match('/^[a-zA-Z]{2}$/', $ccode)) {
 <form action="<?php echo util_make_url('/account/register.php'); ?>" method="post">
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 <p>
-<?php echo _('Login Name (do not use uppercase letters):'); echo utils_requiredField(); ?><br />
+<?php
+if ($GLOBALS['sys_require_unique_email']) {
+	echo _('Login Name (no uppercase letters; leave empty to have it generated automatically)');
+} else {
+	echo _('Login Name (do not use uppercase letters):'); echo utils_requiredField();
+} ?><br />
 <input type="text" name="unix_name" value="<?php print(htmlspecialchars(stripslashes($unix_name))); ?>" />
 </p>
 <p>
