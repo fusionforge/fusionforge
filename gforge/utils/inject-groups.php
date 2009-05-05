@@ -47,7 +47,7 @@ db_begin ();
 
 $f = fopen ('groups.txt', 'r') ;
 while (! feof ($f)) {
-        $l = fgets ($f, 1024);
+        $l = trim (fgets ($f, 1024)) ;
 	if ($l == "") { continue ; } ;
 	$array = explode (':', $l) ;
 	$unixname = $array[0] ;

@@ -35,7 +35,7 @@ db_begin ();
 
 $f = fopen ('users.txt', 'r') ;
 while (! feof ($f)) {
-        $l = fgets ($f, 1024);
+        $l = trim (fgets ($f, 1024)) ;
 	if ($l == "") { continue ; } ;
 	$array = explode (':', $l, 5) ;
 	$login = $array[0] ;
