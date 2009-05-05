@@ -52,8 +52,8 @@ while (! feof ($f)) {
 
 	if (!$r) {
 		print "Error: ". $u->getErrorMessage () . "\n" ;
-		exit (1) ;
 		db_rollback () ;
+		exit (1) ;
 	}
 
 	$u->setStatus ('A') ;
