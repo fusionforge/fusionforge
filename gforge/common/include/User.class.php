@@ -60,7 +60,8 @@ function user_get_object_by_email($email,$res=false) {
 		return false ;
 	}
 	if (!$res) {
-		$res=db_query("SELECT * FROM users WHERE email='$email'");
+		$res=db_query_params('SELECT * FROM users WHERE email=$1',
+				     array ($email));
 	}
 	return user_get_object(db_result($res,0,'user_id'),$res);
 }
@@ -298,7 +299,8 @@ class GFUser extends Error {
 			$l = substr ($l, 0, 15) ;
 			// Is the user part of the email address okay?
 			if (account_namevalid($l)
-			    && db_numrows(db_query("SELECT user_id FROM users WHERE user_name = '$l'")) == 0) {
+			    && db_numrows(db_query_params('SELECT user_id FROM users WHERE user_name = $1',
+							  array ($l))) == 0) {
 				$unix_name = $l ;
 			} else {
 				// No? What if we add a number at the end?
@@ -306,7 +308,8 @@ class GFUser extends Error {
 				while ($i < 1000) {
 					$c = substr ($l, 0, 15-strlen ("$i")) . "$i" ;
 					if (account_namevalid($c)
-					    && db_numrows(db_query("SELECT user_id FROM users WHERE user_name = '$c'")) == 0) {
+					    && db_numrows(db_query_params('SELECT user_id FROM users WHERE user_name = $1',
+									  array ($c))) == 0) {
 						$unix_name = $c ;
 						break;
 					}
@@ -317,7 +320,8 @@ class GFUser extends Error {
 			while (!$unix_name) {
 				$c = substr (md5($email . rand()), 0, 15) ;
 				if (account_namevalid($c)
-				    && db_numrows(db_query("SELECT user_id FROM users WHERE user_name = '$c'")) == 0) {
+				    && db_numrows(db_query_params('SELECT user_id FROM users WHERE user_name = $1',
+								  array ($c))) == 0) {
 					$unix_name = $c ;
 				}
 			}
