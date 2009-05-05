@@ -148,20 +148,37 @@ function session_login_valid_dbonly ($loginname, $passwd, $allowpending) {
 	global $feedback,$userstatus;
 
 	//  Try to get the users from the database using user_id and (MD5) user_pw
-	$res = db_query_params ('SELECT user_id,status,unix_pw FROM users WHERE user_name=$1 AND user_pw=$2',
-				array ($loginname,
-				       md5($passwd))) ;
+	if ($GLOBALS['sys_require_unique_email']) {
+		$res = db_query_params ('SELECT user_id,status,unix_pw FROM users WHERE (user_name=$1 OR email=$1) AND user_pw=$2',
+					array ($loginname,
+					       md5($passwd))) ;
+	} else {
+		$res = db_query_params ('SELECT user_id,status,unix_pw FROM users WHERE user_name=$1 AND user_pw=$2',
+					array ($loginname,
+					       md5($passwd))) ;
+		$res = db_query("
+			SELECT user_id,status,unix_pw
+			FROM users
+			WHERE user_name='$loginname'
+			AND user_pw='".md5($passwd)."'
+		");
+	}
 	if (!$res || db_numrows($res) < 1) {
 		// No user whose MD5 passwd matches the MD5 of the provided passwd
-		// Selecting by user_name only
-		$res = db_query_params ('SELECT user_id,status,unix_pw FROM users WHERE user_name=$1',
-					array ($loginname)) ;
+		// Selecting by user_name/email only
+		if ($GLOBALS['sys_require_unique_email']) {
+			$res = db_query_params ('SELECT user_id,status,unix_pw FROM users WHERE user_name=$1 OR email=$1',
+						array ($loginname)) ;
+		} else {
+			$res = db_query_params ('SELECT user_id,status,unix_pw FROM users WHERE user_name=$1',
+						array ($loginname)) ;
+		}
 		if (!$res || db_numrows($res) < 1) {
 			// No user by that name
 			$feedback=_('Invalid Password Or User Name');
 			return false;
 		} else {
-			// There is a user with the provided user_name, but the MD5 passwds do not match
+			// There is a user with the provided user_name/email, but the MD5 passwds do not match
 			// We'll have to try checking the (crypt) unix_pw
 			$usr = db_fetch_array($res);
 
