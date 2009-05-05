@@ -128,6 +128,7 @@ computedefault(){
 	DEFAULTsys_apache_user=$(findapacheowner)
 	DEFAULTsys_apache_group=$(findapacheowner)
 	DEFAULTsys_forum_return_domain=$DEFAULTdomain_name
+	DEFAULTsys_block_anonymous_downloads=false
 	#
 	# TODO
 	#usr_lib_gforge=$GFGDIR

@@ -81,6 +81,11 @@ if(!$is_public) {
 		exit_permission_denied();
 	}
 }
+if ($GLOBALS['sys_block_anonymous_downloads']) {
+	if (!session_loggedin()) {
+		exit_permission_denied();
+	}
+}
 
 $filepath=$sys_upload_dir.'/'.$Group->getUnixName().'/'.$Package->getFileName().'/'.$Release->getFileName().'/'.$File->getName();
 if (file_exists($filepath)) {
