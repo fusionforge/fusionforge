@@ -66,7 +66,7 @@ while (! feof ($f)) {
 	}
 	
 	$g = new Group () ;
-	$r = $g->create ($u, $fullname, $unixname, $description, $license, $licenseother, '', 'shell', 'scm', $is_public, false) ;
+	$r = $g->create ($u, $fullname, $unixname, $description, $license, $licenseother, 'Project injected into the database by inject-groups.php', 'shell', 'scm', $is_public, false) ;
 
 	if (!$r) {
 		print "Error: ". $g->getErrorMessage () . "\n" ;
@@ -74,7 +74,15 @@ while (! feof ($f)) {
 		exit (1) ;
 	}
 
-	$g->setStatus ('A') ;
+	$admin = user_get_object_by_name ('admin') ;
+	session_set_new ($admin->getID ()) ;
+	$r = $g->setStatus ($admin, 'A') ;
+        if (!$r) {
+                print "Error: ". $g->getErrorMessage () . "\n" ;
+                db_rollback () ;
+                exit (1) ;
+        }
+
 }
 fclose ($f);
 
