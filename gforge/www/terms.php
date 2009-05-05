@@ -49,6 +49,8 @@ $HTML->header(array('title'=> _('Terms of use')));
 <td width="35%" valign="top">
 </td></tr></table>
 
+<?php
+
 $HTML->footer(array());
 
 // Local Variables:
