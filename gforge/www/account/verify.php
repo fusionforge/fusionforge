@@ -41,6 +41,9 @@ if (getStringFromRequest('submit')) {
 	}
 
 	$u = user_get_object_by_name($loginname);
+	if (!$u && $GLOBALS['sys_require_unique_email']) {
+		$u = user_get_object_by_email ($loginname);
+	}
 	if (!$u || !is_object($u)) {
 		exit_error('Error','Could Not Get User');
 	} elseif ($u->isError()) {
@@ -91,7 +94,13 @@ if (isset($GLOBALS['error_msg'])) {
 
 <form action="<?php echo util_make_url('/account/verify.php'); ?>" method="post">
 
-<p><?php echo _('Login name:'); ?>
+<p><?php 
+if ($GLOBALS['sys_require_unique_email']) {
+	echo _('Login name or email address:');
+} else {
+	echo _('Login name:'); 
+}
+?>
 <br /><input type="text" name="loginname" /></p>
 <p><?php echo _('Password:'); ?>
 <br /><input type="password" name="passwd" /></p>
