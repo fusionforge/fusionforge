@@ -49,6 +49,7 @@ $phone = getStringFromRequest('phone');
 $fax = getStringFromRequest('fax');
 $title = getStringFromRequest('title');
 $ccode = getStringFromRequest('ccode');
+$accept_conditions = getIntFromRequest ('accept_conditions');
 
 if ($sys_use_ssl && !session_issecure()) {
 	//force use of SSL for login
@@ -66,19 +67,23 @@ if (getStringFromRequest('submit')) {
 	*/
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit();
-	}	
-	$new_user = new GFUser();
-	$register = $new_user->create($unix_name,$firstname,$lastname,$password1,$password2,
-		$email,$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,'',
-		$address,$address2,$phone,$fax,$title,$ccode);
-	if ($register) {
-		echo $HTML->header(array('title'=>'Register Confirmation'));
-
-		printf(_('<p>Congratulations. You have registered on %1$s.  <p> You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.'), $sys_name);
-		echo $HTML->footer(array());
-		exit;
+	}
+	if ($accept_conditions) {
+		$new_user = new GFUser();
+		$register = $new_user->create($unix_name,$firstname,$lastname,$password1,$password2,
+					      $email,$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,'',
+					      $address,$address2,$phone,$fax,$title,$ccode);
+		if ($register) {
+			echo $HTML->header(array('title'=>'Register Confirmation'));
+			
+			printf(_('<p>Congratulations. You have registered on %1$s.  <p> You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.'), $sys_name);
+			echo $HTML->footer(array());
+			exit;
+		} else {
+			$feedback = $new_user->getErrorMessage();
+		}
 	} else {
-		$feedback = $new_user->getErrorMessage();
+		$feedback = _("You can't register an account unless you accept the terms of use.") ;
 	}
 }
 
@@ -182,6 +187,11 @@ if ($sys_use_jabber) {
 <p>
 <input type="checkbox" name="mail_va" value="1" />
 <?php echo _('Receive additional community mailings. <i>(Low traffic.)</i>'); ?>
+</p>
+<p>
+<input type="checkbox" name="accept_conditions" value="0" />
+				    <?php printf (_('Do you accept the <a href="%1$s">terms of use</a> for this site?'),
+						  util_make_url ('/')); ?>
 </p>
 <p>
 <?php printf(_('Fields marked with %s are mandatory.'), utils_requiredField()); ?>
