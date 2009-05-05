@@ -46,6 +46,26 @@ function &user_get_object_by_name($user_name,$res=false) {
 }
 
 /**
+ * user_get_object_by_email() - Get User object by email address
+ *  Only works if sys_require_unique_email is true
+ *
+ *  @param		string	The unix username - required
+ *  @param		int		The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
+ *  @return a user object or false on failure
+ *
+ */
+function &user_get_object_by_email($email,$res=false) {
+	if (!validate_email($email)
+	    || $GLOBALS['sys_require_unique_email']) {
+		return false ;
+	}
+	if (!$res) {
+		$res=db_query("SELECT * FROM users WHERE email='$email'");
+	}
+	return user_get_object(db_result($res,0,'user_id'),$res);
+}
+
+/**
  * user_get_object() - Get User object by user ID.
  *  user_get_object is useful so you can pool user objects/save database queries
  *  You should always use this instead of instantiating the object directly 
@@ -264,8 +284,7 @@ class GFUser extends Error {
 			return false;
 		}
 		if ($GLOBALS['sys_require_unique_email']) {
-			if (db_numrows(db_query_params('SELECT user_id FROM users WHERE email ILIKE $1 OR email_new ILIKE $1',
-						       array ($email))) > 0) {
+			if (user_get_object_by_email ('$email')) {
 				$this->setError(_('User with this email already exists - use people search to recover your login.'));
 				return false;
 			}
