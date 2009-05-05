@@ -62,8 +62,11 @@ while (! feof ($f)) {
 	$filepath = $array[3] ;
 	$notes = $array[4] ;
 	$changes = $array[5] ;
-	$type = $array[6] ;
+	$typeid = $array[6] ;
 	$processorid = $array[7] ;
+
+	$admin = user_get_object_by_name ('admin') ;
+	session_set_new ($admin->getID ()) ;
 
 	$g = group_get_object_by_name ($projectname);
 	if (! $g) {
@@ -94,14 +97,16 @@ while (! feof ($f)) {
 
 	$releases = $package->getReleases () ;
 	$release = false ;
-	foreach ($releases as $cur) {
-		if ($cur->getName () == $releasename) {
-			$release = $cur ;
-			break ;
+	if ($releases) {
+		foreach ($releases as $cur) {
+			if ($cur->getName () == $releasename) {
+				$release = $cur ;
+				break ;
+			}
 		}
 	}
 	if (!$release) {
-		$release = new FRSRelease ($g) ;
+		$release = new FRSRelease ($package) ;
 		$r = $release->create ($releasename, $notes, $changes, false) ;
 	}
 	if (!$r || !$release) {
