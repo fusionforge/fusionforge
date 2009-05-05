@@ -118,6 +118,7 @@ computedefault(){
 	DEFAULTsys_project_reg_restricted=false
 	DEFAULTsys_user_reg_restricted=false
 	DEFAULTsys_require_accept_conditions=false
+	DEFAULTsys_require_unique_email=false
 	DEFAULTsys_localinc=$ETCDIR/local.inc
 	DEFAULTsys_jabber_pass=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
 	DEFAULTsys_plugins_path=$SHAREDIR/plugins/

@@ -46,7 +46,7 @@ $sys_session_expire = {sys_session_expire};
 
 // Require that user give unique (not yet existent in db) email upon
 // registration
-$sys_require_unique_email=0;
+$sys_require_unique_email={sys_require_unique_email};
 //
 // Require that all email be copied to this address if present
 $sys_bcc_all_email_address='';
