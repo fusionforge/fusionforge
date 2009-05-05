@@ -68,7 +68,10 @@ if (getStringFromRequest('submit')) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit();
 	}
-	if ($accept_conditions) {
+	
+	if ($GLOBALS['sys_require_accept_conditions'] && ! $accept_conditions) {
+		$feedback = _("You can't register an account unless you accept the terms of use.") ;
+	} else {
 		$new_user = new GFUser();
 		$register = $new_user->create($unix_name,$firstname,$lastname,$password1,$password2,
 					      $email,$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,'',
@@ -82,8 +85,6 @@ if (getStringFromRequest('submit')) {
 		} else {
 			$feedback = $new_user->getErrorMessage();
 		}
-	} else {
-		$feedback = _("You can't register an account unless you accept the terms of use.") ;
 	}
 }
 
@@ -188,11 +189,13 @@ if ($sys_use_jabber) {
 <input type="checkbox" name="mail_va" value="1" />
 <?php echo _('Receive additional community mailings. <i>(Low traffic.)</i>'); ?>
 </p>
-<p>
-<input type="checkbox" name="accept_conditions" value="0" />
-				    <?php printf (_('Do you accept the <a href="%1$s">terms of use</a> for this site?'),
-						  util_make_url ('/terms.php')); ?>
-</p>
+<?php if ($GLOBALS['sys_require_accept_conditions']) { ?>
+	<p>
+	<input type="checkbox" name="accept_conditions" value="0" />
+	<?php printf (_('Do you accept the <a href="%1$s">terms of use</a> for this site?'),
+		      util_make_url ('/terms.php')); ?>
+	</p>
+<?php } ?>
 <p>
 <?php printf(_('Fields marked with %s are mandatory.'), utils_requiredField()); ?>
 </p>

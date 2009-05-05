@@ -49,3 +49,5 @@ $sys_project_reg_restricted={sys_project_reg_restricted};
 //
 $sys_user_reg_restricted={sys_user_reg_restricted};
 
+// Require acceptance of terms and conditions
+$sys_require_accept_conditions={sys_require_accept_conditions};
