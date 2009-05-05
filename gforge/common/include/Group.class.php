@@ -278,8 +278,9 @@ class Group extends Error {
 	 *  @param	string	The Unix name of the user.
 	 *  @param	string	The new group description.
 	 *  @param	string	The purpose of the group.
+	 *  @param	bool	Whether to send an email or not
 	 */
-	function create(&$user, $group_name, $unix_name, $description, $purpose, $unix_box='shell1', $scm_box='cvs1', $is_public=1) {
+	function create(&$user, $group_name, $unix_name, $description, $purpose, $unix_box='shell1', $scm_box='cvs1', $is_public=1, $send_mail=true) {
 		// $user is ignored - anyone can create pending group
 
 		if ($this->getID()!=0) {
@@ -388,7 +389,9 @@ class Group extends Error {
 			plugin_hook ("group_create", $hook_params);
 			
 			db_commit();
-			$this->sendNewProjectNotificationEmail();
+			if ($send_mail) {
+				$this->sendNewProjectNotificationEmail();
+			}
 			return true;
 		}
 	}
