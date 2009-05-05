@@ -113,7 +113,7 @@ if (!isset($ccode) || empty($ccode) || !preg_match('/^[a-zA-Z]{2}$/', $ccode)) {
 <p>
 <?php
 if ($GLOBALS['sys_require_unique_email']) {
-	echo _('Login Name (no uppercase letters; leave empty to have it generated automatically)');
+	echo _('Login Name (no uppercase letters; leave empty to have it generated automatically):');
 } else {
 	echo _('Login Name (do not use uppercase letters):'); echo utils_requiredField();
 } ?><br />
