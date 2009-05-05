@@ -47,7 +47,8 @@ while (! feof ($f)) {
 	$u = new GFUser () ;
 
 	$r = $u->create ($login, $fname, $lname, $password, $password, $email,
-			   1, 0, 1, 'UTC', '', '', 1);
+			 1, 0, 1, 'UTC', '', '', 1,
+			 'shell', '', '', '', '', '', 'US', false);
 
 	if (!$r) {
 		print "Error: ". $u->getErrorMessage () . "\n" ;
