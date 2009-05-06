@@ -229,16 +229,21 @@ Thank you for registering your project with %1$s.
 	 *	@param	int	Pass (1) if it should be public (0) for private
 	 *	@return	boolean	success.
 	 */
-	function update($description, $isPublic = MAIL__MAILING_LIST_IS_PUBLIC) {
+	function update($description, $isPublic = MAIL__MAILING_LIST_IS_PUBLIC, $status = 'xyzzy') {
 		if(! $this->userIsAdmin()) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
+
+		if ($status == 'xyzzy') {
+			$status = $this->getStatus();
+		}
 		
-		$res = db_query_params ('UPDATE mail_group_list SET is_public=$1, description=$2
-			                 WHERE group_list_id=$3 AND group_id=$4',
+		$res = db_query_params ('UPDATE mail_group_list SET is_public=$1, description=$2, status=$3
+			                 WHERE group_list_id=$4 AND group_id=$5',
 					array ($isPublic,
 					       $description,
+					       $status,
 					       $this->groupMailingListId,
 					       $this->Group->getID())) ;
 		

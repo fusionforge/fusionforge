@@ -30,9 +30,9 @@ if ($group_id) {
 		exit_permission_denied();
 	}
 	
-//
-//	Post Changes to database
-//
+	//
+	//	Post Changes to database
+	//
 	if (getStringFromRequest('post_changes') == 'y') {
 		//
 		//	Add list
@@ -82,8 +82,33 @@ if ($group_id) {
 				$feedback .= _('List updated');
 			}
 		}
-
 	}
+
+	//
+	//	Reset admin password
+	//
+	if (getIntFromRequest('reset_pw') == 1) {
+		$mailingList = new MailingList($Group, getIntFromGet('group_list_id'));
+		
+		if(!$mailingList || !is_object($mailingList)) {
+			exit_error(_('Error'), _('Error getting the list'));
+		} elseif($mailingList->isError()) {
+			exit_error(_('Error'), $mailingList->getErrorMessage());
+		}
+		
+		if($mailingList->getStatus() == MAIL__MAILING_LIST_IS_CONFIGURED) {
+			if(!$mailingList->update(
+				   $mailingList->getDescription(),
+				   $mailingList->isPublic(),
+				   MAIL__MAILING_LIST_PW_RESET_REQUESTED
+				   )) {
+				exit_error(_('Error'), $mailingList->getErrorMessage());
+			} else {
+				$feedback .= _('Password reset requested');
+			}
+		}
+	}
+
 
 //
 //	Form to add list
@@ -214,25 +239,31 @@ if ($group_id) {
 			$tableHeaders = array(
 				_('Mailing list'),
 				'',
+				'',
 				''
 			);
 			echo $HTML->listTableTop($tableHeaders);
 			for ($i = 0; $i < $mlCount; $i++) {
 				$currentList =& $mlArray[$i];
 				if ($currentList->isError()) {
-					echo '<tr '. $HTML->boxGetAltRowStyle($i) .'><td colspan="3">';
+					echo '<tr '. $HTML->boxGetAltRowStyle($i) .'><td colspan="4">';
 					echo $currentList->getErrorMessage();
 					echo '</td></tr>';
 				} else {
 					echo '<tr '. $HTML->boxGetAltRowStyle($i) . '><td width="60%">'.
 					'<strong>'.$currentList->getName().'</strong><br />'.
 					htmlspecialchars($currentList->getDescription()).'</td>'.
-					'<td width="20%" style="text-align:center"><a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_list_id='.$currentList->getID().'&amp;change_status=1">'._('Update').'</a></td>'.
-					'<td width="20%" style="text-align:center">';
+						'<td width="15%" style="text-align:center"><a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_list_id='.$currentList->getID().'&amp;change_status=1">'._('Update').'</a></td>' ;
+					echo '<td width="15%" style="text-align:center">';
 					if($currentList->getStatus() == MAIL__MAILING_LIST_IS_REQUESTED) {
 						echo _('Not activated yet');
 					} else {
 						echo '<a href="'.$currentList->getExternalAdminUrl().'">'._('Administrate').'</a></td>';
+					}
+					echo '<td width="15%" style="text-align:center">';
+					if($currentList->getStatus() == MAIL__MAILING_LIST_IS_CONFIGURED) {
+						print '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_list_id='.$currentList->getID().'&amp;reset_pw=1">'._('Reset admin password').'</a></td>' ;
+
 					}
 					echo '</tr>';
 				}

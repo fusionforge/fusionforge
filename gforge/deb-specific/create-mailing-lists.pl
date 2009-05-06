@@ -98,6 +98,40 @@ eval {
 	#debug "Committing." ;
 	$dbh->commit () ;
     }
+
+    $query = "SELECT mail_group_list.group_list_id,
+                     mail_group_list.list_name,
+                     users.user_name,
+                     mail_group_list.password,
+                     mail_group_list.description,
+                     mail_group_list.is_public
+              FROM mail_group_list, users
+              WHERE mail_group_list.status = 4
+                    AND mail_group_list.list_admin = users.user_id" ; # Status = 4: password reset requested
+    $sth = $dbh->prepare ($query) ;
+    $sth->execute () ;
+    while (my @myarray = $sth->fetchrow_array ()) {
+	push @lines, \@myarray ;
+    }
+    $sth->finish () ;
+
+    foreach $line (@lines) {
+	@array = @{$line} ;
+	my ($group_list_id, $listname, $user_name, $password, $description, $is_public) ;
+	my ($tmp) ;
+
+	($group_list_id, $listname, $user_name, $password, $description, $is_public)= @array ;
+	my $cmd = "/usr/lib/mailman/bin/change_pw -l $listname >/dev/null 2>&1" ;
+	system ($cmd) ;
+
+	$query = "UPDATE mail_group_list SET status = 3 where group_list_id = group_list_id" ; # Status = 3: list configured on Mailman
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	$sth->finish () ;
+
+	#debug "Committing." ;
+	$dbh->commit () ;
+    }
     
     # There should be a commit at the end of every block above.
     # If there is not, then it might be symptomatic of a problem.
