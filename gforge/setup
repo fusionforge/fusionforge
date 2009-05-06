@@ -288,7 +288,7 @@ setupinout(){
 	#rm -f $ETCDIR/httpd.d/20list
 	#
 
-	find $ETCTEMPLATEDIR/httpd.d  -type f -regex "$ETCTEMPLATEDIR/httpd.d/\([a-z0-9]+\|_?([a-z0-9_.]+-)+[a-z0-9]+\|[a-z0-9][a-z0-9-]*\)\(\|.ssl\|.secrets\)" $EXCLUDEVHOST | sort | while read i
+	find $ETCTEMPLATEDIR/httpd.d  -follow -type f -regex "$ETCTEMPLATEDIR/httpd.d/\([a-z0-9]+\|_?([a-z0-9_.]+-)+[a-z0-9]+\|[a-z0-9][a-z0-9-]*\)\(\|.ssl\|.secrets\)" $EXCLUDEVHOST | sort | while read i
 	do
 		if [ "$ETCTEMPLATEDIR" != "$ETCDIR" -a -f $ETCDIR/httpd.d/`basename $i` ]
 		then
@@ -323,7 +323,7 @@ setupinout(){
 	rm $ETCDIR/httpd.secrets.gforge-new
 	
 	echo "Creating $LOCALINC"
-	find $ETCTEMPLATEDIR/local.d -type f -regex "$ETCTEMPLATEDIR/local.d/\([a-z0-9]+\|_?([a-z0-9_.]+-)+[a-z0-9]+\|[a-z0-9][a-z0-9-]*\)\(\|.$database\)" | sort | while read i 
+	find $ETCTEMPLATEDIR/local.d -follow -type f -regex "$ETCTEMPLATEDIR/local.d/\([a-z0-9]+\|_?([a-z0-9_.]+-)+[a-z0-9]+\|[a-z0-9][a-z0-9-]*\)\(\|.$database\)" | sort | while read i
 	do
 		if [ "$ETCTEMPLATEDIR" != "$ETCDIR" -a -f $ETCDIR/local.d/`basename $i` ]
 		then
@@ -336,12 +336,12 @@ setupinout(){
 		fi
 		$BINDIR/fill-in-the-blanks.pl $i $CONFFILEOUTDIR/`basename $i` $CONFFILEOUT
 	done
-	(find $CONFFILEOUTDIR  -type f -regex "$CONFFILEOUTDIR/\([a-z0-9]+\|_?([a-z0-9_.]+-)+[a-z0-9]+\|[a-z0-9][a-z0-9-]*\)\(\|.$database\)" | sort | xargs cat ) > $LOCALINC
-	find $CONFFILEOUTDIR  -type f -regex "$CONFFILEOUTDIR/\([a-z0-9]+\|_?([a-z0-9_.]+-)+[a-z0-9]+\|[a-z0-9][a-z0-9-]*\)\(\|.$database\)" -print0 | xargs -0 rm 
+	(find $CONFFILEOUTDIR  -follow -type f -regex "$CONFFILEOUTDIR/\([a-z0-9]+\|_?([a-z0-9_.]+-)+[a-z0-9]+\|[a-z0-9][a-z0-9-]*\)\(\|.$database\)" | sort | xargs cat ) > $LOCALINC
+	find $CONFFILEOUTDIR  -follow -type f -regex "$CONFFILEOUTDIR/\([a-z0-9]+\|_?([a-z0-9_.]+-)+[a-z0-9]+\|[a-z0-9][a-z0-9-]*\)\(\|.$database\)" -print0 | xargs -0 rm
 
 	echo "Creating other includes"
 	#for i in $ETCDIR/templates/[a-z]*
-	find $ETCTEMPLATEDIR/templates -type f -regex "$ETCTEMPLATEDIR/templates/[a-z].*"  | while read i 
+	find $ETCTEMPLATEDIR/templates -follow -type f -regex "$ETCTEMPLATEDIR/templates/[a-z].*"  | while read i
 	do
 		if [ "$ETCTEMPLATEDIR" != "$ETCDIR" -a -f $ETCDIR/templates/`basename $i` ]
 		then
