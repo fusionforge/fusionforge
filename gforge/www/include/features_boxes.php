@@ -199,7 +199,7 @@ function show_highest_ranked_projects() {
 	} else {
 		$return='';
 		while ($row=db_fetch_array($result)) {
-			$return .= '<strong>('.number_format(substr($row['percentile'],0,5),1).'%)</strong> '
+			$return .= '<strong>(#'.number_format(substr($row['ranking'],0,5),1).')</strong> '
 				.util_make_link_g ($row['unix_group_name'],$row['group_id'],$row['group_name'])
 				.'<br />';
 		}

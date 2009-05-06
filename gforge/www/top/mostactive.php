@@ -62,7 +62,7 @@ while ($row_top = db_fetch_array($res_top)) {
 	$i++;
 	print '
 	<tr '. $HTML->boxGetAltRowStyle($i) .'>
-		<td>&nbsp;&nbsp;'.$i.'
+		<td>&nbsp;&nbsp;'.$row_top['ranking'].'
 		</td>
 		<td>'.util_make_link_g (strtolower($row_top['unix_group_name']),$row_top['group_id'],$row_top['group_name']).'
 		</td>
