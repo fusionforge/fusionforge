@@ -766,7 +766,7 @@ Enjoy the site.
 	 */
 	function setEmail($email) {
 
-		if (!strcasecmp($this->getEmail(), $email)) {
+		if (!strcasecmp($this->getEmail(), stripslashes($email))) {
 			return true;
 		}
 
@@ -799,7 +799,11 @@ Enjoy the site.
 			$hook_params['user_email'] = $email;
 			plugin_hook ("user_setemail", $hook_params);
 			
-			$this->data_array['email'] = $email;
+			if (!$this->fetchData($this->getId())) {
+				db_rollback();
+				return false;
+			}
+
 			db_commit();
 			return true;
 		}
