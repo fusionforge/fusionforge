@@ -17,7 +17,7 @@ use Unicode::String qw(latin1 utf8);
 
 use strict;
 
-require("/usr/lib/gforge/lib/include.pl");  # Include all predefined functions
+require("/usr/share/gforge/lib/include.pl");  # Include all predefined functions
 
 # DB 
 #-------------------------------------------------------------------------------

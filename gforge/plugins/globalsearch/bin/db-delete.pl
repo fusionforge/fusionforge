@@ -28,9 +28,9 @@ sub is_greater ( $$ ) ;
 sub debug ( $ ) ;
 sub parse_sql_file ( $ ) ;
 
-require ("/usr/lib/gforge/lib/include.pl") ; # Include a few predefined functions 
-require ("/usr/lib/gforge/lib/sqlparser.pm") ; # Our magic SQL parser
-require ("/usr/lib/gforge/lib/sqlhelper.pm") ; # A few SQL helper functions
+require ("/usr/share/gforge/lib/include.pl") ; # Include a few predefined functions 
+require ("/usr/share/gforge/lib/sqlparser.pm") ; # Our magic SQL parser
+require ("/usr/share/gforge/lib/sqlhelper.pm") ; # A few SQL helper functions
 
 debug "You'll see some debugging info during this installation." ;
 debug "Do not worry unless told otherwise." ;

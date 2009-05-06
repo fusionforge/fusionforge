@@ -30,7 +30,7 @@
 # 5. run migrate-from-gforge-as.pl
 # In case something breaks, to get back to step 2:
 # su - postgres -c 'dropdb gforge'
-# /usr/lib/gforge/bin/install-db.sh configure
+# /usr/share/gforge/bin/install-db.sh configure
 # 6. If no error appears, uncomment the last line of this script and re-run it
 ######
 # This script isn't complete, but it migrates the most important data.
@@ -42,7 +42,7 @@ use Data::Dumper ;
 use MIME::Base64 ;
 # use strict ;
 
-require "/usr/lib/gforge/lib/sqlhelper.pm" ;
+require "/usr/share/gforge/lib/sqlhelper.pm" ;
 
 use vars qw/$dbhAS $dbhFF $map @arrayAS $sthAS $sthFF/ ;
 
