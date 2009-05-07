@@ -642,7 +642,10 @@ class ForumMessage extends Error {
 			$recipients[] = $recipient ;
 		}
 		if ($this->Forum->getSendAllPostsTo()) {
-			$recipients[] = $this->Forum->getSendAllPostsTo() ;
+			$sapt = explode (',', $this->Forum->getSendAllPostsTo()) ;
+			foreach ($sapt as $r) {
+				$recipients[] = $r;
+			}
 		}
 
 		if (count ($recipients) == 0) {
