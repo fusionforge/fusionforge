@@ -276,7 +276,11 @@ class Role extends Error {
 		if (!$ref_id) {
 			$ref_id=0;
 		}
-		return $this->setting_array[$section][$ref_id];
+		if (array_key_exists ($section, $this->setting_array)) {
+			return $this->setting_array[$section][$ref_id];
+		} else {
+			return 0 ;
+		}
 	}
 
 	/**
