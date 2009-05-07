@@ -481,6 +481,12 @@ class Role extends Error {
 			}
 		}
 //		if ($update_usergroup) {
+			$keys = array ('forumadmin', 'pmadmin', 'trackeradmin', 'docman', 'scm', 'frs', 'projectadmin') ;
+			foreach ($keys as $k) {
+				if (!array_key_exists ($k, $data)) {
+					$data[$k] = array(0);
+				}
+			}
 			$res = db_query_params ('UPDATE user_group
                                SET admin_flags=$1,
    				   forum_flags=$2,
