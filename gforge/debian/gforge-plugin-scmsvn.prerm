@@ -36,6 +36,7 @@ case "$1" in
 			invoke-rc.d --quiet apache2 reload
 		fi
 	fi
+	/usr/lib/gforge/plugins/scmsvn/bin/install-svn.sh purge
         ;;
     upgrade|failed-upgrade)
         ;;
