@@ -696,12 +696,18 @@ class ForumMessage extends Error {
 		}
 
 		$subject="[" . $this->Forum->getUnixName() ."][".$this->getID()."] ".util_unconvert_htmlspecialchars($this->getSubject());
+		$BCCadds = explode (',', $this->Forum->getSendAllPostsTo());
 		if (count($ids) != 0) {
 			// maybe we have no monitoring ids. this was causing a transaction to be aborted because of being called everytime
 			$sql="SELECT email FROM users WHERE status='A' AND user_id IN ('".implode($ids,'\',\'')."')";
 			$bccres = db_query($sql);
+			for ($i=0;$i<db_numrows($bccres);$i++) {
+				$aux = db_fetch_array($res);
+				$BCCadds[] = $aux[0];
+			}
+
 		}
-		$BCC =& implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
+		$BCC = implode(',', $BCCadds);
 //echo $BCC;
 		$User = user_get_object($this->getPosterID());
 		util_send_message('',$subject,$body,"noreply@".$GLOBALS['sys_default_domain'],$BCC,'Forum',$extra_headers);
