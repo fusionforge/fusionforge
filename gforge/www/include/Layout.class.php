@@ -1073,7 +1073,7 @@ if (isset($params['group']) && $params['group']) {
 		if (!session_loggedin()) {
 			return '';
 		} else {
-			$res=db_query("SELECT * FROM groups NATURAL JOIN user_group WHERE user_id='".user_getid()."' ORDER BY group_name");
+			$res=db_query("SELECT * FROM groups JOIN user_group USING (group_id) WHERE user_id='".user_getid()."' ORDER BY group_name");
 echo db_error();
 			if (!$res || db_numrows($res) < 1) {
 				return '';
