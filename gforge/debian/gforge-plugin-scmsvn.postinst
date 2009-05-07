@@ -39,7 +39,8 @@ case "$1" in
 			invoke-rc.d --quiet apache2 reload
 		fi
 	fi
-
+	# Setup inetd
+	/usr/lib/gforge/plugins/scmsvn/bin/install-svn.sh configure
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
