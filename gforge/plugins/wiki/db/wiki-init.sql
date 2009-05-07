@@ -21,7 +21,7 @@ CREATE TABLE plugin_wiki_page (
     pagename character varying(100) NOT NULL,
     hits integer DEFAULT 0 NOT NULL,
     pagedata text DEFAULT ''::text NOT NULL,
-    cached_html text DEFAULT ''::text,
+    cached_html bytea DEFAULT ''::bytea,
     CONSTRAINT plugin_wiki_page_pagename_check CHECK (((pagename)::text <> ''::text))
 );
 -- ALTER TABLE public.plugin_wiki_page OWNER TO gforge;
