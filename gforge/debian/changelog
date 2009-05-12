@@ -9,6 +9,9 @@ gforge (4.8.50-1) experimental; urgency=low
   * Packaging-related files are now stored in
     gforge/packaging/{dirs,install,cron.d,control}/* rather than the
     previous gforge/{dirs,install,cron.d,control}/*.
+  * Read sys_urlprefix from gforge.conf and use it for local.inc and in
+    the Apache config.  This makes it possible to run FusionForge as
+    http://<hostname>/forge/ with unmodified packages.
 
  -- Roland Mas <lolando@debian.org>  Wed, 29 Apr 2009 15:21:31 +0200
   

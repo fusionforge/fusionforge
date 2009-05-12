@@ -924,6 +924,16 @@ function util_is_root_dir($dir) {
 	return !preg_match('/[^\\/]/',$dir);
 }
 
+function normalized_urlprefix () {
+	$prefix = $GLOBALS['sys_urlprefix'] ;
+	$prefix = ereg_replace ("^/", "", $prefix) ;
+	$prefix = ereg_replace ("/$", "", $prefix) ;
+	$prefix = "/$prefix/" ;
+	if ($prefix == '//') 
+		$prefix = '/' ;
+	return $prefix ;
+}
+
 function util_make_url ($path) {
 	if ($GLOBALS['sys_use_ssl']) 
 		$url = "https://" ;
@@ -931,8 +941,7 @@ function util_make_url ($path) {
 		$url = "http://" ;
 	
 	$url .= $GLOBALS['sys_default_domain'] ;
-	$url .= $GLOBALS['sys_urlprefix'] ;
-	$url .= "/" ;
+	$url .= normalized_urlprefix () ;
 	$path = ereg_replace ("^/", "", $path) ;
 	$url .= $path ;
 	return $url ;

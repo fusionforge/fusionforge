@@ -13,7 +13,6 @@
 		SuexecUserGroup {sys_apache_user} {sys_apache_group}
 	</IfModule>
 	DocumentRoot {usr_share_gforge}/www
-	Alias /images/ {usr_share_gforge}/www/images/
 	DirectoryIndex index.html index.php
 	<IfModule mod_userdir.c>
 		UserDir disabled
@@ -25,18 +24,18 @@
 		Include   {gforge_etc}/httpd.secrets
 	</Directory>
 
-	ScriptAliasMatch ^/plugins/([^/]*)/cgi-bin/(.*) /usr/share/gforge/plugins/$1/cgi-bin/$2
+	ScriptAliasMatch ^{sys_urlprefix}plugins/([^/]*)/cgi-bin/(.*) /usr/share/gforge/plugins/$1/cgi-bin/$2
 
 	# Projects and Users script
-	<Location /projects>
+	<Location {sys_urlprefix}projects>
 		ForceType application/x-httpd-php
 	</Location>
-	<Location /users>
+	<Location {sys_urlprefix}users>
 		ForceType application/x-httpd-php
 	</Location>
 
 	# 404 Error document
-	ErrorDocument 404 /404.php
+	ErrorDocument 404 {sys_urlprefix}404.php
 	LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
 	CustomLog "|{cronolog_path} {var_log_gforge}/%Y/%m/%d/gforge.log" gforge
 
@@ -58,13 +57,15 @@
 		SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
 	</IfModule>
 
-        Alias /fckeditor/ /usr/share/fckeditor/
+        Alias {sys_urlprefix}fckeditor/ /usr/share/fckeditor/
         <Directory "/usr/share/fckeditor/">
             Options Indexes MultiViews FollowSymLinks
             AllowOverride None
             Order allow,deny
 	    allow from all
         </Directory>
+
+	Alias {sys_urlprefix} {usr_share_gforge}/www/
 
         RewriteEngine on
         RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK)
