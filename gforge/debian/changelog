@@ -1,10 +1,10 @@
-gforge (4.7.2-8+1) unstable; urgency=low
+gforge (4.7.2-9) unstable; urgency=low
 
   * gforge-plugin-scmsvn: For some reason the code setting up the inetd
     was missing.  Re-added it.
   * Fixed email sending in forums.
 
- -- Roland Mas <lolando@debian.org>  Thu, 07 May 2009 15:05:14 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 12 May 2009 13:30:37 +0200
 
 gforge (4.7.2-8) unstable; urgency=low
 
