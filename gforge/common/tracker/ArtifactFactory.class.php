@@ -265,7 +265,7 @@ class ArtifactFactory extends Error {
 		
 		$selectsql = 'SELECT DISTINCT ON (group_artifact_id, artifact_id) artifact_vw.* FROM artifact_vw';
 
-		$wheresql = 'WHERE group_artifact_id=$'.$paramcount++ ;
+		$wheresql = ' WHERE group_artifact_id=$'.$paramcount++ ;
 		$params[] = $this->ArtifactType->getID() ;
 
 		if (is_array($this->extra_fields) && !empty($this->extra_fields)) {
@@ -353,7 +353,7 @@ class ArtifactFactory extends Error {
 							    'assigned_to',
 							    'submitted_by',
 							    'priority'));
-		$ordersql = " ORDER BY Artifacts.group_artifact_id.$sortorder, Artifacts.$sortcol $sortorder" ;
+		$ordersql = " ORDER BY Artifacts.group_artifact_id $sortorder, Artifacts.$sortcol $sortorder" ;
 
 		$result = db_query_params ('SELECT * FROM (' . $selectsql . $wheresql . ') AS Artifacts' . $ordersql,
 					   $params) ;
