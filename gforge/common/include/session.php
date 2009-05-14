@@ -156,12 +156,6 @@ function session_login_valid_dbonly ($loginname, $passwd, $allowpending) {
 		$res = db_query_params ('SELECT user_id,status,unix_pw FROM users WHERE user_name=$1 AND user_pw=$2',
 					array ($loginname,
 					       md5($passwd))) ;
-		$res = db_query("
-			SELECT user_id,status,unix_pw
-			FROM users
-			WHERE user_name='$loginname'
-			AND user_pw='".md5($passwd)."'
-		");
 	}
 	if (!$res || db_numrows($res) < 1) {
 		// No user whose MD5 passwd matches the MD5 of the provided passwd
