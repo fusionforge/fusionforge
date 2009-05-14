@@ -3,6 +3,7 @@
  * FusionForge search engine
  *
  * Copyright 2004, Dominik Haas
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -137,15 +138,15 @@ class FrsSearchQuery extends SearchQuery {
 	 * @param $showNonPublic boolean if we should consider non public sections
 	 */
 	function getSections($groupId, $showNonPublic) {
-		$sql = 'SELECT package_id, name FROM frs_package WHERE group_id = \''.$groupId.'\' ORDER BY name';
-		
+		$sql = 'SELECT package_id, name FROM frs_package WHERE group_id=$1';
 		if(!$showNonPublic) {
 			$sql .= ' AND is_public=1';
 		}
 		$sql .= ' ORDER BY name';
 		
 		$sections = array();
-		$res = db_query($sql);
+		$res = db_query_params ($sql,
+					array ($groupId));
 		while($data = db_fetch_array($res)) {
 			$sections[$data['package_id']] = $data['name'];
 		}

@@ -3,6 +3,7 @@
  * FusionForge search engine
  *
  * Copyright 2004, Dominik Haas
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -134,14 +135,15 @@ class TrackersSearchQuery extends SearchQuery {
 	 * @param $showNonPublic boolean if we should consider non public sections
 	 */
 	function getSections($groupId, $showNonPublic=false) {
-		$sql = 'SELECT group_artifact_id, name FROM artifact_group_list WHERE group_id = '.$groupId.'';
+		$sql = 'SELECT group_artifact_id, name FROM artifact_group_list WHERE group_id = $1';
 		if (!$showNonPublic) {
 			$sql .= ' AND artifact_group_list.is_public = 1';
 		}
 		$sql .= ' ORDER BY name';
 		
+		$res = db_query_params ($sql,
+					array ($groupId));
 		$sections = array();
-		$res = db_query($sql);
 		while($data = db_fetch_array($res)) {
 			$sections[$data['group_artifact_id']] = $data['name'];
 		}

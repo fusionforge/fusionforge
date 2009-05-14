@@ -3,6 +3,7 @@
  * FusionForge search engine
  *
  * Copyright 2004, Dominik Haas
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -146,7 +147,7 @@ class DocsSearchQuery extends SearchQuery {
 	 */
 	function getSections($groupId, $showNonPublic=false) {
 		$sql = 'SELECT doc_groups.doc_group, doc_groups.groupname FROM doc_groups, doc_data'
-			.' WHERE doc_groups.doc_group = doc_data.doc_group AND doc_groups.group_id = '.$groupId;
+			.' WHERE doc_groups.doc_group = doc_data.doc_group AND doc_groups.group_id=$1';
 		if ($showNonPublic) {
 			$sql .= ' AND doc_data.stateid IN (1, 4, 5)';
 		} else {
@@ -155,7 +156,8 @@ class DocsSearchQuery extends SearchQuery {
 		$sql .= ' ORDER BY groupname';
 		
 		$sections = array();
-		$res = db_query($sql);
+		$res = db_query_params ($sql,
+					array ($groupId));
 		while($data = db_fetch_array($res)) {
 			$sections[$data['doc_group']] = $data['groupname'];
 		}

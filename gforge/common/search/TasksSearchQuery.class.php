@@ -3,6 +3,7 @@
  * FusionForge search engine
  *
  * Copyright 2004, Dominik Haas
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -134,14 +135,15 @@ class TasksSearchQuery extends SearchQuery {
 	 * @param $showNonPublic boolean if we should consider non public sections
 	 */
 	function getSections($groupId, $showNonPublic=false) {
-		$sql = 'SELECT group_project_id, project_name FROM project_group_list WHERE group_id = '.$groupId.'';
+		$sql = 'SELECT group_project_id, project_name FROM project_group_list WHERE group_id=$1' ;
 		if (!$showNonPublic) {
 			$sql .= ' AND is_public = 1';
 		}
 		$sql .= ' ORDER BY project_name';
 		
 		$sections = array();
-		$res = db_query($sql);
+		$res = db_query_params ($sql,
+					array ($groupId));
 		while($data = db_fetch_array($res)) {
 			$sections[$data['group_project_id']] = $data['project_name'];
 		}

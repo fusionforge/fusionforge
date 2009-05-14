@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001, VA Linux Systems, Inc
  * Copyright 2004, Guillaume Smet/Open Wide
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -168,7 +169,8 @@ class SearchQuery extends Error {
 		}
 
 		if ($sys_use_fti) {
-			db_query("select set_curcfg('default')");
+			db_query_params ('select set_curcfg($1)',
+					 array ('default'));
 		}
 		$this->result = db_query(
 			$query,

@@ -3,6 +3,7 @@
  * FusionForge search engine
  *
  * Copyright 2004, Dominik Haas
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -135,14 +136,15 @@ class ForumsSearchQuery extends SearchQuery {
 	 * @param $showNonPublic boolean if we should consider non public sections
 	 */
 	function getSections($groupId, $showNonPublic=false) {
-		$sql = 'SELECT group_forum_id, forum_name FROM forum_group_list WHERE group_id = '.$groupId.' AND is_public <> 9';
+		$sql = 'SELECT group_forum_id, forum_name FROM forum_group_list WHERE group_id = $1 AND is_public <> 9';
 		if (!$showNonPublic) {
 			$sql .= ' AND is_public = 1';
 		}
 		$sql .= ' ORDER BY forum_name';
 		
 		$sections = array();
-		$res = db_query($sql);
+		$res = db_query_params ($sql,
+					array ($groupId));
 		while($data = db_fetch_array($res)) {
 			$sections[$data['group_forum_id']] = $data['forum_name'];
 		}
