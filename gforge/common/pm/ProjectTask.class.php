@@ -170,14 +170,14 @@ class ProjectTask extends Error {
 				VALUES ('".$this->ProjectGroup->getID()."','".user_getid()."','".htmlspecialchars( $summary )."',
 				'". htmlspecialchars($details) ."',	'$start_date','$end_date','1','$category_id','$priority','$percent_complete','$hours','$duration','$parent_id')";
 			
-			$result = db_query( $sql );
+			$result = db_query_mysql( $sql );
 			if (!$result || db_affected_rows($result) < 1) {
 				$this->setError( 'ProjectTask::create() Posting Failed '.db_error().$sql );
 				db_rollback();
 				return false;
 			}
 
-			$result = db_query( "SELECT last_insert_id() AS id" );
+			$result = db_query_mysql( "SELECT last_insert_id() AS id" );
 			if (!$result) {
 				$this->setError( 'ProjectTask::create() Get Created ID Failed '.db_error().$sql );
 				db_rollback();
