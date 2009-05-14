@@ -3,6 +3,7 @@
  * FusionForge surveys
  *
  * Copyright 2004, Sung Kim/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -84,10 +85,8 @@ class SurveyFactory extends Error {
 			return $this->surveys;
 		}
 		
-		$group_id = $this->Group->GetID();
-		
-		$sql="SELECT * FROM surveys WHERE group_id='$group_id' order by survey_id DESC";
-		$result = db_query ($sql);
+		$result = db_query_params ('SELECT * FROM surveys WHERE group_id=$1 ORDER BY survey_id DESC',
+					   array ($this->Group->getID()));
 
 		if (!$result) {
 			$this->setError(_('No Survey is found').db_error());

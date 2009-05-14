@@ -3,6 +3,7 @@
  * FusionForge surveys
  *
  * Copyright 2004, Sung Kim/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -100,10 +101,11 @@ class SurveyQuestion extends Error {
 		}
 
 		$group_id = $this->Group->GetID();
-		$sql="INSERT INTO survey_questions (group_id,question,question_type) 
-                      VALUES ($group_id,'".htmlspecialchars($question)."',$question_type)";
 
-		$res=db_query($sql);
+		$res = db_query_params ('INSERT INTO survey_questions (group_id,question,question_type) VALUES ($1,$2,$3)',
+					array ($group_id,
+					       htmlspecialchars($question),
+					       $question_type)) ;
 		if (!$res) {
 			$this->setError(_('Question Added').db_error());
 			return false;
@@ -141,11 +143,13 @@ class SurveyQuestion extends Error {
 		$group_id = $this->Group->GetID();
 		$question_id = $this->getID();
 
-		$sql="UPDATE survey_questions SET question='".htmlspecialchars($question)."', 
-                     question_type='$question_type' 
-                     where question_id='$question_id' AND group_id='$group_id'";
+		$sql="";
 	
-		$res=db_query($sql);
+		$res = db_query_params ('UPDATE survey_questions SET question=$1, question_type=$2 where question_id=$3 AND group_id=$4',
+					array (htmlspecialchars($question),
+					       $question_type,
+					       $question_id,
+					       $group_id));
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError(_('UPDATE FAILED').db_error());
 			return false;
@@ -162,9 +166,9 @@ class SurveyQuestion extends Error {
 		$group_id = $this->Group->GetID();
 		$question_id = $this->getID();
 
-		$sql="DELETE FROM survey_questions where question_id='$question_id' AND group_id='$group_id'";
- 
-		$res=db_query($sql);
+		$res = db_query_params ('DELETE FROM survey_questions where question_id=$1 AND group_id=$2',
+					array ($question_id,
+					       $group_id)) ;
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError(_('Delete failed').db_error());
 			return false;
@@ -183,12 +187,13 @@ class SurveyQuestion extends Error {
 	function fetchData($question_id) {
 		$group_id = $this->Group->GetID();
 		
-		$sql="SELECT survey_questions.*, survey_question_types.type 
+		$res = db_query_params ('SELECT survey_questions.*, survey_question_types.type 
                       FROM survey_questions ,survey_question_types 
                       WHERE  survey_question_types.id=survey_questions.question_type 
-                      AND    survey_questions.question_id='$question_id' 
-                      AND  survey_questions.group_id='$group_id'";
-		$res=db_query($sql);
+                      AND    survey_questions.question_id=$1
+                      AND  survey_questions.group_id=$2',
+					array ($question_id,
+					       $group_id)) ;
 	
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('Error finding question').db_error());

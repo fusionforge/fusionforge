@@ -3,6 +3,7 @@
  * FusionForge surveys
  *
  * Copyright 2004, Sung Kim/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -79,14 +80,13 @@ class SurveyResponse extends Error {
 	 *	@return	boolean	success.
 	 */
 	function create($user_id, $survey_id, $question_id, $response) {
-		$group_id = $this->Group->GetID();
-		$now = time();
- 
-		$sql="INSERT INTO survey_responses (user_id,group_id,survey_id,question_id,response,post_date) ".
-			"VALUES ('". $user_id. "','" . addslashes($group_id) . "','" . 
-			addslashes($survey_id) . "','" . addslashes($question_id) . "','". 
-			htmlspecialchars($response) . "','$now')";
-		$res=db_query($sql);
+		$res = db_query_params ('INSERT INTO survey_responses (user_id,group_id,survey_id,question_id,response,post_date) VALUES ($1,$2,$3,$4,$5,$6)',
+					array ($user_id,
+					       $this->Group->GetID(),
+					       $survey_id,
+					       $question_id,
+					       htmlspecialchars ($response),
+					       time ())) ;
 		if (!$res) {
 			$this->setError(_('Error').db_error());
 			return false;
