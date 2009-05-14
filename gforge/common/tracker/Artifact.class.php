@@ -926,7 +926,7 @@ class Artifact extends Error {
 				assigned_to=$3,
 				summary=$4,
 				close_date=$5,
-				group_artifact_id=$6,
+				group_artifact_id=$6
 				WHERE 
 				artifact_id=$7 AND group_artifact_id=$8',
 						   array ($status_id,
