@@ -890,8 +890,7 @@ class ArtifactType extends Error {
 				WHERE group_artifact_id=$1
 				AND perm_level in (1,2)
 				ORDER BY realname',
-								  array ($this->getID())) ;
-			($sql);
+				array ($this->getID())) ;
 		}
 		return $this->technicians_res;
 	}
