@@ -221,8 +221,9 @@ class ArtifactExtraFieldElement extends Error {
 			$this->setMissingParamsError();
 			return false;
 		}
-		$sql = "SELECT element_name FROM artifact_extra_field_elements WHERE element_name='$name' AND extra_field_id=".$this->ArtifactExtraField->getID();
-		$res = db_query($sql);
+		$res = db_query_params ('SELECT element_name FROM artifact_extra_field_elements WHERE element_name=$1 AND extra_field_id=$2',
+					array ($name,
+					       $this->ArtifactExtraField->getID())) ;
 		if (db_numrows($res) > 0) {
 			$this->setError(_('Element name already exists'));
 			return false;

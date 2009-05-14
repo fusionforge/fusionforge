@@ -161,19 +161,16 @@ class ArtifactFactory extends Error {
 		//  validate the column names and sort order passed in from user
 		//  before saving it to prefs
 		//
-		if ($order_col=='artifact_id' || $order_col=='summary' || $order_col=='open_date' ||
-			$order_col=='close_date' || $order_col=='assigned_to' || $order_col=='submitted_by' || $order_col=='priority') {
-			$_order_col=$order_col;
-			if (($sort == 'ASC') || ($sort == 'DESC')) {
-				$_sort_ord=$sort;
-			} else {
-				$_sort_ord='ASC';
-			}
-		} else {
-			$_order_col='artifact_id';
-			$_sort_ord='ASC';
-		}
-
+		$_order_col = util_ensure_value_in_set ($order_col,
+							array ('artifact_id',
+							       'summary',
+							       'open_date',
+							       'close_date',
+							       'assigned_to',
+							       'submitted_by',
+							       'priority'));
+		$_sort_ord = util_ensure_value_in_set ($sort,
+						       array ('ASC', 'DESC')) ;
 		if ($set=='custom') {
 			if (session_loggedin()) {
 				/*
@@ -263,51 +260,52 @@ class ArtifactFactory extends Error {
 			return $this->artifacts;
 		}
 
+		$params = array() ;
+		$paramcount = 1 ;
+		
+		$selectsql = 'SELECT DISTINCT ON (group_artifact_id, artifact_id) artifact_vw.* FROM artifact_vw';
+
+		$wheresql = 'WHERE group_artifact_id=$'.$paramcount++ ;
+		$params[] = $this->ArtifactType->getID() ;
+
+		if (is_array($this->extra_fields) && !empty($this->extra_fields)) {
+			$keys=array_keys($this->extra_fields);
+			$vals=array_values($this->extra_fields);
+			for ($i=0; $i<count($keys); $i++) {
+				if (empty($vals[$i])) {
+					continue;
+				}
+				$selectsql .= ', artifact_extra_field_data aefd'.$i;
+				$wheresql .= ' AND aefd'.$i.'.extra_field_id=$'.$paramcount++ ;
+				$params[] = $keys[$i] ;
+				$wheresql .= ' AND aefd'.$i.'.field_data = ANY ($'.$paramcount++ ;
+				$params[] = db_string_array_to_any_clause ($vals[$i]) ;
+				$wheresql .= ') AND aefd'.$i.'.artifact_id=artifact_vw.artifact_id' ;
+			}
+		}
+
 		//if status selected, and more to where clause
 		if ($this->status && ($this->status != 100)) {
 			//for open tasks, add status=100 to make sure we show all
-			$status_str="AND status_id='".$this->status."'";
-		} else {
-			//no status was chosen, so don't add it to where clause
-			$status_str='';
+			$wheresql .= ' AND status_id=$'.$paramcount++ ;
+			$params[] = $this->status;
 		}
 
 		//if assigned to selected, and more to where clause
 		if ($this->assigned_to) {
 			if (is_array($this->assigned_to)) {
-				$assigned_str="AND assigned_to IN (".implode(',',$this->assigned_to).")";
+				$wheresql .= 'AND assigned_to = ANY ($'.$paramcount++ ;
+				$params[] = db_int_array_to_any_clause ($this->assigned_to) ;
+				$wheresql .= ')' ;
 			} else {
-				$assigned_str="AND assigned_to='".$this->assigned_to."'";
+				$wheresql .= 'AND assigned_to = $'.$paramcount++ ;
+				$params[] = $this->assigned_to ;
 			}
-		} else {
-			//no assigned to was chosen, so don't add it to where clause
-			$assigned_str='';
-		}
-
-		if (is_array($this->extra_fields) && !empty($this->extra_fields)) {
-			$keys=array_keys($this->extra_fields);
-			$vals=array_values($this->extra_fields);
-			$ef_where_str='';
-			$ef_table_str='';
-			for ($i=0; $i<count($keys); $i++) {
-				if (empty($vals[$i])) {
-					continue;
-				}
-				if (is_array($vals[$i]) && !empty($vals[$i])) {
-					$vals[$i]=implode("','",$vals[$i]);
-				}
-				$ef_table_str.=", artifact_extra_field_data aefd$i ";
-				$ef_where_str.=" AND aefd$i.extra_field_id='".$keys[$i]."' AND aefd$i.field_data IN ('".$vals[$i]."') AND aefd$i.artifact_id=artifact_vw.artifact_id ";
-			}
-		} else {
-			$ef_table_str='';
-			$ef_where_str='';
 		}
 
 		if ($this->last_changed > 0) {
-			$last_changed_str=" AND last_modified_date > '" . $this->last_changed . "' ";
-		} else {
-			$last_changed_str='';
+			$wheresql .= ' AND last_modified_date > $'.$paramcount++ ;
+			$params[] = $this->last_changed ;
 		}
 
 		//add constraint of range of modified dates
@@ -315,50 +313,50 @@ class ArtifactFactory extends Error {
 			$range_arr=explode(' ',$this->moddaterange);
 			$begin_int = strtotime($range_arr[0]);
 			$end_int=strtotime($range_arr[1])+(24*60*60);
-			$moddatesql= " AND last_modified_date BETWEEN '$begin_int' AND '$end_int' ";
-		} else {
-			$moddatesql= '';
+			$wheresql .= ' AND (last_modified_date BETWEEN $'.$paramcount++ ;
+			$params[] = $begin_int ;
+			$wheresql .= ' AND $'.$paramcount++ ;
+			$params[] = $end_int ;
+			$wheresql .= ')' ;
 		}
 		//add constraint of range of open dates
 		if ($this->opendaterange) {
 			$range_arr=explode(' ',$this->opendaterange);
 			$begin_int = strtotime($range_arr[0]);
 			$end_int=strtotime($range_arr[1])+(24*60*60);
-			$opendatesql= " AND open_date BETWEEN '$begin_int' AND '$end_int' ";
-		} else {
-			$opendatesql= '';
+			$wheresql .= ' AND (open_date BETWEEN $'.$paramcount++ ;
+			$params[] = $begin_int ;
+			$wheresql .= ' AND $'.$paramcount++ ;
+			$params[] = $end_int ;
+			$wheresql .= ')' ;
 		}
 		//add constraint of range of close dates
 		if ($this->closedaterange) {
 			$range_arr=explode(' ',$this->closedaterange);
 			$begin_int = strtotime($range_arr[0]);
 			$end_int=strtotime($range_arr[1])+(24*60*60);
-			$closedatesql= " AND close_date BETWEEN '$begin_int' AND '$end_int' ";
-		} else {
-			$closedatesql= '';
+			$wheresql .= ' AND (close_date BETWEEN $'.$paramcount++ ;
+			$params[] = $begin_int ;
+			$wheresql .= ' AND $'.$paramcount++ ;
+			$params[] = $end_int ;
+			$wheresql .= ')' ;
 		}
-		
-		// these are currently not being used
-		$submitted_by_str = '';
-		
-		//
-		//  now run the query using the criteria chosen above
-		//
-		if ($sys_database_type == "mysql") {
-			$sql="SELECT * FROM (SELECT DISTINCT artifact_vw.* FROM artifact_vw $ef_table_str ";
-		} else {
-			$sql="SELECT * FROM (SELECT DISTINCT ON (group_artifact_id, artifact_id) artifact_vw.* FROM artifact_vw $ef_table_str ";
-		}
-		$sql.="
-			WHERE 
-			group_artifact_id='". $this->ArtifactType->getID() ."'
-			$opendatesql $moddatesql $closedatesql $submitted_by_str
-			 $status_str $assigned_str $last_changed_str $ef_where_str ) AS Artifacts
-			ORDER BY Artifacts.group_artifact_id ".$this->sort.", Artifacts.". $this->order_col ." ".$this->sort;
-//echo "$sql";
-//exit;
 
-		$result=db_query($sql);//,($this->max_rows),$this->offset);
+		$sortorder = util_ensure_value_in_set ($this->sort,
+						       array ('ASC', 'DESC')) ;
+		
+		$sortcol = util_ensure_value_in_set ($this->order_col,
+						     array ('artifact_id',
+							    'summary',
+							    'open_date',
+							    'close_date',
+							    'assigned_to',
+							    'submitted_by',
+							    'priority'));
+		$ordersql = " ORDER BY Artifacts.group_artifact_id.$sortorder, Artifacts.$sortcol $sortorder" ;
+
+		$result = db_query_params ('SELECT * FROM (' . $selectsql . $wheresql . ') AS Artifacts' . $ordersql,
+					   $params) ;
 		$rows = db_numrows($result);
 		$this->fetched_rows=$rows;
 		if (db_error()) {

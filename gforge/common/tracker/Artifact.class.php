@@ -866,42 +866,35 @@ class Artifact extends Error {
 			$extra_fields=array();
 		}
 		
-		
-
-		$sqlu='';
-
 		//
-		//	handle audit trail & build SQL statement
+		//	handle audit trail
 		//
+		$close_date = $this->getCloseDate();
 		if ($this->getStatusID() != $status_id) {
 			$this->addHistory('status_id',$this->getStatusID());
-			$sqlu .= " status_id='$status_id', ";
 			$changes['status'] = 1;
 			$update = true;
 
 			// Reset the close_date if bug is re-opened 
 			// (otherwise stat reports will be wrong).
 			if ($status_id == 1) {
-				$sqlu .= " close_date='0', ";
+				$close_date = 0 ;
 				$this->addHistory('close_date',0);
-			}
+			}			
 		}
 		if ($this->getPriority() != $priority) {
 			$this->addHistory('priority',$this->getPriority());
-			$sqlu .= " priority='$priority', ";
 			$changes['priority'] = 1;
 			$update = true;
 		}
 
 		if ($this->getAssignedTo() != $assigned_to) {
 			$this->addHistory('assigned_to',$this->getAssignedTo());
-			$sqlu .= " assigned_to='$assigned_to', ";
 			$changes['assigned_to'] = 1;
 			$update = true;
 		}
 		if ($summary && (addslashes($this->getSummary()) != htmlspecialchars($summary))) {
 			$this->addHistory('summary', addslashes($this->getSummary()));
-			$sqlu .= " summary='". htmlspecialchars($summary) ."', ";
 			$changes['summary'] = 1;
 			$update = true;
 		}
@@ -916,8 +909,8 @@ class Artifact extends Error {
 		//	Enter the timestamp if we are changing to closed
 		//
 		if ($status_id != 1) {
-			$now=time();
-			$sqlu .= " close_date='$now', ";
+			$now = time();
+			$close_date = $now ;
 			$this->addHistory('close_date',$now);
 			$update = true;
 		}
@@ -926,14 +919,24 @@ class Artifact extends Error {
 			Finally, update the artifact itself
 		*/
 		if ($update){
-			$sql = "UPDATE artifact 
+			$result = db_query_params ('UPDATE artifact 
 				SET 
-				$sqlu
-				group_artifact_id='$new_artifact_type_id'
+				status_id=$1,
+				priority=$2,
+				assigned_to=$3,
+				summary=$4,
+				close_date=$5,
+				group_artifact_id=$6,
 				WHERE 
-				artifact_id='". $this->getID() ."'
-				AND group_artifact_id='$artifact_type_id'";
-			$result=db_query($sql);
+				artifact_id=$7 AND group_artifact_id=$8',
+						   array ($status_id,
+							  $priority,
+							  $assigned_to,
+							  htmlspecialchars ($summary),
+							  $close_date,
+							  $new_artifact_type_id,
+							  $this->getID(),
+							  $artifact_type_id)) ;
 
 			if (!$result || db_affected_rows($result) < 1) {
 				$this->setError('Error - update failed!'.db_error());
