@@ -1,6 +1,7 @@
 #!/usr/bin/php -q
 <?php
 
+require dirname(__FILE__).'/../../env.inc.php';
 require_once $gfwww.'include/squal_pre.php';
 require $gfcommon.'include/cron_utils.php';
 
