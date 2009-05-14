@@ -3,6 +3,7 @@
  * FusionForge surveys
  *
  * Copyright 2004, Sung Kim/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -135,12 +136,10 @@ class SurveyResponseFactory extends Error {
 		$question = $this->getQUestion();
 		$question_id = $question->GetID();
 		
-		$sql="SELECT * FROM survey_responses ".
-			"WHERE survey_id='$survey_id' ".
-			"AND question_id='$question_id' ".
-			"AND group_id='$group_id' ORDER BY post_date DESC";
-
-		$result = db_query ($sql);
+		$result = db_query_params ('SELECT * FROM survey_responses WHERE survey_id=$1 AND question_id=$2 AND group_id=$3 ORDER BY post_date DESC',
+					   array ($survey_id,
+						  $question_id,
+						  $group_id)) ;
 		if (!$result) {
 			$this->setError(_('No Survey Response is found').db_error());
 			return false;

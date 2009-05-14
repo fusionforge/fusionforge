@@ -3,6 +3,7 @@
  * FusionForge surveys
  *
  * Copyright 2004, Sung Kim/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -112,9 +113,11 @@ class Survey extends Error {
 		/* Make old style survey string from array: 1, 2, 3, ..., n */
 		$survey_questions = $this->_makeQuestionString(array_reverse($add_questions));
 
-		$sql="INSERT INTO surveys (survey_title,group_id,survey_questions,is_active) VALUES ('".htmlspecialchars($survey_title)."','$group_id','$survey_questions','$is_active')";
-
-		$result=db_query($sql);
+		$result = db_query_params ('INSERT INTO surveys (survey_title,group_id,survey_questions,is_active) VALUES ($1,$2,$3,$4)',
+					   array (htmlspecialchars($survey_title),
+						  $group_id,
+						  $survey_questions,
+						  $is_active)) ;
 		if (!$result) {
 			$this->setError(_('Insert Error').db_error());
 			return false;
@@ -159,9 +162,12 @@ class Survey extends Error {
 			$add_questions = array_reverse($add_questions);
 			
 		$survey_questions = $this->_updateQuestionString($add_questions, $del_questions);
-		$sql="UPDATE surveys SET survey_title='".htmlspecialchars($survey_title)."', survey_questions='$survey_questions', is_active='$is_active' ".
-			"WHERE survey_id='$survey_id' AND group_id='$group_id'";
-		$result=db_query($sql);
+		$result = db_query_params ('UPDATE surveys SET survey_title=$1, survey_questions=$2, is_active=$3 WHERE survey_id=$4 AND group_id=$5',
+					   array (htmlspecialchars($survey_title),
+						  $survey_questions,
+						  $is_active,
+						  $survey_id,
+						  $group_id)) ;
 		if (db_affected_rows($result) < 1) {
 			 $this->setError(_('UPDATE FAILED').db_error());
 			 return false;
@@ -195,9 +201,10 @@ class Survey extends Error {
 		}
 
 		$survey_questions = $this->_updateQuestionStringOrder($question_number, $delta);
-		$sql="UPDATE surveys SET survey_questions='$survey_questions' ".
-			"WHERE survey_id='$survey_id' AND group_id='$group_id'";
-		$result=db_query($sql);
+		$result = db_query_params ('UPDATE surveys SET survey_questions=$1 WHERE survey_id=$2 AND group_id=$3',
+					   array ($survey_questions,
+						  $survey_id,
+						  $group_id)) ;
 		if (db_affected_rows($result) < 1) {
 			 $this->setError(_('UPDATE FAILED').db_error());
 			 return false;
@@ -217,9 +224,9 @@ class Survey extends Error {
 		$group_id = $this->Group->GetID();
 		$survey_id = $this->getID();
 
-		$sql="DELETE FROM surveys where survey_id='$survey_id' AND group_id='$group_id'";
- 
-		$res=db_query($sql);
+		$res = db_query_params ('DELETE FROM surveys where survey_id=$1 AND group_id=$2',
+					array ($survey_id,
+					       $group_id)) ;
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError(_('Delete failed').db_error());
 			return false;
@@ -239,8 +246,9 @@ class Survey extends Error {
 	function fetchData($survey_id) {
 		$group_id = $this->Group->GetID();
 		
-		$sql="SELECT * FROM surveys WHERE survey_id='$survey_id' AND group_id='$group_id'";
-		$res=db_query($sql);
+		$res = db_query_params ('SELECT * FROM surveys where survey_id=$1 AND group_id=$2',
+					array ($survey_id,
+					       $group_id)) ;
 	
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('No Survey is found').db_error());
@@ -314,9 +322,10 @@ class Survey extends Error {
 		$group_id = $this->Group->GetID();
 		$survey_id = $this->getID();
 		
-		$sql = "SELECT 1 from survey_responses where group_id='$group_id' and survey_id='$survey_id' group by user_id";
-		$res=db_query($sql);
-		$ret  =  db_numrows($res);
+		$res = db_query_params ('SELECT 1 FROM survey_responses where survey_id=$1 AND group_id=$2',
+					array ($survey_id,
+					       $group_id)) ;
+		$ret = db_numrows($res);
 		db_free_result($res);		
 		
 		return $ret;
@@ -332,10 +341,11 @@ class Survey extends Error {
 		$group_id = $this->Group->GetID();
 		$survey_id = $this->getID();
 
-		$sql = "SELECT 1 from survey_responses where group_id='$group_id' and survey_id='$survey_id' and user_id='$user_id'";
-		
-		$res=db_query($sql, 1);
-		$ret  =  db_numrows($res);
+		$res = db_query_params ('SELECT 1 FROM survey_responses where survey_id=$1 AND group_id=$2 AND user_id=$3',
+					array ($survey_id,
+					       $group_id,
+					       $user_id)) ;
+		$ret = db_numrows($res);
 		db_free_result($res);		
 		
 		return $ret;
