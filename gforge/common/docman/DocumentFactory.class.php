@@ -183,57 +183,6 @@ class DocumentFactory extends Error {
 		}
 
 		return $return;
-
-/*
-		if (!$this->stateid) {
-			if (session_loggedin()) {
-				$perm =& $this->Group->getPermission( session_get_user() );
-				if (!$perm || !is_object($perm) || !$perm->isMember()) {
-					$public_flag='AND stateid=1';
-				} else {
-					$public_flag='AND stateid IN (1,4,5)';
-				}
-			} else {
-				$public_flag='AND stateid=1';
-			}
-		} else {
-			if ($this->stateid =='ALL') {
-
-			} else {
-				$public_flag='AND stateid =\''.$this->stateid.'\'';
-			}
-		}
-
-		if ($this->docgroupid) {
-			$docgroupsql="AND doc_group='".$this->docgroupid."'";
-		}
-
-		if ($this->languageid) {
-			$languagesql="AND language_id='".$this->languageid."'";
-		}
-
-		$sql="SELECT *
-			FROM docdata_vw
-			WHERE group_id='". $this->Group->getID() ."' 
-			$public_flag 
-			$docgroupsql
-			$languagesql
-			ORDER BY ".$this->sort;
-
-		$result = db_query ($sql);
-
-		$rows = db_numrows($result);
-
-		if (!$result || $rows < 1) {
-			$this->setError(_('No Documents Found')." ".db_error());
-			return false;
-		} else {
-			while ($arr =& db_fetch_array($result)) {
-				$this->Documents[] = new Document($this->Group, $arr['docid'], $arr);
-			}
-		}
-		return $this->Documents;
-*/
 	}
 	
 	/**
