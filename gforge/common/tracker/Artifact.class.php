@@ -683,7 +683,7 @@ class Artifact extends Error {
 			WHERE pt.group_project_id = pgl.group_project_id AND
 			EXISTS (SELECT project_task_id FROM project_task_artifact
 				WHERE project_task_id=pt.project_task_id
-				AND artifact_id = $1',
+				AND artifact_id = $1)',
 							       array ($this->getID())) ;
 		}
 		return $this->relatedtasks;
