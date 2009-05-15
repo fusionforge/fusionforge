@@ -12,7 +12,7 @@
 # Change path to the GForge directory.
 GFORGE="/opt/gforge"
 
-PHP="/usr/bin/php -f"
+PHP="/usr/bin/php -q -d include_path=.:/etc/gforge:/opt/gforge:/opt/gforge/www/include"
 
 # Don't mail command output to anyone.
 MAILTO=""
