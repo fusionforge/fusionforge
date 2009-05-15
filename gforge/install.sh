@@ -26,6 +26,7 @@ fi
 hostname=$1
 type="";
 msg="";
+version=4.7.3
 
 if [ -f "/etc/redhat-release" ]
 then
@@ -70,7 +71,7 @@ then
 	if [ $mode = "install" ]
 	then
 		php gforge-install-3-db.php
-		php /opt/gforge/db/startpoint.php 4.7
+		php /opt/gforge/db/startpoint.php $version
 
 		# Post installation fixes.
 		perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/httpd/conf/httpd.conf
@@ -99,7 +100,7 @@ then
 	if [ $mode = "install" ]
 	then
 		php gforge-install-3-db.php
-		php /opt/gforge/db/startpoint.php 4.7
+		php /opt/gforge/db/startpoint.php $version
 
 		# Post installation fixes.
 		#perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/apache2/httpd.conf
