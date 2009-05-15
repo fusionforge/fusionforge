@@ -1,4 +1,4 @@
-#! /usr/bin/php4 -f
+#! /usr/bin/php4
 <?php
 //Open encryption module
 $keystr="Veni, vidi, vici!!!";

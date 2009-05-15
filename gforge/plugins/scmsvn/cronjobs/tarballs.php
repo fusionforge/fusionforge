@@ -1,4 +1,4 @@
-#! /usr/bin/php5 -f
+#! /usr/bin/php5
 <?php
 
 require dirname(__FILE__).'/../../env.inc.php';
