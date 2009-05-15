@@ -234,7 +234,7 @@ class SVNPlugin extends SCM {
 			SELECT u.realname, u.user_name, u.user_id, sum(commits) as commits, sum(adds) as adds, sum(adds+commits) as combined
 			FROM stats_cvs_user s, users u
 			WHERE group_id=\''.$group_id.'\' AND s.user_id=u.user_id AND (commits>0 OR adds >0)
-			GROUP BY group_id, realname, user_name
+			GROUP BY group_id, realname, user_name, u.user_id
 			ORDER BY combined DESC, realname;
 		');
 
