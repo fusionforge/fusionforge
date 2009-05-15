@@ -1,3 +1,10 @@
+gforge (4.7.2-9+1) unstable; urgency=low
+
+  * Removed -f option from the shebang line in PHP scripts, as it seems to
+    cause problems (closes: #528792).
+
+ -- Roland Mas <lolando@debian.org>  Fri, 15 May 2009 18:41:11 +0200
+
 gforge (4.7.2-9) unstable; urgency=low
 
   * gforge-plugin-scmsvn: For some reason the code setting up the inetd

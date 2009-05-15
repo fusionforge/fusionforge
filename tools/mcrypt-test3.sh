@@ -1,4 +1,4 @@
-#! /usr/bin/php4 -f
+#! /usr/bin/php4
 <?php
 $td = mcrypt_module_open ('des', '', 'ejb', '') or die;
 $td = mcrypt_module_open ('des', '', 'ofb', '') or die;

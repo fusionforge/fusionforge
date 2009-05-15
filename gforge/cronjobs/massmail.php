@@ -1,4 +1,4 @@
-#! /usr/bin/php5 -f
+#! /usr/bin/php5
 <?php
 /**
  * Massmail backend cron script

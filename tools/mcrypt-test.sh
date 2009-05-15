@@ -1,4 +1,4 @@
-#! /usr/bin/php4 -f
+#! /usr/bin/php4
 <?
 // Voir http://bugs.php.net/bug.php?id=13399&edit=1
 function encrypt_pass($ascii_pass)
