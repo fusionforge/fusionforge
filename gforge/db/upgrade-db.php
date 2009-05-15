@@ -30,7 +30,7 @@ if (version_compare(phpversion(), '4.3.0', '<') || php_sapi_name() == 'cgi') {
        ); 
 }
 
-$db_path = './';
+$db_path = dirname(__FILE__).'/';
 $date = -1;
 $version = '';
 
@@ -63,7 +63,7 @@ if (!$res) { // db error
 }
 
 if (!apply_fixes($version)) {
-	show("ERROR apllying fixes!\n");
+	show("ERROR applying fixes to version $version!\n");
 	exit();
 }
 
@@ -277,13 +277,13 @@ function run_sql_script($filename) {
 		}
 	}
 	
-	// Patch for somre 3.0preX versions
+	// Patch for some 3.0preX versions
 	if ($filename == '20021216.sql') {
 		db_query("SELECT setval('themes_theme_id_key', (SELECT MAX(theme_id) FROM themes), true)");
 		show("Applying fix for some 3.0preX versions\n");
 	}
 	
-	db_commit();
+	//db_commit();
 	return true;
 }
 
@@ -347,6 +347,10 @@ function apply_fixes($version) {
 			$queries[] = "ALTER TABLE project_task ADD CONSTRAINT project_task_group_project_id_f CHECK (1 = 1)";
 			$queries[] = "INSERT INTO database_changes (filename) VALUES ('3.0pre7fixes')";
 		}
+	} else if ($version == '4.7') {
+		run_script(array('filename'=>'20070924-project-perm.sql','ext'=>'sql'));
+		run_script(array('filename'=>'20070924-forum-perm.sql','ext'=>'sql'));
+		run_script(array('filename'=>'20070924-artifact-perm.sql','ext'=>'sql'));
 	}
 
 	//db_begin();

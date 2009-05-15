@@ -1342,34 +1342,6 @@ CREATE TABLE artifact_group_list (
 
 
 
-CREATE SEQUENCE artifact_perm_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    MAXVALUE 2147483647
-    NO MINVALUE
-    CACHE 1;
-
-
-
-CREATE TABLE artifact_perm (
-    id integer DEFAULT nextval('"artifact_perm_id_seq"'::text) NOT NULL,
-    group_artifact_id integer NOT NULL,
-    user_id integer NOT NULL,
-    perm_level integer DEFAULT 0 NOT NULL
-);
-
-
-
-CREATE VIEW artifactperm_user_vw AS
-    SELECT ap.id, ap.group_artifact_id, ap.user_id, ap.perm_level, users.user_name, users.realname FROM artifact_perm ap, users WHERE (users.user_id = ap.user_id);
-
-
-
-CREATE VIEW artifactperm_artgrouplist_vw AS
-    SELECT agl.group_artifact_id, agl.name, agl.description, agl.group_id, ap.user_id, ap.perm_level FROM artifact_perm ap, artifact_group_list agl WHERE (ap.group_artifact_id = agl.group_artifact_id);
-
-
-
 CREATE SEQUENCE artifact_status_id_seq
     INCREMENT BY 1
     MAXVALUE 2147483647
@@ -2195,24 +2167,6 @@ CREATE TABLE role (
 
 
 
-CREATE TABLE project_perm (
-    id serial NOT NULL,
-    group_project_id integer NOT NULL,
-    user_id integer NOT NULL,
-    perm_level integer DEFAULT 0 NOT NULL
-);
-
-
-
-CREATE TABLE forum_perm (
-    id serial NOT NULL,
-    group_forum_id integer NOT NULL,
-    user_id integer NOT NULL,
-    perm_level integer DEFAULT 0 NOT NULL
-);
-
-
-
 CREATE TABLE role_setting (
     role_id integer NOT NULL,
     section_name text NOT NULL,
@@ -2220,6 +2174,55 @@ CREATE TABLE role_setting (
     value character varying(2) NOT NULL
 );
 
+
+CREATE VIEW artifact_perm AS
+       SELECT
+	0 AS id,
+	role_setting.ref_id AS group_artifact_id,
+	user_group.user_id,
+	role_setting.value::int AS perm_level
+       FROM role_setting, user_group
+       WHERE user_group.role_id = role_setting.role_id
+         AND role_setting.section_name='tracker';
+
+
+
+CREATE VIEW artifactperm_artgrouplist_vw AS
+       SELECT
+	agl.group_artifact_id, agl.name, agl.description,
+	agl.group_id, ap.user_id, ap.perm_level
+       FROM artifact_perm ap, artifact_group_list agl
+       WHERE (ap.group_artifact_id = agl.group_artifact_id) ;
+
+
+CREATE VIEW artifactperm_user_vw AS
+       SELECT
+	ap.id, ap.group_artifact_id, ap.user_id, ap.perm_level,
+	users.user_name, users.realname
+       FROM artifact_perm ap, users
+       WHERE (users.user_id = ap.user_id) ;
+
+
+CREATE VIEW project_perm AS
+       SELECT
+	0 AS id,
+	role_setting.ref_id AS group_project_id,
+	user_group.user_id,
+	role_setting.value::int AS perm_level
+       FROM role_setting, user_group
+       WHERE user_group.role_id = role_setting.role_id
+         AND role_setting.section_name='pm';
+
+
+CREATE VIEW forum_perm AS
+       SELECT
+	0 AS id,
+	role_setting.ref_id AS group_forum_id,
+	user_group.user_id,
+	role_setting.value::int AS perm_level
+       FROM role_setting, user_group
+       WHERE user_group.role_id = role_setting.role_id
+         AND role_setting.section_name='forum';
 
 
 CREATE TABLE artifact_extra_field_list (
@@ -3457,11 +3460,6 @@ COPY artifact_group_list (group_artifact_id, group_id, name, description, is_pub
 
 
 
-COPY artifact_perm (id, group_artifact_id, user_id, perm_level) FROM stdin;
-\.
-
-
-
 COPY artifact_status (id, status_name) FROM stdin;
 1	Open
 2	Closed
@@ -4007,16 +4005,6 @@ COPY role (role_id, group_id, role_name) FROM stdin;
 
 
 
-COPY project_perm (id, group_project_id, user_id, perm_level) FROM stdin;
-\.
-
-
-
-COPY forum_perm (id, group_forum_id, user_id, perm_level) FROM stdin;
-\.
-
-
-
 COPY role_setting (role_id, section_name, ref_id, value) FROM stdin;
 2	projectadmin	0	A
 2	frs	0	1
@@ -4529,10 +4517,6 @@ CREATE INDEX artgrouplist_groupid_public ON artifact_group_list USING btree (gro
 
 
 
-CREATE UNIQUE INDEX artperm_groupartifactid_userid ON artifact_perm USING btree (group_artifact_id, user_id);
-
-
-
 CREATE INDEX art_groupartid ON artifact USING btree (group_artifact_id);
 
 
@@ -4746,10 +4730,6 @@ CREATE INDEX projectdep_isdepon_projtaskid ON project_dependencies USING btree (
 
 
 CREATE INDEX projectmsgs_projtaskidpostdate ON project_messages USING btree (project_task_id, postdate);
-
-
-
-CREATE INDEX projectperm_useridgroupprojid ON project_perm USING btree (user_id, group_project_id);
 
 
 
@@ -5052,11 +5032,6 @@ ALTER TABLE ONLY artifact_group_list
 
 
 
-ALTER TABLE ONLY artifact_perm
-    ADD CONSTRAINT artifact_perm_pkey PRIMARY KEY (id);
-
-
-
 ALTER TABLE ONLY artifact_status
     ADD CONSTRAINT artifact_status_pkey PRIMARY KEY (id);
 
@@ -5172,11 +5147,6 @@ ALTER TABLE ONLY forum_monitored_forums
 
 
 
-ALTER TABLE ONLY forum_perm
-    ADD CONSTRAINT forum_perm_pkey PRIMARY KEY (group_forum_id, user_id);
-
-
-
 ALTER TABLE ONLY forum_saved_place
     ADD CONSTRAINT forum_saved_place_pkey PRIMARY KEY (user_id, forum_id);
 
@@ -5204,11 +5174,6 @@ ALTER TABLE ONLY project_counts_agg
 
 ALTER TABLE ONLY project_dependencies
     ADD CONSTRAINT project_dependencies_pkey PRIMARY KEY (project_task_id, is_dependent_on_task_id);
-
-
-
-ALTER TABLE ONLY project_perm
-    ADD CONSTRAINT project_perm_id_key PRIMARY KEY (group_project_id, user_id);
 
 
 
@@ -5339,26 +5304,6 @@ ALTER TABLE ONLY users
 
 ALTER TABLE ONLY role
     ADD CONSTRAINT "$1" FOREIGN KEY (group_id) REFERENCES groups(group_id) ON DELETE CASCADE;
-
-
-
-ALTER TABLE ONLY project_perm
-    ADD CONSTRAINT "$1" FOREIGN KEY (group_project_id) REFERENCES project_group_list(group_project_id) ON DELETE CASCADE;
-
-
-
-ALTER TABLE ONLY project_perm
-    ADD CONSTRAINT "$2" FOREIGN KEY (user_id) REFERENCES users(user_id) MATCH FULL;
-
-
-
-ALTER TABLE ONLY forum_perm
-    ADD CONSTRAINT "$1" FOREIGN KEY (group_forum_id) REFERENCES forum_group_list(group_forum_id) ON DELETE CASCADE;
-
-
-
-ALTER TABLE ONLY forum_perm
-    ADD CONSTRAINT "$2" FOREIGN KEY (user_id) REFERENCES users(user_id) MATCH FULL;
 
 
 
@@ -5791,15 +5736,6 @@ CREATE CONSTRAINT TRIGGER artifactgroup_groupid_fk
 
 
 CREATE CONSTRAINT TRIGGER artifactperm_userid_fk
-    AFTER INSERT OR UPDATE ON artifact_perm
-    FROM users
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifactperm_userid_fk', 'artifact_perm', 'users', 'FULL', 'user_id', 'user_id');
-
-
-
-CREATE CONSTRAINT TRIGGER artifactperm_userid_fk
     AFTER DELETE ON users
     FROM artifact_perm
     NOT DEFERRABLE INITIALLY IMMEDIATE
@@ -5814,15 +5750,6 @@ CREATE CONSTRAINT TRIGGER artifactperm_userid_fk
     NOT DEFERRABLE INITIALLY IMMEDIATE
     FOR EACH ROW
     EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifactperm_userid_fk', 'artifact_perm', 'users', 'FULL', 'user_id', 'user_id');
-
-
-
-CREATE CONSTRAINT TRIGGER artifactperm_groupartifactid_fk
-    AFTER INSERT OR UPDATE ON artifact_perm
-    FROM artifact_group_list
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifactperm_groupartifactid_fk', 'artifact_perm', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
 
 
 
@@ -7508,10 +7435,6 @@ SELECT pg_catalog.setval('artifact_grou_group_artifac_seq', 100, true);
 
 
 
-SELECT pg_catalog.setval('artifact_perm_id_seq', 1, false);
-
-
-
 SELECT pg_catalog.setval('artifact_status_id_seq', 3, true);
 
 
@@ -7597,14 +7520,6 @@ SELECT pg_catalog.setval('user_type_type_id_seq', 2, true);
 
 
 SELECT pg_catalog.setval('role_role_id_seq', 21, true);
-
-
-
-SELECT pg_catalog.setval('project_perm_id_seq', 1, false);
-
-
-
-SELECT pg_catalog.setval('forum_perm_id_seq', 1, false);
 
 
 
@@ -7886,3 +7801,6 @@ CREATE VIEW rep_site_act_monthly_vw AS
 	sum(tasks_closed) AS tasks_closed
 	FROM rep_group_act_monthly
 	GROUP BY month;
+
+
+
