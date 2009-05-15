@@ -47,7 +47,7 @@ example (for installs in /opt/gforge):
 
 5) Add the following cronjob:
 
-12 * * * * root $PHP $GFORGE/cronjobs/dav-svn/create_groups.php /opt
+12 * * * * root $PHP $GFORGE/plugins/wiki/cronjobs/create_groups.php /opt
 
 NOTES: 
 1) Personal wikis are no longer available but can be re-activated quite easily by
