@@ -137,7 +137,7 @@ class FrsSearchQuery extends SearchQuery {
 	 * @param $showNonPublic boolean if we should consider non public sections
 	 */
 	function getSections($groupId, $showNonPublic) {
-		$sql = 'SELECT package_id, name FROM frs_package WHERE group_id = \''.$groupId.'\' ORDER BY name';
+		$sql = 'SELECT package_id, name FROM frs_package WHERE group_id = \''.$groupId.'\'';
 		
 		if(!$showNonPublic) {
 			$sql .= ' AND is_public=1';
