@@ -1,4 +1,4 @@
-#! /usr/bin/php5 -f
+#! /usr/bin/php5
 <?php
 require_once $gfwww.'include/squal_pre.php';
 require_once $gfcommon.'mail/MailingList.class.php';

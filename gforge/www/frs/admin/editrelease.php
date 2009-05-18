@@ -370,7 +370,7 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 					<td><?php echo frs_show_filetype_popup ('type_id', db_result($res,$x,'type_id')); ?></td>
 				</tr>
 				<tr <?php echo $HTML->boxGetAltRowStyle($x); ?>>
-				file:///usr/share/ubuntu-artwork/home/index.html	<td>
+					<td>
 						
 							<?php echo frs_show_release_popup ($group_id, $name='new_release_id',db_result($res,$x,'release_id')); ?>
 						
