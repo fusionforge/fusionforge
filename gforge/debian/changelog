@@ -15,11 +15,12 @@ gforge (4.8.50-1) experimental; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Wed, 29 Apr 2009 15:21:31 +0200
   
-gforge (4.8~rc1-2+1) experimental; urgency=low
+gforge (4.8~rc2-1) experimental; urgency=low
 
+  * New upstream release candidate.
   * Fixed path to install-svn.sh in -plugin-scmsvn's postinst and prerm.
 
- -- Roland Mas <lolando@debian.org>  Fri, 15 May 2009 16:59:08 +0200
+ -- Roland Mas <lolando@debian.org>  Mon, 18 May 2009 11:24:58 +0200
 
 gforge (4.8~rc1-2) experimental; urgency=low
 
