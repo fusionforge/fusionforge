@@ -2242,7 +2242,8 @@ CREATE TABLE artifact_extra_field_elements (
     element_id integer DEFAULT nextval('artifact_extra_field_elements_element_id_seq'::text) NOT NULL,
     extra_field_id integer NOT NULL,
     element_name text NOT NULL,
-    status_id integer DEFAULT 0 NOT NULL
+    status_id integer DEFAULT 0 NOT NULL,
+    element_pos integer
 );
 
 
@@ -2609,7 +2610,8 @@ CREATE TABLE artifact_query (
     artifact_query_id serial NOT NULL,
     group_artifact_id integer NOT NULL,
     user_id integer NOT NULL,
-    query_name text NOT NULL
+    query_name text NOT NULL,
+    query_type integer DEFAULT 0 NOT NULL
 );
 
 
@@ -7808,5 +7810,85 @@ CREATE VIEW rep_site_act_monthly_vw AS
 	FROM rep_group_act_monthly
 	GROUP BY month;
 
+DROP VIEW "artifact_group_list_vw";
 
+ALTER TABLE "artifact_group_list" ADD COLUMN "browse_list" text;
+UPDATE "artifact_group_list" 
+  SET browse_list='summary,open_date,assigned_to,submitted_by';
+ALTER TABLE "artifact_group_list" ALTER COLUMN browse_list SET NOT NULL;
+ALTER TABLE "artifact_group_list" ALTER COLUMN browse_list
+  SET DEFAULT 'summary,open_date,assigned_to,submitted_by';
+
+CREATE VIEW "artifact_group_list_vw" AS 
+  SELECT agl.group_artifact_id, agl.group_id, agl.name, agl.description,
+    agl.is_public, agl.allow_anon, agl.email_all_updates, agl.email_address,
+    agl.due_period, agl.submit_instructions, agl.browse_instructions, 
+    agl.browse_list, agl.datatype, agl.status_timeout, agl.custom_status_field, 
+    agl.custom_renderer, aca.count, aca.open_count
+  FROM artifact_group_list agl
+  LEFT JOIN artifact_counts_agg aca USING (group_artifact_id);
+ALTER TABLE artifact_extra_field_list ADD CONSTRAINT artifact_extra_field_list_unique UNIQUE (group_artifact_id, extra_field_id);
+
+-- Table: artifact_workflow_event
+
+CREATE SEQUENCE artifact_workflow_event_id_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 2147483647
+  START 1
+  CACHE 1;
+-- ALTER TABLE artifact_workflow_event_id_seq OWNER TO gforge;
+
+CREATE TABLE artifact_workflow_event
+(
+  event_id integer NOT NULL DEFAULT nextval('"artifact_workflow_event_id_seq"'::text),
+  group_artifact_id integer NOT NULL,
+  field_id integer NOT NULL,
+  from_value_id integer NOT NULL,
+  to_value_id integer NOT NULL,
+  CONSTRAINT artifact_workflow_event_pkey PRIMARY KEY (event_id),
+  CONSTRAINT artifact_workflow_event_group_artifact_id_fkey FOREIGN KEY (group_artifact_id, field_id) 
+	REFERENCES artifact_extra_field_list (group_artifact_id, extra_field_id) MATCH SIMPLE
+	ON UPDATE NO ACTION ON DELETE CASCADE
+) 
+WITH OIDS;
+-- ALTER TABLE artifact_workflow_event OWNER TO gforge;
+
+-- Index: artifact_workflow_event_index
+
+CREATE INDEX artifact_workflow_event_index
+  ON artifact_workflow_event
+  USING btree
+  (event_id, group_artifact_id, field_id);
+
+
+
+-- Table: artifact_workflow_roles
+
+CREATE TABLE artifact_workflow_roles
+(
+  event_id integer NOT NULL,
+  role_id integer NOT NULL,
+  CONSTRAINT artifact_workflow_roles_pkey PRIMARY KEY (event_id, role_id),
+  CONSTRAINT artifact_workflow_roles_event_id_fkey FOREIGN KEY (event_id)
+      REFERENCES artifact_workflow_event (event_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE CASCADE
+)
+WITH OIDS;
+-- ALTER TABLE artifact_workflow_roles OWNER TO gforge;
+
+
+-- Table: artifact_workflow_notify
+
+CREATE TABLE artifact_workflow_notify
+(
+  event_id integer NOT NULL,
+  role_id integer NOT NULL,
+  CONSTRAINT artifact_workflow_notify_pkey PRIMARY KEY (event_id, role_id),
+  CONSTRAINT artifact_workflow_notify_event_id_fkey FOREIGN KEY (event_id)
+      REFERENCES artifact_workflow_event (event_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE CASCADE
+) 
+WITH OIDS;
+-- ALTER TABLE artifact_workflow_notify OWNER TO gforge;
 

@@ -19,29 +19,61 @@
 		$rows=count($efearr);
 		if ($rows > 0) {
 			
+			?>
+			<form action="<?php echo 'index.php?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;boxid='.$boxid; ?>" method="post">
+			<?php
 			$title_arr=array();
+			$title_arr[]=_('Current / New positions');
+			$title_arr[]=_('Up/Down positions');
 			$title_arr[]=_('Elements Defined');
-
-			echo $GLOBALS['HTML']->listTableTop ($title_arr);
+			$title_arr[]='';
+			
+			echo $GLOBALS['HTML']->listTableTop ($title_arr,false, ' ');
 
 			for ($i=0; $i < $rows; $i++) {
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
-					'<td><a href="'.getStringFromServer('PHP_SELF').'?update_opt=1&amp;id='.
+					'<td align="right">'.
+					($i + 1).'&nbsp;--&gt;&nbsp;<input type="text" name="order['. $efearr[$i]['element_id'] .']" value="" size="3" maxlength="3" />'.
+					'</td>'."\n".'<td align="center">'.'&nbsp;&nbsp;&nbsp;'.
+					'<a href="index.php?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;boxid='.$boxid.'&amp;id='.$efearr[$i]['element_id'].
+					'&amp;updownorder_opt=1&amp;new_pos='.(($i == 0)? $i + 1 : $i).'">'.html_image('ic/btn_up.png','19','18',array('alt'=>"Up")).'</a>'.
+					'&nbsp;&nbsp;'.
+					'<a href="index.php?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;boxid='.$boxid.'&amp;id='.$efearr[$i]['element_id'].
+					'&amp;updownorder_opt=1&amp;new_pos='.(($i == $rows - 1)? $i + 1 : $i + 2).'">'.html_image('ic/btn_down.png','19','18',array('alt'=>"Down")).'</a>'.
+					'</td>'."\n".'<td>'.'&nbsp;&nbsp;&nbsp;'.$efearr[$i]['element_name'].
+					'</td>'."\n".'<td align="center">'.
+					'<a href="'.getStringFromServer('PHP_SELF').'?update_opt=1&amp;id='.
 					$efearr[$i]['element_id'].'&amp;boxid='.			
 					$boxid.'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
-					$efearr[$i]['element_name'].' ['._('Edit').']</a></td>';
+					html_image('ic/forum_edit.gif','37','15',array('alt'=>"Edit")).'</a>'.
+					'</td></tr>'."\n";
 			}		   
-			echo $GLOBALS['HTML']->listTableBottom();
+//			echo $GLOBALS['HTML']->listTableBottom();
+			?>
+			<tr class="noborder">
+			<td align="right">
+			<input type="submit" name="post_changes_order" value="<?php echo _('Reorder') ?>" />
+			</td>
+			<td>
+			</td>
+			<td align="left">
+			<input type="submit" name="post_changes_alphaorder" value="<?php echo _('Alphabetical order') ?>" />
+			</td>
+			</tr>
+			<?php echo $GLOBALS['HTML']->listTableBottom(); ?>
+			</form>
+			<?php
 
 		} else { 
 			echo "\n<h3>"._('You have not defined any elements')."</h3>";
 		}
 		?>
-		<p>
-		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&boxid='.$boxid.'&atid='.$ath->getID(); ?>" method="post">
+		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;boxid='.$boxid.'&amp;atid='.$ath->getID(); ?>" method="post">
 		<input type="hidden" name="add_opt" value="y" />
-		<strong><?php echo _('Add New Element') ?>:</strong><br />
-		<input type="text" name="name" value="" size="15" maxlength="30" /> <br \>
+		<br />
+		<p>
+		<strong><?php echo _('Add New Element') ?>:</strong>
+		<input type="text" name="name" value="" size="15" maxlength="30" />
 		<!--
 		Show a pop-up box to choose the possible statuses that this element will map to
 		-->
@@ -49,12 +81,11 @@
 		<strong><?php echo _('Status'); ?></strong><br />
 		<?php echo $ath->statusBox('status_id',1,false,false); ?>
 		<?php } ?>
-		<p>
-		<span class="warning"><?php echo _('Once you add a new element, it cannot be deleted') ?></span></p>
-		<p>
-		<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
-		</form>
+		&nbsp;&nbsp;<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
 		</p>
+		<span class="warning"><?php echo _('Once you add a new element, it cannot be deleted') ?></span>
+		</form>
+		<br />
 		<?php
 		$ath->footer(array());
 	}

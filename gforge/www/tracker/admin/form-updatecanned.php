@@ -23,7 +23,7 @@ echo "<h1>".$title."</h1>";
 			<input type="text" name="title" value="<?php echo $acr->getTitle(); ?>" size="50" maxlength="50" />
 			<p>
 			<strong><?php echo _('Message Body') ?>:</strong><br />
-			<textarea name="body" rows="30" cols="65" wrap="hard"><?php echo $acr->getBody(); ?></textarea></p>
+			<textarea name="body" rows="30" cols="65"><?php echo $acr->getBody(); ?></textarea></p>
 			<p>
 			<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
 			</form>

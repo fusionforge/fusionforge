@@ -34,6 +34,9 @@ define('ARTIFACT_QUERY_SORTCOL',5);
 define('ARTIFACT_QUERY_SORTORD',6);
 define('ARTIFACT_QUERY_OPENDATE',7);
 define('ARTIFACT_QUERY_CLOSEDATE',8);
+define('ARTIFACT_QUERY_SUMMARY',9);
+define('ARTIFACT_QUERY_DESCRIPTION',10);
+define('ARTIFACT_QUERY_FOLLOWUPS',11);
 
 require_once $gfcommon.'tracker/ArtifactType.class.php';
 
@@ -89,12 +92,13 @@ class ArtifactQuery extends Error {
 	}
 
 	/**
-	 *	create - create a row in the table that stores a saved query for 	 *	a tracker.   
+	 *	create - create a row in the table that stores a saved query for
+	 *  a tracker.   
 	 *
 	 *	@param	string	Name of the saved query.
-	 *  	@return 	true on success / false on failure.
+	 *  @return 	true on success / false on failure.
 	 */
-	function create($name,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange=0,$closedaterange=0) {
+	function create($name,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange=0,$closedaterange=0,$summary,$description,$followups,$query_type=0) {
 		//
 		//	data validation
 		//
@@ -112,11 +116,27 @@ class ArtifactQuery extends Error {
 			return false;
 		}
 
+		if ($query_type>0 && !$this->ArtifactType->userIsAdmin()) {
+			$this->setError($Language->getText('artifact_query','require_admin_rights'));
+			return false;
+		}
+		
+		// Reset the project default query.
+		if ($query_type==2) {
+			$sql="UPDATE artifact_query SET query_type=1 WHERE query_type=2 AND group_artifact_id='".$this->ArtifactType->getID()."'";
+			$res=db_query($sql);
+			if (!$res) {
+				$this->setError('Error Updating: '.db_error());
+				return false;
+			}
+		}
+		
 		db_begin();
-		$result = db_query_params ('INSERT INTO artifact_query (group_artifact_id,query_name,user_id) VALUES ($1,$2,$3)',
+		$result = db_query_params ('INSERT INTO artifact_query (group_artifact_id,query_name,user_id,query_type) VALUES ($1,$2,$3,$4)',
 					   array ($this->ArtifactType->getID(),
 						  htmlspecialchars($name),
-						  user_getid())) ;
+						  user_getid(),
+						  $query_type)) ;
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
 			$id=db_insertid($result,'artifact_query','artifact_query_id');
@@ -125,7 +145,7 @@ class ArtifactQuery extends Error {
 				db_rollback();
 				return false;
 			} else {
-				if (!$this->insertElements($id,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange,$closedaterange)) {
+				if (!$this->insertElements($id,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange,$closedaterange,$summary,$description,$followups)) {
 					db_rollback();
 					return false;
 				}
@@ -191,7 +211,7 @@ class ArtifactQuery extends Error {
 	 *
 	 *
 	 */
-	function insertElements($id,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange,$closedaterange) {
+	function insertElements($id,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange,$closedaterange,$summary,$description,$followups) {
 		$res = db_query_params ('DELETE FROM artifact_query_fields WHERE artifact_query_id=$1',
 					array ($id)) ;
 		if (!$res) {
@@ -310,6 +330,33 @@ class ArtifactQuery extends Error {
 			$this->setError('Setting Sort Order: '.db_error());
 			return false;
 		}
+		
+		// Saving the summary value.
+		$res=db_query("INSERT INTO artifact_query_fields 
+			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
+			VALUES ('$id','".ARTIFACT_QUERY_SUMMARY."','0','".$summary."')");
+		if (!$res) {
+			$this->setError('Setting Summary: '.db_error());
+			return false;
+		}
+
+		// Saving the description value.
+		$res=db_query("INSERT INTO artifact_query_fields 
+			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
+			VALUES ('$id','".ARTIFACT_QUERY_DESCRIPTION."','0','".$description."')");
+		if (!$res) {
+			$this->setError('Setting Description: '.db_error());
+			return false;
+		}
+		
+		// Saving the followups value.
+		$res=db_query("INSERT INTO artifact_query_fields 
+			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
+			VALUES ('$id','".ARTIFACT_QUERY_FOLLOWUPS."','0','".$followups."')");
+		if (!$res) {
+			$this->setError('Setting Followups: '.db_error());
+			return false;
+		}
 
 		if (!$extra_fields) {
 			$extra_fields=array();
@@ -329,8 +376,6 @@ class ArtifactQuery extends Error {
 					$vals[$i][$e]=intval($vals[$i][$e]); 
 				}
 				$vals[$i]=implode(',',$vals[$i]);
-			} else {
-				$vals[$i] =	 intval($vals[$i]);
 			}
 			$res = db_query_params ('INSERT INTO artifact_query_fields 
 			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
@@ -363,6 +408,24 @@ class ArtifactQuery extends Error {
 	 */
 	function getName() {
 		return $this->data_array['query_name'];
+	}
+
+	/**
+	 *	getUserId - get the user_id.
+	 *
+	 *	@return	string	The user_id.
+	 */
+	function getUserId() {
+		return $this->data_array['user_id'];
+	}
+
+	/**
+	 *	getQueryType - get the type of the query
+	 *
+	 *	@return	string	type of query (0: private, 1: project, 2: project&default)
+	 */
+	function getQueryType() {
+		return $this->data_array['query_type'];
 	}
 
 	/**
@@ -423,6 +486,45 @@ class ArtifactQuery extends Error {
 	}
 
 	/**
+	 *	getSummary - get the summary string to include in a query
+	 *
+	 *	@return	string	Summary string.
+	 */
+	function getSummary() {
+		if ($this->element_array[ARTIFACT_QUERY_SUMMARY][0]) {
+			return $this->element_array[ARTIFACT_QUERY_SUMMARY][0];
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 *	getDescription - get the description string to include in a query
+	 *
+	 *	@return	string	Description string.
+	 */
+	function getDescription() {
+		if ($this->element_array[ARTIFACT_QUERY_DESCRIPTION][0]) {
+			return $this->element_array[ARTIFACT_QUERY_DESCRIPTION][0];
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 *	getFollowups - get the followups string to include in a query
+	 *
+	 *	@return	string	Folowups string.
+	 */
+	function getFollowups() {
+		if ($this->element_array[ARTIFACT_QUERY_FOLLOWUPS][0]) {
+			return $this->element_array[ARTIFACT_QUERY_FOLLOWUPS][0];
+		} else {
+			return false;
+		}
+	}
+
+	/**
 	 *	getAssignee
 	 *
 	 *	@return	string	Assignee ID
@@ -466,7 +568,7 @@ class ArtifactQuery extends Error {
 	 *	@param	string	The name of the saved query
 	 *  @return	boolean	success.
 	 */
-	function update($name,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange='',$closedaterange='') {
+	function update($name,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange='',$closedaterange='',$summary,$description,$followups,$query_type=0) {
 		if (!$name) {
 			$this->setMissingParamsError();
 			return false;
@@ -479,16 +581,32 @@ class ArtifactQuery extends Error {
 			$this->setError(_('Query does not exist'));
 			return false;
 		}
+		if ($query_type>0 && !$this->ArtifactType->userIsAdmin()) {
+			$this->setError($Language->getText('artifact_query','require_admin_rights'));
+			return false;
+		}
+		
+		// Reset the project default query.
+		if ($query_type==2) {
+			$sql="UPDATE artifact_query SET query_type=1 WHERE query_type=2 AND group_artifact_id='".$this->ArtifactType->getID()."'";
+			$res=db_query($sql);
+			if (!$res) {
+				$this->setError('Error Updating: '.db_error());
+				return false;
+			}
+		}
 		db_begin();
 		$result = db_query_params ('UPDATE artifact_query
-			SET query_name=$1
-			WHERE artifact_query_id=$2
-			AND user_id=$3',
+			SET query_name=$1,
+				query_type=$2
+			WHERE artifact_query_id=$3
+			AND user_id=$4',
 					   array (htmlspecialchars($name),
+						  $query_type,
 						  $this->getID(),
 						  user_getid())) ;
 		if ($result && db_affected_rows($result) > 0) {
-			if (!$this->insertElements($this->getID(),$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange,$closedaterange)) {
+			if (!$this->insertElements($this->getID(),$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange,$closedaterange,$summary,$description,$followups)) {
 				db_rollback();
 				return false;
 			} else {
@@ -518,9 +636,15 @@ class ArtifactQuery extends Error {
 	}
 
 	function delete() {
-		$res = db_query_params ('DELETE FROM artifact_query WHERE artifact_query_id=$1 AND user_id=$2',
+		if ($this->ArtifactType->userIsAdmin()) {
+			$res = db_query_params ('DELETE FROM artifact_query WHERE artifact_query_id=$1 AND (user_id=$2 OR query_type>0)',
 					array ($this->getID(),
 					       user_getid())) ;
+		} else {
+			$res = db_query_params ('DELETE FROM artifact_query WHERE artifact_query_id=$1 AND user_id=$2',
+					array ($this->getID(),
+					       user_getid())) ;
+		}
 		$res = db_query_params ('DELETE FROM user_preferences WHERE preference_value=$1 AND preference_name =$2',
 					array ($this->getID(),
 					       'art_query'.$this->ArtifactType->getID())) ;
@@ -536,7 +660,7 @@ class ArtifactQuery extends Error {
 	function Exist($name) {
 		$user_id = user_getid();
 		$art_id = $this->ArtifactType->getID();
-		$res = db_query_params ('SELECT * FROM artifact_query WHERE group_artifact_id = $1 AND query_name = $2 AND user_id = $3',
+		$res = db_query_params ('SELECT * FROM artifact_query WHERE group_artifact_id = $1 AND query_name = $2 AND (user_id = $3 OR query_type>0)',
 					array ($art_id,
 					       $name,
 					       $user_id)) ;

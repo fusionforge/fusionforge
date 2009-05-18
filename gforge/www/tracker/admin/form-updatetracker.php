@@ -42,10 +42,10 @@ $ath->adminHeader(array ('title'=>sprintf(_('Modify A Group In %s'),$ath->getNam
 		<input type="text" name="status_timeout"  value="<?php echo($ath->getStatusTimeout() / 86400); ?>" /></p>
 		<p>
 		<strong><?php echo _('Free form text for the "submit new item" page') ?>:</strong><br />
-		<textarea name="submit_instructions" rows="10" cols="55" wrap="hard"><?php echo $ath->getSubmitInstructions(); ?></textarea></p>
+		<textarea name="submit_instructions" rows="10" cols="55"><?php echo $ath->getSubmitInstructions(); ?></textarea></p>
 		<p>
 		<strong><?php echo _('Free form text for the "browse items" page') ?>:</strong><br />
-		<textarea name="browse_instructions" rows="10" cols="55" wrap="hard"><?php echo $ath->getBrowseInstructions(); ?></textarea></p>
+		<textarea name="browse_instructions" rows="10" cols="55"><?php echo $ath->getBrowseInstructions(); ?></textarea></p>
 		<p>
 		<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
 		</form>

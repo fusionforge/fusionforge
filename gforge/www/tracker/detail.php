@@ -24,7 +24,7 @@ echo notepad_func();
 				<?php 
 					if ($ah->isMonitoring()) {
 						$img="xmail16w.png";
-						$key="stop_monitoring";
+						$key="monitorstop";
 					} else {
 						$img="mail16w.png";
 						$key="monitor";
@@ -66,7 +66,7 @@ echo notepad_func();
 		</tr>
 
 	<?php
-		//$ath->renderExtraFields($ah->getExtraFieldData(),true);
+		$ath->renderExtraFields($ah->getExtraFieldData(),true,'none',false,'Any','',false,'DISPLAY');
 	?>
 
 		<tr><td colspan="2"><strong><?php echo _('Summary') ?>:</strong><br /><?php echo $ah->getSummary(); ?></td></tr>
@@ -83,18 +83,19 @@ echo notepad_func();
 	<table border="0" width="80%">
 		<tr><td colspan="2">
 			<?php if ($ath->allowsAnon() || session_loggedin()) { ?>
-			<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
-			<input type="hidden" name="func" value="postmod">
-			<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>">
+			<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
+			<input type="hidden" name="func" value="postmod" />
+			<input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
+			<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>" />
 			<p>
 			<strong><?php echo _('Add A Comment') ?>:</strong> 
 			<?php echo notepad_button('document.forms[1].details') ?><br />
-			<textarea name="details" ROWS="10" COLS="60" WRAP="SOFT"></textarea>
+			<textarea name="details" rows="10" cols="60"></textarea>
+			</p>
 			<?php } ?>
 		</td></tr>
 		<tr><td colspan="2">
 		<h3><?php echo _('Followup') ?></h3>
-		<p>
 		<?php
 		echo $ah->showMessages();
 		?>
@@ -143,7 +144,7 @@ if ($group->usesPM()) {
 <?php } ?>
 <div class="tabbertab" title="<?php echo _('Attachments'); ?>">
 <table border="0" width="80%">
-	<tr><td colspan=2>
+	<tr><td colspan="2">
 	<?php if (session_loggedin() && ($ah->getSubmittedBy() == user_getid())) { ?>
 		<strong><?php echo _('Attach Files'); ?></strong><br />
 		<input type="file" name="input_file[]" size="30" /><br />
@@ -179,9 +180,8 @@ if ($group->usesPM()) {
 	} else {
 		echo _('No Files Currently Attached');
 	}
-	
-
 ?>
+	</td></tr>
 </table>
 </div>
 <div class="tabbertab" title="<?php echo _('Commits'); ?>" >
@@ -197,7 +197,6 @@ if ($group->usesPM()) {
 	<tr>
 	<td colspan="2">
 	<h3><?php echo _('Changes') ?>:</h3>
-	<p>
 	<?php
 
 	echo $ah->showHistory();
@@ -207,7 +206,9 @@ if ($group->usesPM()) {
 	</tr>
 </table>
 </div>
+<?php $ah->showRelations(); ?>
 </div>
+</form>
 <?php
 
 $ath->footer(array());

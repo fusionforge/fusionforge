@@ -38,30 +38,26 @@
 			$field_arr[] = $efearr[$i]['element_name'];
 		}
 		?>
-		<form action="<?php echo getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post" >
-                <?php
-		echo '<table>';
-		echo '<tr>';
-		echo '<td></td><td><center><strong>';
-		echo _('Copy From');
-		echo '<br />';
-		echo $fb->getName();
-		echo '</strong></center></td><td></td><td><center><strong>';
-		
-		echo _('Into trackers and custom fields');
-		echo '</strong></center></td></tr><tr><td><center><strong>';
-		echo '</strong></center></td>';
-		echo '<td valign="top">';
-		?>
-		
+		<form action="<?php echo getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post" >        
+		<table>
+		<tr>
+		<td></td><td><center><strong>';
+		<?php echo _('Copy From') ?>
+		<br />
+		<?php echo $fb->getName() ?>
+		</strong></center></td>
+		<td></td>
+		<td><center><strong>
+		<?php echo _('Into trackers and custom fields') ?>
+		</strong></center></td></tr>
+		<tr><td></td>
+		<td valign="top">
 		<input type="hidden" name="copy_opt" value="copy" />
 		<input type="hidden" name="id" value="<?php echo $id; ?>" />
 		<?php
 		echo html_build_multiple_select_box_from_arrays($field_id_arr,$field_arr,'copyid[]',array(),10,false);
 		echo '</td><td><center><strong>';
 		
-//		echo db_error().$sql;
-
 		while($arr =db_fetch_array($res)) {
 				$name_arr[]=$arr['unix_group_name']. '::'. $arr['tracker_name'] . '::'. $arr['field_name'];
 				$id_arr[]=$arr['extra_field_id'];

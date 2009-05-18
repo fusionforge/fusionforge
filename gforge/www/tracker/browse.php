@@ -16,6 +16,8 @@ if (!$ath->userCanView()) {
 	exit_permission_denied();
 }
 
+$query_id = getIntFromRequest('query_id');
+
 //
 //	The browse page can be powered by a pre-saved query
 //	or by select boxes chosen by the user
@@ -26,8 +28,6 @@ if (!$ath->userCanView()) {
 //	If the query_id = -1, unset the pref and use regular browse boxes
 //
 if (session_loggedin()) {
-	$query_id = getIntFromRequest('query_id');
-
 	if($query_id) {
 		if ($query_id == '-1') {
 			$u =& session_get_user();
@@ -43,6 +43,20 @@ if (session_loggedin()) {
 		$u =& session_get_user();
 		$query_id=$u->getPreference('art_query'.$ath->getID(),'');
 	}
+} elseif ($query_id) {
+	// If user is not logged, then use a cookie to store the current query.
+	if (isset($_COOKIE["GFTrackerQuery"])) {
+		$gf_tracker = unserialize($_COOKIE["GFTrackerQuery"]);
+	} else {
+		$gf_tracker = array();
+	}
+	$gf_tracker[$ath->getID()] = $query_id;
+	// Send the query_id as a cookie to save it.
+	setcookie("GFTrackerQuery", serialize($gf_tracker));
+	$_COOKIE["GFTrackerQuery"] = serialize($gf_tracker);
+} elseif (isset($_COOKIE["GFTrackerQuery"])) {
+	$gf_tracker = unserialize($_COOKIE["GFTrackerQuery"]);
+	$query_id = (int)$gf_tracker[$ath->getID()];
 }
 
 $af = new ArtifactFactory($ath);
@@ -182,6 +196,12 @@ $changed_arr[]= 3600 * 24 * 7; // 1 week
 $changed_arr[]= 3600 * 24 * 14;// 2 week
 $changed_arr[]= 3600 * 24 * 30;// 1 month
 
+/**
+ *
+ *	Show the free-form text submitted by the project admin
+ */
+echo $ath->renderBrowseInstructions();
+
 //
 //	statuses can be custom in GForge 4.5+
 //
@@ -204,70 +224,109 @@ if ($ath->usesCustomStatuses()) {
 	}
 	$status_box = $ath->statusBox('_status',$_status,true,_('Any'));
 }
+echo '<script type="text/javascript" src="/tabber/tabber.js"></script>'."\n";
 echo '
-<table width="100%" border="0">';
+<div id="tabber" class="tabber">
+	<div class="tabbertab" title="'._('Advanced queries').'">';
 
-echo '
-	<tr>';
-/*
-	Logged in users get the option of seeing a power-browse box
-*/
 if (session_loggedin()) {
-	echo '<td rowspan="2">';
-	echo '<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&atid='.$ath->getID().'" method="post">';
-	echo '<input type="hidden" name="power_query" value="1">';
-	$res=db_query("SELECT artifact_query_id,query_name 
-	FROM artifact_query WHERE user_id='".user_getid()."' AND group_artifact_id='".$ath->getID()."'");
+	$filter = "AND (user_id='".user_getid()."' OR query_type>0)";
+} else {
+	$filter = "AND query_type>0";
+}
 
-	if (db_numrows($res)>0) {
-	echo 
-		html_build_select_box($res,'query_id',$af->getDefaultQuery(),false).'<br />
-		<input type="submit" name="run" value="'._('Power Query').'"></input>
-		<strong><a href="javascript:admin_window(\''.util_make_url ('/tracker/?func=query&group_id='.$group_id.'&atid='.$ath->getID()).'\')">'.
-		_('Build Query').'</a></strong>';
-	} else {
-		echo '<strong>
-		<a href="javascript:admin_window(\''.util_make_url ('/tracker/?func=query&group_id='.$group_id.'&atid='.$ath->getID()).'\')">'._('Build Query').'</a></strong>';
+$sql="SELECT artifact_query_id,query_name, CASE WHEN query_type>0 THEN 1 ELSE 0 END as type 
+	FROM artifact_query 
+	WHERE group_artifact_id='".$ath->getID()."' $filter
+	ORDER BY type ASC, query_name ASC";
+$res = db_query($sql);
+
+if (db_numrows($res)>0) {
+	echo '<form action="'. getStringFromServer('PHP_SELF') .'" method="get">';
+	echo '<input type="hidden" name="group_id" value="'.$group_id.'" />';
+	echo '<input type="hidden" name="atid" value="'.$ath->getID().'" />';
+	echo '<input type="hidden" name="power_query" value="1" />';
+	echo '	<table width="100%" cellspacing="0">
+	<tr>
+	<td>
+	';
+	$optgroup['key'] = 'type';
+	$optgroup['values'][0] = 'Private queries';
+	$optgroup['values'][1] = 'Project queries';
+	echo '<span style="font-size:smaller">';
+	echo '<select name="query_id">';
+	echo '<option value="100">Select One</option>';
+	$current = '';
+	$selected = $af->getDefaultQuery();
+	while ($row = db_fetch_array($res)) {
+		if ($current != $row['type']) {
+			if ($current !== '') 
+				echo '</optgroup>';
+			$label = $row['type'] ? 'Project' : 'Private';
+			echo '<optgroup label="'.$label.'">';
+			$current = $row['type'];
+		}
+		echo '<option value="'.$row['artifact_query_id'].'"';
+		if ($row['artifact_query_id'] == $selected)
+			echo ' selected="selected"';
+		echo '>'. $row['query_name'] .'</option>'."\n";
 	}
-	echo '
-		</form>
-		</td>';
+	if ($current !== '') 
+		echo '</optgroup>';
+	echo '</select>';
+	echo '</span>
+	<input type="submit" name="run" value="'._('Power Query').'" />
+	&nbsp;&nbsp;<a href="/tracker/?atid='. $ath->getID().'&amp;group_id='.$group_id.'&amp;func=query">'.
+	_('Build Query').'</a>
+	</td></tr></table>
+	</form>';
+} else {
+	echo '<strong>
+	<a href="/tracker/?atid='. $ath->getID().'&amp;group_id='.$group_id.'&amp;func=query">'._('Build Query').'</a></strong>';
 }
 echo '
-	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&atid='.$ath->getID().'" method="post">
+	</div>
+	<div class="tabbertab'.($af->query_type == 'custom' ? ' tabbertabdefault' : '').'" title="'._('Simple Filtering and Sorting').'">
+	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;atid='.$ath->getID().'" method="post">
+	<input type="hidden" name="query_id" value="-1" />
 	<input type="hidden" name="set" value="custom" />
-	<td>'._('Assignee').'<br />'. $tech_box .'</td>'.
-	'<td>'._('Status').'<br />'. $status_box .'</td>';
-	echo '
-</tr>
-
-<input type="hidden" name="query_id" value="-1">';
-
-	echo '
+	<table width="100%" cellspacing="0">
 	<tr>
-		<td align="right">'._('Order by').' <a href="javascript:help_window(\''.util_make_url ('/help/tracker.php?helpname=sort_by').'\')"><strong>(?)</strong></a></span></td>'.
-		'<td>'. 
-		html_build_select_box_from_arrays($order_arr,$order_name_arr,'_sort_col',$_sort_col,false) .
-		html_build_select_box_from_arrays($sort_arr,$sort_name_arr,'_sort_ord',$_sort_ord,false) .
-		'<input type="submit" name="submit" value="'._('Quick Browse').'" /></span></td>
-	</tr>';
+	<td>
+	'._('Assignee').':&nbsp;'. $tech_box .'
+	</td>
+	<td align="center">
+	'._('State').':&nbsp;'. $status_box .'
+	</td>
+	<td align="right">';
 
+echo _('Order by').
+	':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=sort_by\')">' .
+	'<strong>(?)</strong></a>'.
+	html_build_select_box_from_arrays($order_arr,$order_name_arr,'_sort_col',$_sort_col,false) .
+	html_build_select_box_from_arrays($sort_arr,$sort_name_arr,'_sort_ord',$_sort_ord,false) .
+	'<input type="submit" name="submit" value="'._('Quick Browse').'" />';
 
 echo '
+	</td>
+	</tr>
+	</table>
 	</form>
-</table>';
-/**
- *
- *	Show the free-form text submitted by the project admin
- */
-echo $ath->getBrowseInstructions();
+	</div>';
+if ($af->query_type == 'default') {
+	echo '<div class="tabbertab tabbertabdefault" title="'._('Default').'">';
+	echo '<strong>'._('Viewing only opened records by default, use \'Advanced queries\' or \'Simple Filtering and Sorting\' to change.').'</strong>';
+	echo '</div>';
+}
+echo '
+</div>';
 
 if ($art_arr && count($art_arr) > 0) {
 
 	if ($set=='custom') {
-		$set .= '&_assigned_to='.$_assigned_to.'&_status='.$_status.'&_sort_col='.$_sort_col.'&_sort_ord='.$_sort_ord;
+		$set .= '&amp;_assigned_to='.$_assigned_to.'&amp;_status='.$_status.'&amp;_sort_col='.$_sort_col.'&amp;_sort_ord='.$_sort_ord;
 		if (array_key_exists($ath->getCustomStatusField(),$_extra_fields)) {
-			$set .= '&extra_fields['.$ath->getCustomStatusField().']='.$_extra_fields[$ath->getCustomStatusField()];
+			$set .= '&amp;extra_fields['.$ath->getCustomStatusField().']='.$_extra_fields[$ath->getCustomStatusField()];
 		}
 	}
 
@@ -276,33 +335,38 @@ if ($art_arr && count($art_arr) > 0) {
 
 	if ($IS_ADMIN) {
 		echo '
-		<form name="artifactList" action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&atid='.$ath->getID().'" METHOD="POST">
-		<input type="hidden" name="form_key" value="'.form_generate_key().'">
-		<input type="hidden" name="func" value="massupdate">';
+		<form name="artifactList" action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;atid='.$ath->getID().'" method="post">
+		<input type="hidden" name="form_key" value="'.form_generate_key().'" />
+		<input type="hidden" name="func" value="massupdate" />';
 	}
 
-	$display_col=array('summary'=>1,
-		'open_date'=>1,
-		'status'=>0,
-		'priority'=>1,
-		'assigned_to'=>1,
-		'submitted_by'=>1);
-
+	$browse_fields = explode(',', "id,".$ath->getBrowseList());
 	$title_arr=array();
-	$title_arr[]=_('ID');
-	if ($display_col['summary'])
-		$title_arr[]=_('Summary');
-	if ($display_col['open_date'])
-		$title_arr[]=_('Open Date');
-	if ($display_col['status'])
-		$title_arr[]=_('State');
-	if ($display_col['priority'])
-		$title_arr[]=_('Priority');
-	if ($display_col['assigned_to'])
-		$title_arr[]=_('Assigned to');
-	if ($display_col['submitted_by'])
-		$title_arr[]=_('Submitted by');
-
+	foreach ($browse_fields as $f) {
+		if (intval($f) > 0) {
+    		$title = $ath->getExtraFieldName($f);
+		} else {
+			if ($f == 'id')
+				$title=_('ID');
+			if ($f == 'summary')
+				$title=_('Summary');
+			if ($f == 'details')
+				$title=_('Description');
+			if ($f == 'open_date')
+				$title=_('Open Date');
+			if ($f == 'close_date')
+				$title=_('Close Date');
+			if ($f == 'status_id')
+				$title=_('State');
+			if ($f == 'priority')
+				$title=_('Priority');
+			if ($f == 'assigned_to')
+				$title=_('Assigned to');
+			if ($f == 'submitted_by')
+				$title=_('Submitted by');
+		}
+		$title_arr[] = $title;
+	}
 
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -316,44 +380,67 @@ if ($art_arr && count($art_arr) > 0) {
 	$max = ((count($art_arr) > ($start + 25)) ? ($start+25) : count($art_arr) );
 //echo "max: $max";
 	for ($i=$start; $i<$max; $i++) {
+ 		$extra_data = $art_arr[$i]->getExtraFieldDataText();
 		echo '
-		<tr '. $HTML->boxGetAltRowStyle($i) . '>'.
-		'<td>'.
-		($IS_ADMIN?'<input type="CHECKBOX" name="artifact_id_list[]" value="'.
-			$art_arr[$i]->getID() .'"> ':'').
-			$art_arr[$i]->getID() .
-			'</td>';
-		if ($display_col['summary'])
-		 echo '<td><a href="'.getStringFromServer('PHP_SELF').'?func=detail&amp;aid='.
-			$art_arr[$i]->getID() .
-			'&amp;group_id='. $group_id .'&amp;atid='.
-			$ath->getID().'">'.
-			$art_arr[$i]->getSummary().
-			'</a></td>';
-		if ($display_col['open_date'])
-			echo '<td>'. (($set != 'closed' && $art_arr[$i]->getOpenDate() < $then)?'* ':'&nbsp; ') .
+		<tr '. $HTML->boxGetAltRowStyle($i) . '>';
+ 		foreach ($browse_fields as $f) {
+			if ($f == 'id') {
+				echo '<td nowrap="nowrap">'.
+				($IS_ADMIN?'<input type="checkbox" name="artifact_id_list[]" value="'.
+				$art_arr[$i]->getID() .'" /> ':'').
+				'<a href="'.getStringFromServer('PHP_SELF').'?func=detail&amp;aid='.
+				$art_arr[$i]->getID() .
+				'&amp;group_id='. $group_id .'&amp;atid='.
+				$ath->getID().'">'.$art_arr[$i]->getID() .
+				'</a></td>';
+			} else if ($f == 'summary') {
+		 		echo '<td><a href="'.getStringFromServer('PHP_SELF').'?func=detail&amp;aid='.
+				$art_arr[$i]->getID() .
+				'&amp;group_id='. $group_id .'&amp;atid='.
+				$ath->getID().'">'.
+				$art_arr[$i]->getSummary().
+				'</a></td>';
+			} else if ($f == 'open_date') {
+				echo '<td>'. (($set != 'closed' && $art_arr[$i]->getOpenDate() < $then)?'* ':'&nbsp; ') .
 				date(_('Y-m-d H:i'),$art_arr[$i]->getOpenDate()) .'</td>';
-		if ($display_col['status'])
-			echo '<td>'. $art_arr[$i]->getStatusName() .'</td>';
-		if ($display_col['priority'])
-			echo '<td class="priority'.$art_arr[$i]->getPriority()  .'">'. $art_arr[$i]->getPriority() .'</td>';
-		if ($display_col['assigned_to'])
-			echo '<td>'. $art_arr[$i]->getAssignedRealName() .'</td>';
-		if ($display_col['submitted_by'])
-			echo '<td>'. $art_arr[$i]->getSubmittedRealName() .'</td>';
+			} else if ($f == 'status_id') {
+				echo '<td>'. $art_arr[$i]->getStatusName() .'</td>';
+			} else if ($f == 'priority') {
+				echo '<td class="priority'.$art_arr[$i]->getPriority()  .'">'. $art_arr[$i]->getPriority() .'</td>';
+			} else if ($f == 'assigned_to') {
+				echo '<td>'. $art_arr[$i]->getAssignedRealName() .'</td>';
+			} else if ($f == 'submitted_by') {
+				echo '<td>'. $art_arr[$i]->getSubmittedRealName() .'</td>';
+			} else if ($f == 'close_date') {
+				echo '<td>'. ($art_arr[$i]->getCloseDate() ? 
+				date(_('Y-m-d H:i'),$art_arr[$i]->getCloseDate()) :'&nbsp; ') .'</td>';
+			} else if ($f == 'details') {
+				echo '<td>'. $art_arr[$i]->getDetails() .'</td>';
+			} else if (intval($f) > 0) {
+				// Now display extra-fields (fields are numbers).
+				$value = $extra_data[$f]['value'];
+				if ($extra_data[$f]['type'] == 9) {
+					$value = preg_replace('/\b(\d+)\b/e', "_artifactid2url('\\1')", $value);
+				}
+				echo '<td>' . $value .'</td>';
+			} else {
+				// Display ? for unknown values.
+				echo '<td>?</td>';
+			}
+ 		}
 		echo '</tr>';
 	}
 
 	/*
 		Show extra rows for <-- Prev / Next -->
 	* /
-	//only show this if we�re not using a power query
+	//only show this if we're not using a power query
 	if ($af->max_rows > 0) {
 		if (($offset > 0) || ($rows >= 50)) {
 			echo '
 				<tr><td colspan="2">';
 			if ($offset > 0) {
-				echo '<a href="'.getStringFromServer('PHP_SELF').'?func=browse&amp;group_id='.$group_id.'&amp;atid='.$ath->getID().'&set='.
+				echo '<a href="'.getStringFromServer('PHP_SELF').'?func=browse&amp;group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;set='.
 				$set.'&offset='.($offset-50).'"><strong><-- '._('Previous 50').'</strong></a>';
 			} else {
 				echo '&nbsp;';
@@ -373,23 +460,25 @@ if ($art_arr && count($art_arr) > 0) {
 	$pages = count($art_arr) / 25;
 	$currentpage = intval($start / 25);
 //echo "Item Count: ".count($arr)."Pages: $pages";
-	$skipped_pages=false;
-	for ($j=0; $j<$pages; $j++) {
-		if ($pages > 20) {
-			if ((($j > 4) && ($j < ($currentpage-5))) || (($j > ($currentpage+5)) && ($j < ($pages-5)))) {
-				if (!$skipped_pages) {
-					$skipped_pages=true;
-					echo "....&nbsp;";
+	if ($pages >= 1) {
+		$skipped_pages=false;
+		for ($j=0; $j<$pages; $j++) {
+			if ($pages > 20) {
+				if ((($j > 4) && ($j < ($currentpage-5))) || (($j > ($currentpage+5)) && ($j < ($pages-5)))) {
+					if (!$skipped_pages) {
+						$skipped_pages=true;
+						echo "....&nbsp;";
+					}
+					continue;
+				} else {
+					$skipped_pages=false;
 				}
-				continue;
-			} else {
-				$skipped_pages=false;
 			}
-		}
-		if ($j == $currentpage) {
-			echo '<strong>'.($j+1).'</strong>&nbsp;&nbsp;';
-		} else {
-			echo '<a href="'.getStringFromServer('PHP_SELF')."?func=browse&amp;group_id=".$group_id.'&atid='.$ath->getID().'&set='. $set.'&start='.($j*25).'"><strong>'.($j+1).'</strong></a>&nbsp;&nbsp;';
+			if ($j == $currentpage) {
+				echo '<strong>'.($j+1).'</strong>&nbsp;&nbsp;';
+			} else {
+				echo '<a href="'.getStringFromServer('PHP_SELF')."?func=browse&amp;group_id=".$group_id.'&amp;atid='.$ath->getID().'&amp;set='. $set.'&amp;start='.($j*25).'"><strong>'.($j+1).'</strong></a>&nbsp;&nbsp;';
+			}
 		}
 	}
 
@@ -397,7 +486,7 @@ if ($art_arr && count($art_arr) > 0) {
 		Mass Update Code
 	*/
 	if ($IS_ADMIN) {
-		echo '<script language="JavaScript">
+		echo '<script type="text/javascript">
 	<!--
 	function checkAll(val) {
 		al=document.artifactList;
@@ -412,7 +501,7 @@ if ($art_arr && count($art_arr) > 0) {
 	//-->
 	</script>
 
-			<table width="100%" border="0">
+			<table width="100%" border="0" id="admin_mass_update">
 			<tr><td colspan="2">
 
 <a href="javascript:checkAll(1)">'._('Check &nbsp;all').'</a>
@@ -420,7 +509,7 @@ if ($art_arr && count($art_arr) > 0) {
   <a href="javascript:checkAll(0)">'._('Clear &nbsp;all').'</a>
 
 <p>
-<span class="important">'._('<strong>Admin:</strong> If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".').'
+<span class="important">'._('<strong>Admin:</strong> If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".').'</span></p>
 			</td></tr>';
 
 
@@ -463,8 +552,7 @@ if ($art_arr && count($art_arr) > 0) {
 				<a href="javascript:help_window(\'/help/tracker.php?helpname=canned_response\')"><strong>(?)</strong></a>
 				</strong><br />'. $ath->cannedResponseBox ('canned_response') .'</td></tr>
 
-			<tr><td colspan="3" align="MIDDLE"><input type="SUBMIT" name="submit" value="'._('Mass update').'"></td></tr>
-
+			<tr><td colspan="3" align="center"><input type="submit" name="submit" value="'._('Mass update').'" /></td></tr>
 			</table>
 		</form>';
 	}

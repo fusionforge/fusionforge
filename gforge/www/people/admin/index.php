@@ -136,7 +136,7 @@ if (user_ismember(1,'A')) {
 		<span class="imporant">Once you add a category, it cannot be deleted</span></p>
 		<p>
 		<input type="submit" name="submit" value="SUBMIT"></p>
-		</form></p>
+		</form>
 		<?php
 
 		people_footer(array());

@@ -29,17 +29,18 @@ $ath->header(array ('title'=>_('Submit')));
 		Show the free-form text submitted by the project admin
 	*/
 	echo notepad_func();
-	echo $ath->getSubmitInstructions();
+	echo $ath->renderSubmitInstructions();
 
-	echo '<p>
-
-	<form action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&atid='.$ath->getID().'" method="post" enctype="multipart/form-data">
-	<input type="hidden" name="form_key" value="'.form_generate_key().'">
-	<input type="hidden" name="func" value="postadd" />
+	echo '<form action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID().'" method="post" enctype="multipart/form-data">
+	
+	<input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
 	<table>';
 	echo '
 	<tr>
-		<td valign="top">';
+		<td valign="top">
+	            <input type="hidden" name="form_key" value="'.form_generate_key().'" />
+	            <input type="hidden" name="func" value="postadd" />
+	            <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />';
 	if (!session_loggedin()) {
 		echo '
 		<span class="error">'.sprintf(_('Please %1$s login %2$s'), '<a href="'.util_make_url ('/account/login.php?return_to='.urlencode($REQUEST_URI)).'">', '</a>').'</span><<br />
@@ -55,8 +56,8 @@ $ath->header(array ('title'=>_('Submit')));
 		<td valign="top"><input type="submit" name="submit" value="'. _('Submit').'" /></td>
 	</tr>';
 	
-	$ath->renderExtraFields(array(),true,'none');
- 
+	$ath->renderExtraFields(array(),true,'none',false,'Any','',false,'UPDATE');
+
 	if ($ath->userIsAdmin()) {
 		echo '<tr>
 		<td><strong>'._('Assigned to').': <a href="javascript:help_window(\''.util_make_url ('/help/tracker.php?helpname=assignee').'\')"><strong>(?)</strong></a></strong><br />';
@@ -70,16 +71,15 @@ $ath->header(array ('title'=>_('Submit')));
 	
 	?>
 	<tr>
-		<td colspan="2"><strong><?php echo _('Summary') ?>: <a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=summary'); ?>')"></strong><?php echo utils_requiredField(); ?><strong>(?)</strong></a><br />
+		<td colspan="2"><strong><?php echo _('Summary') ?><?php echo utils_requiredField(); ?>: <a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=summary'); ?>')">(?)</a></strong><br />
 		<input type="text" name="summary" size="80" maxlength="255" />
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">
-		<strong><?php echo _('Detailed description') ?>:</strong><?php echo notepad_button('document.forms[1].details') ?> <?php echo utils_requiredField(); ?>
-		<p>
-		<textarea name="details" rows="30" cols="79"></textarea></p>
+		<strong><?php echo _('Detailed description') ?><?php echo utils_requiredField(); ?>:</strong><?php echo notepad_button('document.forms[1].details') ?><br /> 
+		<textarea name="details" rows="30" cols="79"></textarea>
 		</td>
 	</tr>
 
@@ -110,15 +110,17 @@ $ath->header(array ('title'=>_('Submit')));
 		<input type="file" name="input_file[]" size="30" /><br />
 		<input type="file" name="input_file[]" size="30" /><br />
 		<input type="file" name="input_file[]" size="30" /><br />
+		</p>
 		</td>
-	<tr>
+	</tr>
 
 	<tr><td colspan="2">
 		<input type="submit" name="submit" value="<?php echo _('Submit')?>" />
 		</td>
 	</tr>
 
-	</table></form></p>
+	<tr><td colspan="2"><br/><?php echo utils_requiredField(); ?> <?php echo $Language->getText('general','required_fields')?></td></tr>
+	</table></form>
 
 	<?php
 

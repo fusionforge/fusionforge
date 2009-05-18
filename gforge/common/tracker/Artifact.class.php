@@ -27,6 +27,7 @@
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'tracker/ArtifactMessage.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
+require_once $gfcommon.'tracker/ArtifactWorkflow.class.php';
 
 // This string is used when sending the notification mail for identifying the
 // user response
@@ -175,10 +176,13 @@ class Artifact extends Error {
 			//
 			//	Only admins can post/modify private artifacts
 			//
-			if (!$this->ArtifactType->userIsAdmin()) {
-				$this->setError(_('Artifact: Only Artifact Admins Can Modify Private ArtifactTypes'));
-				return false;
-			}
+
+//
+// ape: Disabled, private means only restricted to members. So, no special rules #2503.
+//			if (!$this->ArtifactType->userIsAdmin()) {
+//				$this->setError($Language->getText('tracker_artifact','error_admin_modify'));
+//				return false;
+//			}
 		}
 
 		//
@@ -657,7 +661,9 @@ class Artifact extends Error {
 	 */
 	function &getFiles() {
 		if (!isset($this->files)) {
-			$res = db_query_params ('SELECT * FROM artifact_file_user_vw WHERE artifact_id=$1',
+			$res = db_query_params ('SELECT id,artifact_id,description,filename,filesize," .
+					"filetype,adddate,submitted_by,user_name,realname
+					 FROM artifact_file_user_vw WHERE artifact_id=$1',
 						array ($this->getID())) ;
 			$rows=db_numrows($res);
 			if ($rows > 0) {
@@ -769,10 +775,12 @@ class Artifact extends Error {
 	 *	@param	string	Attaching another comment.
 	 *	@param	int		Allows you to move an artifact to another type.
 	 *	@param	array	Array of extra fields like: array(15=>'foobar',22=>'1');
+	 *  @param  string  The description.
 	 *	@return	boolean	success.
 	 */
 	function update($priority,$status_id,
-		$assigned_to,$summary,$canned_response,$details,$new_artifact_type_id,$extra_fields=array()) {
+		$assigned_to,$summary,$canned_response,$details,$new_artifact_type_id,
+		$extra_fields=array(), $description='') {
 
 		/*
 			Field-level permission checking
@@ -783,6 +791,7 @@ class Artifact extends Error {
 			//everyone else cannot modify these fields
 			$priority=$this->getPriority();
 			$summary=addslashes($this->getSummary());
+			$description=addslashes($this->getDetails());
 			$canned_response=100;
 			$new_artifact_type_id=$this->ArtifactType->getID();
 			$assigned_to=$this->getAssignedTo();
@@ -814,6 +823,23 @@ class Artifact extends Error {
 			return false;
 		}
 
+
+		// Check that assigned_to is member of the project.
+		if ($assigned_to != 100) {
+			$res = $this->ArtifactType->getTechnicians();
+			$arr =& util_result_column_to_array($res,0);
+			$found = false;
+			foreach (array_values($arr) as $r)
+			{
+				if ($r == $assigned_to) {
+					$found = true;
+				}
+			}
+			if (!$found) {
+				$this->setError("Invalid assigned_to (not member of the project)");
+				return false;
+			}
+		}
 
 		// Array to record which properties were changed
 		$changes = array();
@@ -875,12 +901,17 @@ class Artifact extends Error {
 			$changes['status'] = 1;
 			$update = true;
 
-			// Reset the close_date if bug is re-opened 
-			// (otherwise stat reports will be wrong).
-			if ($status_id == 1) {
-				$close_date = 0 ;
-				$this->addHistory('close_date',0);
-			}			
+			//
+			//	Enter the timestamp if we are changing to closed
+			//
+			if ($status_id != 1) {
+				$sqlu .= " close_date='".time()."', ";
+			} else {
+				// Reset the close_date if bug is re-opened 
+				// (otherwise stat reports will be wrong).
+				$sqlu .= " close_date='0', ";
+			}
+			$this->addHistory('close_date', $this->getCloseDate());
 		}
 		if ($this->getPriority() != $priority) {
 			$this->addHistory('priority',$this->getPriority());
@@ -893,26 +924,20 @@ class Artifact extends Error {
 			$changes['assigned_to'] = 1;
 			$update = true;
 		}
-		if ($summary && (addslashes($this->getSummary()) != htmlspecialchars($summary))) {
-			$this->addHistory('summary', addslashes($this->getSummary()));
+		if ($summary && ($this->getSummary() != stripslashes($summary))) {
+			$this->addHistory('summary', $this->getSummary());
 			$changes['summary'] = 1;
 			$update = true;
 		}
-
+ 		if ($description && ($this->getDetails() != stripslashes($description))) {
+ 			$this->addHistory('details', $this->getDetails());
+ 			$changes['details'] = 1;
+ 			$update = true;
+  		}
 		if ($details) {
 			$this->addMessage($details,'',0);
 			$changes['details'] = 1;
 			$send_message=true;
-		}
-
-		//
-		//	Enter the timestamp if we are changing to closed
-		//
-		if ($status_id != 1) {
-			$now = time();
-			$close_date = $now ;
-			$this->addHistory('close_date',$now);
-			$update = true;
 		}
 
 		/*
@@ -925,14 +950,16 @@ class Artifact extends Error {
 				priority=$2,
 				assigned_to=$3,
 				summary=$4,
-				close_date=$5,
-				group_artifact_id=$6
+				details=$5,
+				close_date=$6,
+				group_artifact_id=$7
 				WHERE 
-				artifact_id=$7 AND group_artifact_id=$8',
+				artifact_id=$8 AND group_artifact_id=$9',
 						   array ($status_id,
 							  $priority,
 							  $assigned_to,
-							  htmlspecialchars ($summary),
+							  htmlspecialchars($summary),
+							  htmlspecialchars($description),
 							  $close_date,
 							  $new_artifact_type_id,
 							  $this->getID(),
@@ -1033,20 +1060,72 @@ class Artifact extends Error {
 		$ef = $this->ArtifactType->getExtraFields();
 		$efk=array_keys($ef);
 
+		// If there is a status field, then check against the workflow.
+		for ($i=0; $i<count($efk); $i++) {
+			$efid=$efk[$i];
+			$type=$ef[$efid]['field_type'];
+			if ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
+				// Get previous value.
+				$sql =  "SELECT field_data FROM artifact_extra_field_data
+						WHERE artifact_id='".$this->getID()."' AND extra_field_id='".$efid."'";
+				$res = db_query($sql);
+				$old = (db_numrows($res)>0) ? db_result($res,0,'field_data') : 100;
+				if ($old != $extra_fields[$efid]) {
+					$atw = new ArtifactWorkflow($this->ArtifactType, $efid);
+					if (!$atw->checkEvent($old, $extra_fields[$efid])) {
+						$this->setError('Workflow error: You are not authorized to change the Status');
+						return false;
+					}
+				}
+			}
+		}
+		
 		//now we'll update this artifact for each extra field
 		for ($i=0; $i<count($efk); $i++) {
 			$efid=$efk[$i];
 			$type=$ef[$efid]['field_type'];
 
+			// check required fields
+			if ($ef[$efid]['is_required']) {
+				if (!array_key_exists($efid, $extra_fields)) {
+					if ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
+						$this->setError('Status Custom Field Must Be Set');
+					}
+					else {
+						$this->setMissingParamsError($ef[$efid]['field_name']);
+					}
+					return false;
+				}
+				else {
+					if (!$extra_fields[$efid]) {
+						if ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
+							$this->setError('Status Custom Field Must Be Set');
+						}
+						else {
+							$this->setMissingParamsError($ef[$efid]['field_name']);
+						}
+						return false;
+					}
+					else {
+						if (($type == ARTIFACT_EXTRAFIELDTYPE_SELECT || $type == ARTIFACT_EXTRAFIELDTYPE_RADIO) &&
+							$extra_fields[$efid] == '100') {
+								$this->setMissingParamsError($ef[$efid]['field_name']);
+								return false;
+						}
+						elseif (($type == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT || $type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) &&
+								(count($extra_fields[$efid]) == 1 && $extra_fields[$efid][0] == '100')) {
+							$this->setMissingParamsError($ef[$efid]['field_name']);
+							return false;
+						}
+					}
+				}
+			}
 //
 //	Force each field to have some value if it is a numeric field
 //	text fields will just be purged and skipped
 //
 			if (!array_key_exists($efid, $extra_fields) || !$extra_fields[$efid]) {
-				if ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
-					$this->setError('Status Custom Field Must Be Set');
-					return false;
-				} elseif (($type == ARTIFACT_EXTRAFIELDTYPE_SELECT) || ($type == ARTIFACT_EXTRAFIELDTYPE_RADIO)) {
+				if (($type == ARTIFACT_EXTRAFIELDTYPE_SELECT) || ($type == ARTIFACT_EXTRAFIELDTYPE_RADIO)) {
 					$extra_fields[$efid]='100';
 				} elseif (($type == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) || ($type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX)) {
 					$extra_fields[$efid]=array('100');
@@ -1084,13 +1163,9 @@ class Artifact extends Error {
 					if (!empty($added_values) || !empty($deleted_values))	{	// there are differences...
 						$field_name = $ef[$efid]['field_name'];
 						$changes["extra_fields"][$efid] = 1;
-						
-						// Do a history entry only for deleted values
-						if (!empty($deleted_values)) {
-							$this->addHistory($field_name, $this->ArtifactType->getElementName($deleted_values));
-						}
-						
-						
+
+						$this->addHistory($field_name, $this->ArtifactType->getElementName(array_reverse($old_values)));
+
 						$resdel = db_query_params ('DELETE FROM artifact_extra_field_data WHERE	artifact_id=$1 AND extra_field_id=$2',
 									   array ($this->getID(),
 										  $efid)) ;
@@ -1107,9 +1182,12 @@ class Artifact extends Error {
 					$resdel = db_query_params ('DELETE FROM artifact_extra_field_data WHERE	artifact_id=$1 AND extra_field_id=$2',
 								   array ($this->getID(),
 									  $efid)) ;
+
+					// Adding history with previous value.
 					if (($type == ARTIFACT_EXTRAFIELDTYPE_SELECT) || ($type == ARTIFACT_EXTRAFIELDTYPE_RADIO) || ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS)) {
-//don't add history for text fields
 						$this->addHistory($field_name,$this->ArtifactType->getElementName(db_result($resd,0,'field_data')));
+					} else {
+						$this->addHistory($field_name, db_result($resd,0,'field_data'));
 					}
 				}
 			} else {
@@ -1117,6 +1195,38 @@ class Artifact extends Error {
 //no history for this extra field exists
 
 			}
+
+			//
+			// Some rewrite & consistency checks on the relation type field.
+			//
+			// 1) Convert syntax [#NNN] to NNN
+			// 2) Allow multiple spaces as separator.
+			// 3) Ensure that only integers are given.
+			// 4) Ensure that id corresponds to valid tracker id.
+			//
+			if ($type == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
+				$value = preg_replace('/\[\#(\d+)\]/', "\\1", trim($extra_fields[$efid]));
+				$value = preg_replace('/\\s+/', ' ', $value);
+				$new = '';
+				foreach (explode(' ',$value) as $id) {
+					if (preg_match('/^(\d+)$/', $id)) {
+						// Control that the id is present in the db
+						$sql = "SELECT artifact_id FROM artifact WHERE artifact_id=$id";
+						$res = db_query($sql);
+						if (db_numrows($res) == 1) {
+							$new .= $id.' ';
+						} else {
+							$this->setError('Illegal id '.$id.', it\'s not a valid tracker id for field: '.$ef[$efid]['field_name'].'.'); // @todo: lang
+							return false;
+						}
+					} else {
+						$this->setError('Illegal value '.$id.', only trackers id are allowed for field: '.$ef[$efid]['field_name'].'.'); // @todo: lang
+						return false;
+					}
+				}
+				$extra_fields[$efid] = trim($new);
+			}
+			
 			//
 			//	See if anything was even passed for this extra_field_id
 			//
@@ -1134,7 +1244,7 @@ class Artifact extends Error {
 									       $efid,
 									       $extra_fields[$efid][$fin])) ;
 						if (!$res) {
-							$this->setError('Artifact::updateExtraFields:: '.$sql.db_error());
+							$this->setError(db_error());
 							return false;
 						}
 					}
@@ -1146,7 +1256,7 @@ class Artifact extends Error {
 								       $efid,
 								       htmlspecialchars($extra_fields[$efid]))) ;
 					if (!$res) {
-						$this->setError('Artifact::updateExtraFields:: '.db_error());
+						$this->setError(db_error());
 						return false;
 					}
 				}
@@ -1208,6 +1318,9 @@ class Artifact extends Error {
 	 *	@return	boolean	success.
 	 */
 	function mailFollowup($type, $more_addresses=false, $changes='') {
+
+		$monitor_ids = array();
+
 		if (!$changes) {
 			$changes=array();
 		}
@@ -1234,7 +1347,7 @@ class Artifact extends Error {
 					    "&group_id=". $this->ArtifactType->Group->getID()) .
 			"\nOr by replying to this e-mail entering your response between the following markers: ".
 			"\n".ARTIFACT_MAIL_MARKER.
-			"\n(enter your response here)".
+			"\n(enter your response here, only in plain text format)".
 			"\n".ARTIFACT_MAIL_MARKER.
 			"\n\n".
 			$this->marker('status',$changes).
@@ -1391,22 +1504,24 @@ class Artifact extends Error {
 
 		foreach ($efs as $efid => $ef) {
 			$name = $ef["field_name"];
+			$type = $ef["field_type"];
 			
 			// Get the value according to the type
-			switch ($ef["field_type"]) {
+			switch ($type) {
 				
-			// for these types, the associated value comes straight
-			case ARTIFACT_EXTRAFIELDTYPE_TEXT:
-			case ARTIFACT_EXTRAFIELDTYPE_TEXTAREA:
-				$value = isset($efd[$efid]) ? $efd[$efid]: '';
-				break;
-
-			// the other types have and ID or an array of IDs associated to them
-			default:
-				$value = $this->ArtifactType->getElementName($efd[$efid]);
+				// for these types, the associated value comes straight
+				case ARTIFACT_EXTRAFIELDTYPE_TEXT:
+				case ARTIFACT_EXTRAFIELDTYPE_TEXTAREA:
+				case ARTIFACT_EXTRAFIELDTYPE_RELATION:
+					$value = isset($efd[$efid]) ? $efd[$efid]: '';
+					break;
+	
+				// the other types have and ID or an array of IDs associated to them
+				default:
+					$value = $this->ArtifactType->getElementName($efd[$efid]);
 			}
 			
-			$return[$efid] = array("name" => $name, "value" => $value);
+			$return[$efid] = array("name" => $name, "value" => $value, 'type' => $type);
 		}
 		
 		return $return;

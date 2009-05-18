@@ -11,6 +11,7 @@
 
 
 require_once $gfcommon.'tracker/Artifact.class.php';
+require_once $gfcommon.'include/utils_crossref.php';
 
 class ArtifactHtml extends Artifact {
 
@@ -30,14 +31,29 @@ class ArtifactHtml extends Artifact {
 	/**
 	 * show details preformatted (like followups)
 	 */
-	function showDetails() {
+	function showDetails($editable = false) {
 		$result = $this->getDetails();
+		$result = util_gen_cross_ref($result, $this->ArtifactType->Group->getID());
+		//$result = util_line_wrap( $result, 120,"\n");
+		$result = preg_replace('/\r?\n/', '<br />', $result);
 
 		$title_arr = array();
-		$title_arr[] = _('Detailed description');
+		if ($editable === true) {
+			$title_arr[] = '<div style="width:100%;">' .
+				'<div style="float:left">' . _('Detailed description') . '</div>' .
+				'<div style="float:right">' . html_image('ic/forum_edit.gif','37','15',array('title'=>"Click to edit", 'alt'=>"Click to edit", 'onclick'=>"switch2edit(this, 'show', 'edit')", 'border'=>"0")) . '</div>' .
+/*
+ html_image('ic/forum_edit.gif','37','15',array(title=>"Click to edit" alt=>"Click to edit" onclick=>"switch2edit(this, 'show', 'edit')", border=>"0"))
+ */
+			
+				'</div>';
+		}
+		else {
+			$title_arr[] = _('Detailed description');
+		}
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
-		echo '<tr ' . $GLOBALS['HTML']->boxGetAltRowStyle(0) .'><td><pre>'. util_line_wrap ( $result, 120,"\n"). '</pre></td></tr>';
+		echo '<tr ' . $GLOBALS['HTML']->boxGetAltRowStyle(0) .'><td>'. $result. '</td></tr>';
 
 		echo $GLOBALS['HTML']->listTableBottom();
 	}
@@ -54,15 +70,21 @@ class ArtifactHtml extends Artifact {
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 			for ($i=0; $i < $rows; $i++) {
-				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><pre>
-'._('Date').': '. date(_('Y-m-d H:i'),db_result($result, $i, 'adddate')) .'
-'._('Sender').': ';
+				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.
+					_('Date').': '.
+					date(_('Y-m-d H:i'),db_result($result, $i, 'adddate')) .'<br />'.
+					_('Sender').': ';
 				if(db_result($result,$i,'user_id') == 100) {
 					echo db_result($result,$i,'realname');
 				} else {
 					echo util_make_link_u (db_result($result,$i,'user_name'),db_result($result,$i,'user_id'),db_result($result,$i,'realname'));
 				}
-				echo "\n\n". util_line_wrap ( db_result($result, $i, 'body'),65,"\n"). '</pre></td></tr>';
+
+				$text = db_result($result, $i, 'body');
+				$text = util_gen_cross_ref($text, $this->ArtifactType->Group->getID());
+				//$text = util_line_wrap( $text, 120,"\n");
+				$text = preg_replace('/\r?\n/', '<br />', $text);
+				echo "<br /><br />".$text.'</td></tr>';
 			}
 
 			echo $GLOBALS['HTML']->listTableBottom();
@@ -104,9 +126,10 @@ class ArtifactHtml extends Artifact {
 					echo user_getname(db_result($result, $i, 'old_value'));
 
 				} else if ($field == 'close_date') {
-
-					echo date(_('Y-m-d H:i'),db_result($result, $i, 'old_value'));
-
+					if (db_result($result, $i, 'old_value'))
+						echo date(_('Y-m-d H:i'),db_result($result, $i, 'old_value'));
+					else 
+						echo '<i>None</i>';
 				} else {
 
 					echo db_result($result, $i, 'old_value');
@@ -126,6 +149,56 @@ class ArtifactHtml extends Artifact {
 
 	}
 
+	function showRelations() {
+		global $Language;
+		
+		$aid = $this->getID();
+		
+		// Search for all relations pointing to this record.
+		$sql = "SELECT *
+		FROM artifact_extra_field_list, artifact_extra_field_data, artifact_group_list, artifact, groups
+		WHERE field_type=9
+		AND artifact_extra_field_list.extra_field_id=artifact_extra_field_data.extra_field_id
+		AND artifact_group_list.group_artifact_id = artifact_extra_field_list.group_artifact_id
+		AND artifact.artifact_id = artifact_extra_field_data.artifact_id
+		AND groups.group_id = artifact_group_list.group_id
+		AND (field_data = '$aid' OR field_data LIKE '$aid %' OR field_data LIKE '% $aid %' OR field_data LIKE '% $aid')
+		ORDER BY artifact_group_list.group_id ASC, name ASC, artifact.artifact_id ASC";
+		$res = db_query($sql);
+		if (db_numrows($res)>0) {
+			?>
+<div class="tabbertab" title="<?php echo _('Backward Relations'); ?>">
+<table border="0" width="80%">
+	<tr>
+		<td colspan="2">
+		<h3><?php echo _('Changes') ?>:</h3>
+		<?php
+		$current = '';
+		$end = '';
+		while ($arr = db_fetch_array($res)) {
+			$title = $arr['group_name'].': '.$arr['name'];
+			if ($title != $current) {
+				echo $end.'<strong>'.$title.'</strong>';
+				$current = $title;
+				$end = '<br /><br />';
+			}
+			$text = '[#'.$arr['artifact_id'].']';
+			$url = '/tracker/?func=detail&amp;aid='.$arr['artifact_id'].'&amp;group_id='.$arr['group_id'].'&amp;atid='.$arr['group_artifact_id'];
+			$arg = 'title="'.$arr['summary'].'"' ;
+			if ($arr['status_id'] == 2) {
+				$arg .= 'class="artifact_closed"';
+			}
+			print '<br/>&nbsp;&nbsp;&nbsp;<a href="'.$url.'" '.$arg.'>'.$text.'</a>'.' <a href="'.$url.'">'.$arr['summary'].'</a> <i>(Relation: '.$arr['field_name'].')</i>';
+		}
+		?></td>
+	</tr>
+</table>
+</div>
+<?php
+}	
+	}
+
+	
 }
 
 // Local Variables:

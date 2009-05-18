@@ -113,19 +113,11 @@ class Theme extends Layout {
     <title><?php echo $params['title']; ?></title>
     <link rel="icon" type="image/png" href="<?php echo util_make_url('/images/icon.png'); ?>"/>
     <link rel="shortcut icon" type="image/png" href="<?php echo util_make_url('/images/icon.png'); ?>"/>
-		<?php $this->headerLink(); ?>
-    <script language="JavaScript" type="text/javascript">
-    <!--
-
-    function admin_window(adminurl) {
-        AdminWin = window.open( adminurl, 'AdminWindow','scrollbars=yes,resizable=yes, toolbar=yes, height=400, width=400, top=2, left=2');
-        AdminWin.focus();
-    }
-    function help_window(helpurl) {
-        HelpWin = window.open( helpurl,'HelpWindow','scrollbars=yes,resizable=yes,toolbar=no,height=400,width=600');
-    }
-    // -->
-<?php plugin_hook ("javascript",false) ; ?>
+	<?php $this->headerLink(); ?>
+    <script type="text/javascript" src="<?php echo util_make_url('/js/common.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo util_make_url('/js/sortable.js'); ?>"></script>
+    <script type="text/javascript">
+    <?php plugin_hook ("javascript",false) ; ?>
     </script>
 <?php
 	      if (_('default_font') != 'default_font') {

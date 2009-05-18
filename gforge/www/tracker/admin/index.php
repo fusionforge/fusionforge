@@ -55,7 +55,10 @@ if ($group_id && $atid) {
 	}
 
 	$next = '';
-	if (getStringFromRequest('post_changes')) {
+	if (getStringFromRequest('post_changes') ||
+		getStringFromRequest('updownorder_opt') ||
+		getStringFromRequest('post_changes_order') ||
+		getStringFromRequest('post_changes_alphaorder')) {
 		include $gfwww.'tracker/admin/updates.php';
 
 	} elseif (getStringFromRequest('deletetemplate')) {
@@ -65,16 +68,17 @@ if ($group_id && $atid) {
 		$feedback .= 'Renderer Deleted';
 		$next = 'add_extrafield';
 	}
-	
-	//
-	//	FORMS TO ADD/UPDATE DATABASE
-	//
+
+//
+//		FORMS TO ADD/UPDATE DATABASE
+//
 	if ($next) {
 		$action = $next;
 	} else {
-		$actions = array('add_extrafield', 'add_opt', 'copy_opt', 'add_canned','clone_tracker',
-			'uploadtemplate', 'downloadtemplate', 'update_canned', 'update_box',
-			'update_opt', 'delete', 'deleteextrafield','update_type');
+		$actions = array('add_extrafield', 'customize_list', 'workflow', 'workflow_roles', 'add_opt',
+			'updownorder_opt', 'post_changes_order', 'post_changes_alphaorder', 'copy_opt', 'add_canned',
+			'clone_tracker', 'uploadtemplate', 'downloadtemplate', 'downloadcurrenttemplate', 
+			'update_canned', 'update_box', 'update_opt', 'delete', 'deleteextrafield','update_type');
 		$action = '';
 		foreach ($actions as $a) {
 			if (getStringFromRequest($a)) {
@@ -83,12 +87,27 @@ if ($group_id && $atid) {
 			}
 		}
 	}
-		
+
 	if ($action == 'add_extrafield') {  
 
 		include $gfwww.'tracker/admin/form-addextrafield.php';
 
-	} elseif ($action == 'add_opt') {
+	} elseif ($action == 'customize_list') {
+
+		include $gfwww.'tracker/admin/form-customizelist.php';
+
+	} elseif ($action == 'workflow') {
+
+		include $gfwww.'tracker/admin/form-workflow.php';
+
+	} elseif ($action == 'workflow_roles') {
+
+		include $gfwww.'tracker/admin/form-workflow_roles.php';
+
+	} elseif ($action == 'add_opt' ||
+			  $action == 'updownorder_opt' ||
+			  $action == 'post_changes_order' ||
+			  $action == 'post_changes_alphaorder') {
 
 		include $gfwww.'tracker/admin/form-addextrafieldoption.php';
 
@@ -111,6 +130,10 @@ if ($group_id && $atid) {
 	} elseif ($action == 'downloadtemplate') {
 
 		echo $ath->getRenderHTML();
+
+	} elseif ($action == 'downloadcurrenttemplate') {
+
+		echo $ath->getRenderHTML('','DETAIL');
 
 	} elseif ($action == 'update_canned') {
 

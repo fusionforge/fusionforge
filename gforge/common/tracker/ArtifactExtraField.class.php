@@ -34,6 +34,7 @@ define('ARTIFACT_EXTRAFIELDTYPE_MULTISELECT',5);
 define('ARTIFACT_EXTRAFIELDTYPE_TEXTAREA',6);
 define('ARTIFACT_EXTRAFIELDTYPE_STATUS',7);
 //define('ARTIFACT_EXTRAFIELDTYPE_ASSIGNEE',8);
+define('ARTIFACT_EXTRAFIELDTYPE_RELATION',9);
 
 class ArtifactExtraField extends Error {
 
@@ -108,10 +109,33 @@ class ArtifactExtraField extends Error {
 			$this->setError(_('a field name is required'));
 			return false;
 		}
+		if (!$field_type) {
+			$this->setError("Type of custom field not selected");
+			return false;			
+		}
 		if (!$this->ArtifactType->userIsAdmin()) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
+		$sql = "SELECT field_name FROM artifact_extra_field_list WHERE field_name='$name' AND group_artifact_id=".$this->ArtifactType->getID();
+		$res = db_query($sql);
+		if (db_numrows($res) > 0) {
+			$this->setError(_('Field name already exists'));
+			return false;
+		}
+		if ($field_type == ARTIFACT_EXTRAFIELDTYPE_TEXT) {
+			if (!$attribute1 || !$attribute2 || $attribute2 < $attribute1) {
+				$this->setError("Invalid size/maxlength for text field");
+				return false;
+			}
+		}
+		if ($field_type == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) {
+			if (!$attribute1 || !$attribute2) {
+				$this->setError("Invalid rows/cols for textarea field");
+				return false;
+			}
+		}
+		
 		if ($is_required) {
 			$is_required=1;
 		} else {
@@ -148,40 +172,27 @@ class ArtifactExtraField extends Error {
 					db_rollback();
 					return false;
 				} else {
-//
-//	Must insert some default statuses for each artifact
-//
-					$reso = db_query_params ('INSERT INTO artifact_extra_field_elements(extra_field_id,element_name,status_id) VALUES ($1,$2,$3)',
-								 array ($id,
-									'Open',
-									1)) ;
-					if (!$reso) {
-						echo db_error();
+					//
+					//	Must insert some default statuses for each artifact
+					//
+					$ao = new ArtifactExtraFieldElement($this);
+					if (!$ao || !is_object($ao)) {
+						$feedback .= 'Unable to create ArtifactExtraFieldElement Object';
+						db_rollback();
+						return false;
 					} else {
-						$resoid=db_insertid($reso,'artifact_extra_field_elements','element_id');
-						db_query_params ('INSERT INTO artifact_extra_field_data(artifact_id,field_data,extra_field_id) 
-							SELECT artifact_id,$1,$2 FROM artifact 
-							WHERE group_artifact_id=$3
-							AND status_id=1',
-								 array ($resoid,
-									$id,
-									$this->ArtifactType->getID())) ;
-					}
-					$resc = db_query_params ('INSERT INTO artifact_extra_field_elements(extra_field_id,element_name,status_id) VALUES ($1,$2,$3)',
-								 array ($id,
-									'Closed',
-									2)) ;
-					if (!$resc) {
-						echo db_error();
-					} else {
-						$rescid=db_insertid($resc,'artifact_extra_field_elements','element_id');
-						db_query_params ('INSERT INTO artifact_extra_field_data(artifact_id,field_data,extra_field_id) 
-							SELECT artifact_id,$1,$2 FROM artifact 
-							WHERE group_artifact_id=$3
-							AND status_id != 1',
-								 array ($rescid,
-									$id,
-									$this->ArtifactType->getID())) ;
+						if (!$ao->create('Open', '1')) {
+							$feedback .= _('Error inserting an element').': '.$ao->getErrorMessage();
+							$ao->clearError();
+							db_rollback();
+							return false;
+						}
+						if (!$ao->create('Closed', '2')) {
+							$feedback .= _('Error inserting an element').': '.$ao->getErrorMessage();
+							$ao->clearError();
+							db_rollback();
+							return false;
+						}
 					}
 				}
 			} elseif (strstr(ARTIFACT_EXTRAFIELD_FILTER_INT,$field_type) !== false) {
@@ -311,7 +322,8 @@ class ArtifactExtraField extends Error {
 			4=>_('Text Field'),
 			5=>_('Multi-Select Box'),
 			6=>_('Text Area'),
-			7=>_('Status')
+			7=>_('Status'),
+			9=>_('Relation')
 		);
 	}
 	
@@ -362,6 +374,13 @@ class ArtifactExtraField extends Error {
 		//
 		if (!$name) {
 			$this->setError(_('a field name is required'));
+			return false;
+		}
+		$sql = "SELECT field_name FROM artifact_extra_field_list 
+				WHERE field_name='$name' AND group_artifact_id=".$this->ArtifactType->getID()." AND extra_field_id !='". $this->getID();
+		$res = db_query($sql);
+		if (db_numrows($res) > 0) {
+			$this->setError(_('Field name already exists'));
 			return false;
 		}
 		if ($is_required) {
@@ -531,6 +550,67 @@ class ArtifactExtraField extends Error {
 		// at this point, the alias is valid and unique
 		return $alias;
 	}
+
+	function updateOrder($element_id, $order) {
+		$sql = 'UPDATE artifact_extra_field_elements
+				SET element_pos=' . $order . '
+				WHERE element_id=' . $element_id;
+		$result=db_query($sql);
+		if ($result && db_affected_rows($result) > 0) {
+			return true;
+		}
+		else {
+			$this->setError(db_error());
+			return false;
+		}
+	}
+
+	function reorderValues($element_id, $new_pos) {
+		global $Language;
+
+		$sql = 'SELECT element_id FROM artifact_extra_field_elements WHERE extra_field_id=' .$this->getID() .
+			   ' ORDER BY element_pos ASC, element_id ASC';
+		$res = db_query($sql);
+		$max = db_numrows($res);
+		if ($new_pos < 1 || $new_pos > $max) {
+			$this->setError(_('Out of range value'));
+			return false;
+		}
+		$i = 1;
+		while ($i <= $max) {
+			if ($i == $new_pos) {
+				$data[] = $element_id;
+				$i++;
+			}
+			if (($row = db_fetch_array($res)) && $row['element_id'] != $element_id) {
+				$data[] = $row['element_id'];
+				$i++;
+			}
+		}
+		for ($i = 0; $i < count($data); $i++) {
+			if (! $this->updateOrder($data[$i], $i + 1))
+				return false;
+		}
+
+		return true;
+	}
+
+	function alphaorderValues($element_id) {
+		global $Language;
+
+		$sql = 'SELECT element_id FROM artifact_extra_field_elements WHERE extra_field_id=' .$this->getID() .
+			   ' ORDER BY element_name ASC';
+		$res = db_query($sql);
+		$i = 1;
+		while ($row = db_fetch_array($res)) {
+			if (! $this->updateOrder($row['element_id'], $i))
+				return false;
+			$i++;
+		}
+
+		return true;
+	}
+
 }
 
 // Local Variables:

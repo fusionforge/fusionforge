@@ -19,6 +19,39 @@ function html_feedback_top($feedback) {
 }
 
 /**
+ * html_warning_top() - Show the warning output at the top of the page.
+ *
+ * @param		string	The warning message.
+ */
+function html_warning_top($msg) {
+	global $HTML;
+	echo $HTML->warning_msg($msg);
+}
+
+/**
+ * html_error_top() - Show the error output at the top of the page.
+ *
+ * @param		string	The error message.
+ */
+function html_error_top($msg) {
+	global $HTML;
+	echo $HTML->error_msg($msg);
+}
+
+/**
+ * make_user_link() - Make a username reference into a link to that users User page on SF.
+ *
+ * @param		string	The username of the user to link.
+ */
+function make_user_link($username) {
+	if (!strcasecmp($username,'Nobody') || !strcasecmp($username,'None')) {
+		return $username;
+	} else {
+		return '<a href="/users/'.$username.'">'.$username.'</a>' ;
+	}
+}
+
+/**
  * html_feedback_top() - Show the feedback output at the bottom of the page.
  *
  * @param		string	The feedback.
@@ -130,7 +163,13 @@ function html_get_language_popup ($title='language_id',$selected='xzxz') {
  */
 function html_get_theme_popup ($title='theme_id',$selected='xzxz') {
 	$res=db_query("SELECT theme_id, fullname FROM themes WHERE enabled=true");
-	return html_build_select_box($res,$title,$selected,false);
+	$nbTheme = db_numrows($res);
+	if($nbTheme < 2) {
+		return("");
+	}
+	else {
+		return html_build_select_box($res,$title,$selected,false);
+	}
 }
 
 /**
@@ -250,12 +289,12 @@ function html_build_radio_buttons_from_arrays ($vals,$texts,$select_name,$checke
 	//we don't always want the default Any row shown
 	if ($show_any) {
 		$return .= '
-		<input type="radio" name="'.$select_name.'" value=""'.(($checked_val=='') ? ' checked' : '').'>&nbsp;'. $text_any .'<br />';
+		<input type="radio" name="'.$select_name.'" value=""'.(($checked_val=='') ? ' checked="checked"' : '').' />&nbsp;'. $text_any .'<br />';
 	}
 	//we don't always want the default 100 row shown
 	if ($show_100) {
 		$return .= '
-		<input type="radio" name="'.$select_name.'" value="100"'.(($checked_val==100) ? ' checked' : '').'>&nbsp;'. $text_100 .'<br />';
+		<input type="radio" name="'.$select_name.'" value="100"'.(($checked_val==100) ? ' checked="checked"' : '').' />&nbsp;'. $text_100 .'<br />';
 	}
 
 	$checked_found=false;
@@ -268,9 +307,9 @@ function html_build_radio_buttons_from_arrays ($vals,$texts,$select_name,$checke
 				<input type="radio" name="'.$select_name.'" value="'.$vals[$i].'"';
 			if ((string)$vals[$i] == (string)$checked_val) {
 				$checked_found=true;
-				$return .= ' checked';
+				$return .= ' checked="checked"';
 			}
-			$return .= '>&nbsp;'.htmlspecialchars($texts[$i]).'<br />';
+			$return .= ' />&nbsp;'.htmlspecialchars($texts[$i]).'<br />';
 		}
 	}
 	//
@@ -279,7 +318,7 @@ function html_build_radio_buttons_from_arrays ($vals,$texts,$select_name,$checke
 	//
 	if (!$checked_found && $checked_val != 'xzxz' && $checked_val && $checked_val != 100) {
 		$return .= '
-		<input type="radio" value="'.$checked_val.'" checked>&nbsp;'._('No Change').'<br />';
+		<input type="radio" value="'.$checked_val.'" checked="checked" />&nbsp;'._('No Change').'<br />';
 	}
 
 	return $return;
@@ -301,8 +340,9 @@ function html_build_radio_buttons_from_arrays ($vals,$texts,$select_name,$checke
  * @param		string	What to call the '100 row' defaults to none
  * @param		bool	Whether or not to show the 'Any row'
  * @param		string	What to call the 'Any row' defaults to any
+ * @param		array	Array of all allowed values from the full list.
  */
-function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_val='xzxz',$show_100=true,$text_100='none',$show_any=false,$text_any='any') {
+function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_val='xzxz',$show_100=true,$text_100='none',$show_any=false,$text_any='any', $allowed=false) {
 	if ($text_100=='none'){
 		$text_100=_('None');
 	}
@@ -335,9 +375,12 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
 		if (($vals[$i] != '100') || ($vals[$i] == '100' && !$show_100)) {
 			$return .= '
 				<option value="'.$vals[$i].'"';
-			if ($vals[$i] == $checked_val) {
+			if ((string)$vals[$i] == (string)$checked_val) {
 				$checked_found=true;
 				$return .= ' selected="selected"';
+			}
+			if (is_array($allowed) && !in_array($vals[$i], $allowed)) {
+				$return .= ' disabled="disabled" class="option_disabled"';
 			}
 			$return .= '>'./*htmlspecialchars(*/$texts[$i]/*)*/.'</option>';
 		}
@@ -366,12 +409,35 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
  * @param		bool	Whether or not to show the '100 row'
  * @param		string	What to call the '100 row'.  Defaults to none.
  */
-function html_build_select_box ($result, $name, $checked_val="xzxz",$show_100=true,$text_100='none') {
+function html_build_select_box ($result, $name, $checked_val="xzxz",$show_100=true,$text_100='none',$show_any=false,$text_any='Select One') {
 	if ($text_100=='none'){
 		$text_100=_('None');
 	}
-	return html_build_select_box_from_arrays (util_result_column_to_array($result,0),util_result_column_to_array($result,1),$name,$checked_val,$show_100,$text_100);
+	return html_build_select_box_from_arrays (util_result_column_to_array($result,0),util_result_column_to_array($result,1),$name,$checked_val,$show_100,$text_100, $show_any, $text_any);
 }
+
+/**
+ * html_build_select_box_sorted() - Takes a result set, with the first column being the "id" or value and
+ * the second column being the text you want displayed.
+ *
+ * @param		int		The result set
+ * @param		string	Text to be displayed
+ * @param		string	The item that should be checked
+ * @param		bool	Whether or not to show the '100 row'
+ * @param		string	What to call the '100 row'.  Defaults to none.
+ */
+function html_build_select_box_sorted ($result, $name, $checked_val="xzxz",$show_100=true,$text_100='none') {
+	global $Language;
+	if ($text_100=='none'){
+		$text_100=_('None');
+	}
+	$vals = util_result_column_to_array($result, 0);
+	$texts = util_result_column_to_array($result, 1);
+	array_multisort($texts, SORT_ASC, SORT_STRING,
+	                $vals);
+	return html_build_select_box_from_arrays ($vals, $texts, $name, $checked_val, $show_100, $text_100);
+}
+
 /**
  * html_build_multiple_select_box() - Takes a result set, with the first column being the "id" or value
  * and the second column being the text you want displayed.
@@ -595,6 +661,15 @@ function site_project_header($params) {
 	if (!$project || !is_object($project)) {
 		exit_error("GROUP PROBLEM","PROBLEM CREATING GROUP OBJECT");
 	} else if ($project->isError()) {
+		if ($project->isPermissionDeniedError() && !session_get_user()) {
+ 			$next = '/account/login.php?feedback='.urlencode($project->getErrorMessage());
+ 			if (getStringFromServer('REQUEST_METHOD') != 'POST') {
+				$next .= '&return_to='.urlencode(getStringFromServer('REQUEST_URI'));
+ 			}
+			// @alu: change url.
+ 			header("Location: $next");
+ 			exit;
+		}
 		exit_error("Group Problem",$project->getErrorMessage());
 	}
 
@@ -617,7 +692,13 @@ function site_project_header($params) {
 	}
 	echo $HTML->header($params);
 	
-	if(isset($GLOBALS['feedback'])) {
+	if(isset($GLOBALS['error_msg']) && $GLOBALS['error_msg']) {
+		echo html_error_top($GLOBALS['error_msg']);
+	}
+	if(isset($GLOBALS['warning_msg']) && $GLOBALS['warning_msg']) {
+		echo html_warning_top($GLOBALS['warning_msg']);
+	}
+	if(isset($GLOBALS['feedback']) && $GLOBALS['feedback']) {
 		echo html_feedback_top($GLOBALS['feedback']);
 	}
 //	echo $HTML->project_tabs($params['toptab'],$params['group'],$params['tabtext']);
@@ -632,10 +713,6 @@ function site_project_header($params) {
  */
 function site_project_footer($params) {
 	GLOBAL $HTML;
-
-	if(isset($GLOBALS['feedback'])) {
-		echo html_feedback_bottom($GLOBALS['feedback']);
-	}
 	echo $HTML->footer($params);
 }
 

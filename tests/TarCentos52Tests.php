@@ -9,7 +9,7 @@ require_once 'func/Testing/SeleniumRemoteSuite.php';
 
 // Selenium based tests
 require_once 'func/Site/AllTests.php';
-//require_once 'Trackers/AllTests.php';
+require_once 'func/Trackers/AllTests.php';
 require_once 'func/Tasks/AllTests.php';
 require_once 'func/Forums/AllTests.php';
 //require_once 'PluginsWiki/AllTests.php';
@@ -18,7 +18,7 @@ require_once 'func/News/AllTests.php';
 //require_once 'scm/AllTests.php';
 //require_once 'docs/AllTests.php';
 
-class AllTests
+class TarCentos52Tests
 {
 	public static function main()
 	{
@@ -40,7 +40,7 @@ class AllTests
 
 		// Integration tests (Selenium).
 		$suite->addTest(Site_AllTests::suite());
-//		$suite->addTest(Trackers_AllTests::suite());
+		$suite->addTest(Trackers_AllTests::suite());
 		$suite->addTest(Tasks_AllTests::suite());
 		$suite->addTest(Forums_AllTests::suite());
 		$suite->addTest(News_AllTests::suite());

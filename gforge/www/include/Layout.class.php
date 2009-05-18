@@ -640,7 +640,7 @@ if (isset($params['group']) && $params['group']) {
 
 	}
 
-	function tabGenerator($TABS_DIRS,$TABS_TITLES,$nested=false,$selected=false,$sel_tab_bgcolor='WHITE',$total_width='100%') {
+	function tabGenerator($TABS_DIRS,$TABS_TITLES,$nested=false,$selected=false,$sel_tab_bgcolor='white',$total_width='100%') {
 
 		$count=count($TABS_DIRS);
 		$width=intval((100/$count));
@@ -788,7 +788,7 @@ if (isset($params['group']) && $params['group']) {
 
 //		print '<br />';
 //		print '
-//		<input type="CHECKBOX" name="exact" value="1"'.( $exact ? ' CHECKED' : ' UNCHECKED' ).'> Require All Words';
+//		<input type="checkbox" name="exact" value="1"'.( $exact ? ' checked' : ' unchecked' ).'> Require All Words';
 
 		print '</td><td>&nbsp;';
 		$parameters = $searchManager->getParameters();
@@ -869,9 +869,13 @@ if (isset($params['group']) && $params['group']) {
 				$countLines += 3;
 			}
 		}
-		$breakLimit = round($countLines/3);
+
+ 		$maxCol = 3;
+ 		$breakLimit = ceil($countLines/$maxCol);
 		$break = $breakLimit;
 		$countLines = 0;
+ 		$countCol = 1;
+ 
 		$return = '
 			<table width="100%" border="0" cellspacing="0" cellpadding="1">
 				<tr class="tableheader">
@@ -881,7 +885,7 @@ if (isset($params['group']) && $params['group']) {
 								<!--<td colspan="2">'._('Search in').':</td-->
 								<td align="right">'._('Select').' <a href="javascript:setCheckBoxes(\'\', true)">'._('all').'</a> / <a href="javascript:setCheckBoxes(\'\', false)">'._('none').'</a></td>
 							</tr>
-							<tr height="20" class="tablecontent">
+							<tr class="tablecontent">
 								<td colspan="3">&nbsp;</td>
 							</tr>
 							<tr align="center" valign="top" class="tablecontent">
@@ -895,10 +899,11 @@ if (isset($params['group']) && $params['group']) {
 			}
 				
 			if ($countLines >= $break) {
-				//if the next block is so large that shifting it to the next column hits the breakpoint better
-				//the second part of statement (behind &&) proofs, that no 4th column is added
-				if ((($countLines - $break) >= ($break - $countLines)) && ((($break + $breakLimit)/$breakLimit) <= 3)) {
+ 				// if we are closer to the limit with this one included, then
+ 				// it's better to include it.
+ 				if (($countCol < $maxCol) && ($countLines - $break) >= ($break - $oldcountlines)) {
 					$return .= '</td><td>';
+ 					$countCol++;
 					$break += $breakLimit;
 				}
 			}
@@ -926,8 +931,8 @@ if (isset($params['group']) && $params['group']) {
 				foreach($section as $underkey => $undersection) {
 					$return .= '	<input type="checkbox" name="'.urlencode($key.$underkey).'"';
 					if (isset($GLOBALS[urlencode($key.$underkey)]))
-						$return .= ' checked ';
-					$return .= '></input>'.$undersection.'<br />';				
+						$return .= ' checked="checked" ';
+					$return .= ' />'.$undersection.'<br />';				
 					
 				}
 				
@@ -1054,9 +1059,39 @@ if (isset($params['group']) && $params['group']) {
 			return '';
 		} else {
 			return '
-				<span class="feedback">'.strip_tags($feedback, '<br>').'</span>';
+			<div class="feedback">'.strip_tags($feedback, '<br>').'</div>';
 		}
 	}
+	/**
+	 * warning_msg() - returns the htmlized warning string when an action is performed.
+	 *
+	 * @param string msg string
+	 * @return string htmlized warning
+	 */
+	function warning_msg($msg) {
+		if (!$msg) {
+			return '';
+		} else {
+			return '
+			<div class="warning_msg">'.strip_tags($msg, '<br>').'</div>';
+		}
+	}
+	
+	/**
+	 * error_msg() - returns the htmlized error string when an action is performed.
+	 *
+	 * @param string msg string
+	 * @return string htmlized error
+	 */
+	function error_msg($msg) {
+		if (!$msg) {
+			return '';
+		} else {
+			return '
+			<div class="error">'.strip_tags($msg, '<br>').'</div>';
+		}
+	}
+
 
 	/**
 	 * getThemeIdFromName()

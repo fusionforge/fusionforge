@@ -266,7 +266,7 @@ function run_sql_script($filename) {
 				show("Continue executing ([Y]es/[N]o)?\n");
 				// Read the input
 				$answer = strtolower(trim(fgets(STDIN)));
-				if ($answer != 'y' && $anser != 'yes') {
+				if ($answer != 'y' && $answer != 'yes') {
 					//db_rollback();
 					return false;
 				} else {
@@ -382,6 +382,10 @@ function drop_table_if_exists($name) {
 }
 
 function drop_if_exists($name, $command, $kind) {
+	// Strip "name" => name
+	if (preg_match('/^"(.*)"$/', $name, $match)) {
+		$name = $match[1];
+	}
 	$res = db_query("SELECT COUNT(*) AS exists FROM pg_class WHERE relname='$name' AND relkind='$kind'");
 	if (!$res) {
 		show("ERROR:".db_error()."\n");

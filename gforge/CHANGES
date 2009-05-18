@@ -1,4 +1,4 @@
-Not released yet:
+FusionForge-4.8: (Not released yet)
 * New projectlabels plugin, to tag projects with snippets of
   user-defined HTML (developed for/sponsored by Adullact)
 * New extratabs plugin, to add tabs with links to arbitrary URLs
@@ -12,6 +12,22 @@ Not released yet:
   FRS (AdaCore again)
 * New command-line scripts to inject users, groups and file releases
   into the database from text files (AdaCore again)
+* Trackers: The list of fields displayed when browsing the list of artifacts
+  can now be defined (Alcatel-Lucent)
+* Trackers: The description field can now be updated/corrected (Alcatel-Lucent)
+* Trackers: It is now possible to force a custom field to be mandatory (Alcatel-Lucent)
+* Trackers: The values for 'select box' custom fields can now be reordered (Alcatel-Lucent)
+* Trackers: A workflow on the status field (when overwritten) can be set. Allowed
+  transition between values can be defined and allowed per roles (Alcatel-Lucent)
+* Trackers: A new type of extra field has been added: Relation between artifact. 
+  This type allow to create a relation between artifacts. Backwards relation can
+  also be visible (Alcatel-Lucent)
+* Trackers: Dynamic links added, expressions like [#NNN],[TNNN] are now rendered as
+  links for description and comments (Alcatel-Lucent).
+* Trackers: Search improved to allow searching in text fields (Alcatel-Lucent).
+* Trackers: New system to share a search query. Shared queries can be represented 
+  as an URL or bookmarked. It is also possible to define one query as the default
+  one (Alcatel-Lucent) 
 
 FusionForge-4.8:
 * New classification by tags (aka tag cloud)

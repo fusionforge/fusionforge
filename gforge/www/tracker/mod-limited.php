@@ -14,9 +14,10 @@ $ath->header(array ('title'=>_('Modify').': '.$ah->getID(). ' - ' . $ah->getSumm
 ?>
 	<h3>[#<?php echo $ah->getID(); ?>] <?php echo $ah->getSummary(); ?></h3>
 
-	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;atid=<?php echo $ath->getID(); ?>" METHOD="post" enctype="multipart/form-data">
+	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;atid=<?php echo $ath->getID(); ?>" enctype="multipart/form-data" method="post">
 	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
 	<input type="hidden" name="func" value="postmod" />
+	<input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
 	<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>" />
 
 	<table width="80%">
@@ -27,7 +28,7 @@ if (session_loggedin()) {
 			<td><?php
 				if ($ah->isMonitoring()) {
 					$img="xmail16w.png";
-					$key="stop_monitoring";
+					$key="monitorstop";
 				} else {
 					$img="mail16w.png";
 					$key="monitor";
@@ -35,7 +36,7 @@ if (session_loggedin()) {
 				echo '
 				<a href="index.php?group_id='.$group_id.'&amp;artifact_id='.$ah->getID().'&amp;atid='.$ath->getID().'&amp;func=monitor"><strong>'.
 					html_image('ic/'.$img.'','20','20',array()).' '.$key.'</strong></a>';
-				?>&nbsp;<a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=monitor'); ?>')"><strong>(?)</strong></a>
+				?>&nbsp;<a href="javascript:help_window('/help/tracker.php?helpname=monitor')"><strong>(?)</strong></a>
 			</td>
 			<td><?php
 				if ($group->usesPM()) {
@@ -49,7 +50,8 @@ if (session_loggedin()) {
 				<input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
 			</td>
 		</tr>
-	</table>
+</table>
+<p/>
 <?php } ?>
 <table border="0" width="80%">
 
@@ -78,8 +80,8 @@ if (session_loggedin()) {
 	</tr>
 
     <?php
-        $ath->renderExtraFields($ah->getExtraFieldData(),true);
-    ?>
+		$ath->renderExtraFields($ah->getExtraFieldData(),true,'none',false,'Any','',false,'UPDATE');
+		?>
 
 	<tr>
 		<td><strong><?php echo _('Assigned to')?>: <a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=assignee'); ?>')"><strong>(?)</strong></a></strong><br />
@@ -110,7 +112,7 @@ if (session_loggedin()) {
 	</tr>
 
 	<tr>
-		<td colspan="2"><strong><?php echo _('Summary')?>: <a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=summary'); ?>')"><strong>(?)</strong></a></strong><br />
+		<td colspan="2"><strong><?php echo _('Summary')?><?php echo utils_requiredField(); ?>: <a href="javascript:help_window('/help/tracker.php?helpname=summary')"><strong>(?)</strong></a></strong><br />
 			<?php echo $ah->getSummary(); ?>
 		</td>
 	</tr>
@@ -126,7 +128,7 @@ if (session_loggedin()) {
 <table border="0" width="80%">
 	<tr><td colspan="2">
 		<br /><strong><?php echo _('OR Attach A Comment') ?>: <?php echo notepad_button('document.forms[1].details') ?> <a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=comment'); ?>')"><strong>(?)</strong></a></strong><br />
-		<textarea name="details" rows="7" cols="60"></textarea></p>
+		<textarea name="details" rows="7" cols="60"></textarea>
 		<p>
 		<h3><?php echo _('Followup') ?>:</h3>
 		<?php
@@ -165,7 +167,7 @@ if (session_loggedin()) {
 
 			for ($i=0; $i<$count; $i++) {
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-				<td><input type="CHECKBOX" name="delete_file[]" value="'. $file_list[$i]->getID() .'">'._('Delete').' </td>
+				<td><input type="checkbox" name="delete_file[]" value="'. $file_list[$i]->getID() .'">'._('Delete').' </td>
 				<td>'. htmlspecialchars($file_list[$i]->getName()) .'</td>
 				<td>'.  htmlspecialchars($file_list[$i]->getDescription()) .'</td>
 				<td>'.util_make_link ('/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.$file_list[$i]->getID().'/'.$file_list[$i]->getName(),_('Download')).'</td>
@@ -173,7 +175,7 @@ if (session_loggedin()) {
 			}
 
 		} else {
-			echo '<tr '.$GLOBALS['HTML']->boxGetAltRowStyle(0).'><td colspan=3>'._('No Files Currently Attached').'</td></tr>';
+			echo '<tr '.$GLOBALS['HTML']->boxGetAltRowStyle(0).'><td colspan="4">'._('No Files Currently Attached').'</td></tr>';
 		}
 		echo $GLOBALS['HTML']->listTableBottom();
 		?>
@@ -198,6 +200,7 @@ if (session_loggedin()) {
 	</td></tr>
 </table>
 </div>
+<?php $ah->showRelations(); ?>
 </div>
 		</form>
 <?php

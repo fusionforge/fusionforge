@@ -19,6 +19,7 @@ echo notepad_func();
 	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;atid=<?php echo $ath->getID(); ?>"  enctype="multipart/form-data" method="post">
 	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 	<input type="hidden" name="func" value="postmod"/>
+	<input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
 	<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>"/>
 
 	<table width="80%">
@@ -57,7 +58,7 @@ if (session_loggedin()) {
 			</td>
 		</tr>
 </table>
-<br />
+<p/>
 <?php } ?>
 <table border="0" width="80%">
 	<tr>
@@ -117,7 +118,7 @@ if (session_loggedin()) {
 	</tr>
 
 	<?php
-		$ath->renderExtraFields($ah->getExtraFieldData(),true);
+		$ath->renderExtraFields($ah->getExtraFieldData(),true,'none',false,'Any','',false,'UPDATE');
 	?>
 
 	<tr>
@@ -152,7 +153,7 @@ if (session_loggedin()) {
 	</tr>
 
 	<tr>
-		<td><strong><?php echo _('Summary')?>: <a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=summary'); ?>')"><strong>(?)</strong></a></strong><br />
+		<td><strong><?php echo _('Summary')?><?php echo utils_requiredField(); ?>: <a href="javascript:help_window('/help/tracker.php?helpname=summary')"><strong>(?)</strong></a></strong><br />
 		<input type="text" name="summary" size="70" value="<?php
 			echo $ah->getSummary(); 
 			?>" maxlength="255" />
@@ -161,7 +162,14 @@ if (session_loggedin()) {
 		</td>
 	</tr>
 	<tr><td colspan="2">
-		<?php echo $ah->showDetails(); ?>
+		<div id="edit" style="display:none;">
+		<strong><?php echo _('Detailed description') ?><?php echo utils_requiredField(); ?>: <?php echo notepad_button('document.forms[1].details') ?> <a href="javascript:help_window('/help/tracker.php?helpname=description')">(?)</a></strong>
+		<br />
+		<textarea name="description" rows="30" cols="79"><?php echo $ah->getDetails(); ?></textarea>
+		</div>
+		<div id="show" style="display:block;">
+		<?php echo $ah->showDetails(true); ?>
+		</div>
 	</td></tr>
 </table>
 <br />
@@ -256,7 +264,7 @@ if ($group->usesPM()) {
 			for ($i=0; $i<$count; $i++) {
 				echo '
 				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-				<td><input type="CHECKBOX" name="delete_file[]" value="'. $file_list[$i]->getID() .'">'._('Delete').' </td>'.
+				<td><input type="checkbox" name="delete_file[]" value="'. $file_list[$i]->getID() .'">'._('Delete').' </td>'.
 				'<td>'. htmlspecialchars($file_list[$i]->getName()) .'</td>
 				<td>'.util_make_link ('/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.$file_list[$i]->getID().'/'.$file_list[$i]->getName(),_('Download')).'</td>
 				</tr>';
@@ -289,6 +297,7 @@ if ($group->usesPM()) {
 	</td></tr>
 </table>
 </div>
+<?php $ah->showRelations(); ?>
 </div>
 		</form>
 

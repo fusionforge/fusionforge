@@ -105,9 +105,9 @@ echo $HTML->boxTop(_('Account Maintenance'));
 <?php echo _('Account options:'); ?>
 </p>
 <ul>
-	<li><?php echo util_make_link_u ($u->getUnixName(),$u->getId(),'<strong>'._('View My Profile').'</strong>'); ?></a></li>
+	<li><?php echo util_make_link_u ($u->getUnixName(),$u->getId(),'<strong>'._('View My Profile').'</strong>'); ?></li>
 <?php if($GLOBALS['sys_use_people']) { ?>
-	<li><?php echo util_make_link ('/people/editprofile.php','<strong>'._('Edit My Skills Profile').'</strong>'); ?></a></li>
+	<li><?php echo util_make_link ('/people/editprofile.php','<strong>'._('Edit My Skills Profile').'</strong>'); ?></li>
 <?php } ?>
 </ul>
 <?php echo $HTML->boxBottom(); ?>

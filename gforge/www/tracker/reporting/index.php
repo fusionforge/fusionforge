@@ -38,9 +38,28 @@ $SPAN = getStringFromRequest('SPAN');
 $start = getStringFromRequest('start');
 $end = getStringFromRequest('end');
 
+if (!$SPAN)
+	$SPAN=REPORT_TYPE_MONTHLY;
+	
 $report=new Report();
 if ($report->isError()) {
 	exit_error($report->getErrorMessage());
+}
+
+/*
+ * Set the start date to birth of the project.
+ */
+$res=db_query("SELECT register_time FROM groups WHERE group_id=$group_id");
+$report->site_start_date=db_result($res,0,'register_time');
+
+if (!$start) {
+	$z =& $report->getMonthStartArr();
+	$start = $z[0];
+}
+
+if (!$end) {
+	$z =& $report->getMonthStartArr();
+	$end = $z[ count($z)-1];
 }
 
 $group =& group_get_object($group_id);
@@ -96,37 +115,36 @@ $params['toptab']='tracker';
 echo site_project_header($params);
 
 ?>
+<div align="center">
 <h3>Project Activity</h3>
-<p>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
-<input type="hidden" name="sw" value="<?php echo $sw; ?>">
-<input type="hidden" name="group_id" value="<?php echo $group_id; ?>">
 <table><tr>
-<td><strong>Tracker:</strong><br /><?php echo html_build_select_box($restracker,'atid',$atid,false); ?></td>
+<td>
+<input type="hidden" name="sw" value="<?php echo $sw; ?>" />
+<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
+<strong>Tracker:</strong><br /><?php echo html_build_select_box($restracker,'atid',$atid,false); ?></td>
 <td><strong>Area:</strong><br /><?php echo html_build_select_box_from_arrays($vals, $labels, 'area',$area,false); ?></td>
 <td><strong>Type:</strong><br /><?php echo report_span_box('SPAN',$SPAN,true); ?></td>
 <td><strong>Start:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
 <td><strong>End:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
-<td><input type="submit" name="submit" value="Refresh"></td>
+<td><input type="submit" name="submit" value="Refresh" /></td>
 </tr></table>
 </form>
 <p>
 <?php if ($atid) {
 		if (!$area || $area == 'activity') { 
 	?>
-	<img src="trackeract_graph.php?<?php echo "SPAN=$SPAN&start=$start&end=$end&group_id=$group_id&atid=$atid"; ?>" width="640" height="480">
-	<p>
+	<img src="trackeract_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end&amp;group_id=$group_id&amp;atid=$atid"; ?>" width="640" height="480" alt="" />
 	<?php
 		} else {
 	?>
-	<img src="trackerpie_graph.php?<?php echo "SPAN=$SPAN&start=$start&end=$end&group_id=$group_id&atid=$atid&area=$area"; ?>" width="640" height="480">
-	<p>
+	<img src="trackerpie_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end&amp;group_id=$group_id&amp;atid=$atid&amp;area=$area"; ?>" width="640" height="480" alt="" />
 	<?php
 
 		}
 
 }
-
-echo site_project_footer(array());
-
 ?>
+</p>
+</div>
+<?php echo site_project_footer(array()); ?>

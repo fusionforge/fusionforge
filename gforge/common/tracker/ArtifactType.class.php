@@ -25,6 +25,7 @@
  */
 
 require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'tracker/ArtifactExtraFieldElement.class.php';
 
 	/**
 	* Gets an ArtifactType object from the artifact type id
@@ -270,8 +271,8 @@ class ArtifactType extends Error {
 			} else {
 				db_commit();
 				return $id;
-			}
 		}
+	}
 	}
 
 	/**
@@ -723,7 +724,7 @@ class ArtifactType extends Error {
 			$res = db_query_params  ('SELECT element_id,element_name,status_id
 				FROM artifact_extra_field_elements
 				WHERE extra_field_id = $1
-				ORDER BY element_id ASC',
+				ORDER BY element_pos ASC, element_id ASC',
 						 array ($id)) ;
 			$i=0;
 			while($arr =& db_fetch_array($res)) {
@@ -976,7 +977,8 @@ class ArtifactType extends Error {
 				//
 				//	You must have a role in the project if this tracker is not public
 				//
-				if ($this->userIsAdmin() || $this->getCurrentUserPerm() >= 0) {
+				$perm = $this->getCurrentUserPerm();
+				if ($this->userIsAdmin() || (strlen($perm) && $perm >= 0)) {
 					return true;
 				} else {
 					return false;
@@ -1120,6 +1122,40 @@ class ArtifactType extends Error {
 			$this->fetchData($this->getID());
 			return true;
 		}
+	}
+
+	/**
+	 *	  getBrowseList - get the free-form string strings.
+	 *
+	 *	  @return string instructions.
+	 */
+	function getBrowseList() {
+		$list = $this->data_array['browse_list'];
+		
+		// remove status_id in the browse list if a custom status exists
+    if (count($this->getExtraFields(ARTIFACT_EXTRAFIELDTYPE_STATUS)) > 0) {
+      $arr = explode(',', $list);
+      $idx = array_search('status_id', $arr);
+      if($idx !== False) {
+        array_splice($arr, $idx, 1);
+      }
+      return join(',', $arr);
+    }
+
+    return $list;
+	}
+
+	/**
+	 *	setCustomStatusField - set the extra_field_id of the field containing the custom status.
+	 *	@param	int	The extra field id.
+	 *	@return	boolean	success.
+	 */
+	function setBrowseList($list) {
+		$res=db_query("UPDATE artifact_group_list 
+		    SET browse_list='$list'
+			WHERE group_artifact_id='".$this->getID()."'");
+		$this->fetchData($this->getID());
+		return $res;
 	}
 
 }

@@ -21,7 +21,9 @@ gforge/common/include/database-mysql.php -text
 gforge/common/include/group_section_texts.php -text
 gforge/common/include/rbac_texts.php -text
 gforge/common/include/tag_cloud.php -text
+gforge/common/include/utils_crossref.php -text
 gforge/common/reporting/ReportDownloads.class.php -text
+gforge/common/tracker/ArtifactWorkflow.class.php -text
 gforge/contrib/cmd-line-prototype.tar.gz -text
 gforge/contrib/fusionforge.dia -text
 gforge/contrib/migrate-from-gforge-as.pl -text
@@ -47,6 +49,11 @@ gforge/db/20070924-project-perm.sql -text
 gforge/db/20090327_create_table_project_tags.sql -text
 gforge/db/20090402-add-projecttags-constraints.sql -text
 gforge/db/20090402-forum-attachment-types.sql -text
+gforge/db/20090507-add_artifact_workflow.sql -text
+gforge/db/20090507-add_element_pos.sql -text
+gforge/db/20090507-add_project_query.sql -text
+gforge/db/20090507-browse_list.sql -text
+gforge/db/20090507-install_workflow.php -text
 gforge/db/FTI-20061025.sql -text
 gforge/db/gforge-data-mysql.sql -text
 gforge/db/gforge-struct-mysql.sql -text
@@ -3332,6 +3339,8 @@ gforge/www/include/SmilieSupport.class.php -text svneol=unset#application/octet-
 gforge/www/include/SmilieSupportHtml.class.php -text svneol=unset#application/octet-stream
 gforge/www/include/TextSupport.class.php -text svneol=unset#application/octet-stream
 gforge/www/include/unicode.php -text
+gforge/www/js/common.js -text
+gforge/www/js/sortable.js -text
 gforge/www/jscook/ThemePanel/arrow.gif svneol=native#unset
 gforge/www/jscook/ThemePanel/arrowdown.gif svneol=native#unset
 gforge/www/jscook/ThemePanel/blank.gif svneol=native#unset
@@ -3516,7 +3525,10 @@ gforge/www/themes/gforge/images/header/top-logo.blank.gif -text
 gforge/www/themes/gforge/images/header/top-logo.png -text svneol=unset#unset
 gforge/www/themes/gforge/images/header/top-middle.gif -text
 gforge/www/themes/gforge/images/header/top-right.gif -text
+gforge/www/themes/gforge/images/ic/acl_roles20.png -text svneol=unset#unset
 gforge/www/themes/gforge/images/ic/adddoc12.png -text
+gforge/www/themes/gforge/images/ic/btn_down.png -text svneol=unset#unset
+gforge/www/themes/gforge/images/ic/btn_up.png -text svneol=unset#unset
 gforge/www/themes/gforge/images/ic/caret.png -text
 gforge/www/themes/gforge/images/ic/cfolder15.png -text
 gforge/www/themes/gforge/images/ic/check.png -text
@@ -3550,6 +3562,7 @@ gforge/www/themes/gforge/images/ic/trash.png -text
 gforge/www/themes/gforge/images/ic/wiki20g.png -text svneol=unset#unset
 gforge/www/themes/gforge/images/ic/write16w.png -text
 gforge/www/themes/gforge/images/ic/xmail16w.png -text
+gforge/www/themes/gforge/images/spacer.gif -text svneol=unset#unset
 gforge/www/themes/gforge/images/t.png -text
 gforge/www/themes/gforge/images/t2.png -text
 gforge/www/themes/gforge/images/toptab-new/left.gif -text
@@ -3651,6 +3664,9 @@ gforge/www/themes/ultralite/images/forum_add.gif -text
 gforge/www/themes/ultralite/images/forum_delete.gif -text
 gforge/www/themes/ultralite/images/forum_edit.gif -text
 gforge/www/themes/ultralite/images/new.png -text
+gforge/www/tracker/admin/form-customizelist.php -text
+gforge/www/tracker/admin/form-workflow.php -text
+gforge/www/tracker/admin/form-workflow_roles.php -text
 gforge/www/trove/TroveCategory.class.php -text
 gforge/www/trove/TroveCategoryAdmin.class.php -text
 gforge/www/trove/TroveCategoryFactory.class.php -text

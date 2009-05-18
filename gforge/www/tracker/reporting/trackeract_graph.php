@@ -63,7 +63,7 @@ if (!$g || $g->isError()) {
 
 // Create the graph. These two calls are always required
 $graph  = new Graph(640, 480,"auto");
-$graph->SetMargin(50,10,35,50);
+$graph->SetMargin(50,10,35,80);
 $graph->SetScale( "textlin");
 //$graph->SetScale( "linlog");
 //$graph ->SetYScale("log");
@@ -87,11 +87,11 @@ $lineplot3 ->SetColor("red");
 $graph->Add( $lineplot3 );
 
 //	Legends
-$lineplot->SetLegend ("Avg Time Open");
+$lineplot->SetLegend ("Avg Time Open (in days)");
 $lineplot2 ->SetLegend("Total Opened");
 $lineplot3 ->SetLegend("Total Still Open");
 
-//echo "<pre>".print_r($report->getDates()).'<br>'.print_r($ydata).'<br>'.print_r($ydata2).'<br>'.print_r($ydata3);
+//echo "<pre>".print_r($report->getDates()).'<br />'.print_r($ydata).'<br />'.print_r($ydata2).'<br />'.print_r($ydata3);
 //echo "<pre>".print_r($ydata2);
 //exit;
 
@@ -99,7 +99,7 @@ $lineplot3 ->SetLegend("Total Still Open");
 //	Titles
 //
 $graph->title->Set("Tracker Activity For: ".$g->getPublicName(). 
-	" (".date('m/d/Y',$report->getStartDate()) ."-". date('m/d/Y',$report->getEndDate()) .")");
+	" (".date('Y-m-d',$report->getStartDate()) ." to ". date('Y-m-d',$report->getEndDate()) .")");
 $graph->subtitle->Set($report_company_name);
 //$graph->xaxis-> title->Set("Date" );
 //$graph->yaxis-> title->Set("Number" ); 

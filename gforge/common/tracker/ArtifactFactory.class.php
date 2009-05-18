@@ -56,6 +56,9 @@ class ArtifactFactory extends Error {
 	var $moddaterange;
 	var $opendaterange;
 	var $closedaterange;
+	
+	var $query_type;		// query, default, custom
+	var $query_id;			// id of the query (when query_type=query)
 
 	/**
 	 *  Constructor.
@@ -113,23 +116,17 @@ class ArtifactFactory extends Error {
 				if no set is passed in, see if a preference was set
 				if no preference or not logged in, use open set
 			*/
+			$this->query_type = '';
 			if (session_loggedin()) {
-				$default_query=$u->getPreference('art_query'.$this->ArtifactType->getID());
-				$this->defaultquery = $default_query;
-				if ($default_query) {
-					$aq = new ArtifactQuery($this->ArtifactType,$default_query);
-					$_extra_fields=$aq->getExtraFields();
-					$order_col=$aq->getSortCol();
-					$sort=$aq->getSortOrd();
-					$_assigned_to=$aq->getAssignee();
-					$_status=$aq->getStatus();
-					$this->moddaterange = $aq->getModDateRange();
-					$this->opendaterange = $aq->getOpenDateRange();
-					$this->closedaterange = $aq->getCloseDateRange();
+				$query_id=$u->getPreference('art_query'.$this->ArtifactType->getID());
+				if ($query_id) {
+					$this->query_type = 'query';
+					$this->query_id = $query_id;
 				} else {
 					$custom_pref=$u->getPreference('art_cust'.$this->ArtifactType->getID());
 					if ($custom_pref) {
 //$_assigned_to.'|'.$_status.'|'.$_order_col.'|'.$_sort_ord.'|'.$_changed.'|'.serialize($_extra_fields);
+						$this->query_type = 'custom';
 						$pref_arr=explode('|',$custom_pref);
 						$_assigned_to=$pref_arr[0];
 						$_status=$pref_arr[1];
@@ -142,18 +139,49 @@ class ArtifactFactory extends Error {
 							$_status=$pref_arr[1];
 						}
 						$set='custom';
-					} else {
-						//default to open
-						$_assigned_to=0;
-						$_status=1;
-						$_changed=0;
 					}
 				}
-			} else {
-				//default to open
+			} elseif (isset($_COOKIE["GFTrackerQuery"])) {
+				$gf_tracker = unserialize($_COOKIE["GFTrackerQuery"]);
+				$query_id = (int)$gf_tracker[$this->ArtifactType->getID()];
+				if ($query_id) { 
+					$this->query_type = 'query';
+					$this->query_id = $query_id;
+				}
+			}
+
+			if (!$this->query_type) {
+				$sql = "SELECT artifact_query_id FROM artifact_query
+					WHERE group_artifact_id='".$this->ArtifactType->getID()."'
+					AND query_type=2";
+				$res = db_query($sql);
+				if (db_numrows($res)>0) {
+					$this->query_type = 'query';
+					$this->query_id = db_result($res, 0, 'artifact_query_id');
+				}
+			}
+
+			if (!$this->query_type) {
+				//default to all opened
+				$this->query_type = 'default';
 				$_assigned_to=0;
 				$_status=1;
 				$_changed=0;
+			}
+
+			if ($this->query_type == 'query') {
+				$aq = new ArtifactQuery($this->ArtifactType, $this->query_id);
+				$_assigned_to=$aq->getAssignee();
+				$_status=$aq->getStatus();
+				$_extra_fields=$aq->getExtraFields();
+				$this->moddaterange = $aq->getModDateRange();
+				$this->opendaterange = $aq->getOpenDateRange();
+				$this->closedaterange = $aq->getCloseDateRange();
+				$this->summary = $aq->getSummary();
+				$this->description = $aq->getDescription();
+				$this->followups = $aq->getFollowups();
+				$order_col=$aq->getSortCol();
+				$sort=$aq->getSortOrd();
 			}
 		}
 
@@ -172,6 +200,7 @@ class ArtifactFactory extends Error {
 		$_sort_ord = util_ensure_value_in_set ($sort,
 						       array ('ASC', 'DESC')) ;
 		if ($set=='custom') {
+			$this->query_type = 'custom';
 			if (session_loggedin()) {
 				/*
 					if this custom set is different than the stored one, reset preference
@@ -211,7 +240,8 @@ class ArtifactFactory extends Error {
 		$this->sort=$_sort_ord;
 		$this->order_col=$_order_col;
 		$this->status=$_status;
-		if ($_assigned_to != 'Array') {
+		if (gettype($_assigned_to) === 'integer' || 
+			gettype($_assigned_to) === 'string') {
 			$this->assigned_to=$_assigned_to;
 		}
 		$this->extra_fields=$_extra_fields;
@@ -221,7 +251,7 @@ class ArtifactFactory extends Error {
 		if (is_null($max_rows) || $max_rows < 0) {
 			$max_rows=50;
 		}
-		if (isset ($default_query)) {
+		if ($this->query_type == 'query') {
 			$this->max_rows=0;
 		} else {
 			$this->max_rows=$max_rows;
@@ -245,7 +275,10 @@ class ArtifactFactory extends Error {
 	 *	@return	int	
 	 */
 	function getDefaultQuery() {
-		return $this->defaultquery;
+		if ($this->query_type == 'query')
+			return $this->query_id;
+		else
+			return '';
 	}
 	
 	/**
@@ -278,8 +311,18 @@ class ArtifactFactory extends Error {
 				$selectsql .= ', artifact_extra_field_data aefd'.$i;
 				$wheresql .= ' AND aefd'.$i.'.extra_field_id=$'.$paramcount++ ;
 				$params[] = $keys[$i] ;
-				$wheresql .= ' AND aefd'.$i.'.field_data = ANY ($'.$paramcount++ ;
-				$params[] = db_string_array_to_any_clause ($vals[$i]) ;
+
+				// Hack: Determine the type of the element to get the right search query.
+				$sql = "SELECT field_type FROM artifact_extra_field_list WHERE extra_field_id=".$keys[$i];
+				$type = db_result(db_query($sql),0,'field_type');
+				if ($type == 4 or $type == 6) {
+					$search = "LIKE '".addslashes($vals[$i])."'";
+					$wheresql .= ' AND aefd'.$i.'.field_data LIKE $'.$paramcount++ ;
+					$params[] = $vals[$i];
+				} else {
+					$wheresql .= ' AND aefd'.$i.'.field_data = ANY ($'.$paramcount++ ;
+					$params[] = db_string_array_to_any_clause ($vals[$i]) ;
+				}
 				$wheresql .= ') AND aefd'.$i.'.artifact_id=artifact_vw.artifact_id' ;
 			}
 		}
@@ -340,6 +383,23 @@ class ArtifactFactory extends Error {
 			$wheresql .= ' AND $'.$paramcount++ ;
 			$params[] = $end_int ;
 			$wheresql .= ')' ;
+		}
+
+		//add constraint on the summary string.
+		if ($this->summary) {
+			$wheresql .= ' AND summary LIKE $'.$paramcount++ ;
+			$params[] = $this->summary;
+		}
+		//add constraint on the description string.
+		if ($this->description) {
+			$wheresql .= ' AND details LIKE $'.$paramcount++ ;
+			$params[] = $this->description;
+		}
+		//add constraint on the followups string.
+		if ($this->followups) {
+			$wheresql .= 'LEFT OUTER JOIN artifact_message am USING (artifact_id)
+						WHERE am.body LIKE $'.$paramcount++;
+			$params[] = $this->followups;
 		}
 
 		$sortorder = util_ensure_value_in_set ($this->sort,

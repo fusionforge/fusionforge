@@ -40,9 +40,11 @@
 			$res=new ArtifactTypeHtml($group);
 			if (!$res->create($name,$description,$is_public,$allow_anon,$email_all,$email_address,
 				$due_period,$use_resolution,$submit_instructions,$browse_instructions)) {
-				$feedback .= $res->getErrorMessage();
+				exit_error('Error',$res->getErrorMessage());
 			} else {
-				header ("Location: ".util_make_url ("/tracker/admin/?group_id=$group_id&atid=".$res->getID()."&update_users=1"));
+				$feedback .= _('Tracker created successfully');
+				$feedback .= '<br />';
+				$feedback .= _('Please configure also the roles (by default, it\'s \'No Access\')');
 			}
 
 		}
@@ -117,18 +119,17 @@
 	} else {
 
 	?><?php echo _('<h3>Create a new tracker</h3><p>You can use this system to track virtually any kind of data, with each tracker having separate user, group, category, and permission lists. You can also easily move items between trackers when needed.</p><p>Trackers are referred to as "Artifact Types" and individual pieces of data are "Artifacts". "Bugs" might be an Artifact Type, whiles a bug report would be an Artifact. You can create as many Artifact Types as you want, but remember you need to set up categories, groups, and permission for each type, which can get time-consuming') ?>
-	<p>
 	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
 	<input type="hidden" name="add_at" value="y" />
 	<p>
 	<?php echo _('<strong> Name:</strong> (examples: meeting minutes, test results, RFP Docs)') ?><br />
-	<input type="text" name="name" value=""></p>
+	<input type="text" name="name" value="" /></p>
 	<p>
 	<strong><?php echo _('Description') ?>:</strong><br />
 	<input type="text" name="description" value="" size="50" /></p>
 	<p>
 	<input type="checkbox" name="is_public" value="1" /> <strong><?php echo _('Publicly Available') ?></strong><br />
-	<input type="checkbox" name="allow_anon" value="1" /> <strong><?php echo _('Allow non-logged-in postings') ?></strong><br />
+	<input type="checkbox" name="allow_anon" value="1" /> <strong><?php echo _('Allow non-logged-in postings') ?></strong></p>
 	<p>
 	<strong><?php echo _('Send email on new submission to address') ?>:</strong><br />
 	<input type="text" name="email_address" value="" /></p>
@@ -142,13 +143,13 @@
 	<input type="text" name="status_timeout" value="14" /></p>
 	<p>
 	<strong><?php echo _('Free form text for the "submit new item" page') ?>:</strong><br />
-	<textarea name="submit_instructions" rows="10" cols="55" wrap="hard"></textarea></p>
+	<textarea name="submit_instructions" rows="10" cols="55"></textarea></p>
 	<p>
 	<strong><?php echo _('Free form text for the "browse items" page') ?>:</strong><br />
-	<textarea name="browse_instructions" rows="10" cols="55" wrap="hard"></textarea></p>
+	<textarea name="browse_instructions" rows="10" cols="55"></textarea></p>
 	<p>
 	<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
-	</form></p>
+	</form>
 	<?php
 	}
 

@@ -90,6 +90,43 @@ class ArtifactsForUser extends Error {
 		return $this->getArtifactsFromSQLwithParams('SELECT * FROM artifact_vw av WHERE av.submitted_by=$1 AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',
 							    array($this->User->getID())) ;
 	}
+
+	/**
+	*	getMonitoredArtifacts
+	*
+	*	@return Artifact[] The array of Artifacts
+	*/
+	function & getMonitoredArtifacts() {
+		$artifacts = array();
+		$sql="SELECT groups.group_name,groups.group_id," .
+				"artifact_group_list.group_artifact_id," .
+				"artifact_group_list.name " .
+			"FROM groups,artifact_group_list,artifact_type_monitor " .
+			"WHERE groups.group_id=artifact_group_list.group_id " .
+			"AND groups.status ='A' " .
+			"AND artifact_group_list.group_artifact_id=artifact_type_monitor.group_artifact_id " .
+			"AND artifact_type_monitor.user_id='".$this->User->getID()."' " .
+			"ORDER BY group_name DESC";
+			
+		$result=db_query($sql);
+		$rows=db_numrows($result);
+		if ($rows < 1) {
+		        return $artifacts;
+		}
+		for ($i=0; $i<$rows; $i++) {
+			$group_id = db_result($result,$i,'group_id');
+			$group_artifact_id = db_result($result,$i,'group_artifact_id');
+			$group =& group_get_object($group_id);
+			$artifact =& new ArtifactType($group,$group_artifact_id);
+			$ag = $artifact->getGroup();
+			if ($artifact->isError()) {
+				$this->setError($artifact->getErrorMessage());
+			} else {
+				$artifacts[] =& $artifact;
+			}
+		}
+		return $artifacts;
+	}
 }
 
 // Local Variables:

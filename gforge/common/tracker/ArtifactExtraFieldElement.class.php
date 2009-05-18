@@ -24,6 +24,7 @@
  */
 
 require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'tracker/ArtifactWorkflow.class.php';
 
 class ArtifactExtraFieldElement extends Error {
 
@@ -129,6 +130,12 @@ class ArtifactExtraFieldElement extends Error {
 				db_rollback();
 				return false;
 			} else {
+				// If new element belongs to Status custom field, then register the new element in the workflow.
+				if ($this->ArtifactExtraField->getType() == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
+					$atw = new ArtifactWorkflow($this->ArtifactExtraField->ArtifactType, $this->ArtifactExtraField->getID());
+					$atw->addNode($id);
+				}
+				
 				db_commit();
 				return $id;
 			}

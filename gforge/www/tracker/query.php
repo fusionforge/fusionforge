@@ -41,7 +41,8 @@ if (getStringFromRequest('submit')) {
 		if (!$aq || !is_object($aq)) {
 			exit_error('Error',$aq->getErrorMessage());
 		}
-		$query_name = getStringFromRequest('query_name');
+		$query_name = trim(getStringFromRequest('query_name'));
+		$query_type = getStringFromRequest('query_type',0);
 		$_status = getStringFromRequest('_status');
 		$_assigned_to = getStringFromRequest('_assigned_to');
 		$_sort_col = getStringFromRequest('_sort_col');
@@ -50,13 +51,18 @@ if (getStringFromRequest('submit')) {
 		$_moddaterange = getStringFromRequest('_moddaterange');
 		$_opendaterange = getStringFromRequest('_opendaterange');
 		$_closedaterange = getStringFromRequest('_closedaterange');
-		if (!$aq->create($query_name,$_status,$_assigned_to,$_moddaterange,$_sort_col,$_sort_ord,$extra_fields,$_opendaterange,$_closedaterange)) {
+		$_summary = getStringFromRequest('_summary');
+		$_description = getStringFromRequest('_description');
+		$_followups = getStringFromRequest('_followups');
+		if (!$aq->create($query_name,$_status,$_assigned_to,$_moddaterange,$_sort_col,$_sort_ord,$extra_fields,$_opendaterange,$_closedaterange,$_summary,$_description,$_followups,$query_type)) {
 			exit_error('Error',$aq->getErrorMessage());
 		} else {
 			$feedback .= 'Successfully Created';
 		}
 		$aq->makeDefault();
 		$query_id=$aq->getID();
+		header('Location: /tracker/?atid='.$atid.'&group_id='.$group_id.'&func=browse');
+		exit;
 	//	
 /*
 	// Make the displayed query the default
@@ -83,6 +89,7 @@ if (getStringFromRequest('submit')) {
 			exit_error('Error',$aq->getErrorMessage());
 		}
 		$query_name = getStringFromRequest('query_name');
+		$query_type = getStringFromRequest('query_type',0);
 		$_status = getStringFromRequest('_status');
 		$_assigned_to = getStringFromRequest('_assigned_to');
 		$_sort_col = getStringFromRequest('_sort_col');
@@ -90,14 +97,19 @@ if (getStringFromRequest('submit')) {
 		$_moddaterange = getStringFromRequest('_moddaterange');
 		$_opendaterange = getStringFromRequest('_opendaterange');
 		$_closedaterange = getStringFromRequest('_closedaterange');
+		$_summary = getStringFromRequest('_summary');
+		$_description = getStringFromRequest('_description');
+		$_followups = getStringFromRequest('_followups');
 		$extra_fields = getStringFromRequest('extra_fields');
-		if (!$aq->update($query_name,$_status,$_assigned_to,$_moddaterange,$_sort_col,$_sort_ord,$extra_fields,$_opendaterange,$_closedaterange)) {
+		if (!$aq->update($query_name,$_status,$_assigned_to,$_moddaterange,$_sort_col,$_sort_ord,$extra_fields,$_opendaterange,$_closedaterange,$_summary,$_description,$_followups,$query_type)) {
 			exit_error('Error',$aq->getErrorMessage());
 		} else {
 			$feedback .= 'Query Updated';
 		}
 		$aq->makeDefault();
 		$query_id=$aq->getID();
+		header('Location: /tracker/?atid='.$atid.'&group_id='.$group_id.'&func=browse');
+		exit;
 	//
 	//	Just load the query
 	//
@@ -124,6 +136,8 @@ if (getStringFromRequest('submit')) {
 			$feedback .= 'Query Deleted';
 		}
 		$query_id=0;
+		header('Location: /tracker/?atid='.$atid.'&group_id='.$group_id.'&func=browse');
+		exit;
 	}	
 } else {
 	$user=session_get_user();
@@ -146,6 +160,10 @@ $_sort_ord=$aq->getSortOrd();
 $_moddaterange=$aq->getModDateRange();
 $_opendaterange=$aq->getOpenDateRange();
 $_closedaterange=$aq->getCloseDateRange();
+$_summary=$aq->getSummary();
+$_description=$aq->getDescription();
+$_followups=$aq->getFollowups();
+$query_type=$aq->getQueryType();
 //
 //	creating a custom technician box which includes "any" and "unassigned"
 $tech_box=$ath->technicianBox ('_assigned_to[]',$_assigned_to,true,'none','-1',false,true);
@@ -211,27 +229,19 @@ $res=db_query("SELECT artifact_query_id,query_name
 
 //	Show the new pop-up boxes to select assigned to, status, etc
 //
-?><html>
-<head>
-<title>Query</title>
-<link rel="stylesheet" type="text/css" href="<?php echo util_make_url ('/themes/css/gforge-compat.css'); ?>" />
-<?php
+$ath->header(array('atid'=>$ath->getID()));
 
-$theme_cssfile=$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'].'/css/theme.css';
-if (file_exists($theme_cssfile)){
-echo '
-<link rel="stylesheet" type="text/css" href="'.util_make_url ('/themes/'.$GLOBALS['sys_theme'].'/css/theme.css').'" />
-';
-}
-echo '
+echo '<table align="center"><tr><td>' .
+		'<fieldset><legend>'.
+		_('Build Query').
+		'</legend>';
 
-</head>
-<body>
+echo '
 <h1>'. $feedback .'</h1>
 
-<table border="3" cellpadding="4" rules="groups" frame="box" width="100%" class="tablecontent">
-	<form action="'.getStringFromServer('PHP_SELF').'?func=query&group_id='.$group_id.'&atid='.$ath->getID().'" method="post">
-	<input type="hidden" name="form_key" value="'.form_generate_key().'">
+<form action="'.getStringFromServer('PHP_SELF').'?func=query&amp;group_id='.$group_id.'&amp;atid='.$ath->getID().'" method="post">
+<input type="hidden" name="form_key" value="'.form_generate_key().'" />
+<table align="center" border="3" cellpadding="4" rules="groups" frame="box" width="100%" class="tablecontent">
 	<tr>
 		<td>
 			<input type="submit" name="submit" value="'._('Save Changes').'" />
@@ -240,20 +250,21 @@ echo '
 	if(db_numrows($res)>0) {
 		echo html_build_select_box($res,'query_id',$query_id,false).'';
 	}
+
 	echo '
 		</td>
 	</tr>
 	<tr class="tablecontent">
-		<td>
-		<input type="radio" name="query_action" value="1" '.((!$query_id) ? 'checked' : '' ).'>'._('Name and Save Query').'<br />';
+		<td>';
 	if(db_numrows($res)>0) {
 		echo '
-		<input type="radio" name="query_action" value="4">'._('Load Query').'<br />';
-	}
-	if ($query_id) {
+		<input type="radio" name="query_action" value="1" />'._('Name and Save Query').'<br />
+		<input type="radio" name="query_action" value="4" />'._('Load Query').'<br />
+		<input type="radio" name="query_action" value="3" checked="checked" />'._('Update Query').'<br />
+		<input type="radio" name="query_action" value="5" />'._('Delete Query');
+	} else {
 		echo '
-		<input type="radio" name="query_action" value="3" checked>'._('Update Query').'<br />
-		<input type="radio" name="query_action" value="5">'._('Delete Query').'';
+		<input type="hidden" name="query_action" value="1" />'._('Name and Save Query').'<br />';
 	}
 	echo '
 		</td>
@@ -263,36 +274,79 @@ echo '
 </table>';
 
 echo'
-<table width="100%" class="tablecontent">
+<table width="100%" class="tablecontent">';
+if ($ath->userIsAdmin()) {
+	$sql = "SELECT query_name 
+			FROM artifact_query WHERE query_type=2 AND group_artifact_id='".$ath->getID()."'";
+	$default_query = db_result(db_query($sql),0, 'query_name');
+	if ($default_query) {
+		if ($default_query == $aq->getName()) {
+			$note = '';
+		} else {
+			$note= '<br/><i>'.sprintf(_('Note: The default project query is currently \'%1$s\'.'), $default_query).'</i>';
+		}
+	} else {
+		$note= '<br/><i>'._('Note: There is no default project query defined.').'</i>';
+	}
+	echo '
 	<tr>
-		<td>'._('Assignee').'</a><br />'. $tech_box .'</td>
-		<td>';
+		<td colspan="2">
+			<strong>'._('Type of query').':</strong><br />
+			<input name="query_type" value="0" type="radio"'.(($query_type==0) ? ' checked="checked"' : '' ).' />'.
+			_('Private query').'<br />
+			<input name="query_type" value="1" type="radio"'.(($query_type==1) ? ' checked="checked"' : '' ).' />'.
+			_('Project level query (query is public)').'<br />
+			<input name="query_type" value="2" type="radio"'.(($query_type==2) ? ' checked="checked"' : '' ).' />'.
+			_('Default project query (for project level query only)').'<br />
+			'.$note.'
+			<hr/>
+		</td>
+	</tr>';
+}
+	echo '<tr>
+		<td><strong>'._('Assignee').':</strong><br />'. $tech_box .'</td>
+		<td valign="top">';
 		if (!$ath->usesCustomStatuses()) {
-			echo _('State').':&nbsp;<br />'. $ath->statusBox('_status',$_status,true,_('Any'));
+			echo '<strong>'._('State').':</strong><br />'. $ath->statusBox('_status',$_status,true,_('State'));
 		}
 		echo '</td>
 	</tr>';
-	$ath->renderExtraFields($extra_fields,true,'None',true,'Any',ARTIFACT_EXTRAFIELD_FILTER_INT,false,'QUERY');
+	$ath->renderExtraFields($extra_fields,true,'None',true,'Any','',false,'QUERY');
+	
+	$tips = '<i>'._('(% for wildcards)').'</i>&nbsp;&nbsp;&nbsp;';
 	
 echo '
 	<tr>
-		<td colspan="2">'.
-		_('Last Modified Date range').':<strong>(YYYY-MM-DD&nbsp;YYYY-MM-DD Format)</strong><br />
-		<input type="text" name="_moddaterange" size="21" maxlength="21" value="'. htmlspecialchars($_moddaterange) .'"><p/>
-		'._('Open Date range').': <strong>(YYYY-MM-DD&nbsp;YYYY-MM-DD Format)</strong><br />
-		<input type="text" name="_opendaterange" size="21" maxlength="21" value="'. htmlspecialchars($_opendaterange) .'"><p/>
-		'._('Close Date range').': <strong>(YYYY-MM-DD&nbsp;YYYY-MM-DD Format)</strong><br />
-		<input type="text" name="_closedaterange" size="21" maxlength="21" value="'. htmlspecialchars($_closedaterange) .'">
+		<td colspan="2" nowrap="nowrap">'.
+		'<strong>'._('Last Modified Date range').':</strong> <i>(YYYY-MM-DD&nbsp;YYYY-MM-DD Format)</i><br />
+		<input type="text" name="_moddaterange" size="21" maxlength="21" value="'. htmlspecialchars($_moddaterange) .'" /><p/>
+		<strong>'._('Open Date range').':</strong> <i>(YYYY-MM-DD&nbsp;YYYY-MM-DD Format)</i><br />
+		<input type="text" name="_opendaterange" size="21" maxlength="21" value="'. htmlspecialchars($_opendaterange) .'" /><p/>
+		<strong>'._('Close Date range').':</strong> <i>(YYYY-MM-DD&nbsp;YYYY-MM-DD Format)</i><br />
+		<input type="text" name="_closedaterange" size="21" maxlength="21" value="'. htmlspecialchars($_closedaterange) .'" />
 		</td>
 	</tr>
 	<tr>
-		<td>'._('Order by').'<br />
+		<td colspan="2">'.
+		'<strong>'._('Summary').':</strong> '.$tips.'<br />
+		<input type="text" name="_summary" size="40" value="'. htmlspecialchars($_summary) .'" /><p/>
+		<strong>'._('Detailed description').':</strong> '.$tips.'<br />
+		<input type="text" name="_description" size="40" value="'. htmlspecialchars($_description) .'" /><p/>
+		<strong>'._('Followups').':</strong> '.$tips.'<br />
+		<input type="text" name="_followups" size="40" value="'. htmlspecialchars($_followups) .'" />
+		</td>
+	</tr>
+	<tr>
+		<td><strong>'._('Order by').':</strong><br />
 		'. 
 		html_build_select_box_from_arrays($order_arr,$order_name_arr,'_sort_col',$_sort_col,false) .'</td>
 		<td>&nbsp;<br />
 		'.html_build_select_box_from_arrays($sort_arr,$sort_name_arr,'_sort_ord',$_sort_ord,false) .'</td>
-	</tr>
-	</form></table></body></html>';
+	</tr>';
+	echo '
+	</table></form>';
+echo '</fieldset></td></tr></table>';
+$ath->footer(array());
 
 // Local Variables:
 // mode: php
