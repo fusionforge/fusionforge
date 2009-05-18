@@ -57,3 +57,14 @@ NOTES:
 2) By default, phpWiki creates lots of pages with plugins and helps. The current 
  implementation allows to create a full wiki (with all standard pages) or one big
  and the others with minimal pages (see configuration file for more).
+
+PROBLEMS:
+* If you have PearDB problems and if you have a peardb package already installed, then
+you can try to remove it. By default, phpwiki will try to use the installed one and
+failback to the embedded one if none found.
+
+* You may also have problems with the tsearch configuration. phpWiki uses full text
+search to provide an improved search and you have to check that the configuration
+is supported by the installed locale on your system.
+Here is an example of command if your installed locale is fr_FR.UTF-8:
+SQL: UPDATE pg_ts_cfg set locale = 'fr_FR.UTF-8' WHERE ts_name = 'default';
