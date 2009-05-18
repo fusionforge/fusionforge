@@ -16,8 +16,8 @@ $limit = getIntFromRequest('limit', 10);
 if ($limit > 100) $limit = 100;
 
 if ($group_id) {
-	$where = "group_id=$group_id";
-	$query = "SELECT group_name FROM groups WHERE $where";
+	$where = "AND group_id=$group_id";
+	$query = "SELECT group_name FROM groups WHERE group_id=$group_id";
 	$res = db_query($query,1);
 	$row = db_fetch_array($res);
 	$title = ": ".$row['group_name']." - ";
