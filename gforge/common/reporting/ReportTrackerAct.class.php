@@ -3,6 +3,7 @@
  * FusionForge reporting system
  *
  * Copyright 2003-2004, Tim Perdue/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -93,39 +94,42 @@ function ReportTrackerAct($span,$group_id,$atid,$start=0,$end=0) {
 }
 
 function getAverageTime($atid,$start,$end) {
-	$sql="SELECT avg((close_date-open_date)/(24*60*60)) AS avgtime
+	$res = db_query_params ('SELECT avg((close_date-open_date)/(24*60*60)) AS avgtime
 		FROM artifact
-		WHERE group_artifact_id='$atid'
+		WHERE group_artifact_id=$1
 		AND close_date > 0
-		AND (open_date >= '$start' AND open_date <= '$end')";
-	$res=db_query($sql);
-echo db_error();
+		AND open_date BETWEEN $2 AND $3',
+				array ($atid,
+				       $start,
+				       $end));
+	echo db_error();
 	return db_result($res,0,0);
 }
 
 function getOpenCount($atid,$start,$end) {
-	$sql="SELECT count(*)
+	$res = db_query_params ('SELECT count(*)
 		FROM artifact
 		WHERE 
-		group_artifact_id='$atid'
-		AND open_date >= '$start'
-		AND open_date <= '$end'";
-
-	$res=db_query($sql);
-echo db_error();
+		group_artifact_id=$1
+		AND open_date BETWEEN $2 AND $3',
+				array ($atid,
+				       $start,
+				       $end));
+	echo db_error();
 	return db_result($res,0,0);
 }
 
 function getStillOpenCount($atid,$start,$end) {
-	$sql="SELECT count(*)
+	$res = db_query_params ('SELECT count(*)
 		FROM artifact
 		WHERE 
-		group_artifact_id='$atid'
-		AND open_date <= '$end'
-		AND (close_date >= '$end' OR close_date < 1 OR close_date is null)";
-
-	$res=db_query($sql);
-echo db_error();
+		group_artifact_id=$1
+		AND open_date <= $2
+		AND (close_date >= $3 OR close_date < 1 OR close_date is null)',
+				array ($atid,
+				       $end, // Yes, really.
+				       $end)) ;
+	echo db_error();
 	return db_result($res,0,0);
 }
 

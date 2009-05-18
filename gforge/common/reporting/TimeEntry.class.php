@@ -3,6 +3,7 @@
  * FusionForge reporting system
  *
  * Copyright 2003-2004, Tim Perdue/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -80,11 +81,13 @@ class TimeEntry extends Error {
     function create($projectTaskId, $week, $daysAdjust, $timeCode, $hours)
     {
         $report_date=($week + ($days_adjust*REPORT_DAY_SPAN))+(12*60*60);
-        $res=db_query("INSERT INTO rep_time_tracking (user_id,week,report_date,project_task_id,time_code,hours)
-                       VALUES ('".user_getid()."','$week','$report_date','$projectTaskId','$timeCode','$hours')");
-        //$res=db_query("INSERT INTO rep_time_tracking (user_id,week,report_date,project_task_id,time_code,hours)
-        //               VALUES (103,'$week','$report_date','$projectTaskId','$timeCode','$hours')");
-        //print_r($res); exit;
+        $res = db_query_params ('INSERT INTO rep_time_tracking (user_id,week,report_date,project_task_id,time_code,hours) VALUES ($1,$2,$3,$4,$5,$6)',
+				array (user_getid(),
+				       $week,
+				       $report_date,
+				       $projectTaskId,
+				       $timeCode,
+				       $hours)) ;
         if (!$res) {
             exit_error('Error',db_error());
         } else {

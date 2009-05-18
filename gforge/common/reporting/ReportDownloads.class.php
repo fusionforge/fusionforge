@@ -1,6 +1,9 @@
 <?php
 /*
+ * FusionForge reporting system
+ *
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -68,14 +71,12 @@ class ReportDownloads extends Report {
 		}
 
 		if (!$package_id) {
-			$sql = "SELECT package_id
-                        FROM frs_package
-                        WHERE frs_package.group_id = '$group_id'";
-			$res=db_query($sql);
+			$res = db_query_params ('SELECT package_id FROM frs_package WHERE frs_package.group_id = $1',
+						array ($group_id)) ;
 			$package_id = db_result($res, 0, 'package_id');
 		}
 
-		$sql = "SELECT frs_package.name, frs_release.name,
+		$res = db_query_params ('SELECT frs_package.name, frs_release.name,
                        frs_file.filename, users.realname,
                        frs_dlstats_file.month || lpad(frs_dlstats_file.day,2,0),
                        users.user_name
@@ -85,13 +86,16 @@ class ReportDownloads extends Report {
                   AND frs_dlstats_file.file_id = frs_file.file_id
                   AND frs_file.release_id = frs_release.release_id
                   AND frs_release.package_id = frs_package.package_id
-                  AND frs_package.group_id = '$group_id'
-                  AND frs_release.package_id = '$package_id' 
-                  AND frs_dlstats_file.month >= $start_m 
-                  AND frs_dlstats_file.month <= $end_m
+                  AND frs_package.group_id = $1
+                  AND frs_release.package_id = $2
+                  AND frs_dlstats_file.month >= $3
+                  AND frs_dlstats_file.month <= $4
                 ORDER BY frs_dlstats_file.month DESC,
-                       frs_dlstats_file.day DESC";
-		$res=db_query($sql);
+                       frs_dlstats_file.day DESC',
+					array ($group_id,
+					       $package_id,
+					       $start_m,
+					       $end_m)) ;
 
 		$this->start_date=$start;
 		$this->end_date=$end;

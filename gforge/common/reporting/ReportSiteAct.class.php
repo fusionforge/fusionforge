@@ -3,6 +3,7 @@
  * FusionForge reporting system
  *
  * Copyright 2003-2004, Tim Perdue/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -41,20 +42,17 @@ function ReportSiteAct($span,$start=0,$end=0) {
 	}
 
 	if (!$span || $span == REPORT_TYPE_MONTHLY) {
-
-		$res=db_query("SELECT * FROM rep_site_act_monthly_vw 
-			WHERE month BETWEEN '$start' AND '$end' ORDER BY month");
-
+		$res = db_query_params ('SELECT * FROM rep_site_act_monthly_vw WHERE month BETWEEN $1 AND $2 ORDER BY month ASC',
+					array ($start,
+					       $end)) ;
 	} elseif ($span == REPORT_TYPE_WEEKLY) {
-
-		$res=db_query("SELECT * FROM rep_site_act_weekly_vw 
-			WHERE week BETWEEN '$start' AND '$end' ORDER BY week");
-
+		$res = db_query_params ('SELECT * FROM rep_site_act_weekly_vw WHERE week BETWEEN $1 AND $2 ORDER BY week ASC',
+					array ($start,
+					       $end)) ;
 	} elseif ($span == REPORT_TYPE_DAILY) {
-
-		$res=db_query("SELECT * FROM rep_site_act_daily_vw 
-			WHERE day BETWEEN '$start' AND '$end' ORDER BY day ASC");
-
+		$res = db_query_params ('SELECT * FROM rep_site_act_daily_vw WHERE day BETWEEN $1 AND $2 ORDER BY day ASC',
+					array ($start,
+					       $end)) ;
 	}
 
 	$this->start_date=$start;

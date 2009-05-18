@@ -3,6 +3,7 @@
  * FusionForge reporting system
  *
  * Copyright 2003-2004, Tim Perdue/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -59,7 +60,8 @@ function Report() {
  */
 function getMinDate() {
 	if (!$this->site_start_date) {
-		$res=db_query("select min(add_date) AS start_date from users where add_date > 0;");
+		$res = db_query_params ('SELECT MIN(add_date) AS start_date FROM users WHERE add_date > 0',
+					array ());
 		$this->site_start_date=db_result($res,0,'start_date');
 	}
 	return $this->site_start_date;

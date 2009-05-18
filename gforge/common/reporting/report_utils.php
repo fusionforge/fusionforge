@@ -3,6 +3,7 @@
  * FusionForge reporting system
  *
  * Copyright 2003-2004, Tim Perdue/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -100,16 +101,17 @@ function report_useract_box($name='dev_id', $selected='1', $start_with='') {
 
 	if ($start_with) {
 		if ( $sys_database_type == "mysql" ) {
-			$sql2=" AND (lastname LIKE '$start_with%' OR user_name LIKE '$start_with%')";
+			$res = db_query_mysql ("SELECT user_id,realname FROM users WHERE status='A' AND (exists (SELECT user_id FROM rep_user_act_daily WHERE user_id=users.user_id)) AND (lastname LIKE '$start_with%' OR user_name LIKE '$start_with%') ORDER BY lastname") ;
 		} else {
-			$sql2=" AND (lastname ILIKE '$start_with%' OR user_name ILIKE '$start_with%')";
+			$res = db_query_params ('SELECT user_id,realname FROM users WHERE status=$1 AND (exists (SELECT user_id FROM rep_user_act_daily WHERE user_id=users.user_id)) AND (lastname LIKE $2 OR user_name LIKE $3) ORDER BY lastname',
+						array ('A',
+						       "$start_with%",
+						       "$start_with%")) ;
 		}
+	} else {
+		$res = db_query_params ('SELECT user_id,realname FROM users WHERE status=$1 AND (exists (SELECT user_id FROM rep_user_act_daily WHERE user_id=users.user_id)) ORDER BY lastname',
+					array ('A')) ;
 	}
-
-	$res=db_query("SELECT user_id,realname 
-		FROM users 
-		WHERE status='A' $sql2 
-		AND (exists (SELECT user_id FROM rep_user_act_daily WHERE user_id=users.user_id)) ORDER BY lastname");
 	return html_build_select_box($res, $name, $selected, false);
 }
 
@@ -118,22 +120,24 @@ function report_usertime_box($name='dev_id', $selected='1', $start_with='') {
 
 	if ($start_with) {
 		if ( $sys_database_type == "mysql" ) {
-			$sql2=" AND lastname LIKE '$start_with%' ";
+			$res = db_query_mysql ("SELECT user_id,realname FROM users WHERE status='A' AND (exists (SELECT user_id FROM rep_time_tracking WHERE user_id=users.user_id)) AND (lastname LIKE '$start_with%' OR user_name LIKE '$start_with%') ORDER BY lastname") ;
 		} else {
-			$sql2=" AND lastname ILIKE '$start_with%' ";
+			$res = db_query_params ('SELECT user_id,realname FROM users WHERE status=$1 AND (exists (SELECT user_id FROM rep_time_tracking WHERE user_id=users.user_id)) AND (lastname LIKE $2 OR user_name LIKE $3) ORDER BY lastname',
+						array ('A',
+						       "$start_with%",
+						       "$start_with%")) ;
 		}
+	} else {
+		$res = db_query_params ('SELECT user_id,realname FROM users WHERE status=$1 AND (exists (SELECT user_id FROM rep_time_tracking WHERE user_id=users.user_id)) ORDER BY lastname',
+					array ('A')) ;
 	}
-
-	$res=db_query("SELECT user_id,realname 
-		FROM users 
-		WHERE status='A' $sql2 
-		AND (exists (SELECT user_id FROM rep_time_tracking WHERE user_id=users.user_id)) ORDER BY lastname");
 	return html_build_select_box($res, $name, $selected, false);
 }
 
 function report_group_box($name='g_id', $selected='1') {
 
-	$res=db_query("SELECT group_id,group_name FROM groups WHERE status='A' ORDER BY group_name");
+	$res = db_query_params ('SELECT group_id,group_name FROM groups WHERE status=$1 ORDER BY group_name',
+				array ('A')) ;
 	return html_build_select_box($res, $name, $selected, false);
 }
 
@@ -206,7 +210,8 @@ function report_tracker_box($name='datatype', $selected='1') {
 function report_time_category_box($name='category',$selected=false) {
 	global $report_time_category_res;
 	if (!$report_time_category_res) {
-		$report_time_category_res=db_query("SELECT * FROM rep_time_category");
+		$report_time_category_res = db_query_params ('SELECT * FROM rep_time_category',
+							     array()) ;
 	}
 	return html_build_select_box($report_time_category_res,$name,$selected,false);
 }
@@ -238,11 +243,8 @@ function report_pie_arr($labels, $vals, $format=1) {
 }
 
 function report_package_box($group_id, $name='dev_id', $selected='') {
-
-	$sql = "SELECT package_id, name
-                FROM frs_package
-                WHERE frs_package.group_id = '$group_id'";
-	$res=db_query($sql);
+	$res = db_query_params ('SELECT package_id, name FROM frs_package WHERE frs_package.group_id = $1',
+				array ($group_id));
 	return html_build_select_box($res, $name, $selected, false);
 }
 

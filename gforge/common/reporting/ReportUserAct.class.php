@@ -3,6 +3,7 @@
  * FusionForge reporting system
  *
  * Copyright 2003-2004, Tim Perdue/GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -45,20 +46,20 @@ function ReportUserAct($span,$user_id,$start=0,$end=0) {
 		return false;
 	}
 	if (!$span || $span == REPORT_TYPE_MONTHLY) {
-
-		$res=db_query("SELECT * FROM rep_user_act_monthly 
-			WHERE user_id='$user_id' AND month BETWEEN '$start' AND '$end' ORDER BY month");
-
+		$res = db_query_params ('SELECT * FROM rep_user_act_monthly WHERE user_id=$1 AND month BETWEEN $2 AND $3 ORDER BY month ASC',
+					array ($user_id,
+					       $start,
+					       $end)) ;
 	} elseif ($span == REPORT_TYPE_WEEKLY) {
-
-		$res=db_query("SELECT * FROM rep_user_act_weekly 
-			WHERE user_id='$user_id' AND week BETWEEN '$start' AND '$end' ORDER BY week");
-
+		$res = db_query_params ('SELECT * FROM rep_user_act_weekly WHERE user_id=$1 AND week BETWEEN $2 AND $3 ORDER BY week ASC',
+					array ($user_id,
+					       $start,
+					       $end)) ;
 	} elseif ($span == REPORT_TYPE_DAILY) {
-
-		$res=db_query("SELECT * FROM rep_user_act_daily 
-			WHERE user_id='$user_id' AND day BETWEEN '$start' AND '$end' ORDER BY day ASC");
-
+		$res = db_query_params ('SELECT * FROM rep_user_act_daily WHERE user_id=$1 AND day BETWEEN $2 AND $3 ORDER BY day ASC',
+					array ($user_id,
+					       $start,
+					       $end)) ;
 	}
 
 	$this->start_date=$start;
