@@ -3733,6 +3733,10 @@ tests/func/Tasks/AllTests.php -text
 tests/func/Tasks/csv.php -text
 tests/func/Testing/SeleniumGforge.php -text
 tests/func/Testing/SeleniumRemoteSuite.php -text
+tests/func/Trackers/AllTests.php -text
+tests/func/Trackers/relation.php -text
+tests/func/Trackers/trackers.php -text
+tests/func/Trackers/workflow.php -text
 tests/func/config.php.sample -text
 tests/func/config.php.tests -text
 tests/func/db_reload.php -text
