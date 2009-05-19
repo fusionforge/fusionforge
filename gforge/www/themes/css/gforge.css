@@ -407,3 +407,6 @@ A.lnkutility:hover { COLOR: #ffffff }
  font-weight: bold;
 }
 
+.artifact_closed { text-decoration: line-through; }
+.task_closed { text-decoration: line-through; }
+
