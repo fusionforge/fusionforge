@@ -14,11 +14,14 @@ include /usr/share/dpatch/dpatch.make
 CRONFILESLIST=$(patsubst packaging/cron.d/%,debian/$(PACKAGE)-%.cron.d,$(wildcard packaging/cron.d/[a-z]*))
 DIRSFILESLIST=$(patsubst packaging/dirs/%,debian/$(PACKAGE)-%.dirs,$(wildcard packaging/dirs/[a-z]*))
 INSTALLFILESLIST=$(patsubst packaging/install/%,debian/$(PACKAGE)-%.install,$(wildcard packaging/install/[a-z]*))
+DOCSFILESLIST=$(patsubst packaging/docs/pkgname%,debian/$(PACKAGE)%.docs,$(wildcard packaging/docs/pkgname*))
 
 listecho: 
 	@echo $(CRONFILESLIST)
 	@echo $(DIRSFILESLIST)
 	@echo $(INSTALLFILESLIST)
+listechod: 
+	@echo $(DOCSFILESLIST)
 
 remove-binary-files:
 	sh $(CURDIR)/deb-specific/manage-uufiles.sh clean
@@ -29,7 +32,9 @@ dirsfiles: $(DIRSFILESLIST)
 
 installfiles: $(INSTALLFILESLIST)
 
-conffiles: cronfiles dirsfiles installfiles gencontrol
+docsfiles: $(DOCSFILESLIST)
+
+conffiles: cronfiles dirsfiles installfiles gencontrol docsfiles
 
 debian/$(PACKAGE)-%.cron.d:
 	@echo "Creating $@"
@@ -42,6 +47,10 @@ debian/$(PACKAGE)-%.dirs:
 debian/$(PACKAGE)-%.install:
 	@echo "Creating $@"
 	cp $(CURDIR)/packaging/install/$* $@ 
+
+debian/%.docs:
+	@echo "Creating $@"
+	cp $(CURDIR)/packaging/docs/$(patsubst $(PACKAGE)%,pkgname%,$*) $@
 
 gencontrol:
 	ls $(CURDIR)/packaging/control/[0-9][0-9][0-9]* | grep -v shortdesc | while read file ; do cat $${file}; if [ -f $${file}.shortdesc ] ; then cat $(CURDIR)/packaging/control/AAAdesc; echo ' .'; cat $${file}.shortdesc; fi; echo '';  done | sed 's/@PACKAGE@/$(PACKAGE)/g' > $(CURDIR)/debian/control
@@ -78,6 +87,7 @@ clean: remove-binary-files unpatch
 	rm -f $(CURDIR)/debian/*.cron.d
 	rm -f $(CURDIR)/debian/*.dirs
 	rm -f $(CURDIR)/debian/*.install
+	rm -f $(CURDIR)/debian/*.docs
 	rm -f cvssh.1 gforge-config.1
 
 	rm -rf locales/*
