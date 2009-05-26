@@ -1,4 +1,4 @@
 # List of patches to apply
-disable-tracker-reply-by-email
+#disable-tracker-reply-by-email
 use-snoopy-from-distro
 disable-dav
