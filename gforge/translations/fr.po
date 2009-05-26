@@ -5253,7 +5253,7 @@ msgstr ""
 "Utilisez le champ ci-dessous pour trouver des utilisateurs correspondant à "
 "un critère donné portant sur le nom d'utilisateur %1$s, le nom complet, ou "
 "l'adresse email.  La recherche porte sur des sous-chaînes, et il est "
-"possible d'utiliser « %% » pour chercher une sous-shaîne quelconque.  Cliquez "
+"possible d'utiliser « %% » pour chercher une sous-chaîne quelconque.  Cliquez "
 "sur un nom d'utilisateur pour le désabonner des envois de messages en masse."
 
 #: www/admin/unsubscribe.php:103
