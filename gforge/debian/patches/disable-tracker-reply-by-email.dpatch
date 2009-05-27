@@ -6,20 +6,16 @@
 
 @DPATCH@
 diff -urNad gforge~/common/tracker/Artifact.class.php gforge/common/tracker/Artifact.class.php
---- gforge~/common/tracker/Artifact.class.php	2008-01-13 23:13:59.000000000 +0100
-+++ gforge/common/tracker/Artifact.class.php	2008-01-13 23:29:14.000000000 +0100
-@@ -1210,10 +1210,10 @@
- 			"\n".util_make_url ('/tracker/?func=detail&atid='. $this->ArtifactType->getID() .
+--- gforge~/common/tracker/Artifact.class.php	2009-05-19 10:58:03.000000000 +0200
++++ gforge/common/tracker/Artifact.class.php	2009-05-27 18:23:22.000000000 +0200
+@@ -1346,10 +1346,6 @@
  					    "&aid=". $this->getID() .
  					    "&group_id=". $this->ArtifactType->Group->getID()) .
--			"\nOr by replying to this e-mail entering your response between the following markers: ".
+ 			"\nOr by replying to this e-mail entering your response between the following markers: ".
 -			"\n".ARTIFACT_MAIL_MARKER.
--			"\n(enter your response here)".
+-			"\n(enter your response here, only in plain text format)".
 -			"\n".ARTIFACT_MAIL_MARKER.
-+// 			"\nOr by replying to this e-mail entering your response between the following markers: ".
-+// 			"\n".ARTIFACT_MAIL_MARKER.
-+// 			"\n(enter your response here)".
-+// 			"\n".ARTIFACT_MAIL_MARKER.
- 			"\n\n".
+-			"\n\n".
  			$this->marker('status',$changes).
  			 "Status: ". $this->getStatusName() ."\n".
+ 			$this->marker('priority',$changes).
