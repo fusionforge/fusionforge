@@ -87,26 +87,7 @@ if (getStringFromRequest("delete")) {
 	if ($form_trove_cat_id==$default_trove_cat){
 		exit_error( _('Error In Trove Operation, can\'t delete trove category define as default in local.inc'));
 	}
-	$res=db_query("SELECT * FROM trove_cat WHERE parent='$form_trove_cat_id'");
-	if (!$res) {
-		exit_error( _('Error In Trove Operation'), db_error());
-	}
-	if (db_numrows($res)>0) {
-		exit_error( _('Can\'t delete, That trove cat has sub categories'), db_error());
-	} else {
-		$res=db_query("DELETE FROM trove_treesums WHERE trove_cat_id='$form_trove_cat_id'");
-		if (!$res) {
-			exit_error( _('Error In Trove Operation'), db_error());
-		}
-		$res=db_query("DELETE FROM trove_group_link WHERE trove_cat_id='$form_trove_cat_id'");
-		if (!$res) {
-			exit_error( _('Error In Trove Operation'), db_error());
-		}
-		$res=db_query("DELETE FROM trove_cat WHERE trove_cat_id='$form_trove_cat_id'");
-		if (!$res || db_affected_rows($res)<1) {
-			exit_error( _('Error In Trove Operation'), db_error());
-		}
-	}
+	trove_del_cat_id($form_trove_cat_id);
 	session_redirect("/admin/trove/trove_cat_list.php");
 }
 

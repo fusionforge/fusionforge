@@ -53,7 +53,8 @@ require_once 'PHPUnit/TextUI/TestRunner.php';
 require_once dirname(__FILE__).'/projects.php';
 require_once dirname(__FILE__).'/top.php';
 require_once dirname(__FILE__).'/login.php';
- 
+require_once dirname(__FILE__).'/trove.php';
+
 class Site_AllTests
 {
     public static function main()
@@ -67,6 +68,7 @@ class Site_AllTests
  
         $suite->addTestSuite('CreateProject');
         $suite->addTestSuite('LoginProcess');
+        $suite->addTestSuite('Trove');
         
         // FIXME: Do not run this test as it requires the cron to be launched
         //        $suite->addTestSuite('Top');

@@ -364,6 +364,35 @@ function trove_getfullpath($node) {
 	return $return;
 }
 
+/**
+ * trove_del_cat_id() - Delete the selected node (and its sub-nodes) in the trove tree
+ *
+ * @param		int		The node
+ */
+function trove_del_cat_id($node) {
+        $res=db_query("SELECT * FROM trove_cat WHERE parent='$node'");
+        if (!$res) {
+                exit_error( _('Error In Trove Operation'), db_error());
+        }
+        if (db_numrows($res)>0) {
+                for ($i=0; $i<db_numrows($res); $i++) {
+                        trove_del_cat_id(db_result($res,$i,'trove_cat_id'));
+                }
+	}
+        $res=db_query("DELETE FROM trove_treesums WHERE trove_cat_id='$node'");
+        if (!$res) {
+                exit_error( _('Error In Trove Operation'), db_error());
+        }
+        $res=db_query("DELETE FROM trove_group_link WHERE trove_cat_id='$node'");
+        if (!$res) {
+                exit_error( _('Error In Trove Operation'), db_error());
+        }
+        $res=db_query("DELETE FROM trove_cat WHERE trove_cat_id='$node'");
+        if (!$res || db_affected_rows($res)<1) {
+                exit_error( _('Error In Trove Operation'), db_error());
+        }
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

@@ -3729,6 +3729,7 @@ tests/func/Site/AllTests.php -text
 tests/func/Site/login.php -text
 tests/func/Site/projects.php -text
 tests/func/Site/top.php -text
+tests/func/Site/trove.php -text
 tests/func/Tasks/AllTests.php -text
 tests/func/Tasks/csv.php -text
 tests/func/Testing/SeleniumGforge.php -text
