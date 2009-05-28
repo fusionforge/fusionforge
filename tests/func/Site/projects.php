@@ -9,7 +9,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -67,7 +67,7 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->type("purpose", "This is a simple description for project A");
 		$this->type("description", "This is the public description for project A.");
 		$this->type("unix_name", "projecta");
-    	$this->click("//input[@name='scm' and @value='scmsvn']");
+		$this->click("//input[@name='scm' and @value='scmsvn']");
 		$this->click("submit");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Your project has been submitted"));
@@ -104,7 +104,7 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->type("purpose", "This is a & été simple description for project B");
 		$this->type("description", "This is & été the public description for project B.");
 		$this->type("unix_name", "projectb");
-    	$this->click("//input[@name='scm' and @value='scmsvn']");
+		$this->click("//input[@name='scm' and @value='scmsvn']");
 		$this->click("submit");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Your project has been submitted"));
@@ -121,6 +121,18 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->click("link=Project ' & B");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("This is & été the public description for project B."));
+
+		$this->click("link=Projects");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Project Tree");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Project List");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Project ' & B - This is & été the public description for project B."));
+		$this->click("link=My Page");
+		$this->waitForPageToLoad("30000");
+		$this->click("//div[@id='tabber']/ul/li[5]/a");
+		$this->assertFalse($this->isTextPresent("Project ' &amp; B"));
 	}
 
 	// Test removal of project.
@@ -128,7 +140,7 @@ class CreateProject extends FForge_SeleniumTestCase
 	function testRemoveProject()
 	{
 		$this->createProject('testal1');
-		
+
 		$this->click("link=Admin");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Display Full Project List/Edit Projects");
