@@ -27,6 +27,8 @@ if (((int) $_SERVER['argc']) < 1) {
 	exit(1);
 }
 
+require_once dirname(__FILE__).'/../../env.inc.php';
+require_once $gfwww.'include/squal_pre.php';
 require_once $gfconfig.'plugins/scmcvs/config.php';
 require $gfplugins.'scmcvs/common/Snoopy.class.php';
 
