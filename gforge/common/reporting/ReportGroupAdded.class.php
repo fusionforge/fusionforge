@@ -44,7 +44,7 @@ function ReportGroupAdded($span,$start=0,$end=0) {
 					array ($start,
 					       $end)) ;
 	} elseif ($span == REPORT_TYPE_WEEKLY) {
-		$res = db_query_params ('SELECT * FROM rep_groups_added_weekly WHERE week BETWEEN $1 AND $1 ORDER BY week',
+		$res = db_query_params ('SELECT * FROM rep_groups_added_weekly WHERE week BETWEEN $1 AND $2 ORDER BY week',
 					array ($start,
 					       $end)) ;
 	} elseif ($span == REPORT_TYPE_DAILY) {
