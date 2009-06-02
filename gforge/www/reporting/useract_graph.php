@@ -37,6 +37,7 @@ $dev_id = getStringFromRequest('dev_id');
 $SPAN = getStringFromRequest('SPAN');
 $start = getStringFromRequest('start');
 $end = getStringFromRequest('end');
+$area = getStringFromRequest('area');
 
 //
 //	Create Report
