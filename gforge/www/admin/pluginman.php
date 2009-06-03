@@ -31,6 +31,9 @@ require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 
+// Skip non compatible plugins.
+$plugins_disabled = array('helloworld', 'webcalendar');
+
 site_admin_header(array('title'=>_('Site admin')));
 
 ?>
@@ -51,6 +54,8 @@ site_admin_header(array('title'=>_('Site admin')));
 
 <form name="theform" action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <?php
+
+$pm = plugin_manager_get_object();
 
 if (getStringFromRequest('update')) {
 	$pluginname = getStringFromRequest('update');
@@ -74,15 +79,13 @@ if (getStringFromRequest('update')) {
 				$feedback .= sprintf(ngettext('%d group detached from plugin.', '%d groups detached from plugin.', db_affected_rows($res)), db_affected_rows($res));
 			}
 		}
-		$sql = "DELETE FROM plugins WHERE plugin_name = '$pluginname'";
-		$res = db_query($sql);
+		$res = $pm->desactivate($pluginname);
 		if (!$res) {
 			exit_error("SQL ERROR",db_error());
 		} else {
 			$feedback = sprintf(_('Plugin %1$s updated Successfully'), $pluginname);
 			
 			// Load the plugin and now get information from it.
-			$pm = plugin_manager_get_object();
 			$plugin = $pm->GetPluginObject($pluginname);
 			$installdir = $plugin->getInstallDir();
 			
@@ -106,8 +109,7 @@ if (getStringFromRequest('update')) {
 		}
 	} else {
 
-		$sql = "INSERT INTO plugins (plugin_name,plugin_desc) VALUES ('$pluginname','This is the $pluginname plugin')";
-		$res = db_query($sql);
+		$res = $pm->activate($pluginname);
 		if (!$res) {
 			exit_error("SQL ERROR",db_error());
 		} else {
@@ -186,13 +188,27 @@ $title_arr = array( _('Plugin Name'),
 				_('Groups Using it'),);
 echo $HTML->listTableTop($title_arr);
 
+// Get the activated plugins.
+$pm = plugin_manager_get_object();
+
+// Simple hack to disable dependent plugins.
+if (!$pm->PluginIsInstalled('scmsvn')) {
+	$plugins_disabled[] = 'svncommitemail';
+	$plugins_disabled[] = 'svntracker';
+}
+if (!$pm->PluginIsInstalled('scmcvs')) {
+	$plugins_disabled[] = 'cvssyncmail';
+	$plugins_disabled[] = 'cvstracker';
+}
+
 //get the directories from the plugins dir
 
 $handle = opendir($sys_plugins_path);
 $filelist = array();
 while (($filename = readdir($handle)) !== false) {
 	if ($filename!='..' && $filename!='.' && $filename!=".svn" && $filename!="CVS" &&
-		is_dir($sys_plugins_path.'/'.$filename)) {
+		is_dir($sys_plugins_path.'/'.$filename) &&
+		!in_array($filename, $plugins_disabled)) {
 
 		$filelist[] = $filename;
 	}
@@ -204,15 +220,7 @@ sort($filelist);
 $j = 0;
 
 foreach ($filelist as $filename) {
-	//Don't add special directories '..' or '.' to the list
-	$status=0; 
-	//check if the plugin is in the plugins table
-	$sql = "SELECT plugin_name FROM plugins WHERE plugin_name = '$filename'"; // see if the plugin is there
-	$res = db_query($sql);
-	if (!$res) {
-		exit_error("SQL ERROR",db_error());
-	}
-	if (db_numrows($res)!=0) {
+	if ($pm->PluginIsInstalled($filename)) {
 		$msg = _('Active');
 		$status="active";
 		$link = "<a href=\"javascript:change('" . getStringFromServer('PHP_SELF') . "?update=$filename&amp;action=deactivate";

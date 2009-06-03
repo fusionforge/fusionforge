@@ -84,6 +84,33 @@ class PluginManager extends Error {
 		return false ;
 	}
 
+	function activate($pluginname) {
+		$res = db_query_params('INSERT INTO plugins (plugin_name,plugin_desc) VALUES ($1,$2)',
+			array($pluginname, "This is the $pluginname plugin"));
+
+		$res = db_query_params ('SELECT plugin_id, plugin_name FROM plugins WHERE plugin_name=$1',
+			array ($pluginname));
+		if (db_numrows($res) == 1) {
+			$plugin_id = db_result($res,0,'plugin_id');
+			$this->plugins_data[$plugin_id] = db_result($res,0,'plugin_name');
+		} else {
+			return false;
+		}
+		return $res;
+	}
+
+	function desactivate($pluginname) {
+		$res = db_query_params('DELETE FROM plugins WHERE plugin_name = $1', array($pluginname));
+
+		foreach ($this->plugins_data as $i => $n) {
+			if ($n == $pluginname) {
+				$p_id = $i;
+			}
+		}
+		unset($this->plugins_data[$p_id]);
+		return $res;
+	}
+
 	/**
 	 * LoadPlugin() - load a specific plugin
 	 *
@@ -102,12 +129,12 @@ class PluginManager extends Error {
 				require_once ($filename) ;
 			} else {
 				// we can't find the plugin so we remove it from the array
-                                foreach ($plugins_data as $i => $n) {
-                                        if ($n == $p_name) {
-                                                $p_id = $i;
-                                        }
-                                }
- 				unset($this->plugins_data[$p_id]);
+				foreach ($plugins_data as $i => $n) {
+					if ($n == $p_name) {
+						$p_id = $i;
+					}
+				}
+				unset($this->plugins_data[$p_id]);
 			}
 		}
 		return true ;
