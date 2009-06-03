@@ -834,8 +834,8 @@ Enjoy the site.
 		}
 
 		if ($GLOBALS['sys_require_unique_email']) {
-			if (db_numrows(db_query_params('SELECT user_id FROM users WHERE email ILIKE $1 OR email_new ILIKE $2',
-						       array ($email, $email))) > 0) {
+			if (db_numrows(db_query_params('SELECT user_id FROM users WHERE user_id!=$1 AND (email ILIKE $2 OR email_new ILIKE $2)',
+						       array ($this->getID(), $email))) > 0) {
 				$this->setError(_('User with this email already exists.'));
 			return false;
 			}
@@ -886,8 +886,8 @@ Enjoy the site.
 		}
 
 		if ($GLOBALS['sys_require_unique_email']) {
-			if (db_numrows(db_query_params ('SELECT user_id FROM users WHERE email ILIKE $1 OR email_new ILIKE $1',
-							array ($email))) > 0) {
+			if (db_numrows(db_query_params('SELECT user_id FROM users WHERE user_id!=$1 AND (email ILIKE $2 OR email_new ILIKE $2)',
+						       array ($this->getID(), $email))) > 0) {
 				$this->setError(_('User with this email already exists.'));
 			return false;
 			}
