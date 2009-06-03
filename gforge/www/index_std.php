@@ -23,7 +23,6 @@ require_once $gfcommon.'include/FusionForge.class.php';
 <li><?php print _('A powerful plugin system to add new features.'); ?></li>
 </ul>
 <h3><?php print _("What's new in FusionForge 4.7"); ?></h3>
-<p>
 <ul>
 <li><?php print _('A new name to avoid confusion with proprietary versions of GForge.'); ?></li>
 <li><?php print _('Support for PHP5.'); ?></li>
@@ -37,7 +36,6 @@ require_once $gfcommon.'include/FusionForge.class.php';
 <li><?php print _('New phpwebcalendar plugin.'); ?></li>
 <li><?php print _('New project hierarchy plugin.'); ?></li>
 </ul>
-</p>
 <?php
 echo $HTML->boxTop(_('Latest News'));
 echo news_show_latest($sys_news_group,5,true,false,false,5);
@@ -59,3 +57,4 @@ echo show_features_boxes();
 			$forge->software_name,
 			$forge->software_version) ;
 ?>
+</center>
