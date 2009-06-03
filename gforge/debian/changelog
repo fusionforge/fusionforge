@@ -1,3 +1,10 @@
+gforge (4.8.52-1) experimental; urgency=low
+
+  * bump to new version because on binary commit
+  * put debian postinst/prerm/config/.. files in dsf-in dir
+
+ -- Christian Bayle <bayle@debian.org>  Wed, 03 Jun 2009 22:49:58 +0200
+
 gforge (4.8.51-1) experimental; urgency=low
 
   * Fixed blackhole syntax for gforge-mta-exim4 so as not to require

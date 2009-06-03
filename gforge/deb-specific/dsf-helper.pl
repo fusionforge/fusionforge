@@ -23,12 +23,18 @@ use diagnostics ;
 sub pkgfile {
     my $package=shift;
     my $filename=shift;
+    $package =~ s/^.[^-]*-// ;
 
-    if (-f "debian/$package.$filename.dsfh-in") {
-	return "debian/$package.$filename.dsfh-in";
+    if (-f "debian/dsf-in/$package.$filename.dsfh-in") {
+	return "debian/dsf-in/$package.$filename.dsfh-in";
     }
     else {
-	return "";
+	if (-f "debian/dsf-in/$package.$filename") {
+		return "debian/dsf-in/$package.$filename";
+	}
+	else {
+		return "";
+	}
     }
 } ;
 
@@ -71,10 +77,11 @@ if ($ARGV[0] && $ARGV[0] eq "--clean") {
    PKGLOOP: for my $pkg (@package_list) {
        my $srcfile = &pkgfile ($pkg, $ext) ;
        next PKGLOOP unless $srcfile ;
-       my $destfile = $srcfile ;
-       $destfile =~ s/\.dsfh-in$// ;
+       #my $destfile = $srcfile ;
+       my $destfile = "debian/$pkg.$ext" ;
+       #$destfile =~ s/\.dsfh-in$// ;
        do {
-	   # print "Removing $destfile\n" ;
+	   print "Removing $destfile\n" ;
 	   unlink $destfile ;
        } if -f $destfile ;
    }
@@ -83,13 +90,15 @@ if ($ARGV[0] && $ARGV[0] eq "--clean") {
 }
 
  EXTLOOP: for my $ext (@known_files) {
-     # print "Extension: $ext\n" ;
+     #print "Extension: $ext\n" ;
    PKGLOOP: for my $pkg (@package_list) {
-       # print "  Package: $pkg\n" ;
+       #print "  Package: $pkg\n" ;
        my $srcfile = &pkgfile ($pkg, $ext) ;
+       #print "   SrcPackage: $srcfile\n" ;
        next PKGLOOP unless $srcfile ;
-       my $destfile = $srcfile ;
-       $destfile =~ s/\.dsfh-in$// ;
+#       my $destfile = $srcfile ;
+#       $destfile =~ s/\.dsfh-in$// ;
+       my $destfile = "debian/$pkg.$ext" ;
        print "$srcfile -> $destfile\n" ;
 
        open S, "< $srcfile" ;
