@@ -13,25 +13,25 @@ init_debconf_from_mainconffile
 #DSFHELPER:users-variables#
 #DSFHELPER:lists-variables#
 
-if [ -f /etc/aliases.gforge-new ] 
+if [ -f /etc/aliases.pkgname-new ] 
 then
-	ucf --debconf-ok /etc/aliases.gforge-new /etc/aliases
-	rm /etc/aliases.gforge-new
+	ucf --debconf-ok /etc/aliases.pkgname-new /etc/aliases
+	rm /etc/aliases.pkgname-new
 fi
-if [ -f /etc/exim4/exim4.conf.gforge-new ]
+if [ -f /etc/exim4/exim4.conf.pkgname-new ]
 then
-	ucf --debconf-ok /etc/exim4/exim4.conf.gforge-new /etc/exim4/exim4.conf
-	rm /etc/exim4/exim4.conf.gforge-new
+	ucf --debconf-ok /etc/exim4/exim4.conf.pkgname-new /etc/exim4/exim4.conf
+	rm /etc/exim4/exim4.conf.pkgname-new
 fi
-if [ -f /etc/exim4/exim4.conf.template.gforge-new ]
+if [ -f /etc/exim4/exim4.conf.template.pkgname-new ]
 then
-	ucf --debconf-ok /etc/exim4/exim4.conf.template.gforge-new /etc/exim4/exim4.conf.template
-	rm /etc/exim4/exim4.conf.template.gforge-new
+	ucf --debconf-ok /etc/exim4/exim4.conf.template.pkgname-new /etc/exim4/exim4.conf.template
+	rm /etc/exim4/exim4.conf.template.pkgname-new
 fi
-if [ -f /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs.gforge-new ]
+if [ -f /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs.pkgname-new ]
 then
-	ucf --debconf-ok /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs.gforge-new /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs
-	rm /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs.gforge-new
+	ucf --debconf-ok /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs.pkgname-new /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs
+	rm /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs.pkgname-new
 fi
 db_stop
 

@@ -7,20 +7,20 @@
 # Even minor modifications require translation updates and such
 # changes should be coordinated with translators and reviewers.
 
-Template: gforge/shared/domain_name
+Template: pkgname/shared/domain_name
 Type: string
 _Description: GForge domain or subdomain name:
  Please enter the domain that will host the GForge installation. Some
  services (scm, lists, etc.) will be given their own subdomain in that
  domain.
 
-Template: gforge/shared/server_admin
+Template: pkgname/shared/server_admin
 Type: string
 _Description: GForge administrator e-mail address:
  Please enter the e-mail address of the GForge administrator of this site. It
  will be used when problems occur.
 
-Template: gforge/shared/system_name
+Template: pkgname/shared/system_name
 Type: string
 Default: GForge
 _Description: GForge system name:

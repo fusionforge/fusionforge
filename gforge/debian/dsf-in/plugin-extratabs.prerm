@@ -1,5 +1,5 @@
 #! /bin/sh
-# prerm script for gforge-plugin-extratabs
+# prerm script for pkgname-plugin-extratabs
 #
 # see: dh_installdeb(1)
 
@@ -19,8 +19,8 @@ set -e
 
 case "$1" in
     remove|deconfigure)
-        /usr/share/gforge/bin/unregister-plugin extratabs
-        /usr/share/gforge/plugins/extratabs/bin/db-delete.pl
+        /usr/share/pkgname/bin/unregister-plugin extratabs
+        /usr/share/pkgname/plugins/extratabs/bin/db-delete.pl
         ;;
     upgrade|failed-upgrade)
         ;;

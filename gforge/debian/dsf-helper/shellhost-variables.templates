@@ -7,7 +7,7 @@
 # Even minor modifications require translation updates and such
 # changes should be coordinated with translators and reviewers.
 
-Template: gforge/shared/shell_host
+Template: pkgname/shared/shell_host
 Type: string
 _Description: Shell server:
  Please enter the host name of the server that will host the GForge

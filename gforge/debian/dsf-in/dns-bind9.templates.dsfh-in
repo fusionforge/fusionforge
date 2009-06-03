@@ -15,7 +15,7 @@
 #DSFHELPER:host-variables#
 #DSFHELPER:web-variables#
 
-Template: gforge/shared/simple_dns
+Template: pkgname/shared/simple_dns
 Type: boolean
 Default: false
 # Translators: SCM here means "Source Control Management"

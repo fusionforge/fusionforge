@@ -38,7 +38,7 @@ conffiles: cronfiles dirsfiles installfiles gencontrol docsfiles
 
 debian/$(PACKAGE)-%.cron.d:
 	@echo "Creating $@"
-	(cat $(CURDIR)/packaging/cron.d/00phpcron ; sed -e 's/\$$FFUSER/gforge/g' $(CURDIR)/packaging/cron.d/$*) > $@
+	(cat $(CURDIR)/packaging/cron.d/00phpcron ; sed -e 's/\$$FFUSER/$(PACKAGE)/g' $(CURDIR)/packaging/cron.d/$*) > $@
 
 debian/$(PACKAGE)-%.dirs:
 	@echo "Creating $@"
@@ -70,7 +70,7 @@ build-stamp: patch
 
 	# Build man pages from Docbook sources
 	/usr/bin/docbook-to-man debian/cvssh.sgml > cvssh.1
-	/usr/bin/docbook-to-man debian/gforge-config.sgml > gforge-config.1
+	/usr/bin/docbook-to-man debian/$(PACKAGE)-config.sgml > $(PACKAGE)-config.1
 
 	# Uudecode binary files
 	sh $(CURDIR)/deb-specific/manage-uufiles.sh decode
@@ -88,7 +88,7 @@ clean: remove-binary-files unpatch
 	rm -f $(CURDIR)/debian/*.dirs
 	rm -f $(CURDIR)/debian/*.install
 	rm -f $(CURDIR)/debian/*.docs
-	rm -f cvssh.1 gforge-config.1
+	rm -f cvssh.1 $(PACKAGE)-config.1
 
 	rm -rf locales/*
 
@@ -123,7 +123,7 @@ install: build
 		$(CURDIR)/debian/*/usr/share/*/plugins/*/cronjobs/*
 	#
 	chmod 755 $(CURDIR)/debian/$(PACKAGE)-db-postgresql/usr/share/*/db/*.php
-	chmod 644 $(CURDIR)/debian/$(PACKAGE)-db-postgresql/usr/share/gforge/cronjobs/*.inc
+	chmod 644 $(CURDIR)/debian/$(PACKAGE)-db-postgresql/usr/share/$(PACKAGE)/cronjobs/*.inc
 
 	# viewvc rights
 	find $(CURDIR)/debian/$(PACKAGE)-web-apache2/usr/share/*/www/scm/viewvc -type f -exec chmod 0644 {} \;
@@ -137,7 +137,7 @@ install: build
 	# remove windows files
 	rm -rf $(CURDIR)/debian/$(PACKAGE)-web-apache2/usr/share/*/www/scm/viewvc/windows
 	#
-	rm -f $(CURDIR)/debian/$(PACKAGE)-web-apache2/usr/share/*/www/themes/gforge/COPYING
+	rm -f $(CURDIR)/debian/$(PACKAGE)-web-apache2/usr/share/*/www/themes/$(PACKAGE)/COPYING
 
 	# Remove Snoopy class from binary packages (provided by libphp-snoopy)
 	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -name Snoopy.class.php | xargs rm -rf ; done

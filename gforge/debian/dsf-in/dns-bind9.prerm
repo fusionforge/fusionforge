@@ -1,5 +1,5 @@
 #! /bin/sh
-# prerm script for gforge
+# prerm script for pkgname
 #
 # see: dh_installdeb(1)
 
@@ -23,16 +23,16 @@ case "$1" in
 	db_title "Unconfiguring Gforge"
 
 	# Unpatch Bind configuration files
-	/usr/share/gforge/bin/install-dns.sh purge-files
-	ucf --debconf-ok /etc/bind/named.conf.gforge-new /etc/bind/named.conf
-	rm /etc/bind/named.conf.gforge-new
+	/usr/share/pkgname/bin/install-dns.sh purge-files
+	ucf --debconf-ok /etc/bind/named.conf.pkgname-new /etc/bind/named.conf
+	rm /etc/bind/named.conf.pkgname-new
 	ucf --purge /etc/bind/named.conf
 	
 	# Clean debconf after ourselves
 	db_stop
 
         # DNS config removal
-	/usr/share/gforge/bin/install-dns.sh purge
+	/usr/share/pkgname/bin/install-dns.sh purge
 
 	;;
     upgrade|deconfigure|failed-upgrade)

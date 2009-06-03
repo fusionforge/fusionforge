@@ -9,7 +9,7 @@
 
 #DSFHELPER:common-variables#
 
-Template: gforge/shared/shell_host
+Template: pkgname/shared/shell_host
 Type: string
 _Description: Shell server:
  Please enter the hostname of the server that will host the GForge
@@ -19,7 +19,7 @@ _Description: Shell server:
 
 #DSFHELPER:lists-variables#
 
-Template: gforge/shared/download_host
+Template: pkgname/shared/download_host
 Type: string
 _Description: Download server:
  Please enter the hostname of the server that will host the GForge
@@ -29,7 +29,7 @@ _Description: Download server:
 
 #DSFHELPER:dbpasswd-variables#
 
-Template: gforge/shared/admin_login
+Template: pkgname/shared/admin_login
 Type: string
 Default: admin
 _Description: GForge administrator login:
@@ -38,7 +38,7 @@ _Description: GForge administrator login:
  .
  Please choose the username for this account.
 
-Template: gforge/shared/ip_address
+Template: pkgname/shared/ip_address
 Type: string
 _Description: IP address:
  Please enter the IP address of the server that will host the GForge
@@ -46,7 +46,7 @@ _Description: IP address:
  .
  This is needed for the configuration of Apache virtual hosting.
 
-Template: gforge/shared/admin_password
+Template: pkgname/shared/admin_password
 Type: password
 _Description: GForge administrator password:
  The GForge administrator account will have full privileges on the
@@ -54,12 +54,12 @@ _Description: GForge administrator password:
  .
  Please choose the password for this account.
 
-Template: gforge/shared/admin_password_confirm
+Template: pkgname/shared/admin_password_confirm
 Type: password
 _Description: Password confirmation:
  Please re-type the password for confirmation.
 
-Template: gforge/shared/skill_list
+Template: pkgname/shared/skill_list
 Type: string
 Default: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
 _Description: Initial list of skills:

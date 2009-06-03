@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for gforge-plugin-mediawiki
+# postinst script for pkgname-plugin-mediawiki
 #
 # see: dh_installdeb(1)
 
@@ -25,9 +25,9 @@ set -e
 
 case "$1" in
     configure)
-	# /usr/share/gforge/plugins/mediawiki/bin/db-upgrade.pl
-	/usr/share/gforge/bin/register-plugin mediawiki "Mediawiki"
-	gforge-config
+	# /usr/share/pkgname/plugins/mediawiki/bin/db-upgrade.pl
+	/usr/share/pkgname/bin/register-plugin mediawiki "Mediawiki"
+	pkgname-config
 	for flavour in apache apache-perl apache-ssl apache2 ; do
 	    if [ -x /usr/sbin/$flavour ]; then
 		invoke-rc.d $flavour reload || true

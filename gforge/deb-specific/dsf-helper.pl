@@ -120,6 +120,7 @@ if ($ARGV[0] && $ARGV[0] eq "--clean") {
 	   $dest =~ s/^\n*//g ;
 	   $dest =~ s/\n\n+/\n\n/g ;
        }
+       $dest =~ s/pkgname/$package_list[0]/g ;
 
        open D, "> $destfile" ;
        print D "$dest" ;
@@ -127,3 +128,4 @@ if ($ARGV[0] && $ARGV[0] eq "--clean") {
        close S ;
    }
  }
+       print "pkgname: $package_list[0]\n" ;

@@ -7,7 +7,7 @@
 # Even minor modifications require translation updates and such
 # changes should be coordinated with translators and reviewers.
 
-Template: gforge/shared/users_host
+Template: pkgname/shared/users_host
 Type: string
 _Description: User mail redirector server:
  Please enter the host name of the server that will host the GForge user mail

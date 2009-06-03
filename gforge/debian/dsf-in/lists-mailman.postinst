@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for gforge
+# postinst script for pkgname
 #
 # see: dh_installdeb(1)
 
@@ -27,11 +27,11 @@ set -e
 
 case "$1" in
     configure)
-	gforge-config
+	pkgname-config
 	
 	echo "Fixing past damage in mailing-lists..."
 	if [ -z "$2" ] || dpkg --compare-versions $2 le 3rc2-4 ; then
-	    su -s /bin/sh gforge -c /usr/share/gforge/bin/fix-mailing-lists.pl
+	    su -s /bin/sh pkgname -c /usr/share/pkgname/bin/fix-mailing-lists.pl
 	fi
     ;;
 

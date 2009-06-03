@@ -1,5 +1,5 @@
 #! /bin/sh
-# prerm script for gforge
+# prerm script for pkgname
 #
 # see: dh_installdeb(1)
 
@@ -22,18 +22,18 @@ case "$1" in
 	db_title "Unconfiguring Gforge"
 
 	# Unpatch Exim configuration files
-	/usr/share/gforge/bin/install-exim4.sh purge-files
-	ucf --debconf-ok /etc/aliases.gforge-new /etc/aliases
-	if [ -f /etc/exim4/exim4.conf.gforge-new ]
+	/usr/share/pkgname/bin/install-exim4.sh purge-files
+	ucf --debconf-ok /etc/aliases.pkgname-new /etc/aliases
+	if [ -f /etc/exim4/exim4.conf.pkgname-new ]
 	then
-		ucf --debconf-ok /etc/exim4/exim4.conf.gforge-new /etc/exim4/exim4.conf
-		rm /etc/exim4/exim4.conf.gforge-new
+		ucf --debconf-ok /etc/exim4/exim4.conf.pkgname-new /etc/exim4/exim4.conf
+		rm /etc/exim4/exim4.conf.pkgname-new
 	fi
-	ucf --debconf-ok /etc/exim4/exim4.conf.template.gforge-new /etc/exim4/exim4.conf.template
-	ucf --debconf-ok /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs.gforge-new /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs
-	rm /etc/aliases.gforge-new
-	rm /etc/exim4/exim4.conf.template.gforge-new
-	rm /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs.gforge-new
+	ucf --debconf-ok /etc/exim4/exim4.conf.template.pkgname-new /etc/exim4/exim4.conf.template
+	ucf --debconf-ok /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs.pkgname-new /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs
+	rm /etc/aliases.pkgname-new
+	rm /etc/exim4/exim4.conf.template.pkgname-new
+	rm /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs.pkgname-new
 	ucf --purge /etc/aliases
 	ucf --purge /etc/exim4/exim4.conf
 	ucf --purge /etc/exim4/exim4.conf.template
@@ -43,7 +43,7 @@ case "$1" in
 	db_stop
 
         # Exim config removal
-	/usr/share/gforge/bin/install-exim4.sh purge
+	/usr/share/pkgname/bin/install-exim4.sh purge
 	;;
     upgrade|deconfigure|failed-upgrade)
         ;;

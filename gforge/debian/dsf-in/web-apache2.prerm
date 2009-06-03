@@ -1,5 +1,5 @@
 #! /bin/sh
-# prerm script for gforge
+# prerm script for pkgname
 #
 # see: dh_installdeb(1)
 
@@ -19,8 +19,8 @@ set -e
 
 case "$1" in
     remove)
-	a2dissite gforge || true
-	rm -f /etc/apache2/sites-available/gforge
+	a2dissite pkgname || true
+	rm -f /etc/apache2/sites-available/pkgname
 	invoke-rc.d apache2 reload || true
 	;;
     upgrade|deconfigure|failed-upgrade)

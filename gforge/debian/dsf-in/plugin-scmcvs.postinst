@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for gforge-plugin-scmcvs
+# postinst script for pkgname-plugin-scmcvs
 #
 # see: dh_installdeb(1)
 
@@ -25,10 +25,10 @@ set -e
 
 case "$1" in
     configure)
-	gforge-config
+	pkgname-config
 
 	# Prepare database
-	su -s /bin/sh gforge -c '/usr/share/gforge/bin/register-plugin scmcvs "CVS"'
+	su -s /bin/sh pkgname -c '/usr/share/pkgname/bin/register-plugin scmcvs "CVS"'
 	test -f /etc/default/apache2 && . /etc/default/apache2
 	if [ "$NO_START" != "0" ]; then
 		if [ -x /usr/sbin/apache ]; then
@@ -40,22 +40,22 @@ case "$1" in
 		fi
 	fi
         # Setup our CVS
-	/usr/share/gforge/plugins/scmcvs/bin/install-cvs.sh configure
+	/usr/share/pkgname/plugins/scmcvs/bin/install-cvs.sh configure
 
 	# Making user group and cvs update from database 
-	/usr/share/gforge/plugins/scmcvs/bin/update-user-group-ssh.sh > /dev/null 2>&1
-	rm -f /var/lib/gforge/dumps/*cvs*dump
-	su -s /bin/sh gforge -c /usr/share/gforge/plugins/scmcvs/cronjobs/cvs_dump.pl
-	/usr/share/gforge/plugins/scmcvs/cronjobs/cvs_update.pl
+	/usr/share/pkgname/plugins/scmcvs/bin/update-user-group-ssh.sh > /dev/null 2>&1
+	rm -f /var/lib/pkgname/dumps/*cvs*dump
+	su -s /bin/sh pkgname -c /usr/share/pkgname/plugins/scmcvs/cronjobs/cvs_dump.pl
+	/usr/share/pkgname/plugins/scmcvs/cronjobs/cvs_update.pl
 
-	if [ ! -e /var/lib/gforge/chroot/cvs ] ; then
-	    cd /var/lib/gforge/chroot
+	if [ ! -e /var/lib/pkgname/chroot/cvs ] ; then
+	    cd /var/lib/pkgname/chroot
 	    ln -s cvsroot cvs
 	fi
 
 	# logs
-	chown root:gforge /var/log/gforge/cvs
-	chmod 775 /var/log/gforge/cvs
+	chown root:pkgname /var/log/pkgname/cvs
+	chmod 775 /var/log/pkgname/cvs
 
 	# Restart some services
 	[ -d /etc/ssh ] && invoke-rc.d ssh restart || true

@@ -1,7 +1,7 @@
 ###
 # Functions to handle the main Gforge configuration file
 ###
-mainconffile=/etc/gforge/gforge.conf
+mainconffile=/etc/pkgname/pkgname.conf
 # Update it for the variables received as parameters
 create_mainconffile () {
     if [ ! -e $mainconffile ] ; then
@@ -11,7 +11,7 @@ create_mainconffile () {
 }
 update_mainconffile () {
     for key in $@ ; do
-	db_get gforge/shared/$key
+	db_get pkgname/shared/$key
 	val=$RET
 	update_onevar_mainconffile $key $val
     done

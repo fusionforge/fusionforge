@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for gforge
+# postinst script for pkgname
 #
 # see: dh_installdeb(1)
 
@@ -27,12 +27,12 @@ set -e
 
 case "$1" in
     configure)
-	adduser --system --group --home /var/www/gforge gforge > /dev/null 2>&1
-	adduser --system --group --home /var/lib/gforge/chroot/cvsroot anonscm-gforge > /dev/null 2>&1
-	adduser --system --group --home /var/lib/gforge/chroot/cvsroot scm-gforge > /dev/null 2>&1
-	adduser --system --group --home /var/lib/gforge/chroot/cvsroot www-gforge > /dev/null 2>&1
+	adduser --system --group --home /var/www/pkgname pkgname > /dev/null 2>&1
+	adduser --system --group --home /var/lib/pkgname/chroot/cvsroot anonscm-pkgname > /dev/null 2>&1
+	adduser --system --group --home /var/lib/pkgname/chroot/cvsroot scm-pkgname > /dev/null 2>&1
+	adduser --system --group --home /var/lib/pkgname/chroot/cvsroot www-pkgname > /dev/null 2>&1
 
-	gforge-config
+	pkgname-config
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

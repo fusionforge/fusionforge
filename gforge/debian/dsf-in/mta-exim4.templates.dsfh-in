@@ -2,7 +2,7 @@
 #DSFHELPER:users-variables#
 #DSFHELPER:lists-variables#
 
-Template: gforge/shared/noreply_to_bitbucket
+Template: pkgname/shared/noreply_to_bitbucket
 Type: boolean
 Default: true
 _Description: Do you want mail to ${noreply} to be deleted?

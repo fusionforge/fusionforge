@@ -1,5 +1,5 @@
 #! /bin/sh
-# prerm script for gforge
+# prerm script for pkgname
 #
 # see: dh_installdeb(1)
 
@@ -22,16 +22,16 @@ case "$1" in
 	db_title "Unconfiguring Gforge"
 
 	# Unpatch Proftpd configuration files
-	/usr/share/gforge/bin/install-ftp.sh purge-files
-	ucf --debconf-ok /etc/proftpd/proftpd.conf.gforge-new /etc/proftpd/proftpd.conf
-	rm /etc/proftpd/proftpd.conf.gforge-new
+	/usr/share/pkgname/bin/install-ftp.sh purge-files
+	ucf --debconf-ok /etc/proftpd/proftpd.conf.pkgname-new /etc/proftpd/proftpd.conf
+	rm /etc/proftpd/proftpd.conf.pkgname-new
 	ucf --purge /etc/proftpd/proftpd.conf
 
 	# Clean debconf after ourselves
 	db_stop
 
         # FTP config removal
-	/usr/share/gforge/bin/install-ftp.sh purge
+	/usr/share/pkgname/bin/install-ftp.sh purge
 	;;
     upgrade|deconfigure|failed-upgrade)
         ;;

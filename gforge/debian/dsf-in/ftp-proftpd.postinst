@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for gforge
+# postinst script for pkgname
 #
 # see: dh_installdeb(1)
 
@@ -27,21 +27,21 @@ set -e
 
 case "$1" in
     configure)
-	gforge-config
+	pkgname-config
 
         # Patch Proftpd configuration files
-	/usr/share/gforge/bin/install-ftp.sh configure-files
-	if [ -f /etc/proftpd/proftpd.conf.gforge-new ]
+	/usr/share/pkgname/bin/install-ftp.sh configure-files
+	if [ -f /etc/proftpd/proftpd.conf.pkgname-new ]
 	then
-		ucf --debconf-ok /etc/proftpd/proftpd.conf.gforge-new /etc/proftpd/proftpd.conf
-		rm /etc/proftpd/proftpd.conf.gforge-new
+		ucf --debconf-ok /etc/proftpd/proftpd.conf.pkgname-new /etc/proftpd/proftpd.conf
+		rm /etc/proftpd/proftpd.conf.pkgname-new
 	fi
 
         # Setup our FTP
-	/usr/share/gforge/bin/install-ftp.sh configure 
+	/usr/share/pkgname/bin/install-ftp.sh configure 
 
         # Setup our FRS
-	chown www-data:www-data /var/lib/gforge/download
+	chown www-data:www-data /var/lib/pkgname/download
 	
     ;;
 

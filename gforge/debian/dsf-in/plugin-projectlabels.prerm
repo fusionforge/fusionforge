@@ -1,5 +1,5 @@
 #! /bin/sh
-# prerm script for gforge-plugin-projectlabels
+# prerm script for pkgname-plugin-projectlabels
 #
 # see: dh_installdeb(1)
 
@@ -19,8 +19,8 @@ set -e
 
 case "$1" in
     remove|deconfigure)
-        /usr/share/gforge/bin/unregister-plugin projectlabels
-        /usr/share/gforge/plugins/projectlabels/bin/db-delete.pl
+        /usr/share/pkgname/bin/unregister-plugin projectlabels
+        /usr/share/pkgname/plugins/projectlabels/bin/db-delete.pl
         ;;
     upgrade|failed-upgrade)
         ;;

@@ -1,5 +1,5 @@
 #! /bin/sh
-# prerm script for gforge
+# prerm script for pkgname
 #
 # see: dh_installdeb(1)
 
@@ -21,7 +21,7 @@ fi
 
 case "$1" in
     remove)
-	rm -f /etc/gforge/local.pl
+	rm -f /etc/pkgname/local.pl
 	;;
     upgrade|deconfigure|failed-upgrade)
         ;;

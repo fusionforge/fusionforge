@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for gforge
+# postinst script for pkgname
 #
 # see: dh_installdeb(1)
 
@@ -27,19 +27,19 @@ set -e
 
 case "$1" in
     configure)
-	gforge-config
+	pkgname-config
 
         # Patch NSS configuration files
-	/usr/share/gforge/bin/install-nsspgsql.sh configure-files
-	ucf --debconf-ok /etc/nss-pgsql.conf.gforge-new /etc/nss-pgsql.conf
-	ucf --debconf-ok /etc/nss-pgsql-root.conf.gforge-new /etc/nss-pgsql-root.conf
-	ucf --debconf-ok /etc/nsswitch.conf.gforge-new /etc/nsswitch.conf
-	rm /etc/nss-pgsql.conf.gforge-new
-	rm /etc/nss-pgsql-root.conf.gforge-new
-	rm /etc/nsswitch.conf.gforge-new
+	/usr/share/pkgname/bin/install-nsspgsql.sh configure-files
+	ucf --debconf-ok /etc/nss-pgsql.conf.pkgname-new /etc/nss-pgsql.conf
+	ucf --debconf-ok /etc/nss-pgsql-root.conf.pkgname-new /etc/nss-pgsql-root.conf
+	ucf --debconf-ok /etc/nsswitch.conf.pkgname-new /etc/nsswitch.conf
+	rm /etc/nss-pgsql.conf.pkgname-new
+	rm /etc/nss-pgsql-root.conf.pkgname-new
+	rm /etc/nsswitch.conf.pkgname-new
 
 	# Install the chroot environment
-	/usr/share/gforge/bin/install-chroot.sh configure
+	/usr/share/pkgname/bin/install-chroot.sh configure
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

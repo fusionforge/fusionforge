@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for gforge
+# postinst script for pkgname
 #
 # see: dh_installdeb(1)
 
@@ -49,33 +49,33 @@ case "$1" in
 	    add_onevar_mainconfile cronolog_path /usr/bin/cronolog
 	fi
 
-	if [ ! -e /etc/gforge/ssl-cert.pem ] || [ ! -e /etc/gforge/ssl-cert.key ] ; then
+	if [ ! -e /etc/pkgname/ssl-cert.pem ] || [ ! -e /etc/pkgname/ssl-cert.key ] ; then
 	    # Uh-oh, no SSL cert, let's make sure at least a dummy one exists.
 	    if [ ! -e /etc/ssl/certs/ssl-cert-snakeoil.pem ] || [ ! -e /etc/ssl/private/ssl-cert-snakeoil.key ] ; then
 		# What, not even the snakeoil cert is there?  Let's generate it
 		make-ssl-cert generate-default-snakeoil
 	    fi
 	    # Right.  At this point, it should be safe to set the symlinks.
-	    ln -s /etc/ssl/certs/ssl-cert-snakeoil.pem /etc/gforge/ssl-cert.pem
-	    ln -s /etc/ssl/private/ssl-cert-snakeoil.key /etc/gforge/ssl-cert.key
-	    if grep -q ^sys_use_ssl=false$ /etc/gforge/gforge.conf \
-		&& grep -q ^sys_sslcrt=$ /etc/gforge/gforge.conf \
-		&& grep -q ^sys_sslkey=$ /etc/gforge/gforge.conf ; then
+	    ln -s /etc/ssl/certs/ssl-cert-snakeoil.pem /etc/pkgname/ssl-cert.pem
+	    ln -s /etc/ssl/private/ssl-cert-snakeoil.key /etc/pkgname/ssl-cert.key
+	    if grep -q ^sys_use_ssl=false$ /etc/pkgname/pkgname.conf \
+		&& grep -q ^sys_sslcrt=$ /etc/pkgname/pkgname.conf \
+		&& grep -q ^sys_sslkey=$ /etc/pkgname/pkgname.conf ; then
 		# Okay, previous installations failed to locate SSL certs
 		# and disabled SSL altogether.  Let's fix that
-		sed -i -e 's,^sys_use_ssl=false$,sys_use_ssl=true,' /etc/gforge/gforge.conf 
-		sed -i -e 's,^sys_sslcrt=$,sys_sslcrt=/etc/gforge/ssl-cert.pem,' /etc/gforge/gforge.conf 
-		sed -i -e 's,^sys_sslkey=$,sys_sslkey=/etc/gforge/ssl-cert.key,' /etc/gforge/gforge.conf
+		sed -i -e 's,^sys_use_ssl=false$,sys_use_ssl=true,' /etc/pkgname/pkgname.conf 
+		sed -i -e 's,^sys_sslcrt=$,sys_sslcrt=/etc/pkgname/ssl-cert.pem,' /etc/pkgname/pkgname.conf 
+		sed -i -e 's,^sys_sslkey=$,sys_sslkey=/etc/pkgname/ssl-cert.key,' /etc/pkgname/pkgname.conf
 	    fi
 	fi
 	
-        gforge-config
+        pkgname-config
 
 	db_stop
         # Setup our Apache
-	touch /var/lib/gforge/etc/templates/httpd.vhosts  && \
-		chown gforge:gforge /var/lib/gforge/etc/templates/httpd.vhosts && \
-		/usr/share/gforge/bin/create-vhosts.sh --norestart
+	touch /var/lib/pkgname/etc/templates/httpd.vhosts  && \
+		chown pkgname:pkgname /var/lib/pkgname/etc/templates/httpd.vhosts && \
+		/usr/share/pkgname/bin/create-vhosts.sh --norestart
 
 	# Enable required modules
 	DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod php5 || true
@@ -86,13 +86,13 @@ case "$1" in
 	DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod rewrite || true
 	
 	# Enable the Gforge configuration
-	if [ -e /etc/apache2/conf.d/gforge.httpd.conf ] ; then
-	    rm -f /etc/apache2/conf.d/gforge.httpd.conf
+	if [ -e /etc/apache2/conf.d/pkgname.httpd.conf ] ; then
+	    rm -f /etc/apache2/conf.d/pkgname.httpd.conf
 	fi
-	if [ -d /etc/apache2/sites-available ] && [ ! -e /etc/apache2/sites-available/gforge ] ; then
-	    ln -s /etc/gforge/httpd.conf /etc/apache2/sites-available/gforge
+	if [ -d /etc/apache2/sites-available ] && [ ! -e /etc/apache2/sites-available/pkgname ] ; then
+	    ln -s /etc/pkgname/httpd.conf /etc/apache2/sites-available/pkgname
 	fi
-	a2ensite gforge
+	a2ensite pkgname
 	
 	# Make Apache see these new changes
 	invoke-rc.d apache2 restart || true

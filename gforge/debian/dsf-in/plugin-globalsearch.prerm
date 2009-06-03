@@ -1,5 +1,5 @@
 #! /bin/sh
-# prerm script for gforge-plugin-globalsearch
+# prerm script for pkgname-plugin-globalsearch
 #
 # see: dh_installdeb(1)
 
@@ -19,8 +19,8 @@ set -e
 
 case "$1" in
     remove|deconfigure)
-        /usr/share/gforge/bin/unregister-plugin globalsearch
-        /usr/share/gforge/plugins/globalsearch/bin/db-delete.pl
+        /usr/share/pkgname/bin/unregister-plugin globalsearch
+        /usr/share/pkgname/plugins/globalsearch/bin/db-delete.pl
         ;;
     upgrade|failed-upgrade)
         ;;
