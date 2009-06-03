@@ -107,8 +107,8 @@ function getVars($filedata) {
 	$lines = explode("\n",$filedata);
 	$results = array();
 	foreach ($lines as $line) {
-		if ( (strstr($line,"true") || strstr($line,"false")) && (!strstr($line,"//"))) { // get the true / false vars
-			$sep_var = explode("=",$line);
+		if ( substr(trim($line),0,1) == "$"  ) {
+			$sep_var = explode("=",$line,2);
 			$sep_var[0] = trim($sep_var[0]);
 			$sep_var[1] = substr(trim($sep_var[1]),0,strlen(trim($sep_var[1]))-1);
 			$results[$sep_var[0]] = $sep_var[1];
@@ -130,10 +130,14 @@ function updateVars($vars,$filepath) {
 	$lines = explode("\n",$filedata);
 	$keys = array_keys($vars);
 	for($i=0;$i<(count($vars));$i++) {
+		$vars[$keys[$i]] = str_replace('\"','"',$vars[$keys[$i]]);
+		$vars[$keys[$i]] = str_replace("\'","'",$vars[$keys[$i]]);
 		$currline = $keys[$i] . "=" . $vars[$keys[$i]] . ";";
 		//$filedata = preg_replace('/(.*)(' . $keys[$i] . ')([^;]*);(.*)/','/\1\2='.$vars[$keys[$i]].';\n\4/',$filedata);	
 		for ($j=0;$j<count($lines);$j++) {
-			if (strstr($lines[$j],$keys[$i])) {
+			$mykey = explode("=",$lines[$j]);
+			$mykey = trim($mykey[0]);
+			if ($mykey == $keys[$i]) {
 				$lines[$j] = $currline;
 			}
 		}
@@ -190,15 +194,52 @@ function updateVars($vars,$filepath) {
 			echo $HTML->listTableTop($title_arr);
 			$j = 0;
 			for($i=0;$i<(count($keys));$i++) {
-				$checkedtrue = "";
-				$checkedfalse = "";
-				($vars[$keys[$i]]=="true")?$checkedtrue=' checked="checked" ':$checkedfalse=' checked="checked" ';
-				echo '<tr '. $HTML->boxGetAltRowStyle($j+1) .'>'.
-			 	'<td>'. $keys[$i] .'</td>'.
-			 	'<td style="text-align:center"><input type="radio" name="attributes[' . $keys[$i] . ']" value="true" ' . $checkedtrue . '/>' .'</td>'.
-			 	'<td style="text-align:center"><input type="radio" name="attributes[' . $keys[$i] . ']" value="false" ' . $checkedfalse . '/></td>'.
-				'</tr>'."\n";
+				if ( ($vars[$keys[$i]]=="true") || ($vars[$keys[$i]]=="false") ) {
+					echo '<tr '. $HTML->boxGetAltRowStyle($j+1) .'>'.
+					'<td>'. $keys[$i] .'</td>';
+					$checkedtrue = "";
+					$checkedfalse = "";
+					($vars[$keys[$i]]=="true")?$checkedtrue=' checked="checked" ':$checkedfalse=' checked="checked" ';
+				 	echo '<td style="text-align:center"><input type="radio" name="attributes[' . $keys[$i] . ']" value="true" ' . $checkedtrue . '/>' .'</td>'.
+				 	'<td style="text-align:center"><input type="radio" name="attributes[' . $keys[$i] . ']" value="false" ' . $checkedfalse . '/></td>';
+					echo '</tr>'."\n";
+				}
+			}
+			echo $HTML->listTableBottom();
+			$title_arr = array(_('Attribute'),_('Value'));
+			echo $HTML->listTableTop($title_arr);
+			for($i=0;$i<(count($keys));$i++) {
+				// Strings
+				if ( (substr($vars[$keys[$i]],0,1)=='"') ||(substr($vars[$keys[$i]],0,1)=="'") ) {
+					echo '<tr '. $HTML->boxGetAltRowStyle($j+1) .'>'.
+				 	'<td>'. $keys[$i] .'</td>';
+					echo '<td><input type="text" size=80 name="attributes[' . $keys[$i] . ']" value="'. str_replace('"',"'",$vars[$keys[$i]]) .'"></td>';
+					echo '</tr>'."\n";
+				}
+				// Numbers
+				else if ( (ord(substr($vars[$keys[$i]],0,1)) >= 48) && (ord(substr($vars[$keys[$i]],0,1)) <= 57) ) {
+					echo '<tr '. $HTML->boxGetAltRowStyle($j+1) .'>'.
+				 	'<td>'. $keys[$i] .'</td>';
+					echo '<td><input type="text" size=80 name="attributes[' . $keys[$i] . ']" value="'. trim($vars[$keys[$i]],"'") .'"></td>';
+					echo '</tr>'."\n";
+				}
+				// Others => Not supported
+				else {
+					echo '<tr '. $HTML->boxGetAltRowStyle($j+1) .'>'.
+				 	'<td>'. $keys[$i] .'</td>';
+					echo '<td>Not supported</td>';
+					echo '</tr>'."\n";
+					$array_rm[$i]=1;
+				}
 			 	$j++;
+			}
+			// Remove "Not supported" keys from the keys' array
+			$j=0;
+			for($i=0;$i<(count($array_rm));$i++) {
+				if ( $array_rm[$i] == 1 ) {
+					array_splice($array_rm, $i-$j);
+					$j++;
+				}
 			}
 			echo $HTML->listTableBottom();
 			/*echo '<br><center>' . html_build_rich_textarea('filedata',30,150,$filedata,false) . '</center>';*/
