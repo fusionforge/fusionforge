@@ -93,6 +93,7 @@ clean: remove-binary-files unpatch
 	rm -rf locales/*
 
 	perl $(CURDIR)/deb-specific/dsf-helper.pl --clean
+	rm -f $(CURDIR)/$(PACKAGE)-config.sgml
 	dh_clean
 
 install: build
@@ -107,6 +108,9 @@ install: build
 
 	# Preprocess files with DSF-Helper
 	perl $(CURDIR)/deb-specific/dsf-helper.pl
+
+	# Preprocess some other files
+	cat $(CURDIR)/dsf-in/config.sgml | sed "s/pkgname/$(PACKAGE)/g" > $(CURDIR)/$(PACKAGE)-config.sgml
 
 	# Install files
 	#dh_install --fail-missing -X.svn -X.arch-ids -X.bzr -X.cvsignore --sourcedir=$(CURDIR)
