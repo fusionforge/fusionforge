@@ -69,6 +69,8 @@ build-stamp: patch
 	dh_testdir
 
 	# Build man pages from Docbook sources
+	# Preprocess sgml
+	cat debian/dsf-in/config.sgml | sed 's/pkgname/$(PACKAGE)/g' > debian/$(PACKAGE)-config.sgml
 	/usr/bin/docbook-to-man debian/cvssh.sgml > cvssh.1
 	/usr/bin/docbook-to-man debian/$(PACKAGE)-config.sgml > $(PACKAGE)-config.1
 
@@ -88,12 +90,12 @@ clean: remove-binary-files unpatch
 	rm -f $(CURDIR)/debian/*.dirs
 	rm -f $(CURDIR)/debian/*.install
 	rm -f $(CURDIR)/debian/*.docs
+	rm -f $(CURDIR)/debian/$(PACKAGE)-config.sgml
 	rm -f cvssh.1 $(PACKAGE)-config.1
 
 	rm -rf locales/*
 
 	perl $(CURDIR)/deb-specific/dsf-helper.pl --clean
-	rm -f $(CURDIR)/$(PACKAGE)-config.sgml
 	dh_clean
 
 install: build
@@ -108,9 +110,6 @@ install: build
 
 	# Preprocess files with DSF-Helper
 	perl $(CURDIR)/deb-specific/dsf-helper.pl
-
-	# Preprocess some other files
-	cat $(CURDIR)/dsf-in/config.sgml | sed "s/pkgname/$(PACKAGE)/g" > $(CURDIR)/$(PACKAGE)-config.sgml
 
 	# Install files
 	#dh_install --fail-missing -X.svn -X.arch-ids -X.bzr -X.cvsignore --sourcedir=$(CURDIR)
