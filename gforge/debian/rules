@@ -69,8 +69,8 @@ build-stamp: patch
 	dh_testdir
 
 	# Build man pages from Docbook sources
-	# Preprocess sgml
 	cat debian/dsf-in/config.sgml | sed 's/pkgname/$(PACKAGE)/g' > debian/$(PACKAGE)-config.sgml
+	cat debian/dsf-in/common.manpages | sed 's/pkgname/$(PACKAGE)/g' > $(PACKAGE)-common.manpages
 	/usr/bin/docbook-to-man debian/cvssh.sgml > cvssh.1
 	/usr/bin/docbook-to-man debian/$(PACKAGE)-config.sgml > $(PACKAGE)-config.1
 
@@ -91,6 +91,7 @@ clean: remove-binary-files unpatch
 	rm -f $(CURDIR)/debian/*.install
 	rm -f $(CURDIR)/debian/*.docs
 	rm -f $(CURDIR)/debian/$(PACKAGE)-config.sgml
+	rm -f $(CURDIR)/debian/$(PACKAGE)-common.manpages
 	rm -f cvssh.1 $(PACKAGE)-config.1
 
 	rm -rf locales/*
