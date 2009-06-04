@@ -70,7 +70,7 @@ build-stamp: patch
 
 	# Build man pages from Docbook sources
 	cat debian/dsf-in/config.sgml | sed 's/pkgname/$(PACKAGE)/g' > debian/$(PACKAGE)-config.sgml
-	cat debian/dsf-in/common.manpages | sed 's/pkgname/$(PACKAGE)/g' > $(PACKAGE)-common.manpages
+	cat debian/dsf-in/common.manpages | sed 's/pkgname/$(PACKAGE)/g' > debian/$(PACKAGE)-common.manpages
 	/usr/bin/docbook-to-man debian/cvssh.sgml > cvssh.1
 	/usr/bin/docbook-to-man debian/$(PACKAGE)-config.sgml > $(PACKAGE)-config.1
 
