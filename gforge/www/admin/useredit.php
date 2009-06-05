@@ -71,8 +71,12 @@ if (getStringFromRequest('delete_user') != '' && getStringFromRequest('confirm_d
 	if ($u->getUnixStatus() != 'N') {
 		$u->setUnixStatus($status);
 	} else {
-		// make sure that user doesn't have LDAP entry
-		$u->setUnixStatus('N');
+		if (count($u->getGroups())>0 && $u->isActive()) {
+			$u->setUnixStatus('A');
+		}else{
+			// make sure that user doesn't have LDAP entry
+			$u->setUnixStatus('N');
+		}
 	}
 	
 	if ($u->isError()) {
