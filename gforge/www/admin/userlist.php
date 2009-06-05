@@ -48,7 +48,11 @@ function performAction($newStatus, $statusString, $user_id) {
 	} else {
 		if(!$u->setStatus($newStatus)) {
 			exit_error('Error',$u->getErrorMessage());
-		}	
+		}
+		if(!$u->setUnixStatus($newStatus)) {
+			exit_error('Error',$u->getErrorMessage());
+		}
+
 	}
 	echo "<h2>" .sprintf(_('User updated to %1$s status'), $statusString)."</h2>";
 }
