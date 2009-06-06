@@ -23,6 +23,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
+require_once dirname(__FILE__).'/../www/env.inc.php';
 require_once $gfwww.'include/squal_pre.php';
 require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraFieldElement.class.php';
