@@ -57,15 +57,13 @@ if (!$days || $days < 1) {
 	$days=30;
 }
 
-if (!isset($datatype)) {
-	$datatype=1;
-}
-
+$start = getIntFromRequest('start');
 if (!$start) {
 	$start=time() - ($days * 60 * 60 * 24);
 	$formattedmonth = date('Ym',$start);
 }
 
+$end = getIntFromRequest('end');
 if (!$end) {
 	$end=time();
 } else {
