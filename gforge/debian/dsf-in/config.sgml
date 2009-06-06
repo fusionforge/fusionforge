@@ -10,8 +10,8 @@
   <!ENTITY dhsection   "<manvolnum>1</manvolnum>">
   <!ENTITY dhemail     "<email>lolando@debian.org</email>">
   <!ENTITY dhusername  "Roland Mas">
-  <!ENTITY dhucpackage "<refentrytitle>Gforge</refentrytitle>">
-  <!ENTITY dhpackage   "pkgname-config">
+  <!ENTITY dhucpackage "<refentrytitle>@FORGENAME@</refentrytitle>">
+  <!ENTITY dhpackage   "@PACKAGE@-config">
 
   <!ENTITY debian      "<productname>Debian GNU/Linux</productname>">
   <!ENTITY gnu         "<acronym>GNU</acronym>">
@@ -40,7 +40,7 @@
   <refnamediv>
     <refname>&dhpackage;</refname>
 
-    <refpurpose>Reconfigure Gforge
+    <refpurpose>Reconfigure @FORGENAME@
     </refpurpose>
   </refnamediv>
 
@@ -61,10 +61,10 @@
     </para>
 
     <para><command>&dhpackage;</command> replaces (or creates) the
-      configuration files found in /etc/pkgname with appropriate
+      configuration files found in /etc/@PACKAGE@ with appropriate
       files derived from standard fill-in-the-blank templates (found
-      in /usr/share/pkgname/templates).  The values used to fill in
-      the blanks are taken from /etc/pkgname.conf.
+      in /usr/share/@PACKAGE@/templates).  The values used to fill in
+      the blanks are taken from /etc/@PACKAGE@.conf.
     </para>
 
   </refsect1>
@@ -80,7 +80,7 @@
   <refsect1>
     <title>SEE ALSO</title>
 
-    <para>Gforge package documentation (ahem).</para>
+    <para>@FORGENAME@ package documentation (ahem).</para>
   </refsect1>
 
   <refsect1>

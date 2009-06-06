@@ -1,7 +1,7 @@
-[type: gettext/rfc822deb] gforge-common.templates.dsfh-in
-[type: gettext/rfc822deb] gforge-db-postgresql.templates.dsfh-in
-[type: gettext/rfc822deb] gforge-dns-bind9.templates.dsfh-in
-[type: gettext/rfc822deb] gforge-mta-postfix.templates.dsfh-in
+[type: gettext/rfc822deb] @PACKAGE@-common.templates
+[type: gettext/rfc822deb] @PACKAGE@-db-postgresql.templates
+[type: gettext/rfc822deb] @PACKAGE@-dns-bind9.templates
+[type: gettext/rfc822deb] @PACKAGE@-mta-postfix.templates
 [type: gettext/rfc822deb] dsf-helper/common-variables.templates
 [type: gettext/rfc822deb] dsf-helper/dbhost-variables.templates
 [type: gettext/rfc822deb] dsf-helper/dbpasswd-variables.templates

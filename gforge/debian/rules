@@ -8,13 +8,18 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
-PACKAGE=gforge
+PACKAGE=$(shell dh_listpackages | head -1)
+FORGENAME=FusionForge
 include /usr/share/dpatch/dpatch.make
 
 CRONFILESLIST=$(patsubst packaging/cron.d/%,debian/$(PACKAGE)-%.cron.d,$(wildcard packaging/cron.d/[a-z]*))
 DIRSFILESLIST=$(patsubst packaging/dirs/%,debian/$(PACKAGE)-%.dirs,$(wildcard packaging/dirs/[a-z]*))
 INSTALLFILESLIST=$(patsubst packaging/install/%,debian/$(PACKAGE)-%.install,$(wildcard packaging/install/[a-z]*))
 DOCSFILESLIST=$(patsubst packaging/docs/pkgname%,debian/$(PACKAGE)%.docs,$(wildcard packaging/docs/pkgname*))
+POFILES=$(patsubst debian/dsf-po/%,debian/po/%,$(wildcard debian/dsf-po/*) debian/po/POTFILES.in)
+
+default:
+	@echo $(PACKAGE)
 
 listecho: 
 	@echo $(CRONFILESLIST)
@@ -61,16 +66,27 @@ configure-stamp: remove-binary-files
 
 	touch configure-stamp
 
-debian/po/templates.pot: $(wildcard debian/*.templates) $(wildcard debian/*.templates.dsfh-in) $(wildcard debian/dsf-helper/*.templates)
+#$(foreach PO,$(wildcard debian/dsf-po/*.po), cp $(PO) debian/po ; ) 
+
+debian/po/templates.pot: $(POFILES) $(wildcard debian/dsf-in/*.templates.dsfh-in) $(wildcard debian/dsf-helper/*.templates)
+	perl $(CURDIR)/deb-specific/dsf-helper.pl
 	@debconf-updatepo
+
+debian/po/%:
+	cat $(patsubst debian/po/%,debian/dsf-po/%,$@) | sed 's/@PACKAGE@/$(PACKAGE)/g' | sed 's/@FORGENAME@/$(FORGENAME)/g' > $@
+
+cleanpo:
+	rm -f $(POFILES)
+
+
 
 build: configure-stamp build-stamp
 build-stamp: patch
 	dh_testdir
 
 	# Build man pages from Docbook sources
-	cat debian/dsf-in/config.sgml | sed 's/pkgname/$(PACKAGE)/g' > debian/$(PACKAGE)-config.sgml
-	cat debian/dsf-in/common.manpages | sed 's/pkgname/$(PACKAGE)/g' > debian/$(PACKAGE)-common.manpages
+	cat debian/dsf-in/config.sgml | sed 's/@PACKAGE@/$(PACKAGE)/g' | sed 's/@FORGENAME@/$(FORGENAME)/g' > debian/$(PACKAGE)-config.sgml
+	cat debian/dsf-in/common.manpages | sed 's/@PACKAGE@/$(PACKAGE)/g' | sed 's/@FORGENAME@/$(FORGENAME)/g' > debian/$(PACKAGE)-common.manpages
 	/usr/bin/docbook-to-man debian/cvssh.sgml > cvssh.1
 	/usr/bin/docbook-to-man debian/$(PACKAGE)-config.sgml > $(PACKAGE)-config.1
 
@@ -82,7 +98,7 @@ build-stamp: patch
 
 	touch build-stamp
 
-clean: remove-binary-files unpatch
+clean: remove-binary-files unpatch cleanpo
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp configure-stamp

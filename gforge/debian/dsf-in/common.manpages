@@ -1,2 +1,2 @@
-pkgname-config.1
+@PACKAGE@-config.1
 cvssh.1

@@ -1,12 +1,12 @@
-# Portuguese translation for gforge's debconf messages
+# Portuguese translation for @PACKAGE@'s debconf messages
 # Copyright (C) 2007 Ricardo Silva
-# This file is distributed under the same license as the gforge package.
+# This file is distributed under the same license as the @PACKAGE@ package.
 # Ricardo Silva <ardoric@gmail.com>, 2007-2008.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gforge 4.6.99+svn6387-1\n"
-"Report-Msgid-Bugs-To: gforge@packages.debian.org\n"
+"Project-Id-Version: @PACKAGE@ 4.6.99+svn6387-1\n"
+"Report-Msgid-Bugs-To: @PACKAGE@@packages.debian.org\n"
 "POT-Creation-Date: 2008-02-26 22:50+0100\n"
 "PO-Revision-Date: 2008-04-12 21:30+0100\n"
 "Last-Translator: Ricardo Silva <ardoric@gmail.com>\n"
@@ -17,14 +17,14 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:3001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:3001
 #: ../dsf-helper/shellhost-variables.templates:2001
 msgid "Shell server:"
 msgstr "Servidor de shells:"
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:3001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:3001
 msgid ""
 "Please enter the hostname of the server that will host the GForge shell "
 "accounts."
@@ -34,14 +34,14 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:6001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:6001
 #: ../dsf-helper/downloadhost-variables.templates:2001
 msgid "Download server:"
 msgstr "Servidor de downloads:"
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:6001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:6001
 msgid ""
 "Please enter the hostname of the server that will host the GForge packages."
 msgstr ""
@@ -49,7 +49,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:6001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:6001
 #: ../dsf-helper/downloadhost-variables.templates:2001
 #: ../dsf-helper/lists-variables.templates:2001
 #: ../dsf-helper/users-variables.templates:2001
@@ -58,7 +58,7 @@ msgstr "Não deve ser o mesmo que o host principal do GForge."
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:8001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:8001
 msgid "GForge administrator login:"
 msgstr "Login do administrador do GForge:"
 
@@ -66,8 +66,8 @@ msgstr "Login do administrador do GForge:"
 #. Description
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:8001
-#: ../gforge-db-postgresql.templates.dsfh-in:10001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:8001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:10001
 msgid ""
 "The GForge administrator account will have full privileges on the system. It "
 "will be used to approve the creation of new projects."
@@ -77,20 +77,20 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:8001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:8001
 msgid "Please choose the username for this account."
 msgstr "Por favor escolha o nome de utilizador para esta conta."
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:9001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/host-variables.templates:2001
 msgid "IP address:"
 msgstr "Endereço IP:"
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:9001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/host-variables.templates:2001
 msgid ""
 "Please enter the IP address of the server that will host the GForge "
@@ -101,46 +101,46 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:9001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/host-variables.templates:2001
 msgid "This is needed for the configuration of Apache virtual hosting."
 msgstr "Isto é necessário para a configuração de 'virtual hosts' do Apache."
 
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:10001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:10001
 msgid "GForge administrator password:"
 msgstr "Palavra-passe do administrador do GForge:"
 
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:10001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:10001
 msgid "Please choose the password for this account."
 msgstr "Por favor escolha a palavra-passe para esta conta."
 
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:11001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:11001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
 msgid "Password confirmation:"
 msgstr "Confirmação da palavra-passe:"
 
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:11001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:11001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
 msgid "Please re-type the password for confirmation."
 msgstr "Por favor, reescreva a palavra-passe para confirmação."
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:12001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:12001
 msgid "Initial list of skills:"
 msgstr "Lista inicial de competências:"
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:12001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:12001
 msgid ""
 "GForge allows users to define a list of their skills, to be chosen from "
 "those present in the database. This list is the initial list of skills that "
@@ -153,7 +153,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:12001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:12001
 msgid "Please enter a semicolon-separated list of skill names."
 msgstr ""
 "Por favor introduza uma lista de nomes de capacidades, separadas pelo "
@@ -163,7 +163,7 @@ msgstr ""
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../gforge-dns-bind9.templates.dsfh-in:3001
+#: ../@PACKAGE@-dns-bind9.templates.dsfh-in:3001
 msgid "Do you want a simple DNS setup for GForge?"
 msgstr "Deseja uma configuração simples de DNS no GForge?"
 
@@ -171,7 +171,7 @@ msgstr "Deseja uma configuração simples de DNS no GForge?"
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../gforge-dns-bind9.templates.dsfh-in:3001
+#: ../@PACKAGE@-dns-bind9.templates.dsfh-in:3001
 msgid ""
 "You can use a simple DNS setup with wildcards to map all project web-hosts "
 "to a single IP address, and direct all the scm-hosts to a single SCM server, "
@@ -188,7 +188,7 @@ msgstr ""
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../gforge-dns-bind9.templates.dsfh-in:3001
+#: ../@PACKAGE@-dns-bind9.templates.dsfh-in:3001
 msgid ""
 "Even if you use a simple DNS setup, you can still use separate machines as "
 "project servers; it just assumes that all the project web directories are on "
@@ -201,13 +201,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../gforge-mta-postfix.templates.dsfh-in:3001
+#: ../@PACKAGE@-mta-postfix.templates.dsfh-in:3001
 msgid "Do you want mail to ${noreply} to be discarded?"
 msgstr "Deseja que o mail para ${noreply} seja apagado?"
 
 #. Type: boolean
 #. Description
-#: ../gforge-mta-postfix.templates.dsfh-in:3001
+#: ../@PACKAGE@-mta-postfix.templates.dsfh-in:3001
 msgid ""
 "GForge sends and receives plenty of e-mail to and from the \"${noreply}\" "
 "address."
@@ -217,7 +217,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../gforge-mta-postfix.templates.dsfh-in:3001
+#: ../@PACKAGE@-mta-postfix.templates.dsfh-in:3001
 msgid ""
 "E-mail to that address should be directed to a black hole (/dev/null), "
 "unless you have another use for that address."

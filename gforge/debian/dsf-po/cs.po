@@ -1,236 +1,233 @@
-# translation of gforge_4.6.99+svn6580-1_sv.po to Swedish
-# Translators, if you are not familiar with the PO format, gettext
-# documentation is worth reading, especially sections dedicated to
-# this format, e.g. by running:
-# info -n '(gettext)PO Files'
-# info -n '(gettext)Header Entry'
-# Some information specific to po-debconf are available at
-# /usr/share/doc/po-debconf/README-trans
-# or http://www.debian.org/intl/l10n/po-debconf/README-trans
-# Developers do not need to manually edit POT or PO files.
 #
-# Martin �gren <martin.agren@gmail.com>, 2008.
+#    Translators, if you are not familiar with the PO format, gettext
+#    documentation is worth reading, especially sections dedicated to
+#    this format, e.g. by running:
+#         info -n '(gettext)PO Files'
+#         info -n '(gettext)Header Entry'
+#
+#    Some information specific to po-debconf are available at
+#            /usr/share/doc/po-debconf/README-trans
+#         or http://www.debian.org/intl/l10n/po-debconf/README-trans
+#
+#    Developers do not need to manually edit POT or PO files.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: gforge_4.6.99+svn6580-1_sv\n"
-"Report-Msgid-Bugs-To: gforge@packages.debian.org\n"
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: @PACKAGE@@packages.debian.org\n"
 "POT-Creation-Date: 2008-02-26 22:50+0100\n"
-"PO-Revision-Date: 2008-07-29 18:44+0200\n"
-"Last-Translator: Martin �gren <martin.agren@gmail.com>\n"
-"Language-Team: Swedish <debian-l10n-swedish@lists.debian.org>\n"
+"PO-Revision-Date: 2008-03-30 14:36+0200\n"
+"Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
+"Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: sv\n"
-"X-Poedit-Country: sv\n"
-"X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:3001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:3001
 #: ../dsf-helper/shellhost-variables.templates:2001
 msgid "Shell server:"
-msgstr "Skalserver:"
+msgstr "Server se shellovými účty:"
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:3001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:3001
 msgid ""
 "Please enter the hostname of the server that will host the GForge shell "
 "accounts."
-msgstr "Ange v�rdnamnet f�r servern som kommer tillhandah�lla skalkonton f�r GForge."
+msgstr "Zadejte prosím jméno serveru, který bude hostit shellové účty GForge."
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:6001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:6001
 #: ../dsf-helper/downloadhost-variables.templates:2001
 msgid "Download server:"
-msgstr "H�mtningsserver:"
+msgstr "Server pro stahování:"
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:6001
-msgid "Please enter the hostname of the server that will host the GForge packages."
-msgstr "Ange v�rdnamnet f�r servern som kommer tillhandah�lla GForge-paketen."
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:6001
+msgid ""
+"Please enter the hostname of the server that will host the GForge packages."
+msgstr "Zadejte prosím jméno serveru, který bude hostit balíky GForge."
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:6001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:6001
 #: ../dsf-helper/downloadhost-variables.templates:2001
 #: ../dsf-helper/lists-variables.templates:2001
 #: ../dsf-helper/users-variables.templates:2001
 msgid "It should not be the same as the main GForge host."
-msgstr "Det ska inte vara samma som huvudv�rden f�r GForge."
+msgstr "Měl by to být jiný počítač než je hlavní server GForge."
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:8001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:8001
 msgid "GForge administrator login:"
-msgstr "GForge-administrat�rens anv�ndarnamn:"
+msgstr "Přihlašovací jméno správce GForge:"
 
 #. Type: string
 #. Description
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:8001
-#: ../gforge-db-postgresql.templates.dsfh-in:10001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:8001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:10001
 msgid ""
 "The GForge administrator account will have full privileges on the system. It "
 "will be used to approve the creation of new projects."
 msgstr ""
-"Administrat�rskontot f�r GForge kommer att ha alla r�ttigheter i GForge-systemet. "
-"Det beh�vs f�r att godk�nna skapandet av projekten."
+"Správce GForge bude mít v systému GForge všechna práva. Používá se například "
+"pro schvalování vytváření nových projektů."
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:8001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:8001
 msgid "Please choose the username for this account."
-msgstr "Ange anv�ndarnamnet f�r detta konto."
+msgstr "Zadejte prosím přihlašovací jméno tohoto účtu."
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:9001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/host-variables.templates:2001
 msgid "IP address:"
-msgstr "IP-adress:"
+msgstr "IP adresa:"
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:9001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/host-variables.templates:2001
 msgid ""
 "Please enter the IP address of the server that will host the GForge "
 "installation."
-msgstr "Ange IP-adressen f�r servern som kommer tillhandah�lla GForge-installationen."
+msgstr "Zadejte prosím IP adresu serveru, který bude hostit instalaci GForge."
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:9001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/host-variables.templates:2001
 msgid "This is needed for the configuration of Apache virtual hosting."
-msgstr "Detta kr�vs f�r att konfigurera Apaches virtuella v�rd."
+msgstr "To je vyžadováno pro nastavení virtuálních hostů v Apachi."
 
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:10001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:10001
 msgid "GForge administrator password:"
-msgstr "GForge-administrat�rens l�senord:"
+msgstr "Heslo správce GForge:"
 
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:10001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:10001
 msgid "Please choose the password for this account."
-msgstr "Mata in l�senordet f�r detta konto."
+msgstr "Zadejte prosím heslo pro tento účet."
 
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:11001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:11001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
 msgid "Password confirmation:"
-msgstr "L�senordsbekr�ftelse:"
+msgstr "Potvrzení hesla:"
 
 #. Type: password
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:11001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:11001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
 msgid "Please re-type the password for confirmation."
-msgstr "Mata in l�senordet igen f�r bekr�ftelse."
+msgstr "Zadejte heslo ještě jednou pro potvrzení."
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:12001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:12001
 msgid "Initial list of skills:"
-msgstr "Initiala listan �ver f�rdigheter:"
+msgstr "Počáteční seznam schopností:"
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:12001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:12001
 msgid ""
 "GForge allows users to define a list of their skills, to be chosen from "
 "those present in the database. This list is the initial list of skills that "
 "will enter the database."
 msgstr ""
-"GForge l�ter anv�ndarna definiera en lista �ver sina f�rdigheter, som kan "
-"v�ljas av de som finns i databasen.  Denna lista �r den initiala listan "
-"som kommer att l�ggas in i databasen."
+"GForge umožňuje uživatelům, aby si ze seznamu schopností definovali své "
+"dovednosti. Seznam, který zde zadáte, bude uložen v databázi jako výchozí "
+"seznam schopností."
 
 #. Type: string
 #. Description
-#: ../gforge-db-postgresql.templates.dsfh-in:12001
+#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:12001
 msgid "Please enter a semicolon-separated list of skill names."
-msgstr "Mata in namn p� f�rdigheter, separerade med semikolon."
+msgstr "Jednotlivé položky seznamu schopností oddělte středníky."
 
 #. Type: boolean
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../gforge-dns-bind9.templates.dsfh-in:3001
+#: ../@PACKAGE@-dns-bind9.templates.dsfh-in:3001
 msgid "Do you want a simple DNS setup for GForge?"
-msgstr "Vill du ha en enkel DNS-konfiguration f�r GForge?"
+msgstr "Chcete mít v GForge jednoduchou konfiguraci DNS?"
 
 #. Type: boolean
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../gforge-dns-bind9.templates.dsfh-in:3001
+#: ../@PACKAGE@-dns-bind9.templates.dsfh-in:3001
 msgid ""
 "You can use a simple DNS setup with wildcards to map all project web-hosts "
 "to a single IP address, and direct all the scm-hosts to a single SCM server, "
 "or a complex setup which allows many servers as project web servers or SCM "
 "servers."
 msgstr ""
-"Du kan ha en enkel DNS-konfiguration som anv�nder jokertecken f�r att peka "
-"alla projektwebbplatser till en enda IP-adress och vidares�nda alla k�llkodshanterings"
-"v�rdar till en enda k�llkodshanteringsserver, eller en komplex konfiguration som l�ter "
-"dig ha m�nga servrar som projektwebbservrar eller k�llkodshanteringsservrar."
+"Můžete mít buď jednodušší konfiguraci DNS, která používá zástupné znaky, aby "
+"namapovala weby všech projektů na jedinou IP adresu a nasměrovala všechny "
+"SCM servery na server jediný, nebo můžete mít komplexní nastavení, jež vám "
+"umožní použít vícero počítačů pro webové a SCM servery."
 
 #. Type: boolean
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../gforge-dns-bind9.templates.dsfh-in:3001
+#: ../@PACKAGE@-dns-bind9.templates.dsfh-in:3001
 msgid ""
 "Even if you use a simple DNS setup, you can still use separate machines as "
 "project servers; it just assumes that all the project web directories are on "
 "the same server with a single SCM server."
 msgstr ""
-"�ven om du har en enkel DNS-konfiguration, kan du fortfarande ha separata "
-"maskiner f�r dina projektservrar; den antar bara att du har alla projektens "
-"webbkataloger p� samma server och en enda k�llkodshanteringsserver."
+"I když zvolíte jednodušší nastavení DNS, stále můžete použít více počítačů. "
+"Nastavení bude pouze předpokládat, budete mít všechny adresáře s weby "
+"projektů na jednom počítači a že pro SCM použijete jediný server."
 
 #. Type: boolean
 #. Description
-#: ../gforge-mta-postfix.templates.dsfh-in:3001
+#: ../@PACKAGE@-mta-postfix.templates.dsfh-in:3001
 msgid "Do you want mail to ${noreply} to be discarded?"
-msgstr "Vill du att e-post till ${noreply} ska tas bort?"
+msgstr "Chcete, aby se pošta doručená na ${noreply} zahazovala?"
 
 #. Type: boolean
 #. Description
-#: ../gforge-mta-postfix.templates.dsfh-in:3001
+#: ../@PACKAGE@-mta-postfix.templates.dsfh-in:3001
 msgid ""
 "GForge sends and receives plenty of e-mail to and from the \"${noreply}\" "
 "address."
 msgstr ""
-"GForge skickar och tar emot en m�ngd e-postmeddelanden till och fr�n "
-"adressen \"${noreply}\"."
+"GForge využívá adresu „${noreply}“ k odesílání i příjmu velkého množství "
+"pošty."
 
 #. Type: boolean
 #. Description
-#: ../gforge-mta-postfix.templates.dsfh-in:3001
+#: ../@PACKAGE@-mta-postfix.templates.dsfh-in:3001
 msgid ""
 "E-mail to that address should be directed to a black hole (/dev/null), "
 "unless you have another use for that address."
 msgstr ""
-"E-post till den adressen ska pekas mot "
-"ett svart h�l (/dev/null) s�vida du inte har andra anv�ndningsomr�den f�r "
-"den adressen."
+"Pokud s touto adresou nemáte jiné plány, doporučujeme veškerou příchozí "
+"poštu přesměrovat do černé díry (/dev/null)."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:2001
 msgid "GForge domain or subdomain name:"
-msgstr "Namn p� GForge-dom�nen eller -underdom�nen:"
+msgstr "Název GForge domény nebo subdomény:"
 
 #. Type: string
 #. Description
@@ -239,14 +236,14 @@ msgid ""
 "Please enter the domain that will host the GForge installation. Some "
 "services (scm, lists, etc.) will be given their own subdomain in that domain."
 msgstr ""
-"Ange den dom�n som kommer att vara v�rd f�r GForge-installationen.  Vissa "
-"tj�nster (k�llkodshantering, listor, etc.) kommer att tilldelas sina egna underdom�ner i den dom�nen."
+"Zadejte prosím doménu, která bude hostit vaši instalaci GForge. Některé "
+"služby obdrží své vlastní subdomény této domény (scm, lists, atd.)."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:3001
 msgid "GForge administrator e-mail address:"
-msgstr "GForge-administrat�rens e-postadress:"
+msgstr "Emailová adresa správce GForge:"
 
 #. Type: string
 #. Description
@@ -255,14 +252,14 @@ msgid ""
 "Please enter the e-mail address of the GForge administrator of this site. It "
 "will be used when problems occur."
 msgstr ""
-"Ange e-postadressen f�r GForge-administrat�ren p� systemet. "
-"Den kommer anv�ndas ifall problem uppst�r."
+"Zadejte prosím emailovou adresu správce tohoto systému GForge. Adresa se "
+"použije v případě výskytu problémů."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:4001
 msgid "GForge system name:"
-msgstr "GForges systemnamn:"
+msgstr "Jméno GForge systému:"
 
 #. Type: string
 #. Description
@@ -270,13 +267,15 @@ msgstr "GForges systemnamn:"
 msgid ""
 "Please enter the name of the GForge system. It is used in various places "
 "throughout the system."
-msgstr "Ange namnet p� GForge-systemet. Det anv�nds p� olika st�llen i systemet."
+msgstr ""
+"Zadejte prosím jméno GForge systému. Toto jméno je v systému používáno na "
+"několika místech."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/dbhost-variables.templates:2001
 msgid "Database server:"
-msgstr "Databasserver:"
+msgstr "Databázový server:"
 
 #. Type: string
 #. Description
@@ -285,26 +284,27 @@ msgid ""
 "Please enter the IP address (or hostname) of the server that will host the "
 "GForge database."
 msgstr ""
-"IP-adressen (eller v�rdnamnet) f�r servern som kommer tillhandah�lla "
-"GForge-databasen."
+"Zadejte prosím IP adresu (nebo jméno) serveru, který bude hostit vaši GForge "
+"databázi."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/dbhost-variables.templates:3001
 msgid "Database name:"
-msgstr "Databasnamn:"
+msgstr "Jméno databáze:"
 
 #. Type: string
 #. Description
 #: ../dsf-helper/dbhost-variables.templates:3001
-msgid "Please enter the name of the database that will host the GForge database."
-msgstr "Ange namnet p� databasen som kommer tillhandah�lla GForge-databasen."
+msgid ""
+"Please enter the name of the database that will host the GForge database."
+msgstr "Zadejte prosím jméno databáze, která bude obsahovat databázi GForge."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/dbhost-variables.templates:4001
 msgid "Database administrator username:"
-msgstr "Databasadministrat�rens anv�ndarnamn:"
+msgstr "Uživatelské jméno správce databáze:"
 
 #. Type: string
 #. Description
@@ -313,38 +313,39 @@ msgid ""
 "Please enter the username of the database administrator for the server that "
 "will host the GForge database."
 msgstr ""
-"Ange anv�ndarnamnet p� databasadministrat�ren f�r servers "
-"som kommer tillhandah�lla GForge-databasen."
+"Zadejte prosím uživatelské jméno správce databáze na serveru, který bude "
+"hostit databázi GForge."
 
 #. Type: password
 #. Description
 #: ../dsf-helper/dbpasswd-variables.templates:2001
 msgid "Password used for the database:"
-msgstr "L�senordet som anv�nds f�r databasen:"
+msgstr "Heslo pro připojení do databáze:"
 
 #. Type: password
 #. Description
 #: ../dsf-helper/dbpasswd-variables.templates:2001
 msgid "Connections to the database system are authenticated by a password."
-msgstr "Uppkopplingar till databassystem autentiseras med ett l�senord."
+msgstr "Připojení do databáze je ověřováno heslem."
 
 #. Type: password
 #. Description
 #: ../dsf-helper/dbpasswd-variables.templates:2001
 msgid "Please choose the connection password."
-msgstr "V�lj uppkopplingsl�senordet."
+msgstr "Zadejte zde prosím heslo pro připojení."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/downloadhost-variables.templates:2001
-msgid "Please enter the host name of the server that will host the GForge packages."
-msgstr "Ange v�rdnamnet f�r servern som kommer tillhandah�lla GForge-paketen."
+msgid ""
+"Please enter the host name of the server that will host the GForge packages."
+msgstr "Zadejte prosím jméno serveru, který bude hostit balíky GForge."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/groupid-variables.templates:2001
 msgid "News administrative group ID:"
-msgstr "Grupp-id f�r nyhetsadministrat�rerna:"
+msgstr "ID skupiny správců novinek:"
 
 #. Type: string
 #. Description
@@ -354,27 +355,27 @@ msgid ""
 "page. This group's ID must not be 1. This should be changed only if you "
 "upgrade from a previous version and want to keep the data."
 msgstr ""
-"Medlemmar i nyhetsadministrationsgruppen kan godk�nna nyheter f�r GForges "
-"f�rstasida.  Detta grupp-id f�r inte vara 1. Du beh�ver bara �ndra detta "
-"v�rde om du uppgraderar fr�n en tidigare version och vill beh�lla ditt data."
+"Členové správcovské skupiny pro novinky mohou schvalovat novinky pro hlavní "
+"stránku GForge. Tato skupina nesmí mít ID 1. Toto byste měli měnit jen v "
+"případě, že přecházíte z dřívější verze a chcete zachovat svá data."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/groupid-variables.templates:3001
 msgid "Statistics administrative group ID:"
-msgstr "Grupp-id f�r statistikadministrat�rerna:"
+msgstr "ID skupiny správců pro statistiky:"
 
 #. Type: string
 #. Description
 #: ../dsf-helper/groupid-variables.templates:4001
 msgid "Peer rating administrative group ID:"
-msgstr "Grupp-id f�r anv�ndarbed�mningsadministrat�rerna:"
+msgstr "ID skupiny správců pro hodnocení:"
 
 #. Type: string
 #. Description
 #: ../dsf-helper/lists-variables.templates:2001
 msgid "Mailing lists server:"
-msgstr "Server f�r s�ndlistor:"
+msgstr "Server pro poštovní konference:"
 
 #. Type: string
 #. Description
@@ -382,7 +383,8 @@ msgstr "Server f�r s�ndlistor:"
 msgid ""
 "Please enter the host name of the server that will host the GForge mailing "
 "lists."
-msgstr "Ange v�rdnamnet f�r servern som kommer tillhandah�lla s�ndlistorna f�r GForge."
+msgstr ""
+"Zadejte prosím jméno serveru, který bude hostit poštovní konference GForge."
 
 #. Type: string
 #. Description
@@ -390,13 +392,13 @@ msgstr "Ange v�rdnamnet f�r servern som kommer tillhandah�lla s�ndlistorna f�r G
 msgid ""
 "Please enter the host name of the server that will host the GForge shell "
 "accounts."
-msgstr "Ange v�rdnamnet f�r servern som kommer tillhandah�lla skalkonton f�r GForge."
+msgstr "Zadejte prosím jméno serveru, který bude hostit shellové účty GForge."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/users-variables.templates:2001
 msgid "User mail redirector server:"
-msgstr "Omdirigerarserver f�r anv�ndarnas e-post:"
+msgstr "Server pro přesměrování pošty:"
 
 #. Type: string
 #. Description
@@ -404,181 +406,182 @@ msgstr "Omdirigerarserver f�r anv�ndarnas e-post:"
 msgid ""
 "Please enter the host name of the server that will host the GForge user mail "
 "redirector."
-msgstr "Ange v�rdnamnet f�r servern som kommer tillhandah�lla omdirigerarserver f�r anv�ndarnas e-post f�r GForge."
+msgstr ""
+"Zadejte prosím jméno serveru, který bude hostit přesměrování pošty pro "
+"uživatele GForge."
 
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "English"
-msgstr "Engelska"
+msgstr "angličtina"
 
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Bulgarian"
-msgstr "Bulgariska"
+msgstr "bulharština"
 
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Catalan"
-msgstr "Katalanska"
+msgstr "katalánština"
 
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Chinese (Traditional)"
-msgstr "Kinesiska (traditionell)"
+msgstr "čínština (tradiční)"
 
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Dutch"
-msgstr "Holl�ndska"
+msgstr "holandština"
 
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Esperanto"
-msgstr "Esperanto"
+msgstr "esperanto"
 
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "French"
-msgstr "Franska"
+msgstr "francouzština"
 
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "German"
-msgstr "Tyska"
+msgstr "němčina"
 
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Greek"
-msgstr "Grekiska"
+msgstr "řečtina"
 
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Hebrew"
-msgstr "Hebreiska"
+msgstr "hebrejština"
 
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Indonesian"
-msgstr "Indonesiska"
+msgstr "indonéština"
 
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Italian"
-msgstr "Italienska"
+msgstr "italština"
 
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Japanese"
-msgstr "Japanska"
+msgstr "japonština"
 
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Korean"
-msgstr "Koreanska"
+msgstr "korejština"
 
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Latin"
-msgstr "Latin"
+msgstr "latina"
 
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Norwegian"
-msgstr "Norska"
+msgstr "norština"
 
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Polish"
-msgstr "Polska"
+msgstr "polština"
 
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Portuguese (Brazilian)"
-msgstr "Portugisiska (brasiliansk)"
+msgstr "portugalština (brazilská)"
 
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Portuguese"
-msgstr "Portugisiska"
+msgstr "portugalština"
 
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Russian"
-msgstr "Ryska"
+msgstr "ruština"
 
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Chinese (Simplified)"
-msgstr "Kinesiska (f�renklad)"
+msgstr "čínština (zjednodušená)"
 
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Spanish"
-msgstr "Spanska"
+msgstr "španělština"
 
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Swedish"
-msgstr "Svenska"
+msgstr "švédština"
 
 #. Type: select
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Thai"
-msgstr "Thail�ndska"
+msgstr "thajština"
 
 #. Type: select
 #. DefaultChoice
 #: ../dsf-helper/web-variables.templates:2002
 msgid "English[ Default language]"
-msgstr "Engelska[ Standardspr�k]"
+msgstr "English"
 
 #. Type: select
 #. Description
 #: ../dsf-helper/web-variables.templates:2003
 msgid "Default language:"
-msgstr "Standardspr�k:"
+msgstr "Výchozí jazyk:"
 
 #. Type: select
 #. Description
 #: ../dsf-helper/web-variables.templates:2003
 msgid "Please choose the default language for web pages."
-msgstr "Ange standardspr�ket f�r webbsidorna."
+msgstr "Vyberte prosím výchozí jazyk pro webové stránky."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/web-variables.templates:3001
 msgid "Default theme:"
-msgstr "Standardtema:"
+msgstr "Výchozí téma:"
 
 #. Type: string
 #. Description
 #: ../dsf-helper/web-variables.templates:3001
-msgid "Please choose the default theme for web pages. This must be a valid name."
+msgid ""
+"Please choose the default theme for web pages. This must be a valid name."
 msgstr ""
-"Ange standardtemat f�r webbsidorna. Detta m�ste vara ett giltigt "
-"namn."
-
+"Vyberte prosím výchozí téma pro webové stránky. Musí to být platný název."
