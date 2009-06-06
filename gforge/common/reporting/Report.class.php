@@ -106,8 +106,14 @@ function setData($result,$column) {
 
 function setDates($result,$column) {
 	$arr =& util_result_column_to_array($result,$column);
+	if(isset($this->span) && $this->span == REPORT_TYPE_MONTHLY) {
+		$format = 'M Y';
+	} else {
+	    $format = 'M d';
+	}
+	
 	for ($i=0; $i<count($arr); $i++) {
-		$this->labels[$i] = date('M d',$arr[$i]);
+		$this->labels[$i] = date($format,$arr[$i]);
 	}
 }
 
