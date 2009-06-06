@@ -302,7 +302,7 @@ class GFUser extends Error {
 						  $ccode,
 						  $theme_id)) ;
 		if (!$result) {
-			$this->setError(_('Insert Failed') .db_error().$sql);
+			$this->setError(_('Insert Failed') . db_error());
 			db_rollback();
 			return false;
 		} else {
