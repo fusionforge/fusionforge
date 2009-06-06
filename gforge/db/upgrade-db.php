@@ -183,7 +183,7 @@ function run_sql_script($filename) {
 	
 	$content = preg_replace("/--(.*)/", '', $content);
 	
-	$parts = explode(';', $content);
+	$parts = explode(";\n", $content);
 	$queries = array();
 	$query_temp = '';
 	$is_function = false;
@@ -206,7 +206,7 @@ function run_sql_script($filename) {
 		} else if (in_string($q, 'copy') && in_string($q, 'from stdin')) {
 			while (!in_string($q, '\.')) {
 				$i++;
-				$q = $q.';'.$parts[$i];
+				$q = $q.";\n".$parts[$i];
 			}
 			$aux = explode('\.', $q, 2);
 			$queries[] = ltrim($aux[0]."\\.\n");
@@ -230,7 +230,7 @@ function run_sql_script($filename) {
 		if (in_string($query, 'drop table')) {
 			$aux = explode(' ', trim($query));
 			if (count($aux) == 3 || count($aux) == 4) { // PERFECT!
-				drop_table_if_exists($aux[2]);
+				drop_table_if_exists($aux[2], (count($aux) == 4) && preg_match('/CASCADE/i', trim($aux[3])));
 			} else {
 				print_r($aux);
 			}
@@ -258,6 +258,13 @@ function run_sql_script($filename) {
 			} else {
 				print_r($aux);
 			}
+		} else if (in_string($query, 'drop index')) {
+			$aux = explode(' ', trim($query));
+			if (count($aux) == 3 || count($aux) == 4) { // PERFECT!
+				drop_index_if_exists($aux[2]);
+			} else {
+				print_r($aux);
+			}
 		} else {
 			$res = db_query($query);
 			if (!$res) {
@@ -266,7 +273,7 @@ function run_sql_script($filename) {
 				show("Continue executing ([Y]es/[N]o)?\n");
 				// Read the input
 				$answer = strtolower(trim(fgets(STDIN)));
-				if ($answer != 'y' && $anser != 'yes') {
+				if ($answer != 'y' && $answer != 'yes') {
 					//db_rollback();
 					return false;
 				} else {
@@ -376,19 +383,28 @@ function drop_seq_if_exists($name) {
 	return $result;
 }
 
-function drop_table_if_exists($name) {
-	$result = drop_if_exists($name, 'DROP TABLE', 'r');
+function drop_index_if_exists($name) {
+	$result = drop_if_exists($name, 'DROP INDEX', 'i');
 	return $result;
 }
 
-function drop_if_exists($name, $command, $kind) {
+function drop_table_if_exists($name, $cascade) {
+	if($cascade)  {
+		$result = drop_if_exists($name, 'DROP TABLE', 'r', 'CASCADE');
+	} else {
+		$result = drop_if_exists($name, 'DROP TABLE', 'r');
+	}
+	return $result;
+}
+
+function drop_if_exists($name, $command, $kind, $commandSuffix = '') {
 	$res = db_query("SELECT COUNT(*) AS exists FROM pg_class WHERE relname='$name' AND relkind='$kind'");
 	if (!$res) {
 		show("ERROR:".db_error()."\n");
 		return false;
 	}
 	if (db_result($res, 0, 'exists') != '0') {
-		$res = db_query("$command $name");
+		$res = db_query("$command $name $commandSuffix");
 		if (!$res) {
 			show("ERROR:".db_error()."\n");
 			//db_rollback();

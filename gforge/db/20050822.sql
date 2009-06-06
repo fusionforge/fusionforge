@@ -82,21 +82,17 @@ CREATE TABLE forum_attachmenttype (
 -- Data for Name: forum_attachmenttype; Type: TABLE DATA; Schema: public; Owner: gforge
 --
 
---COPY forum_attachmenttype (extension, mimetype, size, width, height, enabled, display) FROM stdin;
---compat for older version
-COPY forum_attachmenttype FROM stdin;
-gif	a:1:{i:0;s:23:"Content-type: image/gif";}	20000	620	280	1	0
-jpeg	a:1:{i:0;s:24:"Content-type: image/jpeg";}	20000	620	280	1	0
-jpg	a:1:{i:0;s:24:"Content-type: image/jpeg";}	100000	0	0	1	0
-jpe	a:1:{i:0;s:24:"Content-type: image/jpeg";}	20000	620	280	1	0
-txt	a:1:{i:0;s:24:"Content-type: plain/text";}	20000	0	0	1	2
-png	a:1:{i:0;s:23:"Content-type: image/png";}	20000	620	280	1	0
-doc	a:2:{i:0;s:20:"Accept-ranges: bytes";i:1;s:32:"Content-type: application/msword";}	20000	0	0	1	0
-pdf	a:1:{i:0;s:29:"Content-type: application/pdf";}	20000	0	0	1	0
-bmp	a:1:{i:0;s:26:"Content-type: image/bitmap";}	20000	620	280	1	0
-psd	a:1:{i:0;s:29:"Content-type: unknown/unknown";}	20000	0	0	1	0
-zip	a:1:{i:0;s:29:"Content-type: application/zip";}	100000	0	0	1	0
-\.
+INSERT INTO forum_attachmenttype VALUES ('gif', 'a:1:{i:0;s:23:"Content-type: image/gif";}', 20000, 620, 280, 1, 0);
+INSERT INTO forum_attachmenttype VALUES ('jpeg', 'a:1:{i:0;s:24:"Content-type: image/jpeg";}', 20000, 620, 280, 1, 0);
+INSERT INTO forum_attachmenttype VALUES ('jpg', 'a:1:{i:0;s:24:"Content-type: image/jpeg";}', 100000, 0, 0, 1, 0);
+INSERT INTO forum_attachmenttype VALUES ('jpe', 'a:1:{i:0;s:24:"Content-type: image/jpeg";}', 20000, 620, 280, 1, 0);
+INSERT INTO forum_attachmenttype VALUES ('png', 'a:1:{i:0;s:23:"Content-type: image/png";}', 20000, 620, 280, 1, 0);
+INSERT INTO forum_attachmenttype VALUES ('txt', 'a:1:{i:0;s:24:"Content-type: plain/text";}', 20000, 0, 0, 1, 2);
+INSERT INTO forum_attachmenttype VALUES ('doc', 'a:2:{i:0;s:20:"Accept-ranges: bytes";i:1;s:32:"Content-type: application/msword";}', 20000, 0, 0, 1, 0);
+INSERT INTO forum_attachmenttype VALUES ('pdf', 'a:1:{i:0;s:29:"Content-type: application/pdf";}', 20000, 0, 0, 1, 0);
+INSERT INTO forum_attachmenttype VALUES ('bmp', 'a:1:{i:0;s:26:"Content-type: image/bitmap";}', 20000, 620, 280, 1, 0);
+INSERT INTO forum_attachmenttype VALUES ('psd', 'a:1:{i:0;s:29:"Content-type: unknown/unknown";}', 20000, 0, 0, 1, 0);
+INSERT INTO forum_attachmenttype VALUES ('zip', 'a:1:{i:0;s:29:"Content-type: application/zip";}', 100000, 0, 0, 1, 0);
 
 
 --
