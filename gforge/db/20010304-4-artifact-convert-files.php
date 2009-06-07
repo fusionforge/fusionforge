@@ -1,6 +1,7 @@
 #! /usr/bin/php5
 <?php
 
+require_once dirname(__FILE__).'/../www/env.inc.php';
 require $gfwww.'include/squal_pre.php';
 
 db_begin();

@@ -7,6 +7,7 @@
  * Copyright 2002 (c) GFORGE LLC
  */
 
+require_once dirname(__FILE__).'/../www/env.inc.php';
 require $gfwww.'include/squal_pre.php';
 
 // drop and recreate page cache
