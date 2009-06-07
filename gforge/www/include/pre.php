@@ -104,7 +104,7 @@ setup_plugin_manager () ;
 //determine if they're logged in
 session_set();
 
-
+plugin_hook('after_session_set');
 
 //mandatory login
 if (!session_loggedin() && $sys_force_login == 1 ) {
