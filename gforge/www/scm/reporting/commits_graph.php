@@ -100,7 +100,6 @@ $graph->subtitle->Set($sys_name);
 report_pie_arr(util_result_column_to_array($res,0), util_result_column_to_array($res,1), 0);
 
 $p1  = new PiePlot3D($pie_vals);
-$p1->ExplodeSlice (0);
 $p1->SetLegends($pie_labels);
 $graph->Add( $p1);
 
