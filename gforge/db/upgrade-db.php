@@ -401,6 +401,7 @@ function drop_if_exists($name, $command, $kind, $commandSuffix = '') {
 	// Strip "name" => name
 	if (preg_match('/^"(.*)"$/', $name, $match)) {
 		$name = $match[1];
+	}
 	$res = db_query("SELECT COUNT(*) AS exists FROM pg_class WHERE relname='$name' AND relkind='$kind'");
 	if (!$res) {
 		show("ERROR:".db_error()."\n");
