@@ -15,6 +15,7 @@
  * store in DB the commit info attached to the tracker or task.
  *
  */
+require_once dirname(__FILE__)."/../../env.inc.php";
 require_once $gfwww.'include/squal_pre.php';
 require_once $gfconfig.'plugins/cvstracker/config.php';
 
@@ -25,7 +26,7 @@ require_once $gfconfig.'plugins/cvstracker/config.php';
  */
 $Config = array();
 $SubmittedVars = array();
-$SubmittedVars = unserialize(str_replace('\"','"',$_POST['data']));
+$SubmittedVars = unserialize(str_replace('\\\\', '\\', str_replace('\"','"',$_POST['data'])));
 
 $i = 0;
 foreach ($SubmittedVars as $SubmittedVar) {
