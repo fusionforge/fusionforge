@@ -360,7 +360,7 @@ class GFUser extends Error {
 						  $ccode,
 						  $theme_id)) ;
 		if (!$result) {
-			$this->setError(_('Insert Failed') .db_error());
+			$this->setError(_('Insert Failed') . db_error());
 			db_rollback();
 			return false;
 		} else {
@@ -1457,7 +1457,7 @@ Enjoy the site.
 //
 //	An optimization in session_getdata lets us pre-fetch this in most cases.....
 //
-		if (!$this->data_array['dirname']) {
+		if (!isset($this->data_array['dirname']) || !$this->data_array['dirname']) {
 			$res = db_query_params ('SELECT dirname FROM themes WHERE theme_id=$1',
 						array ($this->getThemeID())) ;
 			$this->theme=db_result($res,0,'dirname');
