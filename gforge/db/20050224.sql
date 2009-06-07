@@ -92,6 +92,7 @@ CREATE INDEX forummonitoredforums_useridforumid ON forum_monitored_forums(user_i
 -- TODO DROP unnecessary sequence/id
 --
 ALTER TABLE forum_perm DROP CONSTRAINT forum_perm_id_key;
+DROP INDEX forum_perm_id_key;
 CREATE INDEX forumperm_useridgroupforumid ON forum_perm(user_id,group_forum_id);
 ALTER TABLE forum_perm ADD CONSTRAINT forum_perm_pkey PRIMARY KEY (group_forum_id, user_id);
 
@@ -169,6 +170,7 @@ CREATE INDEX projectmsgs_projtaskidpostdate ON project_messages(project_task_id,
 -- TODO DROP unnecessary sequence/id
 --
 ALTER TABLE project_perm DROP CONSTRAINT project_perm_id_key;
+DROP INDEX project_perm_id_key;
 DROP INDEX projectperm_groupprojiduserid;
 ALTER TABLE project_perm ADD CONSTRAINT project_perm_id_key PRIMARY KEY(group_project_id,user_id);
 CREATE INDEX projectperm_useridgroupprojid ON project_perm(user_id,group_project_id);
