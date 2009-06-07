@@ -7,23 +7,44 @@
 
 @DPATCH@
 diff -urNad gforge~/plugins/cvstracker/bin/post.php gforge/plugins/cvstracker/bin/post.php
---- gforge~/plugins/cvstracker/bin/post.php	2007-09-03 18:08:13.000000000 +0200
-+++ gforge/plugins/cvstracker/bin/post.php	2007-09-25 09:34:07.000000000 +0200
-@@ -33,7 +33,7 @@
-  
- //require ('local.inc'); we don´t need this file. also, in some installations this file cannot be accessed by the caller (perms problem)
- require $gfconfig.'plugins/cvstracker/config.php';
--require $gfplugins.'cvstracker/common/Snoopy.class.php';
-+require '/usr/share/php/libphp-snoopy/Snoopy.class.php';
+--- gforge~/plugins/cvstracker/bin/post.php	2009-06-07 14:20:47.000000000 +0200
++++ gforge/plugins/cvstracker/bin/post.php	2009-06-07 17:24:09.000000000 +0200
+@@ -34,7 +34,7 @@
+ require dirname(__FILE__).'/../../env.inc.php';
+ require_once ($gfconfig.'plugins/cvstracker/config.php');
+ require_once ($gfcommon.'common/include/utils.php');
+-require_once ($gfplugins.'cvstracker/common/Snoopy.class.php');
++require_once ('/usr/share/php/libphp-snoopy/Snoopy.class.php');
  
  
  if ($cvs_binary_version != "1.12" &&
+diff -urNad gforge~/plugins/cvstracker/bin/post.php.rej gforge/plugins/cvstracker/bin/post.php.rej
+--- gforge~/plugins/cvstracker/bin/post.php.rej	1970-01-01 01:00:00.000000000 +0100
++++ gforge/plugins/cvstracker/bin/post.php.rej	2009-06-07 17:22:33.000000000 +0200
+@@ -0,0 +1,17 @@
++***************
++*** 33,39 ****
++   
++  //require ('local.inc'); we don´t need this file. also, in some installations this file cannot be accessed by the caller (perms problem)
++  require $gfconfig.'plugins/cvstracker/config.php';
++- require $gfplugins.'cvstracker/common/Snoopy.class.php';
++  
++  
++  if ($cvs_binary_version != "1.12" &&
++--- 33,39 ----
++   
++  //require ('local.inc'); we don´t need this file. also, in some installations this file cannot be accessed by the caller (perms problem)
++  require $gfconfig.'plugins/cvstracker/config.php';
+++ require '/usr/share/php/libphp-snoopy/Snoopy.class.php';
++  
++  
++  if ($cvs_binary_version != "1.12" &&
 diff -urNad gforge~/plugins/scmcvs/bin/aclcheck.php gforge/plugins/scmcvs/bin/aclcheck.php
---- gforge~/plugins/scmcvs/bin/aclcheck.php	2007-09-03 18:08:13.000000000 +0200
-+++ gforge/plugins/scmcvs/bin/aclcheck.php	2007-09-25 09:33:25.000000000 +0200
+--- gforge~/plugins/scmcvs/bin/aclcheck.php	2009-06-02 20:33:08.000000000 +0200
++++ gforge/plugins/scmcvs/bin/aclcheck.php	2009-06-07 17:22:33.000000000 +0200
 @@ -30,7 +30,7 @@
- }
- 
+ require_once dirname(__FILE__).'/../../env.inc.php';
+ require_once $gfwww.'include/squal_pre.php';
  require_once $gfconfig.'plugins/scmcvs/config.php';
 -require $gfplugins.'scmcvs/common/Snoopy.class.php';
 +require '/usr/share/php/libphp-snoopy/Snoopy.class.php';
@@ -31,8 +52,8 @@ diff -urNad gforge~/plugins/scmcvs/bin/aclcheck.php gforge/plugins/scmcvs/bin/ac
  // Input cleansing
  $env_cvsroot = (string) $_ENV['CVSROOT'];
 diff -urNad gforge~/plugins/svntracker/bin/post.php gforge/plugins/svntracker/bin/post.php
---- gforge~/plugins/svntracker/bin/post.php	2007-09-03 18:08:13.000000000 +0200
-+++ gforge/plugins/svntracker/bin/post.php	2007-09-25 09:33:46.000000000 +0200
+--- gforge~/plugins/svntracker/bin/post.php	2009-05-15 18:55:18.000000000 +0200
++++ gforge/plugins/svntracker/bin/post.php	2009-06-07 17:22:33.000000000 +0200
 @@ -32,7 +32,7 @@
  
  
