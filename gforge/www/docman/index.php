@@ -114,8 +114,8 @@ if (!$d_arr || count($d_arr) < 1) {
 			print "\n\n<li><strong>". $d_arr[$i]->getDocGroupName() ."</strong></li><li style=\"list-style: none\"><ul>";
 			$last_group=$d_arr[$i]->getDocGroupID();
 		}
-		print "\n<li><a href=\"".(( $d_arr[$i]->isURL() ) ? $d_arr[$i]->getFileName() : "view.php/$group_id/".$d_arr[$i]->getID()."/".$d_arr[$i]->getFileName() )."\">".
-			$d_arr[$i]->getName()." [ ".$d_arr[$i]->getFileName()." ]</a>".
+		print "\n<li><a href=\"".(( $d_arr[$i]->isURL() ) ? $d_arr[$i]->getFileName() : "view.php/$group_id/".$d_arr[$i]->getID()."/".urlencode($d_arr[$i]->getFileName()) )."\">".
+			addslashes($d_arr[$i]->getName())." [ ".addslashes($d_arr[$i]->getFileName())." ]</a>".
 			"\n<br /><em>".$Language->getText('docman','description').":</em> ".$d_arr[$i]->getDescription()."</li>\n";
 	}
 	print "\n</ul></li></ul>\n";

@@ -204,14 +204,14 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 					if ($from_admin) {
 						$link = "index.php?editdoc=1&amp;docid=".$docs[$j]->getID()."&amp;group_id=".$docs[$j]->Group->getID();
 					} else {
-						$link = (( $docs[$j]->isURL() ) ? $docs[$j]->getFileName() : "view.php/".$docs[$j]->Group->getID()."/".$docs[$j]->getID()."/".$docs[$j]->getFileName() );
+						$link = (( $docs[$j]->isURL() ) ? $docs[$j]->getFileName() : "view.php/".$docs[$j]->Group->getID()."/".$docs[$j]->getID()."/".urlencode($docs[$j]->getFileName()));
 					}
 				
 					echo "<li>".
 							html_image('ic/docman16b.png',"20","20",array("border"=>"0")).
 							" ".
 							"<a href=\"".$link."\">".
-							$docs[$j]->getName().
+						addslashes($docs[$j]->getName())
 							"</a>";
 				}
 				echo "</ul>";
