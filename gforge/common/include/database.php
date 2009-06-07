@@ -129,6 +129,37 @@ function db_query($qstring,$limit='-1',$offset=0,$dbserver=SYS_DB_PRIMARY) {
 	return $res;
 }
 
+/**
+ *  db_query_params() - Query the database, with parameters
+ *
+ *  @param text SQL statement.
+ *  @param array parameters
+ *  @param int How many rows do you want returned.
+ *  @param int Of matching rows, return only rows starting here.
+ *	@param int ability to spread load to multiple db servers.
+ *	@return int result set handle.
+ */
+function db_query_params($qstring,$params,$limit='-1',$offset=0,$dbserver=SYS_DB_PRIMARY) {
+	global $QUERY_COUNT;
+	$QUERY_COUNT++;
+
+	if (get_magic_quotes_gpc() == true) {
+		$params = array_map('stripslashes',$params);
+	}
+	if (!$limit || !is_numeric($limit) || $limit < 0) {
+		$limit=0;
+	}
+	if ($limit > 0) {
+		if (!$offset || !is_numeric($offset) || $offset < 0) {
+			$offset=0;
+		}
+		$qstring=$qstring." LIMIT $limit OFFSET $offset";
+	}
+
+	$res = @pg_query_params($dbserver,$qstring,$params);
+	return $res;
+}
+
 /* Current transaction level, private variable */
 /* FIXME: Having scalar variable for transaction level is
    no longer correct after multiple database (dbservers) support
