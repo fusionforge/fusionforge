@@ -16,6 +16,7 @@
  *
  */
 
+require_once dirname(__FILE__)."/../../env.inc.php";
 require_once $gfwww.'include/squal_pre.php';
 require_once $gfconfig.'plugins/svntracker/config.php';
 
@@ -30,10 +31,11 @@ if ($svn_tracker_debug) {
  */
 $Config = array();
 $SubmittedVars = array();
-$SubmittedVars = unserialize(str_replace('\"','"',$_POST['data']));
+$SubmittedVars = unserialize(str_replace('\\\\', '\\', str_replace('\"','"',$_POST['data'])));
 
 $i = 0;
 foreach ($SubmittedVars as $SubmittedVar) {
+	$Configs[$i] = array();
 	$Configs[$i]['UserName']        = $SubmittedVar['UserName'];
 	//$Configs[$i]['UserName']        = 'def_admin';   use this to make tests, just replace with a gforge user
 	$Configs[$i]['Repository']      = $SubmittedVar['Repository'];
@@ -127,7 +129,7 @@ function parseConfig(&$Config)
  */
 function addArtifactLog($Config, $GroupId, $Num)
 {
-	global $file;
+	global $file, $svn_tracker_debug;
 	$return = array();
 	$Query = "SELECT * from artifact,artifact_group_list WHERE ".
 		"artifact.group_artifact_id=artifact_group_list.group_artifact_id ".
@@ -140,7 +142,7 @@ function addArtifactLog($Config, $GroupId, $Num)
 		fwrite($file,"rows : " . $Rows ."\n");
 	}
 	if ($Rows == 0) {
-		$return['Error'] .= "Artifact ".$Num." Not Found.";
+		$return['Error'] = "Artifact ".$Num." Not Found.";
 	}
 
 	if ($Rows == 1) {
@@ -238,7 +240,7 @@ function addTaskLog($Config, $GroupId, $Num)
 }
 
 foreach ($Configs as $Config) {
-	$Result = parseConfig(&$Config);
+	$Result = parseConfig($Config);
 	if ($Result['check'] == false) {
 		exit_error('Check_error', $Result['error']);
 	}

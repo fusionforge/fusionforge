@@ -31,8 +31,10 @@
  */
  
 //require ('local.inc'); we don't need this file. also, in some installations this file cannot be accessed by the caller (perms problem)
-require $gfconfig.'plugins/cvstracker/config.php';
-require $gfplugins.'cvstracker/common/Snoopy.class.php';
+require dirname(__FILE__).'/../../env.inc.php';
+require_once ($gfconfig.'plugins/cvstracker/config.php');
+require_once ($gfcommon.'common/include/utils.php');
+require_once ($gfplugins.'cvstracker/common/Snoopy.class.php');
 
 
 if ($cvs_binary_version != "1.12" &&
@@ -103,6 +105,7 @@ function getLog($Input)
 	$Lines = explode("\n", $Input);
 	$ii = count($Lines);
 	$Logging=false;
+	$Log = "";
 	for ( $i=0; $i < $ii ; $i++ )
 	{
 		if ($Logging==true)
@@ -122,7 +125,7 @@ if($cvs_tracker_debug) {
 }
 
 if( $cvs_binary_version == "1.11" ) {
-	if ($argc != 3 ) {
+	if ($argc <= 3 ) {
 		usage ( $argv );
 	}
 	

@@ -167,9 +167,11 @@ function process_day($day_begin, $day_end){
 			if ( ($time_parsed > $day_begin) && ($time_parsed < $day_end) ) {
 				if ( $type == 'M' ) {
 					$cvs_commit++;
+					if(!isset($usr_commit[$user])) $usr_commit[$user] = 0;
 					$usr_commit[$user]++;
 				} elseif ( $type == 'A' ) {
 					$cvs_add++;
+					if(!isset($usr_add[$user])) $usr_add[$user] = 0;
 					$usr_add[$user]++;
 				} elseif ( $type == 'O' || $type == 'E' ) {
 					$cvs_co++;
@@ -253,7 +255,7 @@ if (count($groups) < 1) {
 	exit;
 }
 
-if ( $ARGV[1] && $ARGV[2] && $ARGV[3] ) {
+if ( isset($ARGV[1]) && isset($ARGV[2]) && isset($ARGV[3]) ) {
 	
 	$day_begin = gmmktime( 0, 0, 0, $ARGV[2], $ARGV[3], $ARGV[1] );
 	//	$day_begin = timegm( 0, 0, 0, $ARGV[2], $ARGV[1] - 1, $ARGV[0] - 1900 );
@@ -265,7 +267,7 @@ if ( $ARGV[1] && $ARGV[2] && $ARGV[3] ) {
 	} else {
 		db_commit();
 	}
-} else if($ARGV[1]=='all' && !$ARGV[2] && !$ARGV[3]) { 
+} else if(isset($ARGV) && $ARGV[1]=='all' && !isset($ARGV[2]) && !isset($ARGV[3])) { 
   
 	// Heavy (rarely used) operation, allow for 8hrs
 	ini_set('max_execution_time', '30000');
@@ -297,12 +299,6 @@ if ( $ARGV[1] && $ARGV[2] && $ARGV[3] ) {
 	} else {
 		db_commit();
 	}
-}
-
-if ( $rollback ) {
-	db_rollback();
-} else {
-	db_commit();
 }
 
 cron_entry(14,$err);

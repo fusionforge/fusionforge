@@ -118,7 +118,7 @@ class cvstrackerPlugin extends Plugin {
 	*
 	*/
 	function getFileLink($GroupName, $FileName, $LatestRevision) {
-		return url_make_link ('/scm/viewvc.php/'.$FileName .
+		return util_make_link ('/scm/viewvc.php/'.$FileName .
 				      '?root='.$GroupName.'&amp;view=log',
 				      $FileName);
 	}
@@ -134,7 +134,7 @@ class cvstrackerPlugin extends Plugin {
 	*
 	*/
 	function getActualVersionLink($GroupName, $FileName, $Version) {
-		return url_make_link ('/scm/viewvc.php/'.$FileName .
+		return util_make_link ('/scm/viewvc.php/'.$FileName .
 				      '?root='.$GroupName.'&pathrev='.$Version .
 				      '&amp;view=markup',
 				      $Version);
@@ -152,7 +152,7 @@ class cvstrackerPlugin extends Plugin {
 	*
 	*/
 	function getDiffLink($GroupName, $FileName, $PrevVersion, $ActualVersion) {
-		return url_make_link ('/scm/viewvc.php/'.$FileName .
+		return util_make_link ('/scm/viewvc.php/'.$FileName .
 				      '?root='.$GroupName.'&r1='.$PrevVersion .
 				      '&r2='.$ActualVersion,
 				      _('Diff To').' '.$PrevVersion);
@@ -165,7 +165,7 @@ class cvstrackerPlugin extends Plugin {
 	* @param   string  $path The filename of loginfo
 	*
 	*/
-	function addCvsTrackerToFile($path) {
+	function addCvsTrackerToFile($group, $path) {
 		global $sys_plugins_path, $sys_users_host, $cvs_binary_version;
 		
 		$FOut = fopen($path, "a");
@@ -179,7 +179,7 @@ class cvstrackerPlugin extends Plugin {
 			if ( $cvs_binary_version == "1.11") {
 				$Line = "ALL ( php -q -d include_path=".ini_get('include_path').
 					" ".$sys_plugins_path."/cvstracker/bin/post.php".
-					" %r %{sVv} )\n";
+					" ".$group->getUnixName()." %{sVv} )\n";
 			}
 			fwrite($FOut,$Line);
 			fwrite($FOut, "# END added by gforge-plugin-cvstracker\n");
@@ -200,7 +200,7 @@ class cvstrackerPlugin extends Plugin {
 		if ( $cvs_binary_version == "1.11" ) {
 				$array[] = "ALL ( php -q -d include_path=".ini_get('include_path').
 					" ".$sys_plugins_path."/cvstracker/bin/post.php".
-					" %r %{sVv} )\n";
+					" ".$group->getUnixName()." %{sVv} )\n";
 		}else { //it's version 1.12
 			$array[] = "ALL ( php -q -d include_path=".ini_get('include_path').
 			" ".$sys_plugins_path."/cvstracker/bin/post.php".
@@ -320,13 +320,14 @@ class cvstrackerPlugin extends Plugin {
 				if($LineFound==FALSE) {
 					$newfile=getCvsFile($params["file_name"],
 						 "CVSROOT/loginfo");
-					$this->addCvsTrackerToFile($newfile);
+					$this->addCvsTrackerToFile($group, $newfile);
 					$this->putCvsFile($params["file_name"],
 						$newfile);
 				}
 			}
 		} elseif ($hookname == "get_cvs_loginfo_lines") {
-			$GLOBALS['loginfo_lines']=$this->getCvsTrackerLogInfoLines();		
+			$group = &group_get_object($group_id);
+			$GLOBALS['loginfo_lines']=$this->getCvsTrackerLogInfoLines($group);		
 		}
 	}
 }
