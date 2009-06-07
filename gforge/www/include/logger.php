@@ -113,11 +113,11 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 
 $sql =	"INSERT INTO activity_log "
 	. "(day,hour,group_id,browser,ver,platform,time,page,type) "
-	. "VALUES (" . date('Ymd', mktime()) . ",'" . date('H', mktime())
-	. "','$log_group','" . browser_get_agent() . "','" . browser_get_version() 
-	. "','" . browser_get_platform() . "','" . time() . "','".getStringFromServer('PHP_SELF')."','0');";
+	. "VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);";
 
-$res_logger = db_query ( $sql );
+$res_logger = db_query_params ($sql, array(date('Ymd'), date('H'),
+	$log_group, browser_get_agent(), browser_get_version(), browser_get_platform(),
+	time(), getStringFromServer('PHP_SELF'), '0'));
 
 //
 //	temp hack
