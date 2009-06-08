@@ -708,7 +708,7 @@ class ForumMessage extends Error {
 			
 			$subject="[" . $this->Forum->getUnixName() ."][".$this->getID()."] ".util_unconvert_htmlspecialchars($this->getSubject());
 
-			util_send_message($dest_email,$subject,$body,"noreply@".$GLOBALS['sys_default_domain'],'Forum',$extra_headers);
+			util_send_message($dest_email,$subject,$body,"noreply@".$GLOBALS['sys_default_domain'],'','Forum',$extra_headers);
 		}
 
 		// Switch back to the user language settings
