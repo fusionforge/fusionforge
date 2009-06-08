@@ -175,7 +175,7 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 			if ($from_admin && $stateid) {	// if we're sorting by the state, pass the state as a variable
 				echo "&amp;selected_stateid=".$stateid;
 			}
-			echo "'>".$doc_group->getName()."</a>";
+			echo "'>".htmlspecialchars($doc_group->getName())."</a>";
 				
 			// display link to add a document to the current group
 			echo " &nbsp;&nbsp;&nbsp;&nbsp;<a href='".($from_admin ? "../" : "")."new.php?group_id=".$doc_group->Group->getID()."&amp;selected_doc_group=".$doc_group->getID()."'>";
@@ -211,7 +211,7 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 							html_image('ic/docman16b.png',"20","20",array("border"=>"0")).
 							" ".
 							"<a href=\"".$link."\">".
-						addslashes($docs[$j]->getName()).
+						htmlspeciarchars($docs[$j]->getName()).
 							"</a>";
 				}
 				echo "</ul>";
