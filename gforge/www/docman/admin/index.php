@@ -167,7 +167,7 @@ if ($editdoc && $docid) {
 		<td>
 		<strong><?php echo $Language->getText('docman_new','file')?></strong><?php echo utils_requiredField(); ?><br />
 		<?php if ($d->isURL()) {
-			echo '<a href="'.urlencode($d->getFileName()).'">[View File URL]</a>';
+			echo '<a href="'.addslashes($d->getFileName()).'">[View File URL]</a>';
 		} else { ?>
 		<a target="_blank" href="../view.php/<?php echo $group_id.'/'.$d->getID().'/'.urlencode($d->getFileName()) ?>"><?php echo $d->getName(); ?></a>
 		<?php } ?>
