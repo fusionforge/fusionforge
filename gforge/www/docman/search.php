@@ -193,7 +193,7 @@ if (getStringFromPost('cmd') == "search")
 		$vtp->SetVar($handle,"RESULT.SEARCHPATH",$s);
 		$vtp->SetVar($handle,"RESULT.GROUP_ID",$_GET["group_id"]);
 		$vtp->SetVar($handle,"RESULT.DOC_ID",$item["docid"]);
-		$vtp->SetVar($handle,"RESULT.FILE_NAME",$item["filename"]);
+		$vtp->SetVar($handle,"RESULT.FILE_NAME",urlencode($item["filename"]));
 		if ($is_editor) $vtp->SetVar($handle,"RESULT.STATE",$item["statename"]);
 		$vtp->CloseSession($handle,"RESULT");
 	}
