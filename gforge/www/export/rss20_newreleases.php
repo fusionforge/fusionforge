@@ -7,7 +7,7 @@ require_once '../env.inc.php';
 require_once $gfwww.'include/pre.php';
 require_once $gfwww.'export/rss_utils.inc';
 
-header("Content-Type: text/xml");
+header("Content-Type: text/xml; charset=utf-8");
 print '<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
 ';
@@ -45,17 +45,10 @@ print "  <title>".$GLOBALS['sys_name']." Project$title Releases</title>\n";
 print "  <link>http://".$GLOBALS['sys_default_domain']."$link</link>\n";
 print "  <description>".$GLOBALS['sys_name']." Project Releases$description</description>\n";
 print "  <language>en-us</language>\n";
-print "  <copyright>Copyright 2000-".date("Y")." ".$GLOBALS['sys_name']." OSI</copyright>\n";
+print "  <copyright>Copyright ".date("Y")." ".$GLOBALS['sys_name']."</copyright>\n";
 print "  <webMaster>$webmaster</webMaster>\n";
-print "  <lastBuildDate>".gmdate('D, d M Y G:i:s',time())." GMT</lastBuildDate>\n";
+print "  <lastBuildDate>".rss_date(time())."</lastBuildDate>\n";
 print "  <docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
-print "  <image>\n";
-print "    <url>http://".$GLOBALS['sys_default_domain']."/images/bflogo-88.png</url>\n";
-print "    <title>".$GLOBALS['sys_name']." Developer</title>\n";
-print "    <link>http://".$GLOBALS['sys_default_domain']."/</link>\n";
-print "    <width>124</width>\n";
-print "    <heigth>32</heigth>\n";
-print "  </image>\n";
 
 $res = db_query("SELECT groups.group_name AS group_name,"
 	. "frs_package.group_id AS group_id,"
@@ -94,8 +87,8 @@ while ($row = db_fetch_array($res)) {
 		print "   <link>http://".$GLOBALS['sys_default_domain']."/project/showfiles.php?group_id=".$row['group_id']."&amp;release_id=".$row['filerelease_id']."</link>\n";
 		print "   <description>".rss_description($row['module_notes'])."</description>\n";
 		print "   <author>".$row['user_name']."@".$GLOBALS['sys_users_host']." (".$row['realname'].")</author>\n";
-		print "   <comment>http://".$GLOBALS['sys_default_domain']."/project/shownotes.php?group_id=".$row['group_id']."&amp;release_id=".$row['filerelease_id']."</comment>\n";
-		print "   <pubDate>".gmdate('D, d M Y G:i:s',$row['release_date'])." GMT</pubDate>\n";
+		print "   <comments>http://".$GLOBALS['sys_default_domain']."/project/shownotes.php?group_id=".$row['group_id']."&amp;release_id=".$row['filerelease_id']."</comments>\n";
+		print "   <pubDate>".rss_date($row['release_date'])."</pubDate>\n";
 		print "   <guid>http://".$GLOBALS['sys_default_domain']."/project/showfiles.php?group_id=".$row['group_id']."&amp;release_id=".$row['filerelease_id']."</guid>\n";
 		print "  </item>\n";
 		$outputtotal++;

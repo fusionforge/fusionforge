@@ -17,8 +17,8 @@ require_once $gfwww.'export/rss_utils.inc';
 $limit = getIntFromRequest('limit', 10);
 if ($limit > 100) $limit = 100;
 
-header("Content-Type: text/plain");
-print '<?xml version="1.0"?>
+header("Content-Type: text/xml; charset=utf-8");
+print '<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rss SYSTEM "http://my.netscape.com/publish/formats/rss-0.91.dtd">
 <rss version="0.91">
 ';

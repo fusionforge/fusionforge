@@ -20,6 +20,10 @@ function rss_setscheme() {
 	}
 }
 
+function rss_date($date) {
+	return gmdate('D, d M Y H:i:s', $date).' GMT';
+}
+
 function rss_description ($in) {
 	// if description_maxlen is defined, then truncate appropriately
 	// added for netscape rss schema compat
@@ -40,12 +44,12 @@ function rss_dump_project_result_set ($res,$title,$desription='',$callback=0) {
         if (!$desription) $desription=$title;
 	// one time output
 	print " <channel>\n";
-	print "  <copyright>Copyright 1999-2000 VA Linux Systems, Inc.</copyright>\n";
-	print "  <pubDate>".gmdate('D, d M Y g:i:s',time())." GMT</pubDate>\n";
+	print "  <copyright>Copyright ".date("Y")." ".$GLOBALS['sys_name']."</copyright>\n";
+	print "  <pubDate>".rss_date(time())."</pubDate>\n";
 	print "  <description>$desription</description>\n";
-	print "  <link>http://$GLOBALS[sys_default_domain]</link>\n";
+	print "  <link>http://".$GLOBALS['sys_default_domain']."/</link>\n";
 	print "  <title>$title</title>\n";
-	print "  <webMaster>webmaster@$GLOBALS[sys_default_domain]</webMaster>\n";
+	print "  <webMaster>".$GLOBALS['sys_admin_email']."</webMaster>\n";
 	print "  <language>en-us</language>\n";
 
 	// item outputs

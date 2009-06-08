@@ -18,7 +18,7 @@ $group_id = getIntFromRequest('group_id');
 $limit = getIntFromRequest('limit', 10);
 if ($limit > 100) $limit = 100;
 
-header("Content-Type: text/plain");
+header("Content-Type: text/xml; charset=utf-8");
 print '<?xml version="1.0" encoding="UTF-8"?>
 
 <rdf:RDF
@@ -45,7 +45,6 @@ $sql = "SELECT forum_id,summary,post_date,details,g.group_id,g.group_name,u.real
 	$res = db_query($sql, $limit);
 
 print "\n <channel rdf:about=".'"'."http://$GLOBALS[sys_default_domain]/export/rss_sfnews.php".'"'.">\n";
-print "  <copyright>Copyright 1999-2000 VA Linux Systems, Inc.</copyright>\n";
 $grsql = "SELECT group_name from groups where group_id='.$group_id'";
 $grres = db_query($sql,$limit);
 $grrow = db_fetch_array($grres);
@@ -75,7 +74,7 @@ while ($row = db_fetch_array($res)) {
 	print "   <description>".rss_description($row['details'])."</description>\n";
 	print "   <dc:subject>".$row['group_name']."</dc:subject>\n";
 	print "   <dc:creator>".$row['realname']."</dc:creator>\n";
-	print "  <dc:date>".gmdate('D, d M Y g:i:s',$row['post_date'])." GMT</dc:date>\n";
+	print "  <dc:date>".gmdate('c', $row['post_date'])."</dc:date>\n";
 	print "  </item>\n";
 }
 // ## end output

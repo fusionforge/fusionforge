@@ -49,11 +49,11 @@ if ($group_id) {
 	if ($rowwm = db_fetch_array($reswm)) {
 		$webmaster = $rowwm['user_name']."@".$GLOBALS['sys_users_host']." (".$rowwm['realname'].")";
 	} else {
-		$webmaster = "admin@".$GLOBALS['sys_default_domain'];
+		$webmaster = $GLOBALS['sys_admin_email'];
 	}
 
 	// ## one time output
-	header("Content-Type: text/xml");
+	header("Content-Type: text/xml; charset=utf-8");
 	print '<?xml version="1.0" encoding="UTF-8"?>
        <rss version="2.0">
        ';
@@ -62,21 +62,11 @@ if ($group_id) {
 	print "  <link>$url/activity/$link</link>\n";
 	print "  <description>".$GLOBALS['sys_name']." Project Activity$description</description>\n";
 	print "  <language>en-us</language>\n";
-	print "  <copyright>Copyright 2000-".date("Y")." ".$GLOBALS['sys_name']." OSI</copyright>\n";
+	print "  <copyright>Copyright ".date("Y")." ".$GLOBALS['sys_name']."</copyright>\n";
 	print "  <webMaster>$webmaster</webMaster>\n";
-	print "  <lastBuildDate>".gmdate('D, d M Y G:i:s',time())." GMT</lastBuildDate>\n";
+	print "  <lastBuildDate>".rss_date(time())."</lastBuildDate>\n";
 	print "  <docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
 	print "  <generator>".$GLOBALS['sys_name']." RSS generator</generator>\n";
-
-	if (file_exists('../images/bflogo-88.png')) {
-		print "  <image>\n";
-		print "    <url>$url/images/bflogo-88.png</url>\n";
-		print "    <title>".$GLOBALS['sys_name']."</title>\n";
-		print "    <link>$url/</link>\n";
-		print "    <width>124</width>\n";
-		print "    <heigth>32</heigth>\n";
-		print "  </image>\n";
-	}
 
 	$sql="SELECT * FROM activity_vw WHERE activity_date BETWEEN '".(time()-(30*86400))."' AND '".time()."'
 	AND group_id='$group_id' ORDER BY activity_date DESC";
@@ -90,44 +80,44 @@ if ($group_id) {
 			case 'commit': {
 				print "   <title>".htmlspecialchars('Commit for Tracker Item [#'.$arr['subref_id'].'] '.$arr['description'])."</title>\n";
 				print "   <link>$url/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</link>\n";
-				print "   <comment>$url/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</comment>\n";
+				print "   <comments>$url/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</comments>\n";
 				break;
 			}
 			case 'trackeropen': {
 				print "   <title>".htmlspecialchars('Tracker Item [#'.$arr['subref_id'].' '.$arr['description'].'] Opened')."</title>\n";
 				print "   <link>$url/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</link>\n";
-				print "   <comment>$url/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</comment>\n";
+				print "   <comments>$url/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</comments>\n";
 				break;
 			}
 			case 'trackerclose': {
 				print "   <title>".htmlspecialchars('Tracker Item [#'.$arr['subref_id'].' '.$arr['description'].'] Closed')."</title>\n";
 				print "   <link>$url/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</link>\n";
-				print "   <comment>$url/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</comment>\n";
+				print "   <comments>$url/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</comments>\n";
 				break;
 			}
 			case 'frsrelease': {
 				print "   <title>".htmlspecialchars('FRS Release [#'.$arr['description'].']')."</title>\n";
 				print "   <link>$url/frs/?release_id=".$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</link>\n";
-				print "   <comment>$url/frs/?release_id=".$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</comment>\n";
+				print "   <comments>$url/frs/?release_id=".$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</comments>\n";
 				break;
 			}
 			case 'forumpost': {
 				print "   <title>".htmlspecialchars('Forum Post [#'.$arr['subref_id'].'] '.$arr['description'])."</title>\n";
 				print "   <link>$url/forum/message.php?forum_id=".$arr['ref_id'].'&amp;msg_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</link>\n";
-				print "   <comment>$url/forum/message.php?forum_id=".$arr['ref_id'].'&amp;msg_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</comment>\n";
+				print "   <comments>$url/forum/message.php?forum_id=".$arr['ref_id'].'&amp;msg_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</comments>\n";
 				break;
 			}
 			case 'news': {
 				print "   <title>".htmlspecialchars('News Post [#'.$arr['subref_id'].'] '.$arr['description'])."</title>\n";
 				print "   <link>$url/forum/forum.php?forum_id=".$arr['subref_id']."</link>\n";
-				print "   <comment>$url/forum/forum.php?forum_id=".$arr['subref_id']."</comment>\n";
+				print "   <comments>$url/forum/forum.php?forum_id=".$arr['subref_id']."</comments>\n";
 				break;
 			}
 		}
 
 		print "   <description>".rss_description($arr['description'])."</description>\n";
 		print "   <author>".$arr['user_name']."@".$GLOBALS['sys_users_host']." (".$arr['realname'].")</author>\n";
-		print "   <pubDate>".gmdate('D, d M Y G:i:s',$arr['activity_date'])." GMT</pubDate>\n";
+		print "   <pubDate>".rss_date($arr['activity_date'])."</pubDate>\n";
 		print "  </item>\n";
 	}
 	// ## end output
