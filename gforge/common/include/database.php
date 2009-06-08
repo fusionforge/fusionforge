@@ -160,6 +160,28 @@ function db_query_params($qstring,$params,$limit='-1',$offset=0,$dbserver=SYS_DB
 	return $res;
 }
 
+// Stolen from php.net for older releases of PHP
+if( !function_exists( 'pg_query_params' ) ) {
+	
+	function pg_query_params__callback( $at ) {
+		global $pg_query_params__parameters;
+		return $pg_query_params__parameters[ $at[1]-1 ];
+	}
+	
+	function pg_query_params( $db, $query, $parameters ) {
+		
+		// Escape parameters as required & build parameters for callback function
+		global $pg_query_params__parameters;
+		foreach( $parameters as $k=>$v )
+			$parameters[$k] = ( is_int( $v ) ? $v : "'".pg_escape_string( $v )."'" );
+		$pg_query_params__parameters = $parameters;
+		
+		// Call using pg_query
+		return pg_query( $db, preg_replace_callback( '/\$([0-9]+)/', 'pg_query_params__callback', $query ) );
+		
+	}
+}
+
 /* Current transaction level, private variable */
 /* FIXME: Having scalar variable for transaction level is
    no longer correct after multiple database (dbservers) support
