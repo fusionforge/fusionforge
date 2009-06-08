@@ -211,7 +211,7 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 							html_image('ic/docman16b.png',"20","20",array("border"=>"0")).
 							" ".
 							"<a href=\"".$link."\">".
-						addslashes($docs[$j]->getName())
+						addslashes($docs[$j]->getName()).
 							"</a>";
 				}
 				echo "</ul>";
