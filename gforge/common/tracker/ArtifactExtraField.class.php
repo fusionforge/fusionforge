@@ -68,7 +68,7 @@ class ArtifactExtraField extends Error {
 		}
 		//did ArtifactType have an error?
 		if ($ArtifactType->isError()) {
-			$this->setError('ArtifactExtraField: '.$Artifact->getErrorMessage());
+			$this->setError('ArtifactExtraField: '.$ArtifactType->getErrorMessage());
 			return false;
 		}
 		$this->ArtifactType =& $ArtifactType;
