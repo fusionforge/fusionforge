@@ -115,13 +115,13 @@ class SearchQuery extends Error {
 		if(is_numeric($words) && $this->implementsSearchById()) {
 			$this->searchId = (int) $words;
 		} else {
-			$words = htmlspecialchars($words);
-			$words = strtr($words, array('%' => '', '_' => ''));
 			$words = preg_replace("/[ \t]+/", ' ', $words);
 			if(strlen($words) < 3) {
 				$this->setError(_('Error: search query too short'));
 				return;
 			}
+			$words = htmlspecialchars($words);
+			$words = strtr($words, array('%' => '\%', '_' => '\_'));
 			$this->words = array();
 			$this->phrases = array();
 			$phrase = '';
