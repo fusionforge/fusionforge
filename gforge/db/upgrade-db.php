@@ -216,7 +216,7 @@ function run_sql_script($filename) {
 		// Else, we just add it up
 		} else {
 			if (trim($q) != '') {
-				$queries[] = trim($q);
+				$queries[] = trim(preg_replace("/\s+/", ' ', str_replace("\n", ' ', $q)));
 			}
 		}
 	}
@@ -258,6 +258,7 @@ function run_sql_script($filename) {
 			} else {
 				print_r($aux);
 			}
+		// Check if it is a DROP INDEX
 		} else if (in_string($query, 'drop index')) {
 			$aux = explode(' ', trim($query));
 			if (count($aux) == 3 || count($aux) == 4) { // PERFECT!
@@ -265,6 +266,13 @@ function run_sql_script($filename) {
 			} else {
 				print_r($aux);
 			}
+		// Check if it is a DROP CONSTRAINT
+		} else if (in_string($query, 'alter table') && in_string($query, 'drop constraint')) {
+			$aux = explode(' ', trim($query));
+			$table = trim($aux[2], "\" ");
+			$constraint = trim($aux[5], "\" ");
+			
+			drop_constraint_if_exists($table, $constraint, $query);
 		} else {
 			$res = db_query($query);
 			if (!$res) {
@@ -413,6 +421,21 @@ function drop_if_exists($name, $command, $kind, $commandSuffix = '') {
 			show("ERROR:".db_error()."\n");
 			//db_rollback();
 			//exit();
+		}
+	}
+	return true;
+}
+
+function drop_constraint_if_exists($table, $constraint, $query) {
+	$res = db_query("SELECT COUNT(*) AS exists FROM information_schema.constraint_table_usage WHERE table_name='$table' AND constraint_name='$constraint'");
+	if (!$res) {
+		show("ERROR:".db_error()."\n");
+		return false;
+	}
+	if (db_result($res, 0, 'exists') != '0') {
+		$res = db_query($query);
+		if (!$res) {
+			show("ERROR:".db_error()."\n");
 		}
 	}
 	return true;
