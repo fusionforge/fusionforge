@@ -7,7 +7,7 @@ require_once '../env.inc.php';
 require_once $gfwww.'include/pre.php';
 require_once $gfwww.'export/rss_utils.inc';
 
-header("Content-Type: text/xml");
+header("Content-Type: text/xml; charset=utf-8");
 print '<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
 ';
@@ -38,24 +38,20 @@ if ($group_id) {
 	$webmaster = $GLOBALS['sys_admin_email'];
 }
 
+$rssTitle = $GLOBALS['sys_name']." Project$title News";
+$rssLink = "http://".$GLOBALS['sys_default_domain']."/news/$link";
+
 // ## one time output
 print " <channel>\n";
-print "  <title>".$GLOBALS['sys_name']." Project$title News</title>\n";
-print "  <link>http://".$GLOBALS['sys_default_domain']."/news/$link</link>\n";
+print "  <title>".$rssTitle."</title>\n";
+print "  <link>".$rssLink."</link>\n";
 print "  <description>".$GLOBALS['sys_name']." Project News$description</description>\n";
 print "  <language>en-us</language>\n";
-print "  <copyright>Copyright 2000-".date("Y")." ".$GLOBALS['sys_name']." OSI</copyright>\n";
+print "  <copyright>Copyright ".date("Y")." ".$GLOBALS['sys_name']."</copyright>\n";
 print "  <webMaster>$webmaster</webMaster>\n";
-print "  <lastBuildDate>".gmdate('D, d M Y G:i:s',time())." GMT</lastBuildDate>\n";
+print "  <lastBuildDate>".rss_date(time())."</lastBuildDate>\n";
 print "  <docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
 print "  <generator>".$GLOBALS['sys_name']." RSS generator</generator>\n";
-print "  <image>\n";
-print "    <url>http://".$GLOBALS['sys_default_domain']."/images/bflogo-88.png</url>\n";
-print "    <title>".$GLOBALS['sys_name']." Developer</title>\n";
-print "    <link>http://".$GLOBALS['sys_default_domain']."/</link>\n";
-print "    <width>124</width>\n";
-print "    <heigth>32</heigth>\n";
-print "  </image>\n";
 
 $sql = "SELECT forum_id,summary,post_date,details,g.group_id,g.group_name,u.realname,u.user_name
         FROM news_bytes, groups g,users u
@@ -81,7 +77,7 @@ while ($row = db_fetch_array($res)) {
 	}
 	print "   <description>".rss_description($row['details'])."</description>\n";
 	print "   <author>".$row['user_name']."@".$GLOBALS['sys_users_host']." (".$row['realname'].")</author>\n";
-	print "   <pubDate>".gmdate('D, d M Y G:i:s',$row['post_date'])." GMT</pubDate>\n";
+	print "   <pubDate>".rss_date($row['post_date'])."</pubDate>\n";
 	if ($row['group_id'] != $sys_news_group) {
 		print "   <guid>http://".$GLOBALS['sys_default_domain']."/forum/forum.php?forum_id=".$row['forum_id']."</guid>\n";
 	} else {
@@ -89,9 +85,9 @@ while ($row = db_fetch_array($res)) {
 	}
 	// if news group, comment is main page
 	if ($row['group_id'] != $sys_news_group) {
-		print "   <comment>http://".$GLOBALS['sys_default_domain']."/forum/forum.php?forum_id=".$row['forum_id']."</comment>\n";
+		print "   <comments>http://".$GLOBALS['sys_default_domain']."/forum/forum.php?forum_id=".$row['forum_id']."</comments>\n";
 	} else {
-		print "   <comment>http://".$GLOBALS['sys_default_domain']."/</comment>\n";
+		print "   <comments>http://".$GLOBALS['sys_default_domain']."/</comments>\n";
 	}
 	print "  </item>\n";
 }

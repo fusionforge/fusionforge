@@ -3,13 +3,15 @@
 // Author: Scott Grayban <sgrayban@borgnet.us>
 //
 
-include "../env.inc.php";
-include "pre.php";
-include "rss_utils.inc";
-header("Content-Type: text/xml");
-print '<?xml version="1.0"?>
+require_once '../env.inc.php';
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'export/rss_utils.inc';
+
+header("Content-Type: text/xml; charset=utf-8");
+print '<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
 ';
+
 $limit = getIntFromRequest('limit', 10);
 
 $res = db_query(
@@ -20,6 +22,6 @@ $res = db_query(
 
 //rss20_dump_project_result_set($res,$GLOBALS['sys_default_name'].' Full Project Listing');
 // quick and dirty fix
-rss_dump_project_result_set($res,$GLOBALS['sys_default_name'].' Full Project Listing');
+rss_dump_project_result_set($res,$GLOBALS['sys_name'].' Full Project Listing');
 ?>
 </rss>
