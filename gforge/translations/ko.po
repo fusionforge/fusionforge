@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-10 16:11+0200\n"
+"POT-Creation-Date: 2009-06-10 21:36+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -983,7 +983,7 @@ msgstr "en_US"
 #: common/include/group_section_texts.php:30
 #: common/reporting/report_utils.php:164
 #: plugins/quota_management/www/quota_project.php:91
-#: www/include/Layout.class.php:560 www/include/project_home.php:309
+#: www/include/Layout.class.php:560 www/include/project_home.php:313
 #: www/themes/gforge-simple-theme/Theme.class.php:505
 #: www/themes/gforge/Theme.class.php:508
 msgid "Forums"
@@ -996,7 +996,7 @@ msgstr ""
 #: common/include/group_section_texts.php:32 common/include/rbac_texts.php:86
 #: common/include/rbac_texts.php:87 common/reporting/report_utils.php:172
 #: common/reporting/report_utils.php:200 www/include/Layout.class.php:582
-#: www/include/project_home.php:343 www/my/dashboard.php:89
+#: www/include/project_home.php:347 www/my/dashboard.php:89
 #: www/project/stats/project_stats_utils.php:83
 #: www/project/stats/project_stats_utils.php:142
 #: www/project/stats/project_stats_utils.php:198
@@ -1207,7 +1207,7 @@ msgid "Project Admin"
 msgstr "Project Admin"
 
 #: common/include/rbac_texts.php:98 common/include/rbac_texts.php:99
-#: www/include/Layout.class.php:610 www/include/project_home.php:372
+#: www/include/Layout.class.php:610 www/include/project_home.php:378
 #: www/scm/include/scm_utils.php:52
 #: www/themes/gforge-simple-theme/Theme.class.php:562
 #: www/themes/gforge/Theme.class.php:558
@@ -1469,7 +1469,7 @@ msgid "Y-m"
 msgstr ""
 
 #: common/reporting/report_utils.php:168 www/include/Layout.class.php:589
-#: www/include/project_home.php:325
+#: www/include/project_home.php:329
 #: www/themes/gforge-simple-theme/Theme.class.php:538
 #: www/themes/gforge/Theme.class.php:537
 msgid "Docs"
@@ -5718,7 +5718,7 @@ msgid "Your search did not match any documents"
 msgstr ""
 
 #: www/export/projnews.php:81 www/forum/include/ForumHTML.class.php:79
-#: www/include/project_home.php:428 www/index_std.php:40
+#: www/include/project_home.php:434 www/index_std.php:40
 msgid "Latest News"
 msgstr "뉴스"
 
@@ -7188,14 +7188,14 @@ msgstr "코드 라이브러리"
 msgid "Project&nbsp;Openings"
 msgstr "멤버 구함"
 
-#: www/include/Layout.class.php:575 www/include/project_home.php:333
+#: www/include/Layout.class.php:575 www/include/project_home.php:337
 #: www/themes/gforge-simple-theme/Theme.class.php:522
 #: www/themes/gforge/Theme.class.php:523
 msgid "Lists"
 msgstr "메일링 리스트"
 
-#: www/include/Layout.class.php:596 www/include/project_home.php:363
-#: www/include/project_home.php:364 www/survey/include/SurveyHTML.class.php:53
+#: www/include/Layout.class.php:596 www/include/project_home.php:369
+#: www/include/project_home.php:370 www/survey/include/SurveyHTML.class.php:53
 #: www/survey/survey_utils.php:52
 #: www/themes/gforge-simple-theme/Theme.class.php:546
 #: www/themes/gforge/Theme.class.php:544
@@ -7512,70 +7512,64 @@ msgstr "프로젝트 홈페이지"
 msgid "There are no public trackers available"
 msgstr "공개된 문제점 추적 항목이 없습니다."
 
-#: www/include/project_home.php:299
+#: www/include/project_home.php:301 www/include/project_summary.php:138
 #, fuzzy, php-format
-msgid " (<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
-msgid_plural " (<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
+msgid "(<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
+msgid_plural "(<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
 msgstr[0] "%1$s 진행중 /전체 %2$s"
 
-#: www/include/project_home.php:310
+#: www/include/project_home.php:314
 msgid "Public Forums"
 msgstr "공개 게시판"
 
-#: www/include/project_home.php:313
+#: www/include/project_home.php:317
 #, fuzzy, php-format
 msgid "<strong>%d</strong> message"
 msgid_plural "<strong>%d</strong> messages"
 msgstr[0] "<strong>%1$s</strong>개의 프로젝트가 결과에 포함되었습니다."
 
-#: www/include/project_home.php:315
+#: www/include/project_home.php:319
 #, fuzzy, php-format
 msgid "<strong>%d</strong> forum"
 msgid_plural "<strong>%d</strong> forums"
 msgstr[0] "<strong>%1$s</strong>개의 프로젝트가 결과에 포함되었습니다."
 
-#: www/include/project_home.php:326
+#: www/include/project_home.php:330
 msgid "DocManager: Project Documentation"
 msgstr "문서 관리자: 프로젝트 문서화"
 
-#: www/include/project_home.php:334
+#: www/include/project_home.php:338
 msgid "Mailing Lists"
 msgstr "메일링 리스트"
 
-#: www/include/project_home.php:336
+#: www/include/project_home.php:340
 #, fuzzy, php-format
 msgid "(<strong>%1$s</strong> public mailing list)"
 msgid_plural "(<strong>%1$s</strong> public mailing lists)"
 msgstr[0] "<strong>%1$s</strong>개의 프로젝트가 결과에 포함되었습니다."
 
-#: www/include/project_home.php:344
+#: www/include/project_home.php:348
 msgid "Task Manager"
 msgstr "임무 관리자"
 
-#: www/include/project_home.php:349
+#: www/include/project_home.php:353
 msgid "There are no public subprojects available"
 msgstr "공개된 하위 프로젝트가 없습니다."
 
-#: www/include/project_home.php:365
+#: www/include/project_home.php:371
 msgid "surveys"
 msgstr "설문조사"
 
-#: www/include/project_home.php:373 www/register/projectinfo.php:160
+#: www/include/project_home.php:379 www/register/projectinfo.php:160
 #: www/scm/admin/index.php:39 www/scm/admin/index.php:89
 #: www/scm/include/scm_utils.php:43 www/scm/index.php:32
 #: www/scm/reporting/index.php:32 www/scm/viewvc.php:138
 msgid "SCM Repository"
 msgstr "SCM 저장소"
 
-#: www/include/project_home.php:408 www/include/project_home.php:409
+#: www/include/project_home.php:414 www/include/project_home.php:415
 msgid "Anonymous FTP Space"
 msgstr "익명 FTP 공간"
-
-#: www/include/project_summary.php:138
-#, fuzzy, php-format
-msgid "(<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
-msgid_plural "(<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
-msgstr[0] "%1$s 진행중 /전체 %2$s"
 
 #: www/include/tool_reports.php:52 www/pm/index.php:69
 #: www/reporting/usersummary.php:55 www/tracker/ind.php:45
@@ -13287,6 +13281,11 @@ msgstr[0] ""
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "사용자ID"
+
+#, fuzzy
+#~ msgid " (<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
+#~ msgid_plural " (<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
+#~ msgstr[0] "%1$s 진행중 /전체 %2$s"
 
 #~ msgid "Artifact: Only Artifact Admins Can Modify Private ArtifactTypes"
 #~ msgstr "Artifact: Only Artifact Admins Can Modify Private ArtifactTypes"
