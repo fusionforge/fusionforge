@@ -99,7 +99,7 @@ if (!$res || db_numrows($res) < 1) {
 
 }
 
-echo '<input type="submit" name="finished" value="Add All">
+echo '<input type="submit" name="finished" value="'._('Add All').'">
 </form>';
 
 project_admin_footer(array());
