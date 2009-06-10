@@ -331,9 +331,6 @@ class FRSPackage extends Error {
 		if (!session_loggedin()) {
 			return false;
 		}
-		$sql="SELECT * FROM filemodule_monitor
-			WHERE user_id='".user_getid()."'
-			AND filemodule_id='".$this->getID()."';";
 
 		$result = db_query_params ('SELECT * FROM filemodule_monitor WHERE user_id=$1 AND filemodule_id=$2',
 					   array (user_getid(),
