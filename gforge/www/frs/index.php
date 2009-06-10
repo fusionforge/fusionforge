@@ -27,6 +27,7 @@
 require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once $gfwww.'frs/include/frs_utils.php';
+require_once $gfcommon.'frs/FRSPackage.class.php';
 
 $group_id = getIntFromRequest('group_id');
 $release_id = getIntFromRequest('release_id');
@@ -115,11 +116,20 @@ if ( $num_packages < 1) {
 	// Iterate and show the packages
 	for ( $p = 0; $p < $num_packages; $p++ ) {
 		$cur_style = $GLOBALS['HTML']->boxGetAltRowStyle($p);
+		
+		$frsPackage = new FRSPackage($cur_group, db_result($res_package,$p,'package_id'));
+		
+		print '<tr '.$cur_style.'><td colspan="3"><h3>'.db_result($res_package,$p,'name');
 
-		print '<tr '.$cur_style.'><td colspan="3"><h3>'.db_result($res_package,$p,'name').'
-	<a href="'.util_make_url ('/frs/monitor.php?filemodule_id='. db_result($res_package,$p,'package_id') .'&group_id='.db_result($res_package,$p,'group_id').'&start=1').'">'.
-		html_image('ic/mail16w.png','20','20',array('alt'=>_('Monitor this package'))) .
-		'</a></h3></td><td colspan="4">&nbsp;</td></tr>';
+		if($frsPackage->isMonitoring()) {
+			print ' <a href="'.util_make_url ('/frs/monitor.php?filemodule_id='. db_result($res_package,$p,'package_id') .'&group_id='.db_result($res_package,$p,'group_id').'&stop=1').'">'.
+				html_image('ic/xmail16w.png','20','20',array('alt'=>_('Stop monitoring this package')));
+		} else {
+			print ' <a href="'.util_make_url ('/frs/monitor.php?filemodule_id='. db_result($res_package,$p,'package_id') .'&group_id='.db_result($res_package,$p,'group_id').'&start=1').'">'.
+				html_image('ic/mail16w.png','20','20',array('alt'=>_('Monitor this package')));
+		}
+		
+		print '</a></h3></td><td colspan="4">&nbsp;</td></tr>';
 
 		// get the releases of the package
 		$sql = "SELECT * FROM frs_release
