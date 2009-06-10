@@ -293,12 +293,16 @@ if ($project->usesTracker()) {
 	if (!$result || $rows < 1) {
 		echo '<br /><em>'._('There are no public trackers available').'</em>';
 	} else {
+		echo '<ul>' ;
+		
 		for ($j = 0; $j < $rows; $j++) {
-			echo '<p />
-		&nbsp;-&nbsp;'.util_make_link ('/tracker/?atid='. db_result($result, $j, 'group_artifact_id') . '&amp;group_id='.$group_id.'&amp;func=browse',db_result($result, $j, 'name'))
-		.sprintf(ngettext(' (<strong>%1$s</strong> open / <strong>%2$s</strong> total)', ' (<strong>%1$s</strong> open / <strong>%2$s</strong> total)', (int) db_result($result, $j, 'open_count')), (int) db_result($result, $j, 'open_count'), (int) db_result($result, $j, 'count')) .'<br />'.
-		db_result($result, $j, 'description');
+			echo '<li>' ;
+			print util_make_link ('/tracker/?atid='. db_result($result, $j, 'group_artifact_id') . '&amp;group_id='.$group_id.'&amp;func=browse',db_result($result, $j, 'name')) . ' ' ;
+		.sprintf(ngettext('(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', '(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', (int) db_result($result, $j, 'open_count')), (int) db_result($result, $j, 'open_count'), (int) db_result($result, $j, 'count')) .'<br />'.
+			 db_result($result, $j, 'description');
+			echo '</li>' ;
 		}
+		echo '</ul>' ;
 	}
 }
 
@@ -348,11 +352,13 @@ if ($project->usesPm()) {
 	if (!$result || $rows < 1) {
 		echo '<br /><em>'._('There are no public subprojects available').'</em>';
 	} else {
+		echo '<ul>' ;
 		for ($j = 0; $j < $rows; $j++) {
-			echo '
-			<br /> &nbsp; - '.util_make_link ('/pm/task.php?group_project_id='.db_result($result, $j, 'group_project_id').'&amp;group_id='.$group_id.'&amp;func=browse',db_result($result, $j, 'project_name'));
+			echo '<li>' ;
+			print util_make_link ('/pm/task.php?group_project_id='.db_result($result, $j, 'group_project_id').'&amp;group_id='.$group_id.'&amp;func=browse',db_result($result, $j, 'project_name'));
+			echo '</li>' ;
 		}
-
+		echo '</ul>' ;
 	}
 }
 
