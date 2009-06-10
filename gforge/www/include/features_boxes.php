@@ -72,7 +72,7 @@ function show_top_downloads() {
 	$return = "";
 	while ($row_topdown = db_fetch_array($res_topdown)) {
 		if ($row_topdown['downloads'] > 0)
-			$return .= '(' . number_format($row_topdown['downloads']) . ')'
+			$return .= '<strong>(' . number_format($row_topdown['downloads']) . ')</strong> '
 			. util_make_link_g ($row_topdown['unix_group_name'],$row_topdown['group_id'],$row_topdown['group_name'])
 			. "<br />\n";
 	}
