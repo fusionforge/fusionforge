@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-09 11:01+0200\n"
-"PO-Revision-Date: 2009-06-10 18:53+0200\n"
-"Last-Translator: Julien HEYMAN <julien.heyman@atosorigin.com>\n"
+"POT-Creation-Date: 2009-06-10 16:11+0200\n"
+"PO-Revision-Date: 2009-06-10 20:53+0200\n"
+"Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <aljeux@free.fr>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -1782,7 +1782,6 @@ msgstr "Un nom de champ est nécessaire"
 
 #: common/tracker/ArtifactExtraField.class.php:123
 #: common/tracker/ArtifactExtraField.class.php:383
-#, fuzzy
 msgid "Field name already exists"
 msgstr "Ce nom d'élément existe déjà."
 
@@ -2302,6 +2301,7 @@ msgstr "Non"
 #: www/admin/responses_admin.php:47 www/admin/trove/trove_cat_edit.php:147
 #: www/admin/useredit.php:201 www/docman/admin/index.php:458
 #: www/forum/admin/index.php:184 www/forum/admin/index.php:194
+#: www/forum/include/AttachManager.class.php:148
 #: www/frs/admin/deletepackage.php:76 www/frs/admin/deleterelease.php:81
 #: www/frs/admin/index.php:171 www/frs/admin/showreleases.php:115
 #: www/my/index.php:427 www/news/admin/index.php:131
@@ -3821,9 +3821,8 @@ msgid "Cookies must be enabled past this point."
 msgstr "Vous devez activer les cookies pour aller plus loin."
 
 #: www/account/login.php:116
-#, fuzzy
 msgid "Login name or email address"
-msgstr "Adresse de messagerie non valide."
+msgstr "Identifiant ou adresse de messagerie invalide"
 
 #: www/account/login.php:123 www/account/verify.php:105
 msgid "Password:"
@@ -3952,26 +3951,23 @@ msgstr ""
 "lien qui vous a été envoyé pour activer votre compte."
 
 #: www/account/pending-resend.php:63
-#, fuzzy
 msgid ""
 "Fill in a user name or email address and click 'Submit' to resend the "
 "confirmation email."
 msgstr ""
-"Saisissez un nom d'utilisateur et validez pour envoyer le courrier de "
-"confirmation"
+"Saisissez un nom d'utilisateur ou une adresse de messagerie et validez pour "
+"renvoyer le courrier de confirmation."
 
 #: www/account/pending-resend.php:65
-#, fuzzy
 msgid ""
 "Fill in a user name and click 'Submit' to resend the confirmation email."
 msgstr ""
-"Saisissez un nom d'utilisateur et validez pour envoyer le courrier de "
-"confirmation"
+"Saisissez un nom d'utilisateur et validez pour renvoyer le courrier de "
+"confirmation."
 
 #: www/account/pending-resend.php:72 www/account/verify.php:99
-#, fuzzy
 msgid "Login name or email address:"
-msgstr "Adresse de messagerie non valide."
+msgstr "Identifiant de connexion ou adresse de messagerie :"
 
 #: www/account/pending-resend.php:78 www/activity/index.php:157
 #: www/admin/admin_table.php:195 www/admin/cronman.php:45
@@ -4007,6 +4003,8 @@ msgstr "Soumettre"
 #: www/account/register.php:73
 msgid "You can't register an account unless you accept the terms of use."
 msgstr ""
+"Vous ne pouvez pas créer de compte sans accepter les conditions "
+"d'utilisation."
 
 #: www/account/register.php:82
 #, php-format
@@ -4025,6 +4023,8 @@ msgid ""
 "Login Name (no uppercase letters; leave empty to have it generated "
 "automatically):"
 msgstr ""
+"Identifiant de connexion (en minuscules ; si vous laissez ce champ vide, un "
+"identifiant sera généré automatiquement) :"
 
 #: www/account/register.php:118
 msgid "Login Name (do not use uppercase letters):"
@@ -4062,6 +4062,7 @@ msgstr ""
 #, php-format
 msgid "Do you accept the <a href=\"%1$s\">terms of use</a> for this site?"
 msgstr ""
+"Acceptez-vous les <a href=\"%1$s\">conditions d'utilisation</a> de ce site ?"
 
 #: www/account/register.php:205
 #, php-format
@@ -4249,9 +4250,9 @@ msgstr "Créer un(e) nouveau(elle) %1$s ci-dessous :"
 #: www/admin/admin_table.php:54 www/admin/database.php:165
 #: www/admin/trove/trove_cat_add.php:116 www/admin/trove/trove_cat_list.php:41
 #: www/admin/trove/trove_cat_list.php:44 www/docman/admin/index.php:380
-#: www/pm/mod_task.php:228 www/reporting/timeadd.php:187
-#: www/reporting/timecategory.php:99 www/trove/admin/trove_cat_add.php:91
-#: www/trove/admin/trove_cat_list.php:32
+#: www/forum/include/AttachManager.class.php:159 www/pm/mod_task.php:228
+#: www/reporting/timeadd.php:187 www/reporting/timecategory.php:99
+#: www/trove/admin/trove_cat_add.php:91 www/trove/admin/trove_cat_list.php:32
 msgid "Add"
 msgstr "Ajouter"
 
@@ -4313,10 +4314,12 @@ msgstr "ajouter nouveau"
 
 #: www/admin/admin_table.php:265 www/admin/responses_admin.php:46
 #: www/admin/responses_admin.php:87 www/admin/trove/trove_cat_list.php:43
-#: www/docman/admin/index.php:432 www/frs/admin/showreleases.php:112
-#: www/people/skills_utils.php:33 www/people/skills_utils.php:91
-#: www/project/admin/editimages.php:257 www/project/admin/editimages.php:288
-#: www/project/admin/index.php:210 www/survey/include/SurveyHTML.class.php:304
+#: www/docman/admin/index.php:432
+#: www/forum/include/AttachManager.class.php:147
+#: www/frs/admin/showreleases.php:112 www/people/skills_utils.php:33
+#: www/people/skills_utils.php:91 www/project/admin/editimages.php:257
+#: www/project/admin/editimages.php:288 www/project/admin/index.php:210
+#: www/survey/include/SurveyHTML.class.php:304
 #: www/survey/include/SurveyHTML.class.php:352
 #: www/survey/include/SurveyHTML.class.php:412
 #: www/tracker/admin/form-addextrafield.php:33
@@ -4490,9 +4493,8 @@ msgid "Off"
 msgstr "Arrêt"
 
 #: www/admin/configman.php:209
-#, fuzzy
 msgid "Value"
-msgstr "Ancienne valeur"
+msgstr "Valeur"
 
 #: www/admin/configman.php:248
 msgid "Save"
@@ -6433,7 +6435,7 @@ msgstr "Veuillez vous <a href=\"%1$s\">connecter</a>"
 msgid "Forums for %1$s"
 msgstr "Forums de %1$s"
 
-#: www/forum/myforums.php:65 www/forum/myforums.php:67
+#: www/forum/index.php:59 www/forum/myforums.php:65 www/forum/myforums.php:67
 #: www/forum/myforums.php:70 www/my/index.php:302
 msgid "My Monitored Forums"
 msgstr "Mes forums surveillés"
@@ -7639,9 +7641,9 @@ msgid "Registered:&nbsp;"
 msgstr "Enregistré le&nbsp;:&nbsp;"
 
 #: www/include/project_home.php:91
-#, fuzzy, php-format
+#, php-format
 msgid "Activity Ranking: %d"
-msgstr "Rang d'activité&nbsp;:&nbsp;"
+msgstr "Rang d'activité : %d"
 
 #: www/include/project_home.php:92
 #, php-format
@@ -8146,9 +8148,8 @@ msgid "List updated"
 msgstr "Liste mise à jour"
 
 #: www/mail/admin/index.php:107
-#, fuzzy
 msgid "Password reset requested"
-msgstr "Mot de passe (confirmez) :"
+msgstr "Remise à zéro du mot de passe déclenchée."
 
 #: www/mail/admin/index.php:118
 msgid "Add a Mailing List"
@@ -8227,7 +8228,7 @@ msgstr "Administrer"
 
 #: www/mail/admin/index.php:265
 msgid "Reset admin password"
-msgstr ""
+msgstr "Régénérer un mot de passe d'administration"
 
 #: www/mail/index.php:35
 #, php-format
@@ -11115,9 +11116,8 @@ msgstr ""
 "Le dépôt de ce projet n'existe pas encore.  Il sera créé prochainement."
 
 #: www/scm/reporting/commits_graph.php:96
-#, fuzzy
 msgid "Commits By User"
-msgstr "Envois"
+msgstr "Envois par utilisateur"
 
 #: www/search/include/SearchManager.class.php:98
 msgid "Search the entire project"
@@ -11802,35 +11802,32 @@ msgstr[0] "<strong>%d</strong> projet trouvé."
 msgstr[1] "<strong>%d</strong> projets trouvés."
 
 #: www/softwaremap/tag_cloud.php:118
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Displaying %d project per page. Projects sorted by alphabetical order.<br />"
 msgid_plural ""
 "Displaying %d projects per page. Projects sorted by alphabetical order.<br />"
-msgstr[0] ""
-"Affichage de %1$s projet par page. Projets triés par ordre alphabétique."
-msgstr[1] ""
-"Affichage de %1$s projet par page. Projets triés par ordre alphabétique."
+msgstr[0] "Affichage de %d projet par page. Projets triés par ordre alphabétique."
+msgstr[1] "Affichage de %d projets par page. Projets triés par ordre alphabétique."
 
 #: www/softwaremap/tag_cloud.php:182
-#, fuzzy, php-format
+#, php-format
 msgid "Activity Percentile: <strong>%3.0f</strong>"
-msgstr "Utilisateurs actifs : <strong>%1$s</strong>"
+msgstr "Centile d'activité : <strong>%3.0f</strong>"
 
 #: www/softwaremap/tag_cloud.php:183
-#, fuzzy, php-format
+#, php-format
 msgid "Activity Ranking: <strong>%d</strong>"
-msgstr "Utilisateurs actifs : <strong>%1$s</strong>"
+msgstr "Rang d'activité : <strong>%d</strong>"
 
 #: www/softwaremap/tag_cloud.php:184
-#, fuzzy, php-format
+#, php-format
 msgid "Registered: <strong>%s</strong>"
-msgstr "Projets enregistrés : <strong>%1$s</strong>"
+msgstr "Date d'enregistrement : <strong>%s</strong>"
 
 #: www/softwaremap/trove_list.php:134
-#, fuzzy
 msgid "Now limiting view to projects in the following categories:"
-msgstr "Vue restreinte aux projets des catégories suivantes"
+msgstr "Vue restreinte aux projets des catégories suivantes :"
 
 #: www/softwaremap/trove_list.php:314
 msgid "Activity Percentile:&nbsp;"
@@ -12532,14 +12529,13 @@ msgid "Error creating permission"
 msgstr "Erreur lors de la création des permissions"
 
 #: www/terms.php:33
-#, fuzzy
 msgid "Terms of use"
-msgstr "Utilisation du disque utilisateur"
+msgstr "Conditions d'utilisation"
 
 #: www/terms.php:38
 #, php-format
 msgid "%1$s Terms of Use"
-msgstr ""
+msgstr "Conditions d'utilisation pour %1$s"
 
 #: www/terms.php:41
 #, php-format
@@ -12548,6 +12544,10 @@ msgid ""
 "$s service.  They are empty by default, but the administrator(s) of the "
 "service can use this page to publish their local requirements if needed."
 msgstr ""
+"Ceci constitue les conditions selon lesquelles vous êtes autorisé à utiliser "
+"le service %1$s. Elles sont vides par défaut, mais le ou les "
+"administrateurs du service peut utiliser cette page pour publier des "
+"conditions d'utilisation particulières le cas échéant."
 
 #: www/themes/gforge-simple-theme/Theme.class.php:359
 #: www/themes/lite/Theme.class.php:270
