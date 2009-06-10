@@ -40,7 +40,7 @@ if (session_loggedin()) {
 				exit_error(_('Error'),$f->getErrorMessage());
 			} else {
 				frs_header(array('title'=>_('Monitoring stopped'),'group'=>$group_id));
-				echo _('Monitoring Has Been Stopped');
+				echo $HTML->feedback(_('Monitoring Has Been Stopped'));
 				frs_footer();
 			}
 		} elseif($start) {
@@ -48,7 +48,7 @@ if (session_loggedin()) {
 				exit_error('Error',$f->getErrorMessage());
 			} else {
 				frs_header(array('title'=>_('Monitoring started'),'group'=>$group_id));
-				echo _('Monitoring Has Been Started');
+				echo $HTML->feedback(_('Monitoring Has Been Started'));
 				frs_footer();
 			}
 		}
