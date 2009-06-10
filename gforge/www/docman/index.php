@@ -35,8 +35,8 @@ function docman_recursive_display($docgroup) {
 			if (isset($nested_docs[$dg->getID()]) && is_array($nested_docs[$dg->getID()])) {
 				foreach ($nested_docs[$dg->getID()] as $d) {
 					$docurl=util_make_url ('/docman/view.php/'.$group_id.'/'.$d->getID().'/'.urlencode($d->getFileName()));
-					$docname=htmlspecialchars($d->getName(), ENT_QUOTES)." (".htmlspecialchars($d->getFileName(), ENT_QUOTES).")";
-					$docdesc=htmlspecialchars($d->getDescription(), ENT_QUOTES);
+					$docname=addslashes($d->getName(), ENT_QUOTES)." (".htmlspecialchars($d->getFileName(), ENT_QUOTES).")";
+					$docdesc=addslashes($d->getDescription());
 					echo ",['','".$docname."','".$docurl."','','".$docdesc."' ]";
 				}
 			}
