@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-09 11:01+0200\n"
+"POT-Creation-Date: 2009-06-10 16:11+0200\n"
 "PO-Revision-Date: 2009-04-30 16:18+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <aljeux@free.fr>\n"
@@ -2303,6 +2303,7 @@ msgstr "Non"
 #: www/admin/responses_admin.php:47 www/admin/trove/trove_cat_edit.php:147
 #: www/admin/useredit.php:201 www/docman/admin/index.php:458
 #: www/forum/admin/index.php:184 www/forum/admin/index.php:194
+#: www/forum/include/AttachManager.class.php:148
 #: www/frs/admin/deletepackage.php:76 www/frs/admin/deleterelease.php:81
 #: www/frs/admin/index.php:171 www/frs/admin/showreleases.php:115
 #: www/my/index.php:427 www/news/admin/index.php:131
@@ -4250,9 +4251,9 @@ msgstr "Créer un(e) nouveau(elle) %1$s ci-dessous :"
 #: www/admin/admin_table.php:54 www/admin/database.php:165
 #: www/admin/trove/trove_cat_add.php:116 www/admin/trove/trove_cat_list.php:41
 #: www/admin/trove/trove_cat_list.php:44 www/docman/admin/index.php:380
-#: www/pm/mod_task.php:228 www/reporting/timeadd.php:187
-#: www/reporting/timecategory.php:99 www/trove/admin/trove_cat_add.php:91
-#: www/trove/admin/trove_cat_list.php:32
+#: www/forum/include/AttachManager.class.php:159 www/pm/mod_task.php:228
+#: www/reporting/timeadd.php:187 www/reporting/timecategory.php:99
+#: www/trove/admin/trove_cat_add.php:91 www/trove/admin/trove_cat_list.php:32
 msgid "Add"
 msgstr "Ajouter"
 
@@ -4314,10 +4315,12 @@ msgstr "ajouter nouveau"
 
 #: www/admin/admin_table.php:265 www/admin/responses_admin.php:46
 #: www/admin/responses_admin.php:87 www/admin/trove/trove_cat_list.php:43
-#: www/docman/admin/index.php:432 www/frs/admin/showreleases.php:112
-#: www/people/skills_utils.php:33 www/people/skills_utils.php:91
-#: www/project/admin/editimages.php:257 www/project/admin/editimages.php:288
-#: www/project/admin/index.php:210 www/survey/include/SurveyHTML.class.php:304
+#: www/docman/admin/index.php:432
+#: www/forum/include/AttachManager.class.php:147
+#: www/frs/admin/showreleases.php:112 www/people/skills_utils.php:33
+#: www/people/skills_utils.php:91 www/project/admin/editimages.php:257
+#: www/project/admin/editimages.php:288 www/project/admin/index.php:210
+#: www/survey/include/SurveyHTML.class.php:304
 #: www/survey/include/SurveyHTML.class.php:352
 #: www/survey/include/SurveyHTML.class.php:412
 #: www/tracker/admin/form-addextrafield.php:33
@@ -6161,6 +6164,11 @@ msgstr "Vous ne pouvez pas modifier cette pièce jointe."
 msgid "Error getting new ForumHTML"
 msgstr "Erreur lors de la création d'un objet ForumHTML"
 
+#: www/forum/attachment.php:163
+#, fuzzy
+msgid "No attach found"
+msgstr "Aucune pièce jointe trouvée"
+
 #: www/forum/attachment.php:196
 msgid "The Attachment does not exist"
 msgstr "La pièce jointe n'existe pas."
@@ -6430,6 +6438,11 @@ msgstr "Veuillez vous <a href=\"%1$s\">connecter</a>"
 msgid "Forums for %1$s"
 msgstr "Forums de %1$s"
 
+#: www/forum/index.php:59 www/forum/myforums.php:65 www/forum/myforums.php:67
+#: www/forum/myforums.php:70 www/my/index.php:302
+msgid "My Monitored Forums"
+msgstr "Mes forums surveillés"
+
 #: www/forum/index.php:60 www/forum/myforums.php:72
 msgid "Threads"
 msgstr "Fils de discussion"
@@ -6501,11 +6514,6 @@ msgstr "Vous ne surveillez aucun forum"
 #: www/forum/myforums.php:53 www/my/index.php:300
 msgid "You are not monitoring any forums."
 msgstr "Vous ne surveillez pas de forum."
-
-#: www/forum/myforums.php:65 www/forum/myforums.php:67
-#: www/forum/myforums.php:70 www/my/index.php:302
-msgid "My Monitored Forums"
-msgstr "Mes forums surveillés"
 
 #: www/forum/myforums.php:73
 msgid "New Content?"
@@ -10355,6 +10363,11 @@ msgstr "Finir"
 msgid "Choose the role for each user and then press &quot;Add All&quot;."
 msgstr ""
 "Choisissez un rôle pour chaque utilisateur et cliquez sur \"Ajouter Tous\"."
+
+#: www/project/admin/massfinish.php:102
+#, fuzzy
+msgid "Add All"
+msgstr "Ajouter l'étiquette"
 
 #: www/project/admin/project_admin_utils.php:62
 msgid "Edit Public Info"
