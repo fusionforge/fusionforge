@@ -50,10 +50,10 @@ gforge/db/20031026-gforge-3.1 -text svneol=unset#application/octet-stream
 gforge/db/20040108-gforge-3.21 -text svneol=unset#application/octet-stream
 gforge/db/20040326-gforge-3.3 -text svneol=unset#application/octet-stream
 gforge/db/20041025-gforge-4.0 -text svneol=unset#application/octet-stream
-gforge/db/20050822-drops.sql -text
+gforge/db/20050822-1-drops.sql -text
 gforge/db/20051103_transiciel_motscle_document.sql -text
-gforge/db/20060216-drops.sql -text
-gforge/db/20060216-nocommit.sql -text
+gforge/db/20060216-1-drops.sql -text
+gforge/db/20060216-2-debian-nocommit.sql -text
 gforge/db/20070924-artifact-perm.sql -text
 gforge/db/20070924-forum-perm.sql -text
 gforge/db/20070924-project-perm.sql -text

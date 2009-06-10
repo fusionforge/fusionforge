@@ -107,7 +107,7 @@ function get_scripts($dir) {
 					if (strlen($name) >= 8) {
 						$date_aux = substr($name, 0, 8);
 						$type_aux = substr($file, $pos + 1);
-						if ((int) $date_aux > 20000000 && $type_aux=='sql' || $type_aux=='php') {
+						if ((int) $date_aux > 20000000 && ($type_aux=='sql' || $type_aux=='php') && strpos($file, 'debian') === false) {
 							$data[] = array('date'=>$date_aux, 'filename'=>$file, 'ext'=>$type_aux);
 						}
 					}
@@ -115,10 +115,15 @@ function get_scripts($dir) {
 			}
 			closedir($dh);
 		}
-		sort($data);
+		usort($data, 'compare_scripts');
 		reset($data);
 	}
+	
 	return $data;
+}
+
+function compare_scripts($script1, $script2) {
+	return strcmp($script1['filename'], $script2['filename']);
 }
 
 function run_script($script) {

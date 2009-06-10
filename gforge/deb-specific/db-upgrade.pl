@@ -835,9 +835,9 @@ eval {
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+14" ;
     if (&is_lesser ($version, $target)) {
-      &debug ("Upgrading with 20021213.sql") ;
+      &debug ("Upgrading with 20021213-1.sql") ;
 
-      @reqlist = @{ &parse_sql_file ("$sqldir/20021213.sql") } ;
+      @reqlist = @{ &parse_sql_file ("$sqldir/20021213-1.sql") } ;
       foreach my $s (@reqlist) {
 	  $query = $s ;
 	  # debug $query ;
@@ -944,9 +944,9 @@ eval {
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+19" ;
     if (&is_lesser ($version, $target)) {
-      &debug ("Upgrading with 20021223.sql") ;
+      &debug ("Upgrading with 20021223-2.sql") ;
 
-      @reqlist = @{ &parse_sql_file ("$sqldir/20021223.sql") } ;
+      @reqlist = @{ &parse_sql_file ("$sqldir/20021223-2.sql") } ;
       foreach my $s (@reqlist) {
 	  $query = $s ;
 	  # debug $query ;
@@ -964,9 +964,9 @@ eval {
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+20" ;
     if (&is_lesser ($version, $target)) {
-      &debug ("Upgrading with 20030102.sql") ;
+      &debug ("Upgrading with 20030102-2.sql") ;
 
-      @reqlist = @{ &parse_sql_file ("$sqldir/20030102.sql") } ;
+      @reqlist = @{ &parse_sql_file ("$sqldir/20030102-2.sql") } ;
       foreach my $s (@reqlist) {
 	  $query = $s ;
 	  # debug $query ;
@@ -1075,9 +1075,9 @@ eval {
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+25" ;
     if (&is_lesser ($version, $target)) {
-      &debug ("Upgrading with 20030113.sql") ;
+      &debug ("Upgrading with 20030113-2.sql") ;
 
-      @reqlist = @{ &parse_sql_file ("$sqldir/20030113.sql") } ;
+      @reqlist = @{ &parse_sql_file ("$sqldir/20030113-2.sql") } ;
       foreach my $s (@reqlist) {
 	  $query = $s ;
 	  # debug $query ;
@@ -2139,9 +2139,9 @@ eval {
     $version = &get_db_version ;
     $target = "4.1-0" ;
     if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20050224.sql") ;
+        &debug ("Upgrading with 20050224-2.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("$sqldir/20050224.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20050224-2.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -2219,9 +2219,9 @@ eval {
     $version = &get_db_version ;
     $target = "4.1-4" ;
     if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20050325-1.sql") ;
+        &debug ("Upgrading with 20050325-2.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("$sqldir/20050325-1.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20050325-2.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -2435,9 +2435,9 @@ eval {
     $version = &get_db_version ;
     $target = "4.1-6" ;
     if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20050325-3.sql") ;
+        &debug ("Upgrading with 20050325-5.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("$sqldir/20050325-3.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/20050325-5.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
@@ -2680,14 +2680,14 @@ eval {
     # If the view doesn't exists apply 
     if (! &view_exists ($dbh, 'activity_vw')) {
         &update_with_sql("20050812","4.5.15-10merge"); 
-        &update_with_sql("20050822","4.5.15-11merge"); 
+        &update_with_sql("20050822-2","4.5.15-11merge"); 
         &update_with_sql("20050823","4.5.15-12merge"); 
         &update_with_sql("20050824","4.5.15-13merge"); 
         &update_with_sql("20050831","4.5.15-14merge"); 
 
         &update_with_sql("20060113","4.5.15-15"); 
         &update_with_sql("20060214","4.5.15-16"); 
-        &update_with_sql("20060216-nocommit","4.5.15-17"); 
+        &update_with_sql("20060216-2-debian-nocommit","4.5.15-17"); 
     }
 
     $version = &get_db_version ;

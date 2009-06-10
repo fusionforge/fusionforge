@@ -1,8 +1,3 @@
-DROP VIEW activity_vw;
-DROP RULE groupactivity_userdelete_rule ON users;
-DROP TABLE group_activity_monitor;
-
-
 CREATE VIEW activity_vw AS 
 SELECT 
 agl.group_id, 'trackeropen'::text AS section, agl.group_artifact_id AS ref_id,
