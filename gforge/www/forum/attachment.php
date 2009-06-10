@@ -160,7 +160,7 @@ if ($edit=="yes") {
 				exit_error(_('Error'),$fh->getErrorMessage());
 			}
 			if (!db_result($res,0,'filename')) {
-				$filename = "No attach found";
+				$filename = _("No attach found");
 			} else {
 				$filename = db_result($res,0,'filename');
 			}
