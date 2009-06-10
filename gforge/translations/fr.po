@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-06-10 16:11+0200\n"
-"PO-Revision-Date: 2009-06-10 20:53+0200\n"
+"PO-Revision-Date: 2009-06-10 21:11+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <aljeux@free.fr>\n"
 "Language: fr\n"
@@ -802,13 +802,9 @@ msgid ""
 "The %1$s admin team will now examine your project submission.  You will be "
 "notified of their decision."
 msgstr ""
-"Un nouveau projet a été soumis sur %1$s\n"
-"\n"
-"Nom du projet :  %2$s\n"
-"Description fournie : %3$s\n"
-"\n"
-"L'équipe d'administration de %1$s va maintenant examiner votre\n"
-"candidature. Vous serez tenu informé de sa décision."
+"Un nouveau projet a été soumis sur %1$sNom long du projet :  %2$sDescription "
+"fournie : %3$sLicense: %4$sL'équipe d'administration de %1$s va maintenant "
+"examiner votrecandidature. Vous serez tenu informé de sa décision."
 
 #: common/include/Group.class.php:2382
 msgid "Group name is too short"
@@ -12762,9 +12758,8 @@ msgid "add choices"
 msgstr "ajouter des éléments"
 
 #: www/tracker/admin/form-addextrafield.php:78
-#, fuzzy
 msgid "Indicates required fields."
-msgstr "Veuillez remplir tous les champs requis"
+msgstr "Indique les champs requis."
 
 #: www/tracker/admin/form-addextrafield.php:80
 msgid "You have not defined any custom fields"
@@ -12794,9 +12789,8 @@ msgid "Box type technician"
 msgstr "Type de boîte : technicien"
 
 #: www/tracker/admin/form-addextrafield.php:105
-#, fuzzy
 msgid "Relation between artifacts"
-msgstr "Supprimer l'objet"
+msgstr "Relation entre artifacts"
 
 #: www/tracker/admin/form-addextrafield.php:107
 msgid ""
@@ -12840,22 +12834,20 @@ msgid "Add/Update Custom Field Elements in %s"
 msgstr "Ajouter/modifier des éléments personnalisés pour %s"
 
 #: www/tracker/admin/form-addextrafieldoption.php:26
-#, fuzzy
 msgid "Current / New positions"
-msgstr "Version actuelle"
+msgstr "Postes actuellement ouverts"
 
 #: www/tracker/admin/form-addextrafieldoption.php:27
 msgid "Up/Down positions"
 msgstr ""
 
 #: www/tracker/admin/form-addextrafieldoption.php:55
-#, fuzzy
 msgid "Reorder"
-msgstr "Enlever"
+msgstr "Réordonnancer"
 
 #: www/tracker/admin/form-addextrafieldoption.php:60
 msgid "Alphabetical order"
-msgstr ""
+msgstr "Ordre alphabétique"
 
 #: www/tracker/admin/form-addextrafieldoption.php:68
 msgid "You have not defined any elements"
@@ -12900,23 +12892,23 @@ msgstr ""
 
 #: www/tracker/admin/form-customizelist.php:5
 msgid "Customize Browse List"
-msgstr ""
+msgstr "Personnaliser la navigation"
 
 #: www/tracker/admin/form-customizelist.php:18
 msgid ""
 "Set order of the fields that will be displayed on the browse view of your "
 "tracker:"
 msgstr ""
+"Choisir l'ordre des champs qui seront affichés dans l'écran de navigation de "
+"votre outil de suivi :"
 
 #: www/tracker/admin/form-customizelist.php:28
-#, fuzzy
 msgid "Assigned To"
 msgstr "Confié à"
 
 #: www/tracker/admin/form-customizelist.php:29
-#, fuzzy
 msgid "Submitted By"
-msgstr "Proposée par"
+msgstr "Soumis par"
 
 #: www/tracker/admin/form-customizelist.php:30 www/tracker/browse.php:157
 #: www/tracker/browse.php:358 www/tracker/query.php:180
@@ -12973,29 +12965,24 @@ msgid "Modify a custom field in %s"
 msgstr "Modifuer un champ supplémentaire pour %s"
 
 #: www/tracker/admin/form-updateextrafield.php:32
-#, fuzzy
 msgid "Text Area Rows"
-msgstr "Zone de texte"
+msgstr "Lignes dans la zone de saisie"
 
 #: www/tracker/admin/form-updateextrafield.php:35
-#, fuzzy
 msgid "Text Area Columns"
-msgstr "Zone de texte"
+msgstr "Colonnes dans la zone de saisie"
 
 #: www/tracker/admin/form-updateextrafield.php:38
-#, fuzzy
 msgid "Text Field Size"
-msgstr "Champ texte"
+msgstr "Taille du champ texte"
 
 #: www/tracker/admin/form-updateextrafield.php:41
-#, fuzzy
 msgid "Text Field Maxlength"
-msgstr "Longeur maximale du champ texte/Colonne de la zone de texte"
+msgstr "Longeur maximale du champ texte"
 
 #: www/tracker/admin/form-updateextrafield.php:52
-#, fuzzy
 msgid "Field is mandatory"
-msgstr "Les champs marqués avec %s sont obligatoires."
+msgstr "Champ obligatoire"
 
 #: www/tracker/admin/form-updateextrafield.php:54
 #: www/tracker/admin/form-updateextrafieldelement.php:46
@@ -13076,9 +13063,8 @@ msgid "Allowed initial values for the %1$s field"
 msgstr ""
 
 #: www/tracker/admin/form-workflow.php:46
-#, fuzzy
 msgid "Initial values"
-msgstr "Évaluation invalide"
+msgstr "Valeurs initiales"
 
 #: www/tracker/admin/form-workflow.php:49
 #, fuzzy
@@ -13100,9 +13086,8 @@ msgid "Configuring allowed roles for the transitions from %1$s to %2$s"
 msgstr ""
 
 #: www/tracker/admin/ind.php:45
-#, fuzzy
 msgid "Tracker created successfully"
-msgstr "Tâche créée avec succès"
+msgstr "Outil de suivi créé avec succès"
 
 #: www/tracker/admin/ind.php:47
 msgid "Please configure also the roles (by default, it's 'No Access')"
@@ -13230,9 +13215,8 @@ msgid "Element inserted"
 msgstr "Elément ajouté"
 
 #: www/tracker/admin/updates.php:95 www/tracker/admin/updates.php:117
-#, fuzzy
 msgid "Unable to create ArtifactCanned Object"
-msgstr "Erreur lors de la création d'un objet ArtifactTypes"
+msgstr "Erreur lors de la création d'un objet ArtifactCanned"
 
 #: www/tracker/admin/updates.php:100
 msgid "Error inserting"
@@ -13252,9 +13236,8 @@ msgid "Canned Response Updated"
 msgstr "Réponse type mise à jour"
 
 #: www/tracker/admin/updates.php:147
-#, fuzzy
 msgid "ArtifactType could not be created"
-msgstr "Erreur lors de la création de l'élément"
+msgstr "Erreur lors de la création de l'objet ArtifactType"
 
 #: www/tracker/admin/updates.php:154
 #, fuzzy
@@ -13340,9 +13323,8 @@ msgid "Last 1month"
 msgstr "Le mois dernier"
 
 #: www/tracker/browse.php:230
-#, fuzzy
 msgid "Advanced queries"
-msgstr "Recherche avancée"
+msgstr "Requêtes avancées"
 
 #: www/tracker/browse.php:278
 msgid "Power Query"
@@ -13481,7 +13463,7 @@ msgstr ""
 
 #: www/tracker/include/ArtifactTypeHtml.class.php:106
 msgid "Customize List"
-msgstr ""
+msgstr "Personnaliser la liste"
 
 #: www/tracker/include/ArtifactTypeHtml.class.php:112
 msgid "Add Canned Responses"
@@ -13579,14 +13561,12 @@ msgid "Note: There is no default project query defined."
 msgstr ""
 
 #: www/tracker/query.php:294
-#, fuzzy
 msgid "Type of query"
-msgstr "Type de champ supplémentaire"
+msgstr "Type de requête"
 
 #: www/tracker/query.php:296
-#, fuzzy
 msgid "Private query"
-msgstr "Privé"
+msgstr "Requête privée"
 
 #: www/tracker/query.php:298
 msgid "Project level query (query is public)"
