@@ -663,10 +663,11 @@ class ForumMessage extends Error {
 
 			$body = sprintf(_("\nRead and respond to this message at: \n%s"), util_make_url ('/forum/message.php?msg_id='.$this->getID()));
 			if ($GLOBALS['sys_use_mail']) {
-				$body .= stripcslashes(sprintf(_('\nOr by replying to this e-mail entering your response between the following markers: '.
-					  '\n%1$s'.
-					  '\n(enter your response here)'.
-					  '\n%1$s'), FORUM_MAIL_MARKER));
+				$body .= stripcslashes(sprintf(_('
+Or reply to this e-mail entering your response between the following markers: 
+%1$s
+(enter your response here)
+%1$s'), FORUM_MAIL_MARKER));
 			}
 			$body .= sprintf(_("\n\n\nBy: %s\n"), $this->getPosterRealName());
 
