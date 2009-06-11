@@ -279,7 +279,7 @@ print '&nbsp;'._('Project Home Page').'</a>';
 if ($project->usesTracker()) {
 	print '<hr size="1" /><a href="'.util_make_url ('/tracker/?group_id='.$group_id).'">';
 	print html_image('ic/tracker20g.png','20','20',array('alt'=>_('Tracker')));
-	print _('Tracker').'</a>';
+	print '&nbsp;'._('Tracker').'</a>';
 
 	$result=db_query("SELECT agl.*,aca.count,aca.open_count
 	FROM artifact_group_list agl
@@ -298,7 +298,7 @@ if ($project->usesTracker()) {
 		for ($j = 0; $j < $rows; $j++) {
 			echo '<li>' ;
 			print util_make_link ('/tracker/?atid='. db_result($result, $j, 'group_artifact_id') . '&amp;group_id='.$group_id.'&amp;func=browse',db_result($result, $j, 'name')) . ' ' ;
-			sprintf(ngettext('(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', '(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', (int) db_result($result, $j, 'open_count')), (int) db_result($result, $j, 'open_count'), (int) db_result($result, $j, 'count')) .'<br />'.
+			printf(ngettext('(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', '(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', (int) db_result($result, $j, 'open_count')), (int) db_result($result, $j, 'open_count'), (int) db_result($result, $j, 'count')) .'<br />'.
 			 db_result($result, $j, 'description');
 			echo '</li>' ;
 		}
@@ -367,7 +367,7 @@ if ($project->usesPm()) {
 if ($project->usesSurvey()) {
 	print '<hr size="1" /><a href="'.util_make_url ('/survey/?group_id='.$group_id).'">';
 	print html_image('ic/survey16b.png','20','20',array('alt'=>_('Surveys')));
-	print " "._('Surveys')."</a>";
+	print '&nbsp;'._('Surveys')."</a>";
 	echo ' ( <strong>'. project_get_survey_count($group_id) .'</strong> '._('surveys').'  )';
 }
 
@@ -376,7 +376,7 @@ if ($project->usesSurvey()) {
 if ($project->usesSCM()) {
 	print '<hr size="1" /><a href="'.util_make_url ('/scm/?group_id='.$group_id).'">';
 	print html_image('ic/cvs16b.png','20','20',array('alt'=>_('SCM')));
-	print " "._('SCM Repository')."</a>";
+	print '&nbsp;'._('SCM Repository')."</a>";
 
 	/*
 	$result = db_query("
@@ -412,7 +412,7 @@ if ($project->usesFTP()) {
 		print '<hr size="1" />';
 		print '<a href="ftp://' . $project->getUnixName() . '.' . $GLOBALS['sys_default_domain'] . '/pub/'. $project->getUnixName() .'/">';
 		print html_image('ic/ftp16b.png','20','20',array('alt'=>_('Anonymous FTP Space')));
-		print _('Anonymous FTP Space')."</a>";
+		print '&nbsp;'._('Anonymous FTP Space')."</a>";
 	}
 }
 

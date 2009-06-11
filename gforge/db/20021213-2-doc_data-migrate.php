@@ -10,6 +10,8 @@
 require_once dirname(__FILE__).'/../www/env.inc.php';
 require $gfwww.'include/squal_pre.php';
 
+@ini_set('memory_limit', '128M');
+
 // drop and recreate page cache
 //
 //SELECT * FROM doc_data WHERE filename is null;
