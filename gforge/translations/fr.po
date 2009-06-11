@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-10 16:11+0200\n"
+"POT-Creation-Date: 2009-06-11 13:41+0200\n"
 "PO-Revision-Date: 2009-06-10 21:11+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <aljeux@free.fr>\n"
-"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Pootle 1.2.1\n"
 "X-Poedit-Language: French\n"
@@ -276,7 +276,7 @@ msgstr "Un fichier portant ce nom existe déjà dans ce projet"
 msgid "File cannot be moved to the permanent location"
 msgstr "Le fichier ne peut pas être déplacé vers sa destination"
 
-#: common/frs/FRSPackage.class.php:136 common/frs/FRSPackage.class.php:369
+#: common/frs/FRSPackage.class.php:136 common/frs/FRSPackage.class.php:366
 #: common/frs/FRSRelease.class.php:122 common/frs/FRSRelease.class.php:386
 msgid "FRSPackage Name Must Be At Least 3 Characters"
 msgstr "Le nom de révision doit compter au moins 3 caractères"
@@ -1013,7 +1013,7 @@ msgstr "fr_FR"
 #: common/include/group_section_texts.php:30
 #: common/reporting/report_utils.php:164
 #: plugins/quota_management/www/quota_project.php:91
-#: www/include/Layout.class.php:560 www/include/project_home.php:309
+#: www/include/Layout.class.php:560 www/include/project_home.php:313
 #: www/themes/gforge-simple-theme/Theme.class.php:505
 #: www/themes/gforge/Theme.class.php:508
 msgid "Forums"
@@ -1026,7 +1026,7 @@ msgstr "Outil de suivi"
 #: common/include/group_section_texts.php:32 common/include/rbac_texts.php:86
 #: common/include/rbac_texts.php:87 common/reporting/report_utils.php:172
 #: common/reporting/report_utils.php:200 www/include/Layout.class.php:582
-#: www/include/project_home.php:343 www/my/dashboard.php:89
+#: www/include/project_home.php:347 www/my/dashboard.php:89
 #: www/project/stats/project_stats_utils.php:83
 #: www/project/stats/project_stats_utils.php:142
 #: www/project/stats/project_stats_utils.php:198
@@ -1217,7 +1217,7 @@ msgid "Project Admin"
 msgstr "Administration du projet"
 
 #: common/include/rbac_texts.php:98 common/include/rbac_texts.php:99
-#: www/include/Layout.class.php:610 www/include/project_home.php:372
+#: www/include/Layout.class.php:610 www/include/project_home.php:378
 #: www/scm/include/scm_utils.php:52
 #: www/themes/gforge-simple-theme/Theme.class.php:562
 #: www/themes/gforge/Theme.class.php:558
@@ -1376,7 +1376,7 @@ msgstr "Référence circulaire détéctée"
 #: www/forum/include/ForumHTML.class.php:245
 #: www/forum/include/ForumHTML.class.php:428 www/forum/index.php:86
 #: www/forum/message.php:107 www/forum/message.php:182
-#: www/forum/myforums.php:161 www/frs/index.php:160
+#: www/forum/myforums.php:161 www/frs/index.php:170
 #: www/include/project_home.php:81 www/include/stats_function.php:85
 #: www/include/stats_function.php:108 www/include/user_home.php:93
 #: www/my/diary.php:201 www/news/news_utils.php:148
@@ -1495,7 +1495,7 @@ msgid "Y-m"
 msgstr "m/Y"
 
 #: common/reporting/report_utils.php:168 www/include/Layout.class.php:589
-#: www/include/project_home.php:325
+#: www/include/project_home.php:329
 #: www/themes/gforge-simple-theme/Theme.class.php:538
 #: www/themes/gforge/Theme.class.php:537
 msgid "Docs"
@@ -2011,7 +2011,7 @@ msgstr "Aucun envoi n'a été fait dans CVS."
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:102
 #: plugins/svntracker/common/svntrackerPlugin.class.php:94
-#: www/frs/index.php:98
+#: www/frs/index.php:99
 msgid "Filename"
 msgstr "Nom du fichier"
 
@@ -2021,7 +2021,7 @@ msgstr "Nom du fichier"
 #: www/developer/diary.php:46 www/developer/diary.php:78
 #: www/forum/forum.php:236 www/forum/include/ForumHTML.class.php:67
 #: www/forum/message.php:139 www/frs/admin/showreleases.php:102
-#: www/frs/index.php:99 www/include/project_home.php:183
+#: www/frs/index.php:100 www/include/project_home.php:183
 #: www/news/admin/news_admin_utils.php:56 www/pm/calendar.php:252
 #: www/pm/include/ProjectTaskHTML.class.php:127
 #: www/pm/include/ProjectTaskHTML.class.php:164
@@ -2296,8 +2296,8 @@ msgstr "Non"
 #: www/admin/admin_table.php:136 www/admin/admin_table.php:266
 #: www/admin/responses_admin.php:47 www/admin/trove/trove_cat_edit.php:147
 #: www/admin/useredit.php:201 www/docman/admin/index.php:458
-#: www/forum/admin/index.php:184 www/forum/admin/index.php:194
-#: www/forum/include/AttachManager.class.php:148
+#: www/forum/admin/ForumAdmin.class.php:63 www/forum/admin/index.php:184
+#: www/forum/admin/index.php:194 www/forum/include/AttachManager.class.php:148
 #: www/frs/admin/deletepackage.php:76 www/frs/admin/deleterelease.php:81
 #: www/frs/admin/index.php:171 www/frs/admin/showreleases.php:115
 #: www/my/index.php:427 www/news/admin/index.php:131
@@ -4310,7 +4310,7 @@ msgstr "ajouter nouveau"
 
 #: www/admin/admin_table.php:265 www/admin/responses_admin.php:46
 #: www/admin/responses_admin.php:87 www/admin/trove/trove_cat_list.php:43
-#: www/docman/admin/index.php:432
+#: www/docman/admin/index.php:432 www/forum/admin/ForumAdmin.class.php:62
 #: www/forum/include/AttachManager.class.php:147
 #: www/frs/admin/showreleases.php:112 www/people/skills_utils.php:33
 #: www/people/skills_utils.php:91 www/project/admin/editimages.php:257
@@ -4545,7 +4545,7 @@ msgstr "Administration du site : gestion des bases de données des groupes"
 msgid "Statistics for Project Databases"
 msgstr "Statistiques pour les bases de données des projets"
 
-#: www/admin/database.php:99 www/admin/massmail.php:143 www/frs/index.php:107
+#: www/admin/database.php:99 www/admin/massmail.php:143 www/frs/index.php:108
 #: www/people/editprofile.php:289 www/people/skills_utils.php:36
 #: www/people/skills_utils.php:151 www/project/stats/index.php:58
 #: www/reporting/groupadded.php:55 www/reporting/groupcum.php:55
@@ -5917,7 +5917,7 @@ msgid "Your search did not match any documents"
 msgstr "Votre recherche n'a renvoyé aucun document."
 
 #: www/export/projnews.php:81 www/forum/include/ForumHTML.class.php:79
-#: www/include/project_home.php:428 www/index_std.php:40
+#: www/include/project_home.php:434 www/index_std.php:40
 msgid "Latest News"
 msgstr "Dernières annonces"
 
@@ -6890,38 +6890,38 @@ msgstr "Mise à jour d'une nouvelle version de fichier."
 msgid "Must Choose One"
 msgstr "Sélection obligatoire"
 
-#: www/frs/index.php:36
+#: www/frs/index.php:37
 msgid "No group title"
 msgstr "Pas de titre de groupe"
 
-#: www/frs/index.php:36
+#: www/frs/index.php:37
 msgid "No group"
 msgstr "Pas de groupe"
 
-#: www/frs/index.php:64
+#: www/frs/index.php:65
 msgid "Project Filelist"
 msgstr "Liste de fichiers du projet"
 
-#: www/frs/index.php:67
+#: www/frs/index.php:68
 msgid "No File Packages"
 msgstr "Aucun paquet de fichiers"
 
-#: www/frs/index.php:68
+#: www/frs/index.php:69
 msgid "There are no file packages defined for this project."
 msgstr "Aucun paquet de fichiers n'a été défini pour ce projet."
 
-#: www/frs/index.php:71
+#: www/frs/index.php:72
 msgid "Below is a list of all files of the project."
 msgstr "La liste des fichiers du projet est affichée en dessous."
 
-#: www/frs/index.php:73
+#: www/frs/index.php:74
 msgid ""
 "The release you have chosen is <span class=\"selected\">highlighted</span>."
 msgstr ""
 "La version que vous avez choisie est <span class=\"selected\">mise en "
 "valeur</span>"
 
-#: www/frs/index.php:75
+#: www/frs/index.php:76
 msgid ""
 "Before downloading, you may want to read Release Notes and ChangeLog "
 "(accessible by clicking on release version)."
@@ -6929,41 +6929,46 @@ msgstr ""
 "Avant de télécharger, vous pouvez lire les commentaires et changements en "
 "cliquant sur le numéro de version."
 
-#: www/frs/index.php:86
+#: www/frs/index.php:87
 msgid "To create a new release click here."
 msgstr "Pour créer une nouvelle version, cliquez ici.</s>"
 
-#: www/frs/index.php:96 www/frs/reporting/downloads.php:100
+#: www/frs/index.php:97 www/frs/reporting/downloads.php:100
 #: www/include/project_home.php:177
 msgid "Package"
 msgstr "Paquet"
 
-#: www/frs/index.php:97
+#: www/frs/index.php:98
 msgid "Release &amp; Notes"
 msgstr "Version <br />&amp; Commentaires</s>"
 
-#: www/frs/index.php:104 www/pm/ganttpage.php:171
+#: www/frs/index.php:105 www/pm/ganttpage.php:171
 #: www/project/admin/editimages.php:262
 msgid "Size"
 msgstr "Taille"
 
-#: www/frs/index.php:105
+#: www/frs/index.php:106
 msgid "D/L"
 msgstr "D/L"
 
-#: www/frs/index.php:106
+#: www/frs/index.php:107
 msgid "Arch"
 msgstr "Archive"
 
-#: www/frs/index.php:121 www/include/project_home.php:243
+#: www/frs/index.php:126
+#, fuzzy
+msgid "Stop monitoring this package"
+msgstr "Suivre ce paquet"
+
+#: www/frs/index.php:129 www/include/project_home.php:243
 msgid "Monitor this package"
 msgstr "Suivre ce paquet"
 
-#: www/frs/index.php:134
+#: www/frs/index.php:144
 msgid "No releases"
 msgstr "Pas de version"
 
-#: www/frs/index.php:218
+#: www/frs/index.php:228
 msgid "Project totals"
 msgstr "Totaux du projet"
 
@@ -7410,14 +7415,14 @@ msgstr "Boite à outils"
 msgid "Project&nbsp;Openings"
 msgstr "Demande d'aide"
 
-#: www/include/Layout.class.php:575 www/include/project_home.php:333
+#: www/include/Layout.class.php:575 www/include/project_home.php:337
 #: www/themes/gforge-simple-theme/Theme.class.php:522
 #: www/themes/gforge/Theme.class.php:523
 msgid "Lists"
 msgstr "Listes"
 
-#: www/include/Layout.class.php:596 www/include/project_home.php:363
-#: www/include/project_home.php:364 www/survey/include/SurveyHTML.class.php:53
+#: www/include/Layout.class.php:596 www/include/project_home.php:369
+#: www/include/project_home.php:370 www/survey/include/SurveyHTML.class.php:53
 #: www/survey/survey_utils.php:52
 #: www/themes/gforge-simple-theme/Theme.class.php:546
 #: www/themes/gforge/Theme.class.php:544
@@ -7737,7 +7742,7 @@ msgstr "Page d'accueil du projet"
 msgid "There are no public trackers available"
 msgstr "Il n'y a pas de traceur public"
 
-#: www/include/project_summary.php:138
+#: www/include/project_home.php:301 www/include/project_summary.php:138
 #, php-format
 msgid "(<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
 msgid_plural "(<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
@@ -7746,59 +7751,59 @@ msgstr[0] ""
 msgstr[1] ""
 "(<strong>%1$s</strong> ouverts sur un total de <strong>%2$s</strong>)"
 
-#: www/include/project_home.php:310
+#: www/include/project_home.php:314
 msgid "Public Forums"
 msgstr "Forums de discussion"
 
-#: www/include/project_home.php:313
+#: www/include/project_home.php:317
 #, php-format
 msgid "<strong>%d</strong> message"
 msgid_plural "<strong>%d</strong> messages"
 msgstr[0] "<strong>%d</strong> message"
 msgstr[1] "<strong>%d</strong> messages"
 
-#: www/include/project_home.php:315
+#: www/include/project_home.php:319
 #, php-format
 msgid "<strong>%d</strong> forum"
 msgid_plural "<strong>%d</strong> forums"
 msgstr[0] "<strong>%d</strong> forum"
 msgstr[1] "<strong>%d</strong> forums"
 
-#: www/include/project_home.php:326
+#: www/include/project_home.php:330
 msgid "DocManager: Project Documentation"
 msgstr "Gestion de documents : Documentation du projet"
 
-#: www/include/project_home.php:334
+#: www/include/project_home.php:338
 msgid "Mailing Lists"
 msgstr "Listes de diffusion"
 
-#: www/include/project_home.php:336
+#: www/include/project_home.php:340
 #, php-format
 msgid "(<strong>%1$s</strong> public mailing list)"
 msgid_plural "(<strong>%1$s</strong> public mailing lists)"
 msgstr[0] "(<strong>%1$s</strong> liste de diffusion publique)"
 msgstr[1] "(<strong>%1$s</strong> listes de diffusion publiques)"
 
-#: www/include/project_home.php:344
+#: www/include/project_home.php:348
 msgid "Task Manager"
 msgstr "Gestion des tâches"
 
-#: www/include/project_home.php:349
+#: www/include/project_home.php:353
 msgid "There are no public subprojects available"
 msgstr "Il n'y a pas de sous-projet public"
 
-#: www/include/project_home.php:365
+#: www/include/project_home.php:371
 msgid "surveys"
 msgstr "Sondages"
 
-#: www/include/project_home.php:373 www/register/projectinfo.php:160
+#: www/include/project_home.php:379 www/register/projectinfo.php:160
 #: www/scm/admin/index.php:39 www/scm/admin/index.php:89
 #: www/scm/include/scm_utils.php:43 www/scm/index.php:32
 #: www/scm/reporting/index.php:32 www/scm/viewvc.php:138
 msgid "SCM Repository"
 msgstr "Dépôt de sources"
 
-#: www/include/project_home.php:408 www/include/project_home.php:409
+#: www/include/project_home.php:414 www/include/project_home.php:415
 msgid "Anonymous FTP Space"
 msgstr "Espace FTP anonyme"
 
@@ -13732,11 +13737,9 @@ msgstr[1] ""
 msgid "No User Name Provided"
 msgstr "Aucun nom d'utilisateur n'a été fourni"
 
-#: www/include/project_home.php:299
-#, php-format
-msgid " (<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
-msgid_plural " (<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
-msgstr[0] ""
-"(<strong>%1$s</strong> ouvert sur un total de <strong>%2$s</strong>)"
-msgstr[1] ""
-"(<strong>%1$s</strong> ouverts sur un total de <strong>%2$s</strong>)"
+#~ msgid " (<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
+#~ msgid_plural " (<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
+#~ msgstr[0] ""
+#~ "(<strong>%1$s</strong> ouvert sur un total de <strong>%2$s</strong>)"
+#~ msgstr[1] ""
+#~ "(<strong>%1$s</strong> ouverts sur un total de <strong>%2$s</strong>)"

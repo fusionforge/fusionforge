@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-10 21:36+0200\n"
+"POT-Creation-Date: 2009-06-11 13:41+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -248,7 +248,7 @@ msgstr "在這個專案空間中，同樣檔案名稱已存在"
 msgid "File cannot be moved to the permanent location"
 msgstr "檔案無法被移到永久保存位置"
 
-#: common/frs/FRSPackage.class.php:136 common/frs/FRSPackage.class.php:369
+#: common/frs/FRSPackage.class.php:136 common/frs/FRSPackage.class.php:366
 #: common/frs/FRSRelease.class.php:122 common/frs/FRSRelease.class.php:386
 msgid "FRSPackage Name Must Be At Least 3 Characters"
 msgstr "FRSPackage 名稱必須至少3個字元"
@@ -1357,7 +1357,7 @@ msgstr "發現迴圈依賴'"
 #: www/forum/include/ForumHTML.class.php:245
 #: www/forum/include/ForumHTML.class.php:428 www/forum/index.php:86
 #: www/forum/message.php:107 www/forum/message.php:182
-#: www/forum/myforums.php:161 www/frs/index.php:160
+#: www/forum/myforums.php:161 www/frs/index.php:170
 #: www/include/project_home.php:81 www/include/stats_function.php:85
 #: www/include/stats_function.php:108 www/include/user_home.php:93
 #: www/my/diary.php:201 www/news/news_utils.php:148
@@ -1976,7 +1976,7 @@ msgstr ""
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:102
 #: plugins/svntracker/common/svntrackerPlugin.class.php:94
-#: www/frs/index.php:98
+#: www/frs/index.php:99
 msgid "Filename"
 msgstr "檔案名稱"
 
@@ -1986,7 +1986,7 @@ msgstr "檔案名稱"
 #: www/developer/diary.php:46 www/developer/diary.php:78
 #: www/forum/forum.php:236 www/forum/include/ForumHTML.class.php:67
 #: www/forum/message.php:139 www/frs/admin/showreleases.php:102
-#: www/frs/index.php:99 www/include/project_home.php:183
+#: www/frs/index.php:100 www/include/project_home.php:183
 #: www/news/admin/news_admin_utils.php:56 www/pm/calendar.php:252
 #: www/pm/include/ProjectTaskHTML.class.php:127
 #: www/pm/include/ProjectTaskHTML.class.php:164
@@ -2272,8 +2272,8 @@ msgstr "否"
 #: www/admin/admin_table.php:136 www/admin/admin_table.php:266
 #: www/admin/responses_admin.php:47 www/admin/trove/trove_cat_edit.php:147
 #: www/admin/useredit.php:201 www/docman/admin/index.php:458
-#: www/forum/admin/index.php:184 www/forum/admin/index.php:194
-#: www/forum/include/AttachManager.class.php:148
+#: www/forum/admin/ForumAdmin.class.php:63 www/forum/admin/index.php:184
+#: www/forum/admin/index.php:194 www/forum/include/AttachManager.class.php:148
 #: www/frs/admin/deletepackage.php:76 www/frs/admin/deleterelease.php:81
 #: www/frs/admin/index.php:171 www/frs/admin/showreleases.php:115
 #: www/my/index.php:427 www/news/admin/index.php:131
@@ -4180,7 +4180,7 @@ msgstr "新增"
 
 #: www/admin/admin_table.php:265 www/admin/responses_admin.php:46
 #: www/admin/responses_admin.php:87 www/admin/trove/trove_cat_list.php:43
-#: www/docman/admin/index.php:432
+#: www/docman/admin/index.php:432 www/forum/admin/ForumAdmin.class.php:62
 #: www/forum/include/AttachManager.class.php:147
 #: www/frs/admin/showreleases.php:112 www/people/skills_utils.php:33
 #: www/people/skills_utils.php:91 www/project/admin/editimages.php:257
@@ -4409,7 +4409,7 @@ msgstr "網站管理：群組資料庫維護"
 msgid "Statistics for Project Databases"
 msgstr "專案資料庫統計"
 
-#: www/admin/database.php:99 www/admin/massmail.php:143 www/frs/index.php:107
+#: www/admin/database.php:99 www/admin/massmail.php:143 www/frs/index.php:108
 #: www/people/editprofile.php:289 www/people/skills_utils.php:36
 #: www/people/skills_utils.php:151 www/project/stats/index.php:58
 #: www/reporting/groupadded.php:55 www/reporting/groupcum.php:55
@@ -6710,77 +6710,82 @@ msgstr "釋出新檔案版本"
 msgid "Must Choose One"
 msgstr "必須選擇一個"
 
-#: www/frs/index.php:36
+#: www/frs/index.php:37
 msgid "No group title"
 msgstr ""
 
-#: www/frs/index.php:36
+#: www/frs/index.php:37
 #, fuzzy
 msgid "No group"
 msgstr "增加新分組"
 
-#: www/frs/index.php:64
+#: www/frs/index.php:65
 msgid "Project Filelist"
 msgstr "專案檔案列表"
 
-#: www/frs/index.php:67
+#: www/frs/index.php:68
 msgid "No File Packages"
 msgstr "沒有釋出檔案"
 
-#: www/frs/index.php:68
+#: www/frs/index.php:69
 msgid "There are no file packages defined for this project."
 msgstr ""
 
-#: www/frs/index.php:71
+#: www/frs/index.php:72
 msgid "Below is a list of all files of the project."
 msgstr "下面是這個專案的所有檔案。"
 
-#: www/frs/index.php:73
+#: www/frs/index.php:74
 msgid ""
 "The release you have chosen is <span class=\"selected\">highlighted</span>."
 msgstr ""
 
-#: www/frs/index.php:75
+#: www/frs/index.php:76
 msgid ""
 "Before downloading, you may want to read Release Notes and ChangeLog "
 "(accessible by clicking on release version)."
 msgstr "下載之前，您也許想要閱讀釋出與異動記錄 (點擊釋出版本即可瀏覽)。"
 
-#: www/frs/index.php:86
+#: www/frs/index.php:87
 msgid "To create a new release click here."
 msgstr "點擊這裡建立新的釋出"
 
-#: www/frs/index.php:96 www/frs/reporting/downloads.php:100
+#: www/frs/index.php:97 www/frs/reporting/downloads.php:100
 #: www/include/project_home.php:177
 msgid "Package"
 msgstr "集合"
 
-#: www/frs/index.php:97
+#: www/frs/index.php:98
 msgid "Release &amp; Notes"
 msgstr "釋出記錄"
 
-#: www/frs/index.php:104 www/pm/ganttpage.php:171
+#: www/frs/index.php:105 www/pm/ganttpage.php:171
 #: www/project/admin/editimages.php:262
 msgid "Size"
 msgstr "大小"
 
-#: www/frs/index.php:105
+#: www/frs/index.php:106
 msgid "D/L"
 msgstr "下載"
 
-#: www/frs/index.php:106
+#: www/frs/index.php:107
 msgid "Arch"
 msgstr "文件"
 
-#: www/frs/index.php:121 www/include/project_home.php:243
+#: www/frs/index.php:126
+#, fuzzy
+msgid "Stop monitoring this package"
+msgstr "訂閱這個集合"
+
+#: www/frs/index.php:129 www/include/project_home.php:243
 msgid "Monitor this package"
 msgstr "訂閱這個集合"
 
-#: www/frs/index.php:134
+#: www/frs/index.php:144
 msgid "No releases"
 msgstr "未釋出任何檔案"
 
-#: www/frs/index.php:218
+#: www/frs/index.php:228
 msgid "Project totals"
 msgstr "專案檔案總數"
 
