@@ -36,6 +36,14 @@ elif [ -f "/etc/SuSE-release" ]
 then
 	type="suse"
 	distrib=`awk '{print $1}' /etc/SuSE-release | head -n 1`
+elif [ -f "/etc/ubuntu_version" ]
+then
+	type="ubuntu"
+	distrib=`awk '{print $1}' /etc/ubuntu_version`
+elif [ -f "/etc/debian_version" ]
+then
+	type="debian"
+	distrib=`awk '{print $1}' /etc/debian_version`
 fi
 
 
@@ -128,6 +136,18 @@ then
 	else
 		php /opt/gforge/db/upgrade-db.php
 	fi
+elif [ $type = "ubuntu" ]
+then
+	echo "--"
+	echo "For ubuntu, rather use ubuntu $distrib package"
+	echo "SEE https://fusionforge.org/mediawiki/index.php/Installing/UbuntuRepositories"
+	echo "--"
+elif [ $type = "debian" ]
+then
+	echo "--"
+	echo "For debian, rather use debian $distrib package"
+	echo "SEE https://fusionforge.org/mediawiki/index.php/Installing/DebianRepositories"
+	echo "--"
 else
 	echo "Only Red Hat, Fedora or CentOS and OpenSUSE are supported by this script.";
 	echo "See INSTALL for normal installation";
