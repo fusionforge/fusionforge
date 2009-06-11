@@ -176,7 +176,7 @@ class MailingList extends Error {
 			$this->setInvalidEmailError();
 			return false;
 		} else {
-			$mailBody = stripcslashes(sprintf(_('A mailing list will be created on %1$s in 6-24 hours 
+			$mailBody = sprintf(_('A mailing list will be created on %1$s in 6-24 hours 
 and you are the list administrator.
 
 This list is: %3$s@%2$s .
@@ -193,7 +193,7 @@ You are encouraged to change this password as soon as possible.
 Thank you for registering your project with %1$s.
 
 -- the %1$s staff
-'), $GLOBALS['sys_name'], $GLOBALS['sys_lists_host'], $realListName, $this->getExternalInfoUrl(), $this->getExternalAdminUrl(), $listPassword));
+'), $GLOBALS['sys_name'], $GLOBALS['sys_lists_host'], $realListName, $this->getExternalInfoUrl(), $this->getExternalAdminUrl(), $listPassword);
 			$mailSubject = sprintf(_('%1$s New Mailing List'), $GLOBALS['sys_name']);
 			
 			util_send_message($userEmail, $mailSubject, $mailBody, 'admin@'.$GLOBALS['sys_default_domain']);

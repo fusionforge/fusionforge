@@ -2194,7 +2194,7 @@ class Group extends Error {
 			$admin =& user_get_object($row_admins['user_id']);
 			setup_gettext_for_user ($admin) ;
 
-			$message=stripcslashes(sprintf(_('Your project registration for %4$s has been approved.
+			$message=sprintf(_('Your project registration for %4$s has been approved.
 
 Project Full Name:  %1$s
 Project Unix Name:  %2$s
@@ -2228,7 +2228,7 @@ if there is anything we can do to help you.
 						       $this->getPublicName(), 
 						       $this->getUnixName(), 
 						       util_make_url ('/project/admin/?group_id='.$this->getID()),
-						       $GLOBALS['sys_name']));
+						       $GLOBALS['sys_name']);
 	
 			util_send_message($row_admins['email'], sprintf(_('%1$s Project Approved'), $GLOBALS['sys_name']), $message);
 
@@ -2266,18 +2266,18 @@ if there is anything we can do to help you.
 			$admin =& user_get_object($row_admins['user_id']);
 			setup_gettext_for_user ($admin) ;
 
-			$response=stripcslashes(sprintf(_('Your project registration for %3$s has been denied.
+			$response=sprintf(_('Your project registration for %3$s has been denied.
 
 Project Full Name:  %1$s
 Project Unix Name:  %2$s
 
 Reasons for negative decision:
 
-'), $this->getPublicName(), $this->getUnixName(), $GLOBALS['sys_name']));
+'), $this->getPublicName(), $this->getUnixName(), $GLOBALS['sys_name']);
 
 			// Check to see if they want to send a custom rejection response
 			if ($response_id == 0) {
-				$response .= stripcslashes($message);
+				$response .= $message;
 			} else {
 				$response .= db_result (
 					db_query_params('SELECT response_text FROM canned_responses WHERE response_id=$1', array ($response_id)),
@@ -2332,7 +2332,7 @@ Reasons for negative decision:
 			$admin =& user_get_object(db_result($res,$i,'user_id'));
 			setup_gettext_for_user ($admin) ;
 			
-			$message=stripcslashes(sprintf(_('New %1$s Project Submitted
+			$message=sprintf(_('New %1$s Project Submitted
 
 Project Full Name:  %2$s
 Submitted Description: %3$s
@@ -2345,7 +2345,7 @@ Please visit the following URL to approve or reject this project:
 						       util_unconvert_htmlspecialchars($this->getRegistrationPurpose()),
 						       util_make_url ('/admin/approve-pending.php'),
 						       $submitter->getRealName(), 
-						       $submitter->getUnixName()));
+						       $submitter->getUnixName());
 			util_send_message($admin_email, sprintf(_('New %1$s Project Submitted'), $GLOBALS['sys_name']), $message);
 			setup_gettext_from_context();
 		}
@@ -2354,12 +2354,12 @@ Please visit the following URL to approve or reject this project:
 		$email = $submitter->getEmail() ;
 		setup_gettext_for_user ($submitter) ;
 				
-		$message=stripcslashes(sprintf(_('New %1$s Project Submitted
+		$message=sprintf(_('New %1$s Project Submitted
 
 Project Full Name:  %2$s
 Submitted Description: %3$s
 
-The %1$s admin team will now examine your project submission.  You will be notified of their decision.'), $GLOBALS['sys_name'], $this->getPublicName(), util_unconvert_htmlspecialchars($this->getRegistrationPurpose()), $GLOBALS['sys_default_domain']));
+The %1$s admin team will now examine your project submission.  You will be notified of their decision.'), $GLOBALS['sys_name'], $this->getPublicName(), util_unconvert_htmlspecialchars($this->getRegistrationPurpose()), $GLOBALS['sys_default_domain']);
 				
 		util_send_message($email, sprintf(_('New %1$s Project Submitted'), $GLOBALS['sys_name']), $message);
 		setup_gettext_from_context();

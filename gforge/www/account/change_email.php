@@ -58,14 +58,14 @@ if (getStringFromRequest('submit')) {
 		);
 	}
 
-	$message = stripcslashes(sprintf(_('You have requested a change of email address on %1$s.
+	$message = sprintf(_('You have requested a change of email address on %1$s.
 Please visit the following URL to complete the email change:
 
 %2$s
 
  -- the %1$s staff'), 
 					 $GLOBALS['sys_name'],
-					 util_make_url ('/account/change_email-complete.php?ch=_'.$confirm_hash)));
+					 util_make_url ('/account/change_email-complete.php?ch=_'.$confirm_hash));
 
 	util_send_message($newemail,sprintf(_('%1$s Verification'), $GLOBALS['sys_name']),$message);
 
