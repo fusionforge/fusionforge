@@ -79,7 +79,7 @@ cleanff:		# Clean files of fusionforge build                         #
 	@echo cleanff Done
 
 build: rpmprep		# Build rpm fusionforge packages                               #
-	cd gforge; find . -type f | grep -v '/CVS/' | grep -v '/.svn/' | grep -v contrib | grep -v debian | grep -v docs/phpdoc/docs | cpio -pdumvB $(RPM_TMP)/SOURCES/fusionforge-$(version)
+	cd gforge; find . -type f | grep -v '/CVS/' | grep -v '/.svn/' | grep -v '/contrib/' | grep -v '/debian/' | grep -v docs/phpdoc/docs | cpio -pdumvB $(RPM_TMP)/SOURCES/fusionforge-$(version)
 	cd $(RPM_TMP)/SOURCES/fusionforge-$(version); mv plugins ../;mkdir ../utils;mv utils/install-nsspgsql.sh ../utils/;mv utils/fusionforge-shell-postgresql.spec ../utils/
 	cd $(RPM_TMP)/SOURCES/fusionforge-$(version)/;  utils/manage-translations.sh build
 	cd $(RPM_TMP)/SOURCES/; cp fusionforge-$(version)/rpm-specific/patches/gforge-4.0-deb_rpm.patch .
@@ -96,7 +96,7 @@ cleancvs:               # Clean files of gforge-plugin-scmcvs build           #
 	@echo cleancvs Done
 
 buildcvs:               # Build rpm fusionforge-plugin-scmcvs package                  #
-	cd gforge/plugins/scmcvs; find . -type f | grep -v '/CVS/' | grep -v '/.svn/' | grep -v contrib | grep -v debian | cpio -pdumvB $(RPM_TMP)/SOURCES/fusionforge-plugin-scmcvs-$(version)
+	cd gforge/plugins/scmcvs; find . -type f | grep -v '/CVS/' | grep -v '/.svn/' | grep -v '/contrib/' | grep -v '/debian/' | cpio -pdumvB $(RPM_TMP)/SOURCES/fusionforge-plugin-scmcvs-$(version)
 	cd $(RPM_TMP)/SOURCES; tar cvjf fusionforge-plugin-scmcvs-$(version).tar.bz2 fusionforge-plugin-scmcvs-$(version)
 	cd $(RPM_TMP)/SOURCES; rpmbuild -ts --nodeps fusionforge-plugin-scmcvs-$(version).tar.bz2
 
@@ -167,7 +167,7 @@ cleanlibnsspgsql:               # Clean files of fusionforge-shell-postgresql   
 	@echo cleanlibnsspgsql Done
 
 buildlibnsspgsql:               # Build rpm fusionforge-shell-postgresql package                  #
-	cd gforge/utils; find . -type f | grep -v '/CVS/' | grep -v '/.svn/' | grep -v contrib | grep -v debian | cpio -pdumvB $(RPM_TMP)/SOURCES/fusionforge-shell-postgresql-$(version)
+	cd gforge/utils; find . -type f | grep -v '/CVS/' | grep -v '/.svn/' | grep -v '/contrib/' | grep -v '/debian/' | cpio -pdumvB $(RPM_TMP)/SOURCES/fusionforge-shell-postgresql-$(version)
 	cd $(RPM_TMP)/SOURCES; tar cvjf fusionforge-shell-postgresql-$(version).tar.bz2 fusionforge-shell-postgresql-$(version)
 	cd $(RPM_TMP)/SOURCES/; rpmbuild -ts --nodeps fusionforge-shell-postgresql-$(version).tar.bz2
 
