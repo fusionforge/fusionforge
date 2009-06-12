@@ -1,9 +1,14 @@
 gforge (4.8.52-1) experimental; urgency=low
 
+  [ Christian Bayle ]
   * bump to new version because on binary commit
   * put debian postinst/prerm/config/.. files in dsf-in dir
 
- -- Christian Bayle <bayle@debian.org>  Wed, 03 Jun 2009 22:49:58 +0200
+  [ Roland Mas ]
+  * Use standard Sort::Versions module to compare database schema version
+    numbers rather than forking dpkg --compare-versions.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 12 Jun 2009 11:07:25 +0200
 
 gforge (4.8.51-1) experimental; urgency=low
 

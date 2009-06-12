@@ -21,6 +21,7 @@
 ### TODO
 
 use strict ;
+use Sort::Versions;
 
 use subs qw/ &get_plugin_id &remove_plugin_from_groups
     &remove_plugin_from_users &drop_table_if_exists
@@ -287,18 +288,14 @@ sub is_lesser ( $$ ) {
     my $v1 = shift || 0 ;
     my $v2 = shift || 0 ;
 
-    my $rc = system "dpkg --compare-versions $v1 lt $v2" ;
-
-    return (! $rc) ;
+    return (versioncmp($v1, $v2) < 0) ;
 }
 
 sub is_greater ( $$ ) {
     my $v1 = shift || 0 ;
     my $v2 = shift || 0 ;
 
-    my $rc = system "dpkg --compare-versions $v1 gt $v2" ;
-
-    return (! $rc) ;
+    return (versioncmp($v1, $v2) > 0) ;
 }
 
 1 ;
