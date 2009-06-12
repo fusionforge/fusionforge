@@ -1,3 +1,9 @@
+gforge (4.8-1) experimental; urgency=low
+
+  * New upstream release.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 12 Jun 2009 13:44:57 +0200
+
 gforge (4.8~rc2-1) experimental; urgency=low
 
   * New upstream release candidate.
