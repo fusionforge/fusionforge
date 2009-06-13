@@ -1,8 +1,9 @@
-gforge (4.8.52-1) experimental; urgency=low
+gforge (4.8.53-1) experimental; urgency=low
 
   [ Christian Bayle ]
   * bump to new version because on binary commit
   * put debian postinst/prerm/config/.. files in dsf-in dir
+  * use @PACKAGE@ instead of gforge everywhere i can
 
   [ Roland Mas ]
   * Use standard Sort::Versions module to compare database schema version

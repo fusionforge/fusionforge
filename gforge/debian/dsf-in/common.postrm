@@ -1,5 +1,5 @@
 #! /bin/sh
-# postrm script for pkgname
+# postrm script for @PACKAGE@
 #
 # see: dh_installdeb(1)
 
@@ -18,8 +18,8 @@ set -e
 
 case "$1" in
     purge)
-	rm -rf /var/lib/pkgname
-	[ -d /etc/pkgname ] && rm -rf /etc/pkgname
+	rm -rf /var/lib/@PACKAGE@
+	[ -d /etc/@PACKAGE@ ] && rm -rf /etc/@PACKAGE@
 	;;
     remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
 	;;

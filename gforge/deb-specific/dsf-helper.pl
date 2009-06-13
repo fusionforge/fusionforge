@@ -71,6 +71,10 @@ sub get_chunk {
 ###
 # DO THE JOB
 @package_list = split /\n/, qx! dh_listpackages ! ;
+my $package_name = qx! grep ^PACKAGE= debian/rules | cut -d= -f2 ! ;
+$package_name =~ s/\n//;
+my $forge_name = qx! grep ^FORGENAME= debian/rules | cut -d= -f2 ! ;
+$forge_name =~ s/\n//;
 
 if ($ARGV[0] && $ARGV[0] eq "--clean") {
  EXTLOOP: for my $ext (@known_files) {
@@ -120,7 +124,8 @@ if ($ARGV[0] && $ARGV[0] eq "--clean") {
 	   $dest =~ s/^\n*//g ;
 	   $dest =~ s/\n\n+/\n\n/g ;
        }
-       $dest =~ s/pkgname/$package_list[0]/g ;
+       $dest =~ s/\@PACKAGE\@/$package_name/g ;
+       $dest =~ s/\@FORGENAME\@/$forge_name/g ;
 
        open D, "> $destfile" ;
        print D "$dest" ;
@@ -128,4 +133,5 @@ if ($ARGV[0] && $ARGV[0] eq "--clean") {
        close S ;
    }
  }
-       print "pkgname: $package_list[0]\n" ;
+       print "package_name: $package_name\n" ;
+       print "forge_name: $forge_name\n" ;

@@ -1,5 +1,5 @@
 #! /bin/sh
-# prerm script for pkgname
+# prerm script for @PACKAGE@
 #
 # see: dh_installdeb(1)
 
@@ -19,16 +19,16 @@ set -e
 
 case "$1" in
     remove)
-	db_title "Unconfiguring Gforge"
+	db_title "Unconfiguring @FORGENAME@"
 
         # Unpatch Slapd configuration files
-	/usr/share/pkgname/bin/install-nsspgsql.sh purge-files
-	ucf --debconf-ok /etc/nss-pgsql.conf.pkgname-new /etc/nss-pgsql.conf
-	ucf --debconf-ok /etc/nss-pgsql-root.conf.pkgname-new /etc/nss-pgsql-root.conf
-	ucf --debconf-ok /etc/nsswitch.conf.pkgname-new /etc/nsswitch.conf
-	rm /etc/nss-pgsql.conf.pkgname-new
-	rm /etc/nss-pgsql-root.conf.pkgname-new
-	rm /etc/nsswitch.conf.pkgname-new
+	/usr/share/@PACKAGE@/bin/install-nsspgsql.sh purge-files
+	ucf --debconf-ok /etc/nss-pgsql.conf.@PACKAGE@-new /etc/nss-pgsql.conf
+	ucf --debconf-ok /etc/nss-pgsql-root.conf.@PACKAGE@-new /etc/nss-pgsql-root.conf
+	ucf --debconf-ok /etc/nsswitch.conf.@PACKAGE@-new /etc/nsswitch.conf
+	rm /etc/nss-pgsql.conf.@PACKAGE@-new
+	rm /etc/nss-pgsql-root.conf.@PACKAGE@-new
+	rm /etc/nsswitch.conf.@PACKAGE@-new
 	ucf --purge /etc/libnss-pgsql.conf
 	ucf --purge /etc/libnss-pgsql-root.conf
 	ucf --purge /etc/nsswitch.conf

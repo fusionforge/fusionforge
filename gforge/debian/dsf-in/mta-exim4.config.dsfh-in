@@ -13,25 +13,25 @@ init_debconf_from_mainconffile
 #DSFHELPER:users-variables#
 #DSFHELPER:lists-variables#
 
-if [ -f /etc/aliases.pkgname-new ] 
+if [ -f /etc/aliases.@PACKAGE@-new ] 
 then
-	ucf --debconf-ok /etc/aliases.pkgname-new /etc/aliases
-	rm /etc/aliases.pkgname-new
+	ucf --debconf-ok /etc/aliases.@PACKAGE@-new /etc/aliases
+	rm /etc/aliases.@PACKAGE@-new
 fi
-if [ -f /etc/exim4/exim4.conf.pkgname-new ]
+if [ -f /etc/exim4/exim4.conf.@PACKAGE@-new ]
 then
-	ucf --debconf-ok /etc/exim4/exim4.conf.pkgname-new /etc/exim4/exim4.conf
-	rm /etc/exim4/exim4.conf.pkgname-new
+	ucf --debconf-ok /etc/exim4/exim4.conf.@PACKAGE@-new /etc/exim4/exim4.conf
+	rm /etc/exim4/exim4.conf.@PACKAGE@-new
 fi
-if [ -f /etc/exim4/exim4.conf.template.pkgname-new ]
+if [ -f /etc/exim4/exim4.conf.template.@PACKAGE@-new ]
 then
-	ucf --debconf-ok /etc/exim4/exim4.conf.template.pkgname-new /etc/exim4/exim4.conf.template
-	rm /etc/exim4/exim4.conf.template.pkgname-new
+	ucf --debconf-ok /etc/exim4/exim4.conf.template.@PACKAGE@-new /etc/exim4/exim4.conf.template
+	rm /etc/exim4/exim4.conf.template.@PACKAGE@-new
 fi
-if [ -f /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs.pkgname-new ]
+if [ -f /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs.@PACKAGE@-new ]
 then
-	ucf --debconf-ok /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs.pkgname-new /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs
-	rm /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs.pkgname-new
+	ucf --debconf-ok /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs.@PACKAGE@-new /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs
+	rm /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs.@PACKAGE@-new
 fi
 db_stop
 

@@ -1,5 +1,5 @@
 #! /bin/sh
-# prerm script for pkgname-plugin-extratabs
+# prerm script for @PACKAGE@-plugin-extratabs
 #
 # see: dh_installdeb(1)
 
@@ -19,8 +19,8 @@ set -e
 
 case "$1" in
     remove|deconfigure)
-        /usr/share/pkgname/bin/unregister-plugin extratabs
-        /usr/share/pkgname/plugins/extratabs/bin/db-delete.pl
+        /usr/share/@PACKAGE@/bin/unregister-plugin extratabs
+        /usr/share/@PACKAGE@/plugins/extratabs/bin/db-delete.pl
         ;;
     upgrade|failed-upgrade)
         ;;

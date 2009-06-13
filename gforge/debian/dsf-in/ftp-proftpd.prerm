@@ -1,5 +1,5 @@
 #! /bin/sh
-# prerm script for pkgname
+# prerm script for @PACKAGE@
 #
 # see: dh_installdeb(1)
 
@@ -19,19 +19,19 @@ set -e
 
 case "$1" in
     remove)
-	db_title "Unconfiguring Gforge"
+	db_title "Unconfiguring @FORGENAME@"
 
 	# Unpatch Proftpd configuration files
-	/usr/share/pkgname/bin/install-ftp.sh purge-files
-	ucf --debconf-ok /etc/proftpd/proftpd.conf.pkgname-new /etc/proftpd/proftpd.conf
-	rm /etc/proftpd/proftpd.conf.pkgname-new
+	/usr/share/@PACKAGE@/bin/install-ftp.sh purge-files
+	ucf --debconf-ok /etc/proftpd/proftpd.conf.@PACKAGE@-new /etc/proftpd/proftpd.conf
+	rm /etc/proftpd/proftpd.conf.@PACKAGE@-new
 	ucf --purge /etc/proftpd/proftpd.conf
 
 	# Clean debconf after ourselves
 	db_stop
 
         # FTP config removal
-	/usr/share/pkgname/bin/install-ftp.sh purge
+	/usr/share/@PACKAGE@/bin/install-ftp.sh purge
 	;;
     upgrade|deconfigure|failed-upgrade)
         ;;

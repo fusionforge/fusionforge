@@ -8,7 +8,8 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
-PACKAGE=$(shell dh_listpackages | head -1)
+#PACKAGE=$(shell dh_listpackages | head -1)
+PACKAGE=gforge
 FORGENAME=FusionForge
 include /usr/share/dpatch/dpatch.make
 
@@ -69,8 +70,7 @@ configure-stamp: remove-binary-files
 #$(foreach PO,$(wildcard debian/dsf-po/*.po), cp $(PO) debian/po ; ) 
 
 debian/po/templates.pot: $(POFILES) $(wildcard debian/dsf-in/*.templates.dsfh-in) $(wildcard debian/dsf-helper/*.templates)
-	perl $(CURDIR)/deb-specific/dsf-helper.pl
-	@debconf-updatepo
+	@debconf-updatepo --podir=debian/dsf-po
 
 debian/po/%:
 	cat $(patsubst debian/po/%,debian/dsf-po/%,$@) | sed 's/@PACKAGE@/$(PACKAGE)/g' | sed 's/@FORGENAME@/$(FORGENAME)/g' > $@

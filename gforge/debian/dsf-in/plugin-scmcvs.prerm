@@ -1,5 +1,5 @@
 #! /bin/sh
-# prerm script for pkgname-plugin-scmcvs
+# prerm script for @PACKAGE@-plugin-scmcvs
 #
 # see: dh_installdeb(1)
 set -e
@@ -22,9 +22,9 @@ case "$1" in
     remove|deconfigure)
     	if [ -f /var/run/postgresql/.s.PGSQL.5432 ]
 	then
-		/usr/share/pkgname/bin/unregister-plugin scmcvs
+		/usr/share/@PACKAGE@/bin/unregister-plugin scmcvs
 	else
-		echo "WARNING: GForge database not available to unregister scmcvs plugin"
+		echo "WARNING: @FORGENAME@ database not available to unregister scmcvs plugin"
 	fi
 	test -f /etc/default/apache2 && . /etc/default/apache2
 	if [ "$NO_START" != "0" ]; then

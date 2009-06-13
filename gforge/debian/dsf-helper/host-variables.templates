@@ -7,10 +7,10 @@
 # Even minor modifications require translation updates and such
 # changes should be coordinated with translators and reviewers.
 
-Template: pkgname/shared/ip_address
+Template: @PACKAGE@/shared/ip_address
 Type: string
 _Description: IP address:
- Please enter the IP address of the server that will host the GForge
+ Please enter the IP address of the server that will host the @FORGENAME@
  installation.
  .
  This is needed for the configuration of Apache virtual hosting.

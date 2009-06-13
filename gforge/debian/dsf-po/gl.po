@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
-"Report-Msgid-Bugs-To: @PACKAGE@@packages.debian.org\n"
-"POT-Creation-Date: 2008-02-26 22:50+0100\n"
+"Report-Msgid-Bugs-To: gforge@packages.debian.org\n"
+"POT-Creation-Date: 2009-06-12 23:23+0200\n"
 "PO-Revision-Date: 2008-03-25 03:47+0000\n"
 "Last-Translator: Jacobo Tarrio <jtarrio@debian.org>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
@@ -16,139 +16,167 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:3001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:3001
 #: ../dsf-helper/shellhost-variables.templates:2001
 msgid "Shell server:"
 msgstr "Servidor de shell:"
 
 #. Type: string
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:3001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:3001
+#, fuzzy
+#| msgid ""
+#| "Please enter the hostname of the server that will host the @FORGENAME@ shell "
+#| "accounts."
 msgid ""
-"Please enter the hostname of the server that will host the GForge shell "
+"Please enter the hostname of the server that will host the @FORGENAME@ shell "
 "accounts."
 msgstr ""
-"Introduza o nome do servidor que ha hospedar as contas shell de GForge."
+"Introduza o nome do servidor que ha hospedar as contas shell de @FORGENAME@."
 
 #. Type: string
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:6001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:6001
 #: ../dsf-helper/downloadhost-variables.templates:2001
 msgid "Download server:"
 msgstr "Servidor de descargas:"
 
 #. Type: string
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:6001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:6001
+#, fuzzy
+#| msgid ""
+#| "Please enter the hostname of the server that will host the @FORGENAME@ "
+#| "packages."
 msgid ""
-"Please enter the hostname of the server that will host the GForge packages."
-msgstr "Introduza o nome do servidor que ha hospedar os paquetes de GForge."
+"Please enter the hostname of the server that will host the @FORGENAME@ "
+"packages."
+msgstr "Introduza o nome do servidor que ha hospedar os paquetes de @FORGENAME@."
 
 #. Type: string
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:6001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:6001
 #: ../dsf-helper/downloadhost-variables.templates:2001
 #: ../dsf-helper/lists-variables.templates:2001
 #: ../dsf-helper/users-variables.templates:2001
-msgid "It should not be the same as the main GForge host."
-msgstr "Non debería ser o mesmo que o servidor principal de GForge."
+#, fuzzy
+#| msgid "It should not be the same as the main @FORGENAME@ host."
+msgid "It should not be the same as the main @FORGENAME@ host."
+msgstr "Non debería ser o mesmo que o servidor principal de @FORGENAME@."
 
 #. Type: string
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:8001
-msgid "GForge administrator login:"
-msgstr "Nome do usuario administrador de GForge:"
+#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
+#, fuzzy
+#| msgid "@FORGENAME@ administrator login:"
+msgid "@FORGENAME@ administrator login:"
+msgstr "Nome do usuario administrador de @FORGENAME@:"
 
 #. Type: string
 #. Description
 #. Type: password
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:8001
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:10001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
+#, fuzzy
+#| msgid ""
+#| "The @FORGENAME@ administrator account will have full privileges on the system. "
+#| "It will be used to approve the creation of new projects."
 msgid ""
-"The GForge administrator account will have full privileges on the system. It "
-"will be used to approve the creation of new projects."
+"The @FORGENAME@ administrator account will have full privileges on the "
+"system. It will be used to approve the creation of new projects."
 msgstr ""
-"A conta de administrador de GForge ha ter tódolos privilexios no sistema. "
+"A conta de administrador de @FORGENAME@ ha ter tódolos privilexios no sistema. "
 "Hase empregar para aprobar a creación de novos proxectos."
 
 #. Type: string
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:8001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
 msgid "Please choose the username for this account."
 msgstr "Escolla o nome de usuario para esta conta."
 
 #. Type: string
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:9001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/host-variables.templates:2001
 msgid "IP address:"
 msgstr "Enderezo IP:"
 
 #. Type: string
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:9001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/host-variables.templates:2001
+#, fuzzy
+#| msgid ""
+#| "Please enter the IP address of the server that will host the @FORGENAME@ "
+#| "installation."
 msgid ""
-"Please enter the IP address of the server that will host the GForge "
+"Please enter the IP address of the server that will host the @FORGENAME@ "
 "installation."
 msgstr ""
-"Introduza o enderezo IP do servidor que ha hospedar a instalación de GForge."
+"Introduza o enderezo IP do servidor que ha hospedar a instalación de @FORGENAME@."
 
 #. Type: string
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:9001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/host-variables.templates:2001
 msgid "This is needed for the configuration of Apache virtual hosting."
 msgstr "Isto é preciso para configurar a hospedaxe virtual de Apache."
 
 #. Type: password
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:10001
-msgid "GForge administrator password:"
-msgstr "Contrasinal de administrador de GForge:"
+#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
+#, fuzzy
+#| msgid "@FORGENAME@ administrator password:"
+msgid "@FORGENAME@ administrator password:"
+msgstr "Contrasinal de administrador de @FORGENAME@:"
 
 #. Type: password
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:10001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
 msgid "Please choose the password for this account."
 msgstr "Escolla un contrasinal para esta conta."
 
 #. Type: password
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:11001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:11001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
 msgid "Password confirmation:"
 msgstr "Confirmación do contrasinal:"
 
 #. Type: password
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:11001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:11001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
 msgid "Please re-type the password for confirmation."
 msgstr "Volva introducir o contrasinal para confirmalo."
 
 #. Type: string
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:12001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:12001
 msgid "Initial list of skills:"
 msgstr "Lista inicial de coñecementos:"
 
 #. Type: string
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:12001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:12001
+#, fuzzy
+#| msgid ""
+#| "@FORGENAME@ allows users to define a list of their skills, to be chosen from "
+#| "those present in the database. This list is the initial list of skills "
+#| "that will enter the database."
 msgid ""
-"GForge allows users to define a list of their skills, to be chosen from "
+"@FORGENAME@ allows users to define a list of their skills, to be chosen from "
 "those present in the database. This list is the initial list of skills that "
 "will enter the database."
 msgstr ""
-"GForge permítelle aos usuarios facer unha lista cos seus coñecementos, que "
+"@FORGENAME@ permítelle aos usuarios facer unha lista cos seus coñecementos, que "
 "poden escoller entre os que figuran na base de datos. Esta lista é a lista "
 "inicial de coñecementos que han entrar na base de datos."
 
 #. Type: string
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:12001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:12001
 msgid "Please enter a semicolon-separated list of skill names."
 msgstr ""
 "Introduza unha lista de nomes de coñecementos separados por signos de punto "
@@ -158,15 +186,17 @@ msgstr ""
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../@PACKAGE@-dns-bind9.templates.dsfh-in:3001
-msgid "Do you want a simple DNS setup for GForge?"
-msgstr "¿Quere unha configuración de DNS simple para GForge?"
+#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
+#, fuzzy
+#| msgid "Do you want a simple DNS setup for @FORGENAME@?"
+msgid "Do you want a simple DNS setup for @FORGENAME@?"
+msgstr "¿Quere unha configuración de DNS simple para @FORGENAME@?"
 
 #. Type: boolean
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../@PACKAGE@-dns-bind9.templates.dsfh-in:3001
+#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
 msgid ""
 "You can use a simple DNS setup with wildcards to map all project web-hosts "
 "to a single IP address, and direct all the scm-hosts to a single SCM server, "
@@ -182,7 +212,7 @@ msgstr ""
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../@PACKAGE@-dns-bind9.templates.dsfh-in:3001
+#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
 msgid ""
 "Even if you use a simple DNS setup, you can still use separate machines as "
 "project servers; it just assumes that all the project web directories are on "
@@ -194,22 +224,26 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../@PACKAGE@-mta-postfix.templates.dsfh-in:3001
+#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
 msgid "Do you want mail to ${noreply} to be discarded?"
 msgstr "¿Quere que se descarten as mensaxes enviadas a ${noreply}?"
 
 #. Type: boolean
 #. Description
-#: ../@PACKAGE@-mta-postfix.templates.dsfh-in:3001
+#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
+#, fuzzy
+#| msgid ""
+#| "@FORGENAME@ sends and receives plenty of e-mail to and from the \"${noreply}\" "
+#| "address."
 msgid ""
-"GForge sends and receives plenty of e-mail to and from the \"${noreply}\" "
-"address."
+"@FORGENAME@ sends and receives plenty of e-mail to and from the \"${noreply}"
+"\" address."
 msgstr ""
-"GForge envía e recibe moito email desde e para o enderezo \"${noreply}\"."
+"@FORGENAME@ envía e recibe moito email desde e para o enderezo \"${noreply}\"."
 
 #. Type: boolean
 #. Description
-#: ../@PACKAGE@-mta-postfix.templates.dsfh-in:3001
+#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
 msgid ""
 "E-mail to that address should be directed to a black hole (/dev/null), "
 "unless you have another use for that address."
@@ -220,49 +254,68 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:2001
-msgid "GForge domain or subdomain name:"
-msgstr "Nome de dominio ou subdominio de GForge:"
+#, fuzzy
+#| msgid "@FORGENAME@ domain or subdomain name:"
+msgid "@FORGENAME@ domain or subdomain name:"
+msgstr "Nome de dominio ou subdominio de @FORGENAME@:"
 
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:2001
+#, fuzzy
+#| msgid ""
+#| "Please enter the domain that will host the @FORGENAME@ installation. Some "
+#| "services (scm, lists, etc.) will be given their own subdomain in that "
+#| "domain."
 msgid ""
-"Please enter the domain that will host the GForge installation. Some "
+"Please enter the domain that will host the @FORGENAME@ installation. Some "
 "services (scm, lists, etc.) will be given their own subdomain in that domain."
 msgstr ""
-"Introduza o dominio que ha hospedar a instalación de GForge. Algúns servizos "
+"Introduza o dominio que ha hospedar a instalación de @FORGENAME@. Algúns servizos "
 "(scm, listas, etc.) han ter o seu propio subdominio dentro dese dominio."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:3001
-msgid "GForge administrator e-mail address:"
-msgstr "Enderezo de email do administrador de GForge:"
+#, fuzzy
+#| msgid "@FORGENAME@ administrator e-mail address:"
+msgid "@FORGENAME@ administrator e-mail address:"
+msgstr "Enderezo de email do administrador de @FORGENAME@:"
 
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:3001
+#, fuzzy
+#| msgid ""
+#| "Please enter the e-mail address of the @FORGENAME@ administrator of this site. "
+#| "It will be used when problems occur."
 msgid ""
-"Please enter the e-mail address of the GForge administrator of this site. It "
-"will be used when problems occur."
+"Please enter the e-mail address of the @FORGENAME@ administrator of this "
+"site. It will be used when problems occur."
 msgstr ""
-"Introduza o enderezo de email do administrador de GForge deste sitio. Hase "
+"Introduza o enderezo de email do administrador de @FORGENAME@ deste sitio. Hase "
 "empregar se aparecen problemas."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:4001
-msgid "GForge system name:"
-msgstr "Nome do sistema GForge:"
+#, fuzzy
+#| msgid "@FORGENAME@ system name:"
+msgid "@FORGENAME@ system name:"
+msgstr "Nome do sistema @FORGENAME@:"
 
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:4001
+#, fuzzy
+#| msgid ""
+#| "Please enter the name of the @FORGENAME@ system. It is used in various places "
+#| "throughout the system."
 msgid ""
-"Please enter the name of the GForge system. It is used in various places "
-"throughout the system."
+"Please enter the name of the @FORGENAME@ system. It is used in various "
+"places throughout the system."
 msgstr ""
-"Introduza o nome do sistema GForge. Emprégase en varios lugares do sistema."
+"Introduza o nome do sistema @FORGENAME@. Emprégase en varios lugares do sistema."
 
 #. Type: string
 #. Description
@@ -273,12 +326,16 @@ msgstr "Servidor de bases de datos:"
 #. Type: string
 #. Description
 #: ../dsf-helper/dbhost-variables.templates:2001
+#, fuzzy
+#| msgid ""
+#| "Please enter the IP address (or hostname) of the server that will host "
+#| "the @FORGENAME@ database."
 msgid ""
 "Please enter the IP address (or hostname) of the server that will host the "
-"GForge database."
+"@FORGENAME@ database."
 msgstr ""
 "Introduza o enderezo IP (ou nome) do servidor que ha hospedar a base de "
-"datos de GForge."
+"datos de @FORGENAME@."
 
 #. Type: string
 #. Description
@@ -289,10 +346,14 @@ msgstr "Nome da base de datos:"
 #. Type: string
 #. Description
 #: ../dsf-helper/dbhost-variables.templates:3001
+#, fuzzy
+#| msgid ""
+#| "Please enter the name of the database that will host the @FORGENAME@ database."
 msgid ""
-"Please enter the name of the database that will host the GForge database."
+"Please enter the name of the database that will host the @FORGENAME@ "
+"database."
 msgstr ""
-"Introduza o nome da base de datos que ha hospedar as contas shell de Gforge"
+"Introduza o nome da base de datos que ha hospedar as contas shell de @FORGENAME@"
 
 #. Type: string
 #. Description
@@ -303,12 +364,16 @@ msgstr "Nome de usuario do administrador da base de datos:"
 #. Type: string
 #. Description
 #: ../dsf-helper/dbhost-variables.templates:4001
+#, fuzzy
+#| msgid ""
+#| "Please enter the username of the database administrator for the server "
+#| "that will host the @FORGENAME@ database."
 msgid ""
 "Please enter the username of the database administrator for the server that "
-"will host the GForge database."
+"will host the @FORGENAME@ database."
 msgstr ""
 "Introduza o nome de usuario do administrador de bases de datos do servidor "
-"que ha hospedar a base de datos de GForge."
+"que ha hospedar a base de datos de @FORGENAME@."
 
 #. Type: password
 #. Description
@@ -332,9 +397,14 @@ msgstr "Escolla o contrasinal para a conexión."
 #. Type: string
 #. Description
 #: ../dsf-helper/downloadhost-variables.templates:2001
+#, fuzzy
+#| msgid ""
+#| "Please enter the host name of the server that will host the @FORGENAME@ "
+#| "packages."
 msgid ""
-"Please enter the host name of the server that will host the GForge packages."
-msgstr "Introduza o nome do servidor que ha hospedar os paquetes de GForge."
+"Please enter the host name of the server that will host the @FORGENAME@ "
+"packages."
+msgstr "Introduza o nome do servidor que ha hospedar os paquetes de @FORGENAME@."
 
 #. Type: string
 #. Description
@@ -345,13 +415,18 @@ msgstr "ID do grupo de administradores de novas:"
 #. Type: string
 #. Description
 #: ../dsf-helper/groupid-variables.templates:2001
+#, fuzzy
+#| msgid ""
+#| "The members of the news admin group can approve news for the @FORGENAME@ main "
+#| "page. This group's ID must not be 1. This should be changed only if you "
+#| "upgrade from a previous version and want to keep the data."
 msgid ""
-"The members of the news admin group can approve news for the GForge main "
-"page. This group's ID must not be 1. This should be changed only if you "
+"The members of the news admin group can approve news for the @FORGENAME@ "
+"main page. This group's ID must not be 1. This should be changed only if you "
 "upgrade from a previous version and want to keep the data."
 msgstr ""
 "Os membros do grupo de administradores de novas poden aprobar as novas da "
-"páxina principal de Gforge. Este ID de grupo non debe ser 1. Só se debería "
+"páxina principal de @FORGENAME@. Este ID de grupo non debe ser 1. Só se debería "
 "cambiar se está a se actualizar dunha versión anterior e quere conservar os "
 "datos."
 
@@ -376,20 +451,28 @@ msgstr "Servidor de listas de correo:"
 #. Type: string
 #. Description
 #: ../dsf-helper/lists-variables.templates:2001
+#, fuzzy
+#| msgid ""
+#| "Please enter the host name of the server that will host the @FORGENAME@ "
+#| "mailing lists."
 msgid ""
-"Please enter the host name of the server that will host the GForge mailing "
-"lists."
+"Please enter the host name of the server that will host the @FORGENAME@ "
+"mailing lists."
 msgstr ""
-"Introduza o nome do servidor que ha hospedar as listas de correo de GForge."
+"Introduza o nome do servidor que ha hospedar as listas de correo de @FORGENAME@."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/shellhost-variables.templates:2001
+#, fuzzy
+#| msgid ""
+#| "Please enter the host name of the server that will host the @FORGENAME@ shell "
+#| "accounts."
 msgid ""
-"Please enter the host name of the server that will host the GForge shell "
-"accounts."
+"Please enter the host name of the server that will host the @FORGENAME@ "
+"shell accounts."
 msgstr ""
-"Introduza o nome do servidor que ha hospedar as contas shell de GForge."
+"Introduza o nome do servidor que ha hospedar as contas shell de @FORGENAME@."
 
 #. Type: string
 #. Description
@@ -400,12 +483,16 @@ msgstr "Redirector de correo dos usuarios:"
 #. Type: string
 #. Description
 #: ../dsf-helper/users-variables.templates:2001
+#, fuzzy
+#| msgid ""
+#| "Please enter the host name of the server that will host the @FORGENAME@ user "
+#| "mail redirector."
 msgid ""
-"Please enter the host name of the server that will host the GForge user mail "
-"redirector."
+"Please enter the host name of the server that will host the @FORGENAME@ user "
+"mail redirector."
 msgstr ""
 "Introduza o nome do servidor que ha hospedar o redirector do correo dos "
-"usuarios de GForge."
+"usuarios de @FORGENAME@."
 
 #. Type: select
 #. Choices

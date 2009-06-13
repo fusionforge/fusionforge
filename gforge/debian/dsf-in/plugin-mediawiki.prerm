@@ -1,5 +1,5 @@
 #! /bin/sh
-# prerm script for pkgname-plugin-mediawiki
+# prerm script for @PACKAGE@-plugin-mediawiki
 #
 # see: dh_installdeb(1)
 
@@ -19,9 +19,9 @@ set -e
 
 case "$1" in
     remove|deconfigure)
-	/usr/share/pkgname/bin/unregister-plugin mediawiki
+	/usr/share/@PACKAGE@/bin/unregister-plugin mediawiki
 	invoke-rc.d apache reload
-	# /usr/share/pkgname/plugins/mediawiki/bin/db-delete.pl
+	# /usr/share/@PACKAGE@/plugins/mediawiki/bin/db-delete.pl
         ;;
     upgrade|failed-upgrade)
         ;;

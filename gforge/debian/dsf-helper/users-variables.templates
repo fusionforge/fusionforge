@@ -7,10 +7,10 @@
 # Even minor modifications require translation updates and such
 # changes should be coordinated with translators and reviewers.
 
-Template: pkgname/shared/users_host
+Template: @PACKAGE@/shared/users_host
 Type: string
 _Description: User mail redirector server:
- Please enter the host name of the server that will host the GForge user mail
+ Please enter the host name of the server that will host the @FORGENAME@ user mail
  redirector.
  .
- It should not be the same as the main GForge host.
+ It should not be the same as the main @FORGENAME@ host.

@@ -7,9 +7,9 @@
 # Even minor modifications require translation updates and such
 # changes should be coordinated with translators and reviewers.
 
-Template: pkgname/shared/download_host
+Template: @PACKAGE@/shared/download_host
 Type: string
 _Description: Download server:
- Please enter the host name of the server that will host the GForge packages.
+ Please enter the host name of the server that will host the @FORGENAME@ packages.
  .
- It should not be the same as the main GForge host.
+ It should not be the same as the main @FORGENAME@ host.

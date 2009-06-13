@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for pkgname
+# postinst script for @PACKAGE@
 #
 # see: dh_installdeb(1)
 
@@ -28,28 +28,28 @@ set -e
 case "$1" in
     configure)
 
-	pkgname-config
+	@PACKAGE@-config
         # Patch Exim configuration files
-	/usr/share/pkgname/bin/install-exim4.sh configure-files
-	if [ -f /etc/aliases.pkgname-new ]
+	/usr/share/@PACKAGE@/bin/install-exim4.sh configure-files
+	if [ -f /etc/aliases.@PACKAGE@-new ]
 	then
-		ucf --debconf-ok /etc/aliases.pkgname-new /etc/aliases
-		rm /etc/aliases.pkgname-new
+		ucf --debconf-ok /etc/aliases.@PACKAGE@-new /etc/aliases
+		rm /etc/aliases.@PACKAGE@-new
 	fi
-	if [ -f /etc/exim4/exim4.conf.pkgname-new ]
+	if [ -f /etc/exim4/exim4.conf.@PACKAGE@-new ]
 	then
-		ucf --debconf-ok /etc/exim4/exim4.conf.pkgname-new /etc/exim4/exim4.conf
-		rm /etc/exim4/exim4.conf.pkgname-new
+		ucf --debconf-ok /etc/exim4/exim4.conf.@PACKAGE@-new /etc/exim4/exim4.conf
+		rm /etc/exim4/exim4.conf.@PACKAGE@-new
 	fi
-	if [ -f /etc/exim4/exim4.conf.template.pkgname-new ]
+	if [ -f /etc/exim4/exim4.conf.template.@PACKAGE@-new ]
 	then
-		ucf --debconf-ok /etc/exim4/exim4.conf.template.pkgname-new /etc/exim4/exim4.conf.template
-		rm /etc/exim4/exim4.conf.template.pkgname-new
+		ucf --debconf-ok /etc/exim4/exim4.conf.template.@PACKAGE@-new /etc/exim4/exim4.conf.template
+		rm /etc/exim4/exim4.conf.template.@PACKAGE@-new
 	fi
-	if [ -f /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs.pkgname-new ]
+	if [ -f /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs.@PACKAGE@-new ]
 	then
-		ucf --debconf-ok /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs.pkgname-new /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs
-		rm /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs.pkgname-new
+		ucf --debconf-ok /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs.@PACKAGE@-new /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs
+		rm /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs.@PACKAGE@-new
 	fi
     ;;
 

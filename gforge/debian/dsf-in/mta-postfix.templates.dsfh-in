@@ -11,11 +11,11 @@
 #DSFHELPER:users-variables#
 #DSFHELPER:lists-variables#
 
-Template: pkgname/shared/noreply_to_bitbucket
+Template: @PACKAGE@/shared/noreply_to_bitbucket
 Type: boolean
 Default: true
 _Description: Do you want mail to ${noreply} to be discarded?
- GForge sends and receives plenty of e-mail to and from the
+ @FORGENAME@ sends and receives plenty of e-mail to and from the
  "${noreply}" address.
  .
  E-mail to that address should be directed to a

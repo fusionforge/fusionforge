@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for pkgname
+# postinst script for @PACKAGE@
 #
 # see: dh_installdeb(1)
 
@@ -27,19 +27,19 @@ set -e
 
 case "$1" in
     configure)
-	pkgname-config
+	@PACKAGE@-config
 
         # Patch NSS configuration files
-	/usr/share/pkgname/bin/install-nsspgsql.sh configure-files
-	ucf --debconf-ok /etc/nss-pgsql.conf.pkgname-new /etc/nss-pgsql.conf
-	ucf --debconf-ok /etc/nss-pgsql-root.conf.pkgname-new /etc/nss-pgsql-root.conf
-	ucf --debconf-ok /etc/nsswitch.conf.pkgname-new /etc/nsswitch.conf
-	rm /etc/nss-pgsql.conf.pkgname-new
-	rm /etc/nss-pgsql-root.conf.pkgname-new
-	rm /etc/nsswitch.conf.pkgname-new
+	/usr/share/@PACKAGE@/bin/install-nsspgsql.sh configure-files
+	ucf --debconf-ok /etc/nss-pgsql.conf.@PACKAGE@-new /etc/nss-pgsql.conf
+	ucf --debconf-ok /etc/nss-pgsql-root.conf.@PACKAGE@-new /etc/nss-pgsql-root.conf
+	ucf --debconf-ok /etc/nsswitch.conf.@PACKAGE@-new /etc/nsswitch.conf
+	rm /etc/nss-pgsql.conf.@PACKAGE@-new
+	rm /etc/nss-pgsql-root.conf.@PACKAGE@-new
+	rm /etc/nsswitch.conf.@PACKAGE@-new
 
 	# Install the chroot environment
-	/usr/share/pkgname/bin/install-chroot.sh configure
+	/usr/share/@PACKAGE@/bin/install-chroot.sh configure
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for pkgname
+# postinst script for @PACKAGE@
 #
 # see: dh_installdeb(1)
 
@@ -27,15 +27,15 @@ set -e
 
 case "$1" in
     configure)
-	pkgname-config
+	@PACKAGE@-config
 
         # Patch Postfix configuration files
-	/usr/share/pkgname/bin/install-postfix.sh configure-files
-	ucf --debconf-ok /etc/aliases.pkgname-new /etc/aliases
-	ucf --debconf-ok /etc/postfix/main.cf.pkgname-new /etc/postfix/main.cf
-	rm /etc/aliases.pkgname-new
-	rm /etc/postfix/main.cf.pkgname-new
-	/usr/share/pkgname/bin/install-postfix.sh configure
+	/usr/share/@PACKAGE@/bin/install-postfix.sh configure-files
+	ucf --debconf-ok /etc/aliases.@PACKAGE@-new /etc/aliases
+	ucf --debconf-ok /etc/postfix/main.cf.@PACKAGE@-new /etc/postfix/main.cf
+	rm /etc/aliases.@PACKAGE@-new
+	rm /etc/postfix/main.cf.@PACKAGE@-new
+	/usr/share/@PACKAGE@/bin/install-postfix.sh configure
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

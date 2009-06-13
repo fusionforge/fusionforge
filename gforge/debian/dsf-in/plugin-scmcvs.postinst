@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for pkgname-plugin-scmcvs
+# postinst script for @PACKAGE@-plugin-scmcvs
 #
 # see: dh_installdeb(1)
 
@@ -25,10 +25,10 @@ set -e
 
 case "$1" in
     configure)
-	pkgname-config
+	@PACKAGE@-config
 
 	# Prepare database
-	su -s /bin/sh pkgname -c '/usr/share/pkgname/bin/register-plugin scmcvs "CVS"'
+	su -s /bin/sh @PACKAGE@ -c '/usr/share/@PACKAGE@/bin/register-plugin scmcvs "CVS"'
 	test -f /etc/default/apache2 && . /etc/default/apache2
 	if [ "$NO_START" != "0" ]; then
 		if [ -x /usr/sbin/apache ]; then
@@ -40,22 +40,22 @@ case "$1" in
 		fi
 	fi
         # Setup our CVS
-	/usr/share/pkgname/plugins/scmcvs/bin/install-cvs.sh configure
+	/usr/share/@PACKAGE@/plugins/scmcvs/bin/install-cvs.sh configure
 
 	# Making user group and cvs update from database 
-	/usr/share/pkgname/plugins/scmcvs/bin/update-user-group-ssh.sh > /dev/null 2>&1
-	rm -f /var/lib/pkgname/dumps/*cvs*dump
-	su -s /bin/sh pkgname -c /usr/share/pkgname/plugins/scmcvs/cronjobs/cvs_dump.pl
-	/usr/share/pkgname/plugins/scmcvs/cronjobs/cvs_update.pl
+	/usr/share/@PACKAGE@/plugins/scmcvs/bin/update-user-group-ssh.sh > /dev/null 2>&1
+	rm -f /var/lib/@PACKAGE@/dumps/*cvs*dump
+	su -s /bin/sh @PACKAGE@ -c /usr/share/@PACKAGE@/plugins/scmcvs/cronjobs/cvs_dump.pl
+	/usr/share/@PACKAGE@/plugins/scmcvs/cronjobs/cvs_update.pl
 
-	if [ ! -e /var/lib/pkgname/chroot/cvs ] ; then
-	    cd /var/lib/pkgname/chroot
+	if [ ! -e /var/lib/@PACKAGE@/chroot/cvs ] ; then
+	    cd /var/lib/@PACKAGE@/chroot
 	    ln -s cvsroot cvs
 	fi
 
 	# logs
-	chown root:pkgname /var/log/pkgname/cvs
-	chmod 775 /var/log/pkgname/cvs
+	chown root:@PACKAGE@ /var/log/@PACKAGE@/cvs
+	chmod 775 /var/log/@PACKAGE@/cvs
 
 	# Restart some services
 	[ -d /etc/ssh ] && invoke-rc.d ssh restart || true

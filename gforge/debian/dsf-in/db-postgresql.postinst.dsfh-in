@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for pkgname
+# postinst script for @PACKAGE@
 #
 # see: dh_installdeb(1)
 
@@ -17,11 +17,11 @@ then
 		export pg_hba_dir=/etc/postgresql/${pg_version}/main
 	else
 		echo "No database found online on port 5432"
-		echo "Couldn't initialize or upgrade pkgname database."
+		echo "Couldn't initialize or upgrade @PACKAGE@ database."
 		echo "Please see postgresql documentation"
-		echo "and run dpkg-reconfigure -plow pkgname-db-postgresql"
+		echo "and run dpkg-reconfigure -plow @PACKAGE@-db-postgresql"
 		echo "once the problem is solved"
-		echo "exiting without error, but pkgname db will not work"
+		echo "exiting without error, but @PACKAGE@ db will not work"
 		echo "right now"
 		exit 0
 	fi
@@ -56,19 +56,19 @@ case "$1" in
     configure)
 	add_onevar_mainconfile default_trove_cat 18
 
-	pkgname-config
+	@PACKAGE@-config
 
         # Patch DB configuration files
-	/usr/share/pkgname/bin/install-db.sh configure-files
-	ucf --debconf-ok ${pg_hba_dir}/pg_hba.conf.pkgname-new ${pg_hba_dir}/pg_hba.conf
-	rm ${pg_hba_dir}/pg_hba.conf.pkgname-new
+	/usr/share/@PACKAGE@/bin/install-db.sh configure-files
+	ucf --debconf-ok ${pg_hba_dir}/pg_hba.conf.@PACKAGE@-new ${pg_hba_dir}/pg_hba.conf
+	rm ${pg_hba_dir}/pg_hba.conf.@PACKAGE@-new
 
 	# Make sure the database accepts connections from these new users
 	pg_name=postgresql-$pg_version
 	invoke-rc.d ${pg_name} reload
 
         # Setup our DB
-	/usr/share/pkgname/bin/install-db.sh configure
+	/usr/share/@PACKAGE@/bin/install-db.sh configure
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

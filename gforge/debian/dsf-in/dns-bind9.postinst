@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for pkgname
+# postinst script for @PACKAGE@
 #
 # see: dh_installdeb(1)
 
@@ -27,17 +27,17 @@ set -e
 
 case "$1" in
     configure)
-	pkgname-config
+	@PACKAGE@-config
 
 	# Patch Bind configuration files
-	/usr/share/pkgname/bin/install-dns.sh configure-files
-	ucf --debconf-ok /etc/bind/named.conf.pkgname-new /etc/bind/named.conf
-	rm /etc/bind/named.conf.pkgname-new
+	/usr/share/@PACKAGE@/bin/install-dns.sh configure-files
+	ucf --debconf-ok /etc/bind/named.conf.@PACKAGE@-new /etc/bind/named.conf
+	rm /etc/bind/named.conf.@PACKAGE@-new
 
 	db_stop
 
 	# Create the DNS zone
-	/usr/share/pkgname/bin/install-dns.sh configure
+	/usr/share/@PACKAGE@/bin/install-dns.sh configure
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for pkgname
+# postinst script for @PACKAGE@
 #
 # see: dh_installdeb(1)
 
@@ -27,21 +27,21 @@ set -e
 
 case "$1" in
     configure)
-	pkgname-config
+	@PACKAGE@-config
 
         # Patch Proftpd configuration files
-	/usr/share/pkgname/bin/install-ftp.sh configure-files
-	if [ -f /etc/proftpd/proftpd.conf.pkgname-new ]
+	/usr/share/@PACKAGE@/bin/install-ftp.sh configure-files
+	if [ -f /etc/proftpd/proftpd.conf.@PACKAGE@-new ]
 	then
-		ucf --debconf-ok /etc/proftpd/proftpd.conf.pkgname-new /etc/proftpd/proftpd.conf
-		rm /etc/proftpd/proftpd.conf.pkgname-new
+		ucf --debconf-ok /etc/proftpd/proftpd.conf.@PACKAGE@-new /etc/proftpd/proftpd.conf
+		rm /etc/proftpd/proftpd.conf.@PACKAGE@-new
 	fi
 
         # Setup our FTP
-	/usr/share/pkgname/bin/install-ftp.sh configure 
+	/usr/share/@PACKAGE@/bin/install-ftp.sh configure 
 
         # Setup our FRS
-	chown www-data:www-data /var/lib/pkgname/download
+	chown www-data:www-data /var/lib/@PACKAGE@/download
 	
     ;;
 

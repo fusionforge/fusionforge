@@ -7,8 +7,8 @@
 # Even minor modifications require translation updates and such
 # changes should be coordinated with translators and reviewers.
 
-Template: pkgname/shared/shell_host
+Template: @PACKAGE@/shared/shell_host
 Type: string
 _Description: Shell server:
- Please enter the host name of the server that will host the GForge
+ Please enter the host name of the server that will host the @FORGENAME@
  shell accounts.

@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for pkgname
+# postinst script for @PACKAGE@
 #
 # see: dh_installdeb(1)
 
@@ -27,12 +27,12 @@ set -e
 
 case "$1" in
     configure)
-	adduser --system --group --home /var/www/pkgname pkgname > /dev/null 2>&1
-	adduser --system --group --home /var/lib/pkgname/chroot/cvsroot anonscm-pkgname > /dev/null 2>&1
-	adduser --system --group --home /var/lib/pkgname/chroot/cvsroot scm-pkgname > /dev/null 2>&1
-	adduser --system --group --home /var/lib/pkgname/chroot/cvsroot www-pkgname > /dev/null 2>&1
+	adduser --system --group --home /var/www/@PACKAGE@ @PACKAGE@ > /dev/null 2>&1
+	adduser --system --group --home /var/lib/@PACKAGE@/chroot/cvsroot anonscm-@PACKAGE@ > /dev/null 2>&1
+	adduser --system --group --home /var/lib/@PACKAGE@/chroot/cvsroot scm-@PACKAGE@ > /dev/null 2>&1
+	adduser --system --group --home /var/lib/@PACKAGE@/chroot/cvsroot www-@PACKAGE@ > /dev/null 2>&1
 
-	pkgname-config
+	@PACKAGE@-config
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

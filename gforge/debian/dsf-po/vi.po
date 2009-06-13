@@ -1,4 +1,4 @@
-# Vietnamese Translation for GForge.
+# Vietnamese Translation for @FORGENAME@.
 # Copyright © 2008 Free Software Foundation, Inc.
 # This file is distributed under the same license as the @PACKAGE@ 4.6.99+svn6387-1 package.
 # Clytie Siddall <clytie@riverland.net.au>, 2005-2008.
@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@ 4.6.99+svn6387-1\n"
-"Report-Msgid-Bugs-To: @PACKAGE@@packages.debian.org\n"
-"POT-Creation-Date: 2008-02-26 22:50+0100\n"
+"Report-Msgid-Bugs-To: gforge@packages.debian.org\n"
+"POT-Creation-Date: 2009-06-12 23:23+0200\n"
 "PO-Revision-Date: 2008-03-29 18:46+1030\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -19,138 +19,166 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:3001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:3001
 #: ../dsf-helper/shellhost-variables.templates:2001
 msgid "Shell server:"
 msgstr "Máy phục vụ trình bao :"
 
 #. Type: string
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:3001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:3001
+#, fuzzy
+#| msgid ""
+#| "Please enter the hostname of the server that will host the @FORGENAME@ shell "
+#| "accounts."
 msgid ""
-"Please enter the hostname of the server that will host the GForge shell "
+"Please enter the hostname of the server that will host the @FORGENAME@ shell "
 "accounts."
 msgstr ""
-"Hãy gõ tên máy của máy phục vụ sẽ cung cấp các tài khoản trình bao GForge."
+"Hãy gõ tên máy của máy phục vụ sẽ cung cấp các tài khoản trình bao @FORGENAME@."
 
 #. Type: string
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:6001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:6001
 #: ../dsf-helper/downloadhost-variables.templates:2001
 msgid "Download server:"
 msgstr "Máy phục vụ tải xuống:"
 
 #. Type: string
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:6001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:6001
+#, fuzzy
+#| msgid ""
+#| "Please enter the hostname of the server that will host the @FORGENAME@ "
+#| "packages."
 msgid ""
-"Please enter the hostname of the server that will host the GForge packages."
-msgstr "Hãy gõ tên máy của máy phục vụ sẽ cung cấp các gói GForge."
+"Please enter the hostname of the server that will host the @FORGENAME@ "
+"packages."
+msgstr "Hãy gõ tên máy của máy phục vụ sẽ cung cấp các gói @FORGENAME@."
 
 #. Type: string
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:6001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:6001
 #: ../dsf-helper/downloadhost-variables.templates:2001
 #: ../dsf-helper/lists-variables.templates:2001
 #: ../dsf-helper/users-variables.templates:2001
-msgid "It should not be the same as the main GForge host."
-msgstr "Không nên trùng với máy chủ GForge chính."
+#, fuzzy
+#| msgid "It should not be the same as the main @FORGENAME@ host."
+msgid "It should not be the same as the main @FORGENAME@ host."
+msgstr "Không nên trùng với máy chủ @FORGENAME@ chính."
 
 #. Type: string
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:8001
-msgid "GForge administrator login:"
-msgstr "Tên đăng nhập quản trị GForge:"
+#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
+#, fuzzy
+#| msgid "@FORGENAME@ administrator login:"
+msgid "@FORGENAME@ administrator login:"
+msgstr "Tên đăng nhập quản trị @FORGENAME@:"
 
 #. Type: string
 #. Description
 #. Type: password
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:8001
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:10001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
+#, fuzzy
+#| msgid ""
+#| "The @FORGENAME@ administrator account will have full privileges on the system. "
+#| "It will be used to approve the creation of new projects."
 msgid ""
-"The GForge administrator account will have full privileges on the system. It "
-"will be used to approve the creation of new projects."
+"The @FORGENAME@ administrator account will have full privileges on the "
+"system. It will be used to approve the creation of new projects."
 msgstr ""
-"Tài khoản quản trị GForge này sẽ được mọi quyền truy cập hệ thống. Nó dùng "
+"Tài khoản quản trị @FORGENAME@ này sẽ được mọi quyền truy cập hệ thống. Nó dùng "
 "để tán thành việc tạo dự án mới."
 
 #. Type: string
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:8001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:8001
 msgid "Please choose the username for this account."
 msgstr "Hãy chọn tên người dùng cho tài khoản này."
 
 #. Type: string
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:9001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/host-variables.templates:2001
 msgid "IP address:"
 msgstr "Địa chỉ IP:"
 
 #. Type: string
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:9001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/host-variables.templates:2001
+#, fuzzy
+#| msgid ""
+#| "Please enter the IP address of the server that will host the @FORGENAME@ "
+#| "installation."
 msgid ""
-"Please enter the IP address of the server that will host the GForge "
+"Please enter the IP address of the server that will host the @FORGENAME@ "
 "installation."
-msgstr "Hãy gõ địa chỉ IP của máy phục vụ sẽ chứa bản cài đặt GForge."
+msgstr "Hãy gõ địa chỉ IP của máy phục vụ sẽ chứa bản cài đặt @FORGENAME@."
 
 #. Type: string
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:9001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/host-variables.templates:2001
 msgid "This is needed for the configuration of Apache virtual hosting."
 msgstr "Nó cần để cấu hình dịch vụ ảo Apache."
 
 #. Type: password
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:10001
-msgid "GForge administrator password:"
-msgstr "Mật khẩu quản trị GForge:"
+#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
+#, fuzzy
+#| msgid "@FORGENAME@ administrator password:"
+msgid "@FORGENAME@ administrator password:"
+msgstr "Mật khẩu quản trị @FORGENAME@:"
 
 #. Type: password
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:10001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:10001
 msgid "Please choose the password for this account."
 msgstr "Hãy chọn mật khẩu cho tài khoản này."
 
 #. Type: password
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:11001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:11001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
 msgid "Password confirmation:"
 msgstr "Xác nhận mật khẩu :"
 
 #. Type: password
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:11001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:11001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
 msgid "Please re-type the password for confirmation."
 msgstr "Hãy gõ lại mật khẩu để xác nhận nó."
 
 #. Type: string
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:12001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:12001
 msgid "Initial list of skills:"
 msgstr "Danh sách kỹ năng ban đầu :"
 
 #. Type: string
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:12001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:12001
+#, fuzzy
+#| msgid ""
+#| "@FORGENAME@ allows users to define a list of their skills, to be chosen from "
+#| "those present in the database. This list is the initial list of skills "
+#| "that will enter the database."
 msgid ""
-"GForge allows users to define a list of their skills, to be chosen from "
+"@FORGENAME@ allows users to define a list of their skills, to be chosen from "
 "those present in the database. This list is the initial list of skills that "
 "will enter the database."
 msgstr ""
-"GForge cho mỗi người dùng có khả năng định nghĩa một danh sách các kỹ năng "
+"@FORGENAME@ cho mỗi người dùng có khả năng định nghĩa một danh sách các kỹ năng "
 "của mình, để được chọn trong các điều nằm trong cơ sở dữ liệu. Danh sách này "
 "là danh sách kỹ năng ban đầu sẽ vào cơ sở dữ liệu."
 
 #. Type: string
 #. Description
-#: ../@PACKAGE@-db-postgresql.templates.dsfh-in:12001
+#: ../dsf-in/db-postgresql.templates.dsfh-in:12001
 msgid "Please enter a semicolon-separated list of skill names."
 msgstr "Hãy gõ danh sách các tên kỹ năng định giới bằng dấu chấm phẩy « ; »."
 
@@ -158,15 +186,17 @@ msgstr "Hãy gõ danh sách các tên kỹ năng định giới bằng dấu ch�
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../@PACKAGE@-dns-bind9.templates.dsfh-in:3001
-msgid "Do you want a simple DNS setup for GForge?"
-msgstr "Bạn có muốn thiết lập DNS đơn giản cho GForge không?"
+#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
+#, fuzzy
+#| msgid "Do you want a simple DNS setup for @FORGENAME@?"
+msgid "Do you want a simple DNS setup for @FORGENAME@?"
+msgstr "Bạn có muốn thiết lập DNS đơn giản cho @FORGENAME@ không?"
 
 #. Type: boolean
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../@PACKAGE@-dns-bind9.templates.dsfh-in:3001
+#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
 msgid ""
 "You can use a simple DNS setup with wildcards to map all project web-hosts "
 "to a single IP address, and direct all the scm-hosts to a single SCM server, "
@@ -182,7 +212,7 @@ msgstr ""
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../@PACKAGE@-dns-bind9.templates.dsfh-in:3001
+#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
 msgid ""
 "Even if you use a simple DNS setup, you can still use separate machines as "
 "project servers; it just assumes that all the project web directories are on "
@@ -195,21 +225,25 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../@PACKAGE@-mta-postfix.templates.dsfh-in:3001
+#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
 msgid "Do you want mail to ${noreply} to be discarded?"
 msgstr "Bạn có muốn hủy mọi thư được gửi cho ${noreply} không?"
 
 #. Type: boolean
 #. Description
-#: ../@PACKAGE@-mta-postfix.templates.dsfh-in:3001
+#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
+#, fuzzy
+#| msgid ""
+#| "@FORGENAME@ sends and receives plenty of e-mail to and from the \"${noreply}\" "
+#| "address."
 msgid ""
-"GForge sends and receives plenty of e-mail to and from the \"${noreply}\" "
-"address."
-msgstr "GForge gửi và nhận rất nhiều thư điện tử cho/từ địa chỉ « ${noreply} »."
+"@FORGENAME@ sends and receives plenty of e-mail to and from the \"${noreply}"
+"\" address."
+msgstr "@FORGENAME@ gửi và nhận rất nhiều thư điện tử cho/từ địa chỉ « ${noreply} »."
 
 #. Type: boolean
 #. Description
-#: ../@PACKAGE@-mta-postfix.templates.dsfh-in:3001
+#: ../dsf-in/mta-postfix.templates.dsfh-in:3001
 msgid ""
 "E-mail to that address should be directed to a black hole (/dev/null), "
 "unless you have another use for that address."
@@ -220,49 +254,68 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:2001
-msgid "GForge domain or subdomain name:"
-msgstr "Tên miền hay miền con GForge:"
+#, fuzzy
+#| msgid "@FORGENAME@ domain or subdomain name:"
+msgid "@FORGENAME@ domain or subdomain name:"
+msgstr "Tên miền hay miền con @FORGENAME@:"
 
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:2001
+#, fuzzy
+#| msgid ""
+#| "Please enter the domain that will host the @FORGENAME@ installation. Some "
+#| "services (scm, lists, etc.) will be given their own subdomain in that "
+#| "domain."
 msgid ""
-"Please enter the domain that will host the GForge installation. Some "
+"Please enter the domain that will host the @FORGENAME@ installation. Some "
 "services (scm, lists, etc.) will be given their own subdomain in that domain."
 msgstr ""
-"Hãy gõ miền sẽ chứa bản cài đặt GForge. Một số dịch vụ (scm, lists v.v.) sẽ "
+"Hãy gõ miền sẽ chứa bản cài đặt @FORGENAME@. Một số dịch vụ (scm, lists v.v.) sẽ "
 "nhận miền con riêng ở trong miền đó."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:3001
-msgid "GForge administrator e-mail address:"
-msgstr "Địa chỉ thư của quản trị GForge:"
+#, fuzzy
+#| msgid "@FORGENAME@ administrator e-mail address:"
+msgid "@FORGENAME@ administrator e-mail address:"
+msgstr "Địa chỉ thư của quản trị @FORGENAME@:"
 
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:3001
+#, fuzzy
+#| msgid ""
+#| "Please enter the e-mail address of the @FORGENAME@ administrator of this site. "
+#| "It will be used when problems occur."
 msgid ""
-"Please enter the e-mail address of the GForge administrator of this site. It "
-"will be used when problems occur."
+"Please enter the e-mail address of the @FORGENAME@ administrator of this "
+"site. It will be used when problems occur."
 msgstr ""
-"Hãy gõ địa chỉ thư điện tử của quản trị GForge của địa chỉ Web này. Nó sẽ "
+"Hãy gõ địa chỉ thư điện tử của quản trị @FORGENAME@ của địa chỉ Web này. Nó sẽ "
 "dùng khi gặp vấn đề."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:4001
-msgid "GForge system name:"
-msgstr "Tên hệ thống GForge:"
+#, fuzzy
+#| msgid "@FORGENAME@ system name:"
+msgid "@FORGENAME@ system name:"
+msgstr "Tên hệ thống @FORGENAME@:"
 
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:4001
+#, fuzzy
+#| msgid ""
+#| "Please enter the name of the @FORGENAME@ system. It is used in various places "
+#| "throughout the system."
 msgid ""
-"Please enter the name of the GForge system. It is used in various places "
-"throughout the system."
+"Please enter the name of the @FORGENAME@ system. It is used in various "
+"places throughout the system."
 msgstr ""
-"Hãy gõ tên của hệ thống GForge. Nó dùng ở các nơi khác nhau trên khắp hệ "
+"Hãy gõ tên của hệ thống @FORGENAME@. Nó dùng ở các nơi khác nhau trên khắp hệ "
 "thống."
 
 #. Type: string
@@ -274,11 +327,15 @@ msgstr "Máy phục vụ cơ sở dữ liệu :"
 #. Type: string
 #. Description
 #: ../dsf-helper/dbhost-variables.templates:2001
+#, fuzzy
+#| msgid ""
+#| "Please enter the IP address (or hostname) of the server that will host "
+#| "the @FORGENAME@ database."
 msgid ""
 "Please enter the IP address (or hostname) of the server that will host the "
-"GForge database."
+"@FORGENAME@ database."
 msgstr ""
-"Hãy gõ địa chỉ IP (hay tên máy) của máy phục vụ sẽ chứa cơ sở dữ liệu GForge."
+"Hãy gõ địa chỉ IP (hay tên máy) của máy phục vụ sẽ chứa cơ sở dữ liệu @FORGENAME@."
 
 #. Type: string
 #. Description
@@ -289,9 +346,13 @@ msgstr "Tên cơ sở dữ liệu :"
 #. Type: string
 #. Description
 #: ../dsf-helper/dbhost-variables.templates:3001
+#, fuzzy
+#| msgid ""
+#| "Please enter the name of the database that will host the @FORGENAME@ database."
 msgid ""
-"Please enter the name of the database that will host the GForge database."
-msgstr "Hãy gõ tên của cơ sở dữ liệu sẽ chứa cơ sở dữ liệu GForge."
+"Please enter the name of the database that will host the @FORGENAME@ "
+"database."
+msgstr "Hãy gõ tên của cơ sở dữ liệu sẽ chứa cơ sở dữ liệu @FORGENAME@."
 
 #. Type: string
 #. Description
@@ -302,12 +363,16 @@ msgstr "Tên người dùng quản trị cơ sở dữ liệu :"
 #. Type: string
 #. Description
 #: ../dsf-helper/dbhost-variables.templates:4001
+#, fuzzy
+#| msgid ""
+#| "Please enter the username of the database administrator for the server "
+#| "that will host the @FORGENAME@ database."
 msgid ""
 "Please enter the username of the database administrator for the server that "
-"will host the GForge database."
+"will host the @FORGENAME@ database."
 msgstr ""
 "Hãy gõ tên người dùng của quản trị cơ sở dữ liệu cho máy phục vụ sẽ chứa cơ "
-"sở dữ liệu GForge."
+"sở dữ liệu @FORGENAME@."
 
 #. Type: password
 #. Description
@@ -330,9 +395,14 @@ msgstr "Hãy chọn mật khẩu kết nối."
 #. Type: string
 #. Description
 #: ../dsf-helper/downloadhost-variables.templates:2001
+#, fuzzy
+#| msgid ""
+#| "Please enter the host name of the server that will host the @FORGENAME@ "
+#| "packages."
 msgid ""
-"Please enter the host name of the server that will host the GForge packages."
-msgstr "Hãy gõ tên máy của máy phục vụ sẽ chứa các gói GForge."
+"Please enter the host name of the server that will host the @FORGENAME@ "
+"packages."
+msgstr "Hãy gõ tên máy của máy phục vụ sẽ chứa các gói @FORGENAME@."
 
 #. Type: string
 #. Description
@@ -343,13 +413,18 @@ msgstr "ID nhóm quản trị tin tức:"
 #. Type: string
 #. Description
 #: ../dsf-helper/groupid-variables.templates:2001
+#, fuzzy
+#| msgid ""
+#| "The members of the news admin group can approve news for the @FORGENAME@ main "
+#| "page. This group's ID must not be 1. This should be changed only if you "
+#| "upgrade from a previous version and want to keep the data."
 msgid ""
-"The members of the news admin group can approve news for the GForge main "
-"page. This group's ID must not be 1. This should be changed only if you "
+"The members of the news admin group can approve news for the @FORGENAME@ "
+"main page. This group's ID must not be 1. This should be changed only if you "
 "upgrade from a previous version and want to keep the data."
 msgstr ""
 "Mọi thành viên của nhóm quản trị tin tức có quyền tán thành tin tức để hiển "
-"thị trên trang chính GForge. ID nhóm (GID) này PHẢI khác với số 1. Thay đổi "
+"thị trên trang chính @FORGENAME@. ID nhóm (GID) này PHẢI khác với số 1. Thay đổi "
 "nó chỉ nếu bạn nâng cấp từ phiên bản cũ và muốn giữ lại dữ liệu."
 
 #. Type: string
@@ -373,18 +448,26 @@ msgstr "Máy phục vụ hộp thư chung:"
 #. Type: string
 #. Description
 #: ../dsf-helper/lists-variables.templates:2001
+#, fuzzy
+#| msgid ""
+#| "Please enter the host name of the server that will host the @FORGENAME@ "
+#| "mailing lists."
 msgid ""
-"Please enter the host name of the server that will host the GForge mailing "
-"lists."
-msgstr "Hãy gõ tên máy của máy phục vụ sẽ chứa các hộp thư chung GForge."
+"Please enter the host name of the server that will host the @FORGENAME@ "
+"mailing lists."
+msgstr "Hãy gõ tên máy của máy phục vụ sẽ chứa các hộp thư chung @FORGENAME@."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/shellhost-variables.templates:2001
+#, fuzzy
+#| msgid ""
+#| "Please enter the host name of the server that will host the @FORGENAME@ shell "
+#| "accounts."
 msgid ""
-"Please enter the host name of the server that will host the GForge shell "
-"accounts."
-msgstr "Hãy gõ tên máy của máy phục vụ sẽ chứa các tài khoản trình bao GForge."
+"Please enter the host name of the server that will host the @FORGENAME@ "
+"shell accounts."
+msgstr "Hãy gõ tên máy của máy phục vụ sẽ chứa các tài khoản trình bao @FORGENAME@."
 
 #. Type: string
 #. Description
@@ -395,12 +478,16 @@ msgstr "Máy phục vụ chuyển hướng thư tín người dùng:"
 #. Type: string
 #. Description
 #: ../dsf-helper/users-variables.templates:2001
+#, fuzzy
+#| msgid ""
+#| "Please enter the host name of the server that will host the @FORGENAME@ user "
+#| "mail redirector."
 msgid ""
-"Please enter the host name of the server that will host the GForge user mail "
-"redirector."
+"Please enter the host name of the server that will host the @FORGENAME@ user "
+"mail redirector."
 msgstr ""
 "Hãy gõ tên máy của máy phục vụ sẽ chứa bộ chuyển hướng thư tín người dùng "
-"GForge."
+"@FORGENAME@."
 
 #. Type: select
 #. Choices

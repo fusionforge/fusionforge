@@ -7,20 +7,20 @@
 # Even minor modifications require translation updates and such
 # changes should be coordinated with translators and reviewers.
 
-Template: pkgname/shared/newsadmin_groupid
+Template: @PACKAGE@/shared/newsadmin_groupid
 Type: string
 Default: 2
 _Description: News administrative group ID:
- The members of the news admin group can approve news for the GForge main
+ The members of the news admin group can approve news for the @FORGENAME@ main
  page. This group's ID must not be 1. This should be changed only if
  you upgrade from a previous version and want to keep the data.
 
-Template: pkgname/shared/statsadmin_groupid
+Template: @PACKAGE@/shared/statsadmin_groupid
 Type: string
 Default: 3
 _Description: Statistics administrative group ID:
 
-Template: pkgname/shared/peerrating_groupid
+Template: @PACKAGE@/shared/peerrating_groupid
 Type: string
 Default: 4
 _Description: Peer rating administrative group ID:
