@@ -8,6 +8,8 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
+#Never use the next kind of line, this would break dsf-helper.pl neither add space on
+#Package and Forgename lines
 #PACKAGE=$(shell dh_listpackages | head -1)
 PACKAGE=gforge
 FORGENAME=FusionForge
