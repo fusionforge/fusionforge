@@ -92,6 +92,9 @@ build-stamp: patch
 	/usr/bin/docbook-to-man debian/cvssh.sgml > cvssh.1
 	/usr/bin/docbook-to-man debian/$(PACKAGE)-config.sgml > $(PACKAGE)-config.1
 
+	# Build README.Debian from template
+	cat debian/README.Debian.tmpl | sed 's/@PACKAGE@/$(PACKAGE)/g' | sed 's/@FORGENAME@/$(FORGENAME)/g' > debian/README.Debian
+
 	# Uudecode binary files
 	sh $(CURDIR)/deb-specific/manage-uufiles.sh decode
 
@@ -111,6 +114,7 @@ clean: remove-binary-files unpatch cleanpo
 	rm -f $(CURDIR)/debian/$(PACKAGE)-config.sgml
 	rm -f $(CURDIR)/debian/$(PACKAGE)-common.manpages
 	rm -f cvssh.1 $(PACKAGE)-config.1
+	rm -f $(CURDIR)/debian/README.Debian
 
 	rm -rf locales/*
 
