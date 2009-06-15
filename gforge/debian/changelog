@@ -1,3 +1,10 @@
+gforge (4.7.3-2) unstable; urgency=high
+
+  * Fixed SQL injection and possible cross-site scripting vulnerabilities
+    due to insufficient input sanitizing (CVE ids pending).
+
+ -- Roland Mas <lolando@debian.org>  Mon, 15 Jun 2009 16:10:06 +0200
+
 gforge (4.7.3-1) unstable; urgency=low
 
   * New upstream release.
