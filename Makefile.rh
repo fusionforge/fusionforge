@@ -96,7 +96,6 @@ cleancvs:               # Clean files of gforge-plugin-scmcvs build           #
 	@echo cleancvs Done
 
 buildcvs:               # Build rpm fusionforge-plugin-scmcvs package                  #
-	cd $(RPM_TMP)/SOURCES; tar cjf fusionforge-plugin-scmcvs-$(version).tar.bz2 fusionforge-plugin-scmcvs-$(version)
 	cd gforge/plugins/scmcvs; find . -type f | grep -v '/CVS/' | grep -v '/.svn/' | grep -v '/contrib/' | grep -v '/debian/' | cpio -pdumB --quiet $(RPM_TMP)/SOURCES/fusionforge-plugin-scmcvs-$(version)
 	cd $(RPM_TMP)/SOURCES; tar cjf fusionforge-plugin-scmcvs-$(version).tar.bz2 fusionforge-plugin-scmcvs-$(version)
 	cd $(RPM_TMP)/SOURCES; rpmbuild -ts --nodeps fusionforge-plugin-scmcvs-$(version).tar.bz2
