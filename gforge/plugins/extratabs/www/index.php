@@ -34,6 +34,8 @@ if (!$perm->isAdmin()) {
         exit_permission_denied();
 }
 
+db_begin () ;
+
 // Calculate new index field
 $res = db_query_params ('SELECT COUNT(*) as c FROM plugin_extratabs_main WHERE group_id = $1',
 			array ($group_id)) ;
@@ -52,11 +54,11 @@ if (getStringFromRequest ('addtab') != '') {
 				       $newid,
 				       $tab_name,
 				       $tab_url)) ;
-
 	if (!$res || db_affected_rows($res) < 1) {
 		$feedback = sprintf (_('Cannot insert new tab entry: %s'),
 				      db_error());
 	} else {
+		db_commit () ;
 		$feedback = _('Tab added');
 	}
 } elseif (getStringFromRequest ('delete') != '') {
@@ -67,9 +69,13 @@ if (getStringFromRequest ('addtab') != '') {
 		$feedback = sprintf (_('Cannot delete tab entry: %s'),
 				      db_error());
 	} else {
-		$res = db_query_params ('UPDATE plugin_extratabs_main SET index=index-1 WHERE group_id=$1 AND index > $2',
+		$res = db_query_params ('UPDATE plugin_extratabs_main SET index=-(index-1) WHERE group_id=$1 AND index > $2',
 					array ($group_id,
 					       $index)) ;
+		$res = db_query_params ('UPDATE plugin_extratabs_main SET index=-index WHERE group_id=$1 AND index > $2',
+					array ($group_id,
+					       $index)) ;
+		db_commit () ;
 	}
   } elseif (getStringFromRequest ('up') != '') {
 	if ($index > 1) {
@@ -84,6 +90,7 @@ if (getStringFromRequest ('addtab') != '') {
 		$res = db_query_params('UPDATE plugin_extratabs_main SET index=$1 WHERE group_id=$2 AND index=0',
 				       array ($previous,
 					      $group_id)) ;
+		db_commit () ;
 		$selected = $previous;
 	} else {
 	    $selected = $index;
@@ -101,6 +108,7 @@ if (getStringFromRequest ('addtab') != '') {
 		$res = db_query_params('UPDATE plugin_extratabs_main SET index=$1 WHERE group_id=$2 AND index=0',
 				       array ($next,
 					      $group_id)) ;
+		db_commit () ;
 		$selected = $next;
 	} else {
 	    $selected = $index;
