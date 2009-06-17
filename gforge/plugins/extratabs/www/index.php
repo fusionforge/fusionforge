@@ -72,7 +72,7 @@ if (getStringFromRequest ('addtab') != '') {
 		$res = db_query_params ('UPDATE plugin_extratabs_main SET index=-(index-1) WHERE group_id=$1 AND index > $2',
 					array ($group_id,
 					       $index)) ;
-		$res = db_query_params ('UPDATE plugin_extratabs_main SET index=-index WHERE group_id=$1 AND index > $2',
+		$res = db_query_params ('UPDATE plugin_extratabs_main SET index=-index WHERE group_id=$1 AND index < 0',
 					array ($group_id,
 					       $index)) ;
 		db_commit () ;
