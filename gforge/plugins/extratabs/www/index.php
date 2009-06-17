@@ -1,8 +1,9 @@
 <?php
 /*
- * Hello world plugin
+ * Extra tabs plugin
  *
- * Roland Mas <lolando@debian.org>
+ * Copyright 2005, Raphaël Hertzog
+ * Copyright 2006-2009, Roland Mas
  */
 
 require_once ('../../../www/env.inc.php');
@@ -34,8 +35,8 @@ if (!$perm->isAdmin()) {
 }
 
 // Calculate new index field
-$res = db_query("SELECT COUNT(*) as c FROM plugin_extratabs_main 
-		 WHERE group_id = '$group_id'");
+$res = db_query_params ('SELECT COUNT(*) as c FROM plugin_extratabs_main WHERE group_id = $1',
+			array ($group_id)) ;
 $row = db_fetch_array($res);
 $newid = $row['c'] + 1;
 
@@ -46,8 +47,11 @@ $index = getIntFromRequest ('index') ;
 if (getStringFromRequest ('addtab') != '') {
 	$tab_name = addslashes (getStringFromRequest ('tab_name')) ;
 	$tab_url = addslashes (getStringFromRequest ('tab_url')) ;
-	$res = db_query("INSERT INTO plugin_extratabs_main (group_id, index, tab_name, tab_url)
-		  	 VALUES('$group_id','$newid','$tab_name','$tab_url')");
+	$res = db_query_params ('INSERT INTO plugin_extratabs_main (group_id, index, tab_name, tab_url) VALUES ($1,$2,$3,$4)',
+				array ($group_id,
+				       $newid,
+				       $tab_name,
+				       $tab_url)) ;
 
 	if (!$res || db_affected_rows($res) < 1) {
 		$feedback = sprintf (_('Cannot insert new tab entry: %s'),
@@ -56,58 +60,47 @@ if (getStringFromRequest ('addtab') != '') {
 		$feedback = _('Tab added');
 	}
 } elseif (getStringFromRequest ('delete') != '') {
-	$res = db_query("DELETE FROM plugin_extratabs_main
-			 WHERE group_id='$group_id' AND
-			 index='$index'");
+	$res = db_query_params ('DELETE FROM plugin_extratabs_main WHERE group_id=$1 AND index=$2',
+				array ($group_id,
+				       $index)) ;
 	if (!$res || db_affected_rows($res) < 1) {
 		$feedback = sprintf (_('Cannot delete tab entry: %s'),
 				      db_error());
 	} else {
-		$res = db_query("UPDATE plugin_extratabs_main
-			 SET index = index - 1
-			 WHERE group_id = '$group_id' AND
-			 index > $index");
+		$res = db_query_params ('UPDATE plugin_extratabs_main SET index=index-1 WHERE group_id=$1 AND index > $2',
+					array ($group_id,
+					       $index)) ;
 	}
   } elseif (getStringFromRequest ('up') != '') {
 	if ($index > 1) {
 		$previous = $index - 1;
-		$res = db_query("
-		    UPDATE plugin_extratabs_main
-		    SET index = 0 
-		    WHERE group_id = '$group_id' AND index = $index
-		");
-		$res = db_query("
-		    UPDATE plugin_extratabs_main
-		    SET index = $index 
-		    WHERE group_id = '$group_id' AND index = $previous
-		");
-		$res = db_query("
-		    UPDATE plugin_extratabs_main
-		    SET index = $previous
-		    WHERE group_id = '$group_id' AND index = 0
-		");
+		$res = db_query_params('UPDATE plugin_extratabs_main SET index = 0 WHERE group_id=$1 AND index=$2',
+				       array ($group_id,
+					      $index)) ;
+		$res = db_query_params('UPDATE plugin_extratabs_main SET index=$1 WHERE group_id=$2 AND index=$3',
+				       array ($index,
+					      $group_id,
+					      $previous)) ;
+		$res = db_query_params('UPDATE plugin_extratabs_main SET index=$1 WHERE group_id=$2 AND index=0',
+				       array ($previous,
+					      $group_id)) ;
 		$selected = $previous;
 	} else {
 	    $selected = $index;
 	}
-} elseif (getStringFromRequest ('down') != '') {
+    } elseif (getStringFromRequest ('down') != '') {
 	if ($index < $newid - 1) {
 		$next = $index + 1;
-		$res = db_query("
-		    UPDATE plugin_extratabs_main
-		    SET index = 0 
-		    WHERE group_id = '$group_id' AND index = $index
-		");
-		$res = db_query("
-		    UPDATE plugin_extratabs_main
-		    SET index = $index 
-		    WHERE group_id = '$group_id' AND index = $next
-		");
-		$res = db_query("
-		    UPDATE plugin_extratabs_main
-		    SET index = $next
-		    WHERE group_id = '$group_id' AND index = 0
-		");
+		$res = db_query_params('UPDATE plugin_extratabs_main SET index = 0 WHERE group_id=$1 AND index=$2',
+				       array ($group_id,
+					      $index)) ;
+		$res = db_query_params('UPDATE plugin_extratabs_main SET index=$1 WHERE group_id=$2 AND index=$3',
+				       array ($index,
+					      $group_id,
+					      $next)) ;
+		$res = db_query_params('UPDATE plugin_extratabs_main SET index=$1 WHERE group_id=$2 AND index=0',
+				       array ($next,
+					      $group_id)) ;
 		$selected = $next;
 	} else {
 	    $selected = $index;
@@ -140,7 +133,7 @@ project_admin_header(array('title'=>$adminheadertitle, 'group'=>$group->getID())
 </p>
 
 <?php
-	$res = db_query("SELECT * FROM plugin_extratabs_main WHERE group_id='$group_id' ORDER BY index ASC");
+	$res = db_query_params ('SELECT * FROM plugin_extratabs_main WHERE group_id=$1 ORDER BY index ASC', array ($group_id)) ;
 $nbtabs = db_numrows($res) ;
 if ($nbtabs > 0) {
 	
