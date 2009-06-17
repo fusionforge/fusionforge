@@ -257,7 +257,7 @@ if ($sys_show_source) {
         return '
         <!-- Box Top Start -->
 
-        <table cellspacing="0" cellpadding="0" width="100%" border="0" background="'.$this->imgroot.'vert-grad.png">
+        <table cellspacing="0" cellpadding="0" style="table-layout:fixed" width="100%" border="0" background="'.$this->imgroot.'vert-grad.png">
         <tr align="center">
             <td valign="top" style="text-align:right" width="10" background="'.$this->imgroot.'box-topleft.png"><img src="'.$this->imgroot.'clear.png" width="10" height="20" /></td>
             <td width="100%" background="'.$this->imgroot.'box-grad.png"><span class="titlebar">'.$title.'</span></td>
