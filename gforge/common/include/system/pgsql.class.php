@@ -59,6 +59,24 @@ class pgsql extends System {
 		return true;
 	}
 
+	/**
+	* sysUseUnixName() - Check if user/group used the unix_name
+	*
+	* @param		string   The unix_name to check
+	* @returns true if used/false is free
+	*
+	*/
+	function sysUseUnixName($unix_name) {
+		$res1 = db_query_params ('SELECT user_id FROM users
+		                          WHERE user_name=$1',array($unix_name));
+		$res2 = db_query_params ('SELECT group_id FROM groups
+		                          WHERE unix_group_name=$1',array($unix_name));
+		if ( db_numrows($res1) == 0 && db_numrows($res2) == 0 ){
+			return true;
+		}
+		return false;
+	}
+
 	/*
  	* User management functions
  	*/

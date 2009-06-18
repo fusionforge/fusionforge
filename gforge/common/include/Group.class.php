@@ -282,6 +282,7 @@ class Group extends Error {
 	function create(&$user, $group_name, $unix_name, $description, $purpose, $unix_box='shell1', $scm_box='cvs1', $is_public=1) {
 		// $user is ignored - anyone can create pending group
 
+		global $SYS;
 		if ($this->getID()!=0) {
 			$this->setError(_('Group::create: Group object already exists'));
 			return false;
@@ -289,6 +290,9 @@ class Group extends Error {
 			return false;
 		} else if (!account_groupnamevalid($unix_name)) {
 			$this->setError(_('Invalid Unix name'));
+			return false;
+		} else if (!$SYS->sysUseUnixName($unix_name)) {
+			$this->setError(_('Unix name already taken'));
 			return false;
 		} else if (db_numrows(db_query_params('SELECT group_id FROM groups WHERE unix_group_name=$1',
 						      array ($unix_name))) > 0) {

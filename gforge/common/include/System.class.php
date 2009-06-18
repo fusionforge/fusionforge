@@ -34,6 +34,17 @@ class System extends Error {
 		return true;
 	}
 
+	/**
+	* sysUseUnixName() - Check if user/group used the unix_name
+	*
+	* @param		string   The unix_name to check
+	* @returns true if used/false is free
+	*
+	*/
+	function sysUseUnixName($unix_name) {
+		return true;
+	}
+
 	/*
  	* User management functions
  	*/
