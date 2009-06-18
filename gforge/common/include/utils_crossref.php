@@ -3,6 +3,7 @@
  * utils_crossref.php - Misc utils common to all aspects of the site
  *
  * Copyright 1999-2001 (c) Alcatel-Lucent
+ * Copyright 2009, Roland Mas
  *
  * @version   $Id: utils.php 5732 2006-09-30 21:04:41Z marcelo $
  *
@@ -48,12 +49,12 @@ function util_gen_cross_ref ($text, $group_id) {
 }
 
 function _artifactid2url ($id, $mode='') {
-	$sql = "SELECT group_id, artifact.group_artifact_id, summary, status_id
-			FROM artifact, artifact_group_list
-			WHERE artifact_id=$id
-			AND artifact.group_artifact_id=artifact_group_list.group_artifact_id";
 	$text = '[#'.$id.']';
-	$res = db_query($sql);
+	$res = db_query_params ('SELECT group_id, artifact.group_artifact_id, summary, status_id
+			FROM artifact, artifact_group_list
+			WHERE artifact_id=$1
+			AND artifact.group_artifact_id=artifact_group_list.group_artifact_id',
+				array ($id)) ;
 	if (db_numrows($res) == 1) {
 		$row = db_fetch_array($res);
 		$url = '/tracker/?func=detail&amp;aid='.$id.'&amp;group_id='.$row['group_id'].'&amp;atid='.$row['group_artifact_id'];
@@ -71,12 +72,12 @@ function _artifactid2url ($id, $mode='') {
 }
 
 function _taskid2url ($id) {
-	$sql = "SELECT group_id, project_task.group_project_id, summary, status_id
-			FROM project_task, project_group_list
-			WHERE project_task_id=$id
-			AND project_task.group_project_id=project_group_list.group_project_id";
 	$text = '[T'.$id.']';
-	$res = db_query($sql);
+	$res = db_query_params ('SELECT group_id, project_task.group_project_id, summary, status_id
+			FROM project_task, project_group_list
+			WHERE project_task_id=$1
+			AND project_task.group_project_id=project_group_list.group_project_id',
+				array ($id));
 	if (db_numrows($res) == 1) {
 		$row = db_fetch_array($res);
 		$url = '/pm/task.php?func=detailtask&amp;project_task_id='.$id.'&amp;group_id='.$row['group_id'].'&amp;group_project_id='.$row['group_project_id'];
@@ -90,12 +91,12 @@ function _taskid2url ($id) {
 }
 
 function _forumid2url ($id) {
-	$sql = "SELECT group_id, forum.group_forum_id, subject
-			FROM forum, forum_group_list
-			WHERE msg_id=$id
-			AND forum.group_forum_id=forum_group_list.group_forum_id";
 	$text = '[forum:'.$id.']';
-	$res = db_query($sql);
+	$res = db_query_params ('SELECT group_id, forum.group_forum_id, subject
+			FROM forum, forum_group_list
+			WHERE msg_id=$1
+			AND forum.group_forum_id=forum_group_list.group_forum_id',
+				array ($id));
 	if (db_numrows($res) == 1) {
 		$row = db_fetch_array($res);
 		$url = '/forum/message.php?msg_id='.$id.'&amp;group_id='.$row['group_id'];
