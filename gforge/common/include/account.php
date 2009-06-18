@@ -73,9 +73,15 @@ function account_namevalid($name) {
 		$GLOBALS['register_error'] = _('Name is reserved.');
 		return 0;
 	}
-	if ( exec("getent passwd $name") != "" ){
-		$GLOBALS['register_error'] = _('That username already exists.');
-		return 0;
+	if ($sys_use_shell) {
+		if ( exec("getent passwd $name") != "" ){
+			$GLOBALS['register_error'] = _('That username already exists.');
+			return 0;
+		}
+		if ( exec("getent group $name") != "" ){
+			$GLOBALS['register_error'] = _('That username already exists.');
+			return 0;
+		}
 	}
 	if (eregi("^(anoncvs_)",$name)) {
 		$GLOBALS['register_error'] = _('Name is reserved for CVS.');

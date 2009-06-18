@@ -236,6 +236,7 @@ class GFUser extends Error {
 	function create($unix_name,$firstname,$lastname,$password1,$password2,$email,
 		$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,
 		$unix_box='shell',$address='',$address2='',$phone='',$fax='',$title='',$ccode='US',$send_mail=true) {
+		global $SYS;
 		if (!$theme_id) {
 			$this->setError(_('You must supply a theme'));
 			return false;
@@ -264,6 +265,15 @@ class GFUser extends Error {
 		}
 		if (!account_pwvalid($password1)) {
 			$this->setError(_('Invalid Password:'));
+			return false;
+		}
+		$unix_name=strtolower($unix_name);
+		if (!account_namevalid($unix_name)) {
+			$this->setError(_('Invalid Unix Name.'));
+			return false;
+		}
+		if (!$SYS->sysUseUnixName($unix_name)) {
+			$this->setError(_('Unix name already taken'));
 			return false;
 		}
 		if (!validate_email($email)) {
