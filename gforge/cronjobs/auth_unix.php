@@ -83,7 +83,9 @@ if ($err == "")
 	//
 	// Get the users from the database
 	//
-	$res = db_query ("SELECT user_name,unix_pw,unix_uid,unix_gid,realname,shell FROM users WHERE unix_status='A'::bpchar");
+	$res = db_query_params ('SELECT user_name,unix_pw,unix_uid,unix_gid,realname,shell FROM users WHERE unix_status=$1',
+			array('A')) ;
+
 	$user_names = &util_result_column_to_array ($res, "user_name");
 	$user_pws = &util_result_column_to_array ($res, "unix_pw");
 	$user_ids = &util_result_column_to_array ($res, "unix_uid");
@@ -170,7 +172,9 @@ if ($err == "")
 	//
 	// Get the groups from the database
 	//
-	$res = db_query ("SELECT unix_group_name,group_id FROM groups WHERE status='A'::bpchar AND use_scm=1");
+	$res = db_query_params ('SELECT unix_group_name,group_id FROM groups WHERE status=$1 AND use_scm=1',
+			array('A')) ;
+
 	$group_names = &util_result_column_to_array ($res, "unix_group_name");
 	$group_ids = &util_result_column_to_array ($res, "group_id");
 	//

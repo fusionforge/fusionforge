@@ -67,10 +67,12 @@ $cond_mapping = array(
 	'SFDVLPR' => "AND users.user_id=user_group.user_id AND user_group.group_id=1"
 );
 
-$mail_res = db_query("SELECT *
+$mail_res = db_query_params ('SELECT *
 	FROM massmail_queue
 	WHERE finished_date=0
-	ORDER BY queued_date");
+	ORDER BY queued_date',
+			array()) ;
+
 
 /* If there was error, notify admins, but don't be pesky */
 if (!$mail_res) {

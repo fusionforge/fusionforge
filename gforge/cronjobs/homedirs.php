@@ -169,12 +169,16 @@ foreach($groups as $group) {
 		fclose($fw);
 		
 	}
-	/*$resgroupadmin=db_query("SELECT u.user_name FROM users u,user_group ug,groups g
+	/*$resgroupadmin=db_query_params ('SELECT u.user_name FROM users u,user_group ug,groups g
 		WHERE u.user_id=ug.user_id 
 		AND ug.group_id=g.group_id 
-		AND g.unix_group_name='$group'
-		AND ug.admin_flags='A'
-		AND u.status='A'");
+		AND g.unix_group_name=$1
+		AND ug.admin_flags=$2
+		AND u.status=$3',
+			array($group,
+			'A',
+			'A')) ;
+
 	if (!$resgroupadmin || db_numrows($resgroupadmin) < 1) {
 		//group has no members, so cannot create dir
 	} else {

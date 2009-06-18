@@ -36,7 +36,9 @@ require_once $gfcommon.'include/SCM.class.php' ;
 			 
 setup_plugin_manager () ;
 
-$res=db_query("SELECT group_id FROM groups WHERE status='A' AND use_scm=1 ORDER BY group_id"); 
+$res=db_query_params ('SELECT group_id FROM groups WHERE status=$1 AND use_scm=1 ORDER BY group_id',
+			array('A')) ;
+
 if (!$res) {
 	$this->setError('Unable to get hosted project count: '.db_error());
 	return false;

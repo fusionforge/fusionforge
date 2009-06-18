@@ -268,9 +268,15 @@ ORDER BY ranking ASC";
 		echo db_error();
 
 
-		$rel=db_query("DROP TABLE project_counts_weekly_tmp;");
-		$rel=db_query("DROP TABLE project_metric_weekly_tmp1;");
-		$rel=db_query("DROP SEQUENCE project_metric_week_ranking_seq;");
+		$rel=db_query_params ('DROP TABLE project_counts_weekly_tmp;',
+			array()) ;
+
+		$rel=db_query_params ('DROP TABLE project_metric_weekly_tmp1;',
+			array()) ;
+
+		$rel=db_query_params ('DROP SEQUENCE project_metric_week_ranking_seq;',
+			array()) ;
+
 
 	}
 }

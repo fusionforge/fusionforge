@@ -32,7 +32,9 @@ $err='';
 
 db_begin();
 
-$rel = db_query("DELETE FROM survey_rating_aggregate;");
+$rel = db_query_params ('DELETE FROM survey_rating_aggregate;',
+			array()) ;
+
 $err .= db_error();
 
 

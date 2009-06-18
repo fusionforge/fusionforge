@@ -68,25 +68,34 @@ $threshhold='1.6';
 
 db_begin();
 
-db_query("DELETE FROM user_metric0");
+db_query_params ('DELETE FROM user_metric0',
+			array()) ;
+
 $err .= db_error();
 
 if ($sys_database_type != 'mysql') {
-	db_query("select setval('user_metric0_pk_seq',1)");
+	db_query_params ('select setval($1,1)',
+			array('user_metric0_pk_seq')) ;
+
 	$err .= db_error();
 }
 
-db_query("INSERT INTO user_metric0 
+db_query_params ('INSERT INTO user_metric0 
 (user_id,times_ranked,avg_raters_importance,avg_rating,metric,percentile,importance_factor)
 SELECT user_id,5,1.25,3,0,0,1.25
 FROM user_group
 WHERE
-user_group.group_id='$sys_peer_rating_group'
-AND user_group.admin_flags='A';");
+user_group.group_id=$1
+AND user_group.admin_flags=$2;',
+			array($sys_peer_rating_group,
+			'A')) ;
+
 
 $err .= db_error();
 
-db_query("UPDATE user_metric0 SET ranking=ranking-1");
+db_query_params ('UPDATE user_metric0 SET ranking=ranking-1',
+			array()) ;
+
 
 if ($sys_database_type == 'mysql') {
 	$sql="
@@ -321,12 +330,18 @@ $ts_month = date('Ym', $t);
 $ts_day = date('d', $t);
 
 db_begin();
-db_query("DELETE FROM user_metric_history WHERE month='$ts_month' AND day='$ts_day'");
-db_query("
+db_query_params ('DELETE FROM user_metric_history WHERE month=$1 AND day=$2',
+			array($ts_month,
+			$ts_day)) ;
+
+db_query_params ('
 	INSERT INTO user_metric_history
-	SELECT '$ts_month','$ts_day',user_id,ranking,metric
+	SELECT $1,$2,user_id,ranking,metric
 	FROM user_metric
-");
+',
+			array($ts_month,
+			$ts_day)) ;
+
 $err .= db_error();
 
 cron_entry(1,$err);

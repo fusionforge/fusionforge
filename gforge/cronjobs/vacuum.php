@@ -31,12 +31,15 @@ $err='';
 //
 //	PG 7.1 and earlier
 //
-//$res = db_query("VACUUM ANALYZE;");
+//$res = db_query_params ('VACUUM ANALYZE;',array()) ;
+
 //
 //	PG 7.2 and 7.3
 //
 if ($sys_database_type != 'mysql') {
-	$res = db_query("VACUUM FULL ANALYZE;");
+	$res = db_query_params ('VACUUM FULL ANALYZE;',
+			array()) ;
+
 
 	if (!$res) {
 		$err .= "Error on DB1: " . db_error();

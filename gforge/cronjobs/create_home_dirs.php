@@ -54,13 +54,20 @@ if ($err != "")
 //
 // Get the users from the gforge database
 //
-$res = db_query ("SELECT distinct users.user_name FROM users,user_group,groups WHERE users.user_id=user_group.user_id AND user_group.group_id=groups.group_id AND groups.status='A' AND user_group.cvs_flags='1' AND users.unix_status='A'");
+$res = db_query_params ('SELECT distinct users.user_name FROM users,user_group,groups WHERE users.user_id=user_group.user_id AND user_group.group_id=groups.group_id AND groups.status=$1 AND user_group.cvs_flags=$2 AND users.unix_status=$3',
+			array('A',
+			'1',
+			'A')) ;
+
 $users = &util_result_column_to_array ($res, 'user_name');
 
 //
 // Get the groups from the gforge database
 //
-$res = db_query ("SELECT unix_group_name FROM groups WHERE status='A' AND type_id='1'");
+$res = db_query_params ('SELECT unix_group_name FROM groups WHERE status=$1 AND type_id=$2',
+			array('A',
+			'1')) ;
+
 $groups = &util_result_column_to_array ($res, 'unix_group_name');
 
 //
