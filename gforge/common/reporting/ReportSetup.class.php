@@ -423,7 +423,8 @@ function dailyData() {
  *	@return	boolean	Success.
  */
 function users_added_daily($day) {
-	db_query("DELETE FROM rep_users_added_daily WHERE day='$day'");
+	db_query_params ('DELETE FROM rep_users_added_daily WHERE day=$1',
+			array($day)) ;
 
 	$sql="INSERT INTO rep_users_added_daily (day,added) 
 		VALUES ('$day',(SELECT count(*) FROM users WHERE status='A' AND add_date 
@@ -467,7 +468,8 @@ function backfill_users_added_daily($count=10000) {
  *	@return	boolean	Success.
  */
 function groups_added_daily($day) {
-	db_query("DELETE FROM rep_groups_added_daily WHERE day='$day'");
+	db_query_params ('DELETE FROM rep_groups_added_daily WHERE day=$1',
+			array($day)) ;
 
 	$sql="INSERT INTO rep_groups_added_daily (day,added) 
 		VALUES ('$day',(SELECT count(*) FROM groups WHERE status='A' AND register_time 
@@ -511,7 +513,8 @@ function backfill_groups_added_daily($count=10000) {
  *  @return boolean Success.
  */
 function users_added_weekly($week) {
-	db_query("DELETE FROM rep_users_added_weekly WHERE week='$week'");
+	db_query_params ('DELETE FROM rep_users_added_weekly WHERE week=$1',
+			array($week)) ;
 
 	$sql="INSERT INTO rep_users_added_weekly (week,added)
 		VALUES ('$week',(SELECT count(*) FROM users WHERE status='A' AND add_date
@@ -547,7 +550,8 @@ function backfill_users_added_weekly($count=10000) {
  *  @return boolean Success.
  */
 function groups_added_weekly($week) {
-	db_query("DELETE FROM rep_groups_added_weekly WHERE week='$week'");
+	db_query_params ('DELETE FROM rep_groups_added_weekly WHERE week=$1',
+			array($week)) ;
 
 	$sql="INSERT INTO rep_groups_added_weekly (week,added)
 		VALUES ('$week',(SELECT count(*) FROM groups WHERE status='A' AND register_time
@@ -584,7 +588,8 @@ function backfill_groups_added_weekly($count=10000) {
  *  @return boolean Success.
  */
 function users_added_monthly($month,$end) {
-	db_query("DELETE FROM rep_users_added_monthly WHERE month='$month'");
+	db_query_params ('DELETE FROM rep_users_added_monthly WHERE month=$1',
+			array($month)) ;
 
 	$sql="INSERT INTO rep_users_added_monthly (month,added)
 		VALUES ('$month',(SELECT count(*) FROM users WHERE status='A' AND add_date
@@ -622,7 +627,8 @@ function backfill_users_added_monthly($count=10000) {
  *  @return boolean Success.
  */
 function groups_added_monthly($month,$end) {
-	db_query("DELETE FROM rep_groups_added_monthly WHERE month='$month'");
+	db_query_params ('DELETE FROM rep_groups_added_monthly WHERE month=$1',
+			array($month)) ;
 
 	$sql="INSERT INTO rep_groups_added_monthly (month,added)
 		VALUES ('$month',(SELECT count(*) FROM groups WHERE status='A' AND register_time
@@ -663,7 +669,8 @@ function backfill_groups_added_monthly($count=10000) {
  *	@return	boolean	Success.
  */
 function users_cum_daily($day) {
-	db_query("DELETE FROM rep_users_cum_daily WHERE day='$day'");
+	db_query_params ('DELETE FROM rep_users_cum_daily WHERE day=$1',
+			array($day)) ;
 
 	$sql="INSERT INTO rep_users_cum_daily (day,total) 
 		VALUES ('$day',(SELECT count(*) FROM users WHERE status='A' AND add_date 
@@ -707,7 +714,8 @@ function backfill_users_cum_daily($count=10000) {
  *	@return	boolean	Success.
  */
 function groups_cum_daily($day) {
-	db_query("DELETE FROM rep_groups_cum_daily WHERE day='$day'");
+	db_query_params ('DELETE FROM rep_groups_cum_daily WHERE day=$1',
+			array($day)) ;
 
 	$sql="INSERT INTO rep_groups_cum_daily (day,total) 
 		VALUES ('$day',(SELECT count(*) FROM groups WHERE status='A' AND register_time 
@@ -751,7 +759,8 @@ function backfill_groups_cum_daily($count=10000) {
  *  @return boolean Success.
  */
 function users_cum_weekly($week) {
-	db_query("DELETE FROM rep_users_cum_weekly WHERE week='$week'");
+	db_query_params ('DELETE FROM rep_users_cum_weekly WHERE week=$1',
+			array($week)) ;
 
 	$sql="INSERT INTO rep_users_cum_weekly (week,total)
 		VALUES ('$week',(SELECT count(*) FROM users WHERE status='A' AND add_date
@@ -787,7 +796,8 @@ function backfill_users_cum_weekly($count=10000) {
  *  @return boolean Success.
  */
 function groups_cum_weekly($week) {
-	db_query("DELETE FROM rep_groups_cum_weekly WHERE week='$week'");
+	db_query_params ('DELETE FROM rep_groups_cum_weekly WHERE week=$1',
+			array($week)) ;
 
 	$sql="INSERT INTO rep_groups_cum_weekly (week,total)
 		VALUES ('$week',(SELECT count(*) FROM groups WHERE status='A' AND register_time
@@ -824,7 +834,8 @@ function backfill_groups_cum_weekly($count=10000) {
  *  @return boolean Success.
  */
 function users_cum_monthly($month,$end) {
-	db_query("DELETE FROM rep_users_cum_monthly WHERE month='$month'");
+	db_query_params ('DELETE FROM rep_users_cum_monthly WHERE month=$1',
+			array($month)) ;
 
 	$sql="INSERT INTO rep_users_cum_monthly (month,total)
 		VALUES ('$month',(SELECT count(*) FROM users WHERE status='A' AND add_date
@@ -862,7 +873,8 @@ function backfill_users_cum_monthly($count=10000) {
  *  @return boolean Success.
  */
 function groups_cum_monthly($month,$end) {
-	db_query("DELETE FROM rep_groups_cum_monthly WHERE month='$month'");
+	db_query_params ('DELETE FROM rep_groups_cum_monthly WHERE month=$1',
+			array($month)) ;
 
 	$sql="INSERT INTO rep_groups_cum_monthly (month,total)
 		VALUES ('$month',(SELECT count(*) FROM groups WHERE status='A' AND register_time
@@ -905,7 +917,8 @@ function backfill_groups_cum_monthly($count=10000) {
 function user_act_daily($day) {
 	global $sys_database_type;
 
-	db_query("DELETE FROM rep_user_act_daily WHERE day='$day'");
+	db_query_params ('DELETE FROM rep_user_act_daily WHERE day=$1',
+			array($day)) ;
 
 	$end_day=$day+REPORT_DAY_SPAN-1;
 
@@ -1066,7 +1079,8 @@ function backfill_user_act_daily($count=10000) {
 function user_act_weekly($week) {
 	global $sys_database_type;
 
-	db_query("DELETE FROM rep_user_act_weekly WHERE week='$week'");
+	db_query_params ('DELETE FROM rep_user_act_weekly WHERE week=$1',
+			array($week)) ;
 
 	$sql="INSERT INTO rep_user_act_weekly (user_id,week,tracker_opened,tracker_closed,
 		forum,docs,cvs_commits,tasks_opened,tasks_closed)
@@ -1121,7 +1135,8 @@ function backfill_user_act_weekly($count=10000) {
 function user_act_monthly($month,$end) {
 	global $sys_database_type;
 
-	db_query("DELETE FROM rep_user_act_monthly WHERE month='$month'");
+	db_query_params ('DELETE FROM rep_user_act_monthly WHERE month=$1',
+			array($month)) ;
 
 	$sql="INSERT INTO rep_user_act_monthly (user_id,month,tracker_opened,tracker_closed,
 		forum,docs,cvs_commits,tasks_opened,tasks_closed)
@@ -1178,7 +1193,8 @@ function backfill_user_act_monthly($count=10000) {
 function group_act_daily($day) {
 	global $sys_database_type;
 
-	db_query("DELETE FROM rep_group_act_daily WHERE day='$day'");
+	db_query_params ('DELETE FROM rep_group_act_daily WHERE day=$1',
+			array($day)) ;
 
 	$end_day=$day+REPORT_DAY_SPAN-1;
 
@@ -1379,7 +1395,8 @@ function backfill_group_act_daily($count=10000) {
 function group_act_weekly($week) {
 	global $sys_database_type;
 
-	db_query("DELETE FROM rep_group_act_weekly WHERE week='$week'");
+	db_query_params ('DELETE FROM rep_group_act_weekly WHERE week=$1',
+			array($week)) ;
 
 	$sql="INSERT INTO rep_group_act_weekly (group_id,week,tracker_opened,tracker_closed,
 		forum,docs,downloads,cvs_commits,tasks_opened,tasks_closed)
@@ -1436,7 +1453,8 @@ function backfill_group_act_weekly($count=10000) {
 function group_act_monthly($month,$end) {
 	global $sys_database_type;
 
-	db_query("DELETE FROM rep_group_act_monthly WHERE month='$month'");
+	db_query_params ('DELETE FROM rep_group_act_monthly WHERE month=$1',
+			array($month)) ;
 
 	$sql="INSERT INTO rep_group_act_monthly (group_id,month,tracker_opened,tracker_closed,
 		forum,docs,downloads,cvs_commits,tasks_opened,tasks_closed)
@@ -1489,7 +1507,8 @@ function backfill_group_act_monthly($count=10000) {
  *  @return boolean Success.
  */
 function addTimeCode($category_name) {
-	return db_query("INSERT INTO rep_time_category (category_name) VALUES ('$category_name')");
+	return db_query_params ('INSERT INTO rep_time_category (category_name) VALUES ($1)',
+			array($category_name)) ;
 }
 
 /**
@@ -1499,7 +1518,9 @@ function addTimeCode($category_name) {
  *  @return boolean Success.
  */
 function updateTimeCode($time_code, $category_name) {
-	return db_query("UPDATE rep_time_category SET category_name='$category_name' WHERE time_code='$time_code'");
+	return db_query_params ('UPDATE rep_time_category SET category_name=$1 WHERE time_code=$2',
+			array($category_name,
+			$time_code)) ;
 }
 
 }
