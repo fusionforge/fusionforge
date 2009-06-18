@@ -38,9 +38,13 @@ $reserved_alias = array(
 );
 
 // First of all, try to create the "alias" field if it doesn't exist
-$res = db_query("SELECT alias FROM artifact_extra_field_list");
+$res = db_query_params ('SELECT alias FROM artifact_extra_field_list',
+			array()) ;
+
 if (!$res) {		// error, the field doesn't exist
-	$res = db_query("ALTER TABLE artifact_extra_field_list ADD COLUMN alias TEXT");
+	$res = db_query_params ('ALTER TABLE artifact_extra_field_list ADD COLUMN alias TEXT',
+			array()) ;
+
 	if (!$res) {
 		echo db_error();
 		exit(1);
@@ -48,9 +52,13 @@ if (!$res) {		// error, the field doesn't exist
 } 
 
 // Now fill all the data
-db_query("BEGIN WORK");
+db_query_params ('BEGIN WORK',
+			array()) ;
 
-$res = db_query("SELECT * FROM artifact_extra_field_list");
+
+$res = db_query_params ('SELECT * FROM artifact_extra_field_list',
+			array()) ;
+
 if (!$res) {
 	echo db_error();
 	exit(2);

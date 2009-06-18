@@ -6,7 +6,9 @@ require_once $gfcommon.'pm/ProjectTask.class.php';
 
 db_begin();
 
-$res = db_query("SELECT project_task_id FROM project_task WHERE status_id='3'");
+$res = db_query_params ('SELECT project_task_id FROM project_task WHERE status_id=$1',
+			array('3')) ;
+
 
 if (!$res) {
 	echo "FAIL\n";
@@ -65,7 +67,9 @@ if (!$res) {
 	}
 }
 
-$res = db_query("SELECT artifact_id FROM artifact WHERE status_id='3'");
+$res = db_query_params ('SELECT artifact_id FROM artifact WHERE status_id=$1',
+			array('3')) ;
+
 
 if (!$res) {
 	echo "FAIL\n";

@@ -37,7 +37,10 @@ $version = '';
 // a huge message will warn not to run it without doing a backup first // warning.
 
 // Check if table 'database_startpoint' exists
-$res = db_query("SELECT COUNT(*) AS proceed FROM pg_class WHERE relname = 'database_startpoint' AND relkind = 'r'");
+$res = db_query_params ('SELECT COUNT(*) AS proceed FROM pg_class WHERE relname = $1 AND relkind = $2',
+			array('database_startpoint',
+			'r')) ;
+
 if (!$res) { // db error
 	show("DB-ERROR-2: ".db_error()."\n");
 	exit();
@@ -48,7 +51,9 @@ if (!$res) { // db error
 		exit();
 	} else {
 		// Check if table 'database_startpoint' has proper values
-		$res = db_query("SELECT * FROM database_startpoint");
+		$res = db_query_params ('SELECT * FROM database_startpoint',
+			array()) ;
+
 		if (!$res) { // db error
 			show("DB-ERROR-3: ".db_error()."\n");
 			exit();
@@ -299,7 +304,9 @@ function run_sql_script($filename) {
 	
 	// Patch for some 3.0preX versions
 	if ($filename == '20021216.sql') {
-		db_query("SELECT setval('themes_theme_id_key', (SELECT MAX(theme_id) FROM themes), true)");
+		db_query_params ('SELECT setval($1, (SELECT MAX(theme_id) FROM themes), true)',
+			array('themes_theme_id_key')) ;
+
 		show("Applying fix for some 3.0preX versions\n");
 	}
 	
@@ -432,7 +439,10 @@ function drop_if_exists($name, $command, $kind, $commandSuffix = '') {
 }
 
 function drop_constraint_if_exists($table, $constraint, $query) {
-	$res = db_query("SELECT COUNT(*) AS exists FROM information_schema.constraint_table_usage WHERE table_name='$table' AND constraint_name='$constraint'");
+	$res = db_query_params ('SELECT COUNT(*) AS exists FROM information_schema.constraint_table_usage WHERE table_name=$1 AND constraint_name=$2',
+			array($table,
+			$constraint)) ;
+
 	if (!$res) {
 		show("ERROR:".db_error()."\n");
 		return false;

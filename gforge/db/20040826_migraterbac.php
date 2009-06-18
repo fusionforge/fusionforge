@@ -43,7 +43,10 @@ require_once $gfcommon.'include/Role.class.php';
 //	Set up this script to run as the site admin
 //
 
-$res = db_query("SELECT user_id FROM user_group WHERE admin_flags='A' AND group_id='1'");
+$res = db_query_params ('SELECT user_id FROM user_group WHERE admin_flags=$1 AND group_id=$2',
+			array('A',
+			'1')) ;
+
 
 if (!$res) {
 	echo db_error();
@@ -63,11 +66,19 @@ session_set_new($id);
 //	Clear out role settings in case this was run before
 //
 db_begin();
-db_query("UPDATE user_group SET role_id=1");
-db_query("DELETE FROM role_setting");
-db_query("DELETE FROM role WHERE role_id>1");
+db_query_params ('UPDATE user_group SET role_id=1',
+			array()) ;
 
-$res=db_query("SELECT group_id FROM groups WHERE status != 'P'");
+db_query_params ('DELETE FROM role_setting',
+			array()) ;
+
+db_query_params ('DELETE FROM role WHERE role_id>1',
+			array()) ;
+
+
+$res=db_query_params ('SELECT group_id FROM groups WHERE status != $1',
+			array('P')) ;
+
 $arr = util_result_column_to_array($res);
 
 for ($i=0; $i<count($arr); $i++) {

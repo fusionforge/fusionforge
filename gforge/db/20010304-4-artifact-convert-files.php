@@ -28,6 +28,8 @@ if (db_error()) {
 } else {
 	echo "SUCCESS\n";
 }
-db_query("vacuum analyze;");
+db_query_params ('vacuum analyze;',
+			array()) ;
+
 
 ?>

@@ -17,7 +17,9 @@ require $gfwww.'include/squal_pre.php';
 //SELECT * FROM doc_data WHERE filename is null;
 db_begin();
 
-$res=db_query("SELECT * FROM doc_data WHERE filename IS NULL");
+$res=db_query_params ('SELECT * FROM doc_data WHERE filename IS NULL',
+			array()) ;
+
 if (!$res) {
 	echo db_error();
 	db_rollback();

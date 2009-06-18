@@ -30,7 +30,9 @@ require_once $gfwww.'include/squal_pre.php';
 //	Convert forum names to new legal syntax
 //
 db_begin();
-$res=db_query("SELECT group_forum_id,forum_name FROM forum_group_list");
+$res=db_query_params ('SELECT group_forum_id,forum_name FROM forum_group_list',
+			array()) ;
+
 if (!$res) {
 	echo db_error();
 	db_rollback();
@@ -54,8 +56,11 @@ for ($i=0; $i<db_numrows($res); $i++) {
 //	Long-standing oddity in GForge - 
 //	forums were ZERO-pen Discussion, not Oh-pen Discussion
 //
-$res = db_query("UPDATE forum_group_list SET forum_name='open-discussion' 
-	WHERE forum_name='0pen-discussion'");
+$res = db_query_params ('UPDATE forum_group_list SET forum_name=$1 
+	WHERE forum_name=$2',
+			array('open-discussion',
+			'0pen-discussion')) ;
+
 
 if (!$res) {
 	echo db_error();

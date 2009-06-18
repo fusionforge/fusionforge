@@ -29,9 +29,13 @@ require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraFieldElement.class.php';
 
 // First of all, try to create the "alias" field if it doesn't exist
-$res = db_query("SELECT alias FROM artifact_extra_field_list");
+$res = db_query_params ('SELECT alias FROM artifact_extra_field_list',
+			array()) ;
+
 if (!$res) {		// error, the field doesn't exist
-	$res = db_query("ALTER TABLE artifact_extra_field_list ADD COLUMN alias TEXT");
+	$res = db_query_params ('ALTER TABLE artifact_extra_field_list ADD COLUMN alias TEXT',
+			array()) ;
+
 	if (!$res) {
 		echo db_error();
 		exit(16);
@@ -42,7 +46,10 @@ if (!$res) {		// error, the field doesn't exist
 //  Set up this script to run as the site admin
 //
 
-$res = db_query("SELECT user_id FROM user_group WHERE admin_flags='A' AND group_id='1'");
+$res = db_query_params ('SELECT user_id FROM user_group WHERE admin_flags=$1 AND group_id=$2',
+			array('A',
+			'1')) ;
+
 
 if (!$res) {
     echo db_error();
@@ -60,7 +67,9 @@ session_set_new($id);
 
 db_begin();
 
-$res=db_query("SELECT group_id,group_artifact_id,use_resolution FROM artifact_group_list");
+$res=db_query_params ('SELECT group_id,group_artifact_id,use_resolution FROM artifact_group_list',
+			array()) ;
+
 
 for ($i=0; $i<db_numrows($res); $i++) {
 
@@ -92,7 +101,9 @@ for ($i=0; $i<db_numrows($res); $i++) {
 		db_rollback();
 		exit(4);
 	}
-	$resc=db_query("SELECT * FROM artifact_category WHERE group_artifact_id='$gaid'");
+	$resc=db_query_params ('SELECT * FROM artifact_category WHERE group_artifact_id=$1',
+			array($gaid)) ;
+
 	for ($j=0; $j<db_numrows($resc); $j++) {
 		$cat_id=db_result($resc,$j,'id');
 		$cat_name=addslashes(db_result($resc,$j,'category_name'));
@@ -117,17 +128,26 @@ for ($i=0; $i<db_numrows($res); $i++) {
 			db_rollback();
 			exit(5);
 		}
-		$res2=db_query("INSERT INTO artifact_extra_field_data (artifact_id,field_data,extra_field_id)
+		$res2=db_query_params ('INSERT INTO artifact_extra_field_data (artifact_id,field_data,extra_field_id)
 			SELECT artifact_id,$efe_id,$catbox_id FROM artifact 
-			WHERE category_id='$cat_id' AND group_artifact_id='$gaid'");
+			WHERE category_id=$1 AND group_artifact_id=$2',
+			array($cat_id,
+			$gaid)) ;
+
 		if (!$res2) {
 			echo "Could Not Insert AEFD for category " . db_error();
 			db_rollback();
 			exit(6);
 		}
-		$res3=db_query("UPDATE artifact_history SET old_value='$cat_name',field_name='Category'
-			WHERE old_value='$cat_id' AND field_name='category_id' AND artifact_id IN
-            (SELECT artifact_id FROM artifact WHERE group_artifact_id='$gaid')");
+		$res3=db_query_params ('UPDATE artifact_history SET old_value=$1,field_name=$2
+			WHERE old_value=$3 AND field_name=$4 AND artifact_id IN
+            (SELECT artifact_id FROM artifact WHERE group_artifact_id=$5)',
+			array($cat_name,
+			'Category',
+			$cat_id,
+			'category_id',
+			$gaid)) ;
+
 		if (!$res3) {
 			echo "Could Not update history category " . db_error();
 			db_rollback();
@@ -146,7 +166,9 @@ for ($i=0; $i<db_numrows($res); $i++) {
 		db_rollback();
 		exit(8);
 	}
-	$resc=db_query("SELECT * FROM artifact_group WHERE group_artifact_id='$gaid'");
+	$resc=db_query_params ('SELECT * FROM artifact_group WHERE group_artifact_id=$1',
+			array($gaid)) ;
+
 	for ($j=0; $j<db_numrows($resc); $j++) {
 		$artgroup_id=db_result($resc,$j,'id');
 		$group_name=addslashes(db_result($resc,$j,'group_name'));
@@ -169,17 +191,26 @@ for ($i=0; $i<db_numrows($res); $i++) {
 			db_rollback();
 			exit(9);
 		}
-		$res2=db_query("INSERT INTO artifact_extra_field_data (artifact_id,field_data,extra_field_id)
+		$res2=db_query_params ('INSERT INTO artifact_extra_field_data (artifact_id,field_data,extra_field_id)
 			SELECT artifact_id,$efe_id,$groupbox_id FROM artifact 
-			WHERE artifact_group_id='$artgroup_id' AND group_artifact_id='$gaid'");
+			WHERE artifact_group_id=$1 AND group_artifact_id=$2',
+			array($artgroup_id,
+			$gaid)) ;
+
 		if (!$res2) {
 			echo "Could Not Insert AEFD for artifactgroup " . db_error();
 			db_rollback();
 			exit(10);
 		}
-		$res3=db_query("UPDATE artifact_history SET old_value='$group_name',field_name='Group'
-			WHERE old_value='$artgroup_id' AND field_name='artifact_group_id' AND artifact_id IN
-            (SELECT artifact_id FROM artifact WHERE group_artifact_id='$gaid')");
+		$res3=db_query_params ('UPDATE artifact_history SET old_value=$1,field_name=$2
+			WHERE old_value=$3 AND field_name=$4 AND artifact_id IN
+            (SELECT artifact_id FROM artifact WHERE group_artifact_id=$5)',
+			array($group_name,
+			'Group',
+			$artgroup_id,
+			'artifact_group_id',
+			$gaid)) ;
+
 		if (!$res3) {
 			echo "Could Not update history artifactgroup " . db_error();
 			db_rollback();
@@ -199,7 +230,9 @@ for ($i=0; $i<db_numrows($res); $i++) {
 			db_rollback();
 			exit(12);
 		}
-		$resc=db_query("SELECT * FROM artifact_resolution");
+		$resc=db_query_params ('SELECT * FROM artifact_resolution',
+			array()) ;
+
 		for ($j=0; $j<db_numrows($resc); $j++) {
 			$resolution_id=db_result($resc,$j,'id');
 			$resolution_name=addslashes(db_result($resc,$j,'resolution_name'));
@@ -221,17 +254,26 @@ for ($i=0; $i<db_numrows($res); $i++) {
 				db_rollback();
 				exit(13);
 			}
-			$res2=db_query("INSERT INTO artifact_extra_field_data (artifact_id,field_data,extra_field_id)
+			$res2=db_query_params ('INSERT INTO artifact_extra_field_data (artifact_id,field_data,extra_field_id)
 				SELECT artifact_id,$efe_id,$resolutionbox_id FROM artifact 
-				WHERE resolution_id='$resolution_id' AND group_artifact_id='$gaid'");
+				WHERE resolution_id=$1 AND group_artifact_id=$2',
+			array($resolution_id,
+			$gaid)) ;
+
 			if (!$res2) {
 				echo "Could Not Insert AEFD for resolution " . db_error();
 				db_rollback();
 				exit(14);
 			}
-			$res3=db_query("UPDATE artifact_history SET old_value='$resolution_name',field_name='Resolution'
-				WHERE old_value='$resolution_id' AND field_name='resolution_id' AND artifact_id IN 
-				(SELECT artifact_id FROM artifact WHERE group_artifact_id='$gaid')");
+			$res3=db_query_params ('UPDATE artifact_history SET old_value=$1,field_name=$2
+				WHERE old_value=$3 AND field_name=$4 AND artifact_id IN 
+				(SELECT artifact_id FROM artifact WHERE group_artifact_id=$5)',
+			array($resolution_name,
+			'Resolution',
+			$resolution_id,
+			'resolution_id',
+			$gaid)) ;
+
 			if (!$res3) {
 				echo "Could Not update history resolution " . db_error();
 				db_rollback();

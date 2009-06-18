@@ -26,7 +26,9 @@
 require_once dirname(__FILE__).'/../www/env.inc.php';
 require_once $gfwww.'include/squal_pre.php';
 
-$res = db_query("SELECT * FROM doc_data");
+$res = db_query_params ('SELECT * FROM doc_data',
+			array()) ;
+
 if (!$res) {		// error
 	echo db_error();
 	exit(1);

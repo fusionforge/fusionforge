@@ -31,28 +31,38 @@ if (count($argv) < 2) {
 
 function check_tables() {
 	db_begin();
-	$res = db_query("SELECT COUNT(*) AS exists FROM pg_class WHERE relname = 'database_startpoint' AND relkind = 'r'");
+	$res = db_query_params ('SELECT COUNT(*) AS exists FROM pg_class WHERE relname = $1 AND relkind = $2',
+			array('database_startpoint',
+			'r')) ;
+
 	if (!$res) { // db error
 		echo "DB-ERROR-1: ".db_error()."\n";
 		db_rollback();
 		return false;
 	}
 	if (db_result($res, 0, 'exists') == '0') {
-		$res = db_query("CREATE TABLE database_startpoint (db_version varchar(10), db_start_date int)");
+		$res = db_query_params ('CREATE TABLE database_startpoint (db_version varchar(10), db_start_date int)',
+			array()) ;
+
 		if (!$res) { // db error
 			echo "DB-ERROR-2: ".db_error()."\n";
 			db_rollback();
 			return false;
 		}
 	}
-	$res = db_query("SELECT COUNT(*) AS exists FROM pg_class WHERE relname = 'database_changes' AND relkind = 'r'");
+	$res = db_query_params ('SELECT COUNT(*) AS exists FROM pg_class WHERE relname = $1 AND relkind = $2',
+			array('database_changes',
+			'r')) ;
+
 	if (!$res) { // db error
 		echo "DB-ERROR-3: ".db_error()."\n";
 		db_rollback();
 		return false;
 	}
 	if (db_result($res, 0, 'exists') == '0') {
-		$res = db_query("CREATE TABLE database_changes (filename text)");
+		$res = db_query_params ('CREATE TABLE database_changes (filename text)',
+			array()) ;
+
 		if (!$res) { // db error
 			echo "DB-ERROR-4: ".db_error()."\n";
 			db_rollback();
@@ -90,13 +100,18 @@ function check_version($version = 0) {
 
 function set_version($version, $date) {
 	db_begin();
-	$res = db_query("TRUNCATE TABLE database_startpoint");
+	$res = db_query_params ('TRUNCATE TABLE database_startpoint',
+			array()) ;
+
 	if (!$res) { // db error
 		echo "DB-ERROR-5: ".db_error()."\n";
 		db_rollback();
 		return false;
 	}
-	$res = db_query("INSERT INTO database_startpoint (db_version, db_start_date) VALUES ('$version', '$date')");
+	$res = db_query_params ('INSERT INTO database_startpoint (db_version, db_start_date) VALUES ($1, $2)',
+			array($version,
+			$date)) ;
+
 	if (!$res) { // db error
 		echo "DB-ERROR-5: ".db_error()."\n";
 		db_rollback();

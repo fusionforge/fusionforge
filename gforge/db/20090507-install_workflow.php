@@ -15,7 +15,9 @@ require_once $gfcommon.'tracker/ArtifactExtraFieldElement.class.php';
 require_once $gfcommon.'tracker/ArtifactWorkflow.class.php';
 
 /* Need full power, switching to an admin guy */
-$res = db_query("SELECT user_id FROM user_group WHERE group_id=1");
+$res = db_query_params ('SELECT user_id FROM user_group WHERE group_id=1',
+			array()) ;
+
 $admin_id = db_result($res,0,'user_id');
 session_set_new($admin_id);
 
