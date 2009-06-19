@@ -33,12 +33,14 @@ if (empty($svn) || util_is_root_dir($svn)) {
 	exit;
 }
 
-$res = db_query("SELECT is_public,enable_anonscm,unix_group_name,groups.group_id 
+$res = db_query_params ('SELECT is_public,enable_anonscm,unix_group_name,groups.group_id 
 	FROM groups, plugins, group_plugin 
-	WHERE groups.status != 'P' 
+	WHERE groups.status != $1 
 	AND groups.group_id=group_plugin.group_id
 	AND group_plugin.plugin_id=plugins.plugin_id
-	AND plugins.plugin_name='scmsvn'");
+	AND plugins.plugin_name=$2',
+			array('P',
+				'scmsvn'));
 
 if (!$res) {
 	$err .=  "Error! Database Query Failed: ".db_error();
@@ -77,8 +79,9 @@ while ( $group_row =& db_fetch_array($res) ) {
 if (!$per_group_access) {
 	// Now generate the contents for the password file
 	$password_file_contents = '';
-	$res = db_query("SELECT * FROM users WHERE user_id IN (SELECT DISTINCT user_id FROM user_group ug, group_plugin gp, plugins p
-		WHERE ug.group_id=gp.group_id AND gp.plugin_id=p.plugin_id AND p.plugin_name='scmsvn')");
+	$res = db_query_params ('SELECT * FROM users WHERE user_id IN (SELECT DISTINCT user_id FROM user_group ug, group_plugin gp, plugins p
+		WHERE ug.group_id=gp.group_id AND gp.plugin_id=p.plugin_id AND p.plugin_name=$1)',
+			array('scmsvn'));
 	if (!$res) {
 		$err .=  "Error! Database Query Failed: ".db_error();
 		echo $err;

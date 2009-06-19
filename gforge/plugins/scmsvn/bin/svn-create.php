@@ -49,12 +49,14 @@ $repos_type = ' --fs-type fsfs ';
 
 $err .= "Creating Groups at ". $svn."\n";
 
-$res = db_query("SELECT is_public,enable_anonscm,unix_group_name 
+$res = db_query_params ('SELECT is_public,enable_anonscm,unix_group_name 
 	FROM groups, plugins, group_plugin 
-	WHERE groups.status != 'P' 
+	WHERE groups.status != $1 
 	AND groups.group_id=group_plugin.group_id
 	AND group_plugin.plugin_id=plugins.plugin_id
-	AND plugins.plugin_name='scmsvn'");
+	AND plugins.plugin_name=$2',
+			array('P',
+				'scmsvn'));
 
 if (!$res) {
 	$err .=  "Error! Database Query Failed: ".db_error();

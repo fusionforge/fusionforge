@@ -80,8 +80,9 @@ function charData($parser, $chars) {
 			// We can save time by looking up users and caching them
 			if (!array_key_exists($last_user, $user_list)) {
 				// trying to get user id from user name
-				$user_res = db_query("SELECT user_id FROM users WHERE " .
-						     "user_name='$last_user'");
+				$user_res = db_query_params ('SELECT user_id FROM users WHERE 
+user_name=$1',
+			array($last_user));
 				if ($user_row = db_fetch_array($user_res)) {
 					$user_list[$last_user] = $user_row[0];
 				} else {
@@ -255,12 +256,14 @@ function process_day($day_begin=0, $day_end=0) {
 	
 	// Lookup all the groups that use this plugin, use SCM and
 	// are active
-	$res = db_query("SELECT group_plugin.group_id, groups.unix_group_name
+	$res = db_query_params ('SELECT group_plugin.group_id, groups.unix_group_name
 				FROM group_plugin, groups
-				WHERE group_plugin.plugin_id = $pluginid
+				WHERE group_plugin.plugin_id = $1
 				AND groups.use_scm = 1
-				AND groups.status = 'A'
-				AND group_plugin.group_id = groups.group_id");
+				AND groups.status = $2
+				AND group_plugin.group_id = groups.group_id',
+			array($pluginid,
+				'A'));
 	
 	if (!$res) {
 		$err .=  "Error! Database Query Failed: ".db_error();
@@ -421,8 +424,9 @@ function process_day($day_begin=0, $day_end=0) {
 }
 
 function get_plugin_id($pluginname){
-	$res = db_query("SELECT plugin_id FROM plugins WHERE plugin_name = '" .
-					$pluginname."'");	
+	$res = db_query_params ('SELECT plugin_id FROM plugins WHERE plugin_name = '" .
+					$1."'',
+			array($pluginname));	
 	if (!$res) {
 		$err .=  "Error! Database Query Failed: ".db_error();
 		return NULL;
