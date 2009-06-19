@@ -49,7 +49,9 @@ if (empty($sys_apache_user) || empty($sys_apache_group)) {
 	exit;
 }
 
-$res = db_query("SELECT unix_group_name FROM groups WHERE status != 'P' AND status != 'D';");
+$res = db_query_params ('SELECT unix_group_name FROM groups WHERE status != $1 AND status != $2;',
+			array('P',
+				'D'));
 if (!$res) {
 	$err .=  "Error! Database Query Failed: ".db_error();
 	cron_entry(23,$err);
