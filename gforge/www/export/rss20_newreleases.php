@@ -19,7 +19,9 @@ if ($limit > 100) $limit = 100;
 
 if ($group_id) {
 	$where = "frs_package.group_id=$group_id AND ";
-	$res = db_query("SELECT group_name FROM groups WHERE group_id=$group_id");
+	$res = db_query_params ('SELECT group_name FROM groups WHERE group_id=$1',
+			array($group_id)) ;
+
 	$row = db_fetch_array($res);
 	$title = ": ".$row['group_name']." - ";
 	$link = "/project/showfiles.php?group_id=$group_id";

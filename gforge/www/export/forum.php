@@ -20,13 +20,16 @@ header("Content-Type: text/plain");
 $group_id = getIntFromRequest('group_id');
 
 // group_id must be specified
-$res_grp = db_query("
+$res_grp = db_query_params ('
 	SELECT group_id,group_name
 	FROM groups 
 	WHERE is_public=1
-	AND status='A'
-	AND group_id='$group_id'
-");
+	AND status=$1
+	AND group_id=$2
+',
+			array('A',
+				$group_id)) ;
+
 if (db_numrows($res_grp) < 1) {
 	print 'ERROR: This URL must be called with a valid group_id parameter';
 	exit;
