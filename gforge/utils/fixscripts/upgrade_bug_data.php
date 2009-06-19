@@ -17,7 +17,8 @@ require $gfwww.'include/pre.php';
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
 //get all the tasks
-$result=db_query("SELECT bug_id FROM bug ORDER BY bug_id ASC");
+$result=db_query_params ('SELECT bug_id FROM bug ORDER BY bug_id ASC',
+			array());
 $rows=db_numrows($result);
 echo "\nRows: $rows\n";
 flush();

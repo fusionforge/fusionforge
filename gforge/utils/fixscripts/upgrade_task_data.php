@@ -17,7 +17,8 @@ require $gfwww.'include/pre.php';
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
 //get all the tasks
-$result=db_query("SELECT project_task_id FROM project_task ORDER BY project_task_id ASC");
+$result=db_query_params ('SELECT project_task_id FROM project_task ORDER BY project_task_id ASC',
+			array());
 $rows=db_numrows($result);
 echo "\nRows: $rows\n";
 flush();

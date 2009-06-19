@@ -30,7 +30,8 @@ if (!strstr($REMOTE_ADDR,'192.168.1.')) {
 }
 
 //get all the tasks
-$result=db_query("SELECT * FROM frs_release WHERE release_id > 9290 ORDER BY release_id ASC");
+$result=db_query_params ('SELECT * FROM frs_release WHERE release_id > 9290 ORDER BY release_id ASC',
+			array());
 $rows=db_numrows($result);
 echo "\n<br />Rows: $rows\n";
 flush();

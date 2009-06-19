@@ -16,7 +16,8 @@ if (!strstr($REMOTE_ADDR,$sys_internal_network)) {
         exit_permission_denied();
 }
 
-$res=db_query("SELECT * FROM users WHERE unix_uid=1");
+$res=db_query_params ('SELECT * FROM users WHERE unix_uid=1',
+			array());
 
 $rows=db_numrows($res);
 
