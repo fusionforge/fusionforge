@@ -41,9 +41,11 @@ if (session_loggedin()) {
 		} else {
 
 			//Remove the item from the package
-			$result=db_query("DELETE FROM snippet_package_item ".
-				"WHERE snippet_version_id='$snippet_version_id' ".
-				"AND snippet_package_version_id='$snippet_package_version_id'");
+			$result=db_query_params ('DELETE FROM snippet_package_item 
+WHERE snippet_version_id=$1 
+AND snippet_package_version_id=$2',
+			array($snippet_version_id,
+				$snippet_package_version_id));
 			if (!$result || db_affected_rows($result) < 1) {
 				echo '<h1>Error - That snippet doesn\'t exist in this package.</h1>';
 				snippet_footer(array());

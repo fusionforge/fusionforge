@@ -121,12 +121,12 @@ function snippet_footer($params) {
 
 function snippet_show_package_snippets($version) {
 	//show the latest version
-	$sql="SELECT snippet_package_item.snippet_version_id, snippet_version.version,snippet.name,users.user_name ".
-		"FROM snippet,snippet_version,snippet_package_item,users ".
-		"WHERE snippet.snippet_id=snippet_version.snippet_id ".
-		"AND users.user_id=snippet_version.submitted_by ".
-		"AND snippet_version.snippet_version_id=snippet_package_item.snippet_version_id ".
-		"AND snippet_package_item.snippet_package_version_id='$version'";
+	$sql="SELECT snippet_package_item.snippet_version_id, snippet_version.version,snippet.name,users.user_name 
+FROM snippet,snippet_version,snippet_package_item,users 
+WHERE snippet.snippet_id=snippet_version.snippet_id 
+AND users.user_id=snippet_version.submitted_by 
+AND snippet_version.snippet_version_id=snippet_package_item.snippet_version_id 
+AND snippet_package_item.snippet_package_version_id='$version'";
 
 	$result=db_query($sql);
 	$rows=db_numrows($result);

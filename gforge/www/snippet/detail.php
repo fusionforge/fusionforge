@@ -35,10 +35,10 @@ if ($type=='snippet') {
 	/*
 		Get all the versions of this snippet
 	*/
-	$sql="SELECT users.realname,users.user_name,users.user_id,snippet_version.snippet_version_id,snippet_version.version,snippet_version.post_date,snippet_version.changes ".
-		"FROM snippet_version,users ".
-		"WHERE users.user_id=snippet_version.submitted_by AND snippet_id='$id' ".
-		"ORDER BY snippet_version.snippet_version_id DESC";
+	$sql="SELECT users.realname,users.user_name,users.user_id,snippet_version.snippet_version_id,snippet_version.version,snippet_version.post_date,snippet_version.changes 
+FROM snippet_version,users 
+WHERE users.user_id=snippet_version.submitted_by AND snippet_id='$id' 
+ORDER BY snippet_version.snippet_version_id DESC";
 
 	$result=db_query($sql);
 	$rows=db_numrows($result);
@@ -87,7 +87,8 @@ if ($type=='snippet') {
 	/*
 		show the latest version of this snippet's code
 	*/
-	$result=db_query("SELECT code,version FROM snippet_version WHERE snippet_version_id='$newest_version'");	
+	$result=db_query_params ('SELECT code,version FROM snippet_version WHERE snippet_version_id=$1',
+			array($newest_version));	
 
 	echo '
 		<p>&nbsp;</p>
@@ -123,11 +124,11 @@ if ($type=='snippet') {
 	/*
 		Get all the versions of this package
 	*/
-	$sql="SELECT users.realname,users.user_name,users.user_id,snippet_package_version.snippet_package_version_id,".
-		"snippet_package_version.version,snippet_package_version.post_date ".
-		"FROM snippet_package_version,users ".
-		"WHERE users.user_id=snippet_package_version.submitted_by AND snippet_package_id='$id' ".
-		"ORDER BY snippet_package_version.snippet_package_version_id DESC";
+	$sql="SELECT users.realname,users.user_name,users.user_id,snippet_package_version.snippet_package_version_id,
+snippet_package_version.version,snippet_package_version.post_date 
+FROM snippet_package_version,users 
+WHERE users.user_id=snippet_package_version.submitted_by AND snippet_package_id='$id' 
+ORDER BY snippet_package_version.snippet_package_version_id DESC";
 
 	$result=db_query($sql);
 	$rows=db_numrows($result);
