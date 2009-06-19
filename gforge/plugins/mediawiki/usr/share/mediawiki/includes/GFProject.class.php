@@ -65,7 +65,8 @@ function &group_get_object($group_id,$res=false) {
 		if ($res) {
 			//the db result handle was passed in
 		} else {
-			$res=db_query("SELECT * FROM groups WHERE group_id='$group_id'");
+			$res=db_query_params ('SELECT * FROM groups WHERE group_id=$1',
+			array($group_id));
 		}
 		if (!$res || db_numrows($res) < 1) {
 			$GROUP_OBJ["_".$group_id."_"]=false;
@@ -85,7 +86,8 @@ function &group_get_object($group_id,$res=false) {
 	return $GROUP_OBJ["_".$group_id."_"];
 }
 function &group_get_object_by_name($groupname) {
-	$res=db_query("SELECT * FROM groups WHERE unix_group_name='$groupname'");
+	$res=db_query_params ('SELECT * FROM groups WHERE unix_group_name=$1',
+			array($groupname));
 	return group_get_object(db_result($res,0,'group_id'),$res);
 }
 
@@ -187,7 +189,8 @@ class Group extends Error {
 	 *	@param	int	The group_id.
 	 */
 	function fetchData($group_id) {
-		$res = db_query("SELECT * FROM groups WHERE group_id='$group_id'");
+		$res = db_query_params ('SELECT * FROM groups WHERE group_id=$1',
+			array($group_id));
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('fetchData():: '.db_error());
 			return false;

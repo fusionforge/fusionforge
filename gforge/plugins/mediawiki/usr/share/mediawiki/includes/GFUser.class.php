@@ -61,7 +61,8 @@ function &user_get_object($user_id,$res=false) {
 		if ($res) {
 			//the db result handle was passed in
 		} else {
-			$res=db_query("SELECT * FROM users WHERE user_id='$user_id'");
+			$res=db_query_params ('SELECT * FROM users WHERE user_id=$1',
+			array($user_id));
 		}
 		if (!$res || db_numrows($res) < 1) {
 			$USER_OBJ["_".$user_id."_"]=false;
@@ -183,7 +184,8 @@ class GFUser extends Error {
 	 *	@return boolean success;
 	 */
 	function fetchData($user_id) {
-		$res=db_query("SELECT * FROM users WHERE user_id='$user_id'");
+		$res=db_query_params ('SELECT * FROM users WHERE user_id=$1',
+			array($user_id));
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('User::fetchData()::'.db_error());
 			return false;
