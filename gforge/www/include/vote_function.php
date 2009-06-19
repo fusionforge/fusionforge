@@ -372,11 +372,13 @@ $USER_RATING_VALUES[]='3';
  */
 function vote_show_user_rate_box ($user_id, $by_id=0) {
 	if ($by_id) {
-		$res = db_query("
+		$res = db_query_params ('
 			SELECT rate_field,rating FROM user_ratings
-			WHERE rated_by='$by_id'
-			AND user_id='$user_id'
-		");
+			WHERE rated_by=$1
+			AND user_id=$2
+		',
+			array($by_id,
+				$user_id));
 		$prev_vote = util_result_columns_to_assoc($res);
 		while (list($k,$v) = each($prev_vote)) {
 			if ($v == 0) {
@@ -413,10 +415,10 @@ function vote_show_user_rate_box ($user_id, $by_id=0) {
  */
 function vote_show_user_rating($user_id) {
 	global $USER_RATING_QUESTIONS;
-	$sql="SELECT rate_field,(avg(rating)+3) AS avg_rating,count(*) as count ".
-		"FROM user_ratings ".
-		"WHERE user_id='$user_id' ".
-		"GROUP BY rate_field";
+	$sql="SELECT rate_field,(avg(rating)+3) AS avg_rating,count(*) as count 
+FROM user_ratings 
+WHERE user_id='$user_id' 
+GROUP BY rate_field";
 	$res=db_query($sql);
 	$rows=db_numrows($res);
 	if (!$res || $rows < 1) {
@@ -434,7 +436,8 @@ function vote_show_user_rating($user_id) {
 			<td>'.db_result($res,$i,'avg_rating').' (By '. db_result($res,$i,'count') .' Users)</td></tr>';
 		}
 
-		$res=db_query("SELECT ranking,metric,importance_factor FROM user_metric WHERE user_id='$user_id'");
+		$res=db_query_params ('SELECT ranking,metric,importance_factor FROM user_metric WHERE user_id=$1',
+			array($user_id));
 		if ($res && db_numrows($res) > 0) {
 			echo '<tr><td colspan="2"><strong>Trusted Overall Rating</strong></td></tr>';
 			echo '<tr><td>Sitewide Ranking:</td><td><strong>'. db_result($res,0,'ranking') .'</strong></td></tr>
@@ -452,10 +455,11 @@ function vote_show_user_rating($user_id) {
  * @param		int		The user ID
  */
 function vote_remove_all_ratings_by($user_id) {
-	db_query("
+	db_query_params ('
 		DELETE FROM user_ratings
-		WHERE rated_by='$user_id'
-	");
+		WHERE rated_by=$1
+	',
+			array($user_id));
 }
 
 // Local Variables:

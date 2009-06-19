@@ -133,14 +133,17 @@ $HTML->header(array('title'=>_('Developer Profile')));
 	<p/>
 <?php
 	// now get listing of groups for that user
-	$res_cat = db_query("SELECT groups.group_name, 
+	$res_cat = db_query_params ('SELECT groups.group_name, 
 	 groups.unix_group_name, 
 	 groups.group_id, 
 	 user_group.admin_flags,
          role.role_name
 	 FROM 
-	 groups,user_group,role WHERE user_group.user_id='$user_id' AND  user_group.role_id=role.role_id AND
-	 groups.group_id=user_group.group_id AND groups.is_public='1' AND groups.status='A'");
+	 groups,user_group,role WHERE user_group.user_id=$1 AND  user_group.role_id=role.role_id AND
+	 groups.group_id=user_group.group_id AND groups.is_public=$2 AND groups.status=$3',
+			array($user_id,
+				'1',
+				'A'));
 
 // see if there were any groups
 if (db_numrows($res_cat) < 1) {

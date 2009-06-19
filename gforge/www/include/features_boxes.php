@@ -94,7 +94,9 @@ function stats_getprojects_active_public() {
 }
 
 function stats_getprojects_total() {
-	$res_count = db_query("SELECT count(*) AS count FROM groups WHERE status='A' OR status='H'");
+	$res_count = db_query_params ('SELECT count(*) AS count FROM groups WHERE status=$1 OR status=$2',
+			array('A',
+				'H'));
 	if (db_numrows($res_count) > 0) {
 		$row_count = db_fetch_array($res_count);
 		return $row_count['count'];
@@ -104,7 +106,8 @@ function stats_getprojects_total() {
 }
 
 function stats_getpageviews_total() {
-	$res_count = db_query("SELECT SUM(site_views) AS site, SUM(subdomain_views) AS subdomain FROM stats_site");
+	$res_count = db_query_params ('SELECT SUM(site_views) AS site, SUM(subdomain_views) AS subdomain FROM stats_site',
+			array());
 	if (db_numrows($res_count) > 0) {
 		$row_count = db_fetch_array($res_count);
 		return ($row_count['site'] + $row_count['subdomain']);
@@ -114,7 +117,8 @@ function stats_getpageviews_total() {
 }
 
 function stats_downloads_total() {
-	$res_count = db_query("SELECT SUM(downloads) AS downloads FROM stats_site");
+	$res_count = db_query_params ('SELECT SUM(downloads) AS downloads FROM stats_site',
+			array());
 	if (db_numrows($res_count) > 0) {
 		$row_count = db_fetch_array($res_count);
 		return $row_count['downloads'];
@@ -140,9 +144,9 @@ function show_sitestats() {
 }
 
 function show_newest_projects() {
-	$sql =	"SELECT group_id,unix_group_name,group_name,register_time FROM groups " .
-		"WHERE is_public=1 AND status='A' AND type_id=1 AND register_time > 0 " .
-		"ORDER BY register_time DESC";
+	$sql =	"SELECT group_id,unix_group_name,group_name,register_time FROM groups 
+WHERE is_public=1 AND status='A' AND type_id=1 AND register_time > 0 
+ORDER BY register_time DESC";
 	$res_newproj = db_query($sql,10);
 
 	$return = '';
@@ -184,15 +188,15 @@ function show_highest_ranked_users() {
 }
 
 function show_highest_ranked_projects() {
-	$sql="SELECT groups.group_name,groups.unix_group_name,groups.group_id,".
-		"project_weekly_metric.ranking,project_weekly_metric.percentile ".
-		"FROM groups,project_weekly_metric ".
-		"WHERE groups.group_id=project_weekly_metric.group_id ".
-		"AND groups.is_public=1 ".
-		"AND groups.type_id=1  ".
-		"AND groups.status != 'D'  ".
-		"AND groups.use_stats=1  ".
-		"ORDER BY ranking ASC";
+	$sql="SELECT groups.group_name,groups.unix_group_name,groups.group_id,
+project_weekly_metric.ranking,project_weekly_metric.percentile 
+FROM groups,project_weekly_metric 
+WHERE groups.group_id=project_weekly_metric.group_id 
+AND groups.is_public=1 
+AND groups.type_id=1  
+AND groups.status != 'D'  
+AND groups.use_stats=1  
+ORDER BY ranking ASC";
 	$result=db_query($sql,20);
 	if (!$result || db_numrows($result) < 1) {
 		return _('No Stats Available')." ".db_error();

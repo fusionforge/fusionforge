@@ -31,12 +31,14 @@ site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'home'));
 
 // ########################################## top area, not in box
 
-$res_admin = db_query("SELECT users.user_id,users.user_name,users.realname,user_group.admin_flags
+$res_admin = db_query_params ('SELECT users.user_id,users.user_name,users.realname,user_group.admin_flags
 	FROM users,user_group
 	WHERE user_group.user_id=users.user_id
-	AND user_group.group_id='$group_id'
-	AND users.status='A'
-	ORDER BY admin_flags DESC,realname");
+	AND user_group.group_id=$1
+	AND users.status=$2
+	ORDER BY admin_flags DESC,realname',
+			array($group_id,
+				'A'));
 
 if ($project->getStatus() == 'H') {
 	print "<p>".sprintf(_('NOTE: This project entry is maintained by the %1$s staff. We are not the official site for this product. Additional copyright information may be found on this project\'s homepage.'), $GLOBALS['sys_name'])."</p>\n";
@@ -83,7 +85,8 @@ print(_('Registered:&nbsp;') . date(_('Y-m-d H:i'), $project->getStartDate()));
 // Get the activity percentile
 // CB hide stats if desired
 if ($project->usesStats()) {
-	$actv = db_query("SELECT ranking FROM project_weekly_metric WHERE group_id='$group_id'");
+	$actv = db_query_params ('SELECT ranking FROM project_weekly_metric WHERE group_id=$1',
+			array($group_id));
 	$actv_res = db_result($actv,0,"ranking");
 	if (!$actv_res) {
 		$actv_res=0;
@@ -281,12 +284,13 @@ if ($project->usesTracker()) {
 	print html_image('ic/tracker20g.png','20','20',array('alt'=>_('Tracker')));
 	print '&nbsp;'._('Tracker').'</a>';
 
-	$result=db_query("SELECT agl.*,aca.count,aca.open_count
+	$result=db_query_params ('SELECT agl.*,aca.count,aca.open_count
 	FROM artifact_group_list agl
 	LEFT JOIN artifact_counts_agg aca USING (group_artifact_id)
-	WHERE agl.group_id='$group_id'
+	WHERE agl.group_id=$1
 	AND agl.is_public=1
-	ORDER BY group_artifact_id ASC");
+	ORDER BY group_artifact_id ASC',
+			array($group_id));
 
 	$rows = db_numrows($result);
 

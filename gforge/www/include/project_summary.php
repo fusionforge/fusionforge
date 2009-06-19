@@ -18,7 +18,8 @@ $project_agg_arr=array();
  */
 function project_setup_agg($group_id) {
 	global $project_agg_arr,$project_agg_arr_is_set;
-	$res=db_query("SELECT type, count FROM project_sums_agg WHERE group_id=$group_id");
+	$res=db_query_params ('SELECT type, count FROM project_sums_agg WHERE group_id=$1',
+			array($group_id));
 	$rows=db_numrows($res);
 	if ($res && $rows > 0) {
 		for ($i=0; $i<$rows; $i++) {
@@ -120,12 +121,13 @@ function project_summary($group_id,$mode,$no_table) {
 	$return .= ' Tracker</a>';
 
 	if ($mode != 'compact') {
-		$result=db_query("SELECT agl.*,aca.count,aca.open_count
+		$result=db_query_params ('SELECT agl.*,aca.count,aca.open_count
 		FROM artifact_group_list agl
 		LEFT JOIN artifact_counts_agg aca USING (group_artifact_id) 
-		WHERE agl.group_id='$group_id'
+		WHERE agl.group_id=$1
 		AND agl.is_public=1
-		ORDER BY group_artifact_id ASC");
+		ORDER BY group_artifact_id ASC',
+			array($group_id));
 
 		$rows = db_numrows($result);
 	

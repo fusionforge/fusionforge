@@ -124,11 +124,13 @@ function trove_setnode($group_id,$trove_cat_id,$rootnode=0) {
 	// need to see if this one is more specific than another
 	// if so, delete the other and proceed with this insertion
 	$subnodeids = explode(' :: ',$row_verifycat['fullpath_ids']);
-	$res_checksubs = db_query("
+	$res_checksubs = db_query_params ('
 		SELECT trove_cat_id
 		FROM trove_group_link
-		WHERE group_id='$group_id'
-		AND trove_cat_root='$rootnode'");
+		WHERE group_id=$1
+		AND trove_cat_root=$2',
+			array($group_id,
+				$rootnode));
 
 	while ($row_checksubs = db_fetch_array($res_checksubs)) {
 		// check against all subnodeids
@@ -159,10 +161,11 @@ function trove_getrootcat($trove_cat_id) {
 	$current_cat = $trove_cat_id;
 
 	while ($parent > 0) {
-		$res_par = db_query("
+		$res_par = db_query_params ('
 			SELECT parent
 			FROM trove_cat
-			WHERE trove_cat_id='$current_cat'");
+			WHERE trove_cat_id=$1',
+			array($current_cat));
 
 		$row_par = db_fetch_array($res_par);
 		$parent = $row_par["parent"];
@@ -177,11 +180,12 @@ function trove_getrootcat($trove_cat_id) {
  * trove_getallroots() - Returns an associative array of all project roots
  */
 function trove_getallroots() {
-	$res = db_query("
+	$res = db_query_params ('
 		SELECT trove_cat_id,fullname
 		FROM trove_cat
 		WHERE parent=0
-		AND trove_cat_id!=0");
+		AND trove_cat_id!=0',
+			array());
 
 	while ($row = db_fetch_array($res)) {
 		$tmpcatid = $row["trove_cat_id"];
@@ -200,11 +204,12 @@ function trove_getallroots() {
 function trove_catselectfull($node,$selected,$name) {
 	print "<br /><select name=\"$name\">";
 	print '  <option value="0">'._('None Selected')."</option>\n";
-	$res_cat = db_query("
+	$res_cat = db_query_params ('
 		SELECT trove_cat_id,fullpath
 		FROM trove_cat
-		WHERE root_parent='$node'
-		ORDER BY fullpath");
+		WHERE root_parent=$1
+		ORDER BY fullpath',
+			array($node));
 
 	while ($row_cat = db_fetch_array($res_cat)) {
 		print '  <option value="'.$row_cat['trove_cat_id'].'"';
@@ -227,14 +232,15 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats,$a_complete) {
 	global $expl_discrim;
 	global $form_cat;
 
-	$res_trovecat = db_query("
+	$res_trovecat = db_query_params ('
 		SELECT trove_cat.fullpath AS fullpath,
 			trove_cat.fullpath_ids AS fullpath_ids,
 			trove_cat.trove_cat_id AS trove_cat_id
 		FROM trove_cat,trove_group_link
 		WHERE trove_cat.trove_cat_id=trove_group_link.trove_cat_id
-		AND trove_group_link.group_id='$group_id'
-		ORDER BY trove_cat.fullpath");
+		AND trove_group_link.group_id=$1
+		ORDER BY trove_cat.fullpath',
+			array($group_id));
 
 	$return = '';
 	$need_close_ul_tag = 0;
@@ -333,10 +339,11 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats,$a_complete) {
  * @param		int		The node
  */
 function trove_getfullname($node) {
-	$res = db_query("
+	$res = db_query_params ('
 		SELECT fullname
 		FROM trove_cat
-		WHERE trove_cat_id='$node'");
+		WHERE trove_cat_id=$1',
+			array($node));
 	$row = db_fetch_array($res);
 	return $row['fullname'];
 }
@@ -352,10 +359,11 @@ function trove_getfullpath($node) {
 	$return = '';
 
 	while ($currentcat > 0) {
-		$res = db_query("
+		$res = db_query_params ('
 			SELECT trove_cat_id,parent,fullname
 			FROM trove_cat
-			WHERE trove_cat_id='$currentcat'");
+			WHERE trove_cat_id=$1',
+			array($currentcat));
 		$row = db_fetch_array($res);
 		$return = $row["fullname"] . ($first ? "" : " :: ") . $return;
 		$currentcat = $row["parent"];
@@ -370,7 +378,8 @@ function trove_getfullpath($node) {
  * @param		int		The node
  */
 function trove_del_cat_id($node) {
-        $res=db_query("SELECT * FROM trove_cat WHERE parent='$node'");
+        $res=db_query_params ('SELECT * FROM trove_cat WHERE parent=$1',
+			array($node));
         if (!$res) {
                 exit_error( _('Error In Trove Operation'), db_error());
         }
@@ -379,15 +388,18 @@ function trove_del_cat_id($node) {
                         trove_del_cat_id(db_result($res,$i,'trove_cat_id'));
                 }
 	}
-        $res=db_query("DELETE FROM trove_treesums WHERE trove_cat_id='$node'");
+        $res=db_query_params ('DELETE FROM trove_treesums WHERE trove_cat_id=$1',
+			array($node));
         if (!$res) {
                 exit_error( _('Error In Trove Operation'), db_error());
         }
-        $res=db_query("DELETE FROM trove_group_link WHERE trove_cat_id='$node'");
+        $res=db_query_params ('DELETE FROM trove_group_link WHERE trove_cat_id=$1',
+			array($node));
         if (!$res) {
                 exit_error( _('Error In Trove Operation'), db_error());
         }
-        $res=db_query("DELETE FROM trove_cat WHERE trove_cat_id='$node'");
+        $res=db_query_params ('DELETE FROM trove_cat WHERE trove_cat_id=$1',
+			array($node));
         if (!$res || db_affected_rows($res)<1) {
                 exit_error( _('Error In Trove Operation'), db_error());
         }

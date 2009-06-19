@@ -17,7 +17,9 @@
 function add_canned_response($title, $text)
 {
 		global $feedback;
-		if( !db_query("INSERT INTO canned_responses (response_title, response_text) VALUES('$title','$text')") ) {
+		if( !db_query_params ('INSERT INTO canned_responses (response_title, response_text) VALUES($1,$2)',
+			array($title,
+				$text)) ) {
 			$feedback .= db_error();
 		}
 }
@@ -29,7 +31,8 @@ function get_canned_responses()
 {
 	global $canned_response_res;
 	if (!$canned_response_res) {
-		$canned_response_res = db_query("SELECT response_id, response_title FROM canned_responses");
+		$canned_response_res = db_query_params ('SELECT response_id, response_title FROM canned_responses',
+			array());
 	}
 	return html_build_select_box($canned_response_res, 'response_id');
 }

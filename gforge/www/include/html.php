@@ -83,8 +83,8 @@ function html_dbimage($id, $args=0) {
 	if (!$args) {
 		$args = array();
 	}
-	$sql="SELECT width,height,version ".
-		"FROM db_images WHERE id='$id'";
+	$sql="SELECT width,height,version 
+FROM db_images WHERE id='$id'";
 	$result=db_query($sql);
 	$rows=db_numrows($result);
 
@@ -162,7 +162,8 @@ function html_get_language_popup ($title='language_id',$selected='xzxz') {
  * @return	string	The html select box.
  */
 function html_get_theme_popup ($title='theme_id',$selected='xzxz') {
-	$res=db_query("SELECT theme_id, fullname FROM themes WHERE enabled=true");
+	$res=db_query_params ('SELECT theme_id, fullname FROM themes WHERE enabled=true',
+			array());
 	$nbTheme = db_numrows($res);
 	if($nbTheme < 2) {
 		return("");
@@ -180,7 +181,8 @@ function html_get_theme_popup ($title='theme_id',$selected='xzxz') {
  * @return	string	The html select box.
  */
 function html_get_ccode_popup ($title='ccode',$selected='xzxz') {
-	$res=db_query("SELECT ccode,country_name FROM country_code ORDER BY country_name");
+	$res=db_query_params ('SELECT ccode,country_name FROM country_code ORDER BY country_name',
+			array());
 	return html_build_select_box ($res,$title,$selected,false);
 }
 

@@ -79,12 +79,15 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 	if (($expl_pathinfo[1]=='wiki') && ($expl_pathinfo[2]=='g')) {
 		// URLs are /wiki/g/<user_name>/<page_name>
 		$group_name = $expl_pathinfo[3];
-		$res_grp=db_query("
+		$res_grp=db_query_params ('
 			SELECT *
 			FROM groups
-			WHERE unix_group_name='$group_name'
-			AND status IN ('A','H')
-		");
+			WHERE unix_group_name=$1
+			AND status IN ($2,$3)
+		',
+			array($group_name,
+				'A',
+				'H'));
 		
 		// store subpage id for analyzing later
 		$subpage = @$expl_pathinfo[4];
@@ -110,9 +113,9 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 	$log_group=0;
 }
 
-$sql =	"INSERT INTO activity_log "
-	. "(day,hour,group_id,browser,ver,platform,time,page,type) "
-	. "VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);";
+$sql =	"INSERT INTO activity_log 
+(day,hour,group_id,browser,ver,platform,time,page,type) 
+VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);";
 
 $res_logger = db_query_params ($sql, array(date('Ymd'), date('H'),
 	$log_group, browser_get_agent(), browser_get_version(), browser_get_platform(),
