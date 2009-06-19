@@ -7555,7 +7555,7 @@ msgstr ""
 #: www/include/project_home.php:93
 #, fuzzy, php-format
 msgid ""
-"View list of <a href=\"%1$s\">RSS feeds</a> available for this project.</a>"
+"View list of <a href=\"%1$s\">RSS feeds</a> available for this project."
 msgstr "Hier ist eine Liste der verfügbaren Positionen für dieses Projekt."
 
 #: www/include/project_home.php:108

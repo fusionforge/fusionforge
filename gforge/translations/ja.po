@@ -7261,7 +7261,7 @@ msgstr ""
 #: www/include/project_home.php:93
 #, php-format
 msgid ""
-"View list of <a href=\"%1$s\">RSS feeds</a> available for this project.</a>"
+"View list of <a href=\"%1$s\">RSS feeds</a> available for this project."
 msgstr ""
 
 #: www/include/project_home.php:108

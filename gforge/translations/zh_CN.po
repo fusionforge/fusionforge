@@ -7467,7 +7467,7 @@ msgstr ""
 #: www/include/project_home.php:93
 #, fuzzy, php-format
 msgid ""
-"View list of <a href=\"%1$s\">RSS feeds</a> available for this project.</a>"
+"View list of <a href=\"%1$s\">RSS feeds</a> available for this project."
 msgstr "以下是这个项目能够提供的工作列表"
 
 #: www/include/project_home.php:108

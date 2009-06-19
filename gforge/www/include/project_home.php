@@ -90,7 +90,7 @@ if ($project->usesStats()) {
 	}
 	print '<br />'._('Activity Percentile:&nbsp;'). substr($actv_res, 0, 5). '%';
 	print '<br />'.sprintf(_('View project <a href="%1$s" >Statistics</a> or <a href="%2$s">Activity</a>'), util_make_url ('/project/stats/?group_id='.$group_id),util_make_url ('/project/report/?group_id='.$group_id));
-	print '<br />'.sprintf(_('View list of <a href="%1$s">RSS feeds</a> available for this project.</a>'), util_make_url ('/export/rss_project.php?group_id='.$group_id)). '&nbsp;' . html_image('ic/rss.png',16,16,array('border'=>'0'));
+	print '<br />'.sprintf(_('View list of <a href="%1$s">RSS feeds</a> available for this project.'), util_make_url ('/export/rss_project.php?group_id='.$group_id)). '&nbsp;' . html_image('ic/rss.png',16,16,array('border'=>'0'));
 }
 
 if($GLOBALS['sys_use_people']) {
@@ -257,7 +257,7 @@ if ($project->usesFRS()) {
 }
 
 ?>
-<p />
+<p> </p>
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td valign="top" width="50%">
