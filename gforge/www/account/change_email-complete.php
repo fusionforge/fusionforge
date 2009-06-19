@@ -39,7 +39,9 @@ if (!$confirm_hash) {
 }
 $confirm_hash = html_clean_hash_string($confirm_hash);
 
-$res_user = db_query("SELECT * FROM users WHERE confirm_hash='$confirm_hash'");
+$res_user = db_query_params ('SELECT * FROM users WHERE confirm_hash=$1',
+			array($confirm_hash)) ;
+
 if (db_numrows($res_user) > 1) {
 	exit_error("Error","This confirm hash exists more than once.");
 }
