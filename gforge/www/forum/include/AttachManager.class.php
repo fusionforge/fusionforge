@@ -170,7 +170,8 @@ class AttachManager extends Error {
 	 *
 	 */
 	function AddToDBOnly($userid, $dateline, $filename, $filedata, $filesize, $visible, $filehash, $mimetype) {
-		$result=db_query("SELECT max(msg_id) AS id FROM forum");
+		$result=db_query_params ('SELECT max(msg_id) AS id FROM forum',
+			array());
 		if (!$result || db_numrows($result) < 1) {
 			$this->messages[] = _('Couldn\'t get message id');
 		} else {
@@ -256,7 +257,8 @@ class AttachManager extends Error {
 				if ($msg_id!=0) {
 					$this->msg_id = $msg_id;
 				} else {
-					$result=db_query("SELECT max(msg_id) AS id FROM forum_pending_messages");
+					$result=db_query_params ('SELECT max(msg_id) AS id FROM forum_pending_messages',
+			array());
 					if (!$result || db_numrows($result) < 1) {
 						$this->messages[] = _('Couldn\'t get message id');
 						@unlink($attachment);
@@ -298,7 +300,8 @@ class AttachManager extends Error {
 				if ($msg_id!=0) {
 					$this->msg_id = $msg_id;
 				} else {
-					$result=db_query("SELECT max(msg_id) AS id FROM forum_pending_messages");
+					$result=db_query_params ('SELECT max(msg_id) AS id FROM forum_pending_messages',
+			array());
 					if (!$result || db_numrows($result) < 1) {
 						$this->messages[] = _('Couldn\'t get message id');
 						@unlink($attachment);

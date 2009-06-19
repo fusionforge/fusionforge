@@ -34,10 +34,11 @@ if ($msg_id) {
 	/*
 		Figure out which group this message is in, for the sake of the admin links
 	*/
-	$result=db_query("SELECT forum_group_list.group_id,forum_group_list.group_forum_id
+	$result=db_query_params ('SELECT forum_group_list.group_id,forum_group_list.group_forum_id
 		FROM forum_group_list,forum
 		WHERE forum_group_list.group_forum_id=forum.group_forum_id
-		AND forum.msg_id='$msg_id'");
+		AND forum.msg_id=$1',
+			array($msg_id));
 
 	if (!$result || db_numrows($result) < 1) {
 		/*

@@ -95,7 +95,8 @@ if ($delete == "yes") {
 		goodbye(_('You cannot delete this attachment'));
 	}	else {
 		if (!$pending) {
-			if (db_query ("DELETE FROM forum_attachment where attachmentid=$attachid")) {
+			if (db_query_params ('DELETE FROM forum_attachment where attachmentid=$1',
+			array($attachid))) {
 				goodbye(_('Attachment deleted'));
 			} else {
 				exit_error(db_error());
@@ -220,7 +221,8 @@ for ($i = 0; $i < strlen($filedata); $i = $i+100) {
 flush();
 //increase the attach count
 if (!$pending) { //we don't care for the pending attach counter, it's just for administrative purposes
-	db_query("UPDATE forum_attachment set counter=counter+1 where attachmentid='$attachid'");
+	db_query_params ('UPDATE forum_attachment set counter=counter+1 where attachmentid=$1',
+			array($attachid));
 }
 
 
