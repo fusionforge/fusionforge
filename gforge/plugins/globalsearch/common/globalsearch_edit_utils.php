@@ -80,7 +80,8 @@ VALUES ('$new_title', '$new_link', '$new_onlysw', '$new_enabled', '$new_rank')" 
 function globalsearch_admin_table_confirmdelete ($id) {
         global $PHP_SELF;
 
-        $result = db_query("SELECT * FROM plugin_globalsearch_assoc_site WHERE assoc_site_id=$id");
+        $result = db_query_params ('SELECT * FROM plugin_globalsearch_assoc_site WHERE assoc_site_id=$1',
+			array($id));
         if ($result and db_numrows($result) == 1) {
 		$title     =  db_result ($result, 0, 'title');
 		$link      =  db_result ($result, 0, 'link');
@@ -113,7 +114,8 @@ function globalsearch_admin_table_confirmdelete ($id) {
  *      @param $id - the id of the record to act on
  */
 function globalsearch_admin_table_delete ($id) {
-        if (db_query("DELETE FROM plugin_globalsearch_assoc_site WHERE assoc_site_id=$id")) {
+        if (db_query_params ('DELETE FROM plugin_globalsearch_assoc_site WHERE assoc_site_id=$1',
+			array($id))) {
 		echo _('Associated forge successfully deleted.');
         } else {
                 echo db_error();
@@ -128,7 +130,8 @@ function globalsearch_admin_table_delete ($id) {
 function globalsearch_admin_table_edit ($id) {
         global $PHP_SELF;
 
-        $result = db_query("SELECT * FROM plugin_globalsearch_assoc_site WHERE assoc_site_id=$id");
+        $result = db_query_params ('SELECT * FROM plugin_globalsearch_assoc_site WHERE assoc_site_id=$1',
+			array($id));
         if ($result and db_numrows($result) == 1) {
 		$old_title     =  db_result ($result, 0, 'title');
 		$old_link      =  db_result ($result, 0, 'link');
@@ -196,7 +199,8 @@ function globalsearch_admin_table_postedit ($id) {
 function globalsearch_admin_table_show () {
         global $HTML, $PHP_SELF;
 
-        $result = db_query("SELECT * FROM plugin_globalsearch_assoc_site ORDER BY assoc_site_id");
+        $result = db_query_params ('SELECT * FROM plugin_globalsearch_assoc_site ORDER BY assoc_site_id',
+			array());
         if ($result) {
                 $rows = db_numrows($result);
 

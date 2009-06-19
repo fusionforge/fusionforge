@@ -120,13 +120,13 @@ $array_re=explode(" ",addslashes(quotemeta($gwords)));
 $gwords1="project_title ILIKE '%" . implode($array,"%' $crit project_title ILIKE '%") ."%'";
 $gwords2="project_description ILIKE '%" . implode($array,"%' $crit project_description ILIKE '%") . "%'";
 
-$sql = "SELECT project_title, project_link, project_description, title, link "
-        ."FROM plugin_globalsearch_assoc_site_project, plugin_globalsearch_assoc_site "
-        ."WHERE plugin_globalsearch_assoc_site_project.assoc_site_id = plugin_globalsearch_assoc_site.assoc_site_id "
-        ."AND enabled = 't' AND status_id = 2 "
+$sql = "SELECT project_title, project_link, project_description, title, link 
+FROM plugin_globalsearch_assoc_site_project, plugin_globalsearch_assoc_site 
+WHERE plugin_globalsearch_assoc_site_project.assoc_site_id = plugin_globalsearch_assoc_site.assoc_site_id 
+AND enabled = 't' AND status_id = 2 "
         .$onlysw
-        ."AND (($gwords1) OR ($gwords2)) "
-        ."ORDER BY ".$order;
+        ."AND (($gwords1) OR ($gwords2)) 
+ORDER BY ".$order;
 
 $limit=25;
 
@@ -168,9 +168,9 @@ if (!$result || $rows < 1) {
                 print        "<tr ". $HTML->boxGetAltRowStyle($i)."><td><a href=\""
                         . db_result($result, $i, 'project_link')."\" target=\"blank\">"
                         . html_image("ic/msg.png","10","12",array("border"=>"0"))."&nbsp;"
-                        . highlight_target_words($array,db_result($result, $i, 'project_title'))."</a></td>"
-                        . "<td>".highlight_target_words($array,db_result($result,$i,'project_description'))."</td>"
-                        . "<td><center><a href=\"".db_result($result,$i,'link')."\" target=\"_blank\">"
+                        . highlight_target_words($array,db_result($result, $i, 'project_title'))."</a></td>
+<td>".highlight_target_words($array,db_result($result,$i,'project_description'))."</td>
+<td><center><a href=\"".db_result($result,$i,'link')."\" target=\"_blank\">"
                         . db_result($result,$i,'title')."</a></center></td></tr>\n";
         }
 

@@ -75,13 +75,15 @@ class globalSearchPlugin extends Plugin {
 	 *
 	 */
 	function show_top_n_assocsites($num_assocsites) {
-		$res_top_n_assoc = db_query("
+		$res_top_n_assoc = db_query_params ('
                 SELECT a.title, a.link, count(*) AS numprojects 
                 FROM plugin_globalsearch_assoc_site_project p, plugin_globalsearch_assoc_site a 
                 WHERE p.assoc_site_id = a.assoc_site_id AND p.assoc_site_id IN 
                         (SELECT assoc_site_id FROM plugin_globalsearch_assoc_site 
-                        WHERE status_id = 2 AND enabled='t' ORDER BY rank LIMIT $num_assocsites) 
-                GROUP BY a.title, a.link");
+                        WHERE status_id = 2 AND enabled=$1 ORDER BY rank LIMIT $2) 
+                GROUP BY a.title, a.link',
+						    array('t',
+							  $num_assocsites));
 
 		if (db_numrows($res_top_n_assoc) == 0) {
 			return _('No stats available')." ".db_error();
@@ -107,7 +109,8 @@ class globalSearchPlugin extends Plugin {
 	 *
 	 */
 	function stats_get_total_projects_assoc_sites() {
-		$res_count = db_query("SELECT count(*) AS numprojects FROM plugin_globalsearch_assoc_site_project p, plugin_globalsearch_assoc_site a WHERE p.assoc_site_id = a.assoc_site_id AND a.status_id = 2");
+		$res_count = db_query_params ('SELECT count(*) AS numprojects FROM plugin_globalsearch_assoc_site_project p, plugin_globalsearch_assoc_site a WHERE p.assoc_site_id = a.assoc_site_id AND a.status_id = 2',
+			array());
 		if (db_numrows($res_count) > 0) {
 			$row_count = db_fetch_array($res_count);
 			return $row_count['numprojects'];
