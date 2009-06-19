@@ -139,8 +139,9 @@
 				//
 				// create an object for each selected type
 				//
-				$result = db_query("SELECT * FROM artifact_extra_field_list 
-					WHERE extra_field_id='$selectid'");
+				$result = db_query_params ('SELECT * FROM artifact_extra_field_list 
+					WHERE extra_field_id=$1',
+			array($selectid));
 				$typeid = db_result($result,0,'group_artifact_id');
 				$dest_tracker =& artifactType_get_object($typeid);
 				if (!$dest_tracker || !is_object($dest_tracker)) {

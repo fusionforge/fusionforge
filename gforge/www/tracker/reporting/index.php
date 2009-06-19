@@ -49,7 +49,8 @@ if ($report->isError()) {
 /*
  * Set the start date to birth of the project.
  */
-$res=db_query("SELECT register_time FROM groups WHERE group_id=$group_id");
+$res=db_query_params ('SELECT register_time FROM groups WHERE group_id=$1',
+			array($group_id));
 $report->site_start_date=db_result($res,0,'register_time');
 
 if (!$start) {
