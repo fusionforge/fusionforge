@@ -151,8 +151,9 @@ for ($i=0; $i<count($keys); $i++) {
 		if ($keys[$i] == 'forumanon') {
 			//skip as we have special case below
 		} else {
-			$res=db_query("SELECT group_forum_id,forum_name,is_public,allow_anonymous 
-				FROM forum_group_list WHERE group_id='$group_id'");
+			$res=db_query_params ('SELECT group_forum_id,forum_name,is_public,allow_anonymous 
+				FROM forum_group_list WHERE group_id=$1',
+			array($group_id));
 			for ($q=0; $q<db_numrows($res); $q++) {
 				//
 				//	Special cases - when going through the keys, we want to show trackeranon
@@ -182,8 +183,9 @@ for ($i=0; $i<count($keys); $i++) {
 //
 	} elseif ($keys[$i] == 'pm' || $keys[$i] == 'pmpublic') {
 
-		$res=db_query("SELECT group_project_id,project_name,is_public 
-			FROM project_group_list WHERE group_id='$group_id'");
+		$res=db_query_params ('SELECT group_project_id,project_name,is_public 
+			FROM project_group_list WHERE group_id=$1',
+			array($group_id));
 		for ($q=0; $q<db_numrows($res); $q++) {
 			echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
 			<td>'.$rbac_edit_section_names[$keys[$i]].'</td>
@@ -203,8 +205,9 @@ for ($i=0; $i<count($keys); $i++) {
 		if ($keys[$i] == 'trackeranon') {
 			//skip as we have special case below
 		} else {
-			$res=db_query("SELECT group_artifact_id,name,is_public,allow_anon
-				FROM artifact_group_list WHERE group_id='$group_id'");
+			$res=db_query_params ('SELECT group_artifact_id,name,is_public,allow_anon
+				FROM artifact_group_list WHERE group_id=$1',
+			array($group_id));
 			for ($q=0; $q<db_numrows($res); $q++) {
 				//
 				//	Special cases - when going through the keys, we want to show trackeranon
@@ -235,8 +238,9 @@ for ($i=0; $i<count($keys); $i++) {
 //
 	} elseif ($keys[$i] == 'frspackage') {
 
-		$res=db_query("SELECT package_id,name,is_public 
-			FROM frs_package WHERE group_id='$group_id'");
+		$res=db_query_params ('SELECT package_id,name,is_public 
+			FROM frs_package WHERE group_id=$1',
+			array($group_id));
 		for ($q=0; $q<db_numrows($res); $q++) {
 			echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
 			<td>'.$rbac_edit_section_names[$keys[$i]].'</td>

@@ -262,11 +262,12 @@ echo $HTML->boxBottom();
 
 		*/
 
-		$res_memb = db_query("SELECT users.realname,users.user_id,users.status,
+		$res_memb = db_query_params ('SELECT users.realname,users.user_id,users.status,
 			users.user_name,user_group.admin_flags,user_group.role_id
 			FROM users,user_group 
 			WHERE users.user_id=user_group.user_id 
-			AND user_group.group_id='$group_id' ORDER BY users.lastname,users.firstname");
+			AND user_group.group_id=$1 ORDER BY users.lastname,users.firstname',
+			array($group_id));
 
 		echo '
 		<table width="100%" border="0">

@@ -122,7 +122,8 @@ if (getStringFromRequest('submit')) {
 			$feedback .= _('Both file name and description are required');
 		} else {
 			//see if they have too many data in the system
-			$res=db_query("SELECT sum(filesize) WHERE group_id='$group_id'");
+			$res=db_query_params ('SELECT sum(filesize) WHERE group_id=$1',
+			array($group_id));
 			if (db_result($res,0,'sum') < $QUOTA) {
 				store_file(0, $input_file);
 			} else {
@@ -132,7 +133,9 @@ if (getStringFromRequest('submit')) {
 
 	} else if (getStringFromRequest('remove')) {
 
-		$res=db_query("DELETE FROM db_images WHERE id='$id' AND group_id='$group_id'");
+		$res=db_query_params ('DELETE FROM db_images WHERE id=$1 AND group_id=$2',
+			array($id,
+				$group_id));
 
 		if (!$res || db_affected_rows($res) < 1) {
 			$feedback .= 'ERROR: DB: Cannot delete multimedia file<br />';
@@ -149,11 +152,15 @@ if (getStringFromRequest('submit')) {
 
 				// Just replace description/mime type
 
-				$res = db_query("UPDATE db_images
-						SET description='$description',
-						 filetype='$filetype'
-						WHERE group_id='$group_id'
-						AND id='$id' ");
+				$res = db_query_params ('UPDATE db_images
+						SET description=$1,
+						 filetype=$2
+						WHERE group_id=$3
+						AND id=$4 ',
+			array($description,
+				$filetype,
+				$group_id,
+				$id));
 
 				if (!$res || db_affected_rows($res) < 1) {
 					$feedback .= 'ERROR: DB: Cannot update multimedia file<br />';
@@ -169,9 +176,11 @@ if (getStringFromRequest('submit')) {
 				// mime type
 
 				//see if they have too many data in the system
-				$res=db_query("	SELECT sum(filesize)
-						WHERE group_id='$group_id'
-						AND id<>'$id'");
+				$res=db_query_params ('	SELECT sum(filesize)
+						WHERE group_id=$1
+						AND id<>$2',
+			array($group_id,
+				$id));
 
 				$size = $input_file['size'];
 				if (db_result($res,0,'sum')+$size < $QUOTA) {
@@ -198,10 +207,12 @@ echo '
 
 $mode = getStringFromGet("mode");
 if ($mode == "edit") {
-	$result=db_query("	SELECT *
+	$result=db_query_params ('	SELECT *
 				FROM db_images
-				WHERE group_id='$group_id'
-				AND id='$id'");
+				WHERE group_id=$1
+				AND id=$2',
+			array($group_id,
+				$id));
 
 	if (!$result || db_numrows($result)!=1) {
 		$feedback .= "Cannot edit multimedia file<br />";
@@ -233,10 +244,11 @@ if ($mode == "edit") {
 	</form></p>
 	';
 } else {
-	$result=db_query("	SELECT *
+	$result=db_query_params ('	SELECT *
 				FROM db_images
-				WHERE group_id='$group_id'
-				ORDER BY id");
+				WHERE group_id=$1
+				ORDER BY id',
+			array($group_id));
 
 	echo '<h4>'._('Add Multimedia Data').'</h4>
 	<p>

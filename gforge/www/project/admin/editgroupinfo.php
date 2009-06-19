@@ -104,12 +104,13 @@ project_admin_header(array('title'=>_('Edit Group Info').'','group'=>$group->get
 /* NOT ACTIVE YET
 
 // Prepare images res to render select box in HTML template
-$images_res = db_query("
+$images_res = db_query_params ('
 	SELECT id,description FROM db_images
-	WHERE group_id='$group_id'
+	WHERE group_id=$1
 	AND width<200
 	AND height<200
-");
+',
+			array($group_id));
 
 */
 

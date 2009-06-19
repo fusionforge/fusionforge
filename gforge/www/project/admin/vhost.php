@@ -77,19 +77,22 @@ if (getStringFromRequest('deletevhost')) {
 
 	//schedule for deletion
 
-	$res =	db_query("
+	$res =	db_query_params ('
 		SELECT * 
 		FROM prweb_vhost 
-		WHERE vhostid='$vhostid'
-	");
+		WHERE vhostid=$1
+	',
+			array($vhostid));
 
 	$row_vh = db_fetch_array($res);
 
-	$res = db_query("
+	$res = db_query_params ('
 		DELETE FROM prweb_vhost 
-		WHERE vhostid='$vhostid' 
-		AND group_id='$group_id'
-	");
+		WHERE vhostid=$1 
+		AND group_id=$2
+	',
+			array($vhostid,
+				$group_id));
 
 	if (!$res || db_affected_rows($res) < 1) {
 		$feedback .= "Could not delete VHOST entry:".db_error();

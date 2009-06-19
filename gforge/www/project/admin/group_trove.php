@@ -47,11 +47,13 @@ if (getStringFromRequest('submit') && getStringFromRequest('root1')) {
 	//$eachroot = ;//must make this bypass because it wouldn't compile otherwise
 	while (list($rootnode,$value) = each($allroots)) {
 		// check for array, then clear each root node for group
-		db_query("
+		db_query_params ('
 			DELETE FROM trove_group_link
-			WHERE group_id='$group_id'
-			AND trove_cat_root='$rootnode'
-		");
+			WHERE group_id=$1
+			AND trove_cat_root=$2
+		',
+			array($group_id,
+				$rootnode));
 		
 		for ($i=1;$i<=$TROVE_MAXPERROOT;$i++) {
 			$varname = 'root'.$i;
@@ -80,11 +82,13 @@ $CATROOTS = trove_getallroots();
 while (list($catroot,$fullname) = each($CATROOTS)) {
 	print "\n<hr />\n<p><strong>$fullname</strong> ".help_button('trove_cat',$catroot)."</p>\n";
 
-	$res_grpcat = db_query("
+	$res_grpcat = db_query_params ('
 		SELECT trove_cat_id
 		FROM trove_group_link
-		WHERE group_id='$group_id'
-		AND trove_cat_root='$catroot'");
+		WHERE group_id=$1
+		AND trove_cat_root=$2',
+			array($group_id,
+				$catroot));
 
 	for ($i=1;$i<=$TROVE_MAXPERROOT;$i++) {
 		// each drop down, consisting of all cats in each root

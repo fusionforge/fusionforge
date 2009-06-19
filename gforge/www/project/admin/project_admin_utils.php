@@ -126,10 +126,10 @@ function project_admin_footer($params) {
 */
 
 function group_get_history ($group_id=false) {
-	$sql="SELECT group_history.field_name,group_history.old_value,group_history.adddate,users.user_name ".
-		 "FROM group_history,users ".
-		 "WHERE group_history.mod_by=users.user_id ".
-		 "AND group_id='$group_id' ORDER BY group_history.adddate DESC";
+	$sql="SELECT group_history.field_name,group_history.old_value,group_history.adddate,users.user_name 
+FROM group_history,users 
+WHERE group_history.mod_by=users.user_id 
+AND group_id='$group_id' ORDER BY group_history.adddate DESC";
 	return db_query($sql);
 }		   
 	
@@ -201,9 +201,9 @@ function show_grouphistory ($group_id) {
  */
 function prdb_namespace_seek($namecheck) {
 
-	$query = "select * "
-		."from prdb_dbs "
-		."where dbname = '$namecheck'";
+	$query = "select * 
+from prdb_dbs 
+where dbname = '$namecheck'";
 
 	$res_dbl = db_query($query);
 
@@ -216,9 +216,9 @@ function prdb_namespace_seek($namecheck) {
 			$curr_num++;
 			$namecheck .= "$namecheck"."$curr_num";
 					
-			$query = "select * "
-				."from prdb_dbs "
-				."where dbname = '$namecheck'";
+			$query = "select * 
+from prdb_dbs 
+where dbname = '$namecheck'";
 
 			$res_dbl = db_query($query);
 		}

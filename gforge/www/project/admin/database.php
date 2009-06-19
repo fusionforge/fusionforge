@@ -86,22 +86,27 @@ if (getStringFromRequest('updatedbrec')) {
 
 		//sync new password, and flag it as 'pending (an) update'
 
-		$res = db_query("
+		$res = db_query_params ('
 			UPDATE prdb_dbs 
-			SET dbuserpass = '$pw', 
-				state = '4'
-			WHERE dbid = '$dbid' 
-			AND group_id = '$group_id'
-		"); 
+			SET dbuserpass = $1, 
+				state = $2
+			WHERE dbid = $3 
+			AND group_id = $4
+		',
+			array($pw,
+				'4',
+				$dbid,
+				$group_id)); 
 
 		if (!$res || db_affected_rows($res) < 1) {
 			$feedback .= "Update failure - ".db_error()."";
 		} else {
-			$res = db_query("
+			$res = db_query_params ('
 				SELECT * 
 				FROM prdb_types 
-				WHERE dbtypeid='$newdbtypeid'
-			");
+				WHERE dbtypeid=$1
+			',
+			array($newdbtypeid));
 			$row_db = db_fetch_array($res);
 			group_add_history('Updated database - (type: '.$row_db['dbsoftware'].')','',$group_id);
 		}
@@ -118,12 +123,14 @@ if (getStringFromRequest('deletedbconfirm')) {
 
 	//schedule for deletion
 
-	$res = db_query("
+	$res = db_query_params ('
 		UPDATE prdb_dbs 
 		SET state=3 
-		WHERE dbid='$dbid'
-		AND group_id='$group_id'
-	");
+		WHERE dbid=$1
+		AND group_id=$2
+	',
+			array($dbid,
+				$group_id));
 
 	if (!$res || db_affected_rows($res) < 1) {
 		$feedback .= 'Cannot delete database: '.db_error();
@@ -142,17 +149,18 @@ if ($deletedb == 1) {
 
 }
 
-$res_db = db_query("
+$res_db = db_query_params ('
 	SELECT * 
 	FROM prdb_types 
 	WHERE dbsoftware NOT IN (
 		SELECT dbsoftware 
 		FROM prdb_dbs,prdb_types 
 		WHERE dbtypeid=dbtype 
-		AND group_id='$group_id'
+		AND group_id=$1
 		AND state IN (1,2,4)
 	)
-");
+',
+			array($group_id));
 
 if (db_numrows($res_db) > 0) {
 
