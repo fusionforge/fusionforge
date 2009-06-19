@@ -60,14 +60,27 @@ if (!session_loggedin()) {
 						// get rid of 0.1 thing
 						$rating = (int)$rating;
 						//user did answer this question, so insert into db
-						$res=db_query("SELECT * FROM user_ratings ".
-							"WHERE rated_by='$ruser' AND user_id='$rated_user' AND rate_field='$i'");
+						$res=db_query_params ('SELECT * FROM user_ratings 
+WHERE rated_by=$1 AND user_id=$2 AND rate_field=$3',
+			array($ruser,
+				$rated_user,
+				$i)) ;
+
 						if ($res && db_numrows($res) > 0) {
-							$res=db_query("DELETE FROM user_ratings ".
-								"WHERE rated_by='$ruser' AND user_id='$rated_user' AND rate_field='$i'");
+							$res=db_query_params ('DELETE FROM user_ratings 
+WHERE rated_by=$1 AND user_id=$2 AND rate_field=$3',
+			array($ruser,
+				$rated_user,
+				$i)) ;
+
 						}
-						$res=db_query("INSERT INTO user_ratings (rated_by,user_id,rate_field,rating) ".
-							"VALUES ('$ruser','$rated_user','$i','$rating')");
+						$res=db_query_params ('INSERT INTO user_ratings (rated_by,user_id,rate_field,rating) 
+VALUES ($1,$2,$3,$4)',
+			array($ruser,
+				$rated_user,
+				$i,
+				$rating)) ;
+
 						echo db_error();
 					}
 				}
