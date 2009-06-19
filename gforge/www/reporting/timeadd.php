@@ -51,12 +51,17 @@ if (getStringFromRequest('submit')) {
 	 if (getStringFromRequest('update')) {
 
 		if ($project_task_id && $report_date && $time_code) {
-		$res=db_query("UPDATE rep_time_tracking
-		SET time_code='$time_code', hours='$hours'
+		$res=db_query_params ('UPDATE rep_time_tracking
+		SET time_code=$1, hours=$2
 		WHERE user_id='".user_getid()."'
-		AND report_date='$report_date'
-		AND project_task_id='$project_task_id'
-		AND time_code='$old_time_code'");
+		AND report_date=$3
+		AND project_task_id=$4
+		AND time_code=$5',
+			array($time_code,
+				$hours,
+				$report_date,
+				$project_task_id,
+				$old_time_code));
 		if (!$res || db_affected_rows($res) < 1) {
 		exit_error('Error',db_error());
 		} else {
@@ -68,11 +73,14 @@ if (getStringFromRequest('submit')) {
 		*/
 	if (getStringFromRequest('delete')) {
 		if ($project_task_id && $report_date && $old_time_code) {
-			$res=db_query("DELETE FROM rep_time_tracking
+			$res=db_query_params ('DELETE FROM rep_time_tracking
 				WHERE user_id='".user_getid()."'
-				AND report_date='$report_date'
-				AND project_task_id='$project_task_id'
-				AND time_code='$old_time_code'");
+				AND report_date=$1
+				AND project_task_id=$2
+				AND time_code=$3',
+			array($report_date,
+				$project_task_id,
+				$old_time_code));
 			if (!$res || db_affected_rows($res) < 1) {
 				exit_error('Error',db_error());
 			} else {
@@ -174,7 +182,8 @@ if ($group_project_id || $rows) {
 	}
 	if ($group_project_id) {
 
-		$respt=db_query("SELECT project_task_id,summary FROM project_task WHERE group_project_id='$group_project_id'");
+		$respt=db_query_params ('SELECT project_task_id,summary FROM project_task WHERE group_project_id=$1',
+			array($group_project_id));
 
 		echo '<form action="'.getStringFromServer('PHP_SELF').'?week='.$week.'" method="post" />
 			<input type="hidden" name="submit" value="1" />

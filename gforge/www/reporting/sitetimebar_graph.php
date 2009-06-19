@@ -57,10 +57,12 @@ if (!$end) {
 	$end--;
 }
 
-$res=db_query("SELECT week,sum(hours) 
+$res=db_query_params ('SELECT week,sum(hours) 
 	FROM rep_time_tracking 
 	WHERE week 
-	BETWEEN '$start' AND '$end' GROUP BY week");
+	BETWEEN $1 AND $2 GROUP BY week',
+			array($start,
+				$end));
 
 $report->setDates($res,0);
 $report->setData($res,1);

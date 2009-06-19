@@ -63,10 +63,12 @@ if (getStringFromRequest('submit')) {
 echo report_header(_('Main Page'));
 
 if ($time_code) {
-	$res1=db_query("SELECT * FROM rep_time_category WHERE time_code='$time_code'");
+	$res1=db_query_params ('SELECT * FROM rep_time_category WHERE time_code=$1',
+			array($time_code));
 	$category_name=db_result($res1,0,'category_name');
 }
-$res=db_query("SELECT * FROM rep_time_category");
+$res=db_query_params ('SELECT * FROM rep_time_category',
+			array());
 
 $arr[]=_('Time Code');
 $arr[]=_('Category Name');
