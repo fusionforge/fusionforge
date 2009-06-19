@@ -139,7 +139,8 @@ site_admin_header(array('title'=>_('Site Admin: Trove - Category List'))) ;
 <br /><select name="form_parent">
 <?php
 // generate list of possible parents
-$res_parent = db_query("SELECT shortname,fullname,trove_cat_id FROM trove_cat");
+$res_parent = db_query_params ('SELECT shortname,fullname,trove_cat_id FROM trove_cat',
+			array());
 
 // Place the root node at the start of the list
 print('<option value="0"');

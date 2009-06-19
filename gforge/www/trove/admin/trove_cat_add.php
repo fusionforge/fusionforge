@@ -66,14 +66,16 @@ if (isset($parent_trove_cat_id)) {
 	if ($parent_trove_cat_id == 0) {
 		print ('<option value="0">root</option>\n');
 	} else {
-		$res_cat = db_query("SELECT shortname,fullname,trove_cat_id FROM trove_cat WHERE trove_cat_id=$parent_trove_cat_id");
+		$res_cat = db_query_params ('SELECT shortname,fullname,trove_cat_id FROM trove_cat WHERE trove_cat_id=$1',
+			array($parent_trove_cat_id));
 		while ($row_cat = db_fetch_array($res_cat)) {
 			print ('<option value="'.$row_cat["trove_cat_id"].'">'.$row_cat["fullname"]."</option>\n");
 		}
 	}
 } else {
 	print ('<option value="0">root</option>\n');
-	$res_cat = db_query("SELECT shortname,fullname,trove_cat_id FROM trove_cat");
+	$res_cat = db_query_params ('SELECT shortname,fullname,trove_cat_id FROM trove_cat',
+			array());
 	while ($row_cat = db_fetch_array($res_cat)) {
 		print ('<option value="'.$row_cat["trove_cat_id"].'">'.$row_cat["fullname"]."</option>\n");
 	}
