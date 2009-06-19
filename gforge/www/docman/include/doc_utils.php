@@ -137,7 +137,9 @@ function doc_droplist_count($l_group_id, $language_id, $g) {
 }
 
 function doc_get_state_box($checkedval='xzxz') {
-	$res_states=db_query("select * from doc_states;");
+	$res_states=db_query_params ('select * from doc_states;',
+			array()) ;
+
 	echo html_build_select_box ($res_states,'stateid',$checkedval,false);
 
 }
