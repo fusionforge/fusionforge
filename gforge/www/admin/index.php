@@ -40,7 +40,9 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 <p><strong><?php echo _('User Maintenance'); ?></strong></p>
 	<ul>
 	<li><?php
-		$res=db_query("SELECT count(*) AS count FROM users WHERE status='A'");
+		$res=db_query_params ('SELECT count(*) AS count FROM users WHERE status=$1',
+			array('A')) ;
+
 		$row = db_fetch_array($res);
 		printf(_('Active site users: <strong>%1$s</strong>'), $row['count']);
 	?></li>
@@ -71,17 +73,23 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 </p>
 <ul>
 	<li><?php
-		$res=db_query("SELECT count(*) AS count FROM groups");
+		$res=db_query_params ('SELECT count(*) AS count FROM groups',
+			array()) ;
+
 		$row = db_fetch_array($res);
 		printf(_('Registered projects: <strong>%1$s</strong>'), $row['count']);
 	?></li>
 	<li><?php
-		$res=db_query("SELECT count(*) AS count FROM groups WHERE status='A'");
+		$res=db_query_params ('SELECT count(*) AS count FROM groups WHERE status=$1',
+			array('A')) ;
+
 		$row = db_fetch_array($res);
 		printf(_('Active projects: <strong>%1$s</strong>'), $row['count']);
 	?></li>
 	<li><?php
-		$res=db_query("SELECT count(*) AS count FROM groups WHERE status='P'");
+		$res=db_query_params ('SELECT count(*) AS count FROM groups WHERE status=$1',
+			array('P')) ;
+
 		$row = db_fetch_array($res);
 		printf(_('Pending projects: <strong>%1$s</strong>'), $row['count']);
 	?></li>

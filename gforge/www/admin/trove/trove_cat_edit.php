@@ -77,7 +77,9 @@ if (getStringFromRequest('submit')) {
 		trove_genfullpaths($form_trove_cat_id,trove_getfullname($form_trove_cat_id),$form_trove_cat_id);
 		trove_updaterootparent($form_trove_cat_id,$form_trove_cat_id);
 	}
-	db_query("update trove_group_link set trove_cat_root=(select root_parent from trove_cat where trove_cat_id=trove_group_link.trove_cat_id)");
+	db_query_params ('update trove_group_link set trove_cat_root=(select root_parent from trove_cat where trove_cat_id=trove_group_link.trove_cat_id)',
+			array()) ;
+
 
 	session_redirect("/admin/trove/trove_cat_list.php");
 }
@@ -97,7 +99,9 @@ if (getStringFromRequest("delete")) {
 
 $trove_cat_id = getIntFromRequest("trove_cat_id");
 
-$res_cat = db_query("SELECT * FROM trove_cat WHERE trove_cat_id=$trove_cat_id");
+$res_cat = db_query_params ('SELECT * FROM trove_cat WHERE trove_cat_id=$1',
+			array($trove_cat_id)) ;
+
 if (db_numrows($res_cat)<1) {
 	exit_error( _('No Such Category, That trove cat does not exist'));
 }

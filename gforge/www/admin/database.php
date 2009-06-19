@@ -84,12 +84,14 @@ if (getStringFromRequest('submit')) {
 
 site_admin_header(array('title'=>_('Site Admin: Groups\' DB Maintenance')));
 
-$res_db = db_query("
+$res_db = db_query_params ('
 	SELECT stateid,statename,COUNT(*) AS count
 	FROM prdb_dbs,prdb_states
 	WHERE stateid=state
 	GROUP BY statename,stateid
-");
+',
+			array()) ;
+
 
 echo '<h3>' ._('Statistics for Project Databases').'</h3>';
 

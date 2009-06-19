@@ -131,11 +131,13 @@ print '
 ';
 
 
-$res = db_query("
+$res = db_query_params ('
 	SELECT *
 	FROM massmail_queue
 	WHERE finished_date=0
-");
+',
+			array()) ;
+
 
 $title=array();
 $title[]='&nbsp;';

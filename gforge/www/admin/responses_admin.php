@@ -67,10 +67,16 @@ if( $action == "Edit" ) {
 	// Edit Response
 	check_select_value($response_id, $action);
 	if( $action2 ) {
-		db_query("UPDATE canned_responses SET response_title='$response_title', response_text='$response_text' WHERE response_id='$response_id'");
+		db_query_params ('UPDATE canned_responses SET response_title=$1, response_text=$2 WHERE response_id=$3',
+			array($response_title,
+			$response_text,
+			$response_id)) ;
+
 		print(" <strong>" ._('Edited Response')."</strong> ");
 	} else {
-		$res = db_query("SELECT * FROM canned_responses WHERE response_id='$response_id'");
+		$res = db_query_params ('SELECT * FROM canned_responses WHERE response_id=$1',
+			array($response_id)) ;
+
 		$row = db_fetch_array($res);
 		$response_title=$row[1];
 		$response_text=$row[2];
@@ -97,7 +103,9 @@ if( $action == "Edit" ) {
 	// Delete Response
 	check_select_value($response_id, $action);
 	if( $sure == "yes" ) {
-		db_query("DELETE FROM canned_responses WHERE response_id='$response_id'");
+		db_query_params ('DELETE FROM canned_responses WHERE response_id=$1',
+			array($response_id)) ;
+
 		print(" <strong>" ._('Deleted Response')."</strong> ");
 	} else {
 		print( _('If you\'re aren\'t sure then why did you click \'Delete\'?')."<br />");

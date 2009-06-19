@@ -230,14 +230,16 @@ if ($u->getStatus() == 'D') {
 /*
 	Iterate and show groups this user is in
 */
-$res_cat = db_query("
+$res_cat = db_query_params ('
 	SELECT groups.unix_group_name, groups.group_name AS group_name, 
 		groups.group_id AS group_id, 
 		user_group.admin_flags AS admin_flags
 	FROM groups,user_group
-	WHERE user_group.user_id=$user_id
+	WHERE user_group.user_id=$1
 	AND groups.group_id=user_group.group_id
-");
+',
+			array($user_id)) ;
+
 
 $title=array();
 $title[]=_('Name');

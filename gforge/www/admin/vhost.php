@@ -61,10 +61,15 @@ if (getStringFromRequest('add')) {
 			$cgidir = $homedir.'/cgi-bin/';
 
 
-			$res = db_query("
+			$res = db_query_params ('
 				INSERT INTO prweb_vhost(vhost_name, docdir, cgidir, group_id) 
-				VALUES ('$vhost_name','$docdir','$cgidir',$group_id)
-			");
+				VALUES ($1,$2,$3,$4)
+			',
+			array($vhost_name,
+			$docdir,
+			$cgidir,
+			$group_id)) ;
+
 
 			if (!$res || db_affected_rows($res) < 1) {
 				$feedback .= _('Error adding VHOST:') .db_error();
@@ -85,12 +90,16 @@ if (getStringFromRequest('tweakcommit')) {
 	$docdir = getStringFromRequest('docdir');
 	$cgidir = getStringFromRequest('cgidir');
 
-	$res = db_query("
+	$res = db_query_params ('
 		UPDATE prweb_vhost 
-		SET docdir='$docdir',
-			cgidir='$cgidir' 
-		WHERE vhostid=$vhostid
-	");
+		SET docdir=$1,
+			cgidir=$2 
+		WHERE vhostid=$3
+	',
+			array($docdir,
+			$cgidir,
+			$vhostid)) ;
+
 
 	if (!$res || db_affected_rows($res) < 1) {
 		$feedback .= _('Error updating VHOST entry:') .db_error();
@@ -148,12 +157,14 @@ site_admin_header(array('title'=>_('Site admin')));
 if (getStringFromRequest('tweak')) {
 	$vhost_name = getStringFromRequest('vhost_name');
 
-	$res_vh = db_query("
+	$res_vh = db_query_params ('
 		SELECT vhostid,vhost_name,docdir,cgidir,unix_group_name,group_id
 		FROM prweb_vhost,groups
-		WHERE vhost_name='$vhost_name'
+		WHERE vhost_name=$1
 		AND prweb_vhost.group_id=groups.group_id
-	");
+	',
+			array($vhost_name)) ;
+
 
 	if (db_numrows($res_vh) > 0) {
 

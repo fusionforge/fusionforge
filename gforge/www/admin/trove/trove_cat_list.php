@@ -46,11 +46,13 @@ function printnode ($nodeid,$text) {
 	}
 
 	$GLOBALS['depth']++;
-	$res_child = db_query("
+	$res_child = db_query_params ('
 		SELECT trove_cat_id,fullname FROM trove_cat 
-		WHERE parent='$nodeid'
+		WHERE parent=$1
 		AND trove_cat_id!=0 ORDER BY fullname;
-	");
+	',
+			array($nodeid)) ;
+
 	while ($row_child = db_fetch_array($res_child)) {
 		printnode($row_child["trove_cat_id"],$row_child["fullname"]);
 	}
