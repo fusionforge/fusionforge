@@ -56,8 +56,8 @@ if (!session_loggedin()) {
 		} else {
 			$feedback .= _('Vote registered');
 			echo "<h2>"._('Vote registered')."</h2>";
-			echo "<a href=\"javascript:history.back()\"><strong>"._('Click to return to previous page')."</strong></a>".
-				"<p>"._('If you vote again, your old vote will be erased.')."</p>";
+			echo "<a href=\"javascript:history.back()\"><strong>"._('Click to return to previous page')."</strong></a>
+<p>"._('If you vote again, your old vote will be erased.')."</p>";
 		}
 	} else {
 		echo "<h1>"._('ERROR!!! MISSING PARAMS')."</h1>";

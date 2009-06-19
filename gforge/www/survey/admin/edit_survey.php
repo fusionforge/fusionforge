@@ -63,8 +63,8 @@ if (getStringFromRequest('post_changes')) {
 		} else {
 			$is_active = 0;
 		}
-		$sql="UPDATE surveys SET survey_title='".htmlspecialchars($survey_title)."', survey_questions='$survey_questions', is_active='$is_active' ".
-			 "WHERE survey_id='$survey_id' AND group_id='$group_id'";
+		$sql="UPDATE surveys SET survey_title='".htmlspecialchars($survey_title)."', survey_questions='$survey_questions', is_active='$is_active' 
+WHERE survey_id='$survey_id' AND group_id='$group_id'";
 		$result=db_query($sql);
 		if (db_affected_rows($result) < 1) {
 			$feedback .= _('UPDATE FAILED');

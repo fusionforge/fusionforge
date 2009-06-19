@@ -90,9 +90,9 @@ for ($i=0; $i<$count; $i++) {
 		Build the questions on the HTML form
 	*/
 
-	$sql="select questions.question_type,questions.question,questions.question_id,responses.response ".
-		"from questions,responses where questions.question_id='".$quest_array[$i]."' and ".
-		"questions.question_id=responses.question_id and responses.customer_id='$customer_id' AND responses.survey_id='$survey_id'";
+	$sql="select questions.question_type,questions.question,questions.question_id,responses.response 
+from questions,responses where questions.question_id='".$quest_array[$i]."' and 
+questions.question_id=responses.question_id and responses.customer_id='$customer_id' AND responses.survey_id='$survey_id'";
 
 	$result=db_query($sql);
 
