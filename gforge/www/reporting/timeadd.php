@@ -74,13 +74,14 @@ if (getStringFromRequest('submit')) {
 	if (getStringFromRequest('delete')) {
 		if ($project_task_id && $report_date && $old_time_code) {
 			$res=db_query_params ('DELETE FROM rep_time_tracking
-				WHERE user_id='".user_getid()."'
-				AND report_date=$1
-				AND project_task_id=$2
-				AND time_code=$3',
-			array($report_date,
-				$project_task_id,
-				$old_time_code));
+				WHERE user_id=$1
+				AND report_date=$2
+				AND project_task_id=$3
+				AND time_code=$4',
+					      array(user_getid(),
+						    $report_date,
+						    $project_task_id,
+						    $old_time_code));
 			if (!$res || db_affected_rows($res) < 1) {
 				exit_error('Error',db_error());
 			} else {
