@@ -60,17 +60,17 @@
 
 
  function type_son_box () {
-	return "<select name='link_type' onchange=\"javascript:" .
-			"if(this.value!= 0){" .
-			"document.formson.son.disabled=false" .
-			"}" .
-			"else {" .
-			"document.formson.son.disabled=true" .
-			"}\">" .
-			"\n<option value='0' selected=\"selected\" >"._('Link Type')."</option>\n" .
-			"<option value='shar'>"._('Share')."</option>\n" .
-			"<option value='navi' >"._('Navigation')."</option>\n" .
-			"</select>";
+	return "<select name='link_type' onchange=\"javascript:
+if(this.value!= 0){
+document.formson.son.disabled=false
+}
+else {
+document.formson.son.disabled=true
+}\">
+\n<option value='0' selected=\"selected\" >"._('Link Type')."</option>\n
+<option value='shar'>"._('Share')."</option>\n
+<option value='navi' >"._('Navigation')."</option>\n
+</select>";
 	}
 
 //search all the family,all ancestor 

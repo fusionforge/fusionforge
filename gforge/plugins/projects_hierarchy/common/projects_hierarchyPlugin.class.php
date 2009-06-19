@@ -224,9 +224,9 @@ class projects_hierarchyPlugin extends Plugin {
 			echo '<td><input type="submit"  name="son" value="'._('Add a link').'"></td></tr></table></form>';
 			echo '<br/>';
 			//select all the sons of the current project
-			$sql_son = "SELECT group_id,group_name,unix_group_name,sub_project_id, activated,link_type,com FROM groups,plugin_projects_hierarchy WHERE " .
-					"	(	groups.group_id = plugin_projects_hierarchy.sub_project_id " .
-					"AND plugin_projects_hierarchy.project_id = ".$group_id.")" ;
+			$sql_son = "SELECT group_id,group_name,unix_group_name,sub_project_id, activated,link_type,com FROM groups,plugin_projects_hierarchy WHERE 
+	(	groups.group_id = plugin_projects_hierarchy.sub_project_id 
+AND plugin_projects_hierarchy.project_id = ".$group_id.")" ;
 							
 			
 			$res_son=db_query($sql_son)or die(db_error());
@@ -271,9 +271,9 @@ class projects_hierarchyPlugin extends Plugin {
 				
 			}
 			//select  navigation link by father
-			$sql_son = "SELECT group_id,group_name,unix_group_name,project_id, activated,link_type,com FROM groups,plugin_projects_hierarchy WHERE " .
-							" (	groups.group_id = plugin_projects_hierarchy.project_id " .
-					"AND plugin_projects_hierarchy.sub_project_id = ".$group_id." AND plugin_projects_hierarchy.link_type = 'navi') ";
+			$sql_son = "SELECT group_id,group_name,unix_group_name,project_id, activated,link_type,com FROM groups,plugin_projects_hierarchy WHERE 
+ (	groups.group_id = plugin_projects_hierarchy.project_id 
+AND plugin_projects_hierarchy.sub_project_id = ".$group_id." AND plugin_projects_hierarchy.link_type = 'navi') ";
 			
 			$res_son=db_query($sql_son)or die(db_error());
 			if (!$res_son || db_numrows($res_son) < 1) {
@@ -323,10 +323,10 @@ class projects_hierarchyPlugin extends Plugin {
 			}
 			
 			//research allowing father
-			$sql_father = "SELECT group_id,group_name,unix_group_name,project_id,com FROM groups,plugin_projects_hierarchy WHERE " .
-					"		groups.group_id = plugin_projects_hierarchy.project_id " .
-					"AND plugin_projects_hierarchy.sub_project_id = ".$group_id."".
-					"		AND plugin_projects_hierarchy.activated = true AND plugin_projects_hierarchy.link_type = 'shar'";
+			$sql_father = "SELECT group_id,group_name,unix_group_name,project_id,com FROM groups,plugin_projects_hierarchy WHERE 
+		groups.group_id = plugin_projects_hierarchy.project_id 
+AND plugin_projects_hierarchy.sub_project_id = ".$group_id."
+		AND plugin_projects_hierarchy.activated = true AND plugin_projects_hierarchy.link_type = 'shar'";
 					//print $sql_wait;
 			$res_father=db_query($sql_father)or die(db_error());
 			if (!$res_father || db_numrows($res_father) < 1) {
@@ -350,10 +350,10 @@ class projects_hierarchyPlugin extends Plugin {
 			
 			  
 			//research waiting fathers
-			$sql_wait = "SELECT group_id,group_name,unix_group_name,project_id,link_type,com FROM groups,plugin_projects_hierarchy WHERE " .
-					"		groups.group_id = plugin_projects_hierarchy.project_id " .
-					"AND plugin_projects_hierarchy.sub_project_id = ".$group_id."".
-					"		AND plugin_projects_hierarchy.activated = false AND plugin_projects_hierarchy.link_type = 'shar'";
+			$sql_wait = "SELECT group_id,group_name,unix_group_name,project_id,link_type,com FROM groups,plugin_projects_hierarchy WHERE 
+		groups.group_id = plugin_projects_hierarchy.project_id 
+AND plugin_projects_hierarchy.sub_project_id = ".$group_id."
+		AND plugin_projects_hierarchy.activated = false AND plugin_projects_hierarchy.link_type = 'shar'";
 					//print $sql_wait;
 			$res_wait=db_query($sql_wait)or die(db_error());
 			if (!$res_wait || db_numrows($res_wait) < 1) {

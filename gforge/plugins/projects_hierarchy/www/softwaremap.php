@@ -32,10 +32,11 @@ if (!isset($form_cat) || !$form_cat) {
 $form_cat = intval($form_cat);
 
 // get info about current folder
-$res_trove_cat = db_query("
+$res_trove_cat = db_query_params ('
 	SELECT *
 	FROM trove_cat
-	WHERE trove_cat_id='$form_cat' ORDER BY fullname");
+	WHERE trove_cat_id=$1 ORDER BY fullname',
+			array($form_cat));
 
 if (db_numrows($res_trove_cat) < 1) {
 	exit_error(
