@@ -1020,7 +1020,8 @@ if ($sys_show_source) {
      * @return    integer the theme id    
      */
     function getThemeIdFromName($dirname) {
-        $res=db_query("SELECT theme_id FROM themes WHERE dirname='$dirname'");
+        $res=db_query_params ('SELECT theme_id FROM themes WHERE dirname=$1',
+			array($dirname));
         return db_result($res,0,'theme_id');
     }
 
