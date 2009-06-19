@@ -424,9 +424,8 @@ function process_day($day_begin=0, $day_end=0) {
 }
 
 function get_plugin_id($pluginname){
-	$res = db_query_params ('SELECT plugin_id FROM plugins WHERE plugin_name = '" .
-					$1."'',
-			array($pluginname));	
+	$res = db_query_params ('SELECT plugin_id FROM plugins WHERE plugin_name = $1',
+				array($pluginname));	
 	if (!$res) {
 		$err .=  "Error! Database Query Failed: ".db_error();
 		return NULL;

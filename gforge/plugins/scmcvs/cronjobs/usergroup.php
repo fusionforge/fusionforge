@@ -288,11 +288,11 @@ for ($i = 0; $i < count($gforge_groups); $i++) {
 		AND users.user_id=user_group.user_id
 		AND user_group.cvs_flags IN ($1,$2)
 		AND users.status=$3
-.$4."'',
-			array('0',
-				'1',
-				'A',
-				$group_name));
+                AND groups.unix_group_name=$4',
+				     array('0',
+					   '1',
+					   'A',
+					   $group_name));
 	$gmembers = util_result_column_to_array($resusers,'user_name');
 	if ($enable_pserver) $gmembers[] = 'anonymous';
 	if (!$project->enableAnonSCM()) {
