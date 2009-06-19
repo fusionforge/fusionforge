@@ -77,8 +77,9 @@ pm_header(array('title'=>_('Task Detail'),'group_project_id'=>$group_project_id)
 			to pass into multiple select box
 		*/
 
-		$result2=db_query("SELECT users.user_name AS User_Name FROM users,project_assigned_to 
-			WHERE users.user_id=project_assigned_to.assigned_to_id AND project_task_id='$project_task_id'");
+		$result2=db_query_params ('SELECT users.user_name AS User_Name FROM users,project_assigned_to 
+			WHERE users.user_id=project_assigned_to.assigned_to_id AND project_task_id=$1',
+			array($project_task_id));
 		ShowResultSet($result2,_('Assigned to'), false, false);
 		?>
 		</td>
@@ -88,9 +89,10 @@ pm_header(array('title'=>_('Task Detail'),'group_project_id'=>$group_project_id)
 			Get the list of ids this is dependent on and convert to array
 			to pass into multiple select box
 		*/
-		$result2=db_query("SELECT project_task.summary FROM project_dependencies,project_task 
+		$result2=db_query_params ('SELECT project_task.summary FROM project_dependencies,project_task 
 			WHERE is_dependent_on_task_id=project_task.project_task_id 
-			AND project_dependencies.project_task_id='$project_task_id'");
+			AND project_dependencies.project_task_id=$1',
+			array($project_task_id));
 		ShowResultSet($result2,_('Dependent on task'), false, false);
 		?>
 		</td>

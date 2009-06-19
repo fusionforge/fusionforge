@@ -112,13 +112,13 @@ if ($what) {
 			$start=($time_now-($counter*$sub_duration));
 			$end=($time_now-(($counter-1)*$sub_duration));
 
-			$sql="SELECT avg((end_date-start_date)/(24*60*60)) ".
-				 "FROM project_task,project_group_list ".
-				 "WHERE end_date > 0 ".
-				 "AND (start_date >= '$start' AND start_date <= '$end') ".
-				 "AND project_task.status_id=2 ".
-				 "AND project_group_list.group_project_id=project_task.group_project_id ".
-				 "AND project_group_list.group_id='$group_id' ";
+			$sql="SELECT avg((end_date-start_date)/(24*60*60)) 
+FROM project_task,project_group_list 
+WHERE end_date > 0 
+AND (start_date >= '$start' AND start_date <= '$end') 
+AND project_task.status_id=2 
+AND project_group_list.group_project_id=project_task.group_project_id 
+AND project_group_list.group_id='$group_id' ";
 
 			$result = db_query($sql);
 
@@ -135,12 +135,12 @@ if ($what) {
 			$start=($time_now-($counter*$sub_duration));
 			$end=($time_now-(($counter-1)*$sub_duration));
 
-			$sql="SELECT count(*) ".
-				 "FROM project_task,project_group_list ".
-				 "WHERE start_date >= '$start' ".
-				 "AND start_date <= '$end' ".
-				 "AND project_group_list.group_project_id=project_task.group_project_id ".
-				 "AND project_group_list.group_id='$group_id' ";
+			$sql="SELECT count(*) 
+FROM project_task,project_group_list 
+WHERE start_date >= '$start' 
+AND start_date <= '$end' 
+AND project_group_list.group_project_id=project_task.group_project_id 
+AND project_group_list.group_id='$group_id' ";
 
 			$result = db_query($sql);
 
@@ -157,12 +157,12 @@ if ($what) {
 			$start=($time_now-($counter*$sub_duration));
 			$end=($time_now-(($counter-1)*$sub_duration));
 
-			$sql="SELECT count(*) ".
-				 "FROM project_task,project_group_list ".
-				 "WHERE start_date <= '$end' ".
-				 "AND (end_date >= '$end' OR end_date < 1 OR end_date is null) ".
-				 "AND project_group_list.group_project_id=project_task.group_project_id ".
-				 "AND project_group_list.group_id='$group_id' ";
+			$sql="SELECT count(*) 
+FROM project_task,project_group_list 
+WHERE start_date <= '$end' 
+AND (end_date >= '$end' OR end_date < 1 OR end_date is null) 
+AND project_group_list.group_project_id=project_task.group_project_id 
+AND project_group_list.group_id='$group_id' ";
 
 			$result = db_query($sql);
 
@@ -178,18 +178,18 @@ if ($what) {
 
 	} else if ($what=="subproject") {
 
-		$sql1="SELECT project_group_list.project_name AS Subproject, count(*) AS Count ".
-			  "FROM project_group_list,project_task ".
-			  "WHERE project_group_list.group_project_id=project_task.group_project_id ".
-			  "AND project_task.status_id = '1' ".
-			  "AND project_group_list.group_id='$group_id' ".
+		$sql1="SELECT project_group_list.project_name AS Subproject, count(*) AS Count 
+FROM project_group_list,project_task 
+WHERE project_group_list.group_project_id=project_task.group_project_id 
+AND project_task.status_id = '1' 
+AND project_group_list.group_id='$group_id' ".
 			  $period_clause .
 			  "GROUP BY Subproject";
-		$sql2="SELECT project_group_list.project_name AS Subproject, count(*) AS Count ".
-			  "FROM project_group_list,project_task ".
-			  "WHERE project_group_list.group_project_id=project_task.group_project_id ".
-			  "AND project_task.status_id <> '3' ".
-			  "AND project_group_list.group_id='$group_id' ".
+		$sql2="SELECT project_group_list.project_name AS Subproject, count(*) AS Count 
+FROM project_group_list,project_task 
+WHERE project_group_list.group_project_id=project_task.group_project_id 
+AND project_task.status_id <> '3' 
+AND project_group_list.group_id='$group_id' ".
 			  $period_clause .
 			  "GROUP BY Subproject";
 
@@ -200,23 +200,23 @@ if ($what) {
 
 	} else if ($what=="tech") {
 
-		$sql1="SELECT users.user_name AS Technician, count(*) AS Count ".
-			  "FROM users,project_group_list,project_task,project_assigned_to ".
-			  "WHERE users.user_id=project_assigned_to.assigned_to_id ".
-			  "AND project_assigned_to.project_task_id=project_task.project_task_id ".
-			  "AND project_task.group_project_id=project_group_list.group_project_id ".
-			  "AND project_task.status_id = '1' ".
-			  "AND project_group_list.group_id='$group_id' ".
+		$sql1="SELECT users.user_name AS Technician, count(*) AS Count 
+FROM users,project_group_list,project_task,project_assigned_to 
+WHERE users.user_id=project_assigned_to.assigned_to_id 
+AND project_assigned_to.project_task_id=project_task.project_task_id 
+AND project_task.group_project_id=project_group_list.group_project_id 
+AND project_task.status_id = '1' 
+AND project_group_list.group_id='$group_id' ".
 			  $period_clause .
 			  "GROUP BY Technician";
 
-		$sql2="SELECT users.user_name AS Technician, count(*) AS Count ".
-			  "FROM users,project_group_list,project_task,project_assigned_to ".
-			  "WHERE users.user_id=project_assigned_to.assigned_to_id ".
-			  "AND project_assigned_to.project_task_id=project_task.project_task_id ".
-			  "AND project_task.group_project_id=project_group_list.group_project_id ".
-			  "AND project_task.status_id <> '3' ".
-			  "AND project_group_list.group_id='$group_id' ".
+		$sql2="SELECT users.user_name AS Technician, count(*) AS Count 
+FROM users,project_group_list,project_task,project_assigned_to 
+WHERE users.user_id=project_assigned_to.assigned_to_id 
+AND project_assigned_to.project_task_id=project_task.project_task_id 
+AND project_task.group_project_id=project_group_list.group_project_id 
+AND project_task.status_id <> '3' 
+AND project_group_list.group_id='$group_id' ".
 			  $period_clause .
 			  "GROUP BY Technician";
 
