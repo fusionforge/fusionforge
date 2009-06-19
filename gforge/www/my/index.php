@@ -327,11 +327,11 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 		$order_name_arr[]=_('Monitored FileModules');
 		echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
 
-		$sql="SELECT groups.group_name,groups.unix_group_name,groups.group_id,frs_package.name,filemodule_monitor.filemodule_id ".
-			"FROM groups,filemodule_monitor,frs_package ".
-			"WHERE groups.group_id=frs_package.group_id AND groups.status = 'A' ".
-			"AND frs_package.package_id=filemodule_monitor.filemodule_id ".
-			"AND filemodule_monitor.user_id='".user_getid()."' ORDER BY group_name DESC";
+		$sql="SELECT groups.group_name,groups.unix_group_name,groups.group_id,frs_package.name,filemodule_monitor.filemodule_id 
+FROM groups,filemodule_monitor,frs_package 
+WHERE groups.group_id=frs_package.group_id AND groups.status = 'A' 
+AND frs_package.package_id=filemodule_monitor.filemodule_id 
+AND filemodule_monitor.user_id='".user_getid()."' ORDER BY group_name DESC";
 		$result=db_query($sql);
 		$rows=db_numrows($result);
 		if (!$result || $rows < 1) {

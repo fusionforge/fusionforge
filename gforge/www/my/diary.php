@@ -64,17 +64,17 @@ if (!session_loggedin()) {
 		} else if (getStringFromRequest('add')) {
 			//inserting a new diary entry
 
-			$sql="INSERT INTO user_diary (user_id,date_posted,summary,details,is_public) VALUES ".
-			"('". user_getid() ."','". time() ."','". htmlspecialchars($summary) ."','". htmlspecialchars($details) ."','$is_public')";
+			$sql="INSERT INTO user_diary (user_id,date_posted,summary,details,is_public) VALUES 
+('". user_getid() ."','". time() ."','". htmlspecialchars($summary) ."','". htmlspecialchars($details) ."','$is_public')";
 			$res=db_query($sql);
 			if ($res && db_affected_rows($res) > 0) {
 				$feedback .= _('Item Added');
 				if ($is_public) {
 
 					//send an email if users are monitoring
-					$sql="SELECT users.email from user_diary_monitor,users ".
-					"WHERE user_diary_monitor.user_id=users.user_id ".
-					"AND user_diary_monitor.monitored_user='". user_getid() ."'";
+					$sql="SELECT users.email from user_diary_monitor,users 
+WHERE user_diary_monitor.user_id=users.user_id 
+AND user_diary_monitor.monitored_user='". user_getid() ."'";
 
 					$result=db_query($sql);
 					$rows=db_numrows($result);
