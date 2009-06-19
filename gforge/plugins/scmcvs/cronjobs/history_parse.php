@@ -93,8 +93,8 @@ function process_day($day_begin, $day_end){
 	$month_string = sprintf( "%04d%02d", $year, $month );
 
 	if($verbose) {
-		$err .= "Parsing cvs logs looking for traffic on day $day, " .
-		"month $month, year $year.\n";
+		$err .= "Parsing cvs logs looking for traffic on day $day, 
+month $month, year $year.\n";
 	}
 
 	$rollback = false;
@@ -179,8 +179,8 @@ function process_day($day_begin, $day_end){
 				}
 			} elseif ( $time_parsed > $day_end ) {
 				if ( $verbose >= 2 ) {
-					$err .= "Short circuting execution, parsed date " .
-						"exceeded current threshold.\n";
+					$err .= "Short circuting execution, parsed date 
+exceeded current threshold.\n";
 				}
 				break;
 			}

@@ -227,10 +227,11 @@ class CVSPlugin extends SCM {
 		}
 		
 		if ($project->usesPlugin($this->name)) {
-			$result = db_query("
+			$result = db_query_params ('
 				SELECT sum(commits) AS commits, sum(adds) AS adds
 				FROM stats_cvs_group
-				WHERE group_id='$group_id'");
+				WHERE group_id=$1',
+			array($group_id));
 			$commit_num = db_result($result,0,'commits');
 			$add_num    = db_result($result,0,'adds');
 			if (!$commit_num) {

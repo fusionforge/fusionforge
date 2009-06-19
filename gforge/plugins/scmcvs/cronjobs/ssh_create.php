@@ -29,10 +29,11 @@ require $gfcommon.'include/cron_utils.php';
 
 $err='';
 
-$res=db_query("SELECT user_name,user_id,authorized_keys 
+$res=db_query_params ('SELECT user_name,user_id,authorized_keys 
 	FROM users 
 	WHERE authorized_keys != ''
-	AND status='A'");
+	AND status=$1',
+			array('A'));
 
 for ($i=0; $i<db_numrows($res); $i++) {
 

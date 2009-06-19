@@ -35,7 +35,9 @@ if ($sys_use_ftpuploads) {
 	//
 	//	Add the groups from the gforge database
 	//
-	$res=db_query("SELECT group_id,unix_group_name FROM groups WHERE status='A' AND type_id='1'");
+	$res=db_query_params ('SELECT group_id,unix_group_name FROM groups WHERE status=$1 AND type_id=$2',
+			array('A',
+				'1'));
 	for($i = 0; $i < db_numrows($res); $i++) {
 	    $groups[] = db_result($res,$i,'unix_group_name');
 	}

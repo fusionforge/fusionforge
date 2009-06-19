@@ -195,12 +195,12 @@ function add_cvstracker($unix_group_name) {
 		$content = "\n# BEGIN added by gforge-plugin-cvstracker";
 		if ( $cvs_binary_version == "1.11" ) {
 			$content .= "\nALL ( php -q -d include_path=".ini_get('include_path').
-				" ".$sys_plugins_path."/cvstracker/bin/post.php".
-				" ".$unix_group_name." %{sVv} )";
+				" ".$sys_plugins_path."/cvstracker/bin/post.php
+ ".$unix_group_name." %{sVv} )";
 		} else { //it's version 1.12
 			$content .= "\nALL ( php -q -d include_path=".ini_get('include_path').
-				" ".$sys_plugins_path."/cvstracker/bin/post.php".
-				" %r %p %{sVv} )";
+				" ".$sys_plugins_path."/cvstracker/bin/post.php
+ %r %p %{sVv} )";
 		}
 		$content .= "\n# END added by gforge-plugin-cvstracker";
 
@@ -281,12 +281,14 @@ function update_cvs_repositories() {
 	global $cvsdir_prefix;
 	global $err;
 
-	$res = db_query("select groups.group_id,groups.unix_group_name,groups.enable_anonscm,groups.enable_pserver".
-		" FROM groups, plugins, group_plugin".
-		" WHERE groups.status != 'P' ".
-		" AND groups.group_id=group_plugin.group_id ".
-		" AND group_plugin.plugin_id=plugins.plugin_id ".
-		" AND plugins.plugin_name='scmcvs'");
+	$res = db_query_params ('select groups.group_id,groups.unix_group_name,groups.enable_anonscm,groups.enable_pserver
+ FROM groups, plugins, group_plugin
+ WHERE groups.status != $1 
+ AND groups.group_id=group_plugin.group_id 
+ AND group_plugin.plugin_id=plugins.plugin_id 
+ AND plugins.plugin_name=$2',
+			array('P',
+				'scmcvs'));
 	
 	for($i = 0; $i < db_numrows($res); $i++) {
 		/*
@@ -358,7 +360,8 @@ function update_cvs_repositories() {
 	//
         // Move CVS trees for deleted groups
         //
-        $res8 = db_query("SELECT unix_group_name FROM deleted_groups WHERE isdeleted = 0;");
+        $res8 = db_query_params ('SELECT unix_group_name FROM deleted_groups WHERE isdeleted = 0;',
+			array());
         $err .= db_error();
         $rows    = db_numrows($res8);
         for($k = 0; $k < $rows; $k++) {

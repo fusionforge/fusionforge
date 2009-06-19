@@ -51,14 +51,18 @@ if (util_is_root_dir($groupdir_prefix)) {
 //	Get the users' unix_name and password out of the database
 //   ONLY USERS WITH CVS READ AND COMMIT PRIVS ARE ADDED
 //
-$res = db_query("SELECT distinct users.user_name,users.unix_pw,users.unix_uid,users.unix_gid,users.user_id
+$res = db_query_params ('SELECT distinct users.user_name,users.unix_pw,users.unix_uid,users.unix_gid,users.user_id
 	FROM users,user_group,groups
 	WHERE users.user_id=user_group.user_id 
 	AND user_group.group_id=groups.group_id
-	AND groups.status='A'
-	AND user_group.cvs_flags IN ('0','1')
-	AND users.status='A'
-	ORDER BY users.user_id ASC");
+	AND groups.status=$1
+	AND user_group.cvs_flags IN ($2,$3)
+	AND users.status=$4
+	ORDER BY users.user_id ASC',
+			array('A',
+				'0',
+				'1',
+				'A'));
 $err .= db_error();
 
 $gforge_users    =& util_result_column_to_array($res,'user_name');
@@ -215,7 +219,9 @@ $shadow_contents .= "\n#GFORGEEND\n";
 $group_orig = file("/etc/group");
 
 //	Add the groups from the gforge database
-$group_res = db_query("SELECT group_id, unix_group_name, (is_public=1 AND enable_anonscm=1 AND type_id=1) AS enable_pserver FROM groups WHERE status='A' AND type_id='1'");
+$group_res = db_query_params ('SELECT group_id, unix_group_name, (is_public=1 AND enable_anonscm=1 AND type_id=1) AS enable_pserver FROM groups WHERE status=$1 AND type_id=$2',
+			array('A',
+				'1'));
 $err .= db_error();
 
 $gforge_groups = array();
@@ -276,13 +282,17 @@ for ($i = 0; $i < count($gforge_groups); $i++) {
 	$project = &group_get_object($group_id);
 	$enable_pserver = (db_result($group_res, $i, 'enable_pserver') == 't');	
 
-	$resusers = db_query("SELECT user_name 
+	$resusers = db_query_params ('SELECT user_name 
 		FROM users,user_group,groups 
 		WHERE groups.group_id=user_group.group_id 
 		AND users.user_id=user_group.user_id
-		AND user_group.cvs_flags IN ('0','1')
-		AND users.status='A'
-		AND groups.unix_group_name='".$group_name."'");
+		AND user_group.cvs_flags IN ($1,$2)
+		AND users.status=$3
+.$4."'',
+			array('0',
+				'1',
+				'A',
+				$group_name));
 	$gmembers = util_result_column_to_array($resusers,'user_name');
 	if ($enable_pserver) $gmembers[] = 'anonymous';
 	if (!$project->enableAnonSCM()) {
