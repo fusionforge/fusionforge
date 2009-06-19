@@ -72,8 +72,8 @@ if (session_loggedin()) {
 	   			$new_id=$f->getID();
 				$sanitizer = new TextSanitizer();
 				$details = $sanitizer->SanitizeHtml($details);
-				$sql="INSERT INTO news_bytes (group_id,submitted_by,is_approved,post_date,forum_id,summary,details) ".
-					" VALUES ($1, $2, $3, $4, $5, $6, $7)";
+				$sql="INSERT INTO news_bytes (group_id,submitted_by,is_approved,post_date,forum_id,summary,details) 
+ VALUES ($1, $2, $3, $4, $5, $6, $7)";
 				$result=db_query_params($sql,
 					array($group_id, user_getid(), 0, time(), $new_id, htmlspecialchars($summary), $details));
 	   			if (!$result) {

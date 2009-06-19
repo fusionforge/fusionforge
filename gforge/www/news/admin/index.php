@@ -68,7 +68,8 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 			}
 
 			//foundry stuff - remove this news from the foundry so it has to be re-approved by the admin
-			db_query("DELETE FROM foundry_news WHERE news_id='$id'");
+			db_query_params ('DELETE FROM foundry_news WHERE news_id=$1',
+			array($id));
 
 			if (!$summary) {
 				$summary='(none)';
@@ -79,8 +80,8 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 			
 			$sanitizer = new TextSanitizer();
 			$details = $sanitizer->SanitizeHtml($details);
-			$sql="UPDATE news_bytes SET is_approved='$status', summary='".htmlspecialchars($summary)."', ".
-				"details='".$details."' WHERE id='$id' AND group_id='$group_id'";
+			$sql="UPDATE news_bytes SET is_approved='$status', summary='".htmlspecialchars($summary)."', 
+details='".$details."' WHERE id='$id' AND group_id='$group_id'";
 			$result=db_query($sql);
 
 			if (!$result || db_affected_rows($result) < 1) {
@@ -198,8 +199,8 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 				*/
 				$sanitizer = new TextSanitizer();
 				$details = $sanitizer->SanitizeHtml($details);
-				$sql="UPDATE news_bytes SET is_approved='1', post_date='".time()."', ".
-					"summary='".htmlspecialchars($summary)."', details='".$details."' WHERE id='$id'";
+				$sql="UPDATE news_bytes SET is_approved='1', post_date='".time()."', 
+summary='".htmlspecialchars($summary)."', details='".$details."' WHERE id='$id'";
 				$result=db_query($sql);
 				if (!$result || db_affected_rows($result) < 1) {
 					$feedback .= _('Error On Update:');
@@ -230,9 +231,9 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 				Move msg to rejected status
 			*/
 			$news_id = getArrayFromRequest('news_id');
-			$sql="UPDATE news_bytes "
-			     ."SET is_approved='2' "
-			     ."WHERE id IN ('".implode("','",$news_id)."')";
+			$sql="UPDATE news_bytes 
+SET is_approved='2' 
+WHERE id IN ('".implode("','",$news_id)."')";
 			$result=db_query($sql);
 			if (!$result || db_affected_rows($result) < 1) {
 				$feedback .= _('Error On Update:');
@@ -250,9 +251,9 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 			Show the submit form
 		*/
 
-		$sql="SELECT groups.unix_group_name,groups.group_id,news_bytes.* ".
-			"FROM news_bytes,groups WHERE id='$id' ".
-			"AND news_bytes.group_id=groups.group_id ";
+		$sql="SELECT groups.unix_group_name,groups.group_id,news_bytes.* 
+FROM news_bytes,groups WHERE id='$id' 
+AND news_bytes.group_id=groups.group_id ";
 		$result=db_query($sql);
 		if (db_numrows($result) < 1) {
 			exit_error(_('Error'), _('NewsByte not found'));
