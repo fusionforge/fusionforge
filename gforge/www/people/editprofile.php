@@ -33,8 +33,8 @@ if (session_loggedin()) {
 			exit_form_double_submit();
 		}
 		
-		$sql="UPDATE users SET people_view_skills='$people_view_skills'".
-			"WHERE user_id='".user_getid()."'";
+		$sql="UPDATE users SET people_view_skills='$people_view_skills'
+WHERE user_id='".user_getid()."'";
 		$result=db_query($sql);
 		if (!$result || db_affected_rows($result) < 1) {
 			form_release_key(getStringFromRequest("form_key"));
@@ -79,8 +79,8 @@ if (session_loggedin()) {
 			if (db_numrows($result) >= 1) {
 				$feedback .= '';	/* don't tell them anything! */
 			} else {		  
-				$sql = "INSERT into skills_data (user_id, type, title, start, finish, keywords) values".
-					   "(".user_getid().",".$type.",'".$title."',".$start.",".$finish.",'".$keywords."')";
+				$sql = "INSERT into skills_data (user_id, type, title, start, finish, keywords) values
+(".user_getid().",".$type.",'".$title."',".$start.",".$finish.",'".$keywords."')";
 			   
 				$result=db_query($sql);
 				if (!$result || db_affected_rows($result) < 1) {
@@ -122,9 +122,9 @@ if (session_loggedin()) {
 
 					$keywords[$i] = str_replace("\n", " ", $keywords[$i]);  /* strip out any backspace characters. */
 					$title[$i] = str_replace("\n", " ", $title[$i]);
-					$sql="UPDATE skills_data SET type='$type[$i]',title='$title[$i]',start='$startY[$i]$startM[$i]',".
-						"finish='$endY[$i]$endM[$i]',keywords='$keywords[$i]' ".
-						"WHERE skills_data_id='$skill_edit[$i]'";
+					$sql="UPDATE skills_data SET type='$type[$i]',title='$title[$i]',start='$startY[$i]$startM[$i]',
+finish='$endY[$i]$endM[$i]',keywords='$keywords[$i]' 
+WHERE skills_data_id='$skill_edit[$i]'";
 
 					$result=db_query($sql);
 					if (!$result || db_affected_rows($result) < 1) {
@@ -293,34 +293,33 @@ if (session_loggedin()) {
 
 				$HTML->multiTableRow('',$cell_data,TRUE);
 
-		echo	"<tr>".
-					"<td>".html_build_select_box($skills, "type", 1, false, "")."</td>".
-					"<td>".html_build_select_box_from_arrays($monthArrayVals,$monthArray, "startM", date("m"), false, "").
-						html_build_select_box_from_arrays($yearArray,$yearArray, "startY", 0, false, "")."</td>".
-					"<td>".html_build_select_box_from_arrays($monthArrayVals,$monthArray, "endM", date("m"), false, "").
-						html_build_select_box_from_arrays($yearArray,$yearArray, "endY", 0, false, "")."</td>".
-				"</tr>".
-			"</table>".
-				
-				"<table border=0 >";
+		echo	"<tr>
+<td>".html_build_select_box($skills, "type", 1, false, "")."</td>
+<td>".html_build_select_box_from_arrays($monthArrayVals,$monthArray, "startM", date("m"), false, "").
+						html_build_select_box_from_arrays($yearArray,$yearArray, "startY", 0, false, "")."</td>
+<td>".html_build_select_box_from_arrays($monthArrayVals,$monthArray, "endM", date("m"), false, "").
+						html_build_select_box_from_arrays($yearArray,$yearArray, "endY", 0, false, "")."</td>
+</tr>
+</table>
+<table border=0 >";
 
 				$cell_data = array();
 				$cell_data[] = array(_('Title (max 100 characters)'));
 				echo $HTML->multiTableRow('',$cell_data,TRUE);
 
-				echo "<tr>".
-						"<td><input type=text name=\"title\" size=100></td>".
-					"</tr>";
+				echo "<tr>
+<td><input type=text name=\"title\" size=100></td>
+</tr>";
 				$cell_data = array();
 				$cell_data[] = array(_('Keywords (max 255 characters)'));
 				echo $HTML->multiTableRow('',$cell_data,TRUE);
-				echo "<tr>".
-						"<td><textarea name=\"keywords\" rows=\"3\" cols=\"85\" wrap=\"soft\"></textarea></td>".
-					"</tr>".
-					"<tr>".
-						"<td><input type=submit name=\"AddSkill\" value=\""._('Add This Skill')."\"></td>".
-					"</tr>".
-				 "</table>";
+				echo "<tr>
+<td><textarea name=\"keywords\" rows=\"3\" cols=\"85\" wrap=\"soft\"></textarea></td>
+</tr>
+<tr>
+<td><input type=submit name=\"AddSkill\" value=\""._('Add This Skill')."\"></td>
+</tr>
+</table>";
 		
 		echo '</form>';
 		

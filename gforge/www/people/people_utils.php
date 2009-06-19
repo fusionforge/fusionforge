@@ -99,8 +99,8 @@ function people_add_to_skill_inventory($skill_id,$skill_level_id,$skill_year_id)
 		$result=db_query($sql);
 		if (!$result || db_numrows($result) < 1) {
 			//skill not already in inventory
-			$sql="INSERT INTO people_skill_inventory (user_id,skill_id,skill_level_id,skill_year_id) ".
-				"VALUES ('". user_getid() ."','$skill_id','$skill_level_id','$skill_year_id')";
+			$sql="INSERT INTO people_skill_inventory (user_id,skill_id,skill_level_id,skill_year_id) 
+VALUES ('". user_getid() ."','$skill_id','$skill_level_id','$skill_year_id')";
 			$result=db_query($sql);
 			if (!$result || db_affected_rows($result) < 1) {
 				$feedback .= _('ERROR inserting into skill inventory');
@@ -118,12 +118,12 @@ function people_add_to_skill_inventory($skill_id,$skill_level_id,$skill_year_id)
 }
 
 function people_show_skill_inventory($user_id) {
-	$sql="SELECT people_skill.name AS skill_name, people_skill_level.name AS level_name, people_skill_year.name AS year_name ".
-		"FROM people_skill_year,people_skill_level,people_skill,people_skill_inventory ".
-		"WHERE people_skill_year.skill_year_id=people_skill_inventory.skill_year_id ".
-		"AND people_skill_level.skill_level_id=people_skill_inventory.skill_level_id ".
-		"AND people_skill.skill_id=people_skill_inventory.skill_id ".
-		"AND people_skill_inventory.user_id='$user_id'";
+	$sql="SELECT people_skill.name AS skill_name, people_skill_level.name AS level_name, people_skill_year.name AS year_name 
+FROM people_skill_year,people_skill_level,people_skill,people_skill_inventory 
+WHERE people_skill_year.skill_year_id=people_skill_inventory.skill_year_id 
+AND people_skill_level.skill_level_id=people_skill_inventory.skill_level_id 
+AND people_skill.skill_id=people_skill_inventory.skill_id 
+AND people_skill_inventory.user_id='$user_id'";
 	$result=db_query($sql);
 
 	$title_arr=array();
@@ -211,8 +211,8 @@ function people_add_to_job_inventory($job_id,$skill_id,$skill_level_id,$skill_ye
 		$result=db_query($sql);
 		if (!$result || db_numrows($result) < 1) {
 			//skill isn't already in this inventory
-			$sql="INSERT INTO people_job_inventory (job_id,skill_id,skill_level_id,skill_year_id) ".
-				"VALUES ('$job_id','$skill_id','$skill_level_id','$skill_year_id')";
+			$sql="INSERT INTO people_job_inventory (job_id,skill_id,skill_level_id,skill_year_id) 
+VALUES ('$job_id','$skill_id','$skill_level_id','$skill_year_id')";
 			$result=db_query($sql);
 			if (!$result || db_affected_rows($result) < 1) {
 				$feedback .= _('ERROR inserting into skill inventory');
@@ -230,12 +230,12 @@ function people_add_to_job_inventory($job_id,$skill_id,$skill_level_id,$skill_ye
 }
 
 function people_show_job_inventory($job_id) {
-	$sql="SELECT people_skill.name AS skill_name, people_skill_level.name AS level_name, people_skill_year.name AS year_name ".
-		"FROM people_skill_year,people_skill_level,people_skill,people_job_inventory ".
-		"WHERE people_skill_year.skill_year_id=people_job_inventory.skill_year_id ".
-		"AND people_skill_level.skill_level_id=people_job_inventory.skill_level_id ".
-		"AND people_skill.skill_id=people_job_inventory.skill_id ".
-		"AND people_job_inventory.job_id='$job_id'";
+	$sql="SELECT people_skill.name AS skill_name, people_skill_level.name AS level_name, people_skill_year.name AS year_name 
+FROM people_skill_year,people_skill_level,people_skill,people_job_inventory 
+WHERE people_skill_year.skill_year_id=people_job_inventory.skill_year_id 
+AND people_skill_level.skill_level_id=people_job_inventory.skill_level_id 
+AND people_skill.skill_id=people_job_inventory.skill_id 
+AND people_job_inventory.job_id='$job_id'";
 	$result=db_query($sql);
 
 	$title_arr=array();
@@ -363,18 +363,18 @@ function people_show_category_table() {
 	$return = $GLOBALS['HTML']->listTableTop ($title_arr);
 
 /*
-	$sql="SELECT pjc.category_id, pjc.name, count(*) as total ". 
-		"FROM people_job_category pjc,people_job pj ".
-		"WHERE pjc.category_id=pj.category_id ".
-		"AND pj.status_id=1 ".
-		"GROUP BY pjc.category_id, pjc.name";
+	$sql="SELECT pjc.category_id, pjc.name, count(*) as total 
+FROM people_job_category pjc,people_job pj 
+WHERE pjc.category_id=pj.category_id 
+AND pj.status_id=1 
+GROUP BY pjc.category_id, pjc.name";
 */
-	$sql="SELECT pjc.category_id, pjc.name, COUNT(pj.category_id) AS total ". 
-		"FROM people_job_category pjc LEFT JOIN people_job pj ".
-                "ON pjc.category_id=pj.category_id ".
-                "WHERE pjc.private_flag=0 ".
-		"AND (pj.status_id=1 OR pj.status_id IS NULL) ".
-		"GROUP BY pjc.category_id, pjc.name";
+	$sql="SELECT pjc.category_id, pjc.name, COUNT(pj.category_id) AS total 
+FROM people_job_category pjc LEFT JOIN people_job pj 
+ON pjc.category_id=pj.category_id 
+WHERE pjc.private_flag=0 
+AND (pj.status_id=1 OR pj.status_id IS NULL) 
+GROUP BY pjc.category_id, pjc.name";
 
 	$result=db_query($sql);
 	$rows=db_numrows($result);
@@ -393,12 +393,12 @@ function people_show_category_table() {
 
 function people_show_project_jobs($group_id) {
 	//show open jobs for this project
-	$sql="SELECT people_job.group_id,people_job.job_id,groups.group_name,groups.unix_group_name,people_job.title,people_job.post_date,people_job_category.name AS category_name ".
-		"FROM people_job,people_job_category,groups ".
-		"WHERE people_job.group_id='$group_id' ".
-		"AND people_job.group_id=groups.group_id ".
-		"AND people_job.category_id=people_job_category.category_id ".
-		"AND people_job.status_id=1 ORDER BY post_date DESC";
+	$sql="SELECT people_job.group_id,people_job.job_id,groups.group_name,groups.unix_group_name,people_job.title,people_job.post_date,people_job_category.name AS category_name 
+FROM people_job,people_job_category,groups 
+WHERE people_job.group_id='$group_id' 
+AND people_job.group_id=groups.group_id 
+AND people_job.category_id=people_job_category.category_id 
+AND people_job.status_id=1 ORDER BY post_date DESC";
 	$result=db_query($sql);
 
 	return people_show_job_list($result);
@@ -406,12 +406,12 @@ function people_show_project_jobs($group_id) {
 
 function people_show_category_jobs($category_id) {
 	//show open jobs for this category
-	$sql="SELECT people_job.group_id,people_job.job_id,groups.unix_group_name,groups.group_name,people_job.title,people_job.post_date,people_job_category.name AS category_name ".
-		"FROM people_job,people_job_category,groups ".
-		"WHERE people_job.category_id='$category_id' ".
-		"AND people_job.group_id=groups.group_id ".
-		"AND people_job.category_id=people_job_category.category_id ".
-		"AND people_job.status_id=1 ORDER BY post_date DESC";
+	$sql="SELECT people_job.group_id,people_job.job_id,groups.unix_group_name,groups.group_name,people_job.title,people_job.post_date,people_job_category.name AS category_name 
+FROM people_job,people_job_category,groups 
+WHERE people_job.category_id='$category_id' 
+AND people_job.group_id=groups.group_id 
+AND people_job.category_id=people_job_category.category_id 
+AND people_job.status_id=1 ORDER BY post_date DESC";
 	$result=db_query($sql);
 
 	return people_show_job_list($result);

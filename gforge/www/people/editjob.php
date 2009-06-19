@@ -53,8 +53,8 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 			exit_form_double_submit();
 		}
-		$sql="INSERT INTO people_job (group_id,created_by,title,description,post_date,status_id,category_id) ".
-			"VALUES ('$group_id','". user_getid() ."','".htmlspecialchars($title)."','".htmlspecialchars($description)."','".time()."','1','$category_id')";
+		$sql="INSERT INTO people_job (group_id,created_by,title,description,post_date,status_id,category_id) 
+VALUES ('$group_id','". user_getid() ."','".htmlspecialchars($title)."','".htmlspecialchars($description)."','".time()."','1','$category_id')";
 		$result=db_query($sql);
 		if (!$result || db_affected_rows($result) < 1) {
 			$feedback .= _('JOB insert FAILED');
@@ -74,8 +74,8 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 			exit_error(_('error - missing info'),_('Fill in all required fields'));
 		}
 
-		$sql="UPDATE people_job SET title='".htmlspecialchars($title)."',description='".htmlspecialchars($description)."',status_id='$status_id',category_id='$category_id' ".
-			"WHERE job_id='$job_id' AND group_id='$group_id'";
+		$sql="UPDATE people_job SET title='".htmlspecialchars($title)."',description='".htmlspecialchars($description)."',status_id='$status_id',category_id='$category_id' 
+WHERE job_id='$job_id' AND group_id='$group_id'";
 		$result=db_query($sql);
 		if (!$result || db_affected_rows($result) < 1) {
 			$feedback = _('JOB update FAILED');
@@ -110,8 +110,8 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 		}
 
 		if (people_verify_job_group($job_id,$group_id)) {
-			$sql="UPDATE people_job_inventory SET skill_level_id='$skill_level_id',skill_year_id='$skill_year_id' ".
-				"WHERE job_id='$job_id' AND job_inventory_id='$job_inventory_id'";
+			$sql="UPDATE people_job_inventory SET skill_level_id='$skill_level_id',skill_year_id='$skill_year_id' 
+WHERE job_id='$job_id' AND job_inventory_id='$job_inventory_id'";
 			$result=db_query($sql);
 			if (!$result || db_affected_rows($result) < 1) {
 				$feedback .= _('JOB skill update FAILED');
