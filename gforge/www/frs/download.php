@@ -34,13 +34,14 @@ require_once $gfcommon.'frs/FRSFile.class.php';
 $arr=explode('/',getStringFromServer('REQUEST_URI'));
 $file_id=$arr[3];
 
-$res=db_query("SELECT frs_file.filename,frs_package.is_public,frs_package.package_id,
+$res=db_query_params ('SELECT frs_file.filename,frs_package.is_public,frs_package.package_id,
 	frs_file.file_id,groups.unix_group_name,groups.group_id,frs_release.release_id
 	FROM frs_package,frs_release,frs_file,groups
 	WHERE frs_release.release_id=frs_file.release_id
 	AND groups.group_id=frs_package.group_id
 	AND frs_release.package_id=frs_package.package_id
-	AND frs_file.file_id='$file_id'");
+	AND frs_file.file_id=$1',
+			array($file_id));
 
 if (db_numrows($res) < 1) {
 	Header("Status: 404");

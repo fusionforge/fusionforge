@@ -347,7 +347,8 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 
 <?php
 	// Get a list of files associated with this release
-	$res=db_query("SELECT * FROM frs_file WHERE release_id='$release_id'");
+	$res=db_query_params ('SELECT * FROM frs_file WHERE release_id=$1',
+			array($release_id));
 	$rows=db_numrows($res);
 	if($rows < 1) {
 		print("<span class=\"error\">"._('No Files In This Release')."</span>\n");

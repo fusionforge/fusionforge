@@ -117,8 +117,9 @@ if (getStringFromRequest('submit')) {
 
 frs_admin_header(array('title'=>_('Release Edit/File Releases'),'group'=>$group_id));
 
-$res=db_query("SELECT status_id,package_id,name AS package_name 
-	FROM frs_package WHERE group_id='$group_id'");
+$res=db_query_params ('SELECT status_id,package_id,name AS package_name 
+	FROM frs_package WHERE group_id=$1',
+			array($group_id));
 $rows=db_numrows($res);
 if ($res && $rows > 0) {
 	echo '<h3>'._('QRS').'</h3>';
