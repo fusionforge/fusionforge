@@ -19,11 +19,13 @@ if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 } else {
 	$user_name = $user->getRealName();
 	$unix_name = $user->getUnixName();
-	$result = db_query("SELECT groups.unix_group_name "
-	                . "FROM groups,user_group "
-	                . "WHERE groups.group_id=user_group.group_id "
-	                . "AND user_group.user_id=$user_id"
-	                . "AND groups.status='A'");
+	$result = db_query_params ('SELECT groups.unix_group_name 
+FROM groups,user_group 
+WHERE groups.group_id=user_group.group_id 
+AND user_group.user_id=$1
+AND groups.status=$2',
+			array($user_id,
+				'A'));
         $rows=db_numrows($result);
 	$channels="";
 	if (!$result || $rows < 1) {
