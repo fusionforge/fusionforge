@@ -150,10 +150,11 @@ class CCasePlugin extends SCM {
 
 	function display_stats ($params) {
 		$group_id = $params['group_id'] ;
-		$result = db_query("
+		$result = db_query_params ('
 			SELECT commits, adds
 			FROM plugin_scmccase_stats
-			WHERE group_id='$group_id'");
+			WHERE group_id=$1',
+			array($group_id));
 		$commit_num = db_result($result,0,0);
 		$add_num    = db_result($result,0,1);
 		if (!$commit_num) {
