@@ -119,10 +119,10 @@ function parseConfig($Config)
 function addArtifactLog($Config, $GroupId, $Num)
 {
 	$return = array();
-	$Query = "SELECT * from artifact,artifact_group_list WHERE ".
-		"artifact.group_artifact_id=artifact_group_list.group_artifact_id ".
-		"AND artifact_group_list.group_id=".
-		"'".$GroupId."' AND artifact.artifact_id='".$Num."'";
+	$Query = "SELECT * from artifact,artifact_group_list WHERE 
+artifact.group_artifact_id=artifact_group_list.group_artifact_id 
+AND artifact_group_list.group_id=
+'".$GroupId."' AND artifact.artifact_id='".$Num."'";
 	$Result = db_query($Query);
 	$Rows = db_numrows($Result);
 	if ($Rows == 0) {
@@ -131,19 +131,19 @@ function addArtifactLog($Config, $GroupId, $Num)
 
 	if ($Rows == 1) {
 		db_begin();
-		$Query = "INSERT INTO plugin_cvstracker_data_artifact ".
-		"(kind, group_artifact_id) VALUES ".
-		"('0', '".$Num."')";
+		$Query = "INSERT INTO plugin_cvstracker_data_artifact 
+(kind, group_artifact_id) VALUES 
+('0', '".$Num."')";
 		$DBRes = db_query($Query);
 		$HolderID= db_insertid($DBRes,'plugin_cvstracker_data_artifact','id');
 		if (!$DBRes || !$HolderID) {
 			$return['Error']='Problems with Artifact $Num: '.db_error($DBRes);
 			db_rollback();
 		} else {
-			$Query = "INSERT INTO plugin_cvstracker_data_master ".
-				"(holder_id, cvs_date, log_text, file, prev_version, ".
-				"actual_version, author)".
-				" VALUES ('".$HolderID."','".$Config['CvsDate']."','".$Config['Log'].
+			$Query = "INSERT INTO plugin_cvstracker_data_master 
+(holder_id, cvs_date, log_text, file, prev_version, 
+actual_version, author)
+ VALUES ('".$HolderID."','".$Config['CvsDate']."','".$Config['Log'].
 				"','".$Config['FileName']."','".
 				$Config['PrevVersion']."','".
 				$Config['ActualVersion']."','".$Config['UserName']."')";
@@ -174,11 +174,11 @@ function addArtifactLog($Config, $GroupId, $Num)
 function addTaskLog($Config, $GroupId, $Num)
 {
 	$return = array();
-	$Query = "SELECT * from project_task,project_group_list WHERE ".
-		"project_task.group_project_id=".
-		"project_group_list.group_project_id ".
-		"AND project_task.project_task_id='".$Num."' AND ".
-		" project_group_list.group_id='".$GroupId."'";
+	$Query = "SELECT * from project_task,project_group_list WHERE 
+project_task.group_project_id=
+project_group_list.group_project_id 
+AND project_task.project_task_id='".$Num."' AND 
+ project_group_list.group_id='".$GroupId."'";
 	$Result = db_query($Query);
 	$Rows = db_numrows($Result);
 	if ($Rows == 0) {
@@ -186,19 +186,19 @@ function addTaskLog($Config, $GroupId, $Num)
 	}
 	if ($Rows == 1) {
 		db_begin();
-		$Query = "INSERT INTO plugin_cvstracker_data_artifact ".
-		"(kind, project_task_id) VALUES ".
-		"('1', '".$Num."')";
+		$Query = "INSERT INTO plugin_cvstracker_data_artifact 
+(kind, project_task_id) VALUES 
+('1', '".$Num."')";
 		$DBRes = db_query($Query);
 		$HolderID= db_insertid($DBRes,'plugin_cvstracker_data_artifact','id');
 		if (!$DBRes || !$HolderID) {
 			$return['Error']='Problems with Task $Num: '.db_error($DBRes);
 			db_rollback();
 		} else {
-			$Query = "INSERT INTO plugin_cvstracker_data_master ".
-				"(holder_id, cvs_date, log_text, file, prev_version, ".
-				"actual_version, author)".
-				" VALUES ('".$HolderID."','".$Config['CvsDate']."','".$Config['Log'].
+			$Query = "INSERT INTO plugin_cvstracker_data_master 
+(holder_id, cvs_date, log_text, file, prev_version, 
+actual_version, author)
+ VALUES ('".$HolderID."','".$Config['CvsDate']."','".$Config['Log'].
 				"','".$Config['FileName'].
 				"','".$Config['PrevVersion']."','".
 				$Config['ActualVersion']."','".$Config['UserName']."')";

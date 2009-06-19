@@ -173,13 +173,13 @@ class cvstrackerPlugin extends Plugin {
 			fwrite($FOut, "# BEGIN added by gforge-plugin-cvstracker\n");
 			if ( $cvs_binary_version == "1.12" ) {
 				$Line = "ALL ( php -q -d include_path=".ini_get('include_path').
-					" ".$sys_plugins_path."/cvstracker/bin/post.php".
-					" %r %p %{sVv} )\n";
+					" ".$sys_plugins_path."/cvstracker/bin/post.php
+ %r %p %{sVv} )\n";
 			}
 			if ( $cvs_binary_version == "1.11") {
 				$Line = "ALL ( php -q -d include_path=".ini_get('include_path').
-					" ".$sys_plugins_path."/cvstracker/bin/post.php".
-					" ".$group->getUnixName()." %{sVv} )\n";
+					" ".$sys_plugins_path."/cvstracker/bin/post.php
+ ".$group->getUnixName()." %{sVv} )\n";
 			}
 			fwrite($FOut,$Line);
 			fwrite($FOut, "# END added by gforge-plugin-cvstracker\n");
@@ -199,12 +199,12 @@ class cvstrackerPlugin extends Plugin {
 		$array[]="# BEGIN added by gforge-plugin-cvstracker\n";
 		if ( $cvs_binary_version == "1.11" ) {
 				$array[] = "ALL ( php -q -d include_path=".ini_get('include_path').
-					" ".$sys_plugins_path."/cvstracker/bin/post.php".
-					" ".$group->getUnixName()." %{sVv} )\n";
+					" ".$sys_plugins_path."/cvstracker/bin/post.php
+ ".$group->getUnixName()." %{sVv} )\n";
 		}else { //it's version 1.12
 			$array[] = "ALL ( php -q -d include_path=".ini_get('include_path').
-			" ".$sys_plugins_path."/cvstracker/bin/post.php".
-			" %r %p %{sVv} )\n";
+			" ".$sys_plugins_path."/cvstracker/bin/post.php
+ %r %p %{sVv} )\n";
 		}			
 		$array[]= "# END added by gforge-plugin-cvstracker\n";
 		
@@ -287,19 +287,19 @@ class cvstrackerPlugin extends Plugin {
 				$group->setPluginUse ( $this->name, false );
 			}
 		} elseif ($hookname == "artifact_extra_detail") {
-			$Query="SELECT * FROM plugin_cvstracker_data_master,".
-				"plugin_cvstracker_data_artifact".
-				" WHERE plugin_cvstracker_data_artifact.group_artifact_id='$aid' ".
-				" AND plugin_cvstracker_data_master.holder_id=".
-				" plugin_cvstracker_data_artifact.id ORDER BY cvs_date";
+			$Query="SELECT * FROM plugin_cvstracker_data_master,
+plugin_cvstracker_data_artifact
+ WHERE plugin_cvstracker_data_artifact.group_artifact_id='$aid' 
+ AND plugin_cvstracker_data_master.holder_id=
+ plugin_cvstracker_data_artifact.id ORDER BY cvs_date";
 			$this->getCommitEntries($Query, $group_id);
 		} elseif ($hookname == "task_extra_detail") {
-			$Query="SELECT * FROM plugin_cvstracker_data_master,".
-				"plugin_cvstracker_data_artifact".
-				" WHERE plugin_cvstracker_data_artifact.project_task_id='".
-				$params['task_id']."' ".
-				" AND plugin_cvstracker_data_master.holder_id=".
-				" plugin_cvstracker_data_artifact.id ORDER BY cvs_date";
+			$Query="SELECT * FROM plugin_cvstracker_data_master,
+plugin_cvstracker_data_artifact
+ WHERE plugin_cvstracker_data_artifact.project_task_id='".
+				$params['task_id']."' 
+ AND plugin_cvstracker_data_master.holder_id=
+ plugin_cvstracker_data_artifact.id ORDER BY cvs_date";
 			$this->getCommitEntries($Query, $group_id);
 		} elseif ($hookname == "update_cvs_repository") {
 			$Group = group_get_object($params["group_id"]);
