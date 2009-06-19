@@ -16,8 +16,10 @@ $func = getStringFromRequest ('func') ;
 if ($func == 'addlabel') {
 	$label_name = addslashes (getStringFromRequest ('label_name')) ;
 	$label_text = addslashes (getStringFromRequest ('label_text')) ;
-	$res = db_query("INSERT INTO plugin_projectlabels_labels (label_name, label_text)
-                         VALUES('$label_name','$label_text')");
+	$res = db_query_params ('INSERT INTO plugin_projectlabels_labels (label_name, label_text)
+                         VALUES($1,$2)',
+			array($label_name,
+				$label_text));
 
 	if (!$res || db_affected_rows($res) < 1) {
 		printf (_('Cannot insert new label: %s'),
@@ -30,14 +32,16 @@ if ($func == 'addlabel') {
 if ($func == 'delete') {
 	db_begin () ;
 	$label_id = getIntFromRequest ('label_id', 0) ;
-	$res = db_query("DELETE FROM plugin_projectlabels_group_labels WHERE label_id=$label_id");
+	$res = db_query_params ('DELETE FROM plugin_projectlabels_group_labels WHERE label_id=$1',
+			array($label_id));
 
 	if (!$res) {
 		printf (_('Cannot delete label: %s'),
 			db_error()) ;
 		db_rollback () ;
 	} else {
-		$res = db_query("DELETE FROM plugin_projectlabels_labels WHERE label_id=$label_id");
+		$res = db_query_params ('DELETE FROM plugin_projectlabels_labels WHERE label_id=$1',
+			array($label_id));
 		
 		if (!$res) {
 			printf (_('Cannot delete label: %s'),
@@ -68,7 +72,9 @@ if ($func == 'addlabeltoproject') {
 }
 if ($func == 'removelabelfromproject') {
 	$label_id = getIntFromRequest ('label_id', 0) ;
-	$res = db_query("DELETE FROM plugin_projectlabels_group_labels WHERE label_id = $label_id AND group_id = $group_id");
+	$res = db_query_params ('DELETE FROM plugin_projectlabels_group_labels WHERE label_id = $1 AND group_id = $2',
+			array($label_id,
+				$group_id));
 
 	if (!$res) {
 		printf (_('Cannot remove label: %s'),
@@ -82,8 +88,11 @@ if ($func == 'editlabel') {
 	$label_id = getIntFromRequest ('label_id', 0) ;
 	$label_name = addslashes (getStringFromRequest ('label_name')) ;
 	$label_text = addslashes (getStringFromRequest ('label_text')) ;
-	$res = db_query("UPDATE plugin_projectlabels_labels SET label_name = '$label_name', label_text = '$label_text'
-		         WHERE label_id=$label_id");
+	$res = db_query_params ('UPDATE plugin_projectlabels_labels SET label_name = $1, label_text = $2
+		         WHERE label_id=$3',
+			array($label_name,
+				$label_text,
+				$label_id));
 	if (!$res || db_affected_rows($res) < 1) {
 		printf (_('Cannot modify label: %s'),
 			db_error()) ;
@@ -93,8 +102,9 @@ if ($func == 'editlabel') {
 }
 if ($func == 'edit') {
 	$label_id = getIntFromRequest ('label_id', 0) ;
-	$res = db_query("SELECT label_id, label_name, label_text FROM plugin_projectlabels_labels
-		         WHERE label_id=$label_id");
+	$res = db_query_params ('SELECT label_id, label_name, label_text FROM plugin_projectlabels_labels
+		         WHERE label_id=$1',
+			array($label_id));
 	$row = db_fetch_array($res) ;
 ?>
 <form name="edit_label" action="<?php echo util_make_url ('/plugins/projectlabels/') ; ?>" method="post">
@@ -116,8 +126,9 @@ if ($func == 'edit') {
 <p>
 <?php 
 
-$res = db_query("SELECT label_id, label_name, label_text FROM plugin_projectlabels_labels
-		 ORDER BY label_name ASC");
+$res = db_query_params ('SELECT label_id, label_name, label_text FROM plugin_projectlabels_labels
+		 ORDER BY label_name ASC',
+			array());
 
 if (db_numrows($res) >= 1) {
 	echo "<h2>"._('Manage labels')."</h2>" ;
