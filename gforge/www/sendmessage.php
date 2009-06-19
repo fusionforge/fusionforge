@@ -38,7 +38,9 @@ if ($touser) {
 		check to see if that user even exists
 		Get their name and email if it does
 	*/
-	$result=db_query("SELECT email,user_name FROM users WHERE user_id='$touser'");
+	$result=db_query_params ('SELECT email,user_name FROM users WHERE user_id=$1',
+			array($touser)) ;
+
 	if (!$result || db_numrows($result) < 1) {
 		exit_error(_('Error'),_('Error - That user does not exist'));
 	}

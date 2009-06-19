@@ -26,7 +26,9 @@ require_once $gfwww.'include/squal_pre.php';
 
 $id = getStringFromRequest('id');
 
-$res=db_query("SELECT * FROM db_images WHERE id='$id'");
+$res=db_query_params ('SELECT * FROM db_images WHERE id=$1',
+			array($id)) ;
+
 
 $filename=db_result($res,0,'filename');
 $type=db_result($res,0,'filetype');
