@@ -28,10 +28,11 @@ require_once $gfwww.'include/pre.php';
 
 $trove_cat_id = getIntFromRequest('trove_cat_id');
 
-$res_cat = db_query("
+$res_cat = db_query_params ('
 	SELECT *
 	FROM trove_cat
-	WHERE trove_cat_id='$trove_cat_id'");
+	WHERE trove_cat_id=$1',
+			array($trove_cat_id));
 
 if (db_numrows($res_cat)<1) {
 	print _('No such trove category');
