@@ -43,10 +43,11 @@ function stats_util_sum_array( $sum, $add ) {
  *	and "special project list" respectively
  */
 function stats_generate_trove_pulldown( $selected_id = 0 ) {
-	$res = db_query("
+	$res = db_query_params ('
 		SELECT trove_cat_id,fullpath
 		FROM trove_cat
-		ORDER BY fullpath");
+		ORDER BY fullpath',
+			array());
 	
 	print '
 		<select name="trovecatid">';
@@ -69,10 +70,11 @@ function stats_generate_trove_pulldown( $selected_id = 0 ) {
 
 function stats_trove_cat_to_name( $trovecatid ) {
 
-	$res = db_query("
+	$res = db_query_params ('
 		SELECT fullpath
 		FROM trove_cat
-		WHERE trove_cat_id = '$trovecatid'");
+		WHERE trove_cat_id = $1',
+			array($trovecatid));
 
 	if ( $row = db_fetch_array($res) ) {
 		return $row["fullpath"];
@@ -86,10 +88,11 @@ function stats_generate_trove_grouplist( $trovecatid ) {
 	
 	$results = array();
 
-	$res = db_query("
+	$res = db_query_params ('
 		SELECT *
 		FROM trove_group_link
-		WHERE trove_cat_id='$trovecatid'");
+		WHERE trove_cat_id=$1',
+			array($trovecatid));
 
 	print db_error( $res );
 
