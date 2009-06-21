@@ -45,22 +45,30 @@ decode()
 			case $strn in
 				*\$*)
 					strns=`echo "$strn" | sed 's/\$./%s/g'` 
-					newstrn="gettext(\"$strns\","
+				#	newstrn="gettext(\"$strns\","
+					newstrn="gettext(\"$strns\""
 					#grep "'$1'.*'$2'" $file | sed "s/.*\(GLOBALS.*('$1'.*'$2',\).*/\1/"| sort -u | while read oldstrn
-					grep "'$1'.*'$2'" $file | sed "s/.*\(GLOBALS\['Language'\].[^(]*('$1'.*'$2',\).*/\1/"| sort -u | while read oldstrn
+					#grep "'$1'.*'$2'" $file | sed "s/.*\(GLOBALS\['Language'\]->getText('$1'.[^']*'$2',\).*/\1/"| sort -u | while read oldstrn
+					#set -x
+					grep "'$1'.*'$2'" $file | sed "s/.*\(GLOBALS\['Language'\]->getText('$1'.[^']*'$2'\).*/\1/"| sort -u | while read oldstrn
 					do
 						#echo "== \$$oldstrn ==> $newstrn =="
 						substitute "$oldstrn" "$newstrn" "$3"
 					done
+					#set +x
 					;;
 				*)
-					newstrn="gettext(\"$strn\")"
+				#	newstrn="gettext(\"$strn\")"
+					newstrn="gettext(\"$strn\""
 					#grep "'$1'.*'$2'" $file | sed "s/.*\(GLOBALS.*('$1'.*'$2')\).*/\1/"| sort -u | while read oldstrn
-					grep "'$1'.*'$2'" $file | sed "s/.*\(GLOBALS\['Language'\].[^(]*('$1'.*'$2')\).*/\1/"| sort -u | while read oldstrn
+					#grep "'$1'.*'$2'" $file | sed "s/.*\(GLOBALS\['Language'\]->getText('$1'.[^']*'$2')\).*/\1/"| sort -u | while read oldstrn
+					#set -x
+					grep "'$1'.*'$2'" $file | sed "s/.*\(GLOBALS\['Language'\]->getText('$1'.[^']*'$2'\).*/\1/"| sort -u | while read oldstrn
 					do
 						#echo "== \$$oldstrn ==> $newstrn =="
 						substitute "$oldstrn" "$newstrn" "$3"
 					done
+					#set +x
 					;;
 				
 			esac
@@ -105,8 +113,8 @@ do
 			echo "======== $file ========"
 		fi
 		found="1"		
+		echo  "-- $key1 -- $key2 --"
 		decode $key1 $key2 $file
-		#echo  "$key1 $key2"
 	done
 	if [ "$found" = "1" ] 
 	then
