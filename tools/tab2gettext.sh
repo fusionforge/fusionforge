@@ -3,6 +3,7 @@
 # This file is used to convert $GLOBALS['Language']->getText('str1','str2') to gettext("English String from tab(str1,str2)")
 # Copyright Christian Bayle <bayle@debian.org> 2009
 # Licenced as GPL v2 or next or Affero GPL to your courtesy
+# Thanks to PK for perl regexp help
 # 
 # Interesting part is to point non translatable strings, that should maybe be modified  before operation
 # not sure it is useable as is as in only replace strings for english.
@@ -25,7 +26,8 @@ substitute()
 	#echo "Converting in $3"
 	echo "+++ $var1 ==> $var2 +++"
 	#perl -pi -e "s/$var1/$var2/g" $3
-	perl -pi -e "s{$var1}{$var2}go" $3
+	#perl -pi -e "s{$var1}{$var2}go" $3
+	perl -pi -e "s{$var1}{$var2}sg" $3
 }
 
 decode()
@@ -44,7 +46,8 @@ decode()
 				*\$*)
 					strns=`echo "$strn" | sed 's/\$./%s/g'` 
 					newstrn="gettext(\"$strns\","
-					grep "'$1'.*'$2'" $file | sed "s/.*\(GLOBALS.*('$1'.*'$2',\).*/\1/"| sort -u | while read oldstrn
+					#grep "'$1'.*'$2'" $file | sed "s/.*\(GLOBALS.*('$1'.*'$2',\).*/\1/"| sort -u | while read oldstrn
+					grep "'$1'.*'$2'" $file | sed "s/.*\(GLOBALS\['Language'\].[^(]*('$1'.*'$2',\).*/\1/"| sort -u | while read oldstrn
 					do
 						#echo "== \$$oldstrn ==> $newstrn =="
 						substitute "$oldstrn" "$newstrn" "$3"
@@ -52,7 +55,8 @@ decode()
 					;;
 				*)
 					newstrn="gettext(\"$strn\")"
-					grep "'$1'.*'$2'" $file | sed "s/.*\(GLOBALS.*('$1'.*'$2')\).*/\1/"| sort -u | while read oldstrn
+					#grep "'$1'.*'$2'" $file | sed "s/.*\(GLOBALS.*('$1'.*'$2')\).*/\1/"| sort -u | while read oldstrn
+					grep "'$1'.*'$2'" $file | sed "s/.*\(GLOBALS\['Language'\].[^(]*('$1'.*'$2')\).*/\1/"| sort -u | while read oldstrn
 					do
 						#echo "== \$$oldstrn ==> $newstrn =="
 						substitute "$oldstrn" "$newstrn" "$3"
@@ -91,9 +95,10 @@ do
 	#grep "getText(" $file | sed "s/.*getText.[^']*'\(.[^']*\)'.[^']*'\(.[^']*\)'.*/\1	\2/g" | while read key1 key2
 	#grep "getText(" $file | sed "s/.*getText('\(.[^']*\)'.[^']*'\(.[^']*\)'.*/\1	\2/g" | while read key1 key2
 	#
-	perl -pi -e "s{\\QLanguage->getText\\E}{GLOBALS['Language']->getText}go" $file
+	perl -pi -e "s{\\QLanguage->getText\\E}{GLOBALS['Language']->getText}sg" $file
 	#
-	grep "getText('.[^']*'.[^']*'.[^']*'.*" $file | sed "s/.*getText('\(.[^']*\)'.[^']*'\(.[^']*\)'.*/\1	\2/g" | while read key1 key2
+	#grep "getText('.[^']*'.[^']*'.[^']*'.*" $file | sed "s/.*getText('\(.[^']*\)'.[^']*'\(.[^']*\)'.*/\1	\2/g" | while read key1 key2
+	grep "GLOBALS\['Language'\]->getText('.[^']*'.[^']*'.[^']*'.*" $file | sed "s/.*GLOBALS\['Language'\]->getText('\(.[^']*\)'.[^']*'\(.[^']*\)'.*/\1	\2/g" | while read key1 key2
 	do
 		if [ "$found" = "0" ] 
 		then 
