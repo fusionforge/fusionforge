@@ -3763,6 +3763,7 @@ tools/simple-cdd/profiles/fusionforge.preseed -text
 tools/simple-cdd/profiles/fusionforge.preseed.fr -text
 tools/simple-cdd/profiles/fusionforge.udebs -text
 tools/simulate_cron.pl -text
+tools/tab2gettext.sh -text
 tools/tab2po/.classpath -text
 tools/tab2po/.project -text
 tools/tab2po/.settings/org.eclipse.jdt.core.prefs -text
