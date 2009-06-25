@@ -4,11 +4,13 @@ use strict 'refs';
 use strict 'vars';
 use warnings;
 use Getopt::Long;
+use File::Find;
 
 my %tab;
 my $verbose=10;
-my $filename;
 my $write;
+my $recursive;
+my $filename="";
 
 sub findtxt2 {
 	my $key1 = shift;
@@ -122,13 +124,27 @@ if ( ! -f "alltab.txt" ){
 	system("find . -name '*.tab' | grep -v '.svn' | grep en_US | xargs cat > alltab.txt");
 }
 
+sub wanted {
+	if (/^.*\.php$/s) {
+		my $filename=$_;
+		if ($verbose > 1) {print "Reading $File::Find::name\n";}
+		my $buf=tab2gettextfile($filename);
+		if ( $write ) {
+			if ($verbose > 1) {print "Writing $filename\n";}
+			open(FILEOUT, '>', "$filename") or die "Can't write $filename: $!";
+			print FILEOUT $buf;
+			close(FILEOUT);
+		};
+	}
+}
 
-my %h = ('verbose' => \$verbose, 'filename' => \$filename, 'write' => \$write);
-GetOptions (\%h, 'verbose=i', 'filename=s', 'write');
+my %h = ('verbose' => \$verbose, 'filename' => \$filename, 'write' => \$write, 'recursive' => \$recursive);
+GetOptions (\%h, 'verbose=i', 'filename=s', 'write', 'recursive');
 
 %tab = readalltab();
 
-if ( exists $h{filename} ) {
+#if ( exists $h{filename} ) {
+if ( $filename ) {
 	if ($verbose > 1) {print "Reading $filename\n"};
 	my $buf=tab2gettextfile($filename);
 	if ( $write ) {
@@ -139,6 +155,9 @@ if ( exists $h{filename} ) {
 	};
 }
 
+if ( $recursive ) {
+	find(\&wanted, '.');
+}
 
 
 
