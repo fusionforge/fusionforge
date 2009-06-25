@@ -1,10 +1,14 @@
 #!/usr/bin/perl
 use strict;
 use strict 'refs';
+use strict 'vars';
 use warnings;
+use Getopt::Long;
 
 my %tab;
 my $verbose=10;
+my $filename;
+my $write;
 
 sub findtxt2 {
 	my $key1 = shift;
@@ -20,11 +24,11 @@ sub findtxt3 {
 	my $txt = $tab{$key1}{$key2};
 	my $txtsave = $txt;
 	my @key = split /\$/, "$txt";
-	if ( @key == 2 ){
+	if ( @key == 2 ){	# Text contains only one var, I assume $1
 		$txt =~ s/\$./\%s/g;
 		return "vsprintf(_(\"$txt\"), $extra)";
-	} else {
-		return "TOCHECKvsprintf(_(\"$txtsave\"), $extra)";
+	} else {		# Text contains several vars, should be possible to deal with if array() is detected
+		return "TODOBETTERvsprintf(_(\"$txtsave\"), $extra)";
 	}
 }
 
@@ -87,7 +91,7 @@ sub tab2gettextfile {
 					$key[0] =~ s/\'//g;
 					$key[1] =~ s/\'//g;
 					$thrdparam = $params;
-					$thrdparam =~ s/.[^,]*,.[^,]*,//g;
+					$thrdparam =~ s/.[^,]*,.[^,]*,//;
 					$outstr=findtxt3($key[0],$key[1],$thrdparam);
 					if ($verbose > 5) {print "=($cnt)= $instr ==> $outstr === \n"};
 					if ($verbose > 10) {print "=(*)= thrdparam ==> $thrdparam === \n"};
@@ -97,7 +101,7 @@ sub tab2gettextfile {
 						$key[0] =~ s/\'//g;
 						$key[1] =~ s/\'//g;
 						$thrdparam = $params;
-						$thrdparam =~ s/.[^,]*,.[^,]*,//g;
+						$thrdparam =~ s/.[^,]*,.[^,]*,//;
 						$outstr=findtxt3($key[0],$key[1],$thrdparam);
 						if ($verbose > 5) {print "=($cnt)= $instr ==> FUNC ERROR (too many args) === \n"};
 						if ($verbose > 10) {print "=(*)= outstr ==> $outstr === \n"};
@@ -111,25 +115,30 @@ sub tab2gettextfile {
 		}
 	}
 	if ($verbose > 10) {print "$buf\n"};
+	return $buf;
 }
 
 if ( ! -f "alltab.txt" ){
 	system("find . -name '*.tab' | grep -v '.svn' | grep en_US | xargs cat > alltab.txt");
 }
 
+
+my %h = ('verbose' => \$verbose, 'filename' => \$filename, 'write' => \$write);
+GetOptions (\%h, 'verbose=i', 'filename=s', 'write');
+
 %tab = readalltab();
-if ($verbose > 1) {print "Reading $ARGV[0]\n"};
-tab2gettextfile($ARGV[0]);
 
-#$buf =~ /$re/;
-#print "\$1 = $1\n", "\$2 = $2\n";
-#my @key = split /,\s*/, "$2";
+if ( exists $h{filename} ) {
+	if ($verbose > 1) {print "Reading $filename\n"};
+	my $buf=tab2gettextfile($filename);
+	if ( $write ) {
+		if ($verbose > 1) {print "Writing $filename\n";}
+		open(FILEOUT, '>', "$filename") or die "Can't write $filename: $!";
+		print FILEOUT $buf;
+		close(FILEOUT);
+	};
+}
 
-#$key[0] =~ s/\'//g;
-#$key[1] =~ s/\'//g;
 
-#print "$key[0]\n";
-#print "$key[1]\n";
 
-#my @file  = <FILE>;
-#print "@file";
+
