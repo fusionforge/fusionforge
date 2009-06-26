@@ -52,8 +52,8 @@ decode()
 					#set -x
 					grep "'$1'.*'$2'" $file | sed "s/.*\(GLOBALS\['Language'\]->getText('$1'.[^']*'$2'\).*/\1/"| sort -u | while read oldstrn
 					do
-						#echo "== \$$oldstrn ==> $newstrn =="
-						substitute "$oldstrn" "$newstrn" "$3"
+						echo "==TOMANUALCONVERT \$$oldstrn ==> $newstrn =="
+						#substitute "$oldstrn" "$newstrn" "$3"
 					done
 					#set +x
 					;;
