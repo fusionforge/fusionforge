@@ -96,7 +96,7 @@ sub tab2gettextfile {
 					if ($verbose > 5) {print "=($cnt)= $instr ==> $outstr === \n"};
 					$buf =~ s{\$\Q$instr\E}{$outstr}s;
 				} else {
-					print "=($cnt)= $instr ==> TRANSLATION NOT FOUND === \n";
+					if ($verbose > 5) {print "=($cnt)= $instr ==> TRANSLATION NOT FOUND === \n"};
 				}
 			} else {
 				if ( $cnt == 3 ) {
@@ -109,7 +109,7 @@ sub tab2gettextfile {
 						if ($verbose > 10) {print "=(*)= thrdparam ==> $thrdparam === \n"};
 						$buf =~ s{\$\Q$instr\E}{$outstr}s;
 					} else {
-						print "=($cnt)= $instr ==> TRANSLATION NOT FOUND === \n";
+						if ($verbose > 5) {print "=($cnt)= $instr ==> TRANSLATION NOT FOUND === \n"};
 					}
 				} else {
 					if ( $cnt > 3 ) {
@@ -125,7 +125,7 @@ sub tab2gettextfile {
 							if ($verbose > 10) {print "=(*)= thrdparam ==> $thrdparam === \n"};
 							$buf =~ s{\$\Q$instr\E}{$outstr}s;
 						} else {
-							print "=($cnt)= $instr ==> TRANSLATION NOT FOUND === \n";
+							if ($verbose > 5) {print "=($cnt)= $instr ==> TRANSLATION NOT FOUND === \n"};
 						}
 					}
 				}
