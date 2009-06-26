@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 use strict;
 use strict 'refs';
-use strict 'vars';
+#use strict 'vars';
 use warnings;
 use Getopt::Long;
 use File::Find;
@@ -15,22 +15,29 @@ my $filename="";
 sub findtxt2 {
 	my $key1 = shift;
 	my $key2 = shift;
-	my $txt = $tab{$key1}{$key2};
-	return "_(\"$txt\")";
+	if (my $txt = $tab{$key1}{$key2}){
+		return "_(\"$txt\")";
+	} else {
+		return "";
+	}
 }
 
 sub findtxt3 {
 	my $key1 = shift;
 	my $key2 = shift;
 	my $extra = shift;
-	my $txt = $tab{$key1}{$key2};
-	my $txtsave = $txt;
-	my @key = split /\$/, "$txt";
-	if ( @key == 2 ){	# Text contains only one var, I assume $1
-		$txt =~ s/\$./\%s/g;
-		return "vsprintf(_(\"$txt\"), $extra)";
-	} else {		# Text contains several vars, should be possible to deal with if array() is detected
-		return "TODOBETTERvsprintf(_(\"$txtsave\"), $extra)";
+	if (my $txt = $tab{$key1}{$key2}){
+		my $txt = $tab{$key1}{$key2};
+		my $txtsave = $txt;
+		my @key = split /\$/, "$txt";
+		if ( @key == 2 ){	# Text contains only one var, I assume $1
+			$txt =~ s/\$./\%s/g;
+			return "vsprintf(_(\"$txt\"), $extra)";
+		} else {		# Text contains several vars, should be possible to deal with if array() is detected
+			return "TODOBETTERvsprintf(_(\"$txtsave\"), $extra)";
+		}
+	} else {
+		return "";
 	}
 }
 
@@ -85,32 +92,41 @@ sub tab2gettextfile {
 			if ( $cnt == 2 ) {
 				$key[0] =~ s/\'//g;
 				$key[1] =~ s/\'//g;
-				$outstr=findtxt2($key[0],$key[1]);
-				if ($verbose > 5) {print "=($cnt)= $instr ==> $outstr === \n"};
-				$buf =~ s{\$\Q$instr\E}{$outstr}s;
+				if($outstr=findtxt2($key[0],$key[1])){
+					if ($verbose > 5) {print "=($cnt)= $instr ==> $outstr === \n"};
+					$buf =~ s{\$\Q$instr\E}{$outstr}s;
+				} else {
+					print "=($cnt)= $instr ==> TRANSLATION NOT FOUND === \n";
+				}
 			} else {
 				if ( $cnt == 3 ) {
 					$key[0] =~ s/\'//g;
 					$key[1] =~ s/\'//g;
 					$thrdparam = $params;
 					$thrdparam =~ s/.[^,]*,.[^,]*,//;
-					$outstr=findtxt3($key[0],$key[1],$thrdparam);
-					if ($verbose > 5) {print "=($cnt)= $instr ==> $outstr === \n"};
-					if ($verbose > 10) {print "=(*)= thrdparam ==> $thrdparam === \n"};
-					$buf =~ s{\$\Q$instr\E}{$outstr}s;
+					if ($outstr=findtxt3($key[0],$key[1],$thrdparam)){
+						if ($verbose > 5) {print "=($cnt)= $instr ==> $outstr === \n"};
+						if ($verbose > 10) {print "=(*)= thrdparam ==> $thrdparam === \n"};
+						$buf =~ s{\$\Q$instr\E}{$outstr}s;
+					} else {
+						print "=($cnt)= $instr ==> TRANSLATION NOT FOUND === \n";
+					}
 				} else {
 					if ( $cnt > 3 ) {
 						$key[0] =~ s/\'//g;
 						$key[1] =~ s/\'//g;
 						$thrdparam = $params;
 						$thrdparam =~ s/.[^,]*,.[^,]*,//;
-						$outstr=findtxt3($key[0],$key[1],$thrdparam);
-						if ($verbose > 5) {print "=($cnt)= $instr ==> FUNC ERROR (too many args) === \n"};
-						if ($verbose > 10) {print "=(*)= outstr ==> $outstr === \n"};
-						if ($verbose > 10) {print "=(*)= extra ==> $extra === \n"};
-						if ($verbose > 10) {print "=(*)= params ==> $params === \n"};
-						if ($verbose > 10) {print "=(*)= thrdparam ==> $thrdparam === \n"};
-						$buf =~ s{\$\Q$instr\E}{$outstr}s;
+						if($outstr=findtxt3($key[0],$key[1],$thrdparam)){
+							if ($verbose > 5) {print "=($cnt)= $instr ==> FUNC ERROR (too many args) === \n"};
+							if ($verbose > 10) {print "=(*)= outstr ==> $outstr === \n"};
+							if ($verbose > 10) {print "=(*)= extra ==> $extra === \n"};
+							if ($verbose > 10) {print "=(*)= params ==> $params === \n"};
+							if ($verbose > 10) {print "=(*)= thrdparam ==> $thrdparam === \n"};
+							$buf =~ s{\$\Q$instr\E}{$outstr}s;
+						} else {
+							print "=($cnt)= $instr ==> TRANSLATION NOT FOUND === \n";
+						}
 					}
 				}
 			}
