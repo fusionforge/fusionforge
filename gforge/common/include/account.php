@@ -45,6 +45,8 @@ function account_pwvalid($pw) {
  *
  */
 function account_namevalid($name) {
+	global $sys_use_shell;
+
 	// no spaces
 	if (strrpos($name,' ') > 0) {
 		$GLOBALS['register_error'] = _('There cannot be any spaces in the login name.');
