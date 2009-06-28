@@ -8,7 +8,7 @@ list:
 	@cat Makefile.rh | grep '^.*:.*#$$' | sed 's/^\(.*:\).*#\(.*\)#$$/\1		\2/'
 
 #Do it all
-all: fusionforge allplugins allmodules dist          # Build fusionforge and plugins #
+all: fusionforge allplugins allmodules allexternals dist          # Build fusionforge and plugins #
 clean: cleanff cleanplugins   # Clean fusionforge and plugins #
 
 #GForge
@@ -28,6 +28,9 @@ cvsplugin: buildcvs  # package cvs plugin #
 
 #Modules
 allmodules : libnsspgsql
+
+#Exterals
+allexternals : htmlpurifier
 
 libnsspgsql : buildlibnsspgsql
 
