@@ -189,6 +189,7 @@ pbuilderenv: $(PBUILDERTGZ) $(PBUILDERTGZ)/base-$(DISTRIB).tgz
 
 cowbuilderenv: $(COWBUILDERBASE) $(COWBUILDERBASE)/base-$(DISTRIB).stamp
 	@echo "Ready for $(DISTRIB)"
+	sudo /usr/sbin/cowbuilder --update $(HOOK) --distribution $(DISTRIB) --basepath $(COWBUILDERBASE)/base-$(DISTRIB).cow --configfile $(COWBUILDERBASE)/config $(DISTROOP)
 
 $(PBUILDERTGZ)/base-$(DISTRIB).tgz: $(PBUILDERTGZ)/config
 	sudo /usr/sbin/pbuilder --create --distribution $(DISTRIB) --basetgz $(PBUILDERTGZ)/base-$(DISTRIB).tgz --configfile $(PBUILDERTGZ)/config $(DISTROOP)
