@@ -71,6 +71,8 @@ rpmprep:
 dist:
 	-mkdir -p $(BUILDRESULT)
 	cp $(RPM_TMP)/SRPMS/*.rpm $(BUILDRESULT)
+	cp $(RPM_TMP)/RPMS/noarch/*.rpm  $(BUILDRESULT)
+	createrepo $(BUILDRESULT)
 
 #
 # FUSIONFORGE
