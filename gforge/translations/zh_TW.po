@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-11 13:41+0200\n"
+"POT-Creation-Date: 2009-06-30 14:28+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -111,9 +111,9 @@ msgid "Forum::savePlace()"
 msgstr "討論區：savePlace()"
 
 #: common/forum/Forum.class.php:620 common/include/Error.class.php:163
-#: common/mail/MailingList.class.php:251 www/news/admin/index.php:87
-#: www/news/admin/index.php:205 www/news/admin/index.php:216
-#: www/news/admin/index.php:238
+#: common/mail/MailingList.class.php:251 www/news/admin/index.php:88
+#: www/news/admin/index.php:206 www/news/admin/index.php:217
+#: www/news/admin/index.php:239
 #, php-format
 msgid "Error On Update:"
 msgstr "更新時錯誤："
@@ -277,14 +277,14 @@ msgid ""
 "%6$s"
 msgstr ""
 
-#: common/include/Error.class.php:126 common/include/Group.class.php:422
-#: common/include/Group.class.php:494 www/include/exit.php:37
-#: www/news/admin/index.php:351
+#: common/include/Error.class.php:126 common/include/Group.class.php:426
+#: common/include/Group.class.php:498 www/include/exit.php:37
+#: www/news/admin/index.php:352
 #, fuzzy
 msgid "Permission denied."
 msgstr "權限不足"
 
-#: common/include/Error.class.php:143 common/include/User.class.php:270
+#: common/include/Error.class.php:143 common/include/User.class.php:280
 #: www/tracker/tracker.php:74
 msgid "Invalid Email Address"
 msgstr "無效的Email"
@@ -299,7 +299,7 @@ msgid "Group Not Found"
 msgstr "找不到檔案"
 
 #: common/include/Group.class.php:248
-#: plugins/mediawiki/usr/share/mediawiki/includes/GFProject.class.php:177
+#: plugins/mediawiki/usr/share/mediawiki/includes/GFProject.class.php:179
 #: www/survey/admin/add_question.php:35 www/survey/admin/add_survey.php:36
 #: www/survey/admin/edit_question.php:37 www/survey/admin/edit_survey.php:37
 #: www/survey/admin/index.php:37 www/survey/admin/show_questions.php:36
@@ -317,317 +317,318 @@ msgstr "權限不足"
 msgid "fetchData():: %s"
 msgstr ""
 
-#: common/include/Group.class.php:287
+#: common/include/Group.class.php:288
 msgid "Group::create: Group object already exists"
 msgstr ""
 
-#: common/include/Group.class.php:292
+#: common/include/Group.class.php:293
 #, fuzzy
 msgid "Invalid Unix name"
 msgstr "Unix名稱錯誤"
 
-#: common/include/Group.class.php:296
+#: common/include/Group.class.php:296 common/include/Group.class.php:300
+#: common/include/User.class.php:276
 msgid "Unix name already taken"
 msgstr "Unix名稱重複"
 
-#: common/include/Group.class.php:299
+#: common/include/Group.class.php:303
 msgid ""
 "Please describe your Registration Purpose in a more comprehensive manner"
 msgstr "請詳細說明您為什麼要在這裡註冊"
 
-#: common/include/Group.class.php:302
+#: common/include/Group.class.php:306
 msgid ""
 "The Registration Purpose text is too long. Please make it smaller than 1500 "
 "bytes."
 msgstr ""
 
-#: common/include/Group.class.php:305
+#: common/include/Group.class.php:309
 msgid "Describe in a more comprehensive manner your project."
 msgstr "請詳細說明您的專案目的"
 
-#: common/include/Group.class.php:308
+#: common/include/Group.class.php:312
 msgid ""
 "Your project description is too long. Please make it smaller than 256 bytes."
 msgstr ""
 
-#: common/include/Group.class.php:348
+#: common/include/Group.class.php:352
 #, php-format
 msgid "ERROR: Could not create group: %s"
 msgstr ""
 
-#: common/include/Group.class.php:355
+#: common/include/Group.class.php:359
 #, php-format
 msgid "ERROR: Could not get group id: %s"
 msgstr ""
 
-#: common/include/Group.class.php:374
+#: common/include/Group.class.php:378
 #, php-format
 msgid "ERROR: Could not add admin to newly created group: %s"
 msgstr ""
 
-#: common/include/Group.class.php:417 common/include/Group.class.php:489
+#: common/include/Group.class.php:421 common/include/Group.class.php:493
 #, fuzzy
 msgid "Could not get permission."
 msgstr "無法獲得許可權"
 
-#: common/include/Group.class.php:440
+#: common/include/Group.class.php:444
 #, php-format
 msgid "ERROR: DB: Could not change group properties: %s"
 msgstr ""
 
-#: common/include/Group.class.php:508
+#: common/include/Group.class.php:512
 #, fuzzy, php-format
 msgid "New Doc Address Appeared Invalid: %s"
 msgid_plural "New Doc Addresses Appeared Invalid: %s"
 msgstr[0] "E-mail位址明顯無效"
 msgstr[1] "E-mail位址明顯無效"
 
-#: common/include/Group.class.php:560
+#: common/include/Group.class.php:564
 msgid ""
 "Error updating project information: Maximum length for Project Description "
 "is 255 chars."
 msgstr ""
 
-#: common/include/Group.class.php:608
+#: common/include/Group.class.php:612
 #, fuzzy, php-format
 msgid "Error updating project information: %s"
 msgstr "專案類別"
 
-#: common/include/Group.class.php:700
+#: common/include/Group.class.php:704
 #, fuzzy
 msgid "Invalid Status Change"
 msgstr "不正確會員"
 
-#: common/include/Group.class.php:711
+#: common/include/Group.class.php:715
 #, php-format
 msgid "ERROR: DB: Could not change group status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:879
+#: common/include/Group.class.php:883
 msgid "Couldn't insert SCM_BOX to database"
 msgstr ""
 
-#: common/include/Group.class.php:883
+#: common/include/Group.class.php:887
 msgid "SCM Box can't be empty"
 msgstr "原始碼版本管理系統區塊不能空白"
 
-#: common/include/Group.class.php:1300
+#: common/include/Group.class.php:1304
 msgid ""
 "Bad tag name, you only can use the following characters: [A-Z][a-z][0-9]-_&'#"
 "+. and space"
 msgstr ""
 
-#: common/include/Group.class.php:1310
+#: common/include/Group.class.php:1314
 #, fuzzy
 msgid "Setting tags: "
 msgstr "設定"
 
-#: common/include/Group.class.php:1355
+#: common/include/Group.class.php:1359
 msgid "Cannot Delete System Group"
 msgstr ""
 
-#: common/include/Group.class.php:1385
+#: common/include/Group.class.php:1389
 #, php-format
 msgid "Not Object: ArtifactType: %d"
 msgstr ""
 
-#: common/include/Group.class.php:1397
+#: common/include/Group.class.php:1401
 #, php-format
 msgid "Not Object: Forum: %d"
 msgstr ""
 
-#: common/include/Group.class.php:1410
+#: common/include/Group.class.php:1414
 #, fuzzy, php-format
 msgid "Not Object: ProjectGroup: %d"
 msgstr "無法更新上層文章"
 
-#: common/include/Group.class.php:1441
+#: common/include/Group.class.php:1445
 #, fuzzy, php-format
 msgid "Could Not Delete News Forum: %d"
 msgstr "無法完成執行"
 
-#: common/include/Group.class.php:1481
+#: common/include/Group.class.php:1485
 #, php-format
 msgid "Not Object: Survey: %d"
 msgstr ""
 
-#: common/include/Group.class.php:1494
+#: common/include/Group.class.php:1498
 #, fuzzy, php-format
 msgid "Not Object: SurveyQuestion: %d"
 msgstr "沒有發現問卷問題"
 
-#: common/include/Group.class.php:1507
+#: common/include/Group.class.php:1511
 #, php-format
 msgid "Not Object: MailingList: %d"
 msgstr ""
 
-#: common/include/Group.class.php:1511
+#: common/include/Group.class.php:1515
 #, fuzzy
 msgid "Could not properly delete the mailing list"
 msgstr "無法正確刪除通訊論壇"
 
-#: common/include/Group.class.php:1612
+#: common/include/Group.class.php:1616
 msgid "User is not active. Only active users can be added."
 msgstr ""
 
-#: common/include/Group.class.php:1651
+#: common/include/Group.class.php:1655
 #, php-format
 msgid "ERROR: Could Not Add User To Group: %s"
 msgstr ""
 
-#: common/include/Group.class.php:1678 common/include/Group.class.php:1701
+#: common/include/Group.class.php:1682 common/include/Group.class.php:1705
 #, fuzzy
 msgid "Error Getting Role Object"
 msgstr "建立群組物件時發生錯誤"
 
-#: common/include/Group.class.php:1731
+#: common/include/Group.class.php:1735
 #, fuzzy
 msgid "ERROR: User does not exist"
 msgstr "查詢不存在"
 
-#: common/include/Group.class.php:1778
+#: common/include/Group.class.php:1782
 #, php-format
 msgid "ERROR: User not removed: %s"
 msgstr ""
 
-#: common/include/Group.class.php:1793
+#: common/include/Group.class.php:1797
 #, php-format
 msgid "ERROR: DB: artifact: %s"
 msgstr ""
 
-#: common/include/Group.class.php:1828 common/include/Group.class.php:1841
+#: common/include/Group.class.php:1832 common/include/Group.class.php:1845
 #, php-format
 msgid "ERROR: DB: project_assigned_to %d: %s"
 msgstr ""
 
-#: common/include/Group.class.php:1887 www/project/admin/roleedit.php:64
+#: common/include/Group.class.php:1891 www/project/admin/roleedit.php:64
 #, fuzzy
 msgid "Could Not Get Role"
 msgstr "無法完成執行"
 
-#: common/include/Group.class.php:1890 common/include/Group.class.php:1895
+#: common/include/Group.class.php:1894 common/include/Group.class.php:1899
 #, fuzzy, php-format
 msgid "Role: %s"
 msgstr "角色"
 
-#: common/include/Group.class.php:1949
+#: common/include/Group.class.php:1953
 #, fuzzy
 msgid "Error getting member object"
 msgstr "建立群組物件時發生錯誤"
 
-#: common/include/Group.class.php:1952
+#: common/include/Group.class.php:1956
 #, fuzzy, php-format
 msgid "Error getting member object: %s"
 msgstr "建立群組物件時發生錯誤"
 
-#: common/include/Group.class.php:1991
+#: common/include/Group.class.php:1995
 #, fuzzy
 msgid "Group already active"
 msgstr "帳號已經啟動。"
 
-#: common/include/Group.class.php:2014
+#: common/include/Group.class.php:2018
 #, fuzzy
 msgid "Error creating ArtifactTypes object"
 msgstr "建立群組物件時發生錯誤"
 
-#: common/include/Group.class.php:2019 common/include/Group.class.php:2025
+#: common/include/Group.class.php:2023 common/include/Group.class.php:2029
 #, php-format
 msgid "ATS%d: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2037
+#: common/include/Group.class.php:2041
 #, fuzzy
 msgid "Open-Discussion"
 msgstr "討論版："
 
-#: common/include/Group.class.php:2037
+#: common/include/Group.class.php:2041
 msgid "General Discussion"
 msgstr ""
 
-#: common/include/Group.class.php:2038 common/include/Group.class.php:2045
-#: common/include/Group.class.php:2052
+#: common/include/Group.class.php:2042 common/include/Group.class.php:2049
+#: common/include/Group.class.php:2056
 #, php-format
 msgid "F%d: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2044
+#: common/include/Group.class.php:2048
 msgid "Help"
 msgstr ""
 
-#: common/include/Group.class.php:2044
+#: common/include/Group.class.php:2048
 msgid "Get Public Help"
 msgstr ""
 
-#: common/include/Group.class.php:2051 www/include/project_home.php:139
-#: www/stats/site_stats_utils.php:515
+#: common/include/Group.class.php:2055 www/include/project_home.php:142
+#: www/stats/site_stats_utils.php:518
 msgid "Developers"
 msgstr "開發人員"
 
-#: common/include/Group.class.php:2051
+#: common/include/Group.class.php:2055
 #, fuzzy
 msgid "Project Developer Discussion"
 msgstr "所有專案開發員"
 
-#: common/include/Group.class.php:2064
+#: common/include/Group.class.php:2068
 #, fuzzy
 msgid "Uncategorized Submissions"
 msgstr "新文件送出"
 
-#: common/include/Group.class.php:2065
+#: common/include/Group.class.php:2069
 #, php-format
 msgid "DG: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2078
+#: common/include/Group.class.php:2082
 #, php-format
 msgid "FRSP: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2090
+#: common/include/Group.class.php:2094
 msgid "To Do"
 msgstr ""
 
-#: common/include/Group.class.php:2090
+#: common/include/Group.class.php:2094
 msgid "Things We Have To Do"
 msgstr ""
 
-#: common/include/Group.class.php:2091 common/include/Group.class.php:2098
+#: common/include/Group.class.php:2095 common/include/Group.class.php:2102
 #, php-format
 msgid "PG%d: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2097
+#: common/include/Group.class.php:2101
 #, fuzzy
 msgid "Next Release"
 msgstr "最近更新"
 
-#: common/include/Group.class.php:2097
+#: common/include/Group.class.php:2101
 #, fuzzy
 msgid "Items For Our Next Release"
 msgstr "最新發佈專案"
 
-#: common/include/Group.class.php:2124
+#: common/include/Group.class.php:2128
 #, php-format
 msgid "R%d: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2143
-#: plugins/scmcvs/common/CVSPlugin.class.php:262 www/activity/index.php:94
-#: www/stats/site_stats_utils.php:318 www/tracker/detail.php:187
+#: common/include/Group.class.php:2147
+#: plugins/scmcvs/common/CVSPlugin.class.php:263 www/activity/index.php:94
+#: www/stats/site_stats_utils.php:321 www/tracker/detail.php:187
 #: www/tracker/mod-limited.php:185 www/tracker/mod.php:282
 msgid "Commits"
 msgstr ""
 
-#: common/include/Group.class.php:2144
+#: common/include/Group.class.php:2148
 #, php-format
 msgid "ML: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2188 common/include/Group.class.php:2261
+#: common/include/Group.class.php:2192 common/include/Group.class.php:2265
 msgid "Group does not have any administrators."
 msgstr ""
 
-#: common/include/Group.class.php:2197
+#: common/include/Group.class.php:2201
 #, fuzzy, php-format
 msgid ""
 "Your project registration for %4$s has been approved.\n"
@@ -694,12 +695,12 @@ msgstr ""
 "\n"
 "--  %7$s"
 
-#: common/include/Group.class.php:2233
+#: common/include/Group.class.php:2237
 #, php-format
 msgid "%1$s Project Approved"
 msgstr "%1$s 專案通過審核了"
 
-#: common/include/Group.class.php:2269
+#: common/include/Group.class.php:2273
 #, php-format
 msgid ""
 "Your project registration for %3$s has been denied.\n"
@@ -718,20 +719,20 @@ msgstr ""
 "原因：\n"
 "\n"
 
-#: common/include/Group.class.php:2288
+#: common/include/Group.class.php:2292
 #, php-format
 msgid "%1$s Project Denied"
 msgstr "%1$s 專案被取消了"
 
-#: common/include/Group.class.php:2311
+#: common/include/Group.class.php:2315
 msgid "Could not find user who has submitted the project."
 msgstr ""
 
-#: common/include/Group.class.php:2326
+#: common/include/Group.class.php:2330
 msgid "There is no administrator to send the mail."
 msgstr ""
 
-#: common/include/Group.class.php:2335
+#: common/include/Group.class.php:2339
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -752,12 +753,12 @@ msgstr ""
 "請瀏覽下面網址審核這個專案：\n"
 "%5$s"
 
-#: common/include/Group.class.php:2349 common/include/Group.class.php:2364
+#: common/include/Group.class.php:2353 common/include/Group.class.php:2368
 #, php-format
 msgid "New %1$s Project Submitted"
 msgstr "新專案 %1$s 完成註冊了"
 
-#: common/include/Group.class.php:2357
+#: common/include/Group.class.php:2361
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -776,22 +777,22 @@ msgstr ""
 "\n"
 " %1$s 的管理團隊會盡快審核您註冊的專案，通過審核與否您都會收到通知。"
 
-#: common/include/Group.class.php:2382
+#: common/include/Group.class.php:2386
 #, fuzzy
 msgid "Group name is too short"
 msgstr "問題太簡略"
 
-#: common/include/Group.class.php:2385
+#: common/include/Group.class.php:2389
 #, fuzzy
 msgid "Group name is too long"
 msgstr "群組名稱 (編輯)"
 
-#: common/include/Group.class.php:2388
+#: common/include/Group.class.php:2392
 #, fuzzy
 msgid "Group name already taken"
 msgstr "Unix名稱重複"
 
-#: common/include/Group.class.php:2475
+#: common/include/Group.class.php:2479
 #, php-format
 msgid "ERROR - Could Not Update Group Unix Status: %s"
 msgstr ""
@@ -835,58 +836,59 @@ msgstr "您提出希望加入專案 %1$s 的請求被管理者拒絕了。"
 msgid "Your request to join the %1$s project was granted by an administrator."
 msgstr "您提出希望加入專案 %1$s 的請求被管理者拒絕了。"
 
-#: common/include/User.class.php:240
+#: common/include/User.class.php:241
 #, fuzzy
 msgid "You must supply a theme"
 msgstr "您必須提供一個帳號"
 
-#: common/include/User.class.php:245
+#: common/include/User.class.php:246
 msgid "You must supply a username"
 msgstr "您必須提供一個帳號"
 
-#: common/include/User.class.php:250
+#: common/include/User.class.php:251
 msgid "You must supply a first name"
 msgstr "您必須輸入名字"
 
-#: common/include/User.class.php:254
+#: common/include/User.class.php:255
 msgid "You must supply a last name"
 msgstr "您必須輸入姓氏"
 
-#: common/include/User.class.php:258
+#: common/include/User.class.php:259
 msgid "You must supply a password"
 msgstr "您必須提供密碼"
 
-#: common/include/User.class.php:262
+#: common/include/User.class.php:263
 msgid "Passwords do not match"
 msgstr "密碼不一致"
 
-#: common/include/User.class.php:266
+#: common/include/User.class.php:267
 msgid "Invalid Password:"
 msgstr "無效的密碼："
 
-#: common/include/User.class.php:274 common/include/User.class.php:518
+#: common/include/User.class.php:272 common/include/User.class.php:341
+msgid "Invalid Unix Name."
+msgstr "無效的帳號"
+
+#: common/include/User.class.php:284 common/include/User.class.php:528
 msgid "Invalid Jabber Address"
 msgstr "無效的Jabber信箱"
 
-#: common/include/User.class.php:284 common/include/account.php:77
+#: common/include/User.class.php:294 common/include/account.php:80
+#: common/include/account.php:84
 msgid "That username already exists."
 msgstr "帳號已存在"
 
-#: common/include/User.class.php:289
+#: common/include/User.class.php:299
 msgid ""
 "User with this email already exists - use people search to recover your "
 "login."
 msgstr "已存在使用該email信箱的會員 － 使用會員查詢來恢復您的登入。"
 
-#: common/include/User.class.php:331
-msgid "Invalid Unix Name."
-msgstr "無效的帳號"
-
-#: common/include/User.class.php:363
+#: common/include/User.class.php:373
 msgid "Insert Failed"
 msgstr "新增失敗"
 
-#: common/include/User.class.php:404
+#: common/include/User.class.php:414
 #, fuzzy, php-format
 msgid ""
 "Thank you for registering on the %3$s web site. You have\n"
@@ -919,12 +921,12 @@ msgstr ""
 "\n"
 "-- %4$s 團隊\n"
 
-#: common/include/User.class.php:424
+#: common/include/User.class.php:434
 #, php-format
 msgid "%1$s Account Registration"
 msgstr "%1$s 帳號註冊"
 
-#: common/include/User.class.php:839 common/include/User.class.php:891
+#: common/include/User.class.php:849 common/include/User.class.php:901
 #, fuzzy
 msgid "User with this email already exists."
 msgstr "帳號已存在"
@@ -933,36 +935,36 @@ msgstr "帳號已存在"
 msgid "Password must be at least 6 characters."
 msgstr "密碼至少要6個字元"
 
-#: common/include/account.php:50
+#: common/include/account.php:52
 msgid "There cannot be any spaces in the login name."
 msgstr "帳號不能夠使用任何空白"
 
-#: common/include/account.php:56
+#: common/include/account.php:58
 msgid "Name is too short. It must be at least 3 characters."
 msgstr "名稱太短，至少要三個字元"
 
-#: common/include/account.php:60
+#: common/include/account.php:62
 msgid "Name is too long. It must be less than 15 characters."
 msgstr "名稱太長，最多只能15個字元"
 
-#: common/include/account.php:65
+#: common/include/account.php:67
 msgid "Illegal character in name."
 msgstr "名稱使用了錯誤的字元"
 
-#: common/include/account.php:73
+#: common/include/account.php:75
 #, fuzzy
 msgid "Name is reserved."
 msgstr "名稱保留給 CVS 使用"
 
-#: common/include/account.php:81
+#: common/include/account.php:89
 msgid "Name is reserved for CVS."
 msgstr "名稱保留給 CVS 使用"
 
-#: common/include/account.php:102
+#: common/include/account.php:110
 msgid "Name is reserved for DNS purposes."
 msgstr "名稱保留給 DNS 使用"
 
-#: common/include/account.php:107
+#: common/include/account.php:115
 msgid "Group name cannot contain underscore for DNS reasons."
 msgstr "為了使用dns，群組名稱不能包含底線"
 
@@ -973,7 +975,7 @@ msgstr "zh_TW"
 #: common/include/group_section_texts.php:30
 #: common/reporting/report_utils.php:164
 #: plugins/quota_management/www/quota_project.php:91
-#: www/include/Layout.class.php:560 www/include/project_home.php:313
+#: www/include/Layout.class.php:560 www/include/project_home.php:317
 #: www/themes/gforge-simple-theme/Theme.class.php:505
 #: www/themes/gforge/Theme.class.php:508
 msgid "Forums"
@@ -986,12 +988,12 @@ msgstr "追蹤者"
 #: common/include/group_section_texts.php:32 common/include/rbac_texts.php:86
 #: common/include/rbac_texts.php:87 common/reporting/report_utils.php:172
 #: common/reporting/report_utils.php:200 www/include/Layout.class.php:582
-#: www/include/project_home.php:347 www/my/dashboard.php:89
+#: www/include/project_home.php:351 www/my/dashboard.php:89
 #: www/project/stats/project_stats_utils.php:83
 #: www/project/stats/project_stats_utils.php:142
 #: www/project/stats/project_stats_utils.php:198
-#: www/stats/site_stats_utils.php:274 www/stats/site_stats_utils.php:408
-#: www/stats/site_stats_utils.php:463
+#: www/stats/site_stats_utils.php:277 www/stats/site_stats_utils.php:411
+#: www/stats/site_stats_utils.php:466
 #: www/themes/gforge-simple-theme/Theme.class.php:530
 #: www/themes/gforge/Theme.class.php:530
 #: www/themes/ultralite/Theme.class.php:104
@@ -1012,7 +1014,7 @@ msgstr "檔案"
 
 #: common/include/group_section_texts.php:35
 #: plugins/quota_management/www/quota_project.php:76 www/activity/index.php:89
-#: www/activity/index.php:235 www/admin/index.php:124
+#: www/activity/index.php:235 www/admin/index.php:132
 #: www/include/Layout.class.php:603 www/news/index.php:35
 #: www/news/submit.php:101 www/themes/gforge-simple-theme/Theme.class.php:554
 #: www/themes/gforge/Theme.class.php:551
@@ -1022,15 +1024,15 @@ msgstr "新聞"
 #: common/include/rbac_texts.php:30 common/include/rbac_texts.php:33
 #: common/include/rbac_texts.php:35 common/include/rbac_texts.php:37
 #: common/include/rbac_texts.php:41 common/include/rbac_texts.php:43
-#: www/frs/admin/index.php:199 www/project/admin/editgroupinfo.php:152
+#: www/frs/admin/index.php:200 www/project/admin/editgroupinfo.php:153
 #: www/register/projectinfo.php:194
 msgid "Private"
 msgstr "隱藏"
 
 #: common/include/rbac_texts.php:31 common/include/rbac_texts.php:34
 #: common/include/rbac_texts.php:38 common/include/rbac_texts.php:42
-#: common/include/rbac_texts.php:44 www/frs/admin/index.php:198
-#: www/project/admin/editgroupinfo.php:152 www/register/projectinfo.php:188
+#: common/include/rbac_texts.php:44 www/frs/admin/index.php:199
+#: www/project/admin/editgroupinfo.php:153 www/register/projectinfo.php:188
 msgid "Public"
 msgstr "公開"
 
@@ -1121,8 +1123,8 @@ msgstr "角色/職位"
 
 #: common/include/rbac_texts.php:68 common/include/rbac_texts.php:70
 #: common/include/rbac_texts.php:72 common/include/rbac_texts.php:74
-#: www/include/html.php:280 www/include/html.php:347 www/include/html.php:414
-#: www/include/html.php:432 www/include/html.php:466 www/include/html.php:507
+#: www/include/html.php:282 www/include/html.php:349 www/include/html.php:416
+#: www/include/html.php:434 www/include/html.php:468 www/include/html.php:509
 #: www/pm/ganttpage.php:72 www/tracker/include/ArtifactTypeHtml.class.php:417
 #: www/tracker/include/ArtifactTypeHtml.class.php:456
 #: www/tracker/include/ArtifactTypeHtml.class.php:586
@@ -1170,7 +1172,7 @@ msgstr "專案"
 
 #: common/include/rbac_texts.php:90 common/include/rbac_texts.php:91
 #: common/reporting/report_utils.php:160 www/include/Layout.class.php:567
-#: www/include/project_home.php:281 www/include/project_home.php:282
+#: www/include/project_home.php:284 www/include/project_home.php:285
 #: www/pm/include/ProjectTaskHTML.class.php:92
 #: www/themes/gforge-simple-theme/Theme.class.php:513
 #: www/themes/gforge/Theme.class.php:515 www/tracker/admin/ind.php:96
@@ -1197,7 +1199,7 @@ msgid "Project Admin"
 msgstr "專案管理"
 
 #: common/include/rbac_texts.php:98 common/include/rbac_texts.php:99
-#: www/include/Layout.class.php:610 www/include/project_home.php:378
+#: www/include/Layout.class.php:610 www/include/project_home.php:382
 #: www/scm/include/scm_utils.php:52
 #: www/themes/gforge-simple-theme/Theme.class.php:562
 #: www/themes/gforge/Theme.class.php:558
@@ -1237,9 +1239,9 @@ msgstr "帳號刪除了"
 msgid "Account Not Active"
 msgstr "帳號未啟用"
 
-#: common/include/session.php:412 www/account/lostlogin.php:47
-#: www/account/lostlogin.php:53 www/account/lostlogin.php:68
-#: www/account/lostlogin.php:75 www/account/lostlogin.php:92
+#: common/include/session.php:412 www/account/lostlogin.php:49
+#: www/account/lostlogin.php:55 www/account/lostlogin.php:70
+#: www/account/lostlogin.php:77 www/account/lostlogin.php:94
 #: www/pm/calendar.php:83 www/pm/calendar.php:87 www/pm/calendar.php:89
 #: www/pm/calendar.php:94 www/pm/calendar.php:96 www/pm/calendar.php:107
 #: www/survey/rating_resp.php:53 www/trove/TroveCategory.class.php:75
@@ -1345,20 +1347,20 @@ msgstr "發現迴圈依賴'"
 #: common/tracker/Artifact.class.php:1339
 #: common/tracker/Artifact.class.php:1439
 #: cronjobs/send_pending_items_mail.php:96
-#: plugins/projects_hierarchy/www/softwaremap.php:320
+#: plugins/projects_hierarchy/www/softwaremap.php:321
 #: www/account/index.php:120 www/admin/cronman.php:72
-#: www/admin/grouplist.php:118 www/admin/massmail.php:159
+#: www/admin/grouplist.php:118 www/admin/massmail.php:161
 #: www/admin/search.php:108 www/admin/search.php:184 www/admin/userlist.php:99
 #: www/developer/diary.php:46 www/developer/diary.php:84
-#: www/docman/include/doc_utils.php:214 www/docman/include/doc_utils.php:215
-#: www/export/tracker.php:112 www/forum/forum.php:270 www/forum/forum.php:343
+#: www/docman/include/doc_utils.php:216 www/docman/include/doc_utils.php:217
+#: www/export/tracker.php:112 www/forum/forum.php:271 www/forum/forum.php:344
 #: www/forum/include/ForumHTML.class.php:67
 #: www/forum/include/ForumHTML.class.php:197
 #: www/forum/include/ForumHTML.class.php:245
 #: www/forum/include/ForumHTML.class.php:428 www/forum/index.php:86
-#: www/forum/message.php:107 www/forum/message.php:182
+#: www/forum/message.php:108 www/forum/message.php:183
 #: www/forum/myforums.php:161 www/frs/index.php:170
-#: www/include/project_home.php:81 www/include/stats_function.php:85
+#: www/include/project_home.php:83 www/include/stats_function.php:85
 #: www/include/stats_function.php:108 www/include/user_home.php:93
 #: www/my/diary.php:201 www/news/news_utils.php:148
 #: www/news/news_utils.php:161 www/news/news_utils.php:266
@@ -1377,9 +1379,9 @@ msgstr "發現迴圈依賴'"
 #: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:49
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:52
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:50
-#: www/snippet/detail.php:70 www/snippet/detail.php:158
+#: www/snippet/detail.php:70 www/snippet/detail.php:159
 #: www/soap/tracker/tracker.php:1132 www/softwaremap/full_list.php:146
-#: www/softwaremap/tag_cloud.php:185 www/softwaremap/trove_list.php:317
+#: www/softwaremap/tag_cloud.php:185 www/softwaremap/trove_list.php:318
 #: www/stats/lastlogins.php:49 www/tracker/browse.php:405
 #: www/tracker/browse.php:416 www/tracker/detail.php:45
 #: www/tracker/detail.php:127 www/tracker/detail.php:128
@@ -1399,7 +1401,7 @@ msgstr "Y-m-d H:i"
 msgid "[%1$s - %2$s] [Task #%3$d] "
 msgstr ""
 
-#: common/reporting/TimeEntry.class.php:94 www/reporting/timeadd.php:99
+#: common/reporting/TimeEntry.class.php:94 www/reporting/timeadd.php:108
 msgid "Successfully Added"
 msgstr "成功新增"
 
@@ -1435,7 +1437,7 @@ msgstr "每日"
 #: plugins/svntracker/common/svntrackerPlugin.class.php:67
 #: www/my/dashboard.php:154 www/news/admin/news_admin_utils.php:42
 #: www/pm/detail_task.php:50 www/pm/detail_task.php:54
-#: www/reporting/timeadd.php:129
+#: www/reporting/timeadd.php:138
 msgid "Y-m-d"
 msgstr "Y-m-d"
 
@@ -1476,15 +1478,15 @@ msgid "Y-m"
 msgstr "Y-m"
 
 #: common/reporting/report_utils.php:168 www/include/Layout.class.php:589
-#: www/include/project_home.php:329
+#: www/include/project_home.php:333
 #: www/themes/gforge-simple-theme/Theme.class.php:538
 #: www/themes/gforge/Theme.class.php:537
 msgid "Docs"
 msgstr "文件"
 
 #: common/reporting/report_utils.php:176 common/reporting/report_utils.php:204
-#: www/stats/site_stats_utils.php:265 www/stats/site_stats_utils.php:404
-#: www/stats/site_stats_utils.php:458 www/stats/site_stats_utils.php:514
+#: www/stats/site_stats_utils.php:268 www/stats/site_stats_utils.php:407
+#: www/stats/site_stats_utils.php:461 www/stats/site_stats_utils.php:517
 #: www/top/toplist.php:37 www/top/toplist.php:53
 msgid "Downloads"
 msgstr "下載次數"
@@ -1493,8 +1495,8 @@ msgstr "下載次數"
 #: www/project/stats/project_stats_utils.php:79
 #: www/project/stats/project_stats_utils.php:138
 #: www/project/stats/project_stats_utils.php:194
-#: www/stats/site_stats_utils.php:268 www/stats/site_stats_utils.php:405
-#: www/stats/site_stats_utils.php:459
+#: www/stats/site_stats_utils.php:271 www/stats/site_stats_utils.php:408
+#: www/stats/site_stats_utils.php:462
 msgid "Bugs"
 msgstr "問題回報"
 
@@ -1502,8 +1504,8 @@ msgstr "問題回報"
 #: www/project/stats/project_stats_utils.php:80
 #: www/project/stats/project_stats_utils.php:139
 #: www/project/stats/project_stats_utils.php:195
-#: www/stats/site_stats_utils.php:269 www/stats/site_stats_utils.php:406
-#: www/stats/site_stats_utils.php:460
+#: www/stats/site_stats_utils.php:272 www/stats/site_stats_utils.php:409
+#: www/stats/site_stats_utils.php:463
 msgid "Support"
 msgstr "支援"
 
@@ -1511,8 +1513,8 @@ msgstr "支援"
 #: www/project/stats/project_stats_utils.php:81
 #: www/project/stats/project_stats_utils.php:140
 #: www/project/stats/project_stats_utils.php:196
-#: www/stats/site_stats_utils.php:270 www/stats/site_stats_utils.php:407
-#: www/stats/site_stats_utils.php:461
+#: www/stats/site_stats_utils.php:273 www/stats/site_stats_utils.php:410
+#: www/stats/site_stats_utils.php:464
 msgid "Patches"
 msgstr "修補檔案"
 
@@ -1613,7 +1615,7 @@ msgstr "沒有發現問卷問題"
 #: www/account/change_pw.php:49 www/account/change_pw.php:57
 #: www/account/change_pw.php:65 www/account/change_pw.php:73
 #: www/admin/search.php:39 www/developer/diary.php:97
-#: www/developer/rate.php:77 www/docman/admin/index.php:75
+#: www/developer/rate.php:90 www/docman/admin/index.php:75
 #: www/docman/admin/index.php:87 www/docman/admin/index.php:472
 #: www/docman/admin/index.php:477 www/docman/include/doc_utils.php:64
 #: www/docman/index.php:63 www/docman/index.php:68 www/docman/new.php:55
@@ -1646,19 +1648,19 @@ msgstr "沒有發現問卷問題"
 #: www/forum/admin/pendingmsgdetail.php:67
 #: www/forum/admin/pendingmsgdetail.php:71
 #: www/forum/admin/pendingmsgdetail.php:73 www/forum/attachment.php:77
-#: www/forum/attachment.php:79 www/forum/attachment.php:158
-#: www/forum/attachment.php:160 www/forum/forum.php:46 www/forum/forum.php:60
-#: www/forum/forum.php:62 www/forum/forum.php:79 www/forum/forum.php:82
-#: www/forum/forum.php:97 www/forum/forum.php:122 www/forum/forum.php:125
-#: www/forum/forum.php:139 www/forum/forum.php:141 www/forum/forum.php:394
-#: www/forum/index.php:35 www/forum/message.php:63 www/forum/message.php:65
-#: www/forum/message.php:70 www/forum/message.php:72 www/forum/message.php:77
-#: www/forum/message.php:79 www/forum/message.php:89 www/forum/message.php:91
+#: www/forum/attachment.php:79 www/forum/attachment.php:159
+#: www/forum/attachment.php:161 www/forum/forum.php:47 www/forum/forum.php:61
+#: www/forum/forum.php:63 www/forum/forum.php:80 www/forum/forum.php:83
+#: www/forum/forum.php:98 www/forum/forum.php:123 www/forum/forum.php:126
+#: www/forum/forum.php:140 www/forum/forum.php:142 www/forum/forum.php:395
+#: www/forum/index.php:35 www/forum/message.php:64 www/forum/message.php:66
+#: www/forum/message.php:71 www/forum/message.php:73 www/forum/message.php:78
+#: www/forum/message.php:80 www/forum/message.php:90 www/forum/message.php:92
 #: www/forum/myforums.php:88 www/forum/myforums.php:99
 #: www/forum/myforums.php:101 www/forum/myforums.php:106
 #: www/forum/myforums.php:108 www/forum/save.php:44 www/forum/save.php:46
 #: www/forum/save.php:50 www/frs/admin/showreleases.php:91
-#: www/frs/monitor.php:40 www/frs/shownotes.php:39 www/mail/admin/index.php:48
+#: www/frs/monitor.php:40 www/frs/shownotes.php:40 www/mail/admin/index.php:48
 #: www/mail/admin/index.php:51 www/mail/admin/index.php:60
 #: www/mail/admin/index.php:71 www/mail/admin/index.php:73
 #: www/mail/admin/index.php:80 www/mail/admin/index.php:94
@@ -1668,15 +1670,15 @@ msgstr "沒有發現問卷問題"
 #: www/mail/admin/index.php:216 www/mail/admin/index.php:226
 #: www/mail/index.php:22 www/mail/index.php:29 www/mail/index.php:31
 #: www/mail/index.php:42 www/mail/mail_utils.php:23 www/my/rmproject.php:48
-#: www/news/admin/index.php:109 www/news/admin/index.php:258
+#: www/news/admin/index.php:110 www/news/admin/index.php:259
 #: www/people/viewjob.php:107 www/pm/include/ProjectGroupHTML.class.php:39
 #: www/project/admin/database.php:45 www/project/admin/database.php:47
 #: www/project/admin/editgroupinfo.php:36
 #: www/project/admin/editgroupinfo.php:39 www/project/report/index.php:120
-#: www/scm/viewvc.php:51 www/sendmessage.php:33 www/sendmessage.php:43
-#: www/sendmessage.php:48 www/snapshots.php:23 www/snapshots.php:26
-#: www/snippet/addversion.php:64 www/snippet/browse.php:49
-#: www/snippet/detail.php:211 www/snippet/package.php:111
+#: www/scm/viewvc.php:51 www/sendmessage.php:33 www/sendmessage.php:45
+#: www/sendmessage.php:50 www/snapshots.php:23 www/snapshots.php:26
+#: www/snippet/addversion.php:65 www/snippet/browse.php:49
+#: www/snippet/detail.php:212 www/snippet/package.php:111
 #: www/snippet/submit.php:66 www/survey/admin/question.php:46
 #: www/survey/admin/question.php:48 www/survey/admin/show_results.php:69
 #: www/survey/admin/show_results.php:73 www/survey/admin/show_results.php:84
@@ -1685,7 +1687,7 @@ msgstr "沒有發現問卷問題"
 #: www/survey/include/SurveyHTML.class.php:45 www/survey/survey_utils.php:44
 #: www/tarballs.php:24 www/tarballs.php:27 www/tarballs.php:33
 #: www/tarballs.php:36 www/tracker/admin/index.php:51
-#: www/tracker/admin/updates.php:149 www/tracker/tracker.php:15
+#: www/tracker/admin/updates.php:150 www/tracker/tracker.php:15
 #: www/tracker/tracker.php:30 www/users:33
 msgid "Error"
 msgstr "錯誤"
@@ -1763,7 +1765,7 @@ msgstr "帳號已存在"
 
 #: common/tracker/ArtifactExtraField.class.php:185
 #: common/tracker/ArtifactExtraField.class.php:191
-#: www/tracker/admin/updates.php:78 www/tracker/admin/updates.php:176
+#: www/tracker/admin/updates.php:78 www/tracker/admin/updates.php:177
 msgid "Error inserting an element"
 msgstr "錯誤插入一個組成元件"
 
@@ -1798,14 +1800,14 @@ msgid "Text Area"
 msgstr "多行文字"
 
 #: common/tracker/ArtifactExtraField.class.php:325
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:216
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:220
 #: www/admin/groupedit.php:102 www/admin/grouplist.php:85
 #: www/admin/pluginman.php:184 www/admin/search.php:97
 #: www/admin/search.php:167 www/frs/admin/editrelease.php:261
-#: www/frs/admin/index.php:145 www/my/dashboard.php:81
-#: www/news/admin/index.php:129 www/people/editjob.php:172
+#: www/frs/admin/index.php:146 www/my/dashboard.php:81
+#: www/news/admin/index.php:130 www/people/editjob.php:172
 #: www/people/viewjob.php:75 www/pm/browse_task.php:121
-#: www/pm/detail_task.php:106 www/pm/ganttpage.php:167 www/pm/mod_task.php:142
+#: www/pm/detail_task.php:108 www/pm/ganttpage.php:167 www/pm/mod_task.php:142
 #: www/pm/mod_task.php:159 www/reporting/usersummary.php:106
 #: www/tracker/admin/form-addextrafield.php:102
 #: www/tracker/admin/form-addextrafieldoption.php:81
@@ -1899,7 +1901,7 @@ msgid ""
 "project page</a>."
 msgstr ""
 
-#: cronjobs/massmail.php:140
+#: cronjobs/massmail.php:142
 #, php-format
 msgid ""
 "You receive this message because you subscribed to %1$s\n"
@@ -1982,16 +1984,16 @@ msgstr "檔案名稱"
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:103
 #: plugins/svntracker/common/svntrackerPlugin.class.php:95
-#: www/admin/cronman.php:50 www/admin/massmail.php:145
+#: www/admin/cronman.php:50 www/admin/massmail.php:147
 #: www/developer/diary.php:46 www/developer/diary.php:78
-#: www/forum/forum.php:236 www/forum/include/ForumHTML.class.php:67
-#: www/forum/message.php:139 www/frs/admin/showreleases.php:102
-#: www/frs/index.php:100 www/include/project_home.php:183
+#: www/forum/forum.php:237 www/forum/include/ForumHTML.class.php:67
+#: www/forum/message.php:140 www/frs/admin/showreleases.php:102
+#: www/frs/index.php:100 www/include/project_home.php:186
 #: www/news/admin/news_admin_utils.php:56 www/pm/calendar.php:252
 #: www/pm/include/ProjectTaskHTML.class.php:127
 #: www/pm/include/ProjectTaskHTML.class.php:164
 #: www/project/admin/project_admin_utils.php:164
-#: www/project/stats/project_stats_utils.php:75 www/reporting/timeadd.php:153
+#: www/project/stats/project_stats_utils.php:75 www/reporting/timeadd.php:162
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:46
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:44
 #: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:37
@@ -2021,10 +2023,10 @@ msgstr ""
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:107
 #: plugins/svntracker/common/svntrackerPlugin.class.php:99
-#: www/forum/forum.php:235 www/forum/message.php:138
+#: www/forum/forum.php:236 www/forum/message.php:139
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:43
 #: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:36
-#: www/snippet/detail.php:55 www/snippet/detail.php:143
+#: www/snippet/detail.php:55 www/snippet/detail.php:144
 #: www/snippet/snippet_utils.php:142
 msgid "Author"
 msgstr "作者"
@@ -2034,72 +2036,72 @@ msgstr "作者"
 msgid "Diff To"
 msgstr ""
 
-#: plugins/extratabs/www/index.php:53
+#: plugins/extratabs/www/index.php:58
 #, fuzzy, php-format
 msgid "Cannot insert new tab entry: %s"
 msgstr "無法增加資料庫分類"
 
-#: plugins/extratabs/www/index.php:56
+#: plugins/extratabs/www/index.php:62
 msgid "Tab added"
 msgstr ""
 
-#: plugins/extratabs/www/index.php:63
+#: plugins/extratabs/www/index.php:69
 #, fuzzy, php-format
 msgid "Cannot delete tab entry: %s"
 msgstr "無法增加資料庫分類"
 
-#: plugins/extratabs/www/index.php:117 www/project/admin/index.php:166
+#: plugins/extratabs/www/index.php:118 www/project/admin/index.php:166
 #, php-format
 msgid "Project Admin: %1$s"
 msgstr "專案管理：%1$s"
 
-#: plugins/extratabs/www/index.php:124
+#: plugins/extratabs/www/index.php:125
 #, fuzzy
 msgid "Add new tabs"
 msgstr "增加新資料庫"
 
-#: plugins/extratabs/www/index.php:125
+#: plugins/extratabs/www/index.php:126
 msgid "You can add your own tabs in the menu bar with the form below."
 msgstr ""
 
-#: plugins/extratabs/www/index.php:132
+#: plugins/extratabs/www/index.php:133
 #, fuzzy
 msgid "Name of the tab:"
 msgstr "已開始的任務數"
 
-#: plugins/extratabs/www/index.php:135
+#: plugins/extratabs/www/index.php:136
 msgid "URL of the tab:"
 msgstr ""
 
-#: plugins/extratabs/www/index.php:138
+#: plugins/extratabs/www/index.php:139
 #, fuzzy
 msgid "Add tab"
 msgstr "增加任務"
 
-#: plugins/extratabs/www/index.php:150
+#: plugins/extratabs/www/index.php:151
 msgid "Manage extra tabs"
 msgstr ""
 
-#: plugins/extratabs/www/index.php:152
+#: plugins/extratabs/www/index.php:153
 msgid ""
 "You can move and delete the tabs that you already added. Please note that "
 "those extra tabs can only appear on the right of the standard tabs. And you "
 "can only move them inside the set of extra tabs."
 msgstr ""
 
-#: plugins/extratabs/www/index.php:158
+#: plugins/extratabs/www/index.php:159
 msgid "Tab to modify:"
 msgstr ""
 
-#: plugins/extratabs/www/index.php:171
+#: plugins/extratabs/www/index.php:172
 msgid "Move tab left"
 msgstr ""
 
-#: plugins/extratabs/www/index.php:172
+#: plugins/extratabs/www/index.php:173
 msgid "Move tab right"
 msgstr ""
 
-#: plugins/extratabs/www/index.php:174
+#: plugins/extratabs/www/index.php:175
 #, fuzzy
 msgid "Delete tab"
 msgstr "刪除"
@@ -2150,10 +2152,10 @@ msgstr ""
 msgid "Require all words"
 msgstr "以所有字"
 
-#: plugins/globalsearch/common/GlobalsearchPlugin.class.php:87
-#: plugins/globalsearch/common/GlobalsearchPlugin.class.php:115
-#: plugins/globalsearch/common/globalsearch_stats_boxes.php:72
-#: plugins/globalsearch/common/globalsearch_stats_boxes.php:101
+#: plugins/globalsearch/common/GlobalsearchPlugin.class.php:89
+#: plugins/globalsearch/common/GlobalsearchPlugin.class.php:118
+#: plugins/globalsearch/common/globalsearch_stats_boxes.php:74
+#: plugins/globalsearch/common/globalsearch_stats_boxes.php:104
 #, fuzzy
 msgid "No stats available"
 msgstr "沒有統計資訊"
@@ -2164,9 +2166,9 @@ msgid "Create a new associated forge below"
 msgstr "創造一個新的 %1$s 如下："
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:37
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:93
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:143
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:212
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:94
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:146
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:216
 #: www/people/people_utils.php:426 www/people/skills_utils.php:37
 #: www/pm/admin/index.php:193
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:37
@@ -2179,9 +2181,9 @@ msgid "Title"
 msgstr "標題"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:38
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:94
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:144
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:213
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:95
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:147
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:217
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:144
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:157
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:172
@@ -2191,25 +2193,25 @@ msgid "Link"
 msgstr "登入"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:39
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:95
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:145
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:214
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:96
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:148
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:218
 #, fuzzy
 msgid "Software only"
 msgstr "軟體地圖"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:40
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:96
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:146
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:215
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:97
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:149
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:219
 #, fuzzy
 msgid "Enabled"
 msgstr "結束"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:41
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:97
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:147
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:217
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:98
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:150
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:221
 #: www/project/stats/project_stats_utils.php:76
 #: www/project/stats/project_stats_utils.php:135
 #: www/project/stats/project_stats_utils.php:191 www/top/mostactive.php:52
@@ -2227,15 +2229,15 @@ msgstr "送出新的文件"
 msgid "Associated forge successfully added."
 msgstr "%1$s 新增成功"
 
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:91
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:92
 #, fuzzy
 msgid "Are you sure you want to delete this associated forge?"
 msgstr "您確定要刪除這個自訂類型？"
 
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:95
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:96
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:230
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:231
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:97
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:234
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:235
 #: www/admin/groupedit.php:143 www/forum/admin/index.php:96
 #: www/forum/admin/index.php:100 www/forum/admin/index.php:146
 #: www/forum/admin/index.php:151 www/forum/admin/index.php:229
@@ -2248,10 +2250,10 @@ msgstr "您確定要刪除這個自訂類型？"
 msgid "Yes"
 msgstr "是"
 
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:95
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:96
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:230
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:231
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:97
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:234
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:235
 #: www/admin/groupedit.php:142 www/forum/admin/index.php:97
 #: www/forum/admin/index.php:101 www/forum/admin/index.php:147
 #: www/forum/admin/index.php:152 www/forum/admin/index.php:230
@@ -2264,23 +2266,23 @@ msgstr "是"
 msgid "No"
 msgstr "否"
 
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:100
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:101
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:267
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:318
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:345
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:375
 #: www/admin/admin_table.php:136 www/admin/admin_table.php:266
-#: www/admin/responses_admin.php:47 www/admin/trove/trove_cat_edit.php:147
+#: www/admin/responses_admin.php:47 www/admin/trove/trove_cat_edit.php:151
 #: www/admin/useredit.php:201 www/docman/admin/index.php:458
 #: www/forum/admin/ForumAdmin.class.php:63 www/forum/admin/index.php:184
 #: www/forum/admin/index.php:194 www/forum/include/AttachManager.class.php:148
 #: www/frs/admin/deletepackage.php:76 www/frs/admin/deleterelease.php:81
-#: www/frs/admin/index.php:171 www/frs/admin/showreleases.php:115
-#: www/my/index.php:427 www/news/admin/index.php:131
+#: www/frs/admin/index.php:172 www/frs/admin/showreleases.php:115
+#: www/my/index.php:427 www/news/admin/index.php:132
 #: www/people/people_utils.php:183 www/people/people_utils.php:333
 #: www/people/skills_utils.php:34 www/people/skills_utils.php:92
 #: www/pm/admin/index.php:389 www/pm/admin/index.php:400
-#: www/project/admin/vhost.php:142 www/reporting/timeadd.php:171
+#: www/project/admin/vhost.php:145 www/reporting/timeadd.php:180
 #: www/snippet/detail.php:56 www/survey/include/SurveyHTML.class.php:306
 #: www/tracker/admin/form-addextrafield.php:36
 #: www/tracker/admin/form-deleteextrafield.php:19
@@ -2292,81 +2294,81 @@ msgstr "否"
 msgid "Delete"
 msgstr "刪除"
 
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:103
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:151
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:104
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:154
 #: www/admin/admin_table.php:58 www/admin/admin_table.php:139
 #: www/admin/admin_table.php:197 www/forum/include/ForumHTML.class.php:514
 #: www/my/rmproject.php:90 www/people/editprofile.php:148
 #: www/people/editprofile.php:218 www/pm/mod_task.php:228
-#: www/register/projectinfo.php:201 www/reporting/timeadd.php:187
+#: www/register/projectinfo.php:201 www/reporting/timeadd.php:197
 msgid "Cancel"
 msgstr "取消"
 
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:117
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:119
 #, fuzzy
 msgid "Associated forge successfully deleted."
 msgstr "%1$s 刪除成功"
 
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:139
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:142
 #, fuzzy
 msgid "Modify the associated forge below"
 msgstr "修改 %1$s 如下："
 
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:149
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:152
 #, fuzzy
 msgid "Submit changes"
 msgstr "送出異動"
 
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:187
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:190
 #, fuzzy
 msgid "Associated forge successfully modified."
 msgstr "%1$s 修改成功"
 
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:204
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:208
 msgid "Associated forge"
 msgid_plural "Associated forges"
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:204
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:208
 #, fuzzy
 msgid "[add new]"
 msgstr "新增"
 
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:211
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:215
 msgid "Forge ID"
 msgstr ""
 
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:224
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:228
 #, fuzzy
 msgid "[edit]"
 msgstr "編輯"
 
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:225
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:229
 #, fuzzy
 msgid "[delete]"
 msgstr "刪除"
 
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:244
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:248
 #, fuzzy
 msgid "New"
 msgstr "新聞"
 
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:245
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:249
 msgid "OK"
 msgstr ""
 
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:246
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:250
 #, fuzzy
 msgid "Error fetching data"
 msgstr "新增資料庫時發生錯誤"
 
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:247
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:251
 #, fuzzy
 msgid "Error parsing data"
 msgstr "更新時發生錯誤"
 
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:248
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:252
 msgid "Unknown status ID"
 msgstr ""
 
@@ -2407,10 +2409,10 @@ msgstr "新專案名稱"
 #: plugins/globalsearch/www/index.php:155 www/docman/admin/index.php:197
 #: www/docman/new.php:135 www/forum/admin/index.php:93
 #: www/forum/admin/index.php:165 www/forum/index.php:60
-#: www/forum/myforums.php:72 www/help/trove_cat.php:49 www/mail/index.php:61
+#: www/forum/myforums.php:72 www/help/trove_cat.php:50 www/mail/index.php:61
 #: www/pm/admin/index.php:300 www/pm/admin/index.php:349 www/pm/index.php:68
-#: www/project/admin/editimages.php:222 www/project/admin/editimages.php:248
-#: www/project/admin/editimages.php:264
+#: www/project/admin/editimages.php:233 www/project/admin/editimages.php:260
+#: www/project/admin/editimages.php:276
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:38
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:33
 #: www/snippet/submit.php:86 www/tracker/admin/form-updatetracker.php:22
@@ -2462,143 +2464,143 @@ msgstr ""
 msgid "Project labels"
 msgstr "專案檔案列表"
 
-#: plugins/projectlabels/www/index.php:23
+#: plugins/projectlabels/www/index.php:25
 #, php-format
 msgid "Cannot insert new label: %s"
 msgstr ""
 
-#: plugins/projectlabels/www/index.php:26
+#: plugins/projectlabels/www/index.php:28
 #, fuzzy
 msgid "Project label added."
 msgstr "新增的專案"
 
-#: plugins/projectlabels/www/index.php:36
-#: plugins/projectlabels/www/index.php:43
+#: plugins/projectlabels/www/index.php:39
+#: plugins/projectlabels/www/index.php:47
 #, php-format
 msgid "Cannot delete label: %s"
 msgstr ""
 
-#: plugins/projectlabels/www/index.php:47
+#: plugins/projectlabels/www/index.php:51
 #, fuzzy
 msgid "Project label deleted."
 msgstr "專案檔案列表"
 
-#: plugins/projectlabels/www/index.php:62
+#: plugins/projectlabels/www/index.php:66
 #, fuzzy, php-format
 msgid "Cannot add label onto project: %s"
 msgstr "無法增加資料庫分類"
 
-#: plugins/projectlabels/www/index.php:65
+#: plugins/projectlabels/www/index.php:69
 msgid "The label has been added to the project."
 msgstr ""
 
-#: plugins/projectlabels/www/index.php:74
+#: plugins/projectlabels/www/index.php:80
 #, php-format
 msgid "Cannot remove label: %s"
 msgstr ""
 
-#: plugins/projectlabels/www/index.php:77
+#: plugins/projectlabels/www/index.php:83
 msgid "The label has been removed from the project."
 msgstr ""
 
-#: plugins/projectlabels/www/index.php:88
+#: plugins/projectlabels/www/index.php:97
 #, php-format
 msgid "Cannot modify label: %s"
 msgstr ""
 
-#: plugins/projectlabels/www/index.php:91
+#: plugins/projectlabels/www/index.php:100
 #, fuzzy
 msgid "Label has been saved."
 msgstr "訊息已送出"
 
-#: plugins/projectlabels/www/index.php:104
+#: plugins/projectlabels/www/index.php:114
 #, fuzzy
 msgid "Label name:"
 msgstr "真實姓名"
 
-#: plugins/projectlabels/www/index.php:106
-#: plugins/projectlabels/www/index.php:181
+#: plugins/projectlabels/www/index.php:116
+#: plugins/projectlabels/www/index.php:192
 msgid "Displayed text (or HTML) for the label:"
 msgstr ""
 
-#: plugins/projectlabels/www/index.php:109
-#: plugins/projectlabels/www/index.php:128
+#: plugins/projectlabels/www/index.php:119
+#: plugins/projectlabels/www/index.php:139
 msgid "This label currently looks like this:"
 msgstr ""
 
-#: plugins/projectlabels/www/index.php:110
+#: plugins/projectlabels/www/index.php:120
 #, fuzzy
 msgid "Save this label"
 msgstr "保存位置"
 
-#: plugins/projectlabels/www/index.php:123
+#: plugins/projectlabels/www/index.php:134
 #, fuzzy
 msgid "Manage labels"
 msgstr "新發佈"
 
-#: plugins/projectlabels/www/index.php:124
+#: plugins/projectlabels/www/index.php:135
 msgid "You can edit the labels that you have already created."
 msgstr ""
 
-#: plugins/projectlabels/www/index.php:136
+#: plugins/projectlabels/www/index.php:147
 #, fuzzy
 msgid "This label is used on the following group:"
 msgid_plural "This label is used on the following groups:"
 msgstr[0] "這個研發人員隸屬於下面群組："
 msgstr[1] "這個研發人員隸屬於下面群組："
 
-#: plugins/projectlabels/www/index.php:147
+#: plugins/projectlabels/www/index.php:158
 #, fuzzy
 msgid "[Remove this label]"
 msgstr "移除這個規則"
 
-#: plugins/projectlabels/www/index.php:150
+#: plugins/projectlabels/www/index.php:161
 #, fuzzy
 msgid "This label is not used on any group."
 msgstr "這個研發人員不屬於任何專案"
 
-#: plugins/projectlabels/www/index.php:154
+#: plugins/projectlabels/www/index.php:165
 msgid "Unix name of the project:"
 msgstr ""
 
-#: plugins/projectlabels/www/index.php:157
+#: plugins/projectlabels/www/index.php:168
 #, fuzzy
 msgid "Add label to project"
 msgstr "增加新專案"
 
-#: plugins/projectlabels/www/index.php:162
+#: plugins/projectlabels/www/index.php:173
 #, fuzzy
 msgid "[Edit this label]"
 msgstr "編輯 %1$s 表格"
 
-#: plugins/projectlabels/www/index.php:164
+#: plugins/projectlabels/www/index.php:175
 #, fuzzy
 msgid "[Delete this label]"
 msgstr "刪除這個任務"
 
-#: plugins/projectlabels/www/index.php:172
+#: plugins/projectlabels/www/index.php:183
 #, fuzzy
 msgid "Add new labels"
 msgstr "增加新任務"
 
-#: plugins/projectlabels/www/index.php:173
+#: plugins/projectlabels/www/index.php:184
 msgid "You can create new labels with the form below."
 msgstr ""
 
-#: plugins/projectlabels/www/index.php:179
+#: plugins/projectlabels/www/index.php:190
 msgid "Name of the label:"
 msgstr ""
 
-#: plugins/projectlabels/www/index.php:180
+#: plugins/projectlabels/www/index.php:191
 #, fuzzy
 msgid "potm"
 msgstr "報告"
 
-#: plugins/projectlabels/www/index.php:183
+#: plugins/projectlabels/www/index.php:194
 msgid "<p><b>Project of the month!</b></p>"
 msgstr ""
 
-#: plugins/projectlabels/www/index.php:185
+#: plugins/projectlabels/www/index.php:196
 #, fuzzy
 msgid "Add label"
 msgstr "新增日期"
@@ -2717,69 +2719,69 @@ msgstr ""
 msgid "Navigation"
 msgstr ""
 
-#: plugins/projects_hierarchy/www/softwaremap.php:42
-#: www/softwaremap/trove_list.php:56 www/trove/TroveCategory.class.php:67
+#: plugins/projects_hierarchy/www/softwaremap.php:43
+#: www/softwaremap/trove_list.php:57 www/trove/TroveCategory.class.php:67
 msgid "Invalid Trove Category"
 msgstr "錯誤的軟體類別"
 
-#: plugins/projects_hierarchy/www/softwaremap.php:43
-#: www/softwaremap/trove_list.php:57
+#: plugins/projects_hierarchy/www/softwaremap.php:44
+#: www/softwaremap/trove_list.php:58
 msgid "That Trove category does not exist"
 msgstr "軟體類別不存在"
 
-#: plugins/projects_hierarchy/www/softwaremap.php:47
+#: plugins/projects_hierarchy/www/softwaremap.php:48
 #: www/softwaremap/full_list.php:49 www/softwaremap/tag_cloud.php:53
-#: www/softwaremap/trove_list.php:61
+#: www/softwaremap/trove_list.php:62
 msgid "Software Map"
 msgstr "軟體地圖"
 
-#: plugins/projects_hierarchy/www/softwaremap.php:56
+#: plugins/projects_hierarchy/www/softwaremap.php:57
 #: www/reporting/projecttime.php:54 www/reporting/sitetime.php:52
 #: www/reporting/usertime.php:68
 msgid "By Category"
 msgstr "根據類別"
 
-#: plugins/projects_hierarchy/www/softwaremap.php:56
+#: plugins/projects_hierarchy/www/softwaremap.php:57
 msgid "By Tree"
 msgstr ""
 
-#: plugins/projects_hierarchy/www/softwaremap.php:124
+#: plugins/projects_hierarchy/www/softwaremap.php:125
 msgid "Now limiting view to projects in the following categories"
 msgstr "現在限制下面類別的專案瀏覽"
 
-#: plugins/projects_hierarchy/www/softwaremap.php:131
-#: www/softwaremap/trove_list.php:139
+#: plugins/projects_hierarchy/www/softwaremap.php:132
+#: www/softwaremap/trove_list.php:140
 msgid "Remove This Filter"
 msgstr "移除這個規則"
 
-#: plugins/projects_hierarchy/www/softwaremap.php:192
-#: www/softwaremap/trove_list.php:194 www/trove/index.php:140
+#: plugins/projects_hierarchy/www/softwaremap.php:193
+#: www/softwaremap/trove_list.php:195 www/trove/index.php:140
 #, php-format
 msgid "%1$s projects"
 msgstr "%1$s 個專案"
 
-#: plugins/projects_hierarchy/www/softwaremap.php:207
-#: www/softwaremap/trove_list.php:209 www/trove/index.php:83
+#: plugins/projects_hierarchy/www/softwaremap.php:208
+#: www/softwaremap/trove_list.php:210 www/trove/index.php:83
 msgid "Browse By"
 msgstr "瀏覽者："
 
-#: plugins/projects_hierarchy/www/softwaremap.php:262
-#: www/softwaremap/full_list.php:90 www/softwaremap/trove_list.php:255
+#: plugins/projects_hierarchy/www/softwaremap.php:263
+#: www/softwaremap/full_list.php:90 www/softwaremap/trove_list.php:256
 #, php-format
 msgid "More than <strong>%1$s</strong> projects in result set."
 msgstr "找到超過 <strong>%1$s</strong> 個專案"
 
-#: plugins/projects_hierarchy/www/softwaremap.php:265
-#: www/softwaremap/trove_list.php:258
+#: plugins/projects_hierarchy/www/softwaremap.php:266
+#: www/softwaremap/trove_list.php:259
 #, fuzzy, php-format
 msgid "<strong>%1$s</strong> project in result set."
 msgid_plural "<strong>%1$s</strong> projects in result set."
 msgstr[0] "找到 <strong>%1$s</strong> 個專案"
 msgstr[1] "找到 <strong>%1$s</strong> 個專案"
 
-#: plugins/projects_hierarchy/www/softwaremap.php:388
+#: plugins/projects_hierarchy/www/softwaremap.php:389
 #: www/softwaremap/full_list.php:59 www/softwaremap/tag_cloud.php:64
-#: www/softwaremap/trove_list.php:72
+#: www/softwaremap/trove_list.php:73
 msgid "Project Tree"
 msgstr ""
 
@@ -2804,7 +2806,7 @@ msgstr ""
 #: plugins/quota_management/www/quota.php:33
 #: plugins/quota_management/www/quota_admin.php:36 www/admin/configman.php:35
 #: www/admin/cronman.php:31 www/admin/index.php:34 www/admin/pluginman.php:37
-#: www/admin/vhost.php:104
+#: www/admin/vhost.php:113
 #, fuzzy
 msgid "Site admin"
 msgstr "網站管理"
@@ -2991,10 +2993,10 @@ msgstr ""
 
 #: plugins/quota_management/www/quota_project.php:204
 #: plugins/quota_management/www/quota_project.php:251
-#: plugins/scmbzr/common/BzrPlugin.class.php:265
-#: plugins/scmcvs/common/CVSPlugin.class.php:280
-#: plugins/scmsvn/common/SVNPlugin.class.php:292 www/pm/index.php:70
-#: www/pm/mod_task.php:261 www/stats/site_stats_utils.php:300
+#: plugins/scmbzr/common/BzrPlugin.class.php:266
+#: plugins/scmcvs/common/CVSPlugin.class.php:281
+#: plugins/scmsvn/common/SVNPlugin.class.php:293 www/pm/index.php:70
+#: www/pm/mod_task.php:261 www/stats/site_stats_utils.php:303
 #: www/tracker/ind.php:45
 msgid "Total"
 msgstr "總共"
@@ -3099,30 +3101,30 @@ msgstr ""
 msgid "<strong>%1$s</strong> updates, <strong>%2$s</strong> adds"
 msgstr ""
 
-#: plugins/scmbzr/common/BzrPlugin.class.php:232
-#: plugins/scmcvs/common/CVSPlugin.class.php:260
-#: plugins/scmsvn/common/SVNPlugin.class.php:259 www/admin/useredit.php:243
-#: www/project/admin/editimages.php:260 www/reporting/usersummary.php:104
+#: plugins/scmbzr/common/BzrPlugin.class.php:233
+#: plugins/scmcvs/common/CVSPlugin.class.php:261
+#: plugins/scmsvn/common/SVNPlugin.class.php:260 www/admin/useredit.php:245
+#: www/project/admin/editimages.php:272 www/reporting/usersummary.php:104
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:32
 #: www/tracker/detail.php:169 www/tracker/mod-limited.php:161
 #: www/tracker/mod.php:258
 msgid "Name"
 msgstr "名稱"
 
-#: plugins/scmbzr/common/BzrPlugin.class.php:233
-#: plugins/scmcvs/common/CVSPlugin.class.php:261
-#: plugins/scmsvn/common/SVNPlugin.class.php:260
-#: www/stats/site_stats_utils.php:319
+#: plugins/scmbzr/common/BzrPlugin.class.php:234
+#: plugins/scmcvs/common/CVSPlugin.class.php:262
+#: plugins/scmsvn/common/SVNPlugin.class.php:261
+#: www/stats/site_stats_utils.php:322
 msgid "Adds"
 msgstr "新增"
 
-#: plugins/scmbzr/common/BzrPlugin.class.php:234
-#: plugins/scmsvn/common/SVNPlugin.class.php:261
+#: plugins/scmbzr/common/BzrPlugin.class.php:235
+#: plugins/scmsvn/common/SVNPlugin.class.php:262
 msgid "Updates"
 msgstr ""
 
-#: plugins/scmbzr/common/BzrPlugin.class.php:256
-#: plugins/scmsvn/common/SVNPlugin.class.php:283
+#: plugins/scmbzr/common/BzrPlugin.class.php:257
+#: plugins/scmsvn/common/SVNPlugin.class.php:284
 msgid "Unknown"
 msgstr ""
 
@@ -3163,14 +3165,14 @@ msgstr ""
 msgid "ClearCase server"
 msgstr ""
 
-#: plugins/scmccase/common/CCasePlugin.class.php:168
+#: plugins/scmccase/common/CCasePlugin.class.php:169
 #, fuzzy, php-format
 msgid "commit"
 msgid_plural "commits"
 msgstr[0] "評論"
 msgstr[1] "評論"
 
-#: plugins/scmccase/common/CCasePlugin.class.php:170
+#: plugins/scmccase/common/CCasePlugin.class.php:171
 #, fuzzy, php-format
 msgid "add"
 msgid_plural "adds"
@@ -3237,7 +3239,7 @@ msgstr ""
 msgid "Enable pserver"
 msgstr ""
 
-#: plugins/scmcvs/common/CVSPlugin.class.php:242
+#: plugins/scmcvs/common/CVSPlugin.class.php:243
 #, php-format
 msgid "<strong>%1$s</strong> commits, <strong>%2$s</strong> adds"
 msgstr ""
@@ -3336,11 +3338,11 @@ msgstr "頁面不存在（錯誤 404）"
 msgid "PAGE NOT FOUND"
 msgstr "頁面不存在"
 
-#: www/account/change_email-complete.php:67
+#: www/account/change_email-complete.php:69
 msgid "Email Change Complete"
 msgstr "Email改變成功"
 
-#: www/account/change_email-complete.php:72
+#: www/account/change_email-complete.php:74
 #, php-format
 msgid ""
 "Welcome, %1$s. Your email change is complete. Your new email address on file "
@@ -3348,8 +3350,8 @@ msgid ""
 "this account."
 msgstr ""
 
-#: www/account/change_email-complete.php:75 www/account/change_email.php:93
-#: www/account/lostpw.php:97 www/account/unsubscribe.php:73
+#: www/account/change_email-complete.php:77 www/account/change_email.php:93
+#: www/account/lostpw.php:97 www/account/unsubscribe.php:75
 #: www/my/bookmark_edit.php:66
 msgid "Return"
 msgstr "返回"
@@ -3430,7 +3432,7 @@ msgstr "舊的密碼不正確"
 msgid "You must supply valid password (at least 6 chars)"
 msgstr "您必須提供有效的密碼（至少6個字元）"
 
-#: www/account/change_pw.php:66 www/account/lostlogin.php:76
+#: www/account/change_pw.php:66 www/account/lostlogin.php:78
 msgid "New passwords do not match."
 msgstr "新密碼不一致。"
 
@@ -3462,7 +3464,7 @@ msgstr "舊密碼"
 msgid "New Password (at least 6 chars)"
 msgstr "新密碼（至少6個字元）"
 
-#: www/account/change_pw.php:104 www/account/lostlogin.php:105
+#: www/account/change_pw.php:104 www/account/lostlogin.php:107
 msgid "New Password (repeat)"
 msgstr "新密碼（重複）"
 
@@ -3508,17 +3510,17 @@ msgstr ""
 "字元，在提交之後，檢驗您檔案中Keys的數值是您所期望的。</span>"
 
 #: www/account/editsshkeys.php:86 www/account/index.php:279
-#: www/account/lostlogin.php:108 www/admin/groupedit.php:206
-#: www/admin/trove/trove_cat_edit.php:147 www/admin/useredit.php:206
-#: www/admin/vhost.php:180 www/forum/admin/ForumAdmin.class.php:377
+#: www/account/lostlogin.php:110 www/admin/groupedit.php:206
+#: www/admin/trove/trove_cat_edit.php:151 www/admin/useredit.php:206
+#: www/admin/vhost.php:191 www/forum/admin/ForumAdmin.class.php:377
 #: www/forum/admin/index.php:168 www/forum/include/ForumHTML.class.php:299
-#: www/forum/include/ForumHTML.class.php:513 www/frs/admin/index.php:168
+#: www/forum/include/ForumHTML.class.php:513 www/frs/admin/index.php:169
 #: www/mail/admin/index.php:205 www/mail/admin/index.php:256
 #: www/people/people_utils.php:182 www/people/people_utils.php:332
 #: www/pm/admin/index.php:367 www/pm/calendar.php:277
-#: www/project/admin/database.php:231 www/project/admin/editgroupinfo.php:352
-#: www/project/admin/index.php:275 www/project/admin/index.php:295
-#: www/reporting/timecategory.php:97 www/scm/admin/index.php:110
+#: www/project/admin/database.php:239 www/project/admin/editgroupinfo.php:353
+#: www/project/admin/index.php:276 www/project/admin/index.php:296
+#: www/reporting/timecategory.php:99 www/scm/admin/index.php:110
 msgid "Update"
 msgstr "更新"
 
@@ -3544,8 +3546,8 @@ msgstr ""
 msgid "Updated"
 msgstr "已更新"
 
-#: www/account/index.php:93 www/account/index.php:97 www/include/html.php:740
-#: www/include/html.php:750
+#: www/account/index.php:93 www/account/index.php:97 www/include/html.php:742
+#: www/include/html.php:752
 msgid "Account Maintenance"
 msgstr "帳號維護"
 
@@ -3742,36 +3744,36 @@ msgstr "[新帳號]"
 msgid "[Resend confirmation email to a pending account]"
 msgstr "[重新發送確認信函給未通過的帳號]"
 
-#: www/account/lostlogin.php:48
+#: www/account/lostlogin.php:50
 msgid "This confirm hash exists more than once."
 msgstr "這個確認編碼不只存在了一次"
 
-#: www/account/lostlogin.php:54
+#: www/account/lostlogin.php:56
 msgid "Invalid confirmation hash"
 msgstr "不正確的確認編碼"
 
-#: www/account/lostlogin.php:69
+#: www/account/lostlogin.php:71
 msgid "You must supply valid password (at least 6 chars)."
 msgstr "您必須提供一個有效的密碼（至少6個字元）。"
 
-#: www/account/lostlogin.php:86
+#: www/account/lostlogin.php:88
 #, php-format
 msgid ""
 "<h2>Password changed</h2><p>Congratulations, you have re-set your account "
 "password. You may <a href=\"%1$s\">login</a> to the site now.</p>"
 msgstr ""
 
-#: www/account/lostlogin.php:95
+#: www/account/lostlogin.php:97
 #, fuzzy
 msgid "Lost Password Login"
 msgstr "[忘了密碼？]"
 
-#: www/account/lostlogin.php:98
+#: www/account/lostlogin.php:100
 #, php-format
 msgid "Welcome, %s. You may now change your password."
 msgstr ""
 
-#: www/account/lostlogin.php:103
+#: www/account/lostlogin.php:105
 msgid "New Password (min. 6 chars)"
 msgstr "新密碼（至少6個字元）"
 
@@ -3858,15 +3860,15 @@ msgstr "無效的Email"
 
 #: www/account/pending-resend.php:78 www/activity/index.php:157
 #: www/admin/admin_table.php:195 www/admin/cronman.php:45
-#: www/admin/index.php:118 www/admin/userlist.php:185
+#: www/admin/index.php:126 www/admin/userlist.php:185
 #: www/include/vote_function.php:266 www/my/bookmark_add.php:51
-#: www/my/bookmark_edit.php:62 www/news/admin/index.php:153
-#: www/news/admin/index.php:298 www/news/news_utils.php:52
+#: www/my/bookmark_edit.php:62 www/news/admin/index.php:154
+#: www/news/admin/index.php:299 www/news/news_utils.php:52
 #: www/news/submit.php:133 www/pm/add_task.php:43 www/pm/add_task.php:125
 #: www/pm/add_task.php:139 www/pm/admin/index.php:221
 #: www/pm/admin/index.php:267 www/pm/admin/index.php:306
 #: www/pm/deletetask.php:36 www/pm/mod_task.php:37 www/pm/mod_task.php:195
-#: www/project/admin/editimages.php:231 www/project/admin/roleedit.php:268
+#: www/project/admin/editimages.php:242 www/project/admin/roleedit.php:272
 #: www/project/request.php:67 www/register/projectinfo.php:201
 #: www/survey/include/SurveyHTML.class.php:537 www/tracker/add.php:26
 #: www/tracker/add.php:56 www/tracker/add.php:118
@@ -3882,7 +3884,7 @@ msgstr "無效的Email"
 #: www/tracker/admin/form-updatetracker.php:50
 #: www/tracker/admin/form-uploadtemplate.php:14
 #: www/tracker/admin/form-workflow.php:105
-#: www/tracker/admin/form-workflow_roles.php:55 www/tracker/admin/ind.php:151
+#: www/tracker/admin/form-workflow_roles.php:56 www/tracker/admin/ind.php:151
 #: www/tracker/deleteartifact.php:31 www/tracker/mod-limited.php:50
 msgid "Submit"
 msgstr "提交"
@@ -3949,12 +3951,12 @@ msgstr ""
 msgid "Register"
 msgstr "註冊"
 
-#: www/account/unsubscribe.php:61 www/account/unsubscribe.php:63
+#: www/account/unsubscribe.php:63 www/account/unsubscribe.php:65
 #, fuzzy
 msgid "Unsubscription Complete"
 msgstr "註冊完成"
 
-#: www/account/unsubscribe.php:66
+#: www/account/unsubscribe.php:68
 #, php-format
 msgid ""
 "You have been unsubscribed from all %1$s mailings and notifications. In case "
@@ -3962,7 +3964,7 @@ msgid ""
 "visit your Account Maintenance page."
 msgstr ""
 
-#: www/account/unsubscribe.php:68
+#: www/account/unsubscribe.php:70
 #, php-format
 msgid ""
 "You have been unsubscribed from %1$s site mailings. In case you will want to "
@@ -4073,7 +4075,7 @@ msgid "No Activity Found"
 msgstr ""
 
 #: www/activity/index.php:192 www/reporting/projecttime.php:86
-#: www/reporting/sitetime.php:81 www/reporting/sitetimebar.php:84
+#: www/reporting/sitetime.php:81 www/reporting/sitetimebar.php:86
 msgid "Time"
 msgstr "時間"
 
@@ -4095,16 +4097,16 @@ msgstr "追蹤項目"
 msgid "Tracker Item"
 msgstr "追蹤項目"
 
-#: www/activity/index.php:215 www/stats/site_stats_utils.php:303
-#: www/stats/site_stats_utils.php:305 www/stats/site_stats_utils.php:307
-#: www/stats/site_stats_utils.php:309 www/stats/site_stats_utils.php:313
+#: www/activity/index.php:215 www/stats/site_stats_utils.php:306
+#: www/stats/site_stats_utils.php:308 www/stats/site_stats_utils.php:310
+#: www/stats/site_stats_utils.php:312 www/stats/site_stats_utils.php:316
 #, fuzzy
 msgid "Opened"
 msgstr "開啟"
 
-#: www/activity/index.php:220 www/stats/site_stats_utils.php:304
-#: www/stats/site_stats_utils.php:306 www/stats/site_stats_utils.php:308
-#: www/stats/site_stats_utils.php:310 www/stats/site_stats_utils.php:314
+#: www/activity/index.php:220 www/stats/site_stats_utils.php:307
+#: www/stats/site_stats_utils.php:309 www/stats/site_stats_utils.php:311
+#: www/stats/site_stats_utils.php:313 www/stats/site_stats_utils.php:317
 #, fuzzy
 msgid "Closed"
 msgstr "關閉"
@@ -4119,12 +4121,12 @@ msgstr "討論區"
 msgid "Create a new %1$s below:"
 msgstr "創造一個新的 %1$s 如下："
 
-#: www/admin/admin_table.php:54 www/admin/database.php:165
-#: www/admin/trove/trove_cat_add.php:116 www/admin/trove/trove_cat_list.php:41
+#: www/admin/admin_table.php:54 www/admin/database.php:167
+#: www/admin/trove/trove_cat_add.php:120 www/admin/trove/trove_cat_list.php:41
 #: www/admin/trove/trove_cat_list.php:44 www/docman/admin/index.php:380
 #: www/forum/include/AttachManager.class.php:159 www/pm/mod_task.php:228
-#: www/reporting/timeadd.php:187 www/reporting/timecategory.php:99
-#: www/trove/admin/trove_cat_add.php:91 www/trove/admin/trove_cat_list.php:32
+#: www/reporting/timeadd.php:197 www/reporting/timecategory.php:101
+#: www/trove/admin/trove_cat_add.php:93 www/trove/admin/trove_cat_list.php:32
 msgid "Add"
 msgstr "新增"
 
@@ -4179,12 +4181,12 @@ msgid "add new"
 msgstr "新增"
 
 #: www/admin/admin_table.php:265 www/admin/responses_admin.php:46
-#: www/admin/responses_admin.php:87 www/admin/trove/trove_cat_list.php:43
+#: www/admin/responses_admin.php:93 www/admin/trove/trove_cat_list.php:43
 #: www/docman/admin/index.php:432 www/forum/admin/ForumAdmin.class.php:62
 #: www/forum/include/AttachManager.class.php:147
 #: www/frs/admin/showreleases.php:112 www/people/skills_utils.php:33
-#: www/people/skills_utils.php:91 www/project/admin/editimages.php:257
-#: www/project/admin/editimages.php:288 www/project/admin/index.php:210
+#: www/people/skills_utils.php:91 www/project/admin/editimages.php:269
+#: www/project/admin/editimages.php:300 www/project/admin/index.php:210
 #: www/survey/include/SurveyHTML.class.php:304
 #: www/survey/include/SurveyHTML.class.php:352
 #: www/survey/include/SurveyHTML.class.php:412
@@ -4260,8 +4262,8 @@ msgstr "是"
 msgid "Add this custom response to canned responses"
 msgstr ""
 
-#: www/admin/approve-pending.php:179 www/news/admin/index.php:277
-#: www/project/admin/index.php:345
+#: www/admin/approve-pending.php:179 www/news/admin/index.php:278
+#: www/project/admin/index.php:346
 msgid "Reject"
 msgstr "拒絕"
 
@@ -4370,7 +4372,7 @@ msgid "Job"
 msgstr "工作"
 
 #: www/admin/cronman.php:52 www/forum/admin/ForumAdmin.class.php:342
-#: www/forum/message.php:97 www/sendmessage.php:138
+#: www/forum/message.php:98 www/sendmessage.php:140
 #: www/tracker/include/ArtifactHtml.class.php:68
 msgid "Message"
 msgstr "訊息"
@@ -4379,8 +4381,8 @@ msgstr "訊息"
 msgid "Previous"
 msgstr "上一個"
 
-#: www/admin/cronman.php:98 www/reporting/timeadd.php:209
-#: www/reporting/timeadd.php:236
+#: www/admin/cronman.php:98 www/reporting/timeadd.php:219
+#: www/reporting/timeadd.php:246
 msgid "Next"
 msgstr "下一個"
 
@@ -4388,7 +4390,7 @@ msgstr "下一個"
 msgid "Error Adding Database"
 msgstr "新增資料庫時發生錯誤"
 
-#: www/admin/database.php:74 www/admin/vhost.php:167
+#: www/admin/database.php:74 www/admin/vhost.php:178
 msgid "Group"
 msgstr "群組"
 
@@ -4405,11 +4407,11 @@ msgstr "無法新增已經啟用的資料庫"
 msgid "Site Admin: Groups' DB Maintenance"
 msgstr "網站管理：群組資料庫維護"
 
-#: www/admin/database.php:94
+#: www/admin/database.php:96
 msgid "Statistics for Project Databases"
 msgstr "專案資料庫統計"
 
-#: www/admin/database.php:99 www/admin/massmail.php:143 www/frs/index.php:108
+#: www/admin/database.php:101 www/admin/massmail.php:145 www/frs/index.php:108
 #: www/people/editprofile.php:289 www/people/skills_utils.php:36
 #: www/people/skills_utils.php:151 www/project/stats/index.php:58
 #: www/reporting/groupadded.php:55 www/reporting/groupcum.php:55
@@ -4423,23 +4425,23 @@ msgstr "專案資料庫統計"
 msgid "Type"
 msgstr "類型"
 
-#: www/admin/database.php:100
+#: www/admin/database.php:102
 msgid "Count"
 msgstr "次"
 
-#: www/admin/database.php:112
+#: www/admin/database.php:114
 msgid "No databases defined"
 msgstr "未定義資料庫"
 
-#: www/admin/database.php:126
+#: www/admin/database.php:128
 msgid "Displaying Databases of Type:"
 msgstr "顯示資料庫類型："
 
-#: www/admin/database.php:148
+#: www/admin/database.php:150
 msgid "Add an already active database"
 msgstr "新增一個已經啟用中的資料庫"
 
-#: www/admin/database.php:155
+#: www/admin/database.php:157
 msgid "Group Unix Name:"
 msgstr "Group\tUnix名稱："
 
@@ -4469,13 +4471,13 @@ msgstr "已送出說明 Email"
 msgid "Site Admin: Group Info"
 msgstr "網站管理：群組資訊"
 
-#: www/admin/groupedit.php:92 www/admin/useredit.php:256
+#: www/admin/groupedit.php:92 www/admin/useredit.php:258
 msgid "[Project Admin]"
 msgstr "[專案管理]"
 
 #: www/admin/groupedit.php:110 www/admin/groupedit.php:122
-#: www/admin/index.php:108 www/admin/index.php:114 www/admin/useredit.php:136
-#: www/admin/useredit.php:142 www/project/admin/index.php:281
+#: www/admin/index.php:116 www/admin/index.php:122 www/admin/useredit.php:136
+#: www/admin/useredit.php:142 www/project/admin/index.php:282
 msgid "Pending (P)"
 msgstr "未指定 (P)"
 
@@ -4483,7 +4485,7 @@ msgstr "未指定 (P)"
 msgid "Incomplete (I)"
 msgstr "未完成 (I)"
 
-#: www/admin/groupedit.php:121 www/admin/index.php:112
+#: www/admin/groupedit.php:121 www/admin/index.php:120
 #: www/admin/useredit.php:32 www/admin/useredit.php:137
 #: www/admin/useredit.php:143
 msgid "Active (A)"
@@ -4530,7 +4532,7 @@ msgid "Register Time"
 msgstr "註冊時間"
 
 #: www/admin/grouplist.php:84 www/admin/search.php:164
-#: www/admin/useredit.php:244 www/project/admin/index.php:273
+#: www/admin/useredit.php:246 www/project/admin/index.php:274
 #: www/project/admin/massadd.php:102 www/project/admin/massfinish.php:81
 #, fuzzy
 msgid "Unix name"
@@ -4548,166 +4550,166 @@ msgstr "會員"
 msgid "User Maintenance"
 msgstr "會員維護"
 
-#: www/admin/index.php:45
+#: www/admin/index.php:47
 #, php-format
 msgid "Active site users: <strong>%1$s</strong>"
 msgstr "啟用中的使用者：<strong>%1$s</strong>"
 
-#: www/admin/index.php:49
+#: www/admin/index.php:51
 msgid "Display Full User List/Edit Users"
 msgstr "顯示完整的會員清單/編輯會員"
 
-#: www/admin/index.php:51
+#: www/admin/index.php:53
 msgid "Display Users Beginning with :"
 msgstr "顯示會員開始於："
 
-#: www/admin/index.php:58
+#: www/admin/index.php:60
 msgid "Search <em>(userid, username, realname, email)</em>"
 msgstr "搜尋 <em>(會員編號、使用者名稱、真實姓名、Email)</em>"
 
-#: www/admin/index.php:61 www/admin/index.php:102
+#: www/admin/index.php:63 www/admin/index.php:110
 msgid "get"
 msgstr "取得"
 
-#: www/admin/index.php:65
+#: www/admin/index.php:67
 msgid "Register a New User"
 msgstr "註冊新帳號"
 
-#: www/admin/index.php:70
+#: www/admin/index.php:72
 #, fuzzy
 msgid "Project Maintenance"
 msgstr "群組維護"
 
-#: www/admin/index.php:76
+#: www/admin/index.php:80
 #, php-format
 msgid "Registered projects: <strong>%1$s</strong>"
 msgstr "已註冊專案：<strong>%1$s</strong>"
 
-#: www/admin/index.php:81
+#: www/admin/index.php:87
 #, php-format
 msgid "Active projects: <strong>%1$s</strong>"
 msgstr "進行中專案：<strong>%1$s</strong>"
 
-#: www/admin/index.php:86
+#: www/admin/index.php:94
 #, php-format
 msgid "Pending projects: <strong>%1$s</strong>"
 msgstr "等候審核專案：<strong>%1$s</strong>"
 
-#: www/admin/index.php:90
+#: www/admin/index.php:98
 #, fuzzy
 msgid "Display Full Project List/Edit Projects"
 msgstr "顯示完整的群組清單/編輯群組"
 
-#: www/admin/index.php:92
+#: www/admin/index.php:100
 #, fuzzy
 msgid "Display Projects Beginning with :"
 msgstr "顯示群組開始於："
 
-#: www/admin/index.php:99
+#: www/admin/index.php:107
 msgid "Search <em>(groupid, group unix name, full name)</em>"
 msgstr "搜尋 <em>(群組編號、群組 unix 名稱、完整名稱)</em>"
 
-#: www/admin/index.php:107
+#: www/admin/index.php:115
 msgid "Register New Project"
 msgstr "註冊新專案"
 
-#: www/admin/index.php:108 www/admin/index.php:110
+#: www/admin/index.php:116 www/admin/index.php:118
 #, fuzzy
 msgid "Projects with status"
 msgstr "群組狀態"
 
-#: www/admin/index.php:108
+#: www/admin/index.php:116
 #, fuzzy
 msgid "(New Project Approval)"
 msgstr "%1$s 專案通過審核了"
 
-#: www/admin/index.php:113
+#: www/admin/index.php:121
 msgid "Hold (H)"
 msgstr "等候 (H)"
 
-#: www/admin/index.php:120
+#: www/admin/index.php:128
 #, fuzzy
 msgid "Private Projects"
 msgstr "私人群組"
 
-#: www/admin/index.php:127
+#: www/admin/index.php:135
 msgid "Approve/Reject"
 msgstr "審核/拒絕"
 
-#: www/admin/index.php:127
+#: www/admin/index.php:135
 msgid "Front-page news"
 msgstr ""
 
-#: www/admin/index.php:131 www/project/admin/project_admin_utils.php:78
+#: www/admin/index.php:139 www/project/admin/project_admin_utils.php:78
 msgid "Stats"
 msgstr "統計"
 
-#: www/admin/index.php:134
+#: www/admin/index.php:142
 msgid "Site-Wide Stats"
 msgstr "全站統計"
 
-#: www/admin/index.php:138
+#: www/admin/index.php:146
 msgid "Trove Project Tree"
 msgstr "軟體地圖"
 
-#: www/admin/index.php:141
+#: www/admin/index.php:149
 msgid "Display Trove Map"
 msgstr "顯示軟體地圖"
 
-#: www/admin/index.php:142
+#: www/admin/index.php:150
 msgid "Add to the Trove Map"
 msgstr "新增到軟體地圖"
 
-#: www/admin/index.php:145
+#: www/admin/index.php:153
 msgid "Site Utilities"
 msgstr "網站工具"
 
-#: www/admin/index.php:147 www/admin/massmail.php:85
+#: www/admin/index.php:155 www/admin/massmail.php:85
 #, php-format
 msgid "Mail Engine for %1$s Subscribers"
 msgstr "%1$s 的郵件引擎"
 
-#: www/admin/index.php:148
+#: www/admin/index.php:156
 msgid "Site Mailings Maintenance"
 msgstr "網站電子報維護"
 
-#: www/admin/index.php:149
+#: www/admin/index.php:157
 msgid "Add, Delete, or Edit File Types"
 msgstr "新增、刪除或編輯檔案類型"
 
-#: www/admin/index.php:150
+#: www/admin/index.php:158
 msgid "Add, Delete, or Edit Processors"
 msgstr "新增、刪除或編輯處理器"
 
-#: www/admin/index.php:151
+#: www/admin/index.php:159
 msgid "Add, Delete, or Edit Themes"
 msgstr "新增、刪除或編輯佈景"
 
-#: www/admin/index.php:152
+#: www/admin/index.php:160
 msgid "Add, Delete, or Edit Licenses"
 msgstr "新增、刪除或編輯授權方式"
 
-#: www/admin/index.php:153
+#: www/admin/index.php:161
 msgid "Recent logins"
 msgstr "最近登入"
 
-#: www/admin/index.php:154
+#: www/admin/index.php:162
 msgid "Cron Manager"
 msgstr "Cron管理"
 
-#: www/admin/index.php:155
+#: www/admin/index.php:163
 msgid "Plugin Manager"
 msgstr ""
 
-#: www/admin/index.php:156
+#: www/admin/index.php:164
 msgid "Config Manager"
 msgstr ""
 
-#: www/admin/index.php:165
+#: www/admin/index.php:173
 msgid "Virtual Host Admin Tool"
 msgstr "虛擬主機管理工具"
 
-#: www/admin/index.php:169
+#: www/admin/index.php:177
 msgid "Project Database Administration"
 msgstr "專案資料庫管理"
 
@@ -4736,7 +4738,7 @@ msgstr "郵件管理"
 msgid "Mailing successfully scheduled for delivery"
 msgstr "電子報寄送工作排程成功"
 
-#: www/admin/massmail.php:91 www/admin/massmail.php:148
+#: www/admin/massmail.php:91 www/admin/massmail.php:150
 msgid "Active Deliveries"
 msgstr "進行中的遞送"
 
@@ -4774,11 +4776,11 @@ msgstr "所有會員"
 msgid "Developers (test)"
 msgstr "開發者 (測試)"
 
-#: www/admin/massmail.php:120 www/admin/massmail.php:144
+#: www/admin/massmail.php:120 www/admin/massmail.php:146
 #: www/developer/diary.php:50 www/developer/diary.php:77
-#: www/news/admin/index.php:133 www/news/admin/index.php:278
+#: www/news/admin/index.php:134 www/news/admin/index.php:279
 #: www/news/admin/news_admin_utils.php:57 www/news/submit.php:115
-#: www/sendmessage.php:135
+#: www/sendmessage.php:137
 msgid "Subject"
 msgstr "主題"
 
@@ -4794,16 +4796,16 @@ msgstr ""
 msgid "Schedule for Mailing"
 msgstr "電子報排程"
 
-#: www/admin/massmail.php:142 www/admin/search.php:92 www/admin/search.php:163
+#: www/admin/massmail.php:144 www/admin/search.php:92 www/admin/search.php:163
 #: www/docman/admin/index.php:352 www/my/dashboard.php:75 www/my/index.php:74
 #: www/my/index.php:117 www/my/index.php:166
-#: www/project/admin/editimages.php:258
+#: www/project/admin/editimages.php:270
 #: www/tracker/admin/form-addcanned.php:23 www/tracker/browse.php:153
 #: www/tracker/browse.php:350 www/tracker/query.php:176
 msgid "ID"
 msgstr "編號"
 
-#: www/admin/massmail.php:146
+#: www/admin/massmail.php:148
 msgid "Last user_id mailed"
 msgstr "最後送出的會員編號"
 
@@ -4920,48 +4922,48 @@ msgstr "已存在的回應："
 msgid "Yes, I'm sure"
 msgstr "確定"
 
-#: www/admin/responses_admin.php:71
+#: www/admin/responses_admin.php:75
 msgid "Edited Response"
 msgstr "編輯的回應"
 
-#: www/admin/responses_admin.php:79
+#: www/admin/responses_admin.php:85
 msgid "Edit Response:"
 msgstr "編輯回應："
 
-#: www/admin/responses_admin.php:81 www/admin/responses_admin.php:120
+#: www/admin/responses_admin.php:87 www/admin/responses_admin.php:128
 msgid "Response Title:"
 msgstr "回應標題："
 
-#: www/admin/responses_admin.php:82 www/admin/responses_admin.php:121
+#: www/admin/responses_admin.php:88 www/admin/responses_admin.php:129
 msgid "Response Text:"
 msgstr "回應內容："
 
-#: www/admin/responses_admin.php:85
+#: www/admin/responses_admin.php:91
 msgid "go"
 msgstr "衝"
 
-#: www/admin/responses_admin.php:101
+#: www/admin/responses_admin.php:109
 msgid "Deleted Response"
 msgstr "刪除的回應"
 
-#: www/admin/responses_admin.php:103
+#: www/admin/responses_admin.php:111
 msgid "If you're aren't sure then why did you click 'Delete'?"
 msgstr "如果您無法確定，為何要點擊 '刪除'？"
 
-#: www/admin/responses_admin.php:104
+#: www/admin/responses_admin.php:112
 msgid "By the way, I didn't delete... just in case..."
 msgstr "還有，我沒有刪除，只是假設"
 
-#: www/admin/responses_admin.php:113
+#: www/admin/responses_admin.php:121
 msgid "Added Response"
 msgstr "新增的回應"
 
-#: www/admin/responses_admin.php:118
+#: www/admin/responses_admin.php:126
 msgid "Create New Response:"
 msgstr "建立新的回應："
 
-#: www/admin/responses_admin.php:125 www/project/admin/database.php:180
-#: www/project/admin/vhost.php:118
+#: www/admin/responses_admin.php:133 www/project/admin/database.php:188
+#: www/project/admin/vhost.php:121
 msgid "Create"
 msgstr "建立"
 
@@ -5021,8 +5023,8 @@ msgid "Registered"
 msgstr "註冊"
 
 #: www/admin/trove/trove_cat_add.php:62 www/admin/trove/trove_cat_edit.php:66
-#: www/include/trove.php:375 www/include/trove.php:384
-#: www/include/trove.php:388 www/include/trove.php:392
+#: www/include/trove.php:384 www/include/trove.php:394
+#: www/include/trove.php:399 www/include/trove.php:404
 msgid "Error In Trove Operation"
 msgstr "在軟體執行時發生錯誤"
 
@@ -5038,18 +5040,18 @@ msgstr "新增軟體類別"
 msgid "Parent Category"
 msgstr "上層類別"
 
-#: www/admin/trove/trove_cat_add.php:110
-#: www/admin/trove/trove_cat_edit.php:138
+#: www/admin/trove/trove_cat_add.php:114
+#: www/admin/trove/trove_cat_edit.php:142
 msgid "New category short name (no spaces, unix-like)"
 msgstr "新類別縮寫 (沒有空白，像是Unix)"
 
-#: www/admin/trove/trove_cat_add.php:112
-#: www/admin/trove/trove_cat_edit.php:141
+#: www/admin/trove/trove_cat_add.php:116
+#: www/admin/trove/trove_cat_edit.php:145
 msgid "New category full name (VARCHAR 80)"
 msgstr "新類別完整名稱 (80字元)"
 
-#: www/admin/trove/trove_cat_add.php:114
-#: www/admin/trove/trove_cat_edit.php:144
+#: www/admin/trove/trove_cat_add.php:118
+#: www/admin/trove/trove_cat_edit.php:148
 msgid "New category description (VARCHAR 255)"
 msgstr "新類別說明 (255字元)"
 
@@ -5057,35 +5059,35 @@ msgstr "新類別說明 (255字元)"
 msgid "Error: a category can't be the same as its own parent."
 msgstr ""
 
-#: www/admin/trove/trove_cat_edit.php:88
+#: www/admin/trove/trove_cat_edit.php:90
 msgid ""
 "Error In Trove Operation, can't delete trove category define as default in "
 "local.inc"
 msgstr "在軟體執行時發生錯誤，無法在local.inc刪除預設的軟體類別定義"
 
-#: www/admin/trove/trove_cat_edit.php:102
+#: www/admin/trove/trove_cat_edit.php:106
 msgid "No Such Category, That trove cat does not exist"
 msgstr "沒有這個類別，那個軟體類別不存在"
 
-#: www/admin/trove/trove_cat_edit.php:106
+#: www/admin/trove/trove_cat_edit.php:110
 #: www/trove/admin/trove_cat_edit.php:81
 msgid "Site Admin: Trove - Edit Category"
 msgstr "網站管理：軟體 - 編輯類別"
 
-#: www/admin/trove/trove_cat_edit.php:109
+#: www/admin/trove/trove_cat_edit.php:113
 msgid "Edit Trove Category"
 msgstr "編輯軟體類別"
 
-#: www/admin/trove/trove_cat_edit.php:113
+#: www/admin/trove/trove_cat_edit.php:117
 msgid "Parent Category:"
 msgstr "上層類別："
 
-#: www/admin/trove/trove_cat_list.php:62 www/trove/admin/trove_cat_edit.php:75
-#: www/trove/admin/trove_cat_list.php:53
+#: www/admin/trove/trove_cat_list.php:64 www/trove/admin/trove_cat_edit.php:75
+#: www/trove/admin/trove_cat_list.php:54
 msgid "Site Admin: Trove - Category List"
 msgstr "網站管理：軟體 - 類別清單"
 
-#: www/admin/trove/trove_cat_list.php:66 www/trove/admin/trove_cat_list.php:57
+#: www/admin/trove/trove_cat_list.php:68 www/trove/admin/trove_cat_list.php:58
 msgid "Browse Trove Tree"
 msgstr "瀏覽軟體地圖"
 
@@ -5167,7 +5169,7 @@ msgid "No Unix account (N)"
 msgstr "沒有Unix帳號 (N)"
 
 #: www/admin/useredit.php:33 www/admin/useredit.php:138
-#: www/admin/useredit.php:144 www/project/admin/index.php:283
+#: www/admin/useredit.php:144 www/project/admin/index.php:284
 msgid "Suspended (S)"
 msgstr "等待 (S)"
 
@@ -5235,8 +5237,8 @@ msgstr "Unix帳號狀態更新反映自網站的狀態，除非它的設定值�
 msgid "Groups Membership"
 msgstr "群組會員身分"
 
-#: www/admin/useredit.php:245 www/admin/vhost.php:170
-#: www/project/admin/database.php:208 www/project/admin/vhost.php:135
+#: www/admin/useredit.php:247 www/admin/vhost.php:181
+#: www/project/admin/database.php:216 www/project/admin/vhost.php:138
 msgid "Operations"
 msgstr "動作"
 
@@ -5299,76 +5301,76 @@ msgstr "群組的會員清單："
 msgid "All Groups"
 msgstr "所有群組"
 
-#: www/admin/vhost.php:70
+#: www/admin/vhost.php:75
 msgid "Error adding VHOST:"
 msgstr "新增虛擬主機時發生錯誤："
 
-#: www/admin/vhost.php:72 www/admin/vhost.php:138
+#: www/admin/vhost.php:77 www/admin/vhost.php:147
 msgid "Virtual Host:"
 msgstr "虛擬主機："
 
-#: www/admin/vhost.php:72
+#: www/admin/vhost.php:77
 #, fuzzy
 msgid "scheduled for creation on group"
 msgstr "資料庫建立已加入進度表"
 
-#: www/admin/vhost.php:76
+#: www/admin/vhost.php:81
 msgid "The provided group name does not exist"
 msgstr "群組名稱不存在"
 
-#: www/admin/vhost.php:96
+#: www/admin/vhost.php:105
 msgid "Error updating VHOST entry:"
 msgstr "更新虛擬主機資料時發生錯誤："
 
-#: www/admin/vhost.php:98
+#: www/admin/vhost.php:107
 msgid "Virtual Host entry updated."
 msgstr "虛擬主機資料已更新"
 
-#: www/admin/vhost.php:107
+#: www/admin/vhost.php:116
 msgid "Virtual Host Administration"
 msgstr "虛擬主機管理"
 
-#: www/admin/vhost.php:111 www/admin/vhost.php:126
+#: www/admin/vhost.php:120 www/admin/vhost.php:135
 msgid "Add Virtual Host"
 msgstr "新增虛擬主機"
 
-#: www/admin/vhost.php:116
+#: www/admin/vhost.php:125
 msgid "Group Unix Name"
 msgstr "Unix群組名稱"
 
-#: www/admin/vhost.php:121
+#: www/admin/vhost.php:130
 msgid "Virtual Host Name"
 msgstr "虛擬主機名稱"
 
-#: www/admin/vhost.php:132
+#: www/admin/vhost.php:141
 msgid "Tweak Directories"
 msgstr "調整資料夾"
 
-#: www/admin/vhost.php:139
+#: www/admin/vhost.php:148
 msgid "Get Info"
 msgstr "取得資訊"
 
-#: www/admin/vhost.php:162
+#: www/admin/vhost.php:173
 msgid "Update Record:"
 msgstr "更新記錄："
 
-#: www/admin/vhost.php:165
+#: www/admin/vhost.php:176
 msgid "VHOST ID"
 msgstr "VHOST 編號"
 
-#: www/admin/vhost.php:166
+#: www/admin/vhost.php:177
 msgid "VHOST Name"
 msgstr "VHOST 名稱"
 
-#: www/admin/vhost.php:168
+#: www/admin/vhost.php:179
 msgid "Htdocs Dir"
 msgstr "網頁資料夾"
 
-#: www/admin/vhost.php:169
+#: www/admin/vhost.php:180
 msgid "CGI Dir"
 msgstr "CGI 資料夾"
 
-#: www/admin/vhost.php:188
+#: www/admin/vhost.php:199
 msgid "No such VHOST:"
 msgstr "沒有這個虛擬主機："
 
@@ -5455,19 +5457,19 @@ msgstr "您選擇不參與相互評價系統"
 msgid "Invalid rate value"
 msgstr "無效參數"
 
-#: www/developer/rate.php:77
+#: www/developer/rate.php:90
 msgid "You can't rate yourself"
 msgstr ""
 
-#: www/developer/rate.php:80
+#: www/developer/rate.php:93
 msgid "User Ratings Page"
 msgstr "會員評價頁面"
 
-#: www/developer/rate.php:83
+#: www/developer/rate.php:96
 msgid "Ratings Recorded"
 msgstr "評價記錄"
 
-#: www/developer/rate.php:84
+#: www/developer/rate.php:97
 msgid ""
 "You can re-rate this person by simply returning to their ratings page and re-"
 "submitting the info."
@@ -5538,7 +5540,7 @@ msgid "Group that document belongs in"
 msgstr "文件所屬的分組"
 
 #: www/docman/admin/index.php:273 www/pm/browse_task.php:358
-#: www/project/admin/database.php:205
+#: www/project/admin/database.php:213
 #: www/tracker/admin/form-customizelist.php:26 www/tracker/browse.php:299
 #: www/tracker/browse.php:360 www/tracker/browse.php:545
 #: www/tracker/detail.php:50 www/tracker/mod-limited.php:103
@@ -5568,7 +5570,7 @@ msgstr "增加文件分組"
 
 #: www/docman/admin/index.php:353 www/docman/admin/index.php:421
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:32
-#: www/stats/site_stats_utils.php:262
+#: www/stats/site_stats_utils.php:265
 msgid "Group Name"
 msgstr "群組名稱"
 
@@ -5674,11 +5676,11 @@ msgstr "所有語言"
 msgid "Go"
 msgstr "衝"
 
-#: www/docman/include/doc_utils.php:187
+#: www/docman/include/doc_utils.php:189
 msgid "[Add document here]"
 msgstr "[在這新增文件]"
 
-#: www/docman/include/doc_utils.php:229
+#: www/docman/include/doc_utils.php:231
 #, fuzzy
 msgid "bytes"
 msgstr "是"
@@ -5748,7 +5750,7 @@ msgid "Your search did not match any documents"
 msgstr ""
 
 #: www/export/projnews.php:81 www/forum/include/ForumHTML.class.php:79
-#: www/include/project_home.php:434 www/index_std.php:40
+#: www/include/project_home.php:438 www/index_std.php:40
 msgid "Latest News"
 msgstr "最新消息"
 
@@ -5812,7 +5814,7 @@ msgstr[0] "%1$s 文章已刪除"
 msgstr[1] "%1$s 文章已刪除"
 
 #: www/forum/admin/ForumAdmin.class.php:280 www/pm/admin/index.php:158
-#: www/reporting/timeadd.php:79
+#: www/reporting/timeadd.php:88
 msgid "Successfully Deleted"
 msgstr "成功刪除"
 
@@ -5830,8 +5832,8 @@ msgstr "討論區名稱"
 msgid "Forum deleted"
 msgstr "確認刪除"
 
-#: www/forum/admin/ForumAdmin.class.php:438 www/forum/forum.php:60
-#: www/forum/message.php:63
+#: www/forum/admin/ForumAdmin.class.php:438 www/forum/forum.php:61
+#: www/forum/message.php:64
 #, fuzzy
 msgid "Error getting new Forum"
 msgstr "新增討論區錯誤"
@@ -5919,7 +5921,7 @@ msgid ""
 msgstr "你將永久地刪除這整個的討論區和它所有的內容，而且不能挽回！"
 
 #: www/forum/admin/index.php:192 www/frs/admin/deletepackage.php:71
-#: www/frs/admin/deleterelease.php:79 www/frs/admin/editrelease.php:398
+#: www/frs/admin/deleterelease.php:79 www/frs/admin/editrelease.php:399
 #: www/pm/admin/index.php:397
 msgid "I'm Sure"
 msgstr "我確定"
@@ -5965,8 +5967,8 @@ msgstr "新增討論區錯誤"
 msgid "No Forums Found For %1$s"
 msgstr "%1$s 沒有討論區"
 
-#: www/forum/attachment.php:48 www/forum/attachment.php:127
-#: www/forum/attachment.php:155 www/tracker/detail.php:145
+#: www/forum/attachment.php:48 www/forum/attachment.php:128
+#: www/forum/attachment.php:156 www/tracker/detail.php:145
 #: www/tracker/mod-limited.php:140 www/tracker/mod.php:238
 msgid "Attachments"
 msgstr ""
@@ -5975,120 +5977,120 @@ msgstr ""
 msgid "You cannot delete this attachment"
 msgstr ""
 
-#: www/forum/attachment.php:99
+#: www/forum/attachment.php:100
 msgid "Attachment deleted"
 msgstr ""
 
-#: www/forum/attachment.php:123
+#: www/forum/attachment.php:124
 msgid "You cannot edit this attachment"
 msgstr ""
 
-#: www/forum/attachment.php:158 www/forum/forum.php:139
-#: www/forum/message.php:89
+#: www/forum/attachment.php:159 www/forum/forum.php:140
+#: www/forum/message.php:90
 #, fuzzy
 msgid "Error getting new ForumHTML"
 msgstr "新增討論區錯誤"
 
-#: www/forum/attachment.php:163
+#: www/forum/attachment.php:164
 #, fuzzy
 msgid "No attach found"
 msgstr "未發現符合項目"
 
-#: www/forum/attachment.php:196
+#: www/forum/attachment.php:197
 msgid "The Attachment does not exist"
 msgstr ""
 
-#: www/forum/forum.php:46
+#: www/forum/forum.php:47
 #, fuzzy
 msgid "Error forum not found "
 msgstr "錯誤 - 未發現版本"
 
-#: www/forum/forum.php:79 www/forum/message.php:70
+#: www/forum/forum.php:80 www/forum/message.php:71
 #, fuzzy
 msgid "Error getting new ForumMessage"
 msgstr "新增討論區錯誤"
 
-#: www/forum/forum.php:82
+#: www/forum/forum.php:83
 #, fuzzy
 msgid "Error getting new ForumMessage: "
 msgstr "新增討論區錯誤"
 
-#: www/forum/forum.php:97
+#: www/forum/forum.php:98
 #, fuzzy
 msgid "Error creating ForumMessage: "
 msgstr "建立群組物件時發生錯誤"
 
-#: www/forum/forum.php:100
+#: www/forum/forum.php:101
 msgid ""
 "Message Queued for moderation -> Please wait until the admin approves/"
 "rejects it"
 msgstr ""
 
-#: www/forum/forum.php:102
+#: www/forum/forum.php:103
 msgid "Message Posted Successfully"
 msgstr "文章發表成功"
 
-#: www/forum/forum.php:122 www/forum/message.php:77
+#: www/forum/forum.php:123 www/forum/message.php:78
 msgid "Error getting new ForumMessageFactory"
 msgstr ""
 
-#: www/forum/forum.php:168
+#: www/forum/forum.php:169
 msgid "Nested"
 msgstr "巢狀"
 
-#: www/forum/forum.php:168
+#: www/forum/forum.php:169
 msgid "Flat"
 msgstr ""
 
-#: www/forum/forum.php:168
+#: www/forum/forum.php:169
 #, fuzzy
 msgid "Threaded"
 msgstr "討論"
 
-#: www/forum/forum.php:168
+#: www/forum/forum.php:169
 #, fuzzy
 msgid "Ultimate"
 msgstr "啟用"
 
-#: www/forum/forum.php:174 www/include/tool_reports.php:101
+#: www/forum/forum.php:175 www/include/tool_reports.php:101
 msgid "Show"
 msgstr "顯示"
 
-#: www/forum/forum.php:187
+#: www/forum/forum.php:188
 msgid "Change View"
 msgstr "改變瀏覽方式"
 
-#: www/forum/forum.php:234 www/forum/message.php:137
+#: www/forum/forum.php:235 www/forum/message.php:138
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:42
 #: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:35
 msgid "Thread"
 msgstr "討論"
 
-#: www/forum/forum.php:314
+#: www/forum/forum.php:315
 msgid "Topic"
 msgstr "主題"
 
-#: www/forum/forum.php:315
+#: www/forum/forum.php:316
 msgid "Topic Starter"
 msgstr "主題發起人"
 
-#: www/forum/forum.php:316
+#: www/forum/forum.php:317
 msgid "Replies"
 msgstr "回覆"
 
-#: www/forum/forum.php:317 www/forum/index.php:60 www/forum/myforums.php:73
+#: www/forum/forum.php:318 www/forum/index.php:60 www/forum/myforums.php:73
 msgid "Last Post"
 msgstr "最後發表時間"
 
-#: www/forum/forum.php:359
+#: www/forum/forum.php:360
 msgid "Previous Messages"
 msgstr "前一頁"
 
-#: www/forum/forum.php:370
+#: www/forum/forum.php:371
 msgid "Next Messages"
 msgstr "後一頁"
 
-#: www/forum/forum.php:394
+#: www/forum/forum.php:395
 msgid "No forum chosen"
 msgstr ""
 
@@ -6102,39 +6104,39 @@ msgstr "無法更新上層文章"
 msgid "No attachment found"
 msgstr "未發現符合項目"
 
-#: www/forum/include/AttachManager.class.php:175
-#: www/forum/include/AttachManager.class.php:261
-#: www/forum/include/AttachManager.class.php:303
+#: www/forum/include/AttachManager.class.php:176
+#: www/forum/include/AttachManager.class.php:263
+#: www/forum/include/AttachManager.class.php:306
 msgid "Couldn't get message id"
 msgstr ""
 
-#: www/forum/include/AttachManager.class.php:183
-#: www/forum/include/AttachManager.class.php:274
-#: www/forum/include/AttachManager.class.php:290
-#: www/forum/include/AttachManager.class.php:316
+#: www/forum/include/AttachManager.class.php:184
+#: www/forum/include/AttachManager.class.php:276
+#: www/forum/include/AttachManager.class.php:292
+#: www/forum/include/AttachManager.class.php:319
 msgid "File uploaded"
 msgstr ""
 
-#: www/forum/include/AttachManager.class.php:185
-#: www/forum/include/AttachManager.class.php:277
-#: www/forum/include/AttachManager.class.php:294
-#: www/forum/include/AttachManager.class.php:319
+#: www/forum/include/AttachManager.class.php:186
+#: www/forum/include/AttachManager.class.php:279
+#: www/forum/include/AttachManager.class.php:296
+#: www/forum/include/AttachManager.class.php:322
 msgid "File not uploaded"
 msgstr ""
 
-#: www/forum/include/AttachManager.class.php:214
+#: www/forum/include/AttachManager.class.php:215
 msgid "No file was provided"
 msgstr ""
 
-#: www/forum/include/AttachManager.class.php:224
+#: www/forum/include/AttachManager.class.php:225
 msgid "Invalid Extension"
 msgstr ""
 
-#: www/forum/include/AttachManager.class.php:232
+#: www/forum/include/AttachManager.class.php:233
 msgid "Error, problem with the attachment file uploaded into the server"
 msgstr ""
 
-#: www/forum/include/AttachManager.class.php:291
+#: www/forum/include/AttachManager.class.php:293
 msgid "File Updated Successfully"
 msgstr ""
 
@@ -6293,39 +6295,39 @@ msgstr ""
 msgid "All Except Admins"
 msgstr ""
 
-#: www/forum/message.php:46
+#: www/forum/message.php:47
 msgid "Message Not Found"
 msgstr "沒發現文章"
 
-#: www/forum/message.php:47
+#: www/forum/message.php:48
 msgid "This message does not (any longer) exist"
 msgstr "該文章（不再）存在"
 
-#: www/forum/message.php:106
+#: www/forum/message.php:107
 msgid "BY"
 msgstr "作者"
 
-#: www/forum/message.php:107
+#: www/forum/message.php:108
 msgid "DATE"
 msgstr "日期"
 
-#: www/forum/message.php:112
+#: www/forum/message.php:113
 msgid "SUBJECT"
 msgstr "標題"
 
-#: www/forum/message.php:129
+#: www/forum/message.php:130
 msgid "Thread View"
 msgstr "依照主題瀏覽"
 
-#: www/forum/message.php:199
+#: www/forum/message.php:200
 msgid "Post a followup to this message"
 msgstr "回覆該文章"
 
-#: www/forum/message.php:204
+#: www/forum/message.php:205
 msgid "Must Choose A Message First"
 msgstr "必須先選擇一個文章"
 
-#: www/forum/message.php:205
+#: www/forum/message.php:206
 msgid "You Must Choose A Message First"
 msgstr "您必須先選擇一個文章"
 
@@ -6405,7 +6407,7 @@ msgstr "文件已刪除"
 msgid "File Updated"
 msgstr "文件更新"
 
-#: www/frs/admin/editrelease.php:241 www/frs/admin/index.php:162
+#: www/frs/admin/editrelease.php:241 www/frs/admin/index.php:163
 msgid "Edit Releases"
 msgstr "編輯發佈"
 
@@ -6505,11 +6507,11 @@ msgstr "新增這個文件"
 msgid "Step 3: Edit Files In This Release"
 msgstr "第三步：編輯這個發佈中的文件"
 
-#: www/frs/admin/editrelease.php:353
+#: www/frs/admin/editrelease.php:354
 msgid "No Files In This Release"
 msgstr "本次發佈沒有文件"
 
-#: www/frs/admin/editrelease.php:355
+#: www/frs/admin/editrelease.php:356
 msgid ""
 "Once you have added files to this release you <strong>must</strong> update "
 "each of these files with the correct information or they will not appear on "
@@ -6518,27 +6520,27 @@ msgstr ""
 "一旦您新增了文件到發佈中，您<strong>必須</strong>用正確的資訊更新每個文件，否"
 "則它們不會正確地顯示在您的下載摘要頁中。"
 
-#: www/frs/admin/editrelease.php:356
+#: www/frs/admin/editrelease.php:357
 msgid "Filename<br />Release"
 msgstr "檔案名<br />發佈"
 
-#: www/frs/admin/editrelease.php:357
+#: www/frs/admin/editrelease.php:358
 msgid "Processor<br />Release Date"
 msgstr "處理器<br />發佈日期"
 
-#: www/frs/admin/editrelease.php:358
+#: www/frs/admin/editrelease.php:359
 msgid "File Type<br />Update"
 msgstr "文件類型<br />更新"
 
-#: www/frs/admin/editrelease.php:383
+#: www/frs/admin/editrelease.php:384
 msgid "Update/Refresh"
 msgstr "更新/重新整理"
 
-#: www/frs/admin/editrelease.php:398
+#: www/frs/admin/editrelease.php:399
 msgid "Delete File"
 msgstr "刪除文件"
 
-#: www/frs/admin/editrelease.php:408
+#: www/frs/admin/editrelease.php:409
 #, fuzzy, php-format
 msgid "There is %1$s user monitoring this package."
 msgid_plural "There are %1$s users monitoring this package."
@@ -6553,16 +6555,16 @@ msgstr "增加套裝軟體"
 msgid "Updated Package"
 msgstr "更新軟體封裝"
 
-#: www/frs/admin/index.php:124
+#: www/frs/admin/index.php:125
 msgid "QRS"
 msgstr "QRS（快速發佈系統）"
 
-#: www/frs/admin/index.php:125
+#: www/frs/admin/index.php:126
 #, php-format
 msgid "Click here to %1$s quick-release a file %2$s"
 msgstr "點擊這裏來 %1$s 快速發佈檔案 %2$s"
 
-#: www/frs/admin/index.php:128
+#: www/frs/admin/index.php:129
 msgid ""
 "<h3>Packages</h3><p>You can use packages to group different file releases "
 "together, or use them however you like. <p><h4>An example of packages:</"
@@ -6584,32 +6586,32 @@ msgstr ""
 "><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /><p>您可以透過點擊"
 "套裝軟體名稱旁的<strong>增加/編輯發佈</strong>來建立套裝軟體的新發佈。<p>"
 
-#: www/frs/admin/index.php:140
+#: www/frs/admin/index.php:141
 msgid "You Have No Packages Defined"
 msgstr "您沒有定義套裝軟體"
 
-#: www/frs/admin/index.php:143
+#: www/frs/admin/index.php:144
 msgid "Releases"
 msgstr "發佈"
 
-#: www/frs/admin/index.php:144 www/frs/admin/showreleases.php:100
+#: www/frs/admin/index.php:145 www/frs/admin/showreleases.php:100
 #, fuzzy
 msgid "Package name"
 msgstr "分類名稱"
 
-#: www/frs/admin/index.php:158
+#: www/frs/admin/index.php:159
 msgid "Add Release"
 msgstr "增加發佈"
 
-#: www/frs/admin/index.php:190
+#: www/frs/admin/index.php:191
 msgid "New Package Name"
 msgstr "新套裝軟體名稱"
 
-#: www/frs/admin/index.php:197 www/people/editprofile.php:250
+#: www/frs/admin/index.php:198 www/people/editprofile.php:250
 msgid "Publicly Viewable"
 msgstr "是否公開瀏覽"
 
-#: www/frs/admin/index.php:200
+#: www/frs/admin/index.php:201
 msgid "Create This Package"
 msgstr "建立這個套裝軟體"
 
@@ -6681,7 +6683,7 @@ msgstr "或者 %1$s 建立新的套裝軟體 %2$s"
 msgid "File Name"
 msgstr "檔案名"
 
-#: www/frs/admin/qrs.php:265 www/include/project_home.php:241
+#: www/frs/admin/qrs.php:265 www/include/project_home.php:244
 msgid "Release Notes"
 msgstr "釋出記錄"
 
@@ -6706,7 +6708,7 @@ msgstr ""
 msgid "Release New File Version"
 msgstr "釋出新檔案版本"
 
-#: www/frs/include/frs_utils.php:149 www/frs/include/frs_utils.php:166
+#: www/frs/include/frs_utils.php:151 www/frs/include/frs_utils.php:169
 msgid "Must Choose One"
 msgstr "必須選擇一個"
 
@@ -6751,7 +6753,7 @@ msgid "To create a new release click here."
 msgstr "點擊這裡建立新的釋出"
 
 #: www/frs/index.php:97 www/frs/reporting/downloads.php:100
-#: www/include/project_home.php:177
+#: www/include/project_home.php:180
 msgid "Package"
 msgstr "集合"
 
@@ -6760,7 +6762,7 @@ msgid "Release &amp; Notes"
 msgstr "釋出記錄"
 
 #: www/frs/index.php:105 www/pm/ganttpage.php:171
-#: www/project/admin/editimages.php:262
+#: www/project/admin/editimages.php:274
 msgid "Size"
 msgstr "大小"
 
@@ -6777,7 +6779,7 @@ msgstr "文件"
 msgid "Stop monitoring this package"
 msgstr "訂閱這個集合"
 
-#: www/frs/index.php:129 www/include/project_home.php:243
+#: www/frs/index.php:129 www/include/project_home.php:246
 msgid "Monitor this package"
 msgstr "訂閱這個集合"
 
@@ -6821,25 +6823,25 @@ msgstr "文件已發佈"
 msgid "Refresh"
 msgstr "重新整理"
 
-#: www/frs/shownotes.php:39
+#: www/frs/shownotes.php:40
 #, fuzzy
 msgid "That Release Was Not Found"
 msgstr "沒發現文章"
 
-#: www/frs/shownotes.php:53
+#: www/frs/shownotes.php:54
 msgid "File Release Notes and Changelog"
 msgstr "File 釋出與異動記錄"
 
-#: www/frs/shownotes.php:55 www/frs/shownotes.php:71
+#: www/frs/shownotes.php:56 www/frs/shownotes.php:72
 msgid "Notes:"
 msgstr "記錄："
 
-#: www/frs/shownotes.php:57
+#: www/frs/shownotes.php:58
 msgid "Release Name:"
 msgstr "釋出名稱："
 
-#: www/frs/shownotes.php:74 www/snippet/addversion.php:85
-#: www/snippet/addversion.php:209
+#: www/frs/shownotes.php:75 www/snippet/addversion.php:86
+#: www/snippet/addversion.php:211
 msgid "Changes:"
 msgstr "異動："
 
@@ -6959,15 +6961,15 @@ msgstr "未知的協助請求："
 msgid "Close Window"
 msgstr "關閉視窗"
 
-#: www/help/trove_cat.php:37
+#: www/help/trove_cat.php:38
 msgid "No such trove category"
 msgstr "沒有這種分類"
 
-#: www/help/trove_cat.php:46
+#: www/help/trove_cat.php:47
 msgid "Full Category Name"
 msgstr "完整的分類名稱"
 
-#: www/help/trove_cat.php:47
+#: www/help/trove_cat.php:48
 msgid "Short Name"
 msgstr "簡短名稱"
 
@@ -7194,7 +7196,7 @@ msgid "My&nbsp;Page"
 msgstr "我的首頁"
 
 #: www/include/Layout.class.php:429 www/my/index.php:388
-#: www/reporting/index.php:44 www/stats/site_stats_utils.php:516
+#: www/reporting/index.php:44 www/stats/site_stats_utils.php:519
 #: www/themes/gforge/Theme.class.php:377
 msgid "Projects"
 msgstr "專案"
@@ -7211,14 +7213,14 @@ msgstr "分享程式碼"
 msgid "Project&nbsp;Openings"
 msgstr "尋求協助"
 
-#: www/include/Layout.class.php:575 www/include/project_home.php:337
+#: www/include/Layout.class.php:575 www/include/project_home.php:341
 #: www/themes/gforge-simple-theme/Theme.class.php:522
 #: www/themes/gforge/Theme.class.php:523
 msgid "Lists"
 msgstr "通信論壇"
 
-#: www/include/Layout.class.php:596 www/include/project_home.php:369
-#: www/include/project_home.php:370 www/survey/include/SurveyHTML.class.php:53
+#: www/include/Layout.class.php:596 www/include/project_home.php:373
+#: www/include/project_home.php:374 www/survey/include/SurveyHTML.class.php:53
 #: www/survey/survey_utils.php:52
 #: www/themes/gforge-simple-theme/Theme.class.php:546
 #: www/themes/gforge/Theme.class.php:544
@@ -7256,7 +7258,7 @@ msgid "Select"
 msgstr "選擇"
 
 #: www/include/Layout.class.php:886 www/include/Layout.class.php:918
-#: www/stats/site_stats_utils.php:125
+#: www/stats/site_stats_utils.php:128
 #: www/themes/gforge-simple-theme/Theme.class.php:681
 #: www/themes/gforge-simple-theme/Theme.class.php:737
 #: www/themes/gforge/Theme.class.php:836 www/themes/gforge/Theme.class.php:867
@@ -7271,7 +7273,7 @@ msgstr "全部"
 msgid "none"
 msgstr "完成"
 
-#: www/include/Layout.class.php:1120
+#: www/include/Layout.class.php:1121
 msgid "Quick Jump To..."
 msgstr ""
 
@@ -7350,59 +7352,59 @@ msgstr "本週最有活力"
 msgid "Recently Registered Projects"
 msgstr "最近註冊的專案"
 
-#: www/include/features_boxes.php:69 www/include/features_boxes.php:151
-#: www/include/features_boxes.php:173 www/include/features_boxes.php:198
+#: www/include/features_boxes.php:69 www/include/features_boxes.php:155
+#: www/include/features_boxes.php:177 www/include/features_boxes.php:202
 msgid "No Stats Available"
 msgstr "沒有統計資訊"
 
-#: www/include/features_boxes.php:79 www/include/features_boxes.php:160
-#: www/include/features_boxes.php:182 www/include/features_boxes.php:207
+#: www/include/features_boxes.php:79 www/include/features_boxes.php:164
+#: www/include/features_boxes.php:186 www/include/features_boxes.php:211
 #: www/top/mostactive.php:77 www/top/mostactive.php:84
 msgid "More"
 msgstr "更多"
 
-#: www/include/features_boxes.php:129
+#: www/include/features_boxes.php:133
 msgid "Hosted Projects"
 msgstr "登入專案"
 
-#: www/include/features_boxes.php:137
+#: www/include/features_boxes.php:141
 msgid "Registered Users"
 msgstr "註冊會員"
 
-#: www/include/features_boxes.php:154
+#: www/include/features_boxes.php:158
 msgid "m/d"
 msgstr "m/d"
 
-#: www/include/html.php:321 www/include/html.php:394 www/include/html.php:580
+#: www/include/html.php:323 www/include/html.php:396 www/include/html.php:582
 #: www/pm/browse_task.php:317 www/pm/browse_task.php:348
 #: www/pm/browse_task.php:359 www/tracker/browse.php:530
 #: www/tracker/browse.php:542 www/tracker/browse.php:546
 msgid "No Change"
 msgstr "沒有異動"
 
-#: www/include/html.php:582
+#: www/include/html.php:584
 msgid "Lowest"
 msgstr "最低"
 
-#: www/include/html.php:586
+#: www/include/html.php:588
 msgid "Highest"
 msgstr "最高"
 
-#: www/include/html.php:737 www/include/html.php:749
+#: www/include/html.php:739 www/include/html.php:751
 #: www/my/bookmark_add.php:29
 msgid "My Personal Page"
 msgstr "我的個人首頁"
 
-#: www/include/html.php:738
+#: www/include/html.php:740
 #, fuzzy
 msgid "Trackers dashboard"
 msgstr "追蹤更新"
 
-#: www/include/html.php:739
+#: www/include/html.php:741
 msgid "Diary &amp; Notes"
 msgstr "日記和筆記"
 
-#: www/include/html.php:741 www/include/html.php:751
+#: www/include/html.php:743 www/include/html.php:753
 msgid "Register Project"
 msgstr "註冊專案"
 
@@ -7410,7 +7412,7 @@ msgstr "註冊專案"
 msgid "Project Info"
 msgstr "專案資訊"
 
-#: www/include/project_home.php:42
+#: www/include/project_home.php:44
 #, php-format
 msgid ""
 "NOTE: This project entry is maintained by the %1$s staff. We are not the "
@@ -7420,44 +7422,44 @@ msgstr ""
 "注意：這個專案資料是由 %1$s 團隊所維護，我們並不是這個產品的官方網站，相關版"
 "權聲明資訊也許能夠在這個專案的網頁中找到！"
 
-#: www/include/project_home.php:52
+#: www/include/project_home.php:54
 msgid "This project has not yet submitted a description."
 msgstr "該專案還沒有送出描述"
 
-#: www/include/project_home.php:61 www/project/admin/editgroupinfo.php:136
+#: www/include/project_home.php:63 www/project/admin/editgroupinfo.php:137
 #: www/project/admin/index.php:203 www/softwaremap/tag_cloud.php:164
 #, fuzzy
 msgid "Tags"
 msgstr "任務"
 
-#: www/include/project_home.php:67 www/include/project_home.php:70
+#: www/include/project_home.php:69 www/include/project_home.php:72
 #, fuzzy
 msgid "No tag defined for this project"
 msgstr "該專案沒有這樣的文章"
 
-#: www/include/project_home.php:81 www/softwaremap/trove_list.php:317
+#: www/include/project_home.php:83 www/softwaremap/trove_list.php:318
 msgid "Registered:&nbsp;"
 msgstr "已註冊："
 
-#: www/include/project_home.php:91
+#: www/include/project_home.php:94
 #, fuzzy, php-format
 msgid "Activity Ranking: %d"
 msgstr "活躍度："
 
-#: www/include/project_home.php:92
+#: www/include/project_home.php:95
 #, php-format
 msgid ""
 "View project <a href=\"%1$s\" >Statistics</a> or <a href=\"%2$s\">Activity</"
 "a>"
 msgstr ""
 
-#: www/include/project_home.php:93
+#: www/include/project_home.php:96
 #, fuzzy, php-format
 msgid ""
 "View list of <a href=\"%1$s\">RSS feeds</a> available for this project.</a>"
 msgstr "以下是這個專案能夠提供的工作列表"
 
-#: www/include/project_home.php:108
+#: www/include/project_home.php:111
 #, fuzzy, php-format
 msgid ""
 "HELP WANTED: This project is looking for a <a href=\"%1$s\">\"%2$s\"</a>."
@@ -7467,132 +7469,132 @@ msgid_plural ""
 msgstr[0] "需要協助：這個專案正在找尋"
 msgstr[1] "需要協助：這個專案正在找尋"
 
-#: www/include/project_home.php:128
+#: www/include/project_home.php:131
 msgid "Developer Info"
 msgstr "開發者資訊"
 
-#: www/include/project_home.php:133
+#: www/include/project_home.php:136
 msgid "Project Admins"
 msgstr "專案管理員"
 
-#: www/include/project_home.php:151
+#: www/include/project_home.php:154
 msgid "View Members"
 msgstr "瀏覽成員"
 
-#: www/include/project_home.php:152
+#: www/include/project_home.php:155
 msgid "Request to join"
 msgstr "請求參與"
 
-#: www/include/project_home.php:170
+#: www/include/project_home.php:173
 msgid "Latest File Releases"
 msgstr "最新發佈專案"
 
-#: www/include/project_home.php:180 www/snippet/package.php:149
+#: www/include/project_home.php:183 www/snippet/package.php:149
 #: www/snippet/submit.php:114
 msgid "Version"
 msgstr "版本"
 
-#: www/include/project_home.php:186
+#: www/include/project_home.php:189
 msgid "Notes"
 msgstr "備註"
 
-#: www/include/project_home.php:186
+#: www/include/project_home.php:189
 #: www/tracker/include/ArtifactTypeHtml.class.php:64
 #: www/tracker/include/ArtifactTypeHtml.class.php:73 www/tracker/mod.php:38
 msgid "Monitor"
 msgstr "監視"
 
-#: www/include/project_home.php:189 www/include/project_home.php:246
+#: www/include/project_home.php:192 www/include/project_home.php:249
 #: www/new/index.php:100 www/tracker/detail.php:170 www/tracker/detail.php:175
 #: www/tracker/mod-limited.php:163 www/tracker/mod-limited.php:173
 #: www/tracker/mod.php:259 www/tracker/mod.php:269
 msgid "Download"
 msgstr "下載"
 
-#: www/include/project_home.php:220
+#: www/include/project_home.php:223
 msgid "This Project Has Not Released Any Files"
 msgstr "該專案沒有發佈任何檔案"
 
-#: www/include/project_home.php:253
+#: www/include/project_home.php:256
 msgid "View All Project Files"
 msgstr "瀏覽全部檔案"
 
-#: www/include/project_home.php:268
+#: www/include/project_home.php:271
 msgid "Public Areas"
 msgstr "公共區域"
 
-#: www/include/project_home.php:273
+#: www/include/project_home.php:276
 msgid "Home Page"
 msgstr "首頁"
 
-#: www/include/project_home.php:274
+#: www/include/project_home.php:277
 msgid "Project Home Page"
 msgstr "專案首頁"
 
-#: www/include/project_home.php:294 www/include/project_summary.php:133
+#: www/include/project_home.php:298 www/include/project_summary.php:135
 msgid "There are no public trackers available"
 msgstr "目前沒有公開的追蹤項目"
 
-#: www/include/project_home.php:301 www/include/project_summary.php:138
+#: www/include/project_home.php:305 www/include/project_summary.php:140
 #, fuzzy, php-format
 msgid "(<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
 msgid_plural "(<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
 msgstr[0] "開啟中 <strong>%1$s</strong>  / 總共<strong>%2$s</strong>"
 msgstr[1] "開啟中 <strong>%1$s</strong>  / 總共<strong>%2$s</strong>"
 
-#: www/include/project_home.php:314
+#: www/include/project_home.php:318
 msgid "Public Forums"
 msgstr "公共討論區"
 
-#: www/include/project_home.php:317
+#: www/include/project_home.php:321
 #, fuzzy, php-format
 msgid "<strong>%d</strong> message"
 msgid_plural "<strong>%d</strong> messages"
 msgstr[0] "找到 <strong>%1$s</strong> 個專案"
 msgstr[1] "找到 <strong>%1$s</strong> 個專案"
 
-#: www/include/project_home.php:319
+#: www/include/project_home.php:323
 #, fuzzy, php-format
 msgid "<strong>%d</strong> forum"
 msgid_plural "<strong>%d</strong> forums"
 msgstr[0] "找到 <strong>%1$s</strong> 個專案"
 msgstr[1] "找到 <strong>%1$s</strong> 個專案"
 
-#: www/include/project_home.php:330
+#: www/include/project_home.php:334
 msgid "DocManager: Project Documentation"
 msgstr "文件管理員：專案文件"
 
-#: www/include/project_home.php:338
+#: www/include/project_home.php:342
 msgid "Mailing Lists"
 msgstr "通信論壇"
 
-#: www/include/project_home.php:340
+#: www/include/project_home.php:344
 #, fuzzy, php-format
 msgid "(<strong>%1$s</strong> public mailing list)"
 msgid_plural "(<strong>%1$s</strong> public mailing lists)"
 msgstr[0] "找到 <strong>%1$s</strong> 個專案"
 msgstr[1] "找到 <strong>%1$s</strong> 個專案"
 
-#: www/include/project_home.php:348
+#: www/include/project_home.php:352
 msgid "Task Manager"
 msgstr "任務管理"
 
-#: www/include/project_home.php:353
+#: www/include/project_home.php:357
 msgid "There are no public subprojects available"
 msgstr "目前沒有公開的子專案"
 
-#: www/include/project_home.php:371
+#: www/include/project_home.php:375
 msgid "surveys"
 msgstr "問卷"
 
-#: www/include/project_home.php:379 www/register/projectinfo.php:160
+#: www/include/project_home.php:383 www/register/projectinfo.php:160
 #: www/scm/admin/index.php:39 www/scm/admin/index.php:89
 #: www/scm/include/scm_utils.php:43 www/scm/index.php:32
 #: www/scm/reporting/index.php:32 www/scm/viewvc.php:138
 msgid "SCM Repository"
 msgstr "原始碼版本控制系統資料庫"
 
-#: www/include/project_home.php:414 www/include/project_home.php:415
+#: www/include/project_home.php:418 www/include/project_home.php:419
 msgid "Anonymous FTP Space"
 msgstr "匿名FTP"
 
@@ -7633,24 +7635,24 @@ msgstr "專案期間"
 msgid "for"
 msgstr "給"
 
-#: www/include/trove.php:202
+#: www/include/trove.php:206
 #, fuzzy
 msgid "None Selected"
 msgstr "選擇拒絕"
 
-#: www/include/trove.php:242
+#: www/include/trove.php:248
 msgid "This project has not yet categorized itself in the"
 msgstr "這個專案還沒自行歸類於"
 
-#: www/include/trove.php:243
+#: www/include/trove.php:249
 msgid "Trove Software Map"
 msgstr "軟體地圖"
 
-#: www/include/trove.php:309 www/trove/include/trove.php:284
+#: www/include/trove.php:315 www/trove/include/trove.php:290
 msgid "(Now Filtering)"
 msgstr ""
 
-#: www/include/trove.php:317 www/trove/include/trove.php:293
+#: www/include/trove.php:323 www/trove/include/trove.php:299
 #, fuzzy
 msgid "[Filter]"
 msgstr "文件:"
@@ -7676,7 +7678,7 @@ msgstr "專長資料"
 msgid "Login name"
 msgstr "使用者名稱："
 
-#: www/include/user_home.php:53 www/sendmessage.php:132
+#: www/include/user_home.php:53 www/sendmessage.php:134
 msgid "Your Email Address"
 msgstr "您的 Email"
 
@@ -7712,15 +7714,15 @@ msgstr "瀏覽日記與筆記"
 msgid "Monitor this Diary"
 msgstr "監控這個日記"
 
-#: www/include/user_home.php:148
+#: www/include/user_home.php:151
 msgid "This developer is not a member of any projects."
 msgstr "這個研發人員不屬於任何專案"
 
-#: www/include/user_home.php:151
+#: www/include/user_home.php:154
 msgid "This developer is a member of the following groups:"
 msgstr "這個研發人員隸屬於下面群組："
 
-#: www/include/user_home.php:173
+#: www/include/user_home.php:176
 #, php-format
 msgid ""
 "<p>If you are familiar with this user, please take a moment to rate him/her "
@@ -7730,7 +7732,7 @@ msgid ""
 "re-implemented and expanded in a few ways.</p>"
 msgstr ""
 
-#: www/include/user_home.php:180
+#: www/include/user_home.php:183
 #, php-format
 msgid ""
 "<p>The Peer rating box shows all rating averages (and response levels) for "
@@ -7749,7 +7751,7 @@ msgid ""
 "user page. </i></p>"
 msgstr ""
 
-#: www/include/user_home.php:187
+#: www/include/user_home.php:190
 #, php-format
 msgid ""
 "You opted-out from peer rating system, otherwise you would have a chance to "
@@ -8089,7 +8091,7 @@ msgid "Priority"
 msgstr "優先權"
 
 #: www/my/dashboard.php:85 www/pm/add_task.php:109 www/pm/browse_task.php:178
-#: www/pm/browse_task.php:356 www/pm/detail_task.php:82
+#: www/pm/browse_task.php:356 www/pm/detail_task.php:83
 #: www/pm/mod_task.php:113 www/tracker/add.php:63 www/tracker/browse.php:364
 #: www/tracker/browse.php:541 www/tracker/detail.php:64
 #: www/tracker/mod-limited.php:87 www/tracker/mod.php:125
@@ -8097,8 +8099,8 @@ msgstr "優先權"
 msgid "Assigned to"
 msgstr "指定給"
 
-#: www/my/dashboard.php:87 www/news/admin/index.php:125
-#: www/news/admin/index.php:272 www/pm/detail_task.php:25
+#: www/my/dashboard.php:87 www/news/admin/index.php:126
+#: www/news/admin/index.php:273 www/pm/detail_task.php:25
 #: www/pm/mod_task.php:35
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:45
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:37
@@ -8163,8 +8165,8 @@ msgstr "增加新日記或筆記"
 msgid "Update An Entry"
 msgstr "更新日記或筆記"
 
-#: www/my/diary.php:169 www/news/admin/index.php:135
-#: www/news/admin/index.php:280 www/news/submit.php:118
+#: www/my/diary.php:169 www/news/admin/index.php:136
+#: www/news/admin/index.php:281 www/news/submit.php:118
 msgid "Details"
 msgstr ""
 
@@ -8218,7 +8220,7 @@ msgstr ""
 
 #: www/my/index.php:216 www/my/index.php:294 www/my/index.php:326
 #: www/my/index.php:396 www/my/rmproject.php:84
-#: www/project/admin/index.php:276 www/project/admin/index.php:296
+#: www/project/admin/index.php:277 www/project/admin/index.php:297
 msgid "Remove"
 msgstr "移除"
 
@@ -8317,8 +8319,8 @@ msgstr "發佈者："
 msgid "Module:"
 msgstr "模組："
 
-#: www/new/index.php:80 www/snippet/addversion.php:81
-#: www/snippet/addversion.php:205
+#: www/new/index.php:80 www/snippet/addversion.php:82
+#: www/snippet/addversion.php:207
 msgid "Version:"
 msgstr "版本："
 
@@ -8342,66 +8344,66 @@ msgstr "最近更新"
 msgid "Older Releases"
 msgstr "歷史更新"
 
-#: www/news/admin/index.php:89 www/news/admin/index.php:207
+#: www/news/admin/index.php:90 www/news/admin/index.php:208
 msgid "NewsByte Updated."
 msgstr "新聞已更新"
 
-#: www/news/admin/index.php:99 www/news/admin/index.php:246
+#: www/news/admin/index.php:100 www/news/admin/index.php:247
 #: www/project/admin/index.php:228
 #, fuzzy
 msgid "News admin"
 msgstr "新聞管理"
 
-#: www/news/admin/index.php:109 www/news/admin/index.php:258
+#: www/news/admin/index.php:110 www/news/admin/index.php:259
 #, fuzzy
 msgid "NewsByte not found"
 msgstr "找不到問卷"
 
-#: www/news/admin/index.php:116 www/news/admin/index.php:265
+#: www/news/admin/index.php:117 www/news/admin/index.php:266
 #, php-format
 msgid "Approve a NewsByte For Project: %1$s"
 msgstr "核准新聞針對專案：%1$s"
 
-#: www/news/admin/index.php:130
+#: www/news/admin/index.php:131
 msgid "Displayed"
 msgstr "顯示"
 
-#: www/news/admin/index.php:152
+#: www/news/admin/index.php:153
 #, php-format
 msgid ""
 "If this item is on the %1$s home page and you edit it, it will be removed "
 "from the home page."
 msgstr "如果您編輯在 %1$s 首頁的這個項目，它將從首頁被移除。"
 
-#: www/news/admin/index.php:168 www/news/admin/news_admin_utils.php:70
+#: www/news/admin/index.php:169 www/news/admin/news_admin_utils.php:70
 msgid "No Queued Items Found"
 msgstr "未佇列項目發現"
 
-#: www/news/admin/index.php:171
+#: www/news/admin/index.php:172
 msgid "List of News Submitted for Project"
 msgstr "這些新聞項目針對專案被發表"
 
-#: www/news/admin/index.php:219
+#: www/news/admin/index.php:220
 msgid "NewsByte Deleted."
 msgstr "新聞已移除"
 
-#: www/news/admin/index.php:241
+#: www/news/admin/index.php:242
 msgid "NewsBytes Rejected."
 msgstr "新聞已拒絕"
 
-#: www/news/admin/index.php:270
+#: www/news/admin/index.php:271
 msgid "Submitted for group"
 msgstr "發表群組"
 
-#: www/news/admin/index.php:275
+#: www/news/admin/index.php:276
 msgid "Approve For Front Page"
 msgstr "核准首頁發表"
 
-#: www/news/admin/index.php:276
+#: www/news/admin/index.php:277
 msgid "Do Nothing"
 msgstr "不採取動作"
 
-#: www/news/admin/index.php:351
+#: www/news/admin/index.php:352
 #, php-format
 msgid ""
 "You have to be an admin on the project you are editing or a member of the %s "
@@ -8523,7 +8525,7 @@ msgstr ""
 #: www/pm/add_task.php:35 www/pm/browse_task.php:122
 #: www/pm/browse_task.php:176 www/pm/browse_task.php:346
 #: www/pm/detail_task.php:30 www/pm/ganttpage.php:168 www/pm/mod_task.php:42
-#: www/pm/mod_task.php:209 www/reporting/timeadd.php:155
+#: www/pm/mod_task.php:209 www/reporting/timeadd.php:164
 #: www/snippet/package.php:142 www/snippet/submit.php:107
 msgid "Category"
 msgstr "類別"
@@ -8794,20 +8796,20 @@ msgstr "開啟日期"
 msgid "End Date"
 msgstr "結束日期"
 
-#: www/people/editprofile.php:308 www/people/skills_utils.php:168
+#: www/people/editprofile.php:307 www/people/skills_utils.php:168
 #, fuzzy
 msgid "Title (max 100 characters)"
 msgstr "關鍵字（不多於255字元）"
 
-#: www/people/editprofile.php:315 www/people/skills_utils.php:175
+#: www/people/editprofile.php:314 www/people/skills_utils.php:175
 msgid "Keywords (max 255 characters)"
 msgstr "關鍵字（不多於255字元）"
 
-#: www/people/editprofile.php:321
+#: www/people/editprofile.php:320
 msgid "Add This Skill"
 msgstr "增加這個技能"
 
-#: www/people/editprofile.php:328
+#: www/people/editprofile.php:327
 msgid "Edit/Delete Your Skills"
 msgstr "編輯/刪除您的技能"
 
@@ -9002,7 +9004,7 @@ msgstr ""
 msgid "View Calendar"
 msgstr "查看日曆"
 
-#: www/pm/add_task.php:115 www/pm/detail_task.php:94 www/pm/mod_task.php:123
+#: www/pm/add_task.php:115 www/pm/detail_task.php:96 www/pm/mod_task.php:123
 #, fuzzy
 msgid "Dependent on task"
 msgstr "依賴於任務"
@@ -9041,7 +9043,7 @@ msgid "No categories defined"
 msgstr "沒有定義分類"
 
 #: www/pm/admin/index.php:216 www/pm/admin/index.php:262
-#: www/reporting/timecategory.php:72 www/reporting/timecategory.php:91
+#: www/reporting/timecategory.php:74 www/reporting/timecategory.php:93
 msgid "Category Name"
 msgstr "類別名稱"
 
@@ -9394,7 +9396,7 @@ msgstr "任務細節"
 msgid "Original Comment"
 msgstr "原始評論"
 
-#: www/pm/detail_task.php:101 www/reporting/timeadd.php:154
+#: www/pm/detail_task.php:103 www/reporting/timeadd.php:163
 msgid "Hours"
 msgstr "小時"
 
@@ -9524,16 +9526,16 @@ msgid ""
 "start."
 msgstr "您應該只選擇那些只有完成了才能開始這個任務的任務。"
 
-#: www/pm/mod_task.php:202 www/reporting/timeadd.php:112
-#: www/reporting/timeadd.php:227
+#: www/pm/mod_task.php:202 www/reporting/timeadd.php:121
+#: www/reporting/timeadd.php:237
 msgid "Time tracking"
 msgstr "時間追蹤"
 
-#: www/pm/mod_task.php:206 www/reporting/sitetimebar.php:83
+#: www/pm/mod_task.php:206 www/reporting/sitetimebar.php:85
 msgid "Week"
 msgstr "週"
 
-#: www/pm/mod_task.php:207 www/stats/site_stats_utils.php:401
+#: www/pm/mod_task.php:207 www/stats/site_stats_utils.php:404
 msgid "Day"
 msgstr "日"
 
@@ -9649,49 +9651,49 @@ msgstr "無法增加資料庫分類"
 msgid "Database scheduled for creation"
 msgstr "資料庫建立已加入進度表"
 
-#: www/project/admin/database.php:136
+#: www/project/admin/database.php:143
 msgid "Database Information"
 msgstr "資料庫資訊"
 
-#: www/project/admin/database.php:141
+#: www/project/admin/database.php:148
 msgid "Click to confirm deletion"
 msgstr "點擊這裏確認刪除"
 
-#: www/project/admin/database.php:161
+#: www/project/admin/database.php:169
 msgid "Add New Database"
 msgstr "增加新資料庫"
 
-#: www/project/admin/database.php:162
+#: www/project/admin/database.php:170
 msgid ""
 "Clicking on \"create\" will schedule the creation of the database, and email "
 "the\tdetails to the project administrators"
 msgstr ""
 
-#: www/project/admin/database.php:164
+#: www/project/admin/database.php:172
 msgid "Database Type"
 msgstr "資料庫類型"
 
-#: www/project/admin/database.php:186
+#: www/project/admin/database.php:194
 msgid "Maximum number of databases of all types have been allocated"
 msgstr "所有類型的資料庫最大值都被分配了"
 
-#: www/project/admin/database.php:204
+#: www/project/admin/database.php:212
 msgid "DB Type"
 msgstr "資料庫類型"
 
-#: www/project/admin/database.php:206
+#: www/project/admin/database.php:214
 msgid "New Password"
 msgstr "新密碼"
 
-#: www/project/admin/database.php:207
+#: www/project/admin/database.php:215
 msgid "Confirm New"
 msgstr "確認新密碼"
 
-#: www/project/admin/database.php:252
+#: www/project/admin/database.php:260
 msgid "Current Databases"
 msgstr "當前資料庫"
 
-#: www/project/admin/database.php:252
+#: www/project/admin/database.php:260
 msgid "There are no databases currently allocated to this group"
 msgstr ""
 
@@ -9703,83 +9705,83 @@ msgstr "專案資訊更新"
 msgid "Edit Group Info"
 msgstr "編輯專案資訊"
 
-#: www/project/admin/editgroupinfo.php:123
+#: www/project/admin/editgroupinfo.php:124
 msgid "Descriptive Group Name"
 msgstr "說明性的專案名稱"
 
-#: www/project/admin/editgroupinfo.php:128
+#: www/project/admin/editgroupinfo.php:129
 msgid ""
 "Short Description (255 Character Max, HTML will be stripped from this "
 "description)"
 msgstr "簡短說明（最多255個字元，HTML標記都會當做普通文字顯示）"
 
-#: www/project/admin/editgroupinfo.php:142
+#: www/project/admin/editgroupinfo.php:143
 msgid "Homepage Link"
 msgstr "網頁鏈結"
 
-#: www/project/admin/editgroupinfo.php:149
+#: www/project/admin/editgroupinfo.php:150
 msgid "Visibility: "
 msgstr ""
 
-#: www/project/admin/editgroupinfo.php:172
+#: www/project/admin/editgroupinfo.php:173
 msgid "Active Features"
 msgstr "活動的特性"
 
-#: www/project/admin/editgroupinfo.php:200
+#: www/project/admin/editgroupinfo.php:201
 msgid "Use Mailing Lists"
 msgstr "使用通信論壇"
 
-#: www/project/admin/editgroupinfo.php:213
+#: www/project/admin/editgroupinfo.php:214
 msgid "Use Surveys"
 msgstr "使用查詢"
 
-#: www/project/admin/editgroupinfo.php:226
+#: www/project/admin/editgroupinfo.php:227
 msgid "Use Forums"
 msgstr "使用討論區"
 
-#: www/project/admin/editgroupinfo.php:239
+#: www/project/admin/editgroupinfo.php:240
 msgid "Use Project/Task Manager"
 msgstr "使用專案/任務管理器"
 
-#: www/project/admin/editgroupinfo.php:252
+#: www/project/admin/editgroupinfo.php:253
 msgid "Use SCM"
 msgstr "使用原始碼版本管理系統"
 
-#: www/project/admin/editgroupinfo.php:265
+#: www/project/admin/editgroupinfo.php:266
 msgid "Use News"
 msgstr "使用新聞"
 
-#: www/project/admin/editgroupinfo.php:278
+#: www/project/admin/editgroupinfo.php:279
 msgid "Use Doc Mgr"
 msgstr "使用文件產生器"
 
-#: www/project/admin/editgroupinfo.php:291
+#: www/project/admin/editgroupinfo.php:292
 msgid "Use FTP"
 msgstr "使用FTP"
 
-#: www/project/admin/editgroupinfo.php:304
+#: www/project/admin/editgroupinfo.php:305
 msgid "Use Tracker"
 msgstr "使用追蹤"
 
-#: www/project/admin/editgroupinfo.php:317
+#: www/project/admin/editgroupinfo.php:318
 msgid "Use File Release System"
 msgstr "使用檔案發佈系統"
 
-#: www/project/admin/editgroupinfo.php:326
+#: www/project/admin/editgroupinfo.php:327
 msgid "Use Statistics"
 msgstr "使用統計"
 
-#: www/project/admin/editgroupinfo.php:340
+#: www/project/admin/editgroupinfo.php:341
 msgid ""
 "If you wish, you can provide default email addresses to which new "
 "submissions will be sent"
 msgstr "如果您願意，您可以提供其他的email，這樣所有的更新都會發送到該信箱"
 
-#: www/project/admin/editgroupinfo.php:341
+#: www/project/admin/editgroupinfo.php:342
 msgid "New Document Submissions"
 msgstr "新文件送出"
 
-#: www/project/admin/editgroupinfo.php:343
+#: www/project/admin/editgroupinfo.php:344
 msgid "(send on all updates)"
 msgstr "(發送所有更新)"
 
@@ -9795,24 +9797,24 @@ msgstr "多媒體文件已上傳"
 msgid "Both file name and description are required"
 msgstr "檔案名和說明都是必須的"
 
-#: www/project/admin/editimages.php:141
+#: www/project/admin/editimages.php:144
 msgid "Multimedia File Deleted"
 msgstr "多媒體文件已刪除"
 
-#: www/project/admin/editimages.php:146
+#: www/project/admin/editimages.php:149
 msgid "File description is required"
 msgstr "需要文件說明"
 
-#: www/project/admin/editimages.php:162
+#: www/project/admin/editimages.php:169
 msgid "Multimedia File Properties Updated"
 msgstr "多媒體文件資訊已更新"
 
-#: www/project/admin/editimages.php:192 www/project/admin/editimages.php:212
+#: www/project/admin/editimages.php:201 www/project/admin/editimages.php:223
 #: www/project/admin/project_admin_utils.php:69
 msgid "Edit Multimedia Data"
 msgstr "編輯多媒體資料"
 
-#: www/project/admin/editimages.php:195
+#: www/project/admin/editimages.php:204
 #, php-format
 msgid ""
 "You can store up to %1$s MB of multimedia data (bitmap and vector graphics, "
@@ -9822,47 +9824,47 @@ msgstr ""
 "您可以存儲最多不超過 %1$s MB 的多媒體資料（點陣圖或是向量圖，音效檔案，3D模"
 "型）到資料庫中。使用本頁進行增加/刪除專案多媒體資料。"
 
-#: www/project/admin/editimages.php:218
+#: www/project/admin/editimages.php:229
 msgid "Replace with new file (optional)"
 msgstr "使用新文件替換(可選)"
 
-#: www/project/admin/editimages.php:226 www/project/admin/editimages.php:261
+#: www/project/admin/editimages.php:237 www/project/admin/editimages.php:273
 msgid "MIME Type"
 msgstr "MIME 類型"
 
-#: www/project/admin/editimages.php:232
+#: www/project/admin/editimages.php:243
 msgid "Reset"
 msgstr "重設"
 
-#: www/project/admin/editimages.php:241
+#: www/project/admin/editimages.php:253
 msgid "Add Multimedia Data"
 msgstr "增加多媒體資料"
 
-#: www/project/admin/editimages.php:245
+#: www/project/admin/editimages.php:257
 msgid "Local filename"
 msgstr "本地檔案名"
 
-#: www/project/admin/editimages.php:251
+#: www/project/admin/editimages.php:263
 msgid "Add File"
 msgstr "增加文件"
 
-#: www/project/admin/editimages.php:259
+#: www/project/admin/editimages.php:271
 msgid "Uploaded"
 msgstr "上傳"
 
-#: www/project/admin/editimages.php:263
+#: www/project/admin/editimages.php:275
 msgid "Dims"
 msgstr "Dims"
 
-#: www/project/admin/editimages.php:285
+#: www/project/admin/editimages.php:297
 msgid "Del"
 msgstr "刪除"
 
-#: www/project/admin/group_trove.php:70
+#: www/project/admin/group_trove.php:72
 msgid "Group Trove Information"
 msgstr "專案類別"
 
-#: www/project/admin/group_trove.php:73
+#: www/project/admin/group_trove.php:75
 msgid ""
 "<h3>Edit Trove Categorization</h3><p>Select up to three locations for this "
 "project in each of the Trove root categories. If the project does not "
@@ -9873,7 +9875,7 @@ msgid ""
 "categorization being accepted</p>."
 msgstr ""
 
-#: www/project/admin/group_trove.php:105
+#: www/project/admin/group_trove.php:109
 msgid "Update All Category Changes"
 msgstr "更新所有的類別異動"
 
@@ -9965,51 +9967,51 @@ msgstr "原始碼版本管理系統"
 msgid "Group Members"
 msgstr "群組會員"
 
-#: www/project/admin/index.php:274 www/project/admin/massfinish.php:82
+#: www/project/admin/index.php:275 www/project/admin/massfinish.php:82
 msgid "Role"
 msgstr "角色"
 
-#: www/project/admin/index.php:300
+#: www/project/admin/index.php:301
 msgid "Observer"
 msgstr "匿名者"
 
-#: www/project/admin/index.php:303 www/project/admin/roleedit.php:100
+#: www/project/admin/index.php:304 www/project/admin/roleedit.php:100
 msgid "Edit Observer"
 msgstr "編輯匿名者"
 
-#: www/project/admin/index.php:314 www/project/admin/massadd.php:103
+#: www/project/admin/index.php:315 www/project/admin/massadd.php:103
 #, fuzzy
 msgid "Add user"
 msgstr "增加會員"
 
-#: www/project/admin/index.php:317 www/project/admin/massadd.php:80
+#: www/project/admin/index.php:318 www/project/admin/massadd.php:80
 #: www/project/admin/massfinish.php:70
 msgid "Add Users From List"
 msgstr "從列表新增使用者"
 
-#: www/project/admin/index.php:328
+#: www/project/admin/index.php:329
 msgid "Pending Requests"
 msgstr "等待中的請求"
 
-#: www/project/admin/index.php:331
+#: www/project/admin/index.php:332
 msgid "No Pending Requests"
 msgstr "沒有未決定的請求"
 
-#: www/project/admin/index.php:344
+#: www/project/admin/index.php:345
 msgid "Accept"
 msgstr "接受"
 
-#: www/project/admin/index.php:356 www/tracker/admin/form-workflow.php:103
+#: www/project/admin/index.php:357 www/tracker/admin/form-workflow.php:103
 msgid "Edit Roles"
 msgstr "編輯角色"
 
-#: www/project/admin/index.php:359 www/project/admin/massadd.php:76
+#: www/project/admin/index.php:360 www/project/admin/massadd.php:76
 #: www/project/admin/massfinish.php:67 www/project/admin/roleedit.php:92
 #: www/project/admin/roleedit.php:106
 msgid "Edit Role"
 msgstr "編輯角色"
 
-#: www/project/admin/index.php:361
+#: www/project/admin/index.php:362
 msgid "Add Role"
 msgstr "新增角色"
 
@@ -10156,15 +10158,15 @@ msgstr "建立虛擬主機工作已經進入排程"
 msgid "Not a valid hostname - %1$s"
 msgstr "錯誤的主機名稱 - %1$s"
 
-#: www/project/admin/vhost.php:97
+#: www/project/admin/vhost.php:100
 msgid "VHOST deleted"
 msgstr "虛擬主機刪除了"
 
-#: www/project/admin/vhost.php:104
+#: www/project/admin/vhost.php:107
 msgid "Virtual Host Management"
 msgstr "虛擬主機管理"
 
-#: www/project/admin/vhost.php:110
+#: www/project/admin/vhost.php:113
 #, php-format
 msgid ""
 "<strong><span style=\"text-decoration:underline\">Add New Virtual Host</"
@@ -10176,15 +10178,15 @@ msgid ""
 "display the material at <em>%4$s.%5$s</em>."
 msgstr ""
 
-#: www/project/admin/vhost.php:116
+#: www/project/admin/vhost.php:119
 msgid "New Virtual Host <em>(e.g. vhost.org)</em>"
 msgstr "新增虛擬主機 <em>(例如 vhost.org)</em>"
 
-#: www/project/admin/vhost.php:134
+#: www/project/admin/vhost.php:137
 msgid "Virtual Host"
 msgstr "虛擬主機"
 
-#: www/project/admin/vhost.php:151
+#: www/project/admin/vhost.php:154
 msgid "No VHOSTs defined"
 msgstr "未定義任何虛擬主機"
 
@@ -10224,8 +10226,8 @@ msgstr "瀏覽"
 msgid "Last Modified"
 msgstr ""
 
-#: www/project/report/index.php:165 www/sendmessage.php:83
-#: www/sendmessage.php:94
+#: www/project/report/index.php:165 www/sendmessage.php:85
+#: www/sendmessage.php:96
 msgid "Contact"
 msgstr "聯絡"
 
@@ -10274,7 +10276,7 @@ msgid "Areas"
 msgstr "區域"
 
 #: www/project/stats/project_stats_utils.php:71
-#: www/stats/site_stats_utils.php:398
+#: www/stats/site_stats_utils.php:401
 #, php-format
 msgid "Statistics for the past %1$s days"
 msgstr "過去 %1$s 天的統計"
@@ -10282,7 +10284,7 @@ msgstr "過去 %1$s 天的統計"
 #: www/project/stats/project_stats_utils.php:77
 #: www/project/stats/project_stats_utils.php:136
 #: www/project/stats/project_stats_utils.php:192
-#: www/stats/site_stats_utils.php:263
+#: www/stats/site_stats_utils.php:266
 msgid "Page Views"
 msgstr "頁面瀏覽次數"
 
@@ -10295,15 +10297,15 @@ msgstr "下載"
 #: www/project/stats/project_stats_utils.php:82
 #: www/project/stats/project_stats_utils.php:141
 #: www/project/stats/project_stats_utils.php:197
-#: www/stats/site_stats_utils.php:271 www/stats/site_stats_utils.php:462
+#: www/stats/site_stats_utils.php:274 www/stats/site_stats_utils.php:465
 msgid "All Trkr"
 msgstr "所有工作"
 
 #: www/project/stats/project_stats_utils.php:84
 #: www/project/stats/project_stats_utils.php:143
 #: www/project/stats/project_stats_utils.php:199
-#: www/stats/site_stats_utils.php:277 www/stats/site_stats_utils.php:409
-#: www/stats/site_stats_utils.php:464
+#: www/stats/site_stats_utils.php:280 www/stats/site_stats_utils.php:412
+#: www/stats/site_stats_utils.php:467
 msgid "CVS"
 msgstr "CVS"
 
@@ -10514,7 +10516,7 @@ msgstr "管理"
 msgid "Initialize / Rebuild Reporting Tables"
 msgstr "初始化 / 重建報告表格"
 
-#: www/reporting/index.php:68 www/reporting/timecategory.php:84
+#: www/reporting/index.php:68 www/reporting/timecategory.php:86
 msgid "Manage Time Tracker Categories"
 msgstr "管理時間追蹤者種類"
 
@@ -10576,54 +10578,54 @@ msgstr "網站活動"
 msgid "Site-Wide Time Tracking"
 msgstr "網站時間追蹤"
 
-#: www/reporting/timeadd.php:103
+#: www/reporting/timeadd.php:112
 msgid "All Fields Are Required."
 msgstr "需要全部的欄位"
 
-#: www/reporting/timeadd.php:129
+#: www/reporting/timeadd.php:138
 #, php-format
 msgid "Time Entries For The Week Starting %s"
 msgstr ""
 
-#: www/reporting/timeadd.php:152
+#: www/reporting/timeadd.php:161
 msgid "Project/Task"
 msgstr "專案/任務"
 
-#: www/reporting/timeadd.php:191
+#: www/reporting/timeadd.php:201
 msgid "Total Hours"
 msgstr "總共小時"
 
-#: www/reporting/timeadd.php:198
+#: www/reporting/timeadd.php:208
 msgid "Add Entry"
 msgstr "新增項目"
 
-#: www/reporting/timeadd.php:199
+#: www/reporting/timeadd.php:209
 msgid ""
 "Choose a Project/Subproject in the Task Manager. You will then have to "
 "choose a Task and category to record your time in."
 msgstr ""
 "在任務管理中選擇一個專案/子專案，您然後將必須選擇一個任務和種類記錄你的時間。"
 
-#: www/reporting/timeadd.php:206 www/tracker/taskmgr.php:88
+#: www/reporting/timeadd.php:216 www/tracker/taskmgr.php:88
 #: www/tracker/taskmgr.php:141
 msgid "Task Manager Project"
 msgstr "專案任務管理員"
 
-#: www/reporting/timeadd.php:218
+#: www/reporting/timeadd.php:228
 msgid "Change Week"
 msgstr "變更星期"
 
-#: www/reporting/timeadd.php:230
+#: www/reporting/timeadd.php:240
 msgid "Choose A Week to Record Or Edit Your Time."
 msgstr "選擇一個星期記錄或編輯您的時間。"
 
-#: www/reporting/timeadd.php:231
+#: www/reporting/timeadd.php:241
 msgid ""
 "After you choose a week, you will be prompted to choose a Project/Subproject "
 "in the Task Manager."
 msgstr "在您選擇一個星期之後，在任務管理中您將被提示選擇一個專案/子專案"
 
-#: www/reporting/timeadd.php:234
+#: www/reporting/timeadd.php:244
 msgid "Week Starting"
 msgstr "星期開始"
 
@@ -10631,11 +10633,11 @@ msgstr "星期開始"
 msgid "Successful"
 msgstr "成功"
 
-#: www/reporting/timecategory.php:71
+#: www/reporting/timecategory.php:73
 msgid "Time Code"
 msgstr "時間碼"
 
-#: www/reporting/timecategory.php:86
+#: www/reporting/timecategory.php:88
 msgid ""
 "You can create categories for how time might be spent when completing a "
 "particular task. Examples of categories include \"Meeting\", \"Coding\", "
@@ -10865,21 +10867,21 @@ msgstr "錯誤 - 無法搜尋"
 msgid "Error - some variables were not provided"
 msgstr ""
 
-#: www/sendmessage.php:43
+#: www/sendmessage.php:45
 #, fuzzy
 msgid "Error - That user does not exist"
 msgstr "錯誤 - 程式碼不存在"
 
-#: www/sendmessage.php:48
+#: www/sendmessage.php:50
 #, fuzzy, php-format
 msgid "You can only send to addresses @<em>%1$s</em>."
 msgstr "找不到關於 <em>%1$s</em> 的資料"
 
-#: www/sendmessage.php:84 www/sendmessage.php:95
+#: www/sendmessage.php:86 www/sendmessage.php:97
 msgid "Message has been sent"
 msgstr "訊息已送出"
 
-#: www/sendmessage.php:121
+#: www/sendmessage.php:123
 msgid ""
 "In an attempt to reduce spam, we are using this form to send email.<p />Fill "
 "it out accurately and completely or the receiver may not be able to respond."
@@ -10889,11 +10891,11 @@ msgid ""
 "<b>project id</b> (<b>group_id</b>) and <b>Project Name</b>.</span>"
 msgstr ""
 
-#: www/sendmessage.php:129
+#: www/sendmessage.php:131
 msgid "Your Name"
 msgstr "您的姓名"
 
-#: www/sendmessage.php:142
+#: www/sendmessage.php:144
 msgid "Send Message"
 msgstr "傳送 Email"
 
@@ -10909,82 +10911,82 @@ msgstr "錯誤 - snippet_package_version_id 錯誤"
 msgid "Error - Only the creator of a package version can add snippets to it."
 msgstr "錯誤 - 只有軟體包裝版本的建立者可以新增程式碼到其中"
 
-#: www/snippet/add_snippet_to_package.php:69
+#: www/snippet/add_snippet_to_package.php:70
 msgid "Error - That snippet doesn't exist."
 msgstr "錯誤 - 程式碼不存在"
 
-#: www/snippet/add_snippet_to_package.php:70
-#: www/snippet/add_snippet_to_package.php:82
-#: www/snippet/add_snippet_to_package.php:101
+#: www/snippet/add_snippet_to_package.php:71
+#: www/snippet/add_snippet_to_package.php:85
+#: www/snippet/add_snippet_to_package.php:104
 msgid "Back To Add Page"
 msgstr "回到新增頁面"
 
-#: www/snippet/add_snippet_to_package.php:81
+#: www/snippet/add_snippet_to_package.php:84
 msgid "Error - That snippet was already added to this package."
 msgstr "錯誤 - 那個程式碼已經新增到這個軟體包裝中"
 
-#: www/snippet/add_snippet_to_package.php:94 www/snippet/addversion.php:57
+#: www/snippet/add_snippet_to_package.php:97 www/snippet/addversion.php:58
 #: www/snippet/submit.php:58
 msgid "ERROR DOING SNIPPET VERSION INSERT!"
 msgstr "新增程式碼版本時發生錯誤！"
 
-#: www/snippet/add_snippet_to_package.php:97 www/snippet/addversion.php:61
+#: www/snippet/add_snippet_to_package.php:100 www/snippet/addversion.php:62
 msgid "Snippet Version Added Successfully."
 msgstr "程式碼版本新增成功"
 
-#: www/snippet/add_snippet_to_package.php:100 www/snippet/addversion.php:64
-#: www/snippet/addversion.php:186 www/snippet/package.php:111
+#: www/snippet/add_snippet_to_package.php:103 www/snippet/addversion.php:65
+#: www/snippet/addversion.php:188 www/snippet/package.php:111
 #: www/snippet/submit.php:66
 msgid "Error - Go back and fill in all the information"
 msgstr "錯誤 - 回上頁並且填入所有資訊"
 
-#: www/snippet/add_snippet_to_package.php:114
+#: www/snippet/add_snippet_to_package.php:118
 msgid "Package:"
 msgstr "軟體包裝："
 
-#: www/snippet/add_snippet_to_package.php:116
+#: www/snippet/add_snippet_to_package.php:120
 msgid ""
 "You can use this form repeatedly to keep adding snippets to your package.</"
 "p><p>The \"Snippet Version ID\" is the unique ID number that is shown next "
 "to a specific version of a snippet on the browse pages."
 msgstr ""
 
-#: www/snippet/add_snippet_to_package.php:125
+#: www/snippet/add_snippet_to_package.php:129
 msgid "Add This Snippet Version ID:"
 msgstr "新增這個程式碼版本編號："
 
-#: www/snippet/add_snippet_to_package.php:151 www/snippet/addversion.php:94
-#: www/snippet/addversion.php:214 www/snippet/package.php:154
+#: www/snippet/add_snippet_to_package.php:155 www/snippet/addversion.php:95
+#: www/snippet/addversion.php:216 www/snippet/package.php:154
 #: www/snippet/submit.php:123
 msgid "Make sure all info is complete and accurate"
 msgstr "請確認所有資訊是正確且完整的"
 
-#: www/snippet/add_snippet_to_package.php:153 www/snippet/addversion.php:96
-#: www/snippet/addversion.php:216 www/snippet/package.php:156
+#: www/snippet/add_snippet_to_package.php:157 www/snippet/addversion.php:97
+#: www/snippet/addversion.php:218 www/snippet/package.php:156
 #: www/snippet/submit.php:125
 msgid "SUBMIT"
 msgstr "送出"
 
-#: www/snippet/add_snippet_to_package.php:169
+#: www/snippet/add_snippet_to_package.php:174
 #: www/snippet/snippet_utils.php:149
 msgid "No Snippets Are In This Package Yet"
 msgstr "目前這個集合還沒有程式碼"
 
-#: www/snippet/add_snippet_to_package.php:171
+#: www/snippet/add_snippet_to_package.php:176
 msgid "Snippets In This Package"
 msgstr "這個軟體包裝的程式碼"
 
-#: www/snippet/addversion.php:27
+#: www/snippet/addversion.php:28
 #, fuzzy
 msgid "Error - snippet doesn't exist"
 msgstr "錯誤 - 程式碼不存在"
 
-#: www/snippet/addversion.php:68 www/snippet/addversion.php:190
+#: www/snippet/addversion.php:69 www/snippet/addversion.php:192
 #, fuzzy
 msgid "New snippet version"
 msgstr "最新程式碼版本："
 
-#: www/snippet/addversion.php:71
+#: www/snippet/addversion.php:72
 msgid ""
 "If you have modified a version of a snippet and you feel it is significant "
 "enough to share with others, please do so."
@@ -10992,38 +10994,38 @@ msgstr ""
 "如果您已經修改一個片斷程式碼的一個版本，而且您感覺它夠重要來和其他人分享，請"
 "這麼做。"
 
-#: www/snippet/addversion.php:89
+#: www/snippet/addversion.php:90
 msgid "Paste the Code Here:"
 msgstr "在這裡貼上程式碼："
 
-#: www/snippet/addversion.php:113
+#: www/snippet/addversion.php:115
 #, fuzzy
 msgid "Error - snippet_package doesn't exist"
 msgstr "錯誤, 錯誤 - 程式碼集合不存在"
 
-#: www/snippet/addversion.php:139 www/snippet/package.php:61
+#: www/snippet/addversion.php:141 www/snippet/package.php:61
 msgid "ERROR DOING SNIPPET PACKAGE VERSION INSERT!"
 msgstr "插入程式碼集合版本時發生錯誤！"
 
-#: www/snippet/addversion.php:140
+#: www/snippet/addversion.php:142
 #, fuzzy
 msgid "New snippet package"
 msgstr "送出一個新的程式碼集合"
 
-#: www/snippet/addversion.php:146
+#: www/snippet/addversion.php:148
 msgid "Snippet Package Version Added Successfully."
 msgstr "程式碼集合版本新增成功"
 
-#: www/snippet/addversion.php:151
+#: www/snippet/addversion.php:153
 #, fuzzy
 msgid "Add snippet to package"
 msgstr "新增程式碼到這個集合"
 
-#: www/snippet/addversion.php:169 www/snippet/package.php:93
+#: www/snippet/addversion.php:171 www/snippet/package.php:93
 msgid "IMPORTANT!"
 msgstr "重要!"
 
-#: www/snippet/addversion.php:171 www/snippet/package.php:95
+#: www/snippet/addversion.php:173 www/snippet/package.php:95
 msgid ""
 "If a new window opened, use it to add snippets to your package. If a new "
 "window did not open, use the following link to add to your package BEFORE "
@@ -11032,13 +11034,13 @@ msgstr ""
 "如果一個新視窗開啟，使用它新增片斷程式碼至您的軟體封裝。如果一個新視窗沒有開"
 "啟，在您離開這個頁面之前使用下列連結來新增至您的軟體封裝。"
 
-#: www/snippet/addversion.php:174 www/snippet/package.php:73
+#: www/snippet/addversion.php:176 www/snippet/package.php:73
 #: www/snippet/package.php:97
 #, fuzzy
 msgid "Add snippets to package"
 msgstr "新增程式碼到這個集合"
 
-#: www/snippet/addversion.php:175 www/snippet/package.php:100
+#: www/snippet/addversion.php:177 www/snippet/package.php:100
 msgid ""
 "<strong>Browse the library</strong> to find the snippets you want to add, "
 "then add them using the new window link shown above."
@@ -11046,7 +11048,7 @@ msgstr ""
 "<strong>瀏覽函式庫</strong>是為了找尋您要新增的片斷程式碼，然後使用顯示在上面"
 "的新視窗連結新增它們。"
 
-#: www/snippet/addversion.php:195
+#: www/snippet/addversion.php:197
 msgid ""
 "If you have modified a version of a package and you feel it is significant "
 "enough to share with others, please do so."
@@ -11054,13 +11056,13 @@ msgstr ""
 "如果您已經修改一個軟體封裝的一個版本，而且您感覺它夠重要來和其他人分享，請這"
 "麼做。"
 
-#: www/snippet/addversion.php:225
+#: www/snippet/addversion.php:227
 #, fuzzy
 msgid "Error - was the URL or form mangled??"
 msgstr "錯誤, 錯誤 - 網址格式有誤"
 
 #: www/snippet/browse.php:34 www/snippet/detail.php:31
-#: www/snippet/detail.php:119 www/snippet/detail.php:201
+#: www/snippet/detail.php:120 www/snippet/detail.php:202
 #: www/snippet/index.php:78
 msgid "Snippet Library"
 msgstr "程式碼函式庫"
@@ -11102,7 +11104,7 @@ msgstr "程式碼集合"
 msgid "Snippets"
 msgstr "程式碼"
 
-#: www/snippet/detail.php:46 www/snippet/detail.php:135
+#: www/snippet/detail.php:46 www/snippet/detail.php:136
 msgid "Error - no versions found"
 msgstr "錯誤 - 未發現版本"
 
@@ -11114,7 +11116,7 @@ msgstr "這個程式碼的版本："
 msgid "Download Version"
 msgstr "下載版本"
 
-#: www/snippet/detail.php:54 www/snippet/detail.php:142
+#: www/snippet/detail.php:54 www/snippet/detail.php:143
 msgid "Date Posted"
 msgstr "發表日期"
 
@@ -11122,22 +11124,22 @@ msgstr "發表日期"
 msgid "Changes since last version:"
 msgstr "與上個版本的差異："
 
-#: www/snippet/detail.php:84 www/snippet/detail.php:170
+#: www/snippet/detail.php:84 www/snippet/detail.php:171
 msgid ""
 "Download a raw-text version of this code by clicking on &quot;"
 "<strong>Download Version</strong>&quot;"
 msgstr "下載一個程式碼的純文字版本，藉由點擊\"<strong>下載版本</strong>\""
 
-#: www/snippet/detail.php:95
+#: www/snippet/detail.php:96
 #, fuzzy
 msgid "Latest Snippet Version: "
 msgstr "最新程式碼版本："
 
-#: www/snippet/detail.php:104 www/snippet/detail.php:191
+#: www/snippet/detail.php:105 www/snippet/detail.php:192
 msgid "Submit a new version"
 msgstr "上傳新版本"
 
-#: www/snippet/detail.php:105
+#: www/snippet/detail.php:106
 msgid ""
 "You can submit a new version of this snippet if you have modified it and you "
 "feel it is appropriate to share with others."
@@ -11145,24 +11147,24 @@ msgstr ""
 "如果您已經修改它，而且你感覺和其它人分享是適當的，您可以發表一個這片斷程式碼"
 "的新版本。"
 
-#: www/snippet/detail.php:138
+#: www/snippet/detail.php:139
 msgid "Versions Of This Package:"
 msgstr "這個集合的版本："
 
-#: www/snippet/detail.php:141
+#: www/snippet/detail.php:142
 msgid "Package Version"
 msgstr "集合版本"
 
-#: www/snippet/detail.php:144
+#: www/snippet/detail.php:145
 msgid "Edit/Del"
 msgstr "編輯/刪除"
 
-#: www/snippet/detail.php:182
+#: www/snippet/detail.php:183
 #, fuzzy
 msgid "Latest Package Version: "
 msgstr "最新集合版本："
 
-#: www/snippet/detail.php:192
+#: www/snippet/detail.php:193
 msgid ""
 "You can submit a new version of this package if you have modified it and you "
 "feel it is appropriate to share with others."
@@ -11170,7 +11172,7 @@ msgstr ""
 "如果您已經修改它，而且你感覺和其它人分享是適當的，您可以發表一個這軟體封裝的"
 "新版本。"
 
-#: www/snippet/detail.php:211
+#: www/snippet/detail.php:212
 #, fuzzy
 msgid "Error - was the URL mangled?"
 msgstr "錯誤, 錯誤 - 網址格式有誤"
@@ -11352,12 +11354,12 @@ msgid "Paste the Code Here"
 msgstr "在這裡貼上程式碼"
 
 #: www/softwaremap/full_list.php:54 www/softwaremap/tag_cloud.php:59
-#: www/softwaremap/trove_list.php:67
+#: www/softwaremap/trove_list.php:68
 msgid "Tag cloud"
 msgstr ""
 
 #: www/softwaremap/full_list.php:63 www/softwaremap/tag_cloud.php:68
-#: www/softwaremap/trove_list.php:76
+#: www/softwaremap/trove_list.php:77
 #, fuzzy
 msgid "Project List"
 msgstr "專案"
@@ -11414,16 +11416,16 @@ msgstr "啟用中的使用者：<strong>%1$s</strong>"
 msgid "Registered: <strong>%s</strong>"
 msgstr "已註冊專案：<strong>%1$s</strong>"
 
-#: www/softwaremap/trove_list.php:134
+#: www/softwaremap/trove_list.php:135
 #, fuzzy
 msgid "Now limiting view to projects in the following categories:"
 msgstr "現在限制下面類別的專案瀏覽"
 
-#: www/softwaremap/trove_list.php:314
+#: www/softwaremap/trove_list.php:315
 msgid "Activity Percentile:&nbsp;"
 msgstr "活躍度："
 
-#: www/softwaremap/trove_list.php:315
+#: www/softwaremap/trove_list.php:316
 #, fuzzy
 msgid "Activity Ranking:&nbsp;"
 msgstr "活躍度："
@@ -11531,90 +11533,90 @@ msgstr "來源 IP"
 msgid "Project Statistical Comparisons"
 msgstr "專案統計比較表"
 
-#: www/stats/site_stats_utils.php:55
+#: www/stats/site_stats_utils.php:56
 #, fuzzy
 msgid "All Projects"
 msgstr "所有專案管理員"
 
-#: www/stats/site_stats_utils.php:56
+#: www/stats/site_stats_utils.php:57
 #, fuzzy
 msgid "Special Projects"
 msgstr "專案排行榜"
 
-#: www/stats/site_stats_utils.php:80
+#: www/stats/site_stats_utils.php:82
 #, php-format
 msgid " (no category found with ID %d)"
 msgstr ""
 
-#: www/stats/site_stats_utils.php:109
+#: www/stats/site_stats_utils.php:112
 msgid "Projects in trove category:"
 msgstr "在軟體分類的專案："
 
-#: www/stats/site_stats_utils.php:113
+#: www/stats/site_stats_utils.php:116
 msgid "OR enter Special Project List:"
 msgstr "或是輸入指定的專案列表："
 
-#: www/stats/site_stats_utils.php:115
+#: www/stats/site_stats_utils.php:118
 msgid "<strong>comma separated</strong> group_id's)"
 msgstr "<strong>逗點分隔</strong> group_id's)"
 
-#: www/stats/site_stats_utils.php:117
+#: www/stats/site_stats_utils.php:120
 msgid "Report:"
 msgstr "報告："
 
-#: www/stats/site_stats_utils.php:124
+#: www/stats/site_stats_utils.php:127
 msgid "last_30"
 msgstr "最後30筆"
 
-#: www/stats/site_stats_utils.php:131
+#: www/stats/site_stats_utils.php:134
 msgid "View by:"
 msgstr "瀏覽者："
 
-#: www/stats/site_stats_utils.php:151
+#: www/stats/site_stats_utils.php:154
 msgid "Generate Report"
 msgstr "產生報表"
 
-#: www/stats/site_stats_utils.php:297
+#: www/stats/site_stats_utils.php:300
 msgid "Site"
 msgstr "網站"
 
-#: www/stats/site_stats_utils.php:298
+#: www/stats/site_stats_utils.php:301
 msgid "Subdomain"
 msgstr "子網域"
 
-#: www/stats/site_stats_utils.php:317
+#: www/stats/site_stats_utils.php:320
 #, fuzzy
 msgid "Checkouts"
 msgstr "核選區塊"
 
-#: www/stats/site_stats_utils.php:366
+#: www/stats/site_stats_utils.php:369
 msgid "Query returned no valid data."
 msgstr "搜尋的項目沒有資料"
 
-#: www/stats/site_stats_utils.php:402 www/stats/site_stats_utils.php:456
-#: www/stats/site_stats_utils.php:512
+#: www/stats/site_stats_utils.php:405 www/stats/site_stats_utils.php:459
+#: www/stats/site_stats_utils.php:515
 msgid "Site Views"
 msgstr "網站瀏覽次數"
 
-#: www/stats/site_stats_utils.php:403 www/stats/site_stats_utils.php:457
-#: www/stats/site_stats_utils.php:513
+#: www/stats/site_stats_utils.php:406 www/stats/site_stats_utils.php:460
+#: www/stats/site_stats_utils.php:516
 msgid "Subdomain Views"
 msgstr "子網域瀏覽次數"
 
-#: www/stats/site_stats_utils.php:434 www/stats/site_stats_utils.php:490
+#: www/stats/site_stats_utils.php:437 www/stats/site_stats_utils.php:493
 msgid "No Data"
 msgstr "沒有資料"
 
-#: www/stats/site_stats_utils.php:451
+#: www/stats/site_stats_utils.php:454
 #, php-format
 msgid "Statistics for the past %1$s months"
 msgstr "過去 %1$s 個月的統計"
 
-#: www/stats/site_stats_utils.php:455
+#: www/stats/site_stats_utils.php:458
 msgid "Month"
 msgstr "月"
 
-#: www/stats/site_stats_utils.php:508
+#: www/stats/site_stats_utils.php:511
 msgid "Current Aggregate Statistics for All Time"
 msgstr "全部時間的現在整體統計"
 
@@ -12740,9 +12742,9 @@ msgid "Set up prefs like expiration times, email addresses"
 msgstr "設定偏好，像過期時間、Email"
 
 #: www/tracker/admin/updates.php:16 www/tracker/admin/updates.php:35
-#: www/tracker/admin/updates.php:65 www/tracker/admin/updates.php:158
-#: www/tracker/admin/updates.php:201 www/tracker/admin/updates.php:224
-#: www/tracker/admin/updates.php:347
+#: www/tracker/admin/updates.php:65 www/tracker/admin/updates.php:159
+#: www/tracker/admin/updates.php:202 www/tracker/admin/updates.php:225
+#: www/tracker/admin/updates.php:348
 msgid "Unable to create ArtifactExtraField Object"
 msgstr ""
 
@@ -12775,8 +12777,8 @@ msgstr "新增時發生錯誤"
 msgid "Canned Response Inserted"
 msgstr "預設回應已插入"
 
-#: www/tracker/admin/updates.php:122 www/tracker/admin/updates.php:278
-#: www/tracker/admin/updates.php:302 www/tracker/admin/updates.php:316
+#: www/tracker/admin/updates.php:122 www/tracker/admin/updates.php:279
+#: www/tracker/admin/updates.php:303 www/tracker/admin/updates.php:317
 msgid "Error updating"
 msgstr "更新時發生錯誤"
 
@@ -12784,59 +12786,59 @@ msgstr "更新時發生錯誤"
 msgid "Canned Response Updated"
 msgstr "預設回應已更新"
 
-#: www/tracker/admin/updates.php:147
+#: www/tracker/admin/updates.php:148
 #, fuzzy
 msgid "ArtifactType could not be created"
 msgstr "自訂類型刪除失敗"
 
-#: www/tracker/admin/updates.php:154
+#: www/tracker/admin/updates.php:155
 #, fuzzy
 msgid "Copy into Tracker: "
 msgstr "追蹤項目"
 
-#: www/tracker/admin/updates.php:206 www/tracker/admin/updates.php:237
-#: www/tracker/admin/updates.php:352 www/tracker/admin/updates.php:375
-#: www/tracker/admin/updates.php:395
+#: www/tracker/admin/updates.php:207 www/tracker/admin/updates.php:238
+#: www/tracker/admin/updates.php:353 www/tracker/admin/updates.php:376
+#: www/tracker/admin/updates.php:396
 msgid "Error updating a custom field"
 msgstr "更新自訂欄位時發生錯誤"
 
-#: www/tracker/admin/updates.php:209
+#: www/tracker/admin/updates.php:210
 msgid "Custom Field updated"
 msgstr "自訂欄位更新了"
 
-#: www/tracker/admin/updates.php:230
+#: www/tracker/admin/updates.php:231
 msgid "Unable to create ArtifactExtraFieldElement Object"
 msgstr ""
 
-#: www/tracker/admin/updates.php:240
+#: www/tracker/admin/updates.php:241
 msgid "Element updated"
 msgstr "元件更新了"
 
-#: www/tracker/admin/updates.php:258
+#: www/tracker/admin/updates.php:259
 #, fuzzy
 msgid "Successfully Cloned Tracker Fields "
 msgstr "增加追蹤關係成功"
 
-#: www/tracker/admin/updates.php:281 www/tracker/admin/updates.php:305
-#: www/tracker/admin/updates.php:355 www/tracker/admin/updates.php:384
-#: www/tracker/admin/updates.php:398
+#: www/tracker/admin/updates.php:282 www/tracker/admin/updates.php:306
+#: www/tracker/admin/updates.php:356 www/tracker/admin/updates.php:385
+#: www/tracker/admin/updates.php:399
 msgid "Tracker Updated"
 msgstr "追蹤更新"
 
-#: www/tracker/admin/updates.php:337
+#: www/tracker/admin/updates.php:338
 #, fuzzy
 msgid "Renderer Uploaded"
 msgstr "上傳"
 
-#: www/tracker/admin/updates.php:411
+#: www/tracker/admin/updates.php:412
 msgid "ERROR: Initial values not saved, no initial state given."
 msgstr ""
 
-#: www/tracker/admin/updates.php:415
+#: www/tracker/admin/updates.php:416
 msgid "Initial values saved."
 msgstr ""
 
-#: www/tracker/admin/updates.php:424 www/tracker/admin/updates.php:433
+#: www/tracker/admin/updates.php:425 www/tracker/admin/updates.php:434
 msgid "Workflow saved"
 msgstr ""
 
@@ -13245,17 +13247,17 @@ msgstr "在軟體執行時發生錯誤"
 msgid "Parent Category: "
 msgstr "上層類別："
 
-#: www/trove/admin/trove_cat_add.php:85 www/trove/admin/trove_cat_edit.php:86
+#: www/trove/admin/trove_cat_add.php:87 www/trove/admin/trove_cat_edit.php:86
 #, fuzzy
 msgid "New category short name (no spaces, Unix-like): "
 msgstr "新類別縮寫 (沒有空白，像是Unix)"
 
-#: www/trove/admin/trove_cat_add.php:87 www/trove/admin/trove_cat_edit.php:89
+#: www/trove/admin/trove_cat_add.php:89 www/trove/admin/trove_cat_edit.php:89
 #, fuzzy
 msgid "New category full name (80 characters max): "
 msgstr "新類別完整名稱 (80字元)"
 
-#: www/trove/admin/trove_cat_add.php:89 www/trove/admin/trove_cat_edit.php:92
+#: www/trove/admin/trove_cat_add.php:91 www/trove/admin/trove_cat_edit.php:92
 #, fuzzy
 msgid "New category description (255 characters max): "
 msgstr "新類別說明 (255字元)"
@@ -13270,7 +13272,7 @@ msgstr "更新"
 msgid "delete"
 msgstr "刪除"
 
-#: www/trove/include/trove.php:240
+#: www/trove/include/trove.php:246
 #, fuzzy, php-format
 msgid ""
 "This project has not yet categorized itself in the <a href=\"%s\">Trove "
