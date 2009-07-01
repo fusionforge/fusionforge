@@ -45,14 +45,15 @@ function INFO($message)
 }
 
 function installRedhat() {
+	addFusionForgeYumRepo();
 	INFO("Installing packages: Executing YUM. Please wait...\n\n\n");
-	passthru("yum -y install httpd php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php-pgsql subversion mod_dav_svn postfix rcs php-gd mod_ssl wget openssh inetd which liberation-fonts");
+	passthru("yum -y install httpd php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php-pgsql subversion mod_dav_svn postfix rcs php-gd mod_ssl wget openssh inetd which liberation-fonts htmlpurifier");
 }
 
 function installRHEL4() {
-
 	INFO("Installing packages: Executing UP2DATE. Please wait...\n\n\n");
 	passthru("up2date --install php php-gd php-pgsql mailman postgresql-server postgresql-contrib rcs cvs httpd subversion perl-URI mod_dav_svn ssh postfix mod_ssl wget");
+	INFO(RED."You Must Install htmlpurifier manually.");
 }
 
 function installDebian() {
@@ -81,6 +82,8 @@ function installSUSE() {
 
 	INFO("Starting Apache");
 	passthru("/etc/init.d/apache2 start");
+
+	INFO(RED."You Must Install htmlpurifier manually.");
 }
 
 function installOPENSUSE() {
@@ -92,6 +95,8 @@ function installOPENSUSE() {
 	passthru("rcpostgresql restart");
 	INFO("Restarting Apache...");
 	passthru("rcapache2 restart");
+
+	INFO(RED."You Must Install htmlpurifier manually.");
 }
 
 function installArk() {
@@ -101,6 +106,29 @@ function installArk() {
 
 	INFO("Restarting PostgreSQL\n");
 	passthru("/sbin/service postgresql restart");
+
+	INFO(RED."You Must Install htmlpurifier manually.");
+}
+
+function addFusionForgeYumRepo() {
+	INFO("Adding FusionForge YUM repository\n");
+
+	if (getenv('FFORGE_RPM_REPO')) {
+		$rpm_repo = getenv('FFORGE_RPM_REPO');
+	} else {
+		$rpm_repo = 'http://fusionforge.org/rpm/';
+	}
+
+	$repo = '
+# Name: FusionForge RPM Repository
+# URL: http://fusionforge.org/
+[fusionforge]
+name = Red Hat Enterprise $releasever - fusionforge.org
+baseurl = '.$rpm_repo.'
+enabled = 1
+protect = 0
+gpgcheck = 0';
+	file_put_contents('/etc/yum.repos.d/fusionforge.repo', $repo);
 }
 
 if (count($argv) < 2) {
