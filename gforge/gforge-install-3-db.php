@@ -33,7 +33,7 @@ define ('RED', "\033[01;31m" );
 $STDOUT = fopen('php://stdout','w');
 $STDIN = fopen('php://stdin','r');
 
-show("\n-=# Welcome to FusionForge DB-Installer v4.9 #=-");
+show("\n-=# Welcome to FusionForge DB-Installer #=-");
 
 //TO DO: add dependency check
 //if (!run("php check-deps.php", true)) {
