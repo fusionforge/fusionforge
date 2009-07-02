@@ -1,10 +1,12 @@
 <?php
 /**
- * GForge News Facility
+ * FusionForge News Facility
  *
- * Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2002-2004 (c) GForge Team
- * http://gforge.org/
+ * Copyright (C) 1999-2001 VA Linux Systems
+ * Copyright (C) 2002-2004 GForge Team
+ * Copyright (C) 2008-2009 Alcatel-Lucent
+ *
+ * http://fusionforge.org/
  *
  * This file is part of GForge.
  *
@@ -21,6 +23,28 @@
  * You should have received a copy of the GNU General Public License
  * along with GForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
+/*
+ * Standard Alcatel-Lucent disclaimer for contributing to open source
+ *
+ * "The Style Sheet ("Contribution") has not been tested and/or
+ * validated for release as or in products, combinations with products or
+ * other commercial use. Any use of the Contribution is entirely made at
+ * the user's own responsibility and the user can not rely on any features,
+ * functionalities or performances Alcatel-Lucent has attributed to the
+ * Contribution.
+ *
+ * THE CONTRIBUTION BY ALCATEL-LUCENT IS PROVIDED AS IS, WITHOUT WARRANTY
+ * OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, COMPLIANCE,
+ * NON-INTERFERENCE AND/OR INTERWORKING WITH THE SOFTWARE TO WHICH THE
+ * CONTRIBUTION HAS BEEN MADE, TITLE AND NON-INFRINGEMENT. IN NO EVENT SHALL
+ * ALCATEL-LUCENT BE LIABLE FOR ANY DAMAGES OR OTHER LIABLITY, WHETHER IN
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * CONTRIBUTION OR THE USE OR OTHER DEALINGS IN THE CONTRIBUTION, WHETHER
+ * TOGETHER WITH THE SOFTWARE TO WHICH THE CONTRIBUTION RELATES OR ON A STAND
+ * ALONE BASIS."
  */
 
 require_once('../env.inc.php');
@@ -53,6 +77,9 @@ if (session_loggedin()) {
 
 		//check to make sure both fields are there
 		if ($summary && $details) {
+			$sanitizer = new TextSanitizer();
+			$details = addslashes($sanitizer->purify(stripslashes($details)));
+
 			/*
 				Insert the row into the db if it's a generic message
 				OR this person is an admin for the group involved
@@ -72,8 +99,8 @@ if (session_loggedin()) {
 	   			$new_id=$f->getID();
 				$sanitizer = new TextSanitizer();
 				$details = $sanitizer->SanitizeHtml($details);
-				$sql="INSERT INTO news_bytes (group_id,submitted_by,is_approved,post_date,forum_id,summary,details) 
- VALUES ($1, $2, $3, $4, $5, $6, $7)";
+				$sql='INSERT INTO news_bytes (group_id,submitted_by,is_approved,post_date,forum_id,summary,details) 
+ VALUES ($1, $2, $3, $4, $5, $6, $7)';
 				$result=db_query_params($sql,
 					array($group_id, user_getid(), 0, time(), $new_id, htmlspecialchars($summary), $details));
 	   			if (!$result) {
@@ -113,15 +140,15 @@ if (session_loggedin()) {
 		<p><strong>'._('For project').' '.$group->getPublicName().'</strong></p>
 		<p>
 		<strong>'._('Subject').':</strong>'.utils_requiredField().'<br />
-		<input type="text" name="summary" value="" size="30" maxlength="60" /></p>
+		<input type="text" name="summary" value="" size="60" maxlength="60" /></p>
 		<p>
 		<strong>'._('Details').':</strong>'.notepad_button('document.forms[1].details').utils_requiredField().'<br />';
 	
 	$GLOBALS['editor_was_set_up']=false;
 	$params = array() ;
 	$params['name'] = 'details';
-	$params['width'] = "600";
-	$params['height'] = "300";
+	$params['width'] = "800";
+	$params['height'] = "500";
 	$params['body'] = "";
 	$params['group'] = $group_id;
 	plugin_hook("text_editor",$params);
