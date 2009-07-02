@@ -3750,6 +3750,7 @@ tests/scripts/stop_vm.sh -text
 tests/scripts/stop_vz.sh -text
 tests/unit/AllTests.php -text
 tests/unit/utils/AllTests.php -text
+tests/unit/utils/TextSanitizerTests.php -text
 tests/unit/utils/UtilsTests.php -text
 tools/export-tracker.tcl -text
 tools/jpgraph_pietest.php -text
