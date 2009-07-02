@@ -17,7 +17,7 @@ if ($limit > 100) $limit = 100;
 
 if ($group_id) {
 	$where = "AND g.group_id=$group_id";
-	$query = "SELECT group_name FROM groups WHERE group_id=$group_id";
+	$query = "SELECT group_name FROM groups WHERE group_id=$group_id AND is_public=1";
 	$res = db_query($query,1);
 	$row = db_fetch_array($res);
 	$title = ": ".$row['group_name']." - ";
