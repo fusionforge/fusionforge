@@ -158,6 +158,7 @@ install -m 755 -d $RPM_BUILD_ROOT/%{GFORGE_LIB_DIR}
 install -m 755 -d $RPM_BUILD_ROOT/%{UPLOAD_DIR}
 #install -m 755 -d $RPM_BUILD_ROOT/%{CACHE_DIR}
 install -m 755 -d $RPM_BUILD_ROOT/%{SCM_TARBALLS_DIR}
+install -m 755 -d $RPM_BUILD_ROOT/%{SCM_SNAPSHOTS_DIR}
 install -m 755 -d $RPM_BUILD_ROOT/%{PLUGINS_LIB_DIR}
 install -m 755 -d $RPM_BUILD_ROOT/%{SBIN_DIR}
 install -m 755 -d $RPM_BUILD_ROOT/%{HTTPD_CONF_DIR}/conf.d
@@ -372,6 +373,7 @@ fi
 %{GFORGE_LANG_DIR}
 %{GFORGE_CONF_DIR}
 %{SCM_TARBALLS_DIR}
+%{SCM_SNAPSHOTS_DIR}
 
 %changelog
 * Wed Jun 29 2005 Open Wide <guillaume.smet@openwide.fr>
