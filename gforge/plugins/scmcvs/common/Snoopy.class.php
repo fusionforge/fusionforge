@@ -287,7 +287,12 @@ class Snoopy
 					}
 					else
 					{
-						$path = $URI_PARTS["path"].($URI_PARTS["query"] ? "?".$URI_PARTS["query"] : "");
+						if (isset($URI_PARTS["query"]))
+						{
+							$path = $URI_PARTS["path"].$URI_PARTS["query"];
+						}else {
+							$path = $URI_PARTS["path"];
+						}
 						// no proxy, send only the path
 						$this->_httprequest($path, $fp, $URI, $this->_submit_method, $this->_submit_type, $postdata);
 					}
@@ -1137,6 +1142,7 @@ class Snoopy
 	{
 		settype($formvars, "array");
 		settype($formfiles, "array");
+		$postdata = "";
 
 		if (count($formvars) == 0 && count($formfiles) == 0)
 			return;
