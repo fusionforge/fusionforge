@@ -600,7 +600,7 @@ class Forum extends Error {
 			allow_anonymous=$4,
 			moderation_level=$5,
 			is_public=$6
-			WHERE group_id=$7,
+			WHERE group_id=$7
 			AND group_forum_id=$8',
 					array (strtolower($forum_name),
 					       htmlspecialchars($description),
