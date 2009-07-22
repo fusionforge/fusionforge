@@ -7,11 +7,15 @@ msgstr ""
 "Project-Id-Version: FusionForge 4.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-06-30 14:28+0200\n"
-"PO-Revision-Date: 2009-06-12 15:49+0200\n"
-"Last-Translator: Julien HEYMAN <julien.heyman@atosorigin.com>\n"
+"PO-Revision-Date: 2009-06-30 14:58+0200\n"
+"Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <aljeux@free.fr>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language: fr\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Pootle 1.2.1\n"
 
 #: common/docman/Document.class.php:112 common/docman/Document.class.php:447
 #: common/pm/ProjectGroup.class.php:132 common/pm/ProjectGroup.class.php:347
@@ -1832,9 +1836,8 @@ msgid "Status"
 msgstr "État"
 
 #: common/tracker/ArtifactExtraField.class.php:326
-#, fuzzy
 msgid "Relation"
-msgstr "Précision"
+msgstr "Relation"
 
 #: common/tracker/ArtifactExtraField.class.php:489
 msgid ""
@@ -1851,7 +1854,7 @@ msgstr "« %1$s » est un alias réservé. Veuillez choisir un autre nom."
 
 #: common/tracker/ArtifactExtraField.class.php:576
 msgid "Out of range value"
-msgstr ""
+msgstr "Valeur en dehors des valeurs autorisées"
 
 #: common/tracker/ArtifactExtraFieldElement.class.php:115
 #: common/tracker/ArtifactExtraFieldElement.class.php:235
@@ -6954,9 +6957,8 @@ msgid "Arch"
 msgstr "Archive"
 
 #: www/frs/index.php:126
-#, fuzzy
 msgid "Stop monitoring this package"
-msgstr "Suivre ce paquet"
+msgstr "Ne plus suivre ce paquet"
 
 #: www/frs/index.php:129 www/include/project_home.php:246
 msgid "Monitor this package"
@@ -12835,7 +12837,7 @@ msgstr "Postes actuellement ouverts"
 
 #: www/tracker/admin/form-addextrafieldoption.php:27
 msgid "Up/Down positions"
-msgstr ""
+msgstr "Monter/descendre les positions"
 
 #: www/tracker/admin/form-addextrafieldoption.php:55
 msgid "Reorder"
@@ -13048,38 +13050,39 @@ msgid ""
 "To create a workflow, you need first to create a custom field of type "
 "'Status'."
 msgstr ""
+"Pour créer un processus, vous devez d'abord créer un champ personnalisé de "
+"type « statut »."
 
 #: www/tracker/admin/form-workflow.php:20
 msgid "Configure workflow"
-msgstr ""
+msgstr "Configurer le processus"
 
 #: www/tracker/admin/form-workflow.php:38
 #, php-format
 msgid "Allowed initial values for the %1$s field"
-msgstr ""
+msgstr "Valeurs initiales autorisées pour le champ %1$s"
 
 #: www/tracker/admin/form-workflow.php:46
 msgid "Initial values"
 msgstr "Valeurs initiales"
 
 #: www/tracker/admin/form-workflow.php:49
-#, fuzzy
 msgid "From Value"
 msgstr "Ancienne valeur"
 
 #: www/tracker/admin/form-workflow.php:69
 #, php-format
 msgid "Configuring workflow for the %1$s field"
-msgstr ""
+msgstr "Configuration du processus pour le champ %1$s"
 
 #: www/tracker/admin/form-workflow_roles.php:11
 msgid "Configure allowed roles"
-msgstr ""
+msgstr "Configuration des rôles autorisés"
 
 #: www/tracker/admin/form-workflow_roles.php:37
 #, php-format
 msgid "Configuring allowed roles for the transitions from %1$s to %2$s"
-msgstr ""
+msgstr "Configuration des rôles autorisés pour les transitions de %1$s à %2$s"
 
 #: www/tracker/admin/ind.php:45
 msgid "Tracker created successfully"
@@ -13087,7 +13090,7 @@ msgstr "Outil de suivi créé avec succès"
 
 #: www/tracker/admin/ind.php:47
 msgid "Please configure also the roles (by default, it's 'No Access')"
-msgstr ""
+msgstr "Veuillez aussi configurer les rôles (aucun accès par défaut)"
 
 #: www/tracker/admin/ind.php:76
 msgid "Report"
@@ -13192,7 +13195,7 @@ msgstr "Modifier les préférences (date d'expiration, e-mail)"
 #: www/tracker/admin/updates.php:202 www/tracker/admin/updates.php:225
 #: www/tracker/admin/updates.php:348
 msgid "Unable to create ArtifactExtraField Object"
-msgstr ""
+msgstr "Impossible de créer un objet ArtifactExtraField"
 
 #: www/tracker/admin/updates.php:21
 msgid "Error inserting a custom field"
@@ -13235,10 +13238,9 @@ msgstr "Réponse type mise à jour"
 msgid "ArtifactType could not be created"
 msgstr "Erreur lors de la création de l'objet ArtifactType"
 
-#: www/tracker/admin/updates.php:155
-#, fuzzy
+#: www/tracker/admin/updates.php:154
 msgid "Copy into Tracker: "
-msgstr "Cloner l'outil de suivi"
+msgstr "Copier vers l'outil de suivi :"
 
 #: www/tracker/admin/updates.php:207 www/tracker/admin/updates.php:238
 #: www/tracker/admin/updates.php:353 www/tracker/admin/updates.php:376
@@ -13252,16 +13254,15 @@ msgstr "Nom du champ modifié"
 
 #: www/tracker/admin/updates.php:231
 msgid "Unable to create ArtifactExtraFieldElement Object"
-msgstr ""
+msgstr "Impossible de créer un objet ArtifactExtraFieldElement"
 
 #: www/tracker/admin/updates.php:241
 msgid "Element updated"
 msgstr "Elément mis à jour"
 
-#: www/tracker/admin/updates.php:259
-#, fuzzy
+#: www/tracker/admin/updates.php:258
 msgid "Successfully Cloned Tracker Fields "
-msgstr "La relation a été ajoutée avec succés"
+msgstr "Les champs de l'outil de suivi ont été correctement clonés."
 
 #: www/tracker/admin/updates.php:282 www/tracker/admin/updates.php:306
 #: www/tracker/admin/updates.php:356 www/tracker/admin/updates.php:385
@@ -13269,22 +13270,22 @@ msgstr "La relation a été ajoutée avec succés"
 msgid "Tracker Updated"
 msgstr "Traceur mis à jour"
 
-#: www/tracker/admin/updates.php:338
-#, fuzzy
+#: www/tracker/admin/updates.php:337
 msgid "Renderer Uploaded"
-msgstr "Téléchargé"
+msgstr "Moteur de rendu téléchargé"
 
 #: www/tracker/admin/updates.php:412
 msgid "ERROR: Initial values not saved, no initial state given."
 msgstr ""
+"Erreur : valeurs initiales non sauvegardées et pas d'état initial spécifié."
 
 #: www/tracker/admin/updates.php:416
 msgid "Initial values saved."
-msgstr ""
+msgstr "Valeurs initiales sauvegardées."
 
 #: www/tracker/admin/updates.php:425 www/tracker/admin/updates.php:434
 msgid "Workflow saved"
-msgstr ""
+msgstr "Processus sauvegardé."
 
 #: www/tracker/browse.php:158 www/tracker/query.php:181
 msgid "Submitter"
@@ -13333,7 +13334,7 @@ msgstr "Construire une requête"
 
 #: www/tracker/browse.php:289
 msgid "Simple Filtering and Sorting"
-msgstr ""
+msgstr "Filtrage et tri simples"
 
 #: www/tracker/browse.php:303 www/tracker/query.php:340
 msgid "Order by"
@@ -13348,6 +13349,9 @@ msgid ""
 "Viewing only opened records by default, use 'Advanced queries' or 'Simple "
 "Filtering and Sorting' to change."
 msgstr ""
+"Seuls les enregistrements ouverts sont affichés par défaut.  Pour voir les "
+"autres, utilisez les fonctions de « filtrage et tri simples » ou les « "
+"requêtes avancées »."
 
 #: www/tracker/browse.php:542
 #: www/tracker/include/ArtifactTypeHtml.class.php:552
@@ -13429,9 +13433,8 @@ msgid "No Changes Have Been Made to This Item"
 msgstr "Aucun changement"
 
 #: www/tracker/include/ArtifactHtml.class.php:170
-#, fuzzy
 msgid "Backward Relations"
-msgstr "Établir une relation avec des tâches"
+msgstr "Relations entrantes"
 
 #: www/tracker/include/ArtifactTypeHtml.class.php:50
 msgid "Download .csv"
@@ -13455,7 +13458,7 @@ msgstr "Mettre à jour les réglages"
 
 #: www/tracker/include/ArtifactTypeHtml.class.php:103
 msgid "Manage Workflow"
-msgstr ""
+msgstr "Gérer le processus"
 
 #: www/tracker/include/ArtifactTypeHtml.class.php:106
 msgid "Customize List"
@@ -13470,12 +13473,14 @@ msgstr "Ajouter des réponses types"
 #: www/tracker/query.php:316
 #, php-format
 msgid "(% for wildcards)"
-msgstr ""
+msgstr "(% pour les jokers)"
 
 #: www/tracker/include/ArtifactTypeHtml.class.php:532
 msgid ""
 "Tip: Enter a space-separated list of artifact ids ([#NNN] also accepted)"
 msgstr ""
+"Astuce : saisissez une liste d'identifiants d'artifacts séparés par des "
+"espaces (la syntaxe [#NNN] est aussi acceptée)."
 
 #: www/tracker/ind.php:34
 msgid "No Accessible Trackers Found"
@@ -13550,11 +13555,11 @@ msgstr "Supprimer la requête"
 #: www/tracker/query.php:286
 #, php-format
 msgid "Note: The default project query is currently '%1$s'."
-msgstr ""
+msgstr "Note : la requête par défaut de ce projet est actuellement « %1$s »."
 
 #: www/tracker/query.php:289
 msgid "Note: There is no default project query defined."
-msgstr ""
+msgstr "Note : aucune requête par défaut n'a été définie sur ce projet."
 
 #: www/tracker/query.php:294
 msgid "Type of query"
@@ -13566,11 +13571,13 @@ msgstr "Requête privée"
 
 #: www/tracker/query.php:298
 msgid "Project level query (query is public)"
-msgstr ""
+msgstr "Requête de niveau projet (publique)"
 
 #: www/tracker/query.php:300
 msgid "Default project query (for project level query only)"
 msgstr ""
+"Requête par défaut pour ce projet (uniquement pour les requêtes de niveau "
+"projet)"
 
 #: www/tracker/query.php:321
 msgid "Last Modified Date range"
