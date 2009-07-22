@@ -8,12 +8,15 @@ msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-06-30 14:28+0200\n"
-"PO-Revision-Date: 2009-01-15 15:24+0100\n"
-"Last-Translator: Roland Mas <lolando@debian.org>\n"
+"PO-Revision-Date: 2009-07-01 23:15+0200\n"
+"Last-Translator: Mariano Guerra <luismarianoguerra@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 1.2.1\n"
 
 #: common/docman/Document.class.php:112 common/docman/Document.class.php:447
 #: common/pm/ProjectGroup.class.php:132 common/pm/ProjectGroup.class.php:347
@@ -40,7 +43,7 @@ msgstr "Grupo de documento: se require un nombre"
 #: common/docman/DocumentGroup.class.php:107
 #: common/docman/DocumentGroup.class.php:219
 msgid "DocumentGroup: Invalid DocumentGroup parent ID"
-msgstr ""
+msgstr "Grupo de documento: identificador del padre de DocumentGroup invalido"
 
 #: common/docman/DocumentGroup.class.php:152
 msgid "DocumentGroup: Invalid DocumentGroup ID"
@@ -91,7 +94,7 @@ msgstr "Bienvenido a %1$s"
 
 #: common/forum/Forum.class.php:228
 msgid "Invalid forum group identifier"
-msgstr ""
+msgstr "identificador de grupo de foro invalido"
 
 #: common/forum/Forum.class.php:458 common/forum/Forum.class.php:495
 #: common/frs/FRSPackage.class.php:270 common/frs/FRSPackage.class.php:302
@@ -189,7 +192,7 @@ msgstr "ForumMessage::fetchData() MessageID Inválido"
 
 #: common/forum/ForumMessage.class.php:579
 msgid "Invalid Message ID"
-msgstr ""
+msgstr "Identificador de mensaje inválido"
 
 #: common/forum/ForumMessage.class.php:664
 #, php-format
@@ -198,6 +201,9 @@ msgid ""
 "Read and respond to this message at: \n"
 "%s"
 msgstr ""
+"\n"
+"Leer y responder a este mensaje a: \n"
+"%s"
 
 #: common/forum/ForumMessage.class.php:666
 #, php-format
@@ -209,6 +215,12 @@ msgid ""
 "(enter your response here)\n"
 "%1$s"
 msgstr ""
+"\n"
+"O responda a este e-mail ingresando su respuesta entre las siguientes "
+"marcas: \n"
+"%1$s\n"
+"(ingrese su respuesta aquí)\n"
+"%1$s"
 
 #: common/forum/ForumMessage.class.php:672
 #, php-format
@@ -218,10 +230,14 @@ msgid ""
 "\n"
 "By: %s\n"
 msgstr ""
+"\n"
+"\n"
+"\n"
+"Por: %s\n"
 
 #: common/forum/ForumMessage.class.php:677
 msgid "A file has been uploaded with this message."
-msgstr ""
+msgstr "Un archivo ha sido adjuntado con este mensaje."
 
 #: common/forum/ForumMessage.class.php:688
 #, php-format
@@ -230,6 +246,9 @@ msgid ""
 "To stop monitoring this forum, login to %s and visit: \n"
 "%s\n"
 msgstr ""
+"Usted esta recibiendo este email porque usted eligió monitorear este foro.\n"
+"Para dejar de monitorear este foro, ingrese a %s y visite: \n"
+"%s\n"
 
 #: common/frs/FRSFile.class.php:93
 msgid "FRSFile Name Must Be At Least 3 Characters"
@@ -238,6 +257,8 @@ msgstr "FRSFile El nombre debe contener al menos 3 caracteres"
 #: common/frs/FRSFile.class.php:97
 msgid "Filename can only be alphanumeric and \"-\" \"_\" \".\" characters."
 msgstr ""
+"El nombre del archivo solo puede contener caracteres alfanuméricos y los "
+"siguientes caracteres \"-\", \"_\", \".\"."
 
 #: common/frs/FRSFile.class.php:107
 msgid "FRSFile Appears to be invalid"
@@ -263,7 +284,7 @@ msgstr "FRSPackage::Update: El nombre del paquete sólo puede ser alfanumérico"
 #: common/frs/FRSRelease.class.php:287
 #, php-format
 msgid "[%1$s Release] %2$s"
-msgstr ""
+msgstr "[%1$s Release] %2$s"
 
 #: common/frs/FRSRelease.class.php:290
 #, php-format
@@ -279,6 +300,16 @@ msgid ""
 "\n"
 "%6$s"
 msgstr ""
+"El proyecto %1$s (%2$s) ha publicado una nueva versión del paquete \"%3$s\".\n"
+"Usted puede descargarlo del siguiente enlace:\n"
+"\n"
+"%4$s\n"
+"\n"
+"Usted recibió este mail porque solicito ser notificado cuando nuevas\n"
+"versiones de este paquete sean realizadas. Si usted no desea ser\n"
+"notificado en el futuro, por favor ingrese a %5$s y siga el enlace:\n"
+"\n"
+"%6$s"
 
 #: common/include/Error.class.php:126 common/include/Group.class.php:426
 #: common/include/Group.class.php:498 www/include/exit.php:37
@@ -320,7 +351,7 @@ msgstr ""
 
 #: common/include/Group.class.php:288
 msgid "Group::create: Group object already exists"
-msgstr ""
+msgstr "Group::create: el objeto Group ya existe"
 
 #: common/include/Group.class.php:293
 msgid "Invalid Unix name"
@@ -341,6 +372,8 @@ msgid ""
 "The Registration Purpose text is too long. Please make it smaller than 1500 "
 "bytes."
 msgstr ""
+"El texto de propósito de registración es muy largo. Por favor hágalo mas "
+"corto que 1500 bytes."
 
 #: common/include/Group.class.php:309
 msgid "Describe in a more comprehensive manner your project."
