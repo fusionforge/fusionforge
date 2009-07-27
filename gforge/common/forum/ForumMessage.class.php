@@ -799,7 +799,7 @@ Or reply to this e-mail entering your response between the following markers:
 		$msg_id = $this->getID();
 		$res = db_query_params ('UPDATE forum 
 			SET group_forum_id=$1, posted_by=$2, subject=$3,
-			body=$4, post_date=$4, is_followup_to=$6,
+			body=$4, post_date=$5, is_followup_to=$6,
 			thread_id=$7, most_recent_date=$8
 			WHERE msg_id=$9',
 					array ($group_forum_id,
