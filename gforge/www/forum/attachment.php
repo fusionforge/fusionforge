@@ -148,7 +148,7 @@ if ($edit=="yes") {
 			foreach ($am->Getmessages() as $item) {
 				$feedback .= "<br>" . $item;
 			}
-			echo '<p><p><center><form method="post"><input type="button" value="Close Window" onclick="window.close()"></form></center>';
+			echo '<p><p><center><form method="post"><input type="button" value="'._("Close Window").'" onclick="window.close()"></form></center>';
 			forum_footer(array());
 			exit();
 		} else {
