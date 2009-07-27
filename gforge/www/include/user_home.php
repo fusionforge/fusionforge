@@ -150,7 +150,7 @@ if (db_numrows($res_cat) < 1) {
 } else { // endif no groups
 	print "<p/>"._('This developer is a member of the following groups:')."<br />&nbsp;";
 	while ($row_cat = db_fetch_array($res_cat)) {
-			print ('<br />' . util_make_link_g ($row_cat['unix_group_name'],$row_cat['group_id'],htmlentities($row_cat['group_name'])).' ('.htmlentities($row_cat['role_name']).')');
+			print ('<br />' . util_make_link_g ($row_cat['unix_group_name'],$row_cat['group_id'],$row_cat['group_name']).' ('.$row_cat['role_name'].')');
 	}
 	print '</ul><p/>';
 } // end if groups
