@@ -639,7 +639,9 @@ class ForumMessage extends Error {
 		$recipients = array ();
 		foreach ($ids as $id) {
 			$recipient = user_get_object ($id) ;
-			$recipients[] = $recipient ;
+			if ($recipient->isActive()) {
+				$recipients[] = $recipient ;
+			}
 		}
 		if ($this->Forum->getSendAllPostsTo()) {
 			$sapt = explode (',', $this->Forum->getSendAllPostsTo()) ;
