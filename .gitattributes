@@ -913,6 +913,7 @@ gforge/plugins/scmcvs/fusionforge-plugin-scmcvs.spec -text
 gforge/plugins/scmsvn/cron.d/fusionforge-plugin-scmsvn -text
 gforge/plugins/scmsvn/cronjobs/update_users.php -text
 gforge/plugins/scmsvn/db/scmsvn-init-mysql.sql -text
+gforge/plugins/scmsvn/fusionforge-plugin-scmsvn.spec -text
 gforge/plugins/svncommitemail/bin/commit-email.php -text
 gforge/plugins/svntracker/AUTHORS -text
 gforge/plugins/svntracker/COPYING -text
