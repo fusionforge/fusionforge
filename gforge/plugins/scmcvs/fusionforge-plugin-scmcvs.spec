@@ -73,12 +73,16 @@ install -m 644 cron.d/%{name} $RPM_BUILD_ROOT/%{CROND_DIR}/
 
 # copying all needed stuff to %{PLUGIN_LIB}
 install -m 755 -d $RPM_BUILD_ROOT/%{PLUGIN_LIB}
-for dir in bin common sbin www cronjobs; do
+for dir in bin common www cronjobs; do
         cp -rp $dir $RPM_BUILD_ROOT/%{PLUGIN_LIB}/
 done;
 chmod 755 $RPM_BUILD_ROOT/%{PLUGIN_LIB}/bin/*
-chmod 755 $RPM_BUILD_ROOT/%{PLUGIN_LIB}/sbin/*
 chmod 755 $RPM_BUILD_ROOT/%{PLUGIN_LIB}/cronjobs/cvscreate.sh
+
+# installing executable for pserver
+install -m 755 -d $RPM_BUILD_ROOT/%{GFORGE_BIN_DIR}/
+cp -rp sbin/cvs-pserver $RPM_BUILD_ROOT/%{GFORGE_BIN_DIR}/
+chmod 755 $RPM_BUILD_ROOT/%{GFORGE_BIN_DIR}/cvs-pserver
 
 # installing configuration file
 install -m 755 -d  $RPM_BUILD_ROOT/%{GFORGE_CONF_DIR}/
@@ -154,10 +158,10 @@ fi
 %{PLUGIN_CONF}/config.pl
 %{PLUGIN_LIB}/bin
 %{PLUGIN_LIB}/common
-%{PLUGIN_LIB}/sbin
 %{PLUGIN_LIB}/www
 %{PLUGIN_LIB}/cronjobs
 %{CROND_DIR}/%{name}
+%{GFORGE_BIN_DIR}/cvs-pserver
 
 %changelog
 * Mon Jan 09 2006 Nicolas Quienot <nquienot@linagora.com>

@@ -361,7 +361,7 @@ fi
 
 %files
 %defattr(-, root, root)
-%doc AUTHORS AUTHORS.sourceforge COPYING ChangeLog INSTALL README*
+%doc AUTHORS AUTHORS.sourceforge COPYING ChangeLog INSTALL* README*
 %doc docs/*
 %attr(0660, %{httpduser}, gforge) %config(noreplace) %{GFORGE_CONF_DIR}/gforge.conf
 %attr(0750, root, root) %{SBIN_DIR}/gforge-config
