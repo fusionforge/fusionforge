@@ -15,6 +15,7 @@ Requires: fusionforge >= 4.7
 #Requires: perl perl-URI
 Requires: subversion
 Requires: python >= 2.3
+Requires: xinet
 
 URL: http://fusionforge.org/
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
@@ -70,8 +71,6 @@ install -m 755 -d $RPM_BUILD_ROOT/%{PLUGIN_LIB}
 for dir in bin common cronjobs; do
         cp -rp $dir $RPM_BUILD_ROOT/%{PLUGIN_LIB}/
 done;
-#cp -rp deb-specific/scmsvn/cronjobs/* $RPM_BUILD_ROOT/%{PLUGIN_LIB}/cronjobs
-#cp -rp deb-specific/install-svn.sh $RPM_BUILD_ROOT/%{PLUGIN_LIB}/bin
 #chmod 755 $RPM_BUILD_ROOT/%{PLUGIN_LIB}/bin/*
 
 # installing configuration file
@@ -85,7 +84,7 @@ cp -rp etc/plugins/%{plugin}/* $RPM_BUILD_ROOT/%{PLUGIN_CONF}/
 %post
 if [ "$1" = "1" ] ; then
 	# link the plugin www rep to be accessed by web
-	ln -s %{PLUGIN_LIB}/www %{FFORGE_DIR}/www/plugins/%{plugin}
+	#ln -s %{PLUGIN_LIB}/www %{FFORGE_DIR}/www/plugins/%{plugin}
         
     # register plugin in database
     %{FFORGE_BIN_DIR}/register-plugin %{plugin} SVN &> /dev/null
