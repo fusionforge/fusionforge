@@ -1,6 +1,6 @@
 Summary: HTML Purifier is a standards-compliant HTML filter library written in PHP.
 Name: htmlpurifier
-Version: 3.3.0
+Version: 4.0.0
 Release: 0
 License: LGPL
 Group: Development/Languages
