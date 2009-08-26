@@ -274,7 +274,7 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 			<td colspan="2"><strong><?php echo _('Tasks'); ?></strong></td>
 			<?php } ?>
 			<?php if ($GLOBALS['sys_use_scm']) { ?>
-			<td colspan="3"><strong><?php echo _('CVS'); ?></strong></td>
+			<td colspan="3"><strong><?php echo _('SCM'); ?></strong></td>
 			<?php } ?>
 			<?php plugin_hook('stats_header_table'); ?>
 		</tr>
@@ -406,7 +406,7 @@ function stats_site_projects_daily( $span ) {
 			<td><strong><?php echo _('Support'); ?></strong></td>
 			<td><strong><?php echo _('Patches'); ?></strong></td>
 			<td><strong><?php echo _('Tasks'); ?></strong></td>
-			<td><strong><?php echo _('CVS'); ?></strong></td>
+			<td><strong><?php echo _('SCM'); ?></strong></td>
 			</tr>
 		<?php
 	
@@ -461,7 +461,7 @@ function stats_site_projects_monthly() {
 			<td><strong><?php echo _('Patches'); ?></strong></td>
 			<td><strong><?php echo _('All Trkr'); ?></strong></td>
 			<td><strong><?php echo _('Tasks'); ?></strong></td>
-			<td><strong><?php echo _('CVS'); ?></strong></td>
+			<td><strong><?php echo _('SCM'); ?></strong></td>
 			</tr>
 		<?php
 
