@@ -427,7 +427,7 @@ AND filemodule_monitor.user_id='".user_getid()."' ORDER BY group_name DESC";
 					     '<img src="'.$HTML->imgroot.'ic/'.$img.'" alt="'._('Delete').'" height="16" width="16" border="0" />') ;
 
 			echo '</td>
-			<td>'.util_make_link_g (db_result($result,$i,'unix_group_name'),db_result($result,$i,'group_id'), db_result($result,$i,'group_name')).'</td>
+			<td>'.util_make_link_g (db_result($result,$i,'unix_group_name'),db_result($result,$i,'group_id'),db_result($result,$i,'group_name')).'</td>
 			<td>'. htmlspecialchars(db_result($result,$i,'role_name')) .'</td></tr>';
 		}
 	}
