@@ -45,7 +45,7 @@
  * ALONE BASIS."
  */
 
-require_once($sys_path_to_htmlpurifier . '/HTMLPurifier.auto.php');
+require_once('HTMLPurifier.auto.php');
 
 Class TextSanitizer extends Error {
 	

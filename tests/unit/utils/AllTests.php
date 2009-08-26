@@ -1,7 +1,5 @@
 <?php
 
-$sys_path_to_htmlpurifier = '/usr/share/htmlpurifier';
-
 require_once 'PHPUnit/Framework.php';
 require_once dirname(__FILE__).'/UtilsTests.php';
 require_once dirname(__FILE__).'/TextSanitizerTests.php';

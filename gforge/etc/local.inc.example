@@ -324,6 +324,4 @@ $sys_plugins_path="$sys_opt_path/plugins/";
 //	'Support Tech'=>array( 'projectadmin'=>'0', 'frs'=>'0', 'scm'=>'0', 'docman'=>'1', 'forumadmin'=>'0', 'forum'=>'1', 'trackeradmin'=>'0', 'tracker'=>'2', 'pmadmin'=>'0', 'pm'=>'0' , 'webcal'=>'2')
 //);
 
-$sys_path_to_htmlpurifier = '/usr/share/htmlpurifier';
-
 // End of customizations -- place nothing after this line
