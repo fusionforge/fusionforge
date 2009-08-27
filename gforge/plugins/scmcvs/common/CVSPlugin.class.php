@@ -25,6 +25,7 @@ class CVSPlugin extends SCMPlugin {
 	function CVSPlugin () {
 		global $cvs_root;
 		global $gfconfig;
+		global $cvsdir_prefix ;
 		$this->SCMPlugin () ;
 		$this->name = 'scmcvs';
 		$this->text = 'CVS';
@@ -36,6 +37,8 @@ class CVSPlugin extends SCMPlugin {
 		$this->default_cvs_server = $default_cvs_server ;
 		if ($cvs_root) {
 			$this->cvs_root = $cvs_root;
+		elseif ($cvsdir_prefix) {
+			$this->cvs_root = $cvsdir_prefix;
 		} else {
 			$this->cvs_root = "/cvsroot";
 		} 
@@ -74,6 +77,7 @@ class CVSPlugin extends SCMPlugin {
 	}
 
 	function getSnapshotPara ($project) {
+		global $sys_scm_snapshots_path ;
 		$b = "" ;
 		$filename = $project->getUnixName().'-scm-latest.tar.gz';
 		if (file_exists($sys_scm_snapshots_path.'/'.$filename)) {
@@ -338,6 +342,9 @@ class CVSPlugin extends SCMPlugin {
 	}
 
 	function generateSnapshots ($params) {
+		global $sys_scm_snapshots_path ;
+		global $sys_scm_tarballs_path ;
+
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
 			return false ;
@@ -355,7 +362,8 @@ class CVSPlugin extends SCMPlugin {
 			return false;
 		}
 
-		$repo = $this->cvs_root . '/' . $project->getUnixName() ;
+		$toprepo = $this->cvs_root ;
+		$repo = $toprepo . '/' . $project->getUnixName() ;
 
 		$repo_exists = false ;
 		if (is_dir ($repo) && is_dir ("$repo/CVSROOT")) {
@@ -368,26 +376,25 @@ class CVSPlugin extends SCMPlugin {
 			return false ;
 		}
 
-		/*
-		 $compression = --gzip
-		 
-		 Déléguer la suite à un script shell
+		$tmp = trim (`mktemp -d`) ;
+		if ($tmp == '') {
+			return false ;
+		}
+		$today = date ('Y-m-d') ;
+		$dir = $project->getUnixName ()."-$today" ;
+		system ("mkdir -p $tmp/$dir") ;
+		system ("cd $tmp/$dir ; cvs -d $repo checkout . > /dev/null 2>&1") ;
+		system ("tar czCf $tmp $tmp/snapshot.tar.gz $dir") ;
+		chmod ("$tmp/snapshot.tar.gz", 0644) ;
+		copy ("$tmp/snapshot.tar.gz", $snapshot) ;
+		unlink ("$tmp/snapshot.tar.gz") ;
+		system ("rm -rf $tmp/$dir") ;
 
-		 system ("scmcvs-snapshots.sh $repo $group_name $snapshot")
-		 
-		 tmp=$(mktemp -d)
-		 cd $tmp
-		 $today=$(date +%Y-%m-%d)
-		 mkdir -p $group_name-$today
-		 cd $group_name-$today
-		 cvs -d $repo checkout .
-		 cd ..
-		 tar cf snapshot.tar.compressed $compression $group_name-$today
-		 chmod
-		 mv snapshot.tar.compressed $snapshot
-		 cd /
-		 rm -rf $tmp
-		*/
+		system ("tar czCf $toprepo $tmp/tarball.tar.gz " . $project->getUnixName()) ;
+		chmod ("$tmp/tarball.tar.gz", 0644) ;
+		copy ("$tmp/tarball.tar.gz", $tarball) ;
+		unlink ("$tmp/tarball.tar.gz") ;
+		system ("rm -rf $tmp") ;
 	}
   }
 

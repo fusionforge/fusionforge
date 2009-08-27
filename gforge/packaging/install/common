@@ -21,4 +21,5 @@ deb-specific/update-user-group-ssh.sh  usr/share/gforge/bin/
 common                                 usr/share/gforge/
 cronjobs/create_scm_repos.php          usr/share/gforge/cronjobs/
 cronjobs/gather_scm_stats.php          usr/share/gforge/cronjobs/
+cronjobs/generate_scm_snapshots.php    usr/share/gforge/cronjobs/
 locales/*                              usr/share/locale/

@@ -64,7 +64,6 @@ gforge/db/timetracking-init.sql -text
 gforge/deb-specific/fckeditor/config.js -text
 gforge/deb-specific/gforge.logrotate -text
 gforge/deb-specific/install-cvs.sh -text
-gforge/deb-specific/scmcvs/cronjobs/cvs-stats.pl -text
 gforge/debian/compat -text
 gforge/debian/dsf-in/plugin-extratabs.postinst -text
 gforge/debian/dsf-in/plugin-extratabs.prerm -text
@@ -170,7 +169,6 @@ gforge/packaging/cron.d/homedirs -text
 gforge/packaging/cron.d/lists-mailman -text
 gforge/packaging/cron.d/mail -text
 gforge/packaging/cron.d/plugin-globalsearch -text
-gforge/packaging/cron.d/plugin-scmcvs -text
 gforge/packaging/cron.d/plugin-scmsvn -text
 gforge/packaging/cron.d/shell-postgresql -text
 gforge/packaging/cron.d/web-apache2 -text
