@@ -288,8 +288,6 @@ class CVSPlugin extends SCM {
 	}
 
 	function createOrUpdateRepo ($params) {
-		return true ;	// Disabled for now
-
 		$group_id = $params['group_id'] ;
 
 		$project =& group_get_object($group_id);
@@ -304,6 +302,7 @@ class CVSPlugin extends SCM {
 		}
 
 		$repo = $this->cvs_root . '/' . $project->getUnixName() ;
+		$locks_dir = $this->cvs_root . '/cvs-locks/' . $project->getUnixName() ;
 		$unix_group = 'scm_' . $project->getUnixName() ;
 
 		$repo_exists = false ;
@@ -312,10 +311,12 @@ class CVSPlugin extends SCM {
 		}
 		
 		if (!$repo_exists) {
-			system ("cvs -d$repo init") ;
+			system ("cvs -d $repo init") ;
+			system ("mkdir -p $locks_dir") ;
 		}
 
-		system ("chgrp -R $unix_group $repo") ;
+		system ("chgrp -R $unix_group $repo $locks_dir") ;
+		system ("chmod 3777 $locks_dir") ;
 		if ($project->enableAnonSCM()) {
 			system ("chmod -R g+wXs,o+rX-w $repo") ;
 		} else {
