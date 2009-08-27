@@ -244,6 +244,36 @@ Description: collaborative development tool - Darcs plugin
  over it to the project's administrator.
 Provides: gforge-plugin-scm
 
+Package: gforge-plugin-scmgit
+Architecture: all
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, git-core, php5-cli, ${misc:Depends}
+Description: collaborative development tool - Git plugin
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin contains the Git subsystem of FusionForge. It allows each
+ FusionForge project to have its own Git repository, and gives some
+ control over it to the project's administrator.
+Provides: gforge-plugin-scm
+
+Package: gforge-plugin-scmhg
+Architecture: all
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, mercurial, php5-cli, ${misc:Depends}
+Description: collaborative development tool - Mercurial (Hg) plugin
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin contains the Mercurial (Hg) subsystem of FusionForge. It
+ allows each FusionForge project to have its own Mercurial repository,
+ and gives some control over it to the project's administrator.
+Provides: gforge-plugin-scm
+
 Package: gforge-plugin-scmcpold
 Architecture: all
 Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, php5-cli, ${misc:Depends}

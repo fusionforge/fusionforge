@@ -94,6 +94,10 @@ gforge/debian/gforge-plugin-scmcpold.postinst -text
 gforge/debian/gforge-plugin-scmcpold.prerm -text
 gforge/debian/gforge-plugin-scmdarcs.postinst -text
 gforge/debian/gforge-plugin-scmdarcs.prerm -text
+gforge/debian/gforge-plugin-scmgit.postinst -text
+gforge/debian/gforge-plugin-scmgit.prerm -text
+gforge/debian/gforge-plugin-scmhg.postinst -text
+gforge/debian/gforge-plugin-scmhg.prerm -text
 gforge/debian/patches/disable-dav.dpatch -text
 gforge/debian/patches/use-snoopy-from-distro.dpatch -text
 gforge/debian/po/README -text
@@ -182,6 +186,8 @@ gforge/packaging/dirs/plugin-scmbzr -text
 gforge/packaging/dirs/plugin-scmcpold -text
 gforge/packaging/dirs/plugin-scmcvs -text
 gforge/packaging/dirs/plugin-scmdarcs -text
+gforge/packaging/dirs/plugin-scmgit -text
+gforge/packaging/dirs/plugin-scmhg -text
 gforge/packaging/dirs/plugin-scmsvn -text
 gforge/packaging/dirs/web-apache2 -text
 gforge/packaging/docs/pkgname-web-apache2 -text
@@ -200,6 +206,8 @@ gforge/packaging/install/plugin-scmbzr -text
 gforge/packaging/install/plugin-scmcpold -text
 gforge/packaging/install/plugin-scmcvs -text
 gforge/packaging/install/plugin-scmdarcs -text
+gforge/packaging/install/plugin-scmgit -text
+gforge/packaging/install/plugin-scmhg -text
 gforge/packaging/install/plugin-scmsvn -text
 gforge/packaging/install/shell-postgresql -text
 gforge/packaging/install/web-apache2 -text
@@ -922,6 +930,12 @@ gforge/plugins/scmcvs/fusionforge-plugin-scmcvs.spec -text
 gforge/plugins/scmdarcs/common/DarcsPlugin.class.php -text
 gforge/plugins/scmdarcs/common/scmdarcs-init.php -text
 gforge/plugins/scmdarcs/etc/plugins/scmdarcs/config.php -text
+gforge/plugins/scmgit/common/GitPlugin.class.php -text
+gforge/plugins/scmgit/common/scmgit-init.php -text
+gforge/plugins/scmgit/etc/plugins/scmgit/config.php -text
+gforge/plugins/scmhg/common/HgPlugin.class.php -text
+gforge/plugins/scmhg/common/scmhg-init.php -text
+gforge/plugins/scmhg/etc/plugins/scmhg/config.php -text
 gforge/plugins/scmsvn/cron.d/fusionforge-plugin-scmsvn -text
 gforge/plugins/scmsvn/cronjobs/update_users.php -text
 gforge/plugins/scmsvn/db/scmsvn-init-mysql.sql -text
