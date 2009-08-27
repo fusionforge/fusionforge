@@ -960,7 +960,6 @@ gforge/plugins/scmhg/common/scmhg-init.php -text
 gforge/plugins/scmhg/etc/plugins/scmhg/config.php -text
 gforge/plugins/scmsvn/cron.d/fusionforge-plugin-scmsvn -text
 gforge/plugins/scmsvn/cronjobs/update_users.php -text
-gforge/plugins/scmsvn/db/scmsvn-init-mysql.sql -text
 gforge/plugins/scmsvn/fusionforge-plugin-scmsvn.spec -text
 gforge/plugins/svncommitemail/bin/commit-email.php -text
 gforge/plugins/svntracker/AUTHORS -text

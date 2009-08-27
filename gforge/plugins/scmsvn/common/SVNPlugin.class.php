@@ -29,6 +29,7 @@ class SVNPlugin extends SCMPlugin {
 		$this->name = 'scmsvn';
 		$this->text = 'SVN';
 		$this->hooks[] = 'scm_browser_page';
+		$this->hooks[] = 'scm_update_repolist' ;
 		$this->hooks[] = 'scm_generate_snapshots' ;
 		$this->hooks[] = 'scm_gather_stats' ;
 
@@ -192,14 +193,78 @@ class SVNPlugin extends SCMPlugin {
 
 		if (!is_dir ($repo) || !is_file ("$repo/format")) {
 			system ("svnadmin create --fs-type fsfs $repo") ;
+			system ("svn mkdir -m'Init' file:///$repo/trunk file:///$repo/tags file:///$repo/branches") ;
+		}
+		
+		if ($this->use_ssh) {
+			system ("chgrp -R $unix_group $repo") ;
+			if ($project->enableAnonSCM()) {
+				system ("chmod -R g+wXs,o+rX-w $repo") ;
+			} else {
+				system ("chmod -R g+wXs,o-rwx $repo") ;
+			}
+		} else {
+			$unix_user = 'www-data' ;
+			system ("chown -R $unix_user:$unix_group $repo") ;
+			if ($project->enableAnonSCM()) {
+				system ("chmod -R g+wXs,o+rX-w $repo") ;
+			} else {
+				system ("chmod -R g+wXs,o-rwx $repo") ;
+			}
+		}
+	}
+
+	function updateRepositoryList ($params) {
+		$groups = $this->getGroups () ;
+
+		// Update WebDAV stuff
+		if (!$this->use_dav) {
+			return true ;
 		}
 
-		system ("chgrp -R $unix_group $repo") ;
-		if ($project->enableAnonSCM()) {
-			system ("chmod -R g+wXs,o+rX-w $repo") ;
-		} else {
-			system ("chmod -R g+wXs,o-rwx $repo") ;
+		$access_data = '' ;
+		$password_data = '' ;
+
+		$svnusers = array () ;
+		foreach ($groups as $project) {
+			$users = $project->getMembers () ;
+			$perm = $project->getPermission ($user) ;
+			if ($perm->isMember ('scm', 0)) {
+				$svnusers[$user->getID()] = $user ;
+			}
+
+			$access_data .= '[' . $project->getUnixName () . ":/]\n" ;
+			if ($perm->isMember ('scm', 1)) {
+				$access_data .= $user->getUnixName() . "= rw\n" ;
+			} elseif ($perm->isMember ('scm', 0)) {
+				$access_data .= $user->getUnixName() . "= r\n" ;
+			}
+			if ( $project->enableAnonSCM() ) {
+				$access_data .= "anonsvn= r\n" ;
+				$access_data .= "* = r\n" ;
+				
+			}
+			$access_data .= "\n" ;
 		}
+
+		foreach ($svnusers as $user_id => $user) {
+			$password_data .= $user->getUnixName ().':'.$user->getMD5Passwd ()."\n" ;
+		}
+		$password_data .= "anonsvn:$apr1$Kfr69/..$J08mbyNpD81y42x7xlFDm.\n" ;
+
+		$fname = $sys_var_path.'/svnroot-access' ;
+		$f = fopen ($fname.'.new', 'w') ;
+		fwrite ($f, $password_data) ;
+		fclose ($f) ;
+		chmod ($fname.'.new', 0644) ;
+		rename ($fname.'.new', $fname) ;
+
+		$fname = $sys_var_path.'/svnroot-authfile' ;
+		$f = fopen ($fname.'.new', 'w') ;
+		fwrite ($f, $access_data) ;
+		fclose ($f) ;
+		chmod ($fname.'.new', 0644) ;
+		rename ($fname.'.new', $fname) ;
 	}
 
 	function gatherStats ($params) {
