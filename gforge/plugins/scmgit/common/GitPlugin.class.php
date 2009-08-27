@@ -27,7 +27,7 @@ class GitPlugin extends SCMPlugin {
 		$this->SCMPlugin () ;
 		$this->name = 'scmgit';
 		$this->text = 'Git';
-		# $this->hooks[] = 'scm_update_repolist' ;
+		$this->hooks[] = 'scm_update_repolist' ;
 		$this->hooks[] = 'scm_browser_page' ;
 		$this->hooks[] = 'scm_gather_stats' ;
 		$this->hooks[] = 'scm_generate_snapshots' ;
@@ -90,7 +90,7 @@ class GitPlugin extends SCMPlugin {
 		
 		if ($project->usesPlugin ($this->name)) {
 			if ($this->browserDisplayable ($project)) {
-				print '<iframe src="'.util_make_url ("/plugins/scmgit/cgi-bin/gitweb.cgi?r=".$project->getUnixName()).'" frameborder="no" width=100% height=700></iframe>' ;
+				print '<iframe src="'.util_make_url ("/plugins/scmgit/cgi-bin/gitweb.cgi?p=".$project->getUnixName()).'" frameborder="no" width=100% height=700></iframe>' ;
 			}
 		}
 	}
@@ -190,20 +190,21 @@ class GitPlugin extends SCMPlugin {
 		}
 
 		$config_dir = '/etc/gforge/plugins/scmgit' ;
-		$config_file = $config_dir . '/gitweb.conf' ;
-		$config_f = fopen ($config_file.'.new', 'w') ;
+		$fname = $config_dir . '/gitweb.conf' ;
+		$config_f = fopen ($fname.'.new', 'w') ;
 		$rootdir = $this->git_root;
-		fwrite($config_f, "\n\$projectroot = \"$rootdir\";");
-		fwrite($config_f, "\n\$stylesheet = \"/gitweb.css\";");
-		fwrite($config_f, "\n\$projects_list = \"$configdir/gitweb.list\";");
-		fwrite($config_f, "\n\@git_base_url_list = \"". util_make_url ('/anonscm/git/'.$project->getUnixName().'/') . " \"");
-		fwrite($config_f, "\n\$logo = \"/git-logo.png\";");
-		fwrite($config_f, "\n$favicon = \"/git-favicon.png\";");
-		fwrite($config_f, "\n\$prevent_xss = true;");
+		fwrite($config_f, "\$projectroot = '$rootdir';\n");
+		fwrite($config_f, "\$projects_list = '$config_dir/gitweb.list';\n");
+		fwrite($config_f, "@git_base_url_list = ('". util_make_url ('/anonscm/git/') . "');\n");
+		fwrite($config_f, "\$logo = '". util_make_url ('/plugins/scmgit/gitweb/git-logo.png') . "';\n");
+		fwrite($config_f, "\$favicon = '". util_make_url ('/plugins/scmgit/gitweb/git-favicon.png')."';\n");
+		fwrite($config_f, "\$stylesheet = '". util_make_url ('/plugins/scmgit/gitweb/gitweb.css')."';\n");
+		fwrite($config_f, "\$prevent_xss = 'true';\n");
 		fclose($config_f);
 		chmod ($fname.'.new', 0644) ;
+		rename ($fname.'.new', $fname) ;
 
-		$fname = $configdir . '/gitweb.list' ;
+		$fname = $config_dir . '/gitweb.list' ;
 
 		$f = fopen ($fname.'.new', 'w') ;
 		foreach ($list as $project) {
@@ -211,7 +212,7 @@ class GitPlugin extends SCMPlugin {
 		}
 		fclose ($f) ;
 		chmod ($fname.'.new', 0644) ;
-		rename ($fname.'.new', $config_file) ;
+		rename ($fname.'.new', $fname) ;
 	}
 
 	function generateSnapshots ($params) {
