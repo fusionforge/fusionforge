@@ -28,7 +28,7 @@ gforge (4.8.51-1) experimental; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Wed, 29 Apr 2009 15:21:31 +0200
 
-gforge (4.8+scmrefactor-1) UNRELEASED; urgency=low
+gforge (4.8-1+scmrefactor) UNRELEASED; urgency=low
 
   * Stop shipping cvs_dump.pl and cvs_update.pl now that their function is
     fulfilled by the plugin hook.
