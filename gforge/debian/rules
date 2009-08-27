@@ -169,8 +169,8 @@ install: build
 	ln -s /usr/share/darcsweb $(CURDIR)/debian/$(PACKAGE)-plugin-scmdarcs/usr/share/gforge/plugins/scmdarcs/www/darcsweb
 	ln -s ../../plugins/scmdarcs/www $(CURDIR)/debian/$(PACKAGE)-plugin-scmdarcs/usr/share/gforge/www/plugins/
 
-	ln -s /usr/lib/cgi-bin/gitweb.cgi $(CURDIR)/debian/$(PACKAGE)-plugin-scmgit/usr/share/gforge/plugins/scmdarcs/cgi-bin/
-	ln -s /usr/share/gitweb $(CURDIR)/debian/$(PACKAGE)-plugin-scmgit/usr/share/gforge/plugins/scmdarcs/www/darcsweb
+	ln -s /usr/lib/cgi-bin/gitweb.cgi $(CURDIR)/debian/$(PACKAGE)-plugin-scmgit/usr/share/gforge/plugins/scmgit/cgi-bin/
+	ln -s /usr/share/gitweb $(CURDIR)/debian/$(PACKAGE)-plugin-scmgit/usr/share/gforge/plugins/scmgit/www/gitweb
 	ln -s ../../plugins/scmgit/www $(CURDIR)/debian/$(PACKAGE)-plugin-scmgit/usr/share/gforge/www/plugins/
 
 	# Remove Snoopy class from binary packages (provided by libphp-snoopy)
