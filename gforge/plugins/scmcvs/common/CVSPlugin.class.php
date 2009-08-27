@@ -317,10 +317,9 @@ class CVSPlugin extends SCMPlugin {
 				
 			foreach ( $user_list as $user ) {
 				// trying to get user id from user name
-				$user_res = db_query_params ('SELECT user_id FROM users WHERE user_name=$1',
-							     array ($user)) ;
-				if ( $user_row = db_fetch_array($user_res) ) {
-					$user_id = $user_row[0];
+				$u = &user_get_object_by_name ($last_user) ;
+				if ($u) {
+					$user_id = $u->getID();
 				} else {
 					continue;
 				}
@@ -330,8 +329,8 @@ class CVSPlugin extends SCMPlugin {
 							     $day,
 							     $project->getID(),
 							     $user_id,
-							     $usr_commit{$user} ? $usr_commit{$user} : 0,
-							     $usr_add{$user} ? $usr_add{$user} : 0))) {
+							     $usr_commit[$user] ? $usr_commit[$user] : 0,
+							     $usr_add[$user] ? $usr_add[$user] : 0))) {
 					echo "Error while inserting into stats_cvs_user\n" ;
 					db_rollback () ;
 					return false ;
