@@ -35,7 +35,6 @@ gforge/cronjobs/ftp_create_group_access.php -text
 gforge/cronjobs/gforge-db-backup.sh -text
 gforge/cronjobs/homedirs.php -text
 gforge/cronjobs/mail/publicize_list.py -text
-gforge/cronjobs/maintain-scm.php -text
 gforge/db/20030701-gforge-3.0 -text svneol=unset#application/octet-stream
 gforge/db/20031026-gforge-3.1 -text svneol=unset#application/octet-stream
 gforge/db/20040108-gforge-3.21 -text svneol=unset#application/octet-stream

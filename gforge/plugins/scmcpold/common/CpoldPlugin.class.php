@@ -84,6 +84,7 @@ class CpoldPlugin extends SCMPlugin {
 		$repo = $this->cpold_root . '/' . $project->getUnixName() ;
 		$unix_group = 'scm_' . $project->getUnixName() ;
 
+		system ("mkdir -p $repo") ;
 		system ("chgrp -R $unix_group $repo") ;
 		if ($project->enableAnonSCM()) {
 			system ("chmod -R g+wXs,o+rX-w $repo") ;
