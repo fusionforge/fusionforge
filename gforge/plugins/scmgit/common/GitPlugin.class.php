@@ -290,7 +290,7 @@ class GitPlugin extends SCMPlugin {
 
 			$repo = $this->git_root . '/' . $project->getUnixName() ;
 			if (!is_dir ($repo) || !is_file ("$repo/refs")) {
-				echo "No repository\n" ;
+				// echo "No repository\n" ;
 				db_rollback () ;
 				return false ;
 			}

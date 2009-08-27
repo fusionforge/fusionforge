@@ -238,7 +238,7 @@ class SVNPlugin extends SCMPlugin {
 				return false ;
 			}
 	
-			$pipe = popen ("svn log file://$repo --xml -v -q", 'r' ) ;
+			$pipe = popen ("svn log file://$repo --xml -v -q 2> /dev/null", 'r' ) ;
 
 			// cleaning stats_cvs_* table for the current day
 			$res = db_query_params ('DELETE FROM stats_cvs_group WHERE month=$1 AND day=$2 AND group_id=$3',
