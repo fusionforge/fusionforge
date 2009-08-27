@@ -29,7 +29,7 @@ class GitPlugin extends SCMPlugin {
 		$this->text = 'Git';
 		# $this->hooks[] = 'scm_update_repolist' ;
 		$this->hooks[] = 'scm_browser_page' ;
-		# $this->hooks[] = 'scm_gather_stats' ;
+		$this->hooks[] = 'scm_gather_stats' ;
 		$this->hooks[] = 'scm_generate_snapshots' ;
 		
 		require_once $gfconfig.'plugins/scmgit/config.php' ;
@@ -256,6 +256,123 @@ class GitPlugin extends SCMPlugin {
 		copy ("$tmp/tarball.tar.gz", $tarball) ;
 		unlink ("$tmp/tarball.tar.gz") ;
 		system ("rm -rf $tmp") ;
+	}
+
+	function gatherStats ($params) {
+		global $last_user, $usr_adds, $usr_deletes,
+		$usr_updates, $updates, $adds;
+		
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
+		}
+		
+		if (! $project->usesPlugin ($this->name)) {
+			return false;
+		}
+
+		if ($params['mode'] == 'day') {
+			db_begin();
+
+			$year = $params ['year'] ;
+			$month = $params ['month'] ;
+			$day = $params ['day'] ;
+			$month_string = sprintf( "%04d%02d", $year, $month );
+			$start_time = gmmktime( 0, 0, 0, $month, $day, $year);
+			$end_time = $start_time + 86400;
+
+			$usr_adds    = array () ;
+			$usr_updates = array () ;
+			$usr_deletes = array () ;
+
+			$adds    = 0 ;
+			$updates = 0 ;
+
+			$repo = $this->git_root . '/' . $project->getUnixName() ;
+			if (!is_dir ($repo) || !is_file ("$repo/refs")) {
+				echo "No repository\n" ;
+				db_rollback () ;
+				return false ;
+			}
+	
+			$pipe = popen ("GIT_DIR=$repo git log --since='1 day ago' "
+					."--all --pretty='%n%an <%ae>' --name-status", 'r' ) ;
+
+			// cleaning stats_cvs_* table for the current day
+			$res = db_query_params ('DELETE FROM stats_cvs_group WHERE month=$1 AND day=$2 AND group_id=$3',
+						array ($month_string,
+						       $day,
+						       $project->getID())) ;
+			if(!$res) {
+				echo "Error while cleaning stats_cvs_group\n" ;
+				db_rollback () ;
+				return false ;
+			}
+	
+			$last_user    = "";
+			while (!feof($pipe) && $data = fgets ($pipe)) {
+				$line = trim($data);
+				if (strlen($line) > 0) {
+					$result = preg_match("/^(?<name>.+) <(?<mail>.+)>/", $line, $matches);
+					if ($result) {
+						// Author line
+						$last_user = $matches['name'];
+					} else {
+						// Short-commit stats line
+						preg_match("/(?<mode>[AM])[ ]+(?<file>.+)$/", $line, $matches);
+						if ($last_user == "") continue;
+						if ($matches['mode'] == 'A') {
+							$usr_adds[$last_user]++;
+							$adds++;
+						} elseif ($matches['mode'] == 'M') {
+							$usr_updates[$last_user]++;
+							$updates++;
+						} elseif ($matches['mode'] == 'D') {
+							$usr_deletes[$last_user]++;
+						}
+					}
+				}
+			}
+			
+			// inserting group results in stats_cvs_groups
+			if (!db_query_params ('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
+					      array ($month_string,
+						     $day,
+						     $project->getID(),
+						     0,
+						     $updates,
+						     $adds))) {
+				echo "Error while inserting into stats_cvs_group\n" ;
+				db_rollback () ;
+				return false ;
+			}
+				
+			// building the user list
+			$user_list = array_unique( array_merge( array_keys( $usr_adds ), array_keys( $usr_updates ) ) );
+
+			foreach ( $user_list as $user ) {
+				// trying to get user id from user name
+				$u = &user_get_object_by_name ($user) ;
+				if ($u) {
+					$user_id = $u->getID();
+				} else {
+					continue;
+				}
+					
+				if (!db_query_params ('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
+						      array ($month_string,
+							     $day,
+							     $project->getID(),
+							     $user_id,
+							     $usr_updates[$user] ? $usr_updates[$user] : 0,
+							     $usr_adds[$user] ? $usr_adds[$user] : 0))) {
+					echo "Error while inserting into stats_cvs_user\n" ;
+					db_rollback () ;
+					return false ;
+				}
+			}
+		}
+		db_commit();
 	}
   }
 
