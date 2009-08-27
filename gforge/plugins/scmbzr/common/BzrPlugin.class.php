@@ -98,7 +98,8 @@ class BzrPlugin extends SCMPlugin {
 		}
 		
 		if (!$repo_exists) {
-			system ("bzr init-repo --no-trees $repo") ;
+			system ("mkdir -p $repo") ;
+			system ("bzr init-repo --no-trees $repo >/dev/null") ;
 		}
 
 		system ("chgrp -R $unix_group $repo") ;

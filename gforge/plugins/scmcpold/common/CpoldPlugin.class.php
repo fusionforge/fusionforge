@@ -27,6 +27,7 @@ class CpoldPlugin extends SCMPlugin {
 		$this->SCMPlugin () ;
 		$this->name = 'scmcpold';
 		$this->text = 'CPOLD';
+		$this->hooks[] = 'scm_cpold_do_nothing' ;
 		
 		require_once $gfconfig.'plugins/scmcpold/config.php' ;
 		
@@ -37,6 +38,18 @@ class CpoldPlugin extends SCMPlugin {
 		$this->register () ;
 	}
 	
+	function CallHook ($hookname, $params) {
+		global $HTML;
+		
+		switch ($hookname) {
+		case 'scm_cpold_do_nothing':
+			// Do nothing
+			break;
+		default:
+			parent::CallHook ($hookname, $params) ;
+		}
+	}
+
 	function getDefaultServer() {
 		return $this->default_cpold_server ;
 	}

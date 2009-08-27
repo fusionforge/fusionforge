@@ -44,8 +44,12 @@ if (!$res) {
 }
 
 while ($data = db_fetch_array ($res)) {
-	$hook_params = array ('group_id' => $data['group_id']) ;
-	plugin_hook ('scm_create_repo', $hook_params) ;
+	$hook_params = array ('group_id' => $data['group_id'],
+			      'mode' => 'day',
+			      'year' => date ('Y', time () - 43200),
+			      'month' => date ('n', time () - 43200),
+			      'day' => date ('j', time () - 43200)) ;
+	plugin_hook ('scm_gather_stats', $hook_params) ;
 }
 
 // Local Variables:

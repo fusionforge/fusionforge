@@ -31,18 +31,25 @@ abstract class SCMPlugin extends Plugin {
 	 */
 	function SCMPlugin () {
 		$this->Plugin() ;
+		$this->hooks[] = 'scm_plugin';
 		$this->hooks[] = 'scm_page';
 		$this->hooks[] = 'scm_admin_update';
 		$this->hooks[] = 'scm_admin_page';
  		$this->hooks[] = 'scm_stats';
-		$this->hooks[] = 'scm_createrepo';
-		$this->hooks[] = 'scm_plugin';
+		$this->hooks[] = 'scm_create_repo';
+		# Other common hooks that can be enabled per plugin:
+		# scm_generate_snapshots
+		# scm_gather_stats
 	}
 
 	function CallHook ($hookname, $params) {
 		global $HTML ;
 		
 		switch ($hookname) {
+		case 'scm_plugin':
+			$scm_plugins=& $params['scm_plugins'];
+			$scm_plugins[]=$this->name;
+			break;
 		case 'scm_page':
 			$this->getPage ($params) ;
 			break ;
@@ -55,12 +62,14 @@ abstract class SCMPlugin extends Plugin {
 		case 'scm_stats':
 			$this->echoShortStats ($params) ;
 			break;
-		case 'scm_createrepo':
+		case 'scm_create_repo':
 			$this->createOrUpdateRepo ($params) ;
 			break;
-		case 'scm_plugin':
-			$scm_plugins=& $params['scm_plugins'];
-			$scm_plugins[]=$this->name;
+		case 'scm_generate_snapshots': // Optional
+			$this->generateSnapshots ($params) ;
+			break;
+		case 'scm_gather_stats': // Optional
+			$this->gatherStats ($params) ;
 			break;
 		default:
 			// Forgot something
