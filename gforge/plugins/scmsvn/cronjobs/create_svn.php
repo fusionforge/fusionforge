@@ -124,7 +124,6 @@ while ( $row =& db_fetch_array($res) ) {
 			//
 			//	Create the repository
 			//
-			passthru ("[ ! -d $svn/".$row["unix_group_name"][0]."/".$row["unix_group_name"]." ] && mkdir -p $svn/".$row["unix_group_name"][0]."/ && $svn_path/svnadmin create $repos_type $svn/".$row["unix_group_name"][0]."/".$row["unix_group_name"]);
  			if ($project->usesPlugin('svncommitemail')) {
  				check_svn_mail($row["unix_group_name"], $svn."/".$row["unix_group_name"][0]."/".$row["unix_group_name"]);
  			}
@@ -132,7 +131,6 @@ while ( $row =& db_fetch_array($res) ) {
  				check_svn_tracker($row["unix_group_name"], $svn."/".$row["unix_group_name"][0]."/".$row["unix_group_name"]);
  			}
 		} else {
-			passthru ("[ ! -d $svn/".$row["unix_group_name"]." ] &&  $svn_path/svnadmin create $repos_type $svn/".$row["unix_group_name"]);
 			$cmd = 'chown -R '.$file_owner.' '.$svn.'/'.$row["unix_group_name"];
 			passthru($cmd); // svn dir owned by apache or viewcvs doesn't work 
 			if ($project->usesPlugin('svncommitemail')) {

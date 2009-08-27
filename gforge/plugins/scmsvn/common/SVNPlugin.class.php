@@ -300,8 +300,6 @@ class SVNPlugin extends SCM {
 	}
 
 	function createOrUpdateRepo ($params) {
-		return true ;   // Disabled for now
-
 		$group_id = $params['group_id'] ;
 
 		$project =& group_get_object($group_id);
