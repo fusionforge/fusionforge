@@ -33,6 +33,7 @@ gforge/cronjobs/create_home_dirs.php -text
 gforge/cronjobs/create_scm_repos.php -text
 gforge/cronjobs/ftp_create_group_access.php -text
 gforge/cronjobs/gather_scm_stats.php -text
+gforge/cronjobs/generate_scm_snapshots.php -text
 gforge/cronjobs/gforge-db-backup.sh -text
 gforge/cronjobs/homedirs.php -text
 gforge/cronjobs/mail/publicize_list.py -text

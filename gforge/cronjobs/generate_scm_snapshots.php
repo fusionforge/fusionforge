@@ -44,12 +44,8 @@ if (!$res) {
 }
 
 while ($data = db_fetch_array ($res)) {
-	$hook_params = array ('group_id' => $data['group_id'],
-			      'mode' => 'day',
-			      'year' => date ('Y', time () - 86400),
-			      'month' => date ('n', time () - 86400),
-			      'day' => date ('j', time () - 86400)) ;
-	plugin_hook ('scm_gather_stats', $hook_params) ;
+	$hook_params = array ('group_id' => $data['group_id']) ;
+	plugin_hook ('scm_generate_snapshots', $hook_params) ;
 }
 
 // Local Variables:

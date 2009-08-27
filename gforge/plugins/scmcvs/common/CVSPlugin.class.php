@@ -207,9 +207,9 @@ class CVSPlugin extends SCMPlugin {
 		if ($params['mode'] == 'day') {
 				db_begin();
 
-				$year = $params ('year') ;
-				$month = $params ('month') ;
-				$day = $params ('day') ;
+				$year = $params ['year'] ;
+				$month = $params ['month'] ;
+				$day = $params ['day'] ;
 				$month_string = sprintf( "%04d%02d", $year, $month );
 				$day_begin = gmmktime( 0, 0, 0, $month, $day, $year);
 				$day_end = $day_begin + 86400;
@@ -231,7 +231,7 @@ class CVSPlugin extends SCMPlugin {
 				if (!file_exists($hist_file_path) 
 				    || !is_readable($hist_file_path)
 				    || filesize($hist_file_path) == 0) {
-					echo "No history file\n" ;
+					// echo "No history file\n" ;
 					db_rollback () ;
 					return false ;
 				}
@@ -299,7 +299,7 @@ class CVSPlugin extends SCMPlugin {
 				if (!db_query_params ('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
 						      array ($month_string,
 							     $day,
-							     $group_id,
+							     $project->getID(),
 							     $cvs_co,
 							     $cvs_commit,
 							     $cvs_add))) {
@@ -324,7 +324,7 @@ class CVSPlugin extends SCMPlugin {
 					if (!db_query_params ('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
 							      array ($month_string,
 								     $day,
-								     $group_id,
+								     $project->getID(),
 								     $user_id,
 								     $usr_commit{$user} ? $usr_commit{$user} : 0,
 								     $usr_add{$user} ? $usr_add{$user} : 0))) {
