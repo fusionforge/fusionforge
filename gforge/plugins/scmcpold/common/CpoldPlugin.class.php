@@ -35,6 +35,23 @@ class CpoldPlugin extends SCMPlugin {
 		$this->cpold_root = $cpold_root;
 	}
 	
+	function getBlurb () {
+		return _('<p>This CPOLD plugin is only intended as a proof of concept.</p>') ;
+	}
+
+	function getInstructionsForAnon ($project) {
+		$b =  _('<p><b>Anonymous CPOLD Access</b></p><p>This project\'s CPOLD repository cannot be anonymously checked out yet.</p>');
+		return $b ;
+	}
+
+	function getInstructionsForRW ($project) {
+		$b = _('<p><b>Developer CPOLD Access via SSH</b></p><p>Only project developers can access the CPOLD tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
+		$b .= '<p><tt>scp -r <i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. $this->cpold_root .'/'. $project->getUnixName().'/ .</tt></p>' ;
+		}
+
+		return $b ;
+	}
+
   }
 
 // Local Variables:
