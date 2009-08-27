@@ -1,0 +1,2 @@
+plugins/scmdarcs/common/*               usr/share/gforge/plugins/scmdarcs/common/
+plugins/scmdarcs/etc/plugins/scmdarcs/* etc/gforge/plugins/scmdarcs/

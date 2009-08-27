@@ -92,6 +92,8 @@ gforge/debian/gforge-plugin-scmbzr.postinst -text
 gforge/debian/gforge-plugin-scmbzr.prerm -text
 gforge/debian/gforge-plugin-scmcpold.postinst -text
 gforge/debian/gforge-plugin-scmcpold.prerm -text
+gforge/debian/gforge-plugin-scmdarcs.postinst -text
+gforge/debian/gforge-plugin-scmdarcs.prerm -text
 gforge/debian/patches/disable-dav.dpatch -text
 gforge/debian/patches/use-snoopy-from-distro.dpatch -text
 gforge/debian/po/README -text
@@ -179,6 +181,7 @@ gforge/packaging/dirs/plugin-projectlabels -text
 gforge/packaging/dirs/plugin-scmbzr -text
 gforge/packaging/dirs/plugin-scmcpold -text
 gforge/packaging/dirs/plugin-scmcvs -text
+gforge/packaging/dirs/plugin-scmdarcs -text
 gforge/packaging/dirs/plugin-scmsvn -text
 gforge/packaging/dirs/web-apache2 -text
 gforge/packaging/docs/pkgname-web-apache2 -text
@@ -196,6 +199,7 @@ gforge/packaging/install/plugin-projectlabels -text
 gforge/packaging/install/plugin-scmbzr -text
 gforge/packaging/install/plugin-scmcpold -text
 gforge/packaging/install/plugin-scmcvs -text
+gforge/packaging/install/plugin-scmdarcs -text
 gforge/packaging/install/plugin-scmsvn -text
 gforge/packaging/install/shell-postgresql -text
 gforge/packaging/install/web-apache2 -text
@@ -915,6 +919,9 @@ gforge/plugins/scmcpold/common/scmcpold-init.php -text
 gforge/plugins/scmcpold/etc/plugins/scmcpold/config.php -text
 gforge/plugins/scmcvs/cron.d/fusionforge-plugin-scmcvs -text
 gforge/plugins/scmcvs/fusionforge-plugin-scmcvs.spec -text
+gforge/plugins/scmdarcs/common/DarcsPlugin.class.php -text
+gforge/plugins/scmdarcs/common/scmdarcs-init.php -text
+gforge/plugins/scmdarcs/etc/plugins/scmdarcs/config.php -text
 gforge/plugins/scmsvn/cron.d/fusionforge-plugin-scmsvn -text
 gforge/plugins/scmsvn/cronjobs/update_users.php -text
 gforge/plugins/scmsvn/db/scmsvn-init-mysql.sql -text

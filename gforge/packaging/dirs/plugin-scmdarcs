@@ -1,0 +1,4 @@
+etc/gforge/httpd.d
+etc/gforge/plugins/scmdarcs
+usr/share/gforge/plugins/scmdarcs/common
+var/lib/gforge/chroot/scmrepos/darcs

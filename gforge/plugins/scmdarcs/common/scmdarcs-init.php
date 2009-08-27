@@ -1,5 +1,5 @@
 <?php
-/** FusionForge CPOLD plugin
+/** FusionForge Darcs plugin
  *
  * Copyright 2009, Roland Mas
  *
@@ -22,11 +22,11 @@
  */
 
 global $gfplugins;
-require_once $gfplugins.'scmcpold/common/CpoldPlugin.class.php' ;
+require_once $gfplugins.'scmdarcs/common/DarcsPlugin.class.php' ;
 
-$CpoldPluginObject = new CpoldPlugin ;
+$DarcsPluginObject = new DarcsPlugin ;
 
-register_plugin ($CpoldPluginObject) ;
+register_plugin ($DarcsPluginObject) ;
 
 // Local Variables:
 // mode: php
