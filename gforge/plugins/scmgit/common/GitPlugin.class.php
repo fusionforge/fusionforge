@@ -58,7 +58,7 @@ class GitPlugin extends SCMPlugin {
 
 	function getInstructionsForRW ($project) {
 		$b = _('<p><b>Developer GIT Access via SSH</b></p><p>Only project developers can access the GIT tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
-		$b .= '<p><tt>git clone git+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . ':'. $this->git_root .'/'. $project->getUnixName().'/ .</tt></p>' ;
+		$b .= '<p><tt>git clone git+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . ':'. $this->git_root .'/'. $project->getUnixName().'</tt></p>' ;
 		return $b ;
 	}
 
@@ -158,12 +158,14 @@ class GitPlugin extends SCMPlugin {
 			return false;
 		}
 
-		$repo = $this->git_root . '/' . $project->getUnixName() ;
-		$unix_group = 'scm_' . $project->getUnixName() ;
+		$project_name = $project->getUnixName() ;
+		$repo = $this->git_root . '/' . $project_name ;
+		$unix_group = 'scm_' . $project_name ;
 
 		system ("mkdir -p $repo") ;
-		if (!is_dir ("$repo/.git")) {
-			system ("git init $repo") ;
+		if (!is_file ("$repo/HEAD") && !is_dir("$repo/objects") && !is_dir("$repo/refs")) {
+			system ("GIT_DIR=\"$repo\" git --bare init") ;
+			system ("echo \"Git repository for $project_name\" > $repo/description") ;
 		}
 
 		system ("chgrp -R $unix_group $repo") ;
@@ -214,6 +216,7 @@ class GitPlugin extends SCMPlugin {
 		
 		$group_name = $project->getUnixName() ;
 
+		$snapshot = $sys_scm_snapshots_path.'/'.$group_name.'-scm-latest.tar.gz';
 		$tarball = $sys_scm_tarballs_path.'/'.$group_name.'-scmroot.tar.gz';
 
 		if (! $project->usesPlugin ($this->name)) {
@@ -233,10 +236,17 @@ class GitPlugin extends SCMPlugin {
 			return false ;
 		}
 
+		$today = date ('Y-m-d') ;
 		$tmp = trim (`mktemp -d`) ;
 		if ($tmp == '') {
 			return false ;
 		}
+
+		system ("git archive --format=tar --prefix=$group_name-scm-$today/ HEAD | gzip > $tmp/snapshot.tar.gz");
+		chmod ("$tmp/snapshot.tar.gz", 0644) ;
+		copy ("$tmp/snapshot.tar.gz", $snapshot) ;
+		unlink ("$tmp/snapshot.tar.gz") ;
+
 		system ("tar czCf $toprepo $tmp/tarball.tar.gz " . $project->getUnixName()) ;
 		chmod ("$tmp/tarball.tar.gz", 0644) ;
 		copy ("$tmp/tarball.tar.gz", $tarball) ;

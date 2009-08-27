@@ -246,7 +246,7 @@ Provides: gforge-plugin-scm
 
 Package: gforge-plugin-scmgit
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, git-core, php5-cli, ${misc:Depends}
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, git-core, gitweb, php5-cli, ${misc:Depends}
 Description: collaborative development tool - Git plugin
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
