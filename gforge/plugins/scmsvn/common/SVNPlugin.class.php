@@ -92,17 +92,6 @@ class SVNPlugin extends SCMPlugin {
 
 		if ($project->usesPlugin ($this->name)) {
 
-			// SVN browser links must be displayed if
-			// project enables anon SVN or if logged-in
-			// user is a member of the group
-			$displaySvnBrowser = $project->enableAnonSCM();
-			if(session_loggedin()) {
-				$perm =& $project->getPermission(session_get_user());
-				if ($perm && is_object($perm) && !$perm->isError() && $perm->isMember()) {
-					$displaySvnBrowser = true;
-				}
-			}
-
 			// Table for summary info
 			print '<table width="100%"><tr valign="top"><td width="65%">' ;
 			print _('<p>Documentation for Subversion (sometimes referred to as "SVN") is available <a href="http://svnbook.red-bean.com/">here</a>.</p>');
@@ -148,7 +137,7 @@ class SVNPlugin extends SCMPlugin {
 			}
 
 			// SVN Snapshot
-			if ($displaySvnBrowser) {
+			if ($this->browserDisplayable ($project) {
 				$filename=$project->getUnixName().'-scm-latest.tar.gz';
 				if (file_exists($sys_scm_snapshots_path.'/'.$filename)) {
 					print '<p>[' ;
@@ -163,7 +152,7 @@ class SVNPlugin extends SCMPlugin {
 			// SVN Browsing
 			echo $HTML->boxTop(_('Repository History'));
 			echo $this->getDetailedStats(array('group_id'=>$group_id)).'<p>';
-			if ($displaySvnBrowser) {
+			if ($this->browserDisplayable ($project) {
 				echo _('<b>Browse the Subversion Tree</b><p>Browsing the SVN tree gives you a great view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
 				echo '<p>[' ;
 				echo util_make_link ("/scm/viewvc.php/?root=".$project->getUnixName(),

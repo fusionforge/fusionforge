@@ -104,17 +104,6 @@ class CVSPlugin extends SCMPlugin {
 			$cvsrootend=$project->getSCMBox().':/cvsroot/'.$project->getUnixName();
 			$cvsrootend = $project->getSCMBox().':'.$this->cvs_root.'/'.$project->getUnixName();
 
-			// CVS browser links must be displayed if
-			// project enables anon CVS or if logged-in
-			// user is a member of the group
-			$displayCvsBrowser = $project->enableAnonSCM();
-			if(session_loggedin()) {
-				$perm =& $project->getPermission(session_get_user());
-				if ($perm && is_object($perm) && !$perm->isError() && $perm->isMember()) {
-					$displayCvsBrowser = true;
-				}
-			}
-
 			// Table for summary info
 			print '<table width="100%"><tr valign="top"><td width="65%">' ;
 
@@ -149,7 +138,7 @@ class CVSPlugin extends SCMPlugin {
 			}
 			
 			// CVS Snapshot
-			if ($displayCvsBrowser) {
+			if ($this->browserDisplayable ($project)) {
 				print '<p>[' ;
 				print util_make_link ("/snapshots.php?group_id=$group_id",
 						      _('Download The Nightly CVS Tree Snapshot')
@@ -161,7 +150,7 @@ class CVSPlugin extends SCMPlugin {
 			// CVS Browsing 
 			echo $HTML->boxTop(_('Repository History'));
 			echo $this->getDetailedStats(array('group_id'=>$group_id)).'<p>';
-			if ($displayCvsBrowser){
+			if ($this->browserDisplayable ($project)) {
 				echo _('<b>Browse the CVS Tree</b><p>Browsing the CVS tree gives you a great view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
 				echo '<p>[' ;
 				echo util_make_link ("/scm/viewvc.php/?root=".$project->getUnixName(),

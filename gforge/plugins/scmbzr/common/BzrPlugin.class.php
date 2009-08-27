@@ -87,10 +87,6 @@ class BzrPlugin extends SCMPlugin {
 		}
 
 		if ($project->usesPlugin ($this->name)) {
-			// Bazaar browser links must be displayed if
-			// project enables anonymous Bazaar
-			$displayBzrBrowser = $project->enableAnonSCM();
-
 			// Table for summary info
 			print ('<table width="100%">
 				 <tr valign="top">
@@ -117,7 +113,7 @@ class BzrPlugin extends SCMPlugin {
 			print '<p><tt>bzr checkout bzr+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. $this->svn_root .'/'. $project->getUnixName().'/'._('branchname').'</tt></p>' ;
 		
 			// Bazaar Snapshot
-			if ($displaySvnBrowser) {
+			if ($this->browserDisplayable ($project) {
 				$filename=$project->getUnixName().'-scm-latest.tar.gz';
 				if (file_exists($sys_scm_snapshots_path.'/'.$filename)) {
 					print '<p>[' ;
@@ -134,7 +130,7 @@ class BzrPlugin extends SCMPlugin {
 			echo $HTML->boxTop(_('Repository History'));
 			echo _('Not implemented yet');
 			/*				echo $this->getDetailedStats(array('group_id'=>$group_id)).'<p>';
-			 if ($displaySvnBrowser) {
+			 if ($this->browserDisplayable ($project) {
 			 echo _('<b>Browse the Bazaar Tree</b><p>Browsing the Bazaar tree gives you a great view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
 			 echo '<p>[' ;
 			 echo util_make_link ("/scm/viewvc.php/?root=".$project->getUnixName(),
