@@ -6,9 +6,9 @@
 
 @DPATCH@
 diff -urNad gforge~/plugins/scmsvn/etc/plugins/scmsvn/config.php gforge/plugins/scmsvn/etc/plugins/scmsvn/config.php
---- gforge~/plugins/scmsvn/etc/plugins/scmsvn/config.php	2009-07-23 11:07:34.000000000 +0200
-+++ gforge/plugins/scmsvn/etc/plugins/scmsvn/config.php	2009-07-23 11:22:37.000000000 +0200
-@@ -7,10 +7,10 @@
+--- gforge~/plugins/scmsvn/etc/plugins/scmsvn/config.php	2009-08-19 20:55:48.000000000 +0200
++++ gforge/plugins/scmsvn/etc/plugins/scmsvn/config.php	2009-08-19 21:12:57.000000000 +0200
+@@ -7,8 +7,8 @@
  } else {
  	$default_svn_server = 'scm';
  }
@@ -17,8 +17,5 @@ diff -urNad gforge~/plugins/scmsvn/etc/plugins/scmsvn/config.php gforge/plugins/
 +$use_ssh = true;
 +$use_dav = false;
  $use_ssl = true;
--$svn_root = 'svn';
-+$svn_root = 'svnroot';
- 
- $svn_bin = "/usr/bin/svn";
+ // $svn_root = $GLOBALS['sys_chroot'].'/scmrepos/svn' ;
  
