@@ -25,18 +25,14 @@ class CVSPlugin extends SCMPlugin {
 	function CVSPlugin () {
 		global $cvs_root;
 		global $gfconfig;
-		$this->SCMPlugin () ;
+		require_once $GLOBALS['gfconfig'].'plugins/scmcvs/config.php' ;
+
 		$this->name = 'scmcvs';
 		$this->text = 'CVS';
-		$this->hooks[] = 'scm_page';
-		$this->hooks[] = 'scm_admin_update';
-		$this->hooks[] = 'scm_admin_page';
-		$this->hooks[] = 'scm_stats';
-		$this->hooks[] = 'scm_createrepo' ;
-		$this->hooks[] = 'scm_snapshots_and_tarballs' ;
-		$this->hooks[] = 'scm_plugin';
+		$this->SCMPlugin () ;
 
-		require_once $GLOBALS['gfconfig'].'plugins/scmcvs/config.php' ;
+		$this->hooks[] = 'scm_snapshots_and_tarballs' ;
+
 
 		$this->default_cvs_server = $default_cvs_server ;
 		if ($cvs_root) {
@@ -47,8 +43,6 @@ class CVSPlugin extends SCMPlugin {
 		//$this->default_cvs_server = $default_cvs_server ;
 		//$this->this_server = $this_server ;
 		$this->enabled_by_default = $enabled_by_default ;
-
-		$this->register () ;
 	}
 	
 	function getDefaultServer() {
@@ -59,31 +53,11 @@ class CVSPlugin extends SCMPlugin {
 		global $HTML;
 		
 		switch ($hookname) {
-		case 'scm_page':
-			$group_id = $params['group_id'] ;
-			$this->getPage ($group_id) ;
-			break ;
-		case 'scm_admin_update':
-			$this->adminUpdate ($params) ;
-			break ;
-		case 'scm_admin_page':
-			$this->getAdminPage ($params) ;
-			break ;
-		case 'scm_stats':
-			$this->getStats ($params) ;
-			break;
-		case 'scm_createrepo':
-			$this->createOrUpdateRepo ($params) ;
-			break;
 		case 'scm_snapshots_and_tarballs':
 			$this->generateSnapshots ($params) ;
 			break;
-		case 'scm_plugin':
-			$scm_plugins=& $params['scm_plugins'];
-			$scm_plugins[]=$this->name;
-			break;
 		default:
-			// Forgot something
+			parent::CallHook ($hookname, $params) ;
 		}
 	}
 

@@ -24,23 +24,15 @@
 class CpoldPlugin extends SCMPlugin {
 	function CpoldPlugin () {
 		global $gfconfig;
-		$this->SCMPlugin () ;
+		require_once $gfconfig.'plugins/scmcpold/config.php' ;
+
 		$this->name = 'scmcpold';
 		$this->text = 'CPOLD';
-		$this->hooks[] = 'scm_page';
-		$this->hooks[] = 'scm_admin_update';
-		$this->hooks[] = 'scm_admin_page';
- 		$this->hooks[] = 'scm_stats';
-		$this->hooks[] = 'scm_plugin';
-		$this->hooks[] = 'scm_createrepo';
-		
-		require_once $gfconfig.'plugins/scmcpold/config.php' ;
+		$this->SCMPlugin () ;
 		
 		$this->default_cpold_server = $default_cpold_server ;
 		$this->enabled_by_default = $enabled_by_default ;
 		$this->cpold_root = $cpold_root;
-		
-		$this->register () ;
 	}
 	
   }

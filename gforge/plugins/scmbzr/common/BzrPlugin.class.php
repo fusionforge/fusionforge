@@ -24,23 +24,15 @@
 class BzrPlugin extends SCMPlugin {
 	function BzrPlugin () {
 		global $gfconfig;
-		$this->SCMPlugin () ;
-		$this->name = 'scmbzr';
-		$this->text = 'Bazaar';
-		$this->hooks[] = 'scm_page';
-		$this->hooks[] = 'scm_admin_update';
-		$this->hooks[] = 'scm_admin_page';
- 		$this->hooks[] = 'scm_stats';
-		$this->hooks[] = 'scm_plugin';
-		$this->hooks[] = 'scm_createrepo';
-
 		require_once $gfconfig.'plugins/scmbzr/config.php' ;
 		
+		$this->name = 'scmbzr';
+		$this->text = 'Bazaar';
+		$this->SCMPlugin () ;
+
 		$this->default_bzr_server = $default_bzr_server ;
 		$this->enabled_by_default = $enabled_by_default ;
 		$this->bzr_root = $bzr_root;
-
-		$this->register () ;
 	}
 	
 	function getDefaultServer() {
