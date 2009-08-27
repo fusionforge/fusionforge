@@ -282,8 +282,6 @@ class SVNPlugin extends SCMPlugin {
 			
 			xml_parser_free ($xml_parser);
 
-			//..................
-
 			// inserting group results in stats_cvs_groups
 			if (!db_query_params ('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
 					      array ($month_string,

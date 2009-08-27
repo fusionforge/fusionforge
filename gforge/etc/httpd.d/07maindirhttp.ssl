@@ -67,6 +67,14 @@
 
 	Alias {sys_urlprefix} {usr_share_gforge}/www/
 
+        Alias /anonscm/ {var_lib_gforge}/chroot/scmrepos/
+        <DirectoryMatch {var_lib_gforge}/chroot/scmrepos/[^/]*>
+            Options -Indexes
+        </DirectoryMatch>
+        <DirectoryMatch {var_lib_gforge}/chroot/scmrepos/[^/]*/.*>
+            Options +Indexes
+        </DirectoryMatch>
+
         RewriteEngine on
         RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK)
         RewriteRule .* - [F]

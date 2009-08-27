@@ -59,7 +59,9 @@ class CpoldPlugin extends SCMPlugin {
 	}
 
 	function getInstructionsForAnon ($project) {
-		$b =  _('<p><b>Anonymous CPOLD Access</b></p><p>This project\'s CPOLD repository cannot be anonymously checked out yet.</p>');
+		$b =  sprintf (_('<p><b>Anonymous CPOLD Access</b></p><p>This project\'s CPOLD repository can be accessep anonymously at %s.</p>'),
+			       util_make_link ('/anonscm/cpold/'.$project->getUnixName().'/',
+					       util_make_url ('/anonscm/cpold/'.$project->getUnixName().'/'))) ;
 		return $b ;
 	}
 

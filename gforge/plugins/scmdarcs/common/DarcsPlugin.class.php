@@ -47,11 +47,10 @@ class DarcsPlugin extends SCMPlugin {
 	}
 
 	function getInstructionsForAnon ($project) {
-		$b =  _('<p><b>Anonymous Darcs Access</b></p><p>This project\'s Darcs repository cannot be anonymously checked out yet.</p>');
+		$b =  _('<p><b>Anonymous Darcs Access</b></p><p>This project\'s Darcs repository can be checked out through anonymous access with the following command.</p>');
 		$b .= '<p>' ;
-		$b .= '<tt>bzr checkout http://'.$project->getSCMBox().$this->bzr_root.'/'.$project->getUnixName().'/'._('branchname').'</tt><br />';
+		$b .= '<tt>darcs get '.util_make_url ('/anonscm/darcs/'.$project->getUnixName().'/').'</tt><br />';
 		$b .= '</p>';
-		return $b ;
 		return $b ;
 	}
 

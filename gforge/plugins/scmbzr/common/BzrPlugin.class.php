@@ -53,9 +53,9 @@ class BzrPlugin extends SCMPlugin {
 	}
 
 	function getInstructionsForAnon ($project) {
-		$b =  _('<p><b>Anonymous Bazaar Access</b></p><p>This project\'s Bazaar repository can be checked out through anonymous access with the following command(s).</p>');
+		$b =  _('<p><b>Anonymous Bazaar Access</b></p><p>This project\'s Bazaar repository can be checked out through anonymous access with the following command.</p>');
 		$b .= '<p>' ;
-		$b .= '<tt>bzr checkout http://'.$project->getSCMBox().$this->bzr_root.'/'.$project->getUnixName().'/'._('branchname').'</tt><br />';
+		$b .= '<tt>bzr checkout '.util_make_url ('/anonscm/bzr/'.$project->getUnixName().'/').'</tt><br />';
 		$b .= '</p>';
 		return $b ;
 	}

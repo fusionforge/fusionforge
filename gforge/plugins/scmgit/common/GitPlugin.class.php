@@ -46,7 +46,10 @@ class GitPlugin extends SCMPlugin {
 	}
 
 	function getInstructionsForAnon ($project) {
-		$b =  _('<p><b>Anonymous GIT Access</b></p><p>This project\'s GIT repository cannot be anonymously checked out yet.</p>');
+		$b =  _('<p><b>Anonymous Git Access</b></p><p>This project\'s Git repository can be checked out through anonymous access with the following command.</p>');
+		$b .= '<p>' ;
+		$b .= '<tt>git clone '.util_make_url ('/anonscm/git/'.$project->getUnixName().'/').'</tt><br />';
+		$b .= '</p>';
 		return $b ;
 	}
 
