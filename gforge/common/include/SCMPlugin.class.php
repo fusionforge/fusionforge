@@ -164,6 +164,28 @@ abstract class SCMPlugin extends Plugin {
 		}
 	}
 
+	function AdminUpdate ($params) {
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
+		}
+		
+		if ($project->usesPlugin ($this->name) ) {
+			if ($params['scm_enable_anonymous']) {
+				$project->SetUsesAnonSCM(true);
+			} else {
+				$project->SetUsesAnonSCM(false);
+			}
+		}
+	}
+	
+	function getAdminPage ($params) {
+		$group =& group_get_object($params['group_id']);
+		if ( $group->usesPlugin ( $this->name ) && $group->isPublic()) {
+			print '<p><input type="checkbox" name="scm_enable_anonymous" value="1" '.$this->c($group->enableAnonSCM()).' /><strong>'._('Enable Anonymous Access').'</strong></p>';
+		}
+	}
+	
 	function checkParams ($params) {
 		$group_id = $params['group_id'] ;
 		$project =& group_get_object($group_id);

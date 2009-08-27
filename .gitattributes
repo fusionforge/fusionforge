@@ -87,6 +87,8 @@ gforge/debian/dsf-po/fi.po -text
 gforge/debian/dsf-po/gl.po -text
 gforge/debian/dsf-po/pt.po -text
 gforge/debian/dsf-po/ru.po -text
+gforge/debian/gforge-plugin-scmbzr.postinst -text
+gforge/debian/gforge-plugin-scmbzr.prerm -text
 gforge/debian/gforge-plugin-scmcpold.postinst -text
 gforge/debian/gforge-plugin-scmcpold.prerm -text
 gforge/debian/patches/disable-dav.dpatch -text
