@@ -27,6 +27,7 @@ class BzrPlugin extends SCMPlugin {
 		$this->SCMPlugin () ;
 		$this->name = 'scmbzr';
 		$this->text = 'Bazaar';
+		$this->hooks[] = 'scm_generate_snapshots' ;
 
 		require_once $gfconfig.'plugins/scmbzr/config.php' ;
 		
@@ -34,6 +35,13 @@ class BzrPlugin extends SCMPlugin {
 		$this->enabled_by_default = $enabled_by_default ;
 		$this->bzr_root = $bzr_root;
 
+		$this->main_branch_names = array () ;
+		$this->main_branch_names[] = 'trunk' ;
+		$this->main_branch_names[] = 'master' ;
+		$this->main_branch_names[] = 'main' ;
+		$this->main_branch_names[] = 'head' ;
+		$this->main_branch_names[] = 'HEAD' ;
+		
 		$this->register () ;
 	}
 	
@@ -108,6 +116,70 @@ class BzrPlugin extends SCMPlugin {
 		} else {
 			system ("chmod -R g+wXs,o-rwx $repo") ;
 		}
+	}
+
+	function generateSnapshots ($params) {
+		global $sys_scm_snapshots_path ;
+		global $sys_scm_tarballs_path ;
+
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
+		}
+		
+		$group_name = $project->getUnixName() ;
+
+		$snapshot = $sys_scm_snapshots_path.'/'.$group_name.'-scm-latest.tar.gz';
+		$tarball = $sys_scm_tarballs_path.'/'.$group_name.'-scmroot.tar.gz';
+
+		if (! $project->usesPlugin ($this->name)
+		    || ! $project->enableAnonSCM()) {
+			unlink ($snapshot) ;
+			unlink ($tarball) ;
+			return false;
+		}
+
+		$toprepo = $this->bzr_root ;
+		$repo = $toprepo . '/' . $project->getUnixName() ;
+
+		if (!is_dir ($repo) || !is_file ("$repo/format")) {
+			unlink ($snapshot) ;
+			unlink ($tarball) ;
+			return false ;
+		}
+
+		$tmp = trim (`mktemp -d`) ;
+		if ($tmp == '') {
+			return false ;
+		}
+		$today = date ('Y-m-d') ;
+		$dir = $project->getUnixName ()."-$today" ;
+		system ("mkdir -p $tmp") ;
+		
+		$code = 0 ;
+		$branch = '' ;
+		foreach ($this->main_branch_names as $bname) {
+			system ("bzr ls file://$repo/$bname > /dev/null 2>&1", $code) ;
+			if ($code == 0) {
+				$branch = $bname ;
+				break ;
+			}
+		}
+		if ($branch != '') {
+			system ("cd $tmp ; bzr export $tmp/snapshot.tar.gz $repo/$bname") ;
+			chmod ("$tmp/snapshot.tar.gz", 0644) ;
+			copy ("$tmp/snapshot.tar.gz", $snapshot) ;
+			unlink ("$tmp/snapshot.tar.gz") ;
+			system ("rm -rf $tmp/$dir") ;
+		} else {
+			unlink ($snapshot) ;
+		}
+
+		system ("tar czCf $toprepo $tmp/tarball.tar.gz " . $project->getUnixName()) ;
+		chmod ("$tmp/tarball.tar.gz", 0644) ;
+		copy ("$tmp/tarball.tar.gz", $tarball) ;
+		unlink ("$tmp/tarball.tar.gz") ;
+		system ("rm -rf $tmp") ;
 	}
   }
 
