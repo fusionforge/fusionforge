@@ -1,4 +1,2 @@
-plugins/scmcpold/bin/*                usr/share/gforge/plugins/scmcpold/bin/
 plugins/scmcpold/common/*             usr/share/gforge/plugins/scmcpold/common/
-plugins/scmcpold/cronjobs/*           usr/share/gforge/plugins/scmcpold/cronjobs/
 plugins/scmcpold/etc/plugins/scmcpold/* etc/gforge/plugins/scmcpold/
