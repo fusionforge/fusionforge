@@ -296,7 +296,7 @@ class SVNPlugin extends SCMPlugin {
 			}
 				
 			// building the user list
-			$user_list = array_unique( array_merge( array_keys( $usr_add ), array_keys( $usr_commit ) ) );
+			$user_list = array_unique( array_merge( array_keys( $usr_adds ), array_keys( $usr_updates ) ) );
 
 			foreach ( $user_list as $user ) {
 				// trying to get user id from user name
@@ -312,8 +312,8 @@ class SVNPlugin extends SCMPlugin {
 							     $day,
 							     $project->getID(),
 							     $user_id,
-							     $usr_commit[$user] ? $usr_commit[$user] : 0,
-							     $usr_add[$user] ? $usr_add[$user] : 0))) {
+							     $usr_updates[$user] ? $usr_updates[$user] : 0,
+							     $usr_adds[$user] ? $usr_adds[$user] : 0))) {
 					echo "Error while inserting into stats_cvs_user\n" ;
 					db_rollback () ;
 					return false ;

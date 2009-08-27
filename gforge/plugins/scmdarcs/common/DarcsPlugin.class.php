@@ -147,8 +147,211 @@ class DarcsPlugin extends SCMPlugin {
 		unlink ("$tmp/tarball.tar.gz") ;
 		system ("rm -rf $tmp") ;
 	}
-  }
 
+	function gatherStats ($params) {
+		global  $adds, $deletes, $updates, $commits,
+			$usr_adds, $usr_deletes, $usr_updates;
+		
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
+		}
+		
+		if (! $project->usesPlugin ($this->name)) {
+			return false;
+		}
+		
+		if ($params['mode'] == 'day') {
+			db_begin();
+		
+			$year = $params ['year'] ;
+			$month = $params ['month'] ;
+			$day = $params ['day'] ;
+			$month_string = sprintf( "%04d%02d", $year, $month );
+			$start_time = gmmktime( 0, 0, 0, $month, $day, $year);
+			$end_time = $start_time + 86400;
+		
+			$updates = 0 ;
+			$adds = 0 ;
+			$deletes = 0;
+			$usr_adds = array () ;
+			$usr_updates = array () ;
+			$usr_deletes = array ();
+		
+			$repo = $this->svn_root . '/' . $project->getUnixName() ;
+			if (!is_dir ($repo) || !is_dir ("$repo/_darcs")) {
+				echo "No repository\n" ;
+				db_rollback () ;
+				return false ;
+			}
+		
+			$from_date = date("c", $start_time);
+			$to_date   = date("c", $end_time);
+			$pipe = popen("darcs changes --repodir='$repo' "
+				      ."--match 'date \"between $from_date and $to_date\"' "
+				      ."--xml -s\n", 'r');
+		
+			// cleaning stats_cvs_* table for the current day
+			$res = db_query_params ('DELETE FROM stats_cvs_group WHERE month=$1 AND day=$2 AND group_id=$3',
+						array ($month_string,
+						       $day,
+						       $project->getID())) ;
+			if(!$res) {
+				echo "Error while cleaning stats_cvs_group\n" ;
+				db_rollback () ;
+				return false ;
+			}
+		
+			$res = db_query_params ('DELETE FROM stats_cvs_user WHERE month=$1 AND day=$2 AND group_id=$3',
+						array ($month_string,
+						       $day,
+						       $project->getID())) ;
+			if(!$res) {
+				echo "Error while cleaning stats_cvs_user\n" ;
+				db_rollback () ;
+				return false ;
+			}
+		
+			$xml_parser = xml_parser_create();
+			xml_set_element_handler($xml_parser, "DarcsPluginStartElement", "DarcsPluginEndElement");
+		
+			// Analyzing history stream
+			while (!feof($pipe) &&
+			       $data = fgets ($pipe, 4096)) {
+				
+				if (!xml_parse ($xml_parser, $data, feof ($pipe))) {
+					debug("Unable to parse XML with error " .
+					      xml_error_string(xml_get_error_code($xml_parser)) .
+					      " on line " .
+					      xml_get_current_line_number($xml_parser));
+					db_rollback () ;
+					return false ;
+					break;
+				}
+			}
+			
+			xml_parser_free ($xml_parser);
+			
+			//..................
+		
+			// inserting group results in stats_cvs_groups
+		
+			if (!db_query_params ('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
+					      array ($month_string,
+						     $day,
+						     $project->getID(),
+						     0,
+						     $updates,
+						     $adds))) {
+				echo "Error while inserting into stats_cvs_group\n" ;
+				db_rollback () ;
+				return false ;
+			}
+				
+			// build map for email -> login 
+		
+			$email_login = array();
+			$email_login_fn = $repo."/_darcs/email-login.txt"; 
+			if (!file_exists($email_login_fn))
+			{
+				$email_login_fn = $repo."/.email-login.txt";
+			};
+			if (!file_exists($email_login_fn))
+			{
+				unset($email_login_fn);
+			};
+			
+			if (isset($email_login_fn))
+			{
+				$fh = fopen($email_login_fn, 'r');
+				while (!feof($fh))
+				{
+					$a = explode(" ", fgets($fh));
+					if (isset($a[1]))
+					{
+						$email_login[$a[0]] = rtrim($a[1]);
+					};
+				};
+				fclose($fh);
+			};
+		
+			// building the user list
+			$user_list = array_unique( array_merge( array_keys( $usr_adds ), array_keys( $usr_updates ) ) );
+		
+			foreach ( $user_list as $user ) {
+				// trying to get user id from darcs user name
+				$id = $user;
+				$tmp_email = explode("<", $id, 2);
+				if (isset($tmp_email[1]))
+				{
+				  $tmp_email = explode(">", $tmp_email[1]);
+				  $id = $tmp_email[0];
+				}
+				if (isset($email_login[$id]))
+				{
+				  $id = $email_login[$id];
+				}
+		
+				$u = &user_get_object_by_name ($id) ;
+				if ($u) {
+					$user_id = $u->getID();
+				} else {
+					continue;
+				}
+					
+				if (!db_query_params ('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
+						      array ($month_string,
+							     $day,
+							     $project->getID(),
+							     $user_id,
+							     $usr_updates[$user] ? $usr_updates[$user] : 0,
+							     $usr_adds[$user] ? $usr_adds[$user] : 0))) {
+					echo "Error while inserting into stats_cvs_user\n" ;
+					db_rollback () ;
+					return false ;
+				}
+			}
+		
+			db_commit();
+		}
+	}
+		
+	function DarcsPluginStartElement($parser, $name, $attrs) {
+		global $last_user, $commits, 
+		       $adds, $updates, $deletes,
+		       $usr_adds, $usr_updates, $usr_deletes;
+		switch($name) {
+		case "PATCH":
+			$last_user = $attrs['AUTHOR'];
+			$commits++;
+			break;
+		case "REMOVE_FILE":
+		case "REMOVE_DIRECTORY":
+			$deletes++;
+			if ($last_user) {
+				$usr_deletes[$last_user]++;
+			}
+			break;
+		case "MOVE":
+		case "MODIFY_FILE":
+			$updates++;
+			if ($last_user) {
+				$usr_updates[$last_user]++;
+			}
+			break;
+		case "ADD_FILE":
+		case "ADD_DIRECTORY":
+			$adds++;
+			if ($last_user) {
+				$usr_adds[$last_user]++;
+			}
+			break;
+		}
+	}
+	
+	function DarcsPluginEndElement ($parser, $name) {
+	}
+  }
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
