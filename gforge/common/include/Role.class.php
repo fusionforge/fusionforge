@@ -401,7 +401,7 @@ class Role extends Error {
 					if (!$res || db_affected_rows($res) < 1) {
 						$res = db_query_params ('INSERT INTO role_setting (role_id, section_name, ref_id, value) VALUES ($1, $2, $3, $4)',
 									array ($this->getID(),
-									       $usecrion_name,
+									       $usection_name,
 									       $uref_id,
 									       $uvalue)) ;
 						if (!$res) {
