@@ -15,7 +15,8 @@
  * leads to creation of new group with Pending status, suitable for approval.
  *
  * Portions Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2002-2004 (c) GForge Team
+ * Portions Copyright 2002-2004 (c) GForge Team
+ * Portions Copyright 2002-2009 (c) Roland Mas
  * http://gforge.org/
  *
  * This file is part of GForge.
@@ -65,14 +66,13 @@ if (getStringFromRequest('submit')) {
 		form_release_key(getStringFromRequest("form_key"));
 		// $feedback .= _('Site has SCM enabled, but no SCM was chosen.');
 	} else {
-		$scm_host = $sys_cvs_host;
-		if ($sys_use_scm && $scm) {
+		$scm_host = '';
+		$plugin = false ;
+		if ($sys_use_scm && $scm && $scm != 'noscm') {
 			$plugin = plugin_get_object($scm);
-			$scm_host = $plugin->getDefaultServer();
-		} else if ($sys_use_scm && isset($sys_cvs_host)) {
-			$scm_host = $sys_cvs_host;
-		} else {
-			$scm_host = '';
+			if ($plugin) {
+				$scm_host = $plugin->getDefaultServer();
+			}
 		}
 
 		$group = new Group();
@@ -87,9 +87,13 @@ if (getStringFromRequest('submit')) {
 			$scm_host,
 			$is_public
 		);
-		if ($res && $sys_use_scm) {
-			$res = $group->setPluginUse($scm,true);
+		if ($res && $sys_use_scm && $plugin) {
+			$group->setUsesSCM (true) ;
+			$res = $group->setPluginUse ($scm, true);
+		} else {
+			$group->setUsesSCM (false) ;
 		}
+
 		if (!$res) {
 			form_release_key(getStringFromRequest("form_key"));
 			$feedback .= $group->getErrorMessage();
@@ -148,35 +152,18 @@ site_header(array('title'=>_('Project Information')));
 <input type="text" maxlength="15" size="15" name="unix_name" value="<?php echo htmlspecialchars(stripslashes($unix_name)); ?>"/>
 
 <?php
-	if ($sys_use_scm) {
-		$SCMFactory=new SCMFactory();
-		$scm_plugins=$SCMFactory->getSCMs();
-		if (count($scm_plugins)!=0) {	
-			if (count($scm_plugins)==1) {
-				printf(_('As there is only one SCM system, then this will be selected automatically. <strong>%1$s</strong> will be selected.'), $scm_plugins[0]).'<br /><br />';
-				echo '<input type="hidden" name="scm" value="'. $scm_plugins[0].'">';
-			} else {
-				echo _('<h3>6. SCM</h3><p>You can choose among different SCM for your project, but just one. Please select the SCM system you want to use.</p>')."\n";
-				echo '<table><tbody><tr><td><strong>'._('SCM Repository').':</strong></td>';
-				$checked=true;
-				foreach($scm_plugins as $plugin) {
-					$myPlugin= plugin_get_object($plugin);
-					echo '<td><input type="radio" name="scm" ';
-					echo 'value="'.$myPlugin->name.'"';
-					if (isset($scm) && strcmp($scm, $myPlugin->name) == 0) {
-						echo ' checked="checked"';
-					} elseif (!isset($scm) && $checked) {
-						echo ' checked="checked"';
-						$checked = false;
-					}
-					echo '>'.$myPlugin->text.'</td>';
-				}
-				echo '</tr></tbody></table>'."\n";
-			}
-		} else {
-			echo 'Error - Site has SCM but no plugins registered';
-		}
+	$SCMFactory = new SCMFactory() ;
+$scm_plugins=$SCMFactory->getSCMs() ;
+if ($sys_use_scm && count($scm_plugins) > 0) {	
+	echo _('<h3>6. SCM</h3><p>You can choose among different SCM for your project, but just one (or none at all). Please select the SCM system you want to use.</p>')."\n";
+	echo '<table><tbody><tr><td><strong>'._('SCM Repository').':</strong></td>';
+	echo '<td><input type="radio" name="scm" value="noscm" checked="checked">'._('No SCM').'</td>';
+	foreach($scm_plugins as $plugin) {
+		$myPlugin= plugin_get_object($plugin);
+		echo '<td><input type="radio" name="scm" value="'.$myPlugin->name.'">'.$myPlugin->text.'</td>';
 	}
+	echo '</tr></tbody></table>'."\n";
+}
 
 ?>
 <?php
@@ -207,5 +194,9 @@ site_header(array('title'=>_('Project Information')));
 
 site_footer(array());
 
-?>
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
+?>
