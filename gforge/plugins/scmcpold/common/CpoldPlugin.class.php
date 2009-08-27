@@ -52,7 +52,7 @@ class CpoldPlugin extends SCMPlugin {
 
 	function getInstructionsForRW ($project) {
 		$b = _('<p><b>Developer CPOLD Access via SSH</b></p><p>Only project developers can access the CPOLD tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
-		$b .= '<p><tt>scp -r <i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. $this->cpold_root .':'. $project->getUnixName().'/ .</tt></p>' ;
+		$b .= '<p><tt>scp -r <i>'._('developername').'</i>@' . $project->getSCMBox() . ':'. $this->cpold_root .'/'. $project->getUnixName().'/ .</tt></p>' ;
 		return $b ;
 	}
 
