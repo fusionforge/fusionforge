@@ -200,6 +200,10 @@ class CVSPlugin extends SCMPlugin {
 			return false ;
 		}
 		
+		if (! $project->usesPlugin ($this->name)) {
+			return false;
+		}
+
 		if ($params['mode'] == 'day') {
 				db_begin();
 
@@ -212,6 +216,7 @@ class CVSPlugin extends SCMPlugin {
 
 				$repo = $this->cvs_root . '/' . $project->getUnixName() ;
 				if (!is_dir ($repo) || !is_dir ("$repo/CVSROOT")) {
+					echo "No repository\n" ;
 					db_rollback () ;
 					return false ;
 				}
@@ -226,12 +231,14 @@ class CVSPlugin extends SCMPlugin {
 				if (!file_exists($hist_file_path) 
 				    || !is_readable($hist_file_path)
 				    || filesize($hist_file_path) == 0) {
+					echo "No history file\n" ;
 					db_rollback () ;
 					return false ;
 				}
 				
 				$hist_file =& fopen( $hist_file_path, 'r' );
 				if ( ! $hist_file ) {
+					echo "Unreadable history\n" ;
 					db_rollback () ;
 					return false ;
 				}
@@ -242,6 +249,7 @@ class CVSPlugin extends SCMPlugin {
 							       $day,
 							       $project->getID())) ;
 				if(!$res) {
+					echo "Error while cleaning stats_cvs_group\n" ;
 					db_rollback () ;
 					return false ;
 				}
@@ -251,6 +259,7 @@ class CVSPlugin extends SCMPlugin {
 							       $day,
 							       $project->getID())) ;
 				if(!$res) {
+					echo "Error while cleaning stats_cvs_user\n" ;
 					db_rollback () ;
 					return false ;
 				}
@@ -294,6 +303,7 @@ class CVSPlugin extends SCMPlugin {
 							     $cvs_co,
 							     $cvs_commit,
 							     $cvs_add))) {
+					echo "Error while inserting into stats_cvs_group\n" ;
 					db_rollback () ;
 					return false ;
 				}
@@ -318,10 +328,10 @@ class CVSPlugin extends SCMPlugin {
 								     $user_id,
 								     $usr_commit{$user} ? $usr_commit{$user} : 0,
 								     $usr_add{$user} ? $usr_add{$user} : 0))) {
+						echo "Error while inserting into stats_cvs_user\n" ;
 						db_rollback () ;
 						return false ;
 					}
-			
 				}
 		}
 		db_commit();
