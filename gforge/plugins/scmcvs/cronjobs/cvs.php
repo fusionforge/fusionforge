@@ -29,7 +29,7 @@ require $gfcommon.'include/cron_utils.php';
 require_once $gfcommon.'mail/MailingList.class.php';
 require_once $gfcommon.'mail/MailingListFactory.class.php';
 
-require_once $gfcommon.'include/SCM.class.php' ;
+require_once $gfcommon.'include/SCMPlugin.class.php' ;
 
 $err='';
 

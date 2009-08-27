@@ -48,7 +48,7 @@ if (db_numrows($result)) {
   require_once('common/include/PluginManager.class.php') ;
 
   // SCM-specific plugins subsystem
-  require_once('common/include/SCM.class.php') ;
+  require_once('common/include/SCMPlugin.class.php') ;
 
   setup_plugin_manager () ;
 
