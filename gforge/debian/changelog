@@ -32,6 +32,7 @@ gforge (4.8+scmrefactor-1) UNRELEASED; urgency=low
 
   * Stop shipping cvs_dump.pl and cvs_update.pl now that their function is
     fulfilled by the plugin hook.
+  * Ditto for svn_dump.pl and svn_update.pl.
 
  -- Roland Mas <lolando@debian.org>  Sun, 19 Jul 2009 11:38:11 +0200
 
