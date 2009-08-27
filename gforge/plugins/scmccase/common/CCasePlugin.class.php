@@ -22,7 +22,7 @@
  * USA
  */
 
-class CCasePlugin extends SCM {
+class CCasePlugin extends.SCMPlugin {
 	function CCasePlugin () {
 		global $gfconfig;
 		$this->SCM () ;

@@ -21,7 +21,7 @@
  * USA
  */
 
-class BzrPlugin extends SCM {
+class BzrPlugin extends.SCMPlugin {
 	function BzrPlugin () {
 		global $gfconfig;
 		$this->SCM () ;

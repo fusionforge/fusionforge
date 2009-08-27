@@ -21,7 +21,7 @@
  * USA
  */
 
-class CVSPlugin extends SCM {
+class CVSPlugin extends.SCMPlugin {
 	function CVSPlugin () {
 		global $cvs_root;
 		global $gfconfig;

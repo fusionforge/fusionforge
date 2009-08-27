@@ -2,7 +2,7 @@
 /**
  * FusionForge source control management
  *
- * Copyright 2004, Roland Mas
+ * Copyright 2004-2009, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -24,12 +24,12 @@
 
 require_once $gfcommon.'include/scm.php';
 
-class SCM extends Plugin {
+class SCMPlugin extends Plugin {
 	/**
-	 * SCM() - constructor
+	 * SCMPlugin() - constructor
 	 *
 	 */
-	function SCM () {
+	function SCMPlugin () {
 		$this->Plugin() ;
 	}
 
@@ -37,6 +37,82 @@ class SCM extends Plugin {
 		global $scm_list ;
 
 		$scm_list[] = $this->name ;
+	}
+
+	function browserDisplayable ($project) {
+		if ($project->usesPlugin($this->name)
+		    && $project->enableAnonSCM()) {
+			return true ;
+		} else {
+			return false ;
+		}
+	}
+
+	function displayBrowser ($project) {
+		if ($this->browserDisplayable ($project)) {
+			// ...
+		} else {
+			return '' ;
+		}
+	}
+
+	function createOrUpdateRepo ($params) {
+		$group_id = $params['group_id'] ;
+
+		$project =& group_get_object($group_id);
+		if (!$project || !is_object($project)) {
+			return false;
+		} elseif ($project->isError()) {
+			return false;
+		}
+		
+		if (! $project->usesPlugin ($this->name)) {
+			return false;
+		}
+
+		// ...
+	}
+		
+	function gatherStats ($params) {
+		$group_id = $params['group_id'] ;
+
+		$project =& group_get_object($group_id);
+		if (!$project || !is_object($project)) {
+			return false;
+		} elseif ($project->isError()) {
+			return false;
+		}
+		
+		if (! $project->usesPlugin ($this->name)) {
+			return false;
+		}
+
+		// ...
+	}
+		
+	function generateSnapshots ($params) {
+		$group_id = $params['group_id'] ;
+
+		$project =& group_get_object($group_id);
+		if (!$project || !is_object($project)) {
+			return false;
+		} elseif ($project->isError()) {
+			return false;
+		}
+
+		$group_name = $project->getUnixName();
+
+		$snapshot = $sys_scm_snapshots_path.'/'.$group_name.'-scm-latest.tar.gz';
+		$tarball = $sys_scm_tarballs_path.'/'.$group_name.'-scmroot.tar.gz';
+
+		if (! $project->usesPlugin ($this->name)
+		    || ! $project->enableAnonSCM()) {
+			unlink ($snapshot) ;
+			unlink ($tarball) ;
+			return false;
+		}
+
+		// ...
 	}
 }
 
