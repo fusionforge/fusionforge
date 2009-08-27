@@ -189,25 +189,29 @@ class GitPlugin extends SCMPlugin {
 			}
 		}
 
-/*		$fname = '/etc/gforge/plugins/scmdarcs/config.py' ;
+		$config_dir = '/etc/gforge/plugins/scmgit' ;
+		$config_file = $config_dir . '/gitweb.conf' ;
+		$config_f = fopen ($config_file.'.new', 'w') ;
+		$rootdir = $this->git_root;
+		fwrite($config_f, "\n\$projectroot = \"$rootdir\";");
+		fwrite($config_f, "\n\$stylesheet = \"/gitweb.css\";");
+		fwrite($config_f, "\n\$projects_list = \"$configdir/gitweb.list\";");
+		fwrite($config_f, "\n\@git_base_url_list = \"". util_make_url ('/anonscm/git/'.$project->getUnixName().'/') . " \"");
+		fwrite($config_f, "\n\$logo = \"/git-logo.png\";");
+		fwrite($config_f, "\n$favicon = \"/git-favicon.png\";");
+		fwrite($config_f, "\n\$prevent_xss = true;");
+		fclose($config_f);
+		chmod ($fname.'.new', 0644) ;
+
+		$fname = $configdir . '/gitweb.list' ;
 
 		$f = fopen ($fname.'.new', 'w') ;
 		foreach ($list as $project) {
-			$classname = str_replace ('-', '_',
-						  'repo_' . $project->getUnixName()) ;
-			
-			$repo = $this->git_root . '/' . $project->getUnixName() ;
-			fwrite ($f, "class: $classname\n"
-				."\treponame = $classname\n"
-			       ."\trepodir = $repo\n"
-				."\trepourl = " . util_make_url ('/anonscm/git/'.$project->getUnixName().'/') . "\n"
-				."\trepoprojurl = " . util_make_url ('/projects/'.$project->getUnixName().'/') . "\n"
-				. "\n") ;
+			fwrite ($f, $project->getUnixName() . "\n");
 		}
 		fclose ($f) ;
 		chmod ($fname.'.new', 0644) ;
-		rename ($fname.'.new', $fname) ;
-*/
+		rename ($fname.'.new', $config_file) ;
 	}
 
 	function generateSnapshots ($params) {
