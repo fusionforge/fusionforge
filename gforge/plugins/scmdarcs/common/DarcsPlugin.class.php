@@ -44,8 +44,29 @@ class DarcsPlugin extends SCMPlugin {
 		return $this->default_darcs_server ;
 	}
 
+	function printShortStats ($params) {
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
+		}
+		
+		if ($project->usesPlugin($this->name)) {
+			$result = db_query_params('SELECT sum(commits) AS commits, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
+						  array ($project->getID())) ;
+			$commit_num = db_result($result,0,'commits');
+			$add_num    = db_result($result,0,'adds');
+			if (!$commit_num) {
+				$commit_num=0;
+			}
+			if (!$add_num) {
+				$add_num=0;
+			}
+			echo ' (Darcs: '.sprintf(_('<strong>%1$s</strong> commits, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
+		}
+	}
+	
 	function getBlurb () {
-		return _('<p>This Darcs plugin is not fully implemented yet.</p>') ;
+		return _('<p>Documentation for Darcs is available <a href="http://darcs.net/">here</a>.</p>') ;
 	}
 
 	function getInstructionsForAnon ($project) {
@@ -183,16 +204,25 @@ class DarcsPlugin extends SCMPlugin {
 		$fname = '/etc/gforge/plugins/scmdarcs/config.py' ;
 
 		$f = fopen ($fname.'.new', 'w') ;
+
+		fwrite ($f, "class base:\n"
+			."\tdarcslogo = '".util_make_url ('/plugins/scmdarcs/darcsweb/darcs.png')."'\n"
+			."\tdarcsfav = '".util_make_url ('/plugins/scmdarcs/darcsweb/minidarcs.png')."'\n"
+			."\tcssfile = '".util_make_url ('/plugins/scmdarcs/darcsweb/style.css')."'\n"
+			. "\n") ;
+
 		foreach ($list as $project) {
 			$classname = str_replace ('-', '_',
 						  'repo_' . $project->getUnixName()) ;
 			
 			$repo = $this->darcs_root . '/' . $project->getUnixName() ;
-			fwrite ($f, "class: $classname\n"
-				."\treponame = $classname\n"
-			       ."\trepodir = $repo\n"
-				."\trepourl = " . util_make_url ('/anonscm/darcs/'.$project->getUnixName().'/') . "\n"
-				."\trepoprojurl = " . util_make_url ('/projects/'.$project->getUnixName().'/') . "\n"
+			fwrite ($f, "class $classname:\n"
+				."\treponame = '".$project->getUnixName()."'\n"
+				."\t".'repodesc = """'.$project->getPublicName().'"""'."\n"
+				."\trepodir = '$repo'\n"
+				."\trepourl = '" . util_make_url ('/anonscm/darcs/'.$project->getUnixName().'/') . "'\n"
+				."\trepoprojurl = '" . util_make_url ('/projects/'.$project->getUnixName().'/') . "'\n"
+				."\trepoencoding = 'utf8'\n"
 				. "\n") ;
 		}
 		fclose ($f) ;
@@ -280,7 +310,7 @@ class DarcsPlugin extends SCMPlugin {
 			$usr_updates = array () ;
 			$usr_deletes = array ();
 		
-			$repo = $this->svn_root . '/' . $project->getUnixName() ;
+			$repo = $this->darcs_root . '/' . $project->getUnixName() ;
 			if (!is_dir ($repo) || !is_dir ("$repo/_darcs")) {
 				echo "No repository\n" ;
 				db_rollback () ;
@@ -334,8 +364,6 @@ class DarcsPlugin extends SCMPlugin {
 			
 			xml_parser_free ($xml_parser);
 			
-			//..................
-		
 			// inserting group results in stats_cvs_groups
 		
 			if (!db_query_params ('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
