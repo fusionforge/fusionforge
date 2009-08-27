@@ -96,7 +96,7 @@ class SVNPlugin extends SCMPlugin {
 	function getBrowserBlock ($project) {
 		global $HTML ;
 		$b = $HTML->boxMiddle(_('Subversion Repository Browser'));
-		$b = _('<p>Browsing the Subversion tree gives you a view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
+		$b .= _('<p>Browsing the Subversion tree gives you a view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
 		$b .= '<p>[' ;
 		$b .= util_make_link ("/scm/viewvc.php/?root=".$project->getUnixName(),
 				      _('Browse Subversion Repository')
@@ -107,12 +107,14 @@ class SVNPlugin extends SCMPlugin {
 	
 	function getStatsBlock ($project) {
 		global $HTML ;
-		$b = $HTML->boxMiddle(_('Repository Statistics'));
+		$b = '' ;
 		
 		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(commits) as commits, sum(adds) as adds, sum(adds+commits) as combined FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (commits>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id ORDER BY combined DESC, realname',
 					  array ($project->getID()));
 		
 		if (db_numrows($result) > 0) {
+			$b .= $HTML->boxMiddle(_('Repository Statistics')) ;
+
 			$tableHeaders = array(
 				_('Name'),
 				_('Adds'),
