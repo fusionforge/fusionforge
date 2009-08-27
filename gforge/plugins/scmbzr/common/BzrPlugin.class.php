@@ -32,7 +32,11 @@ class BzrPlugin extends SCMPlugin {
 		require_once $gfconfig.'plugins/scmbzr/config.php' ;
 		
 		$this->default_bzr_server = $default_bzr_server ;
-		$this->bzr_root = $bzr_root;
+		if (isset ($bzr_root)) {
+			$this->bzr_root = $bzr_root;
+		} else {
+			$this->bzr_root = $GLOBALS['sys_chroot'].'/scmrepos/bzr' ;
+		}
 
 		$this->main_branch_names = array () ;
 		$this->main_branch_names[] = 'trunk' ;

@@ -35,7 +35,11 @@ class DarcsPlugin extends SCMPlugin {
 		require_once $gfconfig.'plugins/scmdarcs/config.php' ;
 		
 		$this->default_darcs_server = $default_darcs_server ;
-		$this->darcs_root = $darcs_root;
+		if (isset ($darcs_root)) {
+			$this->darcs_root = $darcs_root;
+		} else {
+			$this->darcs_root = $GLOBALS['sys_chroot'].'/scmrepos/darcs' ;
+		}
 		
 		$this->register () ;
 	}

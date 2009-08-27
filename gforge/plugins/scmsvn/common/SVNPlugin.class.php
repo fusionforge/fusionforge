@@ -38,7 +38,11 @@ class SVNPlugin extends SCMPlugin {
 		$this->use_ssh = $use_ssh;
 		$this->use_dav = $use_dav;
 		$this->use_ssl = $use_ssl;
-		$this->svn_root = $svn_root;
+		if (isset ($svn_root)) {
+			$this->svn_root = $svn_root;
+		} else {
+			$this->svn_root = $GLOBALS['sys_chroot'].'/scmrepos/svn' ;
+		}
 
 		$this->register () ;
 	}

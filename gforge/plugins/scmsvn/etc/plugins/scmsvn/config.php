@@ -10,7 +10,7 @@ if (isset ($GLOBALS['sys_scm_host'])) {
 $use_ssh = false;
 $use_dav = true;
 $use_ssl = true;
-$svn_root = 'svn';
+// $svn_root = $GLOBALS['sys_chroot'].'/scmrepos/svn' ;
 
 $svn_bin = "/usr/bin/svn";
 

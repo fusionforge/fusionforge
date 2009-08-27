@@ -8,6 +8,7 @@ if (isset ($GLOBALS['sys_scm_host'])) {
 $cvs_binary_version='1.12';
 $use_ssl=false;
 $GLOBALS['cvs_binary_version']=$cvs_binary_version;
+// $cvs_root = $GLOBALS['sys_chroot'].'/scmrepos/cvs' ;
 
 // Local Variables:
 // mode: php

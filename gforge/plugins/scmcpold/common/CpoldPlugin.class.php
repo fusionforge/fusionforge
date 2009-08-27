@@ -33,7 +33,11 @@ class CpoldPlugin extends SCMPlugin {
 		require_once $gfconfig.'plugins/scmcpold/config.php' ;
 		
 		$this->default_cpold_server = $default_cpold_server ;
-		$this->cpold_root = $cpold_root;
+		if (isset ($cpold_root)) {
+			$this->cpold_root = $cpold_root;
+		} else {
+			$this->cpold_root = $GLOBALS['sys_chroot'].'/scmrepos/cpold' ;
+		}
 		
 		$this->register () ;
 	}

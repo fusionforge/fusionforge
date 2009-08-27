@@ -35,7 +35,11 @@ class GitPlugin extends SCMPlugin {
 		require_once $gfconfig.'plugins/scmgit/config.php' ;
 		
 		$this->default_git_server = $default_git_server ;
-		$this->git_root = $git_root;
+		if (isset ($git_root)) {
+			$this->git_root = $git_root;
+		} else {
+			$this->git_root = $GLOBALS['sys_chroot'].'/scmrepos/git' ;
+		}
 		
 		$this->register () ;
 	}

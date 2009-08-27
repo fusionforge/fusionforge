@@ -32,7 +32,11 @@ class ArchPlugin extends SCMPlugin {
 		require_once $gfconfig.'plugins/scmarch/config.php' ;
 		
 		$this->default_arch_server = $default_arch_server ;
-		$this->arch_root = $arch_root;
+		if (isset ($arch_root)) {
+			$this->arch_root = $arch_root;
+		} else {
+			$this->arch_root = $GLOBALS['sys_chroot'].'/scmrepos/arch' ;
+		}
 
 		$this->register () ;
 	}

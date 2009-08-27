@@ -32,7 +32,11 @@ class HgPlugin extends SCMPlugin {
 		require_once $gfconfig.'plugins/scmhg/config.php' ;
 		
 		$this->default_hg_server = $default_hg_server ;
-		$this->hg_root = $hg_root;
+		if (isset ($hg_root)) {
+			$this->hg_root = $hg_root;
+		} else {
+			$this->hg_root = $GLOBALS['sys_chroot'].'/scmrepos/hg' ;
+		}
 		
 		$this->register () ;
 	}

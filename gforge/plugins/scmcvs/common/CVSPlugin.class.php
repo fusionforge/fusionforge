@@ -41,7 +41,7 @@ class CVSPlugin extends SCMPlugin {
 		} elseif ($cvsdir_prefix) {
 			$this->cvs_root = $cvsdir_prefix;
 		} else {
-			$this->cvs_root = "/cvsroot";
+			$this->cvs_root = $GLOBALS['sys_chroot'].'/scmrepos/cvs' ;
 		} 
 
 		$this->register () ;
