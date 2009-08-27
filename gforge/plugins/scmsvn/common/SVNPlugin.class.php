@@ -29,6 +29,7 @@ class SVNPlugin extends SCMPlugin {
 		$this->name = 'scmsvn';
 		$this->text = 'SVN';
 		$this->hooks[] = 'scm_generate_snapshots' ;
+		$this->hooks[] = 'scm_gather_stats' ;
 
 		require_once $gfconfig.'plugins/scmsvn/config.php' ;
 		
@@ -198,6 +199,128 @@ class SVNPlugin extends SCMPlugin {
 		}
 	}
 
+	function gatherStats ($params) {
+		global $last_user, $last_time, $last_tag, $time_ok, $start_time, $end_time,
+			$adds, $deletes, $updates, $commits, $date_key,
+			$usr_adds, $usr_deletes, $usr_updates;
+		
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
+		}
+		
+		if (! $project->usesPlugin ($this->name)) {
+			return false;
+		}
+
+		if ($params['mode'] == 'day') {
+			db_begin();
+
+			$year = $params ['year'] ;
+			$month = $params ['month'] ;
+			$day = $params ['day'] ;
+			$month_string = sprintf( "%04d%02d", $year, $month );
+			$start_time = gmmktime( 0, 0, 0, $month, $day, $year);
+			$end_time = $start_time + 86400;
+
+			$repo = $this->svn_root . '/' . $project->getUnixName() ;
+			if (!is_dir ($repo) || !is_file ("$repo/format")) {
+				echo "No repository\n" ;
+				db_rollback () ;
+				return false ;
+			}
+	
+			$pipe = popen ("svn log $repo --xml -v -q", 'r' ) ;
+
+			// cleaning stats_cvs_* table for the current day
+			$res = db_query_params ('DELETE FROM stats_cvs_group WHERE month=$1 AND day=$2 AND group_id=$3',
+						array ($month_string,
+						       $day,
+						       $project->getID())) ;
+			if(!$res) {
+				echo "Error while cleaning stats_cvs_group\n" ;
+				db_rollback () ;
+				return false ;
+			}
+	
+			$res = db_query_params ('DELETE FROM stats_cvs_user WHERE month=$1 AND day=$2 AND group_id=$3',
+						array ($month_string,
+						       $day,
+						       $project->getID())) ;
+			if(!$res) {
+				echo "Error while cleaning stats_cvs_user\n" ;
+				db_rollback () ;
+				return false ;
+			}
+	
+			$xml_parser = xml_parser_create();
+			xml_set_element_handler($xml_parser, "SVNPluginStartElement", "SVNPluginEndElement");
+			xml_set_character_data_handler($xml_parser, "SVNPluginCharData");
+
+			// Analyzing history stream
+			while (!feof($pipe) &&
+			       $data = fgets ($pipe, 4096)) {
+				
+				if (!xml_parse ($xml_parser, $data, feof ($pipe))) {
+					debug("Unable to parse XML with error " .
+					      xml_error_string(xml_get_error_code($xml_parser)) .
+					      " on line " .
+					      xml_get_current_line_number($xml_parser));
+					db_rollback () ;
+					return false ;
+					break;
+				}
+
+				if (!$time_ok && $last_time && $last_time < $start_time) {
+					break;
+				}
+			}
+			
+			xml_parser_free ($xml_parser);
+
+			//..................
+
+			// inserting group results in stats_cvs_groups
+			if (!db_query_params ('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
+					      array ($month_string,
+						     $day,
+						     $project->getID(),
+						     0,
+						     $updates,
+						     $adds))) {
+				echo "Error while inserting into stats_cvs_group\n" ;
+				db_rollback () ;
+				return false ;
+			}
+				
+			// building the user list
+			$user_list = array_unique( array_merge( array_keys( $usr_add ), array_keys( $usr_commit ) ) );
+
+			foreach ( $user_list as $user ) {
+				// trying to get user id from user name
+				$u = &user_get_object_by_name ($last_user) ;
+				if ($u) {
+					$user_id = $u->getID();
+				} else {
+					continue;
+				}
+					
+				if (!db_query_params ('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
+						      array ($month_string,
+							     $day,
+							     $project->getID(),
+							     $user_id,
+							     $usr_commit[$user] ? $usr_commit[$user] : 0,
+							     $usr_add[$user] ? $usr_add[$user] : 0))) {
+					echo "Error while inserting into stats_cvs_user\n" ;
+					db_rollback () ;
+					return false ;
+				}
+			}
+		}
+		db_commit();
+	}
+
 	function generateSnapshots ($params) {
 		global $sys_scm_snapshots_path ;
 		global $sys_scm_tarballs_path ;
@@ -255,6 +378,73 @@ class SVNPlugin extends SCMPlugin {
 		system ("rm -rf $tmp") ;
 	}
   }
+
+// End of class, helper functions now
+
+function SVNPluginCharData ($parser, $chars) {
+	global $last_tag, $last_user, $last_time, $start_time, $end_time,
+		$time_ok, $user_list;
+	switch ($last_tag) {
+	case "AUTHOR":
+		$last_user = ereg_replace ('[^a-z0-9_-]', '', 
+					   strtolower (trim ($chars))) ;
+		// We can save time by looking up users and caching them
+		if (!array_key_exists($last_user, $user_list)) {
+			$u = &user_get_object_by_name ($last_user) ;
+			if ($u) {
+				$user_list[$last_user] = $u->getID();
+			} else {
+				$user_list[$last_user] = -1;
+			}
+		}
+		break;
+	case "DATE":
+		$chars = preg_replace('/T(\d\d:\d\d:\d\d)\.\d+Z?$/', ' ${1}', $chars);
+		$last_time = strtotime($chars);
+		if ($start_time <= $last_time && $last_time < $end_time) {
+			$time_ok = true;
+		} else {
+			$time_ok = false;
+		}
+		break;
+	}
+}
+
+function SVNPluginStartElement($parser, $name, $attrs) {
+	global $last_user, $last_time, $last_tag, $time_ok,
+		$adds, $updates, $usr_adds, $usr_updates;
+	$last_tag = $name;
+	switch($name) {
+	case "LOGENTRY":
+		// Make sure we clean up before doing a new log entry
+		$last_user = "";
+		$last_time = "";
+		break;
+	case "PATH":
+		if ($time_ok && $date_key) {
+			if ($attrs['ACTION'] == "M") {
+				$updates++;
+				if ($last_user) {
+					$usr_updates[$last_user]++;
+				}
+			} elseif ($attrs['ACTION'] == "A") {
+				$adds++;
+				if ($last_user) {
+					$usr_adds[$last_user]++;
+				}
+			}
+		}
+		break;
+	}
+}
+
+function SVNPluginEndElement ($parser, $name) {
+	global $time_ok, $last_tag, $commits;
+	if ($name == "LOGENTRY" && $time_ok) {
+		$commits++;
+	}
+	$last_tag = "";
+}
 
 // Local Variables:
 // mode: php
