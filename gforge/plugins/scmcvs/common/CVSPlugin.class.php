@@ -33,6 +33,7 @@ class CVSPlugin extends SCM {
 		$this->hooks[] = 'scm_admin_page';
 		$this->hooks[] = 'scm_stats';
 		$this->hooks[] = 'scm_createrepo' ;
+		$this->hooks[] = 'scm_snapshots_and_tarballs' ;
 		$this->hooks[] = 'scm_plugin';
 
 		require_once $GLOBALS['gfconfig'].'plugins/scmcvs/config.php' ;
@@ -73,6 +74,9 @@ class CVSPlugin extends SCM {
 			break;
 		case 'scm_createrepo':
 			$this->createOrUpdateRepo ($params) ;
+			break;
+		case 'scm_snapshots_and_tarballs':
+			$this->generateSnapshots ($params) ;
 			break;
 		case 'scm_plugin':
 			$scm_plugins=& $params['scm_plugins'];
@@ -322,6 +326,63 @@ class CVSPlugin extends SCM {
 		} else {
 			system ("chmod -R g+wXs,o-rwx $repo") ;
 		}
+	}
+
+	function generateSnapshots ($params) {
+		$group_id = $params['group_id'] ;
+
+		$project =& group_get_object($group_id);
+		if (!$project || !is_object($project)) {
+			return false;
+		} elseif ($project->isError()) {
+			return false;
+		}
+
+		$group_name = $project->getUnixName();
+
+		$snapshot = $sys_scm_snapshots_path.'/'.$group_name.'-scm-latest.tar.gz';
+		$tarball = $sys_scm_tarballs_path.'/'.$group_name.'-scmroot.tar.gz';
+
+		if (! $project->usesPlugin ($this->name)
+		    || ! $project->enableAnonSCM()) {
+			unlink ($snapshot) ;
+			unlink ($tarball) ;
+			return false;
+		}
+
+		$repo = $this->cvs_root . '/' . $project->getUnixName() ;
+
+		$repo_exists = false ;
+		if (is_dir ($repo) && is_dir ("$repo/CVSROOT")) {
+			$repo_exists = true ;
+		}
+		
+		if (!$repo_exists) {
+			unlink ($snapshot) ;
+			unlink ($tarball) ;
+			return false ;
+		}
+
+		/*
+		 $compression = --gzip
+		 
+		 Déléguer la suite à un script shell
+
+		 system ("scmcvs-snapshots.sh $repo $group_name $snapshot")
+		 
+		 tmp=$(mktemp -d)
+		 cd $tmp
+		 $today=$(date +%Y-%m-%d)
+		 mkdir -p $group_name-$today
+		 cd $group_name-$today
+		 cvs -d $repo checkout .
+		 cd ..
+		 tar cf snapshot.tar.compressed $compression $group_name-$today
+		 chmod
+		 mv snapshot.tar.compressed $snapshot
+		 cd /
+		 rm -rf $tmp
+		*/
 	}
   }
 
