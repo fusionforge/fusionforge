@@ -29,6 +29,7 @@ class CVSPlugin extends SCMPlugin {
 		$this->SCMPlugin () ;
 		$this->name = 'scmcvs';
 		$this->text = 'CVS';
+		$this->hooks[] = 'scm_browser_page';
 		$this->hooks[] = 'scm_generate_snapshots' ;
 		$this->hooks[] = 'scm_gather_stats' ;
 
@@ -51,6 +52,27 @@ class CVSPlugin extends SCMPlugin {
 		return $this->default_cvs_server;
 	}
 
+	function printShortStats ($params) {
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
+		}
+		
+		if ($project->usesPlugin($this->name)) {
+			$result = db_query_params('SELECT sum(commits) AS commits, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
+						  array ($project->getID())) ;
+			$commit_num = db_result($result,0,'commits');
+			$add_num    = db_result($result,0,'adds');
+			if (!$commit_num) {
+				$commit_num=0;
+			}
+			if (!$add_num) {
+				$add_num=0;
+			}
+			echo ' (CVS: '.sprintf(_('<strong>%1$s</strong> commits, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
+		}
+	}
+	
 	function getBlurb () {
 		return _('<p>CVS documentation is available <a href="http://cvsbook.red-bean.com/">here</a>.</p>');
 	}
@@ -90,12 +112,12 @@ class CVSPlugin extends SCMPlugin {
 		return $b ;
 	}
 
-	function getBrowserBlock ($project) {
+	function getBrowserLinkBlock ($project) {
 		global $HTML ;
 		$b = $HTML->boxMiddle(_('CVS Repository Browser'));
 		$b .= _('<p>Browsing the CVS tree gives you a view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
 		$b .= '<p>[' ;
-		$b .= util_make_link ("/scm/viewvc.php/?root=".$project->getUnixName(),
+		$b .= util_make_link ("/scm/browser.php?group_id=".$project->getID(),
 				      _('Browse CVS Repository')
 			) ;
 		$b .= ']</p>' ;
@@ -144,27 +166,21 @@ class CVSPlugin extends SCMPlugin {
 		return $b ;
 	}
 
-	function echoShortStats ($params) {
+	function printBrowserPage ($params) {
+		global $HTML;
+
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
 			return false ;
 		}
 		
-		if ($project->usesPlugin($this->name)) {
-			$result = db_query_params('SELECT sum(commits) AS commits, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
-						  array ($project->getID())) ;
-			$commit_num = db_result($result,0,'commits');
-			$add_num    = db_result($result,0,'adds');
-			if (!$commit_num) {
-				$commit_num=0;
+		if ($project->usesPlugin ($this->name)) {
+			if ($this->browserDisplayable ($project)) {
+				print '<iframe src="'.util_make_url ("/scm/viewvc.php/?root=".$project->getUnixName()).'" frameborder="no" width=100% height=700></iframe>' ;
 			}
-			if (!$add_num) {
-				$add_num=0;
-			}
-			echo ' (CVS: '.sprintf(_('<strong>%1$s</strong> commits, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
 		}
 	}
-	
+
 	function createOrUpdateRepo ($params) {
 		$project = $this->checkParams ($params) ;
 		if (!$project) {

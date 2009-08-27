@@ -74,7 +74,7 @@ class CpoldPlugin extends SCMPlugin {
 		return ;
 	}
 
-	function getBrowserBlock ($project) {
+	function getBrowserLinkBlock ($project) {
 		return ;
 	}
 

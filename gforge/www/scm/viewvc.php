@@ -135,8 +135,7 @@ if (viewcvs_is_html()) {
 			$content = mb_convert_encoding($content, 'UTF-8', $encoding);
 		}
 	}
-	scm_header(array('title'=>_('SCM Repository'),
-		'group'=>$Group->getID()));
+	// scm_header(array('title'=>_('SCM Repository'), 'group'=>$Group->getID()));
 
 	echo $content;
 	scm_footer(array());

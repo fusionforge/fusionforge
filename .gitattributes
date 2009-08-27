@@ -3381,6 +3381,7 @@ gforge/www/plugins/quota_management -text
 gforge/www/plugins/scmcvs -text
 gforge/www/plugins/svntracker -text
 gforge/www/plugins/webcalendar -text
+gforge/www/scm/browser.php -text
 gforge/www/scm/viewvc/templates/docroot/images/annotate.png -text
 gforge/www/scm/viewvc/templates/docroot/images/back.png -text
 gforge/www/scm/viewvc/templates/docroot/images/back_small.png -text

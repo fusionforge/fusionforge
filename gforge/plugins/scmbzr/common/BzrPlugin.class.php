@@ -73,7 +73,7 @@ class BzrPlugin extends SCMPlugin {
 		return ;
 	}
 
-	function getBrowserBlock ($project) {
+	function getBrowserLinkBlock ($project) {
 		return ;
 	}
 

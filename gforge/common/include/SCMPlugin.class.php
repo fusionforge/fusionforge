@@ -33,13 +33,14 @@ abstract class SCMPlugin extends Plugin {
 		$this->Plugin() ;
 		$this->hooks[] = 'scm_plugin';
 		$this->hooks[] = 'scm_page';
-		$this->hooks[] = 'scm_admin_update';
 		$this->hooks[] = 'scm_admin_page';
+		$this->hooks[] = 'scm_admin_update';
  		$this->hooks[] = 'scm_stats';
 		$this->hooks[] = 'scm_create_repo';
 		# Other common hooks that can be enabled per plugin:
 		# scm_generate_snapshots
 		# scm_gather_stats
+		# scm_browser_page
 	}
 
 	function CallHook ($hookname, $params) {
@@ -51,16 +52,19 @@ abstract class SCMPlugin extends Plugin {
 			$scm_plugins[]=$this->name;
 			break;
 		case 'scm_page':
-			$this->getPage ($params) ;
+			$this->printPage ($params) ;
 			break ;
-		case 'scm_admin_update':
-			$this->AdminUpdate ($params) ;
+		case 'scm_browser_page':
+			$this->printBrowserPage ($params) ;
 			break ;
 		case 'scm_admin_page':
-			$this->getAdminPage ($params) ;
+			$this->printAdminPage ($params) ;
+			break ;
+		case 'scm_admin_update':
+			$this->adminUpdate ($params) ;
 			break ;
 		case 'scm_stats':
-			$this->echoShortStats ($params) ;
+			$this->printShortStats ($params) ;
 			break;
 		case 'scm_create_repo':
 			$this->createOrUpdateRepo ($params) ;
@@ -93,7 +97,7 @@ abstract class SCMPlugin extends Plugin {
 
 	abstract function createOrUpdateRepo ($params) ;
 
-	function echoShortStats ($params) {
+	function printShortStats ($params) {
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
 			return false ;
@@ -120,15 +124,22 @@ abstract class SCMPlugin extends Plugin {
 		return _('<p>Instructions for snapshot access for unimplemented SCM plugin.</p>');
 	}
 
-	function getBrowserBlock ($project) {
+	function getBrowserLinkBlock ($project) {
 		global $HTML ;
 		$b = $HTML->boxMiddle(_('Repository Browser'));
-		$b = _('<p>Browsing the SCM tree is not yet implemented for this SCM plugin.</p>');
+		$b .= _('<p>Browsing the SCM tree is not yet implemented for this SCM plugin.</p>');
 		$b .= '<p>[' ;
 		$b .= util_make_link ("/scm/?group_id=".$project->getID(),
 				      _('Not implemented yet')
 			) ;
 		$b .= ']</p>' ;
+		return $b ;
+	}
+
+	function getBrowserBlock ($project) {
+		global $HTML ;
+		$b = $HTML->boxMiddle(_('Repository Browser'));
+		$b .= _('<p>Browsing the SCM tree is not yet implemented for this SCM plugin.</p>');
 		return $b ;
 	}
 
@@ -139,7 +150,7 @@ abstract class SCMPlugin extends Plugin {
 		return $b ;
 	}
 
-	function getPage ($params) {
+	function printPage ($params) {
 		global $HTML, $sys_scm_snapshots_path;
 
 		$project = $this->checkParams ($params) ;
@@ -172,7 +183,7 @@ abstract class SCMPlugin extends Plugin {
 			echo _('Data about current and past states of the repository') ;
 			if ($this->browserDisplayable ($project)) {
 				echo $this->getStatsBlock($project) ;
-				echo $this->getBrowserBlock ($project) ;
+				echo $this->getBrowserLinkBlock ($project) ;
 			}
 			
 			echo $HTML->boxBottom();
@@ -180,7 +191,29 @@ abstract class SCMPlugin extends Plugin {
 		}
 	}
 
-	function AdminUpdate ($params) {
+	function printBrowserPage ($params) {
+		global $HTML;
+
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
+		}
+		
+		if ($project->usesPlugin ($this->name)) {
+			if ($this->browserDisplayable ($project)) {
+				// print '<iframe src="'.util_make_url('/scm/browser.php?title='.$group->getUnixName()).'" frameborder="no" width=100% height=700></iframe>' ;
+			}
+		}
+	}
+
+	function printAdminPage ($params) {
+		$group =& group_get_object($params['group_id']);
+		if ( $group->usesPlugin ( $this->name ) && $group->isPublic()) {
+			print '<p><input type="checkbox" name="scm_enable_anonymous" value="1" '.$this->c($group->enableAnonSCM()).' /><strong>'._('Enable Anonymous Access').'</strong></p>';
+		}
+	}
+	
+	function adminUpdate ($params) {
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
 			return false ;
@@ -192,13 +225,6 @@ abstract class SCMPlugin extends Plugin {
 			} else {
 				$project->SetUsesAnonSCM(false);
 			}
-		}
-	}
-	
-	function getAdminPage ($params) {
-		$group =& group_get_object($params['group_id']);
-		if ( $group->usesPlugin ( $this->name ) && $group->isPublic()) {
-			print '<p><input type="checkbox" name="scm_enable_anonymous" value="1" '.$this->c($group->enableAnonSCM()).' /><strong>'._('Enable Anonymous Access').'</strong></p>';
 		}
 	}
 	
