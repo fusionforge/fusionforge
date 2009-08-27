@@ -22,7 +22,7 @@
  * USA
  */
 
-class SVNPlugin extends.SCMPlugin {
+class SVNPlugin extends SCMPlugin {
 	function SVNPlugin () {
 		global $gfconfig;
 		$this->SCM () ;
