@@ -114,6 +114,87 @@ class SCMPlugin extends Plugin {
 
 		// ...
 	}
+
+	function getBlurb () {
+		return _('<p>Unimplemented SCM plugin.</p>');
+	}
+
+	function getInstructionsForAnon ($project) {
+		return _('<p>Instructions for anonymous access for unimplemented SCM plugin.</p>');
+	}
+
+	function getInstructionsForRW ($project) {
+		return _('<p>Instructions for read-write access for unimplemented SCM plugin.</p>');
+	}
+
+	function getBrowserBlurb () {
+		return _('<b>Browse the SCM Tree</b><p>Browsing the SCM tree gives you a great view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
+	}
+
+	function getPage ($group_id) {
+		global $HTML, $sys_scm_snapshots_path;
+
+		$project =& group_get_object($group_id);
+		if (!$project || !is_object($project)) {
+			return false;
+		} elseif ($project->isError()) {
+			return false;
+		}
+
+		if ($project->usesPlugin ($this->name)) {
+
+			// Table for summary info
+			print '<table width="100%"><tr valign="top"><td width="65%">' ;
+			print $this->getBlurb () ;
+
+			// Instructions for anonymous access
+			if ($project->enableAnonSCM()) {
+				print $this->getInstructionsForAnon ($project) ;
+			}
+	
+			// Instructions for developer access
+			print $this->getInstructionsForRW ($project) ;
+
+			// SVN Snapshot
+			if ($this->browserDisplayable ($project)) {
+				$filename=$project->getUnixName().'-scm-latest.tar.gz';
+				if (file_exists($sys_scm_snapshots_path.'/'.$filename)) {
+					print '<p>[' ;
+					print util_make_link ("/snapshots.php?group_id=$group_id",
+							      _('Download the nightly snapshot')
+						) ;
+					print ']</p>';
+				}
+			}
+			print '</td><td width="35%" valign="top">' ;
+
+			// SVN Browsing
+			echo $HTML->boxTop(_('Repository History'));
+			echo $this->getDetailedStats(array('group_id'=>$group_id)).'<p>';
+			if ($this->browserDisplayable ($project)) {
+				print $this->getBrowserBlurb ($project) ;
+				echo '<p>[' ;
+				echo util_make_link ("/scm/viewvc.php/?root=".$project->getUnixName(),
+						     _('Browse Repository')
+					) ;
+				echo ']</p>' ;
+			}
+			
+			echo $HTML->boxBottom();
+			print '</td></tr></table>' ;
+		}
+	}
+	
+
+
+	function c($v) {
+		if ($v) {
+			return 'checked="checked"';
+		} else {
+			return '';
+		}
+	}
+	
 }
 
 // Local Variables:

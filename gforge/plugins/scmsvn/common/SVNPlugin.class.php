@@ -80,92 +80,38 @@ class SVNPlugin extends SCMPlugin {
 		}
 	}
 
-	function getPage ($group_id) {
-		global $HTML, $sys_scm_snapshots_path;
-
-		$project =& group_get_object($group_id);
-		if (!$project || !is_object($project)) {
-			return false;
-		} elseif ($project->isError()) {
-			return false;
-		}
-
-		if ($project->usesPlugin ($this->name)) {
-
-			// Table for summary info
-			print '<table width="100%"><tr valign="top"><td width="65%">' ;
-			print _('<p>Documentation for Subversion (sometimes referred to as "SVN") is available <a href="http://svnbook.red-bean.com/">here</a>.</p>');
-
-			// Anonymous SVN Instructions
-			if ($project->enableAnonSCM()) {
-				print _('<p><b>Anonymous Subversion Access</b></p><p>This project\'s SVN repository can be checked out through anonymous access with the following command(s).</p>');
-				print '<p>';
-				if ($this->use_ssh) {
-					print '<tt>svn checkout svn://'.$project->getSCMBox().'/'.$this->svn_root.'/'.$project->getUnixName().'</tt><br />';
-				}
-				if ($this->use_dav) {
-					print '<tt>svn checkout --username anonsvn http'.(($this->use_ssl) ? 's' : '').'://' . $project->getSCMBox(). '/' . $this->svn_root .'/'. $project->getUnixName() .'</tt><br/><br/>';
-					print _('The password is \'anonsvn\'').'<br/>';
-				}
-				print '</p>';
-			}
-	
-			// Developer Access
-			if ($this->use_ssh) {
-				if (session_loggedin()) {
-					echo _('<p><b>Developer Subversion Access via SSH</b></p><p>Only project developers can access the SVN tree via this method. SSH must be installed on your client machine. Enter your site password when prompted.</p>');
-					print '<p><tt>svn checkout svn+ssh://' ;
-					$u = session_get_user();
-					print $u->getUnixName();
-					print '@' . $project->getSCMBox() . '/'. $this->svn_root .'/'. $project->getUnixName().'</tt></p>' ;
-				} else {
-					echo _('<p><b>Developer Subversion Access via SSH</b></p><p>Only project developers can access the SVN tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
-					print '<p><tt>svn checkout svn+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. $this->svn_root .'/'. $project->getUnixName().'</tt></p>' ;
-				}
-			}
-			if ($this->use_dav) {
-				if (session_loggedin()) {
-					echo _('<p><b>Developer Subversion Access via DAV</b></p><p>Only project developers can access the SVN tree via this method. Enter your site password when prompted.</p>');
-					print '<p><tt>svn checkout --username ';
-					$u = session_get_user();
-					print $u->getUnixName();
-					print ' http'.(($this->use_ssl) ? 's' : '').'://'. $project->getSCMBox() .'/'. $this->svn_root .'/'.$project->getUnixName().'</tt></p>' ;
-				} else {
-					echo _('<p><b>Developer Subversion Access via DAV</b></p><p>Only project developers can access the SVN tree via this method. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
-					print '<p><tt>svn checkout --username <i>'._('developername').'</i> http'.(($this->use_ssl) ? 's' : '').'://'. $project->getSCMBox() .'/'. $this->svn_root .'/'.$project->getUnixName().'</tt></p>' ;
-				}
-			}
-
-			// SVN Snapshot
-			if ($this->browserDisplayable ($project) {
-				$filename=$project->getUnixName().'-scm-latest.tar.gz';
-				if (file_exists($sys_scm_snapshots_path.'/'.$filename)) {
-					print '<p>[' ;
-					print util_make_link ("/snapshots.php?group_id=$group_id",
-							      _('Download The Nightly SVN Tree Snapshot')
-						) ;
-					print ']</p>';
-				}
-			}
-			print '</td><td width="35%" valign="top">' ;
-
-			// SVN Browsing
-			echo $HTML->boxTop(_('Repository History'));
-			echo $this->getDetailedStats(array('group_id'=>$group_id)).'<p>';
-			if ($this->browserDisplayable ($project) {
-				echo _('<b>Browse the Subversion Tree</b><p>Browsing the SVN tree gives you a great view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
-				echo '<p>[' ;
-				echo util_make_link ("/scm/viewvc.php/?root=".$project->getUnixName(),
-						     _('Browse Subversion Repository')
-					) ;
-				echo ']</p>' ;
-			}
-			
-			echo $HTML->boxBottom();
-			print '</td></tr></table>' ;
-		}
+	function getBlurb () {
+		return _('<p>Documentation for Subversion (sometimes referred to as "SVN") is available <a href="http://svnbook.red-bean.com/">here</a>.</p>') ;
 	}
-	
+
+	function getInstructionsForAnon ($project) {
+		$b =  _('<p><b>Anonymous Subversion Access</b></p><p>This project\'s SVN repository can be checked out through anonymous access with the following command(s).</p>');
+		$b .= '<p>' ;
+		if ($this->use_ssh) {
+			$b .= '<tt>svn checkout svn://'.$project->getSCMBox().'/'.$this->svn_root.'/'.$project->getUnixName().'</tt><br />';
+		}
+		if ($this->use_dav) {
+			$b .= '<tt>svn checkout --username anonsvn http'.(($this->use_ssl) ? 's' : '').'://' . $project->getSCMBox(). '/' . $this->svn_root .'/'. $project->getUnixName() .'</tt><br/><br/>';
+			$b .= _('The password is \'anonsvn\'').'<br/>';
+		}
+		$b .= '</p>';
+		return $b ;
+	}
+
+	function getInstructionsForRW ($project) {
+		$b = '' ;
+		if ($this->use_ssh) {
+			$b .= _('<p><b>Developer Subversion Access via SSH</b></p><p>Only project developers can access the SVN tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
+			$b .= '<p><tt>svn checkout svn+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. $this->svn_root .'/'. $project->getUnixName().'</tt></p>' ;
+		}
+		if ($this->use_dav) {
+			$b .= _('<p><b>Developer Subversion Access via DAV</b></p><p>Only project developers can access the SVN tree via this method. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
+			$b .= '<p><tt>svn checkout --username <i>'._('developername').'</i> http'.(($this->use_ssl) ? 's' : '').'://'. $project->getSCMBox() .'/'. $this->svn_root .'/'.$project->getUnixName().'</tt></p>' ;
+		}
+
+		return $b ;
+	}
+
 	function AdminUpdate ($params) {
 		$group =& group_get_object($params['group_id']);
 		if (!$group || !is_object($group)) {
@@ -184,14 +130,6 @@ class SVNPlugin extends SCMPlugin {
 	}
 	
 	// This function is used to render checkboxes below
-	function c($v) {
-		if ($v) {
-			return 'checked="checked"';
-		} else {
-			return '';
-		}
-	}
-	
 	function getAdminPage ($params) {
 		$group =& group_get_object($params['group_id']);
 		if ( $group->usesPlugin ( $this->name ) && $group->isPublic()) {
