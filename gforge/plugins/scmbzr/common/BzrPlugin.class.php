@@ -44,13 +44,11 @@ class BzrPlugin extends SCMPlugin {
 	function getPage ($group_id) {
 		global $HTML, $sys_scm_snapshots_path;
 
-		$project =& group_get_object($group_id);
-		if (!$project || !is_object($project)) {
-			return false;
-		} elseif ($project->isError()) {
-			return false;
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
 		}
-
+		
 		if ($project->usesPlugin ($this->name)) {
 			// Table for summary info
 			print ('<table width="100%">
@@ -110,18 +108,16 @@ class BzrPlugin extends SCMPlugin {
 	}
 	
 	function AdminUpdate ($params) {
-		$group =& group_get_object($params['group_id']);
-		if (!$group || !is_object($group)) {
-			return false;
-		} elseif ($group->isError()) {
-			return false;
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
 		}
-
-		if ( $group->usesPlugin ( $this->name ) ) {
+		
+		if ( $project->usesPlugin ( $this->name ) ) {
 			if ($params['scmbzr_enable_anon_bzr']) {
-				$group->SetUsesAnonSCM(true);
+				$project->SetUsesAnonSCM(true);
 			} else {
-				$group->SetUsesAnonSCM(false);
+				$project->SetUsesAnonSCM(false);
 			}
 		}
 	}
@@ -136,23 +132,24 @@ class BzrPlugin extends SCMPlugin {
 	}
 
 	function getAdminPage ($params) {
-		$group =& group_get_object($params['group_id']);
-		if ( $group->usesPlugin ( $this->name ) && $group->isPublic()) {
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
+		}
+		
+		if ( $project->usesPlugin ( $this->name ) && $project->isPublic()) {
 			?>
-			<p><input type="checkbox" name="scmbzr_enable_anon_bzr" value="1" <?php echo $this->c($group->enableAnonSCM()); ?> /><strong><?php echo _('Enable Anonymous Access') ?></strong></p>
+			<p><input type="checkbox" name="scmbzr_enable_anon_bzr" value="1" <?php echo $this->c($project->enableAnonSCM()); ?> /><strong><?php echo _('Enable Anonymous Access') ?></strong></p>
 																		      <?php
 																		      }
 	}
 
 	function getStats ($params) {
-		$group_id = $params['group_id'] ;
-		$project =& group_get_object($group_id);
-		if (!$project || !is_object($project)) {
-			return false;
-		} elseif ($project->isError()) {
-			return false;
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
 		}
-
+		
 		if ($project->usesPlugin ($this->name)) {
 			list($commit_num, $add_num) = $this->getTotalStats($group_id);
 			echo ' (Bazaar: '.sprintf(_('<strong>%1$s</strong> updates, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).')';
@@ -234,15 +231,11 @@ class BzrPlugin extends SCMPlugin {
 	}
 
 	function createOrUpdateRepo ($params) {
-		$group_id = $params['group_id'] ;
-
-		$project =& group_get_object($group_id);
-		if (!$project || !is_object($project)) {
-			return false;
-		} elseif ($project->isError()) {
-			return false;
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
 		}
-		
+				
 		if (! $project->usesPlugin ($this->name)) {
 			return false;
 		}

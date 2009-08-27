@@ -1,5 +1,5 @@
 <?php
-/** FusionForge Bazaar plugin
+/** FusionForge CPOLD plugin
  *
  * Copyright 2009, Roland Mas
  *
@@ -57,12 +57,9 @@ class CpoldPlugin extends SCMPlugin {
 	}
 
 	function getStats ($params) {
-		$group_id = $params['group_id'] ;
-		$project =& group_get_object($group_id);
-		if (!$project || !is_object($project)) {
-			return false;
-		} elseif ($project->isError()) {
-			return false;
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
 		}
 		
 		if ($project->usesPlugin ($this->name)) {
@@ -75,15 +72,11 @@ class CpoldPlugin extends SCMPlugin {
 	}
 
 	function createOrUpdateRepo ($params) {
-		$group_id = $params['group_id'] ;
-
-		$project =& group_get_object($group_id);
-		if (!$project || !is_object($project)) {
-			return false;
-		} elseif ($project->isError()) {
-			return false;
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
 		}
-		
+				
 		if (! $project->usesPlugin ($this->name)) {
 			return false;
 		}

@@ -78,18 +78,16 @@ class SVNPlugin extends SCMPlugin {
 	}
 
 	function AdminUpdate ($params) {
-		$group =& group_get_object($params['group_id']);
-		if (!$group || !is_object($group)) {
-			return false;
-		} elseif ($group->isError()) {
-			return false;
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
 		}
 		
-		if ( $group->usesPlugin ( $this->name ) ) {
+		if ($project->usesPlugin ($this->name) ) {
 			if ($params['scmsvn_enable_anon_svn']) {
-				$group->SetUsesAnonSCM(true);
+				$project->SetUsesAnonSCM(true);
 			} else {
-				$group->SetUsesAnonSCM(false);
+				$project->SetUsesAnonSCM(false);
 			}
 		}
 	}
@@ -103,16 +101,13 @@ class SVNPlugin extends SCMPlugin {
 	}
 	
 	function getStats ($params) {
-		$group_id = $params['group_id'] ;
-		$project =& group_get_object($group_id);
-		if (!$project || !is_object($project)) {
-			return false;
-		} elseif ($project->isError()) {
-			return false;
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
 		}
 		
 		if ($project->usesPlugin ($this->name)) {
-			list($commit_num, $add_num) = $this->getTotalStats($group_id);
+			list($commit_num, $add_num) = $this->getTotalStats($project->getID());
 			echo ' (SVN: '.sprintf(_('<strong>%1$s</strong> updates, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).')';
 		}
 	}
@@ -192,15 +187,11 @@ class SVNPlugin extends SCMPlugin {
 	}
 
 	function createOrUpdateRepo ($params) {
-		$group_id = $params['group_id'] ;
-
-		$project =& group_get_object($group_id);
-		if (!$project || !is_object($project)) {
-			return false;
-		} elseif ($project->isError()) {
-			return false;
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
 		}
-               
+		
 		if (! $project->usesPlugin ($this->name)) {
 			return false;
 		}

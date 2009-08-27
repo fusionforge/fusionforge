@@ -163,6 +163,18 @@ abstract class SCMPlugin extends Plugin {
 			print '</td></tr></table>' ;
 		}
 	}
+
+	function checkParams ($params) {
+		$group_id = $params['group_id'] ;
+		$project =& group_get_object($group_id);
+		if (!$project || !is_object($project)) {
+			return false;
+		} elseif ($project->isError()) {
+			return false;
+		}
+		
+		return $project ;
+	}
 	
 	function c($v) {
 		if ($v) {

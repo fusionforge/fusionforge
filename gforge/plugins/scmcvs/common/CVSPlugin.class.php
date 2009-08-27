@@ -64,11 +64,9 @@ class CVSPlugin extends SCMPlugin {
 	function getPage ($group_id) {
 		global $HTML ;
 
-		$project =& group_get_object($group_id);
-		if (!$project || !is_object($project)) {
-			return false;
-		} elseif ($project->isError()) {
-			return false;
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
 		}
 		
 		if ($project->usesPlugin($this->name)) {
@@ -140,22 +138,21 @@ class CVSPlugin extends SCMPlugin {
 	}
 
 	function adminUpdate ($params) {
-		$group =& group_get_object($params['group_id']);
-		if (!$group || !is_object($group)) {
-			return false;
-		} elseif ($group->isError()) {
-			return false;
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
 		}
-		if ($group->usesPlugin($this->name)) {
+		
+		if ($project->usesPlugin($this->name)) {
 			if (array_key_exists('scmcvs_enable_anoncvs', $params)){
-				$group->SetUsesAnonSCM(true);
+				$project->SetUsesAnonSCM(true);
 			} else {
-				$group->SetUsesAnonSCM(false);
+				$project->SetUsesAnonSCM(false);
 			}
 			if (array_key_exists('scmcvs_enable_pserver', $params)){
-				$group->SetUsesPserver(true);
+				$project->SetUsesPserver(true);
 			} else {
-				$group->SetUsesPserver(false);
+				$project->SetUsesPserver(false);
 			}
 		}
 	}
@@ -170,27 +167,27 @@ class CVSPlugin extends SCMPlugin {
 	}
 
 	function getAdminPage ($params) {
-		$group =& group_get_object($params['group_id']);
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
+		}
 		
-		if ($group->usesPlugin($this->name)) {
+		if ($project->usesPlugin($this->name)) {
 			print '<p>';
-			if ($group->isPublic()) {
-				print '<input type="checkbox" name="scmcvs_enable_anoncvs" value="1" '.$this->c($group->enableAnonSCM()).'/><strong>'._('Enable Anonymous Access').'</strong><br />';
+			if ($project->isPublic()) {
+				print '<input type="checkbox" name="scmcvs_enable_anoncvs" value="1" '.$this->c($project->enableAnonSCM()).'/><strong>'._('Enable Anonymous Access').'</strong><br />';
 			} else {
-				print '<input type="checkbox" name="scmcvs_enable_anoncvs" value="1" '.$this->c($group->enableAnonSCM()).' DISABLED/>'._('Enable Anonymous Access').' <strong>'._("You project is private and so, you can't turn Anonymous Access on").'</strong><br />';
+				print '<input type="checkbox" name="scmcvs_enable_anoncvs" value="1" '.$this->c($project->enableAnonSCM()).' DISABLED/>'._('Enable Anonymous Access').' <strong>'._("You project is private and so, you can't turn Anonymous Access on").'</strong><br />';
 
 			}
-			print '<input type="checkbox" name="scmcvs_enable_pserver" value="1" '.$this->c($group->enablePserver()).' /><strong>'._('Enable pserver').'</strong></p>' ;
+			print '<input type="checkbox" name="scmcvs_enable_pserver" value="1" '.$this->c($project->enablePserver()).' /><strong>'._('Enable pserver').'</strong></p>' ;
 		}
 	}
 
 	function getStats ($params) {
-		$group_id = $params['group_id'] ;
-		$project =& group_get_object($group_id);
-		if (!$project || !is_object($project)) {
-			return false;
-		} elseif ($project->isError()) {
-			return false;
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
 		}
 		
 		if ($project->usesPlugin($this->name)) {
@@ -255,13 +252,9 @@ class CVSPlugin extends SCMPlugin {
 	}
 
 	function createOrUpdateRepo ($params) {
-		$group_id = $params['group_id'] ;
-
-		$project =& group_get_object($group_id);
-		if (!$project || !is_object($project)) {
-			return false;
-		} elseif ($project->isError()) {
-			return false;
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
 		}
 		
 		if (! $project->usesPlugin ($this->name)) {
@@ -292,15 +285,11 @@ class CVSPlugin extends SCMPlugin {
 	}
 
 	function generateSnapshots ($params) {
-		$group_id = $params['group_id'] ;
-
-		$project =& group_get_object($group_id);
-		if (!$project || !is_object($project)) {
-			return false;
-		} elseif ($project->isError()) {
-			return false;
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
 		}
-
+		
 		$group_name = $project->getUnixName();
 
 		$snapshot = $sys_scm_snapshots_path.'/'.$group_name.'-scm-latest.tar.gz';
