@@ -33,7 +33,6 @@ class CpoldPlugin extends SCMPlugin {
 		require_once $gfconfig.'plugins/scmcpold/config.php' ;
 		
 		$this->default_cpold_server = $default_cpold_server ;
-		$this->enabled_by_default = $enabled_by_default ;
 		$this->cpold_root = $cpold_root;
 		
 		$this->register () ;

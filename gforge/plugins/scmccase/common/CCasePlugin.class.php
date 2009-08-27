@@ -40,7 +40,6 @@ class CCasePlugin extends SCMPlugin {
 		$this->default_ccase_server = $default_ccase_server ;
 		$this->this_server = $this_server ;
 		$this->tag_pattern = $tag_pattern ;
-		$this->enabled_by_default = $enabled_by_default ;
 
 		$this->register () ;
 	}

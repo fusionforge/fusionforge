@@ -32,7 +32,6 @@ class BzrPlugin extends SCMPlugin {
 		require_once $gfconfig.'plugins/scmbzr/config.php' ;
 		
 		$this->default_bzr_server = $default_bzr_server ;
-		$this->enabled_by_default = $enabled_by_default ;
 		$this->bzr_root = $bzr_root;
 
 		$this->main_branch_names = array () ;

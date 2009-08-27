@@ -33,7 +33,6 @@ class DarcsPlugin extends SCMPlugin {
 		require_once $gfconfig.'plugins/scmdarcs/config.php' ;
 		
 		$this->default_darcs_server = $default_darcs_server ;
-		$this->enabled_by_default = $enabled_by_default ;
 		$this->darcs_root = $darcs_root;
 		
 		$this->register () ;

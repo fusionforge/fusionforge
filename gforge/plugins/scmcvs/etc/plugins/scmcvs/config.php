@@ -5,7 +5,6 @@ if (isset ($GLOBALS['sys_scm_host'])) {
 } else {
 	$default_cvs_server = 'scm';
 }
-$enabled_by_default = true;
 $cvs_binary_version='1.12';
 $use_ssl=false;
 $GLOBALS['cvs_binary_version']=$cvs_binary_version;

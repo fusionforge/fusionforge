@@ -35,7 +35,6 @@ class SVNPlugin extends SCMPlugin {
 		require_once $gfconfig.'plugins/scmsvn/config.php' ;
 		
 		$this->default_svn_server = $default_svn_server ;
-		$this->enabled_by_default = $enabled_by_default ;
 		$this->use_ssh = $use_ssh;
 		$this->use_dav = $use_dav;
 		$this->use_ssl = $use_ssl;

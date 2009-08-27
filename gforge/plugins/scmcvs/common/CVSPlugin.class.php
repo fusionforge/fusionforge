@@ -43,7 +43,6 @@ class CVSPlugin extends SCMPlugin {
 		} else {
 			$this->cvs_root = "/cvsroot";
 		} 
-		$this->enabled_by_default = $enabled_by_default ;
 
 		$this->register () ;
 	}

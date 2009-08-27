@@ -11,7 +11,6 @@ $use_ssh = false;
 $use_dav = true;
 $use_ssl = true;
 $svn_root = 'svn';
-$enabled_by_default = false;
 
 $svn_bin = "/usr/bin/svn";
 
