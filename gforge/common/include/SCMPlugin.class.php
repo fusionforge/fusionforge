@@ -24,7 +24,7 @@
 
 require_once $gfcommon.'include/scm.php';
 
-class SCMPlugin extends Plugin {
+abstract class SCMPlugin extends Plugin {
 	/**
 	 * SCMPlugin() - constructor
 	 *
@@ -68,7 +68,7 @@ class SCMPlugin extends Plugin {
 		}
 	}
 
-	function register () {
+	final function register () {
 		global $scm_list ;
 
 		$scm_list[] = $this->name ;
@@ -91,64 +91,8 @@ class SCMPlugin extends Plugin {
 		}
 	}
 
-	function createOrUpdateRepo ($params) {
-		$group_id = $params['group_id'] ;
-
-		$project =& group_get_object($group_id);
-		if (!$project || !is_object($project)) {
-			return false;
-		} elseif ($project->isError()) {
-			return false;
-		}
-		
-		if (! $project->usesPlugin ($this->name)) {
-			return false;
-		}
-
-		// ...
-	}
-		
-	function gatherStats ($params) {
-		$group_id = $params['group_id'] ;
-
-		$project =& group_get_object($group_id);
-		if (!$project || !is_object($project)) {
-			return false;
-		} elseif ($project->isError()) {
-			return false;
-		}
-		
-		if (! $project->usesPlugin ($this->name)) {
-			return false;
-		}
-
-		// ...
-	}
-		
-	function generateSnapshots ($params) {
-		$group_id = $params['group_id'] ;
-
-		$project =& group_get_object($group_id);
-		if (!$project || !is_object($project)) {
-			return false;
-		} elseif ($project->isError()) {
-			return false;
-		}
-
-		$group_name = $project->getUnixName();
-
-		$snapshot = $sys_scm_snapshots_path.'/'.$group_name.'-scm-latest.tar.gz';
-		$tarball = $sys_scm_tarballs_path.'/'.$group_name.'-scmroot.tar.gz';
-
-		if (! $project->usesPlugin ($this->name)
-		    || ! $project->enableAnonSCM()) {
-			unlink ($snapshot) ;
-			unlink ($tarball) ;
-			return false;
-		}
-
-		// ...
-	}
+	abstract function createOrUpdateRepo ($params) ;
+	abstract function getStats ($params) ;
 
 	function getBlurb () {
 		return _('<p>Unimplemented SCM plugin.</p>');
@@ -203,7 +147,7 @@ class SCMPlugin extends Plugin {
 			}
 			print '</td><td width="35%" valign="top">' ;
 
-			// SVN Browsing
+			// Browsing
 			echo $HTML->boxTop(_('Repository History'));
 			echo $this->getDetailedStats(array('group_id'=>$group_id)).'<p>';
 			if ($this->browserDisplayable ($project)) {
@@ -220,8 +164,6 @@ class SCMPlugin extends Plugin {
 		}
 	}
 	
-
-
 	function c($v) {
 		if ($v) {
 			return 'checked="checked"';

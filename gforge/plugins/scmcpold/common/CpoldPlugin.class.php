@@ -74,7 +74,30 @@ class CpoldPlugin extends SCMPlugin {
 		return ;
 	}
 
+	function createOrUpdateRepo ($params) {
+		$group_id = $params['group_id'] ;
 
+		$project =& group_get_object($group_id);
+		if (!$project || !is_object($project)) {
+			return false;
+		} elseif ($project->isError()) {
+			return false;
+		}
+		
+		if (! $project->usesPlugin ($this->name)) {
+			return false;
+		}
+
+		$repo = $this->cpold_root . '/' . $project->getUnixName() ;
+		$unix_group = 'scm_' . $project->getUnixName() ;
+
+		system ("chgrp -R $unix_group $repo") ;
+		if ($project->enableAnonSCM()) {
+			system ("chmod -R g+wXs,o+rX-w $repo") ;
+		} else {
+			system ("chmod -R g+wXs,o-rwx $repo") ;
+		}
+	}
   }
 
 // Local Variables:
