@@ -25,14 +25,12 @@ class CVSPlugin extends SCMPlugin {
 	function CVSPlugin () {
 		global $cvs_root;
 		global $gfconfig;
-		require_once $GLOBALS['gfconfig'].'plugins/scmcvs/config.php' ;
-
+		$this->SCMPlugin () ;
 		$this->name = 'scmcvs';
 		$this->text = 'CVS';
-		$this->SCMPlugin () ;
-
 		$this->hooks[] = 'scm_snapshots_and_tarballs' ;
 
+		require_once $GLOBALS['gfconfig'].'plugins/scmcvs/config.php' ;
 
 		$this->default_cvs_server = $default_cvs_server ;
 		if ($cvs_root) {
@@ -43,6 +41,8 @@ class CVSPlugin extends SCMPlugin {
 		//$this->default_cvs_server = $default_cvs_server ;
 		//$this->this_server = $this_server ;
 		$this->enabled_by_default = $enabled_by_default ;
+
+		$this->register () ;
 	}
 	
 	function getDefaultServer() {

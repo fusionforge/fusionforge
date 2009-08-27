@@ -24,15 +24,17 @@
 class CpoldPlugin extends SCMPlugin {
 	function CpoldPlugin () {
 		global $gfconfig;
-		require_once $gfconfig.'plugins/scmcpold/config.php' ;
-
+		$this->SCMPlugin () ;
 		$this->name = 'scmcpold';
 		$this->text = 'CPOLD';
-		$this->SCMPlugin () ;
+		
+		require_once $gfconfig.'plugins/scmcpold/config.php' ;
 		
 		$this->default_cpold_server = $default_cpold_server ;
 		$this->enabled_by_default = $enabled_by_default ;
 		$this->cpold_root = $cpold_root;
+		
+		$this->register () ;
 	}
 	
 	function getBlurb () {
@@ -47,8 +49,6 @@ class CpoldPlugin extends SCMPlugin {
 	function getInstructionsForRW ($project) {
 		$b = _('<p><b>Developer CPOLD Access via SSH</b></p><p>Only project developers can access the CPOLD tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
 		$b .= '<p><tt>scp -r <i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. $this->cpold_root .'/'. $project->getUnixName().'/ .</tt></p>' ;
-		}
-
 		return $b ;
 	}
 

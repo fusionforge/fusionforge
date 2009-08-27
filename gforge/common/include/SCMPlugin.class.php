@@ -37,7 +37,6 @@ class SCMPlugin extends Plugin {
  		$this->hooks[] = 'scm_stats';
 		$this->hooks[] = 'scm_createrepo';
 		$this->hooks[] = 'scm_plugin';
-		$this->register () ;
 	}
 
 	function CallHook ($hookname, $params) {

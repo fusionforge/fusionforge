@@ -25,12 +25,12 @@
 class SVNPlugin extends SCMPlugin {
 	function SVNPlugin () {
 		global $gfconfig;
-		require_once $gfconfig.'plugins/scmsvn/config.php' ;
-
+		$this->SCMPlugin () ;
 		$this->name = 'scmsvn';
 		$this->text = 'SVN';
-		$this->SCMPlugin () ;
 
+		require_once $gfconfig.'plugins/scmsvn/config.php' ;
+		
 		$this->default_svn_server = $default_svn_server ;
 		$this->enabled_by_default = $enabled_by_default ;
 		$this->use_ssh = $use_ssh;
@@ -38,6 +38,7 @@ class SVNPlugin extends SCMPlugin {
 		$this->use_ssl = $use_ssl;
 		$this->svn_root = $svn_root;
 
+		$this->register () ;
 	}
 	
 	function getDefaultServer() {

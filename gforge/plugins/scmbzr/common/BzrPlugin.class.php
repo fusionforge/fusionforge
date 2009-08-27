@@ -24,48 +24,21 @@
 class BzrPlugin extends SCMPlugin {
 	function BzrPlugin () {
 		global $gfconfig;
-		require_once $gfconfig.'plugins/scmbzr/config.php' ;
-		
+		$this->SCMPlugin () ;
 		$this->name = 'scmbzr';
 		$this->text = 'Bazaar';
-		$this->SCMPlugin () ;
 
+		require_once $gfconfig.'plugins/scmbzr/config.php' ;
+		
 		$this->default_bzr_server = $default_bzr_server ;
 		$this->enabled_by_default = $enabled_by_default ;
 		$this->bzr_root = $bzr_root;
+
+		$this->register () ;
 	}
 	
 	function getDefaultServer() {
 		return $this->default_bzr_server ;
-	}
-
-	function CallHook ($hookname, $params) {
-		global $HTML ;
-		
-		switch ($hookname) {
-		case 'scm_page':
-			$group_id = $params['group_id'] ;
-			$this->getPage ($group_id) ;
-			break ;
-		case 'scm_admin_update':
-			$this->AdminUpdate ($params) ;
-			break ;
-		case 'scm_admin_page':
-			$this->getAdminPage ($params) ;
-			break ;
-		case 'scm_stats':
-			$this->getStats ($params) ;
-			break;
-		case 'scm_createrepo':
-			$this->createOrUpdateRepo ($params) ;
-			break;
-		case 'scm_plugin':
-			$scm_plugins=& $params['scm_plugins'];
-			$scm_plugins[]=$this->name;
-			break;
-		default:
-			// Forgot something
-		}
 	}
 
 	function getPage ($group_id) {
