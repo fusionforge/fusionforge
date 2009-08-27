@@ -155,9 +155,6 @@ class BzrPlugin extends SCMPlugin {
 			return false ;
 		}
 		$today = date ('Y-m-d') ;
-		$dir = $project->getUnixName ()."-$today" ;
-		system ("mkdir -p $tmp") ;
-		
 		$code = 0 ;
 		$branch = '' ;
 		foreach ($this->main_branch_names as $bname) {
@@ -168,7 +165,7 @@ class BzrPlugin extends SCMPlugin {
 			}
 		}
 		if ($branch != '') {
-			system ("cd $tmp ; bzr export $tmp/snapshot.tar.gz $repo/$bname") ;
+			system ("bzr export --root=$group_name-scm-$today $tmp/snapshot.tar.gz $repo/$bname") ;
 			chmod ("$tmp/snapshot.tar.gz", 0644) ;
 			copy ("$tmp/snapshot.tar.gz", $snapshot) ;
 			unlink ("$tmp/snapshot.tar.gz") ;
