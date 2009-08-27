@@ -209,134 +209,134 @@ class CVSPlugin extends SCMPlugin {
 		}
 
 		if ($params['mode'] == 'day') {
-				db_begin();
-
-				$year = $params ['year'] ;
-				$month = $params ['month'] ;
-				$day = $params ['day'] ;
-				$month_string = sprintf( "%04d%02d", $year, $month );
-				$day_begin = gmmktime( 0, 0, 0, $month, $day, $year);
-				$day_end = $day_begin + 86400;
-
-				$repo = $this->cvs_root . '/' . $project->getUnixName() ;
-				if (!is_dir ($repo) || !is_dir ("$repo/CVSROOT")) {
-					echo "No repository\n" ;
-					db_rollback () ;
-					return false ;
-				}
+			db_begin();
+			
+			$year = $params ['year'] ;
+			$month = $params ['month'] ;
+			$day = $params ['day'] ;
+			$month_string = sprintf( "%04d%02d", $year, $month );
+			$day_begin = gmmktime( 0, 0, 0, $month, $day, $year);
+			$day_end = $day_begin + 86400;
+			
+			$repo = $this->cvs_root . '/' . $project->getUnixName() ;
+			if (!is_dir ($repo) || !is_dir ("$repo/CVSROOT")) {
+				echo "No repository\n" ;
+				db_rollback () ;
+				return false ;
+			}
+			
+			$cvs_co	= 0;
+			$cvs_commit = 0;
+			$cvs_add = 0;
+			$usr_commit = array();
+			$usr_add = array();
+			
+			$hist_file_path = $repo.'/CVSROOT/history';
+			if (!file_exists($hist_file_path) 
+			    || !is_readable($hist_file_path)
+			    || filesize($hist_file_path) == 0) {
+				// echo "No history file\n" ;
+				db_rollback () ;
+				return false ;
+			}
 				
-				$cvs_co	= 0;
-				$cvs_commit = 0;
-				$cvs_add = 0;
-				$usr_commit = array();
-				$usr_add = array();
-	
-				$hist_file_path = $repo.'/CVSROOT/history';
-				if (!file_exists($hist_file_path) 
-				    || !is_readable($hist_file_path)
-				    || filesize($hist_file_path) == 0) {
-					// echo "No history file\n" ;
-					db_rollback () ;
-					return false ;
-				}
+			$hist_file =& fopen( $hist_file_path, 'r' );
+			if ( ! $hist_file ) {
+				echo "Unreadable history\n" ;
+				db_rollback () ;
+				return false ;
+			}
 				
-				$hist_file =& fopen( $hist_file_path, 'r' );
-				if ( ! $hist_file ) {
-					echo "Unreadable history\n" ;
-					db_rollback () ;
-					return false ;
-				}
-				
-				// cleaning stats_cvs_* table for the current day
-				$res = db_query_params ('DELETE FROM stats_cvs_group WHERE month=$1 AND day=$2 AND group_id=$3',
-							array ($month_string,
-							       $day,
-							       $project->getID())) ;
-				if(!$res) {
-					echo "Error while cleaning stats_cvs_group\n" ;
-					db_rollback () ;
-					return false ;
-				}
+			// cleaning stats_cvs_* table for the current day
+			$res = db_query_params ('DELETE FROM stats_cvs_group WHERE month=$1 AND day=$2 AND group_id=$3',
+						array ($month_string,
+						       $day,
+						       $project->getID())) ;
+			if(!$res) {
+				echo "Error while cleaning stats_cvs_group\n" ;
+				db_rollback () ;
+				return false ;
+			}
 	
-				$res = db_query_params ('DELETE FROM stats_cvs_user WHERE month=$1 AND day=$2 AND group_id=$3',
-							array ($month_string,
-							       $day,
-							       $project->getID())) ;
-				if(!$res) {
-					echo "Error while cleaning stats_cvs_user\n" ;
-					db_rollback () ;
-					return false ;
-				}
+			$res = db_query_params ('DELETE FROM stats_cvs_user WHERE month=$1 AND day=$2 AND group_id=$3',
+						array ($month_string,
+						       $day,
+						       $project->getID())) ;
+			if(!$res) {
+				echo "Error while cleaning stats_cvs_user\n" ;
+				db_rollback () ;
+				return false ;
+			}
 	
 
-				// analyzing history file
-				while (!feof($hist_file)) {
-					$hist_line = fgets($hist_file, 1024);
-					if ( preg_match( '/^\s*$/', $hist_line ) ) {
-						continue;
-					}
-					list( $cvstime,$user,$curdir,$module,$rev,$file ) = explode( '|', $hist_line );
+			// analyzing history file
+			while (!feof($hist_file)) {
+				$hist_line = fgets($hist_file, 1024);
+				if ( preg_match( '/^\s*$/', $hist_line ) ) {
+					continue;
+				}
+				list( $cvstime,$user,$curdir,$module,$rev,$file ) = explode( '|', $hist_line );
 					
-					$type = substr($cvstime, 0, 1);
-					$time_parsed = hexdec( substr($cvstime, 1, 8) );
+				$type = substr($cvstime, 0, 1);
+				$time_parsed = hexdec( substr($cvstime, 1, 8) );
 					
-					if ( ($time_parsed > $day_begin) && ($time_parsed < $day_end) ) {
-						if ( $type == 'M' ) {
-							$cvs_commit++;
-							if(!isset($usr_commit[$user])) $usr_commit[$user] = 0;
-							$usr_commit[$user]++;
-						} elseif ( $type == 'A' ) {
-							$cvs_add++;
-							if(!isset($usr_add[$user])) $usr_add[$user] = 0;
-							$usr_add[$user]++;
-						} elseif ( $type == 'O' || $type == 'E' ) {
-							$cvs_co++;
-							// ignoring checkouts on a per-user
-						}
-					} elseif ( $time_parsed > $day_end ) {
-						break;
+				if ( ($time_parsed > $day_begin) && ($time_parsed < $day_end) ) {
+					if ( $type == 'M' ) {
+						$cvs_commit++;
+						if(!isset($usr_commit[$user])) $usr_commit[$user] = 0;
+						$usr_commit[$user]++;
+					} elseif ( $type == 'A' ) {
+						$cvs_add++;
+						if(!isset($usr_add[$user])) $usr_add[$user] = 0;
+						$usr_add[$user]++;
+					} elseif ( $type == 'O' || $type == 'E' ) {
+						$cvs_co++;
+						// ignoring checkouts on a per-user
 					}
+				} elseif ( $time_parsed > $day_end ) {
+					break;
 				}
-				fclose( $hist_file );
+			}
+			fclose( $hist_file );
 
-				// inserting group results in stats_cvs_groups
-				if (!db_query_params ('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
+			// inserting group results in stats_cvs_groups
+			if (!db_query_params ('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
+					      array ($month_string,
+						     $day,
+						     $project->getID(),
+						     $cvs_co,
+						     $cvs_commit,
+						     $cvs_add))) {
+				echo "Error while inserting into stats_cvs_group\n" ;
+				db_rollback () ;
+				return false ;
+			}
+				
+			// building the user list
+			$user_list = array_unique( array_merge( array_keys( $usr_add ), array_keys( $usr_commit ) ) );
+				
+			foreach ( $user_list as $user ) {
+				// trying to get user id from user name
+				$user_res = db_query_params ('SELECT user_id FROM users WHERE user_name=$1',
+							     array ($user)) ;
+				if ( $user_row = db_fetch_array($user_res) ) {
+					$user_id = $user_row[0];
+				} else {
+					continue;
+				}
+					
+				if (!db_query_params ('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
 						      array ($month_string,
 							     $day,
 							     $project->getID(),
-							     $cvs_co,
-							     $cvs_commit,
-							     $cvs_add))) {
-					echo "Error while inserting into stats_cvs_group\n" ;
+							     $user_id,
+							     $usr_commit{$user} ? $usr_commit{$user} : 0,
+							     $usr_add{$user} ? $usr_add{$user} : 0))) {
+					echo "Error while inserting into stats_cvs_user\n" ;
 					db_rollback () ;
 					return false ;
 				}
-				
-				// building the user list
-				$user_list = array_unique( array_merge( array_keys( $usr_add ), array_keys( $usr_commit ) ) );
-				
-				foreach ( $user_list as $user ) {
-					// trying to get user id from user name
-					$user_res = db_query_params ('SELECT user_id FROM users WHERE user_name=$1',
-								     array ($user)) ;
-					if ( $user_row = db_fetch_array($user_res) ) {
-						$user_id = $user_row[0];
-					} else {
-						continue;
-					}
-					
-					if (!db_query_params ('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
-							      array ($month_string,
-								     $day,
-								     $project->getID(),
-								     $user_id,
-								     $usr_commit{$user} ? $usr_commit{$user} : 0,
-								     $usr_add{$user} ? $usr_add{$user} : 0))) {
-						echo "Error while inserting into stats_cvs_user\n" ;
-						db_rollback () ;
-						return false ;
-					}
-				}
+			}
 		}
 		db_commit();
 	}
