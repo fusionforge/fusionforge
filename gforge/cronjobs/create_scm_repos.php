@@ -48,6 +48,9 @@ while ($data = db_fetch_array ($res)) {
 	plugin_hook ('scm_create_repo', $hook_params) ;
 }
 
+$hook_params = array () ;
+plugin_hook ('scm_update_repolist', $hook_params) ;
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

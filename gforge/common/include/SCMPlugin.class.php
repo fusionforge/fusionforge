@@ -41,6 +41,7 @@ abstract class SCMPlugin extends Plugin {
 		# scm_generate_snapshots
 		# scm_gather_stats
 		# scm_browser_page
+		# scm_update_repolist
 	}
 
 	function CallHook ($hookname, $params) {
@@ -69,6 +70,9 @@ abstract class SCMPlugin extends Plugin {
 		case 'scm_create_repo':
 			$this->createOrUpdateRepo ($params) ;
 			break;
+		case 'scm_update_repolist':
+			$this->updateRepositoryList ($params) ;
+			break;
 		case 'scm_generate_snapshots': // Optional
 			$this->generateSnapshots ($params) ;
 			break;
@@ -87,7 +91,8 @@ abstract class SCMPlugin extends Plugin {
 	}
 
 	function browserDisplayable ($project) {
-		if ($project->usesPlugin($this->name)
+		if ($project->usesSCM ()
+		    && $project->usesPlugin($this->name)
 		    && $project->enableAnonSCM()) {
 			return true ;
 		} else {

@@ -28,7 +28,9 @@ class DarcsPlugin extends SCMPlugin {
 		$this->name = 'scmdarcs';
 		$this->text = 'Darcs';
 		$this->hooks[] = 'scm_generate_snapshots' ;
-		$this->hooks[] = 'scm_darcs_do_nothing' ;
+		$this->hooks[] = 'scm_update_repolist' ;
+		$this->hooks[] = 'scm_browser_page' ;
+		$this->hooks[] = 'scm_gather_stats' ;
 		
 		require_once $gfconfig.'plugins/scmdarcs/config.php' ;
 		
@@ -61,15 +63,86 @@ class DarcsPlugin extends SCMPlugin {
 	}
 
 	function getSnapshotPara ($project) {
-		return ;
+		global $sys_scm_snapshots_path ;
+		$b = "" ;
+		$filename = $project->getUnixName().'-scm-latest.tar.gz';
+		if (file_exists($sys_scm_snapshots_path.'/'.$filename)) {
+			$b .= '<p>[' ;
+			$b .= util_make_link ("/snapshots.php?group_id=".$project->getID(),
+					      _('Download the nightly snapshot')
+				) ;
+			$b .= ']</p>';
+		}
+		return $b ;
 	}
 
 	function getBrowserLinkBlock ($project) {
-		return ;
+		global $HTML ;
+		$b = $HTML->boxMiddle(_('Darcs Repository Browser'));
+		$b .= _('<p>Browsing the Darcs tree gives you a view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
+		$b .= '<p>[' ;
+		$b .= util_make_link ("/scm/browser.php?group_id=".$project->getID(),
+				      _('Browse Darcs Repository')
+			) ;
+		$b .= ']</p>' ;
+		return $b ;
 	}
 
 	function getStatsBlock ($project) {
-		return ;
+		global $HTML ;
+		$b = '' ;
+
+		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(commits) as commits, sum(adds) as adds, sum(adds+commits) as combined FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (commits>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id ORDER BY combined DESC, realname',
+					  array ($project->getID()));
+		
+		if (db_numrows($result) > 0) {
+			$b .= $HTML->boxMiddle(_('Repository Statistics'));
+
+			$tableHeaders = array(
+				_('Name'),
+				_('Adds'),
+				_('Commits')
+				);
+			$b .= $HTML->listTableTop($tableHeaders);
+			
+			$i = 0;
+			$total = array('adds' => 0, 'commits' => 0);
+			
+			while($data = db_fetch_array($result)) {
+				$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
+				$b .= '<td width="50%">' ;
+				$b .= util_make_link_u ($data['user_name'], $data['user_id'], $data['realname']) ;
+				$b .= '</td><td width="25%" align="right">'.$data['adds']. '</td>'.
+					'<td width="25%" align="right">'.$data['commits'].'</td></tr>';
+				$total['adds'] += $data['adds'];
+				$total['commits'] += $data['commits'];
+				$i++;
+			}
+			$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
+			$b .= '<td width="50%"><strong>'._('Total').':</strong></td>'.
+				'<td width="25%" align="right"><strong>'.$total['adds']. '</strong></td>'.
+				'<td width="25%" align="right"><strong>'.$total['commits'].'</strong></td>';
+			$b .= '</tr>';
+			$b .= $HTML->listTableBottom();
+			$b .= '<hr size="1" />';
+		}
+
+		return $b ;
+	}
+
+	function printBrowserPage ($params) {
+		global $HTML;
+
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
+		}
+		
+		if ($project->usesPlugin ($this->name)) {
+			if ($this->browserDisplayable ($project)) {
+				print '<iframe src="'.util_make_url ("/plugins/scmdarcs/cgi-bin/darcsweb.cgi?r=".$project->getUnixName()).'" frameborder="no" width=100% height=700></iframe>' ;
+			}
+		}
 	}
 
 	function createOrUpdateRepo ($params) {
@@ -85,7 +158,7 @@ class DarcsPlugin extends SCMPlugin {
 		$repo = $this->darcs_root . '/' . $project->getUnixName() ;
 		$unix_group = 'scm_' . $project->getUnixName() ;
 
-		if (!is_dir ($repo."_darcs")) {
+		if (!is_dir ($repo."/_darcs")) {
 			system ("mkdir -p $repo") ;
 			system ("cd $repo ; darcs init >/dev/null") ;
 		}
@@ -96,6 +169,35 @@ class DarcsPlugin extends SCMPlugin {
 		} else {
 			system ("chmod -R g+wXs,o-rwx $repo") ;
 		}
+	}
+
+	function updateRepositoryList ($params) {
+		$groups = $this->getGroups () ;
+		$list = array () ;
+		foreach ($groups as $project) {
+			if ($this->browserDisplayable ($project)) {
+				$list[] = $project ;
+			}
+		}
+
+		$fname = '/etc/gforge/plugins/scmdarcs/config.py' ;
+
+		$f = fopen ($fname.'.new', 'w') ;
+		foreach ($list as $project) {
+			$classname = str_replace ('-', '_',
+						  'repo_' . $project->getUnixName()) ;
+			
+			$repo = $this->darcs_root . '/' . $project->getUnixName() ;
+			fwrite ($f, "class: $classname\n"
+				."\treponame = $classname\n"
+			       ."\trepodir = $repo\n"
+				."\trepourl = " . util_make_url ('/anonscm/darcs/'.$project->getUnixName().'/') . "\n"
+				."\trepoprojurl = " . util_make_url ('/projects/'.$project->getUnixName().'/') . "\n"
+				. "\n") ;
+		}
+		fclose ($f) ;
+		chmod ($fname.'.new', 0644) ;
+		rename ($fname.'.new', $fname) ;
 	}
 
 	function generateSnapshots ($params) {
@@ -315,43 +417,43 @@ class DarcsPlugin extends SCMPlugin {
 			db_commit();
 		}
 	}
+  }	
 		
-	function DarcsPluginStartElement($parser, $name, $attrs) {
-		global $last_user, $commits, 
-		       $adds, $updates, $deletes,
-		       $usr_adds, $usr_updates, $usr_deletes;
-		switch($name) {
-		case "PATCH":
-			$last_user = $attrs['AUTHOR'];
-			$commits++;
-			break;
-		case "REMOVE_FILE":
-		case "REMOVE_DIRECTORY":
-			$deletes++;
-			if ($last_user) {
-				$usr_deletes[$last_user]++;
-			}
-			break;
-		case "MOVE":
-		case "MODIFY_FILE":
-			$updates++;
-			if ($last_user) {
-				$usr_updates[$last_user]++;
-			}
-			break;
-		case "ADD_FILE":
-		case "ADD_DIRECTORY":
-			$adds++;
-			if ($last_user) {
-				$usr_adds[$last_user]++;
-			}
-			break;
+function DarcsPluginStartElement($parser, $name, $attrs) {
+	global $last_user, $commits, 
+		$adds, $updates, $deletes,
+		$usr_adds, $usr_updates, $usr_deletes;
+	switch($name) {
+	case "PATCH":
+		$last_user = $attrs['AUTHOR'];
+		$commits++;
+		break;
+	case "REMOVE_FILE":
+	case "REMOVE_DIRECTORY":
+		$deletes++;
+		if ($last_user) {
+			$usr_deletes[$last_user]++;
 		}
+		break;
+	case "MOVE":
+	case "MODIFY_FILE":
+		$updates++;
+		if ($last_user) {
+			$usr_updates[$last_user]++;
+		}
+		break;
+	case "ADD_FILE":
+	case "ADD_DIRECTORY":
+		$adds++;
+		if ($last_user) {
+			$usr_adds[$last_user]++;
+		}
+		break;
 	}
+}
 	
-	function DarcsPluginEndElement ($parser, $name) {
-	}
-  }
+function DarcsPluginEndElement ($parser, $name) {
+}
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

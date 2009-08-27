@@ -231,7 +231,7 @@ Provides: gforge-plugin-scm
 
 Package: gforge-plugin-scmdarcs
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, darcs, php5-cli, ${misc:Depends}
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, darcs, darcsweb, php5-cli, ${misc:Depends}
 Description: collaborative development tool - Darcs plugin
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,

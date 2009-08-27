@@ -82,6 +82,7 @@ class Plugin extends Error {
 	 *  @return	array	array containing group ids
 	 */
 	function getGroups() {
+		$result = array () ;
 		$res = db_query_params ('SELECT group_plugin.group_id
 				           FROM group_plugin, plugins
                                            WHERE group_plugin.plugin_id=plugins.plugin_id
@@ -92,8 +93,10 @@ class Plugin extends Error {
 		
 		for ($i=0; $i<$rows; $i++) {
 			$group_id = db_result($res,$i,'group_id');
-			$this->plugins_data[] = $group_id ;
+			$result[] = group_get_object ($group_id) ;
 		}
+		
+		return $result ;
 	}
 }
 
