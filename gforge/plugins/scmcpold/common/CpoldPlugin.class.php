@@ -27,6 +27,7 @@ class CpoldPlugin extends SCMPlugin {
 		$this->SCMPlugin () ;
 		$this->name = 'scmcpold';
 		$this->text = 'CPOLD';
+		$this->hooks[] = 'scm_generate_snapshots' ;
 		$this->hooks[] = 'scm_cpold_do_nothing' ;
 		
 		require_once $gfconfig.'plugins/scmcpold/config.php' ;
@@ -101,6 +102,43 @@ class CpoldPlugin extends SCMPlugin {
 		} else {
 			system ("chmod -R g+wXs,o-rwx $repo") ;
 		}
+	}
+
+	function generateSnapshots ($params) {
+		global $sys_scm_tarballs_path ;
+
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
+		}
+		
+		$group_name = $project->getUnixName() ;
+
+		$tarball = $sys_scm_tarballs_path.'/'.$group_name.'-scmroot.tar.gz';
+
+		if (! $project->usesPlugin ($this->name)
+		    || ! $project->enableAnonSCM()) {
+			unlink ($tarball) ;
+			return false;
+		}
+
+		$toprepo = $this->cpold_root ;
+		$repo = $toprepo . '/' . $project->getUnixName() ;
+
+		if (!is_dir ($repo)) {
+			unlink ($tarball) ;
+			return false ;
+		}
+
+		$tmp = trim (`mktemp -d`) ;
+		if ($tmp == '') {
+			return false ;
+		}
+		system ("tar czCf $toprepo $tmp/tarball.tar.gz " . $project->getUnixName()) ;
+		chmod ("$tmp/tarball.tar.gz", 0644) ;
+		copy ("$tmp/tarball.tar.gz", $tarball) ;
+		unlink ("$tmp/tarball.tar.gz") ;
+		system ("rm -rf $tmp") ;
 	}
   }
 
