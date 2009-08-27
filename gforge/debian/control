@@ -274,6 +274,21 @@ Description: collaborative development tool - Mercurial (Hg) plugin
  and gives some control over it to the project's administrator.
 Provides: gforge-plugin-scm
 
+Package: gforge-plugin-scmarch
+Architecture: all
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, php5-cli, tla, ${misc:Depends}
+Description: collaborative development tool - GNU Arch plugin
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin contains the GNU Arch subsystem of FusionForge. It allows
+ each FusionForge project to have its own Arch repository, and gives
+ some control over it to the project's administrator.
+Provides: gforge-plugin-scm
+
 Package: gforge-plugin-scmcpold
 Architecture: all
 Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, php5-cli, ${misc:Depends}
