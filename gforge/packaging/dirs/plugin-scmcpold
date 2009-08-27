@@ -3,5 +3,4 @@ etc/gforge/plugins/scmcpold
 usr/share/gforge/plugins/scmcpold/bin
 usr/share/gforge/plugins/scmcpold/cronjobs
 usr/share/gforge/plugins/scmcpold/common
-var/lib/gforge/chroot/cpoldroot
-var/lib/gforge/dumps
+var/lib/gforge/chroot/scmrepos/cpold
