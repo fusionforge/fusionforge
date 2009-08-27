@@ -104,8 +104,11 @@ class DarcsPlugin extends SCMPlugin {
 
 		$tarball = $sys_scm_tarballs_path.'/'.$group_name.'-scmroot.tar.gz';
 
-		if (! $project->usesPlugin ($this->name)
-		    || ! $project->enableAnonSCM()) {
+		if (! $project->usesPlugin ($this->name)) {
+			return false;
+		}
+
+		if (! $project->enableAnonSCM()) {
 			unlink ($tarball) ;
 			return false;
 		}

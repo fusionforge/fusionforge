@@ -370,8 +370,11 @@ class CVSPlugin extends SCMPlugin {
 		$snapshot = $sys_scm_snapshots_path.'/'.$group_name.'-scm-latest.tar.gz';
 		$tarball = $sys_scm_tarballs_path.'/'.$group_name.'-scmroot.tar.gz';
 
-		if (! $project->usesPlugin ($this->name)
-		    || ! $project->enableAnonSCM()) {
+		if (! $project->usesPlugin ($this->name)) {
+			return false;
+		}
+
+		if (! $project->enableAnonSCM()) {
 			unlink ($snapshot) ;
 			unlink ($tarball) ;
 			return false;
