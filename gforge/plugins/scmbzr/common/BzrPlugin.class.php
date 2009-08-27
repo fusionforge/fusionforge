@@ -24,7 +24,7 @@
 class BzrPlugin extends SCMPlugin {
 	function BzrPlugin () {
 		global $gfconfig;
-		$this->SCM () ;
+		$this->SCMPlugin () ;
 		$this->name = 'scmbzr';
 		$this->text = 'Bazaar';
 		$this->hooks[] = 'scm_page';

@@ -25,7 +25,7 @@
 class SVNPlugin extends SCMPlugin {
 	function SVNPlugin () {
 		global $gfconfig;
-		$this->SCM () ;
+		$this->SCMPlugin () ;
 		$this->name = 'scmsvn';
 		$this->text = 'SVN';
 		$this->hooks[] = 'scm_page';

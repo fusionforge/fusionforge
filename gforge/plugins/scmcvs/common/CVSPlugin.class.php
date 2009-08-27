@@ -25,7 +25,7 @@ class CVSPlugin extends SCMPlugin {
 	function CVSPlugin () {
 		global $cvs_root;
 		global $gfconfig;
-		$this->SCM () ;
+		$this->SCMPlugin () ;
 		$this->name = 'scmcvs';
 		$this->text = 'CVS';
 		$this->hooks[] = 'scm_page';
