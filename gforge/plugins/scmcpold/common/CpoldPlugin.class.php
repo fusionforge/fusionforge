@@ -56,6 +56,25 @@ class CpoldPlugin extends SCMPlugin {
 		return $b ;
 	}
 
+	function getStats ($params) {
+		$group_id = $params['group_id'] ;
+		$project =& group_get_object($group_id);
+		if (!$project || !is_object($project)) {
+			return false;
+		} elseif ($project->isError()) {
+			return false;
+		}
+		
+		if ($project->usesPlugin ($this->name)) {
+			echo ' (CPOLD)';
+		}
+	}
+	
+	function getDetailedStats ($params) {
+		return ;
+	}
+
+
   }
 
 // Local Variables:
