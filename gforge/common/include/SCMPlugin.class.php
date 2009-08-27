@@ -53,7 +53,7 @@ abstract class SCMPlugin extends Plugin {
 			$this->getAdminPage ($params) ;
 			break ;
 		case 'scm_stats':
-			$this->getStats ($params) ;
+			$this->echoShortStats ($params) ;
 			break;
 		case 'scm_createrepo':
 			$this->createOrUpdateRepo ($params) ;
@@ -82,16 +82,18 @@ abstract class SCMPlugin extends Plugin {
 		}
 	}
 
-	function displayBrowser ($project) {
-		if ($this->browserDisplayable ($project)) {
-			// ...
-		} else {
-			return '' ;
+	abstract function createOrUpdateRepo ($params) ;
+
+	function echoShortStats ($params) {
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
+		}
+		
+		if ($project->usesPlugin ($this->name)) {
+			echo ' ('.$this->name.')' ;
 		}
 	}
-
-	abstract function createOrUpdateRepo ($params) ;
-	abstract function getStats ($params) ;
 
 	function getBlurb () {
 		return _('<p>Unimplemented SCM plugin.</p>');
@@ -105,8 +107,27 @@ abstract class SCMPlugin extends Plugin {
 		return _('<p>Instructions for read-write access for unimplemented SCM plugin.</p>');
 	}
 
-	function getBrowserBlurb () {
-		return _('<b>Browse the SCM Tree</b><p>Browsing the SCM tree gives you a great view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
+	function getSnapshotPara ($project) {
+		return _('<p>Instructions for snapshot access for unimplemented SCM plugin.</p>');
+	}
+
+	function getBrowserBlock ($project) {
+		global $HTML ;
+		$b = $HTML->boxMiddle(_('Repository Browser'));
+		$b = _('<p>Browsing the SCM tree is not yet implemented for this SCM plugin.</p>');
+		$b .= '<p>[' ;
+		$b .= util_make_link ("/scm/?group_id=".$project->getID(),
+				      _('Not implemented yet')
+			) ;
+		$b .= ']</p>' ;
+		return $b ;
+	}
+
+	function getStatsBlock ($project) {
+		global $HTML ;
+		$b = $HTML->boxMiddle(_('Repository Statistics'));
+		$b .= _('<p>Not implemented for this SCM plugin yet.</p>') ;
+		return $b ;
 	}
 
 	function getPage ($params) {
@@ -131,29 +152,18 @@ abstract class SCMPlugin extends Plugin {
 			// Instructions for developer access
 			print $this->getInstructionsForRW ($project) ;
 
-			// SVN Snapshot
+			// Snapshot
 			if ($this->browserDisplayable ($project)) {
-				$filename=$project->getUnixName().'-scm-latest.tar.gz';
-				if (file_exists($sys_scm_snapshots_path.'/'.$filename)) {
-					print '<p>[' ;
-					print util_make_link ("/snapshots.php?group_id=".$project->getID(),
-							      _('Download the nightly snapshot')
-						) ;
-					print ']</p>';
-				}
+				print $this->getSnapshotPara ($project) ;
 			}
 			print '</td><td width="35%" valign="top">' ;
 
 			// Browsing
 			echo $HTML->boxTop(_('Repository History'));
-			echo $this->getDetailedStats(array('group_id'=>$project->getID())).'<p>';
+			echo _('Data about current and past states of the repository') ;
 			if ($this->browserDisplayable ($project)) {
-				print $this->getBrowserBlurb ($project) ;
-				echo '<p>[' ;
-				echo util_make_link ("/scm/viewvc.php/?root=".$project->getUnixName(),
-						     _('Browse Repository')
-					) ;
-				echo ']</p>' ;
+				echo $this->getStatsBlock($project) ;
+				echo $this->getBrowserBlock ($project) ;
 			}
 			
 			echo $HTML->boxBottom();

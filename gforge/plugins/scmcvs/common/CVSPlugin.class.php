@@ -49,6 +49,95 @@ class CVSPlugin extends SCMPlugin {
 		return $this->default_cvs_server;
 	}
 
+	function getBlurb () {
+		return _('<p>CVS documentation is available <a href="http://cvsbook.red-bean.com/">here</a>.</p>');
+	}
+
+	function getInstructionsForAnon ($project) {
+		$cvsrootend = $project->getSCMBox().':'.$this->cvs_root.'/'.$project->getUnixName();
+		$b = _('<p><b>Anonymous CVS Access</b></p><p>This project\'s CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <i>modulename</i>. When prompted for a password for <i>anonymous</i>, simply press the Enter key.</p>');
+		$b .= '<p>
+		       <tt>cvs -d :pserver:anonymous@' . $cvsrootend.' login</tt><br/>
+		       <tt>cvs -d :pserver:anonymous@' . $cvsrootend.' checkout <em>'._('modulename').'</em></tt>
+		       </p>';
+
+		return $b ;
+	}
+
+	function getInstructionsForRW ($project) {
+		$b = _('<p><b>Developer CVS Access via SSH</b></p><p>Only project developers can access the CVS tree via this method. SSH must be installed on your client machine. Substitute <i>modulename</i> and <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
+			$b .= '<p>
+			       <tt>export CVS_RSH=ssh</tt><br/>
+			       <tt>cvs -d :ext:<em>'._('developername').'</em>@'.$cvsrootend.' checkout <em>'._('modulename').'</em></tt>
+			       </p>';
+
+		return $b ;
+	}
+
+	function getSnapshotPara ($project) {
+		$b = $filename=$project->getUnixName().'-scm-latest.tar.gz';
+		if (file_exists($sys_scm_snapshots_path.'/'.$filename)) {
+			$b .= '<p>[' ;
+			$b .= util_make_link ("/snapshots.php?group_id=".$project->getID(),
+					      _('Download the nightly snapshot')
+				) ;
+			$b .= ']</p>';
+		}
+		return $b ;
+	}
+
+	function getBrowserBlock ($project) {
+		global $HTML ;
+		$b = $HTML->boxMiddle(_('CVS Repository Browser'));
+		$b = _('<p>Browsing the CVS tree gives you a view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
+		$b .= '<p>[' ;
+		$b .= util_make_link ("/scm/viewvc.php/?root=".$project->getUnixName(),
+				      _('Browse CVS Repository')
+			) ;
+		$b .= ']</p>' ;
+		return $b ;
+	}
+
+	function getStatsBlock ($project) {
+		global $HTML ;
+		$b = $HTML->boxMiddle(_('Repository Statistics'));
+
+		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(commits) as commits, sum(adds) as adds, sum(adds+commits) as combined FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (commits>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id ORDER BY combined DESC, realname',
+					  array ($project->getID()));
+		
+		if (db_numrows($result) > 0) {
+			$tableHeaders = array(
+				_('Name'),
+				_('Adds'),
+				_('Commits')
+				);
+			$b .= $HTML->listTableTop($tableHeaders);
+			
+			$i = 0;
+			$total = array('adds' => 0, 'commits' => 0);
+			
+			while($data = db_fetch_array($result)) {
+				$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
+				$b .= '<td width="50%">' ;
+				$b .= util_make_link_u ($data['user_name'], $data['user_id'], $data['realname']) ;
+				$b .= '</td><td width="25%" align="right">'.$data['adds']. '</td>'.
+					'<td width="25%" align="right">'.$data['commits'].'</td></tr>';
+				$total['adds'] += $data['adds'];
+				$total['commits'] += $data['commits'];
+				$i++;
+			}
+			$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
+			$b .= '<td width="50%"><strong>'._('Total').':</strong></td>'.
+				'<td width="25%" align="right"><strong>'.$total['adds']. '</strong></td>'.
+				'<td width="25%" align="right"><strong>'.$total['commits'].'</strong></td>';
+			$b .= '</tr>';
+			$b .= $HTML->listTableBottom();
+			$b .= '<hr size="1" />';
+		}
+
+		return $b ;
+	}
+
 	function CallHook ($hookname, $params) {
 		global $HTML;
 		
@@ -61,121 +150,7 @@ class CVSPlugin extends SCMPlugin {
 		}
 	}
 
-	function getPage ($params) {
-		global $HTML ;
-
-		$project = $this->checkParams ($params) ;
-		if (!$project) {
-			return false ;
-		}
-		
-		if ($project->usesPlugin($this->name)) {
-		
-			print _('Some CVS documentation is available <a href="http://www.nongnu.org/cvs/">Here</a>');
-
-			$cvsrootend=$project->getSCMBox().':/cvsroot/'.$project->getUnixName();
-			$cvsrootend = $project->getSCMBox().':'.$this->cvs_root.'/'.$project->getUnixName();
-
-			// Table for summary info
-			print '<table width="100%"><tr valign="top"><td width="65%">' ;
-
-			// Anonymous CVS Instructions
-			if ($project->enableAnonSCM()){
-				echo _('<p><b>Anonymous CVS Access</b></p><p>This project\'s CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <i>modulename</i>. When prompted for a password for <i>anonymous</i>, simply press the Enter key.</p>');
-				print '
-						<p>
-						<tt>cvs -d :pserver:anonymous@' . $cvsrootend.' login</tt><br/>
-						<tt>cvs -d :pserver:anonymous@' . $cvsrootend.' checkout <em>'._('modulename').'</em></tt>
-						</p>';
-			}
-			
-			// Developer Access
-			if (session_loggedin ()) {
-				echo _('<p><b>Developer CVS Access via SSH</b></p><p>Only project developers can access the CVS tree via this method. SSH must be installed on your client machine. Substitute <i>modulename</i> with the proper value. Enter your site password when prompted.</p>');
-				print '
-					<p>
-					<tt>export CVS_RSH=ssh</tt><br/>
-					<tt>cvs -d :ext:' ;
-				$u = session_get_user();
-				print $u->getUnixName();
-				print '@'.$cvsrootend.' checkout <em>'._('modulename').'</em></tt>
-					</p>';
-			} else {
-				echo _('<p><b>Developer CVS Access via SSH</b></p><p>Only project developers can access the CVS tree via this method. SSH must be installed on your client machine. Substitute <i>modulename</i> and <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
-				print '
-					<p>
-					<tt>export CVS_RSH=ssh</tt><br/>
-					<tt>cvs -d :ext:<em>'._('developername').'</em>@'.$cvsrootend.' checkout <em>'._('modulename').'</em></tt>
-					</p>';
-			}
-			
-			// CVS Snapshot
-			if ($this->browserDisplayable ($project)) {
-				print '<p>[' ;
-				print util_make_link ("/snapshots.php?group_id=".$project->getID(),
-						      _('Download The Nightly CVS Tree Snapshot')
-					) ;
-				print ']</p>';
-			}
-			print '</td><td width="35%" valign="top">' ;
-			
-			// CVS Browsing 
-			echo $HTML->boxTop(_('Repository History'));
-			echo $this->getDetailedStats(array('group_id'=>$project->getID())).'<p>';
-			if ($this->browserDisplayable ($project)) {
-				echo _('<b>Browse the CVS Tree</b><p>Browsing the CVS tree gives you a great view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
-				echo '<p>[' ;
-				echo util_make_link ("/scm/viewvc.php/?root=".$project->getUnixName(),
-						     _('Browse CVS Repository')
-					) ;
-				echo ']</p>' ;
-				$hook_params['project_name'] = $project->getUnixName();
-				plugin_hook ("cvs_stats", $hook_params) ;
-			}
-			echo $HTML->boxBottom();
-			print '</td></tr></table>' ;
-		}	
-	}
-
-	function adminUpdate ($params) {
-		$project = $this->checkParams ($params) ;
-		if (!$project) {
-			return false ;
-		}
-		
-		if ($project->usesPlugin($this->name)) {
-			if (array_key_exists('scmcvs_enable_anoncvs', $params)){
-				$project->SetUsesAnonSCM(true);
-			} else {
-				$project->SetUsesAnonSCM(false);
-			}
-			if (array_key_exists('scmcvs_enable_pserver', $params)){
-				$project->SetUsesPserver(true);
-			} else {
-				$project->SetUsesPserver(false);
-			}
-		}
-	}
-	
-	function getAdminPage ($params) {
-		$project = $this->checkParams ($params) ;
-		if (!$project) {
-			return false ;
-		}
-		
-		if ($project->usesPlugin($this->name)) {
-			print '<p>';
-			if ($project->isPublic()) {
-				print '<input type="checkbox" name="scmcvs_enable_anoncvs" value="1" '.$this->c($project->enableAnonSCM()).'/><strong>'._('Enable Anonymous Access').'</strong><br />';
-			} else {
-				print '<input type="checkbox" name="scmcvs_enable_anoncvs" value="1" '.$this->c($project->enableAnonSCM()).' DISABLED/>'._('Enable Anonymous Access').' <strong>'._("You project is private and so, you can't turn Anonymous Access on").'</strong><br />';
-
-			}
-			print '<input type="checkbox" name="scmcvs_enable_pserver" value="1" '.$this->c($project->enablePserver()).' /><strong>'._('Enable pserver').'</strong></p>' ;
-		}
-	}
-
-	function getStats ($params) {
+	function echoShortStats ($params) {
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
 			return false ;
@@ -196,48 +171,6 @@ class CVSPlugin extends SCMPlugin {
 		}
 	}
 	
-	function getDetailedStats ($params) {
-		global $HTML;
-
-		$project = $this->checkParams ($params) ;
-		if (!$project) {
-			return false ;
-		}
-		
-		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(commits) as commits, sum(adds) as adds, sum(adds+commits) as combined FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (commits>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id ORDER BY combined DESC, realname',
-					  array ($project->getID()));
-		
-		if (db_numrows($result) > 0) {
-			$tableHeaders = array(
-				_('Name'),
-				_('Adds'),
-				_('Commits')
-				);
-			echo $HTML->listTableTop($tableHeaders);
-			
-			$i = 0;
-			$total = array('adds' => 0, 'commits' => 0);
-			
-			while($data = db_fetch_array($result)) {
-				echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
-				echo '<td width="50%">' ;
-				echo util_make_link_u ($data['user_name'], $data['user_id'], $data['realname']) ;
-				echo '</td><td width="25%" align="right">'.$data['adds']. '</td>'.
-					'<td width="25%" align="right">'.$data['commits'].'</td></tr>';
-				$total['adds'] += $data['adds'];
-				$total['commits'] += $data['commits'];
-				$i++;
-			}
-			echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
-			echo '<td width="50%"><strong>'._('Total').':</strong></td>'.
-				'<td width="25%" align="right"><strong>'.$total['adds']. '</strong></td>'.
-				'<td width="25%" align="right"><strong>'.$total['commits'].'</strong></td>';
-			echo '</tr>';
-			echo $HTML->listTableBottom();
-			echo '<hr size="1" />';
-		}
-	}
-
 	function createOrUpdateRepo ($params) {
 		$project = $this->checkParams ($params) ;
 		if (!$project) {

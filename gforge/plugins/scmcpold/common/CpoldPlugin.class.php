@@ -56,18 +56,15 @@ class CpoldPlugin extends SCMPlugin {
 		return $b ;
 	}
 
-	function getStats ($params) {
-		$project = $this->checkParams ($params) ;
-		if (!$project) {
-			return false ;
-		}
-		
-		if ($project->usesPlugin ($this->name)) {
-			echo ' (CPOLD)';
-		}
+	function getSnapshotPara ($project) {
+		return ;
 	}
-	
-	function getDetailedStats ($params) {
+
+	function getBrowserBlock ($project) {
+		return ;
+	}
+
+	function getStatsBlock ($project) {
 		return ;
 	}
 
