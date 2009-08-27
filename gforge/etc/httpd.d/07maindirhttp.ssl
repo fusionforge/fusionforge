@@ -24,7 +24,7 @@
 		Include   {gforge_etc}/httpd.secrets
 	</Directory>
 
-	ScriptAliasMatch ^{sys_urlprefix}plugins/([^/]*)/cgi-bin/(.*) /usr/share/gforge/plugins/$1/cgi-bin/$2
+	ScriptAliasMatch ^{sys_urlprefix}plugins/([^/]*)/cgi-bin/(.*) {usr_share_gforge}/plugins/$1/cgi-bin/$2
 
 	# Projects and Users script
 	<Location {sys_urlprefix}projects>
