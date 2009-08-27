@@ -100,7 +100,7 @@ abstract class SCMPlugin extends Plugin {
 		}
 		
 		if ($project->usesPlugin ($this->name)) {
-			echo ' ('.$this->name.')' ;
+			echo ' ('.$this->text.')' ;
 		}
 	}
 

@@ -53,9 +53,18 @@ class SVNPlugin extends SCMPlugin {
 			return false ;
 		}
 		
-		if ($project->usesPlugin ($this->name)) {
-			list($commit_num, $add_num) = $this->getTotalStats($project->getID());
-			echo ' (SVN: '.sprintf(_('<strong>%1$s</strong> updates, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).')';
+		if ($project->usesPlugin($this->name)) {
+			$result = db_query_params('SELECT sum(commits) AS commits, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
+						  array ($project->getID())) ;
+			$commit_num = db_result($result,0,'commits');
+			$add_num    = db_result($result,0,'adds');
+			if (!$commit_num) {
+				$commit_num=0;
+			}
+			if (!$add_num) {
+				$add_num=0;
+			}
+			echo ' (SVN: '.sprintf(_('<strong>%1$s</strong> commits, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
 		}
 	}
 	
@@ -223,6 +232,11 @@ class SVNPlugin extends SCMPlugin {
 			$start_time = gmmktime( 0, 0, 0, $month, $day, $year);
 			$end_time = $start_time + 86400;
 
+			$updates = 0 ;
+			$adds = 0 ;
+			$usr_adds = array () ;
+			$usr_updates = array () ;
+
 			$repo = $this->svn_root . '/' . $project->getUnixName() ;
 			if (!is_dir ($repo) || !is_file ("$repo/format")) {
 				echo "No repository\n" ;
@@ -230,7 +244,7 @@ class SVNPlugin extends SCMPlugin {
 				return false ;
 			}
 	
-			$pipe = popen ("svn log $repo --xml -v -q", 'r' ) ;
+			$pipe = popen ("svn log file://$repo --xml -v -q", 'r' ) ;
 
 			// cleaning stats_cvs_* table for the current day
 			$res = db_query_params ('DELETE FROM stats_cvs_group WHERE month=$1 AND day=$2 AND group_id=$3',
@@ -298,7 +312,7 @@ class SVNPlugin extends SCMPlugin {
 
 			foreach ( $user_list as $user ) {
 				// trying to get user id from user name
-				$u = &user_get_object_by_name ($last_user) ;
+				$u = &user_get_object_by_name ($user) ;
 				if ($u) {
 					$user_id = $u->getID();
 				} else {
@@ -388,15 +402,6 @@ function SVNPluginCharData ($parser, $chars) {
 	case "AUTHOR":
 		$last_user = ereg_replace ('[^a-z0-9_-]', '', 
 					   strtolower (trim ($chars))) ;
-		// We can save time by looking up users and caching them
-		if (!array_key_exists($last_user, $user_list)) {
-			$u = &user_get_object_by_name ($last_user) ;
-			if ($u) {
-				$user_list[$last_user] = $u->getID();
-			} else {
-				$user_list[$last_user] = -1;
-			}
-		}
 		break;
 	case "DATE":
 		$chars = preg_replace('/T(\d\d:\d\d:\d\d)\.\d+Z?$/', ' ${1}', $chars);
@@ -421,7 +426,7 @@ function SVNPluginStartElement($parser, $name, $attrs) {
 		$last_time = "";
 		break;
 	case "PATH":
-		if ($time_ok && $date_key) {
+		if ($time_ok) {
 			if ($attrs['ACTION'] == "M") {
 				$updates++;
 				if ($last_user) {
