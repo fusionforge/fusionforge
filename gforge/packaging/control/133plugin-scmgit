@@ -1,0 +1,5 @@
+Package: @PACKAGE@-plugin-scmgit
+Architecture: all
+Depends: @PACKAGE@-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, git-core, gitweb, php5-cli, ${misc:Depends}
+Provides: @PACKAGE@-plugin-scm
+Description: collaborative development tool - Git plugin

@@ -1,0 +1,5 @@
+Package: @PACKAGE@-plugin-scmbzr
+Architecture: all
+Depends: @PACKAGE@-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, bzr, php5-cli, ${misc:Depends}
+Provides: @PACKAGE@-plugin-scm
+Description: collaborative development tool - Bazaar plugin
