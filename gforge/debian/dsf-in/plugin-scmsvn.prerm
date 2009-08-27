@@ -1,5 +1,5 @@
 #! /bin/sh
-# prerm script for gforge-plugin-scmsvn
+# prerm script for @PACKAGE@-plugin-scmsvn
 #
 # see: dh_installdeb(1)
 set -e
@@ -22,7 +22,7 @@ case "$1" in
     remove|deconfigure)
 	if [ -f /var/run/postgresql/.s.PGSQL.5432 ]
 	then
-		/usr/share/gforge/bin/unregister-plugin scmsvn
+		/usr/share/@PACKAGE@/bin/unregister-plugin scmsvn
 	else
 		echo "WARNING: GForge database not available to unregister scmsvn plugin"
 	fi
@@ -36,7 +36,7 @@ case "$1" in
 			invoke-rc.d --quiet apache2 reload
 		fi
 	fi
-	/usr/share/gforge/plugins/scmsvn/bin/install-svn.sh purge
+	/usr/share/@PACKAGE@/plugins/scmsvn/bin/install-svn.sh purge
         ;;
     upgrade|failed-upgrade)
         ;;

@@ -1,5 +1,5 @@
 #! /bin/sh
-# prerm script for gforge-plugin-scmbzr
+# prerm script for @PACKAGE@-plugin-scmarch
 #
 # see: dh_installdeb(1)
 set -e
@@ -22,9 +22,9 @@ case "$1" in
     remove|deconfigure)
 	if [ -f /var/run/postgresql/.s.PGSQL.5432 ]
 	then
-		/usr/share/gforge/bin/unregister-plugin scmbzr
+		/usr/share/@PACKAGE@/bin/unregister-plugin scmarch
 	else
-		echo "WARNING: database not available to unregister scmbzr plugin"
+		echo "WARNING: database not available to unregister scmarch plugin"
 	fi
         ;;
     upgrade|failed-upgrade)

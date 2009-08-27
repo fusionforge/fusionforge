@@ -1,5 +1,5 @@
 #! /bin/sh
-# prerm script for gforge-plugin-scmcpold
+# prerm script for @PACKAGE@-plugin-scmhg
 #
 # see: dh_installdeb(1)
 set -e
@@ -22,9 +22,9 @@ case "$1" in
     remove|deconfigure)
 	if [ -f /var/run/postgresql/.s.PGSQL.5432 ]
 	then
-		/usr/share/gforge/bin/unregister-plugin scmcpold
+		/usr/share/@PACKAGE@/bin/unregister-plugin scmhg
 	else
-		echo "WARNING: database not available to unregister scmcpold plugin"
+		echo "WARNING: database not available to unregister scmhg plugin"
 	fi
         ;;
     upgrade|failed-upgrade)

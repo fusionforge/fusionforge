@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for gforge-plugin-scmdarcs
+# postinst script for @PACKAGE@-plugin-scmhg
 #
 # see: dh_installdeb(1)
 
@@ -25,10 +25,10 @@ set -e
 
 case "$1" in
     configure)
-	gforge-config
+	@PACKAGE@-config
 
 	# Prepare database
-	su -s /bin/sh gforge -c '/usr/share/gforge/bin/register-plugin scmdarcs "Darcs"'
+	su -s /bin/sh @PACKAGE@ -c '/usr/share/gforge/bin/register-plugin scmhg "Mercurial"'
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
