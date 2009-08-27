@@ -34,8 +34,10 @@ gforge (4.8-1+scmrefactor) UNRELEASED; urgency=low
     fulfilled by the plugin hook.
   * Ditto for svn_dump.pl and svn_update.pl.
   * Added plugin-scmcpold as a proof of concept for other plugins.
+  * Also scmgit, scmbzr, scmdarcs and scmhg.  Not all of them are complete
+    yet.
 
- -- Roland Mas <lolando@debian.org>  Mon, 20 Jul 2009 11:15:00 +0200
+ -- Roland Mas <lolando@debian.org>  Thu, 06 Aug 2009 16:41:09 +0200
 
 gforge (4.8-3) unstable; urgency=low
 
