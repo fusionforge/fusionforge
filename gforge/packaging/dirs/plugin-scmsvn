@@ -4,5 +4,6 @@ usr/share/gforge/plugins/scmsvn/bin
 usr/share/gforge/plugins/scmsvn/cronjobs
 usr/share/gforge/plugins/scmsvn/common
 var/lib/gforge/chroot/svnroot
+var/lib/gforge/chroot/scmrepos/svn
 var/lib/gforge/dumps
 var/log/gforge/svn

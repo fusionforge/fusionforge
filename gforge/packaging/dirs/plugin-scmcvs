@@ -5,4 +5,5 @@ usr/share/gforge/plugins/scmcvs/sbin
 usr/share/gforge/plugins/scmcvs/cronjobs
 usr/share/gforge/plugins/scmcvs/common
 var/lib/gforge/chroot/cvsroot
+var/lib/gforge/chroot/scmrepos/cvs
 var/log/gforge/cvs

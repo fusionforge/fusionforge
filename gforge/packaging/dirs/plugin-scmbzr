@@ -3,4 +3,4 @@ etc/gforge/plugins/scmbzr
 usr/share/gforge/plugins/scmbzr/bin
 usr/share/gforge/plugins/scmbzr/cronjobs
 usr/share/gforge/plugins/scmbzr/common
-var/lib/gforge/chroot/bzrroot
+var/lib/gforge/chroot/scmrepos/bzr

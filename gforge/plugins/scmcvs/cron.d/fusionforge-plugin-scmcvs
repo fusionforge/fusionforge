@@ -30,21 +30,3 @@ MAILTO=""
 #       Create the blank cvs trees
 #
 20 * * * * root $PHP $FUSIONFORGE/plugins/scmcvs/cronjobs/cvs.php
-
-#
-#       Daily stats collection
-#
-20 1 * * * root $PHP $FUSIONFORGE/plugins/scmcvs/cronjobs/history_parse.php
-
-#
-#       Create CVS tarballs
-#
-5 2 * * * root $PHP $FUSIONFORGE/plugins/scmcvs/cronjobs/tarballs.php
-
-#
-#       Create CVS snapshots
-#
-# CVSROOT and SCMSNAPSHOTSDIR variables are hard-coded in the script, so
-# you'll have to edit the script if necessary.
-#
-35 2 * * * root /bin/sh $FUSIONFORGE/plugins/scmcvs/cronjobs/snapshots.sh generate
