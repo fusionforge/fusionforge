@@ -37,7 +37,7 @@ class CVSPlugin extends SCMPlugin {
 		$this->default_cvs_server = $default_cvs_server ;
 		if ($cvs_root) {
 			$this->cvs_root = $cvs_root;
-		elseif ($cvsdir_prefix) {
+		} elseif ($cvsdir_prefix) {
 			$this->cvs_root = $cvsdir_prefix;
 		} else {
 			$this->cvs_root = "/cvsroot";
