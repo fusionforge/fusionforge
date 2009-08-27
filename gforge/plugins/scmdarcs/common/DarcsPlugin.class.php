@@ -48,12 +48,16 @@ class DarcsPlugin extends SCMPlugin {
 
 	function getInstructionsForAnon ($project) {
 		$b =  _('<p><b>Anonymous Darcs Access</b></p><p>This project\'s Darcs repository cannot be anonymously checked out yet.</p>');
+		$b .= '<p>' ;
+		$b .= '<tt>bzr checkout http://'.$project->getSCMBox().$this->bzr_root.'/'.$project->getUnixName().'/'._('branchname').'</tt><br />';
+		$b .= '</p>';
+		return $b ;
 		return $b ;
 	}
 
 	function getInstructionsForRW ($project) {
 		$b = _('<p><b>Developer Darcs Access via SSH</b></p><p>Only project developers can access the Darcs tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
-		$b .= '<p><tt>scp -r <i>'._('developername').'</i>@' . $project->getSCMBox() . ':'. $this->darcs_root .'/'. $project->getUnixName().'/ .</tt></p>' ;
+		$b .= '<p><tt>darcs get '.$project->getSCMBox() . ':'. $this->darcs_root .'/'. $project->getUnixName().'/ .</tt></p>' ;
 		return $b ;
 	}
 
@@ -82,7 +86,11 @@ class DarcsPlugin extends SCMPlugin {
 		$repo = $this->darcs_root . '/' . $project->getUnixName() ;
 		$unix_group = 'scm_' . $project->getUnixName() ;
 
-		system ("mkdir -p $repo") ;
+		if (!is_dir ($repo."_darcs")) {
+			system ("mkdir -p $repo") ;
+			system ("cd $repo ; darcs init >/dev/null") ;
+		}
+		
 		system ("chgrp -R $unix_group $repo") ;
 		if ($project->enableAnonSCM()) {
 			system ("chmod -R g+wXs,o+rX-w $repo") ;
@@ -124,6 +132,16 @@ class DarcsPlugin extends SCMPlugin {
 		if ($tmp == '') {
 			return false ;
 		}
+		$today = date ('Y-m-d') ;
+		$dir = $project->getUnixName ()."-$today" ;
+		system ("mkdir -p $tmp/$dir") ;
+		system ("cd $tmp ; darcs $repo $dir > /dev/null 2>&1") ;
+		system ("tar czCf $tmp $tmp/snapshot.tar.gz $dir") ;
+		chmod ("$tmp/snapshot.tar.gz", 0644) ;
+		copy ("$tmp/snapshot.tar.gz", $snapshot) ;
+		unlink ("$tmp/snapshot.tar.gz") ;
+		system ("rm -rf $tmp/$dir") ;
+
 		system ("tar czCf $toprepo $tmp/tarball.tar.gz " . $project->getUnixName()) ;
 		chmod ("$tmp/tarball.tar.gz", 0644) ;
 		copy ("$tmp/tarball.tar.gz", $tarball) ;
