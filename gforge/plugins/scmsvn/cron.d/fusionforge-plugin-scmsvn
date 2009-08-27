@@ -17,26 +17,7 @@ PHP="/usr/bin/php -q -d include_path=.:/etc/gforge:/usr/share/gforge:/usr/share/
 MAILTO=""
 
 #
-#       Create the blank svn trees for SVN-over-DAV
-#       (all repositories owned by apache)
-#
-21 * * * * root $PHP $FUSIONFORGE/plugins/scmsvn/cronjobs/create_svn.php
-
-#
-#       Create SVN snapshots
-#
-# SVNROOT and SCMSNAPSHOTSDIR variables are hard-coded in the script, so
-# you'll have to edit the script if necessary.
-#
-35 3 * * * root /bin/sh $FUSIONFORGE/plugins/scmsvn/cronjobs/snapshots.sh generate
-
-#
 #       Daily SVN stats collection
 #
 20 1 * * * root $PHP $FUSIONFORGE/plugins/scmsvn/cronjobs/svn-stats.php
-
-#
-#       Create SVN tarballs
-#
-5 3 * * * root $PHP $FUSIONFORGE/plugins/scmsvn/cronjobs/tarballs.php
 

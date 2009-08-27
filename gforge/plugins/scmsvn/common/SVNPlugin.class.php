@@ -28,6 +28,7 @@ class SVNPlugin extends SCMPlugin {
 		$this->SCMPlugin () ;
 		$this->name = 'scmsvn';
 		$this->text = 'SVN';
+		$this->hooks[] = 'scm_generate_snapshots' ;
 
 		require_once $gfconfig.'plugins/scmsvn/config.php' ;
 		
@@ -185,12 +186,7 @@ class SVNPlugin extends SCMPlugin {
 		$repo = $this->svn_root . '/' . $project->getUnixName() ;
 		$unix_group = 'scm_' . $project->getUnixName() ;
 
-		$repo_exists = false ;
-		if (is_dir ($repo) && is_file ("$repo/format")) {
-			$repo_exists = true ;
-		}
-               
-		if (!$repo_exists) {
+		if (!is_dir ($repo) || !is_file ("$repo/format")) {
 			system ("svnadmin create --fs-type fsfs $repo") ;
 		}
 
@@ -200,6 +196,63 @@ class SVNPlugin extends SCMPlugin {
 		} else {
 			system ("chmod -R g+wXs,o-rwx $repo") ;
 		}
+	}
+
+	function generateSnapshots ($params) {
+		global $sys_scm_snapshots_path ;
+		global $sys_scm_tarballs_path ;
+
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
+		}
+		
+		$group_name = $project->getUnixName() ;
+
+		$snapshot = $sys_scm_snapshots_path.'/'.$group_name.'-scm-latest.tar.gz';
+		$tarball = $sys_scm_tarballs_path.'/'.$group_name.'-scmroot.tar.gz';
+
+		if (! $project->usesPlugin ($this->name)
+		    || ! $project->enableAnonSCM()) {
+			unlink ($snapshot) ;
+			unlink ($tarball) ;
+			return false;
+		}
+
+		$toprepo = $this->svn_root ;
+		$repo = $toprepo . '/' . $project->getUnixName() ;
+
+		if (!is_dir ($repo) || !is_file ("$repo/format")) {
+			unlink ($snapshot) ;
+			unlink ($tarball) ;
+			return false ;
+		}
+
+		$tmp = trim (`mktemp -d`) ;
+		if ($tmp == '') {
+			return false ;
+		}
+		$today = date ('Y-m-d') ;
+		$dir = $project->getUnixName ()."-$today" ;
+		system ("mkdir -p $tmp") ;
+		$code = 0 ;
+		system ("svn ls file://$repo/trunk", $code) ;
+		if ($code == 0) {
+			system ("cd $tmp ; svn checkout file://$repo/trunk $dir > /dev/null 2>&1") ;
+			system ("tar czCf $tmp $tmp/snapshot.tar.gz $dir") ;
+			chmod ("$tmp/snapshot.tar.gz", 0644) ;
+			copy ("$tmp/snapshot.tar.gz", $snapshot) ;
+			unlink ("$tmp/snapshot.tar.gz") ;
+			system ("rm -rf $tmp/$dir") ;
+		} else {
+			unlink ($snapshot) ;
+		}
+
+		system ("tar czCf $toprepo $tmp/tarball.tar.gz " . $project->getUnixName()) ;
+		chmod ("$tmp/tarball.tar.gz", 0644) ;
+		copy ("$tmp/tarball.tar.gz", $tarball) ;
+		unlink ("$tmp/tarball.tar.gz") ;
+		system ("rm -rf $tmp") ;
 	}
   }
 
