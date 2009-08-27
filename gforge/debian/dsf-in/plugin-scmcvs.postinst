@@ -45,8 +45,6 @@ case "$1" in
 	# Making user group and cvs update from database 
 	/usr/share/@PACKAGE@/plugins/scmcvs/bin/update-user-group-ssh.sh > /dev/null 2>&1
 	rm -f /var/lib/@PACKAGE@/dumps/*cvs*dump
-	su -s /bin/sh @PACKAGE@ -c /usr/share/@PACKAGE@/plugins/scmcvs/cronjobs/cvs_dump.pl
-	/usr/share/@PACKAGE@/plugins/scmcvs/cronjobs/cvs_update.pl
 
 	if [ ! -e /var/lib/@PACKAGE@/chroot/cvs ] ; then
 	    cd /var/lib/@PACKAGE@/chroot
