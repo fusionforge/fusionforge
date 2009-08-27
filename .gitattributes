@@ -63,8 +63,6 @@ gforge/deb-specific/fckeditor/config.js -text
 gforge/deb-specific/gforge.logrotate -text
 gforge/deb-specific/install-cvs.sh -text
 gforge/deb-specific/scmcvs/cronjobs/cvs-stats.pl -text
-gforge/deb-specific/scmcvs/cronjobs/cvs_dump.pl -text
-gforge/deb-specific/scmcvs/cronjobs/cvs_update.pl -text
 gforge/deb-specific/scmsvn/cronjobs/svn_dump.pl -text
 gforge/deb-specific/scmsvn/cronjobs/svn_update.pl -text
 gforge/debian/compat -text
