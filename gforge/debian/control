@@ -214,6 +214,23 @@ Description: collaborative development tool - Subversion plugin
  each FusionForge project to have its own Subversion repository, and gives
  some control over it to the project's administrator.
 
+Package: gforge-plugin-scmcpold
+Architecture: all
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, php5-cli, ${misc:Depends}
+Description: collaborative development tool - CPOLD plugin
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin contains the CPOLD subsystem of FusionForge. It allows
+ each FusionForge project to have its own CPOLD repository, and gives
+ some control over it to the project's administrator.
+ .
+ It is mostly intended as a proof of concept.
+Provides: gforge-plugin-scm
+
 Package: gforge-plugin-mediawiki
 Architecture: all
 Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, mediawiki, ${misc:Depends}
