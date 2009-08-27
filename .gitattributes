@@ -88,6 +88,8 @@ gforge/debian/dsf-po/fi.po -text
 gforge/debian/dsf-po/gl.po -text
 gforge/debian/dsf-po/pt.po -text
 gforge/debian/dsf-po/ru.po -text
+gforge/debian/gforge-plugin-scmarch.postinst -text
+gforge/debian/gforge-plugin-scmarch.prerm -text
 gforge/debian/gforge-plugin-scmbzr.postinst -text
 gforge/debian/gforge-plugin-scmbzr.prerm -text
 gforge/debian/gforge-plugin-scmcpold.postinst -text
@@ -183,6 +185,7 @@ gforge/packaging/dirs/plugin-extratabs -text
 gforge/packaging/dirs/plugin-globalsearch -text
 gforge/packaging/dirs/plugin-mediawiki -text
 gforge/packaging/dirs/plugin-projectlabels -text
+gforge/packaging/dirs/plugin-scmarch -text
 gforge/packaging/dirs/plugin-scmbzr -text
 gforge/packaging/dirs/plugin-scmcpold -text
 gforge/packaging/dirs/plugin-scmcvs -text
@@ -203,6 +206,7 @@ gforge/packaging/install/plugin-extratabs -text
 gforge/packaging/install/plugin-globalsearch -text
 gforge/packaging/install/plugin-mediawiki -text
 gforge/packaging/install/plugin-projectlabels -text
+gforge/packaging/install/plugin-scmarch -text
 gforge/packaging/install/plugin-scmbzr -text
 gforge/packaging/install/plugin-scmcpold -text
 gforge/packaging/install/plugin-scmcvs -text
