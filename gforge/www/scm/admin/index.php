@@ -48,9 +48,12 @@ if (getStringFromRequest('submit')) {
 		foreach ($scm_list as $scm) {
 			if ($key == strstr($key, $scm . "_")) {
 				$hook_params[$key] = $value;
-			} elseif ($key == 'scmradio') {
-				$scmradio = $value;
 			}
+		}
+		if ($key == strstr($key, "scm_")) {
+			$hook_params[$key] = $value;
+		} elseif ($key == 'scmradio') {
+			$scmradio = $value;
 		}
 	}
 

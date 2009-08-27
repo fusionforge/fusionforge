@@ -157,15 +157,6 @@ class CVSPlugin extends SCMPlugin {
 		}
 	}
 	
-	// This function is used to render checkboxes below
-	function c($v) {
-		if ($v) {
-			return 'checked="checked"';
-		} else {
-			return '';
-		}
-	}
-
 	function getAdminPage ($params) {
 		$project = $this->checkParams ($params) ;
 		if (!$project) {

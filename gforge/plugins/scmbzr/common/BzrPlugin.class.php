@@ -48,14 +48,14 @@ class BzrPlugin extends SCMPlugin {
 	function getInstructionsForAnon ($project) {
 		$b =  _('<p><b>Anonymous Bazaar Access</b></p><p>This project\'s Bazaar repository can be checked out through anonymous access with the following command(s).</p>');
 		$b .= '<p>' ;
-		$b .= '<tt>bzr checkout http://'.$project->getSCMBox().'/'.$this->bzr_root.'/'.$project->getUnixName().'</tt><br />';
+		$b .= '<tt>bzr checkout http://'.$project->getSCMBox().$this->bzr_root.'/'.$project->getUnixName().'/'._('branchname').'</tt><br />';
 		$b .= '</p>';
 		return $b ;
 	}
 
 	function getInstructionsForRW ($project) {
 		$b = '' ;
-		$b .= _('<p><b>Developer Subversion Access via SSH</b></p><p>Only project developers can access the SVN tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
+		$b .= _('<p><b>Developer Bazaar Access via SSH</b></p><p>Only project developers can access the Bazaar branches via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
 		$b .= '<p><tt>bzr checkout bzr+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. $this->bzr_root .'/'. $project->getUnixName().'/'._('branchname').'</tt></p>' ;
 		
 		return $b ;

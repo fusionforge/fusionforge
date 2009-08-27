@@ -77,29 +77,6 @@ class SVNPlugin extends SCMPlugin {
 		return $b ;
 	}
 
-	function AdminUpdate ($params) {
-		$project = $this->checkParams ($params) ;
-		if (!$project) {
-			return false ;
-		}
-		
-		if ($project->usesPlugin ($this->name) ) {
-			if ($params['scmsvn_enable_anon_svn']) {
-				$project->SetUsesAnonSCM(true);
-			} else {
-				$project->SetUsesAnonSCM(false);
-			}
-		}
-	}
-	
-	// This function is used to render checkboxes below
-	function getAdminPage ($params) {
-		$group =& group_get_object($params['group_id']);
-		if ( $group->usesPlugin ( $this->name ) && $group->isPublic()) {
-			print '<p><input type="checkbox" name="scmsvn_enable_anon_svn" value="1" '.$this->c($group->enableAnonSCM()).' /><strong>'._('Enable Anonymous Access').'</strong></p>';
-		}
-	}
-	
 	function getStats ($params) {
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
