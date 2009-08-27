@@ -44,8 +44,7 @@ abstract class SCMPlugin extends Plugin {
 		
 		switch ($hookname) {
 		case 'scm_page':
-			$group_id = $params['group_id'] ;
-			$this->getPage ($group_id) ;
+			$this->getPage ($params) ;
 			break ;
 		case 'scm_admin_update':
 			$this->AdminUpdate ($params) ;
@@ -110,16 +109,14 @@ abstract class SCMPlugin extends Plugin {
 		return _('<b>Browse the SCM Tree</b><p>Browsing the SCM tree gives you a great view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
 	}
 
-	function getPage ($group_id) {
+	function getPage ($params) {
 		global $HTML, $sys_scm_snapshots_path;
 
-		$project =& group_get_object($group_id);
-		if (!$project || !is_object($project)) {
-			return false;
-		} elseif ($project->isError()) {
-			return false;
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
 		}
-
+		
 		if ($project->usesPlugin ($this->name)) {
 
 			// Table for summary info
@@ -139,7 +136,7 @@ abstract class SCMPlugin extends Plugin {
 				$filename=$project->getUnixName().'-scm-latest.tar.gz';
 				if (file_exists($sys_scm_snapshots_path.'/'.$filename)) {
 					print '<p>[' ;
-					print util_make_link ("/snapshots.php?group_id=$group_id",
+					print util_make_link ("/snapshots.php?group_id=".$project->getID(),
 							      _('Download the nightly snapshot')
 						) ;
 					print ']</p>';
@@ -149,7 +146,7 @@ abstract class SCMPlugin extends Plugin {
 
 			// Browsing
 			echo $HTML->boxTop(_('Repository History'));
-			echo $this->getDetailedStats(array('group_id'=>$group_id)).'<p>';
+			echo $this->getDetailedStats(array('group_id'=>$project->getID())).'<p>';
 			if ($this->browserDisplayable ($project)) {
 				print $this->getBrowserBlurb ($project) ;
 				echo '<p>[' ;

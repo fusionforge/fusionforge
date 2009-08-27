@@ -61,7 +61,7 @@ class CVSPlugin extends SCMPlugin {
 		}
 	}
 
-	function getPage ($group_id) {
+	function getPage ($params) {
 		global $HTML ;
 
 		$project = $this->checkParams ($params) ;
@@ -112,7 +112,7 @@ class CVSPlugin extends SCMPlugin {
 			// CVS Snapshot
 			if ($this->browserDisplayable ($project)) {
 				print '<p>[' ;
-				print util_make_link ("/snapshots.php?group_id=$group_id",
+				print util_make_link ("/snapshots.php?group_id=".$project->getID(),
 						      _('Download The Nightly CVS Tree Snapshot')
 					) ;
 				print ']</p>';
@@ -121,7 +121,7 @@ class CVSPlugin extends SCMPlugin {
 			
 			// CVS Browsing 
 			echo $HTML->boxTop(_('Repository History'));
-			echo $this->getDetailedStats(array('group_id'=>$group_id)).'<p>';
+			echo $this->getDetailedStats(array('group_id'=>$project->getID())).'<p>';
 			if ($this->browserDisplayable ($project)) {
 				echo _('<b>Browse the CVS Tree</b><p>Browsing the CVS tree gives you a great view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
 				echo '<p>[' ;
@@ -182,11 +182,8 @@ class CVSPlugin extends SCMPlugin {
 		}
 		
 		if ($project->usesPlugin($this->name)) {
-			$result = db_query_params ('
-				SELECT sum(commits) AS commits, sum(adds) AS adds
-				FROM stats_cvs_group
-				WHERE group_id=$1',
-			array($group_id));
+			$result = db_query_params('SELECT sum(commits) AS commits, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
+						  array ($project->getID())) ;
 			$commit_num = db_result($result,0,'commits');
 			$add_num    = db_result($result,0,'adds');
 			if (!$commit_num) {
@@ -201,15 +198,14 @@ class CVSPlugin extends SCMPlugin {
 	
 	function getDetailedStats ($params) {
 		global $HTML;
-		$group_id = $params['group_id'] ;
+
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
+		}
 		
-		$result = db_query('
-			SELECT u.realname, u.user_name, u.user_id, sum(commits) as commits, sum(adds) as adds, sum(adds+commits) as combined
-			FROM stats_cvs_user s, users u
-			WHERE group_id=\''.$group_id.'\' AND s.user_id=u.user_id AND (commits>0 OR adds >0)
-			GROUP BY u.user_id, realname, user_name, u.user_id
-			ORDER BY combined DESC, realname;
-		');
+		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(commits) as commits, sum(adds) as adds, sum(adds+commits) as combined FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (commits>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id ORDER BY combined DESC, realname',
+					  array ($project->getID()));
 		
 		if (db_numrows($result) > 0) {
 			$tableHeaders = array(

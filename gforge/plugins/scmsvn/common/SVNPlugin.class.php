@@ -109,16 +109,15 @@ class SVNPlugin extends SCMPlugin {
 	
 	function getDetailedStats ($params) {
 		global $HTML;
-		$group_id = $params['group_id'] ;
-		
-		$result = db_query('
-			SELECT u.realname, u.user_name, u.user_id, sum(commits) as commits, sum(adds) as adds, sum(adds+commits) as combined
-			FROM stats_cvs_user s, users u
-			WHERE group_id=\''.$group_id.'\' AND s.user_id=u.user_id AND (commits>0 OR adds >0)
-			GROUP BY group_id, realname, user_name, u.user_id
-			ORDER BY combined DESC, realname;
-		');
 
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
+		}
+		
+		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(commits) as commits, sum(adds) as adds, sum(adds+commits) as combined FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (commits>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id ORDER BY combined DESC, realname',
+					  array ($project->getID()));
+		
 		if (db_numrows($result) > 0) {
 			$tableHeaders = array(
 				_('Name'),
