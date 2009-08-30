@@ -84,10 +84,10 @@ if (!$mail_res) {
 		util_send_message(
 			"$sys_admin_email",
 			"ATT: Problems with massmail cron script",
-			"This is automatically generated message from\n"
-			."the mass mailing cron script of $sys_name\n"
-			."installation. There was error querying massmail_queue\n"
-			."database table. Please take appropriate actions.\n"
+			"This is automatically generated message from\n
+the mass mailing cron script of $sys_name\n
+installation. There was error querying massmail_queue\n
+database table. Please take appropriate actions.\n"
 		);
 	}
 	m_exit();
@@ -127,9 +127,9 @@ $err .= "Mailing ".db_numrows($users_res)." users.\n";
 
 // If no more users left, we've finished with this mailing
 if ($users_res && db_numrows($users_res)==0) {
-	db_query("UPDATE massmail_queue
-		SET failed_date=0,finished_date='".time()."'
-		WHERE id='$mail_id'");
+	db_query_params ('UPDATE massmail_queue SET failed_date=0,finished_date=$1 WHERE id=$2',
+			 array(time(),
+			       $mail_id));
 	m_exit();
 }
 
@@ -158,13 +158,10 @@ by visiting following link:
 	sleep($SLEEP);
 }
 
-$sql="UPDATE massmail_queue
-		SET failed_date=0,
-		last_userid='$last_userid',
-		finished_date='".time()."'
-		WHERE id='$mail_id'";
-
-db_query($sql);
+db_query_params ('UPDATE massmail_queue SET failed_date=0, last_userid=$1, finished_date=$2 WHERE id=$3',
+		 array($last_userid,
+		       time (),
+		       $mail_id));
 
 if (db_error()) {
 	$err .= $sql.db_error();

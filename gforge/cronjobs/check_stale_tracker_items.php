@@ -34,19 +34,24 @@ require $gfwww.'include/squal_pre.php';
 require $gfcommon.'include/cron_utils.php';
 
 if ($sys_database_type == 'mysql') {
-	$sql = 'UPDATE artifact NATURAL JOIN artifact_group_list SET status_id = 2
-			WHERE (status_timeout + close_date) < now() AND status_id = 4';
+	$res = db_query_mysql ('UPDATE artifact NATURAL JOIN artifact_group_list SET status_id = 2
+			WHERE (status_timeout + close_date) < now() AND status_id = 4');
 } else {
-	$sql = 'UPDATE artifact SET status_id= 2
+	$res = db_query_params ('UPDATE artifact SET status_id = 2
 			WHERE artifact_id IN (
 				SELECT artifact_id
 				FROM artifact a NATURAL JOIN artifact_group_list agl
-				WHERE (agl.status_timeout + a.close_date) < '.time().'
-				AND a.status_id=4);';
+				WHERE (agl.status_timeout + a.close_date) < $1
+				AND a.status_id=4)',
+				array (time()));
 }
 
-$res = db_query($sql);
 
 cron_entry(2,db_error());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

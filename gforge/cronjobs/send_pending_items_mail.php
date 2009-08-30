@@ -54,8 +54,8 @@ function send_pending_pm_items_mail(){
 	$time = time();
 
 	/* first we check the tasks from the project_manager */
-	$sql='select project_task.project_task_id, project_task.group_project_id, project_group_list.group_project_id, group_id, project_task.summary,project_task.created_by, project_task.status_id, project_task_vw.user_name, project_task_vw.status_name, project_task_vw.percent_complete from project_task, project_group_list natural join project_task_vw where project_task.end_date >0 and project_task.end_date<'.$time.' and project_task.group_project_id=project_group_list.group_project_id and project_task.status_id=1;';
-	$res = db_query($sql);
+	$res = db_query_params ('SELECT project_task.project_task_id, project_task.group_project_id, project_group_list.group_project_id, group_id, project_task.summary,project_task.created_by, project_task.status_id, project_task_vw.user_name, project_task_vw.status_name, project_task_vw.percent_complete FROM project_task, project_group_list NATURAL JOIN project_task_vw WHERE project_task.end_date > 0 AND project_task.end_date < $1 AND project_task.group_project_id=project_group_list.group_project_id AND project_task.status_id=1;',
+			array($time));
 	for($i = 0; $i < db_numrows($res); $i++) {
 		$summary= db_result($res,$i,'summary');
 		$status_name=db_result($res,$i,'status_name');
@@ -63,8 +63,11 @@ function send_pending_pm_items_mail(){
 		$project_task_id=db_result($res,$i,'project_task_id');
 		$hyperlink=util_make_url('/pm/task.php?func=detailtask&project_task_id='.db_result($res,$i,"project_task_id").'&group_id='.db_result($res,$i,"group_id")
 					 .'&group_project_id='.db_result($res,$i,"group_project_id"));
-		$sql="select * from users where users.status='A' and user_id in (".db_result($res,$i,"created_by").", (select assigned_to_id from project_assigned_to where project_task_id=".db_result($res,$i,"project_task_id")."))";			
-		$userres=db_query($sql);
+
+		$userres = db_query_params ('SELECT * FROM users WHERE users.status=$1 AND (user_id = $2 OR user_id IN (SELECT assigned_to_id FROM project_assigned_to WHERE project_task_id = $3))',
+					    array ('A',
+						   db_result($res,$i,"created_by"),
+						   db_result($res,$i,"project_task_id")));
 		/* now, for each user, send the mail */
 		for ($usercount=0;$usercount<db_numrows($userres);$usercount++){
 			$mailto=db_result($userres,$usercount,"email");
@@ -89,8 +92,8 @@ Click here to visit the item %3$s'), $project_task_id, $summary, $hyperlink, $us
 function send_pending_tracker_items_mail(){
 	/* first, get all the items that are considered overdue */
 	$time = time();
-	$sql = 	'SELECT artifact_id, submitted_by, group_id, assigned_to, summary,  details, description,  assigned_realname, submitted_realname, status_name, category_name, group_name, group_artifact_id, open_date	FROM artifact_vw a NATURAL JOIN artifact_group_list agl	WHERE (agl.due_period+a.open_date) < '.$time.' AND	a.status_id=1';	
-	$res=db_query($sql);
+	$res = db_query_params ('SELECT artifact_id, submitted_by, group_id, assigned_to, summary,  details, description,  assigned_realname, submitted_realname, status_name, category_name, group_name, group_artifact_id, open_date	FROM artifact_vw a NATURAL JOIN artifact_group_list agl	WHERE (agl.due_period+a.open_date) < $1 AND a.status_id=1',
+			array($time));
 	
 	for ($tmp=0; $tmp<db_numrows($res); $tmp++) {
 		$realopendate=date(_('Y-m-d H:i'), db_result($res,$tmp,'open_date'));
@@ -104,8 +107,8 @@ function send_pending_tracker_items_mail(){
 		$opendate=db_result($res,$tmp,"open_date");
 
 		/* now, get all the users */
-		$sql2='select * from users where user_id in '.$users.' and user_id>100';
-		$userres=db_query($sql2);
+		$userres = db_query_params ('SELECT * FROM users WHERE user_id = ANY ($1) AND user_id > 100',
+					    array(db_int_array_to_any_clause ($users)));
 		for ($usercount=0;$usercount<db_numrows($userres);$usercount++){
 			$mailto=db_result($userres,$usercount,"email");
 			$language=db_result($userres,$usercount,"language");
@@ -128,5 +131,9 @@ Click here to visit the item: %4$s'),  $artifact, $opendate, $summary, $hyperlin
 	cron_entry(19,db_error());
 }
 
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>
