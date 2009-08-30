@@ -195,7 +195,7 @@ class SVNPlugin extends SCMPlugin {
 			system ("svnadmin create --fs-type fsfs $repo") ;
 			system ("svn mkdir -m'Init' file:///$repo/trunk file:///$repo/tags file:///$repo/branches") ;
 		}
-		
+
 		if ($this->use_ssh) {
 			system ("chgrp -R $unix_group $repo") ;
 			if ($project->enableAnonSCM()) {
@@ -204,7 +204,7 @@ class SVNPlugin extends SCMPlugin {
 				system ("chmod -R g+wXs,o-rwx $repo") ;
 			}
 		} else {
-			$unix_user = 'www-data' ;
+			$unix_user = $sys_apache_user ;
 			system ("chown -R $unix_user:$unix_group $repo") ;
 			if ($project->enableAnonSCM()) {
 				system ("chmod -R g+wXs,o+rX-w $repo") ;
