@@ -31,18 +31,25 @@ function site_stats_day($year,$month,$day) {
 	//
 	//  build row for stats_site
 	//
-	$rel=db_query("DELETE FROM stats_site WHERE month='$year$month' AND day='$day'");
+	$rel = db_query_params ('DELETE FROM stats_site WHERE month=$1 AND day=$2',
+				array("$year$month",
+				      $day));
 
-	$sql="INSERT INTO stats_site (month,day,uniq_users,sessions,total_users,new_users,new_projects) 
-	VALUES ('$year$month',
-	'$day',
-	(SELECT COUNT(DISTINCT(user_id)) FROM user_session WHERE (time < '$day_end' AND time > '$day_begin')),
-	(SELECT COUNT(session_hash) FROM user_session WHERE (time < '$day_end' AND time > $day_begin)),
-	(SELECT COUNT(user_id) FROM users WHERE ( add_date < '$day_end' AND status='A' )),
-	(SELECT COUNT(user_id) FROM users WHERE ( add_date < '$day_end' AND add_date > '$day_begin' )),
-	(SELECT COUNT(group_id) FROM groups WHERE ( register_time < '$day_end' AND register_time > '$day_begin' )))";
 
-	$rel=db_query($sql);
+
+	$rel = db_query_params ('INSERT INTO stats_site (month,day,uniq_users,sessions,total_users,new_users,new_projects) 
+	VALUES ($1,
+	$2,
+	(SELECT COUNT(DISTINCT(user_id)) FROM user_session WHERE (time < $3 AND time > $4)),
+	(SELECT COUNT(session_hash) FROM user_session WHERE (time < $3 AND time > $4)),
+	(SELECT COUNT(user_id) FROM users WHERE ( add_date < $3 AND status=$4 )),
+	(SELECT COUNT(user_id) FROM users WHERE ( add_date < $3 AND add_date > $4 )),
+	(SELECT COUNT(group_id) FROM groups WHERE ( register_time < $3 AND register_time > $4 )))',
+				array("$year$month",
+				      $day,
+				      $day_end,
+				      $day_begin,
+				      'A'));
 	echo db_error();
 
 	db_commit();

@@ -32,29 +32,29 @@ $err='';
 
 	Aggregation script
 
-	Since we cannot crunch down all the data on the fly anymore, 
-	we need to crunch it down once daily into a separate table, 
+	Since we cannot crunch down all the data on the fly anymore,
+	we need to crunch it down once daily into a separate table,
 	then join against that table to get counts.
 
 */
 
 
 /*
-    Create an aggregation table that includes counts of forum messages 
+    Create an aggregation table that includes counts of forum messages
 */
 db_begin();
 
-db_query_params ('LOCK TABLE forum_agg_msg_count IN ACCESS EXCLUSIVE MODE;',
-			array()) ;
+db_query_params ('LOCK TABLE forum_agg_msg_count IN ACCESS EXCLUSIVE MODE',
+		 array()) ;
 
-db_query_params ('LOCK TABLE forum IN ACCESS EXCLUSIVE MODE;',
-			array()) ;
+db_query_params ('LOCK TABLE forum IN ACCESS EXCLUSIVE MODE',
+		 array()) ;
 
-db_query_params ('LOCK TABLE forum_group_list IN ACCESS EXCLUSIVE MODE;',
-			array()) ;
+db_query_params ('LOCK TABLE forum_group_list IN ACCESS EXCLUSIVE MODE',
+		 array()) ;
 
 
-$res = db_query_params ('DELETE FROM forum_agg_msg_count;',
+$res = db_query_params ('DELETE FROM forum_agg_msg_count',
 			array()) ;
 
 if (!$res) {
@@ -65,7 +65,7 @@ $res = db_query_params ('INSERT INTO forum_agg_msg_count
 SELECT fgl.group_forum_id,count(f.msg_id)
 FROM forum_group_list fgl
 LEFT JOIN forum f USING (group_forum_id)
-GROUP BY fgl.group_forum_id;',
+GROUP BY fgl.group_forum_id',
 			array()) ;
 
 if (!$res) {
@@ -75,7 +75,7 @@ if (!$res) {
 db_commit();
 
 if ($sys_database_type != 'mysql') {
-	db_query_params ('VACUUM ANALYZE forum_agg_msg_count;',
+	db_query_params ('VACUUM ANALYZE forum_agg_msg_count',
 			array()) ;
 
 }
@@ -85,37 +85,37 @@ if ($sys_database_type != 'mysql') {
 */
 db_begin();
 
-db_query_params ('LOCK TABLE artifact_counts_agg IN ACCESS EXCLUSIVE MODE;',
-			array()) ;
+db_query_params ('LOCK TABLE artifact_counts_agg IN ACCESS EXCLUSIVE MODE',
+		 array()) ;
 
-db_query_params ('LOCK TABLE artifact IN ACCESS EXCLUSIVE MODE;',
-			array()) ;
+db_query_params ('LOCK TABLE artifact IN ACCESS EXCLUSIVE MODE',
+		 array()) ;
 
-db_query_params ('LOCK TABLE artifact_group_list IN ACCESS EXCLUSIVE MODE;',
-			array()) ;
+db_query_params ('LOCK TABLE artifact_group_list IN ACCESS EXCLUSIVE MODE',
+		 array()) ;
 
 
-$rel = db_query_params ('DELETE FROM artifact_counts_agg;',
+$rel = db_query_params ('DELETE FROM artifact_counts_agg',
 			array()) ;
 
 $err .= db_error();
 
 $rel=db_query_params ('INSERT INTO artifact_counts_agg
 SELECT agl.group_artifact_id,
-(SELECT count(*) FROM artifact WHERE status_id <> 3 AND group_artifact_id=agl.group_artifact_id), 
+(SELECT count(*) FROM artifact WHERE status_id <> 3 AND group_artifact_id=agl.group_artifact_id),
 (SELECT count(*) FROM artifact WHERE status_id=1 AND group_artifact_id=agl.group_artifact_id)
-FROM artifact_group_list agl 
+FROM artifact_group_list agl
 LEFT JOIN artifact a USING (group_artifact_id)
-GROUP BY agl.group_artifact_id;',
-			array()) ;
+GROUP BY agl.group_artifact_id',
+		      array()) ;
 
 $err .= db_error();
 
 db_commit();
 
 if ($sys_database_type != 'mysql') {
-	db_query_params ('VACUUM ANALYZE artifact_counts_agg;',
-			array()) ;
+	db_query_params ('VACUUM ANALYZE artifact_counts_agg',
+			 array()) ;
 
 }
 
@@ -128,79 +128,56 @@ if ($sys_database_type != 'mysql') {
 */
 
 db_begin();
-$res=db_query_params ('DELETE FROM project_sums_agg;',
-			array()) ;
+$res=db_query_params ('DELETE FROM project_sums_agg',
+		      array()) ;
 
 
 /*
 	Get counts of mailing lists
 */
-$sql="INSERT INTO project_sums_agg ";
-if ($sys_database_type == 'mysql') {
-	$sql.="SELECT group_id,'mail' AS type,count(*) AS count ";
-} else {
-	$sql.="SELECT group_id,'mail'::text AS type,count(*) AS count ";
-}
-$sql.="
-	FROM mail_group_list WHERE is_public = 1
-	GROUP BY group_id,type;";
-
-$res=db_query($sql);
+$res=db_query_params ('INSERT INTO project_sums_agg
+SELECT group_id,$1 AS type,count(*) AS count
+FROM mail_group_list WHERE is_public = 1
+GROUP BY group_id,type',
+		      array('mail'));
 $err .= db_error();
 
 
 /*
 	Get counts of surveys
 */
-$sql="INSERT INTO project_sums_agg ";
-if ($sys_database_type == 'mysql') {
-	$sql.="SELECT group_id,'surv' AS type,count(*) AS count ";
-} else {
-	$sql.="SELECT group_id,'surv'::text AS type,count(*) AS count ";
-}
-$sql.="
-	FROM surveys
-	WHERE is_active='1'
-	GROUP BY group_id,type;";
-
-$res=db_query($sql);
+$res=db_query_params ('INSERT INTO project_sums_agg
+SELECT group_id,$1 AS type,count(*) AS count
+FROM surveys
+WHERE is_active=$2
+GROUP BY group_id,type',
+		      array('surv',
+			    '1'));
 $err .= db_error();
 
 
 /*
 	Forum message count
 */
-$sql="INSERT INTO project_sums_agg ";
-if ($sys_database_type == 'mysql') {
-	$sql.="SELECT forum_group_list.group_id,'fmsg' AS type, count(forum.msg_id) AS count ";
-} else {
-	$sql.="SELECT forum_group_list.group_id,'fmsg'::text AS type, count(forum.msg_id) AS count ";
-}
-$sql.="
-	FROM forum,forum_group_list 
-	WHERE forum.group_forum_id=forum_group_list.group_forum_id 
-	AND forum_group_list.is_public=1
-	GROUP BY group_id,type;";
-
-$res=db_query($sql);
+$res=db_query_params ('INSERT INTO project_sums_agg
+SELECT forum_group_list.group_id,$1 AS type, count(forum.msg_id) AS count
+FROM forum,forum_group_list
+WHERE forum.group_forum_id=forum_group_list.group_forum_id
+AND forum_group_list.is_public=1
+GROUP BY group_id,type',
+		      array('fmsg'));
 $err .= db_error();
 
 
 /*
 	Forum count
 */
-$sql="INSERT INTO project_sums_agg ";
-if ($sys_database_type == 'mysql') {
-	$sql.="SELECT group_id,'fora' AS type, count(*) AS count ";
-} else {
-	$sql.="SELECT group_id,'fora'::text AS type, count(*) AS count ";
-}
-$sql.="
-	FROM forum_group_list 
-	WHERE is_public=1
-	GROUP BY group_id,type;";
-
-$res=db_query($sql);
+$res=db_query_params ('INSERT INTO project_sums_agg
+SELECT group_id,$1 AS type, count(*) AS count
+FROM forum_group_list
+WHERE is_public=1
+GROUP BY group_id,type',
+		      array('fora'));
 $err .= db_error();
 
 
@@ -208,9 +185,8 @@ db_commit();
 $err .= db_error();
 
 if ($sys_database_type != 'mysql') {
-	db_query_params ('VACUUM ANALYZE project_sums_agg;',
-			array()) ;
-
+	db_query_params ('VACUUM ANALYZE project_sums_agg',
+			 array()) ;
 
 	if (db_error()) {
 		$err .= "Error: ".db_error();
