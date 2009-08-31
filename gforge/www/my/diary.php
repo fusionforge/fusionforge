@@ -52,8 +52,13 @@ if (!session_loggedin()) {
 		//make changes to the database
 		if (getStringFromRequest('update')) {
 			//updating an existing diary entry
-			$res=db_query("UPDATE user_diary SET summary='". htmlspecialchars($summary) ."',details='". htmlspecialchars($details) ."',is_public='$is_public' ".
-			"WHERE user_id='". user_getid() ."' AND id='$diary_id'");
+			$res=db_query_params ('UPDATE user_diary SET summary=$1,details=$2,is_public=$3 
+WHERE user_id=$4 AND id=$5',
+			array(htmlspecialchars($summary) ,
+				htmlspecialchars($details) ,
+				$is_public,
+				user_getid() ,
+				$diary_id));
 			if ($res && db_affected_rows($res) > 0) {
 				$feedback .= _('Diary Updated');
 			} else {
@@ -64,19 +69,25 @@ if (!session_loggedin()) {
 		} else if (getStringFromRequest('add')) {
 			//inserting a new diary entry
 
-			$sql="INSERT INTO user_diary (user_id,date_posted,summary,details,is_public) VALUES 
-('". user_getid() ."','". time() ."','". htmlspecialchars($summary) ."','". htmlspecialchars($details) ."','$is_public')";
-			$res=db_query($sql);
+
+			$res=db_query_params ('INSERT INTO user_diary (user_id,date_posted,summary,details,is_public) VALUES 
+($1,$2,$3,$4,$5)',
+			array(user_getid() ,
+				time() ,
+				htmlspecialchars($summary) ,
+				htmlspecialchars($details) ,
+				$is_public));
 			if ($res && db_affected_rows($res) > 0) {
 				$feedback .= _('Item Added');
 				if ($is_public) {
 
 					//send an email if users are monitoring
-					$sql="SELECT users.email from user_diary_monitor,users 
-WHERE user_diary_monitor.user_id=users.user_id 
-AND user_diary_monitor.monitored_user='". user_getid() ."'";
 
-					$result=db_query($sql);
+
+					$result=db_query_params ('SELECT users.email from user_diary_monitor,users 
+WHERE user_diary_monitor.user_id=users.user_id 
+AND user_diary_monitor.monitored_user=$1',
+			array(user_getid() ));
 					$rows=db_numrows($result);
 
 					if ($result) {
@@ -131,8 +142,10 @@ To stop monitoring this user, login to %s and visit the following link:
 	$_is_public = '';
 
 	if ($diary_id) {
-		$sql="SELECT * FROM user_diary WHERE user_id='". user_getid() ."' AND id='$diary_id'";
-		$res=db_query($sql);
+
+		$res=db_query_params ('SELECT * FROM user_diary WHERE user_id=$1 AND id=$2',
+			array(user_getid() ,
+				$diary_id));
 		if (!$res || db_numrows($res) < 1) {
 			$feedback .= _('Entry not found or does not belong to you');
 			$proc_str='add';
@@ -184,9 +197,10 @@ To stop monitoring this user, login to %s and visit the following link:
 
 	echo $HTML->boxTop(_('Existing Diary And Note Entries'));
 
-	$sql="SELECT * FROM user_diary WHERE user_id='". user_getid() ."' ORDER BY id DESC";
 
-	$result=db_query($sql);
+
+	$result=db_query_params ('SELECT * FROM user_diary WHERE user_id=$1 ORDER BY id DESC',
+			array(user_getid() ));
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
