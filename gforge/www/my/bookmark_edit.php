@@ -44,8 +44,10 @@ if (getStringFromRequest('submit')) {
 
 site_user_header(array('title'=>_('Edit Bookmark')));
 
-$result = db_query("SELECT * from user_bookmarks where "
-	. "bookmark_id='".$bookmark_id."' and user_id='".user_getid()."'");
+$result = db_query_params ('SELECT * from user_bookmarks where 
+bookmark_id=$1 and user_id=$2',
+			array($bookmark_id,
+				user_getid()));
 if ($result) {
 	$bookmark_url = db_result($result,0,'bookmark_url');
 	$bookmark_title = db_result($result,0,'bookmark_title');
