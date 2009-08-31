@@ -112,15 +112,18 @@ if ($what) {
 			$start=($time_now-($counter*$sub_duration));
 			$end=($time_now-(($counter-1)*$sub_duration));
 
-			$sql="SELECT avg((end_date-start_date)/(24*60*60)) 
+
+
+			$result = db_query_params ('SELECT avg((end_date-start_date)/(24*60*60)) 
 FROM project_task,project_group_list 
 WHERE end_date > 0 
-AND (start_date >= '$start' AND start_date <= '$end') 
+AND (start_date >= $1 AND start_date <= $2) 
 AND project_task.status_id=2 
 AND project_group_list.group_project_id=project_task.group_project_id 
-AND project_group_list.group_id='$group_id' ";
-
-			$result = db_query($sql);
+AND project_group_list.group_id=$3 ',
+			array($start,
+				$end,
+				$group_id));
 
 			$names[$counter-1]=date("Y-m-d",($start))." to ".date("Y-m-d",($end));
 			$values[$counter-1]=((int)(db_result($result, 0,0)*1000))/1000;
@@ -135,14 +138,15 @@ AND project_group_list.group_id='$group_id' ";
 			$start=($time_now-($counter*$sub_duration));
 			$end=($time_now-(($counter-1)*$sub_duration));
 
-			$sql="SELECT count(*) 
+			$result = db_query_params ('SELECT count(*) 
 FROM project_task,project_group_list 
-WHERE start_date >= '$start' 
-AND start_date <= '$end' 
+WHERE start_date >= $1 
+AND start_date <= $2 
 AND project_group_list.group_project_id=project_task.group_project_id 
-AND project_group_list.group_id='$group_id' ";
-
-			$result = db_query($sql);
+AND project_group_list.group_id=$3 ',
+			array($start,
+				$end,
+				$group_id));
 
 			$names[$counter-1]=date("Y-m-d",($start))." to ".date("Y-m-d",($end));
 			$values[$counter-1]=db_result($result, 0,0);
@@ -157,14 +161,17 @@ AND project_group_list.group_id='$group_id' ";
 			$start=($time_now-($counter*$sub_duration));
 			$end=($time_now-(($counter-1)*$sub_duration));
 
-			$sql="SELECT count(*) 
-FROM project_task,project_group_list 
-WHERE start_date <= '$end' 
-AND (end_date >= '$end' OR end_date < 1 OR end_date is null) 
-AND project_group_list.group_project_id=project_task.group_project_id 
-AND project_group_list.group_id='$group_id' ";
 
-			$result = db_query($sql);
+
+			$result = db_query_params ('SELECT count(*) 
+FROM project_task,project_group_list 
+WHERE start_date <= $1 
+AND (end_date >= $2 OR end_date < 1 OR end_date is null) 
+AND project_group_list.group_project_id=project_task.group_project_id 
+AND project_group_list.group_id=$3 ',
+			array($end,
+				$end,
+				$group_id));
 
 			$names[$counter-1]=date("Y-m-d",($end));
 			$values[$counter-1]=db_result($result, 0,0);

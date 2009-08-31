@@ -40,11 +40,12 @@ class ProjectTaskHTML extends ProjectTask {
 
 
 	function showDependentTasks () {
-		$sql="SELECT project_task.project_task_id,project_task.summary 
+
+		$result=db_query_params ('SELECT project_task.project_task_id,project_task.summary 
 			FROM project_task,project_dependencies 
 			WHERE project_task.project_task_id=project_dependencies.project_task_id 
-			AND project_dependencies.is_dependent_on_task_id='". $this->getID() ."'";
-		$result=db_query($sql);
+			AND project_dependencies.is_dependent_on_task_id=$1',
+			array($this->getID() ));
 		$rows=db_numrows($result);
 
 		if ($rows > 0) {

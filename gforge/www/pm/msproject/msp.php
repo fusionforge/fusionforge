@@ -38,11 +38,7 @@ function &MSPLogin($username,$password) {
 		$array['success']=true;
 		$array['session_hash']=$session_ser;
 	    if ( $sys_database_type == "mysql" ) {
-			$sql="SELECT pgl.group_project_id, CONCAT(g.group_name, ': ', pgl.project_name) AS name";
-	    } else {
-			$sql="SELECT pgl.group_project_id, g.group_name || ': ' || pgl.project_name AS name";
-		}
-		$sql.="
+		    $sql="SELECT pgl.group_project_id, CONCAT(g.group_name, ': ', pgl.project_name) AS name
 			FROM groups g, project_group_list pgl, role_setting rs, user_group ug
 			WHERE ug.user_id='".user_getid()."' 
 			AND g.group_id=pgl.group_id
@@ -50,7 +46,20 @@ function &MSPLogin($username,$password) {
 			AND rs.group_project_id = pgl.group_project_id
                         AND ug.role_id = rs.role_id
                         AND rs.section_name='pm'";
-		$res=db_query($sql);
+		    $res=db_query_mysql($sql);
+	    } else {
+		    $res=db_query_params ('SELECT pgl.group_project_id, g.group_name || $1 || pgl.project_name AS name
+			FROM groups g, project_group_list pgl, role_setting rs, user_group ug
+			WHERE ug.user_id=$2
+			AND g.group_id=pgl.group_id
+			AND rs.value::integer > 0
+			AND rs.group_project_id = pgl.group_project_id
+                        AND ug.role_id = rs.role_id
+                        AND rs.section_name=$3',
+					  array(': ',
+						user_getid(),
+						'pm'));
+		}
 		$rows=db_numrows($res);
 		if (!$res || $rows<1) {
 			$array['success']=false;
@@ -201,7 +210,9 @@ function &MSPGetProjects($session_hash) {
 		$array['success']=false;
 		$array['errormessage']='Could Not Continue Session';
 	}
-	$group_res = db_query("SELECT groups.group_id FROM groups NATURAL JOIN user_group WHERE user_id='".user_getid()."' AND project_flags='2'");
+	$group_res = db_query_params ('SELECT groups.group_id FROM groups NATURAL JOIN user_group WHERE user_id=$1 AND project_flags=$2',
+			array(user_getid(),
+				2));
 	$group_ids=&util_result_column_to_array($group_res,'group_id');
 	$groups=&group_get_objects($group_ids);
 	return $groups;
