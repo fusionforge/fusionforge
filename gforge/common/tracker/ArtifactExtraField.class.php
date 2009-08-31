@@ -117,8 +117,10 @@ class ArtifactExtraField extends Error {
 			$this->setPermissionDeniedError();
 			return false;
 		}
-		$sql = "SELECT field_name FROM artifact_extra_field_list WHERE field_name='$name' AND group_artifact_id=".$this->ArtifactType->getID();
-		$res = db_query($sql);
+
+		$res = db_query_params ('SELECT field_name FROM artifact_extra_field_list WHERE field_name=$1 AND group_artifact_id=$2',
+					array($name,
+					      $this->ArtifactType->getID()));
 		if (db_numrows($res) > 0) {
 			$this->setError(_('Field name already exists'));
 			return false;
@@ -376,9 +378,11 @@ class ArtifactExtraField extends Error {
 			$this->setError(_('a field name is required'));
 			return false;
 		}
-		$sql = "SELECT field_name FROM artifact_extra_field_list 
-				WHERE field_name='$name' AND group_artifact_id=".$this->ArtifactType->getID()." AND extra_field_id !='". $this->getID();
-		$res = db_query($sql);
+		$res = db_query_params ('SELECT field_name FROM artifact_extra_field_list 
+				WHERE field_name=$1 AND group_artifact_id=$2 AND extra_field_id !=$3',
+			array($name,
+				$this->ArtifactType->getID(),
+				$this->getID()));
 		if (db_numrows($res) > 0) {
 			$this->setError(_('Field name already exists'));
 			return false;
@@ -552,10 +556,12 @@ class ArtifactExtraField extends Error {
 	}
 
 	function updateOrder($element_id, $order) {
-		$sql = 'UPDATE artifact_extra_field_elements
-				SET element_pos=' . $order . '
-				WHERE element_id=' . $element_id;
-		$result=db_query($sql);
+
+		$result=db_query_params ('UPDATE artifact_extra_field_elements
+				SET element_pos= $1
+				WHERE element_id=$2',
+			array($order,
+				$element_id));
 		if ($result && db_affected_rows($result) > 0) {
 			return true;
 		}
@@ -568,9 +574,9 @@ class ArtifactExtraField extends Error {
 	function reorderValues($element_id, $new_pos) {
 		global $Language;
 
-		$sql = 'SELECT element_id FROM artifact_extra_field_elements WHERE extra_field_id=' .$this->getID() .
-			   ' ORDER BY element_pos ASC, element_id ASC';
-		$res = db_query($sql);
+
+		$res = db_query_params ('SELECT element_id FROM artifact_extra_field_elements WHERE extra_field_id=$1 ORDER BY element_pos ASC, element_id ASC',
+			array($this->getID()));
 		$max = db_numrows($res);
 		if ($new_pos < 1 || $new_pos > $max) {
 			$this->setError(_('Out of range value'));
@@ -598,9 +604,9 @@ class ArtifactExtraField extends Error {
 	function alphaorderValues($element_id) {
 		global $Language;
 
-		$sql = 'SELECT element_id FROM artifact_extra_field_elements WHERE extra_field_id=' .$this->getID() .
-			   ' ORDER BY element_name ASC';
-		$res = db_query($sql);
+
+		$res = db_query_params ('SELECT element_id FROM artifact_extra_field_elements WHERE extra_field_id=$1 ORDER BY element_name ASC',
+			array($this->getID()));
 		$i = 1;
 		while ($row = db_fetch_array($res)) {
 			if (! $this->updateOrder($row['element_id'], $i))
