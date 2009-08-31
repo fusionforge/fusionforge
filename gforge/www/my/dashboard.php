@@ -46,17 +46,19 @@ if (!session_loggedin()) {
 		 echo $HTML->boxTop(_('All trackers for my projects'),false,false);
 	// Include both groups and foundries; developers should be similarly
 	// aware of membership in either.
-	$result = db_query("SELECT groups.group_name,"
-		. "groups.group_id,"
-		. "groups.unix_group_name,"
-		. "groups.status,"
-		. "groups.type_id,"
-		. "user_group.admin_flags "
-		. "FROM groups,user_group "
-		. "WHERE groups.group_id=user_group.group_id "
-		. "AND user_group.user_id='". user_getid() ."' "
-		. "AND groups.status='A' "
-		. "ORDER BY group_name");
+	$result = db_query_params ('SELECT groups.group_name,
+groups.group_id,
+groups.unix_group_name,
+groups.status,
+groups.type_id,
+user_group.admin_flags 
+FROM groups,user_group 
+WHERE groups.group_id=user_group.group_id 
+AND user_group.user_id=$1 
+AND groups.status=$2 
+ORDER BY group_name',
+			array(user_getid() ,
+				'A'));
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '<strong>'._('You\'re not a member of any active projects').'</strong>';
