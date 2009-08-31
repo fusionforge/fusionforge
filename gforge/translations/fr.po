@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: FusionForge 4.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-08-27 16:06+0200\n"
-"PO-Revision-Date: 2009-06-30 14:58+0200\n"
+"PO-Revision-Date: 2009-08-31 09:23+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <aljeux@free.fr>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2820,7 +2820,7 @@ msgstr "Afficher par&nbsp;"
 #: www/softwaremap/full_list.php:90 www/softwaremap/trove_list.php:256
 #, php-format
 msgid "More than <strong>%1$s</strong> projects in result set."
-msgstr "Plus de <strong>%1$s</strong> projects trouvés.</s>"
+msgstr "Plus de <strong>%1$s</strong> projects trouvés."
 
 #: plugins/projects_hierarchy/www/softwaremap.php:266
 #: www/softwaremap/trove_list.php:259
@@ -7100,7 +7100,7 @@ msgstr ""
 
 #: www/frs/index.php:87
 msgid "To create a new release click here."
-msgstr "Pour créer une nouvelle version, cliquez ici.</s>"
+msgstr "Pour créer une nouvelle version, cliquez ici."
 
 #: www/frs/index.php:97 www/frs/reporting/downloads.php:100
 #: www/include/project_home.php:180
@@ -7109,7 +7109,7 @@ msgstr "Paquet"
 
 #: www/frs/index.php:98
 msgid "Release &amp; Notes"
-msgstr "Version <br />&amp; Commentaires</s>"
+msgstr "Notes de publication"
 
 #: www/frs/index.php:105 www/pm/ganttpage.php:171
 #: www/project/admin/editimages.php:274
@@ -9074,7 +9074,7 @@ msgstr "Compétences ajoutée avec succès"
 
 #: www/people/editprofile.php:112
 msgid "No skills selected to edit."
-msgstr "Auncune compétence n'est sélectionnée pour l'édition.</s>"
+msgstr "Auncune compétence n'est sélectionnée pour l'édition."
 
 #: www/people/editprofile.php:132
 msgid "Failed to update skills"
@@ -10861,15 +10861,7 @@ msgid ""
 "ensure that you are using the services in the intended way. This description "
 "will not be used as a public description of your project. It must be written "
 "in English.</strong>"
-msgstr ""
-"<h3>2. Objectifs et description du projet</h3><p><p><strong> Veuillez "
-"fournir une description précise et détaillée de votre projet, quelles "
-"resources de %1$s vous prévoyez d'utiliser, et de quelle manière . "
-"L'approbation ou le rejet de l'hébergement de votre projet sur %1$s reposera "
-"sur cette description, comme plus tard son maintien, conditionné par l'usage "
-"approprié des services. Cette description ne sera pas utilisée comme "
-"description publique de votre projet. Elle doit être rédigée en anglais.</"
-"strong></s>"
+msgstr "<h3>2. Objectifs et description du projet</h3><p><p><strong> Veuillez fournir une description précise et détaillée de votre projet, quelles resources de %1$s vous prévoyez d'utiliser, et de quelle manière . L'approbation ou le rejet de l'hébergement de votre projet sur %1$s reposera sur cette description, comme plus tard son maintien, conditionné par l'usage approprié des services. Cette description ne sera pas utilisée comme description publique de votre projet. Elle doit être rédigée en anglais.</strong></p>"
 
 #: www/register/projectinfo.php:143
 msgid ""
@@ -12584,19 +12576,7 @@ msgid ""
 "aggregate form, not to single out specific users or developers.</p><p>If any "
 "changes are made to this policy, it will affect only future data that is "
 "collected and the user will of course have the ability to 'opt-out'."
-msgstr ""
-"Quid des informations confidentielles ?<p>Les informations collectées par "
-"ces sondages ne seront jamais vendues à des tiers ou utilisées pour "
-"solliciter de vous l'achat de biens ou de services.</p><p>Les informations "
-"sont rassemblées pour construire un profil des projets et des développeurs. "
-"Ce profil aidera les visiteurs du site à mesurer la qualité d'un projet "
-"donné.</p><p>Les identifiants de ceux qui ont répondu aux questions sont "
-"effacés et ne sont visibles, ni par les administrateurs du projet, ni par "
-"les visiteurs, ni par des tiers.</p><p>L'information collectée est utilisée "
-"seulement sous forme agrégée, et non pour singulariser des utilisateurs ou "
-"des développeurs.</p><p>Si des changements sont effectués dans ces règles, "
-"ils ne pourront avoir d'effet que sur des données futures et les "
-"utilisateurs auront évidemment la faculté de désistement.</s>"
+msgstr "Quid des informations confidentielles ?<p>Les informations collectées par ces sondages ne seront jamais vendues à des tiers ou utilisées pour solliciter de vous l'achat de biens ou de services.</p><p>Les informations sont rassemblées pour construire un profil des projets et des développeurs. Ce profil aidera les visiteurs du site à mesurer la qualité d'un projet donné.</p><p>Les identifiants de ceux qui ont répondu aux questions sont effacés et ne sont visibles, ni par les administrateurs du projet, ni par les visiteurs, ni par des tiers.</p><p>L'information collectée est utilisée seulement sous forme agrégée, et non pour singulariser des utilisateurs ou des développeurs.</p><p>Si des changements sont effectués dans ces règles, ils ne pourront avoir d'effet que sur des données futures et les utilisateurs auront évidemment la faculté de désistement.</p>"
 
 #: www/survey/privacy.php:40
 #, php-format
