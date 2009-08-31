@@ -599,8 +599,8 @@ class ArtifactQuery extends Error {
 		
 		// Reset the project default query.
 		if ($query_type==2) {
-			$sql="UPDATE artifact_query SET query_type=1 WHERE query_type=2 AND group_artifact_id='".$this->ArtifactType->getID()."'";
-			$res=db_query($sql);
+			$res = db_query_params ('UPDATE artifact_query SET query_type=1 WHERE query_type=2 AND group_artifact_id=$1',
+						array($this->ArtifactType->getID()));
 			if (!$res) {
 				$this->setError('Error Updating: '.db_error());
 				return false;

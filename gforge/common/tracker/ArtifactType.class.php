@@ -1151,9 +1151,11 @@ class ArtifactType extends Error {
 	 *	@return	boolean	success.
 	 */
 	function setBrowseList($list) {
-		$res=db_query("UPDATE artifact_group_list 
-		    SET browse_list='$list'
-			WHERE group_artifact_id='".$this->getID()."'");
+		$res=db_query_params ('UPDATE artifact_group_list 
+		    SET browse_list=$1
+			WHERE group_artifact_id=$2',
+			array($list,
+				$this->getID()));
 		$this->fetchData($this->getID());
 		return $res;
 	}
