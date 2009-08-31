@@ -12,7 +12,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -123,8 +123,8 @@ class ArtifactQuery extends Error {
 		
 		// Reset the project default query.
 		if ($query_type==2) {
-			$sql="UPDATE artifact_query SET query_type=1 WHERE query_type=2 AND group_artifact_id='".$this->ArtifactType->getID()."'";
-			$res=db_query($sql);
+			$res = db_query_params ('UPDATE artifact_query SET query_type=1 WHERE query_type=2 AND group_artifact_id=$1',
+						array($this->ArtifactType->getID()));
 			if (!$res) {
 				$this->setError('Error Updating: '.db_error());
 				return false;
@@ -219,12 +219,11 @@ class ArtifactQuery extends Error {
 			return false;
 		}
 		$id = intval($id);
-		$res = db_query_params ('INSERT INTO artifact_query_fields 
-			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
-                        VALUES ($1,$2,0,$3)',
+		$status = intval($status);
+		$res = db_query_params ('INSERT INTO artifact_query_fields (artifact_query_id,query_field_type,query_field_id,query_field_values) VALUES ($1,$2,0,$3)',
 					array ($id,
 					       ARTIFACT_QUERY_STATE,
-					       intval($status))) ;
+					       $status)) ;
 		if (!$res) {
 			$this->setError('Setting Status: '.db_error());
 			return false;
@@ -250,8 +249,8 @@ class ArtifactQuery extends Error {
 		}
 
 		//CSV LIST OF ASSIGNEES
-		$res = db_query_params ('INSERT INTO artifact_query_fields 
-			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
+		$res = db_query_params ('INSERT INTO artifact_query_fields
+			(artifact_query_id,query_field_type,query_field_id,query_field_values)
 			VALUES ($1,$2,0,$3)',
 					array ($id,
 					       ARTIFACT_QUERY_ASSIGNEE,
@@ -266,8 +265,8 @@ class ArtifactQuery extends Error {
 			$this->setError('Invalid Mod Date Range');
 			return false;
 		}
-		$res = db_query_params ('INSERT INTO artifact_query_fields 
-			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
+		$res = db_query_params ('INSERT INTO artifact_query_fields
+			(artifact_query_id,query_field_type,query_field_id,query_field_values)
 			VALUES ($1,$2,0,$3)',
 					array ($id,
 					       ARTIFACT_QUERY_MODDATE,
@@ -282,8 +281,8 @@ class ArtifactQuery extends Error {
 			$this->setError('Invalid Open Date Range');
 			return false;
 		}
-		$res = db_query_params ('INSERT INTO artifact_query_fields 
-			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
+		$res = db_query_params ('INSERT INTO artifact_query_fields
+			(artifact_query_id,query_field_type,query_field_id,query_field_values)
 			VALUES ($1,$2,0,$3)',
 					array ($id,
 					       ARTIFACT_QUERY_OPENDATE,
@@ -298,8 +297,8 @@ class ArtifactQuery extends Error {
 			$this->setError('Invalid Close Date Range');
 			return false;
 		}
-		$res = db_query_params ('INSERT INTO artifact_query_fields 
-			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
+		$res = db_query_params ('INSERT INTO artifact_query_fields
+			(artifact_query_id,query_field_type,query_field_id,query_field_values)
 			VALUES ($1,$2,0,$3)',
 					array ($id,
 					       ARTIFACT_QUERY_CLOSEDATE,
@@ -310,8 +309,8 @@ class ArtifactQuery extends Error {
 		}
 
 		// SORT COLUMN
-		$res = db_query_params ('INSERT INTO artifact_query_fields 
-			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
+		$res = db_query_params ('INSERT INTO artifact_query_fields
+			(artifact_query_id,query_field_type,query_field_id,query_field_values)
 			VALUES ($1,$2,0,$3)',
 					array ($id,
 					       ARTIFACT_QUERY_SORTCOL,
@@ -320,8 +319,8 @@ class ArtifactQuery extends Error {
 			$this->setError('Setting Sort Col: '.db_error());
 			return false;
 		}
-		$res = db_query_params ('INSERT INTO artifact_query_fields 
-			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
+		$res = db_query_params ('INSERT INTO artifact_query_fields
+			(artifact_query_id,query_field_type,query_field_id,query_field_values
 			VALUES ($1,$2,0,$3)',
 					array ($id,
 					       ARTIFACT_QUERY_SORTORD,
@@ -332,27 +331,39 @@ class ArtifactQuery extends Error {
 		}
 		
 		// Saving the summary value.
-		$res=db_query("INSERT INTO artifact_query_fields 
-			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
-			VALUES ('$id','".ARTIFACT_QUERY_SUMMARY."','0','".$summary."')");
+		$res=db_query_params ('INSERT INTO artifact_query_fields
+			(artifact_query_id,query_field_type,query_field_id,query_field_values)
+			VALUES ($1,$2,$3,$4)',
+			array($id,
+				ARTIFACT_QUERY_SUMMARY,
+				0,
+				$summary));
 		if (!$res) {
 			$this->setError('Setting Summary: '.db_error());
 			return false;
 		}
 
 		// Saving the description value.
-		$res=db_query("INSERT INTO artifact_query_fields 
-			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
-			VALUES ('$id','".ARTIFACT_QUERY_DESCRIPTION."','0','".$description."')");
+		$res=db_query_params ('INSERT INTO artifact_query_fields
+			(artifact_query_id,query_field_type,query_field_id,query_field_values)
+			VALUES ($1,$2,$3,$4)',
+			array($id,
+				ARTIFACT_QUERY_DESCRIPTION,
+				0,
+				$description));
 		if (!$res) {
 			$this->setError('Setting Description: '.db_error());
 			return false;
 		}
 		
 		// Saving the followups value.
-		$res=db_query("INSERT INTO artifact_query_fields 
-			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
-			VALUES ('$id','".ARTIFACT_QUERY_FOLLOWUPS."','0','".$followups."')");
+		$res=db_query_params ('INSERT INTO artifact_query_fields
+			(artifact_query_id,query_field_type,query_field_id,query_field_values)
+			VALUES ($1,$2,$3,$4)',
+			array($id,
+				ARTIFACT_QUERY_FOLLOWUPS,
+				0,
+				$followups));
 		if (!$res) {
 			$this->setError('Setting Followups: '.db_error());
 			return false;
@@ -373,12 +384,12 @@ class ArtifactQuery extends Error {
 			//
 			if (is_array($vals[$i])) {
 				for($e=0; $e<count($vals[$i]); $e++) {
-					$vals[$i][$e]=intval($vals[$i][$e]); 
+					$vals[$i][$e]=intval($vals[$i][$e]);
 				}
 				$vals[$i]=implode(',',$vals[$i]);
 			}
-			$res = db_query_params ('INSERT INTO artifact_query_fields 
-			(artifact_query_id,query_field_type,query_field_id,query_field_values) 
+			$res = db_query_params ('INSERT INTO artifact_query_fields
+			(artifact_query_id,query_field_type,query_field_id,query_field_values)
 			VALUES ($1,$2,$3,$4)',
 						array ($id,
 						       ARTIFACT_QUERY_EXTRAFIELD,
