@@ -4,6 +4,7 @@
  * This script will get mails and store it into artifact DB
  *
  * Copyright 2004 GForge, LLC
+ * Copyright 2009, Roland Mas
  *
  * @author Tim Perdue tim@gforge.org
  * @author Sung Kim 
@@ -144,10 +145,10 @@ class TrackerGateway extends Error {
 		// find first occurrence of the marker in the message
 		$begin = strpos($body, ARTIFACT_MAIL_MARKER);
 		if ($begin === false) {
-			$this->setError("Response message wasn't found in your mail. Please verify that ".
-							"you entered your message between the correct text markers.".
-							"\nYour message was:".
-							"\n".$mp->getBody());
+			$this->setError("Response message wasn't found in your mail. Please verify that 
+you entered your message between the correct text markers.
+\nYour message was:
+\n".$mp->getBody());
 			return false;
 		}
 		// get the part of the message located after the marker
@@ -155,10 +156,10 @@ class TrackerGateway extends Error {
 		// now look for the ending marker
 		$end = strpos($body, ARTIFACT_MAIL_MARKER);
 		if ($end === false) {
-			$this->setError("Response message wasn't found in your mail. Please verify that ".
-							"you entered your message between the correct text markers.".
-							"\nYour message was:".
-							"\n".$mp->getBody());
+			$this->setError("Response message wasn't found in your mail. Please verify that 
+you entered your message between the correct text markers.
+\nYour message was:
+\n".$mp->getBody());
 			return false;
 		}
 		$message = substr($body, 0, $end);
@@ -218,9 +219,9 @@ class TrackerGateway extends Error {
 	function getUserId() {
 		// Find User id using email
 		// If no user id, user id is 0;
-		$sql = "SELECT user_id FROM users 
-			WHERE lower(email) ='".strtolower($this->FromEmail)."' AND status='A'";
-		$res = db_query($sql);
+		$res = db_query_params ('SELECT user_id FROM users WHERE lower(email)=$1 AND status=$2',
+					array(strtolower($this->FromEmail),
+					      'A'));
 		if (!$res || db_numrows($res) < 1) {
 			return false;
 		} else {

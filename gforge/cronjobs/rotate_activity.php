@@ -20,7 +20,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
-require dirname(__FILE__).'/../www/env.inc.php';
+require (dirname(__FILE__).'/../www/env.inc.php');
 require $gfwww.'include/squal_pre.php';
 require $gfcommon.'include/cron_utils.php';
 
@@ -31,9 +31,8 @@ $sql='';
 
 db_begin();
 
-$sql = "DELETE FROM activity_log WHERE day < $today_formatted";
-$err .= $sql;
-$rel = db_query($sql);
+$rel = db_query_params ('DELETE FROM activity_log WHERE day < $1',
+			array ($today_formatted));
 $err .= db_error();
 
 db_commit();

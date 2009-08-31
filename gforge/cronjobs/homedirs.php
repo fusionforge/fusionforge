@@ -76,18 +76,21 @@ if (!is_dir($homedir_prefix)) {
 	@mkdir($homedir_prefix,0755,true);
 }
 
-$res = db_query("SELECT distinct users.user_name,users.unix_pw,users.user_id
+$res = db_query_params ('SELECT distinct users.user_name,users.unix_pw,users.user_id
 	FROM users,user_group,groups
-	WHERE users.user_id=user_group.user_id 
+	WHERE users.user_id=user_group.user_id
 	AND user_group.group_id=groups.group_id
-	AND groups.status='A'
-	AND user_group.cvs_flags IN ('0','1')
-	AND users.status='A'
-	ORDER BY user_id ASC");
+	AND groups.status=$1
+	AND user_group.cvs_flags IN (0,1)
+	AND users.status=$2
+	ORDER BY user_id ASC',
+			array('A',
+			      'A'));
 $err .= db_error();
 $users    =& util_result_column_to_array($res,'user_name');
 
-$group_res = db_query("SELECT unix_group_name, (is_public=1 AND enable_anonscm=1 AND type_id=1) AS enable_pserver FROM groups WHERE status='A' AND type_id='1'");
+$group_res = db_query_params ('SELECT unix_group_name, (is_public=1 AND enable_anonscm=1 AND type_id=1) AS enable_pserver FROM groups WHERE status=$1 AND type_id=1',
+			      array('A'));
 $err .= db_error();
 $groups = util_result_column_to_array($group_res,'unix_group_name');
 
@@ -167,24 +170,7 @@ foreach($groups as $group) {
 		$fw=fopen($groupdir_prefix."/".$group."/htdocs/index.html",'w');
 		fwrite($fw,$contents);
 		fclose($fw);
-		
 	}
-	/*$resgroupadmin=db_query_params ('SELECT u.user_name FROM users u,user_group ug,groups g
-		WHERE u.user_id=ug.user_id 
-		AND ug.group_id=g.group_id 
-		AND g.unix_group_name=$1
-		AND ug.admin_flags=$2
-		AND u.status=$3',
-			array($group,
-			'A',
-			'A')) ;
-
-	if (!$resgroupadmin || db_numrows($resgroupadmin) < 1) {
-		//group has no members, so cannot create dir
-	} else {
-		$user=db_result($resgroupadmin,0,'user_name');
-		system("chown -R $user:$group $groupdir_prefix/$group");
-	}*/
 	system("chown -R $sys_apache_user:$sys_apache_group $groupdir_prefix/$group");
 }
 

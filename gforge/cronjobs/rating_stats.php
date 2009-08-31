@@ -19,8 +19,8 @@
  * along with GForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
-        
-require dirname(__FILE__).'/../www/env.inc.php';
+
+require (dirname(__FILE__).'/../www/env.inc.php');
 require $gfwww.'include/squal_pre.php';
 require $gfcommon.'include/cron_utils.php';
 
@@ -37,9 +37,8 @@ $rel = db_query_params ('DELETE FROM survey_rating_aggregate;',
 
 $err .= db_error();
 
-
-$query = "INSERT INTO survey_rating_aggregate SELECT type,id,avg(response),count(*) FROM survey_rating_response GROUP BY type,id;";
-$rel = db_query($query);
+$rel = db_query_params ('INSERT INTO survey_rating_aggregate SELECT type,id,avg(response),count(*) FROM survey_rating_response GROUP BY type,id',
+			array());
 
 db_commit();
 
