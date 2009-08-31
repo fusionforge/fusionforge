@@ -1066,9 +1066,11 @@ class Artifact extends Error {
 			$type=$ef[$efid]['field_type'];
 			if ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 				// Get previous value.
-				$sql =  "SELECT field_data FROM artifact_extra_field_data
-						WHERE artifact_id='".$this->getID()."' AND extra_field_id='".$efid."'";
-				$res = db_query($sql);
+
+				$res = db_query_params ('SELECT field_data FROM artifact_extra_field_data
+						WHERE artifact_id=$1 AND extra_field_id=$2',
+			array($this->getID(),
+				$efid));
 				$old = (db_numrows($res)>0) ? db_result($res,0,'field_data') : 100;
 				if ($old != $extra_fields[$efid]) {
 					$atw = new ArtifactWorkflow($this->ArtifactType, $efid);
@@ -1211,8 +1213,9 @@ class Artifact extends Error {
 				foreach (explode(' ',$value) as $id) {
 					if (preg_match('/^(\d+)$/', $id)) {
 						// Control that the id is present in the db
-						$sql = "SELECT artifact_id FROM artifact WHERE artifact_id=$id";
-						$res = db_query($sql);
+
+						$res = db_query_params ('SELECT artifact_id FROM artifact WHERE artifact_id=$1',
+			array($id));
 						if (db_numrows($res) == 1) {
 							$new .= $id.' ';
 						} else {
