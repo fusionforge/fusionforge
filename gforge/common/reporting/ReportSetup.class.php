@@ -699,10 +699,10 @@ function users_cum_daily($day) {
 
 	return db_query_params ('INSERT INTO rep_users_cum_daily (day,total) 
 		VALUES ($1,(SELECT count(*) FROM users WHERE status=$2 AND add_date 
-		BETWEEN '0' AND $3))',
-			array($day,
-				'A',
-				$day));
+		BETWEEN 0 AND $3))',
+				array($day,
+				      'A',
+				      $day));
 }
 
 /**
@@ -747,10 +747,10 @@ function groups_cum_daily($day) {
 
 	return db_query_params ('INSERT INTO rep_groups_cum_daily (day,total) 
 		VALUES ($1,(SELECT count(*) FROM groups WHERE status=$2 AND register_time 
-		BETWEEN '0' AND $3))',
-			array($day,
-				'A',
-				$day));
+		BETWEEN 0 AND $3))',
+				array($day,
+				      'A',
+				      $day));
 }
 
 /**
@@ -878,10 +878,10 @@ function users_cum_monthly($month,$end) {
 
 	return db_query_params ('INSERT INTO rep_users_cum_monthly (month,total)
 		VALUES ($1,(SELECT count(*) FROM users WHERE status=$2 AND add_date
-		BETWEEN '0' AND $3))',
-			array($month,
-				'A',
-				$end));
+		BETWEEN 0 AND $3))',
+				array($month,
+				      'A',
+				      $end));
 }
 
 /**
@@ -920,10 +920,10 @@ function groups_cum_monthly($month,$end) {
 
 	return db_query_params ('INSERT INTO rep_groups_cum_monthly (month,total)
 		VALUES ($1,(SELECT count(*) FROM groups WHERE status=$2 AND register_time
-		BETWEEN '0' AND $3))',
-			array($month,
-				'A',
-				$end));
+		BETWEEN 0 AND $3))',
+				array($month,
+				      'A',
+				      $end));
 }
 
 /**
@@ -966,66 +966,7 @@ function user_act_daily($day) {
 
 	$end_day=$day+REPORT_DAY_SPAN-1;
 
-	if ( $sys_database_type == "mysql" ) {
-
-		return db_query_mysql("INSERT INTO rep_user_act_daily
-			SELECT user_id,$day,coalesce(tracker_opened,0) AS tracker_opened,
-				coalesce(tracker_closed,0) AS tracker_closed,
-				coalesce(forum,0) AS forum,
-				coalesce(docs,0) AS docs,
-				coalesce(cvs_commits,0) AS cvs_commits,
-				coalesce(tasks_opened,0) AS tasks_opened,
-				coalesce(tasks_closed,0) AS tasks_closed
-			FROM
-				(((((((((SELECT submitted_by AS user_id FROM artifact WHERE open_date BETWEEN '$day' AND '$end_day')
-				UNION
-				(SELECT assigned_to AS user_id FROM artifact WHERE close_date BETWEEN '$day' AND '$end_day')
-				UNION
-				(SELECT posted_by AS user_id FROM forum WHERE post_date BETWEEN '$day' AND '$end_day')
-				UNION
-				(SELECT created_by AS user_id FROM doc_data WHERE createdate BETWEEN '$day' AND '$end_day' )
-				UNION
-				(SELECT user_id FROM stats_cvs_user WHERE month='". date('Ym') ."' AND day='". date('d') ."')
-				UNION
-				(SELECT created_by AS user_id FROM project_task WHERE start_date BETWEEN '$day' AND '$end_day')
-				UNION
-				(SELECT mod_by AS user_id FROM project_history WHERE mod_date BETWEEN '$day' AND '$end_day')) AS t_users
-				LEFT JOIN 
-					(SELECT submitted_by AS user_id, count(*) AS tracker_opened FROM artifact
-					WHERE open_date BETWEEN '$day' AND '$end_day'
-					GROUP BY user_id) AS tmp1 USING (user_id)) 
-				LEFT JOIN 
-					(SELECT assigned_to AS user_id, count(*) AS tracker_closed FROM artifact
-					WHERE close_date BETWEEN '$day' AND '$end_day'
-					GROUP BY user_id) AS tmp2 USING (user_id))
-				LEFT JOIN 
-					(SELECT posted_by AS user_id, count(*) AS forum
-					FROM forum
-					WHERE post_date BETWEEN '$day' AND  '$end_day'
-					GROUP BY user_id) AS tmp3 USING (user_id))
-				LEFT JOIN
-					(SELECT created_by AS user_id, count(*) AS docs
-					FROM doc_data
-					WHERE createdate BETWEEN '$day' AND '$end_day'
-					GROUP BY user_id) AS tmp4 USING (user_id))
-				LEFT JOIN
-					(SELECT user_id, sum(commits) AS cvs_commits
-					FROM stats_cvs_user
-					WHERE month='". date('Ym') ."' AND day='". date('d') ."'
-					GROUP BY user_id) AS tmp5 USING (user_id))
-				LEFT JOIN
-					(SELECT created_by AS user_id, count(*) AS tasks_opened
-					FROM project_task
-					WHERE start_date BETWEEN '$day' AND '$end_day'
-					GROUP BY user_id) AS tmp6 USING (user_id))
-				LEFT JOIN
-					(SELECT mod_by AS user_id, count(*) AS tasks_closed 
-					FROM project_history
-					WHERE mod_date BETWEEN '$day' AND '$end_day' AND old_value='1' AND field_name='status_id'
-					GROUP BY user_id) AS tmp7 USING (user_id))");
-	} else {
-
-		return db_query_params ('INSERT INTO rep_user_act_daily
+	return db_query_params ('INSERT INTO rep_user_act_daily
 		SELECT user_id,day,coalesce(tracker_opened,0) AS tracker_opened,
 			coalesce(tracker_closed,0) AS tracker_closed,
 			coalesce(forum,0) AS forum,
@@ -1039,72 +980,53 @@ function user_act_daily($day) {
 		(SELECT * FROM
 		(SELECT * FROM
 		(SELECT * FROM
-		(SELECT * FROM 
-			(SELECT submitted_by AS user_id, $1::int AS day, count(*) AS tracker_opened
+		(SELECT * FROM
+			(SELECT submitted_by AS user_id, $1 AS day, count(*) AS tracker_opened
 			FROM artifact
-			WHERE open_date BETWEEN $2 AND $3
-			GROUP BY user_id,day) aopen 
+			WHERE open_date BETWEEN $1 AND $2
+			GROUP BY user_id,day) aopen
 
-		FULL OUTER JOIN 
-			(SELECT assigned_to AS user_id, $4::int AS day, count(*) AS tracker_closed
+		FULL OUTER JOIN
+			(SELECT assigned_to AS user_id, $1 AS day, count(*) AS tracker_closed
 			FROM artifact
-			WHERE close_date BETWEEN $5 AND $6
+			WHERE close_date BETWEEN $1 AND $2
 			GROUP BY user_id,day ) aclosed USING (user_id,day)) foo1
 
-		FULL OUTER JOIN 
-			(SELECT posted_by AS user_id, $7::int AS day, count(*) AS forum
+		FULL OUTER JOIN
+			(SELECT posted_by AS user_id, $1 AS day, count(*) AS forum
 			FROM forum
-			WHERE post_date BETWEEN $8 AND $9
+			WHERE post_date BETWEEN $1 AND $2
 			GROUP BY user_id,day ) forum USING (user_id,day)) foo2
 
 		FULL OUTER JOIN
-			(SELECT created_by AS user_id, $10::int AS day, count(*) AS docs
+			(SELECT created_by AS user_id, $1 AS day, count(*) AS docs
 			FROM doc_data
-			WHERE createdate BETWEEN $11 AND $12 
+			WHERE createdate BETWEEN $1 AND $2
 			GROUP BY user_id,day ) docs USING (user_id,day)) foo3
 
 		FULL OUTER JOIN
-			(SELECT user_id,$13 AS day, sum(commits) AS cvs_commits
+			(SELECT user_id,$1 AS day, sum(commits) AS cvs_commits
 			FROM stats_cvs_user
-			WHERE month='". date('Ym') ."' AND day='$end_day'
+			WHERE month=$3 AND day=$2
 			GROUP BY user_id,day ) cvs USING (user_id,day)) foo4
 
 		FULL OUTER JOIN
-			(SELECT created_by AS user_id, $14::int AS day, count(*) AS tasks_opened
+			(SELECT created_by AS user_id, $1 AS day, count(*) AS tasks_opened
 			FROM project_task
-			WHERE start_date BETWEEN $15 AND $16
+			WHERE start_date BETWEEN $1 AND $2
 			GROUP BY user_id,day ) topen USING (user_id,day)) foo5
 
 		FULL OUTER JOIN
-			(SELECT mod_by AS user_id, $17::int AS day, count(*) AS tasks_closed 
+			(SELECT mod_by AS user_id, $1 AS day, count(*) AS tasks_closed 
 			FROM project_history
-			WHERE mod_date BETWEEN $18 AND $19
-			AND old_value=$20 AND field_name=$21
+			WHERE mod_date BETWEEN $1 AND $2
+			AND old_value=$4 AND field_name=$5
 			GROUP BY user_id,day ) tclosed USING (user_id,day)) foo6',
-			array($day,
-				$day,
-				$end_day,
-				$day,
-				$day,
-				$end_day,
-				$day,
-				$day,
-				$end_day,
-				$day,
-				$day,
-				$end_day,
-				$day,
-				$day,
-				$day,
-				$end_day,
-				$day,
-				$day,
-				$end_day,
-				1,
-				'status_id'));
-	}
-
-
+				array($day,
+				      $end_day,
+				      date ('Ym'),
+				      1,
+				      'status_id'));
 }
 
 /**
@@ -1264,116 +1186,6 @@ function group_act_daily($day) {
 
 	$end_day=$day+REPORT_DAY_SPAN-1;
 
-	if ($sys_database_type == "mysql") {
-
-		return db_query_params ('INSERT INTO rep_group_act_daily
-			SELECT group_id,$1,coalesce(tracker_opened,0) AS tracker_opened,
-				coalesce(tracker_closed,0) AS tracker_closed,
-				coalesce(forum,0) AS forum,
-				coalesce(docs,0) AS docs,
-				coalesce(downloads,0) AS downloads,
-				coalesce(cvs_commits,0) AS cvs_commits,
-				coalesce(tasks_opened,0) AS tasks_opened,
-				coalesce(tasks_closed,0) AS tasks_closed
-			FROM
-				((((((((((SELECT agl.group_id FROM artifact a, artifact_group_list agl
-				WHERE a.open_date BETWEEN $2 AND $3 AND a.group_artifact_id=agl.group_artifact_id)
-				UNION
-				(SELECT agl.group_id FROM artifact a, artifact_group_list agl
-				WHERE a.close_date BETWEEN $4 AND $5 AND a.group_artifact_id=agl.group_artifact_id)
-				UNION
-				(SELECT fgl.group_id FROM forum f, forum_group_list fgl
-				WHERE f.post_date BETWEEN $6 AND $7 AND f.group_forum_id=fgl.group_forum_id)
-				UNION
-				(SELECT group_id FROM doc_data WHERE createdate BETWEEN $8 AND $9)
-				UNION
-				(SELECT fp.group_id FROM frs_package fp, frs_release fr, frs_file ff, frs_dlstats_file fdf
-				WHERE fp.package_id=fr.package_id AND fr.release_id=ff.release_id AND ff.file_id=fdf.file_id
-				AND fdf.month = '". date('Ym',$day) ."' AND fdf.day = '". date('d',$day) ."')
-				UNION
-				(SELECT group_id FROM stats_cvs_group WHERE month='".date('Ym',$day)."' AND day='".date('d',$day)."')
-				UNION
-				(SELECT pgl.group_id FROM project_task pt, project_group_list pgl
-				WHERE pt.start_date BETWEEN $10 AND $11 AND pt.group_project_id=pgl.group_project_id)
-				UNION
-				(SELECT pgl.group_id FROM project_history ph, project_task pt, project_group_list pgl
-				WHERE ph.mod_date BETWEEN $12 AND $13
-				AND ph.old_value=$14 AND ph.field_name=$15 AND ph.project_task_id=pt.project_task_id
-				AND pt.group_project_id=pgl.group_project_id)) t_groups
-				LEFT JOIN 
-					(SELECT agl.group_id, count(*) AS tracker_opened
-					FROM artifact a, artifact_group_list agl
-					WHERE a.open_date BETWEEN $16 AND $17 AND a.group_artifact_id=agl.group_artifact_id
-					GROUP BY group_id) AS tmp1 USING (group_id))
-				LEFT JOIN 
-					(SELECT agl.group_id, count(*) AS tracker_closed
-					FROM artifact a, artifact_group_list agl
-					WHERE a.close_date BETWEEN $18 AND $19 AND a.group_artifact_id=agl.group_artifact_id
-					GROUP BY group_id) AS tmp2 USING (group_id))
-				LEFT JOIN 
-					(SELECT fgl.group_id, count(*) AS forum
-					FROM forum f, forum_group_list fgl
-					WHERE f.post_date BETWEEN $20 AND $21 AND f.group_forum_id=fgl.group_forum_id
-					GROUP BY group_id) AS tmp3 USING (group_id))
-				LEFT JOIN
-					(SELECT group_id, count(*) AS docs
-					FROM doc_data
-					WHERE createdate BETWEEN $22 AND $23 
-					GROUP BY group_id) AS tmp4 USING (group_id))
-				LEFT JOIN
-					(SELECT fp.group_id, count(*) AS downloads
-					FROM frs_package fp, frs_release fr, frs_file ff, frs_dlstats_file fdf
-					WHERE fp.package_id=fr.package_id AND fr.release_id=ff.release_id AND ff.file_id=fdf.file_id
-					AND fdf.month = '". date('Ym',$day) ."' AND fdf.day = '". date('d',$day) ."'
-					GROUP BY fp.group_id) AS tmp5 USING (group_id))
-				LEFT JOIN
-					(SELECT group_id, sum(commits) AS cvs_commits
-					FROM stats_cvs_group
-					WHERE month='". date('Ym',$day) ."' AND day='". date('d',$day) ."'
-					GROUP BY group_id) AS tmp6 USING (group_id))
-				LEFT JOIN
-					(SELECT pgl.group_id, count(*) AS tasks_opened
-					FROM project_task pt, project_group_list pgl
-					WHERE pt.start_date BETWEEN $24 AND $25 AND pt.group_project_id=pgl.group_project_id
-					GROUP BY group_id) AS tmp7 USING (group_id))
-				LEFT JOIN
-					(SELECT pgl.group_id, count(*) AS tasks_closed 
-					FROM project_history ph, project_task pt, project_group_list pgl
-					WHERE ph.mod_date BETWEEN $26 AND $27
-					AND ph.old_value=$28 AND ph.field_name=$29 AND ph.project_task_id=pt.project_task_id
-					AND pt.group_project_id=pgl.group_project_id
-					GROUP BY group_id) AS tmp8 USING (group_id))',
-			array($day,
-				$day,
-				$end_day,
-				$day,
-				$end_day,
-				$day,
-				$end_day,
-				$day,
-				$end_day,
-				$day,
-				$end_day,
-				$day,
-				$end_day,
-				1,
-				'status_id',
-				$day,
-				$end_day,
-				$day,
-				$end_day,
-				$day,
-				$end_day,
-				$day,
-				$end_day,
-				$day,
-				$end_day,
-				$day,
-				$end_day,
-				1,
-				'status_id'));
-	} else {
-
 	return db_query_params ('INSERT INTO rep_group_act_daily
 		SELECT group_id,day,coalesce(tracker_opened,0) AS tracker_opened,
 			coalesce(tracker_closed,0) AS tracker_closed,
@@ -1390,87 +1202,70 @@ function group_act_daily($day) {
 		(SELECT * FROM
 		(SELECT * FROM
 		(SELECT * FROM
-		(SELECT * FROM 
-			(SELECT agl.group_id, $1::int AS day, count(*) AS tracker_opened
+		(SELECT * FROM
+			(SELECT agl.group_id, $1 AS day, count(*) AS tracker_opened
 			FROM artifact a, artifact_group_list agl
-			WHERE a.open_date BETWEEN $2 AND $3
+			WHERE a.open_date BETWEEN $1 AND $2
 			AND a.group_artifact_id=agl.group_artifact_id
-			GROUP BY group_id,day) aopen 
+			GROUP BY group_id,day) aopen
 
-		FULL OUTER JOIN 
-			(SELECT agl.group_id, $4::int AS day, count(*) AS tracker_closed
+		FULL OUTER JOIN
+			(SELECT agl.group_id, $1 AS day, count(*) AS tracker_closed
 			FROM artifact a, artifact_group_list agl
-			WHERE a.close_date BETWEEN $5 AND $6
+			WHERE a.close_date BETWEEN $1 AND $2
 			AND a.group_artifact_id=agl.group_artifact_id
 			GROUP BY group_id,day ) aclosed USING (group_id,day)) foo1
 
-		FULL OUTER JOIN 
-			(SELECT fgl.group_id, $7::int AS day, count(*) AS forum
+		FULL OUTER JOIN
+			(SELECT fgl.group_id, $1 AS day, count(*) AS forum
 			FROM forum f, forum_group_list fgl
-			WHERE f.post_date BETWEEN $8 AND $9
+			WHERE f.post_date BETWEEN $1 AND $2
 			AND f.group_forum_id=fgl.group_forum_id
 			GROUP BY group_id,day ) forum USING (group_id,day)) foo2
 
 		FULL OUTER JOIN
-			(SELECT group_id, $10::int AS day, count(*) AS docs
+			(SELECT group_id, $1 AS day, count(*) AS docs
 			FROM doc_data
-			WHERE createdate BETWEEN $11 AND $12 
+			WHERE createdate BETWEEN $1 AND $2
 			GROUP BY group_id,day ) docs USING (group_id,day)) foo3
 
 		FULL OUTER JOIN
-			(SELECT fp.group_id, $13::int AS day, count(*) AS downloads
+			(SELECT fp.group_id, $1 AS day, count(*) AS downloads
 			FROM frs_package fp, frs_release fr, frs_file ff, frs_dlstats_file fdf
 			WHERE fp.package_id=fr.package_id
 			AND fr.release_id=ff.release_id
 			AND ff.file_id=fdf.file_id
-			AND fdf.month = '". date('Ym',$day) ."' AND fdf.day = '". date('d',$day) ."'
+			AND fdf.month = $3 AND fdf.day = $4
 			GROUP BY fp.group_id,day ) docs USING (group_id,day)) foo4
 
 		FULL OUTER JOIN
-			(SELECT group_id,$14 AS day, sum(commits) AS cvs_commits
+			(SELECT group_id, $1 AS day, sum(commits) AS cvs_commits
 			FROM stats_cvs_group
-			WHERE month='". date('Ym',$day) ."' AND day='". date('d',$day) ."'
+			WHERE month=$3 AND day=$4
 			GROUP BY group_id,day ) cvs USING (group_id,day)) foo5
 
 		FULL OUTER JOIN
-			(SELECT pgl.group_id, $15::int AS day,count(*) AS tasks_opened
+			(SELECT pgl.group_id, $1 AS day,count(*) AS tasks_opened
 			FROM project_task pt, project_group_list pgl
-			WHERE pt.start_date BETWEEN $16 AND $17
+			WHERE pt.start_date BETWEEN $1 AND $2
 			AND pt.group_project_id=pgl.group_project_id
 			GROUP BY group_id,day ) topen USING (group_id,day)) foo6
 
 		FULL OUTER JOIN
-			(SELECT pgl.group_id, $18::int AS day, count(*) AS tasks_closed 
+			(SELECT pgl.group_id, $1 AS day, count(*) AS tasks_closed
 			FROM project_history ph, project_task pt, project_group_list pgl
-			WHERE ph.mod_date BETWEEN $19 AND $20
-			AND ph.old_value=$21 
-			AND ph.field_name=$22
+			WHERE ph.mod_date BETWEEN $1 AND $2
+			AND ph.old_value=$5
+			AND ph.field_name=$6
 			AND ph.project_task_id=pt.project_task_id
 			AND pt.group_project_id=pgl.group_project_id
 			GROUP BY group_id,day ) tclosed USING (group_id,day)) foo7',
-			array($day,
-				$day,
-				$end_day,
-				$day,
-				$day,
-				$end_day,
-				$day,
-				$day,
-				$end_day,
-				$day,
-				$day,
-				$end_day,
-				$day,
-				$day,
-				$day,
-				$day,
-				$end_day,
-				$day,
-				$day,
-				$end_day,
-				1,
-				'status_id'));
-	}
+				array($day,
+				      $end_day,
+				      date('Ym', $day),
+				      date('d',$day),
+				      1,
+				      'status_id'));
 
 
 }

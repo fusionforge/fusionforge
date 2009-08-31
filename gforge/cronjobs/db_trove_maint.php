@@ -28,42 +28,6 @@ require $gfcommon.'include/cron_utils.php';
 $err='';
 
 /*
-//FIRST TIME THIS SCRIPT IS RUN - YOU MAY NEED TO RUN THIS QUERY FIRST
-
-//nightly aggregation query
-DROP TABLE trove_agg;
-CREATE TABLE trove_agg AS
-	SELECT tgl.trove_cat_id, g.group_id, g.group_name, g.unix_group_name,
-		g.status, g.register_time, g.short_description,
-		project_weekly_metric.percentile, project_weekly_metric.ranking
-		FROM groups g
-		LEFT JOIN project_weekly_metric USING (group_id) ,
-		trove_group_link tgl
-		WHERE
-		tgl.group_id=g.group_id
-		AND (g.is_public=1)
-		AND (g.type_id=1)
-		AND (g.status='A')
-	ORDER BY trove_cat_id ASC, ranking ASC;
-
-CREATE INDEX troveagg_trovecatid ON trove_agg(trove_cat_id);
-CREATE INDEX troveagg_trovecatid_ranking ON trove_agg(trove_cat_id,ranking);
-
-DROP TABLE trove_treesums;
-CREATE TABLE "trove_treesums" (
-		"trove_treesums_id" serial primary key,
-		"trove_cat_id" integer DEFAULT '0' NOT NULL,
-		"limit_1" integer DEFAULT '0' NOT NULL,
-		"subprojects" integer DEFAULT '0' NOT NULL
-);
-
-*/
-
-/*if (!strstr($REMOTE_ADDR,$sys_internal_network)) {
-  exit_permission_denied();
-  }*/
-
-/*
   
   Rebuild the trove_agg table, which saves us
   from doing really expensive queries in trove
@@ -86,8 +50,6 @@ AND g.type_id = 1
 AND g.status = $1
 ORDER BY trove_cat_id ASC, ranking ASC)',
 		 array('A'));
-}
-
 $err .= db_error();
 
 db_commit();

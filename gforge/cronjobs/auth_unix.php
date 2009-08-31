@@ -206,8 +206,9 @@ if ($err == "")
 		else
 		{
 			$line = $group_names [$i] . ":x:" . ($group_ids [$i] + $gid_add) . ":";
-			$resusers = db_query_params ('SELECT user_name FROM user_group,users,groups WHERE users.user_id=user_group.user_id AND groups.group_id=user_group.group_id AND groups.status='A'::bpchar AND groups.use_scm=1 AND groups.unix_group_name=$1 AND users.status=$2 AND users.unix_status=$3',
-						     array($group_names [$i],
+			$resusers = db_query_params ('SELECT user_name FROM user_group,users,groups WHERE users.user_id=user_group.user_id AND groups.group_id=user_group.group_id AND groups.status=$1::bpchar AND groups.use_scm=1 AND groups.unix_group_name=$2 AND users.status=$3 AND users.unix_status=$4',
+						     array('A',
+							   $group_names [$i],
 							   'A',
 							   'A'));
 			$members = &util_result_column_to_array ($resusers, "user_name");
