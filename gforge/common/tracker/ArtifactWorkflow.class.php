@@ -42,12 +42,16 @@ class ArtifactWorkflow extends Error {
 		if ($from === $to)
 			return true;
 
-		$sql = "SELECT event_id FROM artifact_workflow_event 
-				WHERE group_artifact_id=".$this->artifact_id."
-				AND field_id=".$this->field_id."
-				AND from_value_id=".$from."
-				AND to_value_id=".$to;
-		$res = db_query($sql);
+
+		$res = db_query_params ('SELECT event_id FROM artifact_workflow_event 
+				WHERE group_artifact_id=$1
+				AND field_id=$2
+				AND from_value_id=$3
+				AND to_value_id=$4',
+			array($this->artifact_id,
+				$this->field_id,
+				$from,
+				$to));
 		$event_id = db_result($res, 0, 'event_id');
 		if ($event_id) {
 			// No role based checks for the initial transition.
@@ -55,13 +59,17 @@ class ArtifactWorkflow extends Error {
 				return true;
 
 			// There is a transition, now check if current role is allowed.
-			$sql = "SELECT event_id 
+
+			$res = db_query_params ('SELECT event_id 
 					FROM user_group, artifact_workflow_roles 
-					WHERE user_id=".user_getid()."
-					AND group_id=".$this->ath->Group->getID()."
-					AND event_id=$event_id 
-					AND user_group.role_id=artifact_workflow_roles.role_id";
-			return db_result(db_query($sql), 0, 'event_id') ? true : false;
+					WHERE user_id=$1
+					AND group_id=$2
+					AND event_id=$3 
+					AND user_group.role_id=artifact_workflow_roles.role_id',
+			array(user_getid(),
+				$this->ath->Group->getID(),
+				$event_id));
+			return db_result($res, 0, 'event_id') ? true : false;
 		}
 		return false;
 	}
@@ -88,11 +96,14 @@ class ArtifactWorkflow extends Error {
 	
 	// Returns all the possible following nodes (no roles involved).
 	function getNextNodes($from) {
-		$sql = "SELECT to_value_id FROM artifact_workflow_event 
-				WHERE group_artifact_id=".$this->artifact_id."
-				AND field_id=".$this->field_id."
-				AND from_value_id=".(int)$from;
-		$res = db_query($sql);
+
+		$res = db_query_params ('SELECT to_value_id FROM artifact_workflow_event 
+				WHERE group_artifact_id=$1
+				AND field_id=$2
+				AND from_value_id=$3',
+			array($this->artifact_id,
+				$this->field_id,
+				(int)$from));
 		$values = array();
 		while($arr = db_fetch_array($res)) {
 			$values[] = $arr['to_value_id'];
@@ -129,8 +140,9 @@ class ArtifactWorkflow extends Error {
 				
 		// If no values, then no roles defined, all roles are allowed.
 		if (empty($values)) {
-			$res=db_query("SELECT role_id 
-			FROM role WHERE group_id='".$this->ath->Group->getID()."' ORDER BY role_name");
+			$res=db_query_params ('SELECT role_id 
+			FROM role WHERE group_id=$1 ORDER BY role_name',
+			array($this->ath->Group->getID()));
 			while($arr = db_fetch_array($res)) {
 				$values[] = $arr['role_id'];
 			}			
@@ -162,12 +174,16 @@ class ArtifactWorkflow extends Error {
 	}
 	
 	function _getEventId($from, $to) {
-		$sql = "SELECT event_id FROM artifact_workflow_event 
-				WHERE group_artifact_id=".$this->artifact_id."
-				AND field_id=".$this->field_id."
-				AND from_value_id=".$from."
-				AND to_value_id=".$to;
-		$res = db_query($sql);
+
+		$res = db_query_params ('SELECT event_id FROM artifact_workflow_event 
+				WHERE group_artifact_id=$1
+				AND field_id=$2
+				AND from_value_id=$3
+				AND to_value_id=$4',
+			array($this->artifact_id,
+				$this->field_id,
+				$from,
+				$to));
 		if (!$res) {
 			$this->setError('Unable to get Event Id ($from, $to): '.db_error());
 			return false;
@@ -178,10 +194,14 @@ class ArtifactWorkflow extends Error {
 
 	
 	function _addEvent($from, $to) {
-		$sql = "INSERT INTO artifact_workflow_event
+
+		$res = db_query_params ('INSERT INTO artifact_workflow_event
 				(group_artifact_id, field_id, from_value_id, to_value_id)
-				VALUES (".$this->artifact_id.", ".$this->field_id.", $from, $to)";
-		$res = db_query($sql);
+				VALUES ($1, $2, $3, $4)',
+			array($this->artifact_id,
+				$this->field_id,
+				$from,
+				$to));
 		if (!$res) {
 			$this->setError('Unable to add Event($from, $to): '.db_error());
 			return false;
@@ -190,8 +210,9 @@ class ArtifactWorkflow extends Error {
 		$event_id = $this->_getEventId($from, $to);
 		if ($event_id) {
 			// By default, all roles are allowed on a new event.
-			$res=db_query("SELECT role_id 
-				FROM role WHERE group_id='".$this->ath->Group->getID()."' ORDER BY role_name");
+			$res=db_query_params ('SELECT role_id 
+				FROM role WHERE group_id=$1 ORDER BY role_name',
+			array($this->ath->Group->getID()));
 			while($arr = db_fetch_array($res)) {
 				$this->_addRole($event_id, $arr['role_id']);
 			}
@@ -204,12 +225,16 @@ class ArtifactWorkflow extends Error {
 	function _removeEvent($from, $to) {
 		$event_id = $this->_getEventId($from, $to);
 		
-		$sql = "DELETE FROM artifact_workflow_event
-				WHERE group_artifact_id=".$this->artifact_id."
-				AND field_id=".$this->field_id."
-				AND from_value_id=".$from."
-				AND to_value_id=".$to;
-		$res = db_query($sql);
+
+		$res = db_query_params ('DELETE FROM artifact_workflow_event
+				WHERE group_artifact_id=$1
+				AND field_id=$2
+				AND from_value_id=$3
+				AND to_value_id=$4',
+			array($this->artifact_id,
+				$this->field_id,
+				$from,
+				$to));
 		if (!$res) {
 			$this->setError('Unable to remove Event($from, $to): '.db_error());
 			return false;
@@ -219,14 +244,18 @@ class ArtifactWorkflow extends Error {
 	}
 
 	function _getRealAllowedRoles($from, $to) {
-		$sql = "SELECT role_id
+
+		$res = db_query_params ('SELECT role_id
 				FROM artifact_workflow_roles, artifact_workflow_event
 				WHERE artifact_workflow_roles.event_id = artifact_workflow_event.event_id
-				AND group_artifact_id=".$this->artifact_id."
-				AND field_id=".$this->field_id."
-				AND from_value_id=".$from."
-				AND to_value_id=".$to;
-		$res = db_query($sql);
+				AND group_artifact_id=$1
+				AND field_id=$2
+				AND from_value_id=$3
+				AND to_value_id=$4',
+			array($this->artifact_id,
+				$this->field_id,
+				$from,
+				$to));
 		$values = array();
 		while($arr = db_fetch_array($res)) {
 			$values[] = $arr['role_id'];
@@ -235,10 +264,12 @@ class ArtifactWorkflow extends Error {
 	}
 
 	function _addRole($event_id, $role_id) {
-		$sql = "INSERT INTO artifact_workflow_roles
+
+		$res = db_query_params ('INSERT INTO artifact_workflow_roles
 				(event_id, role_id)
-				VALUES ($event_id, $role_id)";
-		$res = db_query($sql);
+				VALUES ($1, $2)',
+			array($event_id,
+				$role_id));
 		if (!$res) {
 			$this->setError('Unable to add Role ($role_id): '.db_error());
 			return false;
@@ -248,9 +279,11 @@ class ArtifactWorkflow extends Error {
 	}
 	
 	function _removeRole($event_id, $role_id) {
-		$sql = "DELETE FROM artifact_workflow_roles
-				WHERE event_id=$event_id AND role_id=$role_id";
-		$res = db_query($sql);
+
+		$res = db_query_params ('DELETE FROM artifact_workflow_roles
+				WHERE event_id=$1 AND role_id=$2',
+			array($event_id,
+				$role_id));
 		if (!$res) {
 			$this->setError('Unable to remove Event($from, $to): '.db_error());
 			return false;
@@ -266,12 +299,14 @@ class ArtifactWorkflow extends Error {
  * In this case, for all the defined events, add the role as allowed.
  */
 function workflow_add_new_role ($role_id, $group) {
-	$sql = "INSERT INTO artifact_workflow_roles 
-			SELECT event_id, $role_id as role_id 
+
+	$res = db_query_params ('INSERT INTO artifact_workflow_roles 
+			SELECT event_id, $1 as role_id 
 					FROM artifact_workflow_event, artifact_group_list
 					WHERE artifact_workflow_event.group_artifact_id=artifact_group_list.group_artifact_id 
-					AND artifact_group_list.group_id=".$group->getID();
-	$res = db_query($sql);
+					AND artifact_group_list.group_id=$2',
+			array($role_id,
+				$group->getID()));
 	if (!$res) {
 		$this->setError('Unable to register new role in workflows: '.db_error());
 		return false;
