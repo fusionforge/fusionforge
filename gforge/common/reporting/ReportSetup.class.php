@@ -426,10 +426,14 @@ function users_added_daily($day) {
 	db_query_params ('DELETE FROM rep_users_added_daily WHERE day=$1',
 			array($day)) ;
 
-	$sql="INSERT INTO rep_users_added_daily (day,added) 
-		VALUES ('$day',(SELECT count(*) FROM users WHERE status='A' AND add_date 
-		BETWEEN '$day' AND '". ($day + REPORT_DAY_SPAN - 1) ."' ))";
-	return db_query($sql);
+
+	return db_query_params ('INSERT INTO rep_users_added_daily (day,added) 
+		VALUES ($1,(SELECT count(*) FROM users WHERE status=$2 AND add_date 
+		BETWEEN $3 AND $4 ))',
+			array($day,
+				'A',
+				$day,
+				($day + REPORT_DAY_SPAN - 1) ));
 }
 
 /**
@@ -471,10 +475,14 @@ function groups_added_daily($day) {
 	db_query_params ('DELETE FROM rep_groups_added_daily WHERE day=$1',
 			array($day)) ;
 
-	$sql="INSERT INTO rep_groups_added_daily (day,added) 
-		VALUES ('$day',(SELECT count(*) FROM groups WHERE status='A' AND register_time 
-		BETWEEN '$day' AND '". ($day + REPORT_DAY_SPAN - 1) ."' ))";
-	return db_query($sql);
+
+	return db_query_params ('INSERT INTO rep_groups_added_daily (day,added) 
+		VALUES ($1,(SELECT count(*) FROM groups WHERE status=$2 AND register_time 
+		BETWEEN $3 AND $4 ))',
+			array($day,
+				'A',
+				$day,
+				($day + REPORT_DAY_SPAN - 1) ));
 }
 
 /**
@@ -516,10 +524,14 @@ function users_added_weekly($week) {
 	db_query_params ('DELETE FROM rep_users_added_weekly WHERE week=$1',
 			array($week)) ;
 
-	$sql="INSERT INTO rep_users_added_weekly (week,added)
-		VALUES ('$week',(SELECT count(*) FROM users WHERE status='A' AND add_date
-		BETWEEN '$week' AND '". ($week+REPORT_WEEK_SPAN-1) ."' ))";
-	return db_query($sql);
+
+	return db_query_params ('INSERT INTO rep_users_added_weekly (week,added)
+		VALUES ($1,(SELECT count(*) FROM users WHERE status=$2 AND add_date
+		BETWEEN $3 AND $4 ))',
+			array($week,
+				'A',
+				$week,
+				($week+REPORT_WEEK_SPAN-1) ));
 }
 
 /**
@@ -553,10 +565,14 @@ function groups_added_weekly($week) {
 	db_query_params ('DELETE FROM rep_groups_added_weekly WHERE week=$1',
 			array($week)) ;
 
-	$sql="INSERT INTO rep_groups_added_weekly (week,added)
-		VALUES ('$week',(SELECT count(*) FROM groups WHERE status='A' AND register_time
-		BETWEEN '$week' AND '". ($week+REPORT_WEEK_SPAN-1) ."' ))";
-	return db_query($sql);
+
+	return db_query_params ('INSERT INTO rep_groups_added_weekly (week,added)
+		VALUES ($1,(SELECT count(*) FROM groups WHERE status=$2 AND register_time
+		BETWEEN $3 AND $4 ))',
+			array($week,
+				'A',
+				$week,
+				($week+REPORT_WEEK_SPAN-1) ));
 }
 
 /**
@@ -591,10 +607,14 @@ function users_added_monthly($month,$end) {
 	db_query_params ('DELETE FROM rep_users_added_monthly WHERE month=$1',
 			array($month)) ;
 
-	$sql="INSERT INTO rep_users_added_monthly (month,added)
-		VALUES ('$month',(SELECT count(*) FROM users WHERE status='A' AND add_date
-		BETWEEN '$month' AND '$end' ))";
-	return db_query($sql);
+
+	return db_query_params ('INSERT INTO rep_users_added_monthly (month,added)
+		VALUES ($1,(SELECT count(*) FROM users WHERE status=$2 AND add_date
+		BETWEEN $3 AND $4 ))',
+			array($month,
+				'A',
+				$month,
+				$end));
 }
 
 /**
@@ -630,10 +650,14 @@ function groups_added_monthly($month,$end) {
 	db_query_params ('DELETE FROM rep_groups_added_monthly WHERE month=$1',
 			array($month)) ;
 
-	$sql="INSERT INTO rep_groups_added_monthly (month,added)
-		VALUES ('$month',(SELECT count(*) FROM groups WHERE status='A' AND register_time
-		BETWEEN '$month' AND '$end' ))";
-	return db_query($sql);
+
+	return db_query_params ('INSERT INTO rep_groups_added_monthly (month,added)
+		VALUES ($1,(SELECT count(*) FROM groups WHERE status=$2 AND register_time
+		BETWEEN $3 AND $4 ))',
+			array($month,
+				'A',
+				$month,
+				$end));
 }
 
 /**
@@ -672,10 +696,13 @@ function users_cum_daily($day) {
 	db_query_params ('DELETE FROM rep_users_cum_daily WHERE day=$1',
 			array($day)) ;
 
-	$sql="INSERT INTO rep_users_cum_daily (day,total) 
-		VALUES ('$day',(SELECT count(*) FROM users WHERE status='A' AND add_date 
-		BETWEEN '0' AND '$day'))";
-	return db_query($sql);
+
+	return db_query_params ('INSERT INTO rep_users_cum_daily (day,total) 
+		VALUES ($1,(SELECT count(*) FROM users WHERE status=$2 AND add_date 
+		BETWEEN '0' AND $3))',
+			array($day,
+				'A',
+				$day));
 }
 
 /**
@@ -717,10 +744,13 @@ function groups_cum_daily($day) {
 	db_query_params ('DELETE FROM rep_groups_cum_daily WHERE day=$1',
 			array($day)) ;
 
-	$sql="INSERT INTO rep_groups_cum_daily (day,total) 
-		VALUES ('$day',(SELECT count(*) FROM groups WHERE status='A' AND register_time 
-		BETWEEN '0' AND '$day'))";
-	return db_query($sql);
+
+	return db_query_params ('INSERT INTO rep_groups_cum_daily (day,total) 
+		VALUES ($1,(SELECT count(*) FROM groups WHERE status=$2 AND register_time 
+		BETWEEN '0' AND $3))',
+			array($day,
+				'A',
+				$day));
 }
 
 /**
@@ -762,10 +792,14 @@ function users_cum_weekly($week) {
 	db_query_params ('DELETE FROM rep_users_cum_weekly WHERE week=$1',
 			array($week)) ;
 
-	$sql="INSERT INTO rep_users_cum_weekly (week,total)
-		VALUES ('$week',(SELECT count(*) FROM users WHERE status='A' AND add_date
-		BETWEEN '0' AND '". ($week+REPORT_WEEK_SPAN-1 ). "'))";
-	return db_query($sql);
+
+	return db_query_params ('INSERT INTO rep_users_cum_weekly (week,total)
+		VALUES ($1,(SELECT count(*) FROM users WHERE status=$2 AND add_date
+		BETWEEN $3 AND $4))',
+			array($week,
+				'A',
+				0,
+				($week+REPORT_WEEK_SPAN-1 )));
 }
 
 /**
@@ -799,10 +833,14 @@ function groups_cum_weekly($week) {
 	db_query_params ('DELETE FROM rep_groups_cum_weekly WHERE week=$1',
 			array($week)) ;
 
-	$sql="INSERT INTO rep_groups_cum_weekly (week,total)
-		VALUES ('$week',(SELECT count(*) FROM groups WHERE status='A' AND register_time
-		BETWEEN '0' AND '". ($week+REPORT_WEEK_SPAN-1 ). "'))";
-	return db_query($sql);
+
+	return db_query_params ('INSERT INTO rep_groups_cum_weekly (week,total)
+		VALUES ($1,(SELECT count(*) FROM groups WHERE status=$2 AND register_time
+		BETWEEN $3 AND $4))',
+			array($week,
+				'A',
+				0,
+				($week+REPORT_WEEK_SPAN-1 )));
 }
 
 /**
@@ -837,10 +875,13 @@ function users_cum_monthly($month,$end) {
 	db_query_params ('DELETE FROM rep_users_cum_monthly WHERE month=$1',
 			array($month)) ;
 
-	$sql="INSERT INTO rep_users_cum_monthly (month,total)
-		VALUES ('$month',(SELECT count(*) FROM users WHERE status='A' AND add_date
-		BETWEEN '0' AND '$end'))";
-	return db_query($sql);
+
+	return db_query_params ('INSERT INTO rep_users_cum_monthly (month,total)
+		VALUES ($1,(SELECT count(*) FROM users WHERE status=$2 AND add_date
+		BETWEEN '0' AND $3))',
+			array($month,
+				'A',
+				$end));
 }
 
 /**
@@ -876,10 +917,13 @@ function groups_cum_monthly($month,$end) {
 	db_query_params ('DELETE FROM rep_groups_cum_monthly WHERE month=$1',
 			array($month)) ;
 
-	$sql="INSERT INTO rep_groups_cum_monthly (month,total)
-		VALUES ('$month',(SELECT count(*) FROM groups WHERE status='A' AND register_time
-		BETWEEN '0' AND '$end'))";
-	return db_query($sql);
+
+	return db_query_params ('INSERT INTO rep_groups_cum_monthly (month,total)
+		VALUES ($1,(SELECT count(*) FROM groups WHERE status=$2 AND register_time
+		BETWEEN '0' AND $3))',
+			array($month,
+				'A',
+				$end));
 }
 
 /**
@@ -923,7 +967,8 @@ function user_act_daily($day) {
 	$end_day=$day+REPORT_DAY_SPAN-1;
 
 	if ( $sys_database_type == "mysql" ) {
-		$sql="INSERT INTO rep_user_act_daily
+
+		return db_query_mysql("INSERT INTO rep_user_act_daily
 			SELECT user_id,$day,coalesce(tracker_opened,0) AS tracker_opened,
 				coalesce(tracker_closed,0) AS tracker_closed,
 				coalesce(forum,0) AS forum,
@@ -977,9 +1022,10 @@ function user_act_daily($day) {
 					(SELECT mod_by AS user_id, count(*) AS tasks_closed 
 					FROM project_history
 					WHERE mod_date BETWEEN '$day' AND '$end_day' AND old_value='1' AND field_name='status_id'
-					GROUP BY user_id) AS tmp7 USING (user_id))";
+					GROUP BY user_id) AS tmp7 USING (user_id))");
 	} else {
-		$sql="INSERT INTO rep_user_act_daily
+
+		return db_query_params ('INSERT INTO rep_user_act_daily
 		SELECT user_id,day,coalesce(tracker_opened,0) AS tracker_opened,
 			coalesce(tracker_closed,0) AS tracker_closed,
 			coalesce(forum,0) AS forum,
@@ -994,50 +1040,70 @@ function user_act_daily($day) {
 		(SELECT * FROM
 		(SELECT * FROM
 		(SELECT * FROM 
-			(SELECT submitted_by AS user_id, '$day'::int AS day, count(*) AS tracker_opened
+			(SELECT submitted_by AS user_id, $1::int AS day, count(*) AS tracker_opened
 			FROM artifact
-			WHERE open_date BETWEEN '$day' AND '$end_day'
+			WHERE open_date BETWEEN $2 AND $3
 			GROUP BY user_id,day) aopen 
 
 		FULL OUTER JOIN 
-			(SELECT assigned_to AS user_id, '$day'::int AS day, count(*) AS tracker_closed
+			(SELECT assigned_to AS user_id, $4::int AS day, count(*) AS tracker_closed
 			FROM artifact
-			WHERE close_date BETWEEN '$day' AND '$end_day'
+			WHERE close_date BETWEEN $5 AND $6
 			GROUP BY user_id,day ) aclosed USING (user_id,day)) foo1
 
 		FULL OUTER JOIN 
-			(SELECT posted_by AS user_id, '$day'::int AS day, count(*) AS forum
+			(SELECT posted_by AS user_id, $7::int AS day, count(*) AS forum
 			FROM forum
-			WHERE post_date BETWEEN '$day' AND '$end_day'
+			WHERE post_date BETWEEN $8 AND $9
 			GROUP BY user_id,day ) forum USING (user_id,day)) foo2
 
 		FULL OUTER JOIN
-			(SELECT created_by AS user_id, '$day'::int AS day, count(*) AS docs
+			(SELECT created_by AS user_id, $10::int AS day, count(*) AS docs
 			FROM doc_data
-			WHERE createdate BETWEEN '$day' AND '$end_day' 
+			WHERE createdate BETWEEN $11 AND $12 
 			GROUP BY user_id,day ) docs USING (user_id,day)) foo3
 
 		FULL OUTER JOIN
-			(SELECT user_id,$day AS day, sum(commits) AS cvs_commits
+			(SELECT user_id,$13 AS day, sum(commits) AS cvs_commits
 			FROM stats_cvs_user
 			WHERE month='". date('Ym') ."' AND day='$end_day'
 			GROUP BY user_id,day ) cvs USING (user_id,day)) foo4
 
 		FULL OUTER JOIN
-			(SELECT created_by AS user_id, '$day'::int AS day, count(*) AS tasks_opened
+			(SELECT created_by AS user_id, $14::int AS day, count(*) AS tasks_opened
 			FROM project_task
-			WHERE start_date BETWEEN '$day' AND '$end_day'
+			WHERE start_date BETWEEN $15 AND $16
 			GROUP BY user_id,day ) topen USING (user_id,day)) foo5
 
 		FULL OUTER JOIN
-			(SELECT mod_by AS user_id, '$day'::int AS day, count(*) AS tasks_closed 
+			(SELECT mod_by AS user_id, $17::int AS day, count(*) AS tasks_closed 
 			FROM project_history
-			WHERE mod_date BETWEEN '$day' AND '$end_day'
-			AND old_value='1' AND field_name='status_id'
-			GROUP BY user_id,day ) tclosed USING (user_id,day)) foo6";
+			WHERE mod_date BETWEEN $18 AND $19
+			AND old_value=$20 AND field_name=$21
+			GROUP BY user_id,day ) tclosed USING (user_id,day)) foo6',
+			array($day,
+				$day,
+				$end_day,
+				$day,
+				$day,
+				$end_day,
+				$day,
+				$day,
+				$end_day,
+				$day,
+				$day,
+				$end_day,
+				$day,
+				$day,
+				$day,
+				$end_day,
+				$day,
+				$day,
+				$end_day,
+				1,
+				'status_id'));
 	}
 
-	return db_query($sql);
 
 }
 
@@ -1199,8 +1265,9 @@ function group_act_daily($day) {
 	$end_day=$day+REPORT_DAY_SPAN-1;
 
 	if ($sys_database_type == "mysql") {
-		$sql="INSERT INTO rep_group_act_daily
-			SELECT group_id,'$day',coalesce(tracker_opened,0) AS tracker_opened,
+
+		return db_query_params ('INSERT INTO rep_group_act_daily
+			SELECT group_id,$1,coalesce(tracker_opened,0) AS tracker_opened,
 				coalesce(tracker_closed,0) AS tracker_closed,
 				coalesce(forum,0) AS forum,
 				coalesce(docs,0) AS docs,
@@ -1210,15 +1277,15 @@ function group_act_daily($day) {
 				coalesce(tasks_closed,0) AS tasks_closed
 			FROM
 				((((((((((SELECT agl.group_id FROM artifact a, artifact_group_list agl
-				WHERE a.open_date BETWEEN '$day' AND '$end_day' AND a.group_artifact_id=agl.group_artifact_id)
+				WHERE a.open_date BETWEEN $2 AND $3 AND a.group_artifact_id=agl.group_artifact_id)
 				UNION
 				(SELECT agl.group_id FROM artifact a, artifact_group_list agl
-				WHERE a.close_date BETWEEN '$day' AND '$end_day' AND a.group_artifact_id=agl.group_artifact_id)
+				WHERE a.close_date BETWEEN $4 AND $5 AND a.group_artifact_id=agl.group_artifact_id)
 				UNION
 				(SELECT fgl.group_id FROM forum f, forum_group_list fgl
-				WHERE f.post_date BETWEEN '$day' AND '$end_day' AND f.group_forum_id=fgl.group_forum_id)
+				WHERE f.post_date BETWEEN $6 AND $7 AND f.group_forum_id=fgl.group_forum_id)
 				UNION
-				(SELECT group_id FROM doc_data WHERE createdate BETWEEN '$day' AND '$end_day')
+				(SELECT group_id FROM doc_data WHERE createdate BETWEEN $8 AND $9)
 				UNION
 				(SELECT fp.group_id FROM frs_package fp, frs_release fr, frs_file ff, frs_dlstats_file fdf
 				WHERE fp.package_id=fr.package_id AND fr.release_id=ff.release_id AND ff.file_id=fdf.file_id
@@ -1227,31 +1294,31 @@ function group_act_daily($day) {
 				(SELECT group_id FROM stats_cvs_group WHERE month='".date('Ym',$day)."' AND day='".date('d',$day)."')
 				UNION
 				(SELECT pgl.group_id FROM project_task pt, project_group_list pgl
-				WHERE pt.start_date BETWEEN '$day' AND '$end_day' AND pt.group_project_id=pgl.group_project_id)
+				WHERE pt.start_date BETWEEN $10 AND $11 AND pt.group_project_id=pgl.group_project_id)
 				UNION
 				(SELECT pgl.group_id FROM project_history ph, project_task pt, project_group_list pgl
-				WHERE ph.mod_date BETWEEN '$day' AND '$end_day'
-				AND ph.old_value='1' AND ph.field_name='status_id' AND ph.project_task_id=pt.project_task_id
+				WHERE ph.mod_date BETWEEN $12 AND $13
+				AND ph.old_value=$14 AND ph.field_name=$15 AND ph.project_task_id=pt.project_task_id
 				AND pt.group_project_id=pgl.group_project_id)) t_groups
 				LEFT JOIN 
 					(SELECT agl.group_id, count(*) AS tracker_opened
 					FROM artifact a, artifact_group_list agl
-					WHERE a.open_date BETWEEN '$day' AND '$end_day' AND a.group_artifact_id=agl.group_artifact_id
+					WHERE a.open_date BETWEEN $16 AND $17 AND a.group_artifact_id=agl.group_artifact_id
 					GROUP BY group_id) AS tmp1 USING (group_id))
 				LEFT JOIN 
 					(SELECT agl.group_id, count(*) AS tracker_closed
 					FROM artifact a, artifact_group_list agl
-					WHERE a.close_date BETWEEN '$day' AND '$end_day' AND a.group_artifact_id=agl.group_artifact_id
+					WHERE a.close_date BETWEEN $18 AND $19 AND a.group_artifact_id=agl.group_artifact_id
 					GROUP BY group_id) AS tmp2 USING (group_id))
 				LEFT JOIN 
 					(SELECT fgl.group_id, count(*) AS forum
 					FROM forum f, forum_group_list fgl
-					WHERE f.post_date BETWEEN '$day' AND '$end_day' AND f.group_forum_id=fgl.group_forum_id
+					WHERE f.post_date BETWEEN $20 AND $21 AND f.group_forum_id=fgl.group_forum_id
 					GROUP BY group_id) AS tmp3 USING (group_id))
 				LEFT JOIN
 					(SELECT group_id, count(*) AS docs
 					FROM doc_data
-					WHERE createdate BETWEEN '$day' AND '$end_day' 
+					WHERE createdate BETWEEN $22 AND $23 
 					GROUP BY group_id) AS tmp4 USING (group_id))
 				LEFT JOIN
 					(SELECT fp.group_id, count(*) AS downloads
@@ -1267,17 +1334,47 @@ function group_act_daily($day) {
 				LEFT JOIN
 					(SELECT pgl.group_id, count(*) AS tasks_opened
 					FROM project_task pt, project_group_list pgl
-					WHERE pt.start_date BETWEEN '$day' AND '$end_day' AND pt.group_project_id=pgl.group_project_id
+					WHERE pt.start_date BETWEEN $24 AND $25 AND pt.group_project_id=pgl.group_project_id
 					GROUP BY group_id) AS tmp7 USING (group_id))
 				LEFT JOIN
 					(SELECT pgl.group_id, count(*) AS tasks_closed 
 					FROM project_history ph, project_task pt, project_group_list pgl
-					WHERE ph.mod_date BETWEEN '$day' AND '$end_day'
-					AND ph.old_value='1' AND ph.field_name='status_id' AND ph.project_task_id=pt.project_task_id
+					WHERE ph.mod_date BETWEEN $26 AND $27
+					AND ph.old_value=$28 AND ph.field_name=$29 AND ph.project_task_id=pt.project_task_id
 					AND pt.group_project_id=pgl.group_project_id
-					GROUP BY group_id) AS tmp8 USING (group_id))";
+					GROUP BY group_id) AS tmp8 USING (group_id))',
+			array($day,
+				$day,
+				$end_day,
+				$day,
+				$end_day,
+				$day,
+				$end_day,
+				$day,
+				$end_day,
+				$day,
+				$end_day,
+				$day,
+				$end_day,
+				1,
+				'status_id',
+				$day,
+				$end_day,
+				$day,
+				$end_day,
+				$day,
+				$end_day,
+				$day,
+				$end_day,
+				$day,
+				$end_day,
+				$day,
+				$end_day,
+				1,
+				'status_id'));
 	} else {
-		$sql="INSERT INTO rep_group_act_daily
+
+	return db_query_params ('INSERT INTO rep_group_act_daily
 		SELECT group_id,day,coalesce(tracker_opened,0) AS tracker_opened,
 			coalesce(tracker_closed,0) AS tracker_closed,
 			coalesce(forum,0) AS forum,
@@ -1294,34 +1391,34 @@ function group_act_daily($day) {
 		(SELECT * FROM
 		(SELECT * FROM
 		(SELECT * FROM 
-			(SELECT agl.group_id, '$day'::int AS day, count(*) AS tracker_opened
+			(SELECT agl.group_id, $1::int AS day, count(*) AS tracker_opened
 			FROM artifact a, artifact_group_list agl
-			WHERE a.open_date BETWEEN '$day' AND '$end_day'
+			WHERE a.open_date BETWEEN $2 AND $3
 			AND a.group_artifact_id=agl.group_artifact_id
 			GROUP BY group_id,day) aopen 
 
 		FULL OUTER JOIN 
-			(SELECT agl.group_id, '$day'::int AS day, count(*) AS tracker_closed
+			(SELECT agl.group_id, $4::int AS day, count(*) AS tracker_closed
 			FROM artifact a, artifact_group_list agl
-			WHERE a.close_date BETWEEN '$day' AND '$end_day'
+			WHERE a.close_date BETWEEN $5 AND $6
 			AND a.group_artifact_id=agl.group_artifact_id
 			GROUP BY group_id,day ) aclosed USING (group_id,day)) foo1
 
 		FULL OUTER JOIN 
-			(SELECT fgl.group_id, '$day'::int AS day, count(*) AS forum
+			(SELECT fgl.group_id, $7::int AS day, count(*) AS forum
 			FROM forum f, forum_group_list fgl
-			WHERE f.post_date BETWEEN '$day' AND '$end_day'
+			WHERE f.post_date BETWEEN $8 AND $9
 			AND f.group_forum_id=fgl.group_forum_id
 			GROUP BY group_id,day ) forum USING (group_id,day)) foo2
 
 		FULL OUTER JOIN
-			(SELECT group_id, '$day'::int AS day, count(*) AS docs
+			(SELECT group_id, $10::int AS day, count(*) AS docs
 			FROM doc_data
-			WHERE createdate BETWEEN '$day' AND '$end_day' 
+			WHERE createdate BETWEEN $11 AND $12 
 			GROUP BY group_id,day ) docs USING (group_id,day)) foo3
 
 		FULL OUTER JOIN
-			(SELECT fp.group_id, '$day'::int AS day, count(*) AS downloads
+			(SELECT fp.group_id, $13::int AS day, count(*) AS downloads
 			FROM frs_package fp, frs_release fr, frs_file ff, frs_dlstats_file fdf
 			WHERE fp.package_id=fr.package_id
 			AND fr.release_id=ff.release_id
@@ -1330,30 +1427,51 @@ function group_act_daily($day) {
 			GROUP BY fp.group_id,day ) docs USING (group_id,day)) foo4
 
 		FULL OUTER JOIN
-			(SELECT group_id,$day AS day, sum(commits) AS cvs_commits
+			(SELECT group_id,$14 AS day, sum(commits) AS cvs_commits
 			FROM stats_cvs_group
 			WHERE month='". date('Ym',$day) ."' AND day='". date('d',$day) ."'
 			GROUP BY group_id,day ) cvs USING (group_id,day)) foo5
 
 		FULL OUTER JOIN
-			(SELECT pgl.group_id, '$day'::int AS day,count(*) AS tasks_opened
+			(SELECT pgl.group_id, $15::int AS day,count(*) AS tasks_opened
 			FROM project_task pt, project_group_list pgl
-			WHERE pt.start_date BETWEEN '$day' AND '$end_day'
+			WHERE pt.start_date BETWEEN $16 AND $17
 			AND pt.group_project_id=pgl.group_project_id
 			GROUP BY group_id,day ) topen USING (group_id,day)) foo6
 
 		FULL OUTER JOIN
-			(SELECT pgl.group_id, '$day'::int AS day, count(*) AS tasks_closed 
+			(SELECT pgl.group_id, $18::int AS day, count(*) AS tasks_closed 
 			FROM project_history ph, project_task pt, project_group_list pgl
-			WHERE ph.mod_date BETWEEN '$day' AND '$end_day'
-			AND ph.old_value='1' 
-			AND ph.field_name='status_id'
+			WHERE ph.mod_date BETWEEN $19 AND $20
+			AND ph.old_value=$21 
+			AND ph.field_name=$22
 			AND ph.project_task_id=pt.project_task_id
 			AND pt.group_project_id=pgl.group_project_id
-			GROUP BY group_id,day ) tclosed USING (group_id,day)) foo7";
+			GROUP BY group_id,day ) tclosed USING (group_id,day)) foo7',
+			array($day,
+				$day,
+				$end_day,
+				$day,
+				$day,
+				$end_day,
+				$day,
+				$day,
+				$end_day,
+				$day,
+				$day,
+				$end_day,
+				$day,
+				$day,
+				$day,
+				$day,
+				$end_day,
+				$day,
+				$day,
+				$end_day,
+				1,
+				'status_id'));
 	}
 
-	return db_query($sql);
 
 }
 
