@@ -36,27 +36,6 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 	exit_not_logged_in();
 
 } else {
-
-
-	/*
-//needs security audit
-	 *  If user has valid "remember-me" hash, instantiate not-logged in
-	 *  session for one.
-	 * /
-	if (!session_loggedin()) {
-			list($user_id,$hash)=explode('_',$sf_user_hash);
-			$sql="SELECT *
-			FROM users
-			WHERE user_id='".$user_id."' AND user_pw LIKE '".$hash."%'";
-
-		$result=db_query($sql);
-		$rows=db_numrows($result);
-		if (!$result || $rows != 1) { exit_not_logged_in();
-		}
-		$user_id=db_result($result,0,'user_id');
-		session_get_user()=user_get_object($user_id,$result);
-	}
-*/
 	echo site_user_header(array('title'=>sprintf(_('Personal Page For %s'),user_getname())));
 	$tabcnt=0;	
 	?>
@@ -327,12 +306,14 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 		$order_name_arr[]=_('Monitored FileModules');
 		echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
 
-		$sql="SELECT groups.group_name,groups.unix_group_name,groups.group_id,frs_package.name,filemodule_monitor.filemodule_id 
+
+		$result=db_query_params ('SELECT groups.group_name,groups.unix_group_name,groups.group_id,frs_package.name,filemodule_monitor.filemodule_id 
 FROM groups,filemodule_monitor,frs_package 
-WHERE groups.group_id=frs_package.group_id AND groups.status = 'A' 
+WHERE groups.group_id=frs_package.group_id AND groups.status = $1 
 AND frs_package.package_id=filemodule_monitor.filemodule_id 
-AND filemodule_monitor.user_id='".user_getid()."' ORDER BY group_name DESC";
-		$result=db_query($sql);
+AND filemodule_monitor.user_id=$2 ORDER BY group_name DESC',
+			array('A',
+				user_getid()));
 		$rows=db_numrows($result);
 		if (!$result || $rows < 1) {
 			echo '<tr><td colspan="2" bgcolor="#FFFFFF"><center><strong>'._('You are not monitoring any files.').'</strong></center></td></tr>';
@@ -363,8 +344,9 @@ AND filemodule_monitor.user_id='".user_getid()."' ORDER BY group_name DESC";
 	echo $HTML->boxTop(_('My Bookmarks'),false,false);
 
 	echo '<a href="'.util_make_url ('/my/bookmark_add.php').'">'._('Add bookmark').'</a><br/><br/>';
-	$result = db_query("SELECT bookmark_url, bookmark_title, bookmark_id from user_bookmarks where ".
-		"user_id='". user_getid() ."' ORDER BY bookmark_title");
+	$result = db_query_params ('SELECT bookmark_url, bookmark_title, bookmark_id from user_bookmarks where 
+user_id=$1 ORDER BY bookmark_title',
+			array(user_getid() ));
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
