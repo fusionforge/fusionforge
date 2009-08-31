@@ -105,10 +105,13 @@ if (count($show) < 1) {
 	$section=$show;
 }
 
-$sql="SELECT * FROM activity_vw WHERE activity_date BETWEEN '".$begin."' AND '".$end."'
-	AND group_id='$group_id' AND section IN ('".implode("','",$section)."') ORDER BY activity_date DESC";
-//echo $sql;
-$res=db_query($sql);
+
+$res=db_query_params ('SELECT * FROM activity_vw WHERE activity_date BETWEEN $1 AND $2
+	AND group_id=$3 AND section = ANY ($4) ORDER BY activity_date DESC',
+		      array($begin,
+			    $end,
+			    $group_id,
+			    db_string_array_to_any_clause ($section)));
 echo db_error();
 
 $results = array();
@@ -177,10 +180,13 @@ if (count($results)<1) {
 <br />
 	<?php
 
-	$sql="SELECT * FROM activity_vw WHERE activity_date BETWEEN '".$begin."' AND '".$end."'
-	AND group_id='$group_id' AND section IN ('".implode("','",$show)."') ORDER BY activity_date DESC";
-	//echo $sql;
-	$res=db_query($sql);
+
+	$res=db_query_params ('SELECT * FROM activity_vw WHERE activity_date BETWEEN $1 AND $2
+	AND group_id=$3 AND section = ANY ($4) ORDER BY activity_date DESC',
+			      array($begin,
+				    $end,
+				    $group_id,
+				    db_string_array_to_any_clause ($show)));
 	echo db_error();
 
 	$rows=db_numrows($res);
