@@ -882,8 +882,8 @@ function feedback($feedback) {
  * @return	integer the theme id
  */
 function getThemeIdFromName($dirname) {
-	$res=db_query_params ('SELECT theme_id FROM themes WHERE dirname=$1',
-			array($dirname));
+	$res = db_query_params ('SELECT theme_id FROM themes WHERE dirname=$1',
+				array ($dirname));
 	return db_result($res,0,'theme_id');
 }
 
@@ -891,7 +891,9 @@ function quickNav() {
 	if (!session_loggedin()) {
 		return '';
 	} else {
-		$res=db_query("SELECT * FROM groups NATURAL JOIN user_group WHERE user_id='".user_getid()."' ORDER BY group_name");
+		$res = db_query_params ('SELECT * FROM groups JOIN user_group USING (group_id) WHERE user_group.user_id=$1 AND groups.status=$2 ORDER BY group_name',
+					array (user_getid(),
+					       'A'));
 		echo db_error();
 		if (!$res || db_numrows($res) < 1) {
 			return '';
