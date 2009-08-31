@@ -151,10 +151,10 @@ class ArtifactFactory extends Error {
 			}
 
 			if (!$this->query_type) {
-				$sql = "SELECT artifact_query_id FROM artifact_query
-					WHERE group_artifact_id='".$this->ArtifactType->getID()."'
-					AND query_type=2";
-				$res = db_query($sql);
+				$res = db_query_params ('SELECT artifact_query_id FROM artifact_query
+					WHERE group_artifact_id=$1
+					AND query_type=2',
+							array($this->ArtifactType->getID()));
 				if (db_numrows($res)>0) {
 					$this->query_type = 'query';
 					$this->query_id = db_result($res, 0, 'artifact_query_id');
@@ -313,8 +313,9 @@ class ArtifactFactory extends Error {
 				$params[] = $keys[$i] ;
 
 				// Hack: Determine the type of the element to get the right search query.
-				$sql = "SELECT field_type FROM artifact_extra_field_list WHERE extra_field_id=".$keys[$i];
-				$type = db_result(db_query($sql),0,'field_type');
+				$res = db_query_params ('SELECT field_type FROM artifact_extra_field_list WHERE extra_field_id=$1',
+							array($keys[$i])) ;
+				$type = db_result($res,0,'field_type');
 				if ($type == 4 or $type == 6) {
 					$search = "LIKE '".addslashes($vals[$i])."'";
 					$wheresql .= ' AND aefd'.$i.'.field_data LIKE $'.$paramcount++ ;
