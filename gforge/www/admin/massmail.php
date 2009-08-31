@@ -60,10 +60,14 @@ if (getStringFromRequest('submit')) {
 		);
 	}
 
-	$res = db_query("
+	$res = db_query_params ('
 		INSERT INTO massmail_queue(type,subject,message,queued_date)
-		VALUES ('$mail_type','$mail_subject','$mail_message',".time().")
-	");
+		VALUES ($1,$2,$3,$4)
+	',
+			array($mail_type,
+				$mail_subject,
+				$mail_message,
+				time()));
 
 	if (!$res || db_affected_rows($res)<1) {
 		form_release_key(getStringFromRequest('form_key'));

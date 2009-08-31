@@ -162,10 +162,11 @@ if (!$group_id) {
 	print "<strong>" . group_getname($group_id) . "</strong></p>";
 
 
-	$result = db_query("SELECT users.user_id AS user_id,users.user_name AS user_name,users.status AS status, users.add_date AS add_date "
-		. "FROM users,user_group "
-		. "WHERE users.user_id=user_group.user_id AND "
-		. "user_group.group_id='$group_id' ORDER BY users.user_name");
+	$result = db_query_params ('SELECT users.user_id AS user_id,users.user_name AS user_name,users.status AS status, users.add_date AS add_date 
+FROM users,user_group 
+WHERE users.user_id=user_group.user_id AND 
+user_group.group_id=$1 ORDER BY users.user_name',
+			array($group_id));
 	show_users_list ($result);
 
 	/*

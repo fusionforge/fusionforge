@@ -101,23 +101,28 @@ function admin_table_postadd($table, $unit, $primary_key) {
  */
 function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
 	if ($unit == "processor") {
-		$result = db_numrows(db_query("SELECT processor_id FROM frs_file WHERE processor_id = $id"));
+		$result = db_numrows(db_query_params ('SELECT processor_id FROM frs_file WHERE processor_id = $1',
+			array($id)));
 		if ($result > 0) {
-			echo '<p>'.sprintf(_('You can\'t delete the processor %1$s since it\'s currently referenced in a file release.'), db_result(db_query("select name from frs_processor where processor_id = $id"), 0, 0)).'</p>';
+			echo '<p>'.sprintf(_('You can\'t delete the processor %1$s since it\'s currently referenced in a file release.'), db_result(db_query_params ('select name from frs_processor where processor_id = $1',
+			array($id)), 0, 0)).'</p>';
 			return;
 		}
 	}
 	if ($unit == "license") {
-		$result = db_numrows(db_query("SELECT license FROM groups WHERE license = $id"));
+		$result = db_numrows(db_query_params ('SELECT license FROM groups WHERE license = $1',
+			array($id)));
 		if ($result > 0) {
-			echo '<p>'.sprintf(_('You can\'t delete the license %1$s since it\'s currently referenced in a project.'), db_result(db_query("select license_name from licenses where license_id = $id"), 0, 0)).'</p>';
+			echo '<p>'.sprintf(_('You can\'t delete the license %1$s since it\'s currently referenced in a project.'), db_result(db_query_params ('select license_name from licenses where license_id = $1',
+			array($id)), 0, 0)).'</p>';
 			return;
 		}
 	}
 	if ($unit == "supported_language") {
 		$result = db_numrows(db_query('SELECT language FROM users WHERE language='.$id));
 		if ($result > 0) {
-			echo '<p>'.sprintf(_('You can\'t delete the language %1$s since it\'s currently referenced in a user profile.'), db_result(db_query("select license_name from licenses where license_id = $id"), 0, 0)).'</p>';
+			echo '<p>'.sprintf(_('You can\'t delete the language %1$s since it\'s currently referenced in a user profile.'), db_result(db_query_params ('select license_name from licenses where license_id = $1',
+			array($id)), 0, 0)).'</p>';
 			return;
 		}
 	}

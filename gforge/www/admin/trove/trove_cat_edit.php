@@ -49,16 +49,23 @@ if (getStringFromRequest('submit')) {
 				   db_error()
 			);
 		} else {
-			$res = db_query("
+			$res = db_query_params ('
 				UPDATE trove_cat
-				SET	shortname='".htmlspecialchars($form_shortname)."',
-					fullname='".htmlspecialchars($form_fullname)."',
-					description='".htmlspecialchars($form_description)."',
-					parent='$form_parent',
-					version='".date("Ymd",time())."01',
-					root_parent='$newroot'
-				WHERE trove_cat_id='$form_trove_cat_id'
-			");
+				SET	shortname=$1,
+					fullname=$2,
+					description=$3,
+					parent=$4,
+					version=$5,
+					root_parent=$6
+				WHERE trove_cat_id=$7
+			',
+			array(htmlspecialchars($form_shortname),
+			      htmlspecialchars($form_fullname),
+			      htmlspecialchars($form_description),
+			      $form_parent,
+			      date("Ymd",time()).'01',
+			      $newroot,
+			      $form_trove_cat_id));
 		}
 
 		if (!$res || db_affected_rows($res)<1) {
@@ -119,7 +126,8 @@ site_admin_header(array('title'=>_('Site Admin: Trove - Edit Category')));
 
 <?php
 // generate list of possible parents (a category can't be a parent of itself)
-$res_parent = db_query("SELECT shortname,fullname,trove_cat_id FROM trove_cat WHERE trove_cat_id <> ".$trove_cat_id);
+$res_parent = db_query_params ('SELECT shortname,fullname,trove_cat_id FROM trove_cat WHERE trove_cat_id <> $1',
+			array($trove_cat_id));
 
 // Place the root node at the start of the list
 print('<option value="0"');

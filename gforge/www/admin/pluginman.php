@@ -62,8 +62,9 @@ if (getStringFromRequest('update')) {
 	
 	if ((getStringFromRequest('action')=='deactivate')) {
 		if (getStringFromRequest('delusers')) {
-			$sql = "DELETE FROM user_plugin WHERE plugin_id = (SELECT plugin_id FROM plugins WHERE plugin_name = '$pluginname')";
-			$res = db_query($sql);
+
+			$res = db_query_params ('DELETE FROM user_plugin WHERE plugin_id = (SELECT plugin_id FROM plugins WHERE plugin_name = $1)',
+			array($pluginname));
 			if (!$res) {
 				exit_error("SQL ERROR",db_error());
 			} else {
@@ -71,8 +72,9 @@ if (getStringFromRequest('update')) {
 			}
 		}
 		if (getStringFromRequest('delgroups')) {
-			$sql = "DELETE FROM group_plugin WHERE plugin_id = (SELECT plugin_id FROM plugins WHERE plugin_name = '$pluginname')";
-			$res = db_query($sql);
+
+			$res = db_query_params ('DELETE FROM group_plugin WHERE plugin_id = (SELECT plugin_id FROM plugins WHERE plugin_name = $1)',
+			array($pluginname));
 			if (!$res) {
 				exit_error("SQL ERROR",db_error());
 			} else {
@@ -224,8 +226,9 @@ foreach ($filelist as $filename) {
 		$msg = _('Active');
 		$status="active";
 		$link = "<a href=\"javascript:change('" . getStringFromServer('PHP_SELF') . "?update=$filename&amp;action=deactivate";
-		$sql = "SELECT  u.user_name FROM plugins p, user_plugin up, users u WHERE p.plugin_name = '$filename' and up.user_id = u.user_id and p.plugin_id = up.plugin_id";
-		$res = db_query($sql);
+
+		$res = db_query_params ('SELECT  u.user_name FROM plugins p, user_plugin up, users u WHERE p.plugin_name = $1 and up.user_id = u.user_id and p.plugin_id = up.plugin_id',
+			array($filename));
 		if ($res) {
 			if (db_numrows($res)>0) {
 				// tell the form to delete the users, so that we don't re-do the query
@@ -239,8 +242,9 @@ foreach ($filelist as $filename) {
 				$users = "none";
 			}
 		}
-		$sql = "SELECT g.group_name FROM plugins p, group_plugin gp, groups g WHERE plugin_name = '$filename' and gp.group_id = g.group_id and p.plugin_id = gp.plugin_id";
-		$res = db_query($sql);
+
+		$res = db_query_params ('SELECT g.group_name FROM plugins p, group_plugin gp, groups g WHERE plugin_name = $1 and gp.group_id = g.group_id and p.plugin_id = gp.plugin_id',
+			array($filename));
 		if ($res) {
 			if (db_numrows($res)>0) {
 				// tell the form to delete the groups, so that we don't re-do the query

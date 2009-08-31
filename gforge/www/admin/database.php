@@ -63,10 +63,15 @@ if (getStringFromRequest('submit')) {
 		}
 
 
-		$res = db_query("
+		$res = db_query_params ('
 			INSERT INTO prdb_dbs(group_id, dbname, dbusername, dbuserpass, requestdate, dbtype, created_by, state)
-			VALUES ($group_id,'$dbname','$dbname','xxx',".time().",1,".$user->getID().",1)
-		");
+			VALUES ($group_id,$1,$2,$3,$4,1,$5,1)
+		',
+			array($dbname,
+				$dbname,
+				'xxx',
+				time(),
+				$user->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
 			$feedback .= _('Error Adding Database') .db_error();
@@ -117,22 +122,24 @@ if (db_numrows($res_db) > 0) {
 
 if ($displaydb) {
 
-	$res_db = db_query("
+	$res_db = db_query_params ('
 		SELECT statename
 		FROM prdb_states
-		WHERE stateid=".$dbstate."
-	");
+		WHERE stateid=$1
+	',
+			array($dbstate));
 
 	$row_db = db_fetch_array($res_db);
 
 	print '<hr /><h3>' ._('Displaying Databases of Type:') .$row_db['statename'].' </h3><ul>';
 
-	$res_db = db_query("
+	$res_db = db_query_params ('
 		SELECT *
 		FROM prdb_dbs
-		WHERE state=".$dbstate."
+		WHERE state=$1
 		ORDER BY dbname
-	");
+	',
+			array($dbstate));
 
 	while ($row_db = db_fetch_array($res_db)) {
 		print '<li>'.util_make_link ('/project/admin/database.php?group_id='.$row_db['group_id'],$row_db['dbname']).'</li>';
