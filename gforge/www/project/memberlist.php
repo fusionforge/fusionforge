@@ -38,16 +38,6 @@ site_project_header(array('title'=>_('Project Member List'),'group'=>$group_id,'
 
 echo _('<p>If you would like to contribute to this project by becoming a developer, contact one of the project admins, designated in bold text below.</p>');
 
-// list members
-$query = "SELECT users.*,user_group.admin_flags,role.role_name AS role
-	FROM users,user_group 
-	LEFT JOIN role ON user_group.role_id=role.role_id
-	WHERE users.user_id=user_group.user_id 
-	AND user_group.group_id=$1
-	AND users.status='A'
-	ORDER BY users.user_name ";
-
-
 $title_arr=array();
 $title_arr[]=_('Developer');
 $title_arr[]=_('Username');
@@ -58,7 +48,14 @@ if($GLOBALS['sys_use_people']) {
 
 echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
-$res_memb = db_query_params($query, array($group_id));
+// list members
+$res_memb = db_query_params("SELECT users.*,user_group.admin_flags,role.role_name AS role
+	FROM users,user_group
+	LEFT JOIN role ON user_group.role_id=role.role_id
+	WHERE users.user_id=user_group.user_id
+	AND user_group.group_id=$1
+	AND users.status='A'
+	ORDER BY users.user_name ", array($group_id));
 $i=0;
 while ( $row_memb=db_fetch_array($res_memb) ) {
 	echo '<tr '.$HTML->boxGetAltRowStyle($i++).'>';

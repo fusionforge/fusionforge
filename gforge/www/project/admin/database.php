@@ -60,9 +60,8 @@ if (getStringFromRequest('createdb')) {
 	$dbname = prdb_namespace_seek($dbname);
 	$randompw = random_pwgen();
 
-	$sql = "INSERT INTO prdb_dbs(group_id,dbname,dbusername,dbuserpass,requestdate,dbtype,created_by,state)
-			VALUES($1, $2, $2, $3, $4, $5, $6 ,2)";
-	$res = db_query_params($sql, array($group_id, $dbname, $randompw, time(), $newdbtypeid, $LUSER->getID()));
+	$res = db_query_params("INSERT INTO prdb_dbs(group_id,dbname,dbusername,dbuserpass,requestdate,dbtype,created_by,state)
+			VALUES($1, $2, $2, $3, $4, $5, $6 ,2)", array($group_id, $dbname, $randompw, time(), $newdbtypeid, $LUSER->getID()));
 
 	if (!$res || db_affected_rows($res) < 1) {
 		$feedback .= _('Cannot add database entry').': '.db_error();
@@ -196,14 +195,13 @@ if (db_numrows($res_db) > 0) {
 <?php
 }
 
-$sql="
+$res_db = db_query_params("
 	SELECT * 
 	FROM prdb_dbs,prdb_states,prdb_types 
 	WHERE group_id=$1
 	AND stateid=state 
 	AND dbtype=dbtypeid
-";
-$res_db = db_query_params($sql, array($group_id));
+", array($group_id));
 
 if (db_numrows($res_db) > 0) {
 

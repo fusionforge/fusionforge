@@ -68,33 +68,32 @@ function store_file($id, $input_file) {
 
 	if (check_file_size($size)) {
 		$curtime = time();
-		$sql="";
 		$width = ((!$width) ? "0" : $width);
 		$height = ((!$height) ? "0" : $height);
 		if (!$id) {
-			$sql="	INSERT INTO db_images
-					(group_id,description,bin_data,
-					 filename,filesize,filetype,
-					 width,height,upload_date,version)
-					VALUES
-					($1, $2, $3, $4, $5, $6, $7, $8, $9, 1)";
-			$res = db_query_params($sql, array($group_id, $description, $data, $input_file['name'],
-			                         $size, $input_file['type'], $width, $height, $curtime));
+			$res = db_query_params("INSERT INTO db_images
+                              (group_id,description,bin_data,
+                              filename, filesize, filetype,
+                              width,height,upload_date,version)
+                              VALUES
+                              ($1, $2, $3, $4, $5, $6, $7, $8, $9, 1)",
+                              array($group_id, $description, $data, $input_file['name'],
+                              $size, $input_file['type'], $width, $height, $curtime));
 		} else {
-			$sql="	UPDATE db_images
-					SET description=$1,
-					 bin_data=$2,
-					 filename=$3,
-					 filesize=$4,
-					 filetype=$5,
-					 width=$6,
-					 height=$7,
-					 upload_date=$8,
-					 version=version+1
-					WHERE group_id=$9
-					AND id=$10";
-			$res = db_query_params($sql, array($description, $data, $input_file['name'], $size,
-			                         $input_file['type'], $width, $height, $curtime, $group_id, $id);
+			$res = db_query_params("UPDATE db_images
+		                          SET description=$1,
+		                           bin_data=$2,
+		                           filename=$3,
+		                           filesize=$4,
+		                           filetype=$5,
+		                           width=$6,
+		                           height=$7,
+		                           upload_date=$8,
+		                           version=version+1
+		                          WHERE group_id=$9
+		                          AND id=$10",
+		                          array($description, $data, $input_file['name'], $size,
+		                          $input_file['type'], $width, $height, $curtime, $group_id, $id));
 		}
 
 
