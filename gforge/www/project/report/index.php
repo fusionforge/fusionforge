@@ -144,11 +144,11 @@ $query = "SELECT users.*,user_group.admin_flags,people_job_category.name AS role
 	FROM users,user_group 
 	LEFT JOIN people_job_category ON user_group.member_role=people_job_category.category_id
 	WHERE users.user_id=user_group.user_id 
-	AND user_group.group_id='$group_id' 
+	AND user_group.group_id=$1
 	AND users.status='A'
 	ORDER BY users.user_name ";
 
-$res_memb = db_query($query);
+$res_memb = db_query_params($query, array($group_id));
 
 while ( $row_memb=db_fetch_array($res_memb) ) {
 	echo '
@@ -176,17 +176,17 @@ while ( $row_memb=db_fetch_array($res_memb) ) {
 		</tr>';
 
 	// print out all the artifacts assigned to this person 
-        $artifact_group=db_query("SELECT group_artifact_id, name
+        $artifact_group=db_query_params("SELECT group_artifact_id, name
                                   FROM artifact_group_list
-                                  WHERE group_id=".$group_id."
-                                  ORDER BY group_artifact_id DESC");
+                                  WHERE group_id=$1
+                                  ORDER BY group_artifact_id DESC", array($group_id));
 
  	while ( $artifact_type =db_fetch_array($artifact_group) ) {
-		$artifacts=db_query("SELECT * FROM artifact_vw
-                                     WHERE assigned_to=".$row_memb['user_id']."
+		$artifacts=db_query_params("SELECT * FROM artifact_vw
+                                     WHERE assigned_to=$1
                                        AND status_id='1'
-                                       AND group_artifact_id=".$artifact_type['group_artifact_id']."
-                                     ORDER BY priority DESC");
+                                       AND group_artifact_id=$2
+                                     ORDER BY priority DESC", array($row_memb['user_id'], $artifact_type['group_artifact_id']));
 
                 $num_artifacts=db_numrows($artifacts);
                 for ($m=0; $m < $num_artifacts; $m++) {
@@ -199,9 +199,9 @@ while ( $row_memb=db_fetch_array($res_memb) ) {
 			<td>'.GetTime( time() - db_result($artifacts, $m, 'open_date'))	.'
 			</td>';
 
-			$messages=db_query("select adddate FROM artifact_message_user_vw ".
-						"WHERE artifact_id='".db_result($artifacts, $m, 'artifact_id')."' ".
-						"ORDER by adddate DESC");
+			$messages=db_query_params("select adddate FROM artifact_message_user_vw ".
+						"WHERE artifact_id=$1 ".
+						"ORDER by adddate DESC", array(db_result($artifacts, $m, 'artifact_id')));
 			if ( db_numrows($messages)) {
 				echo '
 			<td>'. GetTime( time () - db_result($messages, 0, 'adddate')).'</td>';
@@ -213,18 +213,19 @@ while ( $row_memb=db_fetch_array($res_memb) ) {
 		</tr>';
                 }
 	}
-	$task_group=db_query("SELECT ptv.*,g.group_name,pgl.project_name
+	$task_group=db_query_params("SELECT ptv.*,g.group_name,pgl.project_name
                         FROM project_task_vw ptv,
                                 project_assigned_to pat,
                                 groups g,
                                 project_group_list pgl
                         WHERE ptv.project_task_id=pat.project_task_id
-                                AND pgl.group_id=".$group_id."
-				AND g.group_id=".$group_id."
+                                AND pgl.group_id=$1
+                                AND g.group_id=$1
                                 AND pgl.group_project_id=ptv.group_project_id
                                 AND ptv.status_id=1
-                                AND pat.assigned_to_id='".$row_memb['user_id']."'
-                        ORDER BY group_name,project_name");
+                                AND pat.assigned_to_id=$2
+                        ORDER BY group_name,project_name",
+                        array($group_id, $row_memb['user_id']));
 
 	while ( $task_type = db_fetch_array($task_group) ) {
 		if ( $task_type['percent_complete'] != 100 ) {

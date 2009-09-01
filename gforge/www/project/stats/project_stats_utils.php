@@ -55,12 +55,12 @@ function stats_project_daily( $group_id, $span = 7 ) {
 	}
 
 	$sql="SELECT * FROM stats_project_vw
-		WHERE group_id='$group_id' ORDER BY month DESC, day DESC";
+		WHERE group_id=$1 ORDER BY month DESC, day DESC";
 
 	if ($span == 30) {
-		$res = db_query($sql, 30, 0, SYS_DB_STATS);
+		$res = db_query_params($sql, $group_id, 30, 0, SYS_DB_STATS);
 	} else {
-		$res = db_query($sql,  7, 0, SYS_DB_STATS);
+		$res = db_query_params($sql, $group_id,  7, 0, SYS_DB_STATS);
 	}
 
 	echo db_error();
@@ -117,11 +117,11 @@ function stats_project_daily( $group_id, $span = 7 ) {
    // stats_project_monthly
 function stats_project_monthly( $group_id ) {
 	global $HTML;
-	$res = db_query("
+	$res = db_query_params("
 		SELECT * FROM stats_project_months 
-		WHERE group_id='$group_id'
+		WHERE group_id=$1
 		ORDER BY group_id DESC, month DESC
-	", -1, 0, SYS_DB_STATS);
+	",array($group_id), -1, 0, SYS_DB_STATS);
 
 	   // if there are any weeks, we have valid data.
 	if ( ($valid_months = db_numrows( $res )) > 1 ) {
@@ -174,11 +174,11 @@ function stats_project_monthly( $group_id ) {
 
 function stats_project_all( $group_id ) {
 	global $HTML;
-	$res = db_query("
+	$res = db_query_params("
 		SELECT *
 		FROM stats_project_all_vw
-		WHERE group_id='$group_id'
-	", -1, 0, SYS_DB_STATS);
+		WHERE group_id=$1
+	", array($group_id), -1, 0, SYS_DB_STATS);
 	$row = db_fetch_array($res);
 //	echo db_error();
 

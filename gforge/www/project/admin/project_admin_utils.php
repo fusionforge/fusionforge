@@ -129,8 +129,8 @@ function group_get_history ($group_id=false) {
 	$sql="SELECT group_history.field_name,group_history.old_value,group_history.adddate,users.user_name 
 FROM group_history,users 
 WHERE group_history.mod_by=users.user_id 
-AND group_id='$group_id' ORDER BY group_history.adddate DESC";
-	return db_query($sql);
+AND group_id=$1 ORDER BY group_history.adddate DESC";
+	return db_query_params($sql, array($group_id));
 }		   
 	
 function group_add_history ($field_name,$old_value,$group_id) {
@@ -203,9 +203,9 @@ function prdb_namespace_seek($namecheck) {
 
 	$query = "select * 
 from prdb_dbs 
-where dbname = '$namecheck'";
+where dbname = $1";
 
-	$res_dbl = db_query($query);
+	$res_dbl = db_query_params($query, array($namecheck));
 
 	if (db_numrows($res_dbl) > 0) {
 		//crap, we're going to have issues
@@ -216,11 +216,7 @@ where dbname = '$namecheck'";
 			$curr_num++;
 			$namecheck .= "$namecheck"."$curr_num";
 					
-			$query = "select * 
-from prdb_dbs 
-where dbname = '$namecheck'";
-
-			$res_dbl = db_query($query);
+			$res_dbl = db_query_params($query, array($namecheck));
 		}
 
 		// if we reached 20, then the namespace is depleted - eject eject

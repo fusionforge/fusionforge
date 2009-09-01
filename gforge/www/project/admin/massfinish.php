@@ -59,9 +59,9 @@ if (!$accumulated_ids) {
 	exit_error('Error','No IDs Were Passed');
 } else {
 	$arr=explode(',',$accumulated_ids);
-	$res=db_query("SELECT user_id,user_name,realname FROM users
-		WHERE status='A' and type_id='1' and user_id IN ('". implode('\',\'',$arr) ."') 
-		ORDER BY realname ASC");
+	$res=db_query_params("SELECT user_id,user_name,realname FROM users
+		WHERE status='A' and type_id='1' and user_id IN ($1)
+		ORDER BY realname ASC", array(implode('\',\'',$arr)));
 }
 
 project_admin_header(array('title'=>_('Edit Role'),'group'=>$group_id));

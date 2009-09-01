@@ -43,7 +43,7 @@ $query = "SELECT users.*,user_group.admin_flags,role.role_name AS role
 	FROM users,user_group 
 	LEFT JOIN role ON user_group.role_id=role.role_id
 	WHERE users.user_id=user_group.user_id 
-	AND user_group.group_id='$group_id' 
+	AND user_group.group_id=$1
 	AND users.status='A'
 	ORDER BY users.user_name ";
 
@@ -58,7 +58,7 @@ if($GLOBALS['sys_use_people']) {
 
 echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
-$res_memb = db_query($query);
+$res_memb = db_query_params($query, array($group_id));
 $i=0;
 while ( $row_memb=db_fetch_array($res_memb) ) {
 	echo '<tr '.$HTML->boxGetAltRowStyle($i++).'>';

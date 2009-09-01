@@ -77,26 +77,26 @@ function store_file($id, $input_file) {
 					 filename,filesize,filetype,
 					 width,height,upload_date,version)
 					VALUES
-					('$group_id','$description',
-					 '$data','".$input_file['name']."',
-					 '$size','".$input_file['type']."',
-					 '$width','$height','$curtime',1)";
+					($1, $2, $3, $4, $5, $6, $7, $8, $9, 1)";
+			$res = db_query_params($sql, array($group_id, $description, $data, $input_file['name'],
+			                         $size, $input_file['type'], $width, $height, $curtime));
 		} else {
 			$sql="	UPDATE db_images
-					SET description='$description',
-					 bin_data='$data',
-					 filename='".$input_file['name']."',
-					 filesize='$size',
-					 filetype='".$input_file['type']."',
-					 width='$width',
-					 height='$height',
-					 upload_date='$curtime',
+					SET description=$1,
+					 bin_data=$2,
+					 filename=$3,
+					 filesize=$4,
+					 filetype=$5,
+					 width=$6,
+					 height=$7,
+					 upload_date=$8,
 					 version=version+1
-					WHERE group_id='$group_id'
-					AND id='$id' ";
+					WHERE group_id=$9
+					AND id=$10";
+			$res = db_query_params($sql, array($description, $data, $input_file['name'], $size,
+			                         $input_file['type'], $width, $height, $curtime, $group_id, $id);
 		}
 
-		$res = db_query($sql);
 
 		if (!$res || db_affected_rows($res) < 1) {
 			$feedback .= 'ERROR: DB: Cannot store multimedia file<br />';
