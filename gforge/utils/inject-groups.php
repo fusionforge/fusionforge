@@ -28,21 +28,10 @@ db_begin ();
 
 /*
  * Line format:
- * unixname:fullname:description:license:licenseother:ispublic:username
+ * unixname:fullname:description:ispublic:username
  * username is login of admin user
  * ispublic is 0/1
- * license to pick from "SELECT * from licenses":
- 101 | GNU General Public License (GPL)
- 102 | GNU Library Public License (LGPL)
- 103 | BSD License
- 104 | MIT License
- 105 | Artistic License
- [...]
- 124 | Public Domain
- 125 | Website Only
- 126 | Other/Proprietary License
- * Pick 126 (and use the licenseother field) for a non-standard license
- * Beware of colons in text fields (fullname, description, licenseother)!
+ * Beware of colons in text fields (fullname, description)!
 */
 
 $f = fopen ('groups.txt', 'r') ;
@@ -53,10 +42,8 @@ while (! feof ($f)) {
 	$unixname = $array[0] ;
 	$fullname = $array[1] ;
 	$description = $array[2] ;
-	$license = $array[3] ;
-	$licenseother = $array[4] ;
-	$is_public = $array[5] ;
-	$username = $array[6] ;
+	$is_public = $array[3] ;
+	$username = $array[4] ;
 
 	$u = user_get_object_by_name($username) ;
 	if (! $u) {
@@ -66,7 +53,7 @@ while (! feof ($f)) {
 	}
 	
 	$g = new Group () ;
-	$r = $g->create ($u, $fullname, $unixname, $description, $license, $licenseother, 'Project injected into the database by inject-groups.php', 'shell', 'scm', $is_public, false) ;
+	$r = $g->create ($u, $fullname, $unixname, $description, 'Project injected into the database by inject-groups.php', 'shell', 'scm', $is_public, false) ;
 
 	if (!$r) {
 		print "Error: ". $g->getErrorMessage () . "\n" ;
