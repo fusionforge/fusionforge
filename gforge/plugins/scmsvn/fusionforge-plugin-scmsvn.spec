@@ -15,7 +15,7 @@ Requires: fusionforge >= 4.7
 #Requires: perl perl-URI
 Requires: subversion
 Requires: python >= 2.3
-Requires: xinet
+Requires: xinetd
 
 URL: http://fusionforge.org/
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
