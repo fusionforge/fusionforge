@@ -65,17 +65,17 @@ if ($form_catroot == 1) {
 } else {
 	echo "<p>"._('Group List for Category:').' ';
 	echo "<strong>" . category_fullname($form_catroot) . "</strong></p>\n";
-	$res = db_query("SELECT groups.group_name,groups.register_time,groups.unix_group_name,groups.group_id,"
+	$res = db_query_params("SELECT groups.group_name,groups.register_time,groups.unix_group_name,groups.group_id,"
 		. "groups.is_public,"
 		. "licenses.license_name,"
 		. "groups.status "
 		. "COUNT(user_group.group_id) AS members "
 		. "FROM groups LEFT JOIN user_group ON user_group.group_id=groups.group_id,group_category,licenses "
 		. "WHERE groups.group_id=group_category.group_id AND "
-		. "group_category.category_id=".$form_catroot." AND "
+		. "group_category.category_id=$1 AND "
 		. "licenses.license_id=groups.license "
 		. "GROUP BY group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name "
-		. "ORDER BY $sortorder");
+		. "ORDER BY $2", array($form_catroot, $sortorder));
 }
 
 $headers = array(

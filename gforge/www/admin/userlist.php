@@ -152,7 +152,7 @@ if (!$group_id) {
 		$result = db_query($sql);
 	} else {
 		$sortorder = getStringFromRequest('sortorder', 'user_name');
-		$result = db_query("SELECT user_name,lastname,firstname,user_id,status,add_date FROM users ORDER BY ".$sortorder);
+		$result = db_query_params("SELECT user_name,lastname,firstname,user_id,status,add_date FROM users ORDER BY $1", array($sortorder));
 	}
 	show_users_list ($result);
 } else {

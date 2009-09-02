@@ -111,18 +111,18 @@ if ($pattern) {
 		FROM users";
 	if ( $sys_database_type == "mysql" ) {
 		$sql .= "
-		WHERE user_name LIKE '%$pattern%'
-		OR realname LIKE '%$pattern%'
-		OR email LIKE '%$pattern%'
+		WHERE user_name LIKE $1
+		OR realname LIKE $1
+		OR email LIKE $1
 		";
 	} else {
 		$sql .= "
-		WHERE user_name LIKE '%$pattern%'
-		OR realname ILIKE '%$pattern%'
-		OR email ILIKE '%$pattern%'
+		WHERE user_name LIKE $1
+		OR realname ILIKE $1
+		OR email ILIKE $1
 		";
 	}
-	$res = db_query($sql);
+	$res = db_query_params($sql, array("%".$pattern."%");
 
 	$title=array();
 	$title[]='&nbsp;';

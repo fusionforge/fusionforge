@@ -125,7 +125,7 @@ if ($action=='activate') {
 site_admin_header(array('title'=>_('Approving Pending Projects')));
 
 // get current information
-$res_grp = db_query("SELECT * FROM groups WHERE status='P'", $LIMIT);
+$res_grp = db_query_params("SELECT * FROM groups WHERE status='P'", array(), $LIMIT);
 
 $rows = db_numrows($res_grp);
 
@@ -213,9 +213,9 @@ while ($row_grp = db_fetch_array($res_grp)) {
 		print "<p>" ._('Pending reason:'). "</p><span class=\"important\">".$row_grp['status_comment']."</span>";
 	}
 
-	$res = db_query("SELECT u.user_id
+	$res = db_query_params("SELECT u.user_id
 			 FROM users u, user_group ug
-			 WHERE ug.group_id='".$row_grp['group_id']."' AND u.user_id=ug.user_id;");
+			 WHERE ug.group_id=$1 AND u.user_id=ug.user_id;", array($row_grp['group_id']));
 	
 	if (db_numrows($res) >= 1) {
 		$submitter =& user_get_object(db_result($res,0,'user_id'));
