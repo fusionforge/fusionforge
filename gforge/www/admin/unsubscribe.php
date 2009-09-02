@@ -122,7 +122,7 @@ if ($pattern) {
 		OR email ILIKE $1
 		";
 	}
-	$res = db_query_params($sql, array("%".$pattern."%");
+	$res = db_query_params($sql, array("%".$pattern."%"));
 
 	$title=array();
 	$title[]='&nbsp;';
