@@ -10520,10 +10520,10 @@ msgstr ""
 #: www/register/projectinfo.php:158
 #, fuzzy
 msgid ""
-"<h3>6. SCM</h3><p>You can choose among different SCM for your project, but "
+"<h3>5. SCM</h3><p>You can choose among different SCM for your project, but "
 "just one (or none at all). Please select the SCM system you want to use.</p>"
 msgstr ""
-"<h3>6. 原始碼版本管理系統</h3><p>您可以選擇使用不同的原始碼版本管理系統，但是"
+"<h3>5. 原始碼版本管理系統</h3><p>您可以選擇使用不同的原始碼版本管理系統，但是"
 "只能選擇一個。請選擇您要使用的原始碼版本管理系統。</p> <p><strong>一旦專案被"
 "註冊你將不能夠改變它！</strong></p>"
 

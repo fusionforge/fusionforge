@@ -10676,10 +10676,10 @@ msgstr ""
 #: www/register/projectinfo.php:158
 #, fuzzy
 msgid ""
-"<h3>6. SCM</h3><p>You can choose among different SCM for your project, but "
+"<h3>5. SCM</h3><p>You can choose among different SCM for your project, but "
 "just one (or none at all). Please select the SCM system you want to use.</p>"
 msgstr ""
-"<h3>6. SCM</h3><p>Debe elegir un único sistema entre los diferentes SCM "
+"<h3>5. SCM</h3><p>Debe elegir un único sistema entre los diferentes SCM "
 "(Sistemas de control de configuración) para su proyecto. Debe elegir sólo "
 "uno. Por favor, elija el sistema SCM que desea usar. </p> <p><strong>No "
 "podrá cambiar una vez registre el proyecto</strong></p>"
