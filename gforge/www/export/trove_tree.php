@@ -16,7 +16,7 @@ require_once $gfwww.'include/pre.php';
 
 header("Content-Type: text/plain");
 print("<?xml version=\"1.0\"?>
-<!DOCTYPE trove-tree SYSTEM \"http://$sys_default_domain/export/trove_tree_0.1.dtd\">
+<!DOCTYPE trove-tree SYSTEM ".util_make_url ('/export/trove_tree_0.1.dtd')."\">
 <trove-tree>\n");
 
 
@@ -31,11 +31,8 @@ print('  <category id="0" name="root" fullname="Trove Root" description="Root of
 
 function dump_subtree($root) {
         global $level;
-	$res = db_query("
-		SELECT *
-		FROM trove_cat
-		WHERE parent='$root'
-	", -1, 0, SYS_DB_TROVE);
+	$res = db_query_params ('SELECT * FROM trove_cat WHERE parent=$1',
+				array ($root));
 
         if (db_numrows($res)==0) {
 		// leaf category
@@ -58,10 +55,14 @@ function dump_subtree($root) {
         return true;
 }
 
-
 dump_subtree(0);
 
 print("  </category>\n");
 print("</trove-tree>\n");
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

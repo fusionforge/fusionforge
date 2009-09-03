@@ -20,15 +20,13 @@ header("Content-Type: text/plain");
 $group_id = getIntFromRequest('group_id');
 
 // group_id must be specified
-$res_grp = db_query_params ('
-	SELECT group_id,group_name
-	FROM groups 
+$res_grp = db_query_params ('SELECT group_id,group_name
+	FROM groups
 	WHERE is_public=1
 	AND status=$1
-	AND group_id=$2
-',
-			array('A',
-				$group_id)) ;
+	AND group_id=$2',
+			    array('A',
+				  $group_id)) ;
 
 if (db_numrows($res_grp) < 1) {
 	print 'ERROR: This URL must be called with a valid group_id parameter';
@@ -42,24 +40,22 @@ print '<?xml version="1.0"?>
 ';
 print '<group name="'.$row_grp['group_name'].'">';
 
-$res_forum = db_query("
-	SELECT group_forum_id,forum_name
-	FROM forum_group_list 
-	WHERE group_id='$group_id'
-");
+$res_forum = db_query_params ('SELECT group_forum_id,forum_name
+	FROM forum_group_list
+	WHERE group_id=$1',
+			      array ($group_id));
 
 while ($row_forum = db_fetch_array($res_forum)) {
 	print ' <forum name="'.$row_forum['forum_name'].'">'."\n";
 
-	$res_post = db_query("
-		SELECT forum.msg_id AS msg_id,forum.subject AS subject,
+	$res_post = db_query_params ('SELECT forum.msg_id AS msg_id,forum.subject AS subject,
 			forum.body AS body,forum.date AS date,
 			users.user_name AS user_name,
 			users.realname AS realname
-		FROM forum,users 
+		FROM forum,users
 		WHERE forum.posted_by=users.user_id
-		AND forum.group_forum_id='".$row_forum['group_forum_id']."'
-	");
+		AND forum.group_forum_id=$1',
+				     array ($row_forum['group_forum_id']));
 
 
 	// ## item outputs

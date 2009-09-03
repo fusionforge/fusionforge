@@ -20,13 +20,14 @@ if ($limit > 100) $limit = 100;
 if ($group_id) {
 	$where = "frs_package.group_id=$group_id AND ";
 	$res = db_query_params ('SELECT group_name FROM groups WHERE group_id=$1 AND is_public=1',
-			array($group_id)) ;
+				array ($group_id)) ;
 	$row = db_fetch_array($res);
 	$title = ": ".$row['group_name']." - ";
 	$link = "/project/showfiles.php?group_id=$group_id";
 	$description = " of ".$row['group_name'];
-	$querywm =  "SELECT users.user_name,users.realname FROM user_group,users WHERE group_id=$group_id AND admin_flags='A' AND users.user_id=user_group.user_id ORDER BY users.add_date";
-	$reswm = db_query($querywm,1);
+	$reswm = db_query_params ('SELECT users.user_name,users.realname FROM user_group,users WHERE group_id=$1 AND admin_flags=$2 AND users.user_id=user_group.user_id ORDER BY users.add_date',
+				  array($group_id,
+					'A'));
 	if ($rowwm = db_fetch_array($reswm)) {
 	  $webmaster = $rowwm['user_name']."@".$GLOBALS['sys_users_host']." (".$rowwm['realname'].")";
 	} else {
@@ -34,7 +35,7 @@ if ($group_id) {
 	}
 } else {
 	$where = "";
-    $title = "";
+	$title = "";
 	$link = "/new/";
 	$description = "";
 	$webmaster = $GLOBALS['sys_admin_email'];

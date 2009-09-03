@@ -17,14 +17,18 @@ if ($limit > 100) $limit = 100;
 
 if ($group_id) {
 	$where = "AND g.group_id=$group_id";
-	$query = "SELECT group_name FROM groups WHERE group_id=$group_id AND is_public=1";
-	$res = db_query($query,1);
+
+	$res = db_query_params ('SELECT group_name FROM groups WHERE group_id=$1 AND is_public=1',
+				array($group_id),
+				1);
 	$row = db_fetch_array($res);
 	$title = ": ".$row['group_name']." - ";
 	$link = "?group_id=$group_id";
 	$description = " of ".$row['group_name'];
-	$querywm =  "SELECT users.user_name,users.realname FROM user_group,users WHERE group_id=$group_id AND admin_flags='A' AND users.user_id=user_group.user_id ORDER BY users.add_date";
-	$reswm = db_query($querywm,1);
+
+	$reswm = db_query_params ('SELECT users.user_name,users.realname FROM user_group,users WHERE group_id=$group_id AND admin_flags=$1 AND users.user_id=user_group.user_id ORDER BY users.add_date',
+				  array('A'),
+				  1);
 	if ($rowwm = db_fetch_array($reswm)) {
 	  $webmaster = $rowwm['user_name']."@".$GLOBALS['sys_users_host']." (".$rowwm['realname'].")";
 	} else {

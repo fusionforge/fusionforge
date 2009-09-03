@@ -37,15 +37,17 @@ if ($limit > 100) $limit = 100;
 $url = util_make_url ('/');
 
 if ($group_id) {
-	$where = "group_id=$group_id and is_public=1";
-	$query = "SELECT group_name FROM groups WHERE $where";
-	$res = db_query($query,1);
+	$res = db_query_params ('SELECT group_name FROM groups WHERE group_id=$1 and is_public=1',
+				array($group_id),
+				1);
 	$row = db_fetch_array($res);
 	$title = $row['group_name'];
 	$link = "?group_id=$group_id";
 	$description = " of ".$row['group_name'];
-	$querywm =  "SELECT users.user_name,users.realname FROM user_group,users WHERE group_id=$group_id AND admin_flags='A' AND users.user_id=user_group.user_id ORDER BY users.add_date";
-	$reswm = db_query($querywm,1);
+
+	$reswm = db_query_params ('SELECT users.user_name,users.realname FROM user_group,users WHERE group_id=$group_id AND admin_flags=$1 AND users.user_id=user_group.user_id ORDER BY users.add_date',
+				  array('A'),
+				  1);
 	if ($rowwm = db_fetch_array($reswm)) {
 		$webmaster = $rowwm['user_name']."@".$GLOBALS['sys_users_host']." (".$rowwm['realname'].")";
 	} else {
@@ -68,9 +70,11 @@ if ($group_id) {
 	print "  <docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
 	print "  <generator>".$GLOBALS['sys_name']." RSS generator</generator>\n";
 
-	$sql="SELECT * FROM activity_vw WHERE activity_date BETWEEN '".(time()-(30*86400))."' AND '".time()."'
-	AND group_id='$group_id' ORDER BY activity_date DESC";
-	$res = db_query($sql, $limit);
+	$res = db_query_params ('SELECT * FROM activity_vw WHERE activity_date BETWEEN $1 AND $2 AND group_id=$3 ORDER BY activity_date DESC',
+				array(time() - 30*86400,
+				      time(),
+				      $group_id),
+				$limit);
 
 	// ## item outputs
 	while ($arr = db_fetch_array($res)) {

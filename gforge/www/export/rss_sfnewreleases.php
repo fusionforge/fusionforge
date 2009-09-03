@@ -23,7 +23,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>
 <rss version="0.91">
 ';
 
-$res=db_query("SELECT 
+$res=db_query_params ('SELECT 
 					groups.group_id,
 					groups.group_name,
 					groups.unix_group_name,
@@ -37,11 +37,13 @@ $res=db_query("SELECT
 					groups 
 				WHERE 
 					news_bytes.group_id=groups.group_id 
-					AND groups.status='A'
+					AND groups.status=$1
 					AND groups.is_public = 1
 				ORDER BY 
 					post_date 
-				DESC",($limit * 3));
+				DESC',
+		      array('A'),
+		      $limit * 3);
 
 
 // ## one time output
