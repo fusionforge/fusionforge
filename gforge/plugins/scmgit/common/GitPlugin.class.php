@@ -169,6 +169,19 @@ class GitPlugin extends SCMPlugin {
 		system ("mkdir -p $repo") ;
 		if (!is_file ("$repo/HEAD") && !is_dir("$repo/objects") && !is_dir("$repo/refs")) {
 			system ("GIT_DIR=\"$repo\" git --bare init") ;
+			system ("GIT_DIR=\"$repo\" git update-server-info") ;
+			if (is_file ("$repo/hooks/post-update.sample")) {
+				rename ("$repo/hooks/post-update.sample",
+					"$repo/hooks/post-update") ;
+			}
+			if (!is_file ("$repo/hooks/post-update")) {
+				$f = fopen ("$repo/hooks/post-update") ;
+				fwrite ($f, "exec git-update-server-info\n") ;
+				fclose ($f) ;
+			}
+			if (is_file ("$repo/hooks/post-update")) {
+				system ("chmod +x $repo/hooks/post-update") ;
+			}
 			system ("echo \"Git repository for $project_name\" > $repo/description") ;
 		}
 
