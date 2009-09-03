@@ -307,14 +307,14 @@ class GitPlugin extends SCMPlugin {
 			$updates = 0 ;
 
 			$repo = $this->git_root . '/' . $project->getUnixName() ;
-			if (!is_dir ($repo) || !is_file ("$repo/refs")) {
+			if (!is_dir ($repo) || !is_dir ("$repo/refs")) {
 				// echo "No repository\n" ;
 				db_rollback () ;
 				return false ;
 			}
-	
-			$pipe = popen ("GIT_DIR=$repo git log --since='1 day ago' "
-					."--all --pretty='%n%an <%ae>' --name-status", 'r' ) ;
+
+			$pipe = popen ("GIT_DIR=$repo git log --since=@$start_time --until=@$end_time' "
+					."--all --pretty='format:%n%an <%ae>' --name-status", 'r' ) ;
 
 			// cleaning stats_cvs_* table for the current day
 			$res = db_query_params ('DELETE FROM stats_cvs_group WHERE month=$1 AND day=$2 AND group_id=$3',
@@ -326,7 +326,7 @@ class GitPlugin extends SCMPlugin {
 				db_rollback () ;
 				return false ;
 			}
-	
+
 			$last_user    = "";
 			while (!feof($pipe) && $data = fgets ($pipe)) {
 				$line = trim($data);
@@ -337,7 +337,7 @@ class GitPlugin extends SCMPlugin {
 						$last_user = $matches['name'];
 					} else {
 						// Short-commit stats line
-						preg_match("/(?<mode>[AM])[ ]+(?<file>.+)$/", $line, $matches);
+						preg_match("/^(?<mode>[AM])\s+(?<file>.+)$/", $line, $matches);
 						if ($last_user == "") continue;
 						if ($matches['mode'] == 'A') {
 							$usr_adds[$last_user]++;
@@ -351,7 +351,7 @@ class GitPlugin extends SCMPlugin {
 					}
 				}
 			}
-			
+
 			// inserting group results in stats_cvs_groups
 			if (!db_query_params ('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
 					      array ($month_string,
