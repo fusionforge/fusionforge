@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-03 17:59+0200\n"
+"POT-Creation-Date: 2009-09-03 19:14+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2690,14 +2690,16 @@ msgstr ""
 
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:211
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:221
-msgid "Select a project :"
-msgstr ""
+#, fuzzy
+msgid "Select a project:"
+msgstr "Främsta projekt"
 
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:213
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:223
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:268
-msgid "Commentary :"
-msgstr ""
+#, fuzzy
+msgid "Commentary:"
+msgstr "Kommentar"
 
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:215
 msgid "Add son project"
@@ -2736,17 +2738,17 @@ msgstr ""
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:318
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:345
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:375
-msgid "Do you really want to delete this link ?"
+msgid "Do you really want to delete this link?"
 msgstr ""
 
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:312
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:373
-msgid "Do you really want to authorize this project ?"
+msgid "Do you really want to authorize this project?"
 msgstr ""
 
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:319
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:376
-msgid "Commentary of father :"
+msgid "Commentary of father:"
 msgstr ""
 
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:338
@@ -2965,7 +2967,7 @@ msgid "Quota Manager Admin"
 msgstr ""
 
 #: plugins/quota_management/www/quota_admin.php:56
-msgid "Input error : Hard quota must be greater than soft quota"
+msgid "Input error: Hard quota must be greater than soft quota"
 msgstr ""
 
 #: plugins/quota_management/www/quota_admin.php:63
@@ -4672,7 +4674,8 @@ msgid "Display Full User List/Edit Users"
 msgstr "Visa full användarlista/redigera användare"
 
 #: www/admin/index.php:53
-msgid "Display Users Beginning with :"
+#, fuzzy
+msgid "Display Users Beginning with:"
 msgstr "Visa användare innehållande :"
 
 #: www/admin/index.php:60
@@ -4714,7 +4717,7 @@ msgstr "Visa full grupplista/redigera grupper"
 
 #: www/admin/index.php:100
 #, fuzzy
-msgid "Display Projects Beginning with :"
+msgid "Display Projects Beginning with:"
 msgstr "Visa grupper innehållande :"
 
 #: www/admin/index.php:107
@@ -6349,7 +6352,7 @@ msgid "File to upload"
 msgstr ""
 
 #: www/forum/include/ForumHTML.class.php:296
-msgid "Warning : Current file will be deleted permanently"
+msgid "Warning: Current file will be deleted permanently"
 msgstr ""
 
 #: www/forum/include/ForumHTML.class.php:484
@@ -7140,7 +7143,7 @@ msgid "Underline text: [u]text[/u]  (alt+u)"
 msgstr ""
 
 #: www/include/BBCodeSupportHtml.class.php:46
-msgid "Quote text : [quote]text[/quote]  (alt+q)"
+msgid "Quote text: [quote]text[/quote]  (alt+q)"
 msgstr ""
 
 #: www/include/BBCodeSupportHtml.class.php:47

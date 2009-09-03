@@ -53,7 +53,7 @@ if ($_POST["cmd"] == "maj")
 	$qh = $_POST["qh"] * $_quota_block_size;
 	if ($qs > $qh)
 	{
-		$message = utf8_encode(_('Input error : Hard quota must be greater than soft quota'));
+		$message = utf8_encode(_('Input error: Hard quota must be greater than soft quota'));
 		echo "<h3 style=\"color:red\">$message</h3>";
 	}
 	else

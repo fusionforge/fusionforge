@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-03 17:59+0200\n"
-"PO-Revision-Date: 2009-09-03 18:21+0200\n"
+"POT-Creation-Date: 2009-09-03 19:14+0200\n"
+"PO-Revision-Date: 2009-09-03 19:14+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <aljeux@free.fr>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2694,13 +2694,13 @@ msgstr "Modifier la hiérarchie"
 
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:211
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:221
-msgid "Select a project :"
+msgid "Select a project:"
 msgstr "Choisir un projet :"
 
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:213
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:223
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:268
-msgid "Commentary :"
+msgid "Commentary:"
 msgstr "Commentaire :"
 
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:215
@@ -2740,17 +2740,17 @@ msgstr "Autoriser"
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:318
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:345
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:375
-msgid "Do you really want to delete this link ?"
+msgid "Do you really want to delete this link?"
 msgstr "Voulez-vous réellement supprimer ce lien ?"
 
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:312
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:373
-msgid "Do you really want to authorize this project ?"
+msgid "Do you really want to authorize this project?"
 msgstr "Voulez-vous réellement autoriser ce projet ?"
 
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:319
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:376
-msgid "Commentary of father :"
+msgid "Commentary of father:"
 msgstr "Commentaire du projet parent :"
 
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:338
@@ -2968,7 +2968,7 @@ msgid "Quota Manager Admin"
 msgstr "Gestionnaire de quotas"
 
 #: plugins/quota_management/www/quota_admin.php:56
-msgid "Input error : Hard quota must be greater than soft quota"
+msgid "Input error: Hard quota must be greater than soft quota"
 msgstr ""
 "Erreur de données : la limite de blocage doit être supérieure à celle "
 "d'avertissement"
@@ -3360,7 +3360,9 @@ msgstr "Parcourir le dépôt Darcs"
 msgid ""
 "<p>Documentation for Git is available <a href=\"http://git-scm.com/\">here</"
 "a>.</p>"
-msgstr "<p>La documentation de Git est disponible <a href=\"http://git-scm.com/\">ici</a> (en anglais).</p>"
+msgstr ""
+"<p>La documentation de Git est disponible <a href=\"http://git-scm.com/"
+"\">ici</a> (en anglais).</p>"
 
 #: plugins/scmgit/common/GitPlugin.class.php:77
 msgid ""
@@ -4838,7 +4840,7 @@ msgid "Display Full User List/Edit Users"
 msgstr "Afficher/Éditer les utilisateurs"
 
 #: www/admin/index.php:53
-msgid "Display Users Beginning with :"
+msgid "Display Users Beginning with:"
 msgstr "Afficher les utilisateurs commençant par :"
 
 #: www/admin/index.php:60
@@ -4879,7 +4881,7 @@ msgid "Display Full Project List/Edit Projects"
 msgstr "Afficher la liste complète des projets ou éditer les projets"
 
 #: www/admin/index.php:100
-msgid "Display Projects Beginning with :"
+msgid "Display Projects Beginning with:"
 msgstr "Afficher les projets commençant par :"
 
 #: www/admin/index.php:107
@@ -6530,8 +6532,8 @@ msgid "File to upload"
 msgstr "Fichier à publier"
 
 #: www/forum/include/ForumHTML.class.php:296
-msgid "Warning : Current file will be deleted permanently"
-msgstr "Attention : le fichier actuel sera supprimé e manière permanente"
+msgid "Warning: Current file will be deleted permanently"
+msgstr "Attention : le fichier actuel sera supprimé de manière permanente"
 
 #: www/forum/include/ForumHTML.class.php:484
 #: www/forum/include/ForumHTML.class.php:555
@@ -7339,7 +7341,7 @@ msgid "Underline text: [u]text[/u]  (alt+u)"
 msgstr "Texte souligné : [u]texte[/u] (alt+u)"
 
 #: www/include/BBCodeSupportHtml.class.php:46
-msgid "Quote text : [quote]text[/quote]  (alt+q)"
+msgid "Quote text: [quote]text[/quote]  (alt+q)"
 msgstr "Citation : [quote]texte[/quote] (alt+q)"
 
 #: www/include/BBCodeSupportHtml.class.php:47
@@ -8104,8 +8106,8 @@ msgstr ""
 "niveaux de réponse) de chaque critère individuel.  Pour des raisons de "
 "calcul, ces chiffres tiennent compte à la fois des utilisateurs de confiance "
 "et des autres.</p><ul><li>Le champ « rang global » indique le rang de "
-"l'utilisateur comparé à tous les utilisateurs de %1$s classés.</li><li>Le « "
-"score agrégé » indique un score global moyen pondéré, basé uniquement sur "
+"l'utilisateur comparé à tous les utilisateurs de %1$s classés.</li><li>Le "
+"« score agrégé » indique un score global moyen pondéré, basé uniquement sur "
 "les réponses de confiance.</li><li>Le champ « importance personnelle » "
 "indique le poids que cet utilisateur aura lors de ses évaluations des autres "
 "développeurs (entre 1 et 1,5).</li></ul><p><i>Si vous ne souhaitez pas "
@@ -9644,7 +9646,11 @@ msgid ""
 "<strong>Admin:</strong> If you wish to apply changes to all items selected "
 "above, use these controls to change their properties and click once on "
 "\"Mass Update\"."
-msgstr "<strong>Administration :</strong>Si vous souhaitez appliquer des changements à tous les objets sélectionnés ci-dessus, utilisez ces contrôles pour changer les propriétés, et cliquez (une seule fois) sur « Mise à jour massive »."
+msgstr ""
+"<strong>Administration :</strong>Si vous souhaitez appliquer des changements "
+"à tous les objets sélectionnés ci-dessus, utilisez ces contrôles pour "
+"changer les propriétés, et cliquez (une seule fois) sur « Mise à jour "
+"massive »."
 
 #: www/pm/browse_task.php:362 www/pm/mod_task.php:47
 msgid "Subproject"
@@ -10883,8 +10889,8 @@ msgid ""
 msgstr ""
 "<h3>4. Nom Unix du projet</h3>\n"
 "<p>En plus du nom complet du projet, vous devez choisir un nom « Unix » court."
-"</p><p>Du fait de son utilisation à de nombreux endroits sur le site, le « "
-"nom Unix » est soumis à plusieurs restrictions :</p><ul><li>Il doit être "
+"</p><p>Du fait de son utilisation à de nombreux endroits sur le site, le "
+"« nom Unix » est soumis à plusieurs restrictions :</p><ul><li>Il doit être "
 "unique</li><li>Il doit comprendre entre 3 et 15 caractères</li><li>Il ne "
 "peut contenir que des lettres (minuscules), des chiffres et des tirets</"
 "li><li>Il ne peut être choisi parmi certains noms réservés</li><li>Il ne "
@@ -11142,8 +11148,8 @@ msgid ""
 "\"Testing\"."
 msgstr ""
 "Vous pouvez créer des catégories pour décrire à quoi le temps a été passé "
-"pendant le travail d'une tâche particulière.  Par exemple, « réunion », ou « "
-"programmation », ou « tests »."
+"pendant le travail d'une tâche particulière.  Par exemple, « réunion », ou "
+"« programmation », ou « tests »."
 
 #: www/reporting/toolspie.php:48 www/reporting/toolspie.php:55
 msgid "Tool Pie Graphs"
@@ -11690,7 +11696,15 @@ msgid ""
 "a \"Package\" of snippets. That package can contain multiple, specific "
 "versions of other snippets.</p><p>&nbsp;</p><h3>Browse Snippets</h3>\t<p>You "
 "can browse the snippet library quickly:</p>"
-msgstr "<p>Cette section a pour but de vous permettre de partager des échantillons de code, des scripts et des fonctions avec le reste de la communauté.</p><p>Vous pouvez créer un nouvel échantillon, puis le faire évoluer en publiant facilement de nouvelles versions.</p><p>Une fois que des échantillons ont été publiés, il est possible de les rassembler en « paquets ».  Chaque paquet peut contenir différentes versions de différents échantillons de code.</p><h3>Naviguer dans les échantillons</h3><p>Vous pouvez naviguer rapidement dans la bibliothèque d'échantillons :</p>"
+msgstr ""
+"<p>Cette section a pour but de vous permettre de partager des échantillons "
+"de code, des scripts et des fonctions avec le reste de la communauté.</"
+"p><p>Vous pouvez créer un nouvel échantillon, puis le faire évoluer en "
+"publiant facilement de nouvelles versions.</p><p>Une fois que des "
+"échantillons ont été publiés, il est possible de les rassembler en "
+"« paquets ».  Chaque paquet peut contenir différentes versions de différents "
+"échantillons de code.</p><h3>Naviguer dans les échantillons</h3><p>Vous "
+"pouvez naviguer rapidement dans la bibliothèque d'échantillons :</p>"
 
 #: www/snippet/index.php:43
 msgid "Browse by Language"
@@ -12329,8 +12343,8 @@ msgstr ""
 "Listez les numéros des questions, dans l'ordre souhaité, séparés par des "
 "virgules. <strong>Référez-vous à votre liste de questions</strong> pour en "
 "visualiser les identifiants. <strong>N'incluez pas</strong> d'espaces dans "
-"votre liste, et ne la terminez pas par une virgule.<br>Exemple : « "
-"1,2,3,4,5,6,7 »."
+"votre liste, et ne la terminez pas par une virgule.<br>Exemple : "
+"« 1,2,3,4,5,6,7 »."
 
 #: www/survey/admin/edit_survey.php:118
 msgid "Is Active"
@@ -13469,8 +13483,8 @@ msgid ""
 "Filtering and Sorting' to change."
 msgstr ""
 "Seuls les enregistrements ouverts sont affichés par défaut.  Pour voir les "
-"autres, utilisez les fonctions de « filtrage et tri simples » ou les « "
-"requêtes avancées »."
+"autres, utilisez les fonctions de « filtrage et tri simples » ou les "
+"« requêtes avancées »."
 
 #: www/tracker/browse.php:542
 #: www/tracker/include/ArtifactTypeHtml.class.php:552

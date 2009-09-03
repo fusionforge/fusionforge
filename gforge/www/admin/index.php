@@ -50,7 +50,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 <ul>
 	<li><a href="userlist.php"><?php echo _('Display Full User List/Edit Users'); ?></a>&nbsp;&nbsp;</li>
 	<li><?php
-	echo _('Display Users Beginning with :').' ';
+	echo _('Display Users Beginning with:').' ';
 	for ($i=0; $i < count($abc_array); $i++) {
 		echo '<a href="userlist.php?user_name_search='.$abc_array[$i].'">'.$abc_array[$i].'</a>|';
 	}
@@ -97,7 +97,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 <ul>
 	<li><a href="grouplist.php"><?php echo _('Display Full Project List/Edit Projects'); ?></a></li>
 
-	<li><?php echo _('Display Projects Beginning with :').' ';
+	<li><?php echo _('Display Projects Beginning with:').' ';
 	for ($i=0; $i < count($abc_array); $i++) {
 		echo '<a href="grouplist.php?group_name_search='.$abc_array[$i].'">'.$abc_array[$i].'</a>|';
 	}

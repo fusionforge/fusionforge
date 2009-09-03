@@ -208,9 +208,9 @@ class projects_hierarchyPlugin extends Plugin {
 			//include('hierarchy_utils.php');
 			//select box of sons
 			echo '<table><tr>';
-			echo '<td>'._('Select a project :').'</td><td>'.son_box($group_id,'sub_project_id','0').'</td><td>&nbsp;</td>' ;
+			echo '<td>'._('Select a project:').'</td><td>'.son_box($group_id,'sub_project_id','0').'</td><td>&nbsp;</td>' ;
 			echo '</tr><tr>' ;
-			echo '<td>'._('Commentary :').'</td><td> <input type="text" size="25" value="" name="com"></td>' ;
+			echo '<td>'._('Commentary:').'</td><td> <input type="text" size="25" value="" name="com"></td>' ;
 			//echo type_son_box();
 			echo '<td><input type="submit"  name="son" value="'._('Add son project').'"></td></tr></table></form>';
 			echo '<br/>';
@@ -218,9 +218,9 @@ class projects_hierarchyPlugin extends Plugin {
 			//include('hierarchy_utils.php');
 			//select box of sons
 			echo '<table><tr>';
-			echo '<td>'._('Select a project :').'</td><td>'.link_box($group_id,'sub_project_id','0').'</td><td>&nbsp;</td>';
+			echo '<td>'._('Select a project:').'</td><td>'.link_box($group_id,'sub_project_id','0').'</td><td>&nbsp;</td>';
 			echo '</tr><tr>' ;
-			echo '<td>'._('Commentary :').'</td><td><input type="text" size="25" value="" name="com"></td>' ;
+			echo '<td>'._('Commentary:').'</td><td><input type="text" size="25" value="" name="com"></td>' ;
 			echo '<td><input type="submit"  name="son" value="'._('Add a link').'"></td></tr></table></form>';
 			echo '<br/>';
 			//select all the sons of the current project
@@ -264,8 +264,8 @@ AND plugin_projects_hierarchy.project_id = ".$group_id.")" ;
 							print "<b>"._('Authorize')."</b>";
 						}
 						echo '</td>';
-						echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to delete this link ?')."\")){window.location.href=\"../../plugins/projects_hierarchy/del_son.php?group_id=".$group_id."&sub_group_id=".$row_son['sub_project_id']."\"}'}>"._('Delete')."</a></td>";
-						echo "<tr><td colspan='4'>"._('Commentary :')." <i>".$row_son['com']."</i>";
+						echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to delete this link?')."\")){window.location.href=\"../../plugins/projects_hierarchy/del_son.php?group_id=".$group_id."&sub_group_id=".$row_son['sub_project_id']."\"}'}>"._('Delete')."</a></td>";
+						echo "<tr><td colspan='4'>"._('Commentary:')." <i>".$row_son['com']."</i>";
 						echo '</td></tr>';
 					}
 				
@@ -309,14 +309,14 @@ AND plugin_projects_hierarchy.sub_project_id = ".$group_id." AND plugin_projects
 						echo '<td>';
 						if($row_son[activated] == 'f'){
 						//echo _('Waiting');
-						echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to authorize this project ?')."\")){window.location.href=\"../../plugins/projects_hierarchy/wait_son.php?sub_group_id=".$group_id."&group_id=".$row_son['project_id']."\"}'}>"._('Authorize')."</a></td>";
+						echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to authorize this project?')."\")){window.location.href=\"../../plugins/projects_hierarchy/wait_son.php?sub_group_id=".$group_id."&group_id=".$row_son['project_id']."\"}'}>"._('Authorize')."</a></td>";
 						}
 						else {
 							print "<b>"._('Authorize')."</b>";
 						}
 						echo '</td>';
-						echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to delete this link ?')."\")){window.location.href=\"../../plugins/projects_hierarchy/del_father.php?group_id=".$row_son['project_id']."&sub_group_id=".$group_id."\"}'}>"._('Delete')."</a></td>";
-						echo "<tr><td colspan='4'>"._('Commentary of father :')." <i>".$row_son['com']."</i></td>";
+						echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to delete this link?')."\")){window.location.href=\"../../plugins/projects_hierarchy/del_father.php?group_id=".$row_son['project_id']."&sub_group_id=".$group_id."\"}'}>"._('Delete')."</a></td>";
+						echo "<tr><td colspan='4'>"._('Commentary of father:')." <i>".$row_son['com']."</i></td>";
 						echo '</tr>';
 					}
 				echo '</table>';
@@ -342,7 +342,7 @@ AND plugin_projects_hierarchy.sub_project_id = ".$group_id."
 					echo '<td>';
 					echo "<a href=\"../../projects/".$row_father['unix_group_name']."/\">".$row_father['group_name']."</a>";
 					echo '</td><td>';
-					echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to delete this link ?')."\")){window.location.href=\"../../plugins/projects_hierarchy/del_father.php?sub_group_id=".$group_id."&group_id=".$row_father['group_id']."\"}'}>"._('Delete')."</a></td>";
+					echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to delete this link?')."\")){window.location.href=\"../../plugins/projects_hierarchy/del_father.php?sub_group_id=".$group_id."&group_id=".$row_father['group_id']."\"}'}>"._('Delete')."</a></td>";
 					echo '</td></tr>';
 					}
 					echo '</table>';
@@ -370,10 +370,10 @@ AND plugin_projects_hierarchy.sub_project_id = ".$group_id."
 					echo "<a href=\"../../projects/".$row_wait['unix_group_name']."/\">".$row_wait['group_name']."</a>";
 					echo '</td>';
 					echo'<td>';
-					echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to authorize this project ?')."\")){window.location.href=\"../../plugins/projects_hierarchy/wait_son.php?sub_group_id=".$group_id."&group_id=".$row_wait['group_id']."\"}'}>"._('Do you really want to authorize this project ?')."</a></td>";
+					echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to authorize this project?')."\")){window.location.href=\"../../plugins/projects_hierarchy/wait_son.php?sub_group_id=".$group_id."&group_id=".$row_wait['group_id']."\"}'}>"._('Do you really want to authorize this project?')."</a></td>";
 					echo '</td><td>';
-					echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to delete this link ?')."\")){window.location.href=\"../../plugins/projects_hierarchy/del_father.php?sub_group_id=".$group_id."&group_id=".$row_wait['group_id']."\"}'}>"._('Delete')."</a></td>";
-					echo "</td><tr><td colspan='3'>"._('Commentary of father :')." <i>".$row_wait['com']."</i>";
+					echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to delete this link?')."\")){window.location.href=\"../../plugins/projects_hierarchy/del_father.php?sub_group_id=".$group_id."&group_id=".$row_wait['group_id']."\"}'}>"._('Delete')."</a></td>";
+					echo "</td><tr><td colspan='3'>"._('Commentary of father:')." <i>".$row_wait['com']."</i>";
 					echo '</td></tr>';
 					}
 					echo '</table>';

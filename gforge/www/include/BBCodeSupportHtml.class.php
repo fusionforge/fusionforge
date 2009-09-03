@@ -43,7 +43,7 @@ class BBCodeSupportHtml extends BBCodeSupport {
 		b_help = "<?php echo _('Bold text: [b]text[/b]  (alt+b)'); ?>";
 		i_help = "<?php echo _('Italic text: [i]text[/i]  (alt+i)'); ?>";
 		u_help = "<?php echo _('Underline text: [u]text[/u]  (alt+u)'); ?>";
-		q_help = "<?php echo _('Quote text : [quote]text[/quote]  (alt+q)'); ?>";
+		q_help = "<?php echo _('Quote text: [quote]text[/quote]  (alt+q)'); ?>";
 		c_help = "<?php echo _('Code display: [code]code[/code]  (alt+c)'); ?>";
 		l_help = "<?php echo _('List: [list]text[/list] (alt+l)'); ?>";
 		o_help = "<?php echo _('Ordered list: [list=]text[/list]  (alt+o)'); ?>";

@@ -293,7 +293,7 @@ class ForumHTML extends Error {
 						<td>' . _('File to upload') . ':   <input type="file" name="attachment1"/></td>
 					</tr>
 					<tr>
-						<td class="warning">' . _('Warning : Current file will be deleted permanently') . '</td>
+						<td class="warning">' . _('Warning: Current file will be deleted permanently') . '</td>
 					</tr>
 			</table>
 			<input type="submit" name="go" value="'._('Update').'">

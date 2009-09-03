@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-03 17:59+0200\n"
+"POT-Creation-Date: 2009-09-03 19:14+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2696,13 +2696,15 @@ msgstr "Изменить структуру иерархии"
 
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:211
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:221
-msgid "Select a project :"
+#, fuzzy
+msgid "Select a project:"
 msgstr "Выбор проекта :"
 
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:213
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:223
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:268
-msgid "Commentary :"
+#, fuzzy
+msgid "Commentary:"
 msgstr "Коментарий :"
 
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:215
@@ -2742,17 +2744,20 @@ msgstr "Авторизация"
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:318
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:345
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:375
-msgid "Do you really want to delete this link ?"
+#, fuzzy
+msgid "Do you really want to delete this link?"
 msgstr "Вы уверены в необходимости удаления связи?"
 
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:312
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:373
-msgid "Do you really want to authorize this project ?"
+#, fuzzy
+msgid "Do you really want to authorize this project?"
 msgstr "Вы действительно хотите авторизовать этот проект?"
 
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:319
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:376
-msgid "Commentary of father :"
+#, fuzzy
+msgid "Commentary of father:"
 msgstr "Коментарии для вложения :"
 
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:338
@@ -2971,7 +2976,8 @@ msgid "Quota Manager Admin"
 msgstr "Управление ограничением занимаемого объёма"
 
 #: plugins/quota_management/www/quota_admin.php:56
-msgid "Input error : Hard quota must be greater than soft quota"
+#, fuzzy
+msgid "Input error: Hard quota must be greater than soft quota"
 msgstr "Ошибочное указание в размерах ограничений"
 
 #: plugins/quota_management/www/quota_admin.php:63
@@ -4866,7 +4872,8 @@ msgid "Display Full User List/Edit Users"
 msgstr "Показать полный список/Редактировать участников"
 
 #: www/admin/index.php:53
-msgid "Display Users Beginning with :"
+#, fuzzy
+msgid "Display Users Beginning with:"
 msgstr "Показывать пользователей начиная с :"
 
 #: www/admin/index.php:60
@@ -4908,7 +4915,7 @@ msgstr "Полный список групп/Редактирование гру
 
 #: www/admin/index.php:100
 #, fuzzy
-msgid "Display Projects Beginning with :"
+msgid "Display Projects Beginning with:"
 msgstr "Показывать группы начиная с :"
 
 #: www/admin/index.php:107
@@ -6554,7 +6561,8 @@ msgid "File to upload"
 msgstr "Файл для загрузки"
 
 #: www/forum/include/ForumHTML.class.php:296
-msgid "Warning : Current file will be deleted permanently"
+#, fuzzy
+msgid "Warning: Current file will be deleted permanently"
 msgstr "Внимание! Файл будет удален безвозвратно"
 
 #: www/forum/include/ForumHTML.class.php:484
@@ -7358,7 +7366,8 @@ msgid "Underline text: [u]text[/u]  (alt+u)"
 msgstr "Подчеркнутый текст: [u]текст[/u]  (alt+u)"
 
 #: www/include/BBCodeSupportHtml.class.php:46
-msgid "Quote text : [quote]text[/quote]  (alt+q)"
+#, fuzzy
+msgid "Quote text: [quote]text[/quote]  (alt+q)"
 msgstr "Цитата : [quote]текст[/quote]  (alt+q)"
 
 #: www/include/BBCodeSupportHtml.class.php:47
