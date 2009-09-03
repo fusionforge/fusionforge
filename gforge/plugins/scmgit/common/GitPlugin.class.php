@@ -55,14 +55,14 @@ class GitPlugin extends SCMPlugin {
 	function getInstructionsForAnon ($project) {
 		$b =  _('<p><b>Anonymous Git Access</b></p><p>This project\'s Git repository can be checked out through anonymous access with the following command.</p>');
 		$b .= '<p>' ;
-		$b .= '<tt>git clone '.util_make_url ('/anonscm/git/'.$project->getUnixName().'/').'</tt><br />';
+		$b .= '<tt>git clone '.util_make_url ('/anonscm/git/'.$project->getUnixName()).'</tt><br />';
 		$b .= '</p>';
 		return $b ;
 	}
 
 	function getInstructionsForRW ($project) {
 		$b = _('<p><b>Developer GIT Access via SSH</b></p><p>Only project developers can access the GIT tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
-		$b .= '<p><tt>git clone git+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . ':'. $this->git_root .'/'. $project->getUnixName().'</tt></p>' ;
+		$b .= '<p><tt>git clone git+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . $this->git_root .'/'. $project->getUnixName().'</tt></p>' ;
 		return $b ;
 	}
 
