@@ -155,7 +155,7 @@ site_header(array('title'=>_('Project Information')));
 	$SCMFactory = new SCMFactory() ;
 $scm_plugins=$SCMFactory->getSCMs() ;
 if ($sys_use_scm && count($scm_plugins) > 0) {	
-	echo _('<h3>6. SCM</h3><p>You can choose among different SCM for your project, but just one (or none at all). Please select the SCM system you want to use.</p>')."\n";
+	echo _('<h3>5. SCM</h3><p>You can choose among different SCM for your project, but just one (or none at all). Please select the SCM system you want to use.</p>')."\n";
 	echo '<table><tbody><tr><td><strong>'._('SCM Repository').':</strong></td>';
 	echo '<td><input type="radio" name="scm" value="noscm" checked="checked">'._('No SCM').'</td>';
 	foreach($scm_plugins as $plugin) {
