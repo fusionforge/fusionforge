@@ -106,7 +106,7 @@ if (file_exists($filepath)) {
 
 	$ip=getStringFromServer('REMOTE_ADDR');
 	$res=db_query_params("INSERT INTO frs_dlstats_file (ip_address,file_id,month,day,user_id) 
-		VALUES ($1, $2, $3, $4, $5)"; array($ip,$file_id,date('Ym'),date('d'),$us));
+		VALUES ($1, $2, $3, $4, $5)", array($ip,$file_id,date('Ym'),date('d'),$us));
 } else {
 	Header("Status: 404");
 }

@@ -110,7 +110,6 @@ class TroveCategory extends Error {
 					version=$4
 				WHERE trove_cat_id=$5", 
 				array(htmlspecialchars($shortName), htmlspecialchars($fullName), htmlspecialchars($description), date('Ymd',time())."01", $this->categoryId));
-			);
 			if(!$result || db_affected_rows($result) != 1) {
 				$this->setError(_('ERROR'), _('Cannot update'));
 				db_rollback();

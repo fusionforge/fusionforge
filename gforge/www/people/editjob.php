@@ -131,7 +131,7 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 		}
 
 		if (people_verify_job_group($job_id,$group_id)) {
-			$result = db_query_params="DELETE FROM people_job_inventory WHERE job_id=$1 AND job_inventory_id=$2", array($job_id, $job_inventory_id));
+			$result = db_query_params("DELETE FROM people_job_inventory WHERE job_id=$1 AND job_inventory_id=$2", array($job_id, $job_inventory_id));
 			if (!$result || db_affected_rows($result) < 1) {
 				$feedback .= _('JOB skill delete FAILED');
 				echo db_error();

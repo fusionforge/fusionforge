@@ -121,7 +121,7 @@ WHERE user_id=$2", array($people_view_skills, $user_getid()));
 					$keywords[$i] = str_replace("\n", " ", $keywords[$i]);  /* strip out any backspace characters. */
 					$title[$i] = str_replace("\n", " ", $title[$i]);
 					$result = db_query_params("UPDATE skills_data SET type=$1 ,title=$2 ,start=$3,finish=$4, keywords=$5 WHERE skills_data_id=$6",
-																		array($type[$i], $title[$i], $startY[$i]$startM[$i], $endY[$i]$endM[$i], $keywords[$i], $skill_edit[$i]));
+																		array($type[$i], $title[$i], $startY[$i].$startM[$i], $endY[$i].$endM[$i], $keywords[$i], $skill_edit[$i]));
 
 					if (!$result || db_affected_rows($result) < 1) {
 						echo db_error();
