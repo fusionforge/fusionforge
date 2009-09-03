@@ -315,9 +315,8 @@ if [ "$1" -eq "1" ]; then
 
 	ln -s %{GFORGE_DIR}/www/env.inc.php %{PLUGINS_LIB_DIR}/env.inc.php
 	
-	#if not the env.inc.php include-path isn't correct //not necessary if no more /usr/lib/gforge
-        #ln -s %{PLUGINS_LIB_DIR} %{GFORGE_DIR}/plugins
-
+	#creation of scm-gforge user
+	adduser --home-dir /var/lib/gforge/chroot/ scm-gforge
 else
 	# upgrading database
 	su -l %{gfuser} -c "%{GFORGE_BIN_DIR}/db-upgrade.pl 2>&1" | grep -v ^NOTICE

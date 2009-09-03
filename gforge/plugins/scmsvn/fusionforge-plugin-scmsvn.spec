@@ -46,6 +46,7 @@ Requires: perl-IPC-Run
 #specific define for plugins
 %define PLUGIN_LIB              %{PLUGINS_LIB_DIR}/%{plugin}
 %define PLUGIN_CONF             %{PLUGINS_CONF_DIR}/%{plugin}
+%define PLUGIN_DUMP				/var/lib/gforge/dumps
 
 
 %description
@@ -78,6 +79,8 @@ install -m 755 -d  $RPM_BUILD_ROOT/%{FFORGE_CONF_DIR}/
 install -m 755 -d $RPM_BUILD_ROOT/%{PLUGIN_CONF}
 cp -rp etc/plugins/%{plugin}/* $RPM_BUILD_ROOT/%{PLUGIN_CONF}/
 
+# installing dumps repository
+install -m 755 -d $RPM_BUILD_ROOT/%{PLUGIN_DUMP}
 
 %pre
 
@@ -127,9 +130,11 @@ fi
 %doc README
 %{PLUGIN_CONF}
 %{PLUGIN_LIB}/bin
+%attr(0750, root, root) %{PLUGIN_LIB}/bin/install-svn.sh
 %{PLUGIN_LIB}/common
 %{PLUGIN_LIB}/cronjobs
 %{CROND_DIR}/%{name}
+%attr(0744, gforge, gforge) %{PLUGIN_DUMP}
 
 %changelog
 * Mon Jan 09 2006 Nicolas Quienot <nquienot@linagora.com>
