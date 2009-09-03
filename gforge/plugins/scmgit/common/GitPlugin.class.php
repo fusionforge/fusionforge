@@ -31,25 +31,46 @@ class GitPlugin extends SCMPlugin {
 		$this->hooks[] = 'scm_browser_page' ;
 		$this->hooks[] = 'scm_gather_stats' ;
 		$this->hooks[] = 'scm_generate_snapshots' ;
-		
+
 		require_once $gfconfig.'plugins/scmgit/config.php' ;
-		
+
 		$this->default_git_server = $default_git_server ;
 		if (isset ($git_root)) {
 			$this->git_root = $git_root;
 		} else {
 			$this->git_root = $GLOBALS['sys_chroot'].'/scmrepos/git' ;
 		}
-		
+
 		$this->register () ;
 	}
-	
+
 	function getDefaultServer() {
 		return $this->default_git_server ;
 	}
 
+        function printShortStats ($params) {
+                $project = $this->checkParams ($params) ;
+                if (!$project) {
+                        return false ;
+                }
+
+                if ($project->usesPlugin($this->name)) {
+                        $result = db_query_params('SELECT sum(commits) AS commits, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
+                                                  array ($project->getID())) ;
+                        $commit_num = db_result($result,0,'commits');
+                        $add_num    = db_result($result,0,'adds');
+                        if (!$commit_num) {
+                                $commit_num=0;
+                        }
+                        if (!$add_num) {
+                                $add_num=0;
+                        }
+                        echo ' (Git: '.sprintf(_('<strong>%1$s</strong> commits, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
+                }
+        }
+
 	function getBlurb () {
-		return _('<p>This GIT plugin is not completed yet.</p>') ;
+		return _('<p>Documentation for Git is available <a href="http://git-scm.com/">here</a>.</p>') ;
 	}
 
 	function getInstructionsForAnon ($project) {
