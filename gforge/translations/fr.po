@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: FusionForge 4.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-09-03 17:59+0200\n"
-"PO-Revision-Date: 2009-09-03 18:01+0200\n"
+"PO-Revision-Date: 2009-09-03 18:21+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <aljeux@free.fr>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,7 +28,7 @@ msgstr "La description du document doit avoir au moins 10 caractères"
 
 #: common/docman/Document.class.php:196
 msgid "Document:: Invalid docid"
-msgstr "Document : numéro de document invalide"
+msgstr "Document : numéro de document invalide"
 
 #: common/docman/DocumentFactory.class.php:180
 msgid "No Documents Found"
@@ -36,7 +36,7 @@ msgstr "Aucun document trouvé"
 
 #: common/docman/DocumentGroup.class.php:97
 msgid "DocumentGroup: name is Required"
-msgstr "Groupe de documents : le nom est obligatoire"
+msgstr "Groupe de documents : le nom est obligatoire"
 
 #: common/docman/DocumentGroup.class.php:107
 #: common/docman/DocumentGroup.class.php:219
@@ -45,7 +45,7 @@ msgstr "DocumentGroup: ID parent non valable"
 
 #: common/docman/DocumentGroup.class.php:152
 msgid "DocumentGroup: Invalid DocumentGroup ID"
-msgstr "Groupe de documents : numéro de groupe de documents invalide"
+msgstr "Groupe de documents : numéro de groupe de documents invalide"
 
 #: common/forum/Forum.class.php:69 common/mail/MailingList.class.php:63
 #: common/mail/MailingListFactory.class.php:56
@@ -53,7 +53,7 @@ msgstr "Groupe de documents : numéro de groupe de documents invalide"
 #: common/survey/SurveyResponse.class.php:54
 #, php-format
 msgid "%1$s:: No Valid Group Object"
-msgstr "%1$s : Pas d'objet Groupe valide"
+msgstr "%1$s : Pas d'objet Groupe valide"
 
 #: common/forum/Forum.class.php:86 common/include/Error.class.php:180
 #: common/mail/MailingList.class.php:81 common/survey/Survey.class.php:80
@@ -117,7 +117,7 @@ msgstr "Forum::savePlace()"
 #: www/news/admin/index.php:233
 #, php-format
 msgid "Error On Update:"
-msgstr "Erreur lors de la mise à jour :"
+msgstr "Erreur lors de la mise à jour :"
 
 #: common/forum/ForumFactory.class.php:54
 msgid "Forum:: No Valid Group Object"
@@ -201,7 +201,7 @@ msgid ""
 "%s"
 msgstr ""
 "\n"
-"Pour lire ce message en détail et y répondre :\n"
+"Pour lire ce message en détail et y répondre :\n"
 "%s"
 
 #: common/forum/ForumMessage.class.php:668
@@ -216,7 +216,7 @@ msgid ""
 msgstr ""
 "\n"
 "Ou répondez par e-mail en saisissant votre réponse entre les marqueurs "
-"suivants :\n"
+"suivants :\n"
 "%1$s\n"
 "(tapez votre réponse ici)\n"
 "%1$s"
@@ -232,7 +232,7 @@ msgstr ""
 "\n"
 "\n"
 "\n"
-"Par : %s\n"
+"Par : %s\n"
 
 #: common/forum/ForumMessage.class.php:679
 msgid "A file has been uploaded with this message."
@@ -246,7 +246,7 @@ msgid ""
 "%s\n"
 msgstr ""
 "Vous recevez ce message suite à votre choix de surveiller ce forum.\n"
-"Pour interrompre la surveillance, connectez-vous à %s et suivez ce lien :\n"
+"Pour interrompre la surveillance, connectez-vous à %s et suivez ce lien :\n"
 "%s\n"
 
 #: common/frs/FRSFile.class.php:93
@@ -257,7 +257,7 @@ msgstr "Le nom du fichier doit compter au moins 3 caractères"
 msgid "Filename can only be alphanumeric and \"-\" \"_\" \".\" characters."
 msgstr ""
 "Le nom de fichier ne peut contenir que des caractères alphanumériques ainsi "
-"que « - », « _ » et « . »."
+"que « - », « _ » et « . »."
 
 #: common/frs/FRSFile.class.php:107
 msgid "FRSFile Appears to be invalid"
@@ -283,7 +283,7 @@ msgstr "Le nom de paquet doit être alphanumérique"
 #: common/frs/FRSRelease.class.php:287
 #, php-format
 msgid "[%1$s Release] %2$s"
-msgstr "Nouvelle version de %1$s : %2$s"
+msgstr "Nouvelle version de %1$s : %2$s"
 
 #: common/frs/FRSRelease.class.php:290
 #, php-format
@@ -345,11 +345,11 @@ msgstr "Permission refusée"
 #: common/include/Group.class.php:264
 #, php-format
 msgid "fetchData():: %s"
-msgstr "fetchData() : %s"
+msgstr "fetchData() : %s"
 
 #: common/include/Group.class.php:288
 msgid "Group::create: Group object already exists"
-msgstr "Group::create : l'objet Group existe déjà"
+msgstr "Group::create : l'objet Group existe déjà"
 
 #: common/include/Group.class.php:293
 msgid "Invalid Unix name"
@@ -389,17 +389,17 @@ msgstr ""
 #: common/include/Group.class.php:352
 #, php-format
 msgid "ERROR: Could not create group: %s"
-msgstr "Erreur lors de la création du groupe : %s"
+msgstr "Erreur lors de la création du groupe : %s"
 
 #: common/include/Group.class.php:359
 #, php-format
 msgid "ERROR: Could not get group id: %s"
-msgstr "Erreur lors de la récupération de l'identifiant de groupe : %s"
+msgstr "Erreur lors de la récupération de l'identifiant de groupe : %s"
 
 #: common/include/Group.class.php:378
 #, php-format
 msgid "ERROR: Could not add admin to newly created group: %s"
-msgstr "Erreur lors de l'ajout de l'administrateur au nouveau groupe : %s"
+msgstr "Erreur lors de l'ajout de l'administrateur au nouveau groupe : %s"
 
 #: common/include/Group.class.php:421 common/include/Group.class.php:493
 msgid "Could not get permission."
@@ -408,27 +408,27 @@ msgstr "Accès non permis"
 #: common/include/Group.class.php:444
 #, php-format
 msgid "ERROR: DB: Could not change group properties: %s"
-msgstr "Erreur lors de la mise à jour des propriétés du groupe : %s"
+msgstr "Erreur lors de la mise à jour des propriétés du groupe : %s"
 
 #: common/include/Group.class.php:512
 #, php-format
 msgid "New Doc Address Appeared Invalid: %s"
 msgid_plural "New Doc Addresses Appeared Invalid: %s"
-msgstr[0] "Une adresse email semble invalide : %s"
-msgstr[1] "Plusieurs adresses email semblent invalides : %s"
+msgstr[0] "Une adresse email semble invalide : %s"
+msgstr[1] "Plusieurs adresses email semblent invalides : %s"
 
 #: common/include/Group.class.php:564
 msgid ""
 "Error updating project information: Maximum length for Project Description "
 "is 255 chars."
 msgstr ""
-"Erreur lors de la mise à jour des informations du projet : la description du "
+"Erreur lors de la mise à jour des informations du projet : la description du "
 "projet a une longueur maximale de 255 caractères."
 
 #: common/include/Group.class.php:612
 #, php-format
 msgid "Error updating project information: %s"
-msgstr "Erreur lors de la mise à jour des informations sur le projet : %s"
+msgstr "Erreur lors de la mise à jour des informations sur le projet : %s"
 
 #: common/include/Group.class.php:704
 msgid "Invalid Status Change"
@@ -437,7 +437,7 @@ msgstr "Changement d'état non valide"
 #: common/include/Group.class.php:715
 #, php-format
 msgid "ERROR: DB: Could not change group status: %s"
-msgstr "Erreur lors de la mise à jour du statut du projet : %s"
+msgstr "Erreur lors de la mise à jour du statut du projet : %s"
 
 #: common/include/Group.class.php:883
 msgid "Couldn't insert SCM_BOX to database"
@@ -452,7 +452,7 @@ msgid ""
 "Bad tag name, you only can use the following characters: [A-Z][a-z][0-9]-_&'#"
 "+. and space"
 msgstr ""
-"Nom d'étiquette invalide.  Seuls les caractères suivants sont autorisés : [A-"
+"Nom d'étiquette invalide.  Seuls les caractères suivants sont autorisés : [A-"
 "Z][a-z][0-9]-_&'#+. et l'espace."
 
 #: common/include/Group.class.php:1328
@@ -511,7 +511,7 @@ msgstr ""
 #: common/include/Group.class.php:1669
 #, php-format
 msgid "ERROR: Could Not Add User To Group: %s"
-msgstr "Erreur lors de l'ajout d'un utilisateur au groupe : %s"
+msgstr "Erreur lors de l'ajout d'un utilisateur au groupe : %s"
 
 #: common/include/Group.class.php:1696 common/include/Group.class.php:1719
 msgid "Error Getting Role Object"
@@ -519,22 +519,22 @@ msgstr "Erreur lors de la création d'un objet Role"
 
 #: common/include/Group.class.php:1749
 msgid "ERROR: User does not exist"
-msgstr "Erreur : cet utilisateur n'existe pas"
+msgstr "Erreur : cet utilisateur n'existe pas"
 
 #: common/include/Group.class.php:1796
 #, php-format
 msgid "ERROR: User not removed: %s"
-msgstr "Erreur : utilisateur non supprimé : %s"
+msgstr "Erreur : utilisateur non supprimé : %s"
 
 #: common/include/Group.class.php:1811
 #, php-format
 msgid "ERROR: DB: artifact: %s"
-msgstr "Erreur de base de données : artifact : %s"
+msgstr "Erreur de base de données : artifact : %s"
 
 #: common/include/Group.class.php:1846 common/include/Group.class.php:1859
 #, php-format
 msgid "ERROR: DB: project_assigned_to %d: %s"
-msgstr "Erreur de base de données : project_assigned_to : %d / %s"
+msgstr "Erreur de base de données : project_assigned_to : %d / %s"
 
 #: common/include/Group.class.php:1905 www/project/admin/roleedit.php:64
 msgid "Could Not Get Role"
@@ -543,7 +543,7 @@ msgstr "Erreur lors de la création de l'objet Role"
 #: common/include/Group.class.php:1908 common/include/Group.class.php:1913
 #, php-format
 msgid "Role: %s"
-msgstr "Rôle : %s"
+msgstr "Rôle : %s"
 
 #: common/include/Group.class.php:1967
 msgid "Error getting member object"
@@ -552,7 +552,7 @@ msgstr "Erreur lors de la création d'un objet membre"
 #: common/include/Group.class.php:1970
 #, php-format
 msgid "Error getting member object: %s"
-msgstr "Erreur lors de la création d'un objet membre : %s"
+msgstr "Erreur lors de la création d'un objet membre : %s"
 
 #: common/include/Group.class.php:2009
 msgid "Group already active"
@@ -693,8 +693,8 @@ msgid ""
 msgstr ""
 "La candidature de votre projet sur %4$s a été acceptée.\n"
 "\n"
-"Nom complet du projet : %1$s\n"
-"Nom Unix du projet : %2$s\n"
+"Nom complet du projet : %1$s\n"
+"Nom Unix du projet : %2$s\n"
 "\n"
 "Votre enregistrement DNS mettra jusqu'à une journée pour être actif\n"
 "sur notre site.  Votre site web sera accessible par votre compte\n"
@@ -721,7 +721,7 @@ msgstr ""
 "faire immédiatement.\n"
 "\n"
 "Profitez du site et n'hésitez pas à parler de %4$s autour de\n"
-"vous. N'hésitez pas à nous contacter : nous sommes à votre disposition\n"
+"vous. N'hésitez pas à nous contacter : nous sommes à votre disposition\n"
 "pour vous aider.\n"
 "\n"
 "-- L'équipe de %4$s"
@@ -744,10 +744,10 @@ msgid ""
 msgstr ""
 "La candidature de votre projet %3$s a été rejetée.\n"
 "\n"
-"Nom long du projet :  %1$s\n"
-"Nom UNIX du projet : %2$s\n"
+"Nom long du projet :  %1$s\n"
+"Nom UNIX du projet : %2$s\n"
 "\n"
-"Raison de notre refus :\n"
+"Raison de notre refus :\n"
 "\n"
 
 #: common/include/Group.class.php:2306
@@ -777,9 +777,9 @@ msgid ""
 msgstr ""
 "Un nouveau projet a été soumis sur %1$s\n"
 "\n"
-"Nom long du projet :  %2$s\n"
-"Description fournie : %3$s\n"
-"Soumis par : %5$s (%6$s)\n"
+"Nom long du projet :  %2$s\n"
+"Description fournie : %3$s\n"
+"Soumis par : %5$s (%6$s)\n"
 "\n"
 "Visitez l'URL suivante pour approuver ou refuser ce projet:\n"
 "%4$s"
@@ -802,8 +802,8 @@ msgid ""
 msgstr ""
 "Un nouveau projet a été soumis sur %1$s\n"
 "\n"
-"Nom du projet :  %2$s\n"
-"Description fournie : %3$s\n"
+"Nom du projet :  %2$s\n"
+"Description fournie : %3$s\n"
 "\n"
 "L'équipe d'administration de %1$s va maintenant examiner votre\n"
 "candidature. Vous serez tenu informé de sa décision."
@@ -823,7 +823,7 @@ msgstr "Le nom du groupe est déjà pris"
 #: common/include/Group.class.php:2493
 #, php-format
 msgid "ERROR - Could Not Update Group Unix Status: %s"
-msgstr "Erreur lors de la mise à jour du statut Unix du groupe : %s"
+msgstr "Erreur lors de la mise à jour du statut Unix du groupe : %s"
 
 #: common/include/GroupJoinRequest.class.php:111
 msgid "You are already a member of this project."
@@ -856,7 +856,7 @@ msgstr ""
 "%1$s a demandé à rejoindre votre projet. Vous pouvez approuver sa demande "
 "ici: %2$s\n"
 "\n"
-"Commentaires de l'utilisateur :\n"
+"Commentaires de l'utilisateur :\n"
 "%3$s"
 
 #: common/include/GroupJoinRequest.class.php:252
@@ -958,7 +958,7 @@ msgstr "Les mots de passe ne concordent pas"
 
 #: common/include/User.class.php:267
 msgid "Invalid Password:"
-msgstr "Mot de passe non valide :"
+msgstr "Mot de passe non valide :"
 
 #: common/include/User.class.php:272 common/include/User.class.php:341
 msgid "Invalid Unix Name."
@@ -978,7 +978,7 @@ msgid ""
 "User with this email already exists - use people search to recover your "
 "login."
 msgstr ""
-"Un utilisateur avec cette adresse existe déjà : utilisez la recherche des "
+"Un utilisateur avec cette adresse existe déjà : utilisez la recherche des "
 "utilisateurs pour retrouver votre login."
 
 #: common/include/User.class.php:373
@@ -1006,7 +1006,7 @@ msgid ""
 msgstr ""
 "Merci de vous être enregistré sur le site %3$s. \n"
 "Vous avez maintenant un compte du nom de %1$s. \n"
-"Pour terminer votre inscription, suivez le lien : \n"
+"Pour terminer votre inscription, suivez le lien : \n"
 "\n"
 "<%2$s>\n"
 "\n"
@@ -1383,15 +1383,15 @@ msgstr ""
 "Une liste de diffusion va être créée sur %1$s dans un \n"
 "délai de 6 à 24 heures et vous en êtes l'administrateur.\n"
 "\n"
-"Cette liste est : %3$s@%2$s\n"
+"Cette liste est : %3$s@%2$s\n"
 "\n"
-"Les informations concernant cette liste de diffusion sont disponibles sur :\n"
+"Les informations concernant cette liste de diffusion sont disponibles sur :\n"
 "%4$s .\n"
 "\n"
-"L'administration de la liste se fait sur :\n"
+"L'administration de la liste se fait sur :\n"
 "%5$s\n"
 "\n"
-"Le mot de passe d'administration de la liste est : %6$s\n"
+"Le mot de passe d'administration de la liste est : %6$s\n"
 "Vous êtes invités à le changer dès que possible\n"
 "\n"
 "Merci d'avoir enregistré votre projet sur %1$s\n"
@@ -1411,7 +1411,7 @@ msgstr "Erreur en accédant à %1$s"
 
 #: common/pm/ProjectCategory.class.php:95
 msgid "ProjectCategory: name and assignee are Required"
-msgstr "Catégorie de projet : il faut un nom et un responsable."
+msgstr "Catégorie de projet : il faut un nom et un responsable."
 
 #: common/pm/ProjectGroupFactory.class.php:117
 msgid "No ProjectGroups Found"
@@ -1617,20 +1617,20 @@ msgstr "Autre"
 
 #: common/search/SearchQuery.class.php:112
 msgid "Error: criteria not specified"
-msgstr "Erreur : critère non indiqué"
+msgstr "Erreur : critère non indiqué"
 
 #: common/search/SearchQuery.class.php:120
 msgid "Error: search query too short"
-msgstr "Erreur : requête de recherche trop courte"
+msgstr "Erreur : requête de recherche trop courte"
 
 #: common/survey/Survey.class.php:103 common/survey/Survey.class.php:147
 #: www/survey/admin/edit_survey.php:49
 msgid "UPDATE FAILED: Survey Title Required"
-msgstr "La mise à jour a échoué : le titre du sondage est requis"
+msgstr "La mise à jour a échoué : le titre du sondage est requis"
 
 #: common/survey/Survey.class.php:107 www/survey/admin/edit_survey.php:53
 msgid "UPDATE FAILED: Survey Questions Required"
-msgstr "La mise à jour a échoué : des questions sont requises"
+msgstr "La mise à jour a échoué : des questions sont requises"
 
 #: common/survey/Survey.class.php:122
 msgid "Insert Error"
@@ -1786,7 +1786,7 @@ msgstr "Aucune réponse trouvé"
 #: common/tracker/Artifact.class.php:136
 msgid "Artifact: Only group members can view private artifact types"
 msgstr ""
-"Traces : seul un groupe de membres peut voir les traces d'un type privé."
+"Traces : seul un groupe de membres peut voir les traces d'un type privé."
 
 #: common/tracker/Artifact.class.php:197 common/tracker/Artifact.class.php:723
 #: www/tracker/tracker.php:67 www/tracker/tracker.php:258
@@ -1794,24 +1794,24 @@ msgid ""
 "Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please "
 "Login."
 msgstr ""
-"Trace : ce type de trace ne permet pas les soumissions anonymes. Veuillez "
+"Trace : ce type de trace ne permet pas les soumissions anonymes. Veuillez "
 "vous connecter."
 
 #: common/tracker/Artifact.class.php:206
 msgid "Artifact: Message Summary Is Required"
-msgstr "Trace : il faut un titre."
+msgstr "Trace : il faut un titre."
 
 #: common/tracker/Artifact.class.php:210
 msgid "Artifact: Message Body Is Required"
-msgstr "Trace : il faut un contenu."
+msgstr "Trace : il faut un contenu."
 
 #: common/tracker/Artifact.class.php:229
 msgid "Artifact: Error remapping status"
-msgstr "Trace : erreur lors de la mise en correspondance du statut"
+msgstr "Trace : erreur lors de la mise en correspondance du statut"
 
 #: common/tracker/Artifact.class.php:567
 msgid "SetMonitor::Valid Email Address Required"
-msgstr "Installer le suivi : une adresse e-mail valide est requise."
+msgstr "Installer le suivi : une adresse e-mail valide est requise."
 
 #: common/tracker/Artifact.class.php:585
 msgid "Now Monitoring Artifact"
@@ -1832,7 +1832,7 @@ msgstr "Un nom d'élément est nécessaire"
 
 #: common/tracker/ArtifactCanned.class.php:93
 msgid "ArtifactCanned: name and assignee are Required"
-msgstr "ArtifactCanned : un nom et un responsable sont requis."
+msgstr "ArtifactCanned : un nom et un responsable sont requis."
 
 #: common/tracker/ArtifactExtraField.class.php:109
 #: common/tracker/ArtifactExtraField.class.php:378
@@ -1906,12 +1906,12 @@ msgid ""
 "underscores (_) allowed."
 msgstr ""
 "L'alias contient des caractères invalides.  Les seuls caractères autorisés "
-"sont les caractères alphanumériques ainsi que « - » et « _ »."
+"sont les caractères alphanumériques ainsi que « - » et « _ »."
 
 #: common/tracker/ArtifactExtraField.class.php:496
 #, php-format
 msgid "'%1$s' is a reserved alias. Please provide another name."
-msgstr "« %1$s » est un alias réservé. Veuillez choisir un autre nom."
+msgstr "« %1$s » est un alias réservé. Veuillez choisir un autre nom."
 
 #: common/tracker/ArtifactExtraField.class.php:582
 msgid "Out of range value"
@@ -1925,7 +1925,7 @@ msgstr "Ce nom d'élément existe déjà."
 #: common/tracker/ArtifactFile.class.php:130
 msgid "ArtifactFile: File name, type, size, and data are required"
 msgstr ""
-"Fichier-trace : un nom de fichier, un type, une taille, and une donnée sont "
+"Fichier-trace : un nom de fichier, un type, une taille, and une donnée sont "
 "requis."
 
 #: common/tracker/ArtifactMessage.class.php:100
@@ -1948,7 +1948,7 @@ msgstr "La requête n'existe pas"
 #: common/tracker/ArtifactType.class.php:1080
 msgid ""
 "ArtifactType: Name, Description, Due Period, and Status Timeout are required"
-msgstr "Type de trace : nom, description, délai avant retard, persistance."
+msgstr "Type de trace : nom, description, délai avant retard, persistance."
 
 #: common/tracker/ArtifactType.class.php:220
 #: common/tracker/ArtifactType.class.php:1087
@@ -2023,11 +2023,11 @@ msgid ""
 msgstr ""
 "Ce courrier électronique vous est envoyé pour vous rappeler des tâches en "
 "attente ou en retard. \n"
-"La tâche #%1$s est en attente : \n"
-"Résumé : %2$s\n"
-"Soumis par : %4$s\n"
-"Etat :%5$s\n"
-"Pourcentage d'avancement : %6$s\n"
+"La tâche #%1$s est en attente : \n"
+"Résumé : %2$s\n"
+"Soumis par : %4$s\n"
+"Etat : %5$s\n"
+"Pourcentage d'avancement : %6$s\n"
 "\n"
 "Cliquez ici pour accéder à la tâche %3$s ."
 
@@ -2052,16 +2052,16 @@ msgid ""
 msgstr ""
 "Ce courrier électronique vous est envoyé pour vous rappeler que des éléments "
 "que vous suivez sont en attente ou en retard. L'élément #%1$s est en "
-"attente : \n"
-"Résumé : %3$s\n"
-"Etat : %5$s\n"
-"Date d'ouverture :%6$s\n"
-"Assigné à : %7$s\n"
-"Soumis par : %8$s\n"
+"attente : \n"
+"Résumé : %3$s\n"
+"Etat : %5$s\n"
+"Date d'ouverture : %6$s\n"
+"Assigné à : %7$s\n"
+"Soumis par : %8$s\n"
 "Détails: %9$s\n"
 "\n"
 "\n"
-"Cliquez ici pour accéder à cet élément : %4$s"
+"Cliquez ici pour accéder à cet élément : %4$s"
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:63
 msgid "Links to related CVS commits"
@@ -2133,7 +2133,7 @@ msgstr "Afficher les différences avec"
 #: plugins/extratabs/www/index.php:58
 #, php-format
 msgid "Cannot insert new tab entry: %s"
-msgstr "Impossible d'ajouter un nouvel onglet : %s"
+msgstr "Impossible d'ajouter un nouvel onglet : %s"
 
 #: plugins/extratabs/www/index.php:62
 msgid "Tab added"
@@ -2142,7 +2142,7 @@ msgstr "Onglet ajouté."
 #: plugins/extratabs/www/index.php:69
 #, php-format
 msgid "Cannot delete tab entry: %s"
-msgstr "Impossible de supprimer un onglet : %s"
+msgstr "Impossible de supprimer un onglet : %s"
 
 #: plugins/extratabs/www/index.php:118 www/project/admin/index.php:166
 #, php-format
@@ -2161,11 +2161,11 @@ msgstr ""
 
 #: plugins/extratabs/www/index.php:133
 msgid "Name of the tab:"
-msgstr "Nom de l'onglet :"
+msgstr "Nom de l'onglet :"
 
 #: plugins/extratabs/www/index.php:136
 msgid "URL of the tab:"
-msgstr "URL de l'onglet :"
+msgstr "URL de l'onglet :"
 
 #: plugins/extratabs/www/index.php:139
 msgid "Add tab"
@@ -2182,12 +2182,12 @@ msgid ""
 "can only move them inside the set of extra tabs."
 msgstr ""
 "Vous pouvez déplacer et supprimer les onglets supplémentaires déjà ajoutés.  "
-"Note : ces onglets supplémentaires apparaissent forcément à droite des "
+"Note : ces onglets supplémentaires apparaissent forcément à droite des "
 "onglets standard, et ne peuvent être déplacés qu'entre eux."
 
 #: plugins/extratabs/www/index.php:159
 msgid "Tab to modify:"
-msgstr "Onglet à modifier :"
+msgstr "Onglet à modifier :"
 
 #: plugins/extratabs/www/index.php:172
 msgid "Move tab left"
@@ -2316,7 +2316,7 @@ msgstr "Forge partenaire ajoutée avec succès."
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:92
 msgid "Are you sure you want to delete this associated forge?"
-msgstr "Etes-vous sûr de vouloir supprimer cette forge partenaire ?"
+msgstr "Etes-vous sûr de vouloir supprimer cette forge partenaire ?"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:96
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:97
@@ -2535,7 +2535,7 @@ msgstr "Étiquettes de projet"
 #: plugins/projectlabels/www/index.php:25
 #, php-format
 msgid "Cannot insert new label: %s"
-msgstr "Échec lors de l'insertion d'une nouvelle étiquette : %s"
+msgstr "Échec lors de l'insertion d'une nouvelle étiquette : %s"
 
 #: plugins/projectlabels/www/index.php:28
 msgid "Project label added."
@@ -2545,7 +2545,7 @@ msgstr "Étiquette de projet ajoutée."
 #: plugins/projectlabels/www/index.php:47
 #, php-format
 msgid "Cannot delete label: %s"
-msgstr "Échec lors de la suppression d'une étiquette : %s"
+msgstr "Échec lors de la suppression d'une étiquette : %s"
 
 #: plugins/projectlabels/www/index.php:51
 msgid "Project label deleted."
@@ -2554,7 +2554,7 @@ msgstr "Étiquette de projet supprimée."
 #: plugins/projectlabels/www/index.php:66
 #, php-format
 msgid "Cannot add label onto project: %s"
-msgstr "Impossible d'ajouter une étiquette sur le projet : %s"
+msgstr "Impossible d'ajouter une étiquette sur le projet : %s"
 
 #: plugins/projectlabels/www/index.php:69
 msgid "The label has been added to the project."
@@ -2563,7 +2563,7 @@ msgstr "L'étiquette a été ajoutée au projet."
 #: plugins/projectlabels/www/index.php:80
 #, php-format
 msgid "Cannot remove label: %s"
-msgstr "Impossible d'enlever l'étiquette : %s"
+msgstr "Impossible d'enlever l'étiquette : %s"
 
 #: plugins/projectlabels/www/index.php:83
 msgid "The label has been removed from the project."
@@ -2572,7 +2572,7 @@ msgstr "L'étiquette a été enlevée du projet."
 #: plugins/projectlabels/www/index.php:97
 #, php-format
 msgid "Cannot modify label: %s"
-msgstr "Impossible de modifier l'étiquette : %s."
+msgstr "Impossible de modifier l'étiquette : %s."
 
 #: plugins/projectlabels/www/index.php:100
 msgid "Label has been saved."
@@ -2580,17 +2580,17 @@ msgstr "L'étiquette a été modifiée."
 
 #: plugins/projectlabels/www/index.php:114
 msgid "Label name:"
-msgstr "Nom de l'étiquette :"
+msgstr "Nom de l'étiquette :"
 
 #: plugins/projectlabels/www/index.php:116
 #: plugins/projectlabels/www/index.php:192
 msgid "Displayed text (or HTML) for the label:"
-msgstr "Texte (ou HTML) à afficher pour cette étiquette :"
+msgstr "Texte (ou HTML) à afficher pour cette étiquette :"
 
 #: plugins/projectlabels/www/index.php:119
 #: plugins/projectlabels/www/index.php:139
 msgid "This label currently looks like this:"
-msgstr "Cette étiquette a actuellement l'apparence suivante :"
+msgstr "Cette étiquette a actuellement l'apparence suivante :"
 
 #: plugins/projectlabels/www/index.php:120
 msgid "Save this label"
@@ -2607,8 +2607,8 @@ msgstr "Vous pouvez éditer les étiquettes déjà créées."
 #: plugins/projectlabels/www/index.php:147
 msgid "This label is used on the following group:"
 msgid_plural "This label is used on the following groups:"
-msgstr[0] "Cette étiquette est utilisée sur le groupe suivant :"
-msgstr[1] "Cette étiquette est utilisée sur les groupes suivants :"
+msgstr[0] "Cette étiquette est utilisée sur le groupe suivant :"
+msgstr[1] "Cette étiquette est utilisée sur les groupes suivants :"
 
 #: plugins/projectlabels/www/index.php:158
 msgid "[Remove this label]"
@@ -2620,7 +2620,7 @@ msgstr "Cette étiquette n'est utilisée sur aucun projet."
 
 #: plugins/projectlabels/www/index.php:165
 msgid "Unix name of the project:"
-msgstr "Nom Unix du projet :"
+msgstr "Nom Unix du projet :"
 
 #: plugins/projectlabels/www/index.php:168
 msgid "Add label to project"
@@ -2645,7 +2645,7 @@ msgstr ""
 
 #: plugins/projectlabels/www/index.php:190
 msgid "Name of the label:"
-msgstr "Nom de l'étiquette :"
+msgstr "Nom de l'étiquette :"
 
 #: plugins/projectlabels/www/index.php:191
 msgid "potm"
@@ -2653,7 +2653,7 @@ msgstr "pdm"
 
 #: plugins/projectlabels/www/index.php:194
 msgid "<p><b>Project of the month!</b></p>"
-msgstr "<p><b>Projet du mois !</b></p>"
+msgstr "<p><b>Projet du mois !</b></p>"
 
 #: plugins/projectlabels/www/index.php:196
 msgid "Add label"
@@ -2695,13 +2695,13 @@ msgstr "Modifier la hiérarchie"
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:211
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:221
 msgid "Select a project :"
-msgstr "Choisir un projet"
+msgstr "Choisir un projet :"
 
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:213
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:223
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:268
 msgid "Commentary :"
-msgstr "Commentaire"
+msgstr "Commentaire :"
 
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:215
 msgid "Add son project"
@@ -2751,7 +2751,7 @@ msgstr "Voulez-vous réellement autoriser ce projet ?"
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:319
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:376
 msgid "Commentary of father :"
-msgstr "Commentaire du projet parent"
+msgstr "Commentaire du projet parent :"
 
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:338
 msgid "Project's parent"
@@ -2812,7 +2812,7 @@ msgstr "Supprimer ce filtre"
 #: www/softwaremap/trove_list.php:195 www/trove/index.php:140
 #, php-format
 msgid "%1$s projects"
-msgstr "Projets en cours : %1$s"
+msgstr "Projets en cours : %1$s"
 
 #: plugins/projects_hierarchy/www/softwaremap.php:208
 #: www/softwaremap/trove_list.php:210 www/trove/index.php:83
@@ -3432,7 +3432,7 @@ msgid ""
 "<p>Documentation for Subversion (sometimes referred to as \"SVN\") is "
 "available <a href=\"http://svnbook.red-bean.com/\">here</a>.</p>"
 msgstr ""
-"<p>La documentation de Subversion (que l'on appelle parfois « SVN ») est "
+"<p>La documentation de Subversion (que l'on appelle parfois « SVN ») est "
 "disponible <a href=\"http://svnbook.red-bean.com/\">ici</a> (en anglais).</p>"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:81
@@ -3446,7 +3446,7 @@ msgstr ""
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:88
 msgid "The password is 'anonsvn'"
-msgstr "Le mot de passe à fournir est « anonsvn »."
+msgstr "Le mot de passe à fournir est « anonsvn »."
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:97
 msgid ""
@@ -3560,7 +3560,7 @@ msgid ""
 msgstr ""
 "Vous avez demandé une modification d'adresse e-mail pour votre compte sur %1"
 "$s.\n"
-"Veuillez visiter la page suivante pour que ce changement prenne effet :\n"
+"Veuillez visiter la page suivante pour que ce changement prenne effet :\n"
 "\n"
 "%2$s\n"
 "\n"
@@ -3612,7 +3612,7 @@ msgstr ""
 
 #: www/account/change_email.php:88
 msgid "New Email Address:"
-msgstr "Nouvelle adresse e-mail :"
+msgstr "Nouvelle adresse e-mail :"
 
 #: www/account/change_email.php:90
 msgid "Send Confirmation to New Address"
@@ -3676,7 +3676,7 @@ msgid ""
 "The following key has a wrong format: |%s|.  Please, correct it by going "
 "back to the previous page."
 msgstr ""
-"La clef suivante a un format invalide : |%s|.  Veuillez retourner la "
+"La clef suivante a un format invalide : |%s|.  Veuillez retourner la "
 "corriger sur la page précédente."
 
 #: www/account/editsshkeys.php:77
@@ -3707,7 +3707,7 @@ msgid ""
 "except between keys. After submitting, verify that the number of keys in "
 "your file is what you expected.</em>"
 msgstr ""
-"Clés autorisées :<br /><em>Important: Vérifiez qu'il n'y ait pas de retour à "
+"Clés autorisées :<br /><em>Important: Vérifiez qu'il n'y ait pas de retour à "
 "la ligne sauf pour séparer les différentes clés. Après avoir validé, "
 "vérifiez que le nombre de clés dans le fichier correspond bien à ce que vous "
 "attendiez.</em>"
@@ -3775,45 +3775,45 @@ msgstr "Éditer mon profil de compétences"
 
 #: www/account/index.php:119
 msgid "Member since:"
-msgstr "Membre depuis le :"
+msgstr "Membre depuis le :"
 
 #: www/account/index.php:123 www/admin/useredit.php:103
 msgid "User ID:"
-msgstr "Identifiant utilisateur :"
+msgstr "Identifiant utilisateur :"
 
 #: www/account/index.php:128 www/account/login.php:118
 #: www/account/lostpw.php:88 www/account/pending-resend.php:74
 #: www/account/verify.php:101
 msgid "Login name:"
-msgstr "Nom du compte :"
+msgstr "Nom du compte :"
 
 #: www/account/index.php:134 www/account/register.php:135
 msgid "First Name:"
-msgstr "Prénom :"
+msgstr "Prénom :"
 
 #: www/account/index.php:140 www/account/register.php:139
 msgid "Last Name:"
-msgstr "Nom de famille :"
+msgstr "Nom de famille :"
 
 #: www/account/index.php:146
 msgid "Language:"
-msgstr "Langue :"
+msgstr "Langue :"
 
 #: www/account/index.php:152 www/account/register.php:147
 msgid "Timezone:"
-msgstr "Fuseau horaire :"
+msgstr "Fuseau horaire :"
 
 #: www/account/index.php:158
 msgid "Theme:"
-msgstr "Thème :"
+msgstr "Thème :"
 
 #: www/account/index.php:164 www/account/register.php:155
 msgid "Country:"
-msgstr "Pays :"
+msgstr "Pays :"
 
 #: www/account/index.php:170
 msgid "Email Addr:"
-msgstr "Adresse e-mail :"
+msgstr "Adresse e-mail :"
 
 #: www/account/index.php:172
 msgid "Change Email Addr"
@@ -3823,26 +3823,26 @@ msgstr "Modifier mon adresse e-mail"
 #: www/account/register.php:174 www/account/register.php:178
 #: www/include/user_home.php:69
 msgid "Address:"
-msgstr "Adresse :"
+msgstr "Adresse :"
 
 #: www/account/index.php:187 www/account/register.php:182
 #: www/include/user_home.php:76
 msgid "Phone:"
-msgstr "Téléphone :"
+msgstr "Téléphone :"
 
 #: www/account/index.php:192 www/account/register.php:186
 #: www/include/user_home.php:83
 msgid "FAX:"
-msgstr "Fax :"
+msgstr "Fax :"
 
 #: www/account/index.php:197 www/account/register.php:131
 #: www/snippet/package.php:127
 msgid "Title:"
-msgstr "Titre :"
+msgstr "Titre :"
 
 #: www/account/index.php:204 www/account/register.php:165
 msgid "Jabber Address:"
-msgstr "Adresse Jabber :"
+msgstr "Adresse Jabber :"
 
 #: www/account/index.php:208 www/account/register.php:169
 msgid "Send auto-generated notices only to my Jabber address"
@@ -3957,11 +3957,11 @@ msgstr "Identifiant ou adresse de messagerie :"
 
 #: www/account/login.php:123 www/account/verify.php:105
 msgid "Password:"
-msgstr "Mot de passe :"
+msgstr "Mot de passe :"
 
 #: www/account/login.php:130
 msgid "[Lost your password?]"
-msgstr "[Perdu votre mot de passe ?]"
+msgstr "[Perdu votre mot de passe ?]"
 
 #: www/account/login.php:134
 msgid "[New Account]"
@@ -4033,7 +4033,7 @@ msgstr ""
 "e-mail. Si ce n'est pas vous ignorez ce message et rien ne se passera.\n"
 "\n"
 "Si vous avez demandé cette vérification, allez à l'URL suivante pour\n"
-"changer votre mot de passe :\n"
+"changer votre mot de passe :\n"
 "\n"
 "<%2$s>\n"
 "\n"
@@ -4107,7 +4107,7 @@ msgstr ""
 
 #: www/account/pending-resend.php:72 www/account/verify.php:99
 msgid "Login name or email address:"
-msgstr "Identifiant de connexion ou adresse de messagerie :"
+msgstr "Identifiant de connexion ou adresse de messagerie :"
 
 #: www/account/pending-resend.php:78 www/activity/index.php:160
 #: www/admin/admin_table.php:199 www/admin/cronman.php:45
@@ -4163,28 +4163,28 @@ msgid ""
 "Login Name (no uppercase letters; leave empty to have it generated "
 "automatically):"
 msgstr ""
-"Identifiant de connexion (en minuscules ; si vous laissez ce champ vide, un "
-"identifiant sera généré automatiquement) :"
+"Identifiant de connexion (en minuscules ; si vous laissez ce champ vide, un "
+"identifiant sera généré automatiquement) :"
 
 #: www/account/register.php:118
 msgid "Login Name (do not use uppercase letters):"
-msgstr "Nom du compte (ne pas utiliser de majuscules) :"
+msgstr "Nom du compte (ne pas utiliser de majuscules) :"
 
 #: www/account/register.php:123
 msgid "Password (min. 6 chars):"
-msgstr "Mot de passe (6 caractères minimum) :"
+msgstr "Mot de passe (6 caractères minimum) :"
 
 #: www/account/register.php:127
 msgid "Password (repeat):"
-msgstr "Mot de passe (confirmez) :"
+msgstr "Mot de passe (confirmez) :"
 
 #: www/account/register.php:143
 msgid "Language Choice:"
-msgstr "Langue :"
+msgstr "Langue :"
 
 #: www/account/register.php:151
 msgid "Theme"
-msgstr "Thème :"
+msgstr "Thème :"
 
 #: www/account/register.php:159
 #, php-format
@@ -4202,7 +4202,7 @@ msgstr ""
 #, php-format
 msgid "Do you accept the <a href=\"%1$s\">terms of use</a> for this site?"
 msgstr ""
-"Acceptez-vous les <a href=\"%1$s\">conditions d'utilisation</a> de ce site ?"
+"Acceptez-vous les <a href=\"%1$s\">conditions d'utilisation</a> de ce site ?"
 
 #: www/account/register.php:205
 #, php-format
@@ -4385,7 +4385,7 @@ msgstr "Article de forum"
 #: www/admin/admin_table.php:40
 #, php-format
 msgid "Create a new %1$s below:"
-msgstr "Créer un(e) nouveau(elle) %1$s ci-dessous :"
+msgstr "Créer un(e) nouveau(elle) %1$s ci-dessous :"
 
 #: www/admin/admin_table.php:54 www/admin/database.php:174
 #: www/admin/trove/trove_cat_add.php:126 www/admin/trove/trove_cat_list.php:41
@@ -4431,7 +4431,7 @@ msgstr ""
 #: www/admin/admin_table.php:135
 #, php-format
 msgid "Are you sure you want to delete this %1$s?"
-msgstr "Etes-vous sûr de vouloir supprimer ce(tte) %1$s ?"
+msgstr "Etes-vous sûr de vouloir supprimer ce(tte) %1$s ?"
 
 #: www/admin/admin_table.php:161
 #, php-format
@@ -4441,7 +4441,7 @@ msgstr "%1$s supprimé(e) avec succès."
 #: www/admin/admin_table.php:181
 #, php-format
 msgid "Modify the %1$s below:"
-msgstr "Modifier le(la) %1$s ci-dessous :"
+msgstr "Modifier le(la) %1$s ci-dessous :"
 
 #: www/admin/admin_table.php:229
 #, php-format
@@ -4471,7 +4471,7 @@ msgstr "Modifier"
 #: www/admin/admin_table.php:297 www/admin/admin_table.php:299
 #, php-format
 msgid "Edit the %1$ss Table"
-msgstr "Modifier la table : %1$s"
+msgstr "Modifier la table : %1$s"
 
 #: www/admin/approve-pending.php:46
 msgid "Error creating group object"
@@ -4480,7 +4480,7 @@ msgstr "Erreur lors de la création d'un objet groupe"
 #: www/admin/approve-pending.php:53
 #, php-format
 msgid "Approving Group: %1$s"
-msgstr "Projet approuvé : %1$s"
+msgstr "Projet approuvé : %1$s"
 
 #: www/admin/approve-pending.php:101
 msgid "Error during group rejection"
@@ -4500,7 +4500,7 @@ msgstr "Il n'y a pas de projet en attente d'approbation."
 
 #: www/admin/approve-pending.php:140 www/admin/approve-pending.php:142
 msgid "Pending projects:"
-msgstr "Projets en attente :"
+msgstr "Projets en attente :"
 
 #: www/admin/approve-pending.php:151
 msgid "[Edit Project Details]"
@@ -4541,15 +4541,15 @@ msgstr "Rejeter"
 
 #: www/admin/approve-pending.php:185
 msgid "License:"
-msgstr "Licence :"
+msgstr "Licence :"
 
 #: www/admin/approve-pending.php:191 www/admin/groupedit.php:166
 msgid "Home Box:"
-msgstr "Serveur shell :"
+msgstr "Serveur shell :"
 
 #: www/admin/approve-pending.php:195 www/admin/groupedit.php:176
 msgid "HTTP Domain:"
-msgstr "Domaine HTTP :"
+msgstr "Domaine HTTP :"
 
 #: www/admin/approve-pending.php:203
 msgid "Other Information"
@@ -4557,19 +4557,19 @@ msgstr "Autres informations"
 
 #: www/admin/approve-pending.php:204 www/admin/groupedit.php:153
 msgid "Unix Group Name:"
-msgstr "Nom Unix du groupe :"
+msgstr "Nom Unix du groupe :"
 
 #: www/admin/approve-pending.php:206
 msgid "Submitted Description:"
-msgstr "Description proposée :"
+msgstr "Description proposée :"
 
 #: www/admin/approve-pending.php:209
 msgid "License Other:"
-msgstr "Autre licence :"
+msgstr "Autre licence :"
 
 #: www/admin/approve-pending.php:213
 msgid "Pending reason:"
-msgstr "Motif de l'attente :"
+msgstr "Motif de l'attente :"
 
 #: www/admin/approve-pending.php:224
 #, php-format
@@ -4683,7 +4683,7 @@ msgstr "Impossible d'insérer une base de donnée déjà active"
 
 #: www/admin/database.php:90
 msgid "Site Admin: Groups' DB Maintenance"
-msgstr "Administration du site : gestion des bases de données des groupes"
+msgstr "Administration du site : gestion des bases de données des groupes"
 
 #: www/admin/database.php:101
 msgid "Statistics for Project Databases"
@@ -4713,7 +4713,7 @@ msgstr "Aucune base de donnée définie"
 
 #: www/admin/database.php:134
 msgid "Displaying Databases of Type:"
-msgstr "Voir les base de données du type :"
+msgstr "Voir les base de données du type :"
 
 #: www/admin/database.php:157
 msgid "Add an already active database"
@@ -4721,7 +4721,7 @@ msgstr "Ajouter une base de données déjà active"
 
 #: www/admin/database.php:164
 msgid "Group Unix Name:"
-msgstr "Nom de groupe Unix :"
+msgstr "Nom de groupe Unix :"
 
 #: www/admin/groupdelete.php:52 www/admin/groupedit.php:93
 msgid "Permanently Delete Project"
@@ -4747,7 +4747,7 @@ msgstr "Courrier contenant les instructions envoyé"
 
 #: www/admin/groupedit.php:88
 msgid "Site Admin: Group Info"
-msgstr "Administration du site : Informations sur le groupe"
+msgstr "Administration du site : Informations sur le groupe"
 
 #: www/admin/groupedit.php:92 www/admin/useredit.php:258
 msgid "[Project Admin]"
@@ -4775,15 +4775,15 @@ msgstr "Suspendu (H)"
 
 #: www/admin/groupedit.php:132 www/admin/grouplist.php:86
 msgid "Public?"
-msgstr "Public ?"
+msgstr "Public ?"
 
 #: www/admin/groupedit.php:185
 msgid "Registration Application:"
-msgstr "Demande d'inscription :"
+msgstr "Demande d'inscription :"
 
 #: www/admin/groupedit.php:195
 msgid "SCM Box:"
-msgstr "Serveur de sources :"
+msgstr "Serveur de sources :"
 
 #: www/admin/groupedit.php:207
 msgid "Resend New Project Instruction Email"
@@ -4796,11 +4796,11 @@ msgstr "Liste des groupes"
 
 #: www/admin/grouplist.php:46
 msgid "Groups that begin with"
-msgstr "Groupes commençant par :"
+msgstr "Groupes commençant par :"
 
 #: www/admin/grouplist.php:66
 msgid "Group List for Category:"
-msgstr "Liste des groupes de la catégorie :"
+msgstr "Liste des groupes de la catégorie :"
 
 #: www/admin/grouplist.php:82
 msgid "Group Name (click to edit)"
@@ -4831,7 +4831,7 @@ msgstr "Gestion des utilisateurs"
 #: www/admin/index.php:47
 #, php-format
 msgid "Active site users: <strong>%1$s</strong>"
-msgstr "Utilisateurs actifs : <strong>%1$s</strong>"
+msgstr "Utilisateurs actifs : <strong>%1$s</strong>"
 
 #: www/admin/index.php:51
 msgid "Display Full User List/Edit Users"
@@ -4839,7 +4839,7 @@ msgstr "Afficher/Éditer les utilisateurs"
 
 #: www/admin/index.php:53
 msgid "Display Users Beginning with :"
-msgstr "Afficher les utilisateurs commençant par :&nbsp;"
+msgstr "Afficher les utilisateurs commençant par :"
 
 #: www/admin/index.php:60
 msgid "Search <em>(userid, username, realname, email)</em>"
@@ -4862,17 +4862,17 @@ msgstr "Gestion des projets"
 #: www/admin/index.php:80
 #, php-format
 msgid "Registered projects: <strong>%1$s</strong>"
-msgstr "Projets enregistrés : <strong>%1$s</strong>"
+msgstr "Projets enregistrés : <strong>%1$s</strong>"
 
 #: www/admin/index.php:87
 #, php-format
 msgid "Active projects: <strong>%1$s</strong>"
-msgstr "Projets actifs : <strong>%1$s</strong>"
+msgstr "Projets actifs : <strong>%1$s</strong>"
 
 #: www/admin/index.php:94
 #, php-format
 msgid "Pending projects: <strong>%1$s</strong>"
-msgstr "Projets en attente : <strong>%1$s</strong>"
+msgstr "Projets en attente : <strong>%1$s</strong>"
 
 #: www/admin/index.php:98
 msgid "Display Full Project List/Edit Projects"
@@ -4880,7 +4880,7 @@ msgstr "Afficher la liste complète des projets ou éditer les projets"
 
 #: www/admin/index.php:100
 msgid "Display Projects Beginning with :"
-msgstr "Afficher les projets commençant par :"
+msgstr "Afficher les projets commençant par :"
 
 #: www/admin/index.php:107
 msgid "Search <em>(groupid, group unix name, full name)</em>"
@@ -4990,21 +4990,21 @@ msgstr "Administration de la base de données du projet"
 #: www/admin/massmail.php:45
 msgid "Missing parameter, You must select target audience for mailing"
 msgstr ""
-"Paramètre manquant : vous devez indiquer à qui le message doit être adressé."
+"Paramètre manquant : vous devez indiquer à qui le message doit être adressé."
 
 #: www/admin/massmail.php:52
 msgid "Missing parameter, You are trying to send empty message"
-msgstr "Paramètre manquant : vous essayez d'envoyer un message vide."
+msgstr "Paramètre manquant : vous essayez d'envoyer un message vide."
 
 #: www/admin/massmail.php:59
 msgid "Missing parameter, You must give proper subject to the mailing"
-msgstr "Paramètre manquant : vous devez donner un sujet approprié au message."
+msgstr "Paramètre manquant : vous devez donner un sujet approprié au message."
 
 #: www/admin/massmail.php:75
 msgid "Error Scheduling Mailing, Could not schedule mailing, database error:"
 msgstr ""
 "Erreur de programmation de courrier. Impossible de programmer le courrier, "
-"erreur de base de données :"
+"erreur de base de données :"
 
 #: www/admin/massmail.php:79 www/admin/massmail.php:85
 msgid "Massmail admin"
@@ -5024,7 +5024,7 @@ msgid ""
 "submitting it WILL lead to sending email to lots of users."
 msgstr ""
 "Faites <span class=\"important\">TRÈS</span> attention lorsque vous utilisez "
-"ce formulaire ; il envoie des courriers électroniques à de nombreux "
+"ce formulaire ; il envoie des courriers électroniques à de nombreux "
 "utilisateurs."
 
 #: www/admin/massmail.php:108
@@ -5033,11 +5033,11 @@ msgstr "(choisir)"
 
 #: www/admin/massmail.php:109
 msgid "Subscribers to \"Site Updates\""
-msgstr "Abonnés aux « mises à jour du site »"
+msgstr "Abonnés aux « mises à jour du site »"
 
 #: www/admin/massmail.php:110
 msgid "Subscribers to \"Additional Community Mailings\""
-msgstr "Abonnés aux « messages additionnels concernant la communauté »"
+msgstr "Abonnés aux « messages additionnels concernant la communauté »"
 
 #: www/admin/massmail.php:111
 msgid "All Project Developers"
@@ -5175,7 +5175,7 @@ msgstr "Action"
 
 #: www/admin/pluginman.php:188
 msgid "Run Init Script?"
-msgstr "Lancer le script d'initialisation ?"
+msgstr "Lancer le script d'initialisation ?"
 
 #: www/admin/pluginman.php:189
 msgid "Users Using it"
@@ -5208,11 +5208,11 @@ msgstr "Éditer les réponses de refus."
 #: www/admin/responses_admin.php:37
 #, php-format
 msgid "You can't %1$s \\\"None\\\"!"
-msgstr "L'action « %1$s » ne s'applique pas."
+msgstr "L'action « %1$s » ne s'applique pas."
 
 #: www/admin/responses_admin.php:43
 msgid "Existing Responses:"
-msgstr "Réponses existantes :"
+msgstr "Réponses existantes :"
 
 #: www/admin/responses_admin.php:52
 msgid "Yes, I'm sure"
@@ -5224,7 +5224,7 @@ msgstr "Réponse modifiée"
 
 #: www/admin/responses_admin.php:85
 msgid "Edit Response:"
-msgstr "Éditer la réponse :"
+msgstr "Éditer la réponse :"
 
 #: www/admin/responses_admin.php:87 www/admin/responses_admin.php:128
 msgid "Response Title:"
@@ -5244,7 +5244,7 @@ msgstr "Réponse effacée"
 
 #: www/admin/responses_admin.php:111
 msgid "If you're aren't sure then why did you click 'Delete'?"
-msgstr "Si vous n'êtes pas sûr, pourquoi avoir cliqué sur « Supprimer » ?"
+msgstr "Si vous n'êtes pas sûr, pourquoi avoir cliqué sur « Supprimer » ?"
 
 #: www/admin/responses_admin.php:112
 msgid "By the way, I didn't delete... just in case..."
@@ -5256,7 +5256,7 @@ msgstr "Réponse ajoutée"
 
 #: www/admin/responses_admin.php:126
 msgid "Create New Response:"
-msgstr "Créer une nouvelle réponse :"
+msgstr "Créer une nouvelle réponse :"
 
 #: www/admin/responses_admin.php:133 www/project/admin/database.php:186
 #: www/project/admin/vhost.php:119
@@ -5281,9 +5281,9 @@ msgstr "Résultats de recherche"
 msgid "User search with criteria <em>%1$s</em>: %2$s match"
 msgid_plural "User search with criteria <em>%1$s</em>: %2$s matches"
 msgstr[0] ""
-"Recherche d'utilisateurs selon les critères <em>%1$s</em> : %2$s résultat"
+"Recherche d'utilisateurs selon les critères <em>%1$s</em> : %2$s résultat"
 msgstr[1] ""
-"Recherche d'utilisateurs selon les critères <em>%1$s</em> : %2$s résultats"
+"Recherche d'utilisateurs selon les critères <em>%1$s</em> : %2$s résultats"
 
 #: www/admin/search.php:93 www/admin/unsubscribe.php:130
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:32
@@ -5312,9 +5312,9 @@ msgstr "Membre depuis le"
 msgid "Group search with criteria <em>%s</em>: %d match"
 msgid_plural "Group search with criteria <em>%s</em>: %d matches"
 msgstr[0] ""
-"Recherche de groupes selon les critères <em>%1$s</em> : %2$s résultat"
+"Recherche de groupes selon les critères <em>%1$s</em> : %2$s résultat"
 msgstr[1] ""
-"Recherche de groupes selon les critères <em>%1$s</em> : %2$s résultats"
+"Recherche de groupes selon les critères <em>%1$s</em> : %2$s résultats"
 
 #: www/admin/search.php:165
 msgid "Full Name"
@@ -5332,7 +5332,7 @@ msgstr "Erreur lors d'une opération sur l'arbre"
 
 #: www/admin/trove/trove_cat_add.php:80 www/trove/admin/trove_cat_add.php:50
 msgid "Site Admin: Trove - Add Node"
-msgstr "Administration du site : Ajouter un noeud à l'arbre"
+msgstr "Administration du site : Ajouter un noeud à l'arbre"
 
 #: www/admin/trove/trove_cat_add.php:83 www/trove/admin/trove_cat_add.php:53
 msgid "Add New Trove Category"
@@ -5359,14 +5359,14 @@ msgstr "Description de la nouvelle catégorie (VARCHAR 255)"
 
 #: www/admin/trove/trove_cat_edit.php:48
 msgid "Error: a category can't be the same as its own parent."
-msgstr "Erreur : une catégorie ne peut être son propre parent."
+msgstr "Erreur : une catégorie ne peut être son propre parent."
 
 #: www/admin/trove/trove_cat_edit.php:97
 msgid ""
 "Error In Trove Operation, can't delete trove category define as default in "
 "local.inc"
 msgstr ""
-"Erreur lors d'une opération sur l'arbre : il est impossible de supprimer la "
+"Erreur lors d'une opération sur l'arbre : il est impossible de supprimer la "
 "catégorie par défaut définie dans <i>local.inc</i>"
 
 #: www/admin/trove/trove_cat_edit.php:113
@@ -5376,7 +5376,7 @@ msgstr "Cette catégorie n'existe pas"
 #: www/admin/trove/trove_cat_edit.php:117
 #: www/trove/admin/trove_cat_edit.php:81
 msgid "Site Admin: Trove - Edit Category"
-msgstr "Administration du site : Éditer une branche"
+msgstr "Administration du site : Éditer une branche"
 
 #: www/admin/trove/trove_cat_edit.php:120
 msgid "Edit Trove Category"
@@ -5384,12 +5384,12 @@ msgstr "Éditer une branche"
 
 #: www/admin/trove/trove_cat_edit.php:124
 msgid "Parent Category:"
-msgstr "Catégorie mère :"
+msgstr "Catégorie mère :"
 
 #: www/admin/trove/trove_cat_list.php:64 www/trove/admin/trove_cat_edit.php:75
 #: www/trove/admin/trove_cat_list.php:54
 msgid "Site Admin: Trove - Category List"
-msgstr "Administration du site : Liste des catégories de l'arbre"
+msgstr "Administration du site : Liste des catégories de l'arbre"
 
 #: www/admin/trove/trove_cat_list.php:68 www/trove/admin/trove_cat_list.php:58
 msgid "Browse Trove Tree"
@@ -5437,7 +5437,7 @@ msgstr "Désabonnement"
 
 #: www/admin/unsubscribe.php:81
 msgid "Error, Could not unsubscribe user:"
-msgstr "Erreur, impossible de désabonner l'utilisateur :"
+msgstr "Erreur, impossible de désabonner l'utilisateur :"
 
 #: www/admin/unsubscribe.php:85
 msgid "User unsubscribed"
@@ -5455,7 +5455,7 @@ msgstr ""
 "Utilisez le champ ci-dessous pour trouver des utilisateurs correspondant à "
 "un critère donné portant sur le nom d'utilisateur %1$s, le nom complet, ou "
 "l'adresse email.  La recherche porte sur des sous-chaînes, et il est "
-"possible d'utiliser « %% » pour chercher une sous-chaîne quelconque.  Cliquez "
+"possible d'utiliser « %% » pour chercher une sous-chaîne quelconque.  Cliquez "
 "sur un nom d'utilisateur pour le désabonner des envois de messages en masse."
 
 #: www/admin/unsubscribe.php:103
@@ -5464,7 +5464,7 @@ msgstr "Montrer les utilisateurs correspondant au motif"
 
 #: www/admin/unsubscribe.php:129
 msgid "user_id"
-msgstr "Identifiant utilisateur :"
+msgstr "Identifiant utilisateur :"
 
 #: www/admin/unsubscribe.php:133
 msgid "Site Mail."
@@ -5494,7 +5494,7 @@ msgstr "Impossible de terminer l'opération"
 
 #: www/admin/useredit.php:91
 msgid "Site Admin: User Info"
-msgstr "Administration du site : Informations Utilisateur"
+msgstr "Administration du site : Informations Utilisateur"
 
 #: www/admin/useredit.php:94
 msgid "Account Information"
@@ -5502,11 +5502,11 @@ msgstr "Informations du compte"
 
 #: www/admin/useredit.php:112
 msgid "User name:"
-msgstr "Nom d'utilisateur :"
+msgstr "Nom d'utilisateur :"
 
 #: www/admin/useredit.php:130
 msgid "Web account status"
-msgstr "Statut du compte Web :"
+msgstr "Statut du compte Web :"
 
 #: www/admin/useredit.php:160
 msgid "Unix Account Status"
@@ -5514,15 +5514,15 @@ msgstr "Statut du compte Unix"
 
 #: www/admin/useredit.php:169
 msgid "Unix Shell:"
-msgstr "Shell Unix :"
+msgstr "Shell Unix :"
 
 #: www/admin/useredit.php:183
 msgid "Email:"
-msgstr "E-mail :"
+msgstr "E-mail :"
 
 #: www/admin/useredit.php:192
 msgid "Current confirm hash:"
-msgstr "Clé de confirmation actuelle :"
+msgstr "Clé de confirmation actuelle :"
 
 #: www/admin/useredit.php:200
 msgid "I want to delete this user"
@@ -5605,7 +5605,7 @@ msgstr "[Suspendre]"
 
 #: www/admin/userlist.php:139
 msgid "User list for group:"
-msgstr "Liste des membres de ce groupe :&nbsp;"
+msgstr "Liste des membres de ce groupe :"
 
 #: www/admin/userlist.php:143
 msgid "All Groups"
@@ -5613,11 +5613,11 @@ msgstr "Tous les groupes"
 
 #: www/admin/vhost.php:75
 msgid "Error adding VHOST:"
-msgstr "Erreur lors de l'ajout de l'hôte virtuel :"
+msgstr "Erreur lors de l'ajout de l'hôte virtuel :"
 
 #: www/admin/vhost.php:77 www/admin/vhost.php:147
 msgid "Virtual Host:"
-msgstr "Hôte virtuel :"
+msgstr "Hôte virtuel :"
 
 #: www/admin/vhost.php:77
 msgid "scheduled for creation on group"
@@ -5629,7 +5629,7 @@ msgstr "Le nom de groupe fourni n'existe pas"
 
 #: www/admin/vhost.php:105
 msgid "Error updating VHOST entry:"
-msgstr "Erreur lors de la mise à jour de l'hôte virtuel :"
+msgstr "Erreur lors de la mise à jour de l'hôte virtuel :"
 
 #: www/admin/vhost.php:107
 msgid "Virtual Host entry updated."
@@ -5661,7 +5661,7 @@ msgstr "Obtenir les informations"
 
 #: www/admin/vhost.php:173
 msgid "Update Record:"
-msgstr "Mettre à jour l'enregistrement :"
+msgstr "Mettre à jour l'enregistrement :"
 
 #: www/admin/vhost.php:176
 msgid "VHOST ID"
@@ -5681,7 +5681,7 @@ msgstr "Répertoire CGI"
 
 #: www/admin/vhost.php:199
 msgid "No such VHOST:"
-msgstr "Aucun hôte virtuel correspondant :"
+msgstr "Aucun hôte virtuel correspondant :"
 
 #: www/developer/diary.php:37 www/my/diary.php:167
 msgid "My Diary And Notes"
@@ -5802,7 +5802,7 @@ msgstr "Créé avec succès"
 #: www/docman/admin/index.php:179 www/docman/admin/index.php:334
 #: www/docman/admin/index.php:414 www/docman/admin/index.php:448
 msgid "Document Manager Administration"
-msgstr "Gestionnaire de documents : Administration"
+msgstr "Gestionnaire de documents : Administration"
 
 #: www/docman/admin/index.php:179
 msgid "Edit Docs"
@@ -5814,9 +5814,9 @@ msgid ""
 "the document (e.g. How to use the download server)<br /><strong>Description:"
 "</strong> A brief description to be placed just under the title."
 msgstr ""
-"<strong>Titre du document</strong> : se rapporte au titre (relativement "
-"bref) du document  (par exemple : Comment utiliser le serveur de "
-"téléchargement)<br /><strong>Description</strong> : une brève description "
+"<strong>Titre du document</strong> : se rapporte au titre (relativement "
+"bref) du document  (par exemple : Comment utiliser le serveur de "
+"téléchargement)<br /><strong>Description</strong> : une brève description "
 "placée juste en dessous du titre."
 
 #: www/docman/admin/index.php:190 www/docman/new.php:128
@@ -5866,7 +5866,7 @@ msgstr "OU spécifier une URL externe pour le fichier"
 
 #: www/docman/admin/index.php:303
 msgid "OPTIONAL: Upload new file"
-msgstr "Optionnel : Uploader un nouveau fichier"
+msgstr "Optionnel : Uploader un nouveau fichier"
 
 #: www/docman/admin/index.php:319
 msgid "Submit Edit"
@@ -5941,7 +5941,7 @@ msgstr "Projet %s"
 
 #: www/docman/admin/index.php:485 www/docman/admin/index.php:488
 msgid "Document Manager: Administration"
-msgstr "Gestionnaire de documents : Administration"
+msgstr "Gestionnaire de documents : Administration"
 
 #: www/docman/admin/index.php:490
 msgid "Add/Edit Document Groups"
@@ -5964,7 +5964,7 @@ msgstr "Pas de données dans le document"
 #: www/docman/display_doc.php:38 www/docman/view.php:60
 msgid "No document to display - invalid or inactive document number."
 msgstr ""
-"Aucun document à afficher : le numéro de document est invalide, ou "
+"Aucun document à afficher : le numéro de document est invalide, ou "
 "correspond à un document inactif."
 
 #: www/docman/include/doc_utils.php:64
@@ -6001,7 +6001,7 @@ msgstr "octets"
 
 #: www/docman/index.php:110 www/docman/search.php:75
 msgid "Document Manager: Display Document"
-msgstr "Gestionnaire de documents : affichage d'un document"
+msgstr "Gestionnaire de documents : affichage d'un document"
 
 #: www/docman/index.php:110 www/docman/new.php:122 www/docman/search.php:75
 #, php-format
@@ -6034,7 +6034,7 @@ msgstr "Le document a été soumis avec succès"
 
 #: www/docman/new.php:122
 msgid "Document Manager: Submit New Documentation"
-msgstr "Gestionnaire de documents : Soumettre un nouveau document"
+msgstr "Gestionnaire de documents : Soumettre un nouveau document"
 
 #: www/docman/new.php:142
 msgid "Upload File"
@@ -6159,17 +6159,17 @@ msgstr ""
 #: www/forum/admin/attachments.php:50 www/forum/admin/index.php:342
 #: www/forum/admin/pending.php:53 www/forum/admin/pending.php:74
 msgid "Forums: Administration"
-msgstr "Forums : Administration"
+msgstr "Forums : Administration"
 
 #: www/forum/admin/index.php:95 www/forum/admin/index.php:150
 #: www/mail/admin/index.php:167 www/mail/admin/index.php:198
 #: www/pm/admin/index.php:292 www/pm/admin/index.php:336
 msgid "Is Public?"
-msgstr "Public ?"
+msgstr "Public ?"
 
 #: www/forum/admin/index.php:99 www/forum/admin/index.php:145
 msgid "Allow Anonymous Posts?"
-msgstr "Messages anonymes autorisés ?"
+msgstr "Messages anonymes autorisés ?"
 
 #: www/forum/admin/index.php:103 www/forum/admin/index.php:155
 #: www/forum/index.php:74
@@ -6200,7 +6200,7 @@ msgstr "Pour modérer TOUS les articles."
 
 #: www/forum/admin/index.php:106 www/forum/admin/index.php:162
 msgid "Email All Posts To:"
-msgstr "Adresser tous les messages à :"
+msgstr "Adresser tous les messages à :"
 
 #: www/forum/admin/index.php:109
 msgid "Add This Forum"
@@ -6229,7 +6229,7 @@ msgid ""
 "all its contents!"
 msgstr ""
 "Vous êtes sur le point de supprimer irrémediablement ce forum ainsi que tout "
-"son contenu !"
+"son contenu !"
 
 #: www/forum/admin/index.php:192 www/frs/admin/deletepackage.php:71
 #: www/frs/admin/deleterelease.php:79 www/frs/admin/editrelease.php:399
@@ -6255,8 +6255,8 @@ msgid ""
 "WARNING! You are about to permanently delete a message and all of its "
 "followups!!"
 msgstr ""
-"ATTENTION ! Vous allez détruire un message et tous les messages qui lui sont "
-"rattachés !!"
+"ATTENTION ! Vous allez détruire un message et tous les messages qui lui sont "
+"rattachés !!"
 
 #: www/forum/admin/index.php:268
 msgid "Error getting new forum message"
@@ -6320,7 +6320,7 @@ msgstr "La pièce jointe n'existe pas."
 
 #: www/forum/forum.php:47
 msgid "Error forum not found "
-msgstr "Erreur : aucun forum trouvé"
+msgstr "Erreur : aucun forum trouvé"
 
 #: www/forum/forum.php:80 www/forum/message.php:71
 msgid "Error getting new ForumMessage"
@@ -6454,7 +6454,7 @@ msgstr "Fichier publié avec succès"
 
 #: www/forum/include/ForumHTML.class.php:58
 msgid "Error - this news item was not found"
-msgstr "Erreur : cette annonce n'a pas été trouvée"
+msgstr "Erreur : cette annonce n'a pas été trouvée"
 
 #: www/forum/include/ForumHTML.class.php:66
 #: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:36
@@ -6481,7 +6481,7 @@ msgstr "Résumé"
 
 #: www/forum/include/ForumHTML.class.php:99
 msgid "Discussion Forums:"
-msgstr "Forums de discussion :"
+msgstr "Forums de discussion :"
 
 #: www/forum/include/ForumHTML.class.php:121
 msgid "Stop Monitoring"
@@ -6507,7 +6507,7 @@ msgstr "Voici le contenu du message en attente"
 #: www/forum/include/ForumHTML.class.php:187
 #: www/forum/include/ForumHTML.class.php:239
 msgid "By:"
-msgstr "Par :"
+msgstr "Par :"
 
 #: www/forum/include/ForumHTML.class.php:244
 msgid "reply"
@@ -6521,7 +6521,7 @@ msgstr "Fichier actuel"
 #: www/forum/include/ForumHTML.class.php:323
 msgid "Use the \"Browse\" button to find the file you want to attach"
 msgstr ""
-"Utiliser le bouton « Parcourir » pour trouver le fichier que vous voulez "
+"Utiliser le bouton « Parcourir » pour trouver le fichier que vous voulez "
 "joindre"
 
 #: www/forum/include/ForumHTML.class.php:293
@@ -6531,17 +6531,17 @@ msgstr "Fichier à publier"
 
 #: www/forum/include/ForumHTML.class.php:296
 msgid "Warning : Current file will be deleted permanently"
-msgstr "Attention : le fichier actuel sera supprimé e manière permanente"
+msgstr "Attention : le fichier actuel sera supprimé e manière permanente"
 
 #: www/forum/include/ForumHTML.class.php:484
 #: www/forum/include/ForumHTML.class.php:555
 msgid "Subject:"
-msgstr "Sujet :"
+msgstr "Sujet :"
 
 #: www/forum/include/ForumHTML.class.php:488
 #: www/forum/include/ForumHTML.class.php:559
 msgid "Message:"
-msgstr "Message :"
+msgstr "Message :"
 
 #: www/forum/include/ForumHTML.class.php:576
 msgid "HTML tags will display in your post as text"
@@ -6681,7 +6681,7 @@ msgid ""
 "its releases and files!"
 msgstr ""
 "Vous êtes sur le point de supprimer irrémédiablement ce paquet, toutes ses "
-"versions et tous ses fichiers !"
+"versions et tous ses fichiers !"
 
 #: www/frs/admin/deleterelease.php:77
 msgid ""
@@ -6689,7 +6689,7 @@ msgid ""
 "files!"
 msgstr ""
 "Vous êtes sur le point de supprimer irrémédiablement cette version et tous "
-"ses fichiers !"
+"ses fichiers !"
 
 #: www/frs/admin/editrelease.php:104
 msgid "Release Notes Are not in Text"
@@ -6792,7 +6792,7 @@ msgid ""
 "NOTE: In some browsers you must select the file in the file-upload dialog "
 "and click \"OK\".  Double-clicking doesn't register the file."
 msgstr ""
-"Note : dans certains navigateurs, le double-clic ne suffit pas pour "
+"Note : dans certains navigateurs, le double-clic ne suffit pas pour "
 "sélectionner un fichier, et il est nécessaire de cliquer sur le bouton \"OK"
 "\"."
 
@@ -6807,7 +6807,7 @@ msgstr "Vous pouvez également utiliser FTP pour uploader un fichier sur %1$s"
 
 #: www/frs/admin/editrelease.php:318 www/frs/admin/qrs.php:233
 msgid "Choose an FTP file instead of uploading:"
-msgstr "Choisissez un fichier FTP plutôt qu'utiliser l'upload :"
+msgstr "Choisissez un fichier FTP plutôt qu'utiliser l'upload :"
 
 #: www/frs/admin/editrelease.php:327 www/frs/admin/qrs.php:244
 msgid "File Type"
@@ -6977,7 +6977,7 @@ msgstr "Vous devez sélectionner un type de microprocesseur"
 #: www/frs/admin/qrs.php:132
 msgid "File Released: You May Choose To Edit the Release Now"
 msgstr ""
-"Fichier mis à jour : vous pouvez maintenant choisir d'éditer la version."
+"Fichier mis à jour : vous pouvez maintenant choisir d'éditer la version."
 
 #: www/frs/admin/qrs.php:134 www/frs/admin/qrs.php:173
 msgid "Quick Release System"
@@ -7164,16 +7164,16 @@ msgstr "Remarques sur les révisions"
 
 #: www/frs/shownotes.php:56 www/frs/shownotes.php:72
 msgid "Notes:"
-msgstr "Notes :"
+msgstr "Notes :"
 
 #: www/frs/shownotes.php:58
 msgid "Release Name:"
-msgstr "Nom de version :"
+msgstr "Nom de version :"
 
 #: www/frs/shownotes.php:75 www/snippet/addversion.php:86
 #: www/snippet/addversion.php:211
 msgid "Changes:"
-msgstr "Changements :"
+msgstr "Changements :"
 
 #: www/help/index.php:31
 msgid "Page Information"
@@ -7293,14 +7293,14 @@ msgid ""
 "will also get emails for those reasons as well!"
 msgstr ""
 "Vous pouvez surveiller cet objet, ou cesser la surveillance, en cliquant sur "
-"le bouton « Surveiller ».<br/><br/><strong>Note :</strong> surveiller un "
+"le bouton « Surveiller ».<br/><br/><strong>Note :</strong> surveiller un "
 "objet vous enverra des messages email supplémentaires si vous ajoutez des "
 "commentaires, ou si cet objet vous est affecté, ou si c'est vous qui l'avez "
 "créé."
 
 #: www/help/tracker.php:78
 msgid "UNKNOWN HELP REQUEST:"
-msgstr "Aide inconnue :"
+msgstr "Aide inconnue :"
 
 #: www/help/trove_cat.php:38
 msgid "No such trove category"
@@ -7328,41 +7328,41 @@ msgstr "a écrit"
 
 #: www/include/BBCodeSupportHtml.class.php:43
 msgid "Bold text: [b]text[/b]  (alt+b)"
-msgstr "Texte en gras : [b]texte[/b] (alt+b)"
+msgstr "Texte en gras : [b]texte[/b] (alt+b)"
 
 #: www/include/BBCodeSupportHtml.class.php:44
 msgid "Italic text: [i]text[/i]  (alt+i)"
-msgstr "Texte en italique : [i]texte[/i] (alt+i)"
+msgstr "Texte en italique : [i]texte[/i] (alt+i)"
 
 #: www/include/BBCodeSupportHtml.class.php:45
 msgid "Underline text: [u]text[/u]  (alt+u)"
-msgstr "Texte souligné : [u]texte[/u] (alt+u)"
+msgstr "Texte souligné : [u]texte[/u] (alt+u)"
 
 #: www/include/BBCodeSupportHtml.class.php:46
 msgid "Quote text : [quote]text[/quote]  (alt+q)"
-msgstr "Citation : [quote]texte[/quote] (alt+q)"
+msgstr "Citation : [quote]texte[/quote] (alt+q)"
 
 #: www/include/BBCodeSupportHtml.class.php:47
 msgid "Code display: [code]code[/code]  (alt+c)"
-msgstr "Affichage de code : [code]texte[/code] (alt+c)"
+msgstr "Affichage de code : [code]texte[/code] (alt+c)"
 
 #: www/include/BBCodeSupportHtml.class.php:48
 msgid "List: [list]text[/list] (alt+l)"
-msgstr "Liste : [list]texte[/list] (alt+l)"
+msgstr "Liste : [list]texte[/list] (alt+l)"
 
 #: www/include/BBCodeSupportHtml.class.php:49
 msgid "Ordered list: [list=]text[/list]  (alt+o)"
-msgstr "Liste numérotée : [list=]texte[/list] (alt+o)"
+msgstr "Liste numérotée : [list=]texte[/list] (alt+o)"
 
 #: www/include/BBCodeSupportHtml.class.php:50
 msgid "Insert image: [img]http://image_url[/img]  (alt+p)"
-msgstr "Insertion d'une image : [img]http://url_image[/img] (alt+p)"
+msgstr "Insertion d'une image : [img]http://url_image[/img] (alt+p)"
 
 #: www/include/BBCodeSupportHtml.class.php:51
 msgid ""
 "Insert URL: [url]http://url[/url] or [url=http://url]URL text[/url]  (alt+w)"
 msgstr ""
-"Insertion d'un lien : [url]http://url[/url] ou [url=http://url]texte "
+"Insertion d'un lien : [url]http://url[/url] ou [url=http://url]texte "
 "descriptif[/url] (alt+w)"
 
 #: www/include/BBCodeSupportHtml.class.php:52
@@ -7373,12 +7373,12 @@ msgstr "Fermer tous les éléments BBcode ouverts"
 msgid ""
 "Font color: [color=red]text[/color]  Tip: you can also use color=#FF0000"
 msgstr ""
-"Couleur de texte : [color=red]texte[/color] (vous pouvez aussi utiliser des "
+"Couleur de texte : [color=red]texte[/color] (vous pouvez aussi utiliser des "
 "valeurs numériques comme color=#FF0000)"
 
 #: www/include/BBCodeSupportHtml.class.php:54
 msgid "Font size: [size=x-small]small text[/size]"
-msgstr "Taille du texte : [size=x-small]texte[/size]"
+msgstr "Taille du texte : [size=x-small]texte[/size]"
 
 #: www/include/BBCodeSupportHtml.class.php:55
 msgid "Link to Task: [task]Forumid:Subproject:Taskid:TaskName[/task]   (alt+k)"
@@ -7485,7 +7485,7 @@ msgstr "Fermer les élements"
 #: www/include/BBCodeSupportHtml.class.php:288
 msgid "Tip: Styles can be applied quickly to selected text"
 msgstr ""
-"Astuce : les styles peuvent être appliqués rapidement sur le texte "
+"Astuce : les styles peuvent être appliqués rapidement sur le texte "
 "sélectionné."
 
 #: www/include/Layout.class.php:84
@@ -7759,7 +7759,7 @@ msgid ""
 "official site for this product. Additional copyright information may be "
 "found on this project's homepage."
 msgstr ""
-"NOTE : Ce projet est maintenu par l'équipe de %1$s. Nous ne sommes pas le "
+"NOTE : Ce projet est maintenu par l'équipe de %1$s. Nous ne sommes pas le "
 "site officiel de ce produit. Une information supplémentaire sur le copyright "
 "peut être trouvée sur la page d'accueil de ce projet."
 
@@ -7783,7 +7783,7 @@ msgstr "Enregistré le&nbsp;:&nbsp;"
 #: www/include/project_home.php:94
 #, php-format
 msgid "Activity Ranking: %d"
-msgstr "Rang d'activité : %d"
+msgstr "Rang d'activité : %d"
 
 #: www/include/project_home.php:95
 #, php-format
@@ -7909,7 +7909,7 @@ msgstr[1] "<strong>%d</strong> forums"
 
 #: www/include/project_home.php:334
 msgid "DocManager: Project Documentation"
-msgstr "Gestion de documents : Documentation du projet"
+msgstr "Gestion de documents : Documentation du projet"
 
 #: www/include/project_home.php:342
 msgid "Mailing Lists"
@@ -8032,7 +8032,7 @@ msgstr "Addresse Jabber"
 
 #: www/include/user_home.php:91
 msgid "Site Member Since"
-msgstr "Membre du site depuis le :"
+msgstr "Membre du site depuis le :"
 
 #: www/include/user_home.php:97
 msgid "Peer Rating"
@@ -8103,10 +8103,10 @@ msgstr ""
 "<p>La boîte d'évaluations croisées renvoie les notes moyennes (et les "
 "niveaux de réponse) de chaque critère individuel.  Pour des raisons de "
 "calcul, ces chiffres tiennent compte à la fois des utilisateurs de confiance "
-"et des autres.</p><ul><li>Le champ « rang global » indique le rang de "
-"l'utilisateur comparé à tous les utilisateurs de %1$s classés.</li><li>Le « "
-"score agrégé » indique un score global moyen pondéré, basé uniquement sur "
-"les réponses de confiance.</li><li>Le champ « importance personnelle » "
+"et des autres.</p><ul><li>Le champ « rang global » indique le rang de "
+"l'utilisateur comparé à tous les utilisateurs de %1$s classés.</li><li>Le « "
+"score agrégé » indique un score global moyen pondéré, basé uniquement sur "
+"les réponses de confiance.</li><li>Le champ « importance personnelle » "
 "indique le poids que cet utilisateur aura lors de ses évaluations des autres "
 "développeurs (entre 1 et 1,5).</li></ul><p><i>Si vous ne souhaitez pas "
 "participer à ces évaluations (ni en tant qu'évaluateur, ni en tant que sujet "
@@ -8168,7 +8168,7 @@ msgstr ""
 
 #: www/index_std.php:14
 msgid "Additional Features:"
-msgstr "Fonctionnalités supplémentaires :"
+msgstr "Fonctionnalités supplémentaires :"
 
 #: www/index_std.php:16
 msgid "Manage File Releases."
@@ -8306,12 +8306,12 @@ msgstr "Listes de diffusion existantes"
 
 #: www/mail/admin/index.php:164
 msgid "Mailing List Name:"
-msgstr "Nom de la liste de diffusion :"
+msgstr "Nom de la liste de diffusion :"
 
 #: www/mail/admin/index.php:170 www/mail/admin/index.php:202
 #: www/snippet/package.php:131
 msgid "Description:"
-msgstr "Description :"
+msgstr "Description :"
 
 #: www/mail/admin/index.php:173
 msgid "Add This List"
@@ -8503,7 +8503,7 @@ msgstr "Item ajouté."
 #: www/my/diary.php:98
 #, php-format
 msgid "[%s User Notes: %s] %s"
-msgstr "[Journal d'utilisateur %s : %s] %s"
+msgstr "[Journal d'utilisateur %s : %s] %s"
 
 #: www/my/diary.php:103
 #, php-format
@@ -8521,7 +8521,7 @@ msgstr ""
 "______________________________________________________________________\n"
 "Vous recevez ce message suite à votre choix de surveiller le journal de cet "
 "utilisateur.\n"
-"Pour interrompre la surveillance, connectez-vous à %s et suivez ce lien :\n"
+"Pour interrompre la surveillance, connectez-vous à %s et suivez ce lien :\n"
 "\n"
 "%s\n"
 
@@ -8563,7 +8563,7 @@ msgstr "Soumettez une fois seulement"
 
 #: www/my/diary.php:188
 msgid "Is Public"
-msgstr "Affichage public ?"
+msgstr "Affichage public ?"
 
 #: www/my/diary.php:190
 msgid ""
@@ -8703,12 +8703,12 @@ msgstr "mis à jour par"
 
 #: www/new/index.php:81
 msgid "Module:"
-msgstr "Module :"
+msgstr "Module :"
 
 #: www/new/index.php:83 www/snippet/addversion.php:82
 #: www/snippet/addversion.php:207
 msgid "Version:"
-msgstr "Version :"
+msgstr "Version :"
 
 #: www/new/index.php:93
 msgid "This project has not submitted a description"
@@ -8716,11 +8716,11 @@ msgstr "Ce projet n'a pas de déscription"
 
 #: www/new/index.php:104
 msgid "Project Total:"
-msgstr "Total pour le projet :"
+msgstr "Total pour le projet :"
 
 #: www/new/index.php:106
 msgid "Notes &amp; Changes"
-msgstr "Changements :"
+msgstr "Changements :"
 
 #: www/new/index.php:120
 msgid "Newer Releases"
@@ -8746,7 +8746,7 @@ msgstr "Annonce non trouvée"
 #: www/news/admin/index.php:115 www/news/admin/index.php:259
 #, php-format
 msgid "Approve a NewsByte For Project: %1$s"
-msgstr "Approuver une annonce pour le projet : %1$s"
+msgstr "Approuver une annonce pour le projet : %1$s"
 
 #: www/news/admin/index.php:129
 msgid "Displayed"
@@ -8802,7 +8802,7 @@ msgstr ""
 #, php-format
 msgid "These items need to be approved (total: %1$s)"
 msgstr ""
-"Ces annonces ont besoin d'être approuvées pour la page d'accueil (total : %1"
+"Ces annonces ont besoin d'être approuvées pour la page d'accueil (total : %1"
 "$s)"
 
 #: www/news/admin/news_admin_utils.php:78
@@ -8816,7 +8816,7 @@ msgstr "Aucune annonce rejetée cette semaine"
 #: www/news/admin/news_admin_utils.php:92
 #, php-format
 msgid "These items were rejected this past week (total: %1$s)"
-msgstr "Ces annonces ont été rejetées la semaine passée (total : %1$s)"
+msgstr "Ces annonces ont été rejetées la semaine passée (total : %1$s)"
 
 #: www/news/admin/news_admin_utils.php:108
 msgid "No approved items found for this week"
@@ -8825,7 +8825,7 @@ msgstr "Aucune annonce approuvée cette semaine"
 #: www/news/admin/news_admin_utils.php:110
 #, php-format
 msgid "These items were approved this past week (total: %1$s)"
-msgstr "Ces annonces ont été approuvées la semaine passée (total : %1$s)"
+msgstr "Ces annonces ont été approuvées la semaine passée (total : %1$s)"
 
 #: www/news/index.php:37
 msgid ""
@@ -9081,7 +9081,7 @@ msgstr "Édition des compétences"
 msgid ""
 "Change the required fields, and press \"Done\" at the bottom of the page"
 msgstr ""
-"Veuillez modifier les champs requis, puis cliquer sur « Effectué » en bas de "
+"Veuillez modifier les champs requis, puis cliquer sur « Effectué » en bas de "
 "page."
 
 #: www/people/editprofile.php:143
@@ -9116,10 +9116,10 @@ msgid_plural ""
 "You are about to delete the following skills from the skills database:"
 msgstr[0] ""
 "Vous êtes sur le point de supprimer la compétence suivante de la base de "
-"données :"
+"données :"
 msgstr[1] ""
 "Vous êtes sur le point de supprimer les compétences suivantes de la base de "
-"données :"
+"données :"
 
 #: www/people/editprofile.php:204
 msgid "This action cannot be undone."
@@ -9260,7 +9260,7 @@ msgid ""
 "through your project administration page.</p><p>To suggest new job "
 "categories, submit a request via the support manager.</p>"
 msgstr ""
-"<p>Le système « Demande d'aide » de %1$s est destiné aux offres non "
+"<p>Le système « Demande d'aide » de %1$s est destiné aux offres non "
 "commerciales de postes pour volontaires. Tout usage commercial de ce système "
 "d'annonces est interdit.</p><p>Les offres restent visibles pendant deux "
 "semaines ou jusqu'à ce qu'elles soient fermées par le demandeur, suivant ce "
@@ -9538,7 +9538,7 @@ msgid ""
 "all its related data!"
 msgstr ""
 "Vous êtes sur le point de supprimer irrémédiablement ce sous-projet et "
-"toutes ses données !"
+"toutes ses données !"
 
 #: www/pm/admin/index.php:411
 msgid "Project/Task Manager Administration"
@@ -9562,8 +9562,8 @@ msgid ""
 "Projects using the \"Add A Project\" link above.</p>"
 msgstr ""
 "<h2>Aucun sous-projet</h2><p>Aucun sous-projet n'a été trouvé pour ce "
-"groupe.  Vous pouvez ajouter des sous-projets en utilisant le lien « Ajouter "
-"un projet » ci-dessus."
+"groupe.  Vous pouvez ajouter des sous-projets en utilisant le lien « Ajouter "
+"un projet » ci-dessus."
 
 #: www/pm/admin/index.php:439
 msgid "Edit/Update Project"
@@ -9644,11 +9644,7 @@ msgid ""
 "<strong>Admin:</strong> If you wish to apply changes to all items selected "
 "above, use these controls to change their properties and click once on "
 "\"Mass Update\"."
-msgstr ""
-"<strong>Administration :</strong>Si vous souhaitez appliquer des changements "
-"à tous les objets sélectionnés ci-dessus, utilisez ces contrôles pour "
-"changer les propriétés, et cliquez (une seule fois) sur « Mise à jour massive "
-"»."
+msgstr "<strong>Administration :</strong>Si vous souhaitez appliquer des changements à tous les objets sélectionnés ci-dessus, utilisez ces contrôles pour changer les propriétés, et cliquez (une seule fois) sur « Mise à jour massive »."
 
 #: www/pm/browse_task.php:362 www/pm/mod_task.php:47
 msgid "Subproject"
@@ -9810,7 +9806,7 @@ msgstr "Supprimer une tâche"
 
 #: www/pm/deletetask.php:29
 msgid "Are you sure you want to delete this task?"
-msgstr "Etes-vous sûr de vouloir supprimer cette tâche ?"
+msgstr "Etes-vous sûr de vouloir supprimer cette tâche ?"
 
 #: www/pm/deletetask.php:33
 msgid "Yes, I want to delete this task"
@@ -9917,7 +9913,7 @@ msgstr "Aucun changement n'a été effectué"
 
 #: www/pm/index.php:47
 msgid "Project/Task Manager: Subprojects And Tasks"
-msgstr "Gestion de projet : sous-projets et tâches"
+msgstr "Gestion de projet : sous-projets et tâches"
 
 #: www/pm/index.php:59
 msgid ""
@@ -10052,7 +10048,7 @@ msgstr "La relation a été ajoutée avec succés"
 
 #: www/pm/task.php:328
 msgid "Confirmation failed. Task not deleted"
-msgstr "Vous n'avez pas confirmé : la tâche n'a pas été supprimée."
+msgstr "Vous n'avez pas confirmé : la tâche n'a pas été supprimée."
 
 #: www/pm/task.php:334
 msgid "Task Successfully Deleted"
@@ -10104,7 +10100,7 @@ msgid ""
 "Clicking on \"create\" will schedule the creation of the database, and email "
 "the\tdetails to the project administrators"
 msgstr ""
-"Un clic sur « Créer » déclenchera la procédure de création de la base de "
+"Un clic sur « Créer » déclenchera la procédure de création de la base de "
 "données, et enverra les détails par email aux administrateurs du projet."
 
 #: www/project/admin/database.php:170
@@ -10159,7 +10155,7 @@ msgstr "Lien vers la page d'accueil"
 
 #: www/project/admin/editgroupinfo.php:150
 msgid "Visibility: "
-msgstr "Visibilité :"
+msgstr "Visibilité :"
 
 #: www/project/admin/editgroupinfo.php:173
 msgid "Active Features"
@@ -10228,7 +10224,7 @@ msgstr "(envoi pour toutes les mises à jour)"
 #: www/project/admin/editimages.php:48
 msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
 msgstr ""
-"Erreur : la taille du fichier doit être comprise entre 20 et 256000 octets"
+"Erreur : la taille du fichier doit être comprise entre 20 et 256000 octets"
 
 #: www/project/admin/editimages.php:104
 msgid "Multimedia File Uploaded"
@@ -10318,7 +10314,7 @@ msgid ""
 msgstr ""
 "<h3>Éditer la catégorisation</h3><p>Choisissez jusqu'à trois catégories pour "
 "ce projet dans chacune des arborescences de classement.  Vous pouvez bien "
-"entendu choisir « aucune » lorsque les catégories ne s'appliquent pas.</"
+"entendu choisir « aucune » lorsque les catégories ne s'appliquent pas.</"
 "p><p>Important : les projets doivent être classés dans la catégorie la plus "
 "spécifique qui s'applique à eux.  S'ils sont simultanément classés dans une "
 "catégorie spécifique et une plus générique, seule la catégorie la plus "
@@ -10466,7 +10462,7 @@ msgid ""
 "\"Finish\" to choose the roles for the users you are adding."
 msgstr ""
 "Cochez les cases correspondant aux utilisateurs que vous souhaitez ajouter.  "
-"Lorsque vous avez terminé, cliquez sur « Terminer » pour choisir les rôles "
+"Lorsque vous avez terminé, cliquez sur « Terminer » pour choisir les rôles "
 "des utilisateurs que vous ajoutez."
 
 #: www/project/admin/massadd.php:88
@@ -10541,7 +10537,7 @@ msgid ""
 "dd><dt><strong>Editors</strong> (doc. manager)</dt><dd>can update/edit/"
 "remove documentation from the project.</dd></dl>"
 msgstr ""
-"<strong>NOTE :</strong><dl><dt><strong>Administrateurs de projet (en gras)</"
+"<strong>NOTE :</strong><dl><dt><strong>Administrateurs de projet (en gras)</"
 "strong></dt><dd>ont accès à cette page et aux autres pages d'administration "
 "du projet</dd><dt><strong>Techniciens de version</strong></dt><dd>peuvent "
 "fabriquer les versions (tout administrateur de projet est aussi un "
@@ -10635,7 +10631,7 @@ msgstr ""
 "strong><p>Pour ajouter un hôte virtuel, il vous suffit de faire pointer un "
 "enregistrement <strong>CNAME</strong> depuis <em>votre.domaine.org</em> vers "
 "<strong>%1$s.%2$s</strong>.  %3$s ne gère pas le courrier électronique (et "
-"ne peut donc pas être un MX) ni le DNS.</p><p>Un clic sur « Créer » "
+"ne peut donc pas être un MX) ni le DNS.</p><p>Un clic sur « Créer » "
 "déclenchera la procédure de création de l'hôte virtuel.  Cet hôte virtuel "
 "sera un alias pour le site web du projet, c'est-à-dire que <em>votre.domaine."
 "org</em> aura le même contenu que <em>%4$s.%5$s</em>."
@@ -10727,10 +10723,10 @@ msgstr[1] ""
 msgid "If you want, you can send a comment to the administrator:"
 msgid_plural "If you want, you can send a comment to the administrators:"
 msgstr[0] ""
-"Si vous le souhaitez, vous pouvez envoyer un commentaire à l'administrateur :"
+"Si vous le souhaitez, vous pouvez envoyer un commentaire à l'administrateur :"
 msgstr[1] ""
 "Si vous le souhaitez, vous pouvez envoyer un commentaire aux "
-"administrateurs :"
+"administrateurs :"
 
 #: www/project/stats/index.php:41 www/project/stats/index.php:52
 #: www/reporting/projectact.php:51 www/reporting/projectact.php:54
@@ -10886,9 +10882,9 @@ msgid ""
 "li><li>Search engines throughout the site</li></ul><p/>Unix Name:<br/>"
 msgstr ""
 "<h3>4. Nom Unix du projet</h3>\n"
-"<p>En plus du nom complet du projet, vous devez choisir un nom « Unix » court."
-"</p><p>Du fait de son utilisation à de nombreux endroits sur le site, le « "
-"nom Unix » est soumis à plusieurs restrictions :</p><ul><li>Il doit être "
+"<p>En plus du nom complet du projet, vous devez choisir un nom « Unix » court."
+"</p><p>Du fait de son utilisation à de nombreux endroits sur le site, le « "
+"nom Unix » est soumis à plusieurs restrictions :</p><ul><li>Il doit être "
 "unique</li><li>Il doit comprendre entre 3 et 15 caractères</li><li>Il ne "
 "peut contenir que des lettres (minuscules), des chiffres et des tirets</"
 "li><li>Il ne peut être choisi parmi certains noms réservés</li><li>Il ne "
@@ -10899,7 +10895,7 @@ msgstr ""
 "tt></li><li>Pour utiliser CVS, dans <tt>/cvsroot/nom-unix</tt> sur <tt>cvs."
 "nom-unix.%1$s</tt> (ou équivalent pour un autre système de suivi de version)"
 "</li><li>Pour obtenir un accès shell sur <tt>nom-unix.%1$s</tt></li><li>Pour "
-"les recherches partout dans le site</li></ul><p>Nom Unix :<br/>"
+"les recherches partout dans le site</li></ul><p>Nom Unix :<br/>"
 
 #: www/register/projectinfo.php:158
 msgid ""
@@ -10951,7 +10947,7 @@ msgstr "Projets cumulés (graphique)"
 #: www/reporting/index.php:48
 msgid "Project-specific reports: Tracker, Task Mgr, Forums, Doc Mgr, Downloads"
 msgstr ""
-"Statistiques spécifiques au projet : Suivi, Tâches, Forums, Documents, "
+"Statistiques spécifiques au projet : Suivi, Tâches, Forums, Documents, "
 "Téléchargements"
 
 #: www/reporting/index.php:51
@@ -10961,7 +10957,7 @@ msgstr "Global"
 #: www/reporting/index.php:53
 msgid "Site-wide reports: Tracker, Task Mgr, Forums, Doc Mgr, Downloads"
 msgstr ""
-"Statistiques globales : Suivi, Tâches, Forums, Documents, Téléchargements"
+"Statistiques globales : Suivi, Tâches, Forums, Documents, Téléchargements"
 
 #: www/reporting/index.php:54
 msgid "Pie (graph)"
@@ -11056,7 +11052,7 @@ msgstr ""
 "scripts cron ont rencontré une erreur ou si la base de données a été "
 "endommagée, que vous deviez reconstruire les tables utilisées pour le "
 "système de rapports</p><p>Si vous êtes certain de vouloir le faire, cochez "
-"la case « Je suis sûr » et cliquez sur le bouton ci-dessous.</p><p>Cette "
+"la case « Je suis sûr » et cliquez sur le bouton ci-dessous.</p><p>Cette "
 "opération peut durer plusieurs minutes, donc veuillez ne cliquer QU'UNE "
 "SEULE FOIS.<p>"
 
@@ -11146,8 +11142,8 @@ msgid ""
 "\"Testing\"."
 msgstr ""
 "Vous pouvez créer des catégories pour décrire à quoi le temps a été passé "
-"pendant le travail d'une tâche particulière.  Par exemple, « réunion », ou « "
-"programmation », ou « tests »."
+"pendant le travail d'une tâche particulière.  Par exemple, « réunion », ou « "
+"programmation », ou « tests »."
 
 #: www/reporting/toolspie.php:48 www/reporting/toolspie.php:55
 msgid "Tool Pie Graphs"
@@ -11218,18 +11214,18 @@ msgid ""
 "Note: Changing the repository does not delete the previous repository.  It "
 "only affects the information displayed under the SCM tab."
 msgstr ""
-"Note : Changer de dépôt ne supprime pas le dépôt précédent.  Cela n'affecte "
-"que les informations affichées dans l'onglet « Sources »."
+"Note : Changer de dépôt ne supprime pas le dépôt précédent.  Cela n'affecte "
+"que les informations affichées dans l'onglet « Sources »."
 
 #: www/scm/admin/index.php:107
 msgid "Error - Site has SCM but no plugins registered"
 msgstr ""
-"Erreur : le site a activé le suivi de versions, mais aucun greffon adéquat "
+"Erreur : le site a activé le suivi de versions, mais aucun greffon adéquat "
 "n'est installé."
 
 #: www/scm/include/scm_utils.php:41 www/scm/viewvc.php:51
 msgid "Error - This project has turned off SCM."
-msgstr "Erreur : ce projet a désactivé son CVS."
+msgstr "Erreur : ce projet a désactivé son CVS."
 
 #: www/scm/include/viewvc_utils.php:81
 msgid ""
@@ -11399,7 +11395,7 @@ msgstr ""
 "Nous utilisons ce formulaire afin d'essayer de limiter le spam.</"
 "p><p>Veuillez le remplir complètement et précisément, sans quoi le "
 "destinataire risquerait de ne pouvoir vous répondre.</p><p><span class="
-"\"important\"><b>SI VOUS ÉCRIVEZ POUR DEMANDER DE L'AIDE :</b> Avez-vous lu "
+"\"important\"><b>SI VOUS ÉCRIVEZ POUR DEMANDER DE L'AIDE :</b> Avez-vous lu "
 "les documentations du site ?  Avez-vous inclus votre identifiant "
 "d'utilisateur (<b>user_id</b> et <b>user_name</b>) ?  Si vous écrivez à "
 "propos d'un projet, pensez à inclure également le nom du projet et son "
@@ -11454,11 +11450,11 @@ msgstr "La version d'échantillon a été correctement ajoutée."
 #: www/snippet/addversion.php:188 www/snippet/package.php:111
 #: www/snippet/submit.php:66
 msgid "Error - Go back and fill in all the information"
-msgstr "Erreur : Revenez en arrière et remplissez toutes les informations"
+msgstr "Erreur : Revenez en arrière et remplissez toutes les informations"
 
 #: www/snippet/add_snippet_to_package.php:117
 msgid "Package:"
-msgstr "Paquet :"
+msgstr "Paquet :"
 
 #: www/snippet/add_snippet_to_package.php:119
 msgid ""
@@ -11514,7 +11510,7 @@ msgstr ""
 
 #: www/snippet/addversion.php:90
 msgid "Paste the Code Here:"
-msgstr "Coller le code ici :"
+msgstr "Coller le code ici :"
 
 #: www/snippet/addversion.php:115
 msgid "Error - snippet_package doesn't exist"
@@ -11522,7 +11518,7 @@ msgstr "Erreur - ce paquet d'échantillons n'existe pas"
 
 #: www/snippet/addversion.php:141 www/snippet/package.php:61
 msgid "ERROR DOING SNIPPET PACKAGE VERSION INSERT!"
-msgstr "Erreur : pendant l'insertion d'une version de paquet d'échantillons"
+msgstr "Erreur : pendant l'insertion d'une version de paquet d'échantillons"
 
 #: www/snippet/addversion.php:142
 msgid "New snippet package"
@@ -11538,7 +11534,7 @@ msgstr "Ajouter un échantillon au paquet"
 
 #: www/snippet/addversion.php:171 www/snippet/package.php:93
 msgid "IMPORTANT!"
-msgstr "IMPORTANT !"
+msgstr "IMPORTANT !"
 
 #: www/snippet/addversion.php:173 www/snippet/package.php:95
 msgid ""
@@ -11570,7 +11566,7 @@ msgstr ""
 
 #: www/snippet/addversion.php:227
 msgid "Error - was the URL or form mangled??"
-msgstr "Erreur - URL invalide ?"
+msgstr "Erreur - URL invalide ?"
 
 #: www/snippet/browse.php:34 www/snippet/detail.php:31
 #: www/snippet/detail.php:119 www/snippet/detail.php:201
@@ -11581,16 +11577,16 @@ msgstr "Bibliothèque d'échantillons"
 #: www/snippet/browse.php:42
 #, php-format
 msgid "Snippets by language: %1$s"
-msgstr "Echantillons par langage : %1$s"
+msgstr "Echantillons par langage : %1$s"
 
 #: www/snippet/browse.php:47
 #, php-format
 msgid "Snippets by category: %1$s"
-msgstr "Echantillons par catégories : %1$s"
+msgstr "Echantillons par catégories : %1$s"
 
 #: www/snippet/browse.php:49
 msgid "Error - bad url?"
-msgstr "Erreur - URL invalide ?"
+msgstr "Erreur - URL invalide ?"
 
 #: www/snippet/browse.php:59
 msgid "No snippets found"
@@ -11643,7 +11639,7 @@ msgstr ""
 
 #: www/snippet/detail.php:95
 msgid "Latest Snippet Version: "
-msgstr "Dernière version d'échantillon : "
+msgstr "Dernière version d'échantillon : "
 
 #: www/snippet/detail.php:104 www/snippet/detail.php:191
 msgid "Submit a new version"
@@ -11683,7 +11679,7 @@ msgstr ""
 
 #: www/snippet/detail.php:211
 msgid "Error - was the URL mangled?"
-msgstr "Erreur - URL invalide ?"
+msgstr "Erreur - URL invalide ?"
 
 #: www/snippet/index.php:36
 msgid ""
@@ -11694,15 +11690,7 @@ msgid ""
 "a \"Package\" of snippets. That package can contain multiple, specific "
 "versions of other snippets.</p><p>&nbsp;</p><h3>Browse Snippets</h3>\t<p>You "
 "can browse the snippet library quickly:</p>"
-msgstr ""
-"<p>Cette section a pour but de vous permettre de partager des échantillons "
-"de code, des scripts et des fonctions avec le reste de la communauté.</"
-"p><p>Vous pouvez créer un nouvel échantillon, puis le faire évoluer en "
-"publiant facilement de nouvelles versions.</p><p>Une fois que des "
-"échantillons ont été publiés, il est possible de les rassembler en « paquets "
-"».  Chaque paquet peut contenir différentes versions de différents "
-"échantillons de code.</p><h3>Naviguer dans les échantillons</h3><p>Vous "
-"pouvez naviguer rapidement dans la bibliothèque d'échantillons :</p>"
+msgstr "<p>Cette section a pour but de vous permettre de partager des échantillons de code, des scripts et des fonctions avec le reste de la communauté.</p><p>Vous pouvez créer un nouvel échantillon, puis le faire évoluer en publiant facilement de nouvelles versions.</p><p>Une fois que des échantillons ont été publiés, il est possible de les rassembler en « paquets ».  Chaque paquet peut contenir différentes versions de différents échantillons de code.</p><h3>Naviguer dans les échantillons</h3><p>Vous pouvez naviguer rapidement dans la bibliothèque d'échantillons :</p>"
 
 #: www/snippet/index.php:43
 msgid "Browse by Language"
@@ -11714,7 +11702,7 @@ msgstr "Affichage par Catégorie"
 
 #: www/snippet/package.php:43
 msgid "ERROR DOING SNIPPET PACKAGE INSERT!"
-msgstr "Erreur : pendant l'insertion d'un paquet d'échantillons"
+msgstr "Erreur : pendant l'insertion d'un paquet d'échantillons"
 
 #: www/snippet/package.php:44 www/snippet/package.php:62
 #: www/snippet/package.php:115
@@ -11744,7 +11732,7 @@ msgstr ""
 "paquets.  Avant de créer des paquets, assurez-vous que les échantillons que "
 "vous voulez regrouper sont en place, et notez leurs identifiants.</"
 "p><ol><li>Créez un paquet à l'aide de ce formulaire.</li><li><strong>Puis</"
-"strong> utilisez le lien « Ajouter des échantillons » pour ajouter des "
+"strong> utilisez le lien « Ajouter des échantillons » pour ajouter des "
 "fichiers à votre paquet.</li></ol><p><span class=\"important\">Note :</span> "
 "Vous pouvez soumettre une nouvelle version d'un paquet existant en navigant "
 "dans la bibliothèque et en utilisant le lien présent près du paquet "
@@ -11845,7 +11833,7 @@ msgstr "Créer un paquet"
 
 #: www/snippet/snippet_utils.php:134
 msgid "Snippets In This Package:"
-msgstr "Echantillons dans le paquet :"
+msgstr "Echantillons dans le paquet :"
 
 #: www/snippet/submit.php:44
 msgid "ERROR DOING SNIPPET INSERT!"
@@ -11907,7 +11895,7 @@ msgstr ""
 
 #: www/softwaremap/full_list.php:146
 msgid "Register Date:"
-msgstr "Date d'enregistrement :"
+msgstr "Date d'enregistrement :"
 
 #: www/softwaremap/tag_cloud.php:106
 #, php-format
@@ -11938,21 +11926,21 @@ msgstr[1] ""
 #: www/softwaremap/tag_cloud.php:182
 #, php-format
 msgid "Activity Percentile: <strong>%3.0f</strong>"
-msgstr "Centile d'activité : <strong>%3.0f</strong>"
+msgstr "Centile d'activité : <strong>%3.0f</strong>"
 
 #: www/softwaremap/tag_cloud.php:183
 #, php-format
 msgid "Activity Ranking: <strong>%d</strong>"
-msgstr "Rang d'activité : <strong>%d</strong>"
+msgstr "Rang d'activité : <strong>%d</strong>"
 
 #: www/softwaremap/tag_cloud.php:184
 #, php-format
 msgid "Registered: <strong>%s</strong>"
-msgstr "Date d'enregistrement : <strong>%s</strong>"
+msgstr "Date d'enregistrement : <strong>%s</strong>"
 
 #: www/softwaremap/trove_list.php:135
 msgid "Now limiting view to projects in the following categories:"
-msgstr "Vue restreinte aux projets des catégories suivantes :"
+msgstr "Vue restreinte aux projets des catégories suivantes :"
 
 #: www/softwaremap/trove_list.php:315
 msgid "Activity Percentile:&nbsp;"
@@ -12033,7 +12021,7 @@ msgid ""
 "browser preferences"
 msgstr ""
 "C'est une liste de préférences que l'utilisateur a choisi dans ses réglages "
-"personnels ; ce qui n'inclut pas les langues qui sont sélectionnées via "
+"personnels ; ce qui n'inclut pas les langues qui sont sélectionnées via "
 "cookies ou réglages du navigateur."
 
 #: www/stats/index.php:29
@@ -12049,7 +12037,7 @@ msgstr ""
 
 #: www/stats/lastlogins.php:27
 msgid "No records found\",\"Database error: \""
-msgstr "Aucun enregistrement trouvé.  Erreur de base de données : "
+msgstr "Aucun enregistrement trouvé.  Erreur de base de données : "
 
 #: www/stats/lastlogins.php:30
 msgid "Last Logins"
@@ -12082,7 +12070,7 @@ msgstr " (aucune catégorie trouvée avec l'identifiant %d)"
 
 #: www/stats/site_stats_utils.php:112
 msgid "Projects in trove category:"
-msgstr "Catégorie de projets :"
+msgstr "Catégorie de projets :"
 
 #: www/stats/site_stats_utils.php:116
 msgid "OR enter Special Project List:"
@@ -12102,7 +12090,7 @@ msgstr "30 derniers"
 
 #: www/stats/site_stats_utils.php:134
 msgid "View by:"
-msgstr "Voir par :"
+msgstr "Voir par :"
 
 #: www/stats/site_stats_utils.php:154
 msgid "Generate Report"
@@ -12241,7 +12229,7 @@ msgstr ""
 #: www/survey/admin/add_survey.php:81
 #: www/survey/include/SurveyHTML.class.php:188
 msgid "Is Active?"
-msgstr "Actif ?"
+msgstr "Actif ?"
 
 #: www/survey/admin/add_survey.php:85
 #: www/survey/include/SurveyHTML.class.php:154
@@ -12281,7 +12269,7 @@ msgid ""
 "WARNING! It is a bad idea to change a question after responses to it have "
 "been submitted"
 msgstr ""
-"Attention !!! C'est une mauvaise idée que de modifier une question qui à "
+"Attention !!! C'est une mauvaise idée que de modifier une question qui à "
 "déjà des réponses"
 
 #: www/survey/admin/edit_question.php:83
@@ -12303,14 +12291,14 @@ msgstr "Éditer un sondage"
 
 #: www/survey/admin/edit_survey.php:57
 msgid "UPDATE FAILED: Missing Data"
-msgstr "La mise à jour a échoué : il manque des données"
+msgstr "La mise à jour a échoué : il manque des données"
 
 #: www/survey/admin/edit_survey.php:101
 #: www/survey/include/SurveyHTML.class.php:162
 msgid ""
 "WARNING! It is a bad idea to edit a survey after responses have been posted"
 msgstr ""
-"Attention !!! C'est une mauvaise idée que de modifier un sondage qui à déjà "
+"Attention !!! C'est une mauvaise idée que de modifier un sondage qui à déjà "
 "des questions"
 
 #: www/survey/admin/edit_survey.php:103
@@ -12341,8 +12329,8 @@ msgstr ""
 "Listez les numéros des questions, dans l'ordre souhaité, séparés par des "
 "virgules. <strong>Référez-vous à votre liste de questions</strong> pour en "
 "visualiser les identifiants. <strong>N'incluez pas</strong> d'espaces dans "
-"votre liste, et ne la terminez pas par une virgule.<br>Exemple : « "
-"1,2,3,4,5,6,7 »."
+"votre liste, et ne la terminez pas par une virgule.<br>Exemple : « "
+"1,2,3,4,5,6,7 »."
 
 #: www/survey/admin/edit_survey.php:118
 msgid "Is Active"
@@ -12566,7 +12554,7 @@ msgid ""
 "changes are made to this policy, it will affect only future data that is "
 "collected and the user will of course have the ability to 'opt-out'."
 msgstr ""
-"Quid des informations confidentielles ?<p>Les informations collectées par "
+"Quid des informations confidentielles ?<p>Les informations collectées par "
 "ces sondages ne seront jamais vendues à des tiers ou utilisées pour "
 "solliciter de vous l'achat de biens ou de services.</p><p>Les informations "
 "sont rassemblées pour construire un profil des projets et des développeurs. "
@@ -12606,7 +12594,7 @@ msgstr "Si vous votez à nouveau"
 
 #: www/survey/rating_resp.php:63
 msgid "ERROR!!! MISSING PARAMS"
-msgstr "ERREUR !!! Il manque des paramètres"
+msgstr "ERREUR !!! Il manque des paramètres"
 
 #: www/survey/survey.php:56
 msgid "For some reason, the Group ID or Survey ID did not make it to this page"
@@ -12826,7 +12814,7 @@ msgstr "Description détaillée"
 msgid "DO NOT enter passwords or confidential information in your message!"
 msgstr ""
 "N'entrez SURTOUT PAS de mot de passe ou d'informations confidentielles dans "
-"vos messages !"
+"vos messages !"
 
 #: www/tracker/add.php:107 www/tracker/detail.php:149
 #: www/tracker/mod-limited.php:143 www/tracker/mod.php:242
@@ -12915,7 +12903,7 @@ msgstr "Type de champ supplémentaire"
 
 #: www/tracker/admin/form-addextrafield.php:104
 msgid "Box type technician"
-msgstr "Type de boîte : technicien"
+msgstr "Type de boîte : technicien"
 
 #: www/tracker/admin/form-addextrafield.php:105
 msgid "Relation between artifacts"
@@ -12939,7 +12927,7 @@ msgstr "Longeur maximale du champ texte/Colonne de la zone de texte"
 
 #: www/tracker/admin/form-addextrafield.php:113
 msgid "Warning: this add new custom field"
-msgstr "Attention : ceci ajoute un nouveau champ personnalisé"
+msgstr "Attention : ceci ajoute un nouveau champ personnalisé"
 
 #: www/tracker/admin/form-addextrafield.php:121
 msgid "Custom Field Rendering Template"
@@ -13014,7 +13002,7 @@ msgid ""
 "elements from those fields into this tracker. There is nothing to prevent "
 "you from cloning multiple times or making a huge mess. You have been warned!"
 msgstr ""
-"ATTENTION !  Le clonage de cet outil de suivi va dupliquer tous les champs "
+"ATTENTION !  Le clonage de cet outil de suivi va dupliquer tous les champs "
 "et tous les éléments de ces champs dans cet outil.  Aucun mécanisme de "
 "sécurité ne vous empêche de réaliser des clonages multiples, et de vous "
 "retrouver avec un désordre colossal.  Soyez prudent."
@@ -13029,7 +13017,7 @@ msgid ""
 "tracker:"
 msgstr ""
 "Choisir l'ordre des champs qui seront affichés dans l'écran de navigation de "
-"votre outil de suivi :"
+"votre outil de suivi :"
 
 #: www/tracker/admin/form-customizelist.php:28
 msgid "Assigned To"
@@ -13055,7 +13043,7 @@ msgid ""
 "all its contents!"
 msgstr ""
 "Vous êtes sur le point de supprimer irrémédiablement ce champ "
-"supplémentaire !"
+"supplémentaire !"
 
 #: www/tracker/admin/form-deletetracker.php:3
 #, php-format
@@ -13068,7 +13056,7 @@ msgid ""
 "its contents!"
 msgstr ""
 "Vous êtes sur le point de supprimer irrémédiablement cet outil de suivi et "
-"tout son contenu !"
+"tout son contenu !"
 
 #: www/tracker/admin/form-extrafieldcopy.php:31
 #, php-format
@@ -13182,7 +13170,7 @@ msgid ""
 "'Status'."
 msgstr ""
 "Pour créer un processus, vous devez d'abord créer un champ personnalisé de "
-"type « statut »."
+"type « statut »."
 
 #: www/tracker/admin/form-workflow.php:20
 msgid "Configure workflow"
@@ -13255,9 +13243,9 @@ msgstr ""
 "suivi a en effet des listes d'utilisateurs, de groupes, de catégories et de "
 "permissions séparées.  Vous pouvez également déplacer des objets d'un outil "
 "de suivi à un autre le cas échéant.</p><p>Les outils de suivi sont parfois "
-"appelés « trackers » ou « types d'artfacts », et les objets qu'ils servent à "
-"manipuler sont des « artefacts ».  Par exemple, un rapport de bogue est un "
-"artefact, mais l'outil « Gestionnaire de bogues » est un type d'artefacts.  "
+"appelés « trackers » ou « types d'artfacts », et les objets qu'ils servent à "
+"manipuler sont des « artefacts ».  Par exemple, un rapport de bogue est un "
+"artefact, mais l'outil « Gestionnaire de bogues » est un type d'artefacts.  "
 "Vous pouvez définir autant de types d'artefacts que vous le désirez, en "
 "gardant à l'esprit que vous devrez définir, pour chacun, des catégories, des "
 "groupes, et des permissions, ce qui peut prendre du temps."
@@ -13408,7 +13396,7 @@ msgstr "Moteur de rendu téléchargé"
 #: www/tracker/admin/updates.php:412
 msgid "ERROR: Initial values not saved, no initial state given."
 msgstr ""
-"Erreur : valeurs initiales non sauvegardées et pas d'état initial spécifié."
+"Erreur : valeurs initiales non sauvegardées et pas d'état initial spécifié."
 
 #: www/tracker/admin/updates.php:416
 msgid "Initial values saved."
@@ -13481,8 +13469,8 @@ msgid ""
 "Filtering and Sorting' to change."
 msgstr ""
 "Seuls les enregistrements ouverts sont affichés par défaut.  Pour voir les "
-"autres, utilisez les fonctions de « filtrage et tri simples » ou les « "
-"requêtes avancées »."
+"autres, utilisez les fonctions de « filtrage et tri simples » ou les « "
+"requêtes avancées »."
 
 #: www/tracker/browse.php:542
 #: www/tracker/include/ArtifactTypeHtml.class.php:552
@@ -13508,7 +13496,7 @@ msgstr "Supprimer l'objet"
 
 #: www/tracker/deleteartifact.php:24
 msgid "Are you sure you want to delete this artifact?"
-msgstr "Etes-vous sûr de vouloir supprimer cet élément ?"
+msgstr "Etes-vous sûr de vouloir supprimer cet élément ?"
 
 #: www/tracker/deleteartifact.php:28
 msgid "Yes, I want to delete this artifact"
@@ -13610,7 +13598,7 @@ msgstr "(% pour les jokers)"
 msgid ""
 "Tip: Enter a space-separated list of artifact ids ([#NNN] also accepted)"
 msgstr ""
-"Astuce : saisissez une liste d'identifiants d'artifacts séparés par des "
+"Astuce : saisissez une liste d'identifiants d'artifacts séparés par des "
 "espaces (la syntaxe [#NNN] est aussi acceptée)."
 
 #: www/tracker/ind.php:34
@@ -13686,11 +13674,11 @@ msgstr "Supprimer la requête"
 #: www/tracker/query.php:286
 #, php-format
 msgid "Note: The default project query is currently '%1$s'."
-msgstr "Note : la requête par défaut de ce projet est actuellement « %1$s »."
+msgstr "Note : la requête par défaut de ce projet est actuellement « %1$s »."
 
 #: www/tracker/query.php:289
 msgid "Note: There is no default project query defined."
-msgstr "Note : aucune requête par défaut n'a été définie sur ce projet."
+msgstr "Note : aucune requête par défaut n'a été définie sur ce projet."
 
 #: www/tracker/query.php:294
 msgid "Type of query"
@@ -13780,7 +13768,7 @@ msgstr "Fichier envoyé avec succès"
 
 #: www/tracker/tracker.php:381
 msgid "File Delete:"
-msgstr "Fichier détruit :"
+msgstr "Fichier détruit :"
 
 #: www/tracker/tracker.php:384
 msgid "File Delete: Successful"
@@ -13788,7 +13776,7 @@ msgstr "Fichier détruit avec succès"
 
 #: www/tracker/tracker.php:489
 msgid "Confirmation failed. Artifact not deleted"
-msgstr "Vous n'avez pas confirmé : l'élément n'a pas été supprimé."
+msgstr "Vous n'avez pas confirmé : l'élément n'a pas été supprimé."
 
 #: www/tracker/tracker.php:493
 msgid "Artifact Delete Failed"
@@ -13816,19 +13804,19 @@ msgstr "Erreur lors d'une opération sur l'arbre des catégories"
 
 #: www/trove/admin/trove_cat_add.php:56 www/trove/admin/trove_cat_edit.php:138
 msgid "Parent Category: "
-msgstr "Catégorie mère : "
+msgstr "Catégorie mère : "
 
 #: www/trove/admin/trove_cat_add.php:86 www/trove/admin/trove_cat_edit.php:86
 msgid "New category short name (no spaces, Unix-like): "
-msgstr "Nom court de la nouvelle catégorie (pas d'espace, à la Unix) : "
+msgstr "Nom court de la nouvelle catégorie (pas d'espace, à la Unix) : "
 
 #: www/trove/admin/trove_cat_add.php:88 www/trove/admin/trove_cat_edit.php:89
 msgid "New category full name (80 characters max): "
-msgstr "Nom complet de la nouvelle catégorie (80 caractères maxi) : "
+msgstr "Nom complet de la nouvelle catégorie (80 caractères maxi) : "
 
 #: www/trove/admin/trove_cat_add.php:90 www/trove/admin/trove_cat_edit.php:92
 msgid "New category description (255 characters max): "
-msgstr "Description de la nouvelle catégorie (255 caractères maxi) : "
+msgstr "Description de la nouvelle catégorie (255 caractères maxi) : "
 
 #: www/trove/admin/trove_cat_edit.php:95
 msgid "update"
