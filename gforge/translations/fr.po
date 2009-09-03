@@ -10780,10 +10780,10 @@ msgstr ""
 
 #: www/register/projectinfo.php:159
 msgid ""
-"<h3>6. SCM</h3><p>You can choose among different SCM for your project, but "
+"<h3>5. SCM</h3><p>You can choose among different SCM for your project, but "
 "just one. Please select the SCM system you want to use.</p>"
 msgstr ""
-"<h3>6. Gestion de sources</h3><p>Vous pouvez choisir parmi différents "
+"<h3>5. Gestion de sources</h3><p>Vous pouvez choisir parmi différents "
 "gestionnaires de sources pour votre projet mais seulement un seul. Merci de "
 "choisir avec soin le gestionnaire de sources que vous souhaitez utiliser.</"
 "p> <p><strong>Vous ne pourrez plus le changer une fois le projet enregistré !"

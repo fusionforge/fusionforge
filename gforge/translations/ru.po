@@ -10749,10 +10749,10 @@ msgstr ""
 
 #: www/register/projectinfo.php:159
 msgid ""
-"<h3>6. SCM</h3><p>You can choose among different SCM for your project, but "
+"<h3>5. SCM</h3><p>You can choose among different SCM for your project, but "
 "just one. Please select the SCM system you want to use.</p>"
 msgstr ""
-"<h3>6. SCM</h3><p>Вы можете выбрать один из двух типов системы управления "
+"<h3>5. SCM</h3><p>Вы можете выбрать один из двух типов системы управления "
 "версиями <b>SCM</b> для Вашего проекта: <b>svn</b> или <b>cvs</b> "
 "(рекомендуется SVN). Пожалуйста выберите систему SCM, которую Вы хотите "
 "использовать.</p>"

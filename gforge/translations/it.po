@@ -10603,10 +10603,10 @@ msgstr ""
 
 #: www/register/projectinfo.php:159
 msgid ""
-"<h3>6. SCM</h3><p>You can choose among different SCM for your project, but "
+"<h3>5. SCM</h3><p>You can choose among different SCM for your project, but "
 "just one. Please select the SCM system you want to use.</p>"
 msgstr ""
-"<h3>6. SCM</h3><p>Puoi selezionare un solo SCM per il tuo progetto. </p> "
+"<h3>5. SCM</h3><p>Puoi selezionare un solo SCM per il tuo progetto. </p> "
 "<p><strong>Non sarà possibile cambiare questa impostazione una volta che il "
 "progetto è registrato!</strong></p>"
 

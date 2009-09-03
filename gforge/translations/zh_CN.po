@@ -10431,10 +10431,10 @@ msgstr ""
 
 #: www/register/projectinfo.php:159
 msgid ""
-"<h3>6. SCM</h3><p>You can choose among different SCM for your project, but "
+"<h3>5. SCM</h3><p>You can choose among different SCM for your project, but "
 "just one. Please select the SCM system you want to use.</p>"
 msgstr ""
-"<h3>6. SCM</h3><p>您为您的项目能在不同的SCM之中选择，但是只能选择一个。请选择"
+"<h3>5. SCM</h3><p>您为您的项目能在不同的SCM之中选择，但是只能选择一个。请选择"
 "您要使用的SCM系统。</p> <p><strong>一旦项目被注册你将不能够改变它！</"
 "strong></p>"
 
