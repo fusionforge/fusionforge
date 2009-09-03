@@ -156,7 +156,7 @@ site_header(array('title'=>_('Project Information')));
 				printf(_('As there is only one SCM system, then this will be selected automatically. <strong>%1$s</strong> will be selected.'), $scm_plugins[0]).'<br /><br />';
 				echo '<input type="hidden" name="scm" value="'. $scm_plugins[0].'">';
 			} else {
-				echo _('<h3>6. SCM</h3><p>You can choose among different SCM for your project, but just one. Please select the SCM system you want to use.</p>')."\n";
+				echo _('<h3>5. SCM</h3><p>You can choose among different SCM for your project, but just one. Please select the SCM system you want to use.</p>')."\n";
 				echo '<table><tbody><tr><td><strong>'._('SCM Repository').':</strong></td>';
 				$checked=true;
 				foreach($scm_plugins as $plugin) {
