@@ -74,14 +74,10 @@ class TroveCategoryLabel extends Error {
 			return false;
 		}
 		
-		$sql = 'INSERT INTO trove_category_labels '
-			. '(category_id, label, language_id) VALUES ('
-			. $this->category->getId(). ', '
-			. "'".$label."',"
-			. "'".$languageId."')";
-		
 		db_begin();
-		$result = db_query($sql);
+		$result = db_query_params("INSERT INTO trove_category_labels
+			(category_id, label, language_id) VALUES ($1, $2, $3)",
+			array($this->category->getId(), $label, $languageId));
 		echo db_error();
 		if (!$result) {
 			db_rollback();
@@ -96,11 +92,11 @@ class TroveCategoryLabel extends Error {
 	}
 	
 	function fetchData($labelId) {
-		$res=db_query("SELECT trove_category_labels.*, supported_languages.name AS language_name FROM trove_category_labels, supported_languages "
-			. "WHERE trove_category_labels.label_id='".$labelId."' "
-			. "AND trove_category_labels.category_id='". $this->category->getId() ."' "
-			. "AND supported_languages.language_id=trove_category_labels.language_id"
-			);
+		$res=db_query_params("SELECT trove_category_labels.*, supported_languages.name AS language_name FROM trove_category_labels, supported_languages "
+			. "WHERE trove_category_labels.label_id=$1 "
+			. "AND trove_category_labels.category_id=$2 "
+			. "AND supported_languages.language_id=trove_category_labels.language_id",
+			array($labelId, $this->category->getId()));
 
 		if (!$res || db_numrows($res) < 1) {
 			return false;
@@ -112,7 +108,7 @@ class TroveCategoryLabel extends Error {
 
 	function remove() {
 		db_begin();
-		$res = db_query('DELETE FROM trove_category_labels WHERE label_id='.$this->labelId);
+		$res = db_query_params("DELETE FROM trove_category_labels WHERE label_id=$1", array($this->labelId));
 		if(!res || db_affected_rows($res) != 1) {
 			// $this->setError();
 			db_rollback();

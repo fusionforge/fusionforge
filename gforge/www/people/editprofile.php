@@ -33,9 +33,8 @@ if (session_loggedin()) {
 			exit_form_double_submit();
 		}
 		
-		$sql="UPDATE users SET people_view_skills='$people_view_skills'
-WHERE user_id='".user_getid()."'";
-		$result=db_query($sql);
+		$result=db_query_params("UPDATE users SET people_view_skills=$1
+WHERE user_id=$2", array($people_view_skills, $user_getid()));
 		if (!$result || db_affected_rows($result) < 1) {
 			form_release_key(getStringFromRequest("form_key"));
 			$feedback .= _('User update FAILED');
@@ -68,21 +67,20 @@ WHERE user_id='".user_getid()."'";
 			$title = str_replace("\n", " ", $title);
 			
 				 
-			$sql = "SELECT * from skills_data where user_id = ".user_getid().
-				   " AND type=".$type.
-				   " AND title='".$title."'".
-				   " AND start=".$start.
-				   " AND finish=".$finish.
-				   " AND keywords='".$keywords."'";
+			$result = db_query_params("SELECT * from skills_data where user_id = $1
+				   AND type=$2
+				   AND title=$3
+				   AND start=$4
+				   AND finish=$5
+				   AND keywords=$6",
+					 array($user_getid(), $type, $title, $start, $finish, $keywords));
 				   
-			$result=db_query($sql);
 			if (db_numrows($result) >= 1) {
 				$feedback .= '';	/* don't tell them anything! */
 			} else {		  
-				$sql = "INSERT into skills_data (user_id, type, title, start, finish, keywords) values
-(".user_getid().",".$type.",'".$title."',".$start.",".$finish.",'".$keywords."')";
+				$result = db_query_params("INSERT into skills_data (user_id, type, title, start, finish, keywords) values
+($1, $2, $3, $4, $5, $6)",array(user_getid(), $type, $title, $start, $finish, $keywords));
 			   
-				$result=db_query($sql);
 				if (!$result || db_affected_rows($result) < 1) {
 					form_release_key(getStringFromRequest("form_key"));
 					echo db_error();
@@ -122,11 +120,9 @@ WHERE user_id='".user_getid()."'";
 
 					$keywords[$i] = str_replace("\n", " ", $keywords[$i]);  /* strip out any backspace characters. */
 					$title[$i] = str_replace("\n", " ", $title[$i]);
-					$sql="UPDATE skills_data SET type='$type[$i]',title='$title[$i]',start='$startY[$i]$startM[$i]',
-finish='$endY[$i]$endM[$i]',keywords='$keywords[$i]' 
-WHERE skills_data_id='$skill_edit[$i]'";
+					$result = db_query_params("UPDATE skills_data SET type=$1 ,title=$2 ,start=$3,finish=$4, keywords=$5 WHERE skills_data_id=$6",
+																		array($type[$i], $title[$i], $startY[$i]$startM[$i], $endY[$i]$endM[$i], $keywords[$i], $skill_edit[$i]));
 
-					$result=db_query($sql);
 					if (!$result || db_affected_rows($result) < 1) {
 						echo db_error();
 						$feedback = _('Failed to update skills');
@@ -232,9 +228,7 @@ WHERE skills_data_id='$skill_edit[$i]'";
 	html_feedback_top($feedback);
 		
 	//for security, include group_id
-	$sql="SELECT * FROM users WHERE user_id='". user_getid() ."'";
-	
-	$result=db_query($sql);
+	$result = db_query_params("SELECT * FROM users WHERE user_id=$1", array(user_getid()));
 
 	if (!$result || db_numrows($result) < 1) {
 		echo db_error();
@@ -258,8 +252,7 @@ WHERE skills_data_id='$skill_edit[$i]'";
 		//now show the list of desired skills
 		//echo '<p>'.people_edit_skill_inventory( user_getid() );
 	   
-		$sql="SELECT * FROM skills_data_types WHERE type_id > 0";
-		$skills=db_query($sql);
+		$skills = db_query_params("SELECT * FROM skills_data_types WHERE type_id > 0", array());
 		if (!$skills || db_numrows($skills) < 1) {
 			echo db_error();
 			$feedback .= _('No skill types in database (skills_data_types table)');

@@ -193,10 +193,10 @@ function frs_show_release_popup ($group_id, $name='release_id', $checked_val="xz
 			}
 			$sql .=
 				"FROM frs_release,frs_package 
-WHERE frs_package.group_id='$group_id' 
+WHERE frs_package.group_id=$1 
 AND frs_release.package_id=frs_package.package_id";
 
-			$FRS_RELEASE_RES = db_query($sql);
+			$FRS_RELEASE_RES = db_query_params($sql,array($group_id));
 			echo db_error();
 		}
 		return html_build_select_box($FRS_RELEASE_RES,$name,$checked_val,false);

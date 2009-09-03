@@ -121,14 +121,13 @@ function snippet_footer($params) {
 
 function snippet_show_package_snippets($version) {
 	//show the latest version
-	$sql="SELECT snippet_package_item.snippet_version_id, snippet_version.version,snippet.name,users.user_name 
+	$result=db_query_params("SELECT snippet_package_item.snippet_version_id, snippet_version.version,snippet.name,users.user_name 
 FROM snippet,snippet_version,snippet_package_item,users 
 WHERE snippet.snippet_id=snippet_version.snippet_id 
 AND users.user_id=snippet_version.submitted_by 
 AND snippet_version.snippet_version_id=snippet_package_item.snippet_version_id 
-AND snippet_package_item.snippet_package_version_id='$version'";
+AND snippet_package_item.snippet_package_version_id=$1", array($version));
 
-	$result=db_query($sql);
 	$rows=db_numrows($result);
 	echo '
 	<p>&nbsp;</p>
@@ -170,8 +169,7 @@ AND snippet_package_item.snippet_package_version_id='$version'";
 function snippet_show_package_details($id) {
 	global $SCRIPT_CATEGORY,$SCRIPT_LANGUAGE;
 
-	$sql="SELECT * FROM snippet_package WHERE snippet_package_id='$id'";
-	$result=db_query($sql);
+	$result=db_query_params("SELECT * FROM snippet_package WHERE snippet_package_id=$1", array($id));
 
 	echo '
 	<p>
@@ -202,8 +200,7 @@ function snippet_show_package_details($id) {
 function snippet_show_snippet_details($id) {
 	global $SCRIPT_TYPE,$SCRIPT_CATEGORY,$SCRIPT_LICENSE,$SCRIPT_LANGUAGE;
 
-	$sql="SELECT * FROM snippet WHERE snippet_id='$id'";
-	$result=db_query($sql);
+	$result=db_query_params("SELECT * FROM snippet WHERE snippet_id=$1", array($id));
 
 	echo '
 	<p>

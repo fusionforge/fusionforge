@@ -227,18 +227,17 @@ function news_foundry_latest($group_id=0,$limit=5,$show_summaries=true) {
 		Show a the latest news for a portal
 	*/
 
-	$sql="SELECT groups.group_name,groups.unix_group_name,groups.group_id,
+	$result=db_query_params("SELECT groups.group_name,groups.unix_group_name,groups.group_id,
 		users.user_name,users.realname,news_bytes.forum_id,
 		news_bytes.summary,news_bytes.post_date,news_bytes.details 
 		FROM users,news_bytes,groups,foundry_news 
-		WHERE foundry_news.foundry_id='$group_id' 
+		WHERE foundry_news.foundry_id=$1 
 		AND users.user_id=news_bytes.submitted_by 
 		AND foundry_news.news_id=news_bytes.id 
 		AND news_bytes.group_id=groups.group_id 
 		AND foundry_news.is_approved=1 
-		ORDER BY news_bytes.post_date DESC";
+		ORDER BY news_bytes.post_date DESC", array($group_id),$limit);
 
-	$result=db_query($sql,$limit);
 	$rows=db_numrows($result);
 
 	if (!$result || $rows < 1) {
@@ -274,8 +273,7 @@ function get_news_name($id) {
 	/*
 		Takes an ID and returns the corresponding forum name
 	*/
-	$sql="SELECT summary FROM news_bytes WHERE id='$id'";
-	$result=db_query($sql);
+	$result=db_query_params("SELECT summary FROM news_bytes WHERE id=$1", array($id));
 	if (!$result || db_numrows($result) < 1) {
 		return "Not Found";
 	} else {

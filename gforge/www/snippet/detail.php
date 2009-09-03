@@ -35,12 +35,11 @@ if ($type=='snippet') {
 	/*
 		Get all the versions of this snippet
 	*/
-	$sql="SELECT users.realname,users.user_name,users.user_id,snippet_version.snippet_version_id,snippet_version.version,snippet_version.post_date,snippet_version.changes 
+	$result=db_query_params("SELECT users.realname,users.user_name,users.user_id,snippet_version.snippet_version_id,snippet_version.version,snippet_version.post_date,snippet_version.changes 
 FROM snippet_version,users 
-WHERE users.user_id=snippet_version.submitted_by AND snippet_id='$id' 
-ORDER BY snippet_version.snippet_version_id DESC";
+WHERE users.user_id=snippet_version.submitted_by AND snippet_id=$1 
+ORDER BY snippet_version.snippet_version_id DESC", array($id));
 
-	$result=db_query($sql);
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '<h3>' ._('Error - no versions found').'</h3>';
@@ -124,11 +123,11 @@ ORDER BY snippet_version.snippet_version_id DESC";
 	/*
 		Get all the versions of this package
 	*/
-	$sql="SELECT users.realname,users.user_name,users.user_id,snippet_package_version.snippet_package_version_id,
+	$result=db_query_params("SELECT users.realname,users.user_name,users.user_id,snippet_package_version.snippet_package_version_id,
 snippet_package_version.version,snippet_package_version.post_date 
 FROM snippet_package_version,users 
-WHERE users.user_id=snippet_package_version.submitted_by AND snippet_package_id='$id' 
-ORDER BY snippet_package_version.snippet_package_version_id DESC";
+WHERE users.user_id=snippet_package_version.submitted_by AND snippet_package_id=$1 
+ORDER BY snippet_package_version.snippet_package_version_id DESC", array($id));
 
 	$result=db_query($sql);
 	$rows=db_numrows($result);

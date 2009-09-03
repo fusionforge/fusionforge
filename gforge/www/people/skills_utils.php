@@ -9,8 +9,7 @@
 
 function displayUserSkills($user_id, $allowEdit) {
 	global $HTML;
-	$sql = "SELECT * FROM skills_data_types ORDER BY type_id ASC";
-	$result=db_query($sql);
+	$result=db_query_params("SELECT * FROM skills_data_types ORDER BY type_id ASC", array());
 	$rows = db_numrows($result);
 	if ($rows >= 1) {
 		/* obtain the types keywords... */
@@ -19,8 +18,7 @@ function displayUserSkills($user_id, $allowEdit) {
 		}
 	}
 	
-	$sql="SELECT * FROM skills_data WHERE user_id='$user_id' ORDER BY finish DESC, start ASC, skills_data_id DESC";
-	$result=db_query($sql);
+	$result= db_query_params("SELECT * FROM skills_data WHERE user_id=$1 ORDER BY finish DESC, start ASC, skills_data_id DESC",array($user_id));
 	$rows = db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo db_error();
@@ -110,8 +108,7 @@ function handle_multi_edit($skill_ids) {
 	if (!$result || $rows < 1) {
 		echo db_error();
 	} else {
-		$sql="SELECT * FROM skills_data_types WHERE type_id > 0";
-		$skills=db_query($sql);
+		$skills=db_query_params("SELECT * FROM skills_data_types WHERE type_id > 0", array());
 		if (!$skills || db_numrows($skills) < 1) {
 			echo db_error();
 			$feedback .= _('User fetch FAILED');

@@ -41,7 +41,7 @@ if ($group_id && $job_id) {
 	*/
 
 	//for security, include group_id
-	$sql="SELECT groups.group_name,people_job_category.name AS category_name,
+	$result=db_query_params("SELECT groups.group_name,people_job_category.name AS category_name,
 people_job_status.name AS status_name,people_job.title,
 people_job.description,people_job.post_date,users.user_name,users.user_id 
 FROM people_job,groups,people_job_status,people_job_category,users 
@@ -49,8 +49,8 @@ WHERE people_job_category.category_id=people_job.category_id
 AND people_job_status.status_id=people_job.status_id 
 AND users.user_id=people_job.created_by 
 AND groups.group_id=people_job.group_id 
-AND people_job.job_id='$job_id' AND people_job.group_id='$group_id'";
-	$result=db_query($sql);
+AND people_job.job_id=$1 AND people_job.group_id=$2",
+array($job_id, $group_id));
 	if (!$result || db_numrows($result) < 1) {
 		people_header(array('title'=>_('View a Job')));
 		echo db_error();

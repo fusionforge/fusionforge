@@ -21,18 +21,17 @@ if ($GLOBALS['submit']) {
 	$newroot = trove_getrootcat($GLOBALS['form_parent']);
 
 	if ($GLOBALS[form_shortname]) {
-		$res = db_query("
+		$res = db_query_params("
 			INSERT INTO trove_cat 
 				(shortname,fullname,description,parent,version,root_parent)
-			VALUES (
-				'".htmlspecialchars($form_shortname)."',
-				'".htmlspecialchars($form_fullname)."',
-				'".htmlspecialchars($form_description)."',
-				'$form_parent',
-				'".date("Ymd",time())."01',
-				'$newroot'
-			)
-		");
+			VALUES ($1, $2, $3, $4, $5, $6)", 
+			array(htmlspecialchars($form_shortname),
+				htmlspecialchars($form_fullname),
+				htmlspecialchars($form_description),
+				$form_parent,
+				date("Ymd",time())."01",
+				$newroot)
+			);
 
 		if (!$res || db_affected_rows($res)<1) {
 			exit_error(

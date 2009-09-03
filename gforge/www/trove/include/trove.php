@@ -25,18 +25,17 @@ $TROVE_HARDQUERYLIMIT = -1;
  */
 function trove_genfullpaths($mynode,$myfullpath,$myfullpathids) {
 	// first generate own path
-	$res_update = db_query('UPDATE trove_cat SET fullpath=\''
-		.$myfullpath.'\',fullpath_ids=\''
-		.$myfullpathids.'\' WHERE trove_cat_id='.$mynode);
+	$res_update = db_query_params("UPDATE trove_cat SET fullpath=$1,
+		fullpath_ids=$2
+		WHERE trove_cat_id=$3", array($myfullpath, $myfullpathids, $mynode));
 	// now generate paths for all children by recursive call
 	if($mynode!=0)
 	{
-		$res_child = db_query("
+		$res_child = db_query_params("
 			SELECT trove_cat_id,fullname
 			FROM trove_cat
-			WHERE parent='$mynode'
-			AND trove_cat_id!=0;
-		", -1, 0, SYS_DB_TROVE);
+			WHERE parent=$1
+			AND trove_cat_id!=0;", array($mynode), -1, 0, SYS_DB_TROVE);
 
 		while ($row_child = db_fetch_array($res_child)) {
 			trove_genfullpaths($row_child['trove_cat_id'],
@@ -56,17 +55,16 @@ function trove_genfullpaths($mynode,$myfullpath,$myfullpathids) {
  */
 function trove_updaterootparent($mynode,$rootnode) {
 	// first generate own path
-	if($mynode!=$rootnode) $res_update = db_query('UPDATE trove_cat SET root_parent=' .$rootnode. ' WHERE trove_cat_id='.$mynode);
-	else $res_update = db_query('UPDATE trove_cat SET root_parent=0 WHERE trove_cat_id='.$mynode);
+	if($mynode!=$rootnode) $res_update = db_query_params("UPDATE trove_cat SET root_parent=$1 WHERE trove_cat_id=$2", array($rootnode, $mynode));
+	else $res_update = db_query_params("UPDATE trove_cat SET root_parent=0 WHERE trove_cat_id=$1", array($mynode));
 	// now generate paths for all children by recursive call
 	if($mynode!=0)
 	{
-		$res_child = db_query("
+		$res_child = db_query_params("
 			SELECT trove_cat_id
 			FROM trove_cat
-			WHERE parent='$mynode'
-			AND trove_cat_id!=0;
-		", -1, 0, SYS_DB_TROVE);
+			WHERE parent=$1
+			AND trove_cat_id!=0;", array($mynode), -1, 0, SYS_DB_TROVE);
 
 		while ($row_child = db_fetch_array($res_child)) {
 			trove_updaterootparent($row_child['trove_cat_id'],$rootnode);
@@ -88,11 +86,10 @@ function trove_setnode($group_id,$trove_cat_id,$rootnode=0) {
 	if ((!$group_id) || (!$trove_cat_id)) return 1;
 
 	// verify trove category exists
-	$res_verifycat = db_query("
+	$res_verifycat = db_query_params("
 		SELECT trove_cat_id,fullpath_ids
 		FROM trove_cat
-		WHERE trove_cat_id='$trove_cat_id'
-	", -1, 0, SYS_DB_TROVE);
+		WHERE trove_cat_id=$1", array($trove_cat_id), -1, 0, SYS_DB_TROVE);
 
 	if (db_numrows($res_verifycat) != 1) return 1;
 	$row_verifycat = db_fetch_array($res_verifycat);
@@ -103,13 +100,13 @@ function trove_setnode($group_id,$trove_cat_id,$rootnode=0) {
 	}
 
 	// must first make sure that this is not a subnode of anything current
-	$res_topnodes = db_query("
+	$res_topnodes = db_query_params("
 		SELECT trove_cat.trove_cat_id AS trove_cat_id,
 			trove_cat.fullpath_ids AS fullpath_ids
 		FROM trove_cat,trove_group_link
 		WHERE trove_cat.trove_cat_id=trove_group_link.trove_cat_id
-		AND trove_group_link.group_id='$group_id'
-		AND trove_cat.root_parent='$rootnode'");
+		AND trove_group_link.group_id=$1
+		AND trove_cat.root_parent=$2", array($group_id, $rootnode));
 
 	while($row_topnodes = db_fetch_array($res_topnodes)) {
 		$pathids = explode(' :: ',$row_topnodes['fullpath_ids']);
@@ -137,17 +134,17 @@ function trove_setnode($group_id,$trove_cat_id,$rootnode=0) {
 		for ($i=0;$i<count($subnodeids);$i++) {
 			if ($subnodeids[$i] == $row_checksubs['trove_cat_id']) {
 				// then delete subnode
-				db_query('DELETE FROM trove_group_link WHERE '
-					.'group_id='.$group_id.' AND trove_cat_id='
-					.$subnodeids[$i]);
+				db_query_params("DELETE FROM trove_group_link WHERE 
+					group_id=$1 AND trove_cat_id=$2",
+					array($group_id, $subnodeids[$i]));
 			}
 		}
 	}
 
 	// if we got this far, must be ok
-	db_query('INSERT INTO trove_group_link (trove_cat_id,trove_cat_version,'
-		.'group_id,trove_cat_root) VALUES ('.$trove_cat_id.','
-		.time().','.$group_id.','.$rootnode.')');
+	db_query_params("INSERT INTO trove_group_link (trove_cat_id,trove_cat_version,
+		group_id,trove_cat_root) VALUES ($1, $2, $3, $4)",
+		array($trove_cat_id, time(), $group_id, $rootnode));
 	return 0;
 }
 

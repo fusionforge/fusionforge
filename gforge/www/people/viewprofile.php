@@ -29,8 +29,7 @@ if ($user_id && is_numeric($user_id)) {
 	people_header(array('title'=>_('View a User Profile')));
 
 	//for security, include group_id
-	$sql="SELECT * FROM users WHERE user_id='$user_id'";
-	$result=db_query($sql);
+	$result=db_query_params("SELECT * FROM users WHERE user_id=$1", array($user_id));
 	if (!$result || db_numrows($result) < 1) {
 		echo db_error();
 		$feedback .= _('User fetch FAILED');

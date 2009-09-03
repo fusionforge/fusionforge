@@ -312,7 +312,7 @@ function createTables() {
 
 	for ($i=0; $i<count($sql); $i++) {
 
-		$res=db_query($sql[$i]);
+		$res=db_query_params($sql[$i], array());
 
 	}
 

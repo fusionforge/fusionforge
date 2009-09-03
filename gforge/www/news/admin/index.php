@@ -80,9 +80,8 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 			
 			$sanitizer = new TextSanitizer();
 			$details = $sanitizer->SanitizeHtml($details);
-			$sql="UPDATE news_bytes SET is_approved='$status', summary='".htmlspecialchars($summary)."', 
-details='".$details."' WHERE id='$id' AND group_id='$group_id'";
-			$result=db_query($sql);
+			$result = db_query_params("UPDATE news_bytes SET is_approved=$1, summary=$2, 
+details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summary), $details, $id, $group_id));
 
 			if (!$result || db_affected_rows($result) < 1) {
 				$feedback .= _('Error On Update:');
@@ -104,8 +103,7 @@ details='".$details."' WHERE id='$id' AND group_id='$group_id'";
 			Show the submit form
 		*/
 
-		$sql="SELECT * FROM news_bytes WHERE id='$id' AND group_id='$group_id'";
-		$result=db_query($sql);
+		$result=db_query_params("SELECT * FROM news_bytes WHERE id=$1 AND group_id=$2", array($id, $group_id));
 		if (db_numrows($result) < 1) {
 			exit_error(_('Error'), _('NewsByte not found'));
 		}
@@ -159,8 +157,7 @@ details='".$details."' WHERE id='$id' AND group_id='$group_id'";
 			Show list of waiting news items
 		*/
 
-		$sql="SELECT * FROM news_bytes WHERE is_approved <> 4 AND group_id='$group_id'";
-		$result=db_query($sql);
+		$result=db_query_params("SELECT * FROM news_bytes WHERE is_approved <> 4 AND group_id=$1", array($group_id));
 		$rows=db_numrows($result);
 		$group =& group_get_object($group_id);
 		
@@ -199,9 +196,8 @@ details='".$details."' WHERE id='$id' AND group_id='$group_id'";
 				*/
 				$sanitizer = new TextSanitizer();
 				$details = $sanitizer->SanitizeHtml($details);
-				$sql="UPDATE news_bytes SET is_approved='1', post_date='".time()."', 
-summary='".htmlspecialchars($summary)."', details='".$details."' WHERE id='$id'";
-				$result=db_query($sql);
+				$result=db_query_params("UPDATE news_bytes SET is_approved='1', post_date=$1, 
+summary=$2, details=$3 WHERE id=$4", array(time(), htmlspecialchars($summary), $details, $id));
 				if (!$result || db_affected_rows($result) < 1) {
 					$feedback .= _('Error On Update:');
 				} else {
@@ -211,8 +207,7 @@ summary='".htmlspecialchars($summary)."', details='".$details."' WHERE id='$id'"
 				/*
 					Move msg to deleted status
 				*/
-				$sql="UPDATE news_bytes SET is_approved='2' WHERE id='$id'";
-				$result=db_query($sql);
+				$result=db_query_params("UPDATE news_bytes SET is_approved='2' WHERE id=$1", array($id));
 				if (!$result || db_affected_rows($result) < 1) {
 					$feedback .= _('Error On Update:');
 					$feedback .= db_error();
@@ -231,10 +226,9 @@ summary='".htmlspecialchars($summary)."', details='".$details."' WHERE id='$id'"
 				Move msg to rejected status
 			*/
 			$news_id = getArrayFromRequest('news_id');
-			$sql="UPDATE news_bytes 
+			$result = db_query_params("UPDATE news_bytes 
 SET is_approved='2' 
-WHERE id IN ('".implode("','",$news_id)."')";
-			$result=db_query($sql);
+WHERE id = ANY($1)",array(db_int_array_to_any_clause($news_id)));
 			if (!$result || db_affected_rows($result) < 1) {
 				$feedback .= _('Error On Update:');
 				$feedback .= db_error();
@@ -251,10 +245,9 @@ WHERE id IN ('".implode("','",$news_id)."')";
 			Show the submit form
 		*/
 
-		$sql="SELECT groups.unix_group_name,groups.group_id,news_bytes.* 
-FROM news_bytes,groups WHERE id='$id' 
-AND news_bytes.group_id=groups.group_id ";
-		$result=db_query($sql);
+		$result=db_query_params("SELECT groups.unix_group_name,groups.group_id,news_bytes.* 
+FROM news_bytes,groups WHERE id=$1 
+AND news_bytes.group_id=groups.group_id ", array($id));
 		if (db_numrows($result) < 1) {
 			exit_error(_('Error'), _('NewsByte not found'));
 		}

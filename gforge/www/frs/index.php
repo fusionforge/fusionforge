@@ -53,11 +53,11 @@ if (session_loggedin()) {
 
 $sql = "SELECT *
 	FROM frs_package 
-	WHERE group_id='$group_id' 
+	WHERE group_id=$1 
 	AND status_id='1' 
 	$pub_sql
 	ORDER BY name";
-$res_package = db_query( $sql );
+$res_package = db_query_params( $sql, array($group_id));
 $num_packages = db_numrows( $res_package );
 
 
@@ -172,7 +172,7 @@ if ( $num_packages < 1) {
 					
 				print $GLOBALS['HTML']->multiTableRow($bgstyle, $cell_data, FALSE);
 				// get the files in this release....
-				$sql = "SELECT frs_file.filename AS filename,
+				$res_file = db_query_params("SELECT frs_file.filename AS filename,
 				frs_file.file_size AS file_size,
 				frs_file.file_id AS file_id,
 				frs_file.release_time AS release_time,
@@ -181,11 +181,10 @@ if ( $num_packages < 1) {
 				frs_dlstats_filetotal_agg.downloads AS downloads 
 				FROM frs_filetype,frs_processor,
 				frs_file LEFT JOIN frs_dlstats_filetotal_agg ON frs_dlstats_filetotal_agg.file_id=frs_file.file_id 
-				WHERE release_id='". $package_release['release_id'] ."' 
+				WHERE release_id=$1
 				AND frs_filetype.type_id=frs_file.type_id 
 				AND frs_processor.processor_id=frs_file.processor_id 
-				ORDER BY filename";
-				$res_file = db_query($sql);
+				ORDER BY filename", array($package_release['release_id']));
 				$num_files = db_numrows( $res_file );
 
 				@$proj_stats['files'] += $num_files;

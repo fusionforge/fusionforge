@@ -182,8 +182,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 		</td>
 		<td>
 <?php
-	$sql="SELECT * FROM frs_package WHERE group_id='$group_id' AND status_id='1'";
-	$res=db_query($sql);
+	$res=db_query_params("SELECT * FROM frs_package WHERE group_id=$1 AND status_id='1'", array($group_id));
 	$rows=db_numrows($res);
 	if (!$res || $rows < 1) {
 		echo '<h4>'._('No File Types Available').'</h4>';

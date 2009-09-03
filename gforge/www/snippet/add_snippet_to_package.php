@@ -53,9 +53,9 @@ if (session_loggedin()) {
 			/*
 				check to see if they are the creator of this version
 			*/
-			$result=db_query("SELECT * FROM snippet_package_version ".
-				"WHERE submitted_by='".user_getid()."' AND ".
-				"snippet_package_version_id='$snippet_package_version_id'");
+			$result=db_query_params("SELECT * FROM snippet_package_version ".
+				"WHERE submitted_by=$1 AND ".
+				"snippet_package_version_id=$2", array(user_getid(), $snippet_package_version_id));
 			if (!$result || db_numrows($result) < 1) {
 				echo '<h1>' ._('Error - Only the creator of a package version can add snippets to it.').'</h1>';
 				handle_add_exit();
@@ -89,9 +89,8 @@ AND snippet_version_id=$2',
 			/*
 				create the snippet version
 			*/
-			$sql="INSERT INTO snippet_package_item (snippet_package_version_id,snippet_version_id) 
-VALUES ('$snippet_package_version_id','$snippet_version_id')";
-			$result=db_query($sql);
+			$result=db_query_params("INSERT INTO snippet_package_item (snippet_package_version_id,snippet_version_id) 
+VALUES ($1, $2)", array($snippet_package_version_id, $snippet_version_id));
 
 			if (!$result) {
 				$feedback .= _('ERROR DOING SNIPPET VERSION INSERT!');

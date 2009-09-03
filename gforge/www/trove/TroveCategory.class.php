@@ -83,9 +83,9 @@ class TroveCategory extends Error {
 	 *	@return	boolean	success.
 	 */
 	function fetchData($categoryId) {
-		$res=db_query("SELECT *
+		$res=db_query_params("SELECT *
 			FROM trove_cat
-			WHERE trove_cat_id='".$categoryId."'", -1, 0, SYS_DB_TROVE);
+			WHERE trove_cat_id=$1",array($categoryId) -1, 0, SYS_DB_TROVE);
 		if (!$res || db_numrows($res) < 1) {
 			return false;
 		}
@@ -103,12 +103,13 @@ class TroveCategory extends Error {
 			return false;
 		} else {
 			db_begin();
-			$result = db_query("UPDATE trove_cat
-				SET	shortname='".htmlspecialchars($shortName)."',
-					fullname='".htmlspecialchars($fullName)."',
-					description='".htmlspecialchars($description)."',
-					version='".date('Ymd',time())."01'
-				WHERE trove_cat_id='".$this->categoryId."'"
+			$result = db_query_params("UPDATE trove_cat
+				SET	shortname=$1,
+					fullname=$2,
+					description=$3,
+					version=$4
+				WHERE trove_cat_id=$5", 
+				array(htmlspecialchars($shortName), htmlspecialchars($fullName), htmlspecialchars($description), date('Ymd',time())."01", $this->categoryId));
 			);
 			if(!$result || db_affected_rows($result) != 1) {
 				$this->setError(_('ERROR'), _('Cannot update'));
@@ -155,8 +156,9 @@ class TroveCategory extends Error {
 	function & getLabels() {
 		if(!isset($this->labels)) {
 			$this->labels = array();
-			$sql = 'SELECT  trove_category_labels.*, supported_languages.name AS language_name FROM trove_category_labels, supported_languages  WHERE category_id='.$this->categoryId.' AND supported_languages.language_id=trove_category_labels.language_id';
-			$res = db_query($sql);
+			$res = db_query_params("SELECT  trove_category_labels.*, supported_languages.name AS language_name FROM trove_category_labels, supported_languages  
+																WHERE category_id=$1 AND supported_languages.language_id=trove_category_labels.language_id", 
+																array($this->cathergoryId));
 			
 			if (!$res) {
 				return $this->labels;
@@ -177,7 +179,7 @@ class TroveCategory extends Error {
 		if(!isset($this->children)) {
 			$this->children = array();
 			
-			$result = db_query("
+			$result = db_query_params("
 				SELECT trove_cat.*,
 				trove_treesums.subprojects AS subprojects
 				FROM trove_cat LEFT JOIN trove_treesums USING (trove_cat_id) 
@@ -185,9 +187,9 @@ class TroveCategory extends Error {
 					trove_treesums.limit_1=0 
 					OR trove_treesums.limit_1 IS NULL
 				)
-				AND trove_cat.parent='".$this->categoryId."'
-				ORDER BY fullname
-			", -1, 0, SYS_DB_TROVE);
+				AND trove_cat.parent=$1
+				ORDER BY fullname",
+				array($this->categoryId), -1, 0, SYS_DB_TROVE);
 			
 			if(!$result) {
 				$this->setError();

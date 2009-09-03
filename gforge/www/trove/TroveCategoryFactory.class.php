@@ -33,13 +33,13 @@ class TroveCategoryFactory {
 	 * @return	array	The array of TroveCategory objects.
 	 */
 	function & getRootCategories() {
-		$result = db_query('
+		$result = db_query_params("
 			SELECT *
 			FROM trove_cat
 			WHERE parent = 0
 			AND trove_cat_id != 0
 			ORDER BY fullname
-		');
+		", array());
 		
 		if(!$result) {
 			$this->setError();
@@ -54,12 +54,12 @@ class TroveCategoryFactory {
 	}
 	
 	function & getCategories($ids) {
-		$result = db_query('
+		$result = db_query_params("
 			SELECT *
 			FROM trove_cat
-			WHERE trove_cat_id IN('.implode(',', $ids).')
+			WHERE trove_cat_id = ANY ($1)
 			ORDER BY fullname
-		');
+		", array(db_int_array_to_any_clause($ids)));
 		if(!$result) {
 			$this->setError();
 			return false;
