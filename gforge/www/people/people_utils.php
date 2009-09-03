@@ -219,7 +219,7 @@ VALUES ($1, $2, $3, $4)", array($job_id, $skill_id, $skill_level_id, $skill_year
 }
 
 function people_show_job_inventory($job_id) {
-	$result=db_query_params="SELECT people_skill.name AS skill_name, people_skill_level.name AS level_name, people_skill_year.name AS year_name 
+	$result=db_query_params("SELECT people_skill.name AS skill_name, people_skill_level.name AS level_name, people_skill_year.name AS year_name 
 FROM people_skill_year,people_skill_level,people_skill,people_job_inventory 
 WHERE people_skill_year.skill_year_id=people_job_inventory.skill_year_id 
 AND people_skill_level.skill_level_id=people_job_inventory.skill_level_id 
