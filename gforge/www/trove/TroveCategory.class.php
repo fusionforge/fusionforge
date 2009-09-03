@@ -83,9 +83,8 @@ class TroveCategory extends Error {
 	 *	@return	boolean	success.
 	 */
 	function fetchData($categoryId) {
-		$res=db_query_params("SELECT *
-			FROM trove_cat
-			WHERE trove_cat_id=$1",array($categoryId) -1, 0, SYS_DB_TROVE);
+		$res = db_query_params('SELECT * FROM trove_cat	WHERE trove_cat_id=$1',
+				       array($categoryId));
 		if (!$res || db_numrows($res) < 1) {
 			return false;
 		}

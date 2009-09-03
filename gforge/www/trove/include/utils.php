@@ -24,12 +24,8 @@
  */
 
 function getLanguageSelectionPopup($alreadyDefined = array()) {
-	$where = '';
-	if(!empty($alreadyDefined)) {
-		$where = ' WHERE language_id NOT IN('.implode(',', $alreadyDefined).')';
-	}
-	$res = db_query('SELECT * FROM supported_languages'.$where.' ORDER BY name ASC');
-	
+	$res = db_query_params ('SELECT * FROM supported_languages WHERE language_id <> ALL ($1) ORDER BY name ASC',
+				array (db_int_array_to_any_clause ($alreadyDefined)));
 	return html_build_select_box ($res, 'language_id', 'xzxz', false);
 }
 
