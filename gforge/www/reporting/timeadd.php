@@ -47,30 +47,6 @@ if (getStringFromRequest('submit')) {
 	$old_time_code = getStringFromRequest('old_time_code');
 	$hours = getStringFromRequest('hours');
 
-	/*
-	 if (getStringFromRequest('update')) {
-
-		if ($project_task_id && $report_date && $time_code) {
-		$res=db_query_params ('UPDATE rep_time_tracking
-		SET time_code=$1, hours=$2
-		WHERE user_id='".user_getid()."'
-		AND report_date=$3
-		AND project_task_id=$4
-		AND time_code=$5',
-			array($time_code,
-				$hours,
-				$report_date,
-				$project_task_id,
-				$old_time_code));
-		if (!$res || db_affected_rows($res) < 1) {
-		exit_error('Error',db_error());
-		} else {
-		$feedback='Successfully Updated';
-		}
-		}
-
-		} else
-		*/
 	if (getStringFromRequest('delete')) {
 		if ($project_task_id && $report_date && $old_time_code) {
 			$res=db_query_params ('DELETE FROM rep_time_tracking
@@ -78,10 +54,10 @@ if (getStringFromRequest('submit')) {
 				AND report_date=$2
 				AND project_task_id=$3
 				AND time_code=$4',
-					      array(user_getid(),
-						    $report_date,
-						    $project_task_id,
-						    $old_time_code));
+					      array (user_getid(),
+						     $report_date,
+						     $project_task_id,
+						     $old_time_code));
 			if (!$res || db_affected_rows($res) < 1) {
 				exit_error('Error',db_error());
 			} else {
@@ -100,8 +76,14 @@ if (getStringFromRequest('submit')) {
 			//$report_date = mktime($date_list[3],$date_list[4],0,$date_list[1],$date_list[2],$date_list[0]);
 			//make it 12 NOON of the report_date
 			$report_date=($week + ($days_adjust*REPORT_DAY_SPAN))+(12*60*60);
-			$res=db_query("INSERT INTO rep_time_tracking (user_id,week,report_date,project_task_id,time_code,hours)
-				VALUES ('".user_getid()."','$week','$report_date','$project_task_id','$time_code','$hours')");
+			$res = db_query_params ('INSERT INTO rep_time_tracking (user_id,week,report_date,project_task_id,time_code,hours)
+				VALUES ($1,$2,$3,$4,$5,$6)',
+						array (user_getid(),
+						       $week,
+						       $report_date,
+						       $project_task_id,
+						       $time_code,
+						       $hours));
 			if (!$res || db_affected_rows($res) < 1) {
 				exit_error('Error',db_error());
 			} else {
@@ -122,39 +104,58 @@ if ($week) {
 
 	if (!$group_project_id) {
 		if ( $sys_database_type == "mysql" ) {
-			$sql="SELECT pgl.group_project_id,CONCAT(g.group_name, '**', pgl.project_name)";
-		} else {
-			$sql="SELECT pgl.group_project_id,g.group_name || '**' || pgl.project_name ";
-		}
-		$sql.="
+			$sql = "SELECT pgl.group_project_id,CONCAT(g.group_name, '**', pgl.project_name)
 		FROM groups g, project_group_list pgl, user_group ug
-		WHERE ug.user_id='".user_getid()."' 
+		WHERE ug.user_id='".user_getid()."'
 		AND ug.group_id=g.group_id
 		AND g.group_id=pgl.group_id
 		ORDER BY group_name,project_name";
-		$respm=db_query($sql);
+			$respm = db_query_mysql($sql);
+		} else {
+			$respm = db_query_params ('SELECT pgl.group_project_id,g.group_name || $1 || pgl.project_name 
+		FROM groups g, project_group_list pgl, user_group ug
+		WHERE ug.user_id=$2
+		AND ug.group_id=g.group_id
+		AND g.group_id=pgl.group_id
+		ORDER BY group_name,project_name',
+						  array ('**',
+							 user_getid()));
+		}
 	}
 	?>
 		<h3><?php printf(_('Time Entries For The Week Starting %s'), date(_('Y-m-d'),$week)) ?></h3>
 <p><?php
 if ( $sys_database_type == "mysql" ) {
-	$sql="SELECT pt.project_task_id, CONCAT(pgl.project_name, '**', pt.summary) AS name, ";
-} else {
-	$sql="SELECT pt.project_task_id, pgl.project_name || '**' || pt.summary AS name, ";
-}
-$sql .= "
+
+	$res = db_query_mysql ("SELECT pt.project_task_id, CONCAT(pgl.project_name, '**', pt.summary) AS name, 
 	rtt.hours, rtt.report_date, rtc.category_name, rtt.time_code
 	FROM groups g, project_group_list pgl, project_task pt, rep_time_tracking rtt,
 	rep_time_category rtc
-	WHERE rtt.week='$week'
+	WHERE rtt.week=$week
 			AND rtt.time_code=rtc.time_code
-	AND rtt.user_id='".user_getid()."'
+	AND rtt.user_id=".user_getid()."
 			AND g.group_id=pgl.group_id
 	AND pgl.group_project_id=pt.group_project_id
 	AND pt.project_task_id=rtt.project_task_id
-	ORDER BY rtt.report_date";
+	ORDER BY rtt.report_date");
+} else {
+
+	$res = db_query_params ('SELECT pt.project_task_id, pgl.project_name || $1 || pt.summary AS name, 
+	rtt.hours, rtt.report_date, rtc.category_name, rtt.time_code
+	FROM groups g, project_group_list pgl, project_task pt, rep_time_tracking rtt,
+	rep_time_category rtc
+	WHERE rtt.week=$2
+			AND rtt.time_code=rtc.time_code
+	AND rtt.user_id=$3
+			AND g.group_id=pgl.group_id
+	AND pgl.group_project_id=pt.group_project_id
+	AND pt.project_task_id=rtt.project_task_id
+	ORDER BY rtt.report_date',
+				array ('**',
+				       $week,
+				       user_getid()));
 }
-$res=db_query($sql);
+}
 $rows=db_numrows($res);
 if ($group_project_id || $rows) {
 

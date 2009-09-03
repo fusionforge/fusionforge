@@ -66,55 +66,57 @@ if (!$end) {
 
 
 if ($datatype < 5) {
-
-	$sql="SELECT g.group_name,count(*) AS count
+	$res = db_query_params ('SELECT g.group_name,count(*) AS count
 	FROM groups g, artifact_group_list agl, artifact a
-	WHERE g.group_id=agl.group_id 
-	AND agl.group_artifact_id=a.group_artifact_id 
-	AND a.open_date BETWEEN '$start' AND '$end'
-	AND agl.datatype='$datatype'
+	WHERE g.group_id=agl.group_id
+	AND agl.group_artifact_id=a.group_artifact_id
+	AND a.open_date BETWEEN $1 AND $2
+	AND agl.datatype=$3
 	GROUP BY group_name
-	ORDER BY count DESC";
-
+	ORDER BY count DESC',
+				array ($start,
+				       $end,
+				       $datatype));
 } elseif ($datatype == 5) {
-
-	$sql="SELECT g.group_name,count(*) AS count
+	$res = db_query_params ('SELECT g.group_name,count(*) AS count
 	FROM groups g, forum_group_list fgl, forum f
 	WHERE g.group_id=fgl.group_id
 	AND fgl.group_forum_id=f.group_forum_id
-	AND f.post_date BETWEEN '$start' AND '$end'
+	AND f.post_date BETWEEN $1 AND $2
 	GROUP BY group_name
-	ORDER BY count DESC";
-
+	ORDER BY count DESC',
+				array ($start,
+				       $end));
 } elseif ($datatype == 6) {
-
-	$sql="SELECT g.group_name,count(*) AS count
+	$res = db_query_params ('SELECT g.group_name,count(*) AS count
 	FROM groups g, project_group_list pgl, project_task pt
 	WHERE g.group_id=pgl.group_id
 	AND pgl.group_project_id=pt.group_project_id
-	AND pt.start_date BETWEEN '$start' AND '$end'
+	AND pt.start_date BETWEEN $1 AND $2
 	GROUP BY group_name
-	ORDER BY count DESC";
-
+	ORDER BY count DESC',
+				array ($start,
+				       $end));
 } else {
-
-	$sql="SELECT g.group_name,count(*) AS count
+	$res = db_query_params ('SELECT g.group_name,count(*) AS count
 	FROM groups g, frs_package fp, frs_release fr, frs_file ff, frs_dlstats_file fdf
 	WHERE g.group_id=fp.group_id
 	AND fp.package_id=fr.package_id
 	AND fr.release_id=ff.release_id
 	AND ff.file_id=fdf.file_id
-	AND (((fdf.month > '". date('Ym',$start) ."') OR (fdf.month = '". date('Ym',$start) ."' AND fdf.day >= '". date('d',$start) ."'))
-	AND ((fdf.month < '". date('Ym',$end) ."') OR (fdf.month = '". date('Ym',$end) ."' AND fdf.day < '". date('d',$end) ."')))
+	AND (((fdf.month > $1) OR (fdf.month = $1 AND fdf.day >= $2))
+	AND ((fdf.month < $3) OR (fdf.month = $3 AND fdf.day < $4)))
 	GROUP BY group_name
-	ORDER BY count DESC";
-
+	ORDER BY count DESC',
+				array (date('Ym',$start),
+				       date('d',$start),
+				       date('Ym',$end),
+				       date('d',$end)));
 }
 
 //echo $sql;
 //exit;
 
-$res=db_query($sql);
 
 if (db_error()) {
 	exit_error('Error',db_error());
@@ -145,5 +147,10 @@ $graph->Add( $p1);
 
 // Display the graph
 $graph->Stroke();
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

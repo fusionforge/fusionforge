@@ -78,25 +78,24 @@ echo report_header(_('User Summary Report'));
 	</form>
 	<p>
 	<?php
-
-$sql="SELECT users.realname,users.user_id,users.user_name, ps.status_name, pgl.group_id, pt.group_project_id, 
-pt.summary, pt.hours, pt.end_date, pt.project_task_id, pt.hours, sum(rtt.hours) AS remaining_hrs,
-(select sum(hours) from rep_time_tracking 
-	WHERE user_id=users.user_id 
+	$res = db_query_params ('SELECT users.realname,users.user_id,users.user_name, ps.status_name, pgl.group_id, pt.group_project_id, pt.summary, pt.hours, pt.end_date, pt.project_task_id, pt.hours, sum(rtt.hours) AS remaining_hrs,
+(select sum(hours) from rep_time_tracking
+	WHERE user_id=users.user_id
 	AND project_task_id=pt.project_task_id
-	AND report_date BETWEEN '$start' AND '$end') AS cumulative_hrs
+	AND report_date BETWEEN $1 AND $2) AS cumulative_hrs
 FROM users, project_assigned_to pat, project_status ps, project_group_list pgl, project_task pt
 LEFT JOIN rep_time_tracking rtt USING (project_task_id)
 WHERE users.user_id=pat.assigned_to_id
 AND pgl.group_project_id=pt.group_project_id
 AND pat.project_task_id=pt.project_task_id
 AND pt.status_id=ps.status_id
-AND pt.status_id IN ($tstat)
-AND pt.start_date BETWEEN '$start' AND '$end'
-GROUP BY realname, users.user_id, user_name, status_name, pgl.group_id, pt.group_project_id, 
-	summary, pt.hours, end_date, pt.project_task_id, pt.hours";
-
-$res=db_query($sql);
+AND pt.status_id = ANY ($3)
+AND pt.start_date BETWEEN $1 AND $2
+GROUP BY realname, users.user_id, user_name, status_name, pgl.group_id, pt.group_project_id,
+	summary, pt.hours, end_date, pt.project_task_id, pt.hours',
+				array ($start,
+				       $end,
+				       db_int_array_to_any_clause ($tstat)));
 if (!$res || db_numrows($res) < 1) {
 	echo _('No matches found').db_error();
 } else {
@@ -131,14 +130,14 @@ if (!$res || db_numrows($res) < 1) {
 		</tr>';
 
 		$task=db_result($res,$i,'project_task_id');
-		$sql2="SELECT g.group_name, g.group_id, agl.group_artifact_id, agl.name, a.artifact_id, a.summary
+
+		$res2 = db_query_params ('SELECT g.group_name, g.group_id, agl.group_artifact_id, agl.name, a.artifact_id, a.summary
 		FROM project_task_artifact pta, artifact a, artifact_group_list agl, groups g
-		WHERE pta.project_task_id='$task'
+		WHERE pta.project_task_id=$1
 		AND pta.artifact_id=a.artifact_id
 		AND a.group_artifact_id=agl.group_artifact_id
-		AND agl.group_id=g.group_id";
-
-		$res2=db_query($sql2);
+		AND agl.group_id=g.group_id',
+					 array($task));
 		$last_tracker='';
 		if (!$res2 || db_numrows($res2) < 1) {
 			echo db_error();
