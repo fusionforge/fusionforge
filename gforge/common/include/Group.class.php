@@ -412,7 +412,7 @@ class Group extends Error {
 	 *	@param	string	Machine on which group's home directory located.
 	 *	@param	string	Domain which serves group's WWW.
 	 *	@return status.
-	 *	@access public.
+	 *	@access public
 	 */
 	function updateAdmin(&$user, $is_public, $type_id, $unix_box, $http_domain) {
 		$perm =& $this->getPermission($user);
@@ -480,7 +480,7 @@ class Group extends Error {
 	 *	@param	string	Machine on which group's home directory located.
 	 *	@param	string	Domain which serves group's WWW.
 	 *	@return int	status.
-	 *	@access public.
+	 *	@access public
 	 */
 	function update(&$user, $group_name,$homepage,$short_description,$use_mail,$use_survey,$use_forum,
 		$use_pm,$use_pm_depend_box,$use_scm,$use_news,$use_docman,
@@ -674,7 +674,7 @@ class Group extends Error {
 	 *	@param	object	User requesting operation (for access control).
 	 *	@param	string	Status value.
 	 *	@return	boolean	success.
-	 *	@access public.
+	 *	@access public
 	 */
 	function setStatus(&$user, $status) {
 		global $SYS;
@@ -1599,7 +1599,7 @@ class Group extends Error {
 	 *      @param	string	Unix name of the user to add OR integer user_id.
 	 *	@param	int	The role_id this user should have.
 	 *	@return	boolean	success.
-	 *	@access public.
+	 *	@access public
 	 */
 	function addUser($user_identifier,$role_id) {
 		global $SYS;
@@ -1925,7 +1925,7 @@ class Group extends Error {
 	 *  @param	string	The name of the field.
 	 *  @param	string	The Old Value for this $field_name.
 	 *	@return database result handle.
-	 *	@access public.
+	 *	@access public
 	 */
 	function addHistory($field_name, $old_value) {
 		return db_query_params ('INSERT INTO group_history(group_id,field_name,old_value,mod_by,adddate) 
@@ -1943,7 +1943,7 @@ class Group extends Error {
 	 *	Setup unix accounts for group members. Can be called even
 	 *	if members are already active. 
 	 *
-	 *	@access private.
+	 *	@access private
 	 */
 	function activateUsers() {
 		
@@ -2190,7 +2190,7 @@ class Group extends Error {
 	 *	sendApprovalEmail - Send new project email.
 	 *
 	 *	@return	boolean	success.
-	 *	@access public.
+	 *	@access public
 	 */
 	function sendApprovalEmail() {
 		$res_admins = db_query_params ('
@@ -2266,7 +2266,7 @@ if there is anything we can do to help you.
 	 *	@param	int	The id of the response to use.
 	 *	@param	string	The rejection message.
 	 *	@return completion status.
-	 *	@access public.
+	 *	@access public
 	 */
 	function sendRejectionEmail($response_id, $message="zxcv") {
 		$res_admins = db_query_params ('
@@ -2318,7 +2318,7 @@ Reasons for negative decision:
 	 *	submitted.
 	 *
 	 *	@return	boolean	success.
-	 *	@access public.
+	 *	@access public
 	 */
 	function sendNewProjectNotificationEmail() {
 		// Get the user who wants to register the project
