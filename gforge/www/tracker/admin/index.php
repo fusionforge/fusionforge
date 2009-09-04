@@ -62,8 +62,9 @@ if ($group_id && $atid) {
 		include $gfwww.'tracker/admin/updates.php';
 
 	} elseif (getStringFromRequest('deletetemplate')) {
-
-		db_query("UPDATE artifact_group_list SET custom_renderer='' WHERE group_artifact_id='".$ath->getID()."'");
+		db_query_params ('UPDATE artifact_group_list SET custom_renderer=$1 WHERE group_artifact_id=$2',
+				 array ('',
+					$ath->getID()));
 		echo db_error();
 		$feedback .= 'Renderer Deleted';
 		$next = 'add_extrafield';

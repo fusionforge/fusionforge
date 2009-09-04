@@ -99,15 +99,19 @@ if (session_loggedin()) {
 	} else {
 		$alevel=' > 1';	
 	}
-	$sql="SELECT agl.group_artifact_id, agl.name 
+
+	$res = db_query_params ('SELECT agl.group_artifact_id, agl.name
 		FROM artifact_group_list agl, role_setting rs, user_group ug
 		WHERE agl.group_artifact_id=rs.ref_id
-		AND ug.user_id='". user_getid() ."' 
-		AND rs.value::integer $alevel
-		AND agl.group_id='$group_id'
+		AND ug.user_id=$1
+		AND rs.value::integer $2
+		AND agl.group_id=$3
                 AND ug.role_id = rs.role_id
-                AND rs.section_name='tracker'";
-	$res=db_query($sql);
+                AND rs.section_name=$4',
+				array(user_getid() ,
+				      $alevel,
+				      $group_id,
+				      'tracker'));
 
 	echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 

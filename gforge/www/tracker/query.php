@@ -223,8 +223,9 @@ $changed_arr[]= 3600 * 24 * 30;// 1 month
 //
 //	get queries for this user
 //
-$res=db_query("SELECT artifact_query_id,query_name 
-	FROM artifact_query WHERE user_id='".user_getid()."' AND group_artifact_id='".$ath->getID()."'");
+$res = db_query_params ('SELECT artifact_query_id,query_name FROM artifact_query WHERE user_id=$1 AND group_artifact_id=$2',
+			array(user_getid(),
+			      $ath->getID()));
 
 
 //	Show the new pop-up boxes to select assigned to, status, etc
@@ -276,9 +277,10 @@ echo '
 echo'
 <table width="100%" class="tablecontent">';
 if ($ath->userIsAdmin()) {
-	$sql = "SELECT query_name 
-			FROM artifact_query WHERE query_type=2 AND group_artifact_id='".$ath->getID()."'";
-	$default_query = db_result(db_query($sql),0, 'query_name');
+	$default_query = db_result(db_query_params('"SELECT query_name FROM artifact_query WHERE query_type=2 AND group_artifact_id=$1',
+						   array ($ath->getID())),
+				   0,
+				   'query_name');
 	if ($default_query) {
 		if ($default_query == $aq->getName()) {
 			$note = '';

@@ -150,21 +150,23 @@ class ArtifactHtml extends Artifact {
 	}
 
 	function showRelations() {
-		global $Language;
-		
 		$aid = $this->getID();
-		
+
 		// Search for all relations pointing to this record.
-		$sql = "SELECT *
+
+		$res = db_query_params ('SELECT *
 		FROM artifact_extra_field_list, artifact_extra_field_data, artifact_group_list, artifact, groups
 		WHERE field_type=9
 		AND artifact_extra_field_list.extra_field_id=artifact_extra_field_data.extra_field_id
 		AND artifact_group_list.group_artifact_id = artifact_extra_field_list.group_artifact_id
 		AND artifact.artifact_id = artifact_extra_field_data.artifact_id
 		AND groups.group_id = artifact_group_list.group_id
-		AND (field_data = '$aid' OR field_data LIKE '$aid %' OR field_data LIKE '% $aid %' OR field_data LIKE '% $aid')
-		ORDER BY artifact_group_list.group_id ASC, name ASC, artifact.artifact_id ASC";
-		$res = db_query($sql);
+		AND (field_data = $1 OR field_data LIKE $2 OR field_data LIKE $3 OR field_data LIKE $4)
+		ORDER BY artifact_group_list.group_id ASC, name ASC, artifact.artifact_id ASC',
+					array($aid,
+					      "$aid %",
+					      "% $aid %",
+					      "% $aid"));
 		if (db_numrows($res)>0) {
 			?>
 <div class="tabbertab" title="<?php echo _('Backward Relations'); ?>">

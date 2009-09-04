@@ -230,16 +230,20 @@ echo '
 	<div class="tabbertab" title="'._('Advanced queries').'">';
 
 if (session_loggedin()) {
-	$filter = "AND (user_id='".user_getid()."' OR query_type>0)";
+	$res = db_query_params ('SELECT artifact_query_id,query_name, CASE WHEN query_type>0 THEN 1 ELSE 0 END as type
+	FROM artifact_query
+	WHERE group_artifact_id=$1 AND (user_id=$2 OR query_type>0)
+	ORDER BY type ASC, query_name ASC',
+				array ($ath->getID(),
+				       user_getid()));
 } else {
-	$filter = "AND query_type>0";
+	$res = db_query_params ('SELECT artifact_query_id,query_name, CASE WHEN query_type>0 THEN 1 ELSE 0 END as type
+	FROM artifact_query
+	WHERE group_artifact_id=$1 AND query_type>0
+	ORDER BY type ASC, query_name ASC',
+				array ($ath->getID()));
 }
 
-$sql="SELECT artifact_query_id,query_name, CASE WHEN query_type>0 THEN 1 ELSE 0 END as type 
-	FROM artifact_query 
-	WHERE group_artifact_id='".$ath->getID()."' $filter
-	ORDER BY type ASC, query_name ASC";
-$res = db_query($sql);
 
 if (db_numrows($res)>0) {
 	echo '<form action="'. getStringFromServer('PHP_SELF') .'" method="get">';

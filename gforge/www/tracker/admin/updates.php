@@ -333,7 +333,9 @@
 			$size = $input_file['size'];
 			$input_data = addslashes(fread(fopen($input_file['tmp_name'], 'r'), $size));
 
-			db_query("UPDATE artifact_group_list SET custom_renderer='$input_data' WHERE group_artifact_id='".$ath->getID()."'");
+			db_query_params ('UPDATE artifact_group_list SET custom_renderer=$1 WHERE group_artifact_id=$2',
+					 array ($input_data,
+						$ath->getID()));
 			echo db_error();
 			$feedback .= _('Renderer Uploaded');
 		//

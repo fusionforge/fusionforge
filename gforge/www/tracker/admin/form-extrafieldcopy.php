@@ -3,27 +3,30 @@
 //
 //  FORM TO COPY Choices configured by admin for extra_field BOXES 
 //
-		$id = getIntFromRequest('id');
-		$fb= new ArtifactExtraField($ath,$id);
+$id = getIntFromRequest('id');
+$fb= new ArtifactExtraField($ath,$id);
 
-		// Get a list of all extra fields in trackers and groups that you have perms to admin
-		$sql="SELECT g.unix_group_name, agl.name AS tracker_name, aefl.field_name, aefl.extra_field_id
+// Get a list of all extra fields in trackers and groups that you have perms to admin
+
+$res = db_query_params ('SELECT g.unix_group_name, agl.name AS tracker_name, aefl.field_name, aefl.extra_field_id
 			FROM groups g, 
 			artifact_group_list agl, 
 			artifact_extra_field_list aefl,
 			user_group ug,
 			artifact_perm ap
 			WHERE 
-			(ug.admin_flags='A' OR ug.artifact_flags='2' OR ap.perm_level>='2')
-			AND ug.user_id='".user_getid()."'
+			(ug.admin_flags=$1 OR ug.artifact_flags=2 OR ap.perm_level>=2)
+			AND ug.user_id=$2
 			AND ug.group_id=g.group_id
 			AND g.group_id=agl.group_id 
 			AND agl.group_artifact_id=ap.group_artifact_id
-			AND ap.user_id='".user_getid()."'
+			AND ap.user_id=$2
 			AND aefl.group_artifact_id=agl.group_artifact_id
-			AND aefl.extra_field_id != $id
-			AND aefl.field_type IN (1,2,3,5,7)";
-		$res=db_query($sql);
+			AND aefl.extra_field_id != $3
+			AND aefl.field_type IN (1,2,3,5,7)',
+			array ('A',
+			       user_getid(),
+			       $id));
 		if (db_numrows($res) < 1) {
 			exit_error('Cannot find a destination tracker where you have administration rights.');
 		}
@@ -41,7 +44,7 @@
 		<form action="<?php echo getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post" >        
 		<table>
 		<tr>
-		<td></td><td><center><strong>';
+		<td></td><td><center><strong>
 		<?php echo _('Copy From') ?>
 		<br />
 		<?php echo $fb->getName() ?>
