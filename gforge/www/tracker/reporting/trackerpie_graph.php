@@ -68,49 +68,47 @@ if (!$end) {
 
 
 if ($area == 'category') {
-
-	$sql="SELECT ac.category_name,count(*) 
+	$res = db_query_params ('SELECT ac.category_name,count(*) 
 	FROM artifact a, artifact_category ac
-	WHERE a.group_artifact_id='$atid'
+	WHERE a.group_artifact_id=$1
 	AND a.category_id=ac.id
-	AND a.open_date BETWEEN '$start' AND '$end'
-	GROUP BY category_name";
-
+	AND a.open_date BETWEEN $2 AND $3
+	GROUP BY category_name',
+				array($atid,
+				      $start,
+				      $end));
 } elseif ($area == 'group') {
-
-	$sql="SELECT ag.group_name,count(*) 
+	$res = db_query_params ('SELECT ag.group_name,count(*) 
 	FROM artifact a, artifact_group ag
-	WHERE a.group_artifact_id='$atid'
+	WHERE a.group_artifact_id=$1
 	AND a.artifact_group_id=ag.id
-	AND a.open_date BETWEEN '$start' AND '$end'
-	GROUP BY group_name";
-
+	AND a.open_date BETWEEN $2 AND $3
+	GROUP BY group_name',
+				array($atid,
+				      $start,
+				      $end));
 } elseif ($area == 'resolution') {
-
-	$sql="SELECT ar.resolution_name,count(*) 
+	$res = db_query_params ('SELECT ar.resolution_name,count(*) 
 	FROM artifact a, artifact_resolution ar
-	WHERE a.group_artifact_id='$atid'
+	WHERE a.group_artifact_id=$1
 	AND a.resolution_id=ar.id
-	AND a.open_date BETWEEN '$start' AND '$end'
-	GROUP BY resolution_name";
-
+	AND a.open_date BETWEEN $2 AND $3
+	GROUP BY resolution_name',
+				array($atid,
+				      $start,
+				      $end));
 } else {
-	
 	$area = 'assignee';
-
-	$sql="SELECT u.realname,count(*) 
+	$res = db_query_params ('SELECT u.realname,count(*) 
 	FROM artifact a, users u
-	WHERE a.group_artifact_id='$atid'
+	WHERE a.group_artifact_id=$1
 	AND a.assigned_to=u.user_id
-	AND a.open_date BETWEEN '$start' AND '$end'
-	GROUP BY realname";
-
-}
-
-//echo $sql;
-//exit;
-
-$res=db_query($sql);
+	AND a.open_date BETWEEN $2 AND $3
+	GROUP BY realname',
+				array($atid,
+				      $start,
+				      $end));
+}}
 
 if (db_error()) {
 	exit_error('Error',db_error());
