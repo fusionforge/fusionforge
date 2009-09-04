@@ -85,18 +85,25 @@ if (!$perm || !is_object($perm)) {
 //
 //	Get list of trackers this person can see
 //
-$sql="SELECT DISTINCT agl.group_artifact_id,agl.name
+
+$restracker = db_query_params ('SELECT DISTINCT agl.group_artifact_id,agl.name
 	FROM artifact_group_list agl, role_setting rs, user_group ug
-        WHERE agl.group_id='$group_id'
+        WHERE agl.group_id=$1
         AND agl.group_id=ug.group_id
-        AND ug.user_id=". user_getid() ."
+        AND ug.user_id=$2
         AND ug.role_id=rs.role_id
         AND (
-                           (rs.section_name = 'projectadmin' AND rs.value = 'A')
-                           OR (rs.section_name = 'trackeradmin' AND rs.value = '2')
-                           OR (rs.section_name = 'tracker' AND rs.value::integer >= 1 AND rs.ref_id = agl.group_artifact_id)
-        )";
-$restracker=db_query($sql);
+                           (rs.section_name = $3 AND rs.value = $4)
+                           OR (rs.section_name = $5 AND rs.value = $6)
+                           OR (rs.section_name = $6 AND rs.value::integer >= 1 AND rs.ref_id = agl.group_artifact_id)
+        )',
+			array($group_id,
+			      user_getid() ,
+			      'projectadmin',
+			      'A',
+			      'trackeradmin',
+			      2,
+			      'tracker'));
 echo db_error();
 
 //

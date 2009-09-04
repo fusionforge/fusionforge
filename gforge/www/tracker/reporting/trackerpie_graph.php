@@ -108,7 +108,7 @@ if ($area == 'category') {
 				array($atid,
 				      $start,
 				      $end));
-}}
+}
 
 if (db_error()) {
 	exit_error('Error',db_error());
