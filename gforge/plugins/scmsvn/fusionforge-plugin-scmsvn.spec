@@ -40,7 +40,6 @@ Requires: perl-IPC-Run
 %define FFORGE_BIN_DIR          %{FFORGE_DIR}/bin
 %define PLUGINS_LIB_DIR         %{FFORGE_DIR}/plugins
 %define PLUGINS_CONF_DIR        %{FFORGE_CONF_DIR}/plugins
-%define CROND_DIR               %{_sysconfdir}/cron.d
 %define SBIN_DIR				%{_sbindir}
 
 #specific define for plugins
@@ -63,13 +62,9 @@ some control over it to the project's administrator.
 # cleaning build environment
 [ "$RPM_BUILD_ROOT" != "/" ] && rm -rf $RPM_BUILD_ROOT
 
-# installing crontab
-install -m 755 -d $RPM_BUILD_ROOT/%{CROND_DIR}/
-install -m 644 cron.d/%{name} $RPM_BUILD_ROOT/%{CROND_DIR}/
-
 # copying all needed stuff to %{PLUGIN_LIB}
 install -m 755 -d $RPM_BUILD_ROOT/%{PLUGIN_LIB}
-for dir in bin common cronjobs; do
+for dir in bin common; do
         cp -rp $dir $RPM_BUILD_ROOT/%{PLUGIN_LIB}/
 done;
 #chmod 755 $RPM_BUILD_ROOT/%{PLUGIN_LIB}/bin/*
@@ -132,8 +127,6 @@ fi
 %{PLUGIN_LIB}/bin
 %attr(0750, root, root) %{PLUGIN_LIB}/bin/install-svn.sh
 %{PLUGIN_LIB}/common
-%{PLUGIN_LIB}/cronjobs
-%{CROND_DIR}/%{name}
 %attr(0744, gforge, gforge) %{PLUGIN_DUMP}
 
 %changelog
