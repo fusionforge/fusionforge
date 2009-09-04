@@ -46,10 +46,18 @@ my $l;
 while (($l = <>) !~ /^\s*mydestination/) { print $l; };
 chomp $l;
 $l .= ", users.$domain_name" unless ($l =~ /^[^#]*users.$domain_name/);
-$l .= ", $sys_lists_host" unless ($l =~ /^[^#]*$sys_lists_host/);
 print "$l\n";
 while ($l = <>) { print $l; };
 ' < /etc/postfix/main.cf.gforge-new > $tmp1
+	perl -i -e '
+require ("/etc/gforge/local.pl") ;
+my $l;
+while (($l = <>) !~ /^\s*relay_domains/) { print $l; };
+chomp $l;
+$l .= ", $sys_lists_host" unless ($l =~ /^[^#]*$sys_lists_host/);
+print "$l\n";
+while ($l = <>) { print $l; };
+' $tmp1
 	tmp2=$(mktemp /tmp/$pattern)
 	# Second, insinuate our forwarding rules in the directors section
 	perl -e '
@@ -169,6 +177,20 @@ $l = $head . $dests ;
 print "$l\n" ;
 while ($l = <>) { print $l; };
 ' < /etc/postfix/main.cf.gforge-new > $tmp1
+	perl -i -e '
+require ("/etc/gforge/local.pl") ;
+while (($l = <>) !~ /^\s*relay_domains/) {
+  print $l;
+};
+chomp $l ;
+$l =~ /^(\s*relay_domains\s*=\s*)(\S.*)/ ;
+$head = $1 ;
+$dests = $2 ;
+$dests =~ s/, $sys_lists_host// ;
+$l = $head . $dests ;
+print "$l\n" ;
+while ($l = <>) { print $l; };
+' $tmp1
 	tmp2=$(mktemp /tmp/$pattern)
 	# Second, kill our forwarding rules
 	perl -e '
