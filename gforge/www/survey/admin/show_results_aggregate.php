@@ -39,14 +39,13 @@ if (!session_loggedin() || !user_ismember($group_id,'A')) {
 	exit;
 }
 
-//$result=db_query($sql);
-
 /*
 	Select this survey from the database
 */
 
-$sql="SELECT * FROM surveys WHERE survey_id='$survey_id' AND group_id='$group_id'";
-$result=db_query($sql);
+$result = db_query_params ('SELECT * FROM surveys WHERE survey_id=$1 AND group_id=$2',
+			   array ($survey_id,
+				  $group_id));
 
 echo "<h2>".db_result($result, 0, "survey_title")."</h2><p>&nbsp;</p>";
 
@@ -73,9 +72,9 @@ for ($i=0; $i<$count; $i++) {
 		Build the questions on the HTML form
 	*/
 
-	$sql="SELECT question_type,question,question_id FROM survey_questions WHERE question_id='".$quest_array[$i]."' AND group_id='$group_id'";
-
-	$result=db_query($sql);
+	$result = db_query_params ('SELECT question_type,question,question_id FROM survey_questions WHERE question_id=$1 AND group_id=$2',
+				   array ($quest_array[$i],
+					  $group_id));
 
 	$question_type=db_result($result, 0, "question_type");
 
@@ -114,8 +113,11 @@ for ($i=0; $i<$count; $i++) {
 		}
 
 		// Select the number of responses to this question
-		$sql="SELECT count(*) AS count FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND response IN ('1','2','3','4','5') AND group_id='$group_id'";
-		$result2=db_query($sql);
+
+		$result2 = db_query_params ('SELECT count(*) AS count FROM survey_responses WHERE survey_id=$1 AND question_id=$2 AND response IN (1,2,3,4,5) AND group_id=$3',
+			array ($survey_id,
+				$quest_array[$i],
+				$group_id));
 		if (!$result2 || db_numrows($result2) < 1) {
 			echo _('error');
 			echo db_error();
@@ -127,21 +129,29 @@ for ($i=0; $i<$count; $i++) {
 		//	average
 		if ($response_count > 0){
 			if ( $sys_database_type == "mysql" ) {
-				$sql="SELECT avg(response) AS avg FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id' AND response IN ('1','2','3','4','5')";
+
+			$result2 = db_query_params ('SELECT avg(response) AS avg FROM survey_responses WHERE survey_id=$1 AND question_id=$2 AND group_id=$3 AND response IN (1,2,3,4,5)',
+						    array ($survey_id,
+							   $quest_array[$i],
+							   $group_id));
 			} else {
-				$sql="SELECT avg(response::int) AS avg FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id' AND response IN ('1','2','3','4','5')";
+
+			$result2 = db_query_params ('SELECT avg(response::int) AS avg FROM survey_responses WHERE survey_id=$1 AND question_id=$2 AND group_id=$3 AND response IN (1,2,3,4,5)',
+						    array ($survey_id,
+							   $quest_array[$i],
+							   $group_id));
 			}
-			$result2=db_query($sql);
 			if (!$result2 || db_numrows($result2) < 1) {
 				echo _('error');
 				echo db_error();
 			} else {
 				echo "<strong>". number_format(db_result($result2, 0, 'avg'),2) ."</strong>"._('Average');
 			}
-			
-			$sql="SELECT response,count(*) AS count FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id' AND response IN ('1','2','3','4','5') GROUP BY response";
-			
-			$result2=db_query($sql);
+
+			$result2 = db_query_params ('SELECT response,count(*) AS count FROM survey_responses WHERE survey_id=$1 AND question_id=$2 AND group_id=$3 AND response IN (1,2,3,4,5) GROUP BY response',
+						    array ($survey_id,
+							   $quest_array[$i],
+							   $group_id));
 			if (!$result2 || db_numrows($result2) < 1) {
 				echo _('error');
 				echo db_error();
@@ -160,9 +170,11 @@ for ($i=0; $i<$count; $i++) {
 		}
 
 		// Select the count and average of responses to this question
-		$sql="SELECT count(*) AS count FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id' AND response IN (1,5)";
 
-		$result2=db_query($sql);
+		$result2 = db_query_params ('SELECT count(*) AS count FROM survey_responses WHERE survey_id=$1 AND question_id=$2 AND group_id=$3 AND response IN (1,5)',
+					    array ($survey_id,
+						   $quest_array[$i],
+						   $group_id));
 		if (!$result2 || db_numrows($result2) < 1) {
 			echo _('error');
 			echo db_error();
@@ -172,12 +184,19 @@ for ($i=0; $i<$count; $i++) {
 
 		// average
 	    if ( $sys_database_type == "mysql" ) {
-			$sql="SELECT avg(response) AS avg FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id'  and response != ''";
+
+		    $result2 = db_query_params ('SELECT avg(response) AS avg FROM survey_responses WHERE survey_id=$1 AND question_id=$2 AND group_id=$3  and response != ''',
+						array ($survey_id,
+						       $quest_array[$i],
+						       $group_id));
 		} else {
-			$sql="SELECT avg(response::int) AS avg FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id'  and response != ''";
+
+		    $result2 = db_query_params ('SELECT avg(response::int) AS avg FROM survey_responses WHERE survey_id=$1 AND question_id=$2 AND group_id=$3  and response != ''',
+						array ($survey_id,
+						       $quest_array[$i],
+						       $group_id));
 		}
 
-		$result2=db_query($sql);
 		if (!$result2 || db_numrows($result2) < 1) {
 			echo _('error');
 			echo db_error();
@@ -186,9 +205,10 @@ for ($i=0; $i<$count; $i++) {
 		}
 
 		// Get the YES responses
-		$sql="SELECT count(*) AS count FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id' AND response='1'";
-
-		$result2=db_query($sql);
+		$result2 = db_query_params ('SELECT count(*) AS count FROM survey_responses WHERE survey_id=$1 AND question_id=$2 AND group_id=$3 AND response=1',
+					    array ($survey_id,
+						   $quest_array[$i],
+						   $group_id));
 
 		$name_array[0]=_('Yes');
 
@@ -199,9 +219,10 @@ for ($i=0; $i<$count; $i++) {
 		}
 
 		// Get the NO responses
-		$sql="SELECT count(*) AS count FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id' AND response='5'";
-
-		$result2=db_query($sql);
+		$result2 = db_query_params ('SELECT count(*) AS count FROM survey_responses WHERE survey_id=$1 AND question_id=$2 AND group_id=$3 AND response=5',
+					    array ($survey_id,
+						   $quest_array[$i],
+						   $group_id));
 
 		$name_array[1]=_('No');
 

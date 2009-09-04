@@ -44,8 +44,11 @@ if (getStringFromRequest('post_changes')) {
 	$question_type = getStringFromRequest('question_type');
 	$question_id = getIntFromRequest('question_id');
 
-	$sql="UPDATE survey_questions SET question='".htmlspecialchars($question)."', question_type='$question_type' where question_id='$question_id' AND group_id='$group_id'";
-	$result=db_query($sql);
+	$result = db_query_params ('UPDATE survey_questions SET question=$1, question_type=$2 where question_id=$3 AND group_id=$4',
+				   array (htmlspecialchars($question),
+					  $question_type,
+					  $question_id,
+					  $group_id));
         if (db_affected_rows($result) < 1) {
                 $feedback .= _('UPDATE FAILED');
         } else {
@@ -53,8 +56,9 @@ if (getStringFromRequest('post_changes')) {
         }
 }
 
-$sql="SELECT * FROM survey_questions WHERE question_id='$question_id' AND group_id='$group_id'";
-$result=db_query($sql);
+$result = db_query_params ('SELECT * FROM survey_questions WHERE question_id=$1 AND group_id=$2',
+			   array ($question_id,
+				  $group_id));
 
 if ($result) {
 	$question=db_result($result, 0, "question");
@@ -96,8 +100,8 @@ function show_questions() {
 <br />
 <?php
 
-$sql="SELECT * FROM survey_question_types";
-$result=db_query($sql);
+$result = db_query_params ('SELECT * FROM survey_question_types',
+			   array ());
 echo html_build_select_box($result,'question_type',$question_type,false);
 
 ?>

@@ -63,9 +63,13 @@ if (getStringFromRequest('post_changes')) {
 		} else {
 			$is_active = 0;
 		}
-		$sql="UPDATE surveys SET survey_title='".htmlspecialchars($survey_title)."', survey_questions='$survey_questions', is_active='$is_active' 
-WHERE survey_id='$survey_id' AND group_id='$group_id'";
-		$result=db_query($sql);
+		$result = db_query_params ('UPDATE surveys SET survey_title=$1, survey_questions=$2, is_active=$3
+WHERE survey_id=$4 AND group_id=$5',
+					   array (htmlspecialchars($survey_title),
+						  $survey_questions,
+						  $is_active,
+						  $survey_id,
+						  $group_id));
 		if (db_affected_rows($result) < 1) {
 			$feedback .= _('UPDATE FAILED');
 			echo db_error();
@@ -79,8 +83,9 @@ WHERE survey_id='$survey_id' AND group_id='$group_id'";
 	Get this survey out of the DB
 */
 if ($survey_id) {
-	$sql="SELECT * FROM surveys WHERE survey_id='$survey_id' AND group_id='$group_id'";
-	$result=db_query($sql);
+	$result = db_query_params ('SELECT * FROM surveys WHERE survey_id=$1 AND group_id=$2',
+				   array ($survey_id,
+					  $group_id));
 	$survey_title=db_result($result, 0, "survey_title");
 	$survey_questions=db_result($result, 0, "survey_questions");
 	$is_active=db_result($result, 0, "is_active");
@@ -128,10 +133,8 @@ function show_questions() {
 /*
 	Select all surveys from the database
 */
-
-$sql="SELECT * FROM surveys WHERE group_id='$group_id'";
-
-$result=db_query($sql);
+$result = db_query_params ('SELECT * FROM surveys WHERE group_id=$1',
+			   array ($group_id));
 $numrows=db_numrows($result);
 
 ?>

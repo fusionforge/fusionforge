@@ -41,8 +41,9 @@ if (getStringFromRequest('post_changes')) {
 	$question = getStringFromRequest('question');
 	$question_type = getStringFromRequest('question_type');
 
-	$sql="INSERT INTO survey_questions (group_id,question,question_type) VALUES ($group_id,'".htmlspecialchars($question)."',$question_type)";
-	$result=db_query($sql);
+	$result = db_query_params ('INSERT INTO survey_questions (group_id,question,question_type) VALUES ($group_id,$1,$2)',
+				   array (htmlspecialchars($question),
+					  $question_type));
 	if ($result) {
 		$feedback .= _('Question Added');
 	} else {
@@ -74,8 +75,8 @@ function show_questions() {
 <?php echo _('Question type') ?>:<br />
 <?php
 
-$sql="SELECT * from survey_question_types";
-$result=db_query($sql);
+$result = db_query_params ('SELECT * from survey_question_types',
+			   array ());
 echo html_build_select_box($result,'question_type','xzxz',false);
 
 ?>

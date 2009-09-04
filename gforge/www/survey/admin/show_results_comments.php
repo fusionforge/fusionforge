@@ -68,15 +68,22 @@ Function  ShowResultComments($result) {
 	echo "</table>"; //</td></tr></table>";
 }
 
-$sql="SELECT question FROM survey_questions WHERE question_id='$question_id'";
-$result=db_query($sql);
+$result=db_query_params ('SELECT question FROM survey_questions WHERE question_id=$1',
+			 array($question_id));
 echo "<h2>Question: ".db_result($result,0,"question")."</h2>";
 echo "<p>&nbsp;</p>";
 
-$sql="SELECT DISTINCT response FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$question_id' AND group_id='$group_id'";
-$result=db_query($sql);
+$result=db_query_params ('SELECT DISTINCT response FROM survey_responses WHERE survey_id=$1 AND question_id=$2 AND group_id=$3',
+			 array($survey_id,
+			       $question_id,
+			       $group_id));
 ShowResultComments($result);
 
 survey_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

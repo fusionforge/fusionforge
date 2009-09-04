@@ -42,13 +42,17 @@ if (!session_loggedin()) {
 			1=project
 			2=release
 		*/
+		$toss = db_query_params ('DELETE FROM survey_rating_response WHERE user_id=$1 AND type=$2 AND id=$3',
+					 array(user_getid(),
+					       $flag,
+					       $vote_on_id));
 
-		$sql="DELETE FROM survey_rating_response WHERE user_id='".user_getid()."' AND type='$flag' AND id='$vote_on_id'";
-		$toss=db_query($sql);
-
-		$sql="INSERT INTO survey_rating_response (user_id,type,id,response,post_date) ".
-			"VALUES ('".user_getid()."','$flag','$vote_on_id','$response','".time()."')";
-		$result=db_query($sql);
+		$result = db_query_params ('INSERT INTO survey_rating_response (user_id,type,id,response,post_date) VALUES ($1,$2,$3,$4,$5)',
+					   array(user_getid(),
+						 $flag,
+						 $vote_on_id,
+						 $response,
+						 time()));
 		if (!$result) {
 			$feedback .= _('ERROR');
 			echo "<h1>"._('Error in insert')."</h1>";

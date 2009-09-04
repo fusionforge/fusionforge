@@ -129,9 +129,9 @@ class SurveyHTML extends Error {
 		$ret.=_('Question').':<br />';
 		$ret.='<input type="text" name="question" value="'.$question.'" size="60" maxlength="150" />';
 		$ret.='<p>'. _('Question type').':<br />';
-	
-		$sql="SELECT * FROM survey_question_types";
-		$result=db_query($sql);
+
+		$result = db_query_params ('SELECT * FROM survey_question_types',
+					   array());
 		$ret.= html_build_select_box($result,'question_type',$question_type,false);
 
 		$ret.='</p><p><input type="submit" name="submit" value="'.$question_button.'"></p>';

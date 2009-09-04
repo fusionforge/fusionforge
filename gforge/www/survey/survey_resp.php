@@ -72,8 +72,10 @@ if (!session_loggedin()) {
 /*
 	Delete this customer's responses in case they had back-arrowed
 */
-$result=db_query("DELETE FROM survey_responses WHERE survey_id='" . addslashes($survey_id) . "' AND group_id='" . addslashes($group_id) . "' AND user_id='".user_getid()."'");
-
+$result = db_query_params ('DELETE FROM survey_responses WHERE survey_id=$1 AND group_id=$2 AND user_id=$3',
+			   array(addslashes($survey_id) ,
+				 addslashes($group_id) ,
+				 user_getid()));
 /*
 	Select this survey from the database
 */

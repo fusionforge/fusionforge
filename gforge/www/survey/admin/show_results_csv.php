@@ -44,9 +44,10 @@ function strip_commas($string) {
 	Select this survey from the database
 */
 
-$sql="select * from surveys where survey_id='$survey_id'";
 
-$result=db_query($sql);
+
+$result = db_query_params ('SELECT * FROM surveys WHERE survey_id=$1',
+			   array ($survey_id));
 
 /*
 	Select the questions for this survey and show as top row
@@ -73,7 +74,8 @@ echo "<html><pre>";
 echo "cust_id,first_name,field_1,email,field2,phone,field3,field4,field5,year,month,day,";
 
 for ($i=0; $i<$count; $i++) {
-	$result=db_query("select question from questions where question_id='$quest_array[$i]' AND question_type <> '4'");
+	$result = db_query_params ('SELECT question FROM questions WHERE question_id=$1 AND question_type <> 4',
+				   array($quest_array[$i]));
 	if ($result && db_numrows($result) > 0) {
 		echo strip_commas(db_result($result, 0, 0)).",";
 	}
@@ -85,9 +87,8 @@ echo "\n";
 	Now show the customer rows
 */
 
-$sql="SELECT DISTINCT customer_id FROM responses WHERE survey_id='$survey_id'";
-
-$result=db_query($sql);
+$result = db_query_params ('SELECT DISTINCT customer_id FROM responses WHERE survey_id=$1',
+			   array ($survey_id));
 
 $rows=db_numrows($result);
 
@@ -96,12 +97,10 @@ for ($i=0; $i<$rows; $i++) {
 	/*
 		Get this customer's info
 	*/
-	$sql="SELECT DISTINCT cust_id,first_name,people.last_name,people.email,people.email2,people.phone,".
-		"people.beeper,people.cell,people.yes_interested,responses.response_year,".
-		"responses.response_month,responses.response_day FROM people,responses ".
-		"WHERE cust_id='".db_result($result, $i, "customer_id")."' AND cust_id=responses.customer_id";
 
-	$result2=db_query($sql);
+
+	$result2 = db_query_params ('SELECT DISTINCT cust_id,first_name,people.last_name,people.email,people.email2,people.phone,people.beeper,people.cell,people.yes_interested,responses.response_year,responses.response_month,responses.response_day FROM people,responses WHERE cust_id=$1 AND cust_id=responses.customer_id',
+				    array (db_result($result, $i, "customer_id")));
 
 	if (db_numrows($result2) > 0) {
 
@@ -114,9 +113,11 @@ for ($i=0; $i<$rows; $i++) {
 		/*
 			Get this customer's responses. may have to be ordered by original question order
 		*/
-		$sql="SELECT response FROM responses WHERE customer_id='".db_result($result, $i, "customer_id")."' AND survey_id='$survey_id'";
 
-		$result3=db_query($sql);
+
+		$result3 = db_query_params ('SELECT response FROM responses WHERE customer_id=$1 AND survey_id=$2',
+					    array (db_result($result, $i, "customer_id"),
+						   $survey_id));
 
 		$rows3=db_numrows($result3);
 

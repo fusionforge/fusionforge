@@ -49,8 +49,9 @@ if (!session_loggedin() || !user_ismember($group_id,'A')) {
 	Select this survey from the database
 */
 
-$sql="SELECT * FROM surveys WHERE survey_id='$survey_id' AND group_id='$group_id'";
-$result=db_query($sql);
+	$result = db_query_params ('SELECT * FROM surveys WHERE survey_id=$1 AND group_id=$2',
+				   array ($survey_id,
+					  $group_id));
 
 echo "\n<h2>".db_result($result, 0, "survey_title")."</h2><p>&nbsp;</p>";
 
@@ -64,22 +65,6 @@ $quest_array=explode(',', $questions);
 
 $count=count($quest_array);
 
-/*
-	Display info for this customer
-*/
-
-/*
-$sql="select * from people where cust_id='$customer_id'";
-
-$result=db_query($sql);
-
-echo "\n<strong>Name: </strong>".db_result($result, 0, "first_name")." ".db_result($result, 0, "last_name")."<br />";
-echo "\n<strong>Email: </strong>".db_result($result, 0, "email")." / ".db_result($result, 0, "email2")."<br />";
-echo "\n<strong>Phone: </strong>".db_result($result, 0, "phone")."<br />";
-echo "\n<strong>Beeper: </strong>".db_result($result, 0, "beeper")."<br />";
-echo "\n<strong>Cell: </strong>".db_result($result, 0, "cell")."<p>";
-*/
-
 echo "\n\n<table>";
 
 $q_num=1;
@@ -89,31 +74,15 @@ for ($i=0; $i<$count; $i++) {
 	/*
 		Build the questions on the HTML form
 	*/
+	$result = db_query_params ('SELECT questions.question_type,questions.question,questions.question_id,responses.response FROM questions,responses WHERE questions.question_id=$1 AND questions.question_id=responses.question_id AND responses.customer_id=$2 AND responses.survey_id=$3',
+				   array($quest_array[$i],
+					 $customer_id,
+					 $survey_id));
 
-	$sql="select questions.question_type,questions.question,questions.question_id,responses.response 
-from questions,responses where questions.question_id='".$quest_array[$i]."' and 
-questions.question_id=responses.question_id and responses.customer_id='$customer_id' AND responses.survey_id='$survey_id'";
-
-	$result=db_query($sql);
-
-/*
-	See if there was a result. If not a result, join might have failed because of "open ended question".
-	In that case, requery, and test again. If still no response, then this is a "comment only" question
-*/
 	if (!$result || db_numrows($result) < 1) {
-
-		//$result=db_query("select * from responses where question_id='".$quest_array[$i]."' and survey_id='$survey_id' AND customer_id='$customer_id'");
-
-		//echo "\n\n<!-- falling back 1 -->";
-	
-		//if (!$result || db_numrows($result) < 1) {
-		//	echo "\n\n<!-- falling back 2 -->";
-			$result=db_query("select * from survey_questions where question_id='".$quest_array[$i]."'");
-			$not_found=1;
-		//} else {
-                //	$not_found=0;
-		//}
-
+		$result = db_query_params ('SELECT * FROM survey_questions WHERE question_id=$1',
+					   array ($quest_array[$i]));
+		$not_found=1;
 	} else {
 		$not_found=0;
 	}

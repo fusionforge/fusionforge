@@ -79,11 +79,10 @@ Function  ShowResultsEditQuestion($result) {
 	Select this survey from the database
 */
 
-$sql="SELECT survey_questions.question_id,survey_questions.question,survey_question_types.type 
-FROM survey_questions,survey_question_types 
-WHERE survey_question_types.id=survey_questions.question_type AND survey_questions.group_id='$group_id' ORDER BY survey_questions.question_id DESC";
-
-$result=db_query($sql);
+$result = db_query_params ('SELECT survey_questions.question_id,survey_questions.question,survey_question_types.type
+FROM survey_questions,survey_question_types
+WHERE survey_question_types.id=survey_questions.question_type AND survey_questions.group_id=$1 ORDER BY survey_questions.question_id DESC',
+			   array ($group_id));
 
 ShowResultsEditQuestion($result);
 

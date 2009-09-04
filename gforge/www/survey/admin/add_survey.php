@@ -45,8 +45,10 @@ if (getStringFromRequest('post_changes')) {
 	if (!$survey_title) {
 		$feedback .= _('Title required');
 	} else {
-		$sql="insert into surveys (survey_title,group_id,survey_questions) values ('".htmlspecialchars($survey_title)."','$group_id','$survey_questions')";
-		$result=db_query($sql);
+		$result = db_query_params ('INSERT INTO surveys (survey_title,group_id,survey_questions) VALUES ($1,$2,$3)',
+					   array (htmlspecialchars($survey_title),
+						  $group_id,
+						  $survey_questions));
 		if ($result) {
 			$feedback .= _('Question inserted');
 		} else {
@@ -90,9 +92,8 @@ function show_questions() {
 	Select this survey from the database
 */
 
-$sql="SELECT * FROM surveys WHERE group_id='$group_id'";
-
-$result=db_query($sql);
+$result = db_query_params ('SELECT * FROM surveys WHERE group_id=$1',
+			   array ($group_id));
 $numrows=db_numrows($result);
 ?>
 <form>
