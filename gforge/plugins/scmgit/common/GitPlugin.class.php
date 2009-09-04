@@ -334,8 +334,7 @@ class GitPlugin extends SCMPlugin {
 				return false ;
 			}
 
-			$pipe = popen ("GIT_DIR=$repo git log --since=@$start_time --until=@$end_time' "
-					."--all --pretty='format:%n%an <%ae>' --name-status", 'r' ) ;
+			$pipe = popen ("GIT_DIR=$repo git log --since=@$start_time --until=@$end_time --all --pretty='format:%n%an <%ae>' --name-status", 'r' ) ;
 
 			// cleaning stats_cvs_* table for the current day
 			$res = db_query_params ('DELETE FROM stats_cvs_group WHERE month=$1 AND day=$2 AND group_id=$3',
