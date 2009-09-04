@@ -193,7 +193,6 @@ gforge/packaging/cron.d/homedirs -text
 gforge/packaging/cron.d/lists-mailman -text
 gforge/packaging/cron.d/mail -text
 gforge/packaging/cron.d/plugin-globalsearch -text
-gforge/packaging/cron.d/plugin-scmsvn -text
 gforge/packaging/cron.d/shell-postgresql -text
 gforge/packaging/cron.d/web-apache2 -text
 gforge/packaging/dirs/plugin-extratabs -text
@@ -959,7 +958,6 @@ gforge/plugins/scmgit/etc/plugins/scmgit/config.php -text
 gforge/plugins/scmhg/common/HgPlugin.class.php -text
 gforge/plugins/scmhg/common/scmhg-init.php -text
 gforge/plugins/scmhg/etc/plugins/scmhg/config.php -text
-gforge/plugins/scmsvn/cron.d/fusionforge-plugin-scmsvn -text
 gforge/plugins/scmsvn/cronjobs/update_users.php -text
 gforge/plugins/scmsvn/fusionforge-plugin-scmsvn.spec -text
 gforge/plugins/svncommitemail/bin/commit-email.php -text

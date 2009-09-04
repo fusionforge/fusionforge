@@ -1,8 +1,0 @@
-#
-# Regular cron jobs for plugin-scmsvn
-#
-
-INCLUDE_PATH=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www:/usr/share/gforge/common
-
-# Statistics
-55 4 * * * root [ -x /usr/share/gforge/plugins/scmsvn/cronjobs/svn-stats.php ] && php -d include_path=$INCLUDE_PATH /usr/share/gforge/plugins/scmsvn/cronjobs/svn-stats.php > /dev/null 2>&1
