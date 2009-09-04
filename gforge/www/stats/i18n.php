@@ -19,14 +19,13 @@ $HTML->header(array('title' => sprintf(_('%1$s I18n Statistics'), $GLOBALS['sys_
 echo $GLOBALS['HTML']->listTableTop(array(_('Language')."",_('Users')."","%"));
 echo "<h1>".sprintf(_('Languages Distributions'), $GLOBALS['sys_name'])." </h1>";
 
-$sql='SELECT count(user_name) AS total FROM users';
-$total=db_result(db_query($sql),0,'total');
+$total=db_result(db_query_params('SELECT count(user_name) AS total FROM users', array()),0,'total');
 
-$sql='SELECT supported_languages.name AS lang,count(user_name) AS cnt
+$res = db_query_params ('SELECT supported_languages.name AS lang,count(user_name) AS cnt
 FROM supported_languages LEFT JOIN users ON language_id=users.language
 GROUP BY lang,language_id,name
-ORDER BY cnt DESC';
-$res=db_query($sql);
+ORDER BY cnt DESC',
+			array ());
 $non_english=0;
 $i=0;
 while ($lang_stat = db_fetch_array($res)) {

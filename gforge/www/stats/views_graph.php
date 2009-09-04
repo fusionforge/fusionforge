@@ -31,8 +31,10 @@ if ( ! $year ) {
 
 if ($monthly) {
 
-	$sql = "SELECT month,site_page_views AS site_views,subdomain_views 
-		FROM stats_site_months ORDER BY month ASC";
+
+$res = db_query_params ('SELECT month,site_page_views AS site_views,subdomain_views 
+		FROM stats_site_months ORDER BY month ASC',
+			array ());
 	$grouping='Months';
 
 } else {
@@ -41,16 +43,18 @@ if ($monthly) {
 	$beg_month=date('m',mktime(0,0,0,(date('m')-1),date('d'),date('Y')));
 	$beg_day=date('d',mktime(0,0,0,(date('m')-1),date('d'),date('Y')));
 
-	$sql = "SELECT month,day,site_page_views AS site_views,subdomain_views 
+
+$res = db_query_params ('SELECT month,day,site_page_views AS site_views,subdomain_views 
 		FROM stats_site_vw 
-		( month = '$beg_year$beg_month' AND day >= '$beg_day' ) OR ( month > '$beg_year$beg_month' )
-		ORDER BY month ASC, day ASC";
+		( month = $1 AND day >= $2 ) OR ( month > $3 )
+		ORDER BY month ASC, day ASC',
+			array ("$beg_year$beg_month",
+				$beg_day,
+				"$beg_year$beg_month"));
 	$grouping='Days';
 
 }
 
-$res = db_query($sql, -1, 0, SYS_DB_STATS);
-//echo db_error();
 
 $i = 0;
 $xdata = array();

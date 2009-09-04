@@ -246,7 +246,7 @@ function stats_site_project_result( $report, $orderby, $projects, $trove ) {
 		ORDER BY $orderby";
 	}
 
-	return db_query( $sql, 0, 0, SYS_DB_STATS);
+	return db_query($sql);
 
 }
 
@@ -379,19 +379,11 @@ function stats_site_projects_daily( $span ) {
 	//
 	//  We now only have 30 & 7-day views
 	//
-	if ( $span != 30 && $span != 7) {
-		$span = 7;
-	}
-
-	$sql="SELECT * FROM stats_site_vw 
-		ORDER BY month DESC, day DESC";
-
-	if ($span == 30) {
-		$res = db_query($sql, 30, 0, SYS_DB_STATS);
-	} else {
-		$res = db_query($sql,  7, 0, SYS_DB_STATS);
-	}
-
+	$span = util_ensure_value_in_set ($span,
+					  array (7, 30)) ;
+	$res = db_query_params ('SELECT * FROM stats_site_vw ORDER BY month DESC, day DESC',
+				array (),
+				$span);
 	echo db_error();
 
 	   // if there are any weeks, we have valid data.
@@ -440,10 +432,10 @@ function stats_site_projects_daily( $span ) {
 
 function stats_site_projects_monthly() {
 	$i=0;
-	$sql="SELECT * FROM stats_site_months
-		ORDER BY month DESC";
 
-	$res=db_query($sql, -1, 0, SYS_DB_STATS);
+	$res = db_query_params ('SELECT * FROM stats_site_months
+		ORDER BY month DESC',
+			array ());
 
 	echo db_error();
 
@@ -495,15 +487,18 @@ function stats_site_projects_monthly() {
 }
 
 function stats_site_aggregate( ) {
-	$res = db_query("SELECT * FROM stats_site_all_vw", -1, 0, SYS_DB_STATS);
+	$res = db_query_params ('SELECT * FROM stats_site_all_vw',
+			array ());
 	$site_totals = db_fetch_array($res);
 
-	$sql	= "SELECT COUNT(*) AS count FROM groups WHERE status='A'";
-	$res = db_query( $sql );
+
+	$res = db_query_params ('SELECT COUNT(*) AS count FROM groups WHERE status=$1',
+			array ('A'));
 	$groups = db_fetch_array($res);
 
-	$sql	= "SELECT COUNT(*) AS count FROM users WHERE status='A'";
-	$res = db_query( $sql );
+
+	$res = db_query_params ('SELECT COUNT(*) AS count FROM users WHERE status=$1',
+			array ('A'));
 	$users = db_fetch_array($res);
 	
 

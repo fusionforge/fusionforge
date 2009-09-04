@@ -28,8 +28,8 @@ if ( ! $year ) {
 	$year = gmstrftime("%Y", time() );
 }
 
-$sql = "SELECT month,day,new_users,new_projects FROM stats_site ORDER BY month ASC, day ASC";
-$res = db_query( $sql );
+$res = db_query_params ('SELECT month,day,new_users,new_projects FROM stats_site ORDER BY month ASC, day ASC',
+			array ());
 
 $i = 0;
 while ( $row = db_fetch_array($res) ) {
