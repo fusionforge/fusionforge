@@ -35,17 +35,18 @@ $yesterday = time()-60*60*24;
 $yd_month = date('Ym', $yesterday);
 $yd_day = date('d', $yesterday);
 
-$res_top = db_query("
-	SELECT user_metric.ranking,users.user_name,users.user_id,users.realname,
+$res_top = db_query_params ('SELECT user_metric.ranking,users.user_name,users.user_id,users.realname,
 		user_metric.metric,user_metric_history.ranking AS old_ranking
-	FROM users,user_metric LEFT JOIN user_metric_history 
-		ON (user_metric.user_id=user_metric_history.user_id 
-		    AND user_metric_history.month='$yd_month'
-		    AND user_metric_history.day='$yd_day')
+	FROM users,user_metric LEFT JOIN user_metric_history
+		ON (user_metric.user_id=user_metric_history.user_id
+		    AND user_metric_history.month=$1
+		    AND user_metric_history.day=$2)
 	WHERE users.user_id=user_metric.user_id
-	ORDER BY ranking ASC
-", $LIMIT, $offset);
-
+	ORDER BY ranking ASC',
+			    array ($yd_month,
+				   $yd_day),
+			    $LIMIT,
+			    $offset);
 
 if (!$res_top || db_numrows($res_top)<1) {
 	exit_error(
