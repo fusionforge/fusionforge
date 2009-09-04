@@ -5,6 +5,7 @@
 delivery/fusionforge/package/config -text
 delivery/gforge/package/config -text
 delivery/novaforge/package/config -text
+/fix_phpunit.xslt -text
 gforge/CHANGES -text
 gforge/INSTALL.restricted -text
 gforge/NEWS -text
