@@ -1,7 +1,6 @@
 --
 -- Create table for project's tags
 --
-DROP TABLE project_tags ;
 
 CREATE TABLE project_tags
 (

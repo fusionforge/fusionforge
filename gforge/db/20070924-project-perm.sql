@@ -1,5 +1,4 @@
 DROP TABLE project_perm ;
-DROP VIEW project_perm ;
 
 CREATE VIEW project_perm AS
        SELECT

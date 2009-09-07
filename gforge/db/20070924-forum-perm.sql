@@ -1,5 +1,4 @@
 DROP TABLE forum_perm ;
-DROP VIEW forum_perm ;
 
 CREATE VIEW forum_perm AS
        SELECT

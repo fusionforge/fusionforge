@@ -1,7 +1,6 @@
 DROP VIEW artifactperm_artgrouplist_vw ;
 DROP VIEW artifactperm_user_vw ;
 DROP TABLE artifact_perm ;
-DROP VIEW artifact_perm ;
 
 CREATE VIEW artifact_perm AS
        SELECT
