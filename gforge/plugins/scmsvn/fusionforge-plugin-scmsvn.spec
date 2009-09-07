@@ -124,7 +124,6 @@ fi
 %defattr(-, root, root)
 %doc README
 %{PLUGIN_CONF}
-%{PLUGIN_LIB}/bin
 %attr(0750, root, root) %{PLUGIN_LIB}/bin/install-svn.sh
 %{PLUGIN_LIB}/common
 %attr(0744, gforge, gforge) %{PLUGIN_DUMP}
