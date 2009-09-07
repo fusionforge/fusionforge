@@ -47,12 +47,7 @@ if ($docid) {
 	}
 
 	Header ('Content-disposition: filename="'.str_replace('"', '', $d->getFileName()).'"');
-
-	if (strstr($d->getFileType(),'app')) {
-		Header ("Content-type: application/binary");
-	} else {
-		Header ("Content-type: ".$d->getFileType());
-	}
+	Header ("Content-type: ".$d->getFileType());
 
 	echo $d->getFileData();
 
