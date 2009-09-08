@@ -81,7 +81,7 @@ class SVNPlugin extends SCMPlugin {
 		$b =  _('<p><b>Anonymous Subversion Access</b></p><p>This project\'s SVN repository can be checked out through anonymous access with the following command(s).</p>');
 		$b .= '<p>' ;
 		if ($this->use_ssh) {
-			$b .= '<tt>svn checkout svn://'.$project->getSCMBox().'/'.$this->svn_root.'/'.$project->getUnixName().'</tt><br />';
+			$b .= '<tt>svn checkout svn://'.$project->getSCMBox().$this->svn_root.'/'.$project->getUnixName().'</tt><br />';
 		}
 		if ($this->use_dav) {
 			$b .= '<tt>svn checkout --username anonsvn http'.(($this->use_ssl) ? 's' : '').'://' . $project->getSCMBox(). $this->svn_root .'/'. $project->getUnixName() .'</tt><br/><br/>';
