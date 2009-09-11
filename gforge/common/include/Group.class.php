@@ -1471,6 +1471,12 @@ class Group extends Error {
 		$res = db_query_params ('DELETE FROM doc_groups WHERE group_id=$1',
 					array ($this->getID())) ;
 //echo 'doc_groups'.db_error();
+
+		//
+		//  Delete Tags
+		//
+		$res=db_query_params('DELETE FROM project_tags WHERE group_id=$1', array($this->getID()));
+					
 		//
 		//	Delete group history
 		//
