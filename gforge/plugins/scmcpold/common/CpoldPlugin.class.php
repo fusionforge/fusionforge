@@ -102,10 +102,12 @@ class CpoldPlugin extends SCMPlugin {
 
 		system ("mkdir -p $repo") ;
 		system ("chgrp -R $unix_group $repo") ;
+		system ("find $repo -type d | xargs chmod g+s") ;
+
 		if ($project->enableAnonSCM()) {
-			system ("chmod -R g+wXs,o+rX-w $repo") ;
+			system ("chmod -R g+wX,o+rX-w $repo") ;
 		} else {
-			system ("chmod -R g+wXs,o-rwx $repo") ;
+			system ("chmod -R g+wX,o-rwx $repo") ;
 		}
 	}
 

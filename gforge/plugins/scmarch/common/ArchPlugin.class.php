@@ -65,13 +65,14 @@ class ArchPlugin extends SCMPlugin {
 		$repo_exists = false ;
 		if (!$repo_exists) {
 			system ("mkdir -p $repo") ;
+			system ("find $repo -type d | xargs chmod g+s") ;
 		}
 
 		system ("chgrp -R $unix_group $repo") ;
 		if ($project->enableAnonSCM()) {
-			system ("chmod -R g+wXs,o+rX-w $repo") ;
+			system ("chmod -R g+wX,o+rX-w $repo") ;
 		} else {
-			system ("chmod -R g+wXs,o-rwx $repo") ;
+			system ("chmod -R g+wX,o-rwx $repo") ;
 		}
 	}
 

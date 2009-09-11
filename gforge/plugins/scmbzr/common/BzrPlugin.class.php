@@ -111,13 +111,14 @@ class BzrPlugin extends SCMPlugin {
 		if (!$repo_exists) {
 			system ("mkdir -p $repo") ;
 			system ("bzr init-repo --no-trees $repo >/dev/null") ;
+			system ("find $repo -type d | xargs chmod g+s") ;
 		}
 
 		system ("chgrp -R $unix_group $repo") ;
 		if ($project->enableAnonSCM()) {
-			system ("chmod -R g+wXs,o+rX-w $repo") ;
+			system ("chmod -R g+wX,o+rX-w $repo") ;
 		} else {
-			system ("chmod -R g+wXs,o-rwx $repo") ;
+			system ("chmod -R g+wX,o-rwx $repo") ;
 		}
 	}
 

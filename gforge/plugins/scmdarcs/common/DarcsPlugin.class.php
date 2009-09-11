@@ -186,13 +186,14 @@ class DarcsPlugin extends SCMPlugin {
 		if (!is_dir ($repo."/_darcs")) {
 			system ("mkdir -p $repo") ;
 			system ("cd $repo ; darcs init >/dev/null") ;
+			system ("find $repo -type d | xargs chmod g+s") ;
 		}
 		
 		system ("chgrp -R $unix_group $repo") ;
 		if ($project->enableAnonSCM()) {
-			system ("chmod -R g+wXs,o+rX-w $repo") ;
+			system ("chmod -R g+wX,o+rX-w $repo") ;
 		} else {
-			system ("chmod -R g+wXs,o-rwx $repo") ;
+			system ("chmod -R g+wX,o-rwx $repo") ;
 		}
 	}
 
