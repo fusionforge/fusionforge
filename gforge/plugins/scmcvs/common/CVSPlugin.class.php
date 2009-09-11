@@ -88,12 +88,13 @@ class CVSPlugin extends SCMPlugin {
 	}
 
 	function getInstructionsForRW ($project) {
+		$cvsrootend = $project->getSCMBox().':'.$this->cvs_root.'/'.$project->getUnixName();
 		$b = _('<p><b>Developer CVS Access via SSH</b></p><p>Only project developers can access the CVS tree via this method. SSH must be installed on your client machine. Substitute <i>modulename</i> and <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
-			$b .= '<p>
+		$b .= '<p>
 			       <tt>export CVS_RSH=ssh</tt><br/>
 			       <tt>cvs -d :ext:<em>'._('developername').'</em>@'.$cvsrootend.' checkout <em>'._('modulename').'</em></tt>
 			       </p>';
-
+		
 		return $b ;
 	}
 
