@@ -29,6 +29,7 @@ class BzrPlugin extends SCMPlugin {
 		$this->text = 'Bazaar';
 		$this->hooks[] = 'scm_generate_snapshots' ;
                 $this->hooks[] = 'scm_browser_page';
+                $this->hooks[] = 'scm_update_repolist' ;
 
 		require_once $gfconfig.'plugins/scmbzr/config.php' ;
 		
@@ -145,6 +146,55 @@ class BzrPlugin extends SCMPlugin {
 			system ("chmod -R g+wX,o-rwx $repo") ;
 		}
 	}
+
+        function updateRepositoryList ($params) {
+                $groups = $this->getGroups () ;
+
+		$dir = '/var/lib/gforge/plugins/scmbzr/public-repositories' ;
+
+		$oldlist = array () ;
+		$dh = opendir ($dir) ;
+		while (($file = readdir($dh)) !== false) {
+			if ($file != '.' && $file != '..') {
+				$oldlist[] = $file ;
+			}
+		}
+		closedir($dh) ;
+		sort ($oldlist) ;
+
+                $newlist = array () ;
+                foreach ($groups as $project) {
+                        if ($this->browserDisplayable ($project)) {
+                                $newlist[] = $project->getUnixName() ;
+                        }
+                }
+		sort ($newlist) ;
+
+		$dellist = array () ;
+		$createlist = array () ;
+
+		while (count ($oldlist) > 0 && count ($newlist) > 0) {
+			$o = $oldlist[0] ;
+			$n = $newlist[0] ;
+			if ($o > $n) {
+				$createlist[] = array_shift ($newlist) ;
+			} elseif ($o < $n) {
+				$dellist[] = array_shift ($oldlist) ;
+			} else {
+				array_shift ($newlist) ;
+				array_shift ($oldlist) ;
+			}
+		}
+		$dellist = array_merge ($dellist, $oldlist) ;
+		$createlist = array_merge ($createlist, $newlist) ;
+
+		foreach ($dellist as $del) {
+			unlink ($dir . '/' . $del) ;
+		}
+		foreach ($createlist as $create) {
+			symlink ($this->bzr_root . '/' . $create, $dir . '/' . $create) ;
+		}
+        }
 
 	function generateSnapshots ($params) {
 		global $sys_scm_snapshots_path ;
