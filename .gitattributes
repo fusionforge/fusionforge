@@ -103,7 +103,7 @@ gforge/debian/dsf-po/fi.po -text
 gforge/debian/dsf-po/gl.po -text
 gforge/debian/dsf-po/pt.po -text
 gforge/debian/dsf-po/ru.po -text
-gforge/debian/gforge-plugin-scmbzr.init -text
+gforge/debian/gforge-plugin-scmbzr.init.d -text
 gforge/debian/patches/disable-dav.dpatch -text
 gforge/debian/patches/use-snoopy-from-distro.dpatch -text
 gforge/debian/po/README -text

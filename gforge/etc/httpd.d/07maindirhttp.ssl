@@ -75,6 +75,11 @@
             Options +Indexes
         </DirectoryMatch>
 
+	<Location /scm/loggerhead/>
+	    ProxyPass http://127.0.0.1:8081/
+	    ProxyPassReverse http://127.0.0.1:8081/
+	</Location>
+
         RewriteEngine on
         RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK)
         RewriteRule .* - [F]

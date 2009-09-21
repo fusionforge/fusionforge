@@ -189,10 +189,11 @@ case "$1" in
 				DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod php5 || true
 				DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod ssl || true
 				DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod suexec || true
-				#not enabling env module, part of base in apache2
 				DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod vhost_alias || true
 				DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod headers || true
 				DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod rewrite || true
+				DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod proxy || true
+				DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod proxy_http || true
 
 				LINK=`ls -l /etc/$flavour/conf.d/gforge.httpd.conf | sed 's/.*-> \(.*\)$/\1/'`
 				if [ "$LINK" != "$GFORGE_ETC_LIST" ] ; then 
