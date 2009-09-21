@@ -28,6 +28,7 @@ class BzrPlugin extends SCMPlugin {
 		$this->name = 'scmbzr';
 		$this->text = 'Bazaar';
 		$this->hooks[] = 'scm_generate_snapshots' ;
+                $this->hooks[] = 'scm_browser_page';
 
 		require_once $gfconfig.'plugins/scmbzr/config.php' ;
 		
@@ -77,12 +78,35 @@ class BzrPlugin extends SCMPlugin {
 	}
 
 	function getBrowserLinkBlock ($project) {
-		return ;
+		global $HTML ;
+		$b = $HTML->boxMiddle(_('Bazaar Repository Browser'));
+		$b .= _('<p>Browsing the Bazaar tree gives you a view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
+		$b .= '<p>[' ;
+		$b .= util_make_link ("/scm/browser.php?group_id=".$project->getID(),
+				      _('Browse Bazaar Repository')
+			) ;
+		$b .= ']</p>' ;
+		return $b ;
 	}
 
 	function getStatsBlock ($project) {
 		return ;
 	}
+
+        function printBrowserPage ($params) {
+                global $HTML;
+
+                $project = $this->checkParams ($params) ;
+                if (!$project) {
+                        return false ;
+                }
+                
+                if ($project->usesPlugin ($this->name)) {
+                        if ($this->browserDisplayable ($project)) {
+                                print '<iframe src="'.util_make_url ("/scm/loggerhead/".$project->getUnixName()).'" frameborder="no" width=100% height=700></iframe>' ;
+                        }
+                }
+        }
 
 	function createOrUpdateRepo ($params) {
 		$project = $this->checkParams ($params) ;
