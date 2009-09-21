@@ -1,9 +1,9 @@
 %define plugin          scmcvs
 %{!?release:%define release 1}
 
-Summary: CVS Plugin for GForge CDE
+Summary: CVS Plugin for FusionForge
 Name: fusionforge-plugin-%{plugin}
-Version: 4.8
+Version: 4.8.1
 Release: %{release}
 BuildArch: noarch
 License: GPL
@@ -48,15 +48,15 @@ Requires: perl-IPC-Run
 
 
 %description
-GForge CDE is a web-based Collaborative Development Environment offering
+FusionForge is a web-based Collaborative Development Environment offering
 easy access to CVS, mailing lists, bug tracking, message
 boards/forums, task management, permanent file archival, and total
 web-based administration.
 
-This RPM installs SCM CVS plugin for GForge CDE which was previously bundled
-with GForge CDE and provides CVS support to GForge CDE.
+This RPM installs SCM CVS plugin for FusionForge and provides CVS support
+to FusionForge.
 
-It also provides a specific version of CVSWeb wrapped in GForge CDE.
+It also provides a specific version of CVSWeb wrapped in FusionForge.
 
 %prep
 %setup

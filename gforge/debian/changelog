@@ -39,11 +39,14 @@ gforge (4.8-1+scmrefactor) UNRELEASED; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Sun, 16 Aug 2009 15:39:23 +0200
 
-gforge (4.8-3+1) UNRELEASED; urgency=low
+gforge (4.8.1-1) unstable; urgency=low
 
+  * New upstream release.
   * Fixed Postfix configuration for mailing lists.
+  * Stop overwriting local config on upgrades for domain_name and
+    server_admin.
 
- -- Roland Mas <lolando@debian.org>  Fri, 04 Sep 2009 19:15:03 +0200
+ -- Roland Mas <lolando@debian.org>  Mon, 21 Sep 2009 08:53:35 +0200
 
 gforge (4.8-3) unstable; urgency=low
 

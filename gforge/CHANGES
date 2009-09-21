@@ -29,6 +29,9 @@ UNRELEASED:
   as an URL or bookmarked. It is also possible to define one query as the default
   one (Alcatel-Lucent) 
 
+FusionForge-4.8.1:
+* Maintenance release, only bugfixes.
+
 FusionForge-4.8:
 * New classification by tags (aka tag cloud)
 * New reporting page on frs to view the downloads per package
