@@ -73,8 +73,7 @@
             Options +Indexes
         </DirectoryMatch>
 
-	<Proxy http://{domain_name}{sys_urlprefix}scm/loggerhead/*>
-	    Order Deny,Allow
+	<Proxy http://127.0.0.1:8081/*>
 	    Allow from all
 	</Proxy>
 
