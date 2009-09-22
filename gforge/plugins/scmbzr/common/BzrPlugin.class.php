@@ -55,6 +55,27 @@ class BzrPlugin extends SCMPlugin {
 		return $this->default_bzr_server ;
 	}
 
+	function printShortStats ($params) {
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
+		}
+		
+		if ($project->usesPlugin($this->name)) {
+			$result = db_query_params('SELECT sum(commits) AS commits, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
+						  array ($project->getID())) ;
+			$commit_num = db_result($result,0,'commits');
+			$add_num    = db_result($result,0,'adds');
+			if (!$commit_num) {
+				$commit_num=0;
+			}
+			if (!$add_num) {
+				$add_num=0;
+			}
+			echo ' (Bazaar: '.sprintf(_('<strong>%1$s</strong> commits, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
+		}
+	}
+	
 	function getBlurb () {
 		return _('<p>Documentation for Bazaar (sometimes referred to as "bzr") is available <a href="http://bazaar-vcs.org/Documentation">here</a>.</p>') ;
 	}
@@ -217,7 +238,7 @@ class BzrPlugin extends SCMPlugin {
                         $start_time = gmmktime( 0, 0, 0, $month, $day, $year);
                         $end_time = $start_time + 86400;
 
-			$date = sprintf ("%04d-%02d-%02", $year, $month, $day);
+			$date = sprintf ("%04d-%02d-%02d", $year, $month, $day);
 
                         $updates = 0 ;
                         $adds = 0 ;
@@ -266,13 +287,14 @@ class BzrPlugin extends SCMPlugin {
 			$curadds = 0 ;
 			$curupdates = 0 ;
                         while (! feof ($pipe) &&
-                               $line = fgets ($pipe)) {
+                               $line = rtrim (fgets ($pipe))) {
 				if ($line == $sep) {
 					if ($curdate == $date) {
 						$adds = $adds + $curadds ;
 						$updates = $updates + $updates ;
 					}
 					if ($curdate != '' && $curdate < $date) {
+						fclose ($pipe) ;
 						break ;
 					}
 					$currev = '' ;
@@ -305,6 +327,10 @@ class BzrPlugin extends SCMPlugin {
 						break ;
 					}
 				}
+			}
+			if ($curdate == $date) {
+				$adds = $adds + $curadds ;
+				$updates = $updates + $curupdates ;
 			}
                         
                         // inserting group results in stats_cvs_groups
