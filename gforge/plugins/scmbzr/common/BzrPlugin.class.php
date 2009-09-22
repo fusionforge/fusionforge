@@ -30,6 +30,7 @@ class BzrPlugin extends SCMPlugin {
 		$this->hooks[] = 'scm_generate_snapshots' ;
                 $this->hooks[] = 'scm_browser_page';
                 $this->hooks[] = 'scm_update_repolist' ;
+                $this->hooks[] = 'scm_gather_stats' ;
 
 		require_once $gfconfig.'plugins/scmbzr/config.php' ;
 		
@@ -196,6 +197,173 @@ class BzrPlugin extends SCMPlugin {
 		}
         }
 
+        function gatherStats ($params) {
+                $project = $this->checkParams ($params) ;
+                if (!$project) {
+                        return false ;
+                }
+                
+                if (! $project->usesPlugin ($this->name)) {
+                        return false;
+                }
+
+                if ($params['mode'] == 'day') {
+                        db_begin();
+
+                        $year = $params ['year'] ;
+                        $month = $params ['month'] ;
+                        $day = $params ['day'] ;
+                        $month_string = sprintf( "%04d%02d", $year, $month );
+                        $start_time = gmmktime( 0, 0, 0, $month, $day, $year);
+                        $end_time = $start_time + 86400;
+
+			$date = sprintf ("%04d-%02d-%02", $year, $month, $day);
+
+                        $updates = 0 ;
+                        $adds = 0 ;
+			$usr_updates = array () ;
+			$usr_adds = array () ;
+
+			$toprepo = $this->bzr_root ;
+			$repo = $toprepo . '/' . $project->getUnixName() ;
+
+			$branch = $this->findMainBranch ($project) ;
+
+			if ($branch == '') {
+				db_rollback () ;
+				return false ;
+			}
+
+                        $pipe = popen ("bzr log file://$repo/$branch --long --verbose 2> /dev/null", 'r' ) ;
+
+                        // cleaning stats_cvs_* table for the current day
+                        $res = db_query_params ('DELETE FROM stats_cvs_group WHERE month=$1 AND day=$2 AND group_id=$3',
+                                                array ($month_string,
+                                                       $day,
+                                                       $project->getID())) ;
+                        if(!$res) {
+                                echo "Error while cleaning stats_cvs_group\n" ;
+                                db_rollback () ;
+                                return false ;
+                        }
+        
+                        $res = db_query_params ('DELETE FROM stats_cvs_user WHERE month=$1 AND day=$2 AND group_id=$3',
+                                                array ($month_string,
+                                                       $day,
+                                                       $project->getID())) ;
+                        if(!$res) {
+                                echo "Error while cleaning stats_cvs_user\n" ;
+                                db_rollback () ;
+                                return false ;
+                        }
+
+                        // Analyzing history stream
+			$sep = '------------------------------------------------------------' ;
+			$currev = '' ;
+			$curuser = '' ;
+			$curdate = '' ;
+			$state = '' ;
+			$curadds = 0 ;
+			$curupdates = 0 ;
+                        while (! feof ($pipe) &&
+                               $line = fgets ($pipe)) {
+				if ($line == $sep) {
+					if ($curdate == $date) {
+						$adds = $adds + $curadds ;
+						$updates = $updates + $updates ;
+					}
+					if ($curdate != '' && $curdate < $date) {
+						break ;
+					}
+					$currev = '' ;
+					$curuser = '' ;
+					$curdate = '' ;
+					$state = '' ;
+					$curadds = 0 ;
+					$curupdates = 0 ;
+				} elseif (preg_match( '/^revno: ([0-9]+)$/', $line, $matches)) {
+					$currev = $matches[1] ;
+				} elseif (preg_match( '/^committer: (.*)$/', $line, $matches)) {
+					$curuser = $matches[1] ;
+				} elseif (preg_match( '/^timestamp: ... (\d\d\d\d-\d\d-\d\d)/', $line, $matches)) {
+					$curdate = $matches[1] ;
+				} elseif (preg_match( '/^modified:/', $line, $matches)) {
+					$state = 'modified' ;
+				} elseif (preg_match( '/^renamed:/', $line, $matches)) {
+					$state = 'renamed' ;
+				} elseif (preg_match( '/^removed:/', $line, $matches)) {
+					$state = 'removed' ;
+				} elseif (preg_match( '/^added/', $line, $matches)) {
+					$state = 'added' ;
+				} else {
+					switch ($state) {
+					case 'modified':
+						$curupdates++ ;
+						break ;
+					case 'added':
+						$curadds++ ;
+						break ;
+					}
+				}
+			}
+                        
+                        // inserting group results in stats_cvs_groups
+                        if (!db_query_params ('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
+                                              array ($month_string,
+                                                     $day,
+                                                     $project->getID(),
+                                                     0,
+                                                     $updates,
+                                                     $adds))) {
+                                echo "Error while inserting into stats_cvs_group\n" ;
+                                db_rollback () ;
+                                return false ;
+                        }
+                                
+                        // building the user list
+                        $user_list = array_unique( array_merge( array_keys( $usr_adds ), array_keys( $usr_updates ) ) );
+
+                        foreach ( $user_list as $user ) {
+                                // trying to get user id from user name
+                                $u = &user_get_object_by_name ($user) ;
+                                if ($u) {
+                                        $user_id = $u->getID();
+                                } else {
+                                        continue;
+                                }
+                                        
+                                if (!db_query_params ('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
+                                                      array ($month_string,
+                                                             $day,
+                                                             $project->getID(),
+                                                             $user_id,
+                                                             $usr_updates[$user] ? $usr_updates[$user] : 0,
+                                                             $usr_adds[$user] ? $usr_adds[$user] : 0))) {
+                                        echo "Error while inserting into stats_cvs_user\n" ;
+                                       db_rollback () ;
+                                        return false ;
+                                }
+                        }
+                }
+                db_commit();
+        }
+
+	function findMainBranch ($project) {
+		$toprepo = $this->bzr_root ;
+		$repo = $toprepo . '/' . $project->getUnixName() ;
+
+		$branch = '' ;
+
+		foreach ($this->main_branch_names as $bname) {
+			system ("bzr ls file://$repo/$bname > /dev/null 2>&1", $code) ;
+			if ($code == 0) {
+				$branch = $bname ;
+				break ;
+			}
+		}
+		return $branch;
+	}
+
 	function generateSnapshots ($params) {
 		global $sys_scm_snapshots_path ;
 		global $sys_scm_tarballs_path ;
@@ -234,15 +402,7 @@ class BzrPlugin extends SCMPlugin {
 			return false ;
 		}
 		$today = date ('Y-m-d') ;
-		$code = 0 ;
-		$branch = '' ;
-		foreach ($this->main_branch_names as $bname) {
-			system ("bzr ls file://$repo/$bname > /dev/null 2>&1", $code) ;
-			if ($code == 0) {
-				$branch = $bname ;
-				break ;
-			}
-		}
+		$branch = $this->findMainBranch ($project) ;
 		if ($branch != '') {
 			system ("bzr export --root=$group_name-scm-$today $tmp/snapshot.tar.gz $repo/$bname") ;
 			chmod ("$tmp/snapshot.tar.gz", 0644) ;
