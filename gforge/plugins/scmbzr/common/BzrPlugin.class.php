@@ -291,7 +291,7 @@ class BzrPlugin extends SCMPlugin {
 				if ($line == $sep) {
 					if ($curdate == $date) {
 						$adds = $adds + $curadds ;
-						$updates = $updates + $updates ;
+						$updates = $updates + $curupdates ;
 					}
 					if ($curdate != '' && $curdate < $date) {
 						fclose ($pipe) ;
