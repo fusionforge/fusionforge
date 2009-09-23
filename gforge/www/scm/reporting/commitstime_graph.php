@@ -50,11 +50,11 @@ if (!$g || !is_object($g)) {
 	exit;
 }
 
-$sql="SELECT month,sum(commits) AS count
+$res = db_query_params ('SELECT month,sum(commits) AS count
 	FROM stats_cvs_group
-	WHERE group_id='$group_id'
-	GROUP BY month ORDER BY month ASC";
-$res=db_query($sql);
+	WHERE group_id=$1
+	GROUP BY month ORDER BY month ASC',
+			array ($group_id));
 echo db_error();
 
 $report->labels=util_result_column_to_array($res,0);

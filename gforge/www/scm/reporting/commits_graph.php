@@ -70,19 +70,14 @@ if (!$end) {
 	$end--;
 }
 
-
-
-	$sql="SELECT u.realname,sum(commits) AS count 
+$res = db_query_params ('SELECT u.realname,sum(commits) AS count
 		FROM stats_cvs_user scu, users u
-		WHERE u.user_id=scu.user_id 
-		AND scu.month >= '$formattedmonth'
-		AND group_id='$group_id'
-		GROUP BY realname ORDER BY count DESC";
-
-//echo $sql;
-//exit;
-
-$res=db_query($sql);
+		WHERE u.user_id = scu.user_id
+		AND scu.month >= $1
+		AND group_id=$2
+		GROUP BY realname ORDER BY count DESC',
+			array ($formattedmonth,
+			       $group_id));
 
 if (db_error()) {
 	exit_error('Error',db_error());
