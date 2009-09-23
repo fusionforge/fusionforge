@@ -1070,26 +1070,18 @@ function user_act_weekly($week) {
 	db_query_params ('DELETE FROM rep_user_act_weekly WHERE week=$1',
 			array($week)) ;
 
-	$sql="INSERT INTO rep_user_act_weekly (user_id,week,tracker_opened,tracker_closed,
-		forum,docs,cvs_commits,tasks_opened,tasks_closed)
-";
-	if ( $sys_database_type == "mysql" ) {
-		$sql.="SELECT user_id,$week AS week, 	sum(tracker_opened) AS tracker_opened,";
-	} else {
-		$sql.="SELECT user_id,'$week'::int AS week, sum(tracker_opened) AS tracker_opened,";
-	}
-	$sql.="
-		sum(tracker_closed) AS tracker_closed,
-		sum(forum) AS forum,
-		sum(docs) AS docs,
-		sum(cvs_commits) AS cvs_commits,
-		sum(tasks_opened) AS tasks_opened,
-		sum(tasks_closed) AS tasks_closed
-		FROM rep_user_act_daily
-		WHERE DAY
-		BETWEEN '$week' AND '". ($week+REPORT_WEEK_SPAN-1) ."'
-		GROUP BY user_id,week";
-	return db_query($sql);
+	return db_query_params ('
+INSERT INTO rep_user_act_weekly (user_id, week, tracker_opened, tracker_closed,
+       forum, docs, cvs_commits, tasks_opened, tasks_closed)
+SELECT user_id,$1 AS week, sum(tracker_opened) AS tracker_opened,
+       sum(tracker_closed) AS tracker_closed, sum(forum) AS forum,
+       sum(docs) AS docs, sum(cvs_commits) AS cvs_commits,
+       sum(tasks_opened) AS tasks_opened, sum(tasks_closed) AS tasks_closed
+FROM rep_user_act_daily
+WHERE DAY BETWEEN $1 AND $2
+GROUP BY user_id,week',
+				array ($week,
+				       $week+REPORT_WEEK_SPAN-1)) ;
 }
 
 /**
@@ -1126,26 +1118,17 @@ function user_act_monthly($month,$end) {
 	db_query_params ('DELETE FROM rep_user_act_monthly WHERE month=$1',
 			array($month)) ;
 
-	$sql="INSERT INTO rep_user_act_monthly (user_id,month,tracker_opened,tracker_closed,
-		forum,docs,cvs_commits,tasks_opened,tasks_closed)
-";
-	if ($sys_database_type == "mysql") {
-		$sql.="SELECT user_id,$month AS month, sum(tracker_opened) AS tracker_opened,";
-	} else {
-		$sql.="SELECT user_id,'$month'::int AS month, sum(tracker_opened) AS tracker_opened,";
-	}
-	$sql.="
-		sum(tracker_closed) AS tracker_closed,
-		sum(forum) AS forum,
-		sum(docs) AS docs,
-		sum(cvs_commits) AS cvs_commits,
-		sum(tasks_opened) AS tasks_opened,
-		sum(tasks_closed) AS tasks_closed
-		FROM rep_user_act_daily
-		WHERE DAY
-		BETWEEN '$month' AND '$end'
-		GROUP BY user_id,month";
-	return db_query($sql);
+	return db_query_params ('
+INSERT INTO rep_user_act_monthly (user_id, month, tracker_opened,
+       tracker_closed, forum, docs, cvs_commits, tasks_opened, tasks_closed)
+SELECT user_id, $1 AS month, sum(tracker_opened) AS tracker_opened,
+       sum(tracker_closed) AS tracker_closed, sum(forum) AS forum,
+       sum(docs) AS docs, sum(cvs_commits) AS cvs_commits,
+       sum(tasks_opened) AS tasks_opened, sum(tasks_closed) AS tasks_closed
+FROM rep_user_act_daily
+WHERE DAY BETWEEN $1 AND $2
+GROUP BY user_id, month',
+				array ($month, $end)) ;
 }
 
 /**
@@ -1311,28 +1294,20 @@ function group_act_weekly($week) {
 	db_query_params ('DELETE FROM rep_group_act_weekly WHERE week=$1',
 			array($week)) ;
 
-	$sql="INSERT INTO rep_group_act_weekly (group_id,week,tracker_opened,tracker_closed,
-		forum,docs,downloads,cvs_commits,tasks_opened,tasks_closed)
-";
-	if ( $sys_database_type == "mysql" ) {
-		$sql.="SELECT group_id,$week AS week, sum(tracker_opened) AS tracker_opened,";
-	} else {
-		$sql.="SELECT group_id,'$week'::int AS week, sum(tracker_opened) AS tracker_opened,";
-	}
-
-	$sql.="
-		sum(tracker_closed) AS tracker_closed,
-		sum(forum) AS forum,
-		sum(docs) AS docs,
-		sum(downloads) AS downloads,
-		sum(cvs_commits) AS cvs_commits,
-		sum(tasks_opened) AS tasks_opened,
-		sum(tasks_closed) AS tasks_closed
-		FROM rep_group_act_daily
-		WHERE DAY
-		BETWEEN '$week' AND '". ($week+REPORT_WEEK_SPAN-1) ."'
-		GROUP BY group_id,week";
-	return db_query($sql);
+	return db_query_params ('
+INSERT INTO rep_group_act_weekly (group_id, week, tracker_opened,
+       tracker_closed, forum, docs, downloads, cvs_commits, tasks_opened,
+       tasks_closed)
+SELECT group_id, $1 AS week, sum(tracker_opened) AS tracker_opened,
+       sum(tracker_closed) AS tracker_closed, sum(forum) AS forum,
+       sum(docs) AS docs, sum(downloads) AS downloads,
+       sum(cvs_commits) AS cvs_commits, sum(tasks_opened) AS tasks_opened,
+       sum(tasks_closed) AS tasks_closed
+FROM rep_group_act_daily
+WHERE DAY BETWEEN $1 AND $2
+GROUP BY group_id, week',
+				array ($week,
+				       $week+REPORT_WEEK_SPAN-1)) ;
 }
 
 /**
@@ -1369,27 +1344,20 @@ function group_act_monthly($month,$end) {
 	db_query_params ('DELETE FROM rep_group_act_monthly WHERE month=$1',
 			array($month)) ;
 
-	$sql="INSERT INTO rep_group_act_monthly (group_id,month,tracker_opened,tracker_closed,
-		forum,docs,downloads,cvs_commits,tasks_opened,tasks_closed)
-";
-	if ($sys_database_type == "mysql") {
-		$sql.="SELECT group_id,'$month' AS month, sum(tracker_opened) AS tracker_opened,";
-	} else {
-		$sql.="SELECT group_id,'$month'::int AS month, sum(tracker_opened) AS tracker_opened,";
-	}
-	$sql.="
-		sum(tracker_closed) AS tracker_closed,
-		sum(forum) AS forum,
-		sum(docs) AS docs,
-		sum(downloads) AS downloads,
-		sum(cvs_commits) AS cvs_commits,
-		sum(tasks_opened) AS tasks_opened,
-		sum(tasks_closed) AS tasks_closed
-		FROM rep_group_act_daily
-		WHERE DAY
-		BETWEEN '$month' AND '$end'
-		GROUP BY group_id,month";
-	return db_query($sql);
+	return db_query_params ('
+INSERT INTO rep_group_act_monthly (group_id, month, tracker_opened,
+       tracker_closed, forum, docs, downloads, cvs_commits, tasks_opened,
+       tasks_closed)
+SELECT group_id, $1 AS month, sum(tracker_opened) AS tracker_opened,
+       sum(tracker_closed) AS tracker_closed, sum(forum) AS forum,
+       sum(docs) AS docs, sum(downloads) AS downloads,
+       sum(cvs_commits) AS cvs_commits,
+       sum(tasks_opened) AS tasks_opened,
+       sum(tasks_closed) AS tasks_closed
+FROM rep_group_act_daily
+WHERE DAY BETWEEN $1 AND $2
+GROUP BY group_id,month',
+				array ($month, $end)) ;
 }
 
 /**
