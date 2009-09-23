@@ -52,32 +52,35 @@ print "  <webMaster>$webmaster</webMaster>\n";
 print "  <lastBuildDate>".rss_date(time())."</lastBuildDate>\n";
 print "  <docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
 
-$res = db_query("SELECT groups.group_name AS group_name,"
-	. "frs_package.group_id AS group_id,"
-	. "groups.unix_group_name AS unix_group_name,"
-	. "groups.short_description AS short_description,"
-	. "groups.license AS license,"
-	. "users.user_name AS user_name,"
-	. "users.user_id AS user_id,"
-	. "users.realname AS realname,"
-        . "frs_package.name AS package_name,"
-	. "frs_release.package_id AS filemodule_id,"
-	. "frs_release.name AS module_name,"
-	. "frs_release.notes AS module_notes,"
-	. "frs_release.status_id AS release_status,"
-	. "frs_release.release_date AS release_date,"
-	. "frs_file.release_time AS release_time,"
-	. "frs_file.filename AS filename,"
-	. "frs_file.release_id AS filerelease_id "
-	. "FROM users,frs_file,frs_release,frs_package,groups WHERE "
-	. "frs_release.released_by=users.user_id AND "
-	. "frs_release.package_id=frs_package.package_id AND "
-	. "frs_package.group_id=groups.group_id AND "
-	. "frs_release.status_id=1 AND "
-	. "groups.is_public=1 AND "
-	. $where
-	. "frs_file.release_id=frs_release.release_id "
-	. "ORDER BY frs_file.release_time DESC",($limit * 3));
+$res = db_query_params ('SELECT groups.group_name AS group_name,
+	frs_package.group_id AS group_id,
+	groups.unix_group_name AS unix_group_name,
+	groups.short_description AS short_description,
+	groups.license AS license,
+	users.user_name AS user_name,
+	users.user_id AS user_id,
+	users.realname AS realname,
+        frs_package.name AS package_name,
+	frs_release.package_id AS filemodule_id,
+	frs_release.name AS module_name,
+	frs_release.notes AS module_notes,
+	frs_release.status_id AS release_status,
+	frs_release.release_date AS release_date,
+	frs_file.release_time AS release_time,
+	frs_file.filename AS filename,
+	frs_file.release_id AS filerelease_id
+FROM users,frs_file,frs_release,frs_package,groups
+WHERE frs_release.released_by=users.user_id
+  AND frs_release.package_id=frs_package.package_id
+  AND frs_package.group_id=groups.group_id
+  AND frs_release.status_id=1
+  AND groups.is_public=1
+  AND (package.group_id=$1 AND 1=$2)
+  AND frs_file.release_id=frs_release.release_id
+ORDER BY frs_file.release_time DESC',
+			array ($group_id,
+			       $group_id ? 1 : 0),
+			$limit * 3);
 
 
 // ## item outputs

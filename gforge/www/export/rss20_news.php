@@ -57,17 +57,21 @@ print "  <lastBuildDate>".rss_date(time())."</lastBuildDate>\n";
 print "  <docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
 print "  <generator>".$GLOBALS['sys_name']." RSS generator</generator>\n";
 
-$sql = "SELECT forum_id,summary,post_date,details,g.group_id,g.group_name,u.realname,u.user_name
-        FROM news_bytes, groups g,users u
-        WHERE news_bytes.group_id=g.group_id
-        AND u.user_id=news_bytes.submitted_by
-        AND g.is_public='1'
-        AND g.status='A'
-        AND news_bytes.is_approved <> '4'
-        $where
-        ORDER BY post_date DESC";
-
-$res = db_query($sql, $limit);
+$res = db_query_params ('SELECT forum_id,summary,post_date,details,g.group_id,g.group_name,u.realname,u.user_name
+FROM news_bytes, groups g,users u
+WHERE news_bytes.group_id=g.group_id
+AND u.user_id=news_bytes.submitted_by
+AND g.is_public=1
+AND g.status=$1
+AND news_bytes.is_approved <> 4
+AND (g.group_id=$group_id AND 1 = $3)
+AND (is_approved=1 AND 1 = $4)
+ORDER BY post_date DESC',
+			array ('A',
+			       $group_id,
+			       $group_id ? 1 : 0,
+			       $group_id ? 0 : 1),
+			$limit) ;
 
 // ## item outputs
 while ($row = db_fetch_array($res)) {
