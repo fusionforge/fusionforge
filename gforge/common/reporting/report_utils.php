@@ -103,10 +103,10 @@ function report_useract_box($name='dev_id', $selected='1', $start_with='') {
 		if ( $sys_database_type == "mysql" ) {
 			$res = db_query_mysql ("SELECT user_id,realname FROM users WHERE status='A' AND (exists (SELECT user_id FROM rep_user_act_daily WHERE user_id=users.user_id)) AND (lower(lastname) LIKE lower('$start_with%') OR lower(user_name) LIKE lower('$start_with%')) ORDER BY lastname") ;
 		} else {
-			$res = db_query_params ('SELECT user_id,realname FROM users WHERE status=$1 AND (exists (SELECT user_id FROM rep_user_act_daily WHERE user_id=users.user_id)) AND (lastname ILIKE $2 OR user_name ILIKE $3) ORDER BY lastname',
+			$res = db_query_params ('SELECT user_id,realname FROM users WHERE status=$1 AND (exists (SELECT user_id FROM rep_user_act_daily WHERE user_id=users.user_id)) AND (lower(lastname) LIKE $2 OR lower(user_name) LIKE $3) ORDER BY lastname',
 						array ('A',
-						       "$start_with%",
-						       "$start_with%")) ;
+						       strtolower("$start_with%"),
+						       strtolower("$start_with%"))) ;
 		}
 	} else {
 		$res = db_query_params ('SELECT user_id,realname FROM users WHERE status=$1 AND (exists (SELECT user_id FROM rep_user_act_daily WHERE user_id=users.user_id)) ORDER BY lastname',
@@ -122,10 +122,10 @@ function report_usertime_box($name='dev_id', $selected='1', $start_with='') {
 		if ( $sys_database_type == "mysql" ) {
 			$res = db_query_mysql ("SELECT user_id,realname FROM users WHERE status='A' AND (exists (SELECT user_id FROM rep_time_tracking WHERE user_id=users.user_id)) AND (lower(lastname) LIKE lower('$start_with%') OR lower(user_name) LIKE lower('$start_with%')) ORDER BY lastname") ;
 		} else {
-			$res = db_query_params ('SELECT user_id,realname FROM users WHERE status=$1 AND (exists (SELECT user_id FROM rep_time_tracking WHERE user_id=users.user_id)) AND (lastname ILIKE $2 OR user_name ILIKE $3) ORDER BY lastname',
+			$res = db_query_params ('SELECT user_id,realname FROM users WHERE status=$1 AND (exists (SELECT user_id FROM rep_time_tracking WHERE user_id=users.user_id)) AND (lower(lastname) LIKE $2 OR lower(user_name) LIKE $3) ORDER BY lastname',
 						array ('A',
-						       "$start_with%",
-						       "$start_with%")) ;
+						       strtolower("$start_with%"),
+						       strtolower("$start_with%"))) ;
 		}
 	} else {
 		$res = db_query_params ('SELECT user_id,realname FROM users WHERE status=$1 AND (exists (SELECT user_id FROM rep_time_tracking WHERE user_id=users.user_id)) ORDER BY lastname',
