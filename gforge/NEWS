@@ -1,3 +1,23 @@
+Release notes for FusionForge x.y
+---------------------------------
+
+FusionForge x.y is still an incremental step over 4.8, but many
+changes have been made, some of which may require caution when
+upgrading.
+
+In particular, the rewriting of the version control subsystem created
+the possibility for many new VCS tools to be integrated, and indeed
+several new plugins were implemented (Arch, Bazaar, Darcs, Git and
+Mercurial).  To avoid crowding the chroot, all repositories are now
+hosted under a two-level subdirectory structure.  For instance, where
+you had a CVS repositories stored under
+/var/lib/gforge/chroot/cvsroot/<project>, you'll now have it under
+.../chroot/scmrepos/cvs/<project>.  As a consequence, you need to move
+the repositories by hand and/or add symlinks.  Previously existing
+symlinks will also have to be updated, as well as previously existing
+working copies obtained by users.
+
+
 Release notes for FusionForge 4.8
 ---------------------------------
 
