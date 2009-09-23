@@ -27,7 +27,9 @@ UNRELEASED:
 * Trackers: Search improved to allow searching in text fields (Alcatel-Lucent).
 * Trackers: New system to share a search query. Shared queries can be represented 
   as an URL or bookmarked. It is also possible to define one query as the default
-  one (Alcatel-Lucent) 
+  one (Alcatel-Lucent)
+* Version control subsystem: completely rewritten.  New plugins add
+  support for Arch, Bazaar, Darcs, Git, Mercurial.
 
 FusionForge-4.8.1:
 * Maintenance release, only bugfixes.
