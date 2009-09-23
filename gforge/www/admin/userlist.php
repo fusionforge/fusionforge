@@ -144,8 +144,8 @@ if (!$group_id) {
 	print "\n</p>";
 
 	if ($user_name_search) {
-		$result = db_query_params ('SELECT user_name,lastname,firstname,user_id,status,add_date FROM users WHERE user_name ILIKE $1 OR lastname ILIKE $1 ORDER BY lastname',
-					   array ("$user_name_search%"));
+		$result = db_query_params ('SELECT user_name,lastname,firstname,user_id,status,add_date FROM users WHERE lower(user_name) LIKE $1 OR lower(lastname) LIKE $1 ORDER BY lastname',
+					   array (strtolower("$user_name_search%")));
 	} else {
 		$sortorder = getStringFromRequest('sortorder', 'user_name');
 		$result = db_query_params("SELECT user_name,lastname,firstname,user_id,status,add_date FROM users ORDER BY $1", array($sortorder));

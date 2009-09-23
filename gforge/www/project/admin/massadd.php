@@ -39,18 +39,11 @@ if (!$group || !is_object($group)) {
 	exit_error('Error',$group->getErrorMessage());
 }
 
-$sw = getStringFromRequest('sw');
-if (!$sw) {
-	$sw='A';
-}
+$sw = getStringFromRequest('sw', 'A');
 
-$sql="SELECT user_id,user_name,lastname,firstname FROM users ";
-if ($sys_database_type == "mysql") {
-	$sql.="WHERE status='A' and type_id='1' and lastname LIKE $1 ";
-} else {
-	$sql.="WHERE status='A' and type_id='1' and lastname ILIKE $1 ";
-}
-$res=db_query_params($sql, array($sw."%"));
+$res = db_query_params('SELECT user_id,user_name,lastname,firstname FROM users WHERE status=$1 and type_id=1 and lower(lastname) LIKE $2',
+		       array('A',
+			     strtolower ($sw."%")));
 
 $accumulated_ids = getStringFromRequest('accumulated_ids');
 if (!$accumulated_ids) {

@@ -109,16 +109,16 @@ if (!$offset || $offset < 0) {
         Query to find projects
 */
 
-// If multiple words, separate them and put ILIKE (pgsql's 
-// case-insensitive LIKE) in between
 // XXX:SQL: this assumes db understands backslash-quoting
 
 $array=explode(" ",quotemeta($gwords));
 // we need to use double-backslashes in SQL
 $array_re=explode(" ",addslashes(quotemeta($gwords)));
 
-$gwords1="project_title ILIKE '%" . implode($array,"%' $crit project_title ILIKE '%") ."%'";
-$gwords2="project_description ILIKE '%" . implode($array,"%' $crit project_description ILIKE '%") . "%'";
+$gwords1="lower(project_title) LIKE '%" . implode(array_map ('strtolower', $array),
+						  "%' $crit lower(project_title) LIKE '%") ."%'";
+$gwords2="lower(project_description) LIKE '%" . implode(array_map ('strtolower', $array),
+							"%' $crit lower(project_description) LIKE '%") . "%'";
 
 $sql = "SELECT project_title, project_link, project_description, title, link 
 FROM plugin_globalsearch_assoc_site_project, plugin_globalsearch_assoc_site 
