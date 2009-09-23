@@ -8,8 +8,12 @@ gforge (4.8.53-1) experimental; urgency=low
   [ Roland Mas ]
   * Use standard Sort::Versions module to compare database schema version
     numbers rather than forking dpkg --compare-versions.
+  * Rewritten SCM subsystem.  CVS and Subversion plugins have been cleaned
+    up, and new plugins added: scmcpold (as a proof of concept), scmarch,
+    scmbzr, scmdarcs, scmgit and scmhg.  Mercurial (scmhg) and Arch are
+    not quite complete yet.
 
- -- Roland Mas <lolando@debian.org>  Fri, 12 Jun 2009 11:07:25 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 23 Sep 2009 14:44:50 +0200
 
 gforge (4.8.51-1) experimental; urgency=low
 
@@ -27,17 +31,6 @@ gforge (4.8.51-1) experimental; urgency=low
     http://<hostname>/forge/ with unmodified packages.
 
  -- Roland Mas <lolando@debian.org>  Wed, 29 Apr 2009 15:21:31 +0200
-
-gforge (4.8-1+scmrefactor) UNRELEASED; urgency=low
-
-  * Stop shipping cvs_dump.pl and cvs_update.pl now that their function is
-    fulfilled by the plugin hook.
-  * Ditto for svn_dump.pl and svn_update.pl.
-  * Added plugin-scmcpold as a proof of concept for other plugins.
-  * Also scmgit, scmbzr, scmdarcs, scmhg and scmarch.  Not all of them are
-    complete yet.
-
- -- Roland Mas <lolando@debian.org>  Sun, 16 Aug 2009 15:39:23 +0200
 
 gforge (4.8.1-1) unstable; urgency=low
 
