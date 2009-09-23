@@ -44,16 +44,16 @@ if (!isset($sortorder) || empty($sortorder)) {
 if ($form_catroot == 1) {
 	if (isset($group_name_search)) {
 		echo "<p>"._('Groups that begin with'). " <strong>".$group_name_search."</strong></p>\n";
-		$sql = "SELECT group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name,COUNT(user_group.group_id) AS members ";
-	    if ($sys_database_type == "mysql") {
-			$sql.="FROM groups LEFT JOIN user_group ON user_group.group_id=groups.group_id, licenses WHERE license_id=license AND group_name LIKE '$group_name_search%' ";
-		} else {
-			$sql.="FROM groups LEFT JOIN user_group ON user_group.group_id=groups.group_id, licenses WHERE license_id=license AND group_name ILIKE '$group_name_search%' ";
-		}
-		$sql.="GROUP BY group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name "
-			. ($form_pending?"AND WHERE status='P' ":"")
-			. " ORDER BY $sortorder";
-		$res = db_query($sql);
+		$res = db_query_params ('SELECT group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name,COUNT(user_group.group_id) AS members
+FROM groups
+LEFT JOIN user_group ON user_group.group_id=groups.group_id, licenses
+WHERE license_id=license
+AND lower(group_name) LIKE $1
+AND (status=$2 AND 1=$3)
+GROUP BY group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name',
+					array (strtolower ("$group_name_search%"),
+					       'P',
+					       $form_pending ? 1 : 0)) ;
 	} else {
 		$res = db_query("SELECT group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name, COUNT(user_group.group_id) AS members "
 			. "FROM groups LEFT JOIN user_group ON user_group.group_id=groups.group_id, licenses "

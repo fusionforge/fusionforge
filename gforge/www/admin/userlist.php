@@ -144,12 +144,8 @@ if (!$group_id) {
 	print "\n</p>";
 
 	if ($user_name_search) {
-		$sql = 'SELECT user_name,lastname,firstname,user_id,status,add_date FROM users WHERE user_name ';
-	    $sql .= $sys_database_type == 'mysql' ? 'LIKE' : 'ILIKE';
-		$sql .= ' \''.$user_name_search.'%\' OR lastname ';
-	    $sql .= $sys_database_type == 'mysql' ? 'LIKE' : 'ILIKE';
-		$sql .= ' \''.$user_name_search.'%\' ORDER BY lastname';
-		$result = db_query($sql);
+		$result = db_query_params ('SELECT user_name,lastname,firstname,user_id,status,add_date FROM users WHERE user_name ILIKE $1 OR lastname ILIKE $1 ORDER BY lastname',
+					   array ("$user_name_search%"));
 	} else {
 		$sortorder = getStringFromRequest('sortorder', 'user_name');
 		$result = db_query_params("SELECT user_name,lastname,firstname,user_id,status,add_date FROM users ORDER BY $1", array($sortorder));

@@ -66,19 +66,21 @@ if ($usersearch) {
 		SELECT DISTINCT * 
 		FROM users WHERE ";
 	
-	if(is_numeric($search)) {
-		$sql .="user_id = '$search' OR ";
-	}
-	if ( $sys_database_type == "mysql" ) {
-		$sql .= "user_name LIKE '%$search%'
-		OR email LIKE '%$search%'
-		OR realname LIKE '%$search%'"; 
+	if (is_numeric($search)) {
+		$result = db_query_params ('SELECT DISTINCT * FROM users
+WHERE user_id = $1
+OR lower(user_name) LIKE $2
+OR lower(email) LIKE $2
+OR lower(realname) LIKE $2',
+					   array ($search,
+						  strtolower("%$search%")));
 	} else {
-		$sql .= "user_name ILIKE '%$search%'
-		OR email ILIKE '%$search%'
-		OR realname ILIKE '%$search%'"; 
+		$result = db_query_params ('SELECT DISTINCT * FROM users
+WHERE lower(user_name) LIKE $1
+OR lower(email) LIKE $1
+OR lower(realname) LIKE $1',
+					   array (strtolower("%$search%")));
 	}
-	$result = db_query($sql);
 
 	print '<p><strong>' .sprintf(ngettext('User search with criteria <em>%1$s</em>: %2$s match', 'User search with criteria <em>%1$s</em>: %2$s matches', db_numrows($result)), $search, db_numrows($result)).'</strong></p>';
 
@@ -137,18 +139,18 @@ if (getStringFromRequest('groupsearch')) {
 		FROM groups WHERE (";
 	
 	if(is_numeric($search)) {
-		$sql .="group_id = '$search' OR ";
-	}	
-	if ( $sys_database_type == "mysql" ) {
-		$sql .= "unix_group_name LIKE '%$search%'
-		OR group_name LIKE '%$search%')
-		$crit_sql"; 
+		$result = db_query_params ('SELECT DISTINCT * FROM groups
+WHERE group_id=$1
+OR lower (unix_group_name) LIKE $2
+OR lower (group_name) LIKE $2',
+					   array ($search,
+						  strtolower ("%$search%"))) ;
 	} else {
-		$sql .= "unix_group_name ILIKE '%$search%'
-		OR group_name ILIKE '%$search%')
-		$crit_sql"; 
+		$result = db_query_params ('SELECT DISTINCT * FROM groups
+WHERE lower (unix_group_name) LIKE $2
+OR lower (group_name) LIKE $2',
+					   array (strtolower ("%$search%"))) ;
 	}
-	$result = db_query($sql);
 
 	if ($crit_desc) {
 		$crit_desc = "($crit_desc )";

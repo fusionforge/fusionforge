@@ -30,14 +30,7 @@ require_once $gfcommon.'include/cron_utils.php';
 
 site_admin_header(array('title'=>_('Site admin')));
 
-$which = getIntFromRequest('which');
-
-if (!$which || $which==100) {
-	$which=100;
-	$sql_str = '';
-} else {
-	$sql_str = " WHERE job='$which' ";
-}
+$which = getIntFromRequest('which', 100);
 
 ?>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
@@ -54,8 +47,13 @@ $title_arr = array(
 
 echo $HTML->listTableTop ($title_arr);
 
-$sql = 'SELECT COUNT(*) AS count FROM cron_history '.$sql_str;
-$res = db_query($sql);
+if ($which==100) {
+	$res = db_query_params ('SELECT COUNT(*) AS count FROM cron_history',
+				arary ());
+} else {
+	$res = db_query_params ('SELECT COUNT(*) AS count FROM cron_history WHERE job=$1',
+				arary ($which));
+}
 $totalCount = db_result($res, 0, 'count');
 
 $offset = getIntFromRequest('offset');
@@ -63,8 +61,17 @@ if($offset > $totalCount) {
 	$offset = 0;
 }
 
-$sql = 'SELECT * FROM cron_history '.$sql_str.' ORDER BY rundate DESC LIMIT '.ADMIN_CRONMAN_ROWS.' OFFSET '.$offset;
-$res = db_query($sql);
+if ($which==100) {
+	$res = db_query_params ('SELECT * FROM cron_history ORDER BY rundate',
+				array (),
+				ADMIN_CRONMAN_ROWS,
+				$offset);
+} else {
+	$res = db_query_params ('SELECT * FROM cron_history WHERE job=$1 ORDER BY rundate',
+				array ($which),
+				ADMIN_CRONMAN_ROWS,
+				$offset);
+}
 
 for ($i=0; $i<db_numrows($res); $i++) {
 
