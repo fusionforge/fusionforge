@@ -21,12 +21,12 @@ require_once $gfcommon.'search/ExportProjectSearchQuery.class.php';
  */
 function rssProjectCallback($dataRow) {
 	// $default_trove_cat defined in local.inc
-	$result = db_query('SELECT trove_cat.fullpath '
-		.'FROM trove_group_link, trove_cat '
-		.'WHERE trove_group_link.trove_cat_root='.$GLOBALS['default_trove_cat'].' '
-		.'AND trove_group_link.trove_cat_id=trove_cat.trove_cat_id '
-		.'AND group_id=\''.$dataRow['group_id'].'\'');
-	
+	$result = db_query_params ('SELECT trove_cat.fullpath FROM trove_group_link, trove_cat
+WHERE trove_group_link.trove_cat_root=$1
+AND trove_group_link.trove_cat_id=trove_cat.trove_cat_id
+AND group_id=$2',
+				   array ($GLOBALS['default_trove_cat'],
+					  $dataRow['group_id'])) ;
 	$return = '';
 	$return .= ' | date registered: '.date('M jS Y', $dataRow['register_time']);
 	$return .= ' | category: '.str_replace(' ', '', implode(',', util_result_column_to_array($result)));
