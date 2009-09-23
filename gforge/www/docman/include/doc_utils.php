@@ -34,12 +34,11 @@ function display_groups_option($group_id=false,$checkedval='xzxz') {
 	if (!$group_id) {
 		exit_no_group();
 	} else {
-		$query = "select doc_group, groupname "
-		."from doc_groups "
-		."where group_id = '$group_id' "
-		."order by groupname";
-		$result = db_query($query);
-
+		$result = db_query_params ('SELECT doc_group, groupname
+FROM doc_groups
+WHERE group_id = $1
+ORDER BY groupname',
+					   array ($group_id)) ;
 		echo html_build_select_box ($result,'doc_group',$checkedval,false);
 
 	} //end else
@@ -115,9 +114,9 @@ function doc_droplist_count($l_group_id, $language_id, $g) {
 
 	if (db_numrows($gresult) >= 1) {
 
-		print "<form name=\"langchoice\" action=\"index.php?group_id=".$l_group_id."\" method=\"post\"><table border=\"0\">"
-			." <tr><td valign=\"middle\"><strong>"._('Language')." </strong></td>"
-			." <td valign=\"middle\"><select name=\"language_id\">\n\n";
+		print "<form name=\"langchoice\" action=\"index.php?group_id=".$l_group_id."\" method=\"post\"><table border=\"0\">
+ <tr><td valign=\"middle\"><strong>"._('Language')." </strong></td>
+ <td valign=\"middle\"><select name=\"language_id\">\n\n";
 		print "<option value=\"*\">"._('All Languages')." </option>";
 		while($grow = db_fetch_array($gresult)) {
 
@@ -224,11 +223,11 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 					$tooltip = htmlspecialchars($tooltip);					
 					echo "<li>".
 							html_image('ic/docman16b.png',"20","20",array("border"=>"0")).
-							" ".
-							"<a href=\"".$link."\" title=\"$tooltip\">".
+							" 
+<a href=\"".$link."\" title=\"$tooltip\">".
 							$docs[$j]->getName().
-							"</a> - " . $tooltip . "</li>".
-							"(".$docs[$j]->getFileSize()." "._('bytes').")";
+							"</a> - " . $tooltip . "</li>
+(".$docs[$j]->getFileSize()." "._('bytes').")";
 							//add description
 							echo "<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 							echo "<i>".$docs[$j]->getDescription()."</i>";

@@ -165,9 +165,8 @@ if (getStringFromPost('cmd') == "search")
  	// print_debug ($sql);
 	// need groups infos
 	$groupsarr = array();
-	$sql = "SELECT doc_group, groupname, parent_doc_group FROM doc_groups WHERE group_id = $_GET[group_id] \n";
-	$groupsarr = array();
-	$result=db_query($sql);
+	$result = db_query_params ('SELECT doc_group, groupname, parent_doc_group FROM doc_groups WHERE group_id=$1',
+				   array (getIntFromRequest ('group_id')));
 	if ($result && db_numrows($result) > 0)
 	{
 		while ($arr = db_fetch_array($result))
@@ -202,7 +201,6 @@ $vtp->Display();
 
 // print_debug (print_r($_POST,true));
 // print_debug (print_r($groupsarr,true));
-// print_debug ($sql);
 
 docman_footer(array());
 
