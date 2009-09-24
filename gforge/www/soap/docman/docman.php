@@ -177,7 +177,8 @@ function &getDocumentStates($session_ser) {
 	continue_session($session_ser);
 	$return = array();
 		
-	$states = db_query('select * from doc_states');	
+	$states = db_query_params ('select * from doc_states',
+			array ());	
 	for ($row=0; $row<db_numrows($states); $row++) {
 			$return[]=array(
 				'state_id'=>db_result($states,$row,'stateid'),
@@ -192,7 +193,8 @@ function &getDocumentStates($session_ser) {
 //
 
 function validateState($state_id){
-	$res = db_query('SELECT name FROM doc_states WHERE stateid=\''.$state_id.'\'');	
+	$res = db_query_params ('SELECT name FROM doc_states WHERE stateid=$1',
+			array ($state_id));	
 	if(db_numrows($res)==1){
 		return true;
 	}else{
@@ -251,7 +253,8 @@ function &getDocumentLanguages($session_ser) {
 	continue_session($session_ser);
 	$return = array();
 		
-	$languages = db_query('select language_id, classname from supported_languages');	
+	$languages = db_query_params ('select language_id, classname from supported_languages',
+			array ());
 	for ($row=0; $row<db_numrows($languages); $row++) {
 			$return[]=array(
 				'language_id'=>db_result($languages,$row,'language_id'),
@@ -266,7 +269,8 @@ function &getDocumentLanguages($session_ser) {
 //
 
 function validateLanguage($language_id){
-	$res = db_query('SELECT classname FROM supported_languages WHERE language_id=\''.$language_id.'\'');	
+	$res = db_query_params ('SELECT classname FROM supported_languages WHERE language_id=$1',
+			array ($language_id));
 	if(db_numrows($res)==1){
 		return true;
 	}else{
