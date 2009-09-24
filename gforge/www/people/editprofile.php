@@ -167,13 +167,8 @@ WHERE user_id=$2", array($people_view_skills, $user_getid()));
 				if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 					exit_form_double_submit();
 				}
-
-				$sql = "DELETE FROM skills_data where skills_data_id in(".$skill_delete[0];
-				for($i = 1; $i < $numItems; $i++) {
-					$sql .= ",".$skill_delete[$i];
-				}
-				$sql .=")";
-				$result=db_query($sql);
+				$result = db_query_params ('DELETE FROM skills_data where skills_data_id = ANY ($1)',
+							   array (db_int_array_to_any_clause ($skill_delete)));
 				if (!$result || db_affected_rows($result) < 1) {
 					echo db_error();
 					$feedback .= _('Failed to delete any skills');
@@ -182,13 +177,8 @@ WHERE user_id=$2", array($people_view_skills, $user_getid()));
 					$feedback = ngettext ('Skill deleted successfully', 'Skills deleted successfully', db_affected_rows($result));
 				}
 			} else {
-				$sql = "SELECT title FROM skills_data where skills_data_id in(".$skill_delete[0];
-				for($i = 1; $i < $numItems; $i++) {
-					$sql .= ",".$skill_delete[$i];
-				}
-				$sql .=")";
-				
-				$result=db_query($sql);
+				$result = db_query_params ('SELECT title FROM skills_data where skills_data_id = ANY ($1)',
+							   array (db_int_array_to_any_clause ($skill_delete)));
 				$rows = db_numrows($result);
 				if (!$result || $rows < 1) {
 					echo db_error();

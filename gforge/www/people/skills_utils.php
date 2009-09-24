@@ -96,14 +96,8 @@ function displayUserSkills($user_id, $allowEdit) {
 
 function handle_multi_edit($skill_ids) {
 	global $HTML;
-	$numSkills = count($skill_ids);
-	$SQL = "select * from skills_data where skills_data_id in(".(int)$skill_ids[0];
-	for($i = 1; $i < $numSkills; $i++) {
-		$SQL .= ", ".(int)$skill_ids[$i];
-	}
-	$SQL .= ")";
-	
-	$result=db_query($SQL);
+	$result = db_query_params ('select * from skills_data where skills_data_id = ANY ($1)',
+				   array (db_int_array_to_any_clause ($skill_ids)));
 	$rows = db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo db_error();

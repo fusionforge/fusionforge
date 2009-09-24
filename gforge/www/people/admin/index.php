@@ -68,34 +68,6 @@ if (user_ismember(1,'A')) {
 			}
 
 			$feedback .= ' Skill Inserted ';
-/*
-		} else if (getStringFromRequest('people_cat_mod')) {
-			$cat_name = getStringFromRequest('cat_name');
-			$people_cat_id = getIntFromRequest('people_cat_id');
-
-			$sql="UPDATE people_category SET category_name='$cat_name' WHERE people_category_id='$people_cat_id' AND group_id='$group_id'";
-			$result=db_query($sql);
-			if (!$result || db_affected_rows($result) < 1) {
-				$feedback .= ' Error modifying bug category ';
-				echo db_error();
-			} else {
-				$feedback .= ' Bug Category Modified ';
-			}
-
-		} else if (getStringFromRequest('people_group_mod')) {
-			$group_name = getStringFromRequest('group_name');
-			$people_group_id = getIntFromRequest('people_group_id');
-			$group_id = getIntFromRequest('group_id');
-
-			$sql="UPDATE people_group SET group_name = '$group_name' WHERE people_group_id='$people_group_id' AND group_id='$group_id'";
-			$result=db_query($sql);
-			if (!$result || db_affected_rows($result) < 1) {
-				$feedback .= ' Error modifying bug cateogry ';
-				echo db_error();
-			} else {
-				$feedback .= ' Bug Category Modified ';
-			}
-*/
 		}
 
 	} 
