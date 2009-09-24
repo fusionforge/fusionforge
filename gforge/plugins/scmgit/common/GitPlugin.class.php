@@ -76,14 +76,14 @@ class GitPlugin extends SCMPlugin {
 	function getInstructionsForAnon ($project) {
 		$b =  _('<p><b>Anonymous Git Access</b></p><p>This project\'s Git repository can be checked out through anonymous access with the following command.</p>');
 		$b .= '<p>' ;
-		$b .= '<tt>git clone '.util_make_url ('/anonscm/git/'.$project->getUnixName()).'</tt><br />';
+		$b .= '<tt>git clone '.util_make_url ('/anonscm/git/'.$project->getUnixName().'/'.$project->getUnixName().'.git').'</tt><br />';
 		$b .= '</p>';
 		return $b ;
 	}
 
 	function getInstructionsForRW ($project) {
 		$b = _('<p><b>Developer GIT Access via SSH</b></p><p>Only project developers can access the GIT tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
-		$b .= '<p><tt>git clone git+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . $this->git_root .'/'. $project->getUnixName().'</tt></p>' ;
+		$b .= '<p><tt>git clone git+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . $this->git_root .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
 		return $b ;
 	}
 
@@ -315,7 +315,7 @@ class GitPlugin extends SCMPlugin {
 			return false ;
 		}
 
-		system ("git archive --format=tar --prefix=$group_name-scm-$today/ HEAD | gzip > $tmp/snapshot.tar.gz");
+		system ("GIT_DIR=\"$repo\" git archive --format=tar --prefix=$group_name-scm-$today/ HEAD | gzip > $tmp/snapshot.tar.gz");
 		chmod ("$tmp/snapshot.tar.gz", 0644) ;
 		copy ("$tmp/snapshot.tar.gz", $snapshot) ;
 		unlink ("$tmp/snapshot.tar.gz") ;
@@ -357,14 +357,14 @@ class GitPlugin extends SCMPlugin {
 			$adds    = 0 ;
 			$updates = 0 ;
 
-			$repo = $this->git_root . '/' . $project->getUnixName() ;
+			$repo = $this->git_root . '/' . $project->getUnixName() . '/' . $project->getUnixName() . '.git';
 			if (!is_dir ($repo) || !is_dir ("$repo/refs")) {
 				// echo "No repository\n" ;
 				db_rollback () ;
 				return false ;
 			}
 
-			$pipe = popen ("GIT_DIR=$repo git log --since=@$start_time --until=@$end_time --all --pretty='format:%n%an <%ae>' --name-status", 'r' ) ;
+			$pipe = popen ("GIT_DIR=\"$repo\" git log --since=@$start_time --until=@$end_time --all --pretty='format:%n%an <%ae>' --name-status", 'r' ) ;
 
 			// cleaning stats_cvs_* table for the current day
 			$res = db_query_params ('DELETE FROM stats_cvs_group WHERE month=$1 AND day=$2 AND group_id=$3',
