@@ -43,7 +43,7 @@ build-unit-tests:
 	cp $(BUILDDIR)/reports/phpunit.xml $(BUILDDIR)/reports/phpunit.xml.org; xalan -in $(BUILDDIR)/reports/phpunit.xml.org -xsl fix_phpunit.xslt -out $(BUILDDIR)/reports/phpunit.xml
 
 build-full-tests:
-	find $(BUILDDIR)/packages -type f -exec rm -f  {} \;
+	find $(BUILDDIR)/build/packages -type f -exec rm -f  {} \;
 	mkdir -p $(BUILDDIR)/reports/coverage
 	phpdoc --title 'API Documentation' -ue on -t $(BUILDDIR)/apidocs -d gforge/common -tb '/usr/share/php/data/phpUnderControl/data/phpdoc' -o HTML:Phpuc:phpuc
 	-phpcs --tab-width=4 --standard=PEAR --report=checkstyle gforge/common > $(BUILDDIR)/reports/checkstyle.xml
