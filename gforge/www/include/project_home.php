@@ -97,12 +97,14 @@ if ($project->usesStats()) {
 }
 
 if($GLOBALS['sys_use_people']) {
-	$jobs_res = db_query("SELECT name 
+	$jobs_res = db_query_params ('SELECT name 
 					FROM people_job,people_job_category 
 					WHERE people_job.category_id=people_job_category.category_id 
 					AND people_job.status_id=1 
-					AND group_id='$group_id' 
-					GROUP BY name",2);
+					AND group_id=$1 
+					GROUP BY name',
+				     array ($group_id),
+				     2);
 	if ($jobs_res) {
 		$num=db_numrows($jobs_res);
 			if ($num>0) {
@@ -197,25 +199,21 @@ if ($project->usesFRS()) {
 		//  Members of projects can see all packages
 		//  Non-members can only see public packages
 		//
-		if (session_loggedin()) {
-			if (user_ismember($group_id) || user_ismember(1,'A')) {
-				$pub_sql='';
-			} else {
-				$pub_sql=' AND frs_package.is_public=1 ';
-			}
-		} else {
-			$pub_sql=' AND frs_package.is_public=1 ';
+		$public_required = 1;
+		if (session_loggedin() &&
+		    (user_ismember($group_id) || user_ismember(1,'A'))) {
+			$public_required = 0 ;
 		}
 
-		$sql="SELECT frs_package.package_id,frs_package.name AS package_name,frs_release.name AS release_name,frs_release.release_id AS release_id,frs_release.release_date AS release_date 
+		$res_files = db_query_params ('SELECT frs_package.package_id,frs_package.name AS package_name,frs_release.name AS release_name,frs_release.release_id AS release_id,frs_release.release_date AS release_date 
 			FROM frs_package,frs_release 
 			WHERE frs_package.package_id=frs_release.package_id 
-			AND frs_package.group_id='$group_id' 
+			AND frs_package.group_id=$1 
 			AND frs_release.status_id=1 
-			$pub_sql
-			ORDER BY frs_package.package_id,frs_release.release_date DESC";
-
-		$res_files = db_query($sql);
+			AND (frs_package.is_public=1 AND 1=$2)
+			ORDER BY frs_package.package_id,frs_release.release_date DESC',
+			array ($group_id,
+				$public_required));
 		$rows_files=db_numrows($res_files);
 		if (!$res_files || $rows_files < 1) {
 			echo db_error();
@@ -350,8 +348,8 @@ if ($project->usesPm()) {
 	print '<hr size="1" /><a href="'.util_make_url ('/pm/?group_id='.$group_id).'">';
 	print html_image('ic/taskman20g.png','20','20',array('alt'=>_('Tasks')));
 	print '&nbsp;'._('Task Manager').'</a>';
-	$sql="SELECT * FROM project_group_list WHERE group_id='$group_id' AND is_public=1";
-	$result = db_query ($sql);
+	$result = db_query_params ('SELECT * FROM project_group_list WHERE group_id=$1 AND is_public=1',
+			array ($group_id));
 	$rows = db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '<br /><em>'._('There are no public subprojects available').'</em>';
@@ -382,21 +380,6 @@ if ($project->usesSCM()) {
 	print html_image('ic/cvs16b.png','20','20',array('alt'=>_('SCM')));
 	print '&nbsp;'._('SCM Repository')."</a>";
 
-	/*
-	$result = db_query("
-		SELECT sum(commits) AS commits,sum(adds) AS adds
-		FROM stats_cvs_group
-		WHERE group_id='$group_id'
-	", -1, 0, SYS_DB_STATS);
-	$cvs_commit_num = db_result($result,0,0);
-	$cvs_add_num	= db_result($result,0,1);
-	if (!$cvs_commit_num) {
-		$cvs_commit_num=0;
-	}
-	if (!$cvs_add_num) {
-		$cvs_add_num=0;
-	}
-	*/
 	$hook_params = array () ;
 	$hook_params['group_id'] = $group_id ;
 	plugin_hook ("scm_stats", $hook_params) ;
