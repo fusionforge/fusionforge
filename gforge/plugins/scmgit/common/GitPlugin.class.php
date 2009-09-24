@@ -209,12 +209,11 @@ class GitPlugin extends SCMPlugin {
 		}
 
 		system ("chgrp -R $unix_group $root") ;
+		system ("chmod g+s $root") ;
 		if ($project->enableAnonSCM()) {
 			system ("chmod -R g+wX,o+rX-w $root") ;
-                        system ("find $root -type d -print0 | xargs --null chmod g+s");
 		} else {
 			system ("chmod -R g+wX,o-rwx $root") ;
-                        system ("find $root -type d -print0 | xargs --null chmod g+s");
 		}
 	}
 
