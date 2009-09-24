@@ -20,7 +20,7 @@ function bookmark_add ($bookmark_url, $bookmark_title="") {
 	}
 	$result = db_query_params ('INSERT into user_bookmarks (user_id, bookmark_url, bookmark_title) values ($1, $2, $3)',
 				   array (user_getid(),
-					  htmlentities($bookmark_url)
+					  htmlentities($bookmark_url),
 					  htmlspecialchars($bookmark_title)));
 	if (!$result) {
 		echo db_error();
