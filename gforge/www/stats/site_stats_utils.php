@@ -9,13 +9,28 @@
   *
   */
 
+$allowed_orderby_vals = array('downloads',
+			      'site_views',
+			      'subdomain_views',
+			      'msg_posted',
+			      'bugs_opened',
+			      'bugs_closed',
+			      'support_opened',
+			      'support_closed',
+			      'patches_opened',
+			      'patches_closed',
+			      'tasks_opened',
+			      'tasks_closed',
+			      'cvs_checkouts',
+			      'cvs_commits',
+			      'cvs_adds');
 
-   // week_to_dates
+// week_to_dates
 function week_to_dates( $week, $year = 0 ) {
 
 	if ( $year == 0 ) {
 		$year = gmstrftime("%Y", time() );
-	} 
+	}
 
 	   // One second into the New Year!
 	$beginning = gmmktime(0,0,0,1,1,$year);
@@ -106,6 +121,8 @@ function stats_generate_trove_grouplist( $trovecatid ) {
 
 
 function stats_site_projects_form( $report='last_30', $orderby = 'downloads', $projects = 0, $trovecat = 0 ) {
+	global $allowed_orderby_vals ;
+
 	print '<form action="projects.php" method="get">' . "\n";
 	print '<table width="100%" cellpadding="0" cellspacing="0" class="tableheading">' . "\n";
 
@@ -132,23 +149,8 @@ function stats_site_projects_form( $report='last_30', $orderby = 'downloads', $p
 	print ' </td></tr>';
 
 	print '<tr><td><strong>'._('View by:').'</strong></td><td>';
-	$orderby_vals = array("downloads",
-				"site_views",
-				"subdomain_views",
-				"msg_posted",
-				"bugs_opened",
-				"bugs_closed",
-				"support_opened",
-				"support_closed",
-				"patches_opened",
-				"patches_closed",
-				"tasks_opened",
-				"tasks_closed",
-				"cvs_checkouts",
-				"cvs_commits",
-				"cvs_adds");
 
-	print html_build_select_box_from_arrays ( $orderby_vals, $orderby_vals, "orderby", $orderby, false );
+	print html_build_select_box_from_arrays ( $allowed_orderby_vals, $allowed_orderby_vals, "orderby", $orderby, false );
 	print '</td></tr>';
 
 	print '<tr><td colspan="2" style="text-align:center"> <input type="submit" value="'._('Generate Report').'" /> </td></tr>';
@@ -164,90 +166,52 @@ function stats_site_projects_form( $report='last_30', $orderby = 'downloads', $p
  *
  */
 function stats_site_project_result( $report, $orderby, $projects, $trove ) {
-	//
-	//	Determine if we are looking at ALL projects, 
-	//	a trove category, or a specific list
-	//
-	$grp_str='';
-/*
-	if ($trove == '-2') {
-		//do a query of ALL groups
-		$grp_str='';
-	} elseif ($trove == '-1') {
-		//do a query of just a specific list of passed in groups
-		$grp_str=" AND g.group_id IN (" . $projects . ") ";
-	} else {
-		//do a query of 
-		$grp_str=" AND EXISTS 
-			(SELECT group_id 
-				FROM trove_group_link 
-				WHERE trove_cat_id ='$trove' 
-				AND g.group_id=trove_group_link.group_id) ";
-	}
-*/
+	global $allowed_orderby_vals ;
 
 	if (!$orderby) {
-		$orderby = "group_name ASC";
-	}else {
-		$orderby .= " DESC, group_name ASC";
+		$order_clause = 'ORDER BY group_name ASC' ;
+	} else {
+		$order_clause = 'ORDER BY ' ;
+		$order_clause .= util_ensure_value_in_set ($orderby,
+							   $allowed_orderby_vals) ;
+		$order_clause .= ' DESC, group_name ASC';
 	}
 
 	if ($report == 'last_30') {
-
-		$sql = "SELECT g.group_id, 
-		g.group_name,
-		SUM(s.downloads) AS downloads, 
-		SUM(s.site_views) AS site_views, 
-		SUM(s.subdomain_views) AS subdomain_views, 
-		SUM(s.msg_posted) AS msg_posted, 
-		SUM(s.bugs_opened) AS bugs_opened, 
-		SUM(s.bugs_closed) AS bugs_closed, 
-		SUM(s.support_opened) AS support_opened, 
-		SUM(s.support_closed) AS support_closed, 
-		SUM(s.patches_opened) AS patches_opened, 
-		SUM(s.patches_closed) AS patches_closed, 
-		SUM(s.tasks_opened) AS tasks_opened, 
-		SUM(s.tasks_closed) AS tasks_closed, 
-		SUM(s.cvs_checkouts) AS cvs_checkouts, 
-		SUM(s.cvs_commits) AS cvs_commits, 
-		SUM(s.cvs_adds) AS cvs_adds 
-		FROM 
-			stats_project_vw s, groups g
-		WHERE 
-			s.group_id = g.group_id
-			$grp_str
-		GROUP BY g.group_id, g.group_name
-		ORDER BY $orderby";
-
+		return db_query_params ('
+SELECT g.group_id, g.group_name,
+       SUM(s.downloads) AS downloads,
+       SUM(s.site_views) AS site_views,
+       SUM(s.subdomain_views) AS subdomain_views,
+       SUM(s.msg_posted) AS msg_posted,
+       SUM(s.bugs_opened) AS bugs_opened,
+       SUM(s.bugs_closed) AS bugs_closed,
+       SUM(s.support_opened) AS support_opened,
+       SUM(s.support_closed) AS support_closed,
+       SUM(s.patches_opened) AS patches_opened,
+       SUM(s.patches_closed) AS patches_closed,
+       SUM(s.tasks_opened) AS tasks_opened,
+       SUM(s.tasks_closed) AS tasks_closed,
+       SUM(s.cvs_checkouts) AS cvs_checkouts,
+       SUM(s.cvs_commits) AS cvs_commits,
+       SUM(s.cvs_adds) AS cvs_adds
+FROM stats_project_vw s, groups g
+WHERE s.group_id = g.group_id
+GROUP BY g.group_id, g.group_name
+ORDER BY ' . $order_clause,
+					array ()) ;
 	} else {
-
-		$sql = "SELECT g.group_id, 
-	   	g.group_name,
-		s.downloads, 
-		s.site_views, 
-		s.subdomain_views, 
-		s.msg_posted, 
-		s.bugs_opened,
-		s.bugs_closed,
-		s.support_opened,
-		s.support_closed,
-		s.patches_opened,
-		s.patches_closed,
-		s.tasks_opened,
-		s.tasks_closed,
-		s.cvs_checkouts,
-		s.cvs_commits,
-		s.cvs_adds
-		FROM 
-			stats_project_all_vw s, groups g
-		WHERE 
-			s.group_id = g.group_id
-			$grp_str
-		ORDER BY $orderby";
+		return db_query_params ('
+SELECT g.group_id, g.group_name, s.downloads, s.site_views,
+       s.subdomain_views, s.msg_posted, s.bugs_opened, s.bugs_closed,
+       s.support_opened, s.support_closed, s.patches_opened,
+       s.patches_closed, s.tasks_opened, s.tasks_closed,
+       s.cvs_checkouts, s.cvs_commits, s.cvs_adds
+FROM stats_project_all_vw s, groups g
+WHERE s.group_id = g.group_id
+ORDER BY ' . $order_clause,
+					array ()) ;
 	}
-
-	return db_query($sql);
-
 }
 
 function stats_site_projects( $report, $orderby, $projects, $trove ) {

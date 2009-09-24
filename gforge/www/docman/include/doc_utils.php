@@ -90,28 +90,24 @@ function docman_header($title,$pagehead,$style='xyz') {
 }
 
 function doc_droplist_count($l_group_id, $language_id, $g) {
+	$pub = array () ;
+	$pub[] = 1 ;
 	if (session_loggedin()) {
 		$perm =& $g->getPermission( session_get_user() );
-		if (!$perm || !is_object($perm) || !$perm->isMember()) {
-			$public_flag='AND dd.stateid=1';
-		} else {
-			$public_flag='AND dd.stateid IN (1,4,5)';
+		if ($perm && is_object($perm) && $perm->isMember()) {
+			$pub[] = 4 ;
+			$pub[] = 5 ;
 		}
-	} else {
-		$public_flag='AND dd.stateid=1';
 	}
-
-	$query = "select dd.language_id, sl.name, count(*) as count
-		 from doc_groups as dg, doc_data as dd, supported_languages as sl
-		 where dg.doc_group = dd.doc_group
-		 and dg.group_id = '$l_group_id'
-		 $public_flag
-		 and sl.language_id = dd.language_id
-		 group by dd.language_id,sl.name";
-
-	$gresult = db_query($query);
-
-
+	$gresult = db_query_params ('SELECT dd.language_id, sl.name, COUNT(*) AS count
+		 FROM doc_groups AS dg, doc_data AS dd, supported_languages AS sl
+		 WHERE dg.doc_group = dd.doc_group
+		 AND dg.group_id = $1
+		 AND dd.stateid = ANY ($2)
+		 AND sl.language_id = dd.language_id
+		 GROUP BY dd.language_id, sl.name',
+				    array ($l_group_id,
+					   db_int_array_to_any_clause ($pub))) ;
 	if (db_numrows($gresult) >= 1) {
 
 		print "<form name=\"langchoice\" action=\"index.php?group_id=".$l_group_id."\" method=\"post\"><table border=\"0\">
