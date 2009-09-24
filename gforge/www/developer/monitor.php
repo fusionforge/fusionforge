@@ -48,18 +48,17 @@ if (!session_loggedin()) {
 		echo '
 			<h2>'._('Monitor a User').'</h2>';
 
-		$sql="SELECT * FROM user_diary_monitor WHERE user_id='".user_getid()."' AND monitored_user='$diary_user';";
-
-		$result = db_query($sql);
-
+		$result = db_query_params ('SELECT * FROM user_diary_monitor WHERE user_id=$1 AND monitored_user=$2;',
+					   array (user_getid(),
+						  $diary_user));
 		if (!$result || db_numrows($result) < 1) {
 			/*
 				User is not already monitoring thread, so 
 				insert a row so monitoring can begin
 			*/
-			$sql="INSERT INTO user_diary_monitor (monitored_user,user_id) VALUES ('$diary_user','".user_getid()."')";
-
-			$result = db_query($sql);
+			$result = db_query_params ('INSERT INTO user_diary_monitor (monitored_user,user_id) VALUES ($1,$2)',
+						   array ($diary_user,
+							  user_getid ()));
 
 			if (!$result) {
 				echo "<span class=\"error\">"._('Error inserting into user_diary_monitor')."</span>";
@@ -69,9 +68,9 @@ if (!session_loggedin()) {
 			}
 
 		} else {
-
-			$sql="DELETE FROM user_diary_monitor WHERE user_id='".user_getid()."' AND monitored_user='$diary_user';";
-			$result = db_query($sql);
+			$result = db_query_params ('DELETE FROM user_diary_monitor WHERE user_id=$1 AND monitored_user=$2',
+						   array (user_getid(),
+							  $diary_user));
 			echo "<span class=\"feedback\">"._('Monitoring has been turned off')."</span>";
 			echo _('You will not receive any more emails from this user');
 	

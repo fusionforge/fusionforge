@@ -40,8 +40,9 @@ if ($diary_user) {
 	<h2>'._('Diary And Notes For').': '. $user_obj->getRealName() .'</h2>';
 
 	if ($diary_id) {
-		$sql="SELECT * FROM user_diary WHERE user_id='$diary_user' AND id='$diary_id' AND is_public=1";
-		$res=db_query($sql);
+		$res = db_query_params ('SELECT * FROM user_diary WHERE user_id=$1 AND id=$2 AND is_public=1',
+					array ($diary_user,
+					       $diary_id));
 
 		echo $HTML->boxTop(_('Date').": ".date(_('Y-m-d H:i'), db_result($res,$i,'date_posted')));
 		if (!$res || db_numrows($res) < 1) {
@@ -63,9 +64,8 @@ if ($diary_user) {
 		List all diary entries
 
 	*/
-	$sql="SELECT * FROM user_diary WHERE user_id='$diary_user' AND is_public=1 ORDER BY id DESC";
-
-	$result=db_query($sql);
+	$result = db_query_params ('SELECT * FROM user_diary WHERE user_id=$1 AND is_public=1 ORDER BY id DESC',
+				   array ($diary_user));
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
