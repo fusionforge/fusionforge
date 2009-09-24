@@ -34,9 +34,12 @@ if (session_loggedin()) {
 			/*
 				Create the new package
 			*/
-			$sql="INSERT INTO snippet_package (category,created_by,name,description,language) ".
-				"VALUES ('$category','".user_getid()."','".htmlspecialchars($name)."','".htmlspecialchars($description)."','$language')";
-			$result=db_query($sql);
+			$result = db_query_params ('INSERT INTO snippet_package (category,created_by,name,description,language) VALUES ($1,$2,$3,$4,$5)',
+						   array ($category,
+							  user_getid(),
+							  htmlspecialchars($name),
+							  htmlspecialchars($description),
+							  $language));
 			if (!$result) {
 				//error in database
 				form_release_key(getStringFromRequest("form_key"));
@@ -51,11 +54,12 @@ if (session_loggedin()) {
 				/*
 					create the snippet package version
 				*/
-				$sql="INSERT INTO snippet_package_version ".
-					"(snippet_package_id,changes,version,submitted_by,post_date) ".
-					"VALUES ('$snippet_package_id','".htmlspecialchars($changes)."','".
-						htmlspecialchars($version)."','".user_getid()."','".time()."')";
-				$result=db_query($sql);
+				$result = db_query_params ('INSERT INTO snippet_package_version (snippet_package_id,changes,version,submitted_by,post_date) VALUES ($1,$2,$3,$4,$5)',
+							   array ($snippet_package_id,
+								  htmlspecialchars($changes),
+								  htmlspecialchars($version),
+								  user_getid(),
+								  time()));
 				if (!$result) {
 					//error in database
 					$feedback .= _('ERROR DOING SNIPPET PACKAGE VERSION INSERT!');

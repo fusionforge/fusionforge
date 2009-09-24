@@ -36,10 +36,14 @@ if (session_loggedin()) {
 		*/
 		if ($name && $description && $language != 0 && $category != 0 && $type != 0 && $version && $code) {
 
-			$sql="INSERT INTO snippet (category,created_by,name,description,type,language,license) ".
-				"VALUES ('$category','". user_getid() ."','". htmlspecialchars($name)."','".
-				htmlspecialchars($description)."','$type','$language','$license')";
-			$result=db_query($sql);
+			$result = db_query_params ('INSERT INTO snippet (category,created_by,name,description,type,language,license) VALUES ($1,$2,$3,$4,$5,$6,$7)',
+						   array ($category,
+							  user_getid() ,
+							  htmlspecialchars($name),
+							  htmlspecialchars($description),
+							  $type,
+							  $language,
+							  $license));
 			if (!$result) {
 				$feedback = _('ERROR DOING SNIPPET INSERT!');
 				echo db_error();
@@ -49,11 +53,13 @@ if (session_loggedin()) {
 				/*
 					create the snippet version
 				*/
-				$sql="INSERT INTO snippet_version (snippet_id,changes,version,submitted_by,post_date,code) ".
-					"VALUES ('$snippet_id','".htmlspecialchars($changes)."','".
-						htmlspecialchars($version)."','".user_getid()."','".
-						time()."','".htmlspecialchars($code)."')";
-				$result=db_query($sql);
+				$result = db_query_params ('INSERT INTO snippet_version (snippet_id,changes,version,submitted_by,post_date,code) VALUES ($1,$2,$3,$4,$5,$6)',
+							   array ($snippet_id,
+								  htmlspecialchars($changes),
+								  htmlspecialchars($version),
+								  user_getid(),
+								  time(),
+								  htmlspecialchars($code)));
 				if (!$result) {
 					$feedback = _('ERROR DOING SNIPPET VERSION INSERT!');
 					echo db_error();

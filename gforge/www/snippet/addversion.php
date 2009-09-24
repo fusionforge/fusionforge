@@ -49,11 +49,13 @@ if (session_loggedin()) {
 				/*
 					create the snippet version
 				*/
-				$sql="INSERT INTO snippet_version (snippet_id,changes,version,submitted_by,post_date,code) ".
-					"VALUES ('$snippet_id','".htmlspecialchars($changes)."','".
-						htmlspecialchars($version)."','".user_getid()."','".
-						time()."','".htmlspecialchars($code)."')";
-				$result=db_query($sql);
+				$result = db_query_params ('INSERT INTO snippet_version (snippet_id,changes,version,submitted_by,post_date,code) VALUES ($1,$2,$3,$4,$5,$6)',
+							   array ($snippet_id,
+								  htmlspecialchars($changes),
+								  htmlspecialchars($version),
+								  user_getid(),
+								  time(),
+								  htmlspecialchars($code)));
 				if (!$result) {
 					$feedback .= _('ERROR DOING SNIPPET VERSION INSERT!');
 					echo db_error();
@@ -131,11 +133,12 @@ if (session_loggedin()) {
 				/*
 					create the snippet package version
 				*/
-				$sql="INSERT INTO snippet_package_version ".
-					"(snippet_package_id,changes,version,submitted_by,post_date) ".
-					"VALUES ('$snippet_package_id','".htmlspecialchars($changes)."','".
-						htmlspecialchars($version)."','".user_getid()."','".time()."')";
-				$result=db_query($sql);
+				$result = db_query_params ('INSERT INTO snippet_package_version (snippet_package_id,changes,version,submitted_by,post_date) VALUES ($1,$2,$3,$4,$5)',
+							   array ($snippet_package_id,
+								  htmlspecialchars($changes),
+								  htmlspecialchars($version),
+								  user_getid(),
+								  time()));
 				if (!$result) {
 					//error in database
 					$feedback .= _('ERROR DOING SNIPPET PACKAGE VERSION INSERT!');

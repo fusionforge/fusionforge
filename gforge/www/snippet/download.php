@@ -18,8 +18,8 @@ require $gfwww.'snippet/snippet_utils.php';
 global $SCRIPT_EXTENSION;
 
 $id = getIntFromRequest('id');
-$sql = 'SELECT language,code FROM (snippet NATURAL JOIN snippet_version) WHERE snippet_version_id = '.$id;
-$result=db_query($sql);
+$result = db_query_params ('SELECT language,code FROM (snippet NATURAL JOIN snippet_version) WHERE snippet_version_id = $1',
+			   array ($id));
 
 if ($result && db_numrows($result) > 0) {
 	header('Content-Type: text/plain');
