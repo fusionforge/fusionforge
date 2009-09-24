@@ -111,7 +111,7 @@ class GitPlugin extends SCMPlugin {
 		
 		if ($project->usesPlugin ($this->name)) {
 			if ($this->browserDisplayable ($project)) {
-				print '<iframe src="'.util_make_url ("/plugins/scmgit/cgi-bin/gitweb.cgi?p=".$project->getUnixName()).'" frameborder="no" width=100% height=700></iframe>' ;
+				print '<iframe src="'.util_make_url ("/plugins/scmgit/cgi-bin/gitweb.cgi?p=".$project->getUnixName().'/'.$project->getUnixName().'.git').'" frameborder="no" width=100% height=700></iframe>' ;
 			}
 		}
 	}
@@ -184,12 +184,13 @@ class GitPlugin extends SCMPlugin {
 		}
 
 		$project_name = $project->getUnixName() ;
-		$repo = $this->git_root . '/' . $project_name ;
+		$root = $this->git_root . '/' . $project_name ;
+		$repo = $root . '/' .  $project_name . '.git' ;
 		$unix_group = 'scm_' . $project_name ;
 
 		system ("mkdir -p $repo") ;
 		if (!is_file ("$repo/HEAD") && !is_dir("$repo/objects") && !is_dir("$repo/refs")) {
-			system ("GIT_DIR=\"$repo\" git --bare init") ;
+			system ("GIT_DIR=\"$repo\" git init --bare --shared=group") ;
 			system ("GIT_DIR=\"$repo\" git update-server-info") ;
 			if (is_file ("$repo/hooks/post-update.sample")) {
 				rename ("$repo/hooks/post-update.sample",
@@ -207,11 +208,13 @@ class GitPlugin extends SCMPlugin {
 			system ("find $repo -type d | xargs chmod g+s") ;
 		}
 
-		system ("chgrp -R $unix_group $repo") ;
+		system ("chgrp -R $unix_group $root") ;
 		if ($project->enableAnonSCM()) {
-			system ("chmod -R g+wX,o+rX-w $repo") ;
+			system ("chmod -R g+wX,o+rX-w $root") ;
+                        system ("find $root -type d -print0 | xargs --null chmod g+s");
 		} else {
-			system ("chmod -R g+wX,o-rwx $repo") ;
+			system ("chmod -R g+wX,o-rwx $root") ;
+                        system ("find $root -type d -print0 | xargs --null chmod g+s");
 		}
 	}
 
@@ -243,7 +246,7 @@ class GitPlugin extends SCMPlugin {
 
 		$f = fopen ($fname.'.new', 'w') ;
 		foreach ($list as $project) {
-			fwrite ($f, $project->getUnixName() . "\n");
+			fwrite ($f, $project->getUnixName() . "/" .  $project->getUnixName() . ".git\n");
 		}
 		fclose ($f) ;
 		chmod ($fname.'.new', 0644) ;
@@ -272,8 +275,9 @@ class GitPlugin extends SCMPlugin {
 			return false;
 		}
 
+                // TODO: ideally we generate one snapshot per git repository
 		$toprepo = $this->git_root ;
-		$repo = $toprepo . '/' . $project->getUnixName() ;
+		$repo = $toprepo . '/' . $project->getUnixName() . '/' .  $project->getUnixName() . '.git' ;
 
 		if (!is_dir ($repo)) {
 			unlink ($tarball) ;
