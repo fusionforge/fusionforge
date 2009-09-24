@@ -53,16 +53,18 @@ function show_top_downloads() {
 	$month = date("Ym",time()-(2*3600*24));
 	$day = date("d",time()-(2*3600*24));
 
-	$res_topdown = db_query("
+	$res_topdown = db_query_params ('
 		SELECT groups.group_id,
 		groups.group_name,
 		groups.unix_group_name,
 		frs_dlstats_grouptotal_vw.downloads
 		FROM frs_dlstats_grouptotal_vw,groups
 		WHERE
-		frs_dlstats_grouptotal_vw.group_id=groups.group_id AND groups.is_public='1' and groups.status='A'
+		frs_dlstats_grouptotal_vw.group_id=groups.group_id AND groups.is_public=1 and groups.status=$1
 		ORDER BY downloads DESC
-	", 10, 0, SYS_DB_STATS);
+	',
+					array ('A'),
+					10);
 //	echo db_error();
 
 	if (db_numrows($res_topdown) == 0) {
@@ -84,7 +86,8 @@ function show_top_downloads() {
 
 
 function stats_getprojects_active_public() {
-	$res_count = db_query("SELECT count(*) AS count FROM groups WHERE status='A' AND is_public=1");
+	$res_count = db_query_params ('SELECT count(*) AS count FROM groups WHERE status=$1 AND is_public=1',
+			array ('A'));
 	if (db_numrows($res_count) > 0) {
 		$row_count = db_fetch_array($res_count);
 		return $row_count['count'];
