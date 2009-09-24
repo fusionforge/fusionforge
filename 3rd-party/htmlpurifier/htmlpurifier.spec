@@ -6,7 +6,7 @@ License: LGPL
 Group: Development/Languages
 URL: http://htmlpurifier.org/
 
-Packager: Manuel VACELET <manuel.vacelet@st.com>
+Packager: Alain PEYRAT <aljeux@free.fr>
 
 Source: http://htmlpurifier.org/releases/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -44,21 +44,25 @@ This package includes the documentation for %{name}.
 
 %install
 %{__rm} -rf %{buildroot}
-%{__install} -d -m0755 %{buildroot}%{_datadir}/%{name}
-%{__cp} -ar library/* %{buildroot}%{_datadir}/%{name}
+%{__install} -d -m0755 %{buildroot}%{_datadir}/php
+%{__cp} -ar library/* %{buildroot}%{_datadir}/php
 
 %clean
 %{__rm} -rf %{buildroot}
 
 %files
 %defattr(-, root, root, 0755)
-%{_datadir}/%{name}/
+%{_datadir}/php/
 
 %files docs
 %defattr(-, root, root, 0755)
 %doc art benchmarks configdoc CREDITS docs INSTALL INSTALL.fr.utf8 LICENSE NEWS README TODO VERSION WHATSNEW WYSIWYG
 
 %changelog
+* Thu Sep 24 2009 Alain Peyrat <aljeux@free.fr> - 4.0.0
+- Updated to v4.0.0
+- Changed installation path to /usr/share/php to use the share path with debian.
+
 * Mon Apr 27 2009 Nicolas GUERIN <nicolas.guerin@xrce.xerox.com> - 3.3.0
 - Updated to v3.3.0
 
