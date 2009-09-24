@@ -111,8 +111,8 @@ $HTML->header(array('title'=>_('Developer Profile')));
 
 		*/
 
-		$res=db_query("SELECT count(*) from user_diary ".
-			"WHERE user_id='". $user_id ."' AND is_public=1");
+		$res = db_query_params ('SELECT count(*) from user_diary WHERE user_id=$1 AND is_public=1',
+					array ($user_id));
 		echo _('Diary/Note entries:').' '.db_result($res,0,0).'
 		<p/>'.util_make_link ('/developer/diary.php?diary_user='.$user_id,_('View Diary & Notes')).'</p>
 		<p/>';

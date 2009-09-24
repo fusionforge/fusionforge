@@ -17,9 +17,8 @@ function stats_sf_stats() {
 /*
 	pages/day
 */
-	$sql="SELECT * FROM stats_agg_pages_by_day";
-
-	$result = db_query ($sql);
+	$result = db_query_params ('SELECT * FROM stats_agg_pages_by_day',
+				   array ());
 	$rows = db_numrows($result);
 
 	if (!$result || $rows < 1) {
@@ -49,27 +48,10 @@ function stats_sf_stats() {
 	echo '<p>&nbsp;</p>';
 
 /*
-	pages/hour
-* /
-	$sql="SELECT * FROM stats_agg_pages_by_hour";
-
-	$result = db_query ($sql);
-	$rows = db_numrows($result);
-
-	if (!$result || $rows < 1) {
-		echo '<h1>Stats Problem</h1>';
-		echo db_error();
-	} else {
-		GraphResult($result,'Page Views By Hour');
-	}
-	echo '<p>';
-*/
-
-/*
 	Groups added by week
 */
-	$sql="select (round((register_time/604800),0)*604800) AS time ,count(*) from groups group by time";
-	$result = db_query ($sql);
+	$result = db_query_params ('select (round((register_time/604800),0)*604800) AS time ,count(*) from groups group by time',
+				   array ());
 	$rows = db_numrows($result);
 
 	if (!$result || $rows < 1) {
@@ -91,8 +73,8 @@ function stats_sf_stats() {
 /*
 	Users added by week
 */
-	$sql="select (round((add_date/604800),0)*604800) AS time ,count(*) from users group by time";
-	$result = db_query ($sql);
+	$result = db_query_params ('select (round((add_date/604800),0)*604800) AS time ,count(*) from users group by time',
+				   array ());
 	$rows = db_numrows($result);
 
 	if (!$result || $rows < 1) {
@@ -121,9 +103,9 @@ function stats_project_stats() {
 /*
 	logo impressions/day
 */
-	$sql="SELECT * FROM stats_agg_logo_by_day";
 
-	$result = db_query ($sql);
+	$result = db_query_params ('SELECT * FROM stats_agg_logo_by_day',
+				   array ());
 	$rows = db_numrows($result);
 
 	if (!$result || $rows < 1) {
@@ -138,9 +120,9 @@ function stats_project_stats() {
 /*
 	logo impressions/group
 */
-	$sql="SELECT group_id,sum(count) as count FROM stats_agg_logo_by_group GROUP BY group_id";
 
-	$result = db_query ($sql);
+	$result = db_query_params ('SELECT group_id,sum(count) as count FROM stats_agg_logo_by_group GROUP BY group_id',
+				   array ());
 	$rows = db_numrows($result);
 
 	if (!$result || $rows < 1) {
@@ -162,9 +144,9 @@ function stats_browser_stats() {
 /*
 	Browser
 */
-	$sql="SELECT * FROM stats_agg_pages_by_browser";
 
-	$result = db_query ($sql);
+	$result = db_query_params ('SELECT * FROM stats_agg_pages_by_browser',
+				   array ());
 	$rows = db_numrows($result);
 
 	if (!$result || $rows < 1) {
@@ -178,9 +160,9 @@ function stats_browser_stats() {
 /*
 	Platform
 */
-	$sql="SELECT * FROM stats_agg_pages_by_platform";
 
-	$result = db_query ($sql);
+	$result = db_query_params ('SELECT * FROM stats_agg_pages_by_platform',
+				   array ());
 	$rows = db_numrows($result);
 
 	if (!$result || $rows < 1) {
@@ -194,9 +176,9 @@ function stats_browser_stats() {
 /*
 	Browser/ver
 */
-	$sql="SELECT * FROM stats_agg_pages_by_plat_brow_ver";
 
-	$result = db_query ($sql);
+	$result = db_query_params ('SELECT * FROM stats_agg_pages_by_plat_brow_ver',
+				   array ());
 	$rows = db_numrows($result);
 
 	if (!$result || $rows < 1) {

@@ -197,8 +197,8 @@ function project_summary($group_id,$mode,$no_table) {
 
 		if ($mode != 'compact') {
 			//get a list of publicly available projects
-			$sql="SELECT * FROM project_group_list WHERE group_id='$group_id' AND is_public=1";
-			$result = db_query ($sql);
+			$result = db_query_params ('SELECT * FROM project_group_list WHERE group_id=$1 AND is_public=1',
+						   array ($group_id));
 			$rows = db_numrows($result);
 			if (!$result || $rows < 1) {
 				$return .= '<br /><em>There are no public subprojects available</em>';
@@ -237,8 +237,8 @@ function project_summary($group_id,$mode,$no_table) {
 		$return .= "&nbsp;SCM&nbsp;Tree</a>";
 
 		if ($mode != 'compact') {
-			$sql = "SELECT SUM(commits) AS commits,SUM(adds) AS adds from stats_cvs_group where group_id='$group_id'";
-			$result = db_query($sql);
+			$result = db_query_params ('SELECT SUM(commits) AS commits,SUM(adds) AS adds from stats_cvs_group where group_id=$1',
+						   array ($group_id));
 			$return .= ' ( <strong>'.db_result($result,0,0).'</strong> commits, <strong>'.db_result($result,0,1).'</strong> adds )';
 		}
 	}

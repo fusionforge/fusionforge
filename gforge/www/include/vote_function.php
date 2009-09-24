@@ -60,8 +60,9 @@ function vote_show_thumbs($id,$flag) {
  * @param		string	The rating type
  */
 function vote_get_rating ($id,$flag) {
-	$sql="SELECT response FROM survey_rating_aggregate WHERE type='$flag' AND id='$id'";
-	$result=db_query($sql);
+	$result = db_query_params ('SELECT response FROM survey_rating_aggregate WHERE type=$1 AND id=$2',
+				   array ($flag,
+					  $id));
 	if (!$result || (db_numrows($result) < 1) || (db_result($result,0,0)==0)) {
 		return '0';
 	} else {
@@ -130,9 +131,9 @@ function show_survey ($group_id,$survey_id) {
 	Select this survey from the database
 */
 
-$sql="SELECT * FROM surveys WHERE survey_id='$survey_id' and group_id = '$group_id'";
-
-$result=db_query($sql);
+	$result = db_query_params ('SELECT * FROM surveys WHERE survey_id=$1 and group_id = $2',
+				   array ($survey_id,
+					  $group_id));
 
 if (db_numrows($result) > 0) {
 	echo '
@@ -157,8 +158,8 @@ if (db_numrows($result) > 0) {
 			Build the questions on the HTML form
 		*/
 
-		$sql="SELECT * FROM survey_questions WHERE question_id='".$quest_array[$i]."'";
-		$result=db_query($sql);
+		$result = db_query_params ('SELECT * FROM survey_questions WHERE question_id=$1',
+					   array ($quest_array[$i]));
 		$question_type=db_result($result, 0, 'question_type');
 
 		if ($question_type == '4') {
@@ -377,8 +378,8 @@ function vote_show_user_rate_box ($user_id, $by_id=0) {
 			WHERE rated_by=$1
 			AND user_id=$2
 		',
-			array($by_id,
-				$user_id));
+					array($by_id,
+					      $user_id));
 		$prev_vote = util_result_columns_to_assoc($res);
 		while (list($k,$v) = each($prev_vote)) {
 			if ($v == 0) {
@@ -415,11 +416,11 @@ function vote_show_user_rate_box ($user_id, $by_id=0) {
  */
 function vote_show_user_rating($user_id) {
 	global $USER_RATING_QUESTIONS;
-	$sql="SELECT rate_field,(avg(rating)+3) AS avg_rating,count(*) as count 
-FROM user_ratings 
-WHERE user_id='$user_id' 
-GROUP BY rate_field";
-	$res=db_query($sql);
+	$res = db_query_params ('SELECT rate_field,(avg(rating)+3) AS avg_rating,count(*) as count
+FROM user_ratings
+WHERE user_id=$1
+GROUP BY rate_field',
+				array ($user_id));
 	$rows=db_numrows($res);
 	if (!$res || $rows < 1) {
 
@@ -436,8 +437,8 @@ GROUP BY rate_field";
 			<td>'.db_result($res,$i,'avg_rating').' (By '. db_result($res,$i,'count') .' Users)</td></tr>';
 		}
 
-		$res=db_query_params ('SELECT ranking,metric,importance_factor FROM user_metric WHERE user_id=$1',
-			array($user_id));
+		$res = db_query_params ('SELECT ranking,metric,importance_factor FROM user_metric WHERE user_id=$1',
+					array($user_id));
 		if ($res && db_numrows($res) > 0) {
 			echo '<tr><td colspan="2"><strong>Trusted Overall Rating</strong></td></tr>';
 			echo '<tr><td>Sitewide Ranking:</td><td><strong>'. db_result($res,0,'ranking') .'</strong></td></tr>
@@ -459,7 +460,7 @@ function vote_remove_all_ratings_by($user_id) {
 		DELETE FROM user_ratings
 		WHERE rated_by=$1
 	',
-			array($user_id));
+			 array($user_id));
 }
 
 // Local Variables:
