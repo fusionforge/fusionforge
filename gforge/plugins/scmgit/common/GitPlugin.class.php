@@ -246,12 +246,37 @@ class GitPlugin extends SCMPlugin {
 
 		$f = fopen ($fname.'.new', 'w') ;
 		foreach ($list as $project) {
-			fwrite ($f, $project->getUnixName() . "/" .  $project->getUnixName() . ".git\n");
+                        $repos = $this->getRepositories($rootdir . "/" .  $project->getUnixName());
+                        foreach ($repos as $repo) {
+                                $reldir = substr($repo, strlen($rootdir) + 1);
+			        fwrite ($f, $reldir . "\n");
+                        }
 		}
 		fclose ($f) ;
 		chmod ($fname.'.new', 0644) ;
 		rename ($fname.'.new', $fname) ;
 	}
+
+        function getRepositories($path) {
+                if (! is_dir($path))
+                        return;
+                $list = Array();
+                $entries = scandir($path);
+                foreach ($entries as $entry) {
+                        $fullname = $path . "/" . $entry;
+                        if (($entry == ".") or ($entry == ".."))
+                                continue;
+                        if (is_dir($fullname)) {
+                                if (is_link($fullname))
+                                        continue;
+                                $result = $this->getRepositories($fullname);
+                                $list = array_merge($list, $result);
+                        } else if ($entry == "HEAD") {
+                                $list[] = $path;
+                        }
+                }
+                return $list;
+        }
 
 	function generateSnapshots ($params) {
 		global $sys_scm_tarballs_path ;
