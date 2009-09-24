@@ -83,9 +83,9 @@ function html_dbimage($id, $args=0) {
 	if (!$args) {
 		$args = array();
 	}
-	$sql="SELECT width,height,version 
-FROM db_images WHERE id='$id'";
-	$result=db_query($sql);
+	$result = db_query_params ('SELECT width,height,version 
+FROM db_images WHERE id=$1',
+			array ($id));
 	$rows=db_numrows($result);
 
 	if (!$result || $rows < 1) {
@@ -150,7 +150,8 @@ function html_image($src,$width,$height,$args,$display=1) {
  * @return	string	The html select box.
  */
 function html_get_language_popup ($title='language_id',$selected='xzxz') {
-	$res = db_query('SELECT * FROM supported_languages ORDER BY name ASC');	
+	$res = db_query_params ('SELECT * FROM supported_languages ORDER BY name ASC',
+			array ());	
 	return html_build_select_box ($res,$title,$selected,false);
 }
 

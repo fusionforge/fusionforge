@@ -39,12 +39,14 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 	}
 	$expl_pathinfo = explode('/',$pathwithoutprefix);
 	if (($expl_pathinfo[1]=='foundry') || ($expl_pathinfo[1]=='projects')) {
-		$res_grp=db_query("
+		$res_grp = db_query_params ('
 			SELECT *
 			FROM groups
-			WHERE unix_group_name='$expl_pathinfo[2]'
-			AND status IN ('A','H')
-		");
+			WHERE unix_group_name=$1
+			AND status IN ($2,$3)',
+					    array ($expl_pathinfo[2],
+						   'A',
+						   'H'));
 		
 		// store subpage id for analyzing later
 		$subpage = @$expl_pathinfo[3];
