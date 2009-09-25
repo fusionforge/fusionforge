@@ -132,10 +132,10 @@ if ( $num_packages < 1) {
 		print '</a></h3></td><td colspan="4">&nbsp;</td></tr>';
 
 		// get the releases of the package
-		$sql = "SELECT * FROM frs_release
-		WHERE package_id='". db_result($res_package,$p,'package_id') . "'
-		AND status_id=1 ORDER BY release_date DESC, name ASC";
-		$res_release = db_query( $sql );
+		$res_release = db_query_params ('SELECT * FROM frs_release
+		WHERE package_id=$1
+		AND status_id=1 ORDER BY release_date DESC, name ASC',
+			array (db_result($res_package,$p,'package_id')));
 		$num_releases = db_numrows( $res_release );
 
 		$proj_stats['releases'] += $num_releases;
