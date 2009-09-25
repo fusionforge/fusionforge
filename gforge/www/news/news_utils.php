@@ -90,7 +90,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 	*/
 	if ($tail_headlines == -1) {
 		$l = 0 ;
-	} elso {
+	} else {
 		$l = $limit + $tail_headlines ;
 	}
 	$result = db_query_params ('
