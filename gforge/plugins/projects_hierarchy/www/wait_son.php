@@ -31,10 +31,11 @@ $sub_group_id = getIntFromRequest('sub_group_id');
 
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 //update the link when the son allow the father
-$sql = "UPDATE plugin_projects_hierarchy SET activated = true WHERE project_id  = '".$group_id."' AND sub_project_id = '".$sub_group_id."'";
-//print "<br>".$sql;
 db_begin();
-db_query($sql) or die(db_error());
+db_query_params ('UPDATE plugin_projects_hierarchy SET activated = true WHERE project_id  = $1 AND sub_project_id = $2',
+		 array ($group_id,
+			$sub_group_id)
+	) or die(db_error());
 db_commit();
 
 //plugin webcal

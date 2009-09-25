@@ -48,10 +48,14 @@
  function link_box ($group_id,$name,$selected='xzxzxz') {
 	global $link;
 	if (!$link) {
-		$link=db_query("SELECT group_id,group_name,register_time FROM groups " .
-		"WHERE  status='A' AND type_id=1 AND group_id != ".$group_id." " .
-		"AND  group_id NOT IN (SELECT sub_project_id FROM plugin_projects_hierarchy WHERE project_id = ".$group_id." )".
-		" AND group_id NOT IN (SELECT project_id FROM plugin_projects_hierarchy WHERE sub_project_id = ".$group_id." )");
+		$link = db_query_params ('SELECT group_id,group_name,register_time FROM groups 
+WHERE  status=$1 AND type_id=1 AND group_id != $2 
+AND  group_id NOT IN (SELECT sub_project_id FROM plugin_projects_hierarchy WHERE project_id = $3 )
+ AND group_id NOT IN (SELECT project_id FROM plugin_projects_hierarchy WHERE sub_project_id = $4 )',
+			array ('A',
+				$group_id,
+				$group_id,
+				$group_id));
 	
 	
 	}

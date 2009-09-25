@@ -32,10 +32,12 @@ $com = getStringFromRequest('com');
 
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 //add link between two projects
-$sql = "INSERT INTO plugin_projects_hierarchy (project_id ,sub_project_id,link_type,com) VALUES ('".$group_id."' , '".$sub_project_id."', 'navi','".$com."')";
-//print "<br>".$sql;
 db_begin();
-db_query($sql) or die(db_error());
+db_query_params ('INSERT INTO plugin_projects_hierarchy (project_id ,sub_project_id,link_type,com) VALUES ($1 , $2, $3,$4)',
+			array ($group_id,
+				$sub_project_id,
+				'navi',
+				$com)) or die(db_error());
 db_commit();
 
 header("Location: ".util_make_url ('/project/admin/index.php?group_id='.$group_id));

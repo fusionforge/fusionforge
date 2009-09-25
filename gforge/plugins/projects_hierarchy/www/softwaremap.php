@@ -169,7 +169,7 @@ if(@$_SESSION['cat'] != 't'){
 		}
 		
 		// print subcategories
-		$res_sub = db_query("
+		$res_sub = db_query_params ('
 			SELECT trove_cat.trove_cat_id AS trove_cat_id,
 				trove_cat.fullname AS fullname,
 				trove_treesums.subprojects AS subprojects
@@ -177,10 +177,10 @@ if(@$_SESSION['cat'] != 't'){
 			WHERE (
 				trove_treesums.limit_1=0 
 				OR trove_treesums.limit_1 IS NULL
-			) AND " // need no discriminators
-			."trove_cat.parent='$form_cat'
+			) AND trove_cat.parent=$1
 			ORDER BY fullname
-		", -1, 0, SYS_DB_TROVE);
+		',
+			array ($form_cat));
 		echo db_error();
 		
 		while ($row_sub = db_fetch_array($res_sub)) {
@@ -197,12 +197,13 @@ if(@$_SESSION['cat'] != 't'){
 		// ########### right column: root level
 		print '</span></td><td><span style="font-family:arial,helvetica">';
 		// here we print list of root level categories, and use open folder for current
-		$res_rootcat = db_query("
+		$res_rootcat = db_query_params ('
 			SELECT trove_cat_id,fullname
 			FROM trove_cat
 			WHERE parent=0
 			AND trove_cat_id!=0
-			ORDER BY fullname");
+			ORDER BY fullname',
+			array ());
 		echo db_error();
 		
 		print _('Browse By').':';
@@ -337,8 +338,9 @@ if(@$_SESSION['cat'] != 't'){
 else {
 		function build_tree() {
 			global $project_name ;
-			$query = "select p1.group_id as father_id,p1.unix_group_name as father_unix_name,p1.group_name as father_name,p2.group_id as son_id,p2.unix_group_name as son_unix_name,p2.group_name as son_name from groups as p1,groups as p2,plugin_projects_hierarchy where p1.group_id=plugin_projects_hierarchy.project_id and p2.group_id=plugin_projects_hierarchy.sub_project_id and plugin_projects_hierarchy.activated='t' AND plugin_projects_hierarchy.link_type='shar'";
-			$res = db_query($query);
+			$res = db_query_params ('select p1.group_id as father_id,p1.unix_group_name as father_unix_name,p1.group_name as father_name,p2.group_id as son_id,p2.unix_group_name as son_unix_name,p2.group_name as son_name from groups as p1,groups as p2,plugin_projects_hierarchy where p1.group_id=plugin_projects_hierarchy.project_id and p2.group_id=plugin_projects_hierarchy.sub_project_id and plugin_projects_hierarchy.activated=$1 AND plugin_projects_hierarchy.link_type=$2',
+			array ('t',
+				'shar'));
 			echo db_error();
 			// construction du tableau associatif
 			// key = name of the father

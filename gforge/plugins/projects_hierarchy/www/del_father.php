@@ -37,10 +37,10 @@ $params[1] = $group_id;
 plugin_hook('del_cal_link_father',$params);
 
 //del link between two projects
-$sql = "DELETE FROM plugin_projects_hierarchy WHERE project_id  = '".$group_id."' AND sub_project_id = '".$sub_group_id."'";
-//print "<br>".$sql;
 db_begin();
-db_query($sql) or die(db_error());
+db_query_params ('DELETE FROM plugin_projects_hierarchy WHERE project_id  = $1 AND sub_project_id = $2',
+			array ($group_id,
+				$sub_group_id)) or die(db_error());
 db_commit();
 
 header("Location: ".util_make_url ('/project/admin/index.php?group_id='.$sub_group_id));
