@@ -79,7 +79,11 @@ while ($row2 = db_fetch_array($res2)) {
 				 array (trim($mail,','),
 					$row2['unix_group_name'])) ;
 	}
-	$cal_res = db_query("INSERT INTO webcal_user (cal_login, cal_passwd, cal_firstname,cal_email) VALUES ('" . $row2['unix_group_name'] . "','qdkqshjddoshd','" . addslashes($row2['group_name']) . "','" . $row2['email'] . "')"); 
+	$cal_res = db_query_params ('INSERT INTO webcal_user (cal_login, cal_passwd, cal_firstname,cal_email) VALUES ($1,$2,$3,$4)',
+			array ($row2['unix_group_name'] ,
+				'qdkqshjddoshd',
+				addslashes($row2['group_name']) ,
+				$row2['email'] )); 
 
 }
 
