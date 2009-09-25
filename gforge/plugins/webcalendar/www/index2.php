@@ -30,22 +30,25 @@ echo site_project_footer(array());
 
 function user_belongs_to_group($user_id,$group_id){
 global $HTML;
-$sql = "SELECT value::integer,admin_flags FROM user_group,role_setting WHERE role_setting.role_id = user_group.role_id AND user_group.user_id = '".$user_id."' AND user_group.group_id = '".$group_id."' AND role_setting.section_name = 'webcal'";
-		
-//$sql = "SELECT COUNT(*) FROM user_group WHERE user_id = '".$user_id."' AND group_id = '".$group_id."'";	
-$res = db_query($sql);
+$res = db_query_params ('SELECT value::integer,admin_flags FROM user_group,role_setting WHERE role_setting.role_id = user_group.role_id AND user_group.user_id = $1 AND user_group.group_id = $2 AND role_setting.section_name = $3',
+			array ($user_id,
+				$group_id,
+				'webcal'));
 $row = db_fetch_array($res);
 if($row[0] < 1 ){
-//verif si admin 
-	$sql_admin = "SELECT COUNT(*) FROM  user_group WHERE user_id = '".$user_id."' AND  group_id = '".$group_id."' AND admin_flags = 'A'" ;	
-	$res_admin = db_query($sql_admin);
+//verif si admin
+	$res_admin = db_query_params ('SELECT COUNT(*) FROM  user_group WHERE user_id = $1 AND  group_id = $2 AND admin_flags = $3',
+			array ($user_id,
+				$group_id,
+				'A'));
 	$row_admin = db_fetch_array($res_admin);
 	$row[0] = $row_admin[0];
-} 
+}
 if( $row[0] < 1) {
-	//verif si admin 
-	$sql_admin = "SELECT COUNT(*) FROM  webcal_user,users WHERE users.user_name = webcal_user.cal_login AND users.user_id = '".$user_id."' AND  cal_is_admin = 'Y'" ;	
-	$res_admin = db_query($sql_admin);
+	//verif si admin
+	$res_admin = db_query_params ('SELECT COUNT(*) FROM  webcal_user,users WHERE users.user_name = webcal_user.cal_login AND users.user_id = $1 AND  cal_is_admin = $2',
+			array ($user_id,
+				'Y'));
 	$row_admin = db_fetch_array($res_admin);
 	$row[0] = $row_admin[0];
 }
