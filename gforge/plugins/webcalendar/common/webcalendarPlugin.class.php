@@ -38,7 +38,7 @@ class webcalendarPlugin extends Plugin {
 		$this->hooks[] = "call_user_js"; // call a function when you click on webcal (file my/index.php line 434)
 		$this->hooks[] = "call_group_cal"; // to show the calendar of the group (file layout.class.php ligne 627)
 		//$this->hooks[] = "iframe_group_calendar"; // to show the calendar of the group (file  ligne 627)
-		$this->hooks[] = "add_cal_user"; //add a gforge user in calendar base 
+		$this->hooks[] = "add_cal_user"; //add a gforge user in calendar base
 		$this->hooks[] = "del_cal_user"; //dell a gforge user in calendar base
 		$this->hooks[] = "add_cal_group"; //add a group user in calendar base
 		$this->hooks[] = "del_cal_group"; //del a gforge user in calendar base
@@ -164,44 +164,58 @@ class webcalendarPlugin extends Plugin {
 				//argument user_id
 				//user.class.php line 590
 				//admin/userlist.php line 129
-				$query = "SELECT user_name,user_pw,email FROM users WHERE user_id = '".$params."'";
-				$res = db_query($query);
+			$res = db_query_params ('SELECT user_name,user_pw,email FROM users WHERE user_id = $1',
+						array ($params));
 				$row = db_fetch_array($res);
-				$cal_query = "INSERT INTO webcal_user (cal_login, cal_passwd, cal_email,cal_firstname, cal_is_admin) VALUES ('" . $row['user_name'] . "','" . $row['user_pw'] . "','" . $row['email'] . "','" . $row['user_name'] . "','N')";
-				$res_cal = db_query($cal_query);	
+				$res_cal = db_query_params ('INSERT INTO webcal_user (cal_login, cal_passwd, cal_email,cal_firstname, cal_is_admin) VALUES ($1,$2,$3,$4,$5)',
+			array ($row['user_name'] ,
+				$row['user_pw'] ,
+				$row['email'] ,
+				$row['user_name'] ,
+				'N'));
 		}
 		elseif ($hookname == "del_cal_user") { 
 				//argument user_id
 				//admin/userlist.php line 122
-				$query = "SELECT user_name,user_pw,email FROM users WHERE user_id = '".$params."'";
-				$res = db_query($query);
+			$res = db_query_params ('SELECT user_name,user_pw,email FROM users WHERE user_id = $1',
+			array ($params));
 				$row = db_fetch_array($res);
-				$cal_query = "DELETE FROM webcal_user WHERE cal_login = '" . $row['user_name'] . "'";
-				$res_cal = db_query($cal_query);	
-				db_query("DELETE FROM webcal_asst WHERE cal_boss = '" . $row['user_name'] . "' OR cal_assistant = '" . $row['user_name'] . "'");
-				db_query("DELETE FROM webcal_entry_user WHERE cal_login = '" . $row['user_name'] . "' ");
+				$res_cal = db_query_params ('DELETE FROM webcal_user WHERE cal_login = $1',
+			array ($row['user_name'] ));	
+db_query_params ('DELETE FROM webcal_asst WHERE cal_boss = $1 OR cal_assistant = $2',
+			array ($row['user_name'] ,
+				$row['user_name'] ));
+db_query_params ('DELETE FROM webcal_entry_user WHERE cal_login = $1 ',
+			array ($row['user_name'] ));
 		}
 		elseif ($hookname == "add_cal_group") {
 				//argument group_id
 				//approve_pending.php line 69,80 
-				$query = "SELECT  unix_group_name,groups.group_id,group_name,email FROM groups,users,user_group WHERE groups.group_id = '".$params."' AND groups.group_id = user_group.group_id AND user_group.user_id = users.user_id AND user_group.admin_flags = 'A' ";
-				$res = db_query($query);
+								$res = db_query_params ('SELECT  unix_group_name,groups.group_id,group_name,email FROM groups,users,user_group WHERE groups.group_id = $1 AND groups.group_id = user_group.group_id AND user_group.user_id = users.user_id AND user_group.admin_flags = $2 ',
+			array ($params,
+				'A'));
 				$row = db_fetch_array($res);
-				$cal_query = "INSERT INTO webcal_user (cal_login, cal_passwd, cal_firstname,cal_email) VALUES ('" . $row['unix_group_name'] . "','cccc','" . addslashes($row['group_name']) . "','".$row['email']."')";
-				$res_cal = db_query($cal_query);
+				$res_cal = db_query_params ('INSERT INTO webcal_user (cal_login, cal_passwd, cal_firstname,cal_email) VALUES ($1,$2,$3,$4)',
+			array ($row['unix_group_name'] ,
+				'cccc',
+				addslashes($row['group_name']) ,
+				$row['email']));
 				
 		
 		}
 		elseif ($hookname == "del_cal_group") {
 				//argument group_id
 				//approve_pending.php line 90 
-				$query = "SELECT  unix_group_name,group_id,group_name FROM groups WHERE group_id = '".$params."' ";
-				$res = db_query($query);
+								$res = db_query_params ('SELECT  unix_group_name,group_id,group_name FROM groups WHERE group_id = $1 ',
+			array ($params));
 				$row = db_fetch_array($res);
-				$cal_query = "DELETE FROM webcal_user WHERE cal_login = '" . $row['unix_group_name'] . "'";
-				$res_cal = db_query($cal_query);
-				db_query("DELETE FROM webcal_asst WHERE cal_boss = '" . $row['unix_group_name'] . "' OR cal_assistant = '" . $row['unix_group_name'] . "'");
-				db_query("DELETE FROM webcal_entry_user WHERE cal_login = '" . $row['unix_group_name'] . "' ");
+				$res_cal = db_query_params ('DELETE FROM webcal_user WHERE cal_login = $1',
+			array ($row['unix_group_name'] ));
+db_query_params ('DELETE FROM webcal_asst WHERE cal_boss = $1 OR cal_assistant = $2',
+			array ($row['unix_group_name'] ,
+				$row['unix_group_name'] ));
+db_query_params ('DELETE FROM webcal_entry_user WHERE cal_login = $1 ',
+			array ($row['unix_group_name'] ));
 		}
 		elseif ($hookname == "change_cal_permission") {
 				//argument user_id -> $params[0]et group_id -> $params[1]
@@ -210,52 +224,57 @@ class webcalendarPlugin extends Plugin {
 				
 				
 				
-				$query_flags = "SELECT value,admin_flags FROM user_group,role_setting WHERE role_setting.role_id = user_group.role_id AND user_group.user_id = '".$params[0]."' AND user_group.group_id = '".$params[1]."' AND role_setting.section_name = 'webcal'";
-				
-				$res = db_query($query_flags);
+								
+			$res = db_query_params ('SELECT value,admin_flags FROM user_group,role_setting WHERE role_setting.role_id = user_group.role_id AND user_group.user_id = $1 AND user_group.group_id = $2 AND role_setting.section_name = $3',
+			array ($params[0],
+				$params[1],
+				'webcal'));
 				$row_flags = db_fetch_array($res);
 				
 				//get user name :
-				$query_nom_boss = "SELECT unix_group_name FROM groups WHERE group_id = '".$params[1]."' ";
-				$res_nom_boss = db_query($query_nom_boss);
+				$res_nom_boss = db_query_params ('SELECT unix_group_name FROM groups WHERE group_id = $1 ',
+			array ($params[1]));
 				$row_nom_boss = db_fetch_array($res_nom_boss);
 				
 				
-				$query_nom_user = "SELECT user_name,email FROM users WHERE user_id = '".$params[0]."' ";
-				$res_nom_user = db_query($query_nom_user);
+				$res_nom_user = db_query_params ('SELECT user_name,email FROM users WHERE user_id = $1 ',
+			array ($params[0]));
 				$row_nom_user = db_fetch_array($res_nom_user);
 				
 				//flag verification
-				$query_flags = "SELECT COUNT(*) FROM webcal_asst WHERE cal_boss = '".$row_nom_boss['unix_group_name']."' AND cal_assistant = '".$row_nom_user['user_name']."'";
-				$res = db_query($query_flags);
+				$res = db_query_params ('SELECT COUNT(*) FROM webcal_asst WHERE cal_boss = $1 AND cal_assistant = $2',
+			array ($row_nom_boss['unix_group_name'],
+				$row_nom_user['user_name']));
 				$row_num = db_fetch_array($res);
 				
 				//select email
-				$query_mail ="SELECT cal_email FROM webcal_user WHERE  cal_login = '".$row_nom_boss['unix_group_name']."'";			
-				$res_mail = db_query($query_mail);
-				$row_mail = db_fetch_array($res_mail);	
+				$res_mail = db_query_params ('SELECT cal_email FROM webcal_user WHERE  cal_login = $1',
+			array ($row_nom_boss['unix_group_name']));
+				$row_mail = db_fetch_array($res_mail);
 				$mail = $row_mail['cal_email'] ;
 				
 				//if group admin
 				if($params[1] == 1){
-				$query_flags_admin = "SELECT admin_flags FROM user_group WHERE user_id = '".$params[0]."' AND group_id = '".$params[1]."'";
-				$res_flags_admin = db_query($query_flags_admin);
-				$row_flags_admin = db_fetch_array($res_flags_admin);
+					$res_flags_admin = db_query_params ('SELECT admin_flags FROM user_group WHERE user_id = $1 AND group_id = $2',
+									    array ($params[0],
+										   $params[1]));
+					$row_flags_admin = db_fetch_array($res_flags_admin);
 					if(trim($row_flags_admin['admin_flags']) == 'A'  ) {
-						$update_admin = "UPDATE webcal_user SET cal_is_admin = 'Y' WHERE cal_login = '".$row_nom_user['user_name']."'" ;
+						$cia = 'Y' ;
+					} else {
+						$cia = 'N' ;
 					}
-					else {
-						$update_admin = "UPDATE webcal_user SET cal_is_admin = 'N' WHERE cal_login = '".$row_nom_user['user_name']."'" ;
-				
+					db_query_params ('UPDATE webcal_user SET cal_is_admin = $1 WHERE cal_login = $2',
+							 array ($cia,
+								$row_nom_user['user_name']));
 					}
-					db_query($update_admin);
-				
 				}
-				
+
 				if(($row_num[0] != 1 ) && ($row_flags['value'] == 1)){
 					
-				$insert_ass =  "INSERT INTO webcal_asst (cal_boss, cal_assistant) VALUES ('".$row_nom_boss['unix_group_name']."','".$row_nom_user['user_name']."')";	
-				$res_insert  = db_query($insert_ass);
+					$res_insert = db_query_params ('INSERT INTO webcal_asst (cal_boss, cal_assistant) VALUES ($1,$2)',
+			array ($row_nom_boss['unix_group_name'],
+				$row_nom_user['user_name']));
 				
 				//we add email of the new admin
 				$mail = str_replace($row_nom_user['email'],"",$mail);
@@ -273,57 +292,59 @@ class webcalendarPlugin extends Plugin {
 				
 				
 				//$mail = $row_mail['cal_email'].",".$row_nom_user['email'] ;
-				$update = "UPDATE webcal_user SET cal_email = '".trim($mail,',')."' WHERE cal_login = '".$row_nom_boss['unix_group_name']."'" ;
-				db_query($update);
+				db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
+						 array (trim($mail,','),
+							$row_nom_boss['unix_group_name']));
 				}
 				elseif($row_num[0] == 1 && ($row_flags['value'] != 1)){
-				$del_ass = "DELETE FROM webcal_asst WHERE cal_boss = '".$row_nom_boss['unix_group_name']."' AND cal_assistant = '".$row_nom_user['user_name']."'";
-				$res_del = db_query($del_ass);	
+					$res_del = db_query_params ('DELETE FROM webcal_asst WHERE cal_boss = $1 AND cal_assistant = $2',
+			array ($row_nom_boss['unix_group_name'],
+				$row_nom_user['user_name']));	
 				
 				//we del email of the old admin
 				$mail = str_replace(",".$row_nom_user['email'],"",$row_mail['cal_email']) ;
-				$update = "UPDATE webcal_user SET cal_email = '".$mail."' WHERE cal_login = '".$row_nom_boss['unix_group_name']."'" ;
-				db_query($update);
+db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
+			array ($mail,
+				$row_nom_boss['unix_group_name']));
 				}
 				
 				
 		}
 		elseif ($hookname == "change_cal_permission_default") {
-				//argument user_id -> $params[0]et group_id -> $params[1]
-				// Group.class.php line 2085
-				//$query_flags = "SELECT value FROM user_group,role_setting WHERE role_setting.role_id = user_group.role_id AND user_group.user_id = '".$params[0]."' AND user_group.group_id = '".$params[1]."' AND role_setting.section_name = 'test'";
-				
-				$query_flags = "SELECT admin_flags FROM user_group WHERE user_id = '".$params[0]."' AND group_id = '".$params[1]."'";
-				$res = db_query($query_flags);
-				$row_flags = db_fetch_array($res);
+			$res = db_query_params ('SELECT admin_flags FROM user_group WHERE user_id = $1 AND group_id = $2',
+						array ($params[0],
+						       $params[1]));
+			$row_flags = db_fetch_array($res);
 				 
 				
 				
 				//get user name
-				$query_nom_boss = "SELECT unix_group_name FROM groups WHERE group_id = '".$params[1]."' ";
-				$res_nom_boss = db_query($query_nom_boss);
+				$res_nom_boss = db_query_params ('SELECT unix_group_name FROM groups WHERE group_id = $1 ',
+			array ($params[1]));
 				$row_nom_boss = db_fetch_array($res_nom_boss);
 				
 				
-				$query_nom_user = "SELECT user_name,email FROM users WHERE user_id = '".$params[0]."' ";
-				$res_nom_user = db_query($query_nom_user);
+				$res_nom_user = db_query_params ('SELECT user_name,email FROM users WHERE user_id = $1 ',
+			array ($params[0]));
 				$row_nom_user = db_fetch_array($res_nom_user);
 				
 				//verif du flag sur webcal
-				$query_flags = "SELECT COUNT(*) FROM webcal_asst WHERE cal_boss = '".$row_nom_boss['unix_group_name']."' AND cal_assistant = '".$row_nom_user['user_name']."'";
-				$res = db_query($query_flags);
+				$res = db_query_params ('SELECT COUNT(*) FROM webcal_asst WHERE cal_boss = $1 AND cal_assistant = $2',
+			array ($row_nom_boss['unix_group_name'],
+				$row_nom_user['user_name']));
 				$row_num = db_fetch_array($res);
 				
 				 //select email
-				$query_mail ="SELECT cal_email FROM webcal_user WHERE  cal_login = '".$row_nom_boss['unix_group_name']."'";			
-				$res_mail = db_query($query_mail);
+				$res_mail = db_query_params ('SELECT cal_email FROM webcal_user WHERE  cal_login = $1',
+			array ($row_nom_boss['unix_group_name']));
 				$row_mail = db_fetch_array($res_mail);
 				$mail = $row_mail['cal_email']; 
 				
 				if(($row_num[0] != 1 ) && (trim($row_flags['admin_flags']) == 'A')){
 					//recuperer le nom du user et du group
-				$insert_ass =  "INSERT INTO webcal_asst (cal_boss, cal_assistant) VALUES ('".$row_nom_boss['unix_group_name']."','".$row_nom_user['user_name']."')";	
-				$res_insert  = db_query($insert_ass);
+					$res_insert = db_query_params ('INSERT INTO webcal_asst (cal_boss, cal_assistant) VALUES ($1,$2)',
+			array ($row_nom_boss['unix_group_name'],
+				$row_nom_user['user_name']));
 				
 				//we add email of the new admin
 				$mail = str_replace($row_nom_user['email'],"",$mail);
@@ -339,56 +360,59 @@ class webcalendarPlugin extends Plugin {
 				$mail = $mail.$virgule.$row_nom_user['email'] ;
 								
 				//$mail = $row_mail['cal_email'].",".$row_nom_user['email'] ;
-				$update = "UPDATE webcal_user SET cal_email = '".trim($mail,',')."' WHERE cal_login = '".$row_nom_boss['unix_group_name']."'" ;
-				db_query($update);
+				db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
+						 array (trim($mail,','),
+							$row_nom_boss['unix_group_name']));
 				}
 				elseif($row_num[0] == 1 && (trim($row_flags['admin_flags']) != 'A')){
-				$del_ass = "DELETE FROM webcal_asst WHERE cal_boss = '".$row_nom_boss['unix_group_name']."' AND cal_assistant = '".$row_nom_user['user_name']."'";
-				$res_del = db_query($del_ass);	
+					$res_del = db_query_params ('DELETE FROM webcal_asst WHERE cal_boss = $1 AND cal_assistant = $2',
+			array ($row_nom_boss['unix_group_name'],
+				$row_nom_user['user_name']));	
 				
 				//we del email of the old admin
 				$mail = str_replace(",".$row_nom_user['email'],"",$row_mail['cal_email']) ;
-				$update = "UPDATE webcal_user SET cal_email = '".$mail."' WHERE cal_login = '".$row_nom_boss['unix_group_name']."'" ;
-				db_query($update);
+db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
+			array ($mail,
+				$row_nom_boss['unix_group_name']));
 				}
 				
 		}
 		elseif ($hookname == "change_cal_permission_auto") {
-				//argument $params group_id
-				// project/admin/roleedit.php line 85
-				
-				$query_flags = "SELECT value, user_id FROM user_group,role_setting WHERE role_setting.role_id = user_group.role_id AND role_setting.section_name = 'webcal' AND group_id = '".$params."'" ;				
-				$res = db_query($query_flags);
+			$res = db_query_params ('SELECT value, user_id FROM user_group,role_setting WHERE role_setting.role_id = user_group.role_id AND role_setting.section_name = $1 AND group_id = $2',
+			array ('webcal',
+				$params));
 				if($res){
 						while( $row_flags = db_fetch_array($res)){
 						
 						
 						
 								//get the group and user names
-								$query_nom_boss = "SELECT unix_group_name FROM groups WHERE group_id = '".$params."' ";
-								$res_nom_boss = db_query($query_nom_boss);
-								$row_nom_boss = db_fetch_array($res_nom_boss);
-								
-								
-								$query_nom_user = "SELECT user_name,email FROM users WHERE user_id = '".$row_flags['user_id']."' ";
-								$res_nom_user = db_query($query_nom_user);
+							$res_nom_boss = db_query_params ('SELECT unix_group_name FROM groups WHERE group_id = $1 ',
+			array ($params));
+							$row_nom_boss = db_fetch_array($res_nom_boss);
+							
+							
+							$res_nom_user = db_query_params ('SELECT user_name,email FROM users WHERE user_id = $1 ',
+			array ($row_flags['user_id']));
 								$row_nom_user = db_fetch_array($res_nom_user);
 								
 								//verif if the user is admin
-								$query_flags = "SELECT COUNT(*) FROM webcal_asst WHERE cal_boss = '".$row_nom_boss['unix_group_name']."' AND cal_assistant = '".$row_nom_user['user_name']."'";
-								$res_count = db_query($query_flags);
+								$res_count = db_query_params ('SELECT COUNT(*) FROM webcal_asst WHERE cal_boss = $1 AND cal_assistant = $2',
+			array ($row_nom_boss['unix_group_name'],
+				$row_nom_user['user_name']));
 								$row_num = db_fetch_array($res_count);
 								 								
 								//select email
-								$query_mail ="SELECT cal_email FROM webcal_user WHERE  cal_login = '".$row_nom_boss['unix_group_name']."'";			
-								$res_mail = db_query($query_mail);
+								$res_mail = db_query_params ('SELECT cal_email FROM webcal_user WHERE  cal_login = $1',
+			array ($row_nom_boss['unix_group_name']));
 								$row_mail = db_fetch_array($res_mail);
 								$mail = $row_mail['cal_email'];
 								
 								if(($row_num[0] != 1 ) && ($row_flags['value'] == 1)){
 								//recuperer le nom du user et du group
-								$insert_ass =  "INSERT INTO webcal_asst (cal_boss, cal_assistant) VALUES ('".$row_nom_boss['unix_group_name']."','".$row_nom_user['user_name']."')";	
-								$res_insert  = db_query($insert_ass);
+									$res_insert = db_query_params ('INSERT INTO webcal_asst (cal_boss, cal_assistant) VALUES ($1,$2)',
+			array ($row_nom_boss['unix_group_name'],
+				$row_nom_user['user_name']));
 								
 								//we add email of the new admin
 								$mail = str_replace($row_nom_user['email'],"",$mail);
@@ -404,18 +428,20 @@ class webcalendarPlugin extends Plugin {
 								$mail = $mail.$virgule.$row_nom_user['email'] ;
 								
 								//$mail = $row_mail['cal_email'].",".$row_nom_user['email'] ;
-								$update = "UPDATE webcal_user SET cal_email = '".trim($mail,',')."' WHERE cal_login = '".$row_nom_boss['unix_group_name']."'" ;
-								db_query($update);
-								
+								db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
+										 array (trim($mail,','),
+											$row_nom_boss['unix_group_name']));
 								}
 								elseif($row_num[0] == 1 && ($row_flags['value'] != 1)){
-								$del_ass = "DELETE FROM webcal_asst WHERE cal_boss = '".$row_nom_boss['unix_group_name']."' AND cal_assistant = '".$row_nom_user['user_name']."'";
-								$res_del = db_query($del_ass);	
+									$res_del = db_query_params ('DELETE FROM webcal_asst WHERE cal_boss = $1 AND cal_assistant = $2',
+			array ($row_nom_boss['unix_group_name'],
+				$row_nom_user['user_name']));	
 								
 								//we del email of the old admin
 								$mail = str_replace(",".$row_nom_user['email'],"",$row_mail['cal_email']) ;
-								$update = "UPDATE webcal_user SET cal_email = '".$mail."' WHERE cal_login = '".$row_nom_boss['unix_group_name']."'" ;
-								db_query($update);
+db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
+			array ($mail,
+				$row_nom_boss['unix_group_name']));
 								}
 						}
 				}
@@ -424,16 +450,22 @@ class webcalendarPlugin extends Plugin {
 		elseif ($hookname == "add_cal_link_father") {
 				//argument id du fils --> $params[0], id du pere--> $params[1]
 				//plugin hierachy wait_son.php line 36
-				$query_hierarchy = "select p1.group_id as father_id,p1.unix_group_name as father_unix_name,p1.group_name as father_name,p2.group_id as son_id,p2.unix_group_name as son_unix_name,p2.group_name as son_name from groups as p1,groups as p2,plugin_projects_hierarchy where p1.group_id=plugin_projects_hierarchy.project_id AND plugin_projects_hierarchy.project_id = '".$params[1]."' and p2.group_id=plugin_projects_hierarchy.sub_project_id AND plugin_projects_hierarchy.sub_project_id = '".$params[0]."'and plugin_projects_hierarchy.activated='t' AND plugin_projects_hierarchy.link_type='shar'";
-				$res_hierarchy = db_query($query_hierarchy);
+			$res_hierarchy = db_query_params ('select p1.group_id as father_id,p1.unix_group_name as father_unix_name,p1.group_name as father_name,p2.group_id as son_id,p2.unix_group_name as son_unix_name,p2.group_name as son_name from groups as p1,groups as p2,plugin_projects_hierarchy where p1.group_id=plugin_projects_hierarchy.project_id AND plugin_projects_hierarchy.project_id = $1 and p2.group_id=plugin_projects_hierarchy.sub_project_id AND plugin_projects_hierarchy.sub_project_id = $2and plugin_projects_hierarchy.activated=$3 AND plugin_projects_hierarchy.link_type=$4',
+			array ($params[1],
+				$params[0],
+				't',
+				'shar'));
 				if($res_hierarchy){
 						while($row_hierarchy = db_fetch_array($res_hierarchy)) {
-							$query_entry = "SELECT cal_id FROM webcal_entry_user WHERE cal_login = '".$row_hierarchy['son_unix_name']."' AND cal_status = 'A'" ;
-							$res_entry = db_query($query_entry);
+							$res_entry = db_query_params ('SELECT cal_id FROM webcal_entry_user WHERE cal_login = $1 AND cal_status = $2',
+			array ($row_hierarchy['son_unix_name'],
+				'A'));
 							if($res_entry){
 								while($row_entry = db_fetch_array($res_entry)) {
-								$insert_entry = "INSERT INTO webcal_entry_user (cal_id,cal_login,cal_status) VALUES ('".$row_entry['cal_id']."','".$row_hierarchy['father_unix_name']."','A')";	
-								$res_insert_entry = db_query($insert_entry);
+									$res_insert_entry = db_query_params ('INSERT INTO webcal_entry_user (cal_id,cal_login,cal_status) VALUES ($1,$2,$3)',
+			array ($row_entry['cal_id'],
+				$row_hierarchy['father_unix_name'],
+				'A'));
 								}
 							}
 						}	
@@ -444,31 +476,38 @@ class webcalendarPlugin extends Plugin {
 				//argument name of the son --> $params[0], id_cal--> $params[1]
 				//webcalendar/edit_entry_handler.php line 390
 				//webcalendar/approve_entry.php line 21
-				$query_nom = "SELECT group_id FROM groups WHERE unix_group_name = '".$params[0]."'";
-				$res_nom = db_query($query_nom);
+			$res_nom = db_query_params ('SELECT group_id FROM groups WHERE unix_group_name = $1',
+			array ($params[0]));
 				$row_nom = db_fetch_array($res_nom);
-				$query_pere = "SELECT project_id, unix_group_name FROM plugin_projects_hierarchy, groups WHERE plugin_projects_hierarchy.project_id = groups.group_id AND sub_project_id = '".$row_nom['group_id']."' AND link_type = 'shar' AND activated = true";
-				$res_pere = db_query($query_pere);
+				$res_pere = db_query_params ('SELECT project_id, unix_group_name FROM plugin_projects_hierarchy, groups WHERE plugin_projects_hierarchy.project_id = groups.group_id AND sub_project_id = $1 AND link_type = $2 AND activated = true',
+			array ($row_nom['group_id'],
+				'shar'));
 				if($res_pere){
 					$row_pere = db_fetch_array($res_pere);
-					$insert_entry = "INSERT INTO webcal_entry_user (cal_id,cal_login,cal_status) VALUES ('".$params[1]."','".$row_pere['unix_group_name']."','A')";	
-					$res_insert  = db_query($insert_entry);
+					$res_insert = db_query_params ('INSERT INTO webcal_entry_user (cal_id,cal_login,cal_status) VALUES ($1,$2,$3)',
+			array ($params[1],
+				$row_pere['unix_group_name'],
+				'A'));
 				}
 				
 		}
 		elseif ($hookname == "del_cal_link_father") {
 				//argument id son --> $params[0], id father--> $params[1]
 				//plugin hierachy wait_son.php line 36
-				$query_hierarchy = "select p1.group_id as father_id,p1.unix_group_name as father_unix_name,p1.group_name as father_name,p2.group_id as son_id,p2.unix_group_name as son_unix_name,p2.group_name as son_name from groups as p1,groups as p2,plugin_projects_hierarchy where p1.group_id=plugin_projects_hierarchy.project_id AND plugin_projects_hierarchy.project_id = '".$params[1]."' and p2.group_id=plugin_projects_hierarchy.sub_project_id AND plugin_projects_hierarchy.sub_project_id = '".$params[0]."'and plugin_projects_hierarchy.activated='t' AND plugin_projects_hierarchy.link_type='shar'";
-				$res_hierarchy = db_query($query_hierarchy);
+			$res_hierarchy = db_query_params ('select p1.group_id as father_id,p1.unix_group_name as father_unix_name,p1.group_name as father_name,p2.group_id as son_id,p2.unix_group_name as son_unix_name,p2.group_name as son_name from groups as p1,groups as p2,plugin_projects_hierarchy where p1.group_id=plugin_projects_hierarchy.project_id AND plugin_projects_hierarchy.project_id = $1 and p2.group_id=plugin_projects_hierarchy.sub_project_id AND plugin_projects_hierarchy.sub_project_id = $2and plugin_projects_hierarchy.activated=$3 AND plugin_projects_hierarchy.link_type=$4',
+			array ($params[1],
+				$params[0],
+				't',
+				'shar'));
 				if($res_hierarchy){
 						while($row_hierarchy = db_fetch_array($res_hierarchy)) {
-							$query_entry = "SELECT cal_id FROM webcal_entry_user WHERE cal_login = '".$row_hierarchy['son_unix_name']."' " ;
-							$res_entry = db_query($query_entry);
+							$res_entry = db_query_params ('SELECT cal_id FROM webcal_entry_user WHERE cal_login = $1 ',
+			array ($row_hierarchy['son_unix_name']));
 							if($res_entry){
 								while($row_entry = db_fetch_array($res_entry)) {
-								$insert_entry = "DELETE FROM webcal_entry_user WHERE cal_id = '".$row_entry['cal_id']."' AND cal_login = '".$row_hierarchy['father_unix_name']."'";	
-								$res_insert_entry = db_query($insert_entry);
+									$res_insert_entry = db_query_params ('DELETE FROM webcal_entry_user WHERE cal_id = $1 AND cal_login = $2',
+			array ($row_entry['cal_id'],
+				$row_hierarchy['father_unix_name']));
 								}
 							}
 						}	
@@ -482,34 +521,38 @@ class webcalendarPlugin extends Plugin {
 		elseif ($hookname == "change_cal_password") {
 				//argument user_id
 				//account/change_pw.php line 79
-				$query_name = "SELECT user_name,user_pw,email  FROM users WHERE user_id = '".$params."'" ;
-				$res_name = db_query($query_name);
+			$res_name = db_query_params ('SELECT user_name,user_pw,email  FROM users WHERE user_id = $1',
+			array ($params));
 				$row_name = db_fetch_array($res_name);
 				
-				$update = "UPDATE webcal_user SET cal_passwd = '".$row_name['user_pw']."', cal_email = '".$row_name['email']."' WHERE cal_login = '".$row_name['user_name']."'";
-				$res_update = db_query($update); 
+				$res_update = db_query_params ('UPDATE webcal_user SET cal_passwd = $1, cal_email = $2 WHERE cal_login = $3',
+			array ($row_name['user_pw'],
+				$row_name['email'],
+				$row_name['user_name'])); 
 						
 		}
 		elseif ($hookname == "change_cal_mail") {
 				//argument user_id
 				//account/change_email-complete.php line 63
 				 
-				$query_name = "SELECT user_name,user_pw,email  FROM users WHERE user_id = '".$params."'" ;
-				$res_name = db_query($query_name);
+			$res_name = db_query_params ('SELECT user_name,user_pw,email  FROM users WHERE user_id = $1',
+			array ($params));
 				$row_name = db_fetch_array($res_name);
 				
-				$query_old = "SELECT cal_email FROM webcal_user WHERE cal_login = '".$row_name['user_name']."'" ;
-				$res_old = db_query($query_old);
+				$res_old = db_query_params ('SELECT cal_email FROM webcal_user WHERE cal_login = $1',
+			array ($row_name['user_name']));
 				$row_old = db_fetch_array($res_old);
 				
 				//get all the cal_login where you need to change mail
-				$query_all_mail = "SELECT cal_login, cal_email FROM webcal_user WHERE cal_email LIKE '%".$row_old['cal_email']."%'" ;
-				$res_all_mail = db_query($query_all_mail);
+				$res_all_mail = db_query_params ('SELECT cal_login, cal_email FROM webcal_user WHERE cal_email LIKE '%".$row_old['cal_email']."%'',
+			array ());
 				print $query_all_mail;
 				while($row_all_mail = db_fetch_array($res_all_mail)){
 					$mail = str_replace($row_old['cal_email'],$row_name['email'],$row_all_mail['cal_email']);
-					$update = "UPDATE webcal_user SET cal_passwd = '".$row_name['user_pw']."', cal_email = '".$mail."' WHERE cal_login = '".$row_all_mail['cal_login']."'";
-					$res_update = db_query($update); 
+										$res_update = db_query_params ('UPDATE webcal_user SET cal_passwd = $1, cal_email = $2 WHERE cal_login = $3',
+			array ($row_name['user_pw'],
+				$mail,
+				$row_all_mail['cal_login'])); 
 					
 				}
 								

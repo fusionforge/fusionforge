@@ -27,17 +27,16 @@ $res = db_query_params ('SELECT user_name,user_pw,email,user_id FROM users WHERE
 echo db_error();
 while ($row = db_fetch_array($res)) {
 	//verify if admin
-	$query_flags = "SELECT COUNT(*) FROM user_group WHERE user_id = '".$row['user_id']."' AND admin_flags = 'A'  AND group_id = '1'";
-	$res_flags = db_query($query_flags) ;
+	$res_flags = db_query_params ('SELECT COUNT(*) FROM user_group WHERE user_id = $1 AND admin_flags = $2  AND group_id = 1',
+				      array ($row['user_id'],
+					     'A'));
 	$row_flags = db_fetch_array($res_flags) ;
-	$cal_query = "INSERT INTO webcal_user (cal_login, cal_passwd, cal_email,cal_firstname, cal_is_admin) VALUES ('" . $row['user_name'] . "','" . $row['user_pw'] . "','" . $row['email'] . "','" . $row['user_name'] . "'";
-	if ($row_flags[0] == 1)
-		$cal_query .= ",'Y')";
-	else
-		$cal_query .= ",'N')";
-		
-	$cal_res = db_query($cal_query);
-
+	$cal_res = db_query_params ('INSERT INTO webcal_user (cal_login, cal_passwd, cal_email,cal_firstname, cal_is_admin) VALUES ($1,$2,$3,$4,$5)',
+				    array ($row['user_name'] ,
+					   $row['user_pw'] ,
+					   $row['email'] ,
+					   $row['user_name'],
+					   $row_flags[0] == 1 ? 'Y' : 'N'));
 }
 
 //group
@@ -45,23 +44,23 @@ while ($row = db_fetch_array($res)) {
 $res2 = db_query_params ('SELECT  unix_group_name,groups.group_id,group_name,email FROM groups,users,user_group WHERE groups.group_id >5 AND groups.group_id = user_group.group_id AND user_group.user_id = users.user_id AND user_group.admin_flags = $1 ',
 			array ('A'));
 while ($row2 = db_fetch_array($res2)) {
-	$cal_query2 = "INSERT INTO webcal_user (cal_login, cal_passwd, cal_firstname,cal_email) VALUES ('" . $row2['unix_group_name'] . "','qdkqshjddoshd','" . addslashes($row2['group_name']) . "','" . $row2['email'] . "')";
-
 	
 	//get for admin of project
-	$query_user_group = "SELECT user_group.user_id,user_name,email from user_group,users WHERE user_group.user_id = users.user_id AND group_id = '".$row2['group_id']."' AND admin_flags = 'A'" ;
-	//print $query_user_group ;
-	$res_user_group = db_query($query_user_group);
+	$res_user_group = db_query_params ('SELECT user_group.user_id,user_name,email from user_group,users WHERE user_group.user_id = users.user_id AND group_id = $1 AND admin_flags = $2',
+			array ($row2['group_id'],
+				'A'));
 	
 	//get the email of the admin
-		$res_mail = db_query("SELECT cal_email FROM webcal_user WHERE  cal_login = '".$row2['unix_group_name']."'");
+		$res_mail = db_query_params ('SELECT cal_email FROM webcal_user WHERE  cal_login = $1',
+			array ($row2['unix_group_name']));
 	$row_mail = db_fetch_array($res_mail);	
 	$mail = $row_mail['cal_email'];
 	
 	if($res_user_group){
 		while($row_user_group = db_fetch_array($res_user_group)) {
-			$insert_ass = "INSERT INTO webcal_asst (cal_boss, cal_assistant) VALUES ('".$row2['unix_group_name']."','".$row_user_group['user_name']."')"; 
-			$cal_res = db_query($insert_ass);
+			$cal_res = db_query_params ('INSERT INTO webcal_asst (cal_boss, cal_assistant) VALUES ($1,$2)',
+			array ($row2['unix_group_name'],
+				$row_user_group['user_name']));
 			
 			//add email
 			$mail = str_replace($row_user_group['email'],"",$mail);
@@ -76,11 +75,15 @@ while ($row2 = db_fetch_array($res2)) {
 			$mail = $mail.$virgule.$row_user_group['email'] ;
 			
 		}	
-			$update = "UPDATE webcal_user SET cal_email = '".trim($mail,',')."' WHERE cal_login = '".$row2['unix_group_name']."'" ;
-			db_query($update);
-			
-	} 
-	$cal_res = db_query($cal_query2); 
+		db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
+				 array (trim($mail,','),
+					$row2['unix_group_name'])) ;
+	}
+	$cal_res = db_query_params ('INSERT INTO webcal_user (cal_login, cal_passwd, cal_firstname,cal_email) VALUES ($1,$2,$3,$4)',
+			array ($row2['unix_group_name'] ,
+				'qdkqshjddoshd',
+				addslashes($row2['group_name']) ,
+				$row2['email'] )); 
 
 }
 
@@ -92,12 +95,15 @@ $res_hierarchy = db_query_params ('select p1.group_id as father_id,p1.unix_group
 				'shar'));
 if($res_hierarchy){
 		while($row_hierarchy = db_fetch_array($res_hierarchy)) {
-			$query_entry = "SELECT cal_id FROM webcal_entry_user WHERE cal_login = '".$row_hierarchy['son_unix_name']."' AND cal_status = 'A'" ;
-			$res_entry = db_query($query_entry);
+			$res_entry = db_query_params ('SELECT cal_id FROM webcal_entry_user WHERE cal_login = $1 AND cal_status = $2',
+			array ($row_hierarchy['son_unix_name'],
+				'A'));
 			if($res_entry){
 				while($row_entry = db_fetch_array($res_entry)) {
-				$insert_entry = "INSERT INTO webcal_entry_user (cal_id,cal_login,cal_status) VALUES ('".$row_entry['cal_id']."','".$row_hierarchy['father_unix_name']."','A')";	
-				$res_insert_entry = db_query($insert_entry);
+					$res_insert_entry = db_query_params ('INSERT INTO webcal_entry_user (cal_id,cal_login,cal_status) VALUES ($1,$2,$3)',
+			array ($row_entry['cal_id'],
+				$row_hierarchy['father_unix_name'],
+				'A'));
 				}
 			}
 		}	
@@ -114,43 +120,48 @@ if($res_hierarchy){
 						
 						
 								//get user name :
-								$query_nom_boss = "SELECT unix_group_name FROM groups WHERE group_id = '".$row_flags['group_id']."' ";
-								$res_nom_boss = db_query($query_nom_boss);
+							$res_nom_boss = db_query_params ('SELECT unix_group_name FROM groups WHERE group_id = $1 ',
+			array ($row_flags['group_id']));
 								$row_nom_boss = db_fetch_array($res_nom_boss);
 								
 								
-								$query_nom_user = "SELECT user_name FROM users WHERE user_id = '".$row_flags['user_id']."' ";
-								$res_nom_user = db_query($query_nom_user);
+																$res_nom_user = db_query_params ('SELECT user_name FROM users WHERE user_id = $1 ',
+			array ($row_flags['user_id']));
 								$row_nom_user = db_fetch_array($res_nom_user);
 								
 								//webcal admin flags
-								$query_flags = "SELECT COUNT(*) FROM webcal_asst WHERE cal_boss = '".$row_nom_boss['unix_group_name']."' AND cal_assistant = '".$row_nom_user['user_name']."'";
-								$res_count = db_query($query_flags);
+								$res_count = db_query_params ('SELECT COUNT(*) FROM webcal_asst WHERE cal_boss = $1 AND cal_assistant = $2',
+			array ($row_nom_boss['unix_group_name'],
+				$row_nom_user['user_name']));
 								$row_num = db_fetch_array($res_count);
 								
 								//select email
-								$query_mail ="SELECT cal_email FROM webcal_user WHERE  cal_login = '".$row_nom_boss['unix_group_name']."'";			
-								$res_mail = db_query($query_mail);
+								$res_mail = db_query_params ('SELECT cal_email FROM webcal_user WHERE  cal_login = $1',
+			array ($row_nom_boss['unix_group_name']));
 								$row_mail = db_fetch_array($res_mail);	
 								
 								if(($row_num[0] != 1 ) && ($row_flags['value'] == 1)){
 								//recuperer le nom du user et du group
-								$insert_ass =  "INSERT INTO webcal_asst (cal_boss, cal_assistant) VALUES ('".$row_nom_boss['unix_group_name']."','".$row_nom_user['user_name']."')";	
-								$res_insert  = db_query($insert_ass);
+									$res_insert = db_query_params ('INSERT INTO webcal_asst (cal_boss, cal_assistant) VALUES ($1,$2)',
+			array ($row_nom_boss['unix_group_name'],
+				$row_nom_user['user_name']));
 								
 								//we add email of the new admin
 								$mail = $row_mail['cal_email'].",".$row_nom_user['email'] ;
-								$update = "UPDATE webcal_user SET cal_email = '".$mail."' WHERE cal_login = '".$row_nom_boss['unix_group_name']."'" ;
-								db_query($update);
+db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
+			array ($mail,
+				$row_nom_boss['unix_group_name']));
 								}
 								elseif($row_num[0] == 1 && ($row_flags['value'] != 1)){
-								$del_ass = "DELETE FROM webcal_asst WHERE cal_boss = '".$row_nom_boss['unix_group_name']."' AND cal_assistant = '".$row_nom_user['user_name']."'";
-								$res_del = db_query($del_ass);
+									$res_del = db_query_params ('DELETE FROM webcal_asst WHERE cal_boss = $1 AND cal_assistant = $2',
+			array ($row_nom_boss['unix_group_name'],
+				$row_nom_user['user_name']));
 								
 								//we del email of the old admin
 								$mail = str_replace(",".$row_nom_user['email'],"",$row_mail['cal_email']) ;
-								$update = "UPDATE webcal_user SET cal_email = '".$mail."' WHERE cal_login = '".$row_nom_boss['unix_group_name']."'" ;
-								db_query($update);	
+db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
+			array ($mail,
+				$row_nom_boss['unix_group_name']));	
 								}
 						}
 				}
