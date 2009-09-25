@@ -49,10 +49,10 @@ echo $HTML->listTableTop ($title_arr);
 
 if ($which==100) {
 	$res = db_query_params ('SELECT COUNT(*) AS count FROM cron_history',
-				arary ());
+				array ());
 } else {
 	$res = db_query_params ('SELECT COUNT(*) AS count FROM cron_history WHERE job=$1',
-				arary ($which));
+				array ($which));
 }
 $totalCount = db_result($res, 0, 'count');
 
