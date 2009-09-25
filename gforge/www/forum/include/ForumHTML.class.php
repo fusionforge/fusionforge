@@ -44,8 +44,8 @@ function forum_header($params) {
 		//this is a news item, not a regular forum
 		if ($forum_id) {
 			// Show this news item at the top of the page
-			$sql="SELECT submitted_by, post_date, group_id, forum_id, summary, details FROM news_bytes WHERE forum_id='$forum_id'";
-			$result=db_query($sql);
+			$result = db_query_params ('SELECT submitted_by, post_date, group_id, forum_id, summary, details FROM news_bytes WHERE forum_id=$1',
+						   array ($forum_id));
 
 			// checks which group the news item belongs to
 			$params['group']=db_result($result,0,'group_id');

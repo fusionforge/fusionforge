@@ -295,17 +295,18 @@ if ($forum_id) {
 			This is the view that is most similar to the "Ultimate BB view"
 		*/
 
-		$sql="SELECT f.most_recent_date,users.user_name,users.realname,users.user_id,f.msg_id,f.subject,f.thread_id,
-(count(f2.thread_id)-1) AS followups,max(f2.post_date) AS recent 
-FROM forum f, forum f2, users 
-WHERE f.group_forum_id='$forum_id' 
-AND f.is_followup_to=0 
-AND users.user_id=f.posted_by 
-AND f.thread_id=f2.thread_id 
-GROUP BY f.most_recent_date,users.user_name,users.realname,users.user_id,f.msg_id,f.subject,f.thread_id 
-ORDER BY f.most_recent_date DESC";
-
-		$result=db_query($sql,($max_rows+1),$offset);
+		$result = db_query_params ('SELECT f.most_recent_date,users.user_name,users.realname,users.user_id,f.msg_id,f.subject,f.thread_id,
+(count(f2.thread_id)-1) AS followups,max(f2.post_date) AS recent
+FROM forum f, forum f2, users
+WHERE f.group_forum_id=$1
+AND f.is_followup_to=0
+AND users.user_id=f.posted_by
+AND f.thread_id=f2.thread_id
+GROUP BY f.most_recent_date,users.user_name,users.realname,users.user_id,f.msg_id,f.subject,f.thread_id
+ORDER BY f.most_recent_date DESC',
+					   array ($forum_id),
+					   $max_rows+1,
+					   $offset);
 
 		$avail_rows=db_numrows($result);
 

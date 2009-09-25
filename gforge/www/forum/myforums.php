@@ -47,8 +47,8 @@ if (!session_loggedin()) {
 $user_id = user_getid();
 $group_id = getIntFromRequest("group_id");
 //get the user monitored forums
-$sql = "SELECT mon.forum_id, fg.group_id FROM forum_monitored_forums mon,forum_group_list fg where mon.user_id='$user_id' and fg.group_forum_id=mon.forum_id";
-$result = db_query($sql);
+$result = db_query_params ('SELECT mon.forum_id, fg.group_id FROM forum_monitored_forums mon,forum_group_list fg where mon.user_id=$1 and fg.group_forum_id=mon.forum_id',
+			   array ($user_id));
 if (!$result || db_numrows($result) < 1) {
 	exit_error(_('You have no monitored forums'),_('You are not monitoring any forums.').' '.db_error(), 'forums');
 }

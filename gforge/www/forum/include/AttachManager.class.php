@@ -72,8 +72,8 @@ class AttachManager extends Error {
 	* Returns the attach id for the message id passed as a parameter or false if error
 	*/
 	function GetAttachId($msg_id) {
-		$sql = "SELECT attachmentid FROM forum_attachment WHERE msg_id='$msg_id'";
-		$res = db_query($sql);
+		$res = db_query_params ('SELECT attachmentid FROM forum_attachment WHERE msg_id=$1',
+			array ($msg_id));
 		if ($res) {
 			return db_result($res,0,0);
 		} else {
@@ -123,14 +123,15 @@ class AttachManager extends Error {
 		//ask if the message has an attachment
 		$msg_id = $msg->getID();
 		if ($msg->isPending()) {
-			$sql = "SELECT attachmentid,filename,userid,counter FROM forum_pending_attachment where msg_id='$msg_id'";
+			$res = db_query_params ('SELECT attachmentid,filename,userid,counter FROM forum_pending_attachment where msg_id=$1',
+						array ($msg_id));
 			$pend = "&pending=yes";
 		} else {
-			$sql = "SELECT attachmentid,filename,userid,counter FROM forum_attachment where msg_id='$msg_id'";
+			$res = db_query_params ('SELECT attachmentid,filename,userid,counter FROM forum_attachment where msg_id=$1',
+						array ($msg_id));
 			$pend = "";
 		}
 		
-		$res = db_query($sql);
 		if ($res) {
 			$attachid = db_result($res,0,'attachmentid');
 		}
@@ -176,11 +177,19 @@ class AttachManager extends Error {
 			$this->messages[] = _('Couldn\'t get message id');
 		} else {
 			$this->msg_id = db_result($result,0,0);
-			$sql = "INSERT INTO forum_attachment (userid, dateline, filename, filedata, filesize, visible, msg_id , filehash, mimetype)
+			if (db_query_params ('INSERT INTO forum_attachment (userid, dateline, filename, filedata, filesize, visible, msg_id , filehash, mimetype)
 					VALUES 
-					( $userid , " . $dateline . ", '" . $filename . "',
-					'" .  $filedata . "', $filesize, $visible, $this->msg_id,  '" . $filehash . "', '" . $mimetype  . "')";
-			if (db_query($sql)) {
+					( $1 , $2, $3,
+					$4, $5, $6, $7,  $8, $9)',
+			array ($userid,
+				$dateline ,
+				$filename ,
+				$filedata ,
+				$filesize,
+				$visible,
+				$this->msg_id,
+				$filehash ,
+				$mimetype  ))) {
 				$this->messages[] = _('File uploaded');
 			}	else {
 				$this->messages[] = _('File not uploaded');
@@ -245,12 +254,6 @@ class AttachManager extends Error {
 		if ($this->ForumMsg->isPending()) {
 			if ($update) {
 				//update the fileinfo
-				/*$sql = "UPDATE forum_pending_attachment SET dateline = '" . time() . "' , filedata = '" . base64_encode($filestuff) .  "' , filename = '" . addslashes($attachment_name) . "' , filehash = '" . addslashes(md5($filestuff)) . "' where attachmentid=$update";
-				if (db_query($sql)) {
-					$this->messages[] = _('File uploaded');
-				}	else {
-					$this->messages[] = _('File not uploaded');
-				}*/
 				// not implemented
 			} else {
 				// add to db
@@ -267,11 +270,18 @@ class AttachManager extends Error {
 						$this->msg_id = db_result($result,0,0);
 					}
 				}
-				$sql = "INSERT INTO forum_pending_attachment (userid, dateline, filename, filedata, filesize, visible, msg_id , filehash, mimetype)
+				$res = db_query_params ('INSERT INTO forum_pending_attachment (userid, dateline, filename, filedata, filesize, visible, msg_id , filehash, mimetype)
 					VALUES 
-					( $user_id , " . time() . ", '" . addslashes($attachment_name) . "',
-					'" .  base64_encode($filestuff) . "', $attachment_size, 1, $this->msg_id,  '" . addslashes(md5($filestuff)) . "', '". addslashes($attachment_type) ."')";
-				$res = db_query($sql);
+					( $1 , $2, $3,
+					$4, $5, 1, $6,  $7, $8)',
+			array ($user_id,
+				time() ,
+				addslashes($attachment_name) ,
+				base64_encode($filestuff) ,
+				$attachment_size,
+				$this->msg_id,
+				addslashes(md5($filestuff)) ,
+				addslashes($attachment_type) ));
 				if ($res) {
 					$this->messages[] = _('File uploaded');
 					$id = db_insertid($res,'forum_pending_attachment','attachmentid');
@@ -282,13 +292,19 @@ class AttachManager extends Error {
 		} else {
 			if ($update) {
 				//update the fileinfo
-				$sql = "UPDATE forum_attachment SET dateline = '" . time() . "' , filedata = '" . base64_encode($filestuff) .  "' ,
-				 filename = '" . addslashes($attachment_name) . "' , 
-				 filehash = '" . addslashes(md5($filestuff)) . "' , 
-				 mimetype = '" . addslashes($attachment_type) . "' ,
-				 counter = '0' ,
-				 filesize = '" . $attachment_size . "' where attachmentid=$update";
-				if (db_query($sql)) {
+				if (db_query_params ('UPDATE forum_attachment SET dateline = $1 , filedata = $2 ,
+				 filename = $3 , 
+				 filehash = $4 , 
+				 mimetype = $5 ,
+				 counter = 0 ,
+				 filesize = $6 where attachmentid=$7',
+			array (time() ,
+				base64_encode($filestuff) ,
+				addslashes($attachment_name) ,
+				addslashes(md5($filestuff)) ,
+				addslashes($attachment_type) ,
+				$attachment_size ,
+				$update))) {
 					$this->messages[] = _('File uploaded');
 					$this->messages[] = _('File Updated Successfully');
 					$id = $update;
@@ -310,11 +326,18 @@ class AttachManager extends Error {
 						$this->msg_id = db_result($result,0,0);
 					}
 				}
-				$sql = "INSERT INTO forum_attachment (userid, dateline, filename, filedata, filesize, visible, msg_id , filehash, mimetype)
+				$res = db_query_params ('INSERT INTO forum_attachment (userid, dateline, filename, filedata, filesize, visible, msg_id , filehash, mimetype)
 					VALUES 
-					( $user_id , " . time() . ", '" . addslashes($attachment_name) . "',
-					'" .  base64_encode($filestuff) . "', $attachment_size, 1, $this->msg_id,  '" . addslashes(md5($filestuff)) . "', '" . addslashes($attachment_type) . "')";
-				$res = db_query($sql);
+					( $1 , $2, $3,
+					$4, $5, 1, $6,  $7, $8)',
+			array ($user_id,
+				time() ,
+				addslashes($attachment_name) ,
+				base64_encode($filestuff) ,
+				$attachment_size,
+				$this->msg_id,
+				addslashes(md5($filestuff)) ,
+				addslashes($attachment_type) ));
 				if ($res) {
 					$this->messages[] = _('File uploaded');
 					$id = db_insertid($res,'forum_attachment','attachmentid');

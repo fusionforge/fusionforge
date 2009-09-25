@@ -43,11 +43,10 @@ if (!$f || !is_object($f)) {
 
 forum_header(array('title'=>_('Add forum')));
 
-$sql="select users.user_id,users.user_name, users.email, users.realname from
+$res = db_query_params ('select users.user_id,users.user_name, users.email, users.realname from
 users,forum_monitored_forums fmf where fmf.user_id=users.user_id and
-fmf.forum_id ='$group_forum_id' order by users.user_id;";
-
-$res=db_query($sql);
+fmf.forum_id =$1 order by users.user_id',
+			array ($group_forum_id));
 
 $head=array();
 $head[]='User';

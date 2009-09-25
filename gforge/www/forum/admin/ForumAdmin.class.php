@@ -288,8 +288,8 @@ class ForumAdmin extends Error {
 			if ($this->isGroupAdmin()) {
 				$this->PrintAdminOptions();
 			}
-			$sql = "SELECT forum_name, group_forum_id FROM forum_group_list WHERE group_id='$group_id' and moderation_level > 0";
-			$res = db_query($sql);
+			$res = db_query_params ('SELECT forum_name, group_forum_id FROM forum_group_list WHERE group_id=$1 and moderation_level > 0',
+			array ($group_id));
 			if (!$res) {
 				echo db_error();
 				return;			
@@ -342,8 +342,9 @@ class ForumAdmin extends Error {
 			$title[] = _('Message');
 			$title[] = "Action";
 			
-			$sql = "SELECT msg_id,subject,pm.group_forum_id,gl.forum_name FROM forum_pending_messages pm, forum_group_list gl WHERE pm.group_forum_id='$forum_id' AND pm.group_forum_id=gl.group_forum_id AND gl.group_forum_id='$forum_id'";
-			$res = db_query($sql);
+			$res = db_query_params ('SELECT msg_id,subject,pm.group_forum_id,gl.forum_name FROM forum_pending_messages pm, forum_group_list gl WHERE pm.group_forum_id=$1 AND pm.group_forum_id=gl.group_forum_id AND gl.group_forum_id=$2',
+			array ($forum_id,
+				$forum_id));
 			if (!$res) {
 				echo db_error();
 				return;			
@@ -401,15 +402,15 @@ class ForumAdmin extends Error {
 					case 2 : { 
 						//delete
 						db_begin();
-						$sql = "DELETE FROM forum_pending_attachment WHERE msg_id='$msgids[$i]'";
-						if (!db_query($sql)) {
+						if (!db_query_params ('DELETE FROM forum_pending_attachment WHERE msg_id=$1',
+			array ($msgids[$i]))) {
 							$feedback .= "DB Error ";
 							$feedback .= db_error() . "<br>";
 							db_rollback();
 							break;
 						}
-						$sql = "DELETE FROM forum_pending_messages WHERE msg_id='$msgids[$i]'";
-						if (!db_query($sql)) {
+						if (!db_query_params ('DELETE FROM forum_pending_messages WHERE msg_id=$1',
+			array ($msgids[$i]))) {
 							$feedback .= "DB Error ";
 							$feedback .= db_error() . "<br>";
 							db_rollback();
@@ -421,14 +422,14 @@ class ForumAdmin extends Error {
 					}
 					case 3 : { 
 						//release
-						$sql = "SELECT * FROM forum_pending_messages WHERE msg_id='$msgids[$i]'";
-						$res1 = db_query($sql);
+						$res1 = db_query_params ('SELECT * FROM forum_pending_messages WHERE msg_id=$1',
+			array ($msgids[$i]));
 						if (!$res1) {
 							$feedback .= "DB Error " . db_error() . "<br>";
 							break;
 						}
-						$sql = "SELECT * FROM forum_pending_attachment WHERE msg_id='$msgids[$i]'";
-						$res2 = db_query($sql);
+						$res2 = db_query_params ('SELECT * FROM forum_pending_attachment WHERE msg_id=$1',
+			array ($msgids[$i]));
 						if (!$res2) {
 							$feedback .= "DB Error " . db_error() . "<br>";
 							break;
@@ -494,8 +495,8 @@ class ForumAdmin extends Error {
 							 } else {
 							 	//undo the changes to the forum table
 								db_begin();
-								$sql = "DELETE FROM forum WHERE msg_id='$fm->getID()'";
-								if (!db_query($sql)) {
+								if (!db_query_params ('DELETE FROM forum WHERE msg_id=$1',
+										      array ($fm->getID()))) {
 									$feedback .= "DB Error ";
 									$feedback .= db_error() . "<br>";
 									db_rollback();
@@ -509,15 +510,15 @@ class ForumAdmin extends Error {
 						if ($deleteok) {
 							//delete the message and attach
 							db_begin();
-							$sql = "DELETE FROM forum_pending_attachment WHERE msg_id='$msgids[$i]'";
-							if (!db_query($sql)) {
+							if (!db_query_params ('DELETE FROM forum_pending_attachment WHERE msg_id=$1',
+			array ($msgids[$i]))) {
 								$feedback .= "DB Error ";
 								$feedback .= db_error() . "<br>";
 								db_rollback();
 								break;
 							}
-							$sql = "DELETE FROM forum_pending_messages WHERE msg_id='$msgids[$i]'";
-							if (!db_query($sql)) {
+							if (!db_query_params ('DELETE FROM forum_pending_messages WHERE msg_id=$1',
+			array ($msgids[$i]))) {
 								$feedback .= "DB Error ";
 								$feedback .= db_error() . "<br>";
 								db_rollback();

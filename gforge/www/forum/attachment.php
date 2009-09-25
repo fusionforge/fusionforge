@@ -85,9 +85,11 @@ if ($delete == "yes") {
 	}
 	//only the user that created the attach  or forum admin can delete it (safecheck)
 	if (!$pending) { //pending messages aren't deleted from this page
-		$sql = "SELECT userid FROM forum_attachment WHERE attachmentid='$attachid'";
+		$res = db_query_params ('SELECT userid FROM forum_attachment WHERE attachmentid=$1',
+			array ($attachid));
+	} else {
+		$res = false ;
 	}
-	$res = db_query($sql);
 	if ( (!$res) ) {
 		exit_error("Attachment Download error","DB Error");
 	}
@@ -112,11 +114,14 @@ if ($edit=="yes") {
 	}
 	//only the user that created the attach  or forum admin can edit it (safecheck)
 	if (!$pending) { //pending messages aren't deleted from this page
-		$sql1 = "SELECT filename FROM forum_attachment WHERE attachmentid='$attachid'";
-		$sql2 = "SELECT posted_by FROM forum WHERE msg_id='$msg_id'";
+		$res = db_query_params ('SELECT filename FROM forum_attachment WHERE attachmentid=$1',
+			array ($attachid));
+		$res2 = db_query_params ('SELECT posted_by FROM forum WHERE msg_id=$1',
+			array ($msg_id));
+	} else {
+		$res = false ;
+		$res2 = false ;
 	}
-	$res = db_query($sql1);
-	$res2 = db_query($sql2);
 	if ( (!$res) || (!$res2) ) {
 		exit_error("Attachment error","DB Error");
 	}
@@ -183,11 +188,12 @@ if (!$attachid) {
 }
 
 if ($pending=="yes") {
-	$sql = "SELECT * FROM forum_pending_attachment where attachmentid='$attachid'";
+	$res = db_query_params ('SELECT * FROM forum_pending_attachment where attachmentid=$1',
+			array ($attachid));
 } else {
-	$sql = "SELECT * FROM forum_attachment where attachmentid='$attachid'";
+	$res = db_query_params ('SELECT * FROM forum_attachment where attachmentid=$1',
+			array ($attachid));
 }
-$res = db_query($sql);
 if ( (!$res) ) {
 	exit_error("Attachment Download error","DB Error");
 }
