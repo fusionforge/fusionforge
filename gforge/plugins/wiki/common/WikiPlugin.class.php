@@ -203,11 +203,13 @@ class GforgeWikiPlugin extends Plugin {
 							plugin_wiki_version.versiondata AS versiondata
 						FROM plugin_wiki_page, plugin_wiki_version
 						WHERE plugin_wiki_page.id=plugin_wiki_version.id
-							AND mtime BETWEEN '".$params['begin']."' AND '".$params['end']."'
+							AND mtime BETWEEN $2 AND $3
 							AND minor_edit=0
-							AND substring(plugin_wiki_page.pagename from 0 for $1) = $2
+							AND substring(plugin_wiki_page.pagename from 0 for $1) = $4
 						ORDER BY mtime DESC',
 								 array ($len,
+									$params['begin'],
+									$params['end'],
 									$pat));
 
 					$cache = array();

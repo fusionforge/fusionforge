@@ -267,7 +267,6 @@ db_query_params ('DELETE FROM webcal_entry_user WHERE cal_login = $1 ',
 					db_query_params ('UPDATE webcal_user SET cal_is_admin = $1 WHERE cal_login = $2',
 							 array ($cia,
 								$row_nom_user['user_name']));
-					}
 				}
 
 				if(($row_num[0] != 1 ) && ($row_flags['value'] == 1)){
@@ -307,8 +306,6 @@ db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
 			array ($mail,
 				$row_nom_boss['unix_group_name']));
 				}
-				
-				
 		}
 		elseif ($hookname == "change_cal_permission_default") {
 			$res = db_query_params ('SELECT admin_flags FROM user_group WHERE user_id = $1 AND group_id = $2',
@@ -544,8 +541,8 @@ db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
 				$row_old = db_fetch_array($res_old);
 				
 				//get all the cal_login where you need to change mail
-				$res_all_mail = db_query_params ('SELECT cal_login, cal_email FROM webcal_user WHERE cal_email LIKE '%".$row_old['cal_email']."%'',
-			array ());
+				$res_all_mail = db_query_params ('SELECT cal_login, cal_email FROM webcal_user WHERE lower(cal_email) LIKE $1',
+								 array ("%".$row_old['cal_email']."%"));
 				print $query_all_mail;
 				while($row_all_mail = db_fetch_array($res_all_mail)){
 					$mail = str_replace($row_old['cal_email'],$row_name['email'],$row_all_mail['cal_email']);
