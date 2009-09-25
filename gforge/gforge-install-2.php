@@ -280,7 +280,6 @@
 	system("chown -R $args[2]:$args[3] /var/lib/gforge/uploads");
 	system("chmod -R 755 /opt/gforge/cronjobs/");
 	system("chmod 755 /opt/gforge/www/scm/viewvc/bin/cgi/viewvc.cgi");
-	system("chmod 755 /opt/gforge/plugins/scmcvs/cronjobs/cvscreate.sh");
 	
 	if (!is_dir("/etc/gforge"))
 	{
