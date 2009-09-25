@@ -151,75 +151,16 @@
 
 	system("mkdir -p /etc/gforge/httpd.d");
 	system("cp plugins/*/etc/httpd.d/*.conf /etc/gforge/httpd.d");
-	
-	////#copy the scmcvs plugin config to /etc/gforge/
-	//if (!is_dir("/etc/gforge/plugins/scmcvs"))
-	//{
-	//	system("mkdir -p /etc/gforge/plugins/scmcvs");
-	//}
-	//system("cp plugins/scmcvs/etc/plugins/scmcvs/config.php /etc/gforge/plugins/scmcvs/config.php");
-	//
-	////#copy the scmsvn config files to /etc/gforge/
-	//if (!is_dir("/etc/gforge/plugins/scmsvn"))
-	//{
-	//	system("mkdir -p /etc/gforge/plugins/scmsvn");
-	//}
-	//system("cp plugins/scmsvn/etc/plugins/scmsvn/config.php /etc/gforge/plugins/scmsvn/config.php");
-	//
-	////#copy the cvstracker config files to /etc/gforge/
-	//if (!is_dir("/etc/gforge/plugins/cvstracker"))
-	//{
-	//	system("mkdir -p /etc/gforge/plugins/cvstracker");
-	//}
-	//system("cp plugins/cvstracker/etc/plugins/cvstracker/config.php /etc/gforge/plugins/cvstracker/config.php");
-	//
-	////#copy the svntracker config files to /etc/gforge/
-	//if (!is_dir("/etc/gforge/plugins/svntracker"))
-	//{
-	//	system("mkdir -p /etc/gforge/plugins/svntracker");
-	//}
-	//system("cp plugins/svntracker/etc/plugins/svntracker/config.php /etc/gforge/plugins/svntracker/config.php");
 
-	
-	$plugins_confFiles = array(
-				"aselectextauth"	=> "standard",
-				"cvssyncmail" 		=> "standard",
-				"cvstracker" 		=> "standard",
-				"eirc" 				=> "/opt/gforge/plugins/eirc/etc/*",
-				"externalsearch" 	=> "standard",
-				"fckeditor" 		=> "standard",
-				"helloworld" 		=> "standard",
-				"ldapextauth" 		=> "standard",
-				"mantis" 			=> "standard",
-				"mediawiki" 		=> "standard",
-				"scmccase" 			=> "standard",
-				"scmcvs" 			=> "standard",
-				"scmsvn" 			=> "standard",
-				"svncommitemail" 	=> "standard",
-				"svntracker" 		=> "standard",
-				"wiki"				=> "standard"
-			);
-	//echo "Este es el array:\n";
-	//print_r($plugins_confFiles);
-	//echo "Antes de entrar al foreach\n";
-	foreach ($plugins_confFiles as $plugin_name => $conf_files)
-	{
-		if ($conf_files == "standard") {
-			$source = "/opt/gforge/plugins/$plugin_name/etc/plugins/$plugin_name";
-			$dest =  "/etc/gforge/plugins/";
-		} else {
-			$source = $conf_files;
-			$dest =  "/etc/gforge/plugins/$plugin_name/";
-		}
-		
-		//echo "\tsource=$source\tdest=$dest\n\t\tmkdir -p $dest\n\t\tcp $source $dest\n";
-		if (is_dir("/opt/gforge/plugins/$plugin_name/etc/plugins/$plugin_name")) {
-			system("mkdir -p $dest");
-			system("cp -r $source $dest");
+	// Install default configuration files for all plugins.
+	system("mkdir -p /etc/gforge/plugins/");
+	chdir("/opt/gforge/plugins");
+	foreach( glob("*") as $plugin) {
+		$source = "/opt/gforge/plugins/$plugin/etc/plugins/$plugin";
+		if (is_dir($source)) {
+			system("cp -r $source /etc/gforge/plugins/");
 		}
 	}
-	//echo "Despues de salir del foreach\n";
-
 
 	$apacheconffiles=array();
 	if (is_file('/etc/httpd/conf/httpd.conf')) {
