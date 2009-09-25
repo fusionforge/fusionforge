@@ -177,8 +177,8 @@ class CCasePlugin extends SCMPlugin {
 	}
 
 	function GetGroupServer ($group_id) {
-		$sql = "SELECT ccase_host FROM plugin_scmccase_group_usage WHERE group_id = $group_id" ;
-		$res = db_query($sql);
+		$res = db_query_params ('SELECT ccase_host FROM plugin_scmccase_group_usage WHERE group_id = $1',
+			array ($group_id));
 		if (db_numrows($res) == 0) {
 			return $this->default_ccase_server ;
 		} else {
@@ -188,15 +188,17 @@ class CCasePlugin extends SCMPlugin {
 
 	function SetGroupServer ($group_id, $server) {
 		db_begin () ;
-		$sql = "SELECT ccase_host FROM plugin_scmccase_group_usage WHERE group_id = $group_id" ;
-		$res = db_query($sql);
+		$res = db_query_params ('SELECT ccase_host FROM plugin_scmccase_group_usage WHERE group_id = $1',
+			array ($group_id));
 		if (db_numrows($res) == 0) {
-			$sql = "INSERT INTO plugin_scmccase_group_usage (group_id, ccase_host) VALUES ($group_id, '$server')" ;
+			$res = db_query_params ('INSERT INTO plugin_scmccase_group_usage (group_id, ccase_host) VALUES ($1, $2)',
+			array ($group_id,
+				$server)) ;
 		} else {
-			$sql = "UPDATE plugin_scmccase_group_usage SET ccase_host = '$server' WHERE group_id = $group_id" ;
-			
+			$res = db_query_params ('UPDATE plugin_scmccase_group_usage SET ccase_host = $1 WHERE group_id = $2',
+			array ($server,
+				$group_id)) ;
 		}
-		$res = db_query($sql);
 		db_commit () ;
 	}
 
