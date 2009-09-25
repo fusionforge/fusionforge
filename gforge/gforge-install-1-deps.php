@@ -116,7 +116,8 @@ function addFusionForgeYumRepo() {
 	if (getenv('FFORGE_RPM_REPO')) {
 		$rpm_repo = getenv('FFORGE_RPM_REPO');
 	} else {
-		$rpm_repo = 'http://fusionforge.org/rpm/';
+//		$rpm_repo = 'http://fusionforge.org/rpm/';
+		$rpm_repo = 'http://buildbot.fusionforge.org/job/fusionforge-trunk-full/ws/build/packages/';
 	}
 
 	$repo = '
