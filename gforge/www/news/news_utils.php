@@ -88,30 +88,30 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 	/*
 		Show a simple list of the latest news items with a link to the forum
 	*/
-
-	if ($group_id != $sys_news_group) {
-		$wclause="news_bytes.group_id='$group_id' AND news_bytes.is_approved <> '4'";
-	} else {
-		$wclause='news_bytes.is_approved=1';
-	}
-
-	$sql="SELECT groups.group_name,groups.unix_group_name,groups.group_id,
-		groups.type_id,users.user_name,users.realname,
-		news_bytes.forum_id,news_bytes.summary,news_bytes.post_date,news_bytes.details 
-		FROM users,news_bytes,groups 
-		WHERE $wclause 
-		AND users.user_id=news_bytes.submitted_by 
-		AND news_bytes.group_id=groups.group_id 
-		AND groups.status='A'
-		ORDER BY post_date DESC";
-
 	if ($tail_headlines == -1) {
-		$result=db_query($sql);
-	} else {
-		$result=db_query($sql,$limit+$tail_headlines);
+		$l = 0 ;
+	} elso {
+		$l = $limit + $tail_headlines ;
 	}
+	$result = db_query_params ('
+SELECT groups.group_name, groups.unix_group_name, groups.group_id,
+       groups.type_id, users.user_name, users.realname,
+       news_bytes.forum_id, news_bytes.summary, news_bytes.post_date,
+       news_bytes.details
+FROM users,news_bytes,groups
+WHERE (news_bytes.group_id=$1 AND news_bytes.is_approved <> 4 OR 1!=$2)
+  AND (news_bytes.is_approved=1 OR 1 != $3)
+  AND users.user_id=news_bytes.submitted_by
+  AND news_bytes.group_id=groups.group_id
+  AND groups.status=$4
+ORDER BY post_date DESC',
+				   array ($group_id,
+					  $group_id != $sys_news_group ? 1 : 0,
+					  $group_id != $sys_news_group ? 0 : 1,
+					  'A'),
+				   $l);
 	$rows=db_numrows($result);
-	
+
 	$return = '';
 
 	if (!$result || $rows < 1) {
@@ -161,8 +161,8 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 					date(_('Y-m-d H:i'),db_result($result,$i,'post_date')). '</em>' .
 					$proj_name . $summ_txt;
 
-				$sql="SELECT total FROM forum_group_list_vw WHERE group_forum_id='" . db_result($result,$i,'forum_id') . "'";
-				$res2 = db_query($sql);
+				$res2 = db_query_params ('SELECT total FROM forum_group_list_vw WHERE group_forum_id=$1',
+							 array (db_result($result,$i,'forum_id')));
 				$num_comments = db_result($res2,0,'total');
 
 				if (!$num_comments) {

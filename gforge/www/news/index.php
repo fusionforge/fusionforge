@@ -42,12 +42,6 @@ echo _('<p>Choose a News item and you can browse, search, and post messages.</p>
 if ( !$group_id || $group_id < 0 || !is_numeric($group_id) ) {
 	$group_id = 0;
 }
-if ($group_id && ($group_id != $sys_news_group)) {
-	$sql="SELECT * FROM news_bytes WHERE group_id='$group_id' AND is_approved <> '4' ORDER BY post_date DESC";
-} else {
-	$sql="SELECT * FROM news_bytes WHERE is_approved='1' ORDER BY post_date DESC";
-}
-
 if ( !$offset || $offset < 0 || !is_numeric($offset) ) {
 	$offset = 0;
 }
@@ -55,7 +49,16 @@ if ( !$limit || $limit < 0 || $limit > 50 || !is_numeric($limit) ) {
 	$limit = 50;
 }
 
-$result=db_query($sql,$limit+1,$offset);
+if ($group_id && ($group_id != $sys_news_group)) {
+	$result = db_query_params ('SELECT * FROM news_bytes WHERE group_id=$1 AND is_approved <> 4 ORDER BY post_date DESC',
+				   array ($group_id),
+				   $limit+1,
+				   $offset);
+} else {
+	$result = db_query_params ('SELECT * FROM news_bytes WHERE is_approved=1 ORDER BY post_date DESC',
+				   array ());
+}
+
 $rows=db_numrows($result);
 $more=0;
 if ($rows>$limit) {
