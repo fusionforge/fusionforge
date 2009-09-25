@@ -45,11 +45,12 @@ $err .= 'Existing mailing lists : '.implode(', ', $mailing_lists)."\n";
 
 pclose($fp);
 
-$res=db_query("SELECT users.user_name,email,mail_group_list.list_name,
+$res = db_query_params ('SELECT users.user_name,email,mail_group_list.list_name,
 	mail_group_list.password,mail_group_list.status, 
 	mail_group_list.group_list_id,mail_group_list.is_public
 	FROM mail_group_list,users
-	WHERE mail_group_list.list_admin=users.user_id");
+	WHERE mail_group_list.list_admin=users.user_id',
+			array ());
 $err .= db_error();
 
 $rows=db_numrows($res);
@@ -124,7 +125,9 @@ $listname.':		"|'.$sys_path_to_mailman.'/mail/wrapper post '.$listname.'"'."\n"
 
 // Update status
 //if(!empty($mailingListIds)) {
-	db_query('UPDATE mail_group_list set status='.MAIL__MAILING_LIST_IS_CREATED.' WHERE status=\''.MAIL__MAILING_LIST_IS_REQUESTED.'\'');
+db_query_params ('UPDATE mail_group_list set status=$1 WHERE status=$2',
+		 array (MAIL__MAILING_LIST_IS_CREATED,
+			MAIL__MAILING_LIST_IS_REQUESTED));
 echo db_error();
 //}
 
@@ -133,7 +136,8 @@ fclose($h1);
 //
 //delete mailing lists
 //
-$res=db_query("SELECT mailing_list_name FROM deleted_mailing_lists WHERE isdeleted = 0;");
+$res = db_query_params ('SELECT mailing_list_name FROM deleted_mailing_lists WHERE isdeleted = 0',
+			array ());
 $err .= db_error();
 $rows	 = db_numrows($res);
 
@@ -155,7 +159,8 @@ for($k = 0; $k < $rows; $k++) {
 		}
 	}
 	if($success){
-		$res1 = db_query("UPDATE deleted_mailing_lists SET isdeleted = 1 WHERE mailing_list_name = '$deleted_mail_list'");
+		$res1 = db_query_params ('UPDATE deleted_mailing_lists SET isdeleted = 1 WHERE mailing_list_name = $1',
+			array ($deleted_mail_list));
 		$err .= db_error();
 	}else{
 		$err .= "Could not remove the list $deleted_mail_list \n";

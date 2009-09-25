@@ -43,13 +43,13 @@ $day_end=($day_begin + 86400);
 //	logo showings by day
 //
 $err .= "\n\nBeginning stats_agg_logo_by_day ".date('Ymd H:i:s',time());
-$sql = "DELETE FROM stats_agg_logo_by_day WHERE day='$yesterday_formatted'";
-$rel = db_query($sql);
+$rel = db_query_params ('DELETE FROM stats_agg_logo_by_day WHERE day=$1',
+			array ($yesterday_formatted));
 $err .= db_error();
-$sql = "INSERT INTO stats_agg_logo_by_day 
+$rel = db_query_params ('INSERT INTO stats_agg_logo_by_day 
 	SELECT day, count(*) 
-	FROM activity_log WHERE type=0 AND day='$yesterday_formatted' GROUP BY day";
-$rel = db_query($sql);
+	FROM activity_log WHERE type=0 AND day=$1 GROUP BY day',
+			array ($yesterday_formatted));
 $err .= db_error();
 
 
@@ -58,8 +58,9 @@ $err .= db_error();
 //	new table format 2001-april
 //
 $err .= "\n\nBeginning stats_agg_logo_by_group ".date('Ymd H:i:s',time());
-$sql = "DELETE FROM stats_agg_logo_by_group WHERE month='$year$month' AND day='$day'";
-$rel = db_query($sql);
+$rel = db_query_params ('DELETE FROM stats_agg_logo_by_group WHERE month=$1 AND day=$2',
+			array ("$year$month",
+				$day));
 $err .= db_error();
 $sql = "INSERT INTO stats_agg_logo_by_group ";
 if ($sys_database_type == 'mysql') {
@@ -78,8 +79,9 @@ $err .= db_error();
 //	new table format 2001-april
 //
 $err .= "\n\nBeginning stats_agg_site_by_group ".date('Ymd H:i:s',time());
-$sql = "DELETE FROM stats_agg_site_by_group WHERE month='$year$month' AND day='$day'";
-$rel = db_query($sql);
+$rel = db_query_params ('DELETE FROM stats_agg_site_by_group WHERE month=$1 AND day=$2',
+			array ("$year$month",
+				$day));
 $err .= db_error();
 $sql = "INSERT INTO stats_agg_site_by_group ";
 if ($sys_database_type == 'mysql') {
@@ -97,8 +99,9 @@ $err .= db_error();
 //	page views by day
 //
 $err .= "\n\nBeginning stats_site_pages_by_day ".date('Ymd H:i:s',time());
-$sql = "DELETE FROM stats_site_pages_by_day WHERE month='$year$month' AND day='$day'";
-$rel = db_query($sql);
+$rel = db_query_params ('DELETE FROM stats_site_pages_by_day WHERE month=$1 AND day=$2',
+			array ("$year$month",
+				$day));
 $err .= db_error();
 $sql = "INSERT INTO stats_site_pages_by_day (month,day,site_page_views) ";
 if ($sys_database_type == 'mysql') {
@@ -116,7 +119,9 @@ $err .= db_error();
 //	insert the number of developers per project into history table
 //
 $err .= "\n\nBeginning stats_project_developers ".date('Ymd H:i:s',time());
-$rel=db_query("DELETE FROM stats_project_developers WHERE month='$year$month' AND day='$day'");
+$rel = db_query_params ('DELETE FROM stats_project_developers WHERE month=$1 AND day=$2',
+			array ("$year$month",
+				$day));
 $err .= db_error();
 $sql = "INSERT INTO stats_project_developers (month,day,group_id,developers) ";
 if ($sys_database_type == 'mysql') {

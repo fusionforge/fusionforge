@@ -255,9 +255,10 @@ class ForumGateway extends Error {
 	function getUserId() {
 		// Find User id using email
 		// If no user id, user id is 0;
-		$sql = "SELECT user_id FROM users 
-			WHERE lower(email) ='".strtolower($this->FromEmail)."' AND status='A'";
-		$res = db_query($sql);
+		$res = db_query_params ('SELECT user_id FROM users 
+			WHERE lower(email) = $1 AND status = $2',
+					array (strtolower($this->FromEmail),
+					       'A'));
 		if (!$res || db_numrows($res) < 1) {
 			return false;
 		} else {
@@ -284,19 +285,21 @@ class ForumGateway extends Error {
 				//
 				// Find Forum id by parent
 				//
-				$sql = "SELECT group_forum_id,thread_id 
+				$res = db_query_params ('SELECT group_forum_id,thread_id 
 					FROM forum
-					WHERE msg_id='$this->Parent'";
+					WHERE msg_id=$1',
+							array ($this->Parent));
 			} else {
 				//
 				//	Find forum by arguments passed by aliases file
 				//
-				$sql = "SELECT group_forum_id, 0 AS thread_id 
+				$res = db_query_params ('SELECT group_forum_id, 0 AS thread_id 
 					FROM forum_group_list
-					WHERE forum_name='$argv[2]'
-					AND group_id='".$Group->getID()."'";
+					WHERE forum_name=$1
+					AND group_id=$2',
+							array ($argv[2],
+							       $Group->getID()));
 			}
-			$res = db_query($sql);
 			if (!$res || db_numrows($res) < 1) {
 				$this->setError('Getting Forum IDs: '.db_error());
 				return false;

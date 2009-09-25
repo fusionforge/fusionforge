@@ -33,14 +33,14 @@ $ftp_dir = $sys_ftp_upload_dir."/pub/";
 $home_dir = $chroot_dir.$homedir_prefix."/";
 
 
-$SQL = "SELECT groups.group_id, group_name, unix_group_name, ";
-$SQL .= "user_group.user_id, ";
-$SQL .= "users.user_name ";
-$SQL .= "FROM groups ";
-$SQL .= "JOIN user_group ON user_group.group_id = groups.group_id ";
-$SQL .= "JOIN users ON users.user_id = user_group.user_id ";
-$SQL .= "ORDER BY group_id ";
-$res_db = db_query($SQL);
+$res_db = db_query_params ('SELECT groups.group_id, group_name, unix_group_name,
+user_group.user_id,
+users.user_name
+FROM groups
+JOIN user_group ON user_group.group_id = groups.group_id
+JOIN users ON users.user_id = user_group.user_id
+ORDER BY group_id',
+			array ());
 if ($res_db)
 {
         while($e = db_fetch_array($res_db))

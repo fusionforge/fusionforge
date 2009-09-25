@@ -36,11 +36,12 @@ $month=date('m');
 //
 //	project stats by month
 //
-db_begin(SYS_DB_STATS);
+db_begin();
 $err .= "\n\nBeginning stats_project_months: ".date('Y-m-d H:i:s',time());
 
-$rel = db_query("DELETE FROM stats_project_months;", -1, 0, SYS_DB_STATS);
-$err .= db_error(SYS_DB_STATS);
+$rel = db_query_params ('DELETE FROM stats_project_months',
+			array ());
+$err .= db_error();
 
 $sql="INSERT INTO stats_project_months
 	SELECT month, group_id, ";
@@ -76,55 +77,47 @@ $sql.="
 FROM stats_project_vw
 GROUP BY month,group_id
 ";
-$rel=db_query($sql, -1, 0, SYS_DB_STATS);
-$err .= db_error(SYS_DB_STATS);
+$rel=db_query($sql);
+$err .= db_error();
 
-db_commit(SYS_DB_STATS);
-
-if ($sys_database_type != 'mysql') {
-	db_query("VACUUM ANALYZE stats_project_months;", -1, 0, SYS_DB_STATS);
-}
-
+db_commit();
 
 //
 //  main site page views by month
 //
-db_begin(SYS_DB_STATS);
+db_begin();
 
 $err .= "\n\nBeginning stats_site_pages_by_month: ".date('Y-m-d H:i:s',time());
 
-$rel = db_query("DELETE FROM stats_site_pages_by_month;", -1, 0, SYS_DB_STATS);
-$err .= db_error(SYS_DB_STATS);
+$rel = db_query_params ('DELETE FROM stats_site_pages_by_month',
+			array ());
+$err .= db_error();
 
-$rel=db_query("INSERT INTO stats_site_pages_by_month
+$rel = db_query_params ('INSERT INTO stats_site_pages_by_month
 select month,sum(site_page_views) as site_page_views
-    from stats_site_pages_by_day group by month;
-", -1, 0, SYS_DB_STATS);
+    from stats_site_pages_by_day group by month',
+			array ());
 
 if (!$rel) {
 	$err .= "ERROR IN stats_site_pages_by_month";
 }
 
-$err .= db_error(SYS_DB_STATS);
+$err .= db_error();
 
-db_commit(SYS_DB_STATS);
-
-if ($sys_database_type != 'mysql') {
-	db_query("VACUUM ANALYZE stats_site_pages_by_month;", -1, 0, SYS_DB_STATS);
-}
-
+db_commit();
 
 //
 //  sitewide stats in last 30 days
 //
-db_begin(SYS_DB_STATS);
+db_begin();
 
 $err .= "\n\nBeginning stats_site_months: ".date('Y-m-d H:i:s',time());
 
-$rel = db_query("DELETE FROM stats_site_months;", -1, 0, SYS_DB_STATS);
-$err .= db_error(SYS_DB_STATS);
+$rel = db_query_params ('DELETE FROM stats_site_months',
+			array ());
+$err .= db_error();
 
-$rel=db_query("INSERT INTO stats_site_months
+$rel = db_query_params ('INSERT INTO stats_site_months
 SELECT spm.month,
 	sspbm.site_page_views,
 	SUM(spm.downloads) AS downloads,
@@ -148,15 +141,12 @@ SELECT spm.month,
 	WHERE spm.month=sspbm.month
 	GROUP BY spm.month,sspbm.site_page_views
 	ORDER BY spm.month ASC;
-", -1, 0, SYS_DB_STATS);
+',
+			array ());
 
-$err .= db_error(SYS_DB_STATS);
+$err .= db_error();
 
-db_commit(SYS_DB_STATS);
-
-if ($sys_database_type != 'mysql') {
-	db_query("VACUUM ANALYZE stats_site_months;", -1, 0, SYS_DB_STATS);
-}
+db_commit();
 
 cron_entry(4,$err);
 

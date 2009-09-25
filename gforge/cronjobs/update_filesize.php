@@ -34,16 +34,14 @@ require_once $gfwww.'include/squal_pre.php';
 
 db_begin();
 
-$fms_filesize_res =
-  db_query( "SELECT frs_file.filename,frs_file.file_id,
+$fms_filesize_res = db_query_params ('SELECT frs_file.filename,frs_file.file_id,
              groups.unix_group_name,frs_file.file_size
              FROM frs_package,frs_release,frs_file,groups
              WHERE frs_release.release_id=frs_file.release_id
              AND groups.group_id=frs_package.group_id
              AND frs_release.package_id=frs_package.package_id
-             AND frs_file.post_date > " .
-	     time() - (7 * 24 * 60 * 60)
-	    );
+             AND frs_file.post_date > $1',
+				     array (time() - (7 * 24 * 60 * 60))) ;
 echo db_error();
 
 while ( $fms_filesize_row = db_fetch_array( $fms_filesize_res ) ) {
@@ -55,9 +53,9 @@ while ( $fms_filesize_row = db_fetch_array( $fms_filesize_res ) ) {
   $fms_curr_size = filesize( $fms_file_path );
 
   if ( $fms_curr_size != $fms_filesize_row['file_size'] ) {
-    db_query( "UPDATE frs_file SET file_size='" .
-	      $fms_curr_size . "' WHERE file_id='" .
-	      $fms_filesize_row['file_id'] . "'" );
+db_query_params ('UPDATE frs_file SET file_size=$1 WHERE file_id=$2',
+		 array ($fms_curr_size,
+			$fms_filesize_row['file_id']));
     echo db_error();
   }
 

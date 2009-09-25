@@ -90,10 +90,11 @@ $gforge_aliases = array();
 //	Set up the forum aliases
 //
 if ($sys_use_forum) {
-	$resforum=db_query("SELECT groups.unix_group_name,lower(fgl.forum_name) AS forum_name
+	$resforum = db_query_params ('SELECT groups.unix_group_name,lower(fgl.forum_name) AS forum_name
 		FROM forum_group_list fgl,groups
 		WHERE fgl.group_id=groups.group_id
-		AND groups.status='A'");
+		AND groups.status=$1',
+			array ('A'));
 	for ($forres=0; $forres<db_numrows($resforum); $forres++) {
 		$forname=strtolower(db_result($resforum,$forres,'unix_group_name').'-'.strtolower(db_result($resforum,$forres,'forum_name')));
 		
@@ -111,10 +112,11 @@ if ($sys_use_forum) {
 //	Set up the tracker aliases
 //
 if ($sys_use_tracker) {
-	$restracker=db_query("SELECT groups.unix_group_name,lower(agl.name) AS tracker_name,group_artifact_id
+	$restracker = db_query_params ('SELECT groups.unix_group_name,lower(agl.name) AS tracker_name,group_artifact_id
 		FROM artifact_group_list agl, groups
 		WHERE agl.group_id=groups.group_id
-		AND groups.status='A'");
+		AND groups.status=$1',
+			array ('A'));
 	for ($forres=0; $forres<db_numrows($restracker); $forres++) {
 		// first we remove non-alphanumeric characters (spaces and other stuff)
 		$formatted_tracker_name = preg_replace('/[^[:alnum:]]/','',db_result($restracker,$forres,'tracker_name'));
@@ -163,7 +165,9 @@ if ($sys_use_mail && file_exists($sys_var_path.'/dumps/mailman-aliases')) {
 //
 //	Write out the user aliases
 //
-$res=db_query("SELECT user_name,email FROM users WHERE status = 'A' AND email != ''");
+$res = db_query_params ('SELECT user_name,email FROM users WHERE status = $1 AND email != $2',
+			array ('A',
+				''));
 $err .= db_error();
 
 $rows=db_numrows($res);

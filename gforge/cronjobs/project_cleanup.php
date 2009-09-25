@@ -31,16 +31,22 @@ db_begin();
 
 #one hour ago for projects
 $then=(time()-3600);
-db_query("DELETE FROM groups WHERE status='I' and register_time < '$then'");
+db_query_params ('DELETE FROM groups WHERE status=$1 and register_time < $2',
+		 array ('I',
+			$then));
 $err .= db_error();
 
 #one week ago for users
 $then=(time()-604800);
-db_query("DELETE FROM user_group WHERE EXISTS (SELECT user_id FROM users ".
-"WHERE status='P' and add_date < '$then' AND users.user_id=user_group.user_id)");
+db_query_params ('DELETE FROM user_group WHERE EXISTS (SELECT user_id FROM users 
+WHERE status=$1 and add_date < $2 AND users.user_id=user_group.user_id)',
+		 array ('P',
+			$then));
 $err .= db_error();
 
-$result = db_query("SELECT user_id, email FROM users WHERE status='P' and add_date < '$then'");
+$result = db_query_params ('SELECT user_id, email FROM users WHERE status=$1 and add_date < $2',
+			   array ('P',
+				  $then));
 if (db_numrows($result)) {
 
   // Plugins subsystem
@@ -60,27 +66,33 @@ if (db_numrows($result)) {
   }
 }
 
-db_query("DELETE FROM users WHERE status='P' and add_date < '$then'");
+db_query_params ('DELETE FROM users WHERE status=$1 and add_date < $2',
+		 array ('P',
+			$then));
 $err .= db_error();
 
 #30 days ago for sessions
 $then=(time()-(30*60*60*24));
-db_query("DELETE FROM user_session WHERE time < '$then'");
+db_query_params ('DELETE FROM user_session WHERE time < $1',
+			array ($then));
 $err .= db_error();
 
 #one month ago for preferences
 $then=(time()-604800*4);
-db_query("DELETE FROM user_preferences WHERE set_date < '$then'");
+db_query_params ('DELETE FROM user_preferences WHERE set_date < $1',
+			array ($then));
 $err .= db_error();
 
 #3 weeks ago for jobs
 $then=(time()-604800*3);
-db_query("UPDATE people_job SET status_id = '3' where post_date < '$then'");
+db_query_params ('UPDATE people_job SET status_id = 3 where post_date < $1',
+			array ($then));
 $err .= db_error();
 
 #1 day ago for form keys
 $then=(time()-(60*60*24));
-db_query("DELETE FROM form_keys WHERE creation_date < '$then'");
+db_query_params ('DELETE FROM form_keys WHERE creation_date < $1',
+			array ($then));
 $err .= db_error();
 
 db_commit();

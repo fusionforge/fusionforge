@@ -278,7 +278,8 @@ if (!$rel) {
 db_commit();
 
 if ($sys_database_type != 'mysql') {
-	$rel = db_query( "CREATE SEQUENCE project_metric_weekly_seq" );
+	$rel = db_query_params ('CREATE SEQUENCE project_metric_weekly_seq',
+			array ());
 	if (!$rel) {
 		$err .= "\n\n***ERROR: \n\n".db_error();
 	}
