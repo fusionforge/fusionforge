@@ -18,7 +18,6 @@ $limit = getIntFromRequest('limit', 10);
 if ($limit > 100) $limit = 100;
 
 if ($group_id) {
-	$where = "frs_package.group_id=$group_id AND ";
 	$res = db_query_params ('SELECT group_name FROM groups WHERE group_id=$1 AND is_public=1',
 				array ($group_id)) ;
 	$row = db_fetch_array($res);
@@ -34,7 +33,6 @@ if ($group_id) {
 	  $webmaster = $GLOBALS['sys_admin_email'];
 	}
 } else {
-	$where = "";
 	$title = "";
 	$link = "/new/";
 	$description = "";
@@ -75,7 +73,7 @@ WHERE frs_release.released_by=users.user_id
   AND frs_package.group_id=groups.group_id
   AND frs_release.status_id=1
   AND groups.is_public=1
-  AND (package.group_id=$1 AND 1=$2)
+  AND (package.group_id=$1 OR 1!=$2)
   AND frs_file.release_id=frs_release.release_id
 ORDER BY frs_file.release_time DESC',
 			array ($group_id,

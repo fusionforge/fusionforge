@@ -49,7 +49,7 @@ FROM groups
 LEFT JOIN user_group ON user_group.group_id=groups.group_id, licenses
 WHERE license_id=license
 AND lower(group_name) LIKE $1
-AND (status=$2 AND 1=$3)
+AND (status=$2 OR 1!=$3)
 GROUP BY group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name',
 					array (strtolower ("$group_name_search%"),
 					       'P',

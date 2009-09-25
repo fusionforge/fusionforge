@@ -210,7 +210,7 @@ if ($project->usesFRS()) {
 			WHERE frs_package.package_id=frs_release.package_id 
 			AND frs_package.group_id=$1 
 			AND frs_release.status_id=1 
-			AND (frs_package.is_public=1 AND 1=$2)
+			AND (frs_package.is_public=1 OR 1 != $2)
 			ORDER BY frs_package.package_id,frs_release.release_date DESC',
 			array ($group_id,
 				$public_required));

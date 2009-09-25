@@ -16,8 +16,6 @@ $limit = getIntFromRequest('limit', 10);
 if ($limit > 100) $limit = 100;
 
 if ($group_id) {
-	$where = "AND g.group_id=$group_id";
-
 	$res = db_query_params ('SELECT group_name FROM groups WHERE group_id=$1 AND is_public=1',
 				array($group_id),
 				1);
@@ -35,7 +33,6 @@ if ($group_id) {
 	  $webmaster = $GLOBALS['sys_admin_email'];
 	}
 } else {
-	$where = "AND is_approved=1";
 	$title = "";
 	$link = "";
 	$description = "";
@@ -64,8 +61,8 @@ AND u.user_id=news_bytes.submitted_by
 AND g.is_public=1
 AND g.status=$1
 AND news_bytes.is_approved <> 4
-AND (g.group_id=$group_id AND 1 = $3)
-AND (is_approved=1 AND 1 = $4)
+AND (g.group_id=$group_id OR 1 != $3)
+AND (is_approved=1 OR 1 != $4)
 ORDER BY post_date DESC',
 			array ('A',
 			       $group_id,
