@@ -308,7 +308,8 @@ function update_cvs_repositories() {
                 system("chmod -R o-rwx $cvsdir_prefix/.deleted/$deleted_group_name");
 
 
-                $res9 = db_query("UPDATE deleted_groups set isdeleted = 1 WHERE unix_group_name = '$deleted_group_name';" );
+                $res9 = db_query_params ('UPDATE deleted_groups set isdeleted = 1 WHERE unix_group_name = $1',
+			array ($deleted_group_name));
                 $err .= db_error();
         }
 
