@@ -49,10 +49,8 @@ project_admin_header(array('title'=>_('Project quota manager'),'group'=>$group->
 
 <?php
 $quotas = array();
-$SQL = "SELECT SUM(octet_length(data)) as size, SUM(octet_length(data_words)) as size1, count(*) as nb ";
-$SQL .= "FROM doc_data ";
-$SQL .= "WHERE group_id = '$group_id' ";
-$res_db = db_query($SQL);
+$res_db = db_query_params ('SELECT SUM(octet_length(data)) as size, SUM(octet_length(data_words)) as size1, count(*) as nb FROM doc_data WHERE group_id = $1 ',
+			array ($group_id));
 $q = array();
 $q["name"] = _('Documents');
 $q["nb"] = 0; $q["size"] = 0;
@@ -70,8 +68,8 @@ if (db_numrows($res_db) > 0)
 $quotas[0] = $q;
 $quotas[1] = $q1;
 
-$SQL = "SELECT SUM(octet_length(summary) + octet_length(details)) as size, count(*) as nb FROM news_bytes WHERE group_id = '$group_id' ";
-$res_db = db_query($SQL);
+$res_db = db_query_params ('SELECT SUM(octet_length(summary) + octet_length(details)) as size, count(*) as nb FROM news_bytes WHERE group_id = $1 ',
+			array ($group_id));
 $q = array();
 $q["name"] = _('News');
 $q["nb"] = 0; $q["size"] = 0;
@@ -84,9 +82,8 @@ if (db_numrows($res_db) > 0)
 $quotas[2] = $q;
 
 
-$SQL = "SELECT SUM(octet_length(subject)+octet_length(body)) as size, count(*) as nb FROM forum INNER JOIN forum_group_list ";
-$SQL .= "ON forum.group_forum_id = forum_group_list.group_forum_id WHERE group_id = '$group_id' ";
-$res_db = db_query($SQL);
+$res_db = db_query_params ('SELECT SUM(octet_length(subject)+octet_length(body)) as size, count(*) as nb FROM forum INNER JOIN forum_group_list ON forum.group_forum_id = forum_group_list.group_forum_id WHERE group_id = $1 ',
+			array ($group_id));
 $q = array();
 $q["name"] = _('Forums');
 $q["nb"] = 0; $q["size"] = 0;
@@ -107,8 +104,8 @@ $_quota_block_size = trim(shell_exec("echo $BLOCK_SIZE")) + 0;
 if ($_quota_block_size == 0) $_quota_block_size = 1024;
 $quota_soft = "";
 $quota_hard = "";
-$SQL = "SELECT quota_soft, quota_hard FROM groups WHERE group_id = $group_id";
-$res_db = db_query($SQL);
+$res_db = db_query_params ('SELECT quota_soft, quota_hard FROM groups WHERE group_id = $1',
+			array ($group_id));
 if (db_numrows($res_db) > 0) 
 {
 	$e = db_fetch_array($res_db);

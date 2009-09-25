@@ -58,8 +58,10 @@ if ($_POST["cmd"] == "maj")
 	}
 	else
 	{
-		$SQL = "UPDATE groups SET quota_soft = $qs, quota_hard = $qh WHERE group_id = $_POST[group_id] ";
-		db_query($SQL);
+		db_query_params ('UPDATE groups SET quota_soft = $1, quota_hard = $2 WHERE group_id = $3',
+				 array ($qs,
+					$qh,
+					getIntFromRequest ('group_id')));
 		$message = utf8_encode(_('Successfully updated quota'));
 		echo "<h3 style=\"color:red\">$message</h3>";
 	}
@@ -70,8 +72,8 @@ if ($_POST["cmd"] == "maj")
 $quotas = array();
 
 // all projects list
-$SQL = "SELECT group_id, group_name, unix_group_name, quota_soft, quota_hard FROM groups ORDER BY group_id ";
-$res_db = db_query($SQL);
+$res_db = db_query_params ('SELECT group_id, group_name, unix_group_name, quota_soft, quota_hard FROM groups ORDER BY group_id ',
+			array ());
 if (db_numrows($res_db) > 0) 
 {
 	while($e = db_fetch_array($res_db))

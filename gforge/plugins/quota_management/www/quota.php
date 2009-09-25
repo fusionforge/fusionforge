@@ -42,8 +42,8 @@ site_admin_header(array('title'=>_('Site admin')));
 $quotas = array();
 
 // all projects list
-$SQL = "SELECT group_id, group_name, unix_group_name, quota_soft, quota_hard FROM groups ORDER BY group_id ";
-$res_db = db_query($SQL);
+$res_db = db_query_params ('SELECT group_id, group_name, unix_group_name, quota_soft, quota_hard FROM groups ORDER BY group_id ',
+			array ());
 if (db_numrows($res_db) > 0) 
 {
 	while($e = db_fetch_array($res_db))
@@ -61,10 +61,8 @@ if (db_numrows($res_db) > 0)
 }
 
 // documents database size
-$SQL = "SELECT group_id, SUM(octet_length(data)) as size, SUM(octet_length(data_words)) as size1 ";
-$SQL .= "FROM doc_data ";
-$SQL .= "GROUP BY group_id ";
-$res_db = db_query($SQL);
+$res_db = db_query_params ('SELECT group_id, SUM(octet_length(data)) as size, SUM(octet_length(data_words)) as size1 FROM doc_data GROUP BY group_id ',
+			array ());
 if (db_numrows($res_db) > 0) 
 {
 	while($e = db_fetch_array($res_db))
@@ -77,10 +75,8 @@ if (db_numrows($res_db) > 0)
 }
 
 // news database size
-$SQL = "SELECT group_id, SUM(octet_length(summary) + octet_length(details)) as size \n";
-$SQL .= "FROM news_bytes \n";
-$SQL .= "GROUP BY group_id \n";
-$res_db = db_query($SQL);
+$res_db = db_query_params ('SELECT group_id, SUM(octet_length(summary) + octet_length(details)) as size FROM news_bytes GROUP BY group_id',
+			array ());
 if (db_numrows($res_db) > 0) 
 {
 	while($e = db_fetch_array($res_db))
@@ -91,12 +87,8 @@ if (db_numrows($res_db) > 0)
 }
 
 // forums database size
-$SQL = "SELECT forum_group_list.group_id as group_id, SUM(octet_length(subject)+octet_length(body)) as size \n"; 
-$SQL .= "FROM forum \n";
-$SQL .= "INNER JOIN forum_group_list \n";
-$SQL .= "ON forum.group_forum_id = forum_group_list.group_forum_id \n";
-$SQL .= "GROUP BY group_id \n";
-$res_db = db_query($SQL);
+$res_db = db_query_params ('SELECT forum_group_list.group_id as group_id, SUM(octet_length(subject)+octet_length(body)) as size FROM forum INNER JOIN forum_group_list ON forum.group_forum_id = forum_group_list.group_forum_id GROUP BY group_id',
+			array ());
 if (db_numrows($res_db) > 0) 
 {
 	while($e = db_fetch_array($res_db))
@@ -149,8 +141,8 @@ foreach ($quotas as $p)
 $chroot_dir = $sys_chroot;
 $ftp_dir = $chroot_dir."/home/users/";
 $users = array();
-$SQL = "SELECT user_id, user_name, realname, unix_status FROM users ORDER BY user_id ";
-$res_db = db_query($SQL);
+$res_db = db_query_params ('SELECT user_id, user_name, realname, unix_status FROM users ORDER BY user_id ',
+			array ());
 if (db_numrows($res_db) > 0) 
 {
 	while($e = db_fetch_array($res_db))
