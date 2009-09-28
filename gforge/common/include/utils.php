@@ -113,7 +113,7 @@ function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$e
 		$body2 .= "\nBCC: $BCC";
 	}
 	$send_html_email?$type="html":$type="plain";
-	$body2 .= "\nSubject: ".util_encode_mimeheader($subject, $charset).
+	$body2 .= "\n".util_encode_mimeheader("Subject", $subject, $charset).
 		"\nContent-type: text/$type; charset=$charset".
 		"\n\n".
 		util_convert_body($body, $charset);
@@ -155,17 +155,28 @@ function util_encode_mailaddr($email,$name,$charset) {
 /**
  * util_encode_mimeheader() - Encode mimeheader
  *
+ * @param		string	The name of the header (e.g. "Subject")
  * @param		string	The email subject
  * @param		string	The converting charset (like ISO-2022-JP)
  * @return		string	The MIME encoded subject
  *
  */
-function util_encode_mimeheader($str,$charset) {
-	if (!function_exists('mb_convert_encoding')) {
-		return $str;
+function util_encode_mimeheader($headername,$str,$charset) {
+	if (function_exists('mb_internal_encoding') &&
+	    function_exists('mb_encode_mimeheader')) {
+		$x = mb_internal_encoding();
+		mb_internal_encoding("UTF-8");
+		$y = mb_encode_mimeheader($headername . ": " . $str,
+					  $charset, "Q");
+		mb_internal_encoding($x);
+		return $y;
 	}
 
-	return "=?".$charset."?B?".
+	if (!function_exists('mb_convert_encoding')) {
+		return $headername . ": " . $str;
+	}
+
+	return $headername . ": " . "=?".$charset."?B?".
 		base64_encode(mb_convert_encoding(
 			$str,$charset,"UTF-8")).
 		"?=";
