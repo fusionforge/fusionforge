@@ -49,6 +49,7 @@ function docman_recursive_display($docgroup) {
 
 $group_id = getIntFromRequest('group_id');
 $language_id = getStringFromRequest('language_id');
+$feedback = getStringFromRequest('feedback');
 
 if (!$group_id) {
     exit_no_group();
