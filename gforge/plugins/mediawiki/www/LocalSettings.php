@@ -61,13 +61,10 @@ $wgDBts2schema      = str_replace ('-', '_', "plugin_mediawiki_$fusionforgeproje
 $wgMainCacheType = CACHE_NONE;
 $wgMemCachedServers = array();
 
-## To enable image uploads, make sure the 'images' directory
-## is writable, then set this to true:
-$wgEnableUploads       = true;
+$wgEnableUploads = false;
 $wgUploadDirectory = "$wikidata/images";
-# $wgUseImageMagick = true;
-# $wgImageMagickConvertCommand = "/usr/bin/convert";
-# $wgHashedUploadDirectory = false;
+$wgUseImageMagick = true;
+$wgImageMagickConvertCommand = "/usr/bin/convert";
 $wgLocalInterwiki   = $wgSitename;
 $wgShowExceptionDetails = true ;
 

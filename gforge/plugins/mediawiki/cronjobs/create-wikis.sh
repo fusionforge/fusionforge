@@ -4,7 +4,7 @@ tmp3=$(mktemp)
 perl -e'require "/etc/gforge/local.pl"; print "*:*:$sys_dbname:$sys_dbuser:$sys_dbpasswd\n"' > $tmp3
 
 projects=$(echo "SELECT g.unix_group_name from groups g, group_plugin gp, plugins p where g.group_id = gp.group_id and gp.plugin_id = p.plugin_id and p.plugin_name = 'mediawiki' ;" \
-    | PGPASSFILE=/tmp/tmp.wOirlBjmDn /usr/bin/psql -U gforge gforge \
+    | PGPASSFILE=$tmp3 /usr/bin/psql -U gforge gforge \
     | tail -n +3 \
     | grep '^ ')
 
@@ -13,8 +13,15 @@ wdprefix=/var/lib/gforge/plugins/mediawiki/wikidata
 for project in $projects ; do
     if [ ! -d $wdprefix/$project/images ] ; then
 	mkdir -p $wdprefix/$project/images
-	chown www-data $wdprefix/$project/images
-	touch $wdprefix/$project/LocalSettings.php
+    fi
+    if [ ! -e $wdprefix/$project/LocalSettings.php ] ; then
+	cat > $wdprefix/$project/LocalSettings.php <<EOF
+<?php
+// To enable uploads for the wiki, you'll need to edit this value:
+\$wgEnableUploads = false;
+// Don't forget to "chown www-data $wdprefix/$project/images"
+EOF
+
 	filteredprojects="$filteredprojects $project"
     fi
 done
