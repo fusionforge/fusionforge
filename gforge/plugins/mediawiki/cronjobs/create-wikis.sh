@@ -20,6 +20,22 @@ for project in $projects ; do
 // To enable uploads for the wiki, you'll need to edit this value:
 \$wgEnableUploads = false;
 // Don't forget to "chown www-data $wdprefix/$project/images"
+
+// Edit permissions for group members
+\$wgGroupPermissions['Members']['edit']          = true;
+\$wgGroupPermissions['Members']['createpage']    = true;
+\$wgGroupPermissions['Members']['createtalk']    = true;
+
+// Edit permissions for non-members
+\$wgGroupPermissions['Users']['edit']          = false;
+\$wgGroupPermissions['Users']['createpage']    = false;
+\$wgGroupPermissions['Users']['createtalk']    = false;
+
+// Edit permissions for anonymous users
+\$wgGroupPermissions['*']['edit']          = false;
+\$wgGroupPermissions['*']['createpage']    = false;
+\$wgGroupPermissions['*']['createtalk']    = false;
+
 EOF
 
 	filteredprojects="$filteredprojects $project"

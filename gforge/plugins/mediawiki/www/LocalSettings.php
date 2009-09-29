@@ -105,6 +105,9 @@ function GforgeMWAuth( &$user, &$result ) {
         }
         if ($s) {
                 $u = user_get_object ($s);
+		$g = group_get_object_by_name ($fusionforgeproject) ;
+		$perm =& $g->getPermission($u);
+
                 $mwname = ucfirst($u->getUnixName ()) ;
                 $mwu = User::newFromName ($mwname);
                 if($mwu->getID() == 0) {
@@ -112,45 +115,52 @@ function GforgeMWAuth( &$user, &$result ) {
                         $mwu->setPassword (User::randomPassword());
                         $mwu->setRealName ($u->getRealName ()) ;
                         $mwu->setToken ();
-                } else {
                         $mwu->loadFromDatabase ();
                 }
-		$g = group_get_object_by_name ($fusionforgeproject) ;
-		$perm =& $g->getPermission($u);
+                $user->mId=$mwu->getID();
+                $user->loadFromId() ;
 
-		$mwu->loadGroups() ;
-		$current_groups = $mwu->getGroups() ;
-
+		$user->loadGroups() ;
+		$current_groups = $user->getGroups() ;
                 if ($perm && is_object($perm) && $perm->isAdmin()) {
                         if (!in_array ('Administrators', $current_groups)) {
-                                $mwu->addGroup ('Administrators') ;
+                                $user->addGroup ('Administrators') ;
+                        }
+                        if (!in_array ('Members', $current_groups)) {
+                                $user->addGroup ('Members') ;
                         }
                         if (!in_array ('Users', $current_groups)) {
-                                $mwu->addGroup ('Users') ;
+                                $user->addGroup ('Users') ;
                         }
                 } elseif ($perm && is_object($perm) && $perm->isMember()) {
                         if (in_array ('Administrators', $current_groups)) {
-                                $mwu->removeGroup ('Administrators') ;
+                                $user->removeGroup ('Administrators') ;
+                        }
+                        if (!in_array ('Members', $current_groups)) {
+                                $user->addGroup ('Members') ;
                         }
                         if (!in_array ('Users', $current_groups)) {
-                                $mwu->addGroup ('Users') ;
+                                $user->addGroup ('Users') ;
                         }
                 } else {
                         if (in_array ('Administrators', $current_groups)) {
-                                $mwu->removeGroup ('Administrators') ;
+                                $user->removeGroup ('Administrators') ;
                         }
-                        if (in_array ('Users', $current_groups)) {
-                                $mwu->removeGroup ('Users') ;
+                        if (in_array ('Members', $current_groups)) {
+                                $user->removeGroup ('Members') ;
+                        }
+                        if (!in_array ('Users', $current_groups)) {
+                                $user->addGroup ('Users') ;
                         }
                 }
 
-                $mwu->setCookies ();
-                $mwu->saveSettings ();
-
-                $user = $mwu ;
+                $user->setCookies ();
+                $user->saveSettings ();
         } else {
 		$user->logout ();
         }
+
+	$result = true;
 	return true ;
 }
 
@@ -160,6 +170,16 @@ if (is_file("/etc/mediawiki-extensions/extensions.php")) {
 
 $GLOBALS['wgHooks']['UserLoadFromSession'][]='GforgeMWAuth';
 
+$wgGroupPermissions['Members']['createaccount'] = true;
+$wgGroupPermissions['Members']['edit']          = true;
+$wgGroupPermissions['Members']['createpage']    = true;
+$wgGroupPermissions['Members']['createtalk']    = true;
+
+$wgGroupPermissions['Users']['createaccount'] = false;
+$wgGroupPermissions['Users']['edit']          = false;
+$wgGroupPermissions['Users']['createpage']    = false;
+$wgGroupPermissions['Users']['createtalk']    = false;
+
 $wgGroupPermissions['*']['createaccount'] = false;
 $wgGroupPermissions['*']['edit']          = false;
 $wgGroupPermissions['*']['createpage']    = false;
@@ -168,3 +188,8 @@ $wgGroupPermissions['*']['createtalk']    = false;
 $wgFavicon = '/images/icon.png' ;
 $wgBreakFrames = false ;
 ini_set ('memory_limit', '50M') ;
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:

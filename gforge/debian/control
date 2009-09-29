@@ -308,7 +308,7 @@ Description: collaborative development tool - CPOLD plugin
 
 Package: gforge-plugin-mediawiki
 Architecture: all
-Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, mediawiki, ${misc:Depends}
+Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, mediawiki (>= 1.15~), ${misc:Depends}
 Description: Mediawiki plugin for FusionForge
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
