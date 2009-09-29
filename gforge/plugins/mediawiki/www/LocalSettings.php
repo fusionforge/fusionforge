@@ -126,17 +126,30 @@ function GforgeMWAuth( &$user, &$result ) {
 
 		$mwu->loadGroups() ;
 		$current_groups = $mwu->getGroups() ;
-		
+
                 if ($perm && is_object($perm) && $perm->isAdmin()) {
                         if (!in_array ('Administrators', $current_groups)) {
                                 $mwu->addGroup ('Administrators') ;
+                        }
+                        if (!in_array ('Users', $current_groups)) {
+                                $mwu->addGroup ('Users') ;
+                        }
+                } elseif ($perm && is_object($perm) && $perm->isMember()) {
+                        if (in_array ('Administrators', $current_groups)) {
+                                $mwu->removeGroup ('Administrators') ;
+                        }
+                        if (!in_array ('Users', $current_groups)) {
+                                $mwu->addGroup ('Users') ;
                         }
                 } else {
                         if (in_array ('Administrators', $current_groups)) {
                                 $mwu->removeGroup ('Administrators') ;
                         }
+                        if (in_array ('Users', $current_groups)) {
+                                $mwu->removeGroup ('Users') ;
+                        }
                 }
-		
+
                 $user = $mwu ;
         } else {
 		$user->logout ();
