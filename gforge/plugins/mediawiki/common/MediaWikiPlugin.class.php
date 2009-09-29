@@ -26,7 +26,6 @@ class MediaWikiPlugin extends Plugin {
 		$this->Plugin() ;
 		$this->name = "mediawiki" ;
 		$this->text = "Mediawiki" ; // To show in the tabs, use...
-
 		$this->hooks[] = "groupmenu" ;	// To put into the project tabs
 		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
 		$this->hooks[] = "groupisactivecheckboxpost" ; //
@@ -55,7 +54,7 @@ class MediaWikiPlugin extends Plugin {
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
-				$params['DIRS'][]=util_make_url ('/plugins/mediawiki/index.php?group_id=' . $project->getID()) ; 
+				$params['DIRS'][]=util_make_url ('/plugins/mediawiki/frame.php?group_id=' . $project->getID()) ; 
 			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == "groupisactivecheckbox") {
@@ -81,6 +80,17 @@ class MediaWikiPlugin extends Plugin {
 			$use_mediawikiplugin = getStringFromRequest('use_mediawikiplugin');
 			if ( $use_mediawikiplugin == 1 ) {
 				$group->setPluginUse ( $this->name );
+				
+				db_begin () ;
+				$schemaname = "plugin_mediawiki_$fusionforgeproject" ;
+				$schemaname = str_replace ('-', '_', $schemaname) ;
+
+				$res = db_query_params ('CREATE SCHEMA $1',
+							array ($schemaname)) ;
+
+				db_commit () ;
+
+
 			} else {
 				$group->setPluginUse ( $this->name, false );
 			}
