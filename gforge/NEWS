@@ -17,6 +17,14 @@ the repositories by hand and/or add symlinks.  Previously existing
 symlinks will also have to be updated, as well as previously existing
 working copies obtained by users.
 
+Also, the Mediawiki plugin was rewritten to allow for each project to
+get their own independent wiki.  The wiki for project foo-bar is now
+stored in the plugin_mediakiki_foo_bar in the same database as the
+rest of the forge.  This means the data should be migrated from the
+existing database to this new location.  Depending on your setup and
+the amount of data involved, it might make sense to either cut and
+paste by hand or dump the tables and reload them in the new schema.
+
 
 Release notes for FusionForge 4.8
 ---------------------------------
