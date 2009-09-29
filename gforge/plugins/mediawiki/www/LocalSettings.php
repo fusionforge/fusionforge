@@ -42,7 +42,7 @@ if ( $wgCommandLineMode ) {
                 die( "This script must be run from the command line\n" );
         }
 }
-$wgSitename         = "$system_name Wiki";
+$wgSitename         = "$sys_name Wiki";
 $wgScriptPath       = "/plugins/mediawiki/wiki/$fusionforgeproject" ;
 
 $wgEmergencyContact = "webmaster@fusionforge.org";
@@ -118,9 +118,6 @@ function GforgeMWAuth( &$user, &$result ) {
                 } else {
                         $mwu->loadFromDatabase ();
                 }
-                $mwu->setCookies ();
-                $mwu->saveSettings ();
-
 		$g = group_get_object_by_name ($fusionforgeproject) ;
 		$perm =& $g->getPermission($u);
 
@@ -149,6 +146,9 @@ function GforgeMWAuth( &$user, &$result ) {
                                 $mwu->removeGroup ('Users') ;
                         }
                 }
+
+                $mwu->setCookies ();
+                $mwu->saveSettings ();
 
                 $user = $mwu ;
         } else {
