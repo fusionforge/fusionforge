@@ -141,6 +141,7 @@ install: build
 	# Install few links
 	ln -s database-pgsql.php $(CURDIR)/debian/$(PACKAGE)-common/usr/share/$(PACKAGE)/common/include/database.php
 	ln -s /usr/share/mediawiki/skins/$(PACKAGE)/loader.php $(CURDIR)/debian/$(PACKAGE)-plugin-mediawiki/etc/mediawiki-extensions/extensions-available/GforgeAuth.php
+	for i in includes opensearch_desc.php redirect.php thumb.php api.php extensions img_auth.php index.php languages maintenance profileinfo.php StartProfiler.php trackback.php ; do ln -s /usr/share/mediawiki/$$i $(CURDIR)/debian/$(PACKAGE)-plugin-mediawiki/usr/share/gforge/www/plugins/mediawiki/ ; done
 
 	# Fix permissions
 	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -type f -exec chmod 644 {} \;  ; done

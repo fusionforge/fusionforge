@@ -12,6 +12,7 @@ gforge (4.8.53-1) experimental; urgency=low
     up, and new plugins added: scmcpold (as a proof of concept), scmarch,
     scmbzr, scmdarcs, scmgit and scmhg.  Mercurial (scmhg) and Arch are
     not quite complete yet.
+  * Patched mediawiki plugin to enable one wiki per project.
 
  -- Roland Mas <lolando@debian.org>  Wed, 23 Sep 2009 14:44:50 +0200
 

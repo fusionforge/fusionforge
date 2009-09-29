@@ -16,9 +16,9 @@ $gfRequestTime = microtime( true );
 error_reporting( E_ALL );
 
 # Attempt to set up the include path, to fix problems with relative includes
-$IP = dirname(dirname( __FILE__ )) ;
+$fusionforge_basedir = dirname(dirname( __FILE__ )) ;
 $include_path = join(PATH_SEPARATOR, 
-	array("/etc/gforge/custom", "/etc/gforge", "$IP/common", "$IP/www",	"$IP/plugins", "$IP", ".", "/usr/share/php"));
+	array("/etc/gforge/custom", "/etc/gforge", "$fusionforge_basedir/common", "$fusionforge_basedir/www",	"$fusionforge_basedir/plugins", "$fusionforge_basedir", ".", "/usr/share/php"));
 
 // By default, the include_path is changed to include path needed by Gforge.
 // If this does not work, then set defines to real path directly.
@@ -35,21 +35,21 @@ if (getenv('sys_localinc')) {
 	$gfcgfile = getenv('sys_localinc');
 	$gfconfig = dirname($gfcgfile).'/';
 } elseif (isset($_SERVER['SERVER_NAME']) && 
-	file_exists($IP.'/config/'.$_SERVER['SERVER_NAME'].'/local.inc.php')) {
-	$gfcgfile = $IP.'/config/'.$_SERVER['SERVER_NAME'].'/local.inc.php';
-	$gfconfig = $IP.'/config/'.$_SERVER['SERVER_NAME'].'/';
-} elseif (file_exists($IP.'/config/local.inc.php')) {
-	$gfcgfile = $IP.'/config/local.inc.php';
-	$gfconfig = $IP.'/config/';
+	file_exists($fusionforge_basedir.'/config/'.$_SERVER['SERVER_NAME'].'/local.inc.php')) {
+	$gfcgfile = $fusionforge_basedir.'/config/'.$_SERVER['SERVER_NAME'].'/local.inc.php';
+	$gfconfig = $fusionforge_basedir.'/config/'.$_SERVER['SERVER_NAME'].'/';
+} elseif (file_exists($fusionforge_basedir.'/config/local.inc.php')) {
+	$gfcgfile = $fusionforge_basedir.'/config/local.inc.php';
+	$gfconfig = $fusionforge_basedir.'/config/';
 } else {
 	$gfcgfile = 'local.inc';
 	$gfconfig = '';
 }
 
 if( !ini_set('include_path', $include_path ) && !set_include_path( $include_path )) {
-	$gfcommon = $IP.'/common/';
-	$gfwww = $IP.'/www/';
-	$gfplugins = $IP.'/plugins/';
+	$gfcommon = $fusionforge_basedir.'/common/';
+	$gfwww = $fusionforge_basedir.'/www/';
+	$gfplugins = $fusionforge_basedir.'/plugins/';
 } else {
 	$gfcommon = '';
 	$gfwww = '';

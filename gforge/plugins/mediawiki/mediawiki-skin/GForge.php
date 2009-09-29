@@ -37,9 +37,11 @@ $GLOBALS['REMOTE_ADDR'] = getStringFromServer('REMOTE_ADDR') ;
 $GLOBALS['HTTP_USER_AGENT'] = getStringFromServer('HTTP_USER_AGENT') ;
 
 function GforgeRegisterMWHook() {
-	$GLOBALS['wgHooks']['AutoAuthenticate'][]='GforgeMWAuth';
+	$GLOBALS['wgHooks']['UserLoadFromSession'][]='GforgeMWAuth';
 }
-function GforgeMWAuth( &$user ) {
+function GforgeMWAuth( &$user, &$result ) {
+	global $fusionforgeproject ;
+
 	$cookie = getStringFromCookie ('session_ser') ;
         if ($cookie != '') {
                 $s = session_check_session_cookie ($cookie);
@@ -62,12 +64,28 @@ function GforgeMWAuth( &$user ) {
                 $mwu->setCookies ();
                 $mwu->saveSettings ();
 
+		$g = group_get_object_by_name ($fusionforgeproject) ;
+		$perm =& $g->getPermission($u);
+
+		$mwu->loadGroups() ;
+		$current_groups = $mwu->getGroups() ;
+		
+                if ($perm && is_object($perm) && $perm->isAdmin()) {
+                        if (!in_array ('Administrators', $current_groups)) {
+                                $mwu->addGroup ('Administrators') ;
+                        }
+                } else {
+                        if (in_array ('Administrators', $current_groups)) {
+                                $mwu->removeGroup ('Administrators') ;
+                        }
+                }
+		
                 $user = $mwu ;
-                return true ;	// Ignored by MW, but required anyway
         } else {
                 // print "Not logged in (according to gforge) ";
-                return false ;	// Ignored by MW, but required anyway
+		$user->logout ();
         }
+	return true ;
 }
 /**
  * Inherit main code from SkinTemplate, set the CSS and template filter.
