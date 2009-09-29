@@ -80,17 +80,6 @@ class MediaWikiPlugin extends Plugin {
 			$use_mediawikiplugin = getStringFromRequest('use_mediawikiplugin');
 			if ( $use_mediawikiplugin == 1 ) {
 				$group->setPluginUse ( $this->name );
-				
-				db_begin () ;
-				$schemaname = "plugin_mediawiki_$fusionforgeproject" ;
-				$schemaname = str_replace ('-', '_', $schemaname) ;
-
-				$res = db_query_params ('CREATE SCHEMA $1',
-							array ($schemaname)) ;
-
-				db_commit () ;
-
-
 			} else {
 				$group->setPluginUse ( $this->name, false );
 			}

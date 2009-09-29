@@ -32,7 +32,11 @@ $params['sectionvals'] = array ($group->getPublicName());
 
 site_project_header($params);
 
-echo '<iframe src="'.util_make_url('/plugins/mediawiki/wiki/'.$group->getUnixName().'/index.php').'" frameborder="no" width=100% height=700></iframe>' ;
+if (file_exists ('/var/lib/gforge/plugins/mediawiki/wikidata/'.$group->getUnixName().'/LocalSettings.php')) {
+	echo '<iframe src="'.util_make_url('/plugins/mediawiki/wiki/'.$group->getUnixName().'/index.php').'" frameborder="no" width=100% height=700></iframe>' ;
+} else {
+	print _('Wiki not created yet, please wait for a few minutes.');
+}
 
 site_project_footer(array());
 

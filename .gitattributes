@@ -195,6 +195,7 @@ gforge/packaging/cron.d/homedirs -text
 gforge/packaging/cron.d/lists-mailman -text
 gforge/packaging/cron.d/mail -text
 gforge/packaging/cron.d/plugin-globalsearch -text
+gforge/packaging/cron.d/plugin-mediawiki -text
 gforge/packaging/cron.d/shell-postgresql -text
 gforge/packaging/cron.d/web-apache2 -text
 gforge/packaging/dirs/plugin-extratabs -text
@@ -771,10 +772,10 @@ gforge/plugins/globalsearch/www/edit_assoc_sites.php -text
 gforge/plugins/globalsearch/www/index.php -text
 gforge/plugins/ldapextauth/rpm-specific/.keepme -text svneol=unset#application/octet-stream
 gforge/plugins/mediawiki/README -text
-gforge/plugins/mediawiki/bin/db-delete.pl -text
-gforge/plugins/mediawiki/bin/db-upgrade.pl -text
+gforge/plugins/mediawiki/bin/drop-wiki.sh -text
 gforge/plugins/mediawiki/common/MediaWikiPlugin.class.php -text
 gforge/plugins/mediawiki/common/mediawiki-init.php -text
+gforge/plugins/mediawiki/cronjobs/create-wikis.sh -text
 gforge/plugins/mediawiki/etc/httpd.d/03mediawiki -text
 gforge/plugins/mediawiki/mediawiki-skin/GForge.php -text
 gforge/plugins/mediawiki/mediawiki-skin/gforge/IE50Fixes.css -text

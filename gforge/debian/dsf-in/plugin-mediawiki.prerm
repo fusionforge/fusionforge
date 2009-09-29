@@ -21,7 +21,6 @@ case "$1" in
     remove|deconfigure)
 	/usr/share/@PACKAGE@/bin/unregister-plugin mediawiki
 	invoke-rc.d apache reload
-	# /usr/share/@PACKAGE@/plugins/mediawiki/bin/db-delete.pl
         ;;
     upgrade|failed-upgrade)
         ;;

@@ -1,0 +1,6 @@
+#
+# Regular cron jobs for plugin-mediawiki
+#
+
+# Create new wikis four times an hour
+*/15 * * * * root [ -x /usr/share/gforge/plugins/mediawiki/cronjobs/create-wikis.sh ] && /usr/share/gforge/plugins/mediawiki/cronjobs/create-wikis.sh
