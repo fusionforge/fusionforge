@@ -1,20 +1,10 @@
 <?php
 /**
- * GForge nouveau
- *
- * Translated from gwicke's previous TAL template version to remove
- * dependency on PHPTAL.
- *
- * @todo document
- * @package MediaWiki
- * @subpackage Skins
+ * FusionForge theme for Mediawiki
  */
 
 if( !defined( 'MEDIAWIKI' ) )
 	die( -1 );
-
-/** */
-require_once 'includes/SkinTemplate.php';
 
 /**
  * Inherit main code from SkinTemplate, set the CSS and template filter.
@@ -22,13 +12,13 @@ require_once 'includes/SkinTemplate.php';
  * @package MediaWiki
  * @subpackage Skins
  */
-class SkinGForge extends SkinTemplate {
-	/** Using gforge. */
+class SkinFusionForge extends SkinTemplate {
+	/** Using fusionforge. */
 	function initPage( &$out ) {
 		SkinTemplate::initPage( $out );
-		$this->skinname  = 'gforge';
-		$this->stylename = 'gforge';
-		$this->template  = 'GForgeTemplate';
+		$this->skinname  = 'fusionforge';
+		$this->stylename = 'fusionforge';
+		$this->template  = 'FusionForgeTemplate';
 	}
 }
 
@@ -37,9 +27,9 @@ class SkinGForge extends SkinTemplate {
  * @package MediaWiki
  * @subpackage Skins
  */
-class GForgeTemplate extends QuickTemplate {
+class FusionForgeTemplate extends QuickTemplate {
 	/**
-	 * Template filter callback for GForge skin.
+	 * Template filter callback for FusionForge skin.
 	 * Takes an associative array of data set from a SkinTemplate-based
 	 * class, and a wrapper for MediaWiki's localization database, and
 	 * outputs a formatted page.
@@ -69,7 +59,7 @@ class GForgeTemplate extends QuickTemplate {
 	<!--[if lt IE 7]><script type="<?php $this->text('jsmimetype') ?>" src="<?php $this->text('stylepath') ?>/common/IEFixes.js"></script>
 	<meta http-equiv="imagetoolbar" content="no" /><![endif]-->
 	<script type="<?php $this->text('jsmimetype') ?>">var skin = '<?php $this->text('skinname')?>';var stylepath = '<?php $this->text('stylepath')?>';</script>
-	<script type="<?php $this->text('jsmimetype') ?>" src="<?php $this->text('stylepath' ) ?>/common/wikibits.js?1"><!-- wikibits js --></script>
+	<script type="<?php $this->text('jsmimetype') ?>" src="<?php $this->text('stylepath' ) ?>/fusionforge/wikibits.js?1"><!-- wikibits js --></script>
 		<?php	if($this->data['jsvarurl'  ]) { ?>
 	<script type="<?php $this->text('jsmimetype') ?>" src="<?php $this->text('jsvarurl'  ) ?>"><!-- site js --></script>
 		<?php	} ?>
@@ -89,18 +79,11 @@ class GForgeTemplate extends QuickTemplate {
 	<!-- Head Scripts -->
 		<?php $this->html('headscripts') ?>
 
-	<!-- GFORGE Stylesheet BEGIN -->
-	<?php $GLOBALS['HTML']->headerCSS(); ?>
-	<!-- GFORGE Stylesheet END -->
 </head>
 
 <body <?php if($this->data['body_ondblclick']) { ?>ondblclick="<?php $this->text('body_ondblclick') ?>"<?php } ?>
 <?php if($this->data['body_onload'    ]) { ?>onload="<?php     $this->text('body_onload')     ?>"<?php } ?>
  class="<?php $this->text('nsclass') ?> <?php $this->text('dir') ?>">
-
-	<!-- GFORGE BodyHeader BEGIN -->
-	<?php $GLOBALS['HTML']->bodyHeader($params); ?>
-	<!-- GFORGE BodyHeader END -->
 
 	<div id="globalWrapper">
 		<div id="column-content">
@@ -127,8 +110,9 @@ class GForgeTemplate extends QuickTemplate {
 		<h5><?php $this->msg('personaltools') ?></h5>
 		<div class="pBody">
 			<ul>
-<?php 			// XXXXXX CB don't display login as it's done by GForge
+<?php
 			$this->data['personal_urls']['login']=array();
+			$this->data['personal_urls']['anonlogin']=array();
 			$this->data['personal_urls']['logout']=array();
 			foreach($this->data['personal_urls'] as $key => $item) { ?>
 				<li id="pt-<?php echo htmlspecialchars($key) ?>"<?php
@@ -153,12 +137,13 @@ class GForgeTemplate extends QuickTemplate {
 		</ul>
 	</div>
 	<div class="portlet" id="p-logo">
-		<a style="background-image: url(<?php $this->text('logopath') ?>);" <?php
-			?>href="<?php echo htmlspecialchars($this->data['nav_urls']['mainpage']['href'])?>" <?php
+		<a href="<?php echo htmlspecialchars($this->data['nav_urls']['mainpage']['href'])?>" <?php
 			?>title="<?php $this->msg('mainpage') ?>"></a>
 	</div>
 	<script type="<?php $this->text('jsmimetype') ?>"> if (window.isMSIE55) fixalpha(); </script>
-	<?php foreach ($this->data['sidebar'] as $bar => $cont) { ?>
+	<?php foreach ($this->data['sidebar'] as $bar => $cont) {
+				if ($bar != 'navigation') { continue ; }
+        ?>
 	<div class='portlet' id='p-<?php echo htmlspecialchars($bar) ?>'>
 		<h5><?php $out = wfMsg( $bar ); if (wfEmptyMsg($bar, $out)) echo $bar; else echo $out; ?></h5>
 		<div class='pBody'>
@@ -236,7 +221,7 @@ class GForgeTemplate extends QuickTemplate {
 				<li id="t-ispermalink"><?php $this->msg('permalink') ?></li><?php
 		}
 
-		wfRunHooks( 'GForgeTemplateToolboxEnd', array( &$this ) );
+		wfRunHooks( 'FusionForgeTemplateToolboxEnd', array( &$this ) );
 ?>
 			</ul>
 		</div>
@@ -286,9 +271,14 @@ class GForgeTemplate extends QuickTemplate {
 </div>
 <?php $this->html('reporttime') ?>
 
-<?php $GLOBALS['HTML']->footer($params); ?>
 <?php
 	wfRestoreWarnings();
 	} // end of execute() method
 } // end of class
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

@@ -69,7 +69,7 @@ $wgLocalInterwiki   = $wgSitename;
 $wgShowExceptionDetails = true ;
 
 $wgLanguageCode = "en";
-# $wgDefaultSkin = 'gforge';
+$wgDefaultSkin = 'fusionforge';
 $wgStyleDirectory = '/usr/share/mediawiki/skins' ;
 
 require ('/etc/gforge/local.inc') ;
@@ -94,7 +94,7 @@ $GLOBALS['sys_session_expire'] = $sys_session_expire;
 $GLOBALS['REMOTE_ADDR'] = getStringFromServer('REMOTE_ADDR') ;
 $GLOBALS['HTTP_USER_AGENT'] = getStringFromServer('HTTP_USER_AGENT') ;
 
-function GforgeMWAuth( &$user, &$result ) {
+function FusionForgeMWAuth( &$user, &$result ) {
 	global $fusionforgeproject ;
 
 	$cookie = getStringFromCookie ('session_ser') ;
@@ -168,7 +168,7 @@ if (is_file("/etc/mediawiki-extensions/extensions.php")) {
         include( "/etc/mediawiki-extensions/extensions.php" );
 }
 
-$GLOBALS['wgHooks']['UserLoadFromSession'][]='GforgeMWAuth';
+$GLOBALS['wgHooks']['UserLoadFromSession'][]='FusionForgeMWAuth';
 
 $wgGroupPermissions['Members']['createaccount'] = true;
 $wgGroupPermissions['Members']['edit']          = true;
