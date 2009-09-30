@@ -1,4 +1,4 @@
-#! /usr/bin/php5
+#! /usr/bin/php
 <?php
 /**
  * FusionForge document search engine
@@ -22,6 +22,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
  * USA
  */
+
+require dirname(__FILE__).'/../../../www/env.inc.php';
 
 require_once $gfcommon.'docman/engine/parser_text.inc.php';
 

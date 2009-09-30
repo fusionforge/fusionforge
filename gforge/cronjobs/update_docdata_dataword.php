@@ -1,4 +1,4 @@
-#! /usr/bin/php5
+#! /usr/bin/php -f
 <?php
 /**
  * FusionForge document search engine
@@ -24,6 +24,8 @@
  * USA
  */
 
+require dirname(__FILE__).'/../www/env.inc.php';
+
 require_once $gfwww.'include/pre.php';
 require_once $gfwww.'docman/include/doc_utils.php';
 require_once $gfcommon.'docman/Parsedata.class.php';
@@ -31,8 +33,8 @@ require_once $gfcommon.'docman/Document.class.php';
 require_once $gfcommon.'docman/DocumentFactory.class.php';
 require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
 
+$sys_engine_path = $gfcommon.'docman/engine/';
 $p = new Parsedata ("$sys_engine_path");
-// print_debug(print_r($p->get_parser_list (),true));
 
 $timestarttrait = microtime_float();
 // documents list

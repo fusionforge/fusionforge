@@ -54,18 +54,12 @@ class Parsedata {
 			fwrite ($fp, $data1);
 			fclose ($fp);
 			
-			$cmd = "$parser $filename";
-			echo "cmd $cmd<br />";
+			$cmd = "php -f $parser $filename";
 			$rep = shell_exec ($cmd);
-			echo "rep : <br />$rep<br />";
 			unlink ("$filename");
 			
-			// pour tests et debug
-			// echo "parser $parser<br />";
-			// echo "$rep<br /><br />";
-			// exit();
 		}
-		// alwais parse titre and description
+		// always parse titre and description
 		$data2 = utf8_decode(" $title");
 		$data2 .= utf8_decode(" $description");
 		// $data2 = ereg_replace ("\n", " ", $data2);
@@ -76,7 +70,7 @@ class Parsedata {
 		fwrite ($fp, $data2);
 		fclose ($fp);
 		$cmd = $this->p_path.$this->parsers["text/plain"];
-		$cmd = "$cmd $filename";
+		$cmd = "php -f $cmd $filename";
 		$rep1 = shell_exec ($cmd);
 		return ereg_replace ("\n", " ", "$rep $rep1");
 	}
