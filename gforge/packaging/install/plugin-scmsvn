@@ -1,4 +1,3 @@
 deb-specific/install-svn.sh         usr/share/gforge/plugins/scmsvn/bin/
 plugins/scmsvn/common/*             usr/share/gforge/plugins/scmsvn/common/
-plugins/scmsvn/cronjobs/*           usr/share/gforge/plugins/scmsvn/cronjobs/
 plugins/scmsvn/etc/plugins/scmsvn/* etc/gforge/plugins/scmsvn/
