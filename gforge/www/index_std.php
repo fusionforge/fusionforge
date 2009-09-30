@@ -22,14 +22,23 @@ require_once $gfcommon.'include/FusionForge.class.php';
 <li><?php print _('Wiki (using MediaWiki or phpWiki).'); ?></li>
 <li><?php print _('A powerful plugin system to add new features.'); ?></li>
 </ul>
+
+<h3><?php print _("What's new in FusionForge trunk"); ?></h3>
+<ul>
+<li><?php print _('Many improvements to the trackers: configurable display, workflow management, links between artifacts, better searches, and more'); ?></li>
+<li><?php print _('Rewritten SCM subsystem, with new plugins for Bazaar, Darcs and Git'); ?></li>
+<li><?php print _('New version of Mediawiki plugin, providing independent wikis for each project'); ?></li>
+<li><?php print _('Various new plugins: projectlabels, globalsearch, extratabs'); ?></li>
+</ul>
+
 <h3><?php print _("What's new in FusionForge 4.8"); ?></h3>
-<p>
 <ul>
 <li><?php print _('New project classification by tags (tag cloud).'); ?></li>
 <li><?php print _('New reporting item for the File Release System: downloads per package.'); ?></li>
 <li><?php print _('List of all projects added in Project List'); ?></li>
 <li><?php print _('New version of phpWiki plugin, using lastest svn code'); ?></li>
 </ul>
+
 <h3><?php print _("What's new in FusionForge 4.7"); ?></h3>
 <ul>
 <li><?php print _('A new name to avoid confusion with proprietary versions of GForge.'); ?></li>
