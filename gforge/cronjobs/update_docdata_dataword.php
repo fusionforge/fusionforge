@@ -26,15 +26,15 @@
 
 require dirname(__FILE__).'/../www/env.inc.php';
 
-require_once $gfwww.'include/pre.php';
+require_once $gfwww.'include/squal_pre.php';
 require_once $gfwww.'docman/include/doc_utils.php';
 require_once $gfcommon.'docman/Parsedata.class.php';
 require_once $gfcommon.'docman/Document.class.php';
 require_once $gfcommon.'docman/DocumentFactory.class.php';
 require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
 
-$sys_engine_path = $gfcommon.'docman/engine/';
-$p = new Parsedata ("$sys_engine_path");
+$engine_path = $gfcommon.'docman/engine/';
+$p = new Parsedata ($engine_path);
 
 $timestarttrait = microtime_float();
 // documents list
@@ -59,7 +59,6 @@ foreach ($resarr as $item)
 	$lenin = strlen($data1);
 	$res = $p->get_parse_data ($data1, $item["title"], $item["description"], $item["filetype"]);
 	$len = strlen($res);
-	$sql = "UPDATE doc_data SET data_words = '$res' WHERE docid = $item[docid] ";
 	db_query_params ('UPDATE doc_data SET data_words=$1 WHERE docid=$2',
 			 array ($res,
 				$item['docid'])) ;
