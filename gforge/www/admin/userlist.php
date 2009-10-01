@@ -130,11 +130,6 @@ if ($action=='delete') {
 	performAction('S', "SUSPENDED", $user_id);
 }
 
-// Add a user to this group
-if (getStringFromRequest('action') == 'add_to_group') {
-	echo "ACTION NOT SUPPORTED";
-}
-
 //	Show list of users
 print "<p>" ._('User list for group:');
 if (!$group_id) {
@@ -164,25 +159,6 @@ WHERE users.user_id=user_group.user_id AND
 user_group.group_id=$1 ORDER BY users.user_name',
 			array($group_id));
 	show_users_list ($result);
-
-	/*
-        	Show a form so a user can be added to this group
-	*/
-	?>
-	<hr />
-	<p>
-	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
-	<input type="hidden" name="action" value="add_to_group" />
-	<input name="user_id" type="TEXT" value="" />
-	<br />
-	Add User to Group (<?php print group_getname($group_id); ?>):
-	<br />
-	<input type="hidden" name="group_id" value="<?php print $group_id; ?>" />
-	<br />
-	<input type="submit" name="Submit" value="<?php echo _('Submit'); ?>" />
-	</form>
-	</p>
-	<?php
 }
 
 $HTML->footer(array());
