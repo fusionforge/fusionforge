@@ -44,7 +44,7 @@ class ProjectSearchQuery extends SearchQuery {
 	 * @return string sql query to execute
 	 */
 	function getQuery() {
-		global $sys_use_fti;
+		global $sys_use_fti, $LUSER;
 		if ($sys_use_fti) {
 			if(count($this->words)) {
 				$tsquery0 = "headline(group_name, q) as group_name, " .
@@ -77,17 +77,21 @@ class ProjectSearchQuery extends SearchQuery {
 			}
 			$sql = "SELECT DISTINCT ON ($distinctOn) type_id, g.group_id, " .$tsquery0.
 					" FROM groups AS g ".$tsquery.
-					" WHERE g.status in ('A', 'H') AND ($tsmatch $phraseCond) $tsjoin $orderBy";
+					" WHERE g.status in ('A', 'H') AND (g.is_public='1' ";
+			if (isset($LUSER))
+				$sql .= 'OR g.group_id in (SELECT ug.group_id FROM user_group ug WHERE ug.user_id = \''. $LUSER->getID() .'\' AND ug.group_id = g.group_id) ';
+			$sql .= ") AND ($tsmatch $phraseCond) $tsjoin $orderBy";
 		} else {
-			$groupNameCond = $this->getIlikeCondition('group_name', $this->words);
-			$groupDescriptionCond = $this->getIlikeCondition('short_description', $this->words);
-			$groupUnixNameCond = $this->getIlikeCondition('unix_group_name', $this->words);
+			$groupNameCond = $this->getIlikeCondition('g.group_name', $this->words);
+			$groupDescriptionCond = $this->getIlikeCondition('g.short_description', $this->words);
+			$groupUnixNameCond = $this->getIlikeCondition('g.unix_group_name', $this->words);
 			
-			$sql = 'SELECT group_name, unix_group_name, type_id, group_id, short_description '
-				.'FROM groups '
-				.'WHERE status IN (\'A\', \'H\') '
-				.'AND is_public=\'1\' '
-				.'AND (('.$groupNameCond.') OR ('.$groupDescriptionCond.') OR ('.$groupUnixNameCond.'))';
+			$sql = 'SELECT g.group_name AS group_name, g.unix_group_name AS unix_group_name, g.type_id AS type_id, g.group_id AS group_id, g.short_description AS short_description '
+				.'FROM groups g '
+				.'WHERE g.status IN (\'A\', \'H\') AND (g.is_public=\'1\' ';
+			if (isset($LUSER))
+				$sql .='OR g.group_id in (SELECT ug.group_id FROM user_group ug WHERE ug.user_id = \''. $LUSER->getID() .'\' AND ug.group_id = g.group_id) ';
+			$sql .=') AND (('.$groupNameCond.') OR ('.$groupDescriptionCond.') OR ('.$groupUnixNameCond.'))';
 		}
 		return $sql;
 	}
