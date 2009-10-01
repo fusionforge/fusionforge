@@ -580,7 +580,7 @@ class ProjectTask extends Error {
 			db_rollback();
 			return false;
 		}
-		$res = db_query_params ('DELETE FROM rep_time_trackingWHERE project_task_id=$1',
+		$res = db_query_params ('DELETE FROM rep_time_tracking WHERE project_task_id=$1',
 					array ($this->getID())) ;
 		if (!$res) {
 			$this->setError('Error deleting time tracking report: '.db_error());
