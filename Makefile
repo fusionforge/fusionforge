@@ -49,6 +49,8 @@ build-full-tests:
 	-phpcs --tab-width=4 --standard=PEAR --report=checkstyle gforge/common > $(BUILDDIR)/reports/checkstyle.xml
 	cd tests; phpunit --log-xml $(BUILDDIR)/reports/phpunit.xml --log-pmd $(BUILDDIR)/reports/phpunit.pmd.xml --coverage-clover $(BUILDDIR)/reports/coverage/clover.xml --coverage-html $(BUILDDIR)/reports/coverage/ AllFullTests.php
 	cp $(BUILDDIR)/reports/phpunit.xml $(BUILDDIR)/reports/phpunit.xml.org; xalan -in $(BUILDDIR)/reports/phpunit.xml.org -xsl fix_phpunit.xslt -out $(BUILDDIR)/reports/phpunit.xml
+	cd tests; phpunit --log-xml $(BUILDDIR)/reports/phpunit-selenium.xml TarCentos52Tests.php
+	cp $(BUILDDIR)/reports/phpunit-selenium.xml $(BUILDDIR)/reports/phpunit-selenium.xml.org; xalan -in $(BUILDDIR)/reports/phpunit-selenium.xml.org -xsl fix_phpunit.xslt -out $(BUILDDIR)/reports/phpunit-selenium.xml
 
 %:
 	@make -f Makefile.$(DIST) $@
