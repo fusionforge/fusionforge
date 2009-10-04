@@ -78,7 +78,7 @@ if (session_loggedin()) {
 		//check to make sure both fields are there
 		if ($summary && $details) {
 			$sanitizer = new TextSanitizer();
-			$details = addslashes($sanitizer->purify(stripslashes($details)));
+			$details = $sanitizer->purify($details);
 
 			/*
 				Insert the row into the db if it's a generic message
@@ -97,8 +97,7 @@ if (session_loggedin()) {
 					exit_error('Error',$f->getErrorMessage());
 				}
 	   			$new_id=$f->getID();
-				$sanitizer = new TextSanitizer();
-				$details = $sanitizer->SanitizeHtml($details);
+
 				$sql='INSERT INTO news_bytes (group_id,submitted_by,is_approved,post_date,forum_id,summary,details) 
  VALUES ($1, $2, $3, $4, $5, $6, $7)';
 				$result=db_query_params($sql,
