@@ -26,7 +26,7 @@
  */
 
 // This file is a popup window to edit docman
-//	By Daniel A. P�rez 2005
+//	By Daniel A. Pérez 2005
 
 require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
