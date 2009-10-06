@@ -55,7 +55,7 @@ if (!$perm->isReleaseTechnician()) {
 if (getStringFromRequest('submit')) {
 	$func = getStringFromRequest('func');
 	$package_id = getIntFromRequest('package_id');
-	$package_name = getStringFromRequest('package_name');
+	$package_name = trim(getStringFromRequest('package_name'));
 	$status_id = getIntFromRequest('status_id');
 	$is_public = getStringFromRequest('is_public');
 
@@ -154,7 +154,7 @@ if (!$res || $rows < 1) {
 		<input type="hidden" name="func" value="update_package" />
 		<input type="hidden" name="package_id" value="'. db_result($res,$i,'package_id') .'" />
 		<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-			<td nowrap="nowrap" style="text-align:center">
+			<td style="white-space: nowrap;" align="center">
 					<a href="qrs.php?package_id='. 
 						db_result($res,$i,'package_id') .'&amp;group_id='. $group_id .'"><strong>['._('Add Release').']</strong>
 					</a>

@@ -39,7 +39,7 @@ $upload_dir = $sys_ftp_upload_dir . "/" . $g->getUnixName();
 */
 
 if (getStringFromRequest('submit')) {
-	$release_name = getStringFromRequest('release_name');
+	$release_name = trim(getStringFromRequest('release_name'));
 	$userfile = getUploadedFile('userfile');
 	$userfile_name = $userfile['name'];
 	$type_id = getIntFromRequest('type_id');

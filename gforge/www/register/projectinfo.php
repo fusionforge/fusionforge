@@ -57,7 +57,7 @@ if (getStringFromRequest('submit')) {
 	$full_name = trim(getStringFromRequest('full_name'));
 	$purpose = trim(getStringFromRequest('purpose'));
 	$description = trim(getStringFromRequest('description'));
-	$unix_name = strtolower(getStringFromRequest('unix_name'));
+	$unix_name = trim(strtolower(getStringFromRequest('unix_name')));
 	$scm = getStringFromRequest('scm');
 	$is_public = getIntFromRequest('is_public');
 	$feedback = "";
