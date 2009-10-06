@@ -13,7 +13,7 @@ OL,UL,P,TR,TD,FORM {
         font-size:13px;
         color: #202020;
         text-decoration: none;
-        font-weight: none
+        font-weight: normal;
         }
 
 
@@ -34,7 +34,7 @@ STRONG {font-weight: bold}
 
 h1, h2, h3, h4, h5, h6 { 
 	font-family: arialverdana,arial,helvetica,sans-serif; 
-	font-weight:none;
+	font-weight: normal;
 	padding:0;
 }
 
@@ -98,7 +98,7 @@ td.notSelTab { background-color: #909090}
 .develtitle {
 	FONT-SIZE: 13px; 
 	COLOR: #535c5f; 
-	FONT-FAMILY: arial
+	font-family: arial, verdana, helvetica, sans-serif;
 	}
 
 /* priority styles */
@@ -116,8 +116,8 @@ td.notSelTab { background-color: #909090}
 /* definition for content table */
 .tableheading {
 	background-color:#D0D0D0; 
-	text-align=center;
-	font-weight:  bold
+	text-align: center;
+	font-weight: bold;
 	}
 
 .tablecontent {
@@ -134,7 +134,7 @@ td.notSelTab { background-color: #909090}
 .prev, .next, up, down {
 	font-family: arial,helvetica, sans-serif; 
 	font-size: small; 
-	text-decoration: bold
+	font-weight: bold;
 	}
 
 /* top */
@@ -163,7 +163,7 @@ td.notSelTab { background-color: #909090}
    Use this style if you need to display a warning*/
 
 .warning {
-	color: red: 
+	color: red; 
 	text-decoration: none
 	}
 
@@ -227,7 +227,7 @@ td.notSelTab { background-color: #909090}
    selected release or words in the advanced search */
 
 .selected {
-	background-color: pink
+	background-color: #FFCCFF;
 	}
 
 /* style for required fields */
@@ -239,12 +239,12 @@ td.notSelTab { background-color: #909090}
 
 .altRowStyleEven { 
 	background-color: #EAEAEA; 
-	font-weight: none
+	font-weight: normal;
 	}
 
 .altRowStyleOdd { 
 	background-color: #E0E0E0; 
-	font-weight: none
+	font-weight: normal;
 }
 
 /* tabber, currently used for my/index.php and
