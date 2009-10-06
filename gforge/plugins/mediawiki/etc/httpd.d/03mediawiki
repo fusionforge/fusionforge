@@ -1,5 +1,5 @@
 <Directory /var/lib/gforge/plugins/mediawiki>
-        Options +FollowSymLinks
+        Options +FollowSymLinks -Indexes
         AllowOverride All
         order allow,deny
         allow from all
