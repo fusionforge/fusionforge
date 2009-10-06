@@ -284,7 +284,7 @@ print $html_limit."<hr />\n";
 // #################################################################
 // print actual project listings
 // note that the for loop starts at 1, not 0
-for ($i_proj=1;$i_proj<=$querytotalcount;$i_proj++) { 
+for ($i_proj=1;$i_proj<=$querytotalcount;$i_proj++) {
 	$row_grp = db_fetch_array($res_grp);
 
 	// check to see if row is in page range

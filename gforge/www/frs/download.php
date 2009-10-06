@@ -50,7 +50,7 @@ if (db_numrows($res) < 1) {
 
 $group_id = db_result($res,0,'group_id');
 $package_id = db_result($res,0,'package_id');
-$release_id=db_result($res,0,'release_id');
+$release_id = db_result($res,0,'release_id');
 
 $Group =& group_get_object($group_id);
 if (!$Group || !is_object($Group) || $Group->isError()) {

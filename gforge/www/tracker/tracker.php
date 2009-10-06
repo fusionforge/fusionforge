@@ -57,7 +57,7 @@ switch (getStringFromRequest('func')) {
 		/*
 			Create a new Artifact
 
-			*/
+		*/
 		$ah=new ArtifactHtml($ath);
 		$feedback = '';
 		if (!$ah || !is_object($ah)) {
@@ -244,7 +244,7 @@ switch (getStringFromRequest('func')) {
 			Technicians can modify limited fields - to be certain
 			no one is hacking around, we override any fields they don't have
 			permission to change.
-			*/
+		*/
 		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 			exit_form_double_submit();
 		}
@@ -260,8 +260,8 @@ switch (getStringFromRequest('func')) {
 
 			/*
 
-			The following logic causes fields to be overridden
-			in the event that someone tampered with the HTML form
+				The following logic causes fields to be overridden
+				in the event that someone tampered with the HTML form
 
 			*/
 			if ($ath->userIsAdmin() || $ath->userIsTechnician()) {
