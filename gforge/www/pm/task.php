@@ -107,6 +107,12 @@ switch (getStringFromRequest('func')) {
 				exit_error('Error',$pt->getErrorMessage());
 			}
 
+			$saved_hours = $hours;
+			$hours = (float) $hours;
+			if ( $saved_hours !== (string)$hours ) {
+				exit_error('Error', "Illegal format for hours: must be an integer or a float number.");
+			}
+
 			if (!$dependent_on)
 			{
 				$dependent_on=array();
@@ -148,6 +154,12 @@ switch (getStringFromRequest('func')) {
 				exit_error('Error','Could Not Get ProjectTask');
 			} elseif ($pt->isError()) {
 				exit_error('Error',$pt->getErrorMessage());
+			}
+
+			$saved_hours = $hours;
+			$hours = (float) $hours;
+			if ( $saved_hours !== (string)$hours ) {
+				exit_error('Error', "Illegal format for hours: must be an integer or a float number.");
 			}
 
 			if (!$dependent_on)	{
@@ -240,8 +252,8 @@ switch (getStringFromRequest('func')) {
 					} else if ($assigned_to == '100.1') {
 					    $mass_assigned_to = array('100');
 					} else {
-					    $mass_assigned_to = array($assigned_to);
-					} 			
+						$mass_assigned_to = array($assigned_to);
+					}
 
 					$mass_dependent_on=$pt->getDependentOn();
 					$mass_new_group_project_id=(($new_group_project_id != 100) ? $new_group_project_id : $pt->ProjectGroup->getID() );
