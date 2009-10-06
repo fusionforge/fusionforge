@@ -8,34 +8,37 @@ msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-09-03 19:14+0200\n"
-"PO-Revision-Date: 2009-02-01 14:35+0100\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2009-10-06 16:32+0200\n"
+"Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: th\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Pootle 1.2.1\n"
 
 #: common/docman/Document.class.php:112 common/docman/Document.class.php:447
 #: common/pm/ProjectGroup.class.php:132 common/pm/ProjectGroup.class.php:347
 msgid "Title Must Be At Least 5 Characters"
-msgstr ""
+msgstr "ชื่อจะต้องมีอย่างน้อย 5 ตัวอักษร"
 
 #: common/docman/Document.class.php:116 common/docman/Document.class.php:451
 #: common/pm/ProjectGroup.class.php:136 common/pm/ProjectGroup.class.php:351
 msgid "Document Description Must Be At Least 10 Characters"
-msgstr ""
+msgstr "คำอธิบายเอกสารจะต้องมีอย่างน้อย 10 ตัวอักษร"
 
 #: common/docman/Document.class.php:196
 msgid "Document:: Invalid docid"
-msgstr ""
+msgstr "เอกสาร:: หมายเลขเอกสาร ไม่ถูกต้อง"
 
 #: common/docman/DocumentFactory.class.php:180
 msgid "No Documents Found"
-msgstr ""
+msgstr "ไม่พบเอกสาร"
 
 #: common/docman/DocumentGroup.class.php:97
 msgid "DocumentGroup: name is Required"
-msgstr ""
+msgstr "กลุ่มเอกสาร: จำเป็นต้องมีชื่อ"
 
 #: common/docman/DocumentGroup.class.php:107
 #: common/docman/DocumentGroup.class.php:219
@@ -44,7 +47,7 @@ msgstr ""
 
 #: common/docman/DocumentGroup.class.php:152
 msgid "DocumentGroup: Invalid DocumentGroup ID"
-msgstr ""
+msgstr "กลุ่มเอกสาร: รหัสของกลุ่มเอกสารไม่ตรง"
 
 #: common/forum/Forum.class.php:69 common/mail/MailingList.class.php:63
 #: common/mail/MailingListFactory.class.php:56
@@ -84,11 +87,11 @@ msgstr ""
 #: www/help/index.php:29
 #, php-format
 msgid "Welcome to %1$s"
-msgstr ""
+msgstr "ยินดีต้อนรับสู่ %1$s"
 
 #: common/forum/Forum.class.php:228
 msgid "Invalid forum group identifier"
-msgstr ""
+msgstr "หมายเลขกลุ่มกระทู้ไม่ถูกต้อง"
 
 #: common/forum/Forum.class.php:458 common/forum/Forum.class.php:495
 #: common/frs/FRSPackage.class.php:270 common/frs/FRSPackage.class.php:302
@@ -98,11 +101,11 @@ msgstr ""
 
 #: common/forum/Forum.class.php:479
 msgid "Unable To Add Monitor"
-msgstr ""
+msgstr "ไม่สามารถเพิ่มผู้ดูระบบได้"
 
 #: common/forum/Forum.class.php:528
 msgid "You Can Only Save Your Place If You Are Logged In"
-msgstr ""
+msgstr "จะบันทึกได้ก็ต่อเมื่อได้กรอกข้อมูลเข้าใช้งานแล้วเท่านั้น"
 
 #: common/forum/Forum.class.php:546
 msgid "Forum::savePlace()"
@@ -129,7 +132,7 @@ msgstr ""
 #: common/forum/ForumFactory.class.php:132
 #: common/forum/ForumFactory.class.php:185
 msgid "Forum not found"
-msgstr ""
+msgstr "หากระทู้ไม่เจอ"
 
 #: common/forum/ForumMessage.class.php:60
 msgid "ForumMessage:: No Valid Forum Object"
