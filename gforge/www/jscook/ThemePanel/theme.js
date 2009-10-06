@@ -1,6 +1,6 @@
 
 // directory of where all the images are
-var cmThemePanelBase = '/~heng/JSCookMenu/ThemePanel/';
+var cmThemePanelBase = '/jscook/ThemePanel/';
 
 // the follow block allows user to re-define theme base directory
 // before it is loaded.

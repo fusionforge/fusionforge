@@ -3,7 +3,7 @@
 .ThemeXPTreeLevel0,.ThemeXPTreeLevel1
 {
 	cursor: default;
-	background-color: white;
+/*	background-color: white;  Disabled to view the background image */
 
 	white-space: nowrap;
 
