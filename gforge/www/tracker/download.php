@@ -63,8 +63,8 @@ if (!$ah || !is_object($ah)) {
 	} else if ($afh->isError()) {
 		exit_error('ERROR',$afh->getErrorMessage());
 	} else {
-		Header ('Content-disposition: attachment; filename="'.$afh->getName().'"');
-		Header ('Content-type: '.$afh->getType());
+		Header ('Content-disposition: filename="'.str_replace('"', '', $afh->getName()).'"');
+		Header ("Content-type: ".$afh->getType());
 		echo $afh->getData();
 	}
 }
