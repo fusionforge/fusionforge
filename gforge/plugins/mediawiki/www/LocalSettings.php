@@ -14,10 +14,6 @@ while (count ($exppath) >= 4) {
 define('MW_INSTALL_PATH','/usr/share/gforge/www/plugins/mediawiki');
 $wikidata = "/var/lib/gforge/plugins/mediawiki/wikidata/$fusionforgeproject" ;
 
-if (file_exists ("$wikidata/LocalSettings.php")) {
-        require ("$wikidata/LocalSettings.php") ;
-}
-
 if( defined( 'MW_INSTALL_PATH' ) ) {
         $IP = MW_INSTALL_PATH;
 } else {
@@ -184,6 +180,10 @@ $wgGroupPermissions['*']['createaccount'] = false;
 $wgGroupPermissions['*']['edit']          = false;
 $wgGroupPermissions['*']['createpage']    = false;
 $wgGroupPermissions['*']['createtalk']    = false;
+
+if (file_exists ("$wikidata/LocalSettings.php")) {
+        require ("$wikidata/LocalSettings.php") ;
+}
 
 $wgFavicon = '/images/icon.png' ;
 $wgBreakFrames = false ;
