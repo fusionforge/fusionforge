@@ -38,8 +38,8 @@ if ($report->isError()) {
 	exit_error('Error',$report->getErrorMessage());
 }
 
-$week = getStringFromRequest('week');
-$project_task_id = getStringFromRequest('project_task_id');
+$week = getIntFromRequest('week');
+$project_task_id = getIntFromRequest('project_task_id');
 
 if (getStringFromRequest('submit')) {
 	$report_date = getStringFromRequest('report_date');
@@ -64,7 +64,7 @@ if (getStringFromRequest('submit')) {
 				$feedback=_('Successfully Deleted');
 			}
 		} else {
-			echo "$project_task_id && $report_date && $old_time_code";
+			echo "INTERNAL ERROR: delete: $project_task_id && $report_date && $old_time_code";
 		}
 
 	} elseif (getStringFromRequest('add')) {
