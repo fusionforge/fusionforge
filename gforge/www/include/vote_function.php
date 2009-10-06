@@ -212,7 +212,7 @@ if (db_numrows($result) > 0) {
 
 			echo stripslashes(db_result($result, 0, 'question')).'<br />';
 			echo '
-				<textarea name="_'.$quest_array[$i].'" rows="5" cols="60" wrap="soft"></textarea>';
+				<textarea name="_'.$quest_array[$i].'" rows="5" cols="60"></textarea>';
 
 		} else if ($question_type == '3') {
 			/*
@@ -286,7 +286,7 @@ if (db_numrows($result) > 0) {
  */
 function vote_show_a_question ($question,$element_name) {
 	echo '
-	<tr><td colspan="2" nowrap="nowrap">
+	<tr><td colspan="2" style="white-space: nowrap;">
 	<input type="radio" name="Q_'. $element_name .'" value="-3">
 	&nbsp; <input type="radio" name="Q_'. $element_name .'" value="-2" />
 	&nbsp; <input type="radio" name="Q_'. $element_name .'" value="-1" />

@@ -82,12 +82,12 @@ if ($group_id) {
 		forum_header(array('title'=>_('Add forum')));
 
 		echo '
-			<br>
+			<br />
 			<form method="post" action="'.getStringFromServer('PHP_SELF').'">
 			<input type="hidden" name="post_changes" value="y" />
 			<input type="hidden" name="add_forum" value="y" />
 			<input type="hidden" name="group_id" value="'.$group_id.'" />
-			<input type="hidden" name="form_key" value="' . form_generate_key() . '">
+			<input type="hidden" name="form_key" value="' . form_generate_key() . '" />
 			<strong>'._('Forum Name').':</strong><br />
 			<input type="text" name="forum_name" value="" size="20" maxlength="30" /><br />
 			<strong>'._('Description').':</strong><br />

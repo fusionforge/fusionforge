@@ -54,6 +54,8 @@ function goodbye($msg) {
 	die ('<center><form method="post"><input type="button" value="Close Window" onclick="window.close()"></form></center>');*/
 }
 
+
+
 $attachid = getIntFromRequest("attachid");
 $delete = getStringFromRequest("delete");
 $edit = getStringFromRequest("edit");
@@ -151,7 +153,7 @@ if ($edit=="yes") {
 				}
 			}
 			foreach ($am->Getmessages() as $item) {
-				$feedback .= "<br>" . $item;
+				$feedback .= "<br />" . $item;
 			}
 			echo '<p><p><center><form method="post"><input type="button" value="'._("Close Window").'" onclick="window.close()"></form></center>';
 			forum_footer(array());
@@ -211,12 +213,14 @@ header('ETag: "' . db_result($res,0,'attachmentid') . '"');
 header('Content-disposition: attachment; filename="' . db_result($res,0,'filename') . '"');
 header('Content-Length: ' . db_result($res,0,'filesize') );
 
+
 $mimetype = db_result($res,0,'mimetype');
 if ($mimetype) {
 	header('Content-type: '.$mimetype);
 } else {
 	header('Content-type: application/octet-stream');
 }
+
 
 $filedata = base64_decode(db_result($res,0,'filedata'));
 for ($i = 0; $i < strlen($filedata); $i = $i+100) {

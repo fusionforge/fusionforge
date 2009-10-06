@@ -59,7 +59,7 @@ echo report_header(_('Projects Added'));
 </tr></table>
 </form>
 <p>
-<img src="groupadded_graph.php?<?php echo "SPAN=$SPAN&start=$start&end=$end"; ?>" width="640" height="480">
+<img src="groupadded_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end"; ?>" width="640" height="480">
 <p>
 <?php
 

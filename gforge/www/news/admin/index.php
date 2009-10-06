@@ -143,7 +143,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 		plugin_hook("text_editor",$params);
 		if (!$GLOBALS['editor_was_set_up']) {
 			//if we don't have any plugin for text editor, display a simple textarea edit box
-			echo '<textarea name="details" rows="5" cols="50" wrap="soft">'.db_result($result,0,'details').'</textarea><br />';
+			echo '<textarea name="details" rows="5" cols="50">'.db_result($result,0,'details').'</textarea><br />';
 		}
 		unset($GLOBALS['editor_was_set_up']);
 		
@@ -283,7 +283,7 @@ AND news_bytes.group_id=groups.group_id ", array($id));
 		plugin_hook("text_editor",$params);
 		if (!$GLOBALS['editor_was_set_up']) {
 			//if we don't have any plugin for text editor, display a simple textarea edit box
-			echo '<textarea name="details" rows="5" cols="50" wrap="soft">'.db_result($result,0,'details').'</textarea><br />';
+			echo '<textarea name="details" rows="5" cols="50">'.db_result($result,0,'details').'</textarea><br />';
 		}
 		unset($GLOBALS['editor_was_set_up']);		
 		

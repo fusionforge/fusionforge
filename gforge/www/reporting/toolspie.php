@@ -63,8 +63,8 @@ if (!$datatype) {
 </tr></table>
 </form>
 <p>
-<img src="toolspie_graph.php?<?php echo "datatype=$datatype&start=$start&end=$end"; ?>" width="640" height="480">
-<p>
+<img src="toolspie_graph.php?<?php echo "datatype=$datatype&amp;start=$start&amp;end=$end"; ?>" width="640" height="480" alt="" />
+</p>
 <?php
 
 echo report_footer();

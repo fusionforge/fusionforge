@@ -113,7 +113,7 @@ function show_questions() {
 <strong><?php echo _('Name of Survey'); ?>:</strong>
 <br />
 <input type="hidden" name="survey_id" value="<?php echo $survey_id; ?>" />
-<input type="text" name="survey_title" value="<?php echo $survey_title; ?>" length="60" maxlength="150" />
+<input type="text" name="survey_title" value="<?php echo $survey_title; ?>" size="60" maxlength="150" />
 <p>
 <strong><?php echo _('Questions'); ?>:</strong>
 <br />
@@ -122,7 +122,7 @@ function show_questions() {
 <p>
 <strong><?php echo _('Is Active'); ?></strong>
 <br /><input type="radio" name="is_active" value="1"<?php if ($is_active=='1') { echo ' checked="checked"'; } ?> /> <?php echo _('Yes'); ?>
-<br /><input type="radio" name="is_active" value="0"<?php if ($is_active=='0') { echo ' hecked="checked"'; } ?> /> <?php echo _('No'); ?></p>
+<br /><input type="radio" name="is_active" value="0"<?php if ($is_active=='0') { echo ' checked="checked"'; } ?> /> <?php echo _('No'); ?></p>
 <p>
 <input type="submit" name="submit" value="<?php echo _('Submit Changes'); ?>"></p>
 </form></p>

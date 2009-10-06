@@ -66,7 +66,7 @@ echo report_header(_('Project Activity'));
 </form>
 <p>
 <?php if ($g_id) { ?>
-	<img src="projectact_graph.php?<?php echo "SPAN=$SPAN&start=$start&end=$end&g_id=$g_id&area=$area"; ?>" width="640" height="480">
+	<img src="projectact_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end&g_id=$g_id&amp;area=$area"; ?>" width="640" height="480">
 	<p>
 	<?php
 

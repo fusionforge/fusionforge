@@ -232,7 +232,7 @@ foreach ($filelist as $filename) {
 		if ($res) {
 			if (db_numrows($res)>0) {
 				// tell the form to delete the users, so that we don't re-do the query
-				$link .= "&delusers=1";
+				$link .= "&amp;delusers=1";
 				$users = " ";
 				for($i=0;$i<db_numrows($res);$i++) {
 					$users .= db_result($res,$i,0) . " | ";
@@ -248,7 +248,7 @@ foreach ($filelist as $filename) {
 		if ($res) {
 			if (db_numrows($res)>0) {
 				// tell the form to delete the groups, so that we don't re-do the query
-				$link .= "&delgroups=1";
+				$link .= "&amp;delgroups=1";
 				$groups = " ";
 				for($i=0;$i<db_numrows($res);$i++) {
 					$groups .= db_result($res,$i,0) . " | ";

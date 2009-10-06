@@ -54,7 +54,7 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 		<input type="text" name="title" value="" size="40" maxlength="60" /></p>
 		<p>
 		<strong>'._('Long Description').':</strong>'.utils_requiredField().'<br />
-		<textarea name="description" rows="10" cols="60" wrap="soft"></textarea></p>
+		<textarea name="description" rows="10" cols="60"></textarea></p>
 		<p>
 		<input type="submit" name="add_job" value="'._('Continue >>').'" />
 		</form></p>';

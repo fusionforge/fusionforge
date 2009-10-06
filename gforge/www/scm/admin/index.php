@@ -109,8 +109,8 @@ if (getStringFromRequest('submit')) {
 
 	plugin_hook ("scm_admin_page", $hook_params) ;
 ?>
-<input type="hidden" name="group_id" value="<?php echo $group_id; ?>">
-<input type="submit" name="submit" value="<?php echo _('Update'); ?>">
+<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
+<input type="submit" name="submit" value="<?php echo _('Update'); ?>" />
 </form>
 <?php
 

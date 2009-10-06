@@ -77,7 +77,7 @@ pm_header(array('title'=>_('Modify Task'),'pagename'=>'pm_modtask','group_projec
 		<?php echo nl2br( $pt->getDetails() ); ?>
 		<p />
 		<strong><?php echo _('Add A Comment') ?>:</strong><?php echo notepad_button('document.forms[1].details') ?><br />
-		<textarea name="details" rows="5" cols="40" wrap="soft"></textarea>
+		<textarea name="details" rows="5" cols="40"></textarea>
 		</td>
 	</tr>
 

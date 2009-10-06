@@ -94,7 +94,7 @@ $a2[]='user';
 	    echo $HTML->listTableBottom ();
 
 	} elseif ($g_id) { ?>
-	<img src="projecttime_graph.php?<?php echo "start=$start&end=$end&g_id=$g_id&type=$type"; ?>" width="640" height="480">
+	<img src="projecttime_graph.php?<?php echo "start=$start&amp;end=$end&amp;g_id=$g_id&amp;type=$type"; ?>" width="640" height="480">
 	<p>
 	<?php
 

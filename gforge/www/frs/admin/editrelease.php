@@ -246,7 +246,7 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 
 <h3><?php echo _('Step 1:&nbsp;&nbsp; Edit Release') ?></h3>
 
-<form enctype="multipart/form-data" method="post" action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&release_id=$release_id&package_id=$package_id"; ?>">
+<form enctype="multipart/form-data" method="post" action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&amp;release_id=$release_id&amp;package_id=$package_id"; ?>">
 <input type="hidden" name="step1" value="1" />
 <table border="0" cellpadding="1" cellspacing="1">
 <tr>
@@ -362,11 +362,11 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 
 		for($x=0; $x<$rows; $x++) {
 ?>
-			<form action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&release_id=$release_id&package_id=$package_id"; ?>" method="post">
+			<form action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&amp;release_id=$release_id&amp;package_id=$package_id"; ?>" method="post">
 				<input type="hidden" name="file_id" value="<?php echo db_result($res,$x,'file_id'); ?>" />
 				<input type="hidden" name="step3" value="1" />
 				<tr <?php echo $HTML->boxGetAltRowStyle($x); ?>>
-					<td nowrap="nowrap"><?php echo db_result($res,$x,'filename'); ?></td>
+					<td style="white-space: nowrap;"><?php echo db_result($res,$x,'filename'); ?></td>
 					<td><?php echo frs_show_processor_popup ('processor_id', db_result($res,$x,'processor_id')); ?></td>
 					<td><?php echo frs_show_filetype_popup ('type_id', db_result($res,$x,'type_id')); ?></td>
 				</tr>

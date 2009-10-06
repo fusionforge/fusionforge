@@ -52,7 +52,7 @@ if ($end && !is_numeric($end)) { $end = false; }
 <h3><?php echo _('Project Activity'); ?></h3>
 <p>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
-<input type="hidden" name="group_id" value="<?php echo $group_id; ?>">
+<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 <table><tr>
 <td><strong><?php echo _('Areas'); ?>:</strong><br /><?php echo report_area_box('area',$area,$group); ?></td>
 <td><strong><?php echo _('Type'); ?>:</strong><br /><?php echo report_span_box('SPAN',$SPAN); ?></td>

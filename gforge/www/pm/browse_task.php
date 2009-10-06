@@ -148,8 +148,8 @@ if ($rows < 1) {
 
 	if ($IS_ADMIN) {
 		echo '
-		<form name="taskList" action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&group_project_id='.$pg->getID().'" METHOD="POST">
-		<input type="hidden" name="func" value="massupdate">';
+		<form name="taskList" action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;group_project_id='.$pg->getID().'" method="post">
+		<input type="hidden" name="func" value="massupdate" />';
 	}
 
 //this array can be customized to display whichever columns you want
@@ -189,8 +189,8 @@ if ($rows < 1) {
 		echo '
 			<tr class="priority'.$pt_arr[$i]->getPriority().'">'.
 			'<td>'.
-			($IS_ADMIN?'<input type="CHECKBOX" name="project_task_id_list[]" value="'.
-			$pt_arr[$i]->getID() .'"> ':'').
+			($IS_ADMIN?'<input type="checkbox" name="project_task_id_list[]" value="'.
+			$pt_arr[$i]->getID() .'" /> ':'').
 			$pt_arr[$i]->getID() .'</td>';
 		if ($display_col['summary'])
 			echo '<td><a href="'.$url.'">'.$pt_arr[$i]->getSummary() .'</a></td>';
@@ -262,8 +262,8 @@ if ($rows < 1) {
 						echo '
 						<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($j) .'>
 							<td>'. nl2br(db_result($result, $j, 'body')).'</td>
-							<td valign="TOP">'.date(_('Y-m-d H:i'),db_result($result, $j, 'postdate')).'</td>
-							<td valign="TOP">'.db_result($result, $j, 'user_name').'</td></tr>';
+							<td valign="top">'.date(_('Y-m-d H:i'),db_result($result, $j, 'postdate')).'</td>
+							<td valign="top">'.db_result($result, $j, 'user_name').'</td></tr>';
 					}
 		
 					echo $GLOBALS['HTML']->listTableBottom();
@@ -316,7 +316,7 @@ if ($rows < 1) {
 		$tech_box=html_build_select_box_from_arrays ($tech_id_arr,$tech_name_arr,'assigned_to',
 		'100',true,_('No Change'));
 
-		echo '<script language="JavaScript">
+		echo '<script language="JavaScript" type="text/javascript">
 	<!--
 	function checkAll(val) {
 		al=document.taskList;

@@ -106,7 +106,7 @@ if ($forum_id) {
 			$am->SetForumMsg($fm);
 			$am->attach($attach,$group_id,0,$fm->getID());
 			foreach ($am->Getmessages() as $item) {
-				$feedback .= "<br>" . $item;
+				$feedback .= "<br />" . $item;
 			}
 			$style='';
 			$thread_id='';

@@ -59,8 +59,8 @@ echo report_header(_('Cumulative Users'));
 </tr></table>
 </form>
 <p>
-<img src="usercum_graph.php?<?php echo "SPAN=$SPAN&start=$start&end=$end"; ?>" width="640" height="480">
-<p>
+<img src="usercum_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end"; ?>" width="640" height="480" alt="" />
+</p>
 <?php
 
 echo report_footer();

@@ -76,7 +76,7 @@ if ($group_id) {
 				case 2 : $modlvl = _('All Except Admins');break;
 			}
 			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '><td><a href="forum.php?forum_id='. $farr[$j]->getID() .
-				'&group_id=' . $group_id . '">'.
+				'&amp;group_id=' . $group_id . '">'.
 				html_image("ic/forum20w.png","20","20",array("border"=>"0")) .
 				'&nbsp;' .
 				$farr[$j]->getName() .'</a></td>

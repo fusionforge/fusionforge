@@ -76,7 +76,8 @@ echo report_header(_('User Summary Report'));
 		</tr>
 	</table>
 	</form>
-	<p>
+	<p></p>
+
 	<?php
 	$res = db_query_params ('SELECT users.realname,users.user_id,users.user_name, ps.status_name, pgl.group_id, pt.group_project_id, pt.summary, pt.hours, pt.end_date, pt.project_task_id, pt.hours, sum(rtt.hours) AS remaining_hrs,
 (select sum(hours) from rep_time_tracking

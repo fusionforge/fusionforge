@@ -75,7 +75,7 @@ echo '
 '._('Check the box next to the name of the user(s) you want to add. Your choices will be preserved if you click any of the letters below. When done, click "Finish" to choose the roles for the users you are adding.').'
 <p>
 <form action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'" method="post">
-<input type="hidden" name="accumulated_ids" value="'. implode(',',$accumulated_ids) .'">';
+<input type="hidden" name="accumulated_ids" value="'. implode(',',$accumulated_ids) .'" />';
 
 $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
 echo _('<p>Choose the <strong>First Letter</strong> of the name of the person you wish to add.</p>');
@@ -83,7 +83,7 @@ for ($i=0; $i<count($abc_array); $i++) {
     if ($sw == $abc_array[$i]) {
         echo '<strong>'.$abc_array[$i].'</strong>&nbsp;';
     } else {
-        echo '<input type="submit" name="sw" value="'.$abc_array[$i].'">&nbsp;';
+        echo '<input type="submit" name="sw" value="'.$abc_array[$i].'" />&nbsp;';
     }
 }
 
@@ -109,7 +109,7 @@ if (!$res || db_numrows($res) < 1) {
 		if (in_array($uid, $accumulated_ids)) {
 			echo ' checked="checked"';
 		}
-		echo '></td></tr>';
+		echo ' /></td></tr>';
 
 	}
 

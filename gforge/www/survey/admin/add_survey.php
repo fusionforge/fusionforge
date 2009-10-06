@@ -75,7 +75,7 @@ function show_questions() {
 
 <strong><?php echo _('Name Of Survey:') ?></strong><?php echo utils_requiredField(); ?>
 <br />
-<input type="text" name="survey_title" value="" length="60" maxlength="150" /><p>
+<input type="text" name="survey_title" value="" size="60" maxlength="150" /><p>
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 <input type="hidden" name="post_changes" value="y" />
 <?php echo _('List question numbers, in desired order, separated by commas. <strong>Refer to your list of questions</strong> so you can view the question id\'s. Do <strong>not</strong> include spaces or end your list with a comma. <br />Ex: 1,2,3,4,5,6,7'); ?>

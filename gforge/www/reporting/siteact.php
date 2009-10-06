@@ -64,7 +64,7 @@ echo report_header(_('Site-Wide Activity'));
 </form>
 <p>
 <?php if ($area) { ?>
-	<img src="siteact_graph.php?<?php echo "SPAN=$SPAN&start=$start&end=$end&area=$area"; ?>" width="640" height="480">
+	<img src="siteact_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end&amp;area=$area"; ?>" width="640" height="480">
 	<p>
 	<?php
 

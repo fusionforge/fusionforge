@@ -149,7 +149,7 @@ for ($i=0; $i<$count; $i++) {
 		*/
 
 		echo db_result($result, 0, "question")."<br />\n";
-		echo "\n<textarea name=\"_".$quest_array[$i]."\" rows=\"5\" cols=\"60\" wrap=\"soft\">";
+		echo "\n<textarea name=\"_".$quest_array[$i]."\" rows=\"5\" cols=\"60\">";
 
 		/*
 			Show the person's response if there was one

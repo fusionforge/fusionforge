@@ -90,7 +90,7 @@ if (session_loggedin()) {
 		</td></tr>
   
 		<tr><td colspan="2"><strong><?php echo _('Paste the Code Here:'); ?></strong><br />
-			<textarea name="code" rows="30" cols="85" wrap="soft"></textarea>
+			<textarea name="code" rows="30" cols="85"></textarea>
 		</td></tr>
  
 		<tr><td colspan="2" style="text-align:center">

@@ -34,21 +34,29 @@ scm_header(array('title'=>_('SCM Repository'),'group'=>$group_id));
 ?>
 
 <h2>Reporting</h2>
+
+<h3>Commits Over Time</h3>
 <p>
-<h3>Commits Over Time</h3><br />
-<img src="commitstime_graph.php?group_id=<?php echo $group_id; ?>" />
+<img src="commitstime_graph.php?group_id=<?php echo $group_id; ?>" 
+     alt="Commits Over Time" />
 </p>
+
+<h3>Commits Last 30 Days</h3>
 <p>
-<h3>Commits Last 30 Days</h3><br />
-<img src="commits_graph.php?group_id=<?php echo $group_id; ?>&amp;days=30" />
+<img src="commits_graph.php?group_id=<?php echo $group_id; ?>&amp;days=30" 
+     alt="Commits Last 30 Days" />
 </p>
+
+<h3>Commits Last 90 Days</h3>
 <p>
-<h3>Commits Last 90 Days</h3><br />
-<img src="commits_graph.php?group_id=<?php echo $group_id; ?>&amp;days=90" />
+<img src="commits_graph.php?group_id=<?php echo $group_id; ?>&amp;days=90" 
+     alt="Commits Last 90 Days" />
 </p>
+
+<h3>Commits Last 365 Days</h3>
 <p>
-<h3>Commits Last 365 Days</h3><br />
-<img src="commits_graph.php?group_id=<?php echo $group_id; ?>&amp;days=365" />
+<img src="commits_graph.php?group_id=<?php echo $group_id; ?>&amp;days=365" 
+     alt="Commits Last 365 Days" />
 </p>
 
 <?php

@@ -51,14 +51,14 @@ echo report_header(_('Site-Wide Time Tracking'));
 <h3><?php echo _('Site-Wide Time Tracking'); ?></h3>
 <p>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
-<input type="hidden" name="typ" value="<?php echo $typ; ?>">
+<input type="hidden" name="typ" value="<?php echo $typ; ?>" />
 <table><tr>
 <td><strong><?php echo _('Start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
 <td><strong><?php echo _('End'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
 <td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>"></td>
 </tr></table>
 </form>
-<p>
+<p></p>
 <?php 
 if ($typ=='r') {
 
@@ -95,7 +95,7 @@ if ($typ=='r') {
 	echo $HTML->listTableBottom ();
 
 } else { ?>
-	<img src="sitetimebar_graph.php?<?php echo "start=$start&end=$end"; ?>" width="640" height="480">
+	<img src="sitetimebar_graph.php?<?php echo "start=$start&amp;end=$end"; ?>" width="640" height="480" alt="" />
 	<?php
 }
 

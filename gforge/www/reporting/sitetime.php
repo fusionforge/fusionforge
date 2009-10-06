@@ -91,7 +91,7 @@ if ($typ =='r') {
 
 } else {
 ?>
-<img src="sitetime_graph.php?<?php echo "start=$start&end=$end&type=$type"; ?>" width="640" height="480">
+<img src="sitetime_graph.php?<?php echo "start=$start&amp;end=$end&amp;type=$type"; ?>" width="640" height="480">
 <?php
 }
 echo report_footer();

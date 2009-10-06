@@ -91,7 +91,7 @@ echo $HTML->listTableBottom();
 <input type="hidden" name="submit" value="1" />
 <input type="hidden" name="time_code" value="<?php echo $time_code; ?>" />
 <strong><?php echo _('Category Name'); ?>:</strong><br />
-<input type="text" name="category_name" value="<?php echo $category_name; ?>" >
+<input type="text" name="category_name" value="<?php echo $category_name; ?>" />
 <p>
 <?php
 
@@ -102,6 +102,7 @@ if ($time_code) {
 }
 
 ?>
+</p>
 </form>
 
 <?php
