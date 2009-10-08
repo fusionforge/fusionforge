@@ -94,7 +94,7 @@ frs_header(array('title'=>_('File Release Reporting'),
 
 ?>
 
-<form action="<?php echo $PHP_SELF; ?>" method="get">
+<form action="<?php echo util_make_url('/frs/reporting/downloads.php') ?>" method="get">
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 <table><tr>
 <td><strong><?php echo _('Package'); ?>:</strong><br />
