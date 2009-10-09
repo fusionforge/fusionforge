@@ -448,7 +448,7 @@ if ($editdoc && $docid) {
 	docman_header(_('Document Manager Administration'),_('Edit Groups'),'');
 ?>
 		<p>
-		<form action="<?php echo $PHP_SELF.'?deletedoc=1&amp;docid='.$d->getID().'&amp;group_id='.$d->Group->getID() ?>" method="post">
+		<form action="<?php echo util_make_url('/docman/admin/index.php').'?deletedoc=1&amp;docid='.$d->getID().'&amp;group_id='.$d->Group->getID() ?>" method="post">
 		<input type="hidden" name="submit" value="1" /><br />
 		<?php echo _('You are about to permanently delete this document.'); ?>
 		<p>

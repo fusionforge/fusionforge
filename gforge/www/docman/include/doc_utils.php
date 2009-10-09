@@ -149,12 +149,13 @@ function docman_footer($params) {
 function docman_display_documents(&$nested_groups, &$document_factory, $is_editor, $stateid=0, $from_admin=false, $parent_group=0) {
 	global $selected_doc_group_id;
 
+	$selected_stateid = getIntFromRequest('selected_stateid');
 	$selected_doc_group_id=getIntFromRequest('selected_doc_group_id');
 	
 	
 
 	
-	if (!is_array($nested_groups["$parent_group"])) {
+	if (!array_key_exists("$parent_group",$nested_groups) || !is_array($nested_groups["$parent_group"])) {
 		return;
 	}
 	
@@ -172,7 +173,7 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 			} else {
 				$icon = 'cfolder15.png';
 			}
-			echo "<li>".html_image('ic/'.$icon,"15","13",array("border"=>"0"))." <a href='index.php?group_id=".$doc_group->Group->getID()."&selected_doc_group_id=".$doc_group->getID()."&amp;language_id=".@$GLOBALS['selected_language'];
+			echo "<li>".html_image('ic/'.$icon,"15","13",array("border"=>"0"))." <a href='index.php?group_id=".$doc_group->Group->getID()."&amp;selected_doc_group_id=".$doc_group->getID()."&amp;language_id=".@$GLOBALS['selected_language'];
 			if ($from_admin && $stateid) {	// if we're sorting by the state, pass the state as a variable
 				echo "&amp;selected_stateid=".$stateid;
 			}
