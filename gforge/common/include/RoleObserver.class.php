@@ -280,9 +280,9 @@ class RoleObserver extends Error {
 							continue;
 						}
 						$res = db_query_params ('UPDATE artifact_group_list SET is_public=$1, allow_anon=$2 WHERE group_artifact_id=$3 AND group_id=$4',
-									array ($uvalue,
-									       $data['trackerpublic'][$uref_id],
+									array ($data['trackerpublic'][$uref_id],
 									       $data['trackeranon'][$uref_id],
+									       $uref_id,
 									       $this->Group->getID())) ;
 						$updated['tracker'][$uref_id]=1;
 						if (!$res) {
