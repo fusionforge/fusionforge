@@ -15,7 +15,7 @@ require_once 'code/syntax/AllTests.php';
 
 // Build tests
 require_once 'build/packages/AllTests.php';
-require_once 'build/documentation/AllTests.php';
+//require_once 'build/documentation/AllTests.php';
 
 // Remote tests
 //require_once 'remote/tarball/AllTests.php';
@@ -52,7 +52,7 @@ class AllTests
 
 		// Building packages and documentation tests
 		$suite->addTest(Packages_AllTests::suite());
-		$suite->addTest(Documentation_AllTests::suite());
+//		$suite->addTest(Documentation_AllTests::suite());
 		
 		// Remote tests
 //		$suite->addTest(Remote_AllTests::suite());
