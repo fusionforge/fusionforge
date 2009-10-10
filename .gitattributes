@@ -3736,6 +3736,8 @@ packaging/tag_packaging_delete -text
 tests/AllFullTests.php -text
 tests/AllTests.php -text
 tests/TarCentos52Tests.php -text
+tests/build/documentation/AllTests.php -text
+tests/build/documentation/DocumentationTests.php -text
 tests/build/packages/AllTests.php -text
 tests/build/packages/BuildTests.php -text
 tests/code/syntax/AllTests.php -text
