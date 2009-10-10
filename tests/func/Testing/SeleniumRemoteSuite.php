@@ -10,9 +10,6 @@ class SeleniumRemoteSuite extends PHPUnit_Framework_TestSuite
 		system("ssh root@centos52 'cd fusionforge-*; FFORGE_RPM_REPO=http://buildbot.fusionforge.org/job/fusionforge-trunk-full/ws/build/packages/ FFORGE_DB=fforge FFORGE_USER=gforge FFORGE_ADMIN_USER=ffadmin FFORGE_ADMIN_PASSWORD=ffadmin ./install.sh centos52.local'");
 
 		system("scp -r ../tests root@centos52:/opt");
-//		system("ssh root@centos52 'mkdir -p /opt/tests/func'");
-//		system("scp func/db_reload.php root@centos52:/opt/tests/func/");
-//		system("scp func/config.php.tests root@centos52:/opt/tests/func/config.php");
 
 		system("scp /usr/share/php/PHPUnit/Extensions/SeleniumTestCase/*pend.php root@centos52:/opt/tests");
 		system("scp /usr/share/php/PHPUnit/Extensions/SeleniumTestCase/phpunit_coverage.php root@centos52:/opt/gforge/www");
@@ -23,7 +20,7 @@ class SeleniumRemoteSuite extends PHPUnit_Framework_TestSuite
 
 	protected function tearDown()
 	{
-		//system("cd scripts; ./stop_vm.sh centos52");
+		system("cd scripts; ./stop_vm.sh centos52");
 	}
 }
 ?>
