@@ -50,6 +50,10 @@ elseif (is_file('/etc/init.d/postgresql-8.2'))
 {
 	$pgservice='/etc/init.d/postgresql-8.2';
 } 
+elseif (is_file('/etc/init.d/postgresql-8.3'))
+{
+	$pgservice='/etc/init.d/postgresql-8.3';
+}
 elseif (is_file('/etc/init.d/cswpostgres'))
 {
 	$pgservice='/etc/init.d/cswpostgres';
