@@ -1,7 +1,6 @@
 * text=auto !eol
 /.bzrignore -text
 3rd-party/htmlpurifier/htmlpurifier.spec -text
-/build.xml -text
 delivery/fusionforge/package/config -text
 delivery/gforge/package/config -text
 delivery/novaforge/package/config -text
