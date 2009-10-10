@@ -24,9 +24,10 @@ if [ $# -ne 1  ]; then
 fi
 
 hostname=$1
-type="";
-msg="";
+type=""
+msg=""
 version=4.8.1
+distrib=""
 
 if [ -f "/etc/redhat-release" ]
 then
@@ -39,16 +40,16 @@ then
 fi
 
 
-if [ $distrib = "CentOS" ]
+if [ "$distrib" = "CentOS" ]
 then
 	deps="CENTOS"
-elif [ $distrib = "Red" ]
+elif [ "$distrib" = "Red" ]
 then
 	deps="RHEL5"
-elif [ $distrib = "Fedora" ]
+elif [ "$distrib" = "Fedora" ]
 then
 	deps="FEDORA"
-elif [ $distrib = "openSUSE" ]
+elif [ "$distrib" = "openSUSE" ]
 then
 	deps="OPENSUSE"
 fi
@@ -62,7 +63,7 @@ else
 	echo "Installing FusionForge ...";
 fi
 
-if [ $type = "redhat" ]
+if [ "$type" = "redhat" ]
 then
 	yum -y install php
 	php gforge-install-1-deps.php $deps
@@ -91,7 +92,7 @@ then
 	else
 		php /opt/gforge/db/upgrade-db.php
 	fi
-elif [ $type = "suse" ]
+elif [ "$type" = "suse" ]
 then
 	yast -i php5
 	php gforge-install-1-deps.php $deps
