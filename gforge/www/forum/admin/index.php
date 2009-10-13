@@ -101,11 +101,11 @@ if ($group_id) {
 			<input type="radio" name="allow_anonymous" value="0" checked="checked" />'._('No').'
 			<br /><br />' .
 					html_build_select_box_from_assoc(array("0" => _('No Moderation') ,"1" => _('Moderated Level 1'),"2" => _('Moderated Level 2') ),"moderation_level",0) . '
-				<br>' . _('Moderated Level 1') . ': ' . _('To moderate anonymous posts (if allowed in public forum) and posts from non-member users.') . '<br>' . _('Moderated Level 2') . ': ' . _('To moderate ALL posts.') . '<p>
+				<br />' . _('Moderated Level 1') . ': ' . _('To moderate anonymous posts (if allowed in public forum) and posts from non-member users.') . '<br />' . _('Moderated Level 2') . ': ' . _('To moderate ALL posts.') . '<p>
 				
 			<strong>'._('Email All Posts To:').'</strong><br />
 			<input type="text" name="send_all_posts_to" value="" size="30" maxlength="50" />
-			<p>
+			<br />
 			<input type="submit" name="submit" value="'._('Add This Forum').'" />
 			</p>
 			</form>';
@@ -147,13 +147,14 @@ if ($group_id) {
 				<input type="radio" name="allow_anonymous" value="0"'.(($f->AllowAnonymous() == 0)?' checked="checked"':'').'/> '._('No').'<br />
 				
 				
+				<p />
 				<strong>'._('Is Public?').'</strong><br />
 				<input type="radio" name="is_public" value="1"'.(($f->isPublic() == 1)?' checked="checked"':'').' /> '._('Yes').'<br />
 				<input type="radio" name="is_public" value="0"'.(($f->isPublic() == 0)?' checked="checked"':'').' /> '._('No').'<br />
 				<input type="radio" name="is_public" value="9"'.(($f->isPublic() == 9)?' checked="checked"':'').' />'._('Deleted').'<br />
 				<p>' .
 					html_build_select_box_from_assoc(array("0" => _('No Moderation') ,"1" => _('Moderated Level 1'),"2" => _('Moderated Level 2') ),"moderation_level",$f->getModerationLevel()) . '
-				<br>' . _('Moderated Level 1') . ': ' . _('To moderate anonymous posts (if allowed in public forum) and posts from non-member users.') . '<br>' . _('Moderated Level 2') . ': ' . _('To moderate ALL posts.') . '<p>
+				<br />' . _('Moderated Level 1') . ': ' . _('To moderate anonymous posts (if allowed in public forum) and posts from non-member users.') . '<br />' . _('Moderated Level 2') . ': ' . _('To moderate ALL posts.') . '<p>
 				
 
 				<strong>'._('Forum Name').':</strong><br />
@@ -184,6 +185,7 @@ if ($group_id) {
 		forum_header(array('title'=>_('Delete')));
 		echo '<p>
 			<strong>'._('You are about to permanently and irretrievably delete this entire forum and all its contents!').'</strong><br />
+			</p>
 			<form method="post" action="'.getStringFromServer('PHP_SELF').'">
 			<input type="hidden" name="post_changes" value="y" />
 			<input type="hidden" name="deleteforum" value="y" />
@@ -217,23 +219,25 @@ if ($group_id) {
 					if (!$thread_id) {
 						echo "window.location='/forum/message.php?msg_id=$msg_id';";
 					} else {
-						echo "window.location='/forum/forum.php?thread_id=$thread_id&forum_id=$forum_id';";
+						echo "window.location='/forum/forum.php?thread_id=$thread_id&amp;forum_id=$forum_id';";
 					}
 					echo "</script>";
 				} else {
 					//print the delete message confirmation
 					forum_header(array('title'=>_('Delete a Message')));
-					echo '<p><center>
+					echo '<center>
 							<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 							<h3>' . _('WARNING! You are about to permanently delete a message and all of its followups!!') . '</h3><p>
-							<input type="submit" name="ok" value="' . _('Yes') . '">    
-							<input type="submit" name="cancel" value="' . _('No') . '">    
-							<input type="hidden" name="deletemsg" value="'.$msg_id.'">
-							<input type="hidden" name="group_id" value="'.$group_id.'">
-							<input type="hidden" name="forum_id" value="'.$forum_id.'">
-							<input type="hidden" name="thread_id" value="'.$thread_id.'">
-							</center>
-							</form>';
+							<p>
+							<input type="submit" name="ok" value="' . _('Yes') . '" />
+							<input type="submit" name="cancel" value="' . _('No') . '" />    
+							<input type="hidden" name="deletemsg" value="'.$msg_id.'" />
+							<input type="hidden" name="group_id" value="'.$group_id.'" />
+							<input type="hidden" name="forum_id" value="'.$forum_id.'" />
+							<input type="hidden" name="thread_id" value="'.$thread_id.'" />
+							</p>
+							</form>
+							</center>';
 					forum_footer(array());
 				}
 			} else {
@@ -375,9 +379,9 @@ if ($group_id) {
 			} elseif ($farr[$j]->isError()) {
 				echo $farr[$j]->getErrorMessage();
 			} else {
-				echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;change_status=1&amp;group_forum_id='. $farr[$j]->getID() .'">'.
+				echo '<p><a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;change_status=1&amp;group_forum_id='. $farr[$j]->getID() .'">'.
 					$farr[$j]->getName() .'</a><br />'.$farr[$j]->getDescription().'<br /><a href="monitor.php?group_id='.$group_id.'&amp;group_forum_id='. $farr[$j]->getID() .'">'.
-					_('Monitoring Users').'</a><p>';
+					_('Monitoring Users').'</a></p>';
 			}
 		}
 

@@ -65,7 +65,7 @@ $editor = true;
 if (!$GLOBALS['editor_was_set_up']) {
 	//if we don't have any plugin for text editor, display a simple textarea edit box
 	$editor = false;
-	echo '<textarea name="data" rows="15" cols="100" wrap="soft"></textarea><br />';
+	echo '<textarea name="data" rows="15" cols="100"></textarea><br />';
 	echo '<script>	
 			window.document.theform.data.value = window.opener.document.adddata.data.value;
 		</script>';
@@ -80,9 +80,9 @@ if (!$GLOBALS['editor_was_set_up']) {
 unset($GLOBALS['editor_was_set_up']);
 
 if ($editor) {
-	echo '<br><div align="right"><input type="submit" value="update" onclick="window.opener.document.adddata.data.value=getEditorValue(\'data\');window.close();"/></div>';
+	echo '<br /><div align="right"><input type="submit" value="update" onclick="window.opener.document.adddata.data.value=getEditorValue(\'data\');window.close();"/></div>';
 } else {
-	echo '<br><div align="right"><input type="submit" value="update" onclick="window.opener.document.adddata.data.value=window.document.theform.data.value;window.close();"/></div>';
+	echo '<br /><div align="right"><input type="submit" value="update" onclick="window.opener.document.adddata.data.value=window.document.theform.data.value;window.close();"/></div>';
 }
 echo '</form>';
 

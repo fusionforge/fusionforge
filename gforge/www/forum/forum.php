@@ -358,7 +358,7 @@ ORDER BY f.most_recent_date DESC',
 	if ($offset != 0) {
 		$ret_val .= '<span class="prev">
 		<a href="javascript:history.back()"><strong>' .
-		html_image('t2.png',"15","15",array("border"=>"0","ALIGN"=>"MIDDLE")) ._('Previous Messages').'</a></strong></span>';
+		html_image('t2.png',"15","15",array("border"=>"0","align"=>"middle")) ._('Previous Messages').'</strong></a></span>';
 	} else {
 		$ret_val .= '&nbsp;';
 	}
@@ -370,7 +370,7 @@ ORDER BY f.most_recent_date DESC',
 		<a href="'.util_make_url ('/forum/forum.php?max_rows='.$max_rows.'&amp;style='.$style.'&amp;offset='.($offset+$i).
 					  '&amp;forum_id='.$forum_id.'&amp;group_id='.$group_id).'">
 		<strong> '._('Next Messages') .
-		html_image('t.png',"15","15",array("border"=>"0","ALIGN"=>"MIDDLE")) . '</strong></a>';
+		html_image('t.png',"15","15",array("border"=>"0","align"=>"middle")) . '</strong></a></span>';
 	} else {
 		$ret_val .= '&nbsp;';
 	}

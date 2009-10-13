@@ -52,7 +52,7 @@ function admin_table_add($table, $unit, $primary_key) {
 			echo '<td><input type="text" name="'.$fieldname.'" value="" /></td></tr>';
 		}
 		echo '</table><input type="submit" value="'._('Add').'" />
-			<input type="hidden" name="__fields__" value="'.implode(',',$fields).'">
+			<input type="hidden" name="__fields__" value="'.implode(',',$fields).'" />
 			</form>
 			<form name="cancel" action="'.getStringFromServer('PHP_SELF').'" method="post">
 			<input type="submit" value="'._('Cancel').'" />

@@ -131,7 +131,7 @@ if ($group_id) {
 } else {
 	// Print error showing no group was selected
 
-	echo "<br><span class=\"error\">    Error: No group selected</span>";
+	echo "<br /><span class=\"error\">    Error: No group selected</span>";
 }
 
 

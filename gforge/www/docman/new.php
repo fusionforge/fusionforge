@@ -55,7 +55,6 @@ if (getStringFromRequest('submit')) {
 		exit_error(_('Error'),_('No valid Document Group was selected.'));
 	}
 	
-	//if (!$title || !$description || (!$uploaded_data && !$file_url && !$ftp_filename && (!$editor && !$name ) )) {		
 	if (!$title || !$description || (!$uploaded_data && !$file_url && (!$editor && !$name ) )) {		
 		exit_missing_param();
 	}
@@ -166,7 +165,7 @@ if (getStringFromRequest('submit')) {
 					echo _('Choose an FTP file instead of uploading:').'</strong>'. utils_requiredField() .'<br />';
 					$ftp_files_arr=array_merge($arr,ls($upload_dir,true));
 					echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename','');
-					echo '</td></tr><input type="hidden" name="type" value="ftpupload">';
+					echo '</td></tr><input type="hidden" name="type" value="ftpupload" />';
 					break;
 				} else {
 					exit_error(_('You must enable ftp uploads first'));

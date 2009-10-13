@@ -159,7 +159,7 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 		return;
 	}
 	
-	echo "<ul style='list-style-type: none'>";
+	echo "<ul style='list-style-type: none'>\n";
 	$child_count = count($nested_groups["$parent_group"]);
 	
 	for ($i=0; $i < $child_count; $i++) {		
@@ -181,9 +181,10 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 				
 			// display link to add a document to the current group
 			echo " &nbsp;&nbsp;&nbsp;&nbsp;<a href='".($from_admin ? "../" : "")."new.php?group_id=".$doc_group->Group->getID()."&amp;selected_doc_group=".$doc_group->getID()."'>";
-			echo html_image('ic/adddoc12.png',"12","14",array("border"=>"0"))." ";
+			echo html_image('ic/adddoc12.png',"12","14",array("border"=>"0", 'align'=>'bottom'))." ";
 			echo _('[Add document here]');
-			echo "</a>";
+			echo "</a></li>\n";
+
 			if (($doc_group->getID() == $selected_doc_group_id || $doc_group->hasSubgroup($nested_groups, $selected_doc_group_id)) && (!$stateid || $stateid == @$selected_stateid)) {
 				docman_display_documents($nested_groups, $document_factory, $is_editor, $stateid, $from_admin, $doc_group->getID());
 			}
