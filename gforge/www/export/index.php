@@ -12,7 +12,8 @@
 
 require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
-$HTML->header(array('title'=>"Exports Available"));
+
+$HTML->header(array(title=>_('Exports Available')));
 ?>
 <p><?php echo $GLOBALS['sys_name']; ?> data is exported in a variety of standard formats. Many of
 the export URLs can also accept form/get data to customize the output. All
