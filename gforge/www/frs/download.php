@@ -63,7 +63,6 @@ if (!$Package || !is_object($Package)) {
 } else if ($Package->isError()) {
 	exit_error('Error', $Package->getErrorMessage());
 }
-}
 $is_public = $Package->isPublic();
 
 $Release = new FRSRelease($Package,$release_id);
