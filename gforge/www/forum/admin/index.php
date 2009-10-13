@@ -104,7 +104,7 @@ if ($group_id) {
 				<br />' . _('Moderated Level 1') . ': ' . _('To moderate anonymous posts (if allowed in public forum) and posts from non-member users.') . '<br />' . _('Moderated Level 2') . ': ' . _('To moderate ALL posts.') . '<p>
 				
 			<strong>'._('Email All Posts To:').'</strong><br />
-			<input type="text" name="send_all_posts_to" value="" size="30" maxlength="50" />
+			<input type="text" name="send_all_posts_to" value="" size="60" />
 			<br />
 			<input type="submit" name="submit" value="'._('Add This Forum').'" />
 			</p>
@@ -161,10 +161,10 @@ if ($group_id) {
 				<input type="text" name="forum_name" value="'. $f->getName() .'" size="20" maxlength="30" />
 				<p>
 				<strong>'._('Email All Posts To:').'</strong><br />
-				<input type="text" name="send_all_posts_to" value="'. $f->getSendAllPostsTo() .'" size="30" maxlength="50" />
+				<input type="text" name="send_all_posts_to" value="'. $f->getSendAllPostsTo() .'" size="60" />
 				<p>
 				<strong>'._('Description').':</strong><br />
-				<input type="text" name="description" value="'. $f->getDescription() .'" size="40" maxlength="80" /><br />
+				<input type="text" name="description" value="'. $f->getDescription() .'" size="60" maxlength="80" /><br />
 				<p>
 				<input type="submit" name="submit" value="'._('Update').'" />
 			</form><p>';
