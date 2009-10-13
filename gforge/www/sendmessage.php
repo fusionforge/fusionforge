@@ -135,7 +135,7 @@ $HTML->header(array('title'=>$GLOBALS['sys_name'].' Staff'));
 <input type="text" name="email" size="40" maxlength="255" value="<?php echo $email ?>" />
 <p />
 <strong><?php echo _('Subject').utils_requiredField() ?> :</strong><br />
-<input type="text" name="subject" size="60" maxlength="255" value="" />
+<input type="text" name="subject" size="60" maxlength="255" value="<?php echo $subject; ?>" />
 <p />
 <strong><?php echo _('Message').utils_requiredField() ?> :</strong><br />
 <textarea name="body" rows="15" cols="60"></textarea>

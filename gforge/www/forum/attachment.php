@@ -77,7 +77,7 @@ if (!$g || !is_object($g) || $g->isError()) {
 $f=new Forum($g,$forum_id);
 if (!$f || !is_object($f)) {
 	exit_error(_('Error'),_('Error getting Forum'));
-}	elseif ($f->isError()) {
+} elseif ($f->isError()) {
 	exit_error(_('Error'),$f->getErrorMessage());
 }
 
