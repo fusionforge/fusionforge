@@ -58,8 +58,11 @@ if (!$Group || !is_object($Group) || $Group->isError()) {
 }
 
 $Package = new FRSPackage($Group,$package_id);
-if (!$Package || !is_object($Package) || $Package->isError()) {
+if (!$Package || !is_object($Package)) {
 	exit_error('Error','Error Getting Package');
+} else if ($Package->isError()) {
+	exit_error('Error', $Package->getErrorMessage());
+}
 }
 $is_public = $Package->isPublic();
 
