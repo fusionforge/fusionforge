@@ -63,6 +63,9 @@ if ($msg_id) {
 	if (!$f || !is_object($f)) {
 		exit_error(_('Error'),_('Error getting new Forum'));
 	} elseif ($f->isError()) {
+		if ($f->isPermissionDeniedError()) {
+			exit_permission_denied();
+		}
 		exit_error(_('Error'),$f->getErrorMessage());
 	}
 
@@ -156,7 +159,7 @@ if ($msg_id) {
 		
 		if ($fm->getID() != $msg->getID()) {
 			$ah_begin='<a href="'.util_make_url ('/forum/message.php?msg_id='.$msg->getID().
-							     '&group_id='.$group_id).'">';
+							     '&amp;group_id='.$group_id).'">';
 			$ah_end='</a>';
 		} else {
 			$ah_begin='';
