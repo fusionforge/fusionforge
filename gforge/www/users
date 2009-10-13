@@ -34,7 +34,7 @@ if (!$expl_pathinfo[2]) {
 }
 
 //get the user object based on the user_name in the URL
-$user =& user_get_object_by_name($expl_pathinfo[2]);
+$user =& user_get_object_by_name( urldecode($expl_pathinfo[2]) );
 
 if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 
