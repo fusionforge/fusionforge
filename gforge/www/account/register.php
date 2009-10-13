@@ -36,8 +36,9 @@ $lastname = getStringFromRequest('lastname');
 $password1 = getStringFromRequest('password1');
 $password2 = getStringFromRequest('password2');
 $email = getStringFromRequest('email');
-$mail_site = getStringFromRequest('mail_site');
-$mail_va = getStringFromRequest('mail_va');
+$mail_site = getIntFromRequest('mail_site');
+$mail_va = getIntFromRequest('mail_va');
+
 $language_id = getIntFromRequest('language_id');
 $timezone = getStringFromRequest('timezone');
 $jabber_address = getStringFromRequest('jabber_address');

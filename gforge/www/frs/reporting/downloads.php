@@ -50,8 +50,8 @@ require_once $gfcommon.'reporting/ReportDownloads.class.php';
 
 $group_id = getIntFromRequest('group_id');
 $package_id = getIntFromRequest('package_id');
-$start = getStringFromRequest('start');
-$end = getStringFromRequest('end');
+$start = getIntFromRequest('start');
+$end = getIntFromRequest('end');
 
 global $Language;
 

@@ -48,7 +48,7 @@ if (session_loggedin()) {
 			} else {
 				header ("Location: ".util_make_url ("/forum/forum.php?forum_id=$forum_id&group_id=$group_id&feedback=".urlencode(_('Forum monitoring deactivated'))));
 			}
-		} elseif(getStringFromRequest('start')) {
+		} elseif(getIntFromRequest('start')) {
 			if (!$f->setMonitor()) {
 				exit_error('Error',$f->getErrorMessage());
 			} else {
