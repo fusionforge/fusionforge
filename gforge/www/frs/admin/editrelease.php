@@ -119,7 +119,7 @@ if (getStringFromRequest('step1')) {
 		if (!is_uploaded_file($uploaded_changes['tmp_name'])) {
 			exit_error('Error','Attempted File Upload Attack');
 		}
-		if ($uploaded_notes['type'] !== 'text/plain') {
+		if ($uploaded_changes['type'] !== 'text/plain') {
 			$feedback .= _('Change Log Is not in Text');
 			$exec_changes = false;
 		} else {
@@ -250,11 +250,11 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 <input type="hidden" name="step1" value="1" />
 <table border="0" cellpadding="1" cellspacing="1">
 <tr>
-	<td width="10%"><strong><?php echo _('Release date') ?>:<strong></td>
+	<td width="10%"><strong><?php echo _('Release date') ?>:</strong></td>
 	<td><input type="text" name="release_date" value="<?php echo date('Y-m-d H:i',$frsr->getReleaseDate()) ?>" size="16" maxlength="16" /></td>
 </tr>
 <tr>
-	<td><strong><?php echo _('Release name') ?>:<strong></td>
+	<td><strong><?php echo _('Release name') ?>:</strong></td>
 	<td><input type="text" name="release_name" value="<?php echo htmlspecialchars($frsr->getName()); ?>" /></td>
 </tr>
 <tr>
@@ -282,13 +282,13 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 <tr>
 	<td colspan="2">
 		<strong><?php echo _('Paste The Notes In') ?>:</strong><br />
-		<textarea name="release_notes" rows="10" cols="60" wrap="soft"><?php echo $frsr->getNotes(); ?></textarea>
+		<textarea name="release_notes" rows="10" cols="60"><?php echo $frsr->getNotes(); ?></textarea>
 	</td>
 </tr>
 <tr>
 	<td colspan="2">
 		<strong><?php echo _('Paste The Change Log In') ?>:</strong><br />
-		<textarea name="release_changes" rows="10" cols="60" wrap="soft"><?php echo $frsr->getChanges(); ?></textarea>
+		<textarea name="release_changes" rows="10" cols="60"><?php echo $frsr->getChanges(); ?></textarea>
 	</td>
 </tr>
 <tr>
@@ -297,6 +297,7 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 		<input type="checkbox" name="preformatted" value="1" <?php echo (($frsr->getPreformatted())?'checked="checked"':''); ?> /> <?php echo _('Preserve my pre-formatted text.') ?>
 		<p>
 		<input type="submit" name="submit" value="<?php echo _('Submit/Refresh') ?>"/></p>
+		</p>
 	</td>
 </tr>
 </table>
@@ -304,8 +305,8 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 <p>&nbsp;</p>
 <hr />
 <h3><?php echo _('Step 2: Add Files To This Release</h3><p>Now, choose a file to upload into the system. The maximum file size is determined by the site administrator, but defaults to 2MB. If you need to upload large files, contact your site administrator.</p>') ?></h3>
-<p>
-<form enctype="multipart/form-data" method="post" action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&release_id=$release_id&package_id=$package_id"; ?>">
+
+<form enctype="multipart/form-data" method="post" action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&amp;release_id=$release_id&amp;package_id=$package_id"; ?>">
 <input type="hidden" name="step2" value="1" />
 <span class="important">
 <?php echo _('NOTE: In some browsers you must select the file in the file-upload dialog and click "OK".  Double-clicking doesn\'t register the file.') ?></span>
@@ -339,7 +340,7 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 </table>
 <p>
 <input type="submit" name="submit" value="<?php echo _('Add This File') ?>" /></p>
-</form></p>
+</form>
 <p>&nbsp;</p>
 <hr />
 <p>&nbsp;</p>
