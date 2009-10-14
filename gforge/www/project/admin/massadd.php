@@ -117,7 +117,7 @@ if (!$res || db_numrows($res) < 1) {
 
 }
 
-echo '<input type="submit" name="finished" value="'._('Finish').'">
+echo '<p><input type="submit" name="finished" value="'._('Finish').'"></p>
 </form>';
 
 project_admin_footer(array());
