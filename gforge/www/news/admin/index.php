@@ -87,6 +87,9 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 				$feedback .= _('Error On Update:');
 			} else {
 				$feedback .= _('NewsByte Updated.');
+				// No notification if news is deleted.
+				if ($status != 4)
+					send_news_notification_email($id);
 			}
 			/*
 				Show the list_queue
@@ -250,6 +253,9 @@ FROM news_bytes,groups WHERE id=$1
 AND news_bytes.group_id=groups.group_id ", array($id));
 		if (db_numrows($result) < 1) {
 			exit_error(_('Error'), _('NewsByte not found'));
+		}
+		if (db_result($result,0,'is_approved') == 4) {
+			exit_error(_('Error'), _('NewsByte deleted'));
 		}
 		
 		$group =& group_get_object(db_result($result,0,'group_id'));
