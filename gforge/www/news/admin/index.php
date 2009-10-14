@@ -88,8 +88,8 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 			} else {
 				$feedback .= _('NewsByte Updated.');
 				// No notification if news is deleted.
-				if ($status != 4)
-					send_news_notification_email($id);
+//				if ($status != 4)
+//					send_news_notification_email($id);
 			}
 			/*
 				Show the list_queue
