@@ -64,7 +64,7 @@ echo notepad_func();
   	<tr>
 		<td>
 		<strong><?php echo _('Task Summary') ?>:</strong><br />
-		<input type="text" name="summary" size="40" maxlength="65" value="<?php echo $pt->getSummary(); ?>" />
+		<input type="text" name="summary" size="65" maxlength="65" value="<?php echo $pt->getSummary(); ?>" />
 		</td>
 		<td>
 		<a href="<?php echo getStringFromServer('PHP_SELF')."?func=deletetask&amp;project_task_id=$project_task_id&amp;group_id=$group_id&amp;group_project_id=$group_project_id"; ?>"><?php echo _('Delete this task') ?></a>
@@ -77,7 +77,7 @@ echo notepad_func();
 		<?php echo nl2br( $pt->getDetails() ); ?>
 		<p />
 		<strong><?php echo _('Add A Comment') ?>:</strong><?php echo notepad_button('document.forms[1].details') ?><br />
-		<textarea name="details" rows="5" cols="40"></textarea>
+		<textarea name="details" rows="5" cols="80"></textarea>
 		</td>
 	</tr>
 
@@ -139,7 +139,7 @@ echo notepad_func();
 		</td>
 
 		<td>
-		<strong><?php echo _('Status') ?></strong><br />
+		<strong><?php echo _('Status') ?>:</strong><br />
 		<?php
 		echo $pg->statusBox('status_id', $pt->getStatusID(), false );
 		?>

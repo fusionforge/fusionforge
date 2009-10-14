@@ -57,14 +57,14 @@ echo notepad_func();
   	<tr>
 		<td colspan="2">
 		<strong><?php echo _('Task Summary') ?>:</strong><?php echo utils_requiredField(); ?><br />
-		<input type="text" name="summary" size="40" maxlength="65" value="<?php echo $related_artifact_summary; ?>" />
+		<input type="text" name="summary" size="65" maxlength="65" value="<?php echo $related_artifact_summary; ?>" />
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">
 		<strong><?php echo _('Task Details') ?>:</strong><?php echo notepad_button('document.forms[1].details') ?> <?php echo utils_requiredField(); ?><br />
-		<textarea name="details" rows="5" cols="40" wrap="soft"></textarea></td>
+		<textarea name="details" rows="5" cols="80"></textarea></td>
 	</tr>
 
 	<tr>
