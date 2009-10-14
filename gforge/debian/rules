@@ -101,6 +101,8 @@ install: build
 	# Install few links
 	ln -s database-pgsql.php $(CURDIR)/debian/$(PACKAGE)-common/usr/share/$(PACKAGE)/common/include/database.php
 	ln -s /usr/share/mediawiki/skins/$(PACKAGE)/loader.php $(CURDIR)/debian/$(PACKAGE)-plugin-mediawiki/etc/mediawiki-extensions/extensions-available/GforgeAuth.php
+	# Remove a few others
+	rm $(CURDIR)/debian/$(PACKAGE)-web-apache2/usr/share/gforge/www/plugins/mediawiki
 
 	# Fix permissions
 	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -type f -exec chmod 644 {} \;  ; done

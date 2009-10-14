@@ -1,3 +1,10 @@
+gforge (4.8.1-1.1) unstable; urgency=low
+
+  * New upstream snapshot.
+  * Fixed file conflict between -web-apache2 and -plugin-mediawiki.
+
+ --
+
 gforge (4.8.1-1) unstable; urgency=low
 
   * New upstream release.
