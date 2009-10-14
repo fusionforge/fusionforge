@@ -227,8 +227,8 @@ if ($rows < 1) {
 			echo '
 				<tr class="priority'.$pt_arr[$i]->getPriority() .'">'.
 				'<td>'.
-				($IS_ADMIN?'<input type="CHECKBOX" name="project_task_id_list[]" value="'.
-				$pt_arr[$i]->getID() .'"> ':'').
+				($IS_ADMIN?'<input type="checkbox" name="project_task_id_list[]" value="'.
+				$pt_arr[$i]->getID() .'" /> ':'').
 				$pt_arr[$i]->getID() .'</td>'.
 				'<td><a href="'.$url.'">'.$pt_arr[$i]->getSummary() .'</a></td>'.
 				'<td>'.date(_('Y-m-d H:i'), $pt_arr[$i]->getStartDate() ).'</td>'.

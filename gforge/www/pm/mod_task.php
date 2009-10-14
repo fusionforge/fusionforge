@@ -19,9 +19,9 @@ require_once $gfwww.'include/note.php';
 require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/Report.class.php';
 
-echo notepad_func();
-
 pm_header(array('title'=>_('Modify Task'),'pagename'=>'pm_modtask','group_project_id'=>$group_project_id));
+
+echo notepad_func();
 
 ?>
 
@@ -145,8 +145,8 @@ pm_header(array('title'=>_('Modify Task'),'pagename'=>'pm_modtask','group_projec
 		?>
 		</td>
 	</tr>
-	<input type="hidden" name="duration" value="<?php echo $pt->getDuration(); ?>">
-	<input type="hidden" name="parent_id" value="<?php echo $pt->getParentID(); ?>">
+	<input type="hidden" name="duration" value="<?php echo $pt->getDuration(); ?>" />
+	<input type="hidden" name="parent_id" value="<?php echo $pt->getParentID(); ?>" />
 <!--
 //will add duration and parent selection boxes
 	<tr>
@@ -198,9 +198,9 @@ pm_header(array('title'=>_('Modify Task'),'pagename'=>'pm_modtask','group_projec
 
 </table>
 </form>
-<p>
+
 <h3><?php echo _('Time tracking'); ?></h3>
-<p>
+
 <?php
 $title_arr = array();
 $title_arr[]=_('Week');

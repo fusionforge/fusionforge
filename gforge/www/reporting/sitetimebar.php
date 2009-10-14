@@ -49,7 +49,6 @@ echo report_header(_('Site-Wide Time Tracking'));
 
 ?>
 <h3><?php echo _('Site-Wide Time Tracking'); ?></h3>
-<p>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <input type="hidden" name="typ" value="<?php echo $typ; ?>" />
 <table><tr>

@@ -168,7 +168,7 @@ if ($group_project_id || $rows) {
 	echo $HTML->listTableTop ($title_arr);
 
 	while ($r=&db_fetch_array($res)) {
-		echo '<form action="'.getStringFromServer('PHP_SELF').'?week='.$week.'&project_task_id='.$r['project_task_id'].'" method="post" />
+		echo '<form action="'.getStringFromServer('PHP_SELF').'?week='.$week.'&amp;project_task_id='.$r['project_task_id'].'" method="post">
 			<input type="hidden" name="submit" value="1" />
 			<input type="hidden" name="report_date" value="'.$r['report_date'] .'" />
 			<input type="hidden" name="old_time_code" value="'.$r['time_code'] .'" />
@@ -187,7 +187,7 @@ if ($group_project_id || $rows) {
 		$respt=db_query_params ('SELECT project_task_id,summary FROM project_task WHERE group_project_id=$1',
 			array($group_project_id));
 
-		echo '<form action="'.getStringFromServer('PHP_SELF').'?week='.$week.'" method="post" />
+			echo '<form action="'.getStringFromServer('PHP_SELF').'?week='.$week.'" method="post">
 			<input type="hidden" name="submit" value="1" />
 			<tr '.$HTML->boxGetAltRowStyle($xi++).'>
 				<td align="middle">'. html_build_select_box ($respt,'project_task_id',false,false) .'</td>

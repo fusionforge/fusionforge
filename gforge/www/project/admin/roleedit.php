@@ -114,7 +114,7 @@ echo '
 <form action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&role_id='. $role_id .'" method="post">';
 
 if ($role_id != 'observer') {
-	echo '<strong>'._('Role Name').'</strong><br />
+	echo '<p><strong>'._('Role Name').'</strong><br />
 	<input type="text" name="role_name" value="'.$role->getName().'">
 	<p>';
 }
@@ -269,7 +269,7 @@ for ($i=0; $i<count($keys); $i++) {
 
 echo $HTML->listTableBottom();
 
-echo '<input type="submit" name="submit" value="'._('Submit').'">
+echo '<p><input type="submit" name="submit" value="'._('Submit').'"></p>
 </form>';
 
 project_admin_footer(array());

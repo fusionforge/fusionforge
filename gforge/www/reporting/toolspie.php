@@ -53,7 +53,6 @@ if (!$datatype) {
 
 ?>
 <h3><?php echo _('Tool Pie Graphs'); ?></h3>
-<p>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <table><tr>
 <td><strong><?php echo _('Trackers'); ?>:</strong><br /><?php echo report_tracker_box('datatype',$datatype); ?></td>

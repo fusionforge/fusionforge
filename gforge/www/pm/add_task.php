@@ -38,8 +38,7 @@ echo notepad_func();
 		echo util_make_link ('/pm/admin/?group_id='.$group_id.'&amp;add_cat=1&amp;group_project_id='.$group_project_id,'('._('admin').')');
 		?>
 		</td>
-
-		
+		<td>
 		<input type="submit" value="<?php echo _('Submit') ?>" name="submit" />
 		</td>
 	</tr>
@@ -125,8 +124,8 @@ echo notepad_func();
 		<input type="submit" value="<?php echo _('Submit') ?>" name="submit" />
 		</td>
 	</tr>
-	<input type="hidden" name="duration" value="0">
-	<input type="hidden" name="parent_id" value="0">
+	<input type="hidden" name="duration" value="0" />
+	<input type="hidden" name="parent_id" value="0" />
 <!--
 will add duration and parent_id choices at some point
 	<tr>

@@ -394,10 +394,11 @@ if ($add_cat && $group_project_id) {
 	<input type="hidden" name="delete" value="y" /><br />
 	<?php echo _('You are about to permanently and irretrievably delete this subproject and all its related data!'); ?>
 	<p>
-	<input type="checkbox" name="sure" value="1"><?php echo _('I\'m Sure') ?><br />
-	<input type="checkbox" name="really_sure" value="1"><?php echo _('I\'m Really Sure'); ?>
-	<p>
+	<input type="checkbox" name="sure" value="1" /><?php echo _('I\'m Sure') ?><br />
+	<input type="checkbox" name="really_sure" value="1" /><?php echo _('I\'m Really Sure'); ?>
+	</p><p>
 	<input type="submit" name="post_changes" value="<?php echo _('Delete') ?>" />
+	</p>
 	</form>
 	<?php
 

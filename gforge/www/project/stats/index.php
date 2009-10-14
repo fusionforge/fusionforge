@@ -49,8 +49,9 @@ if ($end && !is_numeric($end)) { $end = false; }
 // BEGIN PAGE CONTENT CODE
 //
 ?>
+<div align="center">
 <h3><?php echo _('Project Activity'); ?></h3>
-<p>
+
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 <table><tr>
@@ -62,7 +63,9 @@ if ($end && !is_numeric($end)) { $end = false; }
 </tr></table>
 </form>
 <p>
-<img src="/reporting/projectact_graph.php?<?php echo "SPAN=$SPAN&start=$start&end=$end&g_id=$group_id&area=$area"; ?>" width="640" height="480">
+<img src="/reporting/projectact_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end&amp;g_id=$group_id&amp;area=$area"; ?>" width="640" height="480" alt="" />
+</p>
+</div>
 <?php
 
 site_project_footer( array() );

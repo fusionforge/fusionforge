@@ -86,7 +86,7 @@ echo $HTML->listTableBottom();
 <h3><?php echo _('Manage Time Tracker Categories'); ?></h3>
 <p>
 <?php echo _('You can create categories for how time might be spent when completing a particular task. Examples of categories include "Meeting", "Coding", "Testing".'); ?>
-<p>
+</p>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="submit" value="1" />
 <input type="hidden" name="time_code" value="<?php echo $time_code; ?>" />

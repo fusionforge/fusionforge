@@ -85,7 +85,7 @@ help_header('Tracker Help - ' . ucwords(str_replace('_',' ',$helpname)));
 	<td align="right">
 		<br /><br />
 		<form action="">
-			<input type="button" value="<?php echo _('Close Window'); ?>" onClick="window.close()" />
+			<input type="button" value="<?php echo _('Close Window'); ?>" onclick="window.close()" />
 		</form>
 	</td>
 </tr>

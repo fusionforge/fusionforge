@@ -130,7 +130,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 		<input type="radio" name="status" value="4" /> '._('Delete').'<br />
 
 		<strong>'._('Subject').'</strong><br />
-		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="30" maxlength="60"><br />
+		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="30" maxlength="60" /><br />
 		<strong>'._('Details').'</strong>'.notepad_button('document.forms[1].details').'<br />';
 		
 		$GLOBALS['editor_was_set_up']=false;

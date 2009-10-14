@@ -49,7 +49,6 @@ echo report_header(_('Users Added'));
 
 ?>
 <h3><?php echo _('Users Added'); ?></h3>
-<p>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <table><tr>
 <td><strong><?php echo _('Type'); ?>:</strong><br /><?php echo report_span_box('SPAN',$SPAN); ?></td>

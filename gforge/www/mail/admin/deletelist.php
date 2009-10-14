@@ -53,6 +53,7 @@ mail_header(array(
 <form method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;group_list_id=<?php echo $ml->getID(); ?>">
 <input type="checkbox" name="sure" value="1" /><?php echo _('Confirm Delete'); ?><br />
 <input type="checkbox" name="really_sure" value="1" /><?php echo _('Confirm Delete'); ?><br />
+<p />
 <input type="submit" name="submit" value="<?php echo _('Permanently Delete'); ?>" />
 </form>
 <?php

@@ -65,7 +65,7 @@ echo report_header(_('User Summary Report'));
 	<h3><?php echo _('User Summary Report'); ?></h3>
 	<p>
 	<?php echo _('Choose the range from the pop-up boxes below. The report will list all tasks with an open date in that range.'); ?>
-	<p>
+	</p>
 	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 	<table>
 		<tr>
