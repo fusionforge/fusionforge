@@ -61,7 +61,7 @@ echo ngettext('You can request to join a project by clicking the submit button. 
 <form action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id"; ?>" method="post">
 <p>
 <?php echo ngettext('If you want, you can send a comment to the administrator:', 'If you want, you can send a comment to the administrators:',$nbadmins); ?><br>
-<textarea name="comments" rows="15" cols="60"></textarea>
+<textarea name="comments" rows="15" cols="60"><?php echo $comments ?></textarea>
 </p>
 <p>
 	<input type="submit" name="submit" value="<?php echo _('Submit'); ?>" />
