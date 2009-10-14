@@ -2,20 +2,20 @@
 /*
 Record description for .csv file format
 
-project_task_id - this is the ID in gforge database
-external_task_id - the equivalent of project_task_id but determined by 
-		external application, such as MS Project
-parent_id - the project_task_id of the parent task, if any
-external_parent_id - the equivalent of parent project_task_id but 
-		determined by external application, such as MS Project
-title - name                ********may contain , characters???
-duration - days
-work - hours
+project_task_id					This is the ID in gforge database
+external_task_id				The equivalent of project_task_id but determined by 
+									external application, such as MS Project
+parent_id						The project_task_id of the parent task, if any
+external_parent_id				The equivalent of parent project_task_id but 
+									determined by external application, such as MS Project
+title							Name                ********may contain , characters???
+duration						Days
+work							Hours
 start_date
 end_date
 percent_complete
-priority - low, medium, high
-notes - details             ********may contain , characters???
+priority						low, medium, high
+notes							Details             ********may contain , characters???
 resource1_unixname
 resource2_unixname
 resource3_unixname
@@ -23,7 +23,7 @@ resource4_unixname
 resource5_unixname
 dependenton1_project_task_id
 dependenton1_external_task_id
-dependenton1_linktype - SS SF FS FF
+dependenton1_linktype			SS SF FS FF
 dependenton2_project_task_id
 dependenton2_external_task_id
 dependenton2_linktype

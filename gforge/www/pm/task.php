@@ -99,7 +99,7 @@ switch (getStringFromRequest('func')) {
 		if ($pg->userIsAdmin()) {
 			
 			$add_artifact_id = getStringFromRequest('add_artifact_id');
-						
+
 			$pt = new ProjectTask($pg);
 			if (!$pt || !is_object($pt)) {
 				exit_error('Error','Could Not Get Empty ProjectTask');
@@ -144,7 +144,7 @@ switch (getStringFromRequest('func')) {
 	case 'postmodtask' : {
 		if ($pg->userIsAdmin()) {
 			$rem_artifact_id = getStringFromRequest('rem_artifact_id');
-		
+
 			if(!$rem_artifact_id){
 				$rem_artifact_id=array();
 			}
@@ -214,7 +214,7 @@ switch (getStringFromRequest('func')) {
 		} else {
 			exit_permission_denied();
 		}
-
+		break;
 	}
 
 	case 'massupdate' : {
@@ -261,7 +261,7 @@ switch (getStringFromRequest('func')) {
 					$mass_parent_id=$pt->getParentID();
 
 					if (!$pt->update($mass_summary,$mass_details,$mass_priority,$mass_hours,$mass_start_date,$mass_end_date,
-							$mass_status_id,$mass_category_id,$mass_percent_complete,$mass_assigned_to,$mass_dependent_on,$mass_new_group_project_id,$mass_duration,$mass_parent_id)) {
+						$mass_status_id,$mass_category_id,$mass_percent_complete,$mass_assigned_to,$mass_dependent_on,$mass_new_group_project_id,$mass_duration,$mass_parent_id)) {
 						$was_error=true;
 						$feedback .= ' ID: '.$project_task_id_list[$i].'::'.$pt->getErrorMessage();
 

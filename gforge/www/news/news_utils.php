@@ -200,11 +200,11 @@ ORDER BY post_date DESC',
 		}
 
 		if ($tail_headlines != -1) {
-		if ($show_forum) {
-			$return .= '<div align="center">'
-				.'<a href="'.$archive_url.'">[' . _('News archive') . ']</a></div>';
-		} else {
-			$return .= '<div align="center">...</div>';
+			if ($show_forum) {
+				$return .= '<div align="center">'
+					.'<a href="'.$archive_url.'">[' . _('News archive') . ']</a></div>';
+			} else {
+				$return .= '<div align="center">...</div>';
 			}
 		}
 	}
