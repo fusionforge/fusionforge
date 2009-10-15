@@ -50,7 +50,7 @@ class CreateTracker extends FForge_SeleniumTestCase
 	function testSimpleCreate()
 	{
 		$this->createProject('ProjectA');
-					
+
 		// Test: Create a simple bug report (Message1/Text1).
 		$this->open( BASE );
 		$this->click("link=ProjectA");
@@ -120,12 +120,11 @@ class CreateTracker extends FForge_SeleniumTestCase
 		$this->click("link=Summary1");
 		$this->waitForPageToLoad("30000");
 	}
-	
-	
+
 	function testExtraFields()
 	{
 		$this->createProject('ProjectA');
-					
+
 		// Testing extra-fields
 		$this->open( BASE );
 		$this->click("link=ProjectA");
@@ -153,7 +152,7 @@ class CreateTracker extends FForge_SeleniumTestCase
 		$this->click("post_changes");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Element inserted"));
-		
+
 		// Testing [#3609]: Select Box does not accept 0 as choice
 		$this->type("name", "0");
 		$this->click("post_changes");
@@ -173,6 +172,40 @@ class CreateTracker extends FForge_SeleniumTestCase
 		$this->click("post_changes");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Element updated"));
+	}
+
+	function testCreateAndDeleteNewTracker()
+	{
+		$this->createProject('ProjectA');
+
+		// Create a new tracker and delete it after.
+		$this->open( BASE );
+		$this->click("link=ProjectA");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Tracker");
+		$this->waitForPageToLoad("30000");
+		$this->click("//a[@href='".URL."tracker/admin/?group_id=6']");
+		$this->waitForPageToLoad("30000");
+		$this->type("name", "newTracker");
+		$this->type("description", "This is a new tracker");
+		$this->click("post_changes");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Tracker created successfully"));
+		$this->assertTrue($this->isTextPresent("newTracker"));
+		$this->assertTrue($this->isTextPresent("This is a new tracker"));
+		$this->click("link=newTracker");
+		$this->waitForPageToLoad("30000");
+		$this->click("//a[@href='".URL."tracker/admin/?group_id=6&atid=105']");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Delete");
+		$this->waitForPageToLoad("30000");
+		$this->click("sure");
+		$this->click("really_sure");
+		$this->click("post_changes");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Successfully Deleted."));
+		$this->assertFalse($this->isTextPresent("newTracker"));
+		$this->assertFalse($this->isTextPresent("This is a new tracker"));
 	}
 }
 ?>
