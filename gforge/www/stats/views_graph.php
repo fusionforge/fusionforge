@@ -84,7 +84,7 @@ if ($i == 1) {
 	$xlabel[1] = $xlabel[0];
 	$ydata1[1] = $ydata1[0];
 }
-$graph->SetTitle( _('Gforge Page Views') );
+$graph->SetTitle( _('Forge Page Views') );
 $graph->SetSubTitle(sprintf(_('Total Page Views (RED) (%1$s days)'),  $i));
 
 $data1 = $graph->AddData( $xdata, $ydata1, $xlabel );
