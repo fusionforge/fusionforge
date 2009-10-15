@@ -50,7 +50,7 @@ $result = db_query_params ('SELECT * FROM surveys WHERE survey_id=$1 AND group_i
 echo "<h2>".db_result($result, 0, "survey_title")."</h2><p>&nbsp;</p>";
 
 /*
-echo "<h3><a href=\"show_results_csv.php?survey_id=$survey_id&group_id=$group_id\">.CSV File</a></h3><p>";
+echo "<h3><a href=\"show_results_csv.php?survey_id=$survey_id&amp;group_id=$group_id\">.CSV File</a></h3><p>";
 */
 
 /*

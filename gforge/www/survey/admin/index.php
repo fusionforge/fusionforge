@@ -46,15 +46,10 @@ if (!session_loggedin() || !user_ismember($group_id,'A')) {
 <p><?php printf(_('You can now activate/deactivate surveys on the %1$s Edit Existing Surveys %2$s page'), '<a href="'.util_make_url ('/survey/admin/survey.php?group_id='.$group_id).'">', '</a>'); ?>
 
 </p>
-<p>
+
 <?php
 
 $sh->footer(array());
-
-?>
-</p>
-
-<?php
 
 // Local Variables:
 // mode: php

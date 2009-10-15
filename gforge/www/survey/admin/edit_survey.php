@@ -106,7 +106,6 @@ function show_questions() {
 <span class="warning"><?php echo _('WARNING! It is a bad idea to edit a survey after responses have been posted'); ?></span>
 
 <p><?php echo _('If you change a survey after you already have responses, your results pages could be misleading or messed up'); ?>.</p>
-<p>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 <input type="hidden" name="post_changes" value="y" />
@@ -125,7 +124,7 @@ function show_questions() {
 <br /><input type="radio" name="is_active" value="0"<?php if ($is_active=='0') { echo ' checked="checked"'; } ?> /> <?php echo _('No'); ?></p>
 <p>
 <input type="submit" name="submit" value="<?php echo _('Submit Changes'); ?>"></p>
-</form></p>
+</form>
 
 <?php
 
@@ -138,10 +137,10 @@ $result = db_query_params ('SELECT * FROM surveys WHERE group_id=$1',
 $numrows=db_numrows($result);
 
 ?>
-<p>
+
 <form>
 <input type="button" name="none" value="<?php echo _('Show Existing Questions'); ?>" onclick="show_questions()" />
-</form></p>
+</form>
 <p>&nbsp;</p>
 <h2><?php echo ngettext('Existing Survey', 'Existing Surveys', $numrows) ?></h2>
 <?php

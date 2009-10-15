@@ -83,13 +83,16 @@ echo "<h2>".$title."</h2>";
 		echo "<h2>"._('Add New Custom Field')."</h2>";
 		?>
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
-		<input type="hidden" name="add_extrafield" value="y" />
 		<p>
+		<input type="hidden" name="add_extrafield" value="y" />
 		<strong><?php echo _('Custom Field Name') ?>:</strong><br />
-		<input type="text" name="name" value="" size="15" maxlength="30" /><br />
+		<input type="text" name="name" value="" size="15" maxlength="30" />
+		</p>
 		<p>
 		<strong><?php echo _('Field alias') ?>:</strong><br />
-		<input type="text" name="alias" value="" size="15" maxlength="30" /><br />
+		<input type="text" name="alias" value="" size="15" maxlength="30" />
+		</p>
+
 		<p>
 		<strong><?php  echo _('Type of custom field') ?>:</strong><br />
 		<input type="radio" name="field_type" value="1" /> <?php echo _('Select Box'); ?><br />
@@ -106,9 +109,10 @@ echo "<h2>".$title."</h2>";
 		<p>
 		<?php echo _('Text Fields and Text Areas need to have Size/Maxlength and Rows/Cols defined, respectively.'); ?><br />
 		<?php echo _('Text Field Size/Text Area Rows'); ?>
-			<input type="text" name="attribute1" value="0" size="2" maxlength="2"><br />
+			<input type="text" name="attribute1" value="20" size="2" maxlength="2" /><br />
 		<?php echo _('Text Field Maxlength/Text Area Columns'); ?>
-			<input type="text" name="attribute2" value="0" size="2" maxlength="2">
+			<input type="text" name="attribute2" value="80" size="2" maxlength="2" />
+		</p>
 		<p>
 		<span class="warning"><?php echo _('Warning: this add new custom field') ?></span>
 		</p>

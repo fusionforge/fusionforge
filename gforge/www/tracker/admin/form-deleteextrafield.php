@@ -5,10 +5,10 @@ $ath->adminHeader(array ('title'=>sprintf(_('Delete a custom field for %s'),$ath
 		$id = getStringFromRequest('id');
 
 		?>
-		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
+		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
 		<p>
-		<input type="hidden" name="deleteextrafield" value="y" /><br />
-		<input type="hidden" name="id" value="<?php echo $id; ?>" /><br />
+		<input type="hidden" name="deleteextrafield" value="y" />
+		<input type="hidden" name="id" value="<?php echo $id; ?>" />
 		<?php echo _('You are about to permanently and irretrievably delete this custom field and all its contents!'); ?>
 		</p>
 		<p>

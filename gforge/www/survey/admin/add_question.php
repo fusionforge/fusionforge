@@ -82,13 +82,12 @@ echo html_build_select_box($result,'question_type','xzxz',false);
 ?>
 </p>
 
-<p><input type="submit" name="submit" value="<?php echo _('Add This Question.'); ?>"></p>
-</form></p>
+<p><input type="submit" name="submit" value="<?php echo _('Add This Question.'); ?>" /></p>
+</form>
 
-<p>
 <form>
 <input type="button" name="none" value="<?php echo _('Show Existing Questions.'); ?>" onclick="show_questions()" />
-</form></p>
+</form>
 
 <?php
 

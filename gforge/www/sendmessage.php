@@ -119,15 +119,14 @@ $HTML->header(array('title'=>$GLOBALS['sys_name'].' Staff'));
 
 ?>
 
-<p>
+<p />
 <?php echo _('In an attempt to reduce spam, we are using this form to send email.<p />Fill it out accurately and completely or the receiver may not be able to respond.<p /><span class="important"><b>IF YOU ARE WRITING FOR HELP:</b> Did you read the site documentation? Did you include your <b>user_id</b> and <b>user_name?</b> If you are writing about a project, include your <b>project id</b> (<b>group_id</b>) and <b>Project Name</b>.</span>'); ?>
-</p>
-
+<p />
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
 <input type="hidden" name="toaddress" value="<?php echo $toaddress; ?>" />
 <input type="hidden" name="touser" value="<?php echo $touser; ?>" />
-<p />
+
 <strong><?php echo _('Your Name').utils_requiredField() ?> :</strong><br />
 <input type="text" name="name" size="40" maxlength="40" value="<?php echo $name ?>" />
 <p />

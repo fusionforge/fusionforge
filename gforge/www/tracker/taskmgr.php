@@ -95,7 +95,7 @@ if (getStringFromRequest('add_to_task')) {
 		echo '<option value="'.$pt_arr[$i]->getID().'">'.$pt_arr[$i]->getSummary().'</option>';
 	}
 	echo '</select><br />
-		<input type="submit" name="done_adding" value="'._('Add Relationship To Selected Task') . '">
+		<input type="submit" name="done_adding" value="'._('Add Relationship To Selected Task') . '" />
 		</form>';
 
 //

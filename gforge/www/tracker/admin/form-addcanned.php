@@ -40,8 +40,7 @@ echo "<h1>".$title."</h1>";
 		}
 		?>
 		<p><?php echo _('Creating useful generic messages can save you a lot of time when handling common artifact requests.') ?></p>
-		<p>
-		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
+		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
 		<input type="hidden" name="add_canned" value="y" />
 		<strong><?php echo _('Title') ?>:</strong><br />
 		<input type="text" name="title" value="" size="50" maxlength="50" />
