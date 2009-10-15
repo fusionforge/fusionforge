@@ -105,7 +105,7 @@ function ShowHBar(&$legend, &$value) {
     $bplot->SetFillGradient("navy","lightsteelblue",GRAD_MIDVER);
  
     $graph->Add($bplot);
-    
+
     $graph->Stroke();
 }
 ?>

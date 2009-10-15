@@ -29,17 +29,17 @@ echo '<h2>'.$title.'</h2>';
 			<input type="text" name="name" value="<?php echo $ac->getName(); ?>" /></p>
 		<p>
 		<?php if ($ac->getType() == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) { ?>
-		<b><?php echo _('Text Area Rows'); ?></b><br />
-		<input type="text" name="attribute1" value="<?php echo $ac->getAttribute1(); ?>" size="2" maxlength="2" />
-		</p><p>
-		<b><?php echo _('Text Area Columns'); ?></b><br />
-		<input type="text" name="attribute2" value="<?php echo $ac->getAttribute2(); ?>" size="2" maxlength="2" />
+			<b><?php echo _('Text Area Rows'); ?></b><br />
+			<input type="text" name="attribute1" value="<?php echo $ac->getAttribute1(); ?>" size="2" maxlength="2" />
+			</p><p>
+			<b><?php echo _('Text Area Columns'); ?></b><br />
+			<input type="text" name="attribute2" value="<?php echo $ac->getAttribute2(); ?>" size="2" maxlength="2" />
 		<?php } elseif ($ac->getType() == ARTIFACT_EXTRAFIELDTYPE_TEXT || $ac->getType() == ARTIFACT_EXTRAFIELDTYPE_RELATION) {?>
-		<b><?php echo _('Text Field Size'); ?></b><br />
-		<input type="text" name="attribute1" value="<?php echo $ac->getAttribute1(); ?>" size="2" maxlength="2" />
-		</p><p>
-		<b><?php echo _('Text Field Maxlength'); ?></b><br />
-		<input type="text" name="attribute2" value="<?php echo $ac->getAttribute2(); ?>" size="2" maxlength="2" />
+			<b><?php echo _('Text Field Size'); ?></b><br />
+			<input type="text" name="attribute1" value="<?php echo $ac->getAttribute1(); ?>" size="2" maxlength="2" />
+			</p><p>
+			<b><?php echo _('Text Field Maxlength'); ?></b><br />
+			<input type="text" name="attribute2" value="<?php echo $ac->getAttribute2(); ?>" size="2" maxlength="2" />
 		<?php } else { ?>
 			<input type="hidden" name="attribute1" value="0" />
 			<input type="hidden" name="attribute2" value="0" />

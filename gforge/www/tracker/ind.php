@@ -41,7 +41,7 @@ if (!$at_arr || count($at_arr) < 1) {
 
 	/*
 		Put the result set (list of trackers for this group) into a column with folders
-		*/
+	*/
 	$tablearr=array(_('Tracker'),_('Description'),_('Open'),_('Total'));
 	echo $HTML->listTableTop($tablearr);
 

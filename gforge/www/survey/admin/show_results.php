@@ -66,44 +66,44 @@ if ($survey_id) {
     $s = new Survey($g, $survey_id);
 		
     if (!$s || !is_object($s)) {
-	echo "<h3>"._('Error'). ' Can not get Survey' ."</h3>";
-	$sh->footer(array());
-	exit;
+		echo "<h3>"._('Error'). ' Can not get Survey' ."</h3>";
+		$sh->footer(array());
+		exit;
     } else if ( $s->isError()) {
-	echo "<h3>"._('Error'). $s->getErrorMessage() ."</h3>";
-	$sh->footer(array());
-	exit;
+		echo "<h3>"._('Error'). $s->getErrorMessage() ."</h3>";
+		$sh->footer(array());
+		exit;
     }
 
     /* A specific question */
     $question_id = getIntFromRequest('question_id');
     if ($question_id) {
-	/* Create a Survey Question for general purpose */
-	$sq = new SurveyQuestion($g, $question_id);
-	if (!$sq || !is_object($sq)) {
-	    echo "<h3>"._('Error'). ' Can not get Survey Question' ."</h3>";
-	} else if ( $sq->isError()) {
-	    echo "<h3>"._('Error'). $sq->getErrorMessage() ."</h3>";
-	} else {
-	    showResult($sh, $s, $sq, 1, 0, $graph);
-	}
+		/* Create a Survey Question for general purpose */
+		$sq = new SurveyQuestion($g, $question_id);
+		if (!$sq || !is_object($sq)) {
+	    	echo "<h3>"._('Error'). ' Can not get Survey Question' ."</h3>";
+		} else if ( $sq->isError()) {
+	    	echo "<h3>"._('Error'). $sq->getErrorMessage() ."</h3>";
+		} else {
+	    	showResult($sh, $s, $sq, 1, 0, $graph);
+		}
 	
     } else {
-	echo '<h2>'.$s->getTitle().' ( '. $s->getNumberOfVotes() .' Votes )</h2><p/>';
+		echo '<h2>'.$s->getTitle().' ( '. $s->getNumberOfVotes() .' Votes )</h2><p/>';
 
-	/* Get questions of this survey */
-	$questions = & $s->getQuestionInstances();
+		/* Get questions of this survey */
+		$questions = & $s->getQuestionInstances();
 	
-	$question_number = 1;
-	for ($i=0; $i<count($questions); $i++) {
-	    if ($questions[$i]->isError()) {
-		echo $questions[$i]->getErrorMessage();
-	    } else {
-		if ($questions[$i]->getQuestionType()!='4') {
-		    showResult($sh, $s, $questions[$i], $show_comment, $question_number++, $graph);
+		$question_number = 1;
+		for ($i=0; $i<count($questions); $i++) {
+	    	if ($questions[$i]->isError()) {
+				echo $questions[$i]->getErrorMessage();
+	    	} else {
+				if ($questions[$i]->getQuestionType()!='4') {
+		    		showResult($sh, $s, $questions[$i], $show_comment, $question_number++, $graph);
+				}
+	    	}
 		}
-	    }
-	}
     }
 }
 

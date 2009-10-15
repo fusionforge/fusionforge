@@ -217,8 +217,8 @@ switch (getStringFromRequest('func')) {
 			}
 			unset($ah);
 
-			if (!$was_error) {
-				$feedback = _('Updated successfully');			}
+		if (!$was_error) {
+			$feedback = $Language->getText('tracker','updated_successful');			}
 		}
 		unset ($extra_fields_choice);
 		include $gfwww.'tracker/browse.php';
@@ -269,7 +269,7 @@ switch (getStringFromRequest('func')) {
 				//admin and techs can do everything
 				//techs will have certain fields overridden inside the update() function call
 				if (!$ah->update($priority,$status_id,
-				$assigned_to,$summary,$canned_response,$details,$new_artifact_type_id,$extra_fields, $description)) {
+					$assigned_to,$summary,$canned_response,$details,$new_artifact_type_id,$extra_fields, $description)) {
 					form_release_key(getStringFromRequest('form_key'));
 					$error_msg .= _('Tracker Item'). ': '.$ah->getErrorMessage();
 					$ah->clearError();
@@ -309,8 +309,8 @@ switch (getStringFromRequest('func')) {
 			}
 
 			// Admin, Techs and Submitter can add files.
-			if ($ath->userIsAdmin() || $ath->userIsTechnician() ||
-			(session_loggedin() && ($ah->getSubmittedBy() == user_getid()))) {
+			if ($ath->userIsAdmin() || $ath->userIsTechnician() || 
+				(session_loggedin() && ($ah->getSubmittedBy() == user_getid()))) {
 				//
 				//	  Attach files to this Artifact.
 				//
