@@ -45,7 +45,7 @@ $ath->header(array ('title'=>_('Submit')));
 		echo '
 		<span class="error">'.sprintf(_('Please %1$s login %2$s'), '<a href="'.util_make_url ('/account/login.php?return_to='.urlencode($REQUEST_URI)).'">', '</a>').'</span><<br />
 		'._('If you <strong>cannot</strong> login, then enter your email address here').':<p>
-		<input type="text" name="user_email" size="30" maxlength="35" /></p>
+		<input type="text" name="user_email" size="50" maxlength="255" /></p>
 		';
 	} 
 	echo '
@@ -79,7 +79,7 @@ $ath->header(array ('title'=>_('Submit')));
 	<tr>
 		<td colspan="2">
 		<strong><?php echo _('Detailed description') ?><?php echo utils_requiredField(); ?>:</strong><?php echo notepad_button('document.forms[1].details') ?><br /> 
-		<textarea name="details" rows="30" cols="79"></textarea>
+		<textarea name="details" rows="20" cols="79"></textarea>
 		</td>
 	</tr>
 

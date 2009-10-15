@@ -39,7 +39,7 @@
 			$pos = array_search($f, $browse_fields);
 			echo "<input type=\"text\" name=\"browse_fields[$f]\" value=\"" .
 				 (($pos !== false) ? $pos + 1 : '') .
-				 "\" size=\"3\" maxlength=\"3\" />" .
+				 "\" size=\"3\" maxlength=\"3\" /> " .
 				 $name .
 				 "<br />\n";
 		}	
@@ -52,7 +52,7 @@
 				$pos = array_search($i, $browse_fields);
 				echo "<input type=\"text\" name=\"browse_fields[$i]\" value=\"" .
 				 	 (($pos !== false) ? $pos + 1 : '') .
-				 	 "\" size=\"3\" maxlength=\"3\" />" .
+				 	 "\" size=\"3\" maxlength=\"3\" /> " .
 					 $efarr[$i]['field_name'] .
 					 "<br />\n";
 			}
