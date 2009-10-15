@@ -258,11 +258,23 @@ echo '
 	<tr class="tablecontent">
 		<td>';
 	if(db_numrows($res)>0) {
+		if ($query_type == 0 || ($query_type>0 && $ath->userIsAdmin())) {
+			$allow_update = true;
+			$checked[1] = '';
+			$checked[3] = ' checked="checked"';
+		} else {
+			$allow_update = false;
+			$checked[1] = ' checked="checked"';
+			$checked[3] = '';
+		}
 		echo '
-		<input type="radio" name="query_action" value="1" />'._('Name and Save Query').'<br />
-		<input type="radio" name="query_action" value="4" />'._('Load Query').'<br />
-		<input type="radio" name="query_action" value="3" checked="checked" />'._('Update Query').'<br />
+		<input type="radio" name="query_action" value="1"'.$checked[1].' />'._('Name and Save Query').'<br />
+		<input type="radio" name="query_action" value="4" />'._('Load Query').'<br />';
+		if ($allow_update) {
+			echo '
+		<input type="radio" name="query_action" value="3"'.$checked[3].' />'._('Update Query').'<br />
 		<input type="radio" name="query_action" value="5" />'._('Delete Query');
+		}
 	} else {
 		echo '
 		<input type="hidden" name="query_action" value="1" />'._('Name and Save Query').'<br />';
