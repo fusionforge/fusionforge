@@ -39,8 +39,4 @@ echo $HTML->header(array('title'=>_('Survey')));
 
 <p><strong><?php printf(_('The %1$s Team'), $GLOBALS['sys_name']); ?></strong></p>
 
-<?php
-
-echo $HTML->footer(array());
-
-?>
+<?php echo $HTML->footer(array()); ?>
