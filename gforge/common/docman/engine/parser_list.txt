@@ -27,3 +27,4 @@ text/plain				parser_text.php
 application/pdf				parser_pdf.php
 application/vnd.sun.xml.writer		parser_oo.php
 application/vnd.oasis.opendocument.text	parser_oo.php
+application/msword			parser_doc.php
