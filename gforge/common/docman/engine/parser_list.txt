@@ -23,8 +23,8 @@
 #
 # Tupple : type file   parser file
 # This list is used by the ParserData class to find if any parser is available for that type of file
-text/plain				parser_text.php
-application/pdf				parser_pdf.php
-application/vnd.sun.xml.writer		parser_oo.php
-application/vnd.oasis.opendocument.text	parser_oo.php
-application/msword			parser_doc.php
+text/plain					parser_text.php
+application/pdf					parser_pdf.php
+application/vnd.oasis.opendocument.presentation	parser_oo.php
+application/vnd.oasis.opendocument.text		parser_oo.php
+application/msword				parser_doc.php
