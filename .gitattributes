@@ -13,7 +13,6 @@ gforge/common/docman/Parsedata.class.php -text
 gforge/common/docman/engine/parser_list.txt -text
 gforge/common/docman/engine/parser_oo.php -text
 gforge/common/docman/engine/parser_pdf.php -text
-gforge/common/docman/engine/parser_pdf.php.php -text
 gforge/common/docman/engine/parser_text.inc.php -text
 gforge/common/docman/engine/parser_text.php -text
 gforge/common/include/TextSanitizer.class.php -text
