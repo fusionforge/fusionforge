@@ -107,9 +107,8 @@ $sum_totals=array();
 function get_trove_sub_projects($cat_id) {
 	global $cat_counts,$sum_totals,$parent_list;
 
-	//number of groups that were in this trove_cat
-	$count=$cat_counts[$cat_id][1];
-	if ($count == '') { $count = 0 ; }
+	// Number of groups that were in this trove_cat
+	$count=isset($cat_counts[$cat_id][1]) ? $cat_counts[$cat_id][1] : 0;
  
 	//number of children of this trove_cat
 	$rows=count( @$parent_list[$cat_id] );
