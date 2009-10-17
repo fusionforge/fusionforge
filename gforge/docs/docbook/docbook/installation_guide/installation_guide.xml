@@ -383,7 +383,7 @@ zone "gforge.company.com" {
           <para><emphasis>Serving Web pages</emphasis>.  In this case, PHP is usually used as module and its configuration is in virtual host configuration, as shown later in the document.  If you prefer to configure <filename>php.ini</filename>, the following directives are required by FusionForge:</para>
           <programlisting>
 <!-- register_globals = Off-->
-magic_quotes_gpc = On
+magic_quotes_gpc = Off
 file_uploads = On
 include_path=&quot;.:<replaceable>/opt/gforge</replaceable>:<replaceable>/opt/gforge</replaceable>/www/include:/etc/gforge&quot;
 </programlisting>
@@ -517,7 +517,7 @@ php_value  default_charset  &quot;UTF-8&quot;
 </programlisting>
           <para>Add these lines in your conf apache </para>
           <programlisting>
-php_flag   magic_quotes_gpc On
+php_flag   magic_quotes_gpc Off
 php_value  include_path     &quot;.:/etc/gforge:<replaceable>/opt/gforge</replaceable>:<replaceable>/opt/gforge</replaceable>/www/include&quot;
 </programlisting>
         </listitem>
@@ -1141,7 +1141,7 @@ $conn = pg_connect(
     <para>Q: How do I backup FusionForge?</para>
     <para>A: The only proper way to backup the gforge database is with <command>pg_dump</command>.  Any attempt to backup the filesystem while pgsql is running will result in a useless and corrupt backup. You can backup CVS trees using <command>tar</command> as long as they are not actively and heavily used during the backup. Mailman and the FRS uploads dir can also be backed up with <command>tar</command>.</para>
     <para>Q: Any time i enter an apostrophe in a text box, i get a parse error</para>
-    <para>A: As stated in the instructions above, you should have <literal>magic_quotes_gpc=On</literal> in your <filename>php.ini</filename> file.</para>
+    <para>A: As stated in the instructions above, you should have <literal>magic_quotes_gpc=Off</literal> in your <filename>php.ini</filename> file.</para>
     <para>Q: Large uploads into FRS or the doc manager fail.</para>
     <para>A: Apache and the <filename>php.ini</filename> file need to have upload limits and possibly memory limits increased.</para>
     <para>Q: When I click on <filename>/projects/</filename> or <filename>/users/</filename> links, I get a <computeroutput>Page Not Found</computeroutput> error instead of the page I expected.</para>

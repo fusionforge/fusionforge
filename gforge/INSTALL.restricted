@@ -283,8 +283,8 @@ PHP setup
 Add the following lines to the .htaccess file in your ~/gforge/lib/www directory.
 The crontab.in file also can be modified to include this path as well.
 
-php_value register_globals 1d
-php_value magic_quotes_gpc 1
+php_value register_globals Off
+php_value magic_quotes_gpc Off
 php_value file_uploads 1
 php_value include_path = ".:~/gforge/lib/:~/gforge/lib/www/include/:~/gforge/etc/"
 
@@ -454,12 +454,6 @@ Any attempt to backup the filesystem while pgsql is running will result
 in a useless and corrupt backup. You can backup CVS trees using tar as 
 long as they are not actively and heavily used during the backup. 
 Mailman and the FRS uploads dir can also be backed up with tar.
-
-
-Q: Any time i enter an apostrophe in a text box, i get a parse error
-
-A: As stated in the instructions above, you should have magic_quotes_gpc=On
-in your php.ini file
 
 
 Q: Large uploads into FRS or the doc manager fail.

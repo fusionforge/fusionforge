@@ -187,7 +187,7 @@ You may also add the include_path to the php.ini, as it will be
 necessary for your php cgi to run the cron jobs.
 
 register_globals = Off
-magic_quotes_gpc = On
+magic_quotes_gpc = Off
 file_uploads = On
 include_path = ".:/opt/gforge/gforge/:/opt/gforge/gforge/www/include/:/etc/gforge/"
 
@@ -195,7 +195,7 @@ PHP CLI that is used by crontab.in may use different php.ini.  Find
 it by running the following command and add the above include_path
 directive there:
 
-$ /usr/bin/php4 -i | fgrep php.ini
+$ /usr/bin/php -i | fgrep php.ini
 
 
 FRS - File Release System
@@ -371,12 +371,6 @@ Any attempt to backup the filesystem while pgsql is running will result
 in a useless and corrupt backup. You can backup CVS trees using tar as 
 long as they are not actively and heavily used during the backup. 
 Mailman and the FRS uploads dir can also be backed up with tar.
-
-
-Q: Any time i enter an apostrophe in a text box, i get a parse error
-
-A: As stated in the instructions above, you should have magic_quotes_gpc=On
-in your php.ini file
 
 
 Q: Large uploads into FRS or the doc manager fail.
