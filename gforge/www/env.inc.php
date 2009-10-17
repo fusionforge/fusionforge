@@ -1,24 +1,18 @@
 <?php
 /*
- * Sets the default required environnement for Gforge
+ * Sets the default required environnement for FusionForge
  *
  * Some of the settings made here can be overwrite in the
  * configuration file if needed.
  * 
  */
 
-# In case of errors, let output be clean.
-$gfRequestTime = microtime( true );
-
-@ini_set( 'memory_limit', '20M' );
-@ini_set( "display_errors", false );
-
-error_reporting( E_ALL );
-
-# Attempt to set up the include path, to fix problems with relative includes
+// Attempt to set up the include path, to fix problems with relative includes
 $fusionforge_basedir = dirname(dirname( __FILE__ )) ;
 $include_path = join(PATH_SEPARATOR, 
-	array("/etc/gforge/custom", "/etc/gforge", "$fusionforge_basedir/common", "$fusionforge_basedir/www",	"$fusionforge_basedir/plugins", "$fusionforge_basedir", ".", "/usr/share/php"));
+	array("/etc/gforge/custom", "/etc/gforge", "$fusionforge_basedir/common", "$fusionforge_basedir/www",
+		"$fusionforge_basedir/plugins", "$fusionforge_basedir",
+		".", "/usr/share/php"));
 
 // By default, the include_path is changed to include path needed by Gforge.
 // If this does not work, then set defines to real path directly.
