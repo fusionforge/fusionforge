@@ -42,7 +42,7 @@ function site_stats_day($year,$month,$day) {
 	$2,
 	(SELECT COUNT(DISTINCT(user_id)) FROM user_session WHERE (time < $3 AND time > $4)),
 	(SELECT COUNT(session_hash) FROM user_session WHERE (time < $3 AND time > $4)),
-	(SELECT COUNT(user_id) FROM users WHERE ( add_date < $3 AND status=$4 )),
+	(SELECT COUNT(user_id) FROM users WHERE ( add_date < $3 AND status=$5 )),
 	(SELECT COUNT(user_id) FROM users WHERE ( add_date < $3 AND add_date > $4 )),
 	(SELECT COUNT(group_id) FROM groups WHERE ( register_time < $3 AND register_time > $4 )))',
 				array("$year$month",

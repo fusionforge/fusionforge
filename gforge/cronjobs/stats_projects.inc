@@ -273,10 +273,10 @@ OR tasks_closed > 0
 OR help_requests > 0;");
 	} else {
 
-	db_query_params ('INSERT INTO stats_project
+		db_query_params ('INSERT INTO stats_project
 SELECT
-'$1'::int AS month,
-'$2'::int AS day,
+$1::int AS month,
+$2::int AS day,
 * FROM (
 SELECT
 	groups.group_id,
@@ -504,7 +504,7 @@ OR artifacts_closed > 0
 OR tasks_opened > 0
 OR tasks_closed > 0
 OR help_requests > 0;',
-			array("$year$month",
+			array($year.$month,
 			      $day,
 			      $day_begin,
 			      $day_end,
@@ -515,10 +515,10 @@ OR help_requests > 0;',
 			      '3',
 			      '3'));
 
-	echo db_error();
+		echo db_error();
 
-	db_commit();
-
+		db_commit();
+	}
 }
 
 // Local Variables:
