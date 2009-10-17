@@ -97,7 +97,7 @@ if ( ! $upload_enabled ) {
 <!-- /PALM -->
 
 <tr id="ivcal"><td>
-	<label><?php etranslate("Overwrite Prior Import")?>:</label></td<td>
+	<label><?php etranslate("Overwrite Prior Import")?>:</label></td><td>
 	<label><input type="radio" name="overwrite" value="Y" checked="checked" />&nbsp;<?php etranslate("Yes");?></label> 
 	<label><input type="radio" name="overwrite" value="N" />&nbsp;<?php etranslate("No");?></label>
 </td></tr>
