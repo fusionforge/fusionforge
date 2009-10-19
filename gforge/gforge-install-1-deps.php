@@ -46,6 +46,7 @@ function INFO($message)
 
 function installRedhat() {
 	addFusionForgeYumRepo();
+	addDagRPMForgeYumRepo();
 	INFO("Installing packages: Executing YUM. Please wait...\n\n\n");
 	passthru("yum -y install httpd php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php-pgsql subversion mod_dav_svn postfix rcs php-gd mod_ssl wget openssh inetd which liberation-fonts htmlpurifier php-mbstring poppler-utils php-pecl-zip antiword");
 }
@@ -130,6 +131,20 @@ enabled = 1
 protect = 0
 gpgcheck = 0';
 	file_put_contents('/etc/yum.repos.d/fusionforge.repo', $repo);
+}
+function addDagRPMForgeYumRepo() {
+	INFO("Adding Dag RPMForge YUM repository\n");
+	$repo = '
+# Name: RPMforge RPM Repository for Red Hat Enterprise 5 - dag
+# URL: http://rpmforge.net/
+[dag-rpmforge]
+name = Red Hat Enterprise $releasever - RPMforge.net - dag
+baseurl = http://apt.sw.be/redhat/el5/en/$basearch/dag
+#mirrorlist = http://apt.sw.be/redhat/el5/en/mirrors-rpmforge
+enabled = 1
+protect = 0
+gpgcheck = 0';
+	file_put_contents('/etc/yum.repos.d/dag-rpmforge.repo', $repo);
 }
 
 if (count($argv) < 2) {
