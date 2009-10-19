@@ -96,7 +96,7 @@ function get_parser_list ($parser_path)
 		{
 			if (trim($a) != "" && substr($a, 0,1) != "#")
 			{
-				$a2 = explode ("\t", $a);
+				$a2 = explode ("|", $a);
 				$rep[$a2[0]] = $a2[1];
 			}
 		}

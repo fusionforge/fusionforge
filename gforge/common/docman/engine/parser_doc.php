@@ -37,7 +37,7 @@ if ($argc != 2)
 $fichin = $argv[1];
 if (!is_file($fichin)) exit (1);
 $fichout = "/tmp/gfo".rand(10000, 99999).".tmp";
-$cmd = "/usr/bin/antiword -i1 -t $fichin - > $fichout";
+$cmd = "/usr/bin/antiword -i1 -t $fichin > $fichout";
 $res = shell_exec($cmd);
 
 
