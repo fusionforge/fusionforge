@@ -253,7 +253,7 @@ while ($row_cat = db_fetch_array($res_cat)) {
 	$row_cat['group_name'] = htmlspecialchars($row_cat['group_name']);
 	print '
 		<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>
-		<td>'.$row_cat['group_name'].'</td>
+		<td>'.util_unconvert_htmlspecialchars($row_cat['group_name']).'</td>
 		<td>'.$row_cat['unix_group_name'].'</td>
 		<td width="40%">'.util_make_link ('/project/admin/?group_id='.$row_cat['group_id'],_('[Project Admin]')).'</td>
 		</tr>
