@@ -139,7 +139,7 @@ class Permission extends Error {
 	 *  fetchData - fetch the data for this Permission from the database.
 	 *
 	 *  @return	boolean success.
-	 *	@access private.
+	 *	@access private
 	 */
 	function fetchData() {
 		$res = db_query_params ('SELECT * FROM user_group WHERE user_id=$1 AND group_id=$2',
@@ -304,7 +304,7 @@ class Permission extends Error {
 	 *	getPermData - returns the assocative array from the db.
 	 *
 	 *	@return array The array of data.
-	 *	@access private.
+	 *	@access private
 	 */
 	function &getPermData() {
 		return $this->data_array;

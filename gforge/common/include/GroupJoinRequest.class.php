@@ -169,7 +169,7 @@ class GroupJoinRequest extends Error {
 	 *      getID - get this GroupJoinRequest ID
 	 *
 	 *      @return int The group_id.
-	 * /
+	 */
 	function getID() {
 		return $this->data_array['group_id'];
 	}
@@ -196,7 +196,7 @@ class GroupJoinRequest extends Error {
 	 *      getComments - get the field comments.
 	 *
 	 *      @return text The field.
-	 * /
+	 */
 	function getComments() {
 		return $this->data_array['comments'];
 	}

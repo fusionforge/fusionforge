@@ -701,7 +701,7 @@ class Artifact extends Error {
 	 *	@param	string	The message being attached.
 	 *	@param	string	Email address of message creator.
 	 *	@param	bool	Whether to email out a followup.
-	 *	@access private.
+	 *	@access private
 	 *  @return	boolean	success.
 	 */
 	function addMessage($body,$by=false,$send_followup=false) {
@@ -747,7 +747,7 @@ class Artifact extends Error {
 	 *
 	 *  @param	string	The name of the field in the database being modified.
 	 *  @param	string	The former value of this field.
-	 *  @access private.
+	 *  @access private
 	 *  @return	boolean	success.
 	 */
 	function addHistory($field_name,$old_value) {
@@ -1317,7 +1317,7 @@ class Artifact extends Error {
 	 *	@param	int		(1) initial/creation (2) update.
 	 *	@param	array	Array of additional addresses to mail to.
 	 *	@param	array	Array of fields changed in this update .
-	 *	@access private.
+	 *	@access private
 	 *	@return	boolean	success.
 	 */
 	function mailFollowup($type, $more_addresses=false, $changes='') {

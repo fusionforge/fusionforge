@@ -26,8 +26,8 @@ class Parsedata {
 	/**
 	 *  Constructor.
 	 *
-	 *	@param
-	 *	@return
+	 *	@param	string
+	 *	@return true
 	 */
 	 var $parsers;
 	 var $p_path = "";

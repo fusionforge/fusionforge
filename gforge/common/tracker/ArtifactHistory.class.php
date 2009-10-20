@@ -157,7 +157,7 @@ class ArtifactHistory extends Error {
 	 *	getName - get the name.
 	 *
 	 *	@return	string	The name.
-	 * /
+	 */
 	function getName() {
 		return $this->data_array['category_name'];
 	}
@@ -166,11 +166,10 @@ class ArtifactHistory extends Error {
 	 *	getAssignee - get the user_id of the person to assign this category to.
 	 *
 	 *	@return int user_id.
-	 * /
+	 */
 	function getAssignee() {
 		return $this->data_array['auto_assign_to'];
 	}
-	*/
 }
 
 // Local Variables:
