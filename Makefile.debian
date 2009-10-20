@@ -109,7 +109,7 @@ $(PKGNAME)/docs/phpdoc/docs:
 # Build with cowbuilder or pbuilder
 #
 
-all: cowbuilddeb cowbuildubu # ***** Build all package for debian and ubuntu ***** #
+all: cleanorig cowbuilddeb cowbuildubu # ***** Build all package for debian and ubuntu ***** #
 
 deploy: repodeb repoubu # ***** Deploy packages in Debian and Ubuntu repositories ***** #
 
@@ -266,3 +266,6 @@ cleanenv: # Clean $(COWBUILDERBASE) $(PBUILDERTGZ) (chroots)#
 
 cleancache: # Clean $(APTCACHE) (apt cache) #
 	rm -rf $(APTCACHE)
+
+cleanorig: # Clean $(TARBALLS)/$(ORIGFILE) #
+	rm -f $(TARBALLS)/$(ORIGFILE)
