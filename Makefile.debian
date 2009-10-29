@@ -18,7 +18,7 @@ LOCALREPOUBU=/var/www/ubuntu-fusionforge-$(BRANCH)
 DEBIANLIST=1lenny 2squeeze 3sid
 DEBIANLISTP=1etch
 DEBLIST=$(DEBIANLIST) $(DEBIANLISTP)
-UBUNTULIST=1hardy 1intrepid 1jaunty
+UBUNTULIST=1hardy 1intrepid 1jaunty 1karmic
 UBUNTULISTP=1gutsy
 UBULIST=$(UBUNTULIST) $(UBUNTULISTP)
 # Try if a local mirror is available
@@ -75,11 +75,26 @@ list:
 lenny:    # Simply build lenny packages #
 	make cowbuilddeb DEBIANLIST=1lenny
 
-rlenny:
+squeeze:    # Simply build squeeze packages #
+	make cowbuilddeb DEBIANLIST=2squeeze
+
+sid:    # Simply build squeeze packages #
+	make cowbuilddeb DEBIANLIST=3sid
+
+rlenny: # Make a lenny repository #
 	make repodeb DEBIANLIST=1lenny
 
 intrepid: # Simply build intrepid packages #
 	make cowbuildubu UBUNTULIST=1intrepid
+
+jaunty: # Simply build jaunty packages #
+	make cowbuildubu UBUNTULIST=1jaunty
+
+karmic: # Simply build karmic packages #
+	make cowbuildubu UBUNTULIST=1karmic
+
+rkarmic: # Make a karmic repository #
+	make repoubu UBUNTULIST=1karmic
 
 
 documentor_path=/tmp
