@@ -13,9 +13,9 @@
 # That's why it is inspired by LDAP and Autologin examples
 #
 # The skin is in :
-# usr/share/mediawiki/skins/GForge.php file 
+# usr/share/mediawiki/skins/FusionForge.php file 
 # and 
-# usr/share/mediawiki/skins/gforge/ dir
+# usr/share/mediawiki/skins/fusionforge/ dir
 # It is based on monobook skin and all css changes are only in main.css
 #
 # usr/share/gforge/etc/httpd.d/03mediawiki contains the apache part you need to add to have this work
@@ -52,7 +52,7 @@
 ## $user: writes user object to this parameter
 #$wgHooks['AutoAuthenticate'][] = array($wgAuth, 'getGForgeUserSession',array());
 # ---------------------------------------
-# This is mostly the only thing you have to do to activate GForge mediawiki plugin
+# This is mostly the only thing you have to do to activate FusionForge mediawiki plugin
 # and tell mediawiki you want to use gforge skin
 # disable the other skins is recommended
 #
