@@ -1,4 +1,4 @@
-gforge (4.8.53-1) experimental; urgency=low
+gforge (4.8.55-1) experimental; urgency=low
 
   [ Christian Bayle ]
   * bump to new version because on binary commit
@@ -14,7 +14,10 @@ gforge (4.8.53-1) experimental; urgency=low
     not quite complete yet.
   * Patched mediawiki plugin to enable one wiki per project.
 
- -- Roland Mas <lolando@debian.org>  Wed, 23 Sep 2009 14:44:50 +0200
+  [ Christian Bayle ]
+  * Remove frame from mediawiki 
+
+ -- Christian Bayle <bayle@debian.org>  Fri, 30 Oct 2009 22:31:45 +0100
 
 gforge (4.8.51-1) experimental; urgency=low
 

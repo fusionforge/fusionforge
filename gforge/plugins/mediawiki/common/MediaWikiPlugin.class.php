@@ -54,7 +54,11 @@ class MediaWikiPlugin extends Plugin {
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
-				$params['DIRS'][]=util_make_url ('/plugins/mediawiki/frame.php?group_id=' . $project->getID()) ; 
+				if ($GLOBALS['sys_use_mwframe']){
+					$params['DIRS'][]=util_make_url ('/plugins/mediawiki/frame.php?group_id=' . $project->getID()) ; 
+				} else {
+					$params['DIRS'][]=util_make_url('/plugins/mediawiki/wiki/'.$project->getUnixName().'/index.php');
+				}
 			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == "groupisactivecheckbox") {

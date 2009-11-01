@@ -6,4 +6,5 @@ usr/share/gforge/plugins/mediawiki/cronjobs
 usr/share/gforge/www/plugins/mediawiki
 usr/share/gforge/etc/httpd.d
 usr/share/mediawiki/skins
+usr/share/mediawiki/skins/fusionforge
 var/lib/gforge/plugins/mediawiki/wikidata
