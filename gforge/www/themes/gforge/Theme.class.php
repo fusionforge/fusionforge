@@ -148,9 +148,9 @@ class Theme extends Layout {
         <td class="middleRight"><?php
 	if (session_loggedin()) {
 		$u =& user_get_object(user_getid());
-		echo util_make_link ('/account/logout.php', sprintf("%s (%s)", _('Log Out'), $u->getRealName()));
+		echo util_make_link ('/account/logout.php', sprintf("%s (%s)", _('Log Out'), $u->getRealName()),array('class'=>'userlink'));
         	echo ' | ';
-        	echo util_make_link ('/account/', _('My Account'));
+        	echo util_make_link ('/account/', _('My Account'),array('class'=>'userlink'));
         } else {
 			$url = '/account/login.php';
         	if(getStringFromServer('REQUEST_METHOD') != 'POST') {
@@ -158,10 +158,10 @@ class Theme extends Layout {
         		$url .= urlencode(getStringFromServer('REQUEST_URI'));
         	}
 
-        	echo util_make_link ($url, _('Log In'));
+        	echo util_make_link ($url, _('Log In'),array('class'=>'userlink'));
         	echo ' | ';
         	if (!$GLOBALS['sys_user_reg_restricted']) {
-        		echo util_make_link ('/account/register.php', _('New Account'));
+        		echo util_make_link ('/account/register.php', _('New Account'),array('class'=>'userlink'));
         	}
         }
 
@@ -760,7 +760,7 @@ if ($sys_show_source) {
         if (isset($group_id) && $group_id) {
             print '
                     <td width="10">&nbsp;</td>
-                    <td>'.util_make_link ('/search/advanced_search.php?group_id='.$group_id, _('Advanced search')).'</td>';
+                    <td>'.util_make_link ('/search/advanced_search.php?group_id='.$group_id, _('Advanced search'),array('class'=>'userlink')).'</td>';
         }
         print '</tr></table>';
         print '</form>';

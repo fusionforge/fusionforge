@@ -39,6 +39,22 @@ a:hover {
   color: rgb(247, 0, 0);
 }
 
+a.userlink {
+  font-size: 13px;
+  font-family: arial,verdana,helvetica,sans-serif;
+  color: white;
+}
+
+a.userlink:hover {
+  text-decoration: underline;
+  color: white;
+}
+
+a.userlink:visited {
+  text-decoration: none;
+  color: white;
+}
+
 h1,h2,h3,h4,h5,h6 {
   font-family: verdana, arial, helvetica, sans-serif;
 }
