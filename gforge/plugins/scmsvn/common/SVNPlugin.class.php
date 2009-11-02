@@ -172,6 +172,7 @@ class SVNPlugin extends SCM {
 		if ( $group->usesPlugin ( $this->name ) ) {
 			if ($params['scmsvn_enable_anon_svn']) {
 				$group->SetUsesAnonSCM(true);
+				$group->setSCMBox($this->default_svn_server);
 			} else {
 				$group->SetUsesAnonSCM(false);
 			}
