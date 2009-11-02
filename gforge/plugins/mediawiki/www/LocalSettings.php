@@ -163,6 +163,17 @@ function FusionForgeMWAuth( &$user, &$result ) {
 if (is_file("/etc/mediawiki-extensions/extensions.php")) {
         include( "/etc/mediawiki-extensions/extensions.php" );
 }
+//function NoLogoutLinkOnMainPage(&$personal_urls){unset($personal_urls['logout']);return true;}
+//$wgHooks['PersonalUrls']['logout']='NoLogoutLinkOnMainPage';
+//function NoLoginLinkOnMainPage(&$personal_urls){unset($personal_urls['anonlogin']);return true;}
+//$wgHooks['PersonalUrls']['anonlogin']='NoLoginLinkOnMainPage';
+function NoLinkOnMainPage(&$personal_urls){
+	unset($personal_urls['anonlogin']);
+	unset($personal_urls['anontalk']);
+	unset($personal_urls['logout']);
+	return true;
+}
+$wgHooks['PersonalUrls'][]='NoLinkOnMainPage';
 
 $GLOBALS['wgHooks']['UserLoadFromSession'][]='FusionForgeMWAuth';
 
