@@ -140,8 +140,8 @@ class Theme extends Layout {
 	global $user_guide;
 
   ?>
-<div class="header">
-  <table border="0" width="100%" cellspacing="0" cellpadding="0">
+<div>
+  <table class="header" border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
 		  <td class="topLeft"><?php echo util_make_link ('/', html_image('header/top-logo.png',192,54,array('border'=>'0'))); ?></td>
         <td class="middleRight"><?php echo $this->searchBox(); ?></td>
