@@ -171,6 +171,7 @@ function NoLinkOnMainPage(&$personal_urls){
 	unset($personal_urls['anonlogin']);
 	unset($personal_urls['anontalk']);
 	unset($personal_urls['logout']);
+	unset($personal_urls['login']);
 	return true;
 }
 $wgHooks['PersonalUrls'][]='NoLinkOnMainPage';
