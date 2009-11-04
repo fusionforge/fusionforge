@@ -118,7 +118,8 @@ class FusionForgeTemplate extends QuickTemplate {
 	if (!$GLOBALS['sys_use_mwframe']){
         	$project=group_get_object_by_name($GLOBALS['fusionforgeproject']);
         	if ($project) {
-                	$params['group']=$project->getID();
+			$GLOBALS['group_id']=$project->getID();
+                	$params['group']=$GLOBALS['group_id'];
                 	$params['toptab']='mediawiki';
                 	$GLOBALS['HTML']->bodyHeader($params);
         	}
