@@ -1117,96 +1117,96 @@ if (isset($params['group']) && $params['group']) {
 				return '';
 			} else {
 				$ret = '
-		<form name="quicknavform">
-			<select name="quicknav" onChange="location.href=document.quicknavform.quicknav.value">';
+		<form class="ff" name="quicknavform">
+			<select class="ff" name="quicknav" onChange="location.href=document.quicknavform.quicknav.value">';
 				$ret .= '
-				<option value="">'._('Quick Jump To...').'</option>';
+				<option class="ff" value="">'._('Quick Jump To...').'</option>';
 				for ($i=0; $i<db_numrows($res); $i++) {
 					$ret .= '
-				<option value="'.util_make_url_g (db_result($res,$i,'unix_group_name'),db_result($res,$i,'group_id')).'">'.db_result($res,$i,'group_name').'</option>';
+				<option class="ff" value="'.util_make_url_g (db_result($res,$i,'unix_group_name'),db_result($res,$i,'group_id')).'">'.db_result($res,$i,'group_name').'</option>';
 					if (trim(db_result($res,$i,'admin_flags'))=='A') {
 					$ret .= '
-				<option value="'.util_make_url ('/project/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
+				<option class="ff" value="'.util_make_url ('/project/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
 					}
 		//tracker
 					if (db_result($res,$i,'use_tracker')) {
 					$ret .= '
-				<option value="'.util_make_url ('/tracker/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tracker</option>';
+				<option class="ff" value="'.util_make_url ('/tracker/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tracker</option>';
 						if (db_result($res,$i,'admin_flags') || db_result($res,$i,'artifact_flags')) {
 					$ret .= '
-				<option value="'.util_make_url ('/tracker/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
+				<option class="ff" value="'.util_make_url ('/tracker/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
 						}
 					}
 		//task mgr
 					if (db_result($res,$i,'use_pm')) {
 					$ret .= '
-				<option value="'.util_make_url ('/pm/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Task Manager</option>';
+				<option class="ff" value="'.util_make_url ('/pm/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Task Manager</option>';
 						if (trim(db_result($res,$i,'admin_flags')) =='A' || db_result($res,$i,'project_flags')) {
 					$ret .= '
-				<option value="'.util_make_url ('/pm/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
+				<option class="ff" value="'.util_make_url ('/pm/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
 						}
 					}
 		//FRS
 					if (db_result($res,$i,'use_frs')) {
 					$ret .= '
-				<option value="'.util_make_url('/frs/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Files</option>';
+				<option class="ff" value="'.util_make_url('/frs/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Files</option>';
 						if (trim(db_result($res,$i,'admin_flags'))=='A' || db_result($res,$i,'release_flags')) {
 					$ret .= '
-				<option value="'.util_make_url('/frs/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
+				<option class="ff" value="'.util_make_url('/frs/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
 						}
 					}
 		//SCM
 					if (db_result($res,$i,'use_scm')) {
 					$ret .= '
-				<option value="'.util_make_url('/scm/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SCM</option>';
+				<option class="ff" value="'.util_make_url('/scm/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SCM</option>';
 						/*if (db_result($res,$i,'admin_flags') || db_result($res,$i,'project_flags')) {
 					$ret .= '
-				<option value="'.util_make_url('/pm/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
+				<option class="ff" value="'.util_make_url('/pm/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
 						} */
 					}
 		//forum
 					if (db_result($res,$i,'use_forum')) {
 					$ret .= '
-				<option value="'.util_make_url('/forum/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Forum</option>';
+				<option class="ff" value="'.util_make_url('/forum/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Forum</option>';
 						if (trim(db_result($res,$i,'admin_flags'))=='A' || db_result($res,$i,'forum_flags')) {
 					$ret .= '
-				<option value="'.util_make_url('/forum/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
+				<option class="ff" value="'.util_make_url('/forum/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
 						}
 					}
 		//mail
 					if (db_result($res,$i,'use_mail')) {
 					$ret .= '
-				<option value="'.util_make_url('/mail/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lists</option>';
+				<option class="ff" value="'.util_make_url('/mail/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lists</option>';
 						if (trim(db_result($res,$i,'admin_flags'))=='A') {
 					$ret .= '
-				<option value="'.util_make_url('/mail/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
+				<option class="ff" value="'.util_make_url('/mail/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
 						}
 					}
 		//doc
 					if (db_result($res,$i,'use_docman')) {
 					$ret .= '
-				<option value="'.util_make_url('/docman/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Docs</option>';
+				<option class="ff" value="'.util_make_url('/docman/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Docs</option>';
 						if (trim(db_result($res,$i,'admin_flags'))=='A' || db_result($res,$i,'doc_flags')) {
 					$ret .= '
-				<option value="'.util_make_url('/docman/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
+				<option class="ff" value="'.util_make_url('/docman/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
 						}
 					}
 		//news
 					if (db_result($res,$i,'use_news')) {
 					$ret .= '
-				<option value="'.util_make_url('/news/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;News</option>';
+				<option class="ff" value="'.util_make_url('/news/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;News</option>';
 						if (trim(db_result($res,$i,'admin_flags'))=='A') {
 					$ret .= '
-				<option value="'.util_make_url('/news/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
+				<option class="ff" value="'.util_make_url('/news/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
 						}
 					}
 		//survey
 					if (db_result($res,$i,'use_survey')) {
 					$ret .= '
-				<option value="'.util_make_url('/survey/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Surveys</option>';
+				<option class="ff" value="'.util_make_url('/survey/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Surveys</option>';
 						if (trim(db_result($res,$i,'admin_flags'))=='A') {
 					$ret .= '
-				<option value="'.util_make_url('/survey/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
+				<option class="ff" value="'.util_make_url('/survey/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
 						}
 					}
 				}	

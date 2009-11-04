@@ -8,23 +8,38 @@ removed from the code
 */
 
 
-body {
-        font-family:arialverdana, arial, helvetica, sans-serif;
-}
-
-OL,UL,P,TR,TD,FORM {
+TR.ff,TD.ff {
         font-family: arialverdana,arial,helvetica,sans-serif;
         font-size:13px;
         color: #202020;
         text-decoration: none;
         font-weight: normal;
         }
+/* REMOVED because of Mediawiki collision, may need some more work
+body {
+        font-family:arialverdana, arial, helvetica, sans-serif;
+}
 
-FORM {
+OL,UL,P,FORM {
+        font-family: arialverdana,arial,helvetica,sans-serif;
+        font-size:13px;
+        color: #202020;
+        text-decoration: none;
+        font-weight: normal;
+        }
+*/
+
+FORM.ff {
 	font-family: arialverdana,arial,helvetica,sans-serif; 
 	font-size: x-small
 }
 
+TEXTAREA.ff, INPUT.ff, SELECT.ff, OPTION.ff {
+	font-family: arialverdana,arial,helvetica,sans-serif; 
+	font-size: x-small
+}
+
+/* REMOVED because of Mediawiki collision, may need some more work
 TEXTAREA, INPUT, SELECT, OPTION {
 	font-family: arialverdana,arial,helvetica,sans-serif; 
 	font-size: x-small
@@ -78,6 +93,7 @@ a {
 	font-size: 13px;
 	font-family: arial, verdana ,helvetica,sans-serif; 
 }
+*/
 
 /* tab menu styles */
 td.toptab { background-color: #E0E0E0}
@@ -247,6 +263,7 @@ td.notSelTab { background-color: #909090}
 	font-weight: normal;
 }
 
+/* REMOVED because of Mediawiki collision, may need some more work
 TH {
 	font-family: arialverdana,arial,helvetica,sans-serif;
 	font-size:13px;
@@ -273,6 +290,7 @@ a:hover {
 	text-decoration:underline; 
 	color:red 
 	}
+*/
 
 .titlebar { 
 	color: black; 
@@ -322,16 +340,10 @@ a.tabsellink:hover {
 	font-size: x-small; 
 	}
 
-
-
-
-
-
-
+/* REMOVED because of Mediawiki collision, may need some more work
 PRE,TT { 
 	font-family: courier,sans-serif 
 	}
-
 
 ul { 
 	list-style-position:inside;
@@ -346,10 +358,12 @@ ol {
 	padding:0;
 	}
 
-
 ul { 
 	padding:0;
 	}
+
+*/
+
 /* link utilities on header of page */
 A.lnkutility { 
 	COLOR: #ffffff;

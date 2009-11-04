@@ -142,7 +142,7 @@ class Theme extends Layout {
   ?>
 <div>
   <table class="header" border="0" width="100%" cellspacing="0" cellpadding="0">
-      <tr>
+      <tr class="ff">
 		  <td class="topLeft"><?php echo util_make_link ('/', html_image('header/top-logo.png',192,54,array('border'=>'0'))); ?></td>
         <td class="middleRight"><?php echo $this->searchBox(); ?></td>
         <td class="middleRight"><?php
@@ -169,7 +169,7 @@ class Theme extends Layout {
 
         echo $this->quickNav();
         ?></td>
-        <td>&nbsp;&nbsp;</td>
+        <td class="ff">&nbsp;&nbsp;</td>
       </tr>
   
   </table>
@@ -177,8 +177,8 @@ class Theme extends Layout {
 
 <!-- outer tabs -->
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
-    <tr>
-        <td><?php echo $this->outerTabs($params); ?></td>
+    <tr class="ff">
+        <td class="ff"><?php echo $this->outerTabs($params); ?></td>
     </tr>
 </table>
 
@@ -187,8 +187,8 @@ class Theme extends Layout {
     <?php
     if (isset($params['group']) && $params['group']) {
     ?>
-      <tr>
-        <td>
+      <tr class="ff">
+        <td class="ff">
            <?php
            echo $this->projectTabs($params['toptab'],$params['group']);
            ?>
@@ -256,16 +256,16 @@ if ($sys_show_source) {
         <!-- Box Top Start -->
 
         <table cellspacing="0" cellpadding="0" style="table-layout:fixed" width="100%" border="0" background="'.$this->imgroot.'vert-grad.png">
-        <tr align="center">
-            <td valign="top" style="text-align:right" width="10" background="'.$this->imgroot.'box-topleft.png"><img src="'.$this->imgroot.'clear.png" width="10" height="20" /></td>
-            <td width="100%" background="'.$this->imgroot.'box-grad.png"><span class="titlebar">'.$title.'</span></td>
-            <td valign="top" width="10" background="'.$this->imgroot.'box-topright.png"><img src="'.$this->imgroot.'clear.png" width="10" height="20" /></td>
+        <tr class="ff" align="center">
+            <td class="ff" valign="top" style="text-align:right" width="10" background="'.$this->imgroot.'box-topleft.png"><img src="'.$this->imgroot.'clear.png" width="10" height="20" /></td>
+            <td class="ff" width="100%" background="'.$this->imgroot.'box-grad.png"><span class="titlebar">'.$title.'</span></td>
+            <td class="ff" valign="top" width="10" background="'.$this->imgroot.'box-topright.png"><img src="'.$this->imgroot.'clear.png" width="10" height="20" /></td>
         </tr>
-        <tr>
-            <td colspan="3">
+        <tr class="ff">
+            <td class="ff" colspan="3">
             <table cellspacing="2" cellpadding="2" width="100%" border="0">
-                <tr align="left">
-                    <td colspan="2">
+                <tr class="ff" align="left">
+                    <td class="ff" colspan="2">
 
         <!-- Box Top End -->';
     }
@@ -281,11 +281,11 @@ if ($sys_show_source) {
         <!-- Box Middle Start -->
                     </td>
                 </tr>
-                <tr align="center">
-                    <td colspan="2" background="'.$this->imgroot.'box-grad.png"><span class="titlebar">'.$title.'</span></td>
+                <tr class="ff" align="center">
+                    <td class="ff" colspan="2" background="'.$this->imgroot.'box-grad.png"><span class="titlebar">'.$title.'</span></td>
                 </tr>
-                <tr align="left">
-                    <td colspan="2">
+                <tr class="ff" align="left">
+                    <td class="ff" colspan="2">
         <!-- Box Middle End -->';
     }
 
@@ -328,23 +328,23 @@ if ($sys_show_source) {
     function listTableTop ($title_arr,$links_arr=false) {
         $return = '
         <table cellspacing="0" cellpadding="0" width="100%" border="0">
-        <tr align="center">
-    <!--        <td valign="top" style="text-align:right" width="10" background="'.$this->imgroot.'box-grad.png"><img src="'.$this->imgroot.'box-topleft.png" width="10" height="75" /></td> -->
-            <td background="'.$this->imgroot.'box-grad.png">
+        <tr class="ff" align="center">
+    <!--        <td class="ff" valign="top" style="text-align:right" width="10" background="'.$this->imgroot.'box-grad.png"><img src="'.$this->imgroot.'box-topleft.png" width="10" height="75" /></td> -->
+            <td class="ff" background="'.$this->imgroot.'box-grad.png">
         <table width="100%" border="0" cellspacing="1" cellpadding="2">
-            <tr>';
+            <tr class="ff">';
 
         $count=count($title_arr);
         if ($links_arr) {
             for ($i=0; $i<$count; $i++) {
                 $return .= '
-                <td style="text-align:center"><a class="sortbutton" href="'.util_make_url ($links_arr[$i]).'"><span style="color:'.
+                <td class="ff" style="text-align:center"><a class="sortbutton" href="'.util_make_url ($links_arr[$i]).'"><span style="color:'.
                 $this->FONTCOLOR_HTMLBOX_TITLE.'"><strong>'.$title_arr[$i].'</strong></span></a></td>';
             }
         } else {
             for ($i=0; $i<$count; $i++) {
                 $return .= '
-                <td style="text-align:center"><span style="color:'.
+                <td class="ff" style="text-align:center"><span style="color:'.
                 $this->FONTCOLOR_HTMLBOX_TITLE.'"><strong>'.$title_arr[$i].'</strong></span></td>';
             }
         }
@@ -353,7 +353,7 @@ if ($sys_show_source) {
 
     function listTableBottom() {
         return '</table></td>
-            <!-- <td valign="top" style="text-align:right" width="10" background="'.$this->imgroot.'box-grad.png"><img src="'.$this->imgroot.'box-topright.png" width="10" height="75" /></td> -->
+            <!-- <td class="ff" valign="top" style="text-align:right" width="10" background="'.$this->imgroot.'box-grad.png"><img src="'.$this->imgroot.'box-topright.png" width="10" height="75" /></td> -->
             </tr></table>';
     }
 
@@ -597,7 +597,7 @@ if ($sys_show_source) {
         <!-- start tabs -->
 
         <table border="0" cellpadding="0" cellspacing="0" width="'.$total_width.'">
-        <tr>';
+        <tr class="ff">';
 
         $folder = $this->imgroot.($nested ? 'bottomtab-new/' : 'toptab-new/');
 
@@ -621,18 +621,18 @@ if ($sys_show_source) {
             if ($nested) {
                 $tab_height = BOTTOM_TAB_HEIGHT;
                 $return .= sprintf(
-                    '<td valign="top" width="5" background="%s">
+                    '<td class="ff" valign="top" width="5" background="%s">
       			<img src="%s" height="%d" width="5" alt="" />
                 	</td>', $middle_img, $clear_img, $tab_height );
                 $return .= sprintf(
-                    '<td background="%s" width="'.$width.'%%" style="text-align:center">
+                    '<td class="ff" background="%s" width="'.$width.'%%" style="text-align:center">
             		<a class="%s" href="%s">%s</a>
     		</td>', $middle_img, $css_class, $TABS_DIRS[$i], $TABS_TITLES[$i]);
     
                 // if the next tab is not last, insert a separator
                 if ($i < $count-1) {
                     $return .= sprintf(
-                        '<td valign="top" width="2" background="%s">
+                        '<td class="ff" valign="top" width="2" background="%s">
           			<img src="%s" height="%d" width="2" alt="" />
                     	  </td>', $separ_img, $clear_img, $tab_height );
                 }
@@ -641,19 +641,19 @@ if ($sys_show_source) {
                 $tab_height = TOP_TAB_HEIGHT;
                 
                 $return .= sprintf(
-                    '<td valign="top" width="3" background="%s">
+                    '<td class="ff" valign="top" width="3" background="%s">
       			<img src="%s" height="%d" width="3" alt="" />
                 	</td>', $left_img, $clear_img, $tab_height );
                     
                 $return .= sprintf(
-                    '<td background="%s" width="'.$width.'%%" style="text-align:center">
+                    '<td class="ff" background="%s" width="'.$width.'%%" style="text-align:center">
             		<a class="%s" href="%s">%s</a>
     		</td>', $middle_img, $css_class, $TABS_DIRS[$i], $TABS_TITLES[$i]);
     
                 // if the next tab is not selected, close this tab
                 if ($selected != $i+1) {
                   $return .= sprintf(
-                      '<td valign="top" width="9" background="%s">
+                      '<td class="ff" valign="top" width="9" background="%s">
         			<img src="%s" height="%d" width="9" alt="" />
                   	  </td>', $right_img, $clear_img, $tab_height );
                 }
@@ -675,21 +675,21 @@ if ($sys_show_source) {
             $end_cols=(((count($TABS_DIRS)*3)-3)-$beg_cols);
         }
         
-        $return .= '<tr>';
+        $return .= '<tr class="ff">';
         
         if ($beg_cols > 0) {
             $return .= 
-                '<td colspan="'.$beg_cols.'" height="1" bgcolor="#909090">
+                '<td class="ff" colspan="'.$beg_cols.'" height="1" bgcolor="#909090">
 			<img src="'.$this->imgroot.'clear.png" height="1" width="10" />
 		</td>';
         }
         $return .= 
-                '<td colspan="3" height="1" bgcolor="'.$sel_tab_bgcolor.'">
+                '<td class="ff" colspan="3" height="1" bgcolor="'.$sel_tab_bgcolor.'">
 			<img src="'.$this->imgroot.'clear.png" height="1" width="10" />
 		</td>';
         if ($end_cols > 0) {
             $return .= 
-                '<td colspan="'.$end_cols.'" height="1" bgcolor="#909090">
+                '<td class="ff" colspan="'.$end_cols.'" height="1" bgcolor="#909090">
 			  <img src="'.$this->imgroot.'clear.png" height="1" width="10" />
 		</td>';
         }
@@ -721,7 +721,7 @@ if ($sys_show_source) {
         print '
         <form class="search" action="'.util_make_url ('/search/').'" method="get">
         <table border="0" cellpadding="0" cellspacing="0">
-        <tr><td>
+        <tr class="ff"><td class="ff">
         <div align="center" style="font-size:smaller">';
         $parameters = array(
         SEARCH__PARAMETER_GROUP_ID => $group_id,
@@ -734,10 +734,10 @@ if ($sys_show_source) {
         $searchManager->setParametersValues($parameters);
         $searchEngines =& $searchManager->getAvailableSearchEngines();
 
-        echo '<select name="type_of_search">';
+        echo '<select class="ff" name="type_of_search">';
         for($i = 0, $max = count($searchEngines); $i < $max; $i++) {
             $searchEngine =& $searchEngines[$i];
-            echo '<option value="'.$searchEngine->getType().'"'.( $type_of_search == $searchEngine->getType() ? ' selected="selected"' : '' ).'>'.$searchEngine->getLabel($parameters).'</option>'."\n";
+            echo '<option class="ff" value="'.$searchEngine->getType().'"'.( $type_of_search == $searchEngine->getType() ? ' selected="selected"' : '' ).'>'.$searchEngine->getLabel($parameters).'</option>'."\n";
         }
         echo '</select></div>';
 
@@ -745,22 +745,22 @@ if ($sys_show_source) {
 //        print '
 //        <input type="CHECKBOX" name="exact" value="1"'.( $exact ? ' CHECKED' : ' UNCHECKED' ).'> Require All Words';
 
-        print '</td><td>&nbsp;';
+        print '</td><td class="ff">&nbsp;';
         $parameters = $searchManager->getParameters();
         foreach($parameters AS $name => $value) {
-            print '<input type="hidden" value="'.$value.'" name="'.$name.'" />';
+            print '<input class="ff" type="hidden" value="'.$value.'" name="'.$name.'" />';
         }
-        print '</td><td>';
-        print '<input type="text" size="12" name="words" value="'.$defaultWords.'" />';
+        print '</td><td class="ff">';
+        print '<input class="ff" type="text" size="12" name="words" value="'.$defaultWords.'" />';
 
-        print '</td><td>&nbsp;</td><td>';
-        print '<input type="submit" name="Search" value="'._('Search').'" />';
+        print '</td><td class="ff">&nbsp;</td><td class="ff">';
+        print '<input class="ff" type="submit" name="Search" value="'._('Search').'" />';
         print '</td>';
 
         if (isset($group_id) && $group_id) {
             print '
-                    <td width="10">&nbsp;</td>
-                    <td>'.util_make_link ('/search/advanced_search.php?group_id='.$group_id, _('Advanced search'),array('class'=>'userlink')).'</td>';
+                    <td class="ff" width="10">&nbsp;</td>
+                    <td class="ff">'.util_make_link ('/search/advanced_search.php?group_id='.$group_id, _('Advanced search'),array('class'=>'userlink')).'</td>';
         }
         print '</tr></table>';
         print '</form>';
@@ -770,23 +770,23 @@ if ($sys_show_source) {
     function advancedSearchBox($sectionsArray, $group_id, $words, $isExact) {
          // display the searchmask
         print '
-        <form name="advancedsearch" action="'.getStringFromServer('PHP_SELF').'" method="post">
-        <input type="hidden" name="search" value="1"/>
-        <input type="hidden" name="group_id" value="'.$group_id.'"/>
+        <form class="ff" name="advancedsearch" action="'.getStringFromServer('PHP_SELF').'" method="post">
+        <input class="ff" type="hidden" name="search" value="1"/>
+        <input class="ff" type="hidden" name="group_id" value="'.$group_id.'"/>
         <div align="center"><br />
             <table border="0">
-                <tr>
-                    <td colspan ="2">
-                        <input type="text" size="60" name="words" value="'.stripslashes(htmlspecialchars($words)).'" />
-                        <input type="submit" name="submitbutton" value="'._('Search').'" />
+                <tr class="ff">
+                    <td class="ff" colspan ="2">
+                        <input class="ff" type="text" size="60" name="words" value="'.stripslashes(htmlspecialchars($words)).'" />
+                        <input class="ff" type="submit" name="submitbutton" value="'._('Search').'" />
                     </td>
                 </tr>
-                <tr>
-                    <td valign="top">
-                        <input type="radio" name="mode" value="'.SEARCH__MODE_AND.'" '.($isExact ? 'checked="checked"' : '').' />'._('with all words').'
+                <tr class="ff">
+                    <td class="ff" valign="top">
+                        <input class="ff" type="radio" name="mode" value="'.SEARCH__MODE_AND.'" '.($isExact ? 'checked="checked"' : '').' />'._('with all words').'
                     </td>
-                    <td>
-                        <input type="radio" name="mode" value="'.SEARCH__MODE_OR.'" '.(!$isExact ? 'checked="checked"' : '').' />'._('with one word').'
+                    <td class="ff">
+                        <input class="ff" type="radio" name="mode" value="'.SEARCH__MODE_OR.'" '.(!$isExact ? 'checked="checked"' : '').' />'._('with one word').'
                     </td>
                 </tr>
             </table><br /></div>'
@@ -828,18 +828,18 @@ if ($sys_show_source) {
         $countLines = 0;
         $return = '
             <table width="99%" border="0" cellspacing="0" cellpadding="1" style="background-color:'. $this->COLOR_LTBACK2.'">
-                <tr>
-                    <td>
+                <tr class="ff">
+                    <td class="ff">
                         <table width="100%" cellspacing="0" border="0" style="background-color:'. $this->COLOR_LTBACK1.'">
-                            <tr style="font-weight: bold;background-color:'. $this->COLOR_LTBACK2 .'">
-                                <td colspan="2">'._('Search in').'</td>
-                                <td style="text-align:right">'._('Select').' <a href="javascript:setCheckBoxes(\'\', true)">'._('all').'</a> / <a href="javascript:setCheckBoxes(\'\', false)">'._('none').'</a></td>
+                            <tr class="ff" style="font-weight: bold;background-color:'. $this->COLOR_LTBACK2 .'">
+                                <td class="ff" colspan="2">'._('Search in').'</td>
+                                <td class="ff" style="text-align:right">'._('Select').' <a href="javascript:setCheckBoxes(\'\', true)">'._('all').'</a> / <a href="javascript:setCheckBoxes(\'\', false)">'._('none').'</a></td>
                             </tr>
-                            <tr height="20">
-                                <td colspan="3">&nbsp;</td>
+                            <tr class="ff" height="20">
+                                <td class="ff" colspan="3">&nbsp;</td>
                             </tr>
-                            <tr align="center" valign="top">
-                                <td>';
+                            <tr class="ff" align="center" valign="top">
+                                <td class="ff">';
         foreach($sectionsArray as $key => $section) {
             $oldcountlines = $countLines;
             if (is_array($section)) {
@@ -852,33 +852,33 @@ if ($sys_show_source) {
                 //if the next block is so large that shifting it to the next column hits the breakpoint better
                 //the second part of statement (behind &&) proofs, that no 4th column is added
                 if ((($countLines - $break) >= ($break - $countLines)) && ((($break + $breakLimit)/$breakLimit) <= 3)) {
-                    $return .= '</td><td>';
+                    $return .= '</td><td class="ff">';
                     $break += $breakLimit;
                 }
             }
             
             $return .= '<table width="90%" border="0" cellpadding="1" cellspacing="0" style="background-color:'. $this->COLOR_LTBACK2.'">
-                            <tr><td><table width="100%" border="0" cellspacing="0" cellpadding="3">
-                            <tr style="background-color:'. $this->COLOR_LTBACK2 .'; font-weight: bold">
-                                <td cellspacing="0">
+                            <tr class="ff"><td class="ff"><table width="100%" border="0" cellspacing="0" cellpadding="3">
+                            <tr class="ff" style="background-color:'. $this->COLOR_LTBACK2 .'; font-weight: bold">
+                                <td class="ff" cellspacing="0">
                                     <a href="#'.$key.'">'.$group_subsection_names[$key].'</a>'
             .'    </td>
-                                <td style="text-align:right">'
+                                <td class="ff" style="text-align:right">'
             ._('Select').' <a href="javascript:setCheckBoxes(\''.$key.'\', true)">'._('all').'</a> / <a href="javascript:setCheckBoxes(\''.$key.'\', false)">'._('none').'</a>
                                 </td>
                             </tr>
-                            <tr style="background-color:'. $this->COLOR_LTBACK1.'">
-                                <td colspan="2">';
+                            <tr class="ff" style="background-color:'. $this->COLOR_LTBACK1.'">
+                                <td class="ff" colspan="2">';
 
             if (!is_array($section)) {
-                $return .= '        <input type="checkbox" name="'.urlencode($key).'"';
+                $return .= '        <input class="ff" type="checkbox" name="'.urlencode($key).'"';
                 if (isset($GLOBALS[urlencode($key)]))
                 $return .= ' checked="checked" ';
                 $return .= ' /></input>'.$group_subsection_names[$key].'<br />';
             }
             else
             foreach($section as $underkey => $undersection) {
-                $return .= '    <input type="checkbox" name="'.urlencode($key.$underkey).'"';
+                $return .= '    <input class="ff" type="checkbox" name="'.urlencode($key.$underkey).'"';
                 if (isset($GLOBALS[urlencode($key.$underkey)]))
                 $return .= ' checked ';
                 $return .= '></input>'.$undersection.'<br />';
@@ -891,7 +891,7 @@ if ($sys_show_source) {
 
             if ($countLines >= $break) {
                 if (($countLines - $break) < ($break - $countLines)) {
-                    $return .= '</td><td width="33%">';
+                    $return .= '</td><td class="ff" width="33%">';
                     $break += $breakLimit;
                 }
             }
@@ -971,13 +971,13 @@ if ($sys_show_source) {
      */
     function multiTableRow($row_attr, $cell_data, $istitle) {
         $return= '
-        <tr '.$row_attr;
+        <tr class="ff" '.$row_attr;
         if ( $istitle ) {
             $return .=' align="center" bgcolor="'. $this->COLOR_HTMLBOX_TITLE .'"';
         }
         $return .= '>';
         for ( $c = 0; $c < count($cell_data); $c++ ) {
-            $return .='<td ';
+            $return .='<td class="ff" ';
             for ( $a=1; $a < count($cell_data[$c]); $a++) {
                 $return .= $cell_data[$c][$a].' ';
             }
