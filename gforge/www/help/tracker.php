@@ -28,7 +28,7 @@ require_once $gfwww.'include/pre.php';
 
 $helpname = getStringFromRequest('helpname');
 
-help_header('Tracker Help - ' . ucwords(str_replace('_',' ',$helpname)));
+help_header('Tracker Help - ' . htmlspecialchars(ucwords(str_replace('_',' ',$helpname))));
 ?>
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
 <tr>
@@ -75,7 +75,7 @@ help_header('Tracker Help - ' . ucwords(str_replace('_',' ',$helpname)));
 			print( _('You can monitor or un-monitor this item by clicking the "Monitor" button. <br /><br /><strong>Note!</strong> this will send you additional email. If you add comments to this item, or submitted, or are assigned this item, you will also get emails for those reasons as well!'));
 			break;
 		default:
-			print( _('UNKNOWN HELP REQUEST:'). $helpname);
+			print( _('UNKNOWN HELP REQUEST:'). htmlspecialchars($helpname));
 			break;
 	}
 ?>

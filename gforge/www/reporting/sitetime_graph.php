@@ -34,8 +34,8 @@ require_once $gfcommon.'reporting/report_utils.php';
 
 session_require( array('group'=>$sys_stats_group) );
 
-$start = getStringFromRequest('start');
-$end = getStringFromRequest('end');
+$start = getIntFromRequest('start');
+$end = getIntFromRequest('end');
 $type = getStringFromRequest('type');
 
 //

@@ -83,7 +83,7 @@ if (getStringFromRequest('submit')) {
 		}
 
 	} elseif (getStringFromRequest('add')) {
-		$days_adjust = getStringFromRequest('days_adjust');
+		$days_adjust = getIntFromRequest('days_adjust');
 
 		if ($project_task_id && $week && $days_adjust && $time_code && $hours) {
 
@@ -99,7 +99,7 @@ if (getStringFromRequest('submit')) {
 				$feedback.=_('Successfully Added');
 			}
 		} else {
-			echo "$project_task_id && $week && $days_adjust && $time_code && $hours";
+			echo "INTERNAL ERROR: add: $project_task_id && $week && $days_adjust && $time_code && $hours";
 			exit_error('Error',_('All Fields Are Required.'));
 		}
 

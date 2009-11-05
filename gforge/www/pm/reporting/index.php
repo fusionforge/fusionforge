@@ -86,8 +86,8 @@ if ($what) {
 	$period_clause=period2sql($period,$span,"start_date");
 
 	if ($what=="aging") {
-		$start = getStringFromRequest('start');
-		$end = getStringFromRequest('end');
+		$start = getIntFromRequest('start');
+		$end = getIntFromRequest('end');
 
 		pm_header(array ("title"=>_('Aging Report')));
 		pm_reporting_header($group_id);

@@ -40,8 +40,8 @@ $sw = getStringFromRequest('sw');
 $typ = getStringFromRequest('typ');
 $g_id = getStringFromRequest('g_id');
 $typ = getStringFromRequest('typ');
-$start = getStringFromRequest('start');
-$end = getStringFromRequest('end');
+$start = getIntFromRequest('start');
+$end = getIntFromRequest('end');
 
 if (!$start) {
 	$z =& $report->getMonthStartArr();
