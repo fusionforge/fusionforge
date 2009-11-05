@@ -35,6 +35,10 @@ if ($report->isError()) {
 	exit_error($report->getErrorMessage());
 }
 
+$datatype = getStringFromRequest('datatype');
+$start = getIntFromRequest('start');
+$end = getIntFromRequest('end');
+
 if (!$start) {
 	$z =& $report->getMonthStartArr();
 	$start = $z[count($z)-1];
@@ -43,10 +47,6 @@ if (!$start) {
 session_require( array('group'=>$sys_stats_group) );
 
 echo report_header(_('Tool Pie Graphs'));
-
-$datatype = getStringFromRequest('datatype');
-$start = getStringFromRequest('start');
-$end = getStringFromRequest('end');
 
 if (!isset($datatype)) {
 	$datatype=1;

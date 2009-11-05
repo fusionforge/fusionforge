@@ -39,8 +39,8 @@ if ($report->isError()) {
 
 $typ = getStringFromRequest('typ');
 $type = getStringFromRequest('type');
-$start = getStringFromRequest('start');
-$end = getStringFromRequest('end');
+$start = getIntFromRequest('start');
+$end = getIntFromRequest('end');
 
 if (!$start) {
 	$z =& $report->getMonthStartArr();

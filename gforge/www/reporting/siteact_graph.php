@@ -35,9 +35,9 @@ require_once $gfwww.'include/unicode.php';
 session_require( array('group'=>$sys_stats_group) );
 
 $area = getStringFromRequest('area');
-$SPAN = getStringFromRequest('SPAN');
-$start = getStringFromRequest('start');
-$end = getStringFromRequest('end');
+$SPAN = getIntFromRequest('SPAN');
+$start = getIntFromRequest('start');
+$end = getIntFromRequest('end');
 
 //
 //	Create Report

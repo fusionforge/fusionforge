@@ -38,9 +38,9 @@ require_once $gfwww.'tracker/include/ArtifactTypeHtml.class.php';
 $group_id = getIntFromRequest('group_id');
 $atid = getStringFromRequest('atid');
 $area = getStringFromRequest('area');
-$SPAN = getStringFromRequest('SPAN');
-$start = getStringFromRequest('start');
-$end = getStringFromRequest('end');
+$SPAN = getIntFromRequest('SPAN');
+$start = getIntFromRequest('start');
+$end = getIntFromRequest('end');
 //
 //	Create Report
 //

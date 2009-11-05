@@ -46,8 +46,8 @@ if ($report->isError()) {
 	exit;
 }
 
-$start = getStringFromRequest('start');
-$end = getStringFromRequest('end');
+$start = getIntFromRequest('start');
+$end = getIntFromRequest('end');
 
 if (!$start) {
 	$start=mktime(0,0,0,date('m'),1,date('Y'));;

@@ -50,8 +50,8 @@ if ($report->isError()) {
 }
 
 $area = getStringFromRequest('area');
-$start = getStringFromRequest('start');
-$end = getStringFromRequest('end');
+$start = getIntFromRequest('start');
+$end = getIntFromRequest('end');
 
 if (!isset($area)) {
 	$area='category';

@@ -17,6 +17,8 @@ if (!$ath->userCanView()) {
 	exit_permission_denied();
 }
 
+$query_id = getIntFromRequest('query_id');
+
 //
 //	The browse page can be powered by a pre-saved query
 //	or by select boxes chosen by the user
@@ -27,8 +29,6 @@ if (!$ath->userCanView()) {
 //	If the query_id = -1, unset the pref and use regular browse boxes
 //
 if (session_loggedin()) {
-	$query_id = getIntFromRequest('query_id');
-
 	if($query_id) {
 		if ($query_id == '-1') {
 			$u =& session_get_user();
@@ -54,13 +54,13 @@ if (!$af || !is_object($af)) {
 	exit_error('Error',$af->getErrorMessage());
 }
 
-$offset = @getStringFromRequest('offset',$offset);
-$_sort_col = @getStringFromRequest('_sort_col',$_sort_col);
-$_sort_ord = @getStringFromRequest('_sort_ord',$_sort_ord);
-$max_rows = @getStringFromRequest('max_rows',$max_rows);
-$set = @getStringFromRequest('set',$set);
-$_assigned_to = @getStringFromRequest('_assigned_to',$_assigned_to);
-$_status = @getStringFromRequest('_status',$_status);
+$offset = getStringFromRequest('offset',$offset);
+$_sort_col = getStringFromRequest('_sort_col',$_sort_col);
+$_sort_ord = getStringFromRequest('_sort_ord',$_sort_ord);
+$max_rows = getStringFromRequest('max_rows',$max_rows);
+$set = getStringFromRequest('set',$set);
+$_assigned_to = getIntFromRequest('_assigned_to',$_assigned_to);
+$_status = getIntFromRequest('_status',$_status);
 $_extra_fields = array() ;
 $aux_extra_fields = array() ;
 if ($set == 'custom') {

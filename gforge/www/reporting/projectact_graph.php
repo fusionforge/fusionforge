@@ -33,15 +33,10 @@ require_once $gfcommon.'reporting/ReportProjectAct.class.php';
 require_once $gfwww.'include/unicode.php';
 
 $area = getStringFromRequest('area');
-$SPAN = getStringFromRequest('SPAN');
-$start = getStringFromRequest('start');
-$end = getStringFromRequest('end');
-$g_id = getStringFromRequest('g_id');
-
-
-if (!$SPAN) {
-	$SPAN=1;
-}
+$SPAN = getIntFromRequest('SPAN', 1);
+$start = getIntFromRequest('start');
+$end = getIntFromRequest('end');
+$g_id = getIntFromRequest('g_id');
 
 if (!$area) {
 	$area='tracker';

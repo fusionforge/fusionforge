@@ -37,8 +37,8 @@ session_require( array('group'=>$sys_stats_group) );
 
 $g_id = getStringFromRequest('g_id');
 $type = getStringFromRequest('type');
-$start = getStringFromRequest('start');
-$end = getStringFromRequest('end');
+$start = getIntFromRequest('start');
+$end = getIntFromRequest('end');
 
 //
 //	Create Report

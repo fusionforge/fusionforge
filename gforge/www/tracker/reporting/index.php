@@ -34,9 +34,9 @@ $sw = getStringFromRequest('sw');
 $group_id = getIntFromRequest('group_id');
 $atid = getStringFromRequest('atid');
 $area = getStringFromRequest('area');
-$SPAN = getStringFromRequest('SPAN');
-$start = getStringFromRequest('start');
-$end = getStringFromRequest('end');
+$SPAN = getIntFromRequest('SPAN');
+$start = getIntFromRequest('start');
+$end = getIntFromRequest('end');
 
 $report=new Report();
 if ($report->isError()) {

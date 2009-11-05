@@ -33,9 +33,9 @@ require_once $gfcommon.'reporting/ReportTrackerAct.class.php';
 
 $group_id = getIntFromRequest('group_id');
 $atid = getStringFromRequest('atid');
-$SPAN = getStringFromRequest('SPAN');
-$start = getStringFromRequest('start');
-$end = getStringFromRequest('end');
+$SPAN = getIntFromRequest('SPAN');
+$start = getIntFromRequest('start');
+$end = getIntFromRequest('end');
 
 if (!$SPAN) {
 	$SPAN=REPORT_TYPE_MONTHLY;

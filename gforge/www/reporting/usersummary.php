@@ -37,8 +37,8 @@ if ($report->isError()) {
 	exit_error($report->getErrorMessage());
 }
 
-$start = getStringFromRequest('start');
-$end = getStringFromRequest('end');
+$start = getIntFromRequest('start');
+$end = getIntFromRequest('end');
 $tstat = getStringFromRequest('tstat');
 
 if (!$start) {
