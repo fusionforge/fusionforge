@@ -67,13 +67,13 @@ if (!$af || !is_object($af)) {
 	exit_error('Error',$af->getErrorMessage());
 }
 
-$offset = @getStringFromRequest('offset',$offset);
-$_sort_col = @getStringFromRequest('_sort_col',$_sort_col);
-$_sort_ord = @getStringFromRequest('_sort_ord',$_sort_ord);
-$max_rows = @getStringFromRequest('max_rows',$max_rows);
-$set = @getStringFromRequest('set',$set);
-$_assigned_to = @getStringFromRequest('_assigned_to',$_assigned_to);
-$_status = @getStringFromRequest('_status',$_status);
+$offset = getStringFromRequest('offset',$offset);
+$_sort_col = getStringFromRequest('_sort_col',$_sort_col);
+$_sort_ord = getStringFromRequest('_sort_ord',$_sort_ord);
+$max_rows = getStringFromRequest('max_rows',$max_rows);
+$set = getStringFromRequest('set',$set);
+$_assigned_to = getIntFromRequest('_assigned_to',$_assigned_to);
+$_status = getIntFromRequest('_status',$_status);
 $_extra_fields = array() ;
 $aux_extra_fields = array() ;
 if ($set == 'custom') {
@@ -389,7 +389,7 @@ if ($art_arr && count($art_arr) > 0) {
 		<tr '. $HTML->boxGetAltRowStyle($i) . '>';
  		foreach ($browse_fields as $f) {
 			if ($f == 'id') {
-				echo '<td nowrap="nowrap">'.
+				echo '<td style="white-space: nowrap;">'.
 				($IS_ADMIN?'<input type="checkbox" name="artifact_id_list[]" value="'.
 				$art_arr[$i]->getID() .'" /> ':'').
 				'<a href="'.getStringFromServer('PHP_SELF').'?func=detail&amp;aid='.

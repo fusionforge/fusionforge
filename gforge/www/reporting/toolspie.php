@@ -35,8 +35,8 @@ if ($report->isError()) {
 }
 
 $datatype = getStringFromRequest('datatype');
-$start = getStringFromRequest('start');
-$end = getStringFromRequest('end');
+$start = getIntFromRequest('start');
+$end = getIntFromRequest('end');
 
 if (!$start) {
 	$z =& $report->getMonthStartArr();

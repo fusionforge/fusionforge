@@ -39,9 +39,9 @@ if ($report->isError()) {
 $sw = getStringFromRequest('sw');
 $dev_id = getStringFromRequest('dev_id');
 $area = getStringFromRequest('area');
-$SPAN = getStringFromRequest('SPAN');
-$start = getStringFromRequest('start');
-$end = getStringFromRequest('end');
+$SPAN = getIntFromRequest('SPAN');
+$start = getIntFromRequest('start');
+$end = getIntFromRequest('end');
 
 if (!$start) {
 	$z =& $report->getMonthStartArr();

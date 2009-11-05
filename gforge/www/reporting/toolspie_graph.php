@@ -48,8 +48,8 @@ if ($report->isError()) {
 }
 
 $datatype = getIntFromRequest('datatype');
-$start = getStringFromRequest('start');
-$end = getStringFromRequest('end');
+$start = getIntFromRequest('start');
+$end = getIntFromRequest('end');
 
 if (!isset($datatype)) {
 	$datatype=1;

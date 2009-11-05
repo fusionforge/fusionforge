@@ -36,8 +36,8 @@ session_require( array('group'=>$sys_stats_group) );
 
 $dev_id = getStringFromRequest('dev_id');
 $type = getStringFromRequest('type');
-$start = getStringFromRequest('start');
-$end = getStringFromRequest('end');
+$start = getIntFromRequest('start');
+$end = getIntFromRequest('end');
 
 //
 //	Create Report
