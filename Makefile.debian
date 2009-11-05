@@ -15,6 +15,7 @@ APTCACHE=$(CURDIR)/builder/cache
 DISTRIB=$(shell echo $(XDISTRIB) | cut -c2-)
 LOCALREPODEB=/var/www/debian-fusionforge-$(BRANCH)
 LOCALREPOUBU=/var/www/ubuntu-fusionforge-$(BRANCH)
+SIGNKEY=yes
 DEBIANLIST=1lenny 2squeeze 3sid
 DEBIANLISTP=1etch
 DEBLIST=$(DEBIANLIST) $(DEBIANLISTP)
@@ -253,7 +254,7 @@ $(LOCALREPO)/conf/distributions:
 	echo "Origin: $(ORIGIN)" ; \
 	echo "Version: 4.7" ; \
 	echo "Description: My $(FUSIONFORGE) $$dist repository" ; \
-	echo "SignWith: yes" ; \
+	echo "SignWith: $(SIGNKEY)" ; \
 	echo "" ; done >> $(LOCALREPO)/conf/distributions
 
 $(LOCALREPO)/conf:
