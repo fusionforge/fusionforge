@@ -8,8 +8,6 @@ usr/share/gforge/etc/templates
 usr/share/gforge/etc/httpd.d
 usr/share/gforge/etc/local.d
 usr/share/gforge/common
-usr/share/gforge/scm
-usr/share/gforge/www/include
 usr/share/locale
 usr/sbin
 var/lib/gforge/www/plugins
