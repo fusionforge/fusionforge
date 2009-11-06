@@ -325,13 +325,13 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 <table width="60%">
 <tr>
 <td>
-<h4><?php echo _('File Type') ?>:</h4>
+<strong><?php echo _('File Type') ?>:</strong>
 <?php
 	print frs_show_filetype_popup ('type_id');
 ?>
 </td>
 <td>
-<h4><?php echo _('Processor Type') ?>:</h4>
+<strong><?php echo _('Processor Type') ?>:</strong>
 <?php
 	print frs_show_processor_popup ('processor_id');
 ?>
@@ -407,7 +407,7 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 		echo $GLOBALS['HTML']->listTableBottom();
 	}
 
-echo '<br />'.sprintf(ngettext('There is %1$s user monitoring this package.', 'There are %1$s users monitoring this package.', $frsp->getMonitorCount()), $frsp->getMonitorCount());
+echo '<p>' . sprintf(ngettext('There is %1$s user monitoring this package.', 'There are %1$s users monitoring this package.', $frsp->getMonitorCount()), $frsp->getMonitorCount()) . '</p>';
 echo '<hr />';
 
 frs_admin_footer();

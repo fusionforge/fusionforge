@@ -173,7 +173,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 				<ul>';
 			for ($i=0; $i<$rows; $i++) {
 				echo '
-				<li>'.util_make_link ('/news/admin/?approve=1&id='.db_result($result,$i,'id').'&amp;group_id='.db_result($result,$i,'group_id'),db_result($result,$i,'summary')).'</li>';
+				<li>'.util_make_link ('/news/admin/?approve=1&amp;id='.db_result($result,$i,'id').'&amp;group_id='.db_result($result,$i,'group_id'),db_result($result,$i,'summary')).'</li>';
 			}
 			echo '</ul>';
 		}

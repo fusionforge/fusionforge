@@ -124,7 +124,7 @@ plugin_hook ("project_after_description",$hook_params) ;
 
 ?>
 		</td>
-		<td nowrap="nowrap" valign="top" width="20%">
+		<td valign="top" width="20%">
 
 <?php
 
