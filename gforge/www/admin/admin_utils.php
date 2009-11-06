@@ -23,14 +23,26 @@
 
 function site_admin_header($params) {
 	global $feedback,$HTML;
+	if (!isset($feedback)) {
+		$feedback = '';
+	}
 	session_require(array('group'=>'1','admin_flags'=>'A'));
 	$HTML->header($params);
 	echo html_feedback_top($feedback);
 }
 
 function site_admin_footer($vals=0) {
-	GLOBAL $HTML;
+	GLOBAL $HTML, $feedback;
+	if (!isset($feedback)) {
+		$feedback = '';
+	}
+	echo html_feedback_bottom($feedback);
 	$HTML->footer(array());
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

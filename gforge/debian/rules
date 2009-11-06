@@ -116,7 +116,7 @@ clean: remove-binary-files unpatch cleanpo
 	rm -f cvssh.1 $(PACKAGE)-config.1
 	rm -f $(CURDIR)/debian/README.Debian
 
-	rm -rf locales/*
+	rm -rf locales
 
 	perl $(CURDIR)/deb-specific/dsf-helper.pl --clean
 	dh_clean

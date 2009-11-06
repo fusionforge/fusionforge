@@ -70,7 +70,7 @@ echo notepad_func();
 	<tr>
 		<td colspan="2">
 		<strong><?php echo _('Estimated Hours') ?>:</strong><?php echo utils_requiredField(); ?><br />
-		<input type="text" name="hours" size="5" />
+		<input type="text" name="hours" size="5" value="1" />
 		</td>
 	</tr>
 

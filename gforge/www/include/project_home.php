@@ -132,6 +132,8 @@ plugin_hook ("project_after_description",$hook_params) ;
 
 echo $HTML->boxTop(_('Developer Info'));
 
+$iam_member = false ;
+
 if (db_numrows($res_admin) > 0) {
 
 	?>
@@ -144,6 +146,8 @@ if (db_numrows($res_admin) > 0) {
 				echo '<span class="develtitle">'. _('Developers').':</span><br />';
 			}
 			echo util_make_link_u ($row_admin['user_name'],$row_admin['user_id'],$row_admin['realname']).'<br />';
+			if ($row_admin['user_id'] == user_getid())
+				$iam_member = true ;
 		}
 	?>
 	<hr width="100%" size="1" />
@@ -154,9 +158,12 @@ if (db_numrows($res_admin) > 0) {
 ?>
 
 <p><?php echo util_make_link ('/project/memberlist.php?group_id='.$group_id,'['._('View Members').']'); ?></p>
-<p><?php echo util_make_link ('/project/request.php?group_id='.$group_id,'['._('Request to join').']'); ?></p>
+
 <?php
 
+if (!$iam_member) {
+	echo '<p>'.util_make_link ('/project/request.php?group_id='.$group_id,'['._('Request to join').']').'</p>';
+}
 echo $HTML->boxBottom();
 
 ?>

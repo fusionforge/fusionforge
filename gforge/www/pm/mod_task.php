@@ -29,7 +29,7 @@ echo notepad_func();
 <input type="hidden" name="func" value="postmodtask" />
 <input type="hidden" name="project_task_id" value="<?php echo $project_task_id; ?>" />
 
-<table border="0" width="100%">
+<table border="0" width="100%" class="mod_task">
 
 	<tr>
 		<td><strong><?php echo _('Submitted by') ?>:</strong><br />

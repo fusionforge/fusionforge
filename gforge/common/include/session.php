@@ -341,10 +341,11 @@ function session_redirect($loc) {
  *	fails checks.
  *
  *	@param		array	Associative array specifying criteria
+ *	@param		string	Override error string (optional)
  *	@return does not return if check is failed
  *
  */
-function session_require($req) {
+function session_require($req, $reason='') {
 	if (!session_loggedin()) {
 		exit_not_logged_in();	
 	}
@@ -352,31 +353,31 @@ function session_require($req) {
 	if (array_key_exists('group', $req)) {
 		$group =& group_get_object($req['group']);
 		if (!$group || !is_object($group)) {
-			exit_error('Error','Could Not Get Group');
+			exit_error('Error',$reason == '' ? _('Could Not Get Group') : $reason);
 		} elseif ($group->isError()) {
-			exit_error('Error',$group->getErrorMessage());
+			exit_error('Error',$reason == '' ? $group->getErrorMessage() : $reason);
 		}
 
 		$perm =& $group->getPermission( session_get_user() );
 		if (!$perm || !is_object($perm) || $perm->isError()) {
-			exit_permission_denied();
+			exit_permission_denied($reason);
 		}
 
 		//don't really like this, but as admin_flags is not mandatory
 		//I add @ to remove the warning
 		if (@$req['admin_flags']) {
 			if (!$perm->isAdmin()) {
-				exit_permission_denied();
+				exit_permission_denied($reason);
 			}
 		} else {
 			if (!$perm->isMember()) {
-				exit_permission_denied();
+				exit_permission_denied($reason);
 			}
 		}
 	} else if ($req['isloggedin']) {
 		//no need to check as long as the check is present at top of function
 	} else {
-		exit_permission_denied();
+		exit_permission_denied($reason);
 	}
 }
 

@@ -26,6 +26,10 @@ require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once $gfwww.'include/vote_function.php';
 
+if (!$sys_use_diary) {
+	exit_error (_('The diary feature is not enabled.')) ;
+}
+
 if (!session_loggedin()) {
 
 	exit_not_logged_in();
