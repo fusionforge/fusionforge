@@ -93,7 +93,9 @@ $HTML->header(array('title'=>'Login'));
 if ($login && !$success) {
 	form_release_key(getStringFromRequest('form_key'));	
 	// Account Pending
-	if ($userstatus == "P") {
+	if (!isset($userstatus)) {
+		$feedback = _('<P>Your account does not exist.');
+	} else if ($userstatus == "P") {
 		$feedback = sprintf(_('<p>Your account is currently pending your email confirmation.		Visiting the link sent to you in this email will activate your account.		<p>If you need this email resent, please click below and a confirmation		email will be sent to the email address you provided in registration.		<p><a href="%1$s">[Resend Confirmation Email]</a>		<br><hr>		<p>'), util_make_url ("/account/pending-resend.php?form_user=".htmlspecialchars($form_loginname)));
 	} else {
 		if ($userstatus == "D") {
