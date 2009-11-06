@@ -43,7 +43,8 @@ $query	= "SELECT groups.group_name,
 	AND frs_release.released_by = users.user_id 
 	AND frs_package.group_id = frs_dlstats_grouptotal_vw.group_id 
 	AND frs_release.status_id=1 
-	AND frs_package.is_public=1 ) 
+	AND frs_package.is_public=1
+	AND groups.is_public=1 ) 
 	ORDER BY frs_release.release_date DESC";
 $res_new = db_query($query, 21, $offset, SYS_DB_STATS);
 
