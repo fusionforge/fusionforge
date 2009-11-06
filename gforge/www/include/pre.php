@@ -11,6 +11,14 @@
 // escaping lib
 require_once $gfcommon.'include/escapingUtils.php';
 
+if (isset($_SERVER) && array_key_exists('PHP_SELF', $_SERVER) && $_SERVER['PHP_SELF']) {
+	$_SERVER['PHP_SELF'] = htmlspecialchars($_SERVER['PHP_SELF']);
+}
+
+if (isset($GLOBALS) && array_key_exists('PHP_SELF', $GLOBALS) && $GLOBALS['PHP_SELF']) {
+	$GLOBALS['PHP_SELF'] = htmlspecialchars($GLOBALS['PHP_SELF']);
+}
+
 // Just say no to link prefetching (Moz prefetching, Google Web Accelerator, others)
 // http://www.google.com/webmasters/faq.html#prefetchblock
 if (getStringFromServer('HTTP_X_moz') === 'prefetch'){
