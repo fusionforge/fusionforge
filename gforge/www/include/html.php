@@ -430,7 +430,6 @@ function html_build_select_box ($result, $name, $checked_val="xzxz",$show_100=tr
  * @param		string	What to call the '100 row'.  Defaults to none.
  */
 function html_build_select_box_sorted ($result, $name, $checked_val="xzxz",$show_100=true,$text_100='none') {
-	global $Language;
 	if ($text_100=='none'){
 		$text_100=_('None');
 	}
