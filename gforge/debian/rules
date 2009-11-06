@@ -76,7 +76,7 @@ clean: remove-binary-files unpatch
 	rm -f $(CURDIR)/debian/*.install
 	rm -f cvssh.1 gforge-config.1
 
-	rm -rf locales/*
+	rm -rf locales
 
 	perl $(CURDIR)/deb-specific/dsf-helper.pl --clean
 	dh_clean
