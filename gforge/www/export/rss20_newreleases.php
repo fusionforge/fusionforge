@@ -19,7 +19,8 @@ if ($limit > 100) $limit = 100;
 
 if ($group_id) {
 	$where = "frs_package.group_id=$group_id AND ";
-	$res = db_query("SELECT group_name FROM groups WHERE group_id=$group_id");
+	$res = db_query("SELECT group_name FROM groups WHERE ".
+			"group_id=$group_id AND is_public='1'");
 	$row = db_fetch_array($res);
 	$title = ": ".$row['group_name']." - ";
 	$link = "/project/showfiles.php?group_id=$group_id";
@@ -72,6 +73,7 @@ $res = db_query("SELECT groups.group_name AS group_name,"
 	. "frs_release.package_id=frs_package.package_id AND "
 	. "frs_package.group_id=groups.group_id AND "
 	. "frs_release.status_id=1 AND "
+	. "groups.is_public='1' AND "
 	. $where
 	. "frs_file.release_id=frs_release.release_id "
 	. "ORDER BY frs_file.release_time DESC",($limit * 3));
