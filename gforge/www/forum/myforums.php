@@ -41,7 +41,7 @@ require_once $gfcommon.'forum/ForumMessage.class.php';
 
 
 if (!session_loggedin()) {
-	exit_permission_denied();	
+    exit_permission_denied();
 }
 
 $user_id = user_getid();
@@ -93,14 +93,14 @@ for($i=0;$i<sizeof($monitored_forums);$i++) {
 		echo $f->getErrorMessage();
 	}	else {
 		//check if the forum has new content
-		
+
 		$fh = new ForumHTML($f);
 		if (!$fh || !is_object($fh)) {
 			exit_error(_('Error'), "Error getting new ForumHTML");
 		}	elseif ($fh->isError()) {
 			exit_error(_('Error'),$fh->getErrorMessage());
 		}
-		
+
 		$fmf = new ForumMessageFactory($f);
 		if (!$fmf || !is_object($fmf)) {
 			exit_error(_('Error'), "Error getting new ForumMessageFactory");
@@ -123,7 +123,7 @@ for($i=0;$i<sizeof($monitored_forums);$i++) {
 		$j=0;
 		$newcontent = "<center>---</center>";
 		//this loops through every message AND followup, in search of new messages.
-		//anything that's new ( new thread or followup) is considered to be a "new thing" and the forum 
+		//anything that's new ( new thread or followup) is considered to be a "new thing" and the forum
 		//is considered to have new contents
 		foreach ($msg_arr as $forum_msg_arr) {
 			foreach ($forum_msg_arr as $forum_msg) {
@@ -147,7 +147,7 @@ for($i=0;$i<sizeof($monitored_forums);$i++) {
 			}
 			$j++;
 		}*/
-		
+
 		$this_forum_group = $f->getGroup();
 		echo '<tr '. $HTML->boxGetAltRowStyle($j) . '>
 			<td>' . $this_forum_group->getPublicName() . '</td>

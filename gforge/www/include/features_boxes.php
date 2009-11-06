@@ -42,7 +42,7 @@ function show_features_boxes() {
 	$hook_params['returned_text'] = '' ;
 	plugin_hook ("features_boxes_bottom", $hook_params);
 	$return .= $HTML->boxBottom(0);
-	return $return ;
+	return $return;
 }
 
 function show_top_downloads() {
