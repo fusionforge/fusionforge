@@ -356,7 +356,7 @@ function &getProjectGroups($session_ser,$group_id) {
 function projectgroups_to_soap($pg_arr) {
 	$return = array();
 	for ($i=0; $i<count($pg_arr); $i++) {
-		if ($pg_arr[$i]->isError()) {
+		if (!is_a($pg_arr[$i], 'ProjectGroup') || $pg_arr[$i]->isError()) {
 			//skip if error
 		} else {
 			$return[]=array(
