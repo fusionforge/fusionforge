@@ -53,6 +53,11 @@ if (!$af || !is_object($af)) {
 	exit_error('Error',$af->getErrorMessage());
 }
 
+if (!isset($_sort_col)) {
+	/* default sort order: highest priority first */
+	$_sort_col = 'priority';
+	$_sort_ord = 'DESC';
+}
 $offset = getStringFromRequest('offset',$offset);
 $_sort_col = getStringFromRequest('_sort_col',$_sort_col);
 $_sort_ord = getStringFromRequest('_sort_ord',$_sort_ord);
