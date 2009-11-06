@@ -126,7 +126,23 @@ if ($res && $rows > 0) {
 	printf(_('Click here to %1$s quick-release a file %2$s'), '<a href="qrs.php?package_id=' . $package_id . '&amp;group_id=' . $group_id . '">', '</a>').'<br />';
 }
 ?>
-<?php echo  _('<h3>Packages</h3><p>You can use packages to group different file releases together, or use them however you like. <p><h4>An example of packages:</h4><p><strong>Mysql-win</strong><br /><strong>Mysql-unix</strong><br /><strong>Mysql-odbc</strong><p><h4>Your Packages:</h4><p><ol><li>Define your packages</li><li>Create new releases of packages</li></ol><p><h3>Releases of Packages</h3><p>A release of a package can contain multiple files.<p><h4>Examples of Releases</h4><p><strong>3.22.1</strong><br /><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /><p>You can create new releases of packages by clicking on <strong>Add/Edit Releases</strong> next to your package name.<p>') ?>
+
+<fieldset>
+<h2><?php echo _("Packages") ?></h2>
+<p><?php echo _("You can use packages to group different file releases together, or use them however you like.") ?></p>
+<h3><?php echo _("An example of packages:") ?></h3>
+<p><strong>Mysql-win</strong><br /><strong>Mysql-unix</strong><br /><strong>Mysql-odbc</strong></p>
+<h3><?php echo _("Your Packages:") ?></h3>
+<ol>
+    <li><?php echo _("Define your packages") ?></li>
+    <li><?php echo _("Create new releases of packages") ?></li>
+</ol>
+<h2><?php echo _("Releases of Packages") ?></h2>
+<p><?php echo _("A release of a package can contain multiple files.") ?></p>
+<h3><?php echo _("Examples of Releases") ?></h3>
+<p><strong>3.22.1</strong><br /><strong>3.22.2</strong><br /><strong>3.22.3</strong></p>
+<p><?php echo _("You can create new releases of packages by clicking on <strong>Add/Edit Releases</strong> next to your package name") ?>.</p>
+</fieldset>
 
 <?php
 /*
@@ -138,7 +154,7 @@ if ($res && $rows > 0) {
 */
 
 if (!$res || $rows < 1) {
-	echo '<h4>'._('You Have No Packages Defined').'</h4>';
+	echo '<p><strong>'._('You Have No Packages Defined').'</strong></p>';
 } else {
 	$title_arr=array();
 	$title_arr[]=_('Releases');
@@ -188,18 +204,19 @@ if (!$res || $rows < 1) {
 
 ?>
 
-<h3><?php echo _('New Package Name') ?>:</h3>
-
+<fieldset>
+<legend><?php echo _('Create New Package') ?></legend>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 <input type="hidden" name="func" value="add_package" />
-<input type="text" name="package_name" value="" size="20" maxlength="30" />
-<p>
-<strong><?php echo _('Publicly Viewable'); ?>:</strong><br />
-<input type="radio" name="is_public" value="1" checked="checked" /> <?php echo _('Public'); ?><br />
-<input type="radio" name="is_public" value="0" /> <?php echo _('Private'); ?><br />
+<p><strong><?php echo _('New Package Name') ?>:</strong>
+<input type="text" name="package_name" value="" size="20" maxlength="30" /></p>
+<p><strong><?php echo _('Publicly Viewable'); ?>:</strong>
+<input type="radio" name="is_public" value="1" checked="checked" /> <?php echo _('Public'); ?>
+<input type="radio" name="is_public" value="0" /> <?php echo _('Private'); ?></p>
 <p><input type="submit" name="submit" value="<?php echo _('Create This Package') ?>" /></p>
-</form></p>
+</form>
+</fieldset>
 
 <?php
 

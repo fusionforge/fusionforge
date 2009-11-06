@@ -113,7 +113,9 @@ $report=new ReportDownloads($group_id,$package_id,$start,$end);
 $data = $report->getData();
 
 if (count($data) == 0) {
-    echo '<p>There have been no downloads for this package.</p>';
+    echo '<p>';
+    echo _('There have been no downloads for this package.');
+    echo '</p>';
 } else {
 
     echo $HTML->listTableTop (array('Package', 'Release', 'File','User', 'Date'),
