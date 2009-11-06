@@ -36,6 +36,15 @@ gforge (4.8.51-1) experimental; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Wed, 29 Apr 2009 15:21:31 +0200
 
+gforge (4.8.1-2) unstable; urgency=low
+
+  * New upstream snapshot from the 4.8 branch.
+  * Fixed file conflict between -web-apache2 and -plugin-mediawiki.
+  * Bumped Standards-Version to 3.8.3 (no changes).
+  * Bumped versioned dependency on debhelper to >= 5.
+
+ -- Roland Mas <lolando@debian.org>  Wed, 14 Oct 2009 14:50:26 +0200
+
 gforge (4.8.1-1) unstable; urgency=low
 
   * New upstream release.

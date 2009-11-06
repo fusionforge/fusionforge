@@ -248,12 +248,12 @@ class DocumentGroup extends Error {
 	*/
 	function hasDocuments(&$nested_groups, &$document_factory, $stateid=0) {
 		global $doc_group_id;
+		$doc_group_id = $this->getID();
 		static $result = array();	// this function will probably be called several times so we better store results in order to speed things up
-		if (!is_array(@$result[$stateid])) $result[$stateid] = array();
+		if (!array_key_exists($stateid, $result) || !is_array($result[$stateid])) $result[$stateid] = array();
+
 		if (array_key_exists($doc_group_id, $result[$stateid])) return $result[$stateid][$doc_group_id];
 
-		$doc_group_id = $this->getID();
-		
 		// check if it has documents
 		if ($stateid) {
 			$document_factory->setStateID($stateid);
@@ -266,10 +266,10 @@ class DocumentGroup extends Error {
 		}
 		
 		// this group doesn't have documents... check recursively on the childs
-		if (is_array($nested_groups["$doc_group_id"])) {
-			$count = count($nested_groups["$doc_group_id"]);
+		if (array_key_exists($doc_group_id,$nested_groups) && is_array($nested_groups[$doc_group_id])) {
+			$count = count($nested_groups[$doc_group_id]);
 			for ($i=0; $i < $count; $i++) {
-				if ($nested_groups["$doc_group_id"][$i]->hasDocuments($nested_groups, $document_factory, $stateid)) {
+				if ($nested_groups[$doc_group_id][$i]->hasDocuments($nested_groups, $document_factory, $stateid)) {
 					// child has documents
 					$result[$stateid][$doc_group_id] = true;
 					return true;
@@ -293,15 +293,15 @@ class DocumentGroup extends Error {
 	function hasSubgroup(&$nested_groups, $doc_subgroup_id) {
 		$doc_group_id = $this->getID();
 
-		if (is_array(@$nested_groups["$doc_group_id"])) {
-			$count = count($nested_groups["$doc_group_id"]);
+		if (is_array(@$nested_groups[$doc_group_id])) {
+			$count = count($nested_groups[$doc_group_id]);
 			for ($i=0; $i < $count; $i++) {
 				// child is a match?
-				if ($nested_groups["$doc_group_id"][$i]->getID() == $doc_subgroup_id) {
+				if ($nested_groups[$doc_group_id][$i]->getID() == $doc_subgroup_id) {
 					return true;
 				} else {
 					// recursively check if this child has this subgroup
-					if ($nested_groups["$doc_group_id"][$i]->hasSubgroup($nested_groups, $doc_subgroup_id)) {
+					if ($nested_groups[$doc_group_id][$i]->hasSubgroup($nested_groups, $doc_subgroup_id)) {
 						return true;
 					}
 				}
