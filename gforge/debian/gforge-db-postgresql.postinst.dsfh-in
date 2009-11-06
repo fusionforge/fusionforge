@@ -11,7 +11,7 @@ then
 	# This is probably not te most elegant way to deal with database
 	# I install or upgrade on the default cluster if it is online
 	# or I quit gently with a big message
-	pg_version=`/usr/bin/pg_lsclusters | grep 5432 | grep online | cut -d' ' -f1`
+	pg_version=`pg_lsclusters | grep 5432 | grep online | cut -d' ' -f1`
 	if [ "x$pg_version" != "x" ] 
 	then 
 		export pg_hba_dir=/etc/postgresql/${pg_version}/main

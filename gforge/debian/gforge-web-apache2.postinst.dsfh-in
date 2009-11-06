@@ -78,12 +78,12 @@ case "$1" in
 		/usr/share/gforge/bin/create-vhosts.sh --norestart
 
 	# Enable required modules
-	DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod php5 || true
-	DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod ssl || true
-	DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod env || true
-	DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod vhost_alias || true
-	DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod headers || true
-	DEBIAN_FRONTEND=noninteractive /usr/sbin/a2enmod rewrite || true
+	DEBIAN_FRONTEND=noninteractive a2enmod php5 || true
+	DEBIAN_FRONTEND=noninteractive a2enmod ssl || true
+	DEBIAN_FRONTEND=noninteractive a2enmod env || true
+	DEBIAN_FRONTEND=noninteractive a2enmod vhost_alias || true
+	DEBIAN_FRONTEND=noninteractive a2enmod headers || true
+	DEBIAN_FRONTEND=noninteractive a2enmod rewrite || true
 	
 	# Enable the Gforge configuration
 	if [ -e /etc/apache2/conf.d/gforge.httpd.conf ] ; then
