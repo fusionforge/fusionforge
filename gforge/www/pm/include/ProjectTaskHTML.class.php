@@ -170,7 +170,7 @@ class ProjectTaskHTML extends ProjectTask {
 				$field=db_result($result, $i, 'field_name');
 
 				echo '
-					<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.$field.'</td><td>';
+					<tr class="mod_task_field" '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.$field.'</td><td>';
 
 				if ($field == 'status_id') {
 //tdP - convert to actual status name
