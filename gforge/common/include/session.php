@@ -342,9 +342,9 @@ function session_require($req, $reason='') {
 	if (array_key_exists('group', $req)) {
 		$group =& group_get_object($req['group']);
 		if (!$group || !is_object($group)) {
-			exit_error('Error',$xreason == '' ? _('Could Not Get Group') : $xreason);
+			exit_error('Error',$reason == '' ? _('Could Not Get Group') : $reason);
 		} elseif ($group->isError()) {
-			exit_error('Error',$xreason == '' ? $group->getErrorMessage() : $xreason);
+			exit_error('Error',$reason == '' ? $group->getErrorMessage() : $reason);
 		}
 
 		$perm =& $group->getPermission( session_get_user() );
