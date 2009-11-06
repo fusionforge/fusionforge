@@ -22,7 +22,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require dirname(__FILE__).'/../www/env.inc.php';
+require (dirname(__FILE__).'/../www/env.inc.php');
 require $gfwww.'include/squal_pre.php';
 require $gfcommon.'include/cron_utils.php';
 
@@ -42,57 +42,61 @@ $err='';
 /*
     Create an aggregation table that includes counts of forum messages 
 */
-db_begin();
+if ($sys_use_forum) {
+	db_begin();
 
-db_query("LOCK TABLE forum_agg_msg_count IN ACCESS EXCLUSIVE MODE;");
-db_query("LOCK TABLE forum IN ACCESS EXCLUSIVE MODE;");
-db_query("LOCK TABLE forum_group_list IN ACCESS EXCLUSIVE MODE;");
+	db_query("LOCK TABLE forum_agg_msg_count IN ACCESS EXCLUSIVE MODE;");
+	db_query("LOCK TABLE forum IN ACCESS EXCLUSIVE MODE;");
+	db_query("LOCK TABLE forum_group_list IN ACCESS EXCLUSIVE MODE;");
 
-$res = db_query("DELETE FROM forum_agg_msg_count;");
-if (!$res) {
-	$err .= "DELETE FROM forum_agg_msg_count : ".db_error();
-}
+	$res = db_query("DELETE FROM forum_agg_msg_count;");
+	if (!$res) {
+		$err .= "DELETE FROM forum_agg_msg_count : ".db_error();
+	}
 
-$res = db_query("INSERT INTO forum_agg_msg_count
+	$res = db_query("INSERT INTO forum_agg_msg_count
 SELECT fgl.group_forum_id,count(f.msg_id)
 FROM forum_group_list fgl
 LEFT JOIN forum f USING (group_forum_id)
 GROUP BY fgl.group_forum_id;");
-if (!$res) {
-	$err .= "INSERT INTO forum_agg_msg_count : ".db_error();
+	if (!$res) {
+		$err .= "INSERT INTO forum_agg_msg_count : ".db_error();
+	}
+	db_commit();
+
+	if ($sys_database_type != 'mysql') {
+		db_query("VACUUM ANALYZE forum_agg_msg_count;");
+	}
 }
 
-db_commit();
-
-if ($sys_database_type != 'mysql') {
-	db_query("VACUUM ANALYZE forum_agg_msg_count;");
-}
 
 /*
 	Create an aggregation table that includes counts of artifacts
 */
-db_begin();
+if ($sys_use_tracker) {
+	db_begin();
 
-db_query("LOCK TABLE artifact_counts_agg IN ACCESS EXCLUSIVE MODE;");
-db_query("LOCK TABLE artifact IN ACCESS EXCLUSIVE MODE;");
-db_query("LOCK TABLE artifact_group_list IN ACCESS EXCLUSIVE MODE;");
-
-$rel = db_query("DELETE FROM artifact_counts_agg;");
-$err .= db_error();
-
-$rel=db_query("INSERT INTO artifact_counts_agg
+	db_query("LOCK TABLE artifact_counts_agg IN ACCESS EXCLUSIVE MODE;");
+	db_query("LOCK TABLE artifact IN ACCESS EXCLUSIVE MODE;");
+	db_query("LOCK TABLE artifact_group_list IN ACCESS EXCLUSIVE MODE;");
+	
+	$rel = db_query("DELETE FROM artifact_counts_agg;");
+	$err .= db_error();
+	
+	$rel=db_query("INSERT INTO artifact_counts_agg
 SELECT agl.group_artifact_id,
 (SELECT count(*) FROM artifact WHERE status_id <> 3 AND group_artifact_id=agl.group_artifact_id), 
 (SELECT count(*) FROM artifact WHERE status_id=1 AND group_artifact_id=agl.group_artifact_id)
 FROM artifact_group_list agl 
 LEFT JOIN artifact a USING (group_artifact_id)
 GROUP BY agl.group_artifact_id;");
-$err .= db_error();
+	$err .= db_error();
 
-db_commit();
+	db_commit();
 
-if ($sys_database_type != 'mysql') {
-	db_query("VACUUM ANALYZE artifact_counts_agg;");
+	if ($sys_database_type != 'mysql') {
+		db_query("VACUUM ANALYZE artifact_counts_agg;");
+	}
 }
 
 /*
@@ -102,81 +106,83 @@ if ($sys_database_type != 'mysql') {
 	each time the project summary is viewed
 
 */
-
 db_begin();
-$res=db_query("DELETE FROM project_sums_agg;");
+$res = db_query("DELETE FROM project_sums_agg;");
 
 /*
 	Get counts of mailing lists
 */
-$sql="INSERT INTO project_sums_agg ";
-if ($sys_database_type == 'mysql') {
-	$sql.="SELECT group_id,'mail' AS type,count(*) AS count ";
-} else {
-	$sql.="SELECT group_id,'mail'::text AS type,count(*) AS count ";
-}
-$sql.="
+if ($sys_use_mail) {
+
+	$sql="INSERT INTO project_sums_agg ";
+	if ($sys_database_type == 'mysql') {
+		$sql.="SELECT group_id,'mail' AS type,count(*) AS count ";
+	} else {
+		$sql.="SELECT group_id,'mail'::text AS type,count(*) AS count ";
+	}
+	$sql.="
 	FROM mail_group_list WHERE is_public = 1
 	GROUP BY group_id,type;";
 
-$res=db_query($sql);
-$err .= db_error();
-
+	$res=db_query($sql);
+	$err .= db_error();
+}	
 
 /*
 	Get counts of surveys
 */
-$sql="INSERT INTO project_sums_agg ";
-if ($sys_database_type == 'mysql') {
-	$sql.="SELECT group_id,'surv' AS type,count(*) AS count ";
-} else {
-	$sql.="SELECT group_id,'surv'::text AS type,count(*) AS count ";
-}
-$sql.="
+if ($sys_use_survey) {
+	$sql="INSERT INTO project_sums_agg ";
+	if ($sys_database_type == 'mysql') {
+		$sql.="SELECT group_id,'surv' AS type,count(*) AS count ";
+	} else {
+		$sql.="SELECT group_id,'surv'::text AS type,count(*) AS count ";
+	}
+	$sql.="
 	FROM surveys
 	WHERE is_active='1'
 	GROUP BY group_id,type;";
 
-$res=db_query($sql);
-$err .= db_error();
-
+	$res=db_query($sql);
+	$err .= db_error();
+}
 
 /*
 	Forum message count
 */
-$sql="INSERT INTO project_sums_agg ";
-if ($sys_database_type == 'mysql') {
-	$sql.="SELECT forum_group_list.group_id,'fmsg' AS type, count(forum.msg_id) AS count ";
-} else {
-	$sql.="SELECT forum_group_list.group_id,'fmsg'::text AS type, count(forum.msg_id) AS count ";
-}
-$sql.="
+if ($sys_use_forum) {
+	$sql="INSERT INTO project_sums_agg ";
+	if ($sys_database_type == 'mysql') {
+		$sql.="SELECT forum_group_list.group_id,'fmsg' AS type, count(forum.msg_id) AS count ";
+	} else {
+		$sql.="SELECT forum_group_list.group_id,'fmsg'::text AS type, count(forum.msg_id) AS count ";
+	}
+	$sql.="
 	FROM forum,forum_group_list 
 	WHERE forum.group_forum_id=forum_group_list.group_forum_id 
 	AND forum_group_list.is_public=1
 	GROUP BY group_id,type;";
 
-$res=db_query($sql);
-$err .= db_error();
-
+	$res=db_query($sql);
+	$err .= db_error();
 
 /*
 	Forum count
 */
-$sql="INSERT INTO project_sums_agg ";
-if ($sys_database_type == 'mysql') {
-	$sql.="SELECT group_id,'fora' AS type, count(*) AS count ";
-} else {
-	$sql.="SELECT group_id,'fora'::text AS type, count(*) AS count ";
-}
-$sql.="
+	$sql="INSERT INTO project_sums_agg ";
+	if ($sys_database_type == 'mysql') {
+		$sql.="SELECT group_id,'fora' AS type, count(*) AS count ";
+	} else {
+		$sql.="SELECT group_id,'fora'::text AS type, count(*) AS count ";
+	}
+	$sql.="
 	FROM forum_group_list 
 	WHERE is_public=1
 	GROUP BY group_id,type;";
-
-$res=db_query($sql);
-$err .= db_error();
-
+	
+	$res=db_query($sql);
+	$err .= db_error();
+}
 
 db_commit();
 $err .= db_error();
