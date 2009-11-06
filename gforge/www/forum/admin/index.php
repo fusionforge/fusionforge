@@ -146,7 +146,6 @@ if ($group_id) {
 				<input type="radio" name="allow_anonymous" value="1"'.(($f->AllowAnonymous() == 1)?' checked="checked"':'').' /> '._('Yes').'<br />
 				<input type="radio" name="allow_anonymous" value="0"'.(($f->AllowAnonymous() == 0)?' checked="checked"':'').'/> '._('No').'<br />
 				
-				
 				<p />
 				<strong>'._('Is Public?').'</strong><br />
 				<input type="radio" name="is_public" value="1"'.(($f->isPublic() == 1)?' checked="checked"':'').' /> '._('Yes').'<br />
@@ -214,14 +213,13 @@ if ($group_id) {
 					forum_footer(array());
 				} elseif (getStringFromRequest("cancel")) {
 					// the user cancelled the request, go back to forum
-					echo "<script>";
 					//if thread_id is 0, then we came from message.php. else, we came from forum.php
 					if (!$thread_id) {
-						echo "window.location='/forum/message.php?msg_id=$msg_id';";
+						header("Location: /forum/message.php?msg_id=$msg_id");
 					} else {
-						echo "window.location='/forum/forum.php?thread_id=$thread_id&amp;forum_id=$forum_id';";
+						header("Location: /forum/forum.php?thread_id=$thread_id&forum_id=$forum_id");
 					}
-					echo "</script>";
+					exit;
 				} else {
 					//print the delete message confirmation
 					forum_header(array('title'=>_('Delete a Message')));
@@ -296,9 +294,8 @@ if ($group_id) {
 					forum_footer(array());
 				} elseif (getStringFromRequest("cancel")) {
 					// the user cancelled the request, go back to forum
-					echo "<script>";
-					echo "window.location='/forum/message.php?msg_id=$msg_id';";
-					echo "</script>";
+					header("Location: /forum/message.php?msg_id=$msg_id");
+					exit;
 				} else { 
 					//print the edit message confirmation
 					
