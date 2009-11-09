@@ -119,7 +119,7 @@ $ath->header(array ('title'=>_('Submit')));
 		</td>
 	</tr>
 
-	<tr><td colspan="2"><br/><?php echo utils_requiredField(); ?> <?php echo $Language->getText('general','required_fields')?></td></tr>
+	<tr><td colspan="2"><br/><?php echo utils_requiredField(); ?> <?php echo _('Indicates required fields.') ?></td></tr>
 	</table></form>
 
 	<?php

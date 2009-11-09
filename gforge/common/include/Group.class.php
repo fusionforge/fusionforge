@@ -1298,8 +1298,6 @@ class Group extends Error {
 	 *	@return	string	database result.
 	 */
 	function setTags($tags) {
-		global $Language;
-
 		db_begin();
 		$sql='DELETE FROM project_tags WHERE group_id=$1';
 		$res=db_query_params($sql, array($this->getID()));

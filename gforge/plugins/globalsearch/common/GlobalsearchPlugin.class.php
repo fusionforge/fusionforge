@@ -32,7 +32,7 @@ class globalSearchPlugin extends Plugin {
         }
 
         function CallHook ($hookname, $params) {
-                global $Language, $G_SESSION, $HTML, $group_id;
+                global $G_SESSION, $HTML, $group_id;
 
                 if ($hookname == "site_admin_option_hook") {
                         print '<li><a href="/plugins/globalsearch/edit_assoc_sites.php">'._("Admin Associated Forges").'</a></li>';

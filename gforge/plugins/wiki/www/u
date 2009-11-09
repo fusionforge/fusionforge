@@ -47,14 +47,16 @@ ini_set("memory_limit", "64M");
 // Disable compression, seems needed to get all the messages.
 $no_gz_buffer=true;
 
-require_once('pre.php');
+require_once('../../env.inc.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfconfig.'plugins/wiki/config.php' ;
 
 $user_name = $group_name;
 
 $user =& user_get_object_by_name($user_name);
 if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 
-    exit_error($Language->getText('users','user_not_exist_title'),$Language->getText('users','user_not_exist_text'));
+    exit_error("Invalid User","Invalid User");
 
 } else {
 
@@ -65,6 +67,6 @@ if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 
     define('THEME', 'gforge');
 
-    require('wikiconfig.php');
+	require dirname(__FILE__).'/wikiconfig.php';
 }
 ?>

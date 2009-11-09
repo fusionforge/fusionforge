@@ -180,7 +180,7 @@ class Artifact extends Error {
 //
 // ape: Disabled, private means only restricted to members. So, no special rules #2503.
 //			if (!$this->ArtifactType->userIsAdmin()) {
-//				$this->setError($Language->getText('tracker_artifact','error_admin_modify'));
+//				$this->setError(_('Artifact: Only Artifact Admins Can Modify Private ArtifactTypes'));
 //				return false;
 //			}
 		}

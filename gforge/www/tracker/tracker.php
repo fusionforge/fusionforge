@@ -218,7 +218,7 @@ switch (getStringFromRequest('func')) {
 			unset($ah);
 
 		if (!$was_error) {
-			$feedback = $Language->getText('tracker','updated_successful');			}
+			$feedback = _('Updated Successfully');			}
 		}
 		unset ($extra_fields_choice);
 		include $gfwww.'tracker/browse.php';
@@ -353,10 +353,10 @@ switch (getStringFromRequest('func')) {
 								exit_error("Error","Invalid filename");
 							}
 							if (!$afh->upload($tmp_name,$file_name,$type,' ')) {
-								$feedback .= ' <br />'.$Language->getText('tracker','file_upload_upload').':'.$afh->getErrorMessage();
+								$feedback .= ' <br />'._('File Upload: Error').':'.$afh->getErrorMessage();
 								$was_error=true;
 							} else {
-								$feedback .= ' <br />'.$Language->getText('tracker','file_upload_successful');
+								$feedback .= ' <br />'._('File Upload: Successful');
 							}
 						}
 					}
@@ -418,9 +418,9 @@ switch (getStringFromRequest('func')) {
 					exit_error('ERROR',$ah->getErrorMessage());
 				} else {
 					if ($start && $ah->isMonitoring())
-					$feedback = $Language->getText('tracker_monitor','monitoring_activated');
+						$feedback = _('Monitoring Started');
 					elseif ($stop && !$ah->isMonitoring())
-					$feedback = $Language->getText('tracker_monitor','monitoring_deactivated');
+						$feedback = _('Monitoring Deactivated');
 					else {
 						$ah->setMonitor();
 						$feedback=$ah->getErrorMessage();
@@ -435,9 +435,9 @@ switch (getStringFromRequest('func')) {
 					exit_error('ERROR',$at->getErrorMessage());
 				} else {
 					if ($start && $at->isMonitoring())
-					$feedback = $Language->getText('tracker_monitor','monitoring_activated');
+						$feedback = _('Monitoring Started');
 					elseif ($stop && !$at->isMonitoring())
-					$feedback = $Language->getText('tracker_monitor','monitoring_deactivated');
+						$feedback = _('Monitoring Deactivated');
 					else {
 						$at->setMonitor();
 						$feedback=$at->getErrorMessage();

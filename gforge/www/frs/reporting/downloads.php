@@ -53,8 +53,6 @@ $package_id = getIntFromRequest('package_id');
 $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');
 
-global $Language;
-
 if (!$group_id) {
 	exit_no_group();
 }

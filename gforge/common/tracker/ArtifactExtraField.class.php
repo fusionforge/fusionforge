@@ -572,8 +572,6 @@ class ArtifactExtraField extends Error {
 	}
 
 	function reorderValues($element_id, $new_pos) {
-		global $Language;
-
 
 		$res = db_query_params ('SELECT element_id FROM artifact_extra_field_elements WHERE extra_field_id=$1 ORDER BY element_pos ASC, element_id ASC',
 			array($this->getID()));
@@ -602,8 +600,6 @@ class ArtifactExtraField extends Error {
 	}
 
 	function alphaorderValues($element_id) {
-		global $Language;
-
 
 		$res = db_query_params ('SELECT element_id FROM artifact_extra_field_elements WHERE extra_field_id=$1 ORDER BY element_name ASC',
 			array($this->getID()));

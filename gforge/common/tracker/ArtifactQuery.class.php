@@ -117,7 +117,7 @@ class ArtifactQuery extends Error {
 		}
 
 		if ($query_type>0 && !$this->ArtifactType->userIsAdmin()) {
-			$this->setError($Language->getText('artifact_query','require_admin_rights'));
+			$this->setError( _('You must have tracker admin rights to set or update a project level query.'));
 			return false;
 		}
 		
@@ -593,7 +593,7 @@ class ArtifactQuery extends Error {
 			return false;
 		}
 		if ($query_type>0 && !$this->ArtifactType->userIsAdmin()) {
-			$this->setError($Language->getText('artifact_query','require_admin_rights'));
+			$this->setError(_('You must have tracker admin rights to set or update a project level query.'));
 			return false;
 		}
 		

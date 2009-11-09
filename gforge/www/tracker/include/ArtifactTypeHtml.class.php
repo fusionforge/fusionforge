@@ -132,8 +132,6 @@ class ArtifactTypeHtml extends ArtifactType {
 	}
 
 	function renderExtraFields($selected=array(),$show_100=false,$text_100='none',$show_any=false,$text_any='Any',$filter='',$status_show_100=false,$mode='') {
-		global $Language;
-		
 		$efarr = $this->getExtraFields($filter);
 		//each two columns, we'll reset this and start a new row
 
@@ -289,8 +287,6 @@ class ArtifactTypeHtml extends ArtifactType {
 	 *	@return	string	HTML template.
 	 */
 	function generateRenderHTML($filter='', $mode) {
-		global $Language;
-		
 		$efarr =& $this->getExtraFields($filter);
 		//each two columns, we'll reset this and start a new row
 
@@ -520,7 +516,6 @@ class ArtifactTypeHtml extends ArtifactType {
 	 *	@return		text area and data.
 	 */	
 	function renderRelationField ($extra_field_id,$contents,$size,$maxlength) {
-		global $Language;
 		$arr =& $this->getExtraFieldElements($extra_field_id);
 		for ($i=0; $i<count($arr); $i++) {
 			$keys[$i]=$arr[$i]['element_id'];
