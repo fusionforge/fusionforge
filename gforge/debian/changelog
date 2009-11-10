@@ -36,6 +36,12 @@ gforge (4.8.51-1) experimental; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Wed, 29 Apr 2009 15:21:31 +0200
 
+gforge (4.8.1-2+) UNRELEASED; urgency=low
+
+  * Fixed potential hang in install-postfix.sh.
+
+ -- Roland Mas <lolando@debian.org>  Tue, 10 Nov 2009 10:15:44 +0100
+
 gforge (4.8.1-2) unstable; urgency=low
 
   * New upstream snapshot from the 4.8 branch.
