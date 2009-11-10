@@ -49,6 +49,7 @@ $l .= ", users.$domain_name" unless ($l =~ /^[^#]*users.$domain_name/);
 print "$l\n";
 while ($l = <>) { print $l; };
 ' < /etc/postfix/main.cf.gforge-new > $tmp1
+	grep -q '^[[:space:]]*relay_domains' $tmp1 || echo 'relay_domains=' >>$tmp1
 	perl -i -e '
 require ("/etc/gforge/local.pl") ;
 my $l;
