@@ -1,9 +1,10 @@
-gforge (4.8.1-2+) UNRELEASED; urgency=low
+gforge (4.8.1-3) unstable; urgency=low
 
+  * New upstream snapshot from the 4.8 branch.
   * Fixed potential hang in install-postfix.sh.
   * Fixed dependency on viewcvs, now called viewvc (closes: #552524).
 
- -- Roland Mas <lolando@debian.org>  Thu, 12 Nov 2009 14:33:09 +0100
+ -- Roland Mas <lolando@debian.org>  Thu, 12 Nov 2009 14:34:32 +0100
 
 gforge (4.8.1-2) unstable; urgency=low
 
