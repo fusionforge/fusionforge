@@ -7,14 +7,6 @@
  * 
  */
 
-# In case of errors, let output be clean.
-$gfRequestTime = microtime( true );
-
-@ini_set( 'memory_limit', '20M' );
-@ini_set( "display_errors", false );
-
-error_reporting( E_ALL );
-
 # Attempt to set up the include path, to fix problems with relative includes
 $IP = dirname(dirname( __FILE__ )) ;
 $include_path = join(PATH_SEPARATOR, 
