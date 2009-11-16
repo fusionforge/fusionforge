@@ -38,7 +38,8 @@ gforge (4.8.51-1) experimental; urgency=low
 
 gforge (4.8.1-3) unstable; urgency=low
 
-  * New upstream snapshot from the 4.8 branch.
+  * New upstream snapshot from the 4.8 branch.  This includes fixes for
+    CVE-2009-3303.
   * Fixed potential hang in install-postfix.sh.
   * Fixed dependency on viewcvs, now called viewvc (closes: #552524).
 
