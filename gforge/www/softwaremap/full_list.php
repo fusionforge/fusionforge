@@ -65,12 +65,14 @@ $subMenuUrl[] = '/softwaremap/full_list.php';
 
 echo ($HTML->subMenu($subMenuTitle, $subMenuUrl));
 
-$res_grp = db_query("
+$res_grp = db_query_params ('
 	SELECT group_id, group_name, unix_group_name, short_description, register_time
 	FROM groups
-        WHERE status = 'A' AND is_public=1 AND type_id=1 AND group_id>4 AND register_time > 0 
+        WHERE status = $1 AND is_public=1 AND type_id=1 AND group_id>4 AND register_time > 0 
 	ORDER BY group_name ASC
-", $TROVE_HARDQUERYLIMIT);
+',
+			    array ('A'),
+			    $TROVE_HARDQUERYLIMIT);
 echo db_error();
 $querytotalcount = db_numrows($res_grp);
 	
