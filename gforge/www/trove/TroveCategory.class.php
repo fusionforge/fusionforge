@@ -229,7 +229,7 @@ class TroveCategory extends Error {
 		
 		for($i = 0, $count = sizeof($filterArray); $i < $count; $i++) {
 			$this->filterQueryAlias .= ', trove_agg trove_agg_'.$i.' ';
-			$this->filterQueryAlias .= 'AND trove_agg_'.$i.'.trove_cat_id='
+			$this->filterQueryAnd .= 'AND trove_agg_'.$i.'.trove_cat_id='
 			.$filterArray[$i].' AND trove_agg_'.$i.'.group_id='
 			.'trove_agg.group_id ';
 		}
