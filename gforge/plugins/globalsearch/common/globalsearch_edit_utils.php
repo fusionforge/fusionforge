@@ -62,10 +62,13 @@ function globalsearch_admin_table_postadd () {
 		$new_enabled = 'f' ;
 	}
 
-        $sql = "INSERT INTO plugin_globalsearch_assoc_site (title, link, onlysw, enabled, rank)
-VALUES ('$new_title', '$new_link', '$new_onlysw', '$new_enabled', '$new_rank')" ;
-
-        if (db_query($sql)) {
+        if (db_query_params ('INSERT INTO plugin_globalsearch_assoc_site (title, link, onlysw, enabled, rank)
+VALUES ($1, $2, $3, $4, $5)',
+			     array ($new_title,
+				    $new_link,
+				    $new_onlysw,
+				    $new_enabled,
+				    $new_rank))) {
 		echo _('Associated forge successfully added.');
         } else {
                 echo db_error();
@@ -81,7 +84,7 @@ function globalsearch_admin_table_confirmdelete ($id) {
         global $PHP_SELF;
 
         $result = db_query_params ('SELECT * FROM plugin_globalsearch_assoc_site WHERE assoc_site_id=$1',
-			array($id));
+				   array($id));
         if ($result and db_numrows($result) == 1) {
 		$title     =  db_result ($result, 0, 'title');
 		$link      =  db_result ($result, 0, 'link');
@@ -115,7 +118,7 @@ function globalsearch_admin_table_confirmdelete ($id) {
  */
 function globalsearch_admin_table_delete ($id) {
         if (db_query_params ('DELETE FROM plugin_globalsearch_assoc_site WHERE assoc_site_id=$1',
-			array($id))) {
+			     array($id))) {
 		echo _('Associated forge successfully deleted.');
         } else {
                 echo db_error();
@@ -131,7 +134,7 @@ function globalsearch_admin_table_edit ($id) {
         global $PHP_SELF;
 
         $result = db_query_params ('SELECT * FROM plugin_globalsearch_assoc_site WHERE assoc_site_id=$1',
-			array($id));
+				   array($id));
         if ($result and db_numrows($result) == 1) {
 		$old_title     =  db_result ($result, 0, 'title');
 		$old_link      =  db_result ($result, 0, 'link');
@@ -176,17 +179,13 @@ function globalsearch_admin_table_postedit ($id) {
 		$new_enabled = 'f' ;
 	}
 
-        $sql = 'UPDATE plugin_globalsearch_assoc_site SET ';
-
-	$sql .= "title='$new_title', ";
-	$sql .= "link='$new_link', ";
-	$sql .= "onlysw='$new_onlysw', ";
-	$sql .= "enabled='$new_enabled', ";
-	$sql .= "rank='$new_rank' ";
-
-        $sql .= "WHERE assoc_site_id=$id";
-
-        if (db_query($sql)) {
+        if (db_query_params ('UPDATE plugin_globalsearch_assoc_site SET title=$1, link=$2, onlysw=$3, enabled=$4, rank=$5 WHERE assoc_site_id=$6',
+			     array ($new_title,
+				    $new_link,
+				    $new_onlysw,
+				    $new_enabled,
+				    $new_rank,
+				    $id))) {
 		echo _('Associated forge successfully modified.');
         } else {
                 echo db_error();
@@ -200,7 +199,7 @@ function globalsearch_admin_table_show () {
         global $HTML, $PHP_SELF;
 
         $result = db_query_params ('SELECT * FROM plugin_globalsearch_assoc_site ORDER BY assoc_site_id',
-			array());
+				   array());
         if ($result) {
                 $rows = db_numrows($result);
 
