@@ -14,6 +14,7 @@ Architecture: all
 Conflicts: sourceforge, gforge-cvs, gforge-common (<< ${source:Version})
 Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, gforge-common (=${source:Version}), gforge-web-apache2 | gforge-web, gforge-db-postgresql | gforge-db, gforge-mta-exim4 | gforge-mta, gforge-shell-postgresql | gforge-shell, gforge-ftp-proftpd | gforge-ftp, gforge-lists-mailman | gforge-lists, ${misc:Depends}
 Recommends: gforge-plugin-scm
+Provides: fusionforge
 Description: collaborative development tool - metapackage
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
