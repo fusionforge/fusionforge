@@ -6,8 +6,9 @@ gforge (4.8.1-4) unstable; urgency=low
   * No longer ship copy of nusoap, adding dependency on libnusoap-php
     instead (Closes: #529575).
   * Add provides tag to control for fusionforge.
+  * Change default system name to FusionForge instead of GForge.
 
- -- Olivier Berger <olivier.berger@it-sudparis.eu>  Sat, 14 Nov 2009 11:17:59 +0100
+ -- Olivier Berger <olivier.berger@it-sudparis.eu>  Sat, 14 Nov 2009 11:18:43 +0100
 
 gforge (4.8.1-3) unstable; urgency=low
 

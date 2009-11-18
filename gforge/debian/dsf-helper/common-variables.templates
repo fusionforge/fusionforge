@@ -22,7 +22,7 @@ _Description: GForge administrator e-mail address:
 
 Template: gforge/shared/system_name
 Type: string
-Default: GForge
-_Description: GForge system name:
+Default: FusionForge
+_Description: GForge/FusionForge system name:
  Please enter the name of the GForge system. It is used in various places
  throughout the system.
