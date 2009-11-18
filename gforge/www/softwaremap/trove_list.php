@@ -171,7 +171,7 @@ for ($i=0;$i<$folders_len;$i++) {
 }
 
 // print subcategories
-$res_sub = db_query("
+$res_sub = db_query_params ('
 	SELECT trove_cat.trove_cat_id AS trove_cat_id,
 		trove_cat.fullname AS fullname,
 		trove_treesums.subprojects AS subprojects
@@ -179,10 +179,9 @@ $res_sub = db_query("
 	WHERE (
 		trove_treesums.limit_1=0 
 		OR trove_treesums.limit_1 IS NULL
-	) AND " // need no discriminators
-	."trove_cat.parent='$form_cat'
-	ORDER BY fullname
-", -1, 0, SYS_DB_TROVE);
+	) AND trove_cat.parent=$1
+	ORDER BY fullname',
+			array ($form_cat));
 echo db_error();
 
 while ($row_sub = db_fetch_array($res_sub)) {
@@ -199,12 +198,13 @@ while ($row_sub = db_fetch_array($res_sub)) {
 // ########### right column: root level
 print '</td><td>';
 // here we print list of root level categories, and use open folder for current
-$res_rootcat = db_query("
+$res_rootcat = db_query_params ('
 	SELECT trove_cat_id,fullname
 	FROM trove_cat
 	WHERE parent=0
 	AND trove_cat_id!=0
-	ORDER BY fullname");
+	ORDER BY fullname',
+			array ());
 echo db_error();
 
 print _('Browse By').':';
