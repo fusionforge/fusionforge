@@ -451,7 +451,8 @@ function db_string_array_to_any_clause ($arr) {
 	foreach ($arr as $cur) {
 		$arr2[] = pg_escape_string ($cur) ;
 	}
-	$res = "{'" . implode ("','", $arr2) . "'}" ;
+//	$res = "{'" . implode ("','", $arr2) . "'}" ;
+	$res = '{"' . implode ('","', $arr2) . '"}' ;
 	return $res ;
 }
 
