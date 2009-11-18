@@ -48,14 +48,13 @@ class cvstrackerPlugin extends Plugin {
 	* @param   integer  $group_id Group_id of the actual Group_id
 	*
 	*/
-	function getCommitEntries($Query,$group_id) {
+	function getCommitEntries($DBResult,$group_id) {
 		$group = &group_get_object($group_id);
 		
 		if (!$group->usesPlugin($this->name)) {
 			return;
 		}
 		
-		$DBResult = db_query($Query);
 		$Rows= db_numrows($DBResult);
 		
 		if ($Rows > 0) {
@@ -287,20 +286,13 @@ class cvstrackerPlugin extends Plugin {
 				$group->setPluginUse ( $this->name, false );
 			}
 		} elseif ($hookname == "artifact_extra_detail") {
-			$Query="SELECT * FROM plugin_cvstracker_data_master,
-plugin_cvstracker_data_artifact
- WHERE plugin_cvstracker_data_artifact.group_artifact_id='$aid' 
- AND plugin_cvstracker_data_master.holder_id=
- plugin_cvstracker_data_artifact.id ORDER BY cvs_date";
-			$this->getCommitEntries($Query, $group_id);
+			$DBResult = db_query_params ('SELECT * FROM plugin_cvstracker_data_master,plugin_cvstracker_data_artifact WHERE plugin_cvstracker_data_artifact.group_artifact_id=$1 AND plugin_cvstracker_data_master.holder_id=plugin_cvstracker_data_artifact.id ORDER BY cvs_date',
+						     array ($aid)) ;
+			$this->getCommitEntries($DBResult, $group_id);
 		} elseif ($hookname == "task_extra_detail") {
-			$Query="SELECT * FROM plugin_cvstracker_data_master,
-plugin_cvstracker_data_artifact
- WHERE plugin_cvstracker_data_artifact.project_task_id='".
-				$params['task_id']."' 
- AND plugin_cvstracker_data_master.holder_id=
- plugin_cvstracker_data_artifact.id ORDER BY cvs_date";
-			$this->getCommitEntries($Query, $group_id);
+			$DBResult = db_query_params ('SELECT * FROM plugin_cvstracker_data_master,plugin_cvstracker_data_artifact WHERE plugin_cvstracker_data_artifact.project_task_id=$1 AND plugin_cvstracker_data_master.holder_id=plugin_cvstracker_data_artifact.id ORDER BY cvs_date',
+						     array ($params['task_id'])) ;
+			$this->getCommitEntries($DBResult, $group_id);
 		} elseif ($hookname == "update_cvs_repository") {
 			$Group = group_get_object($params["group_id"]);
 			if ($Group->usesPlugin("cvstracker")) {
