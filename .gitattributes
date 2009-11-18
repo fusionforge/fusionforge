@@ -1,5 +1,6 @@
 * text=auto !eol
 /.bzrignore -text
+/README -text
 delivery/fusionforge/package/config -text
 delivery/gforge/package/config -text
 delivery/novaforge/package/config -text
