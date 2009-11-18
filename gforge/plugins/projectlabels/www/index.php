@@ -59,8 +59,9 @@ if ($func == 'addlabeltoproject') {
 	$group_uname = addslashes (getStringFromRequest ('group_uname')) ;
 		$g = group_get_object_by_name ($group_uname) ;
 
-	$res = db_query("INSERT INTO plugin_projectlabels_group_labels (label_id, group_id)
-                         VALUES($label_id, ".$g->getID().")");
+		$res = db_query_params ('INSERT INTO plugin_projectlabels_group_labels (label_id, group_id) VALUES ($1, $2)',
+					array ($label_id,
+					       $g->getID()));
 
 	if (!$res || db_affected_rows($res) < 1) {
 		printf (_('Cannot add label onto project: %s'),
@@ -139,10 +140,11 @@ if (db_numrows($res) >= 1) {
 		echo "<br />" . _('This label currently looks like this:') ." ";
 		echo stripslashes ($row['label_text']) . "<br />" ;
 		
-		$res2 = db_query("SELECT groups.unix_group_name, groups.group_name, groups.group_id FROM groups, plugin_projectlabels_group_labels
+		$res2 = db_query_params ('SELECT groups.unix_group_name, groups.group_name, groups.group_id FROM groups, plugin_projectlabels_group_labels
                  WHERE plugin_projectlabels_group_labels.group_id = groups.group_id
-                 AND plugin_projectlabels_group_labels.label_id=".$row['label_id']."
-		 ORDER BY groups.unix_group_name ASC");
+                 AND plugin_projectlabels_group_labels.label_id=$1
+		 ORDER BY groups.unix_group_name ASC',
+					 array ($row['label_id']));
 		if (db_numrows($res2) >= 1) {
 			echo ngettext ('This label is used on the following group:',
 				       'This label is used on the following groups:',

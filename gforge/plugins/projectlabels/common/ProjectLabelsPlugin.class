@@ -24,8 +24,9 @@ class ProjectLabelsPlugin extends Plugin {
 				return;
 			if (!$project->isProject())
 				return;
-			$res_tabs = db_query("SELECT plugin_projectlabels_labels.label_text FROM plugin_projectlabels_labels, plugin_projectlabels_group_labels
-					      WHERE plugin_projectlabels_group_labels.group_id='$group_id' AND plugin_projectlabels_group_labels.label_id = plugin_projectlabels_labels.label_id");
+			$res_tabs = db_query_params ('SELECT plugin_projectlabels_labels.label_text FROM plugin_projectlabels_labels, plugin_projectlabels_group_labels
+					      WHERE plugin_projectlabels_group_labels.group_id=$1 AND plugin_projectlabels_group_labels.label_id = plugin_projectlabels_labels.label_id',
+						     array ($group_id));
 			while ($row_tab = db_fetch_array($res_tabs)) {
 				print ($row_tab['label_text']);
 			}
