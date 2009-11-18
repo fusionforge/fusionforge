@@ -32,8 +32,9 @@ $err='';
 $res=db_query_params ('SELECT user_name,user_id,authorized_keys 
 	FROM users 
 	WHERE authorized_keys != $1
-	AND status=$2',
+	AND status=$2 AND unix_status = $3',
 		      array('',
+			    'A',
 			    'A'));
 
 for ($i=0; $i<db_numrows($res); $i++) {
