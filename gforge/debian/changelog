@@ -1,4 +1,4 @@
-gforge (4.8.1-4) unstable; urgency=low
+gforge (4.8.1-3+) UNRELEASED; urgency=low
 
   * Fix copyright file to mention nusoap.
   * Fix location of Vcs-Bzr: sources repository.
