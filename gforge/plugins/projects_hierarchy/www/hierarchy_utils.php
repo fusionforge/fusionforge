@@ -29,18 +29,20 @@
 		$family = get_family($group_id);
 		$cond = '';
 		if($family != NULL){
-		
-		reset($family);
-			while (list($key, $val) = each($family)) {		
-			$cond .= " AND group_id != ".$val." ";
+			
+			reset($family);
+			$skipped = array() ;
+			while (list($key, $val) = each($family)) {
+				$skipped[] = $val ;
 			}
 			
 		}
-		$son=db_query("SELECT group_id,group_name,register_time FROM groups " .
-		"WHERE status='A' AND type_id=1 AND group_id != ".$group_id." " .$cond.
-		"AND group_id NOT IN (SELECT sub_project_id FROM plugin_projects_hierarchy WHERE link_type = 'shar')" );
-	
-	
+		$son = db_query_params ('SELECT group_id,group_name,register_time FROM groups 
+WHERE status=$1 AND type_id=1 AND group_id != $2 AND group_id <> ALL ($3) AND group_id NOT IN (SELECT sub_project_id FROM plugin_projects_hierarchy WHERE link_type = $4)',
+					array ('A',
+					       $group_id,
+					       db_int_array_to_any_clause ($skipped),
+					       'shar'));
 	}
 	return html_build_select_box($son,$name,$selected,false);
 }
@@ -79,8 +81,9 @@ document.formson.son.disabled=true
 
 //search all the family,all ancestor 
 function get_family($group_id,$family='',$cpt=0){
-	$req = "SELECT project_id FROM plugin_projects_hierarchy WHERE sub_project_id = ".$group_id." ";
-	$res=db_query($req)or die(db_error());
+	$res = db_query_params ('SELECT project_id FROM plugin_projects_hierarchy WHERE sub_project_id = $1',
+				array ($group_id))
+		or die (db_error ());
 	if (!$res || db_numrows($res) < 1) {
 		//return $family;
 	}
