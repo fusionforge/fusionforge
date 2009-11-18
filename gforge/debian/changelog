@@ -3,8 +3,8 @@ gforge (4.8.1-4) unstable; urgency=low
   * Fix copyright file to mention nusoap.
   * Fix location of Vcs-Bzr: sources repository.
   * Fix problem in use-snoopy-from-distro.dpatch containing .rej changes.
-  * No longer ship copy of nusoap, adding dependency on libnusoap-php
-    instead (Closes: #529575).
+  * No longer ship copy of nusoap in binary package, adding dependency on
+    libnusoap-php instead (Closes: #529575).
   * Add provides tag to control for fusionforge.
   * Change default system name to FusionForge instead of GForge.
 
