@@ -119,11 +119,9 @@ function parseConfig($Config)
 function addArtifactLog($Config, $GroupId, $Num)
 {
 	$return = array();
-	$Query = "SELECT * from artifact,artifact_group_list WHERE 
-artifact.group_artifact_id=artifact_group_list.group_artifact_id 
-AND artifact_group_list.group_id=
-'".$GroupId."' AND artifact.artifact_id='".$Num."'";
-	$Result = db_query($Query);
+	$Result = db_query_params ('SELECT * from artifact,artifact_group_list WHERE artifact.group_artifact_id=artifact_group_list.group_artifact_id AND artifact_group_list.group_id=$1 AND artifact.artifact_id=$2',
+				   array ($GroupId,
+					  $Num));
 	$Rows = db_numrows($Result);
 	if ($Rows == 0) {
 		$return['Error'] .= "Artifact ".$Num." Not Found.";
@@ -131,23 +129,21 @@ AND artifact_group_list.group_id=
 
 	if ($Rows == 1) {
 		db_begin();
-		$Query = "INSERT INTO plugin_cvstracker_data_artifact 
-(kind, group_artifact_id) VALUES 
-('0', '".$Num."')";
-		$DBRes = db_query($Query);
+		$DBRes = db_query_params ('INSERT INTO plugin_cvstracker_data_artifact (kind, group_artifact_id) VALUES (0, $1)',
+					  array ($Num));
 		$HolderID= db_insertid($DBRes,'plugin_cvstracker_data_artifact','id');
 		if (!$DBRes || !$HolderID) {
 			$return['Error']='Problems with Artifact $Num: '.db_error($DBRes);
 			db_rollback();
 		} else {
-			$Query = "INSERT INTO plugin_cvstracker_data_master 
-(holder_id, cvs_date, log_text, file, prev_version, 
-actual_version, author)
- VALUES ('".$HolderID."','".$Config['CvsDate']."','".$Config['Log'].
-				"','".$Config['FileName']."','".
-				$Config['PrevVersion']."','".
-				$Config['ActualVersion']."','".$Config['UserName']."')";
-			$DBRes = db_query($Query);
+			$DBRes = db_query_params ('INSERT INTO plugin_cvstracker_data_master (holder_id, cvs_date, log_text, file, prev_version, actual_version, author) VALUES ($1,$2,$3,$4,$5,$6,$7)',
+						  array ($HolderID,
+							 $Config['CvsDate'],
+							 $Config['Log'],
+							 $Config['FileName'],
+							 $Config['PrevVersion'],
+							 $Config['ActualVersion'],
+							 $Config['UserName']));
 			if(!$DBRes) {
 				db_rollback();
 			} else {
@@ -174,35 +170,30 @@ actual_version, author)
 function addTaskLog($Config, $GroupId, $Num)
 {
 	$return = array();
-	$Query = "SELECT * from project_task,project_group_list WHERE 
-project_task.group_project_id=
-project_group_list.group_project_id 
-AND project_task.project_task_id='".$Num."' AND 
- project_group_list.group_id='".$GroupId."'";
-	$Result = db_query($Query);
+	$Result = db_query_params ('SELECT * from project_task,project_group_list WHERE project_task.group_project_id=project_group_list.group_project_id AND project_task.project_task_id=$1 AND project_group_list.group_id=$2',
+				   array ($Num,
+					  $GroupId));
 	$Rows = db_numrows($Result);
 	if ($Rows == 0) {
 		$return['Error'] .= "Task:$Num Not Found.";
 	}
 	if ($Rows == 1) {
 		db_begin();
-		$Query = "INSERT INTO plugin_cvstracker_data_artifact 
-(kind, project_task_id) VALUES 
-('1', '".$Num."')";
-		$DBRes = db_query($Query);
+		$DBRes = db_query_params ('INSERT INTO plugin_cvstracker_data_artifact (kind, project_task_id) VALUES (1, $1)',
+					  array ($Num));
 		$HolderID= db_insertid($DBRes,'plugin_cvstracker_data_artifact','id');
 		if (!$DBRes || !$HolderID) {
 			$return['Error']='Problems with Task $Num: '.db_error($DBRes);
 			db_rollback();
 		} else {
-			$Query = "INSERT INTO plugin_cvstracker_data_master 
-(holder_id, cvs_date, log_text, file, prev_version, 
-actual_version, author)
- VALUES ('".$HolderID."','".$Config['CvsDate']."','".$Config['Log'].
-				"','".$Config['FileName'].
-				"','".$Config['PrevVersion']."','".
-				$Config['ActualVersion']."','".$Config['UserName']."')";
-				$DBRes = db_query($Query);
+			$DBRes = db_query_params ('INSERT INTO plugin_cvstracker_data_master (holder_id, cvs_date, log_text, file, prev_version, actual_version, author) VALUES ($1,$2,$3,$4,$5,$6,$7)',
+						  array ($HolderID,
+							 $Config['CvsDate'],
+							 $Config['Log'],
+							 $Config['FileName'],
+							 $Config['PrevVersion'],
+							 $Config['ActualVersion'],
+							 $Config['UserName']));
 			if(!$DBRes) {
 				db_rollback();
 			} else {
