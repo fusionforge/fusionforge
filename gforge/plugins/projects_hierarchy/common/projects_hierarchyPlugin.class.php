@@ -137,8 +137,10 @@ class projects_hierarchyPlugin extends Plugin {
 			echo $HTML->boxTop(_('Linked projects'));
 			$cpt_project = 0 ;
 			// father request
-			$query = "SELECT DISTINCT group_id,unix_group_name,group_name FROM groups,plugin_projects_hierarchy WHERE plugin_projects_hierarchy.link_type ='shar' AND plugin_projects_hierarchy.activated='t' AND groups.group_id=plugin_projects_hierarchy.project_id AND plugin_projects_hierarchy.sub_project_id=".$group_id;
-			$res = db_query($query);
+			$res = db_query_params ('SELECT DISTINCT group_id,unix_group_name,group_name FROM groups,plugin_projects_hierarchy WHERE plugin_projects_hierarchy.link_type=$1 AND plugin_projects_hierarchy.activated=$2 AND groups.group_id=plugin_projects_hierarchy.project_id AND plugin_projects_hierarchy.sub_project_id=$3',
+						array ('shar',
+						       't',
+						       $group_id));
 			echo db_error();
 			while ($row = db_fetch_array($res)) {
 				echo html_image('ic/forum20g.png','20','20',array('alt'=>_('Link'))).'&nbsp;'._('Parent project').': <a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.$row['unix_group_name'].'/">' . $row['group_name'] . '</a><br/>';
@@ -150,8 +152,10 @@ class projects_hierarchyPlugin extends Plugin {
 			}
 			$cpt_temp = $cpt_project ;
 			// sons request
-			$query = "SELECT DISTINCT group_id,unix_group_name,group_name,com FROM groups,plugin_projects_hierarchy WHERE plugin_projects_hierarchy.link_type ='shar' AND plugin_projects_hierarchy.activated='t' AND groups.group_id=plugin_projects_hierarchy.sub_project_id AND plugin_projects_hierarchy.project_id=".$group_id;
-			$res = db_query($query);
+			$res = db_query_params ('SELECT DISTINCT group_id,unix_group_name,group_name,com FROM groups,plugin_projects_hierarchy WHERE plugin_projects_hierarchy.link_type=$1 AND plugin_projects_hierarchy.activated=$2 AND groups.group_id=plugin_projects_hierarchy.sub_project_id AND plugin_projects_hierarchy.project_id=$3',
+						array ('shar',
+						       't',
+						       $group_id));
 			echo db_error();
 			while ($row = db_fetch_array($res)) {
 				echo html_image('ic/forum20g.png','20','20',array('alt'=>_('Link'))).'&nbsp;'._('Child project').' : <a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.$row['unix_group_name'].'/">' . $row['group_name'] . '</a> : '.$row['com'].'<br/>';
@@ -165,16 +169,20 @@ class projects_hierarchyPlugin extends Plugin {
 			$cpt_temp = $cpt_project ;
 			
 			// links if project is father
-			$query = "SELECT DISTINCT group_id,unix_group_name,group_name,com FROM groups,plugin_projects_hierarchy WHERE plugin_projects_hierarchy.link_type ='navi' AND plugin_projects_hierarchy.activated='t' AND groups.group_id=plugin_projects_hierarchy.sub_project_id AND plugin_projects_hierarchy.project_id=".$group_id;
-			$res = db_query($query);
+			$res = db_query_params ('SELECT DISTINCT group_id,unix_group_name,group_name,com FROM groups,plugin_projects_hierarchy WHERE plugin_projects_hierarchy.link_type=$1 AND plugin_projects_hierarchy.activated=$2 AND groups.group_id=plugin_projects_hierarchy.sub_project_id AND plugin_projects_hierarchy.project_id=$3',
+						array ('navi',
+						       't',
+						       $group_id));
 			echo db_error();
 			while ($row = db_fetch_array($res)) {
 				echo html_image('ic/forum20g.png','20','20',array('alt'=>_('Link'))).'&nbsp;'._('Links')." : <a href=\"".$GLOBALS['sys_urlprefix']."/projects/".$row['unix_group_name']."/\">" . $row['group_name'] . "</a> :  ".$row['com']."<br/>";
 				$cpt_project ++;
 			}
 			// links if project is son
-			$query = "SELECT DISTINCT group_id,unix_group_name,group_name,com FROM groups,plugin_projects_hierarchy WHERE plugin_projects_hierarchy.link_type ='navi' AND plugin_projects_hierarchy.activated='t' AND groups.group_id=plugin_projects_hierarchy.project_id AND plugin_projects_hierarchy.sub_project_id=".$group_id;
-			$res = db_query($query);
+			$res = db_query_params ('SELECT DISTINCT group_id,unix_group_name,group_name,com FROM groups,plugin_projects_hierarchy WHERE plugin_projects_hierarchy.link_type=$1 AND plugin_projects_hierarchy.activated=$2 AND groups.group_id=plugin_projects_hierarchy.project_id AND plugin_projects_hierarchy.sub_project_id=$3',
+						array ('navi',
+						       't',
+						       $group_id));
 			echo db_error();
 			while ($row = db_fetch_array($res)) {
 				echo html_image('ic/forum20g.png','20','20',array('alt'=>_('Link'))).'&nbsp;'._('Links')." : <a href=\"".$GLOBALS['sys_urlprefix']."/projects/".$row['unix_group_name']."/\">" . $row['group_name'] . "</a><br/>";
@@ -224,12 +232,12 @@ class projects_hierarchyPlugin extends Plugin {
 			echo '<td><input type="submit"  name="son" value="'._('Add a link').'"></td></tr></table></form>';
 			echo '<br/>';
 			//select all the sons of the current project
-			$sql_son = "SELECT group_id,group_name,unix_group_name,sub_project_id, activated,link_type,com FROM groups,plugin_projects_hierarchy WHERE 
+			$res_son = db_query_params ('SELECT group_id,group_name,unix_group_name,sub_project_id, activated,link_type,com FROM groups,plugin_projects_hierarchy WHERE 
 	(	groups.group_id = plugin_projects_hierarchy.sub_project_id 
-AND plugin_projects_hierarchy.project_id = ".$group_id.")" ;
-							
+AND plugin_projects_hierarchy.project_id = $1)',
+						    array ($group_id))
 			
-			$res_son=db_query($sql_son)or die(db_error());
+				or die (db_error ());
 			if (!$res_son || db_numrows($res_son) < 1) {
 				$cpt_son = 0;
 			}
@@ -271,11 +279,12 @@ AND plugin_projects_hierarchy.project_id = ".$group_id.")" ;
 				
 			}
 			//select  navigation link by father
-			$sql_son = "SELECT group_id,group_name,unix_group_name,project_id, activated,link_type,com FROM groups,plugin_projects_hierarchy WHERE 
+			$res_son = db_query_params ('SELECT group_id,group_name,unix_group_name,project_id, activated,link_type,com FROM groups,plugin_projects_hierarchy WHERE 
  (	groups.group_id = plugin_projects_hierarchy.project_id 
-AND plugin_projects_hierarchy.sub_project_id = ".$group_id." AND plugin_projects_hierarchy.link_type = 'navi') ";
-			
-			$res_son=db_query($sql_son)or die(db_error());
+AND plugin_projects_hierarchy.sub_project_id = $1 AND plugin_projects_hierarchy.link_type = $2) ',
+						    array ($group_id,
+							   'navi'))
+				or die (db_error ());
 			if (!$res_son || db_numrows($res_son) < 1) {
 				if($cpt_son == 1 ){
 				echo '</table>';
@@ -323,12 +332,13 @@ AND plugin_projects_hierarchy.sub_project_id = ".$group_id." AND plugin_projects
 			}
 			
 			//research allowing father
-			$sql_father = "SELECT group_id,group_name,unix_group_name,project_id,com FROM groups,plugin_projects_hierarchy WHERE 
+			$res_father = db_query_params ('SELECT group_id,group_name,unix_group_name,project_id,com FROM groups,plugin_projects_hierarchy WHERE 
 		groups.group_id = plugin_projects_hierarchy.project_id 
-AND plugin_projects_hierarchy.sub_project_id = ".$group_id."
-		AND plugin_projects_hierarchy.activated = true AND plugin_projects_hierarchy.link_type = 'shar'";
-					//print $sql_wait;
-			$res_father=db_query($sql_father)or die(db_error());
+AND plugin_projects_hierarchy.sub_project_id = $1
+		AND plugin_projects_hierarchy.activated = true AND plugin_projects_hierarchy.link_type = $2',
+						       array ($group_id,
+							      'shar'))
+				or die (db_error ()) ;
 			if (!$res_father || db_numrows($res_father) < 1) {
 				
 				}
@@ -350,12 +360,13 @@ AND plugin_projects_hierarchy.sub_project_id = ".$group_id."
 			
 			  
 			//research waiting fathers
-			$sql_wait = "SELECT group_id,group_name,unix_group_name,project_id,link_type,com FROM groups,plugin_projects_hierarchy WHERE 
+			$res_wait = db_query_params ('SELECT group_id,group_name,unix_group_name,project_id,link_type,com FROM groups,plugin_projects_hierarchy WHERE 
 		groups.group_id = plugin_projects_hierarchy.project_id 
-AND plugin_projects_hierarchy.sub_project_id = ".$group_id."
-		AND plugin_projects_hierarchy.activated = false AND plugin_projects_hierarchy.link_type = 'shar'";
-					//print $sql_wait;
-			$res_wait=db_query($sql_wait)or die(db_error());
+AND plugin_projects_hierarchy.sub_project_id = $1
+		AND plugin_projects_hierarchy.activated = false AND plugin_projects_hierarchy.link_type = $2',
+						     array ($group_id,
+							    'shar'))
+				or die (db_error ()) ;
 			if (!$res_wait || db_numrows($res_wait) < 1) {
 				
 				}
@@ -382,9 +393,9 @@ AND plugin_projects_hierarchy.sub_project_id = ".$group_id."
 			
 		} 
 		elseif ($hookname == "delete_link") {
-			
-			$sql = "DELETE FROM plugin_projects_hierarchy WHERE project_id = ".$params." OR sub_project_id = ".$params." ";
-			$res_son=db_query($sql);
+			$res_son = db_query_params ('DELETE FROM plugin_projects_hierarchy WHERE project_id = $1 OR sub_project_id = $2 ',
+						    array ($params,
+							   $params));
 		} 
 		
 	}
