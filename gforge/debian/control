@@ -7,13 +7,14 @@ Build-Depends-Indep: sharutils, docbook-to-man, devscripts
 Build-Depends: debhelper (>= 5), dpatch, perl, gettext
 Standards-Version: 3.8.3
 Homepage: http://fusionforge.org/
-Vcs-Bzr: http://scm.fusionforge.org/bzr/fusionforge/svn-trunk-ro
+Vcs-Bzr: http://scm.fusionforge.org/bzr/fusionforge/svn-Branch_4_8-ro/
 
 Package: gforge
 Architecture: all
 Conflicts: sourceforge, gforge-cvs, gforge-common (<< ${source:Version})
 Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, gforge-common (=${source:Version}), gforge-web-apache2 | gforge-web, gforge-db-postgresql | gforge-db, gforge-mta-exim4 | gforge-mta, gforge-shell-postgresql | gforge-shell, gforge-ftp-proftpd | gforge-ftp, gforge-lists-mailman | gforge-lists, ${misc:Depends}
 Recommends: gforge-plugin-scm
+Provides: fusionforge
 Description: collaborative development tool - metapackage
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -39,7 +40,7 @@ Description: collaborative development tool - shared files
 
 Package: gforge-web-apache2
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, libapache2-mod-php5, php5-cgi, php5-pgsql, php5-gd, perl, perl-suid, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, cronolog, python, ssl-cert, ${misc:Depends}
+Depends: gforge-common, gforge-db-postgresql | gforge-db, libapache2-mod-php5, php5-cgi, php5-pgsql, php5-gd, perl, perl-suid, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, cronolog, python, ssl-cert, libnusoap-php, ${misc:Depends}
 Recommends: libphp-jpgraph, locales | locales-all
 Provides: gforge-web
 Conflicts: gforge-web

@@ -179,6 +179,9 @@ install: build
 	# Remove Snoopy class from binary packages (provided by libphp-snoopy)
 	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -name Snoopy.class.php | xargs rm -rf ; done
 
+	# Remove nusoap class from binary packages (provided by libnusoap-php)
+	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -name nusoap.php | xargs rm -rf ; done
+
 	# Remove potential SCM artefacts from binary packages
 	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -name .svn -or -name {arch} -or -name .arch-ids -or -name .bzr -or -name .cvsignore | xargs rm -rf ; done
 	# Also remove uuencoded files

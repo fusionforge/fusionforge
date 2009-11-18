@@ -1,6 +1,7 @@
 * text=auto !eol
 /.bzrignore -text
 3rd-party/htmlpurifier/htmlpurifier.spec -text
+/README -text
 delivery/fusionforge/package/config -text
 delivery/gforge/package/config -text
 delivery/novaforge/package/config -text
@@ -104,6 +105,7 @@ gforge/debian/dsf-po/pt.po -text
 gforge/debian/dsf-po/ru.po -text
 gforge/debian/gforge-plugin-scmbzr.init.d -text
 gforge/debian/patches/disable-dav.dpatch -text
+gforge/debian/patches/use-nusoap-from-distro.dpatch -text
 gforge/debian/patches/use-snoopy-from-distro.dpatch -text
 gforge/debian/po/README -text
 gforge/debian/watch -text
@@ -3728,6 +3730,10 @@ tests/func/Site/login.php -text
 tests/func/Site/projects.php -text
 tests/func/Site/top.php -text
 tests/func/Site/trove.php -text
+tests/func/Soap/AllTests.php -text
+tests/func/Soap/config.php -text
+tests/func/Soap/login.php -text
+tests/func/Soap/usergroup.php -text
 tests/func/Tasks/AllTests.php -text
 tests/func/Tasks/csv.php -text
 tests/func/Testing/SeleniumGforge.php -text

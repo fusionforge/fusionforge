@@ -67,7 +67,7 @@ default: list
 
 list:
 	@echo ======================================================================================
-	@echo '=                    Available target are listed below ($(BRANCH))($(ARCH))         ='
+	@echo '=                    Available targets are listed below ($(BRANCH))($(ARCH))         ='
 	@echo ======================================================================================
 	@cat Makefile.debian | grep '^.*:.*#$$' | sed 's/FUSIONFORGE/$(FUSIONFORGE)/' | sed 's/^\(.*:\).*#\(.*\)#$$/\1		\2/'
 	@echo ======================================================================================
@@ -113,7 +113,7 @@ orig: $(TARBALLS)/$(ORIGFILE) # Make FUSIONFORGE orig file                      
 # PHPDOCUMENTOR
 #
 phpdoc: phpdocumentor_get phpdocumentor_unpack $(documentor_path)/$(documentor_vers)/patched $(PKGNAME)/docs/phpdoc/docs # Get phpdocumentor, install phpdocumentor, build $(PKGNAME) phpdoc     #
-	
+
 phpdocumentor_get:
 	[ ! -f $(documentor_path)/$(documentor_vers).tar.gz ] && cd $(documentor_path) && wget http://heanet.dl.sourceforge.net/sourceforge/phpdocu/$(documentor_vers).tar.gz || true
 phpdocumentor_unpack:
@@ -200,7 +200,6 @@ $(BUILDFILES)/$(ORIGFILE): $(TARBALLS)/$(ORIGFILE)
 $(TARBALLS)/$(ORIGFILE): $(TARBALLS)
 	cd $(PKGNAME) ; debclean
 	find $(PKGNAME) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v '/.testbox/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -o -H ustar | gzip > $(TARBALLS)/$(ORIGFILE)
-	
 
 pbuilderenv: $(PBUILDERTGZ) $(PBUILDERTGZ)/base-$(DISTRIB).tgz
 	@echo "Ready for $(DISTRIB)"
@@ -237,7 +236,7 @@ ubukey:
 	sudo apt-get install cowdancer
 
 localrepo: $(LOCALREPO) $(LOCALREPO)/conf $(LOCALREPO)/conf/distributions
-	
+
 reprepro: $(LOCALREPO)/pool/main/$(PKGLETTER)/$(PKGNAME)/$(DSCFILE) # Install in repository
 
 $(LOCALREPO)/pool/main/$(PKGLETTER)/$(PKGNAME)/$(DSCFILE): $(BUILDRESULT)/$(CHANGEFILE)

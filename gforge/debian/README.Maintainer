@@ -208,4 +208,11 @@ actions.
 guarantee you will avoid problems if you understand this.  Maybe not
 all problems, but definitely some of them.
 
+CONTRIBUTING
+------------
+
+The source is maintained in bzr (see debian/control's Vcs-Bzr:
+field). A copy can be checked-out using : debcheckout gforge.
+
+
   -- Roland Mas
