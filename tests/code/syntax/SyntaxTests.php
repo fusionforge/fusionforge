@@ -17,38 +17,38 @@ class Syntax_Tests extends PHPUnit_Framework_TestCase
      */
     public function testPhpSyntax()
     {
-	    $output = `cd .. ; find gforge -name '*.php' -type f  -exec php -l {} \; | grep -v '^No syntax errors detected'`;
+	    $output = `cd .. ; find gforge tests -name '*.php' -type f  -exec php -l {} \; | grep -v '^No syntax errors detected'`;
 	    $this->assertEquals('', $output);
     }
 
     /**
-     * Validate all php code with isutf8.
+     * Validate all scripts with isutf8.
      */
     public function testUTF8Chars()
     {
 	    // Skip the wiki part which is not UTF-8 encoded.
-	    $output = `cd .. ; find gforge -name '*.php' -not -path 'gforge/plugins/wiki/www/*' -type f  -exec isutf8 {} \;`;
+	    $output = `cd .. ; find gforge tests -name '*.php' -not -path 'gforge/plugins/wiki/www/*' -type f  -exec isutf8 {} \;`;
 	    $this->assertEquals('', $output);
-	    $output = `cd .. ; find gforge -name '*.sql' -type f  -exec isutf8 {} \;`;
+	    $output = `cd .. ; find gforge tests -name '*.sql' -type f  -exec isutf8 {} \;`;
 	    $this->assertEquals('', $output);
-	    $output = `cd .. ; find gforge -name '*.sh' -type f  -exec isutf8 {} \;`;
+	    $output = `cd .. ; find gforge tests -name '*.sh' -type f  -exec isutf8 {} \;`;
 	    $this->assertEquals('', $output);
-	    $output = `cd .. ; find gforge -name '*.pl' -type f  -exec isutf8 {} \;`;
+	    $output = `cd .. ; find gforge tests -name '*.pl' -type f  -exec isutf8 {} \;`;
 	    $this->assertEquals('', $output);
     }
 
     /**
-     * Ensure all PHP files use Unix-style line endings
+     * Ensure all scripts use Unix-style line endings
      */
     public function testUnixLineEndings()
     {
-	    $output = `cd .. ; find gforge -name '*.php' -type f | xargs pcregrep -l '\r$'`;
+	    $output = `cd .. ; find gforge tests -name '*.php' -type f | xargs pcregrep -l '\r$'`;
 	    $this->assertEquals('', $output);
-	    $output = `cd .. ; find gforge -name '*.sql' -type f | xargs pcregrep -l '\r$'`;
+	    $output = `cd .. ; find gforge tests -name '*.sql' -type f | xargs pcregrep -l '\r$'`;
 	    $this->assertEquals('', $output);
-	    $output = `cd .. ; find gforge -name '*.sh' -type f | xargs pcregrep -l '\r$'`;
+	    $output = `cd .. ; find gforge tests -name '*.sh' -type f | xargs pcregrep -l '\r$'`;
 	    $this->assertEquals('', $output);
-	    $output = `cd .. ; find gforge -name '*.pl' -type f | xargs pcregrep -l '\r$'`;
+	    $output = `cd .. ; find gforge tests -name '*.pl' -type f | xargs pcregrep -l '\r$'`;
 	    $this->assertEquals('', $output);
     }
 }
