@@ -80,6 +80,7 @@ gforge/debian/dsf-in/plugin-projectlabels.postinst -text
 gforge/debian/dsf-in/plugin-projectlabels.prerm -text
 gforge/debian/dsf-in/plugin-scmarch.postinst -text
 gforge/debian/dsf-in/plugin-scmarch.prerm -text
+gforge/debian/dsf-in/plugin-scmbzr.init.d -text
 gforge/debian/dsf-in/plugin-scmbzr.postinst -text
 gforge/debian/dsf-in/plugin-scmbzr.prerm -text
 gforge/debian/dsf-in/plugin-scmcpold.postinst -text
@@ -107,7 +108,6 @@ gforge/debian/dsf-po/fi.po -text
 gforge/debian/dsf-po/gl.po -text
 gforge/debian/dsf-po/pt.po -text
 gforge/debian/dsf-po/ru.po -text
-gforge/debian/gforge-plugin-scmbzr.init.d -text
 gforge/debian/patches/disable-dav.dpatch -text
 gforge/debian/patches/use-nusoap-from-distro.dpatch -text
 gforge/debian/patches/use-snoopy-from-distro.dpatch -text
