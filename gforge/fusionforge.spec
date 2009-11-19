@@ -315,7 +315,7 @@ if [ "$1" -eq "1" ]; then
 
 	ln -s %{GFORGE_DIR}/www/env.inc.php %{PLUGINS_LIB_DIR}/env.inc.php
 	
-	#if not the env.inc.php include-path isn't correct //not necessary if no more /usr/lib/gforge
+	#if not the env.inc.php include-path isn't correct //not necessary if no more /usr/share/gforge
         #ln -s %{PLUGINS_LIB_DIR} %{GFORGE_DIR}/plugins
 
 else

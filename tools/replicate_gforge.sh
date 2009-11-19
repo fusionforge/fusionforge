@@ -25,8 +25,8 @@ then
 		ssh root@$OLDSFSERVER "su -s /bin/sh $OLDDB -c \"/usr/lib/postgresql/bin/pg_dump $OLDDB\"" > /root/db_dump_$OLDDB
 		[ -f /root/db_dump_$OLDDB ] && echo "Adjusting /root/db_dump_$OLDDB" && perl -pi -e "s/connect - sourceforge/connect - gforge/" /root/db_dump_$OLDDB
 	fi
-	/usr/lib/gforge/bin/install-db.sh restore /root/db_dump_$OLDDB
-	su -s /bin/sh gforge -c /usr/lib/gforge/bin/db-upgrade.pl
+	/usr/share/gforge/bin/install-db.sh restore /root/db_dump_$OLDDB
+	su -s /bin/sh gforge -c /usr/share/gforge/bin/db-upgrade.pl
 fi
 
 if [ $SYNC_FILE == 1 ] 

@@ -57,8 +57,8 @@ sub is_greater ( \$\$ ) ;
 sub debug ( \$ ) ;
 sub parse_sql_file ( \$ ) ;
 
-require ("/usr/lib/gforge/lib/include.pl") ; # Include a few predefined functions 
-require ("/usr/lib/gforge/lib/sqlparser.pm") ; # Our magic SQL parser
+require ("/usr/share/gforge/lib/include.pl") ; # Include a few predefined functions 
+require ("/usr/share/gforge/lib/sqlparser.pm") ; # Our magic SQL parser
 
 debug "You'll see some debugging info during this installation." ;
 debug "Do not worry unless told otherwise." ;
@@ -248,8 +248,8 @@ sub is_greater ( \$\$ ) ;
 sub debug ( \$ ) ;
 sub parse_sql_file ( \$ ) ;
 
-require ("/usr/lib/gforge/lib/include.pl") ; # Include a few predefined functions 
-require ("/usr/lib/gforge/lib/sqlparser.pm") ; # Our magic SQL parser
+require ("/usr/share/gforge/lib/include.pl") ; # Include a few predefined functions 
+require ("/usr/share/gforge/lib/sqlparser.pm") ; # Our magic SQL parser
 
 debug "You'll see some debugging info during this installation." ;
 debug "Do not worry unless told otherwise." ;
@@ -270,7 +270,7 @@ eval {
     \$version = &get_db_version ;
     \$target = "0.1" ;
     if (is_lesser \$version, \$target) {
-	my @filelist = ( "/usr/lib/gforge/plugins/\$pluginname/lib/\$pluginname-init.sql" ) ;
+	my @filelist = ( "/usr/share/gforge/plugins/\$pluginname/lib/\$pluginname-init.sql" ) ;
 	
 	foreach my \$file (@filelist) {
 	    debug "Processing \$file" ;
@@ -625,7 +625,7 @@ FIN
 
 echo Creating $plugdir/debian/cron.d
 cat > $plugdir/debian/cron.d <<FIN
-0 0 * * * gforge [ -x /usr/lib/gforge/plugins/$minus/bin/$minus ] && /usr/lib/gforge/plugins/$minus/bin/$minus > /dev/null 2>&1
+0 0 * * * gforge [ -x /usr/share/gforge/plugins/$minus/bin/$minus ] && /usr/share/gforge/plugins/$minus/bin/$minus > /dev/null 2>&1
 FIN
 
 echo Creating $plugdir/debian/dirs
@@ -682,8 +682,8 @@ set -e
 
 case "\$1" in
     configure)
-	/usr/lib/gforge/plugins/$minus/bin/db-upgrade.pl
-	/usr/lib/gforge/bin/register-plugin $minus "${fullname}"
+	/usr/share/gforge/plugins/$minus/bin/db-upgrade.pl
+	/usr/share/gforge/bin/register-plugin $minus "${fullname}"
 	invoke-rc.d apache reload
     ;;
 
@@ -820,9 +820,9 @@ set -e
 
 case "\$1" in
     remove|deconfigure)
-	/usr/lib/gforge/bin/unregister-plugin $minus
+	/usr/share/gforge/bin/unregister-plugin $minus
 	invoke-rc.d apache reload
-	/usr/lib/gforge/plugins/$minus/bin/db-delete.pl
+	/usr/share/gforge/plugins/$minus/bin/db-delete.pl
         ;;
     upgrade|failed-upgrade)
         ;;
@@ -882,19 +882,19 @@ install: build
 	dh_clean -k
 	dh_installdirs
 
-	cp -r bin/* \$(DESTDIR)/usr/lib/gforge/plugins/\$(PLUGIN)/bin/
-	cp -r include/* \$(DESTDIR)/usr/lib/gforge/plugins/\$(PLUGIN)/include/
-	cp -r lib/* \$(DESTDIR)/usr/lib/gforge/plugins/\$(PLUGIN)/lib/
-	# cp -r cgi-bin/* \$(DESTDIR)/usr/lib/gforge/plugins/\$(PLUGIN)/cgi-bin/
+	cp -r bin/* \$(DESTDIR)/usr/share/gforge/plugins/\$(PLUGIN)/bin/
+	cp -r include/* \$(DESTDIR)/usr/share/gforge/plugins/\$(PLUGIN)/include/
+	cp -r lib/* \$(DESTDIR)/usr/share/gforge/plugins/\$(PLUGIN)/lib/
+	# cp -r cgi-bin/* \$(DESTDIR)/usr/share/gforge/plugins/\$(PLUGIN)/cgi-bin/
 	cp -r etc/* \$(DESTDIR)/etc/gforge/plugins/\$(PLUGIN)/
 	cp -r www/* \$(DESTDIR)/usr/share/gforge/www/plugins/\$(PLUGIN)/
 	install -m 0644 httpd.conf \$(DESTDIR)/etc/gforge/httpd.d/50\$(PLUGIN)
 	# install -m 0600 httpd.secrets \$(DESTDIR)/etc/gforge/httpd.secrets.d/50\$(PLUGIN)
 	find \$(DESTDIR)/ -name CVS -type d | xargs rm -rf
-	find \$(DESTDIR)/usr/lib/gforge/plugins/\$(PLUGIN)/bin/ -type f | xargs chmod 0755
-	find \$(DESTDIR)/usr/lib/gforge/plugins/\$(PLUGIN)/include/ -type f | xargs chmod 0644
-	find \$(DESTDIR)/usr/lib/gforge/plugins/\$(PLUGIN)/lib/ -type f | xargs chmod 0644
-	# find \$(DESTDIR)/usr/lib/gforge/plugins/\$(PLUGIN)/cgi-bin/ -type f | xargs chmod 0755
+	find \$(DESTDIR)/usr/share/gforge/plugins/\$(PLUGIN)/bin/ -type f | xargs chmod 0755
+	find \$(DESTDIR)/usr/share/gforge/plugins/\$(PLUGIN)/include/ -type f | xargs chmod 0644
+	find \$(DESTDIR)/usr/share/gforge/plugins/\$(PLUGIN)/lib/ -type f | xargs chmod 0644
+	# find \$(DESTDIR)/usr/share/gforge/plugins/\$(PLUGIN)/cgi-bin/ -type f | xargs chmod 0755
 	find \$(DESTDIR)/etc/gforge/plugins/\$(PLUGIN)/ -type f | xargs chmod 0644
 	find \$(DESTDIR)/usr/share/gforge/www/plugins/\$(PLUGIN)/ -type f | xargs chmod 0644
 
