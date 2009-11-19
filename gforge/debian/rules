@@ -138,13 +138,6 @@ install: build
 	#dh_install --fail-missing -X.svn -X.arch-ids -X.bzr -X.cvsignore --sourcedir=$(CURDIR)
 	dh_install -X.svn -X.arch-ids -X.bzr -X.cvsignore --sourcedir=$(CURDIR)
 
-	# Install few links
-	ln -s database-pgsql.php $(CURDIR)/debian/$(PACKAGE)-common/usr/share/$(PACKAGE)/common/include/database.php
-	ln -s /usr/share/mediawiki/skins/$(PACKAGE)/loader.php $(CURDIR)/debian/$(PACKAGE)-plugin-mediawiki/etc/mediawiki-extensions/extensions-available/GforgeAuth.php
-	for i in includes opensearch_desc.php redirect.php thumb.php api.php extensions img_auth.php index.php languages maintenance profileinfo.php StartProfiler.php trackback.php ; do ln -s /usr/share/mediawiki/$$i $(CURDIR)/debian/$(PACKAGE)-plugin-mediawiki/usr/share/gforge/www/plugins/mediawiki/ ; done
-	# These link are done for mediawiki 1.15
-	for i in audio.png external.png headbg.jpg IE70Fixes.css lock_icon.gif news_icon.png required.gif wiki-indexed.png bullet.gif external-rtl.png IE50Fixes.css IEMacFixes.css magnify-clip.png Opera6Fixes.css rtl.css wiki.png discussionitem_icon.gif FF2Fixes.css IE55Fixes.css KHTMLFixes.css  mail_icon.gif Opera7Fixes.css user.gif document.png file_icon.gif IE60Fixes.css link_icon.gif Opera9Fixes.css video.png ; do ln -s /usr/share/mediawiki/skins/monobook/$$i $(CURDIR)/debian/$(PACKAGE)-plugin-mediawiki/usr/share/mediawiki/skins/fusionforge/ ; done
-
 	# Fix permissions
 	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -type f -exec chmod 644 {} \;  ; done
 	-chmod 755 $(CURDIR)/debian/*/*/*/*/bin/* $(CURDIR)/debian/*/*/*/*/cronjobs/* \
@@ -167,14 +160,6 @@ install: build
 	rm -rf $(CURDIR)/debian/$(PACKAGE)-web-apache2/usr/share/*/www/scm/viewvc/windows
 	#
 	rm -f $(CURDIR)/debian/$(PACKAGE)-web-apache2/usr/share/*/www/themes/$(PACKAGE)/COPYING
-
-	ln -s /usr/lib/cgi-bin/darcsweb.cgi $(CURDIR)/debian/$(PACKAGE)-plugin-scmdarcs/usr/share/gforge/plugins/scmdarcs/cgi-bin/
-	ln -s /usr/share/darcsweb $(CURDIR)/debian/$(PACKAGE)-plugin-scmdarcs/usr/share/gforge/plugins/scmdarcs/www/darcsweb
-	ln -s ../../plugins/scmdarcs/www $(CURDIR)/debian/$(PACKAGE)-plugin-scmdarcs/usr/share/gforge/www/plugins/scmdarcs
-
-	ln -s /usr/lib/cgi-bin/gitweb.cgi $(CURDIR)/debian/$(PACKAGE)-plugin-scmgit/usr/share/gforge/plugins/scmgit/cgi-bin/
-	ln -s /usr/share/gitweb $(CURDIR)/debian/$(PACKAGE)-plugin-scmgit/usr/share/gforge/plugins/scmgit/www/gitweb
-	ln -s ../../plugins/scmgit/www $(CURDIR)/debian/$(PACKAGE)-plugin-scmgit/usr/share/gforge/www/plugins/scmgit
 
 	# Remove Snoopy class from binary packages (provided by libphp-snoopy)
 	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -name Snoopy.class.php | xargs rm -rf ; done
@@ -203,7 +188,7 @@ binary-indep: build install
 	#dh_installinfo
 	#dh_undocumented
 	dh_installchangelogs ChangeLog
-	#dh_link
+	dh_link
 	dh_strip
 	dh_compress
 	 dh_fixperms
