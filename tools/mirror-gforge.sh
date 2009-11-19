@@ -134,10 +134,10 @@ then
   [ -f $DBDUMPFILE ] && /bin/cp $DBDUMPFILE $DBDUMPFILE.orig
   [ -f $DBDUMPFILE ] && log "Adjusting $DBDUMPFILE" && perl -pi -e "s/connect - sourceforge/connect - gforge/" $DBDUMPFILE
   [ -f $DBDUMPFILE ] && log "Adjusting database for new site" && perl -pi -e "s/$SRCSERVER/$DSTSERVER/" $DBDUMPFILE
-  log "running /usr/lib/gforge/bin/install-db.sh restore $DBDUMPFILE"
-  /usr/lib/gforge/bin/install-db.sh restore $DBDUMPFILE >>$LOGFILE 2>&1
-  log "su -s /bin/sh gforge -c /usr/lib/gforge/bin/db-upgrade.pl"
-  su -s /bin/sh gforge -c /usr/lib/gforge/bin/db-upgrade.pl >>$LOGFILE 2>&1
+  log "running /usr/share/gforge/bin/install-db.sh restore $DBDUMPFILE"
+  /usr/share/gforge/bin/install-db.sh restore $DBDUMPFILE >>$LOGFILE 2>&1
+  log "su -s /bin/sh gforge -c /usr/share/gforge/bin/db-upgrade.pl"
+  su -s /bin/sh gforge -c /usr/share/gforge/bin/db-upgrade.pl >>$LOGFILE 2>&1
   log "Removing user sessions from database"
   su -s /bin/sh - $DBNAME psql $DBNAME >> $LOGFILE 2>&1 <<-END
 delete from user_session ;

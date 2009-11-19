@@ -138,7 +138,7 @@ set -e
 case "\$1" in
     configure)
         # Add the theme
-	/usr/lib/gforge/bin/register-theme "$minus" "$fullname"
+	/usr/share/gforge/bin/register-theme "$minus" "$fullname"
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
@@ -199,7 +199,7 @@ install: build
 	find \$(CURDIR)/debian/$themedir/usr/share/gforge/ -name CVS -type d | xargs rm -rf
 	find \$(CURDIR)/debian/$themedir/usr/share/gforge/www -type d -exec chmod 0755 {} \;
 	find \$(CURDIR)/debian/$themedir/usr/share/gforge/www -type f -exec chmod 0644 {} \;
-	mkdir -p \$(CURDIR)/debian/$themedir/usr/lib/gforge/bin
+	mkdir -p \$(CURDIR)/debian/$themedir/usr/share/gforge/bin
 
 binary-indep: build install
 	dh_testdir
@@ -258,7 +258,7 @@ set -e
 
 case "\$1" in
     remove|deconfigure)
-	/usr/lib/gforge/bin/unregister-theme $minus
+	/usr/share/gforge/bin/unregister-theme $minus
         ;;
     upgrade|failed-upgrade)
         ;;
