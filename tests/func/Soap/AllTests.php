@@ -2,7 +2,7 @@
 /*
  * Copyright (C) 2008 Alain Peyrat <aljeux@free.fr>
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
- * Copyright (c) 2009 Olivier Berger, Institut Télécom
+ * Copyright (c) 2009 Olivier Berger, Institut TÃ©lÃ©com
  *
  * This file is part of FusionForge.
  *
