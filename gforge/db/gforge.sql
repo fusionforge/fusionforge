@@ -2871,9 +2871,9 @@ COPY group_history (group_history_id, group_id, field_name, old_value, mod_by, a
 
 COPY groups (group_id, group_name, homepage, is_public, status, unix_group_name, unix_box, http_domain, short_description, register_purpose, license_other, register_time, rand_hash, use_mail, use_survey, use_forum, use_pm, use_scm, use_news, type_id, use_docman, new_doc_address, send_all_docs, use_pm_depend_box, use_ftp, use_tracker, use_frs, use_stats, enable_pserver, enable_anonscm, license, scm_box) FROM stdin;
 2	Stats Group	\N	0	A	stats	shell1	\N	\N	\N	\N	0	\N	1	1	1	1	1	1	1	1		0	1	1	1	1	1	1	1	100	cvs1
-3	News Group	\N	0	A	news	shell1	\N	\N	\N	\N	0	\N	1	1	1	1	1	1	1	1		0	1	1	1	1	1	1	1	100	cvs1
+3	News Group	\N	0	A	newsadmin	shell1	\N	\N	\N	\N	0	\N	1	1	1	1	1	1	1	1		0	1	1	1	1	1	1	1	100	cvs1
 4	Peer Ratings Group	\N	0	A	peerrating	shell1	\N	\N	\N	\N	0	\N	1	1	1	1	1	1	1	1		0	1	1	1	1	1	1	1	100	cvs1
-1	Master Group	\N	0	A	gforge	shell1	\N	\N	\N	\N	0	\N	1	1	1	1	1	1	1	1		0	1	1	1	1	1	1	1	100	cvs1
+1	Master Group	\N	0	A	siteadmin	shell1	\N	\N	\N	\N	0	\N	1	1	1	1	1	1	1	1		0	1	1	1	1	1	1	1	100	cvs1
 5	Template Project	\N	1	P	template	shell1	\N	Project to house templates used to build other projects	\N	\N	1120266772	\N	1	1	1	1	1	1	1	1		0	1	1	1	1	1	1	1	100	\N
 \.
 
@@ -4216,13 +4216,13 @@ COPY plugin_cvstracker_data_master (id, holder_id, log_text, file, prev_version,
 
 COPY nss_groups (user_id, group_id, name, gid) FROM stdin;
 0	2	stats	10002
-0	3	news	10003
+0	3	newsadmin	10003
 0	4	peerrating	10004
-0	1	gforge	10001
+0	1	siteadmin	10001
 0	2	scm_stats	50002
-0	3	scm_news	50003
+0	3	scm_newsadmin	50003
 0	4	scm_peerrating	50004
-0	1	scm_gforge	50001
+0	1	scm_siteadmin	50001
 \.
 
 
