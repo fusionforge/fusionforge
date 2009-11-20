@@ -89,7 +89,7 @@ class SoapLoginProcess extends PHPUnit_Framework_TestCase
 	{
 	  $version = $this->soapclient->version();
 	  
-	  $this->assertEquals('4.8.50', $version);
+	  $this->assertEquals('4.8.1', $version);
 
 	}
 
