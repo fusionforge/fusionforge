@@ -213,9 +213,9 @@ class SoapUserGroupProcess extends PHPUnit_Framework_TestCase
 		$this->assertNotNull($this->loggedIn);
 
 		$response = $this->soapclient->getPublicProjectNames();
-		 
-//		$this->assertContains("newsadmin", $response);
-//		$this->assertContains("siteadmin", $response);
+
+		$this->assertContains("newsadmin", $response);
+		$this->assertContains("siteadmin", $response);
 
 		//	  print_r($response);
 	}
@@ -234,8 +234,8 @@ class SoapUserGroupProcess extends PHPUnit_Framework_TestCase
 		$this->assertNotNull($this->loggedIn);
 
 		$response = $this->soapclient->getPublicProjectNames($this->session);
-//		$this->assertContains("newsadmin", $response);
-//		$this->assertContains("siteadmin", $response);
+		$this->assertContains("newsadmin", $response);
+		$this->assertContains("siteadmin", $response);
 
 		//print_r($response);
 	}
