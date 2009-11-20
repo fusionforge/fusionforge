@@ -67,6 +67,7 @@ gforge/deb-specific/gforge.logrotate -text
 gforge/deb-specific/install-cvs.sh -text
 gforge/deb-specific/update-ldap.sh -text
 gforge/debian/NEWS.Debian -text
+gforge/debian/README.source -text
 gforge/debian/compat -text
 gforge/debian/dsf-in/common.links -text
 gforge/debian/dsf-in/plugin-extratabs.postinst -text
