@@ -37,7 +37,7 @@ debian/$(PACKAGE)-%.install:
 debian/%.docs:
 	cp $(CURDIR)/packaging/docs/$(patsubst $(PACKAGE)%,pkgname%,$*) $@
 
-debian/control:
+debian/control: $(wildcard packaging/control/*)
 	ls $(CURDIR)/packaging/control/[0-9][0-9][0-9]* | grep -v shortdesc | while read file ; do cat $${file}; if [ -f $${file}.shortdesc ] ; then cat $(CURDIR)/packaging/control/AAAdesc; echo ' .'; cat $${file}.shortdesc; fi; echo '';  done | sed 's/@PACKAGE@/$(PACKAGE)/g' > $@
 
 debian/po/templates.pot: $(wildcard debian/dsf-in/*.templates.dsfh-in) $(wildcard debian/dsf-helper/*.templates)
