@@ -1,112 +1,77 @@
 #!/usr/bin/make -f
-# debian/rules that uses debhelper.
+
 # GNU copyright 1997 to 1999 by Joey Hess (sample file)
 # Copyright 2000 to 2002 by Roland Mas and Christian Bayle for the Sourceforge package
 # Copyright 2002 to 2008 by Roland Mas and Christian Bayle for the Gforge package
 # Copyright 2008 to 2009 by Roland Mas and Christian Bayle for the FusionForge package
 
-# Uncomment this to turn on verbose mode.
-#export DH_VERBOSE=1
-
-#Never use the next kind of line, this would break dsf-helper.pl neither add space on
-#Package and Forgename lines
-#PACKAGE=$(shell dh_listpackages | head -1)
 PACKAGE=gforge
 FORGENAME=FusionForge
-include /usr/share/dpatch/dpatch.make
-
-CRONFILESLIST=$(patsubst packaging/cron.d/%,debian/$(PACKAGE)-%.cron.d,$(wildcard packaging/cron.d/[a-z]*))
-DIRSFILESLIST=$(patsubst packaging/dirs/%,debian/$(PACKAGE)-%.dirs,$(wildcard packaging/dirs/[a-z]*))
-INSTALLFILESLIST=$(patsubst packaging/install/%,debian/$(PACKAGE)-%.install,$(wildcard packaging/install/[a-z]*))
-DOCSFILESLIST=$(patsubst packaging/docs/pkgname%,debian/$(PACKAGE)%.docs,$(wildcard packaging/docs/pkgname*))
-POFILES=$(patsubst debian/dsf-po/%,debian/po/%,$(wildcard debian/dsf-po/*) debian/po/POTFILES.in)
 
 default:
 	@echo $(PACKAGE)
 
-listecho: 
-	@echo $(CRONFILESLIST)
-	@echo $(DIRSFILESLIST)
-	@echo $(INSTALLFILESLIST)
-listechod: 
-	@echo $(DOCSFILESLIST)
+include /usr/share/dpatch/dpatch.make
+
+CRONDFILES=$(patsubst packaging/cron.d/%,debian/$(PACKAGE)-%.cron.d,$(wildcard packaging/cron.d/[a-z]*))
+DIRSFILES=$(patsubst packaging/dirs/%,debian/$(PACKAGE)-%.dirs,$(wildcard packaging/dirs/[a-z]*))
+INSTALLFILES=$(patsubst packaging/install/%,debian/$(PACKAGE)-%.install,$(wildcard packaging/install/[a-z]*))
+DOCSFILES=$(patsubst packaging/docs/pkgname%,debian/$(PACKAGE)%.docs,$(wildcard packaging/docs/pkgname*))
+POFILES=$(patsubst debian/dsf-po/%,debian/po/%,$(wildcard debian/dsf-po/*) debian/po/POTFILES.in)
 
 remove-binary-files:
 	sh $(CURDIR)/deb-specific/manage-uufiles.sh clean
 
-cronfiles: $(CRONFILESLIST)
-
-dirsfiles: $(DIRSFILESLIST)
-
-installfiles: $(INSTALLFILESLIST)
-
-docsfiles: $(DOCSFILESLIST)
-
-conffiles: cronfiles dirsfiles installfiles gencontrol docsfiles
+.PHONY: conffiles
+conffiles: $(CRONDFILES) $(DIRSFILES) $(INSTALLFILES) $(DOCSFILES) debian/control
 
 debian/$(PACKAGE)-%.cron.d:
-	@echo "Creating $@"
 	(cat $(CURDIR)/packaging/cron.d/00phpcron ; sed -e 's/\$$FFUSER/$(PACKAGE)/g' $(CURDIR)/packaging/cron.d/$*) > $@
 
 debian/$(PACKAGE)-%.dirs:
-	@echo "Creating $@"
 	cp $(CURDIR)/packaging/dirs/$* $@ 
 
 debian/$(PACKAGE)-%.install:
-	@echo "Creating $@"
 	cp $(CURDIR)/packaging/install/$* $@ 
 
 debian/%.docs:
-	@echo "Creating $@"
 	cp $(CURDIR)/packaging/docs/$(patsubst $(PACKAGE)%,pkgname%,$*) $@
 
-gencontrol:
-	ls $(CURDIR)/packaging/control/[0-9][0-9][0-9]* | grep -v shortdesc | while read file ; do cat $${file}; if [ -f $${file}.shortdesc ] ; then cat $(CURDIR)/packaging/control/AAAdesc; echo ' .'; cat $${file}.shortdesc; fi; echo '';  done | sed 's/@PACKAGE@/$(PACKAGE)/g' > $(CURDIR)/debian/control
+debian/control:
+	ls $(CURDIR)/packaging/control/[0-9][0-9][0-9]* | grep -v shortdesc | while read file ; do cat $${file}; if [ -f $${file}.shortdesc ] ; then cat $(CURDIR)/packaging/control/AAAdesc; echo ' .'; cat $${file}.shortdesc; fi; echo '';  done | sed 's/@PACKAGE@/$(PACKAGE)/g' > $@
 
-configure: configure-stamp debian/po/templates.pot
-configure-stamp: remove-binary-files
-	dh_testdir
-
-	touch configure-stamp
-
-#$(foreach PO,$(wildcard debian/dsf-po/*.po), cp $(PO) debian/po ; ) 
-
-debian/po/templates.pot: $(POFILES) $(wildcard debian/dsf-in/*.templates.dsfh-in) $(wildcard debian/dsf-helper/*.templates)
+debian/po/templates.pot: $(wildcard debian/dsf-in/*.templates.dsfh-in) $(wildcard debian/dsf-helper/*.templates)
 	@debconf-updatepo --podir=debian/dsf-po
 
 debian/po/%:
 	cat $(patsubst debian/po/%,debian/dsf-po/%,$@) | sed 's/@PACKAGE@/$(PACKAGE)/g' | sed 's/@FORGENAME@/$(FORGENAME)/g' > $@
 
-cleanpo:
-	rm -f $(POFILES)
+build: patch-stamp remove-binary-files debian/po/templates.pot conffiles
+	dh $@
 
-
-
-build: configure-stamp build-stamp
-build-stamp: patch
-	dh_testdir
-
-	# Build man pages from Docbook sources
+# Build man pages from Docbook sources
 	cat debian/dsf-in/config.sgml | sed 's/@PACKAGE@/$(PACKAGE)/g' | sed 's/@FORGENAME@/$(FORGENAME)/g' > debian/$(PACKAGE)-config.sgml
 	cat debian/dsf-in/common.manpages | sed 's/@PACKAGE@/$(PACKAGE)/g' | sed 's/@FORGENAME@/$(FORGENAME)/g' > debian/$(PACKAGE)-common.manpages
 	/usr/bin/docbook-to-man debian/cvssh.sgml > cvssh.1
 	/usr/bin/docbook-to-man debian/$(PACKAGE)-config.sgml > $(PACKAGE)-config.1
 
-	# Build README.Debian from template
+# Build README.Debian from template
 	cat debian/README.Debian.tmpl | sed 's/@PACKAGE@/$(PACKAGE)/g' | sed 's/@FORGENAME@/$(FORGENAME)/g' > debian/README.Debian
 
-	# Uudecode binary files
+# Uudecode binary files
 	sh $(CURDIR)/deb-specific/manage-uufiles.sh decode
 
-	# Build gettext *.mo files
+# Build gettext *.mo files
 	utils/manage-translations.sh build
+
+# Preprocess files with DSF-Helper
+	perl $(CURDIR)/deb-specific/dsf-helper.pl
 
 	touch build-stamp
 
-clean: remove-binary-files unpatch cleanpo
-	dh_testdir
-	dh_testroot
-	rm -f build-stamp configure-stamp
+clean: remove-binary-files unpatch
+	dh $@
+
 	rm -f $(CURDIR)/debian/*.cron.d
 	rm -f $(CURDIR)/debian/*.dirs
 	rm -f $(CURDIR)/debian/*.install
@@ -115,93 +80,51 @@ clean: remove-binary-files unpatch cleanpo
 	rm -f $(CURDIR)/debian/$(PACKAGE)-common.manpages
 	rm -f cvssh.1 $(PACKAGE)-config.1
 	rm -f $(CURDIR)/debian/README.Debian
-
 	rm -rf locales
 
+	rm -f $(POFILES)
+
 	perl $(CURDIR)/deb-specific/dsf-helper.pl --clean
-	dh_clean
 
 install: build
-	dh_testdir
-	dh_testroot
-	dh_clean -k
+	dh $@
 
-	# Generate conffiles *.cron.d *.dirs *.install control
-	$(CURDIR)/debian/rules conffiles
-
-	dh_installdirs
-
-	# Preprocess files with DSF-Helper
-	perl $(CURDIR)/deb-specific/dsf-helper.pl
-
-	# Install files
-	#dh_install --fail-missing -X.svn -X.arch-ids -X.bzr -X.cvsignore --sourcedir=$(CURDIR)
-	dh_install -X.svn -X.arch-ids -X.bzr -X.cvsignore --sourcedir=$(CURDIR)
-
-	# Fix permissions
-	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -type f -exec chmod 644 {} \;  ; done
-	-chmod 755 $(CURDIR)/debian/*/*/*/*/bin/* $(CURDIR)/debian/*/*/*/*/cronjobs/* \
+# Fix permissions
+	chmod 755 $(CURDIR)/debian/*/*/*/*/bin/* $(CURDIR)/debian/*/*/*/*/cronjobs/* \
 		$(CURDIR)/debian/*/bin/*  $(CURDIR)/debian/*/usr/share/*/plugins/*/bin/* \
 		$(CURDIR)/debian/*/usr/share/*/plugins/*/cronjobs/*
-	#
-	chmod 755 $(CURDIR)/debian/$(PACKAGE)-db-postgresql/usr/share/*/db/*.php
 	chmod 644 $(CURDIR)/debian/$(PACKAGE)-db-postgresql/usr/share/$(PACKAGE)/cronjobs/*.inc
 
-	# viewvc rights
-	find $(CURDIR)/debian/$(PACKAGE)-web-apache2/usr/share/*/www/scm/viewvc -type f -exec chmod 0644 {} \;
-	grep -ril '^#!' $(CURDIR)/debian/$(PACKAGE)-web-apache2/usr/share/*/www/scm/viewvc | xargs chmod 0755
-	#
+	chmod 755 $(CURDIR)/debian/$(PACKAGE)-db-postgresql/usr/share/*/db/*.php
+
+# ViewVC rights
+	# find $(CURDIR)/debian/$(PACKAGE)-web-apache2/usr/share/*/www/scm/viewvc -type f -exec chmod 0644 {} \;
+	grep -rl '^#!' $(CURDIR)/debian/$(PACKAGE)-web-apache2/usr/share/*/www/scm/viewvc | xargs chmod 0755
+
 	find $(CURDIR)/debian/$(PACKAGE)-common/usr/share/*/common/docman/engine/ -type f -name \*.php -not -name \*.inc.php -exec chmod 0755 {} \;
 	find $(CURDIR)/debian/$(PACKAGE)-common/usr/share/*/common/docman/engine/ -type f -name \*.sh -exec chmod 0755 {} \;
-	#
+
 	rm -f $(CURDIR)/debian/$(PACKAGE)-plugin-scm*/usr/share/*/plugins/scm*/*/README
 	chmod 755 $(CURDIR)/debian/$(PACKAGE)-plugin-scmcvs/usr/share/*/plugins/scmcvs/sbin/*
-	# remove windows files
+
+# Remove Windows files
 	rm -rf $(CURDIR)/debian/$(PACKAGE)-web-apache2/usr/share/*/www/scm/viewvc/windows
-	#
+
 	rm -f $(CURDIR)/debian/$(PACKAGE)-web-apache2/usr/share/*/www/themes/$(PACKAGE)/COPYING
 
-	# Remove Snoopy class from binary packages (provided by libphp-snoopy)
-	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -name Snoopy.class.php | xargs rm -rf ; done
+# Remove Snoopy class from binary packages (provided by libphp-snoopy)
+	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -name Snoopy.class.php | xargs -r rm ; done
 
-	# Remove nusoap class from binary packages (provided by libnusoap-php)
-	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -name nusoap.php | xargs rm -rf ; done
+# Remove nusoap class from binary packages (provided by libnusoap-php)
+	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -name nusoap.php | xargs -r rm ; done
 
-	# Remove potential SCM artefacts from binary packages
-	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -name .svn -or -name {arch} -or -name .arch-ids -or -name .bzr -or -name .cvsignore | xargs rm -rf ; done
-	# Also remove uuencoded files
-	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -name \*.uu | xargs echo rm ; done
+# Remove potential SCM artefacts from binary packages
+	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -name .svn -or -name {arch} -or -name .arch-ids -or -name .bzr -or -name .cvsignore | xargs -r rm -rf ; done
 
+# Also remove uuencoded files
+	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -name \*.uu | xargs -r rm ; done
 
-binary-indep: build install
-	dh_testdir
-	dh_testroot
-	dh_installdebconf	
-	dh_installdocs
-	#dh_installexamples
-	#dh_installmenu
-	#dh_installemacsen
-	#dh_installpam
-	dh_installinit
-	dh_installcron
-	dh_installman
-	#dh_installinfo
-	#dh_undocumented
-	dh_installchangelogs ChangeLog
-	dh_link
-	dh_strip
-	dh_compress
-	 dh_fixperms
-	#dh_makeshlibs
-	dh_installdeb
-	#dh_perl
-	#dh_shlibdeps
-	dh_gencontrol
-	dh_md5sums
-	dh_builddeb
+binary: install
 
-binary-arch: build install
-	# (No architecture-dependent files for Gforge, doing nothing here)
-
-binary: binary-indep binary-arch
-.PHONY: build clean binary-indep binary-arch binary install configure remove-binary-files patch unpatch
+%:
+	dh $@

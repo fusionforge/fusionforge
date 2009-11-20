@@ -16,8 +16,9 @@ gforge (4.8.55-1) experimental; urgency=low
 
   [ Christian Bayle ]
   * Remove frame from mediawiki 
+  * Simplified debian/rules by using Debhelper 7.
 
- -- Christian Bayle <bayle@debian.org>  Fri, 30 Oct 2009 22:31:45 +0100
+ -- Roland Mas <lolando@debian.org>  Fri, 20 Nov 2009 11:30:37 +0100
 
 gforge (4.8.51-1) experimental; urgency=low
 
