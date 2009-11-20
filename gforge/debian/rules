@@ -97,9 +97,7 @@ install: build
 
 	chmod 755 $(CURDIR)/debian/$(PACKAGE)-db-postgresql/usr/share/*/db/*.php
 
-# ViewVC rights
-	# find $(CURDIR)/debian/$(PACKAGE)-web-apache2/usr/share/*/www/scm/viewvc -type f -exec chmod 0644 {} \;
-	grep -rl '^#!' $(CURDIR)/debian/$(PACKAGE)-web-apache2/usr/share/*/www/scm/viewvc | xargs chmod 0755
+	rm $(CURDIR)/debian/$(PACKAGE)-web-apache2/usr/share/*/www/scm/viewvc/bin/cgi/viewvc-strace.sh
 
 	find $(CURDIR)/debian/$(PACKAGE)-common/usr/share/*/common/docman/engine/ -type f -name \*.php -not -name \*.inc.php -exec chmod 0755 {} \;
 	find $(CURDIR)/debian/$(PACKAGE)-common/usr/share/*/common/docman/engine/ -type f -name \*.sh -exec chmod 0755 {} \;
@@ -115,7 +113,7 @@ install: build
 # Remove Snoopy class from binary packages (provided by libphp-snoopy)
 	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -name Snoopy.class.php | xargs -r rm ; done
 
-# Remove nusoap class from binary packages (provided by libnusoap-php)
+# Remove NuSOAP class from binary packages (provided by libnusoap-php)
 	for i in $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) ; do find $$i -name nusoap.php | xargs -r rm ; done
 
 # Remove potential SCM artefacts from binary packages
