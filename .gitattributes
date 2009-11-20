@@ -3614,6 +3614,7 @@ tests/func/Site/login.php -text
 tests/func/Site/projects.php -text
 tests/func/Site/top.php -text
 tests/func/Soap/AllTests.php -text
+tests/func/Soap/checks.php -text
 tests/func/Soap/login.php -text
 tests/func/Soap/usergroup.php -text
 tests/func/Tasks/AllTests.php -text

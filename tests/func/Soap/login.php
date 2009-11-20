@@ -30,15 +30,22 @@ class SoapLoginProcess extends PHPUnit_Framework_TestCase
 
 	  //	  print_r("setup\n");
 
-	  $this->loggedIn = FALSE;
 	  $this->session = NULL;
-	  //print_r("session :".$this->session);
+	  $this->soapclient = NULL;
 
-	  $this->assertRegExp('/^http.?:\/\//', WSDL_URL);
+	  //try {
 
-	  //	  try {
+	  // This is to check that the SoapClient instanciation will
+	  // work. There's aparently a different behaviour if
+	  // resolving the hostname doesn't work under phpunit. If
+	  // this fails, the hostname and IP address should be
+	  // different and the WSDL retrieval should work
+	  $ip = gethostbyname(FORGE_HOSTNAME);
+	  if ($ip != FORGE_HOSTNAME) 
+	    {
 
-	  $this->soapclient = new SoapClient(WSDL_URL,
+	      // Instantiate the SOAP client with WSDL
+	      $this->soapclient = new SoapClient(WSDL_URL,
 					     array('cache_wsdl' => WSDL_CACHE_NONE, 
 						   'trace' => true));
 	  
@@ -46,115 +53,129 @@ class SoapLoginProcess extends PHPUnit_Framework_TestCase
 	  //	    $fault->faultstring;
 	  //	    print_r($fault);
 	  //	  }
-	  //	  print_r($this->soapclient);
+	      //	      print_r($this->soapclient);
+	    }
 
 	}
 
-	// function tearDown()
-	// {
-	//   //
-	// }
+	 function tearDown()
+	 {
+	   if ($this->session) {
+	     $response = $this->soapclient->logout($this->session);
+	     //	     print($response);
+	   }
+	 }
 
 
 	// performs a login and returns a session "cookie"
 	function login($userid, $passwd)
 	{
+	  $this->assertNotNull($this->soapclient);
+
 	  $response = $this->soapclient->login($userid, $passwd);
 
 	  if ($response) {
-	    $this->loggedIn = TRUE;
-
 	    $this->session = $response;
-
 	    //	    print_r($this->session);
-
 	  }
 
 	  return $response;
 	}
 
-// Name: version
-// Binding: GForgeAPIBinding
-// Input:
-//   use: encoded
-//   message: versionRequest
-//   parts:
-// Output:
-//   use: encoded
-//   message: versionResponse
-//   parts:
-//     versionResponse: xsd:string
+	// Name: version
+	// Binding: GForgeAPIBinding
+	// Input:
+	//   use: encoded
+	//   message: versionRequest
+	//   parts:
+	// Output:
+	//   use: encoded
+	//   message: versionResponse
+	//   parts:
+	//     versionResponse: xsd:string
 
 	function testVersion()
 	{
+	  $this->assertNotNull($this->soapclient);
+
 	  $version = $this->soapclient->version();
 	  
 	  $this->assertEquals('4.8.1', $version);
 
 	}
 
+        /**
+	 * @depends testVersion
+	 */
 	function testGETFUNCTIONS()
 	{
+	  $this->assertNotNull($this->soapclient);
 	  $response = $this->soapclient->__getFunctions();
 	  //	  print_r($response);
 	}
 
-// Name: login
-// Binding: GForgeAPIBinding
-// Input:
-//   use: encoded
-//   message: loginRequest
-//   parts:
-//     userid: xsd:string
-//     passwd: xsd:string
-// Output:
-//   use: encoded
-//   message: loginResponse
-//   parts:
-//     loginResponse: xsd:string
+	// Name: login
+	// Binding: GForgeAPIBinding
+	// Input:
+	//   use: encoded
+	//   message: loginRequest
+	//   parts:
+	//     userid: xsd:string
+	//     passwd: xsd:string
+	// Output:
+	//   use: encoded
+	//   message: loginResponse
+	//   parts:
+	//     loginResponse: xsd:string
 
+        /**
+	 * @depends testVersion
+	 */
 	function testLoginNonExistantUser()
 	{
+	  $this->assertNotNull($this->soapclient);
+
 	  $userid = 'coin';
 	  
 	  try {
-	    
 	    $response = $this->soapclient->login($userid, 'pan');
-	    
 	  }
 	  catch (SoapFault $expected) {
 
 	    $this->assertEquals("Unable to log in with userid of ".$userid, $expected->faultstring);
-
-		//	    print_r($response);
-            
+	    //	    print_r($response);
 	    return;
 	  }
  
 	  $this->fail('An expected exception has not been raised.');
 	}
 
+        /**
+	 * @depends testVersion
+	 */
 	function testLoginWrongPwd()
 	{
+	  $this->assertNotNull($this->soapclient);
+
 	  $userid = EXISTING_USER;
 	  
 	  try {
-	    
 	    $response = $this->soapclient->login($userid, 'xxxxxx');
-	    
 	  }
 	  catch (SoapFault $expected) {
 
 	    $this->assertEquals("Unable to log in with userid of ".$userid, $expected->faultstring);
 
 	    //	    print_r($response);
-            
 	    return;
 	  }
  
 	  $this->fail('An expected exception has not been raised.');
 	}
 
+        /**
+	 * @depends testVersion
+	 */
 	function testLoginSuccesful()
 	{
 	  $userid = EXISTING_USER;
@@ -163,22 +184,21 @@ class SoapLoginProcess extends PHPUnit_Framework_TestCase
 	  $response = $this->login($userid, $passwd);
 
 	  $this->assertNotNull($response);
-
 	}
 
 
-// Name: logout
-// Binding: GForgeAPIBinding
-// Input:
-//   use: encoded
-//   message: logoutRequest
-//   parts:
-//     session_ser: xsd:string
-// Output:
-//   use: encoded
-//   message: logoutResponse
-//   parts:
-//     logoutResponse: xsd:string
+	// Name: logout
+	// Binding: GForgeAPIBinding
+	// Input:
+	//   use: encoded
+	//   message: logoutRequest
+	//   parts:
+	//     session_ser: xsd:string
+	// Output:
+	//   use: encoded
+	//   message: logoutResponse
+	//   parts:
+	//     logoutResponse: xsd:string
 
         /**
 	 * @depends testLoginSuccesful
@@ -186,9 +206,7 @@ class SoapLoginProcess extends PHPUnit_Framework_TestCase
 	/*	function testLogout()
 	{
 
-	  print_r($this->loggedIn);
 
-	  $this->assertNotNull($this->loggedIn);
 
 	  $response = $this->soapclient->logout('coin');
 

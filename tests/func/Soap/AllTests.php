@@ -52,6 +52,7 @@ require_once 'PHPUnit/Framework.php';
 require_once 'PHPUnit/TextUI/TestRunner.php';
  
 require_once 'func/config.php';
+require_once 'func/Soap/checks.php';
 require_once 'func/Soap/login.php';
 require_once 'func/Soap/usergroup.php';
  
@@ -66,8 +67,9 @@ class Soap_AllTests
     {
         $suite = new PHPUnit_Framework_TestSuite('PHPUnit Framework');
  
-        $suite->addTestSuite('SoapLoginProcess');
-        $suite->addTestSuite('SoapUserGroupProcess');
+        $suite->addTestSuite('SoapChecksProcess');
+	$suite->addTestSuite('SoapLoginProcess');
+	$suite->addTestSuite('SoapUserGroupProcess');
         
         return $suite;
     }
