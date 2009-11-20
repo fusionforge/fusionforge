@@ -1,6 +1,6 @@
 Package: @PACKAGE@-web-apache2
 Architecture: all
-Depends: @PACKAGE@-common, @PACKAGE@-db-postgresql | @PACKAGE@-db, libapache2-mod-php5, php5-cgi, php5-pgsql, php5-gd, perl, perl-suid, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, cronolog, python, ssl-cert, ${misc:Depends}
+Depends: @PACKAGE@-common, @PACKAGE@-db-postgresql | @PACKAGE@-db, libapache2-mod-php5, php5-cgi, php5-pgsql, php5-gd, perl, perl-suid, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, cronolog, python, ssl-cert, libnusoap-php, ${misc:Depends}
 Recommends: libphp-jpgraph, locales | locales-all
 Provides: @PACKAGE@-web
 Conflicts: @PACKAGE@-web
