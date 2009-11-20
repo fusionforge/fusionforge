@@ -21,9 +21,8 @@
  */
 
 require_once 'PHPUnit/Framework/TestCase.php';
-require_once 'Soap/config.php';
 
-class LoginProcess extends PHPUnit_Framework_TestCase
+class SoapLoginProcess extends PHPUnit_Framework_TestCase
 {
 
 	function setUp()
@@ -35,7 +34,7 @@ class LoginProcess extends PHPUnit_Framework_TestCase
 	  $this->session = NULL;
 	  //print_r("session :".$this->session);
 
-	  $this->assertRegExp('/http.?:\/\//', WSDL_URL);
+	  $this->assertRegExp('/^http.?:\/\//', WSDL_URL);
 
 	  //	  try {
 
@@ -90,7 +89,7 @@ class LoginProcess extends PHPUnit_Framework_TestCase
 	{
 	  $version = $this->soapclient->version();
 	  
-	  $this->assertEquals('4.8.1', $version);
+	  $this->assertEquals('4.8.50', $version);
 
 	}
 
@@ -127,7 +126,7 @@ class LoginProcess extends PHPUnit_Framework_TestCase
 
 	    $this->assertEquals("Unable to log in with userid of ".$userid, $expected->faultstring);
 
-	    print_r($response);
+		//	    print_r($response);
             
 	    return;
 	  }

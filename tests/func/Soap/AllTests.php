@@ -51,9 +51,9 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 require_once 'PHPUnit/Framework.php';
 require_once 'PHPUnit/TextUI/TestRunner.php';
  
-require_once 'Soap/login.php';
-require_once 'Soap/usergroup.php';
-// ...
+require_once 'func/config.php';
+require_once 'func/Soap/login.php';
+require_once 'func/Soap/usergroup.php';
  
 class Soap_AllTests
 {
@@ -66,14 +66,9 @@ class Soap_AllTests
     {
         $suite = new PHPUnit_Framework_TestSuite('PHPUnit Framework');
  
-        // $suite->addTestSuite('CreateProject');
-        $suite->addTestSuite('LoginProcess');
-        $suite->addTestSuite('UserGroupProcess');
+        $suite->addTestSuite('SoapLoginProcess');
+        $suite->addTestSuite('SoapUserGroupProcess');
         
-        // FIXME: Do not run this test as it requires the cron to be launched
-        //        $suite->addTestSuite('Top');
-        // ...
- 
         return $suite;
     }
 }

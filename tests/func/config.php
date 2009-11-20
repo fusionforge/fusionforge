@@ -25,6 +25,13 @@ define('DB_NAME', 'fforge');
 define('DB_USER', 'gforge');
 define('DB_PASSWORD', '@@FFDB_PASS@@');
 
+define ('WSDL_URL', URL.'soap/index.php?wsdl');
+
+// this should be an existing user of the forge together with its password
+// (the password should be different from 'xxxxxx')
+define ('EXISTING_USER', 'admin');
+define ('PASSWD_OF_EXISTING_USER', 'myadmin');
+
 // Enter true when file is configured.
 define('CONFIGURED', false);
 ?>
