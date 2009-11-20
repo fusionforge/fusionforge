@@ -100,7 +100,7 @@ function &getUsers($session_ser,$user_ids) {
 }
 
 //get user objects for array of unix_names
-function &getUsersByName($session_ser,$user_names) {
+function getUsersByName($session_ser,$user_names) {
 	continue_session($session_ser);
 	$usrs =& user_get_objects_by_name($user_names);
 	if (!$usrs) {
