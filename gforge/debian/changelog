@@ -7,8 +7,9 @@ gforge (4.8.1-3+) UNRELEASED; urgency=low
     libnusoap-php instead (Closes: #529575).
   * Add provides tag to control for fusionforge.
   * Change default system name to FusionForge instead of GForge.
+  * Fix changelog entry for previous version adding details of CVE entry.
 
- -- Olivier Berger <olivier.berger@it-sudparis.eu>  Sat, 14 Nov 2009 11:18:43 +0100
+ -- Olivier Berger <olivier.berger@it-sudparis.eu>  Fri, 20 Nov 2009 15:09:51 +0100
 
 gforge (4.8.1-3) unstable; urgency=low
 
