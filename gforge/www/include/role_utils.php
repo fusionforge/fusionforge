@@ -25,7 +25,7 @@ function role_box ($group_id,$name,$selected='xzxzxz') {
 	global $roleres;
 	if (!$roleres) {
 		$roleres=db_query_params ('SELECT role_id,role_name 
-			FROM role WHERE group_id=$1',
+			FROM role WHERE group_id=$1  ORDER BY role_name',
 			array($group_id));
 	}
 	return html_build_select_box($roleres,$name,$selected,false);
