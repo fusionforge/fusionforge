@@ -143,7 +143,7 @@ if (db_numrows($res_admin) > 0) {
 		while ($row_admin = db_fetch_array($res_admin)) {
 			if (trim($row_admin['admin_flags']) != 'A' && !$started_developers) {
 				$started_developers=true;
-				echo '<span class="develtitle">'. _('Developers').':</span><br />';
+				echo '<span class="develtitle">'. _('Members').':</span><br />';
 			}
 			echo util_make_link_u ($row_admin['user_name'],$row_admin['user_id'],$row_admin['realname']).'<br />';
 			if ($row_admin['user_id'] == user_getid())
