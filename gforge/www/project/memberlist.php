@@ -39,7 +39,7 @@ site_project_header(array('title'=>_('Project Member List'),'group'=>$group_id,'
 echo _('<p>If you would like to contribute to this project by becoming a developer, contact one of the project admins, designated in bold text below.</p>');
 
 $title_arr=array();
-$title_arr[]=_('Developer');
+$title_arr[]=_('Member');
 $title_arr[]=_('Username');
 $title_arr[]=_('Role/Position');
 if($GLOBALS['sys_use_people']) {
