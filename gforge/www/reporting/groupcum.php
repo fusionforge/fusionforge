@@ -48,19 +48,19 @@ session_require( array('group'=>$sys_stats_group) );
 echo report_header(_('Cumulative Projects'));
 
 ?>
-<h3><?php echo _('Cumulative Projects'); ?></h3>
-<p>
+<h2><?php echo _('Cumulative Projects'); ?></h2>
+
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <table><tr>
 <td><strong><?php echo _('Type'); ?>:</strong><br /><?php echo report_span_box('SPAN',$SPAN); ?></td>
 <td><strong><?php echo _('Start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
 <td><strong><?php echo _('End'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
-<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>"></td>
+<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
 </tr></table>
 </form>
 <p>
-<img src="groupcum_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end"; ?>" width="640" height="480">
-<p>
+<img src="groupcum_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end"; ?>" width="640" height="480" alt="" />
+</p>
 <?php
 
 echo report_footer();

@@ -51,21 +51,21 @@ $area = util_ensure_value_in_set ($area, array ('tracker','forum','docman','task
 echo report_header(_('Site-Wide Activity'));
 
 ?>
-<h3><?php echo _('Site-Wide Activity'); ?></h3>
-<p>
+<h2><?php echo _('Site-Wide Activity'); ?></h2>
+
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <table><tr>
 <td><strong><?php echo _('Areas'); ?>:</strong><br /><?php echo report_area_box('area',$area); ?></td>
 <td><strong><?php echo _('Type'); ?>:</strong><br /><?php echo report_span_box('SPAN',$SPAN); ?></td>
 <td><strong><?php echo _('Start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
 <td><strong><?php echo _('End'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
-<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>"></td>
+<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
 </tr></table>
 </form>
-<p>
 <?php if ($area) { ?>
-	<img src="siteact_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end&amp;area=$area"; ?>" width="640" height="480">
 	<p>
+	<img src="siteact_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end&amp;area=$area"; ?>" width="640" height="480" alt="" />
+	</p>
 	<?php
 
 }

@@ -341,9 +341,7 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 <p>
 <input type="submit" name="submit" value="<?php echo _('Add This File') ?>" /></p>
 </form>
-<p>&nbsp;</p>
 <hr />
-<p>&nbsp;</p>
 <h3><?php echo _('Step 3: Edit Files In This Release') ?></h3>
 
 <?php

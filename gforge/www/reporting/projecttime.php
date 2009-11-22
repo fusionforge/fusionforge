@@ -61,20 +61,19 @@ $a2[]='subproject';
 $a2[]='user';
 
 ?>
-<h3><?php echo _('Time Tracking By Project'); ?></h3>
-<p>
+<h2><?php echo _('Time Tracking By Project'); ?></h2>
+
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
-<input type="hidden" name="sw" value="<?php echo $sw; ?>">
-<input type="hidden" name="typ" value="<?php echo $typ; ?>">
+<input type="hidden" name="sw" value="<?php echo $sw; ?>" />
+<input type="hidden" name="typ" value="<?php echo $typ; ?>" />
 <table><tr>
 <td><strong><?php echo _('Project'); ?>:</strong><br /><?php echo report_group_box('g_id',$g_id); ?></td>
 <td><strong><?php echo _('Type'); ?>:</strong><br /><?php echo html_build_select_box_from_arrays($a2,$a,'type',$type,false); ?></td>
 <td><strong><?php echo _('Start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
 <td><strong><?php echo _('End'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
-<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>"></td>
+<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
 </tr></table>
 </form>
-<p>
 <?php 
 	if ($g_id && $typ=='r') {
 		$report=new ReportProjectTime($g_id,$type,$start,$end);
@@ -94,8 +93,9 @@ $a2[]='user';
 	    echo $HTML->listTableBottom ();
 
 	} elseif ($g_id) { ?>
-	<img src="projecttime_graph.php?<?php echo "start=$start&amp;end=$end&amp;g_id=$g_id&amp;type=$type"; ?>" width="640" height="480">
 	<p>
+	<img src="projecttime_graph.php?<?php echo "start=$start&amp;end=$end&amp;g_id=$g_id&amp;type=$type"; ?>" width="640" height="480" alt="" />
+	</p>
 	<?php
 
 }
