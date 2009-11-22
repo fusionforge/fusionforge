@@ -48,7 +48,18 @@ if (getStringFromRequest('submit') && getStringFromRequest('im_sure')) {
 
 }
 	
-	echo _('<h3>Reporting System Initialization</h3><p>Occasionally, if cronjobs failed or the database was damaged, you may have to rebuild the reporting tables.<p>If you are sure you want to rebuild all the reporting tables, check the "I\'m Sure" box and click the button below.<p>This could take a couple minutes, so DO NOT CLICK MORE THAN ONCE.<p>');
+	echo '<h2>';
+	echo _('Reporting System Initialization');
+	echo '</h2>';
+	echo '<p>';
+	echo _('Occasionally, if cronjobs failed or the database was damaged, you may have to rebuild the reporting tables.');
+	echo '</p>';
+	echo '<p>';
+	echo _('If you are sure you want to rebuild all the reporting tables, check the "I am sure" box and click the button below.');
+	echo '</p>';
+	echo '<p>';
+	echo _('This could take a couple minutes, so DO NOT CLICK MORE THAN ONCE.');
+	echo '</p>';
 ?>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
