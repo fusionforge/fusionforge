@@ -1,27 +1,31 @@
-*************************************************************************
-*  WARNING  *  WARNING  *  WARNING  *  WARNING  *  WARNING  *  WARNING  *
+-----------------
+-- FusionForge --
+-----------------
 
-	This code has no warranty and might contain bugs. Use at 
-	your own risk.  This code might not even install so there
-	is no guarantee. We have released this code primarily for
-	educational purposes and to make it easier for the 
-	community to contribute back to the code. 
-
-*  WARNING  *  WARNING  *  WARNING  *  WARNING  *  WARNING  *  WARNING  *
-*************************************************************************
-
-GForge 3.0 (Fork of SourceForge 2.61 which was only available via anonymous CVS)
-
-GForge is a web-based Collaborative Development Environment offering 
-easy access to CVS, mailing lists, bug tracking, message
-boards/forums, task management, permanent file archival,
-and total web-based administration.
+FusionForge is a web-based Collaborative Development Environment
+offering easy access to CVS, SVN and other versioning systems, mailing
+lists, bug tracking, message boards/forums, task management, and permanent
+file archival. It provides full web-based administration.
 
 All files contained in this archive are licensed as stated in the
 COPYING file.  Please check out the AUTHORS file to see who helped
 make this possible.
 
-Thanks for taking the time to download this code.  If you have any
-questions please feel free to visit http://gforge.org/
+Thanks for taking the time to download this code. You will find
+documentation on how to install, administrate and use FusionForge on
+the project's wiki at 
+    https://fusionforge.org/plugins/mediawiki/index.php?group_id=6
 
-For various documentation have a look in docs dir
+If you have any questions or suggestions, post a message either in the
+forums at
+
+    https://fusionforge.org/forum/?group_id=6
+
+connect to the FusionForge IRC channel #fusionforge on
+irc.freenode.net, e.g. via the web client at
+
+    http://webchat.freenode.net/?channels=fusionforge
+
+or subscribe and post to the mailing list
+
+    fusionforge-general@lists.fusionforge.org

@@ -1,4 +1,5 @@
 #! /bin/sh
+# This script is used by the debian and RPM packages to set up fusionforge.
 
 usage() {
 	echo "$0: [-interact] [-help] [-debug] [-confdir confdir] [-input conffile] [-output conffile] [-httpdconf gforgehttpdconf] [-httpdsecrets gforgehttpdsecrets] [-localinc gforgelocalinc] [-example|-fhs] [-clean] [-noapache] [-dovhost] [-home homepath] [-group grouppath] [-listen80|nolisten80] [-nossl]"
