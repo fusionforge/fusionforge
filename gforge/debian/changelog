@@ -1,3 +1,9 @@
+gforge (4.7.3-2+) UNRELEASED; urgency=low
+
+  * Fix for symlink attack (CVE-2009-3304).
+
+ -- Roland Mas <lolando@debian.org>  Mon, 23 Nov 2009 13:55:41 +0100
+
 gforge (4.7.3-2) unstable; urgency=high
 
   * Fixed SQL injection and possible cross-site scripting vulnerabilities

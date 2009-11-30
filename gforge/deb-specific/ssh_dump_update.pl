@@ -4,7 +4,64 @@
 #
 # ssh_dump.pl - Script to suck data outta the database to be processed by ssh_create.pl
 #
+# Symlink attack fix Copyright (C) 2009 Sylvain Beucler / GPLv2+ / no warranty
 use DBI;
+use English;
+
+## Become this effective user (EUID/EGID) and perform this action.
+## 
+## This protect against symlink attacks; they are inevitable when
+## working in a directory owned by a local user.  We could naively
+## check for the presence of symlinks, but then we'd still be
+## vulnerable to a symlink race attack.
+## 
+## We'll use set_e_uid/set_e_gid for efficiency and simplicity
+## (e.g. we can get the return value directly), which is enough for
+## opening files and similar basic operations.  When calling external
+## programs, you should use fork&exec&setuid/setgid.
+## 
+# arg1: username
+# arg2: a Perl sub{}
+sub SudoEffectiveUser {
+    my $user = $_[0];
+    my $sub_unprivileged = $_[1];
+
+    my ($uid,$gid) = GetUserUidGid($user);
+    if ($uid eq "" or $gid eq "") {
+	print "Unknown user: $user";
+	return;
+    }
+
+    my $old_GID = $GID; # save additional groups
+    $! = '';
+    $EGID = "$gid $gid"; # set egid and additional groups
+    if ($! ne '') {
+	warn "Cannot setegid($gid $gid): $!";
+	return;
+    }
+    $EUID = $uid;
+    if ($! ne '') {
+	warn "Cannot seteuid($uid): $!";
+	return;
+    }
+
+    # Perform the action under this effective user:
+    my $ret = &$sub_unprivileged();
+
+    # Back to root
+    undef($EUID);     # restore euid==uid
+    $EGID = $old_GID; # restore egid==gid + additional groups
+
+    return $ret;
+}
+
+## Get system uid/gid
+sub GetUserUidGid {
+    my $user = $_[0];
+    my ($name,$passwd,$uid,$gid,
+	$quota,$comment,$gcos,$dir,$shell,$expire) = getpwnam($user);
+    return ($uid,$gid);
+}
 
 # Run as gforge
 my($name,$passwd,$uid,$gid,$quota,$comment,$gcos,$dir,$shell) = getpwnam("gforge");
@@ -56,10 +113,12 @@ while ($ln = pop(@ssh_array)) {
 	
 		if($verbose){print("Writing authorized_keys for $username: ")};
 	
-		if (write_array_file("$ssh_dir/authorized_keys", @user_authorized_keys)) {
+		SudoEffectiveUser($username, sub {
+		    if (write_array_file("$ssh_dir/authorized_keys", @user_authorized_keys)) {
                         warn "Problem writing authorized_keys for $username\n";
                         next;
-                }
+		    }
+				  });
 
 		chown $uid, $uid, ("$homedir_prefix/$username", $ssh_dir, "$ssh_dir/authorized_keys");
 		chmod 0644, "$ssh_dir/authorized_keys";
@@ -97,8 +156,12 @@ while ($ln = pop(@ssh_array)) {
 
 	if (-d $ssh_dir) {
 	    if($verbose){print("Resetting authorized_keys for $username: ")};
-	    
-	    unlink("$ssh_dir/authorized_keys");
+
+	    if (-l "$ssh_dir") {
+		warn("$ssh_dir is a symlink, possible symlink attack!");
+	    } else {
+		unlink("$ssh_dir/authorized_keys");
+	    }
 	    system("chown $uid:$uid $homedir_prefix/$username");
 	    system("chown $uid:$uid $ssh_dir");
 
