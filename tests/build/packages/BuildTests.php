@@ -23,8 +23,6 @@ class Packages_Tests extends PHPUnit_Framework_TestCase
 	    $this->assertEquals(0, $retval);
     }
     
-    // @todo: disabled by aljeux until a solution is found.
-    // Currently, a binary change or a symlink change makes the build fail.
     public function testBuildDeb()
     {
 	    $tests = dirname( dirname( dirname( dirname (__FILE__)))); 

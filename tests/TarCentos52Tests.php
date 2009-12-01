@@ -22,16 +22,7 @@ class TarCentos52Tests
 {
 	public static function main()
 	{
-		PHPUnit_TextUI_TestRunner::run(self::suite1());
-		PHPUnit_TextUI_TestRunner::run(self::suite2());
-	}
-
-	public static function suite1()
-	{
-		$suite = new PHPUnit_Framework_TestSuite('PHPUnit');
-
-                // Code tests
-                $suite->addTest(Syntax_AllTests::suite());
+		PHPUnit_TextUI_TestRunner::run(self::suite());
 	}
 
 	public static function suite()
