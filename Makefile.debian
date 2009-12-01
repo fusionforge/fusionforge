@@ -75,31 +75,45 @@ list:
 #
 # Simple targets
 #
+#:======== Debian Builds ============#
 lenny:    # Simply build lenny packages #
 	make cowbuilddeb DEBIANLIST=1lenny
 
-squeeze:    # Simply build squeeze packages #
-	make cowbuilddeb DEBIANLIST=2squeeze
-
-sid:    # Simply build squeeze packages #
-	make cowbuilddeb DEBIANLIST=3sid
-
-rlenny: # Make a lenny repository #
+rlenny:   # Make a lenny repository #
 	make repodeb DEBIANLIST=1lenny
 
-intrepid: # Simply build intrepid packages #
+squeeze:  # Simply build squeeze packages #
+	make cowbuilddeb DEBIANLIST=2squeeze
+
+rsqueeze: # Make a squeeze repository #
+	make repodeb DEBIANLIST=2squeeze
+
+sid:      # Simply build sid packages #
+	make cowbuilddeb DEBIANLIST=3sid
+
+rsid:     # Make a sid repository #
+	make repodeb DEBIANLIST=3sid
+
+#:======== Ubuntu Builds ============#
+intrepid:  # Simply build intrepid packages #
 	make cowbuildubu UBUNTULIST=1intrepid
 
-jaunty: # Simply build jaunty packages #
+rintrepid: # Make an intrepid repository #
+	make repoubu UBUNTULIST=1intrepid
+
+jaunty:    # Simply build jaunty packages #
 	make cowbuildubu UBUNTULIST=1jaunty
 
-karmic: # Simply build karmic packages #
+rjaunty:   # Make a jaunty repository #
+	make repoubu UBUNTULIST=1jaunty
+
+karmic:    # Simply build karmic packages #
 	make cowbuildubu UBUNTULIST=1karmic
 
-rkarmic: # Make a karmic repository #
+rkarmic:   # Make a karmic repository #
 	make repoubu UBUNTULIST=1karmic
 
-
+#:======== Other and Multiple Builds ============#
 documentor_path=/tmp
 documentor_vers=phpdocumentor-1.3.0rc3
 
