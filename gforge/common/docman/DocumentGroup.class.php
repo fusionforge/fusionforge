@@ -237,6 +237,46 @@ class DocumentGroup extends Error {
 	}
 		
 	/**
+	 * delete - delete a DocumentGroup.
+	 *          delete is recursive and permanent
+	 *       TODO : use the delete status as document ?
+	 * @param integer Document Group Id, integer Project Group Id
+	 * @return boolean
+ 	 */
+	function delete($doc_groupid,$project_group_id) {
+		$perm =& $this->Group->getPermission (session_get_user());
+		if (!$perm || !$perm->isDocEditor()) {
+			$this->setPermissionDeniedError();
+			return false;
+		}
+		db_begin();
+		/* delete documents in directory */
+		$result = db_query_params ('DELETE FROM doc_data where doc_group = $1 and group_id = $2',
+					array($doc_groupid,
+						$project_group_id));
+
+		/* delete directory */
+		$result = db_query_params ('DELETE FROM doc_groups where doc_group = $1 and group_id = $2',
+					array($doc_groupid,
+						$project_group_id));
+
+		db_commit();
+		/* is there any subdir ? */
+		$result = db_query_params ('select doc_group from doc_groups where parent_doc_group = $1 and group_id = $2',
+					array($doc_groupid,
+						$project_group_id));
+		/* make a recursive call */
+		while ($arr = db_fetch_array($result)) {
+			$this->delete($arr,$project_group_id);
+		}
+
+		if (!$result) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
 	* hasDocuments - Recursive function that checks if this group or any of it childs has documents associated to it
 	*
 	* A group has associated documents if and only if there are documents associated to this

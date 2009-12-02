@@ -67,7 +67,9 @@ class DocumentGroupHTML extends Error {
 				'<td>'.$margin.html_image('ic/'.$img,"15","13",array("border"=>"0")).' '.
 				'<a href="index.php?editgroup=1&amp;doc_group='.
 					$doc_group->getID().'&amp;group_id='.$doc_group->Group->getID().'">'.
-					$doc_group->getName().'</a></td></tr>';
+					$doc_group->getName().'</a></td>'.
+				'<td><a href="index.php?deletegroup=1&amp;doc_group='.$doc_group->getID().'&amp;group_id='.$doc_group->Group->getID().'">'.
+				'<img src="/images/ic/trash.png"/></a></td></tr>';
 			// Show childs (if any)
 			$this->showTableNestedGroups($group_arr, $rowno, $doc_group->getID(), $level+1);
 		}
