@@ -164,6 +164,7 @@ function session_login_valid_dbonly ($loginname, $passwd, $allowpending) {
 			// There is a user with the provided user_name, but the MD5 passwds do not match
 			// We'll have to try checking the (crypt) unix_pw
 			$usr = db_fetch_array($res);
+			$userstatus = $usr['status'] ;
 
 			if (crypt ($passwd, $usr['unix_pw']) != $usr['unix_pw']) {
 				// Even the (crypt) unix_pw does not patch
