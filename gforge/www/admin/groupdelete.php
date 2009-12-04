@@ -59,7 +59,7 @@ echo '<h2>'._('Permanently and irretrievably delete project').': '.$group->getPu
 <input type="checkbox" value="1" name="reallyreallysure" /> <?php echo _('Confirm Delete'); ?><br />
 
 <input type="submit" name="submit" value="<?php echo _('Permanently Delete'); ?>" />
-</form></p>
+</form>
 
 <?php
 

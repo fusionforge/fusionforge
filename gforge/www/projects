@@ -54,7 +54,7 @@ if (!$group_id || !$project) {
 	} else if ($subpage == "cvs") {
 		header("Location: ".account_group_cvsweb_url($project->getUnixName()));
 		exit();
-	}  else {
+	} else {
 		//show the project summary page
 		include $gfwww.'include/project_home.php';
 	}

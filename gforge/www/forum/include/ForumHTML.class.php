@@ -39,7 +39,7 @@ function forum_header($params) {
 	/*
 		bastardization for news
 		Show icon bar unless it's a news forum
-		*/
+	*/
 	if ($group_id == $sys_news_group) {
 		//this is a news item, not a regular forum
 		if ($forum_id) {
@@ -109,8 +109,8 @@ function forum_header($params) {
 	}
 	if (count($menu_text) > 0) {
 		echo $HTML->subMenu(
-		$menu_text,
-		$menu_links
+			$menu_text,
+			$menu_links
 		);
 	}
 	
@@ -142,7 +142,7 @@ function forum_footer($params) {
 
 /**
 
-Wrap many forum functions in this class
+	Wrap many forum functions in this class
 
 **/
 class ForumHTML extends Error {

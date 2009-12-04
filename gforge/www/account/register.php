@@ -1,6 +1,6 @@
 <?php
 /**
- * Register new acoount page
+ * Register new account page
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  *
