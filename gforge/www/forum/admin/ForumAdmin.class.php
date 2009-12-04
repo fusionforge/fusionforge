@@ -78,7 +78,7 @@ class ForumAdmin extends Error {
 			<p>
 			<a href="index.php?group_id='.$group_id.'&amp;add_forum=1">'._('Add forum').'</a>';
 		echo '
-			| <a href="pending.php?action=view_pending&group_id=' . $group_id . '">' . _('Manage Pending Messages').'</a><br /></p>';
+			| <a href="pending.php?action=view_pending&amp;group_id=' . $group_id . '">' . _('Manage Pending Messages').'</a><br /></p>';
 	}
 	
 	/**
@@ -89,7 +89,7 @@ class ForumAdmin extends Error {
 	
 	function PrintAdminPendingOption($forum_id) {
 		echo '
-			<a href="pending.php?action=view_pending&group_id=' . $this->group_id . '&forum_id=' . $forum_id . '">' . _('Manage Pending Messages').'</a><br /></p>';
+			<a href="pending.php?action=view_pending&amp;group_id=' . $this->group_id . '&amp;forum_id=' . $forum_id . '">' . _('Manage Pending Messages').'</a><br /></p>';
 	}
 	
 	/**
@@ -327,7 +327,7 @@ class ForumAdmin extends Error {
 			</script>
 			<p><form name="pending" action="pending.php" method="post">
 			<input type="hidden" name="action" value="update_pending" />
-			<input type="hidden" name="form_key" value="' . form_generate_key() . '">
+			<input type="hidden" name="form_key" value="' . form_generate_key() . '" />
 			<input type="hidden" name="group_id" value="' . getIntFromRequest("group_id") . '" />
 			<input type="hidden" name="forum_id" value="' . $forum_id . '" />
 
@@ -351,7 +351,7 @@ class ForumAdmin extends Error {
 			}
 
 			$options = array("1" => "No action","2" => "Delete","3" => "Release"); //array with the supported actions
-			//i�ll make a hidden variable, helps to determine when the user updates the info, which action corresponds to which msgID
+			//i'll make a hidden variable, helps to determine when the user updates the info, which action corresponds to which msgID
 			for($i=0;$i<db_numrows($res);$i++) {
 				$ids .= db_result($res,$i,'msg_id') . ",";
 			}
@@ -405,14 +405,14 @@ class ForumAdmin extends Error {
 						if (!db_query_params ('DELETE FROM forum_pending_attachment WHERE msg_id=$1',
 			array ($msgids[$i]))) {
 							$feedback .= "DB Error ";
-							$feedback .= db_error() . "<br>";
+							$feedback .= db_error() . "<br />";
 							db_rollback();
 							break;
 						}
 						if (!db_query_params ('DELETE FROM forum_pending_messages WHERE msg_id=$1',
 			array ($msgids[$i]))) {
 							$feedback .= "DB Error ";
-							$feedback .= db_error() . "<br>";
+							$feedback .= db_error() . "<br />";
 							db_rollback();
 							break;
 						}
@@ -425,13 +425,13 @@ class ForumAdmin extends Error {
 						$res1 = db_query_params ('SELECT * FROM forum_pending_messages WHERE msg_id=$1',
 			array ($msgids[$i]));
 						if (!$res1) {
-							$feedback .= "DB Error " . db_error() . "<br>";
+							$feedback .= "DB Error " . db_error() . "<br />";
 							break;
 						}
 						$res2 = db_query_params ('SELECT * FROM forum_pending_attachment WHERE msg_id=$1',
 			array ($msgids[$i]));
 						if (!$res2) {
-							$feedback .= "DB Error " . db_error() . "<br>";
+							$feedback .= "DB Error " . db_error() . "<br />";
 							break;
 						}
 						$f = new Forum($this->g,$forum_id);
@@ -456,9 +456,9 @@ class ForumAdmin extends Error {
 						$has_followups = db_result($res1,0,"has_followups");
 						$most_recent_date = db_result($res1,0,"most_recent_date");
 						if ($fm->insertreleasedmsg($group_forum_id,$subject, $body,$post_date, $thread_id, $is_followup_to,$posted_by,$has_followups,time())) {
-							$feedback .= "( $subject ) " . _('Pending forum released') . "<br>";
+							$feedback .= "( $subject ) " . _('Pending forum released') . "<br />";
 							if (db_numrows($res2)>0) {
-								//if there�s an attachment
+								//if there's an attachment
 								$am = NEW AttachManager();//object that will handle and insert the attachment into the db
 								$am->SetForumMsg($fm);
 								$userid = db_result($res2,0,"userid");
@@ -472,7 +472,7 @@ class ForumAdmin extends Error {
 								$mimetype = db_result($res2,0,"mimetype");
 								$am->AddToDBOnly($userid, $dateline, $filename, $filedata, $filesize, $visible, $filehash, $mimetype);
 								foreach ($am->Getmessages() as $item) {
-									$feedback .= "$msg_id - " . $item . "<br>";
+									$feedback .= "$msg_id - " . $item . "<br />";
 								}
 							}
 							$deleteok = true;
@@ -482,7 +482,7 @@ class ForumAdmin extends Error {
 							    	//the thread which the message was replying to doesn�t exist any more
 							    	$feedback .= "( " . $subject . " ) " . _('The thread which the message was posted to doesn\'t exist anymore, please delete the message.') . "<br>";
 							    } else {
-									$feedback .= "$msg_id - " . $fm->getErrorMessage() . "<br>";
+									$feedback .= "$msg_id - " . $fm->getErrorMessage() . "<br />";
 							    }
 								$deleteok = false;
 							}
@@ -498,7 +498,7 @@ class ForumAdmin extends Error {
 								if (!db_query_params ('DELETE FROM forum WHERE msg_id=$1',
 										      array ($fm->getID()))) {
 									$feedback .= "DB Error ";
-									$feedback .= db_error() . "<br>";
+									$feedback .= db_error() . "<br />";
 									db_rollback();
 									break;
 								}
@@ -513,14 +513,14 @@ class ForumAdmin extends Error {
 							if (!db_query_params ('DELETE FROM forum_pending_attachment WHERE msg_id=$1',
 			array ($msgids[$i]))) {
 								$feedback .= "DB Error ";
-								$feedback .= db_error() . "<br>";
+								$feedback .= db_error() . "<br />";
 								db_rollback();
 								break;
 							}
 							if (!db_query_params ('DELETE FROM forum_pending_messages WHERE msg_id=$1',
 			array ($msgids[$i]))) {
 								$feedback .= "DB Error ";
-								$feedback .= db_error() . "<br>";
+								$feedback .= db_error() . "<br />";
 								db_rollback();
 								break;
 							}
