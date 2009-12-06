@@ -248,7 +248,7 @@ gforge/plugins/env.inc.php -text
 gforge/plugins/extratabs/README -text
 gforge/plugins/extratabs/bin/db-delete.pl -text
 gforge/plugins/extratabs/bin/db-upgrade.pl -text
-gforge/plugins/extratabs/common/ExtraTabsPlugin.class -text
+gforge/plugins/extratabs/common/ExtraTabsPlugin.class.php -text
 gforge/plugins/extratabs/common/extratabs-init.php -text
 gforge/plugins/extratabs/db/extratabs-init.sql -text
 gforge/plugins/extratabs/www/index.php -text
@@ -3365,6 +3365,7 @@ gforge/www/jscook/ThemeXP/spacer.gif svneol=native#unset
 gforge/www/my/dashboard.php -text
 gforge/www/plugins/cvstracker -text
 gforge/www/plugins/eirc -text
+gforge/www/plugins/extratabs -text
 gforge/www/plugins/fckeditor -text
 gforge/www/plugins/helloworld -text
 gforge/www/plugins/mantis -text

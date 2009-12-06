@@ -48,7 +48,7 @@ class ExtraTabsPlugin extends Plugin {
 				return;
 			if (!$project->isProject())
 				return;
-			$res_tabs = db_query_params ('SELECT tab_name, tab_url FROM plugin_extratabsmain WHERE group_id=$1 ORDER BY index',
+			$res_tabs = db_query_params ('SELECT tab_name, tab_url FROM plugin_extratabs_main WHERE group_id=$1 ORDER BY index',
 						     array ($group_id)) ;
 			while ($row_tab = db_fetch_array($res_tabs)) {
 				$params['DIRS'][] = $row_tab['tab_url'];

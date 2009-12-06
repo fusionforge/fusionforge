@@ -4,14 +4,15 @@
  *
  * Copyright 2005, Raphaël Hertzog
  * Copyright 2006-2009, Roland Mas
+ * Copyright 2009, Alain Peyrat
  */
 
 require_once ('../../../www/env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
-require_once $gfcommon.'/include/FusionForge.class.php';
 
 $group_id = getIntFromRequest ('group_id') ;
+$index = getIntFromRequest ('index') ;
 
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
@@ -23,18 +24,7 @@ if (!$group || !is_object($group)) {
         exit_error('Error',$group->getErrorMessage());
 }
 
-$perm =& $group->getPermission( session_get_user() );
-if (!$perm || !is_object($perm)) {
-        exit_error('Error','Could Not Get Permission');
-} elseif ($perm->isError()) {
-        exit_error('Error',$perm->getErrorMessage());
-}
-
-if (!$perm->isAdmin()) {
-        exit_permission_denied();
-}
-
-db_begin () ;
+db_begin();
 
 // Calculate new index field
 $res = db_query_params ('SELECT COUNT(*) as c FROM plugin_extratabs_main WHERE group_id = $1',
@@ -43,12 +33,11 @@ $row = db_fetch_array($res);
 $newid = $row['c'] + 1;
 
 $selected = 0; // No item selected by default
-$index = getIntFromRequest ('index') ;
 
 // Do work before displaying so that the result is immediately visible
 if (getStringFromRequest ('addtab') != '') {
-	$tab_name = addslashes (getStringFromRequest ('tab_name')) ;
-	$tab_url = addslashes (getStringFromRequest ('tab_url')) ;
+	$tab_name = htmlspecialchars(trim(getStringFromRequest ('tab_name')));
+	$tab_url = htmlspecialchars(trim(getStringFromRequest ('tab_url')));
 	$res = db_query_params ('INSERT INTO plugin_extratabs_main (group_id, index, tab_name, tab_url) VALUES ($1,$2,$3,$4)',
 				array ($group_id,
 				       $newid,
@@ -58,7 +47,6 @@ if (getStringFromRequest ('addtab') != '') {
 		$feedback = sprintf (_('Cannot insert new tab entry: %s'),
 				      db_error());
 	} else {
-		db_commit () ;
 		$feedback = _('Tab added');
 	}
 } elseif (getStringFromRequest ('delete') != '') {
@@ -69,18 +57,14 @@ if (getStringFromRequest ('addtab') != '') {
 		$feedback = sprintf (_('Cannot delete tab entry: %s'),
 				      db_error());
 	} else {
-		$res = db_query_params ('UPDATE plugin_extratabs_main SET index=-(index-1) WHERE group_id=$1 AND index > $2',
+		$res = db_query_params ('UPDATE plugin_extratabs_main SET index=index-1 WHERE group_id=$1 AND index > $2',
 					array ($group_id,
 					       $index)) ;
-		$res = db_query_params ('UPDATE plugin_extratabs_main SET index=-index WHERE group_id=$1 AND index < 0',
-					array ($group_id,
-					       $index)) ;
-		db_commit () ;
 	}
-  } elseif (getStringFromRequest ('up') != '') {
+} elseif (getStringFromRequest ('up') != '') {
 	if ($index > 1) {
 		$previous = $index - 1;
-		$res = db_query_params('UPDATE plugin_extratabs_main SET index = 0 WHERE group_id=$1 AND index=$2',
+		$res = db_query_params('UPDATE plugin_extratabs_main SET index=0 WHERE group_id=$1 AND index=$2',
 				       array ($group_id,
 					      $index)) ;
 		$res = db_query_params('UPDATE plugin_extratabs_main SET index=$1 WHERE group_id=$2 AND index=$3',
@@ -90,15 +74,14 @@ if (getStringFromRequest ('addtab') != '') {
 		$res = db_query_params('UPDATE plugin_extratabs_main SET index=$1 WHERE group_id=$2 AND index=0',
 				       array ($previous,
 					      $group_id)) ;
-		db_commit () ;
 		$selected = $previous;
 	} else {
 	    $selected = $index;
 	}
-    } elseif (getStringFromRequest ('down') != '') {
+} elseif (getStringFromRequest ('down') != '') {
 	if ($index < $newid - 1) {
 		$next = $index + 1;
-		$res = db_query_params('UPDATE plugin_extratabs_main SET index = 0 WHERE group_id=$1 AND index=$2',
+		$res = db_query_params('UPDATE plugin_extratabs_main SET index=0 WHERE group_id=$1 AND index=$2',
 				       array ($group_id,
 					      $index)) ;
 		$res = db_query_params('UPDATE plugin_extratabs_main SET index=$1 WHERE group_id=$2 AND index=$3',
@@ -108,11 +91,15 @@ if (getStringFromRequest ('addtab') != '') {
 		$res = db_query_params('UPDATE plugin_extratabs_main SET index=$1 WHERE group_id=$2 AND index=0',
 				       array ($next,
 					      $group_id)) ;
-		db_commit () ;
 		$selected = $next;
 	} else {
 	    $selected = $index;
 	}
+}
+if (!$res) {
+	db_rollback();
+} else  {
+	db_commit();
 }
 
 $adminheadertitle=sprintf(_('Project Admin: %1$s'), $group->getPublicName() );
@@ -124,12 +111,11 @@ project_admin_header(array('title'=>$adminheadertitle, 'group'=>$group->getID())
 
 <h3><?php echo _('Add new tabs'); ?></h3>
 <p><?php echo _('You can add your own tabs in the menu bar with the form below.') ?></p>
-<p>
+<p />
 
 <form name="new_tab" action="<?php echo util_make_url ('/plugins/extratabs/'); ?>" method="post">
 <input type="hidden" name="group_id" value="<?php echo $group->getID() ?>" />
 <input type="hidden" name="addtab" value="1" />
-<input type="hidden" name="newid" value="<?php echo $newid ?>" />
 	<strong><?php echo _('Name of the tab:') ?></strong>
 <?php echo utils_requiredField(); ?><br/>
 <input type="text" size="15" maxlength="255" name="tab_name" /><br/>
@@ -138,7 +124,7 @@ project_admin_header(array('title'=>$adminheadertitle, 'group'=>$group->getID())
 <input type="text" size="15" name="tab_url" value="http://" /><br/>
 <input type="submit" value="<?php echo _('Add tab') ?>" />
 </form>
-</p>
+<p />
 
 <?php
 	$res = db_query_params ('SELECT * FROM plugin_extratabs_main WHERE group_id=$1 ORDER BY index ASC', array ($group_id)) ;
@@ -152,7 +138,8 @@ if ($nbtabs > 0) {
 <p>
 	<?php echo _('You can move and delete the tabs that you already added. Please note that those extra tabs can only appear on the right of the standard tabs. And you can only move them inside the set of extra tabs.') ;
 
-?></p><p>
+?></p>
+<p />
 <form name="change_tab" action="<?php echo util_make_url ('/plugins/extratabs/'); ?>" method="post">
 <input type="hidden" name="group_id" value="<?php echo $group->getID() ?>" />
 <?php 
@@ -174,7 +161,7 @@ while ($row = db_fetch_array($res)) {
 		  <?php } ?>
 <input type="submit" name="delete" value="<?php echo _('Delete tab') ?>" />
 </form>
-</p>
+<p />
 
 <?php
 	  }
