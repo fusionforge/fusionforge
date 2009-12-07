@@ -465,7 +465,7 @@ class ProjectTask extends Error {
 			WHERE a.group_artifact_id=agl.group_artifact_id
 			AND EXISTS (SELECT artifact_id FROM project_task_artifact 
 				WHERE artifact_id=a.artifact_id
-				AND project_task_id=$1',
+				AND project_task_id=$1)',
 						 array ($this->getID())) ;
 		}
 		return $this->relatedartifacts;
