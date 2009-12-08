@@ -3758,6 +3758,7 @@ tests/unit/AllTests.php -text
 tests/unit/utils/AllTests.php -text
 tests/unit/utils/TextSanitizerTests.php -text
 tests/unit/utils/UtilsTests.php -text
+tools/check_and_update_forum_role_settings.php -text
 tools/export-tracker.tcl -text
 tools/jpgraph_pietest.php -text
 tools/make-mo.sh -text
