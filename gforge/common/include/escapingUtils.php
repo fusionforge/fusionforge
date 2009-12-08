@@ -353,6 +353,23 @@ function unTextareaSpecialchars($string) {
 	return strtr($string, array_flip($htmlTranslationTable));
 }
 
+/**
+ * getFilteredStringFromRequest - get a string from REQUEST
+ *
+ * @param string $key key of the wanted value
+ * @param string $pattern Regular expression of allowed values.
+ * @param string $defaultValue if we can't find the wanted value, it returns the default value
+ * @return string the value or false if not valid.
+ */
+function getFilteredStringFromRequest($string, $pattern, $defaultValue = '') {
+	$value = getStringFromRequest($string, $defaultValue);
+	if (preg_match($pattern, $value)) {
+		return $value;
+	} else {
+		return $defaultValue;
+	}
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
