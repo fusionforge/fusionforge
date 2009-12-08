@@ -183,6 +183,22 @@ class Forum extends Error {
 		}
 		$this->group_forum_id=db_insertid($result,'forum_group_list','group_forum_id');
 		$this->fetchData($this->group_forum_id);
+		
+		// set the permission for the role's group 
+		$roles_group = $this->Group->getRolesId();
+		for ($i=0; $i<sizeof($roles_group); $i++) {
+			$role_setting_res = db_query_params ('INSERT INTO role_setting (role_id,section_name,ref_id,value) VALUES ($1,$2,$3,$4)',
+						array ($roles_group[$i],
+						       'forum',
+						       $this->group_forum_id,
+						       1)) ;
+			if (!$role_setting_res) {
+				db_rollback();
+				$this->setError('Error: Role setting for forum id ' . $this->group_forum_id . ' for groud id ' . $this->Group->getID() . ' ' .db_error());
+				return false;
+			}
+		}
+		
 		if ($create_default_message) {
 			$fm=new ForumMessage($this);
 			// Use the system side default language
@@ -657,6 +673,10 @@ class Forum extends Error {
 		db_query_params ('DELETE FROM forum_group_list WHERE group_forum_id=$1',
 				 array ($this->getID())) ;
 //echo '5'.db_error();
+		//delete forum's role setting
+		db_query_params ('DELETE FROM role_setting WHERE section_name=$1 AND ref_id=$2',
+				 array ('forum',
+				 $this->getID())) ; 
 		db_commit();
 		return true;
 	}

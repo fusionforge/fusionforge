@@ -2415,7 +2415,28 @@ The %1$s admin team will now examine your project submission.  You will be notif
 	}
 
 
-
+	/**
+	 *	getRoles - Get the roles of the group.
+	 *
+	 *	@return	array of Role id of this group.
+	 */
+	function getRolesId () {
+		
+		$rolesId = Array();
+		
+		$roles_group_res = db_query_params ('SELECT role_id FROM role WHERE group_id=$1',
+					array ($this->getID()));
+		if (!$roles_group_res) {
+			$this->setError('Error: Roles from group id '. $this->Group->getID() . ' ' .db_error());
+			return false;
+		} else {
+		for ($i=0; $i<db_numrows($roles_group_res); $i++) {
+				 $rolesId[$i] = db_result($roles_group_res,$i,'role_id');
+			}
+		}
+		
+		return $rolesId;
+	}
 
 }
 
