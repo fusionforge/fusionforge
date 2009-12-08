@@ -10,9 +10,10 @@
 // Attempt to set up the include path, to fix problems with relative includes
 $fusionforge_basedir = dirname(dirname( __FILE__ )) ;
 $include_path = join(PATH_SEPARATOR, 
-	array("/etc/gforge/custom", "/etc/gforge", "$fusionforge_basedir/common", "$fusionforge_basedir/www",
+	array("/etc/gforge/custom", "/etc/gforge", ".", 
+		"$fusionforge_basedir/common", "$fusionforge_basedir/www",
 		"$fusionforge_basedir/plugins", "$fusionforge_basedir",
-		".", "/usr/share/php"));
+		"/usr/share/php"));
 
 // By default, the include_path is changed to include path needed by Gforge.
 // If this does not work, then set defines to real path directly.
