@@ -556,6 +556,7 @@ class Group extends Error {
 			$send_all_docs=0;
 		}
 
+		$homepage = ltrim($homepage);
 		if (!$homepage) {
 			$homepage=$GLOBALS['sys_default_domain'].'/projects/'.$this->getUnixName().'/';
 		}
@@ -696,7 +697,7 @@ class Group extends Error {
 		$allowed_status_changes = array(
 			'AH'=>1,'AD'=>1,'DA'=>1,'PA'=>1,'PD'=>1,
 			'IP'=>1,'HA'=>1,'HD'=>1
-		);			  
+		);
 
 		// Check that status transition is valid
 		if ($this->getStatus() != $status
