@@ -203,7 +203,6 @@ function setup_gettext_from_sys_lang () {
 
 function setup_gettext_from_locale ($locale) {
 	setlocale(LC_ALL, $locale);
-	setlocale (LC_TIME, _('en_US'));
 	
 	if (isset($GLOBALS['sys_gettext_path'])) {
 		bindtextdomain('gforge', $GLOBALS['sys_gettext_path']);
