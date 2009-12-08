@@ -766,10 +766,7 @@ function site_user_header($params) {
  *	@param params array() empty
  */
 function site_user_footer($params) {
-	GLOBAL $HTML;
-
-	echo html_feedback_bottom((isset($GLOBALS['feedback']) ? $GLOBALS['feedback'] : ''));
-	echo $HTML->footer($params);
+	site_footer($params);
 }
 
 /**
