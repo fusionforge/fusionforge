@@ -825,7 +825,7 @@ Or reply to this e-mail entering your response between the following markers:
 		}
 	}
 	
-		/**
+	/**
 	 *	sendAttachNotice - contains the logic to send out email attachement followups when a message is posted.
 	 *
 	 *	@param int	attach_id	- The id of the file that has been attached

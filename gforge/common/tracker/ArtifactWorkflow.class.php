@@ -14,7 +14,7 @@
  * NOTE: Code should be improved to manage any kind of custom fields not only of type
  * 'Status' but maybe also for the 'select' also.
  * 
- * 2008 : Alain Peyrat <alain.peyrat@alcatel-lucent.fr>
+ * 2008 : Alain Peyrat <alain.peyrat@alcatel-lucent.com>
  * 
  * NOTES:
  * @todo: the getAllowedRoles should be replaced by getRealAllowedRoles code. (to be tested).

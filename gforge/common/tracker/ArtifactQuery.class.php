@@ -575,7 +575,7 @@ class ArtifactQuery extends Error {
 	 *  update - update a row in the table used to query names 
 	 *  for a tracker.  
 	 *
-	 *  	@param	int	 Id of the saved query
+	 *  @param	int	 Id of the saved query
 	 *	@param	string	The name of the saved query
 	 *  @return	boolean	success.
 	 */
