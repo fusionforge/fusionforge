@@ -85,7 +85,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 */
 	function writeBody() {
 		if (strlen($this->words) < 3) {
-			echo '<br><h1>'._('Error: Under min length search').'<h1><br>';
+			echo '<br><h1>'._('Error: Under min length search').'</h1><br />';
 		} else {
 			echo $this->getResult();
 		}
