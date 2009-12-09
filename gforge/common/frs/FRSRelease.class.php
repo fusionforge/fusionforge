@@ -168,7 +168,9 @@ class FRSRelease extends Error {
 			return false;
 		} else {
 			$newdirlocation = $GLOBALS['sys_upload_dir'].'/'.$this->FRSPackage->Group->getUnixName().'/'.$this->FRSPackage->getFileName().'/'.$this->getFileName();
-			exec("/bin/mkdir $newdirlocation",$out);
+			if (!is_dir($newdirlocation)) {
+				@mkdir($newdirlocation);
+			}
 			db_commit();
 			return true;
 		}
@@ -303,7 +305,7 @@ notified in the future, please login to %5$s and click this link:
 					      util_make_url ("/frs/?group_id=". $this->FRSPackage->Group->getID() ."&release_id=". $this->getID()),
 					      $GLOBALS['sys_name'],
 					      util_make_url ("/frs/monitor.php?filemodule_id=".$this->FRSPackage->getID()."&group_id=".$this->FRSPackage->Group->getID()."&stop=1")));
-		$text = util_line_wrap($text);
+//		$text = util_line_wrap($text);
 		if (count($arr)) {
 			util_handle_message(array_unique($arr),$subject,$text);
 		}
@@ -371,7 +373,7 @@ notified in the future, please login to %5$s and click this link:
 	}
 
 	/**
-	 *	create - create a new release in the database.
+	 *	update - update a new release in the database.
 	 *
 	 *	@param	int	The status of this release from the frs_status table.
 	 *	@param	string	The name of the release.
@@ -405,7 +407,7 @@ notified in the future, please login to %5$s and click this link:
 						array ($this->FRSPackage->getID(),
 						       htmlspecialchars($name))) ;
 			if (db_numrows($res)) {
-				$this->setError('FRSRelease::create() Error Adding Release: Name Already Exists');
+				$this->setError('FRSRelease::update() Error On Update: Name Already Exists');
 				return false;
 			}
 		}		
