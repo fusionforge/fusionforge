@@ -1601,7 +1601,7 @@ class Group extends Error {
 	/**
 	 *	addUser - controls adding a user to a group.
 	 *  
-	 *      @param	string	Unix name of the user to add OR integer user_id.
+	 *  @param	string	Unix name of the user to add OR integer user_id.
 	 *	@param	int	The role_id this user should have.
 	 *	@return	boolean	success.
 	 *	@access public
@@ -1951,16 +1951,16 @@ class Group extends Error {
 	 *	@access private
 	 */
 	function activateUsers() {
-		
+
 		/*
-		 Activate member(s) of the project
+			Activate member(s) of the project
 		*/
 		
 		$member_res = db_query_params ('SELECT user_id, role_id FROM user_group	WHERE group_id=$1',
 					       array ($this->getID())) ;
 		
 		$rows = db_numrows($member_res);
-		
+
 		if ($rows > 0) {
 
 			for ($i=0; $i<$rows; $i++) {

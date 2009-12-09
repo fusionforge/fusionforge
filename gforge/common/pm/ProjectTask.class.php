@@ -1054,7 +1054,7 @@ class ProjectTask extends Error {
 		$old_assigned = &$this->getAssignedTo();
 		$diff_assigned_array=array_diff($old_assigned, $assigned_arr);
 		if (count($diff_assigned_array)>0) { 
-				for ($tmp=0;$tmp<count($old_assigned);$tmp++) { 
+				for ($tmp=0;$tmp<count($old_assigned);$tmp++) {
 					$this->addHistory('assigned_to_id',$old_assigned[$tmp]);
 				}
 				$has_changes = true;

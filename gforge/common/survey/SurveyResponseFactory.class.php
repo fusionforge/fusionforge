@@ -133,7 +133,7 @@ class SurveyResponseFactory extends Error {
 		$group_id = $group->GetID();
 		$survey = $this->getSurvey();
 		$survey_id = $survey->GetID();
-		$question = $this->getQUestion();
+		$question = $this->getQuestion();
 		$question_id = $question->GetID();
 		
 		$result = db_query_params ('SELECT * FROM survey_responses WHERE survey_id=$1 AND question_id=$2 AND group_id=$3 ORDER BY post_date DESC',

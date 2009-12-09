@@ -426,7 +426,7 @@ class Survey extends Error {
 		} else {
 			$ret = $this->all_question_array;
 		}
-				
+		
 		return $ret;
 	}
 
