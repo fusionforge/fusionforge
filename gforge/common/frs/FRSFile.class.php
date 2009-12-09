@@ -158,17 +158,12 @@ class FRSFile extends Error {
 			$this->FRSRelease->FRSPackage->getFileName().'/'.
 			$this->FRSRelease->getFileName().'/';
 
-		//exec("/bin/mkdir $newfilelocation",$out);
-		//print_r($out);
-		//exec("/bin/mkdir $newfilelocation",$out);
-		//print_r($out);
-		$cmd="/bin/mv $file_location $newfilelocation$name";
-		exec($cmd,$out);
-		//echo $cmd;
-		//print_r($out);
-		if (!file_exists("$newfilelocation$name")) {
-			$this->setError(_('File cannot be moved to the permanent location').': '.$newfilelocation.$name);
-			return false;
+			rename($file_location, $newfilelocation.$name);
+
+			if (!file_exists($newfilelocation.$name)) {
+				$this->setError(_('File cannot be moved to the permanent location').': '.$newfilelocation.$name);
+				return false;
+			}
 		}
 		if (!$release_time) {
 			$release_time=time();
@@ -338,7 +333,8 @@ class FRSFile extends Error {
 			$this->FRSRelease->FRSPackage->getFileName().'/'.
 			$this->FRSRelease->getFileName().'/'.
 			$this->getName();
-		unlink($file);
+			if (file_exists($file))
+				unlink($file);
 		$result = db_query_params ('DELETE FROM frs_file WHERE file_id=$1',
 					   array ($this->getID())) ;
 		if (!$result || db_affected_rows($result) < 1) {
@@ -370,7 +366,7 @@ class FRSFile extends Error {
 			return false;
 		}
 
-		// Sanity checks 
+		// Sanity checks
 		if ( $release_id ) {
 			// Check that the new FRSRelease id exists
 			if ($FRSRelease=frsrelease_get_object($release_id)) {
