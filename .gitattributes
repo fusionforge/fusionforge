@@ -3627,6 +3627,7 @@ tests/func/db_reload.php -text
 tests/unit/AllTests.php -text
 tests/unit/utils/AllTests.php -text
 tests/unit/utils/UtilsTests.php -text
+tools/check_and_update_forum_role_settings.php -text
 tools/export-tracker.tcl -text
 tools/make-mo.sh -text
 tools/rpmdev-setuptree -text
