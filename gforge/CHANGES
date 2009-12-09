@@ -28,6 +28,9 @@ UNRELEASED:
 * Trackers: New system to share a search query. Shared queries can be represented 
   as an URL or bookmarked. It is also possible to define one query as the default
   one (Alcatel-Lucent)
+* Trackers: Custom fields are now preserved (if same name and value) when moving an
+  artifact (Alcatel-Lucent)
+* Trackers: New custom field type: Integer (Alain Peyrat)
 * Version control subsystem: completely rewritten.  New plugins add
   support for Arch, Bazaar, Darcs, Git, Mercurial.
 * Mediawiki plugin: mostly rewritten.  Now creates independent wikis

@@ -5,6 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2002-2004, GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright 2009, Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -22,6 +23,28 @@
  * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
  * USA
+ */
+
+/*
+ * Standard Alcatel-Lucent disclaimer for contributing to open source
+ *
+ * "The Artifact ("Contribution") has not been tested and/or
+ * validated for release as or in products, combinations with products or
+ * other commercial use. Any use of the Contribution is entirely made at
+ * the user's own responsibility and the user can not rely on any features,
+ * functionalities or performances Alcatel-Lucent has attributed to the
+ * Contribution.
+ *
+ * THE CONTRIBUTION BY ALCATEL-LUCENT IS PROVIDED AS IS, WITHOUT WARRANTY
+ * OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, COMPLIANCE,
+ * NON-INTERFERENCE AND/OR INTERWORKING WITH THE SOFTWARE TO WHICH THE
+ * CONTRIBUTION HAS BEEN MADE, TITLE AND NON-INFRINGEMENT. IN NO EVENT SHALL
+ * ALCATEL-LUCENT BE LIABLE FOR ANY DAMAGES OR OTHER LIABLITY, WHETHER IN
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * CONTRIBUTION OR THE USE OR OTHER DEALINGS IN THE CONTRIBUTION, WHETHER
+ * TOGETHER WITH THE SOFTWARE TO WHICH THE CONTRIBUTION RELATES OR ON A STAND
+ * ALONE BASIS."
  */
 
 require_once $gfcommon.'include/Error.class.php';
@@ -684,7 +707,7 @@ class Artifact extends Error {
 	 */
 	function getRelatedTasks() {
 		if (!$this->relatedtasks) {
-			$this->relatedtasks = db_query_params ('SELECT pt.group_project_id,pt.project_task_id,pt.summary,pt.start_date,pt.end_date,pgl.group_id
+			$this->relatedtasks = db_query_params ('SELECT pt.group_project_id,pt.project_task_id,pt.summary,pt.start_date,pt.end_date,pgl.group_id, pt.status_id
 			FROM project_task pt, project_group_list pgl
 			WHERE pt.group_project_id = pgl.group_project_id AND
 			EXISTS (SELECT project_task_id FROM project_task_artifact
@@ -828,14 +851,7 @@ class Artifact extends Error {
 		if ($assigned_to != 100) {
 			$res = $this->ArtifactType->getTechnicians();
 			$arr =& util_result_column_to_array($res,0);
-			$found = false;
-			foreach (array_values($arr) as $r)
-			{
-				if ($r == $assigned_to) {
-					$found = true;
-				}
-			}
-			if (!$found) {
+			if (!in_array($assigned_to, $arr)) {
 				$this->setError("Invalid assigned_to (not member of the project)");
 				return false;
 			}
@@ -871,25 +887,95 @@ class Artifact extends Error {
 				return false;
 			}
 			
-			//
-			//	Now set Assigned to 100 in the new ArtifactType
-			//
-			$status_id=1;
-			$assigned_to='100';
+			// Add a message to explain that the tracker was moved.
+			$message = 'Moved from '.$this->ArtifactType->getName().' to '.$newArtifactType->getName();
+			$this->addHistory('type', $this->ArtifactType->getName());
+			$this->addMessage($message,'',0);
+
+			// Fake change to send a mail when moved.
+			$changes['Type'] = 1;
+
+			// Try to remap extra_fields values when possible.
+			// If there is an extra_field with the same alias
+			// and if the value exist in the new one, then recode
+			// the value to keep it.
+			$new_extra_fields = array();
+			$ef = $this->ArtifactType->getExtraFields();
+			$ef_new = $newArtifactType->getExtraFields();
+			foreach($extra_fields as $extra_id => $value) {
+				$alias = $ef[$extra_id]['alias'];
+				$type  = $ef[$extra_id]['field_type'];
+
+				// Search if there is an extra field with the same alias.
+				$new_id = 0;
+				foreach($ef_new as $id => $arr) {
+					if ($arr['alias'] == $alias) {
+						$new_id = $id;
+					}
+				}
+
+				// If we found one, copy for simple fields or
+				// search if there is the same value.
+				if ($new_id) {
+					if ($type == ARTIFACT_EXTRAFIELDTYPE_TEXT ||
+						$type == ARTIFACT_EXTRAFIELDTYPE_INTEGER ||
+						$type == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA ||
+						$type == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
+						$new_extra_fields[$new_id] = $value;
+					} else {
+						$values = $newArtifactType->getExtraFieldElements($new_id);
+						if (is_array($value)) {
+							foreach($value as $v) {
+								$v = $this->ArtifactType->getElementName($v);
+								foreach($values as $ev) {
+									if ($ev['element_name'] == $v) {
+										$new_extra_fields[$new_id][] = $ev['element_id'];
+									}
+								}
+							}
+						} else {
+							$value = $this->ArtifactType->getElementName($value);
+							foreach($values as $ev) {
+								if ($ev['element_name'] == $value) {
+									$new_extra_fields[$new_id] = $ev['element_id'];
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// Special case if moving to a tracker with custom status (previous has not).
+			$custom_status_id = $newArtifactType->getCustomStatusField();
+			if ($custom_status_id && !$new_extra_fields[$custom_status_id]) {
+				$atw = new ArtifactWorkflow($newArtifactType, $custom_status_id);
+				$nodes = $atw->getNextNodes(100);
+				if ($nodes) {
+					$new_extra_fields[$custom_status_id] = $nodes[0];
+				}
+			}
+			$extra_fields = $new_extra_fields;
+
+			$res=db_query("DELETE FROM artifact_extra_field_data WHERE artifact_id='".$this->getID()."'");
+			if (!$res) {
+				$this->setError('Removal of old artifact_extra_field_data failed: '.db_error());
+				db_rollback();
+				return false;
+			}
+
+			// Check that assigned_to is member of the project.
+			if ($assigned_to != 100) {
+				$res = $newArtifactType->getTechnicians();
+				$arr =& util_result_column_to_array($res,0);
+				if (!in_array($assigned_to, $arr)) {
+					$assigned_to = 100;
+				}
+			}
+
 			//can't send a canned response when changing ArtifactType
 			$canned_response=100;
 			$this->ArtifactType =& $newArtifactType;
 			$update = true;
-
-			//
-			//	This is a major problem - the extra fields
-			//	are completely different IDs, and may not even
-			//	exist in the new tracker. All extra_fields will be deleted and 
-			//	then set to 100 in the new tracker.
-			//
-			$res = db_query_params ('DELETE FROM artifact_extra_field_data WHERE artifact_id=$1',
-						array ($this->getID())) ;
-			$extra_fields=array();
 		}
 		
 		//
@@ -924,12 +1010,12 @@ class Artifact extends Error {
 			$changes['assigned_to'] = 1;
 			$update = true;
 		}
-		if ($summary && ($this->getSummary() != stripslashes($summary))) {
+		if ($summary && ($this->getSummary() != htmlspecialchars(stripslashes($summary)))) {
 			$this->addHistory('summary', $this->getSummary());
 			$changes['summary'] = 1;
 			$update = true;
 		}
- 		if ($description && ($this->getDetails() != stripslashes($description))) {
+ 		if ($description && ($this->getDetails() != htmlspecialchars(stripslashes($description)))) {
  			$this->addHistory('details', $this->getDetails());
  			$changes['details'] = 1;
  			$update = true;
@@ -1014,10 +1100,10 @@ class Artifact extends Error {
 		}
 
 		if ($update || $send_message){
-			/*
-				now send the email
-			*/
-			$this->mailFollowup(2, false, $changes);
+			if (!empty($changes)) {
+				// Send the email with changes
+				$this->mailFollowup(2, false, $changes);
+			}
 			db_commit();
 			return true;
 		} else {
@@ -1099,7 +1185,7 @@ class Artifact extends Error {
 					return false;
 				}
 				else {
-					if (!$extra_fields[$efid]) {
+					if ($extra_fields[$efid] === '') {
 						if ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 							$this->setError('Status Custom Field Must Be Set');
 						}
@@ -1126,7 +1212,7 @@ class Artifact extends Error {
 //	Force each field to have some value if it is a numeric field
 //	text fields will just be purged and skipped
 //
-			if (!array_key_exists($efid, $extra_fields) || !$extra_fields[$efid]) {
+			if (!array_key_exists($efid, $extra_fields) || $extra_fields[$efid] === '') {
 				if (($type == ARTIFACT_EXTRAFIELDTYPE_SELECT) || ($type == ARTIFACT_EXTRAFIELDTYPE_RADIO)) {
 					$extra_fields[$efid]='100';
 				} elseif (($type == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) || ($type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX)) {
@@ -1164,7 +1250,9 @@ class Artifact extends Error {
 					
 					if (!empty($added_values) || !empty($deleted_values))	{	// there are differences...
 						$field_name = $ef[$efid]['field_name'];
-						$changes["extra_fields"][$efid] = 1;
+						if (!preg_match('/^@/', $ef[$efid]['alias'])) {
+							$changes["extra_fields"][$efid] = 1;
+						}
 
 						$this->addHistory($field_name, $this->ArtifactType->getElementName(array_reverse($old_values)));
 
@@ -1180,7 +1268,9 @@ class Artifact extends Error {
 				} else {
 					//element DID change - do a history entry
 					$field_name = $ef[$efid]['field_name'];
-					$changes["extra_fields"][$efid] = 1;
+					if (!preg_match('/^@/', $ef[$efid]['alias'])) {
+						$changes["extra_fields"][$efid] = 1;
+					}
 					$resdel = db_query_params ('DELETE FROM artifact_extra_field_data WHERE	artifact_id=$1 AND extra_field_id=$2',
 								   array ($this->getID(),
 									  $efid)) ;
@@ -1229,11 +1319,25 @@ class Artifact extends Error {
 				}
 				$extra_fields[$efid] = trim($new);
 			}
-			
+
+			// Ensure that only integer are allowed for type ARTIFACT_EXTRAFIELDTYPE_INTEGER
+			if ($type == ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
+				$extra_fields[$efid] = trim($extra_fields[$efid]);
+				if (!preg_match('/^[-+]?(\d+)$/', $extra_fields[$efid])) {
+					$this->setError('Illegal value '.$extra_fields[$efid].' for field '.$ef[$efid]['field_name'].': Only integer is allowed.');
+					return false;
+				}
+				if ($extra_fields[$efid] < -2147483648 || $extra_fields[$efid] > 2147483647) {
+					$this->setError('Illegal value '.$extra_fields[$efid].' for field '.$ef[$efid]['field_name'].': Integer out of range (-2147483648 to +2147483647).');
+					return false;
+				}
+				$extra_fields[$efid] = intval($extra_fields[$efid]);
+			}
+
 			//
 			//	See if anything was even passed for this extra_field_id
 			//
-			if (!$extra_fields[$efid]) {
+			if ($extra_fields[$efid] === '') {
 				//nothing in field to update - text fields may be blank
 			} else {
 				//determine the type of field and whether it should have multiple rows supporting it
@@ -1477,8 +1581,6 @@ class Artifact extends Error {
 			}
 		}
 		
-//		print($body);
-
 		//now remove all duplicates from the email list
 		if (count($emails) > 0) {
 			$BCC=implode(',',array_unique($emails));
@@ -1516,12 +1618,21 @@ class Artifact extends Error {
 				case ARTIFACT_EXTRAFIELDTYPE_TEXT:
 				case ARTIFACT_EXTRAFIELDTYPE_TEXTAREA:
 				case ARTIFACT_EXTRAFIELDTYPE_RELATION:
-					$value = isset($efd[$efid]) ? $efd[$efid]: '';
+				case ARTIFACT_EXTRAFIELDTYPE_INTEGER:
+					if (isset($efd[$efid])) {
+						$value = $efd[$efid];
+					} else {
+						$value = '';
+					}
 					break;
 	
 				// the other types have and ID or an array of IDs associated to them
 				default:
-					$value = $this->ArtifactType->getElementName($efd[$efid]);
+					if (isset($efd[$efid])) {
+						$value = $this->ArtifactType->getElementName($efd[$efid]);
+					} else {
+						$value = 'None';
+					}
 			}
 			
 			$return[$efid] = array("name" => $name, "value" => $value, 'type' => $type);

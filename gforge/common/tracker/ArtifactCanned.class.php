@@ -191,10 +191,6 @@ class ArtifactCanned extends Error {
 			return false;
 		}   
 
-		$sql="UPDATE artifact_canned_responses 
-			SET title='". htmlspecialchars($title) ."',body='". htmlspecialchars($body) ."'
-			WHERE group_artifact_id='". $this->ArtifactType->getID() ."' AND id='". $this->getID() ."'";
-
 		$result = db_query_params ('UPDATE artifact_canned_responses
 			SET title=$1,body=$2,
 			WHERE group_artifact_id=$3 AND id=$4',

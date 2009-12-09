@@ -4,6 +4,7 @@
  *
  * Copyright 2004, Anthony J. Pugliese
  * Copyright 2009, Roland Mas
+ * Copyright 2009, Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -21,6 +22,28 @@
  * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
  * USA
+ */
+
+/*
+ * Standard Alcatel-Lucent disclaimer for contributing to open source
+ *
+ * "The Artifact ("Contribution") has not been tested and/or
+ * validated for release as or in products, combinations with products or
+ * other commercial use. Any use of the Contribution is entirely made at
+ * the user's own responsibility and the user can not rely on any features,
+ * functionalities or performances Alcatel-Lucent has attributed to the
+ * Contribution.
+ *
+ * THE CONTRIBUTION BY ALCATEL-LUCENT IS PROVIDED AS IS, WITHOUT WARRANTY
+ * OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, COMPLIANCE,
+ * NON-INTERFERENCE AND/OR INTERWORKING WITH THE SOFTWARE TO WHICH THE
+ * CONTRIBUTION HAS BEEN MADE, TITLE AND NON-INFRINGEMENT. IN NO EVENT SHALL
+ * ALCATEL-LUCENT BE LIABLE FOR ANY DAMAGES OR OTHER LIABLITY, WHETHER IN
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * CONTRIBUTION OR THE USE OR OTHER DEALINGS IN THE CONTRIBUTION, WHETHER
+ * TOGETHER WITH THE SOFTWARE TO WHICH THE CONTRIBUTION RELATES OR ON A STAND
+ * ALONE BASIS."
  */
 
 require_once $gfcommon.'include/Error.class.php';
@@ -228,13 +251,14 @@ class ArtifactExtraFieldElement extends Error {
 			$this->setMissingParamsError();
 			return false;
 		}
-		$res = db_query_params ('SELECT element_name FROM artifact_extra_field_elements WHERE element_name=$1 AND extra_field_id=$2',
+		$res = db_query_params ('SELECT element_name FROM artifact_extra_field_elements WHERE element_name=$1 AND extra_field_id=$2 AND element_id != $3',
 					array ($name,
-					       $this->ArtifactExtraField->getID())) ;
+					       $this->ArtifactExtraField->getID(),
+					       $this->getID())) ;
 		if (db_numrows($res) > 0) {
 			$this->setError(_('Element name already exists'));
 			return false;
-		}   
+		}
 		if ($status_id) {
 			if ($status_id==1) {
 			} else {
@@ -249,6 +273,39 @@ class ArtifactExtraFieldElement extends Error {
 					   array (htmlspecialchars($name),
 						  $status_id,
 						  $this->getID())) ;
+		if ($result && db_affected_rows($result) > 0) {
+			return true;
+		} else {
+			$this->setError(db_error());
+			return false;
+		}
+	}
+
+	/**
+	 *  delete - delete the current value.
+	 *
+	 *  @return	boolean	success.
+	 */
+	function delete() {
+		if (!$this->ArtifactExtraField->ArtifactType->userIsAdmin()) {
+			$this->setPermissionDeniedError();
+			return false;
+		}
+		$sql = "SELECT element_id FROM artifact_extra_field_elements WHERE element_id=".$this->getID();
+		$res = db_query($sql);
+		if (db_numrows($res) != 1) {
+			$this->setError('ArtifactExtraField: Invalid ArtifactExtraFieldElement ID');
+			return false;
+		}
+
+		// Reset all artifacts to 100 before removing the value.
+		$ef=$this->getArtifactExtraField();
+		$sql = "UPDATE artifact_extra_field_data SET field_data=100 WHERE field_data=".$this->getID().
+			" AND extra_field_id=".$ef->getID();
+		db_query($sql);
+
+		$sql="DELETE FROM artifact_extra_field_elements WHERE element_id='".$this->getID()."'";
+		$result=db_query($sql);
 		if ($result && db_affected_rows($result) > 0) {
 			return true;
 		} else {

@@ -1118,7 +1118,6 @@ class ArtifactType extends Error {
 						 $this->getID(),
 						 $this->Group->getID())) ;
 
-		($sql);
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError('ArtifactType::Update(): '.db_error());
 			return false;

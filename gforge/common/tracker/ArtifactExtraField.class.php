@@ -35,6 +35,7 @@ define('ARTIFACT_EXTRAFIELDTYPE_TEXTAREA',6);
 define('ARTIFACT_EXTRAFIELDTYPE_STATUS',7);
 //define('ARTIFACT_EXTRAFIELDTYPE_ASSIGNEE',8);
 define('ARTIFACT_EXTRAFIELDTYPE_RELATION',9);
+define('ARTIFACT_EXTRAFIELDTYPE_INTEGER',10);
 
 class ArtifactExtraField extends Error {
 
@@ -125,7 +126,7 @@ class ArtifactExtraField extends Error {
 			$this->setError(_('Field name already exists'));
 			return false;
 		}
-		if ($field_type == ARTIFACT_EXTRAFIELDTYPE_TEXT) {
+		if ($field_type == ARTIFACT_EXTRAFIELDTYPE_TEXT || $field_type == ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
 			if (!$attribute1 || !$attribute2 || $attribute2 < $attribute1) {
 				$this->setError("Invalid size/maxlength for text field");
 				return false;
@@ -325,8 +326,9 @@ class ArtifactExtraField extends Error {
 			5=>_('Multi-Select Box'),
 			6=>_('Text Area'),
 			7=>_('Status'),
-			9=>_('Relation')
-		);
+			9=>_('Relation'),
+			10=>_('Integer')
+			);
 	}
 	
 	/**

@@ -5,6 +5,7 @@
  * Copyright 2005, Anthony J. Pugliese
  * Copyright 2005, GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright 2009, Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -22,6 +23,28 @@
  * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
  * USA
+ */
+
+/*
+ * Standard Alcatel-Lucent disclaimer for contributing to open source
+ *
+ * "The Artifact ("Contribution") has not been tested and/or
+ * validated for release as or in products, combinations with products or
+ * other commercial use. Any use of the Contribution is entirely made at
+ * the user's own responsibility and the user can not rely on any features,
+ * functionalities or performances Alcatel-Lucent has attributed to the
+ * Contribution.
+ *
+ * THE CONTRIBUTION BY ALCATEL-LUCENT IS PROVIDED AS IS, WITHOUT WARRANTY
+ * OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, COMPLIANCE,
+ * NON-INTERFERENCE AND/OR INTERWORKING WITH THE SOFTWARE TO WHICH THE
+ * CONTRIBUTION HAS BEEN MADE, TITLE AND NON-INFRINGEMENT. IN NO EVENT SHALL
+ * ALCATEL-LUCENT BE LIABLE FOR ANY DAMAGES OR OTHER LIABLITY, WHETHER IN
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * CONTRIBUTION OR THE USE OR OTHER DEALINGS IN THE CONTRIBUTION, WHETHER
+ * TOGETHER WITH THE SOFTWARE TO WHICH THE CONTRIBUTION RELATES OR ON A STAND
+ * ALONE BASIS."
  */
 
 require_once $gfcommon.'include/Error.class.php';
@@ -388,6 +411,16 @@ class ArtifactQuery extends Error {
 				}
 				$vals[$i]=implode(',',$vals[$i]);
 			}
+
+			$aef = new ArtifactExtraField($this->ArtifactType, $keys[$i]);
+			$type = $aef->getType();
+			if ($type == ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
+				if (!preg_match('/^[><= \-\+0-9%]+$/', $vals[$i])) {
+					$this->setError('Invalid Value for Integer type: '. stripslashes($vals[$i]));
+					return false;
+				}
+			}
+
 			$res = db_query_params ('INSERT INTO artifact_query_fields
 			(artifact_query_id,query_field_type,query_field_id,query_field_values)
 			VALUES ($1,$2,$3,$4)',
@@ -437,6 +470,15 @@ class ArtifactQuery extends Error {
 	 */
 	function getQueryType() {
 		return $this->data_array['query_type'];
+	}
+
+	/**
+	 *	getQueryOptions - get the options of the query
+	 *
+	 *	@return	array	array of all activated options
+	 */
+	function getQueryOptions() {
+		return explode('|', $this->data_array['query_options']);
 	}
 
 	/**
