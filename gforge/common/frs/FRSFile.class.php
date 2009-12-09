@@ -158,12 +158,11 @@ class FRSFile extends Error {
 			$this->FRSRelease->FRSPackage->getFileName().'/'.
 			$this->FRSRelease->getFileName().'/';
 
-			rename($file_location, $newfilelocation.$name);
+		rename($file_location, $newfilelocation.$name);
 
-			if (!file_exists($newfilelocation.$name)) {
-				$this->setError(_('File cannot be moved to the permanent location').': '.$newfilelocation.$name);
-				return false;
-			}
+		if (!file_exists($newfilelocation.$name)) {
+			$this->setError(_('File cannot be moved to the permanent location').': '.$newfilelocation.$name);
+			return false;
 		}
 		if (!$release_time) {
 			$release_time=time();
