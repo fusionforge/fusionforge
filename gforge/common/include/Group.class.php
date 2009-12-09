@@ -2437,6 +2437,61 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		
 		return $rolesId;
 	}
+	
+	/**
+	 *	getUnixStatus - Status of activation of unix account.
+	 *
+	 *	@return	char	(N)one, (A)ctive, (S)uspended or (D)eleted
+	 */
+	function getUnixStatus() {
+		return $this->data_array['unix_status'];
+	}
+	
+	/**
+	 *	setUnixStatus - Sets status of activation of unix account.
+	 *
+	 *	@param	string	The unix status.
+	 *	N	no_unix_account
+	 *	A	active
+	 *	S	suspended
+	 *	D	deleted
+	 *
+	 *	@return	boolean success.
+	 */
+	function setUnixStatus($status) {
+		global $SYS;
+		db_begin();
+		$res = db_query_params ('UPDATE groups SET unix_status=$1 WHERE group_id=$2',
+					array ($status,
+					       $this->getID())) ;
+	
+		if (!$res) {
+			$this->setError(sprintf(_('ERROR - Could Not Update Group Unix Status: %s'),db_error()));
+			db_rollback();
+			return false;
+		} else {
+			if ($status == 'A') {
+				if (!$SYS->sysCheckCreateGroup($this->getID())) {
+					$this->setError($SYS->getErrorMessage());
+					db_rollback();
+					return false;
+				}
+			} else {
+				if ($SYS->sysCheckGroup($this->getID())) {
+					if (!$SYS->sysRemoveGroup($this->getID())) {
+						$this->setError($SYS->getErrorMessage());
+						db_rollback();
+						return false;
+					}
+				}
+			}
+			
+			$this->data_array['unix_status']=$status;
+			db_commit();
+			return true;
+		}
+	}
+	
 
 }
 
@@ -2488,59 +2543,6 @@ function &group_get_result($group_id=0) {
 	}
 }
 
-/**
- *	getUnixStatus - Status of activation of unix account.
- *
- *	@return	char	(N)one, (A)ctive, (S)uspended or (D)eleted
- */
-function getUnixStatus() {
-	return $this->data_array['unix_status'];
-}
-
-/**
- *	setUnixStatus - Sets status of activation of unix account.
- *
- *	@param	string	The unix status.
- *	N	no_unix_account
- *	A	active
- *	S	suspended
- *	D	deleted
- *
- *	@return	boolean success.
- */
-function setUnixStatus($status) {
-	global $SYS;
-	db_begin();
-	$res = db_query_params ('UPDATE groups SET unix_status=$1 WHERE group_id=$2',
-				array ($status,
-				       $this->getID())) ;
-
-	if (!$res) {
-		$this->setError(sprintf(_('ERROR - Could Not Update Group Unix Status: %s'),db_error()));
-		db_rollback();
-		return false;
-	} else {
-		if ($status == 'A') {
-			if (!$SYS->sysCheckCreateGroup($this->getID())) {
-				$this->setError($SYS->getErrorMessage());
-				db_rollback();
-				return false;
-			}
-		} else {
-			if ($SYS->sysCheckGroup($this->getID())) {
-				if (!$SYS->sysRemoveGroup($this->getID())) {
-					$this->setError($SYS->getErrorMessage());
-					db_rollback();
-					return false;
-				}
-			}
-		}
-		
-		$this->data_array['unix_status']=$status;
-		db_commit();
-		return true;
-	}
-}
 
 // Local Variables:
 // mode: php
