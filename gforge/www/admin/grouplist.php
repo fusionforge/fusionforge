@@ -55,12 +55,12 @@ GROUP BY group_name,register_time,unix_group_name,groups.group_id,is_public,stat
 					       'P',
 					       $form_pending ? 1 : 0)) ;
 	} else {
-		$res = db_query("SELECT group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name, COUNT(user_group.group_id) AS members "
-			. "FROM groups LEFT JOIN user_group ON user_group.group_id=groups.group_id, licenses "
-			. "WHERE license_id=license "
-			. ($status?"AND status='$status' ":"")
-			. "GROUP BY group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name "
-			. "ORDER BY $sortorder");
+		$qpa = db_construct_qpa (false, 'SELECT group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name, COUNT(user_group.group_id) AS members FROM groups LEFT JOIN user_group ON user_group.group_id=groups.group_id, licenses WHERE license_id=license') ;
+		if ($status) {
+			$qpa = db_construct_qpa ($qpa, ' AND status=$1', array ($status)) ;
+		}
+		$qpa = db_construct_qpa ($qpa, ' GROUP BY group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name ORDER BY '.$sortorder) ;
+		$res = db_query_qpa ($qpa) ;
 	}
 } else {
 	echo "<p>"._('Group List for Category:').' ';
@@ -132,5 +132,10 @@ while ($grp = db_fetch_array($res)) {
 echo $HTML->listTableBottom();
 
 site_admin_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

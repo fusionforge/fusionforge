@@ -76,14 +76,19 @@ function admin_table_postadd($table, $unit, $primary_key) {
 	
 	$field_list = getStringFromRequest('__fields__');
 	$fields = split(",", $field_list);
-	$values = array();
+	$values = array(); $v = array ();
+	$qpa = db_construct_qpa (false, 'INSERT INTO ' . $table . ' (' . $field_list . ') VALUES (') ;
+	
+	$i = 1 ;
 	foreach ($fields as $field) {
-		$values[] = "'".getStringFromPost($field)."'";
+		$v[] = '$'.$i;
+		$i++ ;
+		$values[] = getStringFromPost($field);
 	}
 
-	$sql = "INSERT INTO $table (".$field_list.") VALUES (".implode(",", $values).")";
+	$qpa = db_construct_qpa ($qpa, implode (',', $v), $values) ;
 
-	if (db_query($sql)) {
+	if (db_query_qpa($qpa)) {
 		printf(_('%1$s successfully added.'), ucfirst(getUnitLabel($unit)));
 	} else {
 		form_release_key(getStringFromRequest('form_key'));
@@ -216,20 +221,52 @@ function admin_table_edit($table, $unit, $primary_key, $id) {
 function admin_table_postedit($table, $unit, $primary_key, $id) {
 	global $HTTP_POST_VARS;
 
-	$sql = 'UPDATE '.$table.' SET ';
+	$qpa = db_construct_qpa (false, 'UPDATE ' . $table . ' SET ') ;
+	
+	$i = 0 ;
 	while (list($var, $val) = each($HTTP_POST_VARS)) {
+		if ($i > 0) {
+			$qpa = db_construct_qpa ($qpa, ', ') ;
+		}
+		$i++ ;
 		if ($var != $primary_key) {
-			$sql .= "$var='". htmlspecialchars($val) ."', ";
+			$qpa = db_construct_qpa ($qpa, "$var=$1", array ($val)) ;
 		}
 	}
-	$sql = ereg_replace(', $', ' ', $sql);
-	$sql .= "WHERE $primary_key=$id";
+	$qpa = db_construct_qpa ($qpa, 'WHERE '.$primary_key.'=$1',
+				 array ($id)) ;
 
-	if (db_query($sql)) {
+	if (db_query_qpa($qpa)) {
 		printf(_('%1$s successfully modified.'), ucfirst(getUnitLabel($unit)));
 	} else {
 		echo db_error();
 	}
+
+
+
+
+
+	$field_list = getStringFromRequest('__fields__');
+	$fields = split(",", $field_list);
+	$values = array(); $v = array ();
+	$qpa = db_construct_qpa (false, 'INSERT INTO ' . $table . ' (' . $field_list . ') VALUES (') ;
+	
+	$i = 1 ;
+	foreach ($fields as $field) {
+		$v[] = '$'.$i;
+		$i++ ;
+		$values[] = getStringFromPost($field);
+	}
+
+	$qpa = db_construct_qpa ($qpa, implode (',', $v), $values) ;
+
+	if (db_query_qpa($qpa)) {
+		printf(_('%1$s successfully added.'), ucfirst(getUnitLabel($unit)));
+	} else {
+		form_release_key(getStringFromRequest('form_key'));
+		echo db_error();
+	}
+
 }
 
 /**
