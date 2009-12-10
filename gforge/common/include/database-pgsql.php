@@ -471,7 +471,7 @@ function db_string_array_to_any_clause ($arr) {
 }
 
 function db_construct_qpa ($old_qpa = false, $new_sql = '', $new_params = array ()) {
-	if (!is_array($old_qpa), count ($old_qpa) < 3) {
+	if (!is_array($old_qpa) || count ($old_qpa) < 3) {
 		$old_qpa = array ('', array(), 0) ;
 	}
 	$old_sql = $old_qpa[0] ;
@@ -483,10 +483,14 @@ function db_construct_qpa ($old_qpa = false, $new_sql = '', $new_params = array 
 	$max = $old_max ;
 
 	foreach ($new_params as $index => $value) {
-		$sql = strreplace ($new_sql, '$'.$index, '$'.($index + $old_max)) ;
+		$i = count ($new_params) - $index ;
+		$new_sql = preg_replace ('/\\$'.$i.'(?!\d)/', '$_'.($i + $old_max), $new_sql) ;
 		$params[] = $value ;
 		$max++ ;
 	}
+	$new_sql = str_replace ('$_', '$', $new_sql) ;
+
+	$sql .= $new_sql ;
 	
 	return array ($sql, $params, $max) ;
 }

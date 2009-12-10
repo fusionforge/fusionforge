@@ -2,6 +2,7 @@
 
 require_once 'PHPUnit/Framework.php';
 require_once dirname(__FILE__).'/UtilsTests.php';
+require_once dirname(__FILE__).'/DbUtilsTests.php';
 require_once dirname(__FILE__).'/TextSanitizerTests.php';
  
 class Utils_AllTests
@@ -12,6 +13,7 @@ class Utils_AllTests
  
         $suite->addTestSuite('Utils_Tests');
         $suite->addTestSuite('TextSanitizerTests');
+        $suite->addTestSuite('Database_Utils_Tests');
  
         return $suite;
     }
