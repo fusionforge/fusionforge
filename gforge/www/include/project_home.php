@@ -157,7 +157,9 @@ if (db_numrows($res_admin) > 0) {
 
 ?>
 
-<p><?php echo util_make_link ('/project/memberlist.php?group_id='.$group_id,'['._('View Members').']'); ?></p>
+<p><?php 
+	$members = $project->getUsers();
+	echo util_make_link ('/project/memberlist.php?group_id='.$group_id,'['.sprintf(_('View the %1$d Member(s)'),count($members)).']'); ?></p>
 
 <?php
 

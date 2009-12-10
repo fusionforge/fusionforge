@@ -2427,7 +2427,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		$roles_group_res = db_query_params ('SELECT role_id FROM role WHERE group_id=$1',
 					array ($this->getID()));
 		if (!$roles_group_res) {
-			$this->setError('Error: Roles from group id '. $this->Group->getID() . ' ' .db_error());
+			$this->setError('Error: Roles from group id '. $this->getID() . ' ' .db_error());
 			return false;
 		} else {
 		for ($i=0; $i<db_numrows($roles_group_res); $i++) {
@@ -2492,6 +2492,28 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		}
 	}
 	
+	/**
+	 *	getUsers - Get the users of a group
+	 *
+	 *	@return array of user's objects.
+	 */
+	function getUsers() {
+		$users = Array();
+		
+		$users_group_res = db_query_params ('SELECT u.user_id FROM users u, user_group ug WHERE ug.group_id=$1 AND ug.user_id=u.user_id AND u.status=$2',
+					array ($this->getID(),
+					'A'));
+		if (!$users_group_res) {
+			$this->setError('Error: Enable to get users from group '. $this->getID() . ' ' .db_error());
+			return false;
+		}
+		
+		for ($i=0; $i<db_numrows($users_group_res); $i++) {
+			$users[$i] = new GFUser(db_result($users_group_res,$i,'user_id'),false);
+		}
+		
+		return $users;
+	}
 
 }
 
