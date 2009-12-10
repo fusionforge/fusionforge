@@ -39,12 +39,11 @@ require_once $gfwww.'include/pre.php';
 $otherfreeknowledge = getIntFromRequest('otherfreeknowledge') ;
 $gwords = getStringFromRequest('gwords');
 $order = getStringFromRequest('order', 'rank');
-if (($order != 'rank')
-    && ($order != 'project_title')
-    && ($order != 'project_description')
-    && ($order != 'title')) {
-	$order = $rank ;
-}
+util_ensure_value_in_set ($order, 
+			  array ('rank',
+				 'project_title',
+				 'project_description',
+				 'title')) ;
 $offset = getIntFromRequest('offset');
 $gexact = getStringFromRequest('gexact');
 
@@ -95,12 +94,6 @@ if (!$gwords) {
 
 $no_rows = 0;
 
-if ($gexact) {
-        $crit='AND';
-} else {
-        $crit='OR';
-}
-
 if (!$offset || $offset < 0) {
         $offset = 0;
 }
@@ -109,28 +102,51 @@ if (!$offset || $offset < 0) {
         Query to find projects
 */
 
-// XXX:SQL: this assumes db understands backslash-quoting
+$array = explode(" ",$gwords);
 
-$array=explode(" ",quotemeta($gwords));
-// we need to use double-backslashes in SQL
-$array_re=explode(" ",addslashes(quotemeta($gwords)));
+$qpa = db_construct_qpa (false, 'SELECT project_title, project_link, project_description, title, link FROM plugin_globalsearch_assoc_site_project, plugin_globalsearch_assoc_site WHERE plugin_globalsearch_assoc_site_project.assoc_site_id = plugin_globalsearch_assoc_site.assoc_site_id AND enabled = $1 AND status_id = 2',
+			 array ('t')) ;
 
-$gwords1="lower(project_title) LIKE '%" . implode(array_map ('strtolower', $array),
-						  "%' $crit lower(project_title) LIKE '%") ."%'";
-$gwords2="lower(project_description) LIKE '%" . implode(array_map ('strtolower', $array),
-							"%' $crit lower(project_description) LIKE '%") . "%'";
+if ($otherfreeknowledge) {
+        $qpa = db_construct_qpa ($qpa, ' AND onlysw = $1', array ('f')) ;
+}
 
-$sql = "SELECT project_title, project_link, project_description, title, link 
-FROM plugin_globalsearch_assoc_site_project, plugin_globalsearch_assoc_site 
-WHERE plugin_globalsearch_assoc_site_project.assoc_site_id = plugin_globalsearch_assoc_site.assoc_site_id 
-AND enabled = 't' AND status_id = 2 "
-        .$onlysw
-        ."AND (($gwords1) OR ($gwords2)) 
-ORDER BY ".$order;
+$qpa = db_construct_qpa ($qpa, ' AND ((') ;
+
+$i = 0 ;
+foreach ($array as $val) {
+	if ($i > 0) {
+		if ($gexact) {
+			$qpa = db_construct_qpa ($qpa, ' AND ') ;
+		} else {
+			$qpa = db_construct_qpa ($qpa, ' OR ') ;
+		}
+	}
+	$i++ ;
+	
+	$qpa = db_construct_qpa ($qpa, 'lower(project_title) LIKE $1', array ("%$val%")) ;
+}
+
+$qpa = db_construct_qpa ($qpa, ') OR (') ;
+
+$i = 0 ;
+foreach ($array as $val) {
+	if ($i > 0) {
+		if ($gexact) {
+			$qpa = db_construct_qpa ($qpa, ' AND ') ;
+		} else {
+			$qpa = db_construct_qpa ($qpa, ' OR ') ;
+		}
+	}
+	$i++ ;
+	
+	$qpa = db_construct_qpa ($qpa, 'lower(project_description) LIKE $1', array ("%$val%")) ;
+}
+$qpa = db_construct_qpa ($qpa, ')) ORDER BY '.$order) ;
 
 $limit=25;
 
-$result = db_query($sql, $limit+1, $offset, SYS_DB_SEARCH);
+$result = db_query_qpa ($qpa, $limit+1, $offset, SYS_DB_SEARCH);
 $rows = $rows_returned = db_numrows($result);
 
 if (!$result || $rows < 1) {
