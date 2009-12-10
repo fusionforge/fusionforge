@@ -220,8 +220,6 @@ class TroveCategory extends Error {
 		$this->filter = $filterArray;
 	}
 
-	}
-	
 	function getProjects($offset) {
 		$qpa = db_constract_qpa () ;
 		$qpa = db_construct_qpa ($qpa, 'SELECT * FROM trove_agg') ;

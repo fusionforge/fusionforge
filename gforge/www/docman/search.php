@@ -109,7 +109,7 @@ if (getStringFromPost('cmd') == "search")
 			{
 				$mot = strtolower($mot); 
 				$qpa = db_construct_qpa ($qpa, ' OR title LIKE $1 OR description LIKE $1 OR data_words LIKE $1',
-							 array ("%$mot%") ;
+							 array ("%$mot%")) ;
 			}
 			$qpa = db_construct_qpa ($qpa, ')') ;
 		}
