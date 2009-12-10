@@ -81,7 +81,7 @@ for ($g=0; $g<db_numrows($groups_res); $g++) {
 				return false;
 			}
 			// check if it exists a conf for each role
-			if (db_numrows($role_settings_res) == 0){
+			if (db_numrows($role_setting_res) == 0){
 				//add the role setting corresponding
 				$result = db_query_params('INSERT INTO role_setting (role_id,section_name,ref_id,value) VALUES ($1,$2,$3,$4)',
 							  array (db_result($roles_group_res,$r,'role_id'),
