@@ -35,24 +35,31 @@ snippet_header(array('title'=>_('Snippet Library'), 'header'=>''));
 
 $by = getStringFromRequest('by');
 
+$qpa = db_construct_qpa (false, 'SELECT users.realname,users.user_name,snippet.description,snippet.snippet_id,snippet.name FROM snippet,users WHERE users.user_id=snippet.created_by') ;
+$qpa2 = db_construct_qpa (false, 'SELECT users.realname,users.user_name,users.user_id,snippet_package.description,snippet_package.snippet_package_id,snippet_package.name FROM snippet_package,users WHERE users.user_id=snippet_package.created_by') ;
+
 if ($by=='lang') {
 	$lang = getStringFromRequest('lang');
-	$sql=createSnippetQuery("snippet.language='$lang'");
-	$sql2=createPackageQuery("snippet_package.language='$lang'");
+
+	$qpa = db_construct_qpa ($qpa, 'AND language=$1', array ($lang)) ;
+	$qpa2 = db_construct_qpa ($qpa2, 'AND snippet_package.language=$1', array ($lang)) ;
+
 	echo '<h2>' .sprintf(_('Snippets by language: %1$s'), $SCRIPT_LANGUAGE[$lang]).'</h2>';
 } else if ($by=='cat') {
 	$cat = getStringFromRequest('cat');
-	$sql=createSnippetQuery("snippet.category='$cat'");
-	$sql2=createPackageQuery("snippet_package.category='$cat'");
+
+	$qpa = db_construct_qpa ($qpa, 'AND snippet.category=$1', array ($cat)) ;
+	$qpa2 = db_construct_qpa ($qpa2, 'AND snippet_package.category=$1', array ($cat)) ;
+
 	echo '<h2>' .sprintf(_('Snippets by category: %1$s'), $SCRIPT_CATEGORY[$cat]).'</h2>';
 } else {
 	exit_error(_('Error'),_('Error - bad url?'));
 }
 
-$result=db_query($sql);
+$result = db_query_qpa ($qpa) ;
 $rows=db_numrows($result);
 
-$result2=db_query($sql2);
+$result2 = db_query_qpa ($qpa2) ;
 $rows2=db_numrows($result2);
 
 if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {

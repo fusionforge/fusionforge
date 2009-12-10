@@ -15,12 +15,12 @@ require_once $gfwww.'snippet/snippet_utils.php';
 /**
  * create_snippet_hash() - A little utility function to reduce duplicated code in snippet_mainpage()
  * 
- * @param	sql	String	A SQL query to fetch either snippets or categories from the database
+ * @param	qpa	Array	A query+parameter array
  * @param	field	String	The field name - either 'language' or 'category'
  * @return An associative array filled with the results of the SQL query
  */
-function create_snippet_hash($sql, $field) {
-	$res = db_query($sql);
+function create_snippet_hash($qpa, $field) {
+	$res = db_query_qpa($qpa);
 	$target = array();
 	while ($row = db_fetch_array($res)) {
 		$target[$row[$field]] = $row['count'];
@@ -43,7 +43,8 @@ function snippet_mainpage() {
 	<strong>'._('Browse by Language').':</strong>
 	<ul>';
 
-	$existing_snippets = create_snippet_hash("SELECT language, count(*) as count from snippet group by language", "language");
+	$qpa = db_construct_qpa (false, 'SELECT language, count(*) as count from snippet group by language') ;
+	$existing_snippets = create_snippet_hash($qpa, "language");
 	for ($i=1; $i<count($SCRIPT_LANGUAGE); $i++) {
 		$return .= '<li>'.util_make_link ('/snippet/browse.php?by=lang&amp;lang='.$i,$SCRIPT_LANGUAGE[$i]).' (';
 		// Remove warning
@@ -59,7 +60,8 @@ function snippet_mainpage() {
 	<strong>'._('Browse by Category').':</strong>
 	<ul>';
 	
-	$existing_categories = create_snippet_hash("SELECT category, count(*) as count from snippet group by category", "category");
+	$qpa = db_construct_qpa (false, 'SELECT category, count(*) as count from snippet group by category') ;
+	$existing_categories = create_snippet_hash($qpa, "category");
 	for ($i=1; $i<count($SCRIPT_CATEGORY); $i++) {
 		// Remove warning
 		@$return .= '<li>'.util_make_link ('/snippet/browse.php?by=cat&amp;cat='.$i,$SCRIPT_CATEGORY[$i]).' (';
