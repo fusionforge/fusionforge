@@ -23,7 +23,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
+function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved) {
         /*
        		Show list of waiting news items
        	*/
@@ -58,7 +58,7 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
        		_('Project')
        	);
 
-       	$result=db_query($sql_pending);
+       	$result=db_query_qpa($qpa_pending);
        	$rows=db_numrows($result);
 
        	echo '<form action="'. getStringFromServer('PHP_SELF') .'" method="post">';
@@ -83,7 +83,7 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
        		Show list of rejected news items for this week
        	*/
 
-       	$result=db_query($sql_rejected);
+       	$result=db_query_qpa($qpa_rejected);
        	$rows=db_numrows($result);
        	if ($rows < 1) {
        		echo '
@@ -101,7 +101,7 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
        		Show list of approved news items for this week
        	*/
 
-       	$result=db_query($sql_approved);
+       	$result=db_query_qpa($qpa_approved);
        	$rows=db_numrows($result);
        	if ($rows < 1) {
        		echo '

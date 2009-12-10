@@ -305,42 +305,36 @@ AND news_bytes.group_id=groups.group_id ", array($id));
 		*/
 
 		$old_date = time()-60*60*24*30;
-		$sql_pending= "
-			SELECT groups.group_id,id,post_date,summary,
+		$qpa_pending = db_construct_qpa (false, 'SELECT groups.group_id,id,post_date,summary,
 				group_name,unix_group_name
 			FROM news_bytes,groups
 			WHERE is_approved=0
 			AND news_bytes.group_id=groups.group_id
-			AND post_date > '$old_date'
+			AND post_date > $1
 			AND groups.is_public=1
-			AND groups.status='A'
-			ORDER BY post_date
-		";
+			AND groups.status=$2
+			ORDER BY post_date', array ($old_date, 'A')) ;
 
 		$old_date = time()-(60*60*24*7);
-		$sql_rejected = "
-			SELECT groups.group_id,id,post_date,summary,
+		$qpa_rejected = db_construct_qpa (false, 'SELECT groups.group_id,id,post_date,summary,
 				group_name,unix_group_name
 			FROM news_bytes,groups
 			WHERE is_approved=2
 			AND news_bytes.group_id=groups.group_id
-			AND post_date > '$old_date'
-			ORDER BY post_date
-		";
+			AND post_date > $1
+			ORDER BY post_date', array ($old_date)) ;
 
-		$sql_approved = "
-			SELECT groups.group_id,id,post_date,summary,
+		$qpa_approved = db_construct_qpa (false, 'SELECT groups.group_id,id,post_date,summary,
 				group_name,unix_group_name
 			FROM news_bytes,groups
 			WHERE is_approved=1
 			AND news_bytes.group_id=groups.group_id
-			AND post_date > '$old_date'
-			ORDER BY post_date
-		";
+			AND post_date > $1
+			ORDER BY post_date', array ($old_date)) ;
 		show_news_approve_form(
-			$sql_pending,
-			$sql_rejected,
-			$sql_approved
+			$qpa_pending,
+			$qpa_rejected,
+			$qpa_approved
 		);
 
 	}
