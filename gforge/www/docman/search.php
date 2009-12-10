@@ -98,19 +98,20 @@ if (getStringFromPost('cmd') == "search")
 	$textsearch = getStringFromPost("textsearch");
 	$textsearch = prepare_search_text ($textsearch);
 	$mots = preg_split("/[\s,]+/",$textsearch);
-	$WHERE = "WHERE TRUE ";
+	$qpa = db_construct_qpa (false, 'SELECT filename, docid, doc_data.stateid as stateid, doc_states.name as statename, title, description, createdate, updatedate, doc_group, language_id, group_id FROM doc_data JOIN doc_states ON doc_data.stateid = doc_states.stateid') ;
+
 	if (getStringFromPost('search_type') == "one")
 	{
 		if (count($mots) > 0)
 		{
-			$WHERE .= "AND (FALSE ";
+			$qpa = db_construct_qpa ($qpa, ' AND (FALSE') ;
 			foreach ($mots as $mot)
 			{
 				$mot = strtolower($mot); 
-				$WHERE .= "OR title LIKE '%$mot%' OR description LIKE '%$mot%' OR data_words LIKE '%$mot%' ";
-			//	$WHERE .= "OR data_words LIKE '%$mot%' ";
+				$qpa = db_construct_qpa ($qpa, ' OR title LIKE $1 OR description LIKE $1 OR data_words LIKE $1',
+							 array ("%$mot%") ;
 			}
-			$WHERE .= " ) ";
+			$qpa = db_construct_qpa ($qpa, ')') ;
 		}
 	}
 	else
@@ -118,30 +119,26 @@ if (getStringFromPost('cmd') == "search")
 		// search_type = all
 		if (count($mots) > 0)
 		{
-			$WHERE .= "AND (TRUE ";
+			$qpa = db_construct_qpa ($qpa, ' AND (TRUE') ;
 			foreach ($mots as $mot)
 			{
-				$WHERE .= "AND (title LIKE '%$mot%' OR description LIKE '%$mot%' OR data_words LIKE '%$mot%') ";
-				//$WHERE .= "AND data_words LIKE '%$mot%' ";
+				$mot = strtolower($mot); 
+				$qpa = db_construct_qpa ($qpa, ' AND (title LIKE $1 OR description LIKE $1 OR data_words LIKE $1)',
+							 array ("%$mot%")) ;
 			}
-			$WHERE .= " ) ";
+			$qpa = db_construct_qpa ($qpa, ')') ;
 		}
 	}
 	if (!$is_editor)
 	{
-		$WHERE .= "AND doc_data.stateid = 1 ";
+		$qpa = db_construct_qpa ($qpa, ' AND doc_data.stateid = 1') ;
 	}
 	
-	$sql = "SELECT filename, docid, doc_data.stateid as stateid, doc_states.name as statename, ";
-	$sql .= "title, description, createdate, updatedate, ";
-	$sql .= "doc_group, language_id, group_id ";
-	$sql .= "FROM doc_data \n";
-	$sql .= "JOIN doc_states ON doc_data.stateid = doc_states.stateid ";
-	$sql .= "$WHERE \n";
-	$sql .= "AND group_id = $_GET[group_id] \n";
-	$sql .= "ORDER BY updatedate,createdate \n";
+	$qpa = db_construct_qpa ($qpa, 'AND group_id = $1',
+				 array (getIntFromRequest ('group_id'))) ;
+	$qpa = db_construct_qpa ($qpa, 'ORDER BY updatedate, createdate') ;
 	$resarr = array();
-	$result=db_query($sql);
+	$result = db_query_qpa ($qpa);
 	if (!$result)
 	{
 		$vtp->AddSession($handle,"MESSAGE");
