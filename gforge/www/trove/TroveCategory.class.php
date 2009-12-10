@@ -121,9 +121,6 @@ class TroveCategory extends Error {
 		}
 	}
 	
-	function move() {
-	}
-	
 	function getId() {
 		return $this->categoryId;
 	}
@@ -151,7 +148,7 @@ class TroveCategory extends Error {
 		}
 	}
 	
-	function & getLabels() {
+	function &getLabels() {
 		if(!isset($this->labels)) {
 			$this->labels = array();
 			$res = db_query_params("SELECT  trove_category_labels.*, supported_languages.name AS language_name FROM trove_category_labels, supported_languages  
@@ -169,11 +166,11 @@ class TroveCategory extends Error {
 		return $this->labels;
 	}
 	
-	function & getParents() {
+	function &getParents() {
 		return $this->parents;
 	}
 	
-	function & getChildren() {
+	function &getChildren() {
 		if(!isset($this->children)) {
 			$this->children = array();
 			
@@ -199,9 +196,6 @@ class TroveCategory extends Error {
 			}
 		}
 		return $this->children;
-	}
-	
-	function getRootCategory() {
 	}
 	
 	function getRootParentId() {
@@ -243,12 +237,6 @@ class TroveCategory extends Error {
 			ORDER BY trove_agg.trove_cat_id ASC, trove_agg.ranking ASC
 			', TROVE__PROJECTS_PER_PAGE, '.$offset.', SYS_DB_TROVE);
 		return $result;
-	}
-	
-	function addProject() {
-	}
-	
-	function removeProject() {
 	}
 	
 }
