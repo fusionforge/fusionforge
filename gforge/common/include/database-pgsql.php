@@ -165,6 +165,21 @@ function db_query_params($qstring,$params,$limit='-1',$offset=0,$dbserver=SYS_DB
 }
 
 /**
+ *  db_query_params() - Query the database, with a query+params array
+ *
+ *  @param array array(query, array(parameters...))
+ *  @param int How many rows do you want returned.
+ *  @param int Of matching rows, return only rows starting here.
+ *  @param int ability to spread load to multiple db servers.
+ *  @return int result set handle.
+ */
+function db_query_qpa ($qpa,$limit='-1',$offset=0,$dbserver=SYS_DB_PRIMARY) {
+	$sql = $qpa[0] ;
+	$params = $qpa[1] ;
+	return db_query_params ($sql, $params, $limit, $offset, $dbserver) ;
+}
+
+/**
  *  db_mquery() - Query the database.
  *
  *  @param text SQL statement.
@@ -453,6 +468,31 @@ function db_string_array_to_any_clause ($arr) {
 	}
 	$res = '{"' . implode ('","', $arr2) . '"}' ;
 	return $res ;
+}
+
+function db_construct_qpa ($old_qpa = false, $new_sql = '', $new_params = array ()) {
+	if (!is_array($old_qpa), count ($old_qpa) < 3) {
+		$old_qpa = array ('', array(), 0) ;
+	}
+	$old_sql = $old_qpa[0] ;
+	$old_params = $old_qpa[1] ;
+	$old_max = $old_qpa[2] ;
+
+	$sql = $old_sql ;
+	$params = $old_params ;
+	$max = $old_max ;
+
+	foreach ($new_params as $index => $value) {
+		$sql = strreplace ($new_sql, '$'.$index, '$'.($index + $old_max)) ;
+		$params[] = $value ;
+		$max++ ;
+	}
+	
+	return array ($sql, $params, $max) ;
+}
+	
+function db_join_qpa ($old_qpa = false, $new_qpa = false) {
+	return db_construct_qpa ($old_qpa, $new_qpa[0], $new_qpa[1]) ;
 }
 
 // Local Variables:

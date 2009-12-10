@@ -91,9 +91,10 @@ $discrim = getStringFromRequest('discrim');
 $discrim_url = '';
 $discrim_desc = '';
 
+$qpa_alias = db_construct_qpa () ;
+$qpa_and = db_construct_qpa () ;
+
 if ($discrim) {
-	$discrim_queryalias = '';
-	$discrim_queryand = '';
 	$discrim_url_b = array();
 
 	// commas are ANDs
@@ -109,16 +110,13 @@ if ($discrim) {
 		$expl_discrim[$i] = intval($expl_discrim[$i]);
 
 		// need one aliased table for everything
-//[CB]		$discrim_queryalias .= ', trove_group_link trove_group_link_'.$i.' ';
-		$discrim_queryalias .= ', trove_agg trove_agg_'.$i.' ';
+		$qpa_alias = db_construct_qpa ($qpa_alias,
+					       ', trove_agg trove_agg_'.$i) ;
 		
 		// need additional AND entries for aliased tables
-//[CB]		$discrim_queryand .= 'AND trove_group_link_'.$i.'.trove_cat_id='
-//[CB]			.$expl_discrim[$i].' AND trove_group_link_'.$i.'.group_id='
-//[CB]			.'trove_group_link.group_id ';
-		$discrim_queryand .= 'AND trove_agg_'.$i.'.trove_cat_id='
-			.$expl_discrim[$i].' AND trove_agg_'.$i.'.group_id='
-			.'trove_agg.group_id ';
+		$qpa_and = db_construct_qpa ($qpa_and,
+					     sprintf (' AND trove_agg_%d.trove_cat_id=$%d AND trove_agg_%d.group_id=trove_agg.group_id ', $i, $i+1, $i),
+					     array ($expl_discrim[$i])) ;
 
 		$expl_discrim_b = array () ;
 		for ($j=0;$j<sizeof($expl_discrim);$j++) {
@@ -235,14 +233,14 @@ if(!isset($discrim_queryand)) {
 	$discrim_queryand = '';
 }
 
-$res_grp = db_query("
-	SELECT * 
-	FROM trove_agg
-	$discrim_queryalias
-	WHERE trove_agg.trove_cat_id='$form_cat'
-	$discrim_queryand
-	ORDER BY trove_agg.trove_cat_id ASC, trove_agg.ranking ASC
-", $TROVE_HARDQUERYLIMIT, 0, SYS_DB_TROVE);
+$qpa = db_construct_qpa () ;
+$qpa = db_construct_qpa ($qpa, 'SELECT * FROM trove_agg') ;
+$qpa = db_join_qpa ($qpa, $qpa_alias) ;
+$qpa = db_construct_qpa ($qpa, ' WHERE trove_agg.trove_cat_id=$1', array ($form_cat)) ;
+$qpa = db_join_qpa ($qpa, $qpa_and) ;
+$qpa = db_construct_qpa ($qpa, ' ORDER BY trove_agg.trove_cat_id ASC, trove_agg.ranking ASC') ;
+$res_grp = db_query_qpa ($qpa, $TROVE_HARDQUERYLIMIT, 0, SYS_DB_TROVE);
+
 echo db_error();
 $querytotalcount = db_numrows($res_grp);
 	
@@ -332,5 +330,10 @@ if ($querytotalcount > $TROVE_BROWSELIMIT) {
 //	.$query_projlist.'</FONT>';
 
 $HTML->footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>
