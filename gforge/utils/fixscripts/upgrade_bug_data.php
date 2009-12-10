@@ -31,26 +31,39 @@ for ($i=0; $i<$rows; $i++) {
 		//insert a default bug dependency
 	*/
 
-	$res2=db_query("SELECT * FROM bug_bug_dependencies WHERE bug_id='". db_result($result,$i,'bug_id') ."'");
+	$res2=db_query_params('SELECT * FROM bug_bug_dependencies WHERE bug_id=$1',
+			      array (db_result($result,$i,'bug_id'))) ;
 	$rows2=db_numrows($res2);
 	if ($rows2 < 1) {
-		db_query ("INSERT INTO bug_bug_dependencies VALUES ('','". db_result($result,$i,'bug_id') ."','100')");
+		db_query_params ('INSERT INTO bug_bug_dependencies VALUES ($1,$2,100)',
+				 array ('',
+					db_result($result,$i,'bug_id'))) ;
 	} else if ($rows2 > 1) {
-		db_query ("DELETE FROM bug_bug_dependencies WHERE bug_id='". db_result($result,$i,'bug_id') ."' AND is_dependent_on_bug_id='100'");
+		db_query_params ('DELETE FROM bug_bug_dependencies WHERE bug_id=$1 AND is_dependent_on_bug_id=100',
+				 array (db_result($result,$i,'bug_id'))) ;
 	}
 
 	/*
 		//insert a default task dependency
 	*/
 
-	$res2=db_query("SELECT * FROM bug_task_dependencies WHERE bug_id='". db_result($result,$i,'bug_id') ."'");
+	$res2=db_query_params('SELECT * FROM bug_task_dependencies WHERE bug_id=$1',
+			      array (db_result($result,$i,'bug_id'))) ;
 	$rows2=db_numrows($res2);
 	if ($rows2 < 1) {
-		db_query ("INSERT INTO bug_task_dependencies VALUES ('','". db_result($result,$i,'bug_id') ."','100')");
+		db_query_params ('INSERT INTO bug_task_dependencies VALUES ($1, $2, 100)',
+				 array ('',
+					db_result($result,$i,'bug_id'))) ;
 	} else if ($rows2 > 1) {
-		db_query ("DELETE FROM bug_task_dependencies WHERE bug_id='". db_result($result,$i,'bug_id') ."' AND is_dependent_on_task_id='100'");
+		db_query_params ('DELETE FROM bug_task_dependencies WHERE bug_id=$1 AND is_dependent_on_task_id=100',
+				 array (db_result($result,$i,'bug_id'))) ;
 	}
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

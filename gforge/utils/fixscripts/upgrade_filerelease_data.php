@@ -43,8 +43,9 @@ for ($i=0; $i<$rows; $i++) {
 	/*
 		Get the files from the old system for this release
 	*/
-	$res2=db_query("SELECT * FROM filerelease ".
-		"WHERE filemodule_id='". db_result($result,$i,'package_id') ."' AND release_version='". db_result($result,$i,'name') ."'");
+	$res2=db_query_params ('SELECT * FROM filerelease WHERE filemodule_id=$1 AND release_version=$2',
+			       array (db_result($result,$i,'package_id'),
+				      db_result($result,$i,'name'))) ;
 
 	$rows2=db_numrows($res2);
 	//echo db_error();
@@ -53,7 +54,8 @@ for ($i=0; $i<$rows; $i++) {
 			no matches for this release
 		*/
 		echo "\n<br />Warning - deleting release!";
-		db_query ("DELETE FROM frs_release WHERE release_id='". db_result($result,$i,'release_id') ."'");
+		db_query_params ('DELETE FROM frs_release WHERE release_id=$1',
+				 array (db_result($result,$i,'release_id'))) ;
 	} else {
 		$release_id=db_result($result,$i,'release_id');
 
@@ -61,25 +63,37 @@ for ($i=0; $i<$rows; $i++) {
 			set the change notes and release time for this release 
 			based on any given file from the release in the old system
 		*/
-		db_query ("UPDATE frs_release SET notes='". addslashes(db_result($res2,0,'text_notes')) ."',".
-			"changes='". addslashes(db_result($res2,0,'text_changes')) ."', ".
-			"preformatted='". db_result($res2,0,'text_format') ."', ".
-			"released_by='". db_result($res2,0,'user_id') ."', ".
-			"release_date='". db_result($res2,0,'release_time') ."' ".
-			"WHERE release_id='$release_id'");
+		db_query_params ('UPDATE frs_release SET notes=$1,changes=$2,preformatted=$3,released_by=$4,release_date=$5 WHERE release_id=$6',
+				 array (db_result($res2,0,'text_notes'),
+					db_result($res2,0,'text_changes'),
+					db_result($res2,0,'text_format'),
+					db_result($res2,0,'user_id'),
+					db_result($res2,0,'release_time'),
+					$release_id)) ;
 
 		echo "\n<br />Update Release: $release_id :: ".db_error();
 
 		for ($f=0; $f<$rows2; $f++) {
-			/*
-				move each of the files from the old system to the new
-			*/
-			db_query("INSERT INTO frs_file (file_id,filename,release_id,processor_id,release_time,file_size,post_date,type_id) VALUES ".
-				"('". db_result($res2,$f,'filerelease_id') ."','". db_result($res2,$f,'filename') ."','$release_id',".
-				"'9999','". db_result($res2,$f,'release_time') ."','". db_result($res2,$f,'file_size') ."','". db_result($res2,$f,'post_time') ."','9999')");
+		  /*
+		   move each of the files from the old system to the new
+		  */
+		  db_query_params ('INSERT INTO frs_file (file_id,filename,release_id,processor_id,release_time,file_size,post_date,type_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
+				   array (db_result($res2,$f,'filerelease_id'),
+					  db_result($res2,$f,'filename'),
+					  $release_id,
+					  9999,
+					  db_result($res2,$f,'release_time'),
+					  db_result($res2,$f,'file_size'),
+					  db_result($res2,$f,'post_time'),
+					  9999)) ;
 			echo "\n<br />File: ". db_result($res2,$f,'filerelease_id') ." :: ".db_error();
 		}
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

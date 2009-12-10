@@ -31,26 +31,39 @@ for ($i=0; $i<$rows; $i++) {
 		//insert a default dependency
 	*/
 
-	$res2=db_query("SELECT * FROM project_dependencies WHERE project_task_id='". db_result($result,$i,'project_task_id') ."'");
+	$res2=db_query_params('SELECT * FROM project_dependencies WHERE project_task_id=$1',
+			      array (db_result($result,$i,'project_task_id'))) ;
 	$rows2=db_numrows($res2);
 	if ($rows2 < 1) {
-		db_query ("INSERT INTO project_dependencies VALUES ('','". db_result($result,$i,'project_task_id') ."','100')");
+		db_query_params ('INSERT INTO project_dependencies VALUES ($1,$2,100)',
+				 array ('',
+					db_result($result,$i,'project_task_id'))) ;
 	} else if ($rows2 > 1) {
-		db_query ("DELETE FROM project_dependencies WHERE project_task_id='". db_result($result,$i,'project_task_id') ."' AND is_dependent_on_task_id='100'");
+		db_query_params ('DELETE FROM project_dependencies WHERE project_task_id=$1 AND is_dependent_on_task_id=100',
+				 array (db_result($result,$i,'project_task_id'))) ;
 	}
 
 	/*
 		//insert a default assignee 
 	*/
 
-	$res2=db_query("SELECT * FROM project_assigned_to WHERE project_task_id='". db_result($result,$i,'project_task_id') ."'");
+	$res2=db_query_params('SELECT * FROM project_assigned_to WHERE project_task_id=$1',
+			      array (db_result($result,$i,'project_task_id'))) ;
 	$rows2=db_numrows($res2);
 	if ($rows2 < 1) {
-		db_query ("INSERT INTO project_assigned_to VALUES ('','". db_result($result,$i,'project_task_id') ."','100')");
+		db_query_params ('INSERT INTO project_assigned_to VALUES ($1,$2,100)',
+				 array ('',
+					db_result($result,$i,'project_task_id'))) ;
 	} else if ($rows2 > 1) {
-		db_query ("DELETE FROM project_assigned_to WHERE project_task_id='". db_result($result,$i,'project_task_id') ."' AND assigned_to_id='100'");
+		db_query_params ('DELETE FROM project_assigned_to WHERE project_task_id=$1 AND assigned_to_id=100',
+				 array (db_result($result,$i,'project_task_id'))) ;
 	}
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>
