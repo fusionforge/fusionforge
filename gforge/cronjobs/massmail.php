@@ -111,17 +111,61 @@ $mail_id = db_result($mail_res, 0, 'id');
 $body =  db_result($mail_res, 0, 'message');
 //$err .= "Got mail to send: ".$subj."\n";
 
-$sql = "SELECT DISTINCT users.user_id,users.user_name,users.realname,users.email,users.confirm_hash
-	FROM $table_mapping[$type]
-	WHERE users.user_id>".db_result($mail_res, 0, 'last_userid')."
-	AND users.status='A'
-	".$cond_mapping[$type]."
-	ORDER BY users.user_id";
+$qpa = db_construct_qpa (false, 'SELECT DISTINCT users.user_id,users.user_name,users.realname,users.email,users.confirm_hash') ;
+switch ($type) {
+case 'ALL':
+case 'SITE':
+case 'COMMNTY':
+	$qpa = db_construct_qpa ($qpa, ' FROM users') ;
+	break ;
+case 'DVLPR':
+case 'SFDVLPR':
+	$qpa = db_construct_qpa ($qpa, ' FROM users, user_group') ;
+	break ;
+case 'ADMIN':
+	$qpa = db_construct_qpa ($qpa, ' FROM users, user_group, groups') ;
+	break ;
+}
 
-//$err .= $sql;
+$qpa = db_construct_qpa ($qpa, ' WHERE users.user_id > $1 AND users.status=$2',
+			 array (db_result($mail_res, 0, 'last_userid'),
+				'A')) ;
+
+$cond_mapping = array(
+	'ALL'		=> "",
+	'SITE'	=> "",
+	'COMMNTY' => "",
+	'DVLPR'   => "",
+	'ADMIN'   => "",
+	'SFDVLPR' => ""
+);
+
+
+switch ($type) {
+case 'ALL':
+	break ;
+case 'SITE':
+	$qpa = db_construct_qpa ($qpa, ' AND mail_siteupdates=1') ;
+	break ;
+case 'COMMNTY':
+	$qpa = db_construct_qpa ($qpa, ' AND mail_va=1') ;
+	break ;
+case 'DVLPR':
+	$qpa = db_construct_qpa ($qpa, ' AND users.user_id=user_group.user_id') ;
+	break ;
+case 'SFDVLPR':
+	$qpa = db_construct_qpa ($qpa, ' AND users.user_id=user_group.user_id AND user_group.group_id=1') ;
+	break ;
+case 'ADMIN':
+	$qpa = db_construct_qpa ($qpa, ' AND users.user_id=user_group.user_id AND user_group.admin_flags=$1 AND groups.status=$2 AND groups.group_id=user_group.group_id',
+				 array ('A', 'A')) ;
+	break ;
+}
+
+$qpa = db_construct_qpa ($qpa, ' ORDER BY users.user_id') ;
 
 // Get next chunk of users to mail
-$users_res = db_query($sql);
+$users_res = db_query_qpa ($qpa);
 
 $err .= "Mailing ".db_numrows($users_res)." users.\n";
 
