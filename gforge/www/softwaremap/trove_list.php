@@ -225,14 +225,6 @@ print '</td></tr></table>';
 <?php
 // one listing for each project
 
-if(!isset($discrim_queryalias)) {
-	$discrim_queryalias = '';
-}
-
-if(!isset($discrim_queryand)) {
-	$discrim_queryand = '';
-}
-
 $qpa = db_construct_qpa () ;
 $qpa = db_construct_qpa ($qpa, 'SELECT * FROM trove_agg') ;
 $qpa = db_join_qpa ($qpa, $qpa_alias) ;
