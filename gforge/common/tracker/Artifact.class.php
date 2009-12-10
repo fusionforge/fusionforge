@@ -956,7 +956,8 @@ class Artifact extends Error {
 			}
 			$extra_fields = $new_extra_fields;
 
-			$res=db_query("DELETE FROM artifact_extra_field_data WHERE artifact_id='".$this->getID()."'");
+			$res = db_query_params ('DELETE FROM artifact_extra_field_data WHERE artifact_id=$1',
+						array ($this->getID()));
 			if (!$res) {
 				$this->setError('Removal of old artifact_extra_field_data failed: '.db_error());
 				db_rollback();

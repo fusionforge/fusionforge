@@ -291,8 +291,8 @@ class ArtifactExtraFieldElement extends Error {
 			$this->setPermissionDeniedError();
 			return false;
 		}
-		$sql = "SELECT element_id FROM artifact_extra_field_elements WHERE element_id=".$this->getID();
-		$res = db_query($sql);
+		$res = db_query_params ('SELECT element_id FROM artifact_extra_field_elements WHERE element_id=$1',
+					array ($this->getID()));
 		if (db_numrows($res) != 1) {
 			$this->setError('ArtifactExtraField: Invalid ArtifactExtraFieldElement ID');
 			return false;
@@ -300,12 +300,12 @@ class ArtifactExtraFieldElement extends Error {
 
 		// Reset all artifacts to 100 before removing the value.
 		$ef=$this->getArtifactExtraField();
-		$sql = "UPDATE artifact_extra_field_data SET field_data=100 WHERE field_data=".$this->getID().
-			" AND extra_field_id=".$ef->getID();
-		db_query($sql);
+		db_query_params ('UPDATE artifact_extra_field_data SET field_data=100 WHERE field_data=$1 AND extra_field_id=$2',
+				 array ($this->getID(),
+					$ef->getID())) ;
 
-		$sql="DELETE FROM artifact_extra_field_elements WHERE element_id='".$this->getID()."'";
-		$result=db_query($sql);
+		$result = db_query_params ('DELETE FROM artifact_extra_field_elements WHERE element_id=$1',
+				    array ($this->getID())) ;
 		if ($result && db_affected_rows($result) > 0) {
 			return true;
 		} else {
