@@ -319,7 +319,7 @@ function run_sql_script($filename) {
 function apply_fixes($version) {
 	$queries = array();
 	if ($version == 'sfee3.3') {
-		$res = db_query("SELECT COUNT(*) AS applied FROM database_changes WHERE filename='sfee3.3fixes'");
+		$res = db_query_params('SELECT COUNT(*) AS applied FROM database_changes WHERE filename=$1', array ('sfee3.3fixes')) ;
 		if ($res && db_result($res, 0, 'applied') == '0') {
 			show("Converting SFEE3.3 to SFEE3.0\n");
 			run_script(array('filename'=>'sfee3.3-3.0-1.sql','ext'=>'sql'));
@@ -332,28 +332,32 @@ function apply_fixes($version) {
 			$queries[] = "INSERT INTO database_changes (filename) VALUES ('sfee3.3fixes')";
 		}
 	} else if ($version == 'sfee3.0') {
-		$res = db_query("SELECT COUNT(*) AS applied FROM database_changes WHERE filename='sfee3.0fixes'");
+		$res = db_query_params ('SELECT COUNT(*) AS applied FROM database_changes WHERE filename=$1',
+					array ('sfee3.0fixes')) ;
 		if ($res && db_result($res, 0, 'applied') == '0') {
 			run_script(array('filename'=>'sfee3.0-sf26-1.sql','ext'=>'sql'));
 			run_script(array('filename'=>'sfee3.0-sf26-2.php','ext'=>'php'));
 			$queries[] = "INSERT INTO database_changes (filename) VALUES ('sfee3.0fixes')";
 		}
 	} else if ($version == '2.5') {
-		$res = db_query("SELECT COUNT(*) AS applied FROM database_changes WHERE filename='2.5fixes'");
+		$res = db_query_params ('SELECT COUNT(*) AS applied FROM database_changes WHERE filename=$1',
+					array ('2.5fixes'));
 		if ($res && db_result($res, 0, 'applied') == '0') {
 			show("Applying fixes for version 2.5\n");
 			$queries[] = "ALTER TABLE project_task ADD CONSTRAINT project_task_group_project_id_f CHECK (1 = 1)";
 			$queries[] = "INSERT INTO database_changes (filename) VALUES ('2.5fixes')";
 		}
 	} else if ($version == '2.6') {
-		$res = db_query("SELECT COUNT(*) AS applied FROM database_changes WHERE filename='2.6fixes'");
+		$res = db_query_params ('SELECT COUNT(*) AS applied FROM database_changes WHERE filename=$1',
+					array ('2.6fixes')) ;
 		if ($res && db_result($res, 0, 'applied') == '0') {
 			show("Applying fixes for version 2.6\n");
 			$queries[] = "ALTER TABLE project_task ADD CONSTRAINT project_task_group_project_id_f CHECK (1 = 1)";
 			$queries[] = "INSERT INTO database_changes (filename) VALUES ('2.6fixes')";
 		}
 	} else if ($version == '3.0pre5') {
-		$res = db_query("SELECT COUNT(*) AS applied FROM database_changes WHERE filename='3.0pre5fixes'");
+		$res = db_query_params ('SELECT COUNT(*) AS applied FROM database_changes WHERE filename=$1',
+					array ('3.0pre5fixes')) ;
 		if ($res && db_result($res, 0, 'applied') == '0') {
 			show("Applying fixes for version 3.0pre5\n");
 			if (!run_sql_script('fix-gforge3.0pre5.sql')) {
@@ -363,14 +367,15 @@ function apply_fixes($version) {
 			$queries[] = "INSERT INTO database_changes (filename) VALUES ('3.0pre5fixes')";
 		}
 	} else if ($version == '3.0pre6') {
-		$res = db_query("SELECT COUNT(*) AS applied FROM database_changes WHERE filename='3.0pre6fixes'");
+		$res = db_query_params ('SELECT COUNT(*) AS applied FROM database_changes WHERE filename=$1', array ('3.0pre6fixes')) ;
 		if ($res && db_result($res, 0, 'applied') == '0') {
 			show("Applying fixes for version 3.0pre6\n");
 			$queries[] = "ALTER TABLE project_task ADD CONSTRAINT project_task_group_project_id_f CHECK (1 = 1)";
 			$queries[] = "INSERT INTO database_changes (filename) VALUES ('3.0pre6fixes')";
 		}
 	} else if ($version == '3.0pre7') {
-		$res = db_query("SELECT COUNT(*) AS applied FROM database_changes WHERE filename='3.0pre7fixes'");
+		$res = db_query_params ('SELECT COUNT(*) AS applied FROM database_changes WHERE filename=$1',
+					array ('3.0pre7fixes')) ;
 		if ($res && db_result($res, 0, 'applied') == '0') {
 			show("Applying fixes for version 3.0pre7\n");
 			$queries[] = "ALTER TABLE project_task ADD CONSTRAINT project_task_group_project_id_f CHECK (1 = 1)";
@@ -424,7 +429,9 @@ function drop_if_exists($name, $command, $kind, $commandSuffix = '') {
 	if (preg_match('/^"(.*)"$/', $name, $match)) {
 		$name = $match[1];
 	}
-	$res = db_query("SELECT COUNT(*) AS exists FROM pg_class WHERE relname='$name' AND relkind='$kind'");
+	$res = db_query_params ('SELECT COUNT(*) AS exists FROM pg_class WHERE relname=$1 AND relkind=$2',
+				array ($name,
+				       $kind)) ;
 	if (!$res) {
 		show("ERROR:".db_error()."\n");
 		return false;
@@ -459,7 +466,8 @@ function drop_constraint_if_exists($table, $constraint, $query) {
 }
 
 function drop_trigger_if_exists($name, $on) {
-	$res = db_query("SELECT COUNT(*) AS exists FROM pg_trigger WHERE tgname='$name'");
+	$res = db_query_params ('SELECT COUNT(*) AS exists FROM pg_trigger WHERE tgname=$1',
+				array ($name)) ;
 	if (!$res) {
 		show("ERROR:".db_error()."\n");
 		return false;
