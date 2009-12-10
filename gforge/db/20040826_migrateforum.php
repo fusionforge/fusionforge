@@ -41,10 +41,9 @@ if (!$res) {
 
 for ($i=0; $i<db_numrows($res); $i++) {
 
-	$sql="UPDATE forum_group_list 
-		SET forum_name='". ereg_replace('[^_\.0-9a-z-]','-', strtolower(db_result($res,$i,'forum_name')) )."' 
-		WHERE group_forum_id='".db_result($res,$i,'group_forum_id')."'";
-	$res2=db_query($sql);
+	$res2 = db_query_params ('UPDATE forum_group_list SET forum_name=$1 WHERE group_forum_id=$2',
+				 array (ereg_replace('[^_\.0-9a-z-]','-', strtolower(db_result($res,$i,'forum_name'))),
+					db_result($res,$i,'group_forum_id'))) ;
 	if (!$res2) {
 		echo db_error();
 		db_rollback();
@@ -70,4 +69,10 @@ if (!$res) {
 
 db_commit();
 echo "SUCCESS\n";
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

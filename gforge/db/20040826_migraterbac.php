@@ -100,12 +100,17 @@ for ($i=0; $i<count($arr); $i++) {
 		}
 	}
 
-	$roleid=db_query("SELECT role_id FROM role WHERE group_id='".$arr[$i]."' AND role_name='Admin'");
+	$roleid = db_query_params ('SELECT role_id FROM role WHERE group_id=$1  AND role_name=$2',
+				   array ($arr[$i],
+					  'Admin'));
 	$admin_roleid=db_result($roleid,0,0);
-	$roleid=db_query("SELECT role_id FROM role WHERE group_id='".$arr[$i]."' AND role_name='Junior Developer'");
+	$roleid = db_query_params ('SELECT role_id FROM role WHERE group_id=$1 AND role_name=$2',
+				   array ($arr[$i],
+					  'Junior Developer')) ;
 	$junior_roleid=db_result($roleid,0,0);
 
-	$rrole=db_query("SELECT user_id,admin_flags FROM user_group WHERE group_id='".$arr[$i]."'");
+	$rrole = db_query_params ('SELECT user_id,admin_flags FROM user_group WHERE group_id=$1',
+				  array ($arr[$i])) ;
 	while ($arrole = db_fetch_array($rrole)) {
 
 		$role_id= (( trim($arrole['admin_flags']) == 'A' ) ? $admin_roleid : $junior_roleid );
@@ -131,4 +136,10 @@ for ($i=0; $i<count($arr); $i++) {
 db_commit();
 echo "SUCCESS\n";
 exit(0);
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

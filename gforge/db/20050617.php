@@ -92,10 +92,10 @@ while ($row = db_fetch_array($res)) {
 	$conflict = false;
 	$count = 1;
 	do {
-		$previous_def = db_query("SELECT * FROM artifact_extra_field_list " .
-								"WHERE group_artifact_id=".$row["group_artifact_id"]." AND ".
-								"LOWER(alias)='".$alias."' AND ".
-								"extra_field_id <> ".$row["extra_field_id"]);
+		$previous_def = db_query_params ('SELECT * FROM artifact_extra_field_list WHERE group_artifact_id=$1 AND LOWER(alias)=$2 AND extra_field_id <> $3',
+						 array ($row["group_artifact_id"],
+							$alias,
+							$row["extra_field_id"])) ;
 		if (db_numrows($previous_def) > 0) {	// alias exists...
 			$conflict = true;
 			$alias = $alias.$count;		// do something like "alias1"
@@ -106,14 +106,22 @@ while ($row = db_fetch_array($res)) {
 	} while ($conflict);
 
 	// at this point we can safely insert the alias
-	$update = db_query("UPDATE artifact_extra_field_list SET alias='".$alias."' WHERE extra_field_id=".$row["extra_field_id"]);
+	$update = db_query_params ('UPDATE artifact_extra_field_list SET alias=$1 WHERE extra_field_id=$2',
+				   array ($alias,
+					  $row["extra_field_id"])) ;
 	if (!$update) {
 		echo db_error();
 		exit(3);
 	}	
 }
-db_query("COMMIT WORK");
+db_commit ();
 
 echo "SUCCESS\n";
 exit(0);
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

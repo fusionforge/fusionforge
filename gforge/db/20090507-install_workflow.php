@@ -21,14 +21,13 @@ $res = db_query_params ('SELECT user_id FROM user_group WHERE group_id=1',
 $admin_id = db_result($res,0,'user_id');
 session_set_new($admin_id);
 
-$sql = "SELECT group_id, artifact_group_list.group_artifact_id, element_id, artifact_extra_field_elements.extra_field_id
+			      $res = db_query_params ('SELECT group_id, artifact_group_list.group_artifact_id, element_id, artifact_extra_field_elements.extra_field_id
 		FROM artifact_extra_field_list, artifact_extra_field_elements, artifact_group_list
 		WHERE 
 			artifact_extra_field_list.extra_field_id=artifact_extra_field_elements.extra_field_id
 		AND 	artifact_group_list.group_artifact_id = artifact_extra_field_list.group_artifact_id
-		AND	field_type=7";
-
-$res = db_query($sql);
+		AND	field_type=7',
+						      array ()) ;
 while($row = db_fetch_array($res)) {
 	print "Upgrading group_id=".$row['group_id']." (group_artifact_id=".$row['group_artifact_id'].")\n";
 	$group =& group_get_object($row['group_id']);
@@ -43,4 +42,10 @@ while($row = db_fetch_array($res)) {
 }
 
 echo "SUCCESS";
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

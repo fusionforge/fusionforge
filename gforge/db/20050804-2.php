@@ -41,7 +41,9 @@ for ($i=0; $i < db_numrows($res); $i++) {
 	$data = base64_decode($base64_data);
 	$size = strlen($data);
 	
-	$res2 = db_query("UPDATE doc_data SET filesize='".$size."' WHERE docid='".$docid."'");
+	$res2 = db_query_params ('UPDATE doc_data SET filesize=$1 WHERE docid=$2',
+				 array ($size,
+					$docid)) ;
 	if (!$res2) {
 		echo "Couldn't update document #".$docid.":".db_error()."\n";
 		db_rollback();
@@ -50,4 +52,10 @@ for ($i=0; $i < db_numrows($res); $i++) {
 }
 echo "SUCCESS\n";
 db_commit();
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

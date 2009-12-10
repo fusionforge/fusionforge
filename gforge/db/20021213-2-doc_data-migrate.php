@@ -28,13 +28,11 @@ if (!$res) {
 $rows=db_numrows($res);
 
 for ($i=0; $i<$rows; $i++) {
-
-	$res2=db_query("UPDATE doc_data 
-		SET 
-		data='". base64_encode( util_unconvert_htmlspecialchars( db_result($res,$i,'data') )) ."',
-		filename='file".db_result($res,$i,'docid').".html',
-		filetype='text/html'
-		WHERE docid='".db_result($res,$i,'docid')."'");
+	$res2 = db_query_params ('UPDATE doc_data SET data=$1,filename=$2,filetype=$3 WHERE docid=$4',
+				 array (base64_encode( util_unconvert_htmlspecialchars( db_result($res,$i,'data'))),
+					'file'.db_result($res,$i,'docid').'.html',
+					'text/html',
+					db_result($res,$i,'docid'))) ;
 	if (!$res2 || db_affected_rows($res2) < 1) {
 		echo 'DB ERROR'.db_error();
 		db_rollback();
@@ -44,4 +42,10 @@ for ($i=0; $i<$rows; $i++) {
 
 db_commit();
 echo "SUCCESS\n";
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

@@ -76,7 +76,8 @@ $scripts = &get_scripts($db_path);
 
 foreach ($scripts as $script) {
 	if ((int) $script['date'] > $date) {
-		$res = db_query("SELECT * FROM database_changes WHERE filename='{$script['filename']}'");
+		$res = db_query_params ('SELECT * FROM database_changes WHERE filename=$1',
+					array ("{$script['filename']}")) ;
 		if (!$res) {
 			// error
 			show("ERROR-2: ".db_error()."\n");
@@ -85,7 +86,8 @@ foreach ($scripts as $script) {
 			show("Running script: {$script['filename']}\n");
 			$result = run_script($script);
 			if ($result) {
-				$res = db_query("INSERT INTO database_changes (filename) VALUES ('{$script['filename']}')");
+				$res = db_query_params ('INSERT INTO database_changes (filename) VALUES ($1)',
+							array ("{$script['filename']}")) ;
 				if (!$res)
 				{
 					show("ERROR-3: ".db_error()."\n");
@@ -488,5 +490,10 @@ function show($text) {
 	//echo $text;
 	fwrite(STDOUT, $text);
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>
