@@ -104,8 +104,9 @@ require_once '../../gforge/www/env.inc.php';
 require_once $gfwww.'include/squal_pre.php';    
 
 // Add alcatel theme to the database.
-db_query("INSERT INTO themes (theme_id, dirname, fullname, enabled) 
-             VALUES (5, 'alcatel-lucent', 'Alcatel-Lucent Theme', true)");
+db_query_params ('INSERT INTO themes (theme_id, dirname, fullname, enabled) VALUES (5, $1, $2, true)',
+		 array ('alcatel-lucent',
+			'Alcatel-Lucent Theme'));
 
 // Install tsearch2 for phpwiki & patch it for safe backups.
 //system("psql -q -Upostgres ".DB_NAME." < /usr/share/pgsql/contrib/tsearch2.sql >/dev/null 2>&1");
@@ -141,8 +142,9 @@ if (!$user_id) {
 	print "ERROR: Error creating admin account, no id returned";
 } else {
 	// Register the user in master group to get full admin rights.
-	$sql = "INSERT INTO user_group (user_id,group_id,admin_flags, role_id) VALUES ($user_id,1,'A', 17);";
-	$res = db_query($sql);
+	$res = db_query_params ('INSERT INTO user_group (user_id,group_id,admin_flags, role_id) VALUES ($1,1,$2,17)',
+				array ($user_id,
+				       'A'));
 }
 
 ?>
