@@ -129,8 +129,7 @@ AND snippet_package_version.snippet_package_version_id=$1',
  <select name="snippet_version_id">
 <?php
 
-$combolistresult=db_query
-("SELECT myname,snippet_version.snippet_version_id
+$combolistresult = db_query_params ('SELECT myname,snippet_version.snippet_version_id
 FROM ( SELECT MAX(post_date) AS
 mydate,name AS myname,snippet.snippet_id AS myid
 FROM
@@ -140,7 +139,7 @@ snippet.snippet_id=snippet_version.snippet_id
 GROUP BY
 name,snippet.snippet_id ) AS foo,snippet_version
 WHERE
-snippet_version.post_date=mydate;");
+snippet_version.post_date=mydate');
 $combolistrows=db_numrows($combolistresult);
 for ($i=0; $i<$combolistrows; $i++)
 {
