@@ -61,71 +61,90 @@ class TrackersSearchQuery extends SearchQuery {
 	}
 
 	/**
-	 * getQuery - get the sql query built to get the search results
+	 * getQuery - get the query built to get the search results
 	 *
-	 * @return string sql query to execute
+	 * @return array query+params array
 	 */
 	function getQuery() {
 		global $sys_use_fti;
+		
+		$qpa = db_construct_qpa () ;
+
 		if ($sys_use_fti) {
-			if(count($this->words)) {
-				$tsquery = ", to_tsquery('".$this->getFormattedWords()."') q, artifact_idx, artifact_message_idx ";
+			if (count ($this->words)) {
+				$qpa = db_construct_qpa ($qpa,
+							 'SELECT DISTINCT x.* FROM (SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_group_list.name, (rank(artifact_idx.vectors, q)+rank(artifact_message_idx.vectors, q)) AS rank FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users, artifact_group_list, to_tsquery($1) q, artifact_idx, artifact_message_idx WHERE users.user_id = artifact.submitted_by AND artifact_idx.artifact_id = artifact.artifact_id AND artifact_message_idx.id = artifact_message.id AND artifact_message_idx.artifact_id = artifact_message_idx.artifact_id AND artifact_group_list.group_artifact_id = artifact.group_artifact_id AND artifact_group_list.group_id = $2 ',
+							 
+							 array ($this->getFormattedWords(),
+								$this->groupId)) ;
 				$tsmatch = "(artifact_idx.vectors @@ q OR artifact_message_idx.vectors @@ q)";
-				$rankCol = ", (rank(artifact_idx.vectors, q)+rank(artifact_message_idx.vectors, q)) AS rank ";
-				$tsjoin = 'AND artifact_idx.artifact_id = artifact.artifact_id '
-						. 'AND artifact_message_idx.id = artifact_message.id '
-						. 'AND artifact_message_idx.artifact_id = artifact_message_idx.artifact_id ';
-				$orderBy = "ORDER BY RANK DESC";
 				$phraseOp = $this->getOperator();
 			} else {
-				$tsquery = "";
+				$qpa = db_construct_qpa ($qpa,
+							 'SELECT DISTINCT x.* FROM (SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_group_list.name FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users, artifact_group_list WHERE users.user_id = artifact.submitted_by AND artifact_group_list.group_artifact_id = artifact.group_artifact_id AND artifact_group_list.group_id = $1 ',
+							 array ($this->groupId)) ;
+
+
 				$tsmatch = "";
-				$tsjoin = "";
-				$rankCol = "";
 				$orderBy = "";
 				$phraseOp = "";
 			}
-			$phraseCond = '';
-			if(count($this->phrases)) {
-				$phraseCond .= $phraseOp.'('
-					. ' ('.$this->getMatchCond('artifact.details', $this->phrases).')'
-					. ' OR ('.$this->getMatchCond('artifact.summary', $this->phrases).')'
-					. ' OR ('.$this->getMatchCond('artifact_message.body', $this->phrases).'))';
+
+			if (count($this->phrases)) {
+				$qpa = db_construct_qpa ($qpa,
+							 'AND ((') ;
+				$qpa = $this->addMatchCondition($qpa, 'artifact.details');
+				$qpa = db_construct_qpa ($qpa,
+							 ') OR (') ;
+				$qpa = $this->addMatchCondition($qpa, 'artifact.summary');
+				$qpa = db_construct_qpa ($qpa,
+							 ') OR (') ;
+				$qpa = $this->addMatchCondition($qpa, 'artifact_message.body');
+				$qpa = db_construct_qpa ($qpa,
+							 ')) ') ;
 			}
-			$sql = 'SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_group_list.name '
-				. $rankCol
-				. 'FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users, artifact_group_list '
-				. $tsquery
-				. ' WHERE users.user_id = artifact.submitted_by '
-				. $tsjoin
-				. 'AND artifact_group_list.group_artifact_id = artifact.group_artifact_id '
-				. 'AND artifact_group_list.group_id = '.$this->groupId.' ';
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
-				$sql .= 'AND artifact_group_list.group_artifact_id in ('.$this->sections.') ';
+				$qpa = db_construct_qpa ($qpa,
+							 'AND artifact_group_list.group_artifact_id = ANY ($1) ',
+							 db_int_array_to_any_clause ($this->sections)) ;
 			}
 			if (!$this->showNonPublic) {
-				$sql .= 'AND artifact_group_list.is_public = 1 ';
+				$qpa = db_construct_qpa ($qpa,
+							 'AND artifact_group_list.is_public = 1 ') ;
 			}
-			$sql .= "AND ($tsmatch $phraseCond)";
-			$sql = "SELECT DISTINCT x.* FROM ($sql) x $orderBy";
+			$qpa = db_construct_qpa ($qpa,
+						 ') x') ;
+			if (count ($this->words)) {
+				$qpa = db_construct_qpa ($qpa,
+							 'ORDER BY rank DESC') ;
+			}
 		} else {
-			$sql = 'SELECT DISTINCT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_group_list.name '
-				. 'FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users, artifact_group_list '
-				. 'WHERE users.user_id = artifact.submitted_by '
-				. 'AND artifact_group_list.group_artifact_id = artifact.group_artifact_id '
-				. 'AND artifact_group_list.group_id = '.$this->groupId.' ';
+			$qpa = db_construct_qpa ($qpa,
+						 'SELECT DISTINCT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_group_list.name FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users, artifact_group_list WHERE users.user_id = artifact.submitted_by AND artifact_group_list.group_artifact_id = artifact.group_artifact_id AND artifact_group_list.group_id = $1',
+						 array ($this->groupId)) ;
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
-				$sql .= 'AND artifact_group_list.group_artifact_id in ('.$this->sections.') ';
+				$qpa = db_construct_qpa ($qpa,
+							 'AND artifact_group_list.group_artifact_id = ANY ($1) ',
+							 db_int_array_to_any_clause ($this->sections)) ;
 			}
 			if (!$this->showNonPublic) {
-				$sql .= 'AND artifact_group_list.is_public = 1 ';
+				$qpa = db_construct_qpa ($qpa,
+							 'AND artifact_group_list.is_public = 1 ') ;
 			}
-			$sql .= 'AND (('.$this->getIlikeCondition('artifact.details', $this->words).') ' 
-				. 'OR ('.$this->getIlikeCondition('artifact.summary', $this->words).') '
-				. 'OR ('.$this->getIlikeCondition('artifact_message.body', $this->words).')) '
-				. 'ORDER BY artifact_group_list.name, artifact.artifact_id';
+
+			$qpa = db_construct_qpa ($qpa,
+						 ' AND ((') ;
+			$qpa = $this->addIlikeCondition ($qpa, 'artifact.details') ;
+			$qpa = db_construct_qpa ($qpa,
+						 ') OR (') ;
+			$qpa = $this->addIlikeCondition ($qpa, 'artifact.summary') ;
+			$qpa = db_construct_qpa ($qpa,
+						 ') OR (') ;
+			$qpa = $this->addIlikeCondition ($qpa, 'artifact.message_body') ;
+			$qpa = db_construct_qpa ($qpa,
+						 ') ORDER BY artifact_group_list.name, artifact.artifact_id') ;
 		}
-		return $sql;
+		return $qpa ;
 	}
 	
 	/**
@@ -151,22 +170,24 @@ class TrackersSearchQuery extends SearchQuery {
 	}
 	
 	function getSearchByIdQuery() {
-		$sql = 'SELECT DISTINCT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_group_list.name '
-			. 'FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users, artifact_group_list '
-			. 'WHERE users.user_id = artifact.submitted_by '
-			. 'AND artifact_group_list.group_artifact_id = artifact.group_artifact_id '
-			. 'AND artifact_group_list.group_id = '.$this->groupId.' ';
+		$qpa = db_construct_qpa () ;
+		$qpa = db_construct_qpa ($qpa,
+					 'SELECT DISTINCT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_group_list.name FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users, artifact_group_list WHERE users.user_id = artifact.submitted_by AND artifact_group_list.group_artifact_id = artifact.group_artifact_id AND artifact_group_list.group_id = $1 ',
+					 array ($this->groupId)) ;
 		if ($this->sections != SEARCH__ALL_SECTIONS) {
-			$sql .= 'AND artifact_group_list.group_artifact_id in ('.$this->sections.') ';
+			$qpa = db_construct_qpa ($qpa,
+						 'AND artifact_group_list.group_artifact_id = ANY ($1) ',
+						 db_int_array_to_any_clause ($this->sections)) ;
 		}
 		if (!$this->showNonPublic) {
-			$sql .= 'AND artifact_group_list.is_public = 1 ';
+			$qpa = db_construct_qpa ($qpa,
+						 'AND artifact_group_list.is_public = 1 ') ;
 		}
-		$sql .= 'AND artifact.artifact_id=\''.$this->searchId.'\''
-			. 'ORDER BY artifact_group_list.name, artifact.artifact_id';
+		$qpa = db_construct_qpa ($qpa,
+					 'AND artifact.artifact_id=$1 ORDER BY artifact_group_list.name, artifact.artifact_id',
+					 array ($this->searchId)) ;
 
-
-		return $sql;
+		return $qpa ;
 	}
 }
 

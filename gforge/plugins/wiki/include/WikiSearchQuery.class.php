@@ -35,15 +35,17 @@ class WikiSearchQuery extends SearchQuery {
 	}
 
 	/**
-	 * getQuery - get the sql query built to get the search results
+	 * getQuery - get the query built to get the search results
 	 *
-	 * @return string sql query to execute
+	 * @return array query+params array
 	 */
 	function getQuery() {
 		
 		$pat = '_g'.$this->groupId.'_';
 		$len = strlen($pat)+1;
-		$sql = "SELECT plugin_wiki_page.id AS id, 
+		$qpa = db_construct_qpa () ;
+		$qpa = db_construct_qpa ($qpa,
+					 'SELECT plugin_wiki_page.id AS id, 
 substring(plugin_wiki_page.pagename from $len) AS pagename, 
 plugin_wiki_page.hits AS hits, 
 plugin_wiki_page.pagedata as pagedata, 
@@ -58,11 +60,15 @@ WHERE plugin_wiki_nonempty.id=plugin_wiki_page.id
 AND plugin_wiki_page.id=plugin_wiki_recent.id 
 AND plugin_wiki_page.id=plugin_wiki_version.id 
 AND latestversion=version 
-AND substring(plugin_wiki_page.pagename from 0 for $len) = '$pat' 
-AND ((".$this->getIlikeCondition('pagename', $this->words).") 
-OR (".$this->getIlikeCondition('content', $this->words)."))";
-//print "SQL: $sql\n";
-		return $sql;
+AND substring(plugin_wiki_page.pagename from 0 for $len) = $1 AND ((',
+					 array ($pat)) ;
+		$qpa = $this->addIlikeCondition ($qpa, 'pagename') ;
+		$qpa = db_construct_qpa ($qpa,
+					 ') OR (') ;
+		$qpa = $this->addIlikeCondition ($qpa, 'content') ;
+		$qpa = db_construct_qpa ($qpa,
+					 '))') ;
+		return $qpa ;
 	}
 }
 

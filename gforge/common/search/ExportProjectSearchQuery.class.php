@@ -39,61 +39,88 @@ class ExportProjectSearchQuery extends SearchQuery {
 	}
 
 	/**
-	 * getQuery - get the sql query built to get the search results
+	 * getQuery - get the query built to get the search results
 	 *
-	 * @return string sql query to execute
+	 * @return array query+params array
 	 */
 	function getQuery() {
 		global $sys_use_fti;
+		$qpa = db_construct_qpa () ;
 		if ($sys_use_fti) {
 			$words = $this->getFormattedWords();
 			if(count($this->words)) {
-				$tsquery0 = "headline(unix_group_name, q) as unix_group_name, headline(short_description, q) as short_description";
-				$tsquery = ", groups_idx, to_tsquery('".$words."') q";
-				$tsmatch = "vectors @@ q";
-				$rankCol = "";
-				$tsjoin = 'AND groups.group_id = groups_idx.group_id ';
-				$orderBy = "ORDER BY rank(vectors, q) DESC, group_name ASC";
-				$phraseOp = $this->getOperator();
+				$qpa = db_construct_qpa ($qpa,
+							 'SELECT headline(unix_group_name, q) as unix_group_name, headline(short_description, q) as short_description, type_id, groups.group_id, license, register_time FROM groups, groups_idx, to_tsquery($1) q ',
+							 array (implode (' ', $words))) ;
+				$qpa = db_construct_qpa ($qpa,
+							 'WHERE status IN ($1, $2) AND is_public=1 AND short_description <> $3 AND groups.group_id = groups_idx.group_id',
+							 array ('A',
+								'H',
+								'')) ;
+				$qpa = db_construct_qpa ($qpa,
+							 ' AND (vectors @@ q' ) ;
+				if (count($this->phrases)) {
+					$qpa = db_construct_qpa ($qpa,
+								 $this->getOperator()) ;
+					$qpa = db_construct_qpa ($qpa,
+								 '(') ;
+					$qpa = $this->addMatchCondition($qpa, 'group_name');
+					$qpa = db_construct_qpa ($qpa,
+								 ') OR (') ;
+					$qpa = $this->addMatchCondition($qpa, 'unix_group_name');
+					$qpa = db_construct_qpa ($qpa,
+								 ') OR (') ;
+					$qpa = $this->addMatchCondition($qpa, 'short_description');
+					$qpa = db_construct_qpa ($qpa,
+								 ')') ;
+				}
+				$qpa = db_construct_qpa ($qpa,
+							 ') ORDER BY rank(vectors, q) DESC, group_name ASC') ;
 			} else {
-				$tsquery0 = "unix_group_name, short_description";
-				$tsquery = "";
-				$tsmatch = "";
-				$tsjoin = "";
-				$rankCol = "";
-				$orderBy = "ORDER BY group_name";
-				$phraseOp = "";
+				$qpa = db_construct_qpa ($qpa,
+							 'SELECT unix_group_name, short_description, type_id, groups.group_id, license, register_time FROM groups ') ;
+				$qpa = db_construct_qpa ($qpa,
+							 'WHERE status IN ($1, $2) AND is_public=1 AND short_description <> $3',
+							 array ('A',
+								'H',
+								'')) ;
+				if (count($this->phrases)) {
+					$qpa = db_construct_qpa ($qpa,
+								 ' AND (' ) ;
+					$qpa = db_construct_qpa ($qpa,
+								 '(') ;
+					$qpa = $this->addMatchCondition($qpa, 'group_name');
+					$qpa = db_construct_qpa ($qpa,
+								 ') OR (') ;
+					$qpa = $this->addMatchCondition($qpa, 'unix_group_name');
+					$qpa = db_construct_qpa ($qpa,
+								 ') OR (') ;
+					$qpa = $this->addMatchCondition($qpa, 'short_description');
+					$qpa = db_construct_qpa ($qpa,
+								 '))') ;
+				}
+				$qpa = db_construct_qpa ($qpa,
+							 ') ORDER BY group_name' ) ;
 			}
-			$phraseCond = '';
-			if(count($this->phrases)) {
-				$groupNameCond = $this->getMatchCond('group_name', $this->phrases);
-				$groupDescriptionCond = $this->getMatchCond('short_description', $this->phrases);
-				$groupUnixNameCond = $this->getMatchCond('unix_group_name', $this->phrases);
-				$phraseCond = $phraseOp.' (('.$groupNameCond.') OR ('.$groupDescriptionCond.') OR ('.$groupUnixNameCond.'))';
-			}
-			$sql = "SELECT $tsquery0,
-				type_id,
-				groups.group_id,
-				license,
-				register_time
-				FROM groups $tsquery
-				WHERE status IN ('A', 'H') AND is_public='1' AND short_description <> ''
-				$tsjoin AND ($tsmatch $phraseCond)
-				$orderBy";
 		} else {
-			$groupNameCond = $this->getIlikeCondition('group_name', $this->words);
-			$groupDescriptionCond = $this->getIlikeCondition('short_description', $this->words);
-			$groupUnixNameCond = $this->getIlikeCondition('unix_group_name', $this->words);
-			
-			$sql = 'SELECT group_name,unix_group_name,type_id,groups.group_id, '
-				.'short_description,license,register_time '
-				.'FROM groups '
-				.'WHERE status IN (\'A\', \'H\') '
-				.'AND is_public=\'1\' '
-				.'AND groups.short_description<>\'\' '
-				.'AND (('.$groupNameCond.') OR ('.$groupDescriptionCond.') OR ('.$groupUnixNameCond.'))';
+			$qpa = db_construct_qpa ($qpa,
+						 'SELECT group_name,unix_group_name,type_id,groups.group_id, short_description,license,register_time FROM groups WHERE status IN ($1, $2) AND is_public=1 AND short_description <> $3 AND groups.group_id = groups_idx.group_id',
+							 array ('A',
+								'H',
+								'')) ;
+                        $qpa = db_construct_qpa ($qpa,
+                                                 ' AND ((') ;
+                        $qpa = $this->addIlikeCondition ($qpa, 'group_name') ;
+                        $qpa = db_construct_qpa ($qpa,
+                                                 ') OR (') ;
+                        $qpa = $this->addIlikeCondition ($qpa, 'unix_group_name') ;
+			$qpa = db_construct_qpa ($qpa,
+                                                 ') OR (') ;
+                        $qpa = $this->addIlikeCondition ($qpa, 'short_description') ;
+			$qpa = db_construct_qpa ($qpa,
+                                                 '))') ;
 		}
-		return $sql;
+		return $qpa ;
 	}
 }
 

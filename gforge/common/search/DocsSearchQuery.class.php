@@ -61,82 +61,119 @@ class DocsSearchQuery extends SearchQuery {
 	}
 
 	/**
-	 * getQuery - get the sql query built to get the search results
+	 * getQuery - get the query built to get the search results
 	 *
-	 * @return string sql query to execute
+	 * @return array query+params array
 	 */
 	function getQuery() {
 		global $sys_use_fti;
 		if ($sys_use_fti) {
 			return $this->getFTIQuery();
 		} else {
-			$sql = 'SELECT doc_data.docid, doc_data.title, doc_data.description, doc_groups.groupname'
-				.' FROM doc_data, doc_groups'
-				.' WHERE doc_data.doc_group = doc_groups.doc_group'
-				.' AND doc_data.group_id ='.$this->groupId;
+			$qpa = db_construct_qpa () ;
+			$qpa = db_construct_qpa ($qpa,
+						 'SELECT doc_data.docid, doc_data.title, doc_data.description, doc_groups.groupname FROM doc_data, doc_groups WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.group_id = $1',
+						 array ($this->groupId)) ;
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
-				$sql .= ' AND doc_groups.doc_group IN ('.$this->sections.') ';
+				$qpa = db_construct_qpa ($qpa,
+							 'AND doc_groups.doc_group = ANY ($1) ',
+							 db_int_array_to_any_clause ($this->sections)) ;
 			}
 			if ($this->showNonPublic) {
-				$sql .= ' AND doc_data.stateid IN (1, 4, 5)';
+				$qpa = db_construct_qpa ($qpa,
+							 ' AND doc_data.stateid IN (1, 4, 5)') ;
 			} else {
-				$sql .= ' AND doc_data.stateid = 1';
+				$qpa = db_construct_qpa ($qpa,
+							 ' AND doc_data.stateid = 1') ;
 			}
-			$sql .= ' AND (('.$this->getIlikeCondition('title', $this->words).')' 
-				.' OR ('.$this->getIlikeCondition('description', $this->words).'))'
-				.' ORDER BY doc_groups.groupname, doc_data.docid';
+			$qpa = db_construct_qpa ($qpa,
+						 ' AND ((') ;
+			$qpa = $this->addIlikeCondition ($qpa, 'title') ;
+			$qpa = db_construct_qpa ($qpa,
+						 ') OR (') ;
+			$qpa = $this->addIlikeCondition ($qpa, 'description') ;
+			$qpa = db_construct_qpa ($qpa,
+						 ') ORDER BY doc_groups.groupname, doc_data.docid') ;
 		}
-		return $sql;
+		return $qpa;
 	}
 	
 	function getFTIQuery() {
-		if ($this->showNonPublic) {
-			$nonPublic = "1, 4, 5";
-		} else {
-			$nonPublic = "1";
-		}
-		if ($this->sections != SEARCH__ALL_SECTIONS) {
-			$sections = "AND doc_groups.doc_group IN ($this->sections)";
-		} else {
-			$sections = '';
-		}
 		$words = $this->getFormattedWords();
 		$group_id=$this->groupId;
 
+		$qpa = db_construct_qpa () ;
 		if(count($this->words)) {
-			$tsquery0 = "headline(doc_data.title, q) AS title, headline(doc_data.description, q) AS description";
-			$tsquery = ", doc_data_idx, to_tsquery('".$words()."') q";
-			$tsmatch = "vectors @@ q";
-			$rankCol = "";
-			$tsjoin = 'AND doc_data.docid = doc_data_idx.docid  ';
-			$orderBy = "ORDER BY rank(vectors, q) DESC, groupname ASC";
-			$phraseOp = $this->getOperator();
+			$qpa = db_construct_qpa ($qpa,
+						 'SELECT doc_data.docid, headline(doc_data.title, q) AS title, headline(doc_data.description, q) AS description doc_groups.groupname FROM doc_data, doc_groups, doc_data_idx, to_tsquery($1) q',
+						 array (implode (' ', $words))) ;
+			$qpa = db_construct_qpa ($qpa,
+						 ' WHERE doc_data.doc_group = doc_groups.doc_group AND doc_data.docid = doc_data_idx.docid AND (vectors @@ q') ;
+			if (count($this->phrases)) {
+				$qpa = db_construct_qpa ($qpa,
+							 $this->getOperator()) ;
+				$qpa = db_construct_qpa ($qpa,
+							 '(') ;
+				$qpa = $this->addMatchCondition($qpa, 'title');
+				$qpa = db_construct_qpa ($qpa,
+							 ') OR (') ;
+				$qpa = $this->addMatchCondition($qpa, 'description');
+				$qpa = db_construct_qpa ($qpa,
+							 ')') ;
+			}
+			$qpa = db_construct_qpa ($qpa,
+						 ') AND doc_data.group_id = $1',
+						 array ($group_id)) ;
+			if ($this->sections != SEARCH__ALL_SECTIONS) {
+				$qpa = db_construct_qpa ($qpa,
+							 ' AND doc_groups.doc_group = ANY ($1)',
+							 db_int_array_to_any_clause ($this->sections)) ;
+			}
+			if ($this->showNonPublic) {
+				$qpa = db_construct_qpa ($qpa,
+							 ' AND doc_data.stateid IN (1, 4, 5)') ;
+			} else {
+				$qpa = db_construct_qpa ($qpa,
+							 ' AND doc_data.stateid = 1') ;
+			}
+			$qpa = db_construct_qpa ($qpa,
+						 ' ORDER BY rank(vectors, q) DESC, groupname ASC') ;
 		} else {
-			$tsquery0 = "title, description";
-			$tsquery = "";
-			$tsmatch = "";
-			$tsjoin = "";
-			$rankCol = "";
-			$orderBy = "ORDER BY groupname";
-			$phraseOp = "";
+			$qpa = db_construct_qpa ($qpa,
+						 'SELECT doc_data.docid, title, description doc_groups.groupname FROM doc_data, doc_groups') ;
+			$qpa = db_construct_qpa ($qpa,
+						 'WHERE doc_data.doc_group = doc_groups.doc_group') ;
+			if (count($this->phrases)) {
+				$qpa = db_construct_qpa ($qpa,
+							 $this->getOperator()) ;
+				$qpa = db_construct_qpa ($qpa,
+							 '(') ;
+				$qpa = $this->addMatchCondition($qpa, 'title');
+				$qpa = db_construct_qpa ($qpa,
+							 ') OR (') ;
+				$qpa = $this->addMatchCondition($qpa, 'description');
+				$qpa = db_construct_qpa ($qpa,
+							 ')') ;
+			}
+			$qpa = db_construct_qpa ($qpa,
+						 ') AND doc_data.group_id = $1',
+						 array ($group_id)) ;
+			if ($this->sections != SEARCH__ALL_SECTIONS) {
+				$qpa = db_construct_qpa ($qpa,
+							 'AND doc_groups.doc_group = ANY ($1) ',
+							 db_int_array_to_any_clause ($this->sections)) ;
+			}
+			if ($this->showNonPublic) {
+				$qpa = db_construct_qpa ($qpa,
+							 ' AND doc_data.stateid IN (1, 4, 5)') ;
+			} else {
+				$qpa = db_construct_qpa ($qpa,
+							 ' AND doc_data.stateid = 1') ;
+			}
+			$qpa = db_construct_qpa ($qpa,
+						 ' ORDER BY groupname') ;
 		}
-
-		$phraseCond = '';
-		if(count($this->phrases)) {
-			$titleCond = $this->getMatchCond('title', $this->phrases);
-			$descCond = $this->getMatchCond('description', $this->phrases);
-			$phraseCond = $phraseOp.' (('.$titleCond.') OR ('.$descCond.'))';
-		}
-		
-		$sql="SELECT doc_data.docid, $tsquery0, doc_groups.groupname
-			FROM doc_data, doc_groups $tsquery
-			WHERE doc_data.doc_group = doc_groups.doc_group
-			$tsjoin AND ($tsmatch $phraseCond )
-			AND doc_data.group_id = '$group_id'
-			$sections
-			AND doc_data.stateid IN ($nonPublic)
-			$orderBy";
-		return $sql;
+		return $qpa ;
 	}
 
 	/**

@@ -39,52 +39,60 @@ class PeopleSearchQuery extends SearchQuery {
 	}
 
 	/**
-	 * getQuery - get the sql query built to get the search results
+	 * getQuery - get the query built to get the search results
 	 *
-	 * @return string sql query to execute
+	 * @return array query+params array
 	 */
 	function getQuery() {
 		global $sys_use_fti;
+		
+		$qpa = db_construct_qpa () ;
+
 		if ($sys_use_fti) {
-			if(count($this->words)) {
-				$tsquery0 = ", user_name, headline(realname, q) as realname ";
+			if (count ($this->words)) {
 				$words = $this->getFormattedWords();
-				$tsquery = ", to_tsquery('$words') AS q, users_idx ";
-				$tsmatch = "vectors @@ q";
-				$rankCol = "";
-				$tsjoin = 'AND users_idx.user_id = users.user_id';
-				$orderBy = "ORDER BY rank(vectors, q) DESC, user_name";
-				$phraseOp = $this->getOperator();
+				$qpa = db_construct_qpa ($qpa,
+							 'SELECT users.user_id, user_name, headline(realname, q) as realname FROM users, to_tsquery($1) AS q, users_idx WHERE status=$2 AND users_idx.user_id = users.user_id AND (vectors @@ q ',
+							 array ($words,
+								'A'));
 			} else {
-				$tsquery0 = ", user_name, realname ";
-				$tsquery = "";
-				$tsmatch = "";
-				$tsjoin = "";
-				$rankCol = "";
-				$orderBy = "ORDER BY user_name";
-				$phraseOp = "";
+				$qpa = db_construct_qpa ($qpa,
+							 'SELECT users.user_id, user_name, realname FROM users WHERE status=$1 AND users_idx.user_id = users.user_id AND (',
+							 array ('A'));
 			}
-			$phraseCond = '';
-			if(count($this->phrases)) {
-				$phraseCond .= $phraseOp.'('
-					. ' ('.$this->getMatchCond('user_name', $this->phrases).')'
-					. ' OR ('.$this->getMatchCond('realname', $this->phrases).'))';
+			if (count ($this->phrases)) {
+				if (count ($this->words)) {
+					$qpa = db_construct_qpa ($qpa,
+								 $this->getOperator()) ;
+				}
+				$qpa = db_construct_qpa ($qpa,
+							 '(') ;
+				$qpa = $this->addMatchCondition($qpa, 'user_name');
+				$qpa = db_construct_qpa ($qpa,
+							 ') OR (') ;
+				$qpa = $this->addMatchCondition($qpa, 'realname');
+				$qpa = db_construct_qpa ($qpa,
+							 ')') ;
 			}
-			$sql = 'SELECT users.user_id '.$tsquery0
-				. 'FROM users '.$tsquery
-				. 'WHERE (status=\'A\') '
-				. $tsjoin
-				. " AND ($tsmatch $phraseCond) "
-				. $orderBy;
+			if (count ($this->words)) {
+				$qpa = db_construct_qpa ($qpa,
+							 ') ORDER BY rank(vectors, q) DESC, user_name') ;
+			} else {
+				$qpa = db_construct_qpa ($qpa,
+							 ') ORDER BY user_name') ;
+			}
 		} else {
-			$sql = 'SELECT user_name,user_id,realname ' 
-				. 'FROM users ' 
-				. 'WHERE (('.$this->getIlikeCondition('user_name', $this->words).') ' 
-				. 'OR ('.$this->getIlikeCondition('realname', $this->words).')) ' 
-				. 'AND (status=\'A\') ' 
-				. 'ORDER BY user_name';
+			$qpa = db_construct_qpa ($qpa,
+						 'SELECT user_name,user_id,realname FROM users WHERE ((') ;
+			$qpa = $this->addIlikeCondition ($qpa, 'user_name') ;
+			$qpa = db_construct_qpa ($qpa,
+						 ') OR (') ;
+			$qpa = $this->addIlikeCondition ($qpa, 'realname') ;
+			$qpa = db_construct_qpa ($qpa,
+						 ')) AND status=$1 ORDER BY user_name',
+						 array ('A')) ;
 		}
-		return $sql;
+		return $qpa ;
 	}
 }
 

@@ -48,57 +48,62 @@ class NewsSearchQuery extends SearchQuery {
 	}
 
 	/**
-	 * getQuery - get the sql query built to get the search results
+	 * getQuery - get the query built to get the search results
 	 *
-	 * @return string sql query to execute
+	 * @return array query+params array
 	 */
 	function getQuery() {
 		global $sys_use_fti;
+		
+		$qpa = db_construct_qpa () ;
+
 		if ($sys_use_fti) {
 			$group_id=$this->groupId;
-			if(count($this->words)) {
-				$tsquery0 = "headline(news_bytes.summary, q) as summary";
+
+			if (count ($this->words)) {
 				$words = $this->getFormattedWords();
-				$tsquery = ", to_tsquery('$words') AS q, news_bytes_idx";
-				$tsmatch = "vectors @@ q";
-				$rankCol = "";
-				$tsjoin = 'AND news_bytes_idx.id = news_bytes.id';
-				$orderBy = "ORDER BY rank(vectors, q) DESC, post_date DESC";
-				$phraseOp = $this->getOperator();
+				$qpa = db_construct_qpa ($qpa,
+							 'SELECT headline(news_bytes.summary, q) as summary, news_bytes.post_date, news_bytes.forum_id, users.realname FROM news_bytes, users, to_tsquery($1) AS q, news_bytes_idx WHERE (news_bytes.group_id=$2 AND news_bytes.is_approved <> 4 AND news_bytes_idx.id = news_bytes.id AND news_bytes.submitted_by=users.user_id) AND (vectors @@ q ',
+							 array ($words,
+								$group_id)) ;
 			} else {
-				$tsquery0 = "summary";
-				$tsquery = "";
-				$tsmatch = "";
-				$tsjoin = "";
-				$rankCol = "";
-				$orderBy = "ORDER BY post_date DESC";
-				$phraseOp = "";
+				$qpa = db_construct_qpa ($qpa,
+							 'SELECT summary, news_bytes.post_date, news_bytes.forum_id, users.realname FROM news_bytes, users WHERE (news_bytes.group_id=$1 AND news_bytes.is_approved <> 4 AND news_bytes.submitted_by=users.user_id) AND (',
+							 array ($group_id)) ;
 			}
-			$phraseCond = '';
-			if(count($this->phrases)) {
-				$phraseCond .= $phraseOp.'('
-					. ' ('.$this->getMatchCond('summary', $this->phrases).')'
-					. ' OR ('.$this->getMatchCond('details', $this->phrases).'))';
+			if (count ($this->phrases)) {
+				if (count ($this->words)) {
+					$qpa = db_construct_qpa ($qpa,
+								 $this->getOperator()) ;
+				}
+				$qpa = db_construct_qpa ($qpa,
+							 ' (') ;
+				$qpa = $this->addMatchCondition ($qpa, 'summary') ;
+				$qpa = db_construct_qpa ($qpa,
+							 ') OR (') ;
+				$qpa = $this->addMatchCondition ($qpa, 'details') ;
+				$qpa = db_construct_qpa ($qpa,
+							 ')') ;
 			}
-			$sql = "SELECT $tsquery0,
-				news_bytes.post_date,
-				news_bytes.forum_id,
-				users.realname
-				FROM news_bytes, users $tsquery
-				WHERE (news_bytes.group_id='$group_id' AND news_bytes.is_approved <> '4'
-				$tsjoin
-				AND news_bytes.submitted_by=users.user_id) AND
-				($tsmatch $phraseCond)
-				$orderBy";
+			if (count ($this->words)) {
+				$qpa = db_construct_qpa ($qpa,
+							 ') ORDER BY rank(vectors, q) DESC, post_date DESC') ;
+			} else {
+				$qpa = db_construct_qpa ($qpa,
+							 ') ORDER BY post_date DESC') ;
+			}
 		} else {
-			$sql = 'SELECT news_bytes.summary, news_bytes.post_date, news_bytes.forum_id, users.realname'
-				. ' FROM news_bytes, users'
-				. ' WHERE (group_id='.$this->groupId.' AND is_approved <> \'4\' AND news_bytes.submitted_by = users.user_id' 
-				. ' AND (('.$this->getIlikeCondition('summary', $this->words).')' 
-				. ' OR ('.$this->getIlikeCondition('details', $this->words).')))'
-				. ' ORDER BY post_date DESC';
+			$qpa = db_construct_qpa ($qpa,
+						 'SELECT news_bytes.summary, news_bytes.post_date, news_bytes.forum_id, users.realname FROM news_bytes, users WHERE (group_id=$1 AND is_approved <> 4 AND news_bytes.submitted_by = users.user_id AND ((',
+						 array ($this->groupId)) ;
+			$qpa = $this->addIlikeCondition ($qpa, 'summary') ;
+			$qpa = db_construct_qpa ($qpa,
+						 ') OR (') ;
+			$qpa = $this->addIlikeCondition ($qpa, 'details') ;
+			$qpa = db_construct_qpa ($qpa,
+						 ') ORDER BY post_date DESC') ;
 		}
-		return $sql;
+		return $qpa ;
 	}
 }
 

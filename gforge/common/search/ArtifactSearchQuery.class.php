@@ -59,95 +59,128 @@ class ArtifactSearchQuery extends SearchQuery {
 	}
 
 	/**
-	 * getQuery - get the sql query built to get the search results
+	 * getQuery - get the query built to get the search results
 	 *
-	 * @return string sql query to execute
+	 * @return array query+params array
 	 */
 	function getQuery() {
 		global $sys_database_type;
-
 		global $sys_use_fti;
+
+		$qpa = db_construct_qpa () ;
+
 		if ($sys_use_fti) {
 			$words=$this->getFormattedWords();
 			$artifactId = $this->artifactId;
-		    if (count($words)) {
-				$tsquery0 = "headline(summary, '".$this->getFormattedWords()."') as summary";
-				$tsquery = ", artifact_idx ai, artifact_message_idx ami, to_tsquery('".$words."') q";
-				$tsmatch = "(ai.vectors @@ q OR ami.vectors @@ q)"; 
-				$rankCol = "sum((rank(ai.vectors, q)+rank(ami.vectors, q))) as rank";
-				$tsjoin = 'AND ai.artifact_id = a.artifact_id '
-						. 'AND ami.id = am.id ';
-				$phraseOp = $this->getOperator();
-			} else {
-				$tsquery0 = "summary";
-				$tsquery = "";
-				$tsmatch = "";
-				$tsjoin = "";
-				$rankCol = "0 as rank";
-				$phraseOp = "";
-			}
-			$phraseCond = '';
-			if (count($this->phrases)) {
-				$detailsCond = $this->getMatchCond('a.details', $this->phrases);
-				$summaryCond = $this->getMatchCond('a.summary', $this->phrases);
-				$msgCond = $this->getMatchCond('am.body', $this->phrases);
-				$phraseCond = "$phraseOp (($detailsCond) OR ($summaryCond))";
-			}
-			$sql = "
-				select a.group_artifact_id,a.artifact_id, $tsquery0,
-				a.open_date,users.realname, rank
-				FROM (SELECT a.artifact_id,
-				$rankCol
-				FROM artifact a LEFT OUTER JOIN artifact_message am USING (artifact_id)
-				$tsquery
-				WHERE 
-				a.group_artifact_id='$artifactId'
-				$tsjoin
-				AND ($tsmatch $phraseCond)
-				GROUP BY a.artifact_id) x,
-				artifact a, users
-				WHERE
-				a.artifact_id = x.artifact_id
-				AND users.user_id=a.submitted_by
-				ORDER BY group_artifact_id ASC, rank DESC, a.artifact_id ASC";
-		} else {
 
-			if ($sys_database_type == "mysql") {
-				$sql = 'SELECT DISTINCT a.group_artifact_id,a.artifact_id,a.summary,a.open_date,users.realname ';
+			if (count($words)) {
+				$qpa = db_construct_qpa ($qpa,
+							 'SELECT a.group_artifact_id, a.artifact_id, headline(summary, $1) AS summary, ',
+							 array ($this->getFormattedWords())) ;
+				$qpa = db_construct_qpa ($qpa,
+							 'a.open_date, users.realname, rank FROM (SELECT a.artifact_id, SUM (RANK(ai.vectors, q) + RANK(ami.vectors, q)) AS rank FROM artifact a LEFT OUTER JOIN artifact_message am USING (artifact_id)') ;
+
+				$qpa = db_construct_qpa ($qpa,
+							 ', artifact_idx ai, artifact_message_idx ami, to_tsquery($1) q',
+							 array ($words)) ;
+				$qpa = db_construct_qpa ($qpa,
+							 'WHERE a.group_artifact_id=$1',
+							 array ($artifactId)) ;
+				$qpa = db_construct_qpa ($qpa,
+							 ' AND ai.artifact_id = a.artifact_id AND ami.id = am.id AND ((ai.vectors @@ q OR ami.vectors @@ q) ') ;
+
+				if (count($this->phrases)) {
+					$qpa = db_construct_qpa ($qpa,
+								 $this->getOperator()) ;
+					$qpa = db_construct_qpa ($qpa,
+								 '(') ;
+					$qpa = $this->addMatchCondition($qpa, 'a.details');
+					$qpa = db_construct_qpa ($qpa,
+								 ') OR (') ;
+					$qpa = $this->addMatchCondition($qpa, 'a.summary');
+					$qpa = db_construct_qpa ($qpa,
+								 ') OR (') ;
+					$qpa = $this->addMatchCondition($qpa, 'am.body');
+					$qpa = db_construct_qpa ($qpa,
+								 ')') ;
+				}
+				$qpa = db_construct_qpa ($qpa,
+							 ') GROUP BY a.artifact_id) x, artifact a, users WHERE a.artifact_id=x.artifact_id AND users.user_id=a.submitted_by ORDER BY group_artifact_id ASC, rank DESC, a.artifact_id ASC') ;
 			} else {
-				$sql = 'SELECT DISTINCT ON (a.group_artifact_id,a.artifact_id) a.group_artifact_id,a.artifact_id,a.summary,a.open_date,users.realname ';
+				$qpa = db_construct_qpa ($qpa,
+							 'SELECT a.group_artifact_id, a.artifact_id, summary, a.open_date, users.realname, rank FROM (SELECT a.artifact_id, 0 AS rank FROM artifact a LEFT OUTER JOIN artifact_message am USING (artifact_id)') ;
+
+				$qpa = db_construct_qpa ($qpa,
+							 'WHERE a.group_artifact_id=$1',
+							 array ($artifactId)) ;
+
+				if (count($this->phrases)) {
+					$qpa = db_construct_qpa ($qpa,
+								 ' AND (') ;
+					$qpa = db_construct_qpa ($qpa,
+								 '(') ;
+					$qpa = $this->addMatchCondition($qpa, 'a.details');
+					$qpa = db_construct_qpa ($qpa,
+								 ') OR (') ;
+					$qpa = $this->addMatchCondition($qpa, 'a.summary');
+					$qpa = db_construct_qpa ($qpa,
+								 ') OR (') ;
+					$qpa = $this->addMatchCondition($qpa, 'am.body');
+					$qpa = db_construct_qpa ($qpa,
+								 '))') ;
+				}
+				$qpa = db_construct_qpa ($qpa,
+							 ' GROUP BY a.artifact_id) x, artifact a, users WHERE a.artifact_id=x.artifact_id AND users.user_id=a.submitted_by ORDER BY group_artifact_id ASC, rank DESC, a.artifact_id ASC') ;
 			}
-			$sql.='FROM artifact a LEFT OUTER JOIN artifact_message am USING (artifact_id), users ' 
-				. 'WHERE a.group_artifact_id=\''.$this->artifactId.'\' '
-				. 'AND users.user_id=a.submitted_by '
-				. 'AND (('.$this->getIlikeCondition('a.details', $this->words).') ' 
-				. 'OR ('.$this->getIlikeCondition('a.summary', $this->words).') '
-				. 'OR ('.$this->getIlikeCondition('am.body', $this->words).')) '
-				. 'ORDER BY group_artifact_id ASC, a.artifact_id ASC';
+		} else {
+			if ($sys_database_type == "mysql") {
+				$qpa = db_construct_qpa ($qpa,
+							 'SELECT DISTINCT a.group_artifact_id,a.artifact_id,a.summary,a.open_date,users.realname ') ;
+			} else {
+				$qpa = db_construct_qpa ($qpa,
+							 'SELECT DISTINCT ON (a.group_artifact_id,a.artifact_id) a.group_artifact_id,a.artifact_id,a.summary,a.open_date,users.realname ') ;
+			}
+			$qpa = db_construct_qpa ($qpa,
+						 'FROM artifact a LEFT OUTER JOIN artifact_message am USING (artifact_id), users WHERE a.group_artifact_id=$1 AND users.user_id=a.submitted_by AND ((',
+						 array ($this->artifactId)) ;
+			
+			$qpa = $this->addIlikeCondition ($qpa, 'a.details') ;
+			$qpa = db_construct_qpa ($qpa,
+						 ') OR (') ;
+			$qpa = $this->addIlikeCondition ($qpa, 'a.summary') ;
+			$qpa = db_construct_qpa ($qpa,
+						 ') OR (') ;
+			$qpa = $this->addIlikeCondition ($qpa, 'am.body') ;
+			$qpa = db_construct_qpa ($qpa,
+						 ')) ORDER BY group_artifact_id ASC, a.artifact_id ASC') ;
 		}
-		return $sql;
+		return $qpa;
 	}
 
 	/**
-	 * getSearchByIdQuery - get the sql query built to get the search results when we are looking for an int
+	 * getSearchByIdQuery - get the query built to get the search results when we are looking for an int
 	 *
-	 * @return string sql query to execute
+	 * @return array query+params array
 	 */	
 	function getSearchByIdQuery() {
 		global $sys_database_type;
 
-		if ($sys_database_type == "mysql") {
-			$sql = 'SELECT DISTINCT a.group_artifact_id, a.artifact_id ';
-		} else {
-			$sql = 'SELECT DISTINCT ON (a.group_artifact_id,a.artifact_id) a.group_artifact_id, a.artifact_id ';
-		}
-		$sql.='FROM artifact a ' 
-			. 'WHERE a.group_artifact_id=\''.$this->artifactId.'\' '
-			. 'AND a.artifact_id=\''.$this->searchId.'\'';
+		$qpa = db_construct_qpa () ;
 
-		return $sql;
+		if ($sys_database_type == "mysql") {
+			$qpa = db_construct_qpa ($qpa,
+						 'SELECT DISTINCT a.group_artifact_id, a.artifact_id') ;
+		} else {
+			$qpa = db_construct_qpa ($qpa,
+						 'SELECT DISTINCT ON (a.group_artifact_id,a.artifact_id) a.group_artifact_id, a.artifact_id') ;
+		}
+		$qpa = db_construct_qpa ($qpa,
+					 ' FROM artifact a WHERE a.group_artifact_id=$1 AND a.artifact_id=$2',
+					 array ($this->artifactId,
+						$this->searchId)) ;
+
+		return $qpa;
 	}
-	
 }
 
 // Local Variables:

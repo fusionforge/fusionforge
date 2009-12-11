@@ -169,9 +169,9 @@ class SearchQuery extends Error {
 	function executeQuery() {
 		global $sys_use_fti;
 		if($this->searchId) {
-			$query = $this->getSearchByIdQuery();
+			$qpa = $this->getSearchByIdQuery();
 		} else {
-			$query = $this->getQuery();
+			$qpa = $this->getQuery();
 		}
 
 		if ($sys_use_fti) {
@@ -179,7 +179,7 @@ class SearchQuery extends Error {
 					 array ('default'));
 		}
 		$this->result = db_query(
-			$query,
+			$qpa,
 			$this->rowsPerPage + 1,
 			$this->offset,
 			SYS_DB_SEARCH
@@ -190,37 +190,47 @@ class SearchQuery extends Error {
 	}
 	
 	/**
-	 * getQuery - returns the sql query built to get the search results
+	 * getQuery - returns the query built to get the search results
 	 * This is an abstract method. It _MUST_ be implemented in children classes.
 	 *
-	 * @return string sql query to execute
+	 * @return array query+params array
 	 */
 	function getQuery() {
 		return;
 	}
 
-	/**
-	 * getIlikeCondition - build the ILIKE condition of the SQL query for a given field name
-	 *
-	 * @param string $fieldName name of the field in the ILIKE condition
-	 * @return string the condition
-	 */
-	function getIlikeCondition($fieldName) {
-		global $sys_database_type;
-
-		$wordArgs = array_map ('strtolower',
-				       array_merge($this->words, str_replace(' ', "\\\s+", $this->phrases)));
-		return "lower($fieldName) LIKE '%". implode("%' ".$this->operator." lower(".$fieldName.") LIKE '%", $wordArgs) ."%'";
+	function addMatchCondition($qpa, $fieldName) {
+		if(!count($arr)) {
+			$qpa = db_construct_qpa ($qpa, 'TRUE') ;
+		} else {
+			$regexs = str_replace(' ', "\\\s+", $arr);
+			for ($i = 0; $i < count ($regexs); $i++) {
+				if ($i > 0) {
+					$qpa = db_construct_qpa ($qpa,
+								 $this->operator) ;
+				}
+				$qpa = db_construct_qpa ($qpa,
+							 $fieldName.' ~* $1',
+							 $regexs[$i]) ;
+			}
+		}
+		return $qpa;
 	}
 
-	function getMatchCond($fieldName, $arr) {
-		if(!count($arr)) {
-			$result = 'TRUE';
-		} else {
-			$regexs = str_replace(' ', "\\\s+",$arr);
-			$result = $fieldName." ~* '" . implode("' ".$this->operator." ".$fieldName." ~* '", $regexs) ."'";
+	function addIlikeCondition($qpa, $fieldName) {
+		$wordArgs = array_map ('strtolower',
+				       array_merge($this->words, str_replace(' ', "\\\s+", $this->phrases)));
+
+		for ($i = 0; $i < count ($wordArgs); $i++) {
+			if ($i > 0) {
+				$qpa = db_construct_qpa ($qpa,
+							 $this->operator) ;
+			}
+			$qpa = db_construct_qpa ($qpa,
+						 'lower ('.$fieldName.' LIKE $1',
+						 $wordArgs[$i]) ;
 		}
-		return $result;
+		return $qpa ;
 	}
 	
 	/**
@@ -306,10 +316,7 @@ class SearchQuery extends Error {
 	 */
 	function setSections($sections) {
 		if(is_array($sections)) {
-			//make a comma separated string from the sections array
-			foreach($sections as $key => $section) 
-				$sections[$key] = '\''.$section.'\'';
-			$this->sections = implode(', ', $sections);
+			$this->sections = array_keys ($sections) ;
 		} else {
 			$this->sections = $sections;
 		}

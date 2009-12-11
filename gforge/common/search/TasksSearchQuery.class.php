@@ -61,71 +61,85 @@ class TasksSearchQuery extends SearchQuery {
 	}
 
 	/**
-	 * getQuery - get the sql query built to get the search results
+	 * getQuery - get the query built to get the search results
 	 *
-	 * @return string sql query to execute
+	 * @return array query+params array
 	 */
 	function getQuery() {
 		global $sys_use_fti;
+
+		$qpa = db_construct_qpa () ;
+		
 		if ($sys_use_fti) {
-			if(count($this->words)) {
-				$tsquery0 = "headline(project_task.summary, q) AS summary,";
+			if (count ($this->words)) {
 				$words = $this->getFormattedWords();
-				$tsquery = ", to_tsquery('$words') AS q, project_task_idx";
-				$tsmatch = "vectors @@ q";
-				$rankCol = "";
-				$tsjoin = ' AND project_task.project_task_id = project_task_idx.project_task_id';
-				$orderBy = "ORDER BY project_group_list.project_name, rank(vectors, q) DESC, project_task.project_task_id";
-				$phraseOp = $this->getOperator();
+
+				$qpa = db_construct_qpa ($qpa,
+							 'SELECT project_task.project_task_id, project_task.percent_complete, headline(project_task.summary, q) AS summary, project_task.start_date,project_task.end_date,users.firstname||$1||users.lastname AS realname, project_group_list.project_name, project_group_list.group_project_id FROM project_task, users, project_group_list, to_tsquery($2) AS q, project_task_idx WHERE project_task.created_by = users.user_id AND project_task.project_task_id = project_task_idx.project_task_id AND project_task.group_project_id = project_group_list.group_project_id AND project_group_list.group_id=$3 ',
+							 array (' ',
+								$words,
+								$this->groupId)) ;
 			} else {
-				$tsquery0 = "summary, ";
-				$tsquery = "";
-				$tsmatch = "";
-				$tsjoin = "";
-				$rankCol = "";
-				$orderBy = "ORDER BY project_group_list.project_name, project_task.project_task_id";
-				$phraseOp = "";
+				$qpa = db_construct_qpa ($qpa,
+							 'SELECT project_task.project_task_id, project_task.percent_complete, summary, project_task.start_date,project_task.end_date,users.firstname||$1||users.lastname AS realname, project_group_list.project_name, project_group_list.group_project_id  FROM project_task, users, project_group_list WHERE project_task.created_by = users.user_id AND project_task.group_project_id = project_group_list.group_project_id AND project_group_list.group_id = $2 ',
+							 array (' ',
+								$this->groupId)) ;
 			}
-			$phraseCond = '';
-			if(count($this->phrases)) {
-				$phraseCond .= $phraseOp.'('
-					. ' ('.$this->getMatchCond('summary', $this->phrases).')'
-					. ' OR ('.$this->getMatchCond('details', $this->phrases).'))';
-			}
-			$sql = 'SELECT project_task.project_task_id,project_task.percent_complete,'
-			    .  $tsquery0
-				. ' project_task.start_date,project_task.end_date,users.firstname||\' \'||users.lastname AS realname, project_group_list.project_name, project_group_list.group_project_id ' 
-				. ' FROM project_task, users, project_group_list '
-				. $tsquery
-				. ' WHERE project_task.created_by = users.user_id'
-				. $tsjoin
-				. ' AND project_task.group_project_id = project_group_list.group_project_id '
-				. ' AND project_group_list.group_id  ='.$this->groupId.' ';
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
-				$sql .= 'AND project_group_list.group_project_id in ('.$this->sections.') ';
+				$qpa = db_construct_qpa ($qpa,
+							 'AND project_group_list.group_project_id = ANY ($1) ',
+							 db_int_array_to_any_clause ($this->sections)) ;
 			}
 			if (!$this->showNonPublic) {
-				$sql .= 'AND project_group_list.is_public = 1 ';
+				$qpa = db_construct_qpa ($qpa,
+							 'AND project_group_list.is_public = 1 ') ;
 			}
-			$sql .= "AND ($tsmatch $phraseCond) $orderBy";
+			if (count($this->phrases)) {
+				if (count ($this->words)) {
+					$qpa = db_construct_qpa ($qpa,
+								 'AND (vectors @@ q AND (') ;
+				} else {
+					$qpa = db_construct_qpa ($qpa,
+								 'AND ((') ;
+				}
+				$qpa = $this->addMatchCondition($qpa, 'summary');
+				$qpa = db_construct_qpa ($qpa,
+							 ') OR (') ;
+				$qpa = $this->addMatchCondition($qpa, 'details');
+				$qpa = db_construct_qpa ($qpa,
+							 ')) ') ;
+			}
+			if (count ($this->words)) {
+				$qpa = db_construct_qpa ($qpa,
+							 'ORDER BY project_group_list.project_name, rank(vectors, q) DESC, project_task.project_task_id') ;
+			} else {
+				$qpa = db_construct_qpa ($qpa,
+							 'ORDER BY project_group_list.project_name, project_task.project_task_id') ;
+			}
 		} else {
-			$sql = 'SELECT project_task.project_task_id,project_task.summary,project_task.percent_complete,'
-				. ' project_task.start_date,project_task.end_date,users.firstname||\' \'||users.lastname AS realname, project_group_list.project_name, project_group_list.group_project_id ' 
-				. ' FROM project_task, users, project_group_list' 
-				. ' WHERE project_task.created_by = users.user_id'
-				. ' AND project_task.group_project_id = project_group_list.group_project_id '
-				. ' AND project_group_list.group_id  ='.$this->groupId.' ';
+			$qpa = db_construct_qpa ($qpa,
+						 'SELECT project_task.project_task_id, project_task.summary, project_task.percent_complete, project_task.start_date, project_task.end_date, users.firstname||$1||users.lastname AS realname, project_group_list.project_name, project_group_list.group_project_id FROM project_task, users, project_group_list WHERE project_task.created_by = users.user_id AND project_task.group_project_id = project_group_list.group_project_id AND project_group_list.group_id = $2 ',
+						 array (' ',
+							$this->groupId)) ;
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
-				$sql .= 'AND project_group_list.group_project_id in ('.$this->sections.') ';
+				$qpa = db_construct_qpa ($qpa,
+							 'AND project_group_list.group_project_id = ANY ($1) ',
+							 db_int_array_to_any_clause ($this->sections)) ;
 			}
 			if (!$this->showNonPublic) {
-				$sql .= 'AND project_group_list.is_public = 1 ';
+				$qpa = db_construct_qpa ($qpa,
+							 'AND project_group_list.is_public = 1 ') ;
 			}
-			$sql .= 'AND(('.$this->getIlikeCondition('summary', $this->words).')' 
-				. ' OR ('.$this->getIlikeCondition('details', $this->words).'))' 
-				. ' ORDER BY project_group_list.project_name, project_task.project_task_id';
+			$qpa = db_construct_qpa ($qpa,
+						 ' AND ((') ;
+			$qpa = $this->addIlikeCondition ($qpa, 'summary') ;
+			$qpa = db_construct_qpa ($qpa,
+						 ') OR (') ;
+			$qpa = $this->addIlikeCondition ($qpa, 'details') ;
+			$qpa = db_construct_qpa ($qpa,
+						 ') ORDER BY project_group_list.project_name, project_task.project_task_id') ;
 		}
-		return $sql;
+		return $qpa ;
 	}
 	
 	/**

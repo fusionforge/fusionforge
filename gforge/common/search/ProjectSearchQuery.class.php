@@ -39,61 +39,89 @@ class ProjectSearchQuery extends SearchQuery {
 	}
 
 	/**
-	 * getQuery - get the sql query built to get the search results
+	 * getQuery - get the query built to get the search results
 	 *
-	 * @return string sql query to execute
+	 * @return array query+params array
 	 */
 	function getQuery() {
 		global $sys_use_fti, $LUSER;
+
+		$qpa = db_construct_qpa () ;
+
 		if ($sys_use_fti) {
-			if(count($this->words)) {
-				$tsquery0 = "headline(group_name, q) as group_name, " .
-						"unix_group_name, " .
-						"headline(short_description, q) as short_description";
+			if (count ($this->words)) {
 				$words = $this->getFormattedWords();
-				$tsquery = ", to_tsquery('$words') AS q, groups_idx as i ";
-				$tsmatch = "vectors @@ q";
-				$rankCol = "";
-				$tsjoin = 'AND g.group_id = i.group_id';
-				$distinctOn = "rank(vectors, q), group_name";
-				$orderBy = "ORDER BY rank(vectors, q) DESC, group_name";
-				$phraseOp = $this->getOperator();
+				$qpa = db_construct_qpa ($qpa,
+							 'SELECT DISTINCT ON (rank(vectors, q), group_name) type_id, g.group_id, headline(group_name, q) as group_name, unix_group_name, headline(short_description, q) as short_description FROM groups AS g, to_tsquery($1) AS q, groups_idx as i WHERE g.status in ($2, $3) AND (g.is_public=1 ',
+							 array ($words,
+								'A',
+								'H')) ;
+				
+				if (isset ($LUSER)) {
+					$qpa = db_construct_qpa ($qpa,
+								 'OR g.group_id in (SELECT ug.group_id FROM user_group ug WHERE ug.user_id = $1 AND ug.group_id = g.group_id) ',
+								 $LUSER->getID()) ;
+				}
+				$qpa = db_construct_qpa ($qpa,
+							 ') AND (vectors @@ q AND ') ;
 			} else {
-				$tsquery0 = "group_name, unix_group_name, short_description";
-				$tsquery = "";
-				$tsmatch = "";
-				$tsjoin = "";
-				$rankCol = "";
-				$distinctOn = "group_name";
-				$orderBy = "ORDER BY group_name";
-				$phraseOp = "";
+				$qpa = db_construct_qpa ($qpa,
+							 'SELECT DISTINCT ON (group_name) type_id, g.group_id, group_name, unix_group_name, short_description FROM groups AS g WHERE g.status in ($1, $2) AND (g.is_public=1 ',
+							 array ('A',
+								'H')) ;
+				if (isset ($LUSER)) {
+					$qpa = db_construct_qpa ($qpa,
+								 'OR g.group_id in (SELECT ug.group_id FROM user_group ug WHERE ug.user_id = $1 AND ug.group_id = g.group_id) ',
+								 $LUSER->getID()) ;
+				}
+				$qpa = db_construct_qpa ($qpa,
+							 ') AND (') ;
+
 			}
-			$phraseCond = '';
-			if(count($this->phrases)) {
-				$groupNameCond = $this->getMatchCond('group_name', $this->phrases);
-				$groupDescriptionCond = $this->getMatchCond('short_description', $this->phrases);
-				$groupUnixNameCond = $this->getMatchCond('unix_group_name', $this->phrases);
-				$phraseCond = $phraseOp.' (('.$groupNameCond.') OR ('.$groupDescriptionCond.') OR ('.$groupUnixNameCond.'))';
+			if (count($this->phrases)) {
+				$qpa = db_construct_qpa ($qpa,
+							 '(') ;
+				$qpa = $this->addMatchCondition($qpa, 'group_name');
+				$qpa = db_construct_qpa ($qpa,
+							 ') OR (') ;
+				$qpa = $this->addMatchCondition($qpa, 'short_description');
+				$qpa = db_construct_qpa ($qpa,
+							 ') OR (') ;
+				$qpa = $this->addMatchCondition($qpa, 'unix_group_name');
+				$qpa = db_construct_qpa ($qpa,
+							 ') ') ;
 			}
-			$sql = "SELECT DISTINCT ON ($distinctOn) type_id, g.group_id, " .$tsquery0.
-					" FROM groups AS g ".$tsquery.
-					" WHERE g.status in ('A', 'H') AND (g.is_public='1' ";
-			if (isset($LUSER))
-				$sql .= 'OR g.group_id in (SELECT ug.group_id FROM user_group ug WHERE ug.user_id = \''. $LUSER->getID() .'\' AND ug.group_id = g.group_id) ';
-			$sql .= ") AND ($tsmatch $phraseCond) $tsjoin $orderBy";
+			$qpa = db_construct_qpa ($qpa,
+						 ') ') ;
+			if (count ($this->words)) {
+				$qpa = db_construct_qpa ($qpa,
+							 'AND g.group_id = i.group_id ORDER BY rank(vectors, q) DESC, group_name') ;
+			} else {
+				$qpa = db_construct_qpa ($qpa,
+							 'ORDER BY group_name') ;
+			}
 		} else {
-			$groupNameCond = $this->getIlikeCondition('g.group_name', $this->words);
-			$groupDescriptionCond = $this->getIlikeCondition('g.short_description', $this->words);
-			$groupUnixNameCond = $this->getIlikeCondition('g.unix_group_name', $this->words);
-			
-			$sql = 'SELECT g.group_name AS group_name, g.unix_group_name AS unix_group_name, g.type_id AS type_id, g.group_id AS group_id, g.short_description AS short_description '
-				.'FROM groups g '
-				.'WHERE g.status IN (\'A\', \'H\') AND (g.is_public=\'1\' ';
-			if (isset($LUSER))
-				$sql .='OR g.group_id in (SELECT ug.group_id FROM user_group ug WHERE ug.user_id = \''. $LUSER->getID() .'\' AND ug.group_id = g.group_id) ';
-			$sql .=') AND (('.$groupNameCond.') OR ('.$groupDescriptionCond.') OR ('.$groupUnixNameCond.'))';
+			$qpa = db_construct_qpa ($qpa, 
+						 'SELECT g.group_name AS group_name, g.unix_group_name AS unix_group_name, g.type_id AS type_id, g.group_id AS group_id, g.short_description AS short_description FROM groups g WHERE g.status IN ($1, $2) AND (g.is_public=1 ',
+						 array ('A', 'H')) ;
+			if (isset ($LUSER)) {
+				$qpa = db_construct_qpa ($qpa,
+							 'OR g.group_id in (SELECT ug.group_id FROM user_group ug WHERE ug.user_id = $1 AND ug.group_id = g.group_id) ',
+							 $LUSER->getID()) ;
+			}
+			$qpa = db_construct_qpa ($qpa,
+						 ') AND ((') ;
+			$qpa = $this->addIlikeCondition ($qpa, 'g.group_name') ;
+			$qpa = db_construct_qpa ($qpa,
+						 ') OR (') ;
+			$qpa = $this->addIlikeCondition ($qpa, 'g.short_description') ;
+			$qpa = db_construct_qpa ($qpa,
+						 ') OR (') ;
+			$qpa = $this->addIlikeCondition ($qpa, 'g.unix_group_name') ;
+			$qpa = db_construct_qpa ($qpa,
+						 ')) ORDER BY g.group_name') ;
 		}
-		return $sql;
+		return $qpa ;
 	}
 	
 }

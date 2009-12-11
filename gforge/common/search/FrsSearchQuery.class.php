@@ -60,75 +60,89 @@ class FrsSearchQuery extends SearchQuery {
 	}
 	
 	/**
-	 * getQuery - get the sql query built to get the search results
+	 * getQuery - get the query built to get the search results
 	 *
-	 * @return string sql query to execute
+	 * @return array query+params array
 	 */
 	function getQuery() {
 		global $sys_use_fti;
+
+		$qpa = db_construct_qpa () ;
+
 		if ($sys_use_fti) {
 			if(count($this->words)) {
-				$tsquery0 = "headline(frs_package.name, q) AS package_name, headline(frs_release.name, q) as release_name";
-				$tsquery = ", to_tsquery('".$this->getFormattedWords()."') AS q, frs_release_idx r, frs_file_idx f";
-				$tsmatch = "(f.vectors @@ q OR r.vectors @@ q)";
-				$rankCol = "";
-				$tsjoin = 'AND r.release_id = frs_release.release_id AND f.file_id = frs_file.file_id';
-				$orderBy = "ORDER BY frs_package.name, frs_release.name";
-				$phraseOp = $this->getOperator();
+				$qpa = db_construct_qpa () ;
+				$qpa = db_construct_qpa ($qpa,
+							 'SELECT headline(frs_package.name, q) AS package_name, headline(frs_release.name, q) as release_name, frs_release.release_date, frs_release.release_id, users.realname FROM frs_file, frs_release, users, frs_package, to_tsquery($1) AS q, frs_release_idx r, frs_file_idx f WHERE frs_release.released_by = users.user_id AND r.release_id = frs_release.release_id AND f.file_id = frs_file.file_id AND frs_package.package_id = frs_release.package_id AND frs_file.release_id=frs_release.release_id AND frs_package.group_id=$2 ',
+							 array ($this->getFormattedWords(),
+								 $this->groupId)) ;
 			} else {
-				$tsquery0 = "frs_package.name as package_name, frs_release.name as release_name";
-				$tsquery = "";
-				$tsmatch = "";
-				$tsjoin = "";
-				$rankCol = "";
-				$orderBy = "ORDER BY frs_package.name, frs_release.name";
-				$phraseOp = "";
+				$qpa = db_construct_qpa ($qpa,
+							 'SELECT frs_package.name as package_name, frs_release.name as release_name, frs_release.release_date, frs_release.release_id, users.realname FROM frs_file, frs_release, users, frs_package WHERE frs_release.released_by = users.user_id AND frs_package.package_id = frs_release.package_id AND frs_file.release_id=frs_release.release_id AND frs_package.group_id=$1 ',
+							 array ($this->groupId)) ;
 			}
-			$phraseCond = '';
+			if ($this->sections != SEARCH__ALL_SECTIONS) {
+				$qpa = db_construct_qpa ($qpa,
+							 'AND frs_package.package_id = ANY ($1) ',
+							 array (db_int_array_to_any_clause ($this->sections))) ;
+			}
+			if (!$this->showNonPublic) {
+				$qpa = db_construct_qpa ($qpa,
+							 'AND is_public = 1 ') ;
+			}
+			if (count ($this->words)) {
+				$qpa = db_construct_qpa ($qpa,
+							 'AND (f.vectors @@ q OR r.vectors @@ q) ') ;
+			}
 			if(count($this->phrases)) {
-				$phraseCond .= $phraseOp.'(('.$this->getMatchCond('frs_release.changes', $this->phrases).')'
-					. ' OR ('.$this->getMatchCond('frs_release.notes', $this->phrases).')'
-					. ' OR ('.$this->getMatchCond('frs_release.name', $this->phrases).')'
-					. ' OR ('.$this->getMatchCond('frs_file.filename', $this->phrases).'))';
+				$qpa = db_construct_qpa ($qpa,
+							 'AND ((') ;
+				$qpa = $this->addMatchCondition($qpa, 'frs_release.changes');
+				$qpa = db_construct_qpa ($qpa,
+							 ') OR (') ;
+				$qpa = $this->addMatchCondition($qpa, 'frs_release.notes');
+				$qpa = db_construct_qpa ($qpa,
+							 ') OR (') ;
+				$qpa = $this->addMatchCondition($qpa, 'frs_release.name');
+				$qpa = db_construct_qpa ($qpa,
+							 ') OR (') ;
+				$qpa = $this->addMatchCondition($qpa, 'frs_file.filename');
+				$qpa = db_construct_qpa ($qpa,
+							 ')) ') ;
 			}
-			$sql = 'SELECT '.$tsquery0.', frs_release.release_date, frs_release.release_id, users.realname'
-				. ' FROM frs_file, frs_release, users, frs_package'.$tsquery
-				. ' WHERE frs_release.released_by = users.user_id'
-				. $tsjoin
-				. ' AND frs_package.package_id = frs_release.package_id'
-				. ' AND frs_file.release_id=frs_release.release_id'
-				. ' AND frs_package.group_id='.$this->groupId;
-			if ($this->sections != SEARCH__ALL_SECTIONS) {
-				$sections = $this->sections;
-				$sql .= ' AND frs_package.package_id IN ('.$this->sections.') ';
-			}
-			if(!$this->showNonPublic) {
-				$sql .= ' AND is_public=1';
-			}
-
-			$sql .= ' AND (  '.$tsmatch.' '.$phraseCond.') '.$orderBy;
-		} else {
-			$sql = 'SELECT frs_package.name as package_name, frs_release.name as release_name, frs_release.release_date, frs_release.release_id, users.realname'
-				. ' FROM frs_file, frs_release, users, frs_package'
-				. ' WHERE frs_release.released_by = users.user_id'
-				. ' AND frs_package.package_id = frs_release.package_id'
-				. ' AND frs_file.release_id=frs_release.release_id'
-				. ' AND frs_package.group_id='.$this->groupId;
 			
+			$qpa = db_construct_qpa ($qpa,
+						 ' ORDER BY frs_package.name, frs_release.name') ;
+
+		} else {
+			$qpa = db_construct_qpa ($qpa,
+						 'SELECT frs_package.name as package_name, frs_release.name as release_name, frs_release.release_date, frs_release.release_id, users.realname FROM frs_file, frs_release, users, frs_package WHERE frs_release.released_by = users.user_id AND frs_package.package_id = frs_release.package_id AND frs_file.release_id=frs_release.release_id AND frs_package.group_id = $1 ',
+						 array ($this->groupId)) ;
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
-				$sql .= ' AND frs_package.package_id IN ('.$this->sections.') ';
+				$qpa = db_construct_qpa ($qpa,
+							 'AND frs_package.package_id = ANY ($1) ',
+							 array (db_int_array_to_any_clause ($this->sections))) ;
 			}
-			if(!$this->showNonPublic) {
-				$sql .= ' AND is_public=1';
+			if (!$this->showNonPublic) {
+				$qpa = db_construct_qpa ($qpa,
+							 'AND is_public = 1 ') ;
 			}
-	
-			$sql .= ' AND (('.$this->getIlikeCondition('frs_release.changes', $this->words).')' 
-				. ' OR ('.$this->getIlikeCondition('frs_release.notes', $this->words).')'
-				. ' OR ('.$this->getIlikeCondition('frs_release.name', $this->words).')'
-				. ' OR ('.$this->getIlikeCondition('frs_file.filename', $this->words).'))'
-				. ' ORDER BY frs_package.name, frs_release.name';
+			$qpa = db_construct_qpa ($qpa,
+						 'AND ((') ;
+			$qpa = $this->addIlikeCondition ($qpa, 'frs_release.changes') ;
+			$qpa = db_construct_qpa ($qpa,
+						 ') OR (') ;
+			$qpa = $this->addIlikeCondition ($qpa, 'frs_release.notes') ;
+			$qpa = db_construct_qpa ($qpa,
+						 ') OR (') ;
+			$qpa = $this->addIlikeCondition ($qpa, 'frs_release.name') ;
+			$qpa = db_construct_qpa ($qpa,
+						 ') OR (') ;
+			$qpa = $this->addIlikeCondition ($qpa, 'frs_file.filename') ;
+			$qpa = db_construct_qpa ($qpa,
+						 ')) ORDER BY frs_package.name, frs_release.name') ;
 		}
-		return $sql;
+		return $qpa ;
 	}
 	
 	/**

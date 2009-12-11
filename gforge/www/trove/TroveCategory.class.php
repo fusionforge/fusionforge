@@ -230,16 +230,17 @@ class TroveCategory extends Error {
 		}
 
 		$qpa = db_construct_qpa ($qpa,
-					 ' WHERE trove_agg.trove_cat_id=$1',
+					 ' WHERE trove_agg.trove_cat_id=$1 ',
 					 array ($this->categoryId)) ;
 
 		for($i = 0, $count = sizeof($this->filter); $i < $count; $i++) {
 			$qpa = db_construct_qpa ($qpa,
-						 " AND trove_agg_$i.trove_cat_id=$1 AND trove_agg_$i.group_id=trove_agg.group_id",
+						 "AND trove_agg_$i.trove_cat_id=$1 AND trove_agg_$i.group_id=trove_agg.group_id ",
 						 array ($this->filter[$i])) ;
 		}
 
-		$qpa = db_construct_qpa (' ORDER BY trove_agg.trove_cat_id ASC, trove_agg.ranking ASC') ;
+		$qpa = db_construct_qpa ($qpa,
+					 'ORDER BY trove_agg.trove_cat_id ASC, trove_agg.ranking ASC') ;
 		
 		$result = db_query_qpa ($qpa, TROVE__PROJECTS_PER_PAGE, $offset);
 		return $result;

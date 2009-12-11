@@ -61,12 +61,15 @@ class ForumsSearchQuery extends SearchQuery {
 	}
 
 	/**
-	 * getQuery - get the sql query built to get the search results
+	 * getQuery - get the query built to get the search results
 	 *
-	 * @return string sql query to execute
+	 * @return array query+params array
 	 */
 	function getQuery() {
 		global $sys_use_fti;
+
+		$qpa = db_construct_qpa () ;
+
 		if ($sys_use_fti) {
 			$nonPublic = 'false';
 			$sections = '';
@@ -76,57 +79,66 @@ class ForumsSearchQuery extends SearchQuery {
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
 				$sections = $this->sections;
 			}
-			$sql = 'SELECT forum.msg_id, headline(forum.subject, q) AS subject, forum.post_date, users.realname, forum_group_list.forum_name '
-				. 'FROM forum, users, forum_group_list, forum_idx, to_tsquery(\''.
-				  $this->getFormattedWords().'\') as q '
-				. 'WHERE users.user_id = forum.posted_by '
-				. 'AND vectors @@ q AND forum.msg_id = forum_idx.msg_id '
-				. 'AND forum_group_list.group_forum_id = forum.group_forum_id '
-				. 'AND forum_group_list.is_public <> 9 '			
-				. 'AND forum.group_forum_id IN (SELECT group_forum_id FROM forum_group_list WHERE group_id = '.$this->groupId.') ';
+
+			$qpa = db_construct_qpa ($qpa,
+						 'SELECT forum.msg_id, headline(forum.subject, q) AS subject, forum.post_date, users.realname, forum_group_list.forum_name FROM forum, users, forum_group_list, forum_idx, to_tsquery($1) as q ',
+						 array ($this->getFormattedWords())) ;
+			$qpa = db_construct_qpa ($qpa,
+						 'WHERE users.user_id = forum.posted_by AND vectors @@ q AND forum.msg_id = forum_idx.msg_id AND forum_group_list.group_forum_id = forum.group_forum_id AND forum_group_list.is_public <> 9 AND forum.group_forum_id IN (SELECT group_forum_id FROM forum_group_list WHERE group_id = $1) ',
+						 array ($this->groupId));
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
-				$sql .= 'AND forum_group_list.group_forum_id IN ('.$this->sections.') ';
+				$qpa = db_construct_qpa ($qpa,
+							 'AND forum_group_list.group_forum_id = ANY ($1) ',
+							 array (db_int_array_to_any_clause ($this->sections))) ;
 			}
 			if (!$this->showNonPublic) {
-				$sql .= 'AND forum_group_list.is_public = 1 ';
+				$qpa = db_construct_qpa ($qpa,
+							 'AND forum_group_list.is_public = 1 ') ;
 			}
-			$sql .= 'ORDER BY forum_group_list.forum_name ASC, forum.msg_id ASC, rank(vectors, q) DESC';
+			$qpa = db_construct_qpa ($qpa,
+						 'ORDER BY forum_group_list.forum_name ASC, forum.msg_id ASC, rank(vectors, q) DESC') ;
 		} else {
-			$sql = 'SELECT forum.msg_id, forum.subject, forum.post_date, users.realname, forum_group_list.forum_name '
-				. 'FROM forum, users, forum_group_list '
-				. 'WHERE users.user_id = forum.posted_by '
-				. 'AND forum_group_list.group_forum_id = forum.group_forum_id '
-				. 'AND forum_group_list.is_public <> 9 '			
-				. 'AND forum.group_forum_id IN (SELECT group_forum_id FROM forum_group_list WHERE group_id = '.$this->groupId.') ';
+			$qpa = db_construct_qpa ($qpa,
+						 'SELECT forum.msg_id, forum.subject, forum.post_date, users.realname, forum_group_list.forum_name FROM forum, users, forum_group_list WHERE users.user_id = forum.posted_by AND forum_group_list.group_forum_id = forum.group_forum_id AND forum_group_list.is_public <> 9 AND forum.group_forum_id IN (SELECT group_forum_id FROM forum_group_list WHERE group_id = $1) ',
+						 array ($this->groupId)) ;
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
-				$sql .= 'AND forum_group_list.group_forum_id IN ('.$this->sections.') ';
+				$qpa = db_construct_qpa ($qpa,
+							 'AND forum_group_list.group_forum_id = ANY ($1) ',
+							 array (db_int_array_to_any_clause ($this->sections))) ;
 			}
 			if (!$this->showNonPublic) {
-				$sql .= 'AND forum_group_list.is_public = 1 ';
+				$qpa = db_construct_qpa ($qpa,
+							 'AND forum_group_list.is_public = 1 ') ;
 			}
-			$sql .= 'AND (('.$this->getIlikeCondition('forum.body', $this->words).') '
-				. 'OR ('.$this->getIlikeCondition('forum.subject', $this->words).')) '
-				. 'ORDER BY forum_group_list.forum_name, forum.msg_id';
+			$qpa = db_construct_qpa ($qpa,
+						 'AND ((') ;
+			$qpa = $this->addIlikeCondition ($qpa, 'forum.body') ;
+			$qpa = db_construct_qpa ($qpa,
+						 ') OR (') ;
+			$qpa = $this->addIlikeCondition ($qpa,'forum.subject') ;
+			$qpa = db_construct_qpa ($qpa,
+						 ')) ORDER BY forum_group_list.forum_name, forum.msg_id') ;
 		}
-		return $sql;
+		return $qpa ;
 	}
 
 	/**
 	 * getSearchByIdQuery - get the sql query built to get the search results when we are looking for an int
 	 *
-	 * @return string sql query to execute
+	 * @return array query+params array
 	 */	
 	function getSearchByIdQuery() {
-		$sql = 'SELECT msg_id '
-			. 'FROM forum, forum_group_list '
-			. 'WHERE msg_id=\''.$this->searchId.'\' '
-			. 'AND forum_group_list.group_forum_id = forum.group_forum_id '
-			. 'AND group_forum_id=\''.$this->forumId.'\'';
+		$qpa = db_construct_qpa () ;
+		$qpa = db_construct_qpa ($qpa,
+					 'SELECT msg_id FROM forum, forum_group_list WHERE msg_id=$1 AND forum_group_list.group_forum_id=forum.group_forum_id AND group_forum_id=$2',
+					 array ($this->searchId,
+						$this->forumId)) ;
 		if (!$this->showNonPublic) {
-			$sql .= ' AND forum_group_list.is_public = 1';
+			$qpa = db_construct_qpa ($qpa,
+						 ' AND forum_group_list.is_public=1') ;
 		}
 
-		return $sql;
+		return $qpa;
 	}
 	
 	/**
