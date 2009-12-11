@@ -290,23 +290,6 @@ Description: collaborative development tool - GNU Arch plugin
  each FusionForge project to have its own Arch repository, and gives
  some control over it to the project's administrator.
 
-Package: gforge-plugin-scmcpold
-Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, php5-cli, ${misc:Depends}
-Provides: gforge-plugin-scm
-Description: collaborative development tool - CPOLD plugin
- FusionForge provides many tools to aid collaboration in a
- development project, such as bug-tracking, task management,
- mailing-lists, SCM repository, forums, support request helper,
- web/FTP hosting, release management, etc. All these services are
- integrated into one web site and managed through a web interface.
- .
- This plugin contains the CPOLD subsystem of FusionForge. It allows
- each FusionForge project to have its own CPOLD repository, and gives
- some control over it to the project's administrator.
- .
- It is mostly intended as a proof of concept.
-
 Package: gforge-plugin-mediawiki
 Architecture: all
 Depends: gforge-common (>= 4.8), gforge-db-postgresql (>= 4.8) | gforge-db, gforge-web-apache2 (>= 4.8) | gforge-web, mediawiki (>= 1:1.15~), ${misc:Depends}
