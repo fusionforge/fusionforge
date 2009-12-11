@@ -67,12 +67,12 @@ class MediaWikiPlugin extends Plugin {
 			$group = &group_get_object($group_id);
 			echo "<tr>";
 			echo "<td>";
-			echo ' <input type="CHECKBOX" name="use_mediawikiplugin" value="1" ';
-			// CHECKED OR UNCHECKED?
+			echo ' <input type="checkbox" name="use_mediawikiplugin" value="1" ';
+			// checked or unchecked?
 			if ( $group->usesPlugin ( $this->name ) ) {
-				echo "CHECKED";
+				echo "checked";
 			}
-			echo "><br/>";
+			echo " /><br/>";
 			echo "</td>";
 			echo "<td>";
 			echo "<strong>Use ".$this->text." Plugin</strong>";

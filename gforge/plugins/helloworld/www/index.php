@@ -14,7 +14,7 @@ require_once $gfconfig.'plugins/helloworld/config.php';
 
 // the header that displays for the user portion of the plugin
 function helloworld_Project_Header($params) {                                                                                                                                         
-	global $DOCUMENT_ROOT,$HTML,$id;                                                                            
+	global $DOCUMENT_ROOT,$HTML,$id;
 	$params['toptab']='helloworld'; 
 	$params['group']=$id;
 	/*                                                                                                                                                              
@@ -25,7 +25,7 @@ function helloworld_Project_Header($params) {
 
 // the header that displays for the project portion of the plugin
 function helloworld_User_Header($params) {
-	global $DOCUMENT_ROOT,$HTML,$user_id;                                                                            
+	global $DOCUMENT_ROOT,$HTML,$user_id;
 	$params['toptab']='helloworld'; 
 	$params['user']=$user_id;
 	/*                                                                                                                                                              

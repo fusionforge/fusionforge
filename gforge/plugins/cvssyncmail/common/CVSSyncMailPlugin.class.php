@@ -41,12 +41,12 @@ class CVSSyncMailPlugin extends Plugin {
 				// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
 				echo "<tr>";
 				echo "<td>";
-				echo ' <input type="CHECKBOX" name="use_cvssyncmailplugin" value="1" ';
-				// CHECKED OR UNCHECKED?
+				echo ' <input type="checkbox" name="use_cvssyncmailplugin" value="1" ';
+				// checked or unchecked?
 				if ( $group->usesPlugin ( $this->name ) ) {
-					echo "CHECKED";
+					echo "checked";
 				}
-				echo "><br/>";
+				echo " /><br/>";
 				echo "</td>";
 				echo "<td>";
 				echo "<strong>Use ".$this->text." Plugin</strong>";

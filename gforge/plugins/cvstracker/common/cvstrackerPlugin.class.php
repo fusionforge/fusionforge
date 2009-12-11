@@ -266,10 +266,10 @@ class cvstrackerPlugin extends Plugin {
 			if ($group->usesPlugin('scmcvs')) {
 				echo "<tr>";
 				echo "<td>";
-				echo ' <input type="CHECKBOX" name="use_cvstrackerplugin" value="1" ';
-				// Checked or Unchecked?
+				echo ' <input type="checkbox" name="use_cvstrackerplugin" value="1" ';
+				// checked or unchecked?
 				if ( $group->usesPlugin ( $this->name ) ) {
-					echo "CHECKED";
+					echo "checked";
 				}
 				echo "><br/>";
 				echo "</td>";

@@ -72,12 +72,12 @@ class HelloWorldPlugin extends Plugin {
 			$group = &group_get_object($group_id);
 			echo "<tr>";
 			echo "<td>";
-			echo ' <input type="CHECKBOX" name="use_helloworldplugin" value="1" ';
-			// CHECKED OR UNCHECKED?
+			echo ' <input type="checkbox" name="use_helloworldplugin" value="1" ';
+			// checked or unchecked?
 			if ( $group->usesPlugin ( $this->name ) ) {
-				echo "CHECKED";
+				echo "checked";
 			}
-			echo "><br/>";
+			echo " /><br/>";
 			echo "</td>";
 			echo "<td>";
 			echo "<strong>Use ".$this->text." Plugin</strong>";
@@ -99,12 +99,12 @@ class HelloWorldPlugin extends Plugin {
 			$user = $params['user'];
 			echo "<tr>";
 			echo "<td>";
-			echo ' <input type="CHECKBOX" name="use_helloworldplugin" value="1" ';
-			// CHECKED OR UNCHECKED?
+			echo ' <input type="checkbox" name="use_helloworldplugin" value="1" ';
+			// checked or unchecked?
 			if ( $user->usesPlugin ( $this->name ) ) {
-				echo "CHECKED";
+				echo "checked";
  			}
-			echo ">    Use ".$this->text." Plugin";
+			echo " />    Use ".$this->text." Plugin";
 			echo "</td>";
 			echo "</tr>";
 		} elseif ($hookname == "userisactivecheckboxpost") {
@@ -118,12 +118,12 @@ class HelloWorldPlugin extends Plugin {
 			}
 			echo "<tr>";
 			echo "<td>";
-			echo ' <input type="CHECKBOX" name="use_helloworldplugin" value="1" ';
-			// CHECKED OR UNCHECKED?
+			echo ' <input type="checkbox" name="use_helloworldplugin" value="1" ';
+			// checked or unchecked?
 			if ( $user->usesPlugin ( $this->name ) ) {
-				echo "CHECKED";
+				echo "checked";
 			}
-			echo ">    Use ".$this->text." Plugin";
+			echo " />    Use ".$this->text." Plugin";
 			echo "</td>";
 			echo "</tr>";
 		} elseif ($hookname == "user_personal_links") {
