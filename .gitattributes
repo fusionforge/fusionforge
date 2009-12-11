@@ -3723,6 +3723,8 @@ tests/build/documentation/AllTests.php -text
 tests/build/documentation/DocumentationTests.php -text
 tests/build/packages/AllTests.php -text
 tests/build/packages/BuildTests.php -text
+tests/code/deprecations/AllTests.php -text
+tests/code/deprecations/DeprecationsTests.php -text
 tests/code/syntax/AllTests.php -text
 tests/code/syntax/SyntaxTests.php -text
 tests/func/AllTests.php -text

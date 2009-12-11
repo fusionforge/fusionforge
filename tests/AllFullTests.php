@@ -12,6 +12,7 @@ require_once 'unit/utils/AllTests.php';
 
 // Code tests
 require_once 'code/syntax/AllTests.php';
+require_once 'code/deprecations/AllTests.php';
 
 // Build tests
 require_once 'build/packages/AllTests.php';
@@ -49,6 +50,7 @@ class AllTests
 
 		// Code tests
 		$suite->addTest(Syntax_AllTests::suite());
+		$suite->addTest(Deprecations_AllTests::suite());
 
 		// Building packages and documentation tests
 		$suite->addTest(Packages_AllTests::suite());

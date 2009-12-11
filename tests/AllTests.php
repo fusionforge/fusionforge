@@ -12,6 +12,7 @@ require_once 'unit/utils/AllTests.php';
 
 // Code tests
 require_once 'code/syntax/AllTests.php';
+require_once 'code/deprecations/AllTests.php';
 
 // Selenium based tests
 //require_once 'func/Site/AllTests.php';
@@ -42,6 +43,7 @@ class AllTests
 
 		// Code tests
 		$suite->addTest(Syntax_AllTests::suite());
+		$suite->addTest(Deprecations_AllTests::suite());
 		
 		// Integration tests (Selenium).
 //		$suite->addTest(Site_AllTests::suite());

@@ -25,6 +25,20 @@ existing database to this new location.  Depending on your setup and
 the amount of data involved, it might make sense to either cut and
 paste by hand or dump the tables and reload them in the new schema.
 
+On the internal side of things, access to the database has been
+converted from the db_query() abstraction layer to the
+db_query_params() one.  This means SQL queries are no longer built as
+strings with unwieldy and fragile escaping code, while ensuring no
+data coming from the user can be used for SQL injection attacks.  The
+db_query() function, while deprecated, is still present for the
+benefit of out-of-tree code that might use it.  It might be removed at
+some point in the future, so maintainers of local plugins or
+enhancements are encouraged to migrate their code to
+db_query_params().  For really complex queries that need to be built
+dynamically, there's also a db_query_qpa() abstraction, with a
+db_construct_qpa() method to manipulate "QPA" (query+params array)
+objects.
+
 
 Release notes for FusionForge 4.8
 ---------------------------------
