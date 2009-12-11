@@ -32,8 +32,9 @@ creates group home directories with a template in it.
 
 */
 
-require_once('squal_pre.php');
-require ('common/include/cron_utils.php');
+require (dirname(__FILE__).'/../www/env.inc.php');
+require_once $gfwww.'include/squal_pre.php';
+require $gfcommon.'/include/cron_utils.php';
 
 //
 //	Default values for the script

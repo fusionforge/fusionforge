@@ -1,13 +1,15 @@
 <?php
 /*
  *
+ * Script for creating unix users and group permissions that
+ * correspond to the FusionForge users and groups
+ *
  * Novaforge is a registered trade mark from Bull S.A.S
  * Copyright (C) 2007 Bull S.A.S.
  * 
  * http://novaforge.org/
  *
- *
- * This file has been developped within the Novaforge(TM) project from Bull S.A.S
+ * This file has been developed within the Novaforge(TM) project from Bull S.A.S
  * and contributed back to GForge community.
  *
  * GForge is free software; you can redistribute it and/or modify
@@ -23,27 +25,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this file; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- */
-?>
-<?php
-/**
- * Script for creating user and group permissions
  *
- * Based on cronjobs/cvs-cron/usergroup.php from GForge 4.5.11
- *
- * GForge is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * GForge is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /*
@@ -51,8 +33,9 @@
  * the /etc/passwd, /etc/shadow and /etc/group files
  */
 
-require_once('squal_pre.php');
-require ('common/include/cron_utils.php');
+require (dirname(__FILE__).'/../www/env.inc.php');
+require_once $gfwww.'include/squal_pre.php';
+require $gfcommon.'/include/cron_utils.php';
 
 // Default shell
 $default_shell = "/bin/bash";

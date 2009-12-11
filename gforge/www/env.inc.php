@@ -1,6 +1,6 @@
 <?php
 /*
- * Sets the default required environnement for FusionForge
+ * Sets the default required environement for FusionForge
  *
  * Some of the settings made here can be overwrite in the
  * configuration file if needed.

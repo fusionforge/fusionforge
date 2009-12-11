@@ -56,14 +56,14 @@ function printSelection($checked,$pluginpath) {
 	if (! $handle) { 
 		// Open readonly but tell you can't write
 		$handle = fopen($gfcgfile,'r');
-		$feedback .= _('Could not open local.inc file for read/write. Check the permissions for apache').'<br />';
+		$feedback .= sprintf(_('Could not open %s file for read/write. Check the permissions for apache.'), $gfcgfile).'<br />';
 	}
 	if ($handle) {
 		$config_files['local.inc'] = $gfcgfile;
 		fclose($handle);
 	} else {
 		// say we couldn't open local.inc
-		$feedback .= _('Could not open local.inc file for read. Check the permissions for apache').'<br />';
+		$feedback .= sprintf(_('Could not open %s for read. Check the permissions for apache.'), $gfcgfile).'<br />';
 	}
 
 	//get the directories from the plugins dir
@@ -146,14 +146,14 @@ function updateVars($vars,$filepath) {
 	if (@$handle = fopen($filepath,'w')) {
 		if (fwrite($handle,$filedata)) {
 			// say wrote ok
-			$feedback .= _('File wrote successfully.').'<br />';
+			$feedback .= sprintf(_('File %s wrote successfully.'), $filepath).'<br />';
 		} else {
 			// say some problem
-			$feedback .= _('File wasn\'t written or is empty.').'<br />';
+			$feedback .= sprintf(_('File %s wasn\'t written or is empty.'), $filepath).'<br />';
 		}
 	} else {
 		// say couldn't open
-		$feedback .= _('Could not open the file for write. Check the permissions for apache').'<br />';
+		$feedback .= sprintf(_("Could not open %s for write. Check the permissions for apache."), $filepath).'<br />';
 	}
 }
 
@@ -181,7 +181,7 @@ function updateVars($vars,$filepath) {
 			// Open readonly but tell you can't write
 			$handle = fopen($filepath,'r');
 			$has_write = false;
-			$feedback .= _('Could not open the file for read/write. Check the permissions for apache').'<br />';
+                        $feedback .= sprintf(_("Could not open %s file for read/write. Check the permissions for apache."), $filepath).'<br />';
 		}
 		if ($handle){
 			fclose($handle); // we had to open it in r+ because we need to check we'll be able to save it later
@@ -249,7 +249,7 @@ function updateVars($vars,$filepath) {
 			}
 		} else {
 			// say we couldn't open the file
-			$feedback .= _('Could not open the file for read. Check the permissions for apache').'<br />';
+			$feedback .= sprintf(_("Could not open %s for read. Check the permissions for apache."), $filepath).'<br />';
 		}
 	} elseif (getStringFromRequest('doedit')) {
 		updateVars(getArrayFromRequest('attributes'),$gfcgfile); // perhaps later we'll update something else, for now it's local.inc

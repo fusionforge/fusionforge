@@ -1,7 +1,7 @@
-Several scripts in cvs-cron/ will allow you to automate the process of adding
-users, groups, and cvs trees to your unix machine. These scripts build 
-the /etc/passwd /etc/shadow and /etc/group files based on the contents of your 
-gforge database.
+Several scripts in this directory will allow you to automate the
+process of adding users, groups, cvs trees etc. to your machine. These
+scripts build the /etc/passwd /etc/shadow and /etc/group files based
+on the contents of your gforge database.
 
 WARNING: There are potential security risks. Any gforge project admin could 
 add a user to a project, who would then have unix-level access to your 
