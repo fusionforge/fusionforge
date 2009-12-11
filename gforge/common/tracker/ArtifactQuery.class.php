@@ -343,7 +343,7 @@ class ArtifactQuery extends Error {
 			return false;
 		}
 		$res = db_query_params ('INSERT INTO artifact_query_fields
-			(artifact_query_id,query_field_type,query_field_id,query_field_values
+			(artifact_query_id,query_field_type,query_field_id,query_field_values)
 			VALUES ($1,$2,0,$3)',
 					array ($id,
 					       ARTIFACT_QUERY_SORTORD,
