@@ -224,7 +224,7 @@ function period2seconds($period_name,$span) {
 		return "";
 	}
 
-	if (!$span) $span=1;
+	if (!is_int ($span) || !$span) $span=1;
 
 	if ($period_name=="day") {
 		return 60*60*24*$span;
@@ -234,6 +234,8 @@ function period2seconds($period_name,$span) {
 		return 60*60*24*30*$span;
 	} else if ($period_name=="year") {
 		return 60*60*24*365*$span;
+	} else {
+		return $span;
 	}
 }
 
@@ -243,7 +245,7 @@ function period2sql($period_name,$span,$field_name) {
 
 	if (!$seconds) return "";
 
-	return "AND $field_name>=" . (string)($time_now-$seconds) ." \n";
+	return "AND $field_name>=" . (string)($time_now-$seconds);
 }
 
 // Local Variables:

@@ -57,14 +57,14 @@ function pm_reporting_header($group_id) {
 				_('Report by Subproject')));
 }
 
-function pm_quick_report($group_id,$title,$subtitle1,$sql1,$subtitle2,$sql2,$comment="") {
+function pm_quick_report($group_id,$title,$subtitle1,$qpa1,$subtitle2,$qpa2,$comment="") {
 		global $bar_colors;
 
 	   	pm_header(array ("title"=>$title));
 	   	pm_reporting_header($group_id);
 	   	echo "\n<h1>$title</h1>";
 
-		reports_quick_graph($subtitle1,$sql1,$sql2,$bar_colors);
+		reports_quick_graph($subtitle1,$qpa1,$qpa2,$bar_colors);
 
 		if ($comment) echo $comment;
 
@@ -83,7 +83,7 @@ if ($what) {
 		Update the database
 	*/
 
-	$period_clause=period2sql($period,$span,"start_date");
+	$period_threshold = time() - period2seconds($period, $span) ;
 
 	if ($what=="aging") {
 		$start = getIntFromRequest('start');
@@ -184,53 +184,60 @@ AND project_group_list.group_id=$3 ',
 		pm_footer(array());
 
 	} else if ($what=="subproject") {
-
-		$sql1="SELECT project_group_list.project_name AS Subproject, count(*) AS Count 
+		$qpa1 = db_construct_qpa (false,
+					  'SELECT project_group_list.project_name AS Subproject, count(*) AS Count 
 FROM project_group_list,project_task 
 WHERE project_group_list.group_project_id=project_task.group_project_id 
-AND project_task.status_id = '1' 
-AND project_group_list.group_id='$group_id' ".
-			  $period_clause .
-			  "GROUP BY Subproject";
-		$sql2="SELECT project_group_list.project_name AS Subproject, count(*) AS Count 
+AND project_task.status_id = 1
+AND project_group_list.group_id=$1
+AND start_date >= $2
+GROUP BY Subproject',
+					  array ($group_id,
+						 $period_threshold)) ;
+		$qpa2 = db_construct_qpa ('SELECT project_group_list.project_name AS Subproject, count(*) AS Count 
 FROM project_group_list,project_task 
 WHERE project_group_list.group_project_id=project_task.group_project_id 
-AND project_task.status_id <> '3' 
-AND project_group_list.group_id='$group_id' ".
-			  $period_clause .
-			  "GROUP BY Subproject";
+AND project_task.status_id <> 3
+AND project_group_list.group_id=$1
+AND start_date >= $2
+GROUP BY Subproject',
+					  array ($group_id,
+						 $period_threshold)) ;
 
 		pm_quick_report($group_id,
 			  _('Tasks By Category'),
-			  _('Open Tasks By Category'),$sql1,
-			  _('All Tasks By Category'),$sql2);
+			  _('Open Tasks By Category'), $qpa1,
+			  _('All Tasks By Category'), $qpa2);
 
 	} else if ($what=="tech") {
-
-		$sql1="SELECT users.user_name AS Technician, count(*) AS Count 
+		$qpa1 = db_construct_qpa ('SELECT users.user_name AS Technician, count(*) AS Count 
 FROM users,project_group_list,project_task,project_assigned_to 
 WHERE users.user_id=project_assigned_to.assigned_to_id 
 AND project_assigned_to.project_task_id=project_task.project_task_id 
 AND project_task.group_project_id=project_group_list.group_project_id 
-AND project_task.status_id = '1' 
-AND project_group_list.group_id='$group_id' ".
-			  $period_clause .
-			  "GROUP BY Technician";
+AND project_task.status_id = 1
+AND project_group_list.group_id=$1
+AND start_date >= $2
+GROUP BY Technician',
+					  array ($group_id,
+						 $period_threshold)) ;
 
-		$sql2="SELECT users.user_name AS Technician, count(*) AS Count 
+		$qpa2 = db_construct_qpa ('SELECT users.user_name AS Technician, count(*) AS Count 
 FROM users,project_group_list,project_task,project_assigned_to 
 WHERE users.user_id=project_assigned_to.assigned_to_id 
 AND project_assigned_to.project_task_id=project_task.project_task_id 
 AND project_task.group_project_id=project_group_list.group_project_id 
-AND project_task.status_id <> '3' 
-AND project_group_list.group_id='$group_id' ".
-			  $period_clause .
-			  "GROUP BY Technician";
+AND project_task.status_id <> 3
+AND project_group_list.group_id=$1
+AND start_date >= $2
+GROUP BY Technician',
+					  array ($group_id,
+						 $period_threshold)) ;
 
 		pm_quick_report($group_id,
 		  _('Tasks By Assignee'),
-		  _('Open Tasks By Assignee'),$sql1,
-		  _('All Tasks By Assignee'),$sql2,
+		  _('Open Tasks By Assignee'), $qpa1,
+		  _('All Tasks By Assignee'), $qpa2,
 		  _('<p>Note that same task can be assigned to several technicians. Such task will be counted for each of them.</p>'));
 
 	} else {

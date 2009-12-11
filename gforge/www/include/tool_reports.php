@@ -17,9 +17,9 @@
  * @param		int		Second query resource ID
  * @param		string	The bar colors
  */
-function reports_quick_graph($title,$sql1,$sql2,$bar_colors) {
-	$result1=db_query($sql1);
-	$result2=db_query($sql2);
+function reports_quick_graph($title,$qpa1,$qpa2,$bar_colors) {
+	$result1=db_query_qpa($qpa1);
+	$result2=db_query_qpa($qpa2);
 	if ($result1 && $result2 && db_numrows($result2) > 0) {
 
 		$assoc_open=util_result_columns_to_assoc($result1);
