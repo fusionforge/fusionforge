@@ -198,12 +198,9 @@ function session_login_valid($loginname, $passwd, $allowpending=0)  {
 	}
 
 	//get the users from the database using user_id and password
-	$res = db_query("
-		SELECT user_id,status
-		FROM users
-		WHERE user_name='$loginname' 
-		AND user_pw='".md5($passwd)."'
-	");
+	$res = db_query_params ('SELECT user_id,status FROM users WHERE user_name=$1 AND user_pw=$2',
+				array ($loginname,
+				       md5($passwd))) ;
 	if (!$res || db_numrows($res) < 1) {
 		//invalid password or user_name
 		$feedback='Invalid Password or User Name';
@@ -393,15 +390,11 @@ function session_set_new($user_id) {
 	$cookie = session_build_session_cookie($user_id);
 	session_cookie("session_ser", $cookie);
 
-	db_query("
-		INSERT INTO session (session_hash, ip_addr, time, user_id) 
-		VALUES (
-			'".session_get_session_cookie_hash($cookie)."', 
-			'".$GLOBALS['REMOTE_ADDR']."',
-			'".time()."',
-			$user_id
-		)
-	");
+	db_query_params ('INSERT INTO session (session_hash, ip_addr, time, user_id) VALUES ($1,$2,$3,$4)',
+			 array (session_get_session_cookie_hash($cookie),
+				$GLOBALS['REMOTE_ADDR'],
+				time(),
+				$user_id)) ;
 
 	// check uniqueness of the session_hash in the database
 	// 
@@ -435,15 +428,8 @@ function session_set_new($user_id) {
  *	@access private
  */
 function session_getdata($user_id) {
-	$res=db_query("SELECT
-	
-		u.*,sl.language_id, sl.name, sl.filename, sl.classname, sl.language_code
-
-		FROM users u,
-		supported_languages sl
-		WHERE u.language=sl.language_id 
-		AND u.user_id='$user_id'
-	");
+	$res = db_query_params ('SELECT	u.*,sl.language_id, sl.name, sl.filename, sl.classname, sl.language_code FROM users u, supported_languages sl WHERE u.language=sl.language_id AND u.user_id=$1',
+				array ($user_id)) ;
 	return $res;
 }
 
