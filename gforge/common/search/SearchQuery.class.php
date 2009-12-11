@@ -178,7 +178,7 @@ class SearchQuery extends Error {
 			db_query_params ('select set_curcfg($1)',
 					 array ('default'));
 		}
-		$this->result = db_query(
+		$this->result = db_query_qpa (
 			$qpa,
 			$this->rowsPerPage + 1,
 			$this->offset,
