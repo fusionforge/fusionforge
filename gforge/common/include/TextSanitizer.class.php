@@ -216,6 +216,7 @@ Class TextSanitizer extends Error {
 	function stripTags ($text, $allowed='br,p,li,ul') {
 		$config = HTMLPurifier_Config::createDefault();
 		$config->set('HTML', 'Allowed', $allowed);
+		$config->set('Cache.DefinitionImpl', NULL);
 		$purifier = new HTMLPurifier($config);
 		$text = $purifier->purify($text);
 
@@ -225,6 +226,7 @@ Class TextSanitizer extends Error {
 	function purify ($text) {
 		$config = HTMLPurifier_Config::createDefault();
 		//$config->set('HTML','Allowed','a[href|title],strike,sub,span,font,hr,br,tbody,tr,td,table,div,u,p,ul,li,ol,blockquote,em,strong,sup,input,img,textarea,h1,h2,h3,h4,h5,h6,pre,address');
+		$config->set('Cache.DefinitionImpl', NULL);
 		$purifier = new HTMLPurifier($config);
 		return $purifier->purify($text);
 	}
