@@ -4,7 +4,7 @@ debmirror /var/lib/gforge/chroot/home/groups/fusionforge/htdocs/debian --method=
 debmirror /var/lib/gforge/chroot/home/groups/fusionforge/htdocs/ubuntu --method=http --host=debian.fusionforge.org -r ubuntu -d hardy,intrepid,jaunty -a i386,amd64 -s main -v --progress
 
 debmirror /var/lib/gforge/chroot/home/groups/fusionforge/htdocs/debian-trk --method=http --host=debian.fusionforge.org -r debian-trk -d lenny,squeeze,sid -a i386,amd64 -s main -v --progress
-debmirror /var/lib/gforge/chroot/home/groups/fusionforge/htdocs/ubuntu-trk --method=http --host=debian.fusionforge.org -r ubuntu-trk -d hardy,intrepid,jaunty -a i386,amd64 -s main -v --progress
+debmirror /var/lib/gforge/chroot/home/groups/fusionforge/htdocs/ubuntu-trk --method=http --host=debian.fusionforge.org -r ubuntu-trk -d hardy,intrepid,jaunty,karmic -a i386,amd64 -s main -v --progress
 
 debmirror /var/lib/gforge/chroot/home/groups/fusionforge/htdocs/debian-brc --method=http --host=debian.fusionforge.org -r debian-brc -d lenny,squeeze,sid -a i386,amd64 -s main -v --progress
 debmirror /var/lib/gforge/chroot/home/groups/fusionforge/htdocs/ubuntu-brc --method=http --host=debian.fusionforge.org -r ubuntu-brc -d hardy,intrepid,jaunty,karmic -a i386,amd64 -s main -v --progress
