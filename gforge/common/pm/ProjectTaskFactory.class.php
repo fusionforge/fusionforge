@@ -206,7 +206,7 @@ class ProjectTaskFactory extends Error {
 			}
 
 			if ($this->category) {
-				if ($arr['category_id'] != $this->category_id)
+				if ($arr['category_id'] != $this->category)
 					continue ;
 			}
 					
