@@ -59,6 +59,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 		<form name="usersrch" action="search.php" method="post">
 		<?php echo _('Search <em>(userid, username, realname, email)</em>'); ?>:
 		<input type="text" name="search" />
+		<input type="hidden" name="substr" value="1" />
 		<input type="hidden" name="usersearch" value="1" />
 		<input type="submit" value="<?php echo _('get'); ?>" />
 		</form>
@@ -106,6 +107,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 		<form name="gpsrch" action="search.php" method="post">
 		<?php echo _('Search <em>(groupid, group unix name, full name)</em>'); ?>:
 		<input type="text" name="search" />
+		<input type="hidden" name="substr" value="1" />
 		<input type="hidden" name="groupsearch" value="1" />
 		<input type="submit" value="<?php echo _('get'); ?>" />
 		</form>
@@ -163,8 +165,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	<li><a href="pluginman.php"><?php echo _('Plugin Manager'); ?></a></li>
 	<li><a href="configman.php"><?php echo _('Config Manager'); ?></a></li>
 	
-	<?php 
-	plugin_hook("site_admin_option_hook", false); ?>
+	<?php plugin_hook("site_admin_option_hook", false); ?>
 </ul>
 
 <?php if($GLOBALS['sys_use_project_database'] || $GLOBALS['sys_use_project_vhost']) { ?>
