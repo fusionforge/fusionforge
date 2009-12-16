@@ -62,17 +62,20 @@ $user->unsubscribeFromMailings($all);
 
 site_header(array('title'=>_("Unsubscription Complete")));
 
-echo '<h2>'._('Unsubscription Complete').'</h2><p>';
 
 if ($all) {
 	$what = sprintf(_('You have been unsubscribed from all %1$s mailings and notifications. In case you will want to re-activate your subscriptions in the future, login and visit your Account Maintenance page.'), $GLOBALS['sys_name']);
 } else {
 	$what = sprintf(_('You have been unsubscribed from %1$s site mailings. In case you will want to re-activate your subscriptions in the future, login and visit your Account Maintenance page.'), $GLOBALS['sys_name']);
 }
-echo '</p>';
 ?>
 
-	<p><?php echo util_make_link ("/", _('Return')); ?></p>
+<h2>Unsubscription Complete</h2>
+<p>
+<?php print $what; ?>
+</p>
+
+<p><?php echo util_make_link ("/", _('Return')); ?></p>
 
 <?php
 
