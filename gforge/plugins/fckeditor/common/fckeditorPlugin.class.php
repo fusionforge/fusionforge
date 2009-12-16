@@ -32,7 +32,7 @@ class fckeditorPlugin extends Plugin {
 	function fckeditorPlugin () {
 		$this->Plugin() ;
 		$this->name = "fckeditor" ;
-		$this->text = "FCKeditor";
+		$this->text = "HTML editor";
 		$this->hooks[] = "groupisactivecheckbox";
 		$this->hooks[] = "groupisactivecheckboxpost";
 		$this->hooks[] = "text_editor"; // shows the editor
@@ -61,15 +61,15 @@ class fckeditorPlugin extends Plugin {
 			$group = &group_get_object($group_id);
 			echo "<tr>";
 			echo "<td>";
-			echo ' <input type="CHECKBOX" name="use_fckeditorplugin" value="1" ';
-			// Checked or Unchecked?
+			echo ' <input type="checkbox" name="use_fckeditorplugin" value="1" ';
+			// checked or unchecked?
 			if ( $group->usesPlugin ( $this->name ) ) {
-				echo "CHECKED";
+				echo "checked=\"checked\"";
 			}
-			echo "><br/>";
+			echo " /><br/>";
 			echo "</td>";
 			echo "<td>";
-			echo "<strong>".$this->text." Plugin</strong>";
+			echo "<strong>Use ".$this->text." Plugin (for forums and news)</strong>";
 			echo "</td>";
 			echo "</tr>";
 		} elseif ($hookname == "groupisactivecheckboxpost") {
