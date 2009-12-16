@@ -15,19 +15,14 @@ require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once $gfcommon.'tracker/Artifact.class.php';
 require_once $gfcommon.'tracker/ArtifactFile.class.php';
-//require_once('www/tracker/include/ArtifactFileHtml.class.php');
-require_once $gfcommon.'tracker/ArtifactType.class.php';
 require_once $gfcommon.'tracker/ArtifactType.class.php';
 
-if (!session_loggedin()) {
-	exit_not_logged_in();	
-}
 
 $arr=explode('/',getStringFromServer('REQUEST_URI'));
-$group_id=$arr[3];
-$atid=$arr[4];
-$aid=$arr[5];
-$file_id=$arr[6];
+$group_id=(int)$arr[3];
+$atid=(int)$arr[4];
+$aid=(int)$arr[5];
+$file_id=(int)$arr[6];
 
 if (!$group_id) {
 	exit_no_group();
