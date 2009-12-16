@@ -4,7 +4,7 @@ $title = sprintf(_('Add/Update template for %s'), $ath->getName()) ;
 
 $ath->adminHeader(array('title'=>$title));
 
-echo '<h3>'.$title.'</h3>';
+echo '<h1>'.$title.'</h1>';
 ?>
 <form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post" enctype="multipart/form-data">
 <p><input type="hidden" name="uploadtemplate" value="1" />

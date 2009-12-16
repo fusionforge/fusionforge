@@ -6,7 +6,7 @@
 $title = sprintf(_('Manage Custom Fields for %s'), $ath->getName());
 $ath->adminHeader(array ('title'=>$title));
 
-echo "<h2>".$title."</h2>";
+echo "<h1>".$title."</h1>";
 
 		/*
 			List of possible user built Selection Boxes for an ArtifactType
@@ -77,7 +77,7 @@ echo "<h2>".$title."</h2>";
 			
 			echo utils_requiredField().' '._('Indicates required fields.');
 		} else { 
-			echo "\n<h3>"._('You have not defined any custom fields')."</h3>";
+			echo "\n<strong>"._('You have not defined any custom fields')."</strong>";
 		}
 
 		echo "<h2>"._('Add New Custom Field')."</h2>";

@@ -8,7 +8,7 @@
 $title = sprintf(_('Modify a custom field in %s'),$ath->getName());
 $ath->adminHeader(array('title'=>$title));
 
-echo '<h2>'.$title.'</h2>';
+echo '<h1>'.$title.'</h1>';
 
 		$id = getStringFromRequest('id');
 		$ac = new ArtifactExtraField($ath,$id);

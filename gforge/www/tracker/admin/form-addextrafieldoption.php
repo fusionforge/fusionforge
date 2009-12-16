@@ -14,8 +14,7 @@
 		$title = sprintf(_('Add/Update Custom Field Elements in %s'), $ath->getName());
 		$ath->adminHeader(array ('title'=>$title));
 
-		echo "<h3>".$title."</h3>";
-		echo "<br />";
+		echo "<h1>".$title."</h1>";
 		$rows=count($efearr);
 		if ($rows > 0) {
 			
@@ -66,7 +65,7 @@
 			<?php
 
 		} else { 
-			echo "\n<h3>"._('You have not defined any elements')."</h3>";
+			echo "\n<strong>"._('You have not defined any elements')."</strong>";
 		}
 		?>
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;boxid='.$boxid.'&amp;atid='.$ath->getID(); ?>" method="post">

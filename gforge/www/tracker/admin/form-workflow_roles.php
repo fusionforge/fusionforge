@@ -34,7 +34,7 @@ require_once('common/tracker/ArtifactWorkflow.class.php');
 		}
 
 ?>
-    	<h2><?php printf(_('Configuring allowed roles for the transitions from %1$s to %2$s'), $name[$from], $name[$next]) ?></h2>
+    	<h1><?php printf(_('Configuring allowed roles for the transitions from %1$s to %2$s'), $name[$from], $name[$next]) ?></h1>
  		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
 		<input type="hidden" name="field_id" value="<?php echo $field_id ?>" />
 		<input type="hidden" name="workflow_roles" value="1" />
