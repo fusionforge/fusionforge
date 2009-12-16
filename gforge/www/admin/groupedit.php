@@ -89,10 +89,9 @@ site_admin_header(array('title'=>_('Site Admin: Group Info')));
 
 echo '<h2>'.$group->getPublicName().'</h2>' ;?>
 
-<p><h3><?php echo util_make_link("/project/admin/?group_id=$group_id", _('[Project Admin]')); ?></h3></p>
-<p><h3><?php echo util_make_link("/admin/groupdelete.php?group_id=$group_id", _('Permanently Delete Project')); ?></h3></p>
+<h3><?php echo util_make_link("/project/admin/?group_id=$group_id", _('[Project Admin]')); ?></h3>
+<h3><?php echo util_make_link("/admin/groupdelete.php?group_id=$group_id", _('Permanently Delete Project')); ?></h3>
 
-<p>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 
 
@@ -144,7 +143,6 @@ if($status == 'P') {
 ),
 	'form_public', $group->isPublic(), false
 ); ?>
-
 </td>
 </tr>
 
@@ -205,7 +203,7 @@ if ($group->usesSCM()) {
 
 <br /><input type="submit" name="submit" value="<?php echo _('Update'); ?>" />
 &nbsp;&nbsp;&nbsp; <input type="submit" name="resend" value="<?php echo _('Resend New Project Instruction Email'); ?>" />
-</form></p>
+</form>
 
 <?php
 

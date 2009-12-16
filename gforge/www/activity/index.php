@@ -141,8 +141,8 @@ $multiselect=html_build_multiple_select_box_from_arrays($ids,$texts,'show[]',$sh
 
 ?>
 <br />
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post"><input
-	type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 <table border="0" cellspacing="0" cellpadding="3">
 	<tr>
 		<td><strong><?php echo _('Activity') ?></strong></td>
@@ -262,6 +262,6 @@ if (count($results)<1) {
 	}
 }
 
-	site_project_footer(array());
+site_project_footer(array());
 
 ?>
