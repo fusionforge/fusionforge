@@ -8,16 +8,6 @@
 	//
 
 
-	//
-	//  get the Group object
-	//
-	$group =& group_get_object($group_id);
-	if (!$group || !is_object($group)) {
-		exit_error('Error','Could Not Get Group Object');
-	} elseif ($group->isError()) {
-		exit_error('Error',$group->getErrorMessage());
-	}
-
 	$perm =& $group->getPermission( session_get_user() );
 
 	if (getStringFromRequest('post_changes')) {
@@ -59,7 +49,18 @@
 		exit_error('Error','Could Not Get ArtifactTypeFactory');
 	}
 
-	$at_arr =& $atf->getArtifactTypes();
+	// Only keep the Artifacts where the user has admin rights.
+	$arr =& $atf->getArtifactTypes();
+	$i=0;
+	for ($j = 0; $j < count($arr); $j++) {
+		if ($arr[$j]->userIsAdmin()) {
+			$at_arr[$i++] =& $arr[$j];
+		}
+	}
+	// If no more tracker now,
+	if ($i==0 && $j>0) {
+		exit_permission_denied();
+	}
 
 	//required params for site_project_header();
 	$params['group']=$group_id;
