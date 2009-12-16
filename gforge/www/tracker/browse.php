@@ -352,6 +352,7 @@ if ($art_arr && count($art_arr) > 0) {
 	$browse_fields = explode(',', "id,".$ath->getBrowseList());
 	$title_arr=array();
 	foreach ($browse_fields as $f) {
+		$title=$f;
 		if (intval($f) > 0) {
     		$title = $ath->getExtraFieldName($f);
 		} else {
@@ -567,8 +568,11 @@ if ($art_arr && count($art_arr) > 0) {
 	}
 
 	printf(_('* Denotes requests > %1$s Days Old'), ($ath->getDuePeriod()/86400));
-	show_priority_colors_key();
 
+	if (in_array('priority', $browse_fields)) {
+		show_priority_colors_key();
+
+	}
 } else {
 
 	echo '
