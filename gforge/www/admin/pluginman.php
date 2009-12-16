@@ -78,7 +78,7 @@ if (getStringFromRequest('update')) {
 			if (!$res) {
 				exit_error("SQL ERROR",db_error());
 			} else {
-				$feedback .= sprintf(ngettext('%d group detached from plugin.', '%d groups detached from plugin.', db_affected_rows($res)), db_affected_rows($res));
+				$feedback .= sprintf(ngettext('%d project detached from plugin.', '%d projects detached from plugin.', db_affected_rows($res)), db_affected_rows($res));
 			}
 		}
 		$res = $pm->desactivate($pluginname);
