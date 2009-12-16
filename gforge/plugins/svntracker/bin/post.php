@@ -127,7 +127,7 @@ $log     = trim(`svnlook log -r $revision $repository`); // the log
 $changed = trim(`svnlook changed -r $revision $repository | sed 's/[A-Z]*   //'`); // the filenames
 
 if ($svn_tracker_debug) {
-	fwrite($file,"vars filled\n");
+	fwrite($file,"Vars filled:\n");
 	fwrite($file,"username :  " . $UserName . " \n");
 	fwrite($file,"date :  " . $date . " \n");
 	fwrite($file,"log  :  " . $log . " \n");
