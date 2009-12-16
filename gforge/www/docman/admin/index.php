@@ -192,8 +192,10 @@ if ($editdoc && $docid) {
 	docman_header(_('Document Manager Administration'),_('Edit Docs'),'');
 
 	?>
-		<br />
-		<?php echo _('<strong>Document Title</strong>:  Refers to the relatively brief title of the document (e.g. How to use the download server)<br /><strong>Description:</strong> A brief description to be placed just under the title.') ?>
+		<p>
+		<?php echo _("<strong>Document Title</strong>:  Refers to the relatively brief title of the document (e.g. How to use the download server)<br /><strong>Description:</strong> A brief description to be placed just under the title.") ?>
+                </p>
+
 	<form name="editdata" action="index.php?editdoc=1&amp;group_id=<?php echo $group_id; ?>" method="post" enctype="multipart/form-data">
 
 	<table border="0">
@@ -208,7 +210,7 @@ if ($editdoc && $docid) {
 	<tr>
 		<td>
 		<strong><?php echo _('Description') ?></strong><?php echo utils_requiredField(); ?> <?php printf(_('(at least %1$s characters)'), 10) ?><br />
-		<input type="text" name="description" size="20" maxlength="255" value="<?php echo $d->getDescription(); ?>" />
+		<input type="text" name="description" size="50" maxlength="255" value="<?php echo $d->getDescription(); ?>" />
 		<br /></td>
 	</tr>
 
