@@ -26,7 +26,7 @@ class SVNCommitEmailPlugin extends Plugin {
 	function SVNCommitEmailPlugin () {
 		$this->Plugin() ;
 		$this->name = "svncommitemail" ;
-		$this->text = "svn->CommitEmail" ;
+		$this->text = "Source Code and Mailing List Integration" ;
 		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
 		$this->hooks[] = "groupisactivecheckboxpost" ; //
 	}
@@ -41,12 +41,12 @@ class SVNCommitEmailPlugin extends Plugin {
 			if ($group->usesPlugin('scmsvn')) {
 				echo "<tr>";
 				echo "<td>";
-				echo ' <input type="CHECKBOX" name="use_svncommitemailplugin" value="1" ';
-				// CHECKED OR UNCHECKED?
+				echo ' <input type="checkbox" name="use_svncommitemailplugin" value="1" ';
+				// checked or unchecked?
 				if ( $group->usesPlugin ( $this->name ) ) {
-					echo "CHECKED";
+					echo 'checked="checked"';
 				}
-				echo "><br/>";
+				echo " /><br/>";
 				echo "</td>";
 				echo "<td>";
 				echo "<strong>Use ".$this->text." Plugin</strong>";

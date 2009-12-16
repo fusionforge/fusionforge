@@ -19,7 +19,7 @@
  */
 
 global $gfplugins;
-require_once $gfplugins.'svncommitemail/common/SVNCommitEmailPlugin.class.php' ;
+require_once $gfplugins.'svncommitemail/common/SVNCommitEmailPlugin.class.php';
 
 register_plugin (new SVNCommitEmailPlugin) ;
 
