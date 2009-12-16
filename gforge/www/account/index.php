@@ -125,18 +125,21 @@ echo $HTML->boxTop(_('Account Maintenance'));
 <tr valign="top">
 <td><?php echo _('Login name:'); ?> </td>
 <td><strong><?php print $u->getUnixName(); ?></strong>
-<br /><a href="change_pw.php">[<?php echo _('Change Password'); ?>]</a></td>
+<br /><a href="change_pw.php">[<?php echo _('Change Password'); ?>]</a>
+</td>
 </tr>
 
 <tr valign="top">
 <td><?php echo _('First Name:'); ?></td>
-<td><input type="text" name="firstname" value="<?php print $u->getFirstName(); ?>" />
+<td>
+<input type="text" name="firstname" value="<?php print $u->getFirstName(); ?>" />
 </td>
 </tr>
 
 <tr valign="top">
 <td><?php echo _('Last Name:'); ?></td>
-<td><input type="text" name="lastname" value="<?php print $u->getLastName(); ?>" />
+<td>
+<input type="text" name="lastname" value="<?php print $u->getLastName(); ?>" />
 </td>
 </tr>
 
@@ -172,28 +175,38 @@ echo $HTML->boxTop(_('Account Maintenance'));
 </tr>
 
 <tr valign="top">
-	<td><?php echo _('Address:'); ?></td>
-	<td><input type="text" name="address" value="<?php echo $u->getAddress(); ?>" size="80"/></td>
+<td><?php echo _('Address:'); ?></td>
+<td>
+<input type="text" name="address" value="<?php echo $u->getAddress(); ?>" size="80"/>
+</td>
 </tr>
 
 <tr valign="top">
-	<td><?php echo _('Address:'); ?></td>
-	<td><input type="text" name="address2" value="<?php echo $u->getAddress2(); ?>" size="80"/></td>
+<td><?php echo _('Address:'); ?></td>
+<td>
+<input type="text" name="address2" value="<?php echo $u->getAddress2(); ?>" size="80"/>
+</td>
 </tr>
 
 <tr valign="top">
-	<td><?php echo _('Phone:'); ?></td>
-	<td><input type="text" name="phone" value="<?php echo $u->getPhone(); ?>" size="20"/></td>
+<td><?php echo _('Phone:'); ?></td>
+<td>
+<input type="text" name="phone" value="<?php echo $u->getPhone(); ?>" size="20"/>
+</td>
 </tr>
 
 <tr valign="top">
-	<td><?php echo _('FAX:'); ?></td>
-	<td><input type="text" name="fax" value="<?php echo $u->getFax(); ?>" size="20"/></td>
+<td><?php echo _('FAX:'); ?></td>
+<td>
+<input type="text" name="fax" value="<?php echo $u->getFax(); ?>" size="20"/>
+</td>
 </tr>
 
 <tr valign="top">
-	<td><?php echo _('Title:'); ?></td>
-	<td><input type="text" name="title" value="<?php echo $u->getTitle(); ?>" size="10"/></td>
+<td><?php echo _('Title:'); ?></td>
+<td>
+<input type="text" name="title" value="<?php echo $u->getTitle(); ?>" size="10"/>
+</td>
 </tr>
 
 <?php
