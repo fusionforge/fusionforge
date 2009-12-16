@@ -32,7 +32,7 @@ class svntrackerPlugin extends Plugin {
 	function svntrackerPlugin () {
 		$this->Plugin() ;
 		$this->name = "svntracker" ;
-		$this->text = "svn<->Tracker";
+		$this->text = "Source Code and Tracker Integration";
 		$this->hooks[] = "groupisactivecheckbox";
 		$this->hooks[] = "groupisactivecheckboxpost";
 		$this->hooks[] = "artifact_extra_detail";
@@ -50,7 +50,7 @@ class svntrackerPlugin extends Plugin {
 	function getCommitEntries($DBResult,$group_id) {
 		$group = &group_get_object($group_id);
 		$Rows= db_numrows($DBResult);
-		
+
 		if ($Rows > 0) {
 			echo '<tr><td colspan="2">';
 			echo '<h4>'._('Links to related SVN commits').':</h4>';
@@ -234,12 +234,12 @@ class svntrackerPlugin extends Plugin {
 			if ($group->usesPlugin('scmsvn')) {
 				echo "<tr>";
 				echo "<td>";
-				echo ' <input type="CHECKBOX" name="use_svntrackerplugin" value="1" ';
+				echo ' <input type="checkbox" name="use_svntrackerplugin" value="1" ';
 				// Checked or Unchecked?
 				if ( $group->usesPlugin ( $this->name ) ) {
-					echo "CHECKED";
+					echo 'checked="checked"';;
 				}
-				echo "><br/>";
+				echo " /><br/>";
 				echo "</td>";
 				echo "<td>";
 				echo "<strong>Use ".$this->text." Plugin</strong>";
