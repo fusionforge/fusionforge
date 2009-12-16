@@ -35,9 +35,9 @@ require_once $gfwww.'tracker/include/ArtifactTypeHtml.class.php';
 
 
 $group_id = getIntFromRequest('group_id');
-$atid = getStringFromRequest('atid');
-$area = getStringFromRequest('area');
-$SPAN = getIntFromRequest('SPAN');
+$atid = getIntFromRequest('atid');
+$area = getFilteredStringFromRequest('area', '/^[a-z]+$/', 'category');
+$SPAN = getIntFromRequest('SPAN', REPORT_TYPE_MONTHLY);
 $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');
 //
@@ -53,8 +53,25 @@ if ($report->isError()) {
 	exit;
 }
 
-if (!isset($area)) {
-	$area='category';
+$group =& group_get_object($group_id);
+if (!$group || !is_object($group)) {
+        exit_no_group();
+}
+if ($group->isError()) {
+        if($group->isPermissionDeniedError()) {
+                exit_permission_denied($group->getErrorMessage());
+        } else {
+                exit_error(_('Error'), $group->getErrorMessage());
+        }
+}
+
+$at = new ArtifactType($group, $atid);
+if ($at->isError()) {
+	if ($at->isPermissionDeniedError()) {
+		exit_permission_denied();
+	} else {
+		exit_error('Error',$at->getErrorMessage());
+	}
 }
 
 if (!$start) {

@@ -30,17 +30,13 @@ require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/Report.class.php';
 require_once $gfwww.'tracker/include/ArtifactTypeHtml.class.php';
 
-$sw = getStringFromRequest('sw');
 $group_id = getIntFromRequest('group_id');
-$atid = getStringFromRequest('atid');
-$area = getStringFromRequest('area');
-$SPAN = getIntFromRequest('SPAN');
+$atid = getIntFromRequest('atid');
+$area = getFilteredStringFromRequest('area', '/^[a-z]+$/');
+$SPAN = getIntFromRequest('SPAN', REPORT_TYPE_MONTHLY);
 $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');
 
-if (!$SPAN)
-	$SPAN=REPORT_TYPE_MONTHLY;
-	
 $report=new Report();
 if ($report->isError()) {
 	exit_error($report->getErrorMessage());
@@ -65,9 +61,14 @@ if (!$end) {
 
 $group =& group_get_object($group_id);
 if (!$group || !is_object($group)) {
-	exit_error('Error','Error - Could Not Get Group');
-} elseif ($group->isError()) {
-	exit_error('Error',$group->getErrorMessage());
+        exit_no_group();
+}
+if ($group->isError()) {
+        if($group->isPermissionDeniedError()) {
+                exit_permission_denied($group->getErrorMessage());
+        } else {
+                exit_error(_('Error'), $group->getErrorMessage());
+        }
 }
 
 if (!session_loggedin()) {
@@ -124,11 +125,10 @@ echo site_project_header($params);
 
 ?>
 <div align="center">
-<h3>Project Activity</h3>
+<h1>Project Activity</h1>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <table><tr>
 <td>
-<input type="hidden" name="sw" value="<?php echo $sw; ?>" />
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 <strong>Tracker:</strong><br /><?php echo html_build_select_box($restracker,'atid',$atid,false); ?></td>
 <td><strong>Area:</strong><br /><?php echo html_build_select_box_from_arrays($vals, $labels, 'area',$area,false); ?></td>

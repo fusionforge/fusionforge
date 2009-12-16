@@ -31,13 +31,24 @@ require_once($sys_path_to_jpgraph.'/jpgraph_line.php');
 require_once $gfcommon.'reporting/ReportTrackerAct.class.php';
 
 $group_id = getIntFromRequest('group_id');
-$atid = getStringFromRequest('atid');
-$SPAN = getIntFromRequest('SPAN');
+$atid = getIntFromRequest('atid');
+$SPAN = getIntFromRequest('SPAN', REPORT_TYPE_MONTHLY);
 $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');
 
-if (!$SPAN) {
-	$SPAN=REPORT_TYPE_MONTHLY;
+//
+// Get Group Object
+//
+$group =& group_get_object($group_id);
+if (!$group || !is_object($group)) {
+        exit_no_group();
+}
+if ($group->isError()) {
+        if($group->isPermissionDeniedError()) {
+                exit_permission_denied($group->getErrorMessage());
+        } else {
+                exit_error(_('Error'), $group->getErrorMessage());
+        }
 }
 
 //
@@ -51,14 +62,6 @@ $report=new ReportTrackerAct($SPAN,$group_id,$atid,$start,$end);
 if ($report->isError()) {
 	echo $report->getErrorMessage();
 	exit;
-}
-
-//
-// Get Group Object
-//
-$g =& group_get_object($group_id);
-if (!$g || $g->isError()) {
-	exit_error("Could Not Get Group");
 }
 
 // Create the graph. These two calls are always required
@@ -98,7 +101,7 @@ $lineplot3 ->SetLegend("Total Still Open");
 //
 //	Titles
 //
-$graph->title->Set("Tracker Activity For: ".$g->getPublicName(). 
+$graph->title->Set("Tracker Activity For: ".$group->getPublicName(). 
 	" (".date('Y-m-d',$report->getStartDate()) ." to ". date('Y-m-d',$report->getEndDate()) .")");
 $graph->subtitle->Set($report_company_name);
 //$graph->xaxis-> title->Set("Date" );
