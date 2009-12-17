@@ -24,6 +24,37 @@
  */
 
 /**
+ * is_utf8($string) - utf-8 detection
+ *
+ * From http://www.php.net/manual/en/function.mb-detect-encoding.php#85294
+ */
+function is_utf8($str) {
+    $c=0; $b=0;
+    $bits=0;
+    $len=strlen($str);
+    for($i=0; $i<$len; $i++){
+        $c=ord($str[$i]);
+        if($c > 128){
+            if(($c >= 254)) return false;
+            elseif($c >= 252) $bits=6;
+            elseif($c >= 248) $bits=5;
+            elseif($c >= 240) $bits=4;
+            elseif($c >= 224) $bits=3;
+            elseif($c >= 192) $bits=2;
+            else return false;
+            if(($i+$bits) > $len) return false;
+            while($bits > 1){
+                $i++;
+                $b=ord($str[$i]);
+                if($b < 128 || $b > 191) return false;
+                $bits--;
+            }
+        }
+    }
+    return true;
+}
+
+/**
  * removeCRLF() - remove any Carriage Return-Line Feed from a string. 
  * That function is useful to remove the possibility of a CRLF Injection when sending mail
  * All the data that we will send should be passed through that function
@@ -122,15 +153,9 @@ function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$e
 		$sys_sendmail_path="/usr/sbin/sendmail";
 	}
 
-	exec ("/bin/echo ". util_prep_string_for_sendmail($body2) .
-		  " | ".$sys_sendmail_path." -f'$from' -t -i > /dev/null 2>&1 &");	
-	// WARNING : popen commented code probably brought some trouble, we will use the pipe method as we were before
-       /*if (!$handle = popen($sys_sendmail_path." -f'$from' -t -i", "w")) {
-               echo "<p>Error: cannot run '$sys_sendmail_path' - mail not sent</p>\n";
-       } else {
-               fwrite($handle, util_prep_string_for_sendmail($body2));
-               pclose($handle);
-       }*/
+ 	$handle = popen($sys_sendmail_path." -f'$from' -t -i", 'w');
+	fwrite ($handle, $body2);
+ 	pclose($handle);
 }
 
 /**
@@ -935,6 +960,19 @@ function util_is_root_dir($dir) {
 	return !preg_match('/[^\\/]/',$dir);
 }
 
+/**
+ * util_strip_accents() - Remove accents from given text.
+ * @param	string	Text
+ * @return 	string
+ */
+function util_strip_accents($text) {
+	$find = utf8_decode($text);
+	$find = strtr($find,
+		utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'),
+		'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
+	return utf8_encode($find);
+}
+
 function normalized_urlprefix () {
 	$prefix = $GLOBALS['sys_urlprefix'] ;
 	$prefix = ereg_replace ("^/", "", $prefix) ;
@@ -1002,6 +1040,47 @@ function util_ensure_value_in_set ($value, $set) {
 	} else {
 		return $set[0] ;
 	}
+}
+
+function check_email_available($group, $email, &$response) {
+	// Check if a mailing list with same name already exists
+	$mlFactory = new MailingListFactory($group);
+	if (!$mlFactory || !is_object($mlFactory) || $mlFactory->isError()) {
+		$response .= $mlFactory->getErrorMessage();
+		return false;
+	}
+	$mlArray =& $mlFactory->getMailingLists();
+	if ($mlFactory->isError()) {
+		$response .= $mlFactory->getErrorMessage();
+		return false;
+	}
+	for ($j = 0; $j < count($mlArray); $j++) {
+		$currentList =& $mlArray[$j];
+		if ($email == $currentList->getName()) {
+			$response .= _('Error: a mailing list with the same email address already exists.');
+			return false;
+		}
+	}
+		
+	// Check if a forum with same name already exists
+	$ff = new ForumFactory($group);
+	if (!$ff || !is_object($ff) || $ff->isError()) {
+		$response .= $ff->getErrorMessage();
+		return false;
+	}
+	$farr =& $ff->getForums();
+	$prefix = $group->getUnixName() . '-';
+	for ($j = 0; $j < count($farr); $j++) {
+		if (is_object($farr[$j])) {
+			if ($email == $prefix . $farr[$j]->getName()) {
+				$response .= _('Error: a forum with the same email address already exists.');
+				return false;
+			}
+		}
+	}
+	
+	// Email is available
+	return true;
 }
 
 // Local Variables:
