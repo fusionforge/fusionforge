@@ -160,7 +160,7 @@ class Error {
 	 *
 	 */
 	function setOnUpdateError($result=""){
-		$this->setError(sprintf(_('Error On Update:'), $result), ERROR__ON_UPDATE_ERROR);	
+		$this->setError(sprintf(_('Error On Update: %s'), $result), ERROR__ON_UPDATE_ERROR);
 	}
 	
 	/**
