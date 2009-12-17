@@ -35,9 +35,21 @@ var $stillopencount;
 function ReportTrackerAct($span,$group_id,$atid,$start=0,$end=0) {
 	$this->Report();
 
+	$group =& group_get_object($group_id);
+	$at = new ArtifactType($group, $atid);
+	if ($at->isError()) {
+		if ($at->isPermissionDeniedError()) {
+			exit_permission_denied();
+		} else {
+			exit_error('Error',$at->getErrorMessage());
+		}
+	}
+
+	// Set start date from the project date.
 	if (!$start) {
 		$start=mktime(0,0,0,date('m'),1,date('Y')-1);
 	}
+
 	if (!$end) {
 		$end=time();
 	} else {
