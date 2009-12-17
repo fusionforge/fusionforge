@@ -46,7 +46,7 @@ $atid = getIntFromRequest('atid');
 
 //if the ATID and GID are not provided, but
 //the artifact_id is, then fetch the other vars
-if ($aid && (!$group_id || !$atid)) {
+if ($aid && (!$group_id && !$atid)) {
 	$a =& artifact_get_object($aid);
 	if (!$a || !is_object($a) || $a->isError()) {
 		exit_error('Error','Could Not Get Artifact Object');
@@ -57,16 +57,23 @@ if ($aid && (!$group_id || !$atid)) {
 	}
 }
 
+$group =& group_get_object($group_id);
+if (!$group || !is_object($group)) {
+        exit_no_group();
+}
+if ($group->isError()) {
+        if($group->isPermissionDeniedError()) {
+                exit_permission_denied($group->getErrorMessage());
+        } else {
+                exit_error(_('Error'), $group->getErrorMessage());
+        }
+}
+
 if ($group_id && $atid) {
 	include $gfwww.'tracker/tracker.php';
 
 } elseif ($group_id) {
-
 	include $gfwww.'tracker/ind.php';
-
-} else {
-
-	exit_no_group();
 
 }
 

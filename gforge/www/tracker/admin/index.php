@@ -21,18 +21,24 @@ $group_id = getIntFromRequest('group_id');
 $atid = getIntFromRequest('atid');
 
 $feedback = '';
+$add_extrafield = '';
+
+$group =& group_get_object($group_id);
+if (!$group || !is_object($group)) {
+	exit_no_group();
+}
+if ($group->isError()) {
+	if($group->isPermissionDeniedError()) {
+		exit_permission_denied($group->getErrorMessage());
+	} else {
+		exit_error(_('Error'), $group->getErrorMessage());
+	}
+}
 
 if ($group_id && $atid) {
 //
 //		UPDATING A PARTICULAR ARTIFACT TYPE
 //
-	//	
-	//  get the Group object
-	//	
-	$group =& group_get_object($group_id);
-	if (!$group || !is_object($group) || $group->isError()) {
-		exit_no_group();
-	}
 
 /*	$perm =& $group->getPermission( session_get_user() );
 
@@ -172,11 +178,6 @@ if ($group_id && $atid) {
 	}
 
 	include $gfwww.'tracker/admin/ind.php';
-
-} else {
-
-	//browse for group first message
-	exit_no_group();
 
 }
 
