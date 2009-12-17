@@ -29,7 +29,7 @@ function report_header($title) {
 	if (isset($GLOBALS['feedback'])) {
 		echo html_feedback_top($GLOBALS['feedback']);
 	}
-	echo "<h2>".sprintf(_('%1$s Reporting'), $sys_name)."</h2><p>";
+	echo "<h1>".sprintf(_('%1$s Reporting'), $sys_name)."</h1>\n";
 }
 
 function report_footer() {
@@ -240,6 +240,7 @@ function report_pie_arr($labels, $vals, $format=1) {
 }
 
 function report_package_box($group_id, $name='dev_id', $selected='') {
+
 	$res = db_query_params ('SELECT package_id, name FROM frs_package WHERE frs_package.group_id = $1',
 				array ($group_id));
 	return html_build_select_box($res, $name, $selected, false);
