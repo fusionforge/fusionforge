@@ -149,6 +149,25 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 						} elseif ($percent_complete > 100) {
 							$percent_complete=100;
 						}
+
+						// Convert category name to category_id if given.
+						if (isset($tasks[$i]['category'])) {
+							if ($tasks[$i]['category'] == 'None') {
+								$category_id = 100;
+							} else {
+								$res = db_query_params('SELECT category_id FROM project_category WHERE group_project_id=$1 AND category_name=$2',
+									array($group_project_id, $tasks[$i]['category']));
+								$category_id = db_result($res, 0, 'category_id');
+								if (!$category_id) {
+									$was_error=true;
+									$array['errormessage']='Error No category named : '.$tasks[$i]['category'];
+									break;
+								}
+							}
+						} else {
+							$category_id = $pt->getCategoryID();
+						}
+
 						if (!$pt->create(
 							addslashes($tasks[$i]['name']),
 							addslashes($tasks[$i]['notes']),
@@ -156,7 +175,7 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 							$hours,
 							strtotime($tasks[$i]['start_date']),
 							strtotime($tasks[$i]['end_date']),
-							100,
+							$category_id,
 							$percent_complete,
 							$assignees,
 							$deps = array(),
@@ -216,6 +235,25 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 						} elseif ($percent_complete > 100) {
 							$percent_complete=100;
 						}
+
+						// Convert category name to category_id if given.
+						if (isset($tasks[$i]['category'])) {
+							if ($tasks[$i]['category'] == 'None') {
+								$category_id = 100;
+							} else {
+								$res = db_query_params('SELECT category_id FROM project_category WHERE group_project_id=$1 AND category_name=$2',
+									array($group_project_id, $tasks[$i]['category']));
+								$category_id = db_result($res, 0, 'category_id');
+								if (!$category_id) {
+									$was_error=true;
+									$array['errormessage']='Error No category named : '.$tasks[$i]['category'];
+									break;
+								}
+							}
+						} else {
+							$category_id = $pt->getCategoryID();
+						}
+
 						if (!$pt->update(
 							addslashes($tasks[$i]['name']),
 							addslashes($tasks[$i]['notes']),
@@ -224,7 +262,7 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 							strtotime($tasks[$i]['start_date']),
 							strtotime($tasks[$i]['end_date']),
 							$pt->getStatusID(),
-							$pt->getCategoryID(),
+							$category_id,
 							$percent_complete,
 							$assignees,
 							$pt->getDependentOn(),
