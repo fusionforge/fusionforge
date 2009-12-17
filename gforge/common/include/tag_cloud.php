@@ -113,7 +113,7 @@ function tag_cloud($params = '') {
 			$tag_count[$row['name']] = $row['count'];
 			if ($count_min == 0 || $row['count'] < $count_min) $count_min = $row['count'];
 			if ($row['count'] > $count_max) $count_max = $row['count'];
-			if ($nb >= $params['nb_max']) break;
+			if ($params['nb_max'] && $nb >= $params['nb_max']) break; // no limit if nb_max == 0
 			$nb++;
 		}
 
