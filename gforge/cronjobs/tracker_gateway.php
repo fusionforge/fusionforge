@@ -135,6 +135,7 @@ class TrackerGateway extends Error {
 			$artifactid_end=(strpos($subj,'['.$arr[2].']')) + strlen('['.$arr[2].']');
 			$this->Subject = addslashes(substr($subj,$artifactid_end));
 		} else {
+			$this->FromEmail = ''; // Do not reply if no pattern found.
 			$this->Subject = addslashes($subj);
 			$this->ArtifactId=0; // Not supported at the moment
 			$this->setError("ArtifactId needed at the moment. Artifact creation not supported");
@@ -145,10 +146,10 @@ class TrackerGateway extends Error {
 		// find first occurrence of the marker in the message
 		$begin = strpos($body, ARTIFACT_MAIL_MARKER);
 		if ($begin === false) {
-			$this->setError("Response message wasn't found in your mail. Please verify that 
-you entered your message between the correct text markers.
-\nYour message was:
-\n".$mp->getBody());
+			$this->setError("Response message wasn't found in your mail. Please verify that ".
+							"you entered your message between the correct text markers.".
+							"\nYour message was:".
+							"\n".$mp->getBody());
 			return false;
 		}
 		// get the part of the message located after the marker
@@ -156,10 +157,10 @@ you entered your message between the correct text markers.
 		// now look for the ending marker
 		$end = strpos($body, ARTIFACT_MAIL_MARKER);
 		if ($end === false) {
-			$this->setError("Response message wasn't found in your mail. Please verify that 
-you entered your message between the correct text markers.
-\nYour message was:
-\n".$mp->getBody());
+			$this->setError("Response message wasn't found in your mail. Please verify that ".
+							"you entered your message between the correct text markers.".
+							"\nYour message was:".
+							"\n".$mp->getBody());
 			return false;
 		}
 		$message = substr($body, 0, $end);
@@ -278,6 +279,8 @@ function DBG($str) {
 $debug = 0;
 $myTrackerGateway = new TrackerGateway();
 if ($myTrackerGateway->isError()) {
+	DBG ("From: ". $myTrackerGateway->FromEmail);
+	DBG ("Subject: ". $myTrackerGateway->Subject);
 	if ($myTrackerGateway->FromEmail) {
 		mail ($myTrackerGateway->FromEmail,'Tracker Post Rejected',$myTrackerGateway->getErrorMessage());
 	}
