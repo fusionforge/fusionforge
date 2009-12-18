@@ -39,7 +39,7 @@ function display_contribution ($c, $show_groups = false) {
 		print '<li>' ;
 		printf (_('%s: %s (%s)'),
 			htmlspecialchars ($p->getRole()->getName()),
-			util_make_link ('/plugins/contribtracker/index.php?actor_id='.$p->getActor()->getId (),
+			util_make_link ('/plugins/'.$plugin->name.'/?actor_id='.$p->getActor()->getId (),
 					htmlspecialchars ($p->getActor()->getName())),
 			htmlspecialchars ($p->getActor()->getLegalStructure()->getName())) ;
 		print '</li>' ;
@@ -137,7 +137,7 @@ if ($group_id) {
 		
 		foreach ($participations as $p) {
 			$c = $p->getContribution () ;
-			print '<h3>' . util_make_link ('/plugins/contribtracker/index.php?group_id='.$c->getGroup()->getId().'&contrib_id='.$c->getId (),
+			print '<h3>' . util_make_link ('/plugins/'.$plugin->name.'/?group_id='.$c->getGroup()->getId().'&contrib_id='.$c->getId (),
 						       htmlspecialchars ($c->getName())) . '</h3>' ;
 			print '<strong>'._('Group:').'</strong> ' ;
 			print util_make_link_g ($c->getGroup()->getUnixName(),

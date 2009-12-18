@@ -49,7 +49,7 @@ class ContribTrackerPlugin extends Plugin {
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][] = _('Contribution tracker') ;
-				$params['DIRS'][]='/plugins/contribtracker/index.php?group_id=' . $group_id ;
+				$params['DIRS'][]='/plugins/'.$this->name.'/?group_id=' . $group_id ;
 			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == "groupisactivecheckbox") {
@@ -87,7 +87,7 @@ class ContribTrackerPlugin extends Plugin {
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
-				echo util_make_link ("/plugins/contribtracker/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
+				echo util_make_link ("/plugins/".$this->name."/?id=".$group->getID().'&type=admin&pluginname='.$this->name,
 						     _('Contribution Tracker admin')) ;
 				echo '</p>';
 			}
@@ -105,16 +105,9 @@ class ContribTrackerPlugin extends Plugin {
 	<table cellspacing="1" cellpadding="5" width="100%" border="0">
 		<tr>
 		<td style="text-align:left">
-			'._('Contribution name').'
-		</td>
-		<td style="text-align:center">
-			'._('Date').'
-		</td>
+			'._('Contribution').'
 		<td style="text-align:center">
 			'._('Contributing organisation').'
-		</td>
-		<td style="text-align:center">
-			'._('Role').'
 		</td>
 		</tr>';
 
@@ -129,23 +122,22 @@ class ContribTrackerPlugin extends Plugin {
 					foreach ($contribs as $c) {
 						// Contribution
 						echo '<tr><td>' ;
-						echo util_make_link ('/plugins/'.$this->name.'?group_id='.$group_id.'&contrib_id='.$c->getId(),htmlspecialchars($c->getName())) ;
-						echo '</td><td>' ;
 						echo strftime (_('%Y-%m-%d'), $c->getDate ()) ;
-						echo '</td><td>' ;
-						echo '</td><td>' ;
-						echo '</td></tr>' ;
-
+						echo ' ' ;
+						echo util_make_link ('/plugins/'.$this->name.'/?group_id='.$group_id.'&contrib_id='.$c->getId(),htmlspecialchars($c->getName())) ;
+						echo '</td><td><ul>' ;
 						// Actors involved
 						$parts = $c->getParticipations () ;
 						foreach ($parts as $p) {
-							echo '<tr><td></td><td></td><td>' ;
-							echo (util_make_link ('/plugins/'.$this->name.'/index.php?actor_id='.$p->getActor()->getId (),
-									      htmlspecialchars ($p->getActor()->getName()))) ;
-							echo '</td><td>' ;
-							echo htmlspecialchars ($p->getRole()->getName()) ;
-							echo '</td><td></tr>' ;
+							echo '<li>' ;
+							printf (_('%s: %s (%s)'),
+								htmlspecialchars ($p->getRole()->getName()),
+								util_make_link ('/plugins/'.$this->name.'/?actor_id='.$p->getActor()->getId (),
+										htmlspecialchars ($p->getActor()->getName())),
+								htmlspecialchars ($p->getActor()->getLegalStructure()->getName())) ;
+							echo '</li>' ;
 						}
+						echo '</ul></td></tr>' ;
 
 						$i++ ;
 						if ($i > $max_displayed_contribs) {
@@ -155,7 +147,7 @@ class ContribTrackerPlugin extends Plugin {
 				}
 				?></table>
 					    <div style="text-align:center">
-					    <?php echo util_make_link ('/plugins/'.$this->name.'?group_id='.$group_id,'['._('View All Contributions').']'); ?>
+					    <?php echo util_make_link ('/plugins/'.$this->name.'/?group_id='.$group_id,_('[View All Contributions]')); ?>
 					    </div>
 						      <?php
 						      echo $HTML->boxBottom();
