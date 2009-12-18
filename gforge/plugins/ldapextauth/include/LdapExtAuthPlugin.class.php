@@ -276,7 +276,7 @@ class LdapextauthPlugin extends Plugin {
 					$title = $mappedinfo['title'] ;
 				}
 				if ($mappedinfo['ccode']) {
-					$res = db_query("SELECT count(*) as c FROM country_code WHERE ccode='" . $mappedinfo['ccode'] . "'");
+					$res = db_query_params('SELECT count(*) as c FROM country_code WHERE ccode=$1', array($mappedinfo['ccode']));
 					if (db_result($res, 0, 'c') == 1) {
 						$ccode = $mappedinfo['ccode'] ;
 					}
