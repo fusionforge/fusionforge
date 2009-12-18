@@ -13,7 +13,7 @@ $plugin = plugin_get_object ('contribtracker') ;
 
 function display_contribution ($c, $show_groups = false) {
 	global $plugin ;
-	print '<h3>'.$c->getName().'</h3>' ;
+	print '<h2>'.$c->getName().'</h2>' ;
 	if ($show_groups) {
 		print '<strong>'._('Group:').'</strong> ' ;
 		print util_make_link_g ($c->getGroup()->getUnixName(),
@@ -145,9 +145,9 @@ if ($group_id) {
 		
 		foreach ($participations as $p) {
 			$c = $p->getContribution () ;
-			print '<h3>' . util_make_link ('/plugins/'.$plugin->name.'/?group_id='.$c->getGroup()->getId().'&contrib_id='.$c->getId (),
-						       htmlspecialchars ($c->getName())) . '</h3>' ;
-			print '<strong>'._('Group:').'</strong> ' ;
+			print '<h2>' . util_make_link ('/plugins/'.$plugin->name.'/?group_id='.$c->getGroup()->getId().'&contrib_id='.$c->getId (),
+						       htmlspecialchars ($c->getName())) . '</h2>' ;
+			print '<strong>'._('Project:').'</strong> ' ;
 			print util_make_link_g ($c->getGroup()->getUnixName(),
 						$c->getGroup()->getId(),
 						$c->getGroup()->getPublicName()) ;
