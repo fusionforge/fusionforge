@@ -80,7 +80,7 @@ then
 	if [ $mode = "install" ]
 	then
 		php gforge-install-3-db.php
-		php /opt/gforge/db/startpoint.php $version
+		php db/startpoint.php $version
 
 		# Post installation fixes.
 		perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/httpd/conf/httpd.conf
@@ -98,7 +98,7 @@ then
 		cp plugins/*/etc/cron.d/* /etc/cron.d/
 		service crond reload
 	else
-		php /opt/gforge/db/upgrade-db.php
+		php db/upgrade-db.php
 	fi
 elif [ "$type" = "suse" ]
 then
@@ -109,7 +109,7 @@ then
 	if [ $mode = "install" ]
 	then
 		php gforge-install-3-db.php
-		php /opt/gforge/db/startpoint.php $version
+		php db/startpoint.php $version
 
 		# Post installation fixes.
 		#perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/apache2/httpd.conf
@@ -135,7 +135,7 @@ then
 		cp plugins/*/etc/cron.d/* /etc/cron.d/
 		rccron reload
 	else
-		php /opt/gforge/db/upgrade-db.php
+		php db/upgrade-db.php
 	fi
 elif [ $type = "ubuntu" ]
 then
