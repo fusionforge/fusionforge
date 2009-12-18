@@ -248,6 +248,7 @@ gforge/plugins/contribtracker/bin/db-upgrade.pl -text
 gforge/plugins/contribtracker/common/ContribTrackerPlugin.class.php -text
 gforge/plugins/contribtracker/common/contribtracker-init.php -text
 gforge/plugins/contribtracker/lib/contribtracker-init.sql -text
+gforge/plugins/contribtracker/www/global_admin.php -text
 gforge/plugins/contribtracker/www/index.php -text
 gforge/plugins/contribtracker/www/project_admin.php -text
 gforge/plugins/createplugin.sh -text

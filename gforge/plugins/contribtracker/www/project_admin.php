@@ -296,14 +296,6 @@ case 'display':
 	break ;
 }
 
-
-
-
-
-util_make_link ('/plugins/'.$plugin->name.'/project_admin.php?group_id='.$group->getId ().'&action=foo',
-		_('Blah')) ;
-	
-
 site_project_footer(array());
 
 // Local Variables:

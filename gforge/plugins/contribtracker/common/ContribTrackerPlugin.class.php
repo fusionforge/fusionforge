@@ -32,6 +32,7 @@ class ContribTrackerPlugin extends Plugin {
 		$this->hooks[] = "groupisactivecheckboxpost" ; //
 		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page for group
 		$this->hooks[] = "project_before_frs"; // project summary page
+                $this->hooks[] = "site_admin_option_hook"; // to show in the site admin page
 	}
 
 	function CallHook ($hookname, $params) {
@@ -153,6 +154,14 @@ class ContribTrackerPlugin extends Plugin {
 						      echo $HTML->boxBottom();
 			}
 		}
+                elseif ($hookname == "site_admin_option_hook") {
+                        ?>
+                        <li><?php echo util_make_link ('/plugins/'.$this->name.'/global_admin.php',
+                                                       _('Edit actors and roles for the contribution tracker plugin')
+                                ); ?></li>
+                        <?php
+                } 
+
 	}
 
 	function getActors () {
