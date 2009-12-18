@@ -25,7 +25,7 @@ CREATE SEQUENCE plugin_contribtracker_contribution_pk_seq ;
 CREATE TABLE plugin_contribtracker_contribution (
        contrib_id integer DEFAULT nextval('plugin_contribtracker_contribution_pk_seq') PRIMARY KEY,
        name text DEFAULT '' NOT NULL,
-       date int,
+       date int DEFAULT 0 NOT NULL,
        description text DEFAULT '' NOT NULL,
        group_id integer NOT NULL REFERENCES groups ON DELETE CASCADE
 ) ;

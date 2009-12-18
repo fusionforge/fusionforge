@@ -48,7 +48,7 @@ class ContribTrackerPlugin extends Plugin {
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][] = _('Contribution tracker') ;
-				$params['DIRS'][]='/plugins/contribtracker/index.php?type=group&id=' . $group_id . "&pluginname=" . $this->name; // we indicate the part we're calling is the project one
+				$params['DIRS'][]='/plugins/contribtracker/index.php?group_id=' . $group_id ;
 			}	
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == "groupisactivecheckbox") {
