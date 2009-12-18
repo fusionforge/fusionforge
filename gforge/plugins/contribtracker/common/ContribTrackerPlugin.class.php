@@ -147,14 +147,60 @@ class ContribTrackerRole extends Error {
 		return $this->fetchData ($id) ;
 	}
 
-	function update () {
+	function update ($name, $description) {
+		if (! $this->getId ()) {
+			$this->setError(_('Object does not exist')) ;
+			return false ;
+		}
+
+		$id = $this->getId () ;
+
+		db_begin () ;
+		$res = db_query_params ('UPDATE plugin_contribtracker_role SET (name, description) = ($1,$2) WHERE role_id = $3',
+					array ($name,
+					       $description,
+					       $id)) ;
+		if (!$res || db_affected_rows ($res) < 1) {
+			$this->setError (sprintf(_('Could not update object in database: %s'),
+						 db_error ()));
+			db_rollback () ;
+			return false ;
+		}
+			
+		db_commit () ;
 		return $this->fetchData ($id) ;
 	}
 
 	function delete () {
+		$id = $this->getId () ;
+		if (!$id) {
+			$this->setError (_('Cannot delete a non-existing object')) ;
+			return false ;
+		}
+
+		$res = db_query_params ('DELETE FROM plugin_contribtracker_role WHERE role_id = $1',
+					array ($id)) ;
+		if (!$res) {
+			$this->setError (sprintf(_('Could not delete object in database: %s'),
+						 db_error ())) ;
+			return false ;
+		}
+
+		$this->data_array = array () ;
+		
+		return true ;
 	}
 
-	function getId () { return $this->data_array['role_id'] ; }
+	function getId () {
+		if (isset ($this->data_array['role_id'])) {
+			return $this->data_array['role_id'] ;
+		} else {
+			return false ;
+		}
+	}
+	function getName () { return $this->data_array['name'] ; }
+	function getDescription () { return $this->data_array['description'] ; }
+	
 }
 
 class ContribTrackerLegalStructure extends Error {
@@ -208,14 +254,57 @@ class ContribTrackerLegalStructure extends Error {
 		return $this->fetchData ($id) ;
 	}
 
-	function update () {
+	function update ($name) {
+		if (! $this->getId ()) {
+			$this->setError(_('Object does not exist')) ;
+			return false ;
+		}
+
+		$id = $this->getId () ;
+
+		db_begin () ;
+		$res = db_query_params ('UPDATE plugin_contribtracker_legal_structure SET (name) = ($1) WHERE struct_id = $2',
+					array ($name,
+					       $id)) ;
+		if (!$res || db_affected_rows ($res) < 1) {
+			$this->setError (sprintf(_('Could not update object in database: %s'),
+						 db_error ()));
+			db_rollback () ;
+			return false ;
+		}
+		
+		db_commit () ;
 		return $this->fetchData ($id) ;
 	}
 
 	function delete () {
+		$id = $this->getId () ;
+		if (!$id) {
+			$this->setError (_('Cannot delete a non-existing object')) ;
+			return false ;
+		}
+
+		$res = db_query_params ('DELETE FROM plugin_contribtracker_legal_structure WHERE struct_id = $1',
+					array ($id)) ;
+		if (!$res) {
+			$this->setError (sprintf(_('Could not delete object in database: %s'),
+						 db_error ())) ;
+			return false ;
+		}
+
+		$this->data_array = array () ;
+		
+		return true ;
 	}
 
-	function getId () { return $this->data_array['struct_id'] ; }
+	function getId () {
+		if (isset ($this->data_array['struct_id'])) {
+			return $this->data_array['struct_id'] ;
+		} else {
+			return false ;
+
+	}
+	function getName () { return $this->data_array['name'] ; }
 }
 
 class ContribTrackerActor extends Error {
@@ -273,14 +362,64 @@ class ContribTrackerActor extends Error {
 		return $this->fetchData ($id) ;
 	}
 
-	function update () {
+	function update ($name, $address, $email, $description, $structure) {
+		if (! $this->getId ()) {
+			$this->setError(_('Object does not exist')) ;
+			return false ;
+		}
+
+		$id = $this->getId () ;
+
+		db_begin () ;
+		$res = db_query_params ('UPDATE plugin_contribtracker_actor SET (name,address,email,description,struct_id) = ($1,$2,$3,$4,$5) WHERE actor_id = $6',
+					array ($name,
+					       $address,
+					       $email,
+					       $description,
+					       $structure->getID(),
+					       $id)) ;
+		if (!$res || db_affected_rows ($res) < 1) {
+			$this->setError (sprintf(_('Could not create object in update: %s'),
+						 db_error ()));
+			db_rollback () ;
+			return false ;
+		}
+			
+		db_commit () ;
 		return $this->fetchData ($id) ;
 	}
 
 	function delete () {
+		$id = $this->getId () ;
+		if (!$id) {
+			$this->setError (_('Cannot delete a non-existing object')) ;
+			return false ;
+		}
+
+		$res = db_query_params ('DELETE FROM plugin_contribtracker_actor WHERE actor_id = $1',
+					array ($id)) ;
+		if (!$res) {
+			$this->setError (sprintf(_('Could not delete object in database: %s'),
+						 db_error ())) ;
+			return false ;
+		}
+
+		$this->data_array = array () ;
+		
+		return true ;
 	}
 
-	function getId () { return $this->data_array['actor_id'] ; }
+	function getId () {
+		if (isset ($this->data_array['actor_id'])) {
+			return $this->data_array['actor_id'] ;
+		} else {
+			return false ;
+
+	}
+	function getName () { return $this->data_array['name'] ; }
+	function getAddress () { return $this->data_array['address'] ; }
+	function getEmail () { return $this->data_array['email'] ; }
+	function getDescription () { return $this->data_array['description'] ; }
 	function getLegalStructure () {
 		return new ContribTrackerLegalStructure ($this->data_array['struct_id']) ;
 	}
@@ -340,14 +479,62 @@ class ContribTrackerContribution extends Error {
 		return $this->fetchData ($id) ;
 	}
 
-	function update () {
+	function update ($name, $date, $description, $group) {
+		if (! $this->getId ()) {
+			$this->setError(_('Object does not exist')) ;
+			return false ;
+		}
+
+		$id = $this->getId () ;
+
+		db_begin () ;
+		$res = db_query_params ('UPDATE plugin_contribtracker_contribution SET (name,date,description,group_id) = ($1,$2,$3,$4) WHERE contrib_id = $5',
+					array ($name,
+					       $date,
+					       $description,
+					       $group->getID(),
+					       $id)) ;
+		if (!$res || db_affected_rows ($res) < 1) {
+			$this->setError (sprintf(_('Could not create object update database: %s'),
+						 db_error ()));
+			db_rollback () ;
+			return false ;
+		}
+			
+		db_commit () ;
 		return $this->fetchData ($id) ;
 	}
 
 	function delete () {
+		$id = $this->getId () ;
+		if (!$id) {
+			$this->setError (_('Cannot delete a non-existing object')) ;
+			return false ;
+		}
+
+		$res = db_query_params ('DELETE FROM plugin_contribtracker_contribution WHERE contrib_id = $1',
+					array ($id)) ;
+		if (!$res) {
+			$this->setError (sprintf(_('Could not delete object in database: %s'),
+						 db_error ())) ;
+			return false ;
+		}
+
+		$this->data_array = array () ;
+		
+		return true ;
 	}
 
-	function getId () { return $this->data_array['contrib_id'] ; }
+	function getId () {
+		if (isset ($this->data_array['contrib_id'])) {
+			return $this->data_array['contrib_id'] ;
+		} else {
+			return false ;
+
+	}
+	function getName () { return $this->data_array['name'] ; }
+	function getDate () { return $this->data_array['date'] ; }
+	function getDescription () { return $this->data_array['description'] ; }
 	function getGroup () {
 		return group_get_object ($this->data_array['group_id']) ;
 	}
@@ -406,14 +593,58 @@ class ContribTrackerParticipation extends Error {
 		return $this->fetchData ($id) ;
 	}
 
-	function update () {
+	function update ($contrib, $actor, $role) {
+		if (! $this->getId ()) {
+			$this->setError(_('Object does not exist')) ;
+			return false ;
+		}
+
+		$id = $this->getId () ;
+
+		db_begin () ;
+		$res = db_query_params ('UPDATE plugin_contribtracker_participation SET (contrib_id,actor_id,role_id) = ($1,$2,$3) WHERE participation_id = $4',
+					array ($contrib->getID(),
+					       $actor->getID(),
+					       $role->getID(),
+					       $id)) ;
+		if (!$res || db_affected_rows ($res) < 1) {
+			$this->setError (sprintf(_('Could not create object update database: %s'),
+						 db_error ()));
+			db_rollback () ;
+			return false ;
+		}
+			
+		db_commit () ;
 		return $this->fetchData ($id) ;
 	}
 
 	function delete () {
+		$id = $this->getId () ;
+		if (!$id) {
+			$this->setError (_('Cannot delete a non-existing object')) ;
+			return false ;
+		}
+
+		$res = db_query_params ('DELETE FROM plugin_contribtracker_participation WHERE participation_id = $1',
+					array ($id)) ;
+		if (!$res) {
+			$this->setError (sprintf(_('Could not delete object in database: %s'),
+						 db_error ())) ;
+			return false ;
+		}
+
+		$this->data_array = array () ;
+		
+		return true ;
 	}
 
-	function getId () { return $this->data_array['participation_id'] ; }
+	function getId () {
+		if (isset ($this->data_array['participation_id'])) {
+			return $this->data_array['participation_id'] ;
+		} else {
+			return false ;
+		}
+	}
 	function getActor () {
 		return new ContribTrackerActor ($this->data_array['actor_id']) ;
 	}
