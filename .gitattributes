@@ -964,8 +964,6 @@ gforge/plugins/projectlabels/www/index.php -text
 gforge/plugins/projects_hierarchy/AUTHORS -text
 gforge/plugins/projects_hierarchy/COPYING -text
 gforge/plugins/projects_hierarchy/ChangeLog -text
-gforge/plugins/projects_hierarchy/common/languages/Base.tab -text
-gforge/plugins/projects_hierarchy/common/languages/French.tab -text
 gforge/plugins/projects_hierarchy/common/projects_hierarchy-init.php -text
 gforge/plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php -text
 gforge/plugins/projects_hierarchy/db/projects_hierarchy-init.sql -text
@@ -1000,7 +998,6 @@ gforge/plugins/projects_hierarchy/www/index.php -text
 gforge/plugins/projects_hierarchy/www/softwaremap.php -text
 gforge/plugins/projects_hierarchy/www/wait_son.php -text
 gforge/plugins/quota_management/INSTALL -text
-gforge/plugins/quota_management/common/languages/Base.tab -text
 gforge/plugins/quota_management/common/quota_management-init.php -text
 gforge/plugins/quota_management/common/quota_managementPlugin.class.php -text
 gforge/plugins/quota_management/cronjobs/quota_update.pl -text
@@ -1037,9 +1034,6 @@ gforge/plugins/svntracker/COPYING -text
 gforge/plugins/svntracker/README -text
 gforge/plugins/svntracker/bin/post.php -text
 gforge/plugins/svntracker/common/Snoopy.class.php -text
-gforge/plugins/svntracker/common/languages/Base.tab -text
-gforge/plugins/svntracker/common/languages/French.tab -text
-gforge/plugins/svntracker/common/languages/Spanish.tab -text
 gforge/plugins/svntracker/common/svntracker-init.php -text
 gforge/plugins/svntracker/common/svntrackerPlugin.class.php -text
 gforge/plugins/svntracker/db/20051011.sql -text
@@ -1054,8 +1048,6 @@ gforge/plugins/webcalendar/AUTHORS -text
 gforge/plugins/webcalendar/COPYING -text
 gforge/plugins/webcalendar/ChangeLog -text
 gforge/plugins/webcalendar/README -text
-gforge/plugins/webcalendar/common/languages/Base.tab -text
-gforge/plugins/webcalendar/common/languages/French.tab -text
 gforge/plugins/webcalendar/common/webcalendar-init.php -text
 gforge/plugins/webcalendar/common/webcalendarPlugin.class.php -text
 gforge/plugins/webcalendar/db/webcalendar-init.sql -text
