@@ -176,6 +176,9 @@ echo $HTML->boxBottom();
 <br />
 
 <?php
+$hook_params = array () ;
+$hook_params['group_id'] = $group_id ;
+plugin_hook ("project_before_frs",$hook_params) ;
 
 // ############################# File Releases
 
@@ -265,6 +268,10 @@ if ($project->usesFRS()) {
 <?php
 	echo $HTML->boxBottom();
 }
+
+$hook_params = array () ;
+$hook_params['group_id'] = $group_id ;
+plugin_hook ("project_after_frs",$hook_params) ;
 
 ?>
 <p />
