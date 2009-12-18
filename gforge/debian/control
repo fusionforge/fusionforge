@@ -344,7 +344,7 @@ Description: Projectlabels plugin for FusionForge
 
 Package: gforge-plugin-contribtracker
 Architecture: all
-Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, mediawiki, ${misc:Depends}
+Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, ${misc:Depends}
 Description: Contribution tracker plugin for FusionForge
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,

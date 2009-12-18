@@ -109,6 +109,8 @@ gforge/debian/dsf-po/fi.po -text
 gforge/debian/dsf-po/gl.po -text
 gforge/debian/dsf-po/pt.po -text
 gforge/debian/dsf-po/ru.po -text
+gforge/debian/gforge-plugin-contribtracker.postinst -text
+gforge/debian/gforge-plugin-contribtracker.prerm -text
 gforge/debian/patches/disable-dav.dpatch -text
 gforge/debian/patches/use-nusoap-from-distro.dpatch -text
 gforge/debian/patches/use-snoopy-from-distro.dpatch -text
@@ -225,6 +227,7 @@ gforge/packaging/install/ftp-proftpd -text
 gforge/packaging/install/lists-mailman -text
 gforge/packaging/install/mta-exim4 -text
 gforge/packaging/install/mta-postfix -text
+gforge/packaging/install/plugin-contribtracker -text
 gforge/packaging/install/plugin-extratabs -text
 gforge/packaging/install/plugin-globalsearch -text
 gforge/packaging/install/plugin-mediawiki -text
@@ -240,9 +243,11 @@ gforge/packaging/install/plugin-scmsvn -text
 gforge/packaging/install/shell-postgresql -text
 gforge/packaging/install/web-apache2 -text
 gforge/plugins/contribtracker/INSTALL -text
+gforge/plugins/contribtracker/bin/db-delete.pl -text
+gforge/plugins/contribtracker/bin/db-upgrade.pl -text
 gforge/plugins/contribtracker/common/ContribTrackerPlugin.class.php -text
 gforge/plugins/contribtracker/common/contribtracker-init.php -text
-gforge/plugins/contribtracker/db/contribtracker-init.sql -text
+gforge/plugins/contribtracker/lib/contribtracker-init.sql -text
 gforge/plugins/contribtracker/www/index.php -text
 gforge/plugins/createplugin.sh -text
 gforge/plugins/cvstracker/db/cvstracker-init-mysql.sql -text

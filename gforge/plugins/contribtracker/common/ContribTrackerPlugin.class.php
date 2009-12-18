@@ -30,9 +30,7 @@ class ContribTrackerPlugin extends Plugin {
 		$this->hooks[] = "groupmenu" ;	// To put into the project tabs
 		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
 		$this->hooks[] = "groupisactivecheckboxpost" ; //
-		$this->hooks[] = "userisactivecheckbox" ; // The "use ..." checkbox in user account
-		$this->hooks[] = "userisactivecheckboxpost" ; //
-		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page fro group
+		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page for group
 	}
 
 	function CallHook ($hookname, $params) {
@@ -49,11 +47,8 @@ class ContribTrackerPlugin extends Plugin {
 				return;
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
-				$params['TITLES'][]=$this->text;
+				$params['TITLES'][] = _('Contribution tracker') ;
 				$params['DIRS'][]='/plugins/contribtracker/index.php?type=group&id=' . $group_id . "&pluginname=" . $this->name; // we indicate the part we're calling is the project one
-			} else {
-				$params['TITLES'][]=$this->text." is [Off]";
-				$params['DIRS'][]='';
 			}	
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == "groupisactivecheckbox") {
@@ -83,52 +78,6 @@ class ContribTrackerPlugin extends Plugin {
 				$group->setPluginUse ( $this->name );
 			} else {
 				$group->setPluginUse ( $this->name, false );
-			}
-		} elseif ($hookname == "userisactivecheckbox") {
-			//check if user is active
-			// this code creates the checkbox in the user account manteinance page to activate/deactivate the plugin
-			$user = $params['user'];
-			echo "<tr>";
-			echo "<td>";
-			echo ' <input type="CHECKBOX" name="use_contribtrackerplugin" value="1" ';
-			// CHECKED OR UNCHECKED?
-			if ( $user->usesPlugin ( $this->name ) ) {
-				echo "CHECKED";
- 			}
-			echo ">    Use ".$this->text." Plugin";
-			echo "</td>";
-			echo "</tr>";
-		} elseif ($hookname == "userisactivecheckboxpost") {
-			// this code actually activates/deactivates the plugin after the form was submitted in the user account manteinance page
-			$user = $params['user'];
-			$use_contribtrackerplugin = getStringFromRequest('use_contribtrackerplugin');
-			if ( $use_contribtrackerplugin == 1 ) {
-				$user->setPluginUse ( $this->name );
-			} else {
-				$user->setPluginUse ( $this->name, false );
-			}
-			echo "<tr>";
-			echo "<td>";
-			echo ' <input type="CHECKBOX" name="use_contribtrackerplugin" value="1" ';
-			// CHECKED OR UNCHECKED?
-			if ( $user->usesPlugin ( $this->name ) ) {
-				echo "CHECKED";
-			}
-			echo ">    Use ".$this->text." Plugin";
-			echo "</td>";
-			echo "</tr>";
-		} elseif ($hookname == "user_personal_links") {
-			// this displays the link in the user's profile page to it's personal ContribTracker (if you want other sto access it, youll have to change the permissions in the index.php
-			$userid = $params['user_id'];
-			$user = user_get_object($userid);
-			$text = $params['text'];
-			//check if the user has the plugin activated
-			if ($user->usesPlugin($this->name)) {
-				echo '	<p>' ;
-				echo util_make_link ("/plugins/contribtracker/index.php?id=$userid&type=user&pluginname=".$this->name,
-						     _('View Personal ContribTracker')
-					);
-				echo '</p>';
 			}
 		} elseif ($hookname == "project_admin_plugins") {
 			// this displays the link in the project admin options page to it's  ContribTracker administration

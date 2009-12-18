@@ -13,6 +13,7 @@ gforge (4.8.55-1) experimental; urgency=low
     scmbzr, scmdarcs, scmgit and scmhg.  Mercurial (scmhg) and Arch are
     not quite complete yet.
   * Patched mediawiki plugin to enable one wiki per project.
+  * New contribtracker plugin, developed for Adullact.
 
   [ Christian Bayle ]
   * Remove frame from mediawiki 
