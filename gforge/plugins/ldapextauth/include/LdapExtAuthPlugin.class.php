@@ -167,6 +167,14 @@ class LdapextauthPlugin extends Plugin {
 			if (@ldap_bind($this->ldap_conn, $dn, $raw_passwd)) {
 				debuglog("LDAP: ldap_bind() ok (user bind)");
 				// Password from form is valid in LDAP
+
+				// If account has been deleted but user is valid in LDAP,
+				// then reactivate the account.
+				if ($u->getStatus() == 'D') {
+					debuglog("Account deleted, reactivating it.");
+					$u->setStatus('A');
+				}
+
 				if (session_login_valid_dbonly ($loginname, $passwd, false)) {
 					// Also according to DB
 					$GLOBALS['ldap_auth_failed']=false;
@@ -268,7 +276,10 @@ class LdapextauthPlugin extends Plugin {
 					$title = $mappedinfo['title'] ;
 				}
 				if ($mappedinfo['ccode']) {
-					$ccode = $mappedinfo['ccode'] ;
+					$res = db_query("SELECT count(*) as c FROM country_code WHERE ccode='" . $mappedinfo['ccode'] . "'");
+					if (db_result($res, 0, 'c') == 1) {
+						$ccode = $mappedinfo['ccode'] ;
+					}
 				}
 				if ($mappedinfo['themeid']) {
 					$theme_id = $mappedinfo['themeid'] ;
