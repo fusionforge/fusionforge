@@ -12,6 +12,7 @@ require_once $gfwww.'include/pre.php';
 $plugin = plugin_get_object ('contribtracker') ;
 
 function display_contribution ($c, $show_groups = false) {
+	global $plugin ;
 	print '<h3>'.$c->getName().'</h3>' ;
 	if ($show_groups) {
 		print '<strong>'._('Group:').'</strong> ' ;
@@ -147,7 +148,6 @@ if ($group_id) {
 			print htmlspecialchars ($p->getRole()->getName()) ;
 		}
 	}
-	site_project_footer(array());
 } else {			// Latest contributions, globally
 	$HTML->header(array('title'=>_('Contributions'),'pagename'=>'contribtracker'));
 	
@@ -171,7 +171,6 @@ if ($group_id) {
 		}
 	}
 }	
-
 
 site_project_footer(array());
 
