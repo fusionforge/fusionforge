@@ -3845,6 +3845,7 @@ packaging/tag_packaging_create -text
 packaging/tag_packaging_delete -text
 tests/AllFullTests.php -text
 tests/AllTests.php -text
+tests/SeleniumTests.php -text
 tests/TarCentos52Tests.php -text
 tests/build/documentation/AllTests.php -text
 tests/build/documentation/DocumentationTests.php -text
