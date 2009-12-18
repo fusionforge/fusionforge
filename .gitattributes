@@ -249,6 +249,7 @@ gforge/plugins/contribtracker/common/ContribTrackerPlugin.class.php -text
 gforge/plugins/contribtracker/common/contribtracker-init.php -text
 gforge/plugins/contribtracker/lib/contribtracker-init.sql -text
 gforge/plugins/contribtracker/www/index.php -text
+gforge/plugins/contribtracker/www/project_admin.php -text
 gforge/plugins/createplugin.sh -text
 gforge/plugins/cvstracker/db/cvstracker-init-mysql.sql -text
 gforge/plugins/cvstracker/gforge-plugin-cvstracker.spec -text svneol=unset#application/octet-stream

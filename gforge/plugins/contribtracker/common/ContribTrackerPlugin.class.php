@@ -87,7 +87,7 @@ class ContribTrackerPlugin extends Plugin {
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
-				echo util_make_link ("/plugins/".$this->name."/?id=".$group->getID().'&type=admin&pluginname='.$this->name,
+				echo util_make_link ("/plugins/".$this->name."/project_admin.php?group_id=".$group->getID(),
 						     _('Contribution Tracker admin')) ;
 				echo '</p>';
 			}
@@ -255,7 +255,7 @@ class ContribTrackerRole extends Error {
 	}
 
 	function create ($name, $description) {
-		if ($this->getId () != 0) {
+		if ($this->getId ()) {
 			$this->setError(_('Object already exists')) ;
 			return false ;
 		}
@@ -363,7 +363,7 @@ class ContribTrackerLegalStructure extends Error {
 	}
 
 	function create ($name) {
-		if ($this->getId () != 0) {
+		if ($this->getId ()) {
 			$this->setError(_('Object already exists')) ;
 			return false ;
 		}
@@ -467,7 +467,7 @@ class ContribTrackerActor extends Error {
 	}
 
 	function create ($name, $address, $email, $description, $structure) {
-		if ($this->getId () != 0) {
+		if ($this->getId ()) {
 			$this->setError(_('Object already exists')) ;
 			return false ;
 		}
@@ -599,7 +599,7 @@ class ContribTrackerContribution extends Error {
 	}
 
 	function create ($name, $date, $description, $group) {
-		if ($this->getId () != 0) {
+		if ($this->getId ()) {
 			$this->setError(_('Object already exists')) ;
 			return false ;
 		}
@@ -726,8 +726,8 @@ class ContribTrackerParticipation extends Error {
 		return true ;
 	}
 
-	function create ($contrib,$actor,$role) {
-		if ($this->getId () != 0) {
+	function create ($contrib, $actor, $role) {
+		if ($this->getId ()) {
 			$this->setError(_('Object already exists')) ;
 			return false ;
 		}
