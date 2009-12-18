@@ -55,6 +55,8 @@ function check_structure_id ($s_id) {
 	}
 }
 function check_logo ($arr, $a_id=false) {
+	global $max_logo_size ;
+
 	if ($a_id) {
 		$actor = new ContribTrackerActor ($a_id) ;
 		$default = $actor->getLogo() ;
