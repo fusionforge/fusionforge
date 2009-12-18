@@ -1,7 +1,7 @@
 <?php 
 /*
  * FCKeditor - The text editor for internet
- * Copyright (C) 2003-2005 Frederico Caldeira Knabben
+ * Copyright (C) 2003-2006 Frederico Caldeira Knabben
  * 
  * Licensed under the terms of the GNU Lesser General Public License:
  * 		http://www.opensource.org/licenses/lgpl-license.php
@@ -18,11 +18,13 @@
  * 		Frederico Caldeira Knabben (fredck@fckeditor.net)
  */
 
-include $gfplugins.'fckeditor/www/editor/filemanager/browser/default/connectors/php/config.php' ;
-include $gfplugins.'fckeditor/www/editor/filemanager/browser/default/connectors/php/util.php' ;
-include $gfplugins.'fckeditor/www/editor/filemanager/browser/default/connectors/php/io.php' ;
-include $gfplugins.'fckeditor/www/editor/filemanager/browser/default/connectors/php/basexml.php' ;
-include $gfplugins.'fckeditor/www/editor/filemanager/browser/default/connectors/php/commands.php' ;
+ob_start() ;
+
+include('config.php') ;
+include('util.php') ;
+include('io.php') ;
+include('basexml.php') ;
+include('commands.php') ;
 
 if ( !$Config['Enabled'] )
 	SendError( 1, 'This connector is disabled. Please check the "editor/filemanager/browser/default/connectors/php/config.php" file' ) ;

@@ -1,7 +1,7 @@
 <?php 
 /*
  * FCKeditor - The text editor for internet
- * Copyright (C) 2003-2005 Frederico Caldeira Knabben
+ * Copyright (C) 2003-2006 Frederico Caldeira Knabben
  * 
  * Licensed under the terms of the GNU Lesser General Public License:
  * 		http://www.opensource.org/licenses/lgpl-license.php
@@ -32,8 +32,12 @@ $Config['UserFilesPath'] = '/UserFiles/' ;
 // Attention: The above 'UserFilesPath' must point to the same directory.
 $Config['UserFilesAbsolutePath'] = '' ;
 
-$Config['AllowedExtensions']['File']	= array('7z', 'aiff', 'asf', 'avi', 'bmp', 'csv', 'doc', 'flv', 'gif', 'gz', 'gzip', 'jpeg', 'jpg', 'mid', 'mov', 'mp3', 'mp4', 'mpc', 'mpeg', 'mpg', 'ods', 'odt', 'pdf', 'png', 'ppt', 'pxd', 'qt', 'ram', 'rar', 'rm', 'rmi', 'rmvb', 'rtf', 'sdc', 'sitd', 'swf', 'sxc', 'sxw', 'tar', 'tgz', 'tif', 'tiff', 'txt', 'vsd', 'wav', 'wma', 'wmv', 'xls', 'xml', 'zip') ;
-$Config['DeniedExtensions']['File']		= array() ;
+// Due to security issues with Apache modules, it is reccomended to leave the
+// following setting enabled.
+$Config['ForceSingleExtension'] = true ;
+
+$Config['AllowedExtensions']['File']	= array() ;
+$Config['DeniedExtensions']['File']		= array('php','php2','php3','php4','php5','phtml','pwml','inc','asp','aspx','ascx','jsp','cfm','cfc','pl','bat','exe','com','dll','vbs','js','reg','cgi') ;
 
 $Config['AllowedExtensions']['Image']	= array('jpg','gif','jpeg','png') ;
 $Config['DeniedExtensions']['Image']	= array() ;
