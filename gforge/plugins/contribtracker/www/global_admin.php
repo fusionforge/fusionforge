@@ -12,6 +12,8 @@ require_once $gfwww.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 $plugin = plugin_get_object ('contribtracker') ;
 
+$max_logo_size = 50 ;		// In kibibytes
+
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
 site_admin_header (array ('title' => _('Contribution tracker administration'))) ;
@@ -62,10 +64,10 @@ function check_logo ($arr, $a_id=false) {
 	if ($arr['tmp_name'] == '') {
 		$logo = $default ;
 	} else {
-		if ($arr['size'] > 10240) {
+		if ($arr['size'] > 1024 * $max_logo_size) {
 			$logo = $default ;
 		} else {
-			$logo = file_get_contents ($arr['tmp_name'], 0, NULL, -1, 10240) ;
+			$logo = file_get_contents ($arr['tmp_name'], 0, NULL, -1, 1024 * $max_logo_size) ;
 		}
 		unlink ($arr['tmp_name']) ;
 	}
@@ -413,7 +415,7 @@ case 'add_actor':
 			 <?php echo _('Actor email:') ?> <input type="text" name="actor_email" size="20" /><br />
 			 <?php echo _('Actor description:') ?><br />
 			 <textarea name="actor_desc" rows="20" cols="80"></textarea><br />
-			 <?php echo _('Actor logo (PNG, 10 kB max.):') ?> <input type="file" name="actor_logo" /><br />
+			 <?php printf (_('Actor logo (PNG, %d kB max):'), $max_logo_size) ?> <input type="file" name="actor_logo" /><br />
 			 <?php
 			 echo _('Legal structure:') ?>
 			 <select name="structure_id">
@@ -443,7 +445,7 @@ case 'edit_actor':
 			 <?php echo _('Actor email:') ?> <input type="text" name="actor_email" size="20" value="<?php echo htmlspecialchars ($actor->getEmail()) ?>" /><br />
 			 <?php echo _('Actor description:') ?><br />
 			 <textarea name="actor_desc" rows="20" cols="80"><?php echo htmlspecialchars ($actor->getDescription()) ?></textarea><br />
-			 <?php echo _('Actor logo (PNG, 10 kB max.):') ?> <input type="file" name="actor_logo" />
+			 <?php printf (_('Actor logo (PNG, %d kB max):'), $max_logo_size) ?> <input type="file" name="actor_logo" /><br />
 			 <?php
 			 if ($actor->getLogo() != '') {
 				 print '<img type="image/png" src="'.util_make_url ('/plugins/'.$plugin->name.'/actor_logo.php?actor_id='.$actor->getId ()).'" />' ;
