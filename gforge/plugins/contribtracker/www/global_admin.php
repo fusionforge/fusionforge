@@ -358,7 +358,7 @@ case 'add_role':
 			 <input type="hidden" name="action" value="post_add_role" />
 			 <?php echo _('Role name:') ?> <input type="text" name="role_name" size="20" /><br />
 			 <?php echo _('Role description:') ?><br />
-			 <textarea name="role_desc" rows="20" cols="80"></textarea>
+			 <textarea name="role_desc" rows="20" cols="80"></textarea><br />
 			 <input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
 			 </form>
 
@@ -375,7 +375,7 @@ case 'edit_role':
 			 <input type="hidden" name="role_id" value="<?php echo $role->getId() ?>" />
 			 <?php echo _('Role name:') ?> <input type="text" name="role_name" size="20" value="<?php echo htmlspecialchars ($role->getName()) ?>" /><br />
 			 <?php echo _('Role description:') ?><br />
-			 <textarea name="role_desc" rows="20" cols="80"><?php echo htmlspecialchars ($role->getDescription()) ?></textarea>
+			 <textarea name="role_desc" rows="20" cols="80"><?php echo htmlspecialchars ($role->getDescription()) ?></textarea><br />
 			 <input type="submit" name="submit" value="<?php echo _('Save') ?>" />
 			 </form>
 			 <?php
@@ -427,7 +427,7 @@ case 'add_actor':
 		print '<option value="'.$s->getId().'">'.htmlspecialchars($s->getName()).'</option>' ;
 	}
 	?>
-		</select>
+		</select><br />
 			  <input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
 			  </form>
 
@@ -465,7 +465,7 @@ case 'edit_actor':
 		print '>'.htmlspecialchars($s->getName()).'</option>' ;
 	}
 	?>
-		</select>
+		</select><br />
 			  <input type="submit" name="submit" value="<?php echo _('Save') ?>" />
 			  </form>
 			  <?php

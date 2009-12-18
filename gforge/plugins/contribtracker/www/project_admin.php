@@ -184,7 +184,7 @@ case 'add_contrib':
 <?php echo _('Contribution name:') ?> <input type="text" name="contrib_name" size="20" /><br />
 <?php echo _('Contribution date:') ?> <input type="text" name="date" value="<?php echo strftime($date_format,time()) ?>"  /><br />
 <?php echo _('Contribution description:') ?><br />
-<textarea name="contrib_desc" rows="20" cols="80"></textarea>
+<textarea name="contrib_desc" rows="20" cols="80"></textarea><br />
 <input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
 </form>
 
@@ -192,34 +192,25 @@ case 'add_contrib':
 	 break ;
 case 'edit_contrib':
 	print '<h1>'._('Edit a contribution').'</h1>' ;
-	  print '<h3>'._('Add a participant').'</h3>' ;
-	
+
 	$contrib = new ContribTrackerContribution ($contrib_id) ;
+
+	print '<h3>'._('Contribution details').'</h3>' ;
+
 ?>
 <form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/project_admin.php') ?>" method="post">
-<input type="hidden" name="action" value="add_part" />
+<input type="hidden" name="action" value="post_edit_contrib" />
 <input type="hidden" name="group_id" value="<?php echo $group_id ?>" />
 <input type="hidden" name="contrib_id" value="<?php echo $contrib->getId() ?>" />
-<select name="actor_id">
-<?php
-	$actors = $plugin->getActors () ;
-	foreach ($actors as $a) {
-		print '<option value="'.$a->getId().'">'.htmlspecialchars($a->getName()).'</option>' ;
-	}
-?>
-</select>
-<select name="role_id">
-<?php
-	$roles = $plugin->getRoles () ;
-	foreach ($roles as $r) {
-		print '<option value="'.$r->getId().'">'.htmlspecialchars($r->getName()).'</option>' ;
-	}
-?>
-</select>
-<input type="submit" name="submit" value="<?php echo _('Add participant') ?>" />
+<?php echo _('Contribution name:') ?> <input type="text" name="contrib_name" size="20" value="<?php echo htmlspecialchars ($contrib->getName()) ?>" /><br />
+<?php echo _('Contribution date:') ?> <input type="text" name="date" value="<?php echo strftime($date_format,time()) ?>" /><br />
+<?php echo _('Contribution description:') ?><br />
+<textarea name="contrib_desc" rows="20" cols="80"><?php echo htmlspecialchars ($contrib->getDescription()) ?></textarea><br />
+<input type="submit" name="submit" value="<?php echo _('Save') ?>" />
 </form>
 <?php
-	  print '<h3>'._('Current participants').'</h3>' ;
+
+	 print '<h3>'._('Current participants').'</h3>' ;
 	  
 	$parts = $contrib->getParticipations () ;
 	print '<strong>'.ngettext('Participant:',
@@ -255,30 +246,35 @@ case 'edit_contrib':
 	}
 	print '</ul>' ;
 	
-	  print '<h3>'._('Contribution details').'</h3>' ;
-
+	  print '<h3>'._('Add a participant').'</h3>' ;
+	
 ?>
 <form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/project_admin.php') ?>" method="post">
-<input type="hidden" name="action" value="post_edit_contrib" />
+<input type="hidden" name="action" value="add_part" />
 <input type="hidden" name="group_id" value="<?php echo $group_id ?>" />
 <input type="hidden" name="contrib_id" value="<?php echo $contrib->getId() ?>" />
-<?php echo _('Contribution name:') ?> <input type="text" name="contrib_name" size="20" value="<?php echo htmlspecialchars ($contrib->getName()) ?>" /><br />
-<?php echo _('Contribution date:') ?> <input type="text" name="date" value="<?php echo strftime($date_format,time()) ?>" /><br />
-<?php echo _('Contribution description:') ?><br />
-<textarea name="contrib_desc" rows="20" cols="80"><?php echo htmlspecialchars ($contrib->getDescription()) ?></textarea>
-<input type="submit" name="submit" value="<?php echo _('Save') ?>" />
+<select name="actor_id">
+<?php
+	$actors = $plugin->getActors () ;
+	foreach ($actors as $a) {
+		print '<option value="'.$a->getId().'">'.htmlspecialchars($a->getName()).'</option>' ;
+	}
+?>
+</select>
+<select name="role_id">
+<?php
+	$roles = $plugin->getRoles () ;
+	foreach ($roles as $r) {
+		print '<option value="'.$r->getId().'">'.htmlspecialchars($r->getName()).'</option>' ;
+	}
+?>
+</select>
+<input type="submit" name="submit" value="<?php echo _('Add participant') ?>" />
 </form>
 <?php
 
 	 break ;
 case 'display':
-?>
-<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/project_admin.php') ?>" method="post">
-<input type="hidden" name="action" value="add_contrib" />
-<input type="hidden" name="group_id" value="<?php echo $group_id ?>" />
-<input type="submit" name="submit" value="<?php echo _('Add new contribution') ?>" />
-</form>
-<?php
 	$contribs = $plugin->getContributionsByGroup ($group) ;
 	if (count ($contribs) != 0) {
 		print '<h1>'._('Existing contributions').'</h1>' ;
@@ -320,13 +316,21 @@ case 'display':
 <input type="hidden" name="action" value="del_contrib" />
 <input type="hidden" name="group_id" value="<?php echo $group_id ?>" />
 <input type="hidden" name="contrib_id" value="<?php echo $c->getId() ?>" />
-<input type="submit" name="submit" value="<?php echo _('Delete') ?>" />
+<input type="submit" name="submit" value="<?php echo _('Delete'); ?>" />
 </form>
+<hr />
 <?php
 		}
 	} else {
 		print '<h1>'._('No contributions for this project yet.').'</h1>' ;
 	}		
+?>
+<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/project_admin.php') ?>" method="post">
+<input type="hidden" name="action" value="add_contrib" />
+<input type="hidden" name="group_id" value="<?php echo $group_id ?>" />
+<input type="submit" name="submit" value="<?php echo _('Add new contribution') ?>" />
+</form>
+<?php
 	break ;
 }
 
