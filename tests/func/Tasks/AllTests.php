@@ -64,7 +64,6 @@ class Tasks_AllTests
         $suite = new PHPUnit_Framework_TestSuite('PHPUnit Framework');
  
         $suite->addTestSuite('ExportCSV');
-        // ...
  
         return $suite;
     }

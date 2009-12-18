@@ -64,7 +64,6 @@ class News_AllTests
         $suite = new PHPUnit_Framework_TestSuite('PHPUnit Framework');
  
         $suite->addTestSuite('CreateNews');
-        // ...
  
         return $suite;
     }

@@ -46,7 +46,6 @@
 require_once 'func/config.php';
 require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
 
-// New class to use, next one is now obsolete.
 class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 {
     protected function setUp()
@@ -92,6 +91,12 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->open( BASE ."/account/logout.php" );
 		$this->waitForPageToLoad("30000");
 	}
+	
+	protected function switchUser($username)
+	{
+		$this->logout();
+		$this->login($username);
+	}
 
 	protected function createProject ($name) {
 		$unix_name = strtolower($name);
@@ -130,12 +135,6 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("This is the public description for $name."));
 		$this->assertTrue($this->isTextPresent("This project has not yet categorized itself"));
-	}
-
-	protected function swithUser($username)
-	{
-		$this->logout();
-		$this->login($username);
 	}
 	
 	protected function createUser ($login, $id)

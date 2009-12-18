@@ -72,7 +72,6 @@ class Site_AllTests
         
         // FIXME: Do not run this test as it requires the cron to be launched
         //        $suite->addTestSuite('Top');
-        // ...
  
         return $suite;
     }
