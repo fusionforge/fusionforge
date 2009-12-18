@@ -93,6 +93,97 @@ class ContribTrackerPlugin extends Plugin {
 			// ...
 		} 
 	}
+
+	function getActors () {
+		$res = db_query_params ('SELECT actor_id FROM plugin_contribtracker_actor',
+					array ()) ;
+		$ids = util_result_column_to_array ($res, 0) ;
+		
+		$results = array () ;
+		foreach ($ids as $id) {
+			$results[] = new ContribTrackerActor ($id) ;
+		}
+
+		return $results ;
+	}
+
+	function getLegalStructures () {
+		$res = db_query_params ('SELECT struct_id FROM plugin_contribtracker_legal_structure',
+					array ()) ;
+		$ids = util_result_column_to_array ($res, 0) ;
+		
+		$results = array () ;
+		foreach ($ids as $id) {
+			$results[] = new ContribTrackerLegalStructure ($id) ;
+		}
+
+		return $results ;
+	}
+
+	function getRoles () {
+		$res = db_query_params ('SELECT role_id FROM plugin_contribtracker_role',
+					array ()) ;
+		$ids = util_result_column_to_array ($res, 0) ;
+		
+		$results = array () ;
+		foreach ($ids as $id) {
+			$results[] = new ContribTrackerRole ($id) ;
+		}
+
+		return $results ;
+	}
+
+	function getContributions () {
+		$res = db_query_params ('SELECT contrib_id FROM plugin_contribtracker_contribution',
+					array ()) ;
+		$ids = util_result_column_to_array ($res, 0) ;
+		
+		$results = array () ;
+		foreach ($ids as $id) {
+			$results[] = new ContribTrackerContribution ($id) ;
+		}
+
+		return $results ;
+	}
+
+	function getContributionsByGroup ($group) {
+		$res = db_query_params ('SELECT contrib_id FROM plugin_contribtracker_contribution WHERE group_id = $1',
+					array ($group->getId())) ;
+		$ids = util_result_column_to_array ($res, 0) ;
+		
+		$results = array () ;
+		foreach ($ids as $id) {
+			$results[] = new ContribTrackerContribution ($id) ;
+		}
+
+		return $results ;
+	}
+
+	function getParticipationsByActor ($actor) {
+		$res = db_query_params ('SELECT participation_id FROM plugin_contribtracker_participation WHERE actor_id = $1',
+					array ($actor->getId())) ;
+		$ids = util_result_column_to_array ($res, 0) ;
+		
+		$results = array () ;
+		foreach ($ids as $id) {
+			$results[] = new ContribTrackerParticipation ($id) ;
+		}
+
+		return $results ;
+	}
+
+	function getParticipationsByContribution ($contrib) {
+		$res = db_query_params ('SELECT participation_id FROM plugin_contribtracker_participation WHERE contrib_id = $1',
+					array ($contrib->getId())) ;
+		$ids = util_result_column_to_array ($res, 0) ;
+		
+		$results = array () ;
+		foreach ($ids as $id) {
+			$results[] = new ContribTrackerParticipation ($id) ;
+		}
+
+		return $results ;
+	}
 }
 
 class ContribTrackerRole extends Error {
