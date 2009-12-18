@@ -80,11 +80,11 @@ class ContribTrackerPlugin extends Plugin {
 				$group->setPluginUse ( $this->name, false );
 			}
 		} elseif ($hookname == "project_admin_plugins") {
-			// this displays the link in the project admin options page to it's  ContribTracker administration
+			// this displays the link in the project admin options page to its ContribTracker administration
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
-				echo util_make_link ("/plugins/projects_hierarchy/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
+				echo util_make_link ("/plugins/contribtracker/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
 						     _('View the ContribTracker Administration')) ;
 				echo '</p>';
 			}
@@ -92,6 +92,336 @@ class ContribTrackerPlugin extends Plugin {
 		elseif ($hookname == "blahblahblah") {
 			// ...
 		} 
+	}
+}
+
+class ContribTrackerRole extends Error {
+	var $data_array ;
+
+	function ContribTrackerRole ($id=false) {
+		$this->Error () ;
+		if (!$id) {
+			return true ;
+		}
+		return $this->fetchData ($id) ;
+	}
+
+	function fetchData ($id) {
+		$res = db_query_params ('SELECT * FROM plugin_contribtracker_role WHERE role_id=$1',
+					array ($id)) ;
+		if (!$res || db_numrows($res) < 1) {
+			$this->setError(sprintf('ContribTrackerRole(): %s',db_error()));
+			return false;
+		}
+		
+		$this->data_array = db_fetch_array ($res) ;
+		return true ;
+	}
+
+	function create ($name, $description) {
+		if ($this->getId () != 0) {
+			$this->setError(_('Object already exists')) ;
+			return false ;
+		}
+
+		db_begin () ;
+		$res = db_query_params ('INSERT INTO plugin_contribtracker_role (name, description) VALUES ($1,$2)',
+					array ($name,
+					       $description)) ;
+		if (!$res || db_affected_rows ($res) < 1) {
+			$this->setError (sprintf(_('Could not create object in database: %s'),
+						 db_error ()));
+			db_rollback () ;
+			return false ;
+		}
+
+		$id = db_insertid ($res, 'plugin_contribtracker_role', 'role_id') ;
+		if (!$id) {
+			$this->setError (sprintf(_('Could not get ID from object in database: %s'),
+						 db_error ()));
+			db_rollback () ;
+			return false ;
+		}
+			
+		db_commit () ;
+		return $this->fetchData ($id) ;
+	}
+
+	function update () {
+		return $this->fetchData ($id) ;
+	}
+
+	function delete () {
+	}
+
+	function getId () { return $this->data_array['role_id'] ; }
+}
+
+class ContribTrackerLegalStructure extends Error {
+	var $data_array ;
+
+	function ContribTrackerLegalStructure ($id=false) {
+		$this->Error () ;
+		if (!$id) {
+			return true ;
+		}
+		return $this->fetchData ($id) ;
+	}
+
+	function fetchData ($id) {
+		$res = db_query_params ('SELECT * FROM plugin_contribtracker_legal_structure WHERE struct_id=$1',
+					array ($id)) ;
+		if (!$res || db_numrows($res) < 1) {
+			$this->setError(sprintf('ContribTrackerLegalStructure(): %s',db_error()));
+			return false;
+		}
+		
+		$this->data_array = db_fetch_array ($res) ;
+		return true ;
+	}
+
+	function create ($name) {
+		if ($this->getId () != 0) {
+			$this->setError(_('Object already exists')) ;
+			return false ;
+		}
+
+		db_begin () ;
+		$res = db_query_params ('INSERT INTO plugin_contribtracker_legal_structure (name) VALUES ($1)',
+					array ($name)) ;
+		if (!$res || db_affected_rows ($res) < 1) {
+			$this->setError (sprintf(_('Could not create object in database: %s'),
+						 db_error ()));
+			db_rollback () ;
+			return false ;
+		}
+
+		$id = db_insertid ($res, 'plugin_contribtracker_legal_structure', 'struct_id') ;
+		if (!$id) {
+			$this->setError (sprintf(_('Could not get ID from object in database: %s'),
+						 db_error ()));
+			db_rollback () ;
+			return false ;
+		}
+		
+		db_commit () ;
+		return $this->fetchData ($id) ;
+	}
+
+	function update () {
+		return $this->fetchData ($id) ;
+	}
+
+	function delete () {
+	}
+
+	function getId () { return $this->data_array['struct_id'] ; }
+}
+
+class ContribTrackerActor extends Error {
+	var $data_array ;
+
+	function ContribTrackerActor ($id=false) {
+		$this->Error () ;
+		if (!$id) {
+			return true ;
+		}
+		return $this->fetchData ($id) ;
+	}
+
+	function fetchData ($id) {
+		$res = db_query_params ('SELECT * FROM plugin_contribtracker_actor WHERE actor_id=$1',
+					array ($id)) ;
+		if (!$res || db_numrows($res) < 1) {
+			$this->setError(sprintf('ContribTrackerActor(): %s',db_error()));
+			return false;
+		}
+		
+		$this->data_array = db_fetch_array ($res) ;
+		return true ;
+	}
+
+	function create ($name, $address, $email, $description, $structure) {
+		if ($this->getId () != 0) {
+			$this->setError(_('Object already exists')) ;
+			return false ;
+		}
+
+		db_begin () ;
+		$res = db_query_params ('INSERT INTO plugin_contribtracker_actor (name,address,email,description,struct_id) VALUES ($1,$2,$3,$4,$5)',
+					array ($name,
+					       $address,
+					       $email,
+					       $description,
+					       $structure->getID())) ;
+		if (!$res || db_affected_rows ($res) < 1) {
+			$this->setError (sprintf(_('Could not create object in database: %s'),
+						 db_error ()));
+			db_rollback () ;
+			return false ;
+		}
+
+		$id = db_insertid ($res, 'plugin_contribtracker_actor', 'actor_id') ;
+		if (!$id) {
+			$this->setError (sprintf(_('Could not get ID from object in database: %s'),
+						 db_error ()));
+			db_rollback () ;
+			return false ;
+		}
+			
+		db_commit () ;
+		return $this->fetchData ($id) ;
+	}
+
+	function update () {
+		return $this->fetchData ($id) ;
+	}
+
+	function delete () {
+	}
+
+	function getId () { return $this->data_array['actor_id'] ; }
+	function getLegalStructure () {
+		return new ContribTrackerLegalStructure ($this->data_array['struct_id']) ;
+	}
+}
+
+class ContribTrackerContribution extends Error {
+	var $data_array ;
+
+	function ContribTrackerContribution ($id=false) {
+		$this->Error () ;
+		if (!$id) {
+			return true ;
+		}
+		return $this->fetchData ($id) ;
+	}
+
+	function fetchData ($id) {
+		$res = db_query_params ('SELECT * FROM plugin_contribtracker_contribution WHERE contrib_id=$1',
+					array ($id)) ;
+		if (!$res || db_numrows($res) < 1) {
+			$this->setError(sprintf('ContribTrackerContribution(): %s',db_error()));
+			return false;
+		}
+		
+		$this->data_array = db_fetch_array ($res) ;
+		return true ;
+	}
+
+	function create ($name, $date, $description, $group) {
+		if ($this->getId () != 0) {
+			$this->setError(_('Object already exists')) ;
+			return false ;
+		}
+
+		db_begin () ;
+		$res = db_query_params ('INSERT INTO plugin_contribtracker_contribution (name,date,description,group_id) VALUES ($1,$2,$3,$4)',
+					array ($name,
+					       $date,
+					       $description,
+					       $group->getID())) ;
+		if (!$res || db_affected_rows ($res) < 1) {
+			$this->setError (sprintf(_('Could not create object in database: %s'),
+						 db_error ()));
+			db_rollback () ;
+			return false ;
+		}
+
+		$id = db_insertid ($res, 'plugin_contribtracker_contribution', 'contrib_id') ;
+		if (!$id) {
+			$this->setError (sprintf(_('Could not get ID from object in database: %s'),
+						 db_error ()));
+			db_rollback () ;
+			return false ;
+		}
+			
+		db_commit () ;
+		return $this->fetchData ($id) ;
+	}
+
+	function update () {
+		return $this->fetchData ($id) ;
+	}
+
+	function delete () {
+	}
+
+	function getId () { return $this->data_array['contrib_id'] ; }
+	function getGroup () {
+		return group_get_object ($this->data_array['group_id']) ;
+	}
+}
+
+class ContribTrackerParticipation extends Error {
+	var $data_array ;
+
+	function ContribTrackerParticipation ($id=false) {
+		$this->Error () ;
+		if (!$id) {
+			return true ;
+		}
+		return $this->fetchData ($id) ;
+	}
+
+	function fetchData ($id) {
+		$res = db_query_params ('SELECT * FROM plugin_contribtracker_participation WHERE participation_id=$1',
+					array ($id)) ;
+		if (!$res || db_numrows($res) < 1) {
+			$this->setError(sprintf('ContribTrackerParticipation(): %s',db_error()));
+			return false;
+		}
+		
+		$this->data_array = db_fetch_array ($res) ;
+		return true ;
+	}
+
+	function create ($contrib,$actor,$role) {
+		if ($this->getId () != 0) {
+			$this->setError(_('Object already exists')) ;
+			return false ;
+		}
+
+		db_begin () ;
+		$res = db_query_params ('INSERT INTO plugin_contribtracker_participation (contrib_id,actor_id,role_id) VALUES ($1,$2,$3)',
+					array ($contrib->getID(),
+					       $actor->getID(),
+					       $role->getID())) ;
+		if (!$res || db_affected_rows ($res) < 1) {
+			$this->setError (sprintf(_('Could not create object in database: %s'),
+						 db_error ()));
+			db_rollback () ;
+			return false ;
+		}
+
+		$id = db_insertid ($res, 'plugin_contribtracker_participation', 'participation_id') ;
+		if (!$id) {
+			$this->setError (sprintf(_('Could not get ID from object in database: %s'),
+						 db_error ()));
+			db_rollback () ;
+			return false ;
+		}
+			
+		db_commit () ;
+		return $this->fetchData ($id) ;
+	}
+
+	function update () {
+		return $this->fetchData ($id) ;
+	}
+
+	function delete () {
+	}
+
+	function getId () { return $this->data_array['participation_id'] ; }
+	function getActor () {
+		return new ContribTrackerActor ($this->data_array['actor_id']) ;
+	}
+	function getRole () {
+		return new ContribTrackerRole ($this->data_array['role_id']) ;
+	}
+	function getContribution () {
+		return new ContribTrackerContribution ($this->data_array['contrib_id']) ;
 	}
 }
 

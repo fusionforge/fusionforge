@@ -1,49 +1,39 @@
 CREATE SEQUENCE plugin_contribtracker_legal_structure_pk_seq ;
 CREATE TABLE plugin_contribtracker_legal_structure (
-       struct_id integer DEFAULT nextval('plugin_contribtracker_legal_structure_pk_seq') NOT NULL,
-       struct_name text DEFAULT '' NOT NULL,
-       PRIMARY KEY (struct_id)
+       struct_id integer DEFAULT nextval('plugin_contribtracker_legal_structure_pk_seq') PRIMARY KEY,
+       name text UNIQUE NOT NULL
 ) ;
 
 CREATE SEQUENCE plugin_contribtracker_role_pk_seq ;
 CREATE TABLE plugin_contribtracker_role (
-       role_id integer DEFAULT nextval('plugin_contribtracker_role_pk_seq') NOT NULL,
-       role_name text,
-       role_description text,
-       PRIMARY KEY (role_id)
+       role_id integer DEFAULT nextval('plugin_contribtracker_role_pk_seq') PRIMARY KEY,
+       name text UNIQUE NOT NULL,
+       description text DEFAULT '' NOT NULL
 ) ;
 
 CREATE SEQUENCE plugin_contribtracker_actor_pk_seq ;
 CREATE TABLE plugin_contribtracker_actor (
-       actor_id integer DEFAULT nextval('plugin_contribtracker_actor_pk_seq') NOT NULL,
-       actor_name text,
-       actor_address text,
-       actor_email text,
-       actor_description text,
-       struct_id integer,
-       PRIMARY KEY (actor_id),
-       FOREIGN KEY (struct_id) REFERENCES plugin_contribtracker_legal_structure (struct_id)
+       actor_id integer DEFAULT nextval('plugin_contribtracker_actor_pk_seq') PRIMARY KEY,
+       name text UNIQUE NOT NULL,
+       address text DEFAULT '' NOT NULL,
+       email text DEFAULT '' NOT NULL,
+       description text DEFAULT '' NOT NULL,
+       struct_id integer REFERENCES plugin_contribtracker_legal_structure
 ) ;
 
 CREATE SEQUENCE plugin_contribtracker_contribution_pk_seq ;
 CREATE TABLE plugin_contribtracker_contribution (
-       contrib_id integer DEFAULT nextval('plugin_contribtracker_contribution_pk_seq') NOT NULL,
-       contrib_name text,
-       contrib_date int,
-       contrib_description text,
-       group_id integer,
-       PRIMARY KEY (contrib_id),
-       FOREIGN KEY (group_id) REFERENCES groups (group_id)
+       contrib_id integer DEFAULT nextval('plugin_contribtracker_contribution_pk_seq') PRIMARY KEY,
+       name text DEFAULT '' NOT NULL,
+       date int,
+       description text DEFAULT '' NOT NULL,
+       group_id integer REFERENCES groups ON DELETE CASCADE
 ) ;
 
 CREATE SEQUENCE plugin_contribtracker_participation_pk_seq ;
 CREATE TABLE plugin_contribtracker_participation (
-       participation_id integer DEFAULT nextval('plugin_contribtracker_participation_pk_seq') NOT NULL,
-       contrib_id integer,
-       actor_id integer,
-       role_id integer,
-       PRIMARY KEY (participation_id),
-       FOREIGN KEY (contrib_id) REFERENCES plugin_contribtracker_contribution (contrib_id),
-       FOREIGN KEY (actor_id) REFERENCES plugin_contribtracker_actor (actor_id),
-       FOREIGN KEY (role_id) REFERENCES plugin_contribtracker_role (role_id)
+       participation_id integer DEFAULT nextval('plugin_contribtracker_participation_pk_seq') PRIMARY KEY,
+       contrib_id integer REFERENCES plugin_contribtracker_contribution ON DELETE CASCADE,
+       actor_id integer REFERENCES plugin_contribtracker_actor,
+       role_id integer REFERENCES plugin_contribtracker_role
 ) ;
