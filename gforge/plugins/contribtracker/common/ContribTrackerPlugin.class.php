@@ -66,7 +66,9 @@ class ContribTrackerPlugin extends Plugin {
 			echo "><br/>";
 			echo "</td>";
 			echo "<td>";
-			echo "<strong>Use ".$this->text." Plugin</strong>";
+			echo "<strong>";
+			echo _('Use the Contribution Tracker plugin') ;
+			echo "</strong>";
 			echo "</td>";
 			echo "</tr>";
 		} elseif ($hookname == "groupisactivecheckboxpost") {
@@ -85,7 +87,7 @@ class ContribTrackerPlugin extends Plugin {
 			$group = &group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
 				echo util_make_link ("/plugins/contribtracker/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
-						     _('View the ContribTracker Administration')) ;
+						     _('Contribution Tracker admin')) ;
 				echo '</p>';
 			}
 		}												    
