@@ -39,7 +39,7 @@ function display_contribution ($c, $show_groups = false) {
 		print '<li>' ;
 		printf (_('%s: %s (%s)'),
 			htmlspecialchars ($p->getRole()->getName()),
-			util_make_link ('/plugins/contribtracker/show_actor.php?actor_id='.$p->getActor()->getId (),
+			util_make_link ('/plugins/contribtracker/index.php?actor_id='.$p->getActor()->getId (),
 					htmlspecialchars ($p->getActor()->getName())),
 			htmlspecialchars ($p->getActor()->getLegalStructure()->getName())) ;
 		print '</li>' ;
@@ -48,6 +48,7 @@ function display_contribution ($c, $show_groups = false) {
 }
 	
 $group_id = getIntFromRequest ('group_id') ;
+$actor_id = getIntFromRequest ('actor_id') ;
 if ($group_id) {
 	$group = group_get_object ($group_id) ;
 	if(!$group || !is_object ($group)) {
@@ -104,6 +105,49 @@ if ($group_id) {
 			}
 		}
 	}
+} elseif ($actor_id) {
+	$actor = new ContribTrackerActor ($actor_id) ;
+	if (!is_object ($actor) || $actor->isError()) {
+		exit_error (_('Invalid actor'),
+			    _('Invalid actor specified')) ;
+	}
+
+	$HTML->header(array('title'=>_('Actor details'),'pagename'=>'contribtracker'));
+	
+	print '<h1>'.sprintf(_('Actor details for %s'),
+			     htmlspecialchars($actor->getName())).'</h1>' ;
+	print '<ul>' ;
+	print '<li><strong>'._('Name:').'</strong> '.htmlspecialchars($actor->getName()).'</li>' ;
+	print '<li><strong>'._('Address:').'</strong> '.htmlspecialchars($actor->getAddress()).'</li>' ;
+	print '<li><strong>'._('Email:').'</strong> '.htmlspecialchars($actor->getEmail()).'</li>' ;
+	print '<li><strong>'._('Legal structure:').'</strong> '.htmlspecialchars($actor->getLegalStructure()->getName()).'</li>' ;
+	print '<li><strong>'._('Description:').'</strong> '.htmlspecialchars($actor->getDescription()).'</li>' ;
+	print '</ul>' ;
+	
+	$participations = $actor->getParticipations () ;
+	
+	if (count ($participations) == 0) {
+		printf (_("%s hasn't been involved in any contributions yet"),
+			htmlspecialchars($actor->getName())) ;
+	} else {
+		print '<h1>'.sprintf(ngettext('Contribution by %s',
+					      'Contributions by %s',
+					      count($participations)),
+				     htmlspecialchars($actor->getName())).'</h1>' ;
+		
+		foreach ($participations as $p) {
+			$c = $p->getContribution () ;
+			print '<h3>' . util_make_link ('/plugins/contribtracker/index.php?group_id='.$c->getGroup()->getId().'&contrib_id='.$c->getId (),
+						       htmlspecialchars ($c->getName())) . '</h3>' ;
+			print '<strong>'._('Group:').'</strong> ' ;
+			print util_make_link_g ($c->getGroup()->getUnixName(),
+						$c->getGroup()->getId(),
+						$c->getGroup()->getPublicName()) ;
+			print '<br /><strong>'._('Role:').'</strong> ' ;
+			print htmlspecialchars ($p->getRole()->getName()) ;
+		}
+	}
+	site_project_footer(array());
 } else {			// Latest contributions, globally
 	$HTML->header(array('title'=>_('Contributions'),'pagename'=>'contribtracker'));
 	

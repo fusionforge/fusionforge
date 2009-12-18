@@ -140,7 +140,7 @@ class ContribTrackerPlugin extends Plugin {
 						$parts = $c->getParticipations () ;
 						foreach ($parts as $p) {
 							echo '<tr><td></td><td></td><td>' ;
-							echo (util_make_link ('/plugins/'.$this->name.'/show_actor.php?actor_id='.$p->getActor()->getId (),
+							echo (util_make_link ('/plugins/'.$this->name.'/index.php?actor_id='.$p->getActor()->getId (),
 									      htmlspecialchars ($p->getActor()->getName()))) ;
 							echo '</td><td>' ;
 							echo htmlspecialchars ($p->getRole()->getName()) ;
