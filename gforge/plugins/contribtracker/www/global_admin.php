@@ -456,7 +456,11 @@ case 'edit_actor':
 			 <?php
 			 $structs = $plugin->getLegalStructures () ;
 	foreach ($structs as $s) {
-		print '<option value="'.$s->getId().'">'.htmlspecialchars($s->getName()).'</option>' ;
+		print '<option value="'.$s->getId().'".' ;
+		if ($s->getId() == $actor->getLegalStructure()->getId()) {
+			print ' selected' ;
+		}
+		print '>'.htmlspecialchars($s->getName()).'</option>' ;
 	}
 	?>
 		</select>
