@@ -18,7 +18,7 @@ CREATE TABLE plugin_contribtracker_actor (
        address text DEFAULT '' NOT NULL,
        email text DEFAULT '' NOT NULL,
        description text DEFAULT '' NOT NULL,
-       struct_id integer REFERENCES plugin_contribtracker_legal_structure
+       struct_id integer NOT NULL REFERENCES plugin_contribtracker_legal_structure
 ) ;
 
 CREATE SEQUENCE plugin_contribtracker_contribution_pk_seq ;
@@ -27,13 +27,13 @@ CREATE TABLE plugin_contribtracker_contribution (
        name text DEFAULT '' NOT NULL,
        date int,
        description text DEFAULT '' NOT NULL,
-       group_id integer REFERENCES groups ON DELETE CASCADE
+       group_id integer NOT NULL REFERENCES groups ON DELETE CASCADE
 ) ;
 
 CREATE SEQUENCE plugin_contribtracker_participation_pk_seq ;
 CREATE TABLE plugin_contribtracker_participation (
        participation_id integer DEFAULT nextval('plugin_contribtracker_participation_pk_seq') PRIMARY KEY,
-       contrib_id integer REFERENCES plugin_contribtracker_contribution ON DELETE CASCADE,
-       actor_id integer REFERENCES plugin_contribtracker_actor,
-       role_id integer REFERENCES plugin_contribtracker_role
+       contrib_id integer NOT NULL REFERENCES plugin_contribtracker_contribution ON DELETE CASCADE,
+       actor_id integer NOT NULL REFERENCES plugin_contribtracker_actor,
+       role_id integer NOT NULL REFERENCES plugin_contribtracker_role
 ) ;

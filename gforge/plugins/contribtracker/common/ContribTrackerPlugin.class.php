@@ -161,30 +161,14 @@ class ContribTrackerPlugin extends Plugin {
 		return $results ;
 	}
 
-	function getParticipationsByActor ($actor) {
-		$res = db_query_params ('SELECT participation_id FROM plugin_contribtracker_participation WHERE actor_id = $1',
-					array ($actor->getId())) ;
-		$ids = util_result_column_to_array ($res, 0) ;
-		
-		$results = array () ;
-		foreach ($ids as $id) {
-			$results[] = new ContribTrackerParticipation ($id) ;
+	function ContribComparator ($a, $b) {
+		if ($a->getDate() != $b->getDate()) {
+			return ($a->getDate() < $b->getDate()) ? -1 : 1 ;
+		} elseif ($a->getName() != $b->getName()) {
+			return ($a->getName() < $b->getName()) ? -1 : 1 ;
+		} else {
+			return 0 ;
 		}
-
-		return $results ;
-	}
-
-	function getParticipationsByContribution ($contrib) {
-		$res = db_query_params ('SELECT participation_id FROM plugin_contribtracker_participation WHERE contrib_id = $1',
-					array ($contrib->getId())) ;
-		$ids = util_result_column_to_array ($res, 0) ;
-		
-		$results = array () ;
-		foreach ($ids as $id) {
-			$results[] = new ContribTrackerParticipation ($id) ;
-		}
-
-		return $results ;
 	}
 }
 
@@ -516,6 +500,20 @@ class ContribTrackerActor extends Error {
 	function getLegalStructure () {
 		return new ContribTrackerLegalStructure ($this->data_array['struct_id']) ;
 	}
+
+	function getParticipations () {
+		$res = db_query_params ('SELECT participation_id FROM plugin_contribtracker_participation WHERE actor_id = $1',
+					array ($this->getId())) ;
+		$ids = util_result_column_to_array ($res, 0) ;
+		
+		$results = array () ;
+		foreach ($ids as $id) {
+			$results[] = new ContribTrackerParticipation ($id) ;
+		}
+
+		return $results ;
+	}
+
 }
 
 class ContribTrackerContribution extends Error {
@@ -630,6 +628,19 @@ class ContribTrackerContribution extends Error {
 	function getDescription () { return $this->data_array['description'] ; }
 	function getGroup () {
 		return group_get_object ($this->data_array['group_id']) ;
+	}
+
+	function getParticipations () {
+		$res = db_query_params ('SELECT participation_id FROM plugin_contribtracker_participation WHERE contrib_id = $1',
+					array ($this->getId())) ;
+		$ids = util_result_column_to_array ($res, 0) ;
+		
+		$results = array () ;
+		foreach ($ids as $id) {
+			$results[] = new ContribTrackerParticipation ($id) ;
+		}
+
+		return $results ;
 	}
 }
 
