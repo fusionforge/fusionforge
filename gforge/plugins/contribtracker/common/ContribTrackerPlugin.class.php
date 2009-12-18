@@ -302,7 +302,7 @@ class ContribTrackerLegalStructure extends Error {
 			return $this->data_array['struct_id'] ;
 		} else {
 			return false ;
-
+		}
 	}
 	function getName () { return $this->data_array['name'] ; }
 }
@@ -414,7 +414,7 @@ class ContribTrackerActor extends Error {
 			return $this->data_array['actor_id'] ;
 		} else {
 			return false ;
-
+		}
 	}
 	function getName () { return $this->data_array['name'] ; }
 	function getAddress () { return $this->data_array['address'] ; }
@@ -530,7 +530,7 @@ class ContribTrackerContribution extends Error {
 			return $this->data_array['contrib_id'] ;
 		} else {
 			return false ;
-
+		}
 	}
 	function getName () { return $this->data_array['name'] ; }
 	function getDate () { return $this->data_array['date'] ; }
