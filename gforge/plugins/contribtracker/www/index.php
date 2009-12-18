@@ -107,6 +107,7 @@ if ($group_id) {
 			
 			foreach ($contribs as $c) {
 				display_contribution ($c) ;
+				print '<hr />' ;
 			}
 		}
 	}
@@ -153,6 +154,7 @@ if ($group_id) {
 						$c->getGroup()->getPublicName()) ;
 			print '<br /><strong>'._('Role:').'</strong> ' ;
 			print htmlspecialchars ($p->getRole()->getName()) ;
+			print '<hr />' ;
 		}
 	}
 } else {			// Latest contributions, globally
@@ -171,6 +173,7 @@ if ($group_id) {
 		$i = 1 ;
 		foreach ($contribs as $c) {
 			display_contribution ($c, true) ;
+			print '<hr />' ;
 			$i++ ;
 			if ($i > 20) {
 				break ;
