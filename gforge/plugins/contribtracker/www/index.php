@@ -102,7 +102,8 @@ if ($group_id) {
 			print '<h1>'._('No contributions').'</h1>' ;
 			print _('No contributions have been recorded for this project yet.') ;
 		} else {
-			print '<h1>'._('Latest contributions').'</h1>' ;
+			print '<h1>'.sprintf (_('Contributions for project %s'),
+					    htmlspecialchars ($group->getPublicName())).'</h1>' ;
 			
 			foreach ($contribs as $c) {
 				display_contribution ($c) ;
