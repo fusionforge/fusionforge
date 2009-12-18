@@ -36,5 +36,7 @@ CREATE TABLE plugin_contribtracker_participation (
        participation_id integer DEFAULT nextval('plugin_contribtracker_participation_pk_seq') PRIMARY KEY,
        contrib_id integer NOT NULL REFERENCES plugin_contribtracker_contribution ON DELETE CASCADE,
        actor_id integer NOT NULL REFERENCES plugin_contribtracker_actor,
-       role_id integer NOT NULL REFERENCES plugin_contribtracker_role
+       role_id integer NOT NULL REFERENCES plugin_contribtracker_role,
+       index integer NOT NULL,
+       CONSTRAINT index_unicity UNIQUE(contrib_id,index)
 ) ;

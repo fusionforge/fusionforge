@@ -35,7 +35,8 @@ $action = util_ensure_value_in_set ($action, array ('display',
 						    'del_contrib',
 						    'post_edit_contrib',
 						    'del_part',
-						    'add_part')) ;
+						    'add_part',
+						    'move_part')) ;
 
 function check_contrib_id ($c_id, $g_id) {
 	$contrib = new ContribTrackerContribution ($c_id) ;
@@ -62,7 +63,17 @@ function check_date () {
 	}
 	return $date ;
 }
-	
+function check_updown () {
+	$up = getStringFromRequest ('up') ;
+	$down = getStringFromRequest ('down') ;
+	if ($up != '') {
+		return 1 ;
+	} elseif ($down != '') {
+		return -1 ;
+	} else {
+		return 0 ;
+	}
+}	
 
 // Get and validate parameters, error if tampered with
 switch ($action) {
@@ -92,6 +103,13 @@ case 'del_part':
 	check_contrib_id ($contrib_id, $group_id) ;
 	$part_id = getIntFromRequest ('part_id') ;
 	check_part_id ($part_id, $contrib_id) ;
+	break ;
+case 'move_part':
+	$contrib_id = getIntFromRequest ('contrib_id') ;
+	check_contrib_id ($contrib_id, $group_id) ;
+	$part_id = getIntFromRequest ('part_id') ;
+	check_part_id ($part_id, $contrib_id) ;
+	$updown = check_updown () ;
 	break ;
 case 'add_part':
 	$contrib_id = getIntFromRequest ('contrib_id') ;
@@ -133,6 +151,15 @@ case 'post_edit_contrib':
 case 'del_part':
 	$part = new ContribTrackerParticipation ($part_id) ;
 	$part->delete () ;
+	$action = 'edit_contrib' ;
+	break ;
+case 'move_part':
+	$part = new ContribTrackerParticipation ($part_id) ;
+	if ($updown > 0) {
+		$part->moveUp() ;
+	} elseif ($updown < 0) {
+		$part->moveDown() ;
+	}
 	$action = 'edit_contrib' ;
 	break ;
 case 'add_part':
@@ -215,6 +242,14 @@ case 'edit_contrib':
 <input type="hidden" name="part_id" value="<?php echo $p->getId() ?>" />
 <input type="submit" name="submit" value="<?php echo _('Delete') ?>" />
 </form>
+<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/project_admin.php') ?>" method="post">
+<input type="hidden" name="action" value="move_part" />
+<input type="hidden" name="group_id" value="<?php echo $group_id ?>" />
+<input type="hidden" name="contrib_id" value="<?php echo $contrib->getId() ?>" />
+<input type="hidden" name="part_id" value="<?php echo $p->getId() ?>" />
+<input type="submit" name="down" value="<?php echo _('Move participant down') ?>" />
+<input type="submit" name="up" value="<?php echo _('Move participant up') ?>" />
+</form>
 <?php
 		print '</li>' ;
 	}
@@ -245,7 +280,6 @@ case 'display':
 </form>
 <?php
 	$contribs = $plugin->getContributionsByGroup ($group) ;
-	usort ($contribs, array ($plugin, "ContribComparator")) ;
 	if (count ($contribs) != 0) {
 		print '<h1>'._('Existing contributions').'</h1>' ;
 		

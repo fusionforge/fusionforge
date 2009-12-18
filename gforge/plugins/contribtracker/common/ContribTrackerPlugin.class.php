@@ -113,7 +113,6 @@ class ContribTrackerPlugin extends Plugin {
 		</tr>';
 
 				$contribs = $this->getContributionsByGroup ($group) ;
-				usort ($contribs, array ($this, "ContribComparator")) ;
 
 				if (count ($contribs) == 0) {
 					echo '<tr><td colspan="5"><strong>'._('No contributions have been recorded for this project yet.').'</strong></td></tr>';
@@ -216,6 +215,8 @@ class ContribTrackerPlugin extends Plugin {
 			$results[] = new ContribTrackerContribution ($id) ;
 		}
 
+		$plugin = plugin_get_object ('contribtracker') ;
+		usort ($results, array ($plugin, "ContribComparator")) ;
 		return $results ;
 	}
 
@@ -229,6 +230,8 @@ class ContribTrackerPlugin extends Plugin {
 			$results[] = new ContribTrackerContribution ($id) ;
 		}
 
+		$plugin = plugin_get_object ('contribtracker') ;
+		usort ($results, array ($plugin, "ContribComparator")) ;
 		return $results ;
 	}
 
@@ -237,6 +240,18 @@ class ContribTrackerPlugin extends Plugin {
 			return ($a->getDate() < $b->getDate()) ? -1 : 1 ;
 		} elseif ($a->getName() != $b->getName()) {
 			return ($a->getName() < $b->getName()) ? -1 : 1 ;
+		} else {
+			return 0 ;
+		}
+	}
+
+	function ParticipationComparator ($a, $b) {
+		if ($a->getContribution()->getDate() != $b->getContribution()->getDate()) {
+			return ($a->getContribution()->getDate() < $b->getContribution()->getDate()) ? -1 : 1 ;
+		} elseif ($a->getContribution() != $b->getContribution()) {
+			return ($a->getContribution() < $b->getContribution()) ? -1 : 1 ;
+		} elseif ($a->getIndex() != $b->getIndex()) {
+			return ($a->getIndex() < $b->getIndex()) ? -1 : 1 ;
 		} else {
 			return 0 ;
 		}
@@ -585,6 +600,8 @@ class ContribTrackerActor extends Error {
 			$results[] = new ContribTrackerParticipation ($id) ;
 		}
 
+		$plugin = plugin_get_object ('contribtracker') ;
+		usort ($results, array ($plugin, "ParticipationComparator")) ;
 		return $results ;
 	}
 
@@ -714,7 +731,16 @@ class ContribTrackerContribution extends Error {
 			$results[] = new ContribTrackerParticipation ($id) ;
 		}
 
+		$plugin = plugin_get_object ('contribtracker') ;
+		usort ($results, array ($plugin, "ParticipationComparator")) ;
 		return $results ;
+	}
+
+	function getLastPartIndex () {
+		$res = db_query_params ('SELECT COUNT(*) AS c FROM plugin_contribtracker_participation WHERE contrib_id = $1',
+					array ($this->getId())) ;
+		$curindex = db_result ($res,0,'c') ;
+		return $curindex ;
 	}
 }
 
@@ -748,10 +774,13 @@ class ContribTrackerParticipation extends Error {
 		}
 
 		db_begin () ;
-		$res = db_query_params ('INSERT INTO plugin_contribtracker_participation (contrib_id,actor_id,role_id) VALUES ($1,$2,$3)',
+		$index = $contrib->getLastPartIndex () + 1;
+
+		$res = db_query_params ('INSERT INTO plugin_contribtracker_participation (contrib_id,actor_id,role_id,index) VALUES ($1,$2,$3,$4)',
 					array ($contrib->getID(),
 					       $actor->getID(),
-					       $role->getID())) ;
+					       $role->getID(),
+					       $index)) ;
 		if (!$res || db_affected_rows ($res) < 1) {
 			$this->setError (sprintf(_('Could not create object in database: %s'),
 						 db_error ()));
@@ -778,6 +807,10 @@ class ContribTrackerParticipation extends Error {
 		}
 
 		$id = $this->getId () ;
+		if ($contrib->getID() != $this->getContribution()->getID()) {
+			$this->setError (_('Cannot currently move a participation across contributions')) ;
+			return false ;
+		}
 
 		db_begin () ;
 		$res = db_query_params ('UPDATE plugin_contribtracker_participation SET (contrib_id,actor_id,role_id) = ($1,$2,$3) WHERE participation_id = $4',
@@ -803,6 +836,8 @@ class ContribTrackerParticipation extends Error {
 			return false ;
 		}
 
+		db_begin () ;
+		$curindex = $this->getIndex() ;
 		$res = db_query_params ('DELETE FROM plugin_contribtracker_participation WHERE participation_id = $1',
 					array ($id)) ;
 		if (!$res) {
@@ -810,15 +845,90 @@ class ContribTrackerParticipation extends Error {
 						 db_error ())) ;
 			return false ;
 		}
+		$res = db_query_params ('UPDATE plugin_contribtracker_participation SET index = -index WHERE contrib_id = $1 and index > $2',
+					array ($this->getContribution()->getId(),
+						$curindex)) ;
+		if (!$res) {
+			$this->setError (sprintf(_('Could not update indices in database: %s'),
+						 db_error ())) ;
+			return false ;
+		}
+		$res = db_query_params ('UPDATE plugin_contribtracker_participation SET index = -index -1 WHERE contrib_id = $1 and index < 0',
+					array ($this->getContribution()->getId())) ;
+		if (!$res) {
+			$this->setError (sprintf(_('Could not update indices in database: %s'),
+						 db_error ())) ;
+			return false ;
+		}
+		db_commit () ;
 
 		$this->data_array = array () ;
 		
 		return true ;
 	}
 
+	function moveUp () {
+		$id = $this->getId () ;
+		if (!$id) {
+			$this->setError (_('Cannot update a non-existing object')) ;
+			return false ;
+		}
+
+		$cur = $this->getIndex() ;
+		if ($cur == 1) {
+			return ;
+		}
+		$contrib_id = $this->getContribution()->getId() ;
+		
+		db_begin () ;
+		$res = db_query_params ('UPDATE plugin_contribtracker_participation SET index = 0 WHERE participation_id = $1',
+					array ($id)) ;
+		$res = db_query_params ('UPDATE plugin_contribtracker_participation SET index = index+1 WHERE contrib_id = $1 AND index = $2',
+					array ($contrib_id,
+					       $cur-1)) ;
+		$res = db_query_params ('UPDATE plugin_contribtracker_participation SET index = $1 WHERE contrib_id = $2 AND index = 0',
+					array ($cur - 1,
+					       $contrib_id)) ;
+		db_commit () ;
+	}
+
+	function moveDown () {
+		$id = $this->getId () ;
+		if (!$id) {
+			$this->setError (_('Cannot update a non-existing object')) ;
+			return false ;
+		}
+
+		$lastid = $this->getContribution()->getLastPartIndex() ;
+
+		$cur = $this->getIndex() ;
+		if ($cur == $lastid) {
+			return ;
+		}
+		$contrib_id = $this->getContribution()->getId() ;
+		
+		db_begin () ;
+		$res = db_query_params ('UPDATE plugin_contribtracker_participation SET index = 0 WHERE participation_id = $1',
+					array ($id)) ;
+		$res = db_query_params ('UPDATE plugin_contribtracker_participation SET index = index-1 WHERE contrib_id = $1 AND index = $2',
+					array ($contrib_id,
+					       $cur+1)) ;
+		$res = db_query_params ('UPDATE plugin_contribtracker_participation SET index = $1 WHERE contrib_id = $2 AND index = 0',
+					array ($cur + 1,
+					       $contrib_id)) ;
+		db_commit () ;
+	}
+
 	function getId () {
 		if (isset ($this->data_array['participation_id'])) {
 			return $this->data_array['participation_id'] ;
+		} else {
+			return false ;
+		}
+	}
+	function getIndex () {
+		if (isset ($this->data_array['index'])) {
+			return $this->data_array['index'] ;
 		} else {
 			return false ;
 		}

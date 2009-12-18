@@ -96,7 +96,6 @@ if ($group_id) {
 		site_project_header ($params) ;
 
 		$contribs = $plugin->getContributionsByGroup ($group) ;
-		usort ($contribs, array ($plugin, "ContribComparator")) ;
 
 		if (count ($contribs) == 0) {
 			print '<h1>'._('No contributions').'</h1>' ;
@@ -161,8 +160,6 @@ if ($group_id) {
 	$HTML->header(array('title'=>_('Contributions'),'pagename'=>'contribtracker'));
 	
 	$contribs = $plugin->getContributions () ;
-	
-	usort ($contribs, array ($plugin, "ContribComparator")) ;
 	
 	if (count ($contribs) == 0) {
 		print '<h1>'._('No contributions').'</h1>' ;
