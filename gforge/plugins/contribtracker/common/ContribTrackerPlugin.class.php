@@ -31,6 +31,7 @@ class ContribTrackerPlugin extends Plugin {
 		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
 		$this->hooks[] = "groupisactivecheckboxpost" ; //
 		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page for group
+		$this->hooks[] = "project_before_frs"; // project summary page
 	}
 
 	function CallHook ($hookname, $params) {
@@ -49,7 +50,7 @@ class ContribTrackerPlugin extends Plugin {
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][] = _('Contribution tracker') ;
 				$params['DIRS'][]='/plugins/contribtracker/index.php?group_id=' . $group_id ;
-			}	
+			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == "groupisactivecheckbox") {
 			//Check if the group is active
@@ -90,10 +91,76 @@ class ContribTrackerPlugin extends Plugin {
 						     _('Contribution Tracker admin')) ;
 				echo '</p>';
 			}
-		}												    
-		elseif ($hookname == "blahblahblah") {
-			// ...
-		} 
+		}
+
+		elseif ($hookname == "project_before_frs") {
+			$group_id = $params['group_id'];
+			$group = &group_get_object ($group_id);
+
+			if ($group->usesPlugin($this->name)) {
+				global $HTML ;
+				echo $HTML->boxTop(_('Latest Major Contributions'));
+
+				echo '
+	<table cellspacing="1" cellpadding="5" width="100%" border="0">
+		<tr>
+		<td style="text-align:left">
+			'._('Contribution name').'
+		</td>
+		<td style="text-align:center">
+			'._('Date').'
+		</td>
+		<td style="text-align:center">
+			'._('Contributing organisation').'
+		</td>
+		<td style="text-align:center">
+			'._('Role').'
+		</td>
+		</tr>';
+
+				$contribs = $this->getContributionsByGroup ($group) ;
+				usort ($contribs, array ($this, "ContribComparator")) ;
+
+				if (count ($contribs) == 0) {
+					echo '<tr><td colspan="5"><strong>'._('This Project Has Not Released Any Files').'</strong></td></tr>';
+				} else {
+					$max_displayed_contribs = 3 ;
+					$i = 1 ;
+					foreach ($contribs as $c) {
+						// Contribution
+						echo '<tr><td>' ;
+						echo util_make_link ('/plugins/'.$this->name.'?group_id='.$group_id.'&contrib_id='.$c->getId(),htmlspecialchars($c->getName())) ;
+						echo '</td><td>' ;
+						echo strftime (_('%Y-%m-%d'), $c->getDate ()) ;
+						echo '</td><td>' ;
+						echo '</td><td>' ;
+						echo '</td></tr>' ;
+
+						// Actors involved
+						$parts = $c->getParticipations () ;
+						foreach ($parts as $p) {
+							echo '<tr><td></td><td></td><td>' ;
+							echo (util_make_link ('/plugins/'.$this->name.'/show_actor.php?actor_id='.$p->getActor()->getId (),
+									      htmlspecialchars ($p->getActor()->getName()))) ;
+							echo '</td><td>' ;
+							echo htmlspecialchars ($p->getRole()->getName()) ;
+							echo '</td><td></tr>' ;
+						}
+
+						$i++ ;
+						if ($i > $max_displayed_contribs) {
+							break ;
+						}
+					}
+				}
+				?></table>
+					    <div style="text-align:center">
+					    <?php echo util_make_link ('/plugins/'.$this->name.'?group_id='.$group_id,'['._('View All Contributions').']'); ?>
+					    </div>
+						      <?php
+						      echo $HTML->boxBottom();
+			}
+		}
 	}
 
 	function getActors () {
