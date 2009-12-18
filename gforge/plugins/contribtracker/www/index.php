@@ -40,8 +40,8 @@ function display_contribution ($c, $show_groups = false) {
 		printf (_('%s: %s (%s)'),
 			htmlspecialchars ($p->getRole()->getName()),
 			util_make_link ('/plugins/contribtracker/show_actor.php?actor_id='.$p->getActor()->getId (),
-					$p->getActor()->getName()),
-			$p->getActor()->getLegalStructure()->getName()) ;
+					htmlspecialchars ($p->getActor()->getName())),
+			htmlspecialchars ($p->getActor()->getLegalStructure()->getName())) ;
 		print '</li>' ;
 	}
 	print '</ul>' ;
