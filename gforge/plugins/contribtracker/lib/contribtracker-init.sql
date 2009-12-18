@@ -18,6 +18,7 @@ CREATE TABLE plugin_contribtracker_actor (
        address text DEFAULT '' NOT NULL,
        email text DEFAULT '' NOT NULL,
        description text DEFAULT '' NOT NULL,
+       logo text DEFAULT '' NOT NULL,
        struct_id integer NOT NULL REFERENCES plugin_contribtracker_legal_structure
 ) ;
 

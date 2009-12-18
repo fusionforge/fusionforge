@@ -43,6 +43,9 @@ function display_contribution ($c, $show_groups = false) {
 			util_make_link ('/plugins/'.$plugin->name.'/?actor_id='.$p->getActor()->getId (),
 					htmlspecialchars ($p->getActor()->getName())),
 			htmlspecialchars ($p->getActor()->getLegalStructure()->getName())) ;
+		if ($p->getActor()->getLogo() != '') {
+			print ' <img type="image/png" src="'.util_make_url ('/plugins/'.$plugin->name.'/actor_logo.php?actor_id='.$p->getActor()->getId ()).'" />' ;
+		}
 		print '</li>' ;
 	}
 	print '</ul>' ;
@@ -124,6 +127,9 @@ if ($group_id) {
 	print '<li><strong>'._('Legal structure:').'</strong> '.htmlspecialchars($actor->getLegalStructure()->getName()).'</li>' ;
 	print '<li><strong>'._('Description:').'</strong> '.htmlspecialchars($actor->getDescription()).'</li>' ;
 	print '</ul>' ;
+	if ($actor->getLogo() != '') {
+		print '<img type="image/png" src="'.util_make_url ('/plugins/'.$plugin->name.'/actor_logo.php?actor_id='.$actor->getId ()).'" />' ;
+	}
 	
 	$participations = $actor->getParticipations () ;
 	

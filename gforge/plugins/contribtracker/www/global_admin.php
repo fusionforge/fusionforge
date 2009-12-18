@@ -52,7 +52,25 @@ function check_structure_id ($s_id) {
 		exit_permission_denied () ;
 	}
 }
-	
+function check_logo ($arr, $a_id=false) {
+	if ($a_id) {
+		$actor = new ContribTrackerActor ($a_id) ;
+		$default = $actor->getLogo() ;
+	} else {
+		$default = '' ;
+	}
+	if ($arr['tmp_name'] == '') {
+		$logo = $default ;
+	} else {
+		if ($arr['size'] > 10240) {
+			$logo = $default ;
+		} else {
+			$logo = file_get_contents ($arr['tmp_name'], 0, NULL, -1, 10240) ;
+		}
+		unlink ($arr['tmp_name']) ;
+	}
+	return $logo ;
+}	
 
 // Get and validate parameters, error if tampered with
 switch ($action) {
@@ -102,6 +120,8 @@ case 'post_add_actor':
 	$address = getStringFromRequest ('actor_address') ;
 	$email = getStringFromRequest ('actor_email') ;
 	$desc = getStringFromRequest ('actor_desc') ;
+	$logoarr = getUploadedFile ('actor_logo') ;
+	$logo = check_logo ($logoarr) ;
 	$structure_id = getIntFromRequest ('structure_id') ;
 	check_structure_id ($structure_id) ;
 	break ;
@@ -117,6 +137,8 @@ case 'post_edit_actor':
 	$address = getStringFromRequest ('actor_address') ;
 	$email = getStringFromRequest ('actor_email') ;
 	$desc = getStringFromRequest ('actor_desc') ;
+	$logoarr = getUploadedFile ('actor_logo') ;
+	$logo = check_logo ($logoarr, $actor_id) ;
 	$structure_id = getIntFromRequest ('structure_id') ;
 	check_structure_id ($structure_id) ;
 	break ;	
@@ -167,7 +189,7 @@ case 'post_edit_structure':
 case 'post_add_actor':
 	$actor = new ContribTrackerActor () ;
 	$structure = new ContribTrackerLegalStructure ($structure_id) ;
-	if (!$actor->create ($name, $address, $email, $desc, $structure)) {
+	if (!$actor->create ($name, $address, $email, $desc, $logo, $structure)) {
 		exit_error ($actor->getErrorMessage()) ;
 	}
 	$actor_id = $actor->getId() ;
@@ -181,7 +203,7 @@ case 'del_actor':
 case 'post_edit_actor':
 	$actor = new ContribTrackerActor ($actor_id) ;
 	$structure = new ContribTrackerLegalStructure ($structure_id) ;
-	$actor->update ($name, $address, $email, $desc, $structure) ;
+	$actor->update ($name, $address, $email, $desc, $logo, $structure) ;
 	$action = 'display' ;
 	break ;
 }
@@ -198,6 +220,7 @@ case 'display':
 		print '<td><strong>'._('Postal address').'</strong></td>' ;
 		print '<td><strong>'._('Email').'</strong></td>' ;
 		print '<td><strong>'._('Description').'</strong></td>' ;
+		print '<td><strong>'._('Logo').'</strong></td>' ;
 		print '<td><strong>'._('Legal structure').'</strong></td>' ;
 		print '<td><strong>'._('Actions').'</strong></td>' ;
 		print '</tr></thead><tbody>' ;
@@ -207,6 +230,11 @@ case 'display':
 			print '<td>'.htmlspecialchars($a->getAddress()).'</td>' ;
 			print '<td>'.htmlspecialchars($a->getEmail()).'</td>' ;
 			print '<td>'.htmlspecialchars($a->getDescription()).'</td>' ;
+			print '<td>' ;
+			if ($a->getLogo() != '') {
+				print '<img type="image/png" src="'.util_make_url ('/plugins/'.$plugin->name.'/actor_logo.php?actor_id='.$a->getId ()).'" />' ;
+			}
+			print '</td>' ;
 			print '<td>'.htmlspecialchars($a->getLegalStructure()->getName()).'</td>' ;
 			?>
 				<td>
@@ -378,13 +406,14 @@ case 'edit_structure':
 case 'add_actor':
 	print '<h1>'._('Register a new actor').'</h1>' ;
 	?>
-		<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post">
+		<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post" enctype="multipart/form-data">
 			 <input type="hidden" name="action" value="post_add_actor" />
 			 <?php echo _('Actor name:') ?> <input type="text" name="actor_name" size="20" /><br />
 			 <?php echo _('Actor address:') ?> <input type="text" name="actor_address" size="20" /><br />
 			 <?php echo _('Actor email:') ?> <input type="text" name="actor_email" size="20" /><br />
 			 <?php echo _('Actor description:') ?><br />
 			 <textarea name="actor_desc" rows="20" cols="80"></textarea><br />
+			 <?php echo _('Actor logo (PNG, 10 kB max.):') ?> <input type="file" name="actor_logo" /><br />
 			 <?php
 			 echo _('Legal structure:') ?>
 			 <select name="structure_id">
@@ -406,7 +435,7 @@ case 'edit_actor':
 	$actor = new ContribTrackerActor ($actor_id) ;
 	
 	?>
-		<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post">
+		<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post" enctype="multipart/form-data">
 			 <input type="hidden" name="action" value="post_edit_actor" />
 			 <input type="hidden" name="actor_id" value="<?php echo $actor->getId() ?>" />
 			 <?php echo _('Actor name:') ?> <input type="text" name="actor_name" size="20" value="<?php echo htmlspecialchars ($actor->getName()) ?>" /><br />
@@ -414,7 +443,12 @@ case 'edit_actor':
 			 <?php echo _('Actor email:') ?> <input type="text" name="actor_email" size="20" value="<?php echo htmlspecialchars ($actor->getEmail()) ?>" /><br />
 			 <?php echo _('Actor description:') ?><br />
 			 <textarea name="actor_desc" rows="20" cols="80"><?php echo htmlspecialchars ($actor->getDescription()) ?></textarea><br />
+			 <?php echo _('Actor logo (PNG, 10 kB max.):') ?> <input type="file" name="actor_logo" />
 			 <?php
+			 if ($actor->getLogo() != '') {
+				 print '<img type="image/png" src="'.util_make_url ('/plugins/'.$plugin->name.'/actor_logo.php?actor_id='.$actor->getId ()).'" />' ;
+			 }
+	print '<br />' ;
 			 echo _('Legal structure:') ?>
 			 <select name="structure_id">
 			 <?php

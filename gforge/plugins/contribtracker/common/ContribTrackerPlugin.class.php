@@ -116,7 +116,7 @@ class ContribTrackerPlugin extends Plugin {
 				usort ($contribs, array ($this, "ContribComparator")) ;
 
 				if (count ($contribs) == 0) {
-					echo '<tr><td colspan="5"><strong>'._('This Project Has Not Released Any Files').'</strong></td></tr>';
+					echo '<tr><td colspan="5"><strong>'._('No contributions have been recorded for this project yet.').'</strong></td></tr>';
 				} else {
 					$max_displayed_contribs = 3 ;
 					$i = 1 ;
@@ -136,6 +136,9 @@ class ContribTrackerPlugin extends Plugin {
 								util_make_link ('/plugins/'.$this->name.'/?actor_id='.$p->getActor()->getId (),
 										htmlspecialchars ($p->getActor()->getName())),
 								htmlspecialchars ($p->getActor()->getLegalStructure()->getName())) ;
+							if ($p->getActor()->getLogo() != '') {
+								print ' <img type="image/png" src="'.util_make_url ('/plugins/'.$this->name.'/actor_logo.php?actor_id='.$p->getActor()->getId ()).'" />' ;
+							}
 							echo '</li>' ;
 						}
 						echo '</ul></td></tr>' ;
@@ -475,18 +478,19 @@ class ContribTrackerActor extends Error {
 		return true ;
 	}
 
-	function create ($name, $address, $email, $description, $structure) {
+	function create ($name, $address, $email, $description, $logo, $structure) {
 		if ($this->getId ()) {
 			$this->setError(_('Object already exists')) ;
 			return false ;
 		}
 
 		db_begin () ;
-		$res = db_query_params ('INSERT INTO plugin_contribtracker_actor (name,address,email,description,struct_id) VALUES ($1,$2,$3,$4,$5)',
+		$res = db_query_params ('INSERT INTO plugin_contribtracker_actor (name,address,email,description,logo,struct_id) VALUES ($1,$2,$3,$4,$5,$6)',
 					array ($name,
 					       $address,
 					       $email,
 					       $description,
+					       base64_encode ($logo),
 					       $structure->getID())) ;
 		if (!$res || db_affected_rows ($res) < 1) {
 			$this->setError (sprintf(_('Could not create object in database: %s'),
@@ -507,7 +511,7 @@ class ContribTrackerActor extends Error {
 		return $this->fetchData ($id) ;
 	}
 
-	function update ($name, $address, $email, $description, $structure) {
+	function update ($name, $address, $email, $description, $logo, $structure) {
 		if (! $this->getId ()) {
 			$this->setError(_('Object does not exist')) ;
 			return false ;
@@ -516,11 +520,12 @@ class ContribTrackerActor extends Error {
 		$id = $this->getId () ;
 
 		db_begin () ;
-		$res = db_query_params ('UPDATE plugin_contribtracker_actor SET (name,address,email,description,struct_id) = ($1,$2,$3,$4,$5) WHERE actor_id = $6',
+		$res = db_query_params ('UPDATE plugin_contribtracker_actor SET (name,address,email,description,logo,struct_id) = ($1,$2,$3,$4,$5,$6) WHERE actor_id = $7',
 					array ($name,
 					       $address,
 					       $email,
 					       $description,
+					       base64_encode ($logo),
 					       $structure->getID(),
 					       $id)) ;
 		if (!$res || db_affected_rows ($res) < 1) {
@@ -568,6 +573,7 @@ class ContribTrackerActor extends Error {
 	function getLegalStructure () {
 		return new ContribTrackerLegalStructure ($this->data_array['struct_id']) ;
 	}
+	function getLogo () { return base64_decode ($this->data_array['logo']) ; }
 
 	function getParticipations () {
 		$res = db_query_params ('SELECT participation_id FROM plugin_contribtracker_participation WHERE actor_id = $1',
