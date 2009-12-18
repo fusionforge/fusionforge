@@ -105,11 +105,10 @@ class ContribTrackerPlugin extends Plugin {
 				echo '
 	<table cellspacing="1" cellpadding="5" width="100%" border="0">
 		<tr>
-		<td style="text-align:left">
-			'._('Contribution').'
-		<td style="text-align:center">
-			'._('Contributing organisation').'
-		</td>
+		<th style="text-align:left">'._('Date').'</th>
+		<th style="text-align:left">'._('Contribution').'</th>
+		<th style="text-align:center" colspan="2">'._('Contributor').'</th>
+		<th style="text-align:left">'._('Role').'</th>
 		</tr>';
 
 				$contribs = $this->getContributionsByGroup ($group) ;
@@ -120,29 +119,38 @@ class ContribTrackerPlugin extends Plugin {
 					$max_displayed_contribs = 3 ;
 					$i = 1 ;
 					foreach ($contribs as $c) {
-						// Contribution
-						echo '<tr><td>' ;
-						echo strftime (_('%Y-%m-%d'), $c->getDate ()) ;
-						echo ' ' ;
-						echo util_make_link ('/plugins/'.$this->name.'/?group_id='.$group_id.'&contrib_id='.$c->getId(),htmlspecialchars($c->getName())) ;
-						echo '</td><td><ul>' ;
-						// Actors involved
 						$parts = $c->getParticipations () ;
-						foreach ($parts as $p) {
-							echo '<li>' ;
-							printf (_('%s: %s (%s)'),
-								htmlspecialchars ($p->getRole()->getName()),
-								util_make_link ('/plugins/'.$this->name.'/?actor_id='.$p->getActor()->getId (),
-										htmlspecialchars ($p->getActor()->getName())),
-								htmlspecialchars ($p->getActor()->getLegalStructure()->getName())) ;
-							if ($p->getActor()->getLogo() != '') {
-								print ' <img type="image/png" src="'.util_make_url ('/plugins/'.$this->name.'/actor_logo.php?actor_id='.$p->getActor()->getId ()).'" />' ;
+						if (count ($parts) != 0) {
+							$f = 1 ;
+							foreach ($parts as $p) {
+								echo '<tr>' ;
+								if ($f == 1) {
+									$f = 0 ;
+									// Contribution
+									echo '<td rowspan="'.count ($parts).'">' ;
+									echo strftime (_('%Y-%m-%d'), $c->getDate ()) ;
+									echo '</td>' ;
+									echo '<td rowspan="'.count ($parts).'">' ;
+									echo util_make_link ('/plugins/'.$this->name.'/?group_id='.$group_id.'&contrib_id='.$c->getId(),htmlspecialchars($c->getName())) ;
+									echo '</td>' ;
+								}
+								// Actors involved
+								echo '<td>' ;
+								if ($p->getActor()->getLogo() != '') {
+									print ' <img type="image/png" src="'.util_make_url ('/plugins/'.$this->name.'/actor_logo.php?actor_id='.$p->getActor()->getId ()).'" />' ;
+								}
+								echo '</td><td>' ;
+								printf (_('%s (%s)'),
+									util_make_link ('/plugins/'.$this->name.'/?actor_id='.$p->getActor()->getId (),
+											htmlspecialchars ($p->getActor()->getName())),
+									htmlspecialchars ($p->getActor()->getLegalStructure()->getName())) ;
+								echo '</td><td>' ;
+								echo htmlspecialchars ($p->getRole()->getName()) ;
+								echo '</td>' ;
+								echo '</tr>' ;
 							}
-							echo '</li>' ;
+							$i++ ;
 						}
-						echo '</ul></td></tr>' ;
-
-						$i++ ;
 						if ($i > $max_displayed_contribs) {
 							break ;
 						}

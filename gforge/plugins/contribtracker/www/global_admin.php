@@ -220,25 +220,25 @@ case 'display':
 	$actors = $plugin->getActors () ;
 	if (count ($actors)) {
 		print '<table><thead><tr>' ;
+		print '<td><strong>'._('Logo').'</strong></td>' ;
 		print '<td><strong>'._('Short name').'</strong></td>' ;
 		print '<td><strong>'._('Postal address').'</strong></td>' ;
 		print '<td><strong>'._('Email').'</strong></td>' ;
 		print '<td><strong>'._('Description').'</strong></td>' ;
-		print '<td><strong>'._('Logo').'</strong></td>' ;
 		print '<td><strong>'._('Legal structure').'</strong></td>' ;
 		print '<td><strong>'._('Actions').'</strong></td>' ;
 		print '</tr></thead><tbody>' ;
 		foreach ($actors as $a) {
 			print '<tr>';
-			print '<td>'.htmlspecialchars($a->getName()).'</td>' ;
-			print '<td>'.htmlspecialchars($a->getAddress()).'</td>' ;
-			print '<td>'.htmlspecialchars($a->getEmail()).'</td>' ;
-			print '<td>'.htmlspecialchars($a->getDescription()).'</td>' ;
 			print '<td>' ;
 			if ($a->getLogo() != '') {
 				print '<img type="image/png" src="'.util_make_url ('/plugins/'.$plugin->name.'/actor_logo.php?actor_id='.$a->getId ()).'" />' ;
 			}
 			print '</td>' ;
+			print '<td>'.htmlspecialchars($a->getName()).'</td>' ;
+			print '<td>'.htmlspecialchars($a->getAddress()).'</td>' ;
+			print '<td>'.htmlspecialchars($a->getEmail()).'</td>' ;
+			print '<td>'.htmlspecialchars($a->getDescription()).'</td>' ;
 			print '<td>'.htmlspecialchars($a->getLegalStructure()->getName()).'</td>' ;
 			?>
 				<td>
