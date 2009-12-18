@@ -16,7 +16,7 @@ if(!file_exists($svnlook) || !file_exists($commit_email_pl)) { die("Missing requ
 if($argc < 4) { die("Invalid arguments."); }
 
 $author = exec("$svnlook author \"$argv[1]\" -r $argv[2]");
-$res_db= db_query_params ('SELECT email FROM users where user_name = $1 LIMIT 1',
+$res_db= db_query_params ('SELECT email FROM users where user_name = lower($1) LIMIT 1',
 			array($author));
 if($res_db)
 {
