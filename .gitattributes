@@ -186,6 +186,8 @@ gforge/packaging/control/180plugin-globalsearch -text
 gforge/packaging/control/180plugin-globalsearch.shortdesc -text
 gforge/packaging/control/190plugin-projectlabels -text
 gforge/packaging/control/190plugin-projectlabels.shortdesc -text
+gforge/packaging/control/200plugin-contribtracker -text
+gforge/packaging/control/200plugin-contribtracker.shortdesc -text
 gforge/packaging/control/AAAdesc -text
 gforge/packaging/control/Makefile -text
 gforge/packaging/control/disabled-150plugin-scmbzr -text
