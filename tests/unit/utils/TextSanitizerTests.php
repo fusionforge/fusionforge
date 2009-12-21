@@ -26,8 +26,8 @@ class TextSanitizerTests extends PHPUnit_Framework_TestCase
 	 */
 	public function testPurifyOnValidHtmlCode()
 	{
-		$this->assertEquals($this->s->purify('<h1>A valid message</h1>'), '<h1>A valid message</h1>');
-		$this->assertEquals($this->s->purify('<h1>A <B>valid</B> message</h1>'), '<h1>A <b>valid</b> message</h1>');
+		$this->assertEquals('<h1>A valid message</h1>', $this->s->purify('<h1>A valid message</h1>'));
+		$this->assertEquals('<h1>A <b>valid</b> message</h1>', $this->s->purify('<h1>A <B>valid</B> message</h1>'));
 	}
 	
 	/**
@@ -35,8 +35,8 @@ class TextSanitizerTests extends PHPUnit_Framework_TestCase
 	 */
 	public function testPurifyOnInvalidHtmlCode()
 	{
-		$this->assertEquals($this->s->purify('<h1>Missing ending tag'), '<h1>Missing ending tag</h1>');
-		$this->assertEquals($this->s->purify('Invalid <toto> tag'), 'Invalid  tag');
+		$this->assertEquals('<h1>Missing ending tag</h1>', $this->s->purify('<h1>Missing ending tag'));
+		$this->assertEquals('Invalid  tag', $this->s->purify('Invalid <toto> tag'));
 	}
 	
 	/**
@@ -44,6 +44,6 @@ class TextSanitizerTests extends PHPUnit_Framework_TestCase
 	 */
 	public function testPurifyOnMaliciousHtmlCode()
 	{
-		$this->assertEquals($this->s->purify('Hacker <script>hello</script>'), 'Hacker ');
+		$this->assertEquals('Hacker ', $this->s->purify('Hacker <script>hello</script>'));
 	}
 }
