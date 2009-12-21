@@ -27,13 +27,13 @@ class Syntax_Tests extends PHPUnit_Framework_TestCase
     public function testUTF8Chars()
     {
 	    // Skip the wiki part which is not UTF-8 encoded.
-	    $output = `cd .. ; find gforge tests -name '*.php' -not -path 'gforge/plugins/wiki/www/*' -type f  -exec isutf8 {} \;`;
+	    $output = `cd .. ; find gforge tests -name '*.php' -not -path 'gforge/plugins/wiki/www/*' -type f | xargs isutf8`;
 	    $this->assertEquals('', $output);
-	    $output = `cd .. ; find gforge tests -name '*.sql' -type f  -exec isutf8 {} \;`;
+	    $output = `cd .. ; find gforge tests -name '*.sql' -type f | xargs isutf8`;
 	    $this->assertEquals('', $output);
-	    $output = `cd .. ; find gforge tests -name '*.sh' -type f  -exec isutf8 {} \;`;
+	    $output = `cd .. ; find gforge tests -name '*.sh' -type f | xargs isutf8`;
 	    $this->assertEquals('', $output);
-	    $output = `cd .. ; find gforge tests -name '*.pl' -type f  -exec isutf8 {} \;`;
+	    $output = `cd .. ; find gforge tests -name '*.pl' -type f | xargs isutf8`;
 	    $this->assertEquals('', $output);
     }
 
