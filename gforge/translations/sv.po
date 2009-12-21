@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-10 17:51+0100\n"
+"POT-Creation-Date: 2009-12-21 16:48+0100\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,59 +63,57 @@ msgstr "%1$s:: Ej giltigt gruppobjekt"
 msgid "Group_id in db result does not match Group Object"
 msgstr "Grupp-ID i db-resultatet motsvarar inte gruppobjektet"
 
-#: common/forum/Forum.class.php:121 common/forum/Forum.class.php:593
+#: common/forum/Forum.class.php:121 common/forum/Forum.class.php:594
 msgid "Forum Name Must Be At Least 3 Characters"
 msgstr "Forumnamn måste ha minst 3 tecken"
 
-#: common/forum/Forum.class.php:125 common/forum/Forum.class.php:597
+#: common/forum/Forum.class.php:125 common/forum/Forum.class.php:598
 msgid "Forum Description Must Be At Least 10 Characters"
 msgstr "Forumbeskrivning måste ha minst 10 tecken"
 
-#: common/forum/Forum.class.php:129 common/forum/Forum.class.php:601
+#: common/forum/Forum.class.php:130 common/forum/Forum.class.php:603
 msgid "Illegal Characters in Forum Name"
 msgstr "Ogiltiga tecken i forumnamn"
 
-#: common/forum/Forum.class.php:147
+#: common/forum/Forum.class.php:148
 msgid "Mailing List Exists with same name"
 msgstr "Sändlista med samma namn existerar"
 
-#: common/forum/Forum.class.php:181
+#: common/forum/Forum.class.php:182
 msgid "Error Adding Forum"
 msgstr "Fel vid tillägg i forum"
 
-#: common/forum/Forum.class.php:206 www/account/first.php:29
+#: common/forum/Forum.class.php:207 www/account/first.php:29
 #: www/help/index.php:29
 #, php-format
 msgid "Welcome to %1$s"
 msgstr "Välkommen till %1$s"
 
-#: common/forum/Forum.class.php:244
+#: common/forum/Forum.class.php:245
 msgid "Invalid forum group identifier"
 msgstr "Ogiltig gruppidentitet för forum"
 
-#: common/forum/Forum.class.php:474 common/forum/Forum.class.php:511
+#: common/forum/Forum.class.php:475 common/forum/Forum.class.php:512
 #: common/frs/FRSPackage.class.php:270 common/frs/FRSPackage.class.php:302
 #: common/tracker/ArtifactType.class.php:552
 msgid "You can only monitor if you are logged in"
 msgstr "Du kan bara bevaka om du är inloggad"
 
-#: common/forum/Forum.class.php:495
+#: common/forum/Forum.class.php:496
 msgid "Unable To Add Monitor"
 msgstr "Kunde inte lägga till bevakning"
 
-#: common/forum/Forum.class.php:544
+#: common/forum/Forum.class.php:545
 msgid "You Can Only Save Your Place If You Are Logged In"
 msgstr "Du kan bara spara din position om du är inloggad"
 
-#: common/forum/Forum.class.php:562
+#: common/forum/Forum.class.php:563
 msgid "Forum::savePlace()"
 msgstr "Forum::savePlace()"
 
-#: common/forum/Forum.class.php:637 common/include/Error.class.php:163
-#: common/mail/MailingList.class.php:251 www/news/admin/index.php:87
-#: www/news/admin/index.php:205 www/news/admin/index.php:215
-#: www/news/admin/index.php:236
-#, php-format
+#: common/forum/Forum.class.php:639 common/mail/MailingList.class.php:251
+#: www/news/admin/index.php:87 www/news/admin/index.php:205
+#: www/news/admin/index.php:215 www/news/admin/index.php:236
 msgid "Error On Update:"
 msgstr "Fel vid uppdatering:"
 
@@ -293,7 +291,7 @@ msgstr ""
 
 #: common/include/Error.class.php:126 common/include/Group.class.php:426
 #: common/include/Group.class.php:498 www/include/exit.php:37
-#: www/news/admin/index.php:351
+#: www/news/admin/index.php:345
 msgid "Permission denied."
 msgstr "Åtkomst nekad"
 
@@ -301,6 +299,11 @@ msgstr "Åtkomst nekad"
 #: www/tracker/tracker.php:74
 msgid "Invalid Email Address"
 msgstr "Ogiltig e-postadress"
+
+#: common/include/Error.class.php:163
+#, fuzzy, php-format
+msgid "Error On Update: %s"
+msgstr "Fel vid uppdatering:"
 
 #: common/include/Error.class.php:204 www/frs/admin/editrelease.php:219
 msgid "Missing Parameters"
@@ -566,9 +569,10 @@ msgstr ""
 msgid "Get Public Help"
 msgstr ""
 
-#: common/include/Group.class.php:2074 www/stats/site_stats_utils.php:477
-msgid "Developers"
-msgstr "Utvecklare"
+#: common/include/Group.class.php:2074
+#, fuzzy
+msgid "Developers-Discussion"
+msgstr "Alla projektutvecklare"
 
 #: common/include/Group.class.php:2074
 #, fuzzy
@@ -1057,7 +1061,7 @@ msgstr "Gruppnamn kan inte innehålla understreck av DNS skäl."
 #: common/include/group_section_texts.php:30
 #: common/reporting/report_utils.php:161
 #: plugins/quota_management/www/quota_project.php:88
-#: www/include/Layout.class.php:560 www/include/project_home.php:324
+#: www/include/Layout.class.php:560 www/include/project_home.php:331
 #: www/themes/gforge-simple-theme/Theme.class.php:505
 #: www/themes/gforge/Theme.class.php:508
 msgid "Forums"
@@ -1070,7 +1074,7 @@ msgstr ""
 #: common/include/group_section_texts.php:32 common/include/rbac_texts.php:86
 #: common/include/rbac_texts.php:87 common/reporting/report_utils.php:169
 #: common/reporting/report_utils.php:197 www/include/Layout.class.php:582
-#: www/include/project_home.php:364 www/my/dashboard.php:91
+#: www/include/project_home.php:371 www/my/dashboard.php:91
 #: www/project/stats/project_stats_utils.php:83
 #: www/project/stats/project_stats_utils.php:142
 #: www/project/stats/project_stats_utils.php:198
@@ -1096,7 +1100,7 @@ msgstr "Filer"
 
 #: common/include/group_section_texts.php:35
 #: plugins/quota_management/www/quota_project.php:74 www/activity/index.php:89
-#: www/activity/index.php:241 www/admin/index.php:132
+#: www/activity/index.php:241 www/admin/index.php:134
 #: www/include/Layout.class.php:603 www/news/index.php:35
 #: www/news/submit.php:127 www/themes/gforge-simple-theme/Theme.class.php:554
 #: www/themes/gforge/Theme.class.php:551
@@ -1177,7 +1181,7 @@ msgstr "Poster"
 #: www/themes/gforge-simple-theme/Theme.class.php:488
 #: www/themes/gforge/Theme.class.php:403 www/themes/gforge/Theme.class.php:492
 #: www/themes/lite/Theme.class.php:288 www/tracker/add.php:65
-#: www/tracker/admin/ind.php:77
+#: www/tracker/admin/ind.php:78
 #: www/tracker/include/ArtifactTypeHtml.class.php:69 www/tracker/ind.php:27
 #: www/tracker/mod.php:132 www/tracker/mod.php:189
 msgid "Admin"
@@ -1254,10 +1258,10 @@ msgstr ""
 
 #: common/include/rbac_texts.php:90 common/include/rbac_texts.php:91
 #: common/reporting/report_utils.php:157 www/include/Layout.class.php:567
-#: www/include/project_home.php:291 www/include/project_home.php:292
+#: www/include/project_home.php:298 www/include/project_home.php:299
 #: www/pm/include/ProjectTaskHTML.class.php:93
 #: www/themes/gforge-simple-theme/Theme.class.php:513
-#: www/themes/gforge/Theme.class.php:515 www/tracker/admin/ind.php:96
+#: www/themes/gforge/Theme.class.php:515 www/tracker/admin/ind.php:97
 #: www/tracker/ind.php:45
 msgid "Tracker"
 msgstr "Ordningslista"
@@ -1281,7 +1285,7 @@ msgid "Project Admin"
 msgstr "Projekt admin"
 
 #: common/include/rbac_texts.php:98 common/include/rbac_texts.php:99
-#: www/include/Layout.class.php:610 www/include/project_home.php:395
+#: www/include/Layout.class.php:610 www/include/project_home.php:402
 #: www/scm/include/scm_utils.php:52 www/stats/site_stats_utils.php:244
 #: www/stats/site_stats_utils.php:368 www/stats/site_stats_utils.php:423
 #: www/themes/gforge-simple-theme/Theme.class.php:562
@@ -1301,8 +1305,8 @@ msgstr "Saknat lösenord eller användarnamn"
 #: common/include/session.php:172 common/include/session.php:182
 #: common/include/session.php:213
 #: plugins/ldapextauth/include/LdapExtAuthPlugin.class.php:140
-#: plugins/ldapextauth/include/LdapExtAuthPlugin.class.php:191
-#: plugins/ldapextauth/include/LdapExtAuthPlugin.class.php:298
+#: plugins/ldapextauth/include/LdapExtAuthPlugin.class.php:199
+#: plugins/ldapextauth/include/LdapExtAuthPlugin.class.php:309
 msgid "Invalid Password Or User Name"
 msgstr "Ogiltigt lösenord eller användarnamn"
 
@@ -1332,19 +1336,29 @@ msgstr "Kunde inte uppdatera förälder"
 #: www/account/lostlogin.php:77 www/account/lostlogin.php:94
 #: www/pm/calendar.php:83 www/pm/calendar.php:87 www/pm/calendar.php:89
 #: www/pm/calendar.php:94 www/pm/calendar.php:96 www/pm/calendar.php:107
-#: www/survey/rating_resp.php:57 www/trove/TroveCategory.class.php:75
-#: www/trove/TroveCategory.class.php:101 www/trove/TroveCategory.class.php:113
+#: www/survey/rating_resp.php:57 www/trove/TroveCategory.class.php:73
+#: www/trove/TroveCategory.class.php:99 www/trove/TroveCategory.class.php:111
 #: www/trove/admin/trove_cat_edit.php:42
 msgid "ERROR"
 msgstr "FEL"
 
-#: common/include/utils.php:98
+#: common/include/utils.php:129
 msgid "UTF-8"
 msgstr ""
 
-#: common/include/utils.php:487
+#: common/include/utils.php:512
 msgid "Priority Colors"
 msgstr "Prioritetsfärger"
+
+#: common/include/utils.php:1060
+#, fuzzy
+msgid "Error: a mailing list with the same email address already exists."
+msgstr "Det användarnamnet existerar redan."
+
+#: common/include/utils.php:1076
+#, fuzzy
+msgid "Error: a forum with the same email address already exists."
+msgstr "Det användarnamnet existerar redan."
 
 #: common/mail/MailingList.class.php:122
 msgid "Must Provide List Name That Is 4 or More Characters Long"
@@ -1412,13 +1426,13 @@ msgstr "Hittade inga projektgrupper"
 msgid "Circular Dependency Detected'"
 msgstr "Rundgångsberoende upptäckt'"
 
-#: common/pm/ProjectTask.class.php:1164 common/tracker/Artifact.class.php:1438
-#: common/tracker/Artifact.class.php:1440
-#: common/tracker/Artifact.class.php:1444
-#: common/tracker/Artifact.class.php:1446
-#: common/tracker/Artifact.class.php:1546
+#: common/pm/ProjectTask.class.php:1164 common/tracker/Artifact.class.php:1439
+#: common/tracker/Artifact.class.php:1441
+#: common/tracker/Artifact.class.php:1445
+#: common/tracker/Artifact.class.php:1447
+#: common/tracker/Artifact.class.php:1547
 #: cronjobs/send_pending_items_mail.php:99
-#: plugins/projects_hierarchy/www/softwaremap.php:322
+#: plugins/projects_hierarchy/www/softwaremap.php:318
 #: www/account/index.php:118 www/admin/cronman.php:79
 #: www/admin/grouplist.php:118 www/admin/massmail.php:165
 #: www/admin/search.php:110 www/admin/search.php:186 www/admin/userlist.php:99
@@ -1452,9 +1466,9 @@ msgstr "Rundgångsberoende upptäckt'"
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:50
 #: www/snippet/detail.php:69 www/snippet/detail.php:158
 #: www/soap/tracker/tracker.php:1132 www/softwaremap/full_list.php:148
-#: www/softwaremap/tag_cloud.php:185 www/softwaremap/trove_list.php:318
-#: www/stats/lastlogins.php:51 www/tracker/browse.php:414
-#: www/tracker/browse.php:425 www/tracker/detail.php:45
+#: www/softwaremap/tag_cloud.php:185 www/softwaremap/trove_list.php:308
+#: www/stats/lastlogins.php:51 www/tracker/browse.php:415
+#: www/tracker/browse.php:426 www/tracker/detail.php:45
 #: www/tracker/detail.php:127 www/tracker/detail.php:128
 #: www/tracker/downloadcsv.php:73 www/tracker/downloadcsv.php:74
 #: www/tracker/downloadcsv.php:75
@@ -1549,7 +1563,7 @@ msgid "Y-m"
 msgstr ""
 
 #: common/reporting/report_utils.php:165 www/include/Layout.class.php:589
-#: www/include/project_home.php:346
+#: www/include/project_home.php:353
 #: www/themes/gforge-simple-theme/Theme.class.php:538
 #: www/themes/gforge/Theme.class.php:537
 msgid "Docs"
@@ -1686,8 +1700,8 @@ msgstr ""
 #: www/account/change_pw.php:65 www/account/change_pw.php:73
 #: www/admin/search.php:39 www/developer/diary.php:97
 #: www/developer/rate.php:90 www/docman/admin/index.php:75
-#: www/docman/admin/index.php:87 www/docman/admin/index.php:506
-#: www/docman/admin/index.php:511 www/docman/include/doc_utils.php:63
+#: www/docman/admin/index.php:87 www/docman/admin/index.php:508
+#: www/docman/admin/index.php:513 www/docman/include/doc_utils.php:63
 #: www/docman/index.php:64 www/docman/index.php:69 www/docman/new.php:55
 #: www/docman/new.php:64 www/docman/new.php:66 www/docman/new.php:76
 #: www/docman/new.php:89 www/docman/new.php:106 www/docman/search.php:36
@@ -1748,7 +1762,7 @@ msgstr ""
 #: www/project/admin/editgroupinfo.php:39 www/project/report/index.php:120
 #: www/scm/viewvc.php:51 www/sendmessage.php:33 www/sendmessage.php:45
 #: www/sendmessage.php:50 www/snapshots.php:23 www/snapshots.php:26
-#: www/snippet/addversion.php:67 www/snippet/browse.php:49
+#: www/snippet/addversion.php:67 www/snippet/browse.php:56
 #: www/snippet/detail.php:211 www/snippet/package.php:115
 #: www/snippet/submit.php:72 www/survey/admin/question.php:46
 #: www/survey/admin/question.php:48 www/survey/admin/show_results.php:69
@@ -1757,8 +1771,11 @@ msgstr ""
 #: www/survey/admin/show_results.php:135
 #: www/survey/include/SurveyHTML.class.php:45 www/survey/survey_utils.php:44
 #: www/tarballs.php:24 www/tarballs.php:27 www/tarballs.php:33
-#: www/tarballs.php:36 www/tracker/admin/index.php:51
-#: www/tracker/admin/updates.php:150 www/tracker/tracker.php:15
+#: www/tarballs.php:36 www/tracker/admin/index.php:34
+#: www/tracker/admin/index.php:57 www/tracker/admin/updates.php:150
+#: www/tracker/index.php:68 www/tracker/reporting/index.php:70
+#: www/tracker/reporting/trackeract_graph.php:50
+#: www/tracker/reporting/trackerpie_graph.php:64 www/tracker/tracker.php:15
 #: www/tracker/tracker.php:30 www/users:33
 msgid "Error"
 msgstr "Fel"
@@ -1811,7 +1828,7 @@ msgstr "Ny Bevakning"
 msgid "Artifact Monitoring Deactivated"
 msgstr "Bevakning Deaktiverad"
 
-#: common/tracker/Artifact.class.php:1111
+#: common/tracker/Artifact.class.php:1112
 msgid "Nothing Changed - Update Cancelled"
 msgstr "Inget Ändrat - uppdatering avbruten"
 
@@ -1873,7 +1890,7 @@ msgstr ""
 
 #: common/tracker/ArtifactExtraField.class.php:328
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:219
-#: www/admin/groupedit.php:102 www/admin/grouplist.php:85
+#: www/admin/groupedit.php:101 www/admin/grouplist.php:85
 #: www/admin/pluginman.php:186 www/admin/search.php:99
 #: www/admin/search.php:169 www/frs/admin/editrelease.php:261
 #: www/frs/admin/index.php:162 www/my/dashboard.php:83
@@ -1882,7 +1899,7 @@ msgstr ""
 #: www/pm/detail_task.php:108 www/pm/ganttpage.php:167 www/pm/mod_task.php:142
 #: www/pm/mod_task.php:159 www/reporting/usersummary.php:106
 #: www/tracker/admin/form-addextrafield.php:105
-#: www/tracker/admin/form-addextrafieldoption.php:81
+#: www/tracker/admin/form-addextrafieldoption.php:80
 #: www/tracker/admin/form-updateextrafieldelement.php:41
 msgid "Status"
 msgstr ""
@@ -1985,7 +2002,7 @@ msgid ""
 "project page</a>."
 msgstr ""
 
-#: cronjobs/massmail.php:142
+#: cronjobs/massmail.php:186
 #, php-format
 msgid ""
 "You receive this message because you subscribed to %1$s\n"
@@ -2034,27 +2051,33 @@ msgid ""
 "Click here to visit the item: %4$s"
 msgstr ""
 
-#: plugins/cvstracker/common/cvstrackerPlugin.class.php:62
-msgid "Links to related CVS commits"
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:52
+#, fuzzy
+msgid "Contribution tracker"
+msgstr "Bevakade forum"
+
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:72
+msgid "Use the Contribution Tracker plugin"
 msgstr ""
 
-#: plugins/cvstracker/common/cvstrackerPlugin.class.php:89
-msgid "No commits have been made."
-msgstr ""
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:92
+#, fuzzy
+msgid "Contribution Tracker admin"
+msgstr "Ordningslista admin"
 
-#: plugins/cvstracker/common/cvstrackerPlugin.class.php:101
-#: plugins/svntracker/common/svntrackerPlugin.class.php:93
-#: www/frs/index.php:99
-msgid "Filename"
-msgstr "Filnamn"
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:103
+#, fuzzy
+msgid "Latest Major Contributions"
+msgstr "Språkfördelning"
 
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:108
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:102
 #: plugins/svntracker/common/svntrackerPlugin.class.php:94
 #: www/admin/cronman.php:43 www/admin/massmail.php:151
 #: www/developer/diary.php:47 www/developer/diary.php:78
 #: www/forum/forum.php:237 www/forum/include/ForumHTML.class.php:67
 #: www/forum/message.php:143 www/frs/admin/showreleases.php:102
-#: www/frs/index.php:100 www/include/project_home.php:197
+#: www/frs/index.php:100 www/include/project_home.php:200
 #: www/news/admin/news_admin_utils.php:56 www/pm/calendar.php:252
 #: www/pm/include/ProjectTaskHTML.class.php:128
 #: www/pm/include/ProjectTaskHTML.class.php:165
@@ -2070,6 +2093,619 @@ msgstr "Filnamn"
 #: www/tracker/include/ArtifactHtml.class.php:108
 msgid "Date"
 msgstr "Datum"
+
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:109
+#, fuzzy
+msgid "Contribution"
+msgstr "Fortsätt >>"
+
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:110
+#, fuzzy
+msgid "Contributor"
+msgstr "Fortsätt >>"
+
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:111
+#: www/project/admin/index.php:275 www/project/admin/massfinish.php:82
+msgid "Role"
+msgstr ""
+
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:117
+#: plugins/contribtracker/www/index.php:102
+#, fuzzy
+msgid "No contributions have been recorded for this project yet."
+msgstr "Inga sådana poster i detta projekt"
+
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:131
+#: plugins/contribtracker/www/index.php:26
+#: plugins/contribtracker/www/project_admin.php:26
+#: plugins/contribtracker/www/project_admin.php:285 www/activity/index.php:23
+msgid "%Y-%m-%d"
+msgstr ""
+
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:143
+#, php-format
+msgid "%s (%s)"
+msgstr ""
+
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:161
+#, fuzzy
+msgid "[View All Contributions]"
+msgstr "Se kommentarer"
+
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:170
+msgid "Edit actors and roles for the contribution tracker plugin"
+msgstr ""
+
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:294
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:402
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:506
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:643
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:780
+#, fuzzy
+msgid "Object already exists"
+msgstr "Det användarnamnet existerar redan."
+
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:303
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:410
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:519
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:654
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:793
+#, php-format
+msgid "Could not create object in database: %s"
+msgstr ""
+
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:311
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:418
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:527
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:662
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:801
+#, php-format
+msgid "Could not get ID from object in database: %s"
+msgstr ""
+
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:323
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:430
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:539
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:674
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:813
+#, fuzzy
+msgid "Object does not exist"
+msgstr "Den resurskategorin existerar inte"
+
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:335
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:441
+#, php-format
+msgid "Could not update object in database: %s"
+msgstr ""
+
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:348
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:454
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:568
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:701
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:843
+#, fuzzy
+msgid "Cannot delete a non-existing object"
+msgstr "Kan inte lägga till databas post"
+
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:355
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:461
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:575
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:708
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:852
+#, fuzzy, php-format
+msgid "Could not delete object in database: %s"
+msgstr "Kan inte lägga till databas post"
+
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:555
+#, fuzzy, php-format
+msgid "Could not create object in update: %s"
+msgstr "Kunde inte uppdatera förälder"
+
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:688
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:830
+#, php-format
+msgid "Could not create object update database: %s"
+msgstr ""
+
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:819
+msgid "Cannot currently move a participation across contributions"
+msgstr ""
+
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:860
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:867
+#, php-format
+msgid "Could not update indices in database: %s"
+msgstr ""
+
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:881
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:906
+msgid "Cannot update a non-existing object"
+msgstr ""
+
+#: plugins/contribtracker/www/actor_logo.php:19
+#: plugins/contribtracker/www/actor_logo.php:25
+#: plugins/contribtracker/www/index.php:116
+#, fuzzy
+msgid "Invalid actor"
+msgstr "Ogiltig användare"
+
+#: plugins/contribtracker/www/actor_logo.php:20
+#: plugins/contribtracker/www/actor_logo.php:26
+#: plugins/contribtracker/www/index.php:117
+#, fuzzy
+msgid "Invalid actor specified"
+msgstr "Ogiltig gruppidentitet för forum"
+
+#: plugins/contribtracker/www/global_admin.php:19
+#, fuzzy
+msgid "Contribution tracker administration"
+msgstr "Administration av dokumentansvarig"
+
+#: plugins/contribtracker/www/global_admin.php:219
+#, fuzzy
+msgid "Existing actors"
+msgstr "Existerande filer"
+
+#: plugins/contribtracker/www/global_admin.php:223
+#, fuzzy
+msgid "Logo"
+msgstr "Logga ut"
+
+#: plugins/contribtracker/www/global_admin.php:224
+#: plugins/contribtracker/www/global_admin.php:280
+#: plugins/contribtracker/www/global_admin.php:317
+#, fuzzy
+msgid "Short name"
+msgstr "Förkortning"
+
+#: plugins/contribtracker/www/global_admin.php:225
+#, fuzzy
+msgid "Postal address"
+msgstr "Din e-postadress"
+
+#: plugins/contribtracker/www/global_admin.php:226 www/admin/search.php:97
+#: www/admin/unsubscribe.php:121
+msgid "Email"
+msgstr "E-post"
+
+#: plugins/contribtracker/www/global_admin.php:227
+#: plugins/contribtracker/www/global_admin.php:318
+#: plugins/globalsearch/www/index.php:171 www/docman/admin/index.php:212
+#: www/docman/new.php:134 www/forum/admin/index.php:93
+#: www/forum/admin/index.php:165 www/forum/index.php:60
+#: www/forum/myforums.php:72 www/help/trove_cat.php:50 www/mail/index.php:61
+#: www/pm/admin/index.php:300 www/pm/admin/index.php:349 www/pm/index.php:68
+#: www/project/admin/editimages.php:232 www/project/admin/editimages.php:259
+#: www/project/admin/editimages.php:275
+#: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:38
+#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:33
+#: www/snippet/submit.php:92 www/tracker/admin/form-updatetracker.php:22
+#: www/tracker/admin/ind.php:97 www/tracker/admin/ind.php:129
+#: www/tracker/browse.php:364 www/tracker/ind.php:45
+#: www/tracker/mod-limited.php:162
+msgid "Description"
+msgstr "Beskrivning"
+
+#: plugins/contribtracker/www/global_admin.php:228
+msgid "Legal structure"
+msgstr ""
+
+#: plugins/contribtracker/www/global_admin.php:229
+#: plugins/contribtracker/www/global_admin.php:281
+#: plugins/contribtracker/www/global_admin.php:319
+#, fuzzy
+msgid "Actions"
+msgstr "Auktioner"
+
+#: plugins/contribtracker/www/global_admin.php:248
+#: plugins/contribtracker/www/global_admin.php:291
+#: plugins/contribtracker/www/global_admin.php:330
+#: plugins/contribtracker/www/project_admin.php:313
+#: www/admin/admin_table.php:306 www/admin/responses_admin.php:46
+#: www/admin/responses_admin.php:93 www/admin/trove/trove_cat_list.php:43
+#: www/docman/admin/index.php:448 www/forum/admin/ForumAdmin.class.php:62
+#: www/forum/include/AttachManager.class.php:148
+#: www/frs/admin/showreleases.php:112 www/people/skills_utils.php:31
+#: www/people/skills_utils.php:89 www/project/admin/editimages.php:268
+#: www/project/admin/editimages.php:299 www/project/admin/index.php:210
+#: www/survey/include/SurveyHTML.class.php:304
+#: www/survey/include/SurveyHTML.class.php:352
+#: www/survey/include/SurveyHTML.class.php:412
+#: www/tracker/admin/form-addextrafield.php:33
+#: www/tracker/admin/form-addextrafield.php:56
+#: www/trove/admin/trove_cat_list.php:35
+msgid "Edit"
+msgstr ""
+
+#: plugins/contribtracker/www/global_admin.php:253
+#: plugins/contribtracker/www/global_admin.php:296
+#: plugins/contribtracker/www/global_admin.php:335
+#: plugins/contribtracker/www/project_admin.php:234
+#: plugins/contribtracker/www/project_admin.php:319
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:104
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:275
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:327
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:355
+#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:386
+#: www/admin/admin_table.php:146 www/admin/admin_table.php:307
+#: www/admin/responses_admin.php:47 www/admin/trove/trove_cat_edit.php:159
+#: www/admin/useredit.php:201 www/docman/admin/index.php:473
+#: www/docman/admin/index.php:494 www/forum/admin/ForumAdmin.class.php:63
+#: www/forum/admin/index.php:184 www/forum/admin/index.php:195
+#: www/forum/include/AttachManager.class.php:149
+#: www/frs/admin/deletepackage.php:76 www/frs/admin/deleterelease.php:81
+#: www/frs/admin/index.php:188 www/frs/admin/showreleases.php:115
+#: www/my/index.php:409 www/news/admin/index.php:133
+#: www/people/people_utils.php:174 www/people/people_utils.php:317
+#: www/people/skills_utils.php:32 www/people/skills_utils.php:90
+#: www/pm/admin/index.php:389 www/pm/admin/index.php:400
+#: www/project/admin/vhost.php:142 www/reporting/timeadd.php:181
+#: www/snippet/detail.php:55 www/survey/include/SurveyHTML.class.php:306
+#: www/tracker/admin/form-addextrafield.php:36
+#: www/tracker/admin/form-deleteextrafield.php:19
+#: www/tracker/admin/form-deletetracker.php:13
+#: www/tracker/admin/tracker.php:17 www/tracker/deleteartifact.php:37
+#: www/tracker/include/ArtifactTypeHtml.class.php:115
+#: www/tracker/mod-limited.php:160 www/tracker/mod-limited.php:170
+#: www/tracker/mod.php:54 www/tracker/mod.php:261 www/tracker/mod.php:271
+msgid "Delete"
+msgstr "Ta bort"
+
+#: plugins/contribtracker/www/global_admin.php:261
+#: plugins/contribtracker/www/global_admin.php:304
+msgid "No legal structures currently defined."
+msgstr ""
+
+#: plugins/contribtracker/www/global_admin.php:268
+#, fuzzy
+msgid "Register new actor"
+msgstr "Registrera nytt projekt"
+
+#: plugins/contribtracker/www/global_admin.php:273
+msgid "No legal structures yet, can't define actors without them."
+msgstr ""
+
+#: plugins/contribtracker/www/global_admin.php:276
+#, fuzzy
+msgid "Existing legal structures"
+msgstr "Existerande filer"
+
+#: plugins/contribtracker/www/global_admin.php:309
+#, fuzzy
+msgid "Register new legal structure"
+msgstr "Registrera nytt projekt"
+
+#: plugins/contribtracker/www/global_admin.php:313
+#, fuzzy
+msgid "Existing roles"
+msgstr "Existerande filer"
+
+#: plugins/contribtracker/www/global_admin.php:343
+#, fuzzy
+msgid "No roles currently defined."
+msgstr "Inga filer bifogade förnärvarande"
+
+#: plugins/contribtracker/www/global_admin.php:348
+#, fuzzy
+msgid "Register new role"
+msgstr "Registrera nytt projekt"
+
+#: plugins/contribtracker/www/global_admin.php:355
+#, fuzzy
+msgid "Register a new role"
+msgstr "Registrera nytt projekt"
+
+#: plugins/contribtracker/www/global_admin.php:359
+#: plugins/contribtracker/www/global_admin.php:376
+#, fuzzy
+msgid "Role name:"
+msgstr "Verkligt namn"
+
+#: plugins/contribtracker/www/global_admin.php:360
+#: plugins/contribtracker/www/global_admin.php:377
+#, fuzzy
+msgid "Role description:"
+msgstr "Beskrivning:"
+
+#: plugins/contribtracker/www/global_admin.php:362
+#: plugins/contribtracker/www/global_admin.php:390
+#: plugins/contribtracker/www/global_admin.php:431
+#: plugins/contribtracker/www/project_admin.php:188
+#: www/account/pending-resend.php:78 www/activity/index.php:160
+#: www/admin/admin_table.php:204 www/admin/cronman.php:38
+#: www/admin/index.php:128 www/include/vote_function.php:267
+#: www/my/bookmark_add.php:51 www/my/bookmark_edit.php:64
+#: www/news/admin/index.php:155 www/news/admin/index.php:298
+#: www/news/news_utils.php:52 www/news/submit.php:159 www/pm/add_task.php:42
+#: www/pm/add_task.php:124 www/pm/add_task.php:138 www/pm/admin/index.php:221
+#: www/pm/admin/index.php:267 www/pm/admin/index.php:306
+#: www/pm/deletetask.php:36 www/pm/mod_task.php:37 www/pm/mod_task.php:195
+#: www/project/admin/editimages.php:241 www/project/admin/roleedit.php:272
+#: www/project/request.php:67 www/register/projectinfo.php:190
+#: www/survey/include/SurveyHTML.class.php:537 www/tracker/add.php:26
+#: www/tracker/add.php:56 www/tracker/add.php:118
+#: www/tracker/admin/form-addcanned.php:51
+#: www/tracker/admin/form-addextrafield.php:120
+#: www/tracker/admin/form-addextrafieldoption.php:83
+#: www/tracker/admin/form-clonetracker.php:37
+#: www/tracker/admin/form-customizelist.php:63
+#: www/tracker/admin/form-extrafieldcopy.php:76
+#: www/tracker/admin/form-updatecanned.php:28
+#: www/tracker/admin/form-updateextrafield.php:57
+#: www/tracker/admin/form-updateextrafieldelement.php:49
+#: www/tracker/admin/form-updatetracker.php:50
+#: www/tracker/admin/form-uploadtemplate.php:18
+#: www/tracker/admin/form-workflow.php:105
+#: www/tracker/admin/form-workflow_roles.php:56 www/tracker/admin/ind.php:152
+#: www/tracker/mod-limited.php:50
+msgid "Submit"
+msgstr "Lämna In"
+
+#: plugins/contribtracker/www/global_admin.php:369
+#, fuzzy
+msgid "Edit a role"
+msgstr "Redigera en grupp"
+
+#: plugins/contribtracker/www/global_admin.php:379
+#: plugins/contribtracker/www/global_admin.php:405
+#: plugins/contribtracker/www/global_admin.php:469
+#: plugins/contribtracker/www/project_admin.php:209
+#: www/admin/configman.php:248
+msgid "Save"
+msgstr ""
+
+#: plugins/contribtracker/www/global_admin.php:385
+#, fuzzy
+msgid "Register a new legal structure"
+msgstr "Registrera nytt projekt"
+
+#: plugins/contribtracker/www/global_admin.php:389
+#: plugins/contribtracker/www/global_admin.php:404
+msgid "Structure name:"
+msgstr ""
+
+#: plugins/contribtracker/www/global_admin.php:397
+msgid "Edit a legal structure"
+msgstr ""
+
+#: plugins/contribtracker/www/global_admin.php:411
+#, fuzzy
+msgid "Register a new actor"
+msgstr "Registrera nytt projekt"
+
+#: plugins/contribtracker/www/global_admin.php:415
+#: plugins/contribtracker/www/global_admin.php:445
+#, fuzzy
+msgid "Actor name:"
+msgstr "Användarnamn:"
+
+#: plugins/contribtracker/www/global_admin.php:416
+#: plugins/contribtracker/www/global_admin.php:446
+#, fuzzy
+msgid "Actor address:"
+msgstr "Din e-postadress"
+
+#: plugins/contribtracker/www/global_admin.php:417
+#: plugins/contribtracker/www/global_admin.php:447
+msgid "Actor email:"
+msgstr ""
+
+#: plugins/contribtracker/www/global_admin.php:418
+#: plugins/contribtracker/www/global_admin.php:448
+#, fuzzy
+msgid "Actor description:"
+msgstr "Kort beskrivning"
+
+#: plugins/contribtracker/www/global_admin.php:420
+#: plugins/contribtracker/www/global_admin.php:450
+#, php-format
+msgid "Actor logo (PNG, %d kB max):"
+msgstr ""
+
+#: plugins/contribtracker/www/global_admin.php:422
+#: plugins/contribtracker/www/global_admin.php:456
+#: plugins/contribtracker/www/index.php:128
+msgid "Legal structure:"
+msgstr ""
+
+#: plugins/contribtracker/www/global_admin.php:438
+#, fuzzy
+msgid "Edit an actor"
+msgstr "Redigera en grupp"
+
+#: plugins/contribtracker/www/index.php:18
+#, fuzzy
+msgid "Group:"
+msgstr "Grupp"
+
+#: plugins/contribtracker/www/index.php:25
+#: plugins/contribtracker/www/project_admin.php:284
+#, fuzzy
+msgid "Date:"
+msgstr "Datum"
+
+#: plugins/contribtracker/www/index.php:29
+#: plugins/contribtracker/www/index.php:129
+#: plugins/contribtracker/www/project_admin.php:288
+#: www/mail/admin/index.php:170 www/mail/admin/index.php:202
+#: www/snippet/package.php:135
+msgid "Description:"
+msgstr "Beskrivning:"
+
+#: plugins/contribtracker/www/index.php:34
+#: plugins/contribtracker/www/project_admin.php:216
+#: plugins/contribtracker/www/project_admin.php:293
+msgid "Participant:"
+msgid_plural "Participants:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugins/contribtracker/www/index.php:41
+#: plugins/contribtracker/www/project_admin.php:223
+#: plugins/contribtracker/www/project_admin.php:300
+#, php-format
+msgid "%s: %s (%s)"
+msgstr ""
+
+#: plugins/contribtracker/www/index.php:80
+#: plugins/contribtracker/www/project_admin.php:198
+#, fuzzy
+msgid "Contribution details"
+msgstr "E-postbrev med instruktioner skickat"
+
+#: plugins/contribtracker/www/index.php:91
+#: plugins/contribtracker/www/index.php:104
+#, fuzzy, php-format
+msgid "Contributions for project %s"
+msgstr "Statistik för projektdatabaser"
+
+#: plugins/contribtracker/www/index.php:101
+#: plugins/contribtracker/www/index.php:165
+#, fuzzy
+msgid "No contributions"
+msgstr "Visa Dokumentation"
+
+#: plugins/contribtracker/www/index.php:120
+msgid "Actor details"
+msgstr ""
+
+#: plugins/contribtracker/www/index.php:122
+#, php-format
+msgid "Actor details for %s"
+msgstr ""
+
+#: plugins/contribtracker/www/index.php:125
+#, fuzzy
+msgid "Name:"
+msgstr "Namn"
+
+#: plugins/contribtracker/www/index.php:126 www/account/index.php:178
+#: www/account/index.php:185 www/account/register.php:175
+#: www/account/register.php:179 www/include/user_home.php:69
+msgid "Address:"
+msgstr ""
+
+#: plugins/contribtracker/www/index.php:127 www/admin/useredit.php:183
+msgid "Email:"
+msgstr "E-post:"
+
+#: plugins/contribtracker/www/index.php:138
+#, php-format
+msgid "%s hasn't been involved in any contributions yet"
+msgstr ""
+
+#: plugins/contribtracker/www/index.php:141
+#, fuzzy, php-format
+msgid "Contribution by %s"
+msgid_plural "Contributions by %s"
+msgstr[0] "Fortsätt >>"
+msgstr[1] "Fortsätt >>"
+
+#: plugins/contribtracker/www/index.php:150
+#, fuzzy
+msgid "Project:"
+msgstr "Projekt"
+
+#: plugins/contribtracker/www/index.php:154
+#, fuzzy
+msgid "Role:"
+msgstr "Mina projekt"
+
+#: plugins/contribtracker/www/index.php:160
+#, fuzzy
+msgid "Contributions"
+msgstr "Fortsätt >>"
+
+#: plugins/contribtracker/www/index.php:166
+msgid "No contributions have been recorded yet."
+msgstr ""
+
+#: plugins/contribtracker/www/index.php:168
+#, fuzzy
+msgid "Latest contributions"
+msgstr "Språkfördelning"
+
+#: plugins/contribtracker/www/project_admin.php:21
+#, php-format
+msgid "Contribution tracker for project %s"
+msgstr ""
+
+#: plugins/contribtracker/www/project_admin.php:179
+msgid "Register a new contribution"
+msgstr ""
+
+#: plugins/contribtracker/www/project_admin.php:184
+#: plugins/contribtracker/www/project_admin.php:205
+#, fuzzy
+msgid "Contribution name:"
+msgstr "Fortsätt >>"
+
+#: plugins/contribtracker/www/project_admin.php:185
+#: plugins/contribtracker/www/project_admin.php:206
+#, fuzzy
+msgid "Contribution date:"
+msgstr "Fortsätt >>"
+
+#: plugins/contribtracker/www/project_admin.php:186
+#: plugins/contribtracker/www/project_admin.php:207
+#, fuzzy
+msgid "Contribution description:"
+msgstr "Kort beskrivning"
+
+#: plugins/contribtracker/www/project_admin.php:194
+#, fuzzy
+msgid "Edit a contribution"
+msgstr "Redigera en fråga"
+
+#: plugins/contribtracker/www/project_admin.php:213
+#, fuzzy
+msgid "Current participants"
+msgstr "Gällande databaser"
+
+#: plugins/contribtracker/www/project_admin.php:241
+msgid "Move participant down"
+msgstr ""
+
+#: plugins/contribtracker/www/project_admin.php:242
+msgid "Move participant up"
+msgstr ""
+
+#: plugins/contribtracker/www/project_admin.php:249
+msgid "Add a participant"
+msgstr ""
+
+#: plugins/contribtracker/www/project_admin.php:272
+msgid "Add participant"
+msgstr ""
+
+#: plugins/contribtracker/www/project_admin.php:280
+#, fuzzy
+msgid "Existing contributions"
+msgstr "Visa existerande frågor"
+
+#: plugins/contribtracker/www/project_admin.php:325
+#, fuzzy
+msgid "No contributions for this project yet."
+msgstr "Inga sådana poster i detta projekt"
+
+#: plugins/contribtracker/www/project_admin.php:331
+#, fuzzy
+msgid "Add new contribution"
+msgstr "Lägg till ny databas"
+
+#: plugins/cvstracker/common/cvstrackerPlugin.class.php:62
+msgid "Links to related CVS commits"
+msgstr ""
+
+#: plugins/cvstracker/common/cvstrackerPlugin.class.php:89
+msgid "No commits have been made."
+msgstr ""
+
+#: plugins/cvstracker/common/cvstrackerPlugin.class.php:101
+#: plugins/svntracker/common/svntrackerPlugin.class.php:93
+#: www/frs/index.php:99
+msgid "Filename"
+msgstr "Filnamn"
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:103
 #: plugins/svntracker/common/svntrackerPlugin.class.php:95
@@ -2242,7 +2878,7 @@ msgstr ""
 #: www/pm/admin/index.php:193
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:37
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:34
-#: www/snippet/browse.php:64 www/snippet/snippet_utils.php:140
+#: www/snippet/browse.php:71 www/snippet/snippet_utils.php:140
 #: www/snippet/submit.php:88 www/tracker/admin/form-addcanned.php:24
 #: www/tracker/admin/form-addcanned.php:45
 #: www/tracker/admin/form-updatecanned.php:22
@@ -2305,7 +2941,7 @@ msgstr ""
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:100
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:233
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:234
-#: www/admin/groupedit.php:143 www/forum/admin/index.php:96
+#: www/admin/groupedit.php:142 www/forum/admin/index.php:96
 #: www/forum/admin/index.php:100 www/forum/admin/index.php:146
 #: www/forum/admin/index.php:151 www/forum/admin/index.php:230
 #: www/mail/admin/index.php:168 www/mail/admin/index.php:199
@@ -2321,7 +2957,7 @@ msgstr "Ja"
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:100
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:233
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:234
-#: www/admin/groupedit.php:142 www/forum/admin/index.php:97
+#: www/admin/groupedit.php:141 www/forum/admin/index.php:97
 #: www/forum/admin/index.php:101 www/forum/admin/index.php:147
 #: www/forum/admin/index.php:152 www/forum/admin/index.php:231
 #: www/mail/admin/index.php:169 www/mail/admin/index.php:200
@@ -2333,39 +2969,10 @@ msgstr "Ja"
 msgid "No"
 msgstr "Nej"
 
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:104
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:275
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:327
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:355
-#: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:386
-#: www/admin/admin_table.php:141 www/admin/admin_table.php:270
-#: www/admin/responses_admin.php:47 www/admin/trove/trove_cat_edit.php:159
-#: www/admin/useredit.php:201 www/docman/admin/index.php:471
-#: www/docman/admin/index.php:492 www/forum/admin/ForumAdmin.class.php:63
-#: www/forum/admin/index.php:184 www/forum/admin/index.php:195
-#: www/forum/include/AttachManager.class.php:149
-#: www/frs/admin/deletepackage.php:76 www/frs/admin/deleterelease.php:81
-#: www/frs/admin/index.php:188 www/frs/admin/showreleases.php:115
-#: www/my/index.php:409 www/news/admin/index.php:133
-#: www/people/people_utils.php:174 www/people/people_utils.php:317
-#: www/people/skills_utils.php:32 www/people/skills_utils.php:90
-#: www/pm/admin/index.php:389 www/pm/admin/index.php:400
-#: www/project/admin/vhost.php:142 www/reporting/timeadd.php:181
-#: www/snippet/detail.php:55 www/survey/include/SurveyHTML.class.php:306
-#: www/tracker/admin/form-addextrafield.php:36
-#: www/tracker/admin/form-deleteextrafield.php:19
-#: www/tracker/admin/form-deletetracker.php:13
-#: www/tracker/admin/tracker.php:17
-#: www/tracker/include/ArtifactTypeHtml.class.php:115
-#: www/tracker/mod-limited.php:160 www/tracker/mod-limited.php:170
-#: www/tracker/mod.php:54 www/tracker/mod.php:261 www/tracker/mod.php:271
-msgid "Delete"
-msgstr "Ta bort"
-
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:107
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:157
-#: www/admin/admin_table.php:58 www/admin/admin_table.php:144
-#: www/admin/admin_table.php:201 www/forum/include/ForumHTML.class.php:514
+#: www/admin/admin_table.php:58 www/admin/admin_table.php:149
+#: www/admin/admin_table.php:206 www/forum/include/ForumHTML.class.php:514
 #: www/my/rmproject.php:90 www/people/editprofile.php:144
 #: www/people/editprofile.php:204 www/pm/mod_task.php:228
 #: www/register/projectinfo.php:190 www/reporting/timeadd.php:198
@@ -2443,61 +3050,45 @@ msgid "Edit associated forges for global search"
 msgstr ""
 
 #: plugins/globalsearch/www/edit_assoc_sites.php:35
-#: www/admin/admin_table.php:300
+#: www/admin/admin_table.php:337
 msgid "Site Admin Home"
 msgstr ""
 
-#: plugins/globalsearch/www/index.php:85
+#: plugins/globalsearch/www/index.php:84
 #, fuzzy
 msgid "Search must be at least three characters"
 msgstr "Lösenord måste ha minst 6 tecken."
 
-#: plugins/globalsearch/www/index.php:91
+#: plugins/globalsearch/www/index.php:90
 msgid "Enter Your Search Words Above"
 msgstr ""
 
-#: plugins/globalsearch/www/index.php:138
+#: plugins/globalsearch/www/index.php:154
 #, fuzzy, php-format
 msgid "No matches found for %1$s"
 msgstr "Hittade inga forum för %1$s"
 
-#: plugins/globalsearch/www/index.php:148
+#: plugins/globalsearch/www/index.php:164
 #, fuzzy, php-format
 msgid "Search results for %1$s"
 msgstr "Forum för %1$s"
 
-#: plugins/globalsearch/www/index.php:153
+#: plugins/globalsearch/www/index.php:169
 #, fuzzy
 msgid "Project Name"
 msgstr "Nytt projektnamn"
 
-#: plugins/globalsearch/www/index.php:155 www/docman/admin/index.php:210
-#: www/docman/new.php:134 www/forum/admin/index.php:93
-#: www/forum/admin/index.php:165 www/forum/index.php:60
-#: www/forum/myforums.php:72 www/help/trove_cat.php:50 www/mail/index.php:61
-#: www/pm/admin/index.php:300 www/pm/admin/index.php:349 www/pm/index.php:68
-#: www/project/admin/editimages.php:232 www/project/admin/editimages.php:259
-#: www/project/admin/editimages.php:275
-#: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:38
-#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:33
-#: www/snippet/submit.php:92 www/tracker/admin/form-updatetracker.php:22
-#: www/tracker/admin/ind.php:96 www/tracker/admin/ind.php:128
-#: www/tracker/browse.php:363 www/tracker/ind.php:45
-#: www/tracker/mod-limited.php:162
-msgid "Description"
-msgstr "Beskrivning"
-
-#: plugins/globalsearch/www/index.php:157
+#: plugins/globalsearch/www/index.php:173
 #, fuzzy
 msgid "Forge"
 msgstr "Mer"
 
-#: plugins/globalsearch/www/index.php:192
+#: plugins/globalsearch/www/index.php:208
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:126
 msgid "Previous Results"
 msgstr ""
 
-#: plugins/globalsearch/www/index.php:200
+#: plugins/globalsearch/www/index.php:216
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:133
 msgid "Next Results"
 msgstr ""
@@ -2794,7 +3385,7 @@ msgid "Navigation"
 msgstr ""
 
 #: plugins/projects_hierarchy/www/softwaremap.php:43
-#: www/softwaremap/trove_list.php:57 www/trove/TroveCategory.class.php:67
+#: www/softwaremap/trove_list.php:57 www/trove/TroveCategory.class.php:65
 msgid "Invalid Trove Category"
 msgstr "Ogiltig resurskategori"
 
@@ -2819,41 +3410,41 @@ msgstr ""
 msgid "By Tree"
 msgstr ""
 
-#: plugins/projects_hierarchy/www/softwaremap.php:125
+#: plugins/projects_hierarchy/www/softwaremap.php:129
 msgid "Now limiting view to projects in the following categories"
 msgstr "Begränsar nu vyn till projekt i följande kategorier"
 
-#: plugins/projects_hierarchy/www/softwaremap.php:132
-#: www/softwaremap/trove_list.php:140
+#: plugins/projects_hierarchy/www/softwaremap.php:136
+#: www/softwaremap/trove_list.php:138
 msgid "Remove This Filter"
 msgstr "Ta bort detta filter"
 
-#: plugins/projects_hierarchy/www/softwaremap.php:193
-#: www/softwaremap/trove_list.php:194 www/trove/index.php:140
+#: plugins/projects_hierarchy/www/softwaremap.php:197
+#: www/softwaremap/trove_list.php:192 www/trove/index.php:140
 #, php-format
 msgid "%1$s projects"
 msgstr "%1$s projekt"
 
-#: plugins/projects_hierarchy/www/softwaremap.php:209
-#: www/softwaremap/trove_list.php:210 www/trove/index.php:83
+#: plugins/projects_hierarchy/www/softwaremap.php:213
+#: www/softwaremap/trove_list.php:208 www/trove/index.php:83
 msgid "Browse By"
 msgstr "Bläddra efter:"
 
-#: plugins/projects_hierarchy/www/softwaremap.php:264
-#: www/softwaremap/full_list.php:92 www/softwaremap/trove_list.php:256
+#: plugins/projects_hierarchy/www/softwaremap.php:260
+#: www/softwaremap/full_list.php:92 www/softwaremap/trove_list.php:246
 #, php-format
 msgid "More than <strong>%1$s</strong> projects in result set."
 msgstr "Mer än <strong>%1$s</strong> projekt i resultatmängden."
 
-#: plugins/projects_hierarchy/www/softwaremap.php:267
-#: www/softwaremap/trove_list.php:259
+#: plugins/projects_hierarchy/www/softwaremap.php:263
+#: www/softwaremap/trove_list.php:249
 #, fuzzy, php-format
 msgid "<strong>%1$s</strong> project in result set."
 msgid_plural "<strong>%1$s</strong> projects in result set."
 msgstr[0] "<strong>%1$s</strong> projekt i resultatmängden."
 msgstr[1] "<strong>%1$s</strong> projekt i resultatmängden."
 
-#: plugins/projects_hierarchy/www/softwaremap.php:391
+#: plugins/projects_hierarchy/www/softwaremap.php:387
 #: www/softwaremap/full_list.php:59 www/softwaremap/tag_cloud.php:64
 #: www/softwaremap/trove_list.php:73
 msgid "Project Tree"
@@ -3492,7 +4083,7 @@ msgid ""
 msgstr ""
 
 #: www/account/change_email-complete.php:77 www/account/change_email.php:93
-#: www/account/lostpw.php:97 www/account/unsubscribe.php:75
+#: www/account/lostpw.php:97 www/account/unsubscribe.php:78
 #: www/my/bookmark_edit.php:68
 msgid "Return"
 msgstr "Återgå"
@@ -3645,8 +4236,8 @@ msgid ""
 "your file is what you expected.</em>"
 msgstr ""
 
-#: www/account/editsshkeys.php:86 www/account/index.php:277
-#: www/account/lostlogin.php:110 www/admin/groupedit.php:206
+#: www/account/editsshkeys.php:86 www/account/index.php:290
+#: www/account/lostlogin.php:110 www/admin/groupedit.php:204
 #: www/admin/trove/trove_cat_edit.php:159 www/admin/useredit.php:206
 #: www/admin/vhost.php:191 www/forum/admin/ForumAdmin.class.php:378
 #: www/forum/admin/index.php:168 www/forum/include/ForumHTML.class.php:299
@@ -3723,73 +4314,67 @@ msgstr "Användar-ID:"
 msgid "Login name:"
 msgstr "Inloggningsnamn:"
 
-#: www/account/index.php:132 www/account/register.php:136
+#: www/account/index.php:133 www/account/register.php:136
 msgid "First Name:"
 msgstr ""
 
-#: www/account/index.php:138 www/account/register.php:140
+#: www/account/index.php:140 www/account/register.php:140
 msgid "Last Name:"
 msgstr ""
 
-#: www/account/index.php:144
+#: www/account/index.php:147
 msgid "Language:"
 msgstr "Språk"
 
-#: www/account/index.php:150 www/account/register.php:148
+#: www/account/index.php:153 www/account/register.php:148
 msgid "Timezone:"
 msgstr "Tidszon:"
 
-#: www/account/index.php:156
+#: www/account/index.php:159
 msgid "Theme:"
 msgstr ""
 
-#: www/account/index.php:162 www/account/register.php:156
+#: www/account/index.php:165 www/account/register.php:156
 msgid "Country:"
 msgstr ""
 
-#: www/account/index.php:168
+#: www/account/index.php:171
 msgid "Email Addr:"
 msgstr "e-postadress:"
 
-#: www/account/index.php:170
+#: www/account/index.php:173
 msgid "Change Email Addr"
 msgstr "Byt e-postadress"
 
-#: www/account/index.php:175 www/account/index.php:180
-#: www/account/register.php:175 www/account/register.php:179
-#: www/include/user_home.php:69
-msgid "Address:"
-msgstr ""
-
-#: www/account/index.php:185 www/account/register.php:183
+#: www/account/index.php:192 www/account/register.php:183
 #: www/include/user_home.php:76
 msgid "Phone:"
 msgstr ""
 
-#: www/account/index.php:190 www/account/register.php:187
+#: www/account/index.php:199 www/account/register.php:187
 #: www/include/user_home.php:83
 msgid "FAX:"
 msgstr ""
 
-#: www/account/index.php:195 www/account/register.php:132
+#: www/account/index.php:206 www/account/register.php:132
 #: www/snippet/package.php:131
 msgid "Title:"
 msgstr "Rubrik:"
 
-#: www/account/index.php:202 www/account/register.php:166
+#: www/account/index.php:215 www/account/register.php:166
 msgid "Jabber Address:"
 msgstr "Jabberadress:"
 
-#: www/account/index.php:206 www/account/register.php:170
+#: www/account/index.php:219 www/account/register.php:170
 msgid "Send auto-generated notices only to my Jabber address"
 msgstr ""
 "Skicka automatiskt genererade meddelanden endast till min Jabber adress"
 
-#: www/account/index.php:217
+#: www/account/index.php:230
 msgid "Preferences"
 msgstr "Inställningar"
 
-#: www/account/index.php:221 www/account/register.php:192
+#: www/account/index.php:234 www/account/register.php:192
 msgid ""
 "Receive Email about Site Updates <i>(Very low traffic and includes security "
 "notices. Highly Recommended.)</i>"
@@ -3797,11 +4382,11 @@ msgstr ""
 "Erhåll e-post om webbplatsuppdateringar <i>(Mycket låg trafik samt "
 "inkluderar säkerhetsvarningar. Rekommenderas.)</i>"
 
-#: www/account/index.php:225 www/account/register.php:196
+#: www/account/index.php:238 www/account/register.php:196
 msgid "Receive additional community mailings. <i>(Low traffic.)</i>"
 msgstr "Ta emot ytterligare brev från gruppen. <i>(Låg trafik.)</i>"
 
-#: www/account/index.php:236
+#: www/account/index.php:249
 #, php-format
 msgid ""
 "Participate in peer ratings. <i>(Allows you to rate other users using "
@@ -3810,23 +4395,23 @@ msgid ""
 "participate in ratings.)</i>"
 msgstr ""
 
-#: www/account/index.php:254
+#: www/account/index.php:267
 msgid "Shell Account Information"
 msgstr "Skalkontoinformation"
 
-#: www/account/index.php:256
+#: www/account/index.php:269
 msgid "Shell box"
 msgstr "Skal låda"
 
-#: www/account/index.php:257
+#: www/account/index.php:270
 msgid "SSH Shared Authorized Keys"
 msgstr "CVS/SSH utdelade auktoriserade nycklar"
 
-#: www/account/index.php:266
+#: www/account/index.php:279
 msgid "Edit Keys"
 msgstr "Redigera nycklar"
 
-#: www/account/index.php:278
+#: www/account/index.php:291
 msgid "Reset Changes"
 msgstr "Återställ ändringar"
 
@@ -4014,36 +4599,6 @@ msgstr ""
 msgid "Login name or email address:"
 msgstr "Ogiltig e-postadress"
 
-#: www/account/pending-resend.php:78 www/activity/index.php:160
-#: www/admin/admin_table.php:199 www/admin/cronman.php:38
-#: www/admin/index.php:126 www/include/vote_function.php:267
-#: www/my/bookmark_add.php:51 www/my/bookmark_edit.php:64
-#: www/news/admin/index.php:155 www/news/admin/index.php:298
-#: www/news/news_utils.php:52 www/news/submit.php:159 www/pm/add_task.php:42
-#: www/pm/add_task.php:124 www/pm/add_task.php:138 www/pm/admin/index.php:221
-#: www/pm/admin/index.php:267 www/pm/admin/index.php:306
-#: www/pm/deletetask.php:36 www/pm/mod_task.php:37 www/pm/mod_task.php:195
-#: www/project/admin/editimages.php:241 www/project/admin/roleedit.php:272
-#: www/project/request.php:67 www/register/projectinfo.php:190
-#: www/survey/include/SurveyHTML.class.php:537 www/tracker/add.php:26
-#: www/tracker/add.php:56 www/tracker/add.php:118
-#: www/tracker/admin/form-addcanned.php:51
-#: www/tracker/admin/form-addextrafield.php:120
-#: www/tracker/admin/form-addextrafieldoption.php:84
-#: www/tracker/admin/form-clonetracker.php:37
-#: www/tracker/admin/form-customizelist.php:63
-#: www/tracker/admin/form-extrafieldcopy.php:76
-#: www/tracker/admin/form-updatecanned.php:28
-#: www/tracker/admin/form-updateextrafield.php:57
-#: www/tracker/admin/form-updateextrafieldelement.php:49
-#: www/tracker/admin/form-updatetracker.php:50
-#: www/tracker/admin/form-uploadtemplate.php:14
-#: www/tracker/admin/form-workflow.php:105
-#: www/tracker/admin/form-workflow_roles.php:56 www/tracker/admin/ind.php:151
-#: www/tracker/deleteartifact.php:31 www/tracker/mod-limited.php:50
-msgid "Submit"
-msgstr "Lämna In"
-
 #: www/account/register.php:74
 msgid "You can't register an account unless you accept the terms of use."
 msgstr ""
@@ -4107,12 +4662,12 @@ msgstr ""
 msgid "Register"
 msgstr "Registrera"
 
-#: www/account/unsubscribe.php:63 www/account/unsubscribe.php:65
+#: www/account/unsubscribe.php:63
 #, fuzzy
 msgid "Unsubscription Complete"
 msgstr "Registrering färdig"
 
-#: www/account/unsubscribe.php:68
+#: www/account/unsubscribe.php:67
 #, php-format
 msgid ""
 "You have been unsubscribed from all %1$s mailings and notifications. In case "
@@ -4120,7 +4675,7 @@ msgid ""
 "visit your Account Maintenance page."
 msgstr ""
 
-#: www/account/unsubscribe.php:70
+#: www/account/unsubscribe.php:69
 #, php-format
 msgid ""
 "You have been unsubscribed from %1$s site mailings. In case you will want to "
@@ -4178,10 +4733,6 @@ msgid ""
 msgstr ""
 "<p>Logga in nu för att göra klart din registrering. Ditt konto kommer "
 "därefter bli aktiverat för normal inloggning.</p>"
-
-#: www/activity/index.php:23
-msgid "%Y-%m-%d"
-msgstr ""
 
 #: www/activity/index.php:70 www/activity/index.php:148
 #: www/activity/index.php:199 www/include/Layout.class.php:554
@@ -4281,80 +4832,64 @@ msgstr ""
 
 #: www/admin/admin_table.php:54 www/admin/database.php:174
 #: www/admin/trove/trove_cat_add.php:126 www/admin/trove/trove_cat_list.php:41
-#: www/admin/trove/trove_cat_list.php:44 www/docman/admin/index.php:394
+#: www/admin/trove/trove_cat_list.php:44 www/docman/admin/index.php:396
 #: www/forum/include/AttachManager.class.php:160 www/pm/mod_task.php:228
 #: www/reporting/timeadd.php:198 www/reporting/timecategory.php:101
 #: www/trove/admin/trove_cat_add.php:92 www/trove/admin/trove_cat_list.php:32
 msgid "Add"
 msgstr ""
 
-#: www/admin/admin_table.php:87
+#: www/admin/admin_table.php:92 www/admin/admin_table.php:264
 #, php-format
 msgid "%1$s successfully added."
 msgstr ""
 
-#: www/admin/admin_table.php:107
+#: www/admin/admin_table.php:112
 #, php-format
 msgid ""
 "You can't delete the processor %1$s since it's currently referenced in a "
 "file release."
 msgstr ""
 
-#: www/admin/admin_table.php:116
+#: www/admin/admin_table.php:121
 #, php-format
 msgid ""
 "You can't delete the license %1$s since it's currently referenced in a "
 "project."
 msgstr ""
 
-#: www/admin/admin_table.php:124
+#: www/admin/admin_table.php:129
 #, php-format
 msgid ""
 "You can't delete the language %1$s since it's currently referenced in a user "
 "profile."
 msgstr ""
 
-#: www/admin/admin_table.php:135
+#: www/admin/admin_table.php:140
 #, php-format
 msgid "Are you sure you want to delete this %1$s?"
 msgstr ""
 
-#: www/admin/admin_table.php:161
+#: www/admin/admin_table.php:166
 #, php-format
 msgid "%1$s successfully deleted."
 msgstr ""
 
-#: www/admin/admin_table.php:181
+#: www/admin/admin_table.php:186
 #, php-format
 msgid "Modify the %1$s below:"
 msgstr ""
 
-#: www/admin/admin_table.php:229
+#: www/admin/admin_table.php:240
 #, php-format
 msgid "%1$s successfully modified."
 msgstr ""
 
-#: www/admin/admin_table.php:252
+#: www/admin/admin_table.php:289
 msgid "add new"
 msgstr ""
 
-#: www/admin/admin_table.php:269 www/admin/responses_admin.php:46
-#: www/admin/responses_admin.php:93 www/admin/trove/trove_cat_list.php:43
-#: www/docman/admin/index.php:446 www/forum/admin/ForumAdmin.class.php:62
-#: www/forum/include/AttachManager.class.php:148
-#: www/frs/admin/showreleases.php:112 www/people/skills_utils.php:31
-#: www/people/skills_utils.php:89 www/project/admin/editimages.php:268
-#: www/project/admin/editimages.php:299 www/project/admin/index.php:210
-#: www/survey/include/SurveyHTML.class.php:304
-#: www/survey/include/SurveyHTML.class.php:352
-#: www/survey/include/SurveyHTML.class.php:412
-#: www/tracker/admin/form-addextrafield.php:33
-#: www/tracker/admin/form-addextrafield.php:56
-#: www/trove/admin/trove_cat_list.php:35
-msgid "Edit"
-msgstr ""
-
-#: www/admin/admin_table.php:297 www/admin/admin_table.php:299
+#: www/admin/admin_table.php:334 www/admin/admin_table.php:336
 #, php-format
 msgid "Edit the %1$ss Table"
 msgstr ""
@@ -4434,11 +4969,11 @@ msgstr ""
 msgid "License:"
 msgstr "Licens:"
 
-#: www/admin/approve-pending.php:193 www/admin/groupedit.php:166
+#: www/admin/approve-pending.php:193 www/admin/groupedit.php:164
 msgid "Home Box:"
 msgstr "Hemlåda:"
 
-#: www/admin/approve-pending.php:197 www/admin/groupedit.php:176
+#: www/admin/approve-pending.php:197 www/admin/groupedit.php:174
 msgid "HTTP Domain:"
 msgstr "HTTP Domän:"
 
@@ -4446,7 +4981,7 @@ msgstr "HTTP Domän:"
 msgid "Other Information"
 msgstr "Annan information"
 
-#: www/admin/approve-pending.php:206 www/admin/groupedit.php:153
+#: www/admin/approve-pending.php:206 www/admin/groupedit.php:151
 msgid "Unix Group Name:"
 msgstr "Unixgruppnamn:"
 
@@ -4471,15 +5006,15 @@ msgstr "Inlämnad av"
 msgid "Approve All On This Page"
 msgstr "Godkänn alla på denna sida"
 
-#: www/admin/configman.php:59
+#: www/admin/configman.php:59 www/admin/configman.php:184
+#, php-format
 msgid ""
-"Could not open local.inc file for read/write. Check the permissions for "
-"apache"
+"Could not open %s file for read/write. Check the permissions for apache."
 msgstr ""
 
-#: www/admin/configman.php:66
-msgid ""
-"Could not open local.inc file for read. Check the permissions for apache"
+#: www/admin/configman.php:66 www/admin/configman.php:252
+#, php-format
+msgid "Could not open %s for read. Check the permissions for apache."
 msgstr ""
 
 #: www/admin/configman.php:95
@@ -4487,21 +5022,18 @@ msgid "Choose"
 msgstr ""
 
 #: www/admin/configman.php:149
-#, fuzzy
-msgid "File wrote successfully."
+#, fuzzy, php-format
+msgid "File %s wrote successfully."
 msgstr "JOBB infogning lyckades"
 
 #: www/admin/configman.php:152
-msgid "File wasn't written or is empty."
+#, php-format
+msgid "File %s wasn't written or is empty."
 msgstr ""
 
 #: www/admin/configman.php:156
-msgid "Could not open the file for write. Check the permissions for apache"
-msgstr ""
-
-#: www/admin/configman.php:184
-msgid ""
-"Could not open the file for read/write. Check the permissions for apache"
+#, php-format
+msgid "Could not open %s for write. Check the permissions for apache."
 msgstr ""
 
 #: www/admin/configman.php:193 www/admin/configman.php:209
@@ -4521,14 +5053,6 @@ msgstr ""
 #, fuzzy
 msgid "Value"
 msgstr "Äldre Värde"
-
-#: www/admin/configman.php:248
-msgid "Save"
-msgstr ""
-
-#: www/admin/configman.php:252
-msgid "Could not open the file for read. Check the permissions for apache"
-msgstr ""
 
 #: www/admin/cronman.php:44
 msgid "Job"
@@ -4638,39 +5162,39 @@ msgstr "Webbplats admin: Gruppinfo"
 msgid "[Project Admin]"
 msgstr "[Projekt admin]"
 
-#: www/admin/groupedit.php:110 www/admin/groupedit.php:122
-#: www/admin/index.php:116 www/admin/index.php:122 www/admin/useredit.php:136
+#: www/admin/groupedit.php:109 www/admin/groupedit.php:121
+#: www/admin/index.php:118 www/admin/index.php:124 www/admin/useredit.php:136
 #: www/admin/useredit.php:142 www/project/admin/index.php:282
 msgid "Pending (P)"
 msgstr "Väntande (P)"
 
-#: www/admin/groupedit.php:120
+#: www/admin/groupedit.php:119
 msgid "Incomplete (I)"
 msgstr "Ofullständig (I)"
 
-#: www/admin/groupedit.php:121 www/admin/index.php:120
+#: www/admin/groupedit.php:120 www/admin/index.php:122
 #: www/admin/useredit.php:32 www/admin/useredit.php:137
 #: www/admin/useredit.php:143
 msgid "Active (A)"
 msgstr "Aktiv (A)"
 
-#: www/admin/groupedit.php:123
+#: www/admin/groupedit.php:122
 msgid "Holding (H)"
 msgstr "Väntar (H)"
 
-#: www/admin/groupedit.php:132 www/admin/grouplist.php:86
+#: www/admin/groupedit.php:131 www/admin/grouplist.php:86
 msgid "Public?"
 msgstr "Offentlig"
 
-#: www/admin/groupedit.php:185
+#: www/admin/groupedit.php:183
 msgid "Registration Application:"
 msgstr "Registreringsprogram:"
 
-#: www/admin/groupedit.php:195
+#: www/admin/groupedit.php:193
 msgid "SCM Box:"
 msgstr ""
 
-#: www/admin/groupedit.php:207
+#: www/admin/groupedit.php:205
 msgid "Resend New Project Instruction Email"
 msgstr "Skicka nytt e-postbrev med instruktioner för projekt"
 
@@ -4731,149 +5255,149 @@ msgstr "Visa användare innehållande :"
 msgid "Search <em>(userid, username, realname, email)</em>"
 msgstr ""
 
-#: www/admin/index.php:63 www/admin/index.php:110
+#: www/admin/index.php:64 www/admin/index.php:112
 msgid "get"
 msgstr "hämta"
 
-#: www/admin/index.php:67
+#: www/admin/index.php:68
 msgid "Register a New User"
 msgstr ""
 
-#: www/admin/index.php:72
+#: www/admin/index.php:73
 #, fuzzy
 msgid "Project Maintenance"
 msgstr "Gruppunderhåll"
 
-#: www/admin/index.php:80
+#: www/admin/index.php:81
 #, php-format
 msgid "Registered projects: <strong>%1$s</strong>"
 msgstr ""
 
-#: www/admin/index.php:87
+#: www/admin/index.php:88
 #, php-format
 msgid "Active projects: <strong>%1$s</strong>"
 msgstr ""
 
-#: www/admin/index.php:94
+#: www/admin/index.php:95
 #, php-format
 msgid "Pending projects: <strong>%1$s</strong>"
 msgstr ""
 
-#: www/admin/index.php:98
+#: www/admin/index.php:99
 #, fuzzy
 msgid "Display Full Project List/Edit Projects"
 msgstr "Visa full grupplista/redigera grupper"
 
-#: www/admin/index.php:100
+#: www/admin/index.php:101
 #, fuzzy
 msgid "Display Projects Beginning with:"
 msgstr "Visa grupper innehållande :"
 
-#: www/admin/index.php:107
+#: www/admin/index.php:108
 msgid "Search <em>(groupid, group unix name, full name)</em>"
 msgstr ""
 
-#: www/admin/index.php:115
+#: www/admin/index.php:117
 msgid "Register New Project"
 msgstr "Registrera nytt projekt"
 
-#: www/admin/index.php:116 www/admin/index.php:118
+#: www/admin/index.php:118 www/admin/index.php:120
 #, fuzzy
 msgid "Projects with status"
 msgstr "Projekttotaler"
 
-#: www/admin/index.php:116
+#: www/admin/index.php:118
 #, fuzzy
 msgid "(New Project Approval)"
 msgstr "%1$s projekt godkänt"
 
-#: www/admin/index.php:121
+#: www/admin/index.php:123
 msgid "Hold (H)"
 msgstr ""
 
-#: www/admin/index.php:128
+#: www/admin/index.php:130
 #, fuzzy
 msgid "Private Projects"
 msgstr "Privata grupper"
 
-#: www/admin/index.php:135
+#: www/admin/index.php:137
 msgid "Approve/Reject"
 msgstr "Godkänn/Avslå"
 
-#: www/admin/index.php:135
+#: www/admin/index.php:137
 msgid "Front-page news"
 msgstr ""
 
-#: www/admin/index.php:139 www/project/admin/project_admin_utils.php:78
+#: www/admin/index.php:141 www/project/admin/project_admin_utils.php:78
 msgid "Stats"
 msgstr "Stats"
 
-#: www/admin/index.php:142
+#: www/admin/index.php:144
 msgid "Site-Wide Stats"
 msgstr "Statistik för hela Webbplatsen"
 
-#: www/admin/index.php:146
+#: www/admin/index.php:148
 msgid "Trove Project Tree"
 msgstr "Projektträd över resurser"
 
-#: www/admin/index.php:149
+#: www/admin/index.php:151
 msgid "Display Trove Map"
 msgstr "Visa resurskartan"
 
-#: www/admin/index.php:150
+#: www/admin/index.php:152
 msgid "Add to the Trove Map"
 msgstr "Lägg till i resurskartan"
 
-#: www/admin/index.php:153
+#: www/admin/index.php:155
 msgid "Site Utilities"
 msgstr "Webbplatsverktyg"
 
-#: www/admin/index.php:155 www/admin/massmail.php:89
+#: www/admin/index.php:157 www/admin/massmail.php:89
 #, php-format
 msgid "Mail Engine for %1$s Subscribers"
 msgstr "E-postmotor för %1$s prenumeranter"
 
-#: www/admin/index.php:156
+#: www/admin/index.php:158
 msgid "Site Mailings Maintenance"
 msgstr "Webbplatspostunderhåll"
 
-#: www/admin/index.php:157
+#: www/admin/index.php:159
 msgid "Add, Delete, or Edit File Types"
 msgstr "Lägg till, ta bort eller redigera filtyper"
 
-#: www/admin/index.php:158
+#: www/admin/index.php:160
 msgid "Add, Delete, or Edit Processors"
 msgstr "Lägg till, ta bort eller redigera processorer"
 
-#: www/admin/index.php:159
+#: www/admin/index.php:161
 msgid "Add, Delete, or Edit Themes"
 msgstr "Lägg till, ta bort eller redigera teman"
 
-#: www/admin/index.php:160
+#: www/admin/index.php:162
 msgid "Add, Delete, or Edit Licenses"
 msgstr ""
 
-#: www/admin/index.php:161
+#: www/admin/index.php:163
 msgid "Recent logins"
 msgstr ""
 
-#: www/admin/index.php:162
+#: www/admin/index.php:164
 msgid "Cron Manager"
 msgstr ""
 
-#: www/admin/index.php:163
+#: www/admin/index.php:165
 msgid "Plugin Manager"
 msgstr ""
 
-#: www/admin/index.php:164
+#: www/admin/index.php:166
 msgid "Config Manager"
 msgstr ""
 
-#: www/admin/index.php:173
+#: www/admin/index.php:174
 msgid "Virtual Host Admin Tool"
 msgstr "Adminverktyg för virtuel värd"
 
-#: www/admin/index.php:177
+#: www/admin/index.php:178
 msgid "Project Database Administration"
 msgstr "Administration av projektdatabas"
 
@@ -4961,11 +5485,11 @@ msgid "Schedule for Mailing"
 msgstr "Schemaläggning för e-postande"
 
 #: www/admin/massmail.php:148 www/admin/search.php:94 www/admin/search.php:165
-#: www/docman/admin/index.php:365 www/my/dashboard.php:77 www/my/index.php:53
+#: www/docman/admin/index.php:367 www/my/dashboard.php:77 www/my/index.php:53
 #: www/my/index.php:96 www/my/index.php:145
 #: www/project/admin/editimages.php:269
 #: www/tracker/admin/form-addcanned.php:23 www/tracker/browse.php:158
-#: www/tracker/browse.php:359 www/tracker/query.php:176
+#: www/tracker/browse.php:360 www/tracker/query.php:176
 msgid "ID"
 msgstr "ID"
 
@@ -4982,8 +5506,8 @@ msgstr[1] ""
 
 #: www/admin/pluginman.php:81
 #, php-format
-msgid "%d group detached from plugin."
-msgid_plural "%d groups detached from plugin."
+msgid "%d project detached from plugin."
+msgid_plural "%d projects detached from plugin."
 msgstr[0] ""
 msgstr[1] ""
 
@@ -5161,10 +5685,6 @@ msgstr "Användarnamn:"
 #: www/top/topusers.php:69
 msgid "Real name"
 msgstr "Verkligt namn"
-
-#: www/admin/search.php:97 www/admin/unsubscribe.php:121
-msgid "Email"
-msgstr "E-post"
 
 #: www/admin/search.php:98
 msgid "Member since"
@@ -5371,10 +5891,6 @@ msgstr "Unixkonto status"
 #: www/admin/useredit.php:169
 msgid "Unix Shell:"
 msgstr "Unixskal:"
-
-#: www/admin/useredit.php:183
-msgid "Email:"
-msgstr "E-post:"
 
 #: www/admin/useredit.php:192
 msgid "Current confirm hash:"
@@ -5665,9 +6181,9 @@ msgstr "Filradering: Lyckad"
 msgid "Created successfully"
 msgstr "Skapande lyckades"
 
-#: www/docman/admin/index.php:192 www/docman/admin/index.php:347
-#: www/docman/admin/index.php:428 www/docman/admin/index.php:464
-#: www/docman/admin/index.php:482
+#: www/docman/admin/index.php:192 www/docman/admin/index.php:349
+#: www/docman/admin/index.php:430 www/docman/admin/index.php:466
+#: www/docman/admin/index.php:484
 msgid "Document Manager Administration"
 msgstr "Administration av dokumentansvarig"
 
@@ -5687,115 +6203,115 @@ msgstr ""
 "><strong>Beskrivning:</strong> En kort beskrivning som placeras precis under "
 "rubriken."
 
-#: www/docman/admin/index.php:203 www/docman/new.php:127
+#: www/docman/admin/index.php:205 www/docman/new.php:127
 msgid "Document Title"
 msgstr "Dokumentrubrik"
 
-#: www/docman/admin/index.php:203 www/docman/admin/index.php:210
+#: www/docman/admin/index.php:205 www/docman/admin/index.php:212
 #: www/docman/new.php:127 www/docman/new.php:134
 #, fuzzy, php-format
 msgid "(at least %1$s characters)"
 msgstr "Lösenord måste ha minst 6 tecken."
 
-#: www/docman/admin/index.php:217
+#: www/docman/admin/index.php:219
 msgid "File"
 msgstr "Fil"
 
-#: www/docman/admin/index.php:233
+#: www/docman/admin/index.php:235
 msgid ""
 "Edit the contents to your desire or leave them as they are to remain "
 "unmodified."
 msgstr ""
 
-#: www/docman/admin/index.php:265 www/docman/include/doc_utils.php:114
+#: www/docman/admin/index.php:267 www/docman/include/doc_utils.php:114
 #: www/docman/new.php:210 www/snippet/package.php:140
 #: www/snippet/submit.php:107 www/stats/i18n.php:19
 msgid "Language"
 msgstr "Språk"
 
-#: www/docman/admin/index.php:275 www/docman/new.php:216
+#: www/docman/admin/index.php:277 www/docman/new.php:216
 msgid "Group that document belongs in"
 msgstr "Grupp som dokumentet hör till:"
 
-#: www/docman/admin/index.php:286 www/pm/browse_task.php:358
+#: www/docman/admin/index.php:288 www/pm/browse_task.php:358
 #: www/project/admin/database.php:210
 #: www/tracker/admin/form-customizelist.php:26 www/tracker/browse.php:308
-#: www/tracker/browse.php:369 www/tracker/browse.php:554
+#: www/tracker/browse.php:370 www/tracker/browse.php:555
 #: www/tracker/detail.php:50 www/tracker/mod-limited.php:103
 #: www/tracker/mod.php:148 www/tracker/query.php:324
 msgid "State"
 msgstr "Status"
 
-#: www/docman/admin/index.php:313
+#: www/docman/admin/index.php:315
 msgid "Specify an outside URL where the file will be referenced"
 msgstr ""
 
-#: www/docman/admin/index.php:316
+#: www/docman/admin/index.php:318
 msgid "OPTIONAL: Upload new file"
 msgstr "VALFRITT: Överföra ny fil"
 
-#: www/docman/admin/index.php:332
+#: www/docman/admin/index.php:334
 msgid "Submit Edit"
 msgstr "Skicka redigering"
 
-#: www/docman/admin/index.php:333
+#: www/docman/admin/index.php:335
 msgid "Permanently delete this document"
 msgstr ""
 
-#: www/docman/admin/index.php:347 www/docman/admin/index.php:349
+#: www/docman/admin/index.php:349 www/docman/admin/index.php:351
 #, fuzzy
 msgid "Admin Document Groups"
 msgstr "Lägg till dokumentgrupper"
 
-#: www/docman/admin/index.php:366 www/docman/admin/index.php:435
+#: www/docman/admin/index.php:368 www/docman/admin/index.php:437
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:32
 #: www/stats/site_stats_utils.php:229
 msgid "Group Name"
 msgstr "Gruppnamn"
 
-#: www/docman/admin/index.php:367
+#: www/docman/admin/index.php:369
 #, fuzzy
 msgid "Delete Group"
 msgstr "Ta bort"
 
-#: www/docman/admin/index.php:377
+#: www/docman/admin/index.php:379
 msgid "No Document Groups defined"
 msgstr "Inga dokumentgrupper definierade"
 
-#: www/docman/admin/index.php:380
+#: www/docman/admin/index.php:382
 msgid "Add a group"
 msgstr "Lägg till en grupp"
 
-#: www/docman/admin/index.php:384
+#: www/docman/admin/index.php:386
 msgid "New Group Name"
 msgstr "Nytt gruppnamn"
 
-#: www/docman/admin/index.php:389 www/docman/admin/index.php:440
+#: www/docman/admin/index.php:391 www/docman/admin/index.php:442
 msgid "Belongs to"
 msgstr ""
 
-#: www/docman/admin/index.php:398 www/docman/admin/index.php:450
+#: www/docman/admin/index.php:400 www/docman/admin/index.php:452
 msgid ""
 "Group name will be used as a title, so it should be formatted "
 "correspondingly."
 msgstr ""
 "Gruppnamn kommer att användas som titel, så den bör formateras därefter."
 
-#: www/docman/admin/index.php:428 www/docman/admin/index.php:482
+#: www/docman/admin/index.php:430 www/docman/admin/index.php:484
 #, fuzzy
 msgid "Edit Groups"
 msgstr "Redigera en grupp"
 
-#: www/docman/admin/index.php:430
+#: www/docman/admin/index.php:432
 msgid "Edit a group"
 msgstr "Redigera en grupp"
 
-#: www/docman/admin/index.php:464
+#: www/docman/admin/index.php:466
 #, fuzzy
 msgid "Delete Groups"
 msgstr "Alla grupper"
 
-#: www/docman/admin/index.php:470
+#: www/docman/admin/index.php:472
 #, fuzzy
 msgid ""
 "You are about to permanently delete this document group and his content "
@@ -5803,37 +6319,37 @@ msgid ""
 msgstr ""
 "VARNING! Du är på väg att radera ett meddelande och alla dess uppföljare!!"
 
-#: www/docman/admin/index.php:487
+#: www/docman/admin/index.php:489
 msgid "You are about to permanently delete this document."
 msgstr ""
 
-#: www/docman/admin/index.php:489
+#: www/docman/admin/index.php:491
 #: www/tracker/admin/form-deleteextrafield.php:15
 #: www/tracker/admin/form-deletetracker.php:10
 msgid "I'm Sure."
 msgstr ""
 
-#: www/docman/admin/index.php:490
+#: www/docman/admin/index.php:492
 #: www/tracker/admin/form-deleteextrafield.php:16
 #: www/tracker/admin/form-deletetracker.php:11
 msgid "I'm Really Sure."
 msgstr ""
 
-#: www/docman/admin/index.php:519
+#: www/docman/admin/index.php:521
 #, fuzzy, php-format
 msgid "Project %s"
 msgstr "Projekt"
 
-#: www/docman/admin/index.php:519 www/docman/admin/index.php:522
+#: www/docman/admin/index.php:521 www/docman/admin/index.php:524
 msgid "Document Manager: Administration"
 msgstr "Dokumentansvarig: administration"
 
-#: www/docman/admin/index.php:524
+#: www/docman/admin/index.php:526
 #, fuzzy
 msgid "Add/Edit/Delete Document Groups"
 msgstr "Lägg till/Redigera dokumentgrupper"
 
-#: www/docman/admin/index.php:530 www/docman/index.php:120
+#: www/docman/admin/index.php:532 www/docman/index.php:120
 msgid "This project has no visible documents"
 msgstr "Detta projekt har inga synliga dokument"
 
@@ -5940,11 +6456,11 @@ msgstr ""
 msgid "With at least one of words"
 msgstr ""
 
-#: www/docman/search.php:148
+#: www/docman/search.php:145
 msgid "Database query error"
 msgstr ""
 
-#: www/docman/search.php:154
+#: www/docman/search.php:151
 msgid "Your search did not match any documents"
 msgstr ""
 
@@ -5954,7 +6470,7 @@ msgid "Exports Available"
 msgstr "Ingen statistik tillgänglig"
 
 #: www/export/projnews.php:81 www/forum/include/ForumHTML.class.php:79
-#: www/include/project_home.php:436 www/index_std.php:57
+#: www/include/project_home.php:443 www/index_std.php:57
 msgid "Latest News"
 msgstr "Senaste nyheterna"
 
@@ -6376,7 +6892,7 @@ msgstr "Posta jobb"
 #: www/themes/gforge-simple-theme/Theme.class.php:481
 #: www/themes/gforge/Theme.class.php:485 www/tracker/add.php:74
 #: www/tracker/admin/form-customizelist.php:24 www/tracker/browse.php:160
-#: www/tracker/browse.php:361 www/tracker/detail.php:72
+#: www/tracker/browse.php:362 www/tracker/detail.php:72
 #: www/tracker/mod-limited.php:115 www/tracker/mod.php:160
 #: www/tracker/query.php:178 www/tracker/query.php:345
 msgid "Summary"
@@ -6934,7 +7450,7 @@ msgstr "Eller %1$s skapa ett nytt paket %2$s"
 msgid "File Name"
 msgstr "Filnamn"
 
-#: www/frs/admin/qrs.php:264 www/include/project_home.php:251
+#: www/frs/admin/qrs.php:264 www/include/project_home.php:254
 msgid "Release Notes"
 msgstr "Utgåvonoteringar"
 
@@ -7006,7 +7522,7 @@ msgid "To create a new release click here."
 msgstr "För att skapa en ny utgåva klicka här."
 
 #: www/frs/index.php:97 www/frs/reporting/downloads.php:98
-#: www/include/project_home.php:191
+#: www/include/project_home.php:194
 msgid "Package"
 msgstr "Paket"
 
@@ -7032,7 +7548,7 @@ msgstr "Arkitektur"
 msgid "Stop monitoring this package"
 msgstr "Bevaka detta paket"
 
-#: www/frs/index.php:129 www/include/project_home.php:253
+#: www/frs/index.php:129 www/include/project_home.php:256
 msgid "Monitor this package"
 msgstr "Bevaka detta paket"
 
@@ -7465,14 +7981,14 @@ msgstr "Kodstycken"
 msgid "Project&nbsp;Openings"
 msgstr "Hjälp Önskas"
 
-#: www/include/Layout.class.php:575 www/include/project_home.php:354
+#: www/include/Layout.class.php:575 www/include/project_home.php:361
 #: www/themes/gforge-simple-theme/Theme.class.php:522
 #: www/themes/gforge/Theme.class.php:523
 msgid "Lists"
 msgstr "E-postlistor"
 
-#: www/include/Layout.class.php:596 www/include/project_home.php:386
-#: www/include/project_home.php:387 www/survey/include/SurveyHTML.class.php:53
+#: www/include/Layout.class.php:596 www/include/project_home.php:393
+#: www/include/project_home.php:394 www/survey/include/SurveyHTML.class.php:53
 #: www/survey/survey_utils.php:52
 #: www/themes/gforge-simple-theme/Theme.class.php:546
 #: www/themes/gforge/Theme.class.php:544
@@ -7606,13 +8122,13 @@ msgstr "Mest aktiv denna vecka"
 msgid "Recently Registered Projects"
 msgstr "Nyligen registrerade projekt"
 
-#: www/include/features_boxes.php:71 www/include/features_boxes.php:158
-#: www/include/features_boxes.php:180 www/include/features_boxes.php:205
+#: www/include/features_boxes.php:71 www/include/features_boxes.php:155
+#: www/include/features_boxes.php:174 www/include/features_boxes.php:192
 msgid "No Stats Available"
 msgstr "Ingen statistik tillgänglig"
 
-#: www/include/features_boxes.php:81 www/include/features_boxes.php:167
-#: www/include/features_boxes.php:189 www/include/features_boxes.php:214
+#: www/include/features_boxes.php:81 www/include/features_boxes.php:164
+#: www/include/features_boxes.php:183 www/include/features_boxes.php:201
 #: www/top/mostactive.php:77 www/top/mostactive.php:84
 msgid "More"
 msgstr "Mer"
@@ -7625,14 +8141,14 @@ msgstr "Värdprojekt"
 msgid "Registered Users"
 msgstr "Registrerade användare"
 
-#: www/include/features_boxes.php:161
+#: www/include/features_boxes.php:158
 msgid "m/d"
 msgstr "m/d"
 
 #: www/include/html.php:324 www/include/html.php:397 www/include/html.php:582
 #: www/pm/browse_task.php:317 www/pm/browse_task.php:348
-#: www/pm/browse_task.php:359 www/tracker/browse.php:539
-#: www/tracker/browse.php:551 www/tracker/browse.php:555
+#: www/pm/browse_task.php:359 www/tracker/browse.php:540
+#: www/tracker/browse.php:552 www/tracker/browse.php:556
 msgid "No Change"
 msgstr "Ingen förändring"
 
@@ -7692,7 +8208,7 @@ msgstr "Uppgift"
 msgid "No tag defined for this project"
 msgstr "Inga sådana poster i detta projekt"
 
-#: www/include/project_home.php:83 www/softwaremap/trove_list.php:318
+#: www/include/project_home.php:83 www/softwaremap/trove_list.php:308
 msgid "Registered:&nbsp;"
 msgstr "Registrerad:"
 
@@ -7740,116 +8256,116 @@ msgstr "Visa medlemmar"
 msgid "Request to join"
 msgstr ""
 
-#: www/include/project_home.php:184
+#: www/include/project_home.php:187
 msgid "Latest File Releases"
 msgstr "Senaste filutgåvorna"
 
-#: www/include/project_home.php:194 www/snippet/package.php:153
+#: www/include/project_home.php:197 www/snippet/package.php:153
 #: www/snippet/submit.php:120
 msgid "Version"
 msgstr "Version"
 
-#: www/include/project_home.php:200
+#: www/include/project_home.php:203
 msgid "Notes"
 msgstr "Anteckningar"
 
-#: www/include/project_home.php:200
+#: www/include/project_home.php:203
 #: www/tracker/include/ArtifactTypeHtml.class.php:64
 #: www/tracker/include/ArtifactTypeHtml.class.php:73 www/tracker/mod.php:38
 msgid "Monitor"
 msgstr ""
 
-#: www/include/project_home.php:203 www/include/project_home.php:256
+#: www/include/project_home.php:206 www/include/project_home.php:259
 #: www/new/index.php:104 www/tracker/detail.php:170 www/tracker/detail.php:175
 #: www/tracker/mod-limited.php:163 www/tracker/mod-limited.php:173
 #: www/tracker/mod.php:263 www/tracker/mod.php:273
 msgid "Download"
 msgstr "Hämta"
 
-#: www/include/project_home.php:230
+#: www/include/project_home.php:233
 msgid "This Project Has Not Released Any Files"
 msgstr "Detta projekt har inte släppt några filer"
 
-#: www/include/project_home.php:263
+#: www/include/project_home.php:266
 msgid "View All Project Files"
 msgstr "Visa alla projektfiler"
 
-#: www/include/project_home.php:278
+#: www/include/project_home.php:285
 msgid "Public Areas"
 msgstr "Öppet utrymme"
 
-#: www/include/project_home.php:283
+#: www/include/project_home.php:290
 msgid "Home Page"
 msgstr "Hemsida"
 
-#: www/include/project_home.php:284
+#: www/include/project_home.php:291
 msgid "Project Home Page"
 msgstr "Projekthemsida"
 
-#: www/include/project_home.php:305 www/include/project_summary.php:153
+#: www/include/project_home.php:312 www/include/project_summary.php:153
 msgid "There are no public trackers available"
 msgstr "Det finns inga offentliga ordningslistor tillgängliga"
 
-#: www/include/project_home.php:312 www/include/project_summary.php:158
+#: www/include/project_home.php:319 www/include/project_summary.php:158
 #, fuzzy, php-format
 msgid "(<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
 msgid_plural "(<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
 msgstr[0] "%1$s öppna /%2$s totalt"
 msgstr[1] "%1$s öppna /%2$s totalt"
 
-#: www/include/project_home.php:325
+#: www/include/project_home.php:332
 msgid "Public Forums"
 msgstr "Öppna forum"
 
-#: www/include/project_home.php:334
+#: www/include/project_home.php:341
 #, fuzzy, php-format
 msgid "<strong>%d</strong> message"
 msgid_plural "<strong>%d</strong> messages"
 msgstr[0] "<strong>%1$s</strong> projekt i resultatmängden."
 msgstr[1] "<strong>%1$s</strong> projekt i resultatmängden."
 
-#: www/include/project_home.php:336
+#: www/include/project_home.php:343
 #, fuzzy, php-format
 msgid "<strong>%d</strong> forum"
 msgid_plural "<strong>%d</strong> forums"
 msgstr[0] "<strong>%1$s</strong> projekt i resultatmängden."
 msgstr[1] "<strong>%1$s</strong> projekt i resultatmängden."
 
-#: www/include/project_home.php:347
+#: www/include/project_home.php:354
 msgid "DocManager: Project Documentation"
 msgstr "DocManager: Projektdokumentation"
 
-#: www/include/project_home.php:355
+#: www/include/project_home.php:362
 msgid "Mailing Lists"
 msgstr "Sändlistor"
 
-#: www/include/project_home.php:357
+#: www/include/project_home.php:364
 #, fuzzy, php-format
 msgid "(<strong>%1$s</strong> public mailing list)"
 msgid_plural "(<strong>%1$s</strong> public mailing lists)"
 msgstr[0] "<strong>%1$s</strong> projekt i resultatmängden."
 msgstr[1] "<strong>%1$s</strong> projekt i resultatmängden."
 
-#: www/include/project_home.php:365
+#: www/include/project_home.php:372
 msgid "Task Manager"
 msgstr "Projektstyrning"
 
-#: www/include/project_home.php:370
+#: www/include/project_home.php:377
 msgid "There are no public subprojects available"
 msgstr "Det finns inga offentliga underprojekt tillgängliga"
 
-#: www/include/project_home.php:388
+#: www/include/project_home.php:395
 msgid "surveys"
 msgstr "undersökningar"
 
-#: www/include/project_home.php:396 www/register/projectinfo.php:161
+#: www/include/project_home.php:403 www/register/projectinfo.php:161
 #: www/scm/admin/index.php:39 www/scm/admin/index.php:92
 #: www/scm/browser.php:33 www/scm/include/scm_utils.php:43
 #: www/scm/index.php:32 www/scm/reporting/index.php:32
 msgid "SCM Repository"
 msgstr "SCM Lager"
 
-#: www/include/project_home.php:416 www/include/project_home.php:417
+#: www/include/project_home.php:423 www/include/project_home.php:424
 msgid "Anonymous FTP Space"
 msgstr "Anonymt FTP-utrymme"
 
@@ -8231,11 +8747,6 @@ msgstr ""
 msgid "Mailing List Name:"
 msgstr ""
 
-#: www/mail/admin/index.php:170 www/mail/admin/index.php:202
-#: www/snippet/package.php:135
-msgid "Description:"
-msgstr "Beskrivning:"
-
 #: www/mail/admin/index.php:173
 msgid "Add This List"
 msgstr ""
@@ -8381,7 +8892,7 @@ msgstr "Förändring"
 #: www/pm/browse_task.php:180 www/pm/browse_task.php:349
 #: www/pm/detail_task.php:42 www/pm/mod_task.php:59 www/tracker/add.php:67
 #: www/tracker/admin/form-customizelist.php:27 www/tracker/browse.php:159
-#: www/tracker/browse.php:371 www/tracker/browse.php:541
+#: www/tracker/browse.php:372 www/tracker/browse.php:542
 #: www/tracker/detail.php:46 www/tracker/mod-limited.php:90
 #: www/tracker/mod.php:135 www/tracker/query.php:177
 msgid "Priority"
@@ -8389,8 +8900,8 @@ msgstr "Prioritet"
 
 #: www/my/dashboard.php:87 www/pm/add_task.php:108 www/pm/browse_task.php:178
 #: www/pm/browse_task.php:356 www/pm/detail_task.php:83
-#: www/pm/mod_task.php:113 www/tracker/add.php:63 www/tracker/browse.php:373
-#: www/tracker/browse.php:550 www/tracker/detail.php:64
+#: www/pm/mod_task.php:113 www/tracker/add.php:63 www/tracker/browse.php:374
+#: www/tracker/browse.php:551 www/tracker/detail.php:64
 #: www/tracker/mod-limited.php:87 www/tracker/mod.php:129
 #, fuzzy
 msgid "Assigned to"
@@ -8401,7 +8912,7 @@ msgstr "Tilldelad"
 #: www/pm/mod_task.php:35
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:45
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:37
-#: www/tracker/browse.php:375 www/tracker/detail.php:55
+#: www/tracker/browse.php:376 www/tracker/detail.php:55
 #: www/tracker/mod-limited.php:59 www/tracker/mod.php:66
 msgid "Submitted by"
 msgstr ""
@@ -8710,7 +9221,7 @@ msgstr ""
 msgid "Do Nothing"
 msgstr ""
 
-#: www/news/admin/index.php:351
+#: www/news/admin/index.php:345
 #, php-format
 msgid ""
 "You have to be an admin on the project you are editing or a member of the %s "
@@ -9254,7 +9765,7 @@ msgstr "Kontaktinfo"
 #: www/people/viewjob.php:80 www/pm/include/ProjectTaskHTML.class.php:94
 #: www/project/report/index.php:137
 #: www/tracker/admin/form-customizelist.php:25 www/tracker/browse.php:161
-#: www/tracker/browse.php:365 www/tracker/query.php:179
+#: www/tracker/browse.php:366 www/tracker/query.php:179
 msgid "Open Date"
 msgstr "Öppningsdatum"
 
@@ -9519,15 +10030,15 @@ msgstr "föregående 50"
 msgid "next 50"
 msgstr "nästa 50"
 
-#: www/pm/browse_task.php:337 www/tracker/browse.php:516
+#: www/pm/browse_task.php:337 www/tracker/browse.php:517
 msgid "Check &nbsp;all"
 msgstr "Markera &nbsp;alla"
 
-#: www/pm/browse_task.php:339 www/tracker/browse.php:518
+#: www/pm/browse_task.php:339 www/tracker/browse.php:519
 msgid "Clear &nbsp;all"
 msgstr "Avmarkera &nbsp;alla"
 
-#: www/pm/browse_task.php:342 www/tracker/browse.php:521
+#: www/pm/browse_task.php:342 www/tracker/browse.php:522
 msgid ""
 "<strong>Admin:</strong> If you wish to apply changes to all items selected "
 "above, use these controls to change their properties and click once on "
@@ -9538,7 +10049,7 @@ msgstr ""
 msgid "Subproject"
 msgstr ""
 
-#: www/pm/browse_task.php:365 www/tracker/browse.php:564
+#: www/pm/browse_task.php:365 www/tracker/browse.php:565
 msgid "Mass update"
 msgstr "Mass uppdatering"
 
@@ -9897,31 +10408,31 @@ msgstr "Antal startade uppgifter"
 msgid "Number of tasks still not completed"
 msgstr "Antal uppgifter som fortfarande inte är färdiga"
 
-#: www/pm/reporting/index.php:204
+#: www/pm/reporting/index.php:208
 msgid "Tasks By Category"
 msgstr "Uppgifter efter kategori"
 
-#: www/pm/reporting/index.php:205
+#: www/pm/reporting/index.php:209
 msgid "Open Tasks By Category"
 msgstr "Öppna uppgifter efter kategori"
 
-#: www/pm/reporting/index.php:206
+#: www/pm/reporting/index.php:210
 msgid "All Tasks By Category"
 msgstr "Alla uppgifter efter kategori"
 
-#: www/pm/reporting/index.php:231
+#: www/pm/reporting/index.php:238
 msgid "Tasks By Assignee"
 msgstr "Uppgifter efter tekniker"
 
-#: www/pm/reporting/index.php:232
+#: www/pm/reporting/index.php:239
 msgid "Open Tasks By Assignee"
 msgstr "Öppna uppgifter efter tekniker"
 
-#: www/pm/reporting/index.php:233
+#: www/pm/reporting/index.php:240
 msgid "All Tasks By Assignee"
 msgstr "Alla uppgifter efter tekniker"
 
-#: www/pm/reporting/index.php:234
+#: www/pm/reporting/index.php:241
 msgid ""
 "<p>Note that same task can be assigned to several technicians. Such task "
 "will be counted for each of them.</p>"
@@ -10299,10 +10810,6 @@ msgstr "E-post admin"
 #: www/project/admin/index.php:257
 msgid "Group Members"
 msgstr "Gruppmedlemmar"
-
-#: www/project/admin/index.php:275 www/project/admin/massfinish.php:82
-msgid "Role"
-msgstr ""
 
 #: www/project/admin/index.php:301
 msgid "Observer"
@@ -11305,24 +11812,24 @@ msgstr ""
 msgid "Add This Snippet Version ID:"
 msgstr "Lägg till detta kodstyckes versions-ID:"
 
-#: www/snippet/add_snippet_to_package.php:154 www/snippet/addversion.php:97
+#: www/snippet/add_snippet_to_package.php:153 www/snippet/addversion.php:97
 #: www/snippet/addversion.php:219 www/snippet/package.php:158
 #: www/snippet/submit.php:129
 msgid "Make sure all info is complete and accurate"
 msgstr "Säkerställ att all inforamtion är komplett och riktig"
 
-#: www/snippet/add_snippet_to_package.php:156 www/snippet/addversion.php:99
+#: www/snippet/add_snippet_to_package.php:155 www/snippet/addversion.php:99
 #: www/snippet/addversion.php:221 www/snippet/package.php:160
 #: www/snippet/submit.php:131
 msgid "SUBMIT"
 msgstr "LÄMNA IN"
 
-#: www/snippet/add_snippet_to_package.php:173
+#: www/snippet/add_snippet_to_package.php:172
 #: www/snippet/snippet_utils.php:148
 msgid "No Snippets Are In This Package Yet"
 msgstr "Det finns ännu inga kodstycken i detta paket"
 
-#: www/snippet/add_snippet_to_package.php:175
+#: www/snippet/add_snippet_to_package.php:174
 msgid "Snippets In This Package"
 msgstr "Kodstycken i detta paket"
 
@@ -11415,43 +11922,43 @@ msgstr "Fel, URL'n eller formuläret skadat??"
 
 #: www/snippet/browse.php:34 www/snippet/detail.php:31
 #: www/snippet/detail.php:119 www/snippet/detail.php:201
-#: www/snippet/index.php:78
+#: www/snippet/index.php:80
 msgid "Snippet Library"
 msgstr "Kodstyckesbibliotek"
 
-#: www/snippet/browse.php:42
+#: www/snippet/browse.php:47
 #, php-format
 msgid "Snippets by language: %1$s"
 msgstr "Kodstycken efter språk: %1$s"
 
-#: www/snippet/browse.php:47
+#: www/snippet/browse.php:54
 #, php-format
 msgid "Snippets by category: %1$s"
 msgstr "Kodstycken efter kategori: %1$s"
 
-#: www/snippet/browse.php:49
+#: www/snippet/browse.php:56
 msgid "Error - bad url?"
 msgstr ""
 
-#: www/snippet/browse.php:59
+#: www/snippet/browse.php:66
 msgid "No snippets found"
 msgstr "Hittade inga kodstycken"
 
-#: www/snippet/browse.php:63 www/snippet/detail.php:51
+#: www/snippet/browse.php:70 www/snippet/detail.php:51
 #: www/snippet/snippet_utils.php:138
 msgid "Snippet ID"
 msgstr "Kodstycke-ID"
 
-#: www/snippet/browse.php:65
+#: www/snippet/browse.php:72
 #, fuzzy
 msgid "Creator"
 msgstr "Skapa"
 
-#: www/snippet/browse.php:72
+#: www/snippet/browse.php:79
 msgid "Packages Of Snippets"
 msgstr "Paket med kodstycken"
 
-#: www/snippet/browse.php:87
+#: www/snippet/browse.php:94
 msgid "Snippets"
 msgstr "Kodstycken"
 
@@ -11545,7 +12052,7 @@ msgstr ""
 msgid "Browse by Language"
 msgstr "Bläddra efter språk"
 
-#: www/snippet/index.php:59
+#: www/snippet/index.php:60
 msgid "Browse by Category"
 msgstr "Bläddra efter kategori"
 
@@ -11773,16 +12280,16 @@ msgstr "Aktivitet i procent:"
 msgid "Registered: <strong>%s</strong>"
 msgstr "<strong>%1$s</strong> projekt i resultatmängden."
 
-#: www/softwaremap/trove_list.php:135
+#: www/softwaremap/trove_list.php:133
 #, fuzzy
 msgid "Now limiting view to projects in the following categories:"
 msgstr "Begränsar nu vyn till projekt i följande kategorier"
 
-#: www/softwaremap/trove_list.php:315
+#: www/softwaremap/trove_list.php:305
 msgid "Activity Percentile:&nbsp;"
 msgstr "Aktivitet i procent:"
 
-#: www/softwaremap/trove_list.php:316
+#: www/softwaremap/trove_list.php:306
 #, fuzzy
 msgid "Activity Ranking:&nbsp;"
 msgstr "Aktivitet i procent:"
@@ -11976,6 +12483,10 @@ msgstr "Månad"
 #: www/stats/site_stats_utils.php:470
 msgid "Current Aggregate Statistics for All Time"
 msgstr "Nuvarande sammanlagda statistik för all tid"
+
+#: www/stats/site_stats_utils.php:477
+msgid "Developers"
+msgstr "Utvecklare"
 
 #: www/stats/users_graph.php:72
 msgid "New Additions, by Day"
@@ -12705,7 +13216,7 @@ msgid "Custom Fields Defined"
 msgstr ""
 
 #: www/tracker/admin/form-addextrafield.php:24
-#: www/tracker/admin/form-addextrafieldoption.php:28
+#: www/tracker/admin/form-addextrafieldoption.php:27
 msgid "Elements Defined"
 msgstr ""
 
@@ -12792,33 +13303,33 @@ msgstr ""
 msgid "Add/Update Custom Field Elements in %s"
 msgstr ""
 
-#: www/tracker/admin/form-addextrafieldoption.php:26
+#: www/tracker/admin/form-addextrafieldoption.php:25
 #, fuzzy
 msgid "Current / New positions"
 msgstr "Version"
 
-#: www/tracker/admin/form-addextrafieldoption.php:27
+#: www/tracker/admin/form-addextrafieldoption.php:26
 msgid "Up/Down positions"
 msgstr ""
 
-#: www/tracker/admin/form-addextrafieldoption.php:55
+#: www/tracker/admin/form-addextrafieldoption.php:54
 #, fuzzy
 msgid "Reorder"
 msgstr "Rapport"
 
-#: www/tracker/admin/form-addextrafieldoption.php:60
+#: www/tracker/admin/form-addextrafieldoption.php:59
 msgid "Alphabetical order"
 msgstr ""
 
-#: www/tracker/admin/form-addextrafieldoption.php:69
+#: www/tracker/admin/form-addextrafieldoption.php:68
 msgid "You have not defined any elements"
 msgstr ""
 
-#: www/tracker/admin/form-addextrafieldoption.php:75
+#: www/tracker/admin/form-addextrafieldoption.php:74
 msgid "Add New Element"
 msgstr ""
 
-#: www/tracker/admin/form-addextrafieldoption.php:86
+#: www/tracker/admin/form-addextrafieldoption.php:85
 msgid "Once you add a new element, it cannot be deleted"
 msgstr ""
 
@@ -12863,7 +13374,7 @@ msgid "Submitted By"
 msgstr "Inlämnare"
 
 #: www/tracker/admin/form-customizelist.php:30 www/tracker/browse.php:162
-#: www/tracker/browse.php:367 www/tracker/query.php:180
+#: www/tracker/browse.php:368 www/tracker/query.php:180
 msgid "Close Date"
 msgstr "Stängningsdatum"
 
@@ -12962,27 +13473,27 @@ msgstr ""
 "<strong> Namn:</strong> (exempel: mötesanteckningar, testresultat, RFP "
 "Dokument)"
 
-#: www/tracker/admin/form-updatetracker.php:33 www/tracker/admin/ind.php:134
+#: www/tracker/admin/form-updatetracker.php:33 www/tracker/admin/ind.php:135
 msgid "Send email on new submission to address"
 msgstr "Skicka e-post vid nya inlägg till adressen"
 
-#: www/tracker/admin/form-updatetracker.php:36 www/tracker/admin/ind.php:137
+#: www/tracker/admin/form-updatetracker.php:36 www/tracker/admin/ind.php:138
 msgid "Send email on all changes"
 msgstr "Skicka e-post vid alla förändringar"
 
-#: www/tracker/admin/form-updatetracker.php:38 www/tracker/admin/ind.php:139
+#: www/tracker/admin/form-updatetracker.php:38 www/tracker/admin/ind.php:140
 msgid "Days till considered overdue"
 msgstr "Dagar innan den anses försenad"
 
-#: www/tracker/admin/form-updatetracker.php:41 www/tracker/admin/ind.php:142
+#: www/tracker/admin/form-updatetracker.php:41 www/tracker/admin/ind.php:143
 msgid "Days till pending tracker items time out"
 msgstr "Dagar till väntande ordningspost går ut"
 
-#: www/tracker/admin/form-updatetracker.php:44 www/tracker/admin/ind.php:145
+#: www/tracker/admin/form-updatetracker.php:44 www/tracker/admin/ind.php:146
 msgid "Free form text for the \"submit new item\" page"
 msgstr ""
 
-#: www/tracker/admin/form-updatetracker.php:47 www/tracker/admin/ind.php:148
+#: www/tracker/admin/form-updatetracker.php:47 www/tracker/admin/ind.php:149
 msgid "Free form text for the \"browse items\" page"
 msgstr ""
 
@@ -12990,6 +13501,11 @@ msgstr ""
 #, fuzzy, php-format
 msgid "Add/Update template for %s"
 msgstr "Lägg till/Uppdatera förinställda svar"
+
+#: www/tracker/admin/form-uploadtemplate.php:13
+#, fuzzy
+msgid "Select Template"
+msgstr "Utgåvans datum"
 
 #: www/tracker/admin/form-workflow.php:13
 msgid ""
@@ -13030,25 +13546,25 @@ msgstr ""
 msgid "Configuring allowed roles for the transitions from %1$s to %2$s"
 msgstr ""
 
-#: www/tracker/admin/ind.php:45
+#: www/tracker/admin/ind.php:35
 #, fuzzy
 msgid "Tracker created successfully"
 msgstr "Skapande av uppgift lyckades"
 
-#: www/tracker/admin/ind.php:47
+#: www/tracker/admin/ind.php:37
 msgid "Please configure also the roles (by default, it's 'No Access')"
 msgstr ""
 
-#: www/tracker/admin/ind.php:76
+#: www/tracker/admin/ind.php:77
 msgid "Report"
 msgstr "Rapport"
 
-#: www/tracker/admin/ind.php:86
+#: www/tracker/admin/ind.php:87
 #, fuzzy
 msgid "No trackers found"
 msgstr "Hittade inga poster"
 
-#: www/tracker/admin/ind.php:91
+#: www/tracker/admin/ind.php:92
 msgid ""
 "Choose a data type and you can set up prefs, categories, groups, users, and "
 "permissions"
@@ -13056,7 +13572,7 @@ msgstr ""
 "Völj en data typ och så kan du ställa in inställningars, kategorier, "
 "grupper, användare, och rättigheter"
 
-#: www/tracker/admin/ind.php:121
+#: www/tracker/admin/ind.php:122
 msgid ""
 "<h3>Create a new tracker</h3><p>You can use this system to track virtually "
 "any kind of data, with each tracker having separate user, group, category, "
@@ -13068,22 +13584,22 @@ msgid ""
 "for each type, which can get time-consuming"
 msgstr ""
 
-#: www/tracker/admin/ind.php:125
+#: www/tracker/admin/ind.php:126
 msgid ""
 "<strong> Name:</strong> (examples: meeting minutes, test results, RFP Docs)"
 msgstr ""
 "<strong> Namn:</strong> (exempel: mötesanteckningar, testresultat, RFP "
 "Dokument)"
 
-#: www/tracker/admin/ind.php:131
+#: www/tracker/admin/ind.php:132
 msgid "Publicly Available"
 msgstr "Offentlig"
 
-#: www/tracker/admin/ind.php:132
+#: www/tracker/admin/ind.php:133
 msgid "Allow non-logged-in postings"
 msgstr "Tillåt ej-inloggade postningar"
 
-#: www/tracker/admin/index.php:171
+#: www/tracker/admin/index.php:177
 msgid "Successfully Deleted."
 msgstr ""
 
@@ -13288,34 +13804,39 @@ msgid ""
 "Filtering and Sorting' to change."
 msgstr ""
 
-#: www/tracker/browse.php:551
+#: www/tracker/browse.php:552
 #: www/tracker/include/ArtifactTypeHtml.class.php:547
 msgid "Nobody"
 msgstr "Ingen"
 
-#: www/tracker/browse.php:560
+#: www/tracker/browse.php:561
 msgid "Canned Response"
 msgstr "Standardsvar"
 
-#: www/tracker/browse.php:569
+#: www/tracker/browse.php:570
 #, php-format
 msgid "* Denotes requests > %1$s Days Old"
 msgstr "* Avser frågor > %1$s dagar gamla"
 
-#: www/tracker/browse.php:575
+#: www/tracker/browse.php:579
 msgid "No items found"
 msgstr "Hittade inga poster"
 
-#: www/tracker/deleteartifact.php:10
+#: www/tracker/deleteartifact.php:10 www/tracker/deleteartifact.php:16
 #, fuzzy
 msgid "Delete artifact"
 msgstr "Ta bort fil"
 
-#: www/tracker/deleteartifact.php:24
+#: www/tracker/deleteartifact.php:22
+#, fuzzy
+msgid "Confirm Deletion"
+msgstr "Bekräfta borttag"
+
+#: www/tracker/deleteartifact.php:31
 msgid "Are you sure you want to delete this artifact?"
 msgstr ""
 
-#: www/tracker/deleteartifact.php:28
+#: www/tracker/deleteartifact.php:34
 msgid "Yes, I want to delete this artifact"
 msgstr ""
 
@@ -13618,16 +14139,16 @@ msgstr ""
 msgid "Artifact Deleted Successfully"
 msgstr ""
 
-#: www/trove/TroveCategory.class.php:68 www/trove/TroveCategory.class.php:75
+#: www/trove/TroveCategory.class.php:66 www/trove/TroveCategory.class.php:73
 #, fuzzy
 msgid "That Trove category does not exist."
 msgstr "Den resurskategorin existerar inte"
 
-#: www/trove/TroveCategory.class.php:101
+#: www/trove/TroveCategory.class.php:99
 msgid "Empty strings"
 msgstr ""
 
-#: www/trove/TroveCategory.class.php:113
+#: www/trove/TroveCategory.class.php:111
 #, fuzzy
 msgid "Cannot update"
 msgstr "Mass uppdatering"
@@ -13757,10 +14278,6 @@ msgstr "Användarenamn"
 #~ msgstr "Sändlistor"
 
 #, fuzzy
-#~ msgid "Contribute!"
-#~ msgstr "Fortsätt >>"
-
-#, fuzzy
 #~ msgid "FusionForge Project Page"
 #~ msgstr ""
 #~ "Flest sidläsningar per projekt  - Mätt genom tryckningar på %1$s 'knapp' "
@@ -13814,6 +14331,3 @@ msgstr "Användarenamn"
 #, fuzzy
 #~ msgid "Invalid Group Name"
 #~ msgstr "Unixgruppnamn:"
-
-#~ msgid "Logout"
-#~ msgstr "Logga ut"
