@@ -2055,7 +2055,7 @@ class Group extends Error {
 			return false;
 		}
 		$f = new Forum($this);
-		if (!$f->create(_('Developers'),_('Project Developer Discussion'),0,'',1,0)) {
+		if (!$f->create(_('Developers-Discussion'),_('Project Developer Discussion'),0,'',1,0)) {
 			$this->setError(sprintf (_('F%d: %s'), 3, $f->getErrorMessage()));
 			db_rollback();
 			setup_gettext_from_context();
