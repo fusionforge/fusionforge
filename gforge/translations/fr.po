@@ -7268,7 +7268,7 @@ msgstr[1] ""
 
 #: www/include/project_home.php:321
 msgid "Public Forums"
-msgstr "Forums de discussion"
+msgstr "Forums publics"
 
 #: www/include/project_home.php:324
 #, php-format
