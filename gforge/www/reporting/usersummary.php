@@ -62,7 +62,7 @@ $l[]='2';
 echo report_header(_('User Summary Report'));
 
 	?>
-	<h3><?php echo _('User Summary Report'); ?></h3>
+	<h2><?php echo _('User Summary Report'); ?></h2>
 	<p>
 	<?php echo _('Choose the range from the pop-up boxes below. The report will list all tasks with an open date in that range.'); ?>
 	</p>
@@ -72,7 +72,7 @@ echo report_header(_('User Summary Report'));
 			<td><strong><?php echo _('Start'); ?>:</strong><br /><?php echo report_weeks_box($report, 'start', $start); ?></td>
 			<td><strong><?php echo _('End'); ?>:</strong><br /><?php echo report_weeks_box($report, 'end', $end); ?></td>
 			<td><strong><?php echo _('Task Status'); ?>:</strong><br /><?php echo html_build_select_box_from_arrays($l,$n,'tstat',$tstat,false); ?></td>
-			<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>"></td>
+			<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
 		</tr>
 	</table>
 	</form>
