@@ -62,20 +62,19 @@ for ($i=0; $i<count($abc_array); $i++) {
 
 if ($sw) {
 	?>
-	<h3><?php echo _('User Activity'); ?></h3>
-	<p>
+	<h2><?php echo _('User Activity'); ?></h2>
+
 	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
-	<input type="hidden" name="sw" value="<?php echo $sw; ?>">
+	<input type="hidden" name="sw" value="<?php echo $sw; ?>" />
 	<table><tr>
 	<td><strong><?php echo _('User'); ?>:</strong><br /><?php echo report_useract_box('dev_id',$dev_id,$sw); ?></td>
 	<td><strong><?php echo _('Areas'); ?>:</strong><br /><?php echo report_area_box('area',$area); ?></td>
 	<td><strong><?php echo _('Type'); ?>:</strong><br /><?php echo report_span_box('SPAN',$SPAN); ?></td>
 	<td><strong><?php echo _('Start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
 	<td><strong><?php echo _('End'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
-	<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>"></td>
+	<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
 	</tr></table>
 	</form>
-	<p>
 	<?php if ($dev_id) { ?>
 		<img src="useract_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end&dev_id=$dev_id&amp;area=$area"; ?>" width="640" height="480">
 		<p>

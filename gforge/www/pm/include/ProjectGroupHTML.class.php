@@ -54,7 +54,7 @@ function pm_header($params) {
 		if ($group_project_id) {
 			$gantt_width = 820;
 			$gantt_height = 680;
-			$gantt_url = "/pm/task.php?group_id=$group_id&group_project_id=$group_project_id&func=ganttpage";
+			$gantt_url = "/pm/task.php?group_id=$group_id&amp;group_project_id=$group_project_id&amp;func=ganttpage";
 			$gantt_title = _('Gantt Chart');
 			$gantt_winopt = 'scrollbars=yes,resizable=yes,toolbar=no,height=' . $gantt_height . ',width=' . $gantt_width;
 			$labels[] = $gantt_title;

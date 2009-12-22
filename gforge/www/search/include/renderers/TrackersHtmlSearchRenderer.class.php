@@ -65,7 +65,7 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 						. '<td width="5%">&nbsp;</td>'
 						. '<td>'.db_result($result, $i, 'artifact_id').'</td>'
 						. '<td>'
-							. '<a href="'.util_make_url ('/tracker/?func=detail&group_id='.$this->groupId.'&aid='.db_result($result, $i, 'artifact_id') . '&atid='.db_result($result, $i, 'group_artifact_id')).'">'
+							. '<a href="'.util_make_url ('/tracker/?func=detail&amp;group_id='.$this->groupId.'&amp;aid='.db_result($result, $i, 'artifact_id') . '&amp;atid='.db_result($result, $i, 'group_artifact_id')).'">'
 							. html_image('ic/msg.png', '10', '12', array('border'=>'0')).' '.db_result($result, $i, 'summary')
 							. '</a></td>'		
 						. '<td width="15%">'.db_result($result, $i, 'realname').'</td>'

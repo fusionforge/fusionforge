@@ -150,7 +150,7 @@ function project_summary($group_id,$mode,$no_table) {
 
 			<hr size="1" />';
 		$return .= '<a href="'.util_make_url ('/forum/?group_id='.$group_id).'">';
-		$return .= html_image("ic/forum20g.png","20","20",array("border"=>"0","ALT"=>"Forums"));
+		$return .= html_image("ic/forum20g.png","20","20",array("border"=>"0","alt"=>"Forums"));
 		$return .= '&nbsp;Forums</a>';
 
 		if ($mode != 'compact') {
@@ -233,7 +233,7 @@ function project_summary($group_id,$mode,$no_table) {
 
 			<hr size="1" />';
 		$return .= '<a href="'.util_make_url ('/scm/?group_id='.$group_id).'">';
-		$return .= html_image("ic/cvs16b.png","20","20",array("border"=>"0","ALT"=>"SCM"));
+		$return .= html_image("ic/cvs16b.png","20","20",array("border"=>"0","alt"=>"SCM"));
 		$return .= "&nbsp;SCM&nbsp;Tree</a>";
 
 		if ($mode != 'compact') {
