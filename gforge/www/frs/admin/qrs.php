@@ -25,8 +25,23 @@ $g =& group_get_object($group_id);
 if (!$g || $g->isError()) {
 	exit_error('Error',$g->getErrorMessage());
 }
+
+// check the permissions and see if this user is a release manager.
+// If so, he can create a release
 $perm =& $g->getPermission(session_get_user());
-if (!$perm->isReleaseTechnician()) {
+$can_post = $perm->isReleaseTechnician();
+$packages = get_frs_packages($g);
+
+if (!$can_post) {
+	// If user has write access to at least one package, then it's ok.
+	foreach ( $packages as $f ) {
+		if ($f->userCanPost()) {
+			$can_post = true;
+		}
+	}
+}
+
+if (!$can_post) {
 	exit_permission_denied();
 }
 
@@ -226,7 +241,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 		<span class="important">
 		<?php echo _('NOTE: In some browsers you must select the file in the file-upload dialog and click "OK".  Double-clicking doesn\'t register the file.')?>)</span><br />
 		<?php echo _('Upload a new file') ?>: <input type="file" name="userfile"  size="30" />
-		<?php if ($sys_use_ftpuploads) { 
+		<?php if ($sys_use_ftpuploads) {
 
 			echo '<p>';
 			printf(_('Alternatively, you can use FTP to upload a new file at %1$s'), $sys_ftp_upload_host).'<br />';
