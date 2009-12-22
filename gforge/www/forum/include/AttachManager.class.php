@@ -136,7 +136,7 @@ class AttachManager extends Error {
 			$attachid = db_result($res,0,'attachmentid');
 		}
 		if ($attachid) {
-			$attach = "
+			$attach = "<br/>
 			<a href=\"javascript:manageattachments('".util_make_url("/forum/attachment.php?attachid=$attachid&group_id=$group_id&forum_id=$forum_id$pend")."','no');\">" . html_image('ic/cfolder15.png',"15","13",array("border"=>"0")) . db_result($res,0,'filename') . "</a>  (" . db_result($res,0,'counter') . ") downloads";
 			$attach_userid = db_result($res,0,'userid');
 			
@@ -221,7 +221,6 @@ class AttachManager extends Error {
 			
 		if ($attachment == 'none' OR empty($attachment) OR empty($attachment_name))
 		{
-			$this->messages[] = _('No file was provided');
 			return false; //no point in continuing if there's no file
 		}
 		
