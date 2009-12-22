@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-22 15:16+0100\n"
+"POT-Creation-Date: 2009-12-22 17:03+0100\n"
 "PO-Revision-Date: 2009-07-01 23:15+0200\n"
 "Last-Translator: Mariano Guerra <luismarianoguerra@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1076,7 +1076,7 @@ msgstr ""
 #: common/include/group_section_texts.php:30
 #: common/reporting/report_utils.php:161
 #: plugins/quota_management/www/quota_project.php:88
-#: www/include/Layout.class.php:560 www/include/project_home.php:331
+#: www/include/Layout.class.php:560 www/include/project_home.php:334
 #: www/themes/gforge-simple-theme/Theme.class.php:505
 #: www/themes/gforge/Theme.class.php:508
 msgid "Forums"
@@ -1089,7 +1089,7 @@ msgstr "Registros"
 #: common/include/group_section_texts.php:32 common/include/rbac_texts.php:86
 #: common/include/rbac_texts.php:87 common/reporting/report_utils.php:169
 #: common/reporting/report_utils.php:197 www/include/Layout.class.php:582
-#: www/include/project_home.php:365 www/my/dashboard.php:91
+#: www/include/project_home.php:368 www/my/dashboard.php:91
 #: www/project/stats/project_stats_utils.php:83
 #: www/project/stats/project_stats_utils.php:142
 #: www/project/stats/project_stats_utils.php:198
@@ -1271,7 +1271,7 @@ msgstr "Proyecto"
 
 #: common/include/rbac_texts.php:90 common/include/rbac_texts.php:91
 #: common/reporting/report_utils.php:157 www/include/Layout.class.php:567
-#: www/include/project_home.php:298 www/include/project_home.php:299
+#: www/include/project_home.php:301 www/include/project_home.php:302
 #: www/pm/include/ProjectTaskHTML.class.php:93
 #: www/themes/gforge-simple-theme/Theme.class.php:513
 #: www/themes/gforge/Theme.class.php:515 www/tracker/admin/ind.php:97
@@ -1298,7 +1298,7 @@ msgid "Project Admin"
 msgstr "Adminitrador de Projectos"
 
 #: common/include/rbac_texts.php:98 common/include/rbac_texts.php:99
-#: www/include/Layout.class.php:610 www/include/project_home.php:396
+#: www/include/Layout.class.php:610 www/include/project_home.php:399
 #: www/scm/include/scm_utils.php:52 www/stats/site_stats_utils.php:244
 #: www/stats/site_stats_utils.php:368 www/stats/site_stats_utils.php:423
 #: www/themes/gforge-simple-theme/Theme.class.php:562
@@ -1594,7 +1594,7 @@ msgid "Y-m"
 msgstr "m-Y"
 
 #: common/reporting/report_utils.php:165 www/include/Layout.class.php:589
-#: www/include/project_home.php:347
+#: www/include/project_home.php:350
 #: www/themes/gforge-simple-theme/Theme.class.php:538
 #: www/themes/gforge/Theme.class.php:537
 msgid "Docs"
@@ -2129,7 +2129,7 @@ msgstr "Distribución por Lenguages"
 #: www/developer/diary.php:47 www/developer/diary.php:78
 #: www/forum/forum.php:237 www/forum/include/ForumHTML.class.php:67
 #: www/forum/message.php:143 www/frs/admin/showreleases.php:102
-#: www/frs/index.php:100 www/include/project_home.php:200
+#: www/frs/index.php:100 www/include/project_home.php:203
 #: www/news/admin/news_admin_utils.php:56 www/pm/calendar.php:252
 #: www/pm/include/ProjectTaskHTML.class.php:128
 #: www/pm/include/ProjectTaskHTML.class.php:165
@@ -5316,7 +5316,7 @@ msgstr "Nombre Unix"
 msgid "License"
 msgstr "Licencia"
 
-#: www/admin/grouplist.php:88 www/include/project_home.php:146
+#: www/admin/grouplist.php:88 www/include/project_home.php:149
 msgid "Members"
 msgstr "Miembros"
 
@@ -6555,7 +6555,7 @@ msgid "Exports Available"
 msgstr "No hay estadísticas disponibles"
 
 #: www/export/projnews.php:81 www/forum/include/ForumHTML.class.php:79
-#: www/include/project_home.php:437 www/index_std.php:57
+#: www/include/project_home.php:440 www/index_std.php:57
 msgid "Latest News"
 msgstr "Últimas noticias"
 
@@ -6581,6 +6581,21 @@ msgid ""
 "To get Project News or New Project Releases of a specific project use the "
 "Links below."
 msgstr ""
+
+#: www/export/rss_project.php:58
+#, fuzzy
+msgid " Developer Project News"
+msgstr "Perfil del Desarrollador"
+
+#: www/export/rss_project.php:70
+#, fuzzy
+msgid " Activity"
+msgstr "Actividad de usuario"
+
+#: www/export/rss_project.php:90
+#, fuzzy
+msgid " Developer New Project Releases"
+msgstr "Perfil del Desarrollador"
 
 #: www/export/rss_project.php:131
 msgid "Go back"
@@ -7550,7 +7565,7 @@ msgstr "O %1$s crea un nuevo paquete %2$s"
 msgid "File Name"
 msgstr "Nombre del Fichero"
 
-#: www/frs/admin/qrs.php:264 www/include/project_home.php:254
+#: www/frs/admin/qrs.php:264 www/include/project_home.php:257
 msgid "Release Notes"
 msgstr "Notas de la Versión"
 
@@ -7622,7 +7637,7 @@ msgid "To create a new release click here."
 msgstr "Para crear una nueva versión pulse aquí ."
 
 #: www/frs/index.php:97 www/frs/reporting/downloads.php:98
-#: www/include/project_home.php:194
+#: www/include/project_home.php:197
 msgid "Package"
 msgstr "Paquete"
 
@@ -7648,7 +7663,7 @@ msgstr "Arch"
 msgid "Stop monitoring this package"
 msgstr "Monitorizar esta página"
 
-#: www/frs/index.php:129 www/include/project_home.php:256
+#: www/frs/index.php:129 www/include/project_home.php:259
 msgid "Monitor this package"
 msgstr "Monitorizar esta página"
 
@@ -8086,14 +8101,14 @@ msgstr "Recortes de código"
 msgid "Project&nbsp;Openings"
 msgstr "Peticiones de ayuda"
 
-#: www/include/Layout.class.php:575 www/include/project_home.php:355
+#: www/include/Layout.class.php:575 www/include/project_home.php:358
 #: www/themes/gforge-simple-theme/Theme.class.php:522
 #: www/themes/gforge/Theme.class.php:523
 msgid "Lists"
 msgstr "Listas"
 
-#: www/include/Layout.class.php:596 www/include/project_home.php:387
-#: www/include/project_home.php:388 www/survey/include/SurveyHTML.class.php:53
+#: www/include/Layout.class.php:596 www/include/project_home.php:390
+#: www/include/project_home.php:391 www/survey/include/SurveyHTML.class.php:53
 #: www/survey/survey_utils.php:52
 #: www/themes/gforge-simple-theme/Theme.class.php:546
 #: www/themes/gforge/Theme.class.php:544
@@ -8325,17 +8340,20 @@ msgstr "Porcentaje de Actividad:&nbsp;"
 
 #: www/include/project_home.php:95
 #, php-format
-msgid ""
-"View project <a href=\"%1$s\" >Statistics</a> or <a href=\"%2$s\">Activity</"
-"a>"
+msgid "View project <a href=\"%1$s\" >Statistics</a>"
 msgstr ""
 
-#: www/include/project_home.php:96
+#: www/include/project_home.php:97
+#, php-format
+msgid " or <a href=\"%1$s\">Activity</a>"
+msgstr ""
+
+#: www/include/project_home.php:99
 #, fuzzy, php-format
 msgid "View list of <a href=\"%1$s\">RSS feeds</a> available for this project."
 msgstr "Aquí hay una lista de las posiciones disponibles para este proyecto."
 
-#: www/include/project_home.php:113
+#: www/include/project_home.php:116
 #, fuzzy, php-format
 msgid ""
 "HELP WANTED: This project is looking for a <a href=\"%1$s\">\"%2$s\"</a>."
@@ -8345,133 +8363,133 @@ msgid_plural ""
 msgstr[0] "SE BUSCA AYUDA: Este proyecto está buscando"
 msgstr[1] "SE BUSCA AYUDA: Este proyecto está buscando"
 
-#: www/include/project_home.php:133
+#: www/include/project_home.php:136
 msgid "Developer Info"
 msgstr "Información del colaborador"
 
-#: www/include/project_home.php:140
+#: www/include/project_home.php:143
 msgid "Project Admins"
 msgstr "Administradores del proyecto"
 
-#: www/include/project_home.php:162
+#: www/include/project_home.php:165
 #, fuzzy, php-format
 msgid "View the %1$d Member(s)"
 msgstr "Ver los %1$d Miembro(s)"
 
-#: www/include/project_home.php:167
+#: www/include/project_home.php:170
 msgid "Request to join"
 msgstr ""
 
-#: www/include/project_home.php:187
+#: www/include/project_home.php:190
 msgid "Latest File Releases"
 msgstr "Últimas Publicaciones de Ficheros"
 
-#: www/include/project_home.php:197 www/snippet/package.php:153
+#: www/include/project_home.php:200 www/snippet/package.php:153
 #: www/snippet/submit.php:120
 msgid "Version"
 msgstr "Versión"
 
-#: www/include/project_home.php:203
+#: www/include/project_home.php:206
 msgid "Notes"
 msgstr "Notas"
 
-#: www/include/project_home.php:203
+#: www/include/project_home.php:206
 #: www/tracker/include/ArtifactTypeHtml.class.php:64
 #: www/tracker/include/ArtifactTypeHtml.class.php:73 www/tracker/mod.php:38
 msgid "Monitor"
 msgstr ""
 
-#: www/include/project_home.php:206 www/include/project_home.php:259
+#: www/include/project_home.php:209 www/include/project_home.php:262
 #: www/new/index.php:104 www/tracker/detail.php:170 www/tracker/detail.php:175
 #: www/tracker/mod-limited.php:163 www/tracker/mod-limited.php:173
 #: www/tracker/mod.php:263 www/tracker/mod.php:273
 msgid "Download"
 msgstr "Descargar"
 
-#: www/include/project_home.php:233
+#: www/include/project_home.php:236
 msgid "This Project Has Not Released Any Files"
 msgstr "Este proyecto no ha publicado ningún fichero"
 
-#: www/include/project_home.php:266
+#: www/include/project_home.php:269
 msgid "View All Project Files"
 msgstr "Ver todos los Ficheros del Proyecto"
 
-#: www/include/project_home.php:285
+#: www/include/project_home.php:288
 msgid "Public Areas"
 msgstr "Área pública"
 
-#: www/include/project_home.php:290
+#: www/include/project_home.php:293
 msgid "Home Page"
 msgstr "Página Principal"
 
-#: www/include/project_home.php:291
+#: www/include/project_home.php:294
 msgid "Project Home Page"
 msgstr "Página de inicio del Proyecto"
 
-#: www/include/project_home.php:312 www/include/project_summary.php:135
+#: www/include/project_home.php:315 www/include/project_summary.php:135
 msgid "There are no public trackers available"
 msgstr "No hay trackers públicos disponibles"
 
-#: www/include/project_home.php:319 www/include/project_summary.php:140
+#: www/include/project_home.php:322 www/include/project_summary.php:140
 #, fuzzy, php-format
 msgid "(<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
 msgid_plural "(<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
 msgstr[0] "%1$s abierto /%2$s total"
 msgstr[1] "%1$s abierto /%2$s total"
 
-#: www/include/project_home.php:332
+#: www/include/project_home.php:335
 msgid "Public Forums"
 msgstr "Foros Públicos"
 
-#: www/include/project_home.php:335
+#: www/include/project_home.php:338
 #, fuzzy, php-format
 msgid "<strong>%d</strong> message"
 msgid_plural "<strong>%d</strong> messages"
 msgstr[0] "<strong>%1$s</strong> proyecto en esta categoría."
 msgstr[1] "<strong>%1$s</strong> proyectos en esta categoría."
 
-#: www/include/project_home.php:337
+#: www/include/project_home.php:340
 #, fuzzy, php-format
 msgid "<strong>%d</strong> forum"
 msgid_plural "<strong>%d</strong> forums"
 msgstr[0] "<strong>%1$s</strong> proyectos en esta categoría."
 msgstr[1] "<strong>%1$s</strong> proyectos en esta categoría."
 
-#: www/include/project_home.php:348
+#: www/include/project_home.php:351
 msgid "DocManager: Project Documentation"
 msgstr "Gestión de doc.: Documentación del proyecto"
 
-#: www/include/project_home.php:356
+#: www/include/project_home.php:359
 msgid "Mailing Lists"
 msgstr "Listas de Correo"
 
-#: www/include/project_home.php:358
+#: www/include/project_home.php:361
 #, fuzzy, php-format
 msgid "(<strong>%1$s</strong> public mailing list)"
 msgid_plural "(<strong>%1$s</strong> public mailing lists)"
 msgstr[0] "<strong>%1$s</strong> proyectos en esta categoría."
 msgstr[1] "<strong>%1$s</strong> proyectos en esta categoría."
 
-#: www/include/project_home.php:366
+#: www/include/project_home.php:369
 msgid "Task Manager"
 msgstr "Gestión de Tareas"
 
-#: www/include/project_home.php:371
+#: www/include/project_home.php:374
 msgid "There are no public subprojects available"
 msgstr "No hay subproyectos públicos disponibles"
 
-#: www/include/project_home.php:389
+#: www/include/project_home.php:392
 msgid "surveys"
 msgstr "encuestas"
 
-#: www/include/project_home.php:397 www/register/projectinfo.php:161
+#: www/include/project_home.php:400 www/register/projectinfo.php:161
 #: www/scm/admin/index.php:39 www/scm/admin/index.php:92
 #: www/scm/browser.php:33 www/scm/include/scm_utils.php:43
 #: www/scm/index.php:32 www/scm/reporting/index.php:32
 msgid "SCM Repository"
 msgstr "Repositorio SCM"
 
-#: www/include/project_home.php:417 www/include/project_home.php:418
+#: www/include/project_home.php:420 www/include/project_home.php:421
 msgid "Anonymous FTP Space"
 msgstr "Espacio FTP Anónimo"
 
