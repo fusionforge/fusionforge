@@ -53,7 +53,6 @@ if ($group_id) {
 		exit;
 	}
 	
-	echo _('<p>Mailing lists provided via a GForge version of <a href="http://www.list.org/">GNU Mailman</a>. Thanks to the Mailman and <a href="http://www.python.org/">Python</a> crews for excellent software.</p>');
 	echo _('<p>Choose a list to browse, search, and post messages.</p>');
 	
 	$tableHeaders = array(
