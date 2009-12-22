@@ -55,7 +55,7 @@ if ($project->usesNews() && $GLOBALS['sys_use_news']) {
 		
 	// RSS 2.0 format
 	$string_rss_20 .= get_rss_feed_20 ("rss20_news.php?group_id=" . getIntFromRequest('group_id'),
-										$GLOBALS['sys_name'] . " Developer Project News");
+										$GLOBALS['sys_name'] . _(" Developer Project News"));
 }
 
 
@@ -67,7 +67,7 @@ if ( ($project->usesNews() && $GLOBALS['sys_use_news']) ||
 	($project->usesSCM() && $GLOBALS['sys_use_scm']) ){
 	// RSS 2.0 format
 	$string_rss_20 .= get_rss_feed_20 ("rss20_activity.php?group_id=" . getIntFromRequest('group_id'),
-										$GLOBALS['sys_name'] . " Activity");
+										$GLOBALS['sys_name'] . _(" Activity"));
 }
 
 
@@ -87,7 +87,7 @@ if ($project->usesFRS() && $GLOBALS['sys_use_frs']) {
 	
 	// RSS 2.0 format
 	$string_rss_20 .= get_rss_feed_20 ("rss20_newreleases.php?group_id=" . getIntFromRequest('group_id'),
-										$GLOBALS['sys_name'] . " Developer New Project Releases");
+										$GLOBALS['sys_name'] . _(" Developer New Project Releases"));
 }
 
 /* Pages do not exists
@@ -96,7 +96,7 @@ if ($project->usesFRS() && $GLOBALS['sys_use_frs']) {
 if ($project->usesTracker() && $GLOBALS['sys_use_tracker']) {
 	// RSS 2.0 format
 	$string_rss_20 .= get_rss_feed_20 ("rss20_tracker.php?group_id=" . getIntFromRequest('group_id'),
-										$GLOBALS['sys_name'] . " Developer Bug Tracker");
+										$GLOBALS['sys_name'] . _(" Developer Bug Tracker"));
 }
 
 
@@ -104,14 +104,14 @@ if ($project->usesTracker() && $GLOBALS['sys_use_tracker']) {
 if ($project->usesDocman() && $GLOBALS['sys_use_docman']) {
 	// RSS 2.0 format
 	$string_rss_20 .= get_rss_feed_20 ("rss20_docman.php?group_id=" . getIntFromRequest('group_id'),
-										$GLOBALS['sys_name'] . " Developer Documents");
+										$GLOBALS['sys_name'] . _(" Developer Documents"));
 }
 
 // RSS for project Forums Threads
 if ($project->usesForum() && $GLOBALS['sys_use_forum']) {
 	// RSS 2.0 format
 	$string_rss_20 .= get_rss_feed_20 ("rss20_forum.php?group_ids=" . getIntFromRequest('group_id'),
-										$GLOBALS['sys_name'] . " Developer forum Threads");
+										$GLOBALS['sys_name'] . _(" Developer forum Threads"));
 }
 
 */
