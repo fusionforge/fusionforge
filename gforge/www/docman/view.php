@@ -26,6 +26,7 @@ require_once $gfcommon.'docman/Document.class.php';
 $arr=explode('/',getStringFromServer('REQUEST_URI'));
 $group_id=$arr[3];
 $docid=$arr[4];
+$docname=urldecode($arr[5]);
 
 if ($docid) {
 
@@ -46,8 +47,28 @@ if ($docid) {
 		exit_error('Error',$d->getErrorMessage());
 	}
 
+	/** 
+	 * If the served document has wrong relative links, then
+	 * theses links may redirect to the same document with another
+	 * name, this way a search engine may loop and stress the
+	 * server.
+	 *
+	 * A workaround is to serve only the document if the given
+	 * name is correct.
+	 */
+	if ($d->getFileName() != $docname) {
+		exit_error(_('No document data'),
+			   _('No document to display - invalid or inactive document number'));
+
+	}
+
 	Header ('Content-disposition: filename="'.str_replace('"', '', $d->getFileName()).'"');
-	Header ("Content-type: ".$d->getFileType());
+
+	if (strstr($d->getFileType(),'app')) {
+		Header ("Content-type: application/binary");
+	} else {
+		Header ("Content-type: ".$d->getFileType());
+	}
 
 	echo $d->getFileData();
 
