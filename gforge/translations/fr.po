@@ -8446,16 +8446,15 @@ msgid "Activity Ranking: %d"
 msgstr "Rang d'activité : %d"
 
 #: www/include/project_home.php:95
-#, fuzzy, php-format
+#, php-format
 msgid "View project <a href=\"%1$s\" >Statistics</a>"
 msgstr ""
-"Voir les <a href=\"%1$s\">statistiques</a> ou le <a href=\"%2$s\">rapport "
-"d'activité</a> pour le projet."
+"Voir les <a href=\"%1$s\">statistiques</a>"
 
 #: www/include/project_home.php:97
-#, fuzzy, php-format
+#, php-format
 msgid " or <a href=\"%1$s\">Activity</a>"
-msgstr "Veuillez vous <a href=\"%1$s\">connecter</a>"
+msgstr " ou le <a href=\"%2$s\">rapport d'activité</a> pour le projet."
 
 #: www/include/project_home.php:99
 #, php-format
