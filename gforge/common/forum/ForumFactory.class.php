@@ -192,6 +192,89 @@ ORDER BY group_forum_id',
 			return $this->forums;
 		}
 	}
+	
+	
+	/**
+	 *	getForumsAdmin - get an array of all (public, private and suspended) Forum objects for this Group.
+	 *
+	 *	@return	array	The array of Forum objects.
+	 */
+	function &getForumsAdmin() {
+		global $sys_database_type;
+
+		if ($this->forums) {
+			return $this->forums;
+		}
+
+		
+		if ($sys_database_type == "mysql") {
+			if (session_loggedin()) {
+				$perm =& $this->Group->getPermission( session_get_user() );
+				if (!$perm || !is_object($perm) || !$perm->isForumAdmin()) {
+					$this->setError(_("You don't have a permission to access this page"));
+					$this->forums = false;
+				} else {
+					$sql="SELECT fgl.*,
+							(SELECT count(*) AS `count`
+							FROM (
+								SELECT DISTINCT group_forum_id, thread_id FROM forum
+								) AS tmp
+							WHERE tmp.group_forum_id = fgl.group_forum_id
+							) AS threads 
+						FROM forum_group_list_vw AS fgl
+						WHERE group_id='". $this->Group->getID() . "'
+						ORDER BY group_forum_id;";
+					
+					$result = db_query_mysql ($sql);
+			
+					$rows = db_numrows($result);
+					
+					if (!$result) {
+						$this->setError(_('Forum not found').' : '.db_error());
+						$this->forums = false;
+					} else {
+						while ($arr = db_fetch_array($result)) {
+							$this->forums[] = new Forum($this->Group, $arr['group_forum_id'], $arr);
+						}
+					}
+				}
+			} else {
+				$this->setError(_("You don't have a permission to access this page"));
+				$this->forums = false;
+			}
+			
+			return $this->forums;
+
+		} else {	// Not MySQL
+			if (session_loggedin()) {
+				$perm =& $this->Group->getPermission( session_get_user() );
+				if (!$perm || !is_object($perm) || !$perm->isForumAdmin()) {
+					$this->setError(_("You don't have a permission to access this page"));
+					$this->forums = false;
+				} else {
+					$result = db_query_params ('SELECT * FROM forum_group_list_vw
+WHERE group_id=$1
+ORDER BY group_forum_id',
+									   array ($this->Group->getID())) ;
+				}
+			} else {
+				$this->setError(_("You don't have a permission to access this page"));
+				$this->forums = false;
+			}
+
+			$rows = db_numrows($result);
+
+			if (!$result) {
+				$this->setError(_('Forum not found').' : '.db_error());
+				$this->forums = false;
+			} else {
+				while ($arr = db_fetch_array($result)) {
+					$this->forums[] = new Forum($this->Group, $arr['group_forum_id'], $arr);
+				}
+			}
+			return $this->forums;
+		}
+	}
 }
 
 // Local Variables:

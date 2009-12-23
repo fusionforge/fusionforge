@@ -150,7 +150,7 @@ if ($group_id) {
 				<strong>'._('Is Public?').'</strong><br />
 				<input type="radio" name="is_public" value="1"'.(($f->isPublic() == 1)?' checked="checked"':'').' /> '._('Yes').'<br />
 				<input type="radio" name="is_public" value="0"'.(($f->isPublic() == 0)?' checked="checked"':'').' /> '._('No').'<br />
-				<input type="radio" name="is_public" value="9"'.(($f->isPublic() == 9)?' checked="checked"':'').' />'._('Deleted').'<br />
+				<input type="radio" name="is_public" value="9"'.(($f->isPublic() == 9)?' checked="checked"':'').' />'._('Suspended').'<br />
 				<p>' .
 					html_build_select_box_from_assoc(array("0" => _('No Moderation') ,"1" => _('Moderated Level 1'),"2" => _('Moderated Level 2') ),"moderation_level",$f->getModerationLevel()) . '
 				<br />' . _('Moderated Level 1') . ': ' . _('To moderate anonymous posts (if allowed in public forum) and posts from non-member users.') . '<br />' . _('Moderated Level 2') . ': ' . _('To moderate ALL posts.') . '<p>
@@ -357,7 +357,7 @@ if ($group_id) {
 			exit_error(_('Error'),$ff->getErrorMessage());
 		}
 
-		$farr =& $ff->getForums();
+		$farr =& $ff->getForumsAdmin();
 
 		if ($ff->isError()) {
 			echo '<h1>'.sprintf(_('No Forums Found For %1$s'), $g->getPublicName()) .'</h1>';
