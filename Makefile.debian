@@ -28,8 +28,12 @@ UBUNTUOP=$(shell wget -q -S http://localhost/ubuntu -O /dev/null && echo "--mirr
 
 gfversion=$(shell head -1 $(PKGNAME)/debian/changelog | sed 's/.*(\(.[^+-]*\).*).*/\1/')
 gfminor=$(shell head -1 $(PKGNAME)/debian/changelog | sed 's/.*(.[^+-]*[+-]\(.*\)).*/\1/')
-svnrev=$(shell LANG=C svn info | grep Revision | cut -d: -f2| sed 's/ //g')
-
+in_svn_repo:= $(wildcard .svn/) 
+ifeq ($(strip $(in_svn_repo)),) 
+	svnrev=unknown
+else
+	svnrev=$(shell LANG=C svn info | grep Revision | cut -d: -f2| sed 's/ //g')
+endif
 
 MINOR=-1
 MINOR=-$(BRANCH)$(svnrev)+$(XDISTRIB)
