@@ -919,9 +919,9 @@ gforge/plugins/mediawiki/common/mediawiki-init.php -text
 gforge/plugins/mediawiki/cronjobs/create-wikis.sh -text
 gforge/plugins/mediawiki/etc/httpd.d/03mediawiki -text
 gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php -text
-gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php.patched -text
+gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php.reference -text
 gforge/plugins/mediawiki/mediawiki-skin/fusionforge/main.css -text
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/main.css.patched -text
+gforge/plugins/mediawiki/mediawiki-skin/fusionforge/main.css.reference -text
 gforge/plugins/mediawiki/www/LocalSettings.php -text
 gforge/plugins/mediawiki/www/frame.php -text
 gforge/plugins/online_help/common/online_help-init.php -text

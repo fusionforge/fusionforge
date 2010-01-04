@@ -21,38 +21,36 @@
 # usr/share/gforge/etc/httpd.d/03mediawiki contains the apache part you need to add to have this work
 # This is automagically used in debian package or if you use 'setup' script
 #
-# The three following files are partial reproduction of pre.php User.class.php and Group.class.php
-# usr/share/mediawiki/includes/GForgePre.php
-# usr/share/mediawiki/includes/GFUser.class.php.php
-# usr/share/mediawiki/includes/GFProject.class.php.php
-# These are light version which only use necessary functions
-# It was necessary to do this because of class name collision
-# It should be possible to remove them in future evolution of gforge code
-#
-# In usr/share/mediawiki/includes/GForgeAuthentication.php
-# $wgCacheEpoch = 'date +%Y%m%d%H%M%S';
-# is disabling cache. I didn't find yet a better way to tell mediawiki not to cache files
-# after Connect/Disconnect of a user
-# The mapping of authentication code is in this file which is instanciated in 
-#
 # INSTALL -- INSTALL
 #
 # To install you have to first install mediawiki and modify LocalSettings.php
-# you can choose to use mysql or postgresql database.
+# You can install source code mediawiki in /usr/share/mediawiki
+# And, you can move /usr/share/gforge/plugins/mediawiki/www/LocalSettings.php into /usr/share/mediawiki/LocalSettings.php
+# By default, plugin used postgres database. You can choose to use mysql or postgresql database.
 # In case you use postgresql you can either choose the same or a separate db
-# the same or different database users. LocalSettings.php contains an example
-# to reuse the gforge passwd when passed thru apache env 
+# the same or different database users.
 #
-# usr/share/mediawiki/LocalSettings.php
-# ---------------------------------------
-#$wgShowIPinHeader=false;
-#require_once( 'includes/GForgeAuthentication.php' );
-#$wgAuth = new GForgeAuthenticationPlugin();
-## 'AutoAuthenticate': called to authenticate users on external/environmental means
-## $user: writes user object to this parameter
-#$wgHooks['AutoAuthenticate'][] = array($wgAuth, 'getGForgeUserSession',array());
-# ---------------------------------------
+# For skins, you can move  /usr/share/gforge/plugins/mediawiki/mediawiki-skin/fusionforge into /usr/share/mediawiki/skins/
+# and /usr/share/gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php into /usr/share/mediawiki/skins/
+#
+# You must copy /usr/share/gforge/plugins/mediawiki/etc/httpd.d/03mediawiki into /etc/gforge/httpd.d/03mediawiki
+# You can link : ln -s /usr/share/mediawiki /usr/share/gforge/www/plugins/mediawiki/
+#
 # This is mostly the only thing you have to do to activate FusionForge mediawiki plugin
 # and tell mediawiki you want to use gforge skin
 # disable the other skins is recommended
+# 
+# BACKPORT fusionforge 4.8 --
+#
+# If you use fusionforge4.8, you may be add this at the end in file /usr/share/mediawiki/LocalSettings.php
+# if( defined( 'MW_INSTALL_PATH' ) ) {
+#		$IP = MW_INSTALL_PATH;
+# } else {
+#		$IP = dirname( __FILE__ );
+# }
+# Because in 4.8, fusionforge et mediawiki use the same variable $IP, but they aren't the same value.
+# And may be you can add this in /etc/gforge/httpd.d/06maindirhttp
+# AliasMatch ^/plugins/mediawiki/wiki/[-a-zA-Z0-9_]*/index.php /usr/share/gforge/www/plugins/mediawiki/index.php
+# AliasMatch ^/plugins/mediawiki/wiki/([-a-zA-Z0-9_]*)/images/(.*) /var/lib/gforge/plugins/mediawiki/wikidata/$1/images/$2
+# AliasMatch ^/plugins/mediawiki/wiki/([-a-zA-Z0-9_]*)/skins/(.*) /usr/share/mediawiki/skins/$2
 #
