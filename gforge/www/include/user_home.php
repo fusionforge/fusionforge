@@ -19,14 +19,14 @@ $HTML->header(array('title'=>_('Developer Profile')));
 
 <table width="100%" cellpadding="2" cellspacing="2" border="0">
 <tr valign="top">
-	<td width="50%">
-		<?php echo $HTML->boxTop(_('Personal Information')); ?>
+<td>
+
+<?php echo $HTML->boxTop(_('Personal Information')); ?>
+</td></tr>
 <tr>
-	<td>
-		<?php echo _('User Id') ?>
-	</td>
-	<td>
-		<strong>
+  <td><?php echo _('User Id') ?></td>
+  <td>
+    <strong>
 <?php
 	if (session_loggedin() && user_ismember(1)) {
 		echo util_make_link ('/admin/useredit.php?user_id='.$user_id,$user_id);
@@ -151,9 +151,9 @@ if (db_numrows($res_cat) < 1) {
 	<p/><?php echo _('This developer is not a member of any projects.') ?><p/>
 	<?php
 } else { // endif no groups
-	print "<p/>"._('This developer is a member of the following groups:')."<br />&nbsp;";
+	print "<p>"._('This developer is a member of the following projects:')."</p><ul>";
 	while ($row_cat = db_fetch_array($res_cat)) {
-			print ('<br />' . util_make_link_g ($row_cat['unix_group_name'],$row_cat['group_id'],$row_cat['group_name']).' ('.$row_cat['role_name'].')');
+		print ('<li>' . util_make_link_g ($row_cat['unix_group_name'],$row_cat['group_id'],$row_cat['group_name']).' ('.$row_cat['role_name'].')</li>');
 	}
 	print '</ul><p/>';
 } // end if groups
@@ -185,12 +185,12 @@ printf(_('<p>If you are familiar with this user, please take a moment to rate hi
 			       util_make_url ("/account/"));
 
 } else if ($me && !$me->usesRatings()) { ?>
-<p/>
+<p>
 <em>
 		<?php printf (_('You opted-out from peer rating system, otherwise you would have a chance to rate the user. Refer to <a href="%1$s">your account maintenance page</a> for more information.'),
 			      util_make_url ("/account")); ?>
 </em>
-<p/>
+</p>
 <?php }
       } ?>
 	</td>
