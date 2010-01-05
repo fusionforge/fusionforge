@@ -133,7 +133,7 @@ plugin_hook ("project_after_description",$hook_params) ;
 
 // ########################### Developers on this project
 
-echo $HTML->boxTop(_('Developer Info'));
+echo $HTML->boxTop(_('Project Members'));
 
 $iam_member = false ;
 
@@ -347,7 +347,7 @@ if ($project->usesDocman()) {
 	print '
 	<hr size="1" />
 	<a href="'.util_make_url ('/docman/?group_id='.$group_id).'">';
-	print html_image('ic/docman16b.png','20','20',array('alt'=>_('Docs')));
+	print html_image('ic/docman16b.png','20','20',array('alt'=>_('Documents')));
 	print '&nbsp;'._('DocManager: Project Documentation').'</a>';
 }
 
@@ -355,7 +355,7 @@ if ($project->usesDocman()) {
 
 if ($project->usesMail()) {
 	print '<hr size="1" /><a href="'.util_make_url ('/mail/?group_id='.$group_id).'">';
-	print html_image('ic/mail16b.png','20','20',array('alt'=>_('Lists')));
+	print html_image('ic/mail16b.png','20','20',array('alt'=>_('Mailing Lists')));
 	print '&nbsp;'._('Mailing Lists').'</a>';
 	$n = project_get_mail_list_count($group_id);
 	printf(ngettext('(<strong>%1$s</strong> public mailing list)', '(<strong>%1$s</strong> public mailing lists)', $n), $n);
@@ -365,7 +365,7 @@ if ($project->usesMail()) {
 
 if ($project->usesPm()) {
 	print '<hr size="1" /><a href="'.util_make_url ('/pm/?group_id='.$group_id).'">';
-	print html_image('ic/taskman20g.png','20','20',array('alt'=>_('Tasks')));
+	print html_image('ic/taskman20g.png','20','20',array('alt'=>_('Task Manager')));
 	print '&nbsp;'._('Task Manager').'</a>';
 	$result = db_query_params ('SELECT * FROM project_group_list WHERE group_id=$1 AND is_public=1',
 			array ($group_id));
@@ -396,7 +396,7 @@ if ($project->usesSurvey()) {
 
 if ($project->usesSCM()) {
 	print '<hr size="1" /><a href="'.util_make_url ('/scm/?group_id='.$group_id).'">';
-	print html_image('ic/cvs16b.png','20','20',array('alt'=>_('SCM')));
+	print html_image('ic/cvs16b.png','20','20',array('alt'=>_('Source Code')));
 	print '&nbsp;'._('SCM Repository')."</a>";
 
 	$hook_params = array () ;
