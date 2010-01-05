@@ -67,25 +67,29 @@ if ($role_id=='observer') {
 	}
 
 	if (getStringFromRequest('submit')) {
-		$role_name = getStringFromRequest('role_name');
-		if (!$role_id) {
-			$role_id=$role->create($role_name,$data);
-			if (!$role_id) {
-				$feedback = $role->getErrorMessage();
-			} else {
-				$feedback = _('Successfully Created New Role');
-			}
+		$role_name = trim(getStringFromRequest('role_name'));
+		if (!$role_name) {
+			$feedback .= ' Missing Role Name ';
 		} else {
-			if (!$role->update($role_name,$data)) {
-				$feedback = $role->getErrorMessage();
+			if (!$role_id) {
+				$role_id=$role->create($role_name,$data);
+				if (!$role_id) {
+					$feedback .= $role->getErrorMessage();
+				} else {
+					$feedback = _('Successfully Created New Role');
+				}
 			} else {
-				$feedback = _('Successfully Updated Role');
+				if (!$role->update($role_name,$data)) {
+					$feedback .= $role->getErrorMessage();
+				} else {
+					$feedback = _('Successfully Updated Role');
+				}
 			}
-		}
-		//plugin webcal
+			//plugin webcal
 			//change assistant for webcal
 			$params = getIntFromRequest('group_id');
-			plugin_hook('change_cal_permission_auto',$params);	
+			plugin_hook('change_cal_permission_auto',$params);
+		}
 	}
 }
 
@@ -111,7 +115,7 @@ if ($role_id=='observer') {
 
 echo '
 <p>
-<form action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&role_id='. $role_id .'" method="post">';
+<form action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;role_id='. $role_id .'" method="post">';
 
 if ($role_id != 'observer') {
 	echo '<p><strong>'._('Role Name').'</strong><br />
