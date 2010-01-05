@@ -112,6 +112,9 @@ title="<?php echo _('Assigned Tasks'); ?>">
 			}
 			//if ($task->getProjectGroup()->getID() != $last_group) {
 			$projectGroup =& $task->getProjectGroup();
+			// Hack to prevent errors when there is an error.
+			if (!$projectGroup) 
+				continue;
 			$group =& $projectGroup->getGroup();
 			if ($projectGroup->getID() != $last_group) {
 				echo '
