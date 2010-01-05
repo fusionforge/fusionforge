@@ -51,7 +51,7 @@ echo notepad_func();
 			<td></td>
 		</tr>
 		<tr>
-	                <td>
+	        <td>
 			<strong><?php echo _('Submitted by') ?>:</strong><br />
 			<?php echo $ah->getSubmittedRealName();
 			if($ah->getSubmittedBy() != 100) {

@@ -61,7 +61,7 @@ class PluginManager extends Error {
 	/**
 	 * GetPluginObject() - get a particular plugin object
 	 *
-         * @param pluginname - name of plugin
+	 * @param pluginname - name of plugin
 	 * @return a plugin object
 	 */
 	function GetPluginObject ($pluginname) {

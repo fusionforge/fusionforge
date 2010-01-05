@@ -326,7 +326,7 @@ if ($ath->userIsAdmin()) {
 		echo '</td>
 	</tr>';
 	$ath->renderExtraFields($extra_fields,true,'None',true,'Any','',false,'QUERY');
-	
+
 	$tips = '<i>'._('(% for wildcards)').'</i>&nbsp;&nbsp;&nbsp;';
 	
 echo '

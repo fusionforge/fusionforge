@@ -7,8 +7,6 @@
 //
 // Attempt to set up the include path, to fix problems with relative includes
 
-//require_once('../env.inc.php');
-//require_once('pre.php');
 require_once $gfcommon.'include/FusionForge.class.php';
 require_once $gfcommon.'include/tag_cloud.php';
 
