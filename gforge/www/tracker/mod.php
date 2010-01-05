@@ -8,13 +8,12 @@
   *
   */
 
-
-$ath->header(array ('title'=>_('Modify').': '.$ah->getID(). ' - ' . $ah->getSummary(),'atid'=>$ath->getID() ));
+$ath->header(array ('title'=>'[#'. $ah->getID(). '] ' . $ah->getSummary(), 'atid'=>$ath->getID()));
 
 echo notepad_func();
 
 ?>
-	<h3>[#<?php echo $ah->getID(); ?>] <?php echo $ah->getSummary(); ?></h3>
+	<h1>[#<?php echo $ah->getID(); ?>] <?php echo $ah->getSummary(); ?></h1>
 
 	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;atid=<?php echo $ath->getID(); ?>"  enctype="multipart/form-data" method="post">
 	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
@@ -268,7 +267,7 @@ if ($group->usesPM()) {
 			for ($i=0; $i<$count; $i++) {
 				echo '
 				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-				<td><input type="checkbox" name="delete_file[]" value="'. $file_list[$i]->getID() .'">'._('Delete').' </td>'.
+				<td><input type="checkbox" name="delete_file[]" value="'. $file_list[$i]->getID() .'" />'._('Delete').' </td>'.
 				'<td>'. htmlspecialchars($file_list[$i]->getName()) .'</td>
 				<td>'.util_make_link ('/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.$file_list[$i]->getID().'/'.$file_list[$i]->getName(),_('Download')).'</td>
 				</tr>';

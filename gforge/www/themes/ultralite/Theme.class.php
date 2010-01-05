@@ -105,7 +105,7 @@ class Theme extends Layout {
 		}
 
 		print '
-			<option value="'.SEARCH__TYPE_IS_SOFTWARE.'"'.( $type_of_search == SEARCH__TYPE_IS_SOFTWARE ? ' selected="selected"' : '' ).'>'._('Software/Group').'</option>';
+			<option value="'.SEARCH__TYPE_IS_SOFTWARE.'"'.( $type_of_search == SEARCH__TYPE_IS_SOFTWARE ? ' selected="selected"' : '' ).'>'._('Project').'</option>';
 		print '
 			<option value="'.SEARCH__TYPE_IS_SKILL.'"'.( $type_of_search == SEARCH__TYPE_IS_SKILL ? ' selected="selected"' : '' ).'>'._('Skill').'</option>';
 		print '
@@ -164,7 +164,7 @@ class Theme extends Layout {
 	 * @param   string  Box title
 	 */
 	function boxTop($title) {
-		return '<!-- boxTop --><br>'.$title.'<br>';
+		return '<!-- boxTop --><br />'.$title.'<br />';
 	}
 
 	
@@ -242,7 +242,7 @@ class Theme extends Layout {
 	function tabGenerator($TABS_DIRS,$TABS_TITLES,$nested=false,$selected=false,$sel_tab_bgcolor='WHITE',$total_width='100%') {
 		$count=count($TABS_DIRS);
 		$return = '
-		<form name="menuForm" method="POST" action="/">
+		<form name="menuForm" method="post" action="/">
 		<select name="menuList">';
 		for ($i=0; $i<$count; $i++) {
 		$return .= '

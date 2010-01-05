@@ -267,7 +267,7 @@ if (isset($params['group']) && $params['group']) {
 		$TABS_TITLES[]=_('Home');
 		$TABS_TITLES[]=_('My&nbsp;Page');
 		if ($sys_use_trove) {
-		        $TABS_TITLES[]=_('Project&nbsp;Tree');
+		        $TABS_TITLES[]=_('Projects');
 		}
 		if ($sys_use_snippet) {
 		        $TABS_TITLES[]=_('Code&nbsp;Snippets');
