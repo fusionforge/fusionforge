@@ -200,9 +200,7 @@ function show_grouphistory ($group_id) {
  */
 function prdb_namespace_seek($namecheck) {
 
-	$query = "select * 
-from prdb_dbs 
-where dbname = $1";
+	$query = 'SELECT * FROM prdb_dbs WHERE dbname=$1';
 
 	$res_dbl = db_query_params($query, array($namecheck));
 
