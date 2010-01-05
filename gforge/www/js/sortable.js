@@ -242,15 +242,15 @@ function ts_sort_numeric(a,b) {
 	return compare_numeric(aa,bb);
 }
 function compare_numeric(a,b) {
-	var a = parseFloat(a);
-	a = (isNaN(a) ? 0 : a);
-	var b = parseFloat(b);
-	b = (isNaN(b) ? 0 : b);
-	return a - b;
+  var aa = parseFloat(a);
+  aa = (isNaN(aa) ? 0 : aa);
+  var bb = parseFloat(b);
+  bb = (isNaN(bb) ? 0 : bb);
+  return aa - bb;
 }
 function ts_sort_caseinsensitive(a,b) {
-	aa = ts_getInnerText(a.cells[SORT_COLUMN_INDEX]).toLowerCase();
-	bb = ts_getInnerText(b.cells[SORT_COLUMN_INDEX]).toLowerCase();
+	var aa = ts_getInnerText(a.cells[SORT_COLUMN_INDEX]).toLowerCase();
+	var bb = ts_getInnerText(b.cells[SORT_COLUMN_INDEX]).toLowerCase();
 	if (aa==bb) {
 		return 0;
 	}
@@ -260,8 +260,8 @@ function ts_sort_caseinsensitive(a,b) {
 	return 1;
 }
 function ts_sort_default(a,b) {
-	aa = ts_getInnerText(a.cells[SORT_COLUMN_INDEX]);
-	bb = ts_getInnerText(b.cells[SORT_COLUMN_INDEX]);
+	var aa = ts_getInnerText(a.cells[SORT_COLUMN_INDEX]);
+	var bb = ts_getInnerText(b.cells[SORT_COLUMN_INDEX]);
 	if (aa==bb) {
 		return 0;
 	}
@@ -283,6 +283,7 @@ function addEvent(elm, evType, fn, useCapture)
 		return r;
 	} else {
 		alert("Handler could not be removed");
+		return false;
 	}
 }
 function clean_num(str) {
