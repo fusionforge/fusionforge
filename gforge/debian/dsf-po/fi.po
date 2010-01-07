@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
-"Report-Msgid-Bugs-To: gforge@packages.debian.org\n"
+"Report-Msgid-Bugs-To: @PACKAGENAME@@packages.debian.org\n"
 "POT-Creation-Date: 2009-06-12 23:23+0200\n"
 "PO-Revision-Date: 2008-03-24 17:41+0200\n"
 "Last-Translator: Esko Arajärvi <edu@iki.fi>\n"
