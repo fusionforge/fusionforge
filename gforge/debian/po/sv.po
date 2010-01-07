@@ -1,28 +1,22 @@
-# translation of gforge_4.6.99+svn6580-1_sv.po to Swedish
-# Translators, if you are not familiar with the PO format, gettext
-# documentation is worth reading, especially sections dedicated to
-# this format, e.g. by running:
-# info -n '(gettext)PO Files'
-# info -n '(gettext)Header Entry'
-# Some information specific to po-debconf are available at
-# /usr/share/doc/po-debconf/README-trans
-# or http://www.debian.org/intl/l10n/po-debconf/README-trans
-# Developers do not need to manually edit POT or PO files.
+# Translation of gforge debconf template to Swedish
+# Copyright (C) 2009 Martin Bagge <brother@bsnet.se>
+# This file is distributed under the same license as the gforge package.
 #
-# Martin Ågren <martin.agren@gmail.com>, 2008.
+# Martin Ã…gren <martin.agren@gmail.com>, 2008.
+# Martin Bagge <brother@bsnet.se>, 2009
 msgid ""
 msgstr ""
 "Project-Id-Version: gforge_4.6.99+svn6580-1_sv\n"
-"Report-Msgid-Bugs-To: gforge@packages.debian.org\n"
-"POT-Creation-Date: 2008-02-26 22:50+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-12-25 20:40+0100\n"
 "PO-Revision-Date: 2008-07-29 18:44+0200\n"
-"Last-Translator: Martin Ågren <martin.agren@gmail.com>\n"
+"Last-Translator: Martin Ã…gren <martin.agren@gmail.com>\n"
 "Language-Team: Swedish <debian-l10n-swedish@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: sv\n"
-"X-Poedit-Country: sv\n"
+"X-Poedit-Language: Swedish\n"
+"X-Poedit-Country: Sweden\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
@@ -39,20 +33,22 @@ msgstr "Skalserver:"
 msgid ""
 "Please enter the hostname of the server that will host the GForge shell "
 "accounts."
-msgstr "Ange värdnamnet för servern som kommer tillhandahålla skalkonton för GForge."
+msgstr ""
+"Ange vÃ¤rdnamnet fÃ¶r servern som kommer tillhandahÃ¥lla skalkonton fÃ¶r GForge."
 
 #. Type: string
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:6001
 #: ../dsf-helper/downloadhost-variables.templates:2001
 msgid "Download server:"
-msgstr "Hämtningsserver:"
+msgstr "HÃ¤mtningsserver:"
 
 #. Type: string
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:6001
-msgid "Please enter the hostname of the server that will host the GForge packages."
-msgstr "Ange värdnamnet för servern som kommer tillhandahålla GForge-paketen."
+msgid ""
+"Please enter the hostname of the server that will host the GForge packages."
+msgstr "Ange vÃ¤rdnamnet fÃ¶r servern som kommer tillhandahÃ¥lla GForge-paketen."
 
 #. Type: string
 #. Description
@@ -61,13 +57,13 @@ msgstr "Ange värdnamnet för servern som kommer tillhandahålla GForge-paketen."
 #: ../dsf-helper/lists-variables.templates:2001
 #: ../dsf-helper/users-variables.templates:2001
 msgid "It should not be the same as the main GForge host."
-msgstr "Det ska inte vara samma som huvudvärden för GForge."
+msgstr "Det ska inte vara samma som huvudvÃ¤rden fÃ¶r GForge."
 
 #. Type: string
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:8001
 msgid "GForge administrator login:"
-msgstr "GForge-administratörens användarnamn:"
+msgstr "GForge-administratÃ¶rens anvÃ¤ndarnamn:"
 
 #. Type: string
 #. Description
@@ -79,14 +75,14 @@ msgid ""
 "The GForge administrator account will have full privileges on the system. It "
 "will be used to approve the creation of new projects."
 msgstr ""
-"Administratörskontot för GForge kommer att ha alla rättigheter i GForge-systemet. "
-"Det behövs för att godkänna skapandet av projekten."
+"AdministratÃ¶rskontot fÃ¶r GForge kommer att ha alla rÃ¤ttigheter i GForge-"
+"systemet. Det behÃ¶vs fÃ¶r att godkÃ¤nna skapandet av projekten."
 
 #. Type: string
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:8001
 msgid "Please choose the username for this account."
-msgstr "Ange användarnamnet för detta konto."
+msgstr "Ange anvÃ¤ndarnamnet fÃ¶r detta konto."
 
 #. Type: string
 #. Description
@@ -102,46 +98,47 @@ msgstr "IP-adress:"
 msgid ""
 "Please enter the IP address of the server that will host the GForge "
 "installation."
-msgstr "Ange IP-adressen för servern som kommer tillhandahålla GForge-installationen."
+msgstr ""
+"Ange IP-adressen fÃ¶r servern som kommer tillhandahÃ¥lla GForge-installationen."
 
 #. Type: string
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:9001
 #: ../dsf-helper/host-variables.templates:2001
 msgid "This is needed for the configuration of Apache virtual hosting."
-msgstr "Detta krävs för att konfigurera Apaches virtuella värd."
+msgstr "Detta krÃ¤vs fÃ¶r att konfigurera Apaches virtuella vÃ¤rd."
 
 #. Type: password
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:10001
 msgid "GForge administrator password:"
-msgstr "GForge-administratörens lösenord:"
+msgstr "GForge-administratÃ¶rens lÃ¶senord:"
 
 #. Type: password
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:10001
 msgid "Please choose the password for this account."
-msgstr "Mata in lösenordet för detta konto."
+msgstr "Mata in lÃ¶senordet fÃ¶r detta konto."
 
 #. Type: password
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:11001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
 msgid "Password confirmation:"
-msgstr "Lösenordsbekräftelse:"
+msgstr "LÃ¶senordsbekrÃ¤ftelse:"
 
 #. Type: password
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:11001
 #: ../dsf-helper/dbpasswd-variables.templates:3001
 msgid "Please re-type the password for confirmation."
-msgstr "Mata in lösenordet igen för bekräftelse."
+msgstr "Mata in lÃ¶senordet igen fÃ¶r bekrÃ¤ftelse."
 
 #. Type: string
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:12001
 msgid "Initial list of skills:"
-msgstr "Initiala listan över färdigheter:"
+msgstr "Initiala listan Ã¶ver fÃ¤rdigheter:"
 
 #. Type: string
 #. Description
@@ -151,15 +148,15 @@ msgid ""
 "those present in the database. This list is the initial list of skills that "
 "will enter the database."
 msgstr ""
-"GForge låter användarna definiera en lista över sina färdigheter, som kan "
-"väljas av de som finns i databasen.  Denna lista är den initiala listan "
-"som kommer att läggas in i databasen."
+"GForge lÃ¥ter anvÃ¤ndarna definiera en lista Ã¶ver sina fÃ¤rdigheter, som kan "
+"vÃ¤ljas av de som finns i databasen.  Denna lista Ã¤r den initiala listan som "
+"kommer att lÃ¤ggas in i databasen."
 
 #. Type: string
 #. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:12001
 msgid "Please enter a semicolon-separated list of skill names."
-msgstr "Mata in namn på färdigheter, separerade med semikolon."
+msgstr "Mata in namn pÃ¥ fÃ¤rdigheter, separerade med semikolon."
 
 #. Type: boolean
 #. Description
@@ -167,7 +164,7 @@ msgstr "Mata in namn på färdigheter, separerade med semikolon."
 #. (cvs, svn, etc.)
 #: ../gforge-dns-bind9.templates.dsfh-in:3001
 msgid "Do you want a simple DNS setup for GForge?"
-msgstr "Vill du ha en enkel DNS-konfiguration för GForge?"
+msgstr "Vill du ha en enkel DNS-konfiguration fÃ¶r GForge?"
 
 #. Type: boolean
 #. Description
@@ -180,10 +177,11 @@ msgid ""
 "or a complex setup which allows many servers as project web servers or SCM "
 "servers."
 msgstr ""
-"Du kan ha en enkel DNS-konfiguration som använder jokertecken för att peka "
-"alla projektwebbplatser till en enda IP-adress och vidaresända alla källkodshanterings"
-"värdar till en enda källkodshanteringsserver, eller en komplex konfiguration som låter "
-"dig ha många servrar som projektwebbservrar eller källkodshanteringsservrar."
+"Du kan ha en enkel DNS-konfiguration som anvÃ¤nder jokertecken fÃ¶r att peka "
+"alla projektwebbplatser till en enda IP-adress och vidaresÃ¤nda alla "
+"kÃ¤llkodshanteringsvÃ¤rdar till en enda kÃ¤llkodshanteringsserver, eller en "
+"komplex konfiguration som lÃ¥ter dig ha mÃ¥nga servrar som projektwebbservrar "
+"eller kÃ¤llkodshanteringsservrar."
 
 #. Type: boolean
 #. Description
@@ -195,9 +193,9 @@ msgid ""
 "project servers; it just assumes that all the project web directories are on "
 "the same server with a single SCM server."
 msgstr ""
-"Även om du har en enkel DNS-konfiguration, kan du fortfarande ha separata "
-"maskiner för dina projektservrar; den antar bara att du har alla projektens "
-"webbkataloger på samma server och en enda källkodshanteringsserver."
+"Ã„ven om du har en enkel DNS-konfiguration, kan du fortfarande ha separata "
+"maskiner fÃ¶r dina projektservrar; den antar bara att du har alla projektens "
+"webbkataloger pÃ¥ samma server och en enda kÃ¤llkodshanteringsserver."
 
 #. Type: boolean
 #. Description
@@ -212,7 +210,7 @@ msgid ""
 "GForge sends and receives plenty of e-mail to and from the \"${noreply}\" "
 "address."
 msgstr ""
-"GForge skickar och tar emot en mängd e-postmeddelanden till och från "
+"GForge skickar och tar emot en mÃ¤ngd e-postmeddelanden till och frÃ¥n "
 "adressen \"${noreply}\"."
 
 #. Type: boolean
@@ -222,15 +220,14 @@ msgid ""
 "E-mail to that address should be directed to a black hole (/dev/null), "
 "unless you have another use for that address."
 msgstr ""
-"E-post till den adressen ska pekas mot "
-"ett svart hål (/dev/null) såvida du inte har andra användningsområden för "
-"den adressen."
+"E-post till den adressen ska pekas mot ett svart hÃ¥l (/dev/null) sÃ¥vida du "
+"inte har andra anvÃ¤ndningsomrÃ¥den fÃ¶r den adressen."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:2001
 msgid "GForge domain or subdomain name:"
-msgstr "Namn på GForge-domänen eller -underdomänen:"
+msgstr "Namn pÃ¥ GForge-domÃ¤nen eller -underdomÃ¤nen:"
 
 #. Type: string
 #. Description
@@ -239,14 +236,15 @@ msgid ""
 "Please enter the domain that will host the GForge installation. Some "
 "services (scm, lists, etc.) will be given their own subdomain in that domain."
 msgstr ""
-"Ange den domän som kommer att vara värd för GForge-installationen.  Vissa "
-"tjänster (källkodshantering, listor, etc.) kommer att tilldelas sina egna underdomäner i den domänen."
+"Ange den domÃ¤n som kommer att vara vÃ¤rd fÃ¶r GForge-installationen.  Vissa "
+"tjÃ¤nster (kÃ¤llkodshantering, listor, etc.) kommer att tilldelas sina egna "
+"underdomÃ¤ner i den domÃ¤nen."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:3001
 msgid "GForge administrator e-mail address:"
-msgstr "GForge-administratörens e-postadress:"
+msgstr "GForge-administratÃ¶rens e-postadress:"
 
 #. Type: string
 #. Description
@@ -255,14 +253,14 @@ msgid ""
 "Please enter the e-mail address of the GForge administrator of this site. It "
 "will be used when problems occur."
 msgstr ""
-"Ange e-postadressen för GForge-administratören på systemet. "
-"Den kommer användas ifall problem uppstår."
+"Ange e-postadressen fÃ¶r GForge-administratÃ¶ren pÃ¥ systemet. Den kommer "
+"anvÃ¤ndas ifall problem uppstÃ¥r."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:4001
-msgid "GForge system name:"
-msgstr "GForges systemnamn:"
+msgid "GForge/FusionForge system name:"
+msgstr "GForge systemnamn:"
 
 #. Type: string
 #. Description
@@ -270,7 +268,8 @@ msgstr "GForges systemnamn:"
 msgid ""
 "Please enter the name of the GForge system. It is used in various places "
 "throughout the system."
-msgstr "Ange namnet på GForge-systemet. Det används på olika ställen i systemet."
+msgstr ""
+"Ange namnet pÃ¥ GForge-systemet. Det anvÃ¤nds pÃ¥ olika stÃ¤llen i systemet."
 
 #. Type: string
 #. Description
@@ -285,8 +284,8 @@ msgid ""
 "Please enter the IP address (or hostname) of the server that will host the "
 "GForge database."
 msgstr ""
-"IP-adressen (eller värdnamnet) för servern som kommer tillhandahålla "
-"GForge-databasen."
+"IP-adressen (eller vÃ¤rdnamnet) fÃ¶r servern som kommer tillhandahÃ¥lla GForge-"
+"databasen."
 
 #. Type: string
 #. Description
@@ -297,14 +296,15 @@ msgstr "Databasnamn:"
 #. Type: string
 #. Description
 #: ../dsf-helper/dbhost-variables.templates:3001
-msgid "Please enter the name of the database that will host the GForge database."
-msgstr "Ange namnet på databasen som kommer tillhandahålla GForge-databasen."
+msgid ""
+"Please enter the name of the database that will host the GForge database."
+msgstr "Ange namnet pÃ¥ databasen som kommer tillhandahÃ¥lla GForge-databasen."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/dbhost-variables.templates:4001
 msgid "Database administrator username:"
-msgstr "Databasadministratörens användarnamn:"
+msgstr "DatabasadministratÃ¶rens anvÃ¤ndarnamn:"
 
 #. Type: string
 #. Description
@@ -313,38 +313,39 @@ msgid ""
 "Please enter the username of the database administrator for the server that "
 "will host the GForge database."
 msgstr ""
-"Ange användarnamnet på databasadministratören för servers "
-"som kommer tillhandahålla GForge-databasen."
+"Ange anvÃ¤ndarnamnet pÃ¥ databasadministratÃ¶ren fÃ¶r servers som kommer "
+"tillhandahÃ¥lla GForge-databasen."
 
 #. Type: password
 #. Description
 #: ../dsf-helper/dbpasswd-variables.templates:2001
 msgid "Password used for the database:"
-msgstr "Lösenordet som används för databasen:"
+msgstr "LÃ¶senordet som anvÃ¤nds fÃ¶r databasen:"
 
 #. Type: password
 #. Description
 #: ../dsf-helper/dbpasswd-variables.templates:2001
 msgid "Connections to the database system are authenticated by a password."
-msgstr "Uppkopplingar till databassystem autentiseras med ett lösenord."
+msgstr "Uppkopplingar till databassystem autentiseras med ett lÃ¶senord."
 
 #. Type: password
 #. Description
 #: ../dsf-helper/dbpasswd-variables.templates:2001
 msgid "Please choose the connection password."
-msgstr "Välj uppkopplingslösenordet."
+msgstr "VÃ¤lj uppkopplingslÃ¶senordet."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/downloadhost-variables.templates:2001
-msgid "Please enter the host name of the server that will host the GForge packages."
-msgstr "Ange värdnamnet för servern som kommer tillhandahålla GForge-paketen."
+msgid ""
+"Please enter the host name of the server that will host the GForge packages."
+msgstr "Ange vÃ¤rdnamnet fÃ¶r servern som kommer tillhandahÃ¥lla GForge-paketen."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/groupid-variables.templates:2001
 msgid "News administrative group ID:"
-msgstr "Grupp-id för nyhetsadministratörerna:"
+msgstr "Grupp-id fÃ¶r nyhetsadministratÃ¶rerna:"
 
 #. Type: string
 #. Description
@@ -354,27 +355,27 @@ msgid ""
 "page. This group's ID must not be 1. This should be changed only if you "
 "upgrade from a previous version and want to keep the data."
 msgstr ""
-"Medlemmar i nyhetsadministrationsgruppen kan godkänna nyheter för GForges "
-"förstasida.  Detta grupp-id får inte vara 1. Du behöver bara ändra detta "
-"värde om du uppgraderar från en tidigare version och vill behålla ditt data."
+"Medlemmar i nyhetsadministrationsgruppen kan godkÃ¤nna nyheter fÃ¶r GForges "
+"fÃ¶rstasida.  Detta grupp-id fÃ¥r inte vara 1. Du behÃ¶ver bara Ã¤ndra detta "
+"vÃ¤rde om du uppgraderar frÃ¥n en tidigare version och vill behÃ¥lla ditt data."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/groupid-variables.templates:3001
 msgid "Statistics administrative group ID:"
-msgstr "Grupp-id för statistikadministratörerna:"
+msgstr "Grupp-id fÃ¶r statistikadministratÃ¶rerna:"
 
 #. Type: string
 #. Description
 #: ../dsf-helper/groupid-variables.templates:4001
 msgid "Peer rating administrative group ID:"
-msgstr "Grupp-id för användarbedömningsadministratörerna:"
+msgstr "Grupp-id fÃ¶r anvÃ¤ndarbedÃ¶mningsadministratÃ¶rerna:"
 
 #. Type: string
 #. Description
 #: ../dsf-helper/lists-variables.templates:2001
 msgid "Mailing lists server:"
-msgstr "Server för sändlistor:"
+msgstr "Server fÃ¶r sÃ¤ndlistor:"
 
 #. Type: string
 #. Description
@@ -382,7 +383,9 @@ msgstr "Server för sändlistor:"
 msgid ""
 "Please enter the host name of the server that will host the GForge mailing "
 "lists."
-msgstr "Ange värdnamnet för servern som kommer tillhandahålla sändlistorna för GForge."
+msgstr ""
+"Ange vÃ¤rdnamnet fÃ¶r servern som kommer tillhandahÃ¥lla sÃ¤ndlistorna fÃ¶r "
+"GForge."
 
 #. Type: string
 #. Description
@@ -390,13 +393,14 @@ msgstr "Ange värdnamnet för servern som kommer tillhandahålla sändlistorna för G
 msgid ""
 "Please enter the host name of the server that will host the GForge shell "
 "accounts."
-msgstr "Ange värdnamnet för servern som kommer tillhandahålla skalkonton för GForge."
+msgstr ""
+"Ange vÃ¤rdnamnet fÃ¶r servern som kommer tillhandahÃ¥lla skalkonton fÃ¶r GForge."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/users-variables.templates:2001
 msgid "User mail redirector server:"
-msgstr "Omdirigerarserver för användarnas e-post:"
+msgstr "Omdirigerarserver fÃ¶r anvÃ¤ndarnas e-post:"
 
 #. Type: string
 #. Description
@@ -404,7 +408,9 @@ msgstr "Omdirigerarserver för användarnas e-post:"
 msgid ""
 "Please enter the host name of the server that will host the GForge user mail "
 "redirector."
-msgstr "Ange värdnamnet för servern som kommer tillhandahålla omdirigerarserver för användarnas e-post för GForge."
+msgstr ""
+"Ange vÃ¤rdnamnet fÃ¶r servern som kommer tillhandahÃ¥lla omdirigerarserver fÃ¶r "
+"anvÃ¤ndarnas e-post fÃ¶r GForge."
 
 #. Type: select
 #. Choices
@@ -434,7 +440,7 @@ msgstr "Kinesiska (traditionell)"
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Dutch"
-msgstr "Holländska"
+msgstr "HollÃ¤ndska"
 
 #. Type: select
 #. Choices
@@ -530,7 +536,7 @@ msgstr "Ryska"
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Chinese (Simplified)"
-msgstr "Kinesiska (förenklad)"
+msgstr "Kinesiska (fÃ¶renklad)"
 
 #. Type: select
 #. Choices
@@ -548,25 +554,25 @@ msgstr "Svenska"
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Thai"
-msgstr "Thailändska"
+msgstr "ThailÃ¤ndska"
 
 #. Type: select
 #. DefaultChoice
 #: ../dsf-helper/web-variables.templates:2002
 msgid "English[ Default language]"
-msgstr "Engelska[ Standardspråk]"
+msgstr "Engelska[ StandardsprÃ¥k]"
 
 #. Type: select
 #. Description
 #: ../dsf-helper/web-variables.templates:2003
 msgid "Default language:"
-msgstr "Standardspråk:"
+msgstr "StandardsprÃ¥k:"
 
 #. Type: select
 #. Description
 #: ../dsf-helper/web-variables.templates:2003
 msgid "Please choose the default language for web pages."
-msgstr "Ange standardspråket för webbsidorna."
+msgstr "Ange standardsprÃ¥ket fÃ¶r webbsidorna."
 
 #. Type: string
 #. Description
@@ -577,8 +583,6 @@ msgstr "Standardtema:"
 #. Type: string
 #. Description
 #: ../dsf-helper/web-variables.templates:3001
-msgid "Please choose the default theme for web pages. This must be a valid name."
-msgstr ""
-"Ange standardtemat för webbsidorna. Detta måste vara ett giltigt "
-"namn."
-
+msgid ""
+"Please choose the default theme for web pages. This must be a valid name."
+msgstr "Ange standardtemat fÃ¶r webbsidorna. Detta mÃ¥ste vara ett giltigt namn."
