@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-07 16:01+0100\n"
+"POT-Creation-Date: 2010-01-07 18:16+0100\n"
 "PO-Revision-Date: 2009-01-15 15:23+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2175,18 +2175,18 @@ msgstr "Dieser Benutzername existiert bereits."
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:519
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:654
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:793
-#, php-format
-msgid "Could not create object in database: %s"
-msgstr ""
+#, fuzzy, php-format
+msgid "Could not create object in database: %s."
+msgstr "Kann Datenbankeintrag nicht hinzufügen"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:311
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:418
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:527
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:662
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:801
-#, php-format
-msgid "Could not get ID from object in database: %s"
-msgstr ""
+#, fuzzy, php-format
+msgid "Could not get ID from object in database: %s."
+msgstr "Kann Datenbankeintrag nicht hinzufügen"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:323
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:430
@@ -2199,9 +2199,12 @@ msgstr "Diese Fundkategorie existiert nicht"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:335
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:441
-#, php-format
-msgid "Could not update object in database: %s"
-msgstr ""
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:555
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:688
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:830
+#, fuzzy, php-format
+msgid "Could not update object in database: %s."
+msgstr "Kann Datenbankeintrag nicht hinzufügen"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:348
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:454
@@ -2209,7 +2212,7 @@ msgstr ""
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:701
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:843
 #, fuzzy
-msgid "Cannot delete a non-existing object"
+msgid "Cannot delete a non-existing object."
 msgstr "Kann Datenbankeintrag nicht hinzufügen"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:355
@@ -2218,34 +2221,24 @@ msgstr "Kann Datenbankeintrag nicht hinzufügen"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:708
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:852
 #, fuzzy, php-format
-msgid "Could not delete object in database: %s"
+msgid "Could not delete object in database: %s."
 msgstr "Kann Datenbankeintrag nicht hinzufügen"
 
-#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:555
-#, fuzzy, php-format
-msgid "Could not create object in update: %s"
-msgstr "Konnte das Oberforum nicht aktualisieren"
-
-#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:688
-#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:830
-#, php-format
-msgid "Could not create object update database: %s"
-msgstr ""
-
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:819
-msgid "Cannot currently move a participation across contributions"
+msgid "Cannot currently move a participation across contributions."
 msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:860
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:867
-#, php-format
-msgid "Could not update indices in database: %s"
-msgstr ""
+#, fuzzy, php-format
+msgid "Could not update indices in database: %s."
+msgstr "Kann Datenbankeintrag nicht hinzufügen"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:881
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:906
-msgid "Cannot update a non-existing object"
-msgstr ""
+#, fuzzy
+msgid "Cannot update a non-existing object."
+msgstr "Kann Datenbankeintrag nicht hinzufügen"
 
 #: plugins/contribtracker/www/actor_logo.php:19
 #: plugins/contribtracker/www/actor_logo.php:25
@@ -2258,7 +2251,7 @@ msgstr "Ungültiger Benutzer"
 #: plugins/contribtracker/www/actor_logo.php:26
 #: plugins/contribtracker/www/index.php:117
 #, fuzzy
-msgid "Invalid actor specified"
+msgid "Invalid actor specified."
 msgstr "Ungültiger Parameter"
 
 #: plugins/contribtracker/www/global_admin.php:19
@@ -2539,9 +2532,10 @@ msgid "Edit an actor"
 msgstr "Bearbeite eine Gruppe"
 
 #: plugins/contribtracker/www/index.php:18
+#: plugins/contribtracker/www/index.php:150
 #, fuzzy
-msgid "Group:"
-msgstr "Gruppe"
+msgid "Project:"
+msgstr "Projekt"
 
 #: plugins/contribtracker/www/index.php:25
 #: plugins/contribtracker/www/project_admin.php:284
@@ -2625,11 +2619,6 @@ msgid "Contribution by %s"
 msgid_plural "Contributions by %s"
 msgstr[0] "Weiter >>"
 msgstr[1] "Weiter >>"
-
-#: plugins/contribtracker/www/index.php:150
-#, fuzzy
-msgid "Project:"
-msgstr "Projekt"
 
 #: plugins/contribtracker/www/index.php:154
 #, fuzzy
@@ -4474,7 +4463,7 @@ msgstr "Einloggen (SSL)"
 
 #: www/account/login.php:101
 #, fuzzy
-msgid "<P>Your account does not exist."
+msgid "<p>Your account does not exist.</p>"
 msgstr "Diese Fundkategorie existiert nicht"
 
 #: www/account/login.php:105
@@ -6380,7 +6369,7 @@ msgstr "Alle Gruppen"
 #: www/docman/admin/index.php:472
 #, fuzzy
 msgid ""
-"You are about to permanently delete this document group and his content "
+"You are about to permanently delete this document group and its content "
 "(documents and subgroups)."
 msgstr ""
 "Sie sind dabei dieses Forum und all seinen Inhalt permanent und "
@@ -14429,6 +14418,18 @@ msgstr[1] ""
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "Benutzername"
+
+#, fuzzy
+#~ msgid "Could not create object in update: %s."
+#~ msgstr "Konnte das Oberforum nicht aktualisieren"
+
+#, fuzzy
+#~ msgid "Could not create object update database: %s."
+#~ msgstr "Konnte das Oberforum nicht aktualisieren"
+
+#, fuzzy
+#~ msgid "Group:"
+#~ msgstr "Gruppe"
 
 #~ msgid "Developer Info"
 #~ msgstr "Entwicklerinformationen"

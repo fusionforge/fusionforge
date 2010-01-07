@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-07 16:01+0100\n"
+"POT-Creation-Date: 2010-01-07 18:16+0100\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2162,18 +2162,18 @@ msgstr "查詢已經存在"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:519
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:654
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:793
-#, php-format
-msgid "Could not create object in database: %s"
-msgstr ""
+#, fuzzy, php-format
+msgid "Could not create object in database: %s."
+msgstr "無法增加資料庫分類"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:311
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:418
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:527
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:662
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:801
-#, php-format
-msgid "Could not get ID from object in database: %s"
-msgstr ""
+#, fuzzy, php-format
+msgid "Could not get ID from object in database: %s."
+msgstr "無法增加資料庫分類"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:323
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:430
@@ -2186,9 +2186,12 @@ msgstr "查詢不存在"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:335
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:441
-#, php-format
-msgid "Could not update object in database: %s"
-msgstr ""
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:555
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:688
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:830
+#, fuzzy, php-format
+msgid "Could not update object in database: %s."
+msgstr "無法增加資料庫分類"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:348
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:454
@@ -2196,7 +2199,7 @@ msgstr ""
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:701
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:843
 #, fuzzy
-msgid "Cannot delete a non-existing object"
+msgid "Cannot delete a non-existing object."
 msgstr "無法增加資料庫分類"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:355
@@ -2205,34 +2208,24 @@ msgstr "無法增加資料庫分類"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:708
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:852
 #, fuzzy, php-format
-msgid "Could not delete object in database: %s"
+msgid "Could not delete object in database: %s."
 msgstr "無法增加資料庫分類"
 
-#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:555
-#, fuzzy, php-format
-msgid "Could not create object in update: %s"
-msgstr "無法更新上層文章"
-
-#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:688
-#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:830
-#, php-format
-msgid "Could not create object update database: %s"
-msgstr ""
-
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:819
-msgid "Cannot currently move a participation across contributions"
+msgid "Cannot currently move a participation across contributions."
 msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:860
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:867
-#, php-format
-msgid "Could not update indices in database: %s"
-msgstr ""
+#, fuzzy, php-format
+msgid "Could not update indices in database: %s."
+msgstr "無法增加資料庫分類"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:881
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:906
-msgid "Cannot update a non-existing object"
-msgstr ""
+#, fuzzy
+msgid "Cannot update a non-existing object."
+msgstr "無法增加資料庫分類"
 
 #: plugins/contribtracker/www/actor_logo.php:19
 #: plugins/contribtracker/www/actor_logo.php:25
@@ -2245,7 +2238,7 @@ msgstr "不正確會員"
 #: plugins/contribtracker/www/actor_logo.php:26
 #: plugins/contribtracker/www/index.php:117
 #, fuzzy
-msgid "Invalid actor specified"
+msgid "Invalid actor specified."
 msgstr "無效參數"
 
 #: plugins/contribtracker/www/global_admin.php:19
@@ -2526,9 +2519,10 @@ msgid "Edit an actor"
 msgstr "編輯分組"
 
 #: plugins/contribtracker/www/index.php:18
+#: plugins/contribtracker/www/index.php:150
 #, fuzzy
-msgid "Group:"
-msgstr "群組"
+msgid "Project:"
+msgstr "專案"
 
 #: plugins/contribtracker/www/index.php:25
 #: plugins/contribtracker/www/project_admin.php:284
@@ -2612,11 +2606,6 @@ msgid "Contribution by %s"
 msgid_plural "Contributions by %s"
 msgstr[0] "繼續 >>"
 msgstr[1] "繼續 >>"
-
-#: plugins/contribtracker/www/index.php:150
-#, fuzzy
-msgid "Project:"
-msgstr "專案"
 
 #: plugins/contribtracker/www/index.php:154
 #, fuzzy
@@ -4450,7 +4439,7 @@ msgstr "登入"
 
 #: www/account/login.php:101
 #, fuzzy
-msgid "<P>Your account does not exist."
+msgid "<p>Your account does not exist.</p>"
 msgstr "查詢不存在"
 
 #: www/account/login.php:105
@@ -6324,7 +6313,7 @@ msgstr "所有群組"
 #: www/docman/admin/index.php:472
 #, fuzzy
 msgid ""
-"You are about to permanently delete this document group and his content "
+"You are about to permanently delete this document group and its content "
 "(documents and subgroups)."
 msgstr "你正要永久地刪除這一份文件。"
 
@@ -14200,6 +14189,18 @@ msgstr[1] ""
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "帳號"
+
+#, fuzzy
+#~ msgid "Could not create object in update: %s."
+#~ msgstr "無法更新上層文章"
+
+#, fuzzy
+#~ msgid "Could not create object update database: %s."
+#~ msgstr "無法更新上層文章"
+
+#, fuzzy
+#~ msgid "Group:"
+#~ msgstr "群組"
 
 #~ msgid "Developer Info"
 #~ msgstr "開發者資訊"

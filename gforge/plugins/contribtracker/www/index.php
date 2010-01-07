@@ -15,7 +15,7 @@ function display_contribution ($c, $show_groups = false) {
 	global $plugin ;
 	print '<h2>'.$c->getName().'</h2>' ;
 	if ($show_groups) {
-		print '<strong>'._('Group:').'</strong> ' ;
+		print '<strong>'._('Project:').'</strong> ' ;
 		print util_make_link_g ($c->getGroup()->getUnixName(),
 					$c->getGroup()->getId(),
 					htmlspecialchars ($c->getGroup()->getPublicName())) ;
@@ -114,7 +114,7 @@ if ($group_id) {
 	$actor = new ContribTrackerActor ($actor_id) ;
 	if (!is_object ($actor) || $actor->isError()) {
 		exit_error (_('Invalid actor'),
-			    _('Invalid actor specified')) ;
+			    _('Invalid actor specified.')) ;
 	}
 
 	$HTML->header(array('title'=>_('Actor details'),'pagename'=>'contribtracker'));

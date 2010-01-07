@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-07 16:01+0100\n"
+"POT-Creation-Date: 2010-01-07 18:16+0100\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2050,7 +2050,7 @@ msgstr "Това потребителско име вече е заето."
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:654
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:793
 #, php-format
-msgid "Could not create object in database: %s"
+msgid "Could not create object in database: %s."
 msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:311
@@ -2059,7 +2059,7 @@ msgstr ""
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:662
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:801
 #, php-format
-msgid "Could not get ID from object in database: %s"
+msgid "Could not get ID from object in database: %s."
 msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:323
@@ -2073,8 +2073,11 @@ msgstr "Това потребителско име вече е заето."
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:335
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:441
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:555
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:688
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:830
 #, php-format
-msgid "Could not update object in database: %s"
+msgid "Could not update object in database: %s."
 msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:348
@@ -2082,7 +2085,7 @@ msgstr ""
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:568
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:701
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:843
-msgid "Cannot delete a non-existing object"
+msgid "Cannot delete a non-existing object."
 msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:355
@@ -2091,33 +2094,22 @@ msgstr ""
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:708
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:852
 #, php-format
-msgid "Could not delete object in database: %s"
-msgstr ""
-
-#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:555
-#, php-format
-msgid "Could not create object in update: %s"
-msgstr ""
-
-#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:688
-#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:830
-#, php-format
-msgid "Could not create object update database: %s"
+msgid "Could not delete object in database: %s."
 msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:819
-msgid "Cannot currently move a participation across contributions"
+msgid "Cannot currently move a participation across contributions."
 msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:860
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:867
 #, php-format
-msgid "Could not update indices in database: %s"
+msgid "Could not update indices in database: %s."
 msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:881
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:906
-msgid "Cannot update a non-existing object"
+msgid "Cannot update a non-existing object."
 msgstr ""
 
 #: plugins/contribtracker/www/actor_logo.php:19
@@ -2131,7 +2123,7 @@ msgstr "Грешна парола"
 #: plugins/contribtracker/www/actor_logo.php:26
 #: plugins/contribtracker/www/index.php:117
 #, fuzzy
-msgid "Invalid actor specified"
+msgid "Invalid actor specified."
 msgstr "Невалиден UNIX идентификатор."
 
 #: plugins/contribtracker/www/global_admin.php:19
@@ -2411,8 +2403,10 @@ msgid "Edit an actor"
 msgstr "Редактиране на папка"
 
 #: plugins/contribtracker/www/index.php:18
-msgid "Group:"
-msgstr ""
+#: plugins/contribtracker/www/index.php:150
+#, fuzzy
+msgid "Project:"
+msgstr "Общо за целия проект"
 
 #: plugins/contribtracker/www/index.php:25
 #: plugins/contribtracker/www/project_admin.php:284
@@ -2494,11 +2488,6 @@ msgid "Contribution by %s"
 msgid_plural "Contributions by %s"
 msgstr[0] ""
 msgstr[1] ""
-
-#: plugins/contribtracker/www/index.php:150
-#, fuzzy
-msgid "Project:"
-msgstr "Общо за целия проект"
 
 #: plugins/contribtracker/www/index.php:154
 #, fuzzy
@@ -4300,7 +4289,7 @@ msgstr "Вход"
 
 #: www/account/login.php:101
 #, fuzzy
-msgid "<P>Your account does not exist."
+msgid "<p>Your account does not exist.</p>"
 msgstr "Това потребителско име вече е заето."
 
 #: www/account/login.php:105
@@ -6149,7 +6138,7 @@ msgstr "Редактиране на папка"
 #: www/docman/admin/index.php:472
 #, fuzzy
 msgid ""
-"You are about to permanently delete this document group and his content "
+"You are about to permanently delete this document group and its content "
 "(documents and subgroups)."
 msgstr ""
 "ПРЕДУПРЕЖДЕНИЕ! Вие сте на път да изтриете съобщение и всички свързани с "

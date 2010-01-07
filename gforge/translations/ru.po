@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-07 16:01+0100\n"
+"POT-Creation-Date: 2010-01-07 18:16+0100\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2158,7 +2158,7 @@ msgstr "Запрос уже существует"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:654
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:793
 #, fuzzy, php-format
-msgid "Could not create object in database: %s"
+msgid "Could not create object in database: %s."
 msgstr "Ошибка при создании группы: %s"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:311
@@ -2166,9 +2166,9 @@ msgstr "Ошибка при создании группы: %s"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:527
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:662
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:801
-#, php-format
-msgid "Could not get ID from object in database: %s"
-msgstr ""
+#, fuzzy, php-format
+msgid "Could not get ID from object in database: %s."
+msgstr "Ошибка при создании группы: %s"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:323
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:430
@@ -2181,8 +2181,11 @@ msgstr "Запрос не существует"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:335
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:441
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:555
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:688
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:830
 #, fuzzy, php-format
-msgid "Could not update object in database: %s"
+msgid "Could not update object in database: %s."
 msgstr "Ошибка, невозможно обновить статус группы (Unix): %s"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:348
@@ -2191,7 +2194,7 @@ msgstr "Ошибка, невозможно обновить статус гру�
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:701
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:843
 #, fuzzy
-msgid "Cannot delete a non-existing object"
+msgid "Cannot delete a non-existing object."
 msgstr "Невозможно добавить запись в базу данных"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:355
@@ -2200,34 +2203,24 @@ msgstr "Невозможно добавить запись в базу данн�
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:708
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:852
 #, fuzzy, php-format
-msgid "Could not delete object in database: %s"
+msgid "Could not delete object in database: %s."
 msgstr "Нельзя удалять системные группы"
 
-#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:555
-#, fuzzy, php-format
-msgid "Could not create object in update: %s"
-msgstr "Ошибка при создании группы: %s"
-
-#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:688
-#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:830
-#, fuzzy, php-format
-msgid "Could not create object update database: %s"
-msgstr "Ошибка при создании группы: %s"
-
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:819
-msgid "Cannot currently move a participation across contributions"
+msgid "Cannot currently move a participation across contributions."
 msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:860
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:867
-#, php-format
-msgid "Could not update indices in database: %s"
-msgstr ""
+#, fuzzy, php-format
+msgid "Could not update indices in database: %s."
+msgstr "Ошибка, невозможно обновить статус группы (Unix): %s"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:881
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:906
-msgid "Cannot update a non-existing object"
-msgstr ""
+#, fuzzy
+msgid "Cannot update a non-existing object."
+msgstr "Невозможно добавить запись в базу данных"
 
 #: plugins/contribtracker/www/actor_logo.php:19
 #: plugins/contribtracker/www/actor_logo.php:25
@@ -2240,7 +2233,7 @@ msgstr "Неверно указан год"
 #: plugins/contribtracker/www/actor_logo.php:26
 #: plugins/contribtracker/www/index.php:117
 #, fuzzy
-msgid "Invalid actor specified"
+msgid "Invalid actor specified."
 msgstr "Недопустимый идентификатор форума"
 
 #: plugins/contribtracker/www/global_admin.php:19
@@ -2521,9 +2514,10 @@ msgid "Edit an actor"
 msgstr "Редактировать группу"
 
 #: plugins/contribtracker/www/index.php:18
+#: plugins/contribtracker/www/index.php:150
 #, fuzzy
-msgid "Group:"
-msgstr "Группа"
+msgid "Project:"
+msgstr "Проект"
 
 #: plugins/contribtracker/www/index.php:25
 #: plugins/contribtracker/www/project_admin.php:284
@@ -2610,11 +2604,6 @@ msgid_plural "Contributions by %s"
 msgstr[0] "Атрибуты"
 msgstr[1] "Атрибуты"
 msgstr[2] "Атрибуты"
-
-#: plugins/contribtracker/www/index.php:150
-#, fuzzy
-msgid "Project:"
-msgstr "Проект"
 
 #: plugins/contribtracker/www/index.php:154
 #, fuzzy
@@ -4599,7 +4588,7 @@ msgstr "Вход"
 
 #: www/account/login.php:101
 #, fuzzy
-msgid "<P>Your account does not exist."
+msgid "<p>Your account does not exist.</p>"
 msgstr "Запрос не существует"
 
 #: www/account/login.php:105
@@ -6546,7 +6535,7 @@ msgstr "Все группы"
 #: www/docman/admin/index.php:472
 #, fuzzy
 msgid ""
-"You are about to permanently delete this document group and his content "
+"You are about to permanently delete this document group and its content "
 "(documents and subgroups)."
 msgstr "Сейчас вы удалите этот документ безвозвратно."
 
@@ -14652,6 +14641,18 @@ msgstr[2] ""
 #: www/users:33
 msgid "No User Name Provided"
 msgstr "Имя участника обязательно"
+
+#, fuzzy
+#~ msgid "Could not create object in update: %s."
+#~ msgstr "Ошибка при создании группы: %s"
+
+#, fuzzy
+#~ msgid "Could not create object update database: %s."
+#~ msgstr "Ошибка при создании группы: %s"
+
+#, fuzzy
+#~ msgid "Group:"
+#~ msgstr "Группа"
 
 #~ msgid "No file was provided"
 #~ msgstr "Файл не предоставлен"

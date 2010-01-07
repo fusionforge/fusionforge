@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-07 16:01+0100\n"
+"POT-Creation-Date: 2010-01-07 18:16+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2137,18 +2137,18 @@ msgstr "사용자 ID가 이미 존재합니다."
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:519
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:654
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:793
-#, php-format
-msgid "Could not create object in database: %s"
-msgstr ""
+#, fuzzy, php-format
+msgid "Could not create object in database: %s."
+msgstr "database 항목을 추가할 수 없습니다."
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:311
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:418
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:527
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:662
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:801
-#, php-format
-msgid "Could not get ID from object in database: %s"
-msgstr ""
+#, fuzzy, php-format
+msgid "Could not get ID from object in database: %s."
+msgstr "database 항목을 추가할 수 없습니다."
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:323
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:430
@@ -2161,9 +2161,12 @@ msgstr "분류 기준이 존재하지 않습니다."
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:335
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:441
-#, php-format
-msgid "Could not update object in database: %s"
-msgstr ""
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:555
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:688
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:830
+#, fuzzy, php-format
+msgid "Could not update object in database: %s."
+msgstr "database 항목을 추가할 수 없습니다."
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:348
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:454
@@ -2171,7 +2174,7 @@ msgstr ""
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:701
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:843
 #, fuzzy
-msgid "Cannot delete a non-existing object"
+msgid "Cannot delete a non-existing object."
 msgstr "database 항목을 추가할 수 없습니다."
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:355
@@ -2180,34 +2183,24 @@ msgstr "database 항목을 추가할 수 없습니다."
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:708
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:852
 #, fuzzy, php-format
-msgid "Could not delete object in database: %s"
+msgid "Could not delete object in database: %s."
 msgstr "database 항목을 추가할 수 없습니다."
 
-#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:555
-#, fuzzy, php-format
-msgid "Could not create object in update: %s"
-msgstr "Could Not Update Parent"
-
-#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:688
-#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:830
-#, php-format
-msgid "Could not create object update database: %s"
-msgstr ""
-
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:819
-msgid "Cannot currently move a participation across contributions"
+msgid "Cannot currently move a participation across contributions."
 msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:860
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:867
-#, php-format
-msgid "Could not update indices in database: %s"
-msgstr ""
+#, fuzzy, php-format
+msgid "Could not update indices in database: %s."
+msgstr "database 항목을 추가할 수 없습니다."
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:881
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:906
-msgid "Cannot update a non-existing object"
-msgstr ""
+#, fuzzy
+msgid "Cannot update a non-existing object."
+msgstr "database 항목을 추가할 수 없습니다."
 
 #: plugins/contribtracker/www/actor_logo.php:19
 #: plugins/contribtracker/www/actor_logo.php:25
@@ -2220,7 +2213,7 @@ msgstr "유효하지 않은 사용자입니다."
 #: plugins/contribtracker/www/actor_logo.php:26
 #: plugins/contribtracker/www/index.php:117
 #, fuzzy
-msgid "Invalid actor specified"
+msgid "Invalid actor specified."
 msgstr "잘못된 인자입니다."
 
 #: plugins/contribtracker/www/global_admin.php:19
@@ -2501,9 +2494,10 @@ msgid "Edit an actor"
 msgstr "그룹 편집하기"
 
 #: plugins/contribtracker/www/index.php:18
+#: plugins/contribtracker/www/index.php:150
 #, fuzzy
-msgid "Group:"
-msgstr "Group"
+msgid "Project:"
+msgstr "Projects"
 
 #: plugins/contribtracker/www/index.php:25
 #: plugins/contribtracker/www/project_admin.php:284
@@ -2585,11 +2579,6 @@ msgstr ""
 msgid "Contribution by %s"
 msgid_plural "Contributions by %s"
 msgstr[0] "계속 >>"
-
-#: plugins/contribtracker/www/index.php:150
-#, fuzzy
-msgid "Project:"
-msgstr "Projects"
 
 #: plugins/contribtracker/www/index.php:154
 #, fuzzy
@@ -4405,7 +4394,7 @@ msgstr "로그인"
 
 #: www/account/login.php:101
 #, fuzzy
-msgid "<P>Your account does not exist."
+msgid "<p>Your account does not exist.</p>"
 msgstr "분류 기준이 존재하지 않습니다."
 
 #: www/account/login.php:105
@@ -6287,7 +6276,7 @@ msgstr "All Groups"
 #: www/docman/admin/index.php:472
 #, fuzzy
 msgid ""
-"You are about to permanently delete this document group and his content "
+"You are about to permanently delete this document group and its content "
 "(documents and subgroups)."
 msgstr "경고! 지워진 글은 복구할 수 없으며 답글까지 함께 지워집니다!"
 
@@ -14173,6 +14162,18 @@ msgstr[0] ""
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "사용자ID"
+
+#, fuzzy
+#~ msgid "Could not create object in update: %s."
+#~ msgstr "Could Not Update Parent"
+
+#, fuzzy
+#~ msgid "Could not create object update database: %s."
+#~ msgstr "Could Not Update Parent"
+
+#, fuzzy
+#~ msgid "Group:"
+#~ msgstr "Group"
 
 #~ msgid "Developer Info"
 #~ msgstr "개발자 정보"

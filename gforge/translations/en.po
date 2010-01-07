@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-07 16:01+0100\n"
+"POT-Creation-Date: 2010-01-07 18:16+0100\n"
 "PO-Revision-Date: 2009-01-13 16:27+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1990,7 +1990,7 @@ msgstr ""
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:654
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:793
 #, php-format
-msgid "Could not create object in database: %s"
+msgid "Could not create object in database: %s."
 msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:311
@@ -1999,7 +1999,7 @@ msgstr ""
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:662
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:801
 #, php-format
-msgid "Could not get ID from object in database: %s"
+msgid "Could not get ID from object in database: %s."
 msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:323
@@ -2012,8 +2012,11 @@ msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:335
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:441
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:555
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:688
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:830
 #, php-format
-msgid "Could not update object in database: %s"
+msgid "Could not update object in database: %s."
 msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:348
@@ -2021,7 +2024,7 @@ msgstr ""
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:568
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:701
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:843
-msgid "Cannot delete a non-existing object"
+msgid "Cannot delete a non-existing object."
 msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:355
@@ -2030,33 +2033,22 @@ msgstr ""
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:708
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:852
 #, php-format
-msgid "Could not delete object in database: %s"
-msgstr ""
-
-#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:555
-#, php-format
-msgid "Could not create object in update: %s"
-msgstr ""
-
-#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:688
-#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:830
-#, php-format
-msgid "Could not create object update database: %s"
+msgid "Could not delete object in database: %s."
 msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:819
-msgid "Cannot currently move a participation across contributions"
+msgid "Cannot currently move a participation across contributions."
 msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:860
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:867
 #, php-format
-msgid "Could not update indices in database: %s"
+msgid "Could not update indices in database: %s."
 msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:881
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:906
-msgid "Cannot update a non-existing object"
+msgid "Cannot update a non-existing object."
 msgstr ""
 
 #: plugins/contribtracker/www/actor_logo.php:19
@@ -2068,7 +2060,7 @@ msgstr ""
 #: plugins/contribtracker/www/actor_logo.php:20
 #: plugins/contribtracker/www/actor_logo.php:26
 #: plugins/contribtracker/www/index.php:117
-msgid "Invalid actor specified"
+msgid "Invalid actor specified."
 msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:19
@@ -2327,7 +2319,8 @@ msgid "Edit an actor"
 msgstr ""
 
 #: plugins/contribtracker/www/index.php:18
-msgid "Group:"
+#: plugins/contribtracker/www/index.php:150
+msgid "Project:"
 msgstr ""
 
 #: plugins/contribtracker/www/index.php:25
@@ -2408,10 +2401,6 @@ msgid "Contribution by %s"
 msgid_plural "Contributions by %s"
 msgstr[0] ""
 msgstr[1] ""
-
-#: plugins/contribtracker/www/index.php:150
-msgid "Project:"
-msgstr ""
 
 #: plugins/contribtracker/www/index.php:154
 msgid "Role:"
@@ -4139,7 +4128,7 @@ msgid "Login"
 msgstr ""
 
 #: www/account/login.php:101
-msgid "<P>Your account does not exist."
+msgid "<p>Your account does not exist.</p>"
 msgstr ""
 
 #: www/account/login.php:105
@@ -5952,7 +5941,7 @@ msgstr ""
 
 #: www/docman/admin/index.php:472
 msgid ""
-"You are about to permanently delete this document group and his content "
+"You are about to permanently delete this document group and its content "
 "(documents and subgroups)."
 msgstr ""
 

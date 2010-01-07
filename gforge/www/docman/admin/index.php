@@ -469,7 +469,7 @@ if ($editdoc && $docid) {
 		<form action="<?php echo util_make_url('/docman/admin/index.php').'?deletegroup=1&amp;doc_group='.$dg->getID().'&amp;group_id='.$dg->Group->getID() ?>" method="post">
 		<input type="hidden" name="submit" value="1" /><br />
 		<img src="/images/ic/cfolder15.png" /><?php echo $dg->getName(); ?><br />
-		<?php echo _('You are about to permanently delete this document group and his content (documents and subgroups).'); ?>
+		<?php echo _('You are about to permanently delete this document group and its content (documents and subgroups).'); ?>
 		<p><input type="submit" name="post_changes" value="<?php echo _('Delete') ?>" /></p>
 		</form></p>
 <?php

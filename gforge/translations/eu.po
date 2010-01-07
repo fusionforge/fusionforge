@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-07 16:01+0100\n"
+"POT-Creation-Date: 2010-01-07 18:16+0100\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2163,7 +2163,7 @@ msgstr "Erabiltzailea dagoeneko existitzen da"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:654
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:793
 #, fuzzy, php-format
-msgid "Could not create object in database: %s"
+msgid "Could not create object in database: %s."
 msgstr "ERROREA: Ezin da taldea sortu: %s"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:311
@@ -2171,9 +2171,9 @@ msgstr "ERROREA: Ezin da taldea sortu: %s"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:527
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:662
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:801
-#, php-format
-msgid "Could not get ID from object in database: %s"
-msgstr ""
+#, fuzzy, php-format
+msgid "Could not get ID from object in database: %s."
+msgstr "ERROREA: Ezin da taldea sortu: %s"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:323
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:430
@@ -2186,9 +2186,12 @@ msgstr "ERROREA: Erabiltzailea ez da existitzen"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:335
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:441
-#, php-format
-msgid "Could not update object in database: %s"
-msgstr ""
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:555
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:688
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:830
+#, fuzzy, php-format
+msgid "Could not update object in database: %s."
+msgstr "ERROREA: Ezin da taldea sortu: %s"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:348
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:454
@@ -2196,7 +2199,7 @@ msgstr ""
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:701
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:843
 #, fuzzy
-msgid "Cannot delete a non-existing object"
+msgid "Cannot delete a non-existing object."
 msgstr "Datu basearen sarrera ezin dut gehitu"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:355
@@ -2205,34 +2208,24 @@ msgstr "Datu basearen sarrera ezin dut gehitu"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:708
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:852
 #, fuzzy, php-format
-msgid "Could not delete object in database: %s"
+msgid "Could not delete object in database: %s."
 msgstr "Rzin da sistema taldea ezabatu"
 
-#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:555
-#, fuzzy, php-format
-msgid "Could not create object in update: %s"
-msgstr "ERROREA: Ezin da taldea sortu: %s"
-
-#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:688
-#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:830
-#, fuzzy, php-format
-msgid "Could not create object update database: %s"
-msgstr "ERROREA: Ezin da taldea sortu: %s"
-
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:819
-msgid "Cannot currently move a participation across contributions"
+msgid "Cannot currently move a participation across contributions."
 msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:860
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:867
-#, php-format
-msgid "Could not update indices in database: %s"
-msgstr ""
+#, fuzzy, php-format
+msgid "Could not update indices in database: %s."
+msgstr "ERROREA: Ezin da taldea sortu: %s"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:881
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:906
-msgid "Cannot update a non-existing object"
-msgstr ""
+#, fuzzy
+msgid "Cannot update a non-existing object."
+msgstr "Datu basearen sarrera ezin dut gehitu"
 
 #: plugins/contribtracker/www/actor_logo.php:19
 #: plugins/contribtracker/www/actor_logo.php:25
@@ -2245,7 +2238,7 @@ msgstr "Erabiltzaile ez da baliozkoa"
 #: plugins/contribtracker/www/actor_logo.php:26
 #: plugins/contribtracker/www/index.php:117
 #, fuzzy
-msgid "Invalid actor specified"
+msgid "Invalid actor specified."
 msgstr "Foro talde identifikatzaile baliogabea"
 
 #: plugins/contribtracker/www/global_admin.php:19
@@ -2526,9 +2519,10 @@ msgid "Edit an actor"
 msgstr "Multzoa edituatu"
 
 #: plugins/contribtracker/www/index.php:18
+#: plugins/contribtracker/www/index.php:150
 #, fuzzy
-msgid "Group:"
-msgstr "Taldea"
+msgid "Project:"
+msgstr "Proiektuak"
 
 #: plugins/contribtracker/www/index.php:25
 #: plugins/contribtracker/www/project_admin.php:284
@@ -2612,11 +2606,6 @@ msgid "Contribution by %s"
 msgid_plural "Contributions by %s"
 msgstr[0] "Jarraitu >>"
 msgstr[1] "Jarraitu >>"
-
-#: plugins/contribtracker/www/index.php:150
-#, fuzzy
-msgid "Project:"
-msgstr "Proiektuak"
 
 #: plugins/contribtracker/www/index.php:154
 #, fuzzy
@@ -4444,7 +4433,7 @@ msgstr "Izenpetu"
 
 #: www/account/login.php:101
 #, fuzzy
-msgid "<P>Your account does not exist."
+msgid "<p>Your account does not exist.</p>"
 msgstr "Ez dago kategoria hau"
 
 #: www/account/login.php:105
@@ -6340,7 +6329,7 @@ msgstr "Talde guztiak"
 #: www/docman/admin/index.php:472
 #, fuzzy
 msgid ""
-"You are about to permanently delete this document group and his content "
+"You are about to permanently delete this document group and its content "
 "(documents and subgroups)."
 msgstr "¡ARGI! ¡Mezua bere erantzun guztiekin ezabatzera zoaz erabat!"
 
@@ -14305,6 +14294,18 @@ msgstr[1] ""
 #: www/users:33
 msgid "No User Name Provided"
 msgstr "Ez da erabiltzaile-izenik eman"
+
+#, fuzzy
+#~ msgid "Could not create object in update: %s."
+#~ msgstr "ERROREA: Ezin da taldea sortu: %s"
+
+#, fuzzy
+#~ msgid "Could not create object update database: %s."
+#~ msgstr "ERROREA: Ezin da taldea sortu: %s"
+
+#, fuzzy
+#~ msgid "Group:"
+#~ msgstr "Taldea"
 
 #~ msgid "Developer Info"
 #~ msgstr "Lankidearen informazioa ikusi"

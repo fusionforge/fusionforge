@@ -17,13 +17,13 @@ if ($actor_id) {
 	$actor = new ContribTrackerActor ($actor_id) ;
 	if (!is_object ($actor) || $actor->isError()) {
 		exit_error (_('Invalid actor'),
-			    _('Invalid actor specified')) ;
+			    _('Invalid actor specified.')) ;
 	}
 	Header ("Content-type: image/png");
 	echo $actor->getLogo();
 } else {
 		exit_error (_('Invalid actor'),
-			    _('Invalid actor specified')) ;
+			    _('Invalid actor specified.')) ;
 }	
 
 // Local Variables:

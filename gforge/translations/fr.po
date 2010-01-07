@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-07 16:01+0100\n"
-"PO-Revision-Date: 2010-01-07 17:56+0100\n"
+"POT-Creation-Date: 2010-01-07 18:16+0100\n"
+"PO-Revision-Date: 2010-01-07 18:20+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1349,7 +1349,8 @@ msgstr "Echelle de priorité&nbsp;"
 
 #: common/include/utils.php:1060
 msgid "Error: a mailing list with the same email address already exists."
-msgstr "Erreur : il existe déjà une liste de diffusion avec cette adresse email."
+msgstr ""
+"Erreur : il existe déjà une liste de diffusion avec cette adresse email."
 
 #: common/include/utils.php:1076
 msgid "Error: a forum with the same email address already exists."
@@ -1968,7 +1969,9 @@ msgstr "La requête existe déjà"
 #: common/tracker/ArtifactQuery.class.php:638
 msgid ""
 "You must have tracker admin rights to set or update a project level query."
-msgstr "Vous devez avoir les droits d'administration sur un outil de suivi pour créer ou modifier une requête de niveau projet."
+msgstr ""
+"Vous devez avoir les droits d'administration sur un outil de suivi pour "
+"créer ou modifier une requête de niveau projet."
 
 #: common/tracker/ArtifactQuery.class.php:634
 msgid "Query does not exist"
@@ -2095,7 +2098,7 @@ msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:52
 msgid "Contribution tracker"
-msgstr "Outil de suivi des contributions"
+msgstr "Suivi des contributions"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:72
 msgid "Use the Contribution Tracker plugin"
@@ -2169,7 +2172,8 @@ msgstr "[Voir toutes les contributions]"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:170
 msgid "Edit actors and roles for the contribution tracker plugin"
-msgstr "Éditer les acteurs et les rôles pour le plugin de suivi de contributions"
+msgstr ""
+"Éditer les acteurs et les rôles pour le plugin de suivi de contributions"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:294
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:402
@@ -2185,8 +2189,8 @@ msgstr "L'objet existe déjà"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:654
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:793
 #, php-format
-msgid "Could not create object in database: %s"
-msgstr "Erreur lors de la création de l'objet en base de données : %s"
+msgid "Could not create object in database: %s."
+msgstr "Erreur lors de la création de l'objet en base de données : %s."
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:311
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:418
@@ -2194,8 +2198,8 @@ msgstr "Erreur lors de la création de l'objet en base de données : %s"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:662
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:801
 #, php-format
-msgid "Could not get ID from object in database: %s"
-msgstr "Impossible d'obtenir l'identifiant d'un objet en base de données : %s"
+msgid "Could not get ID from object in database: %s."
+msgstr "Impossible d'obtenir l'identifiant d'un objet en base de données : %s."
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:323
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:430
@@ -2207,17 +2211,20 @@ msgstr "L'objet n'existe pas"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:335
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:441
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:555
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:688
+#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:830
 #, php-format
-msgid "Could not update object in database: %s"
-msgstr "Erreur lors de la mise à jour d'un objet en base de données : %s"
+msgid "Could not update object in database: %s."
+msgstr "Erreur lors de la mise à jour d'un objet en base de données : %s."
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:348
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:454
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:568
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:701
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:843
-msgid "Cannot delete a non-existing object"
-msgstr "Impossible de supprimer un objet qui n'existe pas : %s"
+msgid "Cannot delete a non-existing object."
+msgstr "Impossible de supprimer un objet qui n'existe pas."
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:355
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:461
@@ -2225,33 +2232,24 @@ msgstr "Impossible de supprimer un objet qui n'existe pas : %s"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:708
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:852
 #, php-format
-msgid "Could not delete object in database: %s"
-msgstr "Échec lors de la suppression d'un objet en base de données : %s"
-
-#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:555
-#, php-format
-msgid "Could not create object in update: %s"
-msgstr "Erreur lors de la création d'un objet en base de données : %s"
-
-#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:688
-#: plugins/contribtracker/common/ContribTrackerPlugin.class.php:830
-#, php-format
-msgid "Could not create object update database: %s"
-msgstr "Erreur lors de la modification d'un objet en base de données : %s"
+msgid "Could not delete object in database: %s."
+msgstr "Échec lors de la suppression d'un objet en base de données : %s."
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:819
-msgid "Cannot currently move a participation across contributions"
-msgstr "Il n'est pas actuellement possible de déplacer une participation d'une contribution à une autre."
+msgid "Cannot currently move a participation across contributions."
+msgstr ""
+"Il n'est pas actuellement possible de déplacer une participation d'une "
+"contribution à une autre."
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:860
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:867
 #, php-format
-msgid "Could not update indices in database: %s"
+msgid "Could not update indices in database: %s."
 msgstr "Erreur lors de la mise à jour des index en base de données : %s."
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:881
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:906
-msgid "Cannot update a non-existing object"
+msgid "Cannot update a non-existing object."
 msgstr "Impossible de mettre à jour un objet qui n'existe pas."
 
 #: plugins/contribtracker/www/actor_logo.php:19
@@ -2263,7 +2261,7 @@ msgstr "Acteur invalide"
 #: plugins/contribtracker/www/actor_logo.php:20
 #: plugins/contribtracker/www/actor_logo.php:26
 #: plugins/contribtracker/www/index.php:117
-msgid "Invalid actor specified"
+msgid "Invalid actor specified."
 msgstr "Acteur spécifié invalide."
 
 #: plugins/contribtracker/www/global_admin.php:19
@@ -2386,7 +2384,9 @@ msgstr "Enregistrer un nouvel acteur"
 
 #: plugins/contribtracker/www/global_admin.php:273
 msgid "No legal structures yet, can't define actors without them."
-msgstr "Il n'est pas possible de définir des acteurs tant qu'aucune forme juridique n'est définie."
+msgstr ""
+"Il n'est pas possible de définir des acteurs tant qu'aucune forme juridique "
+"n'est définie."
 
 #: plugins/contribtracker/www/global_admin.php:276
 msgid "Existing legal structures"
@@ -2475,7 +2475,7 @@ msgstr "Enregistrer une nouvelle forme juridique"
 #: plugins/contribtracker/www/global_admin.php:389
 #: plugins/contribtracker/www/global_admin.php:404
 msgid "Structure name:"
-msgstr "Nom de la structure :"
+msgstr "Nom de la forme juridique :"
 
 #: plugins/contribtracker/www/global_admin.php:397
 msgid "Edit a legal structure"
@@ -2522,8 +2522,9 @@ msgid "Edit an actor"
 msgstr "Modifier un acteur"
 
 #: plugins/contribtracker/www/index.php:18
-msgid "Group:"
-msgstr "Groupe :"
+#: plugins/contribtracker/www/index.php:150
+msgid "Project:"
+msgstr "Projet :"
 
 #: plugins/contribtracker/www/index.php:25
 #: plugins/contribtracker/www/project_admin.php:284
@@ -2603,10 +2604,6 @@ msgid "Contribution by %s"
 msgid_plural "Contributions by %s"
 msgstr[0] "Contribution de %s"
 msgstr[1] "Contributions de %s"
-
-#: plugins/contribtracker/www/index.php:150
-msgid "Project:"
-msgstr "Projet :"
 
 #: plugins/contribtracker/www/index.php:154
 msgid "Role:"
@@ -3088,7 +3085,8 @@ msgstr "wiki"
 
 #: plugins/mediawiki/www/frame.php:38
 msgid "Wiki not created yet, please wait for a few minutes."
-msgstr "Le wiki n'a pas encore été créé, veuillez réessayer dans quelques minutes."
+msgstr ""
+"Le wiki n'a pas encore été créé, veuillez réessayer dans quelques minutes."
 
 #: plugins/online_help/common/online_helpPlugin.class.php:84
 msgid "Get Help"
@@ -3723,7 +3721,10 @@ msgid ""
 "<p>Browsing the Bazaar tree gives you a view into the current status of this "
 "project's code. You may also view the complete histories of any file in the "
 "repository.</p>"
-msgstr "Parcourir le dépôt Bazaar permet de naviguer dans l'état actuel du code de ce projet, mais également d'avoir accès à l'historique complet de chaque fichier présent dans le dépôt."
+msgstr ""
+"Parcourir le dépôt Bazaar permet de naviguer dans l'état actuel du code de "
+"ce projet, mais également d'avoir accès à l'historique complet de chaque "
+"fichier présent dans le dépôt."
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:109
 msgid "Browse Bazaar Repository"
@@ -4490,7 +4491,7 @@ msgid "Login"
 msgstr "Identification"
 
 #: www/account/login.php:101
-msgid "<P>Your account does not exist."
+msgid "<p>Your account does not exist.</p>"
 msgstr "<p>Ce compte n'existe pas.</p>"
 
 #: www/account/login.php:105
@@ -5121,12 +5122,16 @@ msgstr "Tout approuver sur cette page"
 #, php-format
 msgid ""
 "Could not open %s file for read/write. Check the permissions for apache."
-msgstr "Le fichier %s n'a pas pu être ouvert en lecture/écriture.  Veuillez vérifier les permissions pour Apache."
+msgstr ""
+"Le fichier %s n'a pas pu être ouvert en lecture/écriture.  Veuillez vérifier "
+"les permissions pour Apache."
 
 #: www/admin/configman.php:66 www/admin/configman.php:252
 #, php-format
 msgid "Could not open %s for read. Check the permissions for apache."
-msgstr "Le fichier %s n'a pas pu être ouvert en lecture.  Veuillez vérifier les permissions pour Apache."
+msgstr ""
+"Le fichier %s n'a pas pu être ouvert en lecture.  Veuillez vérifier les "
+"permissions pour Apache."
 
 #: www/admin/configman.php:95
 msgid "Choose"
@@ -5145,7 +5150,9 @@ msgstr "Le fichier %s est vide ou n'a pas été écrit."
 #: www/admin/configman.php:156
 #, php-format
 msgid "Could not open %s for write. Check the permissions for apache."
-msgstr "Le fichier %s n'a pas pu être ouvert en écriture.  Veuillez vérifier les permissions pour Apache."
+msgstr ""
+"Le fichier %s n'a pas pu être ouvert en écriture.  Veuillez vérifier les "
+"permissions pour Apache."
 
 #: www/admin/configman.php:193 www/admin/configman.php:209
 msgid "Attribute"
@@ -6441,9 +6448,11 @@ msgstr "Supprimer des groupes de documents"
 
 #: www/docman/admin/index.php:472
 msgid ""
-"You are about to permanently delete this document group and his content "
+"You are about to permanently delete this document group and its content "
 "(documents and subgroups)."
-msgstr "Vous êtes sur le point de supprimer définitivement ce groupe de documents et son contenu (documents et sous-groupes)."
+msgstr ""
+"Vous êtes sur le point de supprimer définitivement ce groupe de documents et "
+"son contenu (documents et sous-groupes)."
 
 #: www/docman/admin/index.php:489
 msgid "You are about to permanently delete this document."
@@ -6589,7 +6598,9 @@ msgstr "Votre recherche n'a renvoyé aucun document."
 
 #: www/docman/view.php:61
 msgid "No document to display - invalid or inactive document number"
-msgstr "Aucun document à afficher : le numéro de document est invalide, ou correspond à un document inactif."
+msgstr ""
+"Aucun document à afficher : le numéro de document est invalide, ou "
+"correspond à un document inactif."
 
 #: www/export/index.php:16
 msgid "Exports Available"
@@ -6614,7 +6625,10 @@ msgid ""
 "%1$s data is exported in a variety of standard formats. Many of\n"
 "the export URLs can also accept form/get data to customize the output. All\n"
 "data generated by these pages is realtime."
-msgstr "Les données de %1$s sont exportées dans des formats standards en temps réel.  Plusieurs des URLs d'export acceptent des paramètres permettant de personnaliser leur résultat."
+msgstr ""
+"Les données de %1$s sont exportées dans des formats standards en temps "
+"réel.  Plusieurs des URLs d'export acceptent des paramètres permettant de "
+"personnaliser leur résultat."
 
 #: www/export/rss_project.php:36
 msgid ""
@@ -7448,7 +7462,9 @@ msgstr "Paquets"
 msgid ""
 "You can use packages to group different file releases together, or use them "
 "however you like."
-msgstr "Les paquets peuvent par exemple être utilisés pour regrouper plusieurs publications de fichiers."
+msgstr ""
+"Les paquets peuvent par exemple être utilisés pour regrouper plusieurs "
+"publications de fichiers."
 
 #: www/frs/admin/index.php:133
 msgid "An example of packages:"
@@ -7482,7 +7498,9 @@ msgstr "Exemples de versions"
 msgid ""
 "You can create new releases of packages by clicking on <strong>Add/Edit "
 "Releases</strong> next to your package name"
-msgstr "Vous pouvez créer de nouvelles versions des paquets en cliquant sur <strong>Éditer les versions</strong> à côté du nom de votre paquet."
+msgstr ""
+"Vous pouvez créer de nouvelles versions des paquets en cliquant sur "
+"<strong>Éditer les versions</strong> à côté du nom de votre paquet."
 
 #: www/frs/admin/index.php:157
 msgid "You Have No Packages Defined"
@@ -8801,20 +8819,29 @@ msgstr "Les nouveautés de FusionForge « trunk »"
 msgid ""
 "Many improvements to the trackers: configurable display, workflow "
 "management, links between artifacts, better searches, and more"
-msgstr "De nombreuses améliorations dans les outils de suivi : affichage configurable, gestion des processus (<em>workflow</em>), liens entre objets, recherches améliorées, etc."
+msgstr ""
+"De nombreuses améliorations dans les outils de suivi : affichage "
+"configurable, gestion des processus (<em>workflow</em>), liens entre objets, "
+"recherches améliorées, etc."
 
 #: www/index_std.php:29
 msgid "Rewritten SCM subsystem, with new plugins for Bazaar, Darcs and Git"
-msgstr "Système de suivi de sources récrit, avec de nouveaux outils disponibles (Bazaar, Darcs et Git)"
+msgstr ""
+"Système de suivi de sources récrit, avec de nouveaux outils disponibles "
+"(Bazaar, Darcs et Git)"
 
 #: www/index_std.php:30
 msgid ""
 "New version of Mediawiki plugin, providing independent wikis for each project"
-msgstr "Nouvelle version du plugin Mediawiki, fournissant un wiki indépendant pour chaque projet."
+msgstr ""
+"Nouvelle version du plugin Mediawiki, fournissant un wiki indépendant pour "
+"chaque projet."
 
 #: www/index_std.php:31
 msgid "Various new plugins: projectlabels, globalsearch, extratabs"
-msgstr "Divers nouveaux plugins : projectlabels, globalsearch, extratabs, contribtracker"
+msgstr ""
+"Divers nouveaux plugins : projectlabels, globalsearch, extratabs, "
+"contribtracker"
 
 #: www/index_std.php:34
 msgid "What's new in FusionForge 4.8"
@@ -8822,11 +8849,15 @@ msgstr "Les nouveautés de FusionForge 4.8"
 
 #: www/index_std.php:36
 msgid "New project classification by tags (tag cloud)."
-msgstr "Classification des projets par étiquettes (et affichage sous forme de nuage d'étiquettes)."
+msgstr ""
+"Classification des projets par étiquettes (et affichage sous forme de nuage "
+"d'étiquettes)."
 
 #: www/index_std.php:37
 msgid "New reporting item for the File Release System: downloads per package."
-msgstr "Nouvelle donnée disponible pour les rapports du système de publication de fichiers : nombre de téléchargements par paquet."
+msgstr ""
+"Nouvelle donnée disponible pour les rapports du système de publication de "
+"fichiers : nombre de téléchargements par paquet."
 
 #: www/index_std.php:38
 msgid "List of all projects added in Project List"
@@ -8834,7 +8865,8 @@ msgstr "Ajout de la liste de tous les projets."
 
 #: www/index_std.php:39
 msgid "New version of phpWiki plugin, using lastest svn code"
-msgstr "Nouvelle version du plugin phpWiki, qui utilise la dernière version du code."
+msgstr ""
+"Nouvelle version du plugin phpWiki, qui utilise la dernière version du code."
 
 #: www/index_std.php:42
 msgid "What's new in FusionForge 4.7"
@@ -11423,7 +11455,9 @@ msgstr "Statistiques cumulées"
 msgid ""
 "Project registration is restricted on %s, and only administrators can create "
 "new projects."
-msgstr "L'enregistrement de nouveaux projets est restreint sur %s, seuls les administrateurs peuvent créer de nouveaux projets."
+msgstr ""
+"L'enregistrement de nouveaux projets est restreint sur %s, seuls les "
+"administrateurs peuvent créer de nouveaux projets."
 
 #: www/register/projectinfo.php:103
 msgid "Registration complete"
@@ -11684,17 +11718,25 @@ msgstr "Initialisation du système de rapports"
 msgid ""
 "Occasionally, if cronjobs failed or the database was damaged, you may have "
 "to rebuild the reporting tables."
-msgstr "Exceptionnellement, si des tâches planifiées échouent ou si la base de données est endommagée, il se peut que vous deviez reconstruire les tables du système de rapports."
+msgstr ""
+"Exceptionnellement, si des tâches planifiées échouent ou si la base de "
+"données est endommagée, il se peut que vous deviez reconstruire les tables "
+"du système de rapports."
 
 #: www/reporting/rebuild.php:58
 msgid ""
 "If you are sure you want to rebuild all the reporting tables, check the \"I "
 "am sure\" box and click the button below."
-msgstr "Si vous êtes sûr de vouloir reconstruire toutes les tables du système de rapports, cochez la case « J'en suis sûr » et cliquez sur le bouton ci-dessous."
+msgstr ""
+"Si vous êtes sûr de vouloir reconstruire toutes les tables du système de "
+"rapports, cochez la case « J'en suis sûr » et cliquez sur le bouton ci-"
+"dessous."
 
 #: www/reporting/rebuild.php:61
 msgid "This could take a couple minutes, so DO NOT CLICK MORE THAN ONCE."
-msgstr "Cette opération peut prendre plusieurs minutes ; ne cliquez donc QU'UNE SEULE FOIS."
+msgstr ""
+"Cette opération peut prendre plusieurs minutes ; ne cliquez donc QU'UNE "
+"SEULE FOIS."
 
 #: www/reporting/rebuild.php:67
 msgid "I am sure"
@@ -11961,7 +12003,8 @@ msgstr "Résultats de la recherche dans les annonces"
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:177
 #, php-format
 msgid "Note: only the first %d results for this category are displayed."
-msgstr "Note : seuls les %d premiers résultats de cette catégorie sont affichés."
+msgstr ""
+"Note : seuls les %d premiers résultats de cette catégorie sont affichés."
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:182
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:176
@@ -12673,7 +12716,7 @@ msgstr "statistiques I18n de %1$s"
 #: www/stats/i18n.php:20
 #, php-format
 msgid "Languages Distributions"
-msgstr "Répartion par langue"
+msgstr "Répartition par langue"
 
 #: www/stats/i18n.php:40
 msgid "Total Non-English"

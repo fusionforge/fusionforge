@@ -98,7 +98,7 @@ if ($login && !$success) {
 			$u = user_get_object_by_name($form_loginname) || 
 				user_get_object_by_email($form_loginname) ;
 			if (!$u) {
-				$feedback = _('<P>Your account does not exist.');
+				$feedback = _('<p>Your account does not exist.</p>');
 			}
 		}
 	} else if ($userstatus == "P") {

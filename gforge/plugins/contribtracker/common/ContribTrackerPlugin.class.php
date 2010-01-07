@@ -300,7 +300,7 @@ class ContribTrackerRole extends Error {
 					array ($name,
 					       $description)) ;
 		if (!$res || db_affected_rows ($res) < 1) {
-			$this->setError (sprintf(_('Could not create object in database: %s'),
+			$this->setError (sprintf(_('Could not create object in database: %s.'),
 						 db_error ()));
 			db_rollback () ;
 			return false ;
@@ -308,7 +308,7 @@ class ContribTrackerRole extends Error {
 
 		$id = db_insertid ($res, 'plugin_contribtracker_role', 'role_id') ;
 		if (!$id) {
-			$this->setError (sprintf(_('Could not get ID from object in database: %s'),
+			$this->setError (sprintf(_('Could not get ID from object in database: %s.'),
 						 db_error ()));
 			db_rollback () ;
 			return false ;
@@ -332,7 +332,7 @@ class ContribTrackerRole extends Error {
 					       $description,
 					       $id)) ;
 		if (!$res || db_affected_rows ($res) < 1) {
-			$this->setError (sprintf(_('Could not update object in database: %s'),
+			$this->setError (sprintf(_('Could not update object in database: %s.'),
 						 db_error ()));
 			db_rollback () ;
 			return false ;
@@ -345,14 +345,14 @@ class ContribTrackerRole extends Error {
 	function delete () {
 		$id = $this->getId () ;
 		if (!$id) {
-			$this->setError (_('Cannot delete a non-existing object')) ;
+			$this->setError (_('Cannot delete a non-existing object.')) ;
 			return false ;
 		}
 
 		$res = db_query_params ('DELETE FROM plugin_contribtracker_role WHERE role_id = $1',
 					array ($id)) ;
 		if (!$res) {
-			$this->setError (sprintf(_('Could not delete object in database: %s'),
+			$this->setError (sprintf(_('Could not delete object in database: %s.'),
 						 db_error ())) ;
 			return false ;
 		}
@@ -407,7 +407,7 @@ class ContribTrackerLegalStructure extends Error {
 		$res = db_query_params ('INSERT INTO plugin_contribtracker_legal_structure (name) VALUES ($1)',
 					array ($name)) ;
 		if (!$res || db_affected_rows ($res) < 1) {
-			$this->setError (sprintf(_('Could not create object in database: %s'),
+			$this->setError (sprintf(_('Could not create object in database: %s.'),
 						 db_error ()));
 			db_rollback () ;
 			return false ;
@@ -415,7 +415,7 @@ class ContribTrackerLegalStructure extends Error {
 
 		$id = db_insertid ($res, 'plugin_contribtracker_legal_structure', 'struct_id') ;
 		if (!$id) {
-			$this->setError (sprintf(_('Could not get ID from object in database: %s'),
+			$this->setError (sprintf(_('Could not get ID from object in database: %s.'),
 						 db_error ()));
 			db_rollback () ;
 			return false ;
@@ -438,7 +438,7 @@ class ContribTrackerLegalStructure extends Error {
 					array ($name,
 					       $id)) ;
 		if (!$res || db_affected_rows ($res) < 1) {
-			$this->setError (sprintf(_('Could not update object in database: %s'),
+			$this->setError (sprintf(_('Could not update object in database: %s.'),
 						 db_error ()));
 			db_rollback () ;
 			return false ;
@@ -451,14 +451,14 @@ class ContribTrackerLegalStructure extends Error {
 	function delete () {
 		$id = $this->getId () ;
 		if (!$id) {
-			$this->setError (_('Cannot delete a non-existing object')) ;
+			$this->setError (_('Cannot delete a non-existing object.')) ;
 			return false ;
 		}
 
 		$res = db_query_params ('DELETE FROM plugin_contribtracker_legal_structure WHERE struct_id = $1',
 					array ($id)) ;
 		if (!$res) {
-			$this->setError (sprintf(_('Could not delete object in database: %s'),
+			$this->setError (sprintf(_('Could not delete object in database: %s.'),
 						 db_error ())) ;
 			return false ;
 		}
@@ -516,7 +516,7 @@ class ContribTrackerActor extends Error {
 					       base64_encode ($logo),
 					       $structure->getID())) ;
 		if (!$res || db_affected_rows ($res) < 1) {
-			$this->setError (sprintf(_('Could not create object in database: %s'),
+			$this->setError (sprintf(_('Could not create object in database: %s.'),
 						 db_error ()));
 			db_rollback () ;
 			return false ;
@@ -524,7 +524,7 @@ class ContribTrackerActor extends Error {
 
 		$id = db_insertid ($res, 'plugin_contribtracker_actor', 'actor_id') ;
 		if (!$id) {
-			$this->setError (sprintf(_('Could not get ID from object in database: %s'),
+			$this->setError (sprintf(_('Could not get ID from object in database: %s.'),
 						 db_error ()));
 			db_rollback () ;
 			return false ;
@@ -552,7 +552,7 @@ class ContribTrackerActor extends Error {
 					       $structure->getID(),
 					       $id)) ;
 		if (!$res || db_affected_rows ($res) < 1) {
-			$this->setError (sprintf(_('Could not create object in update: %s'),
+			$this->setError (sprintf(_('Could not update object in database: %s.'),
 						 db_error ()));
 			db_rollback () ;
 			return false ;
@@ -565,14 +565,14 @@ class ContribTrackerActor extends Error {
 	function delete () {
 		$id = $this->getId () ;
 		if (!$id) {
-			$this->setError (_('Cannot delete a non-existing object')) ;
+			$this->setError (_('Cannot delete a non-existing object.')) ;
 			return false ;
 		}
 
 		$res = db_query_params ('DELETE FROM plugin_contribtracker_actor WHERE actor_id = $1',
 					array ($id)) ;
 		if (!$res) {
-			$this->setError (sprintf(_('Could not delete object in database: %s'),
+			$this->setError (sprintf(_('Could not delete object in database: %s.'),
 						 db_error ())) ;
 			return false ;
 		}
@@ -651,7 +651,7 @@ class ContribTrackerContribution extends Error {
 					       $description,
 					       $group->getID())) ;
 		if (!$res || db_affected_rows ($res) < 1) {
-			$this->setError (sprintf(_('Could not create object in database: %s'),
+			$this->setError (sprintf(_('Could not create object in database: %s.'),
 						 db_error ()));
 			db_rollback () ;
 			return false ;
@@ -659,7 +659,7 @@ class ContribTrackerContribution extends Error {
 
 		$id = db_insertid ($res, 'plugin_contribtracker_contribution', 'contrib_id') ;
 		if (!$id) {
-			$this->setError (sprintf(_('Could not get ID from object in database: %s'),
+			$this->setError (sprintf(_('Could not get ID from object in database: %s.'),
 						 db_error ()));
 			db_rollback () ;
 			return false ;
@@ -685,7 +685,7 @@ class ContribTrackerContribution extends Error {
 					       $group->getID(),
 					       $id)) ;
 		if (!$res || db_affected_rows ($res) < 1) {
-			$this->setError (sprintf(_('Could not create object update database: %s'),
+			$this->setError (sprintf(_('Could not update object in database: %s.'),
 						 db_error ()));
 			db_rollback () ;
 			return false ;
@@ -698,14 +698,14 @@ class ContribTrackerContribution extends Error {
 	function delete () {
 		$id = $this->getId () ;
 		if (!$id) {
-			$this->setError (_('Cannot delete a non-existing object')) ;
+			$this->setError (_('Cannot delete a non-existing object.')) ;
 			return false ;
 		}
 
 		$res = db_query_params ('DELETE FROM plugin_contribtracker_contribution WHERE contrib_id = $1',
 					array ($id)) ;
 		if (!$res) {
-			$this->setError (sprintf(_('Could not delete object in database: %s'),
+			$this->setError (sprintf(_('Could not delete object in database: %s.'),
 						 db_error ())) ;
 			return false ;
 		}
@@ -790,7 +790,7 @@ class ContribTrackerParticipation extends Error {
 					       $role->getID(),
 					       $index)) ;
 		if (!$res || db_affected_rows ($res) < 1) {
-			$this->setError (sprintf(_('Could not create object in database: %s'),
+			$this->setError (sprintf(_('Could not create object in database: %s.'),
 						 db_error ()));
 			db_rollback () ;
 			return false ;
@@ -798,7 +798,7 @@ class ContribTrackerParticipation extends Error {
 
 		$id = db_insertid ($res, 'plugin_contribtracker_participation', 'participation_id') ;
 		if (!$id) {
-			$this->setError (sprintf(_('Could not get ID from object in database: %s'),
+			$this->setError (sprintf(_('Could not get ID from object in database: %s.'),
 						 db_error ()));
 			db_rollback () ;
 			return false ;
@@ -816,7 +816,7 @@ class ContribTrackerParticipation extends Error {
 
 		$id = $this->getId () ;
 		if ($contrib->getID() != $this->getContribution()->getID()) {
-			$this->setError (_('Cannot currently move a participation across contributions')) ;
+			$this->setError (_('Cannot currently move a participation across contributions.')) ;
 			return false ;
 		}
 
@@ -827,7 +827,7 @@ class ContribTrackerParticipation extends Error {
 					       $role->getID(),
 					       $id)) ;
 		if (!$res || db_affected_rows ($res) < 1) {
-			$this->setError (sprintf(_('Could not create object update database: %s'),
+			$this->setError (sprintf(_('Could not update object in database: %s.'),
 						 db_error ()));
 			db_rollback () ;
 			return false ;
@@ -840,7 +840,7 @@ class ContribTrackerParticipation extends Error {
 	function delete () {
 		$id = $this->getId () ;
 		if (!$id) {
-			$this->setError (_('Cannot delete a non-existing object')) ;
+			$this->setError (_('Cannot delete a non-existing object.')) ;
 			return false ;
 		}
 
@@ -849,7 +849,7 @@ class ContribTrackerParticipation extends Error {
 		$res = db_query_params ('DELETE FROM plugin_contribtracker_participation WHERE participation_id = $1',
 					array ($id)) ;
 		if (!$res) {
-			$this->setError (sprintf(_('Could not delete object in database: %s'),
+			$this->setError (sprintf(_('Could not delete object in database: %s.'),
 						 db_error ())) ;
 			return false ;
 		}
@@ -857,14 +857,14 @@ class ContribTrackerParticipation extends Error {
 					array ($this->getContribution()->getId(),
 						$curindex)) ;
 		if (!$res) {
-			$this->setError (sprintf(_('Could not update indices in database: %s'),
+			$this->setError (sprintf(_('Could not update indices in database: %s.'),
 						 db_error ())) ;
 			return false ;
 		}
 		$res = db_query_params ('UPDATE plugin_contribtracker_participation SET index = -index -1 WHERE contrib_id = $1 and index < 0',
 					array ($this->getContribution()->getId())) ;
 		if (!$res) {
-			$this->setError (sprintf(_('Could not update indices in database: %s'),
+			$this->setError (sprintf(_('Could not update indices in database: %s.'),
 						 db_error ())) ;
 			return false ;
 		}
@@ -878,7 +878,7 @@ class ContribTrackerParticipation extends Error {
 	function moveUp () {
 		$id = $this->getId () ;
 		if (!$id) {
-			$this->setError (_('Cannot update a non-existing object')) ;
+			$this->setError (_('Cannot update a non-existing object.')) ;
 			return false ;
 		}
 
@@ -903,7 +903,7 @@ class ContribTrackerParticipation extends Error {
 	function moveDown () {
 		$id = $this->getId () ;
 		if (!$id) {
-			$this->setError (_('Cannot update a non-existing object')) ;
+			$this->setError (_('Cannot update a non-existing object.')) ;
 			return false ;
 		}
 
