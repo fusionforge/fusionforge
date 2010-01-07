@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: FusionForge 4.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-01-07 16:01+0100\n"
-"PO-Revision-Date: 2009-09-03 19:20+0200\n"
+"PO-Revision-Date: 2010-01-07 17:56+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -329,9 +329,9 @@ msgid "Invalid Email Address"
 msgstr "Adresse de messagerie non valide"
 
 #: common/include/Error.class.php:163
-#, fuzzy, php-format
+#, php-format
 msgid "Error On Update: %s"
-msgstr "Erreur lors de la mise à jour :"
+msgstr "Erreur lors de la mise à jour : %s"
 
 #: common/include/Error.class.php:204 www/frs/admin/editrelease.php:219
 msgid "Missing Parameters"
@@ -1325,9 +1325,8 @@ msgid "Account Not Active"
 msgstr "Compte non actif"
 
 #: common/include/session.php:357
-#, fuzzy
 msgid "Could Not Get Group"
-msgstr "Erreur lors de la création de l'objet ProjectGroup"
+msgstr "Erreur lors de l'obtention de l'objet Group"
 
 #: common/include/session.php:418 www/account/lostlogin.php:49
 #: www/account/lostlogin.php:55 www/account/lostlogin.php:70
@@ -1349,14 +1348,12 @@ msgid "Priority Colors"
 msgstr "Echelle de priorité&nbsp;"
 
 #: common/include/utils.php:1060
-#, fuzzy
 msgid "Error: a mailing list with the same email address already exists."
-msgstr "Il existe déjà un utilisateur avec cette adresse email."
+msgstr "Erreur : il existe déjà une liste de diffusion avec cette adresse email."
 
 #: common/include/utils.php:1076
-#, fuzzy
 msgid "Error: a forum with the same email address already exists."
-msgstr "Il existe déjà un utilisateur avec cette adresse email."
+msgstr "Erreur : il existe déjà un forum avec cette adresse email."
 
 #: common/mail/MailingList.class.php:122
 msgid "Must Provide List Name That Is 4 or More Characters Long"
@@ -1925,7 +1922,7 @@ msgstr "Relation"
 
 #: common/tracker/ArtifactExtraField.class.php:330
 msgid "Integer"
-msgstr ""
+msgstr "Entier"
 
 #: common/tracker/ArtifactExtraField.class.php:495
 msgid ""
@@ -1971,7 +1968,7 @@ msgstr "La requête existe déjà"
 #: common/tracker/ArtifactQuery.class.php:638
 msgid ""
 "You must have tracker admin rights to set or update a project level query."
-msgstr ""
+msgstr "Vous devez avoir les droits d'administration sur un outil de suivi pour créer ou modifier une requête de niveau projet."
 
 #: common/tracker/ArtifactQuery.class.php:634
 msgid "Query does not exist"
@@ -2097,23 +2094,20 @@ msgstr ""
 "Cliquez ici pour accéder à cet élément : %4$s"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:52
-#, fuzzy
 msgid "Contribution tracker"
-msgstr "Outils de suivi surveillés"
+msgstr "Outil de suivi des contributions"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:72
 msgid "Use the Contribution Tracker plugin"
-msgstr ""
+msgstr "Utiliser le plugin de suivi de contributions"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:92
-#, fuzzy
 msgid "Contribution Tracker admin"
-msgstr "Administration de l'outil de suivi"
+msgstr "Administration de l'outil de suivi des contributions"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:103
-#, fuzzy
 msgid "Latest Major Contributions"
-msgstr "Répartion par langue"
+msgstr "Dernières contributions majeures"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:108
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:102
@@ -2141,12 +2135,11 @@ msgstr "Date"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:109
 msgid "Contribution"
-msgstr ""
+msgstr "Contribution"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:110
-#, fuzzy
 msgid "Contributor"
-msgstr "Surveiller"
+msgstr "Contributeur"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:111
 #: www/project/admin/index.php:275 www/project/admin/massfinish.php:82
@@ -2155,9 +2148,8 @@ msgstr "Rôle"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:117
 #: plugins/contribtracker/www/index.php:102
-#, fuzzy
 msgid "No contributions have been recorded for this project yet."
-msgstr "L'étiquette a été enlevée du projet."
+msgstr "Aucune contribution n'a encore été enregistrée pour ce projet."
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:131
 #: plugins/contribtracker/www/index.php:26
@@ -2169,34 +2161,32 @@ msgstr "%d/%m/%Y"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:143
 #, php-format
 msgid "%s (%s)"
-msgstr ""
+msgstr "%s (%s)"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:161
-#, fuzzy
 msgid "[View All Contributions]"
-msgstr "Voir tous les commentaires"
+msgstr "[Voir toutes les contributions]"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:170
 msgid "Edit actors and roles for the contribution tracker plugin"
-msgstr ""
+msgstr "Éditer les acteurs et les rôles pour le plugin de suivi de contributions"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:294
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:402
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:506
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:643
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:780
-#, fuzzy
 msgid "Object already exists"
-msgstr "La requête existe déjà"
+msgstr "L'objet existe déjà"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:303
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:410
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:519
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:654
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:793
-#, fuzzy, php-format
+#, php-format
 msgid "Could not create object in database: %s"
-msgstr "Erreur lors de la création du groupe : %s"
+msgstr "Erreur lors de la création de l'objet en base de données : %s"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:311
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:418
@@ -2205,107 +2195,98 @@ msgstr "Erreur lors de la création du groupe : %s"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:801
 #, php-format
 msgid "Could not get ID from object in database: %s"
-msgstr ""
+msgstr "Impossible d'obtenir l'identifiant d'un objet en base de données : %s"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:323
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:430
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:539
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:674
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:813
-#, fuzzy
 msgid "Object does not exist"
-msgstr "La requête n'existe pas"
+msgstr "L'objet n'existe pas"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:335
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:441
-#, fuzzy, php-format
+#, php-format
 msgid "Could not update object in database: %s"
-msgstr "Erreur lors de la mise à jour du statut Unix du groupe : %s"
+msgstr "Erreur lors de la mise à jour d'un objet en base de données : %s"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:348
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:454
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:568
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:701
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:843
-#, fuzzy
 msgid "Cannot delete a non-existing object"
-msgstr "Impossible de supprimer un onglet : %s"
+msgstr "Impossible de supprimer un objet qui n'existe pas : %s"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:355
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:461
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:575
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:708
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:852
-#, fuzzy, php-format
+#, php-format
 msgid "Could not delete object in database: %s"
-msgstr "Échec lors de la suppression d'une étiquette : %s"
+msgstr "Échec lors de la suppression d'un objet en base de données : %s"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:555
-#, fuzzy, php-format
+#, php-format
 msgid "Could not create object in update: %s"
-msgstr "Erreur lors de la création du groupe : %s"
+msgstr "Erreur lors de la création d'un objet en base de données : %s"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:688
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:830
-#, fuzzy, php-format
+#, php-format
 msgid "Could not create object update database: %s"
-msgstr "Erreur lors de la création du groupe : %s"
+msgstr "Erreur lors de la modification d'un objet en base de données : %s"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:819
 msgid "Cannot currently move a participation across contributions"
-msgstr ""
+msgstr "Il n'est pas actuellement possible de déplacer une participation d'une contribution à une autre."
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:860
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:867
 #, php-format
 msgid "Could not update indices in database: %s"
-msgstr ""
+msgstr "Erreur lors de la mise à jour des index en base de données : %s."
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:881
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:906
 msgid "Cannot update a non-existing object"
-msgstr ""
+msgstr "Impossible de mettre à jour un objet qui n'existe pas."
 
 #: plugins/contribtracker/www/actor_logo.php:19
 #: plugins/contribtracker/www/actor_logo.php:25
 #: plugins/contribtracker/www/index.php:116
-#, fuzzy
 msgid "Invalid actor"
-msgstr "Année invalide"
+msgstr "Acteur invalide"
 
 #: plugins/contribtracker/www/actor_logo.php:20
 #: plugins/contribtracker/www/actor_logo.php:26
 #: plugins/contribtracker/www/index.php:117
-#, fuzzy
 msgid "Invalid actor specified"
-msgstr "Identifiant invalide pour le groupe de forums"
+msgstr "Acteur spécifié invalide."
 
 #: plugins/contribtracker/www/global_admin.php:19
-#, fuzzy
 msgid "Contribution tracker administration"
-msgstr "Gestionnaire de documents : Administration"
+msgstr "Outil de suivi des contributions : administration"
 
 #: plugins/contribtracker/www/global_admin.php:219
-#, fuzzy
 msgid "Existing actors"
-msgstr "Fichiers existants"
+msgstr "Acteurs existants"
 
 #: plugins/contribtracker/www/global_admin.php:223
-#, fuzzy
 msgid "Logo"
-msgstr "Identification"
+msgstr "Logo"
 
 #: plugins/contribtracker/www/global_admin.php:224
 #: plugins/contribtracker/www/global_admin.php:280
 #: plugins/contribtracker/www/global_admin.php:317
-#, fuzzy
 msgid "Short name"
 msgstr "Nom court"
 
 #: plugins/contribtracker/www/global_admin.php:225
-#, fuzzy
 msgid "Postal address"
-msgstr "Votre adresse e-mail"
+msgstr "Adresse postale"
 
 #: plugins/contribtracker/www/global_admin.php:226 www/admin/search.php:97
 #: www/admin/unsubscribe.php:121
@@ -2332,14 +2313,13 @@ msgstr "Description"
 
 #: plugins/contribtracker/www/global_admin.php:228
 msgid "Legal structure"
-msgstr ""
+msgstr "Forme juridique"
 
 #: plugins/contribtracker/www/global_admin.php:229
 #: plugins/contribtracker/www/global_admin.php:281
 #: plugins/contribtracker/www/global_admin.php:319
-#, fuzzy
 msgid "Actions"
-msgstr "Enchères"
+msgstr "Actions"
 
 #: plugins/contribtracker/www/global_admin.php:248
 #: plugins/contribtracker/www/global_admin.php:291
@@ -2398,58 +2378,49 @@ msgstr "Effacer"
 #: plugins/contribtracker/www/global_admin.php:261
 #: plugins/contribtracker/www/global_admin.php:304
 msgid "No legal structures currently defined."
-msgstr ""
+msgstr "Aucune forme juridique n'est actuellement définie."
 
 #: plugins/contribtracker/www/global_admin.php:268
-#, fuzzy
 msgid "Register new actor"
-msgstr "Nouveau projet"
+msgstr "Enregistrer un nouvel acteur"
 
 #: plugins/contribtracker/www/global_admin.php:273
 msgid "No legal structures yet, can't define actors without them."
-msgstr ""
+msgstr "Il n'est pas possible de définir des acteurs tant qu'aucune forme juridique n'est définie."
 
 #: plugins/contribtracker/www/global_admin.php:276
-#, fuzzy
 msgid "Existing legal structures"
-msgstr "Listes de diffusion existantes"
+msgstr "Formes juridiques existantes"
 
 #: plugins/contribtracker/www/global_admin.php:309
-#, fuzzy
 msgid "Register new legal structure"
-msgstr "Nouveau projet"
+msgstr "Enregistrer une nouvelle forme juridique"
 
 #: plugins/contribtracker/www/global_admin.php:313
-#, fuzzy
 msgid "Existing roles"
-msgstr "Fichiers existants"
+msgstr "Rôles existants"
 
 #: plugins/contribtracker/www/global_admin.php:343
-#, fuzzy
 msgid "No roles currently defined."
-msgstr "Pas de fichier joint"
+msgstr "Aucun rôle n'est actuellement défini."
 
 #: plugins/contribtracker/www/global_admin.php:348
-#, fuzzy
 msgid "Register new role"
-msgstr "Nouveau projet"
+msgstr "Enregistrer un nouveau rôle"
 
 #: plugins/contribtracker/www/global_admin.php:355
-#, fuzzy
 msgid "Register a new role"
-msgstr "Enregistrer un nouvel utilisateur"
+msgstr "Enregistrer un nouveau rôle"
 
 #: plugins/contribtracker/www/global_admin.php:359
 #: plugins/contribtracker/www/global_admin.php:376
-#, fuzzy
 msgid "Role name:"
-msgstr "Nom du rôle"
+msgstr "Nom du rôle :"
 
 #: plugins/contribtracker/www/global_admin.php:360
 #: plugins/contribtracker/www/global_admin.php:377
-#, fuzzy
 msgid "Role description:"
-msgstr "Description :"
+msgstr "Description du rôle :"
 
 #: plugins/contribtracker/www/global_admin.php:362
 #: plugins/contribtracker/www/global_admin.php:390
@@ -2486,9 +2457,8 @@ msgid "Submit"
 msgstr "Soumettre"
 
 #: plugins/contribtracker/www/global_admin.php:369
-#, fuzzy
 msgid "Edit a role"
-msgstr "Modifier le rôle"
+msgstr "Modifier un rôle"
 
 #: plugins/contribtracker/www/global_admin.php:379
 #: plugins/contribtracker/www/global_admin.php:405
@@ -2499,74 +2469,66 @@ msgid "Save"
 msgstr "Enregistrer"
 
 #: plugins/contribtracker/www/global_admin.php:385
-#, fuzzy
 msgid "Register a new legal structure"
-msgstr "Enregistrer un nouvel utilisateur"
+msgstr "Enregistrer une nouvelle forme juridique"
 
 #: plugins/contribtracker/www/global_admin.php:389
 #: plugins/contribtracker/www/global_admin.php:404
 msgid "Structure name:"
-msgstr ""
+msgstr "Nom de la structure :"
 
 #: plugins/contribtracker/www/global_admin.php:397
 msgid "Edit a legal structure"
-msgstr ""
+msgstr "Éditer une forme juridique"
 
 #: plugins/contribtracker/www/global_admin.php:411
-#, fuzzy
 msgid "Register a new actor"
-msgstr "Enregistrer un nouvel utilisateur"
+msgstr "Enregistrer un nouvel acteur"
 
 #: plugins/contribtracker/www/global_admin.php:415
 #: plugins/contribtracker/www/global_admin.php:445
-#, fuzzy
 msgid "Actor name:"
-msgstr "Nom d'utilisateur :"
+msgstr "Nom de l'acteur :"
 
 #: plugins/contribtracker/www/global_admin.php:416
 #: plugins/contribtracker/www/global_admin.php:446
-#, fuzzy
 msgid "Actor address:"
-msgstr "Adresse :"
+msgstr "Adresse de l'acteur :"
 
 #: plugins/contribtracker/www/global_admin.php:417
 #: plugins/contribtracker/www/global_admin.php:447
 msgid "Actor email:"
-msgstr ""
+msgstr "E-mail de l'acteur :"
 
 #: plugins/contribtracker/www/global_admin.php:418
 #: plugins/contribtracker/www/global_admin.php:448
-#, fuzzy
 msgid "Actor description:"
-msgstr "Description courte&nbsp;"
+msgstr "Description de l'acteur :"
 
 #: plugins/contribtracker/www/global_admin.php:420
 #: plugins/contribtracker/www/global_admin.php:450
 #, php-format
 msgid "Actor logo (PNG, %d kB max):"
-msgstr ""
+msgstr "Logo de l'acteur (format PNG, %d ko maxi) :"
 
 #: plugins/contribtracker/www/global_admin.php:422
 #: plugins/contribtracker/www/global_admin.php:456
 #: plugins/contribtracker/www/index.php:128
 msgid "Legal structure:"
-msgstr ""
+msgstr "Forme juridique :"
 
 #: plugins/contribtracker/www/global_admin.php:438
-#, fuzzy
 msgid "Edit an actor"
-msgstr "Modifier un groupe"
+msgstr "Modifier un acteur"
 
 #: plugins/contribtracker/www/index.php:18
-#, fuzzy
 msgid "Group:"
-msgstr "Groupe"
+msgstr "Groupe :"
 
 #: plugins/contribtracker/www/index.php:25
 #: plugins/contribtracker/www/project_admin.php:284
-#, fuzzy
 msgid "Date:"
-msgstr "Date"
+msgstr "Date :"
 
 #: plugins/contribtracker/www/index.php:29
 #: plugins/contribtracker/www/index.php:129
@@ -2581,48 +2543,44 @@ msgstr "Description :"
 #: plugins/contribtracker/www/project_admin.php:293
 msgid "Participant:"
 msgid_plural "Participants:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Participant :"
+msgstr[1] "Participants :"
 
 #: plugins/contribtracker/www/index.php:41
 #: plugins/contribtracker/www/project_admin.php:223
 #: plugins/contribtracker/www/project_admin.php:300
 #, php-format
 msgid "%s: %s (%s)"
-msgstr ""
+msgstr "%s : %s (%s)"
 
 #: plugins/contribtracker/www/index.php:80
 #: plugins/contribtracker/www/project_admin.php:198
-#, fuzzy
 msgid "Contribution details"
-msgstr "Courrier contenant les instructions envoyé"
+msgstr "Détails d'une contribution"
 
 #: plugins/contribtracker/www/index.php:91
 #: plugins/contribtracker/www/index.php:104
-#, fuzzy, php-format
+#, php-format
 msgid "Contributions for project %s"
-msgstr "Statistiques pour les bases de données des projets"
+msgstr "Contributions au projet %s"
 
 #: plugins/contribtracker/www/index.php:101
 #: plugins/contribtracker/www/index.php:165
-#, fuzzy
 msgid "No contributions"
-msgstr "Pas de modération"
+msgstr "Pas de contribution"
 
 #: plugins/contribtracker/www/index.php:120
-#, fuzzy
 msgid "Actor details"
-msgstr "Détails"
+msgstr "Détails d'un acteur"
 
 #: plugins/contribtracker/www/index.php:122
 #, php-format
 msgid "Actor details for %s"
-msgstr ""
+msgstr "Détails de l'acteur %s"
 
 #: plugins/contribtracker/www/index.php:125
-#, fuzzy
 msgid "Name:"
-msgstr "Nom"
+msgstr "Nom :"
 
 #: plugins/contribtracker/www/index.php:126 www/account/index.php:178
 #: www/account/index.php:185 www/account/register.php:175
@@ -2637,109 +2595,94 @@ msgstr "E-mail :"
 #: plugins/contribtracker/www/index.php:138
 #, php-format
 msgid "%s hasn't been involved in any contributions yet"
-msgstr ""
+msgstr "%s n'a encore participé à aucune contribution."
 
 #: plugins/contribtracker/www/index.php:141
 #, php-format
 msgid "Contribution by %s"
 msgid_plural "Contributions by %s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Contribution de %s"
+msgstr[1] "Contributions de %s"
 
 #: plugins/contribtracker/www/index.php:150
-#, fuzzy
 msgid "Project:"
-msgstr "Projet"
+msgstr "Projet :"
 
 #: plugins/contribtracker/www/index.php:154
-#, fuzzy
 msgid "Role:"
-msgstr "Rôle"
+msgstr "Rôle :"
 
 #: plugins/contribtracker/www/index.php:160
-#, fuzzy
 msgid "Contributions"
-msgstr "Répartion par langue"
+msgstr "Contributions"
 
 #: plugins/contribtracker/www/index.php:166
-#, fuzzy
 msgid "No contributions have been recorded yet."
-msgstr "Aucun envoi n'a été fait dans CVS."
+msgstr "Aucune contribution n'a encore été enregistrée."
 
 #: plugins/contribtracker/www/index.php:168
-#, fuzzy
 msgid "Latest contributions"
-msgstr "Répartion par langue"
+msgstr "Dernières contributions"
 
 #: plugins/contribtracker/www/project_admin.php:21
-#, fuzzy, php-format
+#, php-format
 msgid "Contribution tracker for project %s"
-msgstr "Tous les outils de suivi de mes projets"
+msgstr "Suivi des contributions pour le projet %s"
 
 #: plugins/contribtracker/www/project_admin.php:179
-#, fuzzy
 msgid "Register a new contribution"
-msgstr "Enregistrer un nouvel utilisateur"
+msgstr "Enregistrer une nouvelle contribution"
 
 #: plugins/contribtracker/www/project_admin.php:184
 #: plugins/contribtracker/www/project_admin.php:205
-#, fuzzy
 msgid "Contribution name:"
-msgstr "Nom du compte :"
+msgstr "Nom de la contribution :"
 
 #: plugins/contribtracker/www/project_admin.php:185
 #: plugins/contribtracker/www/project_admin.php:206
 msgid "Contribution date:"
-msgstr ""
+msgstr "Date de la contribution :"
 
 #: plugins/contribtracker/www/project_admin.php:186
 #: plugins/contribtracker/www/project_admin.php:207
-#, fuzzy
 msgid "Contribution description:"
-msgstr "Description courte&nbsp;"
+msgstr "Description de la contribution :"
 
 #: plugins/contribtracker/www/project_admin.php:194
-#, fuzzy
 msgid "Edit a contribution"
-msgstr "Éditer une question"
+msgstr "Éditer une contribution"
 
 #: plugins/contribtracker/www/project_admin.php:213
-#, fuzzy
 msgid "Current participants"
-msgstr "Base de données utilisées"
+msgstr "Participants actuels"
 
 #: plugins/contribtracker/www/project_admin.php:241
 msgid "Move participant down"
-msgstr ""
+msgstr "Déplacer le participant vers le bas"
 
 #: plugins/contribtracker/www/project_admin.php:242
 msgid "Move participant up"
-msgstr ""
+msgstr "Déplacer le participant vers le haut"
 
 #: plugins/contribtracker/www/project_admin.php:249
-#, fuzzy
 msgid "Add a participant"
-msgstr "Ajouter une liste de diffusion"
+msgstr "Ajouter un participant"
 
 #: plugins/contribtracker/www/project_admin.php:272
-#, fuzzy
 msgid "Add participant"
-msgstr "Ajouter des options"
+msgstr "Ajouter un participant"
 
 #: plugins/contribtracker/www/project_admin.php:280
-#, fuzzy
 msgid "Existing contributions"
-msgstr "Voir les questions existantes"
+msgstr "Contributions existantes"
 
 #: plugins/contribtracker/www/project_admin.php:325
-#, fuzzy
 msgid "No contributions for this project yet."
-msgstr "Ce projet n'a pas d'offres en cours."
+msgstr "Ce projet n'a pas encore de contributions."
 
 #: plugins/contribtracker/www/project_admin.php:331
-#, fuzzy
 msgid "Add new contribution"
-msgstr "Ajouter de nouveaux onglets"
+msgstr "Ajouter une nouvelle contribution"
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:62
 msgid "Links to related CVS commits"
@@ -2786,7 +2729,6 @@ msgid "Diff To"
 msgstr "Afficher les différences avec"
 
 #: plugins/extratabs/common/ExtraTabsPlugin.class.php:41
-#, fuzzy
 msgid "Extra tabs"
 msgstr "Gestion des onglets supplémentaires"
 
@@ -3142,11 +3084,11 @@ msgstr "Administration de Mantis"
 
 #: plugins/mediawiki/www/frame.php:29
 msgid "wiki"
-msgstr ""
+msgstr "wiki"
 
 #: plugins/mediawiki/www/frame.php:38
 msgid "Wiki not created yet, please wait for a few minutes."
-msgstr ""
+msgstr "Le wiki n'a pas encore été créé, veuillez réessayer dans quelques minutes."
 
 #: plugins/online_help/common/online_helpPlugin.class.php:84
 msgid "Get Help"
@@ -3773,25 +3715,19 @@ msgid "branchname"
 msgstr "nomdebranche"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:105
-#, fuzzy
 msgid "Bazaar Repository Browser"
-msgstr "Navigateur de dépôt Darcs"
+msgstr "Navigateur de dépôt Bazaar"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:106
-#, fuzzy
 msgid ""
 "<p>Browsing the Bazaar tree gives you a view into the current status of this "
 "project's code. You may also view the complete histories of any file in the "
 "repository.</p>"
-msgstr ""
-"Parcourir le dépôt Darcs permet de naviguer dans l'état actuel du code de ce "
-"projet, mais également d'avoir accès à l'historique complet de chaque "
-"fichier présent dans le dépôt."
+msgstr "Parcourir le dépôt Bazaar permet de naviguer dans l'état actuel du code de ce projet, mais également d'avoir accès à l'historique complet de chaque fichier présent dans le dépôt."
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:109
-#, fuzzy
 msgid "Browse Bazaar Repository"
-msgstr "Parcourir le dépôt Darcs"
+msgstr "Parcourir le dépôt Bazaar"
 
 #: plugins/scmccase/common/CCasePlugin.class.php:94
 msgid "ClearCase Access"
@@ -4554,9 +4490,8 @@ msgid "Login"
 msgstr "Identification"
 
 #: www/account/login.php:101
-#, fuzzy
 msgid "<P>Your account does not exist."
-msgstr "La requête n'existe pas"
+msgstr "<p>Ce compte n'existe pas.</p>"
 
 #: www/account/login.php:105
 #, php-format
@@ -5080,9 +5015,9 @@ msgid "Approving Group: %1$s"
 msgstr "Projet approuvé : %1$s"
 
 #: www/admin/approve-pending.php:57
-#, fuzzy, php-format
+#, php-format
 msgid "Error when approving Group: %1$s"
-msgstr "Projet approuvé : %1$s"
+msgstr "Erreur pendant l'approbation d'un projet : %1$s"
 
 #: www/admin/approve-pending.php:103
 msgid "Error during group rejection"
@@ -5183,40 +5118,34 @@ msgid "Approve All On This Page"
 msgstr "Tout approuver sur cette page"
 
 #: www/admin/configman.php:59 www/admin/configman.php:184
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Could not open %s file for read/write. Check the permissions for apache."
-msgstr ""
-"Le fichier n'a pas pu être ouvert en lecture/écriture.  Veuillez vérifier "
-"les permissions pour Apache."
+msgstr "Le fichier %s n'a pas pu être ouvert en lecture/écriture.  Veuillez vérifier les permissions pour Apache."
 
 #: www/admin/configman.php:66 www/admin/configman.php:252
-#, fuzzy, php-format
+#, php-format
 msgid "Could not open %s for read. Check the permissions for apache."
-msgstr ""
-"Le fichier n'a pas pu être ouvert en lecture.  Veuillez vérifier les "
-"permissions pour Apache."
+msgstr "Le fichier %s n'a pas pu être ouvert en lecture.  Veuillez vérifier les permissions pour Apache."
 
 #: www/admin/configman.php:95
 msgid "Choose"
 msgstr "Choisir"
 
 #: www/admin/configman.php:149
-#, fuzzy, php-format
+#, php-format
 msgid "File %s wrote successfully."
-msgstr "Le fichier a été écrit correctement."
+msgstr "Le fichier %s a été écrit correctement."
 
 #: www/admin/configman.php:152
-#, fuzzy, php-format
+#, php-format
 msgid "File %s wasn't written or is empty."
-msgstr "Le fichier est vide ou n'a pas été écrit."
+msgstr "Le fichier %s est vide ou n'a pas été écrit."
 
 #: www/admin/configman.php:156
-#, fuzzy, php-format
+#, php-format
 msgid "Could not open %s for write. Check the permissions for apache."
-msgstr ""
-"Le fichier n'a pas pu être ouvert en écriture.  Veuillez vérifier les "
-"permissions pour Apache."
+msgstr "Le fichier %s n'a pas pu être ouvert en écriture.  Veuillez vérifier les permissions pour Apache."
 
 #: www/admin/configman.php:193 www/admin/configman.php:209
 msgid "Attribute"
@@ -5684,11 +5613,11 @@ msgstr[0] "Greffon désactivé pour %d utilisateur."
 msgstr[1] "Greffon désactivé pour %d utilisateurs."
 
 #: www/admin/pluginman.php:81
-#, fuzzy, php-format
+#, php-format
 msgid "%d project detached from plugin."
 msgid_plural "%d projects detached from plugin."
-msgstr[0] "Greffon désactivé pour %d groupe."
-msgstr[1] "Greffon désactivé pour %d groupes."
+msgstr[0] "Greffon désactivé pour %d projet."
+msgstr[1] "Greffon désactivé pour %d projets."
 
 #: www/admin/pluginman.php:88 www/admin/pluginman.php:118
 #, php-format
@@ -6375,7 +6304,6 @@ msgid "Updated successfully"
 msgstr "Mis à jour avec succès"
 
 #: www/docman/admin/index.php:135
-#, fuzzy
 msgid "Deleted successfully"
 msgstr "Suppression effectuée"
 
@@ -6462,9 +6390,8 @@ msgid "Permanently delete this document"
 msgstr "Permanently delete this document"
 
 #: www/docman/admin/index.php:349 www/docman/admin/index.php:351
-#, fuzzy
 msgid "Admin Document Groups"
-msgstr "Ajouter des groupes de documents"
+msgstr "Gestion des groupes de documents"
 
 #: www/docman/admin/index.php:368 www/docman/admin/index.php:437
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:32
@@ -6473,9 +6400,8 @@ msgid "Group Name"
 msgstr "Nom du groupe"
 
 #: www/docman/admin/index.php:369
-#, fuzzy
 msgid "Delete Group"
-msgstr "Effacer"
+msgstr "Effacer le groupe"
 
 #: www/docman/admin/index.php:379
 msgid "No Document Groups defined"
@@ -6510,16 +6436,14 @@ msgid "Edit a group"
 msgstr "Modifier un groupe"
 
 #: www/docman/admin/index.php:466
-#, fuzzy
 msgid "Delete Groups"
-msgstr "Tous les groupes"
+msgstr "Supprimer des groupes de documents"
 
 #: www/docman/admin/index.php:472
-#, fuzzy
 msgid ""
 "You are about to permanently delete this document group and his content "
 "(documents and subgroups)."
-msgstr "Vous êtes sur le point de supprimer définitivement ce document."
+msgstr "Vous êtes sur le point de supprimer définitivement ce groupe de documents et son contenu (documents et sous-groupes)."
 
 #: www/docman/admin/index.php:489
 msgid "You are about to permanently delete this document."
@@ -6547,9 +6471,8 @@ msgid "Document Manager: Administration"
 msgstr "Gestionnaire de documents : Administration"
 
 #: www/docman/admin/index.php:526
-#, fuzzy
 msgid "Add/Edit/Delete Document Groups"
-msgstr "Ajouter/Éditer des groupes de documents"
+msgstr "Ajouter/éditer/supprimer des groupes de documents"
 
 #: www/docman/admin/index.php:532 www/docman/index.php:120
 msgid "This project has no visible documents"
@@ -6665,16 +6588,12 @@ msgid "Your search did not match any documents"
 msgstr "Votre recherche n'a renvoyé aucun document."
 
 #: www/docman/view.php:61
-#, fuzzy
 msgid "No document to display - invalid or inactive document number"
-msgstr ""
-"Aucun document à afficher : le numéro de document est invalide, ou "
-"correspond à un document inactif."
+msgstr "Aucun document à afficher : le numéro de document est invalide, ou correspond à un document inactif."
 
 #: www/export/index.php:16
-#, fuzzy
 msgid "Exports Available"
-msgstr "Pas de statistiques disponibles"
+msgstr "Exports disponibles"
 
 #: www/export/projnews.php:81 www/forum/include/ForumHTML.class.php:79
 #: www/include/project_home.php:440 www/index_std.php:57
@@ -6690,13 +6609,12 @@ msgid "RSS/XML Exports"
 msgstr "Exports RSS"
 
 #: www/export/rss_project.php:30
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "%1$s data is exported in a variety of standard formats. Many of\n"
 "the export URLs can also accept form/get data to customize the output. All\n"
 "data generated by these pages is realtime."
-msgstr ""
-"Les données de %1$s sont exportées dans des formats standards en temps réel."
+msgstr "Les données de %1$s sont exportées dans des formats standards en temps réel.  Plusieurs des URLs d'export acceptent des paramètres permettant de personnaliser leur résultat."
 
 #: www/export/rss_project.php:36
 msgid ""
@@ -7523,54 +7441,48 @@ msgstr ""
 "Cliquer ici pour faire une %1$s Nouvelle Version Rapide %2$s de vos paquets"
 
 #: www/frs/admin/index.php:131
-#, fuzzy
 msgid "Packages"
-msgstr "Paquet"
+msgstr "Paquets"
 
 #: www/frs/admin/index.php:132
 msgid ""
 "You can use packages to group different file releases together, or use them "
 "however you like."
-msgstr ""
+msgstr "Les paquets peuvent par exemple être utilisés pour regrouper plusieurs publications de fichiers."
 
 #: www/frs/admin/index.php:133
-#, fuzzy
 msgid "An example of packages:"
-msgstr "Ajouter un échantillon au paquet"
+msgstr "Un exemple de paquets :"
 
 #: www/frs/admin/index.php:135
-#, fuzzy
 msgid "Your Packages:"
-msgstr "Paquet :"
+msgstr "Vos paquets :"
 
 #: www/frs/admin/index.php:137
 msgid "Define your packages"
-msgstr ""
+msgstr "Définir vos paquets"
 
 #: www/frs/admin/index.php:138
-#, fuzzy
 msgid "Create new releases of packages"
-msgstr "Pour créer une nouvelle version, cliquez ici."
+msgstr "Créer une nouvelle version de paquets"
 
 #: www/frs/admin/index.php:140
-#, fuzzy
 msgid "Releases of Packages"
-msgstr "Notes"
+msgstr "Versions de paquets"
 
 #: www/frs/admin/index.php:141
 msgid "A release of a package can contain multiple files."
-msgstr ""
+msgstr "Une version d'un paquet peut contenir plusieurs fichiers."
 
 #: www/frs/admin/index.php:142
-#, fuzzy
 msgid "Examples of Releases"
-msgstr "Derniers fichiers publiés"
+msgstr "Exemples de versions"
 
 #: www/frs/admin/index.php:144
 msgid ""
 "You can create new releases of packages by clicking on <strong>Add/Edit "
 "Releases</strong> next to your package name"
-msgstr ""
+msgstr "Vous pouvez créer de nouvelles versions des paquets en cliquant sur <strong>Éditer les versions</strong> à côté du nom de votre paquet."
 
 #: www/frs/admin/index.php:157
 msgid "You Have No Packages Defined"
@@ -7589,7 +7501,6 @@ msgid "Add Release"
 msgstr "Ajouter une version"
 
 #: www/frs/admin/index.php:208
-#, fuzzy
 msgid "Create New Package"
 msgstr "Créer un paquet"
 
@@ -7822,9 +7733,8 @@ msgid "Refresh"
 msgstr "Rafraîchir"
 
 #: www/frs/reporting/downloads.php:115
-#, fuzzy
 msgid "There have been no downloads for this package."
-msgstr "%1$s utilisateur surveille ce paquet."
+msgstr "Ce paquet n'a pas encore été téléchargé."
 
 #: www/frs/shownotes.php:40
 msgid "That Release Was Not Found"
@@ -8488,16 +8398,15 @@ msgstr[1] ""
 "<a href=\"%1$s\">différentes positions</a>."
 
 #: www/include/project_home.php:136
-#, fuzzy
 msgid "Project Members"
-msgstr "Liste des membres du projet"
+msgstr "Membres du projet"
 
 #: www/include/project_home.php:143
 msgid "Project Admins"
 msgstr "Administrateurs du projet"
 
 #: www/include/project_home.php:165
-#, fuzzy, php-format
+#, php-format
 msgid "View the %1$d Member(s)"
 msgstr "Voir les %1$d membre(s)"
 
@@ -8610,9 +8519,8 @@ msgid "surveys"
 msgstr "Sondages"
 
 #: www/include/project_home.php:399
-#, fuzzy
 msgid "Source Code"
-msgstr "IP source"
+msgstr "Code source"
 
 #: www/include/project_home.php:400 www/register/projectinfo.php:161
 #: www/scm/admin/index.php:39 www/scm/admin/index.php:92
@@ -8743,9 +8651,8 @@ msgid "This developer is not a member of any projects."
 msgstr "Ce développeur ne fait partie d'aucun projet"
 
 #: www/include/user_home.php:154
-#, fuzzy
 msgid "This developer is a member of the following projects:"
-msgstr "Ce développeur fait partie des groupes suivants"
+msgstr "Ce développeur fait partie des projets suivants :"
 
 #: www/include/user_home.php:176
 #, php-format
@@ -8887,49 +8794,47 @@ msgid "A powerful plugin system to add new features."
 msgstr "Un système de greffons pour ajouter des fonctionnalités."
 
 #: www/index_std.php:26
-#, fuzzy
 msgid "What's new in FusionForge trunk"
-msgstr "Les nouveautés de FusionForge 4.7"
+msgstr "Les nouveautés de FusionForge « trunk »"
 
 #: www/index_std.php:28
 msgid ""
 "Many improvements to the trackers: configurable display, workflow "
 "management, links between artifacts, better searches, and more"
-msgstr ""
+msgstr "De nombreuses améliorations dans les outils de suivi : affichage configurable, gestion des processus (<em>workflow</em>), liens entre objets, recherches améliorées, etc."
 
 #: www/index_std.php:29
 msgid "Rewritten SCM subsystem, with new plugins for Bazaar, Darcs and Git"
-msgstr ""
+msgstr "Système de suivi de sources récrit, avec de nouveaux outils disponibles (Bazaar, Darcs et Git)"
 
 #: www/index_std.php:30
 msgid ""
 "New version of Mediawiki plugin, providing independent wikis for each project"
-msgstr ""
+msgstr "Nouvelle version du plugin Mediawiki, fournissant un wiki indépendant pour chaque projet."
 
 #: www/index_std.php:31
 msgid "Various new plugins: projectlabels, globalsearch, extratabs"
-msgstr ""
+msgstr "Divers nouveaux plugins : projectlabels, globalsearch, extratabs, contribtracker"
 
 #: www/index_std.php:34
-#, fuzzy
 msgid "What's new in FusionForge 4.8"
-msgstr "Les nouveautés de FusionForge 4.7"
+msgstr "Les nouveautés de FusionForge 4.8"
 
 #: www/index_std.php:36
 msgid "New project classification by tags (tag cloud)."
-msgstr ""
+msgstr "Classification des projets par étiquettes (et affichage sous forme de nuage d'étiquettes)."
 
 #: www/index_std.php:37
 msgid "New reporting item for the File Release System: downloads per package."
-msgstr ""
+msgstr "Nouvelle donnée disponible pour les rapports du système de publication de fichiers : nombre de téléchargements par paquet."
 
 #: www/index_std.php:38
 msgid "List of all projects added in Project List"
-msgstr ""
+msgstr "Ajout de la liste de tous les projets."
 
 #: www/index_std.php:39
 msgid "New version of phpWiki plugin, using lastest svn code"
-msgstr ""
+msgstr "Nouvelle version du plugin phpWiki, qui utilise la dernière version du code."
 
 #: www/index_std.php:42
 msgid "What's new in FusionForge 4.7"
@@ -8984,7 +8889,7 @@ msgstr "Nouveau greffon de hiérarchie de projets."
 #: www/index_std.php:73
 #, php-format
 msgid "This site is running %1$s version %2$s"
-msgstr ""
+msgstr "Ce site fonctionne avec %1$s en version %2$s."
 
 #: www/mail/admin/deletelist.php:48 www/mail/admin/index.php:207
 msgid "Permanently Delete List"
@@ -9201,9 +9106,8 @@ msgid "Submitted by"
 msgstr "Proposée par"
 
 #: www/my/diary.php:30
-#, fuzzy
 msgid "The diary feature is not enabled."
-msgstr "Les données du sondage ne sont pas remplies"
+msgstr "La fonctionnalité de journal est désactivée."
 
 #: www/my/diary.php:67
 msgid "Diary Updated"
@@ -9495,9 +9399,8 @@ msgid "NewsBytes Rejected."
 msgstr "Annonce rejetée."
 
 #: www/news/admin/index.php:258
-#, fuzzy
 msgid "NewsByte deleted"
-msgstr "Annonce supprimée."
+msgstr "Annonce supprimée"
 
 #: www/news/admin/index.php:270
 msgid "Submitted for group"
@@ -11384,9 +11287,8 @@ msgstr ""
 "</p>"
 
 #: www/project/memberlist.php:42
-#, fuzzy
 msgid "Member"
-msgstr "Membres"
+msgstr "Membre"
 
 #: www/project/memberlist.php:43 www/stats/lastlogins.php:41
 msgid "Username"
@@ -11521,7 +11423,7 @@ msgstr "Statistiques cumulées"
 msgid ""
 "Project registration is restricted on %s, and only administrators can create "
 "new projects."
-msgstr ""
+msgstr "L'enregistrement de nouveaux projets est restreint sur %s, seuls les administrateurs peuvent créer de nouveaux projets."
 
 #: www/register/projectinfo.php:103
 msgid "Registration complete"
@@ -11775,29 +11677,28 @@ msgid "Main Page"
 msgstr "Page principale"
 
 #: www/reporting/rebuild.php:52
-#, fuzzy
 msgid "Reporting System Initialization"
-msgstr "Rapports sur les tâches"
+msgstr "Initialisation du système de rapports"
 
 #: www/reporting/rebuild.php:55
 msgid ""
 "Occasionally, if cronjobs failed or the database was damaged, you may have "
 "to rebuild the reporting tables."
-msgstr ""
+msgstr "Exceptionnellement, si des tâches planifiées échouent ou si la base de données est endommagée, il se peut que vous deviez reconstruire les tables du système de rapports."
 
 #: www/reporting/rebuild.php:58
 msgid ""
 "If you are sure you want to rebuild all the reporting tables, check the \"I "
 "am sure\" box and click the button below."
-msgstr ""
+msgstr "Si vous êtes sûr de vouloir reconstruire toutes les tables du système de rapports, cochez la case « J'en suis sûr » et cliquez sur le bouton ci-dessous."
 
 #: www/reporting/rebuild.php:61
 msgid "This could take a couple minutes, so DO NOT CLICK MORE THAN ONCE."
-msgstr ""
+msgstr "Cette opération peut prendre plusieurs minutes ; ne cliquez donc QU'UNE SEULE FOIS."
 
 #: www/reporting/rebuild.php:67
 msgid "I am sure"
-msgstr "Je suis sûr"
+msgstr "J'en suis sûr"
 
 #: www/reporting/rebuild.php:70
 msgid "Press ONLY ONCE"
@@ -11949,7 +11850,6 @@ msgid "User Time Reporting"
 msgstr "Statistiques sur le temps consommé par les utilisateurs"
 
 #: www/reporting/usertime.php:56
-#, fuzzy
 msgid ""
 "Choose the <strong>First Letter</strong> of the name of the person you wish "
 "to report on."
@@ -12061,7 +11961,7 @@ msgstr "Résultats de la recherche dans les annonces"
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:177
 #, php-format
 msgid "Note: only the first %d results for this category are displayed."
-msgstr ""
+msgstr "Note : seuls les %d premiers résultats de cette catégorie sont affichés."
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:182
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:176
@@ -12921,9 +12821,8 @@ msgid "Users (RED) / Projects (BLUE)"
 msgstr "Membres (rouge) / projets (bleu)"
 
 #: www/stats/views_graph.php:87
-#, fuzzy
 msgid "Forge Page Views"
-msgstr "pages"
+msgstr "Pages vues sur la forge"
 
 #: www/stats/views_graph.php:88
 #, php-format
@@ -13926,9 +13825,8 @@ msgid "Add/Update template for %s"
 msgstr "Ajouter/modifier un modèle pour %s"
 
 #: www/tracker/admin/form-uploadtemplate.php:13
-#, fuzzy
 msgid "Select Template"
-msgstr "Supprimer le modèle"
+msgstr "Choisir un modèle"
 
 #: www/tracker/admin/form-workflow.php:13
 msgid ""
@@ -14261,7 +14159,6 @@ msgid "Delete artifact"
 msgstr "Supprimer l'objet"
 
 #: www/tracker/deleteartifact.php:22
-#, fuzzy
 msgid "Confirm Deletion"
 msgstr "Confirmez l'effacement"
 
@@ -14526,7 +14423,6 @@ msgid "Item Successfully Created"
 msgstr "Élément créé avec succès"
 
 #: www/tracker/tracker.php:221
-#, fuzzy
 msgid "Updated Successfully"
 msgstr "Mis à jour avec succès"
 
@@ -14551,12 +14447,10 @@ msgid "File Delete: Successful"
 msgstr "Fichier détruit avec succès"
 
 #: www/tracker/tracker.php:421 www/tracker/tracker.php:438
-#, fuzzy
 msgid "Monitoring Started"
-msgstr "Suivi démarré"
+msgstr "Surveillance démarrée"
 
 #: www/tracker/tracker.php:423 www/tracker/tracker.php:440
-#, fuzzy
 msgid "Monitoring Deactivated"
 msgstr "Surveillance arrêtée"
 
@@ -14646,75 +14540,3 @@ msgstr[1] ""
 #: www/users:33
 msgid "No User Name Provided"
 msgstr "Aucun nom d'utilisateur n'a été fourni"
-
-#~ msgid "No file was provided"
-#~ msgstr "Aucun fichier n'a été fourni"
-
-#~ msgid "Developer Info"
-#~ msgstr "Equipe-Projet"
-
-#~ msgid ""
-#~ "<p>Mailing lists provided via a GForge version of <a href=\"http://www."
-#~ "list.org/\">GNU Mailman</a>. Thanks to the Mailman and <a href=\"http://"
-#~ "www.python.org/\">Python</a> crews for excellent software.</p>"
-#~ msgstr ""
-#~ "<p>Les listes de diffusion sont fournies par <a href=\"http://www.list."
-#~ "org/\">GNU Mailman</a>.</p>"
-
-#~ msgid "Software/Group"
-#~ msgstr "Logiciel/Groupe"
-
-#~ msgid "News Data"
-#~ msgstr "Aucune donnée"
-
-#~ msgid ""
-#~ "Could not open local.inc file for read/write. Check the permissions for "
-#~ "apache"
-#~ msgstr ""
-#~ "Le fichier local.inc n'a pas pu être ouvert en lecture/écriture.  "
-#~ "Veuillez vérifier les permissions pour Apache."
-
-#~ msgid ""
-#~ "Could not open local.inc file for read. Check the permissions for apache"
-#~ msgstr ""
-#~ "Le fichier local.inc n'a pas pu être ouvert en lecture.  Veuillez "
-#~ "vérifier les permissions pour Apache."
-
-#~ msgid ""
-#~ "<h3>Packages</h3><p>You can use packages to group different file releases "
-#~ "together, or use them however you like. <p><h4>An example of packages:</"
-#~ "h4><p><strong>Mysql-win</strong><br /><strong>Mysql-unix</strong><br /"
-#~ "><strong>Mysql-odbc</strong><p><h4>Your Packages:</h4><p><ol><li>Define "
-#~ "your packages</li><li>Create new releases of packages</li></"
-#~ "ol><p><h3>Releases of Packages</h3><p>A release of a package can contain "
-#~ "multiple files.<p><h4>Examples of Releases</h4><p><strong>3.22.1</"
-#~ "strong><br /><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /"
-#~ "><p>You can create new releases of packages by clicking on <strong>Add/"
-#~ "Edit Releases</strong> next to your package name.<p>"
-#~ msgstr ""
-#~ "<h3>Paquets</h3><p>Vous pouvez utiliser les paquets pour grouper "
-#~ "différentes versions de fichiers ensemble, ou les utiliser comme bon vous "
-#~ "semble. <p><h4>Un exemple de paquets&nbsp;:</h4><p><strong>Mysql-win</"
-#~ "strong><br /><strong>Mysql-unix</strong><br /><strong>Mysql-odbc</"
-#~ "strong><p><h4>Vos paquets&nbsp;:</h4><p><ol><li>Définissez vos paquets</"
-#~ "li><li>Créer de nouvelles versions de paquets</li></ol><p><h3>Version de "
-#~ "paquets</h3><p>Une version de paquet peut contenir de multiple fichiers."
-#~ "<p><h4>Exemples de versions</h4><p><strong>3.22.1</strong><br /"
-#~ "><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /><p>Vous pouvez "
-#~ "créer de nouvelles versions de paquets en cliquant sur <strong>Ajouter/"
-#~ "Éditer versions</strong> à coté du nom de votre paquet.<p>"
-
-#~ msgid ""
-#~ "<h3>Reporting System Initialization</h3><p>Occasionally, if cronjobs "
-#~ "failed or the database was damaged, you may have to rebuild the reporting "
-#~ "tables.<p>If you are sure you want to rebuild all the reporting tables, "
-#~ "check the \"I'm Sure\" box and click the button below.<p>This could take "
-#~ "a couple minutes, so DO NOT CLICK MORE THAN ONCE.<p>"
-#~ msgstr ""
-#~ "<h3>Initialisation du système de rapports</h3><p>Il peut arriver, si les "
-#~ "scripts cron ont rencontré une erreur ou si la base de données a été "
-#~ "endommagée, que vous deviez reconstruire les tables utilisées pour le "
-#~ "système de rapports</p><p>Si vous êtes certain de vouloir le faire, "
-#~ "cochez la case « Je suis sûr » et cliquez sur le bouton ci-dessous.</"
-#~ "p><p>Cette opération peut durer plusieurs minutes, donc veuillez ne "
-#~ "cliquer QU'UNE SEULE FOIS.<p>"
