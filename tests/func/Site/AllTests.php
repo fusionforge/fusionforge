@@ -77,7 +77,7 @@ class Site_AllTests
     }
 }
  
-if (PHPUnit_MAIN_METHOD == 'Trackers_AllTests::main') {
+if (PHPUnit_MAIN_METHOD == 'Site_AllTests::main') {
     Site_AllTests::main();
 }
 ?>

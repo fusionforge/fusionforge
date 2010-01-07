@@ -24,50 +24,53 @@ require_once 'PHPUnit/Framework/TestCase.php';
 
 class SoapUserGroupProcess extends PHPUnit_Framework_TestCase
 {
-
+  
 	function setUp()
 	{
+	  //	  print_r("setup\n");
+	  $this->session = NULL;
+	  $this->soapclient = NULL;
+	
+	  //	  try {
 
-		//	  print_r("setup\n");
-
-		$this->loggedIn = FALSE;
-		$this->session = NULL;
-		//print_r("session :".$this->session);
-
-		$this->assertRegExp('/http.?:\/\//', WSDL_URL);
-
-		//	  try {
+	  // see comments in SoapLoginProcess:setup() for details about this
+	  $ip = gethostbyname(FORGE_HOSTNAME);
+	  if ($ip != FORGE_HOSTNAME) 
+	    {
 
 		$this->soapclient = new SoapClient(WSDL_URL,
-		array('cache_wsdl' => WSDL_CACHE_NONE,
-						   'trace' => true));
+						   array('cache_wsdl' => WSDL_CACHE_NONE,
+							 'trace' => true));
 		 
 		//	  } catch (SoapFault $fault) {
 		//	    $fault->faultstring;
 		//	    print_r($fault);
 		//	  }
 		//	  print_r($this->soapclient);
+	    }
+	}
 
-}
+	function tearDown()
+	{
+	   if ($this->session) {
+	     $response = $this->soapclient->logout($this->session);
+	     //	     print($response);
+	   }
+	 }
 
-// function tearDown()
-// {
-//   //
-	// }
 
 
 	// performs a login and returns a session "cookie"
 	function login($userid, $passwd)
 	{
+	        $this->assertNotNull($this->soapclient);
 		$response = $this->soapclient->login($userid, $passwd);
 
 		if ($response) {
-			$this->loggedIn = TRUE;
 
 			$this->session = $response;
 
 			//	    print_r($this->session);
-
 		}
 
 		return $response;
@@ -120,10 +123,8 @@ class SoapUserGroupProcess extends PHPUnit_Framework_TestCase
 	function testGetGroupsByNameEmpty()
 	{
 
-		//	  print_r($this->loggedIn);
-
 		$this->login(EXISTING_USER, PASSWD_OF_EXISTING_USER);
-		$this->assertNotNull($this->loggedIn);
+
 		$this->assertNotNull($this->session);
 
 		try {
@@ -147,11 +148,8 @@ class SoapUserGroupProcess extends PHPUnit_Framework_TestCase
 	 */
 	function testGetGroupsByName()
 	{
-
-		//	  print_r($this->loggedIn);
-
 		$this->login(EXISTING_USER, PASSWD_OF_EXISTING_USER);
-		$this->assertNotNull($this->loggedIn);
+
 		$this->assertNotNull($this->session);
 
 		$groups = array('template' => 'template',
@@ -203,42 +201,42 @@ class SoapUserGroupProcess extends PHPUnit_Framework_TestCase
 	//     return: tns:ArrayOfstring
 
 
+	// /**
+	//  * @depends testLoginSuccesful
+	//  */
+	// function testGetPublicProjectNamesNotLoggedIn()
+	// {
+
+	// 	//	  print_r($this->loggedIn);
+	// 	$this->assertNotNull($this->loggedIn);
+
+	// 	$response = $this->soapclient->getPublicProjectNames();
+
+	// 		  print_r($response);
+	// 	$this->assertContains("newsadmin", $response);
+	// 	$this->assertContains("siteadmin", $response);
+
+	// }
+
 	/**
 	 * @depends testLoginSuccesful
 	 */
-	function testGetPublicProjectNamesNotLoggedIn()
-	{
+	// function testGetPublicProjectNamesLoggedIn()
+	// {
 
-		//	  print_r($this->loggedIn);
-		$this->assertNotNull($this->loggedIn);
+	// 	$this->login(EXISTING_USER, PASSWD_OF_EXISTING_USER);
+	// 	$this->assertNotNull($this->loggedIn);
+	// 	$this->assertNotNull($this->session);
 
-		$response = $this->soapclient->getPublicProjectNames();
-		 
-//		$this->assertContains("newsadmin", $response);
-//		$this->assertContains("siteadmin", $response);
+	// 	//	  print_r($this->loggedIn);
+	// 	$this->assertNotNull($this->loggedIn);
 
-		//	  print_r($response);
-	}
+	// 	$response = $this->soapclient->getPublicProjectNames($this->session);
+	// 	$this->assertContains("newsadmin", $response);
+	// 	$this->assertContains("siteadmin", $response);
 
-	/**
-	 * @depends testLoginSuccesful
-	 */
-	function testGetPublicProjectNamesLoggedIn()
-	{
-
-		$this->login(EXISTING_USER, PASSWD_OF_EXISTING_USER);
-		$this->assertNotNull($this->loggedIn);
-		$this->assertNotNull($this->session);
-
-		//	  print_r($this->loggedIn);
-		$this->assertNotNull($this->loggedIn);
-
-		$response = $this->soapclient->getPublicProjectNames($this->session);
-//		$this->assertContains("newsadmin", $response);
-//		$this->assertContains("siteadmin", $response);
-
-		//print_r($response);
-	}
+	// 	//print_r($response);
+	// }
 
 	// Name: getUsers
 	// Binding: GForgeAPIBinding
@@ -291,11 +289,8 @@ class SoapUserGroupProcess extends PHPUnit_Framework_TestCase
 	 */
 	function testGetUsersByNameEmpty()
 	{
-
-		//	  print_r($this->loggedIn);
-
 		$this->login(EXISTING_USER, PASSWD_OF_EXISTING_USER);
-		$this->assertNotNull($this->loggedIn);
+
 		$this->assertNotNull($this->session);
 
 		try {
@@ -314,29 +309,49 @@ class SoapUserGroupProcess extends PHPUnit_Framework_TestCase
 		$this->fail('An expected exception has not been raised. Got response :'.$response);
 	}
 
+        /**
+	 * @depends testLoginSuccesful
+	 */
+	function testGetUsersByNameBug63()
+	{
+	  $this->login(EXISTING_USER, PASSWD_OF_EXISTING_USER);
+
+	  $this->assertNotNull($this->session);
+
+	  // corner case, but a dangerous ? one : the way the SOAP
+	  // server works allow to trick it in returning several
+	  // values at a time : this one may be fixed some day and we'd then
+	  $users = array('admin", "None' => array( 'count' => 2, 
+						   'user_names' => array('admin', 'None')));
+
+	  foreach (array_keys($users) as $user_name) {
+	    $response = $this->soapclient->getUsersByName($this->session,array($user_name));
+
+	    $this->assertEquals($users[$user_name]['count'], count($response));
+
+	    foreach ($response as $user) {
+	      //	      print_r($user);
+	      $this->assertContains($user->user_name, $users[$user_name]['user_names']);
+	    }
+	  }
+	}
+
 	/**
 	 * @depends testLoginSuccesful
 	 */
 	function testGetUsersByName()
 	{
-
-		//	  print_r($this->loggedIn);
-
 		$this->login(EXISTING_USER, PASSWD_OF_EXISTING_USER);
-		$this->assertNotNull($this->loggedIn);
+
 		$this->assertNotNull($this->session);
 
 		$users = array('admin'=>'admin',
-			 'None'=>'None', 
-		EXISTING_USER => EXISTING_USER);
+			       'None'=>'None', 
+			       EXISTING_USER => EXISTING_USER);
 
 		foreach (array_keys($users) as $user_name) {
 			//	    print_r($user_name);
-			//	  $user_name='admin';
 			$response = $this->soapclient->getUsersByName($this->session,array($user_name));
-	  //	  $response = $this->soapclient->__soapCall('getUsersByName',
-	  //						    array('session_ser' => $this->session,
-	  //							  'user_ids' => array('admin')));
 
 			$user = $response[0];
 			// print_r($user);
