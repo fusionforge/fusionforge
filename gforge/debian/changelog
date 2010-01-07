@@ -38,7 +38,9 @@ gforge (4.8.51-1) experimental; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Wed, 29 Apr 2009 15:21:31 +0200
 
-gforge (4.8.1-3+) UNRELEASED; urgency=low
+gforge (4.8.2-1) unstable; urgency=low
+  
+  * New upstream release.
 
   [ Olivier Berger ]
   * Fix copyright file to mention nusoap.
@@ -53,7 +55,7 @@ gforge (4.8.1-3+) UNRELEASED; urgency=low
   [ Roland Mas ]
   * Fix for symlink attack (CVE-2009-3304).
 
- -- Roland Mas <lolando@debian.org>  Mon, 23 Nov 2009 13:53:17 +0100
+ -- Roland Mas <lolando@debian.org>  Tue, 01 Dec 2009 09:22:03 +0100
 
 gforge (4.8.1-3) unstable; urgency=low
 

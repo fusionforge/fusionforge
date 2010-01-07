@@ -36,6 +36,9 @@ UNRELEASED:
 * Mediawiki plugin: mostly rewritten.  Now creates independent wikis
   for projects, allowing different sets of permissions.
 
+FusionForge-4.8.2:
+* Maintenance release, security and bugfixes.
+
 FusionForge-4.8.1:
 * Maintenance release, only bugfixes.
 
