@@ -126,7 +126,7 @@ class Forum extends Error {
 			return false;
 		}
 		$forum_name = strtolower($forum_name);
-		if (!preg_match('/^([_\.0-9a-z-])*$/i',$forum_name)) {
+		if (!preg_match('/^([_\.0-9a-z-])*$/',$forum_name)) {
 			$this->setError(_('Illegal Characters in Forum Name'));
 			return false;
 		}
@@ -679,7 +679,7 @@ class Forum extends Error {
 		//delete forum's role setting
 		db_query_params ('DELETE FROM role_setting WHERE section_name=$1 AND ref_id=$2',
 				 array ('forum',
-				 $this->getID())) ; 
+				 $this->getID())) ;
 		db_commit();
 		return true;
 	}
