@@ -81,6 +81,7 @@ class FusionForgeTemplate extends QuickTemplate {
 		<?php $this->html('headlinks') ?>
 		<title><?php $this->text('pagetitle') ?></title>
         	<!-- FUSIONFORGE Stylesheet BEGIN -->
+		<?php if (!$GLOBALS['sys_use_mwframe']){ $GLOBALS['HTML']->headerLink(); } ?>
 		<?php if (!$GLOBALS['sys_use_mwframe']){ $GLOBALS['HTML']->headerCSS(); } ?>
         	<!-- FUSIONFORGE Stylesheet END -->
 		<?php $this->html('csslinks') ?>

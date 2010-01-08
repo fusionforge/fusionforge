@@ -39,9 +39,12 @@
 ** http://style.cleverchimp.com/font_size_intervals/altintervals.html
 */
 
+td.body_plugin {
+	background: #f9f9f9 url(headbg.jpg) 0 0 no-repeat;
+}
+
 body {
 	font: x-small sans-serif;
-	background: #f9f9f9 url(headbg.jpg) 0 0 no-repeat;
 	color: black;
 	margin: 0;
 	padding: 0;
