@@ -197,6 +197,7 @@ if (file_exists ("$wikidata/LocalSettings.php")) {
         require ("$wikidata/LocalSettings.php") ;
 }
 
+$wgLogo = "";
 $wgFavicon = '/images/icon.png' ;
 $wgBreakFrames = false ;
 ini_set ('memory_limit', '50M') ;
