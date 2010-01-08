@@ -920,37 +920,8 @@ gforge/plugins/mediawiki/cronjobs/create-wikis.sh -text
 gforge/plugins/mediawiki/etc/httpd.d/03mediawiki -text
 gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php -text
 gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php.reference -text
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/FF2Fixes.css -text
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/IE50Fixes.css -text
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/IE55Fixes.css -text
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/IE60Fixes.css -text
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/IE70Fixes.css -text
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/IEMacFixes.css -text
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/KHTMLFixes.css -text
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/Opera6Fixes.css -text
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/Opera7Fixes.css -text
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/Opera9Fixes.css -text
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/audio.png -text svneol=unset#unset
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/bullet.gif -text svneol=unset#unset
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/discussionitem_icon.gif -text svneol=unset#unset
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/document.png -text svneol=unset#unset
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/external-rtl.png -text svneol=unset#unset
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/external.png -text svneol=unset#unset
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/file_icon.gif -text svneol=unset#unset
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/headbg.jpg -text svneol=unset#unset
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/link_icon.gif -text svneol=unset#unset
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/lock_icon.gif -text svneol=unset#unset
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/magnify-clip.png -text svneol=unset#unset
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/mail_icon.gif -text svneol=unset#unset
 gforge/plugins/mediawiki/mediawiki-skin/fusionforge/main.css -text
 gforge/plugins/mediawiki/mediawiki-skin/fusionforge/main.css.reference -text
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/news_icon.png -text svneol=unset#unset
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/required.gif -text svneol=unset#unset
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/rtl.css -text
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/user.gif -text svneol=unset#unset
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/video.png -text svneol=unset#unset
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/wiki-indexed.png -text svneol=unset#unset
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/wiki.png -text svneol=unset#unset
 gforge/plugins/mediawiki/www/LocalSettings.php -text
 gforge/plugins/mediawiki/www/frame.php -text
 gforge/plugins/online_help/common/online_help-init.php -text
