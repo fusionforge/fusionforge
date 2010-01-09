@@ -273,9 +273,9 @@ function get_news_name($id) {
 	/*
 		Takes an ID and returns the corresponding forum name
 	*/
-	$result=db_query_params("SELECT summary FROM news_bytes WHERE id=$1", array($id));
+	$result=db_query_params('SELECT summary FROM news_bytes WHERE id=$1', array($id));
 	if (!$result || db_numrows($result) < 1) {
-		return "Not Found";
+		return _('Not Found');
 	} else {
 		return db_result($result, 0, 'summary');
 	}
