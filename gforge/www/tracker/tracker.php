@@ -520,12 +520,12 @@ switch (getStringFromRequest('func')) {
 			break;
 		}
 		case 'download' : {
-			$aid = getStringFromRequest('aid');
+			$aid = getIntFromRequest('aid');
 			Header("Redirect: ".util_make_url ("/tracker/download.php?group_id=$group_id&atid=$atid&aid=$aid&file_id=$file_id"));
 			break;
 		}
 		case 'detail' : {
-			$aid = getStringFromRequest('aid');
+			$aid = getIntFromRequest('aid');
 
 			//
 			//	users can modify their own tickets in a limited way if they submitted them
