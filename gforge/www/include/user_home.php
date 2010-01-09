@@ -44,7 +44,7 @@ $HTML->header(array('title'=>_('Developer Profile')));
 </tr>
 
 <tr valign="top">
-	<td><?php echo _('Real name') ?> </td>
+	<td><?php echo _('Real Name') ?> </td>
 	<td><strong><?php print $user->getTitle() .' '. $user->getRealName(); ?></strong></td>
 </tr>
 
