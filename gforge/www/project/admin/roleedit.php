@@ -262,8 +262,7 @@ for ($i=0; $i<count($keys); $i++) {
 	} else {
 
 		echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
-		<td><strong>'.$rbac_edit_section_names[$keys[$i]].'</strong></td>
-		<td>-</td>
+		<td colspan="2"><strong>'.$rbac_edit_section_names[$keys[$i]].'</strong></td>
 		<td>'.html_build_select_box_from_assoc($role->getRoleVals($keys[$i]), "data[".$keys[$i]."][0]", $role->getVal($keys[$i],0), false, false ).'</td>
 		</tr>';
 
