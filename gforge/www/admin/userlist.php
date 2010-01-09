@@ -143,7 +143,7 @@ if (!$group_id) {
 					   array (strtolower("$user_name_search%")));
 	} else {
 		$sortorder = getStringFromRequest('sortorder', 'realname');
-		$result = db_query_params("SELECT user_name,lastname,firstname,user_id,status,add_date FROM users ORDER BY $1", array($sortorder));
+		$result = db_query_params('SELECT user_name,lastname,firstname,user_id,status,add_date FROM users ORDER BY $1', array($sortorder));
 	}
 	show_users_list ($result);
 } else {
