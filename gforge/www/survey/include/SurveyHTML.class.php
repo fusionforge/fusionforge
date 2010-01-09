@@ -125,7 +125,7 @@ class SurveyHTML extends Error {
 		$ret.='<input type="hidden" name="post" value="Y" />';
 		$ret.='<input type="hidden" name="group_id" value="'.$group_id.'" />';
 		$ret.='<input type="hidden" name="question_id" value="'.$question_id.'" />';
-		$ret.='<input type="hidden" name="form_key" value="' . form_generate_key() . '">';
+		$ret.='<input type="hidden" name="form_key" value="' . form_generate_key() . '" />';
 		$ret.=_('Question').':<br />';
 		$ret.='<input type="text" name="question" value="'.$question.'" size="60" maxlength="150" />';
 		$ret.='<p>'. _('Question type').':<br />';
@@ -134,7 +134,7 @@ class SurveyHTML extends Error {
 					   array());
 		$ret.= html_build_select_box($result,'question_type',$question_type,false);
 
-		$ret.='</p><p><input type="submit" name="submit" value="'.$question_button.'"></p>';
+		$ret.='</p><p><input type="submit" name="submit" value="'.$question_button.'" /></p>';
 		$ret.='</form>';
 		
 		return $ret;
@@ -267,7 +267,7 @@ class SurveyHTML extends Error {
 		$ret.='<br /><input type="text" name="survey_questions" value="" length="90" maxlength="1500" /></p>';
 		*/
 				
-		$ret.='<p><input type="submit" name="submit" value="'.$survey_button.'"></p>';
+		$ret.='<p><input type="submit" name="submit" value="'.$survey_button.'" /></p>';
 		$ret.='</form>';
 		
 		return $ret;
@@ -370,7 +370,7 @@ class SurveyHTML extends Error {
 				echo $surveys[$i]->getErrorMessage();
 				continue;
 			}
-			
+
 			if (!$surveys[$i]->isActive()) {
 				if ($show_inactive) {
 					$strike_open="<strike>";
@@ -505,7 +505,7 @@ class SurveyHTML extends Error {
 				
 			case 2:	/* This is a text-area question. */
 				$ret.= $question_title.'<br />';
-				$ret.='<textarea name="_'.$question_id.'" rows="5" cols="60" wrap="soft"></textarea>';
+				$ret.='<textarea name="_'.$question_id.'" rows="5" cols="60"></textarea>';
 				break;
 			case 3:	/* This is a Yes/No question. 
                            Show the Yes/No only if this is the first in a series */
@@ -635,7 +635,7 @@ class SurveyHTML extends Error {
 		case 5:	/* This is a text-field question. */
 			if ($show_comment) {
 				for($j=0; $j<$totalCount; $j++) {
-					$ret.='<hr.><strong>'._('Comments').
+					$ret.='<hr /><strong>'._('Comments').
 						' # '.($j+1).'/'.$totalCount. '</strong><p/>';
 					$ret.='<pre>';
 					$words = explode(" ",$results[$j]);
@@ -648,13 +648,13 @@ class SurveyHTML extends Error {
 							$chunks = $this->split_str($word,50);
 							foreach ($chunks as $chunk) {
 								$ret .= $chunk;
-								$ret .= "<br>";
+								$ret .= "<br />";
 							}
 							$linelength = 0;
 						} else { 
 							$linelength += strlen($word);
 							if ($linelength>100) {
-								$ret .= "<br>";
+								$ret .= "<br />";
 								$linelength = 0;
 							} else {
 								$ret .= $word . " ";
@@ -709,7 +709,7 @@ class SurveyHTML extends Error {
 			$ret.='<td width="90%" bgcolor="'.$color.'">&nbsp;</td>';
 		}
 		
-		$ret.= '<td>'.sprintf("%.2f", $percent).'%</td></tr></table></td></tr\>'."\n";
+		$ret.= '<td>'.sprintf("%.2f", $percent).'%</td></tr></table></td></tr>'."\n";
 		
 		return $ret;
 	}

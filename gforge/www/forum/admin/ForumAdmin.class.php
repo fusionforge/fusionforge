@@ -479,8 +479,8 @@ class ForumAdmin extends Error {
 						} else {
 							if ($fm->isError()) {
 							    if ( $fm->getErrorMessage() == (_('Couldn\'t Update Master Thread parent with current time')) ) {
-							    	//the thread which the message was replying to doesn�t exist any more
-							    	$feedback .= "( " . $subject . " ) " . _('The thread which the message was posted to doesn\'t exist anymore, please delete the message.') . "<br>";
+							    	//the thread which the message was replying to doesn't exist any more
+							    	$feedback .= "( " . $subject . " ) " . _('The thread which the message was posted to doesn\'t exist anymore, please delete the message.') . "<br />";
 							    } else {
 									$feedback .= "$msg_id - " . $fm->getErrorMessage() . "<br />";
 							    }

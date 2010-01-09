@@ -76,7 +76,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		site_project_header(array('title' => _('Advanced search'), 'group' => $this->groupId, 'toptab'=>'none'));
 		$sectionarray = $this->getSectionArray();
 		$this->handleTransferInformation($sectionarray);
-		
+
 		$GLOBALS['HTML']->advancedSearchBox($sectionarray, $this->groupId, $this->words, $this->isExact);
 	}
 	
