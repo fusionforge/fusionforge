@@ -11442,8 +11442,8 @@ msgstr[2] ""
 "запрос для рассмотрения."
 
 #: www/project/request.php:63
-msgid "If you want, you can send a comment to the administrator:"
-msgid_plural "If you want, you can send a comment to the administrators:"
+msgid "You must send a comment to the administrator:"
+msgid_plural "You must send a comment to the administrators:"
 msgstr[0] "Если Вы хотите оставить сообщение администратору:"
 msgstr[1] "Если Вы хотите оставить сообщение администраторам:"
 msgstr[2] "Если Вы хотели оставить сообщение администратору:"

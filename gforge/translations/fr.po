@@ -11347,12 +11347,12 @@ msgstr[1] ""
 "approuver ou refuser votre demande."
 
 #: www/project/request.php:63
-msgid "If you want, you can send a comment to the administrator:"
-msgid_plural "If you want, you can send a comment to the administrators:"
+msgid "You must send a comment to the administrator:"
+msgid_plural "You must send a comment to the administrators:"
 msgstr[0] ""
-"Si vous le souhaitez, vous pouvez envoyer un commentaire à l'administrateur :"
+"Si vous le souhaitez, vous devez envoyer un commentaire à l'administrateur :"
 msgstr[1] ""
-"Si vous le souhaitez, vous pouvez envoyer un commentaire aux "
+"Si vous le souhaitez, vous devez envoyer un commentaire aux "
 "administrateurs :"
 
 #: www/project/stats/index.php:41 www/project/stats/index.php:52

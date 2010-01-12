@@ -11246,8 +11246,8 @@ msgstr[1] ""
 "akzeptiert oder lehnt Ihre Anfrage ab."
 
 #: www/project/request.php:63
-msgid "If you want, you can send a comment to the administrator:"
-msgid_plural "If you want, you can send a comment to the administrators:"
+msgid "You must send a comment to the administrator:"
+msgid_plural "You must send a comment to the administrators:"
 msgstr[0] ""
 msgstr[1] ""
 

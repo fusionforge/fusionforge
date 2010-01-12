@@ -11412,8 +11412,8 @@ msgstr[1] ""
 "non aceptada."
 
 #: www/project/request.php:63
-msgid "If you want, you can send a comment to the administrator:"
-msgid_plural "If you want, you can send a comment to the administrators:"
+msgid "You must send a comment to the administrator:"
+msgid_plural "You must send a comment to the administrators:"
 msgstr[0] "Se desexar, pode enviarlle un comentario ao administrador:"
 msgstr[1] "Se desexar, pode enviarlle un comentario aos administradores:"
 

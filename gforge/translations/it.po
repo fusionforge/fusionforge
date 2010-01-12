@@ -11261,8 +11261,8 @@ msgstr[1] ""
 
 #: www/project/request.php:63
 #, fuzzy
-msgid "If you want, you can send a comment to the administrator:"
-msgid_plural "If you want, you can send a comment to the administrators:"
+msgid "You must send a comment to the administrator:"
+msgid_plural "You must send a comment to the administrators:"
 msgstr[0] "Puoi inviare un commento agli amministratori:"
 msgstr[1] "Puoi inviare un commento agli amministratori:"
 
