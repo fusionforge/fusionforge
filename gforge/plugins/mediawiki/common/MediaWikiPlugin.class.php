@@ -29,6 +29,7 @@ class MediaWikiPlugin extends Plugin {
 		$this->hooks[] = "groupmenu" ;	// To put into the project tabs
 		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
 		$this->hooks[] = "groupisactivecheckboxpost" ; //
+		$this->hooks[] = "project_public_area";
 	}
 
 	function CallHook ($hookname, $params) {
@@ -86,6 +87,24 @@ class MediaWikiPlugin extends Plugin {
 				$group->setPluginUse ( $this->name );
 			} else {
 				$group->setPluginUse ( $this->name, false );
+			}
+		} elseif ($hookname == "project_public_area") {
+			$project = &group_get_object($group_id);
+			if (!$project || !is_object($project)) {
+				return;
+			}
+			if ($project->isError()) {
+				return;
+			}
+			if (!$project->isProject()) {
+				return;
+			}
+			if ( $project->usesPlugin ( $this->name ) ) {
+				print '<hr size="1" />';
+				print '<a href='. util_make_url ('/plugins/mediawiki/wiki/'.$project->getUnixName().'/index.php').'>';
+				print html_abs_image(util_make_url ('/plugins/mediawiki/wiki/'.$project->getUnixName().'/skins/fusionforge/wiki.png'),'20','20',array('alt'=>'Mediawiki'));
+				print 'Mediawiki';
+				print '</a>';
 			}
 		} elseif ($hookname == "blahblahblah") {
 			// ...
