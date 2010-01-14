@@ -6,7 +6,7 @@
 # Inspired from the grap.c file in Sourceforge 2.5
 
 use strict ;
-use vars qw/ @allowed_options @allowed_commands $errmsg @cmd / ;
+use vars qw/ @allowed_options @allowed_commands @commands_requiring_unquote $errmsg @cmd / ;
 use subs qw/ &reject / ;
 no locale ;
 
