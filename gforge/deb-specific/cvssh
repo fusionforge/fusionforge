@@ -38,7 +38,7 @@ if (scalar (grep { $_ eq $cmd[0] } @allowed_commands) == 0) {
     &reject ;
 }
 
-if (scalar (grep { $_ eq $cmd[0] } @commands_requiring_unquote) == 0) {
+if (scalar (grep { $_ eq $cmd[0] } @commands_requiring_unquote) != 0) {
     foreach my $i (1..$#cmd) {
 	if ($cmd[$i] =~ /^'(.*)'$/) {
 	    $cmd[$i] = $1;
