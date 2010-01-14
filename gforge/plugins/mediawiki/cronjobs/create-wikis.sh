@@ -90,4 +90,30 @@ EOF
 
 done
 
+projects=$(echo "SELECT g.unix_group_name from groups g, group_plugin gp, plugins p where g.group_id = gp.group_id and gp.plugin_id = p.plugin_id and p.plugin_name = 'mediawiki' ;" \
+    | PGPASSFILE=$tmp3 /usr/bin/psql -U gforge gforge \
+    | tail -n +3 \
+    | grep '^ ')
+
+tmp4=$(mktemp)
+# Disable read anonymous if project is private
+for project in $projects ; do
+	ispublic=$(echo "SELECT is_public from groups where unix_group_name = '${project}' ;" \
+	    | PGPASSFILE=$tmp3 /usr/bin/psql -U gforge gforge \
+			| tail -n +3 \
+			| grep '^ ')
+
+	# Purge anonymous read
+	cat $wdprefix/$project/LocalSettings.php | grep -vi "\$wgGroupPermissions\['Members'\]\['read'\]" > $tmp4
+	cat $tmp4 > $wdprefix/$project/LocalSettings.php
+	cat $wdprefix/$project/LocalSettings.php | grep -vi "\$wgGroupPermissions\['\*'\]\['read'\]" > $tmp4
+	cat $tmp4 > $wdprefix/$project/LocalSettings.php
+
+	if [ $ispublic == '0' ] ; then
+		echo "\$wgGroupPermissions['Members']['read']    = true;" >> $wdprefix/$project/LocalSettings.php
+		echo "\$wgGroupPermissions['*']['read']          = false;" >> $wdprefix/$project/LocalSettings.php
+	fi
+
+done
+rm -f $tmp4
 rm -f $tmp3
