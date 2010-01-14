@@ -12,6 +12,7 @@ no locale ;
 
 @allowed_options = ('-c', '-e') ;
 @allowed_commands = ('cvs','scp','svnserve','bzr','git-upload-pack','git-receive-pack','git-upload-archive') ;
+@commands_requiring_unquote = ('git-upload-pack','git-receive-pack','git-upload-archive') ;
 
 # Clean up our environment
 delete @ENV{qw(IFS CDPATH ENV BASH_ENV PATH)};
@@ -35,6 +36,14 @@ if (scalar (grep { $_ eq $ARGV[0] } @allowed_options) == 0) {
 if (scalar (grep { $_ eq $cmd[0] } @allowed_commands) == 0) {
     $errmsg = "Command not allowed." ;
     &reject ;
+}
+
+if (scalar (grep { $_ eq $cmd[0] } @commands_requiring_unquote) == 0) {
+    foreach my $i (1..$#cmd) {
+	if ($cmd[$i] =~ /^'(.*)'$/) {
+	    $cmd[$i] = $1;
+	}
+    }
 }
 
 exec @cmd ;
