@@ -85,13 +85,11 @@ class SurveyQuestionFactory extends Error {
 		}
 
 		$group_id = $this->Group->GetID();		
-		$sql="";
-
 		$result = db_query_params ('SELECT survey_questions.*,survey_question_types.type 
 			FROM survey_questions,survey_question_types 
 			WHERE survey_question_types.id=survey_questions.question_type 
                         AND survey_questions.group_id=$1
-			ORDER BY survey_questions.question_id DESC',
+			ORDER BY survey_questions.question_id ASC',
 					   array ($group_id));
 
 		if (!$result) {

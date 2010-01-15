@@ -63,7 +63,7 @@ function report_weeks_box($Report, $name='week', $selected=false) {
 }
 
 function report_day_adjust_box($Report, $name='days_adjust', $selected=false) {
-	$days[]='0.0';
+	$days[]='0';
 	$days[]='1';
 	$days[]='2';
 	$days[]='3';

@@ -143,8 +143,6 @@ class SurveyQuestion extends Error {
 		$group_id = $this->Group->GetID();
 		$question_id = $this->getID();
 
-		$sql="";
-	
 		$res = db_query_params ('UPDATE survey_questions SET question=$1, question_type=$2 where question_id=$3 AND group_id=$4',
 					array (htmlspecialchars($question),
 					       $question_type,

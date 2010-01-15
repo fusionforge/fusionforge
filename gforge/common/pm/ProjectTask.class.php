@@ -693,8 +693,6 @@ class ProjectTask extends Error {
 	 * @returns	boolean	success.
 	 */
 	function addHistory ($field_name,$old_value) {
-		$sql="insert into project_history(project_task_id,field_name,old_value,mod_by,mod_date) 
-			VALUES ('". $this->getID() ."','$field_name','$old_value','".user_getid()."','".time()."')";
 		$result = db_query_params ('INSERT INTO project_history (project_task_id,field_name,old_value,mod_by,mod_date) VALUES ($1,$2,$3,$4,$5)',
 					   array ($this->getID(),
 						  $field_name,

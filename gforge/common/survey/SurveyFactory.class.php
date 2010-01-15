@@ -92,6 +92,7 @@ class SurveyFactory extends Error {
 			$this->setError(_('No Survey is found').db_error());
 			return false;
 		} else {
+			$this->surveys = array();
 			while ($arr = db_fetch_array($result)) {
 				$this->surveys[] = new Survey($this->Group, $arr['survey_id'], $arr);
 			}

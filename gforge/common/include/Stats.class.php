@@ -59,7 +59,6 @@ class Stats extends Error {
 	* @return a resultset of group_name, unix_group_name, group_id, ranking, percentile
 	*/
 	function getMostActiveStats($type, $offset) {
-		$sql="";
 		if ($type == 'week') 	{
 			return db_query_params ('SELECT groups.group_name,groups.unix_group_name,groups.group_id,project_weekly_metric.ranking,project_weekly_metric.percentile FROM groups,project_weekly_metric WHERE groups.group_id=project_weekly_metric.group_id AND groups.is_public=1 ORDER BY ranking ASC',
 						array(),

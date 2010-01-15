@@ -184,10 +184,6 @@ class ProjectCategory extends Error {
 			$this->setMissingParamsError();
 			return false;
 		}   
-		$sql="UPDATE project_category 
-			SET category_name='".htmlspecialchars($name)."'
-			WHERE category_id='". $this->getID() ."' 
-			AND group_project_id='".$this->ProjectGroup->getID()."'";
 		$result = db_query_params ('UPDATE project_category SET category_name=$1
 			WHERE category_id=$2 AND group_project_id=$3',
 					   array (htmlspecialchars($name),

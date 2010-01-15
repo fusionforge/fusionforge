@@ -308,7 +308,6 @@ class ProjectGroup extends Error {
 	 */
 	function getTechnicians () {
 		if (!$this->technicians) {
-			$sql="";
 			$this->technicians = db_query_params ('SELECT users.user_id, users.realname 
 				FROM users, role_setting, user_group
 				WHERE users.user_id=user_group.user_id
