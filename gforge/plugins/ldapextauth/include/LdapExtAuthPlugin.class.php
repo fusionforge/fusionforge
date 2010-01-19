@@ -24,8 +24,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
-require_once $gfcommon.'include/User.class.php';
-require_once $gfconfig.'plugins/ldapextauth/mapping.php' ;
+require_once $GLOBALS['gfcommon'].'include/User.class.php';
+require_once $GLOBALS['gfconfig'].'plugins/ldapextauth/mapping.php' ;
 
 class LdapextauthPlugin extends Plugin {
 	function LdapextauthPlugin () {
@@ -37,15 +37,15 @@ class LdapextauthPlugin extends Plugin {
 		$this->ldap_conn = false ;
 		$this->base_dn = '';
 		$this->user_dn = '';
-		$this->ldap_server = $sys_ldap_server ;
-		$this->ldap_port = $sys_ldap_port ;
+		$this->ldap_server = $GLOBALS['sys_ldap_host'] ;
+		$this->ldap_port = $GLOBALS['sys_ldap_port'] ;
 		$this->ldap_altserver = '';
 		$this->ldap_altport = '';
 		$this->ldap_start_tls = false;
 		$this->ldap_bind_dn = '';
 		$this->ldap_bind_pwd = '';
 		$this->ldap_skip_users = '';
-		require_once $gfconfig.'plugins/ldapextauth/config.php' ;
+		require_once $GLOBALS['gfconfig'].'plugins/ldapextauth/config.php' ;
 		if (isset($base_dn)) {
 			$this->base_dn = $base_dn ;
 		}
