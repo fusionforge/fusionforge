@@ -428,6 +428,29 @@ function session_set_new($user_id) {
 
 }
 
+
+/**
+ *	session_set_admin() - Setup session for the admin user
+ *
+ *	This function sets up a session for the administrator
+ *
+ *	@return none
+ */
+function session_set_admin() {
+	$res = db_query_params ('SELECT user_id FROM user_group WHERE admin_flags=$1 AND group_id=1',
+				array ('A'));
+	if (!$res) {
+		echo db_error();
+		exit (1);
+	}
+	if (db_numrows($res) == 0) {
+		echo "No admin users?\n" ;
+		exit (1);
+	}
+	$id = db_result ($res, 0, 0);
+	session_set_new ($id);
+}
+
 /**
  *	Private optimization function for logins - fetches user data, language, and session
  *	with one query

@@ -68,15 +68,19 @@ abstract class SCMPlugin extends Plugin {
 			$this->printShortStats ($params) ;
 			break;
 		case 'scm_create_repo':
+			session_set_admin () ;
 			$this->createOrUpdateRepo ($params) ;
 			break;
 		case 'scm_update_repolist':
+			session_set_admin () ;
 			$this->updateRepositoryList ($params) ;
 			break;
 		case 'scm_generate_snapshots': // Optional
+			session_set_admin () ;
 			$this->generateSnapshots ($params) ;
 			break;
 		case 'scm_gather_stats': // Optional
+			session_set_admin () ;
 			$this->gatherStats ($params) ;
 			break;
 		default:
