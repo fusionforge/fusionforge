@@ -332,13 +332,13 @@ if ($project->usesTracker()) {
 if ($project->usesForum()) {
 	print '<hr size="1" /><a href="'.util_make_url ('/forum/?group_id='.$group_id).'">';
 	print html_image('ic/forum20g.png','20','20',array('alt'=>_('Forums')));
-	print '&nbsp;'._('Public Forums').'</a> ( ';
+	print '&nbsp;'._('Public Forums').'</a> (';
 	$messages_count = project_get_public_forum_message_count($group_id);
 	$forums_count = project_get_public_forum_count($group_id);
 	printf(ngettext("<strong>%d</strong> message","<strong>%d</strong> messages",$messages_count),$messages_count);
 	print ' in ';
 	printf(ngettext("<strong>%d</strong> forum","<strong>%d</strong> forums",$forums_count),$forums_count);
-	print ' )' ;
+	print ')' ;
 }
 
 // ##################### Doc Manager
@@ -356,7 +356,7 @@ if ($project->usesDocman()) {
 if ($project->usesMail()) {
 	print '<hr size="1" /><a href="'.util_make_url ('/mail/?group_id='.$group_id).'">';
 	print html_image('ic/mail16b.png','20','20',array('alt'=>_('Mailing Lists')));
-	print '&nbsp;'._('Mailing Lists').'</a>';
+	print '&nbsp;'._('Mailing Lists').'</a> ';
 	$n = project_get_mail_list_count($group_id);
 	printf(ngettext('(<strong>%1$s</strong> public mailing list)', '(<strong>%1$s</strong> public mailing lists)', $n), $n);
 }
@@ -389,7 +389,7 @@ if ($project->usesSurvey()) {
 	print '<hr size="1" /><a href="'.util_make_url ('/survey/?group_id='.$group_id).'">';
 	print html_image('ic/survey16b.png','20','20',array('alt'=>_('Surveys')));
 	print '&nbsp;'._('Surveys')."</a>";
-	echo ' ( <strong>'. project_get_survey_count($group_id) .'</strong> '._('surveys').'  )';
+	echo ' (<strong>'. project_get_survey_count($group_id) .'</strong> '._('surveys').')';
 }
 
 // ######################### SCM
