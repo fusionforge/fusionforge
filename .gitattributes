@@ -3463,12 +3463,6 @@ gforge/www/images/smiles/icon_twisted.gif -text
 gforge/www/images/smiles/icon_wink.gif -text
 gforge/www/images/t.png -text
 gforge/www/images/t2.png -text
-gforge/www/include/BBCodeSupport.class.php -text svneol=unset#application/octet-stream
-gforge/www/include/BBCodeSupportHtml.class.php -text svneol=unset#application/octet-stream
-gforge/www/include/HTMLSupport.class.php -text svneol=unset#application/octet-stream
-gforge/www/include/SmilieSupport.class.php -text svneol=unset#application/octet-stream
-gforge/www/include/SmilieSupportHtml.class.php -text svneol=unset#application/octet-stream
-gforge/www/include/TextSupport.class.php -text svneol=unset#application/octet-stream
 gforge/www/include/unicode.php -text
 gforge/www/js/common.js -text
 gforge/www/js/sortable.js -text
