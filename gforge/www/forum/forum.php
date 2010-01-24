@@ -250,8 +250,8 @@ if ($forum_id) {
 
 			$ret_val .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'>
 				<td><a href="'.util_make_url ('/forum/message.php?msg_id='.$msg->getID().
-							      '&ampgroup_id='.$group_id).'">'.
-				html_image('ic/msg.png',"10","12",array("border"=>"0"));
+							      '&amp;group_id='.$group_id).'&amp;reply=0">'.
+				html_image('ic/msg.png',"10","12",array("border"=>"0")).' ';
 			/*
 				See if this message is new or not
 				If so, highlite it in bold
@@ -267,7 +267,7 @@ if ($forum_id) {
 				show the subject and poster
 			*/
 			$ret_val .= $bold_begin.$msg->getSubject() .$bold_end.'</a></td>'.
-				'<td>'. $msg->getPosterRealName() .'</td>'.
+				'<td><a href="/users/'.$msg->getPosterName().'/">'.$msg->getPosterRealName().'</a></td>'.
 				'<td>'. date(_('Y-m-d H:i'),$msg->getPostDate()) .'</td></tr>';
 
 			if ($msg->hasFollowups()) {
@@ -340,7 +340,7 @@ ORDER BY f.most_recent_date DESC',
 					show the subject and poster
 			*/
 			$ret_val .= $bold_begin.$row['subject'] .$bold_end.'</a></td>'.
-				'<td>'. $row['realname'] .'</td>'.
+				'<td><a href="/users/'.$row['user_name'].'/">'.$row['realname'].'</a></td>'.
 				'<td>'. $row['followups'] .'</td>'.
 				'<td>'.date(_('Y-m-d H:i'),$row['recent']).'</td></tr>';
 			$i++;

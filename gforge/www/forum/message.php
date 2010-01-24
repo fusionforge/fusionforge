@@ -29,6 +29,8 @@ require_once $gfcommon.'forum/ForumMessage.class.php';
 $msg_id = getIntFromRequest('msg_id');
 $total_rows = getIntFromRequest('total_rows');
 $ret_val = getIntFromRequest('ret_val');
+$reply = getIntFromRequest('reply', 1);
+
 if ($msg_id) {
 
 	/*
@@ -95,34 +97,46 @@ if ($msg_id) {
 		exit_error(_('Error'),$fh->getErrorMessage());
 	}
 
+	if ($reply && !$f->userCanPost()) {
+		exit_permission_denied();
+	}
+	
 	forum_header(array('title'=>$fm->getSubject(),'forum_id'=>$forum_id));
 
-	$title_arr=array();
-	$title_arr[]=_('Message').': '.$msg_id;
+//	$title_arr=array();
+//	$title_arr[]=_('Message').': '.$msg_id;
 
-	echo $GLOBALS['HTML']->listTableTop ($title_arr);
+//	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
-	echo "<tr class=\"tablecontent\"><td>\n";
+	$url = util_make_url('/forum/message.php?msg_id='. $msg_id .'&amp;group_id='.$group_id);
+	
+	echo '<br /><br /><table border="0" width="100%" cellspacing="0">';
+	echo '<tr class="tablecontent"><td valign="top">'."\n";
+	echo '<strong>'.$fm->getSubject() .'</strong>';
+	if (!$reply) {
+		echo ' <a href="'.$url.'&amp;reply=1">[ '._("reply").' ]</a>';
+	}
+	echo '<br />';
+	echo _("By:").' '. util_make_link_u($fm->getPosterName(), $fm->getPosterID(), $fm->getPosterRealName());
+	echo ' on '. date(_('Y-m-d H:i'), $fm->getPostDate()) .'</td><td align="right">';
+	echo '<a href="'.$url.'">[forum:'.$msg_id.']</a><br/>';
 	$fa = new ForumAdmin();
 	if ($f->userIsAdmin()) {
 		echo $fa->PrintAdminMessageOptions($msg_id,$group_id,0,$forum_id); // 0 in thread id because that tells us to go back to message.php instead of forum.php
 	}
-	echo _('BY').': '. $fm->getPosterRealName() .' ('.util_make_link_u($fm->getPosterName(),$fm->getPosterID(),$fm->getPosterName()) .')<br />';
-	echo _('DATE').': '. date(_('Y-m-d H:i'), $fm->getPostDate()) .'<br />';
 	$am = new AttachManager();
 	echo $am->PrintHelperFunctions();
-	echo $am->PrintAttachLink($fm,$group_id,$forum_id) . '<br/>';
+	echo $am->PrintAttachLink($fm,$group_id,$forum_id) . '</td></tr><tr><td colspan="2"><br/><br />';
 	
-	echo _('SUBJECT').': '. $fm->getSubject() .'<p>&nbsp;</p>';
 	
-	if (!strstr('<',$fm->getBody())) { 
-		echo nl2br($fm->getBody()); //backwards compatibility for non html messages
+	if (strpos($fm->getBody(), '>') === false) { 
+		echo util_make_links(nl2br($fm->getBody())); //backwards compatibility for non html messages
 	} else {
-		echo $fm->getBody();
+		echo util_make_links($fm->getBody());
 	}
-	echo "</td></tr>";
+	echo '</td></tr></table>';
 
-	echo $GLOBALS['HTML']->listTableBottom();
+//	echo $GLOBALS['HTML']->listTableBottom();
 
 	/*
 
@@ -167,7 +181,7 @@ if ($msg_id) {
 		}
 		$ret_val .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'>
 			<td>'. $ah_begin .
-			html_image('ic/msg.png',"10","12",array("border"=>"0"));
+			html_image('ic/msg.png',"10","12",array("border"=>"0")).' ';
 		/*
 			See if this message is new or not
 			If so, highlite it in bold
@@ -182,7 +196,7 @@ if ($msg_id) {
 			show the subject and poster
 		*/
 		$ret_val .= $bold_begin . $msg->getSubject() . $bold_end.$ah_end.'</td>'.
-			'<td>'. $msg->getPosterRealName() .'</td>'.
+			'<td><a href="/users/'.$msg->getPosterName().'">'. $msg->getPosterRealName() .'</a></td>'.
 			'<td>'. date(_('Y-m-d H:i'),$msg->getPostDate()) .'</td></tr>';
 
 		if ($msg->hasFollowups()) {
@@ -195,14 +209,13 @@ if ($msg_id) {
 
 		echo $ret_val;
 
-	/*
-		Show post followup form
-	*/
-
-//	echo '<p>&nbsp;<p>';
-	echo '<div align="center"><h3>'._('Post a followup to this message').'</h3></div>';
-
-	$fh->showPostForm($fm->getThreadID(), $msg_id, $fm->getSubject());
+	if ($reply) {
+		/*
+			Show post followup form
+		*/
+		echo '<div align="center"><h3>'._('Post a followup to this message').'</h3></div>';
+		$fh->showPostForm($fm->getThreadID(), $msg_id, $fm->getSubject());
+	}
 
 } else {
 	forum_header(array('title'=>_('Must Choose A Message First')));

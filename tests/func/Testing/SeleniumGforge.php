@@ -68,6 +68,14 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 //		$this->test->assertFalse($this->isTextPresent("Warning: Missing argument"));
 //	}
 
+    protected function init() {
+		$this->createProject('ProjectA');
+
+		$this->open( BASE );
+		$this->click("link=ProjectA");
+		$this->waitForPageToLoad("30000");
+    }
+
     protected function login($username)
 	{
 		if ($username == 'admin') {

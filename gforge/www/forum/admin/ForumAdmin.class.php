@@ -56,12 +56,20 @@ class ForumAdmin extends Error {
 	 *	@return  The HTML output
 	 */
 	
-	function PrintAdminMessageOptions($msg_id,$group_id,$thread_id=0,$forum_id=0) {
+	function PrintAdminMessageOptions($msg_id,$group_id,$thread_id=0,$forum_id=0,$return_to_message=0) {
 		global $HTML;
 		
-		$return = '<a href="admin/index.php?editmsg=' . $msg_id  . '&group_id=' . $group_id .  '&thread_id=' . $thread_id. '&forum_id=' . $forum_id . '">' . html_image('ic/forum_edit.gif','37','15',array('alt'=>_("Edit"))) . "</a>";
-		$return .= '    <a href="admin/index.php?deletemsg=' . $msg_id  . '&group_id=' . $group_id . '&thread_id=' . $thread_id. '&forum_id=' . $forum_id . '">' . html_image('ic/forum_delete.gif','16','18',array('alt'=>_("Delete"))) . "</a>";
-		$return .= "<br>";
+		$return = '<a href="admin/index.php?movethread=' . $thread_id  . '&amp;msg_id=' . $msg_id . '&amp;group_id=' . $group_id . '&amp;forum_id=' . $forum_id .
+				  '&amp;return_to_message=' . $return_to_message . '">' . html_image('ic/forum_move.gif','37','15',array('alt'=>_('Move thread'))). "</a>";
+
+		// Following code (if ...) is to keep old implementation but need to be cleaned
+		if ($return_to_message) {
+			$thread_id = 0;
+		}
+
+		$return .= '    <a href="admin/index.php?editmsg=' . $msg_id  . '&amp;group_id=' . $group_id .  '&amp;thread_id=' . $thread_id. '&amp;forum_id=' . $forum_id . '">' . html_image('ic/forum_edit.gif','37','15',array('alt'=>_("Edit"))) . "</a>";
+		$return .= '    <a href="admin/index.php?deletemsg=' . $msg_id  . '&amp;group_id=' . $group_id . '&amp;thread_id=' . $thread_id. '&amp;forum_id=' . $forum_id . '">' . html_image('ic/forum_delete.gif','16','18',array('alt'=>_("Delete"))) . "</a>";
+		//		$return .= "<br />";
 		return $return;
 	}
 	
@@ -366,7 +374,7 @@ class ForumAdmin extends Error {
 				echo "
 				<tr" . $HTML->boxGetAltRowStyle($i++). ">
 					<td>$onemsg[forum_name]</td>	
-					<td><a href=\"#\" OnClick=\"window.open('pendingmsgdetail.php?msg_id=$onemsg[msg_id]&forum_id=$onemsg[group_forum_id]&group_id=$group_id','PendingMessageDetail','width=800,height=600,status=no,resizable=yes');\">$onemsg[subject]</a></td>
+					<td><a href=\"#\" OnClick=\"window.open('pendingmsgdetail.php?msg_id=$onemsg[msg_id]&amp;forum_id=$onemsg[group_forum_id]&amp;group_id=$group_id','PendingMessageDetail','width=800,height=600,status=no,resizable=yes');\">$onemsg[subject]</a></td>
 					<td><div align=\"right\">" . html_build_select_box_from_assoc($options,"doaction[]",1) . "</div></td>
 				</tr>";
 			}

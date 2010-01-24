@@ -49,12 +49,8 @@ class CreateForum extends FForge_SeleniumTestCase
 {
 	function testSimplePost()
 	{
-		$this->createProject('ProjectA');
-					
 		// Create the first message (Message1/Text1).
-		$this->open( BASE );
-		$this->click("link=ProjectA");
-		$this->waitForPageToLoad("30000");
+		$this->init();
 		$this->click("link=Forums");
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isTextPresent("Permission denied."));
@@ -74,6 +70,94 @@ class CreateForum extends FForge_SeleniumTestCase
 		$this->click("link=open-discussion");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Message1"));
+	}
+
+	/*
+	 * Simulate a click on the link from a mail.
+	 * As the forum is private, the users should be
+	 * redirected to the login prompt saying that he has
+	 * to login to get access to the message. Once logged,
+	 * he should be redirected to the given forum.
+	 */
+	function testSimpleAccessWhenPrivate()
+	{
+		$this->init();
+		$this->logout();
+
+		$this->open( ROOT.'/forum/message.php?msg_id=3' );
+		$this->waitForPageToLoad("30000");
+		$this->type("form_loginname", 'admin');
+		$this->type("form_pw", 'myadmin');
+		$this->click("login");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Welcome to Developers"));
+	}
+
+	/*
+	 * Simulate a user non logged that will reply
+	 * to a message in a forum. He will be redirected
+	 * to the login page, then will reply and then
+	 * we check that his reply is present in the thread.
+	 */
+	function testReplyToMessage()
+	{
+		$this->init();
+		$this->logout();
+
+		$this->open("/projects/projecta/");
+		$this->click("link=Forums");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=open-discussion");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Welcome to Open-Discussion");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=[ reply ]");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Cookies must be enabled past this point."));
+//		$this->assertEquals("ACOS Forge - Login", $this->getTitle());
+		$this->type("form_loginname", "admin");
+		$this->type("form_pw", 'myadmin');
+		$this->click("login");
+		$this->waitForPageToLoad("30000");
+		$this->type("body", "Here is my 19823 reply");
+		$this->click("submit");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Message Posted Successfully"));
+		$this->click("link=Welcome to Open-Discussion");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Here is my 19823 reply"));
+
+	}
+	
+	/*
+	 * Verify that it is imposible to use name already used by a mailing list
+	 */
+	function testEmailAddressNotAlreadyUsed() {
+		$this->init();
+		$this->click("link=Mailing Lists");
+		$this->waitForPageToLoad("30000");
+		$this->click("//td[@id='main']/p[1]/strong/a");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Add Mailing List");
+		$this->waitForPageToLoad("30000");
+		$this->type("list_name", "toto");
+		$this->type("description", "Toto mailing list");
+		$this->click("submit");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("List Added"));
+		$this->click("link=Forums");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=open-discussion");
+		$this->waitForPageToLoad("30000");
+		$this->click("//td[@id='main']/p[1]/strong/a[2]");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Add forum");
+		$this->waitForPageToLoad("30000");
+		$this->type("forum_name", "toto");
+		$this->type("description", "Toto forum");
+		$this->click("submit");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Error: a mailing list with the same email address already exists"));
 	}
 }
 ?>

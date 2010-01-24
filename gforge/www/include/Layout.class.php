@@ -1218,6 +1218,41 @@ if (isset($params['group']) && $params['group']) {
 		return $ret;
 	}
 
+	function confirmBox($msg, $params, $buttons, $image='*none*') {
+	 	if ($image == '*none*') {
+	 		$image = html_image('stop.png','48','48',array());
+	 	}
+	 	
+	 	foreach ($params as $b => $v) {
+	 		$prms[] = '<input type="hidden" name="'.$b.'" value="'.$v.'" />'."\n";
+	 	}
+	 	$prm = join('	 	', $prms);	 
+	 	
+	 	foreach ($buttons as $b => $v) {
+	 		$btns[] = '<input type="submit" name="'.$b.'" value="'.$v.'" />'."\n";
+	 	}
+		$btn = join('	 	&nbsp;&nbsp;&nbsp;'."\n	 	", $btns);	 	
+	 	
+	 	return '
+	 	<div id="infobox" style="margin-top: 15%; margin-left: 15%; margin-right: 15%; text-align: center;">
+	 	<table align="center">
+	 	<tr>
+	 	<td>'.$image.'</td>
+	 	<td>'.$msg.'<br/></td>
+		</tr>
+		<tr>
+		<td colspan="2" align="center">
+		<br />
+		<form action="' . getStringFromServer('PHP_SELF') . '" method="get" >
+		'.$prm.'
+		'.$btn.'
+		</form>
+		</td>
+		</tr>
+		</table>
+		</div>
+	 	';
+	}
 }
 
 // Local Variables:

@@ -24,7 +24,7 @@ require_once $gfwww.'forum/admin/ForumAdmin.class.php';
 require_once $gfwww.'forum/include/AttachManager.class.php';
 
 function forum_header($params) {
-	global $HTML,$group_id,$forum_name,$forum_id,$sys_news_group,$f,$sys_use_forum,$group_forum_id;
+	global $HTML,$group_id,$forum_name,$forum_id,$sys_news_group,$f,$sys_use_forum,$sys_use_trove,$group_forum_id;
 
 	if ($group_forum_id) {
 		$forum_id=$group_forum_id;
@@ -66,14 +66,30 @@ function forum_header($params) {
 				<strong>'._('Posted by').':</strong> '.$user->getRealName().'<br />
 				<strong>'._('Date').':</strong> '. date(_('Y-m-d H:i'),db_result($result,0,'post_date')).'<br />
 				<strong>'._('Summary').':</strong>'.
-					util_make_link ('/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'&group_id='.$group_id,
+					util_make_link ('/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'&amp;group_id='.$group_id,
 							db_result($result,0,'summary')).'<br/>
 				<strong>'._('Project').':</strong>'.
 					util_make_link_g ($group->getUnixName(),db_result($result,0,'group_id'),$group->getPublicName()).'<br />
 				<p>
-				'. (util_make_links(nl2br(db_result($result,0,'details'))));
+				';
+				$body = db_result($result,0,'details');
+				$sanitizer = new TextSanitizer();
+				$body = $sanitizer->purify($body);
+				if (!strstr($body,'<')) {
+					//backwards compatibility for non html messages
+					echo util_make_links(nl2br($body)); 
+				} else {
+					echo util_make_links($body);
+				}
 
 				echo '</p>';
+
+				// display classification
+				if ($params['group'] == $sys_news_group) { 
+				   print stripslashes(trove_news_getcatlisting(db_result($result,0,'forum_id'),0,1));
+				} elseif ($sys_use_trove) {
+				   print stripslashes(trove_getcatlisting($params['group'],0,1));
+				}
 			}
 			echo '</td><td valign="top" width="35%">';
 			echo $HTML->boxTop(_('Latest News'));
@@ -91,14 +107,14 @@ function forum_header($params) {
 	$menu_links=array();
 
 	if ($f){
-		if ($f->userIsAdmin()) {
-			$menu_text[]=_('Admin');
-			$menu_links[]='/forum/admin/?group_id='.$group_id;
-		} 
 		if ($forum_id) {
 			$menu_text[]=_('Discussion Forums:') .' '. $f->getName();
 			$menu_links[]='/forum/forum.php?forum_id='.$forum_id;
 		}
+		if ($f->userIsAdmin()) {
+			$menu_text[]=_('Admin');
+			$menu_links[]='/forum/admin/?group_id='.$group_id;
+		} 
 	} else {
 			$gg=&group_get_object($group_id);
 			$perm =& $gg->getPermission( session_get_user() );
@@ -126,6 +142,9 @@ function forum_header($params) {
 			echo util_make_link ('/forum/save.php?forum_id='.$forum_id.'&amp;group_id='.$group_id,
 					     html_image('ic/save.png','24','24',array()) .' '._('Save Place')).' | ';
 		}
+	} elseif ($f) {
+		echo '<a href="/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;start=1">' .
+			html_image('ic/mail16w.png','20','20',array()).' '._('Monitor Forum').'</a> | ';		
 	}
 
 	if ($f && $forum_id) {
@@ -184,7 +203,7 @@ class ForumHTML extends Error {
 		$ret_val .= '
 		<table border="0">
 			<tr>
-				<td class="tablecontent" nowrap="nowrap">'._('By:').
+				<td class="tablecontent" style="white-space: nowrap;">'._('By:').
 		$msg->getPosterRealName().
 		'<br />
 					';
@@ -229,26 +248,27 @@ class ForumHTML extends Error {
 		$am = new AttachManager();
 		$fa = new ForumAdmin();
 		$msgforum =& $msg->getForum();
-		$ret_val = '
-		<table border="0">
+		$url = util_make_url('/forum/message.php?msg_id='. $msg->getID() .'&amp;group_id='.$group_id);
+		$ret_val = 		
+		'<table border="0" width="100%" cellspacing="0">
 			<tr>
-				<td class="tablecontent" nowrap="nowrap">';
+				<td class="tablecontent" style="white-space: nowrap;" valign="top">'; 
+		$ret_val .= $bold_begin. $msg->getSubject(). ' <a href="'.$url.'">[ '._("reply").' ]</a>'. $bold_end;
+		$ret_val .= '<br/>'._('By:').' '.util_make_link_u ($msg->getPosterName(),$msg->getPosterID(),$msg->getPosterRealName());
+		$ret_val .= ' on '.date('Y-m-d H:i',$msg->getPostDate());
+		$ret_val .= '</td><td class="tablecontent"  align="right">';
+		$ret_val .= '<a href="'.$url.'">[forum:'.$msg->getID().']</a><br/>';
 		if ($msgforum->userIsAdmin()) {
 			$ret_val .= $fa->PrintAdminMessageOptions($msg->getID(),$group_id,$msg->getThreadID(),$msgforum->getID());
 		} 
-		$ret_val .= _('By:').' '.util_make_link_u ($msg->getPosterName(),$msg->getPosterID(),$msg->getPosterRealName()).'<br />
-';
-		$ret_val .= $am->PrintAttachLink($msg,$group_id,$msgforum->getID()) . '
-					<br />'.util_make_link ('/forum/message.php?msg_id='.$msg->getID() .'&group_id='.$group_id,
-		html_image('ic/msg.png',"10","12",array("border"=>"0")) .
-								$bold_begin. $msg->getSubject() .' [ '._('reply').' ]'. $bold_end) .' &nbsp; '.
-		'<br />'. date(_('Y-m-d H:i'),$msg->getPostDate()) .'
+		$ret_val .= $am->PrintAttachLink($msg,$group_id,$msgforum->getID());
+		$ret_val .= '
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td colspan="2">
 					'; 
-		if (!strstr($msg->getBody(),'<')) {
+					if (strpos($msg->getBody(),'<') === false) {
 			$ret_val .= nl2br($msg->getBody()); //backwards compatibility for non html messages
 		} else {
 			$ret_val .= $msg->getBody();
@@ -275,7 +295,6 @@ class ForumHTML extends Error {
 	function LinkAttachEditForm($filename,$group_id,$forum_id,$attachid,$msg_id) {
 		$return_val = '
 			
-			<p>
 			<form action="' . getStringFromServer('PHP_SELF') . '" method="post" enctype="multipart/form-data">
 			<table>
 			<tr>
@@ -391,7 +410,7 @@ class ForumHTML extends Error {
 				$total_rows++;
 
 				$ret_val .= '
-					<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'><td nowrap="nowrap">';
+					<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'><td style="white-space: nowrap;">';
 				/*
 					How far should it indent?
 					*/
@@ -403,7 +422,7 @@ class ForumHTML extends Error {
 					If it this is the message being displayed, don't show a link to it
 					*/
 				if ($current_message != $msg_arr["$msg_id"][$i]->getID()) {
-					$ah_begin='<a href="'.util_make_url ('/forum/message.php?msg_id='. $msg_arr["$msg_id"][$i]->getID() .'&group_id='.$group_id).'">';
+					$ah_begin='<a href="'.util_make_url ('/forum/message.php?msg_id='. $msg_arr["$msg_id"][$i]->getID() .'&amp;group_id='.$group_id).'">';
 					$ah_end='</a>';
 				} else {
 					$ah_begin='';
@@ -411,7 +430,7 @@ class ForumHTML extends Error {
 				}
 
 				$ret_val .= $ah_begin .
-				html_image('ic/msg.png',"10","12",array("border"=>"0"));
+					html_image('ic/msg.png',"10","12",array("border"=>"0")).' ';
 				/*
 					See if this message is new or not
 					*/
@@ -462,29 +481,25 @@ class ForumHTML extends Error {
 			echo notepad_func();
 			?>
 <div align="center">
-	 <form enctype="multipart/form-data" action="<?php echo util_make_url ('/forum/admin/index.php') ?>"
-	method="post"><?php $objid = $this->Forum->getID();?> <input
-	type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" /> <input
-	type="hidden" name="forum_id" value="<?php echo $objid; ?>" /> <input
-	type="hidden" name="editmsg" value="<?php echo $msg_id; ?>" /> <input
-	type="hidden" name="is_followup_to"
-	value="<?php echo $is_followup_to; ?>" /> <input type="hidden"
-	name="form_key" value="<?php echo form_generate_key();?>"> <input
-	type="hidden" name="posted_by" value="<?php echo $posted_by;?>"> <input
-	type="hidden" name="post_date" value="<?php echo $post_date;?>"> <input
-	type="hidden" name="has_followups" value="<?php echo $has_followups;?>">
-<input type="hidden" name="most_recent_date"
-	value="<?php echo $most_recent_date;?>"> <input type="hidden"
-	name="group_id" value="<?php echo $group_id;?>">
+	 <form enctype="multipart/form-data" action="<?php echo util_make_url ('/forum/admin/index.php') ?>" method="post">
+	<?php $objid = $this->Forum->getID();?>
+	<input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" />
+	<input type="hidden" name="forum_id" value="<?php echo $objid; ?>" />
+	<input type="hidden" name="editmsg" value="<?php echo $msg_id; ?>" />
+	<input type="hidden" name="is_followup_to" value="<?php echo $is_followup_to; ?>" />
+	<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>">
+	<input type="hidden" name="posted_by" value="<?php echo $posted_by;?>">
+	<input type="hidden" name="post_date" value="<?php echo $post_date;?>">
+	<input type="hidden" name="has_followups" value="<?php echo $has_followups;?>">
+	<input type="hidden" name="most_recent_date" value="<?php echo $most_recent_date;?>">
+	<input type="hidden" name="group_id" value="<?php echo $group_id;?>">
 <fieldset class="fieldset">
-<table>
-	<tr>
-		<td valign="top"></td>
-		<td valign="top"><br>
+			<table><tr><td valign="top">
+			</td><td valign="top">
+			<br />
 		<strong><?php echo _('Subject:'); ?></strong><?php echo utils_requiredField(); ?><br />
-		<input type="text" name="subject" value="<?php echo $subject; ?>"
-			size="70" /> <br>
-		<br>
+				<input type="text" name="subject" value="<?php echo $subject; ?>" size="80" maxlength="80" />
+		<br /><br />
 		<strong><?php echo _('Message:'); ?></strong><?php echo notepad_button('document.forms[1].body') ?><?php echo utils_requiredField(); ?><br />
 		<?php
 		$GLOBALS['editor_was_set_up']=false;
@@ -499,24 +514,22 @@ class ForumHTML extends Error {
 			echo '<textarea name="body"  rows="10" cols="70">' . $body . '</textarea>';
 		}
 		unset($GLOBALS['editor_was_set_up']);
-		?> <br>
-		<br>
+				?>
+			<br /><br />		
 
-		<p><?php //$this->LinkAttachForm();?>
+				<p>
+				<?php //$this->LinkAttachForm();?>
+				<p>
 		
 		
-		<p><?php
-		?> <br />
-		
-		
-		<center><input type="submit" name="ok"
-			value="<?php echo _('Update'); ?>" /> <input type="submit"
-			name="cancel" value="<?php echo _('Cancel'); ?>" /></center>
+		<?php
+		?>
+		<br />
+		<center><input type="submit" name="ok" value="<?php echo _('Update'); ?>" />
+			<input type="submit" name="cancel" value="<?php echo _('Cancel'); ?>" />
+		</center>
 		</p>
-		</td>
-	</tr>
-</table>
-</fieldset>
+			</td></tr></table></fieldset>
 </form>
 </div>
 		<?php
@@ -538,24 +551,19 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 		echo notepad_func();
 		?>
 <div align="center">
-<form "enctype="multipart/form-data"
-	action="<?php echo util_make_url ('/forum/forum.php?forum_id='.$this->Forum->getID().'&group_id='.$group_id); ?>"
-	method="post"><?php $objid = $this->Forum->getID();?> <input
-	type="hidden" name="post_message" value="y" /> <input type="hidden"
-	name="thread_id" value="<?php echo $thread_id; ?>" /> <input
-	type="hidden" name="msg_id" value="<?php echo $is_followup_to; ?>" /> <input
-	type="hidden" name="is_followup_to"
-	value="<?php echo $is_followup_to; ?>" /> <input type="hidden"
-	name="form_key" value="<?php echo form_generate_key();?>">
-<fieldset class="fieldset">
-<table>
-	<tr>
-		<td valign="top"></td>
-		<td valign="top"><br>
+<form enctype="multipart/form-data" action="<?php echo util_make_url ('/forum/forum.php?forum_id='.$this->Forum->getID().'&amp;group_id='.$group_id); ?>" method="post">
+	<?php $objid = $this->Forum->getID();?>
+	<input type="hidden" name="post_message" value="y" />
+	<input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" />
+	<input type="hidden" name="msg_id" value="<?php echo $is_followup_to; ?>" />
+	<input type="hidden" name="is_followup_to" value="<?php echo $is_followup_to; ?>" />
+	<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>" />
+			<fieldset class="fieldset"><table><tr><td valign="top">
+			</td><td valign="top">
+			<br />
 		<strong><?php echo _('Subject:'); ?></strong><?php echo utils_requiredField(); ?><br />
-		<input type="text" name="subject" value="<?php echo $subject; ?>"
-			size="70" /> <br>
-		<br>
+				<input type="text" name="subject" value="<?php echo $subject; ?>" size="80" maxlength="80" />
+			<br /><br />
 		<strong><?php echo _('Message:'); ?></strong><?php echo notepad_button('document.forms[1].body') ?><?php echo utils_requiredField(); ?><br />
 
 		<?php
@@ -598,9 +606,11 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 } elseif ($this->Forum->allowAnonymous()) {
 	echo '<span class="error">';
 	printf(_('You could post if you were <a href="%1$s">logged in</a>.'), util_make_url ('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))));
+	echo '</span>';
 } elseif (!session_loggedin()) {
-	echo '
-			<span class="error">'.sprintf(_('Please <a href="%1$s">log in</a>'), util_make_url('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI')))).'</span><br/></p>';
+	echo '<span class="error">';
+	printf(_('Please <a href="%1$s">log in</a>'), util_make_url('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))));
+	echo '</span><br/></p>';
 } else {
 	//do nothing
 }

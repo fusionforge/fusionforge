@@ -43,6 +43,21 @@ if (session_loggedin()) {
 		}
 
 		if (getStringFromRequest('stop')) {
+			$confirm = getStringFromRequest('confirm');
+			$cancel = getStringFromRequest('cancel');
+			if ($cancel) {
+				header ("Location: /forum/forum.php?forum_id=$forum_id&group_id=$group_id");
+				exit;
+			}
+			if (!$confirm) {
+				forum_header(array('title'=>_('My Monitored Forums')));
+				echo $HTML->confirmBox('You are about to stop monitoring the '.$f->getName().
+					' forum.<br/><br/>Do you really want to unsubscribe ?', 
+					array('group_id' => $group_id, 'forum_id' => $forum_id, 'stop' => 1),
+					array('confirm' => 'Unsubscribe', 'cancel' => 'Cancel') );
+				forum_footer(array());
+				exit;
+			}
 			if (!$f->stopMonitor()) {
 				exit_error('Error',$f->getErrorMessage());
 			} else {

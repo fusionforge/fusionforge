@@ -201,7 +201,7 @@ class Theme extends Layout {
 
 <table border="0" width="100%" cellspacing="0" cellpadding="0">  
   <tr>
-    <td class="mainCanvas"> <!-- main body area -->
+    <td id="main" class="mainCanvas"> <!-- main body area -->
     <?php
     }
 

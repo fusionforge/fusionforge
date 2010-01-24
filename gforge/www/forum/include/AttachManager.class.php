@@ -125,7 +125,7 @@ class AttachManager extends Error {
 		if ($msg->isPending()) {
 			$res = db_query_params ('SELECT attachmentid,filename,userid,counter FROM forum_pending_attachment where msg_id=$1',
 						array ($msg_id));
-			$pend = "&pending=yes";
+			$pend = "&amp;pending=yes";
 		} else {
 			$res = db_query_params ('SELECT attachmentid,filename,userid,counter FROM forum_attachment where msg_id=$1',
 						array ($msg_id));
@@ -137,7 +137,7 @@ class AttachManager extends Error {
 		}
 		if ($attachid) {
 			$attach = "<br/>
-			<a href=\"javascript:manageattachments('".util_make_url("/forum/attachment.php?attachid=$attachid&group_id=$group_id&forum_id=$forum_id$pend")."','no');\">" . html_image('ic/cfolder15.png',"15","13",array("border"=>"0")) . db_result($res,0,'filename') . "</a>  (" . db_result($res,0,'counter') . ") downloads";
+			<a href=\"javascript:manageattachments('".util_make_url("/forum/attachment.php?attachid=$attachid&amp;group_id=$group_id&amp;forum_id=$forum_id$pend")."','no');\">" . html_image('ic/cfolder15.png',"15","13",array("border"=>"0")) . db_result($res,0,'filename') . "</a>  (" . db_result($res,0,'counter') . ") downloads";
 			$attach_userid = db_result($res,0,'userid');
 			
 			$f = $msg->getForum();
@@ -145,8 +145,8 @@ class AttachManager extends Error {
 			exit_error('Error', _('Could Not Get Forum Object'));
 			} else {
 				if ( ((user_getid() == $attach_userid) || ($f->userIsAdmin())) && (!$msg->isPending()) ) { //only permit the user who created the attach to delete it, or an admin
-					$attach .= "   <a href=\"javascript:manageattachments('".util_make_url ("/forum/attachment.php?attachid=$attachid&group_id=$group_id&forum_id=$forum_id&msg_id=$msg_id&edit=yes")."','no');\">" .  "<font size=\"-3\">" .  html_image('ic/forum_edit.gif','37','15',array('alt'=>_("Edit"))) . "</font></a>";
-					$attach .= "     <a href=\"javascript:manageattachments('".util_make_url("/forum/attachment.php?attachid=$attachid&group_id=$group_id&forum_id=$forum_id&delete=yes")."','yes');\">" .  "<font size=\"-3\">" .  html_image('ic/forum_delete.gif','16','18',array('alt'=>_("Delete"))) . "</font></a>";
+					$attach .= "   <a href=\"javascript:manageattachments('/forum/attachment.php?attachid=$attachid&amp;group_id=$group_id&amp;forum_id=$forum_id&amp;msg_id=$msg_id&amp;edit=yes','no');\">" .  "<font size=\"-3\">" .  html_image('ic/forum_edit.gif','37','15',array('alt'=>_("Edit"))) . "</font></a>";
+					$attach .= "     <a href=\"javascript:manageattachments('/forum/attachment.php?attachid=$attachid&amp;group_id=$group_id&amp;forum_id=$forum_id&amp;delete=yes','yes');\">" .  "<font size=\"-3\">" .  html_image('ic/forum_delete.gif','16','18',array('alt'=>_("Delete"))) . "</font></a>";
 				}
 			}
 		}	else {
@@ -155,9 +155,10 @@ class AttachManager extends Error {
 			if (!$f || !is_object($f)) {
 			exit_error('Error','Could Not Get Forum Object');
 			} else {
-				$attach = html_image('ic/cfolder15.png',"15","13",array("border"=>"0")) . _('No attachment found');
+//				$attach = html_image('ic/cfolder15.png',"15","13",array("border"=>"0")) . _('No attachment found');
+				$attach = '';
 				if ( ((user_getid() == $msg->getPosterID()) || ($f->userIsAdmin())) && (!$msg->isPending()) ) { //only permit an admin or the user who created the message to insert an attach
-					$attach .= "   <a href=\"javascript:manageattachments('".util_make_url ("/forum/attachment.php?attachid=0&group_id=$group_id&forum_id=$forum_id&msg_id=$msg_id&edit=yes")."','no');\">" .  "<font size=\"-3\">" .  html_image('ic/forum_add.gif','37','15',array('alt'=>_("Add"))) . "</font></a>";
+					$attach .= "   <a href=\"javascript:manageattachments('".util_make_url ("/forum/attachment.php?attachid=0&amp;group_id=$group_id&amp;forum_id=$forum_id&amp;msg_id=$msg_id&amp;edit=yes")."','no');\">" .  "<font size=\"-3\">" .  html_image('ic/forum_add.gif','37','15',array('alt'=>_("Add"))) . "</font></a>";
 				}
 			}
 		}

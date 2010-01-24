@@ -3664,6 +3664,7 @@ gforge/www/themes/gforge/images/ic/forum20w.png -text
 gforge/www/themes/gforge/images/ic/forum_add.gif -text
 gforge/www/themes/gforge/images/ic/forum_delete.gif -text
 gforge/www/themes/gforge/images/ic/forum_edit.gif -text
+gforge/www/themes/gforge/images/ic/forum_move.gif -text svneol=unset#unset
 gforge/www/themes/gforge/images/ic/ftp16b.png -text
 gforge/www/themes/gforge/images/ic/halfcheck.png -text
 gforge/www/themes/gforge/images/ic/home16b.png -text

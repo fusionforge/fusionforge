@@ -34,9 +34,6 @@ require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once $gfwww.'forum/include/ForumHTML.class.php';
 
-if (!session_loggedin()) {
-	exit_not_logged_in();	
-}
 
 /**
 	 *  goodbye - Just prints a message and a close button.
@@ -82,9 +79,10 @@ if (!$f || !is_object($f)) {
 }
 
 if ($delete == "yes") {
-	if ( ! session_loggedin() ) {
-		exit_not_logged_in();//only logged users can delete attachments
+	if (!$f->userCanPost()) {
+		exit_permission_denied();
 	}
+
 	//only the user that created the attach  or forum admin can delete it (safecheck)
 	if (!$pending) { //pending messages aren't deleted from this page
 		$res = db_query_params ('SELECT userid FROM forum_attachment WHERE attachmentid=$1',
@@ -111,9 +109,10 @@ if ($delete == "yes") {
 
 if ($edit=="yes") {
 	
-	if ( ! session_loggedin() ) {
-		exit_not_logged_in();//only logged users can edit attachments
+	if (!$f->userCanPost()) {
+		exit_permission_denied();
 	}
+
 	//only the user that created the attach  or forum admin can edit it (safecheck)
 	if (!$pending) { //pending messages aren't deleted from this page
 		$res = db_query_params ('SELECT filename FROM forum_attachment WHERE attachmentid=$1',

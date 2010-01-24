@@ -46,6 +46,16 @@ if (!session_loggedin()) {
 
 $user_id = user_getid();
 $group_id = getIntFromRequest("group_id");
+
+// If the link comes from the project, display the project header. If it comes from the user page, display the normal site header
+if ($group_id) {
+    forum_header(array('title'=>_('My Monitored Forums')));
+} else {
+    site_header(array('title'=>_('My Monitored Forums'), 'user_id' => $user_id));
+}
+
+echo "<h1>" . _('My Monitored Forums') . "</h1>";
+
 //get the user monitored forums
 $result = db_query_params ('SELECT mon.forum_id, fg.group_id FROM forum_monitored_forums mon,forum_group_list fg where mon.user_id=$1 and fg.group_forum_id=mon.forum_id',
 			   array ($user_id));
@@ -60,21 +70,12 @@ for ($i=0;$i<db_numrows($result);$i++) {
 	$monitored_forums[$i] = db_fetch_array($result);
 }
 
-//if the link comes from the project, display the project header. If it comes from the user page, display the normal site header
-if ($group_id) {
-	forum_header(array('title'=>_('My Monitored Forums')));
-}	else {
-	site_header(array('title'=>_('My Monitored Forums'), 'user_id' => $user_id));
-}
-
-echo "<h4>" . _('My Monitored Forums') . "</h4>";
 $tablearr=array(_('Project'),_('Forum'),
 				_('Description'),_('Threads'),
 				_('Posts'), _('Last Post'), _('New Content?'));
 echo $HTML->listTableTop($tablearr);
 
 $i = 0;
-
 
 $f = array();
 //CHECK : if we won't ever be needing to store each forum/fmf, etc for each pass, don't use an array and use the same variable like $fmf instead of $fmf[$i], etc
