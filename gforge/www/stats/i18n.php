@@ -16,8 +16,8 @@ require_once $gfwww.'stats/site_stats_utils.php';
 session_require( array('group'=>$sys_stats_group) );
 
 $HTML->header(array('title' => sprintf(_('%1$s I18n Statistics'), $GLOBALS['sys_name'])));
-echo $GLOBALS['HTML']->listTableTop(array(_('Language')."",_('Users')."","%"));
 echo "<h1>".sprintf(_('Languages Distributions'), $GLOBALS['sys_name'])." </h1>";
+echo $GLOBALS['HTML']->listTableTop(array(_('Language')."",_('Users')."","%"));
 
 $total=db_result(db_query_params('SELECT count(user_name) AS total FROM users', array()),0,'total');
 
@@ -42,7 +42,7 @@ echo '<tr><td><strong>'._('Total Non-English').'</strong></td>'.
 '<td align="right"><strong>'.sprintf("%.2f",$non_english*100/$total).' </strong></td></tr>';
 
 echo $GLOBALS['HTML']->listTableBottom();
-echo "<p>"._('This is a list of the preferences that users have chosen in their user preferences; it does not include languages which are selected via cookies or browser preferences');
+echo "<p>"._('This is a list of the preferences that users have chosen in their user preferences; it does not include languages which are selected via cookies or browser preferences')."</p>";
 
 $HTML->footer( array() );
 

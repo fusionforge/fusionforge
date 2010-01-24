@@ -25,8 +25,7 @@ $HTML->header(array('title'=>sprintf(_('%1$s Site Statistics'), $GLOBALS['sys_na
 
 echo "\n\n";
 
-print '<div align="center">' . "\n";
-print '<h3>'._('Sitewide aggregate statistics').'</h3><br />' . "\n";
+print '<h1>'._('Sitewide aggregate statistics').'</h1>' . "\n";
 ?>
 
 <hr />
@@ -49,7 +48,6 @@ stats_site_projects_daily( 7 );
 print '<br /><br />';
 stats_site_projects_monthly( );
 print '<br /><br />' . "\n";
-print '</div>' . "\n";
 echo '<p/>'._('Other statistics:<ul><li><a href="i18n.php">I18n Statistics</a></li></ul>');
 
 //

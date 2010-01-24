@@ -23,7 +23,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-
 require_once('../../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
@@ -31,7 +30,7 @@ require_once $gfwww.'project/admin/project_admin_utils.php';
 $group_id = getIntFromRequest('group_id');
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
-project_admin_header(array('title'=>_('History'),'group'=>$group_id));
+project_admin_header(array('title'=>_('Project History'),'group'=>$group_id));
 
 ?>
 
