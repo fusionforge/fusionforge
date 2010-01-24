@@ -38,28 +38,34 @@ if ($group_id) {
 		//	Add list
 		//
 		if (getStringFromRequest('add_list') == 'y') {
-			$mailingList = new MailingList($Group);
+
+			if (check_email_available($Group, $Group->getUnixName() . '-' . getStringFromPost('list_name'), $error_msg)) {
+				$mailingList = new MailingList($Group);
 			
-			if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-				exit_form_double_submit();
-			}
-			if(!$mailingList || !is_object($mailingList)) {
-				form_release_key(getStringFromRequest("form_key"));
-				exit_error(_('Error'), _('Error getting the list'));
-			} elseif($mailingList->isError()) {
-				form_release_key(getStringFromRequest("form_key"));
-				exit_error(_('Error'), $mailingList->getErrorMessage());
-			}
+				if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+					exit_form_double_submit();
+				}
+				if(!$mailingList || !is_object($mailingList)) {
+					form_release_key(getStringFromRequest("form_key"));
+					exit_error(_('Error'), _('Error getting the list'));
+				} elseif($mailingList->isError()) {
+					form_release_key(getStringFromRequest("form_key"));
+					exit_error(_('Error'), $mailingList->getErrorMessage());
+				}
 			
-			if(!$mailingList->create(
-				getStringFromPost('list_name'),
-				getStringFromPost('description'),
-				getIntFromPost('is_public', 1)
-			)) {
+				if(!$mailingList->create(
+					getStringFromPost('list_name'),
+					getStringFromPost('description'),
+					getIntFromPost('is_public', 1)
+				)) {
+					form_release_key(getStringFromRequest("form_key"));
+					exit_error(_('Error'), $mailingList->getErrorMessage());
+				} else {
+					$feedback .= _('List Added');
+				}
+			}
+			else {
 				form_release_key(getStringFromRequest("form_key"));
-				exit_error(_('Error'), $mailingList->getErrorMessage());
-			} else {
-				$feedback .= _('List Added');
 			}
 		//
 		//	Change status
