@@ -46,7 +46,7 @@ if (user_ismember(1,'A')) {
 			if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 				exit_form_double_submit();
 			}
-			$result=db_query_params("INSERT INTO people_job_category (name) VALUES ($1)", array($cat_name));
+			$result=db_query_params('INSERT INTO people_job_category (name) VALUES ($1)', array($cat_name));
 			if (!$result) {
 				echo db_error();
 				form_release_key(getStringFromRequest("form_key"));
@@ -60,7 +60,7 @@ if (user_ismember(1,'A')) {
 			if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 				exit_form_double_submit();
 			}
-			$result=db_query_params("INSERT INTO people_skill (name) VALUES ($1)", array($skill_name));
+			$result=db_query_params('INSERT INTO people_skill (name) VALUES ($1)', array($skill_name));
 			if (!$result) {
 				echo db_error();
 				form_release_key(getStringFromRequest("form_key"));
@@ -84,7 +84,7 @@ if (user_ismember(1,'A')) {
 		/*
 			List of possible categories for this group
 		*/
-		$result=db_query_params("select category_id,name from people_job_category", array());
+		$result=db_query_params('SELECT category_id,name FROM people_job_category', array());
 		echo "<p>";
 		if ($result && db_numrows($result) > 0) {
 			ShowResultSet($result,'Existing Categories','people_cat');
@@ -119,7 +119,7 @@ if (user_ismember(1,'A')) {
 		/*
 			List of possible people_groups for this group
 		*/
-		$result=db_query_params("select skill_id,name from people_skill", array());
+		$result=db_query_params('SELECT skill_id,name FROM people_skill', array());
 		echo "<p>";
 		if ($result && db_numrows($result) > 0) {
 			ShowResultSet($result,"Existing Skills","people_skills");
