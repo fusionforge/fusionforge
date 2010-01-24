@@ -125,8 +125,7 @@ class Forum extends Error {
 			$this->setError(_('Forum Description Must Be At Least 10 Characters'));
 			return false;
 		}
-		$forum_name = strtolower($forum_name);
-		if (!preg_match('/^([_\.0-9a-z-])*$/',$forum_name)) {
+		if (!preg_match('/^([_\.0-9a-z-])*$/i',$forum_name)) {
 			$this->setError(_('Illegal Characters in Forum Name'));
 			return false;
 		}
@@ -141,7 +140,7 @@ class Forum extends Error {
 		$project_name = $this->Group->getUnixName();
 		$result_list_samename = db_query_params ('SELECT 1 FROM mail_group_list WHERE list_name=$1 AND group_id=$2',
 
-							 array ($project_name.'-'.$forum_name,
+							 array ($project_name.'-'.strtolower($forum_name),
 								$this->Group->getID())) ; 
 
 		if (db_numrows($result_list_samename) > 0){
@@ -171,7 +170,7 @@ class Forum extends Error {
 		db_begin();
 		$result = db_query_params('INSERT INTO forum_group_list (group_id,forum_name,is_public,description,send_all_posts_to,allow_anonymous,moderation_level) VALUES ($1,$2,$3,$4,$5,$6,$7)',
 					  array ($this->Group->getID(),
-						 $forum_name,
+						 strtolower($forum_name),
 						 $is_public,
 						 htmlspecialchars($description),
 						 $send_all_posts_to,
@@ -598,8 +597,7 @@ class Forum extends Error {
 			$this->setError(_('Forum Description Must Be At Least 10 Characters'));
 			return false;
 		}
-		$forum_name = strtolower($forum_name);
-		if (!preg_match('/^([_\.0-9a-z-])*$/',$forum_name)) {
+		if (!preg_match('/^([_\.0-9a-z-])*$/i',$forum_name)) {
 			$this->setError(_('Illegal Characters in Forum Name'));
 			return false;
 		}
@@ -626,7 +624,7 @@ class Forum extends Error {
 			is_public=$6
 			WHERE group_id=$7
 			AND group_forum_id=$8',
-					array ($forum_name,
+					array (strtolower($forum_name),
 					       htmlspecialchars($description),
 					       $send_all_posts_to,
 					       $allow_anonymous,
