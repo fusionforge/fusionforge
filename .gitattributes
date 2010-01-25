@@ -3791,6 +3791,7 @@ gforge/www/themes/ultralite/images/forum_delete.gif -text
 gforge/www/themes/ultralite/images/forum_edit.gif -text
 gforge/www/themes/ultralite/images/new.png -text
 gforge/www/tracker/admin/form-customizelist.php -text
+gforge/www/tracker/admin/form-deleteextrafieldelement.php -text
 gforge/www/tracker/admin/form-workflow.php -text
 gforge/www/tracker/admin/form-workflow_roles.php -text
 gforge/www/trove/TroveCategory.class.php -text

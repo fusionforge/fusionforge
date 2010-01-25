@@ -49,14 +49,20 @@ echo "<h1>".$title."</h1>";
 
 					echo '<td>';
 					for ($j=0; $j <$optrows; $j++)
-				
+					{
+						echo $elearray[$j]['element_name'];				
 						echo '<a href="'.getStringFromServer('PHP_SELF').'?update_opt=1&amp;id='.
 						$elearray[$j]['element_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;boxid='.
 						$efarr[$i]['extra_field_id'].'">'.
-						$elearray[$j]['element_name'].' ['._('Edit').']</a><br />';
-
-					} else {
-						echo '<td>';
+						' ['._('Edit').']</a>';
+						echo '<a href="'.getStringFromServer('PHP_SELF').'?delete_opt=1&amp;id='.
+						$elearray[$j]['element_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;boxid='.
+						$efarr[$i]['extra_field_id'].'">'.
+						' ['._('Delete').']</a>';
+						echo '<br />';
+					}
+				} else {
+					echo '<td>';
 				}
 				
 				echo '</td>';

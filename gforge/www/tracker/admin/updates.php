@@ -434,5 +434,30 @@
 			$atw = new ArtifactWorkflow($ath, $field_id);
     		$atw->saveAllowedRoles($from, $next, $role);
 			$feedback .= _('Workflow saved');
+		} elseif (getStringFromRequest('delete_opt')) {
+			$sure = getStringFromRequest('sure');
+			$really_sure = getStringFromRequest('really_sure');
+
+			$id = getStringFromRequest('id');
+			$boxid = getStringFromRequest('boxid');
+			$ab = new ArtifactExtraField($ath,$boxid);
+			if (!$ab || !is_object($ab)) {
+				$feedback .= 'Unable to create ArtifactExtraField Object';
+			} elseif ($ab->isError()) {
+				$feedback .= $ab->getErrorMessage();			
+			} else {
+				$ao = new ArtifactExtraFieldElement($ab,$id);
+				if (!$ao || !is_object($ao)) {
+					$feedback .= 'Unable to create ArtifactExtraFieldElement Object';
+				} else {
+					if (!$sure || !$really_sure || !$ao->delete()) {
+						$feedback .= _('Error deleting an element').': '.$ao->getErrorMessage();
+						$ao->clearError();
+					} else {
+						$feedback .= _('Element deleted');
+						$next = 'add_extrafield';
+					}
+				}
+			}
 		}
 		?>
