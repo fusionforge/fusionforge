@@ -68,14 +68,14 @@ class CreateTrackerWorkflow extends FForge_SeleniumTestCase
 		$this->click("document.forms[2].field_type[6]");
 		$this->click("post_changes");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=Open [Edit]");
+		$this->click("//tr[@id='field-mystatus']/td[3]/a[1]");
 		$this->waitForPageToLoad("30000");
 		$this->type("name", "New");
 		$this->click("post_changes");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Manage Custom Fields");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=Closed [Edit]");
+		$this->click("//tr[@id='field-mystatus']/td[3]/a[3]");
 		$this->waitForPageToLoad("30000");
 		$this->type("name", "Analyse");
 		$this->select("status_id", "label=Open");

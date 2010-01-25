@@ -161,12 +161,12 @@ class CreateTracker extends FForge_SeleniumTestCase
 
 		// Testing [#3649]: 0 not accepted when modifying a select list value
 		$this->open(BASE."/tracker/admin/index.php?group_id=6&atid=101&add_extrafield=1");
-		$this->click("link=0 [Edit]");
+		$this->click("//tr[@id='field-number']/td[3]/a[5]");
 		$this->waitForPageToLoad("30000");
 		$this->type("name", "10");
 		$this->click("post_changes");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=10 [Edit]");
+		$this->click("//tr[@id='field-number']/td[3]/a[5]");
 		$this->waitForPageToLoad("30000");
 		$this->type("name", "0");
 		$this->click("post_changes");

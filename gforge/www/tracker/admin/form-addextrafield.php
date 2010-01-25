@@ -27,7 +27,7 @@ echo "<h1>".$title."</h1>";
 
 			for ($k=0; $k < $rows; $k++) {
 				$i=$keys[$k];
-				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
+				echo '<tr id="field-'.$efarr[$i]['alias'].'" '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
 					'<td>'.$efarr[$i]['field_name'].(($efarr[$i]['is_required']) ? utils_requiredField() : '').'<a href="'.getStringFromServer('PHP_SELF').'?update_box=1&amp;id='.
 						$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
 						' ['._('Edit').']</a>'.
@@ -51,14 +51,14 @@ echo "<h1>".$title."</h1>";
 					for ($j=0; $j <$optrows; $j++)
 					{
 						echo $elearray[$j]['element_name'];				
-						echo '<a href="'.getStringFromServer('PHP_SELF').'?update_opt=1&amp;id='.
+						echo ' <a href="'.getStringFromServer('PHP_SELF').'?update_opt=1&amp;id='.
 						$elearray[$j]['element_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;boxid='.
 						$efarr[$i]['extra_field_id'].'">'.
-						' ['._('Edit').']</a>';
-						echo '<a href="'.getStringFromServer('PHP_SELF').'?delete_opt=1&amp;id='.
+						'['._('Edit').']</a>';
+						echo ' <a href="'.getStringFromServer('PHP_SELF').'?delete_opt=1&amp;id='.
 						$elearray[$j]['element_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;boxid='.
 						$efarr[$i]['extra_field_id'].'">'.
-						' ['._('Delete').']</a>';
+						'['._('Delete').']</a>';
 						echo '<br />';
 					}
 				} else {
@@ -77,7 +77,7 @@ echo "<h1>".$title."</h1>";
 						_('add choices').']</a>';
 				}
 				echo '</td>'; 
-			        echo   '</tr>';
+			        echo   '</tr>'."\n";
 			}
 			echo $GLOBALS['HTML']->listTableBottom();
 			
