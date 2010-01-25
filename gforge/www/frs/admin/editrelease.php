@@ -296,7 +296,7 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 		<br />
 		<input type="checkbox" name="preformatted" value="1" <?php echo (($frsr->getPreformatted())?'checked="checked"':''); ?> /> <?php echo _('Preserve my pre-formatted text.') ?>
 		<p>
-		<input type="submit" name="submit" value="<?php echo _('Submit/Refresh') ?>"/></p>
+		<input type="submit" name="submit" value="<?php echo _('Submit/Refresh') ?>"/>
 		</p>
 	</td>
 </tr>
@@ -309,8 +309,9 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 <form enctype="multipart/form-data" method="post" action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&amp;release_id=$release_id&amp;package_id=$package_id"; ?>">
 <input type="hidden" name="step2" value="1" />
 <span class="important">
-<?php echo _('NOTE: In some browsers you must select the file in the file-upload dialog and click "OK".  Double-clicking doesn\'t register the file.') ?></span>
-</span><br />
+<?php echo _('NOTE: In some browsers you must select the file in the file-upload dialog and click "OK". Double-clicking doesn\'t register the file.') ?>
+</span>
+<br />
 <?php echo _('Upload a new file') ?>: <input type="file" name="userfile"  size="30" />
 <?php if ($sys_use_ftpuploads) {
 
