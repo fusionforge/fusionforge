@@ -207,7 +207,7 @@ if ($msg_id) {
 
 	$ret_val .= $GLOBALS['HTML']->listTableBottom();
 
-		echo $ret_val;
+	echo $ret_val;
 
 	if ($reply) {
 		/*

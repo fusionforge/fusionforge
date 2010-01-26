@@ -237,7 +237,7 @@ class ForumHTML extends Error {
 		/*
 			See if this message is new or not
 			If so, highlite it in bold
-			*/
+		*/
 		if ($this->Forum->getSavedDate() < $msg->getPostDate()) {
 			$bold_begin='<strong>';
 			$bold_end='</strong>';
@@ -396,7 +396,7 @@ class ForumHTML extends Error {
 			then checks if any messages are nested underneath it.
 			If there are, it calls itself, incrementing $level
 			$level is used for indentation of the threads.
-			*/
+		*/
 		global $total_rows,$forum_id,$current_message,$group_id;
 
 		$rows=count($msg_arr["$msg_id"]);
@@ -406,21 +406,21 @@ class ForumHTML extends Error {
 			for ($i=($rows-1); $i >= 0; $i--) {
 				/*
 					Is this row's background shaded or not?
-					*/
+				*/
 				$total_rows++;
 
 				$ret_val .= '
 					<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'><td style="white-space: nowrap;">';
 				/*
 					How far should it indent?
-					*/
+				*/
 				for ($i2=0; $i2<$level; $i2++) {
 					$ret_val .= ' &nbsp; &nbsp; &nbsp; ';
 				}
 
 				/*
 					If it this is the message being displayed, don't show a link to it
-					*/
+				*/
 				if ($current_message != $msg_arr["$msg_id"][$i]->getID()) {
 					$ah_begin='<a href="'.util_make_url ('/forum/message.php?msg_id='. $msg_arr["$msg_id"][$i]->getID() .'&amp;group_id='.$group_id).'">';
 					$ah_end='</a>';
@@ -433,7 +433,7 @@ class ForumHTML extends Error {
 					html_image('ic/msg.png',"10","12",array("border"=>"0")).' ';
 				/*
 					See if this message is new or not
-					*/
+				*/
 				if ($this->Forum->getSavedDate() < $msg_arr["$msg_id"][$i]->getPostDate()) {
 					$bold_begin='<strong>';
 					$bold_end='</strong>';
@@ -449,7 +449,7 @@ class ForumHTML extends Error {
 				if ($msg_arr["$msg_id"][$i]->hasFollowups() > 0) {
 					/*
 						Call yourself, incrementing the level
-						*/
+					*/
 					$ret_val .= $this->showSubmessages($msg_arr,$msg_arr["$msg_id"][$i]->getID(),($level+1));
 				}
 			}
