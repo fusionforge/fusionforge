@@ -62,10 +62,14 @@ function pm_header($params) {
 			. '\', \'' . $gantt_winopt . '\'); return false;';
 		}
 		//upload/download as CSV files
-		$labels[] = _('Download as CSV');
-		$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=downloadcsv';
-		$labels[] = _('Upload CSV');
-		$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=uploadcsv';
+//		$labels[] = _('Download as CSV');
+//		$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=downloadcsv';
+//		$labels[] = _('Upload CSV');
+//		$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=uploadcsv';
+
+		// Import/Export using CSV files.
+		$labels[] = _('Import/Export CSV');
+		$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=csv';
 	}
 	if ($pg && is_object($pg) && $pg->userIsAdmin()) {
 		$labels[] = _('Reporting');

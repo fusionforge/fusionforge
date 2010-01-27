@@ -3495,6 +3495,8 @@ gforge/www/plugins/projects_hierarchy -text
 gforge/www/plugins/quota_management -text
 gforge/www/plugins/svntracker -text
 gforge/www/plugins/webcalendar -text
+gforge/www/pm/csv.php -text
+gforge/www/pm/format_csv.php -text
 gforge/www/scm/browser.php -text
 gforge/www/scm/viewvc/templates/docroot/images/annotate.png -text
 gforge/www/scm/viewvc/templates/docroot/images/back.png -text
@@ -3867,7 +3869,7 @@ tests/func/Soap/checks.php -text
 tests/func/Soap/login.php -text
 tests/func/Soap/usergroup.php -text
 tests/func/Tasks/AllTests.php -text
-tests/func/Tasks/csv.php -text
+tests/func/Tasks/createTask.php -text
 tests/func/Testing/SeleniumGforge.php -text
 tests/func/Testing/SeleniumRemoteSuite.php -text
 tests/func/Trackers/AllTests.php -text

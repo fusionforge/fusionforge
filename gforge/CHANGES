@@ -36,6 +36,7 @@ UNRELEASED:
 * Mediawiki plugin: mostly rewritten.  Now creates independent wikis
   for projects, allowing different sets of permissions.
 * Forums: New 'move' option to move a thread from one forum to another (Alcatel-Lucent).
+* Tasks: Improved CSV import/export (Alcatel-Lucent)
 
 FusionForge-4.8.2:
 * Maintenance release, security and bugfixes.

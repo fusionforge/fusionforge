@@ -185,6 +185,16 @@ switch (getStringFromRequest('func')) {
 		break;
 	}
 
+	case 'csv': {
+		include $gfwww.'pm/csv.php';
+		exit;
+	}
+
+	case 'format_csv': {
+		include $gfwww.'pm/format_csv.php';
+		exit;
+	}
+
 	case 'downloadcsv': {
 
 		if ($pg->userIsAdmin()) {
@@ -209,8 +219,9 @@ switch (getStringFromRequest('func')) {
 
 	case 'postuploadcsv': {
 
-		if ($pg->userIsAdmin()) {			
+		if ($pg->userIsAdmin()) {
 			include $gfwww.'pm/postuploadcsv.php';
+			include $gfwww.'pm/browse_task.php';
 		} else {
 			exit_permission_denied();
 		}
