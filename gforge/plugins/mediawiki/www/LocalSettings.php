@@ -152,7 +152,8 @@ function FusionForgeMWAuth( &$user, &$result ) {
 
                 $user->setCookies ();
                 $user->saveSettings ();
-        } else {
+		wfSetupSession ();
+	} else {
 		$user->logout ();
         }
 
