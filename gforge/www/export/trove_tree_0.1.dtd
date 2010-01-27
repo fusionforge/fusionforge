@@ -7,6 +7,7 @@
 // 		   categorization scheme).
 -->
 
+<?xml version="1.0"?>
 
 <!ELEMENT category (category*)>
 <!ATTLIST category

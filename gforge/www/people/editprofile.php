@@ -33,8 +33,8 @@ if (session_loggedin()) {
 			exit_form_double_submit();
 		}
 		
-		$result=db_query_params("UPDATE users SET people_view_skills=$1
-WHERE user_id=$2", array($people_view_skills, $user_getid()));
+		$result=db_query_params('UPDATE users SET people_view_skills=$1
+WHERE user_id=$2', array($people_view_skills, $user_getid()));
 		if (!$result || db_affected_rows($result) < 1) {
 			form_release_key(getStringFromRequest("form_key"));
 			$feedback .= _('User update FAILED');

@@ -173,7 +173,7 @@ AND artifact_group_list.group_id=$1 AND artifact.artifact_id=$2',
 
 	}
 	if ($Rows > 1) {
-		$return['Error'] .= "Unknown problem adding Tracker:$Num.";
+		$return['Error'] .= "Unknown problem adding Tracker: $Num.";
 	}
 	return $return;
 }

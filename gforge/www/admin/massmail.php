@@ -85,9 +85,9 @@ if (getStringFromRequest('submit')) {
 site_admin_header(array('title'=>_('Massmail admin')));
 
 print '
-<h4>'
+<h1>'
 .sprintf(_('Mail Engine for %1$s Subscribers'), $GLOBALS['sys_name']) .
-'</h4>
+'</h1>
 ';
 
 print '
