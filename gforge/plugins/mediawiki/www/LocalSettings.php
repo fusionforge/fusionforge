@@ -125,8 +125,8 @@ function FusionForgeMWAuth( &$user, &$result ) {
                         if (!in_array ('Members', $current_groups)) {
                                 $user->addGroup ('Members') ;
                         }
-                        if (!in_array ('Users', $current_groups)) {
-                                $user->addGroup ('Users') ;
+                        if (!in_array ('ForgeUsers', $current_groups)) {
+                                $user->addGroup ('ForgeUsers') ;
                         }
                 } elseif ($perm && is_object($perm) && $perm->isMember()) {
                         if (in_array ('Administrators', $current_groups)) {
@@ -135,8 +135,8 @@ function FusionForgeMWAuth( &$user, &$result ) {
                         if (!in_array ('Members', $current_groups)) {
                                 $user->addGroup ('Members') ;
                         }
-                        if (!in_array ('Users', $current_groups)) {
-                                $user->addGroup ('Users') ;
+                        if (!in_array ('ForgeUsers', $current_groups)) {
+                                $user->addGroup ('ForgeUsers') ;
                         }
                 } else {
                         if (in_array ('Administrators', $current_groups)) {
@@ -145,8 +145,8 @@ function FusionForgeMWAuth( &$user, &$result ) {
                         if (in_array ('Members', $current_groups)) {
                                 $user->removeGroup ('Members') ;
                         }
-                        if (!in_array ('Users', $current_groups)) {
-                                $user->addGroup ('Users') ;
+                        if (!in_array ('ForgeUsers', $current_groups)) {
+                                $user->addGroup ('ForgeUsers') ;
                         }
                 }
 
@@ -183,10 +183,15 @@ $wgGroupPermissions['Members']['edit']          = true;
 $wgGroupPermissions['Members']['createpage']    = true;
 $wgGroupPermissions['Members']['createtalk']    = true;
 
-$wgGroupPermissions['Users']['createaccount'] = false;
-$wgGroupPermissions['Users']['edit']          = false;
-$wgGroupPermissions['Users']['createpage']    = false;
-$wgGroupPermissions['Users']['createtalk']    = false;
+$wgGroupPermissions['ForgeUsers']['createaccount'] = false;
+$wgGroupPermissions['ForgeUsers']['edit']          = false;
+$wgGroupPermissions['ForgeUsers']['createpage']    = false;
+$wgGroupPermissions['ForgeUsers']['createtalk']    = false;
+
+$wgGroupPermissions['user']['createaccount'] = false;
+$wgGroupPermissions['user']['edit']          = false;
+$wgGroupPermissions['user']['createpage']    = false;
+$wgGroupPermissions['user']['createtalk']    = false;
 
 $wgGroupPermissions['*']['createaccount'] = false;
 $wgGroupPermissions['*']['edit']          = false;

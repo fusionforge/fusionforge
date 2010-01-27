@@ -27,9 +27,9 @@ for project in $projects ; do
 \$wgGroupPermissions['Members']['createtalk']    = true;
 
 // Edit permissions for non-members
-\$wgGroupPermissions['Users']['edit']          = false;
-\$wgGroupPermissions['Users']['createpage']    = false;
-\$wgGroupPermissions['Users']['createtalk']    = false;
+\$wgGroupPermissions['ForgeUsers']['edit']          = false;
+\$wgGroupPermissions['ForgeUsers']['createpage']    = false;
+\$wgGroupPermissions['ForgeUsers']['createtalk']    = false;
 
 // Edit permissions for anonymous users
 \$wgGroupPermissions['*']['edit']          = false;
