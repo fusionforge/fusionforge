@@ -7,6 +7,6 @@
  */
 
 
-Header("Location: /account/");
+Header("Location: ".util_make_url("/account/"));
 
 ?>
