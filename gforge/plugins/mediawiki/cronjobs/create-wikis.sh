@@ -109,7 +109,7 @@ for project in $projects ; do
 	cat $wdprefix/$project/LocalSettings.php | grep -vi "\$wgGroupPermissions\['\*'\]\['read'\]" > $tmp4
 	cat $tmp4 > $wdprefix/$project/LocalSettings.php
 
-	if [ $ispublic == '0' ] ; then
+	if [ $ispublic = '0' ] ; then
 		echo "\$wgGroupPermissions['Members']['read']    = true;" >> $wdprefix/$project/LocalSettings.php
 		echo "\$wgGroupPermissions['*']['read']          = false;" >> $wdprefix/$project/LocalSettings.php
 	fi
