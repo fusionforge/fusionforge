@@ -26,8 +26,7 @@ UBULIST=$(UBUNTULIST) $(UBUNTULISTP)
 LOCALMIRROR=http://localhost/ubuntu
 UBUNTUOP=$(shell wget -q -S http://localhost/ubuntu -O /dev/null && echo "--mirror $(LOCALMIRROR)" || echo "--mirror http://archive.ubuntu.com/ubuntu") --debootstrap debootstrap
 
-gfversion=$(shell head -1 $(PKGNAME)/debian/changelog | sed 's/.*(\(.[^+-]*\).*).*/\1/')
-gfminor=$(shell head -1 $(PKGNAME)/debian/changelog | sed 's/.*(.[^+-]*[+-]\(.*\)).*/\1/')
+gfversion=$(shell head -1 $(PKGNAME)/debian/changelog | sed 's/.*(\(.*\)-[^-]*).*/\1/')
 in_svn_repo:= $(wildcard .svn/) 
 ifeq ($(strip $(in_svn_repo)),) 
 	svnrev=unknown
