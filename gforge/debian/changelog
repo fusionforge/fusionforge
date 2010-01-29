@@ -1,9 +1,9 @@
 gforge (4.8.55-1) experimental; urgency=low
-
+  
   [ Christian Bayle ]
-  * bump to new version because on binary commit
   * put debian postinst/prerm/config/.. files in dsf-in dir
   * use @PACKAGE@ instead of gforge everywhere i can
+  * Remove frame from mediawiki 
 
   [ Roland Mas ]
   * Use standard Sort::Versions module to compare database schema version
@@ -14,12 +14,10 @@ gforge (4.8.55-1) experimental; urgency=low
     not quite complete yet.
   * Patched mediawiki plugin to enable one wiki per project.
   * New contribtracker plugin, developed for Adullact.
-
-  [ Christian Bayle ]
-  * Remove frame from mediawiki 
   * Simplified debian/rules by using Debhelper 7.
+  * Dropped dependency on -ftp-proftpd from the meta-package.
 
- -- Roland Mas <lolando@debian.org>  Fri, 20 Nov 2009 11:30:37 +0100
+ -- Roland Mas <lolando@debian.org>  Fri, 29 Jan 2010 11:27:29 +0100
 
 gforge (4.8.51-1) experimental; urgency=low
 
