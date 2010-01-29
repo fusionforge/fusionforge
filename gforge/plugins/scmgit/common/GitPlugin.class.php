@@ -2,6 +2,7 @@
 /** FusionForge Git plugin
  *
  * Copyright 2009, Roland Mas
+ * Copyright 2009, Mehdi Dogguy <mehdi@debian.org>
  *
  * This file is part of FusionForge.
  *
