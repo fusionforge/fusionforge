@@ -1,7 +1,5 @@
-gforge (4.8.55+svn8699-1) experimental; urgency=low
+gforge (4.8.55-1) experimental; urgency=low
   
-  * New snapshot from SVN trunk.
-
   [ Christian Bayle ]
   * put debian postinst/prerm/config/.. files in dsf-in dir
   * use @PACKAGE@ instead of gforge everywhere i can
@@ -19,7 +17,7 @@ gforge (4.8.55+svn8699-1) experimental; urgency=low
   * Simplified debian/rules by using Debhelper 7.
   * Dropped dependency on -ftp-proftpd from the meta-package.
 
- -- Roland Mas <lolando@debian.org>  Fri, 29 Jan 2010 13:56:56 +0100
+ -- Roland Mas <lolando@debian.org>  Fri, 29 Jan 2010 11:27:29 +0100
 
 gforge (4.8.51-1) experimental; urgency=low
 
