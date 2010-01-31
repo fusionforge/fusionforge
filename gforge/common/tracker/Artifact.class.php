@@ -684,8 +684,8 @@ class Artifact extends Error {
 	 */
 	function &getFiles() {
 		if (!isset($this->files)) {
-			$res = db_query_params ('SELECT id,artifact_id,description,filename,filesize," .
-					"filetype,adddate,submitted_by,user_name,realname
+			$res = db_query_params ('SELECT id,artifact_id,description,filename,filesize,' .
+					'filetype,adddate,submitted_by,user_name,realname
 					 FROM artifact_file_user_vw WHERE artifact_id=$1',
 						array ($this->getID())) ;
 			$rows=db_numrows($res);
