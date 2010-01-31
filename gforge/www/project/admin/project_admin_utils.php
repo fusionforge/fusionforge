@@ -211,7 +211,7 @@ function prdb_namespace_seek($namecheck) {
 		while ((db_numrows($res_dbl) > 0) && ($curr_num < 20)) {
 			
 			$curr_num++;
-			$namecheck .= "$namecheck"."$curr_num";
+			$namecheck .= $namecheck.$curr_num;
 					
 			$res_dbl = db_query_params($query, array($namecheck));
 		}

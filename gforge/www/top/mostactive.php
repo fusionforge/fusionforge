@@ -44,10 +44,10 @@ if ($type == 'week') {
 
 $HTML->header(array('title'=>$title));
 
-print '<p><h3>'.$title.'</h3>
+print '<h3>'.$title.'</h3>
 <br /><em>('._('Updated Daily').')</em>
 
-<p>'.util_make_link ('/top/','['._('View Other Top Categories').']');
+<p>'.util_make_link ('/top/','['._('View Other Top Categories').']').'</p>';
 
 $arr=array(_('Rank'),_('Project name'),_('Percentile'));
 

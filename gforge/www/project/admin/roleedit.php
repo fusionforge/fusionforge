@@ -101,13 +101,13 @@ $group = group_get_object($group_id);
 //	If observer role, show title
 //
 if ($role_id=='observer') {
-	echo '<h2>'._('Edit Observer').'</h2>';
+	echo '<h1>'._('Edit Observer').'</h1>';
 	echo _('Use this page to edit the permissions and access levels of non-members of your project. Non-members includes users who are not logged in.');
 } else {
 	if (!$role_id) {
-		echo '<h2>'._('New Role').'</h2>';
+		echo '<h1>'._('New Role').'</h1>';
 	} else {
-		echo '<h2>'._('Edit Role').'</h2>';
+		echo '<h1>'._('Edit Role').'</h1>';
 	}
 	echo _('Use this page to edit your project\'s Roles. Note that each member has at least as much access as the Observer. For example, if the Observer can read CVS, so can any other role in the project.');
 

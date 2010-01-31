@@ -41,7 +41,7 @@ if (!$group || !is_object($group)) {
 
 $sw = getStringFromRequest('sw', 'A');
 
-$res = db_query_params('SELECT user_id,user_name,lastname,firstname FROM users WHERE status=$1 and type_id=1 and lower(lastname) LIKE $2',
+$res = db_query_params('SELECT user_id,user_name,lastname,firstname FROM users WHERE status=$1 and type_id=1 and lower(lastname) LIKE $2 ORDER BY lastname,firstname ASC',
 		       array('A',
 			     strtolower ($sw."%")));
 
@@ -70,10 +70,10 @@ project_admin_header(array('title'=>_('Edit Role'),'group'=>$group_id));
 
 
 echo '
-<h2>'._('Add Users From List').'</h2>
+<h1>'._('Add Users From List').'</h1>
 <p>
 '._('Check the box next to the name of the user(s) you want to add. Your choices will be preserved if you click any of the letters below. When done, click "Finish" to choose the roles for the users you are adding.').'
-<p>
+</p>
 <form action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'" method="post">
 <input type="hidden" name="accumulated_ids" value="'. implode(',',$accumulated_ids) .'" />';
 
@@ -117,7 +117,7 @@ if (!$res || db_numrows($res) < 1) {
 
 }
 
-echo '<p><input type="submit" name="finished" value="'._('Finish').'"></p>
+echo '<p><input type="submit" name="finished" value="'._('Finish').'" /></p>
 </form>';
 
 project_admin_footer(array());

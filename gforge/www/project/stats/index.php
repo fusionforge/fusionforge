@@ -51,7 +51,7 @@ if ($end && !is_numeric($end)) { $end = false; }
 //
 ?>
 <div align="center">
-<h3><?php echo _('Project Activity'); ?></h3>
+<h1><?php echo _('Project Activity'); ?></h1>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
@@ -60,7 +60,7 @@ if ($end && !is_numeric($end)) { $end = false; }
 <td><strong><?php echo _('Type'); ?>:</strong><br /><?php echo report_span_box('SPAN',$SPAN); ?></td>
 <td><strong><?php echo _('Start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
 <td><strong><?php echo _('End'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
-<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>"></td>
+<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
 </tr></table>
 </form>
 <p>

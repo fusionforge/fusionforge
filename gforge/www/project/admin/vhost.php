@@ -52,8 +52,8 @@ if (getStringFromRequest('createvhost')) {
 
 	if (valid_hostname($vhost_name)) {
 
-		$res = db_query_params(" INSERT INTO prweb_vhost(vhost_name, docdir, cgidir, group_id)
-			values ($1, $2, $3, $4)", array($vhost_name, $docdir, $cgidir, $group->getID()));
+		$res = db_query_params('INSERT INTO prweb_vhost(vhost_name, docdir, cgidir, group_id)
+			values ($1, $2, $3, $4)', array($vhost_name, $docdir, $cgidir, $group->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
 			$feedback .= "Cannot insert VHOST entry: ".db_error();
@@ -123,10 +123,10 @@ project_admin_header(array('title'=>_('Virtual Host Management'),'group'=>$group
 
 <?php
 
-$res_db = db_query_params("
+$res_db = db_query_params('
 	SELECT *
 	FROM prweb_vhost
-	WHERE group_id=$1", array($group->getID()));
+	WHERE group_id=$1', array($group->getID()));
 	
 if (db_numrows($res_db) > 0) {
 

@@ -67,7 +67,7 @@ if (!$accumulated_ids) {
 project_admin_header(array('title'=>_('Edit Role'),'group'=>$group_id));
 
 echo '
-<h2>'._('Add Users From List').'</h2>
+<h1>'._('Add Users From List').'</h1>
 <p>
 '._('Choose the role for each user and then press &quot;Add All&quot;.').'
 </p>
@@ -99,7 +99,7 @@ if (!$res || db_numrows($res) < 1) {
 
 }
 
-echo '<p><input type="submit" name="finished" value="'._('Add All').'"></p>
+echo '<p><input type="submit" name="finished" value="'._('Add All').'" /></p>
 </form>';
 
 project_admin_footer(array());
