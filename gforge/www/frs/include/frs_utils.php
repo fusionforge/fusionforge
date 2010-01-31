@@ -145,7 +145,7 @@ function frs_show_filetype_popup ($name='type_id', $checked_val="xzxz") {
 	*/
 	global $FRS_FILETYPE_RES;
 	if (!isset($FRS_FILETYPE_RES)) {
-		$FRS_FILETYPE_RES=db_query_params ('SELECT * FROM frs_filetype',
+		$FRS_FILETYPE_RES=db_query_params ('SELECT * FROM frs_filetype ORDER BY type_id',
 			array());
 	}
 	return html_build_select_box ($FRS_FILETYPE_RES,$name,$checked_val,true,_('Must Choose One'));
@@ -163,7 +163,7 @@ function frs_show_processor_popup ($name='processor_id', $checked_val="xzxz") {
 	*/
 	global $FRS_PROCESSOR_RES;
 	if (!isset($FRS_PROCESSOR_RES)) {
-		$FRS_PROCESSOR_RES=db_query_params ('SELECT * FROM frs_processor',
+		$FRS_PROCESSOR_RES=db_query_params ('SELECT * FROM frs_processor ORDER BY processor_id',
 			array());
 	}
 	return html_build_select_box ($FRS_PROCESSOR_RES,$name,$checked_val,true,_('Must Choose One'));
