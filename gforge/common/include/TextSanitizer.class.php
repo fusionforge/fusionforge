@@ -11,7 +11,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -48,10 +48,10 @@
 require_once('HTMLPurifier.auto.php');
 
 Class TextSanitizer extends Error {
-	
-	
+
+
 	/**
-	 *  convertExtendedCharsForEmail - Grabs some text with html special characters and converts them to the corresponding character. 
+	 *  convertExtendedCharsForEmail - Grabs some text with html special characters and converts them to the corresponding character.
 	 *
 	 *	@param   string		The input string
 	 *	@return  string		The output string
@@ -82,13 +82,13 @@ Class TextSanitizer extends Error {
 
 		return $text;
 	}
-	
+
 	/**
 	 *  convertNeededTagsForEmail - Grabs some text with html tags and those which are important for display (<br>, <p>) convert accordingly
 	 *
 	 *	@param   string		The input string
 	 *	@return  string		The output string
-	 */	
+	 */
 	function convertNeededTagsForEmail($text) {
 		$text = str_replace("<br>","\n",$text);
 		$text = str_replace("<br />","\n",$text);
@@ -102,7 +102,7 @@ Class TextSanitizer extends Error {
 		$text = str_replace("\xc2\xa0",' ',$text);
 		return $text;
 	}
-	
+
 	function unhtmlentities ($string) {
 		$trans_tbl = get_html_translation_table (HTML_SPECIALCHARS );
 		$trans_tbl = array_flip ($trans_tbl );
@@ -110,7 +110,7 @@ Class TextSanitizer extends Error {
 		$res = str_replace("&amp;quot;",'"',$res);
 		return $res;
 	}
-	
+
 	/**
 	 *  SanitizeHtml - Grabs some text with all kinds of html code and parses it to make it safe
 	 *
@@ -118,105 +118,105 @@ Class TextSanitizer extends Error {
 	 *	@return  string		The HTML output
 	 */
 	function SanitizeHtml($input) {
-		
+
 		$input = htmlspecialchars($input); // first strip all chars
 
 		$input=str_replace('&amp;','&',$input);
-                $input=str_replace('&quot;','"',$input);
-                $input=str_replace('/&gt;','/>',$input);
-                $input=str_replace('"&gt;','">',$input);
-                $input=str_replace('&lt;/a&gt;','</a>',$input);
-                $input=str_replace('&lt;strike&gt;','<strike>',$input);
-                $input=str_replace('&lt;/strike&gt;','</strike>',$input);
-                $input=str_replace('&lt;sub&gt;','<sub>',$input);
-                $input=str_replace('&lt;/sub&gt;','</sub>',$input);
-                $input=str_replace('&lt;span','<span',$input);
-                $input=str_replace('&lt;/span&gt;','</span>',$input);
-                $input=str_replace('&lt;font','<font',$input);
-                $input=str_replace('&lt;/font&gt;','</font>',$input);
-                $input=str_replace('&lt;hr&gt;','<hr>',$input);
-                $input=str_replace('&lt;hr','<hr',$input);
-                $input=str_replace('&lt;br&gt;','<br>',$input);
-                $input=str_replace('&lt;br />','<br />',$input);
-                $input=str_replace('&lt;tbody&gt;','<tbody>',$input);
-                $input=str_replace('&lt;/tbody&gt;','</tbody>',$input);
-                $input=str_replace('&lt;tr&gt;','<tr>',$input);
-                $input=str_replace('&lt;/tr&gt;','</tr>',$input);
-                $input=str_replace('&lt;td&gt;','<td>',$input);
-                $input=str_replace('&lt;/td&gt;','</td>',$input);
-                $input=str_replace('&lt;td','<td',$input);
-                $input=str_replace('&lt;table&gt;','<table>',$input);
-                $input=str_replace('&lt;table','<table',$input);
-                $input=str_replace('&lt;/table&gt;','</table>',$input);
-                $input=str_replace('&lt;div&gt;','<div>',$input);
-                $input=str_replace('&lt;div','<div',$input);
-                $input=str_replace('&lt;/div&gt;','</div>',$input);
-                $input=str_replace('&lt;u&gt;','<u>',$input);
-                $input=str_replace('&lt;u ','<u ',$input); // rg
-                $input=str_replace('&lt;/u&gt;','</u>',$input);
-                $input=str_replace('&lt;p&gt;','<p>',$input);
-                $input=str_replace('&lt;/p&gt;','</p>',$input);
-                $input=str_replace('&lt;p ','<p ',$input);
-                $input=str_replace('&lt;li&gt;','<li>',$input);
-                $input=str_replace('&lt;/li&gt;','</li>',$input);
+		$input=str_replace('&quot;','"',$input);
+		$input=str_replace('/&gt;','/>',$input);
+		$input=str_replace('"&gt;','">',$input);
+		$input=str_replace('&lt;/a&gt;','</a>',$input);
+		$input=str_replace('&lt;strike&gt;','<strike>',$input);
+		$input=str_replace('&lt;/strike&gt;','</strike>',$input);
+		$input=str_replace('&lt;sub&gt;','<sub>',$input);
+		$input=str_replace('&lt;/sub&gt;','</sub>',$input);
+		$input=str_replace('&lt;span','<span',$input);
+		$input=str_replace('&lt;/span&gt;','</span>',$input);
+		$input=str_replace('&lt;font','<font',$input);
+		$input=str_replace('&lt;/font&gt;','</font>',$input);
+		$input=str_replace('&lt;hr&gt;','<hr>',$input);
+		$input=str_replace('&lt;hr','<hr',$input);
+		$input=str_replace('&lt;br&gt;','<br>',$input);
+		$input=str_replace('&lt;br />','<br />',$input);
+		$input=str_replace('&lt;tbody&gt;','<tbody>',$input);
+		$input=str_replace('&lt;/tbody&gt;','</tbody>',$input);
+		$input=str_replace('&lt;tr&gt;','<tr>',$input);
+		$input=str_replace('&lt;/tr&gt;','</tr>',$input);
+		$input=str_replace('&lt;td&gt;','<td>',$input);
+		$input=str_replace('&lt;/td&gt;','</td>',$input);
+		$input=str_replace('&lt;td','<td',$input);
+		$input=str_replace('&lt;table&gt;','<table>',$input);
+		$input=str_replace('&lt;table','<table',$input);
+		$input=str_replace('&lt;/table&gt;','</table>',$input);
+		$input=str_replace('&lt;div&gt;','<div>',$input);
+		$input=str_replace('&lt;div','<div',$input);
+		$input=str_replace('&lt;/div&gt;','</div>',$input);
+		$input=str_replace('&lt;u&gt;','<u>',$input);
+		$input=str_replace('&lt;u ','<u ',$input); // rg
+		$input=str_replace('&lt;/u&gt;','</u>',$input);
+		$input=str_replace('&lt;p&gt;','<p>',$input);
+		$input=str_replace('&lt;/p&gt;','</p>',$input);
+		$input=str_replace('&lt;p ','<p ',$input);
+		$input=str_replace('&lt;li&gt;','<li>',$input);
+		$input=str_replace('&lt;/li&gt;','</li>',$input);
 		$input=str_replace('&lt;ul&gt;','<ul>',$input);
-                $input=str_replace('&lt;/ul&gt;','</ul>',$input);
-                $input=str_replace('&lt;ol&gt;','<ol>',$input);
-                $input=str_replace('&lt;/ol&gt;','</ol>',$input);
-                $input=str_replace('&lt;blockquote&gt;','<blockquote>',$input);
-                $input=str_replace('&lt;blockquote','<blockquote',$input);
-                $input=str_replace('&lt;/blockquote&gt;','</blockquote>',$input);
-                $input=str_replace('&lt;em&gt;','<em>',$input);
-                $input=str_replace('&lt;/em&gt;','</em>',$input);
-                $input=str_replace('&lt;strong&gt;','<strong>',$input);
-                $input=str_replace('&lt;/strong&gt;','</strong>',$input);
-                $input=str_replace('&lt;sup&gt;','<sup>',$input);
-                $input=str_replace('&lt;/sup&gt;','</sup>',$input);
-                $input=str_replace('&lt;input ','<input ',$input);
-                $input=str_replace('&lt;img ','<img ',$input);
-                $input=str_replace('&lt;textarea ','<textarea ',$input);
-                $input=str_replace('&lt;/textarea&gt;','</textarea>',$input);
-                $input=str_replace('&lt;a ','<a ',$input);
-                $input=str_replace('&lt;h1&gt;','<h1>',$input);
-                $input=str_replace('&lt;/h1&gt;','</h1>',$input);
-                $input=str_replace('&lt;h2&gt;','<h2>',$input);
-                $input=str_replace('&lt;/h2&gt;','</h2>',$input);
-                $input=str_replace('&lt;h3&gt;','<h3>',$input);
-                $input=str_replace('&lt;/h3&gt;','</h3>',$input);
-                $input=str_replace('&lt;h4&gt;','<h4>',$input);
-                $input=str_replace('&lt;/h4&gt;','</h4>',$input);
-                $input=str_replace('&lt;h5&gt;','<h5>',$input);
-                $input=str_replace('&lt;/h5&gt;','</h5>',$input);
-                $input=str_replace('&lt;h6&gt;','<h6>',$input);
-                $input=str_replace('&lt;/h6&gt;','</h6>',$input);
-                $input=str_replace('&lt;pre&gt;','<pre>',$input);
-                $input=str_replace('&lt;/pre&gt;','</pre>',$input);
-                $input=str_replace('&lt;address&gt;','<address>',$input);
-                $input=str_replace('&lt;/address&gt;','</address>',$input);
-                $input=str_replace('&lt;h1 ','<h1 ',$input);
-                $input=str_replace('&lt;h2 ','<h2 ',$input);
-                $input=str_replace('&lt;h3 ','<h3 ',$input);
-                $input=str_replace('&lt;h4 ','<h4 ',$input);
+		$input=str_replace('&lt;/ul&gt;','</ul>',$input);
+		$input=str_replace('&lt;ol&gt;','<ol>',$input);
+		$input=str_replace('&lt;/ol&gt;','</ol>',$input);
+		$input=str_replace('&lt;blockquote&gt;','<blockquote>',$input);
+		$input=str_replace('&lt;blockquote','<blockquote',$input);
+		$input=str_replace('&lt;/blockquote&gt;','</blockquote>',$input);
+		$input=str_replace('&lt;em&gt;','<em>',$input);
+		$input=str_replace('&lt;/em&gt;','</em>',$input);
+		$input=str_replace('&lt;strong&gt;','<strong>',$input);
+		$input=str_replace('&lt;/strong&gt;','</strong>',$input);
+		$input=str_replace('&lt;sup&gt;','<sup>',$input);
+		$input=str_replace('&lt;/sup&gt;','</sup>',$input);
+		$input=str_replace('&lt;input ','<input ',$input);
+		$input=str_replace('&lt;img ','<img ',$input);
+		$input=str_replace('&lt;textarea ','<textarea ',$input);
+		$input=str_replace('&lt;/textarea&gt;','</textarea>',$input);
+		$input=str_replace('&lt;a ','<a ',$input);
+		$input=str_replace('&lt;h1&gt;','<h1>',$input);
+		$input=str_replace('&lt;/h1&gt;','</h1>',$input);
+		$input=str_replace('&lt;h2&gt;','<h2>',$input);
+		$input=str_replace('&lt;/h2&gt;','</h2>',$input);
+		$input=str_replace('&lt;h3&gt;','<h3>',$input);
+		$input=str_replace('&lt;/h3&gt;','</h3>',$input);
+		$input=str_replace('&lt;h4&gt;','<h4>',$input);
+		$input=str_replace('&lt;/h4&gt;','</h4>',$input);
+		$input=str_replace('&lt;h5&gt;','<h5>',$input);
+		$input=str_replace('&lt;/h5&gt;','</h5>',$input);
+		$input=str_replace('&lt;h6&gt;','<h6>',$input);
+		$input=str_replace('&lt;/h6&gt;','</h6>',$input);
+		$input=str_replace('&lt;pre&gt;','<pre>',$input);
+		$input=str_replace('&lt;/pre&gt;','</pre>',$input);
+		$input=str_replace('&lt;address&gt;','<address>',$input);
+		$input=str_replace('&lt;/address&gt;','</address>',$input);
+		$input=str_replace('&lt;h1 ','<h1 ',$input);
+		$input=str_replace('&lt;h2 ','<h2 ',$input);
+		$input=str_replace('&lt;h3 ','<h3 ',$input);
+		$input=str_replace('&lt;h4 ','<h4 ',$input);
 		$input=str_replace('&lt;h5 ','<h5 ',$input);
-                $input=str_replace('&lt;h6 ','<h6 ',$input);
-                $input=str_replace('&rsquo;','\\\'',$input);
-                $input=str_replace('&bull;','-',$input);
+		$input=str_replace('&lt;h6 ','<h6 ',$input);
+		$input=str_replace('&rsquo;','\\\'',$input);
+		$input=str_replace('&bull;','-',$input);
 
-                // Allow embbeding video like youtube ones.
-                $input=str_replace('&lt;object ','<object ',$input);
-                $input=str_replace('&lt;/object&gt;','</object>',$input);
-                $input=str_replace('&lt;param ','<param ',$input);
-                $input=str_replace('&lt;/param&gt;','</param>',$input);
-                $input=str_replace('&lt;embed ','<embed ',$input);
-                $input=str_replace('&lt;/embed&gt;','</embed>',$input);
+		// Allow embbeding video like youtube ones.
+		$input=str_replace('&lt;object ','<object ',$input);
+		$input=str_replace('&lt;/object&gt;','</object>',$input);
+		$input=str_replace('&lt;param ','<param ',$input);
+		$input=str_replace('&lt;/param&gt;','</param>',$input);
+		$input=str_replace('&lt;embed ','<embed ',$input);
+		$input=str_replace('&lt;/embed&gt;','</embed>',$input);
 
-                return $input;
+		return $input;
 	}
 
 	function stripTags ($text, $allowed='br,p,li,ul') {
 		$config = HTMLPurifier_Config::createDefault();
-		$config->set('HTML', 'Allowed', $allowed);
 		$config->set('Cache.DefinitionImpl', NULL);
+		$config->set('HTML.Allowed', $allowed);
 		$purifier = new HTMLPurifier($config);
 		$text = $purifier->purify($text);
 
@@ -224,8 +224,10 @@ Class TextSanitizer extends Error {
 	}
 
 	function purify ($text) {
+		// Remove string like "<![if !supportLists]>" or "<![endif]>"
+		$text = preg_replace('/<!\[.+?\]>/', '', $text);
 		$config = HTMLPurifier_Config::createDefault();
-		//$config->set('HTML','Allowed','a[href|title],strike,sub,span,font,hr,br,tbody,tr,td,table,div,u,p,ul,li,ol,blockquote,em,strong,sup,input,img,textarea,h1,h2,h3,h4,h5,h6,pre,address');
+		//$config->set('HTML.Allowed','a[href|title],strike,sub,span,font,hr,br,tbody,tr,td,table,div,u,p,ul,li,ol,blockquote,em,strong,sup,input,img,textarea,h1,h2,h3,h4,h5,h6,pre,address');
 		$config->set('Cache.DefinitionImpl', NULL);
 		$purifier = new HTMLPurifier($config);
 		return $purifier->purify($text);
@@ -249,8 +251,8 @@ Class TextSanitizer extends Error {
 				$nb_char = $nb_char * ($nb_line - $nb_max + 1);
 			}
 			$summary .= util_make_links((($truncate == true && strlen($arr[$l]) > $nb_char) ?
-											preg_replace('/[^\s]*$/', ' <b>...</b>', substr($arr[$l], 0, $nb_char), 1) :
-											$arr[$l]));
+			preg_replace('/[^\s]*$/', ' <b>...</b>', substr($arr[$l], 0, $nb_char), 1) :
+			$arr[$l]));
 		}
 
 		return $summary;
