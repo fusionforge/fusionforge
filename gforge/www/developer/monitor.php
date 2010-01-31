@@ -46,7 +46,7 @@ if (!session_loggedin()) {
 		$HTML->header (array('title'=>_('Monitor a User')));
 
 		echo '
-			<h2>'._('Monitor a User').'</h2>';
+			<h1>'._('Monitor a User').'</h1>';
 
 		$result = db_query_params ('SELECT * FROM user_diary_monitor WHERE user_id=$1 AND monitored_user=$2;',
 					   array (user_getid(),
@@ -61,9 +61,9 @@ if (!session_loggedin()) {
 							  user_getid ()));
 
 			if (!$result) {
-				echo "<span class=\"error\">"._('Error inserting into user_diary_monitor')."</span>";
+				echo "<div class=\"error\">"._('Error inserting into user_diary_monitor')."</div>";
 			} else {
-				echo "<span class=\"feedback\">"._('User is now being monitored')."</span>";
+				echo "<div class=\"feedback\">"._('User is now being monitored')."</div>";
 				echo _('<p>You will now be emailed this user\'s diary entries.</p><p>To turn off monitoring, simply click the <strong>Monitor user</strong> link again.</p>');
 			}
 
@@ -71,7 +71,7 @@ if (!session_loggedin()) {
 			$result = db_query_params ('DELETE FROM user_diary_monitor WHERE user_id=$1 AND monitored_user=$2',
 						   array (user_getid(),
 							  $diary_user));
-			echo "<span class=\"feedback\">"._('Monitoring has been turned off')."</span>";
+			echo "<div class=\"feedback\">"._('Monitoring has been turned off')."</div>";
 			echo _('You will not receive any more emails from this user');
 	
 		}
