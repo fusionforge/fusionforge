@@ -133,6 +133,7 @@ class ArtifactWorkflow extends Error {
 				$this->_addEvent($from, $node);
 			}
 		}
+		return true;
 	}
 	
 	function getAllowedRoles($from, $to) {
@@ -171,6 +172,7 @@ class ArtifactWorkflow extends Error {
 				$this->_addRole($event_id, $role);
 			}
 		}
+		return true;
 	}
 	
 	function _getEventId($from, $to) {
