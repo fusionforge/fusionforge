@@ -30,16 +30,15 @@
 require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
 
-$user_id = getStringFromRequest('user_id');
-$form_dev = getStringFromRequest('form_dev');
+$user_id = getIntFromRequest('user_id');
 
 if (!$user_id) {
-	$user_id=$form_dev;
+	$user_id = getIntFromRequest('form_dev');
 }
 
 if (isset ($sys_noforcetype) && $sys_noforcetype) {
 	if (!$user_id) {
-		exit_error("Missing User Argument","A user must be specified for this page.");
+		exit_error(_('Missing User Argument'),_('A user must be specified for this page.'));
 	} else {
 		$user =& user_get_object($user_id);
 		if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
