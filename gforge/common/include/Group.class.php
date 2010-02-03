@@ -176,13 +176,6 @@ class Group extends Error {
 	var $membersArr;
 
 	/**
-	 * Permissions data row from db.
-	 * 
-	 * @var array $perm_data_array.
-	 */
-	var $perm_data_array;
-
-	/**
 	 * Whether the use is an admin/super user of this project.
 	 *
 	 * @var bool $is_admin.
@@ -199,9 +192,17 @@ class Group extends Error {
 	/**
 	 * Associative array of data for plugins.
 	 * 
-	 * @var array $plugins_array.
+	 * @var array $plugins_data.
 	 */
-	var $plugins_array;
+	var $plugins_data;
+
+
+	/**
+	 * Associative array of data for the group menu.
+	 *
+	 * @var array $menu_data.
+	 */
+	var $menu_data;
 
 	/**
 	 *	Group - Group object constructor - use group_get_object() to instantiate.
@@ -2515,6 +2516,252 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		return $users;
 	}
 
+	/**
+	 *  getMenu -  get an array that contains data for the group menu
+	 *
+	 *  @param	string	contains the name of the selected menu item
+	 *  @return	array	array containing:
+	 *  		'titles': array that stores the titles of the menu entries
+	 *  		'dirs': array that stores the URLs of the menu entries
+	 *  		'start': URL of the starting page of the project
+	 *  		'admindirs': array that stores the URLs of the admin pages
+	 *    		  for the menu entries, if accessible, false otherwise
+	 *  		'selected': number of the menu entry selected by $toptab
+	 *  		'last_toptab': required internally: stores the
+	 *  		  value of $toptab for the last call to getMenu()
+	 */
+	function &getMenu($toptab = "") {
+		// rebuild menu if it has never been built before, or
+		// if the toptab was set differently
+		if (!isset($this->menu_data)
+		    || ($toptab != "") 
+		    || ($toptab != $this->menu_data['last_toptab']))
+		{
+			$selected = 0;
+			$group = $this->getId();
+
+			$this->menu_data = array () ;
+			$this->menu_data['titles'] = array();
+			$this->menu_data['dirs'] = array();
+			$this->menu_data['admindirs'] = array();
+
+			// Summary
+			$this->menu_data['titles'][] = _('Summary');
+			if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
+				$dir = util_make_url ('/project/?group_id=' . $group);
+			} else {
+				$dir = util_make_url ('/projects/' . $this->getUnixName() .'/');
+			}
+			$this->menu_data['dirs'][] = $dir;
+			$this->menu_data['admindirs'][] = false;
+			if ($toptab == "home") {
+				$selected = (count($this->menu_data['dirs'])-1);
+			}
+			// setting 'start' allows to change the
+			// projects start page
+			$this->menu_data['start'] = $dir;
+			
+			// Project Admin
+			$perm =& $this->getPermission( session_get_user() );
+			if ($perm->isAdmin()) {
+				$this->menu_data['titles'][] = _('Admin');
+				$this->menu_data['dirs'][] = util_make_url ('/project/admin/?group_id=' . $group);
+				$this->menu_data['admindirs'][] = false;
+				if ($toptab == "admin") {
+					$selected = (count($this->menu_data['dirs'])-1);
+				}
+			}
+
+			/* Homepage
+			 // check for use_home_tab?
+			 $TABS_DIRS[]='http://'. $this->getHomePage();
+			 $TABS_TITLES[]=_('Home Page');
+			*/
+
+			// Project Activity tab 
+			$this->menu_data['titles'][] = _('Activity');
+			$this->menu_data['dirs'][] = util_make_url ('/activity/?group_id=' . $group);
+			$this->menu_data['admindirs'][] = false;
+			if ($toptab == "activity") {
+				$selected = (count($this->menu_data['dirs'])-1);
+			}
+
+			// Forums
+			if ($this->usesForum()) {
+				$this->menu_data['titles'][] = _('Forums');
+				$this->menu_data['dirs'][] = util_make_url ('/forum/?group_id=' . $group);
+				if ($perm->isAdmin() || $perm->isForumAdmin()) {
+					$this->menu_data['admindirs'][] = util_make_url('/forum/admin/?group_id='.$group);
+				} else {
+					$this->menu_data['admindirs'][] = false;
+				}
+				if ($toptab == "forums") {
+					$selected = (count($this->menu_data['dirs'])-1);
+				}
+			}
+
+			// Artifact Tracking
+			if ($this->usesTracker()) {
+				$this->menu_data['titles'][] = _('Tracker');
+				$this->menu_data['dirs'][] = util_make_url ('/tracker/?group_id=' . $group);
+				if ($perm->isAdmin() || $perm->isArtifactAdmin()) {
+					$this->menu_data['admindirs'][] = util_make_url('/tracker/admin/?group_id='.$group);
+				} else {
+					$this->menu_data['admindirs'][] = false;
+				}
+				if ($toptab == "tracker" || 
+				    $toptab == "bugs" || 
+				    $toptab == "support" || 
+				    $toptab == "patch") {
+					$selected = (count($this->menu_data['dirs'])-1);
+				}
+			}
+
+			
+			// Mailing Lists
+			if ($this->usesMail()) {
+				$this->menu_data['titles'][] = _('Lists');
+				$this->menu_data['dirs'][] = util_make_url ('/mail/?group_id=' . $group);
+				if ($perm->isAdmin()) {
+					$this->menu_data['admindirs'][] = util_make_url('/mail/admin/?group_id='.$group);
+				} else {
+					$this->menu_data['admindirs'][] = false;
+				}
+				if ($toptab == "mail") {
+					$selected = (count($this->menu_data['dirs'])-1);
+				}
+
+			}
+			
+			// Project/Task Manager
+			if ($this->usesPm()) {
+				$this->menu_data['titles'][] = _('Tasks');
+				$this->menu_data['dirs'][] = util_make_url ('/pm/?group_id=' . $group);
+				if ($perm->isAdmin() || $perm->isPMAdmin()) {
+					$this->menu_data['admindirs'][] = util_make_url ('/pm/admin/?group_id='.$group);
+				} else {
+					$this->menu_data['admindirs'][] = false;
+				}
+				if ($toptab == "pm") {
+					$selected = (count($this->menu_data['dirs'])-1);
+				}
+
+			}
+			
+			// Doc Manager
+			if ($this->usesDocman()) {
+				$this->menu_data['titles'][] = _('Docs');
+				$this->menu_data['dirs'][] = util_make_url ('/docman/?group_id=' . $group);
+				if ($perm->isAdmin() || $perm->isDocEditor()) {
+					$this->menu_data['admindirs'][] = util_make_url ('/docman/admin/?group_id='.$group);
+				} else {
+					$this->menu_data['admindirs'][] = false;
+				}
+				if ($toptab == "docman") {
+					$selected = (count($this->menu_data['dirs'])-1);
+				}
+
+			}
+
+			// Surveys
+			if ($this->usesSurvey()) {
+				$this->menu_data['titles'][] = _('Surveys');
+				$this->menu_data['dirs'][] = util_make_url ('/survey/?group_id=' . $group);
+				if ($perm->isAdmin()) {
+					$this->menu_data['admindirs'][] = util_make_url ('/survey/admin/?group_id='.$group);
+				} else {
+					$this->menu_data['admindirs'][] = false;
+				}
+				if ($toptab == "surveys") {
+					$selected = (count($this->menu_data['dirs'])-1);
+				}
+			}
+
+			// News
+			if ($this->usesNews()) {
+				$this->menu_data['titles'][] = _('News');
+				$this->menu_data['dirs'][] = util_make_url ('/news/?group_id=' . $group);
+				if ($perm->isAdmin()) {
+					$this->menu_data['admindirs'][] = util_make_url ('/news/admin/?group_id='.$group);
+				} else {
+					$this->menu_data['admindirs'][] = false;
+				}
+				if ($toptab == "news") {
+					$selected = (count($this->menu_data['dirs'])-1);
+				}
+			}
+			
+			// SCM systems
+			if ($this->usesSCM()) {
+				$this->menu_data['titles'][] = _('SCM');
+				$this->menu_data['dirs'][] = util_make_url ('/scm/?group_id=' . $group);
+				// eval cvs_flags?
+				if ($perm->isAdmin()) {
+					$this->menu_data['admindirs'][] = util_make_url ('/scm/admin/?group_id='.$group);
+				} else {
+					$this->menu_data['admindirs'][] = false;
+				}
+				if ($toptab == "scm") {
+					$selected = (count($this->menu_data['dirs'])-1);
+				}
+			}
+
+			// groupmenu_after_scm hook
+			$hookParams = array();
+			$hookParams['group_id'] = $group ;
+			$hookParams['DIRS'] =& $this->menu_data['dirs'];
+			$hookParams['TITLES'] =& $this->menu_data['titles'];
+			$hookParams['toptab'] =& $toptab;
+			$hookParams['selected'] =& $selected;
+
+			plugin_hook ("groupmenu_scm", $hookParams) ; 
+
+			// fill up admindirs
+			for ($i = 0; 
+			     $i < count($this->menu_data['dirs']) - count($this->menu_data['admindirs']); 
+			     $i++) {
+				$this->menu_data['admindirs'][] = false;
+			}
+
+			// Downloads
+			if ($this->usesFRS()) {
+				$this->menu_data['titles'][] = _('Files');
+				$this->menu_data['dirs'][] = util_make_url ('/frs/?group_id=' . $group);
+				if ($perm->isAdmin() || $perm->isReleaseTechnician()) {
+					$this->menu_data['admindirs'][] = util_make_url ('/frs/admin/?group_id='.$group);
+				} else {
+					$this->menu_data['admindirs'][] = false;
+				}
+				if ($toptab == "frs") {
+					$selected = (count($this->menu_data['dirs'])-1);
+				}
+			}
+
+			// groupmenu hook
+			$hookParams = array();
+			$hookParams['group'] = $group ;
+			$hookParams['DIRS'] =& $this->menu_data['dirs'];
+			$hookParams['TITLES'] =& $this->menu_data['titles'];
+			$hookParams['toptab'] =& $toptab;
+			$hookParams['selected'] =& $selected;
+				
+			plugin_hook ("groupmenu", $hookParams) ;
+
+			// fill up admindirs
+			for ($i = 0; 
+			     $i < count($this->menu_data['dirs']) - count($this->menu_data['admindirs']); 
+			     $i++) {
+				$this->menu_data['admindirs'][] = false;
+			}
+
+			// store selected menu item (if any)
+			$this->menu_data['selected'] = $selected;
+			if ($toptab != "") {
+				$this->menu_data['last_toptab'] = $toptab;
+			}
+		}
+		return $this->menu_data ;
+	}
 }
 
 /**

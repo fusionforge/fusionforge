@@ -6,7 +6,8 @@
  * for displaying all site dependent HTML, while allowing
  * extendibility/overriding by themes via the Theme class.
  *
- * Make sure browser.php is included _before_ you create an instance of this object.
+ * Make sure browser.php is included _before_ you create an instance
+ * of this object.
  *
  * Geoffrey Herteg, August 29, 2000
  *
@@ -40,15 +41,19 @@ class Layout extends Error {
 	 * Layout() - Constructor
 	 */
 	function Layout() {
-		
-		$this->themeroot=$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'];
-		/* if images directory exists in theme, then use it as imgroot */
-		if (file_exists ($this->themeroot.'/images')){
-			$this->imgroot=util_make_url ('/themes/'.$GLOBALS['sys_theme'].'/images/');
-		}
-		// Constructor for parent class...
+		// determine rootindex
 		if ( file_exists($GLOBALS['sys_custom_path'] . '/index_std.php') )
 			$this->rootindex = $GLOBALS['sys_custom_path'] . '/index_std.php';
+		else
+			$this->rootindex = $GLOBALS['gfwww'].'index_std.php';
+
+		// determine themeroot
+		$this->themeroot = $GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'];
+		/* if images directory exists in theme, then use it as imgroot */
+		if (file_exists ($this->themeroot.'/images')){
+			$this->imgroot = util_make_url ('/themes/'.$GLOBALS['sys_theme'].'/images/');
+		}
+        
 		$this->Error();
 	}
 
@@ -117,7 +122,7 @@ class Layout extends Error {
    		this stylesheet
    		new stylesheets should use the <themename>.css file
 		*/
-		$theme_cssfile=$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'].'/css/'.$GLOBALS['sys_theme'].'.css';
+		$theme_cssfile = $this->themeroot . '/css/'.$GLOBALS['sys_theme'].'.css';
 		if (file_exists($theme_cssfile)){
 			echo '
 	<link rel="stylesheet" type="text/css" href="'.util_make_url ('/themes/'.$GLOBALS['sys_theme'].'/css/'.$GLOBALS['sys_theme'].'.css').'"/>';
@@ -129,7 +134,7 @@ class Layout extends Error {
 		*/
 			echo '
 	<link rel="stylesheet" type="text/css" href="'.util_make_url ('/themes/css/gforge-compat.css').'" />';
-			$theme_cssfile=$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'].'/css/theme.css';
+			$theme_cssfile = $this->themeroot . '/css/theme.css';
 			if (file_exists($theme_cssfile)){
 				echo '
 	<link rel="stylesheet" type="text/css" href="'.util_make_url ('/themes/'.$GLOBALS['sys_theme'].'/css/theme.css').'" />';
@@ -507,13 +512,75 @@ if (isset($params['group']) && $params['group']) {
 	}
 
 	/**
+	 *	quicknav() - Prints out the quicknav menu, contained
+	 *		here in case we want to allow it to be
+	 *		overridden.
+	 *
+	 */
+	function quickNav() {
+		if (!session_loggedin()) {
+			return '';
+		} else {
+			// get all projects that the user belongs to
+			$res = db_query_params ('SELECT group_id FROM groups JOIN user_group USING (group_id) WHERE user_group.user_id=$1 AND groups.status=$2 ORDER BY group_name',
+						array (user_getid(),
+						       'A'));
+			echo db_error();
+			if (!$res || db_numrows($res) < 1) {
+				return '';
+			} else {
+				$ret = '
+		<form class="ff" name="quicknavform">
+			<select class="ff" name="quicknav" onChange="location.href=document.quicknavform.quicknav.value">
+				<option class="ff" value="">'._('Quick Jump To...').'</option>';
+
+				for ($i = 0; $i < db_numrows($res); $i++) {
+					$group_id = db_result($res, $i, 'group_id');
+					$project =& group_get_object($group_id);
+					if (!$project || !is_object($project)) {
+						return;
+					}
+					if ($project->isError()) {
+						//wasn't found or some other problem
+						return;
+					}
+					if (!$project->isProject()) {
+						return;
+					}
+			
+					$menu = $project->getMenu();
+					$ret .= '
+				<option class="ff" value="' . $menu['start'] . '">' 
+						. $project->getPublicName() .'</option>';
+
+					for ($j = 0; $j < count($menu['dirs']); $j++) {
+						$ret .= '
+				<option class="ff" value="' . $menu['dirs'][$j] .'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' 
+							. $menu['titles'][$j] . '</option>';
+						if ($menu['admindirs'][$j]) {
+							$ret .= '
+				<option class="ff" value="' . $menu['admindirs'][$j] 
+					. '">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' 
+					. _('Admin') . '</option>';
+						}
+					}
+				}
+				$ret .= '
+			</select>
+		</form>';
+			}
+		}
+		return $ret;
+	}
+
+	/**
 	 *	projectTabs() - Prints out the project tabs, contained here in case
 	 *		we want to allow it to be overriden
 	 *
 	 *	@param	string	Is the tab currently selected
 	 *	@param	string	Is the group we should look up get title info
 	 */
-	function projectTabs($toptab,$group) {
+	function projectTabs($toptab, $group) {
 		// get group info using the common result set
 		$project =& group_get_object($group);
 		if (!$project || !is_object($project)) {
@@ -527,117 +594,9 @@ if (isset($params['group']) && $params['group']) {
 			return;
 		}
 
-		// Summary
-		if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
-			$TABS_DIRS[]=util_make_url ('/project/?group_id=' . $project->getId());
-		} else {
-			$TABS_DIRS[]=util_make_url ('/projects/' . $project->getUnixName() .'/');
-		}
-		$TABS_TITLES[]=_('Summary');
-		(($toptab == 'home') ? $selected=(count($TABS_TITLES)-1) : '' );
+		$menu = $project->getMenu($toptab);
 
-		// Project Admin
-		$perm =& $project->getPermission( session_get_user() );
-		if ($perm->isAdmin()) {
-			$TABS_DIRS[]=util_make_url ('/project/admin/?group_id=' . $group);
-			$TABS_TITLES[]=_('Admin');
-			(($toptab == 'admin') ? $selected=(count($TABS_TITLES)-1) : '' );
-		}
-		/* Homepage
-		$TABS_DIRS[]='http://'. $project->getHomePage();
-		$TABS_TITLES[]=_('Home Page');
-		*/
-
-		// Project Activity tab 
-
-		$TABS_DIRS[]=util_make_url ('/activity/?group_id=' . $group);
-		$TABS_TITLES[]=_('Activity');
-		(($toptab == 'activity') ? $selected=(count($TABS_TITLES)-1) : '' );
-
-		// Forums
-		if ($project->usesForum()) {
-			$TABS_DIRS[]=util_make_url ('/forum/?group_id='.$group);
-			$TABS_TITLES[]=_('Forums');
-			(($toptab == 'forums') ? $selected=(count($TABS_TITLES)-1) : '' );
-		}
-
-		// Artifact Tracking
-		if ($project->usesTracker()) {
-			$TABS_DIRS[]=util_make_url ('/tracker/?group_id='.$group);
-			$TABS_TITLES[]=_('Tracker');
-			(($toptab == 'tracker' || $toptab == 'bugs' || $toptab == 'support' || $toptab == 'patch')
-				? $selected=(count($TABS_TITLES)-1) : '' );
-		}
-
-		// Mailing Lists
-		if ($project->usesMail()) {
-			$TABS_DIRS[]=util_make_url ('/mail/?group_id='.$group);
-			$TABS_TITLES[]=_('Lists');
-			(($toptab == 'mail') ? $selected=(count($TABS_TITLES)-1) : '' );
-		}
-
-		// Project Manager
-		if ($project->usesPm()) {
-			$TABS_DIRS[]=util_make_url ('/pm/?group_id='.$group);
-			$TABS_TITLES[]=_('Tasks');
-			(($toptab == 'pm') ? $selected=(count($TABS_TITLES)-1) : '' );
-		}
-
-		// Doc Manager
-		if ($project->usesDocman()) {
-			$TABS_DIRS[]=util_make_url ('/docman/?group_id='.$group);
-			$TABS_TITLES[]=_('Docs');
-			(($toptab == 'docman') ? $selected=(count($TABS_TITLES)-1) : '' );
-		}
-
-		// Surveys
-		if ($project->usesSurvey()) {
-			$TABS_DIRS[]=util_make_url ('/survey/?group_id='.$group);
-			$TABS_TITLES[]=_('Surveys');
-			(($toptab == 'surveys') ? $selected=(count($TABS_TITLES)-1) : '' );
-		}
-
-		//newsbytes
-		if ($project->usesNews()) {
-			$TABS_DIRS[]=util_make_url ('/news/?group_id='.$group);
-			$TABS_TITLES[]=_('News');
-			(($toptab == 'news') ? $selected=(count($TABS_TITLES)-1) : '' );
-		}
-
-		// SCM systems
-		if ($project->usesSCM()) {
-			$TABS_DIRS[]=util_make_url ('/scm/?group_id='.$group);
-			$TABS_TITLES[]=_('SCM');
-			(($toptab == 'scm') ? $selected=(count($TABS_TITLES)-1) : '' );
-		}
-
-		// groupmenu_after_scm hook
-		$hookParams['DIRS'] = &$TABS_DIRS;
-		$hookParams['TITLES'] = &$TABS_TITLES;
-		$hookParams['toptab'] = &$toptab;
-		$hookParams['selected'] = &$selected;
-		$hookParams['group_id'] = $group ;
-				
-		plugin_hook ("groupmenu_scm", $hookParams) ; 
-
-		// Downloads
-		if ($project->usesFRS()) {
-			$TABS_DIRS[]=util_make_url ('/frs/?group_id='.$group);
-			$TABS_TITLES[]=_('Files');
-			(($toptab == 'frs') ? $selected=(count($TABS_TITLES)-1) : '' );
-		}
-
-		// groupmenu hook
-		$hookParams['DIRS'] = &$TABS_DIRS;
-		$hookParams['TITLES'] = &$TABS_TITLES;
-		$hookParams['toptab'] = &$toptab;
-		$hookParams['selected'] = &$selected;
-		$hookParams['group'] = $group;
-				
-		plugin_hook ("groupmenu", $hookParams) ; 
-
-		echo $this->tabGenerator($TABS_DIRS,$TABS_TITLES,true,$selected,'white','100%');
-
+		echo $this->tabGenerator($menu['dirs'], $menu['titles'], true, $menu['selected'], 'white', '100%');
 	}
 
 	function tabGenerator($TABS_DIRS,$TABS_TITLES,$nested=false,$selected=false,$sel_tab_bgcolor='white',$total_width='100%') {
@@ -1105,118 +1064,6 @@ if (isset($params['group']) && $params['group']) {
 	        return db_result($res,0,'theme_id');
 	}
 
-	function quickNav() {
-		if (!session_loggedin()) {
-			return '';
-		} else {
-			$res = db_query_params ('SELECT * FROM groups JOIN user_group USING (group_id) WHERE user_group.user_id=$1 AND groups.status=$2 ORDER BY group_name',
-						array (user_getid(),
-						       'A'));
-			echo db_error();
-			if (!$res || db_numrows($res) < 1) {
-				return '';
-			} else {
-				$ret = '
-		<form class="ff" name="quicknavform">
-			<select class="ff" name="quicknav" onChange="location.href=document.quicknavform.quicknav.value">';
-				$ret .= '
-				<option class="ff" value="">'._('Quick Jump To...').'</option>';
-				for ($i=0; $i<db_numrows($res); $i++) {
-					$ret .= '
-				<option class="ff" value="'.util_make_url_g (db_result($res,$i,'unix_group_name'),db_result($res,$i,'group_id')).'">'.db_result($res,$i,'group_name').'</option>';
-					if (trim(db_result($res,$i,'admin_flags'))=='A') {
-					$ret .= '
-				<option class="ff" value="'.util_make_url ('/project/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
-					}
-		//tracker
-					if (db_result($res,$i,'use_tracker')) {
-					$ret .= '
-				<option class="ff" value="'.util_make_url ('/tracker/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tracker</option>';
-						if (db_result($res,$i,'admin_flags') || db_result($res,$i,'artifact_flags')) {
-					$ret .= '
-				<option class="ff" value="'.util_make_url ('/tracker/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
-						}
-					}
-		//task mgr
-					if (db_result($res,$i,'use_pm')) {
-					$ret .= '
-				<option class="ff" value="'.util_make_url ('/pm/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Task Manager</option>';
-						if (trim(db_result($res,$i,'admin_flags')) =='A' || db_result($res,$i,'project_flags')) {
-					$ret .= '
-				<option class="ff" value="'.util_make_url ('/pm/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
-						}
-					}
-		//FRS
-					if (db_result($res,$i,'use_frs')) {
-					$ret .= '
-				<option class="ff" value="'.util_make_url('/frs/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Files</option>';
-						if (trim(db_result($res,$i,'admin_flags'))=='A' || db_result($res,$i,'release_flags')) {
-					$ret .= '
-				<option class="ff" value="'.util_make_url('/frs/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
-						}
-					}
-		//SCM
-					if (db_result($res,$i,'use_scm')) {
-					$ret .= '
-				<option class="ff" value="'.util_make_url('/scm/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SCM</option>';
-						/*if (db_result($res,$i,'admin_flags') || db_result($res,$i,'project_flags')) {
-					$ret .= '
-				<option class="ff" value="'.util_make_url('/pm/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
-						} */
-					}
-		//forum
-					if (db_result($res,$i,'use_forum')) {
-					$ret .= '
-				<option class="ff" value="'.util_make_url('/forum/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Forum</option>';
-						if (trim(db_result($res,$i,'admin_flags'))=='A' || db_result($res,$i,'forum_flags')) {
-					$ret .= '
-				<option class="ff" value="'.util_make_url('/forum/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
-						}
-					}
-		//mail
-					if (db_result($res,$i,'use_mail')) {
-					$ret .= '
-				<option class="ff" value="'.util_make_url('/mail/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lists</option>';
-						if (trim(db_result($res,$i,'admin_flags'))=='A') {
-					$ret .= '
-				<option class="ff" value="'.util_make_url('/mail/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
-						}
-					}
-		//doc
-					if (db_result($res,$i,'use_docman')) {
-					$ret .= '
-				<option class="ff" value="'.util_make_url('/docman/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Docs</option>';
-						if (trim(db_result($res,$i,'admin_flags'))=='A' || db_result($res,$i,'doc_flags')) {
-					$ret .= '
-				<option class="ff" value="'.util_make_url('/docman/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
-						}
-					}
-		//news
-					if (db_result($res,$i,'use_news')) {
-					$ret .= '
-				<option class="ff" value="'.util_make_url('/news/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;News</option>';
-						if (trim(db_result($res,$i,'admin_flags'))=='A') {
-					$ret .= '
-				<option class="ff" value="'.util_make_url('/news/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
-						}
-					}
-		//survey
-					if (db_result($res,$i,'use_survey')) {
-					$ret .= '
-				<option class="ff" value="'.util_make_url('/survey/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Surveys</option>';
-						if (trim(db_result($res,$i,'admin_flags'))=='A') {
-					$ret .= '
-				<option class="ff" value="'.util_make_url('/survey/admin/?group_id='.db_result($res,$i,'group_id')).'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';
-						}
-					}
-				}	
-				$ret .= '
-			</select>
-		</form>';
-			}
-		}
-		return $ret;
-	}
 
 	function confirmBox($msg, $params, $buttons, $image='*none*') {
 	 	if ($image == '*none*') {
