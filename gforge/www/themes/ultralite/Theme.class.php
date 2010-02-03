@@ -23,7 +23,7 @@ class Theme extends Layout {
 		} else {
 			$params['title'] = "$sys_name: " . $params['title'];
 		}
-		print '<?xml version="1.0" encoding="utf-8"';
+		print '<?xml version="1.0" encoding="utf-8"?>';
 		?>
 		<!DOCTYPE html
 		PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
