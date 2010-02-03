@@ -56,6 +56,9 @@ function ctMenuInfo (id, idSub)
 
 // Globals
 
+var _ctSelected = null;
+var _ctSelectedId = null;
+
 var _ctIDSubMenuCount = 0;
 var _ctIDSubMenu = 'ctSubTreeID';		// for creating submenu id
 
@@ -120,6 +123,11 @@ function ctNewSubMenuID ()
 function ctActionItem ()
 {
 	return ' onmouseover="ctItemMouseOver (this.parentNode)" onmouseout="ctItemMouseOut (this.parentNode)" onmousedown="ctItemMouseDown (this.parentNode)" onmouseup="ctItemMouseUp (this.parentNode)"';
+}
+
+function ctActionTitle ()
+{
+	return ' onmouseup="ctSetSelectedItem(this.parentNode)" onmousedown="ctItemMouseDown (this.parentNode)"';
 }
 
 //
@@ -305,6 +313,7 @@ function ctDraw (id, tree, nodeProperties, prefix, hideType, expandLevel)
 	var str = ctDrawSub (tree, true, null, treeIndex, 0, nodeProperties, prefix, '');
 	obj.innerHTML = str;
 	eval (_ctMenuInitStr);
+	//alert(_ctMenuInitStr);
 	_ctMenuInitStr = '';
 
 	var endIndex = _ctItemList.length;
@@ -312,8 +321,14 @@ function ctDraw (id, tree, nodeProperties, prefix, hideType, expandLevel)
 	_ctTreeList[treeIndex].beginIndex = beginIndex;
 	_ctTreeList[treeIndex].endIndex = endIndex;
 
-	if (expandLevel)
-		ctExpandTree (id, expandLevel);
+	if (_ctSelectedId != null)
+	{
+		ctExpandTree (id, endIndex);
+		ctSelectSelected ();
+	}
+	else
+		if (expandLevel)
+			ctExpandTree (id, expandLevel);
 
 	//document.write ('<textarea wrap="off" rows="15" cols="80">' + str + '</textarea><br>');
 
@@ -378,10 +393,10 @@ function ctDrawSub (subMenu, isMain, id, treeIndex, level, nodeProperties, prefi
 		// Also, it tells status of the submenu
 		//
 		str += '<tr' + className;
-		if (hasChild)
+//		if (hasChild)
 			str += ' id="JSCookTreeFolderClosed">';
-		else
-			str += ' id="JSCookTreeItem">';
+//		else
+//			str += ' id="JSCookTreeItem">';
 
 		classStr = prefix + (hasChild ? 'Folder' : 'Item');
 
@@ -406,8 +421,10 @@ function ctDrawSub (subMenu, isMain, id, treeIndex, level, nodeProperties, prefi
 		}
 
 		actionStr = ctActionItem ();
+		actionStr2 = ctActionTitle ();
 
-		str += '<td class="' + classStr + 'Left"' + actionStr + '>';
+		str += '<td class="' + classStr + 'Left"' + actionStr + ' ' + item[4] + '>';
+
 		// add connect part
 		if (hasChild)
 		{
@@ -440,7 +457,7 @@ function ctDrawSub (subMenu, isMain, id, treeIndex, level, nodeProperties, prefi
 		}
 		str += '</td>';
 
-		str += '<td class="' + classStr + 'Text"' + actionStr + '>';
+		str += '<td class="' + classStr + 'Text"' + actionStr2 + ' ' + item[4] + '>';
 
 		str += '<a';
 
@@ -451,12 +468,17 @@ function ctDrawSub (subMenu, isMain, id, treeIndex, level, nodeProperties, prefi
 				str += ' target="' + item[3] + '"';
 		}
 
-		if (item[4] != null)
-			str += ' title="' + item[4] + '"';
-		else
-			str += ' title="' + item[1] + '"';
+//		if (item[4] != null)
+//			str += ' title="' + item[4] + '"';
+//		else
+//			str += ' title="' + item[1] + '"';
 
 		str += '>' + item[1] + '</a></td>';
+
+		if (item[1] == _ctSelected)
+		{
+			_ctSelectedId = itemID;
+		}
 
 		str += '<td class="' + classStr + 'Right"' + actionStr + '>';
 
@@ -568,6 +590,17 @@ function ctItemMouseUp (item)
 		}
 	}
 	ctSetSelectedItem (item);
+}
+
+function ctSelectSelected ()
+{
+	if (_ctSelectedId != null)
+	{
+		var item = ctGetObject (_ctSelectedId).parentNode;
+		ctOpenFolder (item);
+		ctSetSelectedItem (item);
+		ctItemMouseDown (item);
+	}
 }
 
 //
@@ -828,6 +861,11 @@ function ctGetObject (id)
 	if (document.all)
 		return document.all[id];
 	return document.getElementById (id);
+}
+
+function ctSetSelected (item)
+{
+	_ctSelected = item;
 }
 
 //
