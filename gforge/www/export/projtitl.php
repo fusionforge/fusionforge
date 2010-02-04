@@ -71,7 +71,7 @@ if (!$group->isPublic()) {
     }
 }
 
-echo '<h2>Welcome to '.$group->getPublicName().' project!</h2>
+echo '<h1>Welcome to '.$group->getPublicName().' project!</h1>
 <p>';
 
 echo $group->getDescription();

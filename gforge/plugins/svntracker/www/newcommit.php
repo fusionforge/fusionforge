@@ -131,7 +131,7 @@ function addArtifactLog($Config, $GroupId, $Num)
 {
 	global $file, $svn_tracker_debug;
 	$return = array();
-	$Result = db_query_params ('SELECT * from artifact,artifact_group_list WHERE 
+	$Result = db_query_params ('SELECT * FROM artifact,artifact_group_list WHERE 
 artifact.group_artifact_id=artifact_group_list.group_artifact_id 
 AND artifact_group_list.group_id=$1 AND artifact.artifact_id=$2',
 				   array ($GroupId,
@@ -165,6 +165,7 @@ AND artifact_group_list.group_id=$1 AND artifact.artifact_id=$2',
 							 $Config['ActualVersion'],
 							 $Config['UserName'])) ;
 			if(!$DBRes) {
+				$return['Error']="Problems with Artifact $Num: ".db_error($DBRes)."\n";
 				db_rollback();
 			} else {
 				db_commit();
@@ -190,11 +191,10 @@ AND artifact_group_list.group_id=$1 AND artifact.artifact_id=$2',
 function addTaskLog($Config, $GroupId, $Num)
 {
 	$return = array();
-	$Result = db_query_params ('SELECT * from project_task,project_group_list WHERE 
-project_task.group_project_id=
-project_group_list.group_project_id 
-AND project_task.project_task_id=$1 AND 
- project_group_list.group_id=$2',
+	$Result = db_query_params ('SELECT * FROM project_task,project_group_list
+WHERE project_task.group_project_id=project_group_list.group_project_id 
+AND project_task.project_task_id=$1
+AND project_group_list.group_id=$2',
 			array ($Num,
 				$GroupId));
 	$Rows = db_numrows($Result);

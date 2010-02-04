@@ -97,6 +97,7 @@ class ForumAdmin extends Error {
 	
 	function PrintAdminPendingOption($forum_id) {
 		echo '
+			<p>
 			<a href="pending.php?action=view_pending&amp;group_id=' . $this->group_id . '&amp;forum_id=' . $forum_id . '">' . _('Manage Pending Messages').'</a><br /></p>';
 	}
 	
