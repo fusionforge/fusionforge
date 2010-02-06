@@ -3497,6 +3497,8 @@ gforge/www/plugins/svntracker -text
 gforge/www/plugins/webcalendar -text
 gforge/www/pm/csv.php -text
 gforge/www/pm/format_csv.php -text
+gforge/www/project/admin/tools.php -text
+gforge/www/project/admin/users.php -text
 gforge/www/scm/browser.php -text
 gforge/www/scm/viewvc/templates/docroot/images/annotate.png -text
 gforge/www/scm/viewvc/templates/docroot/images/back.png -text

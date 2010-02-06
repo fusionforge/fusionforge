@@ -58,8 +58,9 @@ function project_admin_header($params) {
 	$labels = array();
 	$links = array();
 	
-	//$labels[] = _('Admin');
-	$labels[] = _('Edit Public Info');
+	$labels[] = _('Project Info');
+	$labels[] = _('Users');
+	$labels[] = _('Tools');
 	$labels[] = _('Project History');
 	if($GLOBALS['sys_use_people']) {
 		$labels[] = _('Post Jobs');
@@ -79,8 +80,9 @@ function project_admin_header($params) {
 	}
 	plugin_hook("quota_label_project_admin");
 	
-	//$links[] = '/project/admin/?group_id='.$group_id;
-	$links[] = '/project/admin/editgroupinfo.php?group_id='.$group_id;
+	$links[] = '/project/admin/?group_id='.$group_id;
+	$links[] = '/project/admin/users.php?group_id='.$group_id;
+	$links[] = '/project/admin/tools.php?group_id='.$group_id;
 	$links[] = '/project/admin/history.php?group_id='.$group_id;
 	if($GLOBALS['sys_use_people']) {
 		$links[] = '/people/createjob.php?group_id='.$group_id;
@@ -149,14 +151,15 @@ function show_grouphistory ($group_id) {
 		this group_id
 	*/
 
+	echo '<h1>'._('Project History').'</h1>';
+
 	$result=group_get_history($group_id);
 	$rows=db_numrows($result);
 	
 	if ($rows > 0) {
 	
-		echo '
-		<h3>'._('Group Change History').'</h3>
-		<p/>';
+		echo '<p>'._('This log will show who made significant changes to your project and when').'</p>';
+
 		$title_arr=array();
 		$title_arr[]=_('Field');
 		$title_arr[]=_('Old Value');
@@ -186,10 +189,9 @@ function show_grouphistory ($group_id) {
 		echo $GLOBALS['HTML']->listTableBottom();
 
 	} else {
-		echo '  
-		<h3>'._('No changes').'</h3>';
-	}	   
-}	   
+		echo '<p>'._('No changes').'</p>';
+	}
+}
 
 /*
 	prdb_namespace_seek - check that a projects' potential db name hasn't
