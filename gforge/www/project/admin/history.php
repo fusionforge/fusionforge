@@ -32,10 +32,6 @@ session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
 project_admin_header(array('title'=>_('Project History'),'group'=>$group_id));
 
-?>
-
-<p><?php echo _('This log will show who made significant changes to your project and when') ?>.</p>
-<?php
 echo show_grouphistory($group_id);
 
 project_admin_footer(array());
