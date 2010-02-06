@@ -3,7 +3,7 @@
   deny from all
 </Files>
 
-NameVirtualHost *:80
+#NameVirtualHost *:80
 # This is magic for virtual hosting!
 UseCanonicalName Off
 
