@@ -169,10 +169,9 @@ function stats_site_project_result( $report, $orderby, $projects, $trove ) {
 	global $allowed_orderby_vals ;
 
 	if (!$orderby) {
-		$order_clause = 'ORDER BY group_name ASC' ;
+		$order_clause = 'group_name ASC' ;
 	} else {
-		$order_clause = 'ORDER BY ' ;
-		$order_clause .= util_ensure_value_in_set ($orderby,
+		$order_clause = util_ensure_value_in_set ($orderby,
 							   $allowed_orderby_vals) ;
 		$order_clause .= ' DESC, group_name ASC';
 	}
