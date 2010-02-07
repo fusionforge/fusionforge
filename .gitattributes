@@ -146,6 +146,8 @@ gforge/packaging/control/011meta-minimal -text
 gforge/packaging/control/011meta-minimal.shortdesc -text
 gforge/packaging/control/012meta-full -text
 gforge/packaging/control/012meta-full.shortdesc -text
+gforge/packaging/control/013meta-transition -text
+gforge/packaging/control/013meta-transition.shortdesc -text
 gforge/packaging/control/020common -text
 gforge/packaging/control/020common.shortdesc -text
 gforge/packaging/control/030web-apache2 -text

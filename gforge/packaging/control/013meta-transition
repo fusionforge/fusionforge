@@ -1,0 +1,4 @@
+Package: @OLDPACKAGE@
+Architecture: all
+Depends: @PACKAGE@-standard
+Description: Dummy upgrade package for FusionForge

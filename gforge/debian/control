@@ -11,7 +11,7 @@ Vcs-Bzr: http://scm.fusionforge.org/bzr/fusionforge/svn-trunk-ro/
 
 Package: fusionforge-standard
 Architecture: all
-Conflicts: sourceforge, gforge-cvs, gforge-common (<< ${source:Version}), gforge
+Conflicts: sourceforge, gforge-cvs, gforge-common (<< ${source:Version})
 Replaces: gforge
 Provides: gforge
 Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, gforge-common (=${source:Version}), gforge-web-apache2 | gforge-web, gforge-db-postgresql | gforge-db, gforge-mta-exim4 | gforge-mta, gforge-shell-postgresql | gforge-shell, gforge-lists-mailman | gforge-lists, ${misc:Depends}
@@ -54,6 +54,19 @@ Description: FusionForge collaborative development tool - full metapackage
  integrated into one web site and managed through a web interface.
  .
  This metapackage installs a full FusionForge site with all plugins.
+
+Package: gforge
+Architecture: all
+Depends: fusionforge-standard
+Description: Dummy upgrade package for FusionForge
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This is a transitional package and can safely be removed; see the
+ fusionforge-standard package instead.
 
 Package: gforge-common
 Architecture: all
