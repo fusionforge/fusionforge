@@ -74,12 +74,12 @@ fi
 if [ "$type" = "redhat" ]
 then
 	yum -y install php
-	php gforge-install-1-deps.php $deps
-	php gforge-install-2.php "$hostname" apache apache
+	php fusionforge-install-1-deps.php $deps
+	php fusionforge-install-2.php "$hostname" apache apache
 
 	if [ $mode = "install" ]
 	then
-		php gforge-install-3-db.php
+		php fusionforge-install-3-db.php
 		php db/startpoint.php $version
 
 		# Post installation fixes.
@@ -103,12 +103,12 @@ then
 elif [ "$type" = "suse" ]
 then
 	yast -i php5
-	php gforge-install-1-deps.php $deps
-	php gforge-install-2.php "$hostname" wwwrun www
+	php fusionforge-install-1-deps.php $deps
+	php fusionforge-install-2.php "$hostname" wwwrun www
 
 	if [ $mode = "install" ]
 	then
-		php gforge-install-3-db.php
+		php fusionforge-install-3-db.php
 		php db/startpoint.php $version
 
 		# Post installation fixes.
