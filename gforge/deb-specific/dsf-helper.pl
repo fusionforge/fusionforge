@@ -73,6 +73,8 @@ sub get_chunk {
 @package_list = split /\n/, qx! dh_listpackages ! ;
 my $package_name = qx! grep ^PACKAGE= debian/rules | cut -d= -f2 ! ;
 $package_name =~ s/\n//;
+my $old_package_name = qx! grep ^OLDPACKAGE= debian/rules | cut -d= -f2 ! ;
+$old_package_name =~ s/\n//;
 my $forge_name = qx! grep ^FORGENAME= debian/rules | cut -d= -f2 ! ;
 $forge_name =~ s/\n//;
 
@@ -125,6 +127,7 @@ if ($ARGV[0] && $ARGV[0] eq "--clean") {
 	   $dest =~ s/\n\n+/\n\n/g ;
        }
        $dest =~ s/\@PACKAGE\@/$package_name/g ;
+       $dest =~ s/\@OLDPACKAGE\@/$old_package_name/g ;
        $dest =~ s/\@FORGENAME\@/$forge_name/g ;
 
        open D, "> $destfile" ;

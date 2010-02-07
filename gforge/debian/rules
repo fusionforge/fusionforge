@@ -20,7 +20,7 @@ include /usr/share/dpatch/dpatch.make
 CRONDFILES=$(patsubst packaging/cron.d/%,debian/$(OLDPACKAGE)-%.cron.d,$(wildcard packaging/cron.d/[a-z]*))
 DIRSFILES=$(patsubst packaging/dirs/%,debian/$(OLDPACKAGE)-%.dirs,$(wildcard packaging/dirs/[a-z]*))
 INSTALLFILES=$(patsubst packaging/install/%,debian/$(OLDPACKAGE)-%.install,$(wildcard packaging/install/[a-z]*))
-DOCSFILES=$(patsubst packaging/docs/oldpkgname%,debian/$(OLDPACKAGE)%.docs,$(wildcard packaging/docs/pkgname*)) $(patsubst packaging/docs/pkgname%,debian/$(PACKAGE)%.docs,$(wildcard packaging/docs/pkgname*))
+DOCSFILES=$(patsubst packaging/docs/oldpkgname%,debian/$(OLDPACKAGE)%.docs,$(wildcard packaging/docs/oldpkgname*)) $(patsubst packaging/docs/pkgname%,debian/$(PACKAGE)%.docs,$(wildcard packaging/docs/pkgname*))
 POFILES=$(patsubst debian/dsf-po/%,debian/po/%,$(wildcard debian/dsf-po/*) debian/po/POTFILES.in)
 
 remove-binary-files:
@@ -38,8 +38,10 @@ debian/$(OLDPACKAGE)-%.dirs:
 debian/$(OLDPACKAGE)-%.install:
 	cp $(CURDIR)/packaging/install/$* $@ 
 
-debian/%.docs:
-	cp $(CURDIR)/packaging/docs/$(patsubst $(OLDPACKAGE)%,pkgname%,$*) $@
+debian/$(OLDPACKAGE)-%.docs:
+	cp $(CURDIR)/packaging/docs/$(patsubst $(OLDPACKAGE)%,oldpkgname%,$*) $@
+debian/$(PACKAGE)-%.docs:
+	cp $(CURDIR)/packaging/docs/$(patsubst $(PACKAGE)%,pkgname%,$*) $@
 
 debian/control: $(wildcard packaging/control/*)
 	ls $(CURDIR)/packaging/control/[0-9][0-9][0-9]* | grep -v shortdesc | grep -v scmcpold | while read file ; do cat $${file}; if [ -f $${file}.shortdesc ] ; then cat $(CURDIR)/packaging/control/AAAdesc; echo ' .'; cat $${file}.shortdesc; fi; echo '';  done | $(SED_REPLACE) > $@
