@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for @PACKAGE@
+# postinst script for @OLDPACKAGE@
 #
 # see: dh_installdeb(1)
 
@@ -49,33 +49,33 @@ case "$1" in
 	    add_onevar_mainconfile cronolog_path /usr/bin/cronolog
 	fi
 
-	if [ ! -e /etc/@PACKAGE@/ssl-cert.pem ] || [ ! -e /etc/@PACKAGE@/ssl-cert.key ] ; then
+	if [ ! -e /etc/@OLDPACKAGE@/ssl-cert.pem ] || [ ! -e /etc/@OLDPACKAGE@/ssl-cert.key ] ; then
 	    # Uh-oh, no SSL cert, let's make sure at least a dummy one exists.
 	    if [ ! -e /etc/ssl/certs/ssl-cert-snakeoil.pem ] || [ ! -e /etc/ssl/private/ssl-cert-snakeoil.key ] ; then
 		# What, not even the snakeoil cert is there?  Let's generate it
 		make-ssl-cert generate-default-snakeoil
 	    fi
 	    # Right.  At this point, it should be safe to set the symlinks.
-	    ln -s /etc/ssl/certs/ssl-cert-snakeoil.pem /etc/@PACKAGE@/ssl-cert.pem
-	    ln -s /etc/ssl/private/ssl-cert-snakeoil.key /etc/@PACKAGE@/ssl-cert.key
-	    if grep -q ^sys_use_ssl=false$ /etc/@PACKAGE@/@PACKAGE@.conf \
-		&& grep -q ^sys_sslcrt=$ /etc/@PACKAGE@/@PACKAGE@.conf \
-		&& grep -q ^sys_sslkey=$ /etc/@PACKAGE@/@PACKAGE@.conf ; then
+	    ln -s /etc/ssl/certs/ssl-cert-snakeoil.pem /etc/@OLDPACKAGE@/ssl-cert.pem
+	    ln -s /etc/ssl/private/ssl-cert-snakeoil.key /etc/@OLDPACKAGE@/ssl-cert.key
+	    if grep -q ^sys_use_ssl=false$ /etc/@OLDPACKAGE@/@OLDPACKAGE@.conf \
+		&& grep -q ^sys_sslcrt=$ /etc/@OLDPACKAGE@/@OLDPACKAGE@.conf \
+		&& grep -q ^sys_sslkey=$ /etc/@OLDPACKAGE@/@OLDPACKAGE@.conf ; then
 		# Okay, previous installations failed to locate SSL certs
 		# and disabled SSL altogether.  Let's fix that
-		sed -i -e 's,^sys_use_ssl=false$,sys_use_ssl=true,' /etc/@PACKAGE@/@PACKAGE@.conf 
-		sed -i -e 's,^sys_sslcrt=$,sys_sslcrt=/etc/@PACKAGE@/ssl-cert.pem,' /etc/@PACKAGE@/@PACKAGE@.conf 
-		sed -i -e 's,^sys_sslkey=$,sys_sslkey=/etc/@PACKAGE@/ssl-cert.key,' /etc/@PACKAGE@/@PACKAGE@.conf
+		sed -i -e 's,^sys_use_ssl=false$,sys_use_ssl=true,' /etc/@OLDPACKAGE@/@OLDPACKAGE@.conf 
+		sed -i -e 's,^sys_sslcrt=$,sys_sslcrt=/etc/@OLDPACKAGE@/ssl-cert.pem,' /etc/@OLDPACKAGE@/@OLDPACKAGE@.conf 
+		sed -i -e 's,^sys_sslkey=$,sys_sslkey=/etc/@OLDPACKAGE@/ssl-cert.key,' /etc/@OLDPACKAGE@/@OLDPACKAGE@.conf
 	    fi
 	fi
 	
-        @PACKAGE@-config
+        @OLDPACKAGE@-config
 
 	db_stop
         # Setup our Apache
-	touch /var/lib/@PACKAGE@/etc/templates/httpd.vhosts  && \
-		chown @PACKAGE@:@PACKAGE@ /var/lib/@PACKAGE@/etc/templates/httpd.vhosts && \
-		/usr/share/@PACKAGE@/bin/create-vhosts.sh --norestart
+	touch /var/lib/@OLDPACKAGE@/etc/templates/httpd.vhosts  && \
+		chown @OLDPACKAGE@:@OLDPACKAGE@ /var/lib/@OLDPACKAGE@/etc/templates/httpd.vhosts && \
+		/usr/share/@OLDPACKAGE@/bin/create-vhosts.sh --norestart
 
 	# Enable required modules
 	DEBIAN_FRONTEND=noninteractive a2enmod php5 || true
@@ -88,13 +88,13 @@ case "$1" in
 	DEBIAN_FRONTEND=noninteractive a2enmod proxy_http || true
 	
 	# Enable the @FORGENAME@ configuration
-	if [ -e /etc/apache2/conf.d/@PACKAGE@.httpd.conf ] ; then
-	    rm -f /etc/apache2/conf.d/@PACKAGE@.httpd.conf
+	if [ -e /etc/apache2/conf.d/@OLDPACKAGE@.httpd.conf ] ; then
+	    rm -f /etc/apache2/conf.d/@OLDPACKAGE@.httpd.conf
 	fi
-	if [ -d /etc/apache2/sites-available ] && [ ! -e /etc/apache2/sites-available/@PACKAGE@ ] ; then
-	    ln -s /etc/@PACKAGE@/httpd.conf /etc/apache2/sites-available/@PACKAGE@
+	if [ -d /etc/apache2/sites-available ] && [ ! -e /etc/apache2/sites-available/@OLDPACKAGE@ ] ; then
+	    ln -s /etc/@OLDPACKAGE@/httpd.conf /etc/apache2/sites-available/@OLDPACKAGE@
 	fi
-	a2ensite @PACKAGE@
+	a2ensite @OLDPACKAGE@
 	
 	# Make Apache see these new changes
 	invoke-rc.d apache2 restart || true

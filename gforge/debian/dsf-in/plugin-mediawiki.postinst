@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for @PACKAGE@-plugin-mediawiki
+# postinst script for @OLDPACKAGE@-plugin-mediawiki
 #
 # see: dh_installdeb(1)
 
@@ -25,8 +25,8 @@ set -e
 
 case "$1" in
     configure)
-	/usr/share/@PACKAGE@/bin/register-plugin mediawiki "Mediawiki"
-	@PACKAGE@-config
+	/usr/share/@OLDPACKAGE@/bin/register-plugin mediawiki "Mediawiki"
+	@OLDPACKAGE@-config
 	for flavour in apache apache-perl apache-ssl apache2 ; do
 	    if [ -x /usr/sbin/$flavour ]; then
 		invoke-rc.d $flavour reload || true

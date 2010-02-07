@@ -1,5 +1,5 @@
 #! /bin/sh
-# prerm script for @PACKAGE@-plugin-scmdarcs
+# prerm script for @OLDPACKAGE@-plugin-scmdarcs
 #
 # see: dh_installdeb(1)
 set -e
@@ -22,7 +22,7 @@ case "$1" in
     remove|deconfigure)
 	if [ -f /var/run/postgresql/.s.PGSQL.5432 ]
 	then
-		/usr/share/@PACKAGE@/bin/unregister-plugin scmdarcs
+		/usr/share/@OLDPACKAGE@/bin/unregister-plugin scmdarcs
 	else
 		echo "WARNING: database not available to unregister scmdarcs plugin"
 	fi

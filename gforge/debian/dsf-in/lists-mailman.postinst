@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for @PACKAGE@
+# postinst script for @OLDPACKAGE@
 #
 # see: dh_installdeb(1)
 
@@ -27,11 +27,11 @@ set -e
 
 case "$1" in
     configure)
-	@PACKAGE@-config
+	@OLDPACKAGE@-config
 	
 	echo "Fixing past damage in mailing-lists..."
 	if [ -z "$2" ] || dpkg --compare-versions $2 le 3rc2-4 ; then
-	    su -s /bin/sh @PACKAGE@ -c /usr/share/@PACKAGE@/bin/fix-mailing-lists.pl
+	    su -s /bin/sh @OLDPACKAGE@ -c /usr/share/@OLDPACKAGE@/bin/fix-mailing-lists.pl
 	fi
     ;;
 

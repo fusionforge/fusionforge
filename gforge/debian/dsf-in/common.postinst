@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for @PACKAGE@
+# postinst script for @OLDPACKAGE@
 #
 # see: dh_installdeb(1)
 
@@ -27,12 +27,12 @@ set -e
 
 case "$1" in
     configure)
-	adduser --system --group --home /var/www/@PACKAGE@ @PACKAGE@ > /dev/null 2>&1
-	adduser --system --group --home /var/lib/@PACKAGE@/chroot/cvsroot anonscm-@PACKAGE@ > /dev/null 2>&1
-	adduser --system --group --home /var/lib/@PACKAGE@/chroot/cvsroot scm-@PACKAGE@ > /dev/null 2>&1
-	adduser --system --group --home /var/lib/@PACKAGE@/chroot/cvsroot www-@PACKAGE@ > /dev/null 2>&1
+	adduser --system --group --home /var/www/@OLDPACKAGE@ @OLDPACKAGE@ > /dev/null 2>&1
+	adduser --system --group --home /var/lib/@OLDPACKAGE@/chroot/cvsroot anonscm-@OLDPACKAGE@ > /dev/null 2>&1
+	adduser --system --group --home /var/lib/@OLDPACKAGE@/chroot/cvsroot scm-@OLDPACKAGE@ > /dev/null 2>&1
+	adduser --system --group --home /var/lib/@OLDPACKAGE@/chroot/cvsroot www-@OLDPACKAGE@ > /dev/null 2>&1
 
-	@PACKAGE@-config
+	@OLDPACKAGE@-config
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

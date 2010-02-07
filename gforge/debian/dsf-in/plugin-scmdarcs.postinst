@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for @PACKAGE@-plugin-scmdarcs
+# postinst script for @OLDPACKAGE@-plugin-scmdarcs
 #
 # see: dh_installdeb(1)
 
@@ -25,10 +25,10 @@ set -e
 
 case "$1" in
     configure)
-	@PACKAGE@-config
+	@OLDPACKAGE@-config
 
 	# Prepare database
-	su -s /bin/sh @PACKAGE@ -c '/usr/share/gforge/bin/register-plugin scmdarcs "Darcs"'
+	su -s /bin/sh @OLDPACKAGE@ -c '/usr/share/gforge/bin/register-plugin scmdarcs "Darcs"'
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

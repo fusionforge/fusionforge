@@ -1,5 +1,5 @@
 #! /bin/sh
-# prerm script for @PACKAGE@-plugin-globalsearch
+# prerm script for @OLDPACKAGE@-plugin-globalsearch
 #
 # see: dh_installdeb(1)
 
@@ -19,8 +19,8 @@ set -e
 
 case "$1" in
     remove|deconfigure)
-        /usr/share/@PACKAGE@/bin/unregister-plugin globalsearch
-        /usr/share/@PACKAGE@/plugins/globalsearch/bin/db-delete.pl
+        /usr/share/@OLDPACKAGE@/bin/unregister-plugin globalsearch
+        /usr/share/@OLDPACKAGE@/plugins/globalsearch/bin/db-delete.pl
         ;;
     upgrade|failed-upgrade)
         ;;

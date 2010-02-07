@@ -1,5 +1,5 @@
 #! /bin/sh
-# postrm script for @PACKAGE@
+# postrm script for @OLDPACKAGE@
 #
 # see: dh_installdeb(1)
 
@@ -18,7 +18,7 @@ set -e
 
 case "$1" in
     purge|remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
-	@PACKAGE@-config
+	@OLDPACKAGE@-config
         # Make Apache see these new changes
 	invoke-rc.d apache2 reload || true
 	;;

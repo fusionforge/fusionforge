@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for @PACKAGE@-plugin-scmcpold
+# postinst script for @OLDPACKAGE@-plugin-scmcpold
 #
 # see: dh_installdeb(1)
 
@@ -25,10 +25,10 @@ set -e
 
 case "$1" in
     configure)
-	@PACKAGE@-config
+	@OLDPACKAGE@-config
 
 	# Prepare database
-	su -s /bin/sh @PACKAGE@ -c '/usr/share/gforge/bin/register-plugin scmcpold "CPOLD"'
+	su -s /bin/sh @OLDPACKAGE@ -c '/usr/share/gforge/bin/register-plugin scmcpold "CPOLD"'
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

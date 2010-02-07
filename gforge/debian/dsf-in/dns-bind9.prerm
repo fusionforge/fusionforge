@@ -1,5 +1,5 @@
 #! /bin/sh
-# prerm script for @PACKAGE@
+# prerm script for @OLDPACKAGE@
 #
 # see: dh_installdeb(1)
 
@@ -23,16 +23,16 @@ case "$1" in
 	db_title "Unconfiguring @FORGENAME@"
 
 	# Unpatch Bind configuration files
-	/usr/share/@PACKAGE@/bin/install-dns.sh purge-files
-	ucf --debconf-ok /etc/bind/named.conf.@PACKAGE@-new /etc/bind/named.conf
-	rm /etc/bind/named.conf.@PACKAGE@-new
+	/usr/share/@OLDPACKAGE@/bin/install-dns.sh purge-files
+	ucf --debconf-ok /etc/bind/named.conf.@OLDPACKAGE@-new /etc/bind/named.conf
+	rm /etc/bind/named.conf.@OLDPACKAGE@-new
 	ucf --purge /etc/bind/named.conf
 	
 	# Clean debconf after ourselves
 	db_stop
 
         # DNS config removal
-	/usr/share/@PACKAGE@/bin/install-dns.sh purge
+	/usr/share/@OLDPACKAGE@/bin/install-dns.sh purge
 
 	;;
     upgrade|deconfigure|failed-upgrade)

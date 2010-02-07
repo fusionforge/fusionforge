@@ -1,5 +1,5 @@
 #! /bin/sh
-# prerm script for @PACKAGE@
+# prerm script for @OLDPACKAGE@
 #
 # see: dh_installdeb(1)
 
@@ -19,8 +19,8 @@ set -e
 
 case "$1" in
     remove)
-	a2dissite @PACKAGE@ || true
-	rm -f /etc/apache2/sites-available/@PACKAGE@
+	a2dissite @OLDPACKAGE@ || true
+	rm -f /etc/apache2/sites-available/@OLDPACKAGE@
 	invoke-rc.d apache2 reload || true
 	;;
     upgrade|deconfigure|failed-upgrade)

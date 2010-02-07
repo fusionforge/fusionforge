@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for @PACKAGE@-plugin-scmbzr
+# postinst script for @OLDPACKAGE@-plugin-scmbzr
 #
 # see: dh_installdeb(1)
 
@@ -25,10 +25,10 @@ set -e
 
 case "$1" in
     configure)
-	@PACKAGE@-config
+	@OLDPACKAGE@-config
 
 	# Prepare database
-	su -s /bin/sh @PACKAGE@ -c '/usr/share/gforge/bin/register-plugin scmbzr "Bazaar"'
+	su -s /bin/sh @OLDPACKAGE@ -c '/usr/share/gforge/bin/register-plugin scmbzr "Bazaar"'
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

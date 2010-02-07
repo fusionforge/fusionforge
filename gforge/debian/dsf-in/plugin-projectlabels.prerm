@@ -1,5 +1,5 @@
 #! /bin/sh
-# prerm script for @PACKAGE@-plugin-projectlabels
+# prerm script for @OLDPACKAGE@-plugin-projectlabels
 #
 # see: dh_installdeb(1)
 
@@ -19,8 +19,8 @@ set -e
 
 case "$1" in
     remove|deconfigure)
-        /usr/share/@PACKAGE@/bin/unregister-plugin projectlabels
-        /usr/share/@PACKAGE@/plugins/projectlabels/bin/db-delete.pl
+        /usr/share/@OLDPACKAGE@/bin/unregister-plugin projectlabels
+        /usr/share/@OLDPACKAGE@/plugins/projectlabels/bin/db-delete.pl
         ;;
     upgrade|failed-upgrade)
         ;;

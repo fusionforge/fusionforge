@@ -1,5 +1,5 @@
 #! /bin/sh
-# prerm script for @PACKAGE@
+# prerm script for @OLDPACKAGE@
 #
 # see: dh_installdeb(1)
 
@@ -21,7 +21,7 @@ fi
 
 case "$1" in
     remove)
-	rm -f /etc/@PACKAGE@/local.pl
+	rm -f /etc/@OLDPACKAGE@/local.pl
 	;;
     upgrade|deconfigure|failed-upgrade)
         ;;

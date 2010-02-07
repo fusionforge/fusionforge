@@ -1,18 +1,18 @@
 #! /bin/sh
 ### BEGIN INIT INFO
-# Provides:          @PACKAGE@-plugin-scmbzr
+# Provides:          @OLDPACKAGE@-plugin-scmbzr
 # Required-Start:    $local_fs $network
 # Required-Stop:     $local_fs $network
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
 ### END INIT INFO
 #
-# Init script for @PACKAGE@-plugin-scmbzr Debian package.
+# Init script for @OLDPACKAGE@-plugin-scmbzr Debian package.
 # Based on the script provided by loggerhead.
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 DESC="Loggerhead Bazaar Branch Browser for @FORGENAME@"
-NAME=@PACKAGE@-plugin-scmbzr
+NAME=@OLDPACKAGE@-plugin-scmbzr
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
 
@@ -20,9 +20,9 @@ SCRIPTNAME=/etc/init.d/$NAME
 [ -x /usr/bin/serve-branches ] || exit 0
 
 # Check if configuration file is present
-[ ! -f /etc/@PACKAGE@/plugins/scmbzr/serve-branches.conf ] && exit 0
+[ ! -f /etc/@OLDPACKAGE@/plugins/scmbzr/serve-branches.conf ] && exit 0
 
-. /etc/@PACKAGE@/plugins/scmbzr/serve-branches.conf
+. /etc/@OLDPACKAGE@/plugins/scmbzr/serve-branches.conf
 
 #
 #	Function that starts the daemon/service.

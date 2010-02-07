@@ -1,5 +1,5 @@
 #! /bin/sh
-# prerm script for @PACKAGE@
+# prerm script for @OLDPACKAGE@
 #
 # see: dh_installdeb(1)
 
@@ -22,11 +22,11 @@ case "$1" in
 	db_title "Unconfiguring @FORGENAME@"
 
 	# Unpatch Postfix configuration files
-	/usr/share/@PACKAGE@/bin/install-postfix.sh purge-files
-	ucf --debconf-ok /etc/aliases.@PACKAGE@-new /etc/aliases
-	ucf --debconf-ok /etc/postfix/main.cf.@PACKAGE@-new /etc/postfix/main.cf
-	rm /etc/aliases.@PACKAGE@-new
-	rm /etc/postfix/main.cf.@PACKAGE@-new
+	/usr/share/@OLDPACKAGE@/bin/install-postfix.sh purge-files
+	ucf --debconf-ok /etc/aliases.@OLDPACKAGE@-new /etc/aliases
+	ucf --debconf-ok /etc/postfix/main.cf.@OLDPACKAGE@-new /etc/postfix/main.cf
+	rm /etc/aliases.@OLDPACKAGE@-new
+	rm /etc/postfix/main.cf.@OLDPACKAGE@-new
 	ucf --purge /etc/aliases
 	ucf --purge /etc/postfix/main.cf
 
@@ -34,7 +34,7 @@ case "$1" in
 	db_stop
 
         # Exim config removal
-	/usr/share/@PACKAGE@/bin/install-postfix.sh purge
+	/usr/share/@OLDPACKAGE@/bin/install-postfix.sh purge
 	;;
     upgrade|deconfigure|failed-upgrade)
         ;;

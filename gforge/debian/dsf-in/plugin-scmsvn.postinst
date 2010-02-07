@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for @PACKAGE@-plugin-scmsvn
+# postinst script for @OLDPACKAGE@-plugin-scmsvn
 #
 # see: dh_installdeb(1)
 
@@ -25,10 +25,10 @@ set -e
 
 case "$1" in
     configure)
-	@PACKAGE@-config
+	@OLDPACKAGE@-config
 
 	# Prepare database
-	su -s /bin/sh @PACKAGE@ -c '/usr/share/gforge/bin/register-plugin scmsvn "Subversion"'
+	su -s /bin/sh @OLDPACKAGE@ -c '/usr/share/gforge/bin/register-plugin scmsvn "Subversion"'
 	test -f /etc/default/apache2 && . /etc/default/apache2
 	if [ "$NO_START" != "0" ]; then
 		if [ -x /usr/sbin/apache ]; then
@@ -40,7 +40,7 @@ case "$1" in
 		fi
 	fi
 	# Setup inetd
-	/usr/share/@PACKAGE@/plugins/scmsvn/bin/install-svn.sh configure
+	/usr/share/@OLDPACKAGE@/plugins/scmsvn/bin/install-svn.sh configure
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

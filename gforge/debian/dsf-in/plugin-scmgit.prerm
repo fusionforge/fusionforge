@@ -1,5 +1,5 @@
 #! /bin/sh
-# prerm script for @PACKAGE@-plugin-scmgit
+# prerm script for @OLDPACKAGE@-plugin-scmgit
 #
 # see: dh_installdeb(1)
 set -e
@@ -22,7 +22,7 @@ case "$1" in
     remove|deconfigure)
 	if [ -f /var/run/postgresql/.s.PGSQL.5432 ]
 	then
-		/usr/share/@PACKAGE@/bin/unregister-plugin scmgit
+		/usr/share/@OLDPACKAGE@/bin/unregister-plugin scmgit
 	else
 		echo "WARNING: database not available to unregister scmgit plugin"
 	fi
