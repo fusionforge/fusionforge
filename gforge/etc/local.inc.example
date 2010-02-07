@@ -20,20 +20,19 @@ $sys_database_type='pgsql';
 // FusionForge hostnames
 //
 // Hostnames should be fully qualified domain names (FQDNs); using short names
-// would be prettier but would stop you from distributing your SourceForge
-// implementation across multiple domains.
+// would be prettier but would stop you from distributing your implementation
+// across multiple domains.
 //
 // Of course, if you have a lot of machines serving a particular purpose
 // such as FTP or for shell accounts, the "hostname" here might be in
 // reality an addr_list of machines that is serviced by a round-robin
 // mechanism or something fancy like a local-director.
 //
-// The default GForge domain
-// this is used where ever the "naked" form of the GForge domain
+// The default FusionForge domain
+// this is used where ever the "naked" form of the FusionForge domain
 // might be used.  E.g., "mailto:admin@gforge.net"
 $sys_default_domain = 'gforge.company.com';
 $sys_forum_return_domain = "gforge.company.com";
-//$sys_fallback_domain = 'gforge2.company.com';
 
 // Machine used for downloading sources/packages
 $sys_download_host = 'download.gforge.company.com';
