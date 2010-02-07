@@ -5,7 +5,7 @@ Maintainer: Roland Mas <lolando@debian.org>
 Uploaders: Christian Bayle <bayle@debian.org>
 Build-Depends-Indep: sharutils, docbook-to-man, devscripts
 Build-Depends: debhelper (>= 7), dpatch, perl, gettext
-Standards-Version: 3.8.3
+Standards-Version: 3.8.4
 Homepage: http://fusionforge.org/
 Vcs-Bzr: http://scm.fusionforge.org/bzr/fusionforge/svn-trunk-ro/
 
@@ -15,7 +15,7 @@ Conflicts: sourceforge, gforge-cvs, gforge-common (<< ${source:Version})
 Replaces: gforge
 Provides: gforge
 Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, gforge-common (=${source:Version}), gforge-web-apache2 | gforge-web, gforge-db-postgresql | gforge-db, gforge-mta-exim4 | gforge-mta, gforge-shell-postgresql | gforge-shell, gforge-lists-mailman | gforge-lists, ${misc:Depends}
-Recommends: gforge-plugin-scm
+Recommends: gforge-plugin-scmsvn | gforge-plugin-scm
 Description: FusionForge collaborative development tool - standard metapackage
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -57,7 +57,7 @@ Description: FusionForge collaborative development tool - full metapackage
 
 Package: gforge
 Architecture: all
-Depends: fusionforge-standard
+Depends: fusionforge-standard, ${misc:Depends}
 Description: Dummy upgrade package for FusionForge
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
