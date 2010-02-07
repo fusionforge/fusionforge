@@ -20,7 +20,7 @@ include /usr/share/dpatch/dpatch.make
 CRONDFILES=$(patsubst packaging/cron.d/%,debian/$(OLDPACKAGE)-%.cron.d,$(wildcard packaging/cron.d/[a-z]*))
 DIRSFILES=$(patsubst packaging/dirs/%,debian/$(OLDPACKAGE)-%.dirs,$(wildcard packaging/dirs/[a-z]*))
 INSTALLFILES=$(patsubst packaging/install/%,debian/$(OLDPACKAGE)-%.install,$(wildcard packaging/install/[a-z]*))
-DOCSFILES=$(patsubst packaging/docs/pkgname%,debian/$(OLDPACKAGE)%.docs,$(wildcard packaging/docs/pkgname*))
+DOCSFILES=$(patsubst packaging/docs/oldpkgname%,debian/$(OLDPACKAGE)%.docs,$(wildcard packaging/docs/pkgname*)) $(patsubst packaging/docs/pkgname%,debian/$(PACKAGE)%.docs,$(wildcard packaging/docs/pkgname*))
 POFILES=$(patsubst debian/dsf-po/%,debian/po/%,$(wildcard debian/dsf-po/*) debian/po/POTFILES.in)
 
 remove-binary-files:

@@ -231,8 +231,9 @@ gforge/packaging/dirs/plugin-scmhg -text
 gforge/packaging/dirs/plugin-scmsvn -text
 gforge/packaging/dirs/web-apache2 -text
 gforge/packaging/dirs/web-apache2-vhosts -text
+gforge/packaging/docs/oldpkgname-web-apache2 -text
 gforge/packaging/docs/pkgname-full -text
-gforge/packaging/docs/pkgname-web-apache2 -text
+gforge/packaging/docs/pkgname-standard -text
 gforge/packaging/install/common -text
 gforge/packaging/install/db-postgresql -text
 gforge/packaging/install/dns-bind9 -text
