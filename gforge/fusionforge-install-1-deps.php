@@ -32,7 +32,7 @@ define ("NORMAL", "\033[00m" );
 define ("RED", "\033[01;31m" );
 
 function printUsage() {
-	echo "Usage: gforge-install-1-deps [RHEL4|RHEL5|DEBIAN|FEDORA|CENTOS|ARK|SUSE|OPENSUSE]\n";
+	echo "Usage: fusionforge-install-1-deps [RHEL4|RHEL5|DEBIAN|FEDORA|CENTOS|ARK|SUSE|OPENSUSE]\n";
 }
 
 function INFO($message)

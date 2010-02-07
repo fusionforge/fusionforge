@@ -79,7 +79,7 @@ $gforge_lib_dir = '/opt/gforge';
 
 if (!is_dir($gforge_lib_dir))
 {
-	die("Error: GForge folder doesn't exist. Run gforge-install-2.php first.");
+	die("Error: GForge folder doesn't exist. Run fusionforge-install-2.php first.");
 }
 
 

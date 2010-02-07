@@ -20,20 +20,19 @@ $sys_database_type='pgsql';
 // FusionForge hostnames
 //
 // Hostnames should be fully qualified domain names (FQDNs); using short names
-// would be prettier but would stop you from distributing your SourceForge
-// implementation across multiple domains.
+// would be prettier but would stop you from distributing your implementation
+// across multiple domains.
 //
 // Of course, if you have a lot of machines serving a particular purpose
 // such as FTP or for shell accounts, the "hostname" here might be in
 // reality an addr_list of machines that is serviced by a round-robin
 // mechanism or something fancy like a local-director.
 //
-// The default GForge domain
-// this is used where ever the "naked" form of the GForge domain
+// The default FusionForge domain
+// this is used where ever the "naked" form of the FusionForge domain
 // might be used.  E.g., "mailto:admin@gforge.net"
 $sys_default_domain = 'gforge.company.com';
 $sys_forum_return_domain = "gforge.company.com";
-//$sys_fallback_domain = 'gforge2.company.com';
 
 // Machine used for downloading sources/packages
 $sys_download_host = 'download.gforge.company.com';
@@ -153,11 +152,11 @@ $sys_use_mail=true;
 $sys_use_survey=true;
 $sys_use_frs=true;
 $sys_use_fti=false;
-$sys_use_ftp=true;
+$sys_use_ftp=false;
 $sys_use_trove=true;
-$sys_use_snippet=true;
+$sys_use_snippet=false;
 $sys_use_ssl=false;
-$sys_use_people=true;
+$sys_use_people=false;
 $sys_use_shell=true;
 $sys_use_private_project=true;
 $sys_use_diary=true;
@@ -173,7 +172,7 @@ $sys_use_ftpuploads=false;
 $sys_use_gateways=true;
 
 // Enable/Disable the ability to add additionnal vhost for a project
-$sys_use_project_vhost=true;
+$sys_use_project_vhost=false;
 // Enable/Disable the ability to have database for a project (backend not implemented)
 $sys_use_project_database=false;
 // Enable/Disable the ability to add images for a project (frontend not implemented)
