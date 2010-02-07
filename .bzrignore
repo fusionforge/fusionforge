@@ -1,7 +1,7 @@
-gforge_*.dsc
-gforge_*.tar.gz
-gforge_*.orig.tar.gz
-gforge_*.diff.gz
-gforge_*.build
-gforge_*_source.changes
+fusionforge_*.dsc
+fusionforge_*.tar.gz
+fusionforge_*.orig.tar.gz
+fusionforge_*.diff.gz
+fusionforge_*.build
+fusionforge_*_source.changes
 tarballs
