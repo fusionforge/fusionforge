@@ -15,18 +15,15 @@
 # Author: Alain Peyrat <aljeux@free.fr>
 #
 
-
-#hostname="`hostname`.`dnsdomainname`"
-
-if [ $# -ne 1  ]; then
-	echo 1>&2 Usage: $0 hostname
-	exit 127
-fi
-
 hostname=$1
 type=""
 msg=""
 distrib=""
+
+if [ ! "$hostname" ]
+then
+	hostname=`hostname -f`
+fi
 
 if [ -f "/etc/redhat-release" ]
 then
