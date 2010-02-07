@@ -72,10 +72,6 @@ case "$1" in
         @OLDPACKAGE@-config
 
 	db_stop
-        # Setup our Apache
-	touch /var/lib/@OLDPACKAGE@/etc/templates/httpd.vhosts  && \
-		chown @OLDPACKAGE@:@OLDPACKAGE@ /var/lib/@OLDPACKAGE@/etc/templates/httpd.vhosts && \
-		/usr/share/@OLDPACKAGE@/bin/create-vhosts.sh --norestart
 
 	# Enable required modules
 	DEBIAN_FRONTEND=noninteractive a2enmod php5 || true

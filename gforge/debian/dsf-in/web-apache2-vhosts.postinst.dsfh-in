@@ -28,6 +28,13 @@ set -e
 case "$1" in
     configure)
         @OLDPACKAGE@-config
+
+	db_stop
+        # Setup our Apache
+	touch /var/lib/@OLDPACKAGE@/etc/templates/httpd.vhosts  && \
+		chown @OLDPACKAGE@:@OLDPACKAGE@ /var/lib/@OLDPACKAGE@/etc/templates/httpd.vhosts && \
+		/usr/share/@OLDPACKAGE@/bin/create-vhosts.sh --norestart
+
 	# Make Apache see these new changes
 	invoke-rc.d apache2 reload || true
     ;;
