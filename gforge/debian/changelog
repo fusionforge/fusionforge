@@ -1,8 +1,10 @@
 fusionforge (4.8.55-2) experimental; urgency=low
 
   * Renamed source package.
+  * Also renamed binary meta-packages, now split into three parts:
+    fusionforge-basic, fusionforge-standard and fusionforge-full.
 
- -- Roland Mas <lolando@debian.org>  Sun, 07 Feb 2010 16:21:15 +0100
+ -- Roland Mas <lolando@debian.org>  Sun, 07 Feb 2010 20:46:14 +0100
 
 gforge (4.8.55-1) experimental; urgency=low
   
