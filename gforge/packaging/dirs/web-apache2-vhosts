@@ -1,0 +1,6 @@
+usr/share/gforge/etc/httpd.d
+usr/share/gforge/bin
+var/lib/gforge/etc
+var/lib/gforge/etc/templates
+etc/gforge
+etc/logrotate.d

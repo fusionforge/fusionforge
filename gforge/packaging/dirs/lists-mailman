@@ -1,3 +1,4 @@
 etc/gforge
 usr/share/gforge/bin
+usr/share/gforge/etc/httpd.d/
 var/lib/gforge/etc

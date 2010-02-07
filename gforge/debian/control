@@ -54,6 +54,19 @@ Description: collaborative development tool - web part (using Apache)
  This package contains the files needed to run the web part of
  FusionForge on an Apache webserver.
 
+Package: gforge-web-apache2-vhosts
+Architecture: all
+Depends: gforge-web-apache2, ${misc:Depends}
+Description: collaborative development tool - web vhosts (using Apache)
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This package contains the files needed to run project vhosts
+ FusionForge on an Apache webserver.
+
 Package: gforge-web-apache
 Architecture: all
 Depends: gforge-web-apache2, ${misc:Depends}

@@ -98,6 +98,8 @@ gforge/debian/dsf-in/plugin-scmhg.postinst -text
 gforge/debian/dsf-in/plugin-scmhg.prerm -text
 gforge/debian/dsf-in/plugin-scmsvn.postinst -text
 gforge/debian/dsf-in/plugin-scmsvn.prerm -text
+gforge/debian/dsf-in/web-apache2-vhosts.postinst.dsfh-in -text
+gforge/debian/dsf-in/web-apache2-vhosts.postrm.dsfh-in -text
 gforge/debian/dsf-in/web-apache2.config.dsfh-in -text
 gforge/debian/dsf-in/web-apache2.postinst.dsfh-in -text
 gforge/debian/dsf-in/web-apache2.prerm -text
@@ -144,6 +146,8 @@ gforge/packaging/control/020common -text
 gforge/packaging/control/020common.shortdesc -text
 gforge/packaging/control/030web-apache2 -text
 gforge/packaging/control/030web-apache2.shortdesc -text
+gforge/packaging/control/035web-apache2-vhosts -text
+gforge/packaging/control/035web-apache2-vhosts.shortdesc -text
 gforge/packaging/control/040web-apache -text
 gforge/packaging/control/040web-apache.shortdesc -text
 gforge/packaging/control/050db-postgresql -text
@@ -208,6 +212,7 @@ gforge/packaging/cron.d/plugin-globalsearch -text
 gforge/packaging/cron.d/plugin-mediawiki -text
 gforge/packaging/cron.d/shell-postgresql -text
 gforge/packaging/cron.d/web-apache2 -text
+gforge/packaging/cron.d/web-apache2-vhosts -text
 gforge/packaging/dirs/plugin-extratabs -text
 gforge/packaging/dirs/plugin-globalsearch -text
 gforge/packaging/dirs/plugin-mediawiki -text
@@ -221,6 +226,7 @@ gforge/packaging/dirs/plugin-scmgit -text
 gforge/packaging/dirs/plugin-scmhg -text
 gforge/packaging/dirs/plugin-scmsvn -text
 gforge/packaging/dirs/web-apache2 -text
+gforge/packaging/dirs/web-apache2-vhosts -text
 gforge/packaging/docs/pkgname-web-apache2 -text
 gforge/packaging/install/common -text
 gforge/packaging/install/db-postgresql -text
@@ -244,6 +250,7 @@ gforge/packaging/install/plugin-scmhg -text
 gforge/packaging/install/plugin-scmsvn -text
 gforge/packaging/install/shell-postgresql -text
 gforge/packaging/install/web-apache2 -text
+gforge/packaging/install/web-apache2-vhosts -text
 gforge/plugins/contribtracker/INSTALL -text
 gforge/plugins/contribtracker/bin/db-delete.pl -text
 gforge/plugins/contribtracker/bin/db-upgrade.pl -text
