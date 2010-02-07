@@ -1,6 +1,6 @@
-Package: @PACKAGE@-ftp-proftpd
+Package: @OLDPACKAGE@-ftp-proftpd
 Architecture: all
-Depends: @PACKAGE@-common, @PACKAGE@-shell-postgresql | @PACKAGE@-shell, proftpd, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, php5-cli, ${misc:Depends}
-Provides: @PACKAGE@-ftp
-Conflicts: @PACKAGE@-ftp
+Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-shell-postgresql | @OLDPACKAGE@-shell, proftpd, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, php5-cli, ${misc:Depends}
+Provides: @OLDPACKAGE@-ftp
+Conflicts: @OLDPACKAGE@-ftp
 Description: collaborative development tool - FTP management (using ProFTPd)

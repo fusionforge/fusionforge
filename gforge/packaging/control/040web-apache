@@ -1,4 +1,4 @@
-Package: @PACKAGE@-web-apache
+Package: @OLDPACKAGE@-web-apache
 Architecture: all
-Depends: @PACKAGE@-web-apache2, ${misc:Depends}
-Description: transition package to @PACKAGE@-web-apache2
+Depends: @OLDPACKAGE@-web-apache2, ${misc:Depends}
+Description: transition package to @OLDPACKAGE@-web-apache2

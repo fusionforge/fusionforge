@@ -3,21 +3,24 @@
 # GNU copyright 1997 to 1999 by Joey Hess (sample file)
 # Copyright 2000 to 2002 by Roland Mas and Christian Bayle for the Sourceforge package
 # Copyright 2002 to 2008 by Roland Mas and Christian Bayle for the Gforge package
-# Copyright 2008 to 2009 by Roland Mas and Christian Bayle for the FusionForge package
+# Copyright 2008 to 2010 by Roland Mas and Christian Bayle for the FusionForge package
 
-PACKAGE=gforge
+OLDPACKAGE=gforge
+PACKAGE=fusionforge
 SRCPACKAGE=fusionforge
 FORGENAME=FusionForge
+
+SED_REPLACE=sed -e 's/@PACKAGE@/$(PACKAGE)/g' -e 's/@SRCPACKAGE@/$(SRCPACKAGE)/g' -e 's/@OLDPACKAGE@/$(OLDPACKAGE)/g' -e 's/@FORGENAME@/$(FORGENAME)/g'
 
 default:
 	@echo $(PACKAGE)
 
 include /usr/share/dpatch/dpatch.make
 
-CRONDFILES=$(patsubst packaging/cron.d/%,debian/$(PACKAGE)-%.cron.d,$(wildcard packaging/cron.d/[a-z]*))
-DIRSFILES=$(patsubst packaging/dirs/%,debian/$(PACKAGE)-%.dirs,$(wildcard packaging/dirs/[a-z]*))
-INSTALLFILES=$(patsubst packaging/install/%,debian/$(PACKAGE)-%.install,$(wildcard packaging/install/[a-z]*))
-DOCSFILES=$(patsubst packaging/docs/pkgname%,debian/$(PACKAGE)%.docs,$(wildcard packaging/docs/pkgname*))
+CRONDFILES=$(patsubst packaging/cron.d/%,debian/$(OLDPACKAGE)-%.cron.d,$(wildcard packaging/cron.d/[a-z]*))
+DIRSFILES=$(patsubst packaging/dirs/%,debian/$(OLDPACKAGE)-%.dirs,$(wildcard packaging/dirs/[a-z]*))
+INSTALLFILES=$(patsubst packaging/install/%,debian/$(OLDPACKAGE)-%.install,$(wildcard packaging/install/[a-z]*))
+DOCSFILES=$(patsubst packaging/docs/pkgname%,debian/$(OLDPACKAGE)%.docs,$(wildcard packaging/docs/pkgname*))
 POFILES=$(patsubst debian/dsf-po/%,debian/po/%,$(wildcard debian/dsf-po/*) debian/po/POTFILES.in)
 
 remove-binary-files:
@@ -26,26 +29,26 @@ remove-binary-files:
 .PHONY: conffiles
 conffiles: $(CRONDFILES) $(DIRSFILES) $(INSTALLFILES) $(DOCSFILES) debian/control
 
-debian/$(PACKAGE)-%.cron.d:
-	(cat $(CURDIR)/packaging/cron.d/00phpcron ; sed -e 's/\$$FFUSER/$(PACKAGE)/g' $(CURDIR)/packaging/cron.d/$*) > $@
+debian/$(OLDPACKAGE)-%.cron.d:
+	(cat $(CURDIR)/packaging/cron.d/00phpcron ; sed -e 's/\$$FFUSER/$(OLDPACKAGE)/g' $(CURDIR)/packaging/cron.d/$*) > $@
 
-debian/$(PACKAGE)-%.dirs:
+debian/$(OLDPACKAGE)-%.dirs:
 	cp $(CURDIR)/packaging/dirs/$* $@ 
 
-debian/$(PACKAGE)-%.install:
+debian/$(OLDPACKAGE)-%.install:
 	cp $(CURDIR)/packaging/install/$* $@ 
 
 debian/%.docs:
-	cp $(CURDIR)/packaging/docs/$(patsubst $(PACKAGE)%,pkgname%,$*) $@
+	cp $(CURDIR)/packaging/docs/$(patsubst $(OLDPACKAGE)%,pkgname%,$*) $@
 
 debian/control: $(wildcard packaging/control/*)
-	ls $(CURDIR)/packaging/control/[0-9][0-9][0-9]* | grep -v shortdesc | grep -v scmcpold | while read file ; do cat $${file}; if [ -f $${file}.shortdesc ] ; then cat $(CURDIR)/packaging/control/AAAdesc; echo ' .'; cat $${file}.shortdesc; fi; echo '';  done | sed -e 's/@PACKAGE@/$(PACKAGE)/g' -e 's/@SRCPACKAGE@/$(SRCPACKAGE)/g' > $@
+	ls $(CURDIR)/packaging/control/[0-9][0-9][0-9]* | grep -v shortdesc | grep -v scmcpold | while read file ; do cat $${file}; if [ -f $${file}.shortdesc ] ; then cat $(CURDIR)/packaging/control/AAAdesc; echo ' .'; cat $${file}.shortdesc; fi; echo '';  done | $(SED_REPLACE) > $@
 
 debian/po/templates.pot: $(wildcard debian/dsf-in/*.templates.dsfh-in) $(wildcard debian/dsf-helper/*.templates)
 	@debconf-updatepo --podir=debian/dsf-po
 
 debian/po/%:
-	cat $(patsubst debian/po/%,debian/dsf-po/%,$@) | sed 's/@PACKAGE@/$(PACKAGE)/g' | sed 's/@FORGENAME@/$(FORGENAME)/g' > $@
+	cat $(patsubst debian/po/%,debian/dsf-po/%,$@) | $(SED_REPLACE) > $@
 
 .PHONY: patch
 
@@ -53,13 +56,13 @@ build: patch remove-binary-files debian/po/templates.pot conffiles
 	dh $@
 
 # Build man pages from Docbook sources
-	cat debian/dsf-in/config.sgml | sed 's/@PACKAGE@/$(PACKAGE)/g' | sed 's/@FORGENAME@/$(FORGENAME)/g' > debian/$(PACKAGE)-config.sgml
-	cat debian/dsf-in/common.manpages | sed 's/@PACKAGE@/$(PACKAGE)/g' | sed 's/@FORGENAME@/$(FORGENAME)/g' > debian/$(PACKAGE)-common.manpages
+	cat debian/dsf-in/config.sgml | $(SED_REPLACE) > debian/$(OLDPACKAGE)-config.sgml
+	cat debian/dsf-in/common.manpages | $(SED_REPLACE) > debian/$(OLDPACKAGE)-common.manpages
 	/usr/bin/docbook-to-man debian/cvssh.sgml > cvssh.1
-	/usr/bin/docbook-to-man debian/$(PACKAGE)-config.sgml > $(PACKAGE)-config.1
+	/usr/bin/docbook-to-man debian/$(OLDPACKAGE)-config.sgml > $(OLDPACKAGE)-config.1
 
 # Build README.Debian from template
-	cat debian/README.Debian.tmpl | sed 's/@PACKAGE@/$(PACKAGE)/g' | sed 's/@FORGENAME@/$(FORGENAME)/g' > debian/README.Debian
+	cat debian/README.Debian.tmpl | $(SED_REPLACE) > debian/README.Debian
 
 # Uudecode binary files
 	sh $(CURDIR)/deb-specific/manage-uufiles.sh decode
@@ -77,9 +80,9 @@ clean: remove-binary-files unpatch
 	rm -f $(CURDIR)/debian/*.dirs
 	rm -f $(CURDIR)/debian/*.install
 	rm -f $(CURDIR)/debian/*.docs
-	rm -f $(CURDIR)/debian/$(PACKAGE)-config.sgml
-	rm -f $(CURDIR)/debian/$(PACKAGE)-common.manpages
-	rm -f cvssh.1 $(PACKAGE)-config.1
+	rm -f $(CURDIR)/debian/$(OLDPACKAGE)-config.sgml
+	rm -f $(CURDIR)/debian/$(OLDPACKAGE)-common.manpages
+	rm -f cvssh.1 $(OLDPACKAGE)-config.1
 	rm -f $(CURDIR)/debian/README.Debian
 	rm -rf locales
 
@@ -94,22 +97,22 @@ install: build
 	chmod 755 $(CURDIR)/debian/*/*/*/*/bin/* $(CURDIR)/debian/*/*/*/*/cronjobs/* \
 		$(CURDIR)/debian/*/bin/*  $(CURDIR)/debian/*/usr/share/*/plugins/*/bin/* \
 		$(CURDIR)/debian/*/usr/share/*/plugins/*/cronjobs/*
-	chmod 644 $(CURDIR)/debian/$(PACKAGE)-db-postgresql/usr/share/$(PACKAGE)/cronjobs/*.inc
+	chmod 644 $(CURDIR)/debian/$(OLDPACKAGE)-db-postgresql/usr/share/$(OLDPACKAGE)/cronjobs/*.inc
 
-	chmod 755 $(CURDIR)/debian/$(PACKAGE)-db-postgresql/usr/share/*/db/*.php
+	chmod 755 $(CURDIR)/debian/$(OLDPACKAGE)-db-postgresql/usr/share/*/db/*.php
 
-	rm $(CURDIR)/debian/$(PACKAGE)-web-apache2/usr/share/*/www/scm/viewvc/bin/cgi/viewvc-strace.sh
+	rm $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/*/www/scm/viewvc/bin/cgi/viewvc-strace.sh
 
-	find $(CURDIR)/debian/$(PACKAGE)-common/usr/share/*/common/docman/engine/ -type f -name \*.php -not -name \*.inc.php -exec chmod 0755 {} \;
-	find $(CURDIR)/debian/$(PACKAGE)-common/usr/share/*/common/docman/engine/ -type f -name \*.sh -exec chmod 0755 {} \;
+	find $(CURDIR)/debian/$(OLDPACKAGE)-common/usr/share/*/common/docman/engine/ -type f -name \*.php -not -name \*.inc.php -exec chmod 0755 {} \;
+	find $(CURDIR)/debian/$(OLDPACKAGE)-common/usr/share/*/common/docman/engine/ -type f -name \*.sh -exec chmod 0755 {} \;
 
-	rm -f $(CURDIR)/debian/$(PACKAGE)-plugin-scm*/usr/share/*/plugins/scm*/*/README
-	chmod 755 $(CURDIR)/debian/$(PACKAGE)-plugin-scmcvs/usr/share/*/plugins/scmcvs/sbin/*
+	rm -f $(CURDIR)/debian/$(OLDPACKAGE)-plugin-scm*/usr/share/*/plugins/scm*/*/README
+	chmod 755 $(CURDIR)/debian/$(OLDPACKAGE)-plugin-scmcvs/usr/share/*/plugins/scmcvs/sbin/*
 
 # Remove Windows files
-	rm -rf $(CURDIR)/debian/$(PACKAGE)-web-apache2/usr/share/*/www/scm/viewvc/windows
+	rm -rf $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/*/www/scm/viewvc/windows
 
-	rm -f $(CURDIR)/debian/$(PACKAGE)-web-apache2/usr/share/*/www/themes/$(PACKAGE)/COPYING
+	rm -f $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/*/www/themes/$(OLDPACKAGE)/COPYING
 
 # Remove Snoopy class from binary packages (provided by libphp-snoopy)
 	find $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) -name Snoopy.class.php | xargs -r rm

@@ -1,4 +1,4 @@
-Source: gforge
+Source: fusionforge
 Section: devel
 Priority: optional
 Maintainer: Roland Mas <lolando@debian.org>
@@ -9,12 +9,13 @@ Standards-Version: 3.8.3
 Homepage: http://fusionforge.org/
 Vcs-Bzr: http://scm.fusionforge.org/bzr/fusionforge/svn-trunk-ro/
 
-Package: gforge
+Package: fusionforge
 Architecture: all
-Conflicts: sourceforge, gforge-cvs, gforge-common (<< ${source:Version})
+Conflicts: sourceforge, gforge-cvs, gforge-common (<< ${source:Version}), gforge
+Replaces: gforge
+Provides: gforge
 Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, gforge-common (=${source:Version}), gforge-web-apache2 | gforge-web, gforge-db-postgresql | gforge-db, gforge-mta-exim4 | gforge-mta, gforge-shell-postgresql | gforge-shell, gforge-lists-mailman | gforge-lists, ${misc:Depends}
 Recommends: gforge-plugin-scm
-Provides: fusionforge
 Description: FusionForge collaborative development tool - metapackage
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
