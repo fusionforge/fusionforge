@@ -1,4 +1,4 @@
 Package: @OLDPACKAGE@
 Architecture: all
-Depends: @PACKAGE@-standard
+Depends: @PACKAGE@-standard, ${misc:Depends}
 Description: Dummy upgrade package for FusionForge
