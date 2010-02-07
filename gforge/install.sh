@@ -26,7 +26,6 @@ fi
 hostname=$1
 type=""
 msg=""
-version=4.8.2
 distrib=""
 
 if [ -f "/etc/redhat-release" ]
