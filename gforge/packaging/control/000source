@@ -1,4 +1,4 @@
-Source: @PACKAGE@
+Source: @SRCPACKAGE@
 Section: devel
 Priority: optional
 Maintainer: Roland Mas <lolando@debian.org>

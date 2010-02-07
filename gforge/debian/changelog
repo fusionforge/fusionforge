@@ -1,4 +1,10 @@
-gforge (4.8.58-1) experimental; urgency=low
+fusionforge (4.8.55-2) experimental; urgency=low
+
+  * Renamed source package.
+
+ -- Roland Mas <lolando@debian.org>  Sun, 07 Feb 2010 16:21:15 +0100
+
+gforge (4.8.55-1) experimental; urgency=low
   
   [ Christian Bayle ]
   * put debian postinst/prerm/config/.. files in dsf-in dir

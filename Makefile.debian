@@ -1,7 +1,8 @@
 #! /usr/bin/make -f
 
 FUSIONFORGE=FusionForge
-PKGNAME=gforge
+PKGDIR=gforge
+PKGNAME=$(shell head -1 $(PKGDIR)/debian/changelog | sed 's/ .*//')
 PKGLETTER=$(shell echo $(PKGNAME) | cut -c1)
 ORIGIN=debian.fusionforge.org
 BRANCH=$(shell [ "$(shell echo $(basename $(CURDIR)) | sed 's/.*runk.*/trunk/')" = "trunk" ] && echo svn || echo brc)
@@ -26,7 +27,7 @@ UBULIST=$(UBUNTULIST) $(UBUNTULISTP)
 LOCALMIRROR=http://localhost/ubuntu
 UBUNTUOP=$(shell wget -q -S http://localhost/ubuntu -O /dev/null && echo "--mirror $(LOCALMIRROR)" || echo "--mirror http://archive.ubuntu.com/ubuntu") --debootstrap debootstrap
 
-gfversion=$(shell head -1 $(PKGNAME)/debian/changelog | sed 's/.*(\(.*\)-[^-]*).*/\1/')
+gfversion=$(shell head -1 $(PKGDIR)/debian/changelog | sed 's/.*(\(.*\)-[^-]*).*/\1/')
 in_svn_repo:= $(wildcard .svn/) 
 ifeq ($(strip $(in_svn_repo)),) 
 in_bzr_repo:= $(shell bzr info | grep parent | cut -d: -f2-)
@@ -134,16 +135,16 @@ orig: $(TARBALLS)/$(ORIGFILE) # Make FUSIONFORGE orig file                      
 #
 # PHPDOCUMENTOR
 #
-phpdoc: phpdocumentor_get phpdocumentor_unpack $(documentor_path)/$(documentor_vers)/patched $(PKGNAME)/docs/phpdoc/docs # Get phpdocumentor, install phpdocumentor, build $(PKGNAME) phpdoc     #
+phpdoc: phpdocumentor_get phpdocumentor_unpack $(documentor_path)/$(documentor_vers)/patched $(PKGDIR)/docs/phpdoc/docs # Get phpdocumentor, install phpdocumentor, build $(PKGNAME) phpdoc     #
 
 phpdocumentor_get:
 	[ ! -f $(documentor_path)/$(documentor_vers).tar.gz ] && cd $(documentor_path) && wget http://heanet.dl.sourceforge.net/sourceforge/phpdocu/$(documentor_vers).tar.gz || true
 phpdocumentor_unpack:
 	[ ! -d $(documentor_path)/$(documentor_vers) ] && cd $(documentor_path) && tar xvzf $(documentor_vers).tar.gz || true
 $(documentor_path)/$(documentor_vers)/patched:
-	cd $(documentor_path)/ && patch -p2 < $(CURDIR)/$(PKGNAME)/docs/phpdoc/manageclass.patch && touch $(documentor_path)/$(documentor_vers)/patched 
-$(PKGNAME)/docs/phpdoc/docs:
-	cd $(PKGNAME)/docs/phpdoc/ && ./makedoc.sh
+	cd $(documentor_path)/ && patch -p2 < $(CURDIR)/$(PKGDIR)/docs/phpdoc/manageclass.patch && touch $(documentor_path)/$(documentor_vers)/patched 
+$(PKGDIR)/docs/phpdoc/docs:
+	cd $(PKGDIR)/docs/phpdoc/ && ./makedoc.sh
 
 #
 # Build with cowbuilder or pbuilder
@@ -199,8 +200,8 @@ $(BUILDRESULT)/$(PCHANGEFILE): $(BUILDFILES)/$(PDSCFILE)
 	$(PBUILDERCMD)
 
 $(BUILDFILES)/$(DSCFILE): $(BUILDFILES)/$(ORIGFILE)
-	cd $(PKGNAME) ; debclean
-	find $(PKGNAME) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v '/.testbox/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -pdumB $(BUILDFILES)/
+	cd $(PKGDIR) ; debclean
+	find $(PKGDIR) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v '/.testbox/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -pdumB $(BUILDFILES)/
 	# Set version for given distrib
 	cd $(BUILDFILES)/$(PKGNAME); dch -b -v $(gfversion)$(MINOR) -D UNRELEASED "This is $(DISTRIB) autobuild"
 	perl -pi -e "s/UNRELEASED/$(DISTRIB)/" $(BUILDFILES)/$(PKGNAME)/debian/changelog
@@ -208,8 +209,8 @@ $(BUILDFILES)/$(DSCFILE): $(BUILDFILES)/$(ORIGFILE)
 	rm -rf $(BUILDFILES)/$(PKGNAME)
 
 $(BUILDFILES)/$(PDSCFILE): $(BUILDFILES)/$(ORIGFILE)
-	cd $(PKGNAME) ; debclean
-	find $(PKGNAME) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v '/.testbox/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -pdumB $(BUILDFILES)/
+	cd $(PKGDIR) ; debclean
+	find $(PKGDIR) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v '/.testbox/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -pdumB $(BUILDFILES)/
 	# Set version for given distrib
 	cd $(BUILDFILES)/$(PKGNAME); dch -b -v $(gfversion)$(MINOR)+p -D UNRELEASED "This is $(DISTRIB) autobuild"
 	perl -pi -e "s/UNRELEASED/$(DISTRIB)/" $(BUILDFILES)/$(PKGNAME)/debian/changelog
@@ -220,8 +221,8 @@ $(BUILDFILES)/$(ORIGFILE): $(TARBALLS)/$(ORIGFILE)
 	cp $(TARBALLS)/$(ORIGFILE) $(BUILDFILES)
 
 $(TARBALLS)/$(ORIGFILE): $(TARBALLS)
-	cd $(PKGNAME) ; debclean
-	find $(PKGNAME) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v '/.testbox/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -o -H ustar | gzip > $(TARBALLS)/$(ORIGFILE)
+	cd $(PKGDIR) ; debclean
+	find $(PKGDIR) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v '/.testbox/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -o -H ustar | gzip > $(TARBALLS)/$(ORIGFILE)
 
 pbuilderenv: $(PBUILDERTGZ) $(PBUILDERTGZ)/base-$(DISTRIB).tgz
 	@echo "Ready for $(DISTRIB)"
