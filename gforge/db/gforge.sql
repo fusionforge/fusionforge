@@ -7921,6 +7921,6 @@ ALTER TABLE public.database_startpoint OWNER TO gforge;
 --
 
 COPY database_startpoint (db_version, db_start_date) FROM stdin;
-4.8.2   20090402
+4.8.50	20090507
 \.
 
