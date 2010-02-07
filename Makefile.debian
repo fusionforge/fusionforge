@@ -29,7 +29,12 @@ UBUNTUOP=$(shell wget -q -S http://localhost/ubuntu -O /dev/null && echo "--mirr
 gfversion=$(shell head -1 $(PKGNAME)/debian/changelog | sed 's/.*(\(.*\)-[^-]*).*/\1/')
 in_svn_repo:= $(wildcard .svn/) 
 ifeq ($(strip $(in_svn_repo)),) 
+in_bzr_repo:= $(shell bzr info | grep parent | cut -d: -f2-)
+ifeq ($(strip $(in_bzr_repo)),)
 	svnrev=unknown
+else
+	svnrev=$(shell LANG=C svn info $(in_bzr_repo) | grep Revision | cut -d: -f2| sed 's/ //g')
+endif
 else
 	svnrev=$(shell LANG=C svn info | grep Revision | cut -d: -f2| sed 's/ //g')
 endif
