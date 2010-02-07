@@ -198,8 +198,6 @@ gforge/packaging/control/200plugin-contribtracker -text
 gforge/packaging/control/200plugin-contribtracker.shortdesc -text
 gforge/packaging/control/AAAdesc -text
 gforge/packaging/control/Makefile -text
-gforge/packaging/control/disabled-150plugin-scmbzr -text
-gforge/packaging/control/disabled-150plugin-scmbzr.shortdesc -text
 gforge/packaging/cron.d/00phpcron -text
 gforge/packaging/cron.d/Makefile -text
 gforge/packaging/cron.d/backup1 -text
