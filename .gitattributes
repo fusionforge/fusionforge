@@ -140,8 +140,12 @@ gforge/image-sources/pow-fusionforge.xcf -text svneol=unset#unset
 gforge/image-sources/top-logo.xcf -text svneol=unset#unset
 gforge/install.sh -text
 gforge/packaging/control/000source -text
-gforge/packaging/control/010meta -text
-gforge/packaging/control/010meta.shortdesc -text
+gforge/packaging/control/010meta-standard -text
+gforge/packaging/control/010meta-standard.shortdesc -text
+gforge/packaging/control/011meta-minimal -text
+gforge/packaging/control/011meta-minimal.shortdesc -text
+gforge/packaging/control/012meta-full -text
+gforge/packaging/control/012meta-full.shortdesc -text
 gforge/packaging/control/020common -text
 gforge/packaging/control/020common.shortdesc -text
 gforge/packaging/control/030web-apache2 -text
@@ -227,6 +231,7 @@ gforge/packaging/dirs/plugin-scmhg -text
 gforge/packaging/dirs/plugin-scmsvn -text
 gforge/packaging/dirs/web-apache2 -text
 gforge/packaging/dirs/web-apache2-vhosts -text
+gforge/packaging/docs/pkgname-full -text
 gforge/packaging/docs/pkgname-web-apache2 -text
 gforge/packaging/install/common -text
 gforge/packaging/install/db-postgresql -text
