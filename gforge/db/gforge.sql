@@ -7892,3 +7892,35 @@ CREATE TABLE artifact_workflow_notify
 WITH OIDS;
 -- ALTER TABLE artifact_workflow_notify OWNER TO gforge;
 
+
+--
+-- Name: database_changes; Type: TABLE; Schema: public; Owner: gforge; Tablespace:
+--
+
+CREATE TABLE database_changes (
+    filename text
+);
+
+
+ALTER TABLE public.database_changes OWNER TO gforge;
+
+--
+-- Name: database_startpoint; Type: TABLE; Schema: public; Owner: gforge; Tablespace:
+--
+
+CREATE TABLE database_startpoint (
+    db_version character varying(10),
+    db_start_date integer
+);
+
+
+ALTER TABLE public.database_startpoint OWNER TO gforge;
+
+--
+-- Data for Name: database_startpoint; Type: TABLE DATA; Schema: public; Owner: gforge
+--
+
+COPY database_startpoint (db_version, db_start_date) FROM stdin;
+4.8.2   20090402
+\.
+

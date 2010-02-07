@@ -80,7 +80,7 @@ then
 	if [ $mode = "install" ]
 	then
 		php fusionforge-install-3-db.php
-		php db/startpoint.php $version
+		php db/upgrade-db.php
 
 		# Post installation fixes.
 		perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/httpd/conf/httpd.conf
@@ -109,7 +109,7 @@ then
 	if [ $mode = "install" ]
 	then
 		php fusionforge-install-3-db.php
-		php db/startpoint.php $version
+		php db/upgrade-db.php
 
 		# Post installation fixes.
 		#perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/apache2/httpd.conf
