@@ -249,7 +249,7 @@ function html_build_select_box_from_array ($vals,$select_name,$checked_val='xzxz
 		} else {
 			$return .= "\n\t\t<option value=\"" . $i .'"';
 			if ($i == $checked_val) {
-				$return .= ' selected="selection"';
+				$return .= ' selected="selected"';
 			}
 		}
 		$return .= '>'.htmlspecialchars($vals[$i]).'</option>';
