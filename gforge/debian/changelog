@@ -48,6 +48,13 @@ gforge (4.8.51-1) experimental; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Wed, 29 Apr 2009 15:21:31 +0200
 
+gforge (4.8.2+svn8761-1) unstable; urgency=low
+
+  * New upstream snapshot from the 4.8 branch.
+  * Includes fix for Docman bug (closes: #550318).
+
+ -- Roland Mas <lolando@debian.org>  Tue, 09 Feb 2010 19:38:52 +0100
+
 gforge (4.8.2-2) unstable; urgency=low
 
   * Updated Debconf template translations for German, French, Russian and
