@@ -172,7 +172,7 @@ function ctExpandTreeSub (subMenu, expandLevel)
 		return;
 	var i;
 	var item;
-	for (i = 0; i < subMenu.ctItems.length; ++i)
+	for (i = 0; subMenu.ctItems && i < subMenu.ctItems.length; ++i)
 	{
 		item = subMenu.ctItems[i];
 		if (item.ctIdSub)
