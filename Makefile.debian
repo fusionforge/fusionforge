@@ -24,8 +24,7 @@ UBULIST=$(UBUNTULIST) $(UBUNTULISTP)
 # Try if a local mirror is available
 UBUNTUOP=$(shell wget -q -S http://localhost/ubuntu -O /dev/null && echo "--mirror http://localhost/ubuntu" || echo "--mirror http://archive.ubuntu.com/ubuntu") --debootstrap debootstrap
 
-gfversion=$(shell head -1 $(PKGNAME)/debian/changelog | sed 's/.*(\(.[^+-]*\).*).*/\1/')
-gfminor=$(shell head -1 $(PKGNAME)/debian/changelog | sed 's/.*(.[^+-]*[+-]\(.*\)).*/\1/')
+gfversion=$(shell head -1 $(PKGNAME)/debian/changelog | sed 's/.*(\(.*\)-[^-]*).*/\1/')
 svnrev=$(shell LANG=C svn info | grep Revision | cut -d: -f2| sed 's/ //g')
 
 
