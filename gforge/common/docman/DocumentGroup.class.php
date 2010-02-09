@@ -247,7 +247,6 @@ class DocumentGroup extends Error {
 	* @param int	(optional) State of the documents
 	*/
 	function hasDocuments(&$nested_groups, &$document_factory, $stateid=0) {
-		global $doc_group_id;
 		$doc_group_id = $this->getID();
 		static $result = array();	// this function will probably be called several times so we better store results in order to speed things up
 		if (!array_key_exists($stateid, $result) || !is_array($result[$stateid])) $result[$stateid] = array();
