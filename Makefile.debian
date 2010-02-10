@@ -203,19 +203,19 @@ $(BUILDFILES)/$(DSCFILE): $(BUILDFILES)/$(ORIGFILE)
 	cd $(PKGDIR) ; debclean
 	find $(PKGDIR) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v '/.testbox/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -pdumB $(BUILDFILES)/
 	# Set version for given distrib
-	cd $(BUILDFILES)/$(PKGNAME); dch -b -v $(gfversion)$(MINOR) -D UNRELEASED "This is $(DISTRIB) autobuild"
-	perl -pi -e "s/UNRELEASED/$(DISTRIB)/" $(BUILDFILES)/$(PKGNAME)/debian/changelog
-	cd $(BUILDFILES) ; dpkg-source -b $(PKGNAME)
-	rm -rf $(BUILDFILES)/$(PKGNAME)
+	cd $(BUILDFILES)/$(PKGDIR); dch -b -v $(gfversion)$(MINOR) -D UNRELEASED "This is $(DISTRIB) autobuild"
+	perl -pi -e "s/UNRELEASED/$(DISTRIB)/" $(BUILDFILES)/$(PKGDIR)/debian/changelog
+	cd $(BUILDFILES) ; dpkg-source -b $(PKGDIR)
+	rm -rf $(BUILDFILES)/$(PKGDIR)
 
 $(BUILDFILES)/$(PDSCFILE): $(BUILDFILES)/$(ORIGFILE)
 	cd $(PKGDIR) ; debclean
 	find $(PKGDIR) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v '/.testbox/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -pdumB $(BUILDFILES)/
 	# Set version for given distrib
-	cd $(BUILDFILES)/$(PKGNAME); dch -b -v $(gfversion)$(MINOR)+p -D UNRELEASED "This is $(DISTRIB) autobuild"
-	perl -pi -e "s/UNRELEASED/$(DISTRIB)/" $(BUILDFILES)/$(PKGNAME)/debian/changelog
+	cd $(BUILDFILES)/$(PKGDIR); dch -b -v $(gfversion)$(MINOR)+p -D UNRELEASED "This is $(DISTRIB) autobuild"
+	perl -pi -e "s/UNRELEASED/$(DISTRIB)/" $(BUILDFILES)/$(PKGDIR)/debian/changelog
 	cd $(BUILDFILES) ; dpkg-source -b $(PKGNAME)
-	rm -rf $(BUILDFILES)/$(PKGNAME)
+	rm -rf $(BUILDFILES)/$(PKGDIR)
 
 $(BUILDFILES)/$(ORIGFILE): $(TARBALLS)/$(ORIGFILE)
 	cp $(TARBALLS)/$(ORIGFILE) $(BUILDFILES)
