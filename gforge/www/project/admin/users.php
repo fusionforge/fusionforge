@@ -225,7 +225,7 @@ project_admin_header(array('title'=>sprintf(_('Project Admin: %s'), $group->getP
 			action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>"
 			method="post">
 		<p><input type="hidden" name="submit" value="y" /> <input type="text"
-			name="form_unix_name" size="10" value="" /> <?php echo role_box($group_id,'role_id',$row_memb['role_id']); ?>
+			name="form_unix_name" size="10" value="" /> <?php echo role_box($group_id,'role_id'); ?>
 		<input type="submit" name="adduser"
 			value="<?php echo _("Add User") ?>" />
 		</p>
@@ -290,14 +290,9 @@ project_admin_header(array('title'=>sprintf(_('Project Admin: %s'), $group->getP
 			  <a href="/users/'.$row_memb['user_name'].'">'.$row_memb['realname'].'</a>
 			</td>
 			<td style="white-space: nowrap; text-align: right;">';
-		if (! $row_memb['is_external']) {
 			echo role_box($group_id,'role_id',$row_memb['role_id']);
-		}
-		else {
-			echo external_role_box($group_id,'role_id',$row_memb['role_id']);
-		}
-		echo '<input type="submit" name="updateuser" value="'._("Update").'" />';
-		echo '<input type="submit" name="rmuser" value="'._("Remove").'" />
+			echo '<input type="submit" name="updateuser" value="'._("Update").'" />';
+			echo '<input type="submit" name="rmuser" value="'._("Remove").'" />
                         </td>
 			</tr>
 		</table>
