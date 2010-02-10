@@ -3499,7 +3499,6 @@ gforge/www/jscook/ThemeXP/spacer.gif svneol=native#unset
 gforge/www/my/dashboard.php -text
 gforge/www/plugins/cvstracker -text
 gforge/www/plugins/eirc -text
-gforge/www/plugins/extratabs -text
 gforge/www/plugins/fckeditor -text
 gforge/www/plugins/helloworld -text
 gforge/www/plugins/mantis -text
