@@ -66,7 +66,7 @@ if ( $num_packages < 1) {
 	echo "<h1>"._('No File Packages')."</h1>";
 	echo "<p><strong>"._('There are no file packages defined for this project.')."</strong>";
 } else {
-	echo '<div id="forge-frs" class="lien-soulignement">';
+	echo '<div id="forge-frs" class="lien-soulignement">'."\n";
 
 	echo '<div class="blue-box">'._('Below is a list of all files of the project.').' ';
 	if ($release_id) {
@@ -74,7 +74,7 @@ if ( $num_packages < 1) {
 	}
 	echo _('Before downloading, you may want to read Release Notes and ChangeLog (accessible by clicking on release version).').'
 	</div><!-- class="blue-box" -->
-';
+    '."\n";
 
 	// check the permissions and see if this user is a release manager.
 	// If so, offer the opportunity to create a release
@@ -101,7 +101,6 @@ if ( $num_packages < 1) {
 		$frsPackage = new FRSPackage($cur_group, db_result($res_package, $p, 'package_id'));
 		
 		$package_name = db_result($res_package, $p, 'name');
-		//$package_title = $package_name . '&nbsp;';
 		
 		if($frsPackage->isMonitoring()) {
 			$title = db_result($res_package, $p, 'name') . " - " . _('Stop monitoring this package');
@@ -113,9 +112,8 @@ if ( $num_packages < 1) {
 			$package_monitor = util_make_link ( $url, $GLOBALS['HTML']->getMonitorPic($title));
 		}
 
-		//echo $GLOBALS['HTML']->boxTop($package_title, $package_name);
         $package_name_protected = $HTML->toSlug($package_name);
-        echo '<h2 id="title_'. $package_name_protected .'">' . $package_name . '<span class="frs-monitor-package">' . $package_monitor . '</span></h2>';
+        echo "\n".'<h2 id="title_'. $package_name_protected .'">' . $package_name . ' <span class="frs-monitor-package">' . $package_monitor . '</span></h2>'."\n";
 		
 		// get the releases of the package
 		$res_release = db_query_params ('SELECT * FROM frs_release
@@ -132,10 +130,20 @@ if ( $num_packages < 1) {
 		} else {
 			// iterate and show the releases of the package
 			for ( $r = 0; $r < $num_releases; $r++ ) {
-				
-				$package_release = db_fetch_array( $res_release );
-				$release_title = util_make_link ( 'frs/shownotes.php?release_id=' . $package_release['release_id'], $package_name.' '.$package_release['name']);
-				echo $GLOBALS['HTML']->boxTop($release_title, $package_name . '_' . $package_release['name']);
+                $package_release = db_fetch_array( $res_release );
+
+                // Switch whether release_id exists and/or release_id is current one
+                if ( ! $release_id || $release_id==$package_release['release_id'] ) {
+                    // no release_id OR release_id is current one
+                    $release_title = util_make_link ( 'frs/shownotes.php?release_id=' . $package_release['release_id'], $package_name.' '.$package_release['name']);
+                    echo $GLOBALS['HTML']->boxTop($release_title, $package_name . '_' . $package_release['name'])."\n";
+                } elseif ( $release_id!=$package_release['release_id'] ) {
+                    // release_id but not current one
+                    $t_url_anchor = $HTML->toSlug($package_name)."-".$HTML->toSlug($package_release['name'])."-title-content";
+                    $t_url = 'frs/?group_id='.$group_id.'&amp;release_id=' . $package_release['release_id'] . "#" . $t_url_anchor;
+                    $release_title = util_make_link ( $t_url, $package_name.' '.$package_release['name']);
+                    echo '<div class="frs_release_name_version">'.$release_title."</div>"."\n";
+                }
 
 				// get the files in this release....
 				$res_file = db_query_params("SELECT frs_file.filename AS filename,
@@ -163,45 +171,58 @@ if ( $num_packages < 1) {
                 $cell_data[] = _('Arch');
                 $cell_data[] = _('Type');
 
-                if ($release_id==$package_release['release_id']) {
+                // Switch whether release_id exists and/or release_id == package_release['release_id']
+                if ( ! $release_id ) {
+                    // no release_id
+                    echo $GLOBALS['HTML']->listTableTop($cell_data,'',false);
+                } elseif ( $release_id==$package_release['release_id'] ) {
+                    // release_id is current one
                     echo $GLOBALS['HTML']->listTableTop($cell_data,'',true);
                 } else {
-                    echo $GLOBALS['HTML']->listTableTop($cell_data);
+                    // release_id but not current one => dont print anything here
                 }
 				
-				if ( !$res_file || $num_files < 1 ) {
-					echo '<tr><td colspan="6">&nbsp;&nbsp;<em>'._('No releases').'</em></td></tr>
-					';
-				} else {
-					// now iterate and show the files in this release....
-					for ( $f = 0; $f < $num_files; $f++ ) {
-						$file_release = db_fetch_array( $res_file );
-						
-						$tmp_col1 = util_make_link ('/frs/download.php/'.$file_release['file_id'].'/'.$file_release['filename'], $file_release['filename']);
-						$tmp_col2 = date(_('Y-m-d H:i'), $package_release['release_date'] ); 
-						$tmp_col3 = human_readable_bytes($file_release['file_size']);
-                        $tmp_col4 = ($file_release['downloads'] ? number_format($file_release['downloads'], 0) : '0');
-						$tmp_col5 = $file_release['processor'];
-						$tmp_col6 = $file_release['type'];
-						
-						$proj_stats['size'] += $file_release['file_size'];
-						@$proj_stats['downloads'] += $file_release['downloads'];
-						
-						echo '<tr ' . ">\n";
-						echo ' <td>' . $tmp_col1 . '</td>'."\n";
-						echo ' <td>' . $tmp_col2 . '</td>'."\n";
-						echo ' <td>' . $tmp_col3 . '</td>'."\n";
-						echo ' <td>' . $tmp_col4 . '</td>'."\n";
-						echo ' <td>' . $tmp_col5 . '</td>'."\n";
-						echo ' <td>' . $tmp_col6 . '</td>'."\n";
-						echo '</tr>'."\n";
-					}
-				}
-                echo $GLOBALS['HTML']->listTableBottom();
-                echo $GLOBALS['HTML']->boxBottom();
-			}
-		}
-		//echo $GLOBALS['HTML']->boxBottom();
+                if ( ! $release_id || $release_id==$package_release['release_id'] ) {
+                    // no release_id OR no release_id OR release_id is current one
+                    if ( !$res_file || $num_files < 1 ) {
+                        echo '<tr><td colspan="6">&nbsp;&nbsp;<em>'._('No releases').'</em></td></tr>
+                        ';
+                    } else {
+                        // now iterate and show the files in this release....
+                        for ( $f = 0; $f < $num_files; $f++ ) {
+                            $file_release = db_fetch_array( $res_file );
+
+                            $tmp_col1 = util_make_link ('/frs/download.php/'.$file_release['file_id'].'/'.$file_release['filename'], $file_release['filename']);
+                            $tmp_col2 = date(_('Y-m-d H:i'), $package_release['release_date'] );
+                            $tmp_col3 = human_readable_bytes($file_release['file_size']);
+                            $tmp_col4 = ($file_release['downloads'] ? number_format($file_release['downloads'], 0) : '0');
+                            $tmp_col5 = $file_release['processor'];
+                            $tmp_col6 = $file_release['type'];
+
+                            $proj_stats['size'] += $file_release['file_size'];
+                            @$proj_stats['downloads'] += $file_release['downloads'];
+
+                            echo '<tr ' . ">\n";
+                            echo ' <td>' . $tmp_col1 . '</td>'."\n";
+                            echo ' <td>' . $tmp_col2 . '</td>'."\n";
+                            echo ' <td>' . $tmp_col3 . '</td>'."\n";
+                            echo ' <td>' . $tmp_col4 . '</td>'."\n";
+                            echo ' <td>' . $tmp_col5 . '</td>'."\n";
+                            echo ' <td>' . $tmp_col6 . '</td>'."\n";
+                            echo '</tr>'."\n";
+                        }
+                    }
+                    echo $GLOBALS['HTML']->listTableBottom();
+                } else {
+                    // release_id but not current one
+                    // nothing to print here
+                }
+
+                if ( ! $release_id || $release_id==$package_release['release_id'] ) {
+                    echo $GLOBALS['HTML']->boxBottom();
+                }
+			} //for: release(s)
+		} //if: release(s) available
 	}
 // print statistics for this table datas
 /*

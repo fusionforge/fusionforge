@@ -121,6 +121,10 @@ class Theme extends Layout {
         }
     }
 
+     function bodyFooter($params) {
+        echo "\n";
+    }
+
     function footer($params) {
         echo '
 			<!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
@@ -225,6 +229,7 @@ class Theme extends Layout {
      *
      * @param       array   The array of titles
      * @param       array   The array of title links
+     * @param       boolean Whether to highlight or not the entry
      */
     function listTableTop ($title_arr,$links_arr=false,$selected=false) {
 	    $return = '<table class="width-100p100 listTable';

@@ -528,7 +528,7 @@ if (isset($params['group']) && $params['group']) {
 			} else {
 				$ret = '
 		<form id="quicknavform" name="quicknavform"><div>
-			<select name="quicknav" onChange="location.href=document.quicknavform.quicknav.value">
+			<select name="quicknav" id="quicknav" onChange="location.href=document.quicknavform.quicknav.value">
 				<option value="">'._('Quick Jump To...').'</option>';
 
 				for ($i = 0; $i < db_numrows($res); $i++) {

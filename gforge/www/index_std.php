@@ -64,11 +64,11 @@ echo $HTML->boxBottom();
 
 <td id="bd-col2">
 <?php
-	show_features_boxes();
+	echo show_features_boxes();
 ?>
 
 </td></tr></table>
-<center>
+
 <div id="ft">
 <?php
 			$forge = new FusionForge() ;

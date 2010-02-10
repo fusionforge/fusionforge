@@ -63,3 +63,7 @@
 #forge-frs .frs-monitor-package {
     padding-left:0.5em;
 }
+
+.frs_release_name_version {
+    margin: 0 0 0 1em;
+}

@@ -13,11 +13,8 @@ require_once $gfcommon.'include/tag_cloud.php';
 function show_features_boxes() {
 	GLOBAL $HTML,$sys_use_ratings,$sys_use_frs,$sys_use_project_tags;
 	
-	// have to echo right now otherwise features boxes top will be at bottom
-	// echo $HTML->boxTop(_('Features Boxes'), 'Features_Boxes');
-	echo '<h2 class="skip">' . _('Features Boxes') . '</h2>';
 	plugin_hook ("features_boxes_top", array());
-	$return = '';
+	$return = '<h2 class="skip">' . _('Features Boxes') . '</h2>';
 
 	if ($sys_use_project_tags) {
 		$return .= $HTML->boxTop(_('Tag Cloud'), 'Tag_Cloud');
@@ -39,12 +36,9 @@ function show_features_boxes() {
 	$return .= show_highest_ranked_projects();
 	$return .= $HTML->boxMiddle(_('Recently Registered Projects'), 'Recently_Registered_Projects');
 	$return .= show_newest_projects();
-	$hook_params = array () ;
-	$hook_params['returned_text'] = '' ;
-	plugin_hook ("features_boxes_bottom", $hook_params);
-	$return .= $HTML->boxBottom(0);
-	echo $return;
+	$return .= $HTML->boxBottom();
 	plugin_hook ("features_boxes_bottom", array());
+	return $return;
 }
 
 function show_top_downloads() {
