@@ -381,8 +381,8 @@ if ($project->usesPm()) {
 	$link_content = $HTML->getPmPic('') . '&nbsp;' . _('Task Manager');
 	print util_make_link( '/pm/?group_id='.$group_id, $link_content);
 	
-	$sql="SELECT * FROM project_group_list WHERE group_id='$group_id' AND is_public=1";
-	$result = db_query ($sql);
+	$result = db_query_params ('SELECT * FROM project_group_list WHERE group_id=$1 AND is_public=1',
+				   $array ($group_id));
 	$rows = db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '<br /><em>'._('There are no public subprojects available').'</em>';
