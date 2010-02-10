@@ -208,11 +208,11 @@ function show_highest_ranked_projects() {
 	} else {
 		$return = '<table summary="">';
 		while ($row=db_fetch_array($result)) {
-			$t_prj_activity = number_format(substr($row['ranking'],0,5),1);
+			$t_prj_activity = number_format(substr($row['ranking'],0,5),0);
 			$t_prj_link = util_make_link_g ($row['unix_group_name'],$row['group_id'],$row['group_name']);
 			
 			$return .= "<tr>";
-			$return .= '<td class="width-stat-col1">' . $t_prj_activity . "%</td>";
+			$return .= '<td class="width-stat-col1">'. $t_prj_activity . "</td>";
 			$return .= '<td>' . $t_prj_link . '</td>';
 			$return .= "</tr>\n";			
 		}
