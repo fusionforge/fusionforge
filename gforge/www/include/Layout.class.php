@@ -479,24 +479,24 @@ if (isset($params['group']) && $params['group']) {
 					$selected=count($TABS_DIRS)-1;
 				}
 			}
-		} elseif (strstr(getStringFromServer('REQUEST_URI'),util_make_url ('/my/') ) || 
-			  strstr(getStringFromServer('REQUEST_URI'),util_make_url ('/account/') ) || 
-			  strstr(getStringFromServer('REQUEST_URI'),util_make_url ('/register/') ) ||  
-			  strstr(getStringFromServer('REQUEST_URI'),util_make_url ('/themes/') ) ) {
+		} elseif (strstr(getStringFromServer('REQUEST_URI'),util_make_uri ('/my/') ) || 
+			  strstr(getStringFromServer('REQUEST_URI'),util_make_uri ('/account/') ) || 
+			  strstr(getStringFromServer('REQUEST_URI'),util_make_uri ('/register/') ) ||  
+			  strstr(getStringFromServer('REQUEST_URI'),util_make_uri ('/themes/') ) ) {
 			$selected=array_search(util_make_url ('/my/'), $TABS_DIRS);
-		} elseif (strstr(getStringFromServer('REQUEST_URI'),util_make_url ('softwaremap') )) {
+		} elseif (strstr(getStringFromServer('REQUEST_URI'),util_make_uri ('softwaremap') )) {
 			$selected=array_search(util_make_url ('/softwaremap/'), $TABS_DIRS);
-		} elseif (strstr(getStringFromServer('REQUEST_URI'),util_make_url ('/snippet/') )) {
+		} elseif (strstr(getStringFromServer('REQUEST_URI'),util_make_uri ('/snippet/') )) {
 			$selected=array_search(util_make_url ('/snippet/'), $TABS_DIRS);
-		} elseif (strstr(getStringFromServer('REQUEST_URI'),util_make_url ('/people/') )) {
+		} elseif (strstr(getStringFromServer('REQUEST_URI'),util_make_uri ('/people/') )) {
 			$selected=array_search(util_make_url ('/people/'), $TABS_DIRS);
-		} elseif (strstr(getStringFromServer('REQUEST_URI'),util_make_url ('/reporting/') )) {
+		} elseif (strstr(getStringFromServer('REQUEST_URI'),util_make_uri ('/reporting/') )) {
 			$selected=array_search(util_make_url ('/reporting/'),$TABS_DIRS);
-		} elseif (strstr(getStringFromServer('REQUEST_URI'),util_make_url ('/admin/') ) && $user_is_super) {
+		} elseif (strstr(getStringFromServer('REQUEST_URI'),util_make_uri ('/admin/') ) && $user_is_super) {
 			$selected=array_search(util_make_url ('/admin/'),$TABS_DIRS);
 		} elseif (count($PLUGIN_TABS_DIRS)>0) {
 			foreach ($PLUGIN_TABS_DIRS as $PLUGIN_TABS_DIRS_VALUE) {
-				if (strstr(getStringFromServer('REQUEST_URI'), $PLUGIN_TABS_DIRS_VALUE)) {
+				if (strstr(getStringFromServer('REQUEST_URI'), parse_url ($PLUGIN_TABS_DIRS_VALUE, PHP_URL_PATH))) {
 					$selected=array_search($PLUGIN_TABS_DIRS_VALUE, $TABS_DIRS);
 					break;
 				}

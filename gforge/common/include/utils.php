@@ -990,10 +990,15 @@ function util_make_url ($path) {
 		$url = "http://" ;
 	
 	$url .= $GLOBALS['sys_default_domain'] ;
-	$url .= normalized_urlprefix () ;
-	$path = ereg_replace ("^/", "", $path) ;
-	$url .= $path ;
+	$url .= util_make_uri ($path) ;
 	return $url ;
+}
+
+function util_make_uri ($path) {
+	$path = ereg_replace ("^/", "", $path) ;
+	$uri .= normalized_urlprefix () ;
+	$uri .= $path ;
+	return $uri ;
 }
 
 function util_make_link ($path, $text, $extra_params=false, $absolute=false) {
