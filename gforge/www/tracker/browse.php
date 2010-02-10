@@ -72,13 +72,13 @@ if (!isset($_sort_col)) {
 	$_sort_col = 'priority';
 	$_sort_ord = 'DESC';
 }
-$offset = getStringFromRequest('offset',$offset);
+$offset = getStringFromRequest('offset');
 $_sort_col = getStringFromRequest('_sort_col',$_sort_col);
 $_sort_ord = getStringFromRequest('_sort_ord',$_sort_ord);
-$max_rows = getStringFromRequest('max_rows',$max_rows);
-$set = getStringFromRequest('set',$set);
-$_assigned_to = getIntFromRequest('_assigned_to',$_assigned_to);
-$_status = getIntFromRequest('_status',$_status);
+$max_rows = getStringFromRequest('max_rows');
+$set = getStringFromRequest('set');
+$_assigned_to = getIntFromRequest('_assigned_to');
+$_status = getIntFromRequest('_status');
 $_extra_fields = array() ;
 $aux_extra_fields = array() ;
 if ($set == 'custom') {
