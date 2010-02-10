@@ -2823,10 +2823,10 @@ eval {
     &update_with_sql("20090402-add-projecttags-constraints","4.7.99-1");
     &update_with_sql("20090402-forum-attachment-types","4.7.99-2");
 
-    &update_with_sql("20090507-add_artifact_workflow.sql","4.8.99-1");
-    &update_with_sql("20090507-add_element_pos.sql","4.8.99-2");
-    &update_with_sql("20090507-add_project_query.sql","4.8.99-3");
-    &update_with_sql("20090507-browse_list.sql","4.8.99-4");
+    &update_with_sql("20090507-add_artifact_workflow","4.8.99-1");
+    &update_with_sql("20090507-add_element_pos","4.8.99-2");
+    &update_with_sql("20090507-add_project_query","4.8.99-3");
+    &update_with_sql("20090507-browse_list","4.8.99-4");
 
     ########################### INSERT HERE #################################
 
