@@ -29,8 +29,9 @@
 
 require_once('../../env.inc.php');
 require_once $gfwww.'include/pre.php';
+require_once $gfwww.'include/role_utils.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
-
+require_once $gfcommon.'include/GroupJoinRequest.class.php';
 
 $group_id = getIntFromRequest('group_id');
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
@@ -392,7 +393,6 @@ echo $HTML->boxBottom();?>
 	</tr>
 
 </table>
->>>>>>> MERGE-SOURCE
 
 <?php
 
