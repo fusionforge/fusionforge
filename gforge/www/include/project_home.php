@@ -138,7 +138,7 @@ $iam_member = false ;
 
 if (db_numrows($res_admin) > 0) {
 	echo "<p>\n";
-	echo '<span class="develtitle"><?php echo _('Project Admins'); ?>:</span><br />';
+	echo '<span class="develtitle">'._('Project Admins').'</span><br />';
 	$started_developers = false;
 	while ($row_admin = db_fetch_array($res_admin)) {
 		if (trim($row_admin['admin_flags']) != 'A' && !$started_developers) {
