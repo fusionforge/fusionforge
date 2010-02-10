@@ -2,6 +2,9 @@
 /*
 	Temporary redirect to prevent breakage of existing installs/links
 */
+require_once('../env.inc.php');
+require_once $gfwww.'include/pre.php';
+
 $group_id = getIntFromRequest ('group_id');
 $release_id = getIntFromRequest ('release_id');
 
