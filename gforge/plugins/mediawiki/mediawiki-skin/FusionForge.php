@@ -111,7 +111,7 @@ class FusionForgeTemplate extends QuickTemplate {
 <?php	}
 		if($this->data['trackbackhtml']) print $this->data['trackbackhtml']; ?>
 	</head>
-<body<?php if($this->data['body_ondblclick']) { ?> ondblclick="<?php $this->text('body_ondblclick') ?>"<?php } ?>
+<body id="mydoc" <?php if($this->data['body_ondblclick']) { ?> ondblclick="<?php $this->text('body_ondblclick') ?>"<?php } ?>
 <?php if($this->data['body_onload']) { ?> onload="<?php $this->text('body_onload') ?>"<?php } ?>
  class="mediawiki <?php $this->text('dir') ?> <?php $this->text('pageclass') ?> <?php $this->text('skinnameclass') ?>">
         <!-- FUSIONFORGE BodyHeader BEGIN -->
@@ -262,7 +262,9 @@ class FusionForgeTemplate extends QuickTemplate {
         <!-- FUSIONFORGE Footer BEGIN -->
 <?php	if (!$GLOBALS['sys_use_mwframe']){
 		$GLOBALS['HTML']->footer($params);
-	} else { ?>
+       	$GLOBALS['HTML']->bodyFooter($params);
+        } else { ?>
+    }
 </body></html>
 <?php	} ?>
         <!-- FUSIONFORGE Footer BEGIN -->

@@ -44,16 +44,12 @@ td.mainCanvas {
 }
 
 body {
-	font: x-small sans-serif;
-	color: black;
-	margin: 0;
-	padding: 0;
 }
 
 /* scale back up to a sane default */
 #globalWrapper {
 	position: relative;
-	font-size: 127%;
+	/*font-size: 127%;*/
 	width: 100%;
 	margin: 0;
 	padding: 0;
@@ -65,7 +61,7 @@ body {
 /* general styles */
 
 table {
-	font-size: 100%;
+	/*font-size: 100%;*/
 	color: black;
 	/* we don't want the bottom borders of <h2>s to be visible through
 	   floated tables */
@@ -128,22 +124,22 @@ h1, h2, h3, h4, h5, h6 {
 	padding-bottom: .17em;
 	border-bottom: 1px solid #aaa;
 }
-h1 { font-size: 188%; }
-h1 .editsection { font-size: 53%; }
-h2 { font-size: 150%; }
-h2 .editsection { font-size: 67%; }
+h1 { font-size: 189%; }
+h1 .editsection { font-size: 77%; }
+h2 { font-size: 153.9%; }
+h2 .editsection { font-size: 85%; }
 h3, h4, h5, h6 {
 	border-bottom: none;
 	font-weight: bold;
 }
-h3 { font-size: 132%; }
-h3 .editsection { font-size: 76%; font-weight: normal; }
+h3 { font-size: 131%; }
+h3 .editsection { font-size: 93%; font-weight: normal; }
 h4 { font-size: 116%; }
-h4 .editsection { font-size: 86%; font-weight: normal; }
+h4 .editsection { font-size: 100%; font-weight: normal; }
 h5 { font-size: 100%; }
 h5 .editsection { font-weight: normal; }
-h6 { font-size: 80%;  }
-h6 .editsection { font-size: 125%; font-weight: normal; }
+h6 { font-size: 85%;  }
+h6 .editsection { font-size: 123.1%; font-weight: normal; }
 
 ul {
 	line-height: 1.5em;
@@ -187,7 +183,7 @@ fieldset.nested {
 }
 legend {
 	padding: .5em;
-	font-size: 95%;
+	font-size: 93%;
 }
 form {
 	border: none;
@@ -201,7 +197,7 @@ textarea {
 
 input.historysubmit {
 	padding: 0 .3em .3em .3em !important;
-	font-size: 94%;
+	font-size: 93%;
 	cursor: pointer;
 	height: 1.7em !important;
 	margin-left: 1.6em;
@@ -247,7 +243,7 @@ pre {
 }
 
 #contentSub, #contentSub2 {
-	font-size: 84%;
+	font-size: 85%;
 	line-height: 1.2em;
 	margin: 0 0 1.4em 1em;
 	color: #7d7d7d;
@@ -284,7 +280,7 @@ span.subpages {
 }
 #siteNotice {
 	text-align: center;
-	font-size: 95%;
+	font-size: 93%;
 	padding: 0 .9em;
 }
 #siteNotice p {
@@ -293,14 +289,14 @@ span.subpages {
 }
 .success {
 	color: green;
-	font-size: larger;
+	font-size: 123.1%;
 }
 .error {
 	color: red;
-	font-size: larger;
+	font-size: 123.1%;
 }
 .errorbox, .successbox {
-	font-size: larger;
+	font-size: 123.1%;
 	border: 2px solid;
 	padding: .5em 1em;
 	float: left;
@@ -316,7 +312,7 @@ span.subpages {
 	background-color: #dfd;
 }
 .errorbox h2, .successbox h2 {
-	font-size: 1em;
+	font-size: 123.1%;
 	font-weight: bold;
 	display: inline;
 	margin: 0 .5em 0 0;
@@ -341,7 +337,7 @@ in the bottom-right corner of the content area */
 }
 .documentByLine {
 	text-align: right;
-	font-size: 90%;
+	font-size: 93%;
 	clear: both;
 	font-weight: normal;
 	color: #76797c;
@@ -358,7 +354,7 @@ in the bottom-right corner of the content area */
 }
 /* small for tables and similar */
 .small, .small * {
-	font-size: 94%;
+	font-size: 93%;
 }
 table.small {
 	font-size: 100%;
@@ -374,7 +370,7 @@ table.small {
 	border: 1px solid #aaa;
 	background-color: #f9f9f9;
 	padding: 5px;
-	font-size: 95%;
+	font-size: 93%;
 }
 #toc h2,
 .toc h2 {
@@ -404,7 +400,7 @@ table.small {
 }
 #toc .toctoggle,
 .toc .toctoggle {
-	font-size: 94%;
+	font-size: 93%;
 }
 
 .mw-warning {
@@ -450,7 +446,7 @@ div.thumbinner {
 	border: 1px solid #ccc;
 	padding: 3px !important;
 	background-color: #f9f9f9;
-	font-size: 94%;
+	font-size: 93%;
 	text-align: center;
 	overflow: hidden;
 }
@@ -462,7 +458,7 @@ html .thumbcaption {
 	text-align: left;
 	line-height: 1.4em;
 	padding: 3px !important;
-	font-size: 94%;
+	font-size: 93%;
 }
 div.magnify {
 	float: right;
@@ -512,7 +508,7 @@ table.rimage {
 	border: 1px solid #aaa;
 	background-color: #f9f9f9;
 	padding: 5px;
-	font-size: 95%;
+	font-size: 93%;
 }
 
 /*
@@ -636,7 +632,7 @@ special external link styling */
 	overflow: hidden;
 }
 .portlet h4 {
-	font-size: 95%;
+	font-size: 93%;
 	font-weight: normal;
 	white-space: nowrap;
 }
@@ -646,7 +642,7 @@ special external link styling */
 	display: inline;
 	height: 1em;
 	text-transform: lowercase;
-	font-size: 91%;
+	font-size: 93%;
 	font-weight: normal;
 	white-space: nowrap;
 }
@@ -657,13 +653,13 @@ special external link styling */
 	padding: 0 1em 0 1em;
 	text-transform: lowercase;
 	display: block;
-	font-size: 1em;
+	font-size: 100%;
 	height: 1.2em;
 	font-weight: normal;
 	white-space: nowrap;
 }
 .pBody {
-	font-size: 95%;
+	font-size: 93%;
 	background-color: white;
 	color: black;
 	border-collapse: collapse;
@@ -681,7 +677,7 @@ special external link styling */
 	line-height: 1.5em;
 	list-style-type: square;
 	list-style-image: url(bullet.gif);
-	font-size: 95%;
+	font-size: 93%;
 }
 .portlet li {
 	padding: 0;
@@ -723,7 +719,7 @@ special external link styling */
 }
 input.searchButton {
 	margin-top: 1px;
-	font-size: 95%;
+	font-size: 93%;
 }
 #searchGoButton {
 	padding-left: .5em;
@@ -733,7 +729,7 @@ input.searchButton {
 #searchInput {
 	width: 10.9em;
 	margin: 0;
-	font-size: 95%;
+	font-size: 93%;
 }
 #p-search .pBody {
 	padding: .5em .4em .4em .4em;
@@ -741,7 +737,7 @@ input.searchButton {
 }
 #p-search #searchform div div {
 	margin-top: .4em;
-	font-size: 95%;
+	font-size: 93%;
 }
 /*
 ** the personal toolbar
@@ -842,7 +838,7 @@ li#pt-login {
 	border-collapse: collapse;
 	padding-left: 1em;
 	list-style: none;
-	font-size: 95%;
+	font-size: 93%;
 }
 #p-cactions ul {
 	list-style: none;
@@ -905,7 +901,7 @@ li#ca-watch, li#ca-unwatch, li#ca-varlang-0, li#ca-print {
 	margin-left: 1.6em;
 }
 #p-cactions .pBody {
-	font-size: 1em;
+	font-size: 100%;
 	background-color: transparent;
 	color: inherit;
 	border-collapse: inherit;
@@ -940,7 +936,7 @@ li#ca-watch, li#ca-unwatch, li#ca-varlang-0, li#ca-print {
 	margin: .6em 0 1em 0;
 	padding: .4em 0 1.2em 0;
 	text-align: center;
-	font-size: 90%;
+	font-size: 93%;
 }
 #footer li {
 	display: inline;
@@ -1040,7 +1036,7 @@ li#ca-watch, li#ca-unwatch, li#ca-varlang-0, li#ca-print {
 	display: none;
 }
 div.prefsectiontip {
-	font-size: x-small;
+	font-size: 85%;
 	padding: .2em 2em;
 	color: #666;
 }
@@ -1056,7 +1052,7 @@ div.prefsectiontip {
 }
 
 .prefcache {
-	font-size: 90%;
+	font-size: 93%;
 	margin-top: 2em;
 }
 
@@ -1142,7 +1138,7 @@ div#userloginForm .captcha {
 	display: inline;
 	margin-bottom: 0;
 }
-* html div.editsection { font-size: smaller; }
+* html div.editsection { font-size: 100%; }
 #pagehistory li.selected { position: relative; }
 
 /* Mac IE 5.0 fix; floated content turns invisible */
@@ -1158,7 +1154,7 @@ div#userloginForm .captcha {
 	margin-left: 13.2em;
 }
 .redirectText {
-	font-size: 150%;
+	font-size: 153.9%;
 	margin: 5px;
 }
 
@@ -1171,7 +1167,7 @@ div#userloginForm .captcha {
 }
 div.patrollink {
 	clear: both;
-	font-size: 75%;
+	font-size: 77%;
 	text-align: right;
 }
 span.newpage, span.minor, span.bot {
@@ -1228,7 +1224,7 @@ div.gallerybox div.thumb {
 
 div.gallerytext {
 	overflow: hidden;
-	font-size: 94%;
+	font-size: 93%;
 	padding: 2px 4px;
 }
 
@@ -1237,7 +1233,7 @@ span.comment {
 }
 
 span.changedby {
-	font-size: 95%;
+	font-size: 93%;
 }
 
 .previewnote {
@@ -1259,7 +1255,7 @@ span.changedby {
 	padding: 3px;
 	margin-top: 0.5em;
 	float: left;
-	font-size: small;
+	font-size: 93%;
 	text-align: center;
 }
 .editExternallyHelp {
@@ -1274,7 +1270,7 @@ span.changedby {
 
 /* Classes for EXIF data display */
 table.mw_metadata {
-	font-size: 0.8em;
+	font-size: 85%;
 	margin-left: 0.5em;
 	margin-bottom: 0.5em;
 	width: 300px;
@@ -1323,7 +1319,7 @@ ul#filetoc {
 	border: 1px solid #aaaaaa;
 	background-color: #f9f9f9;
 	padding: 5px;
-	font-size: 95%;
+	font-size: 93%;
 	margin-bottom: 0.5em;
 	margin-left: 0;
 	margin-right: 0;
@@ -1538,18 +1534,18 @@ div.mw-lag-warn-high {
 .MediaTransformError td {
 	text-align: center;
 	vertical-align: middle;
-	font-size: 90%;
+	font-size: 93%;
 }
 
 /** Special:Search stuff */
 div#mw-search-interwiki-caption {
 	text-align: center;
 	font-weight: bold;
-	font-size: 95%;
+	font-size: 93%;
 }
 
 .mw-search-interwiki-project {
-	font-size: 97%;
+	font-size: 100%;
 	text-align: left;
 	padding-left: 0.2em;
 	padding-right: 0.15em;
@@ -1560,5 +1556,5 @@ div#mw-search-interwiki-caption {
 
 /* God-damned hack for the crappy layout */
 .os-suggest {
-	font-size: 127%;
+	font-size: 123.1%;
 }
