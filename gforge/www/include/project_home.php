@@ -301,7 +301,7 @@ echo $HTML->boxTop(_('Public Areas'), 'Public_Areas');
 // ################# Homepage Link
 
 echo '<div class="public-area-box">';
-echo util_make_link ('http://' . $project->getHomePage(), $HTML->getHomePic(_('Home Page')) . '&nbsp;' . _('Project Home Page'));
+echo util_make_link ('http://' . $project->getHomePage(), $HTML->getHomePic(_('Home Page')) . '&nbsp;' . _('Project Home Page'), false, true);
 echo '</div>
     ';
 
