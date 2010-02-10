@@ -90,7 +90,7 @@ $GLOBALS['sys_session_expire'] = $sys_session_expire;
 $GLOBALS['REMOTE_ADDR'] = getStringFromServer('REMOTE_ADDR') ;
 $GLOBALS['HTTP_USER_AGENT'] = getStringFromServer('HTTP_USER_AGENT') ;
 
-function FusionForgeMWAuth( &$user, &$result ) {
+function FusionForgeMWAuth( $user, &$result ) {
 	global $fusionforgeproject ;
 
 	$cookie = getStringFromCookie ('session_ser') ;
