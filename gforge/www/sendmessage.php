@@ -114,6 +114,7 @@ if (session_loggedin()) {
 	$name  = '';
 	$email = '';
 }
+$subject = getStringFromRequest('subject');
 
 $HTML->header(array('title'=>$GLOBALS['sys_name'].' Staff'));
 
