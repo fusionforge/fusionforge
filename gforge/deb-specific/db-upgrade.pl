@@ -2828,10 +2828,86 @@ eval {
     &update_with_sql("20090507-add_project_query","4.8.99-3");
     &update_with_sql("20090507-browse_list","4.8.99-4");
 
+    $version = &get_db_version ;
+    $target = "4.8.99-5" ;
+    if (&is_lesser ($version, $target)) {
+	&debug ("Initialising tracker workflows") ;
+
+	
+	$query = "SELECT group_id, artifact_group_list.group_artifact_id, element_id, artifact_extra_field_elements.extra_field_id
+		FROM artifact_extra_field_list, artifact_extra_field_elements, artifact_group_list
+		WHERE artifact_extra_field_list.extra_field_id=artifact_extra_field_elements.extra_field_id
+		AND artifact_group_list.group_artifact_id = artifact_extra_field_list.group_artifact_id
+		AND field_type=7" ;
+	# &debug ($query) ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	while (@array = $sth->fetchrow_array) {
+	    my $gid = $array[0];
+	    my $gaid = $array[1];
+	    my $eid = $array[2];
+
+	    my $query2 = "SELECT extra_field_id
+				FROM artifact_extra_field_list 
+				WHERE group_artifact_id=$gaid
+                                AND field_type = 7
+				ORDER BY field_type ASC" ;
+	    my $sth2 = $dbh->prepare ($query2) ;
+	    $sth2->execute () ;
+	    
+	    if (my @array2 = $sth2->fetchrow_array) {
+		my $efid = $array2[0];
+		$sth2->finish () ;
+
+		$query2 = "SELECT element_id,element_name,status_id
+				FROM artifact_extra_field_elements
+				WHERE extra_field_id = $efid
+				ORDER BY element_pos ASC, element_id ASC" ;
+		# debug $query2;
+		$sth2 = $dbh->prepare ($query2) ;
+		$sth2->execute () ;
+		while (@array2 = $sth2->fetchrow_array) {
+		    my $eid2 = $array2[0];
+		    if ($eid2 != $eid) {
+			my $query3 = "INSERT INTO artifact_workflow_event
+				(group_artifact_id, field_id, from_value_id, to_value_id)
+				VALUES ($gaid, $efid, $eid, $eid2)";
+			# debug $query3;
+			my $sth3 = $dbh->prepare ($query3) ;
+			$sth3->execute () ;
+			$sth3->finish () ;
+			$query3 = "INSERT INTO artifact_workflow_event
+				(group_artifact_id, field_id, from_value_id, to_value_id)
+				VALUES ($gaid, $efid, $eid2, $eid)";
+			# debug $query3;
+			$sth3 = $dbh->prepare ($query3) ;
+			$sth3->execute () ;
+			$sth3->finish () ;
+		    }
+		}
+		$sth2->finish () ;
+		my $query3 = "INSERT INTO artifact_workflow_event
+				(group_artifact_id, field_id, from_value_id, to_value_id)
+				VALUES ($gaid, $efid, 100, $eid)";
+		# debug $query3;
+		my $sth3 = $dbh->prepare ($query3) ;
+		$sth3->execute () ;
+		$sth3->finish () ;
+	    }
+	}
+	$sth->finish () ;
+
+	@reqlist = () ;
+	&update_db_version ($target) ;
+	&debug ("Committing.") ;
+	$dbh->commit () ;
+    }
+
+
     ########################### INSERT HERE #################################
 
     &debug ("It seems your database $action went well and smoothly. That's cool.") ;
-    &debug ("Please enjoy using GForge.") ;
+    &debug ("Please enjoy using FusionForge.") ;
 
     # There should be a commit at the end of every block above.
     # If there is not, then it might be symptomatic of a problem.
