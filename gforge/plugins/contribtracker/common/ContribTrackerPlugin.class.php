@@ -100,7 +100,7 @@ class ContribTrackerPlugin extends Plugin {
 
 			if ($group->usesPlugin($this->name)) {
 				global $HTML ;
-				echo '<div id="latest-major-contributions">';
+				echo '<div id="major-contributions">';
 				echo $HTML->boxTop(_('Latest Major Contributions'), 'Latest_Major_Contributions');
 
 				echo '
