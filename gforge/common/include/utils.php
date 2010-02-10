@@ -996,7 +996,7 @@ function util_make_url ($path) {
 
 function util_make_uri ($path) {
 	$path = ereg_replace ("^/", "", $path) ;
-	$uri .= normalized_urlprefix () ;
+	$uri = normalized_urlprefix () ;
 	$uri .= $path ;
 	return $uri ;
 }
