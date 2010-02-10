@@ -49,6 +49,8 @@ function show_top_downloads() {
 	$month = date("Ym",time()-(2*3600*24));
 	$day = date("d",time()-(2*3600*24));
 
+	$return = '' ;
+
 	$res_topdown = db_query_params ('
 		SELECT groups.group_id,
 		groups.group_name,

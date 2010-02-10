@@ -32,7 +32,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>
 	xmlns:admin="http://webns.net/mvcb/" >';
 
 function getres ($gid, $l) {
-	if ($id) {
+	if ($gid) {
 		$res = db_query_params ('SELECT forum_id,summary,post_date,details,g.group_id,g.group_name,u.realname
 	FROM news_bytes, groups g,users u
 	WHERE news_bytes.group_id=g.group_id
@@ -70,7 +70,7 @@ print " <rdf:Seq>\n";
 
 $res = getres ($group_id, $limit) ;
 while ($row = db_fetch_array($res)) {
-	print " <rdf:li rdf:resource=\"".util_make_url ('/forum/forum.php?forum_id='.$row[forum_id])."\" />\n";
+	print " <rdf:li rdf:resource=\"".util_make_url ('/forum/forum.php?forum_id='.$row['forum_id'])."\" />\n";
 }
 
 print " </rdf:Seq>\n";
@@ -79,11 +79,11 @@ print " </channel>\n";
 
 $res = getres ($group_id, $limit) ;
 while ($row = db_fetch_array($res)) {
-	print "\n <item rdf:about=\"".util_make_url ('/forum/forum.php?forum_id='.$row[forum_id])."\">\n";
+	print "\n <item rdf:about=\"".util_make_url ('/forum/forum.php?forum_id='.$row['forum_id'])."\">\n";
 	print "   <title>".htmlspecialchars($row['summary'])."</title>\n";
 	// if news group, link is main page
 	if ($row['group_id'] != $sys_news_group) {
-		print "   <link>".util_make_url ('/forum/forum.php?forum_id='.$row[forum_id])."</link>\n";
+		print "   <link>".util_make_url ('/forum/forum.php?forum_id='.$row['forum_id'])."</link>\n";
 	} else {
 		print "   <link>".util_make_url ('/')."</link>\n";
 	}
