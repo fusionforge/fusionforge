@@ -382,7 +382,7 @@ if ($project->usesPm()) {
 	print util_make_link( '/pm/?group_id='.$group_id, $link_content);
 	
 	$result = db_query_params ('SELECT * FROM project_group_list WHERE group_id=$1 AND is_public=1',
-				   $array ($group_id));
+				   array ($group_id));
 	$rows = db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '<br /><em>'._('There are no public subprojects available').'</em>';
