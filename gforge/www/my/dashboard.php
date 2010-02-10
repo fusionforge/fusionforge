@@ -152,8 +152,8 @@ ORDER BY group_name',
                         	                                $art->getSummary().
                                 	                        '</a></td>';
                                         	        if ($display_col['changed'])
-                                                	        echo '<td width="150">'. (($set != 'closed' && $art->getLastModifiedDate() < $then)?'* ':'&nbsp; ') .
-                                                        	        date(_('Y-m-d'),$art->getLastModifiedDate()) .'</td>';
+                                                	        echo '<td width="150">'
+                                                        	        .date(_('Y-m-d'),$art->getLastModifiedDate()) .'</td>';
 	                                                if ($display_col['status'])
         	                                                echo '<td>'. $art->getStatusName() .'</td>';
                 	                                if ($display_col['priority'])
