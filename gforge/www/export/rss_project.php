@@ -66,7 +66,7 @@ function get_rss_20_doc () {
 
 function get_rss_feed_20 ($page,$rss_title) {
 	// RSS 2.0 format
-	$rss_feed_20 .= '<li><a href="' . $page . '">' . $rss_title . '</a>';
+	$rss_feed_20 = '<li><a href="' . $page . '">' . $rss_title . '</a>';
 	$rss_feed_20 .= '<link href="' . $page . '" title="' . $rss_title . ', RSS 2.0" rel="alternate" type="application/rss+xml" />';
 	$rss_feed_20 .= get_rss_20_doc () . '</li>';
 	return $rss_feed_20;
