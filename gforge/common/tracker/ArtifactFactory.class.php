@@ -56,6 +56,9 @@ class ArtifactFactory extends Error {
 	var $moddaterange;
 	var $opendaterange;
 	var $closedaterange;
+	var $summary;
+	var $description;
+	var $followups;
 	
 	var $query_type;		// query, default, custom
 	var $query_id;			// id of the query (when query_type=query)
