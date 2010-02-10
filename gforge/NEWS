@@ -39,6 +39,11 @@ dynamically, there's also a db_query_qpa() abstraction, with a
 db_construct_qpa() method to manipulate "QPA" (query+params array)
 objects.
 
+On a more visible note, the default theme has been reworked to
+increase the accessibility of the web pages; this rewrite also brings
+better maintainability, easier customisation by CSS and more
+conformant XHTML.
+
 
 Release notes for FusionForge 4.8
 ---------------------------------

@@ -30,6 +30,7 @@ require_once $gfcommon.'include/FusionForge.class.php';
 <li><?php print _('Rewritten SCM subsystem, with new plugins for Bazaar, Darcs and Git'); ?></li>
 <li><?php print _('New version of Mediawiki plugin, providing independent wikis for each project'); ?></li>
 <li><?php print _('Various new plugins: projectlabels, globalsearch, extratabs'); ?></li>
+<li><?php print _('An in-depth rewrite of the theme for better accessibility and XHTML conformance'); ?></li>
 </ul>
 
 <h3><?php print _("What's new in FusionForge 4.8"); ?></h3>
