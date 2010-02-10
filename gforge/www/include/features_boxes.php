@@ -75,7 +75,7 @@ function show_top_downloads() {
 			$return .= '<tr>';
 			$return .= '<td class="width-stat-col1">' . $t_downloads . '</td>';
 			$return .= '<td>' . $t_prj_link . '</td>';
-			$return .= '</tr>\n';
+			$return .= '</tr>';
 		}
 	}
 	if ( $return != "" ) {
