@@ -100,7 +100,8 @@ class ContribTrackerPlugin extends Plugin {
 
 			if ($group->usesPlugin($this->name)) {
 				global $HTML ;
-				echo $HTML->boxTop(_('Latest Major Contributions'));
+				echo '<div id="latest-major-contributions">';
+				echo $HTML->boxTop(_('Latest Major Contributions'), 'Latest_Major_Contributions');
 
 				echo '
 	<table cellspacing="1" cellpadding="5" width="100%" border="0">
@@ -162,6 +163,7 @@ class ContribTrackerPlugin extends Plugin {
 					    </div>
 						      <?php
 						      echo $HTML->boxBottom();
+				echo '</div>';
 			}
 		}
                 elseif ($hookname == "site_admin_option_hook") {
