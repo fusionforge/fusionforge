@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: FusionForge 4.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-09-03 19:14+0200\n"
-"PO-Revision-Date: 2010-01-07 22:11+0200\n"
+"PO-Revision-Date: 2010-02-10 17:34+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
 "Language: fr\n"
@@ -8359,7 +8359,7 @@ msgstr "Voir les <a href=\"%1$s\">statistiques</a>"
 #: www/include/project_home.php:97
 #, php-format
 msgid " or <a href=\"%1$s\">Activity</a>"
-msgstr " ou le <a href=\"%2$s\">rapport d'activité</a> pour le projet."
+msgstr " ou le <a href=\"%1$s\">rapport d'activité</a> pour le projet."
 
 #: www/include/project_home.php:96
 #, php-format
