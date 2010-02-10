@@ -37,6 +37,8 @@ UNRELEASED:
   for projects, allowing different sets of permissions.
 * Forums: New 'move' option to move a thread from one forum to another (Alcatel-Lucent).
 * Tasks: Improved CSV import/export (Alcatel-Lucent)
+* Global: rework of the default theme, for better accessibility, maintainability and
+  conformance (developed by Open-S for Adullact)
 
 FusionForge-4.8.2:
 * Maintenance release, security and bugfixes.
