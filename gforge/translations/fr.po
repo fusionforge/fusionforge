@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: FusionForge 4.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-02-10 17:57+0100\n"
-"PO-Revision-Date: 2010-02-10 17:34+0100\n"
+"PO-Revision-Date: 2010-02-10 18:17+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,7 +44,6 @@ msgid "DocumentGroup: Invalid DocumentGroup parent ID"
 msgstr "DocumentGroup: ID parent non valable"
 
 #: common/docman/DocumentGroup.class.php:125
-#, fuzzy
 msgid "Group name is already exists"
 msgstr "Le nom du groupe est déjà pris"
 
@@ -53,7 +52,6 @@ msgid "DocumentGroup: Invalid DocumentGroup ID"
 msgstr "Groupe de documents : numéro de groupe de documents invalide"
 
 #: common/docman/DocumentGroup.class.php:279
-#, fuzzy
 msgid "Group name already exists"
 msgstr "Le nom du groupe est déjà pris"
 
@@ -2863,9 +2861,8 @@ msgid "Top associated forges"
 msgstr "Forges partenaires les plus importantes"
 
 #: plugins/globalsearch/common/GlobalsearchPlugin.class.php:63
-#, fuzzy
 msgid "Search associated forges"
-msgstr "Forges partenaires les plus importantes"
+msgstr "Rechercher dans les forges partenaires"
 
 #: plugins/globalsearch/common/GlobalsearchPlugin.class.php:64
 #: plugins/globalsearch/common/globalsearch_stats_boxes.php:50
@@ -6268,14 +6265,12 @@ msgid "No User Selected"
 msgstr "Aucun utilisateur sélectionné"
 
 #: www/developer/index.php:41
-#, fuzzy
 msgid "Missing User Argument"
-msgstr "Argument <i>fichier</i> manquant."
+msgstr "Argument <i>utilisateur</i> manquant."
 
 #: www/developer/index.php:41
-#, fuzzy
 msgid "A user must be specified for this page."
-msgstr "Cette page requiert qu'un fichier soit spécifié."
+msgstr "Cette page requiert qu'un utilisateur soit spécifié."
 
 #: www/developer/index.php:45 www/users:41
 msgid "Invalid User"
@@ -6664,12 +6659,11 @@ msgid "Latest News"
 msgstr "Dernières annonces"
 
 #: www/export/rss_project.php:75 www/export/rss_project.php:77
-#, fuzzy
 msgid "RSS Exports"
 msgstr "Exports RSS"
 
 #: www/export/rss_project.php:79
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "%1$s data is exported in RSS 2.0 format. Many of\n"
 "the export URLs can also accept form/get data to customize the output. All\n"
@@ -6688,14 +6682,12 @@ msgstr ""
 "d'un projet spécifique, utilisez les liens ci-dessous."
 
 #: www/export/rss_project.php:90
-#, fuzzy
 msgid "Project News"
-msgstr "Nom du projet"
+msgstr "Nouvelles du projet"
 
 #: www/export/rss_project.php:107
-#, fuzzy
 msgid "Project Releases"
-msgstr "Étiquettes de projet"
+msgstr "Publications de projet"
 
 #: www/export/rss_project.php:116
 msgid "Go back"
@@ -6707,7 +6699,7 @@ msgstr "Chercher dans le projet entier"
 
 #: www/forum/admin/ForumAdmin.class.php:63
 msgid "Move thread"
-msgstr ""
+msgstr "Déplacer la discussion"
 
 #: www/forum/admin/ForumAdmin.class.php:87 www/forum/admin/index.php:85
 #: www/forum/admin/monitor.php:44
@@ -6901,24 +6893,23 @@ msgid "Error Getting ForumHTML"
 msgstr "Erreur lors de l'accès à un objet ForumHTML"
 
 #: www/forum/admin/index.php:352
-#, fuzzy
 msgid "Thread not moved"
-msgstr "Fils de discussion"
+msgstr "Discussion non déplacée"
 
 #: www/forum/admin/index.php:375
 #, php-format
 msgid "Thread successfully moved from %1$s forum to %2$s forum"
-msgstr ""
+msgstr "La discussion a été déplacée du forum %1$s au forum %2$s."
 
 #: www/forum/admin/index.php:406
-#, fuzzy, php-format
+#, php-format
 msgid "No Forums Found For %s"
-msgstr "Pas de forum trouvé pour %1$s"
+msgstr "Pas de forum trouvé pour %s"
 
 #: www/forum/admin/index.php:436
 #, php-format
 msgid "Move thread from %s forum to the following forum:"
-msgstr ""
+msgstr "Déplacer la discussion depuis le forum %s vers le forum suivant :"
 
 #: www/forum/admin/index.php:494 www/forum/index.php:48
 #, php-format
@@ -7398,7 +7389,6 @@ msgstr ""
 "Etape 2&nbsp;:&nbsp;Ajouter des fichiers à cette version</h3><p>Maintenant"
 
 #: www/frs/admin/editrelease.php:312 www/frs/admin/qrs.php:242
-#, fuzzy
 msgid ""
 "NOTE: In some browsers you must select the file in the file-upload dialog "
 "and click \"OK\". Double-clicking doesn't register the file."
@@ -8109,9 +8099,8 @@ msgstr ""
 "cliquer deux fois."
 
 #: www/include/features_boxes.php:17
-#, fuzzy
 msgid "Features Boxes"
-msgstr "Demandes de fonctionnalités"
+msgstr "Boîtes d'informations"
 
 #: www/include/features_boxes.php:20
 msgid "Tag Cloud"
@@ -8145,9 +8134,8 @@ msgid "No Stats Available"
 msgstr "Pas de statistiques disponibles"
 
 #: www/include/features_boxes.php:88
-#, fuzzy
 msgid "All the ranking"
-msgstr "Tous les envois en masse"
+msgstr "Tout le classement"
 
 #: www/include/features_boxes.php:144
 msgid "Hosted Projects"
@@ -8162,19 +8150,16 @@ msgid "m/d"
 msgstr "d/m"
 
 #: www/include/features_boxes.php:181
-#, fuzzy
 msgid "All newest projects"
-msgstr "Ajouter un projet"
+msgstr "Tous les derniers projets"
 
 #: www/include/features_boxes.php:200
-#, fuzzy
 msgid "All users"
 msgstr "Tous les utilisateurs"
 
 #: www/include/features_boxes.php:222
-#, fuzzy
 msgid "All project activities"
-msgstr "Activité du projet"
+msgstr "Toutes les activités de projet"
 
 #: www/include/html.php:319 www/include/html.php:392 www/include/html.php:577
 #: www/pm/browse_task.php:317 www/pm/browse_task.php:348
@@ -8214,9 +8199,8 @@ msgid "Project Info"
 msgstr "Information sur un projet"
 
 #: www/include/project_home.php:31
-#, fuzzy
 msgid "Project summary"
-msgstr "Historique du projet"
+msgstr "Résumé du projet"
 
 #: www/include/project_home.php:46
 #, php-format
@@ -8540,7 +8524,7 @@ msgid "This developer is a member of the following projects:"
 msgstr "Ce développeur fait partie des projets suivants :"
 
 #: www/include/user_home.php:177
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "<p>The Peer rating box shows all rating averages (and response levels) for "
 "each individual criteria. Due to the math and processing required to do "
@@ -8698,7 +8682,7 @@ msgstr ""
 msgid ""
 "An in-depth rewrite of the theme for better accessibility and XHTML "
 "conformance"
-msgstr ""
+msgstr "Une récriture un profondeur du thème graphique, qui apporte une meilleure accessibilité et une plus grande conformité à la norme XHTML"
 
 #: www/index_std.php:36
 msgid "What's new in FusionForge 4.8"
@@ -9382,9 +9366,8 @@ msgid "Submit News"
 msgstr "Proposer une annonce"
 
 #: www/news/news_utils.php:286
-#, fuzzy
 msgid "Not Found"
-msgstr "Aucune demande trouvée"
+msgstr "Aucune nouvelle trouvée"
 
 #: www/news/submit.php:62
 msgid ""
@@ -10332,24 +10315,23 @@ msgid ""
 "This page allows you to export or import all the tasks using a CSV (<a href="
 "\"http://en.wikipedia.org/wiki/Comma-separated_values\">Comma Separated "
 "Values</a>) File. This format can be used to view tasks using MS Excel."
-msgstr ""
+msgstr "Cette page permet d'exporter ou d'importer toutes les tâches au format <a href=\"http://fr.wikipedia.org/wiki/Comma-separated_values\">CSV</a>.  Ce format peut être utilisé pour visualiser les tâches dans un tableur."
 
 #: www/pm/csv.php:66
 msgid "Export tasks as a CSV file"
-msgstr ""
+msgstr "Exporter les tâches dans un fichier CSV"
 
 #: www/pm/csv.php:68
 msgid "Selected CSV Format :"
-msgstr ""
+msgstr "Format CSV sélectionné :"
 
 #: www/pm/csv.php:70
-#, fuzzy
 msgid "Export CSV file"
-msgstr "Exports disponibles"
+msgstr "Exporter un fichier CSV"
 
 #: www/pm/csv.php:72
 msgid "Import tasks using a CSV file"
-msgstr ""
+msgstr "Importer des tâches à partir d'un fichier CSV"
 
 #: www/pm/csv.php:74 www/pm/uploadcsv.php:17
 msgid "Choose a file in the proper .csv format for uploading."
@@ -10406,7 +10388,7 @@ msgstr "Ajouter une tâche"
 
 #: www/pm/include/ProjectGroupHTML.class.php:71
 msgid "Import/Export CSV"
-msgstr ""
+msgstr "Import/export CSV"
 
 #: www/pm/include/ProjectGroupHTML.class.php:120
 msgid "Not Started"
@@ -10846,7 +10828,6 @@ msgid "Group Trove Information"
 msgstr "Information sur le groupe"
 
 #: www/project/admin/group_trove.php:75
-#, fuzzy
 msgid ""
 "<h1>Edit Trove Categorization</h1><p>Select up to three locations for this "
 "project in each of the Trove root categories. If the project does not "
@@ -10855,14 +10836,7 @@ msgid ""
 "locations available in the map. Simultaneous categorization in a specific "
 "category AND a parent category will result in only the more specific "
 "categorization being accepted</p>."
-msgstr ""
-"<h3>Éditer la catégorisation</h3><p>Choisissez jusqu'à trois catégories pour "
-"ce projet dans chacune des arborescences de classement.  Vous pouvez bien "
-"entendu choisir « aucune » lorsque les catégories ne s'appliquent pas.</"
-"p><p>Important : les projets doivent être classés dans la catégorie la plus "
-"spécifique qui s'applique à eux.  S'ils sont simultanément classés dans une "
-"catégorie spécifique et une plus générique, seule la catégorie la plus "
-"spécifique sera conservée.</p>"
+msgstr "<h1>Éditer la catégorisation</h1><p>Choisissez jusqu'à trois catégories pour ce projet dans chacune des arborescences de classement.  Vous pouvez bien entendu choisir « aucune » lorsque les catégories ne s'appliquent pas.</p><p>Important : les projets doivent être classés dans la catégorie la plus spécifique qui s'applique à eux.  S'ils sont simultanément classés dans une catégorie spécifique et une plus générique, seule la catégorie la plus spécifique sera conservée.</p>"
 
 #: www/project/admin/group_trove.php:109
 msgid "Update All Category Changes"
@@ -10891,18 +10865,16 @@ msgid "Project WWW directory on shell server:&nbsp;"
 msgstr "Répertoire de service du site web (www)&nbsp;:&nbsp;"
 
 #: www/project/admin/index.php:133 www/project/admin/tools.php:90
-#, fuzzy
 msgid "Project information updated"
-msgstr "Informations de groupes mises à jour"
+msgstr "Informations du projet mises à jour"
 
 #: www/project/admin/index.php:144
-#, fuzzy
 msgid "Descriptive Project Name"
-msgstr "Nom précis du projet&nbsp;"
+msgstr "Nom précis du projet"
 
 #: www/project/admin/index.php:156
 msgid "Tags (use comma as separator)"
-msgstr ""
+msgstr "Étiquettes (séparées par des virgules)"
 
 #: www/project/admin/index.php:160
 msgid "Trove Categorization:&nbsp;"
@@ -10994,9 +10966,8 @@ msgid "Users"
 msgstr "Utilisateurs"
 
 #: www/project/admin/project_admin_utils.php:63
-#, fuzzy
 msgid "Tools"
-msgstr "À faire"
+msgstr "Outils"
 
 #: www/project/admin/project_admin_utils.php:66
 msgid "Post Jobs"
@@ -11103,84 +11074,69 @@ msgid "Setting"
 msgstr "Paramètrage"
 
 #: www/project/admin/tools.php:98
-#, fuzzy
 msgid "Edit Project Info"
-msgstr "Information sur un projet"
+msgstr "Modification des informations sur le projet"
 
 #: www/project/admin/tools.php:154
-#, fuzzy
 msgid "Use Trackers"
-msgstr "Suivi"
+msgstr "Utiliser les outils de suivi"
 
 #: www/project/admin/tools.php:180
-#, fuzzy
 msgid "Use Task Manager"
-msgstr "Gestion des tâches"
+msgstr "Utiliser le gestionnaire de tâches"
 
 #: www/project/admin/tools.php:193
-#, fuzzy
 msgid "Use Documents"
-msgstr "Documents"
+msgstr "Utiliser le gestionnaire de documents"
 
 #: www/project/admin/tools.php:232
-#, fuzzy
 msgid "Use Source Code"
-msgstr "Code source"
+msgstr "Utiliser le gestionnaire de code source"
 
 #: www/project/admin/tools.php:291
 msgid "Tool Admin"
 msgstr "La boite à outils de l'administrateur"
 
 #: www/project/admin/tools.php:294
-#, fuzzy
 msgid "Forums Admin"
 msgstr "Administration des forums"
 
 #: www/project/admin/tools.php:297
-#, fuzzy
 msgid "Trackers Admin"
-msgstr "Administration de l'outil de suivi"
+msgstr "Administration des outils de suivi"
 
 #: www/project/admin/tools.php:300
-#, fuzzy
 msgid "Mailing Lists Admin"
-msgstr "Listes de diffusion"
+msgstr "Administration des listes de diffusion"
 
 #: www/project/admin/tools.php:303
-#, fuzzy
 msgid "Task Manager Admin"
 msgstr "Administration du gestionnaire de tâches"
 
 #: www/project/admin/tools.php:306
-#, fuzzy
 msgid "Documents Admin"
-msgstr "Documents"
+msgstr "Administration du gestionnaire de documents"
 
 #: www/project/admin/tools.php:309
-#, fuzzy
 msgid "Survey Admin"
-msgstr "Administration de sondages"
+msgstr "Administration des sondages"
 
 #: www/project/admin/tools.php:312
-#, fuzzy
 msgid "News Admin"
 msgstr "Administration des annonces"
 
 #: www/project/admin/tools.php:315
-#, fuzzy
 msgid "Source Code Admin"
-msgstr "Code source"
+msgstr "Administration du gestionnaire de code source"
 
 #: www/project/admin/tools.php:318
-#, fuzzy
 msgid "File Release System Admin"
-msgstr "Système de publication de fichiers"
+msgstr "Administration du système de publication de fichiers"
 
 #: www/project/admin/users.php:81 www/project/admin/users.php:115
 #: www/project/admin/users.php:130
-#, fuzzy
 msgid "Role not selected"
-msgstr "Rejeter les annonces sélectionnées"
+msgstr "Aucun rôle choisi"
 
 #: www/project/admin/users.php:87 www/project/admin/users.php:143
 msgid "User Added Successfully"
@@ -11191,17 +11147,15 @@ msgid "User Removed Successfully"
 msgstr "Utilisateur supprimé avec succès"
 
 #: www/project/admin/users.php:121
-#, fuzzy
 msgid "User Updated Successfully"
 msgstr "Mise à jour de l'utilisateur réussie"
 
 #: www/project/admin/users.php:166
-#, fuzzy, php-format
+#, php-format
 msgid "Project Admin: %s"
 msgstr "Administration du projet %1$s"
 
 #: www/project/admin/users.php:214 www/project/admin/users.php:230
-#, fuzzy
 msgid "Add User"
 msgstr "Ajouter un utilisateur"
 
@@ -13690,7 +13644,7 @@ msgstr ""
 "supplémentaire !"
 
 #: www/tracker/admin/form-deleteextrafieldelement.php:22
-#, fuzzy, php-format
+#, php-format
 msgid "Remove a custom field element in %s"
 msgstr "Modifier un élément personnalisé pour %s"
 
@@ -14061,14 +14015,12 @@ msgid "Workflow saved"
 msgstr "Processus sauvegardé."
 
 #: www/tracker/admin/updates.php:454
-#, fuzzy
 msgid "Error deleting an element"
-msgstr "Erreur lors de l'ajout d'un élément"
+msgstr "Erreur lors de la suppression d'un élément"
 
 #: www/tracker/admin/updates.php:457
-#, fuzzy
 msgid "Element deleted"
-msgstr "Elément mis à jour"
+msgstr "Elément supprimé"
 
 #: www/tracker/browse.php:163 www/tracker/query.php:181
 msgid "Submitter"
@@ -14544,346 +14496,3 @@ msgstr[1] ""
 #: www/users:33
 msgid "No User Name Provided"
 msgstr "Aucun nom d'utilisateur n'a été fourni"
-
-#~ msgid "Project Exports"
-#~ msgstr "Exports du projet"
-
-#~ msgid " Developer Project News"
-#~ msgstr " - Annonces projet"
-
-#~ msgid " Activity"
-#~ msgstr " - Activité projet"
-
-#~ msgid " Developer New Project Releases"
-#~ msgstr " - derniers fichiers publiés"
-
-#~ msgid "No attachment found"
-#~ msgstr "Aucune pièce jointe trouvée"
-
-#~ msgid "BY"
-#~ msgstr "Par"
-
-#~ msgid "DATE"
-#~ msgstr "Date"
-
-#~ msgid "SUBJECT"
-#~ msgstr "Sujet"
-
-#~ msgid "Release &amp; Notes"
-#~ msgstr "Notes de publication"
-
-#~ msgid "Project totals"
-#~ msgstr "Totaux du projet"
-
-#~ msgid "Quote"
-#~ msgstr "Citation"
-
-#~ msgid "Code"
-#~ msgstr "Code"
-
-#~ msgid "Wrote"
-#~ msgstr "a écrit"
-
-#~ msgid "Bold text: [b]text[/b]  (alt+b)"
-#~ msgstr "Texte en gras : [b]texte[/b] (alt+b)"
-
-#~ msgid "Italic text: [i]text[/i]  (alt+i)"
-#~ msgstr "Texte en italique : [i]texte[/i] (alt+i)"
-
-#~ msgid "Underline text: [u]text[/u]  (alt+u)"
-#~ msgstr "Texte souligné : [u]texte[/u] (alt+u)"
-
-#~ msgid "Quote text: [quote]text[/quote]  (alt+q)"
-#~ msgstr "Citation : [quote]texte[/quote] (alt+q)"
-
-#~ msgid "Code display: [code]code[/code]  (alt+c)"
-#~ msgstr "Affichage de code : [code]texte[/code] (alt+c)"
-
-#~ msgid "List: [list]text[/list] (alt+l)"
-#~ msgstr "Liste : [list]texte[/list] (alt+l)"
-
-#~ msgid "Ordered list: [list=]text[/list]  (alt+o)"
-#~ msgstr "Liste numérotée : [list=]texte[/list] (alt+o)"
-
-#~ msgid "Insert image: [img]http://image_url[/img]  (alt+p)"
-#~ msgstr "Insertion d'une image : [img]http://url_image[/img] (alt+p)"
-
-#~ msgid ""
-#~ "Insert URL: [url]http://url[/url] or [url=http://url]URL text[/url]  (alt"
-#~ "+w)"
-#~ msgstr ""
-#~ "Insertion d'un lien : [url]http://url[/url] ou [url=http://url]texte "
-#~ "descriptif[/url] (alt+w)"
-
-#~ msgid "Close all open bbCode tags"
-#~ msgstr "Fermer tous les éléments BBcode ouverts"
-
-#~ msgid ""
-#~ "Font color: [color=red]text[/color]  Tip: you can also use color=#FF0000"
-#~ msgstr ""
-#~ "Couleur de texte : [color=red]texte[/color] (vous pouvez aussi utiliser "
-#~ "des valeurs numériques comme color=#FF0000)"
-
-#~ msgid "Font size: [size=x-small]small text[/size]"
-#~ msgstr "Taille du texte : [size=x-small]texte[/size]"
-
-#~ msgid ""
-#~ "Link to Task: [task]Forumid:Subproject:Taskid:TaskName[/task]   (alt+k)"
-#~ msgstr ""
-#~ "Lien vers une tâche : [task]Forumid:Subproject:Taskid:TaskName[/task]   "
-#~ "(alt+k)"
-
-#~ msgid "Link to Artifact: [artifact]ArtifactID[/artifact]   (alt+h)"
-#~ msgstr "Lien vers un artifact : [artifact]ArtifactID[/artifact]   (alt+h)"
-
-#~ msgid "Font colour"
-#~ msgstr "Couleur de texte"
-
-#~ msgid "Dark Red"
-#~ msgstr "Rouge sombre"
-
-#~ msgid "Red"
-#~ msgstr "Rouge"
-
-#~ msgid "Orange"
-#~ msgstr "Orange"
-
-#~ msgid "Brown"
-#~ msgstr "Brun"
-
-#~ msgid "Yellow"
-#~ msgstr "Jaune"
-
-#~ msgid "Green"
-#~ msgstr "Vert"
-
-#~ msgid "Olive"
-#~ msgstr "Vert olive"
-
-#~ msgid "Cyan"
-#~ msgstr "Bleu cyan"
-
-#~ msgid "Blue"
-#~ msgstr "Bleu"
-
-#~ msgid "Dark Blue"
-#~ msgstr "Bleu foncé"
-
-#~ msgid "Indigo"
-#~ msgstr "Indigo"
-
-#~ msgid "Violet"
-#~ msgstr "Violet"
-
-#~ msgid "White"
-#~ msgstr "Blanc"
-
-#~ msgid "Black"
-#~ msgstr "Noir"
-
-#~ msgid "Font size"
-#~ msgstr "Taille de police"
-
-#~ msgid "Tiny"
-#~ msgstr "Minuscule"
-
-#~ msgid "Small"
-#~ msgstr "Petit"
-
-#~ msgid "Normal"
-#~ msgstr "Normal"
-
-#~ msgid "Large"
-#~ msgstr "Grand"
-
-#~ msgid "Huge"
-#~ msgstr "Énorme"
-
-#~ msgid "Close Tags"
-#~ msgstr "Fermer les élements"
-
-#~ msgid "Tip: Styles can be applied quickly to selected text"
-#~ msgstr ""
-#~ "Astuce : les styles peuvent être appliqués rapidement sur le texte "
-#~ "sélectionné."
-
-#~ msgid "Smilies's list"
-#~ msgstr "Liste de trombines"
-
-#~ msgid ""
-#~ "<p>If you are familiar with this user, please take a moment to rate him/"
-#~ "her on the following criteria. Keep in mind, that your rating will be "
-#~ "visible to the user and others.</p><p>The %1$s Peer Rating system is "
-#~ "based on concepts from <a href=\"http://www.advogato.com/\">Advogato.</a> "
-#~ "The system has been re-implemented and expanded in a few ways.</p>"
-#~ msgstr ""
-#~ "<p>Si vous connaissez cet utilisateur, veuillez prendre quelques instants "
-#~ "pour l'évaluer selon les critères suivants.  Veuillez garder à l'esprit "
-#~ "que votre évaluation sera visible à la fois pour cet utilisateur et pour "
-#~ "les autres.</p><p>Le système d'évaluations croisées de %1$s reprend des "
-#~ "concepts initialement développés sur <a href=\"http://www.advogato.com/"
-#~ "\">Advogato</a>, bien qu'il ait été réimplémenté et étendu."
-
-#~ msgid "Download as CSV"
-#~ msgstr "Télécharger un export au format CSV"
-
-#~ msgid "Upload CSV"
-#~ msgstr "Uploader un fichier au format CSV"
-
-#~ msgid "Failed to find user %s"
-#~ msgstr "Echec lors de la recherche de l'utilisateur %s"
-
-#~ msgid "Short Description:&nbsp;"
-#~ msgstr "Description courte&nbsp;:&nbsp;"
-
-#~ msgid "Homepage Link:&nbsp;"
-#~ msgstr "Lien vers la page d'accueil&nbsp;:&nbsp;"
-
-#~ msgid "Download Your Nightly SCM Tree Tarball"
-#~ msgstr ""
-#~ "Télécharger une archive de votre code source (mise à jour chaque nuit)"
-
-#~ msgid "Tracker admin"
-#~ msgstr "Administration de l'outil de suivi"
-
-#~ msgid "Doc manager admin"
-#~ msgstr "Administration du gestionnaire de documentation"
-
-#~ msgid "Forum admin"
-#~ msgstr "Administration des forums"
-
-#~ msgid "FRS admin"
-#~ msgstr "Administration du système de publication de fichiers"
-
-#~ msgid "SCM admin"
-#~ msgstr "Administration de la gestion de configuration"
-
-#~ msgid "Group Members"
-#~ msgstr "Membres du groupe"
-
-#~ msgid "Edit Public Info"
-#~ msgstr "Édition infos  publiques"
-
-#~ msgid "Group Change History"
-#~ msgstr "Historique des changements apportés au groupe"
-
-#~ msgid ""
-#~ "Could not open local.inc file for read/write. Check the permissions for "
-#~ "apache"
-#~ msgstr ""
-#~ "Le fichier local.inc n'a pas pu être ouvert en lecture/écriture.  "
-#~ "Veuillez vérifier les permissions pour Apache."
-
-#~ msgid ""
-#~ "Could not open local.inc file for read. Check the permissions for apache"
-#~ msgstr ""
-#~ "Le fichier local.inc n'a pas pu être ouvert en lecture.  Veuillez "
-#~ "vérifier les permissions pour Apache."
-
-#~ msgid "File wrote successfully."
-#~ msgstr "Le fichier a été écrit correctement."
-
-#~ msgid "File wasn't written or is empty."
-#~ msgstr "Le fichier est vide ou n'a pas été écrit."
-
-#~ msgid "Could not open the file for write. Check the permissions for apache"
-#~ msgstr ""
-#~ "Le fichier n'a pas pu être ouvert en écriture.  Veuillez vérifier les "
-#~ "permissions pour Apache."
-
-#~ msgid ""
-#~ "Could not open the file for read/write. Check the permissions for apache"
-#~ msgstr ""
-#~ "Le fichier n'a pas pu être ouvert en lecture/écriture.  Veuillez vérifier "
-#~ "les permissions pour Apache."
-
-#~ msgid "Could not open the file for read. Check the permissions for apache"
-#~ msgstr ""
-#~ "Le fichier n'a pas pu être ouvert en lecture.  Veuillez vérifier les "
-#~ "permissions pour Apache."
-
-#~ msgid "%d group detached from plugin."
-#~ msgid_plural "%d groups detached from plugin."
-#~ msgstr[0] "Greffon désactivé pour %d groupe."
-#~ msgstr[1] "Greffon désactivé pour %d groupes."
-
-#~ msgid "Add Document Groups"
-#~ msgstr "Ajouter des groupes de documents"
-
-#~ msgid "Add/Edit Document Groups"
-#~ msgstr "Ajouter/Éditer des groupes de documents"
-
-#~ msgid "News Data"
-#~ msgstr "Aucune donnée"
-
-#~ msgid "No file was provided"
-#~ msgstr "Aucun fichier n'a été fourni"
-
-#~ msgid ""
-#~ "<h3>Packages</h3><p>You can use packages to group different file releases "
-#~ "together, or use them however you like. <p><h4>An example of packages:</"
-#~ "h4><p><strong>Mysql-win</strong><br /><strong>Mysql-unix</strong><br /"
-#~ "><strong>Mysql-odbc</strong><p><h4>Your Packages:</h4><p><ol><li>Define "
-#~ "your packages</li><li>Create new releases of packages</li></"
-#~ "ol><p><h3>Releases of Packages</h3><p>A release of a package can contain "
-#~ "multiple files.<p><h4>Examples of Releases</h4><p><strong>3.22.1</"
-#~ "strong><br /><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /"
-#~ "><p>You can create new releases of packages by clicking on <strong>Add/"
-#~ "Edit Releases</strong> next to your package name.<p>"
-#~ msgstr ""
-#~ "<h3>Paquets</h3><p>Vous pouvez utiliser les paquets pour grouper "
-#~ "différentes versions de fichiers ensemble, ou les utiliser comme bon vous "
-#~ "semble. <p><h4>Un exemple de paquets&nbsp;:</h4><p><strong>Mysql-win</"
-#~ "strong><br /><strong>Mysql-unix</strong><br /><strong>Mysql-odbc</"
-#~ "strong><p><h4>Vos paquets&nbsp;:</h4><p><ol><li>Définissez vos paquets</"
-#~ "li><li>Créer de nouvelles versions de paquets</li></ol><p><h3>Version de "
-#~ "paquets</h3><p>Une version de paquet peut contenir de multiple fichiers."
-#~ "<p><h4>Exemples de versions</h4><p><strong>3.22.1</strong><br /"
-#~ "><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /><p>Vous pouvez "
-#~ "créer de nouvelles versions de paquets en cliquant sur <strong>Ajouter/"
-#~ "Éditer versions</strong> à coté du nom de votre paquet.<p>"
-
-#~ msgid ""
-#~ "View project <a href=\"%1$s\" >Statistics</a> or <a href=\"%2$s"
-#~ "\">Activity</a>"
-#~ msgstr ""
-#~ "Voir les <a href=\"%1$s\">statistiques</a> ou le <a href=\"%2$s\">rapport "
-#~ "d'activité</a> pour le projet."
-
-#~ msgid "Developer Info"
-#~ msgstr "Equipe-Projet"
-
-#~ msgid "View Members"
-#~ msgstr "Voir les membres"
-
-#~ msgid "This developer is a member of the following groups:"
-#~ msgstr "Ce développeur fait partie des groupes suivants"
-
-#~ msgid ""
-#~ "<p>Mailing lists provided via a GForge version of <a href=\"http://www."
-#~ "list.org/\">GNU Mailman</a>. Thanks to the Mailman and <a href=\"http://"
-#~ "www.python.org/\">Python</a> crews for excellent software.</p>"
-#~ msgstr ""
-#~ "<p>Les listes de diffusion sont fournies par <a href=\"http://www.list."
-#~ "org/\">GNU Mailman</a>.</p>"
-
-#~ msgid ""
-#~ "<h3>Reporting System Initialization</h3><p>Occasionally, if cronjobs "
-#~ "failed or the database was damaged, you may have to rebuild the reporting "
-#~ "tables.<p>If you are sure you want to rebuild all the reporting tables, "
-#~ "check the \"I'm Sure\" box and click the button below.<p>This could take "
-#~ "a couple minutes, so DO NOT CLICK MORE THAN ONCE.<p>"
-#~ msgstr ""
-#~ "<h3>Initialisation du système de rapports</h3><p>Il peut arriver, si les "
-#~ "scripts cron ont rencontré une erreur ou si la base de données a été "
-#~ "endommagée, que vous deviez reconstruire les tables utilisées pour le "
-#~ "système de rapports</p><p>Si vous êtes certain de vouloir le faire, "
-#~ "cochez la case « Je suis sûr » et cliquez sur le bouton ci-dessous.</"
-#~ "p><p>Cette opération peut durer plusieurs minutes, donc veuillez ne "
-#~ "cliquer QU'UNE SEULE FOIS.<p>"
-
-#~ msgid "Gforge Page Views"
-#~ msgstr "pages"
-
-#~ msgid "Software/Group"
-#~ msgstr "Logiciel/Groupe"
