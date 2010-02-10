@@ -2,9 +2,10 @@
 require_once $gfcommon.'include/FusionForge.class.php';
 ?>
 <!-- whole page table -->
-<table width="100%" cellpadding="5" cellspacing="0" border="0">
-<tr><td width="65%" valign="top">
-<div align="center"><img src="<?php echo util_make_url ('/images/fusionforge-resized.png') ?>" /></div>
+<table id="bd" class="width-100p100" summary="">
+<tr>
+<td id="bd-col1">
+	<h2 id="title-home-page"><img src="<?php echo util_make_url ('/images/fusionforge-resized.png') ?>" alt="FusionForge"/></h2>
 	  <h3><?php print _('FusionForge helps you manage the entire development life cycle'); ?></h3>
 <p>
 
@@ -54,24 +55,25 @@ require_once $gfcommon.'include/FusionForge.class.php';
 <li><?php print _('New project hierarchy plugin.'); ?></li>
 </ul>
 <?php
-echo $HTML->boxTop(_('Latest News'));
+echo $HTML->boxTop(_('Latest News'), 'Latest_News');
 echo news_show_latest($sys_news_group,5,true,false,false,5);
 echo $HTML->boxBottom();
 ?>
 
 </td>
 
-<td width="35%" valign="top">
+<td id="bd-col2">
 <?php
-echo show_features_boxes();
+	show_features_boxes();
 ?>
 
 </td></tr></table>
 <center>
+<div id="ft">
 <?php
 			$forge = new FusionForge() ;
 		printf (_('This site is running %1$s version %2$s'),
 			$forge->software_name,
 			$forge->software_version) ;
 ?>
-</center>
+</div>

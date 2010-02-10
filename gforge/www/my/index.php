@@ -39,8 +39,9 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 	echo site_user_header(array('title'=>sprintf(_('Personal Page For %s'),user_getname())));
 	$tabcnt=0;	
 	?>
+
 <script type="text/javascript" src="<?php echo util_make_url ('/tabber/tabber.js'); ?>"></script>
-<div id="tabber" class="tabber" <?php plugin_hook('call_user_js');?>>
+<div id="tabber" class="tabber tabber-user-homepage" <?php plugin_hook('call_user_js');?>>
 <?php if ($GLOBALS['sys_use_tracker']) { ?>
 <div class="tabbertab" 
 title="<?php echo _('Assigned Artifacts'); ?>">
@@ -53,7 +54,7 @@ title="<?php echo _('Assigned Artifacts'); ?>">
 	$order_name_arr[]=_('ID');
 	$order_name_arr[]=_('Priority');
 	$order_name_arr[]=_('Summary');
-	echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
+    echo $HTML->listTableTop($order_name_arr);
 
 	$artifactsForUser = new ArtifactsForUser(session_get_user());
 	$assignedArtifacts =& $artifactsForUser->getAssignedArtifactsByGroup();
@@ -96,7 +97,7 @@ title="<?php echo _('Assigned Tasks'); ?>">
 	$order_name_arr[]=_('ID');
 	$order_name_arr[]=_('Priority');
 	$order_name_arr[]=_('Summary');
-	echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
+    echo $HTML->listTableTop($order_name_arr);
 	$projectTasksForUser = new ProjectTasksForUser(session_get_user());
 	$userTasks =& $projectTasksForUser->getTasksByGroupProjectName();
 
@@ -148,7 +149,7 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 	$order_name_arr[]=_('ID');
 	$order_name_arr[]=_('Priority');
 	$order_name_arr[]=_('Summary');
-	echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
+    echo $HTML->listTableTop($order_name_arr);
 	$artifactsForUser = new ArtifactsForUser(session_get_user());
 	$submittedArtifacts =& $artifactsForUser->getSubmittedArtifactsByGroup();
 	if (count($submittedArtifacts) > 0) {
@@ -275,13 +276,13 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 		$order_name_arr=array();
 		$order_name_arr[]=_('Remove');
 		$order_name_arr[]=_('Monitored Forums');
-		echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
+        echo $HTML->listTableTop($order_name_arr);
 		$forumsForUser = new ForumsForUser(session_get_user());
 		$forums = $forumsForUser->getMonitoredForums();
 		if (count($forums) < 1) {
-			echo '<tr><td colspan="2" bgcolor="#FFFFFF"><center><strong>'._('You are not monitoring any forums.').'</strong></center></td></tr>';
+			echo '<tr><td colspan="2"><strong>'._('You are not monitoring any forums.').'</strong></td></tr>';
 		} else {
-			echo '<tr><td colspan="2" bgcolor="#FFFFFF"><center><strong>'.util_make_link ('/forum/myforums.php',_('My Monitored Forums')).'</strong></center></td></tr>';
+			echo '<tr><td colspan="2"><strong>'.util_make_link ('/forum/myforums.php',_('My Monitored Forums')).'</strong></td></tr>';
 			foreach ($forums as $f) {
 				$group = $f->getGroup();
 				if ($group->getID() != $last_group) {
@@ -290,7 +291,7 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 				}
 
 				echo '
-				<tr '. $HTML->boxGetAltRowStyle(0) .'><td align="center"><a href="'.util_make_url ('/forum/monitor.php?forum_id='.$f->getID().'&amp;stop=1&amp;group_id='.$group->getID()).'"><img src="'. $HTML->imgroot . '/ic/trash.png" height="16" width="16" '.
+				<tr '. $HTML->boxGetAltRowStyle(0) .'><td class="align-center"><a href="'.util_make_url ('/forum/monitor.php?forum_id='.$f->getID().'&amp;stop=1&amp;group_id='.$group->getID()).'"><img src="'. $HTML->imgroot . '/ic/trash.png" height="16" width="16" '.
 				'border="0" alt="" /></a></td><td width="99%">'.util_make_link ('/forum/forum.php?forum_id='.$f->getID(),$f->getName()).'</td></tr>';
 
 				$last_group= $group->getID();
@@ -307,7 +308,7 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 		$order_name_arr=array();
 		$order_name_arr[]=_('Remove');
 		$order_name_arr[]=_('Monitored FileModules');
-		echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
+        echo $HTML->listTableTop($order_name_arr);
 
 
 		$result=db_query_params ('SELECT groups.group_name,groups.unix_group_name,groups.group_id,frs_package.name,filemodule_monitor.filemodule_id 
@@ -319,7 +320,7 @@ AND filemodule_monitor.user_id=$2 ORDER BY group_name DESC',
 				user_getid()));
 		$rows=db_numrows($result);
 		if (!$result || $rows < 1) {
-			echo '<tr><td colspan="2" bgcolor="#FFFFFF"><center><strong>'._('You are not monitoring any files.').'</strong></center></td></tr>';
+			echo '<tr><td colspan="2"><strong>'._('You are not monitoring any files.').'</strong></td></tr>';
 		} else {
 			for ($i=0; $i<$rows; $i++) {
 				if (db_result($result,$i,'group_id') != $last_group) {
@@ -327,7 +328,7 @@ AND filemodule_monitor.user_id=$2 ORDER BY group_name DESC',
 					<tr '. $HTML->boxGetAltRowStyle($i) .'><td colspan="2">'.util_make_link_g (db_result($result,$i,'unix_group_name'),db_result($result,$i,'group_id'),db_result($result,$i,'group_name')).'</td></tr>';
 				}
 				echo '
-				<tr '. $HTML->boxGetAltRowStyle($i) .'><td style="text-align:center"><a href="'.util_make_url ('/frs/monitor.php?filemodule_id='.db_result($result,$i,'filemodule_id').'&amp;group_id='.db_result($result,$i,'group_id').'&amp;stop=1').'"><img src="'. $HTML->imgroot.'/ic/trash.png" height="16" width="16" '.
+				<tr '. $HTML->boxGetAltRowStyle($i) .'><td class="align-center"><a href="'.util_make_url ('/frs/monitor.php?filemodule_id='.db_result($result,$i,'filemodule_id').'&amp;group_id='.db_result($result,$i,'group_id').'&amp;stop=1').'"><img src="'. $HTML->imgroot.'/ic/trash.png" height="16" width="16" '.
 				'border="0" alt=""/></a></td><td width="99%">'.util_make_link ('/frs/?group_id='.db_result($result,$i,'group_id'),db_result($result,$i,'name')).'</td></tr>';
 
 				$last_group=db_result($result,$i,'group_id');
@@ -344,7 +345,7 @@ AND filemodule_monitor.user_id=$2 ORDER BY group_name DESC',
 	/*
 		   Personal bookmarks
 	*/
-	echo $HTML->boxTop(_('My Bookmarks'),false,false);
+	echo $HTML->boxTop(_('My Bookmarks'), 'My_Bookmarks');
 
 	echo '<a href="'.util_make_url ('/my/bookmark_add.php').'">'._('Add bookmark').'</a><br/><br/>';
 	$result = db_query_params ('SELECT bookmark_url, bookmark_title, bookmark_id from user_bookmarks where 
@@ -358,7 +359,7 @@ user_id=$1 ORDER BY bookmark_title',
 	} else {
 		for ($i=0; $i<$rows; $i++) {
 			echo '</td></tr>
-			<tr '. $HTML->boxGetAltRowStyle($i) .'><td style="text-align:center">
+			<tr '. $HTML->boxGetAltRowStyle($i) .'><td class="align-center">
 			<a href="'.util_make_url ('/my/bookmark_delete.php?bookmark_id='. db_result($result,$i,'bookmark_id')).'">
 			<img src="'.$HTML->imgroot.'/ic/trash.png" height="16" width="16" border="0" alt="" /></a></td>
 			<td><strong><a href="'. db_result($result,$i,'bookmark_url') .'">'.
@@ -381,7 +382,7 @@ user_id=$1 ORDER BY bookmark_title',
 	$order_name_arr[]=_('Remove');
 	$order_name_arr[]=_('My Projects');
 	$order_name_arr[]=_('My Roles');
-	echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
+    echo $HTML->listTableTop($order_name_arr);
 
 	// Include both groups and foundries; developers should be similarly
 	// aware of membership in either.
@@ -396,7 +397,7 @@ user_id=$1 ORDER BY bookmark_title',
 					  'A')) ;
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '<tr><td colspan="3" bgcolor="#FFFFFF"><strong>'._('You\'re not a member of any active projects').'</strong></td></tr>';
+		echo '<tr><td colspan="3"><strong>'._('You\'re not a member of any active projects').'</strong></td></tr>';
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
@@ -407,7 +408,7 @@ user_id=$1 ORDER BY bookmark_title',
 				$img="trash.png";
 			}
 			echo '
-			<tr '. $HTML->boxGetAltRowStyle($i) .'><td style="text-align:center">' ;
+			<tr '. $HTML->boxGetAltRowStyle($i) .'><td class="align-center">' ;
 			echo util_make_link ("/my/rmproject.php?group_id=" . db_result($result,$i,'group_id'),
 					     '<img src="'.$HTML->imgroot.'ic/'.$img.'" alt="'._('Delete').'" height="16" width="16" border="0" />') ;
 

@@ -110,11 +110,6 @@ function html_abs_image($url, $width, $height, $args) {
 		$return .= ' '.$k.'="'.$v.'"';
 	}
 
-	// ## insert a border tag if there isn't one
-	if (!isset($args['border'])) {
-		$return .= ' border="0"';
-	}
-
 	if (!isset($args['alt'])) {
 		$return .= ' alt=""';
 	}
@@ -732,6 +727,7 @@ function site_user_header($params) {
 		Check to see if logged in
 	*/
 	echo $HTML->header($params);
+	echo "<h1>" . _('My Personal Page') . "</h1>\n";
 	echo html_feedback_top((isset($GLOBALS['feedback']) ? $GLOBALS['feedback'] : ''));
 	echo ($HTML->beginSubMenu());
 	if ($GLOBALS['sys_use_diary']) {

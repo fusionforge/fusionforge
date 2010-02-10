@@ -109,7 +109,7 @@ function snippet_header($params) {
 	echo util_make_link ('/snippet/',_('Browse')).'
 		 | '.util_make_link ('/snippet/submit.php',_('Submit A New Snippet')).'
 		 | '.util_make_link ('/snippet/package.php',_('Create A Package')).'</strong>';
-	echo '&nbsp;';
+	echo '</p>';
 }
 
 function snippet_footer($params) {

@@ -76,59 +76,59 @@ if (session_loggedin()) {
 	snippet_header(array('title'=>_('Snippet submit')));
 
 	?>
-	</p><p><?php echo _('You can post a new code snippet and share it with other people around the world. Just fill in this information. <strong>Give a good description</strong> and <strong>comment your code</strong> so others can read and understand it.</p><p><span class="important">Note:</span> You can submit a new version of an existing snippet by browsing the library. You should only use this page if you are submitting an entirely new script or function.'); ?>
+	<p><?php echo _('You can post a new code snippet and share it with other people around the world. Just fill in this information. <strong>Give a good description</strong> and <strong>comment your code</strong> so others can read and understand it.</p><p><span class="important">Note:</span> You can submit a new version of an existing snippet by browsing the library. You should only use this page if you are submitting an entirely new script or function.'); ?>
 	</p>
-	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
-	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
-	<input type="hidden" name="post_changes" value="y" />
-	<input type="hidden" name="changes" value="First Posted Version" />
+	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post" id="snippet_submit">
+	<?php
+	echo $HTML->html_input('form_key', '', '', 'hidden', form_generate_key());
+	echo $HTML->html_input('post_changes', '', '', 'hidden', 'y');
+	echo $HTML->html_input('changes', '', '', 'hidden', 'First Posted Version');
+	?>
 
 	<table>
 
-	<tr><td colspan="2"><strong><?php echo _('Title'); ?>:</strong><?php echo utils_requiredField(); ?><br />
-		<input type="text" name="name" size="45" maxlength="60" />
+	<tr><td colspan="2">
+	    <?php echo $HTML->html_input('name', '', _('Title') . ' :' . utils_requiredField(), 'text', '', array('size' => '45', 'maxlength' => '60')); ?>
 	</td></tr>
 
-	<tr><td colspan="2"><strong><?php echo _('Description'); ?>:</strong><?php echo utils_requiredField(); ?><br />
-		<textarea name="description" rows="5" cols="45" ></textarea>
+	<tr><td colspan="2">
+        <?php echo $HTML->html_textarea('description', '', _('Description') . ' :' . utils_requiredField(), '', array('rows' => '5', 'cols' => '45')); ?>
 	</td></tr>
 
 	<tr>
-	<td><strong><?php echo _('Script Type'); ?>:</strong><?php echo utils_requiredField(); ?><br />
-		<?php echo html_build_select_box_from_array($SCRIPT_TYPE,'type'); ?>
+	<td>
+		<?php echo $HTML->html_select ($SCRIPT_TYPE, 'type', _('Script Type') . ' :' . utils_requiredField() ); ?>
 	</td>
 
-	<td><strong><?php echo _('License'); ?>:</strong><br />
-		<?php echo html_build_select_box_from_array ($SCRIPT_LICENSE,'license'); ?>
+	<td>
+		<?php echo $HTML->html_select ($SCRIPT_LICENSE, 'license', _('License') . ' :'); ?>
 	</td>
 	</tr>
 
 	<tr>
-	<td><strong><?php echo _('Language'); ?>:</strong><?php echo utils_requiredField(); ?><br />
-		<?php echo html_build_select_box_from_array ($SCRIPT_LANGUAGE,'language'); ?>
+	<td>
+		<?php echo $HTML->html_select ($SCRIPT_LANGUAGE, 'language', _('Language') . ' :' . utils_requiredField()); ?>
 		<br />
 		<!-- FIXME: Where should this link go to? <?php echo util_make_link ('/support/?func=addsupport&amp;group_id=1',_('Suggest a Language')); ?> -->
 	</td>
 
-	<td><strong><?php echo _('Category'); ?></strong><?php echo utils_requiredField(); ?><br />
-		<?php echo html_build_select_box_from_array ($SCRIPT_CATEGORY,'category'); ?>
+	<td>
+		<?php echo $HTML->html_select ($SCRIPT_CATEGORY, 'category', _('Category') . ' :' . utils_requiredField()); ?>
                 <br />
                 <!-- FIXME: Where should this link go to? <?php echo util_make_link ('/support/?func=addsupport&amp;group_id=1',_('Suggest a Category')); ?> -->
 	</td>
 	</tr>
 
-	<tr><td colspan="2"><strong><?php echo _('Version'); ?>:</strong><?php echo utils_requiredField(); ?><br />
-		<input type="text" name="version" size="10" maxlength="15" />
+	<tr><td colspan="2">
+        <?php echo $HTML->html_input('version', '', _('Version') . ' :' . utils_requiredField(), 'text', '', array('size' => '10', 'maxlength' => '15')); ?>
 	</td></tr>
 
-	<tr><td colspan="2"><strong><?php echo _('Paste the Code Here'); ?>:</strong><?php echo utils_requiredField(); ?><br />
-		<textarea name="code" rows="30" cols="85" ></textarea>
+	<tr><td colspan="2">
+	    <?php echo $HTML->html_textarea('code', '', _('Paste the Code Here') . ' :' . utils_requiredField(), '', array('rows' => '30', 'cols' => '85')); ?>
 	</td></tr>
 
-	<tr><td colspan="2" style="text-align:center">
-		<strong><?php echo _('Make sure all info is complete and accurate'); ?></strong>
-		<br />
-		<input type="submit" name="submit" value="<?php echo _('SUBMIT'); ?>" />
+	<tr><td colspan="2" class="align-center">
+        <?php echo $HTML->html_input('submit', '', _('Make sure all info is complete and accurate'), 'submit', _('SUBMIT')); ?>
 	</td></tr>
 	</table></form>
 

@@ -73,7 +73,7 @@ echo ($HTML->subMenu($subMenuTitle, $subMenuUrl));
 $selected_tag = getStringFromRequest('tag');
 $page = getIntFromRequest('page', 1);
 
-echo '<br /><center>' . tag_cloud(array('selected' => $selected_tag, 'nb_max' => 100)) . '</center><br /><br />';
+echo '<br />' . tag_cloud(array('selected' => $selected_tag, 'nb_max' => 100)) . '<br /><br />';
 
 if ($selected_tag) {
 

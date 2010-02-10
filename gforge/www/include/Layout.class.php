@@ -229,9 +229,7 @@ if (isset($params['group']) && $params['group']) {
 				<td>&nbsp;</td>
 			</tr>
 			<?php
-
 }
-
 ?>
 			<tr>
 				<td align="left" class="projecttab" width="9"><img src="<?php echo $this->imgroot; ?>tabs/topleft-inner.png" height="9" width="9" alt="" /></td>
@@ -245,8 +243,8 @@ if (isset($params['group']) && $params['group']) {
 
 	<?php
 
-	}
-
+				 }
+	
 	function footer($params) {
 
 	?>
@@ -282,7 +280,6 @@ if (isset($params['group']) && $params['group']) {
 	function footerEnd($params) { ?>
 
 <!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
-<br />
 <div align="right">
 <a href="http://fusionforge.org/"><img src="<?php echo util_make_url ('/images/pow-fusionforge.png'); ?>" alt="Powered By FusionForge" border="0" /></a>
 </div>
@@ -317,7 +314,7 @@ if (isset($params['group']) && $params['group']) {
 		<!-- Box Top Start -->
 
 		<table cellspacing="0" cellpadding="0" width="100%" border="0" style="background:url('.$this->imgroot.'vert-grad.png)">
-		<tr align="center">
+		<tr class="align-center">
 			<td valign="top" align="right" width="10" style="background:url('.$this->imgroot.'box-topleft.png)"><img src="'.$this->imgroot.'clear.png" width="10" height="20" alt="" /></td>
 			<td width="100%" style="background:url('.$this->imgroot.'box-grad.png)"><span class="titlebar">'.$title.'</span></td>
 			<td valign="top" width="10" style="background:url('.$this->imgroot.'box-topright.png)"><img src="'.$this->imgroot.'clear.png" width="10" height="20" alt="" /></td>
@@ -342,7 +339,7 @@ if (isset($params['group']) && $params['group']) {
 		<!-- Box Middle Start -->
 					</td>
 				</tr>
-				<tr align="center">
+				<tr class="align-center">
 					<td colspan="2" style="background:url('.$this->imgroot.'box-grad.png)"><span class="titlebar">'.$title.'</span></td>
 				</tr>
 				<tr align="left">
@@ -386,10 +383,10 @@ if (isset($params['group']) && $params['group']) {
 	 * @param	   array   The array of titles
 	 * @param	   array   The array of title links
 	 */
-	function listTableTop ($title_arr,$links_arr=false) {
+	function listTableTop ($title_arr,$links_arr=false,$selected=false) {
 		$return = '
 		<table cellspacing="0" cellpadding="0" width="100%" border="0">
-		<tr align="center">
+		<tr class="align-center">
 	<!--		<td valign="top" align="right" width="10" style="background:url('.$this->imgroot.'box-grad.png)"><img src="'.$this->imgroot.'box-topleft.png" width="10" height="75" alt="" /></td> -->
 			<td style="background:url('.$this->imgroot.'box-grad.png)">
 		<table width="100%" border="0" cellspacing="1" cellpadding="2" >
@@ -499,15 +496,15 @@ if (isset($params['group']) && $params['group']) {
 			$selected=array_search(util_make_url ('/admin/'),$TABS_DIRS);
 		} elseif (count($PLUGIN_TABS_DIRS)>0) {
 			foreach ($PLUGIN_TABS_DIRS as $PLUGIN_TABS_DIRS_VALUE) {
-				if (strstr(getStringFromServer('REQUEST_URI'),$PLUGIN_TABS_DIRS_VALUE)) {
-					$selected=array_search($PLUGIN_TABS_DIRS_VALUE,$TABS_DIRS);
+				if (strstr(getStringFromServer('REQUEST_URI'), $PLUGIN_TABS_DIRS_VALUE)) {
+					$selected=array_search($PLUGIN_TABS_DIRS_VALUE, $TABS_DIRS);
 					break;
 				}
 			}
 		} else {
 			$selected=0;
 		}
-		echo $this->tabGenerator($TABS_DIRS,$TABS_TITLES,false,$selected,'','100%');
+		echo $this->tabGenerator($TABS_DIRS, $TABS_TITLES, false, $selected, '');
 
 	}
 
@@ -530,9 +527,9 @@ if (isset($params['group']) && $params['group']) {
 				return '';
 			} else {
 				$ret = '
-		<form class="ff" name="quicknavform">
-			<select class="ff" name="quicknav" onChange="location.href=document.quicknavform.quicknav.value">
-				<option class="ff" value="">'._('Quick Jump To...').'</option>';
+		<form id="quicknavform" name="quicknavform"><div>
+			<select name="quicknav" onChange="location.href=document.quicknavform.quicknav.value">
+				<option value="">'._('Quick Jump To...').'</option>';
 
 				for ($i = 0; $i < db_numrows($res); $i++) {
 					$group_id = db_result($res, $i, 'group_id');
@@ -550,16 +547,16 @@ if (isset($params['group']) && $params['group']) {
 			
 					$menu = $project->getMenu();
 					$ret .= '
-				<option class="ff" value="' . $menu['start'] . '">' 
+				<option value="' . $menu['start'] . '">' 
 						. $project->getPublicName() .'</option>';
 
 					for ($j = 0; $j < count($menu['dirs']); $j++) {
 						$ret .= '
-				<option class="ff" value="' . $menu['dirs'][$j] .'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' 
+				<option value="' . $menu['dirs'][$j] .'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' 
 							. $menu['titles'][$j] . '</option>';
 						if ($menu['admindirs'][$j]) {
 							$ret .= '
-				<option class="ff" value="' . $menu['admindirs'][$j] 
+				<option value="' . $menu['admindirs'][$j] 
 					. '">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' 
 					. _('Admin') . '</option>';
 						}
@@ -567,7 +564,7 @@ if (isset($params['group']) && $params['group']) {
 				}
 				$ret .= '
 			</select>
-		</form>';
+		</div></form>';
 			}
 		}
 		return $ret;
@@ -596,7 +593,7 @@ if (isset($params['group']) && $params['group']) {
 
 		$menu = $project->getMenu($toptab);
 
-		echo $this->tabGenerator($menu['dirs'], $menu['titles'], true, $menu['selected'], 'white', '100%');
+		echo $this->tabGenerator($menu['dirs'], $menu['titles'], true, $menu['selected'], 'white');
 	}
 
 	function tabGenerator($TABS_DIRS,$TABS_TITLES,$nested=false,$selected=false,$sel_tab_bgcolor='white',$total_width='100%') {
@@ -605,13 +602,15 @@ if (isset($params['group']) && $params['group']) {
 		$width=intval((100/$count));
 		
 		$return = '';
-		
 		$return .= '
-
 		<!-- start tabs -->
-
-		<table border="0" cellpadding="0" cellspacing="0" width="'.$total_width.'">
-		<tr>';
+		<table class="tabGenerator" ';
+		
+		if ($total_width != '100%') {
+			$return .= 'style="width:' . $total_width . ';"';
+		}
+		$return .= ">\n";
+		$return .= '<tr>';
 		if ($nested) {
 			$inner='bottomtab';
 		} else {
@@ -721,12 +720,9 @@ if (isset($params['group']) && $params['group']) {
 		if ( ! isset($type_of_search) ) {
 			$exact = 1;
 		}
-
-		print '
-		<form action="/search/" method="get">
-		<table border="0" cellpadding="0" cellspacing="0">
-		<tr><td>
-		<div align="center" class="searchbox">';
+	
+		print '<form action="/search/" method="get" id="search-box-form">';
+		print '<div class="searchbox">';
 		$parameters = array(
 			SEARCH__PARAMETER_GROUP_ID => $group_id,
 			SEARCH__PARAMETER_ARTIFACT_ID => $atid,
@@ -743,41 +739,33 @@ if (isset($params['group']) && $params['group']) {
 			$searchEngine =& $searchEngines[$i];
 			echo '<option value="'.$searchEngine->getType().'"'.( $type_of_search == $searchEngine->getType() ? ' selected="selected"' : '' ).'>'.$searchEngine->getLabel($parameters).'</option>'."\n";
 		}
-		echo '</select></div>';
-
-//		print '<br />';
-//		print '
-//		<input type="checkbox" name="exact" value="1"'.( $exact ? ' checked' : ' unchecked' ).'> Require All Words';
-
-		print '</td><td>&nbsp;';
+		echo '</select>';
+		
 		$parameters = $searchManager->getParameters();
 		foreach($parameters AS $name => $value) {
-			print '<input type="hidden" value="'.$value.'" name="'.$name.'" />';
+			print '<input type="hidden" value="'.$value.'" name="'.$name.'" id="'.$name.'"/>';
 		}
-		print '</td><td>';
-		print '<input type="text" size="12" name="words" value="'.$defaultWords.'" />';
-
-		print '</td><td>&nbsp;</td><td>';
-		print '<input type="submit" name="Search" value="'._('Search').'" />';
-		print '</td>';
-
+		print '<label for="search-words" class="skip">' . html_image('pixel-transparent.gif', 1, 1, array('alt' => "")) . '</label>';
+		print '<input type="text" name="words" size="12" id="search-words" value="'.$defaultWords.'" />';
+		
+		print '<label for="search-submit" class="skip">' . html_image('pixel-transparent.gif', 1, 1, array('alt' => "")) . '</label>';
+		print '<input type="image" name="Search" id="search-submit" src="/themes/adullact-v3/image/picto_bleu_loupe.png" alt="'._('Search').'" title="'._('Search').'" />';
+		
 		if (isset($group_id) && $group_id) {
-			print '
-					<td width="10">&nbsp;</td>
-					<td>'.util_make_link ('/search/advanced_search.php?group_id='.$group_id,_('Advanced search'),array('class'=>'lnkutility')).'</td>';
+			$link_content = html_image('picto_remarques.png','21','21',array('alt'=>_('Advanced search'), 'title'=>_('Advanced search')));
+			print '&nbsp;'.util_make_link ('/search/advanced_search.php?group_id='.$group_id, $link_content, array('class'=>'lnkutility', 'id'=>'advanced-search'));
 		}
-		print '</tr></table>';
+		print '</div>';
 		print '</form>';
-
 	}
-	
+
 	function advancedSearchBox($sectionsArray, $group_id, $words, $isExact) {
-		 // display the searchmask
+		// display the searchmask
 		print '
 		<form name="advancedsearch" action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="search" value="1"/>
 		<input type="hidden" name="group_id" value="'.$group_id.'"/>
-		<div align="center"><br />
+		<div class="align-center"><br />
 			<table border="0">
 				<tr>
 					<td colspan ="2">
@@ -847,7 +835,7 @@ if (isset($params['group']) && $params['group']) {
 							<tr class="tablecontent">
 								<td colspan="3">&nbsp;</td>
 							</tr>
-							<tr align="center" valign="top" class="tablecontent">
+							<tr valign="top" class="tablecontent align-center">
 								<td>';
 		foreach($sectionsArray as $key => $section) {
 			$oldcountlines = $countLines;
@@ -982,7 +970,7 @@ if (isset($params['group']) && $params['group']) {
 		$return= '
 		<tr '.$row_attr;
 		if ( $istitle ) {
-			$return .=' align="center" class="multiTableRowTitle"';
+			$return .=' class="align-center multiTableRowTitle"';
 		}
 		$return .= '>';
 		for ( $c = 0; $c < count($cell_data); $c++ ) {
@@ -1064,7 +1052,6 @@ if (isset($params['group']) && $params['group']) {
 	        return db_result($res,0,'theme_id');
 	}
 
-
 	function confirmBox($msg, $params, $buttons, $image='*none*') {
 	 	if ($image == '*none*') {
 	 		$image = html_image('stop.png','48','48',array());
@@ -1100,7 +1087,251 @@ if (isset($params['group']) && $params['group']) {
 		</div>
 	 	';
 	}
-}
+
+	function html_input($name, $id = '', $label = '', $type = 'text', $value = '', $extra_params = '') {
+		if (!$id) {
+			$id = $name;
+		}
+		$return = '<div class="field-holder">
+		';
+		if ($label) {
+			$return .= '<label for="' . $id . '">' . $label . '</label>
+			';
+		}
+		$return .= '<input id="' . $id . '" type="' . $type . '"';
+		//if input is a submit then name is not present
+		if ($name) {
+			$return .= ' name="' . $name . '"';
+		}
+		if ($value) {
+			$return .= ' value="' . $value . '"';
+		}
+		if (is_array($extra_params)) {
+			foreach ($extra_params as $key => $extra_params_value) {
+				$return .= $key . '="' . $extra_params_value . '" ';
+			}
+		}
+		$return .= '/>
+		</div>';
+		return $return;
+	}
+	
+	function html_checkbox($name, $value, $id = '', $label = '', $checked = '', $extra_params = '') {
+		if (!$id) {
+			$id = $name;
+		}
+		$return = '<div class="field-holder">
+        ';
+		$return .= '<input name="' . $name . '" id="' . $id . '" type="checkbox" value="' . $value . '" ';
+		if ($checked) {
+			$return .= 'checked="checked" ';
+		}
+		if (is_array($extra_params)) {
+			foreach ($extra_params as $key => $extra_params_value) {
+				$return .= $key . '="' . $extra_params_value . '" ';
+			}
+		}
+		$return .= '/>';
+		if ($label) {
+			$return .= '<label for="' . $id . '">' . $label . '</label>
+            ';
+		}
+		$return .= '</div>';
+		return $return;
+	}
+	
+	function html_text_input_img_submit($name, $img_src, $id = '', $label = '', $value = '', $img_title = '', $img_alt = '', $extra_params = '', $img_extra_params = '') {
+		if (!$id) {
+			$id = $name;
+		}
+		if (!$img_title) {
+			$img_title = $name;
+		}
+		if (!$img_alt) {
+			$img_alt = $img_title;
+		}
+		$return = '<div class="field-holder">
+        ';
+		if ($label) {
+			$return .= '<label for="' . $id . '">' . $label . '</label>
+            ';
+		}
+		$return .= '<input id="' . $id . '" type="text" name="' . $name . '"';
+		if ($value) {
+			$return .= ' value="' . $value . '"';
+		}
+		if (is_array($extra_params)) {
+			foreach ($extra_params as $key => $extra_params_value) {
+				$return .= $key . '="' . $extra_params_value . '" ';
+			}
+		}
+		$return .= '/>
+        <input type="image" id="' . $id . '_submit" src="' . $this->imgroot . $img_src . '" alt="' . $img_alt . '" title="' . $img_title . '"';
+		if (is_array($img_extra_params)) {
+			foreach ($img_extra_params as $key => $img_extra_params_value) {
+				$return .= $key . '="' . $img_extra_params_value . '" ';
+			}
+		}
+		$return .= '/>
+        </div>';
+		return $return;
+	}
+
+	function html_select($vals, $name, $label = '', $id = '', $checked_val = '', $text_is_value = false, $extra_params = '') {
+		if (!$id) {
+			$id = $name;
+		}
+		$return = '<div class="field-holder">
+        ';
+		if ($label) {
+			$return .= '<label for="' . $id . '">' . $label . '</label>
+            ';
+		}
+		$return .= '<select name="' . $name . '" id="' . $id . '" ';
+		if (is_array($extra_params)) {
+			foreach ($extra_params as $key => $extra_params_value) {
+				$return .= $key . '="' . $extra_params_value . '" ';
+			}
+		}
+		$return .= '>';
+		$rows = count($vals);
+		for ($i = 0; $i < $rows; $i++) {
+			if ( $text_is_value ) {
+				$return .= '
+				<option value="' . $vals[$i] . '"';
+				if ($vals[$i] == $checked_val) {
+					$return .= ' selected="selected"';
+				}
+			} else {
+				$return .= '
+				<option value="' . $i . '"';
+				if ($i == $checked_val) {
+					$return .= ' selected="selected"';
+				}
+			}
+			$return .= '>' . htmlspecialchars($vals[$i]) . '</option>';
+		}
+		$return .= '
+		</select>
+		</div>';
+		return $return;
+	}
+	
+	function html_textarea($name, $id = '', $label = '', $value = '',  $extra_params = '') {
+		if (!$id) {
+			$id = $name;
+		}
+		$return = '<div class="field-holder">
+        ';
+		if ($label) {
+			$return .= '<label for="' . $id . '">' . $label . '</label>
+            ';
+		}
+		$return .= '<textarea id="' . $id . '" name="' . $name . '" ';
+		if (is_array($extra_params)) {
+			foreach ($extra_params as $key => $extra_params_value) {
+				$return .= $key . '="' . $extra_params_value . '" ';
+			}
+		}
+		$return .= '>';
+		if ($value) {
+			$return .= $value;
+		}
+		$return .= '</textarea>
+        </div>';
+		return $return;
+	}
+    
+	function html_table_top($cols, $summary = '', $class = '', $extra_params = '') {
+		$return = '<table summary="' . $summary . '" ';
+		if ($class) {
+			$return .= 'class="' . $class . '" ';
+		}
+		if (is_array($extra_params)) {
+			foreach ($extra_params as $key => $extra_params_value) {
+				$return .= $key . '="' . $extra_params_value . '" ';
+			}
+		}
+		$return .= '>';
+		$return .= '<thead><tr>';
+		$nbCols = count($cols);
+		for ($i = 0; $i < $nbCols; $i++) {
+			$return .= '<th scope="col">' . $cols[$i] . '</th>';
+		}
+		$return .= '</tr></thead>';
+		return $return;
+	}
+    
+	function getMonitorPic($title = '', $alt = '') {
+		return $this->getPicto('ic/mail16w.png', $title, $alt, '15', '15');
+	}
+    
+	function getReleaseNotesPic($title = '', $alt = '') {
+		return $this->getPicto('ic/manual16c.png', $title, $alt, '15', '15');
+	}
+    
+	/* no picto for download */
+	function getDownloadPic($title = '', $alt = '') {
+		return $this->getPicto('ic/save.png', $title, $alt, '15', '15');
+	}
+	
+	function getHomePic($title = '', $alt = '') {
+		return $this->getPicto('ic/home16b.png', $title, $alt);
+	}
+    
+	function getFollowPic($title = '', $alt = '') {
+		return $this->getPicto('ic/tracker20g.png', $title, $alt);
+	}
+    
+	function getForumPic($title = '', $alt = '') {
+		return $this->getPicto('ic/forum20g.png', $title, $alt);;
+	}
+    
+	function getDocmanPic($title = '', $alt = '') {
+		return $this->getPicto('ic/docman16b.png', $title, $alt);
+	}
+    
+	function getMailPic($title = '', $alt = '') {
+		return $this->getPicto('ic/mail16b.png', $title, $alt);
+	}
+    
+	function getPmPic($title = '', $alt = '') {
+		return $this->getPicto('ic/taskman20g.png', $title, $alt);
+	}
+    
+	function getScmPic($title = '', $alt = '') {
+		return $this->getPicto('ic/cvs16b.png', $title, $alt);
+	}
+    
+	function getFtpPic($title = '', $alt = '') {
+		return $this->getPicto('ic/ftp16b.png', $title, $alt);
+	}
+    
+	function getPicto($url, $title, $alt, $width = '20', $height = '20') {
+		if (!$alt) {
+			$alt = $title;   
+		}
+		return html_image($url, $width, $height, array('title'=>$title, 'alt'=>$alt));
+	}
+    
+	/**
+	 * toSlug() - protect a string to be used as a link or an anchor
+	 *
+	 * @param   string $string  the string used as a link or an anchor
+	 * @param   string $space   the caracter used as a replacement for a space
+	 * @return  a protected string with only alphanumeric caracters
+	 */
+	function toSlug($string, $space = "-") {
+		if (function_exists('iconv')) {
+			$string = @iconv('UTF-8', 'ASCII//TRANSLIT', $string);
+		}
+		$string = preg_replace("/[^a-zA-Z0-9- ]/", "-", $string);
+		$string = strtolower($string);
+		$string = str_replace(" ", $space, $string);
+		return $string;
+	}
+}	
+
 
 // Local Variables:
 // mode: php

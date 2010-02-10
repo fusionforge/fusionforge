@@ -13,34 +13,38 @@ require_once $gfcommon.'include/tag_cloud.php';
 function show_features_boxes() {
 	GLOBAL $HTML,$sys_use_ratings,$sys_use_frs,$sys_use_project_tags;
 	
+	// have to echo right now otherwise features boxes top will be at bottom
+	// echo $HTML->boxTop(_('Features Boxes'), 'Features_Boxes');
+	echo '<h2 class="skip">' . _('Features Boxes') . '</h2>';
+	plugin_hook ("features_boxes_top", array());
 	$return = '';
+
 	if ($sys_use_project_tags) {
-		$return .= $HTML->boxTop(_('Tag Cloud'));
-		$return .= '<center>';
+		$return .= $HTML->boxTop(_('Tag Cloud'), 'Tag_Cloud');
 		$return .= tag_cloud();
-		$return .= '</center>';
-		$return .= $HTML->boxMiddle(sprintf(_('%1$s Statistics'), $GLOBALS['sys_name']),0);
+		$return .= $HTML->boxMiddle(sprintf(_('%1$s Statistics'), $GLOBALS['sys_name']), 'Forge_Statistics');
 	} else {
-		$return .= $HTML->boxTop(sprintf(_('%1$s Statistics'), $GLOBALS['sys_name']),0);
+		$return .= $HTML->boxTop(sprintf(_('%1$s Statistics'), $GLOBALS['sys_name']), 'Forge_Statistics');
 	}
 	$return .= show_sitestats();
 	if ($sys_use_frs) {
-		$return .= $HTML->boxMiddle(_('Top Project Downloads'));
+		$return .= $HTML->boxMiddle(_('Top Project Downloads'), 'Top_Projects_Downloads');
 		$return .= show_top_downloads();
 	}
 	if ($sys_use_ratings) {
-		$return .= $HTML->boxMiddle(_('Highest Ranked Users'));
+		$return .= $HTML->boxMiddle(_('Highest Ranked Users'), 'Highest_Ranked_Users');
 		$return .= show_highest_ranked_users();
 	}
-	$return .= $HTML->boxMiddle(_('Most Active This Week'));
+	$return .= $HTML->boxMiddle(_('Most Active This Week'), 'Most_Active_This_Week');
 	$return .= show_highest_ranked_projects();
-	$return .= $HTML->boxMiddle(_('Recently Registered Projects'));
+	$return .= $HTML->boxMiddle(_('Recently Registered Projects'), 'Recently_Registered_Projects');
 	$return .= show_newest_projects();
 	$hook_params = array () ;
 	$hook_params['returned_text'] = '' ;
 	plugin_hook ("features_boxes_bottom", $hook_params);
 	$return .= $HTML->boxBottom(0);
-	return $return;
+	echo $return;
+	plugin_hook ("features_boxes_bottom", array());
 }
 
 function show_top_downloads() {
@@ -69,15 +73,24 @@ function show_top_downloads() {
 		return _('No Stats Available');
 	}
 	// print each one
-	$return = "";
 	while ($row_topdown = db_fetch_array($res_topdown)) {
-		if ($row_topdown['downloads'] > 0)
-			$return .= '<strong>(' . number_format($row_topdown['downloads']) . ')</strong> '
-			. util_make_link_g ($row_topdown['unix_group_name'],$row_topdown['group_id'],$row_topdown['group_name'])
-			. "<br />\n";
+		if ($row_topdown['downloads'] > 0) {
+			$t_downloads = number_format($row_topdown['downloads']);
+			$t_prj_link = util_make_link_g ($row_topdown['unix_group_name'], $row_topdown['group_id'], $row_topdown['group_name']);
+		
+			$return .= '<tr>';
+			$return .= '<td class="width-stat-col1">' . $t_downloads . '</td>';
+			$return .= '<td>' . $t_prj_link . '</td>';
+			$return .= '</tr>\n';
+		}
 	}
-	$return .= '<div align="center">'.util_make_link ('/top/',_('More')).'</div>';
-
+	if ( $return != "" ) {
+		/* MFaure: test required to deal with a special case encountered on zforge by 20091204 */
+		$t_return = $return;
+		$return = '<table summary="">' . $t_return . "</table>\n"; 
+	}
+	$return .= '<div class="align-center">' . util_make_link ('/top/', _('All the ranking'), array('class' => 'dot-link')) . '</div>';
+	
 	return $return;
 
 }
@@ -131,7 +144,8 @@ function stats_downloads_total() {
 function show_sitestats() {
 	global $sys_use_trove;
 	$gforge = new FusionForge();
-	$return = _('Hosted Projects').': ';
+	$return = '<p>';
+	$return .= _('Hosted Projects').': ';
 	if ($sys_use_trove) {
 		$return .= '<a href="softwaremap/full_list.php">';
 	}
@@ -139,8 +153,9 @@ function show_sitestats() {
 	if ($sys_use_trove) {
 		$return .= '</a>';
 	}
-	$return .= '<br />'._('Registered Users').': <strong>'.
-		number_format($gforge->getNumberOfActiveUsers()).'</strong>';
+	$return .= "</p><p>";
+	$return .= _('Registered Users').': <strong>'.number_format($gforge->getNumberOfActiveUsers()).'</strong>';
+	$return .= "</p>\n";
 	return $return;
 }
 
@@ -152,14 +167,22 @@ function show_newest_projects() {
 	if (!$res_newproj || db_numrows($res_newproj) < 1) {
 		return _('No Stats Available')." ".db_error();
 	} else {
+		
+		$return .= '<table summary="">' . "\n";
 		while ( $row_newproj = db_fetch_array($res_newproj) ) {
-			$return .= "<strong>(" . date(_('m/d'),$row_newproj['register_time'])  . ")</strong> "
-			. util_make_link_g ($row_newproj['unix_group_name'],$row_newproj['group_id'],$row_newproj['group_name'])
-			.'<br />';
+			
+			$t_prj_date = date(_('m/d'),$row_newproj['register_time']);
+			$t_prj_link = util_make_link_g ($row_newproj['unix_group_name'],$row_newproj['group_id'],$row_newproj['group_name']);
+			
+			$return .= "<tr>";
+			$return .= '<td class="width-stat-col1">' . $t_prj_date . "</td>";
+			$return .= '<td>' . $t_prj_link . '</td>';
+			$return .= "</tr>\n";
 		}
+		$return .= '</table>';
 	}
 
-	$return .= '<div align="center">'.util_make_link ('/softwaremap/full_list.php','[ '._('More').' ]').'</div>';
+	$return .= '<div class="align-center">'.util_make_link ('/softwaremap/full_list.php', _('All newest projects'), array('class' => 'dot-link')).'</div>';
 	return $return;
 }
 
@@ -178,7 +201,7 @@ function show_highest_ranked_users() {
 			.'<br />';
 		}
 	}
-	$return .= '<div align="center">'.util_make_link ('/top/topusers.php','[ '._('More').' ]').'</div>';
+	$return .= '<div class="align-center">'.util_make_link ('/top/topusers.php', _('All users'), array('class' => 'dot-link')).'</div>';
 	return $return;
 }
 
@@ -189,15 +212,19 @@ function show_highest_ranked_projects() {
 	if (!$result || db_numrows($result) < 1) {
 		return _('No Stats Available')." ".db_error();
 	} else {
-		$return='';
+		$return = '<table summary="">';
 		while ($row=db_fetch_array($result)) {
-			$return .= '<strong>(#'.number_format(substr($row['ranking'],0,5),1).')</strong> '
-				.util_make_link_g ($row['unix_group_name'],$row['group_id'],$row['group_name'])
-				.'<br />';
+			$t_prj_activity = number_format(substr($row['ranking'],0,5),1);
+			$t_prj_link = util_make_link_g ($row['unix_group_name'],$row['group_id'],$row['group_name']);
+			
+			$return .= "<tr>";
+			$return .= '<td class="width-stat-col1">' . $t_prj_activity . "%</td>";
+			$return .= '<td>' . $t_prj_link . '</td>';
+			$return .= "</tr>\n";			
 		}
-		$return .= '<div align="center">'
-		.util_make_link ('/top/mostactive.php?type=week','[ '._('More').' ]')
-		.'</div>';
+		$return .= "</table>";
+		$return .= '<div class="align-center">' . util_make_link ('/top/mostactive.php?type=week', _('All project activities'), array('class' => 'dot-link')) . '</div>';
+		
 	}
 	return $return;
 }

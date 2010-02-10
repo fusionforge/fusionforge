@@ -79,8 +79,8 @@ $subMenuUrl[] = '/softwaremap/full_list.php';
 
 echo ($HTML->subMenu($subMenuTitle, $subMenuUrl));
 
-echo'
-	<hr />';
+echo '<div id="arbre-projets" class="lien-soulignement">' . "\n";
+echo '<h2>Arbre des projets</h2>' . "\n";
 
 $row_trove_cat = db_fetch_array($res_trove_cat);
 
@@ -146,27 +146,30 @@ print '<p>'. (isset($discrim_desc) ? $discrim_desc : '') . '</p>';
 
 // ######## two column table for key on right
 // first print all parent cats and current cat
-print '<table width="100%" border="0" cellspacing="0" cellpadding="0">
-<tr valign="top"><td>';
+print '<table summary="">' . "\n";
+print '<tr>' . "\n";
+print '<td id="arbre-projets-col1">' . "\n";
+
 $folders = explode(" :: ",$row_trove_cat['fullpath']);
 $folders_ids = explode(" :: ",$row_trove_cat['fullpath_ids']);
 $folders_len = count($folders);
+
+print "<p>";
+print html_image("picto_cat_categorie.png",'32','33',array('alt'=>""));
+print "&nbsp;";
+
 for ($i=0;$i<$folders_len;$i++) {
-	for ($sp=0;$sp<($i*2);$sp++) {
-		print " &nbsp; ";
-	}
-	echo html_image("ic/ofolder15.png",'15','13',array());
-	print "&nbsp; ";
 	// no anchor for current cat
 	if ($folders_ids[$i] != $form_cat) {
 		print util_make_link ('/softwaremap/trove_list.php?form_cat=' .$folders_ids[$i].$discrim_url,
 				      $folders[$i]
 			) ;
+		print "&nbsp; &gt; &nbsp;";
 	} else {
 		print '<strong>'.$folders[$i].'</strong>';
 	}
-	print "<br />\n";
 }
+print "</p>";
 
 // print subcategories
 $res_sub = db_query_params ('
@@ -182,19 +185,24 @@ $res_sub = db_query_params ('
 			array ($form_cat));
 echo db_error();
 
+print "<ul>";
 while ($row_sub = db_fetch_array($res_sub)) {
 	for ($sp=0;$sp<($folders_len*2);$sp++) {
 		print " &nbsp; ";
 	}
-	print ('<a href="trove_list.php?form_cat='.$row_sub['trove_cat_id'].$discrim_url.'">');
-	echo html_image("ic/cfolder15.png",'15','13',array());
-	print ('&nbsp; '.$row_sub['fullname'].'</a> <em>('.
-		sprintf(_('%1$s projects'), $row_sub['subprojects']?$row_sub['subprojects']:'0')
-		.')</em><br />');
-		
+	print "<li>";
+	print '<a href="trove_list.php?form_cat=' . $row_sub['trove_cat_id'] . $discrim_url . '">';
+	print $row_sub['fullname'];
+	print '</a>';
+	print '&nbsp;<em>(';
+	print sprintf(_('%1$s projects'), $row_sub['subprojects']?$row_sub['subprojects']:'0');
+	print ')</em>';
+	print "</li>\n";
 }
+print "</ul>";
 // ########### right column: root level
-print '</td><td>';
+print "</td>\n";
+print '<td id="arbre-projets-col2">';
 // here we print list of root level categories, and use open folder for current
 $res_rootcat = db_query_params ('
 	SELECT trove_cat_id,fullname
@@ -205,21 +213,28 @@ $res_rootcat = db_query_params ('
 			array ());
 echo db_error();
 
+print "<p>";
 print _('Browse By').':';
+print "</p> \n";
+
+print '<ul id="arbre-projets-branches">';
 while ($row_rootcat = db_fetch_array($res_rootcat)) {
 	// print open folder if current, otherwise closed
 	// also make anchor if not current
 	print ('<br />');
 	if (($row_rootcat['trove_cat_id'] == $row_trove_cat['root_parent'])
 		|| ($row_rootcat['trove_cat_id'] == $row_trove_cat['trove_cat_id'])) {
-		echo html_image('ic/ofolder15.png','15','13',array());
-		print ('&nbsp; <strong>'.$row_rootcat['fullname']."</strong>\n");
+		print '<li class="current-cat">' . $row_rootcat['fullname'] . "</li>\n";			
 	} else {
-		print util_make_link ('/softwaremap/trove_list.php?form_cat=' .$row_rootcat['trove_cat_id'].$discrim_url,
-				      html_image('ic/cfolder15.png','15','13',array()).'&nbsp; '.$row_rootcat['fullname']);
+		
+		print "<li>";
+		print util_make_link ('/softwaremap/trove_list.php?form_cat=' .$row_rootcat['trove_cat_id'].$discrim_url, $row_rootcat['fullname']); 
+		print "</li>\n";
 	}
 }
-print '</td></tr></table>';
+print "</ul>\n";
+print "</td>\n</tr>\n</table>\n";
+
 ?>
 <hr />
 <?php
@@ -320,6 +335,7 @@ if ($querytotalcount > $TROVE_BROWSELIMIT) {
 
 // print '<p><FONT size="-1">This listing was produced by the following query: '
 //	.$query_projlist.'</FONT>';
+echo '</div><!-- id="arbre-projets" -->' . "\n";
 
 $HTML->footer(array());
 

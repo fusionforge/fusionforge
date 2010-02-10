@@ -22,12 +22,14 @@ site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'home'));
 // ########################################### end top area
 
 // two column deal
-?>
-
-<table width="100%" border="0">
+echo '
+<div id="forge-project-home" class="lien-soulignement">
+<table id="project-summary-and-devs" class="my-layout-table" summary="">
 	<tr>
-		<td width="80%" valign="top">
-		<?php
+		<td>
+			<h2>'.$project->getPublicName().'</h2>
+			<h3>'._('Project summary').'</h3>';
+
 
 // ########################################## top area, not in box
 
@@ -96,7 +98,7 @@ if ($project->usesStats()) {
 	if ( ($project->usesTracker() && $GLOBALS['sys_use_tracker']) || ($project->usesPm() && $GLOBALS['sys_use_pm']) ) {
 		print sprintf(_(' or <a href="%1$s">Activity</a>'),util_make_url ('/project/report/?group_id='.$group_id));
 	}
-	print '<br />'.sprintf(_('View list of <a href="%1$s">RSS feeds</a> available for this project.'), util_make_url ('/export/rss_project.php?group_id='.$group_id)). '&nbsp;' . html_image('ic/rss.png',16,16,array('border'=>'0'));
+	print '<br />'.sprintf(_('View list of <a href="%1$s">RSS feeds</a> available for this project.'), util_make_url ('/export/rss_project.php?group_id='.$group_id)). '&nbsp;' . html_image('ic/rss.png',16,16,array());
 }
 
 if($GLOBALS['sys_use_people']) {
@@ -125,89 +127,75 @@ $hook_params = array () ;
 $hook_params['group_id'] = $group_id ;
 plugin_hook ("project_after_description",$hook_params) ;
 
-?>
-		</td>
-		<td valign="top" width="20%">
-
-<?php
+echo '</td>' ;
 
 // ########################### Developers on this project
 
-echo $HTML->boxTop(_('Project Members'));
+echo '<td>' ;
+echo $HTML->boxTop(_('Project Members'), 'Project_Members');
 
 $iam_member = false ;
 
 if (db_numrows($res_admin) > 0) {
-
-	?>
-	<span class="develtitle"><?php echo _('Project Admins'); ?>:</span><br />
-	<?php
-		$started_developers = false;
-		while ($row_admin = db_fetch_array($res_admin)) {
-			if (trim($row_admin['admin_flags']) != 'A' && !$started_developers) {
-				$started_developers=true;
-				echo '<span class="develtitle">'. _('Members').':</span><br />';
-			}
-			echo util_make_link_u ($row_admin['user_name'],$row_admin['user_id'],$row_admin['realname']).'<br />';
-			if ($row_admin['user_id'] == user_getid())
-				$iam_member = true ;
+	echo "<p>\n";
+	echo '<span class="develtitle"><?php echo _('Project Admins'); ?>:</span><br />';
+	$started_developers = false;
+	while ($row_admin = db_fetch_array($res_admin)) {
+		if (trim($row_admin['admin_flags']) != 'A' && !$started_developers) {
+			$started_developers=true;
+			echo '<span class="develtitle">'. _('Developers').':</span><br />';
 		}
-	?>
-	<hr width="100%" size="1" />
-	<?php
-
+		echo util_make_link_u ($row_admin['user_name'],$row_admin['user_id'],$row_admin['realname']).'<br />';
+		if ($row_admin['user_id'] == user_getid())
+			$iam_member = true ;
+	}
+	echo "</p>\n";
 }
 
-?>
-
-<p><?php 
-	$members = $project->getUsers();
-	echo util_make_link ('/project/memberlist.php?group_id='.$group_id,'['.sprintf(_('View the %1$d Member(s)'),count($members)).']'); ?></p>
-
-<?php
+$members = $project->getUsers();
+echo '<p>';
+echo util_make_link ('/project/memberlist.php?group_id='.$group_id,'['.sprintf(_('View the %1$d Member(s)'),count($members)).']'); ?>
+echo '</p>';
 
 if (!$iam_member) {
-	echo '<p>'.util_make_link ('/project/request.php?group_id='.$group_id,'['._('Request to join').']').'</p>';
+	echo '<p>'.util_make_link ('/project/request.php?group_id='.$group_id,_('Request to join')).'</p>';
 }
 echo $HTML->boxBottom();
 
-?>
-		</td>
-	</tr>
-</table>
-
-<br />
-
-<?php
+echo '</td></tr></table>';
 $hook_params = array () ;
 $hook_params['group_id'] = $group_id ;
 plugin_hook ("project_before_frs",$hook_params) ;
+echo '<div id="file-releases">';
 
 // ############################# File Releases
 
 // CB hide FRS if desired
 if ($project->usesFRS()) {
-	echo $HTML->boxTop(_('Latest File Releases'));
+	echo $HTML->boxTop(_('Latest File Releases'), 'Latest_File_Releases');
 	$unix_group_name = $project->getUnixName();
 
 	echo '
-	<table cellspacing="1" cellpadding="5" width="100%" border="0">
-		<tr>
-		<td style="text-align:left">
-			'._('Package').'
-		</td>
-		<td style="text-align:center">
-			'._('Version').'
-		</td>
-		<td style="text-align:center">
-			'._('Date').'
-		</td>
-		<td style="text-align:center">
-			'._('Notes').' / '._('Monitor').'
-		</td>
-		<td style="text-align:center">
-			'._('Download').'
-		</td>
+	<table summary="Latest file releases" class="width-100p100">
+		<tr class="table-header">
+			<th class="align-left" scope="col">
+				'._('Package').'
+			</th>
+			<th scope="col">
+				'._('Version').'
+			</th>
+			<th scope="col">
+				'._('Date').'
+			</th>
+			<th scope="col">
+				'._('Notes').'
+			</th>
+			<th scope="col">
+				'._('Monitor').'
+			</th>
+			<th scope="col">
+				'._('Download').'
+			</th>
 		</tr>';
 
 		//
@@ -233,7 +221,7 @@ if ($project->usesFRS()) {
 		if (!$res_files || $rows_files < 1) {
 			echo db_error();
 			// No releases
-			echo '<tr><td colspan="5"><strong>'._('This Project Has Not Released Any Files').'</strong></td></tr>';
+			echo '<tr><td colspan="6"><strong>'._('This Project Has Not Released Any Files').'</strong></td></tr>';
 
 		} else {
 			/*
@@ -244,62 +232,85 @@ if ($project->usesFRS()) {
 				if (db_result($res_files,$f,'package_id')==db_result($res_files,($f-1),'package_id')) {
 					//same package as last iteration - don't show this release
 				} else {
-					$rel_date = getdate(db_result($res_files,$f,'release_date'));
+					$rel_date = getdate (db_result ($res_files, $f, 'release_date'));
+					$package_name = db_result($res_files, $f, 'package_name');
+					$package_release = db_result($res_files,$f,'release_name');
 					echo '
-					<tr style="text-align:center">
-					<td style="text-align:left">
-					<strong>' . db_result($res_files,$f,'package_name'). '</strong></td>';
+                        <tr class="align-center">
+						<td class="align-left">
+							<strong>' . $package_name . '</strong>
+						</td>';
 					// Releases to display
-					print '<td>'.db_result($res_files,$f,'release_name') .'
-					</td>
-					<td>' . $rel_date["month"] . ' ' . $rel_date["mday"] . ', ' . $rel_date["year"] . '</td>
-					<td><a href="'.util_make_url ('/frs/shownotes.php?group_id=' . $group_id . '&amp;release_id=' . db_result($res_files,$f,'release_id')) . '">';
-					echo html_image('ic/manual16c.png','15','15',array('alt'=>_('Release Notes')));
-					echo '</a> - <a href="'.util_make_url ('/frs/monitor.php?filemodule_id=' . db_result($res_files,$f,'package_id') . '&amp;group_id='.$group_id.'&amp;start=1').'">';
-					echo html_image('ic/mail16d.png','15','15',array('alt'=>_('Monitor this package')));
-					echo '</a>
-					</td>
-					<td>'.util_make_link ('/frs/?group_id=' . $group_id . '&amp;release_id=' . db_result($res_files,$f,'release_id'),_('Download')).'</td></tr>';
+					echo '
+                        <td>'
+						.$package_release.'
+						</td>
+						<td>'
+						. $rel_date["month"] . ' ' . $rel_date["mday"] . ', ' . $rel_date["year"] .
+						'</td>
+						<td class="align-center">';
+					
+					// -> notes
+					// accessibility: image is a link, so alt must be unique in page => construct a unique alt
+					$tmp_alt = $package_name . " - " . _('Release Notes');
+					$link = '/frs/shownotes.php?group_id=' . $group_id . '&amp;release_id=' . db_result($res_files, $f, 'release_id');
+					$link_content = $HTML->getReleaseNotesPic($tmp_alt, $tmp_alt);
+					echo util_make_link ($link, $link_content);
+					echo '</td>
+						<td class="align-center">';
+					
+					// -> monitor
+					$tmp_alt = $package_name . " - " . _('Monitor this package');
+					$link = '/frs/monitor.php?filemodule_id=' .  db_result($res_files,$f,'package_id') . '&amp;group_id='.$group_id.'&amp;start=1';
+					$link_content = $HTML->getMonitorPic($tmp_alt, $tmp_alt);
+					echo util_make_link ($link, $link_content);
+					echo '</td>
+						<td class="align-center">';
+					
+					// -> download
+					$tmp_alt = $package_name." ".$package_release." - ". _('Download');
+					$link_content = $HTML->getDownloadPic($tmp_alt, $tmp_alt);
+					$t_link_anchor = $HTML->toSlug($package_name)."-".$HTML->toSlug($package_release)."-title-content";
+					$link = '/frs/?group_id=' . $group_id . '&amp;release_id=' . db_result($res_files, $f, 'release_id')."#".$t_link_anchor;
+					echo util_make_link ($link, $link_content);
+					echo '</td>
+					</tr>';
+					
 				}
 			}
-
 		}
-		?></table>
-	<div style="text-align:center">
-	<?php echo util_make_link ('/frs/?group_id='.$group_id,'['._('View All Project Files').']'); ?>
-	</div>
-<?php
-	echo $HTML->boxBottom();
+		echo '</table>';
+		echo '<div class="lien-soulignement">' . util_make_link ('/frs/?group_id='.$group_id, _('View All Project Files')) . '</div>';
+		
+		echo $HTML->boxBottom();
 }
+
+echo '</div><!-- id="file-releases" -->' . "\n";
 
 $hook_params = array () ;
 $hook_params['group_id'] = $group_id ;
 plugin_hook ("project_after_frs",$hook_params) ;
 
-?>
-<p />
-<table width="100%" border="0" cellpadding="0" cellspacing="0">
-	<tr>
-		<td valign="top" width="50%">
-
-<?php
-
 // ############################## PUBLIC AREAS
-echo $HTML->boxTop(_('Public Areas'));
+
+echo '<table id="project-public-areas-and-news" class="my-layout-table" summary="">
+    <tr><td>
+    ';
+echo $HTML->boxTop(_('Public Areas'), 'Public_Areas');
 
 // ################# Homepage Link
 
-print '<a href="http://' . $project->getHomePage() . '">';
-print html_image('ic/home16b.png','20','20',array('alt'=>_('Home Page')));
-print '&nbsp;'._('Project Home Page').'</a>';
+echo '<div class="public-area-box">';
+echo util_make_link ('http://' . $project->getHomePage(), $HTML->getHomePic(_('Home Page')) . '&nbsp;' . _('Project Home Page'));
+echo '</div>
+    ';
 
 // ################## ArtifactTypes
 
-// CB hide tracker if desired
 if ($project->usesTracker()) {
-	print '<hr size="1" /><a href="'.util_make_url ('/tracker/?group_id='.$group_id).'">';
-	print html_image('ic/tracker20g.png','20','20',array('alt'=>_('Tracker')));
-	print '&nbsp;'._('Tracker').'</a>';
+	echo '<div class="public-area-box">';
+	$link_content = $HTML->getFollowPic(_('Tracker')) . '&nbsp;' . _('Tracker');
+	echo util_make_link ( '/tracker/?group_id=' . $group_id, $link_content);
 
 	$result=db_query_params ('SELECT agl.*,aca.count,aca.open_count
 	FROM artifact_group_list agl
@@ -314,94 +325,101 @@ if ($project->usesTracker()) {
 	if (!$result || $rows < 1) {
 		echo '<br /><em>'._('There are no public trackers available').'</em>';
 	} else {
-		echo '<ul>' ;
-		
+		echo '<ul class="tracker">';
 		for ($j = 0; $j < $rows; $j++) {
-			echo '<li>' ;
-			print util_make_link ('/tracker/?atid='. db_result($result, $j, 'group_artifact_id') . '&amp;group_id='.$group_id.'&amp;func=browse',db_result($result, $j, 'name')) . ' ' ;
+			echo '<li>';
+			echo util_make_link ('/tracker/?atid='. db_result($result, $j, 'group_artifact_id')  . '&amp;group_id='.$group_id.'&amp;func=browse',db_result($result, $j, 'name')) . ' ' ;
 			printf(ngettext('(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', '(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', (int) db_result($result, $j, 'open_count')), (int) db_result($result, $j, 'open_count'), (int) db_result($result, $j, 'count')) .'<br />'.
 			 db_result($result, $j, 'description');
 			echo '</li>' ;
 		}
-		echo '</ul>' ;
+		echo '</ul>';
 	}
+	echo '</div>';
 }
 
 // ################## forums
 
 if ($project->usesForum()) {
-	print '<hr size="1" /><a href="'.util_make_url ('/forum/?group_id='.$group_id).'">';
-	print html_image('ic/forum20g.png','20','20',array('alt'=>_('Forums')));
-	print '&nbsp;'._('Public Forums').'</a> (';
+	echo '<div class="public-area-box">';
+    $link_content = $HTML->getForumPic('') . '&nbsp;' . _('Public Forums');
+    echo util_make_link ( '/forum/?group_id=' . $group_id, $link_content);
+	print ' (';
 	$messages_count = project_get_public_forum_message_count($group_id);
 	$forums_count = project_get_public_forum_count($group_id);
 	printf(ngettext("<strong>%d</strong> message","<strong>%d</strong> messages",$messages_count),$messages_count);
 	print ' in ';
 	printf(ngettext("<strong>%d</strong> forum","<strong>%d</strong> forums",$forums_count),$forums_count);
 	print ')' ;
+	print "\n</div>";
 }
 
 // ##################### Doc Manager
 
 if ($project->usesDocman()) {
-	print '
-	<hr size="1" />
-	<a href="'.util_make_url ('/docman/?group_id='.$group_id).'">';
-	print html_image('ic/docman16b.png','20','20',array('alt'=>_('Documents')));
-	print '&nbsp;'._('DocManager: Project Documentation').'</a>';
+	echo '<div class="public-area-box">';
+	$link_content = $HTML->getDocmanPic('') . '&nbsp;' . _('DocManager: Project Documentation');
+	print util_make_link( '/docman/?group_id='.$group_id, $link_content);
+	echo '</div>';
 }
 
 // ##################### Mailing lists
 
 if ($project->usesMail()) {
-	print '<hr size="1" /><a href="'.util_make_url ('/mail/?group_id='.$group_id).'">';
-	print html_image('ic/mail16b.png','20','20',array('alt'=>_('Mailing Lists')));
-	print '&nbsp;'._('Mailing Lists').'</a> ';
+	echo '<div class="public-area-box">';
+	$link_content = $HTML->getMailPic('') . '&nbsp;' . _('Mailing Lists');
+	print util_make_link( '/mail/?group_id='.$group_id, $link_content);
 	$n = project_get_mail_list_count($group_id);
 	printf(ngettext('(<strong>%1$s</strong> public mailing list)', '(<strong>%1$s</strong> public mailing lists)', $n), $n);
+	echo '</div>';
 }
 
 // ##################### Task Manager
 
 if ($project->usesPm()) {
-	print '<hr size="1" /><a href="'.util_make_url ('/pm/?group_id='.$group_id).'">';
-	print html_image('ic/taskman20g.png','20','20',array('alt'=>_('Task Manager')));
-	print '&nbsp;'._('Task Manager').'</a>';
-	$result = db_query_params ('SELECT * FROM project_group_list WHERE group_id=$1 AND is_public=1',
-			array ($group_id));
+	echo '<div class="public-area-box">';
+	$link_content = $HTML->getPmPic('') . '&nbsp;' . _('Task Manager');
+	print util_make_link( '/pm/?group_id='.$group_id, $link_content);
+	
+	$sql="SELECT * FROM project_group_list WHERE group_id='$group_id' AND is_public=1";
+	$result = db_query ($sql);
 	$rows = db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '<br /><em>'._('There are no public subprojects available').'</em>';
 	} else {
-		echo '<ul>' ;
+		echo '<ul class="task-manager">';
 		for ($j = 0; $j < $rows; $j++) {
 			echo '<li>' ;
 			print util_make_link ('/pm/task.php?group_project_id='.db_result($result, $j, 'group_project_id').'&amp;group_id='.$group_id.'&amp;func=browse',db_result($result, $j, 'project_name'));
 			echo '</li>' ;
 		}
-		echo '</ul>' ;
+		echo '</ul>';
 	}
+	echo '</div>';
 }
 
 // ######################### Surveys
 
 if ($project->usesSurvey()) {
-	print '<hr size="1" /><a href="'.util_make_url ('/survey/?group_id='.$group_id).'">';
-	print html_image('ic/survey16b.png','20','20',array('alt'=>_('Surveys')));
-	print '&nbsp;'._('Surveys')."</a>";
-	echo ' (<strong>'. project_get_survey_count($group_id) .'</strong> '._('surveys').')';
+	echo '<div class="public-area-box">';
+	print html_image('ic/survey16b.png','20','20',array('alt'=>"")) . "&nbsp;";
+	print util_make_link( '/survey/?group_id='.$group_id, '&nbsp;'._('Surveys'));
+	echo ' ( <strong>'. project_get_survey_count($group_id) .'</strong> ' . _('surveys').'  )';
+	echo '</div>';
 }
 
 // ######################### SCM
 
 if ($project->usesSCM()) {
-	print '<hr size="1" /><a href="'.util_make_url ('/scm/?group_id='.$group_id).'">';
-	print html_image('ic/cvs16b.png','20','20',array('alt'=>_('Source Code')));
-	print '&nbsp;'._('SCM Repository')."</a>";
+	echo '<div class="public-area-box">';
+
+	$link_content = $HTML->getScmPic('') . '&nbsp;' . _('SCM Repository');
+	print util_make_link( '/scm/?group_id='.$group_id, $link_content);
 
 	$hook_params = array () ;
 	$hook_params['group_id'] = $group_id ;
 	plugin_hook ("scm_stats", $hook_params) ;
+	echo '</div>';
 }
 
 // ######################### Plugins
@@ -415,10 +433,11 @@ plugin_hook ("project_public_area", $hook_params);
 // CB hide FTP if desired
 if ($project->usesFTP()) {
 	if ($project->isActive()) {
-		print '<hr size="1" />';
-		print '<a href="ftp://' . $project->getUnixName() . '.' . $GLOBALS['sys_default_domain'] . '/pub/'. $project->getUnixName() .'/">';
-		print html_image('ic/ftp16b.png','20','20',array('alt'=>_('Anonymous FTP Space')));
-		print '&nbsp;'._('Anonymous FTP Space')."</a>";
+		echo '<div class="public-area-box">';
+		
+		$link_content = $HTML->getFtpPic('') . '&nbsp;' . _('Anonymous FTP Space');
+        print util_make_link('ftp://' . $project->getUnixName() . '.' . $GLOBALS['sys_default_domain'] . '/pub/'. $project->getUnixName(), $link_content);
+		echo '</div>';
 	}
 }
 
@@ -426,36 +445,31 @@ if ($project->usesFTP()) {
 plugin_hook("cal_link_group",$group_id);
 echo $HTML->boxBottom();
 
+echo '
+    </td>
+    <td>
+    ';
+
 if ($project->usesNews()) {
-	// COLUMN BREAK
-	?>
-
-		</td>
-		<td width="15">&nbsp;</td>
-		<td valign="top" width="50%">
-
-	<?php
 	// ############################# Latest News
-
-	echo $HTML->boxTop(_('Latest News'));
-
+	echo $HTML->boxTop(_('Latest News'), 'Latest_News');
 	echo news_show_latest($group_id,10,false);
-
 	echo $HTML->boxBottom();
 }
+
+//echo $HTML->boxBottom();
+
+echo '</td>
+    </tr>
+    </table>
+    </div><!-- id="forge-project-home" -->
+    ';
 
 //
 //	Linked projects (hierarchy)
 //
 
 plugin_hook('project_home_link',$group_id);
-
-?>
-		</td>
-	</tr>
-</table>
-
-<?php
 
 site_project_footer(array());
 

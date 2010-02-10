@@ -117,8 +117,15 @@ ORDER BY post_date DESC',
 	if (!$result || $rows < 1) {
 		$return .= _('No News Items Found');
 		$return .= db_error();
+		$return .= "</div>";
 	} else {
 		for ($i=0; $i<$rows; $i++) {
+			$t_thread_title = db_result($result,$i,'summary');
+			$t_thread_url = "/forum/forum.php?forum_id=" . db_result($result,$i,'forum_id');
+			$t_thread_author = db_result($result,$i,'realname');
+
+			$return .= '<div class="one-news bordure-dessous">';
+			$return .= "\n";
 			if ($show_summaries && $limit) {
 				//get the first paragraph of the story
 				if (strstr(db_result($result,$i,'details'),'<br/>')) {
@@ -127,13 +134,8 @@ ORDER BY post_date DESC',
 				} else {
 					$arr=explode("\n",db_result($result,$i,'details'));
 				}
-				//if the first paragraph is short, and so are following paragraphs, add the next paragraph on
-				if ((isset($arr[1]))&&(isset($arr[2]))&& (strlen($arr[0]) < 200) && (strlen($arr[1].$arr[2]) < 300) && (strlen($arr[2]) > 5)) {
-					$summ_txt='<br />'. util_make_links( $arr[0].'<br />'.$arr[1].'<br />'.$arr[2] );
-				} else {
-					$summ_txt='<br />'. util_make_links( $arr[0] );
-				}
-				$proj_name=' &nbsp; - &nbsp; '.util_make_link_g (strtolower(db_result($result,$i,'unix_group_name')),db_result($result,$i,'group_id'),db_result($result,$i,'group_name'));
+				$summ_txt=util_make_links( $arr[0] );
+				$proj_name=util_make_link_g (strtolower(db_result($result,$i,'unix_group_name')),db_result($result,$i,'group_id'),db_result($result,$i,'group_name'));
 			} else {
 				$proj_name='';
 				$summ_txt='';
@@ -141,25 +143,30 @@ ORDER BY post_date DESC',
 
 			if (!$limit) {
 				if ($show_forum) {
-					$return .= '<li>'.util_make_link ('/forum/forum.php?forum_id='. db_result($result,$i,'forum_id'),'<strong>'. db_result($result,$i,'summary') . '</strong>');
+					$return .= '<h3>'.util_make_link ($t_thread_url, $t_thread_title).'</h3>';
 				} else {
-					$return .= '<li><strong>'. db_result($result,$i,'summary') . '</strong>';
+					$return .= '<h3>'. $t_thread_title . '</h3>';
 				}
 				$return .= ' &nbsp; <em>'. date(_('Y-m-d H:i'),db_result($result,$i,'post_date')).'</em><br /></li>';
 			} else {
 				if ($show_forum) {
-					$return .= util_make_link ('/forum/forum.php?forum_id='. db_result($result,$i,'forum_id'),'<strong>'. db_result($result,$i,'summary').'</strong>');
+					$return .= '<h3>'.util_make_link ($t_thread_url, $t_thread_title).'</h3>';
 				} else {
-					$return .= '
-					<strong>'. db_result($result,$i,'summary') . '</strong>';
+					$return .= '<h3>'. $t_thread_title . '</h3>';
 				}
-				if (!$flat) {
-					$return .= '
-					<br />&nbsp;';
+				$return .= "<div>";
+				$return .= '<em>';
+				$return .= $t_thread_author;
+				$return .= '</em>';
+				$return .= ' - ';
+				$return .= date(_('Y-m-d H:i'),db_result($result,$i,'post_date'));
+				$return .= ' - ';
+				$return .= $proj_name ;
+				$return .= "</div>\n";
+				
+				if ($summ_txt != "") {
+					$return .= '<p>'.$summ_txt.'</p>';
 				}
-				$return .= '&nbsp;&nbsp;&nbsp;<em>'. db_result($result,$i,'realname') .' - '.
-					date(_('Y-m-d H:i'),db_result($result,$i,'post_date')). '</em>' .
-					$proj_name . $summ_txt;
 
 				$res2 = db_query_params ('SELECT total FROM forum_group_list_vw WHERE group_forum_id=$1',
 							 array (db_result($result,$i,'forum_id')));
@@ -174,12 +181,17 @@ ORDER BY post_date DESC',
 				} else {
 					$comments_txt = _('Comments');
 				}
-
-				if ($show_forum){
-					$return .= '<div align="center">(' . $num_comments .' '. $comments_txt . ') '
-					.util_make_link ('/forum/forum.php?forum_id='. db_result($result,$i,'forum_id'),'[' . _('Read&nbsp;More/Comment') . ']').'</div><hr width="100%" size="1" />';
+				
+				if ($show_forum) {
+					$link_text =  _('Read&nbsp;More/Comment') ;
+					$extra_params = array( 'class'      => 'dot-link',
+					             		   'title'      => $link_text . ' ' . $t_thread_title);
+					$return .= "\n";
+					$return .= '<div>' . $num_comments .' '. $comments_txt .' ';
+					$return .= util_make_link ($t_thread_url, $link_text, $extra_params);
+					$return .= '</div>';
 				} else {
-					$return .= '<hr width="100%" size="1" />';
+					$return .= '';
 				}
 			}
 
@@ -189,9 +201,9 @@ ORDER BY post_date DESC',
 			if ($limit) {
 				$limit--;
 			}
-		}
-		if ($tail_headlines){
-			$return .= '<hr width="100%" size="1" />'."\n";
+			$return .= "\n";
+			$return .= '</div><!-- class="one-news" -->';
+			$return .= "\n\n";
 		}
 		if ($group_id != $sys_news_group) {
 			$archive_url=util_make_url ('/news/?group_id='.$group_id);
@@ -201,24 +213,20 @@ ORDER BY post_date DESC',
 
 		if ($tail_headlines != -1) {
 			if ($show_forum) {
-				$return .= '<div align="center">'
-					.'<a href="'.$archive_url.'">[' . _('News archive') . ']</a></div>';
+				$return .= '<div>' . util_make_link($archive_url, _('News archive'), array('class' => 'dot-link')) . '</div>';
 			} else {
-				$return .= '<div align="center">...</div>';
+				$return .= '<div>...</div>';
 			}
 		}
 	}
-
 	if ($allow_submit && $group_id != $sys_news_group) {
 		if(!$result || $rows < 1) {
-			$return .= '<hr width="100%" size="1" />';
+			$return .= '';
 		}
 		//you can only submit news from a project now
 		//you used to be able to submit general news
-		$return .= '<div align="center">'
-		.util_make_link ('/news/submit.php?group_id='.$group_id,'['._('Submit News').']').'</div>';
+		$return .= '<div>' . util_make_link ('/news/submit.php?group_id='.$group_id, _('Submit News')).'</div>';
 	}
-
 	return $return;
 }
 
@@ -263,7 +271,7 @@ function news_foundry_latest($group_id=0,$limit=5,$show_summaries=true) {
 			$return .= util_make_link ('/forum/forum.php?forum_id='. db_result($result,$i,'forum_id'),'<strong>'. db_result($result,$i,'summary') . '</strong>')
 				.'<br /><em>'. db_result($result,$i,'realname') .' - '.
 					date(_('Y-m-d H:i'),db_result($result,$i,'post_date')) . $proj_name . '</em>
-				'. $summ_txt .'<hr width="100%" size="1" />';
+				'. $summ_txt .'';
 		}
 	}
 	return $return;

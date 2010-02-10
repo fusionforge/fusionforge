@@ -60,21 +60,20 @@ $sql = "SELECT *
 $res_package = db_query_params( $sql, array($group_id));
 $num_packages = db_numrows( $res_package );
 
-
-
 frs_header(array('title'=>_('Project Filelist'),'group'=>$group_id));
 
 if ( $num_packages < 1) {
 	echo "<h1>"._('No File Packages')."</h1>";
 	echo "<p><strong>"._('There are no file packages defined for this project.')."</strong>";
 } else {
+	echo '<div id="forge-frs" class="lien-soulignement">';
 
-	echo '<p>'._('Below is a list of all files of the project.').' ';
+	echo '<div class="blue-box">'._('Below is a list of all files of the project.').' ';
 	if ($release_id) {
 		echo _('The release you have chosen is <span class="selected">highlighted</span>.').' ';
 	}
 	echo _('Before downloading, you may want to read Release Notes and ChangeLog (accessible by clicking on release version).').'
-</p>
+	</div><!-- class="blue-box" -->
 ';
 
 	// check the permissions and see if this user is a release manager.
@@ -83,31 +82,14 @@ if ( $num_packages < 1) {
 	$perm =& $cur_group->getPermission(session_get_user());
 
 	if ($perm->isReleaseTechnician()) {
-		echo '<p><a href="admin/qrs.php?package=&group_id='.$group_id.'">';
-		echo _('To create a new release click here.');
+		//echo '<p><a href="admin/qrs.php?package=&group_id='.$group_id.'">';
+		echo '<p><a href="admin/qrs.php?group_id='.$group_id.'">';
+        echo _('To create a new release click here.');
 		echo "</a></p>";
 	}
 
 	// get unix group name for path
 	$group_unix_name=group_getunixname($group_id);
-
-	echo '
-<table width="100%" border="0" cellspacing="1" cellpadding="1">';
-	$cell_data=array();
-	$cell_data[] = array(_('Package'),'rowspan="2"');
-	$cell_data[] = array(_('Release &amp; Notes'),'rowspan="2"');
-	$cell_data[] = array(_('Filename'),'rowspan="2"');
-	$cell_data[] = array(_('Date'),'colspan="4"');
-
-	echo $GLOBALS['HTML']->multiTableRow('', $cell_data, TRUE);
-
-	$cell_data=array();
-	$cell_data[] = array(_('Size'));
-	$cell_data[] = array(_('D/L'));
-	$cell_data[] = array(_('Arch'));
-	$cell_data[] = array(_('Type'));
-
-	echo $GLOBALS['HTML']->multiTableRow('',$cell_data, TRUE);
 
 	$proj_stats['packages'] = $num_packages;
 	$proj_stats['releases'] = 0;
@@ -115,22 +97,26 @@ if ( $num_packages < 1) {
 	
 	// Iterate and show the packages
 	for ( $p = 0; $p < $num_packages; $p++ ) {
-		$cur_style = $GLOBALS['HTML']->boxGetAltRowStyle($p);
 		
-		$frsPackage = new FRSPackage($cur_group, db_result($res_package,$p,'package_id'));
+		$frsPackage = new FRSPackage($cur_group, db_result($res_package, $p, 'package_id'));
 		
-		print '<tr '.$cur_style.'><td colspan="3"><h3>'.db_result($res_package,$p,'name');
-
+		$package_name = db_result($res_package, $p, 'name');
+		//$package_title = $package_name . '&nbsp;';
+		
 		if($frsPackage->isMonitoring()) {
-			print ' <a href="'.util_make_url ('/frs/monitor.php?filemodule_id='. db_result($res_package,$p,'package_id') .'&group_id='.db_result($res_package,$p,'group_id').'&stop=1').'">'.
-				html_image('ic/xmail16w.png','20','20',array('alt'=>_('Stop monitoring this package')));
+			$title = db_result($res_package, $p, 'name') . " - " . _('Stop monitoring this package');
+			$url = '/frs/monitor.php?filemodule_id='. db_result($res_package, $p, 'package_id') .'&amp;group_id='.db_result($res_package,$p,'group_id').'&amp;stop=1';
+			$package_monitor = util_make_link ( $url, $GLOBALS['HTML']->getMonitorPic($title));
 		} else {
-			print ' <a href="'.util_make_url ('/frs/monitor.php?filemodule_id='. db_result($res_package,$p,'package_id') .'&group_id='.db_result($res_package,$p,'group_id').'&start=1').'">'.
-				html_image('ic/mail16w.png','20','20',array('alt'=>_('Monitor this package')));
+			$title = db_result($res_package, $p, 'name') . " - " . _('Monitor this package');
+            $url = '/frs/monitor.php?filemodule_id='. db_result($res_package, $p, 'package_id') .'&amp;group_id='.db_result($res_package,$p,'group_id').'&amp;start=1';
+			$package_monitor = util_make_link ( $url, $GLOBALS['HTML']->getMonitorPic($title));
 		}
-		
-		print '</a></h3></td><td colspan="4">&nbsp;</td></tr>';
 
+		//echo $GLOBALS['HTML']->boxTop($package_title, $package_name);
+        $package_name_protected = $HTML->toSlug($package_name);
+        echo '<h2 id="title_'. $package_name_protected .'">' . $package_name . '<span class="frs-monitor-package">' . $package_monitor . '</span></h2>';
+		
 		// get the releases of the package
 		$res_release = db_query_params ('SELECT * FROM frs_release
 		WHERE package_id=$1
@@ -141,36 +127,16 @@ if ( $num_packages < 1) {
 		$proj_stats['releases'] += $num_releases;
 
 		if ( !$res_release || $num_releases < 1 ) {
-			print '<tr '.$cur_style.'><td colspan="3">&nbsp;&nbsp;<em>'._('No releases').'</em></td><td colspan="4">&nbsp;</td></tr>'."\n";
+			echo '<strong>' . _('No releases') . '</strong>
+			';
 		} else {
 			// iterate and show the releases of the package
 			for ( $r = 0; $r < $num_releases; $r++ ) {
-
-				$cell_data=array();
-					
+				
 				$package_release = db_fetch_array( $res_release );
+				$release_title = util_make_link ( 'frs/shownotes.php?release_id=' . $package_release['release_id'], $package_name.' '.$package_release['name']);
+				echo $GLOBALS['HTML']->boxTop($release_title, $package_name . '_' . $package_release['name']);
 
-				// Highlight the release if one was chosen
-				if ( $release_id ) {
-					if ( $release_id == $package_release['release_id'] ) {
-						$bgstyle = 'class="selected"';
-						$cell_data[] = array('&nbsp;<strong>
-						<a href="shownotes.php?release_id='.$package_release['release_id'].'">'.$package_release['name'] .'</a></strong>',
-						'colspan="3"');
-					} else {
-						$bgstyle = $cur_style;
-						$cell_data[] = array('&nbsp;<strong><a href="?group_id='.$group_id.'&release_id='.$package_release['release_id'].'">'.$package_release['name'] .'</a></strong>','colspan="3"');
-					}
-				} else {
-					$bgstyle = $cur_style;
-					$cell_data[] = array('&nbsp;<strong><a href="shownotes.php?release_id='.$package_release['release_id'].'">'.$package_release['name'] .'</a></strong>','colspan="3"');
-				}
-
-				$cell_data[] = array('&nbsp;<strong>
-				'.date(_('Y-m-d H:i'), $package_release['release_date'] ) .'</strong>',
-				'colspan="4" align="center"');
-					
-				print $GLOBALS['HTML']->multiTableRow($bgstyle, $cell_data, FALSE);
 				// get the files in this release....
 				$res_file = db_query_params("SELECT frs_file.filename AS filename,
 				frs_file.file_size AS file_size,
@@ -189,39 +155,56 @@ if ( $num_packages < 1) {
 
 				@$proj_stats['files'] += $num_files;
 
+                $cell_data = array();
+                $cell_data[] = _('Filename');
+                $cell_data[] = _('Date');
+                $cell_data[] = _('Size');
+                $cell_data[] = _('D/L');
+                $cell_data[] = _('Arch');
+                $cell_data[] = _('Type');
+
+                if ($release_id==$package_release['release_id']) {
+                    echo $GLOBALS['HTML']->listTableTop($cell_data,'',true);
+                } else {
+                    echo $GLOBALS['HTML']->listTableTop($cell_data);
+                }
+				
 				if ( !$res_file || $num_files < 1 ) {
-					print '<tr '.$bgstyle.'><td colspan="3"><dd><em>No Files</em></td><td colspan="4">&nbsp;</td></tr>'."\n";
+					echo '<tr><td colspan="6">&nbsp;&nbsp;<em>'._('No releases').'</em></td></tr>
+					';
 				} else {
 					// now iterate and show the files in this release....
 					for ( $f = 0; $f < $num_files; $f++ ) {
 						$file_release = db_fetch_array( $res_file );
-							
-						$cell_data=array();
-							
-						$cell_data[] = array('<dd>
-						'.util_make_link ('/frs/download.php/'.$file_release['file_id'].'/'.$file_release['filename'],$file_release['filename']),
-						'colspan=3');
-
-						$cell_data[] = array(human_readable_bytes($file_release['file_size']),'align="right"');
-						$cell_data[] = array( ($file_release['downloads'] ? number_format($file_release['downloads'], 0) : '0'), 'align="right"');
-						$cell_data[] = array($file_release['processor']);
-						$cell_data[] = array($file_release['type']);
-
-						if ( $release_id  ) {
-							if ( $release_id == $package_release['release_id'] ) {
-								print $GLOBALS['HTML']->multiTableRow($bgstyle, $cell_data,FALSE);
-							}
-						} else {
-							print $GLOBALS['HTML']->multiTableRow($bgstyle, $cell_data, FALSE);
-						}
+						
+						$tmp_col1 = util_make_link ('/frs/download.php/'.$file_release['file_id'].'/'.$file_release['filename'], $file_release['filename']);
+						$tmp_col2 = date(_('Y-m-d H:i'), $package_release['release_date'] ); 
+						$tmp_col3 = human_readable_bytes($file_release['file_size']);
+                        $tmp_col4 = ($file_release['downloads'] ? number_format($file_release['downloads'], 0) : '0');
+						$tmp_col5 = $file_release['processor'];
+						$tmp_col6 = $file_release['type'];
+						
 						$proj_stats['size'] += $file_release['file_size'];
 						@$proj_stats['downloads'] += $file_release['downloads'];
+						
+						echo '<tr ' . ">\n";
+						echo ' <td>' . $tmp_col1 . '</td>'."\n";
+						echo ' <td>' . $tmp_col2 . '</td>'."\n";
+						echo ' <td>' . $tmp_col3 . '</td>'."\n";
+						echo ' <td>' . $tmp_col4 . '</td>'."\n";
+						echo ' <td>' . $tmp_col5 . '</td>'."\n";
+						echo ' <td>' . $tmp_col6 . '</td>'."\n";
+						echo '</tr>'."\n";
 					}
 				}
+                echo $GLOBALS['HTML']->listTableBottom();
+                echo $GLOBALS['HTML']->boxBottom();
 			}
 		}
+		//echo $GLOBALS['HTML']->boxBottom();
 	}
-
+// print statistics for this table datas
+/*
 	if ( $proj_stats['size'] ) {
 		print '<tr><td colspan="8">&nbsp;</tr>'."\n";
 		print '<tr><td><strong>'._('Project totals').'</strong></td>'
@@ -234,6 +217,12 @@ if ( $num_packages < 1) {
 
 	print "</table>\n\n";
 }
+*/
+
+echo '</div><!-- id="forge-frs" -->';
+
+}
+
 frs_footer();
 
 ?>

@@ -13,20 +13,21 @@ class Theme extends Layout {
         // Parent constructor
         $this->Layout();
 
-        $this->COLOR_CONTENT_BACK= '#ffffff';
-        $this->COLOR_LTBACK1= '#eeeeef';
-        $this->COLOR_LTBACK2= '#fafafa';
-        $this->COLOR_SELECTED_TAB= '#e0e0e0';
-        $this->COLOR_HTMLBOX_TITLE = '#bbbbbb';
-        $this->COLOR_HTMLBOX_BACK = '#eaecef';
-        $this->FONT_CONTENT = 'helvetica';
-        $this->FONT_HTMLBOX_TITLE = 'helvetica';
-        $this->FONTCOLOR_HTMLBOX_TITLE = '#333333';
-        $this->FONTCOLOR_CONTENT = '#333333';
-        $this->FONTSIZE = 'small';
-        $this->FONTSIZE_SMALLER='x-small';
-        $this->FONTSIZE_SMALLEST='xx-small';
-        $this->FONTSIZE_HTMLBOX_TITLE = 'small';
+        $this->imgroot = THEME_DIR.'/images/';
+        $this->jsroot  = THEME_DIR.'/js/';
+    }
+
+    /**
+     * Layout() - Constructor
+     */
+    function Layout() {
+        // Constructor for parent class...
+        if ( file_exists($GLOBALS['sys_custom_path'] . '/index_std.php') ) {
+            $this->rootindex = $GLOBALS['sys_custom_path'] . '/index_std.php';
+        } else {
+            $this->rootindex = $GLOBALS['gfwww'].'index_std.php';
+        }
+        $this->Error();
     }
 
     /**
@@ -42,144 +43,115 @@ class Theme extends Layout {
         }
 
         print '<?xml version="1.0" encoding="utf-8"?>';
-        ?>
+        echo '
+		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="' . _('en') . '" lang="' . _('en') . '">
+		<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>'. $params['title'] . '</title>
+		<link rel="icon" type="image/png" href="'. util_make_url('/images/icon.png') .'" />
+		<link rel="shortcut icon" type="image/png" href="'. util_make_url('/images/icon.png') .'" />';
 
-<!DOCTYPE html
-    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        echo $this->headerLink();
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo _('en') ?>" lang="<?php echo _('en'); ?>">
+        echo '
+		<script type="text/javascript" src="'. $this->jsroot .'gforge.js"></script>
+		<script type="text/javascript">';
+        plugin_hook ("javascript",false);
+        echo '</script>';
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title><?php echo $params['title']; ?></title>
-    <link rel="icon" type="image/png" href="<?php echo util_make_url('/images/icon.png'); ?>"/>
-    <link rel="shortcut icon" type="image/png" href="<?php echo util_make_url('/images/icon.png'); ?>"/>
-	<?php $this->headerLink(); ?>
-    <script type="text/javascript" src="<?php echo util_make_url('/js/common.js'); ?>"></script>
-    <script type="text/javascript" src="<?php echo util_make_url('/js/sortable.js'); ?>"></script>
-    <script type="text/javascript">
-    <?php plugin_hook ("javascript",false) ; ?>
-    </script>
-<?php
-	      if (_('default_font') != 'default_font') {
-		      $site_fonts = _('default_font');
-	      } else {
-		      $site_fonts = 'helvetica' ;
-	      }
+        $this->headerCSS();
 
-    $this->headerCSS();
-?>
-</head>
+        echo '
+		</head>
+		<body id="mydoc">
+		';
 
-<body>
+        $this->bodyHeader($params);
+    }
 
-  <?php
-  $this->bodyHeader($params);
-  }
+    function bodyHeader($params) {
+        global $user_guide;
 
-  function bodyHeader($params){
-	global $user_guide;
-
-  ?>
-<div>
-  <table class="header" border="0" width="100%" cellspacing="0" cellpadding="0">
-      <tr class="ff">
-		  <td class="topLeft"><?php echo util_make_link ('/', html_image('header/top-logo.png',192,54,array('border'=>'0'))); ?></td>
-        <td class="middleRight"><?php echo $this->searchBox(); ?></td>
-        <td class="middleRight"><?php
-	if (session_loggedin()) {
-		$u =& user_get_object(user_getid());
-		echo util_make_link ('/account/logout.php', sprintf("%s (%s)", _('Log Out'), $u->getRealName()),array('class'=>'userlink'));
-        	echo ' | ';
-        	echo util_make_link ('/account/', _('My Account'),array('class'=>'userlink'));
+        echo '
+			<table id="header" class="width-100p100">
+				<tr>
+					<td id="header-col1">
+					<h1>'.  util_make_link ('/', html_image('header/top-logo.png',192,54,array('alt'=>'FusionForge Home'))) .'</h1>
+					</td>
+					<td id="header-col2">';
+        echo $this->searchBox();
+        echo '
+					</td>
+					<td id="header-col3">
+			';
+        if (session_loggedin()) {
+            $u =& user_get_object(user_getid());
+            echo util_make_link ('/account/logout.php', sprintf("%s (%s)", _('Log Out'), $u->getRealName()), array('class'=>'userlink'));
+            echo ' ';
+            echo util_make_link ('/account/', _('My Account'), array('class'=>'userlink'));
         } else {
-			$url = '/account/login.php';
+		$url = '/account/login.php';
         	if(getStringFromServer('REQUEST_METHOD') != 'POST') {
         		$url .= '?return_to=';
         		$url .= urlencode(getStringFromServer('REQUEST_URI'));
         	}
-
+		
         	echo util_make_link ($url, _('Log In'),array('class'=>'userlink'));
-        	echo ' | ';
+        	echo ' ';
         	if (!$GLOBALS['sys_user_reg_restricted']) {
         		echo util_make_link ('/account/register.php', _('New Account'),array('class'=>'userlink'));
-        	}
+		}
         }
 
         plugin_hook ('headermenu', $params);
 
         echo $this->quickNav();
-        ?></td>
-        <td class="ff">&nbsp;&nbsp;</td>
-      </tr>
-  
-  </table>
-</div>
-
-<!-- outer tabs -->
-<table border="0" width="100%" cellspacing="0" cellpadding="0">
-    <tr class="ff">
-        <td class="ff"><?php echo $this->outerTabs($params); ?></td>
-    </tr>
-</table>
-
-<!-- inner tabs -->
-<table border="0" width="100%" cellspacing="0" cellpadding="0">
-    <?php
-    if (isset($params['group']) && $params['group']) {
-    ?>
-      <tr class="ff">
-        <td class="ff">
-           <?php
-           echo $this->projectTabs($params['toptab'],$params['group']);
-           ?>
-        </td>
-      </tr>
-    <?php
-    }
-    ?>
-</table>
-
-<table border="0" width="100%" cellspacing="0" cellpadding="0">  
-  <tr>
-    <td id="main" class="mainCanvas"> <!-- main body area -->
-    <?php
+        echo '
+					</td>
+				</tr>
+			</table>
+			
+			<!-- outer tabs -->
+			';
+        echo $this->outerTabs($params);
+        echo '<!-- inner tabs -->';
+        if (isset($params['group']) && $params['group']) {
+            echo $this->projectTabs($params['toptab'],$params['group']);
+        }
     }
 
     function footer($params) {
-    ?>
-    </td> <!-- end main body area -->
-  </tr>
-</table>  
- 
-<!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
-<br />
-<div align="right">
-<a href="http://fusionforge.org/"><img src="<?php echo util_make_url ('/images/pow-fusionforge.png'); ?>" alt="Powered By FusionForge" border="0" /></a>
-</div>
+        echo '
+			<!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
+			<div class="align-right">
+			<a href="http://fusionforge.org/">
+			<img src="'. util_make_url ('/images/pow-fusionforge.png') .'" alt="Powered By FusionForge" />
+			</a></div>
+			';
 
-<?php
-global $sys_show_source;
-if ($sys_show_source) {
-    global $SCRIPT_NAME;
-    print util_make_link ('/source.php?file=' . $SCRIPT_NAME, _('Show source'), array ("class" => "showsource"));
-}
-?>
+        global $sys_show_source;
+        if ($sys_show_source) {
+            global $SCRIPT_NAME;
+            print util_make_link ('/source.php?file=' . $SCRIPT_NAME, _('Show source'), array ("class" => "showsource"));
+        }
 
-</body>
-</html>
-
-<?php
-
+        echo '
+		</body>
+		</html>
+		';
     }
 
-    function headerCSS(){
-?>
-    <link rel="stylesheet" type="text/css" href="<?php echo util_make_url ('/themes/css/gforge.css') ?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo THEME_DIR ?>/css/theme.css" />
-<?php
-       plugin_hook ('cssfile',$this);
+    function headerCSS() {
+        echo '
+		<link href="http://yui.yahooapis.com/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css" type="text/css" rel="stylesheet" />
+		<link href="http://yui.yahooapis.com/2.6.0/build/base/base-min.css"	type="text/css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="'. util_make_url ('/themes/css/fusionforge.css') .'" />
+		<link rel="stylesheet" type="text/css" href="'. THEME_DIR .'/css/theme.css" />
+		<link rel="stylesheet" type="text/css" href="'. THEME_DIR .'/css/theme-pages.css" />
+		';
+
+	plugin_hook ('cssfile',$this);
     }
 
     function getRootIndex() {
@@ -193,23 +165,19 @@ if ($sys_show_source) {
      * @param   bool    Whether to echo or return the results
      * @param   string  The box background color
      */
-    function boxTop($title) {
-        return '
-        <!-- Box Top Start -->
-
-        <table cellspacing="0" cellpadding="0" style="table-layout:fixed" width="100%" border="0" background="'.$this->imgroot.'vert-grad.png">
-        <tr class="ff" align="center">
-            <td class="ff" valign="top" style="text-align:right" width="10" background="'.$this->imgroot.'box-topleft.png"><img src="'.$this->imgroot.'clear.png" width="10" height="20" /></td>
-            <td class="ff" width="100%" background="'.$this->imgroot.'box-grad.png"><span class="titlebar">'.$title.'</span></td>
-            <td class="ff" valign="top" width="10" background="'.$this->imgroot.'box-topright.png"><img src="'.$this->imgroot.'clear.png" width="10" height="20" /></td>
-        </tr>
-        <tr class="ff">
-            <td class="ff" colspan="3">
-            <table cellspacing="2" cellpadding="2" width="100%" border="0">
-                <tr class="ff" align="left">
-                    <td class="ff" colspan="2">
-
-        <!-- Box Top End -->';
+    function boxTop($title, $id = '') {
+        $t_result = '
+        	<div id="' . $this->toSlug($id) . '" class="box-surround">
+            	<div id="'. $this->toSlug($id) . '-title" class="box-title">
+            		<div class="box-title-left">
+            			<div class="box-title-right">
+                			<h3 class="box-title-content" id="'. $this->toSlug($id) .'-title-content">'. $title .'</h3>
+                		</div>
+                	</div>
+                </div> 
+            	<div id="'. $this->toSlug($id) .'-content" class="box-content">
+            ';
+        return $t_result;
     }
 
     /**
@@ -218,34 +186,25 @@ if ($sys_show_source) {
      * @param   string  Box title
      * @param   string  The box background color
      */
-    function boxMiddle($title) {
-        return '
-        <!-- Box Middle Start -->
-                    </td>
-                </tr>
-                <tr class="ff" align="center">
-                    <td class="ff" colspan="2" background="'.$this->imgroot.'box-grad.png"><span class="titlebar">'.$title.'</span></td>
-                </tr>
-                <tr class="ff" align="left">
-                    <td class="ff" colspan="2">
-        <!-- Box Middle End -->';
+    function boxMiddle($title, $id = '') {
+	    $t_result ='
+	        	</div> <!-- class="box-content" -->
+	        <h3 id="title-'. $this->toSlug($id).'" class="box-middle">'.$title.'</h3>
+	       	<div class="box-content">
+        ';
+	    return $t_result;
     }
 
     /**
      * boxBottom() - Bottom HTML box
      *
-     * @param   bool    Whether to echo or return the results
      */
     function boxBottom() {
-        return '
-            <!-- Box Bottom Start -->
-                    </td>
-                </tr>
-            </table>
-            </td>
-        </tr>
-        </table><br />
-        <!-- Box Bottom End -->';
+	    $t_result='
+                </div>
+            </div> <!-- class="box-surround" -->
+		';
+	    return $t_result;
     }
 
     /**
@@ -255,9 +214,9 @@ if ($sys_show_source) {
      */
     function boxGetAltRowStyle($i) {
         if ($i % 2 == 0) {
-            return ' bgcolor="#EAEAEA"';
+            return 'class="bgcolor-white"';
         } else {
-            return ' bgcolor="#E0E0E0"';
+            return 'class="bgcolor-grey"';
         }
     }
 
@@ -267,134 +226,32 @@ if ($sys_show_source) {
      * @param       array   The array of titles
      * @param       array   The array of title links
      */
-    function listTableTop ($title_arr,$links_arr=false) {
-        $return = '
-        <table cellspacing="0" cellpadding="0" width="100%" border="0">
-        <tr class="ff" align="center">
-    <!--        <td class="ff" valign="top" style="text-align:right" width="10" background="'.$this->imgroot.'box-grad.png"><img src="'.$this->imgroot.'box-topleft.png" width="10" height="75" /></td> -->
-            <td class="ff" background="'.$this->imgroot.'box-grad.png">
-        <table width="100%" border="0" cellspacing="1" cellpadding="2">
-            <tr class="ff">';
+    function listTableTop ($title_arr,$links_arr=false,$selected=false) {
+	    $return = '<table class="width-100p100 listTable';
+	    if ($selected == true) {
+		    $return .= ' selected';
+	    }
+	    $return .= '">
+            <tr>';
 
         $count=count($title_arr);
         if ($links_arr) {
             for ($i=0; $i<$count; $i++) {
                 $return .= '
-                <td class="ff" style="text-align:center"><a class="sortbutton" href="'.util_make_url ($links_arr[$i]).'"><span style="color:'.
-                $this->FONTCOLOR_HTMLBOX_TITLE.'"><strong>'.$title_arr[$i].'</strong></span></a></td>';
+                <th scope="col"><a class="sortbutton" href="'.util_make_url ($links_arr[$i]).'"><strong>'.$title_arr[$i].'</strong></a></th>';
             }
         } else {
             for ($i=0; $i<$count; $i++) {
                 $return .= '
-                <td class="ff" style="text-align:center"><span style="color:'.
-                $this->FONTCOLOR_HTMLBOX_TITLE.'"><strong>'.$title_arr[$i].'</strong></span></td>';
+                <th scope="col"><strong>'.$title_arr[$i].'</strong></th>';
             }
         }
         return $return.'</tr>';
     }
 
     function listTableBottom() {
-        return '</table></td>
-            <!-- <td class="ff" valign="top" style="text-align:right" width="10" background="'.$this->imgroot.'box-grad.png"><img src="'.$this->imgroot.'box-topright.png" width="10" height="75" /></td> -->
-            </tr></table>';
-    }
-
-    function outerTabs($params) {
-        global $sys_use_trove,$sys_use_snippet,$sys_use_people,$sys_use_project_tags,$sys_use_project_full_list;
-
-        $TABS_DIRS[]=util_make_url ('/') ;
-        $TABS_DIRS[]=util_make_url ('/my/') ;
-	if ($sys_use_trove || $sys_use_project_tags || $sys_use_project_full_list) {
-		$TABS_DIRS[]=util_make_url ('/softwaremap/') ;
-	}
-        if ($sys_use_snippet) {
-		$TABS_DIRS[]=util_make_url ('/snippet/') ;
-        }
-        if ($sys_use_people) {
-		$TABS_DIRS[]=util_make_url ('/people/') ;
-        }
-        $TABS_TITLES[]=_('Home');
-        $TABS_TITLES[]=_('My&nbsp;Page');
-	if ($sys_use_trove || $sys_use_project_tags || $sys_use_project_full_list) {
-        	$TABS_TITLES[]=_('Projects');
-	}
-        if ($sys_use_snippet) {
-            $TABS_TITLES[]=_('Code&nbsp;Snippets');
-        }
-        if ($sys_use_people) {
-            $TABS_TITLES[]=_('Project&nbsp;Openings');
-        }
-	// outermenu hook
-	$PLUGIN_TABS_DIRS = Array();
-	$hookParams['DIRS'] = &$PLUGIN_TABS_DIRS;
-	$hookParams['TITLES'] = &$TABS_TITLES;
-	plugin_hook ("outermenu", $hookParams) ;
-	$TABS_DIRS = array_merge($TABS_DIRS, $PLUGIN_TABS_DIRS);
-
-	$user_is_super=false;
-	$selected = 0 ;
-	if (session_loggedin()) {
-		$projectmaster =& group_get_object(GROUP_IS_MASTER);
-		$projectstats =& group_get_object(GROUP_IS_STATS);
-		$permmaster =& $projectmaster->getPermission( session_get_user() );
-		$permstats =& $projectstats->getPermission( session_get_user() );
-
-		if ($permmaster->isAdmin()) {
-			$user_is_super=true;
-			$TABS_DIRS[]=util_make_url ('/admin/') ;
-			$TABS_TITLES[]=_('Admin');
-		}
-		if ($permstats->isMember()) {
-			$TABS_DIRS[]=util_make_url ('/reporting/') ;
-			$TABS_TITLES[]=_('Reporting');
-		}
-	}
-        if(isset($params['group']) && $params['group']) {
-            // get group info using the common result set
-            $project =& group_get_object($params['group']);
-            if ($project && is_object($project)) {
-                if ($project->isError()) {
-
-                } elseif (!$project->isProject()) {
-
-                } else {
-		    if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
-			    $TABS_DIRS[]=util_make_url ('/project/?group_id='. $params['group']) ;
-		    } else {
-			    $TABS_DIRS[]=util_make_url ('/projects/'.$project->getUnixName().'/') ;
-		    }
-                    $TABS_TITLES[]=$project->getPublicName();
-                    $selected=count($TABS_DIRS)-1;
-                }
-            }
-        } elseif (strstr(getStringFromServer('REQUEST_URI'),util_make_url ('/my/')) || strstr(getStringFromServer('REQUEST_URI'),'/account/') ||
-		  strstr(getStringFromServer('REQUEST_URI'),util_make_url ('/themes/')) ) {
-		$selected=array_search(util_make_url ('/my/'), $TABS_DIRS);
-        } elseif (strstr(getStringFromServer('REQUEST_URI'),util_make_url ('softwaremap'))) {
-		$selected=array_search(util_make_url ('/softwaremap/'), $TABS_DIRS);
-        } elseif (strstr(getStringFromServer('REQUEST_URI'),util_make_url ('/snippet/'))) {
-		$selected=array_search(util_make_url ('/snippet/'), $TABS_DIRS);
-        } elseif (strstr(getStringFromServer('REQUEST_URI'),util_make_url ('/people/'))) {
-		$selected=array_search(util_make_url ('/people/'), $TABS_DIRS);
-        } elseif (strstr(getStringFromServer('REQUEST_URI'),util_make_url ('/reporting/'))) {
-		$selected=array_search(util_make_url ('/reporting/'),$TABS_DIRS);
-        } elseif (strstr(getStringFromServer('REQUEST_URI'),util_make_url ('/admin/')) && $user_is_super) {
-		$selected=array_search(util_make_url ('/admin/'),$TABS_DIRS);
-        } elseif (count($PLUGIN_TABS_DIRS)>0) {
-            foreach ($PLUGIN_TABS_DIRS as $PLUGIN_TABS_DIRS_VALUE) {
-               if (strstr(getStringFromServer('REQUEST_URI'),$PLUGIN_TABS_DIRS_VALUE)) {
-                   $selected=array_search($PLUGIN_TABS_DIRS_VALUE,$TABS_DIRS);
-                   break;
-               }
-            }
-        } else {
-            $selected=0;
-        }
-        if (!$this->COLOR_SELECTED_TAB) {
-            $this->COLOR_SELECTED_TAB= '#e0e0e0';
-        }
-        echo $this->tabGenerator($TABS_DIRS,$TABS_TITLES,false,$selected,$this->COLOR_SELECTED_TAB,'100%');
-
+	    return '
+            </table>';
     }
 
 
@@ -403,12 +260,15 @@ if ($sys_show_source) {
         $width=intval((100/$count));
 
         $return = '
+		<!-- start tabs -->
+		<table class="tabGenerator width-100p100" summary="" ';
 
-        <!-- start tabs -->
-
-        <table border="0" cellpadding="0" cellspacing="0" width="'.$total_width.'">
-        <tr class="ff">';
-
+        if ($total_width != '100%') {
+		$return .= 'style="width:' . $total_width . ';"';
+        }
+        $return .= ">\n";
+        $return .= '<tr>';
+ 
         $folder = $this->imgroot.($nested ? 'bottomtab-new/' : 'toptab-new/');
 
         for ($i=0; $i<$count; $i++) {
@@ -427,91 +287,68 @@ if ($sys_show_source) {
             }
             
             $clear_img = $this->imgroot.'clear.png';
+
+            $return .= "\n";
+
+            // left part
+            $return .= '<td class="tg-left">' . "\n";
+            $return .= '<div';
+            if ($selected == $i) {
+                $return .= ' class="selected"';
+            }
+            $return .= '>';
+            $return .= '<div';
             
             if ($nested) {
-                $tab_height = BOTTOM_TAB_HEIGHT;
-                $return .= sprintf(
-                    '<td class="ff" valign="top" width="5" background="%s">
-      			<img src="%s" height="%d" width="5" alt="" />
-                	</td>', $middle_img, $clear_img, $tab_height );
-                $return .= sprintf(
-                    '<td class="ff" background="%s" width="'.$width.'%%" style="text-align:center">
-            		<a class="%s" href="%s">%s</a>
-    		</td>', $middle_img, $css_class, $TABS_DIRS[$i], $TABS_TITLES[$i]);
-    
-                // if the next tab is not last, insert a separator
-                if ($i < $count-1) {
-                    $return .= sprintf(
-                        '<td class="ff" valign="top" width="2" background="%s">
-          			<img src="%s" height="%d" width="2" alt="" />
-                    	  </td>', $separ_img, $clear_img, $tab_height );
-                }
+		    $return .= ' class="nested"';
             }
-            else {
-                $tab_height = TOP_TAB_HEIGHT;
-                
-                $return .= sprintf(
-                    '<td class="ff" valign="top" width="3" background="%s">
-      			<img src="%s" height="%d" width="3" alt="" />
-                	</td>', $left_img, $clear_img, $tab_height );
-                    
-                $return .= sprintf(
-                    '<td class="ff" background="%s" width="'.$width.'%%" style="text-align:center">
-            		<a class="%s" href="%s">%s</a>
-    		</td>', $middle_img, $css_class, $TABS_DIRS[$i], $TABS_TITLES[$i]);
-    
-                // if the next tab is not selected, close this tab
-                if ($selected != $i+1) {
-                  $return .= sprintf(
-                      '<td class="ff" valign="top" width="9" background="%s">
-        			<img src="%s" height="%d" width="9" alt="" />
-                  	  </td>', $right_img, $clear_img, $tab_height );
-                }
+            $return .= '>' . "\n";
+            $return .= '</div>';
+            $return .= '</div>' . "\n";
+            $return .= '</td>' . "\n";
+
+            // middle part
+            $return .= '<td class="tg-middle" style="width:'.$width.'%;">' . "\n";
+            $return .= '<div';
+            if ($selected == $i) {
+		    $return .= ' class="selected"';
             }
-        }
-                
-        //
-        //    Building a bottom row in this table, which will be darker
-        //
-        /*
-        if ($selected == 0) {
-            $beg_cols=0;
-            $end_cols=((count($TABS_DIRS)*3)-3);
-        } elseif ($selected == (count($TABS_DIRS)-1)) {
-            $beg_cols=((count($TABS_DIRS)*3)-3);
-            $end_cols=0;
-        } else {
-            $beg_cols=($selected*3);
-            $end_cols=(((count($TABS_DIRS)*3)-3)-$beg_cols);
-        }
-        
-        $return .= '<tr class="ff">';
-        
-        if ($beg_cols > 0) {
-            $return .= 
-                '<td class="ff" colspan="'.$beg_cols.'" height="1" bgcolor="#909090">
-			<img src="'.$this->imgroot.'clear.png" height="1" width="10" />
-		</td>';
-        }
-        $return .= 
-                '<td class="ff" colspan="3" height="1" bgcolor="'.$sel_tab_bgcolor.'">
-			<img src="'.$this->imgroot.'clear.png" height="1" width="10" />
-		</td>';
-        if ($end_cols > 0) {
-            $return .= 
-                '<td class="ff" colspan="'.$end_cols.'" height="1" bgcolor="#909090">
-			  <img src="'.$this->imgroot.'clear.png" height="1" width="10" />
-		</td>';
-        }
-	    */
-        
-        $return .= '</tr>';
+            $return .= '>';
+            $return .= '<div';
+            if ($nested) {
+		    $return .= ' class="nested"';
+            }
+            $return .= '>' . "\n";
+            $return .= '<a href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a>' . "\n";
+            $return .= '</div>';
+            $return .= '</div>' . "\n";
+            $return .= '</td>' . "\n";
 
-        return $return.'
-        </table> 
+            // right part
+            // if the next tab is not selected, close this tab
+            if ($selected != $i+1) {
+		    $return .= '<td class="tg-right">' . "\n";
+		    $return .= '<div';
+		    if ($selected == $i) {
+			    $return .= ' class="selected"';
+		    }
+		    $return .= '>';
+		    $return .= '<div';
+		    if ($nested) {
+			    $return .= ' class="nested"';
+		    }
+		    $return .= '>' . "\n";
+		    $return .= '</div>';
+		    $return .= '</div>' . "\n";
+		    $return .= '</td>' . "\n";
+	    }
+	}
+	
+        $return .= '</tr>
+        </table>
+        <!-- end tabs -->';
 
-        <!-- end tabs -->
-';
+	return $return;
     }
 
     function searchBox() {
@@ -529,50 +366,39 @@ if ($sys_show_source) {
         }
 
         print '
-        <form class="search" action="'.util_make_url ('/search/').'" method="get">
-        <table border="0" cellpadding="0" cellspacing="0">
-        <tr class="ff"><td class="ff">
-        <div align="center" style="font-size:smaller">';
+        <form id="searchBox" action="'.util_make_url ('/search/').'" method="get">
+        <div>';
         $parameters = array(
-        SEARCH__PARAMETER_GROUP_ID => $group_id,
-        SEARCH__PARAMETER_ARTIFACT_ID => $atid,
-        SEARCH__PARAMETER_FORUM_ID => $forum_id,
-        SEARCH__PARAMETER_GROUP_PROJECT_ID => $group_project_id
+		SEARCH__PARAMETER_GROUP_ID => $group_id,
+		SEARCH__PARAMETER_ARTIFACT_ID => $atid,
+		SEARCH__PARAMETER_FORUM_ID => $forum_id,
+		SEARCH__PARAMETER_GROUP_PROJECT_ID => $group_project_id
         );
 
         $searchManager =& getSearchManager();
         $searchManager->setParametersValues($parameters);
         $searchEngines =& $searchManager->getAvailableSearchEngines();
 
-        echo '<select class="ff" name="type_of_search">';
+        echo '
+        <label for="searchBox-words">
+        <select name="type_of_search">';
         for($i = 0, $max = count($searchEngines); $i < $max; $i++) {
             $searchEngine =& $searchEngines[$i];
             echo '<option class="ff" value="'.$searchEngine->getType().'"'.( $type_of_search == $searchEngine->getType() ? ' selected="selected"' : '' ).'>'.$searchEngine->getLabel($parameters).'</option>'."\n";
         }
-        echo '</select></div>';
+        echo '</select></label>';
 
-//        print '<br />';
-//        print '
-//        <input type="CHECKBOX" name="exact" value="1"'.( $exact ? ' CHECKED' : ' UNCHECKED' ).'> Require All Words';
-
-        print '</td><td class="ff">&nbsp;';
         $parameters = $searchManager->getParameters();
         foreach($parameters AS $name => $value) {
             print '<input class="ff" type="hidden" value="'.$value.'" name="'.$name.'" />';
         }
-        print '</td><td class="ff">';
-        print '<input class="ff" type="text" size="12" name="words" value="'.$defaultWords.'" />';
-
-        print '</td><td class="ff">&nbsp;</td><td class="ff">';
-        print '<input class="ff" type="submit" name="Search" value="'._('Search').'" />';
-        print '</td>';
+        print '<input type="text" size="12" id="searchBox-words" name="words" value="'.$defaultWords.'" />';
+	print '<input type="submit" name="Search" value="'._('Search').'" />';
 
         if (isset($group_id) && $group_id) {
-            print '
-                    <td class="ff" width="10">&nbsp;</td>
-                    <td class="ff">'.util_make_link ('/search/advanced_search.php?group_id='.$group_id, _('Advanced search'),array('class'=>'userlink')).'</td>';
+		print util_make_link ('/search/advanced_search.php?group_id='.$group_id, _('Advanced search'), array('class'=>'userlink'));
         }
-        print '</tr></table>';
+        print '</div>';
         print '</form>';
 
     }
@@ -600,7 +426,7 @@ if ($sys_show_source) {
                     </td>
                 </tr>
             </table><br /></div>'
-        .$this->createUnderSections($sectionsArray).'
+            .$this->createUnderSections($sectionsArray).'
         </form>';
 
 
@@ -621,9 +447,9 @@ if ($sys_show_source) {
         ';
 
     }
-    
+
     function createUnderSections($sectionsArray) {
-    	global $group_subsection_names;
+        global $group_subsection_names;
         $countLines = 0;
         foreach ($sectionsArray as $section) {
             if(is_array($section)) {
@@ -657,7 +483,7 @@ if ($sys_show_source) {
             } else {
                 $countLines += 3;
             }
-            
+
             if ($countLines >= $break) {
                 //if the next block is so large that shifting it to the next column hits the breakpoint better
                 //the second part of statement (behind &&) proofs, that no 4th column is added
@@ -667,10 +493,12 @@ if ($sys_show_source) {
                 }
             }
             
-            $return .= '<table width="90%" border="0" cellpadding="1" cellspacing="0" style="background-color:'. $this->COLOR_LTBACK2.'">
-                            <tr class="ff"><td class="ff"><table width="100%" border="0" cellspacing="0" cellpadding="3">
-                            <tr class="ff" style="background-color:'. $this->COLOR_LTBACK2 .'; font-weight: bold">
-                                <td class="ff" cellspacing="0">
+            $return .= '<table  style="width:90%; background-color:'. $this->COLOR_LTBACK2.'">
+                            <tr class="ff">
+                            <td class="ff">
+                            	<table style="width:100%;">
+                            	<tr class="ff" style="background-color:'. $this->COLOR_LTBACK2 .'; font-weight: bold">
+                                <td class="ff">
                                     <a href="#'.$key.'">'.$group_subsection_names[$key].'</a>'
             .'    </td>
                                 <td class="ff" style="text-align:right">'
@@ -683,7 +511,7 @@ if ($sys_show_source) {
             if (!is_array($section)) {
                 $return .= '        <input class="ff" type="checkbox" name="'.urlencode($key).'"';
                 if (isset($GLOBALS[urlencode($key)]))
-                $return .= ' checked="checked" ';
+			$return .= ' checked="checked" ';
                 $return .= ' /></input>'.$group_subsection_names[$key].'<br />';
             }
             else
@@ -706,7 +534,7 @@ if ($sys_show_source) {
                 }
             }
         }
-        
+
         return $return.'        </td>
                             </tr>
                         </table></td></tr></table>';
@@ -747,9 +575,9 @@ if ($sys_show_source) {
         $return = '';
 
         for ($i=0; $i<$count; $i++) {
-		$return .= util_make_link ($links_arr[$i], $title_arr[$i]) . ' | ';
+            $return .= util_make_link ($links_arr[$i], $title_arr[$i]) . ' | ';
         }
-	$return .= util_make_link ($links_arr[$i], $title_arr[$i]);
+        $return .= util_make_link ($links_arr[$i], $title_arr[$i]);
         return $return;
     }
 
@@ -827,14 +655,13 @@ if ($sys_show_source) {
      * getThemeIdFromName()
      *
      * @param    string  the dirname of the theme
-     * @return    integer the theme id    
+     * @return    integer the theme id
      */
     function getThemeIdFromName($dirname) {
         $res=db_query_params ('SELECT theme_id FROM themes WHERE dirname=$1',
 			array($dirname));
         return db_result($res,0,'theme_id');
     }
-
 }
 
 // Local Variables:

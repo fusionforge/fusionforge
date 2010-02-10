@@ -1,0 +1,65 @@
+/* 
+ * Common stylesheet for *all* FusionForge themes
+ * 
+ * Note to Forge developpers:
+ * 		- put as less code here as possible
+ * 
+ * Note to Themes developpers:
+ * 		- don't add CSS to this file;
+ * 		- use your own's theme CSS file(s) instead
+ * 
+ * Final note: this CSS file should be ideally called:
+ * 		- after YUI's reset,fonts and base
+ * 		- before the theme's own CSS file
+ * 		- Warning: font-size must be expressed in % according to YUI's font table http://developer.yahoo.com/yui/fonts/#chart
+ * 
+ * Matthieu Faure // Open-s.com		2009 december
+*/
+
+
+/* generic classes
+----------------------------------------------- */
+.align-left {text-align: left;}
+.align-right {text-align: right;}
+.align-center {text-align:center;}
+
+.bgcolor-grey {background-color: #e5e5e5;}
+.bgcolor-white {background-color: white;}
+
+.width-100p100 {width: 100%;}
+
+.selected {background-color:pink; }
+
+.skip {
+	height:0;
+	width:0;
+	left:-19000px;
+	overflow:hidden;
+	position:absolute;
+}
+
+
+/* Tag cloud
+----------------------------------------------- */
+.tag1, .tag2, .tag3, .tag4, .tag5 {
+	outline-style: none;
+ 	margin-left: 0.3em;
+ 	margin-right: 0.3em;
+}
+
+.tag1 {font-size: 77%;}		/* 10px */
+.tag2 {font-size: 93%;}		/* 12px */
+.tag3 {font-size: 108%;}	/* 14px */
+.tag4 {font-size: 123.1%;}	/* 16px */
+.tag5 {font-size: 138.5%;}	/* 18px */
+
+/* Table layout
+----------------------------------------------- */
+.my-layout-table {width: 100%; }
+.my-layout-table td {text-align:left; vertical-align:top; }
+
+/* FRS
+----------------------------------------------- */
+#forge-frs .frs-monitor-package {
+    padding-left:0.5em;
+}
