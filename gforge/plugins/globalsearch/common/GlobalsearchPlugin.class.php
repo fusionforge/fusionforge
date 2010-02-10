@@ -11,7 +11,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -24,28 +24,28 @@
  */
 
 class globalSearchPlugin extends Plugin {
-        function globalSearchPlugin () {
-                $this->Plugin() ;
-                $this->name = "globalsearch" ;
-                $this->hooks[] = "site_admin_option_hook" ;
-                $this->hooks[] = "features_boxes_bottom" ;
-        }
+	function globalSearchPlugin () {
+		$this->Plugin() ;
+		$this->name = "globalsearch" ;
+		$this->hooks[] = "site_admin_option_hook" ;
+		$this->hooks[] = "features_boxes_top" ;
+	}
 
-        function CallHook ($hookname, $params) {
-                global $G_SESSION, $HTML, $group_id;
+	function CallHook ($hookname, $params) {
+		global $Language, $G_SESSION, $HTML, $group_id;
 
-                if ($hookname == "site_admin_option_hook") {
-                        print '<li><a href="/plugins/globalsearch/edit_assoc_sites.php">'._("Admin Associated Forges").'</a></li>';
-                } elseif ($hookname == "features_boxes_bottom") {
-			$params['returned_text'] .= $HTML->boxMiddle(_('Associated Forges'));
+		if ($hookname == "site_admin_option_hook") {
+			print '<li><a href="/plugins/globalsearch/edit_assoc_sites.php">'._("Admin Associated Forges").'</a></li>';
+		} elseif ($hookname == "features_boxes_top") {
+			$params['returned_text'] .= $HTML->boxTop(_('Associated Forges'), 'Associated_Forges');
 			$params['returned_text'] .= $this->show_top_n_assocsites (5) ;
 			$params['returned_text'] .= $this->search_box () ;
-                }
-        }
+		}
+	}
 	
 	function show_globalsearch_stats_boxes() {
 		GLOBAL $HTML;
-		
+
 		$return = '';
 		$return .= $HTML->boxTop(_("Global Search"));
 		$return .= globalsearch_box();
@@ -55,19 +55,19 @@ class globalSearchPlugin extends Plugin {
 		$return .= $HTML->boxBottom();
 		return $return;
 	}
-	
+
 	function search_box() {
-		global $gwords,$gexact,$otherfreeknowledge;
-		
-		$return = 'Search in other associated forges:<br />
-        <form method="post" action="/plugins/globalsearch/"/>
-        <input width="100%" type="text" name="gwords" value="'.$gwords.'"/>
-        <input type="submit" name="Search" value="'._("Search").'" /><br/>
-        <input type="checkbox" name="otherfreeknowledge" value="1"'.( $otherfreeknowledge ? ' checked' : ' unchecked' ).'>'._('Extend search to include non-software projects').'<br/>
-        <input type="checkbox" name="gexact" value="1"'.( $gexact ? ' checked' : ' unchecked' ).'>'._("Require all words").'</form>';
+		global $HTML,$gwords,$gexact,$otherfreeknowledge;
+
+		$return = '<form method="post" action="/plugins/globalsearch/">';
+		$return .= $HTML->html_text_input_img_submit('gwords', 'picto_bleu_loupe.png', 'search_associated_forges', '', $gwords, _('Search associated forges'));
+		$return .= $HTML->html_checkbox('otherfreeknowledge', '1', 'search_associated_forges_otherfreeknowledge', _('Extend search to include non-software projects'), $otherfreeknowledge);
+		$return .= $HTML->html_checkbox('gexact', '1', 'search_associated_forges_exact', _('Require all words'), $gexact);
+		$return .= '
+		</form>';
 		return $return;
 	}
-	
+
 	/**
 	 * show_top_n_assocsites() - Show the n top ranked associated sites
 	 *
@@ -89,16 +89,20 @@ class globalSearchPlugin extends Plugin {
 			return _('No stats available')." ".db_error();
 		}
 
-		$return .= "<div align=\"left\"><table>";
+		$return .= '<table summary="" class="lien-soulignement">';
 		while ($row_topdown = db_fetch_array($res_top_n_assoc)) {
-			if ($row_topdown['numprojects'] > 0)
-				$return .= "<tr><td><a href=\"$row_topdown[link]/\">";
-                        $return .= $row_topdown[title]."</a></td>"; 
-                        $return .= "<td><div align=\"right\">". number_format($row_topdown[numprojects], 0);
-                        $return .= " projects</div></td></tr>\n";
+			if ($row_topdown['numprojects'] > 0) {
+				$return .= '<tr><td>';
+				$return .= '<a href="' . $row_topdown[link] . '/">';
+				$return .= $row_topdown[title] . "</a>";
+				$return .= '</td>';
+				$return .= '<td class="align-right">' . number_format($row_topdown[numprojects], 0);
+				$return .= " projects";
+				$return .= "</td></tr>\n";
+			}
 		}
-		$return .= "</div></table>";
-        
+		$return .= "</table>";
+
 		return $return;
 	}
 
