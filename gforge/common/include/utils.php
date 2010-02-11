@@ -935,15 +935,17 @@ function readfile_chunked($filename, $returnBytes=true) {
         return false;
     }
     
+    ob_start () ;
     while (!feof($handle)) {
-        $buffer = fread($handle, $chunksize);
-        echo $buffer;
-	ob_flush() ;
-	flush () ;
-        if ($returnBytes) {
-            $byteCounter += strlen($buffer);
-		}
+	    $buffer = fread($handle, $chunksize);
+	    echo $buffer;
+	    ob_flush() ;
+	    flush () ;
+	    if ($returnBytes) {
+		    $byteCounter += strlen($buffer);
+	    }
     }
+    ob_end_flush () ;
     $status = fclose($handle);
     if ($returnBytes && $status) {
         return $byteCounter; // return num. bytes delivered like readfile() does.
