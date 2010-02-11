@@ -15,7 +15,7 @@ CREATE SEQUENCE "plugin_svntracker_master_seq" start 1 increment 1 maxvalue 2147
 CREATE TABLE plugin_svntracker_data_master (
 	"id" integer DEFAULT nextval ('plugin_svntracker_master_seq'::text) NOT NULL,
 	"holder_id" integer NOT NULL,
-	"svn_date" date NOT NULL,
+	"svn_date" integer NOT NULL,
 	"log_text" text DEFAULT '',
 	"file" text DEFAULT '' NOT NULL,
 	"prev_version" text DEFAULT '',
