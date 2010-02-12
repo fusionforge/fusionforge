@@ -227,7 +227,7 @@ class SearchQuery extends Error {
 							 $this->operator) ;
 			}
 			$qpa = db_construct_qpa ($qpa,
-						 'lower ('.$fieldName.' LIKE $1',
+						 'lower ('.$fieldName.') LIKE $1',
 						 $wordArgs[$i]) ;
 		}
 		return $qpa ;
