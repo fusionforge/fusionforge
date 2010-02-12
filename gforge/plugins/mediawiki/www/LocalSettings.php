@@ -119,8 +119,8 @@ function FusionForgeMWAuth( $user, &$result ) {
 		$user->loadGroups() ;
 		$current_groups = $user->getGroups() ;
                 if ($perm && is_object($perm) && $perm->isAdmin()) {
-                        if (!in_array ('Administrators', $current_groups)) {
-                                $user->addGroup ('Administrators') ;
+                        if (!in_array ('sysop', $current_groups)) {
+                                $user->addGroup ('sysop') ;
                         }
                         if (!in_array ('Members', $current_groups)) {
                                 $user->addGroup ('Members') ;
@@ -129,8 +129,8 @@ function FusionForgeMWAuth( $user, &$result ) {
                                 $user->addGroup ('ForgeUsers') ;
                         }
                 } elseif ($perm && is_object($perm) && $perm->isMember()) {
-                        if (in_array ('Administrators', $current_groups)) {
-                                $user->removeGroup ('Administrators') ;
+                        if (in_array ('sysop', $current_groups)) {
+                                $user->removeGroup ('sysop') ;
                         }
                         if (!in_array ('Members', $current_groups)) {
                                 $user->addGroup ('Members') ;
@@ -139,8 +139,8 @@ function FusionForgeMWAuth( $user, &$result ) {
                                 $user->addGroup ('ForgeUsers') ;
                         }
                 } else {
-                        if (in_array ('Administrators', $current_groups)) {
-                                $user->removeGroup ('Administrators') ;
+                        if (in_array ('sysop', $current_groups)) {
+                                $user->removeGroup ('sysop') ;
                         }
                         if (in_array ('Members', $current_groups)) {
                                 $user->removeGroup ('Members') ;
