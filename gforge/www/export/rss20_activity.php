@@ -45,8 +45,9 @@ if ($group_id) {
 	$link = "?group_id=$group_id";
 	$description = " of ".$row['group_name'];
 
-	$reswm = db_query_params ('SELECT users.user_name,users.realname FROM user_group,users WHERE group_id=$group_id AND admin_flags=$1 AND users.user_id=user_group.user_id ORDER BY users.add_date',
-				  array('A'),
+	$reswm = db_query_params ('SELECT users.user_name,users.realname FROM user_group,users WHERE group_id=$1 AND admin_flags=$2 AND users.user_id=user_group.user_id ORDER BY users.add_date',
+				  array($group_id,
+					'A'),
 				  1);
 	if ($rowwm = db_fetch_array($reswm)) {
 		$webmaster = $rowwm['user_name']."@".$GLOBALS['sys_users_host']." (".$rowwm['realname'].")";
