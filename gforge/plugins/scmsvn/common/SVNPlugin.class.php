@@ -272,6 +272,8 @@ class SVNPlugin extends SCMPlugin {
 		global $last_user, $last_time, $last_tag, $time_ok, $start_time, $end_time,
 			$adds, $deletes, $updates, $commits, $date_key,
 			$usr_adds, $usr_deletes, $usr_updates;
+
+		$time_ok = true ;
 		
 		$project = $this->checkParams ($params) ;
 		if (!$project) {

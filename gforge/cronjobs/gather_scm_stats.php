@@ -43,13 +43,36 @@ if (!$res) {
 	return false;
 }
 
+$mode = 'day' ;			// Override to 'all' to parse the whole history
+
 while ($data = db_fetch_array ($res)) {
-	$hook_params = array ('group_id' => $data['group_id'],
-			      'mode' => 'day',
-			      'year' => date ('Y', time () - 86400),
-			      'month' => date ('n', time () - 86400),
-			      'day' => date ('j', time () - 86400)) ;
-	plugin_hook ('scm_gather_stats', $hook_params) ;
+	if ($mode == 'day') {
+		$time = time () - 86400 ;
+		$hook_params = array ('group_id' => $data['group_id'],
+				      'mode' => 'day',
+				      'year' => date ('Y', $time),
+				      'month' => date ('n', $time),
+				      'day' => date ('j', $time)) ;
+		plugin_hook ('scm_gather_stats', $hook_params) ;
+	} elseif ($mode == 'all') {
+		$last_seen_day = '' ;
+		$time = 0 ;
+		$now = time () ;
+		while ($time < $now) {
+			$day = date ('Y-m-d', $time) ;
+			print "processing $day\n" ;
+			if ($day != $last_seen_day) {
+				$hook_params = array ('group_id' => $data['group_id'],
+						      'mode' => 'day',
+						      'year' => date ('Y', $time),
+						      'month' => date ('n', $time),
+						      'day' => date ('j', $time)) ;
+				plugin_hook ('scm_gather_stats', $hook_params) ;
+				$last_seen_day = $day ;
+			}
+			$time = $time + 80000 ;
+		}
+	}
 }
 
 // Local Variables:
