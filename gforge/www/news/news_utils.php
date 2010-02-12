@@ -205,12 +205,12 @@ ORDER BY post_date DESC',
 			$return .= '</div><!-- class="one-news" -->';
 			$return .= "\n\n";
 		}
-		if ($group_id != $sys_news_group) {
-			$archive_url=util_make_url ('/news/?group_id='.$group_id);
-		} else {
-			$archive_url=util_make_url ('/news/');
-		}
 
+		if ($group_id != $sys_news_group) {
+			$archive_url = '/news/?group_id='.$group_id;
+		} else {
+			$archive_url = '/news/';
+		}
 		if ($tail_headlines != -1) {
 			if ($show_forum) {
 				$return .= '<div>' . util_make_link($archive_url, _('News archive'), array('class' => 'dot-link')) . '</div>';
