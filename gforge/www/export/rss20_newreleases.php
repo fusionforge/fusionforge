@@ -73,7 +73,7 @@ WHERE frs_release.released_by=users.user_id
   AND frs_package.group_id=groups.group_id
   AND frs_release.status_id=1
   AND groups.is_public=1
-  AND (package.group_id=$1 OR 1!=$2)
+  AND (frs_package.group_id=$1 OR 1!=$2)
   AND frs_file.release_id=frs_release.release_id
 ORDER BY frs_file.release_time DESC',
 			array ($group_id,
