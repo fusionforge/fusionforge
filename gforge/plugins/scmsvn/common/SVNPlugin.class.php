@@ -304,7 +304,10 @@ class SVNPlugin extends SCMPlugin {
 				return false ;
 			}
 	
-			$pipe = popen ("svn log file://$repo --xml -v -q 2> /dev/null", 'r' ) ;
+                        $d1 = date ('Y-m-d', $start_time - 150000) ;
+                        $d2 = date ('Y-m-d', $end_time + 150000) ;
+
+			$pipe = popen ("svn log file://$repo --xml -v -q -r '".'{'.$d2.'}:{'.$d1.'}'."' 2> /dev/null", 'r' ) ;
 
 			// cleaning stats_cvs_* table for the current day
 			$res = db_query_params ('DELETE FROM stats_cvs_group WHERE month=$1 AND day=$2 AND group_id=$3',
@@ -345,7 +348,7 @@ class SVNPlugin extends SCMPlugin {
 					break;
 				}
 
-				if (!$time_ok && $last_time && $last_time < $start_time) {
+				if (!$time_ok && $last_time && $last_time > $end_time) {
 					break;
 				}
 			}
@@ -353,16 +356,18 @@ class SVNPlugin extends SCMPlugin {
 			xml_parser_free ($xml_parser);
 
 			// inserting group results in stats_cvs_groups
-			if (!db_query_params ('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
-					      array ($month_string,
-						     $day,
-						     $project->getID(),
-						     0,
-						     $updates,
-						     $adds))) {
-				echo "Error while inserting into stats_cvs_group\n" ;
-				db_rollback () ;
-				return false ;
+			if ($updates > 0 || $adds > 0) {
+				if (!db_query_params ('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
+						      array ($month_string,
+							     $day,
+							     $project->getID(),
+							     0,
+							     $updates,
+							     $adds))) {
+					echo "Error while inserting into stats_cvs_group\n" ;
+					db_rollback () ;
+					return false ;
+				}
 			}
 				
 			// building the user list
@@ -376,17 +381,21 @@ class SVNPlugin extends SCMPlugin {
 				} else {
 					continue;
 				}
-					
-				if (!db_query_params ('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
-						      array ($month_string,
-							     $day,
-							     $project->getID(),
-							     $user_id,
-							     $usr_updates[$user] ? $usr_updates[$user] : 0,
-							     $usr_adds[$user] ? $usr_adds[$user] : 0))) {
-					echo "Error while inserting into stats_cvs_user\n" ;
-					db_rollback () ;
-					return false ;
+		
+				$uu = $usr_updates[$user] ? $usr_updates[$user] : 0 ;
+				$ua = $usr_adds[$user] ? $usr_adds[$user] : 0 ;
+				if ($uu > 0 || $ua > 0) {
+					if (!db_query_params ('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
+							      array ($month_string,
+								     $day,
+								     $project->getID(),
+								     $user_id,
+								     $uu,
+								     $ua))) {
+						echo "Error while inserting into stats_cvs_user\n" ;
+						db_rollback () ;
+						return false ;
+					}
 				}
 			}
 		}
