@@ -62,7 +62,7 @@ AND u.user_id=news_bytes.submitted_by
 AND g.is_public=1
 AND g.status=$1
 AND news_bytes.is_approved <> 4
-AND (g.group_id=$group_id OR 1 != $3)
+AND (g.group_id=$2 OR 1 != $3)
 AND (is_approved=1 OR 1 != $4)
 ORDER BY post_date DESC',
 			array ('A',
