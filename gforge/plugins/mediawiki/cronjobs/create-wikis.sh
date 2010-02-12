@@ -21,6 +21,9 @@ for project in $projects ; do
 \$wgEnableUploads = false;
 // Don't forget to "chown www-data $wdprefix/$project/images"
 
+// Edit permissions for group admins
+\$wgGroupPermissions['Administrators']['*']          = true;
+
 // Edit permissions for group members
 \$wgGroupPermissions['Members']['edit']          = true;
 \$wgGroupPermissions['Members']['createpage']    = true;
