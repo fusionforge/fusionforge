@@ -72,29 +72,29 @@ site_project_header(array('title'=>_('Activity'),'group'=>$group_id,'toptab'=>'a
 $ids=array();
 $texts=array();
 
-if ($GLOBALS['sys_use_forum']) {
+if ($GLOBALS['sys_use_forum'] && $group->usesForum ()) {
 	$ids[]='forumpost';
 	$texts[]=_('Forum Post');
 }
 
-if ($GLOBALS['sys_use_tracker']) {
+if ($GLOBALS['sys_use_tracker'] && $group->usesTracker ()) {
 	$ids[]='trackeropen';
 	$texts[]=_('Tracker Opened');
 	$ids[]='trackerclose';
 	$texts[]=_('Tracker Closed');
 }
 
-if ($GLOBALS['sys_use_news']) {
+if ($GLOBALS['sys_use_news'] && $group->usesNews ()) {
 	$ids[]='news';
 	$texts[]=_('News');
 }
 
-if ($GLOBALS['sys_use_scm']) {
+if ($GLOBALS['sys_use_scm'] && $group->usesSCM ()) {
 	$ids[]='commit';
 	$texts[]=_('Commits');
 }
 
-if ($GLOBALS['sys_use_frs']) {
+if ($GLOBALS['sys_use_frs'] && $group->usesFRS ()) {
 	$ids[]='frsrelease';
 	$texts[]=_('FRS Release');
 }
