@@ -165,10 +165,6 @@ $group->clearError();
 
 project_admin_header(array('title'=>sprintf(_('Project Admin: %s'), $group->getPublicName()),'group'=>$group->getID()));
 
-/*
- Show top box listing trove and other info
- */
-
 ?>
 
 <table width="100%" cellpadding="2" cellspacing="2">
@@ -230,12 +226,8 @@ project_admin_header(array('title'=>sprintf(_('Project Admin: %s'), $group->getP
 			value="<?php echo _("Add User") ?>" />
 		</p>
 		</form>
-		</td>
-	</tr>
-
-	<tr>
-		<td colspan="2"><a
-			href="massadd.php?group_id=<?php echo $group_id; ?>"><?php echo _("Add Users From List"); ?></a>
+		<p><a
+                        href="massadd.php?group_id=<?php echo $group_id; ?>"><?php echo _("Add Users From List"); ?></a></p>
 
 			<?php
 		}
@@ -247,13 +239,12 @@ project_admin_header(array('title'=>sprintf(_('Project Admin: %s'), $group->getP
 		echo '
         <form action="roleedit.php?group_id='. $group_id .'&amp;role_id=observer" method="post">
         <p><input type="submit" name="edit" value="'._("Edit Observer").'" /></p>
-        </form></td></tr>';
+        </form>';
 
-		echo '<tr><td colspan="2"><form action="roleedit.php?group_id='. $group_id .'" method="post">';
+		echo '<form action="roleedit.php?group_id='. $group_id .'" method="post"><p>';
 		echo role_box($group_id,'role_id','');
-		echo '&nbsp;<input type="submit" name="edit" value="'._("Edit Role").'" /></form></td></tr>';
+		echo '&nbsp;<input type="submit" name="edit" value="'._("Edit Role").'" /></p></form>';
 
-		echo '<tr><td colspan="2">';
 		echo '<p><a href="roleedit.php?group_id='.$group_id.'">'._("Add Role").'</a>';
 		echo '</p>';
 
