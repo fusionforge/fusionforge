@@ -187,9 +187,6 @@ echo db_error();
 
 print "<ul>";
 while ($row_sub = db_fetch_array($res_sub)) {
-	for ($sp=0;$sp<($folders_len*2);$sp++) {
-		print " &nbsp; ";
-	}
 	print "<li>";
 	print '<a href="trove_list.php?form_cat=' . $row_sub['trove_cat_id'] . $discrim_url . '">';
 	print $row_sub['fullname'];
@@ -221,7 +218,6 @@ print '<ul id="arbre-projets-branches">';
 while ($row_rootcat = db_fetch_array($res_rootcat)) {
 	// print open folder if current, otherwise closed
 	// also make anchor if not current
-	print ('<br />');
 	if (($row_rootcat['trove_cat_id'] == $row_trove_cat['root_parent'])
 		|| ($row_rootcat['trove_cat_id'] == $row_trove_cat['trove_cat_id'])) {
 		print '<li class="current-cat">' . $row_rootcat['fullname'] . "</li>\n";			
