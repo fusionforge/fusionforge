@@ -201,6 +201,8 @@ $wgGroupPermissions['*']['createtalk']    = false;
 
 if (file_exists ("$wikidata/LocalSettings.php")) {
         require ("$wikidata/LocalSettings.php") ;
+} else {
+	exit_error (_('Wiki not created yet, please wait for a few minutes.')) ;
 }
 
 $wgLogo = "";
