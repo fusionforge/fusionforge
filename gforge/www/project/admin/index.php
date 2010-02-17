@@ -357,6 +357,7 @@ if (count($reqs) < 1) {
 			echo "Invalid User";
 		}
 		?>
+		<table class="width-100p100">
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
 		<input type="hidden" name="submit" value="y" />
 		<input type="hidden" name="form_userid" value="<?php echo $user->getId(); ?>" />
@@ -365,6 +366,7 @@ if (count($reqs) < 1) {
 			<input type="submit" name="acceptpending" value="<?php echo _('Accept') ?>" />
 			<input type="submit" name="rejectpending" value="<?php echo _('Reject') ?>" /></td>
 			</tr></form>
+		</table>
 		
 		<?php
 	}
