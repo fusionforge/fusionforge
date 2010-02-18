@@ -30,7 +30,7 @@ function docman_recursive_display($docgroup) {
 	if (is_array(@$nested_groups[$docgroup])) {
 		foreach ($nested_groups[$docgroup] as $dg) {
 			echo "
-		['".'<span class="JSCookTreeFolderClosed"><i><img alt="" src="\' + ctThemeXPBase + \'folder1.gif" /></i></span><span class="JSCookTreeFolderOpen"><i><img alt="" src="\' + ctThemeXPBase + \'folderopen1.gif"></i></span>'."', '".$dg->getName()."', '#', '', '',";
+		['".'<span class="JSCookTreeFolderClosed"><i><img alt="" src="\' + ctThemeXPBase + \'folder1.gif" /></i></span><span class="JSCookTreeFolderOpen"><i><img alt="" src="\' + ctThemeXPBase + \'folderopen1.gif"></i></span>'."', '".addslashes($dg->getName())."', '#', '', '',";
 			docman_recursive_display($dg->getID());
 			if (isset($nested_docs[$dg->getID()]) && is_array($nested_docs[$dg->getID()])) {
 				foreach ($nested_docs[$dg->getID()] as $d) {
