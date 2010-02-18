@@ -3140,93 +3140,93 @@ msgstr "Aide"
 
 #: plugins/projectlabels/www/index.php:12
 msgid "Project labels"
-msgstr "Étiquettes de projet"
+msgstr "Labels de projet"
 
 #: plugins/projectlabels/www/index.php:25
 #, php-format
 msgid "Cannot insert new label: %s"
-msgstr "Échec lors de l'insertion d'une nouvelle étiquette : %s"
+msgstr "Échec lors de l'insertion d'un nouveau label : %s"
 
 #: plugins/projectlabels/www/index.php:28
 msgid "Project label added."
-msgstr "Étiquette de projet ajoutée."
+msgstr "Label de projet ajouté."
 
 #: plugins/projectlabels/www/index.php:39
 #: plugins/projectlabels/www/index.php:47
 #, php-format
 msgid "Cannot delete label: %s"
-msgstr "Échec lors de la suppression d'une étiquette : %s"
+msgstr "Échec lors de la suppression d'un label : %s"
 
 #: plugins/projectlabels/www/index.php:51
 msgid "Project label deleted."
-msgstr "Étiquette de projet supprimée."
+msgstr "Label de projet supprimé."
 
 #: plugins/projectlabels/www/index.php:67
 #, php-format
 msgid "Cannot add label onto project: %s"
-msgstr "Impossible d'ajouter une étiquette sur le projet : %s"
+msgstr "Impossible d'ajouter un label au projet : %s"
 
 #: plugins/projectlabels/www/index.php:70
 msgid "The label has been added to the project."
-msgstr "L'étiquette a été ajoutée au projet."
+msgstr "Le label a été ajouté au projet."
 
 #: plugins/projectlabels/www/index.php:81
 #, php-format
 msgid "Cannot remove label: %s"
-msgstr "Impossible d'enlever l'étiquette : %s"
+msgstr "Impossible de supprimer le label : %s"
 
 #: plugins/projectlabels/www/index.php:84
 msgid "The label has been removed from the project."
-msgstr "L'étiquette a été enlevée du projet."
+msgstr "Le label a été enlevé du projet."
 
 #: plugins/projectlabels/www/index.php:98
 #, php-format
 msgid "Cannot modify label: %s"
-msgstr "Impossible de modifier l'étiquette : %s."
+msgstr "Impossible de modifier le label : %s"
 
 #: plugins/projectlabels/www/index.php:101
 msgid "Label has been saved."
-msgstr "L'étiquette a été modifiée."
+msgstr "Le label a été sauvegardé."
 
 #: plugins/projectlabels/www/index.php:115
 msgid "Label name:"
-msgstr "Nom de l'étiquette :"
+msgstr "Nom du label :"
 
 #: plugins/projectlabels/www/index.php:117
 #: plugins/projectlabels/www/index.php:194
 msgid "Displayed text (or HTML) for the label:"
-msgstr "Texte (ou HTML) à afficher pour cette étiquette :"
+msgstr "Texte (ou HTML) à afficher pour le label :"
 
 #: plugins/projectlabels/www/index.php:120
 #: plugins/projectlabels/www/index.php:140
 msgid "This label currently looks like this:"
-msgstr "Cette étiquette a actuellement l'apparence suivante :"
+msgstr "Ce label a actuellement l'apparence suivante :"
 
 #: plugins/projectlabels/www/index.php:121
 msgid "Save this label"
-msgstr "Sauvegarder cette étiquette"
+msgstr "Sauvegarder ce label"
 
 #: plugins/projectlabels/www/index.php:135
 msgid "Manage labels"
-msgstr "Gestion des étiquettes de projet"
+msgstr "Gestion des labels"
 
 #: plugins/projectlabels/www/index.php:136
 msgid "You can edit the labels that you have already created."
-msgstr "Vous pouvez éditer les étiquettes déjà créées."
+msgstr "Vous pouvez modifier les labels déjà créés."
 
 #: plugins/projectlabels/www/index.php:149
 msgid "This label is used on the following group:"
 msgid_plural "This label is used on the following groups:"
-msgstr[0] "Cette étiquette est utilisée sur le groupe suivant :"
-msgstr[1] "Cette étiquette est utilisée sur les groupes suivants :"
+msgstr[0] "Ce label est utilisé sur le groupe suivant :"
+msgstr[1] "Ce label est utilisé sur les groupes suivants :"
 
 #: plugins/projectlabels/www/index.php:160
 msgid "[Remove this label]"
-msgstr "[Supprimer cette étiquette]"
+msgstr "[Supprimer ce label]"
 
 #: plugins/projectlabels/www/index.php:163
 msgid "This label is not used on any group."
-msgstr "Cette étiquette n'est utilisée sur aucun projet."
+msgstr "Ce label n'est utilisé sur aucun projet."
 
 #: plugins/projectlabels/www/index.php:167
 msgid "Unix name of the project:"
@@ -3234,28 +3234,27 @@ msgstr "Nom Unix du projet :"
 
 #: plugins/projectlabels/www/index.php:170
 msgid "Add label to project"
-msgstr "Ajouter l'étiquette au projet"
+msgstr "Ajouter un label au projet"
 
 #: plugins/projectlabels/www/index.php:175
 msgid "[Edit this label]"
-msgstr "[Modifier cette étiquette]"
+msgstr "[Modifier ce label]"
 
 #: plugins/projectlabels/www/index.php:177
 msgid "[Delete this label]"
-msgstr "[Supprimer cette étiquette]"
+msgstr "[Supprimer ce label]"
 
 #: plugins/projectlabels/www/index.php:185
 msgid "Add new labels"
-msgstr "Ajouter de nouvelles étiquettes"
+msgstr "Ajouter de nouveaux labels"
 
 #: plugins/projectlabels/www/index.php:186
 msgid "You can create new labels with the form below."
-msgstr ""
-"Vous pouvez créer de nouvelles étiquettes avec le formulaire ci-dessous."
+msgstr "Vous pouvez créer de nouveaux labels avec le formulaire ci-dessous."
 
 #: plugins/projectlabels/www/index.php:192
 msgid "Name of the label:"
-msgstr "Nom de l'étiquette :"
+msgstr "Nom du label :"
 
 #: plugins/projectlabels/www/index.php:193
 msgid "potm"
@@ -3267,7 +3266,7 @@ msgstr "<p><b>Projet du mois !</b></p>"
 
 #: plugins/projectlabels/www/index.php:198
 msgid "Add label"
-msgstr "Ajouter l'étiquette"
+msgstr "Ajouter un label"
 
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:114
 msgid "View Personal projects_hierarchy"
