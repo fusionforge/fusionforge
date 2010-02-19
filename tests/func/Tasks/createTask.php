@@ -102,7 +102,7 @@ class CreateTask extends FForge_SeleniumTestCase
         $this->type("summary", "Task1: Hello Paris");
         $this->type("details", "Details: Hello Paris");
         $this->type("hours", "10");
-        $this->click("//td[@id='main']/form/table/tbody/tr[9]/td/input");
+        $this->click("//body/form/table/tbody/tr[9]/td/input");
         $this->waitForPageToLoad("30000");
         $this->assertTrue($this->isTextPresent("Task Created Successfully"));
 
@@ -112,7 +112,7 @@ class CreateTask extends FForge_SeleniumTestCase
         $this->type("summary", "Task2: Hello France");
         $this->type("details", "Details: Hello France");
         $this->type("hours", "15");
-        $this->click("//td[@id='main']/form/table/tbody/tr[9]/td/input");
+        $this->click("//body/form/table/tbody/tr[9]/td/input");
         $this->waitForPageToLoad("30000");
         $this->assertTrue($this->isTextPresent("Task Created Successfully"));
 
@@ -122,7 +122,7 @@ class CreateTask extends FForge_SeleniumTestCase
         $this->type("summary", "Task3: Hello World");
         $this->type("details", "Details: Hello World");
         $this->type("hours", "20");
-        $this->click("//td[@id='main']/form/table/tbody/tr[9]/td/input");
+        $this->click("//body/form/table/tbody/tr[9]/td/input");
         $this->waitForPageToLoad("30000");
         $this->assertTrue($this->isTextPresent("Task Created Successfully"));
     }
