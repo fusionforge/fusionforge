@@ -20,7 +20,6 @@ set -e
 case "$1" in
     remove|deconfigure)
 	/usr/share/@OLDPACKAGE@/bin/unregister-plugin mediawiki
-	invoke-rc.d apache reload
         ;;
     upgrade|failed-upgrade)
         ;;
