@@ -199,7 +199,7 @@ $(BUILDRESULT)/$(CHANGEFILE): $(BUILDFILES)/$(DSCFILE)
 $(BUILDRESULT)/$(PCHANGEFILE): $(BUILDFILES)/$(PDSCFILE)
 	$(PBUILDERCMD)
 
-$(BUILDFILES)/$(DSCFILE): $(BUILDFILES)/$(ORIGFILE)
+$(BUILDFILES)/$(DSCFILE):
 	cd $(PKGDIR) ; debclean
 	find $(PKGDIR) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v '/.testbox/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -pdumB $(BUILDFILES)/
 	# Set version for given distrib
@@ -208,7 +208,7 @@ $(BUILDFILES)/$(DSCFILE): $(BUILDFILES)/$(ORIGFILE)
 	cd $(BUILDFILES) ; dpkg-source -b $(PKGDIR)
 	rm -rf $(BUILDFILES)/$(PKGDIR)
 
-$(BUILDFILES)/$(PDSCFILE): $(BUILDFILES)/$(ORIGFILE)
+$(BUILDFILES)/$(PDSCFILE):
 	cd $(PKGDIR) ; debclean
 	find $(PKGDIR) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v '/.testbox/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -pdumB $(BUILDFILES)/
 	# Set version for given distrib
