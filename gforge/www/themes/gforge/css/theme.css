@@ -19,6 +19,9 @@ a.userlink:hover {text-decoration: underline; color: white;}
 a.userlink:visited {text-decoration: none; color: white; }
 th, td {text-align:left; border:none; }
 #mydoc {text-align: left;}
+input[type="text"], input[type="password"], textarea {
+	width: auto;
+}
 
 /* =header */
 #header {
