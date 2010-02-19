@@ -1,11 +1,11 @@
-fusionforge (4.8.56+trunk20100217-1) experimental; urgency=low
+fusionforge (4.8.56+trunk20100219-1) experimental; urgency=low
 
   * New snapshot from upstream SVN (trunk).
   * Renamed source package.
   * Also renamed binary meta-packages, now split into three parts:
     fusionforge-minimal, fusionforge-standard and fusionforge-full.
 
- -- Roland Mas <lolando@debian.org>  Wed, 17 Feb 2010 22:11:27 +0100
+ -- Roland Mas <lolando@debian.org>  Fri, 19 Feb 2010 13:44:31 +0100
 
 gforge (4.8.55-1) experimental; urgency=low
   
