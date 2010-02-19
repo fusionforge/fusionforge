@@ -29,19 +29,19 @@ function docman_recursive_display($docgroup) {
 	global $nested_groups,$nested_docs,$group_id;
 	if (is_array(@$nested_groups[$docgroup])) {
 		foreach ($nested_groups[$docgroup] as $dg) {
-			echo "
-		['".'<span class="JSCookTreeFolderClosed"><i><img alt="" src="\' + ctThemeXPBase + \'folder1.gif" /></i></span><span class="JSCookTreeFolderOpen"><i><img alt="" src="\' + ctThemeXPBase + \'folderopen1.gif"></i></span>'."', '".addslashes($dg->getName())."', '#', '', '',";
-			docman_recursive_display($dg->getID());
 			if (isset($nested_docs[$dg->getID()]) && is_array($nested_docs[$dg->getID()])) {
+				echo "
+		['".'<span class="JSCookTreeFolderClosed"><i><img alt="" src="\' + ctThemeXPBase + \'folder1.gif" /></i></span><span class="JSCookTreeFolderOpen"><i><img alt="" src="\' + ctThemeXPBase + \'folderopen1.gif"></i></span>'."', '".addslashes($dg->getName())."', '#', '', '',";
+				docman_recursive_display($dg->getID());
 				foreach ($nested_docs[$dg->getID()] as $d) {
 					$docurl=util_make_url ('/docman/view.php/'.$group_id.'/'.$d->getID().'/'.urlencode($d->getFileName()));
 					$docname=addslashes($d->getName())." (".htmlspecialchars($d->getFileName(), ENT_QUOTES).")";
 					$docdesc=addslashes($d->getDescription());
 					echo ",['','".$docname."','".$docurl."','','".$docdesc."' ]";
 				}
-			}
-			echo ",
+				echo ",
 		],";
+			}
 	
 		}
 	}
