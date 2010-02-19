@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: FusionForge 4.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-02-10 17:57+0100\n"
-"PO-Revision-Date: 2010-02-10 18:17+0100\n"
+"PO-Revision-Date: 2010-02-19 16:24+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -8310,7 +8310,7 @@ msgstr "Surveiller"
 #: www/tracker/mod-limited.php:163 www/tracker/mod-limited.php:173
 #: www/tracker/mod.php:262 www/tracker/mod.php:272
 msgid "Download"
-msgstr "Télécharger (download)"
+msgstr "Télécharger"
 
 #: www/include/project_home.php:224
 msgid "This Project Has Not Released Any Files"
