@@ -39,6 +39,8 @@ UNRELEASED:
 * Tasks: Improved CSV import/export (Alcatel-Lucent)
 * Global: rework of the default theme, for better accessibility, maintainability and
   conformance (developed by Open-S for Adullact)
+* New contribtracker plugin, to give visibility to major contributors
+  to projects (developed for/sponsored by Adullact)
 
 FusionForge-4.8.2:
 * Maintenance release, security and bugfixes.
