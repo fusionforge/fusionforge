@@ -11,6 +11,7 @@ body {color: rgb(68, 68, 68); background-color: rgb(247, 247, 247); }
 form {margin:0; }
 img {border:0; }
 h1 {margin:0; }
+div#maindiv {margin:1em; }
 
 a {text-decoration:none; color:rgb(1, 73, 144); }
 a:hover {text-decoration: underline; color: rgb(247, 0, 0); }

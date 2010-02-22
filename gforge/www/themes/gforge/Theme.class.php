@@ -119,10 +119,13 @@ class Theme extends Layout {
         if (isset($params['group']) && $params['group']) {
             echo $this->projectTabs($params['toptab'],$params['group']);
         }
+	echo '<div id="maindiv">
+';
     }
 
      function bodyFooter($params) {
-        echo "\n";
+        echo '</div>
+';
     }
 
     function footer($params) {
