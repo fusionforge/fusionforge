@@ -37,7 +37,6 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 
 } else {
 	echo site_user_header(array('title'=>sprintf(_('Personal Page For %s'),user_getname())));
-	$tabcnt=0;	
 	?>
 
 <script type="text/javascript" src="<?php echo util_make_url ('/tabber/tabber.js'); ?>"></script>
@@ -91,7 +90,6 @@ title="<?php echo _('Assigned Tasks'); ?>">
 	/*
 		Tasks assigned to me
 	*/
-	$tabcnt++;
 	$last_group=0;
 	$order_name_arr=array();
 	$order_name_arr[]=_('ID');
@@ -143,7 +141,6 @@ title="<?php echo _('Assigned Tasks'); ?>">
 <div class="tabbertab" 
 title="<?php echo _('Submitted Artifacts'); ?>">
 <?php
-	$tabcnt++;
 	$last_group="0";
 	$order_name_arr=array();
 	$order_name_arr[]=_('ID');
@@ -183,7 +180,6 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 		Trackers that are actively monitored
 	*/
 	if ($GLOBALS['sys_use_tracker']) {
-		$tabcnt++;
 		$last_group=0;
 
 		$display_col=array('summary'=>1,
@@ -199,7 +195,7 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 		$order_name_arr[]=_('Remove');
 		$order_name_arr[]=_('Monitored trackers');
 
-		echo $HTML->listTableTop($order_name_arr,'',$tabcnt);
+		echo $HTML->listTableTop($order_name_arr);
 		
 		$result = db_query_params ('SELECT groups.group_name,groups.group_id,groups.unix_group_name,groups.status,groups.type_id,user_group.admin_flags,role.role_name
 			FROM groups,user_group,role 
@@ -271,7 +267,6 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 		Forums that are actively monitored
 	*/
 	if ($GLOBALS['sys_use_forum']) {
-		$tabcnt++;
 		$last_group=0;
 		$order_name_arr=array();
 		$order_name_arr[]=_('Remove');
@@ -304,7 +299,6 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 	*/
 	if ($GLOBALS['sys_use_frs']) {
 		$last_group=0;
-		$tabcnt++;
 		$order_name_arr=array();
 		$order_name_arr[]=_('Remove');
 		$order_name_arr[]=_('Monitored FileModules');
@@ -377,7 +371,6 @@ user_id=$1 ORDER BY bookmark_title',
 	/*
 		PROJECT LIST
 	*/
-	$tabcnt++;
 	$order_name_arr=array();
 	$order_name_arr[]=_('Remove');
 	$order_name_arr[]=_('My Projects');

@@ -198,14 +198,12 @@ if (session_loggedin()) {
 </table>
 </div>
 <?php
-$tabcnt=0;
 if ($group->usesPM()) {
 ?>
 <div class="tabbertab" title="<?php echo _('Related Tasks'); ?>">
 		<h3><?php echo _('Related Tasks'); ?>:</h3>
 <table border="0" width="80%">
 		<?php
-		$tabcnt++;
 		$result = $ah->getRelatedTasks();
 		$taskcount = db_numrows($ah->relatedtasks);
 		if ($taskcount > 0) {
@@ -214,7 +212,7 @@ if ($group->usesPM()) {
 			$titles[] = _('Task Summary');
 			$titles[] = _('Start Date');
 			$titles[] = _('End Date');
-			echo $GLOBALS['HTML']->listTableTop($titles,'',$tabcnt);
+			echo $GLOBALS['HTML']->listTableTop($titles);
 			for ($i = 0; $i < $taskcount; $i++) {
 				$taskinfo  = db_fetch_array($ah->relatedtasks, $i);
 				$taskid    = $taskinfo['project_task_id'];
@@ -255,12 +253,11 @@ if ($group->usesPM()) {
 		$file_list =& $ah->getFiles();
 		
 		$count=count($file_list);
-		$tabcnt++;
 		$title_arr=array();
 		$title_arr[]=_('Delete');
 		$title_arr[]=_('Name');
 		$title_arr[]=_('Download');
-		echo $GLOBALS['HTML']->listTableTop ($title_arr,'',$tabcnt);
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		if ($count > 0) {
 
