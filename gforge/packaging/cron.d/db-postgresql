@@ -45,10 +45,10 @@
 0 * * * * root $PHP $FFCRON/create_scm_repos.php
 
 # Gather commit stats from SCM repositories
-2 * * * * root $PHP $FFCRON/gather_scm_stats.php
+0 2 * * * root $PHP $FFCRON/gather_scm_stats.php
 
 # Generate snapshots and tarballs from SCM repositories
-3 * * * * root $PHP $FFCRON/generate_scm_snapshots.php
+0 3 * * * root $PHP $FFCRON/generate_scm_snapshots.php
 
 # this cronjob analyse the apache log and instert them in the db table stats_subd_pages
 # this is not used in fusionforge IHM.
