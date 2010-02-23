@@ -138,7 +138,9 @@ class ContribTrackerPlugin extends Plugin {
 								// Actors involved
 								echo '<td>' ;
 								if ($p->getActor()->getLogo() != '') {
-									print ' <img type="image/png" src="'.util_make_url ('/plugins/'.$this->name.'/actor_logo.php?actor_id='.$p->getActor()->getId ()).'" />' ;
+									print ' ';
+									print util_make_link ('/plugins/'.$this->name.'/?actor_id='.$p->getActor()->getId (),
+											      '<img type="image/png" src="'.util_make_url ('/plugins/'.$this->name.'/actor_logo.php?actor_id='.$p->getActor()->getId ()).'" />') ;
 								}
 								echo '</td><td>' ;
 								printf (_('%s (%s)'),

@@ -44,7 +44,9 @@ function display_contribution ($c, $show_groups = false) {
 					htmlspecialchars ($p->getActor()->getName())),
 			htmlspecialchars ($p->getActor()->getLegalStructure()->getName())) ;
 		if ($p->getActor()->getLogo() != '') {
-			print ' <img type="image/png" src="'.util_make_url ('/plugins/'.$plugin->name.'/actor_logo.php?actor_id='.$p->getActor()->getId ()).'" />' ;
+			print ' ';
+			print util_make_link ('/plugins/'.$plugin->name.'/?actor_id='.$p->getActor()->getId (),
+					      '<img type="image/png" src="'.util_make_url ('/plugins/'.$plugin->name.'/actor_logo.php?actor_id='.$p->getActor()->getId ()).'" />') ;
 		}
 		print '</li>' ;
 	}
