@@ -180,16 +180,22 @@ class FusionForgeTemplate extends QuickTemplate {
 	<div class="portlet" id="p-personal">
 		<h5><?php $this->msg('personaltools') ?></h5>
 		<div class="pBody">
-			<ul>
-<?php 			foreach($this->data['personal_urls'] as $key => $item) { ?>
+<?php			$put_ul = false;
+ 			foreach($this->data['personal_urls'] as $key => $item) {
+				if (!$put_ul) {
+					echo "\t\t\t<ul>\n";
+					$put_ul = true;
+				} ?>
 				<li id="<?php echo Sanitizer::escapeId( "pt-$key" ) ?>"<?php
 					if ($item['active']) { ?> class="active"<?php } ?>><a href="<?php
 				echo htmlspecialchars($item['href']) ?>"<?php echo $skin->tooltipAndAccesskey('pt-'.$key) ?><?php
 				if(!empty($item['class'])) { ?> class="<?php
 				echo htmlspecialchars($item['class']) ?>"<?php } ?>><?php
 				echo htmlspecialchars($item['text']) ?></a></li>
-<?php			} ?>
-			</ul>
+<?php			}
+			if ($put_ul) {
+				echo "\t\t\t</ul>\n";
+			} ?>
 		</div>
 	</div>
 	<div class="portlet" id="p-logo">
