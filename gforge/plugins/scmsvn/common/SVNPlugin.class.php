@@ -361,10 +361,6 @@ class SVNPlugin extends SCMPlugin {
 					return false ;
 					break;
 				}
-
-				if (!$time_ok && $last_time && $last_time > $end_time) {
-					break;
-				}
 			}
 			
 			xml_parser_free ($xml_parser);
@@ -412,8 +408,8 @@ class SVNPlugin extends SCMPlugin {
 					}
 				}
 			}
+			db_commit();
 		}
-		db_commit();
 	}
 
 	function generateSnapshots ($params) {
