@@ -43,7 +43,10 @@ if (!$res) {
 	return false;
 }
 
-$mode = 'day' ;			// Override to 'all' to parse the whole history
+$mode = 'day' ;
+if (count ($argv) >= 2 && $argv[1] == '--all') {
+	$mode = 'all' ;
+}
 
 while ($data = db_fetch_array ($res)) {
 	if ($mode == 'day') {
