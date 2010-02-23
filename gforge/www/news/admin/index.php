@@ -80,7 +80,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 			$sanitizer = new TextSanitizer();
 			$details = $sanitizer->SanitizeHtml($details);
 			$sql="UPDATE news_bytes SET is_approved='$status', summary='".htmlspecialchars($summary)."', ".
-				"details='".$details."' WHERE id='$id' AND group_id='$group_id'";
+				"details='".addslashes($details)."' WHERE id='$id' AND group_id='$group_id'";
 			$result=db_query($sql);
 
 			if (!$result || db_affected_rows($result) < 1) {
@@ -199,7 +199,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 				$sanitizer = new TextSanitizer();
 				$details = $sanitizer->SanitizeHtml($details);
 				$sql="UPDATE news_bytes SET is_approved='1', post_date='".time()."', ".
-					"summary='".htmlspecialchars($summary)."', details='".$details."' WHERE id='$id'";
+					"summary='".htmlspecialchars($summary)."', details='".addslashes($details)."' WHERE id='$id'";
 				$result=db_query($sql);
 				if (!$result || db_affected_rows($result) < 1) {
 					$feedback .= _('Error On Update:');
