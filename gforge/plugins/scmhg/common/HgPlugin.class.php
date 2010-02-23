@@ -58,8 +58,15 @@ class HgPlugin extends SCMPlugin {
 	}
 
 	function getInstructionsForRW ($project) {
-		$b = _('<p><b>Developer Mercurial Access via SSH</b></p><p>Only project developers can access the Mercurial tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
-		$b .= '<p><tt>hg clone hg+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . ':'. $this->hg_root .'/'. $project->getUnixName().'/ .</tt></p>' ;
+		if (session_logged_in()) {
+			$u =& user_get_object(user_getid()) ;
+			$d = $u->getUnixName() ;
+			$b = _('<p><b>Developer Mercurial Access via SSH</b></p><p>Only project developers can access the Mercurial tree via this method. SSH must be installed on your client machine. Enter your site password when prompted.</p>');
+			$b .= '<p><tt>hg clone hg+ssh://'.$d.'@' . $project->getSCMBox() . ':'. $this->hg_root .'/'. $project->getUnixName().'/ .</tt></p>' ;
+		} else {
+			$b = _('<p><b>Developer Mercurial Access via SSH</b></p><p>Only project developers can access the Mercurial tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper value. Enter your site password when prompted.</p>');
+			$b .= '<p><tt>hg clone hg+ssh://'.$d.'@' . $project->getSCMBox() . ':'. $this->hg_root .'/'. $project->getUnixName().'/ .</tt></p>' ;
+		}
 		return $b ;
 	}
 

@@ -90,9 +90,15 @@ class BzrPlugin extends SCMPlugin {
 
 	function getInstructionsForRW ($project) {
 		$b = '' ;
-		$b .= _('<p><b>Developer Bazaar Access via SSH</b></p><p>Only project developers can access the Bazaar branches via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
-		$b .= '<p><tt>bzr checkout bzr+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . $this->bzr_root .'/'. $project->getUnixName().'/'._('branchname').'</tt></p>' ;
-		
+		if (session_loggedin()) {
+			$u =& user_get_object(user_getid()) ;
+			$d = $u->getUnixName() ;
+			$b .= _('<p><b>Developer Bazaar Access via SSH</b></p><p>Only project developers can access the Bazaar branches via this method. SSH must be installed on your client machine. Enter your site password when prompted.</p>');
+			$b .= '<p><tt>bzr checkout bzr+ssh://'.$d.'@' . $project->getSCMBox() . $this->bzr_root .'/'. $project->getUnixName().'/'._('branchname').'</tt></p>' ;
+		} else {
+			$b .= _('<p><b>Developer Bazaar Access via SSH</b></p><p>Only project developers can access the Bazaar branches via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper value. Enter your site password when prompted.</p>');
+			$b .= '<p><tt>bzr checkout bzr+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . $this->bzr_root .'/'. $project->getUnixName().'/'._('branchname').'</tt></p>' ;
+		}
 		return $b ;
 	}
 
