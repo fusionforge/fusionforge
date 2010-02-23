@@ -169,7 +169,6 @@ class SVNPlugin extends SCMPlugin {
 				'<td width="25%" align="right"><strong>'.$total['commits'].'</strong></td>';
 			$b .= '</tr>';
 			$b .= $HTML->listTableBottom();
-			$b .= '<hr size="1" />';
 		}
 
 		return $b ;
