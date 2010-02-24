@@ -24,7 +24,7 @@ $(MWSKINPATH):
 	echo 'You must install mediawiki to get reference files'
 
 clean:
-	rm -f FusionForge.php monobook/main.css \
+	rm -f FusionForge.php fusionforge/main.css \
 		FusionForge.php.renamed fusionforge/main.css.renamed \
 		FusionForge.php.patch2 fusionforge/main.css.patch2 
 
