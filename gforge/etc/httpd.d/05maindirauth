@@ -1,6 +1,4 @@
-#
-# Main host
-#
+# 05maindirauth begin
 <Directory {usr_share_gforge}/www>
   Options Indexes FollowSymlinks
   AllowOverride All
@@ -25,3 +23,4 @@
   # apache's error_log. So make sure error_log isn't defined in php.ini (/etc/php5/apache/php.ini)
   ##php_admin_value error_log ''
 </Directory>
+# 05maindirauth end

@@ -1,3 +1,4 @@
+# 01common begin
 <Files .htaccess>
   order allow,deny
   deny from all
@@ -11,3 +12,4 @@ UseCanonicalName Off
   ## block web access to CVS directories.
   deny from all
 </Directory>
+# 01common end

@@ -1,3 +1,5 @@
+# 61plugin-scmdarcs begin
 <Directory {usr_share_gforge}/plugins/scmdarcs/cgi-bin>
-  SetEnv DARCSWEB_CONFPATH /etc/gforge/plugins/scmdarcs/
+	SetEnv DARCSWEB_CONFPATH /etc/gforge/plugins/scmdarcs/
 </Directory>
+# 61plugin-scmdarcs end

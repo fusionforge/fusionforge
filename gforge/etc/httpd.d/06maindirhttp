@@ -1,18 +1,4 @@
-# HTTP
-<VirtualHost *:80>
-	ServerName {domain_name}
-	ServerAlias www.{domain_name}
-	ServerAdmin {server_admin}
-	DocumentRoot {usr_share_gforge}/www
-	# Apache 1.3
-	#User {sys_apache_user}
-	#Group {sys_apache_group}
-	# Apache 2 apache2-mpm-perchild
-	#AssignUserID {sys_apache_user} {sys_apache_group}
-	# Apache 2 but this is not the same
-	#<IfModule mod_suexec.c>
-	#	SuexecUserGroup {sys_apache_user} {sys_apache_group}
-	#</IfModule>
+# 06maindirhttp begin
 	DirectoryIndex index.html index.php
 	<IfModule mod_userdir.c>
 		UserDir disabled
@@ -36,24 +22,17 @@
 
 	# 404 Error document
 	ErrorDocument 404 {sys_urlprefix}404.php
-	LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-	CustomLog "|{cronolog_path} {var_log_gforge}/%Y/%m/%d/gforge.log" gforge
 
-	# GForge without the DNS delegation
+	# FusionForge without the DNS delegation
 	# Project home pages are in a virtual /www/<group> location
-#	AliasMatch ^/www/([^/]*)/(.*) {gforge_chroot}{groupdir}/$1/htdocs/$2
-#	ScriptAliasMatch ^/([^/]*)/cgi-bin/(.*) {gforge_chroot}{groupdir}/$1/cgi-bin/$2
-#	<Directory {gforge_chroot}{groupdir}>
-#		Options Indexes FollowSymlinks
-#		AllowOverride All
-#		order allow,deny
-#		allow from all
-#	</Directory>
-
-	# Ensure that we don't try to use SSL on SSL Servers
-	<IfModule apache_ssl.c>
-		SSLDisable
-	</IfModule>
+	#	AliasMatch ^/www/([^/]*)/(.*) {gforge_chroot}{groupdir}/$1/htdocs/$2
+	#	ScriptAliasMatch ^/([^/]*)/cgi-bin/(.*) {gforge_chroot}{groupdir}/$1/cgi-bin/$2
+	#	<Directory {gforge_chroot}{groupdir}>
+	#		Options Indexes FollowSymlinks
+	#		AllowOverride All
+	#		order allow,deny
+	#		allow from all
+	#	</Directory>
 
         Alias {sys_urlprefix}fckeditor/ /usr/share/fckeditor/
         <Directory "/usr/share/fckeditor/">
@@ -63,8 +42,8 @@
 	    allow from all
         </Directory>
 
-	AliasMatch ^{sys_urlprefix}plugins/mediawiki/wiki/[-a-zA-Z0-9_]*/index.php /usr/share/gforge/www/plugins/mediawiki/index.php
-	AliasMatch ^{sys_urlprefix}plugins/mediawiki/wiki/([-a-zA-Z0-9_]*)/images/(.*) /var/lib/gforge/plugins/mediawiki/wikidata/$1/images/$2
+	AliasMatch ^{sys_urlprefix}plugins/mediawiki/wiki/[-a-zA-Z0-9_]*/index.php {usr_share_gforge}/www/plugins/mediawiki/index.php
+	AliasMatch ^{sys_urlprefix}plugins/mediawiki/wiki/([-a-zA-Z0-9_]*)/images/(.*) {var_lib_gforge}/plugins/mediawiki/wikidata/$1/images/$2
 	AliasMatch ^{sys_urlprefix}plugins/mediawiki/wiki/([-a-zA-Z0-9_]*)/skins/(.*) /usr/share/mediawiki/skins/$2
 
         Alias {sys_urlprefix}anonscm/ {var_lib_gforge}/chroot/scmrepos/
@@ -85,9 +64,4 @@
 	    ProxyPass http://127.0.0.1:8081/
 	    ProxyPassReverse http://127.0.0.1:8081/
 	</Location>
-
-        RewriteEngine on
-        RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK)
-        RewriteRule .* - [F]
-</VirtualHost>
-
+# 06maindirhttp end

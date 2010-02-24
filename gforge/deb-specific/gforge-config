@@ -6,12 +6,13 @@
 # For apache2 we have to remove the Listen 80 directive 
 # This is to test if apache2 is started and listen on port 80
 #
+# -dovhost will create vhosts
 [ -f /etc/default/apache2 ] && . /etc/default/apache2
 if [ "x$NO_START" = "x0" ]
 then
-	/usr/share/gforge/bin/setup -fhs -noapache -dovhost -system pgsql -nolisten80
+	/usr/share/gforge/bin/setup -fhs -noapache $@ -system pgsql -nolisten80
 else
-	/usr/share/gforge/bin/setup -fhs -noapache -dovhost -system pgsql -listen80
+	/usr/share/gforge/bin/setup -fhs -noapache $@ -system pgsql -listen80
 fi	
 
 [ -f /etc/gforge/local.inc ] && chmod 644 /etc/gforge/local.inc

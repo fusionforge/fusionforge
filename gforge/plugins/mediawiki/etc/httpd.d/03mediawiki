@@ -1,3 +1,4 @@
+# 03mediawiki begin
 <Directory /var/lib/gforge/plugins/mediawiki>
         Options +FollowSymLinks -Indexes
         AllowOverride All
@@ -13,3 +14,4 @@
         Options -FollowSymLinks
         AllowOverride None
 </DirectoryMatch>
+# 03mediawiki end

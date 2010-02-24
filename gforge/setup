@@ -2,7 +2,7 @@
 # This script is used by the debian and RPM packages to set up fusionforge.
 
 usage() {
-	echo "$0: [-interact] [-help] [-debug] [-confdir confdir] [-input conffile] [-output conffile] [-httpdconf gforgehttpdconf] [-httpdsecrets gforgehttpdsecrets] [-localinc gforgelocalinc] [-example|-fhs] [-clean] [-noapache] [-dovhost] [-home homepath] [-group grouppath] [-listen80|nolisten80] [-nossl]"
+	echo "$0: [-interact] [-help] [-debug] [-confdir confdir] [-input conffile] [-output conffile] [-httpdconf gforgehttpdconf] [-httpdsecrets gforgehttpdsecrets] [-localinc gforgelocalinc] [-example|-fhs] [-clean] [-noapache] [-dovhost] [-novhost] [-home homepath] [-group grouppath] [-listen80|nolisten80] [-nossl]"
 }
 
 getval(){
@@ -132,6 +132,7 @@ computedefault(){
 	DEFAULTsys_forum_return_domain=$DEFAULTdomain_name
 	DEFAULTsys_block_anonymous_downloads=false
 	DEFAULTsys_urlprefix=/
+	DEFAULTdovhost=$dovhost
 	#
 	# TODO
 	#usr_lib_gforge=$GFGDIR
@@ -274,10 +275,10 @@ setupinout(){
 	mv $CONFFILEIN.new $CONFFILEIN
 	
 	# Fill in the blanks
-	EXCLUDEVHOST=' -not -name 55vhost'
+	EXCLUDEVHOST='' 		
 	if [ "$dovhost" = true ]
 	then
-		EXCLUDEVHOST='' 		
+		EXCLUDEVHOST=".vhost\|"
 	fi
 	#
 	rm -f $ETCDIR/httpd.d/10cvs
@@ -290,7 +291,7 @@ setupinout(){
 	#rm -f $ETCDIR/httpd.d/20list
 	#
 
-	find $ETCTEMPLATEDIR/httpd.d  -follow -type f -regex "$ETCTEMPLATEDIR/httpd.d/\([a-z0-9]+\|_?([a-z0-9_.]+-)+[a-z0-9]+\|[a-z0-9][a-z0-9-]*\)\(\|.ssl\|.secrets\)" $EXCLUDEVHOST | sort | while read i
+	find $ETCTEMPLATEDIR/httpd.d  -follow -type f -regex "$ETCTEMPLATEDIR/httpd.d/\([a-z0-9]+\|_?([a-z0-9_.]+-)+[a-z0-9]+\|[a-z0-9][a-z0-9-]*\)\(\|.ssl\|.secrets\|$EXCLUDEVHOST.vhost.ssl\)" | sort | while read i
 	do
 		if [ "$ETCTEMPLATEDIR" != "$ETCDIR" -a -f $ETCDIR/httpd.d/`basename $i` ]
 		then
@@ -418,9 +419,10 @@ export ETCDIR ETCTEMPLATEDIR BINDIR GFGDIR CONFFILEOUTDIR CONFFILEIN CONFFILEOUT
 interact=false
 noapache=false
 database=env
-dovhost=false
 listen80=true
 usessl=true
+dovhost=true
+
 
 while [ $# -ne 0 ]
 do
@@ -490,6 +492,9 @@ do
 			;;
 		-noapache )
 			noapache=true
+			;;
+		-novhost )
+			dovhost=false
 			;;
 		-dovhost )
 			dovhost=true

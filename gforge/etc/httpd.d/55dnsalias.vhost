@@ -1,3 +1,4 @@
+# 55dnsalias.vhost begin
 #This may be used 
 #ServerPath /sub1/
 #RewriteEngine On
@@ -5,3 +6,4 @@
 
 # Other virtual hosts, as requested by users
 Include /var/lib/gforge/etc/httpd.vhosts
+# 55dnsalias.vhost end
