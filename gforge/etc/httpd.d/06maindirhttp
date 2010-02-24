@@ -47,7 +47,6 @@
 	AliasMatch ^{sys_urlprefix}plugins/mediawiki/wiki/([-a-zA-Z0-9_]*)/skins/(.*) /usr/share/mediawiki/skins/$2
 
         Alias {sys_urlprefix}anonscm/ {var_lib_gforge}/chroot/scmrepos/
-	Alias {sys_urlprefix} {usr_share_gforge}/www/
 
         <DirectoryMatch {var_lib_gforge}/chroot/scmrepos/[^/]*>
             Options -Indexes
