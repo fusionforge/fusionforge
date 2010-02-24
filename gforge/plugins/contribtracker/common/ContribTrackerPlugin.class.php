@@ -505,16 +505,16 @@ class ContribTrackerActor extends Error {
 		return true ;
 	}
 
-	function create ($name, $address, $email, $description, $logo, $structure) {
+	function create ($name, $url, $email, $description, $logo, $structure) {
 		if ($this->getId ()) {
 			$this->setError(_('Object already exists')) ;
 			return false ;
 		}
 
 		db_begin () ;
-		$res = db_query_params ('INSERT INTO plugin_contribtracker_actor (name,address,email,description,logo,struct_id) VALUES ($1,$2,$3,$4,$5,$6)',
+		$res = db_query_params ('INSERT INTO plugin_contribtracker_actor (name,url,email,description,logo,struct_id) VALUES ($1,$2,$3,$4,$5,$6)',
 					array ($name,
-					       $address,
+					       $url,
 					       $email,
 					       $description,
 					       base64_encode ($logo),
@@ -538,7 +538,7 @@ class ContribTrackerActor extends Error {
 		return $this->fetchData ($id) ;
 	}
 
-	function update ($name, $address, $email, $description, $logo, $structure) {
+	function update ($name, $url, $email, $description, $logo, $structure) {
 		if (! $this->getId ()) {
 			$this->setError(_('Object does not exist')) ;
 			return false ;
@@ -547,9 +547,9 @@ class ContribTrackerActor extends Error {
 		$id = $this->getId () ;
 
 		db_begin () ;
-		$res = db_query_params ('UPDATE plugin_contribtracker_actor SET (name,address,email,description,logo,struct_id) = ($1,$2,$3,$4,$5,$6) WHERE actor_id = $7',
+		$res = db_query_params ('UPDATE plugin_contribtracker_actor SET (name,url,email,description,logo,struct_id) = ($1,$2,$3,$4,$5,$6) WHERE actor_id = $7',
 					array ($name,
-					       $address,
+					       $url,
 					       $email,
 					       $description,
 					       base64_encode ($logo),
@@ -594,7 +594,7 @@ class ContribTrackerActor extends Error {
 		}
 	}
 	function getName () { return $this->data_array['name'] ; }
-	function getAddress () { return $this->data_array['address'] ; }
+	function getUrl () { return $this->data_array['url'] ; }
 	function getEmail () { return $this->data_array['email'] ; }
 	function getDescription () { return $this->data_array['description'] ; }
 	function getLegalStructure () {

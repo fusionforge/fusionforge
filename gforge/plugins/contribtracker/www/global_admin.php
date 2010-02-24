@@ -121,7 +121,7 @@ case 'add_actor':
 	break ;
 case 'post_add_actor':
 	$name = getStringFromRequest ('actor_name') ;
-	$address = getStringFromRequest ('actor_address') ;
+	$url = getStringFromRequest ('actor_url') ;
 	$email = getStringFromRequest ('actor_email') ;
 	$desc = getStringFromRequest ('actor_desc') ;
 	$logoarr = getUploadedFile ('actor_logo') ;
@@ -138,7 +138,7 @@ case 'post_edit_actor':
 	$actor_id = getIntFromRequest ('actor_id') ;
 	check_actor_id ($actor_id) ;
 	$name = getStringFromRequest ('actor_name') ;
-	$address = getStringFromRequest ('actor_address') ;
+	$url = getStringFromRequest ('actor_url') ;
 	$email = getStringFromRequest ('actor_email') ;
 	$desc = getStringFromRequest ('actor_desc') ;
 	$logoarr = getUploadedFile ('actor_logo') ;
@@ -193,7 +193,7 @@ case 'post_edit_structure':
 case 'post_add_actor':
 	$actor = new ContribTrackerActor () ;
 	$structure = new ContribTrackerLegalStructure ($structure_id) ;
-	if (!$actor->create ($name, $address, $email, $desc, $logo, $structure)) {
+	if (!$actor->create ($name, $url, $email, $desc, $logo, $structure)) {
 		exit_error ($actor->getErrorMessage()) ;
 	}
 	$actor_id = $actor->getId() ;
@@ -207,7 +207,7 @@ case 'del_actor':
 case 'post_edit_actor':
 	$actor = new ContribTrackerActor ($actor_id) ;
 	$structure = new ContribTrackerLegalStructure ($structure_id) ;
-	$actor->update ($name, $address, $email, $desc, $logo, $structure) ;
+	$actor->update ($name, $url, $email, $desc, $logo, $structure) ;
 	$action = 'display' ;
 	break ;
 }
@@ -222,7 +222,7 @@ case 'display':
 		print '<table><thead><tr>' ;
 		print '<td><strong>'._('Logo').'</strong></td>' ;
 		print '<td><strong>'._('Short name').'</strong></td>' ;
-		print '<td><strong>'._('Postal address').'</strong></td>' ;
+		print '<td><strong>'._('URL').'</strong></td>' ;
 		print '<td><strong>'._('Email').'</strong></td>' ;
 		print '<td><strong>'._('Description').'</strong></td>' ;
 		print '<td><strong>'._('Legal structure').'</strong></td>' ;
@@ -236,7 +236,7 @@ case 'display':
 			}
 			print '</td>' ;
 			print '<td>'.htmlspecialchars($a->getName()).'</td>' ;
-			print '<td>'.htmlspecialchars($a->getAddress()).'</td>' ;
+			print '<td>'.htmlspecialchars($a->getUrl()).'</td>' ;
 			print '<td>'.htmlspecialchars($a->getEmail()).'</td>' ;
 			print '<td>'.htmlspecialchars($a->getDescription()).'</td>' ;
 			print '<td>'.htmlspecialchars($a->getLegalStructure()->getName()).'</td>' ;
@@ -413,7 +413,7 @@ case 'add_actor':
 		<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post" enctype="multipart/form-data">
 			 <input type="hidden" name="action" value="post_add_actor" />
 			 <?php echo _('Actor name:') ?> <input type="text" name="actor_name" size="20" /><br />
-			 <?php echo _('Actor address:') ?> <input type="text" name="actor_address" size="20" /><br />
+			 <?php echo _('Actor URL:') ?> <input type="text" name="actor_url" size="20" /><br />
 			 <?php echo _('Actor email:') ?> <input type="text" name="actor_email" size="20" /><br />
 			 <?php echo _('Actor description:') ?><br />
 			 <textarea name="actor_desc" rows="20" cols="80"></textarea><br />
@@ -443,7 +443,7 @@ case 'edit_actor':
 			 <input type="hidden" name="action" value="post_edit_actor" />
 			 <input type="hidden" name="actor_id" value="<?php echo $actor->getId() ?>" />
 			 <?php echo _('Actor name:') ?> <input type="text" name="actor_name" size="20" value="<?php echo htmlspecialchars ($actor->getName()) ?>" /><br />
-			 <?php echo _('Actor address:') ?> <input type="text" name="actor_address" size="20" value="<?php echo htmlspecialchars ($actor->getAddress()) ?>" /><br />
+			 <?php echo _('Actor URL:') ?> <input type="text" name="actor_url" size="20" value="<?php echo htmlspecialchars ($actor->getUrl()) ?>" /><br />
 			 <?php echo _('Actor email:') ?> <input type="text" name="actor_email" size="20" value="<?php echo htmlspecialchars ($actor->getEmail()) ?>" /><br />
 			 <?php echo _('Actor description:') ?><br />
 			 <textarea name="actor_desc" rows="20" cols="80"><?php echo htmlspecialchars ($actor->getDescription()) ?></textarea><br />

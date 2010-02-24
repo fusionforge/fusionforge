@@ -15,7 +15,7 @@ CREATE SEQUENCE plugin_contribtracker_actor_pk_seq ;
 CREATE TABLE plugin_contribtracker_actor (
        actor_id integer DEFAULT nextval('plugin_contribtracker_actor_pk_seq') PRIMARY KEY,
        name text UNIQUE NOT NULL,
-       address text DEFAULT '' NOT NULL,
+       url text DEFAULT '' NOT NULL,
        email text DEFAULT '' NOT NULL,
        description text DEFAULT '' NOT NULL,
        logo text DEFAULT '' NOT NULL,

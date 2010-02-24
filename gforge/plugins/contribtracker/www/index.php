@@ -125,7 +125,7 @@ if ($group_id) {
 			     htmlspecialchars($actor->getName())).'</h1>' ;
 	print '<ul>' ;
 	print '<li><strong>'._('Name:').'</strong> '.htmlspecialchars($actor->getName()).'</li>' ;
-	print '<li><strong>'._('Address:').'</strong> '.htmlspecialchars($actor->getAddress()).'</li>' ;
+	print '<li><strong>'._('URL:').'</strong> <a href="'.htmlspecialchars($actor->getUrl()).'">'.htmlspecialchars($actor->getUrl()).'</a></li>' ;
 	print '<li><strong>'._('Email:').'</strong> '.htmlspecialchars($actor->getEmail()).'</li>' ;
 	print '<li><strong>'._('Legal structure:').'</strong> '.htmlspecialchars($actor->getLegalStructure()->getName()).'</li>' ;
 	print '<li><strong>'._('Description:').'</strong> '.htmlspecialchars($actor->getDescription()).'</li>' ;
