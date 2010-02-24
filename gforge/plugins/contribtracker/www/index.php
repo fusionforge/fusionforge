@@ -125,13 +125,21 @@ if ($group_id) {
 			     htmlspecialchars($actor->getName())).'</h1>' ;
 	print '<ul>' ;
 	print '<li><strong>'._('Name:').'</strong> '.htmlspecialchars($actor->getName()).'</li>' ;
-	print '<li><strong>'._('URL:').'</strong> <a href="'.htmlspecialchars($actor->getUrl()).'">'.htmlspecialchars($actor->getUrl()).'</a></li>' ;
+	print '<li><strong>'._('URL:').'</strong> ' ;
+	if ($actor->getUrl() != '') {
+		print '<a href="'.htmlspecialchars($actor->getUrl()).'">'.htmlspecialchars($actor->getUrl()).'</a>';
+	}
+	print '</li>' ;
 	print '<li><strong>'._('Email:').'</strong> '.htmlspecialchars($actor->getEmail()).'</li>' ;
 	print '<li><strong>'._('Legal structure:').'</strong> '.htmlspecialchars($actor->getLegalStructure()->getName()).'</li>' ;
 	print '<li><strong>'._('Description:').'</strong> '.htmlspecialchars($actor->getDescription()).'</li>' ;
 	print '</ul>' ;
 	if ($actor->getLogo() != '') {
-		print '<img type="image/png" src="'.util_make_url ('/plugins/'.$plugin->name.'/actor_logo.php?actor_id='.$actor->getId ()).'" />' ;
+		if ($actor->getUrl() != '') {
+			print '<a href="'.htmlspecialchars($actor->getUrl()).'"><img type="image/png" src="'.util_make_url ('/plugins/'.$plugin->name.'/actor_logo.php?actor_id='.$actor->getId ()).'" /></a>' ;
+		} else {
+			print '<img type="image/png" src="'.util_make_url ('/plugins/'.$plugin->name.'/actor_logo.php?actor_id='.$actor->getId ()).'" />' ;
+		}
 	}
 	
 	$participations = $actor->getParticipations () ;

@@ -236,7 +236,11 @@ case 'display':
 			}
 			print '</td>' ;
 			print '<td>'.htmlspecialchars($a->getName()).'</td>' ;
-			print '<td>'.htmlspecialchars($a->getUrl()).'</td>' ;
+			print '<td>' ;
+			if ($actor->getUrl() != '') {
+				print '<a href="'.htmlspecialchars($actor->getUrl()).'">'.htmlspecialchars($actor->getUrl()).'</a>';
+			}
+			print '</td>' ;
 			print '<td>'.htmlspecialchars($a->getEmail()).'</td>' ;
 			print '<td>'.htmlspecialchars($a->getDescription()).'</td>' ;
 			print '<td>'.htmlspecialchars($a->getLegalStructure()->getName()).'</td>' ;
