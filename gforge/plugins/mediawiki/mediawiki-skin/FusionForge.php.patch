@@ -1,5 +1,5 @@
---- FusionForge.php.renamed	2010-02-24 20:26:14.000000000 +0100
-+++ FusionForge.php	2010-02-24 20:26:14.000000000 +0100
+--- FusionForge.php.renamed	2010-02-24 21:22:57.000000000 +0100
++++ FusionForge.php	2010-02-24 21:24:19.000000000 +0100
 @@ -80,6 +80,10 @@
  		<meta http-equiv="Content-Type" content="<?php $this->text('mimetype') ?>; charset=<?php $this->text('charset') ?>" />
  		<?php $this->html('headlinks') ?>
@@ -11,8 +11,12 @@
  		<?php $this->html('csslinks') ?>
  
  		<!--[if lt IE 7]><script type="<?php $this->text('jsmimetype') ?>" src="<?php $this->text('stylepath') ?>/common/IEFixes.js?<?php echo $GLOBALS['wgStyleVersion'] ?>"></script>
-@@ -110,6 +114,19 @@
- <body<?php if($this->data['body_ondblclick']) { ?> ondblclick="<?php $this->text('body_ondblclick') ?>"<?php } ?>
+@@ -107,9 +111,22 @@
+ <?php	}
+ 		if($this->data['trackbackhtml']) print $this->data['trackbackhtml']; ?>
+ 	</head>
+-<body<?php if($this->data['body_ondblclick']) { ?> ondblclick="<?php $this->text('body_ondblclick') ?>"<?php } ?>
++<body id="mydoc" <?php if($this->data['body_ondblclick']) { ?> ondblclick="<?php $this->text('body_ondblclick') ?>"<?php } ?>
  <?php if($this->data['body_onload']) { ?> onload="<?php $this->text('body_onload') ?>"<?php } ?>
   class="mediawiki <?php $this->text('dir') ?> <?php $this->text('pageclass') ?> <?php $this->text('skinnameclass') ?>">
 +        <!-- FUSIONFORGE BodyHeader BEGIN -->
