@@ -199,13 +199,14 @@ $wgGroupPermissions['*']['edit']          = false;
 $wgGroupPermissions['*']['createpage']    = false;
 $wgGroupPermissions['*']['createtalk']    = false;
 
+$wgLogo = "/themes/$sys_theme/images/wgLogo.png";
+
 if (file_exists ("$wikidata/LocalSettings.php")) {
         require ("$wikidata/LocalSettings.php") ;
 } else {
 	exit_error (_('Wiki not created yet, please wait for a few minutes.')) ;
 }
 
-$wgLogo = "";
 $wgFavicon = '/images/icon.png' ;
 $wgBreakFrames = false ;
 ini_set ('memory_limit', '50M') ;

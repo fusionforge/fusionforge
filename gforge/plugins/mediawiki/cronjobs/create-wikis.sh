@@ -36,6 +36,9 @@ for project in $projects ; do
 \$wgGroupPermissions['*']['createpage']    = false;
 \$wgGroupPermissions['*']['createtalk']    = false;
 
+// Override default wiki logo
+//\$wgLogo = "/themes/\$sys_theme/images/wgLogo.png";
+
 EOF
 
 	filteredprojects="$filteredprojects $project"
