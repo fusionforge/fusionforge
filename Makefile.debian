@@ -26,6 +26,7 @@ UBULIST=$(UBUNTULIST) $(UBUNTULISTP)
 # Try if a local mirror is available
 LOCALMIRROR=http://localhost/ubuntu
 UBUNTUOP=$(shell wget -q -S http://localhost/ubuntu -O /dev/null && echo "--mirror $(LOCALMIRROR)" || echo "--mirror http://archive.ubuntu.com/ubuntu") --debootstrap debootstrap
+DEBIANOP=--debootstrapopts --include=apt
 
 gfversion=$(shell head -1 $(PKGDIR)/debian/changelog | sed 's/.*(\(.*\)-[^-]*).*/\1/')
 in_svn_repo:= $(wildcard .svn/) 
