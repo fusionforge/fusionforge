@@ -59,5 +59,9 @@ build-full-tests:
 	cd tests; phpunit --log-xml $(BUILDDIR)/reports/phpunit-selenium.xml TarCentos52Tests.php
 	cp $(BUILDDIR)/reports/phpunit-selenium.xml $(BUILDDIR)/reports/phpunit-selenium.xml.org; xalan -in $(BUILDDIR)/reports/phpunit-selenium.xml.org -xsl fix_phpunit.xslt -out $(BUILDDIR)/reports/phpunit-selenium.xml
 
-%:
+
+gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php:
+	cd gforge/plugins/mediawiki/mediawiki-skin ; make
+
+%: gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php
 	@make -f Makefile.$(DIST) $@

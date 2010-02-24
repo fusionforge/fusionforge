@@ -1,3 +1,7 @@
+2009-02-24  Christian Bayle <bayle@debian.org>
+	* Reorganized etc/httpd.d so you can run fusionforge without vhost
+  	You can use gforge-config with dovhost=false in gforge.conf
+
 2009-01-15  Roland Mas  <lolando@debian.org>
 
 	* common/tracker/ArtifactFactory.class.php: Fixed syntax of an SQL

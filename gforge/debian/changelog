@@ -1,4 +1,4 @@
-fusionforge (4.8.59-1) experimental; urgency=low
+fusionforge (4.8.60-1) experimental; urgency=low
 
   * New snapshot from upstream SVN (trunk).
   * Renamed source package.
