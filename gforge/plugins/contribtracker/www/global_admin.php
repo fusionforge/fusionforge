@@ -237,8 +237,8 @@ case 'display':
 			print '</td>' ;
 			print '<td>'.htmlspecialchars($a->getName()).'</td>' ;
 			print '<td>' ;
-			if ($actor->getUrl() != '') {
-				print '<a href="'.htmlspecialchars($actor->getUrl()).'">'.htmlspecialchars($actor->getUrl()).'</a>';
+			if ($a->getUrl() != '') {
+				print '<a href="'.htmlspecialchars($a->getUrl()).'">'.htmlspecialchars($a->getUrl()).'</a>';
 			}
 			print '</td>' ;
 			print '<td>'.htmlspecialchars($a->getEmail()).'</td>' ;
