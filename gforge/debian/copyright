@@ -7,7 +7,7 @@ proprietary.  And then in early 2009 it evolved into FusionForge, what
 with the more recent versions of GForge having been rewritten as
 proprietary software without a name change.
 
-FusionForge is Copyright © 2009 by several people, including:
+FusionForge is Copyright © 2009-2010 by several people, including:
 Alain Peyrat            <aljeux@free.fr>
 Alexandre Neymann       <alexandre.neymann@dgfip.finances.gouv.fr>
 Christian Bayle         <bayle@debian.org>
@@ -50,43 +50,166 @@ Sourceforge, here's the copyright info for the Sourceforge software:
 | General Public License.
 `----
 
+For some reason, the OSX-like theme is provided under an MIT-like
+license rather than the usual GPL:
+,----
+| This theme is 
+| 
+| Copyright(c) 2002-2003 Richard Offer. All rights reserved.
+| 
+| Permission to use, copy, modify, distribute, and sell this software and its
+| documentation for any purpose is hereby granted without fee, provided that
+| the above copyright notice appear in all copies and that both that
+| copyright notice and this permission notice appear in supporting
+| documentation.
+| 
+| The above copyright notice and this permission notice shall be included in
+| all copies or substantial portions of the Software.
+| 
+| THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+| IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+| FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
+| AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
+| AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+| CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+| 
+| Except as contained in this notice, the name of the author shall not be
+| used in advertising or otherwise to promote the sale, use or other dealings
+| in this Software without prior written authorization from the author.
+`----
+
 The packaging and installing scripts (in the debian/ and deb-specific/
-directories amongst others) are Copyright © 2000-2008 by Christian
+directories amongst others) are Copyright © 2000-2010 by Christian
 Bayle <bayle@aist.enst.fr> and Roland Mas <lolando@debian.org>.  You
 are free to use and redistribute them under the terms of the GNU
 General Public License, version 2 or (at your option) any later
 version published by the Free Software Foundation.
 
-The Sourceforge themes are Copyright © 1999-2000 by VA Linux.  The
-Savannah themes are modified versions, and are Copyright © 2000-2001
-by the Free Software Foundation.  They all are free software, and you
-can redistribute them and/or modify them under the terms of the GNU
-General Public License.
+The upstream sources contain a modified copy of a version of the
+Nusoap library (prior to nusoap 0.6.8):
+,----
+| NuSOAP - Web Services Toolkit for PHP developed by Dietrich Ayala
+|
+| Copyright (c) 2002 NuSphere Corporation
+|
+| This library is free software; you can redistribute it and/or
+| modify it under the terms of the GNU Lesser General Public
+| License as published by the Free Software Foundation; either
+| version 2.1 of the License, or (at your option) any later version.
+|
+| This library is distributed in the hope that it will be useful,
+| but WITHOUT ANY WARRANTY; without even the implied warranty of
+| MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+| Lesser General Public License for more details.
+|
+| You should have received a copy of the GNU Lesser General Public
+| License along with this library; if not, write to the Free Software
+| Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301,
+| USA.
+`----
 
+They also contain a copy of tabber.js and related files (under an
+MIT-like license):
+,----
+| tabber.js by Patrick Fitzgerald pat@barelyfitz.com
+|
+| Documentation can be found at the following URL:
+| http://www.barelyfitz.com/projects/tabber/
+|
+| License (http://www.opensource.org/licenses/mit-license.php)
+|
+| Copyright (c) 2006 Patrick Fitzgerald
+|
+| Permission is hereby granted, free of charge, to any person
+| obtaining a copy of this software and associated documentation files
+| (the "Software"), to deal in the Software without restriction,
+| including without limitation the rights to use, copy, modify, merge,
+| publish, distribute, sublicense, and/or sell copies of the Software,
+| and to permit persons to whom the Software is furnished to do so,
+| subject to the following conditions:
+|
+| The above copyright notice and this permission notice shall be
+| included in all copies or substantial portions of the Software.
+|
+| THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+| EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+| MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+| NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+| BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+| ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+| CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+| SOFTWARE.
+`----
 
-The upstream sources also contain a modified copy of a version of the
-Nusoap library (prior to nusoap 0.6.8) : 
-NuSOAP - Web Services Toolkit for PHP developed by Dietrich Ayala
+There's also a copy of the JSCook Javascript library (also under an
+MIT-like license):
+,----
+| JSCookMenu v1.4.4.  (c) Copyright 2002-2005 by Heng Yuan
+|
+| Permission is hereby granted, free of charge, to any person obtaining a
+| copy of this software and associated documentation files (the "Software"),
+| to deal in the Software without restriction, including without limitation
+| the rights to use, copy, modify, merge, publish, distribute, sublicense,
+| and/or sell copies of the Software, and to permit persons to whom the
+| Software is furnished to do so, subject to the following conditions:
+|
+| The above copyright notice and this permission notice shall be included
+| in all copies or substantial portions of the Software.
+|
+| THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+| OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+| ITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+| AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+| LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+| FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+| DEALINGS IN THE SOFTWARE.
+`----
 
+And a copy of the FCKeditor Javascript library, triple-licensed:
+,----
+| FCKeditor - The text editor for Internet - http://www.fckeditor.net
+| Copyright (C) 2003-2008 Frederico Caldeira Knabben
+| 
+| Licensed under the terms of any of the following licenses at your
+| choice:
+| 
+|  - GNU General Public License Version 2 or later (the "GPL")
+|    http://www.gnu.org/licenses/gpl.html
+|    (See Appendix A)
+| 
+|  - GNU Lesser General Public License Version 2.1 or later (the "LGPL")
+|    http://www.gnu.org/licenses/lgpl.html
+|    (See Appendix B)
+| 
+|  - Mozilla Public License Version 1.1 or later (the "MPL")
+|    http://www.mozilla.org/MPL/MPL-1.1.html
+|    (See Appendix C)
+`----
 
- Copyright (c) 2002 NuSphere Corporation
-
- This library is free software; you can redistribute it and/or
- modify it under the terms of the GNU Lesser General Public
- License as published by the Free Software Foundation; either
- version 2.1 of the License, or (at your option) any later version.
-
- This library is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- Lesser General Public License for more details.
-
- You should have received a copy of the GNU Lesser General Public
- License along with this library; if not, write to the Free Software
- Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301,
- USA.
+…except that FCKeditor embeds a copy of one MIT-licensed file
+(_samples/html/assets/swfobject.js):
+,----
+| Copyright (c) 2007 Geoff Stearns
+| 
+| Permission is hereby granted, free of charge, to any person obtaining
+| a copy of this software and associated documentation files (the
+| "Software"), to deal in the Software without restriction, including
+| without limitation the rights to use, copy, modify, merge, publish,
+| distribute, sublicense, and/or sell copies of the Software, and to
+| permit persons to whom the Software is furnished to do so, subject to
+| the following conditions:
+| 
+| The above copyright notice and this permission notice shall be
+| included in all copies or substantial portions of the Software.
+| 
+| THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+| EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+| MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+| NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+| LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+| OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+| WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+`----
 
 On Debian systems, the complete text of the GNU General Public License
 can be found in the /usr/share/common-licenses directory.
-
-
