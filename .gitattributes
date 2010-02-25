@@ -936,10 +936,12 @@ gforge/plugins/mediawiki/common/MediaWikiPlugin.class.php -text
 gforge/plugins/mediawiki/common/mediawiki-init.php -text
 gforge/plugins/mediawiki/cronjobs/create-wikis.sh -text
 gforge/plugins/mediawiki/etc/httpd.d/03mediawiki -text
+gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php -text
 gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php.patch -text
 gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php.reference -text
 gforge/plugins/mediawiki/mediawiki-skin/Makefile -text
 gforge/plugins/mediawiki/mediawiki-skin/README.beforemodifying -text
+gforge/plugins/mediawiki/mediawiki-skin/fusionforge/main.css -text
 gforge/plugins/mediawiki/mediawiki-skin/fusionforge/main.css.patch -text
 gforge/plugins/mediawiki/mediawiki-skin/fusionforge/main.css.reference -text
 gforge/plugins/mediawiki/www/LocalSettings.php -text
