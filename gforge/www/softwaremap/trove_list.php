@@ -80,7 +80,7 @@ $subMenuUrl[] = '/softwaremap/full_list.php';
 echo ($HTML->subMenu($subMenuTitle, $subMenuUrl));
 
 echo '<div id="arbre-projets" class="lien-soulignement">' . "\n";
-echo '<h2>Arbre des projets</h2>' . "\n";
+echo '<h2>'._('Project tree').'</h2>' . "\n";
 
 $row_trove_cat = db_fetch_array($res_trove_cat);
 
