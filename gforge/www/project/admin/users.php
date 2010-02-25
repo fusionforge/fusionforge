@@ -268,11 +268,16 @@ project_admin_header(array('title'=>sprintf(_('Project Admin: %s'), $group->getP
 			AND user_group.group_id=$1 ORDER BY users.realname',
 			array($group_id));
 
+echo '<table width="100%"><thead><tr>';
+echo '<th>'._('User name').'</th>';
+echo '<th>'._('Role').'</th>';
+echo '<th>'._('Update').'</th>';
+echo '<th>'._('Remove').'</th>';
+echo '</tr></thead><tbody>';
 		while ($row_memb=db_fetch_array($res_memb)) {
 
 			echo '
 		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
-		<table width="100%">
                         <tr>
                         <td style="white-space: nowrap;">
 			  <input type="hidden" name="submit" value="y" />
@@ -282,13 +287,13 @@ project_admin_header(array('title'=>sprintf(_('Project Admin: %s'), $group->getP
 			</td>
 			<td style="white-space: nowrap; text-align: right;">';
 			echo role_box($group_id,'role_id',$row_memb['role_id']);
-			echo '<input type="submit" name="updateuser" value="'._("Update").'" />';
-			echo '<input type="submit" name="rmuser" value="'._("Remove").'" />
+			echo '</td><td><input type="submit" name="updateuser" value="'._("Update").'" />';
+			echo '</td><td><input type="submit" name="rmuser" value="'._("Remove").'" />
                         </td>
 			</tr>
-		</table>
                 </form>';
 }
+echo '</tbody></table>';
 echo $HTML->boxBottom(); 
 ?></td>
 	</tr>
