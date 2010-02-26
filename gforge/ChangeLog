@@ -1,4 +1,7 @@
-2009-02-24  Christian Bayle <bayle@debian.org>
+2009-02-25  Christian Bayle <bayle@debian.org>
+	* Renamed change_cal_permission_default hook as group_approve
+	and renamed accordingly in calendar plugin
+	A hook shouldn'd be by nature specific to a plugin
 	* Reorganized etc/httpd.d so you can run fusionforge without vhost
   	You can use gforge-config with dovhost=false in gforge.conf
 
