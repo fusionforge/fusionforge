@@ -131,11 +131,11 @@ if (!$d_arr || count($d_arr) < 1) {
 	}
 	?>
 	<script language="JavaScript"><!--
-	var myThemeXPBase = "<?php echo util_make_url ('/jscook/ThemeXP/'); ?>";
+	var myThemeXPBase = "<?php echo util_make_uri ('/jscook/ThemeXP/'); ?>";
 	--></script>
-	<script language="JavaScript" src="<?php echo util_make_url ('/jscook/JSCookTree.js'); ?>"></script>
-	<link rel="stylesheet" href="<?php echo util_make_url ('/jscook/ThemeXP/theme.css'); ?>" type="text/css" />
-	<script src="<?php echo util_make_url ('/jscook/ThemeXP/theme.js'); ?>" type="text/javascript"></script>
+	<script language="JavaScript" src="<?php echo util_make_uri ('/jscook/JSCookTree.js'); ?>"></script>
+	<link rel="stylesheet" href="<?php echo util_make_uri ('/jscook/ThemeXP/theme.css'); ?>" type="text/css" />
+	<script src="<?php echo util_make_uri ('/jscook/ThemeXP/theme.js'); ?>" type="text/javascript"></script>
 
 	<br>
 	<form action="">

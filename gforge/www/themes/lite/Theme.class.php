@@ -79,7 +79,7 @@ class Theme extends Layout {
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<title><?php echo $params['title']; ?></title>
 	<?php $this->headerLink(); ?>
-	<link rel="stylesheet" type="text/css" href="<?php echo util_make_url ('/themes/lite/css/theme.css'); ?>" />
+	<link rel="stylesheet" type="text/css" href="<?php echo util_make_uri ('/themes/lite/css/theme.css'); ?>" />
 	<script type="text/javascript">
 	<!--
 	function help_window(helpurl) {
@@ -176,7 +176,7 @@ if (isset($params['group']) && $params['group']) {
 <!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
 <br />
 <div align="right">
-<a href="http://fusionforge.org/"><img src="<?php echo util_make_url ('/images/pow-fusionforge.png'); ?>" alt="Powered By FusionForge" border="0" /></a>
+<a href="http://fusionforge.org/"><img src="<?php echo util_make_uri ('/images/pow-fusionforge.png'); ?>" alt="Powered By FusionForge" border="0" /></a>
 </div>
 
 </body>

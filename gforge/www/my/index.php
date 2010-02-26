@@ -39,7 +39,7 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 	echo site_user_header(array('title'=>sprintf(_('Personal Page For %s'),user_getname())));
 	?>
 
-<script type="text/javascript" src="<?php echo util_make_url ('/tabber/tabber.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo util_make_uri ('/tabber/tabber.js'); ?>"></script>
 <div id="tabber" class="tabber tabber-user-homepage" <?php plugin_hook('call_user_js');?>>
 <?php if ($GLOBALS['sys_use_tracker']) { ?>
 <div class="tabbertab" 

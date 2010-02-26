@@ -2,7 +2,7 @@
 
 require_once $gfwww.'include/Layout.class.php';
 
-define('THEME_DIR', util_make_url ('/themes/gforge'));
+define('THEME_DIR', util_make_uri ('/themes/gforge'));
 
 define('TOP_TAB_HEIGHT', 30);
 define('BOTTOM_TAB_HEIGHT', 22);
@@ -49,8 +49,8 @@ class Theme extends Layout {
 		<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>'. $params['title'] . '</title>
-		<link rel="icon" type="image/png" href="'. util_make_url('/images/icon.png') .'" />
-		<link rel="shortcut icon" type="image/png" href="'. util_make_url('/images/icon.png') .'" />';
+		<link rel="icon" type="image/png" href="'. util_make_uri('/images/icon.png') .'" />
+		<link rel="shortcut icon" type="image/png" href="'. util_make_uri('/images/icon.png') .'" />';
 
         echo $this->headerLink();
 
@@ -133,7 +133,7 @@ class Theme extends Layout {
 			<!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
 			<div class="align-right">
 			<a href="http://fusionforge.org/">
-			<img src="'. util_make_url ('/images/pow-fusionforge.png') .'" alt="Powered By FusionForge" />
+			<img src="'. util_make_uri ('/images/pow-fusionforge.png') .'" alt="Powered By FusionForge" />
 			</a></div>
 			';
 
@@ -153,7 +153,7 @@ class Theme extends Layout {
         echo '
 		<link href="http://yui.yahooapis.com/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css" type="text/css" rel="stylesheet" />
 		<link href="http://yui.yahooapis.com/2.6.0/build/base/base-min.css"	type="text/css" rel="stylesheet" />
-		<link rel="stylesheet" type="text/css" href="'. util_make_url ('/themes/css/fusionforge.css') .'" />
+		<link rel="stylesheet" type="text/css" href="'. util_make_uri ('/themes/css/fusionforge.css') .'" />
 		<link rel="stylesheet" type="text/css" href="'. THEME_DIR .'/css/theme.css" />
 		<link rel="stylesheet" type="text/css" href="'. THEME_DIR .'/css/theme-pages.css" />
 		';

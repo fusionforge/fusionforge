@@ -100,7 +100,7 @@ class Theme extends Layout {
 		$theme_cssfile=$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'].'/css/'.$GLOBALS['sys_theme'].'.css';
 		if (file_exists($theme_cssfile)){
 			echo '
-<link rel="stylesheet" type="text/css" href="'.util_make_url ('/themes/'.$GLOBALS['sys_theme'].'/css/'.$GLOBALS['sys_theme'].'.css').'"/>';
+<link rel="stylesheet" type="text/css" href="'.util_make_uri ('/themes/'.$GLOBALS['sys_theme'].'/css/'.$GLOBALS['sys_theme'].'.css').'"/>';
 		}
 		?>
 
@@ -198,7 +198,7 @@ function footer($params){
 }
 function footerEnd($params) { ?> <!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
 <div id="footer"><a href="http://fusionforge.org/"><img
-	src="<?php echo util_make_url ('/images/pow-fusionforge.png'); ?>"
+	src="<?php echo util_make_uri ('/images/pow-fusionforge.png'); ?>"
 	alt="Powered By FusionForge"
 	border="0" /></a>
 </div>

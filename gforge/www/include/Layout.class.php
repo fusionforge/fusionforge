@@ -51,7 +51,7 @@ class Layout extends Error {
 		$this->themeroot = $GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'];
 		/* if images directory exists in theme, then use it as imgroot */
 		if (file_exists ($this->themeroot.'/images')){
-			$this->imgroot = util_make_url ('/themes/'.$GLOBALS['sys_theme'].'/images/');
+			$this->imgroot = util_make_uri ('/themes/'.$GLOBALS['sys_theme'].'/images/');
 		}
         
 		$this->Error();
@@ -125,7 +125,7 @@ class Layout extends Error {
 		$theme_cssfile = $this->themeroot . '/css/'.$GLOBALS['sys_theme'].'.css';
 		if (file_exists($theme_cssfile)){
 			echo '
-	<link rel="stylesheet" type="text/css" href="'.util_make_url ('/themes/'.$GLOBALS['sys_theme'].'/css/'.$GLOBALS['sys_theme'].'.css').'"/>';
+	<link rel="stylesheet" type="text/css" href="'.util_make_uri ('/themes/'.$GLOBALS['sys_theme'].'/css/'.$GLOBALS['sys_theme'].'.css').'"/>';
 		} else {
 		/* if this is not our case, then include the compatibility stylesheet
    		that contains all removed styles from the code and check if a
@@ -133,11 +133,11 @@ class Layout extends Error {
    		Used for compatibility with existing stylesheets
 		*/
 			echo '
-	<link rel="stylesheet" type="text/css" href="'.util_make_url ('/themes/css/gforge-compat.css').'" />';
+	<link rel="stylesheet" type="text/css" href="'.util_make_uri ('/themes/css/gforge-compat.css').'" />';
 			$theme_cssfile = $this->themeroot . '/css/theme.css';
 			if (file_exists($theme_cssfile)){
 				echo '
-	<link rel="stylesheet" type="text/css" href="'.util_make_url ('/themes/'.$GLOBALS['sys_theme'].'/css/theme.css').'" />';
+	<link rel="stylesheet" type="text/css" href="'.util_make_uri ('/themes/'.$GLOBALS['sys_theme'].'/css/theme.css').'" />';
 			}
 		}
 		plugin_hook ('cssfile',$this);
@@ -281,7 +281,7 @@ if (isset($params['group']) && $params['group']) {
 
 <!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
 <div align="right">
-<a href="http://fusionforge.org/"><img src="<?php echo util_make_url ('/images/pow-fusionforge.png'); ?>" alt="Powered By FusionForge" border="0" /></a>
+<a href="http://fusionforge.org/"><img src="<?php echo util_make_uri ('/images/pow-fusionforge.png'); ?>" alt="Powered By FusionForge" border="0" /></a>
 </div>
 
 <?php

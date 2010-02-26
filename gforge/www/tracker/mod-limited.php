@@ -122,7 +122,7 @@ if (session_loggedin()) {
 		<?php echo $ah->showDetails(); ?>
 	</td></tr>
 </table>
-<script type="text/javascript" src="<?php echo util_make_url('/tabber/tabber.js') ?>"></script>
+<script type="text/javascript" src="<?php echo util_make_uri('/tabber/tabber.js') ?>"></script>
 <div id="tabber" class="tabber">
 <div class="tabbertab" title="<?php echo _('Followups');?>">
 <table border="0" width="80%">

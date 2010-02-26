@@ -61,7 +61,7 @@ class Theme extends Layout {
 
 		$this->headerStart($params); ?>
 
-<link rel="stylesheet" type="text/css" href="<?php echo util_make_url ('/themes/osx/css/theme.css'); ?>" />
+<link rel="stylesheet" type="text/css" href="<?php echo util_make_uri ('/themes/osx/css/theme.css'); ?>" />
 <body>
 
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
