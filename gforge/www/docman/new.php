@@ -109,8 +109,15 @@ if (getStringFromRequest('submit')) {
 			//release the cookie for the document contents (should expire at the end of the session anyway)
 			setcookie ("gforgecurrentdocdata", "", time() - 3600);
 		}
-		Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='._('Document submitted sucessfully')));
-		exit;
+		// check if the user is docman's admin
+                $perm =& $g->getPermission( session_get_user() );
+                if (!$perm || $perm->isError() || !$perm->isDocEditor()) {
+			Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='._('Document submitted sucessfully : pending state (need validation)')));
+                        exit;
+                } else {
+			Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='._('Document submitted sucessfully')));
+			exit;
+		}
 	}
 
 } else {
