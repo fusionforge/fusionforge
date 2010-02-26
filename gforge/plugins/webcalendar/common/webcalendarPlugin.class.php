@@ -43,7 +43,7 @@ class webcalendarPlugin extends Plugin {
 		$this->hooks[] = "add_cal_group"; //add a group user in calendar base
 		$this->hooks[] = "del_cal_group"; //del a gforge user in calendar base
 		$this->hooks[] = "change_cal_permission"; //change permission pour webcal user (admin or not)
-		$this->hooks[] = "change_cal_permission_default"; //change permission pour webcal user (admin or not)
+		$this->hooks[] = "group_approve"; //change permission pour webcal user (admin or not)
 		$this->hooks[] = "change_cal_permission_auto"; //change permission pour webcal user when you modify role
 		$this->hooks[] = "add_cal_link_father"; // add a link between son and father
 		$this->hooks[] = "del_cal_link_father"; // del a link between son and father
@@ -307,7 +307,7 @@ db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
 				$row_nom_boss['unix_group_name']));
 				}
 		}
-		elseif ($hookname == "change_cal_permission_default") {
+		elseif ($hookname == "group_approve") {
 			$res = db_query_params ('SELECT admin_flags FROM user_group WHERE user_id = $1 AND group_id = $2',
 						array ($params[0],
 						       $params[1]));

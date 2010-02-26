@@ -2180,12 +2180,13 @@ class Group extends Error {
 		$this->sendApprovalEmail();
 		$this->addHistory('Approved', 'x');
 		
-		//plugin webcal
-		//change assistant for webcal
-			
+		// 
+		//	Plugin can make approve operation there
+		//
+		//	
 		$params[0] = $idadmin_group ;
 		$params[1] = $this->getID();
-		plugin_hook('change_cal_permission_default',$params);	
+		plugin_hook('group_approve',$params);	
 
 		return true;
 	}
