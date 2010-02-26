@@ -330,6 +330,7 @@ AND filemodule_monitor.user_id=$2 ORDER BY group_name DESC',
 		}
 		echo $HTML->listTableBottom();
 	}
+	plugin_hook ("monitored_element",false);
 ?>
 </div>
 <?php } ?>
