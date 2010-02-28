@@ -79,8 +79,8 @@ $subMenuUrl[] = '/softwaremap/full_list.php';
 
 echo ($HTML->subMenu($subMenuTitle, $subMenuUrl));
 
-echo '<div id="arbre-projets" class="lien-soulignement">' . "\n";
-echo '<h2>'._('Project tree').'</h2>' . "\n";
+echo '<div id="project-tree" class="underline-link">' . "\n";
+echo '<h2>' . _('Project tree') . '</h2>' . "\n";
 
 $row_trove_cat = db_fetch_array($res_trove_cat);
 
@@ -148,7 +148,7 @@ print '<p>'. (isset($discrim_desc) ? $discrim_desc : '') . '</p>';
 // first print all parent cats and current cat
 print '<table summary="">' . "\n";
 print '<tr>' . "\n";
-print '<td id="arbre-projets-col1">' . "\n";
+print '<td id="project-tree-col1">' . "\n";
 
 $folders = explode(" :: ",$row_trove_cat['fullpath']);
 $folders_ids = explode(" :: ",$row_trove_cat['fullpath_ids']);
@@ -199,7 +199,7 @@ while ($row_sub = db_fetch_array($res_sub)) {
 print "</ul>";
 // ########### right column: root level
 print "</td>\n";
-print '<td id="arbre-projets-col2">';
+print '<td id="project-tree-col2">';
 // here we print list of root level categories, and use open folder for current
 $res_rootcat = db_query_params ('
 	SELECT trove_cat_id,fullname
@@ -214,7 +214,7 @@ print "<p>";
 print _('Browse By').':';
 print "</p> \n";
 
-print '<ul id="arbre-projets-branches">';
+print '<ul id="project-tree-branches">';
 while ($row_rootcat = db_fetch_array($res_rootcat)) {
 	// print open folder if current, otherwise closed
 	// also make anchor if not current
@@ -331,7 +331,7 @@ if ($querytotalcount > $TROVE_BROWSELIMIT) {
 
 // print '<p><FONT size="-1">This listing was produced by the following query: '
 //	.$query_projlist.'</FONT>';
-echo '</div><!-- id="arbre-projets" -->' . "\n";
+echo '</div><!-- id="project-tree" -->' . "\n";
 
 $HTML->footer(array());
 
