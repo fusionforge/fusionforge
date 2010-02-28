@@ -155,7 +155,7 @@ $folders_ids = explode(" :: ",$row_trove_cat['fullpath_ids']);
 $folders_len = count($folders);
 
 print "<p>";
-print html_image("picto_cat_categorie.png",'32','33',array('alt'=>""));
+print html_image("category.png",'32','33',array('alt'=>""));
 print "&nbsp;";
 
 for ($i=0;$i<$folders_len;$i++) {

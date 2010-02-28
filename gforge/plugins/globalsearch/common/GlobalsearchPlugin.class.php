@@ -60,7 +60,7 @@ class globalSearchPlugin extends Plugin {
 		global $HTML,$gwords,$gexact,$otherfreeknowledge;
 
 		$return = '<form method="post" action="/plugins/globalsearch/">';
-		$return .= $HTML->html_text_input_img_submit('gwords', 'picto_bleu_loupe.png', 'search_associated_forges', '', $gwords, _('Search associated forges'));
+		$return .= $HTML->html_text_input_img_submit('gwords', 'magnifier.png', 'search_associated_forges', '', $gwords, _('Search associated forges'));
 		$return .= $HTML->html_checkbox('otherfreeknowledge', '1', 'search_associated_forges_otherfreeknowledge', _('Extend search to include non-software projects'), $otherfreeknowledge);
 		$return .= $HTML->html_checkbox('gexact', '1', 'search_associated_forges_exact', _('Require all words'), $gexact);
 		$return .= '

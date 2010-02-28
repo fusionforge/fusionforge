@@ -749,10 +749,10 @@ if (isset($params['group']) && $params['group']) {
 		print '<input type="text" name="words" size="12" id="search-words" value="'.$defaultWords.'" />';
 		
 		print '<label for="search-submit" class="skip">' . html_image('pixel-transparent.gif', 1, 1, array('alt' => "")) . '</label>';
-		print '<input type="image" name="Search" id="search-submit" src="/themes/adullact-v3/image/picto_bleu_loupe.png" alt="'._('Search').'" title="'._('Search').'" />';
+		print '<input type="image" name="Search" id="search-submit" src="' . util_make_url('/images/magnifier.png') . '" alt="'._('Search').'" title="'._('Search').'" />';
 		
 		if (isset($group_id) && $group_id) {
-			$link_content = html_image('picto_remarques.png','21','21',array('alt'=>_('Advanced search'), 'title'=>_('Advanced search')));
+			$link_content = html_image('notes.png','21','21',array('alt'=>_('Advanced search'), 'title'=>_('Advanced search')));
 			print '&nbsp;'.util_make_link ('/search/advanced_search.php?group_id='.$group_id, $link_content, array('class'=>'lnkutility', 'id'=>'advanced-search'));
 		}
 		print '</div>';

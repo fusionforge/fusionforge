@@ -3417,6 +3417,7 @@ gforge/www/forum/admin/ForumAdmin.class.php -text
 gforge/www/forum/include/AttachManager.class.php -text
 gforge/www/frs/reporting/downloads.php -text
 gforge/www/images/blank.png -text
+gforge/www/images/category.png -text svneol=unset#unset
 gforge/www/images/clear.png -text
 gforge/www/images/debian-sf-icon.png -text
 gforge/www/images/favicon.ico svneol=native#unset
@@ -3456,6 +3457,7 @@ gforge/www/images/ic/trash.png -text
 gforge/www/images/ic/write16w.png -text
 gforge/www/images/ic/xmail16w.png -text
 gforge/www/images/icon.png -text
+gforge/www/images/magnifier.png -text svneol=unset#unset
 gforge/www/images/msg.png -text
 gforge/www/images/opensearchdescription.png -text svneol=unset#unset
 gforge/www/images/pow-fusionforge.png -text svneol=unset#unset
@@ -3716,8 +3718,7 @@ gforge/www/themes/gforge/images/ic/trash.png -text
 gforge/www/themes/gforge/images/ic/wiki20g.png -text svneol=unset#unset
 gforge/www/themes/gforge/images/ic/write16w.png -text
 gforge/www/themes/gforge/images/ic/xmail16w.png -text
-gforge/www/themes/gforge/images/picto_bleu_loupe.png -text svneol=unset#unset
-gforge/www/themes/gforge/images/picto_cat_categorie.png -text svneol=unset#unset
+gforge/www/themes/gforge/images/notes.png -text svneol=unset#unset
 gforge/www/themes/gforge/images/spacer.gif -text svneol=unset#unset
 gforge/www/themes/gforge/images/t.png -text
 gforge/www/themes/gforge/images/t2.png -text
