@@ -9,6 +9,7 @@
 
 require_once $gfcommon.'include/FusionForge.class.php';
 require_once $gfcommon.'include/tag_cloud.php';
+require_once $gfcommon.'include/Stats.class.php';
 
 function show_features_boxes() {
 	GLOBAL $HTML,$sys_use_ratings,$sys_use_frs,$sys_use_project_tags;
@@ -202,21 +203,22 @@ function show_highest_ranked_users() {
 }
 
 function show_highest_ranked_projects() {
-	$result = db_query_params ('SELECT groups.group_name,groups.unix_group_name,groups.group_id,project_weekly_metric.ranking,project_weekly_metric.percentile FROM groups,project_weekly_metric WHERE groups.group_id=project_weekly_metric.group_id AND groups.is_public=1 AND groups.type_id=1 AND groups.status != $1 AND groups.use_stats=1 ORDER BY ranking ASC', 
-				   array ('D'),
-				   20);
+	$result = getMostActiveStats ('week', 0) ;
 	if (!$result || db_numrows($result) < 1) {
 		return _('No Stats Available')." ".db_error();
 	} else {
 		$return = '<table summary="">';
-		while ($row=db_fetch_array($result)) {
+		$count = 0 ;
+		while ($row=db_fetch_array($result) && $count < 20) {
 			$t_prj_activity = number_format(substr($row['ranking'],0,5),0);
 			$t_prj_link = util_make_link_g ($row['unix_group_name'],$row['group_id'],$row['group_name']);
 			
 			$return .= "<tr>";
 			$return .= '<td class="width-stat-col1">'. $t_prj_activity . "</td>";
 			$return .= '<td>' . $t_prj_link . '</td>';
-			$return .= "</tr>\n";			
+			$return .= "</tr>\n";
+			
+			$count++ ;
 		}
 		$return .= "</table>";
 		$return .= '<div class="align-center">' . util_make_link ('/top/mostactive.php?type=week', _('All project activities'), array('class' => 'dot-link')) . '</div>';
