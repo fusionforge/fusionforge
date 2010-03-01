@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: FusionForge 4.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-03-01 22:22+0100\n"
-"PO-Revision-Date: 2010-02-19 16:24+0100\n"
+"PO-Revision-Date: 2010-03-01 22:35+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2320,7 +2320,7 @@ msgstr "Nom court"
 
 #: plugins/contribtracker/www/global_admin.php:225
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: plugins/contribtracker/www/global_admin.php:226 www/admin/search.php:97
 #: www/admin/unsubscribe.php:121
@@ -2531,9 +2531,8 @@ msgstr "Nom de l'acteur :"
 
 #: plugins/contribtracker/www/global_admin.php:420
 #: plugins/contribtracker/www/global_admin.php:450
-#, fuzzy
 msgid "Actor URL:"
-msgstr "Nom de l'acteur :"
+msgstr "URL de l'acteur :"
 
 #: plugins/contribtracker/www/global_admin.php:421
 #: plugins/contribtracker/www/global_admin.php:451
@@ -2625,7 +2624,7 @@ msgstr "Nom :"
 
 #: plugins/contribtracker/www/index.php:128
 msgid "URL:"
-msgstr ""
+msgstr "URL:"
 
 #: plugins/contribtracker/www/index.php:133 www/admin/useredit.php:183
 msgid "Email:"
@@ -3727,17 +3726,11 @@ msgstr ""
 "est accessible de manière anonyme grâce à la commande suivante.</p>"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:96
-#, fuzzy
 msgid ""
 "<p><b>Developer Bazaar Access via SSH</b></p><p>Only project developers can "
 "access the Bazaar branches via this method. SSH must be installed on your "
 "client machine. Enter your site password when prompted.</p>"
-msgstr ""
-"<p><b>Accès Bazaar via SSH pour les développeurs</b></p><p>Cette méthode "
-"d'accès au dépôt est réservée aux développeurs du projet. SSH doit être "
-"installé sur votre poste client. La valeur <i>nom-du-développeur</i> devra "
-"être remplacée par votre identifiant de connexion. Vous pourrez avoir besoin "
-"de taper votre mot de passe.</p>"
+msgstr "<p><b>Accès Bazaar via SSH pour les développeurs</b></p><p>Cette méthode d'accès au dépôt est réservée aux développeurs du projet. SSH doit être installé sur votre poste client. Vous pourrez avoir besoin de taper votre mot de passe.</p>"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:97
 #: plugins/scmbzr/common/BzrPlugin.class.php:100
@@ -3745,7 +3738,6 @@ msgid "branchname"
 msgstr "nomdebranche"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:99
-#, fuzzy
 msgid ""
 "<p><b>Developer Bazaar Access via SSH</b></p><p>Only project developers can "
 "access the Bazaar branches via this method. SSH must be installed on your "
@@ -3854,20 +3846,13 @@ msgstr ""
 "accessible de manière anonyme par HTTP.</p>"
 
 #: plugins/scmcpold/common/CpoldPlugin.class.php:76
-#, fuzzy
 msgid ""
 "<p><b>Developer CPOLD Access via SSH</b></p><p>Only project developers can "
 "access the CPOLD tree via this method. SSH must be installed on your client "
 "machine. Enter your site password when prompted.</p>"
-msgstr ""
-"<p><b>Accès CPOLD via SSH pour les développeurs</b></p><p>Cette méthode "
-"d'accès au dépôt est réservée aux développeurs du projet. SSH doit être "
-"installé sur votre poste client. La valeur <i>nom-du-module</i> devra être "
-"remplacée par la valeur appropriée. Vous pourrez avoir besoin de taper votre "
-"mot de passe.</p>"
+msgstr "<p><b>Accès CPOLD via SSH pour les développeurs</b></p><p>Cette méthode d'accès au dépôt est réservée aux développeurs du projet. SSH doit être installé sur votre poste client. Vous pourrez avoir besoin de taper votre mot de passe.</p>"
 
 #: plugins/scmcpold/common/CpoldPlugin.class.php:79
-#, fuzzy
 msgid ""
 "<p><b>Developer CPOLD Access via SSH</b></p><p>Only project developers can "
 "access the CPOLD tree via this method. SSH must be installed on your client "
@@ -3909,7 +3894,6 @@ msgid "modulename"
 msgstr "nom-du-module"
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:95
-#, fuzzy
 msgid ""
 "<p><b>Developer CVS Access via SSH</b></p><p>Only project developers can "
 "access the CVS tree via this method. SSH must be installed on your client "
@@ -4040,20 +4024,13 @@ msgstr ""
 "accessible de manière anonyme grâce aux commandes suivantes.</p>"
 
 #: plugins/scmgit/common/GitPlugin.class.php:89
-#, fuzzy
 msgid ""
 "<p><b>Developer GIT Access via SSH</b></p><p>Only project developers can "
 "access the GIT tree via this method. SSH must be installed on your client "
 "machine. Enter your site password when prompted.</p>"
-msgstr ""
-"<p><b>Accès Git via SSH pour les développeurs</b></p><p>Cette méthode "
-"d'accès au dépôt est réservée aux développeurs du projet. SSH doit être "
-"installé sur votre poste client. La valeur <i>nom-du-développeur</i> devra "
-"être remplacée par votre identifiant de connexion. Vous pourrez avoir besoin "
-"de taper votre mot de passe.</p>"
+msgstr "<p><b>Accès Git via SSH pour les développeurs</b></p><p>Cette méthode d'accès au dépôt est réservée aux développeurs du projet. SSH doit être installé sur votre poste client. Vous pourrez avoir besoin de taper votre mot de passe.</p>"
 
 #: plugins/scmgit/common/GitPlugin.class.php:92
-#, fuzzy
 msgid ""
 "<p><b>Developer GIT Access via SSH</b></p><p>Only project developers can "
 "access the GIT tree via this method. SSH must be installed on your client "
@@ -4098,20 +4075,13 @@ msgstr ""
 "projet est accessible de manière anonyme grâce aux commandes suivantes.</p>"
 
 #: plugins/scmhg/common/HgPlugin.class.php:64
-#, fuzzy
 msgid ""
 "<p><b>Developer Mercurial Access via SSH</b></p><p>Only project developers "
 "can access the Mercurial tree via this method. SSH must be installed on your "
 "client machine. Enter your site password when prompted.</p>"
-msgstr ""
-"<p><b>Accès Mercurial via SSH pour les développeurs</b></p><p>Cette méthode "
-"d'accès au dépôt est réservée aux développeurs du projet. SSH doit être "
-"installé sur votre poste client. La valeur <i>nom-du-développeur</i> devra "
-"être remplacée par votre identifiant de connexion. Vous pourrez avoir besoin "
-"de taper votre mot de passe.</p>"
+msgstr "<p><b>Accès Mercurial via SSH pour les développeurs</b></p><p>Cette méthode d'accès au dépôt est réservée aux développeurs du projet. SSH doit être installé sur votre poste client. Vous pourrez avoir besoin de taper votre mot de passe.</p>"
 
 #: plugins/scmhg/common/HgPlugin.class.php:67
-#, fuzzy
 msgid ""
 "<p><b>Developer Mercurial Access via SSH</b></p><p>Only project developers "
 "can access the Mercurial tree via this method. SSH must be installed on your "
@@ -4146,29 +4116,18 @@ msgid "The password is 'anonsvn'"
 msgstr "Le mot de passe à fournir est « anonsvn »."
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:100
-#, fuzzy
 msgid ""
 "<p><b>Developer Subversion Access via SSH</b></p><p>Only project developers "
 "can access the SVN tree via this method. SSH must be installed on your "
 "client machine. Enter your site password when prompted.</p>"
-msgstr ""
-"<p><b>Accès Subversion via SSH pour les développeurs</b></p><p>Cette méthode "
-"d'accès au dépôt est réservée aux développeurs du projet. SSH doit être "
-"installé sur votre poste client. La valeur <i>nom-du-développeur</i> devra "
-"être remplacée par votre identifiant de connexion. Vous pourrez avoir besoin "
-"de taper votre mot de passe.</p>"
+msgstr "<p><b>Accès Subversion via SSH pour les développeurs</b></p><p>Cette méthode d'accès au dépôt est réservée aux développeurs du projet. SSH doit être installé sur votre poste client. Vous pourrez avoir besoin de taper votre mot de passe.</p>"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:104
-#, fuzzy
 msgid ""
 "<p><b>Developer Subversion Access via DAV</b></p><p>Only project developers "
 "can access the SVN tree via this method. Enter your site password when "
 "prompted.</p>"
-msgstr ""
-"<p><b>Accès Subversion via DAV pour les développeurs</b></p><p>Cette méthode "
-"d'accès au dépôt est réservée aux développeurs du projet. La valeur <i>nom-"
-"du-développeur</i> devra être remplacée par votre identifiant de connexion. "
-"Vous pourrez avoir besoin de taper votre mot de passe.</p>"
+msgstr "<p><b>Accès Subversion via DAV pour les développeurs</b></p><p>Cette méthode d'accès au dépôt est réservée aux développeurs du projet. Vous pourrez avoir besoin de taper votre mot de passe.</p>"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:109
 msgid ""
@@ -6710,9 +6669,8 @@ msgid "Invalid file name."
 msgstr "Nom de fichier invalide."
 
 #: www/docman/new.php:115
-#, fuzzy
 msgid "Document submitted sucessfully : pending state (need validation)"
-msgstr "Le document a été soumis avec succès"
+msgstr "Le document a été soumis avec succès (en attente de validation)"
 
 #: www/docman/new.php:118
 msgid "Document submitted sucessfully"
@@ -8749,9 +8707,8 @@ msgid "A powerful plugin system to add new features."
 msgstr "Un système de greffons pour ajouter des fonctionnalités."
 
 #: www/index_std.php:27
-#, fuzzy
 msgid "What's new in FusionForge 5.0"
-msgstr "Les nouveautés de FusionForge 4.8"
+msgstr "Les nouveautés de FusionForge 5.0"
 
 #: www/index_std.php:29
 msgid ""
@@ -12647,7 +12604,6 @@ msgid "Registered: <strong>%s</strong>"
 msgstr "Date d'enregistrement : <strong>%s</strong>"
 
 #: www/softwaremap/trove_list.php:83
-#, fuzzy
 msgid "Project tree"
 msgstr "Arbre des projets"
 
@@ -13996,9 +13952,8 @@ msgid "New Tracker"
 msgstr "Nouvel outil de suivi"
 
 #: www/tracker/admin/tracker.php:10
-#, fuzzy
 msgid "Create a new tracker."
-msgstr "Créer un paquet"
+msgstr "Créer un nouvel outil de suivi."
 
 #: www/tracker/admin/tracker.php:14
 #: www/tracker/include/ArtifactTypeHtml.class.php:97
@@ -14006,9 +13961,8 @@ msgid "Update Settings"
 msgstr "Mettre à jour les réglages"
 
 #: www/tracker/admin/tracker.php:15
-#, fuzzy
 msgid "Set up preferences like expiration times, email addresses."
-msgstr "Modifier les préférences (date d'expiration, e-mail)"
+msgstr "Modifier les préférences (date d'expiration, e-mail)."
 
 #: www/tracker/admin/tracker.php:19
 #: www/tracker/include/ArtifactTypeHtml.class.php:100
@@ -14016,7 +13970,6 @@ msgid "Manage Custom Fields"
 msgstr "Ajouter/modifier les champs supplémentaires"
 
 #: www/tracker/admin/tracker.php:20
-#, fuzzy
 msgid ""
 "Add new boxes like Phases, Quality Metrics, Components, etc.  Once added "
 "they can be used with other selection boxes (for example, Categories or "
@@ -14033,9 +13986,8 @@ msgid "Manage Workflow"
 msgstr "Gérer le processus"
 
 #: www/tracker/admin/tracker.php:25
-#, fuzzy
 msgid "Edit tracker workflow."
-msgstr "Configurer le processus"
+msgstr "Configurer le processus de suivi."
 
 #: www/tracker/admin/tracker.php:29
 #: www/tracker/include/ArtifactTypeHtml.class.php:106
@@ -14044,7 +13996,7 @@ msgstr "Personnaliser la liste"
 
 #: www/tracker/admin/tracker.php:30
 msgid "Customize display for the tracker."
-msgstr ""
+msgstr "Personnaliser l'affichage de l'outil de suivi."
 
 #: www/tracker/admin/tracker.php:34
 #: www/tracker/include/ArtifactTypeHtml.class.php:109
@@ -14052,13 +14004,12 @@ msgid "Add/Update Canned Responses"
 msgstr "Ajouter/modifier les réponses types"
 
 #: www/tracker/admin/tracker.php:35
-#, fuzzy
 msgid "Create/change generic response messages for the tracker."
-msgstr "Ajouter/modifier des réponses types pour l'outil de suivi"
+msgstr "Ajouter/modifier des réponses types pour l'outil de suivi."
 
 #: www/tracker/admin/tracker.php:40
 msgid "Create a new tracker as a copy of this one."
-msgstr ""
+msgstr "Créer un nouvel outil de suivi à partir d'une copie de celui-ci."
 
 #: www/tracker/admin/tracker.php:45
 msgid "Permanently delete this tracker."
@@ -14623,27 +14574,3 @@ msgstr[1] ""
 #: www/users:33
 msgid "No User Name Provided"
 msgstr "Aucun nom d'utilisateur n'a été fourni"
-
-#~ msgid "Group name is already exists"
-#~ msgstr "Le nom du groupe est déjà pris"
-
-#~ msgid "Postal address"
-#~ msgstr "Adresse postale"
-
-#~ msgid "Actor address:"
-#~ msgstr "Adresse de l'acteur :"
-
-#~ msgid "What's new in FusionForge trunk"
-#~ msgstr "Les nouveautés de FusionForge « trunk »"
-
-#~ msgid "Observer"
-#~ msgstr "Observateur"
-
-#~ msgid "No Pending Requests"
-#~ msgstr "Aucune demande en attente"
-
-#~ msgid "Update preferences"
-#~ msgstr "Modifier les préférences"
-
-#~ msgid "Add Canned Responses"
-#~ msgstr "Ajouter des réponses types"
