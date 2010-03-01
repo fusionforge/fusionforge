@@ -24,7 +24,7 @@ require_once $gfcommon.'include/FusionForge.class.php';
 <li><?php print _('A powerful plugin system to add new features.'); ?></li>
 </ul>
 
-<h3><?php print _("What's new in FusionForge trunk"); ?></h3>
+<h3><?php print _("What's new in FusionForge 5.0"); ?></h3>
 <ul>
 <li><?php print _('Many improvements to the trackers: configurable display, workflow management, links between artifacts, better searches, and more'); ?></li>
 <li><?php print _('Rewritten SCM subsystem, with new plugins for Bazaar, Darcs and Git'); ?></li>
