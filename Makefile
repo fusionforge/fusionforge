@@ -50,8 +50,8 @@ build-unit-tests:
 	cp $(BUILDDIR)/reports/phpunit.xml $(BUILDDIR)/reports/phpunit.xml.org; xalan -in $(BUILDDIR)/reports/phpunit.xml.org -xsl fix_phpunit.xslt -out $(BUILDDIR)/reports/phpunit.xml
 
 build-full-tests:
+	mkdir -p $(BUILDDIR)/build/packages $(BUILDDIR)/reports/coverage
 	find $(BUILDDIR)/build/packages -type f -exec rm -f  {} \;
-	mkdir -p $(BUILDDIR)/reports/coverage
 	phpdoc --title 'API Documentation' -ue on -t $(BUILDDIR)/apidocs -d gforge/common -tb '/usr/share/php/data/phpUnderControl/data/phpdoc' -o HTML:Phpuc:phpuc
 	-phpcs --tab-width=4 --standard=PEAR --report=checkstyle gforge/common > $(BUILDDIR)/reports/checkstyle.xml
 	cd tests; phpunit --log-xml $(BUILDDIR)/reports/phpunit.xml --log-pmd $(BUILDDIR)/reports/phpunit.pmd.xml --coverage-clover $(BUILDDIR)/reports/coverage/clover.xml --coverage-html $(BUILDDIR)/reports/coverage/ AllFullTests.php
