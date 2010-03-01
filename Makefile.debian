@@ -223,7 +223,7 @@ $(BUILDFILES)/$(ORIGFILE): $(TARBALLS)/$(ORIGFILE)
 
 $(TARBALLS)/$(ORIGFILE): $(TARBALLS)
 	cd $(PKGDIR) ; debclean
-	find $(PKGDIR) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v '/.testbox/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -o -H ustar | gzip > $(TARBALLS)/$(ORIGFILE)
+	find $(PKGDIR) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v '/.testbox/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | grep -v \\.jar$$ | grep -v \\.pdf$$ | grep -v plugins/fckeditor/www/_samples | cpio -o -H ustar | gzip > $(TARBALLS)/$(ORIGFILE)
 
 pbuilderenv: $(PBUILDERTGZ) $(PBUILDERTGZ)/base-$(DISTRIB).tgz
 	@echo "Ready for $(DISTRIB)"
