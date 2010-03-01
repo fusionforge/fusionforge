@@ -210,7 +210,7 @@ function show_highest_ranked_projects() {
 	} else {
 		$return = '<table summary="">';
 		$count = 0 ;
-		while ($row=db_fetch_array($result) && $count < 20) {
+		while (($row=db_fetch_array($result)) && ($count < 20)) {
 			$t_prj_activity = number_format(substr($row['ranking'],0,5),0);
 			$t_prj_link = util_make_link_g ($row['unix_group_name'],$row['group_id'],$row['group_name']);
 			
