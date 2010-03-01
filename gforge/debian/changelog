@@ -1,3 +1,13 @@
+fusionforge (5.0~rc1-1) experimental; urgency=low
+
+  * New upstream release candidate.
+  * Updated debian/copyright file to include licenses and copyright
+    notices even for files not used in the binary packages.
+  * Also tweaked the script that generates the .orig.tar.gz from upstream
+    SVN so source-less binary files are filtered out.
+
+ -- Roland Mas <lolando@debian.org>  Mon, 01 Mar 2010 21:06:55 +0100
+
 fusionforge (4.8.60-1) experimental; urgency=low
 
   * New snapshot from upstream SVN (trunk).
