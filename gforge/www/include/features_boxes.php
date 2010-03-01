@@ -203,7 +203,8 @@ function show_highest_ranked_users() {
 }
 
 function show_highest_ranked_projects() {
-	$result = getMostActiveStats ('week', 0) ;
+	$statsobj = new Stats () ;
+	$result = $statsobj->getMostActiveStats ('week', 0) ;
 	if (!$result || db_numrows($result) < 1) {
 		return _('No Stats Available')." ".db_error();
 	} else {
