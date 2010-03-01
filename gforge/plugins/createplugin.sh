@@ -48,12 +48,12 @@ else
 		sed "s/$modelfullname/$fullname/g" > \
 		$plugdir/www/index.php
 	fi
-	if [ ! -f $plugdir/common/languages/Base.tab ]
-	then
-		echo Creating $plugdir/common/languages/Base.tab
-		cat $modelplugdir/common/languages/Base.tab | \
-		sed "s/$modelminus/$minus/g" | \
-		sed "s/$modelfullname/$fullname/g" > \
-		$plugdir/common/languages/Base.tab
-	fi
+#	if [ ! -f $plugdir/common/languages/Base.tab ]
+#	then
+#		echo Creating $plugdir/common/languages/Base.tab
+#		cat $modelplugdir/common/languages/Base.tab | \
+#		sed "s/$modelminus/$minus/g" | \
+#		sed "s/$modelfullname/$fullname/g" > \
+#		$plugdir/common/languages/Base.tab
+#	fi
 fi
