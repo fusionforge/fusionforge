@@ -23,7 +23,7 @@ site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'home'));
 
 // two column deal
 echo '
-<div id="forge-project-home" class="lien-soulignement">
+<div id="forge-project-home" class="underline-link">
 <table id="project-summary-and-devs" class="my-layout-table" summary="">
 	<tr>
 		<td>
@@ -280,7 +280,7 @@ if ($project->usesFRS()) {
 			}
 		}
 		echo '</table>';
-		echo '<div class="lien-soulignement">' . util_make_link ('/frs/?group_id='.$group_id, _('View All Project Files')) . '</div>';
+		echo '<div class="underline-link">' . util_make_link ('/frs/?group_id='.$group_id, _('View All Project Files')) . '</div>';
 		
 		echo $HTML->boxBottom();
 }

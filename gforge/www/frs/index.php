@@ -66,7 +66,7 @@ if ( $num_packages < 1) {
 	echo "<h1>"._('No File Packages')."</h1>";
 	echo "<p><strong>"._('There are no file packages defined for this project.')."</strong>";
 } else {
-	echo '<div id="forge-frs" class="lien-soulignement">'."\n";
+	echo '<div id="forge-frs" class="underline-link">'."\n";
 
 	echo '<div class="blue-box">'._('Below is a list of all files of the project.').' ';
 	if ($release_id) {
