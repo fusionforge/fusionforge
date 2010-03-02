@@ -266,6 +266,7 @@ class Theme extends Layout {
     function tabGenerator($TABS_DIRS,$TABS_TITLES,$nested=false,$selected=false,$sel_tab_bgcolor='WHITE',$total_width='100%') {
         $count=count($TABS_DIRS);
         $width=intval((100/$count));
+	$rest_width=100-$count*$width;
 
         $return = '
 		<!-- start tabs -->
@@ -351,7 +352,18 @@ class Theme extends Layout {
 		    $return .= '</td>' . "\n";
 	    }
 	}
-	
+
+	if ($rest_width > 0) {
+		$return .= '<td class="tg-middle" style="width:'.$rest_width.'%;">' . "\n";
+		$return .= '<div><div';
+		if ($nested) {
+			$return .= ' class="nested"';
+		}
+		$return .= '>' . "\n";
+		$return .= '</div></div>' . "\n";
+		$return .= '</td>' . "\n";
+	}
+
         $return .= '</tr>
         </table>
         <!-- end tabs -->';
