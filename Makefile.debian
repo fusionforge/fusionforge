@@ -87,64 +87,73 @@ list:
 #
 #:======== Debian Builds ============#
 lenny:    # Simply build lenny packages #
-	make cowbuilddeb DEBIANLIST=1lenny
+	$(MAKE) cowbuilddeb DEBIANLIST=1lenny
 
 rlenny:   # Make a lenny repository #
-	make repodeb DEBIANLIST=1lenny
+	$(MAKE) repodeb DEBIANLIST=1lenny
 
 squeeze:  # Simply build squeeze packages #
-	make cowbuilddeb DEBIANLIST=2squeeze
+	$(MAKE) cowbuilddeb DEBIANLIST=2squeeze
 
 rsqueeze: # Make a squeeze repository #
-	make repodeb DEBIANLIST=2squeeze
+	$(MAKE) repodeb DEBIANLIST=2squeeze
 
 sid:      # Simply build sid packages #
-	make cowbuilddeb DEBIANLIST=3sid
+	$(MAKE) cowbuilddeb DEBIANLIST=3sid
 
 rsid:     # Make a sid repository #
-	make repodeb DEBIANLIST=3sid
+	$(MAKE) repodeb DEBIANLIST=3sid
 
 #:======== Ubuntu Builds ============#
 intrepid:  # Simply build intrepid packages #
-	make cowbuildubu UBUNTULIST=1intrepid
+	$(MAKE) cowbuildubu UBUNTULIST=1intrepid
 
 rintrepid: # Make an intrepid repository #
-	make repoubu UBUNTULIST=1intrepid
+	$(MAKE) repoubu UBUNTULIST=1intrepid
 
 jaunty:    # Simply build jaunty packages #
-	make cowbuildubu UBUNTULIST=1jaunty
+	$(MAKE) cowbuildubu UBUNTULIST=1jaunty
 
 rjaunty:   # Make a jaunty repository #
-	make repoubu UBUNTULIST=1jaunty
+	$(MAKE) repoubu UBUNTULIST=1jaunty
 
 karmic:    # Simply build karmic packages #
-	make cowbuildubu UBUNTULIST=1karmic
+	$(MAKE) cowbuildubu UBUNTULIST=1karmic
 
 rkarmic:   # Make a karmic repository #
-	make repoubu UBUNTULIST=1karmic
+	$(MAKE) repoubu UBUNTULIST=1karmic
 
 #:======== Other and Multiple Builds ============#
 documentor_path=/tmp
-documentor_vers=phpdocumentor-1.3.0rc3
+documentor_url=http://downloads.sourceforge.net/project/phpdocu/PhpDoc/phpDocumentor-1.4.3/PhpDocumentor-1.4.3.tgz
+documentor_file=PhpDocumentor-1.4.3.tgz
+documentor_subdir=PhpDocumentor-1.4.3
 
 #
 # FUSIONFORGE
 #
 
-orig: $(TARBALLS)/$(ORIGFILE) # Make FUSIONFORGE orig file                                      #
+orig: $(TARBALLS)/$(ORIGFILE) # Make FUSIONFORGE orig file
 
 #
 # PHPDOCUMENTOR
 #
-phpdoc: phpdocumentor_get phpdocumentor_unpack $(documentor_path)/$(documentor_vers)/patched $(PKGDIR)/docs/phpdoc/docs # Get phpdocumentor, install phpdocumentor, build $(PKGNAME) phpdoc     #
+# Get phpdocumentor, install phpdocumentor, build $(PKGNAME) phpdoc
+phpdoc: $(PKGDIR)/docs/phpdoc/docs 
 
 phpdocumentor_get:
-	[ ! -f $(documentor_path)/$(documentor_vers).tar.gz ] && cd $(documentor_path) && wget http://heanet.dl.sourceforge.net/sourceforge/phpdocu/$(documentor_vers).tar.gz || true
-phpdocumentor_unpack:
-	[ ! -d $(documentor_path)/$(documentor_vers) ] && cd $(documentor_path) && tar xvzf $(documentor_vers).tar.gz || true
-$(documentor_path)/$(documentor_vers)/patched:
-	cd $(documentor_path)/ && patch -p2 < $(CURDIR)/$(PKGDIR)/docs/phpdoc/manageclass.patch && touch $(documentor_path)/$(documentor_vers)/patched 
-$(PKGDIR)/docs/phpdoc/docs:
+	[ ! -f $(documentor_path)/$(documentor_file) ] && \
+        cd $(documentor_path) && \
+        wget $(documentor_url) || true
+phpdocumentor_unpack: phpdocumentor_get
+	[ ! -d $(documentor_path)/$(documentor_subdir) ] && \
+        cd $(documentor_path) && \
+        tar -xvzf $(documentor_file) || true
+$(documentor_path)/$(documentor_subdir)/patched: phpdocumentor_unpack
+	cd $(documentor_path)/$(documentor_subdir) && \
+        patch < $(CURDIR)/$(PKGDIR)/docs/phpdoc/phpDocumentor.ini.patch \
+        && touch $(documentor_path)/$(documentor_subdir)/patched 
+$(PKGDIR)/docs/phpdoc/docs: $(documentor_path)/$(documentor_subdir)/patched
 	cd $(PKGDIR)/docs/phpdoc/ && ./makedoc.sh
 
 #
@@ -157,12 +166,12 @@ deploy: repodeb repoubu # ***** Deploy packages in Debian and Ubuntu repositorie
 
 repodeb: cowbuilddeb
 	@for dist in $(DEBIANLIST); do \
-	make -f Makefile.debian localrepo reprepro XDISTRIB=$$dist LOCALREPO=$(LOCALREPODEB) DISTRIBLIST="$(DEBLIST)" ; \
+	$(MAKE) -f Makefile.debian localrepo reprepro XDISTRIB=$$dist LOCALREPO=$(LOCALREPODEB) DISTRIBLIST="$(DEBLIST)" ; \
 	done
 
 repoubu: cowbuildubu
 	@for dist in $(UBUNTULIST); do \
-	make -f Makefile.debian localrepo reprepro XDISTRIB=$$dist LOCALREPO=$(LOCALREPOUBU) DISTRIBLIST="$(UBULIST)" ; \
+	$(MAKE) -f Makefile.debian localrepo reprepro XDISTRIB=$$dist LOCALREPO=$(LOCALREPOUBU) DISTRIBLIST="$(UBULIST)" ; \
 	done
 
 cowbuildtest:
@@ -170,22 +179,22 @@ cowbuildtest:
 
 cowbuilddeb: # ***** This is the one to cowbuild debian packages ***** #
 	@for dist in $(DEBIANLIST); do \
-	make -f Makefile.debian cowbuilddist XDISTRIB=$$dist DISTROOP="$(DEBIANOP)" ; \
+	$(MAKE) -f Makefile.debian cowbuilddist XDISTRIB=$$dist DISTROOP="$(DEBIANOP)" ; \
 	done
 
 cowbuildubu: # ***** This is the one to cowbuild ubuntu packages ***** #
 	@for dist in $(UBUNTULIST); do \
-	make -f Makefile.debian cowbuilddist XDISTRIB=$$dist DISTROOP="$(UBUNTUOP)" HOOK='$(UBUHOOK)' ; \
+	$(MAKE) -f Makefile.debian cowbuilddist XDISTRIB=$$dist DISTROOP="$(UBUNTUOP)" HOOK='$(UBUHOOK)' ; \
 	done
 
 pbuilddeb: # pbuild debian packages (less recommended) #
 	@for dist in $(DEBIANLISTP); do \
-	make -f Makefile.debian pbuilddist XDISTRIB=$$dist DISTROOP="$(DEBIANOP)" LOCALREPO=$(LOCALREPODEB) ; \
+	$(MAKE) -f Makefile.debian pbuilddist XDISTRIB=$$dist DISTROOP="$(DEBIANOP)" LOCALREPO=$(LOCALREPODEB) ; \
 	done
 
 pbuildubu: # pbuild ubuntu packages (less recommended) #
 	@for dist in $(UBUNTULISTP); do \
-	make -f Makefile.debian pbuilddist XDISTRIB=$$dist DISTROOP="$(UBUNTUOP)" LOCALREPO=$(LOCALREPOUBU) ; \
+	$(MAKE) -f Makefile.debian pbuilddist XDISTRIB=$$dist DISTROOP="$(UBUNTUOP)" LOCALREPO=$(LOCALREPOUBU) ; \
 	done
 
 cowbuilddist: cowbuilderenv $(BUILDFILES) $(BUILDRESULT)/$(CHANGEFILE)

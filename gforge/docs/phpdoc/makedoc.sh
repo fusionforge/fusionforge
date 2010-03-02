@@ -26,14 +26,14 @@
 #  * 
 #  * @var               string TITLE
 #  */
-TITLE="GForge PHP Documentation"
+TITLE="FusionForge PHP Documentation"
 
 #/** 
 #  * name to use for the default package. If not specified, uses 'default'
 #  *
 #  * @var               string PACKAGES
 #  */
-PACKAGES="GForge"
+PACKAGES="FusionForge"
 
 #/** 
 #  * name of a directory(s) to parse directory1,directory2
@@ -48,7 +48,7 @@ PATH_PROJECT=$PWD/../..
 #  *
 #  * @var               string PATH_PHPDOC
 #  */
-PATH_PHPDOC=/tmp/phpdocumentor-1.3.0rc3/phpdoc
+PATH_PHPDOC=/tmp/PhpDocumentor-1.4.3/phpdoc
 
 #/**
 #  * where documentation will be put

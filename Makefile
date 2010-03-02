@@ -28,7 +28,7 @@ switch:
 	@echo "Use one of the following target with "
 	@echo "make -f Makefile.$(DIST) <target>"
 	@echo "=========================================================================="
-	@make -f Makefile.$(DIST)
+	@$(MAKE) -f Makefile.$(DIST)
 
 check:
 	cd tests ; php AllTests.php
@@ -61,7 +61,7 @@ build-full-tests:
 
 
 gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php:
-	cd gforge/plugins/mediawiki/mediawiki-skin ; make
+	$(MAKE) -C gforge/plugins/mediawiki/mediawiki-skin
 
 %: gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php
-	@make -f Makefile.$(DIST) $@
+	$(MAKE) -f Makefile.$(DIST) $@
