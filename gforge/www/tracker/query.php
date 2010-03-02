@@ -321,7 +321,7 @@ if ($ath->userIsAdmin()) {
 		<td><strong>'._('Assignee').':</strong><br />'. $tech_box .'</td>
 		<td valign="top">';
 		if (!$ath->usesCustomStatuses()) {
-			echo '<strong>'._('State').':</strong><br />'. $ath->statusBox('_status',$_status,true,_('State'));
+			echo '<strong>'._('State').':</strong><br />'. $ath->statusBox('_status',$_status,true,_('Any'));
 		}
 		echo '</td>
 	</tr>';
