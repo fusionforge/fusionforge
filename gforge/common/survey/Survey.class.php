@@ -322,7 +322,7 @@ class Survey extends Error {
 		$group_id = $this->Group->GetID();
 		$survey_id = $this->getID();
 		
-		$res = db_query_params ('SELECT 1 FROM survey_responses where survey_id=$1 AND group_id=$2',
+		$res = db_query_params ('SELECT 1 FROM survey_responses WHERE survey_id=$1 AND group_id=$2 GROUP BY user_id',
 					array ($survey_id,
 					       $group_id)) ;
 		$ret = db_numrows($res);
