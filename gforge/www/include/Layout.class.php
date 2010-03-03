@@ -1299,6 +1299,10 @@ if (isset($params['group']) && $params['group']) {
 		return $this->getPicto('ic/taskman20g.png', $title, $alt);
 	}
     
+	function getSurveyPic($title = '', $alt = '') {
+		return $this->getPicto('ic/survey16b.png', $title, $alt);
+	}
+
 	function getScmPic($title = '', $alt = '') {
 		return $this->getPicto('ic/cvs16b.png', $title, $alt);
 	}

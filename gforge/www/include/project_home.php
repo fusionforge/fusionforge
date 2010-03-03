@@ -401,8 +401,8 @@ if ($project->usesPm()) {
 
 if ($project->usesSurvey()) {
 	echo '<div class="public-area-box">';
-	print html_image('ic/survey16b.png','20','20',array('alt'=>"")) . "&nbsp;";
-	print util_make_link( '/survey/?group_id='.$group_id, '&nbsp;'._('Surveys'));
+	$link_content = $HTML->getSurveyPic('') . '&nbsp;' . _('Surveys');
+	echo util_make_link( '/survey/?group_id='.$group_id, $link_content);
 	echo ' ( <strong>'. project_get_survey_count($group_id) .'</strong> ' . _('surveys').'  )';
 	echo '</div>';
 }
