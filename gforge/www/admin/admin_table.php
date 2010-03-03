@@ -219,12 +219,12 @@ function admin_table_edit($table, $unit, $primary_key, $id) {
  *	@param $id - the id of the record to act on
  */
 function admin_table_postedit($table, $unit, $primary_key, $id) {
-	global $HTTP_POST_VARS;
+	global $_POST;
 
 	$qpa = db_construct_qpa (false, 'UPDATE ' . $table . ' SET ') ;
 	
 	$i = 0 ;
-	while (list($var, $val) = each($HTTP_POST_VARS)) {
+	while (list($var, $val) = each($_POST)) {
 		if ($i > 0) {
 			$qpa = db_construct_qpa ($qpa, ', ') ;
 		}
