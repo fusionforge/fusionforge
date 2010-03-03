@@ -233,7 +233,7 @@ tasksel tasksel/first multiselect standard
 # Individual additional packages to install
 d-i pkgsel/include string vim ntpdate ntp build-essential debconf-utils exim4-daemon-heavy mailman proftpd apache2-mpm-prefork openssl \
 localization-config console-tools console-data console-common console-setup \
-sudo devscripts fakeroot pbuilder svn-buildpackage dpatch debhelper reprepro
+sudo devscripts fakeroot pbuilder svn-buildpackage dpatch debhelper reprepro ssh
 #sidentd
 
 # Some versions of the installer can report back on what software you have
@@ -329,7 +329,7 @@ in-target chmod o+rw /dev/null ; \
 apt-install postgresql-8.4 ; \
 in-target mount /proc ; \
 in-target /etc/init.d/postgresql-8.4 start ; \
-UCF_FORCE_CONFFNEW=yes apt-install -o DPkg::Options::=--force-confnew fusionforge-full ; \
+UCF_FORCE_CONFFNEW=yes apt-install fusionforge-full ; \
 in-target ln -s /var/lib/gforge/chroot/cvsroot /cvsroot ; \
 in-target ln -s /var/lib/gforge/chroot/svnroot /svnroot ; \
 echo 'SYSLOGD="-p /dev/log -a /var/lib/gforge/chroot/dev/log"' >> /target/etc/default/syslogd ; \
@@ -337,6 +337,10 @@ echo '/var/run/postgresql /var/lib/gforge/chroot/var/run/postgresql none bind' >
 echo 'syntax on' >> /target/etc/vim/vimrc.local ;
 
 
+#in-target echo "===== PAUSE =====" ; \
+#in-target sleep 600 ; \
+#UCF_FORCE_CONFFNEW=yes apt-install -o DPkg::Options::=--force-confnew fusionforge-full ; \
+#
 
 ##d-i preseed/late_command	string	apt-install zsh; \
 ##in-target mkdir -p /etc/apache/ssl.crt /etc/apache/ssl.key /usr/share/gforge/scm ; \
