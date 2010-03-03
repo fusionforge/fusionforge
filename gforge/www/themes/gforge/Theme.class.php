@@ -55,7 +55,7 @@ class Theme extends Layout {
         echo $this->headerLink();
 
         echo '
-		<script type="text/javascript" src="'. $this->jsroot .'gforge.js"></script>
+		<script type="text/javascript" src="'. util_make_uri('/js/common.js') .'"></script>
 		<script type="text/javascript">';
         plugin_hook ("javascript",false);
         echo '</script>';
