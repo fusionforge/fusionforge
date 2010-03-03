@@ -149,7 +149,7 @@ d-i apt-setup/use_mirror boolean false
 #       http://local.server/debian stable main
 #d-i apt-setup/local0/repository string http://localhost/debian-local etch main
 #d-i apt-setup/local0/repository string http://gforge.eu/debian etch main
-d-i apt-setup/local0/repository string http://debian.fusionforge.org/debian lenny main
+d-i apt-setup/local0/repository string http://debian.fusionforge.org/debian %DIST% main
 #d-i apt-setup/local0/comment string local server
 # Enable deb-src lines
 #d-i apt-setup/local0/source boolean true
@@ -162,7 +162,7 @@ d-i apt-setup/local0/source boolean true
 #d-i apt-setup/local0/key string http://gforge.eu/key
 d-i apt-setup/local0/key string http://debian.fusionforge.org/key
 
-d-i apt-setup/local1/repository string http://ftp2.fr.debian.org/debian lenny main
+d-i apt-setup/local1/repository string http://ftp2.fr.debian.org/debian %DIST% main
 d-i apt-setup/local1/source boolean true
 # By default the installer requires that repositories be authenticated
 # using a known gpg key. This setting can be used to disable that
