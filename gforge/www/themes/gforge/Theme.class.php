@@ -263,10 +263,17 @@ class Theme extends Layout {
     }
 
 
-    function tabGenerator($TABS_DIRS,$TABS_TITLES,$nested=false,$selected=false,$sel_tab_bgcolor='WHITE',$total_width='100%') {
-        $count=count($TABS_DIRS);
-        $width=intval((100/$count));
-	$rest_width=100-$count*$width;
+    function tabGenerator($TABS_DIRS, $TABS_TITLES, $nested=false, $selected=false, $sel_tab_bgcolor='WHITE', $total_width='100%') {
+		$count=count($TABS_DIRS);
+		if ($count < 1) {
+			return;
+		}
+		// The width for each tab is given in percent. Note
+		// that an integer value is used as Opera doesn't seem
+		// to interpret fractional percentage values:
+		// http://www.christianmontoya.com/2007/06/26/fluid-widths-and-point-nine-nine-percent/
+		$width=intval((100/$count));
+		$rest_width=100-$count*$width;
 
         $return = '
 		<!-- start tabs -->
@@ -353,13 +360,16 @@ class Theme extends Layout {
 	    }
 	}
 
+	// create a partial tab if there is any rest-width
 	if ($rest_width > 0) {
+		// left part
+		$return .= '<td class="tg-left">' . "\n";
+		$return .= '<div><div' . ($nested ? ' class="nested"' : '') . ">\n";
+		$return .= '</div></div>' . "\n";
+		$return .= '</td>' . "\n";
+		
 		$return .= '<td class="tg-middle" style="width:'.$rest_width.'%;">' . "\n";
-		$return .= '<div><div';
-		if ($nested) {
-			$return .= ' class="nested"';
-		}
-		$return .= '>' . "\n";
+		$return .= '<div><div' . ($nested ? ' class="nested"' : '') . ">\n";
 		$return .= '</div></div>' . "\n";
 		$return .= '</td>' . "\n";
 	}
