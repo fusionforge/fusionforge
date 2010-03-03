@@ -1,4 +1,4 @@
-#### Contents of the preconfiguration file
+### Contents of the preconfiguration file
 ### Localization
 # Locale sets language and country.
 #INTL#d-i debian-installer/country string FR
@@ -184,8 +184,8 @@ d-i apt-setup/local1/source boolean true
 #d-i passwd/root-password-crypted password [MD5 hash]
 
 # To create a normal user account.
-d-i passwd/user-fullname string GForge Debian User
-d-i passwd/username string gfuser
+d-i passwd/user-fullname string FusionForge Debian User
+d-i passwd/username string ffuser
 # Normal user's password, either in clear text
 #CDD#d-i passwd/user-password password gfuser
 #CDD#d-i passwd/user-password-again password gfuser
@@ -326,10 +326,10 @@ ucf ucf/changeprompt select install_new
 d-i preseed/late_command string apt-install zsh; \
 in-target chsh -s /bin/zsh ; \
 in-target chmod o+rw /dev/null ; \
-apt-install postgresql-8.3 ; \
+apt-install postgresql-8.4 ; \
 in-target mount /proc ; \
-in-target /etc/init.d/postgresql-8.3 start ; \
-UCF_FORCE_CONFFNEW=yes apt-install -o DPkg::Options::=--force-confnew gforge gforge-plugin-scmcvs gforge-plugin-scmsvn gforge-plugin-mediawiki ; \
+in-target /etc/init.d/postgresql-8.4 start ; \
+UCF_FORCE_CONFFNEW=yes apt-install -o DPkg::Options::=--force-confnew fusionforge-full ; \
 in-target ln -s /var/lib/gforge/chroot/cvsroot /cvsroot ; \
 in-target ln -s /var/lib/gforge/chroot/svnroot /svnroot ; \
 echo 'SYSLOGD="-p /dev/log -a /var/lib/gforge/chroot/dev/log"' >> /target/etc/default/syslogd ; \

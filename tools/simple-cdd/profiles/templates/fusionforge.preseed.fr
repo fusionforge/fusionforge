@@ -147,7 +147,7 @@ d-i apt-setup/use_mirror boolean false
 # Additional repositories, local[0-9] available
 #d-i apt-setup/local0/repository string \
 #       http://local.server/debian stable main
-d-i apt-setup/local0/repository string http://athlonfreesos/debian-local etch main
+d-i apt-setup/local0/repository string http://ftp.fr.debian.org/debian-local %DIST% main
 #d-i apt-setup/local0/comment string local server
 # Enable deb-src lines
 #d-i apt-setup/local0/source boolean true
@@ -156,7 +156,7 @@ d-i apt-setup/local0/source boolean true
 # apt will complain about the unauthenticated repository and so the
 # sources.list line will be left commented out
 #d-i apt-setup/local0/key string http://local.server/key
-d-i apt-setup/local0/key string http://athlonfreesos/debian-local/key
+d-i apt-setup/local0/key string http://ftp.fr.debian.org/debian-local/key
 
 # By default the installer requires that repositories be authenticated
 # using a known gpg key. This setting can be used to disable that

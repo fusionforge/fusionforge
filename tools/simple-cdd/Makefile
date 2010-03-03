@@ -18,5 +18,8 @@ profiles/fusionforge.conf: profiles/templates/fusionforge.conf
 profiles/fusionforge.preseed: profiles/templates/fusionforge.preseed
 	cat profiles/templates/fusionforge.preseed | sed 's/%DIST%/$(DIST)/g' > $@
 
+profiles/fusionforge.preseed.fr: profiles/templates/fusionforge.preseed.fr
+	cat profiles/templates/fusionforge.preseed.fr | sed 's/%DIST%/$(DIST)/g' > $@
+
 clean:
-	rm -f profiles/fusionforge.conf profiles/fusionforge.preseed
+	rm -f profiles/fusionforge.conf profiles/fusionforge.preseed profiles/templates/fusionforge.preseed.fr
