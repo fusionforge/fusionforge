@@ -320,14 +320,18 @@ class ArtifactFactory extends Error {
 							array($keys[$i])) ;
 				$type = db_result($res,0,'field_type');
 				if ($type == 4 or $type == 6) {
-					$search = "LIKE '".addslashes($vals[$i])."'";
 					$wheresql .= ' AND aefd'.$i.'.field_data LIKE $'.$paramcount++ ;
 					$params[] = $vals[$i];
 				} else {
-					$wheresql .= ' AND aefd'.$i.'.field_data = ANY ($'.$paramcount++ ;
-					$params[] = db_string_array_to_any_clause ($vals[$i]) ;
+					if (is_array($vals[$i])) {
+						$wheresql .= ' AND aefd'.$i.'.field_data = ANY ($'.$paramcount++ .')' ;
+						$params[] = db_string_array_to_any_clause ($vals[$i]) ;
+					} else {
+						$wheresql .= ' AND aefd'.$i.'.field_data = $'.$paramcount++ ;
+						$params[] = $vals[$i];
+					}
 				}
-				$wheresql .= ') AND aefd'.$i.'.artifact_id=artifact_vw.artifact_id' ;
+				$wheresql .= ' AND aefd'.$i.'.artifact_id=artifact_vw.artifact_id' ;
 			}
 		}
 
