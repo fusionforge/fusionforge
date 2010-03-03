@@ -432,7 +432,7 @@ class Navigation extends Error {
                         if ($group->usesTracker()) {
                                 $menu['titles'][] = _('Tracker');
                                 $menu['urls'][] = util_make_url ('/tracker/?group_id=' . $group_id);
-                                if ($perm->isAdmin() || $perm->isArtifcatAdmin()) {
+                                if ($perm->isAdmin() || $perm->isArtifactAdmin()) {
                                         $menu['adminurls'][] = util_make_url('/tracker/admin/?group_id='.$group_id);
                                 } else {
                                         $menu['adminurls'][] = false;
