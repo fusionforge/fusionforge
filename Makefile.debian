@@ -26,7 +26,7 @@ UBUNTULISTP=1gutsy
 UBULIST=$(UBUNTULIST) $(UBUNTULISTP)
 # Try if a local mirror is available
 LOCALMIRROR=http://localhost/ubuntu
-UBUNTUOP=$(shell wget -q -S http://localhost/ubuntu -O /dev/null && echo "--mirror $(LOCALMIRROR)" || echo "--mirror http://archive.ubuntu.com/ubuntu") --debootstrap debootstrap
+UBUNTUOP=$(shell wget -q -S http://localhost/ubuntu -O /dev/null 2>&1 && echo "--mirror $(LOCALMIRROR)" || echo "--mirror http://archive.ubuntu.com/ubuntu") --debootstrap debootstrap
 DEBIANOP=--debootstrapopts --include=apt
 
 MAJOR=$(shell head -1 $(PKGDIR)/debian/changelog | sed 's/.*(\(.*\)-[^-]*).*/\1/')
@@ -37,11 +37,10 @@ in_bzr_repo:= $(wildcard .bzr/)
 ifeq ($(strip $(in_bzr_repo)),)
 	svnrev=unknown
 else
-	#svnrev=$(shell LANG=C svn info $(in_bzr_repo) | grep Revision | cut -d: -f2| sed 's/ //g')
-	svnrev=$(shell LANG=C bzr log -r-1 | grep "svn revno" | cut -d" " -f3)
+	svnrev=$(shell LANG=C bzr log -r-1 2>&1 | grep "svn revno" | cut -d" " -f3)
 endif
 else
-	svnrev=$(shell LANG=C svn info | grep Revision | cut -d: -f2| sed 's/ //g')
+	svnrev=$(shell LANG=C svn info 2>&1 | grep Revision | cut -d: -f2| sed 's/ //g')
 endif
 
 MINOR=-1
@@ -73,10 +72,6 @@ COWBUILDERCMD=sudo /usr/sbin/cowbuilder --build --basepath $(COWBUILDERBASE)/bas
 PBUILDERCMD=cd $(BUILDFILES) && sudo /usr/sbin/pbuilder --build --basetgz $(PBUILDERTGZ)/base-$(DISTRIB).tgz --configfile $(PBUILDERTGZ)/config $(BUILDFILES)/$(PDSCFILE)
 
 default: list
-
-#default: cowbuilddeb
-
-#make -f Makefile.debian cowbuilddist XDISTRIB=2squeeze LOCALREPO=$(LOCALREPODEB)
 
 list:
 	@echo ======================================================================================
@@ -125,6 +120,12 @@ karmic:    # Simply build karmic packages #
 
 rkarmic:   # Make a karmic repository #
 	$(MAKE) repoubu UBUNTULIST=1karmic
+
+lucid:    # Simply build lucid packages #
+	$(MAKE) cowbuildubu UBUNTULIST=1lucid
+
+rlucid:   # Make a lucid repository #
+	$(MAKE) repoubu UBUNTULIST=1lucid
 
 #:======== Other and Multiple Builds ============#
 documentor_path=/tmp
@@ -201,10 +202,8 @@ pbuildubu: # pbuild ubuntu packages (less recommended) #
 	done
 
 cowbuilddist: cowbuilderenv $(BUILDFILES) $(BUILDRESULT)/$(CHANGEFILE)
-	@echo "Building $(BUILDRESULT)/$(CHANGEFILE)"
 
 pbuilddist: pbuilderenv $(BUILDFILES) $(BUILDRESULT)/$(PCHANGEFILE)
-	@echo "Building $(BUILDRESULT)/$(PCHANGEFILE)"
 
 $(BUILDRESULT)/$(CHANGEFILE): $(BUILDFILES)/$(DSCFILE)
 	$(COWBUILDERCMD)
@@ -213,9 +212,12 @@ $(BUILDRESULT)/$(PCHANGEFILE): $(BUILDFILES)/$(PDSCFILE)
 	$(PBUILDERCMD)
 
 $(BUILDFILES)/$(DSCFILE):
-	@echo "Have to cowbuild $@"
+	@echo "================> Have to cowbuild $@ <=================="
 	cd $(PKGDIR) ; debclean
-	find $(PKGDIR) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v '/.testbox/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -pdumB $(BUILDFILES)/
+	find $(PKGDIR) -type f -or -type l | grep -v '/CVS/' | \
+		grep -v '/.svn/' | grep -v '/.testbox/' | \
+		grep -v rpm-specific | grep -v docs/phpdoc/docs | \
+		grep -v ^./debian/ | cpio -pdumB $(BUILDFILES)/
 	# Set version for given distrib
 	cd $(BUILDFILES)/$(PKGDIR); dch -b -v $(MAJOR)$(MINOR) -D UNRELEASED "This is $(DISTRIB) autobuild"
 	perl -pi -e "s/UNRELEASED/$(DISTRIB)/" $(BUILDFILES)/$(PKGDIR)/debian/changelog
@@ -223,8 +225,12 @@ $(BUILDFILES)/$(DSCFILE):
 	rm -rf $(BUILDFILES)/$(PKGDIR)
 
 $(BUILDFILES)/$(PDSCFILE):
+	@echo "================> Have to pbuild $@ <=================="
 	cd $(PKGDIR) ; debclean
-	find $(PKGDIR) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v '/.testbox/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -pdumB $(BUILDFILES)/
+	find $(PKGDIR) -type f -or -type l | grep -v '/CVS/' | \
+		grep -v '/.svn/' | grep -v '/.testbox/' | \
+		grep -v rpm-specific | grep -v docs/phpdoc/docs | \
+		grep -v ^./debian/ | cpio -pdumB $(BUILDFILES)/
 	# Set version for given distrib
 	cd $(BUILDFILES)/$(PKGDIR); dch -b -v $(MAJOR)$(MINOR)+p -D UNRELEASED "This is $(DISTRIB) autobuild"
 	perl -pi -e "s/UNRELEASED/$(DISTRIB)/" $(BUILDFILES)/$(PKGDIR)/debian/changelog
@@ -236,15 +242,20 @@ $(BUILDFILES)/$(ORIGFILE): $(TARBALLS)/$(ORIGFILE)
 
 $(TARBALLS)/$(ORIGFILE): $(TARBALLS)
 	cd $(PKGDIR) ; debclean
-	find $(PKGDIR) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v '/.testbox/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | grep -v \\.jar$$ | grep -v \\.pdf$$ | grep -v plugins/fckeditor/www/_samples | cpio -o -H ustar | gzip > $(TARBALLS)/$(ORIGFILE)
+	find $(PKGDIR) -type f -or -type l | grep -v '/CVS/' | \
+		grep -v '/.svn/' | grep -v '/.testbox/' | \
+		grep -v rpm-specific | grep -v docs/phpdoc/docs | \
+		grep -v ^./debian/ | grep -v \\.jar$$ | \
+		grep -v \\.pdf$$ | grep -v plugins/fckeditor/www/_samples | \
+		cpio -o -H ustar | gzip > $(TARBALLS)/$(ORIGFILE)
 
 pbuilderenv: $(PBUILDERTGZ) $(PBUILDERTGZ)/base-$(DISTRIB).tgz
-	@echo "Ready for $(DISTRIB)"
+	@echo "=========> Ready for $(DISTRIB)"
 
 cowbuilderenv: $(COWBUILDERBASE) $(COWBUILDERBASE)/base-$(DISTRIB).stamp.update
-	@echo "Ready for $(DISTRIB)"
+	@echo "=========> Ready for $(DISTRIB)"
 
-updatecow:
+forceupdatecow: # Force update of cowbuilder env #
 	rm -f $(COWBUILDERBASE)/base-*.stamp.update
 
 $(COWBUILDERBASE)/base-$(DISTRIB).stamp.update: $(COWBUILDERBASE)/base-$(DISTRIB).stamp
@@ -317,8 +328,8 @@ $(PBUILDERTGZ):
 	mkdir -p $(PBUILDERTGZ)
 
 $(LOCALREPO):
-	sudo mkdir $(LOCALREPO)
-	sudo chown `id -u`.`id -g` $(LOCALREPO)
+	sudo mkdir $@
+	sudo chown `id -u`.`id -g` $@
 
 clean: # Clean $(BUILDPLACE) $(BUILDFILES) $(TARBALLS) (intermediate files) #
 	rm -rf $(BUILDPLACE) $(BUILDFILES) $(TARBALLS) 
