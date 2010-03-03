@@ -17,6 +17,7 @@ gforge/common/docman/engine/parser_oo.php -text
 gforge/common/docman/engine/parser_pdf.php -text
 gforge/common/docman/engine/parser_text.inc.php -text
 gforge/common/docman/engine/parser_text.php -text
+gforge/common/include/Navigation.class.php -text
 gforge/common/include/TextSanitizer.class.php -text
 gforge/common/include/database-mysql.php -text
 gforge/common/include/group_section_texts.php -text

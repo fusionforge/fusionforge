@@ -77,7 +77,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$sectionarray = $this->getSectionArray();
 		$this->handleTransferInformation($sectionarray);
 
-		$GLOBALS['HTML']->advancedSearchBox($sectionarray, $this->groupId, $this->words, $this->isExact);
+		echo $this->getAdvancedSearchBox($sectionarray, $this->groupId, $this->words, $this->isExact);
 	}
 	
 	/**
@@ -302,6 +302,150 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		}
 		return $sections;
 	}
+
+	function getAdvancedSearchBox($sectionsArray, $group_id, $words, $isExact) {
+		$res = '';
+		// display the searchmask
+		$res .= '
+        <form class="ff" name="advancedsearch" action="'.getStringFromServer('PHP_SELF').'" method="post">
+        <input class="ff" type="hidden" name="search" value="1"/>
+        <input class="ff" type="hidden" name="group_id" value="'.$group_id.'"/>
+        <div align="center"><br />
+            <table border="0">
+                <tr class="ff">
+                    <td class="ff" colspan ="2">
+                        <input class="ff" type="text" size="60" name="words" value="'.stripslashes(htmlspecialchars($words)).'" />
+                        <input class="ff" type="submit" name="submitbutton" value="'._('Search').'" />
+                    </td>
+                </tr>
+                <tr class="ff">
+                    <td class="ff" valign="top">
+                        <input class="ff" type="radio" name="mode" value="'.SEARCH__MODE_AND.'" '.($isExact ? 'checked="checked"' : '').' />'._('with all words').'
+                    </td>
+                    <td class="ff">
+                        <input class="ff" type="radio" name="mode" value="'.SEARCH__MODE_OR.'" '.(!$isExact ? 'checked="checked"' : '').' />'._('with one word').'
+                    </td>
+                </tr>
+            </table><br /></div>'
+			. $this->createSubSections($sectionsArray) .'
+        </form>';
+
+
+		//create javascript methods for select none/all
+		$res .= '
+        <script type="text/javascript">
+            <!-- method for disable/enable checkboxes
+            function setCheckBoxes(parent, checked) {
+
+
+                for (var i = 0; i < document.advancedsearch.elements.length; i++)
+                    if (document.advancedsearch.elements[i].type == "checkbox") 
+                            if (document.advancedsearch.elements[i].name.substr(0, parent.length) == parent)
+                                document.advancedsearch.elements[i].checked = checked;
+                }
+            //-->
+        </script>
+        ';
+		return $res;
+	}
+
+	function createSubSections($sectionsArray) {
+		global $group_subsection_names;
+
+		$countLines = 0;
+		foreach ($sectionsArray as $section) {
+			if(is_array($section)) {
+				$countLines += (3 + count ($section));
+			} else {
+				//2 lines one for section name and one for checkbox
+				$countLines += 3;
+			}
+		}
+
+ 		$maxCol = 3;
+ 		$breakLimit = ceil($countLines/$maxCol);
+		$break = $breakLimit;
+		$countLines = 0;
+ 		$countCol = 1;
+ 
+		$return = '
+			<table width="100%" border="0" cellspacing="0" cellpadding="1">
+				<tr class="tableheader">
+					<td>
+						<table width="100%" cellspacing="0" border="0">
+							<tr class="tablecontent">
+								<!--<td colspan="2">'._('Search in').':</td-->
+								<td align="right">'._('Select').' <a href="javascript:setCheckBoxes(\'\', true)">'._('all').'</a> / <a href="javascript:setCheckBoxes(\'\', false)">'._('none').'</a></td>
+							</tr>
+							<tr class="tablecontent">
+								<td colspan="3">&nbsp;</td>
+							</tr>
+							<tr valign="top" class="tablecontent align-center">
+								<td>';
+		foreach($sectionsArray as $key => $section) {
+			$oldcountlines = $countLines;
+			if (is_array($section)) {
+				$countLines += (3 + count ($section));
+			} else {
+				$countLines += 3;
+			}
+				
+			if ($countLines >= $break) {
+ 				// if we are closer to the limit with this one included, then
+ 				// it's better to include it.
+ 				if (($countCol < $maxCol) && ($countLines - $break) >= ($break - $oldcountlines)) {
+					$return .= '</td><td>';
+ 					$countCol++;
+					$break += $breakLimit;
+				}
+			}
+		
+			$return .= '<table width="90%" border="0" cellpadding="1" cellspacing="0">
+							<tr><td><table width="100%" border="0" cellspacing="0" cellpadding="3">
+							<tr>
+								<td cellspacing="0">
+									<a href="#'.$key.'">'.$group_subsection_names[$key].'</a>'
+				.'	</td>
+								<td align="right">'
+				._('Select').' <a href="javascript:setCheckBoxes(\''.$key.'\', true)">'._('all').'</a> / <a href="javascript:setCheckBoxes(\''.$key.'\', false)">'._('none').'</a>
+								</td>
+							</tr>
+							<tr class="tablecontent">
+								<td colspan="2">';
+								
+			if (!is_array($section)) {
+				$return .= '		<input type="checkbox" name="'.urlencode($key).'"';
+				if (isset($GLOBALS[urlencode($key)]))
+					$return .= ' checked="checked" ';
+				$return .= ' /></input>'.$group_subsection_names[$key].'<br />';
+			}
+			else
+				foreach($section as $underkey => $undersection) {
+					$return .= '	<input type="checkbox" name="'.urlencode($key.$underkey).'"';
+					if (isset($GLOBALS[urlencode($key.$underkey)]))
+						$return .= ' checked="checked" ';
+					$return .= ' />'.$undersection.'<br />';				
+					
+				}
+				
+			$return .=		'	</td>
+							</tr>
+						</table></td></tr></table><br />';
+						
+			if ($countLines >= $break) {
+				if (($countLines - $break) < ($break - $countLines)) {
+					$return .= '</td><td width="33%">';
+					$break += $breakLimit;
+				}
+			}
+		}
+		
+		return $return.'		</td>
+							</tr>
+						</table></td></tr></table>';
+
+	}
+
 }
 
 // Local Variables:

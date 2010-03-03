@@ -7,7 +7,7 @@
  */
 
 /* HTML elements */
-body {color: rgb(68, 68, 68); background-color: rgb(247, 247, 247); }
+body {color: rgb(68, 68, 68); background-color: rgb(247, 247, 247); text-align: left; }
 form {margin:0; }
 img {border:0; }
 h1 {margin:0; }
@@ -15,11 +15,10 @@ div#maindiv {margin:1em; }
 
 a {text-decoration:none; color:rgb(1, 73, 144); }
 a:hover {text-decoration: underline; color: rgb(247, 0, 0); }
-a.userlink {color: white; }
-a.userlink:hover {text-decoration: underline; color: white;}
-a.userlink:visited {text-decoration: none; color: white; }
+a.userlink, #searchBox a {color: white; }
+a.userlink:hover, #searchBox a:hover {text-decoration: underline; color: white;}
+a.userlink:visited, #searchBox a:visited {text-decoration: none; color: white; }
 th, td {text-align:left; border:none; }
-#mydoc {text-align: left;}
 input[type="text"], input[type="password"], textarea {
 	width: auto;
 }
