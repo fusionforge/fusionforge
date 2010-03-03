@@ -21,6 +21,7 @@ DEBIANLIST=1lenny 2squeeze 3sid
 DEBIANLISTP=1etch
 DEBLIST=$(DEBIANLIST) $(DEBIANLISTP)
 UBUNTULIST=1hardy 1intrepid 1jaunty 1karmic
+UBUNTULIST=1karmic 1lucid
 UBUNTULISTP=1gutsy
 UBULIST=$(UBUNTULIST) $(UBUNTULISTP)
 # Try if a local mirror is available
@@ -28,14 +29,16 @@ LOCALMIRROR=http://localhost/ubuntu
 UBUNTUOP=$(shell wget -q -S http://localhost/ubuntu -O /dev/null && echo "--mirror $(LOCALMIRROR)" || echo "--mirror http://archive.ubuntu.com/ubuntu") --debootstrap debootstrap
 DEBIANOP=--debootstrapopts --include=apt
 
-gfversion=$(shell head -1 $(PKGDIR)/debian/changelog | sed 's/.*(\(.*\)-[^-]*).*/\1/')
+MAJOR=$(shell head -1 $(PKGDIR)/debian/changelog | sed 's/.*(\(.*\)-[^-]*).*/\1/')
 in_svn_repo:= $(wildcard .svn/) 
 ifeq ($(strip $(in_svn_repo)),) 
-in_bzr_repo:= $(shell bzr info | grep parent | cut -d: -f2-)
+#in_bzr_repo:= $(shell bzr info | grep parent | cut -d: -f2-)
+in_bzr_repo:= $(wildcard .bzr/)
 ifeq ($(strip $(in_bzr_repo)),)
 	svnrev=unknown
 else
-	svnrev=$(shell LANG=C svn info $(in_bzr_repo) | grep Revision | cut -d: -f2| sed 's/ //g')
+	#svnrev=$(shell LANG=C svn info $(in_bzr_repo) | grep Revision | cut -d: -f2| sed 's/ //g')
+	svnrev=$(shell LANG=C bzr log -r-1 | grep "svn revno" | cut -d" " -f3)
 endif
 else
 	svnrev=$(shell LANG=C svn info | grep Revision | cut -d: -f2| sed 's/ //g')
@@ -55,14 +58,14 @@ UBUHOOK="--hookdir $(CURDIR)/hook/ubuntu"
 UBUHOOK="--components 'main universe' --debootstrapopts --exclude=udev,pcmciautils,initramfs-tools"
 UBUHOOK=--components "main universe" --hookdir $(CURDIR)/hook/ubuntu
 
-ORIGFILE=$(PKGNAME)_$(gfversion).orig.tar.gz
-DSCFILE=$(PKGNAME)_$(gfversion)$(MINOR).dsc
-PDSCFILE=$(PKGNAME)_$(gfversion)$(MINOR)+p.dsc
-CHANGEFILE=$(PKGNAME)_$(gfversion)$(MINOR)_$(ARCH).changes
-PCHANGEFILE=$(PKGNAME)_$(gfversion)$(MINOR)+p_$(ARCH).changes
+ORIGFILE=$(PKGNAME)_$(MAJOR).orig.tar.gz
+DSCFILE=$(PKGNAME)_$(MAJOR)$(MINOR).dsc
+PDSCFILE=$(PKGNAME)_$(MAJOR)$(MINOR)+p.dsc
+CHANGEFILE=$(PKGNAME)_$(MAJOR)$(MINOR)_$(ARCH).changes
+PCHANGEFILE=$(PKGNAME)_$(MAJOR)$(MINOR)+p_$(ARCH).changes
 
 # Quite heavy version, but still requires to be root
-COWBUILDERCMD=cd $(BUILDPLACE) && dpkg-source -x $(BUILDFILES)/$(DSCFILE) ; cd $(BUILDPLACE)/$(PKGNAME)-$(gfversion) && pdebuild --pbuilder cowbuilder --buildresult $(BUILDRESULT) -- --basepath $(COWBUILDERBASE)/base-$(DISTRIB).cow --buildplace $(BUILDPLACE) --aptcache $(APTCACHE) ; rm -rf $(BUILDPLACE)/$(PKGNAME)-$(gfversion) 
+COWBUILDERCMD=cd $(BUILDPLACE) && dpkg-source -x $(BUILDFILES)/$(DSCFILE) ; cd $(BUILDPLACE)/$(PKGNAME)-$(MAJOR) && pdebuild --pbuilder cowbuilder --buildresult $(BUILDRESULT) -- --basepath $(COWBUILDERBASE)/base-$(DISTRIB).cow --buildplace $(BUILDPLACE) --aptcache $(APTCACHE) ; rm -rf $(BUILDPLACE)/$(PKGNAME)-$(MAJOR) 
 # This one is with sudo and probably faster
 COWBUILDERCMD=sudo /usr/sbin/cowbuilder --build --basepath $(COWBUILDERBASE)/base-$(DISTRIB).cow --configfile $(COWBUILDERBASE)/config $(BUILDFILES)/$(DSCFILE) $(DEBBUILDOPTS)
 
@@ -175,7 +178,7 @@ repoubu: cowbuildubu
 	done
 
 cowbuildtest:
-	@echo "Will build $(PKGNAME)_$(gfversion)$(MINOR)$(DISTRIB)"
+	@echo "Will build $(PKGNAME)_$(MAJOR)$(MINOR)$(DISTRIB)"
 
 cowbuilddeb: # ***** This is the one to cowbuild debian packages ***** #
 	@for dist in $(DEBIANLIST); do \
@@ -210,10 +213,11 @@ $(BUILDRESULT)/$(PCHANGEFILE): $(BUILDFILES)/$(PDSCFILE)
 	$(PBUILDERCMD)
 
 $(BUILDFILES)/$(DSCFILE):
+	@echo "Have to cowbuild $@"
 	cd $(PKGDIR) ; debclean
 	find $(PKGDIR) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v '/.testbox/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -pdumB $(BUILDFILES)/
 	# Set version for given distrib
-	cd $(BUILDFILES)/$(PKGDIR); dch -b -v $(gfversion)$(MINOR) -D UNRELEASED "This is $(DISTRIB) autobuild"
+	cd $(BUILDFILES)/$(PKGDIR); dch -b -v $(MAJOR)$(MINOR) -D UNRELEASED "This is $(DISTRIB) autobuild"
 	perl -pi -e "s/UNRELEASED/$(DISTRIB)/" $(BUILDFILES)/$(PKGDIR)/debian/changelog
 	cd $(BUILDFILES) ; dpkg-source -b $(PKGDIR)
 	rm -rf $(BUILDFILES)/$(PKGDIR)
@@ -222,7 +226,7 @@ $(BUILDFILES)/$(PDSCFILE):
 	cd $(PKGDIR) ; debclean
 	find $(PKGDIR) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v '/.testbox/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -pdumB $(BUILDFILES)/
 	# Set version for given distrib
-	cd $(BUILDFILES)/$(PKGDIR); dch -b -v $(gfversion)$(MINOR)+p -D UNRELEASED "This is $(DISTRIB) autobuild"
+	cd $(BUILDFILES)/$(PKGDIR); dch -b -v $(MAJOR)$(MINOR)+p -D UNRELEASED "This is $(DISTRIB) autobuild"
 	perl -pi -e "s/UNRELEASED/$(DISTRIB)/" $(BUILDFILES)/$(PKGDIR)/debian/changelog
 	cd $(BUILDFILES) ; dpkg-source -b $(PKGNAME)
 	rm -rf $(BUILDFILES)/$(PKGDIR)
@@ -237,16 +241,23 @@ $(TARBALLS)/$(ORIGFILE): $(TARBALLS)
 pbuilderenv: $(PBUILDERTGZ) $(PBUILDERTGZ)/base-$(DISTRIB).tgz
 	@echo "Ready for $(DISTRIB)"
 
-cowbuilderenv: $(COWBUILDERBASE) $(COWBUILDERBASE)/base-$(DISTRIB).stamp
+cowbuilderenv: $(COWBUILDERBASE) $(COWBUILDERBASE)/base-$(DISTRIB).stamp.update
 	@echo "Ready for $(DISTRIB)"
+
+updatecow:
+	rm -f $(COWBUILDERBASE)/base-*.stamp.update
+
+$(COWBUILDERBASE)/base-$(DISTRIB).stamp.update: $(COWBUILDERBASE)/base-$(DISTRIB).stamp
 	sudo /usr/sbin/cowbuilder --update $(HOOK) --distribution $(DISTRIB) --basepath $(COWBUILDERBASE)/base-$(DISTRIB).cow --configfile $(COWBUILDERBASE)/config $(DISTROOP)
+	touch $@
 
 $(PBUILDERTGZ)/base-$(DISTRIB).tgz: $(PBUILDERTGZ)/config
 	sudo /usr/sbin/pbuilder --create --distribution $(DISTRIB) --basetgz $(PBUILDERTGZ)/base-$(DISTRIB).tgz --configfile $(PBUILDERTGZ)/config $(DISTROOP)
 
 $(COWBUILDERBASE)/base-$(DISTRIB).stamp: $(COWBUILDERBASE)/config
 	sudo /usr/sbin/cowbuilder --create $(HOOK) --distribution $(DISTRIB) --basepath $(COWBUILDERBASE)/base-$(DISTRIB).cow --configfile $(COWBUILDERBASE)/config $(DISTROOP)
-	touch $(COWBUILDERBASE)/base-$(DISTRIB).stamp
+	touch $@.update
+	touch $@
 
 $(PBUILDERTGZ)/config: /usr/sbin/pbuilder
 	echo "APTCACHE=$(APTCACHE)" > $(PBUILDERTGZ)/config
@@ -273,6 +284,7 @@ localrepo: $(LOCALREPO) $(LOCALREPO)/conf $(LOCALREPO)/conf/distributions
 reprepro: $(LOCALREPO)/pool/main/$(PKGLETTER)/$(PKGNAME)/$(DSCFILE) # Install in repository
 
 $(LOCALREPO)/pool/main/$(PKGLETTER)/$(PKGNAME)/$(DSCFILE): $(BUILDRESULT)/$(CHANGEFILE)
+	@echo "Installing $(BUILDRESULT)/$(CHANGEFILE) in $@"
 	cd $(BUILDRESULT); reprepro -Vb $(LOCALREPO) include $(DISTRIB) $(CHANGEFILE)
 
 $(LOCALREPO)/conf/distributions:
@@ -284,7 +296,7 @@ $(LOCALREPO)/conf/distributions:
 	echo "UDebComponents: main" ; \
 	echo "Architectures: amd64 i386 source" ; \
 	echo "Origin: $(ORIGIN)" ; \
-	echo "Version: 4.7" ; \
+	echo "Version: 5.0" ; \
 	echo "Description: My $(FUSIONFORGE) $$dist repository" ; \
 	echo "SignWith: $(SIGNKEY)" ; \
 	echo "" ; done >> $(LOCALREPO)/conf/distributions
