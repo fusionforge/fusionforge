@@ -369,6 +369,7 @@ if ($project->usesMail()) {
 	$link_content = $HTML->getMailPic('') . '&nbsp;' . _('Mailing Lists');
 	print util_make_link( '/mail/?group_id='.$group_id, $link_content);
 	$n = project_get_mail_list_count($group_id);
+	echo ' ';
 	printf(ngettext('(<strong>%1$s</strong> public mailing list)', '(<strong>%1$s</strong> public mailing lists)', $n), $n);
 	echo '</div>';
 }
@@ -403,7 +404,7 @@ if ($project->usesSurvey()) {
 	echo '<div class="public-area-box">';
 	$link_content = $HTML->getSurveyPic('') . '&nbsp;' . _('Surveys');
 	echo util_make_link( '/survey/?group_id='.$group_id, $link_content);
-	echo ' ( <strong>'. project_get_survey_count($group_id) .'</strong> ' . _('surveys').'  )';
+	echo ' (<strong>'. project_get_survey_count($group_id) .'</strong> ' . _('surveys').')';
 	echo '</div>';
 }
 
