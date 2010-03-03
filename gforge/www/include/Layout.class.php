@@ -87,34 +87,26 @@ class Layout extends Error {
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo _('en') ?>" lang="<?php echo _('en') ?>">
-
-  <head>
+<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title><?php echo $params['title']; ?></title>
-	<?php $this->headerLink(); ?>
+	<?php
+		$this->headerLink();
 	
-	<?php	if (isset($GLOBALS['group_id'])) { 
+		if (isset($GLOBALS['group_id'])) {
 			$activity = '<link rel="alternate" title="' . $GLOBALS['sys_name'] . ' - New Activity RSS" href="'. util_make_url ('/export/rss20_activity.php?group_id='.$GLOBALS['group_id']).'" type="application/rss+xml"/>';
 			echo $activity;
 		}
-	?>
-	<?php $this->headerCSS(); ?>
 
-	<script language="JavaScript" type="text/javascript">
-	<!--
+		$this->headerCSS();
 
-	function admin_window(adminurl) {
-		AdminWin = window.open( adminurl, 'AdminWindow','scrollbars=yes,resizable=yes, toolbar=yes, height=400, width=400, top=2, left=2');
-		AdminWin.focus();
-	}
-	function help_window(helpurl) {
-		HelpWin = window.open( helpurl,'HelpWindow','scrollbars=yes,resizable=yes,toolbar=no,height=400,width=400');
-	}
-	// -->
-	<?php plugin_hook ("javascript",false) ; ?>
-	</script>
-</head>
-<?php 
+        echo '
+	<script type="text/javascript" src="'. util_make_uri('/js/common.js') .'"></script>
+	<script type="text/javascript">';
+        plugin_hook ("javascript",false);
+        echo '</script>';
+
+        echo "\n".'</head>'."\n";
 	} 
 	
 	function headerCSS() {

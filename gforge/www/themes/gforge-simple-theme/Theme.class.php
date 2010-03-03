@@ -55,7 +55,6 @@ class Theme extends Layout {
 		$this->rootindex = $GLOBALS['sys_custom_path'] . '/index_std.php';
 		$this->Error();
 
-
 	}
 
 	/**
