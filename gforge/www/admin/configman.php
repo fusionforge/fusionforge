@@ -34,6 +34,8 @@ require_once $gfwww.'admin/admin_utils.php';
 
 site_admin_header(array('title'=>_('Site admin')));
 
+$gfcgfile = get_absolute_filename($gfcgfile);
+
 /**
  * printSelection - prints the select box for the user to get the files to edit
  *
@@ -240,6 +242,28 @@ function updateVars($vars,$filepath) {
 
 
 site_admin_footer(array());
+
+function get_absolute_filename($filename) {
+	// Check for absolute path
+	if (realpath($filename) == $filename) {
+		return $filename;
+	}
+
+	// Otherwise, treat as relative path
+	$paths = explode(':', get_include_path());
+	foreach ($paths as $path) {
+		if (substr($path, -1) == '/') {
+			$fullpath = $path.$filename;
+		} else {
+			$fullpath = $path.'/'.$filename;
+		}
+		if (file_exists($fullpath)) {
+			return $fullpath;
+		}
+	}
+
+	return false;
+}
 
 // Local Variables:
 // mode: php
