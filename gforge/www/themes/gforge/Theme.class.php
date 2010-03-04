@@ -268,13 +268,6 @@ class Theme extends Layout {
 		if ($count < 1) {
 			return;
 		}
-		// The width for each tab is given in percent. Note
-		// that an integer value is used as Opera doesn't seem
-		// to interpret fractional percentage values:
-		// http://www.christianmontoya.com/2007/06/26/fluid-widths-and-point-nine-nine-percent/
-		$width=intval((100/$count));
-		$rest_width=100-$count*$width;
-
         $return = '
 		<!-- start tabs -->
 		<table class="tabGenerator width-100p100" summary="" ';
@@ -287,7 +280,11 @@ class Theme extends Layout {
  
         $folder = $this->imgroot.($nested ? 'bottomtab-new/' : 'toptab-new/');
 
+	$accumulated_width = 0;
         for ($i=0; $i<$count; $i++) {
+		$tabwidth = intval(ceil(($i+1)*100/$count)) - $accumulated_width ;
+		$accumulated_width += $tabwidth ;
+
             if ($selected == $i) {
                 $left_img   = $folder.'selected-left.gif';
                 $middle_img = $folder.'selected-middle.gif';
@@ -324,7 +321,7 @@ class Theme extends Layout {
             $return .= '</td>' . "\n";
 
             // middle part
-            $return .= '<td class="tg-middle" style="width:'.$width.'%;">' . "\n";
+            $return .= '<td class="tg-middle" style="width:'.$tabwidth.'%;">' . "\n";
             $return .= '<div';
             if ($selected == $i) {
 		    $return .= ' class="selected"';
@@ -358,20 +355,6 @@ class Theme extends Layout {
 		    $return .= '</div>' . "\n";
 		    $return .= '</td>' . "\n";
 	    }
-	}
-
-	// create a partial tab if there is any rest-width
-	if ($rest_width > 0) {
-		// left part
-		$return .= '<td class="tg-left">' . "\n";
-		$return .= '<div><div' . ($nested ? ' class="nested"' : '') . ">\n";
-		$return .= '</div></div>' . "\n";
-		$return .= '</td>' . "\n";
-		
-		$return .= '<td class="tg-middle" style="width:'.$rest_width.'%;">' . "\n";
-		$return .= '<div><div' . ($nested ? ' class="nested"' : '') . ">\n";
-		$return .= '</div></div>' . "\n";
-		$return .= '</td>' . "\n";
 	}
 
         $return .= '</tr>
