@@ -2137,7 +2137,11 @@ class Group extends Error {
 		if (db_numrows($admin_group) > 0) {
 			$idadmin_group = db_result($admin_group,0,'user_id');
 		} else {
-			$idadmin_group = 1;
+			$idadmin_group = $user->getID();
+			db_query_params ('INSERT INTO user_group (user_id, group_id, admin_flags) VALUES ($1, $2, $3)',
+					 array ($idadmin_group,
+						$this->getID(),
+						'A')) ;
 		}
 
 		$role = new Role($this);
