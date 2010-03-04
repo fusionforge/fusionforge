@@ -3516,6 +3516,7 @@ gforge/www/plugins/fckeditor -text
 gforge/www/plugins/helloworld -text
 gforge/www/plugins/mailman -text
 gforge/www/plugins/mantis -text
+gforge/www/plugins/mediawiki -text
 gforge/www/plugins/online_help -text
 gforge/www/plugins/projects_hierarchy -text
 gforge/www/plugins/quota_management -text
