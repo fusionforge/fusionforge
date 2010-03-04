@@ -212,7 +212,6 @@ class Theme extends Layout {
 			$tabwidth = intval(ceil(($i+1)*100/$count)) - $accumulated_width ;
 			$accumulated_width += $tabwidth ;
 
-		for ($i=0; $i<$count; $i++) {
 			if ($selected == $i) {
 				$left_img   = $folder.'selected-left.gif';
 				$middle_img = $folder.'selected-middle.gif';
