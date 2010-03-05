@@ -3936,7 +3936,6 @@ tools/simple-cdd/profiles/fusionforge.png -text svneol=unset#unset
 tools/simple-cdd/profiles/fusionforge.udebs -text
 tools/simple-cdd/profiles/templates/fusionforge.conf -text
 tools/simple-cdd/profiles/templates/fusionforge.preseed -text
-tools/simple-cdd/profiles/templates/fusionforge.preseed.fr -text
 tools/simulate_cron.pl -text
 tools/tab2gettext.pl -text
 tools/tab2gettext.sh -text
