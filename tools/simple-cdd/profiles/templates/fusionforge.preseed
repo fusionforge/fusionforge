@@ -263,7 +263,6 @@ tasksel tasksel/first multiselect standard
 d-i pkgsel/include string vim ntpdate ntp build-essential debconf-utils \
 exim4-daemon-heavy mailman proftpd apache2-mpm-prefork openssl \
 sudo devscripts fakeroot svn-buildpackage dpatch debhelper reprepro openssh-server
-#sidentd
 
 # Some versions of the installer can report back on what software you have
 # installed, and what software you use. The default is not to report back,
@@ -365,29 +364,3 @@ echo 'SYSLOGD="-p /dev/log -a /var/lib/gforge/chroot/dev/log"' >> /target/etc/de
 echo '/var/run/postgresql /var/lib/gforge/chroot/var/run/postgresql none bind' >> /target/etc/fstab ; \
 echo 'syntax on' >> /target/etc/vim/vimrc.local ;
 
-
-#in-target /etc/init.d/postgresql-8.4 start ; \
-#in-target echo "===== PAUSE =====" ; \
-#in-target sleep 600 ; \
-#UCF_FORCE_CONFFNEW=yes apt-install -o DPkg::Options::=--force-confnew fusionforge-full ; \
-#
-
-##d-i preseed/late_command	string	apt-install zsh; \
-##in-target mkdir -p /etc/apache/ssl.crt /etc/apache/ssl.key /usr/share/gforge/scm ; \
-##in-target /usr/sbin/make-ssl-cert generate-default-snakeoil ; \
-##in-target ln -s /etc/ssl/certs/ssl-cert-snakeoil.pem /etc/apache/ssl.crt/server.crt ; \
-##in-target ln -s /etc/ssl/private/ssl-cert-snakeoil.key /etc/apache/ssl.key/server.key ; \
-##in-target chmod o+rw /dev/null ; \
-##apt-install postgresql-8.1 ; \
-##in-target mount /proc ; \
-##in-target /etc/init.d/postgresql-8.1 start ; \
-##UCF_FORCE_CONFFNEW=yes apt-install -o DPkg::Options::=--force-confnew gforge gforge-plugin-scmcvs gforge-plugin-scmsvn ; \
-##UCF_FORCE_CONFFNEW=yes apt-install -o DPkg::Options::=--force-confnew gforge-plugins-extra ; \
-##in-target ln -s /etc/gforge/httpd.conf /etc/apache2/conf.d/gforge.httpd.conf ; \
-##in-target a2enmod vhost_alias ; \
-##in-target a2dissite default ; \
-##in-target ln -s /var/lib/gforge/chroot/cvsroot /cvsroot ; \
-##in-target ln -s /var/lib/gforge/chroot/svnroot /svnroot ; \
-##echo 'SYSLOGD="-p /dev/log -a /var/lib/gforge/chroot/dev/log"' >> /target/etc/default/syslogd ; \
-##echo '/var/run/postgresql /var/lib/gforge/chroot/var/run/postgresql none bind' >> /target/etc/fstab ; \
-##echo 'syntax on' >> /target/etc/vim/vimrc.local ;
