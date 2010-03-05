@@ -14,7 +14,7 @@ then
 	pg_version_down=`pg_lsclusters | grep 5432 | grep down | cut -d' ' -f1`
 	if [ "x$pg_version_down" != "x" ] 
 	then
-		update-rc.d postgresql-$pg_version_down start
+		invoke-rc.d postgresql-$pg_version_down start
 	fi
 	pg_version=`pg_lsclusters | grep 5432 | grep online | cut -d' ' -f1`
 	if [ "x$pg_version" != "x" ] 
