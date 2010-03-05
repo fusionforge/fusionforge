@@ -37,6 +37,12 @@ function get_pg_version() {
         # postgresql on debian
         if [ -f /usr/bin/pg_lsclusters ]
         then
+		# Start if down
+		pg_version_down=`/usr/bin/pg_lsclusters | grep 5432 | grep down | cut -d' ' -f1`
+		if [ "x$pg_version_down" != "x" ]
+		then
+			invoke-rc.d postgresql-$pg_version_down start
+		fi
                 pg_version=`/usr/bin/pg_lsclusters | grep 5432 | grep online | cut -d' ' -f1`
 		return
         fi
