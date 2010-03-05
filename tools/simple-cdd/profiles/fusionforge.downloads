@@ -48,7 +48,7 @@ zsh
 sudo
 devscripts
 fakeroot
-pbuilder
+cowdancer
 svn-buildpackage
 dpatch
 debhelper
