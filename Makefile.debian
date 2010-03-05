@@ -28,6 +28,8 @@ UBULIST=$(UBUNTULIST) $(UBUNTULISTP)
 LOCALMIRROR=http://localhost/ubuntu
 UBUNTUOP=$(shell wget -q -S http://localhost/ubuntu -O /dev/null 2>&1 && echo "--mirror $(LOCALMIRROR)" || echo "--mirror http://archive.ubuntu.com/ubuntu") --debootstrap debootstrap
 DEBIANOP=--debootstrapopts --include=apt
+ASKPASS=--ask-passphrase
+ASKPASS=
 
 MAJOR=$(shell head -1 $(PKGDIR)/debian/changelog | sed 's/.*(\(.*\)-[^-]*).*/\1/')
 in_svn_repo:= $(wildcard .svn/) 
@@ -297,7 +299,7 @@ reprepro: $(LOCALREPO)/pool/main/$(PKGLETTER)/$(PKGNAME)/$(DSCFILE) # Install in
 
 $(LOCALREPO)/pool/main/$(PKGLETTER)/$(PKGNAME)/$(DSCFILE): $(BUILDRESULT)/$(CHANGEFILE)
 	@echo "Installing $(BUILDRESULT)/$(CHANGEFILE) in $@"
-	cd $(BUILDRESULT); reprepro -Vb $(LOCALREPO) include $(DISTRIB) $(CHANGEFILE)
+	cd $(BUILDRESULT); reprepro $(ASKPASS) -Vb $(LOCALREPO) include $(DISTRIB) $(CHANGEFILE)
 
 $(LOCALREPO)/conf/distributions:
 	for xdist in $(DISTRIBLIST) ; do \
