@@ -72,6 +72,8 @@ gforge/debian/NEWS.Debian -text
 gforge/debian/README.source -text
 gforge/debian/compat -text
 gforge/debian/dsf-in/common.links -text
+gforge/debian/dsf-in/plugin-contribtracker.postinst -text
+gforge/debian/dsf-in/plugin-contribtracker.prerm -text
 gforge/debian/dsf-in/plugin-extratabs.postinst -text
 gforge/debian/dsf-in/plugin-extratabs.prerm -text
 gforge/debian/dsf-in/plugin-globalsearch.postinst -text
@@ -113,8 +115,6 @@ gforge/debian/dsf-po/fi.po -text
 gforge/debian/dsf-po/gl.po -text
 gforge/debian/dsf-po/pt.po -text
 gforge/debian/dsf-po/ru.po -text
-gforge/debian/gforge-plugin-contribtracker.postinst -text
-gforge/debian/gforge-plugin-contribtracker.prerm -text
 gforge/debian/patches/disable-dav.dpatch -text
 gforge/debian/patches/use-nusoap-from-distro.dpatch -text
 gforge/debian/patches/use-snoopy-from-distro.dpatch -text
