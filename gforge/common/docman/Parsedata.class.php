@@ -3,6 +3,7 @@
  * FusionForge document manager
  *
  * Copyright 2005, Fabio Bertagnin
+ * Copyright 2009-2010, Franck Villaume
  *
  * This file is part of FusionForge.
  *
@@ -26,7 +27,7 @@ class Parsedata {
 	/**
 	 *  Constructor.
 	 *
-	 *	@param	string
+	 *	@param  string
 	 *	@return true
 	 */
 	 var $parsers;
@@ -48,30 +49,30 @@ class Parsedata {
 		{ 
 			// parse data if good parser exists
 			$parser = $this->p_path.$this->parsers[$filetype];
-			$filename = rand(10000,99999);
-			$filename = "/tmp/gfd$filename.tmp";
+			$filename = tempnam("/tmp/","tmp");
 			$fp = fopen ($filename, "w");
 			fwrite ($fp, $data1);
 			fclose ($fp);
 			
 			$cmd = "php -f $parser $filename";
 			$rep = shell_exec ($cmd);
-			unlink ("$filename");
+			if ( file_exists ($filename ) ) {
+				unlink($filename);
+			}
 			
 		}
 		// always parse titre and description
-		$data2 = utf8_decode(" $title");
-		$data2 .= utf8_decode(" $description");
+		$data2 = utf8_decode("$title $description");
 		// $data2 = ereg_replace ("\n", " ", $data2);
 		// temporary file for traitement
-		$filename = rand(10000,99999);
-		$filename = "/tmp/gfi$filename.tmp";
+		$filename = tempnam("/tmp", "tmp");
 		$fp = fopen ($filename, "w");
 		fwrite ($fp, $data2);
 		fclose ($fp);
 		$cmd = $this->p_path.$this->parsers["text/plain"];
 		$cmd = "php -f $cmd $filename";
 		$rep1 = shell_exec ($cmd);
+		// dont need to unlink the filename because parser_text already remove it
 		return ereg_replace ("\n", " ", "$rep $rep1");
 	}
 	

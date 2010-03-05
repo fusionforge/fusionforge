@@ -5,6 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright 2010, Franck Villaume
  *
  * This file is part of FusionForge.
  *
@@ -41,12 +42,12 @@ class Document extends Error {
 	 *
 	 * @var	 object  $Group.
 	 */
-	  /**
-       * The Search engine path.
-       *
-       * @var  string $engine_path
-       */
-       var $engine_path;
+	/**
+	 * The Search engine path.
+	 *
+	 * @var  string $engine_path
+	 */
+	var $engine_path;
 
 	/**
 	 *  Constructor.
@@ -143,10 +144,9 @@ class Document extends Error {
 		}
 		$data1 = $data;
 
-         // key words for in-document search
-         $kw = new Parsedata ($this->engine_path);
-         $kwords = $kw->get_parse_data (stripslashes($data1), htmlspecialchars($title1), htmlspecialchars($description), $filetype);
-         // $kwords = "";
+		// key words for in-document search
+		$kw = new Parsedata ($this->engine_path);
+		$kwords = $kw->get_parse_data (stripslashes($data1), htmlspecialchars($title), htmlspecialchars($description), $filetype);
 
 		$filesize = strlen($data);
 
@@ -487,12 +487,19 @@ class Document extends Error {
 		}
 
 		if ($data) {
-			$res = db_query_params ('UPDATE doc_data SET data=$1, filesize=$2 WHERE group_id=$3 AND docid=$4',
+			$data1 = $data;
+
+			// key words for in-document search
+			$kw = new Parsedata ($this->engine_path);
+			$kwords = $kw->get_parse_data (stripslashes($data1), htmlspecialchars($title), htmlspecialchars($description), $filetype);
+
+			$res = db_query_params ('UPDATE doc_data SET data=$1, filesize=$2, data_words=$3 WHERE group_id=$4 AND docid=$5',
 						array (base64_encode(stripslashes($data)),
 						       strlen($data),
+						       $kwords,
 						       $this->Group->getID(),
 						       $this->getID())) ;
-			
+
 			if (!$res || db_affected_rows($res) < 1) {
 				$this->setOnUpdateError(db_error());
 				return false;

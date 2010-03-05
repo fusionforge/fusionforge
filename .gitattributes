@@ -12,6 +12,7 @@ gforge/NEWS -text
 gforge/backend/shell/apache.sh svneol=native#unset
 gforge/common/docman/Parsedata.class.php -text
 gforge/common/docman/engine/parser_doc.php -text
+gforge/common/docman/engine/parser_html.php -text
 gforge/common/docman/engine/parser_list.txt -text
 gforge/common/docman/engine/parser_oo.php -text
 gforge/common/docman/engine/parser_pdf.php -text
