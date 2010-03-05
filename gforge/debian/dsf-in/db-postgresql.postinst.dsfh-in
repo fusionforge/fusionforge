@@ -16,7 +16,7 @@ then
 		pg_version_down=`pg_lsclusters | grep 5432 | grep down | cut -d' ' -f1`
 		if [ "x$pg_version_down" != "x" ]
 		then
-			invoke-rc.d postgresql-$pg_version start
+			invoke-rc.d postgresql-$pg_version_down start
 			sleep $i
 		fi
 	done
