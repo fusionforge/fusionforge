@@ -356,18 +356,13 @@ d-i preseed/late_command string apt-install zsh; \
 in-target chsh -s /bin/zsh ; \
 in-target chmod o+rw /dev/null ; \
 apt-install postgresql-8.4; \
-in-target mv /usr/sbin/policy-rc.d /usr/sbin/policy-rc.d.disabledaemon ; \
-in-target /usr/sbin/invoke-rc.d postgresql-8.4 start ; \
-in-target mv /usr/sbin/policy-rc.d.disabledaemon /usr/sbin/policy-rc.d ; \
-in-target mount /proc ; \
+chroot /target invoke-rc.d postgresql-8.4 start ; \
 UCF_FORCE_CONFFNEW=yes apt-install fusionforge-full ; \
 in-target ln -s /var/lib/gforge/chroot/scmrepo/cvs /cvsroot ; \
 in-target ln -s /var/lib/gforge/chroot/scmrepo/svn /svnroot ; \
 in-target ln -s /var/lib/gforge/chroot/scmrepo /scmrepo ; \
 echo 'SYSLOGD="-p /dev/log -a /var/lib/gforge/chroot/dev/log"' >> /target/etc/default/syslogd ; \
 echo '/var/run/postgresql /var/lib/gforge/chroot/var/run/postgresql none bind' >> /target/etc/fstab ; \
-in-target echo "===== PAUSE =====" ; \
-sleep 600 ; \
 echo 'syntax on' >> /target/etc/vim/vimrc.local ;
 
 
