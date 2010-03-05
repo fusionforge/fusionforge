@@ -3,6 +3,7 @@
 # FusionForge document search engine
 #
 # Copyright 2005, Fabio Bertagnin
+# Copyright 2009-2010, Franck Villaume
 #
 # This file is part of FusionForge.
 #
@@ -21,11 +22,12 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 # USA
 #
-# Tupple : type file   parser file
+# Tupple : mime type file   parser file
+# syntax :
+# mime-type|parser
 # This list is used by the ParserData class to find if any parser is available for that type of file
-# syntax sample :
-# mime-type|parser_type.php
 text/plain|parser_text.php
+text/html|parser_html.php
 application/pdf|parser_pdf.php
 application/vnd.oasis.opendocument.presentation|parser_oo.php
 application/vnd.oasis.opendocument.text|parser_oo.php

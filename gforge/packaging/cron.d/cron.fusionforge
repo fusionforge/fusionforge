@@ -102,6 +102,3 @@ MAILTO=""
 
 # Create SVN tarballs
 5 3 * * * root $PHP $GFORGE/plugins/scmsvn/cronjobs/tarballs.php
-
-# Docman parse word engine
-56 * * * * $FFUSER $PHP $FFCRON/update_docdata_dataword.php
