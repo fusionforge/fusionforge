@@ -11,6 +11,15 @@ then
 	# This is probably not te most elegant way to deal with database
 	# I install or upgrade on the default cluster if it is online
 	# or I quit gently with a big message
+	for i in 1 2 3
+	do
+		pg_version_offline=`pg_lsclusters | grep 5432 | grep offline | cut -d' ' -f1`
+		if [ "x$pg_version" != "x" ]
+		then
+			invoke-rc.d postgresql-$pg_version start
+			sleep $i
+		fi
+	done
 	pg_version=`pg_lsclusters | grep 5432 | grep online | cut -d' ' -f1`
 	if [ "x$pg_version" != "x" ] 
 	then 
