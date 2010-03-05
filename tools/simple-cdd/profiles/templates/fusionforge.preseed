@@ -359,8 +359,9 @@ in-target chmod o+rw /dev/null ; \
 apt-install postgresql-8.4 ; \
 in-target mount /proc ; \
 UCF_FORCE_CONFFNEW=yes apt-install fusionforge-full ; \
-in-target ln -s /var/lib/gforge/chroot/cvsroot /cvsroot ; \
-in-target ln -s /var/lib/gforge/chroot/svnroot /svnroot ; \
+in-target ln -s /var/lib/gforge/chroot/scmrepo/cvs /cvsroot ; \
+in-target ln -s /var/lib/gforge/chroot/scmrepo/svn /svnroot ; \
+in-target ln -s /var/lib/gforge/chroot/scmrepo /scmrepo ; \
 echo 'SYSLOGD="-p /dev/log -a /var/lib/gforge/chroot/dev/log"' >> /target/etc/default/syslogd ; \
 echo '/var/run/postgresql /var/lib/gforge/chroot/var/run/postgresql none bind' >> /target/etc/fstab ; \
 echo 'syntax on' >> /target/etc/vim/vimrc.local ;
