@@ -358,7 +358,7 @@ in-target chsh -s /bin/zsh ; \
 in-target chmod o+rw /dev/null ; \
 apt-install postgresql-8.4 ; \
 in-target mount /proc ; \
-UCF_FORCE_CONFFNEW=yes apt-install fusionforge-full ; \
+UCF_FORCE_CONFFNEW=yes apt-install gforge-db-postgresql ; \
 in-target ln -s /var/lib/gforge/chroot/scmrepo/cvs /cvsroot ; \
 in-target ln -s /var/lib/gforge/chroot/scmrepo/svn /svnroot ; \
 in-target ln -s /var/lib/gforge/chroot/scmrepo /scmrepo ; \
