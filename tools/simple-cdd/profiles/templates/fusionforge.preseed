@@ -262,8 +262,7 @@ tasksel tasksel/first multiselect standard
 # Individual additional packages to install
 d-i pkgsel/include string vim ntpdate ntp build-essential debconf-utils \
 exim4-daemon-heavy mailman proftpd apache2-mpm-prefork openssl \
-localization-config console-tools console-data console-common console-setup \
-sudo devscripts fakeroot pbuilder svn-buildpackage dpatch debhelper reprepro openssh-server
+sudo devscripts fakeroot svn-buildpackage dpatch debhelper reprepro openssh-server
 #sidentd
 
 # Some versions of the installer can report back on what software you have
@@ -356,14 +355,19 @@ ucf ucf/changeprompt select install_new
 d-i preseed/late_command string apt-install zsh; \
 in-target chsh -s /bin/zsh ; \
 in-target chmod o+rw /dev/null ; \
-apt-install postgresql-8.4 ; \
+apt-install postgresql-8.4; \
+in-target mv /usr/sbin/policy-rc.d /usr/sbin/policy-rc.d.disabledaemon ; \
+in-target /usr/sbin/invoke-rc.d postgresql-8.4 start ; \
+in-target mv /usr/sbin/policy-rc.d.disabledaemon /usr/sbin/policy-rc.d ; \
 in-target mount /proc ; \
-UCF_FORCE_CONFFNEW=yes apt-install gforge-db-postgresql ; \
+UCF_FORCE_CONFFNEW=yes apt-install fusionforge-full ; \
 in-target ln -s /var/lib/gforge/chroot/scmrepo/cvs /cvsroot ; \
 in-target ln -s /var/lib/gforge/chroot/scmrepo/svn /svnroot ; \
 in-target ln -s /var/lib/gforge/chroot/scmrepo /scmrepo ; \
 echo 'SYSLOGD="-p /dev/log -a /var/lib/gforge/chroot/dev/log"' >> /target/etc/default/syslogd ; \
 echo '/var/run/postgresql /var/lib/gforge/chroot/var/run/postgresql none bind' >> /target/etc/fstab ; \
+in-target echo "===== PAUSE =====" ; \
+sleep 600 ; \
 echo 'syntax on' >> /target/etc/vim/vimrc.local ;
 
 
