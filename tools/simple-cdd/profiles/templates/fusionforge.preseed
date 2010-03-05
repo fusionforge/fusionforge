@@ -1,5 +1,6 @@
 ### Contents of the preconfiguration file
 ### Localization
+# SEE http://www.debian.org/releases/squeeze/example-preseed.txt
 # Locale sets language and country.
 #INTL#d-i debian-installer/country string FR
 #INTL#d-i debian-installer/locale string fr_FR.UTF-8
@@ -143,32 +144,60 @@ d-i apt-setup/use_mirror boolean false
 # Uncomment this to avoid adding security sources, or
 # add a hostname to use a different server than security.debian.org.
 #CDD#d-i apt-setup/security_host string 192.168.0.218/debian-security
+# Select which update services to use; define the mirrors to be used.
+# Values shown below are the normal defaults.
+#d-i apt-setup/services-select multiselect security, volatile
+d-i apt-setup/services-select multiselect
+#d-i apt-setup/security_host string security.debian.org
+#d-i apt-setup/volatile_host string volatile.debian.org
+
 
 # Additional repositories, local[0-9] available
 #d-i apt-setup/local0/repository string \
 #       http://local.server/debian stable main
 #d-i apt-setup/local0/repository string http://localhost/debian-local etch main
 #d-i apt-setup/local0/repository string http://gforge.eu/debian etch main
-d-i apt-setup/local0/repository string http://debian.fusionforge.org/debian %DIST% main
+#MIR#d-i apt-setup/local0/repository string http://debian.fusionforge.org/debian %DIST% main
 #d-i apt-setup/local0/comment string local server
 # Enable deb-src lines
 #d-i apt-setup/local0/source boolean true
-d-i apt-setup/local0/source boolean true
+#MIR#d-i apt-setup/local0/source boolean true
 # URL to the public key of the local repository; you must provide a key or
 # apt will complain about the unauthenticated repository and so the
 # sources.list line will be left commented out
 #d-i apt-setup/local0/key string http://local.server/key
 #d-i apt-setup/local0/key string http://localhost/debian-local/key
 #d-i apt-setup/local0/key string http://gforge.eu/key
-d-i apt-setup/local0/key string http://debian.fusionforge.org/key
+#MIR#d-i apt-setup/local0/key string http://debian.fusionforge.org/key
 
-d-i apt-setup/local1/repository string http://ftp2.fr.debian.org/debian %DIST% main
-d-i apt-setup/local1/source boolean true
+#MIR#d-i apt-setup/local1/repository string http://ftp2.fr.debian.org/debian %DIST% main
+#MIR#d-i apt-setup/local1/source boolean true
 # By default the installer requires that repositories be authenticated
 # using a known gpg key. This setting can be used to disable that
 # authentication. Warning: Insecure, not recommended.
 #d-i debian-installer/allow_unauthenticated string true
 #d-i debian-installer/allow_unauthenticated string true
+
+###### Apt setup.
+
+# automatically set the CD as the installation media.
+#base-config apt-setup/uri_type  select http
+base-config apt-setup/uri_type  select cdrom
+# only scan the first CD by default
+base-config apt-setup/cd/another  boolean false
+# don't ask to use additional mirrors
+base-config apt-setup/another boolean false
+# Use a network mirror?
+apt-mirror-setup        apt-setup/use_mirror    boolean false
+
+# Do enable security updates.
+#base-config apt-setup/security-updates  boolean true
+
+# You can choose to install non-free and contrib software.
+#d-i apt-setup/non-free  boolean true
+#d-i apt-setup/contrib boolean true
+
+
 
 ### Account setup
 # Skip creation of a root account (normal user account will be able to
@@ -231,9 +260,10 @@ tasksel tasksel/first multiselect standard
 
 
 # Individual additional packages to install
-d-i pkgsel/include string vim ntpdate ntp build-essential debconf-utils exim4-daemon-heavy mailman proftpd apache2-mpm-prefork openssl \
+d-i pkgsel/include string vim ntpdate ntp build-essential debconf-utils \
+exim4-daemon-heavy mailman proftpd apache2-mpm-prefork openssl \
 localization-config console-tools console-data console-common console-setup \
-sudo devscripts fakeroot pbuilder svn-buildpackage dpatch debhelper reprepro ssh
+sudo devscripts fakeroot pbuilder svn-buildpackage dpatch debhelper reprepro openssh-server
 #sidentd
 
 # Some versions of the installer can report back on what software you have

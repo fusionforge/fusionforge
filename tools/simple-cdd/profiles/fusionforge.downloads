@@ -55,7 +55,7 @@ fusionforge-full
 ##gforge
 ##gforge-plugin-scmcvs
 ##gforge-plugin-scmsvn
-##gforge-plugin-mediawiki
+gforge-plugin-mediawiki
 #gforge-plugins-extra
 sudo
 devscripts
@@ -65,3 +65,4 @@ svn-buildpackage
 dpatch
 debhelper
 reprepro
+openssh-server
