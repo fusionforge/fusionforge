@@ -20,15 +20,6 @@ class Theme extends Layout {
 			);
         }
 
-        function headerJS() {
-                echo '
-		<script type="text/javascript" src="'. util_make_uri('/js/common.js') .'"></script>
-        <script type="text/javascript">';
-                plugin_hook ("javascript",false);
-                echo '
-        </script>';
-        }
-        
         function bodyHeader($params) {
                 global $user_guide;
 
