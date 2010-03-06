@@ -94,23 +94,30 @@ if (session_loggedin()) {
 //
 	$perm =& $group->getPermission(session_get_user());
 	if ($perm->isArtifactAdmin()) {
-		$alevel=' >= 0';	
-	} else {
-		$alevel=' > 1';	
-	}
-
-	$res = db_query_params ('SELECT agl.group_artifact_id, agl.name
-		FROM artifact_group_list agl, role_setting rs, user_group ug
-		WHERE agl.group_artifact_id=rs.ref_id
-		AND ug.user_id=$1
-		AND rs.value::integer $2
-		AND agl.group_id=$3
-                AND ug.role_id = rs.role_id
-                AND rs.section_name=$4',
+		$res = db_query_params ('SELECT agl.group_artifact_id, agl.name
+			FROM artifact_group_list agl, role_setting rs, user_group ug
+			WHERE agl.group_artifact_id=rs.ref_id
+			AND ug.user_id=$1
+			AND rs.value IN (0, 1, 2)
+			AND agl.group_id=$2
+			AND ug.role_id = rs.role_id
+			AND rs.section_name=$3',
 				array(user_getid() ,
-				      $alevel,
 				      $group_id,
 				      'tracker'));
+	} else {
+		$res = db_query_params ('SELECT agl.group_artifact_id, agl.name
+			FROM artifact_group_list agl, role_setting rs, user_group ug
+			WHERE agl.group_artifact_id=rs.ref_id
+			AND ug.user_id=$1
+			AND rs.value IN (1, 2)
+			AND agl.group_id=$2
+			AND ug.role_id = rs.role_id
+			AND rs.section_name=$3',
+				array(user_getid() ,
+				      $group_id,
+				      'tracker'));
+	}
 
 	echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 
