@@ -158,7 +158,12 @@ class ArtifactTypeHtml extends ArtifactType {
 			$keys=array_keys($efarr);
 			for ($k=0; $k<count($keys); $k++) {
 				$i=$keys[$k];
-				$value = $selected[$efarr[$i]['extra_field_id']];
+
+				if (!isset($selected[$efarr[$i]['extra_field_id']]))
+					$selected[$efarr[$i]['extra_field_id']] = '';
+
+				$value = @$selected[$efarr[$i]['extra_field_id']];
+
 				if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT ||
 					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX ||
 					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO ||
