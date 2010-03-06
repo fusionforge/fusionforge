@@ -238,6 +238,7 @@ switch (getStringFromRequest('func')) {
 		$description = getStringFromRequest('description');
 		$new_artifact_type_id = getIntFromRequest('new_artifact_type_id');
 		$extra_fields = getStringFromRequest('extra_fields');
+		$user_email = getStringFromRequest('user_email', false);
 		$was_error = false;
 
 		/*
@@ -278,7 +279,7 @@ switch (getStringFromRequest('func')) {
 
 			} else {
 
-				// Everyone alse can add comments
+				// Everyone else can add comments
 				if ($details) {
 					if ($ah->addMessage($details,$user_email,true)) {
 						$feedback=_('Comment added');
