@@ -31,10 +31,6 @@ busybox
 syslinux
 
 dictionaries-common
-# gforge stuffs
-#console-data
-#console-common
-#console-setup
 krb5-clients
 krb5-config
 ssh-krb5
@@ -49,17 +45,16 @@ proftpd
 apache2-mpm-prefork
 openssl
 zsh
-postgresql-8.3
-gforge
-gforge-plugin-scmcvs
-gforge-plugin-scmsvn
-gforge-plugin-mediawiki
-#gforge-plugins-extra
 sudo
 devscripts
 fakeroot
-pbuilder
+cowdancer
 svn-buildpackage
 dpatch
 debhelper
 reprepro
+openssh-server
+
+postgresql-8.4
+fusionforge-full
+gforge-plugin-mediawiki

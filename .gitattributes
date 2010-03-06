@@ -3925,14 +3925,13 @@ tools/jpgraph_pietest.php -text
 tools/make-mo.sh -text
 tools/rpmdev-setuptree -text
 tools/simple-cdd/Makefile -text
-tools/simple-cdd/profiles/fusionforge.conf -text
 tools/simple-cdd/profiles/fusionforge.description -text
 tools/simple-cdd/profiles/fusionforge.downloads -text
 tools/simple-cdd/profiles/fusionforge.packages -text
 tools/simple-cdd/profiles/fusionforge.png -text svneol=unset#unset
-tools/simple-cdd/profiles/fusionforge.preseed -text
-tools/simple-cdd/profiles/fusionforge.preseed.fr -text
 tools/simple-cdd/profiles/fusionforge.udebs -text
+tools/simple-cdd/profiles/templates/fusionforge.conf -text
+tools/simple-cdd/profiles/templates/fusionforge.preseed -text
 tools/simulate_cron.pl -text
 tools/tab2gettext.pl -text
 tools/tab2gettext.sh -text
