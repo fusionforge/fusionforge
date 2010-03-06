@@ -387,15 +387,16 @@ switch (getStringFromRequest('func')) {
 							}
 						}
 					}
-					//
-					//	Show just one feedback entry if no errors
-					//
-					if (!$was_error) {
-						$feedback = _('Updated successfully');
-					}
-					$feedback .= $ext_feedback;
-					include $gfwww.'tracker/browse.php';
 				}
+
+				//
+				//	Show just one feedback entry if no errors
+				//
+				if (!$was_error) {
+					$feedback = _('Updated successfully');
+				}
+				$feedback .= $ext_feedback;
+				include $gfwww.'tracker/browse.php';
 				break;
 			}
 		}
