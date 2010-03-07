@@ -12,7 +12,7 @@
 $ath->header(array ('title'=>_('Modify').': '.$ah->getID(). ' - ' . $ah->getSummary(),'atid'=>$ath->getID()));
 
 ?>
-	<h3>[#<?php echo $ah->getID(); ?>] <?php echo $ah->getSummary(); ?></h3>
+	<h1>[#<?php echo $ah->getID(); ?>] <?php echo $ah->getSummary(); ?></h1>
 
 	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;atid=<?php echo $ath->getID(); ?>" enctype="multipart/form-data" method="post">
 	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
@@ -110,7 +110,10 @@ if (session_loggedin()) {
 		<td>
 		</td>
 	</tr>
-
+	<?php
+		$ath->renderRelatedTasks($group, $ah);
+		$ath->renderFiles($group_id, $ah);
+	?>
 	<tr>
 		<td colspan="2"><strong><?php echo _('Summary')?><?php echo utils_requiredField(); ?>: <a href="javascript:help_window('/help/tracker.php?helpname=summary')"><strong>(?)</strong></a></strong><br />
 			<?php echo $ah->getSummary(); ?>
@@ -130,7 +133,7 @@ if (session_loggedin()) {
 		<br /><strong><?php echo _('OR Attach A Comment') ?>: <?php echo notepad_button('document.forms[1].details') ?> <a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=comment'); ?>')"><strong>(?)</strong></a></strong><br />
 		<textarea name="details" rows="7" cols="60"></textarea>
 		<p>
-		<h3><?php echo _('Followup') ?>:</h3>
+		<h2><?php echo _('Followup') ?>:</h2>
 		<?php
 			echo $ah->showMessages(); 
 		?>
@@ -147,7 +150,7 @@ if (session_loggedin()) {
 		<input type="file" name="input_file[]" size="30" /><br />
 		<input type="file" name="input_file[]" size="30" /><br />
 		<p>
-		<h3><?php echo _('Attached Files') ?>:</h3>
+		<h2><?php echo _('Attached Files') ?>:</h2>
 		<?php
 		//
 		//  print a list of files attached to this Artifact
@@ -167,7 +170,7 @@ if (session_loggedin()) {
 
 			for ($i=0; $i<$count; $i++) {
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-				<td><input type="checkbox" name="delete_file[]" value="'. $file_list[$i]->getID() .'">'._('Delete').' </td>
+				<td><input type="checkbox" name="delete_file[]" value="'. $file_list[$i]->getID() .'" />'._('Delete').' </td>
 				<td>'. htmlspecialchars($file_list[$i]->getName()) .'</td>
 				<td>'.  htmlspecialchars($file_list[$i]->getDescription()) .'</td>
 				<td>'.util_make_link ('/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.$file_list[$i]->getID().'/'.$file_list[$i]->getName(),_('Download')).'</td>
@@ -193,7 +196,7 @@ if (session_loggedin()) {
 <div class="tabbertab" title="<?php echo _('Changes'); ?>">
 <table border="0" width="80%">
 	<tr><td colspan="2">
-		<h3><?php echo _('Change Log') ?>:</h3>
+		<h2><?php echo _('Change Log') ?>:</h2>
 		<?php 
 			echo $ah->showHistory(); 
 		?>

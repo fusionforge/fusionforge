@@ -271,6 +271,59 @@ class ArtifactTypeHtml extends ArtifactType {
 		}
 	}
 
+	function renderRelatedTasks($group, $ah) {
+
+		if (!$group->usesPM()) {
+			return '';
+		}
+
+		$result = $ah->getRelatedTasks();
+		$taskcount = db_numrows($ah->relatedtasks);
+
+		if ($taskcount > 0) {
+			echo '<tr><td colspan="2">';
+			echo '<b>'._("Related Tasks").':</b>'.'<br/>';
+			echo '<table cellspacing="0">';
+			for ($i = 0; $i < $taskcount; $i++) {
+				$taskinfo  = db_fetch_array($ah->relatedtasks, $i);
+				$taskid    = $taskinfo['project_task_id'];
+				$projectid = $taskinfo['group_project_id'];
+				$groupid   = $taskinfo['group_id'];
+				$summary   = util_unconvert_htmlspecialchars($taskinfo['summary']);
+				$startdate = date(_('Y-m-d H:i'), $taskinfo['start_date']);
+				$enddate   = date(_('Y-m-d H:i'), $taskinfo['end_date']);
+				echo '<tr>
+						<td><a href="/pm/task.php?func=detailtask&amp;project_task_id='.$taskid.
+						'&amp;group_id='.$groupid.'&amp;group_project_id='.$projectid.'">[T'.$taskid.'] '.$summary.'</a></td>
+						<td>'.$startdate.'</td>
+						<td>'.$enddate.'</td>
+				</tr>';
+			}
+			echo '</table>';
+			echo '</td></tr>';
+		}
+	}
+
+	function renderFiles($group_id, $ah) {
+
+		$file_list =& $ah->getFiles();
+		$count=count($file_list);
+
+		if ($count > 0) {
+			echo '<tr><td colspan="2">';
+			echo '<b>'._("Attachments").':</b>'.'<br/>';
+			echo '<table cellspacing="0">';
+			for ($i=0; $i<$count; $i++) {
+				echo '<tr>
+				<td><a href="/tracker/download.php/'.$group_id.'/'. $this->getID().'/'. $ah->getID() .'/'.$file_list[$i]->getID().'/'.$file_list[$i]->getName() .'">'. htmlspecialchars($file_list[$i]->getName()) .'</a></td>';
+//				<td><input type="checkbox" name="delete_file[]" value="'. $file_list[$i]->getID() .'">'._("Delete").' </td>
+				echo '</tr>';
+			}
+			echo '</table>';
+			echo '</td></tr>';
+		}
+	}
+
 	/**
 	 *	getRenderHTML
 	 *

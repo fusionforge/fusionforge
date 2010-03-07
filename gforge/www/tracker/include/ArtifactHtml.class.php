@@ -91,7 +91,7 @@ class ArtifactHtml extends Artifact {
 
 		} else {
 			echo '
-				<h3>'._('No Followups Have Been Posted').'</h3>';
+				<p>'._('No Followups Have Been Posted').'</p>';
 		}
 	}
 
@@ -144,7 +144,7 @@ class ArtifactHtml extends Artifact {
 
 		} else {
 			echo '
-			<h3>'._('No Changes Have Been Made to This Item').'</h3>';
+			<p>'._('No Changes Have Been Made to This Item').'</p>';
 		}
 
 	}
@@ -173,7 +173,7 @@ class ArtifactHtml extends Artifact {
 <table border="0" width="80%">
 	<tr>
 		<td colspan="2">
-		<h3><?php echo _('Changes') ?>:</h3>
+		<h2><?php echo _('Changes') ?>:</h2>
 		<?php
 		$current = '';
 		$end = '';

@@ -161,7 +161,10 @@ if (session_loggedin()) {
 		<td>
 		</td>
 	</tr>
-
+	<?php
+		$ath->renderRelatedTasks($group, $ah);
+		$ath->renderFiles($group_id, $ah);
+	?>
 	<tr>
 		<td><strong><?php echo _('Summary')?><?php echo utils_requiredField(); ?>: <a href="javascript:help_window('/help/tracker.php?helpname=summary')"><strong>(?)</strong></a></strong><br />
 		<input type="text" name="summary" size="70" value="<?php
@@ -197,7 +200,7 @@ if (session_loggedin()) {
 		<p>
 		<strong><?php echo _('OR Attach A Comment') ?>:<?php echo notepad_button('document.forms[1].details') ?><a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=comment'); ?>')"><strong>(?)</strong></a></strong><br />
 		<textarea name="details" rows="7" cols="60"></textarea></p>
-		<h3><?php echo _('Followup') ?>:</h3>
+		<h2><?php echo _('Followup') ?>:</h2>
 		<?php
 			echo $ah->showMessages(); 
 		?>
@@ -244,7 +247,7 @@ if ($group->usesPM()) {
 </div>
 <?php } ?>
 <div class="tabbertab" title="<?php echo _('Attachments'); ?>">
-		<h3><?php echo _('Existing Files') ?>:</h3>
+		<h2><?php echo _('Existing Files') ?>:</h2>
 <table border="0" width="80%">
 	<tr><td colspan="2">
         <strong><?php echo _('Attach Files') ?>:</strong><br />
@@ -297,7 +300,7 @@ if ($group->usesPM()) {
 <div class="tabbertab" title="<?php echo _('Changes'); ?>">
 <table border="0" width="80%">
 	<tr><td colspan="2">
-		<h3><?php echo _('Change Log') ?>:</h3>
+		<h2><?php echo _('Change Log') ?>:</h2>
 		<?php 
 			echo $ah->showHistory(); 
 		?>

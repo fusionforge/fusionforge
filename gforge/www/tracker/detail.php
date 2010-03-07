@@ -13,7 +13,7 @@ echo $ath->header(array ('title'=>_('Detail').': '.$ah->getID(). ' '.util_unconv
 echo notepad_func();
 
 ?>
-	<h3>[#<?php echo $ah->getID(); ?>] <?php echo util_unconvert_htmlspecialchars($ah->getSummary()); ?></h3>
+	<h1>[#<?php echo $ah->getID(); ?>] <?php echo util_unconvert_htmlspecialchars($ah->getSummary()); ?></h1>
 
 	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;atid=<?php echo $ath->getID(); ?>" method="post" enctype="multipart/form-data">
 
@@ -65,9 +65,11 @@ echo notepad_func();
 			<?php echo $ah->getAssignedRealName(); ?> (<?php echo $ah->getAssignedUnixName(); ?>)</td>
 		</tr>
 
-	<?php
-		$ath->renderExtraFields($ah->getExtraFieldData(),true,'none',false,'Any','',false,'DISPLAY');
-	?>
+		<?php
+			$ath->renderExtraFields($ah->getExtraFieldData(),true,'none',false,'Any','',false,'DISPLAY');
+			$ath->renderRelatedTasks($group, $ah);
+			$ath->renderFiles($group_id, $ah);
+		?>
 
 		<tr><td colspan="2"><strong><?php echo _('Summary') ?>:</strong><br /><?php echo $ah->getSummary(); ?></td></tr>
 
@@ -95,53 +97,13 @@ echo notepad_func();
 			<?php } ?>
 		</td></tr>
 		<tr><td colspan="2">
-		<h3><?php echo _('Followup') ?></h3>
+		<h2><?php echo _('Followup') ?></h2>
 		<?php
 		echo $ah->showMessages();
 		?>
 		</td></tr>
 </table>
 </div>
-<?php
-if ($group->usesPM()) {
-?>
-<div class="tabbertab" title="<?php echo _('Related Tasks'); ?>">
-<table border="0" width="80%">
-	<tr><td colspan="2">
-		<h3><?php echo _('Related Tasks'); ?>:</h3>
-		<?php
-		$result = $ah->getRelatedTasks();
-		$taskcount = db_numrows($ah->relatedtasks);
-		if ($taskcount > 0) {
-			$titles[] = _('Task Id');
-			$titles[] = _('Task Summary');
-			$titles[] = _('Start Date');
-			$titles[] = _('End Date');
-			echo $GLOBALS['HTML']->listTableTop($titles);
-			for ($i = 0; $i < $taskcount; $i++) {
-				$taskinfo  = db_fetch_array($ah->relatedtasks, $i);
-				$taskid	= $taskinfo['project_task_id'];
-				$projectid = $taskinfo['group_project_id'];
-				$groupid   = $taskinfo['group_id'];
-				$summary   = util_unconvert_htmlspecialchars($taskinfo['summary']);
-				$startdate = date(_('Y-m-d H:i'), $taskinfo['start_date']);
-				$enddate   = date(_('Y-m-d H:i'), $taskinfo['end_date']);
-				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-					<td>'.$taskid.'</td>
-						<td>'.util_make_link ('/pm/task.php?func=detailtask&project_task_id='.$taskid.'&amp;group_id='.$groupid.'&amp;group_project_id='.$projectid,$summary).'</td>
-						<td>'.$startdate.'</td>
-						<td>'.$enddate.'</td>
-				</tr>';
-			}
-			echo $GLOBALS['HTML']->listTableBottom();
-		} else {
-			echo _('No Related Tasks');
-		}
-	  ?>
-	</td></tr>
-</table>
-</div>
-<?php } ?>
 <div class="tabbertab" title="<?php echo _('Attachments'); ?>">
 <table border="0" width="80%">
 	<tr><td colspan="2">
@@ -152,9 +114,9 @@ if ($group->usesPM()) {
 		<input type="file" name="input_file[]" size="30" /><br />
 		<input type="file" name="input_file[]" size="30" /><br />
 		<input type="file" name="input_file[]" size="30" /><br />
-		<p>
+		<p />
 	<?php } ?>
-	<h3><?php echo _('Attached Files') ?>:</h3>
+	<h2><?php echo _('Attached Files') ?>:</h2>
 	<?php
 	//
 	//  print a list of files attached to this Artifact
@@ -196,7 +158,7 @@ if ($group->usesPM()) {
 <table border="0" width="80%">
 	<tr>
 	<td colspan="2">
-	<h3><?php echo _('Changes') ?>:</h3>
+	<h2><?php echo _('Changes') ?>:</h2>
 	<?php
 
 	echo $ah->showHistory();
