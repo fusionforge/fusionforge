@@ -185,7 +185,7 @@ function project_summary($group_id,$mode,$no_table) {
 		}
 	}
 
-	// ##################### Task Manager 
+	// ##################### Tasks
 
 	if ($project->usesPm()) {
 		$return .= '
