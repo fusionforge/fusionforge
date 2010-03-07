@@ -207,19 +207,19 @@ apt-mirror-setup        apt-setup/use_mirror    boolean false
 #d-i passwd/make-user boolean false
 
 # Root password, either in clear text
-#CDD#d-i passwd/root-password password gforge
-#CDD#d-i passwd/root-password-again password gforge
+#d-i passwd/root-password password ff
+#d-i passwd/root-password-again password ff
 # or encrypted using an MD5 hash.
-#d-i passwd/root-password-crypted password [MD5 hash]
+d-i passwd/root-password-crypted password **LCK**
 
 # To create a normal user account.
 d-i passwd/user-fullname string FusionForge Debian User
 d-i passwd/username string ffuser
 # Normal user's password, either in clear text
-#CDD#d-i passwd/user-password password gfuser
-#CDD#d-i passwd/user-password-again password gfuser
+d-i passwd/user-password password ffuser
+d-i passwd/user-password-again password ffuser
 # or encrypted using an MD5 hash.
-d-i passwd/user-password-crypted password **LCK**
+#d-i passwd/user-password-crypted password [MD5 hash]
 
 ### Base system installation
 # Select the initramfs generator used to generate the initrd for 2.6 kernels.
@@ -260,9 +260,10 @@ tasksel tasksel/first multiselect standard
 
 
 # Individual additional packages to install
-d-i pkgsel/include string vim ntpdate ntp build-essential debconf-utils \
-exim4-daemon-heavy mailman proftpd apache2-mpm-prefork openssl \
-sudo devscripts fakeroot svn-buildpackage dpatch debhelper reprepro openssh-server
+# I put them in .packages file
+#d-i pkgsel/include string vim ntpdate ntp build-essential debconf-utils \
+#exim4-daemon-heavy mailman proftpd apache2-mpm-prefork openssl \
+#sudo devscripts fakeroot svn-buildpackage dpatch debhelper reprepro openssh-server
 
 # Some versions of the installer can report back on what software you have
 # installed, and what software you use. The default is not to report back,
@@ -289,16 +290,16 @@ d-i finish-install/reboot_in_progress note
 #xserver-xorg xserver-xorg/autodetect_mouse boolean true
 
 # Monitor autodetection is recommended.
-xserver-xorg xserver-xorg/autodetect_monitor boolean true
+#XORG#xserver-xorg xserver-xorg/autodetect_monitor boolean true
 # Uncomment if you have an LCD display.
 #xserver-xorg xserver-xorg/config/monitor/lcd boolean true
 # X has three configuration paths for the monitor. Here's how to preseed
 # the "medium" path, which is always available. The "simple" path may not
 # be available, and the "advanced" path asks too many questions.
-xserver-xorg xserver-xorg/config/monitor/selection-method \
-       select medium
-xserver-xorg xserver-xorg/config/monitor/mode-list \
-       select 1024x768 @ 60 Hz
+#XORG#xserver-xorg xserver-xorg/config/monitor/selection-method \
+#XORG#       select medium
+#XORG#xserver-xorg xserver-xorg/config/monitor/mode-list \
+#XORG#       select 1024x768 @ 60 Hz
 
 ### Preseeding other packages
 # Depending on what software you choose to install, or if things go wrong
@@ -362,5 +363,6 @@ in-target ln -s /var/lib/gforge/chroot/scmrepo/svn /svnroot ; \
 in-target ln -s /var/lib/gforge/chroot/scmrepo /scmrepo ; \
 echo 'SYSLOGD="-p /dev/log -a /var/lib/gforge/chroot/dev/log"' >> /target/etc/default/syslogd ; \
 echo '/var/run/postgresql /var/lib/gforge/chroot/var/run/postgresql none bind' >> /target/etc/fstab ; \
+echo 'ffuser ALL = NOPASSWD: ALL' >> /target/etc/sudoers ; \
 echo 'syntax on' >> /target/etc/vim/vimrc.local ;
 

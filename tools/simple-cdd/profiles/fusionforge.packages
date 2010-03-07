@@ -1,4 +1,25 @@
 # less is more intuituve
 less
-# htop too
+# htop too some other goodees
 htop
+vim
+sudo
+# 
+ntpdate
+ntp
+# for the forge
+exim4-daemon-heavy
+mailman
+#proftpd # not in squeeze
+apache2-mpm-prefork
+openssl
+openssh-server
+# devel
+build-essential
+debconf-utils
+devscripts
+fakeroot
+svn-buildpackage
+dpatch
+debhelper
+reprepro
