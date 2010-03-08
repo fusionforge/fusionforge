@@ -4,6 +4,7 @@ less
 htop
 vim
 sudo
+#zsh
 # 
 ntpdate
 ntp

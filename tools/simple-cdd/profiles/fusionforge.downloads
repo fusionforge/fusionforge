@@ -41,7 +41,7 @@ build-essential
 debconf-utils
 exim4-daemon-heavy
 mailman
-proftpd
+#proftpd
 apache2-mpm-prefork
 openssl
 zsh

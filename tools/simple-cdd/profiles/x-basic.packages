@@ -14,7 +14,8 @@ xdm
 xbase-clients
 
 # X
-xorg
+#xorg
+xserver-xorg
 
 # workaround http://bugs.debian.org/405639
 xserver-xorg-input-all
