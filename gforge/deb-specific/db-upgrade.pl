@@ -2822,6 +2822,7 @@ eval {
     &update_with_sql("20090327_create_table_project_tags","4.6.99-7");
     &update_with_sql("20090402-add-projecttags-constraints","4.7.99-1");
     &update_with_sql("20090402-forum-attachment-types","4.7.99-2");
+    &update_with_sql("20100308-forum-attachment-types","4.7.99-3");
 
     ########################### INSERT HERE #################################
 
