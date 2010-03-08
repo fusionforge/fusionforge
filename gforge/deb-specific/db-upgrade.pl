@@ -2903,6 +2903,7 @@ eval {
 	$dbh->commit () ;
     }
 
+    &update_with_sql("20100308-forum-attachment-types","4.8.99-6");
 
     ########################### INSERT HERE #################################
 
