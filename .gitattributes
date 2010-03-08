@@ -60,6 +60,7 @@ gforge/db/20090507-add_element_pos.sql -text
 gforge/db/20090507-add_project_query.sql -text
 gforge/db/20090507-browse_list.sql -text
 gforge/db/20090507-install_workflow.php -text
+gforge/db/20100308-drop-forum-attachment-type.sql -text
 gforge/db/20100308-forum-attachment-types.sql -text
 gforge/db/FTI-20061025.sql -text
 gforge/db/gforge-data-mysql.sql -text
