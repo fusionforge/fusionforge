@@ -28,13 +28,16 @@ remove-binary-files:
 	sh $(CURDIR)/deb-specific/manage-uufiles.sh clean
 
 .PHONY: conffiles
-conffiles: $(CRONDFILES) $(DIRSFILES) $(INSTALLFILES) $(DOCSFILES) debian/control
+conffiles: $(CRONDFILES) $(DIRSFILES) $(LINKSFILES) $(INSTALLFILES) $(DOCSFILES) debian/control
 
 debian/$(OLDPACKAGE)-%.cron.d:
 	(cat $(CURDIR)/packaging/cron.d/00phpcron ; sed -e 's/\$$FFUSER/$(OLDPACKAGE)/g' $(CURDIR)/packaging/cron.d/$*) > $@
 
 debian/$(OLDPACKAGE)-%.dirs:
 	cp $(CURDIR)/packaging/dirs/$* $@ 
+
+debian/$(OLDPACKAGE)-%.links:
+	cp $(CURDIR)/packaging/links/$* $@ 
 
 debian/$(OLDPACKAGE)-%.install:
 	cp $(CURDIR)/packaging/install/$* $@ 
@@ -81,6 +84,7 @@ clean: remove-binary-files unpatch
 
 	rm -f $(CURDIR)/debian/*.cron.d
 	rm -f $(CURDIR)/debian/*.dirs
+	rm -f $(CURDIR)/debian/*.links
 	rm -f $(CURDIR)/debian/*.install
 	rm -f $(CURDIR)/debian/*.docs
 	rm -f $(CURDIR)/debian/$(OLDPACKAGE)-config.sgml
