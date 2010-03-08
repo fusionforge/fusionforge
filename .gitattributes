@@ -71,14 +71,12 @@ gforge/deb-specific/update-ldap.sh -text
 gforge/debian/NEWS.Debian -text
 gforge/debian/README.source -text
 gforge/debian/compat -text
-gforge/debian/dsf-in/common.links -text
 gforge/debian/dsf-in/plugin-contribtracker.postinst -text
 gforge/debian/dsf-in/plugin-contribtracker.prerm -text
 gforge/debian/dsf-in/plugin-extratabs.postinst -text
 gforge/debian/dsf-in/plugin-extratabs.prerm -text
 gforge/debian/dsf-in/plugin-globalsearch.postinst -text
 gforge/debian/dsf-in/plugin-globalsearch.prerm -text
-gforge/debian/dsf-in/plugin-mediawiki.links -text
 gforge/debian/dsf-in/plugin-mediawiki.postinst -text
 gforge/debian/dsf-in/plugin-mediawiki.prerm -text
 gforge/debian/dsf-in/plugin-projectlabels.postinst -text
@@ -92,10 +90,8 @@ gforge/debian/dsf-in/plugin-scmcpold.postinst -text
 gforge/debian/dsf-in/plugin-scmcpold.prerm -text
 gforge/debian/dsf-in/plugin-scmcvs.postinst -text
 gforge/debian/dsf-in/plugin-scmcvs.prerm -text
-gforge/debian/dsf-in/plugin-scmdarcs.links -text
 gforge/debian/dsf-in/plugin-scmdarcs.postinst -text
 gforge/debian/dsf-in/plugin-scmdarcs.prerm -text
-gforge/debian/dsf-in/plugin-scmgit.links -text
 gforge/debian/dsf-in/plugin-scmgit.postinst -text
 gforge/debian/dsf-in/plugin-scmgit.prerm -text
 gforge/debian/dsf-in/plugin-scmhg.postinst -text
@@ -265,6 +261,10 @@ gforge/packaging/install/plugin-scmsvn -text
 gforge/packaging/install/shell-postgresql -text
 gforge/packaging/install/web-apache2 -text
 gforge/packaging/install/web-apache2-vhosts -text
+gforge/packaging/links/common.links -text
+gforge/packaging/links/plugin-mediawiki.links -text
+gforge/packaging/links/plugin-scmdarcs.links -text
+gforge/packaging/links/plugin-scmgit.links -text
 gforge/plugins/contribtracker/INSTALL -text
 gforge/plugins/contribtracker/bin/db-delete.pl -text
 gforge/plugins/contribtracker/bin/db-upgrade.pl -text
