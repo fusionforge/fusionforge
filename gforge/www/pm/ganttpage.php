@@ -69,7 +69,7 @@ $_size = getIntFromRequest('_size');
 $_status = getStringFromRequest('_status');
 $_order = getStringFromRequest('_order');
 
-$cat_box=html_build_select_box_from_arrays ($cat_id_arr,$cat_name_arr,'_category_id',$_category_id,true,_('None')._('None'));
+$cat_box=html_build_select_box_from_arrays ($cat_id_arr,$cat_name_arr,'_category_id',$_category_id,true,_('None'));
 
 /*
 	Creating a custom sort box
