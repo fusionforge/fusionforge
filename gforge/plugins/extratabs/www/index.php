@@ -4,7 +4,7 @@
  *
  * Copyright 2005, Raphaël Hertzog
  * Copyright 2006-2009, Roland Mas
- * Copyright 2009, Alain Peyrat
+ * Copyright 2009-2010, Alain Peyrat
  */
 
 require_once ('../../../www/env.inc.php');
@@ -13,6 +13,9 @@ require_once $gfwww.'project/admin/project_admin_utils.php';
 
 $group_id = getIntFromRequest ('group_id') ;
 $index = getIntFromRequest ('index') ;
+
+$tab_name = htmlspecialchars(trim(getStringFromRequest ('tab_name')));
+$tab_url = htmlspecialchars(trim(getStringFromRequest ('tab_url', 'http://')));
 
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
@@ -36,30 +39,46 @@ $selected = 0; // No item selected by default
 
 // Do work before displaying so that the result is immediately visible
 if (getStringFromRequest ('addtab') != '') {
-	$tab_name = htmlspecialchars(trim(getStringFromRequest ('tab_name')));
-	$tab_url = htmlspecialchars(trim(getStringFromRequest ('tab_url')));
-	$res = db_query_params ('INSERT INTO plugin_extratabs_main (group_id, index, tab_name, tab_url) VALUES ($1,$2,$3,$4)',
-				array ($group_id,
-				       $newid,
-				       $tab_name,
-				       $tab_url)) ;
-	if (!$res || db_affected_rows($res) < 1) {
-		$feedback = sprintf (_('Cannot insert new tab entry: %s'),
-				      db_error());
+	if ($tab_name == '' || $tab_url == '' || $tab_url == 'http://') {
+		$error_msg = _('ERROR: Missing Name or URL for the new tab');
+	} else if (!util_check_url($tab_url)) {
+		$error_msg = _('ERROR: Malformed URL (only http, https and ftp allowed)');
 	} else {
-		$feedback = _('Tab added');
+		$res = db_query_params('SELECT * FROM plugin_extratabs_main WHERE group_id=$1 AND tab_name=$2',
+			array($group_id, $tab_name));
+		if ($res && db_numrows($res) > 0) {
+			$error_msg = _('ERROR: Name for tab is already used.');
+		} else {
+			$res = db_query_params ('INSERT INTO plugin_extratabs_main (group_id, index, tab_name, tab_url) VALUES ($1,$2,$3,$4)',
+						array ($group_id,
+						       $newid,
+						       $tab_name,
+						       $tab_url)) ;
+			if (!$res || db_affected_rows($res) < 1) {
+				$feedback = sprintf (_('Cannot insert new tab entry: %s'),
+						      db_error());
+			} else {
+				$tab_name = '';
+				$tab_url = 'http://';
+				$feedback = _('Tab successfully added');
+			}
+		}
 	}
 } elseif (getStringFromRequest ('delete') != '') {
 	$res = db_query_params ('DELETE FROM plugin_extratabs_main WHERE group_id=$1 AND index=$2',
 				array ($group_id,
 				       $index)) ;
 	if (!$res || db_affected_rows($res) < 1) {
-		$feedback = sprintf (_('Cannot delete tab entry: %s'),
-				      db_error());
+		$error_msg = sprintf (_('Cannot delete tab entry: %s'), db_error());
 	} else {
 		$res = db_query_params ('UPDATE plugin_extratabs_main SET index=index-1 WHERE group_id=$1 AND index > $2',
 					array ($group_id,
 					       $index)) ;
+		if ($res) {
+			$feedback = _('Tab successfully deleted');
+		} else {
+			$error_msg = sprintf (_('Cannot delete tab entry: %s'), db_error());
+		}
 	}
 } elseif (getStringFromRequest ('up') != '') {
 	if ($index > 1) {
@@ -75,8 +94,10 @@ if (getStringFromRequest ('addtab') != '') {
 				       array ($previous,
 					      $group_id)) ;
 		$selected = $previous;
+		$feedback = _('Tab successfully moved');
 	} else {
-	    $selected = $index;
+		$warning_msg = _('Tab not moved, already at first position');
+		$selected = $index;
 	}
 } elseif (getStringFromRequest ('down') != '') {
 	if ($index < $newid - 1) {
@@ -91,9 +112,11 @@ if (getStringFromRequest ('addtab') != '') {
 		$res = db_query_params('UPDATE plugin_extratabs_main SET index=$1 WHERE group_id=$2 AND index=0',
 				       array ($next,
 					      $group_id)) ;
+		$feedback = _('Tab successfully moved');
 		$selected = $next;
 	} else {
-	    $selected = $index;
+		$warning_msg = _('Tab not moved, already at last position');
+		$selected = $index;
 	}
 }
 if (!$res) {
@@ -107,24 +130,30 @@ project_admin_header(array('title'=>$adminheadertitle, 'group'=>$group->getID())
 
 ?>
 
-<p>&nbsp;</p>
+<h1><?php echo _('Manage extra tabs') ;?></h1>
 
-<h3><?php echo _('Add new tabs'); ?></h3>
+<h2><?php echo _('Add new tab'); ?></h2>
+
 <p><?php echo _('You can add your own tabs in the menu bar with the form below.') ?></p>
-<p />
 
 <form name="new_tab" action="<?php echo util_make_url ('/plugins/extratabs/'); ?>" method="post">
+<fieldset>
+<legend>Add new tab</legend>
+<p>
 <input type="hidden" name="group_id" value="<?php echo $group->getID() ?>" />
 <input type="hidden" name="addtab" value="1" />
 	<strong><?php echo _('Name of the tab:') ?></strong>
 <?php echo utils_requiredField(); ?><br/>
-<input type="text" size="15" maxlength="255" name="tab_name" /><br/>
+<input type="text" size="20" maxlength="255" name="tab_name" value="<?php echo $tab_name ?>" /><br />
 	<strong><?php echo _('URL of the tab:') ?></strong>
 <?php echo utils_requiredField(); ?><br/>
-<input type="text" size="15" name="tab_url" value="http://" /><br/>
+<input type="text" size="60" name="tab_url" value="<?php echo $tab_url ?>" />
+</p>
+<p>
 <input type="submit" value="<?php echo _('Add tab') ?>" />
+</p>
+</fieldset>
 </form>
-<p />
 
 <?php
 	$res = db_query_params ('SELECT * FROM plugin_extratabs_main WHERE group_id=$1 ORDER BY index ASC', array ($group_id)) ;
@@ -133,35 +162,41 @@ if ($nbtabs > 0) {
 	
 ?>
 
-
-	<h3><?php echo _('Manage extra tabs') ;?></h3>
+<h2><?php echo _('Move or delete extra tabs') ;?></h2>
 <p>
-	<?php echo _('You can move and delete the tabs that you already added. Please note that those extra tabs can only appear on the right of the standard tabs. And you can only move them inside the set of extra tabs.') ;
+	<?php echo _('You can move and delete the tabs that you already added. Please note that those extra tabs can only appear after the standard tabs. And you can only move them inside the set of extra tabs.') ;
 
-?></p>
-<p />
+?>
+</p>
+
 <form name="change_tab" action="<?php echo util_make_url ('/plugins/extratabs/'); ?>" method="post">
+<fieldset>
+<legend>Move or delete tab</legend>
+<p>
 <input type="hidden" name="group_id" value="<?php echo $group->getID() ?>" />
-<?php 
+<?php
 	echo _('Tab to modify:')
 ?>
 <select name="index">
 <?php
 while ($row = db_fetch_array($res)) {
     if ($row['index'] == $selected) {
-	echo "<option selected value='" . $row['index'] . "'>" . $row['tab_name'] .  "</option>";
+	echo "<option selected=\"selected\" value='" . $row['index'] . "'>" . $row['tab_name'] .  "</option>";
     } else {
 	echo "<option value='" . $row['index'] . "'>" . $row['tab_name'] .  "</option>";
     }
 } ?>
-</select><br/><br/>
+</select>
+</p>
+<p>
 	  <?php if ($nbtabs > 1) { ?>
-<input type="submit" name="up" value="<?php echo _('Move tab left') ?>" /><br/>
-<input type="submit" name="down" value="<?php echo _('Move tab right') ?>" /><br/>
+<input type="submit" name="up" value="<?php echo _('Move tab before') ?>" />
+<input type="submit" name="down" value="<?php echo _('Move tab after') ?>" />
 		  <?php } ?>
 <input type="submit" name="delete" value="<?php echo _('Delete tab') ?>" />
+</p>
+</fieldset>
 </form>
-<p />
 
 <?php
 	  }
