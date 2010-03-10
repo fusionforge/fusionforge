@@ -29,7 +29,7 @@ require_once $gfwww.'include/pre.php';
 require_once $gfwww.'include/vote_function.php';
 require_once $gfwww.'survey/survey_utils.php';
 
-echo $HTML->header(array('title'=>_('Survey')));
+echo $HTML->header(array('title'=>_('Survey Privacy')));
 
 ?>
 
