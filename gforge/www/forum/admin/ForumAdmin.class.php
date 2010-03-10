@@ -334,7 +334,7 @@ class ForumAdmin extends Error {
 				}
 			}
 			</script>
-			<p><form name="pending" action="pending.php" method="post">
+			<form name="pending" action="pending.php" method="post">
 			<input type="hidden" name="action" value="update_pending" />
 			<input type="hidden" name="form_key" value="' . form_generate_key() . '" />
 			<input type="hidden" name="group_id" value="' . getIntFromRequest("group_id") . '" />
@@ -344,7 +344,7 @@ class ForumAdmin extends Error {
 			
 			//$moderated_forums["A"] = "All Forums for this group"; // to show all
 			echo html_build_select_box_from_assoc($moderated_forums,forum_id,$forum_id);
-			echo '    <input name="Go" type="submit" value="Go"><p>';
+			echo '    <input name="Go" type="submit" value="Go" />';
 			
 			$title = array();
 			$title[] = _('Forum Name');
@@ -375,16 +375,15 @@ class ForumAdmin extends Error {
 				echo "
 				<tr" . $HTML->boxGetAltRowStyle($i++). ">
 					<td>$onemsg[forum_name]</td>	
-					<td><a href=\"#\" OnClick=\"window.open('pendingmsgdetail.php?msg_id=$onemsg[msg_id]&amp;forum_id=$onemsg[group_forum_id]&amp;group_id=$group_id','PendingMessageDetail','width=800,height=600,status=no,resizable=yes');\">$onemsg[subject]</a></td>
+					<td><a href=\"#\" onclick=\"window.open('pendingmsgdetail.php?msg_id=$onemsg[msg_id]&amp;forum_id=$onemsg[group_forum_id]&amp;group_id=$group_id','PendingMessageDetail','width=800,height=600,status=no,resizable=yes');\">$onemsg[subject]</a></td>
 					<td><div align=\"right\">" . html_build_select_box_from_assoc($options,"doaction[]",1) . "</div></td>
 				</tr>";
 			}
 			
 			echo $HTML->listTableBottom();
 			echo '
-			<p>
-			<input type="hidden" name="msgids" value="' . $ids . '">
-			<div align="right"><input type="submit" onClick="return confirmDel();" name="update" value="' . _('Update') . '"></div>
+			<input type="hidden" name="msgids" value="' . $ids . '" />
+			<p align="right"><input type="submit" onclick="return confirmDel();" name="update" value="' . _('Update') . '" /></p>
 			</form>
 			';
 		}

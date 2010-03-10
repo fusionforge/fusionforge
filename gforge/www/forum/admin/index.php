@@ -212,7 +212,7 @@ if ($group_id) {
 					//actually delete the message
 					$feedback .= $fa->ExecuteAction("delete");
 					forum_header(array('title'=>_('Delete a Message')));
-					echo '<p>'.util_make_link ('/forum/forum.php?forum_id=' . $forum_id, _("Return to the forum")) ;
+					echo '<p>'.util_make_link ('/forum/forum.php?forum_id=' . $forum_id, _("Return to the forum")) . '</p>';
 					forum_footer(array());
 				} elseif (getStringFromRequest("cancel")) {
 					// the user cancelled the request, go back to forum
