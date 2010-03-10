@@ -47,7 +47,7 @@ if (getStringFromRequest('submit') && getStringFromRequest('im_sure')) {
 	}
 
 }
-	
+
 	echo '<h2>';
 	echo _('Reporting System Initialization');
 	echo '</h2>';

@@ -92,7 +92,7 @@ if (getStringFromRequest('delete')=="Y" && $question_id) {
  */
 echo($sh->showAddQuestionForm($sq));
 
-/* Show existing questions 
+/* Show existing questions (if any)
  */
 $sqf = new SurveyQuestionFactory($g);
 $sqs = & $sqf->getSurveyQuestions();

@@ -8,7 +8,7 @@
  */
 /*
 
-	Project/Task Manager
+	Tasks
 	By Tim Perdue, Sourceforge, 11/99
 	Heavy rewrite by Tim Perdue April 2000
 
