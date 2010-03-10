@@ -222,7 +222,7 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 	if ( db_numrows( $res ) > 1 ) {
 
 		?>
-		<table width="100%" cellpadding="0" cellspacing="0" border="1">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0">
 
 		<tr valign="top" align="right" class="tableheading">
 			<td><strong><?php echo _('Group Name'); ?></strong></td>

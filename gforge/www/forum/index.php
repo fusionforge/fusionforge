@@ -43,9 +43,10 @@ if ($group_id) {
 	}
 
 	forum_header(array('title'=>sprintf(_('Forums for %1$s'), $g->getPublicName()) ));
+	echo '<h1>'.sprintf(_('Forums for %1$s'), $g->getPublicName()) .'</h1>';
 
 	if ($ff->isError() || count($farr) < 1) {
-		echo '<h1>'.sprintf(_('No Forums Found For %1$s'), $g->getPublicName()) .'</h1>';
+		echo '<div class="warning_msg">'.sprintf(_('No Forums Found for %1$s'), $g->getPublicName()) .'</div>';
 		if($ff->isError()) {
 			echo $ff->getErrorMessage();
 		}
@@ -98,4 +99,3 @@ if ($group_id) {
 }
 
 ?>
-	echo '<h1>'.sprintf(_('Forums for %1$s'), $g->getPublicName()) .'</h1>';

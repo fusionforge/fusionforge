@@ -51,7 +51,9 @@ if (!$start) {
 echo report_header(_('User Activity'));
 
 $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
-echo _('Choose the <strong>First Letter</strong> of the name of the person you wish to report on.<p>');
+echo '<p>';
+echo _('Choose the <strong>First Letter</strong> of the name of the person you wish to report on.');
+echo '</p>';
 for ($i=0; $i<count($abc_array); $i++) {
 	if ($sw == $abc_array[$i]) {
 		echo '<strong>'.$abc_array[$i].'</strong>&nbsp;';
