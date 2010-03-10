@@ -29,9 +29,9 @@ require_once $gfwww.'include/pre.php';
 $HTML->header(array('title'=>_('Top Projects')));
 ?>
 
-<p><strong><?php printf(_('Top %1$s project'), $GLOBALS['sys_name']); ?></strong></p>
+<h1><?php printf(_('Top %1$s Projects'), $GLOBALS['sys_name']); ?></h1>
 
-<p><?php printf(_('We track many project usage statistics on %1$s, and display here the top ranked projects in several categories.'), $GLOBALS['sys_name']); ?>
+<p><?php printf(_('We track many project usage statistics on %1$s, and display here the top ranked projects in several categories.'), $GLOBALS['sys_name']); ?></p>
 <ul>
 <li><a href="mostactive.php?type=week"><?php echo _('Most Active This Week'); ?></a></li>
 <li><a href="mostactive.php"><?php echo _('Most Active All Time'); ?></a></li>

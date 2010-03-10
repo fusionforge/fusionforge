@@ -333,9 +333,8 @@ session_require(array('group'=>'1','admin_flags'=>'A'));
 
 $HTML->header(array('title'=>sprintf(_('Edit the %1$ss Table'), ucwords(getUnitLabel($unit)))));
 
-echo '<h3>'.sprintf(_('Edit the %1$ss Table'), ucwords(getUnitLabel($unit))).'</h3>
-<p>'.util_make_link ('/admin/',_('Site Admin Home')).'</p>
-<p>&nbsp;</p>';
+echo '<h1>'.sprintf(_('Edit the %1$ss Table'), ucwords(getUnitLabel($unit))).'</h1>
+<p>'.util_make_link ('/admin/',_('Site Admin Home')).'</p>';
 
 // $table, $unit and $primary_key are variables passed from the parent scripts
 $id = getStringFromRequest('id');

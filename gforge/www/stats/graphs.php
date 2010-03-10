@@ -19,8 +19,8 @@ $HTML->header(array('title'=>sprintf(_('%1$s Site Statistics'), $GLOBALS['sys_na
 
 echo "\n\n";
 
+print '<h1>'._('Sitewide Statistics Graphs').'</h1>' . "\n";
 print '<div align="center">' . "\n";
-print '<h3>'._('Sitewide Statistics Graphs').'</h3><br />' . "\n";
 ?>
 <hr />
 

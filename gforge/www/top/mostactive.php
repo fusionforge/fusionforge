@@ -44,8 +44,9 @@ if ($type == 'week') {
 
 $HTML->header(array('title'=>$title));
 
-print '<h3>'.$title.'</h3>
-<br /><em>('._('Updated Daily').')</em>
+print '<h1>'.$title.'</h1>
+
+<p><em>('._('Updated Daily').')</em></p>
 
 <p>'.util_make_link ('/top/','['._('View Other Top Categories').']').'</p>';
 

@@ -98,3 +98,4 @@ if ($group_id) {
 }
 
 ?>
+	echo '<h1>'.sprintf(_('Forums for %1$s'), $g->getPublicName()) .'</h1>';

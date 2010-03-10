@@ -353,7 +353,7 @@ function stats_site_projects_daily( $span ) {
 	if ( ($valid_days = db_numrows( $res )) > 1 ) {
 
 		?>
-		<p><strong><?php printf(_('Statistics for the past %1$s days'), $valid_days); ?></strong></p>
+		<h2><?php printf(_('Statistics for the past %1$s days'), $valid_days); ?></h2>
 		<table width="100%" cellpadding="0" cellspacing="0" border="0">
 			<tr valign="top" align="right">
 			<td><strong><?php echo _('Day'); ?></strong></td>
@@ -402,12 +402,12 @@ function stats_site_projects_monthly() {
 
 	echo db_error();
 
-	   // if there are any weeks, we have valid data.
+	// if there are any weeks, we have valid data.
 	if ( ($valid_months = db_numrows( $res )) > 1 ) {
 
 		?>
-		<p><strong><?php printf(_('Statistics for the past %1$s months'), $valid_months); ?></strong></p>
 
+		<h2><?php printf(_('Statistics for the past %1$s months'), $valid_months); ?></h2>
 		<table width="100%" cellpadding="0" cellspacing="0" border="0">
 			<tr valign="top" align="right">
 			<td><strong><?php echo _('Month'); ?>Month</strong></td>
@@ -466,7 +466,7 @@ function stats_site_aggregate( ) {
 	
 
 	?>
-	<p><strong><?php echo _('Current Aggregate Statistics for All Time'); ?></strong></p>
+	<h2><?php echo _('Current Aggregate Statistics for All Time'); ?></h2>
 
 	<table width="100%" cellpadding="0" cellspacing="0" border="0">
 	<tr valign="top">

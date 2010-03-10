@@ -65,7 +65,7 @@ site_admin_header(array('title'=>_('Site Admin: Trove - Category List')));
 
 ?>
 
-<h3><?php echo _('Browse Trove Tree'); ?></h3>
+<h1><?php echo _('Browse Trove Tree'); ?></h1>
 
 <?php
 

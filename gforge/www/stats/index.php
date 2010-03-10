@@ -43,12 +43,13 @@ print '<h1>'._('Sitewide aggregate statistics').'</h1>' . "\n";
 <?php
 
 stats_site_aggregate();
-print '<br /><br />';
+
 stats_site_projects_daily( 7 );
-print '<br /><br />';
+
 stats_site_projects_monthly( );
-print '<br /><br />' . "\n";
-echo '<p/>'._('Other statistics:<ul><li><a href="i18n.php">I18n Statistics</a></li></ul>');
+
+echo '<h2>'._('Other statistics').'</h2>';
+echo '<ul><li><a href="i18n.php">'.("I18n Statistics").'</a></li></ul>';
 
 //
 // END PAGE CONTENT CODE

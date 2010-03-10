@@ -54,6 +54,8 @@ if ($submit) {
 
 site_project_header(array('title'=>_('Request to join project'),'group'=>$group_id,'toptab'=>'summary'));
 
+echo '<h1>' . _('Request to join project') . '</h1>';
+
 ?>
 <p><?php 
 $nbadmins = count($group->getAdmins());

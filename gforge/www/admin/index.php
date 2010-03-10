@@ -33,11 +33,13 @@ require_once $gfwww.'admin/admin_utils.php';
 
 site_admin_header(array('title'=>_('Site admin')));
 
+echo '<h1>' . _('Site admin') . '</h1>';
+
 $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9');
 
 ?>
 
-<p><strong><?php echo _('User Maintenance'); ?></strong></p>
+<h2><?php echo _('User Maintenance'); ?></h2>
 	<ul>
 	<li><?php
 		$res=db_query_params ('SELECT count(*) AS count FROM users WHERE status=$1',
@@ -69,9 +71,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
     ?></a>
     </li>
 </ul>
-<p>
-<strong><?php echo _('Project Maintenance'); ?></strong>
-</p>
+<h2><?php echo _('Project Maintenance'); ?></h2>
 <ul>
 	<li><?php
 		$res=db_query_params ('SELECT count(*) AS count FROM groups',
@@ -130,29 +130,23 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	<li><a href="search.php?groupsearch=1&amp;search=%&amp;is_public=0"><?php echo _('Private Projects'); ?></a></li>
 </ul>
 
-<p>
-<strong><?php echo _('News'); ?></strong>
-</p>
+<h2><?php echo _('News'); ?></h2>
 <ul>
 	<li><?php echo util_make_link ('/news/admin/',_('Approve/Reject')); ?> <?php echo _('Front-page news'); ?></li>
 </ul>
 
-<p>
-<strong><?php echo _('Stats'); ?></strong>
-</p>
+<h2><?php echo _('Stats'); ?></h2>
 <ul>
 	<li><?php echo util_make_link ('/stats/',_('Site-Wide Stats')); ?></li>
 </ul>
 
-<p>
-<strong><?php echo _('Trove Project Tree'); ?></strong>
-</p>
+<h2><?php echo _('Trove Project Tree'); ?></h2>
 <ul>
 	<li><a href="trove/trove_cat_list.php"><?php echo _('Display Trove Map'); ?></a></li>
 	<li><a href="trove/trove_cat_add.php"><?php echo _('Add to the Trove Map'); ?></a></li>
 </ul>
 
-<p><strong><?php echo _('Site Utilities'); ?></strong></p>
+<h2><?php echo _('Site Utilities'); ?></h2>
 <ul>
 	<li><a href="massmail.php"><?php printf(_('Mail Engine for %1$s Subscribers'), $GLOBALS['sys_name']); ?></a></li>
 	<li><a href="unsubscribe.php"><?php echo $GLOBALS['sys_name']; ?> <?php echo _('Site Mailings Maintenance'); ?></a></li>

@@ -36,7 +36,9 @@ if (!$group_id && $form_grp) {
 
 site_project_header(array('title'=>_('Project Member List'),'group'=>$group_id,'toptab'=>'memberlist'));
 
-echo _('<p>If you would like to contribute to this project by becoming a developer, contact one of the project admins, designated in bold text below.</p>');
+echo '<h1>' . _('Project Member List') . '</h1>';
+
+echo '<p>' . _('If you would like to contribute to this project by becoming a developer, contact one of the project admins, designated in bold text below.') . '</p>';
 
 $title_arr=array();
 $title_arr[]=_('Member');

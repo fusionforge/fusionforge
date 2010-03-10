@@ -80,10 +80,10 @@ if (getStringFromRequest('submit')) {
 site_admin_header(array('title'=>_('Site Admin: Trove - Add Node')));
 ?>
 
-<h3><?php echo _('Add New Trove Category'); ?></h3>
+<h1><?php echo _('Add New Trove Category'); ?></h1>
 
 <form action="trove_cat_add.php" method="post">
-<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>">
+<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
 <p><?php echo _('Parent Category'); ?>:<?php echo utils_requiredField(); ?>
 <br /><select name="form_parent">
 

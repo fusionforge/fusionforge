@@ -26,9 +26,7 @@ session_require( array('group'=>$sys_stats_group) );
 $HTML->header(array('title'=>sprintf(_('%1$s Site Statistics'), $GLOBALS['sys_name'])));
 
 ?>
-<div align="center">
-<h3><?php echo _('Project Statistical Comparisons'); ?></h3><br />
-</div>
+<h1><?php echo _('Project Statistical Comparisons'); ?></h1>
 
 <hr />
 

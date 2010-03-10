@@ -53,7 +53,8 @@ else {
 	$column1 = _('Downloads');
 }
 $HTML->header(array('title'=>$title));
-print '<p>'.util_make_link ('/top/','['._('View Other Top Categories').']');
+print '<h1>'.$title.'</h1>';
+print '<p>'.util_make_link ('/top/','['._('View Other Top Categories').']').'</p>';
 $arr=array(_('Rank'),_('Project name'),"$column1");
 echo $HTML->listTableTop($arr);
 

@@ -438,7 +438,7 @@ if ($editdoc && $docid) {
 
 	docman_header(_('Document Manager Administration'),_('Edit Groups'),'');
 	?>
-	<p><strong><?php echo _('Edit a group') ?></strong></p>
+	<h1><?php echo _('Edit a group') ?></h1>
 	<form name="editgroup" action="index.php?editgroup=1&amp;group_id=<?php echo $group_id; ?>" method="post">
 	<input type="hidden" name="doc_group" value="<?php echo $doc_group; ?>" />
 	<table>
@@ -530,7 +530,7 @@ if ($editdoc && $docid) {
 	docman_header(sprintf(_('Project %s'), $g->getPublicName()),_('Document Manager: Administration'),'admin');
 
 	?> 
-	<h3><?php echo _('Document Manager: Administration') ?></h3>
+	<h1><?php echo _('Document Manager: Administration') ?></h1>
 	<p>
 	<a href="index.php?group_id=<?php echo $group_id; ?>&amp;admingroup=1"><?php echo _('Add/Edit/Delete Document Groups') ?></a>
 	</p>
