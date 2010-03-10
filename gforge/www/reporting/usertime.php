@@ -106,8 +106,9 @@ if ($sw) {
 			echo $HTML->listTableBottom ();
 
 		} elseif ($dev_id) { ?>
-		<img src="usertime_graph.php?<?php echo "start=$start&amp;end=$end&amp;dev_id=$dev_id&amp;type=$type"; ?>" width="640" height="480">
 		<p>
+		<img src="usertime_graph.php?<?php echo "start=$start&amp;end=$end&amp;dev_id=$dev_id&amp;type=$type"; ?>" width="640" height="480" alt="" />
+		</p>
 		<?php
 
 	}

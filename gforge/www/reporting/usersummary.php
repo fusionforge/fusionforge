@@ -157,7 +157,7 @@ if (!$res || db_numrows($res) < 1) {
 				}
 				echo '
 			</td>
-			<td colspan="2">'.util_make_link ('/tracker/?func=detail&atid='.db_result($res2,$j,'group_artifact_id'). '&group_id='.db_result($res2,$j,'group_id'). '&aid='.db_result($res2,$j,'artifact_id'), db_result($res2,$j,'summary')).'
+			<td colspan="2">'.util_make_link ('/tracker/?func=detail&amp;atid='.db_result($res2,$j,'group_artifact_id'). '&amp;group_id='.db_result($res2,$j,'group_id'). '&amp;aid='.db_result($res2,$j,'artifact_id'), db_result($res2,$j,'summary')).'
 			</td>
 		</tr>';
 			}
