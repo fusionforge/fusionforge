@@ -32,6 +32,8 @@ require_once $gfcommon.'reporting/ReportSetup.class.php';
 
 session_require( array('group'=>$sys_stats_group) );
 
+$feedback = htmlspecialchars(getStringFromRequest('feedback'));
+
 echo report_header('Main Page');
 
 ?>
