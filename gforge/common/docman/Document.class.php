@@ -494,7 +494,7 @@ class Document extends Error {
 			$kwords = $kw->get_parse_data (stripslashes($data1), htmlspecialchars($title), htmlspecialchars($description), $filetype);
 
 			$res = db_query_params ('UPDATE doc_data SET data=$1, filesize=$2, data_words=$3 WHERE group_id=$4 AND docid=$5',
-						array (base64_encode(stripslashes($data)),
+						array (base64_encode($data),
 						       strlen($data),
 						       $kwords,
 						       $this->Group->getID(),
