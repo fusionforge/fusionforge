@@ -31,8 +31,8 @@ require_once $gfcommon.'reporting/ReportSetup.class.php';
 
 session_require( array('group'=>$sys_stats_group,'A') );
 
-$time_code = getStringFromRequest('time_code');
-$category_name = getStringFromRequest('category_name');
+$time_code = getIntFromRequest('time_code');
+$category_name = trim(getStringFromRequest('category_name'));
 
 if (getStringFromRequest('submit')) {
 	if (getStringFromRequest('add')) {
