@@ -146,7 +146,7 @@ class Document extends Error {
 
 		// key words for in-document search
 		$kw = new Parsedata ($this->engine_path);
-		$kwords = $kw->get_parse_data (stripslashes($data1), htmlspecialchars($title), htmlspecialchars($description), $filetype);
+		$kwords = $kw->get_parse_data ($data1, htmlspecialchars($title), htmlspecialchars($description), $filetype);
 
 		$filesize = strlen($data);
 
@@ -164,7 +164,7 @@ class Document extends Error {
 						$filename,
 						$filetype,
 						$filesize,
-						base64_encode(stripslashes($data)),
+						base64_encode($data),
 						$kwords,
 						$user_id));
 		if (!$result) {
@@ -491,7 +491,7 @@ class Document extends Error {
 
 			// key words for in-document search
 			$kw = new Parsedata ($this->engine_path);
-			$kwords = $kw->get_parse_data (stripslashes($data1), htmlspecialchars($title), htmlspecialchars($description), $filetype);
+			$kwords = $kw->get_parse_data ($data1, htmlspecialchars($title), htmlspecialchars($description), $filetype);
 
 			$res = db_query_params ('UPDATE doc_data SET data=$1, filesize=$2, data_words=$3 WHERE group_id=$4 AND docid=$5',
 						array (base64_encode($data),
