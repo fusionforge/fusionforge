@@ -98,7 +98,7 @@ GROUP BY realname, users.user_id, user_name, status_name, pgl.group_id, pt.group
 				       $end,
 				       db_int_array_to_any_clause ($tstat)));
 if (!$res || db_numrows($res) < 1) {
-	echo _('No matches found').db_error();
+	echo '<div class="feedback">' . _('No matches found').db_error() . '</div>';
 } else {
 	$tableHeaders = array(
 		_('Name'),

@@ -163,7 +163,9 @@ function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
  */
 function admin_table_delete($table, $unit, $primary_key, $id) {
 	if (db_query_params("DELETE FROM $table WHERE $primary_key=$1", array($id))) {
+                print('<p class="feedback">');
 		printf(_('%1$s successfully deleted.'), ucfirst(getUnitLabel($unit)));
+                print('</p>');
 	} else {
 		echo db_error();
 	}

@@ -50,7 +50,7 @@ $sh->header(array('title'=>_('Survey')));
 $sf = new SurveyFactory($g);
 $ss = & $sf->getSurveys();
 if (!$ss) {
-    echo '<h2>' . (_('No Survey is found')) . '</h2>';
+    echo '<div class="warning_msg">' . (_('No Survey is found')) . '</div>';
 } else {
     echo($sh->showSurveys($ss, 0, 0, 1, 1, 1, 0));
 }

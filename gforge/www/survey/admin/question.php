@@ -43,9 +43,9 @@ if (!session_loggedin() || !user_ismember($group_id,'A')) {
 /* Create a Survey Question for general purpose */
 $sq = new SurveyQuestion($g, $question_id);
 if (!$sq || !is_object($sq)) {
-    echo "<h3>"._('Error'). ' Can not get Survey Question' ."</h3>";
+    echo '<div class="error">'._('Error'). ' ' . _('Cannot get Survey Question') ."</div>";
 } else if ( $sq->isError()) {
-    echo "<h3>"._('Error'). $sq->getErrorMessage() ."</h3>";
+    echo '<div class="error">'._('Error'). $sq->getErrorMessage() ."</div>";
 }
 
 /* Delete a question */
@@ -55,10 +55,11 @@ if (getStringFromRequest('delete')=="Y" && $question_id) {
     /* Error */
     if ( $sq->isError()) {
 	$msg = _('Delete failed').' '.$sq->getErrorMessage();
+        echo '<div class="error">' .$msg ."</div>";
     } else {
 	$msg = _('Delete successful');
+        echo '<div class="feedback">' .$msg ."</div>";
     }
-    echo "<h3>".$msg ."</h3>";
 } else if (getStringFromRequest('post')=="Y") {
     /* Modification */
     if ($question_id) {
@@ -77,9 +78,10 @@ if (getStringFromRequest('delete')=="Y" && $question_id) {
     if ( $sq->isError()) {
 	$msg = $sq->getErrorMessage();
 	form_release_key(getStringFromRequest("form_key"));
+        echo '<div class="error">' .$msg ."</div>";
+    } else {
+        echo '<div class="feedback">' .$msg ."</div>";
     }
-    
-    echo "<h3>".$msg ."</h3>";
 
     /* Add now Question */
     $sq = false;

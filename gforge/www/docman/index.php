@@ -118,7 +118,7 @@ if (!$d_arr || count($d_arr) <1){
 }
 
 if (!$d_arr || count($d_arr) < 1) {
-	print "<strong>"._('This project has no visible documents')."</strong>";
+	print '<div class="warning_msg">'._('This project has no visible documents').'</div>';
 } else {
 	doc_droplist_count($group_id, $language_id, $g);
 

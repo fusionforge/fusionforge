@@ -180,7 +180,7 @@ if (getStringFromRequest('update')) {
 	}
 }
 
-echo $feedback.'<br />';
+if ($feedback) echo '<div class="feedback">' . $feedback . '</div>';
 echo _('Here you can activate / deactivate Site wide plugins which are in the plugins/ folder. Then, you should activate them also per project, per user or whatever the plugin specifically applies to.<br /><span class="important">Be careful because some groups/users can be using the plugin. Deactivating it will remove the plugin from all users/groups.<br />Be EXTRA careful running the SQL init script when a plugin has been deactivated prior use (and you want to re-activate) because some scripts have DROP TABLE statements</span><br /><br />');
 $title_arr = array( _('Plugin Name'),
 				_('Status'),
