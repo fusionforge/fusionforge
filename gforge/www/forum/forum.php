@@ -33,6 +33,7 @@ $thread_id = getIntFromRequest('thread_id');
 $offset = getIntFromRequest('offset');
 $max_rows = getIntFromRequest('max_rows');
 $set = getStringFromRequest('set');
+$feedback = htmlspecialchars(getStringFromRequest('feedback'));
 
 if ($forum_id) {
 
@@ -85,14 +86,14 @@ if ($forum_id) {
 
 		$sanitizer = new TextSanitizer();
 		$body = $sanitizer->SanitizeHtml($body);
-		
+
 		$attach = getUploadedFile("attachment1");
 		if ($attach['size']) {
 			$has_attach = true;
 		} else {
 			$has_attach = false;
 		}
-		
+
 		if (!$fm->create($subject, $body, $thread_id, $is_followup_to,$has_attach) || $fm->isError()) {
 			form_release_key(getStringFromRequest("form_key"));
 			exit_error(_('Error'),_('Error creating ForumMessage: ').$fm->getErrorMessage());
