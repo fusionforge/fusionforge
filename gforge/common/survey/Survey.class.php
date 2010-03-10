@@ -100,11 +100,11 @@ class Survey extends Error {
 	 */
 	function create($survey_title, $add_questions, $is_active=0, $is_public=1, $is_result_public=0, $double_vote=0) {
 		if (!$survey_title) {
-			$this->setError(_('UPDATE FAILED: Survey Title Required'));
+			$this->setError(_('Update Failed: Survey Title Required'));
 			return false;
 			/* We need at least one survey question at this point */	
 		} else if (!$add_questions || !is_array($add_questions) || count($add_questions)<1) {
-			$this->setError(_('UPDATE FAILED: Survey Questions Required'));
+			$this->setError(_('Update Failed: Survey Questions Required'));
 			return false;
 		}
 
@@ -144,7 +144,7 @@ class Survey extends Error {
 	 */
 	function update($survey_title, &$add_questions, &$del_questions, $is_active=0, $is_public=1, $is_result_public=0, $double_vote=0) {
 		if (!$survey_title) {
-			$this->setError(_('UPDATE FAILED: Survey Title Required'));
+			$this->setError(_('Update Failed: Survey Title Required'));
 			return false;
 			/* We need at least one survey question at this point */	
 		}
