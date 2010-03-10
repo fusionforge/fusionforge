@@ -122,19 +122,6 @@ if (getStringFromRequest('submit')) {
 		}
 		$feedback = _('Updated successfully');
 
-	} elseif (getStringFromRequest('deletegroup')) {
-		$doc_group = getIntFromRequest('doc_group');
-		
-		$dg = new DocumentGroup($g,$doc_group);
-		if ($dg->isError()) {
-			exit_error('Error',$dg->getErrorMessage());
-		}
-		if (!$dg->delete($doc_group,$group_id)) {			
-			exit_error('Error',$dg->getErrorMessage());
-		}
-		$feedback = _('Deleted successfully');
-		header('Location: index.php?group_id='.$group_id.'&feedback='.urlencode($feedback));
-		die();	// End parsing file and redirect
 
 	} elseif (getStringFromRequest('addgroup')) {
 		$groupname = getStringFromRequest('groupname');
@@ -342,11 +329,11 @@ if ($editdoc && $docid) {
 //	Add a document group / view existing groups list
 //
 //
-} elseif (getStringFromRequest('admingroup')) {
+} elseif (getStringFromRequest('addgroup')) {
 
-	docman_header(_('Document Manager Administration'),_('Admin Document Groups'),'');
+	docman_header(_('Document Manager Administration'),_('Add Document Groups'),'');
 
-	echo "<h1>"._('Admin Document Groups')."</h1>";
+	echo "<h1>"._('Add Document Groups')."</h1>";
 	
 	$dgf = new DocumentGroupFactory($g);
 	if ($dgf->isError()) {
@@ -364,7 +351,6 @@ if ($editdoc && $docid) {
 		$title_arr=array();
 		$title_arr[]=_('ID');
 		$title_arr[]=_('Group Name');
-		$title_arr[]=_('Delete Group');
 
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 		
@@ -378,7 +364,7 @@ if ($editdoc && $docid) {
 	}
 	?>
 	<p><strong><?php echo _('Add a group') ?>:</strong></p>
-	<form name="admingroup" action="index.php?addgroup=1&amp;group_id=<?php echo $group_id; ?>" method="post">
+	<form name="addgroup" action="index.php?addgroup=1&amp;group_id=<?php echo $group_id; ?>" method="post">
 	<table>
 		<tr>
 			<th><?php echo _('New Group Name') ?>:</th>
@@ -453,26 +439,6 @@ if ($editdoc && $docid) {
 	</form>
 	<?php
 	docman_footer(array());
-} else if (getStringFromRequest('deletegroup') && getIntFromRequest('doc_group')) {
-	$doc_group = getIntFromRequest('doc_group');
-
-	$dg = new DocumentGroup($g,$doc_group);
-        if ($dg->isError()) {
-                exit_error('Error',$dg->getErrorMessage());
-        }
-
-	docman_header(_('Document Manager Administration'),_('Delete Groups'),'');
-?>
-		<p>
-		<form action="<?php echo util_make_url('/docman/admin/index.php').'?deletegroup=1&amp;doc_group='.$dg->getID().'&amp;group_id='.$dg->Group->getID() ?>" method="post">
-		<input type="hidden" name="submit" value="1" /><br />
-		<img src="/images/ic/cfolder15.png" /><?php echo $dg->getName(); ?><br />
-		<?php echo _('You are about to permanently delete this document group and his content (documents and subgroups).'); ?>
-		<p><input type="submit" name="post_changes" value="<?php echo _('Delete') ?>" /></p>
-		</form></p>
-<?php
-	docman_footer(array());
-
 } else if (getStringFromRequest('deletedoc') && $docid) {
 	$d= new Document($g,$docid);
 	if ($d->isError()) {
@@ -521,7 +487,7 @@ if ($editdoc && $docid) {
 	?> 
 	<h3><?php echo _('Document Manager: Administration') ?></h3>
 	<p>
-	<a href="index.php?group_id=<?php echo $group_id; ?>&amp;admingroup=1"><?php echo _('Add/Edit/Delete Document Groups') ?></a>
+	<a href="index.php?group_id=<?php echo $group_id; ?>&amp;addgroup=1"><?php echo _('Add/Edit Document Groups') ?></a>
 	</p>
 	<?php
 	
