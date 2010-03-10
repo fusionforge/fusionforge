@@ -39,6 +39,14 @@ if (!$start) {
 	$start = $z[count($z)-1];
 }
 
+// Find a default SPAN value depending on the number of days.
+$delta=($end - $start)/24/60/60;
+if (!$SPAN) {
+	$SPAN = 1;
+	if ($delta > 60) $SPAN=2;
+	if ($delta > 365) $SPAN=3;
+}
+
 site_project_header(array('title'=>_('Project Activity').' '.$group->getPublicName(),'group'=>$group_id,'toptab'=>'home'));
 
 $area = util_ensure_value_in_set ($area, array ('tracker','forum','docman','taskman','downloads')) ;
