@@ -313,42 +313,44 @@ ORDER BY f.most_recent_date DESC',
 
 		echo db_error();
 
-		$title_arr=array();
-		$title_arr[]=_('Topic');
-		$title_arr[]=_('Topic Starter');
-		$title_arr[]=_('Replies');
-		$title_arr[]=_('Last Post');
-
-		$ret_val .= $GLOBALS['HTML']->listTableTop ($title_arr);
-		$i=0;
-		while (($row=db_fetch_array($result)) && ($i < $max_rows)) {
-			$ret_val .= '
-				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="'.util_make_url ('/forum/forum.php?thread_id='.
-														$row['thread_id'].'&amp;forum_id='.$forum_id.'&amp;group_id='.$group_id).'">'.
-				html_image('ic/cfolder15.png',"15","13",array("border"=>"0")) . '  &nbsp; ';
-			/*
-					See if this message is new or not
-					If so, highlite it in bold
-			*/
-			if ($f->getSavedDate() < $row['recent']) {
-				$bold_begin='<strong>';
-				$bold_end='</strong>';
-			} else {
-				$bold_begin='';
-				$bold_end='';
+		if ($avail_rows > 0) {
+			$title_arr=array();
+			$title_arr[]=_('Topic');
+			$title_arr[]=_('Topic Starter');
+			$title_arr[]=_('Replies');
+			$title_arr[]=_('Last Post');
+	
+			$ret_val .= $GLOBALS['HTML']->listTableTop ($title_arr);
+			$i=0;
+			while (($row=db_fetch_array($result)) && ($i < $max_rows)) {
+				$ret_val .= '
+					<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="'.util_make_url ('/forum/forum.php?thread_id='.
+															$row['thread_id'].'&amp;forum_id='.$forum_id.'&amp;group_id='.$group_id).'">'.
+					html_image('ic/cfolder15.png',"15","13",array("border"=>"0")) . '  &nbsp; ';
+				/*
+						See if this message is new or not
+						If so, highlite it in bold
+				*/
+					if ($f->getSavedDate() < $row['recent']) {
+					$bold_begin='<strong>';
+					$bold_end='</strong>';
+				} else {
+					$bold_begin='';
+					$bold_end='';
+				}
+				/*
+						show the subject and poster
+				*/
+				$ret_val .= $bold_begin.$row['subject'] .$bold_end.'</a></td>'.
+					'<td><a href="/users/'.$row['user_name'].'/">'.$row['realname'].'</a></td>'.
+					'<td>'. $row['followups'] .'</td>'.
+					'<td>'.date(_('Y-m-d H:i'),$row['recent']).'</td></tr>';
+				$i++;
 			}
-			/*
-					show the subject and poster
-			*/
-			$ret_val .= $bold_begin.$row['subject'] .$bold_end.'</a></td>'.
-				'<td><a href="/users/'.$row['user_name'].'/">'.$row['realname'].'</a></td>'.
-				'<td>'. $row['followups'] .'</td>'.
-				'<td>'.date(_('Y-m-d H:i'),$row['recent']).'</td></tr>';
-			$i++;
+
+			$ret_val .= $GLOBALS['HTML']->listTableBottom();
+
 		}
-
-		$ret_val .= $GLOBALS['HTML']->listTableBottom();
-
 	}
 
 	/*
