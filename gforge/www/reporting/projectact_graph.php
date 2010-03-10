@@ -105,7 +105,7 @@ if ($area=='tracker') {
 	$graph->Add( $lineplot4 );
 
 	//	Legends
-	$lineplot4 ->SetLegend("Docs");
+	$lineplot4 ->SetLegend(convert_unicode(_('Docs')));
 
 } elseif ($area=='downloads') {
 
@@ -116,7 +116,7 @@ if ($area=='tracker') {
 	$graph->Add( $lineplot4 );
 
 	//	Legends
-	$lineplot4 ->SetLegend("Downloads");
+	$lineplot4 ->SetLegend(convert_unicode(_('Downloads')));
 
 } elseif ($area=='taskman') {
 
@@ -133,8 +133,80 @@ if ($area=='tracker') {
 	$graph->Add( $lineplot6 );
 
 	//	Legends
-	$lineplot5 ->SetLegend("Task Open");
-	$lineplot6 ->SetLegend("Task Close");
+	$lineplot5 ->SetLegend(convert_unicode(_('Task Open')));
+	$lineplot6 ->SetLegend(convert_unicode(_('Task Close')));
+
+} elseif ($area=='pageviews') {
+
+	// Create the PageViews plot
+	$ydata4  =& $report->getPageViews();
+	$lineplot4 =new LinePlot($ydata4);
+	$lineplot4 ->SetColor("blue");
+	$graph->Add( $lineplot4 );
+
+	//	Legends
+	$lineplot4 ->SetLegend(convert_unicode(_('Page Views')));
+
+} else {
+	/*	
+ 	* The goal of this code is to get values from the activity hook to compute stats without the
+ 	* need of another specific hook or another dedicated tables.
+ 	* 
+ 	* So, values are requested to the hook and stored in $results array.
+ 	* After, the sum is made according to the chosen interval
+ 	* And then, the sum is stored in the ydata array.
+	*/	
+	
+	$results = array();
+	$ids = array();
+	$texts = array();
+	
+	$hookParams['group'] = $g_id ;
+	$hookParams['results'] = &$results;
+	$hookParams['show'] = array();
+	$hookParams['begin'] = $start;
+	$hookParams['end'] = $end;
+	$hookParams['ids'] = &$ids;
+	$hookParams['texts'] = &$texts;
+	plugin_hook ("activity", $hookParams) ;
+	
+	if ($SPAN == REPORT_TYPE_DAILY) {
+		$interval = REPORT_DAY_SPAN;
+	} elseif ($SPAN == REPORT_TYPE_WEEKLY) {
+		$interval = REPORT_WEEK_SPAN;
+	} elseif ($SPAN == REPORT_TYPE_MONTHLY) {
+		$interval = REPORT_MONTH_SPAN;
+	}
+	
+	print "start: $start ".date('r',$start)."<br>";
+	print "  end: $end ".date('r', $end)."<br>";
+	
+	$sum = array();
+	$starting_date = $start;
+	foreach ($results as $arr) {
+		$d = $arr['activity_date'];
+		$col = intval(($d - $starting_date)/$interval);
+		$col_date = $starting_date+$col*$interval;
+		$sum[$col_date]++;
+	}
+	
+	// Now, stores the values in the ydata array for the graph.
+	$ydata = array();
+	$i = 0;
+	foreach ($report->getDates() as $d) {
+		$ydata[$i++] = isset($sum[strtotime($d)]) ? $sum[strtotime($d)] : 0; 
+	}
+	
+	$lineplot =new LinePlot($ydata);
+	$lineplot->SetColor("violet");
+	$graph->Add( $lineplot );
+
+	//	Legends
+	$lineplot->SetLegend($area);
+	
+//	var_dump($report->getDates());
+//	var_dump($ydata);
+// 	exit;
 }
 
 
