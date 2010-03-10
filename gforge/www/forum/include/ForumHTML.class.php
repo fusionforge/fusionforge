@@ -56,7 +56,7 @@ function forum_header($params) {
 
 			echo '<table><tr><td valign="top">';
 			if (!$result || db_numrows($result) < 1) {
-				echo '<h3>'._('Error - this news item was not found').'</h3>';
+				echo '<div class="error">'._('Error - this news item was not found').'</div>';
 			} else {
 				$user = user_get_object(db_result($result,0,'submitted_by'));
 				$group =& group_get_object($params['group']);
