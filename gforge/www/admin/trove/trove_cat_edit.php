@@ -147,13 +147,13 @@ while ($row_parent = db_fetch_array($res_parent)) {
 <input type="hidden" name="form_trove_cat_id" value="<?php
   print $GLOBALS['trove_cat_id']; ?>" /></p>
 
-<p><?php echo _('New category short name (no spaces, unix-like)'); ?>:
+<p><?php echo _('Category short name (no spaces, unix-like)'); ?>:
 <br /><input type="text" name="form_shortname" value="<?php print $row_cat["shortname"]; ?>" /></p>
 
-<p><?php echo _('New category full name (VARCHAR 80)'); ?>:
+<p><?php echo _('Category full name (Maximum length is 80 chars)'); ?>:
 <br /><input type="text" name="form_fullname" value="<?php print $row_cat["fullname"]; ?>" /></p>
 
-<p><?php echo _('New category description (VARCHAR 255)'); ?>:
+<p><?php echo _('Category description (Maximum length is 255 chars)'); ?>:
 <br /><input type="text" name="form_description" size="80" value="<?php print $row_cat["description"]; ?>" /></p>
 
 <br /><input type="submit" name="submit" value="<?php echo _('Update'); ?>" /><input type="submit" name="delete" value="<?php echo _('Delete'); ?>" />

@@ -119,9 +119,9 @@ if ($parent_trove_cat_id != -1) {
 </select></p>
 <p><?php echo _('New category short name (no spaces, unix-like)'); ?>:<?php echo utils_requiredField(); ?>
 <br /><input type="text" name="form_shortname" /></p>
-<p><?php echo _('New category full name (VARCHAR 80)'); ?>:<?php echo utils_requiredField(); ?>
+<p><?php echo _('New category full name (Maximum length is 80 chars)'); ?>:<?php echo utils_requiredField(); ?>
 <br /><input type="text" name="form_fullname" /></p>
-<p><?php echo _('New category description (VARCHAR 255)'); ?>:<?php echo utils_requiredField(); ?>
+<p><?php echo _('New category description (Maximum length is 255 chars)'); ?>:
 <br /><input type="text" size="80" name="form_description" />
 <br /><input type="submit" name="submit" value="<?php echo _('Add'); ?>" /></p>
 </form>

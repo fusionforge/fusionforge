@@ -64,7 +64,7 @@ if (getStringFromRequest('delete')=="Y" && $question_id) {
     /* Modification */
     if ($question_id) {
 	$sq->update($question, $question_type);
-	$msg = _('UPDATE SUCCESSFUL');
+	$msg = _('Update Successful');
     } else { /* adding new question */
 	$question = getStringFromRequest('question');
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
