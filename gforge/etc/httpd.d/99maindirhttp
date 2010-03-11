@@ -1,4 +1,4 @@
 # 99maindirhttp begin
-Alias {sys_urlprefix} {usr_share_gforge}/www/
+#Alias {sys_urlprefix} {usr_share_gforge}/www/
 DocumentRoot {usr_share_gforge}/www
 # 99maindirhttp end
