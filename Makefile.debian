@@ -21,12 +21,13 @@ DEBIANLIST=1lenny 2squeeze 3sid
 DEBIANLISTP=1etch
 DEBLIST=$(DEBIANLIST) $(DEBIANLISTP)
 UBUNTULIST=1hardy 1intrepid 1jaunty 1karmic
-UBUNTULIST=1karmic 1lucid
+UBUNTULIST=1jaunty 1karmic 1lucid
 UBUNTULISTP=1gutsy
 UBULIST=$(UBUNTULIST) $(UBUNTULISTP)
 # Try if a local mirror is available
 LOCALMIRROR=http://localhost/ubuntu
 UBUNTUOP=$(shell wget -q -S http://localhost/ubuntu -O /dev/null 2>&1 && echo "--mirror $(LOCALMIRROR)" || echo "--mirror http://archive.ubuntu.com/ubuntu") --debootstrap debootstrap
+UBUNTUOP=--mirror http://archive.ubuntu.com/ubuntu --debootstrap debootstrap
 DEBIANOP=--debootstrapopts --include=apt
 ASKPASS=--ask-passphrase
 ASKPASS=
