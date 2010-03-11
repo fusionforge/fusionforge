@@ -21,7 +21,7 @@ DEBIANLIST=1lenny 2squeeze 3sid
 DEBIANLISTP=1etch
 DEBLIST=$(DEBIANLIST) $(DEBIANLISTP)
 UBUNTULIST=1hardy 1intrepid 1jaunty 1karmic
-UBUNTULIST=1karmic 1lucid
+UBUNTULIST=1jaunty 1karmic 1lucid
 UBUNTULISTP=1gutsy
 UBULIST=$(UBUNTULIST) $(UBUNTULISTP)
 # Try if a local mirror is available
