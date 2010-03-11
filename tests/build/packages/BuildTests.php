@@ -27,7 +27,7 @@ class Packages_Tests extends PHPUnit_Framework_TestCase
     {
 	    $tests = dirname( dirname( dirname( dirname (__FILE__)))); 
 	    $base = dirname( $tests );
-	    system("cd ..; make -f Makefile.debian BUILDRESULT=$base/build/packages all", $retval);
+	    system("cd ..; make -f Makefile.debian BUILDRESULT=$base/build/packages clean all", $retval);
 	    $this->assertEquals(0, $retval);
     }
 
