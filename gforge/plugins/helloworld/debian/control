@@ -1,0 +1,13 @@
+Source: helloworld
+Section: unknown
+Priority: extra
+Maintainer: Christian Bayle <bayle@debian.org>
+Build-Depends: debhelper (>= 7)
+Standards-Version: 3.8.4
+Homepage: <insert the upstream URL, if relevant>
+
+Package: helloworld
+Architecture: all
+Depends: ${misc:Depends}
+Description: <insert up to 60 chars description>
+ <insert long description, indented with spaces>
