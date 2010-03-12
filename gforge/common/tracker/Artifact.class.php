@@ -813,8 +813,8 @@ class Artifact extends Error {
 		} else {
 			//everyone else cannot modify these fields
 			$priority=$this->getPriority();
-			$summary=addslashes($this->getSummary());
-			$description=addslashes($this->getDetails());
+			$summary=htmlspecialchars_decode($this->getSummary());
+			$description=htmlspecialchars_decode($this->getDetails());
 			$canned_response=100;
 			$new_artifact_type_id=$this->ArtifactType->getID();
 			$assigned_to=$this->getAssignedTo();
