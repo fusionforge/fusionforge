@@ -1,50 +1,63 @@
-This work was packaged for Debian by:
+The "sourceforge" package was first debianised on Wed, 22 Nov 2000
+22:06:35 +0100 by Roland Mas <lolando@debian.org>.  Work has been
+constant since then, and the package evolved a great deal.  It began
+to work, for a start, and then it evolved into GForge, what with the
+more recent versions of the Sourceforge software having been made
+proprietary.  And then in early 2009 it evolved into FusionForge, what
+with the more recent versions of GForge having been rewritten as
+proprietary software without a name change.
 
-    Christian Bayle <bayle@debian.org> on Mon, 08 Mar 2010 16:37:51 +0100
+FusionForge is Copyright © 2009-2010 by several people, including:
+Alain Peyrat            <aljeux@free.fr>
+Alexandre Neymann       <alexandre.neymann@dgfip.finances.gouv.fr>
+Christian Bayle         <bayle@debian.org>
+Roland Mas              <lolando@debian.org>
+Gonéri Le Bouder        <goneri.lebouder@atosorigin.com>
+Julien Heyman 		<julien.heyman@atosorigin.com>
+Olivier Meunier 	<olivier.meunier@centraliens.net>
 
-It was downloaded from:
+GForge itself is Copyright © 2000-2008 by a fair number of people,
+including:
+Tim Perdue              <tim@gforge.org>
+Roland Mas              <99.roland.mas@aist.enst.fr>
+Christian Bayle         <gforge@free.fr>
+Tom Copeland            <tom@infoether.com>
+Guillaume Smet          <guillaume-gforge@smet.org>
+Francisco Gimeno        <kikov@kikov.org>
+Sung Kim                <hunkims@gmail.com>
+Alain Peyrat            <aljeux@free.fr>
 
-    <url://example.com>
+Past Members of the development team include:
+Reinhard Spisser
+Ryan T. Sammartino
+Edward Ritter
+Michael Jennings
 
-Upstream Author(s):
+Since FusionForge, and GForge before it, was initially a fork of
+Sourceforge, here's the copyright info for the Sourceforge software:
+,----
+| The original sources were downloaded from http://www.sourceforge.net/
+| 
+| Authors: The Sourceforge crew at VA Linux.  They are many, they
+| change as time goes by, and they are listed on the Sourceforge
+| website.  Let them be thanked for their work.
+| 
+| Copyright:
+| 
+| This software is Copyright © 1999-2000 by VA Linux.
+| 
+| You are free to distribute this software under the terms of the GNU
+| General Public License.
+`----
 
-    <put author's name and email here>
-    <likewise for another author>
+The packaging and installing scripts (in the debian/ and deb-specific/
+directories amongst others) are Copyright © 2000-2010 by Christian
+Bayle <bayle@aist.enst.fr> and Roland Mas <lolando@debian.org>.  You
+are free to use and redistribute them under the terms of the GNU
+General Public License, version 2 or (at your option) any later
+version published by the Free Software Foundation.
 
-Copyright:
+See Also Copyright file in fusionforge package
 
-    <Copyright (C) YYYY Firstname Lastname>
-    <likewise for another author>
-
-License:
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This package is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program. If not, see <http://www.gnu.org/licenses/>.
-
-On Debian systems, the complete text of the GNU General
-Public License version 3 can be found in "/usr/share/common-licenses/GPL-3".
-
-The Debian packaging is:
-
-    Copyright (C) 2010 Christian Bayle <bayle@debian.org>
-
-# Please chose a license for your packaging work. If the program you package
-# uses a mainstream license, using the same license is the safest choice.
-# Please avoid to pick license terms that are more restrictive than the
-# packaged work, as it may make Debian's contributions unacceptable upstream.
-# If you just want it to be GPL version 3, leave the following line in.
-
-and is licensed under the GPL version 3, see above.
-
-# Please also look if there are files or directories which have a
-# different copyright/license attached and list them here.
+On Debian systems, the complete text of the GNU General Public License
+can be found in the /usr/share/common-licenses directory.

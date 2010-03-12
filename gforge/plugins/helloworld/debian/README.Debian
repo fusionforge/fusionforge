@@ -1,6 +1,6 @@
-helloworld for Debian
+fusionforge-plugin-helloworld for Debian
 ---------------------
 
-<possible notes regarding this package - if none, delete this file>
+See README.Debian in fusionforge-common package
 
  -- Christian Bayle <bayle@debian.org>  Mon, 08 Mar 2010 16:37:51 +0100
