@@ -130,6 +130,7 @@ class Forum extends Error {
 			return false;
 		}
 		if ($send_all_posts_to) {
+			$send_all_posts_to = str_replace(';', ',', $send_all_posts_to);
 			$invalid_mails = validate_emails($send_all_posts_to);
 			if (count($invalid_mails) > 0) {
 				$this->setInvalidEmailError();
