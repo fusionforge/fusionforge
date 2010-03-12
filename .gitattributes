@@ -277,7 +277,6 @@ gforge/plugins/contribtracker/www/actor_logo.php -text
 gforge/plugins/contribtracker/www/global_admin.php -text
 gforge/plugins/contribtracker/www/index.php -text
 gforge/plugins/contribtracker/www/project_admin.php -text
-gforge/plugins/createplugin.sh -text
 gforge/plugins/cvstracker/db/cvstracker-init-mysql.sql -text
 gforge/plugins/cvstracker/gforge-plugin-cvstracker.spec -text svneol=unset#application/octet-stream
 gforge/plugins/cvstracker/rpm-specific/cron.d/gforge-plugin-cvstracker -text svneol=unset#application/octet-stream
@@ -934,26 +933,6 @@ gforge/plugins/globalsearch/common/globalsearch_stats_boxes.php -text
 gforge/plugins/globalsearch/lib/globalsearch-init.sql -text
 gforge/plugins/globalsearch/www/edit_assoc_sites.php -text
 gforge/plugins/globalsearch/www/index.php -text
-gforge/plugins/helloworld/debian/README.Debian -text
-gforge/plugins/helloworld/debian/README.source -text
-gforge/plugins/helloworld/debian/changelog -text
-gforge/plugins/helloworld/debian/compat -text
-gforge/plugins/helloworld/debian/control -text
-gforge/plugins/helloworld/debian/copyright -text
-gforge/plugins/helloworld/debian/docs -text
-gforge/plugins/helloworld/debian/po/templates.pot -text
-gforge/plugins/helloworld/debian/rules -text
-gforge/plugins/helloworld/debian/source/format -text
-gforge/plugins/helloworld/packaging/control/000source -text
-gforge/plugins/helloworld/packaging/control/222plugin-helloworld -text
-gforge/plugins/helloworld/packaging/control/222plugin-helloworld.shortdesc -text
-gforge/plugins/helloworld/packaging/dirs/plugin-helloworld -text
-gforge/plugins/helloworld/packaging/docs/plugin-helloworld -text
-gforge/plugins/helloworld/packaging/install/plugin-helloworld -text
-gforge/plugins/helloworld/packaging/links/plugin-helloworld -text
-gforge/plugins/helloworld/translations/en.po -text
-gforge/plugins/helloworld/translations/gforge.pot -text
-gforge/plugins/helloworld/utils/manage-translations.sh -text
 gforge/plugins/ldapextauth/rpm-specific/.keepme -text svneol=unset#application/octet-stream
 gforge/plugins/mediawiki/README -text
 gforge/plugins/mediawiki/bin/drop-wiki.sh -text
@@ -3898,6 +3877,27 @@ packaging/tag_delivery_create -text
 packaging/tag_delivery_delete -text
 packaging/tag_packaging_create -text
 packaging/tag_packaging_delete -text
+plugins/templates/createplugin.sh -text
+plugins/templates/helloworld/debian/README.Debian -text
+plugins/templates/helloworld/debian/README.source -text
+plugins/templates/helloworld/debian/changelog -text
+plugins/templates/helloworld/debian/compat -text
+plugins/templates/helloworld/debian/control -text
+plugins/templates/helloworld/debian/copyright -text
+plugins/templates/helloworld/debian/docs -text
+plugins/templates/helloworld/debian/po/templates.pot -text
+plugins/templates/helloworld/debian/rules -text
+plugins/templates/helloworld/debian/source/format -text
+plugins/templates/helloworld/packaging/control/000source -text
+plugins/templates/helloworld/packaging/control/222plugin-helloworld -text
+plugins/templates/helloworld/packaging/control/222plugin-helloworld.shortdesc -text
+plugins/templates/helloworld/packaging/dirs/plugin-helloworld -text
+plugins/templates/helloworld/packaging/docs/plugin-helloworld -text
+plugins/templates/helloworld/packaging/install/plugin-helloworld -text
+plugins/templates/helloworld/packaging/links/plugin-helloworld -text
+plugins/templates/helloworld/translations/en.po -text
+plugins/templates/helloworld/translations/gforge.pot -text
+plugins/templates/helloworld/utils/manage-translations.sh -text
 tests/AllFullTests.php -text
 tests/AllTests.php -text
 tests/SeleniumTests.php -text
