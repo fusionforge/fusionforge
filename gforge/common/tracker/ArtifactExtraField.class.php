@@ -491,8 +491,8 @@ class ArtifactExtraField extends Error {
 		if (strlen($alias) == 0) return true;		// empty alias
 
 		// invalid chars?
-		if (preg_match("/[^[:alnum:]_\\-]/", $alias)) {
-			$this->setError(_('The alias contains invalid characters. Only letters, numbers, hypens (-) and underscores (_) allowed.'));
+		if (preg_match("/[^[:alnum:]_@\\-]/", $alias)) {
+			$this->setError(_('The alias contains invalid characters. Only letters, numbers, hypens (-), arobase (@) and underscores (_) allowed.'));
 			return false;
 		} else if (in_array($alias, $reserved_alias)) {	// alias is reserved?
 			$this->setError(sprintf(_('\'%1$s\' is a reserved alias. Please provide another name.'), $alias));
@@ -517,7 +517,7 @@ class ArtifactExtraField extends Error {
 			// called "Quality test", make an alias called "quality_test").
 			// The alias can be seen as a "unix name" for this field
 			$alias = preg_replace("/ /", "_", $name);
-			$alias = preg_replace("/[^[:alnum:]_]/", "", $alias);
+			$alias = preg_replace("/[^[:alnum:]_@]/", "", $alias);
 			$alias = strtolower($alias);
 		} elseif (!$this->validateAlias($alias)) {
 			// alias is invalid...
