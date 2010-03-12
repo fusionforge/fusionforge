@@ -22,18 +22,12 @@
  */
 
 function site_admin_header($params) {
-	global $feedback,$HTML;
-	if (!isset($feedback)) {
-		$feedback = '';
-	}
 	session_require(array('group'=>'1','admin_flags'=>'A'));
-	$HTML->header($params);
-	echo html_feedback_top($feedback);
+	site_header($params);
 }
 
-function site_admin_footer($vals=0) {
-	GLOBAL $HTML;
-	$HTML->footer(array());
+function site_admin_footer($params) {
+	site_footer($params);
 }
 
 // Local Variables:
