@@ -8,7 +8,10 @@
  *
  */
 
-echo $ath->header(array ('title'=>_('Detail').': '.$ah->getID(). ' '.util_unconvert_htmlspecialchars($ah->getSummary()),'atid'=>$ath->getID()));
+$ath->header(array 
+	     ('title' => _('Detail').': [#'.$ah->getID(). '] ' 
+	      . util_unconvert_htmlspecialchars($ah->getSummary()),
+	      'atid'=>$ath->getID()));
 
 echo notepad_func();
 

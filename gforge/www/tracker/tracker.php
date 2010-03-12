@@ -252,7 +252,7 @@ switch (getStringFromRequest('func')) {
 
 		$ah=new ArtifactHtml($ath,$artifact_id);
 		if (!$ah || !is_object($ah)) {
-			exit_error('ERROR','Artifact Could Not Be Created');
+			exit_error('ERROR', _('Artifact Could Not Be Created'));
 		} else if ($ah->isError()) {
 			exit_error('ERROR',$ah->getErrorMessage());
 		} else if (!$ath->allowsAnon() && !session_loggedin()) {
@@ -322,10 +322,12 @@ switch (getStringFromRequest('func')) {
 						$n = $i+1;
 						if ($error === 1 || $error === 2) {
 							// UPLOAD_ERR_INI_SIZE or UPLOAD_ERR_FORM_SIZE
-							$ext_feedback .= "<br />ERROR: Skipping attachement $n: file is too large.";
+							$ext_feedback .= "<br />" . 
+								sprintf(_("ERROR: Skipping attachment %d: file is too large."), $n);
 						} elseif ($error === 3) {
 							// UPLOAD_ERR_PARTIAL
-							$ext_feedback .= "<br />ERROR: Skipping attachement $n: transfert interrupted.";
+							$ext_feedback .= "<br />" . 
+								sprintf(_("ERROR: Skipping attachment %d: transfer interrupted."), $n);
 						}
 						continue;
 					}
@@ -351,7 +353,7 @@ switch (getStringFromRequest('func')) {
 						} else {
 							if (!util_check_fileupload($tmp_name)) {
 								form_release_key(getStringFromRequest('form_key'));
-								exit_error("Error","Invalid filename");
+								exit_error("Error", _("Invalid filename"));
 							}
 							if (!$afh->upload($tmp_name,$file_name,$type,' ')) {
 								$feedback .= ' <br />'._('File Upload: Error').':'.$afh->getErrorMessage();

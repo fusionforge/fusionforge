@@ -9,7 +9,12 @@
  */
 
 
-$ath->header(array ('title'=>_('Modify').': '.$ah->getID(). ' - ' . $ah->getSummary(),'atid'=>$ath->getID()));
+$ath->header(array 
+	     ('title' => _('Modify').' [#'.$ah->getID(). '] ' 
+	      . util_unconvert_htmlspecialchars($ah->getSummary()),
+	      'atid'=>$ath->getID()));
+
+echo notepad_func();
 
 ?>
 	<h1>[#<?php echo $ah->getID(); ?>] <?php echo $ah->getSummary(); ?></h1>
