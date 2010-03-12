@@ -1,0 +1,3 @@
+common/*                  /usr/share/gforge/plugins/helloworld/common/
+www/*                     /usr/share/gforge/plugins/helloworld/www/
+etc/plugins/helloworld/*  /etc/gforge/plugins/helloworld/
