@@ -93,13 +93,13 @@ $HTML->header(array('title'=>'User Account Registration'));
 
 if (isset($feedback)) {
 
-	print "<p><span class=\"error\">$feedback";
+	print "<div class=\"error\">$feedback";
 
 	if (isset($register_error)) {
 		print " $register_error";
 	}
 
-	print "</span>";
+	print "</div>";
 } 
 if (!isset($timezone) || empty($timezone) || !preg_match('/^[-a-zA-Z0-9_\/\.+]+$/', $timezone)) {
 	$timezone = (isset($sys_default_timezone) ? $sys_default_timezone : 'GMT');
@@ -130,15 +130,15 @@ if ($GLOBALS['sys_require_unique_email']) {
 </p
 ><p>
 <?php echo _('Title:'); ?><br />
-<input type="text" name="title" value="<?php echo htmlspecialchars(stripslashes($title)); ?>" size="10" />
+<input type="text" name="title" value="<?php echo htmlspecialchars($title); ?>" size="10" />
 </p>
 <p>
 <?php echo _('First Name:'); echo utils_requiredField(); ?><br />
-<input size="30" type="text" name="firstname" value="<?php print(htmlspecialchars(stripslashes($firstname))); ?>" />
+<input size="30" type="text" name="firstname" value="<?php print(htmlspecialchars($firstname)); ?>" />
 </p>
 <p>
 <?php echo _('Last Name:'); echo utils_requiredField(); ?><br />
-<input size="30" type="text" name="lastname" value="<?php print(htmlspecialchars(stripslashes($lastname))); ?>" />
+<input size="30" type="text" name="lastname" value="<?php print(htmlspecialchars($lastname)); ?>" />
 </p>
 <p>
 <?php echo _('Language Choice:'); ?><br />
@@ -158,14 +158,14 @@ if ($GLOBALS['sys_require_unique_email']) {
 </p>
 <p>
 @<?php printf(_('Email Address:<span class="important">*</span><br /><em>This email address will be verified before account activation. You will receive a mail forward account at &lt;loginname@%1$s&gt; that will forward to this address.</em>'), $GLOBALS['sys_users_host']); ?>
-<br /><input size="30" type="text" name="email" value="<?php print(htmlspecialchars(stripslashes($email))); ?>" />
+<br /><input size="30" type="text" name="email" value="<?php print(htmlspecialchars($email)); ?>" />
 </p>
 <p>
 <?php
 if ($sys_use_jabber) {
 	echo _('Jabber Address:').'<br />
 	<input size="30" type="text" name="jabber_address" value="'. 
-	htmlspecialchars(stripslashes($jabber_address)) .'" /><br />
+	htmlspecialchars($jabber_address) .'" /><br />
 	<input type="checkbox" name="jabber_only" value="1" />
 	'._('Send auto-generated notices only to my Jabber address').'.';
 }
@@ -173,19 +173,19 @@ if ($sys_use_jabber) {
 </p>
 <p>
 <?php echo _('Address:'); ?><br />
-<input type="text" name="address" value="<?php echo htmlspecialchars(stripslashes($address)); ?>" size="80" />
+<input type="text" name="address" value="<?php echo htmlspecialchars($address); ?>" size="80" />
 </p>
 <p>
 <?php echo _('Address:'); ?><br />
-<input type="text" name="address2" value="<?php echo htmlspecialchars(stripslashes($address2)); ?>" size="80" />
+<input type="text" name="address2" value="<?php echo htmlspecialchars($address2); ?>" size="80" />
 </p>
 <p>
 <?php echo _('Phone:'); ?><br />
-<input type="text" name="phone" value="<?php echo htmlspecialchars(stripslashes($phone)); ?>" size="20" />
+<input type="text" name="phone" value="<?php echo htmlspecialchars($phone); ?>" size="20" />
 </p>
 <p>
 <?php echo _('FAX:'); ?><br />
-<input type="text" name="fax" value="<?php echo htmlspecialchars(stripslashes($fax)); ?>" size="20" />
+<input type="text" name="fax" value="<?php echo htmlspecialchars($fax); ?>" size="20" />
 </p>
 <p>
 <input type="checkbox" name="mail_site" value="1" checked="checked" />

@@ -813,8 +813,8 @@ class Artifact extends Error {
 		} else {
 			//everyone else cannot modify these fields
 			$priority=$this->getPriority();
-			$summary=addslashes($this->getSummary());
-			$description=addslashes($this->getDetails());
+			$summary=$this->getSummary();
+			$description=$this->getDetails();
 			$canned_response=100;
 			$new_artifact_type_id=$this->ArtifactType->getID();
 			$assigned_to=$this->getAssignedTo();
@@ -852,7 +852,7 @@ class Artifact extends Error {
 			$res = $this->ArtifactType->getTechnicians();
 			$arr =& util_result_column_to_array($res,0);
 			if (!in_array($assigned_to, $arr)) {
-				$this->setError("Invalid assigned_to (not member of the project)");
+				$this->setError("Invalid assigned_to (assigned person is not a technician)");
 				return false;
 			}
 		}
@@ -1011,12 +1011,12 @@ class Artifact extends Error {
 			$changes['assigned_to'] = 1;
 			$update = true;
 		}
-		if ($summary && ($this->getSummary() != htmlspecialchars(stripslashes($summary)))) {
+		if ($summary && ($this->getSummary() != htmlspecialchars($summary))) {
 			$this->addHistory('summary', $this->getSummary());
 			$changes['summary'] = 1;
 			$update = true;
 		}
- 		if ($description && ($this->getDetails() != htmlspecialchars(stripslashes($description)))) {
+ 		if ($description && ($this->getDetails() != htmlspecialchars($description))) {
  			$this->addHistory('details', $this->getDetails());
  			$changes['details'] = 1;
  			$update = true;
