@@ -81,7 +81,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 			$sanitizer = new TextSanitizer();
 			$details = $sanitizer->SanitizeHtml($details);
 			$result = db_query_params("UPDATE news_bytes SET is_approved=$1, summary=$2, 
-details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summary), addslashes($details), $id, $group_id));
+details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summary), $details, $id, $group_id));
 
 			if (!$result || db_affected_rows($result) < 1) {
 				$feedback .= _('Error On Update:');
@@ -115,7 +115,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 		
 		echo notepad_func();
 		echo '
-		<h3>'.sprintf(_('Approve a NewsByte For Project: %1$s'), $group->getPublicName()).'</h3>
+		<h1>'.sprintf(_('Approve a NewsByte For Project: %1$s'), $group->getPublicName()).'</h1>
 		<p />
 		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="group_id" value="'.db_result($result,0,'group_id').'" />
@@ -164,12 +164,12 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 		$rows=db_numrows($result);
 		$group =& group_get_object($group_id);
 		
+		echo '<h1>'._('List of News Submitted for Project').': '.$group->getPublicName().'</h1>';
 		if ($rows < 1) {
 			echo '
-				<h4>'._('No Queued Items Found').': '.$group->getPublicName().'</h4>';
+				<div class="warning_msg">'._('No Queued Items Found').'</div>';
 		} else {
 			echo '
-				<h4>'._('List of News Submitted for Project').': '.$group->getPublicName().'</h4>
 				<ul>';
 			for ($i=0; $i<$rows; $i++) {
 				echo '
@@ -200,7 +200,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 				$sanitizer = new TextSanitizer();
 				$details = $sanitizer->SanitizeHtml($details);
 				$result=db_query_params("UPDATE news_bytes SET is_approved='1', post_date=$1, 
-summary=$2, details=$3 WHERE id=$4", array(time(), htmlspecialchars($summary), addslashes($details), $id));
+summary=$2, details=$3 WHERE id=$4", array(time(), htmlspecialchars($summary), $details, $id));
 				if (!$result || db_affected_rows($result) < 1) {
 					$feedback .= _('Error On Update:');
 				} else {
@@ -262,7 +262,7 @@ AND news_bytes.group_id=groups.group_id ", array($id));
 		$user =& user_get_object(db_result($result,0,'submitted_by'));
 
 		echo '
-		<h3>'.sprintf(_('Approve a NewsByte For Project: %1$s'), $group->getPublicName()).'</h3>
+		<h1>'.sprintf(_('Approve a NewsByte For Project: %1$s'), $group->getPublicName()).'</h1>
 		<p />
 		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="for_group" value="'.db_result($result,0,'group_id').'" />
