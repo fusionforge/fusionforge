@@ -183,7 +183,7 @@ function updateVars($vars,$filepath) {
 			// Open readonly but tell you can't write
 			$handle = fopen($filepath,'r');
 			$has_write = false;
-                        $feedback .= sprintf(_("Could not open %s file for read/write. Check the permissions for apache."), $filepath).'<br />';
+			$feedback .= sprintf(_("Could not open %s file for read/write. Check the permissions for apache."), $filepath).'<br />';
 		}
 		if ($handle){
 			fclose($handle); // we had to open it in r+ because we need to check we'll be able to save it later
@@ -244,7 +244,7 @@ function updateVars($vars,$filepath) {
 				}
 			}
 			echo $HTML->listTableBottom();
-			/*echo '<br><center>' . html_build_rich_textarea('filedata',30,150,$filedata,false) . '</center>';*/
+			/*echo '<br /><center>' . html_build_rich_textarea('filedata',30,150,$filedata,false) . '</center>';*/
 			echo '<br />';
 			if ($has_write) {
 				echo '<div align="center"><input type="submit" name="doedit" value="' . _('Save') .'"/></div>';
