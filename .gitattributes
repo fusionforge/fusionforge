@@ -946,6 +946,7 @@ gforge/plugins/helloworld/debian/rules -text
 gforge/plugins/helloworld/debian/source/format -text
 gforge/plugins/helloworld/packaging/control/000source -text
 gforge/plugins/helloworld/packaging/control/222plugin-helloworld -text
+gforge/plugins/helloworld/packaging/control/222plugin-helloworld.shortdesc -text
 gforge/plugins/helloworld/packaging/dirs/plugin-helloworld -text
 gforge/plugins/helloworld/packaging/docs/plugin-helloworld -text
 gforge/plugins/helloworld/packaging/install/plugin-helloworld -text
