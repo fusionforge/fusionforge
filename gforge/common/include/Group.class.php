@@ -872,6 +872,10 @@ class Group extends Error {
 	 * @param	string The name of the new SCM_BOX
 	 */
 	function setSCMBox($scm_box) {
+
+		if ($scm_box == $this->data_array['scm_box']) {
+			return true;
+		}
 		if ($scm_box) {
 			db_begin();
 			$res = db_query_params ('UPDATE groups SET scm_box=$1 WHERE group_id=$2', array ($scm_box, $this->getID ()));
