@@ -97,7 +97,6 @@ if (session_loggedin()) {
 					exit_error('Error',$f->getErrorMessage());
 				}
 	   			$new_id=$f->getID();
-
 				$sql='INSERT INTO news_bytes (group_id,submitted_by,is_approved,post_date,forum_id,summary,details) 
  VALUES ($1, $2, $3, $4, $5, $6, $7)';
 				$result=db_query_params($sql,
@@ -124,7 +123,8 @@ if (session_loggedin()) {
 	/*
 		Show the submit form
 	*/
-	news_header(array('title'=>_('News')));
+	news_header(array('title'=>_('Submit News')));
+	echo '<h1>' . _('Submit News') . '</h1>';
 
 	$jsfunc = notepad_func();
 	$group = group_get_object($group_id);
@@ -141,7 +141,7 @@ if (session_loggedin()) {
 		<strong>'._('Subject').':</strong>'.utils_requiredField().'<br />
 		<input type="text" name="summary" value="" size="60" maxlength="60" /></p>
 		<p>
-		<strong>'._('Details').':</strong>'.notepad_button('document.forms[1].details').utils_requiredField().'<br />';
+		<strong>'._('Details').':</strong>'.notepad_button('document.forms[1].details').utils_requiredField().'</p>';
 	
 	$GLOBALS['editor_was_set_up']=false;
 	$params = array() ;
