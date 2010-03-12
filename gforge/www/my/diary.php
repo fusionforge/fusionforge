@@ -169,11 +169,11 @@ To stop monitoring this user, login to %s and visit the following link:
 	}
 
 	echo site_user_header(array('title'=>_('My Diary And Notes')));
+	echo '<h1>' . _('My Diary And Notes') . '</h1>';
 
 	echo '
-	<p>&nbsp;</p>
-	<h3>'. $info_str .'</h3>
-	<p />
+	<h2>'. $info_str .'</h2>
+
 	<form action="'. getStringFromServer('PHP_SELF') .'" method="post">
 	<input type="hidden" name="form_key" value="'.form_generate_key().'"/>
 	<input type="hidden" name="'. $proc_str .'" value="1" />
