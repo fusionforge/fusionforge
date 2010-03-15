@@ -17,7 +17,7 @@ require_once $gfwww.'stats/site_stats_utils.php';
 // require you to be a member of the sfstats group
 session_require( array('group'=>$sys_stats_group) );
 
-$HTML->header(array('title'=>sprintf(_('%1$s Site Statistics'), $GLOBALS['sys_name'])));
+$HTML->header(array('title'=>sprintf(_('%1$s Site Statistics'), fusionforge_get_config ('core', 'forge_name'))));
 
 //
 // BEGIN PAGE CONTENT CODE

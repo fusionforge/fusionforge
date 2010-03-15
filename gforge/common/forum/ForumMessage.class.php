@@ -690,7 +690,7 @@ Or reply to this e-mail entering your response between the following markers:
 				_("You are receiving this email because you elected to monitor this forum.".
 				  "\nTo stop monitoring this forum, login to %s and visit: \n%s\n"),
 				$text,
-				$GLOBALS['sys_name'],
+				fusionforge_get_config ('core', 'forge_name'),
 				util_make_url('/forum/monitor.php?forum_id='.$this->Forum->getID().
 					      '&group_id='.$this->Forum->Group->getID().'&stop=1')
 				);
@@ -853,7 +853,7 @@ Or reply to this e-mail entering your response between the following markers:
 			$body .=
 			"\n\n______________________________________________________________________".
 			"\nYou are receiving this email because you elected to monitor this forum.".
-			"\nTo stop monitoring this forum, login to ".$GLOBALS['sys_name']." and visit: ".
+			"\nTo stop monitoring this forum, login to ".fusionforge_get_config ('core', 'forge_name')." and visit: ".
 				"\n".util_make_url ('/forum/monitor.php?forum_id='.$this->Forum->getID() .'&group_id='.$this->Forum->Group->getID().'&stop=1');
 	
 			$extra_headers = "Return-Path: <noreply@".$GLOBALS['sys_default_domain'].">\n";

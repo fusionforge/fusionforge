@@ -64,9 +64,9 @@ class Theme extends Layout {
 	 */
 	function headerStart($params) {
 		if (!$params['title']) {
-			$params['title'] =  $GLOBALS['sys_name'];
+			$params['title'] =  fusionforge_get_config ('core', 'forge_name');
 		} else {
-			$params['title'] =  $GLOBALS['sys_name'] . ': ' . $params['title'];
+			$params['title'] =  fusionforge_get_config ('core', 'forge_name') . ': ' . $params['title'];
 		}
 		print '<?xml version="1.0" encoding="utf-8"';
 		?>
@@ -84,7 +84,7 @@ class Theme extends Layout {
 <title><?php echo $params['title']; ?></title>
 		<?php $this->headerLink(); ?>
 		<?php	if (isset($GLOBALS['group_id'])) {
-			$activity = '<link rel="alternate" title="'.$GLOBALS['sys_name'].' - New Activity RSS" href="'.
+			$activity = '<link rel="alternate" title="'.fusionforge_get_config ('core', 'forge_name').' - New Activity RSS" href="'.
 			util_make_url ('/export/rss20_activity.php?group_id='.$GLOBALS['group_id']).
 			'" type="application/rss+xml"/>';
 			echo $activity;

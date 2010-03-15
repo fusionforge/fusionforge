@@ -5,7 +5,7 @@ require_once dirname(__FILE__).'/../www/env.inc.php';
 require_once $gfwww.'include/squal_pre.php';
 
 if (!$gfconn) {
-	print "$sys_name Could Not Connect to Database: ".db_error();
+	print fusionforge_get_config ('core', 'forge_name')." Could Not Connect to Database: ".db_error();
 	exit;
 }
 

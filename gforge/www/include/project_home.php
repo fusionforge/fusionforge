@@ -43,7 +43,7 @@ $res_admin = db_query_params ('SELECT users.user_id,users.user_name,users.realna
 				'A'));
 
 if ($project->getStatus() == 'H') {
-	print "<p>".sprintf(_('NOTE: This project entry is maintained by the %1$s staff. We are not the official site for this product. Additional copyright information may be found on this project\'s homepage.'), $GLOBALS['sys_name'])."</p>\n";
+	print "<p>".sprintf(_('NOTE: This project entry is maintained by the %1$s staff. We are not the official site for this product. Additional copyright information may be found on this project\'s homepage.'), fusionforge_get_config ('core', 'forge_name'))."</p>\n";
 }
 
 $hook_params = array () ;

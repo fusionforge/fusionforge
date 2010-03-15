@@ -20,9 +20,9 @@ function show_features_boxes() {
 	if ($sys_use_project_tags) {
 		$return .= $HTML->boxTop(_('Tag Cloud'), 'Tag_Cloud');
 		$return .= tag_cloud();
-		$return .= $HTML->boxMiddle(sprintf(_('%1$s Statistics'), $GLOBALS['sys_name']), 'Forge_Statistics');
+		$return .= $HTML->boxMiddle(sprintf(_('%1$s Statistics'), fusionforge_get_config ('core', 'forge_name')), 'Forge_Statistics');
 	} else {
-		$return .= $HTML->boxTop(sprintf(_('%1$s Statistics'), $GLOBALS['sys_name']), 'Forge_Statistics');
+		$return .= $HTML->boxTop(sprintf(_('%1$s Statistics'), fusionforge_get_config ('core', 'forge_name')), 'Forge_Statistics');
 	}
 	$return .= show_sitestats();
 	if ($sys_use_frs) {

@@ -100,7 +100,7 @@ AND user_diary_monitor.monitored_user=$1',
 							
 							$to = ''; // send to noreply@
 							$subject = sprintf (_("[%s User Notes: %s] %s"),
-									    $GLOBALS['sys_name'],
+									    fusionforge_get_config ('core', 'forge_name'),
 									    $u->getRealName(),
 									    stripslashes($summary)) ;
 							$body = util_line_wrap(stripslashes($details)) ;
@@ -112,7 +112,7 @@ To stop monitoring this user, login to %s and visit the following link:
 
 %s
 ",
-								   $GLOBALS['sys_name'],
+								   fusionforge_get_config ('core', 'forge_name'),
 								   util_make_url ("/developer/monitor.php?diary_user=". user_getid())) ;
 							
 							util_send_message($to, $subject, $body, $to, $tolist);

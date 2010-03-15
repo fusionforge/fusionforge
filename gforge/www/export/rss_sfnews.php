@@ -61,9 +61,9 @@ function getres ($gid, $l) {
 
 print "\n <channel rdf:about=\"".util_make_url ('/export/rss_sfnews.php')."\">\n";
 
-print "  <title>".$GLOBALS['sys_name']." Project News</title>\n";
+print "  <title>".fusionforge_get_config ('core', 'forge_name')." Project News</title>\n";
 print "  <link>".util_make_url ('/')."</link>\n";
-print "  <description>".$GLOBALS['sys_name']." Project News Highlights</description>\n";
+print "  <description>".fusionforge_get_config ('core', 'forge_name')." Project News Highlights</description>\n";
 // ## item outputs
 print " <items>\n";
 print " <rdf:Seq>\n";

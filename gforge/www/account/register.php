@@ -80,7 +80,7 @@ if (getStringFromRequest('submit')) {
 		if ($register) {
 			echo $HTML->header(array('title'=>'Register Confirmation'));
 			
-			printf(_('<p>Congratulations. You have registered on %1$s.  <p> You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.'), $sys_name);
+			printf(_('<p>Congratulations. You have registered on %1$s.  <p> You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.'), fusionforge_get_config ('core', 'forge_name'));
 			echo $HTML->footer(array());
 			exit;
 		} else {

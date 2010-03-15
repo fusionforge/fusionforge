@@ -193,8 +193,8 @@ You are encouraged to change this password as soon as possible.
 Thank you for registering your project with %1$s.
 
 -- the %1$s staff
-'), $GLOBALS['sys_name'], $GLOBALS['sys_lists_host'], $realListName, $this->getExternalInfoUrl(), $this->getExternalAdminUrl(), $listPassword);
-			$mailSubject = sprintf(_('%1$s New Mailing List'), $GLOBALS['sys_name']);
+'), fusionforge_get_config ('core', 'forge_name'), $GLOBALS['sys_lists_host'], $realListName, $this->getExternalInfoUrl(), $this->getExternalAdminUrl(), $listPassword);
+			$mailSubject = sprintf(_('%1$s New Mailing List'), fusionforge_get_config ('core', 'forge_name'));
 			
 			util_send_message($userEmail, $mailSubject, $mailBody, 'admin@'.$GLOBALS['sys_default_domain']);
 		}

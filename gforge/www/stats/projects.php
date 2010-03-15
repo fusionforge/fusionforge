@@ -23,7 +23,7 @@ $trovecatid=getIntFromRequest('trovecatid');
 // require you to be a member of the sfstats group (group_id = 11084)
 session_require( array('group'=>$sys_stats_group) );
 
-$HTML->header(array('title'=>sprintf(_('%1$s Site Statistics'), $GLOBALS['sys_name'])));
+$HTML->header(array('title'=>sprintf(_('%1$s Site Statistics'), fusionforge_get_config ('core', 'forge_name'))));
 
 ?>
 <h1><?php echo _('Project Statistical Comparisons'); ?></h1>

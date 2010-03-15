@@ -57,8 +57,6 @@ class Theme extends Layout {
 	 * @param	array	Header parameters array
 	 */
 	function header($params) {
-		global $sys_name;
-
 		$this->headerStart($params); ?>
 
 <link rel="stylesheet" type="text/css" href="<?php echo util_make_uri ('/themes/osx/css/theme.css'); ?>" />

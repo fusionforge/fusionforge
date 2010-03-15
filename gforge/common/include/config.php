@@ -53,7 +53,7 @@ function read_config_file ($file) {
 	global $fusionforge_config ;
 
 	// Initial implementation reuses values from local.inc:
-	$fusionforge_config['core']['forge_name'] = $GLOBALS['sys_name'] ;
+	$fusionforge_config['core']['forge_name'] = fusionforge_get_config ('core', 'forge_name') ;
 	return ;
 
 	// Real implementation should read *.ini files

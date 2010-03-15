@@ -61,15 +61,15 @@ if ($group_id) {
        <rss version="2.0">
        ';
 	print " <channel>\n";
-	print "  <title>".$GLOBALS['sys_name']." $title Activity</title>\n";
+	print "  <title>".fusionforge_get_config ('core', 'forge_name')." $title Activity</title>\n";
 	print "  <link>$url/activity/$link</link>\n";
-	print "  <description>".$GLOBALS['sys_name']." Project Activity$description</description>\n";
+	print "  <description>".fusionforge_get_config ('core', 'forge_name')." Project Activity$description</description>\n";
 	print "  <language>en-us</language>\n";
-	print "  <copyright>Copyright ".date("Y")." ".$GLOBALS['sys_name']."</copyright>\n";
+	print "  <copyright>Copyright ".date("Y")." ".fusionforge_get_config ('core', 'forge_name')."</copyright>\n";
 	print "  <webMaster>$webmaster</webMaster>\n";
 	print "  <lastBuildDate>".rss_date(time())."</lastBuildDate>\n";
 	print "  <docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
-	print "  <generator>".$GLOBALS['sys_name']." RSS generator</generator>\n";
+	print "  <generator>".fusionforge_get_config ('core', 'forge_name')." RSS generator</generator>\n";
 
 	$res = db_query_params ('SELECT * FROM activity_vw WHERE activity_date BETWEEN $1 AND $2 AND group_id=$3 ORDER BY activity_date DESC',
 				array(time() - 30*86400,

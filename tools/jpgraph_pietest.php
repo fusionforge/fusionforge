@@ -62,7 +62,7 @@ $end=strtotime("6/30/2004");
 
 //$graph->title->Set(_("Commits By User")." (".date('m/d/Y',$start) ."-". date('m/d/Y',$end) .")");
 $graph->title->Set(utf8_decode(_("Commits By User")." (".strftime('%x',$start) ." - ". strftime('%x',$end) .")"));
-$graph->subtitle->Set($sys_name);
+$graph->subtitle->Set(fusionforge_get_config ('core', 'forge_name'));
 
 // Create the tracker open plot
 ////report_pie_arr(util_result_column_to_array($res,0), util_result_column_to_array($res,1));

@@ -13,7 +13,7 @@ $vers=$forge->software_version;
 $name=$forge->software_name;
 $date=rss_date(time());
 $link="http://".$GLOBALS['sys_default_domain'].'/';
-$title=$GLOBALS['sys_name'].' - Software version';
+$title=fusionforge_get_config ('core', 'forge_name').' - Software version';
 
 header("Content-Type: text/xml; charset=utf-8");
 print '<?xml version="1.0" encoding="UTF-8"?>';

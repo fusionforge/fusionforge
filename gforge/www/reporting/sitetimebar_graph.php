@@ -92,7 +92,7 @@ $graph->Add($bplot);
 
 // Setup the titles
 $graph->title->Set("Hours Recorded (".date('m/d/Y',$start) ."-". date('m/d/Y',$end) .")");
-$graph->subtitle->Set($sys_name);
+$graph->subtitle->Set(fusionforge_get_config ('core', 'forge_name'));
 $graph->xaxis->title->Set("Date");
 $graph->yaxis->title->Set("Hours");
 

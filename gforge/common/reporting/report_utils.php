@@ -24,12 +24,12 @@
  */
 
 function report_header($title) {
-	global $HTML,$sys_name;
+	global $HTML ;
 	echo $HTML->header(array('title'=>" "._('Reporting').": " . $title));
 	if (isset($GLOBALS['feedback'])) {
 		echo html_feedback_top($GLOBALS['feedback']);
 	}
-	echo "<h1>".sprintf(_('%1$s Reporting'), $sys_name)."</h1>\n";
+	echo "<h1>".sprintf(_('%1$s Reporting'), fusionforge_get_config ('core', 'forge_name'))."</h1>\n";
 }
 
 function report_footer() {

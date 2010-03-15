@@ -38,7 +38,7 @@ if ( $wgCommandLineMode ) {
                 die( "This script must be run from the command line\n" );
         }
 }
-$wgSitename         = "$sys_name Wiki";
+$wgSitename         = fusionforge_get_config ('core', 'forge_name')." Wiki";
 $wgScriptPath       = "/plugins/mediawiki/wiki/$fusionforgeproject" ;
 
 $wgEmergencyContact = "webmaster@fusionforge.org";

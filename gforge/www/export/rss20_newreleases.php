@@ -41,11 +41,11 @@ if ($group_id) {
 
 // ## one time output
 print " <channel>\n";
-print "  <title>".$GLOBALS['sys_name']." Project$title Releases</title>\n";
+print "  <title>".fusionforge_get_config ('core', 'forge_name')." Project$title Releases</title>\n";
 print "  <link>http://".$GLOBALS['sys_default_domain']."$link</link>\n";
-print "  <description>".$GLOBALS['sys_name']." Project Releases$description</description>\n";
+print "  <description>".fusionforge_get_config ('core', 'forge_name')." Project Releases$description</description>\n";
 print "  <language>en-us</language>\n";
-print "  <copyright>Copyright ".date("Y")." ".$GLOBALS['sys_name']."</copyright>\n";
+print "  <copyright>Copyright ".date("Y")." ".fusionforge_get_config ('core', 'forge_name')."</copyright>\n";
 print "  <webMaster>$webmaster</webMaster>\n";
 print "  <lastBuildDate>".rss_date(time())."</lastBuildDate>\n";
 print "  <docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";

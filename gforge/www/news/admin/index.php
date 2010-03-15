@@ -151,7 +151,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 		unset($GLOBALS['editor_was_set_up']);
 		
 		echo '<p>
-		<strong>'.sprintf(_('If this item is on the %1$s home page and you edit it, it will be removed from the home page.'), $GLOBALS['sys_name']).'</strong><br /></p>
+		<strong>'.sprintf(_('If this item is on the %1$s home page and you edit it, it will be removed from the home page.'), fusionforge_get_config ('core', 'forge_name')).'</strong><br /></p>
 		<input type="submit" name="submit" value="'._('Submit').'" />
 		</form>';
 
@@ -342,7 +342,7 @@ AND news_bytes.group_id=groups.group_id ", array($id));
 
 } else {
 
-	exit_error(_('Permission denied.'),sprintf(_('You have to be an admin on the project you are editing or a member of the %s News team.'), $GLOBALS['sys_name']));
+	exit_error(_('Permission denied.'),sprintf(_('You have to be an admin on the project you are editing or a member of the %s News team.'), fusionforge_get_config ('core', 'forge_name')));
 
 }
 

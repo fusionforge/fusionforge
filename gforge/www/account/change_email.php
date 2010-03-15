@@ -64,10 +64,10 @@ Please visit the following URL to complete the email change:
 %2$s
 
  -- the %1$s staff'), 
-					 $GLOBALS['sys_name'],
+					 fusionforge_get_config ('core', 'forge_name'),
 					 util_make_url ('/account/change_email-complete.php?ch=_'.$confirm_hash));
 
-	util_send_message($newemail,sprintf(_('%1$s Verification'), $GLOBALS['sys_name']),$message);
+	util_send_message($newemail,sprintf(_('%1$s Verification'), fusionforge_get_config ('core', 'forge_name')),$message);
 
 	site_user_header(array('title'=>_('Email Change Confirmation')));
 
