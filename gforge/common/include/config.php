@@ -71,21 +71,28 @@ if (!isset ($fusionforge_config)) {
 	$fusionforge_config = new FusionForgeConfig () ;
 }
 
-function fusionforge_get_config ($var, $section = 'core') {
+function fusionforge_get_config ($var, $section = NULL) {
 	$c = FusionForgeConfig::get_instance () ;
+
+	if ($section == NULL) {
+		$section = 'core' ;
+	}
 
 	return $c->get_value ($section, $var) ;
 }
 
-function fusionforge_get_config_array ($arr) {
+function fusionforge_get_config_array () {
 	$c = FusionForgeConfig::get_instance () ;
 
 	$ret = array () ;
 
-	foreach ($arr as $item) {
-		$var = $arr[0] ;
-		if (isset ($arr[1])) {
-			$section = $arr[1] ;
+	foreach (func_get_args() as $item) {
+		if (! is_array ($item)) {
+			$item = array ($item) ;
+		}
+		$var = $item[0] ;
+		if (isset ($item[1])) {
+			$section = $item[1] ;
 		} else {
 			$section = 'core' ;
 		}
@@ -94,6 +101,29 @@ function fusionforge_get_config_array ($arr) {
 
 	return $ret ;
 }
+
+function fusionforge_set_vars_from_config () {
+	$c = FusionForgeConfig::get_instance () ;
+
+	foreach (func_get_args() as $item) {
+		$section = NULL ;
+		if (is_array ($item)) {
+			$var = $item[0] ;
+			$x = $var ;
+			if (isset ($item[1])) {
+				$section = $item[1] ;
+				$x = $section.'__'.$var ;
+			}
+		} else {
+			$var = $item ;
+			$x = $item ;
+		}
+
+		global $$x ;
+		$$x = fusionforge_get_config ($var, $section) ;
+	}
+}
+
 
 function fusionforge_define_config_item ($var, $section, $default) {
 	$c = FusionForgeConfig::get_instance () ;
