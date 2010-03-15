@@ -77,6 +77,24 @@ function fusionforge_get_config ($var, $section = 'core') {
 	return $c->get_value ($section, $var) ;
 }
 
+function fusionforge_get_config_array ($arr) {
+	$c = FusionForgeConfig::get_instance () ;
+
+	$ret = array () ;
+
+	foreach ($arr as $item) {
+		$var = $arr[0] ;
+		if (isset ($arr[1])) {
+			$section = $arr[1] ;
+		} else {
+			$section = 'core' ;
+		}
+		$ret[] = $c->get_value ($section, $var) ;
+	}
+
+	return $ret ;
+}
+
 function fusionforge_define_config_item ($var, $section, $default) {
 	$c = FusionForgeConfig::get_instance () ;
 
