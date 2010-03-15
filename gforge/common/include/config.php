@@ -37,7 +37,7 @@ function fusionforge_get_config ($section, $var) {
 	return $fusionforge_config[$section][$var] ;
 }
 
-function define_config_item ($section, $var, $default) {
+function fusionforge_define_config_item ($section, $var, $default) {
 	global $fusionforge_config ;
 
 	if (!isset ($fusionforge_config[$section])) {

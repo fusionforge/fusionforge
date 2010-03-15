@@ -33,8 +33,8 @@ if (!isset($no_gz_buffer) || !$no_gz_buffer) {
 
 require $gfcgfile;
 require $gfcommon.'include/config.php';
-define_config_item ('core', 'forge_name', $GLOBALS['sys_name']) ;
-define_config_itme ('core', 'user_registration_restricted', $GLOBALS['sys_user_reg_restricted']) ;
+fusionforge_define_config_item ('core', 'forge_name', $GLOBALS['sys_name']) ;
+fusionforge_define_config_item ('core', 'user_registration_restricted', $GLOBALS['sys_user_reg_restricted']) ;
 read_config ($gfconfig.'/fusionforge.ini') ;
 
 // get constants used for flags or status
