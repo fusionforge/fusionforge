@@ -38,8 +38,20 @@ function get_config ($section, $var) {
 	return $fusionforge_config[$section][$var] ;
 }
 
-function read_config () {
+function read_config_file ($file) {
+	// Initial implementation reuses values from local.inc:
 	$fusionforge_config['core']['forge_name'] = $GLOBALS['sys_name'] ;
+	return ;
+
+	// Real implementation should read *.ini files
+	/* Pseudo-code:
+	 $sections = ini_parse ($file) ;
+	 foreach ($sections as $sectname => $options) {
+	 	foreach ($options as $key => $value) {
+			$fusionforge_config[$sectname][$key] = $value ;
+	 	}
+	 }
+	*/
 }
 
 // Local Variables:

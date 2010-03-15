@@ -33,6 +33,7 @@ if (!isset($no_gz_buffer) || !$no_gz_buffer) {
 
 require $gfcgfile;
 require $gfcommon.'include/config.php';
+read_config ($gfconfig.'/fusionforge.ini') ;
 
 // get constants used for flags or status
 require $gfcommon.'include/constants.php';
