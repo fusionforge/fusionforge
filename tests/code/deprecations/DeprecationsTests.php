@@ -33,16 +33,17 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 	{
 		$vars = array ('sys_name',
 			       'sys_user_reg_restricted') ;
-		
-		foreach ($vars as $v) {		
-			$output = `cd .. ; find gforge tests -name '*.php' -type f | xargs pcregrep -l '\\$$v' \
-					   | grep -v ^gforge/www/include/pre.php`;
-			$this->assertEquals('', $output, "Found deprecated variable $$v:");
 
-			$output = `cd .. ; find gforge tests -name '*.php' -type f | xargs pcregrep -n '\\\$GLOBALS\\[.?$v.?\\]' \
+		$pattern = implode ('|', $vars) ;
+		
+		$output = `cd .. ; find gforge tests -name '*.php' -type f | xargs pcregrep -n '\\$($pattern)\b' \
 					   | grep -v ^gforge/www/include/pre.php`;
-			$this->assertEquals('', $output, "Found deprecated variable \$GLOBALS['$v']:");
-		}
+		$this->assertEquals('', $output, "Found deprecated \$var for var in ($pattern):");
+
+		$output = `cd .. ; find gforge tests -name '*.php' -type f | xargs pcregrep -n '\\\$GLOBALS\\[.?($pattern).?\\]' \
+					   | grep -v ^gforge/www/include/pre.php`;
+		$this->assertEquals('', $output, "Found deprecated \$GLOBALS['\$var'] for var in ($pattern):");
+		
 	}
 	
 // Local Variables:
