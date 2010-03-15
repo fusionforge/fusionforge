@@ -34,32 +34,32 @@ class FusionForgeConfig {
 	}
   
 	public function get_value ($section, $var) {
-		if (!isset ($settings[$section])
-		    || !isset ($settings[$section][$var])) {
+		if (!isset (self::$instance->settings[$section])
+		    || !isset (self::$instance->settings[$section][$var])) {
 			return NULL ;
 		}
-		return $settings[$section][$var] ;
+		return self::$instance->settings[$section][$var] ;
 	}
 
 	public function set_value ($section, $var, $value) {
-		if (!isset ($settings[$section])) {
-			$settings[$section] = array () ;
+		if (!isset (self::$instance->settings[$section])) {
+			self::$instance->settings[$section] = array () ;
 		}
 
-		if (!isset ($settings[$section][$var])) {
-			$settings[$section][$var] = $value ;
+		if (!isset (self::$instance->settings[$section][$var])) {
+			self::$instance->settings[$section][$var] = $value ;
 		}
 	}
 
-	function fusionforge_read_config_file ($file) {
+	function read_config_file ($file) {
 		$sections = parse_ini_file ($file, true) ;
-		foreach ($sections as $sectname => $options) {
-			if (!isset ($settings[$section]))
+		foreach ($sections as $section => $options) {
+			if (!isset (self::$instance->settings[$section]))
 				continue ;
-			foreach ($options as $key => $value) {
-				if (!isset ($settings[$section][$var]))
+			foreach ($options as $var => $value) {
+				if (!isset (self::$instance->settings[$section][$var]))
 					continue ;
-				$settings[$sectname][$key] = $value ;
+				self::$instance->settings[$section][$var] = $value ;
 			}
 		}
 		return ;

@@ -8,6 +8,7 @@ require_once 'PHPUnit/TextUI/TestRunner.php';
 
 // Unit tests
 require_once 'unit/utils/AllTests.php';
+require_once 'unit/config/AllTests.php';
 //require_once 'ACL/AllTests.php';
 
 // Code tests
@@ -40,6 +41,7 @@ class AllTests
 		// Unit tests
 		$suite->addTest(Utils_AllTests::suite());
 //		$suite->addTest(ACL_AllTests::suite());
+		$suite->addTest(Config_AllTests::suite());
 
 		// Code tests
 		$suite->addTest(Syntax_AllTests::suite());

@@ -3943,6 +3943,8 @@ tests/scripts/start_vz.sh -text
 tests/scripts/stop_vm.sh -text
 tests/scripts/stop_vz.sh -text
 tests/unit/AllTests.php -text
+tests/unit/config/AllTests.php -text
+tests/unit/config/ConfigTests.php -text
 tests/unit/utils/AllTests.php -text
 tests/unit/utils/DbUtilsTests.php -text
 tests/unit/utils/TextSanitizerTests.php -text
