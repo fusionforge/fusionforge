@@ -55,9 +55,9 @@ class Navigation extends Error {
                 if (!$asHTML) {
                         // get the title
                         if (!$params['title']) {
-                                return $GLOBALS['sys_name'];
+                                return get_config ('core', 'forge_name') ;
                         } else {
-                                return $GLOBALS['sys_name'] . ': ' . $params['title'];
+                                return get_config ('core', 'forge_name') . ': ' . $params['title'];
                         }
                 } else {
                         // return HTML code otherwise
