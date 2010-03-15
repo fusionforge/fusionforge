@@ -32,6 +32,7 @@ if (!isset($no_gz_buffer) || !$no_gz_buffer) {
 }
 
 require $gfcgfile;
+require $gfcommon.'include/config.php';
 
 // get constants used for flags or status
 require $gfcommon.'include/constants.php';
