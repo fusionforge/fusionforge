@@ -407,7 +407,7 @@ function session_set_new($user_id) {
 	session_cookie("session_ser", $cookie, "", $GLOBALS['sys_session_expire']);
 	$session_ser=$cookie;
 
-	$res = db_query_params ('SELECT count(*) FROM user_session WHERE session_hash = "$1"',
+	$res = db_query_params ('SELECT count(*) FROM user_session WHERE session_hash =$1',
 				array (session_get_session_cookie_hash($cookie))) ;
 	if (!$res || db_numrows($res) < 1) {
 		db_query_params ('INSERT INTO user_session (session_hash,ip_addr,time,user_id) VALUES ($1,$2,$3,$4)',
