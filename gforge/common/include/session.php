@@ -316,10 +316,12 @@ function session_issecure() {
  *	@return true/false
  */
 function session_cookie($name ,$value, $domain = '', $expiration = 0) {
-	if ( $expiration != 0){
-		setcookie($name, $value, time() + $expiration, '/', $domain, 0);
-	} else {
-		setcookie($name, $value, $expiration, '/', $domain, 0);
+	if (php_sapi_name() != 'cli') {
+		if ( $expiration != 0){
+			setcookie($name, $value, time() + $expiration, '/', $domain, 0);
+		} else {
+			setcookie($name, $value, $expiration, '/', $domain, 0);
+		}
 	}
 }
 
