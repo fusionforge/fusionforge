@@ -201,7 +201,7 @@ class Navigation extends Error {
                         $res['titles'][] = _('Log In');
                         $res['urls'][] = util_make_url($url);
                         
-                        if (!$GLOBALS['sys_user_reg_restricted']) {
+                        if (!get_config ('core', 'user_registration_restricted')) {
                                 $res['titles'][] = _('New Account');
                                 $res['urls'][] = util_make_url('/account/register.php');
                         }

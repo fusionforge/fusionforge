@@ -27,15 +27,22 @@ if (!isset ($fusionforge_config)) {
 }
 
 function get_config ($section, $var) {
-	if (!isset ($fusionforge_config[$section])) {
+	if (!isset ($fusionforge_config[$section])
+	    || !isset ($fusionforge_config[$section][$var])) {
 		return false ;
+	}
+	
+	return $fusionforge_config[$section][$var] ;
+}
+
+function define_config_item ($section, $var, $default) {
+	if (!isset ($fusionforge_config[$section])) {
+		$fusionforge_config[$section] = array () ;
 	}
 
 	if (!isset ($fusionforge_config[$section][$var])) {
-		return false ;
+		$fusionforge_config[$section][$var] = $default ;
 	}
-
-	return $fusionforge_config[$section][$var] ;
 }
 
 function read_config_file ($file) {
