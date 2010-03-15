@@ -27,6 +27,8 @@ if (!isset ($fusionforge_config)) {
 }
 
 function fusionforge_get_config ($section, $var) {
+	global $fusionforge_config ;
+
 	if (!isset ($fusionforge_config[$section])
 	    || !isset ($fusionforge_config[$section][$var])) {
 		return false ;
@@ -36,6 +38,8 @@ function fusionforge_get_config ($section, $var) {
 }
 
 function define_config_item ($section, $var, $default) {
+	global $fusionforge_config ;
+
 	if (!isset ($fusionforge_config[$section])) {
 		$fusionforge_config[$section] = array () ;
 	}
@@ -46,6 +50,8 @@ function define_config_item ($section, $var, $default) {
 }
 
 function read_config_file ($file) {
+	global $fusionforge_config ;
+
 	// Initial implementation reuses values from local.inc:
 	$fusionforge_config['core']['forge_name'] = $GLOBALS['sys_name'] ;
 	return ;
