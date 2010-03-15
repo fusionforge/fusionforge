@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-01-07 18:16+0100\n"
-"PO-Revision-Date: 2010-03-15 16:30+0200\n"
+"PO-Revision-Date: 2010-03-15 16:54+0200\n"
 "Last-Translator: Nils Kollat <n.kollat@tarent.de>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: de\n"
@@ -327,9 +327,8 @@ msgstr ""
 #: common/include/Error.class.php:126 common/include/Group.class.php:426
 #: common/include/Group.class.php:498 www/include/exit.php:37
 #: www/news/admin/index.php:345
-#, fuzzy
 msgid "Permission denied."
-msgstr "Zugriff verweigert"
+msgstr "Erlaubnis verweigert"
 
 #: common/include/Error.class.php:143 common/include/User.class.php:280
 #: www/tracker/tracker.php:74
@@ -337,18 +336,17 @@ msgid "Invalid Email Address"
 msgstr "Ungültige E-Mail Adresse"
 
 #: common/include/Error.class.php:163
-#, fuzzy, php-format
+#, php-format
 msgid "Error On Update: %s"
-msgstr "Fehler bei der Aktualisierung:"
+msgstr "Fehler bei der Aktualisierung: %s"
 
 #: common/include/Error.class.php:204 www/frs/admin/editrelease.php:219
 msgid "Missing Parameters"
 msgstr "Fehlende Parameter"
 
 #: common/include/Group.class.php:232
-#, fuzzy
 msgid "Group Not Found"
-msgstr "Datei nicht gefunden"
+msgstr "Gruppe nicht gefunden"
 
 #: common/include/Group.class.php:248 www/survey/admin/add_question.php:35
 #: www/survey/admin/add_survey.php:36 www/survey/admin/edit_question.php:37
@@ -358,9 +356,8 @@ msgstr "Datei nicht gefunden"
 #: www/survey/admin/show_results_csv.php:35
 #: www/survey/admin/show_results_individual.php:38
 #: www/survey/admin/survey.php:40
-#, fuzzy
 msgid "Permission denied"
-msgstr "Zugriff verweigert"
+msgstr "Erlaubnis verweigert"
 
 #: common/include/Group.class.php:264
 #, php-format
@@ -369,7 +366,7 @@ msgstr ""
 
 #: common/include/Group.class.php:288
 msgid "Group::create: Group object already exists"
-msgstr ""
+msgstr "Group::create: Ein solches Gruppen-Objekt existiert bereits"
 
 #: common/include/Group.class.php:293
 msgid "Invalid Unix name"
@@ -390,6 +387,8 @@ msgid ""
 "The Registration Purpose text is too long. Please make it smaller than 1500 "
 "bytes."
 msgstr ""
+"Der Text Ihrer Registrationsabsicht ist zu lang. Bitte verkürzen Sie ihn auf "
+"unter 1500 bytes."
 
 #: common/include/Group.class.php:309
 msgid "Describe in a more comprehensive manner your project."
@@ -399,21 +398,25 @@ msgstr "Beschreiben Sie Ihr Projekt umfassender."
 msgid ""
 "Your project description is too long. Please make it smaller than 256 bytes."
 msgstr ""
+"Ihre Projektbeschreibung ist zu lang. Bitte verkürzen Sie diese auf unter "
+"256 bytes."
 
 #: common/include/Group.class.php:352
 #, php-format
 msgid "ERROR: Could not create group: %s"
-msgstr ""
+msgstr "Fehler: Konnte Gruppe: %s nicht anlegen"
 
 #: common/include/Group.class.php:359
 #, php-format
 msgid "ERROR: Could not get group id: %s"
-msgstr ""
+msgstr "Fehler: Konnte Gruppe: %s nicht erreichen"
 
 #: common/include/Group.class.php:378
 #, php-format
 msgid "ERROR: Could not add admin to newly created group: %s"
 msgstr ""
+"Fehler: Konnte keinen Administrator zur neu eingetragenen Gruppe: %s "
+"hinzufügen"
 
 #: common/include/Group.class.php:421 common/include/Group.class.php:493
 msgid "Could not get permission."
@@ -422,7 +425,7 @@ msgstr "Zugriff nicht erhalten."
 #: common/include/Group.class.php:444
 #, php-format
 msgid "ERROR: DB: Could not change group properties: %s"
-msgstr ""
+msgstr "Fehler: Datenbank: Konnte die Gruppen-Eigenschaften: %s nicht ändern."
 
 #: common/include/Group.class.php:512
 #, php-format
@@ -436,21 +439,22 @@ msgid ""
 "Error updating project information: Maximum length for Project Description "
 "is 255 chars."
 msgstr ""
+"Fehler bei der Aktualisierung der Projekt- Informationen: Die maximale Länge "
+"für Projektbeschreibungen beträgt 255 Zeichen."
 
 #: common/include/Group.class.php:613
-#, fuzzy, php-format
+#, php-format
 msgid "Error updating project information: %s"
-msgstr "Gruppen-Fund-Informationen"
+msgstr "Fehler bei der Aktualisierung der Projekt- Informationen: %s"
 
 #: common/include/Group.class.php:705
-#, fuzzy
 msgid "Invalid Status Change"
-msgstr "Ungültiger Benutzer"
+msgstr "Ungültige Status-Veränderung"
 
 #: common/include/Group.class.php:716
 #, php-format
 msgid "ERROR: DB: Could not change group status: %s"
-msgstr ""
+msgstr "Fehler: Datenbank: Konnte den Gruppenstatus: %s nicht verändern"
 
 #: common/include/Group.class.php:884
 msgid "Couldn't insert SCM_BOX to database"
@@ -458,13 +462,15 @@ msgstr ""
 
 #: common/include/Group.class.php:888
 msgid "SCM Box can't be empty"
-msgstr ""
+msgstr "Das SCM Feld darf nicht leer sein"
 
 #: common/include/Group.class.php:1317
 msgid ""
 "Bad tag name, you only can use the following characters: [A-Z][a-z][0-9]-_&'#"
 "+. and space"
 msgstr ""
+"Fehlerhafter \"tag name\", Sie dürfen nur die folgenden Zeichen verwenden: "
+"[A-Z][a-z][0-9]-_&'#+. und das Leerzeichen"
 
 #: common/include/Group.class.php:1327
 #, fuzzy
