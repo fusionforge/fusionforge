@@ -129,7 +129,7 @@ gforge/docs/docbook/docbook/entities/xinclude.ent -text svneol=unset#application
 gforge/docs/docbook/docbook/user_guide/project_functions/activity.xml -text
 gforge/docs/images/sflogo2-105a.png -text
 gforge/docs/phpdoc/phpDocumentor.ini.patch -text
-gforge/etc/fusionforge.ini -text
+gforge/etc/config.ini -text
 gforge/etc/httpd.d/01common.ssl -text
 gforge/etc/httpd.d/060maindirhttp.vhost -text
 gforge/etc/httpd.d/06zmaindirhttp.vhost -text

@@ -25,7 +25,7 @@ class Config_Tests extends PHPUnit_Framework_TestCase
 		$this->assertEquals('default', fusionforge_get_config ('forge_name', 'core'));
 		$this->assertTrue(fusionforge_get_config ('user_registration_restricted'));
 
-		fusionforge_read_config_file (dirname(__FILE__) . '/../../../gforge/etc/fusionforge.ini') ;
+		fusionforge_read_config_file (dirname(__FILE__) . '/../../../gforge/etc/config.ini') ;
 
 		$this->assertEquals('FusionForge', fusionforge_get_config ('forge_name'));
 		$this->assertEquals('FusionForge', fusionforge_get_config ('forge_name', 'core'));

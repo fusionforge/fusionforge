@@ -42,7 +42,7 @@ fusionforge_define_config_item ('core', 'user_registration_restricted', $GLOBALS
  fusionforge_define_config_item ('core', 'forge_name', $forge->software_name) ;
  fusionforge_define_config_item ('core', 'user_registration_restricted', false) ;
 */
-fusionforge_read_config_file ($gfconfig.'/fusionforge.ini') ;
+fusionforge_read_config_file ($gfconfig.'/config.ini') ;
 
 // get constants used for flags or status
 require $gfcommon.'include/constants.php';

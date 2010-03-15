@@ -1,4 +1,4 @@
-etc/fusionforge.ini                    etc/fusionforge/
+etc/config.ini                    etc/fusionforge/
 etc/httpd.d/[0-1,6-9][0-9]*            usr/share/gforge/etc/httpd.d/
 etc/httpd.d/httpd*                     usr/share/gforge/etc/httpd.d/
 etc/local.d/[0-9][0-9]*                usr/share/gforge/etc/local.d/
