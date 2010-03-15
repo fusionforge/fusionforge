@@ -134,7 +134,7 @@ if ($area=='tracker') {
 //	Titles
 //
 $graph->title->Set("Site-Wide Activity (".date('m/d/Y',$report->getStartDate()) ."-". date('m/d/Y',$report->getEndDate()) .")");
-$graph->subtitle->Set(fusionforge_get_config ('core', 'forge_name'));
+$graph->subtitle->Set(fusionforge_get_config ('forge_name'));
 //$graph->xaxis-> title->Set("Date" );
 //$graph->yaxis-> title->Set("Number" ); 
 

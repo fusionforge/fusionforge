@@ -46,7 +46,7 @@ require_once $gfcommon.'scm/SCMFactory.class.php';
 if ($sys_project_reg_restricted) {
 	session_require(array('group'=>'1','admin_flags'=>'A'),
 			sprintf (_('Project registration is restricted on %s, and only administrators can create new projects.'),
-				 fusionforge_get_config ('core', 'forge_name')));
+				 fusionforge_get_config ('forge_name')));
 } elseif (!session_loggedin()) {
 	exit_not_logged_in();
 }
@@ -104,7 +104,7 @@ if (getStringFromRequest('submit')) {
 	
 			?>
 	
-			<p><?php printf(_('Your project has been submitted to the %1$s administrators. Within 72 hours, you will receive notification of their decision and further instructions.<p/>Thank you for choosing %1$s'), fusionforge_get_config ('core', 'forge_name'))?>
+			<p><?php printf(_('Your project has been submitted to the %1$s administrators. Within 72 hours, you will receive notification of their decision and further instructions.<p/>Thank you for choosing %1$s'), fusionforge_get_config ('forge_name'))?>
 			</p>
 	
 			<?php
@@ -136,7 +136,7 @@ site_header(array('title'=>_('Project Information')));
 
 <input size="40" maxlength="40" type="text" name="full_name" value="<?php echo htmlspecialchars(stripslashes($full_name)); ?>"/>
 
-<?php printf(_('<h3>2. Project Purpose And Summarization</h3><strong> Please provide detailed, accurate description of your project and what %1$s resources and in which way you plan to use. This description will be the basis for the approval or rejection of your project\'s hosting on %1$s, and later, to ensure that you are using the services in the intended way. This description will not be used as a public description of your project. It must be written in English.</strong>'), fusionforge_get_config ('core', 'forge_name'))?>
+<?php printf(_('<h3>2. Project Purpose And Summarization</h3><strong> Please provide detailed, accurate description of your project and what %1$s resources and in which way you plan to use. This description will be the basis for the approval or rejection of your project\'s hosting on %1$s, and later, to ensure that you are using the services in the intended way. This description will not be used as a public description of your project. It must be written in English.</strong>'), fusionforge_get_config ('forge_name'))?>
 <p/>
 <textarea name="purpose" cols="70" rows="10">
 <?php echo htmlspecialchars(stripslashes($purpose)); ?>

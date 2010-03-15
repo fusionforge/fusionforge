@@ -135,7 +135,7 @@ $arr[5]='Forum Messages';
 $arr[6]='Tasks';
 $arr[7]='Downloads';
 $graph->title->Set($arr[$datatype]." By Project (".date('m/d/Y',$start) ."-". date('m/d/Y',$end) .")");
-$graph->subtitle->Set(fusionforge_get_config ('core', 'forge_name'));
+$graph->subtitle->Set(fusionforge_get_config ('forge_name'));
 
 // Create the tracker open plot
 report_pie_arr(util_result_column_to_array($res,0), util_result_column_to_array($res,1));

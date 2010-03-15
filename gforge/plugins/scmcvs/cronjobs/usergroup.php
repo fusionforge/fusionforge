@@ -81,7 +81,7 @@ $unmanaged_lines_shadow = array();
 $unmanaged_lines_group = array();
 
 // user description is something like "MyGForge user"
-$user_description = preg_replace('/[^[:alnum:] _-]/', '', fusionforge_get_config ('core', 'forge_name'));
+$user_description = preg_replace('/[^[:alnum:] _-]/', '', fusionforge_get_config ('forge_name'));
 $user_description .= " user";
 
 /*

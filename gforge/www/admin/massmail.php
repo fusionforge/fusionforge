@@ -53,7 +53,7 @@ if (getStringFromRequest('submit')) {
 		);
 	}
 
-	if (trim($mail_subject) == '['.$GLOBALS['sys_name'].']') {
+	if (trim($mail_subject) == '['.fusionforge_get_config ('forge_name').']') {
 		form_release_key(getStringFromRequest('form_key'));
 		exit_error(
 			_('Missing parameter, You must give proper subject to the mailing')
@@ -86,7 +86,7 @@ site_admin_header(array('title'=>_('Massmail admin')));
 
 print '
 <h1>'
-.sprintf(_('Mail Engine for %1$s Subscribers'), $GLOBALS['sys_name']) .
+.sprintf(_('Mail Engine for %1$s Subscribers'), fusionforge_get_config ('forge_name')) .
 '</h1>
 ';
 
@@ -111,7 +111,7 @@ print '
 		_('All Project Developers'),
 		_('All Project Admins'),
 		_('All Users'),
-		$GLOBALS['sys_name']. _('Developers (test)')
+		fusionforge_get_config ('forge_name'). _('Developers (test)')
 	),
 	'mail_type',false,false
 )
@@ -122,7 +122,7 @@ print '
 
 <p>
 <strong>' ._('Subject').':</strong>'.utils_requiredField().'
-<br /><input type="text" name="mail_subject" size="50" value="['.$GLOBALS['sys_name'].'] " /></p>
+<br /><input type="text" name="mail_subject" size="50" value="['.fusionforge_get_config ('forge_name').'] " /></p>
 
 <p><strong>'._('Text of Message'). ':</strong>'.utils_requiredField(). _('(will be appended with unsubscription information, if applicable)').'</p>
 <pre><textarea name="mail_message" cols="70" rows="20">

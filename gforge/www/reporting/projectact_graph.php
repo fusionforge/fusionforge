@@ -215,7 +215,7 @@ if ($area=='tracker') {
 //
 $graph->title->Set("Project Activity For: ".util_unconvert_htmlspecialchars($g->getPublicName()). 
 	" (".date('Y-m-d',$report->getStartDate()) ." to ". date('Y-m-d',$report->getEndDate()) .")");
-$graph->subtitle->Set(fusionforge_get_config ('core', 'forge_name'));
+$graph->subtitle->Set(fusionforge_get_config ('forge_name'));
 //$graph->xaxis-> title->Set("Date" );
 //$graph->yaxis-> title->Set("Number" ); 
 

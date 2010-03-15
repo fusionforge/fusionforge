@@ -130,7 +130,7 @@ if (session_loggedin()) {
 	$group = group_get_object($group_id);
 	echo '
 		<p>
-		'. sprintf(_('You can post news about your project if you are an admin on your project. You may also post "help wanted" notes if your project needs help.</p><p>All posts <b>for your project</b> will appear instantly on your project summary page. Posts that are of special interest to the community will have to be approved by a member of the %1$s news team before they will appear on the %1$s home page.</p><p>You may include URLs, but not HTML in your submissions.</p><p>URLs that start with http:// are made clickable.'), fusionforge_get_config ('core', 'forge_name')) .'</p>' . $jsfunc . 
+		'. sprintf(_('You can post news about your project if you are an admin on your project. You may also post "help wanted" notes if your project needs help.</p><p>All posts <b>for your project</b> will appear instantly on your project summary page. Posts that are of special interest to the community will have to be approved by a member of the %1$s news team before they will appear on the %1$s home page.</p><p>You may include URLs, but not HTML in your submissions.</p><p>URLs that start with http:// are made clickable.'), fusionforge_get_config ('forge_name')) .'</p>' . $jsfunc . 
 		'
 		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="group_id" value="'.$group_id.'" />

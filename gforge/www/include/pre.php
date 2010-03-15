@@ -106,7 +106,7 @@ require_once $gfcommon.'include/forms.php';
 db_connect();
 
 if (!$GLOBALS['gfconn']) {
-	print fusionforge_get_config ('core', 'forge_name')." Could Not Connect to Database: ".db_error();
+	print fusionforge_get_config ('forge_name')." Could Not Connect to Database: ".db_error();
 	exit;
 }
 

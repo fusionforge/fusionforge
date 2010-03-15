@@ -64,9 +64,9 @@ to change your password:
 <%2$s>
 
  -- the %1$s staff
-'), fusionforge_get_config ('core', 'forge_name'), util_make_url ("/account/lostlogin.php?ch=_".$confirm_hash));
+'), fusionforge_get_config ('forge_name'), util_make_url ("/account/lostlogin.php?ch=_".$confirm_hash));
 
-		util_send_message($u->getEmail(),sprintf(_('%1$s Verification'), fusionforge_get_config ('core', 'forge_name')),$message);
+		util_send_message($u->getEmail(),sprintf(_('%1$s Verification'), fusionforge_get_config ('forge_name')),$message);
 
 		$HTML->header(array('title'=>"Lost Password Confirmation"));
 

@@ -85,7 +85,7 @@ if (!$mail_res) {
 			"$sys_admin_email",
 			"ATT: Problems with massmail cron script",
 			"This is automatically generated message from\n
-the mass mailing cron script of ".fusionforge_get_config ('core', 'forge_name')."\n
+the mass mailing cron script of ".fusionforge_get_config ('forge_name')."\n
 installation. There was error querying massmail_queue\n
 database table. Please take appropriate actions.\n"
 		);
@@ -190,7 +190,7 @@ page (%2$s), or disable them altogether
 by visiting following link:
 <%3$s>
 '), 
-				  fusionforge_get_config ('core', 'forge_name'), 
+				  fusionforge_get_config ('forge_name'), 
 				  util_make_url('/account/'),
 				  util_make_url('/account/unsubscribe.php?ch=_'.$row['confirm_hash'])) ;
 	} else {

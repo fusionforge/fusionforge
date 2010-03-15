@@ -64,9 +64,9 @@ site_header(array('title'=>_("Unsubscription Complete")));
 
 
 if ($all) {
-	$what = sprintf(_('You have been unsubscribed from all %1$s mailings and notifications. In case you will want to re-activate your subscriptions in the future, login and visit your Account Maintenance page.'), fusionforge_get_config ('core', 'forge_name'));
+	$what = sprintf(_('You have been unsubscribed from all %1$s mailings and notifications. In case you will want to re-activate your subscriptions in the future, login and visit your Account Maintenance page.'), fusionforge_get_config ('forge_name'));
 } else {
-	$what = sprintf(_('You have been unsubscribed from %1$s site mailings. In case you will want to re-activate your subscriptions in the future, login and visit your Account Maintenance page.'), fusionforge_get_config ('core', 'forge_name'));
+	$what = sprintf(_('You have been unsubscribed from %1$s site mailings. In case you will want to re-activate your subscriptions in the future, login and visit your Account Maintenance page.'), fusionforge_get_config ('forge_name'));
 }
 ?>
 

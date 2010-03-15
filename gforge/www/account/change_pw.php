@@ -82,7 +82,7 @@ if (getStringFromRequest('submit')) {
 	site_user_header(array('title'=>_('Successfully Changed Password')));
 	?>
 
-	<?php printf(_('<h2>%1$s Password Change Confirmation</h2><p>Congratulations. You have changed your password.</p>'), fusionforge_get_config ('core', 'forge_name')); ?>
+	<?php printf(_('<h2>%1$s Password Change Confirmation</h2><p>Congratulations. You have changed your password.</p>'), fusionforge_get_config ('forge_name')); ?>
 
 	<p>
 		 <?php printf(_('You should now <a href="%1$s">Return to User Prefs</a>.'),

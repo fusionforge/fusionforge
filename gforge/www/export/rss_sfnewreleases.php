@@ -48,11 +48,11 @@ $res=db_query_params ('SELECT
 
 // ## one time output
 print " <channel>\n";
-print "  <copyright>Copyright ".date("Y")." ".fusionforge_get_config ('core', 'forge_name')."</copyright>\n";
+print "  <copyright>Copyright ".date("Y")." ".fusionforge_get_config ('forge_name')."</copyright>\n";
 print "  <pubDate>".rss_date(time())."</pubDate>\n";
-print "  <description>".fusionforge_get_config ('core', 'forge_name')." New Releases</description>\n";
+print "  <description>".fusionforge_get_config ('forge_name')." New Releases</description>\n";
 print "  <link>http://".$GLOBALS['sys_default_domain']."</link>\n";
-print "  <title>".fusionforge_get_config ('core', 'forge_name')." New Releases</title>\n";
+print "  <title>".fusionforge_get_config ('forge_name')." New Releases</title>\n";
 print "  <webMaster>".$GLOBALS['sys_admin_email']."</webMaster>\n";
 print "  <language>en-us</language>\n";
 // ## item outputs

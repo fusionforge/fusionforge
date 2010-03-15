@@ -75,7 +75,7 @@ $arr['category']='By Category';
 $arr['subproject']='By Subproject';
 
 $graph->title->Set("Time Report ".$arr[$type]." (".date('m/d/Y',$start) ."-". date('m/d/Y',$end) .")");
-$graph->subtitle->Set(fusionforge_get_config ('core', 'forge_name'));
+$graph->subtitle->Set(fusionforge_get_config ('forge_name'));
 
 // Create the tracker open plot
 //$data  =& $report->getData();

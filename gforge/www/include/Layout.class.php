@@ -288,7 +288,7 @@ class Layout extends Error {
 	 */
 	function headerSearch() {
 		echo '<link rel="search" title="' 
-			. fusionforge_get_config ('core', 'forge_name').'" href="' 
+			. fusionforge_get_config ('forge_name').'" href="' 
 			. util_make_url ('/export/search_plugin.php') 
 			. '" type="application/opensearchdescription+xml"/>';
 	}

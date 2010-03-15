@@ -82,7 +82,7 @@ if (getStringFromRequest('send_mail')) {
 		$to=eregi_replace('_maillink_','@',$toaddress);
 		$to = util_remove_CRLF($to);
 		util_send_message($to,stripslashes($subject),stripslashes($body),$email,'',$name);
-		$HTML->header(array('title'=>fusionforge_get_config ('core', 'forge_name').' ' ._('Contact')   ));
+		$HTML->header(array('title'=>fusionforge_get_config ('forge_name').' ' ._('Contact')   ));
 		echo '<p>'._('Message has been sent').'.</p>';
 		$HTML->footer(array());
 		exit;
@@ -93,7 +93,7 @@ if (getStringFromRequest('send_mail')) {
 		$to=db_result($result,0,'email');
 		$to = util_remove_CRLF($to);
 		util_send_message($to,stripslashes($subject),stripslashes($body),$email,'',$name);
-		$HTML->header(array('title'=>fusionforge_get_config ('core', 'forge_name').' '._('Contact')));
+		$HTML->header(array('title'=>fusionforge_get_config ('forge_name').' '._('Contact')));
 		echo '<p>'._('Message has been sent').'</p>';
 		$HTML->footer(array());
 		exit;
@@ -116,7 +116,7 @@ if (session_loggedin()) {
 }
 $subject = getStringFromRequest('subject');
 
-$HTML->header(array('title'=>fusionforge_get_config ('core', 'forge_name').' Staff'));
+$HTML->header(array('title'=>fusionforge_get_config ('forge_name').' Staff'));
 
 ?>
 

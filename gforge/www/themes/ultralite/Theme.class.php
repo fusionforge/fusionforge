@@ -18,9 +18,9 @@ class Theme extends Layout {
 		header("Location:".$_POST['menuList']);		
 		}
 		if (!$params['title']) {
-			$params['title'] = fusionforge_get_config ('core', 'forge_name');
+			$params['title'] = fusionforge_get_config ('forge_name');
 		} else {
-			$params['title'] = fusionforge_get_config ('core', 'forge_name').": " . $params['title'];
+			$params['title'] = fusionforge_get_config ('forge_name').": " . $params['title'];
 		}
 		print '<?xml version="1.0" encoding="utf-8"?>';
 		?>

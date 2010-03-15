@@ -40,20 +40,20 @@ if ($group_id) {
 	$webmaster = $GLOBALS['sys_admin_email'];
 }
 
-$rssTitle = fusionforge_get_config ('core', 'forge_name')." Project$title News";
+$rssTitle = fusionforge_get_config ('forge_name')." Project$title News";
 $rssLink = "http://".$GLOBALS['sys_default_domain']."/news/$link";
 
 // ## one time output
 print " <channel>\n";
 print "  <title>".$rssTitle."</title>\n";
 print "  <link>".$rssLink."</link>\n";
-print "  <description>".fusionforge_get_config ('core', 'forge_name')." Project News$description</description>\n";
+print "  <description>".fusionforge_get_config ('forge_name')." Project News$description</description>\n";
 print "  <language>en-us</language>\n";
-print "  <copyright>Copyright ".date("Y")." ".fusionforge_get_config ('core', 'forge_name')."</copyright>\n";
+print "  <copyright>Copyright ".date("Y")." ".fusionforge_get_config ('forge_name')."</copyright>\n";
 print "  <webMaster>$webmaster</webMaster>\n";
 print "  <lastBuildDate>".rss_date(time())."</lastBuildDate>\n";
 print "  <docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
-print "  <generator>".fusionforge_get_config ('core', 'forge_name')." RSS generator</generator>\n";
+print "  <generator>".fusionforge_get_config ('forge_name')." RSS generator</generator>\n";
 
 $res = db_query_params ('SELECT forum_id,summary,post_date,details,g.group_id,g.group_name,u.realname,u.user_name
 FROM news_bytes, groups g,users u

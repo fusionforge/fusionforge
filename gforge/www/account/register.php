@@ -26,7 +26,7 @@ require_once $gfwww.'include/pre.php';
 require_once $gfcommon.'include/account.php';
 require_once $gfcommon.'include/timezones.php';
 
-if (fusionforge_get_config ('core', 'user_registration_restricted')) {
+if (fusionforge_get_config ('user_registration_restricted')) {
 	session_require(array('group'=>'1','admin_flags'=>'A'));
 }
 
@@ -80,7 +80,7 @@ if (getStringFromRequest('submit')) {
 		if ($register) {
 			echo $HTML->header(array('title'=>'Register Confirmation'));
 			
-			printf(_('<p>Congratulations. You have registered on %1$s.  <p> You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.'), fusionforge_get_config ('core', 'forge_name'));
+			printf(_('<p>Congratulations. You have registered on %1$s.  <p> You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.'), fusionforge_get_config ('forge_name'));
 			echo $HTML->footer(array());
 			exit;
 		} else {

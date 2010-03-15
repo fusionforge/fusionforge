@@ -106,7 +106,7 @@ if ($login && !$success) {
 		$feedback = sprintf(_('<p>Your account is currently pending your email confirmation.		Visiting the link sent to you in this email will activate your account.		<p>If you need this email resent, please click below and a confirmation		email will be sent to the email address you provided in registration.		<p><a href="%1$s">[Resend Confirmation Email]</a>		<br><hr>		<p>'), util_make_url ("/account/pending-resend.php?form_user=".htmlspecialchars($form_loginname)));
 	} else {
 		if ($userstatus == "D") {
-			$feedback .= '<br />'.sprintf(_('<p>Your %1$s account has been removed by %1$s staff. This may occur for two reasons, either 1) you requested that your account be removed; or 2) some action has been performed using your account which has been seen as objectionable (i.e. you have breached the terms of service for use of your account) and your account has been revoked for administrative reasons. Should you have questions or concerns regarding this matter, please log a <a href="%2$s">support request</a>.</p><p>Thank you, <br><br>%1$s Staff</p>'), fusionforge_get_config ('core', 'forge_name'), util_make_url ("/support/?group_id=1"));
+			$feedback .= '<br />'.sprintf(_('<p>Your %1$s account has been removed by %1$s staff. This may occur for two reasons, either 1) you requested that your account be removed; or 2) some action has been performed using your account which has been seen as objectionable (i.e. you have breached the terms of service for use of your account) and your account has been revoked for administrative reasons. Should you have questions or concerns regarding this matter, please log a <a href="%2$s">support request</a>.</p><p>Thank you, <br><br>%1$s Staff</p>'), fusionforge_get_config ('forge_name'), util_make_url ("/support/?group_id=1"));
 		}
 	}
 	html_feedback_top($feedback);
@@ -139,7 +139,7 @@ if ($login && !$success) {
 <p><a href="lostpw.php"><?php echo _('[Lost your password?]'); ?></a></p>
 <?php
 // hide "new account" item if restricted to admin
-if (!fusionforge_get_config ('core', 'user_registration_restricted')) {
+if (!fusionforge_get_config ('user_registration_restricted')) {
 	echo '<p><a href="register.php">'._('[New Account]').'</a></p>';
 }
 ?>

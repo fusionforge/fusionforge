@@ -15,8 +15,8 @@ require_once $gfwww.'stats/site_stats_utils.php';
 // require you to be a member of the sfstats group
 session_require( array('group'=>$sys_stats_group) );
 
-$HTML->header(array('title' => sprintf(_('%1$s I18n Statistics'), fusionforge_get_config ('core', 'forge_name'))));
-echo "<h1>".sprintf(_('Languages Distributions'), fusionforge_get_config ('core', 'forge_name'))." </h1>";
+$HTML->header(array('title' => sprintf(_('%1$s I18n Statistics'), fusionforge_get_config ('forge_name'))));
+echo "<h1>".sprintf(_('Languages Distributions'), fusionforge_get_config ('forge_name'))." </h1>";
 echo $GLOBALS['HTML']->listTableTop(array(_('Language')."",_('Users')."","%"));
 
 $total=db_result(db_query_params('SELECT count(user_name) AS total FROM users', array()),0,'total');

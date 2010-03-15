@@ -2261,9 +2261,9 @@ if there is anything we can do to help you.
 						       $this->getPublicName(), 
 						       $this->getUnixName(), 
 						       util_make_url ('/project/admin/?group_id='.$this->getID()),
-						       fusionforge_get_config ('core', 'forge_name'));
+						       fusionforge_get_config ('forge_name'));
 	
-			util_send_message($row_admins['email'], sprintf(_('%1$s Project Approved'), fusionforge_get_config ('core', 'forge_name')), $message);
+			util_send_message($row_admins['email'], sprintf(_('%1$s Project Approved'), fusionforge_get_config ('forge_name')), $message);
 
 			setup_gettext_from_context();
 		}
@@ -2306,7 +2306,7 @@ Project Unix Name:  %2$s
 
 Reasons for negative decision:
 
-'), $this->getPublicName(), $this->getUnixName(), fusionforge_get_config ('core', 'forge_name'));
+'), $this->getPublicName(), $this->getUnixName(), fusionforge_get_config ('forge_name'));
 
 			// Check to see if they want to send a custom rejection response
 			if ($response_id == 0) {
@@ -2318,7 +2318,7 @@ Reasons for negative decision:
 					"response_text");
 			}
 
-			util_send_message($row_admins['email'], sprintf(_('%1$s Project Denied'), fusionforge_get_config ('core', 'forge_name')), $response);
+			util_send_message($row_admins['email'], sprintf(_('%1$s Project Denied'), fusionforge_get_config ('forge_name')), $response);
 			setup_gettext_from_context();
 		}
 
@@ -2373,13 +2373,13 @@ Submitter: %5$s (%6$s)
 
 Please visit the following URL to approve or reject this project:
 %4$s'),
-						       fusionforge_get_config ('core', 'forge_name'),
+						       fusionforge_get_config ('forge_name'),
 						       $this->getPublicName(),
 						       util_unconvert_htmlspecialchars($this->getRegistrationPurpose()),
 						       util_make_url ('/admin/approve-pending.php'),
 						       $submitter->getRealName(), 
 						       $submitter->getUnixName());
-			util_send_message($admin_email, sprintf(_('New %1$s Project Submitted'), fusionforge_get_config ('core', 'forge_name')), $message);
+			util_send_message($admin_email, sprintf(_('New %1$s Project Submitted'), fusionforge_get_config ('forge_name')), $message);
 			setup_gettext_from_context();
 		}
 		
@@ -2392,9 +2392,9 @@ Please visit the following URL to approve or reject this project:
 Project Full Name:  %2$s
 Submitted Description: %3$s
 
-The %1$s admin team will now examine your project submission.  You will be notified of their decision.'), fusionforge_get_config ('core', 'forge_name'), $this->getPublicName(), util_unconvert_htmlspecialchars($this->getRegistrationPurpose()), $GLOBALS['sys_default_domain']);
+The %1$s admin team will now examine your project submission.  You will be notified of their decision.'), fusionforge_get_config ('forge_name'), $this->getPublicName(), util_unconvert_htmlspecialchars($this->getRegistrationPurpose()), $GLOBALS['sys_default_domain']);
 				
-		util_send_message($email, sprintf(_('New %1$s Project Submitted'), fusionforge_get_config ('core', 'forge_name')), $message);
+		util_send_message($email, sprintf(_('New %1$s Project Submitted'), fusionforge_get_config ('forge_name')), $message);
 		setup_gettext_from_context();
 		
 		return true;

@@ -89,7 +89,7 @@ $graph  = new PieGraph(640, 480,"auto");
 
 //$graph->title->Set("Commits By User (".date('m/d/Y',$start) ."-". date('m/d/Y',$end) .")");
 $graph->title->Set(utf8_decode(_("Commits By User")." (".strftime('%x',$start) ." - ". strftime('%x',$end) .")"));
-$graph->subtitle->Set(fusionforge_get_config ('core', 'forge_name'));
+$graph->subtitle->Set(fusionforge_get_config ('forge_name'));
 
 // Create the tracker open plot
 report_pie_arr(util_result_column_to_array($res,0), util_result_column_to_array($res,1), 0);
