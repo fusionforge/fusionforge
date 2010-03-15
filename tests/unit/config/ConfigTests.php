@@ -18,7 +18,6 @@ class Config_Tests extends PHPUnit_Framework_TestCase
 	 */
 	public function testBasicConfig()
 	{
-		$c = FusionForgeConfig::get_instance () ;
 		fusionforge_define_config_item ('forge_name', 'core', 'default') ;
 
 		$this->assertEquals('default', fusionforge_get_config ('forge_name'));
@@ -30,4 +29,43 @@ class Config_Tests extends PHPUnit_Framework_TestCase
 		$this->assertEquals('FusionForge', fusionforge_get_config ('forge_name', 'core'));
 	}
 
+	/**
+	 * test mock config system
+	 */
+	public function testMockConfig()
+	{
+		MockConfig::insinuate () ;
+		fusionforge_define_config_item ('forge_name', 'core', 'default') ;
+
+		$this->assertEquals('core/forge_name', fusionforge_get_config ('forge_name'));
+		$this->assertEquals('core/forge_name', fusionforge_get_config ('forge_name', 'core'));
+
+		MockConfig::cleanup () ;
+		fusionforge_define_config_item ('forge_name', 'core', 'default') ;
+
+		$this->assertEquals('default', fusionforge_get_config ('forge_name'));
+	}
+
+}
+
+class MockConfig extends FusionForgeConfig {
+	public function insinuate () {
+		parent::$instance = NULL ;
+		self::get_instance () ;
+	}
+
+	public function cleanup () {
+		parent::$instance = NULL ;
+	}
+		
+	public function get_instance () {
+		if (parent::$instance == NULL) {
+			parent::$instance = new MockConfig () ;
+		}
+		return parent::$instance ;
+	}
+	
+	public function get_value ($section, $var) {
+		return "$section/$var" ;
+	}
 }

@@ -23,7 +23,7 @@
  */
 
 class FusionForgeConfig {
-	static private $instance = NULL ;
+	static protected $instance = NULL ;
 	private $settings ;
     
 	public function get_instance () {
