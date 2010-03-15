@@ -40,8 +40,8 @@ class AllTests
 
 		// Unit tests
 		$suite->addTest(Utils_AllTests::suite());
-//		$suite->addTest(ACL_AllTests::suite());
 		$suite->addTest(Config_AllTests::suite());
+//		$suite->addTest(ACL_AllTests::suite());
 
 		// Code tests
 		$suite->addTest(Syntax_AllTests::suite());
