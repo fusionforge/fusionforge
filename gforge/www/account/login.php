@@ -139,7 +139,7 @@ if ($login && !$success) {
 <p><a href="lostpw.php"><?php echo _('[Lost your password?]'); ?></a></p>
 <?php
 // hide "new account" item if restricted to admin
-if (!$sys_user_reg_restricted) {
+if (!fusionforge_get_config ('core', 'user_registration_restricted')) {
 	echo '<p><a href="register.php">'._('[New Account]').'</a></p>';
 }
 ?>

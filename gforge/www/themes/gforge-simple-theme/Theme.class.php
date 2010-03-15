@@ -144,7 +144,7 @@ if (session_loggedin()) {
 } else {
 	echo util_make_link ('/account/login.php',_('Log In'));
 	echo '<br />';
-	if (!$GLOBALS['sys_user_reg_restricted']) {
+	if (!fusionforge_get_config ('core', 'user_registration_restricted')) {
 		echo util_make_link ('/account/register.php',_('New Account'));
 		echo '<br />';
 	}

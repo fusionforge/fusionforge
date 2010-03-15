@@ -26,7 +26,7 @@ require_once $gfwww.'include/pre.php';
 require_once $gfcommon.'include/account.php';
 require_once $gfcommon.'include/timezones.php';
 
-if ($sys_user_reg_restricted) {
+if (fusionforge_get_config ('core', 'user_registration_restricted')) {
 	session_require(array('group'=>'1','admin_flags'=>'A'));
 }
 
