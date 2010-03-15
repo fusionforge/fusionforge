@@ -102,7 +102,7 @@ function forge_get_config_array () {
 	return $ret ;
 }
 
-function fusionforge_set_vars_from_config () {
+function forge_set_vars_from_config () {
 	$c = FusionForgeConfig::get_instance () ;
 
 	foreach (func_get_args() as $item) {
@@ -125,13 +125,13 @@ function fusionforge_set_vars_from_config () {
 }
 
 
-function fusionforge_define_config_item ($var, $section, $default) {
+function forge_define_config_item ($var, $section, $default) {
 	$c = FusionForgeConfig::get_instance () ;
 
 	return $c->set_value ($section, $var, $default) ;
 }
 
-function fusionforge_read_config_file ($file) {
+function forge_read_config_file ($file) {
 	$c = FusionForgeConfig::get_instance () ;
 
 	return $c->read_config_file ($file) ;
