@@ -49,22 +49,17 @@ function fusionforge_define_config_item ($section, $var, $default) {
 	}
 }
 
-function read_config_file ($file) {
+function fusionforge_read_config_file ($file) {
 	global $fusionforge_config ;
 
-	// Initial implementation reuses values from local.inc:
-	$fusionforge_config['core']['forge_name'] = fusionforge_get_config ('core', 'forge_name') ;
-	return ;
-
-	// Real implementation should read *.ini files
-	/* Pseudo-code:
-	 $sections = ini_parse ($file) ;
-	 foreach ($sections as $sectname => $options) {
+	$sections = parse_ini_file ($file, true) ;
+	foreach ($sections as $sectname => $options) {
 	 	foreach ($options as $key => $value) {
 			$fusionforge_config[$sectname][$key] = $value ;
 	 	}
-	 }
-	*/
+	}
+
+	return ;
 }
 
 // Local Variables:

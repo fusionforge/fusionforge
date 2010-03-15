@@ -35,7 +35,7 @@ require $gfcgfile;
 require $gfcommon.'include/config.php';
 fusionforge_define_config_item ('core', 'forge_name', $GLOBALS['sys_name']) ;
 fusionforge_define_config_item ('core', 'user_registration_restricted', $GLOBALS['sys_user_reg_restricted']) ;
-read_config ($gfconfig.'/fusionforge.ini') ;
+fusionforge_read_config_file ($gfconfig.'/fusionforge.ini') ;
 
 // get constants used for flags or status
 require $gfcommon.'include/constants.php';
