@@ -55,9 +55,9 @@ class Navigation extends Error {
                 if (!$asHTML) {
                         // get the title
                         if (!$params['title']) {
-                                return get_config ('core', 'forge_name') ;
+                                return fusionforge_get_config ('core', 'forge_name') ;
                         } else {
-                                return get_config ('core', 'forge_name') . ': ' . $params['title'];
+                                return fusionforge_get_config ('core', 'forge_name') . ': ' . $params['title'];
                         }
                 } else {
                         // return HTML code otherwise
@@ -201,7 +201,7 @@ class Navigation extends Error {
                         $res['titles'][] = _('Log In');
                         $res['urls'][] = util_make_url($url);
                         
-                        if (!get_config ('core', 'user_registration_restricted')) {
+                        if (!fusionforge_get_config ('core', 'user_registration_restricted')) {
                                 $res['titles'][] = _('New Account');
                                 $res['urls'][] = util_make_url('/account/register.php');
                         }

@@ -26,7 +26,7 @@ if (!isset ($fusionforge_config)) {
 	$fusionforge_config = array () ;
 }
 
-function get_config ($section, $var) {
+function fusionforge_get_config ($section, $var) {
 	if (!isset ($fusionforge_config[$section])
 	    || !isset ($fusionforge_config[$section][$var])) {
 		return false ;
