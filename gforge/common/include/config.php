@@ -22,48 +22,71 @@
  * USA
  */
 
-if (!isset ($fusionforge_config)) {
-	$fusionforge_config = array () ;
-}
-
-function fusionforge_get_config ($section, $var) {
-	global $fusionforge_config ;
-
-	if (!isset ($fusionforge_config[$section])
-	    || !isset ($fusionforge_config[$section][$var])) {
-		return false ;
+class FusionForgeConfig {
+	static private $instance = NULL ;
+	private $settings ;
+    
+	public function get_instance () {
+		if (self::$instance == NULL) {
+			self::$instance = new FusionForgeConfig () ;
+		}
+		return self::$instance ;
 	}
-	
-	return $fusionforge_config[$section][$var] ;
-}
-
-function fusionforge_define_config_item ($section, $var, $default) {
-	global $fusionforge_config ;
-
-	if (!isset ($fusionforge_config[$section])) {
-		$fusionforge_config[$section] = array () ;
+  
+	public function get_value ($section, $var) {
+		if (!isset ($settings[$section])
+		    || !isset ($settings[$section][$var])) {
+			return NULL ;
+		}
+		return $settings[$section][$var] ;
 	}
 
-	if (!isset ($fusionforge_config[$section][$var])) {
-		$fusionforge_config[$section][$var] = $default ;
-	}
-}
+	public function set_value ($section, $var, $value) {
+		if (!isset ($settings[$section])) {
+			$settings[$section] = array () ;
+		}
 
-function fusionforge_read_config_file ($file) {
-	global $fusionforge_config ;
-
-	$sections = parse_ini_file ($file, true) ;
-	foreach ($sections as $sectname => $options) {
-		if (!isset ($fusionforge_config[$section]))
-			continue ;
-		foreach ($options as $key => $value) {
-			if (!isset ($fusionforge_config[$section][$var]))
-				continue ;
-			$fusionforge_config[$sectname][$key] = $value ;
+		if (!isset ($settings[$section][$var])) {
+			$settings[$section][$var] = $value ;
 		}
 	}
 
-	return ;
+	function fusionforge_read_config_file ($file) {
+		$sections = parse_ini_file ($file, true) ;
+		foreach ($sections as $sectname => $options) {
+			if (!isset ($settings[$section]))
+				continue ;
+			foreach ($options as $key => $value) {
+				if (!isset ($settings[$section][$var]))
+					continue ;
+				$settings[$sectname][$key] = $value ;
+			}
+		}
+		return ;
+	}
+
+  }
+
+if (!isset ($fusionforge_config)) {
+	$fusionforge_config = new FusionForgeConfig () ;
+}
+
+function fusionforge_get_config ($section, $var) {
+	$c = FusionForgeConfig::get_instance () ;
+
+	return $c->get_value ($section, $var) ;
+}
+
+function fusionforge_define_config_item ($section, $var, $default) {
+	$c = FusionForgeConfig::get_instance () ;
+
+	return $c->set_value ($section, $var, $default) ;
+}
+
+function fusionforge_read_config_file ($file) {
+	$c = FusionForgeConfig::get_instance () ;
+
+	return $c->read_config_file ($file) ;
 }
 
 // Local Variables:
