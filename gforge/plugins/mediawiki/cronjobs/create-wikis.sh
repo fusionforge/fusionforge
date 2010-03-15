@@ -36,6 +36,12 @@ for project in $projects ; do
 \$wgGroupPermissions['*']['createpage']    = false;
 \$wgGroupPermissions['*']['createtalk']    = false;
 
+// Uncomment these if you must import XML dumps
+//\$wgGroupPermissions['Administrators']['import']        = true;
+//\$wgGroupPermissions['Administrators']['importupload']  = true;
+// Uncomment these if you must edit the MediaWiki:Sidebar
+//\$wgGroupPermissions['Administrators']['editinterface'] = true;
+
 // Override default wiki logo
 //\$wgLogo = "/themes/\$sys_theme/images/wgLogo.png";
 
