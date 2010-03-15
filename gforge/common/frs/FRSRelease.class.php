@@ -303,7 +303,7 @@ notified in the future, please login to %5$s and click this link:
 					      $this->FRSPackage->Group->getUnixName(),
 					      $this->FRSPackage->getName(),
 					      util_make_url ("/frs/?group_id=". $this->FRSPackage->Group->getID() ."&release_id=". $this->getID()),
-					      fusionforge_get_config ('forge_name'),
+					      forge_get_config ('forge_name'),
 					      util_make_url ("/frs/monitor.php?filemodule_id=".$this->FRSPackage->getID()."&group_id=".$this->FRSPackage->Group->getID()."&stop=1")));
 //		$text = util_line_wrap($text);
 		if (count($arr)) {

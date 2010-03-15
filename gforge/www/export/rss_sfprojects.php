@@ -36,6 +36,6 @@ $res = db_query_params ('SELECT group_id,group_name,unix_group_name,homepage,sho
 			array('A'),
 			$limit);
 
-rss_dump_project_result_set($res,fusionforge_get_config ('forge_name').' Full Project Listing');
+rss_dump_project_result_set($res,forge_get_config ('forge_name').' Full Project Listing');
 ?>
 </rss>

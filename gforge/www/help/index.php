@@ -26,7 +26,7 @@
 require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
 
-$HTML->header(array('title'=>sprintf(_('Welcome to %1$s'), fusionforge_get_config ('forge_name'))));
+$HTML->header(array('title'=>sprintf(_('Welcome to %1$s'), forge_get_config ('forge_name'))));
 
 print "<p>" ._('Page Information')."</p>";
 /**

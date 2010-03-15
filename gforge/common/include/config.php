@@ -71,7 +71,7 @@ if (!isset ($fusionforge_config)) {
 	$fusionforge_config = new FusionForgeConfig () ;
 }
 
-function fusionforge_get_config ($var, $section = NULL) {
+function forge_get_config ($var, $section = NULL) {
 	$c = FusionForgeConfig::get_instance () ;
 
 	if ($section == NULL) {
@@ -81,7 +81,7 @@ function fusionforge_get_config ($var, $section = NULL) {
 	return $c->get_value ($section, $var) ;
 }
 
-function fusionforge_get_config_array () {
+function forge_get_config_array () {
 	$c = FusionForgeConfig::get_instance () ;
 
 	$ret = array () ;
@@ -120,7 +120,7 @@ function fusionforge_set_vars_from_config () {
 		}
 
 		global $$x ;
-		$$x = fusionforge_get_config ($var, $section) ;
+		$$x = forge_get_config ($var, $section) ;
 	}
 }
 

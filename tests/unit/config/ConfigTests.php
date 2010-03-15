@@ -21,17 +21,17 @@ class Config_Tests extends PHPUnit_Framework_TestCase
 		fusionforge_define_config_item ('forge_name', 'core', 'default') ;
 		fusionforge_define_config_item ('user_registration_restricted', 'core', true) ;
 
-		$this->assertEquals('default', fusionforge_get_config ('forge_name'));
-		$this->assertEquals('default', fusionforge_get_config ('forge_name', 'core'));
-		$this->assertTrue(fusionforge_get_config ('user_registration_restricted'));
+		$this->assertEquals('default', forge_get_config ('forge_name'));
+		$this->assertEquals('default', forge_get_config ('forge_name', 'core'));
+		$this->assertTrue(forge_get_config ('user_registration_restricted'));
 
 		fusionforge_read_config_file (dirname(__FILE__) . '/../../../gforge/etc/config.ini') ;
 
-		$this->assertEquals('FusionForge', fusionforge_get_config ('forge_name'));
-		$this->assertEquals('FusionForge', fusionforge_get_config ('forge_name', 'core'));
-		$this->assertEquals('', fusionforge_get_config ('user_registration_restricted'));
+		$this->assertEquals('FusionForge', forge_get_config ('forge_name'));
+		$this->assertEquals('FusionForge', forge_get_config ('forge_name', 'core'));
+		$this->assertEquals('', forge_get_config ('user_registration_restricted'));
 
-		$arr = fusionforge_get_config_array ('forge_name', array ('user_registration_restricted', 'core')) ;
+		$arr = forge_get_config_array ('forge_name', array ('user_registration_restricted', 'core')) ;
 		$this->assertEquals('FusionForge', $arr[0]);
 		$this->assertFalse(!!$arr[1]);
 
@@ -50,13 +50,13 @@ class Config_Tests extends PHPUnit_Framework_TestCase
 		MockConfig::insinuate () ;
 		fusionforge_define_config_item ('forge_name', 'core', 'default') ;
 
-		$this->assertEquals('core/forge_name', fusionforge_get_config ('forge_name'));
-		$this->assertEquals('core/forge_name', fusionforge_get_config ('forge_name', 'core'));
+		$this->assertEquals('core/forge_name', forge_get_config ('forge_name'));
+		$this->assertEquals('core/forge_name', forge_get_config ('forge_name', 'core'));
 
 		MockConfig::cleanup () ;
 		fusionforge_define_config_item ('forge_name', 'core', 'default') ;
 
-		$this->assertEquals('default', fusionforge_get_config ('forge_name'));
+		$this->assertEquals('default', forge_get_config ('forge_name'));
 	}
 
 }

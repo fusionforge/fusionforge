@@ -66,7 +66,7 @@ if (!session_loggedin()) {
 <p>&nbsp;</p>
 <?php echo _('Regards'); ?>,
 <p>&nbsp;</p>
-<strong><?php printf(_('The %1$s Crew'), fusionforge_get_config ('forge_name')); ?></strong>
+<strong><?php printf(_('The %1$s Crew'), forge_get_config ('forge_name')); ?></strong>
 <p>&nbsp;</p>
 <?php
 /*

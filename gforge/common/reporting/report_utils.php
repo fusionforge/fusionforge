@@ -29,7 +29,7 @@ function report_header($title) {
 	if (isset($GLOBALS['feedback'])) {
 		echo html_feedback_top($GLOBALS['feedback']);
 	}
-	echo "<h1>".sprintf(_('%1$s Reporting'), fusionforge_get_config ('forge_name'))."</h1>\n";
+	echo "<h1>".sprintf(_('%1$s Reporting'), forge_get_config ('forge_name'))."</h1>\n";
 }
 
 function report_footer() {

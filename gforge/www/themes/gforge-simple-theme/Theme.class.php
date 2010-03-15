@@ -64,9 +64,9 @@ class Theme extends Layout {
 	 */
 	function headerStart($params) {
 		if (!$params['title']) {
-			$params['title'] =  fusionforge_get_config ('forge_name');
+			$params['title'] =  forge_get_config ('forge_name');
 		} else {
-			$params['title'] =  fusionforge_get_config ('forge_name') . ': ' . $params['title'];
+			$params['title'] =  forge_get_config ('forge_name') . ': ' . $params['title'];
 		}
 		print '<?xml version="1.0" encoding="utf-8"';
 		?>
@@ -84,7 +84,7 @@ class Theme extends Layout {
 <title><?php echo $params['title']; ?></title>
 		<?php $this->headerLink(); ?>
 		<?php	if (isset($GLOBALS['group_id'])) {
-			$activity = '<link rel="alternate" title="'.fusionforge_get_config ('forge_name').' - New Activity RSS" href="'.
+			$activity = '<link rel="alternate" title="'.forge_get_config ('forge_name').' - New Activity RSS" href="'.
 			util_make_url ('/export/rss20_activity.php?group_id='.$GLOBALS['group_id']).
 			'" type="application/rss+xml"/>';
 			echo $activity;
@@ -144,7 +144,7 @@ if (session_loggedin()) {
 } else {
 	echo util_make_link ('/account/login.php',_('Log In'));
 	echo '<br />';
-	if (!fusionforge_get_config ('user_registration_restricted')) {
+	if (!forge_get_config ('user_registration_restricted')) {
 		echo util_make_link ('/account/register.php',_('New Account'));
 		echo '<br />';
 	}

@@ -79,7 +79,7 @@ $graph->Add( $lineplot);
 
 //$graph->SetMargin(10,10,25,10);
 $graph->title->Set($g->getPublicName()." Commits Over Time: ".$report->start_date." - ".$report->end_date);
-$graph->subtitle->Set(fusionforge_get_config ('forge_name'));
+$graph->subtitle->Set(forge_get_config ('forge_name'));
 //$graph->xaxis-> title->Set("Date" );
 //$graph->yaxis-> title->Set("Number" ); 
 

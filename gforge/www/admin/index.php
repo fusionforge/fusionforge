@@ -148,8 +148,8 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 
 <h2><?php echo _('Site Utilities'); ?></h2>
 <ul>
-	<li><a href="massmail.php"><?php printf(_('Mail Engine for %1$s Subscribers'), fusionforge_get_config ('forge_name')); ?></a></li>
-	<li><a href="unsubscribe.php"><?php echo fusionforge_get_config ('forge_name'); ?> <?php echo _('Site Mailings Maintenance'); ?></a></li>
+	<li><a href="massmail.php"><?php printf(_('Mail Engine for %1$s Subscribers'), forge_get_config ('forge_name')); ?></a></li>
+	<li><a href="unsubscribe.php"><?php echo forge_get_config ('forge_name'); ?> <?php echo _('Site Mailings Maintenance'); ?></a></li>
 	<li><a href="edit_frs_filetype.php"><?php echo _('Add, Delete, or Edit File Types'); ?></a></li>
 	<li><a href="edit_frs_processor.php"><?php echo _('Add, Delete, or Edit Processors'); ?></a></li>
 	<li><a href="edit_theme.php"><?php echo _('Add, Delete, or Edit Themes'); ?></a></li>

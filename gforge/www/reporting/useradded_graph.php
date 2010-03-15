@@ -68,7 +68,7 @@ $graph->Add( $lineplot);
 //$graph->SetMargin(10,10,25,10);
 $graph->title->Set("Users Added ".$report->getSpanName()
 	." (".date('m/d/Y',$report->getStartDate()) ."-". date('m/d/Y',$report->getEndDate()) .")");
-$graph->subtitle->Set(fusionforge_get_config ('forge_name'));
+$graph->subtitle->Set(forge_get_config ('forge_name'));
 //$graph->xaxis-> title->Set("Date" );
 //$graph->yaxis-> title->Set("Number" ); 
 

@@ -14,7 +14,7 @@ require_once $gfwww.'include/pre.php';
 print '<?xml version="1.0" encoding="UTF-8"?>';
 ?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
-<ShortName><?php echo fusionforge_get_config ('forge_name'); ?></ShortName>
+<ShortName><?php echo forge_get_config ('forge_name'); ?></ShortName>
 <Description><?php echo _("Search in project"); ?></Description>
 <InputEncoding>UTF-8</InputEncoding>
 <Image width="16" height="16" type="image/x-icon"><?php echo "http://".$GLOBALS['sys_default_domain']."/images/opensearchdescription.png"; ?></Image>

@@ -123,7 +123,7 @@ $arr['group']='By Group';
 $arr['resolution']='By Resolution';
 $arr['assignee']='By Assignee';
 $graph->title->Set($arr[$area]." (".date('m/d/Y',$start) ."-". date('m/d/Y',$end) .")");
-$graph->subtitle->Set(fusionforge_get_config ('forge_name'));
+$graph->subtitle->Set(forge_get_config ('forge_name'));
 
 // Create the tracker open plot
 report_pie_arr(util_result_column_to_array($res,0), util_result_column_to_array($res,1));

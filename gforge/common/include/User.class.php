@@ -428,10 +428,10 @@ Enjoy the site.
 '),
 					       $this->getUnixName(),
 					       util_make_url ('/account/verify.php?confirm_hash=_'.$this->getConfirmHash()),
-					       fusionforge_get_config ('forge_name')));
+					       forge_get_config ('forge_name')));
 		util_send_message(
 			$this->getEmail(),
-			sprintf(_('%1$s Account Registration'), fusionforge_get_config ('forge_name')),
+			sprintf(_('%1$s Account Registration'), forge_get_config ('forge_name')),
 			$message
 		);
 	}

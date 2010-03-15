@@ -55,9 +55,9 @@ class Navigation extends Error {
                 if (!$asHTML) {
                         // get the title
                         if (!$params['title']) {
-                                return fusionforge_get_config ('forge_name') ;
+                                return forge_get_config ('forge_name') ;
                         } else {
-                                return fusionforge_get_config ('forge_name') . ': ' . $params['title'];
+                                return forge_get_config ('forge_name') . ': ' . $params['title'];
                         }
                 } else {
                         // return HTML code otherwise
@@ -93,17 +93,17 @@ class Navigation extends Error {
                         $res['titles'] = array();
                         $res['urls'] = array();
                         
-                        $res['titles'][] = fusionforge_get_config ('forge_name').' - Project News Highlights RSS';
+                        $res['titles'][] = forge_get_config ('forge_name').' - Project News Highlights RSS';
                         $res['urls'][] = util_make_url('/export/rss_sfnews.php'); 
                         
-                        $res['titles'][] = fusionforge_get_config ('forge_name').' - Project News Highlights RSS 2.0';
+                        $res['titles'][] = forge_get_config ('forge_name').' - Project News Highlights RSS 2.0';
                         $res['urls'][] = util_make_url('/export/rss20_news.php'); 
                         
-                        $res['titles'][] = fusionforge_get_config ('forge_name').' - New Projects RSS';
+                        $res['titles'][] = forge_get_config ('forge_name').' - New Projects RSS';
                         $res['urls'][] = util_make_url('/export/rss_sfprojects.php'); 
                         
                         if (isset($GLOBALS['group_id'])) { 
-                                $res['titles'][] = fusionforge_get_config ('forge_name') . ' - New Activity RSS';
+                                $res['titles'][] = forge_get_config ('forge_name') . ' - New Activity RSS';
                                 $res['urls'][] = util_make_url('/export/rss20_activity.php?group_id='.$GLOBALS['group_id']);
                         }
                         return $res;
@@ -201,7 +201,7 @@ class Navigation extends Error {
                         $res['titles'][] = _('Log In');
                         $res['urls'][] = util_make_url($url);
                         
-                        if (!fusionforge_get_config ('user_registration_restricted')) {
+                        if (!forge_get_config ('user_registration_restricted')) {
                                 $res['titles'][] = _('New Account');
                                 $res['urls'][] = util_make_url('/account/register.php');
                         }

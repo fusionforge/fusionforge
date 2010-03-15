@@ -58,7 +58,7 @@ if ($group_id) {
 
 	people_header(array('title'=>_('Help Wanted System')));
 
-	printf(_('<p>The %1$s Project Help Wanted board is for non-commercial, project volunteer openings. Commercial use is prohibited.</p><p>Project listings remain live for two weeks, or until closed by the poster, whichever comes first. (Project administrators may always re-post expired openings.)</p><p>Browse through the category menu to find projects looking for your help.</p><p>If you\'re a project admin, log in and submit help wanted requests through your project administration page.</p><p>To suggest new job categories, submit a request via the support manager.</p>'), fusionforge_get_config ('forge_name'));
+	printf(_('<p>The %1$s Project Help Wanted board is for non-commercial, project volunteer openings. Commercial use is prohibited.</p><p>Project listings remain live for two weeks, or until closed by the poster, whichever comes first. (Project administrators may always re-post expired openings.)</p><p>Browse through the category menu to find projects looking for your help.</p><p>If you\'re a project admin, log in and submit help wanted requests through your project administration page.</p><p>To suggest new job categories, submit a request via the support manager.</p>'), forge_get_config ('forge_name'));
 
 	echo people_show_category_table();
 

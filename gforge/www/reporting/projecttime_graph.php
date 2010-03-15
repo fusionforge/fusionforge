@@ -76,7 +76,7 @@ $arr['subproject']='By Subproject';
 $arr['user']='By User';
 
 $graph->title->Set("Time Report ".$arr[$type]." (".date('m/d/Y',$start) ."-". date('m/d/Y',$end) .")");
-$graph->subtitle->Set(fusionforge_get_config ('forge_name'));
+$graph->subtitle->Set(forge_get_config ('forge_name'));
 
 report_pie_arr($report->labels,$report->getData());
 

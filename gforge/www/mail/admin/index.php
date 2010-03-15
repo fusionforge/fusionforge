@@ -234,7 +234,7 @@ if ($group_id) {
 			mail_footer(array());
 			exit;
 		}
-		echo '<p>'.sprintf(_('You can administrate lists from here. Please note that private lists can still be viewed by members of your project, but are not listed on %1$s.'), fusionforge_get_config ('forge_name')).'</p>';
+		echo '<p>'.sprintf(_('You can administrate lists from here. Please note that private lists can still be viewed by members of your project, but are not listed on %1$s.'), forge_get_config ('forge_name')).'</p>';
 		echo '<ul>
 			<li>
 				<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;add_list=1">'._('Add Mailing List').'</a>

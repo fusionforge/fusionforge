@@ -26,9 +26,9 @@
 require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
 
-site_user_header(array('title'=>sprintf(_('Welcome to %1$s'), fusionforge_get_config ('forge_name'))));
+site_user_header(array('title'=>sprintf(_('Welcome to %1$s'), forge_get_config ('forge_name'))));
 
-printf(_('<p>You are now a registered user on %1$s, the online development environment for Open Source projects.</p><p>As a registered user, you can participate fully in the activities on the site. You may now post messages to the project message forums, post bugs for software in %1$s, sign on as a project developer, or even start your own project.</p><p>Enjoy the site, and please provide us with feedback on ways that we can improve %1$s.</p><p>--the %1$s staff.</p>'), fusionforge_get_config ('forge_name'));
+printf(_('<p>You are now a registered user on %1$s, the online development environment for Open Source projects.</p><p>As a registered user, you can participate fully in the activities on the site. You may now post messages to the project message forums, post bugs for software in %1$s, sign on as a project developer, or even start your own project.</p><p>Enjoy the site, and please provide us with feedback on ways that we can improve %1$s.</p><p>--the %1$s staff.</p>'), forge_get_config ('forge_name'));
 
 site_user_footer(array());
 
