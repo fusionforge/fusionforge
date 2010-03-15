@@ -344,13 +344,18 @@ function session_redirect($loc) {
  *	fails checks.
  *
  *	@param		array	Associative array specifying criteria
- *	@param		string	Override error string (optional)
  *	@return does not return if check is failed
  *
  */
 function session_require($req, $reason='') {
 	if (!session_loggedin()) {
 		exit_not_logged_in();	
+	}
+	
+	$user =& user_get_object(user_getid());
+	if (! $user->isActive()) {
+		session_logout();
+		exit_error('Error','Your account is no longer active ; you have been disconnected');
 	}
 
 	if (array_key_exists('group', $req)) {
