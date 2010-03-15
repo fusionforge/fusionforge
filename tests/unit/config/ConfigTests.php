@@ -33,12 +33,12 @@ class Config_Tests extends PHPUnit_Framework_TestCase
 
 		$arr = fusionforge_get_config_array ('forge_name', array ('user_registration_restricted', 'core')) ;
 		$this->assertEquals('FusionForge', $arr[0]);
-		$this->assertEquals('', $arr[1]);
+		$this->assertFalse(!!$arr[1]);
 
 		fusionforge_set_vars_from_config ('forge_name', array ('user_registration_restricted', 'core')) ;
 		global $forge_name, $core__user_registration_restricted ;
 		$this->assertEquals('FusionForge', $forge_name);
-		$this->assertEquals('', $core__user_registration_restricted);
+		$this->assertFalse(!!$core__user_registration_restricted);
 
 	}
 
