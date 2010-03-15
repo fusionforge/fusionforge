@@ -129,6 +129,10 @@ function db_query($qstring,$limit='-1',$offset=0,$dbserver=SYS_DB_PRIMARY) {
 
 	//$GLOBALS['G_DEBUGQUERY'] .= $qstring .' |<font size="-2">'.$dbserver.'</font>'. "<p>\n";
 	$res = @pg_query($dbserver,$qstring);
+	if (!$res) {
+		error_log('SQL: '. preg_replace('/\n\t+/', ' ',$qstring));
+		error_log('SQL> '.db_error());
+	}
 	//echo "\n<br />|*| [$qstring]: ".db_error();
 	return $res;
 }
@@ -161,6 +165,10 @@ function db_query_params($qstring,$params,$limit='-1',$offset=0,$dbserver=SYS_DB
 	}
 
 	$res = @pg_query_params($dbserver,$qstring,$params);
+	if (!$res) {
+		error_log('SQL: '. preg_replace('/\n\t+/', ' ',$qstring));
+		error_log('SQL> '.db_error());
+	}
 	return $res;
 }
 
