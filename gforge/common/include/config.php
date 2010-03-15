@@ -54,9 +54,13 @@ function fusionforge_read_config_file ($file) {
 
 	$sections = parse_ini_file ($file, true) ;
 	foreach ($sections as $sectname => $options) {
-	 	foreach ($options as $key => $value) {
+		if (!isset ($fusionforge_config[$section]))
+			continue ;
+		foreach ($options as $key => $value) {
+			if (!isset ($fusionforge_config[$section][$var]))
+				continue ;
 			$fusionforge_config[$sectname][$key] = $value ;
-	 	}
+		}
 	}
 
 	return ;
