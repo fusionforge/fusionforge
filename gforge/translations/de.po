@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-01-07 18:16+0100\n"
-"PO-Revision-Date: 2010-03-15 15:31+0200\n"
-"Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
+"PO-Revision-Date: 2010-03-15 15:47+0200\n"
+"Last-Translator: Nils Kollat <n.kollat@tarent.de>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -47,9 +47,8 @@ msgstr "Dokumenten-Gruppe: ungültige parent-ID für die Gruppe"
 
 #: common/docman/DocumentGroup.class.php:125
 #: common/docman/DocumentGroup.class.php:279
-#, fuzzy
 msgid "Group name already exists"
-msgstr "Unix-Name bereits verwendet"
+msgstr "Gruppenname bereits verwendet"
 
 #: common/docman/DocumentGroup.class.php:152
 msgid "DocumentGroup: Invalid DocumentGroup ID"
@@ -82,9 +81,8 @@ msgid "Illegal Characters in Forum Name"
 msgstr "Illegale Zeichen im Forenname"
 
 #: common/forum/Forum.class.php:148
-#, fuzzy
 msgid "Mailing List Exists with same name"
-msgstr "Name der Mailingliste :"
+msgstr "Mailingliste mit gleichem Namen existiert bereits"
 
 #: common/forum/Forum.class.php:182
 msgid "Error Adding Forum"
