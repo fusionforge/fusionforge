@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-01-07 18:16+0100\n"
-"PO-Revision-Date: 2010-03-15 15:47+0200\n"
+"PO-Revision-Date: 2010-03-15 16:30+0200\n"
 "Last-Translator: Nils Kollat <n.kollat@tarent.de>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: de\n"
@@ -96,7 +96,7 @@ msgstr "Willkommen auf %1$s"
 
 #: common/forum/Forum.class.php:245
 msgid "Invalid forum group identifier"
-msgstr ""
+msgstr "Ungültige Forengruppen Kennung"
 
 #: common/forum/Forum.class.php:475 common/forum/Forum.class.php:512
 #: common/frs/FRSPackage.class.php:270 common/frs/FRSPackage.class.php:302
@@ -136,9 +136,8 @@ msgstr "Forum"
 #: common/forum/ForumFactory.class.php:185
 #: common/forum/ForumFactory.class.php:233
 #: common/forum/ForumFactory.class.php:268
-#, fuzzy
 msgid "Forum not found"
-msgstr "Umfrage nicht gefunden."
+msgstr "Forum nicht gefunden."
 
 #: common/forum/ForumFactory.class.php:214
 #: common/forum/ForumFactory.class.php:242
@@ -202,7 +201,7 @@ msgstr "Forennachricht:\"fetchData()\" Ungültige Nachrichten-ID"
 
 #: common/forum/ForumMessage.class.php:579
 msgid "Invalid Message ID"
-msgstr ""
+msgstr "Ungültige Mitteilungs - Identität"
 
 #: common/forum/ForumMessage.class.php:666
 #, php-format
@@ -211,6 +210,9 @@ msgid ""
 "Read and respond to this message at: \n"
 "%s"
 msgstr ""
+"\n"
+"Lesen und Beantworten Sie diese Nachricht hier:  \n"
+"%s"
 
 #: common/forum/ForumMessage.class.php:668
 #, php-format
@@ -222,6 +224,12 @@ msgid ""
 "(enter your response here)\n"
 "%1$s"
 msgstr ""
+"\n"
+"Oder Beantworten Sie auf diese E-Mail indem Sie Ihre Antwort zwischen den "
+"folgenden Markierungen eingeben: \n"
+"%1$s\n"
+"(Geben Sie Ihren Antworttext hier ein)\n"
+"%1$s"
 
 #: common/forum/ForumMessage.class.php:674
 #, php-format
@@ -231,10 +239,14 @@ msgid ""
 "\n"
 "By: %s\n"
 msgstr ""
+"\n"
+" \n"
+" \n"
+"Von: %s\n"
 
 #: common/forum/ForumMessage.class.php:679
 msgid "A file has been uploaded with this message."
-msgstr ""
+msgstr "Mit dieser Nachricht wurde eine Datei hochgeladen."
 
 #: common/forum/ForumMessage.class.php:690
 #, php-format
@@ -243,6 +255,11 @@ msgid ""
 "To stop monitoring this forum, login to %s and visit: \n"
 "%s\n"
 msgstr ""
+"Sie erhalten diese E-Mail, da Sie für dieses Forum Beobachten ausgewählt "
+"haben.\n"
+"Um die Beobachtung des Forums wieder zu beenden, loggen Sie sich auf %s ein "
+"und besuchen Sie:  \n"
+"%s\n"
 
 #: common/frs/FRSFile.class.php:93
 msgid "FRSFile Name Must Be At Least 3 Characters"
@@ -251,6 +268,8 @@ msgstr "FRSFile Name muss mindestens 3 Zeichen haben"
 #: common/frs/FRSFile.class.php:97
 msgid "Filename can only be alphanumeric and \"-\" \"_\" \".\" characters."
 msgstr ""
+"Für Dateinamen können ausschließlich alphanumerische und \"-\" \"_\" \".\" Zeichen "
+"verwendet werden."
 
 #: common/frs/FRSFile.class.php:107
 msgid "FRSFile Appears to be invalid"
@@ -292,6 +311,18 @@ msgid ""
 "\n"
 "%6$s"
 msgstr ""
+"Das Projekt %1$s (%2$s) hat eine Neue Version des Pakets \"%3$s\" "
+"veröffentlicht.\n"
+"Sie können es unter dem folgenden Link herunterladen:\n"
+"\n"
+" %4$s\n"
+" \n"
+"Sie erhalten diese E-Mail, da Sie Informationen erbaten, wenn neue\n"
+"Versionen des Pakets veröffentlicht werden. Wenn Sie zukünftig\n"
+"nicht mehr informiert werden möchten, loggen Sie sich bitte unter\n"
+"%5$s ein und klicken Sie auf den folgenden Link:\n"
+"\n"
+"%6$s"
 
 #: common/include/Error.class.php:126 common/include/Group.class.php:426
 #: common/include/Group.class.php:498 www/include/exit.php:37
