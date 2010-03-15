@@ -113,15 +113,13 @@ for project in $projects ; do
 			| grep '^ ')
 
 	# Purge anonymous read
-	cat $wdprefix/$project/LocalSettings.php | grep -vi "\$wgGroupPermissions\['Members'\]\['read'\]" > $tmp4
-	cat $tmp4 > $wdprefix/$project/LocalSettings.php
-	cat $wdprefix/$project/LocalSettings.php | grep -vi "\$wgGroupPermissions\['\*'\]\['read'\]" > $tmp4
-	cat $tmp4 > $wdprefix/$project/LocalSettings.php
-
+	(fgrep -vie '$wgGroupPermissions['\''Members'\'']['\''read'\'']' \
+	    -e '$wgGroupPermissions['\''*'\'']['\''read'\'']' \
+	    $wdprefix/$project/LocalSettings.php
 	if [ $ispublic = '0' ] ; then
-		echo "\$wgGroupPermissions['Members']['read']    = true;" >> $wdprefix/$project/LocalSettings.php
-		echo "\$wgGroupPermissions['*']['read']          = false;" >> $wdprefix/$project/LocalSettings.php
-	fi
+		echo "\$wgGroupPermissions['Members']['read']    = true;"
+		echo "\$wgGroupPermissions['*']['read']          = false;"
+	fi) >$wdprefix/$project/LocalSettings.php
 
 done
 rm -f $tmp4
