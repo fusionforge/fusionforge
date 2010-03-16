@@ -6,6 +6,8 @@ DIST=$(DISTDEBIAN)$(DISTREDHAT)$(DISTSUSE)
 ARCHIVE=$(CURDIR)/depot
 BUILDRESULT=$(CURDIR)/result
 
+DOXYGEN=doxygen
+
 VER=$(shell LANG=C grep '>software_version' gforge/common/include/FusionForge.class.php | cut -d\' -f2)
 in_svn_repo:= $(wildcard .svn/)
 ifeq ($(strip $(in_svn_repo)),)
@@ -49,10 +51,13 @@ build-unit-tests:
 	cd tests; phpunit --log-xml $(BUILDDIR)/reports/phpunit.xml --log-pmd $(BUILDDIR)/reports/phpunit.pmd.xml --coverage-clover $(BUILDDIR)/reports/coverage/clover.xml --coverage-html $(BUILDDIR)/reports/coverage/ AllTests.php
 	cp $(BUILDDIR)/reports/phpunit.xml $(BUILDDIR)/reports/phpunit.xml.org; xalan -in $(BUILDDIR)/reports/phpunit.xml.org -xsl fix_phpunit.xslt -out $(BUILDDIR)/reports/phpunit.xml
 
+build-doc:
+	$(DOXYGEN) gforge/docs/fusionforge.doxygen
+	$(DOXYGEN) gforge/plugins/wiki/www/doc/phpwiki.doxygen
+
 build-full-tests:
 	mkdir -p $(BUILDDIR)/build/packages $(BUILDDIR)/reports/coverage
 	find $(BUILDDIR)/build/packages -type f -exec rm -f  {} \;
-	phpdoc --title 'API Documentation' -ue on -t $(BUILDDIR)/apidocs -d gforge/common -tb '/usr/share/php/data/phpUnderControl/data/phpdoc' -o HTML:Phpuc:phpuc
 	-phpcs --tab-width=4 --standard=PEAR --report=checkstyle gforge/common > $(BUILDDIR)/reports/checkstyle.xml
 	cd tests; phpunit --log-xml $(BUILDDIR)/reports/phpunit.xml --log-pmd $(BUILDDIR)/reports/phpunit.pmd.xml --coverage-clover $(BUILDDIR)/reports/coverage/clover.xml --coverage-html $(BUILDDIR)/reports/coverage/ AllFullTests.php
 	cp $(BUILDDIR)/reports/phpunit.xml $(BUILDDIR)/reports/phpunit.xml.org; xalan -in $(BUILDDIR)/reports/phpunit.xml.org -xsl fix_phpunit.xslt -out $(BUILDDIR)/reports/phpunit.xml
