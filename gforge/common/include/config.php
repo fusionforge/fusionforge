@@ -101,21 +101,22 @@ function forge_set_vars_from_config () {
 	$c = FusionForgeConfig::get_instance () ;
 
 	foreach (func_get_args() as $item) {
-		$section = NULL ;
 		if (is_array ($item)) {
 			$var = $item[0] ;
 			$x = $var ;
 			if (isset ($item[1])) {
 				$section = $item[1] ;
 				$x = $section.'__'.$var ;
+				$value = forge_get_config ($var, $section) ;
 			}
 		} else {
 			$var = $item ;
 			$x = $item ;
+			$value = forge_get_config ($var) ;
 		}
 
 		global $$x ;
-		$$x = forge_get_config ($var, $section) ;
+		$$x = $value ;
 	}
 }
 
