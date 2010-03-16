@@ -157,7 +157,9 @@ if ($GLOBALS['sys_require_unique_email']) {
 <?php echo html_get_ccode_popup('ccode', $ccode); ?>
 </p>
 <p>
-@<?php printf(_('Email Address:<span class="important">*</span><br /><em>This email address will be verified before account activation. You will receive a mail forward account at &lt;loginname@%1$s&gt; that will forward to this address.</em>'), $GLOBALS['sys_users_host']); ?>
+@<?php
+	echo _('Email Address:') . utils_requiredField() . "<br />\n<em>";
+	printf(_('This email address will be verified before account activation. You will receive a mail forward account at &lt;loginname@%1$s&gt; that will forward to this address.'), $GLOBALS['sys_users_host']); ?></em>
 <br /><input size="30" type="text" name="email" value="<?php print(htmlspecialchars($email)); ?>" />
 </p>
 <p>
