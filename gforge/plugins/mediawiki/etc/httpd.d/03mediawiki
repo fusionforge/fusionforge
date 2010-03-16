@@ -10,7 +10,7 @@
 </Directory>
 
 # some directories must be protected
-<DirectoryMatch /var/lib/gforge/plugins/mediawiki/wikidata/[-a-zA-Z0-9_]*/upload>
+<DirectoryMatch /var/lib/gforge/plugins/mediawiki/wikidata/[-a-zA-Z0-9_]*/images>
         Options -FollowSymLinks
         AllowOverride None
 </DirectoryMatch>
