@@ -254,11 +254,11 @@ if ($group->usesPM()) {
 <table border="0" width="80%">
 	<tr><td colspan="2">
         <strong><?php echo _('Attach Files') ?>:</strong><br />
-        <input type="file" name="input_file[]" size="30" /><br />
-        <input type="file" name="input_file[]" size="30" /><br />
-        <input type="file" name="input_file[]" size="30" /><br />
-        <input type="file" name="input_file[]" size="30" /><br />
-        <input type="file" name="input_file[]" size="30" /><br />
+        <input type="file" name="input_file0" size="30" /><br />
+        <input type="file" name="input_file1" size="30" /><br />
+        <input type="file" name="input_file2" size="30" /><br />
+        <input type="file" name="input_file3" size="30" /><br />
+        <input type="file" name="input_file4" size="30" /><br />
 		<?php
 		//
 		//	print a list of files attached to this Artifact

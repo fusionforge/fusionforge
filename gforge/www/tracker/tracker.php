@@ -87,7 +87,8 @@ switch (getStringFromRequest('func')) {
 				//
 				$ext_feedback = '';
 				for ($i=0; $i<5; $i++) {
-					$error=$_FILES['input_file']['error'][$i];
+					$f = getUploadedFile("input_file$i");
+					$error = $f['error'];
 					if (isset($error) && $error > 0) {
 						$n = $i+1;
 						if ($error === 1 || $error === 2) {
@@ -99,19 +100,19 @@ switch (getStringFromRequest('func')) {
 						}
 						continue;
 					}
-					$file_name=$_FILES['input_file']['name'][$i];
-					$tmp_name=$_FILES['input_file']['tmp_name'][$i];
+					$file_name = $f['name'];
+					$tmp_name = $f['tmp_name'];
+					$size = $f['size'];
+					$type = $f['type'];
 					if (!is_uploaded_file($tmp_name)) {
 						continue;
 					}
-					$size=$_FILES['input_file']['size'][$i];
-					$type=$_FILES['input_file']['type'][$i];
 
 					$afh=new ArtifactFileHtml($ah);
 					if (!$afh || !is_object($afh)) {
 						$feedback .= 'Could Not Create File Object';
-						//				} elseif ($afh->isError()) {
-						//					$feedback .= $afh->getErrorMessage();
+					} elseif ($afh->isError()) {
+						$feedback .= $afh->getErrorMessage();
 					} else {
 						if (!util_check_fileupload($tmp_name)) {
 							form_release_key(getStringFromRequest('form_key'));
@@ -317,7 +318,8 @@ switch (getStringFromRequest('func')) {
 				//
 				$ext_feedback = '';
 				for ($i=0; $i<5; $i++) {
-					$error=$_FILES['input_file']['error'][$i];
+					$f = getUploadedFile("input_file$i");
+					$error = $f['error'];
 					if (isset($error) && $error > 0) {
 						$n = $i+1;
 						if ($error === 1 || $error === 2) {
@@ -331,36 +333,30 @@ switch (getStringFromRequest('func')) {
 						}
 						continue;
 					}
-					$file_name=$_FILES['input_file']['name'][$i];
-					$tmp_name=$_FILES['input_file']['tmp_name'][$i];
+					$file_name = $f['name'];
+					$tmp_name = $f['tmp_name'];
+					$size = $f['size'];
+					$type = $f['type'];
+
 					if (!is_uploaded_file($tmp_name)) {
 						continue;
+					}
 
+					$afh=new ArtifactFileHtml($ah);
+					if (!$afh || !is_object($afh)) {
+						$feedback .= 'Could Not Create File Object';
+					} elseif ($afh->isError()) {
+						$feedback .= $afh->getErrorMessage();
+					} else {
+						if (!util_check_fileupload($tmp_name)) {
+							form_release_key(getStringFromRequest('form_key'));
+							exit_error("Error","Invalid filename");
+						}
 						if (!$afh->upload($tmp_name,$file_name,$type,' ')) {
 							$feedback .= ' <br />'._('File Upload: Error').':'.$afh->getErrorMessage();
 							$was_error=true;
 						} else {
 							$feedback .= ' <br />'._('File Upload: Successful');
-						}
-						$size=$_FILES['input_file']['size'][$i];
-						$type=$_FILES['input_file']['type'][$i];
-
-						$afh=new ArtifactFileHtml($ah);
-						if (!$afh || !is_object($afh)) {
-							$feedback .= 'Could Not Create File Object';
-							//			} elseif ($afh->isError()) {
-							//				$feedback .= $afh->getErrorMessage();
-						} else {
-							if (!util_check_fileupload($tmp_name)) {
-								form_release_key(getStringFromRequest('form_key'));
-								exit_error("Error", _("Invalid filename"));
-							}
-							if (!$afh->upload($tmp_name,$file_name,$type,' ')) {
-								$feedback .= ' <br />'._('File Upload: Error').':'.$afh->getErrorMessage();
-								$was_error=true;
-							} else {
-								$feedback .= ' <br />'._('File Upload: Successful');
-							}
 						}
 					}
 				}
