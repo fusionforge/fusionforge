@@ -28,33 +28,7 @@ debootstrap
 
 # initramfs-tools recommends busybox, and we don't yet support recommends
 busybox
+
+# newer debian-cd (0.3.5+) requires syslinux-common or syslinux in the mirror
+syslinux-common
 syslinux
-
-dictionaries-common
-krb5-clients
-krb5-config
-ssh-krb5
-vim
-ntpdate
-ntp
-build-essential
-debconf-utils
-exim4-daemon-heavy
-mailman
-#proftpd
-apache2-mpm-prefork
-openssl
-zsh
-sudo
-devscripts
-fakeroot
-cowdancer
-svn-buildpackage
-dpatch
-debhelper
-reprepro
-openssh-server
-
-postgresql-8.4
-fusionforge-full
-gforge-plugin-mediawiki

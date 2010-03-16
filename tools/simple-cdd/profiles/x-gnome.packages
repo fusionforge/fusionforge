@@ -1,0 +1,27 @@
+# window manager
+gnome-desktop-environment
+
+# x-teminal-emulator
+gnome-terminal
+
+# menus up to date
+menu
+
+# login manager
+gdm
+
+# includes startx
+xbase-clients
+
+# X
+#xorg
+xserver-xorg
+
+# workaround http://bugs.debian.org/405639
+xserver-xorg-input-all
+xserver-xorg-video-all
+
+# browser
+iceweasel
+# mailer
+icedove
