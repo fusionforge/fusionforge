@@ -36,6 +36,12 @@ if (getenv('sys_localinc')) {
 } elseif (file_exists($fusionforge_basedir.'/config/local.inc.php')) {
 	$gfcgfile = $fusionforge_basedir.'/config/local.inc.php';
 	$gfconfig = $fusionforge_basedir.'/config/';
+} elseif (file_exists('/etc/gforge/local.inc.php')) {
+	$gfcgfile = '/etc/gforge/local.inc.php';
+	$gfconfig = '/etc/gforge/';
+} elseif (file_exists('/etc/gforge/local.inc')) {
+	$gfcgfile = '/etc/gforge/local.inc';
+	$gfconfig = '/etc/gforge/';
 } else {
 	$gfcgfile = 'local.inc';
 	$gfconfig = '';

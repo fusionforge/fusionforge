@@ -71,13 +71,8 @@ if (!isset ($fusionforge_config)) {
 	$fusionforge_config = new FusionForgeConfig () ;
 }
 
-function forge_get_config ($var, $section = NULL) {
+function forge_get_config ($var, $section = 'core') {
 	$c = FusionForgeConfig::get_instance () ;
-
-	if ($section == NULL) {
-		$section = 'core' ;
-	}
-
 	return $c->get_value ($section, $var) ;
 }
 
