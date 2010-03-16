@@ -250,6 +250,7 @@ $(TARBALLS)/$(ORIGFILE): $(TARBALLS)
 		grep -v rpm-specific | grep -v docs/phpdoc/docs | \
 		grep -v ^./debian/ | grep -v \\.jar$$ | \
 		grep -v \\.pdf$$ | grep -v plugins/fckeditor/www/_samples | \
+		grep -v plugins/wiki/www/lib/pear | \
 		cpio -o -H ustar | gzip > $(TARBALLS)/$(ORIGFILE)
 
 pbuilderenv: $(PBUILDERTGZ) $(PBUILDERTGZ)/base-$(DISTRIB).tgz
