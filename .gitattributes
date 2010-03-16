@@ -127,6 +127,7 @@ gforge/docs/docbook/docbook/entities/authors.ent -text svneol=unset#application/
 gforge/docs/docbook/docbook/entities/authors/alain_peyrat.xml -text
 gforge/docs/docbook/docbook/entities/xinclude.ent -text svneol=unset#application/octet-stream
 gforge/docs/docbook/docbook/user_guide/project_functions/activity.xml -text
+gforge/docs/fusionforge.doxygen -text
 gforge/docs/images/sflogo2-105a.png -text
 gforge/docs/phpdoc/phpDocumentor.ini.patch -text
 gforge/etc/config.ini -text
@@ -1357,6 +1358,7 @@ gforge/plugins/wiki/www/doc/README.phpwiki-auth -text
 gforge/plugins/wiki/www/doc/README.phpwiki-cache -text
 gforge/plugins/wiki/www/doc/README.security -text
 gforge/plugins/wiki/www/doc/THEMES -text
+gforge/plugins/wiki/www/doc/phpwiki.doxygen -text
 gforge/plugins/wiki/www/doc/phpwiki_architecture.png -text
 gforge/plugins/wiki/www/favicon.ico -text
 gforge/plugins/wiki/www/g -text
