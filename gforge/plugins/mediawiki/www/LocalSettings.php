@@ -1,7 +1,15 @@
 <?php
 
+$sys_etc_path = "/etc/gforge";
+$sys_opt_path = "/usr/share/gforge";
+$sys_var_path = "/var/lib/gforge";
+
+define('MW_INSTALL_PATH', "$sys_opt_path/www/plugins/mediawiki/wikisrc");
+
 $fusionforgeproject = 'siteadmin' ;
 $exppath = explode ('/', $_SERVER['PHP_SELF']) ;
+
+# determine $fusionforgeproject
 while (count ($exppath) >= 4) {
         if (($exppath[0] == 'plugins') && ($exppath[1] == 'mediawiki') && ($exppath[2] == 'wiki') && ($exppath[4] == 'index.php')) {
                 $fusionforgeproject = $exppath[3] ;
@@ -11,8 +19,7 @@ while (count ($exppath) >= 4) {
         }
 }
 
-define('MW_INSTALL_PATH','/usr/share/gforge/www/plugins/mediawiki');
-$wikidata = "/var/lib/gforge/plugins/mediawiki/wikidata/$fusionforgeproject" ;
+$wikidata = $sys_var_path . "plugins/mediawiki/wikidata/$fusionforgeproject" ;
 
 if( defined( 'MW_INSTALL_PATH' ) ) {
         $IP = MW_INSTALL_PATH;
@@ -26,10 +33,10 @@ set_include_path( implode( PATH_SEPARATOR, $path ) . PATH_SEPARATOR . get_includ
 require_once( "$IP/includes/DefaultSettings.php" );
 
 if ( isset( $_SERVER ) && array_key_exists( 'REQUEST_METHOD', $_SERVER ) ) {
-        require_once ('/etc/gforge/local.inc') ;
-        require_once ('/usr/share/gforge/www/env.inc.php') ;
+        require_once ("$sys_etc_path/local.inc") ;
+        require_once ("$sys_opt_path/www/env.inc.php") ;
 } else {
-        require_once ('/etc/gforge/database.inc') ;
+        require_once ("$sys_etc_path/database.inc") ;
 }
 $sys_dbport = 5432;
 
@@ -66,10 +73,7 @@ $wgShowExceptionDetails = true ;
 
 $wgLanguageCode = "en";
 $wgDefaultSkin = 'fusionforge';
-$wgStyleDirectory = '/usr/share/mediawiki/skins' ;
 
-require ('/etc/gforge/local.inc') ;
-require ('/usr/share/gforge/www/env.inc.php') ;
 $GLOBALS['sys_dbhost'] = $sys_dbhost ;
 $GLOBALS['sys_dbport'] = $sys_dbport ;
 $GLOBALS['sys_dbname'] = $sys_dbname ;
@@ -83,7 +87,7 @@ $GLOBALS['sys_custom_path'] = $sys_custom_path ;
 $GLOBALS['gfwww'] = $gfwww ;
 $GLOBALS['gfplugins'] = $gfplugins ;
 $GLOBALS['sys_lang'] = $sys_lang ;
-require ($gfwww.'include/pre.php') ;
+require ("$sys_opt_path/www/include/pre.php") ;
 $GLOBALS['sys_urlroot'] = $sys_urlroot;
 $GLOBALS['sys_session_key'] = $sys_session_key;
 $GLOBALS['sys_session_expire'] = $sys_session_expire;

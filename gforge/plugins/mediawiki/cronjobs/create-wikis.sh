@@ -1,16 +1,23 @@
 #! /bin/sh
 
-tmp3=$(mktemp)
-perl -e'require "/etc/gforge/local.pl"; print "*:*:$sys_dbname:$sys_dbuser:$sys_dbpasswd\n"' > $tmp3
+sys_etc_path="/etc/gforge"
+sys_var_apth="/var/lib/gforge"
 
-projects=$(echo "SELECT g.unix_group_name from groups g, group_plugin gp, plugins p where g.group_id = gp.group_id and gp.plugin_id = p.plugin_id and p.plugin_name = 'mediawiki' ;" \
+# set the data dir for the plugin
+wdprefix=$sys_var_path/plugins/mediawiki/wikidata
+
+# get DB credentials
+tmp3=$(mktemp)
+perl -e'require "'$sys_etc_path'/local.pl"; print "*:*:$sys_dbname:$sys_dbuser:$sys_dbpasswd\n"' > $tmp3
+
+# get all projects that use the mediawiki plugin
+all_projects=$(echo "SELECT g.unix_group_name from groups g, group_plugin gp, plugins p where g.group_id = gp.group_id and gp.plugin_id = p.plugin_id and p.plugin_name = 'mediawiki' ;" \
     | PGPASSFILE=$tmp3 /usr/bin/psql -U gforge gforge \
     | tail -n +3 \
     | grep '^ ')
 
-wdprefix=/var/lib/gforge/plugins/mediawiki/wikidata
-
-for project in $projects ; do
+# create image directory and LocalSettings.php for all projects that don't have it yet
+for project in $all_projects ; do
     if [ ! -d $wdprefix/$project/images ] ; then
 	mkdir -p $wdprefix/$project/images
     fi
@@ -47,13 +54,12 @@ for project in $projects ; do
 
 EOF
 
-	filteredprojects="$filteredprojects $project"
+	new_projects="$new_projects $project"
     fi
 done
 
-projects=$filteredprojects
-
-for project in $projects ; do
+# create mediawiki database for all projects that started to use mediawiki
+for project in $new_projects ; do
     schema=$(echo plugin_mediawiki_$project | sed s/-/_/g)
 
     tmp1=$(mktemp)
@@ -99,14 +105,9 @@ EOF
 
 done
 
-projects=$(echo "SELECT g.unix_group_name from groups g, group_plugin gp, plugins p where g.group_id = gp.group_id and gp.plugin_id = p.plugin_id and p.plugin_name = 'mediawiki' ;" \
-    | PGPASSFILE=$tmp3 /usr/bin/psql -U gforge gforge \
-    | tail -n +3 \
-    | grep '^ ')
-
 tmp4=$(mktemp)
 # Disable read anonymous if project is private
-for project in $projects ; do
+for project in $all_projects ; do
 	ispublic=$(echo "SELECT is_public from groups where unix_group_name = '${project}' ;" \
 	    | PGPASSFILE=$tmp3 /usr/bin/psql -U gforge gforge \
 			| tail -n +3 \

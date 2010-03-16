@@ -1,16 +1,16 @@
 # 03mediawiki begin
-<Directory /var/lib/gforge/plugins/mediawiki>
+<Directory {var_lib_gforge}/plugins/mediawiki>
         Options +FollowSymLinks -Indexes
         AllowOverride All
         order allow,deny
         allow from all
         # Allow mediawiki to connect to gforge
-        Include /etc/gforge/httpd.secrets
-        php_admin_value include_path "/etc/gforge/custom:/etc/gforge:/usr/share/gforge:/usr/share/gforge/www/include:."
+        Include {gforge_etc}/httpd.secrets
+        php_admin_value include_path "{sys_custom_path}:/etc/gforge:{usr_share_gforge}:{usr_share_gforge}/www/include:."
 </Directory>
 
 # some directories must be protected
-<DirectoryMatch /var/lib/gforge/plugins/mediawiki/wikidata/[-a-zA-Z0-9_]*/images>
+<DirectoryMatch {var_lib_gforge}/plugins/mediawiki/wikidata/[-a-zA-Z0-9_]*/images>
         Options -FollowSymLinks
         AllowOverride None
 </DirectoryMatch>

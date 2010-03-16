@@ -1,4 +1,5 @@
-FFCRON="/usr/share/gforge/cronjobs"
+FFDIR=/usr/share/gforge
+FFCRON=$FFDIR/cronjobs
 FFUSER=gforge
 
 # You may need to change the pathname to php CLI (command line interface)
