@@ -28,7 +28,7 @@ UBULIST=$(UBUNTULIST) $(UBUNTULISTP)
 LOCALMIRROR=http://localhost/ubuntu
 UBUNTUOP=$(shell wget -q -S http://localhost/ubuntu -O /dev/null 2>&1 && echo "--mirror $(LOCALMIRROR)" || echo "--mirror http://archive.ubuntu.com/ubuntu") --debootstrap debootstrap
 UBUNTUOP=--mirror http://archive.ubuntu.com/ubuntu --debootstrap debootstrap
-DEBIANOP=--debootstrapopts --include=apt
+DEBIANOP=--debootstrapopts --include=apt --debootstrap debootstrap
 ASKPASS=--ask-passphrase
 ASKPASS=
 
