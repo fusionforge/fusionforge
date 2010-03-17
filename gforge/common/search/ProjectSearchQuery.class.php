@@ -60,7 +60,7 @@ class ProjectSearchQuery extends SearchQuery {
 				if (isset ($LUSER)) {
 					$qpa = db_construct_qpa ($qpa,
 								 'OR g.group_id in (SELECT ug.group_id FROM user_group ug WHERE ug.user_id = $1 AND ug.group_id = g.group_id) ',
-								 $LUSER->getID()) ;
+								 array ($LUSER->getID())) ;
 				}
 				$qpa = db_construct_qpa ($qpa,
 							 ') AND (vectors @@ q AND ') ;
@@ -72,7 +72,7 @@ class ProjectSearchQuery extends SearchQuery {
 				if (isset ($LUSER)) {
 					$qpa = db_construct_qpa ($qpa,
 								 'OR g.group_id in (SELECT ug.group_id FROM user_group ug WHERE ug.user_id = $1 AND ug.group_id = g.group_id) ',
-								 $LUSER->getID()) ;
+								 array ($LUSER->getID())) ;
 				}
 				$qpa = db_construct_qpa ($qpa,
 							 ') AND (') ;
@@ -107,7 +107,7 @@ class ProjectSearchQuery extends SearchQuery {
 			if (isset ($LUSER)) {
 				$qpa = db_construct_qpa ($qpa,
 							 'OR g.group_id in (SELECT ug.group_id FROM user_group ug WHERE ug.user_id = $1 AND ug.group_id = g.group_id) ',
-							 $LUSER->getID()) ;
+							 array($LUSER->getID())) ;
 			}
 			$qpa = db_construct_qpa ($qpa,
 						 ') AND ((') ;
