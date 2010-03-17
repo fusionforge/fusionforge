@@ -120,7 +120,7 @@ class TrackersSearchQuery extends SearchQuery {
 			}
 		} else {
 			$qpa = db_construct_qpa ($qpa,
-						 'SELECT DISTINCT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_group_list.name FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users, artifact_group_list WHERE users.user_id = artifact.submitted_by AND artifact_group_list.group_artifact_id = artifact.group_artifact_id AND artifact_group_list.group_id = $1',
+						 'SELECT DISTINCT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_group_list.name FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users, artifact_group_list WHERE users.user_id = artifact.submitted_by AND artifact_group_list.group_artifact_id = artifact.group_artifact_id AND artifact_group_list.group_id = $1 ',
 						 array ($this->groupId)) ;
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
 				$qpa = db_construct_qpa ($qpa,
@@ -140,9 +140,9 @@ class TrackersSearchQuery extends SearchQuery {
 			$qpa = $this->addIlikeCondition ($qpa, 'artifact.summary') ;
 			$qpa = db_construct_qpa ($qpa,
 						 ') OR (') ;
-			$qpa = $this->addIlikeCondition ($qpa, 'artifact.message_body') ;
+			$qpa = $this->addIlikeCondition ($qpa, 'artifact_message.body') ;
 			$qpa = db_construct_qpa ($qpa,
-						 ') ORDER BY artifact_group_list.name, artifact.artifact_id') ;
+						 ')) ORDER BY artifact_group_list.name, artifact.artifact_id') ;
 		}
 		return $qpa ;
 	}

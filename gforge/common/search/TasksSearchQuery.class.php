@@ -137,7 +137,7 @@ class TasksSearchQuery extends SearchQuery {
 						 ') OR (') ;
 			$qpa = $this->addIlikeCondition ($qpa, 'details') ;
 			$qpa = db_construct_qpa ($qpa,
-						 ') ORDER BY project_group_list.project_name, project_task.project_task_id') ;
+						 ')) ORDER BY project_group_list.project_name, project_task.project_task_id') ;
 		}
 		return $qpa ;
 	}

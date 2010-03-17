@@ -94,14 +94,14 @@ class NewsSearchQuery extends SearchQuery {
 			}
 		} else {
 			$qpa = db_construct_qpa ($qpa,
-						 'SELECT news_bytes.summary, news_bytes.post_date, news_bytes.forum_id, users.realname FROM news_bytes, users WHERE (group_id=$1 AND is_approved <> 4 AND news_bytes.submitted_by = users.user_id AND ((',
+						 'SELECT news_bytes.summary, news_bytes.post_date, news_bytes.forum_id, users.realname FROM news_bytes, users WHERE group_id=$1 AND is_approved <> 4 AND news_bytes.submitted_by = users.user_id AND ((',
 						 array ($this->groupId)) ;
 			$qpa = $this->addIlikeCondition ($qpa, 'summary') ;
 			$qpa = db_construct_qpa ($qpa,
 						 ') OR (') ;
 			$qpa = $this->addIlikeCondition ($qpa, 'details') ;
 			$qpa = db_construct_qpa ($qpa,
-						 ') ORDER BY post_date DESC') ;
+						 ')) ORDER BY post_date DESC') ;
 		}
 		return $qpa ;
 	}
