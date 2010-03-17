@@ -228,7 +228,7 @@ class SearchQuery extends Error {
 			}
 			$qpa = db_construct_qpa ($qpa,
 						 'lower ('.$fieldName.') LIKE $1',
-						 array ($wordArgs[$i])) ;
+						 array ('%'.$wordArgs[$i].'%')) ;
 		}
 		return $qpa ;
 	}
