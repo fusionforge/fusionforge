@@ -211,7 +211,7 @@ class SearchQuery extends Error {
 				}
 				$qpa = db_construct_qpa ($qpa,
 							 $fieldName.' ~* $1',
-							 $regexs[$i]) ;
+							 array ($regexs[$i])) ;
 			}
 		}
 		return $qpa;
@@ -228,7 +228,7 @@ class SearchQuery extends Error {
 			}
 			$qpa = db_construct_qpa ($qpa,
 						 'lower ('.$fieldName.') LIKE $1',
-						 $wordArgs[$i]) ;
+						 array ('%'.$wordArgs[$i].'%')) ;
 		}
 		return $qpa ;
 	}

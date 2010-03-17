@@ -93,7 +93,7 @@ class DocsSearchQuery extends SearchQuery {
 						 ') OR (') ;
 			$qpa = $this->addIlikeCondition ($qpa, 'description') ;
 			$qpa = db_construct_qpa ($qpa,
-						 ') ORDER BY doc_groups.groupname, doc_data.docid') ;
+						 ')) ORDER BY doc_groups.groupname, doc_data.docid') ;
 		}
 		return $qpa;
 	}

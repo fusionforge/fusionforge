@@ -83,7 +83,7 @@ class GitPlugin extends SCMPlugin {
 	}
 
 	function getInstructionsForRW ($project) {
-		if (session_logged_in()) {
+		if (session_loggedin()) {
 			$u =& user_get_object(user_getid()) ;
 			$d = $u->getUnixName() ;
 			$b = _('<p><b>Developer GIT Access via SSH</b></p><p>Only project developers can access the GIT tree via this method. SSH must be installed on your client machine. Enter your site password when prompted.</p>');
