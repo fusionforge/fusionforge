@@ -99,7 +99,7 @@ class PluginManager extends Error {
 		return $res;
 	}
 
-	function desactivate($pluginname) {
+	function deactivate($pluginname) {
 		$res = db_query_params('DELETE FROM plugins WHERE plugin_name = $1', array($pluginname));
 
 		foreach ($this->plugins_data as $i => $n) {

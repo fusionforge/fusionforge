@@ -1,0 +1,2 @@
+# Create new mediawikis four times an hour
+*/15 * * * * $FFUSER $PHP $FFDIR/plugins/mediawiki/cronjobs/create-wikis.php

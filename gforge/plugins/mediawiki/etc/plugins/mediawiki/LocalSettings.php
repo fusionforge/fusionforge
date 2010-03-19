@@ -1,15 +1,30 @@
 <?php
 
-$sys_etc_path = "/etc/gforge";
-$sys_opt_path = "/usr/share/gforge";
-$sys_var_path = "/var/lib/gforge";
+require_once('/etc/gforge/local.inc');
 
-define('MW_INSTALL_PATH', "$sys_opt_path/www/plugins/mediawiki/wikisrc");
+if (!isset($mediawiki_var_path))
+	$mediawiki_var_path = "$sys_var_path/plugins/mediawiki";
+if (!isset($mediawiki_projects_path))
+	$mediawiki_projects_path = "$mediawiki_var_path/projects";
+if (!isset($mediawiki_master_path))
+	$mediawiki_master_path = "$mediawiki_var_path/master";
+
+if ( isset( $_SERVER ) && array_key_exists( 'REQUEST_METHOD', $_SERVER ) ) {
+	// when loaded from the server
+        require_once ("$sys_opt_path/www/env.inc.php") ;
+	require_once ("$sys_opt_path/www/include/pre.php") ;
+} else {
+	// when run from the command line
+        require_once ("$sys_etc_path/database.inc") ;
+	require_once ("$sys_opt_path/common/include/config.php") ;
+}
+
+$IP = $mediawiki_master_path;
 
 $fusionforgeproject = 'siteadmin' ;
 $exppath = explode ('/', $_SERVER['PHP_SELF']) ;
 
-# determine $fusionforgeproject
+# determine $fusionforgeproject from the URL
 while (count ($exppath) >= 4) {
         if (($exppath[0] == 'plugins') && ($exppath[1] == 'mediawiki') && ($exppath[2] == 'wiki') && ($exppath[4] == 'index.php')) {
                 $fusionforgeproject = $exppath[3] ;
@@ -19,26 +34,14 @@ while (count ($exppath) >= 4) {
         }
 }
 
-$wikidata = $sys_var_path . "plugins/mediawiki/wikidata/$fusionforgeproject" ;
-
-if( defined( 'MW_INSTALL_PATH' ) ) {
-        $IP = MW_INSTALL_PATH;
-} else {
-        $IP = dirname( __FILE__ );
-}
+$project_dir = "$mediawiki_projects_path/$fusionforgeproject" ;
 
 $path = array( $IP, "$IP/includes", "$IP/languages" );
 set_include_path( implode( PATH_SEPARATOR, $path ) . PATH_SEPARATOR . get_include_path() );
 
 require_once( "$IP/includes/DefaultSettings.php" );
 
-if ( isset( $_SERVER ) && array_key_exists( 'REQUEST_METHOD', $_SERVER ) ) {
-        require_once ("$sys_etc_path/local.inc") ;
-        require_once ("$sys_opt_path/www/env.inc.php") ;
-} else {
-        require_once ("$sys_etc_path/database.inc") ;
-}
-$sys_dbport = 5432;
+if (!isset($sys_dbport)) { $sys_dbport = 5432; }
 
 if ( $wgCommandLineMode ) {
         if ( isset( $_SERVER ) && array_key_exists( 'REQUEST_METHOD', $_SERVER ) ) {
@@ -65,7 +68,7 @@ $wgMainCacheType = CACHE_NONE;
 $wgMemCachedServers = array();
 
 $wgEnableUploads = false;
-$wgUploadDirectory = "$wikidata/images";
+$wgUploadDirectory = "$project_dir/images";
 $wgUseImageMagick = true;
 $wgImageMagickConvertCommand = "/usr/bin/convert";
 $wgLocalInterwiki   = $wgSitename;
@@ -87,7 +90,6 @@ $GLOBALS['sys_custom_path'] = $sys_custom_path ;
 $GLOBALS['gfwww'] = $gfwww ;
 $GLOBALS['gfplugins'] = $gfplugins ;
 $GLOBALS['sys_lang'] = $sys_lang ;
-require ("$sys_opt_path/www/include/pre.php") ;
 $GLOBALS['sys_urlroot'] = $sys_urlroot;
 $GLOBALS['sys_session_key'] = $sys_session_key;
 $GLOBALS['sys_session_expire'] = $sys_session_expire;
@@ -203,14 +205,31 @@ $wgGroupPermissions['*']['edit']          = false;
 $wgGroupPermissions['*']['createpage']    = false;
 $wgGroupPermissions['*']['createtalk']    = false;
 
-$wgLogo = "/themes/$sys_theme/images/wgLogo.png";
-
-if (file_exists ("$wikidata/LocalSettings.php")) {
-        require ("$wikidata/LocalSettings.php") ;
+$res = db_query("SELECT is_public from groups where unix_group_name='$fusionforgeproject'") ;
+$row = db_fetch_array($res);
+$public = $row['is_public'];
+if ($public) {
+        // Disable read permissions for non-members
+	$wgGroupPermissions['Members']['read']          = true;
+	$wgGroupPermissions['ForgeUsers']['read']     	= true;
+	$wgGroupPermissions['user']['read']     	= true;
+	$wgGroupPermissions['*']['read']          	= true;
 } else {
-	exit_error (_('Wiki not created yet, please wait for a few minutes.')) ;
+        // Disable read permissions for non-members
+	$wgGroupPermissions['Members']['read']          = true;
+	$wgGroupPermissions['ForgeUsers']['read']     	= false;
+	$wgGroupPermissions['user']['read']     	= false;
+	$wgGroupPermissions['*']['read']          	= false;
+} 
+
+if (file_exists ("$project_dir/ProjectSettings.php")) {
+        require ("$project_dir/ProjectSettings.php") ;
+} else {
+	exit_error (sprintf(_('Mediawiki for project %s not created yet, please wait for a few minutes.'), $fusionforgeproject)) ;
 }
 
+// Override default wiki logo
+$wgLogo = "/themes/$sys_theme/images/wgLogo.png";
 $wgFavicon = '/images/icon.png' ;
 $wgBreakFrames = false ;
 ini_set ('memory_limit', '50M') ;
