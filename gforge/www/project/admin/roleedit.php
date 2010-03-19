@@ -37,6 +37,8 @@ session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 $role_id = getStringFromRequest('role_id');
 $data = getStringFromRequest('data');
 
+$group = group_get_object($group_id);
+
 //
 //	The observer is a special role, which is actually
 //	just controlling the is_public/allow anon flags
@@ -44,7 +46,7 @@ $data = getStringFromRequest('data');
 //	Get observer role instead of regular role
 //
 if ($role_id=='observer') {
-	$role = new RoleObserver(group_get_object($group_id));
+	$role = new RoleObserver($group);
 	if (!$role || !is_object($role)) {
 		exit_error('Error','Could Not Get RoleObserver');
 	} elseif ($role->isError()) {
@@ -59,7 +61,7 @@ if ($role_id=='observer') {
 		}
 	}
 } else {
-	$role = new Role(group_get_object($group_id),$role_id);
+	$role = new Role($group,$role_id);
 	if (!$role || !is_object($role)) {
 		exit_error('Error',_('Could Not Get Role'));
 	} elseif ($role->isError()) {
@@ -94,8 +96,6 @@ if ($role_id=='observer') {
 }
 
 project_admin_header(array('title'=>_('Edit Role'),'group'=>$group_id));
-
-$group = group_get_object($group_id);
 
 //
 //	If observer role, show title
@@ -272,7 +272,7 @@ for ($i=0; $i<count($keys); $i++) {
 
 echo $HTML->listTableBottom();
 
-echo '<p><input type="submit" name="submit" value="'._('Submit').'"></p>
+echo '<p><input type="submit" name="submit" value="'._('Submit').'" /></p>
 </form>';
 
 project_admin_footer(array());
