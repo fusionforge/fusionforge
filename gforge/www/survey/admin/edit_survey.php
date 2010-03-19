@@ -46,15 +46,15 @@ if (getStringFromRequest('post_changes')) {
 
 	if (!isset($survey_title) || $survey_title == "")
 	{
-		$feedback .= _('UPDATE FAILED: Survey Title Required');
+		$feedback .= _('Update Failed: Survey Title Required');
 	}
 	elseif (!isset($survey_questions) || $survey_questions == "")
 	{
-		$feedback .= _('UPDATE FAILED: Survey Questions Required');
+		$feedback .= _('Update Failed: Survey Questions Required');
 	}
 	if (!isset($survey_id) || !isset($group_id) || $survey_id == "" || $group_id == "")
 	{
-		$feedback .= _('UPDATE FAILED: Missing Data');
+		$feedback .= _('Update Failed: Missing Data');
 	}
 	else
 	{
@@ -71,10 +71,10 @@ WHERE survey_id=$4 AND group_id=$5',
 						  $survey_id,
 						  $group_id));
 		if (db_affected_rows($result) < 1) {
-			$feedback .= _('UPDATE FAILED');
+			$feedback .= _('Update Failed');
 			echo db_error();
 		} else {
-			$feedback .= _('UPDATE SUCCESSFUL');
+			$feedback .= _('Update Successful');
 		}
 	}
 }

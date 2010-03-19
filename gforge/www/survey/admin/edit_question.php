@@ -50,9 +50,9 @@ if (getStringFromRequest('post_changes')) {
 					  $question_id,
 					  $group_id));
         if (db_affected_rows($result) < 1) {
-                $feedback .= _('UPDATE FAILED');
+                $feedback .= _('Update Failed');
         } else {
-                $feedback .= _('UPDATE SUCCESSFUL');
+                $feedback .= _('Update Successful');
         }
 }
 

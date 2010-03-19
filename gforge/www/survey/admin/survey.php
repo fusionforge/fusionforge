@@ -52,7 +52,7 @@ if (getStringFromRequest('post')=="Y") {
   
     if ($survey_id) { /* Modify */
 		$s->update($survey_title, $to_add, $to_del, $is_active);
-		$feedback = _('UPDATE SUCCESSFUL');
+		$feedback = _('Update Successful');
     }  else {  /* Add */
 		$s->create($survey_title, $to_add, $is_active);
 		$feedback = _('Survey Inserted');
@@ -65,7 +65,7 @@ if (getStringFromRequest('updown')=="Y") {
     $is_up = getStringFromRequest('is_up');
 
     $s->updateOrder($question_id, $is_up);
-    $feedback = _('UPDATE SUCCESSFUL');
+    $feedback = _('Update Successful');
 }
 
 /* Error on previous transactions? */
