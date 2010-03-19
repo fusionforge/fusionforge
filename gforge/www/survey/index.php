@@ -43,9 +43,10 @@ if (!$g || !is_object($g) || $g->isError()) {
 $user_id = user_getid();
 
 /* Show header */
+$title = sprintf(_('Surveys for %1$s'), $g->getPublicName());
 $sh = new SurveyHtml();
-$sh->header(array('title'=>_('Survey')));
-echo '<h1>'.sprintf(_('Surveys for %1$s'), $g->getPublicName()) .'</h1>';
+$sh->header(array('title'=>$title));
+echo '<h1>' . $title . '</h1>';
 
 /* Show list of Servey */
 $sf = new SurveyFactory($g);

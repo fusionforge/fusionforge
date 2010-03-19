@@ -39,7 +39,9 @@ if (!$g || !is_object($g) || $g->isError()) {
 }
 
 $sh = new  SurveyHtml();
-$sh->header(array('title'=>_('Survey Complete')));
+$title = _('Survey Complete');
+$sh->header(array('title'=>$title));
+echo '<h1>' . $title . '</h1>';
 
 if (!$survey_id) {
 	/*

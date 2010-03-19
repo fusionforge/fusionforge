@@ -50,10 +50,12 @@ if (!session_loggedin()) {
 $sh = new  SurveyHtml();
 $s = new Survey($g, $survey_id);
 
-$sh->header(array('title'=>_('Survey')));
+$title = sprintf(_('Vote for Survey: %1$s'), $s->getTitle());
+$sh->header(array('title'=>$title));
+echo '<h1>' . $title . '</h1>';
 
 if (!$survey_id) {
-    echo "<h1>"._('For some reason, the Group ID or Survey ID did not make it to this page')."</h1>";
+    echo '<div class="error">'._('For some reason, the Group ID or Survey ID did not make it to this page').'</div>';
 } else {
     echo($sh->ShowSurveyForm($s));
 }
