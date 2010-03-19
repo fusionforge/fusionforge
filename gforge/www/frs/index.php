@@ -82,7 +82,6 @@ if ( $num_packages < 1) {
 	$perm =& $cur_group->getPermission(session_get_user());
 
 	if ($perm->isReleaseTechnician()) {
-		//echo '<p><a href="admin/qrs.php?package=&group_id='.$group_id.'">';
 		echo '<p><a href="admin/qrs.php?group_id='.$group_id.'">';
         echo _('To create a new release click here.');
 		echo "</a></p>";
