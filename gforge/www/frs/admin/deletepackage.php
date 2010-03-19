@@ -52,14 +52,11 @@ if (!$frsp || !is_object($frsp)) {
 }
 
 /*
-
 	Relatively simple form to delete packages of releases
-
 */
 
-frs_admin_header(array('title'=>_('Release Edit/File Releases'),'group'=>$group_id));
+frs_admin_header(array('title'=>sprintf(_('Delete Package: %1$s'), $frsp->getName()),'group'=>$group_id));
 
-	echo '<p><strong>'.$frsp->getName().'</strong></p>';
 	echo '
 	<form action="/frs/admin/?group_id='.$group_id.'" method="post">
 	<p>
@@ -68,9 +65,10 @@ frs_admin_header(array('title'=>_('Release Edit/File Releases'),'group'=>$group_
 	'._('You are about to permanently and irretrievably delete this package and all its releases and files!').'
         </p> 
         <p> 
-	<input type="checkbox" name="sure" value="1" />'._('I\'m Sure').'<br />
-        <br /> 
-	<input type="checkbox" name="really_sure" value="1" />'._('I\'m Really Sure').'<br />
+	<input type="checkbox" name="sure" value="1" />'._('I\'m Sure').'
+        </p> 
+        <p> 
+	<input type="checkbox" name="really_sure" value="1" />'._('I\'m Really Sure').'
         </p>
         <p>
 	<input type="submit" name="submit" value="'._('Delete').'" />

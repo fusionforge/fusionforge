@@ -74,13 +74,15 @@ if ($s->isError()) {
     form_release_key(getStringFromRequest("form_key"));
 } 
 
+$sh->header(array('title'=>_('Add a Survey')));
+
 echo ($sh->ShowAddSurveyForm($s));
 
-/* Show list of Servey */
+/* Show list of Survey */
 $sf = new SurveyFactory($g);
 $ss = & $sf->getSurveys();
 if (!$ss) {
-    echo (_('No Survey Question is found'));
+    echo '<div class="warning_msg">' . _('No Survey Question is found') . '</div>';
 } else {
     echo($sh->ShowSurveys($ss, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1));
 }

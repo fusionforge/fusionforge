@@ -177,7 +177,7 @@ if($sys_use_pm) {
 <input type="checkbox" name="use_pm" value="1" <?php echo c($group->usesPM()); ?> />
 </td>
 <td>
-<strong><?php echo _('Use Task Manager') ?></strong>
+<strong><?php echo _('Use Tasks') ?></strong>
 </td>
 </tr>
 <?php
@@ -300,7 +300,7 @@ if($group->usesMail()) { ?>
 	<p><a href="/mail/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Mailing Lists Admin') ?></a></p>
 <?php }
 if($group->usesPM()) { ?>
-	<p><a href="/pm/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Task Manager Admin') ?></a></p>
+	<p><a href="/pm/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Tasks Admin') ?></a></p>
 <?php }
 if($group->usesDocman()) { ?>
 	<p><a href="/docman/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Documents Admin') ?></a></p>

@@ -99,8 +99,8 @@ class SurveyHTML extends Error {
 		global $group_id;
 
 		/* Default is add */
-		$title = _('Add A Question');
-		$question_button = _('Add This Question.');
+		$title = _('Add a Question');
+		$question_button = _('Add this Question');
 
 		/* If we have a question object, it is a Modify */
 		if ($q && is_object($q) && !$q->isError() && $q->getID()) {
@@ -119,17 +119,17 @@ class SurveyHTML extends Error {
 			$question_type = '';
 		}
 
-		$ret = '<h2>'. $title. '</h2>';
+		$ret = '<h1>'. $title. '</h1>';
 		$ret.= $warning;
 		$ret.='<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
-		$ret.='<input type="hidden" name="post" value="Y" />';
+		$ret.='<p><input type="hidden" name="post" value="Y" />';
 		$ret.='<input type="hidden" name="group_id" value="'.$group_id.'" />';
 		$ret.='<input type="hidden" name="question_id" value="'.$question_id.'" />';
 		$ret.='<input type="hidden" name="form_key" value="' . form_generate_key() . '" />';
 		$ret.=_('Question').':<br />';
-		$ret.='<input type="text" name="question" value="'.$question.'" size="60" maxlength="150" />';
-		$ret.='<p>'. _('Question type').':<br />';
-
+		$ret.='<input type="text" name="question" value="'.$question.'" size="60" maxlength="150" /></p>';
+		$ret.='<p>'. _('Question Type').':<br />';
+	
 		$result = db_query_params ('SELECT * FROM survey_question_types',
 					   array());
 		$ret.= html_build_select_box($result,'question_type',$question_type,false);
@@ -149,9 +149,18 @@ class SurveyHTML extends Error {
 		global $group_id;
 		global $survey_id;
 
+		/* If no question is available */
+		if (! $survey_id && ! count($s->getAddableQuestionInstances())) {
+			$ret = '<p>' . sprintf(_('Please %1$s create a question %2$s before creating a survey'),
+								  '<a href="'.util_make_url('/survey/admin/question.php?group_id='.$group_id).'">',
+             					  '</a>') .
+				   '</p>';
+			return $ret;
+		}
+		
 		/* Default is add */
-		$title = _('Add A Survey');
-		$survey_button = _('Add This Survey');
+		$title = _('Add a Survey');
+		$survey_button = _('Add this Survey');
 		$active = ' checked="checked" ';
 		$inactive = '';
 
@@ -193,7 +202,7 @@ class SurveyHTML extends Error {
 		$arr_to_del = & $s->getQuestionInstances();
 		
 		if (count($arr_to_add)>0) {
-			$ret.='<p><strong>'. _('Addable Questions').'</strong>';
+			$ret.='<h2>'. _('Addable Questions').'</h2>';
 			$title_arr[] = "&nbsp;";
 			$title_arr[] = _('Questions');
 			$title_arr[] = "&nbsp;";
@@ -233,7 +242,7 @@ class SurveyHTML extends Error {
 	
 		/* Deletable questions */
 		if (count($arr_to_del) > 0) {
-			$ret.='<p><strong>'. _('Questions in this Survey').'</strong>';
+			$ret.='<p><strong>'. _('Questions in this Survey').'</strong></p>';
 			$title_arr = array('Question ID', 'Question', 'Type', 'Order', 'Delete from this Survey');
 			$ret.=$GLOBALS['HTML']->listTableTop ($title_arr);
 		}
@@ -451,7 +460,7 @@ class SurveyHTML extends Error {
 		
 		$ret="";
 		if ($s->isUserVote(user_getid())) {
-			$ret.= '<span class="error">'. _('Warning - you are about to vote a second time on this survey.').'</span>';
+			$ret.= '<div class="error">'. _('Warning - you are about to vote a second time on this survey.').'</div>';
 		} 
 		$ret.= '<form action="/survey/survey_resp.php" method="post">'.
 			'<input type="hidden" name="group_id" value="'.$group_id.'" />'.
