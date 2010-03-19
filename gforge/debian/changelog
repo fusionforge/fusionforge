@@ -1,3 +1,9 @@
+fusionforge (5.0~rc2-1) experimental; urgency=low
+
+  * New upstream release candidate.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 19 Mar 2010 14:20:15 +0100
+
 fusionforge (5.0~rc1+svn9102-1) experimental; urgency=low
 
   * New snapshot from upstream SVN (Branch_5_0).
