@@ -302,19 +302,16 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 </tr>
 </table>
 </form>
-<p>&nbsp;</p>
 <hr />
-<h3><?php echo _('Step 2: Add Files To This Release</h3><p>Now, choose a file to upload into the system. The maximum file size is determined by the site administrator, but defaults to 2MB. If you need to upload large files, contact your site administrator.</p>') ?></h3>
+
+<h3><?php echo _('Step 2: Add Files To This Release') ?></h3>
+<p><?php echo _('Now, choose a file to upload into the system.') ?></p>
 
 <form enctype="multipart/form-data" method="post" action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&amp;release_id=$release_id&amp;package_id=$package_id"; ?>">
 <input type="hidden" name="step2" value="1" />
-<span class="important">
-<?php echo _('NOTE: In some browsers you must select the file in the file-upload dialog and click "OK". Double-clicking doesn\'t register the file.') ?>
-</span>
-<br />
-<?php echo _('Upload a new file') ?>: <input type="file" name="userfile"  size="30" />
+<fieldset><legend><strong><?php echo _("File Name") ?></strong></legend>
+<?php echo _("Upload a new file") ?>: <input type="file" name="userfile"  size="30" />
 <?php if ($sys_use_ftpuploads) {
-
 	echo '<p>';
 	printf(_('Alternatively, you can use FTP to upload a new file at %1$s'), $sys_ftp_upload_host).'<br />';
 	echo _('Choose an FTP file instead of uploading:').'<br />';
@@ -323,6 +320,15 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 	echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename','',false); ?>
 	</p>
 <?php } ?>
+<p>
+<span class="important">
+<?php echo _('NOTE: In some browsers you must select the file in the file-upload dialog and click "OK".  Double-clicking doesn\'t register the file.').' ('._('Maximum upload file size:').' '. ini_get('upload_max_filesize')?>)
+</span>
+</p>
+<p>
+<?php echo _('Specify a new URL') ?>: <input type="text" name="userlink"  size="50" />
+</p>
+</fieldset>
 <table width="60%">
 <tr>
 <td>
