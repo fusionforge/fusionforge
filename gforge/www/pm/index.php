@@ -56,7 +56,9 @@ if ($perm->isPMAdmin()) {
 }
 
 if (count($pg_arr) < 1 || $pg_arr == false) {
-	echo '<p>'._('<h1>No Subprojects Found</h1><p><b>No subprojects have been set up, or you cannot view them.<p><span class="important">The Admin for this project will have to set up projects using the admin page</span></b>').'</p>';
+	echo '<div class="warning_msg">'._('No Subprojects Found').'</div>';
+	echo '<p>'._('No subprojects have been set up, or you cannot view them.').'</p>';
+	echo '<p class="important">'._('The Admin for this project will have to set up subprojects using the admin page.').'</p>';
 } else {
 	echo '
 	<p>'._('Choose a Subproject and you can browse/edit/add tasks to it.').'</p>';

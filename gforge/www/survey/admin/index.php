@@ -43,10 +43,26 @@ if (!session_loggedin() || !user_ismember($group_id,'A')) {
 
 ?>
 
-<?php printf(_('<p>It\'s simple to create a survey.<ol><li>Create questions and comments using the forms above.</li><li>Create a survey, listing the questions in order (choose from <strong>your</strong> list of questions).</li><li>Link to the survey using this format: %1$s where XX is the survey number'), '<p><strong>'.util_make_url ('/survey/survey.php?group_id='.$group_id.'&survey_id=XX').'</strong>'); ?>
-
-<p><?php printf(_('You can now activate/deactivate surveys on the %1$s Edit Existing Surveys %2$s page'), '<a href="'.util_make_url ('/survey/admin/survey.php?group_id='.$group_id).'">', '</a>'); ?>
-
+<p>
+<?php print(_('It\'s simple to create a survey.')); ?>
+</p>
+<ol>
+    <li>
+    <?php print(_('Create questions and comments using the forms above.')); ?>
+    </li>
+    <li>
+    <?php print(_('Create a survey, listing the questions in order (choose from <strong>your</strong> list of questions).')); ?>
+    </li>
+    <li>
+    <?php printf(_('Link to the survey using this format: %1$s where XX is the survey number'),
+                 '<br /><strong>'.util_make_url('/survey/survey.php?group_id='.$group_id.'&amp;survey_id=XX').'</strong>'); ?>
+    </li>
+</ol>
+<p>
+<?php printf(_('You can now activate/deactivate surveys on the %1$s Edit Existing Surveys %2$s page'),
+             '<a href="'.util_make_url('/survey/admin/survey.php?group_id='.$group_id).'">',
+             '</a>');
+?>
 </p>
 
 <?php
