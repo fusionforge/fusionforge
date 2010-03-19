@@ -68,8 +68,8 @@ if (count($pg_arr) < 1 || $pg_arr == false) {
 	*/
 	$tablearr=array(_('Subproject Name'),
 	_('Description'),
-	_('Open'),
-	_('Total'));
+	_('Open Tasks'),
+	_('Total Number of Tasks'));
 	echo $HTML->listTableTop($tablearr);
 
 	for ($j = 0; $j < count($pg_arr); $j++) {
