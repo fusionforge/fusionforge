@@ -33,7 +33,7 @@ $bookmark_title = trim(getStringFromRequest('bookmark_title'));
 
 if (getStringFromRequest('submit') && $bookmark_url && $bookmark_title) {
 
-	printf(_('Added bookmark for <strong>%1$s</strong> with title <strong>%2$s</strong>'), htmlspecialchars(stripslashes($bookmark_url)),htmlspecialchars(stripslashes($bookmark_title))).".<p>&nbsp;</p>";
+	printf(_('Added bookmark for <strong>%1$s</strong> with title <strong>%2$s</strong>'), htmlspecialchars($bookmark_url),htmlspecialchars($bookmark_title)).".<p>&nbsp;</p>";
 
 	bookmark_add ($bookmark_url, $bookmark_title);
 	print "<a href=\"$bookmark_url\">"._('Visit the bookmarked page')."</a> - ";
