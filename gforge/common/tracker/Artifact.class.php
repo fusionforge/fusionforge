@@ -988,15 +988,10 @@ class Artifact extends Error {
 			$changes['status'] = 1;
 			$update = true;
 
-			//
-			//	Enter the timestamp if we are changing to closed
-			//
 			if ($status_id != 1) {
-				$sqlu .= " close_date='".time()."', ";
+				$close_date = time () ;
 			} else {
-				// Reset the close_date if bug is re-opened 
-				// (otherwise stat reports will be wrong).
-				$sqlu .= " close_date='0', ";
+				$close_date = 0 ;
 			}
 			$this->addHistory('close_date', $this->getCloseDate());
 		}
