@@ -17,7 +17,7 @@ require_once $gfwww.'soap/nusoap.php';
 $server = new soap_server();
 //configureWSDL($serviceName,$namespace = false,$endpoint = false,$style='rpc', $transport = 'http://schemas.xmlsoap.org/soap/http');
 //$server->configureWSDL('GForgeAPI',$uri);
-$server->configureWSDL('GForgeAPI',$uri,false,'rpc','http://schemas.xmlsoap.org/soap/http',$uri);
+$server->configureWSDL('FusionForgeAPI',$uri,false,'rpc','http://schemas.xmlsoap.org/soap/http',$uri);
 
 // add types
 $server->wsdl->addComplexType(
@@ -107,7 +107,7 @@ require_once $gfwww.'soap/tracker/query.php';
 require_once $gfwww.'soap/docman/docman.php';
 
 //
-//	Include task manager Functions
+//	Include tasks Functions
 //
 require_once $gfwww.'soap/pm/pm.php';
 require_once $gfwww.'soap/reporting/timeentry.php';
