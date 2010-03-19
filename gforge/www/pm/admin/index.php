@@ -72,7 +72,9 @@ if (getStringFromRequest('post_changes')) {
 		if (!$pg->create($project_name,$description,$is_public,$send_all_posts_to)) {
 			exit_error('Error',$pg->getErrorMessage());
 		} else {
-			$feedback .= _('Project Inserted');
+			$feedback .= _('Subproject Inserted');
+			$feedback .= '<br />';
+			$feedback .= _("Please configure also the roles (by default, it's 'No Access')");
 		}
 
 	} else if ($add_cat) {
@@ -178,8 +180,9 @@ if ($add_cat && $group_project_id) {
 	if (!$pg->userIsAdmin()) {
 		exit_permission_denied();
 	}
-	pm_header(array ('title'=>_('Add Categories')));
-	echo "<h2>"._('Add Categories To').": ". $pg->getName() ."</h2>";
+
+	$title = sprintf(_('Add Categories to: %s'), $pg->getName());
+	pm_header(array ('title'=>$title));
 
 	/*
 		List of possible categories for this ArtifactType
@@ -242,9 +245,8 @@ if ($add_cat && $group_project_id) {
 	if (!$pg->userIsAdmin()) {
 		exit_permission_denied();
 	}
-	pm_header(array ('title'=>_('Add Categories')));
-
-	echo '<h2>'._('Modify an Category in').': '. $pg->getName() .'</h2>';
+	$title = sprintf(_('Modify a Category in: %s'), $pg->getName());
+	pm_header(array ('title'=>$title));
 
 	$ac = new ProjectCategory($pg,$id);
 	if (!$ac || !is_object($ac)) {
@@ -279,10 +281,10 @@ if ($add_cat && $group_project_id) {
 		exit_permission_denied();
 	}
 
-	pm_header(array ('title'=>_('Add a new project')));
+	pm_header(array ('title'=>_('Add a new subproject')));
 
 	?>
-	<p><?php echo _('Add a new project to the Project/Task Manager. <strong>This is different than adding a task to a project.</strong>') ?></p>
+	<p><?php echo _('Add a new subproject to the Tasks. <strong>This is different than adding a task to a subproject.</strong>') ?></p>
 
 	<p />
 	<form action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id"; ?>" method="post">
@@ -293,7 +295,7 @@ if ($add_cat && $group_project_id) {
 	<input type="radio" name="is_public" value="1" checked="checked" /><?php echo _('Yes') ?><br />
 	<input type="radio" name="is_public" value="0" /><?php echo _('No') ?><p />
 	<p />
-	<h3><?php echo _('New Project Name')?></h3>
+	<h3><?php echo _('New Subproject Name')?></h3>
 	<p />
 	<input type="text" name="project_name" value="" size="15" maxlength="30" />
 	<p />
@@ -320,10 +322,10 @@ if ($add_cat && $group_project_id) {
 		exit_permission_denied();
 	}
 
-	pm_header(array('title'=>_('Change Project/Task Manager Status')));
+	pm_header(array('title'=>_('Change Tasks Status')));
 
 	?>
-	<p><?php echo _('You can modify an existing Project using this form. Please note that private projects can still be viewed by members of your project, but not the general public.') ?></p>
+	<p><?php echo _('You can modify an existing subproject using this form. Please note that private subprojects can still be viewed by members of your project, but not the general public.') ?></p>
 	<p />
 
 	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
@@ -340,7 +342,7 @@ if ($add_cat && $group_project_id) {
 		</td>
 	</tr> -->
 	<tr>
-		<td><strong><?php echo _('New Project Name')?>:</strong><br />
+		<td><strong><?php echo _('Subproject Name')?>:</strong><br />
 			<input type="text" name="project_name" value="<?php echo $pg->getName() ?>" />
 		</td>
 	</tr>
@@ -417,8 +419,8 @@ if ($add_cat && $group_project_id) {
 	if ($perm->isPMAdmin()) {
 		?>
 		<p />
-		<a href="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>&amp;addproject=1"><?php echo _('Add A Project') ?></a><br />
-		<?php echo _('Add a project, which can contain a set of tasks. This is different than creating a new task.') ?>
+		<a href="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>&amp;addproject=1"><?php echo _('Add a Subproject') ?></a><br />
+		<?php echo _('Add a subproject, which can contain a set of tasks. This is different than creating a new task.') ?>
 		<p />
 		<?php
 	}
@@ -433,11 +435,11 @@ if ($add_cat && $group_project_id) {
 	$pg_arr =& $pgf->getProjectGroups();
 
 	if (count($pg_arr) < 1 || $pg_arr == false) {
-		echo _('<h2>No Projects Found</h2><p>None found for this group. You may add new Projects using the "Add A Project" link above.</p>');
+		echo _('<h2>No Subprojects Found in this Project</h2><p>You may add new Subprojects using the "Add a Subproject" link above.</p>');
 		echo db_error();
 	} else {
 		for ($i=0; $i<count($pg_arr); $i++) {
-			echo '<a href="'. getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_project_id='.$pg_arr[$i]->getID().'&amp;update_pg=1">'._('Edit/Update Project').': <strong>'.$pg_arr[$i]->getName().'</strong></a><p />';
+			echo '<a href="'. getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_project_id='.$pg_arr[$i]->getID().'&amp;update_pg=1">'._('Edit/Update Subproject').': <strong>'.$pg_arr[$i]->getName().'</strong></a><p />';
 		}
 
 	}
