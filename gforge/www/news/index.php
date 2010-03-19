@@ -87,3 +87,4 @@ news_footer(array());
 // End:
 
 ?>
+$feedback = htmlspecialchars(getStringFromRequest('feedback'));
