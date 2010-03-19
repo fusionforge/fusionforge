@@ -3419,7 +3419,6 @@ gforge/www/forum/admin/ForumAdmin.class.php -text
 gforge/www/forum/include/AttachManager.class.php -text
 gforge/www/frs/reporting/downloads.php -text
 gforge/www/images/blank.png -text
-gforge/www/images/category.png -text svneol=unset#unset
 gforge/www/images/clear.png -text
 gforge/www/images/debian-sf-icon.png -text
 gforge/www/images/favicon.ico svneol=native#unset
@@ -3677,6 +3676,7 @@ gforge/www/themes/gforge/images/bottomtab-new/separator.gif -text
 gforge/www/themes/gforge/images/box-grad.png -text
 gforge/www/themes/gforge/images/box-topleft.png -text
 gforge/www/themes/gforge/images/box-topright.png -text
+gforge/www/themes/gforge/images/category.png -text svneol=unset#unset
 gforge/www/themes/gforge/images/clear.png -text
 gforge/www/themes/gforge/images/header/top-logo.blank.gif -text
 gforge/www/themes/gforge/images/header/top-logo.png -text svneol=unset#unset
