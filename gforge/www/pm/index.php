@@ -8,7 +8,7 @@
  */
 /*
 
-	Project/Task Manager
+	Tasks
 	By Tim Perdue, Sourceforge, 11/99
 	Heavy rewrite by Tim Perdue April 2000
 
@@ -44,7 +44,7 @@ if ($pg_arr && $pgf->isError()) {
 	exit_error('Error',$pgf->getErrorMessage());
 }
 
-pm_header(array('title'=>_('Project/Task Manager: Subprojects And Tasks')));
+pm_header(array('title'=>_('Subprojects and Tasks')));
 
 $perm =& $g->getPermission( session_get_user() );
 if ($perm->isPMAdmin()) {

@@ -8,7 +8,7 @@
  */
 /*
 
-	Project/Task Manager
+	Tasks
 	By Tim Perdue, Sourceforge, 11/99
 	Heavy rewrite by Tim Perdue April 2000
 
@@ -409,7 +409,7 @@ if ($add_cat && $group_project_id) {
 	/*
 		Show main page
 	*/
-	pm_header(array('title'=>_('Project/Task Manager Administration')));
+	pm_header(array('title'=>_('Tasks Administration')));
 
 	//
 	//	Show link to create new subproject

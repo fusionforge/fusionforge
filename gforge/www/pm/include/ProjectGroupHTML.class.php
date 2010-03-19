@@ -8,7 +8,7 @@
  */
 /*
 
-	Project/Task Manager
+	Tasks
 	By Tim Perdue, Sourceforge, 11/99
 	Heavy rewrite by Tim Perdue April 2000
 
@@ -36,10 +36,11 @@ function pm_header($params) {
 	}
 
 	if (!$project->usesPm()) {
-		exit_error(_('Error'),_('This Project Has Turned Off The Task Manager'));
+		exit_error(_('Error'),_('This Project Has Turned Off The Tasks'));
 	}
 
 	site_project_header($params);
+	echo '<h1>' . $params['title']. '</h1>';
 
 	$labels = array();
 	$links = array();
