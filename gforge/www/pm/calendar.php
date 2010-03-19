@@ -186,13 +186,13 @@ function display_month($m, $y) {
 				if ($curr_date == $today['mday']
 				    && $y == $today['year']
 				    && $m == $today['mon']) {
-					$colour = " today";
+					$colour = "today";
 				} elseif ($curr_date == $day
 					  && $y == $year
 					  && $m == $month) {
-					$colour = " day";
+					$colour = "day";
 				}
-				print "\t\t\t<td valign=\"top\" class=" . $colour . ">$curr_date";
+				print "\t\t\t<td valign=\"top\" class=\"" . $colour . "\">$curr_date";
 				$cell_contents = '';
 				$rows = count($pt_arr);
 				for ($i = 0; $i < $rows; $i++) {
