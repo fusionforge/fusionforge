@@ -56,7 +56,7 @@ $is_admin_page='y';
 $sh->header(array('title'=>_('Survey Results')));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	echo "<h1>"._('Permission denied')."</h1>";
+	echo '<div class="error">'._('Permission denied').'</div>';
 	$sh->footer(array());
 	exit;
 }
@@ -66,11 +66,11 @@ if ($survey_id) {
     $s = new Survey($g, $survey_id);
 		
     if (!$s || !is_object($s)) {
-		echo "<h3>"._('Error'). ' Can not get Survey' ."</h3>";
+		echo '<div class="error">'._('Error'). ' ' . _('Cannot get Survey') ."</div>";
 		$sh->footer(array());
 		exit;
     } else if ( $s->isError()) {
-		echo "<h3>"._('Error'). $s->getErrorMessage() ."</h3>";
+		echo '<div class="error">'._('Error'). $s->getErrorMessage() ."</div>";
 		$sh->footer(array());
 		exit;
     }
@@ -81,9 +81,9 @@ if ($survey_id) {
 		/* Create a Survey Question for general purpose */
 		$sq = new SurveyQuestion($g, $question_id);
 		if (!$sq || !is_object($sq)) {
-	    	echo "<h3>"._('Error'). ' Can not get Survey Question' ."</h3>";
+	    	echo '<div class="error">'._('Error'). ' ' . _('Cannot get Survey Question') ."</div>";
 		} else if ( $sq->isError()) {
-	    	echo "<h3>"._('Error'). $sq->getErrorMessage() ."</h3>";
+	    	echo '<div class="error">'._('Error'). $sq->getErrorMessage() ."</div>";
 		} else {
 	    	showResult($sh, $s, $sq, 1, 0, $graph);
 		}
@@ -112,7 +112,7 @@ if ($survey_id) {
 $sf = new SurveyFactory($g);
 $ss = & $sf->getSurveys();
 if (!$ss) {
-    echo (_('No Survey Question is found'));
+    echo '<div class="warning_msg">' . _('No Survey Question is found') . '</div>';
 } else {
     echo($sh->ShowSurveys($ss, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1));
 }
@@ -130,9 +130,9 @@ function ShowResult(&$SurveyHTML, &$Survey, &$Question, $show_comment=0, $q_num=
     /* Get results */
     $srf = new SurveyResponseFactory($Survey, $Question);
     if (!$srf || !is_object($srf)) {
-	echo "<h3>"._('Error'). ' Can not get Survey Response Factory' ."</h3>";
+	echo '<div class="error">'._('Error'). ' ' . _('Cannot get Survey Response Factory') ."</div>";
     } else if ( $srf->isError()) {
-	echo "<h3>"._('Error'). $srf->getErrorMessage() ."</h3>";
+	echo '<div class="error">'._('Error'). $srf->getErrorMessage() ."</div>";
     } else {
         /* Show result in HTML*/ 
 	echo ($SurveyHTML->ShowResult($srf, $show_comment, $q_num, $graph));

@@ -30,7 +30,7 @@ require_once $gfwww.'include/pre.php';
 $HTML->header(array('title'=>_('Voting')));
 
 if (!session_loggedin()) {
-	echo "<h2>"._('You must be logged in to vote')."</h2>";
+	echo '<div class="error">'._('You must be logged in to vote')."</div>";
 } else {
 	$vote_on_id = getIntFromRequest('vote_on_id');
 	$response = getStringFromRequest('response');

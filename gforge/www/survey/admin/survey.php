@@ -34,10 +34,9 @@ $is_admin_page='y';
 $sh = new  SurveyHtml();
 $s = new Survey($g, $survey_id);
 
-$sh->header(array('title'=>_('Add A Survey')));
-
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	echo "<h1>". _('Permission denied')."</h1>";
+	$sh->header(array());
+	echo '<div class="error">' . _('Permission denied') . '</div>';
 	$sh->footer(array());
 	exit;
 }

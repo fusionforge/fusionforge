@@ -35,7 +35,7 @@ $customer_id = getIntFromRequest('customer_id');
 survey_header(array('title'=>_('Results')));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-        echo "<h1>"._('Permission denied')."</h1>";
+        echo '<div class="error">'._('Permission denied').'</div>';
         survey_footer(array());
 	exit;
 }

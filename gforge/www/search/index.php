@@ -67,8 +67,7 @@ if ($renderer) {
 	$renderer->flush();
 } else {
 	$HTML->header(array('title'=>_('Search')));
-	
-	echo '<h1>'._('Error - Invalid search').'</h1>';
+	echo '<div class="error">'._('Error - Invalid search').'</div>';
 	
 	$HTML->footer(array());
 	exit();

@@ -45,7 +45,7 @@ if (!$survey_id) {
 	/*
 		Quit if params are not provided
 	*/
-	echo "<h1>"._('Error - For some reason group_id and/or survey_id did not make it he')."</h1>";
+	echo '<div class="error">'._('For some reason, the Group ID or Survey ID did not make it to this page').'</div>';
 	$sh->footer(array());
 	exit;
 }
@@ -54,8 +54,7 @@ if (!session_loggedin()) {
 	/*
 		Tell them they need to be logged in
 	*/
-	echo "<h1>"._('You need to be logged in')."</h1>";
-	echo "<p>"._('Unfortunately, you have to be logged in to participate in surveys.')."</p>";
+	echo '<div class="error">'._('You have to be logged in to participate in surveys.')."</div>";
 	$sh->footer(array());
 	exit;
 }
