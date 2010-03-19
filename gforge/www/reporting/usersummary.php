@@ -40,8 +40,8 @@ $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');
 $tstat = getStringFromRequest('tstat');
 
+$z =& $report->getWeekStartArr();
 if (!$start) {
-	$z =& $report->getWeekStartArr();
 	$start = $z[count($z)-1];
 }
 if (!$end) {
