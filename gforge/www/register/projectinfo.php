@@ -137,7 +137,7 @@ echo '<h1>' . _('Register Project') . '</h1>';
 
 <input size="40" maxlength="40" type="text" name="full_name" value="<?php echo htmlspecialchars(stripslashes($full_name)); ?>"/>
 
-<?php printf(_('<h2>2. Project Purpose And Summarization</h2><strong> Please provide detailed, accurate description of your project and what %1$s resources and in which way you plan to use. This description will be the basis for the approval or rejection of your project\'s hosting on %1$s, and later, to ensure that you are using the services in the intended way. This description will not be used as a public description of your project. It must be written in English.</strong>'), $GLOBALS['sys_name'])?>
+<?php printf(_('<h2>2. Project Purpose And Summarization</h2><strong> Please provide detailed, accurate description of your project and what %1$s resources and in which way you plan to use. This description will be the basis for the approval or rejection of your project\'s hosting on %1$s, and later, to ensure that you are using the services in the intended way. This description will not be used as a public description of your project. It must be written in English.</strong>'), forge_get_config ('forge_name'))?>
 <p/>
 <textarea name="purpose" cols="70" rows="10">
 <?php echo htmlspecialchars($purpose); ?>
@@ -158,7 +158,7 @@ echo '<h1>' . _('Register Project') . '</h1>';
 	$SCMFactory = new SCMFactory() ;
 $scm_plugins=$SCMFactory->getSCMs() ;
 if ($sys_use_scm && count($scm_plugins) > 0) {	
-	echo _('<h3>5. SCM</h3><p>You can choose among different SCM for your project, but just one (or none at all). Please select the SCM system you want to use.</p>')."\n";
+	echo _('<h2>5. Source Code</h2><p>You can choose among different SCM for your project, but just one (or none at all). Please select the SCM system you want to use.</p>')."\n";
 	echo '<table><tbody><tr><td><strong>'._('SCM Repository').':</strong></td>';
 	echo '<td><input type="radio" name="scm" value="noscm" checked="checked">'._('No SCM').'</td>';
 	foreach($scm_plugins as $plugin) {
