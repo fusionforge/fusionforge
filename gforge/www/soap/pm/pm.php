@@ -1,6 +1,6 @@
 <?php
 /**
- * SOAP Task Manager Include - this file contains wrapper functions for the SOAP interface
+ * SOAP Tasks Include - this file contains wrapper functions for the SOAP interface
  *
  * Copyright 2004 (c) GForge, LLC
  * http://gforge.org
