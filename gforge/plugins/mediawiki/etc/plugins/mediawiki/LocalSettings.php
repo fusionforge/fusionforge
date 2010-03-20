@@ -205,7 +205,7 @@ $wgGroupPermissions['*']['edit']          = false;
 $wgGroupPermissions['*']['createpage']    = false;
 $wgGroupPermissions['*']['createtalk']    = false;
 
-$res = db_query("SELECT is_public from groups where unix_group_name='$fusionforgeproject'") ;
+$res = db_query_params("SELECT is_public from groups where unix_group_name=$1", array($fusionforgeproject)) ;
 $row = db_fetch_array($res);
 $public = $row['is_public'];
 if ($public) {

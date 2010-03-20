@@ -65,7 +65,7 @@ if (empty($sys_apache_user) || empty($sys_apache_group)) {
 
 
 # Get all projects that use the mediawiki plugin
-$res = db_query ("SELECT g.unix_group_name from groups g, group_plugin gp, plugins p where g.group_id = gp.group_id and gp.plugin_id = p.plugin_id and p.plugin_name = 'mediawiki';");
+$res = db_query_params ("SELECT g.unix_group_name from groups g, group_plugin gp, plugins p where g.group_id = gp.group_id and gp.plugin_id = p.plugin_id and p.plugin_name = $1;", array("mediawiki"));
 if (!$res) {
 	$err =  "Error: Database Query Failed: ".db_error();
 	cron_debug($err);
@@ -110,7 +110,7 @@ while ( $row = db_fetch_array($res) ) {
 		strtr($schema, "-", "_");
 
 		cron_debug("  Creating schema $schema.");
-		$res = db_query("CREATE SCHEMA $schema ;");
+		$res = db_query_params("CREATE SCHEMA $1", array($schema));
 		if (!$res) {
 			$err =  "Error: Schema Creation Failed: " . 
 				db_error();
@@ -129,10 +129,10 @@ while ( $row = db_fetch_array($res) ) {
 		}
 			
 		$creation_query = file_get_contents($table_file);
-		$res = db_query("SET search_path = \"$schema\" ;" 
-				. $creation_query
-				. "CREATE TEXT SEARCH CONFIGURATION $schema.default ( COPY = pg_catalog.english );"
-				. "COMMIT ;");
+		$res = db_mquery("SET search_path=\"$schema\""
+				 . $creation_query
+				 . "CREATE TEXT SEARCH CONFIGURATION $schema.default ( COPY = pg_catalog.english );"
+				 . "COMMIT ;");
 		if (!$res) {
 			$err =  "Error: Mediawiki Database Creation Failed: " . 
 				db_error();
