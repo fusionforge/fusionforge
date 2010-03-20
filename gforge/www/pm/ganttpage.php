@@ -15,8 +15,6 @@
 	Total rewrite in OO and GForge coding guidelines 12/2002 by Tim Perdue
 */
 
-//pm_header(array('title'=>'Browse Tasks','pagename'=>$pagename,'group_project_id'=>$group_project_id,'sectionvals'=>$g->getPublicName()));
-
 ?>
 
 <?php echo '<?xml version="1.0" encoding="UTF-8"?>';?>
@@ -33,43 +31,20 @@
   </head>
   <body>
 <?php
-/*
-		creating a custom technician box which includes "any" and "unassigned"
-*/
 
-$res_tech=$pg->getTechnicians();
-
-$tech_id_arr=util_result_column_to_array($res_tech,0);
-$tech_id_arr[]='0';  //this will be the 'any' row
-
-$tech_name_arr=util_result_column_to_array($res_tech,1);
-$tech_name_arr[]=_('Any');
-
-if ( empty($_assigned_to) ) {
-	$_assigned_to='0';
-}
-$tech_box=html_build_select_box_from_arrays ($tech_id_arr,$tech_name_arr,'_assigned_to',$_assigned_to,true,_('Unassigned'));
-
-/*
-		creating a custom category box which includes "any" and "none"
-*/
-
-$res_cat=$pg->getCategories();
-
-$cat_id_arr=util_result_column_to_array($res_cat,0);
-$cat_id_arr[]='0';  //this will be the 'any' row
-
-$cat_name_arr=util_result_column_to_array($res_cat,1);
-$cat_name_arr[]=_('Any');
-
+$_assigned_to = getIntFromRequest('_assigned_to', 0);
 $_category_id = getIntFromRequest('_category_id');
 $_order = getIntFromRequest('_order');
-$_resolution = getIntFromRequest('_resolution');
-$_size = getIntFromRequest('_size');
-$_status = getStringFromRequest('_status');
+$_resolution = getStringFromRequest('_resolution');
+$_size = getIntFromRequest('_size', 800);
+$_status = getIntFromRequest('_status', 100);
 $_order = getStringFromRequest('_order');
 
-$cat_box=html_build_select_box_from_arrays ($cat_id_arr,$cat_name_arr,'_category_id',$_category_id,true,_('None'));
+$tech_box=html_build_select_box($pg->getTechnicians(),'_assigned_to',$_assigned_to,true,_('Unassigned'), true, _('Any'));
+
+$status_box=html_build_select_box($pg->getStatuses(),'_status',$_status, false, '', true, _('Any'));
+
+$cat_box=html_build_select_box($pg->getCategories(), '_category_id', $_category_id, true, _('None'), true, _('Any'));
 
 /*
 	Creating a custom sort box
@@ -89,14 +64,21 @@ $order_col_arr[]='end_date';
 $order_col_arr[]='percent_complete';
 $order_box=html_build_select_box_from_arrays ($order_col_arr,$title_arr,'_order',$_order,false);
 
+$dispres_col_arr=array();
+$dispres_col_arr[]='Years';
+$dispres_col_arr[]='Months';
+$dispres_col_arr[]='Weeks';
+$dispres_col_arr[]='Days';
+
 $dispres_title_arr=array();
+$dispres_title_arr[]=_('Years');
 $dispres_title_arr[]=_('Months');
 $dispres_title_arr[]=_('Weeks');
 $dispres_title_arr[]=_('Days');
 if (!$_resolution) {
 	$_resolution=_('Months');
 }
-$dispres_box=html_build_select_box_from_arrays ($dispres_title_arr,$dispres_title_arr,'_resolution',$_resolution,false);
+$dispres_box=html_build_select_box_from_arrays ($dispres_col_arr,$dispres_title_arr,'_resolution',$_resolution,false);
 
 /*
 	Graph Size Box
@@ -112,14 +94,8 @@ $size_title_arr[]='640 x 480';
 $size_title_arr[]='800 x 600';
 $size_title_arr[]='1024 x 768';
 $size_title_arr[]='1600 x 1200';
-if (!$_size) {
-	$_size='800';
-}
-$size_box=html_build_select_box_from_arrays ($size_col_arr,$size_title_arr,'_size',$_size,false);
 
-if (!$_status) {
-	$_status='100';
-}
+$size_box=html_build_select_box_from_arrays ($size_col_arr,$size_title_arr,'_size',$_size,false);
 
 /*
 	Show the new pop-up boxes to select assigned to and/or status
@@ -164,7 +140,7 @@ echo '	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.
 	<table width="10%" border="0" class="tableheading">
 	<tr>
 		<td>'._('Assignee').'<br />'. $tech_box .'</td>
-		<td>'._('Status').'<br />'. $pg->statusBox('_status',$_status,'Any') .'</td>
+		<td>'._('Status').'<br />'. $status_box .'</td>
 		<td>'._('Category').'<br />'. $cat_box .'</td>
 		<td>'._('Sort On').'<br />'. $order_box .'</td>
 		<td>'._('Resolution').'<br />'. $dispres_box .'</td>
