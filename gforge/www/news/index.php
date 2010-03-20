@@ -31,8 +31,10 @@ require_once $gfcommon.'forum/Forum.class.php';
 $group_id = getIntFromRequest('group_id');
 $limit = getIntFromRequest('limit');
 $offset = getIntFromRequest('offset');
+$feedback = htmlspecialchars(getStringFromRequest('feedback'));
 
 news_header(array('title'=>_('News')));
+echo '<h1>' . _('News') . '</h1>';
 
 echo _('<p>Choose a News item and you can browse, search, and post messages.</p>');
 
@@ -87,4 +89,3 @@ news_footer(array());
 // End:
 
 ?>
-$feedback = htmlspecialchars(getStringFromRequest('feedback'));
