@@ -18,7 +18,7 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 	public function testdb_query()
 	{
 		$output = `cd .. ; find gforge tests -name '*.php' -type f | xargs pcregrep -l '\bdb_query\b' \
-					   | grep -v ^tests/code/deprecations/DeprecationsTest.php \
+					   | grep -v ^tests/code/deprecations/DeprecationsTests.php \
 					   | grep -v ^gforge/db/upgrade-db.php \
 					   | grep -v ^gforge/www/include/database-oci8.php \
 					   | grep -v ^gforge/common/include/database-pgsql.php \
