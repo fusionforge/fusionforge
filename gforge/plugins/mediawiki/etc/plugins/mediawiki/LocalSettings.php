@@ -48,11 +48,12 @@ if ( $wgCommandLineMode ) {
                 die( "This script must be run from the command line\n" );
         }
 }
-$wgSitename         = forge_get_config ('forge_name')." Wiki";
+$g = group_get_object_by_name($fusionforgeproject) ;
+$wgSitename         = $g->getPublicName() . " Wiki";
 $wgScriptPath       = "/plugins/mediawiki/wiki/$fusionforgeproject" ;
 
-$wgEmergencyContact = "webmaster@fusionforge.org";
-$wgPasswordSender = "webmaster@fusionforge.org";
+$wgEmergencyContact = $sys_admin_email;
+$wgPasswordSender = $sys_admin_email;
 
 $wgDBtype           = "postgres";
 $wgDBserver         = $sys_dbhost ;

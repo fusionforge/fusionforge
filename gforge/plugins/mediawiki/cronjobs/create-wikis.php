@@ -49,10 +49,10 @@ if (!isset($mediawiki_master_path))
 
 # Find the project settings template
 $project_settings_template = 
-	"$sys_etc_path/plugins/mediawiki/$project_settings_filename";
+	"$sys_etc_path/plugins/mediawiki/ProjectSettings.template.php";
 if (!file_exists($project_settings_template))
 	$project_settings_template =
-		"$sys_opt_path/plugins/mediawiki/etc/plugins/mediawiki/$project_settings_filename";
+		"$sys_opt_path/plugins/mediawiki/etc/plugins/mediawiki/$ProjectSettings.template.php";
 
 # Owner of files - apache
 $file_owner = $sys_apache_user.':'.$sys_apache_group;
@@ -65,8 +65,8 @@ if (empty($sys_apache_user) || empty($sys_apache_group)) {
 
 
 # Get all projects that use the mediawiki plugin
-$res = db_query_params ("SELECT g.unix_group_name from groups g, group_plugin gp, plugins p where g.group_id = gp.group_id and gp.plugin_id = p.plugin_id and p.plugin_name = $1;", array("mediawiki"));
-if (!$res) {
+$project_res = db_query_params ("SELECT g.unix_group_name from groups g, group_plugin gp, plugins p where g.group_id = gp.group_id and gp.plugin_id = p.plugin_id and p.plugin_name = $1;", array("mediawiki"));
+if (!$project_res) {
 	$err =  "Error: Database Query Failed: ".db_error();
 	cron_debug($err);
 	cron_entry(23,$err);
@@ -74,7 +74,7 @@ if (!$res) {
 }
 
 # Loop over all projects that use the plugin
-while ( $row = db_fetch_array($res) ) {
+while ( $row = db_fetch_array($project_res) ) {
 	$project = $row['unix_group_name'];
 	$project_dir = "$mediawiki_projects_path/$project";
 	cron_debug("Checking $project...");
@@ -89,7 +89,7 @@ while ( $row = db_fetch_array($res) ) {
 	}
 
 	// Check whether the project settings file exists
-	$project_settings = "$project_dir/$project_settings_filename";
+	$project_settings = "$project_dir/ProjectSettings.php";
 	if (!file_exists($project_settings)) {
 		cron_debug("  Copying $project_settings_template to $project_settings.");
 		if (!copy($project_settings_template, $project_settings)) {
@@ -110,7 +110,7 @@ while ( $row = db_fetch_array($res) ) {
 		strtr($schema, "-", "_");
 
 		cron_debug("  Creating schema $schema.");
-		$res = db_query_params("CREATE SCHEMA $1", array($schema));
+		$res = db_mquery("CREATE SCHEMA $schema");
 		if (!$res) {
 			$err =  "Error: Schema Creation Failed: " . 
 				db_error();
@@ -129,10 +129,10 @@ while ( $row = db_fetch_array($res) ) {
 		}
 			
 		$creation_query = file_get_contents($table_file);
-		$res = db_mquery("SET search_path=\"$schema\""
+		$res = db_mquery("SET search_path='$schema';"
 				 . $creation_query
 				 . "CREATE TEXT SEARCH CONFIGURATION $schema.default ( COPY = pg_catalog.english );"
-				 . "COMMIT ;");
+				 . "COMMIT;");
 		if (!$res) {
 			$err =  "Error: Mediawiki Database Creation Failed: " . 
 				db_error();

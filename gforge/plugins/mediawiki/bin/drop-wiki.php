@@ -49,7 +49,7 @@ foreach ($argv as $project) {
   $schema = "plugin_mediawiki_$project";
   strtr($schema, "-", "_");
   echo "  Dropping database schema $schema.\n";
-  $res = db_query_params("DROP SCHEMA $1 CASCADE", array($schema));
+  $res = db_mquery("DROP SCHEMA $schema CASCADE");
   if (!$res) {
     echo db_error();
   }

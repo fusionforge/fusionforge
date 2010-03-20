@@ -944,7 +944,7 @@ gforge/plugins/mediawiki/cronjobs/create-wikis.php -text
 gforge/plugins/mediawiki/etc/cron.d/mediawiki -text
 gforge/plugins/mediawiki/etc/httpd.d/03mediawiki -text
 gforge/plugins/mediawiki/etc/plugins/mediawiki/LocalSettings.php -text
-gforge/plugins/mediawiki/etc/plugins/mediawiki/ProjectSettings.php -text
+gforge/plugins/mediawiki/etc/plugins/mediawiki/ProjectSettings.template.php -text
 gforge/plugins/mediawiki/etc/plugins/mediawiki/config.php -text
 gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php -text
 gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php.patch -text
