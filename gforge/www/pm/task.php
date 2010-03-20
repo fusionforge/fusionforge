@@ -229,7 +229,7 @@ switch (getStringFromRequest('func')) {
 	}
 
 	case 'massupdate' : {
-		$project_task_id_list = getStringFromRequest('project_task_id_list');
+		$project_task_id_list = getArrayFromRequest('project_task_id_list');
 		$count=count($project_task_id_list);
 	
 		if ($pg->userIsAdmin()) {
