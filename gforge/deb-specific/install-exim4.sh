@@ -74,7 +74,7 @@ while (($l = <>) !~ /^\s*domainlist\s*local_domains/) {
   $seen_gf_domains = 1 if ($l =~ /\s*GFORGE_DOMAINS=/);
   $seen_pg_servers = 1 if ($l =~ m,hide pgsql_servers = .*$sys_dbhost.*/gforge_mta,);
 };
-print "hide pgsql_servers = (/var/run/postgresql/.s.PGSQL.5432)/mail/Debian-exim/bogus:$sys_dbhost/$sys_dbname/gforge_mta/\n" unless $seen_pg_servers;
+print "hide pgsql_servers = (/var/run/postgresql/.s.PGSQL.5432)/mail/Debian-exim/bogus:$sys_dbhost/$sys_dbname/gforge_mta/gforge_mta\n" unless $seen_pg_servers;
 print "GFORGE_DOMAINS=$sys_users_host:$sys_lists_host\n" unless $seen_gf_domains;
 chomp $l;
 $l .= ":GFORGE_DOMAINS" unless ($l =~ /^[^#]*GFORGE_DOMAINS/);
