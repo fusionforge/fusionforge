@@ -18,12 +18,12 @@ if (!$ptf || !is_object($ptf)) {
 
 $offset = getIntFromRequest('offset');
 $_assigned_to = getIntFromRequest('_assigned_to');
-$_status = getStringFromRequest('_status');
+$_status = getIntFromRequest('_status');
 $_order = getStringFromRequest('_order');
 $_resolution = getStringFromRequest('_resolution');
 $_category_id = getIntFromRequest('_category_id');
 $_size = getIntFromRequest('_size');
-$max_rows = getIntFromRequest('max_rows');
+$max_rows = getIntFromRequest('max_rows',50);
 
 $ptf->setup($offset,$_order,$max_rows,'custom',$_assigned_to,$_status,$_category_id);
 if ($ptf->isError()) {
@@ -63,8 +63,10 @@ if ($_resolution == 'Days') {
 	$graph->ShowHeaders( GANTT_HDAY |  GANTT_HWEEK |  GANTT_HMONTH);
 } elseif ($_resolution == 'Weeks') {
 	$graph->ShowHeaders( GANTT_HWEEK |  GANTT_HMONTH);
+} elseif ($_resolution == 'Months') {
+	$graph->ShowHeaders( GANTT_HMONTH | GANTT_HYEAR);
 } else {
-	$graph->ShowHeaders( GANTT_HMONTH);
+	$graph->ShowHeaders( GANTT_HYEAR);
 }
 
 // Instead of week number show the date for the first day in the week
@@ -79,7 +81,7 @@ if (isset($gantt_title_font_family)) {
 
 // Use the short name of the month together with a 2 digit year
 // on the month scale
-$graph->scale->month->SetStyle( MONTHSTYLE_SHORTNAMEYEAR2);
+$graph->scale->month->SetStyle( MONTHSTYLE_SHORTNAME);
 
 $rows=count($pt_arr);
 
