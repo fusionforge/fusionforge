@@ -135,7 +135,7 @@ if (session_loggedin()) {
 <div class="tabbertab" title="<?php echo _('Followups');?>">
 <table border="0" width="80%">
 	<tr><td colspan="2">
-		<br /><strong><?php echo _('OR Attach A Comment') ?>: <?php echo notepad_button('document.forms[1].details') ?> <a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=comment'); ?>')"><strong>(?)</strong></a></strong><br />
+		<br /><strong><?php echo _('OR Attach A Comment') ?>: <?php echo notepad_button('document.forms[2].details') ?> <a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=comment'); ?>')"><strong>(?)</strong></a></strong><br />
 		<textarea name="details" rows="7" cols="60"></textarea>
 		<p>
 		<h2><?php echo _('Followup') ?>:</h2>

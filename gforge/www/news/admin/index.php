@@ -134,7 +134,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 
 		<strong>'._('Subject').'</strong><br />
 		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="30" maxlength="60" /><br />
-		<strong>'._('Details').'</strong>'.notepad_button('document.forms[1].details').'<br />';
+		<strong>'._('Details').'</strong>'.notepad_button('document.forms[2].details').'<br />';
 		
 		$GLOBALS['editor_was_set_up']=false;
 		$params = array () ;

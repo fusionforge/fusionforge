@@ -63,6 +63,9 @@ if (!$data) {
 //printr($data,'initial-data');
 
 // SECTION 1. DEBUG XML
+//$data = stripslashes($data);
+//$data = stripslashes($data);
+//$data = stripslashes($data);
 $data = str_replace("</ ","</",$data);
 $data = str_replace("</ ","</",$data);
 $data = str_replace("\r","",$data);

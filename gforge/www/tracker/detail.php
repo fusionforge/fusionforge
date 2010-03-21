@@ -94,7 +94,7 @@ echo notepad_func();
 			<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>" />
 			<p>
 			<strong><?php echo _('Add A Comment') ?>:</strong> 
-			<?php echo notepad_button('document.forms[1].details') ?><br />
+			<?php echo notepad_button('document.forms[2].details') ?><br />
 			<textarea name="details" rows="10" cols="60"></textarea>
 			</p>
 			<?php } ?>

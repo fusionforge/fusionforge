@@ -141,7 +141,7 @@ if (session_loggedin()) {
 		<strong>'._('Subject').':</strong>'.utils_requiredField().'<br />
 		<input type="text" name="summary" value="" size="60" maxlength="60" /></p>
 		<p>
-		<strong>'._('Details').':</strong>'.notepad_button('document.forms[1].details').utils_requiredField().'</p>';
+		<strong>'._('Details').':</strong>'.notepad_button('document.forms[2].details').utils_requiredField().'</p>';
 	
 	$GLOBALS['editor_was_set_up']=false;
 	$params = array() ;
