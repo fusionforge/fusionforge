@@ -63,7 +63,7 @@ echo notepad_func();
 
 	<tr>
 		<td colspan="2">
-		<strong><?php echo _('Task Details') ?>:</strong><?php echo notepad_button('document.forms[1].details') ?> <?php echo utils_requiredField(); ?><br />
+		<strong><?php echo _('Task Details') ?>:</strong><?php echo notepad_button('document.forms[2].details') ?> <?php echo utils_requiredField(); ?><br />
 		<textarea name="details" rows="5" cols="80"></textarea></td>
 	</tr>
 

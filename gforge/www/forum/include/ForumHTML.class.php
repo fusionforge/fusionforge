@@ -501,7 +501,7 @@ class ForumHTML extends Error {
 		<strong><?php echo _('Subject:'); ?></strong><?php echo utils_requiredField(); ?><br />
 				<input type="text" name="subject" value="<?php echo $subject; ?>" size="80" maxlength="80" />
 		<br /><br />
-		<strong><?php echo _('Message:'); ?></strong><?php echo notepad_button('document.forms[1].body') ?><?php echo utils_requiredField(); ?><br />
+		<strong><?php echo _('Message:'); ?></strong><?php echo notepad_button('document.forms[2].body') ?><?php echo utils_requiredField(); ?><br />
 		<?php
 		$GLOBALS['editor_was_set_up']=false;
 		$params = array() ;
@@ -565,7 +565,7 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 		<strong><?php echo _('Subject:'); ?></strong><?php echo utils_requiredField(); ?><br />
 				<input type="text" name="subject" value="<?php echo $subject; ?>" size="80" maxlength="80" />
 			<br /><br />
-		<strong><?php echo _('Message:'); ?></strong><?php echo notepad_button('document.forms[1].body') ?><?php echo utils_requiredField(); ?><br />
+		<strong><?php echo _('Message:'); ?></strong><?php echo notepad_button('document.forms[2].body') ?><?php echo utils_requiredField(); ?><br />
 
 		<?php
 		$GLOBALS['editor_was_set_up']=false;

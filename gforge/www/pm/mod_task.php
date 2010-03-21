@@ -76,7 +76,7 @@ echo notepad_func();
 		<strong><?php echo _('Original Comment') ?>:</strong><br />
 		<?php echo nl2br( $pt->getDetails() ); ?>
 		<p />
-		<strong><?php echo _('Add A Comment') ?>:</strong><?php echo notepad_button('document.forms[1].details') ?><br />
+		<strong><?php echo _('Add A Comment') ?>:</strong><?php echo notepad_button('document.forms[2].details') ?><br />
 		<textarea name="details" rows="5" cols="80"></textarea>
 		</td>
 	</tr>

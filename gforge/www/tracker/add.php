@@ -78,7 +78,7 @@ $ath->header(array ('title'=>_('Submit')));
 
 	<tr>
 		<td colspan="2">
-		<strong><?php echo _('Detailed description') ?><?php echo utils_requiredField(); ?>:</strong><?php echo notepad_button('document.forms[1].details') ?><br /> 
+		<strong><?php echo _('Detailed description') ?><?php echo utils_requiredField(); ?>:</strong><?php echo notepad_button('document.forms[2].details') ?><br /> 
 		<textarea name="details" rows="20" cols="79"></textarea>
 		</td>
 	</tr>
