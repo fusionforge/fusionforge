@@ -235,7 +235,7 @@ function trove_catselectfull($node,$selected,$name) {
  * @param		bool	Whether to print category links
  * @param		bool	???
  */
-function trove_getcatlisting($group_id,$a_filter,$a_cats,$a_complete) {
+function trove_getcatlisting($group_id,$a_filter,$a_cats,$a_complete=0) {
 	global $discrim_url;
 	global $expl_discrim;
 	global $form_cat;
