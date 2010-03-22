@@ -1,10 +1,9 @@
 <?php
 /**
- * SourceForge Generic Tracker facility
+ * FusionForge Tracker
  *
- * SourceForge: Breaking Down the Barriers to Open Source Development
  * Copyright 1999-2001 (c) VA Linux Systems
- * http://sourceforge.net
+ * Copyright 2010 Roland Mas
  *
  */
 require_once $gfcommon.'tracker/ArtifactFactory.class.php';
@@ -17,6 +16,9 @@ if (!$ath->userCanView()) {
 }
 
 $query_id = getIntFromRequest('query_id');
+$start = getIntFromRequest('start');
+
+$pagelength = 25 ;
 
 //
 //	The browse page can be powered by a pre-saved query
@@ -107,7 +109,7 @@ if (is_array($_extra_fields)){
 	}
 }
 
-$af->setup($offset,$_sort_col,$_sort_ord,null,$set,$_assigned_to,$_status,$aux_extra_fields);
+$af->setup($offset,$_sort_col,$_sort_ord,$pagelength,$set,$_assigned_to,$_status,$aux_extra_fields);
 //
 //	These vals are sanitized and/or retrieved from ArtifactFactory stored settings
 //
@@ -382,12 +384,7 @@ if ($art_arr && count($art_arr) > 0) {
 
 	$then=(time()-$ath->getDuePeriod());
 
-	if (!isset($_GET['start'])) {
-		$start=0;
-	} else {
-		$start=$_GET['start'];
-	}
-	$max = ((count($art_arr) > ($start + 25)) ? ($start+25) : count($art_arr) );
+	$max = ((count($art_arr) > ($start + $pagelength)) ? ($start+$pagelength) : count($art_arr) );
 //echo "max: $max";
 	for ($i=$start; $i<$max; $i++) {
  		$extra_data = $art_arr[$i]->getExtraFieldDataText();
@@ -467,8 +464,8 @@ if ($art_arr && count($art_arr) > 0) {
 	}
 	*/
 	echo $GLOBALS['HTML']->listTableBottom();
-	$pages = count($art_arr) / 25;
-	$currentpage = intval($start / 25);
+	$pages = count($art_arr) / $pagelength;
+	$currentpage = intval($start / $pagelength);
 //echo "Item Count: ".count($arr)."Pages: $pages";
 	if ($pages >= 1) {
 		$skipped_pages=false;
@@ -487,7 +484,7 @@ if ($art_arr && count($art_arr) > 0) {
 			if ($j == $currentpage) {
 				echo '<strong>'.($j+1).'</strong>&nbsp;&nbsp;';
 			} else {
-				echo '<a href="'.getStringFromServer('PHP_SELF')."?func=browse&amp;group_id=".$group_id.'&amp;atid='.$ath->getID().'&amp;set='. $set.'&amp;start='.($j*25).'"><strong>'.($j+1).'</strong></a>&nbsp;&nbsp;';
+				echo '<a href="'.getStringFromServer('PHP_SELF')."?func=browse&amp;group_id=".$group_id.'&amp;atid='.$ath->getID().'&amp;set='. $set.'&amp;start='.($j*$pagelength).'"><strong>'.($j+1).'</strong></a>&nbsp;&nbsp;';
 			}
 		}
 	}

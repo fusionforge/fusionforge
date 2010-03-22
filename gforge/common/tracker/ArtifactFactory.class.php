@@ -98,12 +98,18 @@ class ArtifactFactory extends Error {
 	 *	@param	array	Array of extra fields & elements to limit the query to.
 	 */
 	function setup($offset,$order_col,$sort,$max_rows,$set,$_assigned_to,$_status,$_extra_fields=array()) {
-//echo "<br />offset: $offset| order: $order|max_rows: $max_rows|_assigned_to: $_assigned_to|_status: $_status";
 
 		if ((!$offset) || ($offset < 0)) {
 			$this->offset=0;
 		} else {
 			$this->offset=$offset;
+		}
+
+		// $max_rows == 0 means we want all the rows
+		if (is_null($max_rows) || $max_rows < 0) {
+			$this->max_rows = 50 ;
+		} else {
+			$this->max_rows = $max_rows ;
 		}
 
 		if (session_loggedin()) {
@@ -249,16 +255,6 @@ class ArtifactFactory extends Error {
 		}
 		$this->extra_fields=$_extra_fields;
 		$this->setChangedFrom($_changed);
-
-		// if $max_rows == 0 it means we want all the rows
-		if (is_null($max_rows) || $max_rows < 0) {
-			$max_rows=50;
-		}
-		if ($this->query_type == 'query') {
-			$this->max_rows=0;
-		} else {
-			$this->max_rows=$max_rows;
-		}
 	}
 
 	

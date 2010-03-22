@@ -134,7 +134,7 @@ ORDER BY group_name',
                         	        $ath = new ArtifactTypeHtml($group,$at->getID());
 	                                // create artifact object, setup object
         	                        $af = new ArtifactFactory($ath);
-                	                $af->setup(0,"priority","DESC",null,"",0,1,null);
+                	                $af->setup(0,"priority","DESC",0,"",0,1,null);
                         	        // get artifacts from object
                                 	$art_arr =& $af->getArtifacts();
 	                                if (count($art_arr) > 0) {

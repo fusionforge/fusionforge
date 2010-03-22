@@ -719,10 +719,6 @@ function &getArtifacts($session_ser,$group_id,$group_artifact_id,$assigned_to,$s
 		return new soap_fault ('','getArtifacts',$af->getErrorMessage(),$af->getErrorMessage());
 	}
 
-//MAY HAVE TO CHANGE PARAMS TO FORCE RETRIEVAL OF RIGHT RECORDS - FOR INSTANCE $set='Custom'
-//NEEDS TO BE TESTED
-//	$af->setup(0,'','',0,false,$assigned_to,$status);
-
 	// this is a bit hacky...
 	if ($assigned_to || $status) {
 		$set = "custom";
