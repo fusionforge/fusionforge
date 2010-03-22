@@ -15,7 +15,7 @@ echo notepad_func();
 ?>
 	<h1>[#<?php echo $ah->getID(); ?>] <?php echo $ah->getSummary(); ?></h1>
 
-	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;atid=<?php echo $ath->getID(); ?>"  enctype="multipart/form-data" method="post">
+	<form id="trackermodform" action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;atid=<?php echo $ath->getID(); ?>"  enctype="multipart/form-data" method="post">
 	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 	<input type="hidden" name="func" value="postmod"/>
 	<input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
@@ -165,7 +165,7 @@ if (session_loggedin()) {
 	</tr>
 	<tr><td colspan="2">
 		<div id="edit" style="display:none;">
-		<strong><?php echo _('Detailed description') ?><?php echo utils_requiredField(); ?>: <?php echo notepad_button('document.forms[2].description') ?> <a href="javascript:help_window('/help/tracker.php?helpname=description')">(?)</a></strong>
+		<strong><?php echo _('Detailed description') ?><?php echo utils_requiredField(); ?>: <?php echo notepad_button('document.forms.trackermodform.description') ?> <a href="javascript:help_window('/help/tracker.php?helpname=description')">(?)</a></strong>
 		<br />
 		<textarea name="description" rows="30" cols="79"><?php echo $ah->getDetails(); ?></textarea>
 		</div>
@@ -187,7 +187,7 @@ if (session_loggedin()) {
 		echo '&nbsp;'.util_make_link ('/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;add_canned=1','('._('Admin').')');
 		?>
 		<p>
-		<strong><?php echo _('OR Attach A Comment') ?>:<?php echo notepad_button('document.forms[2].details') ?><a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=comment'); ?>')"><strong>(?)</strong></a></strong><br />
+		<strong><?php echo _('OR Attach A Comment') ?>:<?php echo notepad_button('document.forms.trackermodform.details') ?><a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=comment'); ?>')"><strong>(?)</strong></a></strong><br />
 		<textarea name="details" rows="7" cols="60"></textarea></p>
 		<h3><?php echo _('Followup') ?>:</h3>
 		<?php

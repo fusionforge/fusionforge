@@ -31,7 +31,7 @@ $ath->header(array ('title'=>_('Submit')));
 	echo notepad_func();
 	echo $ath->renderSubmitInstructions();
 
-	echo '<form action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID().'" method="post" enctype="multipart/form-data">
+	echo '<form id="trackeraddform" action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID().'" method="post" enctype="multipart/form-data">
 	
 	<input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
 	<table>';
@@ -78,7 +78,7 @@ $ath->header(array ('title'=>_('Submit')));
 
 	<tr>
 		<td colspan="2">
-		<strong><?php echo _('Detailed description') ?><?php echo utils_requiredField(); ?>:</strong><?php echo notepad_button('document.forms[2].details') ?><br /> 
+		<strong><?php echo _('Detailed description') ?><?php echo utils_requiredField(); ?>:</strong><?php echo notepad_button('document.forms.trackeraddform.details') ?><br /> 
 		<textarea name="details" rows="20" cols="79"></textarea>
 		</td>
 	</tr>

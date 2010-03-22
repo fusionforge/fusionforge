@@ -14,7 +14,7 @@ $ath->header(array ('title'=>_('Modify').': '.$ah->getID(). ' - ' . $ah->getSumm
 ?>
 	<h3>[#<?php echo $ah->getID(); ?>] <?php echo $ah->getSummary(); ?></h3>
 
-	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;atid=<?php echo $ath->getID(); ?>" enctype="multipart/form-data" method="post">
+	<form id="trackermodlimitedform" action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;atid=<?php echo $ath->getID(); ?>" enctype="multipart/form-data" method="post">
 	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
 	<input type="hidden" name="func" value="postmod" />
 	<input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
@@ -127,7 +127,7 @@ if (session_loggedin()) {
 <div class="tabbertab" title="<?php echo _('Followups');?>">
 <table border="0" width="80%">
 	<tr><td colspan="2">
-		<br /><strong><?php echo _('OR Attach A Comment') ?>: <?php echo notepad_button('document.forms[2].details') ?> <a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=comment'); ?>')"><strong>(?)</strong></a></strong><br />
+		<br /><strong><?php echo _('OR Attach A Comment') ?>: <?php echo notepad_button('document.forms.trackermodlimitedform.details') ?> <a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=comment'); ?>')"><strong>(?)</strong></a></strong><br />
 		<textarea name="details" rows="7" cols="60"></textarea>
 		<p>
 		<h3><?php echo _('Followup') ?>:</h3>

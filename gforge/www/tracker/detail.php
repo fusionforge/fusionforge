@@ -15,7 +15,7 @@ echo notepad_func();
 ?>
 	<h3>[#<?php echo $ah->getID(); ?>] <?php echo util_unconvert_htmlspecialchars($ah->getSummary()); ?></h3>
 
-	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;atid=<?php echo $ath->getID(); ?>" method="post" enctype="multipart/form-data">
+	<form id="trackerdetailform" action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;atid=<?php echo $ath->getID(); ?>" method="post" enctype="multipart/form-data">
 
 <?php if (session_loggedin()) { ?>
 	<table cellpadding="0" width="100%">
@@ -89,7 +89,7 @@ echo notepad_func();
 			<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>" />
 			<p>
 			<strong><?php echo _('Add A Comment') ?>:</strong> 
-			<?php echo notepad_button('document.forms[2].details') ?><br />
+			<?php echo notepad_button('document.forms.trackerdetailform.details') ?><br />
 			<textarea name="details" rows="10" cols="60"></textarea>
 			</p>
 			<?php } ?>

@@ -117,7 +117,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 		echo '
 		<h3>'.sprintf(_('Approve a NewsByte For Project: %1$s'), $group->getPublicName()).'</h3>
 		<p />
-		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
+		<form id="newsadminform" action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="group_id" value="'.db_result($result,0,'group_id').'" />
 		<input type="hidden" name="id" value="'.db_result($result,0,'id').'" />';
 
@@ -134,7 +134,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 
 		<strong>'._('Subject').'</strong><br />
 		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="30" maxlength="60" /><br />
-		<strong>'._('Details').'</strong>'.notepad_button('document.forms[2].details').'<br />';
+		<strong>'._('Details').'</strong>'.notepad_button('document.forms.newsadminform.details').'<br />';
 		
 		$GLOBALS['editor_was_set_up']=false;
 		$params = array () ;

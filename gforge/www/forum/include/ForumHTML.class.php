@@ -482,7 +482,7 @@ class ForumHTML extends Error {
 			echo notepad_func();
 			?>
 <div align="center">
-	 <form enctype="multipart/form-data" action="<?php echo util_make_url ('/forum/admin/index.php') ?>" method="post">
+	 <form id="ForumEditForm" enctype="multipart/form-data" action="<?php echo util_make_url ('/forum/admin/index.php') ?>" method="post">
 	<?php $objid = $this->Forum->getID();?>
 	<input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" />
 	<input type="hidden" name="forum_id" value="<?php echo $objid; ?>" />
@@ -501,7 +501,7 @@ class ForumHTML extends Error {
 		<strong><?php echo _('Subject:'); ?></strong><?php echo utils_requiredField(); ?><br />
 				<input type="text" name="subject" value="<?php echo $subject; ?>" size="80" maxlength="80" />
 		<br /><br />
-		<strong><?php echo _('Message:'); ?></strong><?php echo notepad_button('document.forms[2].body') ?><?php echo utils_requiredField(); ?><br />
+		<strong><?php echo _('Message:'); ?></strong><?php echo notepad_button('document.forms.ForumEditForm.body') ?><?php echo utils_requiredField(); ?><br />
 		<?php
 		$GLOBALS['editor_was_set_up']=false;
 		$params = array() ;
@@ -552,7 +552,7 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 		echo notepad_func();
 		?>
 <div align="center">
-<form enctype="multipart/form-data" action="<?php echo util_make_url ('/forum/forum.php?forum_id='.$this->Forum->getID().'&amp;group_id='.$group_id); ?>" method="post">
+<form id="ForumPostForm" enctype="multipart/form-data" action="<?php echo util_make_url ('/forum/forum.php?forum_id='.$this->Forum->getID().'&amp;group_id='.$group_id); ?>" method="post">
 	<?php $objid = $this->Forum->getID();?>
 	<input type="hidden" name="post_message" value="y" />
 	<input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" />
@@ -565,7 +565,7 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 		<strong><?php echo _('Subject:'); ?></strong><?php echo utils_requiredField(); ?><br />
 				<input type="text" name="subject" value="<?php echo $subject; ?>" size="80" maxlength="80" />
 			<br /><br />
-		<strong><?php echo _('Message:'); ?></strong><?php echo notepad_button('document.forms[2].body') ?><?php echo utils_requiredField(); ?><br />
+		<strong><?php echo _('Message:'); ?></strong><?php echo notepad_button('document.forms.ForumPostForm.body') ?><?php echo utils_requiredField(); ?><br />
 
 		<?php
 		$GLOBALS['editor_was_set_up']=false;
