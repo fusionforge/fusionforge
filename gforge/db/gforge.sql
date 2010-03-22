@@ -2668,7 +2668,8 @@ CREATE TABLE forum_attachment (
     counter smallint DEFAULT (0)::smallint NOT NULL,
     filesize integer DEFAULT 0 NOT NULL,
     msg_id integer DEFAULT 0 NOT NULL,
-    filehash character varying(32) DEFAULT ''::character varying NOT NULL
+    filehash character varying(32) DEFAULT ''::character varying NOT NULL,
+    mimetype character varying(32) DEFAULT 'application/octet-stream' NOT NULL
 );
 
 
@@ -2714,7 +2715,8 @@ CREATE TABLE forum_pending_attachment (
     counter smallint DEFAULT (0)::smallint NOT NULL,
     filesize integer DEFAULT 0 NOT NULL,
     msg_id integer DEFAULT 0 NOT NULL,
-    filehash character varying(32) DEFAULT ''::character varying NOT NULL
+    filehash character varying(32) DEFAULT ''::character varying NOT NULL,
+    mimetype character varying(32) DEFAULT 'application/octet-stream' NOT NULL
 );
 
 
