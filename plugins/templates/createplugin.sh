@@ -61,7 +61,7 @@ else
 	if [ $dopackage -ne 0 ]
 	then
 		echo "Doing package"
-		(cd $modelplugdir;find debian)|sort|while read debfile
+		(cd $modelplugdir;find debian;find utils)|sort|while read debfile
 		do
 			if [ -d $modelminus/$debfile ]
 			then
@@ -73,6 +73,7 @@ else
 				$plugdir/$debfile
 			fi
 		done
+		chmod +x $plugdir/utils/*
 		(cd $modelplugdir;find packaging)|sort|while read debfile
 		do
 			if [ -d $modelminus/$debfile ]
