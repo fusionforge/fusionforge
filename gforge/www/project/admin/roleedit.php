@@ -127,6 +127,8 @@ $titles[]=_('Section');
 $titles[]=_('Subsection');
 $titles[]=_('Setting');
 
+setup_rbac_strings () ;
+
 echo $HTML->listTableTop($titles);
 
 //

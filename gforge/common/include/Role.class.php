@@ -269,6 +269,7 @@ class Role extends Error {
 	 */
 	function &getRoleVals($section) {
 		global $role_vals, $rbac_permission_names;
+		setup_rbac_strings () ;
 
 		//
 		//	Optimization - save array so it is only built once per page view
