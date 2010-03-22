@@ -25,7 +25,7 @@ echo notepad_func();
 
 ?>
 
-<form action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&amp;group_project_id=$group_project_id"; ?>" method="post">
+<form id="modtaskform" action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&amp;group_project_id=$group_project_id"; ?>" method="post">
 <input type="hidden" name="func" value="postmodtask" />
 <input type="hidden" name="project_task_id" value="<?php echo $project_task_id; ?>" />
 
@@ -76,7 +76,7 @@ echo notepad_func();
 		<strong><?php echo _('Original Comment') ?>:</strong><br />
 		<?php echo nl2br( $pt->getDetails() ); ?>
 		<p />
-		<strong><?php echo _('Add A Comment') ?>:</strong><?php echo notepad_button('document.forms[2].details') ?><br />
+		<strong><?php echo _('Add A Comment') ?>:</strong><?php echo notepad_button('document.forms.modtaskform.details') ?><br />
 		<textarea name="details" rows="5" cols="80"></textarea>
 		</td>
 	</tr>

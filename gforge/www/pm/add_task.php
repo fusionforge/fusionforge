@@ -24,7 +24,7 @@ pm_header(array('title'=>_('Add a new Task'),'group_project_id'=>$group_project_
 echo notepad_func();
 ?>
 
-<form action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&amp;group_project_id=$group_project_id"; ?>" method="post">
+<form id="addtaskform" action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&amp;group_project_id=$group_project_id"; ?>" method="post">
 <input type="hidden" name="func" value="postaddtask" />
 <input type="hidden" name="add_artifact_id[]" value="<?php echo $related_artifact_id; ?>" />
 
@@ -63,7 +63,7 @@ echo notepad_func();
 
 	<tr>
 		<td colspan="2">
-		<strong><?php echo _('Task Details') ?>:</strong><?php echo notepad_button('document.forms[2].details') ?> <?php echo utils_requiredField(); ?><br />
+		<strong><?php echo _('Task Details') ?>:</strong><?php echo notepad_button('document.forms.addtaskform.details') ?> <?php echo utils_requiredField(); ?><br />
 		<textarea name="details" rows="5" cols="80"></textarea></td>
 	</tr>
 

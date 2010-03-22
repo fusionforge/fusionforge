@@ -132,7 +132,7 @@ if (session_loggedin()) {
 		<p>
 		'. sprintf(_('You can post news about your project if you are an admin on your project. You may also post "help wanted" notes if your project needs help.</p><p>All posts <b>for your project</b> will appear instantly on your project summary page. Posts that are of special interest to the community will have to be approved by a member of the %1$s news team before they will appear on the %1$s home page.</p><p>You may include URLs, but not HTML in your submissions.</p><p>URLs that start with http:// are made clickable.'), forge_get_config ('forge_name')) .'</p>' . $jsfunc . 
 		'
-		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
+		<form id="newssubmitform" action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="group_id" value="'.$group_id.'" />
 		<input type="hidden" name="post_changes" value="y" />
 		<input type="hidden" name="form_key" value="'. form_generate_key() .'" />
@@ -141,7 +141,7 @@ if (session_loggedin()) {
 		<strong>'._('Subject').':</strong>'.utils_requiredField().'<br />
 		<input type="text" name="summary" value="" size="60" maxlength="60" /></p>
 		<p>
-		<strong>'._('Details').':</strong>'.notepad_button('document.forms[2].details').utils_requiredField().'</p>';
+		<strong>'._('Details').':</strong>'.notepad_button('document.forms.newssubmitform.details').utils_requiredField().'</p>';
 	
 	$GLOBALS['editor_was_set_up']=false;
 	$params = array() ;
