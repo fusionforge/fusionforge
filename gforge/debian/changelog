@@ -73,6 +73,12 @@ gforge (4.8.51-1) experimental; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Wed, 29 Apr 2009 15:21:31 +0200
 
+gforge (4.8.3-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 19 Mar 2010 13:49:29 +0100
+
 gforge (4.8.2+svn8761-1) unstable; urgency=low
 
   * New upstream snapshot from the 4.8 branch.
