@@ -165,7 +165,7 @@ if (session_loggedin()) {
 	</tr>
 	<tr><td colspan="2">
 		<div id="edit" style="display:none;">
-		<strong><?php echo _('Detailed description') ?><?php echo utils_requiredField(); ?>: <?php echo notepad_button('document.forms[2].details') ?> <a href="javascript:help_window('/help/tracker.php?helpname=description')">(?)</a></strong>
+		<strong><?php echo _('Detailed description') ?><?php echo utils_requiredField(); ?>: <?php echo notepad_button('document.forms[2].description') ?> <a href="javascript:help_window('/help/tracker.php?helpname=description')">(?)</a></strong>
 		<br />
 		<textarea name="description" rows="30" cols="79"><?php echo $ah->getDetails(); ?></textarea>
 		</div>
