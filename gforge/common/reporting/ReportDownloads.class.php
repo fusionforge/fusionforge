@@ -78,7 +78,7 @@ class ReportDownloads extends Report {
 
 		$res = db_query_params ('SELECT frs_package.name, frs_release.name,
                        frs_file.filename, users.realname,
-                       frs_dlstats_file.month || lpad(frs_dlstats_file.day,2,0),
+                       frs_dlstats_file.month || lpad(frs_dlstats_file.day::text,2,0::text),
                        users.user_name
                 FROM frs_dlstats_file, frs_file, frs_release,
                      frs_package, users
