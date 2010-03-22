@@ -3,16 +3,25 @@
 modelfullname=HelloWorld
 modelminus=`echo $modelfullname | tr '[A-Z]' '[a-z]'`
 modelplugdir=$modelminus
+dopackage=0
 
 usage() {
-	echo Usage: $0 PluginName
+	echo Usage: $0 [--dopackage] PluginName
 }
 
 echo "Plugin template creator"
-if [ "$#" != "1" ] 
+if [ $# -eq 0 ] 
 then
 	usage
 else
+	case $1 in 
+		--dopackage)
+			dopackage=1
+			shift
+			;;
+		*)
+			;;
+	esac
 	fullname=$1
 	minus=`echo $1 | tr '[A-Z]' '[a-z]'`
 	plugdir=$minus
@@ -48,6 +57,36 @@ else
 		sed "s/$modelfullname/$fullname/g" > \
 		$plugdir/www/index.php
 	fi
+
+	if [ $dopackage -ne 0 ]
+	then
+		echo "Doing package"
+		(cd $modelplugdir;find debian)|sort|while read debfile
+		do
+			if [ -d $modelminus/$debfile ]
+			then
+				[ -d $plugdir/$debfile ] || mkdir $plugdir/$debfile
+			else
+				cat $modelminus/$debfile | \
+					sed "s/$modelminus/$minus/g" | \
+					sed "s/$modelfullname/$fullname/g" > \
+				$plugdir/$debfile
+			fi
+		done
+		(cd $modelplugdir;find packaging)|sort|while read debfile
+		do
+			if [ -d $modelminus/$debfile ]
+			then
+				[ -d $plugdir/$debfile ] || mkdir $plugdir/$debfile
+			else
+				newdebfile=`echo $debfile | sed "s/$modelminus/$minus/g"`
+				cat $modelminus/$debfile | \
+					sed "s/$modelminus/$minus/g" | \
+					sed "s/$modelfullname/$fullname/g" > \
+				$plugdir/$newdebfile
+			fi
+		done
+	fi
 #	if [ ! -f $plugdir/common/languages/Base.tab ]
 #	then
 #		echo Creating $plugdir/common/languages/Base.tab
@@ -56,4 +95,6 @@ else
 #		sed "s/$modelfullname/$fullname/g" > \
 #		$plugdir/common/languages/Base.tab
 #	fi
+
 fi
+
