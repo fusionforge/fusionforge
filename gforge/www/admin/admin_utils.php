@@ -23,6 +23,10 @@
 
 function site_admin_header($params) {
 	session_require(array('group'=>'1','admin_flags'=>'A'));
+
+	if (get_magic_quotes_gpc()) {
+		$GLOBALS['warning_msg'] = 'WARNING: Your installation is running with php magic_quotes_gpc ON, please change to OFF';
+	}
 	site_header($params);
 }
 
