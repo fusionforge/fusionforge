@@ -85,9 +85,9 @@ if (getStringFromRequest('add_to_task')) {
 
 		<form name="foo" action="'. getStringFromServer('PHP_SELF') .'?func=taskmgr&amp;group_id='.$group_id.'&amp;atid='.$atid.'&amp;aid='.$aid.'" method="post">
 		<p><strong>'._('Tracker Item').':</strong> [#'.$a->getID().'] '.$a->getSummary().'</p>
-		<p><strong>'._('Task Manager Project').':</strong><br />';
+		<p><strong>'._('Tasks Project').':</strong><br />';
 	echo $pg->getName().'
-		<input type="hidden" name="group_project_id" value="'.$pg->getID().'"></p>
+		<input type="hidden" name="group_project_id" value="'.$pg->getID().'" /></p>
 		<p>
 		<strong>'._('Task').':</strong></p>
 		<select name="project_task_id">';
@@ -95,7 +95,7 @@ if (getStringFromRequest('add_to_task')) {
 		echo '<option value="'.$pt_arr[$i]->getID().'">'.$pt_arr[$i]->getSummary().'</option>';
 	}
 	echo '</select><br />
-		<input type="submit" name="done_adding" value="'._('Add Relationship To Selected Task') . '" />
+		<input type="submit" name="done_adding" value="'._('Add Relationship to Selected Task') . '" />
 		</form>';
 
 //
@@ -138,7 +138,7 @@ if (getStringFromRequest('add_to_task')) {
 	echo '<h3>'._('Build Relationship Between Tracker Items and Task Manager').'</h3>
 		<form name="foo" action="'. getStringFromServer('PHP_SELF') .'?func=taskmgr&amp;group_id='.$group_id.'&amp;atid='.$atid.'&amp;aid='.$aid.'" method="post">
 		<p><strong>'._('Tracker Item').':</strong> [#'.$a->getID().'] '.$a->getSummary().'</p>
-		<p><strong>'._('Task Manager Project').':</strong></p>
+		<p><strong>'._('Tasks Project').':</strong></p>
 		<select name="group_project_id">';
 	for ($i=0; $i<count($pg_arr); $i++) {
 		echo '<option value="'.$pg_arr[$i]->getID().'">'.$pg_arr[$i]->getName().'</option>';
