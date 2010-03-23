@@ -74,7 +74,7 @@ else
 			fi
 		done
 		chmod +x $plugdir/utils/*
-		(cd $modelplugdir;find packaging)|sort|while read debfile
+		(cd $modelplugdir;find packaging;find translations;find etc)|sort|while read debfile
 		do
 			if [ -d $modelminus/$debfile ]
 			then
