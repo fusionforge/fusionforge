@@ -41,7 +41,7 @@ if (!$a || !is_object($a)) {
 if (getStringFromRequest('add_to_task')) {
 	$offset = getStringFromRequest('offset');
 	$_order = getStringFromRequest('_order');
-	$max_rows = getStringFromRequest('max_rows');
+	$max_rows = getIntFromRequest('max_rows');
 	$set = getStringFromRequest('set');
 	$_assigned_to = getStringFromRequest('_assigned_to');
 	$_status = getStringFromRequest('_status');

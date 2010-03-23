@@ -39,7 +39,7 @@ if (!$af || !is_object($af)) {
 $offset = getStringFromRequest('offset');
 $_sort_col = getStringFromRequest('_sort_col');
 $_sort_ord = getStringFromRequest('_sort_ord');
-$max_rows = getStringFromRequest('max_rows');
+$max_rows = getIntFromRequest('max_rows');
 $set = getStringFromRequest('set');
 $_assigned_to = getStringFromRequest('_assigned_to');
 $_status = getStringFromRequest('_status');
