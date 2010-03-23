@@ -320,8 +320,7 @@ function &addDocument($session_ser,$group_id,$doc_group,$title,$description,$lan
 	}	
 
 	if ($base64_contents) {		
-		$bin_data = base64_decode($base64_contents);
-		$data = addslashes($bin_data);
+		$data = base64_decode($base64_contents);
 		$file_url='';
 		$uploaded_data_name=$filename;
 	} elseif ($file_url) { 
@@ -408,8 +407,7 @@ function &updateDocument($session_ser,$group_id,$doc_group,$doc_id,$title,$descr
 
 	if((!$base64_contents) && (!$file_url)){	
 		if((!$base64_contents) && (!$d->isURL())){
-			$bin_data=$d->getFileData();
-			$data = addslashes($bin_data);
+			$data = $d->getFileData();
 			$uploaded_data_name=$d->getFileName();
 			$file_url='';
 		}else{
@@ -425,8 +423,7 @@ function &updateDocument($session_ser,$group_id,$doc_group,$doc_id,$title,$descr
 		$uploaded_data_name=$file_url;
 		$uploaded_data_type='URL';		
 	}elseif($base64_contents){
-		$bin_data = base64_decode($base64_contents);
-		$data = addslashes($bin_data);
+		$data = base64_decode($base64_contents);
 		$file_url='';
 		$uploaded_data_name=$filename;	
 	}		

@@ -101,7 +101,7 @@ class Document extends Error {
 	 *
 	 *	@param	string	The filename of this document. Can be a URL.
 	 *	@param	string	The filetype of this document. If filename is URL, this should be 'URL';
-	 *	@param	string	The contents of this document (should be addslashes()'d before entry).
+	 *	@param	string	The contents of this document.
 	 *	@param	int	The doc_group id of the doc_groups table.
 	 *	@param	string	The title of this document.
 	 *	@param	int	The language id of the supported_languages table.
@@ -434,7 +434,7 @@ class Document extends Error {
 	 *
 	 *	@param	string	The filename of this document. Can be a URL.
 	 *	@param	string	The filetype of this document. If filename is URL, this should be 'URL';
-	 *	@param	string	The contents of this document (should be addslashes()'d before entry).
+	 *	@param	string	The contents of this document.
 	 *	@param	int	The doc_group id of the doc_groups table.
 	 *	@param	string	The title of this document.
 	 *	@param	int	The language id of the supported_languages table.
