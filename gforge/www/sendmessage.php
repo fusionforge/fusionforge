@@ -81,7 +81,7 @@ if (getStringFromRequest('send_mail')) {
 		*/
 		$to=eregi_replace('_maillink_','@',$toaddress);
 		$to = util_remove_CRLF($to);
-		util_send_message($to,stripslashes($subject),stripslashes($body),$email,'',$name);
+		util_send_message($to,$subject,$body,$email,'',$name);
 		$HTML->header(array('title'=>forge_get_config ('forge_name').' ' ._('Contact')   ));
 		echo '<p>'._('Message has been sent').'.</p>';
 		$HTML->footer(array());
@@ -92,7 +92,7 @@ if (getStringFromRequest('send_mail')) {
 		*/
 		$to=db_result($result,0,'email');
 		$to = util_remove_CRLF($to);
-		util_send_message($to,stripslashes($subject),stripslashes($body),$email,'',$name);
+		util_send_message($to,$subject,$body,$email,'',$name);
 		$HTML->header(array('title'=>forge_get_config ('forge_name').' '._('Contact')));
 		echo '<p>'._('Message has been sent').'</p>';
 		$HTML->footer(array());
