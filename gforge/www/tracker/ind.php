@@ -31,7 +31,7 @@ if ($perm->isArtifactAdmin()) {
 
 
 if (!$at_arr || count($at_arr) < 1) {
-	echo "<h1>"._('No Accessible Trackers Found')."</h1>";
+	echo '<div class="error">'._('No Accessible Trackers Found').'</div>';
 	echo "<p><strong>".sprintf(_('No trackers have been set up, or you cannot view them.<p><span class="important">The Admin for this project will have to set up data types using the %1$s admin page %2$s</span>'), '<a href="'.util_make_url ('/tracker/admin/?group_id='.$group_id).'">', '</a>')."</strong>";
 } else {
 
