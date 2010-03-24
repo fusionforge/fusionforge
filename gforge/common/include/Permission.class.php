@@ -258,7 +258,7 @@ class Permission extends Error {
 	}
 
 	/**
-	 *  isPMAdmin - whether the current user has Task Manager admin perms.
+	 *  isPMAdmin - whether the current user has Tasks admin perms.
 	 *
 	 *  @return	boolean	is_projman_admin.
 	 */
