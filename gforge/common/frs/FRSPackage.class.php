@@ -177,8 +177,11 @@ class FRSPackage extends Error {
 				@mkdir($groupdir);
 			}
 
-			$newdirlocation = $GLOBALS['sys_upload_dir'].'/'.$this->Group->getUnixName().'/'.$this->getFileName();
-			exec("/bin/mkdir $newdirlocation",$out);
+			$newdirlocation = $groupdir.'/'.$this->getFileName();
+			if (!is_dir($newdirlocation)) {
+				@mkdir($newdirlocation);
+			}
+			
 			// this 2 should normally silently fail (because it's called with the apache user) but if it's root calling the create() method, then the owner and group for the directory should be changed
 			@chown($newdirlocation,$sys_apache_user);
 			@chgrp($newdirlocation,$sys_apache_group);
