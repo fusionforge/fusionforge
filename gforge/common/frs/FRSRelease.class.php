@@ -441,8 +441,8 @@ notified in the future, please login to %5$s and click this link:
 		$olddirlocation = $GLOBALS['sys_upload_dir'].'/'.$this->FRSPackage->Group->getUnixName().'/'.$this->FRSPackage->getFileName().'/'.$oldfilename;
 		$newdirlocation = $GLOBALS['sys_upload_dir'].'/'.$this->FRSPackage->Group->getUnixName().'/'.$this->FRSPackage->getFileName().'/'.$newfilename;
 	
-		if(($oldfilename!=$newfilename)){
-			if(is_dir($newdirlocation)){
+		if (($oldfilename!=$newfilename) && is_dir($olddirlocation)) {
+			if (is_dir($newdirlocation)) {
 				db_rollback();
 				$this->setError('FRSRelease::update() Error Updating Release: Directory Already Exists');
 				return false;	
