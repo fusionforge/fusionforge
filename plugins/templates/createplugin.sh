@@ -25,6 +25,7 @@ else
 	fullname=$1
 	minus=`echo $1 | tr '[A-Z]' '[a-z]'`
 	plugdir=$minus
+	[ ! -d $modelplugdir/debian/fusionforge-plugin-$modelminus ] || (cd $modelplugdir ; debclean)
 	echo "Creating $1 plugin"
 	echo "Creating directory $plugdir"
 	[ ! -d $plugdir ] && mkdir $plugdir
@@ -65,12 +66,16 @@ else
 		do
 			if [ -d $modelminus/$debfile ]
 			then
-				[ -d $plugdir/$debfile ] || mkdir $plugdir/$debfile
+				[ -d $plugdir/$debfile ] || (echo "Making directory $plugdir/$debfile" ; mkdir $plugdir/$debfile)
 			else
-				cat $modelminus/$debfile | \
-					sed "s/$modelminus/$minus/g" | \
-					sed "s/$modelfullname/$fullname/g" > \
-				$plugdir/$debfile
+				if [ ! -f $plugdir/$debfile ]
+				then
+					echo "Creating $plugdir/$debfile"
+					cat $modelminus/$debfile | \
+						sed "s/$modelminus/$minus/g" | \
+						sed "s/$modelfullname/$fullname/g" > \
+					$plugdir/$debfile
+				fi
 			fi
 		done
 		chmod +x $plugdir/utils/*
@@ -78,13 +83,17 @@ else
 		do
 			if [ -d $modelminus/$debfile ]
 			then
-				[ -d $plugdir/$debfile ] || mkdir $plugdir/$debfile
+				[ -d $plugdir/$debfile ] || (echo "Making directory $plugdir/$debfile" ; mkdir $plugdir/$debfile)
 			else
 				newdebfile=`echo $debfile | sed "s/$modelminus/$minus/g"`
-				cat $modelminus/$debfile | \
-					sed "s/$modelminus/$minus/g" | \
-					sed "s/$modelfullname/$fullname/g" > \
-				$plugdir/$newdebfile
+				if [ ! -f $plugdir/$newdebfile ]
+				then
+					echo "Creating $plugdir/$newdebfile"
+					cat $modelminus/$debfile | \
+						sed "s/$modelminus/$minus/g" | \
+						sed "s/$modelfullname/$fullname/g" > \
+					$plugdir/$newdebfile
+				fi
 			fi
 		done
 	fi
