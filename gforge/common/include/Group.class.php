@@ -2258,7 +2258,7 @@ Enjoy the system, and please tell others about %4$s. Let us know
 if there is anything we can do to help you.
 
 -- the %4$s crew'), 
-						       $this->getPublicName(), 
+						       htmlspecialchars_decode($this->getPublicName()),
 						       $this->getUnixName(), 
 						       util_make_url ('/project/admin/?group_id='.$this->getID()),
 						       forge_get_config ('forge_name'));
@@ -2374,8 +2374,8 @@ Submitter: %5$s (%6$s)
 Please visit the following URL to approve or reject this project:
 %4$s'),
 						       forge_get_config ('forge_name'),
-						       $this->getPublicName(),
-						       util_unconvert_htmlspecialchars($this->getRegistrationPurpose()),
+						       htmlspecialchars_decode($this->getPublicName()),
+						       htmlspecialchars_decode($this->getRegistrationPurpose()),
 						       util_make_url ('/admin/approve-pending.php'),
 						       $submitter->getRealName(), 
 						       $submitter->getUnixName());
