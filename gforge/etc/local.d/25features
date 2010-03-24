@@ -24,6 +24,9 @@ $sys_use_bookmarks={sys_use_bookmarks};
 $sys_use_project_tags={sys_use_project_tags};
 $sys_use_project_full_list={sys_use_project_full_list};
 
+// This one exists purely for hysteric raisins
+$sys_use_mwframe=false;
+
 // Enable/Disable user ratings
 $sys_use_ratings={sys_use_ratings};
 // Enable/Disable the ability to upload files using FTP in FRS
