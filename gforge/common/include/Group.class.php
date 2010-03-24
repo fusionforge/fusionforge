@@ -2356,7 +2356,7 @@ Reasons for negative decision:
 					array ('A'));
 		
 		if (db_numrows($res) < 1) {
-			$this->setError(_("There is no administrator to send the mail."));
+			$this->setError(_("There is no administrator to send the mail to."));
 			return false;
 		}
 
