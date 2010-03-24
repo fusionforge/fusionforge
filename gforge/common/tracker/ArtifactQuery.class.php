@@ -416,7 +416,7 @@ class ArtifactQuery extends Error {
 			$type = $aef->getType();
 			if ($type == ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
 				if (!preg_match('/^[><= \-\+0-9%]+$/', $vals[$i])) {
-					$this->setError('Invalid Value for Integer type: '. stripslashes($vals[$i]));
+					$this->setError('Invalid Value for Integer type: '. $vals[$i]);
 					return false;
 				}
 			}
