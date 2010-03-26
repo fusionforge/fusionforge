@@ -276,19 +276,8 @@ class Forum extends Error {
 	function getNextThreadID() {
 		global $sys_database_type;
 
-		if ($sys_database_type == "mysql") {
-			$sql="call newval('forum_thread_seq', @res)";
-			$result=db_mquery($sql);
-			if (!$result) {
-				echo db_error();
-				return false;
-			}
-			$sql="select @res";
-			$result = db_query_mysql ($sql);
-		} else {
-			$result = db_query_params ('SELECT nextval($1)',
-						   array ('forum_thread_seq')) ;
-		}
+		$result = db_query_params ('SELECT nextval($1)',
+					   array ('forum_thread_seq')) ;
 		if (!$result || db_numrows($result) < 1) {
 			echo db_error();
 			return false;

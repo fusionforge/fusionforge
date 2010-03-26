@@ -1828,20 +1828,7 @@ class Group extends Error {
 			//	first have to purge any assignments that would cause 
 			//	conflict with existing assignment to 100
 			//
-			if ($sys_database_type == 'mysql') {
-				$res=db_mquery("
-					SELECT pt.project_task_id 
-					FROM project_task pt, project_group_list pgl, project_assigned_to pat 
-					WHERE pt.group_project_id = pgl.group_project_id 
-					AND pat.project_task_id=pt.project_task_id
-					AND pt.status_id='1' AND pgl.group_id='".$this->getID()."'
-					AND pat.assigned_to_id='$user_id' INTO @task_list;
-					DELETE FROM project_assigned_to WHERE project_task_id IN ( @task_list ) AND assigned_to_id='100'");
-				if ($res) {
-					$res = db_next_result();
-				}
-			} else {
-				$res = db_query_params ('DELETE FROM project_assigned_to
+			$res = db_query_params ('DELETE FROM project_assigned_to
 					WHERE project_task_id IN (SELECT pt.project_task_id 
 					FROM project_task pt, project_group_list pgl, project_assigned_to pat 
 					WHERE pt.group_project_id = pgl.group_project_id 
@@ -1849,9 +1836,8 @@ class Group extends Error {
 					AND pt.status_id=1 AND pgl.group_id=$1
 					AND pat.assigned_to_id=$2)
 					AND assigned_to_id=100',
-							array ($this->getID(),
-							       $user_id)) ;
-			}
+						array ($this->getID(),
+						       $user_id)) ;
 			if (!$res) {
 				$this->setError(sprintf(_('ERROR: DB: project_assigned_to %d: %s'),1,db_error()));
 				db_rollback();

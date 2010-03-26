@@ -5,5 +5,3 @@ CREATE TABLE plugin_projects_hierarchy (
 	activated boolean DEFAULT false NOT NULL,
 	com char(255) NOT NULL
 	);
-
-INSERT INTO plugins (plugin_name,plugin_desc) VALUES ('hierarchy','Hierarchy GForge Plugin');

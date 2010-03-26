@@ -95,39 +95,16 @@ $err .= db_error();
 db_query_params ('UPDATE user_metric0 SET ranking=ranking-1',
 			array()) ;
 
-
-if ($sys_database_type == 'mysql') {
-	$sql="
-	SELECT count(*) FROM user_metric0 INTO @total;
-	UPDATE user_metric0 SET
-	metric=(log(times_ranked)*avg_rating),
-	percentile=(100-(100*(ranking-1.0)/@total));";
-
-	db_mquery($sql);
-	$err .= db_error();
-	db_next_result();
-	$err .= db_error();
-} else {
-	$sql=";";
-
-	db_query_params ('UPDATE user_metric0 SET metric=(log(times_ranked::float)*avg_rating::float)::float, percentile=(100-(100*((ranking::float-1)/(select count(*) from user_metric0))))::float',
-			 array());
-	$err .= db_error();
-}
-
-if ($sys_database_type == 'mysql') {
-	$sql="UPDATE user_metric0 SET importance_factor=(1+((percentile/100.0)*.5));";
-	db_query_mysql($sql);
-} else {
-	db_query_params ('UPDATE user_metric0 SET importance_factor=(1+((percentile::float/100)*.5))::float',
-			 array()) ;
-}
-
+db_query_params ('UPDATE user_metric0 SET metric=(log(times_ranked::float)*avg_rating::float)::float, percentile=(100-(100*((ranking::float-1)/(select count(*) from user_metric0))))::float', 
+		 array());
+$err .= db_error();
+db_query_params ('UPDATE user_metric0 SET importance_factor=(1+((percentile::float/100)*.5))::float', 
+		 array()) ;
 $err .= db_error();
 
 db_query_params ('SELECT * INTO TEMPORARY TABLE user_metric_cur FROM user_metric0',
 		 array()) ;
-
+$err .= db_error();
 
 for ($i=1; $i<9; $i++) {
 	$j=($i-1);

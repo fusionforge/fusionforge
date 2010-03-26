@@ -109,13 +109,16 @@ while ( $row = db_fetch_array($project_res) ) {
 		// Sanitize schema name
 		strtr($schema, "-", "_");
 
+		db_begin();
+
 		cron_debug("  Creating schema $schema.");
-		$res = db_mquery("CREATE SCHEMA $schema");
+		$res = db_query_params("CREATE SCHEMA $schema", array());
 		if (!$res) {
 			$err =  "Error: Schema Creation Failed: " . 
 				db_error();
 			cron_debug($err);
 			cron_entry(23,$err);
+			db_rollback();
 			exit;
 		}
 
@@ -125,23 +128,48 @@ while ( $row = db_fetch_array($project_res) ) {
 			$err =  "Error: Couldn't find Mediawiki Database Creation File $mediawiki_creation_file!";
 			cron_debug($err);
 			cron_entry(23,$err);
+			db_rollback();
 			exit;
 		}
 			
+		$res = db_query_params("SET search_path=$schema", array());
+		if (!$res) {
+			$err =  "Error: DB Query Failed: " . 
+				db_error();
+			cron_debug($err);
+			cron_entry(23,$err);
+			db_rollback();
+			exit;
+		}
+
 		$creation_query = file_get_contents($table_file);
-		$res = db_mquery("SET search_path='$schema';"
-				 . $creation_query
-				 . "CREATE TEXT SEARCH CONFIGURATION $schema.default ( COPY = pg_catalog.english );"
-				 . "COMMIT;");
+		$res = db_query_from_file($table_file);
 		if (!$res) {
 			$err =  "Error: Mediawiki Database Creation Failed: " . 
 				db_error();
 			cron_debug($err);
 			cron_entry(23,$err);
+			db_rollback();
+			exit;
+		}
+
+		$res = db_query_params("CREATE TEXT SEARCH CONFIGURATION $schema.default ( COPY = pg_catalog.english )", array());
+		if (!$res) {
+			$err =  "Error: DB Query Failed: " . 
+				db_error();
+			cron_debug($err);
+			cron_entry(23,$err);
+			db_rollback();
 			exit;
 		}
 		
-
+		if (!db_commit()) {
+			$err =  "Error: DB Commit Failed: " . 
+				db_error();
+			cron_debug($err);
+			cron_entry(23,$err);
+			exit;
+		}
 	} else {
 		cron_debug("  Nothing to be done.");
 	}

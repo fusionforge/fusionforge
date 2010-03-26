@@ -13,11 +13,11 @@ require_once 'PHPUnit/Framework/TestCase.php';
 class Deprecations_Tests extends PHPUnit_Framework_TestCase
 {
 	/**
-	 * Check that no code uses db_query()
+	 * Check that no code uses db_query() or db_mquery()
 	 */
 	public function testdb_query()
 	{
-		$output = `cd .. ; find gforge tests -name '*.php' -type f | xargs pcregrep -l '\bdb_query\b' \
+		$output = `cd .. ; find gforge tests -name '*.php' -type f | xargs pcregrep -l '\bdb_m?query\b' \
 					   | grep -v ^tests/code/deprecations/DeprecationsTest.php \
 					   | grep -v ^gforge/db/upgrade-db.php \
 					   | grep -v ^gforge/www/include/database-oci8.php \

@@ -156,9 +156,7 @@ if (getStringFromRequest('update')) {
 				}
 					
 				if ($db_init) {
-					$arch = file_get_contents($db_init);
-					$arch = preg_replace('/(INSERT INTO plugins.*$)/','',$arch); // remove the line that inserts into plugins table, we are already doing that (and this would return error otherwise)
-					$res = db_mquery($arch);
+					$res = db_query_from_file($db_init);
 					
 					if ($res) {
 						while ($res) {
