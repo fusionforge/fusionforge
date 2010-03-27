@@ -1,4 +1,6 @@
 UNRELEASED:
+
+FusionForge-5.0:
 * New projectlabels plugin, to tag projects with snippets of
   user-defined HTML (developed for/sponsored by Adullact)
 * New extratabs plugin, to add tabs with links to arbitrary URLs
@@ -41,6 +43,9 @@ UNRELEASED:
   conformance (developed by Open-S for Adullact)
 * New contribtracker plugin, to give visibility to major contributors
   to projects (developed for/sponsored by Adullact)
+
+FusionForge-4.8.3:
+* Maintenance release, only bugfixes.
 
 FusionForge-4.8.2:
 * Maintenance release, security and bugfixes.
