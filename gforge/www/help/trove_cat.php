@@ -44,8 +44,8 @@ $row_cat = db_fetch_array($res_cat);
 help_header("Trove Category - ".$row_cat['fullname']);
 
 print '<table width="100%" cellpadding="0" cellspacing="0" border="0">'."\n";
-print '<tr><td>'._('Full Category Name').':</td><td><strong>'.$row_cat['fullname']."</strong></td>\n";
-print '<tr><td>'._('Short Name').':</td><td><strong>'.$row_cat['shortname']."</strong></td>\n";
+print '<tr><td>'._('Full Category Name').':</td><td><strong>'.$row_cat['fullname']."</strong></td></tr>\n";
+print '<tr><td>'._('Short Name').':</td><td><strong>'.$row_cat['shortname']."</strong></td></tr>\n";
 print "</table>\n";
 print '<p>'._('Description').':<br /><em>'.$row_cat['description'].'</em>'."</p>\n";
 
