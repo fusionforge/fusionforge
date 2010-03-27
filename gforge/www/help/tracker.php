@@ -68,6 +68,10 @@ help_header('Tracker Help - ' . htmlspecialchars(ucwords(str_replace('_',' ',$he
 		case 'comment':
 			print( _('Comment'));
 			break;
+		case 'description':
+			print( _('Enter the complete description.'));
+			print( _("<h3>Editing tips:</h3><strong>http,https or ftp</strong>: will be changed in hyperlinks.<br/><strong>[#NNN]</strong>:  to reference id NNN in the trackers.<br/><strong>[TNNN]</strong>:  to reference id NNN in the tasks.<br/><strong>[wiki:&lt;pagename&gt;]</strong>:  to reference page 'pagename' in the project's wiki.<br/><strong>[forum:&lt;msg_id&gt;]</strong>:  to reference post msg_id in the project's forums.<br/>"));
+			break;
 		case 'attach_file':
 			print( _('When you wish to attach a file to a tracker item you must check this checkbox before submitting changes.'));
 			break;
