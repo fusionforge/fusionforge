@@ -1,5 +1,10 @@
 * text=auto !eol
 /.bzrignore -text
+3rd-party/db2latex-xsl/db2latex-xsl_0.8pre1-6.1.diff.gz -text svneol=unset#unset
+3rd-party/db2latex-xsl/db2latex-xsl_0.8pre1-6.1.dsc -text
+3rd-party/db2latex-xsl/db2latex-xsl_0.8pre1-6.2.diff.gz -text svneol=unset#unset
+3rd-party/db2latex-xsl/db2latex-xsl_0.8pre1-6.2.dsc -text
+3rd-party/db2latex-xsl/db2latex-xsl_0.8pre1.orig.tar.gz -text svneol=unset#unset
 3rd-party/htmlpurifier/Makefile -text
 3rd-party/htmlpurifier/Makefile.debian -text
 3rd-party/htmlpurifier/htmlpurifier.spec -text
