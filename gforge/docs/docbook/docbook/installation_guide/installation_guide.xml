@@ -99,7 +99,7 @@
         <para>The <filename>INSTALL</filename> file in FusionForge package and <filename>README</filename> files in plugin directories are the authoritive sources for installation instructions and they should have more precedence over this guide.</para>
       </important>
       <note>
-        <para>This installation guide is for FusionForge 4.9.</para>
+        <para>This installation guide is for FusionForge 5.0.</para>
       </note>
       <para>FusionForge has a lot of different pieces touching a lot of different components in the system. Cronjobs are required to maintain the system, touching lots of files on a daily and hourly basis, including <filename>/etc/*</filename> system files.</para>
       <para>The plugins that now manage the CVS and SVN functionality have made installation slightly harder because even more files have to be moved into place during installation.</para>
@@ -134,32 +134,24 @@
         <title>Getting the source</title>
         <para>There is two ways to get the sources from FusionForge : </para>
         <screen>
- # <userinput>tar -xjvf fusionforge-4.9.tar.bz2</userinput>
- # <userinput>cd fusionforge-4.9</userinput>
+ # <userinput>tar -xjvf fusionforge-5.0.tar.bz2</userinput>
+ # <userinput>cd fusionforge-5.0</userinput>
  # <userinput>mkdir -p /opt/gforge</userinput>
  # <userinput>cp -r *<replaceable>/opt/gforge</replaceable></userinput>
 </screen>
       </section>
       <section>
-        <title>Checking out from the SVN repository with tag v4_9 </title>
-        <para>Alternative way to get FusionForge 4.9 is to check out with tag v4_9 from SVN. This gets latest fixes as well.</para>
+        <title>Checking out from the SVN repository with tag v5_0 </title>
+        <para>Alternative way to get FusionForge 5.0 is to check out with tag v5_0 from SVN. This gets latest fixes as well.</para>
         <screen>
- $ <userinput>svn checkout --username anonsvn https://svn.gforge.org/svn/gforge/tags/v4_9</userinput>
+ $ <userinput>svn checkout --username anonsvn svn://scm.fusionforge.org/svnroot/fusionforge/tags/v5_0 fusionforge-5.0</userinput>
 
+ $ <userinput>cd fusionforge</userinput>
  $ <userinput>cd gforge/www/plugins</userinput>
 $ <userinput>ln -s ../../plugins/scmcvs/www scmcvs</userinput>
 $ <userinput>ln -s ../../plugins/scmsvn/www scmsvn</userinput>
 $ <userinput>ln -s ../../plugins/cvstracker/www cvstracker</userinput>
     </screen>
-        <section>
-          <title>Updating checked out Branch_4_5</title>
-          <para>To get latest updates in <literal>Branch_4_5</literal>, run the following commands:</para>
-          <screen>
-$ <userinput>cd gforge</userinput>
- $ <userinput>svn -q update</userinput>
-     </screen>
-          <para>To monitor latest changes in FusionForge, subscribe to <ulink url="http://lists.gforge.org/mailman/listinfo/gforge-commits">gforge-commits mailing list</ulink>.</para>
-        </section>
         <section>
           <title>Fixing access rights</title>
           <para>You may want to make sure that permissions are correct (replace <replaceable>apache-group</replaceable> with the system group used by Apache server):</para>
