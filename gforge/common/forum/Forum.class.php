@@ -274,8 +274,6 @@ class Forum extends Error {
 	 *	@return	int	The next thread_id #.
 	 */
 	function getNextThreadID() {
-		global $sys_database_type;
-
 		$result = db_query_params ('SELECT nextval($1)',
 					   array ('forum_thread_seq')) ;
 		if (!$result || db_numrows($result) < 1) {

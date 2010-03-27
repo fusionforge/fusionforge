@@ -140,7 +140,7 @@ function db_query($qstring,$limit='-1',$offset=0,$dbserver=SYS_DB_PRIMARY) {
 }
 
 /**
- *  db_query() - Query the database, from a file.
+ *  db_query_from_file() - Query the database, from a file.
  *
  *  @param string File that contains the SQL statements.
  *  @param int How many rows do you want returned.

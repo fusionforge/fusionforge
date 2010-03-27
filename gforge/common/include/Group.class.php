@@ -1784,7 +1784,7 @@ class Group extends Error {
 	 *	@return	boolean	success.
 	 */ 
 	function removeUser($user_id) {
-		global $SYS,$sys_database_type;
+		global $SYS;
 
 		if ($user_id==user_getid()) {
 			//users can remove themselves
