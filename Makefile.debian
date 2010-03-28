@@ -149,6 +149,12 @@ orig: $(TARBALLS)/$(ORIGFILE) # Make FUSIONFORGE orig file
 # Get phpdocumentor, install phpdocumentor, build $(PKGNAME) phpdoc
 phpdoc: $(PKGDIR)/docs/phpdoc/docs 
 
+doc:
+	(cd gforge/docs/docbook ; make debian)
+
+cleandoc:
+	(cd gforge/docs/docbook ; make clean)
+
 phpdocumentor_get:
 	[ ! -f $(documentor_path)/$(documentor_file) ] && \
         cd $(documentor_path) && \
@@ -238,7 +244,7 @@ $(BUILDFILES)/$(PDSCFILE):
 	# Set version for given distrib
 	cd $(BUILDFILES)/$(PKGDIR); dch -b -v $(MAJOR)$(MINOR)+p -D UNRELEASED "This is $(DISTRIB) autobuild"
 	perl -pi -e "s/UNRELEASED/$(DISTRIB)/" $(BUILDFILES)/$(PKGDIR)/debian/changelog
-	cd $(BUILDFILES) ; dpkg-source -b $(PKGNAME)
+	cd $(BUILDFILES) ; dpkg-source -b $(PKGDIR)
 	rm -rf $(BUILDFILES)/$(PKGDIR)
 
 $(BUILDFILES)/$(ORIGFILE): $(TARBALLS)/$(ORIGFILE)
