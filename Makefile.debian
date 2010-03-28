@@ -238,7 +238,7 @@ $(BUILDFILES)/$(PDSCFILE):
 	# Set version for given distrib
 	cd $(BUILDFILES)/$(PKGDIR); dch -b -v $(MAJOR)$(MINOR)+p -D UNRELEASED "This is $(DISTRIB) autobuild"
 	perl -pi -e "s/UNRELEASED/$(DISTRIB)/" $(BUILDFILES)/$(PKGDIR)/debian/changelog
-	cd $(BUILDFILES) ; dpkg-source -b $(PKGNAME)
+	cd $(BUILDFILES) ; dpkg-source -b $(PKGDIR)
 	rm -rf $(BUILDFILES)/$(PKGDIR)
 
 $(BUILDFILES)/$(ORIGFILE): $(TARBALLS)/$(ORIGFILE)
