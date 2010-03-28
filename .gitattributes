@@ -8,6 +8,8 @@
 3rd-party/htmlpurifier/Makefile -text
 3rd-party/htmlpurifier/Makefile.debian -text
 3rd-party/htmlpurifier/htmlpurifier.spec -text
+3rd-party/nusoap/Makefile -text
+3rd-party/nusoap/Makefile.debian -text
 /README -text
 delivery/fusionforge/package/config -text
 delivery/gforge/package/config -text
