@@ -7,6 +7,7 @@
 3rd-party/db2latex-xsl/db2latex-xsl_0.8pre1.orig.tar.gz -text svneol=unset#unset
 3rd-party/htmlpurifier/Makefile -text
 3rd-party/htmlpurifier/Makefile.debian -text
+3rd-party/htmlpurifier/htmlpurifier-4.0.0.tar.gz -text svneol=unset#unset
 3rd-party/htmlpurifier/htmlpurifier.spec -text
 3rd-party/nusoap/Makefile -text
 3rd-party/nusoap/Makefile.debian -text

@@ -181,10 +181,6 @@ buildlibnsspgsql:               # Build rpm fusionforge-shell-postgresql package
 #
 # HTMLPURIFIER (third party plugin)
 #
-htmlpurifier: rpmprep depot/htmlpurifier-4.0.0.tar.gz
-	cp depot/htmlpurifier-4.0.0.tar.gz $(RPM_TMP)/SOURCES/
+htmlpurifier: rpmprep
+	cp 3rd-party/htmlpurifier/htmlpurifier-4.0.0.tar.gz $(RPM_TMP)/SOURCES/
 	rpmbuild --quiet --clean -ba 3rd-party/htmlpurifier/htmlpurifier.spec
-
-depot/htmlpurifier-4.0.0.tar.gz: rpmprep
-	mkdir -p depot
-	cd depot; wget -q -N http://htmlpurifier.org/releases/htmlpurifier-4.0.0.tar.gz
