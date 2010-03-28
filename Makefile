@@ -40,10 +40,6 @@ buildtar:
 	cd gforge; find . -type f -or -type l | grep -v '/.svn/' | grep -v '^./debian' | grep -v '^./deb-specific' | grep -v '^./rpm-specific' | grep -v '^./contrib' | grep -v '^./gforge.spec' | grep -v '^./README.setup' | grep -v '^./setup' | cpio -pdumB --quiet /tmp/$(VERSION)
 	cd /tmp/$(VERSION); utils/manage-translations.sh build
 	cd /tmp/; tar jcf $(BUILDRESULT)/$(VERSION).tar.bz2 $(VERSION)
-	cd /tmp/$(VERSION); tar zxf $(ARCHIVE)/libphp-jpgraph_1.5.2.orig.tar.gz
-	cd /tmp/$(VERSION); patch -p0 < $(ARCHIVE)/jpgraph-1.5.2-php5_and_liberation_fonts.patch
-	cd /tmp/$(VERSION); mkdir jpgraph; mv jpgraph-1.5.2/src/* jpgraph; rm -fr jpgraph-1.5.2
-	cd /tmp; tar jcf $(BUILDRESULT)/$(VERSION)-allinone.tar.bz2 $(VERSION)
 	rm -fr /tmp/$(VERSION)
 
 build-unit-tests:
