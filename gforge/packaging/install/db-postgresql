@@ -64,3 +64,5 @@ db/20100308-forum-attachment-types.sql	usr/share/gforge/db/
 utils/inject-users.php usr/share/gforge/bin/
 utils/inject-groups.php usr/share/gforge/bin/
 utils/inject-files.php usr/share/gforge/bin/
+#
+utils/fixscripts/normalize_roles.php	usr/share/gforge/bin/
