@@ -264,9 +264,9 @@ class Role extends Error {
 		return true;
 	}
 
-	function normalizeData($role_id) {
+	function normalizeData () {
 		db_begin () ;
-		$this->fetchData ($role_id) ;
+		$this->fetchData ($this->getID()) ;
 		
 		$new_sa = array () ;
 
@@ -293,9 +293,9 @@ class Role extends Error {
 			$tid = db_result ($res,$j,'group_artifact_id') ;
 			if (array_key_exists ('tracker', $this->setting_array)
 			    && array_key_exists ($tid, $this->setting_array['tracker']) ) {
-				$new_sa[$section][$tid] = $this->setting_array[$section][$tid] ;
+				$new_sa['tracker'][$tid] = $this->setting_array['tracker'][$tid] ;
 			} else {
-				$new_sa[$section][$tid] = $new_sa['newtracker'] ;
+				$new_sa['tracker'][$tid] = $new_sa['newtracker'][0] ;
 			}
 		}
 		
@@ -311,9 +311,9 @@ class Role extends Error {
 			$tid = db_result ($res,$j,'group_forum_id') ;
 			if (array_key_exists ('forum', $this->setting_array)
 			    && array_key_exists ($tid, $this->setting_array['forum']) ) {
-				$new_sa[$section][$tid] = $this->setting_array[$section][$tid] ;
+				$new_sa['forum'][$tid] = $this->setting_array['forum'][$tid] ;
 			} else {
-				$new_sa[$section][$tid] = $new_sa['newforum'] ;
+				$new_sa['forum'][$tid] = $new_sa['newforum'][0] ;
 			}
 		}
 
@@ -329,25 +329,25 @@ class Role extends Error {
 			$tid = db_result ($res,$j,'group_project_id') ;
 			if (array_key_exists ('pm', $this->setting_array)
 			    && array_key_exists ($tid, $this->setting_array['pm']) ) {
-				$new_sa[$section][$tid] = $this->setting_array[$section][$tid] ;
+				$new_sa['pm'][$tid] = $this->setting_array['pm'][$tid] ;
 			} else {
-				$new_sa[$section][$tid] = $new_sa['newpm'] ;
+				$new_sa['pm'][$tid] = $new_sa['newpm'][0] ;
 			}
 		}
 
 		// Delete extra settings
-		db_query_params ('DELETE FROM role_settings WHERE role_id=$1 AND section_name <> ALL ($2)',
+		db_query_params ('DELETE FROM role_setting WHERE role_id=$1 AND section_name <> ALL ($2)',
 				 array ($this->getID(),
 					db_string_array_to_any_clause (array_keys ($this->role_values)))) ;
-		db_query_params ('DELETE FROM role_settings WHERE role_id=$1 AND section_name = $2 AND ref_id <> ALL ($3)',
+		db_query_params ('DELETE FROM role_setting WHERE role_id=$1 AND section_name = $2 AND ref_id <> ALL ($3)',
 				 array ($this->getID(),
 					'tracker',
 					db_int_array_to_any_clause (array_keys ($new_sa['tracker'])))) ;
-		db_query_params ('DELETE FROM role_settings WHERE role_id=$1 AND section_name = $2 AND ref_id <> ALL ($3)',
+		db_query_params ('DELETE FROM role_setting WHERE role_id=$1 AND section_name = $2 AND ref_id <> ALL ($3)',
 				 array ($this->getID(),
 					'forum',
 					db_int_array_to_any_clause (array_keys ($new_sa['forum'])))) ;
-		db_query_params ('DELETE FROM role_settings WHERE role_id=$1 AND section_name = $2 AND ref_id <> ALL ($3)',
+		db_query_params ('DELETE FROM role_setting WHERE role_id=$1 AND section_name = $2 AND ref_id <> ALL ($3)',
 				 array ($this->getID(),
 					'pm',
 					db_int_array_to_any_clause (array_keys ($new_sa['pm'])))) ;
@@ -355,7 +355,7 @@ class Role extends Error {
 		db_commit () ;
 
 		// Save
-		$this->update ($this->data_array['role_name'], $this->setting_array) ;
+		$this->update ($this->data_array['role_name'], $new_sa) ;
 
 		return true;
 	}

@@ -2435,7 +2435,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 	}
 	
 	function normalizeAllRoles () {
-		$roles = $this->getRolesId ;
+		$roles = $this->getRolesId () ;
 		
 		foreach ($roles as $role_id) {
 			$r = new Role ($this, $role_id) ;
