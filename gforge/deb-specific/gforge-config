@@ -21,6 +21,12 @@ fi
 [ -f /etc/gforge/database.inc ] && chown gforge:gforge /etc/gforge/database.inc
 [ -f /etc/gforge/database.inc ] && chmod 640 /etc/gforge/database.inc
 
+if getent group list
+then
+	[ -f /etc/gforge/database.py ] && chgrp list /etc/gforge/database.py
+fi
+[ -f /etc/gforge/database.py ] && chmod 640 /etc/gforge/database.py
+
 [ -f /etc/gforge/local.pl ] && chmod go+rx /etc/gforge
 [ -f /etc/gforge/local.pl ] && chown gforge:gforge /etc/gforge/local.pl
 [ -f /etc/gforge/local.pl ] && chmod 640 /etc/gforge/local.pl
