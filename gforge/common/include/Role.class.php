@@ -264,6 +264,102 @@ class Role extends Error {
 		return true;
 	}
 
+	function normalizeData($role_id) {
+		db_begin () ;
+		$this->fetchData ($role_id) ;
+		
+		$new_sa = array () ;
+
+		// Add missing settings
+		// ...project-wide settings
+		$arr = array ('projectadmin', 'frs', 'scm', 'docman', 'forumadmin', 'trackeradmin', 'newtracker', 'pmadmin', 'newpm', 'webcal') ;
+		foreach ($arr as $section) {
+			if (array_key_exists ($section, $this->setting_array)) {
+				$new_sa[$section][0] = $this->setting_array[$section][0] ;
+			} else {
+				$new_sa[$section][0] = 0 ;
+			}
+		}
+
+		// ...tracker-related settings
+		$new_sa['tracker'] = array () ;
+		$res = db_query_params ('SELECT group_artifact_id FROM artifact_group_list WHERE group_id=$1',
+					array ($this->Group->getID())) ;
+		if (!$res) {
+			$this->setError('Error: Tracker '.db_error());
+			return false;
+		}
+		for ($j=0; $j<db_numrows($res); $j++) {
+			$tid = db_result ($res,$j,'group_artifact_id') ;
+			if (array_key_exists ('tracker', $this->setting_array)
+			    && array_key_exists ($tid, $this->setting_array['tracker']) ) {
+				$new_sa[$section][$tid] = $this->setting_array[$section][$tid] ;
+			} else {
+				$new_sa[$section][$tid] = $new_sa['newtracker'] ;
+			}
+		}
+		
+		// ...forum-related settings
+		$new_sa['forum'] = array () ;
+		$res = db_query_params ('SELECT group_forum_id FROM forum_group_list WHERE group_id=$1',
+					array ($this->Group->getID())) ;
+		if (!$res) {
+			$this->setError('Error: Forum '.db_error());
+			return false;
+		}
+		for ($j=0; $j<db_numrows($res); $j++) {
+			$tid = db_result ($res,$j,'group_forum_id') ;
+			if (array_key_exists ('forum', $this->setting_array)
+			    && array_key_exists ($tid, $this->setting_array['forum']) ) {
+				$new_sa[$section][$tid] = $this->setting_array[$section][$tid] ;
+			} else {
+				$new_sa[$section][$tid] = $new_sa['newforum'] ;
+			}
+		}
+
+		// ...subproject-related settings
+		$new_sa['pm'] = array () ;
+		$res = db_query_params ('SELECT group_project_id FROM project_group_list WHERE group_id=$1',
+					array ($this->Group->getID())) ;
+		if (!$res) {
+			$this->setError('Error: Subproject '.db_error());
+			return false;
+		}
+		for ($j=0; $j<db_numrows($res); $j++) {
+			$tid = db_result ($res,$j,'group_project_id') ;
+			if (array_key_exists ('pm', $this->setting_array)
+			    && array_key_exists ($tid, $this->setting_array['pm']) ) {
+				$new_sa[$section][$tid] = $this->setting_array[$section][$tid] ;
+			} else {
+				$new_sa[$section][$tid] = $new_sa['newpm'] ;
+			}
+		}
+
+		// Delete extra settings
+		db_query_params ('DELETE FROM role_settings WHERE role_id=$1 AND section_name <> ALL ($2)',
+				 array ($this->getID(),
+					db_string_array_to_any_clause (array_keys ($this->role_values)))) ;
+		db_query_params ('DELETE FROM role_settings WHERE role_id=$1 AND section_name = $2 AND ref_id <> ALL ($3)',
+				 array ($this->getID(),
+					'tracker',
+					db_int_array_to_any_clause (array_keys ($new_sa['tracker'])))) ;
+		db_query_params ('DELETE FROM role_settings WHERE role_id=$1 AND section_name = $2 AND ref_id <> ALL ($3)',
+				 array ($this->getID(),
+					'forum',
+					db_int_array_to_any_clause (array_keys ($new_sa['forum'])))) ;
+		db_query_params ('DELETE FROM role_settings WHERE role_id=$1 AND section_name = $2 AND ref_id <> ALL ($3)',
+				 array ($this->getID(),
+					'pm',
+					db_int_array_to_any_clause (array_keys ($new_sa['pm'])))) ;
+		
+		db_commit () ;
+
+		// Save
+		$this->update ($this->data_array['role_name'], $this->setting_array) ;
+
+		return true;
+	}
+
 	/**
 	 *  &getRoleVals - get all the values and language text strings for this section.
 	 *
