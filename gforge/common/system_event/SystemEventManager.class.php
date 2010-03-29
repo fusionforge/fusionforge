@@ -50,8 +50,12 @@ class SystemEventManager {
      * Create a new event, store it in the db and send notifications
      */
     public function createEvent($type, $parameters, $priority) {
-        $sql = "INSERT INTO system_event (type, parameters,create_date,log) VALUES ('".$type."','".$parameters['group_list_id']."','".$_SERVER['REQUEST_TIME']."', 'NEW');";
-		return db_query($sql);
+		return db_query_params('INSERT INTO system_event (type, parameters,create_date,log) VALUES ($1,$2,$3,$4)',
+			array($type,
+				$parameters['group_list_id'],
+				$_SERVER['REQUEST_TIME'],
+				'NEW')
+		);
         }
     
     
