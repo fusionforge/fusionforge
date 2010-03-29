@@ -270,6 +270,7 @@ class ArtifactType extends Error {
 				return false;
 			} else {
 				db_commit();
+				$this->Group->normalizeAllRoles () ;
 				return $id;
 		}
 	}
