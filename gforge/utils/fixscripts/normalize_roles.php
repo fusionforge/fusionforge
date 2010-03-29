@@ -34,7 +34,8 @@ require_once('common/include/SCM.class.php') ;
 
 setup_plugin_manager () ;
 
-$res=db_query("SELECT group_id, group_name FROM groups");
+$res = db_query_params ('SELECT group_id, group_name FROM groups',
+			array ());
 
 $rows=db_numrows($res);
 
