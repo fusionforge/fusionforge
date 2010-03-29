@@ -23,7 +23,7 @@ LOCALREPOUBU=/var/www/ubuntu-fusionforge-$(BRANCH)
 DEBIANLIST=1lenny
 UBUNTULIST=1jaunty 1karmic
 ASKPASS=--ask-passphrase
-#ASKPASS=
+ASKPASS=
 
 # Try if a local mirror is available
 UBUNTUOP=$(shell wget -q -S http://localhost/ubuntu -O /dev/null && echo "--mirror http://localhost/ubuntu" || echo "--mirror http://archive.ubuntu.com/ubuntu") --debootstrap debootstrap
