@@ -981,43 +981,43 @@ function user_act_daily($day) {
 		(SELECT * FROM
 		(SELECT * FROM
 		(SELECT * FROM
-			(SELECT submitted_by AS user_id, $1 AS day, count(*) AS tracker_opened
+			(SELECT submitted_by AS user_id, $1::int AS day, count(*) AS tracker_opened
 			FROM artifact
 			WHERE open_date BETWEEN $1 AND $2
 			GROUP BY user_id,day) aopen
 
 		FULL OUTER JOIN
-			(SELECT assigned_to AS user_id, $1 AS day, count(*) AS tracker_closed
+			(SELECT assigned_to AS user_id, $1::int AS day, count(*) AS tracker_closed
 			FROM artifact
 			WHERE close_date BETWEEN $1 AND $2
 			GROUP BY user_id,day ) aclosed USING (user_id,day)) foo1
 
 		FULL OUTER JOIN
-			(SELECT posted_by AS user_id, $1 AS day, count(*) AS forum
+			(SELECT posted_by AS user_id, $1::int AS day, count(*) AS forum
 			FROM forum
 			WHERE post_date BETWEEN $1 AND $2
 			GROUP BY user_id,day ) forum USING (user_id,day)) foo2
 
 		FULL OUTER JOIN
-			(SELECT created_by AS user_id, $1 AS day, count(*) AS docs
+			(SELECT created_by AS user_id, $1::int AS day, count(*) AS docs
 			FROM doc_data
 			WHERE createdate BETWEEN $1 AND $2
 			GROUP BY user_id,day ) docs USING (user_id,day)) foo3
 
 		FULL OUTER JOIN
-			(SELECT user_id,$1 AS day, sum(commits) AS cvs_commits
+			(SELECT user_id, $1::int AS day, sum(commits) AS cvs_commits
 			FROM stats_cvs_user
 			WHERE month=$3 AND day=$2
 			GROUP BY user_id,day ) cvs USING (user_id,day)) foo4
 
 		FULL OUTER JOIN
-			(SELECT created_by AS user_id, $1 AS day, count(*) AS tasks_opened
+			(SELECT created_by AS user_id, $1::int AS day, count(*) AS tasks_opened
 			FROM project_task
 			WHERE start_date BETWEEN $1 AND $2
 			GROUP BY user_id,day ) topen USING (user_id,day)) foo5
 
 		FULL OUTER JOIN
-			(SELECT mod_by AS user_id, $1 AS day, count(*) AS tasks_closed 
+			(SELECT mod_by AS user_id, $1::int AS day, count(*) AS tasks_closed
 			FROM project_history
 			WHERE mod_date BETWEEN $1 AND $2
 			AND old_value=$4 AND field_name=$5
@@ -1073,7 +1073,7 @@ function user_act_weekly($week) {
 	return db_query_params ('
 INSERT INTO rep_user_act_weekly (user_id, week, tracker_opened, tracker_closed,
        forum, docs, cvs_commits, tasks_opened, tasks_closed)
-SELECT user_id,$1 AS week, sum(tracker_opened) AS tracker_opened,
+SELECT user_id,$1::int AS week, sum(tracker_opened) AS tracker_opened,
        sum(tracker_closed) AS tracker_closed, sum(forum) AS forum,
        sum(docs) AS docs, sum(cvs_commits) AS cvs_commits,
        sum(tasks_opened) AS tasks_opened, sum(tasks_closed) AS tasks_closed
@@ -1121,7 +1121,7 @@ function user_act_monthly($month,$end) {
 	return db_query_params ('
 INSERT INTO rep_user_act_monthly (user_id, month, tracker_opened,
        tracker_closed, forum, docs, cvs_commits, tasks_opened, tasks_closed)
-SELECT user_id, $1 AS month, sum(tracker_opened) AS tracker_opened,
+SELECT user_id, $1::int AS month, sum(tracker_opened) AS tracker_opened,
        sum(tracker_closed) AS tracker_closed, sum(forum) AS forum,
        sum(docs) AS docs, sum(cvs_commits) AS cvs_commits,
        sum(tasks_opened) AS tasks_opened, sum(tasks_closed) AS tasks_closed
@@ -1186,34 +1186,34 @@ function group_act_daily($day) {
 		(SELECT * FROM
 		(SELECT * FROM
 		(SELECT * FROM
-			(SELECT agl.group_id, $1 AS day, count(*) AS tracker_opened
+			(SELECT agl.group_id, $1::int AS day, count(*) AS tracker_opened
 			FROM artifact a, artifact_group_list agl
 			WHERE a.open_date BETWEEN $1 AND $2
 			AND a.group_artifact_id=agl.group_artifact_id
 			GROUP BY group_id,day) aopen
 
 		FULL OUTER JOIN
-			(SELECT agl.group_id, $1 AS day, count(*) AS tracker_closed
+			(SELECT agl.group_id, $1::int AS day, count(*) AS tracker_closed
 			FROM artifact a, artifact_group_list agl
 			WHERE a.close_date BETWEEN $1 AND $2
 			AND a.group_artifact_id=agl.group_artifact_id
 			GROUP BY group_id,day ) aclosed USING (group_id,day)) foo1
 
 		FULL OUTER JOIN
-			(SELECT fgl.group_id, $1 AS day, count(*) AS forum
+			(SELECT fgl.group_id, $1::int AS day, count(*) AS forum
 			FROM forum f, forum_group_list fgl
 			WHERE f.post_date BETWEEN $1 AND $2
 			AND f.group_forum_id=fgl.group_forum_id
 			GROUP BY group_id,day ) forum USING (group_id,day)) foo2
 
 		FULL OUTER JOIN
-			(SELECT group_id, $1 AS day, count(*) AS docs
+			(SELECT group_id, $1::int AS day, count(*) AS docs
 			FROM doc_data
 			WHERE createdate BETWEEN $1 AND $2
 			GROUP BY group_id,day ) docs USING (group_id,day)) foo3
 
 		FULL OUTER JOIN
-			(SELECT fp.group_id, $1 AS day, count(*) AS downloads
+			(SELECT fp.group_id, $1::int AS day, count(*) AS downloads
 			FROM frs_package fp, frs_release fr, frs_file ff, frs_dlstats_file fdf
 			WHERE fp.package_id=fr.package_id
 			AND fr.release_id=ff.release_id
@@ -1222,20 +1222,20 @@ function group_act_daily($day) {
 			GROUP BY fp.group_id,day ) docs USING (group_id,day)) foo4
 
 		FULL OUTER JOIN
-			(SELECT group_id, $1 AS day, sum(commits) AS cvs_commits
+			(SELECT group_id, $1::int AS day, sum(commits) AS cvs_commits
 			FROM stats_cvs_group
 			WHERE month=$3 AND day=$4
 			GROUP BY group_id,day ) cvs USING (group_id,day)) foo5
 
 		FULL OUTER JOIN
-			(SELECT pgl.group_id, $1 AS day,count(*) AS tasks_opened
+			(SELECT pgl.group_id, $1::int AS day,count(*) AS tasks_opened
 			FROM project_task pt, project_group_list pgl
 			WHERE pt.start_date BETWEEN $1 AND $2
 			AND pt.group_project_id=pgl.group_project_id
 			GROUP BY group_id,day ) topen USING (group_id,day)) foo6
 
 		FULL OUTER JOIN
-			(SELECT pgl.group_id, $1 AS day, count(*) AS tasks_closed
+			(SELECT pgl.group_id, $1::int AS day, count(*) AS tasks_closed
 			FROM project_history ph, project_task pt, project_group_list pgl
 			WHERE ph.mod_date BETWEEN $1 AND $2
 			AND ph.old_value=$5
@@ -1298,7 +1298,7 @@ function group_act_weekly($week) {
 INSERT INTO rep_group_act_weekly (group_id, week, tracker_opened,
        tracker_closed, forum, docs, downloads, cvs_commits, tasks_opened,
        tasks_closed)
-SELECT group_id, $1 AS week, sum(tracker_opened) AS tracker_opened,
+SELECT group_id, $1::int AS week, sum(tracker_opened) AS tracker_opened,
        sum(tracker_closed) AS tracker_closed, sum(forum) AS forum,
        sum(docs) AS docs, sum(downloads) AS downloads,
        sum(cvs_commits) AS cvs_commits, sum(tasks_opened) AS tasks_opened,
@@ -1348,7 +1348,7 @@ function group_act_monthly($month,$end) {
 INSERT INTO rep_group_act_monthly (group_id, month, tracker_opened,
        tracker_closed, forum, docs, downloads, cvs_commits, tasks_opened,
        tasks_closed)
-SELECT group_id, $1 AS month, sum(tracker_opened) AS tracker_opened,
+SELECT group_id, $1::int AS month, sum(tracker_opened) AS tracker_opened,
        sum(tracker_closed) AS tracker_closed, sum(forum) AS forum,
        sum(docs) AS docs, sum(downloads) AS downloads,
        sum(cvs_commits) AS cvs_commits,
