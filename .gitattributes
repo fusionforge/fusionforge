@@ -43,7 +43,6 @@ gforge/common/include/UserManager.class.php -text
 gforge/common/include/config.php -text
 gforge/common/include/database-mysql.php -text
 gforge/common/include/group_section_texts.php -text
-gforge/common/include/plugins_utils.php -text
 gforge/common/include/rbac_texts.php -text
 gforge/common/include/tag_cloud.php -text
 gforge/common/include/utils_crossref.php -text
@@ -3522,6 +3521,7 @@ gforge/www/images/smiles/icon_twisted.gif -text
 gforge/www/images/smiles/icon_wink.gif -text
 gforge/www/images/t.png -text
 gforge/www/images/t2.png -text
+gforge/www/include/plugins_utils.php -text
 gforge/www/include/unicode.php -text
 gforge/www/js/common.js -text
 gforge/www/js/sortable.js -text
