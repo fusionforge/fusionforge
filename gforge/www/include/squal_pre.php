@@ -25,9 +25,11 @@ require_once $gfcommon.'include/database-'.$sys_database_type.'.php';
 require_once $gfcommon.'include/session.php';
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'include/User.class.php';
+require_once $gfcommon.'include/UserManager.class.php';
 require_once $gfcommon.'include/Permission.class.php';
 require_once $gfcommon.'include/utils.php';
 require_once $gfcommon.'include/Group.class.php';
+require_once $gfcommon.'include/ProjectManager.class.php';
 require_once $gfcommon.'include/escapingUtils.php';
 require_once $gfcommon.'include/gettext.php';
 

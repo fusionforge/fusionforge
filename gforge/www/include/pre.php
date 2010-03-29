@@ -56,6 +56,9 @@ if ($sys_use_jabber) {
 //library to determine browser settings
 require_once $gfwww.'include/browser.php';
 
+//Codendi class for httpRequest
+require_once $gfcommon.'include/HTTPRequest.class.php';
+
 //base error library for new objects
 require_once $gfcommon.'include/Error.class.php';
 
@@ -82,9 +85,13 @@ $SYS=new $sys_account_manager_type();
 
 //user functions like get_name, logged_in, etc
 require_once $gfcommon.'include/User.class.php';
+require_once $gfcommon.'include/UserManager.class.php';
 
 //group functions like get_name, etc
 require_once $gfcommon.'include/Group.class.php';
+
+//ProjectManager from Codendi
+require_once $gfcommon.'include/ProjectManager.class.php';
 
 //permission functions
 require_once $gfcommon.'include/Permission.class.php';
