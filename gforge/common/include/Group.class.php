@@ -2434,6 +2434,15 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		return $rolesId;
 	}
 	
+	function normalizeAllRoles () {
+		$roles = $this->getRolesId ;
+		
+		foreach ($roles as $role_id) {
+			$r = new Role ($this, $role_id) ;
+			$r->normalizeData () ;
+		}
+	}
+
 	/**
 	 *	getUnixStatus - Status of activation of unix account.
 	 *
