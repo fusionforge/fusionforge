@@ -3433,6 +3433,7 @@ gforge/translations/sv.po -text
 gforge/translations/th.po -text
 gforge/translations/zh_CN.po -text
 gforge/translations/zh_TW.po -text
+gforge/utils/fixscripts/normalize_roles.php -text
 gforge/utils/fusionforge-shell-postgresql.spec -text
 gforge/utils/inject-files.php -text
 gforge/utils/inject-groups.php -text
