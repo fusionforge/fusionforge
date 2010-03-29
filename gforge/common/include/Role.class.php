@@ -276,7 +276,7 @@ class Role extends Error {
 		foreach ($arr as $section) {
 			if (array_key_exists ($section, $this->setting_array)) {
 				$new_sa[$section][0] = $this->setting_array[$section][0] ;
-			} elseif (array_key_exists ($this->data_array['role_name'], $this->defaults
+			} elseif (array_key_exists ($this->data_array['role_name'], $this->defaults)
 						    && array_key_exists ($section, $this->defaults[$this->data_array['role_name']])) {
 					  $new_sa[$section][0] = $this->defaults[$this->data_array['role_name']][$section] ;
 			} else {
