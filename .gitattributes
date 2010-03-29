@@ -20,6 +20,11 @@ gforge/CHANGES -text
 gforge/INSTALL.restricted -text
 gforge/NEWS -text
 gforge/backend/shell/apache.sh svneol=native#unset
+gforge/common/dao/CodendiDataAccess.class.php -text
+gforge/common/dao/include/DataAccess.class.php -text
+gforge/common/dao/include/DataAccessException.class.php -text
+gforge/common/dao/include/DataAccessObject.class.php -text
+gforge/common/dao/include/DataAccessResult.class.php -text
 gforge/common/docman/Parsedata.class.php -text
 gforge/common/docman/engine/parser_doc.php -text
 gforge/common/docman/engine/parser_html.php -text
