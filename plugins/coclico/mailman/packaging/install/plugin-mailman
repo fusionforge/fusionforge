@@ -1,0 +1,6 @@
+common/*                  usr/share/gforge/plugins/mailman/common/
+www/*                     usr/share/gforge/plugins/mailman/www/
+cronjobs/*                usr/share/gforge/cronjobs
+etc/plugins/mailman/*     etc/gforge/plugins/mailman/
+usr/lib/mailman/Mailman/* usr/lib/mailman/Mailman/
+var/lib/mailman/lists/*   var/lib/mailman/lists/

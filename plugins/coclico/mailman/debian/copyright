@@ -1,0 +1,63 @@
+The "sourceforge" package was first debianised on Wed, 22 Nov 2000
+22:06:35 +0100 by Roland Mas <lolando@debian.org>.  Work has been
+constant since then, and the package evolved a great deal.  It began
+to work, for a start, and then it evolved into GForge, what with the
+more recent versions of the Sourceforge software having been made
+proprietary.  And then in early 2009 it evolved into FusionForge, what
+with the more recent versions of GForge having been rewritten as
+proprietary software without a name change.
+
+FusionForge is Copyright © 2009-2010 by several people, including:
+Alain Peyrat            <aljeux@free.fr>
+Alexandre Neymann       <alexandre.neymann@dgfip.finances.gouv.fr>
+Christian Bayle         <bayle@debian.org>
+Roland Mas              <lolando@debian.org>
+Gonéri Le Bouder        <goneri.lebouder@atosorigin.com>
+Julien Heyman 		<julien.heyman@atosorigin.com>
+Olivier Meunier 	<olivier.meunier@centraliens.net>
+
+GForge itself is Copyright © 2000-2008 by a fair number of people,
+including:
+Tim Perdue              <tim@gforge.org>
+Roland Mas              <99.roland.mas@aist.enst.fr>
+Christian Bayle         <gforge@free.fr>
+Tom Copeland            <tom@infoether.com>
+Guillaume Smet          <guillaume-gforge@smet.org>
+Francisco Gimeno        <kikov@kikov.org>
+Sung Kim                <hunkims@gmail.com>
+Alain Peyrat            <aljeux@free.fr>
+
+Past Members of the development team include:
+Reinhard Spisser
+Ryan T. Sammartino
+Edward Ritter
+Michael Jennings
+
+Since FusionForge, and GForge before it, was initially a fork of
+Sourceforge, here's the copyright info for the Sourceforge software:
+,----
+| The original sources were downloaded from http://www.sourceforge.net/
+| 
+| Authors: The Sourceforge crew at VA Linux.  They are many, they
+| change as time goes by, and they are listed on the Sourceforge
+| website.  Let them be thanked for their work.
+| 
+| Copyright:
+| 
+| This software is Copyright © 1999-2000 by VA Linux.
+| 
+| You are free to distribute this software under the terms of the GNU
+| General Public License.
+`----
+
+The packaging and installing scripts (in the debian/ and deb-specific/
+directories amongst others) are Copyright © 2000-2010 by Christian
+Bayle <bayle@aist.enst.fr> and Roland Mas <lolando@debian.org>.  You
+are free to use and redistribute them under the terms of the GNU
+General Public License, version 2 or (at your option) any later
+version published by the Free Software Foundation.
+
+See Also Copyright file in fusionforge package
+
+On Debian systems, the complete text of the GNU General Public License
+can be found in the /usr/share/common-licenses directory.

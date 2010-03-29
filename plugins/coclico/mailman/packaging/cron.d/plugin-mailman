@@ -1,0 +1,16 @@
+FFCRON="/usr/share/gforge/cronjobs"
+FFUSER=gforge
+
+# You may need to change the pathname to php CLI (command line interface)
+PHP="/usr/bin/php -q -d include_path=.:/etc/gforge:/usr/share/gforge:/usr/share/gforge/www/include:/usr/share/gforge/plugins"
+
+# Don't mail command output to anyone.
+MAILTO=""
+
+#
+# Regular cron jobs for the lists-mailman package
+#
+
+# Mailman-list creation
+* * * * * root $PHP $FFCRON/manage_mailmanlists.php 
+
