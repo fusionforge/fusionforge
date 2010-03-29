@@ -20,6 +20,9 @@
  * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
  * USA
+ *
+ * Portions Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
+ * Portions Copyright 2010 (c) Mélanie Le Bail
  */
 
 class Plugin extends Error {
@@ -30,7 +33,7 @@ class Plugin extends Error {
 	 * Plugin() - constructor
 	 *
 	 */
-	function Plugin () {
+	function Plugin ($id=0) {
 		$this->Error() ;
 		$this->name = false ;
 		$this->hooks = array () ;
@@ -43,6 +46,12 @@ class Plugin extends Error {
 	 */
 	function GetHooks () {
 		return $this->hooks ;
+	}
+	/**
+	 * _addHooks() - add a hook to the list of hooks
+	 */
+	function _addHook ($name) {
+		return $this->hooks[]=$name ;
 	}
 
 	/**
