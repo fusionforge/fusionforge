@@ -512,8 +512,10 @@ class ProjectGroup extends Error {
                         return false;
                 }
 
-
 		db_commit();
+
+		$this->Group->normalizeAllRoles () ;
+
 		return true;
 	}
 

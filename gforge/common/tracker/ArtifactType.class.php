@@ -881,6 +881,9 @@ class ArtifactType extends Error {
 //echo '11'.db_error();
 		
 		db_commit();
+
+		$this->Group->normalizeAllRoles () ;
+
 		return true;
 	}
 
