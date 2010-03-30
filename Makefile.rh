@@ -188,4 +188,5 @@ htmlpurifier: rpmprep
 php-jpgraph: rpmprep
 	cp 3rd-party/php-jpgraph/libphp-jpgraph_1.5.2.orig.tar.gz $(RPM_TMP)/SOURCES/jpgraph-1.5.2.tar.gz
 	zcat 3rd-party/php-jpgraph/libphp-jpgraph_1.5.2-12.diff.gz > $(RPM_TMP)/SOURCES/libphp-jpgraph_1.5.2-12.diff
+	cp 3rd-party/php-jpgraph/*.patch $(RPM_TMP)/SOURCES/
 	rpmbuild --quiet --clean -ba 3rd-party/php-jpgraph/php-jpgraph.spec

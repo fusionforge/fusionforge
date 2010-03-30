@@ -20,6 +20,7 @@ Obsoletes: jpgraph
 Provides: jpgraph
 
 Patch0: libphp-jpgraph_1.5.2-12.diff
+Patch1: jpgraph-rhel-fonts.patch
 
 
 %description
@@ -48,6 +49,7 @@ This package includes the documentation for %{name}.
 %prep
 %setup -n %{real_name}-%{version}
 %patch0 -p1
+%patch1 -p1
 
 ### Change the default TTF_DIR to Red Hat's TTF_DIR.
 %{__perl} -pi.orig -e 's|/usr/X11R6/lib/X11/fonts/truetype/|/usr/X11R6/lib/X11/fonts/TTF/|' src/jpgraph.php

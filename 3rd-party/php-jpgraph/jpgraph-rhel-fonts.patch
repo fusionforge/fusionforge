@@ -1,0 +1,55 @@
+diff -Naur jpgraph-1.5.2.org/src/jpgraph_dir.php jpgraph-1.5.2/src/jpgraph_dir.php
+--- jpgraph-1.5.2.org/src/jpgraph_dir.php	2010-03-30 23:47:09.000000000 +0200
++++ jpgraph-1.5.2/src/jpgraph_dir.php	2010-03-30 23:51:52.000000000 +0200
+@@ -25,9 +25,9 @@
+ DEFINE("APACHE_CACHE_DIR","/jpgraph_cache/");
+ 
+ // Directory for TTF fonts. Must end with '/'
+-DEFINE("TTF_DIR","/usr/share/fonts/truetype/msttcorefonts/");
++DEFINE("TTF_DIR","/usr/local/fonts/ttf/");
+ 
+-// Add Free liberation font as suggested by Alain Peyrat
+-DEFINE("LIBERATION_DIR","/usr/share/fonts/truetype/ttf-liberation/");
++// Add Free liberation font
++DEFINE("LIBERATION_DIR","/usr/share/fonts/liberation/");
+ 
+ ?>
+diff -Naur jpgraph-1.5.2.org/src/jpgraph.php jpgraph-1.5.2/src/jpgraph.php
+--- jpgraph-1.5.2.org/src/jpgraph.php	2010-03-30 23:47:09.000000000 +0200
++++ jpgraph-1.5.2/src/jpgraph.php	2010-03-30 23:55:57.000000000 +0200
+@@ -1095,13 +1095,13 @@
+     function TTF() {
+ 	// Base file names for available fonts
+ 	$this->font_fam=array(
+-	    FF_COURIER => TTF_DIR."Courier_New",
+-	    FF_VERDANA => TTF_DIR."Verdana",
+-	    FF_TIMES => TTF_DIR."Times",
+-	    FF_HANDWRT => TTF_DIR."Handwriting",
+-	    FF_COMIC => TTF_DIR."Comic",
+-	    FF_ARIAL => TTF_DIR."Arial",
+-	    FF_BOOK => TTF_DIR."Bookant",
++	    FF_COURIER => TTF_DIR."courier",
++	    FF_VERDANA => TTF_DIR."verdana",
++	    FF_TIMES => TTF_DIR."times",
++	    FF_HANDWRT => TTF_DIR."handwriting",
++	    FF_COMIC => TTF_DIR."comic",
++	    FF_ARIAL => TTF_DIR."arial",
++	    FF_BOOK => TTF_DIR."bookant",
+             FF_LIBERATION_SANS => LIBERATION_DIR."LiberationSans-Regular");
+     }
+ 
+@@ -1114,11 +1114,11 @@
+ 	switch( $style ) {
+ 	    case FS_NORMAL:
+ 		break;
+-	    case FS_BOLD: $f .= "_Bold";
++	    case FS_BOLD: $f .= "bd";
+ 		break;
+-	    case FS_ITALIC: $f .= "_Italic";
++	    case FS_ITALIC: $f .= "i";
+ 		break;
+-	    case FS_BOLDIT: $f .= "_Bold_Italic";
++	    case FS_BOLDIT: $f .= "bi";
+ 		break;
+ 	    default:
+ 		JpGraphError::Raise("<b>JpGraph Error:</b> Unknown TTF Style.");

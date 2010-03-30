@@ -48,7 +48,7 @@ function installRedhat() {
 	addFusionForgeYumRepo();
 	addDagRPMForgeYumRepo();
 	INFO("Installing packages: Executing YUM. Please wait...\n\n\n");
-	passthru("yum -y install httpd php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php-pgsql subversion mod_dav_svn postfix rcs php-gd mod_ssl wget openssh which htmlpurifier php-mbstring php-jpgraph-1.5.2 poppler-utils php-pecl-zip antiword");
+	passthru("yum -y install httpd php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php-pgsql subversion mod_dav_svn postfix rcs php-gd mod_ssl wget openssh which liberation-fonts htmlpurifier php-mbstring php-jpgraph-1.5.2 poppler-utils php-pecl-zip antiword");
 }
 
 function installRHEL4() {
