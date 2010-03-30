@@ -169,7 +169,7 @@ class MailmanList extends Error {
 		// Raise an event
 		require_once('mailman/include/events/SystemEvent_MAILMAN_LIST_CREATE.class.php');
 		$systemevent =	SystemEventManager::instance();
-		$systemevent->createEvent('MAILMAN_LIST_CREATE', array('group_list_id' => $this->groupMailmanListId,),SystemEvent::PRIORITY_MEDIUM);
+		$systemevent->createEvent('MAILMAN_LIST_CREATE', $this->groupMailmanListId,SystemEvent::PRIORITY_MEDIUM);
 		$this->fetchData($this->groupMailmanListId);
 		$user=UserManager::instance()->getUserByID($creator_id);
 	
@@ -178,7 +178,7 @@ class MailmanList extends Error {
 			$this->setInvalidEmailError();
 			return false;
 		} else {
-			sendCreationMail($userEmail,$realListName,$listPassword);
+			sendCreationMail($userEmail,$this);
 		}
 
 		return true;
