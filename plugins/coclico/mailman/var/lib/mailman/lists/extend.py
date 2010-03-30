@@ -20,8 +20,8 @@ def extendMemberAdaptor(list):
     ######################
     #Forge default session
     dbparam['cookiename']='session_ser'
-    dbparam['queryCookieMail']="SELECT email FROM plugin_defaultsession,users WHERE users.user_id=plugin_defaultsession.user_id AND session_hash = substring('%s','.*-%%2A-(.*)');"
-    dbparam['queryCookieId']="SELECT user_id FROM plugin_defaultsession WHERE session_hash = substring('%s','.*-%%2A-(.*)');"
+    dbparam['queryCookieMail']="SELECT email FROM user_session,users WHERE users.user_id=user_session.user_id AND session_hash = substring('%s','.*-%%2A-(.*)');"
+    dbparam['queryCookieId']="SELECT user_id FROM user_session WHERE session_hash = substring('%s','.*-%%2A-(.*)');"
 
     dbparam['queryIsAdmin'] = "SELECT COUNT(*) FROM mail_group_list WHERE list_admin=%s AND list_name='%s';" 
     dbparam['queryIsMonitoring'] = "SELECT COUNT(*) FROM "+dbparam['mailman_table']+", users "+" WHERE users.email = "+dbparam['mailman_table']+".address"+" AND users.user_id=%s AND listname='%s';" 
