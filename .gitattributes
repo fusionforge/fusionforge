@@ -299,6 +299,7 @@ gforge/packaging/install/web-apache2-vhosts -text
 gforge/packaging/links/common -text
 gforge/packaging/links/plugin-scmdarcs -text
 gforge/packaging/links/plugin-scmgit -text
+gforge/packaging/links/web-apache2 -text
 gforge/plugins/contribtracker/INSTALL -text
 gforge/plugins/contribtracker/bin/db-delete.pl -text
 gforge/plugins/contribtracker/bin/db-upgrade.pl -text
