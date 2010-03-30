@@ -27,14 +27,19 @@ from Mailman import ExternalConnector
 from Mailman import mm_cfg
 from Mailman import Utils
 from Mailman.Logging.Syslog import syslog
-import psycopg2
+
+
 
 class PsycopgConnector(ExternalConnector.ExternalConnector):
 	def __init__(self,mlist,param):
 		ExternalConnector.ExternalConnector.__init__(self,mlist,param)
 	def __db_connect__(self):
 		if mm_cfg.connection == 0:
-			if self._param['dbhost']:
+			try:
+				import psycopg2
+			except ImportError:
+				return False
+			if self._param['dbhost']<> "127.0.0.1" and self._param['dbhost']<> "127.0.1.1" and self._param['dbhost']<> "":
 				connection = psycopg2.connect (host = self._param['dbhost'], user = self._param['dbuser'], password = self._param['dbpassword'], database = self._param['database'])
 			else :
 				connection = psycopg2.connect (user = self._param['dbuser'], password = self._param['dbpassword'], database = self._param['database'])
