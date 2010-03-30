@@ -109,7 +109,6 @@ class BackendMailmanList {
         $dar = $this->_getMailingListDao()->searchByGroupListId($group_list_id);
 
         if ($row = $dar->getRow()) {
-        	echo "j'ai une row";
             $list = new MailmanList($row['group_id'],$row['group_list_id']);
             $user=UserManager::instance()->getUserByID($list->getListAdminId());
 			$list_admin_email= $user->getEmail();
@@ -117,12 +116,8 @@ class BackendMailmanList {
 
             if ((! is_dir($list_dir))&&($list->isPublic() != 9)) {
                 // Create list
-                echo "execution system";
-               system($GLOBALS['mailman_bin_dir']."/newlist -q ".$list->getName()." ".$list_admin_email." ".$list->getPassword()." >/dev/null");
-				echo "ok pour system";
-				//$list->update($list->getDescription(),$list->isPublic(),'1');
-				echo "update done";
-                // Then update configuraion
+                system($GLOBALS['mailman_bin_dir']."/newlist -q ".$list->getName()." ".$list_admin_email." ".$list->getPassword()." >/dev/null");
+		// Then update configuraion
                 return $this->updateListConfig($list);
             }
         }
