@@ -2905,6 +2905,8 @@ eval {
 
     &update_with_sql("20100308-forum-attachment-types","4.8.99-6");
 
+    &update_with_sql("20100330-add-system-event","5.0.0-1");
+
     ########################### INSERT HERE #################################
 
     &debug ("It seems your database $action went well and smoothly. That's cool.") ;

@@ -92,6 +92,7 @@ gforge/db/20090507-browse_list.sql -text
 gforge/db/20090507-install_workflow.php -text
 gforge/db/20100308-drop-forum-attachment-type.sql -text
 gforge/db/20100308-forum-attachment-types.sql -text
+gforge/db/20100330-add-system-event.sql -text
 gforge/db/FTI-20061025.sql -text
 gforge/db/gforge-data-mysql.sql -text
 gforge/db/gforge-struct-mysql.sql -text
