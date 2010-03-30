@@ -23,13 +23,14 @@ LOCALREPOUBU=/var/www/ubuntu-fusionforge-$(BRANCH)
 DEBIANLIST=1lenny 2squeeze 3sid
 UBUNTULIST=1jaunty 1karmic 1lucid
 ASKPASS=--ask-passphrase
-ASKPASS=
+#ASKPASS=
 
 # Try if a local mirror is available
 UBUNTUOP=$(shell wget -q -S http://localhost/ubuntu -O /dev/null && echo "--mirror http://localhost/ubuntu" || echo "--mirror http://archive.ubuntu.com/ubuntu") --debootstrap debootstrap
 DEBIANOP=$(shell wget -q -S http://localhost/debian -O /dev/null && echo "--mirror http://localhost/debian" || echo "--mirror http://ftp.fr.debian.org/debian") --debootstrapopts --include=apt
 
 MAJOR=$(shell head -1 $(PKGDIR)/debian/changelog 2>/dev/null| sed 's/.*(.:\(.[^-]*\).*).*/\1/')
+EPOCH=$(shell head -1 $(PKGDIR)/debian/changelog 2>/dev/null| sed 's/.*(\(.\):.*).*/\1/')
 ORIGMINOR=$(shell head -1 $(PKGDIR)/debian/changelog 2>/dev/null| sed 's/.*(.[^-]*[-]\(.*\)).*/\1/')
 #svnrev=$(shell LANG=C svn info | grep Revision | cut -d: -f2| sed 's/ //g')
 
@@ -63,7 +64,7 @@ default: list
 
 list:
 	@echo ======================================================================================
-	@echo '=                    Available target are listed below $(BRANCH)                    ='
+	@echo '=                    Available target are listed below $(BRANCH) $(EPOCH) $(MAJOR)  ='
 	@echo ======================================================================================
 	@cat Makefile.debian | grep '^.*:.*#$$' | sed 's/PKGLONGNAME/$(PKGLONGNAME)/' | sed 's/^\(.*:\).*#\(.*\)#$$/\1		\2/'
 	@echo ======================================================================================
@@ -165,7 +166,7 @@ $(BUILDFILES)/$(DSCFILE): $(BUILDFILES)/$(ORIGFILE)
 	cd $(PKGDIR) ; debclean
 	find $(PKGDIR) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -pdumB $(BUILDFILES)/
 	# Set version for given distrib
-	cd $(BUILDFILES)/$(PKGDIR); dch -b -v $(MAJOR)$(MINOR) -D UNRELEASED "This is $(DISTRIB) autobuild"
+	cd $(BUILDFILES)/$(PKGDIR); dch -b -v $(EPOCH):$(MAJOR)$(MINOR) -D UNRELEASED "This is $(DISTRIB) autobuild"
 	perl -pi -e "s/UNRELEASED/$(DISTRIB)/" $(BUILDFILES)/$(PKGDIR)/debian/changelog
 	cd $(BUILDFILES) ; dpkg-source -b $(PKGDIR)
 	rm -rf $(BUILDFILES)/$(PKGDIR)
@@ -174,7 +175,7 @@ $(BUILDFILES)/$(PDSCFILE): $(BUILDFILES)/$(ORIGFILE)
 	cd $(PKGDIR) ; debclean
 	find $(PKGDIR) -type f -or -type l | grep -v '/CVS/' | grep -v '/.svn/' | grep -v rpm-specific | grep -v docs/phpdoc/docs | grep -v ^./debian/ | cpio -pdumB $(BUILDFILES)/
 	# Set version for given distrib
-	cd $(BUILDFILES)/$(PKGDIR); dch -b -v $(MAJOR)$(MINOR)+p -D UNRELEASED "This is $(DISTRIB) autobuild"
+	cd $(BUILDFILES)/$(PKGDIR); dch -b -v $(EPOCH):$(MAJOR)$(MINOR)+p -D UNRELEASED "This is $(DISTRIB) autobuild"
 	perl -pi -e "s/UNRELEASED/$(DISTRIB)/" $(BUILDFILES)/$(PKGDIR)/debian/changelog
 	cd $(BUILDFILES) ; dpkg-source -b $(PKGDIR)
 	rm -rf $(BUILDFILES)/$(PKGDIR)
