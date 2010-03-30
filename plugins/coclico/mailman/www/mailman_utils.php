@@ -17,14 +17,34 @@ require_once 'mailman/include/MailmanListFactory.class.php';
 $current_user=UserManager::instance()->getCurrentUser();
 
 
-function sendCreationMail($userEmail,$listname,$listpassword) {
+function sendCreationMail($userEmail,&$list) {
+ $message = sprintf(_('A mailing list will be created on %1$s in few minutes 
+and you are the list administrator.
 
-	//$message = $Language->getText('mail_admin_index','list_create_explain',array($GLOBALS['sys_name'], $listname.'@' .$GLOBALS['sys_lists_host'],$list_server."/mailman/listinfo/$listname",$list_server."/mailman/admin/$list_name",$listpassword));
+This list is: %3$s@%2$s .
+
+Your mailing list info is at:
+%4$s .
+
+List administration can be found at:
+%5$s .
+
+Your list password is: %6$s .
+You are encouraged to change this password as soon as possible.
+
+Thank you for registering your project with %1$s.
+
+-- the %1$s staff
+'), $GLOBALS['sys_name'], $GLOBALS['sys_lists_host'], $list->getName(), $list->getExternalInfoUrl(), 'http://'.$GLOBALS['sys_lists_host'].'/mailman/admin/'.$this->getName(), $list->getPassword());
+       $mailSubject = sprintf(_('%1$s New Mailing List'), $GLOBALS['sys_name']);
+
+
+
 
 	$hdrs = "From: ".$GLOBALS['sys_email_admin'].$GLOBALS['sys_lf'];
 	$hdrs .='Content-type: text/plain; charset=utf-8'.$GLOBALS['sys_lf'];
 
-	//mail ($userEmail,$GLOBALS['sys_name']." ".$Language->getText('mail_admin_index','new_mail_list'),$message,$hdrs);
+	mail ($userEmail,$mailSubject,$message,$hdrs);
 
 
 }
