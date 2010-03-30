@@ -16,5 +16,5 @@ CREATE TABLE system_event (
     log text,
     create_date integer DEFAULT 0,
     process_date integer DEFAULT 0,
-    end_date integer DEFAULT 0,
+    end_date integer DEFAULT 0
 );
