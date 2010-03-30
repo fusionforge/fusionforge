@@ -61,6 +61,7 @@ db/20090507-add_project_query.sql	usr/share/gforge/db/
 db/20090507-browse_list.sql		usr/share/gforge/db/
 db/20100308-forum-attachment-types.sql	usr/share/gforge/db/
 db/20100330-add-system-event.sql	usr/share/gforge/db/
+db/20100331-alter-system-event.sql	usr/share/gforge/db/
 #
 utils/inject-users.php usr/share/gforge/bin/
 utils/inject-groups.php usr/share/gforge/bin/

@@ -2906,6 +2906,7 @@ eval {
     &update_with_sql("20100308-forum-attachment-types","4.8.99-6");
 
     &update_with_sql("20100330-add-system-event","5.0.0-1");
+    &update_with_sql("20100331-alter-system-event","5.0.0-2");
 
     ########################### INSERT HERE #################################
 
