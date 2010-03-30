@@ -5,8 +5,8 @@ class SeleniumRemoteSuite extends PHPUnit_Framework_TestSuite
 	protected function setUp()
 	{
 		system("cd scripts; ./start_vm.sh centos52.local");
-		system("scp ../../build/packages/fusionforge-*allinone.tar.bz2 root@centos52:");
-		system("ssh root@centos52 'tar jxf fusionforge-*allinone.tar.bz2'");
+		system("scp ../../build/packages/fusionforge-*.tar.bz2 root@centos52:");
+		system("ssh root@centos52 'tar jxf fusionforge-*.tar.bz2'");
 		system("ssh root@centos52 'cd fusionforge-*; FFORGE_RPM_REPO=http://buildbot.fusionforge.org/job/fusionforge-trunk-build-rpm/ws/build/packages/ FFORGE_DB=fforge FFORGE_USER=gforge FFORGE_ADMIN_USER=ffadmin FFORGE_ADMIN_PASSWORD=ffadmin ./install.sh centos52.local'");
 
 		system("scp -r ../tests root@centos52:/opt");
