@@ -98,7 +98,7 @@ if ($group_id) {
 					'title' => _('Add a Mailing List'),
 					'help'=>'CommunicationServices.html#MailingLists',
 					'admin' => '1'));
-		printf(_('<p>Lists are named in this manner:<br /><strong>projectname-listname@%1$s</strong></p><p>It will take <span class="important">6-24 Hours</span> for your list to be created.</p>'), $GLOBALS['sys_lists_host']);
+		printf(_('<p>Lists are named in this manner:<br /><strong>projectname-listname@%1$s</strong></p><p>It will take <span class="important">few minutes</span> for your list to be created.</p>'), $GLOBALS['sys_lists_host']);
 
 		$mlFactory = new MailmanListFactory($Group);
 		if (!$mlFactory || !is_object($mlFactory) || $mlFactory->isError()) {
