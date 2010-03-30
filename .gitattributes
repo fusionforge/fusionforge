@@ -18,6 +18,10 @@
 3rd-party/mailman/mailman_2.1.13.orig.tar.gz -text svneol=unset#unset
 3rd-party/nusoap/Makefile -text
 3rd-party/nusoap/Makefile.debian -text
+3rd-party/php-jpgraph/jpgraph-1.5.2-php5_and_liberation_fonts.patch -text
+3rd-party/php-jpgraph/libphp-jpgraph_1.5.2-12.diff.gz -text svneol=unset#unset
+3rd-party/php-jpgraph/libphp-jpgraph_1.5.2.orig.tar.gz -text svneol=unset#unset
+3rd-party/php-jpgraph/php-jpgraph.spec -text
 /README -text
 delivery/fusionforge/package/config -text
 delivery/gforge/package/config -text

@@ -1,0 +1,172 @@
+diff -Naur jpgraph-1.5.2.org/src/jpgraph_dir.php jpgraph-1.5.2/src/jpgraph_dir.php
+--- jpgraph-1.5.2.org/src/jpgraph_dir.php	2002-03-01 01:46:17.000000000 +0100
++++ jpgraph-1.5.2/src/jpgraph_dir.php	2008-12-09 21:55:28.000000000 +0100
+@@ -26,5 +26,6 @@
+ 
+ // Directory for TTF fonts. Must end with '/'
+ DEFINE("TTF_DIR","/usr/local/fonts/ttf/");
++DEFINE("LIBERATION_DIR","/usr/share/fonts/liberation/");
+ 
+ ?>
+diff -Naur jpgraph-1.5.2.org/src/jpgraph_gantt.php jpgraph-1.5.2/src/jpgraph_gantt.php
+--- jpgraph-1.5.2.org/src/jpgraph_gantt.php	2002-03-01 01:46:17.000000000 +0100
++++ jpgraph-1.5.2/src/jpgraph_gantt.php	2008-12-09 21:55:28.000000000 +0100
+@@ -1157,10 +1157,6 @@
+ 	$this->iCaptionMargin=$aMarg;
+     }
+ 
+-    function GetLineNbr() {
+-	return 0;
+-    }
+-
+     function GetAbsHeight($aImg) {
+ 	return 0;
+     }
+@@ -1189,7 +1185,7 @@
+ 	$this->iProgress = $aProg;
+     }
+ 
+-    function SetPattern($aPattern,$aColor="blue",$aDensity=98) {		
++    function SetPattern($aPattern,$aColor="blue",$aDensity=100) {		
+ 	$this->iPattern = $aPattern;
+ 	$this->iColor = $aColor;
+ 	$this->iDensity = $aDensity;
+diff -Naur jpgraph-1.5.2.org/src/jpgraph.php jpgraph-1.5.2/src/jpgraph.php
+--- jpgraph-1.5.2.org/src/jpgraph.php	2002-03-01 01:46:17.000000000 +0100
++++ jpgraph-1.5.2/src/jpgraph.php	2008-12-09 21:55:28.000000000 +0100
+@@ -30,7 +30,8 @@
+ // regenerate the image. Note that even if reading the cache is 
+ // disabled the cached will still be updated with the newly generated
+ // image. Set also "USE_CACHE" below.
+-DEFINE("READ_CACHE",true);
++//DEFINE("READ_CACHE",true);
++DEFINE("READ_CACHE",false);
+ 
+ // Should the cache be used at all? By setting this to false no
+ // files will be generated in the cache directory.  
+@@ -38,7 +39,8 @@
+ // false will still create the image in the cache directory
+ // just not use it. By setting USE_CACHE=false no files will even
+ // be generated in the cache directory.
+-DEFINE("USE_CACHE",true);
++//DEFINE("USE_CACHE",true);
++DEFINE("USE_CACHE",false);
+ 
+ // If the color palette is full should JpGraph try to allocate
+ // the closest match? If you plan on using background image or
+@@ -104,6 +106,7 @@
+ DEFINE("FF_COMIC",14);
+ DEFINE("FF_ARIAL",15);
+ DEFINE("FF_BOOK",16);
++DEFINE("FF_LIBERATION_SANS",17);
+ 
+ // TTF Font styles
+ DEFINE("FS_NORMAL",1);
+@@ -251,11 +254,11 @@
+ // Check what version of the GD library is being used
+ //
+ if(function_exists('imagecopyresampled') ) {
+-    $gd2 = true;
++    $GLOBALS['gd2'] = true;
+     $copyfunc = "imagecopyresampled";
+ } elseif(function_exists('imagecopyresized')) {
+     $copyfunc = "imagecopyresized";
+-    $gd2 = false;
++    $GLOBALS['gd2'] = false;
+ }
+ else {
+     JpGraphError::Raise("<b>JpGraph Error:</b> Your PHP installation does not 
+@@ -272,7 +275,6 @@
+ // (top level), i.e it is safe to call this function
+ // from a script that uses JpGraph
+ function GenImgName() {
+-    global $HTTP_SERVER_VARS;
+     $supported = imagetypes();
+     if( $supported & IMG_PNG )
+ 	$img_format="png";
+@@ -280,10 +282,10 @@
+ 	$img_format="gif";
+     elseif( $supported & IMG_JPG )
+ 	$img_format="jpeg";
+-    if( !isset($HTTP_SERVER_VARS['PHP_SELF']) )
++    if( !isset($_SERVER['PHP_SELF']) )
+ 	JpGraphError::Raise("<b>JpGraph Error:</b> Can't access PHP_SELF, PHP global variable. You can't run PHP from command line
+ 		if you want to use the 'auto' naming of cache or image files.");
+-    $fname=basename($HTTP_SERVER_VARS['PHP_SELF']);
++    $fname=basename($_SERVER['PHP_SELF']);
+     // Replace the ".php" extension with the image format extension
+     return substr($fname,0,strlen($fname)-4).".".$img_format;
+ }
+@@ -489,6 +491,7 @@
+ 	
+     // Specify a background image
+     function SetBackgroundImage($aFileName,$aBgType=BKIMG_FILLPLOT,$aImgFormat="png") {
++/* CB Not any more bugging
+ 
+ 	if( $GLOBALS["gd2"] && !USE_TRUECOLOR ) {
+ 	    JpGraphError::Raise("<b>JpGraph Error:</b>You are using GD 2.x and are 
+@@ -500,6 +503,7 @@
+ using any truetype fonts with truecolor images will result in very
+ poor quality fonts.");
+ 	}
++*/
+ 
+ 	$this->background_image = $aFileName;
+ 	$this->background_image_type=$aBgType;
+@@ -1064,6 +1068,10 @@
+ 	    $this->img->Rectangle(0,0,$this->img->width-1,$this->img->height-1);		
+ 	}
+     }
++    // Set Margin by Christian Bayle
++    function SetMargin($lm,$rm,$tm,$bm) {
++    	$this->img->SetMargin($lm,$rm,$tm,$bm);
++    }
+ } // Class
+ 
+ 
+@@ -1084,7 +1092,8 @@
+ 	    FF_HANDWRT => TTF_DIR."handwriting",
+ 	    FF_COMIC => TTF_DIR."comic",
+ 	    FF_ARIAL => TTF_DIR."arial",
+-	    FF_BOOK => TTF_DIR."bookant");
++	    FF_BOOK => TTF_DIR."bookant",
++            FF_LIBERATION_SANS => LIBERATION_DIR."LiberationSans-Regular");
+     }
+ 
+ //---------------
+@@ -3183,7 +3192,7 @@
+ 		}
+ 	    }
+ 	}
+-	elseif($this->font_family >= FF_COURIER && $this->font_family <= FF_BOOK)  { // TTF font
++	elseif($this->font_family >= FF_COURIER && $this->font_family <= FF_LIBERATION_SANS)  { // TTF font
+ 	    $file = $this->ttf->File($this->font_family,$this->font_style);			
+ 	    $angle=$dir;
+ 	    $bbox=ImageTTFBBox($this->font_size,$angle,$file,$txt);
+@@ -3208,7 +3217,7 @@
+ 	    }
+ 	}
+ 	else
+-	    JpGraphError::Raise("<b>JpGraph Error:</b> Unknown font font family specification. ");
++	    JpGraphError::Raise("<b>JpGraph Error:</b> Unknown font family specification: ". $this->font_family);
+     }
+ 	
+     function SetMargin($lm,$rm,$tm,$bm) {
+@@ -3490,7 +3499,16 @@
+     }
+ 	
+     function FilledCircle($xc,$yc,$r) {
+-	imagefilledellipse($this->img,$xc,$yc,2*$r,2*$r,$this->current_color);
++	if( $GLOBALS['gd2'] ) {
++		imagefilledellipse($this->img,$xc,$yc,2*$r,2*$r,$this->current_color);
++        }
++        else {
++        	for( $i=1; $i < 2*$r; $i += 2 ) {
++			$this->Arc($xc,$yc,$i,$i,0,360);
++			$this->Arc($xc,$yc,$i+1,$i,0,360);
++			$this->Arc($xc,$yc,$i+1,$i+1,0,360);
++		}
++	}
+     }
+ 	
+     // Linear Color InterPolation
