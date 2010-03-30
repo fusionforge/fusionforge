@@ -87,7 +87,6 @@ class MailmanListDao extends DataAccessObject {
 
 	function & insertNewList($group_id, $realListName,$isPublic,$listPassword,$creator_id,$requested,$description) {
 		$group_id = $this->da->quoteSmart($group_id);
-		$group_list_id = $this->da->quoteSmart($group_list_id);
 		$realListName = $this->da->quoteSmart($realListName);
 		$isPublic = $this->da->quoteSmart($isPublic);
 		$creator_id = $this->da->quoteSmart($creator_id);
