@@ -3923,6 +3923,8 @@ packaging/tag_delivery_create -text
 packaging/tag_delivery_delete -text
 packaging/tag_packaging_create -text
 packaging/tag_packaging_delete -text
+plugins/coclico/Makefile -text
+plugins/coclico/Makefile.debian -text
 plugins/coclico/mailman/README.txt -text
 plugins/coclico/mailman/bin/db-delete.pl -text
 plugins/coclico/mailman/bin/db-upgrade.pl -text
