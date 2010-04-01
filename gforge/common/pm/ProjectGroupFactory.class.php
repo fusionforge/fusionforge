@@ -96,8 +96,8 @@ class ProjectGroupFactory extends Error {
 	WHERE group_id=$1 AND is_public<3
 	  AND group_project_id IN (SELECT role_setting.ref_id
 			           FROM role_setting, user_group
-				   WHERE role_setting.value::integer >= 0
-                                     AND role_setting.section_name = $2
+                                   WHERE role_setting.section_name = $2
+				     AND role_setting.value::integer >= 0
                                      AND role_setting.ref_id=project_group_list_vw.group_project_id
 				     AND user_group.role_id = role_setting.role_id
 				     AND user_group.user_id=$3)
