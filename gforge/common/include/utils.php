@@ -975,6 +975,11 @@ function util_strip_accents($text) {
 	return utf8_encode($find);
 }
 
+/**
+ * Constructs the forge's URL prefix out of $GLOBALS['sys_urlprefix']
+ * 
+ * @return string
+ */
 function normalized_urlprefix () {
 	$prefix = $GLOBALS['sys_urlprefix'] ;
 	$prefix = ereg_replace ("^/", "", $prefix) ;
@@ -985,6 +990,12 @@ function normalized_urlprefix () {
 	return $prefix ;
 }
 
+/**
+ * Construct full URL from a relative path
+ * 
+ * @param string $path
+ * @return string URL
+ */
 function util_make_url ($path) {
 	if ($GLOBALS['sys_use_ssl']) 
 		$url = "https://" ;
@@ -996,6 +1007,12 @@ function util_make_url ($path) {
 	return $url ;
 }
 
+/**
+ * Construct proper (relative) URI (prepending prefix)
+ * 
+ * @param string $path
+ * @return string URI
+ */
 function util_make_uri ($path) {
 	$path = ereg_replace ("^/", "", $path) ;
 	$uri = normalized_urlprefix () ;
@@ -1017,10 +1034,25 @@ function util_make_link ($path, $text, $extra_params=false, $absolute=false) {
 	}
 }
 
+/**
+ * Create an HTML link to a user's profile page
+ * 
+ * @param string $username
+ * @param int $user_id
+ * @param string $text
+ * @return string
+ */
 function util_make_link_u ($username, $user_id,$text) {
 	return '<a href="' . util_make_url_u ($username, $user_id) . '">' . $text . '</a>' ;
 }
 
+/**
+ * Create URL for user's profile page
+ * 
+ * @param string $username
+ * @param int $user_id
+ * @return string URL
+ */
 function util_make_url_u ($username, $user_id) {
 	if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
 		return util_make_url ("/developer/?user_id=$user_id");
@@ -1029,10 +1061,24 @@ function util_make_url_u ($username, $user_id) {
 	}
 }
 
+/**
+ * Create a HTML link to a project's page
+ * @param string $groupame
+ * @param int $group_id
+ * @param string $text
+ * @return string
+ */
 function util_make_link_g ($groupame, $group_id,$text) {
 	return '<a href="' . util_make_url_g ($groupame, $group_id) . '">' . $text . '</a>' ;
 }
 
+/**
+ * Create URL for a project's page
+ * 
+ * @param string $groupame
+ * @param int $group_id
+ * @return string
+ */
 function util_make_url_g ($groupame, $group_id) {
 	if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
 		return util_make_url ("/project/?group_id=$group_id");
