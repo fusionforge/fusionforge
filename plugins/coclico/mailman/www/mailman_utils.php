@@ -35,7 +35,7 @@ You are encouraged to change this password as soon as possible.
 Thank you for registering your project with %1$s.
 
 -- the %1$s staff
-'), $GLOBALS['sys_name'], $GLOBALS['sys_lists_host'], $list->getName(), $list->getExternalInfoUrl(), 'http://'.$GLOBALS['sys_lists_host'].'/mailman/admin/'.$this->getName(), $list->getPassword());
+'), $GLOBALS['sys_name'], $GLOBALS['sys_lists_host'], $list->getName(), $list->getExternalInfoUrl(), 'http://'.$GLOBALS['sys_lists_host'].'/mailman/admin/'.$list->getName(), $list->getPassword());
        $mailSubject = sprintf(_('%1$s New Mailing List'), $GLOBALS['sys_name']);
 
 
@@ -74,7 +74,7 @@ function display_list($currentList)
 		} else {
 			getIcon();
 			echo '&nbsp;<b>'.$currentList->getName().'</b> [';
-			if($currentList->getStatus() == '3') {
+			if($currentList->getStatus() == '1') {
 				echo	_('Not activated yet');
 			} else {
 				echo ' <A HREF="index.php?group_id='.$request->get('group_id').'&action=pipermail&id='.$currentList->getID().'">'._('Archives').'</A>';
@@ -110,7 +110,7 @@ function display_list_admin($currentList)
 			getIcon();
 			echo '&nbsp;<b>'.$currentList->getName().'</b> [';
 		}
-		if($currentList->getStatus() == '3') {
+		if($currentList->getStatus() == '1') {
 			echo	_('Not activated yet');
 		} else {
 

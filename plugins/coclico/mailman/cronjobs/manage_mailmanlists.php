@@ -29,7 +29,7 @@ require_once $gfcommon.'include/cron_utils.php';
 // MailingList backend class
 require_once $gfplugins.'mailman/include/BackendMailmanList.class.php' ;
 			 
-
+gt
 $res = db_query_params ('SELECT id,type, parameters FROM system_event WHERE status=$1 ORDER BY id DESC',
 			array ('1')); 
 if (!$res) {
@@ -44,7 +44,7 @@ while ($data = db_fetch_array ($res)) {
 		BackendMailmanList::instance()->deleteList($data['parameters']);
 	}
 	$events[$data['id']]=$data['parameters'];
-	echo "\n Event ".$data['id']." : ".$data['type']." DONE for list id=".$data['parameters'];
+	echo "events[".$data['id']."]=".$data['parameters'];
 }
 if(isset($events)) {
 	foreach($events as $event_id => $list_id) {
@@ -54,12 +54,7 @@ if(isset($events)) {
 			printf('Unable to update the list of events: '.db_error());
 			return false;
 		}
-		$sql = "UPDATE mail_group_list SET status='1' WHERE group_list_id='".$list_id."';"; 
-		$result = db_query($sql);
-		if (!$result) {
-			printf('Unable to update the list of events: '.db_error());
-			return false;
-		}
+		
 	}
 
 }

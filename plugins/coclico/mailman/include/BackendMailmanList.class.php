@@ -91,7 +91,7 @@ class BackendMailmanList {
             
             if (system($GLOBALS['mailman_bin_dir']."/config_list -i $config_file ".$list->getName()) !== false) {
                 if (unlink($config_file)) {
-                    return true;
+			return true;
                 }
             }
         }
@@ -118,7 +118,13 @@ class BackendMailmanList {
                 // Create list
                 system($GLOBALS['mailman_bin_dir']."/newlist -q ".$list->getName()." ".$list_admin_email." ".$list->getPassword()." >/dev/null");
 		// Then update configuraion
-                return $this->updateListConfig($list);
+                if( $this->updateListConfig($list) !=false ) {
+			$result =  $this->_getMailingListDao() -> updateList($list->getID(),$row['group_id'], $list->getDescription(), $list->isPublic(),'3');
+		    	if (!$result) {
+				printf('Unable to update the list status: '.db_error());
+				return false;
+			}		
+		}
             }
         }
         return false;

@@ -423,7 +423,7 @@ class MailmanList extends Error {
 		}
 		require_once('mailman/include/events/SystemEvent_MAILMAN_LIST_DELETE.class.php');
 		$systemevent =	SystemEventManager::instance();
-		$systemevent->createEvent('MAILMAN_LIST_DELETE', array('group_list_id' => $this->groupMailmanListId,),SystemEvent::PRIORITY_MEDIUM);
+		$systemevent->createEvent('MAILMAN_LIST_DELETE',  $this->groupMailmanListId,SystemEvent::PRIORITY_MEDIUM);
 		
 
 		return true;
