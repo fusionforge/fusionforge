@@ -183,7 +183,35 @@ class MailmanList extends Error {
 
 		return true;
 	}
+	
+	/**
+	* activationRequested - LEt us know if an event is present to create this list
+	*
+	* @return boolean
+	*/
+	function activationRequested()
+	{
+		$systemevent =	SystemEventManager::instance();
+		$result = $systemevent->fetchEvents(0,10,false,SystemEvent::STATUS_NEW,'MAILMAN_LIST_CREATE',$this->getID());
+		if(count($result)<1) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
 
+	/**
+	 * recreate - let the admin recrate a list which had a problem during creation
+	 *
+	 * @return bool
+	 */
+	function recreate()
+	{
+
+		$systemevent =	SystemEventManager::instance();
+		$systemevent->createEvent('MAILMAN_LIST_CREATE', $this->getID(),SystemEvent::PRIORITY_MEDIUM);
+	}
 	/**
 	 *  fetchData - re-fetch the data for this mailing list from the database.
 	 *
@@ -411,7 +439,7 @@ class MailmanList extends Error {
 			$this->setError('Missing params');
 			return false;
 		}
-		
+
 		if (!$current_user->isMember($this->Group->getID(),'A')) {
 			exit_permission_denied();
 			return false;
@@ -424,7 +452,7 @@ class MailmanList extends Error {
 		require_once('mailman/include/events/SystemEvent_MAILMAN_LIST_DELETE.class.php');
 		$systemevent =	SystemEventManager::instance();
 		$systemevent->createEvent('MAILMAN_LIST_DELETE',  $this->groupMailmanListId,SystemEvent::PRIORITY_MEDIUM);
-		
+
 
 		return true;
 

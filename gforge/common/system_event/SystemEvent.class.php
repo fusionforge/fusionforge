@@ -29,6 +29,8 @@
 abstract class SystemEvent {
 
   const PRIORITY_MEDIUM = 2; 
+  const STATUS_NEW= 1; 
+  const STATUS_DONE= 3; 
 }
 
 ?>

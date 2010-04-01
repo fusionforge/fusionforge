@@ -29,7 +29,7 @@ require_once $gfcommon.'include/cron_utils.php';
 // MailingList backend class
 require_once $gfplugins.'mailman/include/BackendMailmanList.class.php' ;
 			 
-gt
+
 $res = db_query_params ('SELECT id,type, parameters FROM system_event WHERE status=$1 ORDER BY id DESC',
 			array ('1')); 
 if (!$res) {
@@ -39,22 +39,22 @@ if (!$res) {
 
 while ($data = db_fetch_array ($res)) {
 	if($data['type'] == 'MAILMAN_LIST_CREATE') {
-		BackendMailmanList::instance()->createList($data['parameters']);
+		$result = BackendMailmanList::instance()->createList($data['parameters']);
 	} elseif ($data['type'] == 'MAILMAN_LIST_DELETE') {
-		BackendMailmanList::instance()->deleteList($data['parameters']);
+		$result = BackendMailmanList::instance()->deleteList($data['parameters']);
 	}
-	$events[$data['id']]=$data['parameters'];
-	echo "events[".$data['id']."]=".$data['parameters'];
+	$result ? $log="DONE":$test="ERROR";
+	$events[$data['id']]=$log;
+	echo "\n Event ".$data['id']." : ".$data['type']." ".$log." for list id=".$data['parameters'];
 }
 if(isset($events)) {
-	foreach($events as $event_id => $list_id) {
-		$sql = "UPDATE system_event SET end_date='".time()."', log='DONE', status='3' WHERE id='".$event_id."';"; 
-		$result = db_query($sql);
+	foreach($events as $event_id => $log) {
+		$sql = "UPDATE system_event SET end_date=$1, log=$2, status='3' WHERE id=$3;"; 
+		$result = db_query_params($sql,array(time(),$log,$event_id));
 		if (!$result) {
 			printf('Unable to update the list of events: '.db_error());
 			return false;
 		}
-		
 	}
 
 }

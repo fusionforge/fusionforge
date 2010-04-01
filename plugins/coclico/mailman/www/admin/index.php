@@ -22,6 +22,7 @@ $pm = ProjectManager::instance();
 $Group = $pm->getProject($group_id);
 $post_changes= $request->get('post_changes');
 $add_list=$request->get('add_list');
+$action=$request->get('action');
 $change_status=$request->get('change_status');
 $list_name=$request->get('list_name');
 $is_public=$request->get('is_public');
@@ -38,6 +39,25 @@ if ($group_id) {
 
 	if (!$current_user->isMember($group_id,'A')) {
 		exit_permission_denied();
+	}
+	//
+	//	RE-CREATE List with problems
+	//
+	if($action=='recreate') {
+		echo 'Je recree';
+		$mailingList = new MailmanList($group_id, $group_list_id);
+		if(!$mailingList || !is_object($mailingList)) {
+			exit_error(_('Error'), _('Error getting the list'));
+			echo 'error';
+		} elseif($mailingList->isError()) {
+			exit_error(_('Error'), $mailingList->getErrorMessage());
+			echo 'error';
+		}
+		$mailingList->recreate();
+			echo 'OKOKOK';
+		$feedback .=_('List re-created');
+		htmlRedirect('index.php?group_id='.$group_id);
+
 	}
 
 	//
@@ -81,13 +101,12 @@ if ($group_id) {
 						$description,
 						$is_public
 						)) {
-				
+
 				exit_error(_('Error'), $mailingList->getErrorMessage());
 			} else {
 				$feedback .= _('List updated');
 			}
 		}
-
 	}
 
 	//
@@ -141,21 +160,21 @@ if ($group_id) {
 	} elseif($change_status && $group_list_id) {
 		echo "je suis la group= et group_id=".$group_list_id;
 		$mailingList = new MailmanList($group_id, $group_list_id);
-echo "coucou";
+		echo "coucou";
 		if(!$mailingList || !is_object($mailingList)) {
 			echo "mailinglist error";
 			exit_error(_('Error'), _('Error getting the list'));
 		} elseif($mailingList->isError()) {
 			exit_error(_('Error'), $mailingList->getErrorMessage());
 		}
-echo "avant header";
+		echo "avant header";
 		mailman_header(array(
 					'title' => _('Mail admin'),
 					'help'=>'CommunicationServices.html#MailingLists',
 					'admin' => 1));
 		echo "PHPSELF=".$PHP_SELF;
 		?>
-		
+
 			<h3><?php echo $mailingList->getName(); ?></h3>
 			<form method="post" action="<?php echo $PHP_SELF; ?>?group_id=<?php echo $group_id; ?>&amp;group_list_id=<?php echo $mailingList->getID(); ?>">
 			<input type="hidden" name="post_changes" value="y" />
@@ -170,7 +189,7 @@ echo "avant header";
 			<p>
 			<input type="submit" name="submit" value="<?php echo _('Update'); ?>" /></p>
 			</form>
-					<?php
+			<?php
 			mail_footer(array());
 	} else {
 		//
@@ -204,13 +223,13 @@ echo "avant header";
 		$mlCount = count($mlArray);
 
 		if($mlCount > 0) {
-				table_begin();
-				for ($j = 0; $j < $mlCount; $j++) {
-					$currentList =& $mlArray[$j];
-					display_list_admin($currentList);
-				}
+			table_begin();
+			for ($j = 0; $j < $mlCount; $j++) {
+				$currentList =& $mlArray[$j];
+				display_list_admin($currentList);
+			}
 
-				table_end();
+			table_end();
 		}
 		mail_footer(array());
 	}

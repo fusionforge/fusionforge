@@ -111,23 +111,38 @@ class BackendMailmanList {
         if ($row = $dar->getRow()) {
             $list = new MailmanList($row['group_id'],$row['group_list_id']);
             $user=UserManager::instance()->getUserByID($list->getListAdminId());
-			$list_admin_email= $user->getEmail();
+	    $list_admin_email= $user->getEmail();
             $list_dir = $GLOBALS['mailman_list_dir']."/".$list->getName();
 
-            if ((! is_dir($list_dir))&&($list->isPublic() != 9)) {
-                // Create list
-                system($GLOBALS['mailman_bin_dir']."/newlist -q ".$list->getName()." ".$list_admin_email." ".$list->getPassword()." >/dev/null");
-		// Then update configuraion
-                if( $this->updateListConfig($list) !=false ) {
-			$result =  $this->_getMailingListDao() -> updateList($list->getID(),$row['group_id'], $list->getDescription(), $list->isPublic(),'3');
-		    	if (!$result) {
-				printf('Unable to update the list status: '.db_error());
-				return false;
-			}		
-		}
-            }
-        }
-        return false;
+	    if($list->isPublic() != 9) {
+		    if ((! is_dir($list_dir))) {
+			    // Create list
+			    system($GLOBALS['mailman_bin_dir']."/newlist -q ".$list->getName()." ".$list_admin_email." ".$list->getPassword()." >/dev/null");
+			    // Then update configuraion
+			    if( $this->updateListConfig($list) !=false ) {
+				    $result = $this->_getMailingListDao() -> updateList($list->getID(),$row['group_id'], $list->getDescription(), $list->isPublic(),'3');
+				    if (!$result) {
+					    printf('Unable to update the list status: '.db_error());
+					    return false;
+				    }		
+				    else {
+					    return true;
+				    }
+			    }
+		    }
+		    else {
+			    $result = $this->_getMailingListDao() -> updateList($list->getID(),$row['group_id'], $list->getDescription(), $list->isPublic(),'3');
+			    if (!$result) {
+				    printf('Unable to update the list status: '.db_error());
+				    return false;
+			    }		
+			    else {
+				   return true;
+			    }
+		    }
+	    }
+	}
+	return false;
     }
 
     /**
@@ -137,26 +152,26 @@ class BackendMailmanList {
      * @return true on success, false otherwise
      */
     public function deleteList($group_list_id) {
-        $dar = $this->_getMailingListDao()->searchByGroupListId($group_list_id);
+	    $dar = $this->_getMailingListDao()->searchByGroupListId($group_list_id);
 
-        if ($row = $dar->getRow()) {
-            $list=new MailmanList($row['group_id'],$group_list_id);
-            $list_dir = $GLOBALS['mailman_list_dir']."/".$list->getName();
-            if ((is_dir($list_dir))&&($list->isPublic() == 9)) {
+	    if ($row = $dar->getRow()) {
+		    $list=new MailmanList($row['group_id'],$group_list_id);
+		    $list_dir = $GLOBALS['mailman_list_dir']."/".$list->getName();
+		    if ((is_dir($list_dir))&&($list->isPublic() == 9)) {
 
-                // Archive first
-                $list_archive_dir = $GLOBALS['mailman_list_dir']."/../archives/private/".$list->getName(); // Does it work? TODO
-                $backupfile=$GLOBALS['tmp_dir']."/".$list->getName()."-mailman.tgz";
-                system("tar cfz $backupfile $list_dir $list_archive_dir");
-                chmod($backupfile,0600);
+			    // Archive first
+			    $list_archive_dir = $GLOBALS['mailman_list_dir']."/../archives/private/".$list->getName(); // Does it work? TODO
+			    $backupfile=$GLOBALS['tmp_dir']."/".$list->getName()."-mailman.tgz";
+			    system("tar cfz $backupfile $list_dir $list_archive_dir");
+			    chmod($backupfile,0600);
 
-                // Delete the mailing list if asked to and the mailing exists (archive deleted as well)
-                system($GLOBALS['mailman_bin_dir']. '/rmlist -a '. $list->getName() .' >/dev/null');
-                
-                return true;
-            }
-        }
-        return false;
+			    // Delete the mailing list if asked to and the mailing exists (archive deleted as well)
+			    system($GLOBALS['mailman_bin_dir']. '/rmlist -a '. $list->getName() .' >/dev/null');
+
+			    return true;
+		    }
+	    }
+	    return false;
     }
 
     /**
@@ -164,10 +179,10 @@ class BackendMailmanList {
      * @return true if list exists, false otherwise
      */
     public function listExists($list) {
-        // Is this the best test?
-        $list_dir = $GLOBALS['mailman_list_dir']."/".$list->getName();
-        if (! is_dir($list_dir)) return false;
-        return true;
+	    // Is this the best test?
+	    $list_dir = $GLOBALS['mailman_list_dir']."/".$list->getName();
+	    if (! is_dir($list_dir)) return false;
+	    return true;
     }
 
 }

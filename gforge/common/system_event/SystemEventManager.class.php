@@ -58,10 +58,31 @@ class SystemEventManager {
 		);
         }
     
-    
-    
-      
-             
+   /**
+     * Table to display the status of the last n events
+     * 
+     * @param int     $offset        the offset of the pagination
+     * @param int     $limit         the number of event to includ in the table
+     * @param boolean $full          display a full table or only a summary
+     * @param array   $filter_status the filter on status
+     * @param array   $filter_type   the filter on type
+     *
+     * @return array events
+     */
+    public function fetchEvents($offset = 0, $limit = 10, $full = false, $filter_status = false, $filter_type = false, $filter_params = false) {
+	    $results = db_query_params('SELECT * FROM system_event WHERE type=$1 AND status=$2 AND parameters=$3;',array($filter_type, $filter_status,$filter_params));
+	    while($row = db_fetch_array($results))
+	    {
+		    $events[]=$row;
+	    }
+	    if (isset($events)) {
+		    return $events;
+	    }
+	    else {
+		    return null;
+	    }
+
+    }
 }
 
 ?>

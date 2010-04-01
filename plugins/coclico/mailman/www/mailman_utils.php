@@ -75,7 +75,13 @@ function display_list($currentList)
 			getIcon();
 			echo '&nbsp;<b>'.$currentList->getName().'</b> [';
 			if($currentList->getStatus() == '1') {
-				echo	_('Not activated yet');
+				if($currentList->activationRequested()){
+					echo	_('Not activated yet');
+				}
+				else{
+					echo _('Error during creation');
+				}
+
 			} else {
 				echo ' <A HREF="index.php?group_id='.$request->get('group_id').'&action=pipermail&id='.$currentList->getID().'">'._('Archives').'</A>';
 				if(isLogged())
@@ -111,7 +117,12 @@ function display_list_admin($currentList)
 			echo '&nbsp;<b>'.$currentList->getName().'</b> [';
 		}
 		if($currentList->getStatus() == '1') {
-			echo	_('Not activated yet');
+			if($currentList->activationRequested()){
+				echo	_('Not activated yet');
+			}
+			else{
+				echo _('Error during creation').' | <A HREF="index.php?group_id='.$request->get('group_id').'&action=recreate&group_list_id='.$currentList->getID().'">'._('Re-create').'</A>';
+			}
 		} else {
 
 			echo ' <A HREF="index.php?group_id='.$request->get('group_id').'&change_status=1&group_list_id='.$currentList->getID().'">'._('Update').'</A>';
