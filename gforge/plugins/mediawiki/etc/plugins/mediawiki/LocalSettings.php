@@ -21,7 +21,9 @@ if ( isset( $_SERVER ) && array_key_exists( 'REQUEST_METHOD', $_SERVER ) ) {
 
 $IP = $mediawiki_master_path;
 
-$fusionforgeproject = 'siteadmin' ;
+if (!isset ($fusionforgeproject)) {
+	$fusionforgeproject = 'siteadmin' ;
+}
 $exppath = explode ('/', $_SERVER['PHP_SELF']) ;
 
 # determine $fusionforgeproject from the URL
