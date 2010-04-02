@@ -6,16 +6,21 @@ PKGNAME=$(shell head -1 $(PKGDIR)/debian/changelog | sed 's/ .*//')
 PKGLETTER=$(shell echo $(PKGNAME) | cut -c1)
 ORIGIN=debian.fusionforge.org
 BRANCH=$(shell [ "$(shell echo $(basename $(CURDIR)) | sed 's/.*runk.*/trunk/')" = "trunk" ] && echo svn || echo brc)
-BUILDPLACE=$(CURDIR)/builder/buildplace
-BUILDFILES=$(CURDIR)/builder/buildfiles
+#
+BUILDERDIR=$(CURDIR)/builder
 BUILDRESULT=$(CURDIR)/result
-COWBUILDERBASE=$(CURDIR)/builder/cow
-PBUILDERTGZ=$(CURDIR)/builder/tgz
 TARBALLS=$(CURDIR)/tarballs
-APTCACHE=$(CURDIR)/builder/cache
-DISTRIB=$(shell echo $(XDISTRIB) | cut -c2-)
+#
+BUILDPLACE=$(BUILDERDIR)/buildplace
+BUILDFILES=$(BUILDERDIR)/buildfiles
+COWBUILDERBASE=$(BUILDERDIR)/cow
+PBUILDERTGZ=$(BUILDERDIR)/tgz
+APTCACHE=$(BUILDERDIR)/cache
+#
 LOCALREPODEB=/var/www/debian-fusionforge-$(BRANCH)
 LOCALREPOUBU=/var/www/ubuntu-fusionforge-$(BRANCH)
+#
+DISTRIB=$(shell echo $(XDISTRIB) | cut -c2-)
 SIGNKEY=yes
 DEBIANLIST=1lenny 2squeeze 3sid
 DEBIANLISTP=1etch
@@ -79,7 +84,8 @@ default: list
 
 list:
 	@echo ======================================================================================
-	@echo '=                    Available targets are listed below ($(BRANCH))($(ARCH))         ='
+	@echo '=                    Available targets are listed below ($(BRANCH))($(ARCH))        ='
+	@echo '=                    BUILDERDIR = $(BUILDERDIR)                                     ='
 	@echo ======================================================================================
 	@cat Makefile.debian | grep '^.*:.*#$$' | sed 's/FUSIONFORGE/$(FUSIONFORGE)/' | sed 's/^\(.*:\).*#\(.*\)#$$/\1		\2/'
 	@echo ======================================================================================
