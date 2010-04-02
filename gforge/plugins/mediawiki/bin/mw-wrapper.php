@@ -23,9 +23,13 @@
  * USA
  */
 
-  /* Usage: .../mw-wrapper.php <project> <script> [ arguments... ]
-   * for instance: .../mw-wrapper.php siteadmin importDump.php /tmp/wikidump.xml
-   */
+if (count ($argv) < 3) {
+        echo "Usage: .../mw-wrapper.php <project> <script> [ arguments... ]
+For instance: .../mw-wrapper.php siteadmin importDump.php /tmp/wikidump.xml
+              .../mw-wrapper.php siteadmin rebuildrecentchanges.php
+" ;
+        exit (1) ;
+}
 
 $wrapperscript = array_shift ($argv) ;
 $fusionforgeproject = array_shift ($argv) ;
@@ -39,9 +43,6 @@ require_once $gfcommon.'include/cron_utils.php';
 require_once $gfcommon.'include/Plugin.class.php' ;
 require_once $gfcommon.'include/PluginManager.class.php' ;
 
-// SCM-specific plugins subsystem
-require_once $gfcommon.'include/SCMPlugin.class.php' ;
-                         
 setup_plugin_manager () ;
 
 $group = group_get_object_by_name($fusionforgeproject) ;
