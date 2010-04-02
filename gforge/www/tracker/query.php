@@ -143,7 +143,9 @@ if (getStringFromRequest('submit')) {
 		$query_id=0;
 		header('Location: /tracker/?atid='.$atid.'&group_id='.$group_id.'&func=browse');
 		exit;
-	}	
+	} else {
+		exit_error('Error', 'Missing Build Query Action');
+	}
 } else {
 	$user=session_get_user();
 	$query_id=$user->getPreference('art_query'.$ath->getID());
