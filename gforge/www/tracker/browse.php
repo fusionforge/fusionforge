@@ -325,6 +325,16 @@ echo '
 	</td>
 	<td align="right">';
 
+// Compute the list of fields which can be sorted.
+// Currently, only text & integer are taken (for simplicity only).
+$efarr = $ath->getExtraFields(ARTIFACT_EXTRAFIELDTYPE_TEXT.",".ARTIFACT_EXTRAFIELDTYPE_INTEGER);
+$keys=array_keys($efarr);
+for ($k=0; $k<count($keys); $k++) {
+	$i=$keys[$k];
+	$order_name_arr[] = $efarr[$i]['field_name'];
+	$order_arr[] = $efarr[$i]['extra_field_id'];
+}
+
 echo _('Order by').
 	':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=sort_by\')">' .
 	'<strong>(?)</strong></a>'.

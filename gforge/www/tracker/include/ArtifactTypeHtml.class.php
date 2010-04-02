@@ -219,7 +219,8 @@ class ArtifactTypeHtml extends ArtifactType {
 
 				$str = $this->renderRadio($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$show_100,$text_100,$show_any,$text_any);
 
-			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXT) {
+			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXT ||
+					$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
 
 				$str = $this->renderTextField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2']);
 				if ($mode == 'QUERY') {
@@ -381,7 +382,8 @@ class ArtifactTypeHtml extends ArtifactType {
 				$return .= '
 					<td width="50%" valign="top">'.$name.'<br /><!--'.$efarr[$i]['field_name'].'--></td>';
 
-			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXT) {
+			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXT ||
+				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
 
 				//text fields might be really wide, so need a row to themselves.
 				if (($col_count == 1) && ($efarr[$i]['attribute1'] > 30)) {
