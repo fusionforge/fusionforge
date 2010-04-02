@@ -446,6 +446,8 @@ if ($art_arr && count($art_arr) > 0) {
 				$title=_('Assigned to');
 			if ($f == 'submitted_by')
 				$title=_('Submitted by');
+			if ($f == 'related_tasks')
+				$title=_('Related tasks');
 		}
 		$title_arr[] = $title;
 	}
@@ -493,11 +495,31 @@ if ($art_arr && count($art_arr) > 0) {
 				date(_('Y-m-d H:i'),$art_arr[$i]->getCloseDate()) :'&nbsp; ') .'</td>';
 			} else if ($f == 'details') {
 				echo '<td>'. $art_arr[$i]->getDetails() .'</td>';
+			} else if ($f == 'related_tasks') {
+				echo '<td>';
+				$tasks_res = $art_arr[$i]->getRelatedTasks();
+				$s ='';
+				while ($rest = db_fetch_array($tasks_res)) {
+					$link = '/pm/task.php?func=detailtask&amp;project_task_id='.$rest['project_task_id'].
+						'&amp;group_id='.$group_id.'&amp;group_project_id='.$rest['group_project_id'];
+					$title = '[T'.$rest['project_task_id'].']';
+					if ($rest['status_id'] == 2) {
+						$title = '<strike>'.$title.'</strike>';
+					}
+					print $s.'<a href="'.$link.'" title="'.$rest['summary'].'">'.$title.'</a>';
+					$s = ' ';
+				}
+				echo '</td>';
 			} else if (intval($f) > 0) {
 				// Now display extra-fields (fields are numbers).
 				$value = $extra_data[$f]['value'];
 				if ($extra_data[$f]['type'] == 9) {
 					$value = preg_replace('/\b(\d+)\b/e', "_artifactid2url('\\1')", $value);
+				} else if ($extra_data[$f]['type'] == 7) {
+					if ($art_arr[$i]->getStatusID() == 2) {
+						$value = '<strike>'.$value.'</strike>';
+					}
+					
 				}
 				echo '<td>' . $value .'</td>';
 			} else {

@@ -28,13 +28,22 @@
 			'assigned_to' => _('Assigned To'),
 			'submitted_by' => _('Submitted By'),
 			'close_date' => _('Close Date'),
-			'details' => _('Detailed description')
-			);
+			'details' => _('Detailed description'),
+			'related_tasks' => _('Related tasks')
+		);
 
-    if(count($ath->getExtraFields(ARTIFACT_EXTRAFIELDTYPE_STATUS)) > 0) {
-      unset($fields['status_id']);
-    }
+    	if(count($ath->getExtraFields(ARTIFACT_EXTRAFIELDTYPE_STATUS)) > 0) {
+      		unset($fields['status_id']);
+    	}
 
+		// Extra fields
+		foreach ($efarr as $f) {
+			$fields[$f[0]] = $f['field_name'];
+		}
+
+		asort($fields);
+
+		// Display fields
 		foreach ($fields as $f => $name) {
 			$pos = array_search($f, $browse_fields);
 			echo "<input type=\"text\" name=\"browse_fields[$f]\" value=\"" .
