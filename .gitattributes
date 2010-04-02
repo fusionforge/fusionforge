@@ -3938,6 +3938,11 @@ plugins/coclico/mailman/debian/docs -text
 plugins/coclico/mailman/debian/po/templates.pot -text
 plugins/coclico/mailman/debian/rules -text
 plugins/coclico/mailman/debian/source/format -text
+plugins/coclico/mailman/etc/httpd.d/200list.vhost -text
+plugins/coclico/mailman/etc/httpd.d/20list -text
+plugins/coclico/mailman/etc/httpd.d/20zlist.vhost -text
+plugins/coclico/mailman/etc/httpd.d/21list.vhost.ssl -text
+plugins/coclico/mailman/etc/httpd.d/62plugin-list-mailman -text
 plugins/coclico/mailman/etc/plugins/mailman/config.php -text
 plugins/coclico/mailman/include/BackendMailmanList.class.php -text
 plugins/coclico/mailman/include/MailmanList.class.php -text

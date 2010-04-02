@@ -5,5 +5,6 @@ bin/*                     usr/share/gforge/plugins/mailman/bin/
 www/*                     usr/share/gforge/plugins/mailman/www/
 cronjobs/*                usr/share/gforge/cronjobs
 etc/plugins/mailman/*     etc/gforge/plugins/mailman/
+etc/httpd.d/*             usr/share/gforge/etc/httpd.d/
 usr/lib/mailman/Mailman/* usr/lib/mailman/Mailman/
 var/lib/mailman/lists/*   var/lib/mailman/lists/
