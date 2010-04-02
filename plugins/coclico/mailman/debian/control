@@ -12,9 +12,11 @@ Vcs-Bzr: http://scm.fusionforge.org/bzr/fusionforge/svn-trunk-ro/
 Package: fusionforge-plugin-mailman
 Architecture: all
 Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, php5-cli, ${misc:Depends}
-Description: collaborative development tool - Helloworld plugin
+Provides: gforge-lists
+Conflicts: gforge-lists
+Description: collaborative development tool - mailing-lists plugin (using Mailman)
  .
- This plugin contains the Helloworld subsystem of FusionForge. It allows each
- FusionForge project to have its own Helloworld, and gives some
- control over it to the project's administrator.
+ This package controls the interaction between FusionForge and Mailman.
+ It provides a single sign on authentication mecanism between
+ the forge and mailman.
 

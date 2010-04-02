@@ -1,3 +1,3 @@
- This plugin contains the Helloworld subsystem of FusionForge. It allows each
- FusionForge project to have its own Helloworld, and gives some
- control over it to the project's administrator.
+ This package controls the interaction between FusionForge and Mailman.
+ It provides a single sign on authentication mecanism between
+ the forge and mailman.
