@@ -330,6 +330,22 @@ if ($ath->userIsAdmin()) {
 	</tr>';
 	$ath->renderExtraFields($extra_fields,true,'None',true,'Any','',false,'QUERY');
 
+	// Compute the list of fields which can be sorted.
+	// Currently, only scalar artifacts are taken.
+	$efarr = $ath->getExtraFields(ARTIFACT_EXTRAFIELDTYPE_TEXT.",".
+								  ARTIFACT_EXTRAFIELDTYPE_TEXTAREA.",".
+								  ARTIFACT_EXTRAFIELDTYPE_INTEGER.",".
+								  ARTIFACT_EXTRAFIELDTYPE_SELECT.",".
+								  ARTIFACT_EXTRAFIELDTYPE_RADIO.",".
+								  ARTIFACT_EXTRAFIELDTYPE_STATUS);
+	$keys=array_keys($efarr);
+	for ($k=0; $k<count($keys); $k++) {
+		$i=$keys[$k];
+		$order_name_arr[] = $efarr[$i]['field_name'];
+		$order_arr[] = $efarr[$i]['extra_field_id'];
+	}
+	array_multisort($order_name_arr, $order_arr);
+
 	$tips = '<i>'._('(% for wildcards)').'</i>&nbsp;&nbsp;&nbsp;';
 	
 echo '
