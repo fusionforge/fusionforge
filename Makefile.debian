@@ -79,10 +79,10 @@ PCHANGEFILE=$(PKGNAME)_$(MAJOR)$(MINOR)+p_$(ARCH).changes
 # Quite heavy version, but still requires to be root
 COWBUILDERCMD=cd $(BUILDPLACE) && dpkg-source -x $(BUILDFILES)/$(DSCFILE) ; cd $(BUILDPLACE)/$(PKGNAME)-$(MAJOR) && pdebuild --pbuilder cowbuilder --buildresult $(BUILDRESULT) -- --basepath $(COWBUILDERBASE)/base-$(DISTRIB).cow --buildplace $(BUILDPLACE) --aptcache $(APTCACHE) ; rm -rf $(BUILDPLACE)/$(PKGNAME)-$(MAJOR) 
 # This one is with sudo and probably faster
-COWBUILDERCMD=sudo /usr/sbin/cowbuilder --build --basepath $(COWBUILDERBASE)/base-$(DISTRIB).cow --configfile $(COWBUILDERBASE)/config $(BUILDFILES)/$(DSCFILE) $(DEBBUILDOPTS)
+COWBUILDERCMD=sudo /usr/sbin/cowbuilder --build --basepath $(COWBUILDERBASE)/base-$(DISTRIB).cow --configfile $(COWBUILDERBASE)/configfile $(BUILDFILES)/$(DSCFILE) $(DEBBUILDOPTS)
 
 # This one is with pbuilder
-PBUILDERCMD=cd $(BUILDFILES) && sudo /usr/sbin/pbuilder --build --basetgz $(PBUILDERTGZ)/base-$(DISTRIB).tgz --configfile $(PBUILDERTGZ)/config $(BUILDFILES)/$(PDSCFILE)
+PBUILDERCMD=cd $(BUILDFILES) && sudo /usr/sbin/pbuilder --build --basetgz $(PBUILDERTGZ)/base-$(DISTRIB).tgz --configfile $(PBUILDERTGZ)/configfile $(BUILDFILES)/$(PDSCFILE)
 
 default: list
 
@@ -273,33 +273,33 @@ $(TARBALLS)/$(ORIGFILE): $(TARBALLS)
 pbuilderenv: $(PBUILDERTGZ) $(PBUILDERTGZ)/base-$(DISTRIB).tgz
 	@echo "=========> Ready for $(DISTRIB)"
 
-cowbuilderenv: $(COWBUILDERBASE) $(COWBUILDERBASE)/base-$(DISTRIB).stamp.update
+cowbuilderenv: $(COWBUILDERBASE)/doconfig $(COWBUILDERBASE)/base-$(DISTRIB).stamp.update
 	@echo "=========> Ready for $(DISTRIB)"
 
 forceupdatecow: # Force update of cowbuilder env #
 	rm -f $(COWBUILDERBASE)/base-*.stamp.update
 
 $(COWBUILDERBASE)/base-$(DISTRIB).stamp.update: $(COWBUILDERBASE)/base-$(DISTRIB).stamp
-	sudo /usr/sbin/cowbuilder --update $(HOOK) --distribution $(DISTRIB) --basepath $(COWBUILDERBASE)/base-$(DISTRIB).cow --configfile $(COWBUILDERBASE)/config $(DISTROOP)
+	sudo /usr/sbin/cowbuilder --update $(HOOK) --distribution $(DISTRIB) --basepath $(COWBUILDERBASE)/base-$(DISTRIB).cow --configfile $(COWBUILDERBASE)/configfile $(DISTROOP)
 	touch $@
 
-$(PBUILDERTGZ)/base-$(DISTRIB).tgz: $(PBUILDERTGZ)/config
-	sudo /usr/sbin/pbuilder --create --distribution $(DISTRIB) --basetgz $(PBUILDERTGZ)/base-$(DISTRIB).tgz --configfile $(PBUILDERTGZ)/config $(DISTROOP)
+$(PBUILDERTGZ)/base-$(DISTRIB).tgz: $(PBUILDERTGZ)/doconfig
+	[ -f $@ ] || sudo /usr/sbin/pbuilder --create --distribution $(DISTRIB) --basetgz $(PBUILDERTGZ)/base-$(DISTRIB).tgz --configfile $(PBUILDERTGZ)/configfile $(DISTROOP)
 
-$(COWBUILDERBASE)/base-$(DISTRIB).stamp: $(COWBUILDERBASE)/config
-	sudo /usr/sbin/cowbuilder --create $(HOOK) --distribution $(DISTRIB) --basepath $(COWBUILDERBASE)/base-$(DISTRIB).cow --configfile $(COWBUILDERBASE)/config $(DISTROOP)
+$(COWBUILDERBASE)/base-$(DISTRIB).stamp:
+	[ -d $(COWBUILDERBASE)/base-$(DISTRIB).cow ] || sudo /usr/sbin/cowbuilder --create $(HOOK) --distribution $(DISTRIB) --basepath $(COWBUILDERBASE)/base-$(DISTRIB).cow --configfile $(COWBUILDERBASE)/configfile $(DISTROOP)
 	touch $@.update
 	touch $@
 
-$(PBUILDERTGZ)/config: /usr/sbin/pbuilder
-	echo "APTCACHE=$(APTCACHE)" > $(PBUILDERTGZ)/config
-	echo "BUILDPLACE=$(BUILDPLACE)" >> $(PBUILDERTGZ)/config
-	echo "BUILDRESULT=$(BUILDRESULT)" >> $(PBUILDERTGZ)/config
+$(PBUILDERTGZ)/doconfig: /usr/sbin/pbuilder
+	@echo "APTCACHE=$(APTCACHE)" > $(PBUILDERTGZ)/configfile
+	@echo "BUILDPLACE=$(BUILDPLACE)" >> $(PBUILDERTGZ)/configfile
+	@echo "BUILDRESULT=$(BUILDRESULT)" >> $(PBUILDERTGZ)/configfile
 
-$(COWBUILDERBASE)/config: /usr/sbin/cowbuilder
-	echo "APTCACHE=$(APTCACHE)" > $(COWBUILDERBASE)/config
-	echo "BUILDPLACE=$(BUILDPLACE)" >> $(COWBUILDERBASE)/config
-	echo "BUILDRESULT=$(BUILDRESULT)" >> $(COWBUILDERBASE)/config
+$(COWBUILDERBASE)/doconfig: /usr/sbin/cowbuilder
+	@echo "APTCACHE=$(APTCACHE)" > $(COWBUILDERBASE)/configfile
+	@echo "BUILDPLACE=$(BUILDPLACE)" >> $(COWBUILDERBASE)/configfile
+	@echo "BUILDRESULT=$(BUILDRESULT)" >> $(COWBUILDERBASE)/configfile
 
 /usr/sbin/pbuilder:
 	sudo apt-get install pbuilder
