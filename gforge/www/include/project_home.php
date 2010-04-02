@@ -22,12 +22,16 @@ site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'home'));
 // ########################################### end top area
 
 // two column deal
+// Embedd some RDFa to describe the project using DOAP and SIOC
 echo '
 <div id="forge-project-home" class="underline-link">
+
+<div about="" typeof="sioc:Space doap:Project" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:doap="http://usefulinc.com/ns/doap#" />
+
 <table id="project-summary-and-devs" class="my-layout-table" summary="">
 	<tr>
 		<td>
-			<h2>'.$project->getPublicName().'</h2>
+			<h2><span property="doap:shortdesc">'.$project->getPublicName().'</span></h2>
 			<h3>'._('Project summary').'</h3>';
 
 
@@ -50,8 +54,16 @@ $hook_params = array () ;
 $hook_params['group_id'] = $group_id ;
 plugin_hook ("project_before_description",$hook_params) ;
 
-if ($project->getDescription()) {
-	print "<p>" . nl2br($project->getDescription()) . '</p>';
+// insert an empty <span /> which seems to be better if not compacted
+print '<span property="doap:name" content="'. $project->getUnixName() .'"></span>'."\n";
+
+$project_description = $project->getDescription();
+if ($project_description) {
+	// need to use a litteral version for content attribute since nl2br is for HTML
+	print "<p>"
+		.'<span property="doap:description" content="'. preg_quote($project_description,'"') .'">'
+		. nl2br($project_description) 
+		.'</span></p>';
 } else {
 	print "<p>" . _('This project has not yet submitted a description.') . '</p>';
 }
@@ -82,7 +94,11 @@ if($GLOBALS['sys_use_trove']) {
 }
 
 // registration date
-print(_('Registered:&nbsp;') . date(_('Y-m-d H:i'), $project->getStartDate()));
+$project_start_date = $project->getStartDate();
+print(_('Registered:&nbsp;') . 
+	'<span property="doap:created" content="'.date('Y-m-d', $project_start_date).'">'.
+	date(_('Y-m-d H:i'), $project_start_date).
+	'</span>');
 
 // Get the activity percentile
 // CB hide stats if desired
@@ -123,6 +139,8 @@ if($GLOBALS['sys_use_people']) {
 			}
 	}
 }
+
+
 $hook_params = array () ;
 $hook_params['group_id'] = $group_id ;
 plugin_hook ("project_after_description",$hook_params) ;
@@ -145,7 +163,24 @@ if (db_numrows($res_admin) > 0) {
 			$started_developers=true;
 			echo '<span class="develtitle">'. _('Developers').':</span><br />';
 		}
-		echo util_make_link_u ($row_admin['user_name'],$row_admin['user_id'],$row_admin['realname']).'<br />';
+		if (!$started_developers) {
+			echo '<div rel="doap:maintainer">'."\n";
+		} else {
+			echo '<div rel="doap:developer">'."\n";
+		}
+		# a foaf:Person that holds an account on the forge
+		$developer_url = util_make_url_u ($row_admin['user_name'],$row_admin['user_id']);
+		echo '<div typeof="foaf:Person" xmlns:foaf="http://xmlns.com/foaf/0.1/" about="'.
+			$developer_url.'#me' .'" >'."\n";
+		echo '<div rel="foaf:holdsAccount">'."\n";
+		echo '<div typeof="sioc:UserAccount" about="'.
+        	$developer_url.
+        	'" xmlns:sioc="http://rdfs.org/sioc/ns#">'."\n";
+		echo util_make_link_u ($row_admin['user_name'],$row_admin['user_id'],$row_admin['realname']) ."<br />\n";
+		echo "</div>\n"; // /sioc:UserAccount
+		echo "</div>\n"; // /foaf:holdsAccount
+		echo "</div>\n"; // /foaf:Person
+		echo "</div>\n"; // /doap:maintainer|developer
 		if ($row_admin['user_id'] == user_getid())
 			$iam_member = true ;
 	}
@@ -300,7 +335,7 @@ echo $HTML->boxTop(_('Public Areas'), 'Public_Areas');
 
 // ################# Homepage Link
 
-echo '<div class="public-area-box">';
+echo '<div class="public-area-box" rel="doap:homepage">';
 echo util_make_link ('http://' . $project->getHomePage(), $HTML->getHomePic(_('Home Page')) . '&nbsp;' . _('Project Home Page'), false, true);
 echo '</div>
     ';
@@ -325,12 +360,20 @@ if ($project->usesTracker()) {
 	if (!$result || $rows < 1) {
 		echo '<br /><em>'._('There are no public trackers available').'</em>';
 	} else {
-		echo '<ul class="tracker">';
+		echo '<ul class="tracker" rel="doap:bug-database">';
 		for ($j = 0; $j < $rows; $j++) {
-			echo '<li>';
-			echo util_make_link ('/tracker/?atid='. db_result($result, $j, 'group_artifact_id')  . '&amp;group_id='.$group_id.'&amp;func=browse',db_result($result, $j, 'name')) . ' ' ;
-			printf(ngettext('(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', '(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', (int) db_result($result, $j, 'open_count')), (int) db_result($result, $j, 'open_count'), (int) db_result($result, $j, 'count'));
-			echo '<br />'.db_result($result, $j, 'description').'</li>';
+			// tracker REST paths are something like : /tracker/cm/project/A_PROJECT/atid/NUMBER to plan compatibility
+			// with OSLC-CM server API
+			$group_artifact_id = db_result($result, $j, 'group_artifact_id');
+			$tracker_stdzd_uri = util_make_url('/tracker/cm/project/'. $project->getUnixName() .'/atid/'. $group_artifact_id);
+			echo '<li about="'. $tracker_stdzd_uri . '" typeof="sioc:Container" xmlns:sioc="http://rdfs.org/sioc/ns#">'."\n";
+            print '<span rel="http://www.w3.org/2002/07/owl#sameAs">'."\n";
+			echo util_make_link ('/tracker/?atid='. $group_artifact_id . '&amp;group_id='.$group_id.'&amp;func=browse',db_result($result, $j, 'name')) . ' ' ;
+			echo "</span>\n"; // /owl:sameAs
+ 			printf(ngettext('(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', '(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', (int) db_result($result, $j, 'open_count')), (int) db_result($result, $j, 'open_count'), (int) db_result($result, $j, 'count'));
+			echo '<br />'.db_result($result, $j, 'description');
+			print '<span rel="sioc:has_space" resource="" />'."\n";
+			echo "</li>\n";
 		}
 		echo '</ul>';
 	}
@@ -462,6 +505,7 @@ if ($project->usesNews()) {
 echo '</td>
     </tr>
     </table>
+    </div><!-- about="" -->
     </div><!-- id="forge-project-home" -->
     ';
 

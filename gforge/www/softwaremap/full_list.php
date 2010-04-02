@@ -131,13 +131,24 @@ for ($i_proj=1;$i_proj<=$querytotalcount;$i_proj++) {
 	}	
 
 	if ($row_grp && $viewthisrow) {
+		
+		// Embed RDFa description for /projects/PROJ_NAME 
+		$proj_uri = util_make_url_g(strtolower($row_grp['unix_group_name']),$row_grp['group_id']);
+		print '<div typeof="doap:Project" about="'.$proj_uri.'" xmlns:doap="http://usefulinc.com/ns/doap#">'."\n";
+		
 		print '<table border="0" cellpadding="0" width="100%">';
 		print '<tr valign="top"><td colspan="2">';
-		print "<a href=\"/projects/". strtolower($row_grp['unix_group_name']) ."/\"><strong>"
-			.$row_grp['group_name']."</strong></a> ";
+		print util_make_link_g(strtolower($row_grp['unix_group_name']),$row_grp['group_id'],'<strong>'
+			.'<span property="doap:name">'
+			.$row_grp['group_name']
+			.'</span>'
+			.'</strong>').' ';
 
 		if ($row_grp['short_description']) {
-			print "- " . $row_grp['short_description'];
+			print "- "
+			. '<span property="doap:short_desc">' 
+			. $row_grp['short_description']
+			. '</span>';
 		}
 
 		// extra description
@@ -153,9 +164,10 @@ for ($i_proj=1;$i_proj<=$querytotalcount;$i_proj++) {
                               .'<a href="/people/?group_id='.$row_grp['group_id'].'">[This project needs help]</a></td></td>';
                 }
 */
-                print '</table>';
+        print '</table>';
+        print '</div>'; // /doap:Project
 		print '<hr />';
-	} // end if for row and range chacking
+	} // end if for row and range chacking   
 }
 
 // print bottom navigation if there are more projects to display
