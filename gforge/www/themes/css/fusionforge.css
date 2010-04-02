@@ -67,3 +67,33 @@
 .frs_release_name_version {
     margin: 0 0 0 1em;
 }
+
+/* Progress bargraph (trackers) */
+table.progress {
+ border: 1px solid #d7d7d7;
+ border-collapse: collapse;
+ border-spacing: 0;
+ margin: 0;
+ padding: 0;
+ margin-top: 1em;
+ empty-cells: show;
+ width: 50%;
+ margin-left: 25%; 
+ margin-right: 25%;
+}
+table.progress_legend {
+ width: 50%;
+ margin-left: 25%; 
+ margin-right: 25%;
+}
+table.progress a, table.progress :link, table.progress :visited,
+table.progress :link:hover, table.progress :visited:hover {
+ border: none;
+ display: block;
+ height: 1.2em;
+ padding: 0;
+ margin: 0;
+ text-decoration: none
+}
+table.progress td { background: #fff; padding: 0 }
+table.progress td :hover { background: none }

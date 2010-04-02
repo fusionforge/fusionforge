@@ -54,7 +54,10 @@ if (getStringFromRequest('submit')) {
 		$_summary = getStringFromRequest('_summary');
 		$_description = getStringFromRequest('_description');
 		$_followups = getStringFromRequest('_followups');
-		if (!$aq->create($query_name,$_status,$_assigned_to,$_moddaterange,$_sort_col,$_sort_ord,$extra_fields,$_opendaterange,$_closedaterange,$_summary,$_description,$_followups,$query_type)) {
+		$query_options = array_keys(getArrayFromRequest('query_options'));
+		if (!$aq->create($query_name,$_status,$_assigned_to,$_moddaterange,$_sort_col,$_sort_ord,$extra_fields,$_opendaterange,$_closedaterange,
+			$_summary,$_description,$_followups,$query_type, $query_options)) {
+			form_release_key(getStringFromRequest('form_key'));
 			exit_error('Error',$aq->getErrorMessage());
 		} else {
 			$feedback .= 'Successfully Created';
@@ -101,7 +104,9 @@ if (getStringFromRequest('submit')) {
 		$_description = getStringFromRequest('_description');
 		$_followups = getStringFromRequest('_followups');
 		$extra_fields = getStringFromRequest('extra_fields');
-		if (!$aq->update($query_name,$_status,$_assigned_to,$_moddaterange,$_sort_col,$_sort_ord,$extra_fields,$_opendaterange,$_closedaterange,$_summary,$_description,$_followups,$query_type)) {
+		$query_options = array_keys(getArrayFromRequest('query_options'));
+		if (!$aq->update($query_name,$_status,$_assigned_to,$_moddaterange,$_sort_col,$_sort_ord,$extra_fields,$_opendaterange,$_closedaterange,
+			$_summary,$_description,$_followups,$query_type, $query_options)) {
 			exit_error('Error',$aq->getErrorMessage());
 		} else {
 			$feedback .= 'Query Updated';
@@ -357,7 +362,15 @@ echo '
 		<td>&nbsp;<br />
 		'.html_build_select_box_from_arrays($sort_arr,$sort_name_arr,'_sort_ord',$_sort_ord,false) .'</td>
 	</tr>';
-	echo '
+echo '<tr>
+		<td colspan="2">'.
+		'<p/><strong>Options:</strong><br />
+		<input type="checkbox" name="query_options[bargraph]" '.
+	((in_array('bargraph', $aq->getQueryOptions())) ? 'checked="checked"' : '')
+.'/> Display a short summary box on top of the list (roadmap status).<p/>
+		</td>
+	</tr>';
+echo '
 	</table></form>';
 echo '</fieldset></td></tr></table>';
 $ath->footer(array());

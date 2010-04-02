@@ -121,7 +121,8 @@ class ArtifactQuery extends Error {
 	 *	@param	string	Name of the saved query.
 	 *  @return 	true on success / false on failure.
 	 */
-	function create($name,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange=0,$closedaterange=0,$summary,$description,$followups,$query_type=0) {
+	function create($name,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange=0,$closedaterange=0,
+		$summary,$description,$followups,$query_type=0,$query_options=array()) {
 		//
 		//	data validation
 		//
@@ -621,7 +622,8 @@ class ArtifactQuery extends Error {
 	 *	@param	string	The name of the saved query
 	 *  @return	boolean	success.
 	 */
-	function update($name,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange='',$closedaterange='',$summary,$description,$followups,$query_type=0) {
+	function update($name,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange='',$closedaterange='',
+		$summary,$description,$followups,$query_type=0,$query_options=array()) {
 		if (!$name) {
 			$this->setMissingParamsError();
 			return false;
@@ -651,13 +653,13 @@ class ArtifactQuery extends Error {
 		db_begin();
 		$result = db_query_params ('UPDATE artifact_query
 			SET query_name=$1,
-				query_type=$2
-			WHERE artifact_query_id=$3
-			AND user_id=$4',
+				query_type=$2,
+				query_options=$3
+			WHERE artifact_query_id=$4',
 					   array (htmlspecialchars($name),
 						  $query_type,
-						  $this->getID(),
-						  user_getid())) ;
+						  join('|', $query_options),
+						  $this->getID())) ;
 		if ($result && db_affected_rows($result) > 0) {
 			if (!$this->insertElements($this->getID(),$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange,$closedaterange,$summary,$description,$followups)) {
 				db_rollback();

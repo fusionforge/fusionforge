@@ -347,6 +347,63 @@ echo '
 
 if ($art_arr && count($art_arr) > 0) {
 
+	if ($query_id) {
+		$aq = new ArtifactQuery($ath,$query_id);
+		$has_bargraph = (in_array('bargraph', $aq->getQueryOptions()));
+	} else {
+		$has_bargraph = false;
+	}
+	
+	if ($has_bargraph) {
+		// Display the roadmap block based on the values of the Status field.
+		$colors = array('#a71d16', '#ffa0a0', '#f5f5b5', '#bae0ba', '#16a716');
+		$count = array();
+		$percent = array();
+		foreach($art_arr as $art) {
+			if ($ath->usesCustomStatuses()) {
+				$custom_id = $ath->getCustomStatusField();
+				$extra_data = $art->getExtraFieldDataText();
+				$count[ $extra_data[$custom_id]['value'] ]++;
+			} else {
+				$count[ $art->getStatusName()]++;
+			}
+		}
+		foreach($count as $n => $c) {
+			$percent[$n] = round(100*$c/count($art_arr));
+		}
+		
+		$i=0;
+		$efarr =& $ath->getExtraFields(ARTIFACT_EXTRAFIELDTYPE_STATUS);
+		$keys=array_keys($efarr);
+		$field_id = $keys[0];
+		$states = $ath->getExtraFieldElements($field_id);
+		$graph = '';
+		$legend = '';
+		if (is_array($states)) {
+			foreach($states as $state) {
+				$name = $state['element_name'];
+				if ($count[$name]) {
+					$graph  .= '<td style="background: '.$colors[$i].'; width: '.$percent[$name].'%;">&nbsp;</td>';
+					$legend .= '<td style="white-space: nowrap; width: '.$percent[$name].'%;">'."<i>$name: $count[$name] ($percent[$name]%)</i></td>";
+				}
+				$i++;
+			}
+		}
+	
+		if ($graph) {
+		?>
+		<table class="progress">
+      	<tbody>
+      		<tr><?php echo $graph; ?></tr>
+      	</tbody>
+      	</table>
+      	<table class="progress_legend">
+      		<tr><?php echo $legend ?></tr>
+      	</table>
+	<?php
+		}
+	}
+	
 	if ($set=='custom') {
 		$set .= '&amp;_assigned_to='.$_assigned_to.'&amp;_status='.$_status.'&amp;_sort_col='.$_sort_col.'&amp;_sort_ord='.$_sort_ord;
 		if (array_key_exists($ath->getCustomStatusField(),$_extra_fields)) {
