@@ -232,8 +232,6 @@ gforge/packaging/control/135plugin-scmdarcs -text
 gforge/packaging/control/135plugin-scmdarcs.shortdesc -text
 gforge/packaging/control/136plugin-scmarch -text
 gforge/packaging/control/136plugin-scmarch.shortdesc -text
-gforge/packaging/control/137plugin-scmcpold -text
-gforge/packaging/control/137plugin-scmcpold.shortdesc -text
 gforge/packaging/control/160plugin-mediawiki -text
 gforge/packaging/control/160plugin-mediawiki.shortdesc -text
 gforge/packaging/control/170plugin-extratabs -text
@@ -269,7 +267,6 @@ gforge/packaging/dirs/plugin-mediawiki -text
 gforge/packaging/dirs/plugin-projectlabels -text
 gforge/packaging/dirs/plugin-scmarch -text
 gforge/packaging/dirs/plugin-scmbzr -text
-gforge/packaging/dirs/plugin-scmcpold -text
 gforge/packaging/dirs/plugin-scmcvs -text
 gforge/packaging/dirs/plugin-scmdarcs -text
 gforge/packaging/dirs/plugin-scmgit -text
@@ -294,7 +291,6 @@ gforge/packaging/install/plugin-mediawiki -text
 gforge/packaging/install/plugin-projectlabels -text
 gforge/packaging/install/plugin-scmarch -text
 gforge/packaging/install/plugin-scmbzr -text
-gforge/packaging/install/plugin-scmcpold -text
 gforge/packaging/install/plugin-scmcvs -text
 gforge/packaging/install/plugin-scmdarcs -text
 gforge/packaging/install/plugin-scmgit -text
@@ -1099,9 +1095,6 @@ gforge/plugins/scmbzr/common/BzrPlugin.class.php -text
 gforge/plugins/scmbzr/common/scmbzr-init.php -text
 gforge/plugins/scmbzr/etc/plugins/scmbzr/config.php -text
 gforge/plugins/scmbzr/etc/plugins/scmbzr/serve-branches.conf -text
-gforge/plugins/scmcpold/common/CpoldPlugin.class.php -text
-gforge/plugins/scmcpold/common/scmcpold-init.php -text
-gforge/plugins/scmcpold/etc/plugins/scmcpold/config.php -text
 gforge/plugins/scmcvs/cron.d/fusionforge-plugin-scmcvs -text
 gforge/plugins/scmcvs/fusionforge-plugin-scmcvs.spec -text
 gforge/plugins/scmdarcs/common/DarcsPlugin.class.php -text
@@ -3999,6 +3992,13 @@ plugins/templates/helloworld/packaging/links/plugin-helloworld -text
 plugins/templates/helloworld/translations/en.po -text
 plugins/templates/helloworld/translations/gforge.pot -text
 plugins/templates/helloworld/utils/manage-translations.sh -text
+plugins/templates/scmcpold/common/CpoldPlugin.class.php -text
+plugins/templates/scmcpold/common/scmcpold-init.php -text
+plugins/templates/scmcpold/etc/plugins/scmcpold/config.php -text
+plugins/templates/scmcpold/packaging/control/137plugin-scmcpold -text
+plugins/templates/scmcpold/packaging/control/137plugin-scmcpold.shortdesc -text
+plugins/templates/scmcpold/packaging/dirs/plugin-scmcpold -text
+plugins/templates/scmcpold/packaging/install/plugin-scmcpold -text
 tests/AllFullTests.php -text
 tests/AllTests.php -text
 tests/SeleniumTests.php -text
