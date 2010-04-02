@@ -61,7 +61,6 @@ if (isset ($group_id)) {
 		mail_footer(array ());
 		exit;
 	}
-	personalized_message();
 
 
 	if (isLogged()){
