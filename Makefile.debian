@@ -7,7 +7,11 @@ PKGLETTER=$(shell echo $(PKGNAME) | cut -c1)
 ORIGIN=debian.fusionforge.org
 BRANCH=$(shell [ "$(shell echo $(basename $(CURDIR)) | sed 's/.*runk.*/trunk/')" = "trunk" ] && echo svn || echo brc)
 #
+ifeq (,$(shell echo "$$BUILDERDIR"))
 BUILDERDIR=$(CURDIR)/builder
+else
+BUILDERDIR=$(shell echo $$BUILDERDIR)
+endif
 BUILDRESULT=$(CURDIR)/result
 TARBALLS=$(CURDIR)/tarballs
 #
