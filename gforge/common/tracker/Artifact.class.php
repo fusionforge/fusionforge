@@ -1583,6 +1583,8 @@ class Artifact extends Error {
 			util_send_message('',$subject,$body,$from,$BCC,'',$extra_headers);			
 		}
 		
+		$this->sendSubjectMsg = $subject;
+		$this->sendBodyMsg = $body;
 		
 		//util_handle_message($monitor_ids,$subject,$body,$BCC);
 		
