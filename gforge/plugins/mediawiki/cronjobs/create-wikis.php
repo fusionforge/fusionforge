@@ -170,6 +170,14 @@ while ( $row = db_fetch_array($project_res) ) {
 			cron_entry(23,$err);
 			exit;
 		}
+
+		$mwwrapper = $sys_opt_path."/plugins/mediawiki/bin/mw-wrapper.php" ;
+		$dumpfile = $sys_etc_path."/mediawiki/initial-content.xml" ;
+		
+		if (file_exists ($dumpfile)) {
+			system ("$mwwrapper $project importDump.php $dumpfile") ;
+			system ("$mwwrapper $project rebuildrecentchanges.php") ;
+		}
 	} else {
 		cron_debug("  Nothing to be done.");
 	}
