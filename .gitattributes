@@ -976,7 +976,7 @@ gforge/plugins/globalsearch/www/index.php -text
 gforge/plugins/ldapextauth/rpm-specific/.keepme -text svneol=unset#application/octet-stream
 gforge/plugins/mediawiki/README -text
 gforge/plugins/mediawiki/bin/drop-wiki.php -text
-gforge/plugins/mediawiki/bin/import-wiki.php -text
+gforge/plugins/mediawiki/bin/mw-wrapper.php -text
 gforge/plugins/mediawiki/common/MediaWikiPlugin.class.php -text
 gforge/plugins/mediawiki/common/mediawiki-init.php -text
 gforge/plugins/mediawiki/cronjobs/create-wikis.php -text

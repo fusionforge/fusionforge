@@ -23,9 +23,13 @@
  * USA
  */
 
-$script = array_shift ($argv) ;
+  /* Usage: .../mw-wrapper.php <project> <script> [ arguments... ]
+   * for instance: .../mw-wrapper.php siteadmin importDump.php /tmp/wikidump.xml
+   */
+
+$wrapperscript = array_shift ($argv) ;
 $fusionforgeproject = array_shift ($argv) ;
-array_unshift ($argv, $script) ;
+$mwscript = array_shift ($argv) ;
 
 require (dirname(__FILE__)).'/../../../www/env.inc.php';
 require_once $gfwww.'include/pre.php';
@@ -49,15 +53,16 @@ if (!$group->usesPlugin('mediawiki')) {
 	die ("Project doesn't use the Mediawiki plugin\n") ;
 }
 
-ob_end_flush() ;
 
 define( "MEDIAWIKI", true );
 require_once $gfwww.'plugins/mediawiki/LocalSettings.php' ;
-chdir ($wikidata) ;
-$script = array_shift ($argv) ;
-array_unshift ($argv, '--conf', "$wikidata/LocalSettings.php") ;
-array_unshift ($argv, $script) ;
 
-require_once '/usr/share/mediawiki/maintenance/importDump.php' ;
+$mwscript = MW_INSTALL_PATH.'/maintenance/'.$mwscript ;
+
+array_unshift ($argv, $mwscript, '--conf', "$wikidata/LocalSettings.php") ;
+
+ob_end_flush() ;
+
+require_once $mwscript ;
 
 ?>
