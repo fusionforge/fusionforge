@@ -9,14 +9,24 @@ BRANCH=$(shell [ "$(shell echo $(basename $(CURDIR)) | sed 's/.*runk.*/trunk/')"
 
 PKGLETTER=$(shell echo $(PKGNAME) | cut -c1)
 ORIGIN=debian.bayle.eu
-COWPLACE=$(CURDIR)
-BUILDPLACE=$(COWPLACE)/builder/buildplace
-BUILDFILES=$(COWPLACE)/builder/buildfiles
-BUILDRESULT=$(COWPLACE)/result
-COWBUILDERBASE=$(COWPLACE)/builder/cow
-PBUILDERTGZ=$(COWPLACE)/builder/tgz
-TARBALLS=$(COWPLACE)/tarballs
-APTCACHE=$(COWPLACE)/builder/cache
+#
+ifeq (,$(shell echo "$$BUILDERDIR"))
+BUILDERDIR=$(CURDIR)/builder
+else
+BUILDERDIR=$(shell echo $$BUILDERDIR)
+endif
+BUILDRESULT=$(CURDIR)/result
+TARBALLS=$(CURDIR)/tarballs
+#
+BUILDPLACE=$(BUILDERDIR)/buildplace
+BUILDFILES=$(BUILDERDIR)/buildfiles
+COWBUILDERBASE=$(BUILDERDIR)/cow
+PBUILDERTGZ=$(BUILDERDIR)/tgz
+APTCACHE=$(BUILDERDIR)/cache
+#
+LOCALREPODEB=/var/www/debian-fusionforge-$(BRANCH)
+LOCALREPOUBU=/var/www/ubuntu-fusionforge-$(BRANCH)
+#
 DISTRIB=$(shell echo $(XDISTRIB) | cut -c2-)
 LOCALREPODEB=/var/www/debian-fusionforge-$(BRANCH)
 LOCALREPOUBU=/var/www/ubuntu-fusionforge-$(BRANCH)
@@ -55,9 +65,9 @@ CHANGEFILE=$(PKGNAME)_$(MAJOR)$(MINOR)_$(ARCH).changes
 PDSCFILE=$(PKGNAME)_$(MAJOR)$(MINOR)+p.dsc
 PCHANGEFILE=$(PKGNAME)_$(MAJOR)$(MINOR)+p_$(ARCH).changes
 
-COWBUILDERCMD=sudo /usr/sbin/cowbuilder --build --basepath $(COWBUILDERBASE)/base-$(DISTRIB).cow --configfile $(COWBUILDERBASE)/config $(BUILDFILES)/$(DSCFILE) $(DEBBUILDOPTS)
+COWBUILDERCMD=sudo /usr/sbin/cowbuilder --build --basepath $(COWBUILDERBASE)/base-$(DISTRIB).cow --configfile $(COWBUILDERBASE)/configfile $(BUILDFILES)/$(DSCFILE) $(DEBBUILDOPTS)
 
-PBUILDERCMD=cd $(BUILDFILES) && sudo /usr/sbin/pbuilder --build --basetgz $(PBUILDERTGZ)/base-$(DISTRIB).tgz --configfile $(PBUILDERTGZ)/config $(BUILDFILES)/$(PDSCFILE)
+PBUILDERCMD=cd $(BUILDFILES) && sudo /usr/sbin/pbuilder --build --basetgz $(PBUILDERTGZ)/base-$(DISTRIB).tgz --configfile $(PBUILDERTGZ)/configfile $(BUILDFILES)/$(PDSCFILE)
 
 default: list
 
@@ -191,25 +201,24 @@ $(TARBALLS)/$(ORIGFILE): $(TARBALLS) $(ORIGFILE)
 pbuilderenv: $(PBUILDERTGZ) $(PBUILDERTGZ)/base-$(DISTRIB).tgz
 	@echo "Ready for $(DISTRIB)"
 
-cowbuilderenv: $(COWBUILDERBASE) $(COWBUILDERBASE)/base-$(DISTRIB).stamp
+cowbuilderenv: $(COWBUILDERBASE) $(COWBUILDERBASE)/base-$(DISTRIB).cow
 	@echo "Ready for $(DISTRIB)"
 
-$(PBUILDERTGZ)/base-$(DISTRIB).tgz: $(PBUILDERTGZ)/config
-	sudo /usr/sbin/pbuilder --create --distribution $(DISTRIB) --basetgz $(PBUILDERTGZ)/base-$(DISTRIB).tgz --configfile $(PBUILDERTGZ)/config $(DISTROOP)
+$(PBUILDERTGZ)/base-$(DISTRIB).tgz: $(PBUILDERTGZ)/doconfig
+	[ -d $@ ] || sudo /usr/sbin/pbuilder --create --distribution $(DISTRIB) --basetgz $@ --configfile $(PBUILDERTGZ)/configfile $(DISTROOP)
 
-$(COWBUILDERBASE)/base-$(DISTRIB).stamp: $(COWBUILDERBASE)/config
-	sudo /usr/sbin/cowbuilder --create $(HOOK) --distribution $(DISTRIB) --basepath $(COWBUILDERBASE)/base-$(DISTRIB).cow --configfile $(COWBUILDERBASE)/config $(DISTROOP)
-	touch $(COWBUILDERBASE)/base-$(DISTRIB).stamp
+$(COWBUILDERBASE)/base-$(DISTRIB).cow: $(COWBUILDERBASE)/doconfig
+	[ -d $@ ] || sudo /usr/sbin/cowbuilder --create $(HOOK) --distribution $(DISTRIB) --basepath $@ --configfile $(COWBUILDERBASE)/configfile $(DISTROOP)
 
-$(PBUILDERTGZ)/config: /usr/sbin/pbuilder
-	echo "APTCACHE=$(APTCACHE)" > $(PBUILDERTGZ)/config
-	echo "BUILDPLACE=$(BUILDPLACE)" >> $(PBUILDERTGZ)/config
-	echo "BUILDRESULT=$(BUILDRESULT)" >> $(PBUILDERTGZ)/config
+$(PBUILDERTGZ)/doconfig: /usr/sbin/pbuilder
+	echo "APTCACHE=$(APTCACHE)" > $(PBUILDERTGZ)/configfile
+	echo "BUILDPLACE=$(BUILDPLACE)" >> $(PBUILDERTGZ)/configfile
+	echo "BUILDRESULT=$(BUILDRESULT)" >> $(PBUILDERTGZ)/configfile
 
-$(COWBUILDERBASE)/config: /usr/sbin/cowbuilder
-	echo "APTCACHE=$(APTCACHE)" > $(COWBUILDERBASE)/config
-	echo "BUILDPLACE=$(BUILDPLACE)" >> $(COWBUILDERBASE)/config
-	echo "BUILDRESULT=$(BUILDRESULT)" >> $(COWBUILDERBASE)/config
+$(COWBUILDERBASE)/doconfig: /usr/sbin/cowbuilder
+	echo "APTCACHE=$(APTCACHE)" > $(COWBUILDERBASE)/configfile
+	echo "BUILDPLACE=$(BUILDPLACE)" >> $(COWBUILDERBASE)/configfile
+	echo "BUILDRESULT=$(BUILDRESULT)" >> $(COWBUILDERBASE)/configfile
 
 /usr/sbin/pbuilder:
 	sudo apt-get install pbuilder
