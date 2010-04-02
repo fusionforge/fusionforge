@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 Roland Mas
+ * Copyright 2010 Alain Peyrat, Alcatel-Lucent
  *
  */
 require_once $gfcommon.'tracker/ArtifactFactory.class.php';
@@ -77,7 +78,7 @@ if (!isset($_sort_col)) {
 $offset = getStringFromRequest('offset');
 $_sort_col = getStringFromRequest('_sort_col',$_sort_col);
 $_sort_ord = getStringFromRequest('_sort_ord',$_sort_ord);
-$max_rows = getStringFromRequest('max_rows');
+$max_rows = getIntFromRequest('max_rows', 25);
 $set = getStringFromRequest('set');
 $_assigned_to = getIntFromRequest('_assigned_to');
 $_status = getIntFromRequest('_status');
@@ -128,7 +129,7 @@ if (!$art_arr && $af->isError()) {
 //build page title to make bookmarking easier
 //if a user was selected, add the user_name to the title
 //same for status
-$ath->header(array('atid'=>$ath->getID()));
+$ath->header(array('atid'=>$ath->getID(), 'title'=>$ath->getName()));
 
 /**
  *
@@ -426,7 +427,7 @@ if ($art_arr && count($art_arr) > 0) {
 	foreach ($browse_fields as $f) {
 		$title=$f;
 		if (intval($f) > 0) {
-    		$title = $ath->getExtraFieldName($f);
+			$title = $ath->getExtraFieldName($f);
 		} else {
 			if ($f == 'id')
 				$title=_('ID');
@@ -660,15 +661,10 @@ if ($art_arr && count($art_arr) > 0) {
 
 	if (in_array('priority', $browse_fields)) {
 		show_priority_colors_key();
-
 	}
 } else {
-
-	echo '
-		<h1>'._('No items found').'</h1>';
+	echo '<div class="warning_msg">'._('No items found').'</div>';
 	echo db_error();
-	//echo "<!-- $sql -->";
-
 }
 
 $ath->footer(array());

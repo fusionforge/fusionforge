@@ -235,7 +235,7 @@ $res = db_query_params ('SELECT artifact_query_id,query_name FROM artifact_query
 
 //	Show the new pop-up boxes to select assigned to, status, etc
 //
-$ath->header(array('atid'=>$ath->getID()));
+$ath->header(array('atid'=>$ath->getID(), 'title' =>_('Build Query')));
 
 echo '<table align="center"><tr><td>' .
 		'<fieldset><legend>'.
@@ -243,8 +243,6 @@ echo '<table align="center"><tr><td>' .
 		'</legend>';
 
 echo '
-<h1>'. $feedback .'</h1>
-
 <form action="'.getStringFromServer('PHP_SELF').'?func=query&amp;group_id='.$group_id.'&amp;atid='.$ath->getID().'" method="post">
 <input type="hidden" name="form_key" value="'.form_generate_key().'" />
 <table align="center" border="3" cellpadding="4" rules="groups" frame="box" width="100%" class="tablecontent">
