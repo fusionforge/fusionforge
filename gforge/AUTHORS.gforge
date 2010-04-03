@@ -1,0 +1,125 @@
+#
+# GForge
+# Copyright 2002-2005 (c) GForge
+# http://gforge.org
+#
+# $Id$
+#
+
+----------------------------------------------------------------------------
+The GForge Team
+----------------------------------------------------------------------------
+
+Tim Perdue			<tim@gforge.org>
+Roland Mas			<99.roland.mas@aist.enst.fr>
+Christian Bayle		<gforge@free.fr>
+Tom Copeland		<tom@infoether.com>
+Guillaume Smet		<guillaume-gforge@smet.org>
+Francisco Gimeno	<kikov@kikov.org>
+Sung Kim			<hunkims@gmail.com>
+
+Past Members:
+Reinhard Spisser
+Ryan T. Sammartino
+Edward Ritter
+Michael Jennings
+
+----------------------------------------------------------------------------
+We'd like to thank the following volunteers for their contributions
+of code, documentation, ideas, and time:
+----------------------------------------------------------------------------
+
+Darrell Brogdon
+John Maguire
+Trix Farrar
+Philippe Kiener
+Robert J. Sanford, Jr.
+François Elie
+Richard Offer
+Julien Goodwin
+Bob Lamoureux
+Olafur Osvaldsson
+Jim Nutt
+Scott Armstrong
+Eric Kerin
+Graham Batty
+Robert B. Hawkins
+Ronald Petty
+Simon Lei
+Paul Kneeland
+Patrick McFarland
+Jeff Fynboh
+Vicente J. Ruiz Jurado
+Dragos Moinescu
+Alwyn Schoeman
+Tony Guntharp
+Hidenari Miwa
+David McNicol
+Ed Hill
+Paul Gibbbs
+James Michael DuPont
+Patrick Lemmens
+Christophe Colombier
+Auke Jilderda
+Rene Klootwijk
+Antoine Nivard
+Joo-won Jung
+Justin Richer
+Franco Catrin L.
+Mathieu Peltier
+Bo Jangborg
+Ramon van Alteren
+Mitch Murphy
+Brett N DiFrischia
+Andreas Schrattenecker
+Eric Evans
+Shawn Soon-Son Kwon
+Frank Gevaerts
+Lars Ehrhardt
+Joseph Bironas
+Marco Schmidt
+Chris Ward
+Marc Kalberer
+Kenneth C. Cone, Sr.
+Hunte Swee
+David Hirst
+Fabrício Vertamatti
+Benoît Sibaud
+Lele Gaifax
+Mike Heath
+Jason Chen
+Tomas Pospisek
+Jáder Marasca
+Oliver Blume
+Vidyut Luther
+Eric Robert
+Chris Watts
+Dominik Haas
+Diggy Bell
+Jaime Diaz
+Paul Santa Maria
+Josiah Olivieri
+Andre Costa
+Konrad Wulf
+Igor Blanco
+Florent Guilleux
+Pedro Paixao
+Matt Hope
+Rob Lanphier
+Finjon Kiang
+Andrey Molchanov
+Ognyan Kulev
+J Aaron Farr
+Tony Pugliese
+Hal Deadman
+Tobias Rötschke
+Greg Hudson
+Jens Jorgensen
+Ramon van Alteren
+Florent Guilleux
+Jimou Lee
+Alain Peyrat
+
+# Local Variables:
+# coding: utf-8
+# End:
