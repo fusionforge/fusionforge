@@ -1,5 +1,9 @@
 #! /usr/bin/make -f
 
+#
+# TODO : document the role of this Makefile
+#
+
 FUSIONFORGE=FusionForge
 PKGDIR=gforge
 PKGNAME=$(shell head -1 $(PKGDIR)/debian/changelog | sed 's/ .*//')
