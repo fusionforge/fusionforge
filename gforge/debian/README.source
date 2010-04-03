@@ -1,2 +1,7 @@
 This package uses dpatch.  For more details, install the dpatch package and
 consult /usr/share/doc/dpatch/README.source.gz.
+
+The Debian-specific package sources are managed in upstream's repository.
+
+
+ -- Olivier Berger <olivier.berger@it-sudparis.eu>, Tue, 30 Mar 2010 19:02:30 +0200
