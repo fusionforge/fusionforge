@@ -1,5 +1,5 @@
-What is Makefile.debian ?
+The code of FusionForge can be found in the gforge/ subdir.
 
-Process to recompile the official Debian packages from bzr ?
+TODO: What is the role of all the  Makefiles ?
 
 -- Olivier Berger
