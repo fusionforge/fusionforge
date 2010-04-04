@@ -1,5 +1,5 @@
 #
-# TODO : document the role of this Makefile
+# This Makefile may be used to create packages for distributions
 #
 
 DISTDEBIAN=$(shell [ -f /etc/debian_version ] && echo debian)
@@ -31,8 +31,9 @@ endif
 
 switch:
 	@echo "=========================================================================="
-	@echo "Use one of the following target with "
-	@echo "make -f Makefile.$(DIST) <target>"
+	@echo "We have detected that your are running a '$(DIST)' distribution."
+	@echo "Use one of the following targets with "
+	@echo "$$ make -f Makefile.$(DIST) <target>"
 	@echo "=========================================================================="
 	@$(MAKE) -f Makefile.$(DIST)
 
