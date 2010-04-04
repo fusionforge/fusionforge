@@ -2,6 +2,14 @@
 
 #
 # TODO : document the role of this Makefile
+
+# Uses cowbuilder to build packages inside ./builder/, for different
+# distributions
+# Packages are versioned ...
+
+# Built packages will be put into ./result/
+#
+# ATTENTION : it requires you to run cowbuilder with sudo
 #
 
 FUSIONFORGE=FusionForge
@@ -9,6 +17,7 @@ PKGDIR=gforge
 PKGNAME=$(shell head -1 $(PKGDIR)/debian/changelog | sed 's/ .*//')
 PKGLETTER=$(shell echo $(PKGNAME) | cut -c1)
 ORIGIN=debian.fusionforge.org
+# BRANCH set to 'svn' if checkout from trunk or 'brc' otherwise
 BRANCH=$(shell [ "$(shell echo $(basename $(CURDIR)) | sed 's/.*runk.*/trunk/')" = "trunk" ] && echo svn || echo brc)
 #
 ifeq (,$(shell echo "$$BUILDERDIR"))
@@ -92,8 +101,14 @@ default: list
 
 list:
 	@echo ======================================================================================
-	@echo '=                    Available targets are listed below ($(BRANCH))($(ARCH))        ='
-	@echo '=                    BUILDERDIR = $(BUILDERDIR)                                     ='
+	@echo '=                    Available targets are listed below                             ='
+	@echo '=                    Your current environment :                                     ='
+	@echo '=                     * checkout from :   $(BRANCH)                                     ='
+	@echo '=                     * architecture  :   $(ARCH)                                   ='
+	@echo '=                     * BUILDERDIR = $(BUILDERDIR)                                  ='
+	@echo "=                    (above 'checkout' meaning :                                    ="
+	@echo "=                       'svn' for trunk                                             ="
+	@echo "=                       'brc' for branches)                                         ="
 	@echo ======================================================================================
 	@cat Makefile.debian | grep '^.*:.*#$$' | sed 's/FUSIONFORGE/$(FUSIONFORGE)/' | sed 's/^\(.*:\).*#\(.*\)#$$/\1		\2/'
 	@echo ======================================================================================
@@ -155,7 +170,8 @@ documentor_subdir=PhpDocumentor-1.4.3
 # FUSIONFORGE
 #
 
-orig: $(TARBALLS)/$(ORIGFILE) # Make FUSIONFORGE orig file
+orig:   # Make Debian package .orig tarball #
+	$(MAKE) $(TARBALLS)/$(ORIGFILE) 
 
 #
 # PHPDOCUMENTOR
@@ -194,11 +210,13 @@ deploy: repodeb repoubu # ***** Deploy packages in Debian and Ubuntu repositorie
 
 repodeb: cowbuilddeb
 	@for dist in $(DEBIANLIST); do \
+	echo "$(MAKE) -f Makefile.debian localrepo reprepro XDISTRIB=$$dist LOCALREPO=$(LOCALREPODEB) DISTRIBLIST='$(DEBLIST)'" ; \
 	$(MAKE) -f Makefile.debian localrepo reprepro XDISTRIB=$$dist LOCALREPO=$(LOCALREPODEB) DISTRIBLIST="$(DEBLIST)" ; \
 	done
 
 repoubu: cowbuildubu
 	@for dist in $(UBUNTULIST); do \
+	echo "$(MAKE) -f Makefile.debian localrepo reprepro XDISTRIB=$$dist LOCALREPO=$(LOCALREPOUBU) DISTRIBLIST='$(UBULIST)'" ; \
 	$(MAKE) -f Makefile.debian localrepo reprepro XDISTRIB=$$dist LOCALREPO=$(LOCALREPOUBU) DISTRIBLIST="$(UBULIST)" ; \
 	done
 
@@ -207,21 +225,25 @@ cowbuildtest:
 
 cowbuilddeb: # ***** This is the one to cowbuild debian packages ***** #
 	@for dist in $(DEBIANLIST); do \
+	echo "$(MAKE) -f Makefile.debian cowbuilddist XDISTRIB=$$dist DISTROOP='$(DEBIANOP)'" ; \
 	$(MAKE) -f Makefile.debian cowbuilddist XDISTRIB=$$dist DISTROOP="$(DEBIANOP)" ; \
 	done
 
 cowbuildubu: # ***** This is the one to cowbuild ubuntu packages ***** #
 	@for dist in $(UBUNTULIST); do \
+	echo "$(MAKE) -f Makefile.debian cowbuilddist XDISTRIB=$$dist DISTROOP='$(UBUNTUOP)' HOOK='$(UBUHOOK)'" ; \
 	$(MAKE) -f Makefile.debian cowbuilddist XDISTRIB=$$dist DISTROOP="$(UBUNTUOP)" HOOK='$(UBUHOOK)' ; \
 	done
 
 pbuilddeb: # pbuild debian packages (less recommended) #
 	@for dist in $(DEBIANLISTP); do \
+	echo "$(MAKE) -f Makefile.debian pbuilddist XDISTRIB=$$dist DISTROOP='$(DEBIANOP)' LOCALREPO=$(LOCALREPODEB)" ; \
 	$(MAKE) -f Makefile.debian pbuilddist XDISTRIB=$$dist DISTROOP="$(DEBIANOP)" LOCALREPO=$(LOCALREPODEB) ; \
 	done
 
 pbuildubu: # pbuild ubuntu packages (less recommended) #
 	@for dist in $(UBUNTULISTP); do \
+	echo "$(MAKE) -f Makefile.debian pbuilddist XDISTRIB=$$dist DISTROOP='$(UBUNTUOP)' LOCALREPO=$(LOCALREPOUBU)" ; \
 	$(MAKE) -f Makefile.debian pbuilddist XDISTRIB=$$dist DISTROOP="$(UBUNTUOP)" LOCALREPO=$(LOCALREPOUBU) ; \
 	done
 
@@ -296,24 +318,26 @@ $(COWBUILDERBASE)/base-$(DISTRIB).stamp:
 	touch $@
 
 $(PBUILDERTGZ)/doconfig: /usr/sbin/pbuilder
+	@mkdir -p $(PBUILDERTGZ)
 	@echo "APTCACHE=$(APTCACHE)" > $(PBUILDERTGZ)/configfile
 	@echo "BUILDPLACE=$(BUILDPLACE)" >> $(PBUILDERTGZ)/configfile
 	@echo "BUILDRESULT=$(BUILDRESULT)" >> $(PBUILDERTGZ)/configfile
 
 $(COWBUILDERBASE)/doconfig: /usr/sbin/cowbuilder
+	@mkdir -p $(COWBUILDERBASE)
 	@echo "APTCACHE=$(APTCACHE)" > $(COWBUILDERBASE)/configfile
 	@echo "BUILDPLACE=$(BUILDPLACE)" >> $(COWBUILDERBASE)/configfile
 	@echo "BUILDRESULT=$(BUILDRESULT)" >> $(COWBUILDERBASE)/configfile
 
 /usr/sbin/pbuilder:
-	sudo apt-get install pbuilder
+	@echo "Error: you need to install package 'pbuilder', for instance with 'sudo apt-get install pbuilder'." ; /bin/false
 
 ubukey:
 	gpg --keyserver keyserver.ubuntu.com --recv-keys 40976EAF437D05B5
 	gpg --export --armor 40976EAF437D05B5 | sudo apt-key add -
 
 /usr/sbin/cowbuilder:
-	sudo apt-get install cowdancer
+	@echo "Error: you need to install package 'cowdancer', for instance with 'sudo apt-get install cowdancer'." ; /bin/false
 
 localrepo: $(LOCALREPO) $(LOCALREPO)/conf $(LOCALREPO)/conf/distributions
 
@@ -360,10 +384,10 @@ clean: # Clean $(BUILDPLACE) $(BUILDFILES) $(TARBALLS) (intermediate files) #
 	rm -rf $(BUILDPLACE) $(BUILDFILES) $(TARBALLS) 
 
 cleanenv: # Clean $(COWBUILDERBASE) $(PBUILDERTGZ) (chroots)#
-	rm -rf $(COWBUILDERBASE) $(PBUILDERTGZ)
+	sudo rm -rf $(COWBUILDERBASE) $(PBUILDERTGZ)
 
 cleancache: # Clean $(APTCACHE) (apt cache) #
-	rm -rf $(APTCACHE)
+	sudo rm -rf $(APTCACHE)
 
 cleanorig: # Clean $(TARBALLS)/$(ORIGFILE) #
 	rm -f $(TARBALLS)/$(ORIGFILE)
