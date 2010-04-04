@@ -1,2 +1,7 @@
 This package uses dpatch.  For more details, install the dpatch package and
 consult /usr/share/doc/dpatch/README.source.gz.
+
+Orig tarball is constructed from upstream's sources top-level dir
+using 'make orig'.
+
+ -- Olivier Berger <olivier.berger@it-sudparis.eu>, Sat,  3 Apr 2010 19:38:08 +0200
