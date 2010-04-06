@@ -8,6 +8,9 @@ DISTSUSE=$(shell grep -qi 'SuSE' /etc/issue && echo rh)
 DIST=$(DISTDEBIAN)$(DISTREDHAT)$(DISTSUSE)
 
 ARCHIVE=$(CURDIR)/depot
+#ifeq ($(BUILDDIR),)
+#	BUILDDIR=builddir
+#endif
 BUILDRESULT=$(CURDIR)/result
 
 DOXYGEN=doxygen
@@ -38,6 +41,8 @@ switch:
 	@$(MAKE) -f Makefile.$(DIST)
 
 check:
+	## To run test in verbose mode :
+	#cd tests ; phpunit --verbose unit; phpunit --verbose code; 
 	cd tests ; php AllTests.php
 
 buildtar:
