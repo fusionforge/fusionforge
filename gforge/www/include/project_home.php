@@ -496,8 +496,8 @@ if ($project->usesFTP()) {
 		echo '<div class="public-area-box">';
 		
 		$link_content = $HTML->getFtpPic('') . '&nbsp;' . _('Anonymous FTP Space');
-//		print '<a rel="doap:anonymous root" href="ftp://' . $project->getUnixName() . '.' . $GLOBALS['sys_default_domain'] . '/pub/'. $project->getUnixName() .'/">';
-        print util_make_link('ftp://' . $project->getUnixName() . '.' . $GLOBALS['sys_default_domain'] . '/pub/'. $project->getUnixName(), $link_content, false, true);
+//		print '<a rel="doap:anonymous root" href="ftp://' . $project->getUnixName() . '.' . forge_get_config('web_host') . '/pub/'. $project->getUnixName() .'/">';
+        print util_make_link('ftp://' . $project->getUnixName() . '.' . forge_get_config('web_host') . '/pub/'. $project->getUnixName(), $link_content, false, true);
 		echo '</div>';
 	}
 }

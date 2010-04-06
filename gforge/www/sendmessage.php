@@ -46,8 +46,8 @@ if ($touser) {
 	}
 }
 
-if ($toaddress && !eregi($GLOBALS['sys_default_domain'],$toaddress)) {
-	exit_error(_('Error'),sprintf(_('You can only send to addresses @<em>%1$s</em>.'),$GLOBALS['sys_default_domain']));
+if ($toaddress && !eregi(forge_get_config('web_host'),$toaddress)) {
+	exit_error(_('Error'),sprintf(_('You can only send to addresses @<em>%1$s</em>.'),forge_get_config('web_host')));
 }
 
 

@@ -21,9 +21,9 @@ require_once $gfcommon.'tracker/ArtifactType.class.php';
 require_once $gfcommon.'tracker/ArtifactCanned.class.php';
 
 function beginDocument() {
-	global $sys_default_domain;
+
 	header("Content-Type: text/plain");
-	echo '<tracker version="1.0" xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://'.$sys_default_domain.'/export/tracker.xsd">'."\n";
+	echo '<tracker version="1.0" xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://'.forge_get_config('web_host').'/export/tracker.xsd">'."\n";
 }
 
 function displayError($errorMessage) {

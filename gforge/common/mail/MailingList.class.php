@@ -196,7 +196,7 @@ Thank you for registering your project with %1$s.
 '), forge_get_config ('forge_name'), $GLOBALS['sys_lists_host'], $realListName, $this->getExternalInfoUrl(), $this->getExternalAdminUrl(), $listPassword);
 			$mailSubject = sprintf(_('%1$s New Mailing List'), forge_get_config ('forge_name'));
 			
-			util_send_message($userEmail, $mailSubject, $mailBody, 'admin@'.$GLOBALS['sys_default_domain']);
+			util_send_message($userEmail, $mailSubject, $mailBody, 'admin@'.forge_get_config('web_host'));
 		}
 		
 		db_commit();

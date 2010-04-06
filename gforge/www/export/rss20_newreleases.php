@@ -42,7 +42,7 @@ if ($group_id) {
 // ## one time output
 print " <channel>\n";
 print "  <title>".forge_get_config ('forge_name')." Project$title Releases</title>\n";
-print "  <link>http://".$GLOBALS['sys_default_domain']."$link</link>\n";
+print "  <link>http://".forge_get_config('web_host')."$link</link>\n";
 print "  <description>".forge_get_config ('forge_name')." Project Releases$description</description>\n";
 print "  <language>en-us</language>\n";
 print "  <copyright>Copyright ".date("Y")." ".forge_get_config ('forge_name')."</copyright>\n";
@@ -88,12 +88,12 @@ while ($row = db_fetch_array($res)) {
 	if (!isset ($seen[$row['filerelease_id']])) {
 		print "  <item>\n";
 		print "   <title>".htmlspecialchars($row['package_name'])." ".htmlspecialchars($row['module_name'])."</title>\n";
-		print "   <link>http://".$GLOBALS['sys_default_domain']."/project/showfiles.php?group_id=".$row['group_id']."&amp;release_id=".$row['filerelease_id']."</link>\n";
+		print "   <link>http://".forge_get_config('web_host')."/project/showfiles.php?group_id=".$row['group_id']."&amp;release_id=".$row['filerelease_id']."</link>\n";
 		print "   <description>".rss_description($row['module_notes'])."</description>\n";
 		print "   <author>".$row['user_name']."@".$GLOBALS['sys_users_host']." (".$row['realname'].")</author>\n";
-		print "   <comments>http://".$GLOBALS['sys_default_domain']."/project/shownotes.php?group_id=".$row['group_id']."&amp;release_id=".$row['filerelease_id']."</comments>\n";
+		print "   <comments>http://".forge_get_config('web_host')."/project/shownotes.php?group_id=".$row['group_id']."&amp;release_id=".$row['filerelease_id']."</comments>\n";
 		print "   <pubDate>".rss_date($row['release_date'])."</pubDate>\n";
-		print "   <guid>http://".$GLOBALS['sys_default_domain']."/project/showfiles.php?group_id=".$row['group_id']."&amp;release_id=".$row['filerelease_id']."</guid>\n";
+		print "   <guid>http://".forge_get_config('web_host')."/project/showfiles.php?group_id=".$row['group_id']."&amp;release_id=".$row['filerelease_id']."</guid>\n";
 		print "  </item>\n";
 		$outputtotal++;
 	}

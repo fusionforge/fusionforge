@@ -1,7 +1,7 @@
 <?php
  
 if (isset ($GLOBALS['sys_scm_host'])) {
-	$default_cvs_server = "cvs." . $GLOBALS['sys_default_domain'];
+	$default_cvs_server = "cvs." . forge_get_config('web_host');
 } else {
 	$default_cvs_server = 'scm';
 }

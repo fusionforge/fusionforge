@@ -150,7 +150,7 @@ foreach($groups as $group) {
 		//
 		//	Change some defaults in the template file
 		//
-		//$contents=str_replace('<domain>',$sys_default_domain,$contents);
+		//$contents=str_replace('<domain>',forge_get_config('web_host'),$contents);
 		//$contents=str_replace('<project_description>',$g->getDescription(),$contents);
 		//$contents=str_replace('<project_name>',$g->getPublicName(),$contents);
 		//$contents=str_replace('<group_id>',$g->getID(),$contents);
@@ -162,7 +162,7 @@ foreach($groups as $group) {
 		$contents=str_replace('##body##',
 			sprintf(
 				_("We're Sorry but this Project hasn't yet uploaded their personal webpage yet. <br /> Please check back soon for updates or visit <a href=\"%s\">the project page</a>."),
-				"http://".$GLOBALS['sys_default_domain'].'/projects/'.$g->getUnixName()),
+				"http://".forge_get_config('web_host').'/projects/'.$g->getUnixName()),
 			$contents);
 		//
 		//	Write the file back out to the project home dir

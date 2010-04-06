@@ -340,8 +340,8 @@ class Group extends Error {
 						       $is_public,
 						       $unix_name,
 						       htmlspecialchars($description),
-						       $unix_name.".".$GLOBALS['sys_default_domain'],
-						       $unix_name.".".$GLOBALS['sys_default_domain'],
+						       $unix_name.".".forge_get_config('web_host'),
+						       $unix_name.".".forge_get_config('web_host'),
 						       'P',
 						       $unix_box,
 						       $scm_box,
@@ -559,7 +559,7 @@ class Group extends Error {
 
 		$homepage = ltrim($homepage);
 		if (!$homepage) {
-			$homepage=$GLOBALS['sys_default_domain'].'/projects/'.$this->getUnixName().'/';
+			$homepage=forge_get_config('web_host').'/projects/'.$this->getUnixName().'/';
 		}
 
 		if (strlen(htmlspecialchars($short_description))>255) {
@@ -2378,7 +2378,7 @@ Please visit the following URL to approve or reject this project:
 Project Full Name:  %2$s
 Submitted Description: %3$s
 
-The %1$s admin team will now examine your project submission.  You will be notified of their decision.'), forge_get_config ('forge_name'), $this->getPublicName(), util_unconvert_htmlspecialchars($this->getRegistrationPurpose()), $GLOBALS['sys_default_domain']);
+The %1$s admin team will now examine your project submission.  You will be notified of their decision.'), forge_get_config ('forge_name'), $this->getPublicName(), util_unconvert_htmlspecialchars($this->getRegistrationPurpose()), forge_get_config('web_host'));
 				
 		util_send_message($email, sprintf(_('New %1$s Project Submitted'), forge_get_config ('forge_name')), $message);
 		setup_gettext_from_context();

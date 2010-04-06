@@ -422,14 +422,14 @@ class ArtifactType extends Error {
 	 * @return string return email address
 	 */
 	function getReturnEmailAddress() {
-		global $sys_default_domain,$sys_use_gateways;
+		global $sys_use_gateways;
 		$address = '';
 		if($sys_use_gateways) {
 			$address .= strtolower($this->getUnixName());
 		} else {
 			$address .= 'noreply';
 		}
-		$address .= '@'.$sys_default_domain;
+		$address .= '@'.forge_get_config('web_host');
 		return $address;
 	}
 

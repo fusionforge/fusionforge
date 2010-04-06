@@ -695,23 +695,23 @@ Or reply to this e-mail entering your response between the following markers:
 					      '&group_id='.$this->Forum->Group->getID().'&stop=1')
 				);
 
-			$extra_headers = "Return-Path: <noreply@".$GLOBALS['sys_default_domain'].">\n";
-			$extra_headers .= "Errors-To: <noreply@".$GLOBALS['sys_default_domain'].">\n";
-			$extra_headers .= "Sender: <noreply@".$GLOBALS['sys_default_domain'].">\n";
+			$extra_headers = "Return-Path: <noreply@".forge_get_config('web_host').">\n";
+			$extra_headers .= "Errors-To: <noreply@".forge_get_config('web_host').">\n";
+			$extra_headers .= "Sender: <noreply@".forge_get_config('web_host').">\n";
 			$extra_headers .= "Reply-To: ".$this->Forum->getReturnEmailAddress()."\n";
 			$extra_headers .= "Precedence: Bulk\n"
-				."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getId()."@".$GLOBALS['sys_default_domain'].">\n"
+				."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getId()."@".forge_get_config('web_host').">\n"
 				."List-Help: ".util_make_url ('/forum/forum.php?id='.$this->Forum->getId())."\n"
-				."Message-Id: <forumpost".$this->getId()."@".$GLOBALS['sys_default_domain'].">";
+				."Message-Id: <forumpost".$this->getId()."@".forge_get_config('web_host').">";
 			$parentid = $this->getParentId();
 			if (!empty($parentid)) {
 				$extra_headers .= "\nIn-Reply-To: ".$this->Forum->getReturnEmailAddress()."\n"
-					."References: <forumpost".$this->getParentId()."@".$GLOBALS['sys_default_domain'].">";
+					."References: <forumpost".$this->getParentId()."@".forge_get_config('web_host').">";
 			}
 			
 			$subject="[" . $this->Forum->getUnixName() ."][".$this->getID()."] ".util_unconvert_htmlspecialchars($this->getSubject());
 
-			util_send_message($dest_email,$subject,$body,"noreply@".$GLOBALS['sys_default_domain'],'','Forum',$extra_headers);
+			util_send_message($dest_email,$subject,$body,"noreply@".forge_get_config('web_host'),'','Forum',$extra_headers);
 		}
 
 		// Switch back to the user language settings
@@ -750,19 +750,19 @@ Or reply to this e-mail entering your response between the following markers:
 		"\n\n______________________________________________________________________".
 		"\nYou are receiving this email because the forum you administrate has a new moderated message awaiting your approval.";
 
-		//$extra_headers = 'Reply-to: '.$this->Forum->getUnixName().'@'.$GLOBALS['sys_default_domain'];
-		$extra_headers = "Return-Path: <noreply@".$GLOBALS['sys_default_domain'].">\n";
-		$extra_headers .= "Errors-To: <noreply@".$GLOBALS['sys_default_domain'].">\n";
-		$extra_headers .= "Sender: <noreply@".$GLOBALS['sys_default_domain'].">\n";
+		//$extra_headers = 'Reply-to: '.$this->Forum->getUnixName().'@'.forge_get_config('web_host');
+		$extra_headers = "Return-Path: <noreply@".forge_get_config('web_host').">\n";
+		$extra_headers .= "Errors-To: <noreply@".forge_get_config('web_host').">\n";
+		$extra_headers .= "Sender: <noreply@".forge_get_config('web_host').">\n";
 		$extra_headers .= "Reply-To: ".$this->Forum->getReturnEmailAddress()."\n";
 		$extra_headers .= "Precedence: Bulk\n"
-			."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getId()."@".$GLOBALS['sys_default_domain'].">\n"
+			."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getId()."@".forge_get_config('web_host').">\n"
 			."List-Help: ".util_make_url('/forum/forum.php?id='.$this->Forum->getId())."\n"
-			."Message-Id: <forumpost".$this->getId()."@".$GLOBALS['sys_default_domain'].">";
+			."Message-Id: <forumpost".$this->getId()."@".forge_get_config('web_host').">";
 		$parentid = $this->getParentId();
 		if (!empty($parentid)) {
  			$extra_headers .= "\nIn-Reply-To: ".$this->Forum->getReturnEmailAddress()."\n"
-				."References: <forumpost".$this->getParentId()."@".$GLOBALS['sys_default_domain'].">";
+				."References: <forumpost".$this->getParentId()."@".forge_get_config('web_host').">";
 		}
 
 		$subject="[" . $this->Forum->getUnixName() ."][".$this->getID()."] ".util_unconvert_htmlspecialchars($this->getSubject());
@@ -775,8 +775,8 @@ Or reply to this e-mail entering your response between the following markers:
 		$BCC =& implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
 		$User = user_get_object($this->getPosterID());
 		//util_send_message('',$subject,$body,$User->getEmail(),$BCC,$this->getPosterRealName(),$extra_headers);
-		util_send_message('',$subject,$body,"noreply@".$GLOBALS['sys_default_domain'],$BCC,'Forum',$extra_headers);
-//		util_handle_message(array_unique($ids),$subject,$body,$this->Forum->getSendAllPostsTo(),'','forumgateway@'.$GLOBALS[sys_default_domain]);
+		util_send_message('',$subject,$body,"noreply@".forge_get_config('web_host'),$BCC,'Forum',$extra_headers);
+//		util_handle_message(array_unique($ids),$subject,$body,$this->Forum->getSendAllPostsTo(),'','forumgateway@'.forge_get_config('web_host'));
 		return true;
 	}
 
@@ -856,18 +856,18 @@ Or reply to this e-mail entering your response between the following markers:
 			"\nTo stop monitoring this forum, login to ".forge_get_config ('forge_name')." and visit: ".
 				"\n".util_make_url ('/forum/monitor.php?forum_id='.$this->Forum->getID() .'&group_id='.$this->Forum->Group->getID().'&stop=1');
 	
-			$extra_headers = "Return-Path: <noreply@".$GLOBALS['sys_default_domain'].">\n";
-			$extra_headers .= "Errors-To: <noreply@".$GLOBALS['sys_default_domain'].">\n";
-			$extra_headers .= "Sender: <noreply@".$GLOBALS['sys_default_domain'].">\n";
+			$extra_headers = "Return-Path: <noreply@".forge_get_config('web_host').">\n";
+			$extra_headers .= "Errors-To: <noreply@".forge_get_config('web_host').">\n";
+			$extra_headers .= "Sender: <noreply@".forge_get_config('web_host').">\n";
 			$extra_headers .= "Reply-To: ".$this->Forum->getReturnEmailAddress()."\n";
 			$extra_headers .= "Precedence: Bulk\n"
-				."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getId()."@".$GLOBALS['sys_default_domain'].">\n"
+				."List-Id: ".$this->Forum->getName()." <forum".$this->Forum->getId()."@".forge_get_config('web_host').">\n"
 				."List-Help: ".util_make_url('/forum/forum.php?id='.$this->Forum->getId())."\n"
-				."Message-Id: <forumpost".$this->getId()."@".$GLOBALS['sys_default_domain'].">";
+				."Message-Id: <forumpost".$this->getId()."@".forge_get_config('web_host').">";
 			$parentid = $this->getParentId();
 			if (!empty($parentid)) {
 				$extra_headers .= "\nIn-Reply-To: ".$this->Forum->getReturnEmailAddress()."\n"
-					."References: <forumpost".$this->getParentId()."@".$GLOBALS['sys_default_domain'].">";
+					."References: <forumpost".$this->getParentId()."@".forge_get_config('web_host').">";
 			}
 	
 			$subject="[" . $this->Forum->getUnixName() ."][".$this->getID()."] ".util_unconvert_htmlspecialchars($this->getSubject());
@@ -878,7 +878,7 @@ Or reply to this e-mail entering your response between the following markers:
 			}
 			$BCC =& implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
 			$User = user_get_object($this->getPosterID());
-			util_send_message('',$subject,$body,"noreply@".$GLOBALS['sys_default_domain'],$BCC,'Forum',$extra_headers);
+			util_send_message('',$subject,$body,"noreply@".forge_get_config('web_host'),$BCC,'Forum',$extra_headers);
 			return true;
 		}
 		

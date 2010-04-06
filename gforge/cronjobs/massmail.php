@@ -196,7 +196,7 @@ by visiting following link:
 	} else {
 		$tail = "" ;
 	}
-	util_send_message($row['email'],$subj, $body."\r\n".$tail,'noreply@'.$sys_default_domain);
+	util_send_message($row['email'],$subj, $body."\r\n".$tail,'noreply@'.forge_get_config('web_host'));
 	$last_userid = $row['user_id'];
 
 	sleep($SLEEP);

@@ -72,7 +72,7 @@ project_admin_header(array('title'=>$adminheadertitle, 'group'=>$group->getID())
 	global $sys_use_shell;
 	if ($sys_use_shell) {
 ?> 
-<p><?php echo _('Group shell (SSH) server:&nbsp;') ?><strong><?php echo $group->getUnixName().'.'.$GLOBALS['sys_default_domain']; ?></strong></p>
+<p><?php echo _('Group shell (SSH) server:&nbsp;') ?><strong><?php echo $group->getUnixName().'.'.forge_get_config('web_host'); ?></strong></p>
 <p><?php echo _('Group directory on shell server:&nbsp;') ?><br/><strong><?php echo account_group_homedir($group->getUnixName()); ?></strong></p>
 <p><?php echo _('Project WWW directory on shell server:&nbsp;') ?><br /><strong><?php echo account_group_homedir($group->getUnixName()).'/htdocs'; ?></strong></p>
 <?php

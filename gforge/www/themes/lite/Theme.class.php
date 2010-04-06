@@ -84,7 +84,7 @@ class Theme extends Layout {
 	<!--
 	function help_window(helpurl) {
 		HelpWin = window.open( '<?php echo ((session_issecure()) ? 'https://'.
-			$GLOBALS['sys_default_domain'] : 'http://'.$GLOBALS['sys_default_domain']); ?>' + helpurl,'HelpWindow','scrollbars=yes,resizable=yes,toolbar=no,height=400,width=400');
+			forge_get_config('web_host') : 'http://'.forge_get_config('web_host')); ?>' + helpurl,'HelpWindow','scrollbars=yes,resizable=yes,toolbar=no,height=400,width=400');
 	}
 	// -->
 	<?php plugin_hook ("javascript",false) ; ?>

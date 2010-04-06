@@ -423,7 +423,7 @@ class Forum extends Error {
 	 * @return string return email address
 	 */
 	function getReturnEmailAddress() {
-		global $sys_default_domain, $sys_use_gateways;
+		global $sys_use_gateways;
 		$address = '';
 		if($sys_use_gateways) {
 			$address .= $this->getUnixName();
@@ -434,7 +434,7 @@ class Forum extends Error {
 		if($sys_use_gateways && isset($GLOBALS['sys_forum_return_domain'])) {
 			$address .= $GLOBALS['sys_forum_return_domain'];
 		} else {
-			$address .= $sys_default_domain;
+			$address .= forge_get_config('web_host');
 		}
 		return $address;
 	}

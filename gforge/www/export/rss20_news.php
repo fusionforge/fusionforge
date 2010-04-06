@@ -41,7 +41,7 @@ if ($group_id) {
 }
 
 $rssTitle = forge_get_config ('forge_name')." Project$title News";
-$rssLink = "http://".$GLOBALS['sys_default_domain']."/news/$link";
+$rssLink = "http://".forge_get_config('web_host')."/news/$link";
 
 // ## one time output
 print " <channel>\n";
@@ -77,23 +77,23 @@ while ($row = db_fetch_array($res)) {
 	print "   <title>".htmlspecialchars($row['summary'])."</title>\n";
 	// if news group, link is main page
 	if ($row['group_id'] != $sys_news_group) {
-		print "   <link>http://".$GLOBALS['sys_default_domain']."/forum/forum.php?forum_id=".$row['forum_id']."</link>\n";
+		print "   <link>http://".forge_get_config('web_host')."/forum/forum.php?forum_id=".$row['forum_id']."</link>\n";
 	} else {
-		print "   <link>http://".$GLOBALS['sys_default_domain']."/</link>\n";
+		print "   <link>http://".forge_get_config('web_host')."/</link>\n";
 	}
 	print "   <description>".rss_description($row['details'])."</description>\n";
 	print "   <author>".$row['user_name']."@".$GLOBALS['sys_users_host']." (".$row['realname'].")</author>\n";
 	print "   <pubDate>".rss_date($row['post_date'])."</pubDate>\n";
 	if ($row['group_id'] != $sys_news_group) {
-		print "   <guid>http://".$GLOBALS['sys_default_domain']."/forum/forum.php?forum_id=".$row['forum_id']."</guid>\n";
+		print "   <guid>http://".forge_get_config('web_host')."/forum/forum.php?forum_id=".$row['forum_id']."</guid>\n";
 	} else {
-		print "   <guid>http://".$GLOBALS['sys_default_domain']."/</guid>\n";
+		print "   <guid>http://".forge_get_config('web_host')."/</guid>\n";
 	}
 	// if news group, comment is main page
 	if ($row['group_id'] != $sys_news_group) {
-		print "   <comments>http://".$GLOBALS['sys_default_domain']."/forum/forum.php?forum_id=".$row['forum_id']."</comments>\n";
+		print "   <comments>http://".forge_get_config('web_host')."/forum/forum.php?forum_id=".$row['forum_id']."</comments>\n";
 	} else {
-		print "   <comments>http://".$GLOBALS['sys_default_domain']."/</comments>\n";
+		print "   <comments>http://".forge_get_config('web_host')."/</comments>\n";
 	}
 	print "  </item>\n";
 }

@@ -12,7 +12,7 @@ $forge=new FusionForge();
 $vers=$forge->software_version;
 $name=$forge->software_name;
 $date=rss_date(time());
-$link="http://".$GLOBALS['sys_default_domain'].'/';
+$link="http://".forge_get_config('web_host').'/';
 $title=forge_get_config ('forge_name').' - Software version';
 
 header("Content-Type: text/xml; charset=utf-8");

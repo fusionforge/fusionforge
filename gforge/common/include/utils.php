@@ -119,10 +119,10 @@ function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$e
 	global $sys_bcc_all_email_address,$sys_sendmail_path;
 
 	if (!$to) {
-		$to='noreply@'.$GLOBALS['sys_default_domain'];
+		$to='noreply@'.forge_get_config('web_host');
 	}
 	if (!$from) {
-		$from='noreply@'.$GLOBALS['sys_default_domain'];
+		$from='noreply@'.forge_get_config('web_host');
 	}
 	
 
@@ -1002,7 +1002,7 @@ function util_make_url ($path) {
 	else
 		$url = "http://" ;
 	
-	$url .= $GLOBALS['sys_default_domain'] ;
+	$url .= forge_get_config('web_host') ;
 	$url .= util_make_uri ($path) ;
 	return $url ;
 }

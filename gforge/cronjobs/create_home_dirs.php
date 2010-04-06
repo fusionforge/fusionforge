@@ -129,7 +129,7 @@ foreach($groups as $group)
 		//
 		//	Change some defaults in the template file
 		//
-		$contents = str_replace ("<domain>", $sys_default_domain, $contents);
+		$contents = str_replace ("<domain>", forge_get_config('web_host'), $contents);
 		$contents = str_replace ("<project_description>", $g->getDescription (), $contents);
 		$contents = str_replace ("<project_name>", $g->getPublicName (), $contents);
 		$contents = str_replace ("<group_id>", $g->getID (), $contents);

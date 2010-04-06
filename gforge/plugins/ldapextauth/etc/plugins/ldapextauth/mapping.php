@@ -14,7 +14,7 @@ function plugin_ldapextauth_mapping ($entry) {
 
 	// Defines new user email address, from LDAP or based on forge domain.
 	$result['email'] = $entry['mail'][0] ;
-	//$result['email'] = $entry['uid'][0] . '@' . $GLOBALS['sys_default_domain'] ;
+	//$result['email'] = $entry['uid'][0] . '@' . forge_get_config('web_host') ;
 
 	// Defines new user theme, causes error if left blank.
 	$result['themeid']=$GLOBALS['sys_default_theme_id'];

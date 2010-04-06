@@ -36,6 +36,9 @@ require $gfcommon.'include/config.php';
 
 forge_define_config_item ('forge_name', 'core', $GLOBALS['sys_name']) ;
 forge_define_config_item ('user_registration_restricted', 'core', $GLOBALS['sys_user_reg_restricted']) ;
+forge_define_config_item ('web_host', 'core', $GLOBALS['sys_default_domain']) ;
+// forge_define_config_item ('', 'core', $GLOBALS['sys_']) ;
+
 /* Long-term:
  require_once $gfcommon.'include/FusionForge.class.php';
  $forge = new FusionForge() ;

@@ -51,7 +51,7 @@ print " <channel>\n";
 print "  <copyright>Copyright ".date("Y")." ".forge_get_config ('forge_name')."</copyright>\n";
 print "  <pubDate>".rss_date(time())."</pubDate>\n";
 print "  <description>".forge_get_config ('forge_name')." New Releases</description>\n";
-print "  <link>http://".$GLOBALS['sys_default_domain']."</link>\n";
+print "  <link>http://".forge_get_config('web_host')."</link>\n";
 print "  <title>".forge_get_config ('forge_name')." New Releases</title>\n";
 print "  <webMaster>".$GLOBALS['sys_admin_email']."</webMaster>\n";
 print "  <language>en-us</language>\n";
@@ -62,7 +62,7 @@ while ($row = db_fetch_array($res)) {
 	if (!isset ($seen[$row['group_id']])) {
 		print "  <item>\n";
 		print "   <title>".htmlspecialchars($row['group_name'])."</title>\n";
-		print "   <link>http://$GLOBALS[sys_default_domain]/project/showfiles.php?group_id=$row[group_id]</link>\n";
+		print "   <link>http://forge_get_config('web_host')/project/showfiles.php?group_id=$row[group_id]</link>\n";
 		print "   <description>".rss_description($row['summary'])."</description>\n";
 		print "  </item>\n";
 		$outputtotal++;
