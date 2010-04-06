@@ -4091,4 +4091,5 @@ tools/tab2po/src/test/resources/translations/en.po.new -text
 tools/tab2po/src/test/resources/translations/fr.po -text
 tools/tab2po/src/test/resources/translations/fr.po.new -text
 tools/tab2po/src/test/resources/translations/gforge.pot -text
+tools/unify_config.sh -text
 tools/update-gettext-files.sh -text
