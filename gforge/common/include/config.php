@@ -52,14 +52,18 @@ class FusionForgeConfig {
 	}
 
 	function read_config_file ($file) {
-		$sections = parse_ini_file ($file, true) ;
-		foreach ($sections as $section => $options) {
-			if (!isset (self::$instance->settings[$section]))
-				continue ;
-			foreach ($options as $var => $value) {
-				if (!isset (self::$instance->settings[$section][$var]))
-					continue ;
-				self::$instance->settings[$section][$var] = $value ;
+		if (file_exists($file)) {
+			$sections = parse_ini_file ($file, true) ;
+			if(is_array($is)) {
+				foreach ($sections as $section => $options) {
+					if (!isset (self::$instance->settings[$section]))
+						continue ;
+					foreach ($options as $var => $value) {
+						if (!isset (self::$instance->settings[$section][$var]))
+							continue ;
+						self::$instance->settings[$section][$var] = $value ;
+					}
+				}
 			}
 		}
 		return ;
