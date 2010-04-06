@@ -7,7 +7,7 @@
  * Copyright 2009, Roland Mas
  *
  * @author Tim Perdue tim@gforge.org
- * @author Sung Kim 
+ * @author Sung Kim
  * @author Francisco Gimeno <kikov@kikov.org>
  *
  * This file is part of GForge.
@@ -78,8 +78,7 @@ class TrackerGateway extends Error {
 	
 		return true;
 	}
-	
-	
+
 	/**
 	 * function - Copy mail(from stdin to tmp and return the tmp file
 	 *
@@ -95,10 +94,10 @@ class TrackerGateway extends Error {
 		while($buffer = fgets($in, 4096)) {
 			fputs($out, $buffer);
 		}
-	
+
 		fclose($in);
 		fclose($out);
-	
+
 		return $tmpfile;
 	}
 
@@ -111,7 +110,7 @@ class TrackerGateway extends Error {
 	 */
 	function parseMail($input_file) {
 		global $argv;
-		
+
 		if (!$mp = new MailParser($input_file)) {
 			$this->setError('Error In MailParser');
 			return false;
@@ -142,14 +141,14 @@ class TrackerGateway extends Error {
 			return false;
 		}
 
-		$body = addslashes($mp->getBody());
+		$body = $mp->getBody();
 		// find first occurrence of the marker in the message
 		$begin = strpos($body, ARTIFACT_MAIL_MARKER);
 		if ($begin === false) {
 			$this->setError("Response message wasn't found in your mail. Please verify that ".
-							"you entered your message between the correct text markers.".
-							"\nYour message was:".
-							"\n".$mp->getBody());
+					"you entered your message between the correct text markers.".
+					"\nYour message was:".
+					"\n".$mp->getBody());
 			return false;
 		}
 		// get the part of the message located after the marker
@@ -158,21 +157,21 @@ class TrackerGateway extends Error {
 		$end = strpos($body, ARTIFACT_MAIL_MARKER);
 		if ($end === false) {
 			$this->setError("Response message wasn't found in your mail. Please verify that ".
-							"you entered your message between the correct text markers.".
-							"\nYour message was:".
-							"\n".$mp->getBody());
+					"you entered your message between the correct text markers.".
+					"\nYour message was:".
+					"\n".$mp->getBody());
 			return false;
 		}
 		$message = substr($body, 0, $end);
 		$message = trim($message);
-		
+
 		// maybe the last line was "> (ARTIFACT_MAIL_MARKER)". In that case, delete the last ">"
 		$message = preg_replace('/>$/', '', $message);
 		$this->Message = $message;
-		
+
 		return true;
 	}
-	
+
 	/**
 	 * Insert data into the tracker db
 	 *
@@ -194,7 +193,7 @@ class TrackerGateway extends Error {
 		if (!$Artifact || !is_object($Artifact)) {
 			$this->setError("Could Not Get Artifact");
 			return false;
-		} 
+		}
 		if (!$user_id && !$Artifact->ArtifactType->allowsAnon()) {
 			$this->setError("Could Not Match Sender Email Address to User and Tracker Does Not Allow Anonymous Posts");
 			return false;
@@ -213,7 +212,7 @@ class TrackerGateway extends Error {
 
 
 	/*------------------------------------------------------------------------
-	 *  Utility functions 
+	 *  Utility functions
 	 *-----------------------------------------------------------------------*/
 
 	/* Find user_id from email */
@@ -229,29 +228,29 @@ class TrackerGateway extends Error {
 			$user_id = db_result($res,0,'user_id');
 		}
 		db_free_result($res);
-	
+
 		return $user_id;
 	}
 
 	function &getArtifact() {
 		global $argv;
 
-			// $Group not needed, but let the code here to support
-			// tracker additions in the Future
-			$Group =& group_get_object_by_name($argv[1]);
-			if (!$Group || !is_object($Group)) {
-				$this->setError('Could Not Get Group Object');
-				return false;
-			} elseif ($Group->isError()) {
-				$this->setError('Getting Group Object: '.$Group->getErrorMessage());
-				return false;
-			}
-			// DBG("Artifact_get_object(".$this->ArtifactId.");");
-			$this->Artifact =& artifact_get_object($this->ArtifactId);
-	
+		// $Group not needed, but let the code here to support
+		// tracker additions in the Future
+		$Group =& group_get_object_by_name($argv[1]);
+		if (!$Group || !is_object($Group)) {
+			$this->setError('Could Not Get Group Object');
+			return false;
+		} elseif ($Group->isError()) {
+			$this->setError('Getting Group Object: '.$Group->getErrorMessage());
+			return false;
+		}
+		// DBG("Artifact_get_object(".$this->ArtifactId.");");
+		$this->Artifact =& artifact_get_object($this->ArtifactId);
+
 		return $this->Artifact;
 	}
- 
+
 }
 
 
@@ -261,19 +260,18 @@ class TrackerGateway extends Error {
  * Add this in /etc/syslog.conf and see /var/log/debug file:
  * # Debug
  * *.=debug			/var/log/debug
- * 
+ *
  */
 function DBG($str) {
 	global $debug;
 
 	if ($debug==1) {
-		system("echo \"artifact: ".$str."\n\" >> /tmp/tracker.log");
+		system("echo \"artifact: ".$str."\n\" >> /tmp/tracker-gateway.log");
 		syslog(LOG_DEBUG, "artifact_gateway: ". $str);
 	} else if ($debug==2) {
 		echo $str."\n";
 	}
 }
- 
 
 /* Main routine */
 $debug = 0;
