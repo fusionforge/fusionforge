@@ -1,3 +1,9 @@
+fusionforge (5.0.50-1) unstable; urgency=low
+
+  * Snapshot from upstream SVN.
+
+ -- Roland Mas <lolando@debian.org>  Tue, 06 Apr 2010 18:30:28 +0200
+
 fusionforge (5.0-1) unstable; urgency=low
 
   * New upstream release, woo-hoo!
