@@ -12,6 +12,31 @@ require_once 'PHPUnit/Framework/TestCase.php';
  */
 class Syntax_Tests extends PHPUnit_Framework_TestCase
 {
+  /**
+   * First, make sure pcregrep is installed
+   */
+  public function testPcRegrepInstalled()
+  {
+    $output = `type pcregrep >/dev/null; echo $?`;
+    $rc = trim($output);
+    if ($rc != '0') {
+      $output = `type pcregrep`;
+      $this->fail('You should probably install "pcregrep" : `type pcregrep` reports "'.$output);
+    }
+  }
+
+  /**
+   * First, make sure it is run from inside the tests/ subdir
+   */
+  public function testPath()
+  {
+    $output = `ls ../gforge >/dev/null; echo $?`;
+    $rc = trim($output);
+    if ($rc != '0') {
+      $output = `ls ../gforge`;
+      $this->fail('Must be run from inside the "tests/" subdir : `ls ../gforge` reports "'.$output);
+    }
+  }
     /**
      * Validate all php code with php -l.
      */
