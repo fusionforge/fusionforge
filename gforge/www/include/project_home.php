@@ -56,6 +56,8 @@ plugin_hook ("project_before_description",$hook_params) ;
 
 // insert an empty <span /> which seems to be better if not compacted
 print '<span property="doap:name" content="'. $project->getUnixName() .'"></span>'."\n";
+// print '<span property="coclico:hosted_by">' ...
+//print '<div property="sioc:has_container" xmlns:sioc="http://rdfs.org/sioc/ns#" content="fusionforge:ForgeProjects" xmlns:fusionforge="http://fusionforge.org/fusionforge#">';
 
 $project_description = $project->getDescription();
 if ($project_description) {
@@ -136,6 +138,11 @@ if($GLOBALS['sys_use_people']) {
 						 $num),
 					util_make_url ('/people/?group_id='.$group_id),
 					db_result($jobs_res,0,"name"));
+//print '<div rel="fusionforge:has_job" typeof="fusionforge:Job" xmlns:fusionforge="http://fusionforge.org/fusionforge#">';
+//print '<span rel="dc:title" content="'. db_result($jobs_res,0,"name").'" xmlns:dc="http://purl.org/dc/elements/1.1/">'; 
+//print '</span>';
+//echo '</div>';
+//end of job description part
 			}
 	}
 }
@@ -172,7 +179,7 @@ if (db_numrows($res_admin) > 0) {
 		$developer_url = util_make_url_u ($row_admin['user_name'],$row_admin['user_id']);
 		echo '<div typeof="foaf:Person" xmlns:foaf="http://xmlns.com/foaf/0.1/" about="'.
 			$developer_url.'#me' .'" >'."\n";
-		echo '<div rel="foaf:holdsAccount">'."\n";
+		echo '<div rel="foaf:account">'."\n";
 		echo '<div typeof="sioc:UserAccount" about="'.
         	$developer_url.
         	'" xmlns:sioc="http://rdfs.org/sioc/ns#">'."\n";
@@ -188,9 +195,14 @@ if (db_numrows($res_admin) > 0) {
 }
 
 $members = $project->getUsers();
-echo '<p>';
+echo '<p><span rel="sioc:has_usergroup" xmlns:sioc="http://rdfs.org/sioc/ns#">';
+echo '<div about="members/" typeof="sioc:UserGroup">';
+echo '<span rel="http://www.w3.org/2002/07/owl#sameAs">';
 echo util_make_link ('/project/memberlist.php?group_id='.$group_id,sprintf(_('View the %1$d Member(s)'),count($members)));
-echo '</p>';
+echo '</span>';
+echo '</div>';
+echo '</span></p>';
+// end of project usergroup description
 
 if (!$iam_member) {
 	echo '<p>'.util_make_link ('/project/request.php?group_id='.$group_id,_('Request to join')).'</p>';
@@ -276,6 +288,7 @@ if ($project->usesFRS()) {
 							<strong>' . $package_name . '</strong>
 						</td>';
 					// Releases to display
+//print '<div about="" xmlns:sioc="http://rdfs.org/sioc/ns#" rel="container_of" resource="'.util_make_link ('/frs/?group_id=' . $group_id . '&amp;release_id=' . db_result($res_files,$f,'release_id').'">';
 					echo '
                         <td>'
 						.$package_release.'
@@ -284,6 +297,7 @@ if ($project->usesFRS()) {
 						. $rel_date["month"] . ' ' . $rel_date["mday"] . ', ' . $rel_date["year"] .
 						'</td>
 						<td class="align-center">';
+//echo '</div>';
 					
 					// -> notes
 					// accessibility: image is a link, so alt must be unique in page => construct a unique alt
@@ -384,6 +398,7 @@ if ($project->usesTracker()) {
 
 if ($project->usesForum()) {
 	echo '<div class="public-area-box">';
+//	print '<hr size="1" /><a rel="sioc:container_of" xmlns:sioc="http://rdfs.org/sioc/ns#" href="'.util_make_url ('/forum/?group_id='.$group_id).'">';
     $link_content = $HTML->getForumPic('') . '&nbsp;' . _('Public Forums');
     echo util_make_link ( '/forum/?group_id=' . $group_id, $link_content);
 	print ' (';
@@ -401,6 +416,7 @@ if ($project->usesForum()) {
 if ($project->usesDocman()) {
 	echo '<div class="public-area-box">';
 	$link_content = $HTML->getDocmanPic('') . '&nbsp;' . _('DocManager: Project Documentation');
+//	<a rel="sioc:container_of" xmlns:sioc="http://rdfs.org/sioc/ns#" href="'.util_make_url ('/docman/?group_id='.$group_id).'">';
 	print util_make_link( '/docman/?group_id='.$group_id, $link_content);
 	echo '</div>';
 }
@@ -457,6 +473,7 @@ if ($project->usesSCM()) {
 	echo '<div class="public-area-box">';
 
 	$link_content = $HTML->getScmPic('') . '&nbsp;' . _('SCM Repository');
+//	print '<hr size="1" /><a rel="doap:repository" href="'.util_make_url ('/scm/?group_id='.$group_id).'">';
 	print util_make_link( '/scm/?group_id='.$group_id, $link_content);
 
 	$hook_params = array () ;
@@ -479,6 +496,7 @@ if ($project->usesFTP()) {
 		echo '<div class="public-area-box">';
 		
 		$link_content = $HTML->getFtpPic('') . '&nbsp;' . _('Anonymous FTP Space');
+//		print '<a rel="doap:anonymous root" href="ftp://' . $project->getUnixName() . '.' . $GLOBALS['sys_default_domain'] . '/pub/'. $project->getUnixName() .'/">';
         print util_make_link('ftp://' . $project->getUnixName() . '.' . $GLOBALS['sys_default_domain'] . '/pub/'. $project->getUnixName(), $link_content, false, true);
 		echo '</div>';
 	}

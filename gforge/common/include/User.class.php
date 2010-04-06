@@ -818,6 +818,15 @@ Enjoy the site.
 	function getEmail() {
 		return $this->data_array['email'];
 	}
+	
+	/**
+	 * getSha1Email - a SHA1 encoded hash of the email URI (including mailto: prefix)
+	 * 
+	 * @return string The SHA1 encoded value for the email
+	 */
+	function getSha1Email() {
+		return sha1('mailto:'.$this->getEmail());
+	}
 
 	/**
 	 *	getNewEmail - while changing an email address, it is stored here until confirmation.
@@ -929,7 +938,8 @@ Enjoy the site.
 	 *	@return	string	This user's real name.
 	 */
 	function getRealName() {
-		return $this->getFirstName(). ' ' .$this->getLastName();
+		$last_name = $this->getLastName();
+		return $this->getFirstName(). ($last_name ? ' ' .$last_name:'');
 	}
 
 	/**

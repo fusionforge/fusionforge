@@ -17,6 +17,8 @@ $HTML->header(array('title'=>_('Developer Profile')));
 
 echo $HTML->boxTop(_('Personal Information'), _('Personal Information')); ?>
 
+<div about="" typeof="sioc:UserAccount" xmlns:sioc="http://rdfs.org/sioc/ns#">
+
 <table class="my-layout-table" id="user-profile-personal-info">
 <tr> 
 	<td>
@@ -25,10 +27,16 @@ echo $HTML->boxTop(_('Personal Information'), _('Personal Information')); ?>
 	<td>
 		<strong>
 <?php
+//print '<div property ="foaf:member" content="fusionforge:ForgeCommunity" xmlns:fusionforge="http://fusionforge.org/fusionforge#">';
+//echo '</div>';
+// description as a FusionForge Community member
+//print '<div property ="dc:Identifier" content="'.$user_id.'" xmlns:dc="http://purl.org/dc/elements/1.1/">';
+
 	if (session_loggedin() && user_ismember(1)) {
 		echo util_make_link ('/admin/useredit.php?user_id='.$user_id,$user_id);
 	} else {
 		echo $user_id;
+//echo '</div>';
 	}
 ?>
 		</strong><?php if($GLOBALS['sys_use_people']) { ?>( <?php echo util_make_link ('/people/viewprofile.php?user_id='.$user_id,'<strong>'._('Skills Profile').'</strong>'); ?> )<?php } ?>
@@ -37,19 +45,38 @@ echo $HTML->boxTop(_('Personal Information'), _('Personal Information')); ?>
 
 <tr>
 	<td><?php echo _('Login name') ?></td>
-	<td><strong><?php print $user->getUnixName(); ?></strong></td>
+	<td><strong><span property="sioc:name"><?php 
+		print $user->getUnixName(); 
+		?></span></strong></td>
 </tr>
 
 <tr>
 	<td><?php echo _('Real name') ?> </td>
-	<td><strong><?php print $user->getTitle() .' '. $user->getRealName(); ?></strong></td>
+	<td>
+		<div rev="foaf:account" xmlns:foaf="http://xmlns.com/foaf/0.1/">
+			<div about="#me" typeof="foaf:Person">
+				<strong><span property="foaf:name"><?php 
+				$user_title = $user->getTitle();
+				print ($user_title ? $user_title .' ' :''). $user->getRealName(); 
+				?></span></strong>
+			</div>
+		</div>
+	</td>
 </tr>
 
 <?php if(!isset($GLOBALS['sys_show_contact_info']) || $GLOBALS['sys_show_contact_info']) { ?>
 <tr>
 	<td><?php echo _('Your Email Address') ?>: </td>
 	<td>
-	<strong><?php echo util_make_link ('/sendmessage.php?touser='.$user_id, str_replace('@',' @nospam@ ',$user->getEmail())); ?></strong>
+	<strong><?php 
+		//$user_mail=$user->getEmail();
+		$user_mailsha1=$user->getSha1Email();
+		// Removed for privacy reasons
+		//print '<span property="sioc:email" content="'. $user_mail .'">';
+		print '<span property="sioc:email_sha1" content="'. $user_mailsha1 .'">';
+		echo util_make_link ('/sendmessage.php?touser='.$user_id, str_replace('@',' @nospam@ ',$user_mail)); 
+		echo '</span>'; 
+	?></strong>
 	</td>
 </tr>
 <?php if ($user->getJabberAddress()) { ?>
@@ -71,7 +98,11 @@ echo $HTML->boxTop(_('Personal Information'), _('Personal Information')); ?>
 <?php if ($user->getPhone()) { ?>
 <tr>
 	<td><?php echo _('Phone:'); ?></td>
-	<td><?php echo $user->getPhone(); ?></td>
+	<td><?php 
+//print '<div property="foaf:phone" content="'.$user->getPhone().'">';
+echo $user->getPhone(); 
+//echo '</div>'; 
+?></td>
 </tr>
 <?php } ?>
 
@@ -118,7 +149,11 @@ echo $HTML->boxTop(_('Personal Information'), _('Personal Information')); ?>
 		$res = db_query_params ('SELECT count(*) from user_diary WHERE user_id=$1 AND is_public=1',
 					array ($user_id));
 		echo _('Diary/Note entries:').' '.db_result($res,0,0).'
-		<p>'.util_make_link ('/developer/diary.php?diary_user='.$user_id,_('View Diary & Notes')).'</p>
+		<p>';
+		//.'<span rel="foaf:weblog">'
+		echo util_make_link ('/developer/diary.php?diary_user='.$user_id,_('View Diary & Notes'));
+		//.'</span>'.
+		echo '</p>
 		<p>';
 		echo util_make_link ('/developer/monitor.php?diary_user='.$user_id,
 						html_image("ic/check.png",'15','13',array(),0) ._('Monitor this Diary')
@@ -155,11 +190,19 @@ if (db_numrows($res_cat) < 1) {
 } else { // endif no groups
 	print "<p>"._('This developer is a member of the following projects:')."<br />&nbsp;";
 	while ($row_cat = db_fetch_array($res_cat)) {
-		print ('<br />' . util_make_link_g ($row_cat['unix_group_name'],$row_cat['group_id'],$row_cat['group_name']).' ('.$row_cat['role_name'].')');
+		$project_link = util_make_link_g ($row_cat['unix_group_name'],$row_cat['group_id'],$row_cat['group_name']);
+		// sioc:UserGroups for all members of a project are named after /projects/A_PROJECT/members/ 
+		$project_uri = util_make_url_g ($row_cat['unix_group_name'],$row_cat['group_id']);
+		print '<span rel="sioc:member_of" resource="'. $project_uri .'members/">';
+//print '<div property="sioc:has_function" content= "'.$row_cat['role_name'].'" xmlns:sioc="http://rdfs.org/sioc/ns#">';
+		print ('<br />' . $project_link .' ('.$row_cat['role_name'].')');
 		print "\n";
+		echo '</span>';
 	}
 	print '</p>';
 } // end if groups
+//</div>
+// end of community member description block 
 
 
 $me = session_get_user(); 
