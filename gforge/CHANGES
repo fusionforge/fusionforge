@@ -3,6 +3,7 @@ UNRELEASED:
 FusionForge-5.1:
 * Trackers: New progressbar to view completion state (when custom status field is used) (Alain Peyrat)
 * Trackers: Sorting improved to allow text & select fields (Alcatel-Lucent)
+* [#127] Patch to auto approve projects.
 
 FusionForge-5.0:
 * New projectlabels plugin, to tag projects with snippets of
