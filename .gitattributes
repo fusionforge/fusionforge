@@ -4041,6 +4041,7 @@ tests/scripts/stop_vm.sh -text
 tests/scripts/stop_vz.sh -text
 tests/unit/config/ConfigTest.php -text
 tests/unit/utils/DbUtilsTest.php -text
+tests/unit/utils/HtmlPurifierTest.php -text
 tests/unit/utils/TextSanitizerTest.php -text
 tests/unit/utils/UtilsTest.php -text
 tools/check_and_update_forum_role_settings.php -text
