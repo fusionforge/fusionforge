@@ -68,8 +68,11 @@ function docman_header($title,$pagehead,$style='xyz') {
 	$menu_text=array();
 	$menu_links=array();
 
-	$menu_text[]=_('Submit new documentation');
-	$menu_links[]='/docman/new.php?group_id='.$group_id;
+	if (session_loggedin()) {
+		$menu_text[]=_('Submit new documentation');
+		$menu_links[]='/docman/new.php?group_id='.$group_id;
+	}
+
 	$menu_text[]=_('View Documentation');
 	$menu_links[]='/docman/index.php?group_id='.$group_id;
 	$menu_text[]=_('Search in documents');
