@@ -196,13 +196,13 @@ class Theme extends Layout {
 		$return .= ">\n";
 		$return .= '<tr>';
  
-		$folder = $this->imgurl.($nested ? 'bottomtab-new/' : 'toptab-new/');
+/*		$folder = $this->imgurl.($nested ? 'bottomtab-new/' : 'toptab-new/');*/
 
 		$accumulated_width = 0;
 		for ($i=0; $i<$count; $i++) {
 			$tabwidth = intval(ceil(($i+1)*100/$count)) - $accumulated_width ;
 			$accumulated_width += $tabwidth ;
-
+/*
 			if ($selected == $i) {
 				$left_img   = $folder.'selected-left.gif';
 				$middle_img = $folder.'selected-middle.gif';
@@ -218,7 +218,7 @@ class Theme extends Layout {
 			}
             
 			$clear_img = $this->imgurl.'clear.png';
-
+*/
 			$return .= "\n";
 
 			// left part
