@@ -77,6 +77,10 @@ if (getStringFromRequest('submit')) {
 			}
 		}
 
+		if ( !$purpose && ($sys_project_reg_autoapprove == true) ) {
+			$purpose = 'No purpose given, autoapprove was on';
+		}
+
 		$group = new Group();
 		$u =& session_get_user();
 		$res = $group->create(
@@ -101,14 +105,27 @@ if (getStringFromRequest('submit')) {
 			$feedback .= $group->getErrorMessage();
 		} else {
 			$HTML->header(array('title'=>_('Registration complete')));
-	
-			?>
-	
-			<p><?php printf(_('Your project has been submitted to the %1$s administrators. Within 72 hours, you will receive notification of their decision and further instructions.<p/>Thank you for choosing %1$s'), forge_get_config ('forge_name'))?>
-			</p>
-	
-			<?php
-	
+
+			if ( $sys_project_reg_autoapprove != true ) {
+				printf(_('<p>Your project has been submitted to the %1$s administrators. Within 72 hours, you will receive notification of their decision and further instructions.<p/>Thank you for choosing %1$s</p>'), forge_get_config ('forge_name'));
+			} else if ($group->isError()) {
+				printf(_('<p>ERROR: %1$s</p>'), $group->getErrorMessage() );
+			} else {
+				printf(_('Approving Project: %1$s'), $group->getUnixName()).'<br />';
+
+				if (!$group->approve( user_get_object_by_name ( $sys_project_reg_autoapprove_user ) ) ) {
+					printf(_('<p>Approval ERROR: %1$s</p>'), $group->getErrorMessage() );
+				} else {
+					$hook_params = array () ;
+					$hook_params['group_id'] = $group_id ;
+					plugin_hook ("group_approved", $hook_params) ;
+
+					plugin_hook('add_cal_group',$group_id);
+
+					printf(_('<p>Your project has been automatically approved.  You should receive an email containing further information shortly.<p/>Thank you for choosing %1$s</p>'), forge_get_config ('forge_name'));
+				}
+			}
+
 			$HTML->footer(array());
 			exit();
 		}
@@ -133,32 +150,52 @@ echo '<h1>' . _('Register Project') . '</h1>';
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
-<?php echo _('<h2>1. Project full name</h2>You should start with specifying the name of your project. The "Full Name" is descriptive, and has no arbitrary restrictions (except a 40 character limit).<p/>Full Name:<br/>') ?>
+<?php
+	$index=1;
+	echo '<h3>'.$index.'. '._('Project full name').'</h3>';
+	echo _('You should start with specifying the name of your project. The "Full Name" is descriptive, and has no arbitrary restrictions (except a 40 character limit).<p/>Full Name:<br/>'); ?>
 
-<input size="40" maxlength="40" type="text" name="full_name" value="<?php echo htmlspecialchars(stripslashes($full_name)); ?>"/>
+<input size="40" maxlength="40" type="text" name="full_name" value="<?php echo htmlspecialchars($full_name); ?>"/>
 
-<?php printf(_('<h2>2. Project Purpose And Summarization</h2><strong> Please provide detailed, accurate description of your project and what %1$s resources and in which way you plan to use. This description will be the basis for the approval or rejection of your project\'s hosting on %1$s, and later, to ensure that you are using the services in the intended way. This description will not be used as a public description of your project. It must be written in English.</strong>'), forge_get_config ('forge_name'))?>
-<p/>
-<textarea name="purpose" cols="70" rows="10">
-<?php echo htmlspecialchars($purpose); ?>
-</textarea>
+<?php
+// Don't display Project purpose if auto approval is on, because it won't be used.
+if ( $sys_project_reg_autoapprove != true ) {
+	$index++;
+	echo '<h3>'.$index.'. '._('Project Purpose And Summarization').'</h3>';
+	echo '<p>';
+	printf(_('Please provide detailed, accurate description of your project and what %1$s resources and in which way you plan to use. This description will be the basis for the approval or rejection of your project\'s hosting on %1$s, and later, to ensure that you are using the services in the intended way. This description will not be used as a public description of your project. It must be written in English.'), forge_get_config ('forge_name'));
+	echo '</p>';
+	echo '<textarea name="purpose" cols="70" rows="10">';
+	echo htmlspecialchars($purpose);
+	echo '</textarea>';
+}
+?>
 
-<?php echo _('<h2>3. Project Public Description</h2><p>This is the description of your project which will be shown on the Project Summary page, in search results, etc. It should not be as comprehensive and formal as Project Purpose description (step 2), so feel free to use concise and catchy wording. Maximum length is 255 chars.</p>')?>
-<br />
-<br />
+<?php
+	$index++;
+	echo '<h3>'.$index.'. '. _('Project Public Description').'</h3>';
+	echo '<p>';
+	echo _('This is the description of your project which will be shown on the Project Summary page, in search results, etc. Maximum length is 255 chars.');
+	echo '</p>';
+	?>
 <textarea name="description" cols="70" rows="5">
-<?php echo htmlspecialchars(stripslashes($description)); ?>
+<?php echo htmlspecialchars($description); ?>
 </textarea>
 
-<?php printf(_('<h2>4. Project Unix Name</h2>In addition to full project name, you will need to choose short,"Unix" name for your project.<p/> The "Unix Name" has several restrictions because it is used in so many places around the site. They are:<ul><li>Cannot match the unix name of any other project</li><li>Must be between 3 and 15 characters in length</li><li>Must be in lower case</li><li>Can only contain characters, numbers, and dashes</li><li>Must be a valid unix username</li><li>Cannot match one of our reserved domains</li><li>Unix name will never change for this project</li></ul><p/>Your unix name is important, however, because it will be used for many things, including:<ul><li>A web site at <tt>unixname.%1$s</tt></li><li>A CVS Repository root of <tt>/cvsroot/unixname</tt> at <tt>cvs.unixname.%1$s</tt></li><li>Shell access to <tt>unixname.%1$s</tt></li><li>Search engines throughout the site</li></ul><p/>Unix Name:<br/>'), $GLOBALS['sys_default_domain']) ?>
+<?php
+	$index++;
+	echo '<h3>'.$index.'. '._('Project Unix Name').'</h3>';
+	printf(_('In addition to full project name, you will need to choose short,"Unix" name for your project.<p/> The "Unix Name" has several restrictions because it is used in so many places around the site. They are:<ul><li>Cannot match the unix name of any other project</li><li>Must be between 3 and 15 characters in length</li><li>Must be in lower case</li><li>Can only contain characters, numbers, and dashes</li><li>Must be a valid unix username</li><li>Cannot match one of our reserved domains</li><li>Unix name will never change for this project</li></ul><p/>Your unix name is important, however, because it will be used for many things, including:<ul><li>A web site at <tt>unixname.%1$s</tt></li><li>A CVS Repository root of <tt>/cvsroot/unixname</tt> at <tt>cvs.unixname.%1$s</tt></li><li>Shell access to <tt>unixname.%1$s</tt></li><li>Search engines throughout the site</li></ul><p/>Unix Name:<br/>'), $GLOBALS['sys_default_domain']) ?>
 
-<input type="text" maxlength="15" size="15" name="unix_name" value="<?php echo htmlspecialchars(stripslashes($unix_name)); ?>"/>
+<input type="text" maxlength="15" size="15" name="unix_name" value="<?php echo htmlspecialchars($unix_name); ?>"/>
 
 <?php
 	$SCMFactory = new SCMFactory() ;
 $scm_plugins=$SCMFactory->getSCMs() ;
 if ($sys_use_scm && count($scm_plugins) > 0) {	
-	echo _('<h2>5. Source Code</h2><p>You can choose among different SCM for your project, but just one (or none at all). Please select the SCM system you want to use.</p>')."\n";
+	$index++;
+	echo '<h3>'.$index.'. '._('Source Code').'</h3>';
+	echo _('<p>You can choose among different SCM for your project, but just one (or none at all). Please select the SCM system you want to use.</p>')."\n";
 	echo '<table><tbody><tr><td><strong>'._('SCM Repository').':</strong></td>';
 	echo '<td><input type="radio" name="scm" value="noscm" checked="checked">'._('No SCM').'</td>';
 	foreach($scm_plugins as $plugin) {
@@ -168,27 +205,28 @@ if ($sys_use_scm && count($scm_plugins) > 0) {
 	echo '</tr></tbody></table>'."\n";
 }
 
-?>
-<?php
-	if ($sys_use_private_project) {
-		echo "<p><input type=\"radio\" name=\"is_public\" value=\"1\" ";
-		if (!isset($is_public) || $is_public) {
-			echo ' checked';
-		}
-		echo ">". _('Public')."</p>";
-
-		echo "<p><input type=\"radio\" name=\"is_public\" value=\"0\" ";
-		if (isset ($is_public) && !$is_public) {
-			echo ' checked';
-		}
-		echo ">". _('Private')."</p>";
-	} else {
-		echo "<input type=\"hidden\" name=\"is_public\" value=\"1\">";
+if ($sys_use_private_project) {
+	$index++;
+	echo '<h3>'.$index.'. '._('Visibility'). '</h3>';
+	echo "<p><input type=\"radio\" name=\"is_public\" value=\"1\" ";
+	if (!isset($is_public) || $is_public) {
+		echo ' checked';
 	}
+	echo ">". _('Public')."</p>";
+
+	echo "<p><input type=\"radio\" name=\"is_public\" value=\"0\" ";
+	if (isset ($is_public) && !$is_public) {
+		echo ' checked';
+	}
+	echo ">". _('Private')."</p>";
+} else {
+	echo "<input type=\"hidden\" name=\"is_public\" value=\"1\">";
+}
 ?>
 
 <div align="center">
-<input type="submit" name="submit" value="<?php echo _('Submit') ?>"/> <input type="submit" name="i_disagree" value="<?php echo _('Cancel') ?>"/>
+<input type="submit" name="submit" value="<?php echo _('Submit') ?>"/>
+<input type="submit" name="i_disagree" value="<?php echo _('Cancel') ?>"/>
 </div>
 
 </form>
