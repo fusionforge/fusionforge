@@ -34,13 +34,13 @@ if (!isset($no_gz_buffer) || !$no_gz_buffer) {
 require $gfcgfile;
 require $gfcommon.'include/config.php';
 
-forge_define_config_item ('core', 'forge_name', $GLOBALS['sys_name']) ;
-forge_define_config_item ('core', 'user_registration_restricted', $GLOBALS['sys_user_reg_restricted']) ;
+forge_define_config_item ('forge_name', 'core', $GLOBALS['sys_name']) ;
+forge_define_config_item ('user_registration_restricted', 'core', $GLOBALS['sys_user_reg_restricted']) ;
 /* Long-term:
  require_once $gfcommon.'include/FusionForge.class.php';
  $forge = new FusionForge() ;
- forge_define_config_item ('core', 'forge_name', $forge->software_name) ;
- forge_define_config_item ('core', 'user_registration_restricted', false) ;
+ forge_define_config_item ('forge_name', 'core', $forge->software_name) ;
+ forge_define_config_item ('user_registration_restricted', 'core', false) ;
 */
 forge_read_config_file ($gfconfig.'/config.ini') ;
 
