@@ -4,9 +4,9 @@
 #
 #
 
-The FusionForge codebase was developped for many years in the frame of
-the GForge project (until 2008), then in the FusionForge project since
-2008.
+The FusionForge codebase was developed for many years in the frame of
+the GForge project (until 2009), then in the FusionForge project since
+2009.
 
 It is copyrighted by individual authors mentioned in copyright notices
 of each files.
@@ -15,7 +15,7 @@ of each files.
 The new FusionForge Team
 ----------------------------------------------------------------------------
 
-TODO : name all contributors to FusionForge. The list bellow was
+TODO : name all contributors to FusionForge. The list below was
 extracted from the SVN stats.
 
 Roland Mas
@@ -40,7 +40,7 @@ Olivier Berger
 Philip Schwartz
 
 
-See also AUTHORS.gforge for prior contributors
+See also AUTHORS.gforge and AUTHORS.sourceforge for prior contributors.
 
 # Local Variables:
 # coding: utf-8
