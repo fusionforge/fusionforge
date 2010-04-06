@@ -1,6 +1,8 @@
 This package uses dpatch.  For more details, install the dpatch package and
 consult /usr/share/doc/dpatch/README.source.gz.
 
+The Debian-specific package sources are managed in upstream's repository.
+
 Orig tarball is constructed from upstream's sources top-level dir
 using 'make orig'.
 
