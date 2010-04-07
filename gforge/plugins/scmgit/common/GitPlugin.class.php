@@ -94,8 +94,7 @@ class GitPlugin extends SCMPlugin {
 				$user_id = db_result($result,$i,'user_id');
 				$user_name = db_result($result,$i,'user_name');
 				$real_name = db_result($result,$i,'realname');
-				$repos[] = array ($root . '/users/' .  $user_name . '.git' => $user_name) ;
-				$b .= '<tt>git clone '.util_make_url ('/anonscm/git/'.$project->getUnixName().'/users/'.$user_name.'.git').'</tt> ('.util_make_link_u ($user_name, $user_id, $realname).')<br />';
+				$b .= '<tt>git clone '.util_make_url ('/anonscm/git/'.$project->getUnixName().'/users/'.$user_name.'.git').'</tt> ('.util_make_link_u ($user_name, $user_id, $real_name).')<br />';
 			}
 			$b .= '</p>';
 		}
@@ -256,6 +255,7 @@ class GitPlugin extends SCMPlugin {
 
 			if (!is_file ("$repodir/HEAD") && !is_dir("$repodir/objects") && !is_dir("$repodir/refs")) {
 				system ("git clone --bare $main_repo $repodir") ;
+				system ("GIT_DIR=\"$repodir\" git update-server-info") ;
 				system ("echo \"Git repository for user $owner in project $project_name\" > $repodir/description") ;
 				system ("chown -R $user_name:$unix_group $repodir") ;
 			}
