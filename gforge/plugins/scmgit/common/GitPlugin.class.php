@@ -111,7 +111,21 @@ class GitPlugin extends SCMPlugin {
 		} else {
 			$b = _('<p><b>Developer GIT Access via SSH</b></p><p>Only project developers can access the GIT tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper value. Enter your site password when prompted.</p>');
 		$b .= '<p><tt>git clone git+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . $this->git_root .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
+
+		if (session_logged_in()) {
+                        $u =& user_get_object(user_getid()) ;
+			if ($u->getUnixStatus() == 'A') {
+				$result = db_query_params ('SELECT * FROM plugin_scmgit_personal_repos p WHERE p.group_id=$1 AND p.user_id=$2',
+							   array ($project->getID(),
+								  $u->getID())) ;
+				if ($result && db_numrows ($result) > 0) {
+					$b .= _('<p><b>Access to your private repository</b></p><p>You have a private repository for this project, accessible through SSH with the following method. Enter your site password when prompted.</p>');
+					$b .= '<p><tt>git clone git+ssh://'.$u->getUnixName().'@' . $project->getSCMBox() . $this->git_root .'/'. $project->getUnixName() .'/users/'. $u->getUnixName() .'.git</tt></p>' ;
+				} else {
+				}
+			}
 		}
+
 		return $b ;
 	}
 
