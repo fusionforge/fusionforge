@@ -86,7 +86,7 @@ class GitPlugin extends SCMPlugin {
 		$rows = db_numrows ($result) ;
 
 		if ($rows > 0) {
-			$b =  ngettext ('<p><b>Developer\'s repository</b></p><p>One of this project\'s members also has a personal Git repository that can be checked out anonymously.</p>',
+			$b .= ngettext ('<p><b>Developer\'s repository</b></p><p>One of this project\'s members also has a personal Git repository that can be checked out anonymously.</p>',
 					'<p><b>Developers\' repositories</b></p><p>Some of this project\'s members also have personal Git repositories that can be checked out anonymously.</p>',
 				$rows);
 			$b .= '<p>' ;
