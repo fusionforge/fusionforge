@@ -237,9 +237,11 @@ class GitPlugin extends SCMPlugin {
 		system ("chgrp -R $unix_group $root") ;
 		system ("chmod g+s $root") ;
 		if ($project->enableAnonSCM()) {
-			system ("chmod -R g+wX,o+rX-w $root") ;
+			system ("chmod g+wX,o+rX-w $root") ;
+			system ("chmod -R g+wX,o+rX-w $main_repo") ;
 		} else {
-			system ("chmod -R g+wX,o-rwx $root") ;
+			system ("chmod g+wX,o-rwx $root") ;
+			system ("chmod -R g+wX,o-rwx $main_repo") ;
 		}
 
 		$result = db_query_params ('SELECT u.user_name FROM plugin_scmgit_personal_repos p, users u WHERE p.group_id=$1 AND u.user_id=p.user_id AND u.unix_status=$2',
@@ -254,12 +256,12 @@ class GitPlugin extends SCMPlugin {
 			if (!is_file ("$repodir/HEAD") && !is_dir("$repodir/objects") && !is_dir("$repodir/refs")) {
 				system ("git clone --bare $main_repo $repodir") ;
 				system ("echo \"Git repository for user $owner in project $project_name\" > $repodir/description") ;
-				system ("chown -R $user_name:$unix_group $root") ;
-				if ($project->enableAnonSCM()) {
-					system ("chmod -R g+rX-w,o+rX-w $root") ;
-				} else {
-					system ("chmod -R g+rX-w,o-rwx $root") ;
-				}
+				system ("chown -R $user_name:$unix_group $repodir") ;
+			}
+			if ($project->enableAnonSCM()) {
+				system ("chmod -R g+rX-w,o+rX-w $repodir") ;
+			} else {
+				system ("chmod -R g+rX-w,o-rwx $repodir") ;
 			}			
 		}
 	}
