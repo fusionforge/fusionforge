@@ -1108,6 +1108,7 @@ gforge/plugins/scmgit/common/GitPlugin.class.php -text
 gforge/plugins/scmgit/common/scmgit-init.php -text
 gforge/plugins/scmgit/db/scmgit-init.sql -text
 gforge/plugins/scmgit/etc/plugins/scmgit/config.php -text
+gforge/plugins/scmgit/www/index.php -text
 gforge/plugins/scmhg/common/HgPlugin.class.php -text
 gforge/plugins/scmhg/common/scmhg-init.php -text
 gforge/plugins/scmhg/etc/plugins/scmhg/config.php -text
