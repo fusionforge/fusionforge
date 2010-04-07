@@ -31,7 +31,7 @@ else
 	[ ! -d $plugdir ] && mkdir $plugdir
 	[ ! -d $plugdir/bin ] && mkdir $plugdir/bin
 	[ ! -d $plugdir/etc/plugins/$minus ] && mkdir -p $plugdir/etc/plugins/$minus
-	[ ! -d $plugdir/common/languages ] && mkdir -p $plugdir/common/languages
+	#[ ! -d $plugdir/common/languages ] && mkdir -p $plugdir/common/languages
 	[ ! -d $plugdir/www ] && mkdir $plugdir/www
 
 	if [ ! -f $plugdir/common/${fullname}Plugin.class.php ]
@@ -83,7 +83,8 @@ else
 		do
 			if [ -d $modelminus/$debfile ]
 			then
-				[ -d $plugdir/$debfile ] || (echo "Making directory $plugdir/$debfile" ; mkdir $plugdir/$debfile)
+				newdebdir=`echo $debfile | sed "s/$modelminus/$minus/g"`
+				[ -d $plugdir/$newdebdir ] || (echo "Making directory $plugdir/$newdebdir" ; mkdir $plugdir/$newdebdir)
 			else
 				newdebfile=`echo $debfile | sed "s/$modelminus/$minus/g"`
 				if [ ! -f $plugdir/$newdebfile ]
