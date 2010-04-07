@@ -1,2 +1,6 @@
-plugins/scmgit/common/*             usr/share/gforge/plugins/scmgit/common/
-plugins/scmgit/etc/plugins/scmgit/* etc/gforge/plugins/scmgit/
+plugins/scmgit/bin/*		usr/share/gforge/plugins/scmgit/bin/
+plugins/scmgit/common/*		usr/share/gforge/plugins/scmgit/common/
+plugins/scmgit/db/*		usr/share/gforge/plugins/scmgit/lib/
+plugins/scmgit/etc/plugins/scmgit/*	etc/gforge/plugins/scmgit/
+
+

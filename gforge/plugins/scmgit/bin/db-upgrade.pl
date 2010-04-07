@@ -4,8 +4,6 @@
 #
 # Debian-specific script to upgrade the database between releases
 # Roland Mas <lolando@debian.org>
-#
-# Adapted by Raphael Hertzog <hertzog@debian.org> for extratabs
 
 use strict ;
 use diagnostics ;
@@ -40,7 +38,7 @@ debug "Do not worry unless told otherwise." ;
 
 # debug "Connected to the database OK." ;
 
-$pluginname = "extratabs" ;
+$pluginname = "scmgit" ;
 
 $dbh->{AutoCommit} = 0;
 $dbh->{RaiseError} = 1;
