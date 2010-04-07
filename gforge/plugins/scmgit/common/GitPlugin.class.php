@@ -214,8 +214,9 @@ class GitPlugin extends SCMPlugin {
 		$project_name = $project->getUnixName() ;
 		$root = $this->git_root . '/' . $project_name ;
 		$unix_group = 'scm_' . $project_name ;
+                system ("mkdir -p $root") ;
 
-		$main_repo = array ($root . '/' .  $project_name . '.git') ;
+		$main_repo = $root . '/' .  $project_name . '.git' ;
 		if (!is_file ("$main_repo/HEAD") && !is_dir("$main_repo/objects") && !is_dir("$main_repo/refs")) {
 			system ("GIT_DIR=\"$main_repo\" git init --bare --shared=group") ;
 			system ("GIT_DIR=\"$main_repo\" git update-server-info") ;
@@ -251,7 +252,7 @@ class GitPlugin extends SCMPlugin {
 		for ($i=0; $i<$rows; $i++) {
 			system ("mkdir -p $root/users") ;
 			$user_name = db_result($result,$i,'user_name');
-			$repodir = array ($root . '/users/' .  $user_name . '.git') ;
+			$repodir = $root . '/users/' .  $user_name . '.git' ;
 
 			if (!is_file ("$repodir/HEAD") && !is_dir("$repodir/objects") && !is_dir("$repodir/refs")) {
 				system ("git clone --bare $main_repo $repodir") ;
