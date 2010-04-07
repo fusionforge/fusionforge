@@ -201,8 +201,8 @@ if (db_numrows($res_cat) < 1) {
 		
 		print '<span rel="sioc:member_of">'."\n"
 			.'<div about="'. $usergroup_uri .'" typeof="sioc:UserGroup">'."\n"
-			.'<span rel="sioc:usergroup_of">."\n"
-			.<div about="'. $project_uri .'" typeof="sioc:Space">';
+			.'<span rel="sioc:usergroup_of">'."\n"
+			.'<div about="'. $project_uri .'" typeof="sioc:Space">';
 		//print '<div property="sioc:has_function" content= "'.$row_cat['role_name'].'" xmlns:sioc="http://rdfs.org/sioc/ns#">';
 		
 		print ('<br />' . $project_link .' ('.$row_cat['role_name'].')');
