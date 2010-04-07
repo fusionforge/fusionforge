@@ -37,8 +37,8 @@ computedefault(){
 	DEFAULTftpuploadhost=upload.$DEFAULTdomain_name
 	DEFAULTftpuploaddir=$GFGDIR/var/lib/gforge/chroot/ftproot
 	#
-	DEFAULTstatsadmin_groupid=2
-	DEFAULTnewsadmin_groupid=3
+	DEFAULTnewsadmin_groupid=2
+	DEFAULTstatsadmin_groupid=3
 	DEFAULTpeerrating_groupid=4
 	DEFAULTtemplate_project=5
 	DEFAULTadmin_login=admin
