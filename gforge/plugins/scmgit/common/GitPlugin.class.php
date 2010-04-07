@@ -119,9 +119,16 @@ class GitPlugin extends SCMPlugin {
 							   array ($project->getID(),
 								  $u->getID())) ;
 				if ($result && db_numrows ($result) > 0) {
-					$b .= _('<p><b>Access to your private repository</b></p><p>You have a private repository for this project, accessible through SSH with the following method. Enter your site password when prompted.</p>');
+					$b .= _('<p><b>Access to your personal repository</b></p><p>You have a personal repository for this project, accessible through SSH with the following method. Enter your site password when prompted.</p>');
 					$b .= '<p><tt>git clone git+ssh://'.$u->getUnixName().'@' . $project->getSCMBox() . $this->git_root .'/'. $project->getUnixName() .'/users/'. $u->getUnixName() .'.git</tt></p>' ;
 				} else {
+					$glist = $u->getGroups();
+					foreach ($glist as $g) {
+						if ($g->getID() == $project->getID()) {
+							$b .= sprintf (_('<p><b>Request a personal repository</b></p><p>You can clone the project repository into a personal one into which you alone will be able to write.  Other members of the project will only have read access.  Access for non-members will follow the same rules as for the project\'s main repository.  Note that the personal repository may take some time before it is created (less than an hour in most situations).</p><p><a href="$s">Request a personal repository</a>.</p>'),
+								       util_make_url ('/plugins/scmgit/index.php?func=request-personal-repo&group_id='.$project->getID()));
+						}
+					}
 				}
 			}
 		}
