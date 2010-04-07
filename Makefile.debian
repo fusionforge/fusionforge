@@ -37,6 +37,7 @@ APTCACHE=$(BUILDERDIR)/cache
 LOCALREPODEB=/var/www/debian-fusionforge-$(BRANCH)
 LOCALREPOUBU=/var/www/ubuntu-fusionforge-$(BRANCH)
 #
+XDISTRIB:=3sid
 DISTRIB=$(shell echo $(XDISTRIB) | cut -c2-)
 SIGNKEY=yes
 DEBIANLIST=1lenny 2squeeze 3sid
@@ -101,14 +102,23 @@ default: list
 
 list:
 	@echo ======================================================================================
-	@echo '=                    Available targets are listed below                             ='
-	@echo '=                    Your current environment :                                     ='
-	@echo '=                     * checkout from :   $(BRANCH)                                     ='
-	@echo '=                     * architecture  :   $(ARCH)                                   ='
-	@echo '=                     * BUILDERDIR = $(BUILDERDIR)                                  ='
-	@echo "=                    (above 'checkout' meaning :                                    ="
-	@echo "=                       'svn' for trunk                                             ="
-	@echo "=                       'brc' for branches)                                         ="
+	@echo "= Available targets are listed below"
+	@echo "= Your current environment :"
+	@echo "=    * checkout from :   $(BRANCH)"
+	@echo "=         (above 'checkout' meaning :"
+	@echo "=         'svn' for trunk"
+	@echo "=         'brc' for branches)"
+	@echo "=    * PKGNAME = $(PKGNAME)"
+	@echo "=    * PKGDIR = $(PKGDIR)"
+	@echo "=    * major version : $(MAJOR)"
+	@echo "=    * minor version : $(MINOR)"
+	@echo "=    * architecture  :   $(ARCH)"
+	@echo "=    * BUILDERDIR = $(BUILDERDIR)"
+	@echo "=    * ORIGFILE = $(ORIGFILE)"
+	@echo "=    * DSCFILE = $(DSCFILE)"
+	@echo "=    * PDSCFILE = $(PDSCFILE)"
+	@echo "=    * CHANGEFILE = $(CHANGEFILE)"
+	@echo "=    * PCHANGEFILE = $(PCHANGEFILE)"
 	@echo ======================================================================================
 	@cat Makefile.debian | grep '^.*:.*#$$' | sed 's/FUSIONFORGE/$(FUSIONFORGE)/' | sed 's/^\(.*:\).*#\(.*\)#$$/\1		\2/'
 	@echo ======================================================================================
