@@ -95,7 +95,7 @@ class GitPlugin extends SCMPlugin {
 				$user_name = db_result($result,$i,'user_name');
 				$real_name = db_result($result,$i,'realname');
 				$repos[] = array ($root . '/users/' .  $user_name . '.git' => $user_name) ;
-				$b .= '<tt>git clone '.util_make_url ('/anonscm/git/users/'.$project->getUnixName().'/users/'.$user_name.'.git').'</tt> ('.util_make_link_u ($user_name, $user_id, $realname).')<br />';
+				$b .= '<tt>git clone '.util_make_url ('/anonscm/git/'.$project->getUnixName().'/users/'.$user_name.'.git').'</tt> ('.util_make_link_u ($user_name, $user_id, $realname).')<br />';
 			}
 			$b .= '</p>';
 		}
