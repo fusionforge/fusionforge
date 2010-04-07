@@ -183,27 +183,48 @@ echo $user->getPhone();
 				'A'));
 
 // see if there were any groups
+echo '<div xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:doap="http://usefulinc.com/ns/doap#">'."\n";
 if (db_numrows($res_cat) < 1) {
 	?>
 	<p><?php echo _('This developer is not a member of any projects.') ?></p>
 	<?php
 } else { // endif no groups
 	print "<p>"._('This developer is a member of the following projects:')."<br />&nbsp;";
+	
 	while ($row_cat = db_fetch_array($res_cat)) {
+
 		$project_link = util_make_link_g ($row_cat['unix_group_name'],$row_cat['group_id'],$row_cat['group_name']);
-		// sioc:UserGroups for all members of a project are named after /projects/A_PROJECT/members/ 
 		$project_uri = util_make_url_g ($row_cat['unix_group_name'],$row_cat['group_id']);
-		print '<span rel="sioc:member_of" resource="'. $project_uri .'members/">';
-//print '<div property="sioc:has_function" content= "'.$row_cat['role_name'].'" xmlns:sioc="http://rdfs.org/sioc/ns#">';
+		// sioc:UserGroups for all members of a project are named after /projects/A_PROJECT/members/ 
+		$usergroup_uri = $project_uri .'members/';
+		
+		
+		print '<span rel="sioc:member_of">'."\n"
+			.'<div about="'. $usergroup_uri .'" typeof="sioc:UserGroup">'."\n"
+			.'<span rel="sioc:usergroup_of">."\n"
+			.<div about="'. $project_uri .'" typeof="sioc:Space">';
+		//print '<div property="sioc:has_function" content= "'.$row_cat['role_name'].'" xmlns:sioc="http://rdfs.org/sioc/ns#">';
+		
 		print ('<br />' . $project_link .' ('.$row_cat['role_name'].')');
 		print "\n";
-		echo '</span>';
+		
+		if (trim($row_cat['admin_flags']) == 'A') {
+			print '<span rev="doap:maintainer" resource="#me"></span>';
+		}
+		else {
+			print '<span rev="doap:developer" resource="#me"></span>';
+		}
+		
+		echo "</div>\n";  // sioc:Space .../projects/A_PROJECT/
+		echo "</span>\n"; // sioc:usergroup_of
+		echo "</div>\n";  // sioc:UserGroup .../projects/A_PROJECT/members
+		echo "</span>\n"; // sioc:member_of
 	}
 	print '</p>';
 } // end if groups
-//</div>
-// end of community member description block 
+echo "</div>\n"; // prefixes
 
+echo "</div>\n"; // end of about=""
 
 $me = session_get_user(); 
 if ($sys_use_ratings) {
