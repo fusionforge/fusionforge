@@ -273,11 +273,11 @@ class GitPlugin extends SCMPlugin {
 				system ("echo \"Git repository for user $owner in project $project_name\" > $repodir/description") ;
 				system ("chown -R $user_name:$unix_group $repodir") ;
 			}
-			if ($project->enableAnonSCM()) {
-				system ("chmod -R g+rX-w,o+rX-w $repodir") ;
-			} else {
-				system ("chmod -R g+rX-w,o-rwx $repodir") ;
-			}			
+		}
+		if ($project->enableAnonSCM()) {
+			system ("chmod -R g+rX-w,o+rX-w $root/users") ;
+		} else {
+			system ("chmod -R g+rX-w,o-rwx $root/users") ;
 		}
 	}
 
