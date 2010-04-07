@@ -29,40 +29,29 @@ else
 	echo "Creating $1 plugin"
 	echo "Creating directory $plugdir"
 	[ ! -d $plugdir ] && mkdir $plugdir
-	[ ! -d $plugdir/bin ] && mkdir $plugdir/bin
-	[ ! -d $plugdir/etc/plugins/$minus ] && mkdir -p $plugdir/etc/plugins/$minus
-	#[ ! -d $plugdir/common/languages ] && mkdir -p $plugdir/common/languages
-	[ ! -d $plugdir/www ] && mkdir $plugdir/www
-
-	if [ ! -f $plugdir/common/${fullname}Plugin.class.php ]
-	then
-		echo Creating $plugdir/common/${fullname}Plugin.class.php
-		cat $modelplugdir/common/${modelfullname}Plugin.class.php | \
-		sed "s/$modelminus/$minus/g" | \
-		sed "s/$modelfullname/$fullname/g" > \
-		$plugdir/common/${fullname}Plugin.class.php
-	fi
-	if [ ! -f $plugdir/common/$minus-init.php ]
-	then
-		echo Creating $plugdir/common/$minus-init.php
-		cat $modelplugdir/common/$modelminus-init.php | \
-		sed "s/$modelminus/$minus/g" | \
-		sed "s/$modelfullname/$fullname/g" > \
-		$plugdir/common/$minus-init.php
-	fi
-	if [ ! -f $plugdir/www/index.php ]
-	then
-		echo Creating $plugdir/www/index.php
-		cat $modelplugdir/www/index.php | \
-		sed "s/$modelminus/$minus/g" | \
-		sed "s/$modelfullname/$fullname/g" > \
-		$plugdir/www/index.php
-	fi
+	(cd $modelplugdir;find bin;find etc;find common;find www;find utils;find db;find cronjobs;find tests; find translations)|sort|while read debfile
+	do
+		if [ -d $modelminus/$debfile ]
+		then
+			newdebdir=`echo $debfile | sed "s/$modelminus/$minus/g"`
+			[ -d $plugdir/$newdebdir ] || (echo "Making directory $plugdir/$newdebdir" ; mkdir $plugdir/$newdebdir)
+		else
+			newdebfile=`echo $debfile | sed "s/$modelminus/$minus/g"`
+			if [ ! -f $plugdir/$newdebfile ]
+			then
+				echo "Creating $plugdir/$newdebfile"
+				cat $modelminus/$debfile | \
+					sed "s/$modelminus/$minus/g" | \
+					sed "s/$modelfullname/$fullname/g" > \
+				$plugdir/$newdebfile
+			fi
+		fi
+	done
 
 	if [ $dopackage -ne 0 ]
 	then
 		echo "Doing package"
-		(cd $modelplugdir;find debian;find utils)|sort|while read debfile
+		(cd $modelplugdir;find debian)|sort|while read debfile
 		do
 			if [ -d $modelminus/$debfile ]
 			then
@@ -79,7 +68,7 @@ else
 			fi
 		done
 		chmod +x $plugdir/utils/*
-		(cd $modelplugdir;find packaging;find translations;find etc)|sort|while read debfile
+		(cd $modelplugdir;find packaging)|sort|while read debfile
 		do
 			if [ -d $modelminus/$debfile ]
 			then
@@ -98,14 +87,5 @@ else
 			fi
 		done
 	fi
-#	if [ ! -f $plugdir/common/languages/Base.tab ]
-#	then
-#		echo Creating $plugdir/common/languages/Base.tab
-#		cat $modelplugdir/common/languages/Base.tab | \
-#		sed "s/$modelminus/$minus/g" | \
-#		sed "s/$modelfullname/$fullname/g" > \
-#		$plugdir/common/languages/Base.tab
-#	fi
-
 fi
 
