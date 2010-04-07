@@ -111,6 +111,7 @@ class GitPlugin extends SCMPlugin {
 		} else {
 			$b = _('<p><b>Developer GIT Access via SSH</b></p><p>Only project developers can access the GIT tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper value. Enter your site password when prompted.</p>');
 		$b .= '<p><tt>git clone git+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . $this->git_root .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
+		}
 
 		if (session_loggedin()) {
                         $u =& user_get_object(user_getid()) ;
