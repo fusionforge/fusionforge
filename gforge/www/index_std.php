@@ -76,5 +76,15 @@ echo $HTML->boxBottom();
 		printf (_('This site is running %1$s version %2$s'),
 			$forge->software_name,
 			$forge->software_version) ;
+			printf('<div about="" typeof="planetforge:ForgeService">'."\n"
+				.'<div rel="planetforge:operated_by">'."\n"
+				.'<div about="#forge" typeof="planetforge:ForgeSoftware">'."\n"
+				.'<span property="planetforge:name" content="%1$s"></span>'."\n"
+				.'<span property="planetforge:version" content="%2$s"></span>'."\n"
+				."</div>\n"
+				."</div>\n"
+				."</div>\n",
+				$forge->software_name,
+				$forge->software_version);
 ?>
 </div>

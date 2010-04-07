@@ -26,7 +26,9 @@ site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'home'));
 echo '
 <div id="forge-project-home" class="underline-link">
 
-<div about="" typeof="sioc:Space doap:Project" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:doap="http://usefulinc.com/ns/doap#" />
+<div about="" typeof="sioc:Space doap:Project" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:doap="http://usefulinc.com/ns/doap#">
+    <span rel="planetforge:hosted_by" resource="'. util_make_url ('/') .'"></span>
+</div>
 
 <table id="project-summary-and-devs" class="my-layout-table" summary="">
 	<tr>
