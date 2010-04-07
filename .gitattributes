@@ -3983,6 +3983,8 @@ plugins/coclico/mailman/www/index.html -text
 plugins/coclico/mailman/www/index.php -text
 plugins/coclico/mailman/www/mailman_utils.php -text
 plugins/templates/createplugin.sh -text
+plugins/templates/helloworld/bin/db-delete.pl -text
+plugins/templates/helloworld/bin/db-upgrade.pl -text
 plugins/templates/helloworld/debian/README.Debian -text
 plugins/templates/helloworld/debian/README.source -text
 plugins/templates/helloworld/debian/changelog -text
