@@ -20,11 +20,11 @@
  */
 
 global $gfplugins;
-require_once $gfplugins.'helloworld/common/HelloWorldPlugin.class.php' ;
+require_once $gfplugins.'helloworld/include/helloworldPlugin.class.php' ;
 
-$HelloWorldPluginObject = new HelloWorldPlugin ;
+$helloworldPluginObject = new helloworldPlugin ;
 
-register_plugin ($HelloWorldPluginObject) ;
+register_plugin ($helloworldPluginObject) ;
 
 // Local Variables:
 // mode: php

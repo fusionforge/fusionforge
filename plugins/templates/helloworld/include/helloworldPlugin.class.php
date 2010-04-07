@@ -1,7 +1,7 @@
 <?php
 
 /**
- * HelloWorldPlugin Class
+ * helloworldPlugin Class
  *
  *
  * This file is part of GForge.
@@ -21,8 +21,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-class HelloWorldPlugin extends Plugin {
-	function HelloWorldPlugin () {
+class helloworldPlugin extends Plugin {
+	function helloworldPlugin () {
 		$this->Plugin() ;
 		$this->name = "helloworld" ;
 		$this->text = "HelloWorld!" ; // To show in the tabs, use...
