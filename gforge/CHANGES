@@ -4,6 +4,8 @@ FusionForge-5.1:
 * Trackers: New progressbar to view completion state (when custom status field is used) (Alain Peyrat)
 * Trackers: Sorting improved to allow text & select fields (Alcatel-Lucent)
 * [#127] Patch to auto approve projects.
+* scmgit plugin now allows project members to request a personal git
+  repository as a clone of the current project's one
 
 FusionForge-5.0:
 * New projectlabels plugin, to tag projects with snippets of
