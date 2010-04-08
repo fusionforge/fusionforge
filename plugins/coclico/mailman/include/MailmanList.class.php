@@ -1,26 +1,26 @@
 <?php
 /**
- * GForge Mailing Lists Facility
+ * FusionForge Mailing Lists Facility
  *
  * Copyright 2003 Guillaume Smet
- * http://gforge.org/
+ * http://fusionforge.org/
  *
  * @version   $Id$
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * 
  * Portions Copyright 2010 (c) Mélanie Le Bail
@@ -331,9 +331,9 @@ class MailmanList extends Error {
 	 */
 	function getArchivesUrl() {
 		if ($this->isPublic()) {
-			$iframe_url = 'http://'.$GLOBALS['sys_lists_host'].'/pipermail/'.$this->getName().'/';
+			$iframe_url = 'http://'.$GLOBALS['sys_default_domain'].'/pipermail/'.$this->getName().'/';
 		} else {
-			$iframe_url = 'http://'.$GLOBALS['sys_lists_host'].'/mailman/private/'.$this->getName().'/';
+			$iframe_url = 'http://'.$GLOBALS['sys_default_domain'].'/mailman/private/'.$this->getName().'/';
 		}
 		htmlIframe($iframe_url, array('class' => 'iframe_service'));
 	}
@@ -344,7 +344,7 @@ class MailmanList extends Error {
 	 * @return string url of the info page
 	 */
 	function getExternalInfoUrl() {
-		return 'http://'.$GLOBALS['sys_lists_host'].'/mailman/listinfo/'.$this->getName();
+		return 'http://'.$GLOBALS['sys_default_domain'].'/mailman/listinfo/'.$this->getName();
 	}
 	/**
 	 * getOptionsUrl - get the url to manage options for user
@@ -354,7 +354,7 @@ class MailmanList extends Error {
 	function getOptionsUrl() {
 		$current_user=UserManager::instance()->getCurrentUser();
 		$user=$current_user->getEmail();
-		$iframe_url = 'http://'.$GLOBALS['sys_lists_host'].'/mailman/options/'.$this->getName().'/'.$user;
+		$iframe_url = 'http://'.$GLOBALS['sys_default_domain'].'/mailman/options/'.$this->getName().'/'.$user;
 		htmlIframe($iframe_url, array('class' => 'iframe_service'));
 	}
 	/**
@@ -422,7 +422,7 @@ class MailmanList extends Error {
 	 */
 
 	function getExternalAdminUrl() {
-		$iframe_url = 'http://'.$GLOBALS['sys_lists_host'].'/mailman/admin/'.$this->getName();
+		$iframe_url = 'http://'.$GLOBALS['sys_default_domain'].'/mailman/admin/'.$this->getName();
 		htmlIframe($iframe_url, array('class' => 'iframe_service'));
 	}
 
