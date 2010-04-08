@@ -147,7 +147,7 @@ ORDER BY post_date DESC',
 				} else {
 					$return .= '<h3>'. $t_thread_title . '</h3>';
 				}
-				$return .= ' &nbsp; <em>'. date(_('Y-m-d H:i'),db_result($result,$i,'post_date')).'</em><br /></li>';
+				$return .= ' &nbsp; <em>'. date(_('Y-m-d H:i'),db_result($result,$i,'post_date')).'</em><br />';
 			} else {
 				if ($show_forum) {
 					$return .= '<h3>'.util_make_link ($t_thread_url, $t_thread_title).'</h3>';
@@ -195,9 +195,6 @@ ORDER BY post_date DESC',
 				}
 			}
 
-			if ($limit==1 && $tail_headlines) {
-				$return .= "<ul>\n";
-			}
 			if ($limit) {
 				$limit--;
 			}
