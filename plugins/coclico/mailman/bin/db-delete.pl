@@ -85,7 +85,7 @@ eval {
 
 
     debug "It seems your database deletion went well and smoothly.  That's cool." ;
-    debug "Please enjoy using Debian GForge." ;
+    debug "Please enjoy using Debian FusionForge." ;
 
     # There should be a commit at the end of every block above.
     # If there is not, then it might be symptomatic of a problem.

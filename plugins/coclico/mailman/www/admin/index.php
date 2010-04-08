@@ -1,7 +1,7 @@
 <?php
 
 /**
- * GForge Mailing Lists Facility
+ * FusionForge Mailing Lists Facility
  *
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2003-2004 (c) Guillaume Smet - Open Wide
