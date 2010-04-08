@@ -2434,11 +2434,21 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		return $rolesId;
 	}
 	
-	function normalizeAllRoles () {
+	function getRoles () {
+		$result = array () ;
+
 		$roles = $this->getRolesId () ;
-		
 		foreach ($roles as $role_id) {
-			$r = new Role ($this, $role_id) ;
+			$result[] = new Role ($this, $role_id) ;
+		}
+
+		return $result ;
+	}
+
+	function normalizeAllRoles () {
+		$roles = $this->getRoles () ;
+		
+		foreach ($roles as $r) {
 			$r->normalizeData () ;
 		}
 	}
