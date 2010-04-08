@@ -103,6 +103,19 @@ function util_check_fileupload($filename) {
 }
 
 /**
+ * util_check_url() - determines if given URL is valid.
+ *
+ * Currently, test is very basic, only the protocol is
+ * checked, allowed values are: http, https, ftp.
+ *
+ * @param		string  The URL
+ * @return		boolean	true if valid, false if not valid.
+ */
+function util_check_url($url) {
+	return (preg_match('/^(http|https|ftp):\/\//', $url) > 0);
+}
+
+/**
  * util_send_message() - Send email
  * This function should be used in place of the PHP mail() function
  *
