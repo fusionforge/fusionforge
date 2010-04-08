@@ -1,3 +1,10 @@
+fusionforge-plugin-mailman (1.2.5-1) unstable; urgency=low
+
+  * Some FusionForge renaming
+  * Use default host so single sign on works 
+
+ -- Christian Bayle <bayle@debian.org>  Thu, 08 Apr 2010 22:35:50 +0200
+
 fusionforge-plugin-mailman (1.2.4-1) karmic; urgency=low
 
   * Remove "powered by GForge" on the main age of mailman plugin 
