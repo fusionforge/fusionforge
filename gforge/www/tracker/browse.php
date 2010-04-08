@@ -254,13 +254,13 @@ if (session_loggedin()) {
 
 if (db_numrows($res)>0) {
 	echo '<form action="'. getStringFromServer('PHP_SELF') .'" method="get">';
-	echo '<input type="hidden" name="group_id" value="'.$group_id.'" />';
-	echo '<input type="hidden" name="atid" value="'.$ath->getID().'" />';
-	echo '<input type="hidden" name="power_query" value="1" />';
 	echo '	<table width="100%" cellspacing="0">
 	<tr>
 	<td>
 	';
+	echo '<input type="hidden" name="group_id" value="'.$group_id.'" />';
+	echo '<input type="hidden" name="atid" value="'.$ath->getID().'" />';
+	echo '<input type="hidden" name="power_query" value="1" />';
 	$optgroup['key'] = 'type';
 	$optgroup['values'][0] = 'Private queries';
 	$optgroup['values'][1] = 'Project queries';
@@ -299,11 +299,11 @@ echo '
 	</div>
 	<div class="tabbertab'.($af->query_type == 'custom' ? ' tabbertabdefault' : '').'" title="'._('Simple Filtering and Sorting').'">
 	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;atid='.$ath->getID().'" method="post">
-	<input type="hidden" name="query_id" value="-1" />
-	<input type="hidden" name="set" value="custom" />
 	<table width="100%" cellspacing="0">
 	<tr>
 	<td>
+	<input type="hidden" name="query_id" value="-1" />
+	<input type="hidden" name="set" value="custom" />
 	'._('Assignee').':&nbsp;'. $tech_box .'
 	</td>
 	<td align="center">
