@@ -100,7 +100,7 @@ class MediaWikiPlugin extends Plugin {
 				return;
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
-				print '<a href='. util_make_url ('/plugins/mediawiki/wiki/'.$project->getUnixName().'/index.php').'>';
+				print '<a href="'. util_make_url ('/plugins/mediawiki/wiki/'.$project->getUnixName().'/index.php').'">';
 				print html_abs_image(util_make_url ('/plugins/mediawiki/wiki/'.$project->getUnixName().'/skins/fusionforge/wiki.png'),'20','20',array('alt'=>'Mediawiki'));
 				print ' Mediawiki';
 				print '</a>';
