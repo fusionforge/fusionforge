@@ -62,11 +62,12 @@ class Theme extends Layout {
         }
 
         function bodyFooter($params) {
-                echo '</div>
+                echo '</div> <!-- id="maindiv" -->
 ';
         }
 
         function footer($params) {
+		$this->bodyFooter($params);
                 echo '
 			<!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
 			<div class="align-right">
@@ -95,9 +96,9 @@ class Theme extends Layout {
             		<div class="box-title-left">
             			<div class="box-title-right">
                 			<h3 class="box-title-content" id="'. $this->toSlug($id) .'-title-content">'. $title .'</h3>
-                		</div>
-                	</div>
-                </div> 
+                		</div> <!-- class="box-title-right" -->
+                	</div> <!-- class="box-title-left" -->
+                </div> <!-- class="box-title" -->
             	<div id="'. $this->toSlug($id) .'-content" class="box-content">
             ';
 		return $t_result;
@@ -124,7 +125,7 @@ class Theme extends Layout {
 	 */
 	function boxBottom() {
 		$t_result='
-                </div>
+                </div> <!-- class="box-content" -->
             </div> <!-- class="box-surround" -->
 		';
 		return $t_result;

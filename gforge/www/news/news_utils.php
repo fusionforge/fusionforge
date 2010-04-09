@@ -117,7 +117,7 @@ ORDER BY post_date DESC',
 	if (!$result || $rows < 1) {
 		$return .= _('No News Items Found');
 		$return .= db_error();
-		$return .= "</div>";
+//		$return .= "</div>";
 	} else {
 		for ($i=0; $i<$rows; $i++) {
 			$t_thread_title = db_result($result,$i,'summary');
