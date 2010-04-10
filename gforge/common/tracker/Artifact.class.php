@@ -852,7 +852,7 @@ class Artifact extends Error {
 			$res = $this->ArtifactType->getTechnicians();
 			$arr =& util_result_column_to_array($res,0);
 			if (!in_array($assigned_to, $arr)) {
-				$this->setError("Invalid assigned_to (not member of the project)");
+				$this->setError("Invalid assigned_to (assigned person is not a technician)");
 				return false;
 			}
 		}
@@ -978,41 +978,48 @@ class Artifact extends Error {
 			$this->ArtifactType =& $newArtifactType;
 			$update = true;
 		}
-		
+
+		$qpa = db_construct_qpa();
+		$qpa = db_construct_qpa($qpa, 'UPDATE artifact SET');
+
 		//
 		//	handle audit trail
 		//
-		$close_date = $this->getCloseDate();
 		if ($this->getStatusID() != $status_id) {
 			$this->addHistory('status_id',$this->getStatusID());
+			$qpa = db_construct_qpa($qpa, ' status_id=$1,', array($status_id));
 			$changes['status'] = 1;
 			$update = true;
 
 			if ($status_id != 1) {
-				$close_date = time () ;
+				$qpa = db_construct_qpa($qpa, ' close_date=$1,', array(time()));
 			} else {
-				$close_date = 0 ;
+			  $qpa = db_construct_qpa($qpa, ' close_date=$1,', array(0));
 			}
 			$this->addHistory('close_date', $this->getCloseDate());
 		}
 		if ($this->getPriority() != $priority) {
 			$this->addHistory('priority',$this->getPriority());
+			$qpa = db_construct_qpa($qpa, ' priority=$1,', array($priority));
 			$changes['priority'] = 1;
 			$update = true;
 		}
 
 		if ($this->getAssignedTo() != $assigned_to) {
 			$this->addHistory('assigned_to',$this->getAssignedTo());
+			$qpa = db_construct_qpa($qpa, ' assigned_to=$1,', array($assigned_to));
 			$changes['assigned_to'] = 1;
 			$update = true;
 		}
 		if ($summary && ($this->getSummary() != htmlspecialchars(stripslashes($summary)))) {
 			$this->addHistory('summary', $this->getSummary());
+			$qpa = db_construct_qpa($qpa, ' summary=$1,', array(htmlspecialchars($summary)));
 			$changes['summary'] = 1;
 			$update = true;
 		}
  		if ($description && ($this->getDetails() != htmlspecialchars(stripslashes($description)))) {
  			$this->addHistory('details', $this->getDetails());
+ 			$qpa = db_construct_qpa($qpa, ' details=$1,', array(htmlspecialchars($description)));
  			$changes['details'] = 1;
  			$update = true;
   		}
@@ -1026,26 +1033,11 @@ class Artifact extends Error {
 			Finally, update the artifact itself
 		*/
 		if ($update){
-			$result = db_query_params ('UPDATE artifact 
-				SET 
-				status_id=$1,
-				priority=$2,
-				assigned_to=$3,
-				summary=$4,
-				details=$5,
-				close_date=$6,
-				group_artifact_id=$7
-				WHERE 
-				artifact_id=$8 AND group_artifact_id=$9',
-						   array ($status_id,
-							  $priority,
-							  $assigned_to,
-							  htmlspecialchars($summary),
-							  htmlspecialchars($description),
-							  $close_date,
-							  $new_artifact_type_id,
-							  $this->getID(),
-							  $artifact_type_id)) ;
+		  $qpa = db_construct_qpa($qpa, ' group_artifact_id=$1
+				                              WHERE artifact_id=$2 AND group_artifact_id=$3',
+                                      array($new_artifact_type_id,
+                                            $this->getID(), $artifact_type_id));
+		  $result = db_query_qpa($qpa);
 
 			if (!$result || db_affected_rows($result) < 1) {
 				$this->setError('Error - update failed!'.db_error());
