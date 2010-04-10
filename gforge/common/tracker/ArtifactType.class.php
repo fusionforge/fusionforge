@@ -512,7 +512,7 @@ class ArtifactType extends Error {
 				$status_id=db_result($res,0,'status_id');
 			} else {
 				// custom status was not passed... use the first status from the database
-				$res = db_query_prams ('SELECT status_id FROM artifact_extra_field_elements WHERE extra_field_id=$1 ORDER BY element_id ASC LIMIT 1 OFFSET 0',
+				$res = db_query_params ('SELECT status_id FROM artifact_extra_field_elements WHERE extra_field_id=$1 ORDER BY element_id ASC LIMIT 1 OFFSET 0',
 						       array ($csfield)) ;
 				if (db_numrows($res) == 0) {		// No values available
 					$this->setError('Error Remapping Status');
