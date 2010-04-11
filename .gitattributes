@@ -3939,6 +3939,8 @@ plugins/coclico/mailman/debian/compat -text
 plugins/coclico/mailman/debian/control -text
 plugins/coclico/mailman/debian/copyright -text
 plugins/coclico/mailman/debian/docs -text
+plugins/coclico/mailman/debian/dsf-in/plugin-mailman.postinst -text
+plugins/coclico/mailman/debian/dsf-in/plugin-mailman.prerm -text
 plugins/coclico/mailman/debian/po/templates.pot -text
 plugins/coclico/mailman/debian/rules -text
 plugins/coclico/mailman/debian/source/format -text
