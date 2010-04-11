@@ -56,14 +56,15 @@ ASKPASS=--ask-passphrase
 ASKPASS=
 
 MAJOR=$(shell head -1 $(PKGDIR)/debian/changelog | sed 's/.*(\(.*\)-[^-]*).*/\1/')
+# SMAJOR is MAJOR without epoch if any
+SMAJOR=$(shell echo $(MAJOR) | sed 's/^.://')
+
 in_svn_repo:= $(wildcard .svn/) 
 ifeq ($(strip $(in_svn_repo)),) 
-#in_bzr_repo:= $(shell bzr info | grep parent | cut -d: -f2-)
 in_bzr_repo:= $(wildcard .bzr/)
 ifeq ($(strip $(in_bzr_repo)),)
 	svnrev=unknown
 else
-	#svnrev=$(shell LANG=C bzr log -r-1 2>&1 | grep "svn revno" | cut -d" " -f3)
 	svnrev=bzr$(shell bzr revno)
 endif
 else
@@ -84,14 +85,14 @@ UBUHOOK="--hookdir $(CURDIR)/hook/ubuntu"
 UBUHOOK="--components 'main universe' --debootstrapopts --exclude=udev,pcmciautils,initramfs-tools"
 UBUHOOK=--components "main universe" --hookdir $(CURDIR)/hook/ubuntu
 
-ORIGFILE=$(PKGNAME)_$(MAJOR).orig.tar.gz
-DSCFILE=$(PKGNAME)_$(MAJOR)$(MINOR).dsc
-PDSCFILE=$(PKGNAME)_$(MAJOR)$(MINOR)+p.dsc
-CHANGEFILE=$(PKGNAME)_$(MAJOR)$(MINOR)_$(ARCH).changes
-PCHANGEFILE=$(PKGNAME)_$(MAJOR)$(MINOR)+p_$(ARCH).changes
+ORIGFILE=$(PKGNAME)_$(SMAJOR).orig.tar.gz
+DSCFILE=$(PKGNAME)_$(SMAJOR)$(MINOR).dsc
+PDSCFILE=$(PKGNAME)_$(SMAJOR)$(MINOR)+p.dsc
+CHANGEFILE=$(PKGNAME)_$(SMAJOR)$(MINOR)_$(ARCH).changes
+PCHANGEFILE=$(PKGNAME)_$(SMAJOR)$(MINOR)+p_$(ARCH).changes
 
 # Quite heavy version, but still requires to be root
-COWBUILDERCMD=cd $(BUILDPLACE) && dpkg-source -x $(BUILDFILES)/$(DSCFILE) ; cd $(BUILDPLACE)/$(PKGNAME)-$(MAJOR) && pdebuild --pbuilder cowbuilder --buildresult $(BUILDRESULT) -- --basepath $(COWBUILDERBASE)/base-$(DISTRIB).cow --buildplace $(BUILDPLACE) --aptcache $(APTCACHE) ; rm -rf $(BUILDPLACE)/$(PKGNAME)-$(MAJOR) 
+COWBUILDERCMD=cd $(BUILDPLACE) && dpkg-source -x $(BUILDFILES)/$(DSCFILE) ; cd $(BUILDPLACE)/$(PKGNAME)-$(SMAJOR) && pdebuild --pbuilder cowbuilder --buildresult $(BUILDRESULT) -- --basepath $(COWBUILDERBASE)/base-$(DISTRIB).cow --buildplace $(BUILDPLACE) --aptcache $(APTCACHE) ; rm -rf $(BUILDPLACE)/$(PKGNAME)-$(SMAJOR) 
 # This one is with sudo and probably faster
 COWBUILDERCMD=sudo /usr/sbin/cowbuilder --build --basepath $(COWBUILDERBASE)/base-$(DISTRIB).cow --configfile $(COWBUILDERBASE)/configfile $(BUILDFILES)/$(DSCFILE) $(DEBBUILDOPTS)
 
@@ -109,15 +110,15 @@ list:
 	@echo "=         'svn' for trunk"
 	@echo "=         'brc' for branches)"
 	@echo "=    * PKGNAME = $(PKGNAME)"
-	@echo "=    * PKGDIR = $(PKGDIR)"
-	@echo "=    * major version : $(MAJOR)"
+	@echo "=    * PKGDIR  = $(PKGDIR)"
+	@echo "=    * major version : $(MAJOR)/$(SMAJOR)"
 	@echo "=    * minor version : $(MINOR)"
-	@echo "=    * architecture  :   $(ARCH)"
-	@echo "=    * BUILDERDIR = $(BUILDERDIR)"
-	@echo "=    * ORIGFILE = $(ORIGFILE)"
-	@echo "=    * DSCFILE = $(DSCFILE)"
-	@echo "=    * PDSCFILE = $(PDSCFILE)"
-	@echo "=    * CHANGEFILE = $(CHANGEFILE)"
+	@echo "=    * architecture  : $(ARCH)"
+	@echo "=    * BUILDERDIR  = $(BUILDERDIR)"
+	@echo "=    * ORIGFILE    = $(ORIGFILE)"
+	@echo "=    * DSCFILE     = $(DSCFILE)"
+	@echo "=    * PDSCFILE    = $(PDSCFILE)"
+	@echo "=    * CHANGEFILE  = $(CHANGEFILE)"
 	@echo "=    * PCHANGEFILE = $(PCHANGEFILE)"
 	@echo ======================================================================================
 	@cat Makefile.debian | grep '^.*:.*#$$' | sed 's/FUSIONFORGE/$(FUSIONFORGE)/' | sed 's/^\(.*:\).*#\(.*\)#$$/\1		\2/'
