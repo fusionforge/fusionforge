@@ -3992,6 +3992,8 @@ plugins/templates/helloworld/debian/compat -text
 plugins/templates/helloworld/debian/control -text
 plugins/templates/helloworld/debian/copyright -text
 plugins/templates/helloworld/debian/docs -text
+plugins/templates/helloworld/debian/dsf-in/plugin-helloworld.postinst -text
+plugins/templates/helloworld/debian/dsf-in/plugin-helloworld.prerm -text
 plugins/templates/helloworld/debian/po/templates.pot -text
 plugins/templates/helloworld/debian/rules -text
 plugins/templates/helloworld/debian/source/format -text
