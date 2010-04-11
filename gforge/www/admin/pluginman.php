@@ -32,7 +32,7 @@ require_once $gfwww.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 
 // Skip non compatible plugins.
-$plugins_disabled = array('helloworld', 'webcalendar', 'scmccase', 'scmcpold');
+$plugins_disabled = array('webcalendar', 'scmccase');
 
 site_admin_header(array('title'=>_('Site admin')));
 
