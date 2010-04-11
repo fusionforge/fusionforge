@@ -51,24 +51,8 @@ else
 	if [ $dopackage -ne 0 ]
 	then
 		echo "Doing package"
-		(cd $modelplugdir;find debian)|sort|while read debfile
-		do
-			if [ -d $modelminus/$debfile ]
-			then
-				[ -d $plugdir/$debfile ] || (echo "Making directory $plugdir/$debfile" ; mkdir $plugdir/$debfile)
-			else
-				if [ ! -f $plugdir/$debfile ]
-				then
-					echo "Creating $plugdir/$debfile"
-					cat $modelminus/$debfile | \
-						sed "s/$modelminus/$minus/g" | \
-						sed "s/$modelfullname/$fullname/g" > \
-					$plugdir/$debfile
-				fi
-			fi
-		done
 		chmod +x $plugdir/utils/*
-		(cd $modelplugdir;find packaging)|sort|while read debfile
+		(cd $modelplugdir;find debian;find packaging)|sort|while read debfile
 		do
 			if [ -d $modelminus/$debfile ]
 			then
