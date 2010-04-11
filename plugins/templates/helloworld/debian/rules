@@ -23,9 +23,10 @@ LINKSFILES=$(patsubst packaging/links/%,debian/$(PACKAGE)-%.links,$(wildcard pac
 INSTALLFILES=$(patsubst packaging/install/%,debian/$(PACKAGE)-%.install,$(wildcard packaging/install/[a-z]*))
 DOCSFILES=$(patsubst packaging/docs/%,debian/$(PACKAGE)-%.docs,$(wildcard packaging/docs/[a-z]*))
 POFILES=$(patsubst debian/dsf-po/%,debian/po/%,$(wildcard debian/dsf-po/*) debian/po/POTFILES.in)
+DSFINFILES=$(patsubst debian/dsf-in/%,debian/$(PACKAGE)-%,$(wildcard debian/dsf-in/[a-z]*))
 
 .PHONY: conffiles
-conffiles: $(CRONDFILES) $(DIRSFILES) $(LINKSFILES) $(INSTALLFILES) $(DOCSFILES) debian/control
+conffiles: $(CRONDFILES) $(DIRSFILES) $(LINKSFILES) $(INSTALLFILES) $(DOCSFILES) $(DSFINFILES) debian/control
 
 debian/$(PACKAGE)-%.cron.d:
 	(cat $(CURDIR)/packaging/cron.d/00phpcron ; sed -e 's/\$$FFUSER/$(PACKAGE)/g' $(CURDIR)/packaging/cron.d/$*) > $@
@@ -51,6 +52,10 @@ debian/po/templates.pot: $(wildcard debian/dsf-in/*.templates.dsfh-in) $(wildcar
 debian/po/%:
 	cat $(patsubst debian/po/%,debian/dsf-po/%,$@) | $(SED_REPLACE) > $@
 
+# postinst and prerm files
+debian/$(PACKAGE)-%:
+	cat $(patsubst debian/$(PACKAGE)-%,debian/dsf-in/%,$@) | $(SED_REPLACE) > $@
+
 build: debian/po/templates.pot conffiles
 	dh $@
 	# Build gettext *.mo files
@@ -63,6 +68,8 @@ clean:
 	rm -f $(CURDIR)/debian/*.links
 	rm -f $(CURDIR)/debian/*.install
 	rm -f $(CURDIR)/debian/*.docs
+	rm -f $(CURDIR)/debian/*.postinst
+	rm -f $(CURDIR)/debian/*.prerm
 	rm -rf locales
 	rm -f $(POFILES)
 
