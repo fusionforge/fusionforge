@@ -1,3 +1,3 @@
- This plugin contains the Helloworld subsystem of FusionForge. It allows each
- FusionForge project to have its own Helloworld, and gives some
+ This plugin contains the HelloWorld subsystem of FusionForge. It allows each
+ FusionForge project to have its own HelloWorld, and gives some
  control over it to the project's administrator.

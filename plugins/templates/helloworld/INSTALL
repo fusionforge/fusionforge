@@ -1,4 +1,4 @@
-0. INSTALLATION of Helloworld Plugin
+0. INSTALLATION of HelloWorld Plugin
 
 i.e. : if the directory where the plugins are is  /srv/www/gforge/plugins you should end up 
 	with /srv/www/gforge/plugins/helloworld and all the files in it
