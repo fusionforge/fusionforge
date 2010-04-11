@@ -3931,9 +3931,7 @@ plugins/coclico/mailman/bin/db-delete.pl -text
 plugins/coclico/mailman/bin/db-upgrade.pl -text
 plugins/coclico/mailman/common/mailman-init.php -text
 plugins/coclico/mailman/cronjobs/manage_mailmanlists.php -text
-plugins/coclico/mailman/db/install.sql -text
 plugins/coclico/mailman/db/mailman-init.sql -text
-plugins/coclico/mailman/db/uninstall.sql -text
 plugins/coclico/mailman/debian/README.Debian -text
 plugins/coclico/mailman/debian/README.source -text
 plugins/coclico/mailman/debian/changelog -text
