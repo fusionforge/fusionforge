@@ -4011,6 +4011,7 @@ plugins/templates/helloworld/packaging/links/plugin-helloworld -text
 plugins/templates/helloworld/translations/en.po -text
 plugins/templates/helloworld/translations/gforge.pot -text
 plugins/templates/helloworld/utils/manage-translations.sh -text
+plugins/templates/helloworld/www/admin/index.php -text
 plugins/templates/scmcpold/common/CpoldPlugin.class.php -text
 plugins/templates/scmcpold/common/scmcpold-init.php -text
 plugins/templates/scmcpold/etc/plugins/scmcpold/config.php -text
