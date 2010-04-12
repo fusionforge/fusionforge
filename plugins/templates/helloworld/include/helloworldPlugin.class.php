@@ -22,18 +22,18 @@
  */
 
 class helloworldPlugin extends Plugin {
-	function helloworldPlugin () {
-		$this->Plugin() ;
-		$this->name = "helloworld" ;
-		$this->text = "HelloWorld!" ; // To show in the tabs, use...
-		$this->hooks[] = "user_personal_links";//to make a link to the user's personal part of the plugin
-		$this->hooks[] = "usermenu" ;
-		$this->hooks[] = "groupmenu" ;	// To put into the project tabs
-		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
-		$this->hooks[] = "groupisactivecheckboxpost" ; //
-		$this->hooks[] = "userisactivecheckbox" ; // The "use ..." checkbox in user account
-		$this->hooks[] = "userisactivecheckboxpost" ; //
-		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page fro group
+	public function __construct($id=0) {
+		$this->Plugin($id) ;
+		$this->name = "helloworld";
+		$this->text = "HelloWorld!"; // To show in the tabs, use...
+		$this->_addHook("user_personal_links");//to make a link to the user's personal part of the plugin
+		$this->_addHook("usermenu");
+		$this->_addHook("groupmenu");	// To put into the project tabs
+		$this->_addHook("groupisactivecheckbox"); // The "use ..." checkbox in editgroupinfo
+		$this->_addHook("groupisactivecheckboxpost"); //
+		$this->_addHook("userisactivecheckbox"); // The "use ..." checkbox in user account
+		$this->_addHook("userisactivecheckboxpost"); //
+		$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
 	}
 
 	function CallHook ($hookname, $params) {
@@ -144,7 +144,7 @@ class helloworldPlugin extends Plugin {
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
-				echo util_make_link ("/plugins/projects_hierarchy/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
+				echo util_make_link ("/plugins/helloworld/admin/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
 						     _('View the HelloWorld Administration')) ;
 				echo '</p>';
 			}
