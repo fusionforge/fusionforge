@@ -262,7 +262,7 @@ class SVNPlugin extends SCMPlugin {
 		foreach ($svnusers as $user_id => $user) {
 			$password_data .= $user->getUnixName ().':'.$user->getMD5Passwd ()."\n" ;
 		}
-		$password_data .= "anonsvn:$apr1$Kfr69/..$J08mbyNpD81y42x7xlFDm.\n" ;
+		$password_data .= 'anonsvn:$apr1$Kfr69/..$J08mbyNpD81y42x7xlFDm.'."\n";
 
 		$fname = $sys_var_path.'/svnroot-access' ;
 		$f = fopen ($fname.'.new', 'w') ;
