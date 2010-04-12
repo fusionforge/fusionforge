@@ -1,0 +1,12 @@
+# 62plugin-helloworld begin
+#	AddHandler cgi-script .cgi
+
+#	ScriptAlias /cgi-bin/helloworld/ /var/lib/helloworld/cgi-bin/
+#	ScriptAlias /helloworld/ /var/lib/helloworld/cgi-bin/
+
+#	Alias /images/helloworld /usr/share/images/helloworld
+#	<Location /images/helloworld>
+#		order allow,deny
+#		allow from all
+#	</Location>
+# 62plugin-helloworld end

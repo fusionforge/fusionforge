@@ -29,7 +29,7 @@ else
 	echo "Creating $1 plugin"
 	echo "Creating directory $plugdir"
 	[ ! -d $plugdir ] && mkdir $plugdir
-	(cd $modelplugdir;find bin;find etc;find common;find www;find utils;find db;find cronjobs;find tests; find translations)|sort|while read debfile
+	(cd $modelplugdir;find bin;find etc;find common;find include;find www;find utils;find db;find cronjobs;find tests; find translations)|sort|while read debfile
 	do
 		if [ -d $modelminus/$debfile ]
 		then

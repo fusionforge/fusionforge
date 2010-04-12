@@ -3987,6 +3987,7 @@ plugins/coclico/mailman/www/mailman_utils.php -text
 plugins/templates/createplugin.sh -text
 plugins/templates/helloworld/bin/db-delete.pl -text
 plugins/templates/helloworld/bin/db-upgrade.pl -text
+plugins/templates/helloworld/cronjobs/manage_helloworld.php -text
 plugins/templates/helloworld/debian/README.Debian -text
 plugins/templates/helloworld/debian/README.source -text
 plugins/templates/helloworld/debian/changelog -text
@@ -3999,6 +4000,7 @@ plugins/templates/helloworld/debian/dsf-in/plugin-helloworld.prerm -text
 plugins/templates/helloworld/debian/po/templates.pot -text
 plugins/templates/helloworld/debian/rules -text
 plugins/templates/helloworld/debian/source/format -text
+plugins/templates/helloworld/etc/httpd.d/62plugin-helloworld -text
 plugins/templates/helloworld/packaging/control/000source -text
 plugins/templates/helloworld/packaging/control/222plugin-helloworld -text
 plugins/templates/helloworld/packaging/control/222plugin-helloworld.shortdesc -text
