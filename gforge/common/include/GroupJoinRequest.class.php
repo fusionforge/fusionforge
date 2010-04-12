@@ -232,7 +232,7 @@ You can approve this request here: %2$s
 Comments by the user:
 %3$s'),
 					$user->getRealName(),
-					util_make_url ('/project/admin/?group_id='.$this->Group->getId()),
+					util_make_url ('/project/admin/users.php?group_id='.$this->Group->getId()),
 					$comments);
 			$body = str_replace("\\n","\n",$body);
 
