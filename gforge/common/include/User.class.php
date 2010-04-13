@@ -417,6 +417,8 @@ to complete your registration, visit the following url:
 
 <%2$s>
 
+You have 1 week to confirm your account. After this time, your account will be deleted.
+
 (If you don\'t see any URL above, it is likely due to a bug in your mail client.
 Use one below, but make sure it is entered as the single line.)
 
