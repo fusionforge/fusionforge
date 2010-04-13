@@ -174,9 +174,8 @@ class mailmanPlugin extends Plugin {
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
-				echo util_make_link ("/plugins/projects_hierarchy/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
-									 _('View the mailman Administration')) ;
-				echo '</p>';
+				echo '<p>'.util_make_link ("/plugins/projects_hierarchy/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
+									 _('View the mailman Administration')).'</p>';
 			}
 		}												    
 		elseif ($hookname == "monitored_element") {

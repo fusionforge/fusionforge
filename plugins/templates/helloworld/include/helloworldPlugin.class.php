@@ -144,9 +144,8 @@ class helloworldPlugin extends Plugin {
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
-				echo util_make_link ("/plugins/helloworld/admin/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
-						     _('View the HelloWorld Administration')) ;
-				echo '</p>';
+				echo '<p>'.util_make_link ("/plugins/helloworld/admin/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
+						     _('HelloWorld Admin')).'</p>' ;
 			}
 		}												    
 		elseif ($hookname == "blahblahblah") {

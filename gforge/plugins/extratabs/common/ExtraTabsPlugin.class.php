@@ -37,8 +37,8 @@ class ExtraTabsPlugin extends Plugin {
 		
 		if ($hookname == "project_admin_plugins") {
 			$group_id=$params['group_id'];
-			echo util_make_link ('/plugins/extratabs/index.php?group_id='.$group_id,
-					     _('Extra tabs')).'<br />';	       
+			echo '<p>'.util_make_link ('/plugins/extratabs/index.php?group_id='.$group_id,
+					     _('Extra tabs')).'</p>';	       
 		} elseif ($hookname == "groupmenu") {
 			$group_id=$params['group'];
 			$project = &group_get_object($group_id);
