@@ -1149,6 +1149,29 @@ function check_email_available($group, $email, &$response) {
 	return true;
 }
 
+// array_replace_recursive only appeared in PHP 5.3.0
+if (!function_exists('array_replace_recursive')) {
+	function array_replace_recursive ($a1, $a2) {
+		$result = $a1 ;
+
+		if (!is_array ($a2)) {
+			return $a2 ;
+		}
+
+		foreach ($a2 as $k => $v) {
+			if (!is_array ($v) ||
+			    !isset ($result[$k]) || !is_array ($result[$k])) {
+				$result[$k] = $v ;
+			}
+			
+			$result[$k] = array_replace_recursive ($result[$k],
+							       $v) ;
+		}
+
+		return $result ;
+	}
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
