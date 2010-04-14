@@ -21,7 +21,7 @@ if (!isset($no_gz_buffer) || !$no_gz_buffer) {
 
 require $gfcgfile;
 require $gfcommon.'include/constants.php';
-require_once $gfcommon.'include/database-'.$sys_database_type.'.php';
+require_once $gfcommon.'include/database-pgsql.php';
 require_once $gfcommon.'include/session.php';
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'include/User.class.php';

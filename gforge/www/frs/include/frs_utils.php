@@ -180,7 +180,7 @@ function frs_show_release_popup ($group_id, $name='release_id', $checked_val="xz
 	/*
 		return a pop-up select box of releases for the project
 	*/
-	global $FRS_RELEASE_RES, $sys_database_type;
+	global $FRS_RELEASE_RES;
 
 	if (!$group_id) {
 		return 'ERROR - GROUP ID REQUIRED';

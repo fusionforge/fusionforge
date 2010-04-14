@@ -147,7 +147,7 @@ if (getStringFromRequest('update')) {
 
 			if (getStringFromRequest('init')) {
 				// now we're going to check if there's a XX-init.sql file and run it
-				$db_init = $sys_plugins_path . '/' . $pluginname . '/db/' . $pluginname . '-init-'. $sys_database_type .'.sql';
+				$db_init = $sys_plugins_path . '/' . $pluginname . '/db/' . $pluginname . '-init-pgsql.sql';
 				if (!is_file($db_init)) {
 					$db_init = $sys_plugins_path . '/' . $pluginname . '/db/' . $pluginname . '-init.sql';
 					if (!is_file($db_init)) {

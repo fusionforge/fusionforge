@@ -78,8 +78,6 @@ class ForumFactory extends Error {
 	 *	@return	array	The array of Forum objects.
 	 */
 	function &getForums() {
-		global $sys_database_type;
-
 		if ($this->forums) {
 			return $this->forums;
 		}
@@ -146,8 +144,6 @@ ORDER BY group_forum_id',
 	 *	@return	array	The array of Forum objects.
 	 */
 	function &getForumsAdmin() {
-		global $sys_database_type;
-
 		if ($this->forums) {
 			return $this->forums;
 		}

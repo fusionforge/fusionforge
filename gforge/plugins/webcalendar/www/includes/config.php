@@ -77,7 +77,7 @@ global $TROUBLE_URL;
   exit;
 }
 
-global $sys_database_type,$sys_dbhost,$sys_dbuser,$sys_dbpasswd,$sys_dbname;
+global $sys_dbhost,$sys_dbuser,$sys_dbpasswd,$sys_dbname;
 
 $db_type = 'postgresql';
 $settings['db_type'] = 'postgresql';

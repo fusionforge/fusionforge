@@ -64,7 +64,6 @@ class ArtifactSearchQuery extends SearchQuery {
 	 * @return array query+params array
 	 */
 	function getQuery() {
-		global $sys_database_type;
 		global $sys_use_fti;
 
 		$qpa = db_construct_qpa () ;
@@ -158,8 +157,6 @@ class ArtifactSearchQuery extends SearchQuery {
 	 * @return array query+params array
 	 */	
 	function getSearchByIdQuery() {
-		global $sys_database_type;
-
 		$qpa = db_construct_qpa () ;
 
 		$qpa = db_construct_qpa ($qpa,

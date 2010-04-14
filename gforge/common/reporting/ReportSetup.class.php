@@ -41,8 +41,6 @@ function initialSetup() {
 }
 
 function createTables() {
-	global $sys_database_type;
-
 //time tracking
 //DROP TABLE rep_time_category;
 	$sql[]="CREATE TABLE rep_time_category (
@@ -955,8 +953,6 @@ function backfill_groups_cum_monthly($count=10000) {
  *	@return	boolean	Success.
  */
 function user_act_daily($day) {
-	global $sys_database_type;
-
 	db_query_params ('DELETE FROM rep_user_act_daily WHERE day=$1',
 			array($day)) ;
 
@@ -1061,8 +1057,6 @@ function backfill_user_act_daily($count=10000) {
  *  @return boolean Success.
  */
 function user_act_weekly($week) {
-	global $sys_database_type;
-
 	db_query_params ('DELETE FROM rep_user_act_weekly WHERE week=$1',
 			array($week)) ;
 
@@ -1109,8 +1103,6 @@ function backfill_user_act_weekly($count=10000) {
  *  @return boolean Success.
  */
 function user_act_monthly($month,$end) {
-	global $sys_database_type;
-
 	db_query_params ('DELETE FROM rep_user_act_monthly WHERE month=$1',
 			array($month)) ;
 
@@ -1158,8 +1150,6 @@ function backfill_user_act_monthly($count=10000) {
  *	@return	boolean	Success.
  */
 function group_act_daily($day) {
-	global $sys_database_type;
-
 	db_query_params ('DELETE FROM rep_group_act_daily WHERE day=$1',
 			array($day)) ;
 
@@ -1285,8 +1275,6 @@ function backfill_group_act_daily($count=10000) {
  *  @return boolean Success.
  */
 function group_act_weekly($week) {
-	global $sys_database_type;
-
 	db_query_params ('DELETE FROM rep_group_act_weekly WHERE week=$1',
 			array($week)) ;
 
@@ -1335,8 +1323,6 @@ function backfill_group_act_weekly($count=10000) {
  *  @return boolean Success.
  */
 function group_act_monthly($month,$end) {
-	global $sys_database_type;
-
 	db_query_params ('DELETE FROM rep_group_act_monthly WHERE month=$1',
 			array($month)) ;
 

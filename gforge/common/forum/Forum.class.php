@@ -211,8 +211,6 @@ class Forum extends Error {
 	 *	@return	boolean	success.
 	 */
 	function fetchData($group_forum_id) {
-		global $sys_database_type;
-
 		$res = db_query_params ('SELECT * FROM forum_group_list_vw WHERE group_forum_id=$1',
 					array ($group_forum_id)) ;
 		if (!$res || db_numrows($res) < 1) {

@@ -31,7 +31,7 @@ return data:
 	$array[errormessage]='Bad Password';
  */
 function &MSPLogin($username,$password) {
-	global $feedback,$session_ser,$sys_database_type;
+	global $feedback,$session_ser;
 
 	$success=session_login_valid(strtolower($username),$password);
 	if ($success) {

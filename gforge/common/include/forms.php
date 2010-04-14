@@ -30,8 +30,6 @@
  *
  */
 function form_generate_key() {
-	global $sys_database_type;
-
 	$is_new=false;
 	db_begin();
 	// there's about 99.999999999% probability this loop will run only once :) 
@@ -60,8 +58,6 @@ function form_generate_key() {
  *
  */
 function form_key_is_valid($key) {
-	global $sys_database_type;
-
 	// Fail back mode if key is empty. This can happen when there is
 	// a problem with the generation. In this case, it may be better
 	// to disable this check instead of blocking all the application.
@@ -91,8 +87,6 @@ function form_key_is_valid($key) {
  *
  */
 function form_release_key($key) {
-	global $sys_database_type;
-
 	db_begin();
 	$res = db_query_params ('SELECT * FROM form_keys WHERE key=$1 FOR UPDATE', array ($key));
 	if (!$res || !db_numrows($res)) {

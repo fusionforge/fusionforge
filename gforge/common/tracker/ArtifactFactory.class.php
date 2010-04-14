@@ -286,8 +286,6 @@ class ArtifactFactory extends Error {
 	 *	@return	array	The array of Artifact objects.
 	 */
 	function &getArtifacts() {
-		global $sys_database_type;
-
 		if (!empty($this->artifacts)) {
 			return $this->artifacts;
 		}

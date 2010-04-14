@@ -94,8 +94,6 @@ function report_months_box($Report, $name='month', $selected=false) {
 }
 
 function report_useract_box($name='dev_id', $selected='1', $start_with='') {
-	global $sys_database_type;
-
 	if ($start_with) {
 		$res = db_query_params ('SELECT user_id,realname FROM users WHERE status=$1 AND (exists (SELECT user_id FROM rep_user_act_daily WHERE user_id=users.user_id)) AND (lower(lastname) LIKE $2 OR lower(user_name) LIKE $3) ORDER BY lastname',
 					array ('A',
@@ -109,8 +107,6 @@ function report_useract_box($name='dev_id', $selected='1', $start_with='') {
 }
 
 function report_usertime_box($name='dev_id', $selected='1', $start_with='') {
-	global $sys_database_type;
-
 	if ($start_with) {
 		$res = db_query_params ('SELECT user_id,realname FROM users WHERE status=$1 AND (exists (SELECT user_id FROM rep_time_tracking WHERE user_id=users.user_id)) AND (lower(lastname) LIKE $2 OR lower(user_name) LIKE $3) ORDER BY lastname',
 					array ('A',

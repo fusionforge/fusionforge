@@ -137,8 +137,6 @@ class ProjectTask extends Error {
 	 */
 	function create($summary,$details,$priority,$hours,$start_date,$end_date,
 			$category_id,$percent_complete,&$assigned_arr,&$depend_arr,$duration=0,$parent_id=0) {
-		global $sys_database_type;
-
 		$v = new Validator();
 		$v->check($summary, "summary");
 		$v->check($details, "details");

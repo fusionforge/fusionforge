@@ -11,12 +11,6 @@ $sys_opt_path='/opt/gforge';
 $sys_var_path='/var/lib/gforge';
 
 //
-// FusionForge database type
-//
-//$sys_database_type='mysql';
-$sys_database_type='pgsql';
-
-//
 // FusionForge hostnames
 //
 // Hostnames should be fully qualified domain names (FQDNs); using short names

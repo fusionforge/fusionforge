@@ -70,7 +70,7 @@ require_once $gfwww.'include/Layout.class.php';
 require_once $gfcommon.'include/utils.php';
 
 //database abstraction
-require_once $gfcommon.'include/database-'.$sys_database_type.'.php';
+require_once $gfcommon.'include/database-pgsql.php';
 
 //security library
 require_once $gfcommon.'include/session.php';
