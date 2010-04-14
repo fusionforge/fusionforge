@@ -331,26 +331,36 @@ class Role extends Error {
 		return true;
 	}
 
+	function normalizeDataForSection (&$new_sa, $section) {
+		if (array_key_exists ($section, $this->setting_array)) {
+			$new_sa[$section][0] = $this->setting_array[$section][0] ;
+		} elseif (array_key_exists ($this->data_array['role_name'], $this->defaults)
+			  && array_key_exists ($section, $this->defaults[$this->data_array['role_name']])) {
+			$new_sa[$section][0] = $this->defaults[$this->data_array['role_name']][$section] ;
+		} else {
+			$new_sa[$section][0] = 0 ;
+		}
+		return $new_sa ;
+	}
+
 	function normalizeData () {
 		db_begin () ;
 		$this->fetchData ($this->getID()) ;
 		
 		$new_sa = array () ;
-
+		
 		// Add missing settings
 		// ...project-wide settings
 		$arr = array ('projectadmin', 'frs', 'scm', 'docman', 'forumadmin', 'trackeradmin', 'newtracker', 'pmadmin', 'newpm', 'webcal') ;
 		foreach ($arr as $section) {
-			if (array_key_exists ($section, $this->setting_array)) {
-				$new_sa[$section][0] = $this->setting_array[$section][0] ;
-			} elseif (array_key_exists ($this->data_array['role_name'], $this->defaults)
-						    && array_key_exists ($section, $this->defaults[$this->data_array['role_name']])) {
-					  $new_sa[$section][0] = $this->defaults[$this->data_array['role_name']][$section] ;
-			} else {
-				$new_sa[$section][0] = 0 ;
-			}
+			$this->normalizeDataForSection ($new_sa, $section) ;
 		}
 
+		$hook_params = array ();
+		$hook_params['role'] =& $this;
+		$hook_params['new_sa'] =& $new_sa ; 
+		plugin_hook ("role_normalize", $hook_params);
+		
 		// ...tracker-related settings
 		$new_sa['tracker'] = array () ;
 		$res = db_query_params ('SELECT group_artifact_id FROM artifact_group_list WHERE group_id=$1',
