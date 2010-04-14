@@ -107,6 +107,9 @@ class Plugin extends Error {
 		
 		return $result ;
 	}
+	function getThemePath(){
+		return util_make_url('plugins/'.$this->name.'/themes/default');
+	}
 }
 
 // Local Variables:
