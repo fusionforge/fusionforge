@@ -290,7 +290,7 @@ class Navigation extends Error {
                          
 			if ($permmaster->isAdmin()) {
 				$user_is_super = true;
-				$menu['titles'][] = _('Admin');
+				$menu['titles'][] = _('Site Admin');
 				$menu['urls'][] = util_make_url('/admin/') ;
 				if (strstr($request_uri, util_make_uri('/admin/'))) {
 					$selected=count($menu['urls'])-1;
