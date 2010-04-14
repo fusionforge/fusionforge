@@ -256,13 +256,13 @@ foreach ($filelist as $filename) {
 				$groups = "none";
 			}
 		}
-		$link .= "','$j');" . '">' . _('Deactivate') . "</a>";
-		$init = '<input id="n'.$j.'" type="checkbox" disabled name="script[]" value="'.$filename.'" />';
+		$link .= "','$filename');" . '">' . _('Deactivate') . "</a>";
+		$init = '<input id="'.$filename.'" type="checkbox" disabled name="script[]" value="'.$filename.'" />';
 	} else {
 		$msg = _('Inactive');
 		$status = "inactive";
-		$link = "<a href=\"javascript:change('" . getStringFromServer('PHP_SELF') . "?update=$filename&amp;action=activate','n$j');" . '">' . _('Activate') . "</a>";
-		$init = '<input id="n'.$j.'" type="checkbox" name="script[]" value="'.$filename.'" />';
+		$link = "<a href=\"javascript:change('" . getStringFromServer('PHP_SELF') . "?update=$filename&amp;action=activate','$filename');" . '">' . _('Activate') . "</a>";
+		$init = '<input id="'.$filename.'" type="checkbox" name="script[]" value="'.$filename.'" />';
 		$users = "none";
 		$groups = "none";
 	}
