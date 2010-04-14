@@ -118,6 +118,11 @@ class MediaWikiPlugin extends Plugin {
 							'Junior Developer' => '1',
 							'Doc Writer' => '2',
 							'Support Tech' => '0')) ;
+		} elseif ($hookname == "role_normalize") {
+			$role =& $params['role'] ;
+			$new_sa =& $params['new_sa'] ;
+
+			$role->normalizeDataForSection ($new_sa, 'plugin_mediawiki_edit') ;
 		} elseif ($hookname == "role_translate_strings") {
 			$edit = new PluginSpecificRoleSetting ($role,
 							       'plugin_mediawiki_edit') ;
