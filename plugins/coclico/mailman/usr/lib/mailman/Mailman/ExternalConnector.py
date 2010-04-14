@@ -180,7 +180,7 @@ class ExternalConnector(MemberAdaptor.MemberAdaptor):
     
             return value
 	def db_cookie_to_mail(self,c):
-		if cookiname and c.has_key(self._cookiename):
+		if c.has_key(self._cookiename):
 			hash=c[self._cookiename]
 			query = self._queryCookieMail %hash
 			mm_cfg.cursor.execute(query)

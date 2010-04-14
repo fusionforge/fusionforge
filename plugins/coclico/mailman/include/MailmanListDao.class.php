@@ -70,7 +70,7 @@ class MailmanListDao extends DataAccessObject {
 	function & searchByGroupId($group_id) {
 		$group_id = $this->da->quoteSmart($group_id);
 		$sql = "SELECT * FROM mail_group_list 
-			WHERE group_id = $1";
+			WHERE group_id = $1 ORDER BY group_list_id";
 		return $this->retrieve($sql,array($group_id));
 	}
 	/**

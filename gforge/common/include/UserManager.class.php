@@ -54,6 +54,9 @@ class UserManager {
     	return user_get_object($user_id);
     }
    
+    function getUserByEmail($user_id) {
+	    return user_get_object_by_email($user_id);
+    }
 }
 
 ?>

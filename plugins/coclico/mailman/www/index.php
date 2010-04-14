@@ -12,6 +12,7 @@
  */
 require_once ('env.inc.php');
 require_once 'pre.php';
+require_once 'preplugins.php';
 require_once 'plugins_utils.php';
 require_once 'mailman_utils.php';
 $request =& HTTPRequest::instance();

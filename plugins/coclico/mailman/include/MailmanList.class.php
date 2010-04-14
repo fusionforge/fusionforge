@@ -331,9 +331,9 @@ class MailmanList extends Error {
 	 */
 	function getArchivesUrl() {
 		if ($this->isPublic()) {
-			$iframe_url = 'http://'.$GLOBALS['sys_default_domain'].'/pipermail/'.$this->getName().'/';
+			$iframe_url = 'http://'.$GLOBALS['sys_lists_host'].'/pipermail/'.$this->getName().'/';
 		} else {
-			$iframe_url = 'http://'.$GLOBALS['sys_default_domain'].'/mailman/private/'.$this->getName().'/';
+			$iframe_url = 'http://'.$GLOBALS['sys_lists_host'].'/mailman/private/'.$this->getName().'/';
 		}
 		htmlIframe($iframe_url, array('class' => 'iframe_service'));
 	}
@@ -344,7 +344,7 @@ class MailmanList extends Error {
 	 * @return string url of the info page
 	 */
 	function getExternalInfoUrl() {
-		return 'http://'.$GLOBALS['sys_default_domain'].'/mailman/listinfo/'.$this->getName();
+		return 'http://'.$GLOBALS['sys_lists_host'].'/mailman/listinfo/'.$this->getName();
 	}
 	/**
 	 * getOptionsUrl - get the url to manage options for user
@@ -354,7 +354,7 @@ class MailmanList extends Error {
 	function getOptionsUrl() {
 		$current_user=UserManager::instance()->getCurrentUser();
 		$user=$current_user->getEmail();
-		$iframe_url = 'http://'.$GLOBALS['sys_default_domain'].'/mailman/options/'.$this->getName().'/'.$user;
+		$iframe_url = 'http://'.$GLOBALS['sys_lists_host'].'/mailman/options/'.$this->getName().'/'.$user;
 		htmlIframe($iframe_url, array('class' => 'iframe_service'));
 	}
 	/**
@@ -363,9 +363,9 @@ class MailmanList extends Error {
 	 * @return string url of the info page
 	 */
 	function subscribe() {
-		if(isLogged() && $this->isPublic() && !$this->isMonitoring())
+		$current_user=UserManager::instance()->getCurrentUser();
+		if(isLogged() && $current_user->isMember($this->Group->getID()) && !$this->isMonitoring())
 		{
-			$current_user=UserManager::instance()->getCurrentUser();
 			$user=$current_user->getEmail();
 			$passwd= $current_user->getUserPw();
 			$name= $current_user->getRealName();
@@ -374,7 +374,7 @@ class MailmanList extends Error {
 				$this->setError(_('Error On Update:').db_error());
 				return false;
 			}
-			htmlRedirect('index.php?group_id='.$this->Group->getId());
+			htmlRedirect('/plugins/mailman/index.php?group_id='.$this->Group->getId());
 		}
 
 	}
@@ -391,7 +391,7 @@ class MailmanList extends Error {
 			$this->setError(_('Error On Update:').db_error());
 			return false;
 		}
-		htmlRedirect('index.php?group_id='.$this->Group->getId());
+		htmlRedirect('/plugins/mailman/index.php?group_id='.$this->Group->getId());
 	}
 	/**
 	 *	isMonitoring - See if the current user is in the list of people monitoring the forum.
@@ -422,7 +422,7 @@ class MailmanList extends Error {
 	 */
 
 	function getExternalAdminUrl() {
-		$iframe_url = 'http://'.$GLOBALS['sys_default_domain'].'/mailman/admin/'.$this->getName();
+		$iframe_url = 'http://'.$GLOBALS['sys_lists_host'].'/mailman/admin/'.$this->getName();
 		htmlIframe($iframe_url, array('class' => 'iframe_service'));
 	}
 

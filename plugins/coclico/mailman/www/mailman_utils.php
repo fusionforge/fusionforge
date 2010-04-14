@@ -13,9 +13,8 @@
 
 require_once 'mailman/include/MailmanList.class.php';
 require_once 'mailman/include/MailmanListFactory.class.php';
-
+global $class;
 $current_user=UserManager::instance()->getCurrentUser();
-
 
 function sendCreationMail($userEmail,&$list) {
  $message = sprintf(_('A mailing list will be created on %1$s in few minutes 
@@ -51,24 +50,63 @@ Thank you for registering your project with %1$s.
 function table_begin()
 {
 
-	echo "<table WIDTH=\"100%\" border=0>\n"."<TR><TD VALIGN=\"TOP\">\n"; 
+//	echo "<table WIDTH=\"100%\" border=0>\n"."<TR><TD VALIGN=\"TOP\">\n"; 
+  echo "<table class='border' width='100%' border='0'>
+            <tr class='boxtable'>
+                <th class='forumml' width='15%'>"._('Mailing List')."</th>
+                <th class='forumml' width='30%'>"._('Description')."</th>
+                <th class='forumml' width='15%'>"._('Archives')."</th>";
+  if (isLogged()) {
+	  echo "<th class='forumml' width='10%'>"._('Subscription')."</th>";
+	  echo "<th class='forumml' width='10%'>"._('Preferences')."</th>";
+	  echo "<th class='forumml' width='10%'>"._('Administrate')."</th>";
+  }
+
 }
+function table_begin_admin()
+{
+
+//	echo "<table WIDTH=\"100%\" border=0>\n"."<TR><TD VALIGN=\"TOP\">\n"; 
+  echo "<table class='border' width='100%' border='0'>
+            <tr class='boxtable'>
+                <th class='forumml' width='15%'>"._('Mailing List')."</th>
+                <th class='forumml' width='20%'>"._('Description')."</th>
+                <th class='forumml' width='15%'>"._('Update')."</th>";
+	  echo "<th class='forumml' width='10%'>"._('Delete')."</th>";
+	  echo "<th class='forumml' width='10%'>"._('Administrate')."</th>";
+
+}
+
 function table_end()
 {
-	echo '</TD></TR></TABLE>';
-
+	//	echo '</TD></TR></TABLE>';
+	echo '</table>';
 }
 function display_list($currentList)
 {
+global $class;
+$plugin_manager =& PluginManager::instance();
+$p =& $plugin_manager->getPluginByName('mailman');
 	$request =& HTTPRequest::instance();
 	$current_user=UserManager::instance()->getCurrentUser();
-	
+
 	if($currentList->isPublic()!='9'){
 		if ($currentList->isError()) {
 			echo $currentList->getErrorMessage();
 		} else {
-			getIcon();
-			echo '&nbsp;<b>'.$currentList->getName().'</b> [';
+			if ($class=="boxitem bgcolor-white") {
+				$class="boxitemalt bgcolor-grey";
+			}
+			else {
+				$class = "boxitem bgcolor-white";
+			}
+			echo "<tr class='".$class."'>";
+			echo '<td>';
+			if ($currentList->isMonitoring()) {
+				echo '<img src ="'.$p->getThemePath().'/images/ic/tick.png"'.' title="You are monitoring this list">';
+			}
+			echo $currentList->getName().'</td> ';
+			echo '<td>';
 			if($currentList->getStatus() == '1') {
 				if($currentList->activationRequested()){
 					echo	_('Not activated yet');
@@ -76,24 +114,31 @@ function display_list($currentList)
 				else{
 					echo _('Error during creation');
 				}
-
+				echo '</td>';
 			} else {
-				echo ' <A HREF="index.php?group_id='.$request->get('group_id').'&action=pipermail&id='.$currentList->getID().'">'._('Archives').'</A>';
+				echo htmlspecialchars($currentList->getDescription()).'</td>';
+				$archives =' <A HREF="index.php?group_id='.$request->get('group_id').'&action=pipermail&id='.$currentList->getID().'">'._('Archives').'</A>';
+				plugin_hook('browse_archives', array('html' => &$archives, 'group_list_id' => $currentList->getID()));
+				echo '<td>'.$archives.'</td>';
 				if(isLogged())
 				{ 
+					echo '<td>';
 					if ($currentList->isMonitoring()) {
-						echo 	' | <a href="index.php?group_id='.$request->get('group_id').'&action=unsubscribe&id='.$currentList->getID().'">'._('Unsubscribe').' </a>';
-						echo 	' | <a href="index.php?group_id='.$request->get('group_id').'&action=options&id='.$currentList->getID().'">'._('Preferences').'</a>';
+						echo ' <a href="index.php?group_id='.$request->get('group_id').'&action=unsubscribe&id='.$currentList->getID().'"><img src="'.$p->getThemePath().'/images/ic/delete.png" title='._('Unsubscribe').'>';
+						echo ' </a></td>';
+						echo 	' <td> <a href="index.php?group_id='.$request->get('group_id').'&action=options&id='.$currentList->getID().'">'._('Preferences').'</a></td>';
 					} else {
-						echo 	' | <a href="index.php?group_id='.$request->get('group_id').'&action=subscribe&id='.$currentList->getID().'">'._('Subscribe').'</a>';
+						echo 	'  <a href="index.php?group_id='.$request->get('group_id').'&action=subscribe&id='.$currentList->getID().'"><img src="'.$p->getThemePath().'/images/ic/add.png" title='._('Subscribe').'>';
+						;
+						echo  '</a></td> <td></td>';
 					}
 					if ($currentList->getListAdminID() == $current_user->getID()){
-						echo ' | <A HREF="index.php?group_id='. $request->get('group_id').'&action=admin&id='. $currentList->getID() .'">'._('Administrate').'</A> ';
+						echo ' <td> <A HREF="index.php?group_id='. $request->get('group_id').'&action=admin&id='. $currentList->getID() .'">'._('Administrate').'</A> ';
 					}
+					else { echo '<td>';}
 				}
 			}
-			echo ' ] <br>&nbsp;';
-			echo htmlspecialchars($currentList->getDescription()).'<p>';
+			echo '</td></tr>';
 
 		}
 	}
@@ -101,6 +146,7 @@ function display_list($currentList)
 }
 function display_list_admin($currentList)
 {
+global $class;
 	$request =& HTTPRequest::instance();
 	$current_user=UserManager::instance()->getCurrentUser();
 	if($currentList->isPublic()!='9'){
@@ -108,28 +154,35 @@ function display_list_admin($currentList)
 			echo $currentList->getErrorMessage();
 		} else
 		{
-			getIcon();
-			echo '&nbsp;<b>'.$currentList->getName().'</b> [';
+			if ($class=="boxitem bgcolor-white") {
+				$class="boxitemalt bgcolor-grey";
+			}
+			else {
+				$class = "boxitem bgcolor-white";
+			}
+
+			echo "<tr class='".$class."'>";
+			echo '<td>'.$currentList->getName().'</td> ';
 		}
 		if($currentList->getStatus() == '1') {
 			if($currentList->activationRequested()){
-				echo	_('Not activated yet');
+				echo	'<td>'._('Not activated yet').'</td>';
 			}
 			else{
-				echo _('Error during creation').' | <A HREF="index.php?group_id='.$request->get('group_id').'&action=recreate&group_list_id='.$currentList->getID().'">'._('Re-create').'</A>';
+				echo '<td>'._('Error during creation').'  <A HREF="index.php?group_id='.$request->get('group_id').'&action=recreate&group_list_id='.$currentList->getID().'">'._('Re-create').'</A></td>';
 			}
 		} else {
 
-			echo ' <A HREF="index.php?group_id='.$request->get('group_id').'&change_status=1&group_list_id='.$currentList->getID().'">'._('Update').'</A>';
-			echo '	| <a href="deletelist.php?group_id='.$currentList->Group->getID().'&id='.$currentList->getID().'">'. _('Delete').'</a>';
+			echo '<td>'.htmlspecialchars($currentList->getDescription()).'</td>';
+			echo '<td> <A HREF="index.php?group_id='.$request->get('group_id').'&change_status=1&group_list_id='.$currentList->getID().'">'._('Update').'</A></td>';
+			echo '<td> <a href="deletelist.php?group_id='.$currentList->Group->getID().'&id='.$currentList->getID().'">'. _('Delete').'</td>';
 
 			if ($currentList->getListAdminID() == $current_user->getID()){
-				echo ' | <A HREF="../index.php?group_id='. $request->get('group_id').'&action=admin&id='. $currentList->getID() .'">'._('Administrate from Mailman').'</A> ';
+				echo ' <td> <A HREF="../index.php?group_id='. $request->get('group_id').'&action=admin&id='. $currentList->getID() .'">'._('Administrate from Mailman').'</td> ';
 			}
 		}
 
-		echo ' ] <br>&nbsp;';
-		echo htmlspecialchars($currentList->getDescription()).'<p>';
+		echo ' </tr>';
 	}
 }
 

@@ -49,9 +49,11 @@ gforge/common/docman/engine/parser_pdf.php -text
 gforge/common/docman/engine/parser_text.inc.php -text
 gforge/common/docman/engine/parser_text.php -text
 gforge/common/event/Event.class.php -text
+gforge/common/include/Codendi_HTMLPurifier.class.php -text
 gforge/common/include/Codendi_Request.class.php -text
 gforge/common/include/HTTPRequest.class.php -text
 gforge/common/include/Navigation.class.php -text
+gforge/common/include/PluginInfo.class.php -text
 gforge/common/include/ProjectManager.class.php -text
 gforge/common/include/TextSanitizer.class.php -text
 gforge/common/include/UserManager.class.php -text
@@ -61,10 +63,14 @@ gforge/common/include/group_section_texts.php -text
 gforge/common/include/rbac_texts.php -text
 gforge/common/include/tag_cloud.php -text
 gforge/common/include/utils_crossref.php -text
+gforge/common/mail/Mail.class.php -text
 gforge/common/reporting/ReportDownloads.class.php -text
 gforge/common/system_event/SystemEvent.class.php -text
 gforge/common/system_event/SystemEventManager.class.php -text
 gforge/common/tracker/ArtifactWorkflow.class.php -text
+gforge/common/valid/Rule.class.php -text
+gforge/common/valid/Valid.class.php -text
+gforge/common/valid/ValidFactory.class.php -text
 gforge/contrib/cmd-line-prototype.tar.gz -text
 gforge/contrib/fusionforge.dia -text
 gforge/contrib/migrate-from-gforge-as.pl -text
@@ -3539,6 +3545,7 @@ gforge/www/images/smiles/icon_wink.gif -text
 gforge/www/images/t.png -text
 gforge/www/images/t2.png -text
 gforge/www/include/plugins_utils.php -text
+gforge/www/include/preplugins.php -text
 gforge/www/include/unicode.php -text
 gforge/www/js/common.js -text
 gforge/www/js/sortable.js -text
@@ -3984,6 +3991,9 @@ plugins/coclico/mailman/www/admin/index.php -text
 plugins/coclico/mailman/www/index.html -text
 plugins/coclico/mailman/www/index.php -text
 plugins/coclico/mailman/www/mailman_utils.php -text
+plugins/coclico/mailman/www/themes/default/images/ic/add.png -text svneol=unset#unset
+plugins/coclico/mailman/www/themes/default/images/ic/delete.png -text svneol=unset#unset
+plugins/coclico/mailman/www/themes/default/images/ic/tick.png -text svneol=unset#unset
 plugins/templates/createplugin.sh -text
 plugins/templates/helloworld/bin/db-delete.pl -text
 plugins/templates/helloworld/bin/db-upgrade.pl -text

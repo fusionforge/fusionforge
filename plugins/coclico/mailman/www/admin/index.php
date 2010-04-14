@@ -1,7 +1,7 @@
 <?php
 
 /**
- * FusionForge Mailing Lists Facility
+ * Fusionforge Mailing Lists Facility
  *
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2003-2004 (c) Guillaume Smet - Open Wide
@@ -12,6 +12,7 @@
  */
 require_once 'env.inc.php';
 require_once 'pre.php';
+require_once 'preplugins.php';
 require_once 'plugins_utils.php';
 require_once '../mailman_utils.php';
 
@@ -44,7 +45,6 @@ if ($group_id) {
 	//	RE-CREATE List with problems
 	//
 	if($action=='recreate') {
-		echo 'Je recree';
 		$mailingList = new MailmanList($group_id, $group_list_id);
 		if(!$mailingList || !is_object($mailingList)) {
 			exit_error(_('Error'), _('Error getting the list'));
@@ -54,7 +54,6 @@ if ($group_id) {
 			echo 'error';
 		}
 		$mailingList->recreate();
-			echo 'OKOKOK';
 		$feedback .=_('List re-created');
 		htmlRedirect('index.php?group_id='.$group_id);
 
@@ -158,16 +157,12 @@ if ($group_id) {
 		//	Form to modify list
 		//
 	} elseif($change_status && $group_list_id) {
-		echo "je suis la group= et group_id=".$group_list_id;
 		$mailingList = new MailmanList($group_id, $group_list_id);
-		echo "coucou";
 		if(!$mailingList || !is_object($mailingList)) {
-			echo "mailinglist error";
 			exit_error(_('Error'), _('Error getting the list'));
 		} elseif($mailingList->isError()) {
 			exit_error(_('Error'), $mailingList->getErrorMessage());
 		}
-		echo "avant header";
 		mailman_header(array(
 					'title' => _('Mail admin'),
 					'help'=>'CommunicationServices.html#MailingLists',
@@ -223,17 +218,18 @@ if ($group_id) {
 		$mlCount = count($mlArray);
 
 		if($mlCount > 0) {
-			table_begin();
+			table_begin_admin();
 			for ($j = 0; $j < $mlCount; $j++) {
-				$currentList =& $mlArray[$j];
-				display_list_admin($currentList);
-			}
 
-			table_end();
-		}
-		mail_footer(array());
-	}
+                                $currentList =& $mlArray[$j];
+                                display_list_admin($currentList);
+                        }
+
+                        table_end();
+                }
+                mail_footer(array());
+        }
 } else {
-	exit_no_group();
+        exit_no_group();
 }
 ?>

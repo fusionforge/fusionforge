@@ -18,7 +18,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with FusionForge; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 
  * USA
  */
 
@@ -38,7 +38,15 @@ class PluginManager extends Error {
 		$this->plugins_to_hooks = array () ;
 		$this->hooks_to_plugins = array () ;
 	}
+	//to work with Codendi files
+	function instance() {
+		global $PLUGINMANAGER_OBJ;
+		if (!isset($PLUGINMANAGER_OBJ) || !$PLUGINMANAGER_OBJ) {
+			$PLUGINMANAGER_OBJ = new PluginManager ;
+		}
+		return $PLUGINMANAGER_OBJ ;
 
+	}
 	/**
 	 * GetPlugins() - get a list of installed plugins
 	 *
@@ -48,7 +56,7 @@ class PluginManager extends Error {
 		if (!isset($this->plugins_data)) {
 			$this->plugins_data = array () ;
 			$res = db_query_params ('SELECT plugin_id, plugin_name FROM plugins',
-						array ());
+					array ());
 			$rows = db_numrows($res);
 			for ($i=0; $i<$rows; $i++) {
 				$plugin_id = db_result($res,$i,'plugin_id');
@@ -68,6 +76,10 @@ class PluginManager extends Error {
 		return @$this->plugins_objects [$pluginname] ;
 	}
 
+	//Added for Codendi compatibility
+	function getPluginByName ($pluginname) {
+		return @$this->plugins_objects [$pluginname] ;
+	}
 	/**
 	 * PluginIsInstalled() - is a plugin installed?
 	 *
@@ -83,13 +95,22 @@ class PluginManager extends Error {
 		}
 		return false ;
 	}
-
+	function isPluginAvailable ($plugin) {
+		$pluginname = $plugin->GetName();
+		$plugins_data = $this->getPlugins() ;
+		foreach ($plugins_data as $p_id => $p_name) {
+			if ($p_name == $pluginname) {
+				return true ;
+			}
+		}
+		return false ;
+	}
 	function activate($pluginname) {
 		$res = db_query_params('INSERT INTO plugins (plugin_name,plugin_desc) VALUES ($1,$2)',
-			array($pluginname, "This is the $pluginname plugin"));
+				array($pluginname, "This is the $pluginname plugin"));
 
 		$res = db_query_params ('SELECT plugin_id, plugin_name FROM plugins WHERE plugin_name=$1',
-			array ($pluginname));
+				array ($pluginname));
 		if (db_numrows($res) == 1) {
 			$plugin_id = db_result($res,0,'plugin_id');
 			$this->plugins_data[$plugin_id] = db_result($res,0,'plugin_name');
@@ -117,7 +138,7 @@ class PluginManager extends Error {
 	 */
 	function LoadPlugin ($p_name) {
 		global $gfplugins;
-		
+
 		$plugins_data = $this->GetPlugins() ;
 		$include_path = $GLOBALS['sys_plugins_path'] ;
 		$filename = $include_path . '/'. $p_name . "/common/".$p_name."-init.php" ;
@@ -227,7 +248,7 @@ class PluginManager extends Error {
 		} else {
 			return 0 ;
 		}
-		
+
 	}
 }
 
