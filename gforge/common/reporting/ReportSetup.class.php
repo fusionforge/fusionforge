@@ -55,12 +55,8 @@ function createTables() {
 		report_date int not null,
 		user_id int not null,
 		project_task_id int not null,
-		time_code int not null";
-
-	if ($sys_database_type != "mysql") {
-		$sql1.=" CONSTRAINT reptimetrk_timecode REFERENCES rep_time_category(time_code)";
-	}
-	$sql1.=",hours float not null);";
+		time_code int not null CONSTRAINT reptimetrk_timecode REFERENCES rep_time_category(time_code),
+                hours float not null);";
 	$sql[]=$sql1;
 //	$sql[]="CREATE UNIQUE INDEX reptimetrk_weekusrtskcde ON 
 //		rep_time_tracking (week,user_id,project_task_id,time_code);";

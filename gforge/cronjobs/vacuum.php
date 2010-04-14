@@ -36,14 +36,12 @@ $err='';
 //
 //	PG 7.2 and 7.3
 //
-if ($sys_database_type != 'mysql') {
-	$res = db_query_params ('VACUUM FULL ANALYZE;',
+$res = db_query_params ('VACUUM FULL ANALYZE;',
 			array()) ;
+			 
 
-
-	if (!$res) {
-		$err .= "Error on DB1: " . db_error();
-	}
+if (!$res) {
+	$err .= "Error on DB1: " . db_error();
 }
 
 cron_entry(12,$err);

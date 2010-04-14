@@ -186,17 +186,10 @@ function frs_show_release_popup ($group_id, $name='release_id', $checked_val="xz
 		return 'ERROR - GROUP ID REQUIRED';
 	} else {
 		if (!isset($FRS_RELEASE_RES)) {
-			if ($sys_database_type == "mysql") {
-				$sql = "SELECT frs_release.release_id,concat(frs_package.name,' : ',frs_release.name) ";
-			} else {
-				$sql = "SELECT frs_release.release_id,(frs_package.name || ' : ' || frs_release.name) ";
-			}
-			$sql .=
-				"FROM frs_release,frs_package 
+			$FRS_RELEASE_RES = db_query_params("SELECT frs_release.release_id,(frs_package.name || ' : ' || frs_release.name) FROM frs_release,frs_package 
 WHERE frs_package.group_id=$1 
-AND frs_release.package_id=frs_package.package_id";
-
-			$FRS_RELEASE_RES = db_query_params($sql,array($group_id));
+AND frs_release.package_id=frs_package.package_id", 
+							   array($group_id));
 			echo db_error();
 		}
 		return html_build_select_box($FRS_RELEASE_RES,$name,$checked_val,false);

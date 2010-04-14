@@ -71,12 +71,6 @@ GROUP BY fgl.group_forum_id',
 	}
 	
 	db_commit();
-	
-	if ($sys_database_type != 'mysql') {
-		db_query_params ('VACUUM ANALYZE forum_agg_msg_count',
-				 array()) ;
-		
-	}
 }
 
 /*
@@ -109,11 +103,6 @@ GROUP BY agl.group_artifact_id',
 	$err .= db_error();
 	
 	db_commit();
-
-	if ($sys_database_type != 'mysql') {
-		db_query_params ('VACUUM ANALYZE artifact_counts_agg',
-				 array()) ;
-	}
 }
 
 /*
@@ -180,15 +169,6 @@ GROUP BY group_id,type',
 }
 db_commit();
 $err .= db_error();
-
-if ($sys_database_type != 'mysql') {
-	db_query_params ('VACUUM ANALYZE project_sums_agg',
-			 array()) ;
-
-	if (db_error()) {
-		$err .= "Error: ".db_error();
-	}
-}
 
 cron_entry(3,$err);
 

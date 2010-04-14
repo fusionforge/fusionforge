@@ -43,39 +43,7 @@ $res = db_query_params ('DELETE FROM stats_project_months',
 			array ());
 $err .= db_error();
 
-if ($sys_database_type == 'mysql') {
-	$sql="INSERT INTO stats_project_months
-	SELECT month, group_id, 
-	avg(developers) AS developers, avg(group_ranking) AS group_ranking, 
-	avg(group_metric) AS group_metric,
-	sum(logo_showings) AS logo_showings,
-	sum(downloads) AS downloads,
-	sum(site_views) AS site_views ,
-	sum(subdomain_views) AS subdomain_views,
-	sum(page_views) AS page_views,
-	sum(file_releases) AS file_releases,
-	sum(msg_posted) AS msg_posted,
-	sum(msg_uniq_auth) AS msg_uniq_auth,
-	sum(bugs_opened) AS bugs_opened,
-	sum(bugs_closed) AS bugs_closed,
-	sum(support_opened) AS support_opened,
-	sum(support_closed) AS support_closed,
-	sum(patches_opened) AS patches_opened,
-	sum(patches_closed) AS patches_closed,
-	sum(artifacts_opened) AS artifacts_opened,
-	sum(artifacts_closed) AS artifacts_closed,
-	sum(tasks_opened) AS tasks_opened,
-	sum(tasks_closed) AS tasks_closed,
-	sum(help_requests) AS help_requests,
-	sum(cvs_checkouts) AS cvs_checkouts,
-	sum(cvs_commits) AS cvs_commits,
-	sum(cvs_adds) AS cvs_adds
-FROM stats_project_vw
-GROUP BY month,group_id
-";
-	$res = db_query_mysql ($sql);
-} else {
-	$res = db_query_params ('INSERT INTO stats_project_months
+$res = db_query_params ('INSERT INTO stats_project_months
 	SELECT month, group_id,
 	avg(developers)::int AS developers, avg(group_ranking)::int AS group_ranking, 
 	avg(group_metric) AS group_metric,
@@ -103,8 +71,7 @@ GROUP BY month,group_id
 	sum(cvs_adds) AS cvs_adds
 FROM stats_project_vw
 GROUP BY month,group_id',
-			 array ()) ;
-}
+			array ()) ;
 $err .= db_error();
 
 db_commit();

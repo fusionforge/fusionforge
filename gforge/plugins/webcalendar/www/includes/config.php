@@ -79,12 +79,8 @@ global $TROUBLE_URL;
 
 global $sys_database_type,$sys_dbhost,$sys_dbuser,$sys_dbpasswd,$sys_dbname;
 
-if ( $sys_database_type == 'pgsql' ){
-        $db_type = 'postgresql';
-	$settings['db_type'] = 'postgresql';
-} else {
-	$settings['db_type'] = 'mysql';
-}
+$db_type = 'postgresql';
+$settings['db_type'] = 'postgresql';
 $settings['db_host'] = $sys_dbhost;
 $settings['db_database'] = $sys_dbname;
 $settings['db_login'] = $sys_dbuser;

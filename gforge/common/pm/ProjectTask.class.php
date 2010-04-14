@@ -163,68 +163,36 @@ class ProjectTask extends Error {
 		}
 
 		db_begin();
-  		if ($sys_database_type == "mysql") {
-
-			$sql = "INSERT INTO project_task (group_project_id,created_by,summary,
-				details,start_date,end_date,status_id,category_id,priority,percent_complete,hours,duration,parent_id) 
-				VALUES ('".$this->ProjectGroup->getID()."','".user_getid()."','".htmlspecialchars( $summary )."',
-				'". htmlspecialchars($details) ."',	'$start_date','$end_date','1','$category_id','$priority','$percent_complete','$hours','$duration','$parent_id')";
-			
-			$result = db_query_mysql( $sql );
-			if (!$result || db_affected_rows($result) < 1) {
-				$this->setError( 'ProjectTask::create() Posting Failed '.db_error().$sql );
-				db_rollback();
-				return false;
-			}
-
-			$result = db_query_mysql( "SELECT last_insert_id() AS id" );
-			if (!$result) {
-				$this->setError( 'ProjectTask::create() Get Created ID Failed '.db_error().$sql );
-				db_rollback();
-				return false;
-			}
-
-			$project_task_id=db_result($result, 0, 'id');
-			if (!$project_task_id) {
-				$this->setError( 'ProjectTask::create() Created ID is NULL Failed' );
-				db_rollback();
-				return false;
-			}
-
-			$this->data_array['project_task_id']=$project_task_id;
-
-		} else {
-			$res = db_query_params ('SELECT nextval($1) AS id', 
-						array ('project_task_pk_seq'));
-			if (!$project_task_id=db_result($res,0,'id')) {
-				$this->setError( 'Could Not Get Next Project Task ID' );
-				db_rollback();
-				return false;
-			}
-
-			$this->data_array['project_task_id']=$project_task_id;
-
-			$result = db_query_params ('INSERT INTO project_task (project_task_id,group_project_id,created_by,summary,details,start_date,end_date,status_id,category_id,priority,percent_complete,hours,duration,parent_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)',
-						   array ($project_task_id,
-							  $this->ProjectGroup->getID(),
-							  user_getid(),
-							  htmlspecialchars($summary),
-							  htmlspecialchars($details),
-							  $start_date,
-							  $end_date,
-							  1,
-							  $category_id,
-							  $priority,
-							  $percent_complete,
-							  $hours,
-							  $duration,
-							  $parent_id)) ;
-
-			if (!$result || db_affected_rows($result) < 1) {
-				$this->setError('ProjectTask::create() Posting Failed '.db_error().$sql);
-				db_rollback();
-				return false;
-			}
+		$res = db_query_params ('SELECT nextval($1) AS id', 
+					array ('project_task_pk_seq'));
+		if (!$project_task_id=db_result($res,0,'id')) {
+			$this->setError( 'Could Not Get Next Project Task ID' );
+			db_rollback();
+			return false;
+		}
+		
+		$this->data_array['project_task_id']=$project_task_id;
+		
+		$result = db_query_params ('INSERT INTO project_task (project_task_id,group_project_id,created_by,summary,details,start_date,end_date,status_id,category_id,priority,percent_complete,hours,duration,parent_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)',
+					   array ($project_task_id,
+						  $this->ProjectGroup->getID(),
+						  user_getid(),
+						  htmlspecialchars($summary),
+						  htmlspecialchars($details),
+						  $start_date,
+						  $end_date,
+						  1,
+						  $category_id,
+						  $priority,
+						  $percent_complete,
+						  $hours,
+						  $duration,
+						  $parent_id)) ;
+		
+		if (!$result || db_affected_rows($result) < 1) {
+			$this->setError('ProjectTask::create() Posting Failed '.db_error().$sql);
+			db_rollback();
+			return false;
 		}
 
 		if (!$this->setDependentOn($depend_arr)) {

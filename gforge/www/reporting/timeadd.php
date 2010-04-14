@@ -103,43 +103,18 @@ if ($week) {
 	report_header(_('Time tracking'));
 
 	if (!$group_project_id) {
-		if ( $sys_database_type == "mysql" ) {
-			$sql = "SELECT pgl.group_project_id,CONCAT(g.group_name, '**', pgl.project_name)
-		FROM groups g, project_group_list pgl, user_group ug
-		WHERE ug.user_id='".user_getid()."'
-		AND ug.group_id=g.group_id
-		AND g.group_id=pgl.group_id
-		ORDER BY group_name,project_name";
-			$respm = db_query_mysql($sql);
-		} else {
-			$respm = db_query_params ('SELECT pgl.group_project_id,g.group_name || $1 || pgl.project_name 
+		$respm = db_query_params ('SELECT pgl.group_project_id,g.group_name || $1 || pgl.project_name 
 		FROM groups g, project_group_list pgl, user_group ug
 		WHERE ug.user_id=$2
 		AND ug.group_id=g.group_id
 		AND g.group_id=pgl.group_id
 		ORDER BY group_name,project_name',
-						  array ('**',
-							 user_getid()));
-		}
+					  array ('**',
+						 user_getid()));
 	}
 	?>
 		<h3><?php printf(_('Time Entries For The Week Starting %s'), date(_('Y-m-d'),$week)) ?></h3>
 <p><?php
-if ( $sys_database_type == "mysql" ) {
-
-	$res = db_query_mysql ("SELECT pt.project_task_id, CONCAT(pgl.project_name, '**', pt.summary) AS name, 
-	rtt.hours, rtt.report_date, rtc.category_name, rtt.time_code
-	FROM groups g, project_group_list pgl, project_task pt, rep_time_tracking rtt,
-	rep_time_category rtc
-	WHERE rtt.week=$week
-			AND rtt.time_code=rtc.time_code
-	AND rtt.user_id=".user_getid()."
-			AND g.group_id=pgl.group_id
-	AND pgl.group_project_id=pt.group_project_id
-	AND pt.project_task_id=rtt.project_task_id
-	ORDER BY rtt.report_date");
-} else {
-
 	$res = db_query_params ('SELECT pt.project_task_id, pgl.project_name || $1 || pt.summary AS name, 
 	rtt.hours, rtt.report_date, rtc.category_name, rtt.time_code
 	FROM groups g, project_group_list pgl, project_task pt, rep_time_tracking rtt,
@@ -154,7 +129,6 @@ if ( $sys_database_type == "mysql" ) {
 				array ('**',
 				       $week,
 				       user_getid()));
-}
 }
 $rows=db_numrows($res);
 if ($group_project_id || $rows) {

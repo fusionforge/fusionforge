@@ -62,16 +62,11 @@ $rel = db_query_params ('DELETE FROM stats_agg_logo_by_group WHERE month=$1 AND 
 			array ("$year$month",
 				$day));
 $err .= db_error();
-if ($sys_database_type == 'mysql') {
-	$sql = "INSERT INTO stats_agg_logo_by_group SELECT '$year$month' AS month, '$day' AS newday,group_id,count(*) AS count FROM activity_log WHERE type=0 AND day='$yesterday_formatted' GROUP BY month,newday,group_id";
-	$rel = db_query_mysql ($sql);
-} else {
-	$rel = db_query_params ('INSERT INTO stats_agg_logo_by_group SELECT $1::int AS month, $2::int AS newday,group_id,count(*) AS count
+$rel = db_query_params ('INSERT INTO stats_agg_logo_by_group SELECT $1::int AS month, $2::int AS newday,group_id,count(*) AS count
 	FROM activity_log WHERE type=0 AND day=$3 GROUP BY month,newday,group_id',
-				array ("$year$month",
-				       $day,
-				       $yesterday_formatted)) ;
-}
+			array ("$year$month",
+			       $day,
+			       $yesterday_formatted)) ;
 $err .= db_error();
 
 
@@ -84,18 +79,10 @@ $rel = db_query_params ('DELETE FROM stats_agg_site_by_group WHERE month=$1 AND 
 			array ("$year$month",
 				$day));
 $err .= db_error();
-if ($sys_database_type == 'mysql') {
-	$sql = "INSERT INTO stats_agg_site_by_group ";
-	$sql .= "SELECT '$year$month' AS month, '$day' AS newday,group_id,COUNT(*) AS count";
-	$sql .= "
-	FROM activity_log WHERE type=0 AND day='$yesterday_formatted' GROUP BY month,newday,group_id";
-	$rel = db_query_mysql ($sql);
-} else {
-	$rel = db_query_params ('INSERT INTO stats_agg_site_by_group SELECT $1::int AS month, $2::int AS newday,group_id,COUNT(*) AS count FROM activity_log WHERE type=0 AND day=$3 GROUP BY month,newday,group_id',
-				array ("$year$month",
-				       $day,
-				       $yesterday_formatted)) ;
-}
+$rel = db_query_params ('INSERT INTO stats_agg_site_by_group SELECT $1::int AS month, $2::int AS newday,group_id,COUNT(*) AS count FROM activity_log WHERE type=0 AND day=$3 GROUP BY month,newday,group_id',
+			array ("$year$month",
+			       $day,
+			       $yesterday_formatted)) ;
 $err .= db_error();
 
 
@@ -107,15 +94,10 @@ $rel = db_query_params ('DELETE FROM stats_site_pages_by_day WHERE month=$1 AND 
 			array ("$year$month",
 				$day));
 $err .= db_error();
-if ($sys_database_type == 'mysql') {
-	$sql = "INSERT INTO stats_site_pages_by_day (month,day,site_page_views) SELECT '$year$month' AS month, '$day' AS newday, count(*) AS count FROM activity_log WHERE type=0 AND day='$yesterday_formatted' GROUP BY month,newday";
-	$rel = db_query_mysql ($sql);
-} else {
-	$rel = db_query_params ('INSERT INTO stats_site_pages_by_day (month,day,site_page_views) SELECT $1::int AS month, $2::int AS newday, count(*) AS count FROM activity_log WHERE type=0 AND day=$3 GROUP BY month,newday',
-				array ("$year$month",
-				       $day,
-				       $yesterday_formatted)) ;
-}
+$rel = db_query_params ('INSERT INTO stats_site_pages_by_day (month,day,site_page_views) SELECT $1::int AS month, $2::int AS newday, count(*) AS count FROM activity_log WHERE type=0 AND day=$3 GROUP BY month,newday',
+			array ("$year$month",
+			       $day,
+			       $yesterday_formatted)) ;
 $err .= db_error();
 
 
@@ -127,14 +109,9 @@ $rel = db_query_params ('DELETE FROM stats_project_developers WHERE month=$1 AND
 			array ("$year$month",
 				$day));
 $err .= db_error();
-if ($sys_database_type == 'mysql') {
-	$sql = "INSERT INTO stats_project_developers (month,day,group_id,developers) SELECT '$year$month' AS month,'$day' AS day,group_id,count(*) AS count FROM user_group GROUP BY month,day,group_id";
-	$rel = db_query_mysql ($sql);
-} else {
-	$rel = db_query_params ('INSERT INTO stats_project_developers (month,day,group_id,developers) SELECT $1::int AS month,$2::int AS day,group_id,count(*) AS count FROM user_group GROUP BY month,day,group_id',
-				array ("$year$month",
-				       $day));
-}
+$rel = db_query_params ('INSERT INTO stats_project_developers (month,day,group_id,developers) SELECT $1::int AS month,$2::int AS day,group_id,count(*) AS count FROM user_group GROUP BY month,day,group_id',
+			array ("$year$month",
+			       $day));
 $err .= db_error();
 
 db_commit();

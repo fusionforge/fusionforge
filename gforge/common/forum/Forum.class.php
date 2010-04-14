@@ -213,22 +213,8 @@ class Forum extends Error {
 	function fetchData($group_forum_id) {
 		global $sys_database_type;
 
-		if ($sys_database_type == "mysql") {
-			$sql="
-				SELECT fgl.*,
-					(SELECT count(*) AS `count`
-						FROM (
-							SELECT DISTINCT group_forum_id, thread_id FROM forum
-						) AS tmp
-						WHERE tmp.group_forum_id = fgl.group_forum_id
-					) AS threads 
-				FROM forum_group_list_vw AS fgl
-				WHERE group_forum_id='$group_forum_id'";
-			$res = db_query_mysql ($sql);
-		} else {
-			$res = db_query_params ('SELECT * FROM forum_group_list_vw WHERE group_forum_id=$1',
-						array ($group_forum_id)) ;
-		}
+		$res = db_query_params ('SELECT * FROM forum_group_list_vw WHERE group_forum_id=$1',
+					array ($group_forum_id)) ;
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('Invalid forum group identifier'));
 			return false;

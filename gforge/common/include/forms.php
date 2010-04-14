@@ -37,21 +37,12 @@ function form_generate_key() {
 	// there's about 99.999999999% probability this loop will run only once :) 
 	while(!$is_new) {
 		$key = md5(microtime() + rand() + $_SERVER["REMOTE_ADDR"]);
-	    if ( $sys_database_type == "mysql" ) {
-			$sql = "SELECT * FROM form_keys WHERE `key`='".$key."'";
-			$res=db_query_mysql($sql);
-		} else {
-			$res = db_query_params ('SELECT * FROM form_keys WHERE key=$1', array ($key));
-		}
+		$res = db_query_params ('SELECT * FROM form_keys WHERE key=$1', array ($key));
 		if (!db_numrows($res)) {
 			$is_new=true;	
 		}
 	}
-	if ( $sys_database_type == "mysql" ) {
-		$res = db_query_mysql("INSERT INTO form_keys (`key`,is_used,creation_date) VALUES ('".$key."',0,".time().")");
-	} else {
-		$res = db_query_params('INSERT INTO form_keys (key,is_used,creation_date) VALUES ($1, 0, $2)', array ($key,time()));
-	}
+	$res = db_query_params('INSERT INTO form_keys (key,is_used,creation_date) VALUES ($1, 0, $2)', array ($key,time()));
 	if (!$res) {
 		db_rollback();
 		return false;
@@ -78,22 +69,12 @@ function form_key_is_valid($key) {
 		return true;
 
 	db_begin();
-	if ( $sys_database_type == "mysql" ) {
-		$sql = "SELECT * FROM form_keys WHERE `key`='$key' and is_used=0 FOR UPDATE";
-		$res=db_query_mysql($sql);
-	} else {
-		$res = db_query_params ('SELECT * FROM form_keys WHERE key=$1 and is_used=0 FOR UPDATE', array ($key));
-	}
+	$res = db_query_params ('SELECT * FROM form_keys WHERE key=$1 and is_used=0 FOR UPDATE', array ($key));
 	if (!$res || !db_numrows($res)) {
 		db_rollback();
 		return false;
 	}
-	if ( $sys_database_type == "mysql" ) {
-		$sql = "UPDATE form_keys SET is_used=1 WHERE `key`='$key'";
-		$res=db_query_mysql($sql);
-	} else {
-		$res = db_query_params ('UPDATE form_keys SET is_used=1 WHERE key=$1', array ($key));
-	}
+	$res = db_query_params ('UPDATE form_keys SET is_used=1 WHERE key=$1', array ($key));
 	if (!$res) {
 		db_rollback();
 		return false;
@@ -113,22 +94,12 @@ function form_release_key($key) {
 	global $sys_database_type;
 
 	db_begin();
-	if ( $sys_database_type == "mysql" ) {
-		$sql = "SELECT * FROM form_keys WHERE `key`='$key' FOR UPDATE";
-		$res=db_query_mysql($sql);
-	} else {
-		$res = db_query_params ('SELECT * FROM form_keys WHERE key=$1 FOR UPDATE', array ($key));
-	}
+	$res = db_query_params ('SELECT * FROM form_keys WHERE key=$1 FOR UPDATE', array ($key));
 	if (!$res || !db_numrows($res)) {
 		db_rollback();
 		return false;
 	}
-	if ( $sys_database_type == "mysql" ) {
-		$sql = "UPDATE form_keys SET is_used=0 WHERE `key`='$key'";
-		$res=db_query_mysql($sql);
-	} else {
-		$res = db_query_params ('UPDATE form_keys SET is_used=0 WHERE key=$1', array ($key));
-	}
+	$res = db_query_params ('UPDATE form_keys SET is_used=0 WHERE key=$1', array ($key));
 	if (!$res) {
 		db_rollback();
 		return false;

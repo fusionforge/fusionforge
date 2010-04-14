@@ -37,18 +37,7 @@ function &MSPLogin($username,$password) {
 	if ($success) {
 		$array['success']=true;
 		$array['session_hash']=$session_ser;
-	    if ( $sys_database_type == "mysql" ) {
-		    $sql="SELECT pgl.group_project_id, CONCAT(g.group_name, ': ', pgl.project_name) AS name
-			FROM groups g, project_group_list pgl, role_setting rs, user_group ug
-			WHERE ug.user_id='".user_getid()."' 
-			AND g.group_id=pgl.group_id
-			AND rs.value::integer > 0
-			AND rs.group_project_id = pgl.group_project_id
-                        AND ug.role_id = rs.role_id
-                        AND rs.section_name='pm'";
-		    $res=db_query_mysql($sql);
-	    } else {
-		    $res=db_query_params ('SELECT pgl.group_project_id, g.group_name || $1 || pgl.project_name AS name
+		$res=db_query_params ('SELECT pgl.group_project_id, g.group_name || $1 || pgl.project_name AS name
 			FROM groups g, project_group_list pgl, role_setting rs, user_group ug
 			WHERE ug.user_id=$2
 			AND g.group_id=pgl.group_id
@@ -56,10 +45,9 @@ function &MSPLogin($username,$password) {
 			AND rs.group_project_id = pgl.group_project_id
                         AND ug.role_id = rs.role_id
                         AND rs.section_name=$3',
-					  array(': ',
-						user_getid(),
-						'pm'));
-		}
+				      array(': ',
+					    user_getid(),
+					    'pm'));
 		$rows=db_numrows($res);
 		if (!$res || $rows<1) {
 			$array['success']=false;

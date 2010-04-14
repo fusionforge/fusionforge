@@ -69,15 +69,11 @@ db_begin();
 
 db_query_params ('DELETE FROM user_metric0',
 			array()) ;
-
 $err .= db_error();
 
-if ($sys_database_type != 'mysql') {
-	db_query_params ('select setval($1,1)',
-			array('user_metric0_pk_seq')) ;
-
-	$err .= db_error();
-}
+db_query_params ('select setval($1,1)',
+		 array('user_metric0_pk_seq')) ;
+$err .= db_error();
 
 db_query_params ('INSERT INTO user_metric0 
 (user_id,times_ranked,avg_raters_importance,avg_rating,metric,percentile,importance_factor)
@@ -237,18 +233,12 @@ for ($i=1; $i<9; $i++) {
 	// Only do final percentile if row count is not zero
 	if (db_result($res,0,0)) {
 
-	    /*
-	    	Update with final percentile and importance
-	    */
-		if ($sys_database_type == 'mysql') {
-			$sql="UPDATE user_metric_next SET
-			percentile=(100-(100*((ranking-1.0)/". db_result($res,0,0) .")))";
-			$res = db_query_mysql ($sql);
-		} else {
-			$res = db_query_params ('UPDATE user_metric_next SET
+		/*
+		 Update with final percentile and importance
+		*/
+		$res = db_query_params ('UPDATE user_metric_next SET
 			percentile=(100-(100*((ranking::float-1)/$1)))',
-						array (db_result($res,0,0))) ;
-		}
+					array (db_result($res,0,0))) ;
 	    if (!$res || db_affected_rows($res) < 1) {
 		$err .= "Error in round $i setting percentile: " . db_error();
 		exit;

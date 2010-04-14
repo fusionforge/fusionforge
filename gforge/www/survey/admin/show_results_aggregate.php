@@ -128,19 +128,10 @@ for ($i=0; $i<$count; $i++) {
 
 		//	average
 		if ($response_count > 0){
-			if ( $sys_database_type == "mysql" ) {
-
-			$result2 = db_query_params ('SELECT avg(response) AS avg FROM survey_responses WHERE survey_id=$1 AND question_id=$2 AND group_id=$3 AND response IN (1,2,3,4,5)',
-						    array ($survey_id,
-							   $quest_array[$i],
-							   $group_id));
-			} else {
-
 			$result2 = db_query_params ('SELECT avg(response::int) AS avg FROM survey_responses WHERE survey_id=$1 AND question_id=$2 AND group_id=$3 AND response IN (1,2,3,4,5)',
 						    array ($survey_id,
 							   $quest_array[$i],
 							   $group_id));
-			}
 			if (!$result2 || db_numrows($result2) < 1) {
 				echo _('error');
 				echo db_error();
@@ -183,21 +174,12 @@ for ($i=0; $i<$count; $i++) {
 		}
 
 		// average
-	    if ( $sys_database_type == "mysql" ) {
 
-		    $result2 = db_query_params ('SELECT avg(response) AS avg FROM survey_responses WHERE survey_id=$1 AND question_id=$2 AND group_id=$3  and response != $4',
-						array ($survey_id,
-						       $quest_array[$i],
-						       $group_id,
-						       ''));
-		} else {
-
-		    $result2 = db_query_params ('SELECT avg(response::int) AS avg FROM survey_responses WHERE survey_id=$1 AND question_id=$2 AND group_id=$3  and response != $4',
-						array ($survey_id,
-						       $quest_array[$i],
-						       $group_id,
-							''));
-		}
+		$result2 = db_query_params ('SELECT avg(response::int) AS avg FROM survey_responses WHERE survey_id=$1 AND question_id=$2 AND group_id=$3  and response != $4',
+					    array ($survey_id,
+						   $quest_array[$i],
+						   $group_id,
+						   ''));
 
 		if (!$result2 || db_numrows($result2) < 1) {
 			echo _('error');
