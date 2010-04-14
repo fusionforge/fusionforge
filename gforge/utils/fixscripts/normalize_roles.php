@@ -30,6 +30,7 @@ require_once('common/include/Plugin.class.php') ;
 require_once('common/include/PluginManager.class.php') ;
 
 setup_plugin_manager () ;
+session_set_admin () ;
 
 $res = db_query_params ('SELECT group_id, group_name FROM groups',
 			array ());
