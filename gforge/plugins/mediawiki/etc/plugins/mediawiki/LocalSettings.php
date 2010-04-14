@@ -112,6 +112,7 @@ function FusionForgeMWAuth( $user, &$result ) {
                 $u = user_get_object ($s);
 		$g = group_get_object_by_name ($fusionforgeproject) ;
 		$perm =& $g->getPermission($u);
+		$r =& $u->getRole($g) ;
 
                 $mwname = ucfirst($u->getUnixName ()) ;
                 $mwu = User::newFromName ($mwname);
@@ -127,6 +128,25 @@ function FusionForgeMWAuth( $user, &$result ) {
 
 		$user->loadGroups() ;
 		$current_groups = $user->getGroups() ;
+
+                // Role-based access control
+		if ($r->isError()) {
+			$rname = '' ;
+		} else {
+			$rname = "ForgeRole:".$r->getName () ;
+		}
+		$role_groups = preg_grep ("^ForgeRole:", $current_groups) ;
+		foreach ($role_groups as $cg) {
+			if ($cg != $rname) {
+                                $user->removeGroup ($cg) ;
+			}
+		}
+		if (!in_array ($rname, $current_groups)) {
+			$user->addGroup ($rname) ;
+		}
+
+		// Previous (group-based) access control
+               $current_groups = $user->getGroups() ;
                 if ($perm && is_object($perm) && $perm->isAdmin()) {
                         if (!in_array ('sysop', $current_groups)) {
                                 $user->addGroup ('sysop') ;
@@ -188,10 +208,28 @@ $wgHooks['PersonalUrls'][]='NoLinkOnMainPage';
 
 $GLOBALS['wgHooks']['UserLoadFromSession'][]='FusionForgeMWAuth';
 
-$wgGroupPermissions['Members']['createaccount'] = true;
-$wgGroupPermissions['Members']['edit']          = true;
-$wgGroupPermissions['Members']['createpage']    = true;
-$wgGroupPermissions['Members']['createtalk']    = true;
+$g = group_get_object_by_name ($fusionforgeproject) ;
+$roles = $g->getRoles () ;
+foreach ($roles as $role) {
+	$gr = "ForgeRole:".$role->getName () ;
+	switch ($role->getVal('plugin_mediawiki_edit', 0)) {
+	case 0:
+		$wgGroupPermissions[$gr]['edit']          = false;
+		$wgGroupPermissions[$gr]['createpage']    = false;
+		$wgGroupPermissions[$gr]['createtalk']    = false;
+		break ;
+	case 1:
+		$wgGroupPermissions[$gr]['edit']          = true;
+		$wgGroupPermissions[$gr]['createpage']    = false;
+		$wgGroupPermissions[$gr]['createtalk']    = false;
+		break ;
+	case 2:
+		$wgGroupPermissions[$gr]['edit']          = true;
+		$wgGroupPermissions[$gr]['createpage']    = true;
+		$wgGroupPermissions[$gr]['createtalk']    = true;
+		break ;
+	}
+}
 
 $wgGroupPermissions['ForgeUsers']['createaccount'] = false;
 $wgGroupPermissions['ForgeUsers']['edit']          = false;
