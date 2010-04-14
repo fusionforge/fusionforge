@@ -139,7 +139,7 @@ class Role extends Error {
 		$hook_params['role'] =& $this;
 		plugin_hook ("role_get", $hook_params);
 
-		if ($GLOBALS['default_roles']) {
+		if (isset ($GLOBALS['default_roles'])) {
 			$this->defaults = array_merge_recursive ($this->defaults,
 								 $GLOBALS['default_roles']) ;
 			foreach ($this->defaults as $k => $v) {

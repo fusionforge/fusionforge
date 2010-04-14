@@ -107,8 +107,50 @@ class Plugin extends Error {
 		
 		return $result ;
 	}
+
 	function getThemePath(){
 		return util_make_url('plugins/'.$this->name.'/themes/default');
+	}
+
+	function registerRoleValues(&$params, $values) {
+		$role =& $params['role'] ;
+	}
+		
+}
+
+class PluginSpecificRoleSetting {
+	var $role ;
+	var $name = '' ;
+	var $section = '' ;
+	var $values = array () ;
+	var $default_values = array () ;
+
+	function PluginSpecificRoleSetting (&$role, $name) {
+		$this->role =& $role ;
+		$this->name = $name ;
+	}
+
+	function SetAllowedValues ($values) {
+		$this->role->role_values = array_replace_recursive ($this->role->role_values,
+								    array ($this->name => $values)) ;
+	}
+
+	function SetDefaultValues ($defaults) {
+		foreach ($defaults as $rname => $v) {
+			$this->role->defaults[$rname][$this->name] = $v ;
+		}
+	}
+
+	function setValueDescriptions ($descs) {
+		global $rbac_permission_names ;
+		foreach ($descs as $k => $v) {
+			$rbac_permission_names[$this->name.$k] = $v ;
+		}
+	}
+
+	function setDescription ($desc) {
+		global $rbac_edit_section_names ;
+		$rbac_edit_section_names[$this->name] = $desc ;
 	}
 }
 

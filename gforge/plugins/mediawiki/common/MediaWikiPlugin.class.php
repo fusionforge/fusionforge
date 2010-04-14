@@ -31,6 +31,7 @@ class MediaWikiPlugin extends Plugin {
 		$this->hooks[] = "groupisactivecheckboxpost" ; //
 		$this->hooks[] = "project_public_area";
 		$this->hooks[] = "role_get";
+		$this->hooks[] = "role_translate_strings";
 	}
 
 	function CallHook ($hookname, $params) {
@@ -108,21 +109,25 @@ class MediaWikiPlugin extends Plugin {
 			}
 		} elseif ($hookname == "role_get") {
 			$role =& $params['role'] ;
-			$role->role_values['plugin_mediawiki_edit'] = array ('0', '1', '2') ;
 			
-			$defaults = array (
-				'Admin' 	   => array ('plugin_mediawiki_edit' => '2'),
-				'Senior Developer' => array ('plugin_mediawiki_edit' => '2'),
-				'Junior Developer' => array ('plugin_mediawiki_edit' => '1'),
-				'Doc Writer' 	   => array ('plugin_mediawiki_edit' => '2'),
-				'Support Tech' 	   => array ('plugin_mediawiki_edit' => '0')
-				) ;
-
-			$role->defaults = array_merge_recursive ($role->defaults,
-								 $defaults) ;
-		} 
+			$edit = new PluginSpecificRoleSetting ($role,
+							       'plugin_mediawiki_edit') ;
+			$edit->SetAllowedValues (array ('0', '1', '2')) ;
+			$edit->SetDefaultValues (array ('Admin' => '2',
+							'Senior Developer' => '2',
+							'Junior Developer' => '1',
+							'Doc Writer' => '2',
+							'Support Tech' => '0')) ;
+		} elseif ($hookname == "role_translate_strings") {
+			$edit = new PluginSpecificRoleSetting ($role,
+							       'plugin_mediawiki_edit') ;
+			$edit->setDescription (_('Mediawiki write access')) ;
+			$edit->setValueDescriptions (array ('0' => _('No editing'),
+							    '1' => _('Edit existing pages only'), 
+							    '2' => _('Edit and create pages'))) ;
+		}
 	}
-}
+  }
 
 // Local Variables:
 // mode: php

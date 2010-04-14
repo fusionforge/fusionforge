@@ -26,9 +26,12 @@
  * This file maps symbolic values to localised texts for the role permissions
  */
 
+require_once $gfcommon.'include/PluginManager.class.php';
+
 function setup_rbac_strings () {
 	global $rbac_permission_names, $rbac_edit_section_names ;
-	$rbac_permission_names = array (
+	$rbac_permission_names = array_replace_recursive ($rbac_permission_names, 
+							  array (
 		'frspackage0' => _('Private'),
 		'frspackage1' => _('Public'),
 		'frspackage' => _('File Release System'),
@@ -78,9 +81,11 @@ function setup_rbac_strings () {
 		'webcal2' => _('See'),
 		'webcal1' => _('Modify'),
 		'webcal0' => _('No access')
+								  )
 		);
 
-	$rbac_edit_section_names = array (
+	$rbac_edit_section_names = array_replace_recursive ($rbac_edit_section_names,
+							    array (
 		'forum' => _('Forum'),
 		'newforum' => _('Default for new forums'),
 		'forumpublic' => _('Forum'),
@@ -103,7 +108,10 @@ function setup_rbac_strings () {
 		'scm' => _('SCM'),
 		'scmpublic' => _('SCM'),
 		'docman' => _('Documentation Manager'),
+								    )
 		) ;
+
+	plugin_hook ("role_translate_strings") ;
   }
 
 setup_rbac_strings () ;
