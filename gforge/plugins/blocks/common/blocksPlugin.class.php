@@ -113,8 +113,8 @@ class blocksPlugin extends Plugin {
 		$res = db_query_params('SELECT content
 				FROM plugin_blocks
 				WHERE group_id=$1
-				"AND name=$2
-				"AND status=1',
+				AND name=$2
+				AND status=1',
 				array($group_id, $name)); // 1 is for active
 		if (db_numrows($res)== 0) {
 			return false;
