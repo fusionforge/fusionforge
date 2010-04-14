@@ -158,7 +158,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	<li><a href="cronman.php"><?php echo _('Cron Manager'); ?></a></li>
 	<li><a href="pluginman.php"><?php echo _('Plugin Manager'); ?></a></li>
 	<li><a href="configman.php"><?php echo _('Config Manager'); ?></a></li>
-	
+	<li><a href="pi.php">PHPinfo()</a></li>
 	<?php plugin_hook("site_admin_option_hook", false); ?>
 </ul>
 
