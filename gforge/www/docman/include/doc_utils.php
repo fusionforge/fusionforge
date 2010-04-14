@@ -90,6 +90,9 @@ function docman_header($title,$pagehead,$style='xyz') {
 		$menu_text,
 		$menu_links
 	);
+
+	plugin_hook ("blocks", "doc index");
+
 }
 
 function doc_droplist_count($l_group_id, $language_id, $g) {

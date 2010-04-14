@@ -35,6 +35,7 @@ if ($group_id) {
 		'title' => sprintf(_('Mailing Lists for %1$s'), $Group->getPublicName())
 	));
 
+	plugin_hook ("blocks", "mail index");
 
 	$mlArray =& $mlFactory->getMailingLists();
 

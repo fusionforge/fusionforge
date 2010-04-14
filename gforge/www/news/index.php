@@ -36,6 +36,8 @@ $feedback = htmlspecialchars(getStringFromRequest('feedback'));
 news_header(array('title'=>_('News')));
 echo '<h1>' . _('News') . '</h1>';
 
+plugin_hook ("blocks", "news index");
+
 echo _('<p>Choose a News item and you can browse, search, and post messages.</p>');
 
 /*

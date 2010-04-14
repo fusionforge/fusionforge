@@ -61,15 +61,19 @@ print '<span property="doap:name" content="'. $project->getUnixName() .'"></span
 // print '<span property="coclico:hosted_by">' ...
 //print '<div property="sioc:has_container" xmlns:sioc="http://rdfs.org/sioc/ns#" content="fusionforge:ForgeProjects" xmlns:fusionforge="http://fusionforge.org/fusionforge#">';
 
-$project_description = $project->getDescription();
-if ($project_description) {
-	// need to use a litteral version for content attribute since nl2br is for HTML
-	print "<p>"
-		.'<span property="doap:description" content="'. preg_quote($project_description,'"') .'">'
-		. nl2br($project_description) 
-		.'</span></p>';
-} else {
-	print "<p>" . _('This project has not yet submitted a description.') . '</p>';
+// Try to display the blocks description first if active.
+$pluginManager = plugin_manager_get_object();
+if (! $pluginManager->PluginIsInstalled('blocks') || !plugin_hook ("blocks", "summary_description")) {
+	$project_description = $project->getDescription();
+	if ($project_description) {
+		// need to use a litteral version for content attribute since nl2br is for HTML
+		print "<p>"
+			.'<span property="doap:description" content="'. preg_quote($project_description,'"') .'">'
+			. nl2br($project_description)
+			.'</span></p>';
+	} else {
+		print "<p>" . _('This project has not yet submitted a description.') . '</p>';
+	}
 }
 
 print "<br />\n";
@@ -159,6 +163,9 @@ echo '</td>' ;
 // ########################### Developers on this project
 
 echo '<td>' ;
+
+plugin_hook ("blocks", "summary_right") ;
+
 echo $HTML->boxTop(_('Project Members'), 'Project_Members');
 
 $iam_member = false ;

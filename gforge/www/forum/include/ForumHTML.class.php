@@ -130,6 +130,10 @@ function forum_header($params) {
 			$menu_links
 		);
 	}
+
+	$pluginManager = plugin_manager_get_object();
+	if ($f && $pluginManager->PluginIsInstalled('blocks') && plugin_hook ("blocks", "forum_".$f->getName()))
+		echo '<br />';
 	
 	if (session_loggedin() ) {
 		if ($f) {

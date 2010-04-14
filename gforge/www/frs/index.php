@@ -62,6 +62,9 @@ $num_packages = db_numrows( $res_package );
 
 frs_header(array('title'=>_('Project Filelist'),'group'=>$group_id));
 
+plugin_hook("blocks", "files index");
+
+
 if ( $num_packages < 1) {
 	echo "<h1>"._('No File Packages')."</h1>";
 	echo "<p><strong>"._('There are no file packages defined for this project.')."</strong>";

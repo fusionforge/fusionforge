@@ -48,6 +48,8 @@ $sh = new SurveyHtml();
 $sh->header(array('title'=>$title));
 echo '<h1>' . $title . '</h1>';
 
+plugin_hook ("blocks", "survey index");
+
 /* Show list of Servey */
 $sf = new SurveyFactory($g);
 $ss = & $sf->getSurveys();

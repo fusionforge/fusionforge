@@ -212,6 +212,10 @@
 	{
 		symlink ("../../plugins/fckeditor/www", "fckeditor");
 	}
+	if (!is_dir("blocks"))
+	{
+		symlink ("../../plugins/blocks/www", "blocks");
+	}
 
 	//cd /opt/gforge
 	chdir("/opt/gforge");

@@ -31,6 +31,8 @@ require_once $gfwww.'scm/include/scm_utils.php';
 $group_id = getIntFromRequest("group_id");
 scm_header(array('title'=>_('SCM Repository'),'group'=>$group_id));
 
+plugin_hook ("blocks", "scm index");
+
 $hook_params = array () ;
 $hook_params['group_id'] = $group_id ;
 plugin_hook ("scm_page", $hook_params) ;

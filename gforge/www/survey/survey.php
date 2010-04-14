@@ -57,6 +57,7 @@ echo '<h1>' . $title . '</h1>';
 if (!$survey_id) {
     echo '<div class="error">'._('For some reason, the Group ID or Survey ID did not make it to this page').'</div>';
 } else {
+	plugin_hook ("blocks", "survey_".$s->getTitle());
     echo($sh->ShowSurveyForm($s));
 }
 

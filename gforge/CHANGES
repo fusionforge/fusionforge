@@ -6,6 +6,8 @@ FusionForge-5.1:
 * [#127] Patch to auto approve projects.
 * scmgit plugin now allows project members to request a personal git
   repository as a clone of the current project's one
+* New blocks plugin, to add free HTML blocks on top of each tools of the project allowing
+  admins to add free descriptions (Alcate-Lucent), (better with fckeditor plugin).
 
 FusionForge-5.0:
 * New projectlabels plugin, to tag projects with snippets of

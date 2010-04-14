@@ -81,6 +81,18 @@
                                         <para>This section describes how to publish new releases of your project.</para>
                                 </listitem>
                         </varlistentry>
+          <varlistentry>
+            <term>
+              <link linkend="ug_project_blocks"> Blocks </link>
+            </term>
+            <listitem>
+              <para>
+        This section describes how to use HTML
+        blocks to customize the appearance of
+        project pages.
+       </para>
+            </listitem>
+          </varlistentry>
 		</variablelist>
 	</section>
 	<section>

@@ -82,6 +82,8 @@ function pm_header($params) {
 		echo ($HTML->subMenu($labels,$links));
 	}
 
+	if ($pg)
+		plugin_hook ("blocks", "tasks_".$pg->getName());
 }
 
 function pm_footer($params) {

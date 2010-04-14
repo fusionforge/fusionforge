@@ -46,6 +46,8 @@ if ($pg_arr && $pgf->isError()) {
 
 pm_header(array('title'=>_('Subprojects and Tasks')));
 
+plugin_hook("blocks", "tasks index");
+
 $perm =& $g->getPermission( session_get_user() );
 if ($perm->isPMAdmin()) {
 	$menu_text=array();

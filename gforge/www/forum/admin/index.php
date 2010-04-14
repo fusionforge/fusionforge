@@ -480,6 +480,10 @@ if ($group_id) {
 			$fa = new ForumAdmin();
 			$fa->PrintAdminOptions();
 		}
+
+		if ($f)
+			plugin_hook ("blocks", "forum index");
+
 		//
 		//	Get existing forums
 		//

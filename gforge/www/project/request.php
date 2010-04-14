@@ -55,6 +55,8 @@ site_project_header(array('title'=>_('Request to join project'),'group'=>$group_
 
 echo '<h1>' . _('Request to join project') . '</h1>';
 
+plugin_hook ("blocks", "request_join");
+
 ?>
 <p><?php 
 $nbadmins = count($group->getAdmins());
