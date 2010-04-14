@@ -1515,7 +1515,7 @@ Enjoy the site.
 		$res = db_query_params ('SELECT role_id FROM user_group WHERE user_id=$1 AND group_id=$2',
 					array ($this->getID(),
 					       $group->getID())) ;
-		if (!$res) {
+		if (!$res || db_numrows($res) < 1) {
 			$this->setError('User::getRole::DB - Could Not get role_id '.db_error());
 			return false;
 		}
