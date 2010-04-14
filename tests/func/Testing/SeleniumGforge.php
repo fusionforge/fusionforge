@@ -130,7 +130,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Your project has been submitted"));
 		$this->assertTrue($this->isTextPresent("you will receive notification of their decision and further instructions"));
-		$this->click("link=Admin");
+		$this->click("link=Site Admin");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Pending (P) (New Project Approval)");
 		$this->waitForPageToLoad("30000");
@@ -161,12 +161,26 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->type("email", $login."@debug.log");
 		$this->click("submit");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=Admin");
+		$this->click("link=Site Admin");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Display Full User List/Edit Users");
 		$this->waitForPageToLoad("30000");
 		$this->click("//a[contains(@href, 'userlist.php?action=activate&user_id=$id')]");
 		$this->waitForPageToLoad("30000");
+	}
+
+	protected function activatePlugin($pluginName) {
+		$this->open( ROOT );
+		$this->waitForPageToLoad("30000");
+		$this->login('admin');
+		$this->click("link=Site Admin");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Plugin Manager");
+		$this->waitForPageToLoad("30000");
+		$this->click($pluginName);
+		$this->click("//a[contains(@href, \"javascript:change('".ROOT."/admin/pluginman.php?update=$pluginName&action=activate','$pluginName');\")]");
+		$this->waitForPageToLoad("30000");
+		$this->logout();
 	}
 }
 
