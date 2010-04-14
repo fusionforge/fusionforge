@@ -31,6 +31,7 @@ class MediaWikiPlugin extends Plugin {
 		$this->hooks[] = "groupisactivecheckboxpost" ; //
 		$this->hooks[] = "project_public_area";
 		$this->hooks[] = "role_get";
+		$this->hooks[] = "role_normalize";
 		$this->hooks[] = "role_translate_strings";
 	}
 
