@@ -97,3 +97,14 @@ table.progress :link:hover, table.progress :visited:hover {
 }
 table.progress td { background: #fff; padding: 0 }
 table.progress td :hover { background: none }
+
+/* style for warning messages box
+*/
+.warning_msg {
+    font-weight: bold;
+    border-width: 2px;
+    border-style: solid;
+    background-color: #ffd297; /* orange */
+    border-color: #FFA500; /* orange */
+    padding: 0.5em;
+}

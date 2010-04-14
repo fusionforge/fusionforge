@@ -27,6 +27,9 @@ function site_admin_header($params) {
 	if (get_magic_quotes_gpc()) {
 		$GLOBALS['warning_msg'] = 'WARNING: Your installation is running with php magic_quotes_gpc ON, please change to OFF';
 	}
+	if (ini_get('register_globals')) {
+		$GLOBALS['warning_msg'] = 'WARNING: Your installation is running with php register_globals ON, this is very unsecure, please change to OFF';
+	}
 	site_header($params);
 }
 
