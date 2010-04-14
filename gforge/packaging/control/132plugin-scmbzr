@@ -1,5 +1,5 @@
 Package: @OLDPACKAGE@-plugin-scmbzr
 Architecture: all
-Depends: @OLDPACKAGE@-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, bzr, php5-cli, ${misc:Depends}
+Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, @OLDPACKAGE@-shell-postgresql | @OLDPACKAGE@-shell, bzr, php5-cli, ${misc:Depends}
 Provides: @OLDPACKAGE@-plugin-scm
 Description: collaborative development tool - Bazaar plugin

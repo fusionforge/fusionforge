@@ -1,6 +1,6 @@
 Package: @PACKAGE@-minimal
 Architecture: all
-Conflicts: sourceforge, gforge-cvs, @OLDPACKAGE@-common (<< ${source:Version}), @OLDPACKAGE@
+Conflicts: sourceforge, @OLDPACKAGE@-cvs, @OLDPACKAGE@-common (<< ${source:Version}), @OLDPACKAGE@
 Replaces: @OLDPACKAGE@
 Provides: @OLDPACKAGE@
 Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, @OLDPACKAGE@-common (=${source:Version}), @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, ${misc:Depends}
