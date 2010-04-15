@@ -28,7 +28,7 @@ class Trove extends FForge_SeleniumTestCase
 	{
 		$this->open( BASE );
 		$this->login('admin');
-		$this->click("link=Admin");
+		$this->click("link=Site Admin");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Display Trove Map");
 		$this->waitForPageToLoad("30000");
