@@ -44,7 +44,7 @@ if ($request->exist('submit')) {
 	if (!$ml->deleteList($sure,$really_sure)) {
 		exit_error('Error',$ml->getErrorMessage());
 	} else {
-		htmlRedirect('index.php?group_id='.$group_id.'&feedback=DELETED');
+		htmlRedirect('/plugins/mailman/index.php?group_id='.$group_id.'&feedback=DELETED');
 	}
 }
 

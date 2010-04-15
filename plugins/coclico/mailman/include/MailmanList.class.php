@@ -331,9 +331,9 @@ class MailmanList extends Error {
 	 */
 	function getArchivesUrl() {
 		if ($this->isPublic()) {
-			$iframe_url = 'http://'.$GLOBALS['sys_lists_host'].'/pipermail/'.$this->getName().'/';
+			$iframe_url = '/pipermail/'.$this->getName().'/';
 		} else {
-			$iframe_url = 'http://'.$GLOBALS['sys_lists_host'].'/mailman/private/'.$this->getName().'/';
+			$iframe_url = '/mailman/private/'.$this->getName().'/';
 		}
 		htmlIframe($iframe_url, array('class' => 'iframe_service'));
 	}
@@ -344,7 +344,7 @@ class MailmanList extends Error {
 	 * @return string url of the info page
 	 */
 	function getExternalInfoUrl() {
-		return 'http://'.$GLOBALS['sys_lists_host'].'/mailman/listinfo/'.$this->getName();
+		return uitl_make_url('/mailman/listinfo/'.$this->getName());
 	}
 	/**
 	 * getOptionsUrl - get the url to manage options for user
@@ -354,7 +354,7 @@ class MailmanList extends Error {
 	function getOptionsUrl() {
 		$current_user=UserManager::instance()->getCurrentUser();
 		$user=$current_user->getEmail();
-		$iframe_url = 'http://'.$GLOBALS['sys_lists_host'].'/mailman/options/'.$this->getName().'/'.$user;
+		$iframe_url = '/mailman/options/'.$this->getName().'/'.$user;
 		htmlIframe($iframe_url, array('class' => 'iframe_service'));
 	}
 	/**

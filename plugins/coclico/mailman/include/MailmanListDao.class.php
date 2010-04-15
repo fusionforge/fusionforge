@@ -150,7 +150,7 @@ class MailmanListDao extends DataAccessObject {
 		return $this->retrieve($sql,array($mail));
 
 	}
-	function & updateInfos($mail,$passwd,$name) {
+	function updateInfos($mail,$passwd,$name) {
 		$mail = $this->da->quoteSmart($mail);
 		$passwd = $this->da->quoteSmart($passwd);
 		$name = $this->da->quoteSmart($name);

@@ -6,10 +6,10 @@
 
 
  
-$GLOBALS['mailman_bin_dir'] =  $GLOBALS['sys_path_to_mailman'].'/bin';
-$GLOBALS['mailman_list_dir'] = '/var/lib/mailman/lists';
+$GLOBALS['mailman_bin_dir'] =  '/usr/lib/mailman/bin';
+$GLOBALS['mailman_lib_dir'] = '/var/lib/mailman';
 $GLOBALS['forumml_arch'] = '/var/lib/mailman/archives';
-$GLOBALS['forumml_tmp'] = '/var/run/forumml';
+$GLOBALS['forumml_tmp'] = '/var/spool/forumml';
 $GLOBALS['forumml_dir'] = '/var/lib/gforge/forumml';
 $GLOBALS['sys_lf'] = "\n"; 
 global $html;

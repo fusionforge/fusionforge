@@ -112,14 +112,14 @@ class BackendMailmanList {
             $list = new MailmanList($row['group_id'],$row['group_list_id']);
             $user=UserManager::instance()->getUserByID($list->getListAdminId());
 	    $list_admin_email= $user->getEmail();
-            $list_dir = $GLOBALS['mailman_list_dir']."/".$list->getName();
+            $list_dir = $GLOBALS['mailman_lib_dir']."/lists/".$list->getName();
 
 	    if($list->isPublic() != 9) {
 		    if ((! is_dir($list_dir))) {
 			    // Create list
 			    system($GLOBALS['mailman_bin_dir']."/newlist -q ".$list->getName()." ".$list_admin_email." ".$list->getPassword()." >/dev/null");
 			    // Then update configuraion
-			    if( $this->updateListConfig($list) !=false ) {
+			    if( is_dir($list_dir) && $this->updateListConfig($list) !=false ) {
 				    $result = $this->_getMailingListDao() -> updateList($list->getID(),$row['group_id'], $list->getDescription(), $list->isPublic(),'3');
 				    if (!$result) {
 					    printf('Unable to update the list status: '.db_error());
@@ -129,6 +129,9 @@ class BackendMailmanList {
 					    return true;
 				    }
 			    }
+			    else {
+				    return false;
+			    }
 		    }
 		    else {
 			    $result = $this->_getMailingListDao() -> updateList($list->getID(),$row['group_id'], $list->getDescription(), $list->isPublic(),'3');
@@ -137,7 +140,7 @@ class BackendMailmanList {
 				    return false;
 			    }		
 			    else {
-				   return true;
+				    return true;
 			    }
 		    }
 	    }
@@ -156,12 +159,12 @@ class BackendMailmanList {
 
 	    if ($row = $dar->getRow()) {
 		    $list=new MailmanList($row['group_id'],$group_list_id);
-		    $list_dir = $GLOBALS['mailman_list_dir']."/".$list->getName();
+		    $list_dir = $GLOBALS['mailman_lib_dir']."/lists/".$list->getName();
 		    if ((is_dir($list_dir))&&($list->isPublic() == 9)) {
 
 			    // Archive first
-			    $list_archive_dir = $GLOBALS['mailman_list_dir']."/../archives/private/".$list->getName(); // Does it work? TODO
-			    $backupfile=$GLOBALS['tmp_dir']."/".$list->getName()."-mailman.tgz";
+			    $list_archive_dir = $GLOBALS['mailman_lib_dir']."/archives/private/".$list->getName(); // Does it work? TODO
+			    $backupfile=$GLOBALS['mailman_lib_dir']."/archives/".$list->getName()."-mailman.tgz";
 			    system("tar cfz $backupfile $list_dir $list_archive_dir");
 			    chmod($backupfile,0600);
 
@@ -180,7 +183,7 @@ class BackendMailmanList {
      */
     public function listExists($list) {
 	    // Is this the best test?
-	    $list_dir = $GLOBALS['mailman_list_dir']."/".$list->getName();
+	    $list_dir = $GLOBALS['mailman_lib_dir']."/lists/".$list->getName();
 	    if (! is_dir($list_dir)) return false;
 	    return true;
     }
