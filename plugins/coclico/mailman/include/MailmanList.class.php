@@ -344,7 +344,7 @@ class MailmanList extends Error {
 	 * @return string url of the info page
 	 */
 	function getExternalInfoUrl() {
-		return uitl_make_url('/mailman/listinfo/'.$this->getName());
+		return util_make_url('/mailman/listinfo/'.$this->getName());
 	}
 	/**
 	 * getOptionsUrl - get the url to manage options for user
