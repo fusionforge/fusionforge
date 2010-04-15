@@ -17,8 +17,10 @@ find_files () {
     ack-grep -l --php $old | grep -v www/include/pre.php
 }
 
-find_files | xargs perl -pi -e"s/(\\s*global .*)\\\$$old, */\\1/"
-find_files | xargs perl -pi -e"s/(\\s*global .*)\\\$$old *;//"
-find_files | xargs perl -pi -e"s,\\\$GLOBALS\['$old'\](?"\!"\\s*=),$newstr,g"
-find_files | xargs perl -pi -e"s,\\\$GLOBALS\[$old\](?"\!"\\s*=),$newstr,g"
-find_files | xargs perl -pi -e"s,\\\$$old(?"\!"\\s*=),$newstr,g"
+find_files | xargs perl -pi -e"
+s/^\\s*global +\\\$$old *;//;
+s/^(\\s*global +)\\\$$old *,/\\1/;
+s/^(\\s*global .*), *\\\$$old/\\1/;
+s,\\\$GLOBALS\['$old'\](?"\!"\\s*=),$newstr,g;
+s,\\\$GLOBALS\[$old\](?"\!"\\s*=),$newstr,g;
+s,\\\$$old(?"\!"\\s*=),$newstr,g"

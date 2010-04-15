@@ -403,8 +403,8 @@ class BzrPlugin extends SCMPlugin {
 	}
 
 	function generateSnapshots ($params) {
-		global $sys_scm_snapshots_path ;
-		global $sys_scm_tarballs_path ;
+
+
 
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
@@ -413,8 +413,8 @@ class BzrPlugin extends SCMPlugin {
 		
 		$group_name = $project->getUnixName() ;
 
-		$snapshot = $sys_scm_snapshots_path.'/'.$group_name.'-scm-latest.tar.gz';
-		$tarball = $sys_scm_tarballs_path.'/'.$group_name.'-scmroot.tar.gz';
+		$snapshot = forge_get_config('scm_snapshots_path').'/'.$group_name.'-scm-latest.tar.gz';
+		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar.gz';
 
 		if (! $project->usesPlugin ($this->name)) {
 			return false;

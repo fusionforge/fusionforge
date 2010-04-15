@@ -45,13 +45,13 @@ $group_name=$group->getUnixName();
 
 $filename=$group_name.'-scm-latest.tar.gz';
 
-if (file_exists($sys_scm_snapshots_path.'/'.$filename)) {
+if (file_exists(forge_get_config('scm_snapshots_path').'/'.$filename)) {
 	Header('Content-disposition: filename="'.str_replace('"', '', $filename).'"');
 	Header('Content-type: application/x-gzip');
-	$length = filesize($sys_scm_snapshots_path.'/'.$filename);
+	$length = filesize(forge_get_config('scm_snapshots_path').'/'.$filename);
 	Header('Content-length: '.$length);
 
-	readfile_chunked($sys_scm_snapshots_path.'/'.$filename);
+	readfile_chunked(forge_get_config('scm_snapshots_path').'/'.$filename);
 } else {
 	session_redirect(util_make_url('/404.php'));
 }

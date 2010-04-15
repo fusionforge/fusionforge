@@ -33,7 +33,9 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 	{
 		$vars = array ('sys_name',
 			       'sys_user_reg_restricted',
-			       'sys_default_domain') ;
+			       'sys_default_domain',
+			       'sys_scm_tarballs_path',
+			       'sys_scm_snapshots_path') ;
 
 		$pattern = implode ('|', $vars) ;
 		

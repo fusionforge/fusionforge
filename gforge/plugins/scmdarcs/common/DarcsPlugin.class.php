@@ -88,10 +88,10 @@ class DarcsPlugin extends SCMPlugin {
 	}
 
 	function getSnapshotPara ($project) {
-		global $sys_scm_snapshots_path ;
+
 		$b = "" ;
 		$filename = $project->getUnixName().'-scm-latest.tar.gz';
-		if (file_exists($sys_scm_snapshots_path.'/'.$filename)) {
+		if (file_exists(forge_get_config('scm_snapshots_path').'/'.$filename)) {
 			$b .= '<p>[' ;
 			$b .= util_make_link ("/snapshots.php?group_id=".$project->getID(),
 					      _('Download the nightly snapshot')
@@ -235,7 +235,7 @@ class DarcsPlugin extends SCMPlugin {
 	}
 
 	function generateSnapshots ($params) {
-		global $sys_scm_tarballs_path ;
+
 
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
@@ -244,7 +244,7 @@ class DarcsPlugin extends SCMPlugin {
 		
 		$group_name = $project->getUnixName() ;
 
-		$tarball = $sys_scm_tarballs_path.'/'.$group_name.'-scmroot.tar.gz';
+		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar.gz';
 
 		if (! $project->usesPlugin ($this->name)) {
 			return false;

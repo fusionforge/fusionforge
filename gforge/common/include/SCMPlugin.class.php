@@ -160,7 +160,7 @@ abstract class SCMPlugin extends Plugin {
 	}
 
 	function printPage ($params) {
-		global $HTML, $sys_scm_snapshots_path;
+		global $HTML;
 
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
