@@ -51,7 +51,7 @@ class Trove extends FForge_SeleniumTestCase
 		$this->assertFalse($this->isTextPresent("4 - Beta2"));
 
 		// Test creation of a new entry (test)
-		$this->click("link=Admin");
+		$this->click("link=Site Admin");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Add to the Trove Map");
 		$this->waitForPageToLoad("30000");
