@@ -40,11 +40,11 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 		$pattern = implode ('|', $vars) ;
 		
 		$output = `cd .. ; find gforge tests -name '*.php' -type f | xargs pcregrep -n '\\$($pattern)\b(?! *=[^=])' \
-					   | grep -v ^gforge/www/include/pre.php`;
+					   | grep -v ^gforge/common/include/config-vars.php`;
 		$this->assertEquals('', $output, "Found deprecated \$var for var in ($pattern):");
 
 		$output = `cd .. ; find gforge tests -name '*.php' -type f | xargs pcregrep -n '\\\$GLOBALS\\[.?($pattern).?\\](?! *=[^=])' \
-					   | grep -v ^gforge/www/include/pre.php`;
+					   | grep -v ^gforge/common/include/config-vars.php`;
 		$this->assertEquals('', $output, "Found deprecated \$GLOBALS['\$var'] for var in ($pattern):");
 		
 	}

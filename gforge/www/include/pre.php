@@ -33,20 +33,8 @@ if (!isset($no_gz_buffer) || !$no_gz_buffer) {
 
 require $gfcgfile;
 require $gfcommon.'include/config.php';
+require $gfcommon.'include/config-vars.php';
 
-forge_define_config_item ('forge_name', 'core', $GLOBALS['sys_name']) ;
-forge_define_config_item ('user_registration_restricted', 'core', $GLOBALS['sys_user_reg_restricted']) ;
-forge_define_config_item ('web_host', 'core', $GLOBALS['sys_default_domain']) ;
-forge_define_config_item ('scm_tarballs_path', 'core', $GLOBALS['sys_scm_tarballs_path']) ;
-forge_define_config_item ('scm_snapshots_path', 'core', $GLOBALS['sys_scm_snapshots_path']) ;
-// forge_define_config_item ('', 'core', $GLOBALS['sys_']) ;
-
-/* Long-term:
- require_once $gfcommon.'include/FusionForge.class.php';
- $forge = new FusionForge() ;
- forge_define_config_item ('forge_name', 'core', $forge->software_name) ;
- forge_define_config_item ('user_registration_restricted', 'core', false) ;
-*/
 forge_read_config_file ($gfconfig.'/config.ini') ;
 
 // get constants used for flags or status
