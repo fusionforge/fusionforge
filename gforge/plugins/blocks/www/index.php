@@ -46,7 +46,7 @@
 
 require_once dirname(__FILE__)."/../../env.inc.php";
 require_once $gfwww.'include/pre.php';
-require_once($sys_plugins_path.'blocks/etc/plugins/blocks/config.php');
+require_once $gfconfig.'plugins/blocks/config.php' ;
 
 require_once $gfcommon.'forum/ForumFactory.class.php';
 require_once $gfcommon.'tracker/ArtifactFactory.class.php';
