@@ -422,7 +422,7 @@ class MailmanList extends Error {
 	 */
 
 	function getExternalAdminUrl() {
-		$iframe_url = 'http://'.$GLOBALS['sys_lists_host'].'/mailman/admin/'.$this->getName();
+		$iframe_url = '/mailman/admin/'.$this->getName();
 		htmlIframe($iframe_url, array('class' => 'iframe_service'));
 	}
 
