@@ -30,6 +30,7 @@ case "$1" in
 	# Prepare database
 	su -s /bin/sh @OLDPACKAGE@ -c '/usr/share/@OLDPACKAGE@/bin/register-plugin mailman "mailman"'
 	chgrp list /var/lib/mailman/lists/extend.py 
+	/usr/share/gforge/plugins/mailman/bin/db-upgrade.pl
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
