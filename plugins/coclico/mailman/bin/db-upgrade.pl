@@ -48,7 +48,7 @@ eval {
     $version = &get_db_version ;
     $target = "0.1" ;
     if (is_lesser $version, $target) {
-	my @filelist = ( "/usr/share/gforge/plugins/$pluginname/lib/$pluginname-init.sql" ) ;
+	my @filelist = ( "/usr/share/gforge/plugins/$pluginname/db/$pluginname-init.sql" ) ;
 	
 	foreach my $file (@filelist) {
 	    debug "Processing $file" ;
