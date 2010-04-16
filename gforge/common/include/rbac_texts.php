@@ -30,6 +30,14 @@ require_once $gfcommon.'include/PluginManager.class.php';
 
 function setup_rbac_strings () {
 	global $rbac_permission_names, $rbac_edit_section_names ;
+	
+	if (!isset ($rbac_permission_names)) {
+		$rbac_permission_names = array () ;
+	}
+	if (!isset ($rbac_edit_section_names)) {
+		$rbac_edit_section_names = array () ;
+	}
+
 	$rbac_permission_names = array_replace_recursive ($rbac_permission_names, 
 							  array (
 		'frspackage0' => _('Private'),
