@@ -1,3 +1,9 @@
+fusionforge-plugin-mailman (1.2.9-1) karmic; urgency=low
+
+  * Make plugin nicer 
+
+ -- Mélanie Le Bail <melanie.lebail@orange-ftgroup.com>  Wed, 14 Apr 2010 15:02:58 +0200
+
 fusionforge-plugin-mailman (1.2.5-1) unstable; urgency=low
 
   * Some FusionForge renaming

@@ -58,7 +58,24 @@
             Order allow,deny
 	    allow from all
         </Directory>
+	##### COPY 20list begin #####
+        AddHandler cgi-script .cgi
 
+        ScriptAlias /cgi-bin/mailman/ /var/lib/mailman/cgi-bin/
+        ScriptAlias /mailman/ /var/lib/mailman/cgi-bin/
+
+        Alias /pipermail /var/lib/mailman/archives/public
+        <Directory /var/lib/mailman/archives/public>
+                AllowOverride Options
+                Options FollowSymLinks
+        </Directory>
+
+        Alias /images/mailman /usr/share/images/mailman
+        <Location /images/mailman>
+                order allow,deny
+                allow from all
+        </Location>
+        ##### COPY 20list end #####
 	RedirectMatch 301 ^({sys_urlprefix}plugins/mediawiki/wiki/[-a-zA-Z0-9_]*)/*$ $1/index.php
 	AliasMatch ^{sys_urlprefix}plugins/mediawiki/wiki/[-a-zA-Z0-9_]*/index.php {usr_share_gforge}/www/plugins/mediawiki/index.php
 	AliasMatch ^{sys_urlprefix}plugins/mediawiki/wiki/([-a-zA-Z0-9_]*)/images/(.*) {var_lib_gforge}/plugins/mediawiki/projects/$1/images/$2
