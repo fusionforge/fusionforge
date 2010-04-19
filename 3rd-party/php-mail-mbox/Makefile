@@ -16,6 +16,7 @@ default: $(PKGDIR)
 	@make -f Makefile.$(DIST) $(PARAM) $@
 
 $(PKGDIR):
+	#pear download channel://pear.php.net/Mail_Mbox-0.6.3
 	dpkg-source -x $(PKGDSC)
 
 clean:
