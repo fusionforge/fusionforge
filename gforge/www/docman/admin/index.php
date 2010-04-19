@@ -95,7 +95,7 @@ if (getStringFromRequest('submit')) {
 			if (!is_uploaded_file($uploaded_data['tmp_name'])) {
 				exit_error(_('Error'),sprintf(_('Invalid file attack attempt %1$s'), $uploaded_data['name']));
 			}
-			$data = addslashes(fread(fopen($uploaded_data['tmp_name'], 'r'), $uploaded_data['size']));
+			$data = fread(fopen($uploaded_data['tmp_name'], 'r'), $uploaded_data['size']);
 			$filename=$uploaded_data['name'];
 			$filetype=$uploaded_data['type'];
 		} elseif ($file_url) {
@@ -105,12 +105,12 @@ if (getStringFromRequest('submit')) {
 		/*
 		} elseif ($sys_use_ftpuploads && $ftp_filename!=100) { //100==None
 			$filename=$upload_dir.'/'.$ftp_filename;
-			$data = addslashes(fread(fopen($filename, 'r'), filesize($filename)));
+			$data = fread(fopen($filename, 'r'), filesize($filename));
 			$filetype=$uploaded_data_type;
 		*/
 		} else {
-			$filename=addslashes($d->getFileName());
-			$filetype=addslashes($d->getFileType());
+			$filename=$d->getFileName();
+			$filetype=$d->getFileType();
 		}
 		if (!$d->update($filename,$filetype,$data,$doc_group,$title,$language_id,$description,$stateid)) {
 			exit_error('Error',$d->getErrorMessage());

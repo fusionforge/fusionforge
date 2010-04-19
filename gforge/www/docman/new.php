@@ -88,7 +88,7 @@ if (getStringFromRequest('submit')) {
 			if (!is_uploaded_file($uploaded_data['tmp_name'])) {			
 				exit_error(_('Error'),_('Invalid file name.'));
 			}
-			$data = addslashes(fread(fopen($uploaded_data['tmp_name'], 'r'), $uploaded_data['size']));
+			$data = fread(fopen($uploaded_data['tmp_name'], 'r'), $uploaded_data['size']);
 			$file_url='';
 			$uploaded_data_name=$uploaded_data['name'];
 			$uploaded_data_type=$uploaded_data['type'];
@@ -97,7 +97,7 @@ if (getStringFromRequest('submit')) {
 		/*
 		case 'ftpupload' : {	
 			$uploaded_data_name=$upload_dir.'/'.$ftp_filename;
-			$data = addslashes(fread(fopen($uploaded_data_name, 'r'), filesize($uploaded_data_name)));
+			$data = fread(fopen($uploaded_data_name, 'r'), filesize($uploaded_data_name));
 		}
 		*/
 	}
