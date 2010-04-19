@@ -25,7 +25,23 @@ BUILDERDIR=$(CURDIR)/builder
 else
 BUILDERDIR=$(shell echo $$BUILDERDIR)
 endif
+ifeq (,$(shell echo "$$BUILDRESULT"))
 BUILDRESULT=$(CURDIR)/result
+else
+BUILDRESULT=$(shell echo $$BUILDRESULT)
+endif
+#
+ifeq (,$(shell echo "$$UBUMIRROR"))
+UBUMIRROR=http://archive.ubuntu.com/ubuntu
+else
+UBUMIRROR=$(shell echo $$UBUMIRROR)
+endif
+ifeq (,$(shell echo "$$DEBMIRROR"))
+DEBMIRROR=http://ftp.fr.debian.org/debian
+else
+DEBMIRROR=$(shell echo $$DEBMIRROR)
+endif
+#
 TARBALLS=$(CURDIR)/tarballs
 #
 BUILDPLACE=$(BUILDERDIR)/buildplace
@@ -47,11 +63,8 @@ UBUNTULIST=1hardy 1intrepid 1jaunty 1karmic
 UBUNTULIST=1jaunty 1karmic 1lucid
 UBUNTULISTP=1gutsy
 UBULIST=$(UBUNTULIST) $(UBUNTULISTP)
-# Try if a local mirror is available
-LOCALMIRROR=http://localhost/ubuntu
-UBUNTUOP=$(shell wget -q -S http://localhost/ubuntu -O /dev/null 2>&1 && echo "--mirror $(LOCALMIRROR)" || echo "--mirror http://archive.ubuntu.com/ubuntu") --debootstrap debootstrap
-UBUNTUOP=--mirror http://archive.ubuntu.com/ubuntu --debootstrap debootstrap
-DEBIANOP=--debootstrapopts --include=apt --debootstrap debootstrap
+UBUNTUOP=--mirror $(UBUMIRROR) --debootstrap debootstrap
+DEBIANOP=--mirror $(DEBMIRROR) --debootstrapopts --include=apt --debootstrap debootstrap
 ASKPASS=--ask-passphrase
 ASKPASS=
 
