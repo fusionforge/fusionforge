@@ -12,10 +12,12 @@ MINOR=$(shell head -1 $(PKGDIR)/debian/changelog | sed 's/.*(.*-\([^-]*\)).*/\1/
 PARAM=PKGDIR=$(PKGDIR) svnrev=$(MINOR)
 
 def:
+	@echo "#==============================================#"
 	@echo "Use make PKGDIR=<$(PKGDIR1)|$(PKGDIR2)> <target>"	
 	@#make -f Makefile.$(DIST) $(PARAM) default
 	@echo "target=default displays all params"
 	@echo "other available targets are: "
+	@echo "#==============================================#"
 	@cat ../../Makefile.$(DIST) | grep '^.*:.*#$$' | sed 's/FUSIONFORGE/$(FUSIONFORGE)/' | sed 's/^\(.*:\).*#\(.*\)#$$/\1		\2/'
 
 default:
