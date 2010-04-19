@@ -128,7 +128,7 @@ extends Valid_String {
         } else {
             $this->separator = null;
         }
-        parent::Valid_String($key);
+        parent::Valid($key);
     }
 
     function validate($value) {
