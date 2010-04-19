@@ -4,13 +4,20 @@ DISTSUSE=$(shell grep -qi 'SuSE' /etc/issue && echo rh)
 DIST=$(DISTDEBIAN)$(DISTREDHAT)$(DISTSUSE)
 
 PKGDIR=mailman-2.1.13
-MINOR=$(shell head -1 $(PKGDIR)/debian/changelog | sed 's/.*(.*-\([^-]*\)).*/\1/')
+PKGDSC=$(shell ls *.dsc | sort | head -1)
+MINOR=$(shell grep ^Version $(PKGDSC) | sed 's/.[^-]*-\(.*\)/\1/')
 
 PARAM=PKGDIR=$(PKGDIR) svnrev=$(MINOR)
 
-default:
+default: $(PKGDIR)
 	@make -f Makefile.$(DIST) $(PARAM) default
 	@cat ../../Makefile.$(DIST) | grep '^.*:.*#$$' | sed 's/FUSIONFORGE/$(FUSIONFORGE)/' | sed 's/^\(.*:\).*#\(.*\)#$$/\1		\2/'
 
-%:
+%: $(PKGDIR)
 	@make -f Makefile.$(DIST) $(PARAM) $@
+
+$(PKGDIR):
+	dpkg-source -x $(PKGDSC)
+
+clean:
+	rm -rf $(PKGDIR)
