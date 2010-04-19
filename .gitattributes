@@ -8,6 +8,8 @@
 3rd-party/PEAR/Mail_mimeDecode-1.5.0.tgz -text svneol=unset#unset
 3rd-party/PEAR/Structures_Graph-1.0.2.tgz -text svneol=unset#unset
 3rd-party/PEAR/XML_Util-1.2.1.tgz -text svneol=unset#unset
+3rd-party/db2latex-xsl/Makefile -text
+3rd-party/db2latex-xsl/Makefile.debian -text
 3rd-party/db2latex-xsl/db2latex-xsl_0.8pre1-6.1.diff.gz -text svneol=unset#unset
 3rd-party/db2latex-xsl/db2latex-xsl_0.8pre1-6.1.dsc -text
 3rd-party/db2latex-xsl/db2latex-xsl_0.8pre1-6.2.diff.gz -text svneol=unset#unset
