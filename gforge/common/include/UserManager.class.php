@@ -57,6 +57,18 @@ class UserManager {
     function getUserByEmail($user_id) {
 	    return user_get_object_by_email($user_id);
     }
+    function existEmail ($email) {
+	    if (!validate_email($email)) {
+		    return false;
+	    }
+	    $res = db_query_params('SELECT * FROM users WHERE email=$1', array($email));
+	    if (!$res || db_numrows($res)<1) {
+		    return false;
+	    }
+	    else {
+		    return $email;
+	    }
+    }
 }
 
 ?>
