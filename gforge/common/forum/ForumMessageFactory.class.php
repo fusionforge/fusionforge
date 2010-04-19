@@ -160,7 +160,7 @@ class ForumMessageFactory extends Error {
 		if ($this->forum_messages) {
 			return $this->forum_messages;
 		}
-		if (isset ($thread_id) && is_int ($thread_id)) {
+		if (isset ($thread_id) && is_numeric($thread_id)) {
 			$result = db_query_params ('SELECT * FROM forum_user_vw 
 		WHERE group_forum_id=$1
                   AND thread_id=$2
@@ -200,7 +200,7 @@ class ForumMessageFactory extends Error {
 		if ($this->forum_messages) {
 			return $this->forum_messages;
 		}
-		if (isset ($thread_id) && is_int ($thread_id)) {
+		if (isset ($thread_id) && is_numeric($thread_id)) {
 			$result = db_query_params ('SELECT * FROM forum_user_vw 
 		WHERE group_forum_id=$1
                   AND thread_id=$2
@@ -239,7 +239,7 @@ class ForumMessageFactory extends Error {
 		if ($this->forum_messages) {
 			return $this->forum_messages;
 		}
-		if (isset ($thread_id) && is_int ($thread_id)) {
+		if (isset ($thread_id) && is_numeric($thread_id)) {
 			$result = db_query_params ('SELECT * FROM forum_user_vw 
 		WHERE group_forum_id=$1
                   AND thread_id=$2
