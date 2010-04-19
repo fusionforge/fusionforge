@@ -12,5 +12,8 @@ default:
 	@make -f Makefile.$(DIST) $(PARAM) default
 	@cat ../../Makefile.$(DIST) | grep '^.*:.*#$$' | sed 's/FUSIONFORGE/$(FUSIONFORGE)/' | sed 's/^\(.*:\).*#\(.*\)#$$/\1		\2/'
 
-%:
+%: $(PKGDIR)
 	@make -f Makefile.$(DIST) $(PARAM) $@
+
+$(PKGDIR):
+	
