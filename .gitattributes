@@ -3949,6 +3949,115 @@ packaging/tag_packaging_create -text
 packaging/tag_packaging_delete -text
 plugins/coclico/Makefile -text
 plugins/coclico/Makefile.debian -text
+plugins/coclico/forumml/PEAR/Archive_Tar-1.3.3.tgz -text svneol=unset#unset
+plugins/coclico/forumml/PEAR/Console_Getopt-1.2.3.tgz -text svneol=unset#unset
+plugins/coclico/forumml/PEAR/Mail-1.1.14.tgz -text svneol=unset#unset
+plugins/coclico/forumml/PEAR/Mail_Mbox-0.6.1.tgz -text svneol=unset#unset
+plugins/coclico/forumml/PEAR/Mail_Mime-1.5.2.tgz -text svneol=unset#unset
+plugins/coclico/forumml/PEAR/Mail_mimeDecode-1.5.0.tgz -text svneol=unset#unset
+plugins/coclico/forumml/PEAR/Structures_Graph-1.0.2.tgz -text svneol=unset#unset
+plugins/coclico/forumml/PEAR/XML_Util-1.2.1.tgz -text svneol=unset#unset
+plugins/coclico/forumml/README.txt -text
+plugins/coclico/forumml/TODO -text
+plugins/coclico/forumml/bin/db-upgrade.pl -text
+plugins/coclico/forumml/bin/installFF.sh -text
+plugins/coclico/forumml/bin/mail_2_DBFF.php -text
+plugins/coclico/forumml/bin/mail_2_DBFF.pl -text
+plugins/coclico/forumml/bin/ml_arch_2_DBFF.pl -text
+plugins/coclico/forumml/common/forumml-init.php -text
+plugins/coclico/forumml/db/forumml-init.sql -text
+plugins/coclico/forumml/db/install.sql -text
+plugins/coclico/forumml/debian/README.Debian -text
+plugins/coclico/forumml/debian/README.source -text
+plugins/coclico/forumml/debian/changelog -text
+plugins/coclico/forumml/debian/compat -text
+plugins/coclico/forumml/debian/control -text
+plugins/coclico/forumml/debian/copyright -text
+plugins/coclico/forumml/debian/docs -text
+plugins/coclico/forumml/debian/dsf-in/plugin-forumml.postinst -text
+plugins/coclico/forumml/debian/dsf-in/plugin-forumml.prerm -text
+plugins/coclico/forumml/debian/po/templates.pot -text
+plugins/coclico/forumml/debian/rules -text
+plugins/coclico/forumml/debian/source/format -text
+plugins/coclico/forumml/etc/forumml.inc.dist -text
+plugins/coclico/forumml/include/ForumMLGroupSearchEngine.class.php -text
+plugins/coclico/forumml/include/ForumMLHtmlSearchRenderer.class.php -text
+plugins/coclico/forumml/include/ForumMLInsert.class.php -text
+plugins/coclico/forumml/include/ForumMLPluginDescriptor.class.php -text
+plugins/coclico/forumml/include/ForumMLPluginInfo.class.php -text
+plugins/coclico/forumml/include/ForumMLSearchEngine.class.php -text
+plugins/coclico/forumml/include/ForumMLSearchQuery.class.php -text
+plugins/coclico/forumml/include/ForumML_Attachment.class.php -text
+plugins/coclico/forumml/include/ForumML_AttachmentDao.class.php -text
+plugins/coclico/forumml/include/ForumML_FileStorage.class.php -text
+plugins/coclico/forumml/include/ForumML_HTMLPurifier.class.php -text
+plugins/coclico/forumml/include/ForumML_MessageDao.class.php -text
+plugins/coclico/forumml/include/ForumML_MessageManager.class.php -text
+plugins/coclico/forumml/include/ForumML_mimeDecode.class.php -text
+plugins/coclico/forumml/include/forummlPlugin.class.php -text
+plugins/coclico/forumml/packaging/control/000source -text
+plugins/coclico/forumml/packaging/control/222plugin-forumml -text
+plugins/coclico/forumml/packaging/control/222plugin-forumml.shortdesc -text
+plugins/coclico/forumml/packaging/dirs/plugin-forumml -text
+plugins/coclico/forumml/packaging/docs/plugin-forumml -text
+plugins/coclico/forumml/packaging/install/plugin-forumml -text
+plugins/coclico/forumml/packaging/links/plugin-forumml -text
+plugins/coclico/forumml/selinux/forumml0.pp -text svneol=unset#unset
+plugins/coclico/forumml/selinux/forumml0.te -text
+plugins/coclico/forumml/selinux/forumml1.pp -text svneol=unset#unset
+plugins/coclico/forumml/selinux/forumml1.te -text
+plugins/coclico/forumml/selinux/forumml2.pp -text svneol=unset#unset
+plugins/coclico/forumml/selinux/forumml2.te -text
+plugins/coclico/forumml/selinux/forumml3.pp -text svneol=unset#unset
+plugins/coclico/forumml/selinux/forumml3.te -text
+plugins/coclico/forumml/selinux/forumml4.pp -text svneol=unset#unset
+plugins/coclico/forumml/selinux/forumml4.te -text
+plugins/coclico/forumml/selinux/forumml5.pp -text svneol=unset#unset
+plugins/coclico/forumml/selinux/forumml5.te -text
+plugins/coclico/forumml/selinux/forumml6.pp -text svneol=unset#unset
+plugins/coclico/forumml/selinux/forumml6.te -text
+plugins/coclico/forumml/selinux/forumml7.pp -text svneol=unset#unset
+plugins/coclico/forumml/selinux/forumml7.te -text
+plugins/coclico/forumml/selinux/forumml8.pp -text svneol=unset#unset
+plugins/coclico/forumml/selinux/forumml8.te -text
+plugins/coclico/forumml/site-content/en_US/forumml.tab -text
+plugins/coclico/forumml/site-content/fr_FR/forumml.tab -text
+plugins/coclico/forumml/tests/ForumML_FileStorageTest.php -text
+plugins/coclico/forumml/tests/ForumML_InsertTest.php -text
+plugins/coclico/forumml/tests/_fixtures/samples/attachment_only.mbox -text
+plugins/coclico/forumml/tests/_fixtures/samples/html_with_inline_content_and_attch_in_html_only.mbox -text
+plugins/coclico/forumml/tests/_fixtures/samples/html_with_inline_content_and_attch_in_text_plus_html.mbox -text
+plugins/coclico/forumml/tests/_fixtures/samples/html_with_inline_content_in_html_only.mbox -text
+plugins/coclico/forumml/tests/_fixtures/samples/html_with_inline_content_in_text_plus_html.mbox -text
+plugins/coclico/forumml/tests/_fixtures/samples/pure_html_in_html_only.mbox -text
+plugins/coclico/forumml/tests/_fixtures/samples/pure_html_text_plus_html.mbox -text
+plugins/coclico/forumml/tests/_fixtures/samples/pure_text.mbox -text
+plugins/coclico/forumml/tests/_fixtures/samples/text_plus_attachment.mbox -text
+plugins/coclico/forumml/translations/en.po -text
+plugins/coclico/forumml/translations/gforge.pot -text
+plugins/coclico/forumml/utils/manage-translations.sh -text
+plugins/coclico/forumml/www/forumml_utils.php -text
+plugins/coclico/forumml/www/index.php -text
+plugins/coclico/forumml/www/message.php -text
+plugins/coclico/forumml/www/scripts/cc_attach_js.php -text
+plugins/coclico/forumml/www/scripts/forumml.js -text
+plugins/coclico/forumml/www/themes/default/css/style.css -text
+plugins/coclico/forumml/www/themes/default/images/ic/attach.png -text svneol=unset#unset
+plugins/coclico/forumml/www/themes/default/images/ic/comment.png -text svneol=unset#unset
+plugins/coclico/forumml/www/themes/default/images/ic/comment_add.png -text svneol=unset#unset
+plugins/coclico/forumml/www/themes/default/images/ic/comments.png -text svneol=unset#unset
+plugins/coclico/forumml/www/themes/default/images/ic/msg.png -text svneol=unset#unset
+plugins/coclico/forumml/www/themes/default/images/ic/resultset_first.png -text svneol=unset#unset
+plugins/coclico/forumml/www/themes/default/images/ic/resultset_first_disabled.png -text svneol=unset#unset
+plugins/coclico/forumml/www/themes/default/images/ic/resultset_last.png -text svneol=unset#unset
+plugins/coclico/forumml/www/themes/default/images/ic/resultset_last_disabled.png -text svneol=unset#unset
+plugins/coclico/forumml/www/themes/default/images/ic/resultset_next.png -text svneol=unset#unset
+plugins/coclico/forumml/www/themes/default/images/ic/resultset_next_disabled.png -text svneol=unset#unset
+plugins/coclico/forumml/www/themes/default/images/ic/resultset_previous.png -text svneol=unset#unset
+plugins/coclico/forumml/www/themes/default/images/ic/resultset_previous_disabled.png -text svneol=unset#unset
+plugins/coclico/forumml/www/themes/default/images/ic/spinner-greenie.gif -text svneol=unset#unset
+plugins/coclico/forumml/www/themes/default/images/ic/trash.png -text svneol=unset#unset
+plugins/coclico/forumml/www/upload.php -text
 plugins/coclico/mailman/README.txt -text
 plugins/coclico/mailman/bin/db-delete.pl -text
 plugins/coclico/mailman/bin/db-upgrade.pl -text

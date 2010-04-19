@@ -1,0 +1,6 @@
+common/*                  usr/share/gforge/plugins/forumml/common/
+include/*                 usr/share/gforge/plugins/forumml/include/
+db/*                      usr/share/gforge/plugins/forumml/db/
+bin/*                     usr/share/gforge/plugins/forumml/bin/
+www/*                     usr/share/gforge/plugins/forumml/www/
+etc/*                     usr/share/gforge/plugins/forumml/etc/

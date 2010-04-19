@@ -55,7 +55,7 @@ if ($group_id) {
 		}
 		$mailingList->recreate();
 		$feedback .=_('List re-created');
-		htmlRedirect('index.php?group_id='.$group_id);
+		htmlRedirect('/plugins/mailman/index.php?group_id='.$group_id);
 
 	}
 

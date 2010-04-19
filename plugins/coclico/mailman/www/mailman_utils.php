@@ -172,7 +172,7 @@ function display_list_admin($currentList)
 				echo	'<td>'._('Not activated yet').'</td>';
 			}
 			else{
-				echo '<td>'._('Error during creation').'  <A HREF="/plugins/mailman/index.php?group_id='.$request->get('group_id').'&action=recreate&group_list_id='.$currentList->getID().'">'._('Re-create').'</A></td>';
+				echo '<td>'._('Error during creation').'  <A HREF="/plugins/mailman/admin/index.php?group_id='.$request->get('group_id').'&action=recreate&group_list_id='.$currentList->getID().'">'._('Re-create').'</A></td>';
 			}
 			echo '<td></td><td></td><td></td>';
 		} else {
