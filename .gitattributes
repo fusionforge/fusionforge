@@ -25,6 +25,13 @@
 3rd-party/php-jpgraph/libphp-jpgraph_1.5.2-12.diff.gz -text svneol=unset#unset
 3rd-party/php-jpgraph/libphp-jpgraph_1.5.2.orig.tar.gz -text svneol=unset#unset
 3rd-party/php-jpgraph/php-jpgraph.spec -text
+3rd-party/php-mail-mbox/Makefile -text
+3rd-party/php-mail-mbox/Makefile.debian -text
+3rd-party/php-mail-mbox/php-mail-mbox_0.6.3-1.diff.gz -text svneol=unset#unset
+3rd-party/php-mail-mbox/php-mail-mbox_0.6.3-1.dsc -text
+3rd-party/php-mail-mbox/php-mail-mbox_0.6.3-1coclico1.diff.gz -text svneol=unset#unset
+3rd-party/php-mail-mbox/php-mail-mbox_0.6.3-1coclico1.dsc -text
+3rd-party/php-mail-mbox/php-mail-mbox_0.6.3.orig.tar.gz -text svneol=unset#unset
 /README -text
 delivery/fusionforge/package/config -text
 delivery/gforge/package/config -text
