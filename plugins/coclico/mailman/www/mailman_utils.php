@@ -114,7 +114,10 @@ $p =& $plugin_manager->getPluginByName('mailman');
 				else{
 					echo _('Error during creation');
 				}
-				echo '</td>';
+				echo '</td><td></td>';
+				if (isLogged()) {
+					echo '<td></td><td></td><td></td>';
+				}
 			} else {
 				echo htmlspecialchars($currentList->getDescription()).'</td>';
 				$archives =' <A HREF="index.php?group_id='.$request->get('group_id').'&action=pipermail&id='.$currentList->getID().'">'._('Archives').'</A>';
@@ -146,7 +149,7 @@ $p =& $plugin_manager->getPluginByName('mailman');
 }
 function display_list_admin($currentList)
 {
-global $class;
+	global $class;
 	$request =& HTTPRequest::instance();
 	$current_user=UserManager::instance()->getCurrentUser();
 	if($currentList->isPublic()!='9'){
@@ -169,8 +172,9 @@ global $class;
 				echo	'<td>'._('Not activated yet').'</td>';
 			}
 			else{
-				echo '<td>'._('Error during creation').'  <A HREF="index.php?group_id='.$request->get('group_id').'&action=recreate&group_list_id='.$currentList->getID().'">'._('Re-create').'</A></td>';
+				echo '<td>'._('Error during creation').'  <A HREF="/plugins/mailman/index.php?group_id='.$request->get('group_id').'&action=recreate&group_list_id='.$currentList->getID().'">'._('Re-create').'</A></td>';
 			}
+			echo '<td></td><td></td><td></td>';
 		} else {
 
 			echo '<td>'.htmlspecialchars($currentList->getDescription()).'</td>';

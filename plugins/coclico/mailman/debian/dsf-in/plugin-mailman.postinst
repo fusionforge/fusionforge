@@ -31,6 +31,7 @@ case "$1" in
 	su -s /bin/sh @OLDPACKAGE@ -c '/usr/share/@OLDPACKAGE@/bin/register-plugin mailman "mailman"'
 	chgrp list /var/lib/mailman/lists/extend.py 
 	su -s /bin/sh @OLDPACKAGE@ -c '/usr/share/@OLDPACKAGE@/plugins/mailman/bin/db-upgrade.pl'
+	getent group www-data | grep -q list || adduser list www-data
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
