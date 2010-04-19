@@ -4,7 +4,7 @@ DISTSUSE=$(shell grep -qi 'SuSE' /etc/issue && echo rh)
 DIST=$(DISTDEBIAN)$(DISTREDHAT)$(DISTSUSE)
 
 PKGDIR=mailman-2.1.13
-PKGDSC=$(shell ls *.dsc | sort | head -1)
+PKGDSC=$(shell ls *.dsc | sort -V -r | head -1)
 MINOR=$(shell grep ^Version $(PKGDSC) | sed 's/.[^-]*-\(.*\)/\1/')
 
 PARAM=PKGDIR=$(PKGDIR) svnrev=$(MINOR)
