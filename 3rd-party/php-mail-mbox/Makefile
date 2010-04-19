@@ -17,6 +17,8 @@ default: $(PKGDIR)
 
 $(PKGDIR):
 	#pear download channel://pear.php.net/Mail_Mbox-0.6.3
+	# gives Mail_Mbox-0.6.3.tgz
+	# then dh-make-pear Mail_Mbox-0.6.3.tgz
 	dpkg-source -x $(PKGDSC)
 
 clean:
