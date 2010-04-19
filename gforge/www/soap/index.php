@@ -15,6 +15,7 @@ require_once $gfwww.'soap/nusoap.php';
 //$debug = true;
 // 2. instantiate server object
 $server = new soap_server();
+$server->setDebugLevel(0);
 //configureWSDL($serviceName,$namespace = false,$endpoint = false,$style='rpc', $transport = 'http://schemas.xmlsoap.org/soap/http');
 //$server->configureWSDL('GForgeAPI',$uri);
 $server->configureWSDL('FusionForgeAPI',$uri,false,'rpc','http://schemas.xmlsoap.org/soap/http',$uri);
