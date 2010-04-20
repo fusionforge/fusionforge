@@ -58,7 +58,7 @@ if ($sys_use_ssl && !session_issecure()) {
 }
 
 if (!$theme_id || !is_numeric($theme_id)) {
-	$theme_id=$HTML->getThemeIdFromName($sys_theme);
+	$theme_id=$HTML->getThemeIdFromName(forge_get_config('default_theme'));
 }
 
 if (getStringFromRequest('submit')) {
@@ -102,10 +102,10 @@ if (isset($feedback)) {
 	print "</div>";
 } 
 if (!isset($timezone) || empty($timezone) || !preg_match('/^[-a-zA-Z0-9_\/\.+]+$/', $timezone)) {
-	$timezone = (isset($sys_default_timezone) ? $sys_default_timezone : 'GMT');
+	$timezone = forge_get_config('default_timezone') ? forge_get_config('default_timezone') : 'GMT' ;
 }
 if (!isset($ccode) || empty($ccode) || !preg_match('/^[a-zA-Z]{2}$/', $ccode)) {
-	$ccode = $sys_default_country_code;
+	$ccode = forge_get_config('default_country_code');
 }
 ?>
 

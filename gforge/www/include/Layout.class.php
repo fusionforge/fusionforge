@@ -133,12 +133,12 @@ class Layout extends Error {
 		}
 
 		// determine theme{dir,url}
-		$this->themedir = $GLOBALS['sys_themeroot'] . $GLOBALS['sys_theme'] . '/';
+		$this->themedir = $GLOBALS['sys_themeroot'] . forge_get_config('default_theme') . '/';
 		if (!file_exists ($this->themedir)) {
 			html_error_top(_("Can't find theme directory!"));
 			return;
 		}
-		$this->themeurl = util_make_url('themes/' . $GLOBALS['sys_theme'] . '/');
+		$this->themeurl = util_make_url('themes/' . forge_get_config('default_theme') . '/');
                  
 		// determine {css,img,js}{url,dir}
 		if (file_exists ($this->themedir . 'css/')) {
@@ -171,7 +171,7 @@ class Layout extends Error {
 		/* check if a personalized css stylesheet exist, if yes include only
 		 this stylesheet. New stylesheets should use the <themename>.css file.
 		*/
-		$theme_cssfile = $GLOBALS['sys_theme'] . '.css';
+		$theme_cssfile = forge_get_config('default_theme') . '.css';
 		if (file_exists($this->cssdir . $theme_cssfile)) {
 			$this->cssurls[] = $this->cssbaseurl . $theme_cssfile;
 		} else {

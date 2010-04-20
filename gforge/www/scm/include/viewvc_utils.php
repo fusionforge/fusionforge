@@ -100,7 +100,7 @@ function viewcvs_execute($repos_name, $repos_type) {
 		'REPOSITORY_TYPE="'.$repos_type.'" '.
 		'REPOSITORY_NAME="'.make_arg_cmd_safe($repos_name).'" '.
 		'HTTP_HOST="'.make_arg_cmd_safe(getStringFromServer('HTTP_HOST')).'" '.
-		'DOCROOT="/themes/'.$GLOBALS['sys_theme'].'/viewvc" '.
+		'DOCROOT="/themes/'.forge_get_config('default_theme').'/viewvc" '.
 		$viewcvs_path.'/bin/cgi/viewvc.cgi 2>&1';
 
 	ob_start();

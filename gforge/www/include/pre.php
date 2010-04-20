@@ -144,7 +144,7 @@ if (session_loggedin()) {
 //
 //	Include user Theme
 //
-require_once $sys_themeroot.$sys_theme.'/Theme.class.php';
+require_once $sys_themeroot.forge_get_config('default_theme').'/Theme.class.php';
 
 $HTML=new Theme();
 

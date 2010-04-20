@@ -45,10 +45,10 @@ class Theme extends Layout {
 	 */
 	function Layout() {
 
-		$this->themeroot=$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'];
+		$this->themeroot=$GLOBALS['sys_themeroot'].forge_get_config('default_theme');
 		/* if images directory exists in theme, then use it as imgroot */
 		if (file_exists ($this->themeroot.'/images')){
-			$this->imgroot='/themes/'.$GLOBALS['sys_theme'].'/images/';
+			$this->imgroot='/themes/'.forge_get_config('default_theme').'/images/';
 		}
 		// Constructor for parent class...
 		if ( file_exists($GLOBALS['sys_custom_path'] . '/index_std.php') )
@@ -96,10 +96,10 @@ class Theme extends Layout {
 		 this stylesheet
 		 new stylesheets should use the <themename>.css file
 		 */
-		$theme_cssfile=$GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'].'/css/'.$GLOBALS['sys_theme'].'.css';
+		$theme_cssfile=$GLOBALS['sys_themeroot'].forge_get_config('default_theme').'/css/'.forge_get_config('default_theme').'.css';
 		if (file_exists($theme_cssfile)){
 			echo '
-<link rel="stylesheet" type="text/css" href="'.util_make_uri ('/themes/'.$GLOBALS['sys_theme'].'/css/'.$GLOBALS['sys_theme'].'.css').'"/>';
+<link rel="stylesheet" type="text/css" href="'.util_make_uri ('/themes/'.forge_get_config('default_theme').'/css/'.forge_get_config('default_theme').'.css').'"/>';
 		}
 		?>
 

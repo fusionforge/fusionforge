@@ -27,6 +27,10 @@ forge_define_config_item ('user_registration_restricted', 'core', $GLOBALS['sys_
 forge_define_config_item ('web_host', 'core', $GLOBALS['sys_default_domain']) ;
 forge_define_config_item ('scm_tarballs_path', 'core', $GLOBALS['sys_scm_tarballs_path']) ;
 forge_define_config_item ('scm_snapshots_path', 'core', $GLOBALS['sys_scm_snapshots_path']) ;
+forge_define_config_item ('default_theme', 'core', $GLOBALS['sys_theme']) ;
+forge_define_config_item ('default_language', 'core', $GLOBALS['sys_lang']) ;
+forge_define_config_item ('default_timezone', 'core', $GLOBALS['sys_default_timezone']) ;
+forge_define_config_item ('default_country_code', 'core', $GLOBALS['sys_default_country_code']) ;
 // forge_define_config_item ('', 'core', $GLOBALS['sys_']) ;
 
 /* Long-term:

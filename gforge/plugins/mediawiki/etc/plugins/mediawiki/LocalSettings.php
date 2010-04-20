@@ -92,7 +92,7 @@ $GLOBALS['sys_default_domain'] = forge_get_config('web_host') ;
 $GLOBALS['sys_custom_path'] = $sys_custom_path ;
 $GLOBALS['gfwww'] = $gfwww ;
 $GLOBALS['gfplugins'] = $gfplugins ;
-$GLOBALS['sys_lang'] = $sys_lang ;
+$GLOBALS['sys_lang'] = forge_get_config('default_language') ;
 $GLOBALS['sys_urlroot'] = $sys_urlroot;
 $GLOBALS['sys_session_key'] = $sys_session_key;
 $GLOBALS['sys_session_expire'] = $sys_session_expire;
@@ -270,7 +270,7 @@ if (file_exists ("$project_dir/ProjectSettings.php")) {
 }
 
 // Override default wiki logo
-$wgLogo = "/themes/$sys_theme/images/wgLogo.png";
+$wgLogo = "/themes/".forge_get_config('default_theme')."/images/wgLogo.png";
 $wgFavicon = '/images/icon.png' ;
 $wgBreakFrames = false ;
 ini_set ('memory_limit', '50M') ;

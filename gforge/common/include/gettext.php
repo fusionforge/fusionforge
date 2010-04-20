@@ -94,8 +94,8 @@ function choose_language_from_context () {
 	}
 
 	// Okay, let's use the site-wide default language
-	if ($GLOBALS['sys_lang']) {
-		return $GLOBALS['sys_lang'] ;
+	if (forge_get_config('default_language')) {
+		return forge_get_config('default_language') ;
 	}
 	
 	// Still no match?  Really?
@@ -193,8 +193,8 @@ function setup_gettext_from_langname ($lang) {
 function setup_gettext_from_sys_lang () {
 
 	$lang = "English";
-	if ($GLOBALS['sys_lang']) {
-		$lang = $GLOBALS['sys_lang'] ;
+	if (forge_get_config('default_language')) {
+		$lang = forge_get_config('default_language') ;
 	}
 
 	$locale = language_name_to_locale_code($lang).'.utf8';

@@ -26,9 +26,9 @@ function plugin_ldapextauth_mapping ($entry) {
 	//$result['phone'] = $entry['telephonenumber'][0]; //AD
 	//$result['fax'] = '' ;
 	//$result['title'] = '' ;
-	//$result['ccode']=$GLOBALS['sys_default_country_code'];
+	//$result['ccode']=forge_get_config('default_country_code');
 	//$result['language_id'] = '' ;
-	//$result['timezone']=$GLOBALS['sys_default_timezone'];
+	//$result['timezone']=forge_get_config('default_timezone');
 	
 	return $result ;
 }
