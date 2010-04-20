@@ -43,7 +43,11 @@ $end = getIntFromRequest('end');
 
 if (!$start) {
 	$z =& $report->getMonthStartArr();
-	$start = $z[count($z)-1];
+	$start = $z[0];
+}
+if (!$end || $end <= $start) {
+	$z =& $report->getMonthStartArr();
+	$end = $z[count($z)-1];
 }
 
 $area = util_ensure_value_in_set ($area, array ('tracker','forum','docman','taskman','downloads')) ;

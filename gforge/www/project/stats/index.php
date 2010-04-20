@@ -29,14 +29,17 @@ if ($report->isError()) {
 }
 
 $area = getStringFromRequest('area');
-$SPAN = getIntFromRequest('SPAN');
+$SPAN = getIntFromRequest('SPAN', REPORT_TYPE_MONTHLY);
 $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');
 
-
 if (!$start) {
 	$z =& $report->getMonthStartArr();
-	$start = $z[count($z)-1];
+	$start = $z[0];
+}
+if (!$end || $end <= $start) {
+	$z =& $report->getMonthStartArr();
+	$end = $z[count($z)-1];
 }
 
 // Find a default SPAN value depending on the number of days.

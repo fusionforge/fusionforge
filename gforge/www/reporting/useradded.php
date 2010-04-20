@@ -40,7 +40,11 @@ $end = getIntFromRequest('end');
 
 if (!$start) {
 	$z =& $report->getMonthStartArr();
-	$start = $z[count($z)-1];
+	$start = $z[0];
+}
+if (!$end || $end <= $start) {
+	$z =& $report->getMonthStartArr();
+	$end = $z[count($z)-1];
 }
 
 session_require( array('group'=>$sys_stats_group) );
