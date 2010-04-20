@@ -134,29 +134,29 @@ function report_area_box($name='area', $selected='1', $Group=false) {
     $sys_use_pm = $Group->usesPM();
     $sys_use_frs = $Group->usesFRS();
   } else {
-    $sys_use_tracker = $GLOBALS['sys_use_tracker'];
-    $sys_use_forum = $GLOBALS['sys_use_forum'];
-    $sys_use_docman = $GLOBALS['sys_use_docman'];
-    $sys_use_pm = $GLOBALS['sys_use_pm'];
-    $sys_use_frs = $GLOBALS['sys_use_frs'];
+    $sys_use_tracker = forge_get_config('use_tracker');
+    $sys_use_forum = forge_get_config('use_forum');
+    $sys_use_docman = forge_get_config('use_docman');
+    $sys_use_pm = forge_get_config('use_pm');
+    $sys_use_frs = forge_get_config('use_frs');
   }
-  if ($sys_use_tracker) {
+  if (forge_get_config('use_tracker')) {
     $arr[]='tracker';
     $arr2[]=_('Tracker');
   }
-  if ($sys_use_forum) {
+  if (forge_get_config('use_forum')) {
     $arr[]='forum';
     $arr2[]=_('Forums');
   }
-  if ($sys_use_docman) {
+  if (forge_get_config('use_docman')) {
     $arr[]='docman';
     $arr2[]=_('Docs');
   }
-  if ($sys_use_pm) {
+  if (forge_get_config('use_pm')) {
     $arr[]='taskman';
     $arr2[]=_('Tasks');
   }
-  if ($sys_use_frs) {
+  if (forge_get_config('use_frs')) {
     $arr[]='downloads';
     $arr2[]=_('Downloads');
   }
@@ -165,7 +165,7 @@ function report_area_box($name='area', $selected='1', $Group=false) {
 }
 
 function report_tracker_box($name='datatype', $selected='1') {
-  if ($GLOBALS['sys_use_tracker']) {
+  if (forge_get_config('use_tracker')) {
     $arr[]=_('Bugs');
     $arr[]=_('Support');
     $arr[]=_('Patches');
@@ -177,15 +177,15 @@ function report_tracker_box($name='datatype', $selected='1') {
     $arr2[]='4';
     $arr2[]='0';
   }
-  if ($GLOBALS['sys_use_forum']) {
+  if (forge_get_config('use_forum')) {
     $arr[]=_('Forum Messages');
     $arr2[]='5';
   }
-  if ($GLOBALS['sys_use_pm']) {
+  if (forge_get_config('use_pm')) {
     $arr[]=_('Tasks');
     $arr2[]='6';
   }
-  if ($GLOBALS['sys_use_frs']) {
+  if (forge_get_config('use_frs')) {
     $arr[]=_('Downloads');
     $arr2[]='7';
   }

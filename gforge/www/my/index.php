@@ -41,7 +41,7 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 
 <script type="text/javascript" src="<?php echo util_make_uri ('/tabber/tabber.js'); ?>"></script>
 <div id="tabber" class="tabber tabber-user-homepage" <?php plugin_hook('call_user_js');?>>
-<?php if ($GLOBALS['sys_use_tracker']) { ?>
+<?php if (forge_get_config('use_tracker')) { ?>
 <div class="tabbertab" 
 title="<?php echo _('Assigned Artifacts'); ?>">
 	<?php
@@ -83,7 +83,7 @@ title="<?php echo _('Assigned Artifacts'); ?>">
 ?>
 </div>
 <?php } ?>
-<?php if ($GLOBALS['sys_use_pm']) { ?>
+<?php if (forge_get_config('use_pm')) { ?>
 <div class="tabbertab" 
 title="<?php echo _('Assigned Tasks'); ?>">
 <?php
@@ -137,7 +137,7 @@ title="<?php echo _('Assigned Tasks'); ?>">
 ?>
 </div>
 <?php } ?>
-<?php if ($GLOBALS['sys_use_tracker']) { ?>
+<?php if (forge_get_config('use_tracker')) { ?>
 <div class="tabbertab" 
 title="<?php echo _('Submitted Artifacts'); ?>">
 <?php
@@ -173,13 +173,13 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 ?>
 </div>
 <?php } ?>
-<?php if ($GLOBALS['sys_use_forum'] || $GLOBALS['sys_use_frs'] || $GLOBALS['sys_use_tracker']) { ?>
+<?php if (forge_get_config('use_forum') || forge_get_config('use_frs') || forge_get_config('use_tracker')) { ?>
 <div class="tabbertab" title="<?php echo _('Monitored Items'); ?>" >
 <?php
 	/*
 		Trackers that are actively monitored
 	*/
-	if ($GLOBALS['sys_use_tracker']) {
+	if (forge_get_config('use_tracker')) {
 		$last_group=0;
 
 		$display_col=array('summary'=>1,
@@ -266,7 +266,7 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 	/*
 		Forums that are actively monitored
 	*/
-	if ($GLOBALS['sys_use_forum']) {
+	if (forge_get_config('use_forum')) {
 		$last_group=0;
 		$order_name_arr=array();
 		$order_name_arr[]=_('Remove');
@@ -297,7 +297,7 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 	/*
 		Filemodules that are actively monitored
 	*/
-	if ($GLOBALS['sys_use_frs']) {
+	if (forge_get_config('use_frs')) {
 		$last_group=0;
 		$order_name_arr=array();
 		$order_name_arr[]=_('Remove');

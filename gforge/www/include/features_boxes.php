@@ -12,7 +12,7 @@ require_once $gfcommon.'include/tag_cloud.php';
 require_once $gfcommon.'include/Stats.class.php';
 
 function show_features_boxes() {
-	GLOBAL $HTML,$sys_use_ratings,$sys_use_frs,$sys_use_project_tags;
+	GLOBAL $HTML, $sys_use_project_tags;
 	
 	plugin_hook ("features_boxes_top", array());
 	$return = '<h2 class="skip">' . _('Features Boxes') . '</h2>';
@@ -25,11 +25,11 @@ function show_features_boxes() {
 		$return .= $HTML->boxTop(sprintf(_('%1$s Statistics'), forge_get_config ('forge_name')), 'Forge_Statistics');
 	}
 	$return .= show_sitestats();
-	if ($sys_use_frs) {
+	if (forge_get_config('use_frs')) {
 		$return .= $HTML->boxMiddle(_('Top Project Downloads'), 'Top_Projects_Downloads');
 		$return .= show_top_downloads();
 	}
-	if ($sys_use_ratings) {
+	if (forge_get_config('use_ratings')) {
 		$return .= $HTML->boxMiddle(_('Highest Ranked Users'), 'Highest_Ranked_Users');
 		$return .= show_highest_ranked_users();
 	}
@@ -139,15 +139,15 @@ function stats_downloads_total() {
 }
 
 function show_sitestats() {
-	global $sys_use_trove;
+
 	$gforge = new FusionForge();
 	$return = '<p>';
 	$return .= _('Hosted Projects').': ';
-	if ($sys_use_trove) {
+	if (forge_get_config('use_trove')) {
 		$return .= '<a href="softwaremap/full_list.php">';
 	}
 	$return .= '<strong>'.number_format($gforge->getNumberOfPublicHostedProjects()).'</strong>';
-	if ($sys_use_trove) {
+	if (forge_get_config('use_trove')) {
 		$return .= '</a>';
 	}
 	$return .= "</p><p>";

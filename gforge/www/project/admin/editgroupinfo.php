@@ -191,7 +191,7 @@ function c($v) {
 
 <table>
 <?php
-if($sys_use_mail) {
+if(forge_get_config('use_mail')) {
 ?>
 <tr>
 <td>
@@ -204,7 +204,7 @@ if($sys_use_mail) {
 <?php
 } 
 
-if($sys_use_survey) {
+if(forge_get_config('use_survey')) {
 ?>
 <tr>
 <td>
@@ -217,7 +217,7 @@ if($sys_use_survey) {
 <?php
 }
 
-if($sys_use_forum) {
+if(forge_get_config('use_forum')) {
 ?>
 <tr>
 <td>
@@ -230,7 +230,7 @@ if($sys_use_forum) {
 <?php
 }
 
-if($sys_use_pm) {
+if(forge_get_config('use_pm')) {
 ?>
 <tr>
 <td>
@@ -243,7 +243,7 @@ if($sys_use_pm) {
 <?php
 }
 
-if($sys_use_scm) {
+if(forge_get_config('use_scm')) {
 ?>
 <tr>
 <td>
@@ -256,7 +256,7 @@ if($sys_use_scm) {
 <?php
 }
 
-if($sys_use_news) {
+if(forge_get_config('use_news')) {
 ?>
 <tr>
 <td>
@@ -269,7 +269,7 @@ if($sys_use_news) {
 <?php
 }
 
-if($sys_use_docman) {
+if(forge_get_config('use_docman')) {
 ?>
 <tr>
 <td>
@@ -282,7 +282,7 @@ if($sys_use_docman) {
 <?php
 }
 
-if($sys_use_ftp) {
+if(forge_get_config('use_ftp')) {
 ?>
 <tr>
 <td>
@@ -295,7 +295,7 @@ if($sys_use_ftp) {
 <?php
 }
 
-if($sys_use_tracker) {
+if(forge_get_config('use_tracker')) {
 ?>
 <tr>
 <td>
@@ -308,7 +308,7 @@ if($sys_use_tracker) {
 <?php
 }
 
-if($sys_use_frs) {
+if(forge_get_config('use_frs')) {
 ?>
 <tr>
 <td>
@@ -335,7 +335,7 @@ plugin_hook("groupisactivecheckbox",$hookParams);
 
 </table>
 <?php
-	if ($sys_use_docman) {
+	if (forge_get_config('use_docman')) {
 ?>
 <p>
 <?php echo _('If you wish, you can provide default email addresses to which new submissions will be sent') ?>.<br />

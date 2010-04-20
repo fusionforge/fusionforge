@@ -53,11 +53,11 @@ class NewsSearchQuery extends SearchQuery {
 	 * @return array query+params array
 	 */
 	function getQuery() {
-		global $sys_use_fti;
+
 		
 		$qpa = db_construct_qpa () ;
 
-		if ($sys_use_fti) {
+		if (forge_get_config('use_fti')) {
 			$group_id=$this->groupId;
 
 			if (count ($this->words)) {

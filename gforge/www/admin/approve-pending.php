@@ -187,8 +187,8 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	<strong><?php echo _('License:')." "; print license_getname($row_grp['license']); ?></strong>
 
 	<?php
-		global $sys_use_shell;
-		if ($sys_use_shell) {
+
+		if (forge_get_config('use_shell')) {
 	?>  
 	<br /><strong><?php echo _('Home Box:')." "; print $row_grp['unix_box']; ?></strong>
 	<?php

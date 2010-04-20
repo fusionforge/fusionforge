@@ -89,7 +89,7 @@ $gforge_aliases = array();
 //
 //	Set up the forum aliases
 //
-if ($sys_use_forum) {
+if (forge_get_config('use_forum')) {
 	$resforum = db_query_params ('SELECT groups.unix_group_name,lower(fgl.forum_name) AS forum_name
 		FROM forum_group_list fgl,groups
 		WHERE fgl.group_id=groups.group_id
@@ -111,7 +111,7 @@ if ($sys_use_forum) {
 //
 //	Set up the tracker aliases
 //
-if ($sys_use_tracker) {
+if (forge_get_config('use_tracker')) {
 	$restracker = db_query_params ('SELECT groups.unix_group_name,lower(agl.name) AS tracker_name,group_artifact_id
 		FROM artifact_group_list agl, groups
 		WHERE agl.group_id=groups.group_id
@@ -137,7 +137,7 @@ if ($sys_use_tracker) {
 	}
 }
 
-if ($sys_use_mail && file_exists($sys_var_path.'/dumps/mailman-aliases')) {
+if (forge_get_config('use_mail') && file_exists($sys_var_path.'/dumps/mailman-aliases')) {
 	//
 	//	Read in the mailman aliases
 	//

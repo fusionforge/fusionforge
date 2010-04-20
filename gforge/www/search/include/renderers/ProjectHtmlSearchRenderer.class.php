@@ -73,12 +73,12 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 	 * redirectToResult - redirect the user  directly to the result when there is only one matching result
 	 */
 	function redirectToResult() {
-		global $sys_use_fti;
+
 		
 		$project_name = $this->getResultId('unix_group_name');
 		$project_id = $this->getResultId('group_id');
 		
-		if ($sys_use_fti) {
+		if (forge_get_config('use_fti')) {
 			// If FTI is being used, the project name returned by the query will be "<b>projectname</b>", so
 			// we remove the HTML code (otherwise we'd get an error)
 			$project_name = str_replace('<b>', '', $project_name);

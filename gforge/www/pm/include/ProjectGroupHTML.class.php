@@ -19,9 +19,9 @@ require_once $gfcommon.'pm/ProjectGroup.class.php';
 
 function pm_header($params) {
 	// XXX ogi: What to do with these?
-	global $group_id,$is_pm_page,$words,$group_project_id,$HTML,$order,$pg,$sys_use_pm;
+	global $group_id,$is_pm_page,$words,$group_project_id,$HTML,$order,$pg;
 
-	if (!$sys_use_pm) {
+	if (!forge_get_config('use_pm')) {
 		exit_disabled();
 	}
 

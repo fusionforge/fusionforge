@@ -39,7 +39,30 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 			       'sys_theme',
 			       'sys_lang',
 			       'sys_default_timezone',
-			       'sys_default_country_code') ;
+			       'sys_default_country_code',
+			       'sys_use_scm',
+			       'sys_use_tracker',
+			       'sys_use_forum',
+			       'sys_use_pm',
+			       'sys_use_docman',
+			       'sys_use_news',
+			       'sys_use_mail',
+			       'sys_use_survey',
+			       'sys_use_frs',
+			       'sys_use_fti',
+			       'sys_use_ftp',
+			       'sys_use_trove',
+			       'sys_use_snippet',
+			       'sys_use_ssl',
+			       'sys_use_people',
+			       'sys_use_shell',
+			       'sys_use_ratings',
+			       'sys_use_ftpuploads',
+			       'sys_use_gateways',
+			       'sys_use_project_vhost',
+			       'sys_use_project_database',
+			       'sys_use_project_multimedia',
+			) ;
 
 		$pattern = implode ('|', $vars) ;
 		

@@ -104,7 +104,7 @@ echo $HTML->boxTop(_('Account Maintenance'));
 </p>
 <ul>
 	<li><?php echo util_make_link_u ($u->getUnixName(),$u->getId(),'<strong>'._('View My Profile').'</strong>'); ?></li>
-<?php if($GLOBALS['sys_use_people']) { ?>
+<?php if(forge_get_config('use_people')) { ?>
 	<li><?php echo util_make_link ('/people/editprofile.php','<strong>'._('Edit My Skills Profile').'</strong>'); ?></li>
 <?php } ?>
 </ul>
@@ -243,7 +243,7 @@ echo $HTML->boxTop(_('Preferences')); ?>
 */ ?>
 
 <p />
-<?php if ($sys_use_ratings) { ?>
+<?php if (forge_get_config('use_ratings')) { ?>
 <input type="checkbox"  name="use_ratings" value="1"<?php
 	if ($u->usesRatings()) print ' checked="checked"'; ?> />
 		  <?php printf(_('Participate in peer ratings. <i>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your <a href="%s">user page</a> if you have chosen to participate in ratings.)</i>'),util_make_url_u ($u->getUnixName(),$u->getId())); 
@@ -263,7 +263,7 @@ if (getStringFromRequest('submit')) {//if this is set, then the user has issued 
 
 // ############################### Shell Account
 
-if (($u->getUnixStatus() == 'A') && ($sys_use_shell)) {
+if (($u->getUnixStatus() == 'A') && (forge_get_config('use_shell'))) {
 	echo $HTML->boxTop(_('Shell Account Information')."");
 	print '&nbsp;
 <br />'._('Shell box').': <strong>'.$u->getUnixBox().'</strong>

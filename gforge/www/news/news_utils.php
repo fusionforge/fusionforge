@@ -29,9 +29,9 @@
 */
 
 function news_header($params) {
-	global $HTML,$group_id,$news_name,$news_id,$sys_news_group,$sys_use_news;
+	global $HTML,$group_id,$news_name,$news_id,$sys_news_group;
 
-	if (!$sys_use_news) {
+	if (!forge_get_config('use_news')) {
 		exit_disabled();
 	}
 

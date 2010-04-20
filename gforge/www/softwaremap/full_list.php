@@ -55,7 +55,7 @@ if ($GLOBALS['sys_use_project_tags']) {
 	$subMenuUrl[] = '/softwaremap/tag_cloud.php';
 }
 
-if ($GLOBALS['sys_use_trove']) {
+if (forge_get_config('use_trove')) {
 	$subMenuTitle[] = _('Project Tree');
 	$subMenuUrl[] = '/softwaremap/trove_list.php';
 }

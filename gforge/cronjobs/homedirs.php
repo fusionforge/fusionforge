@@ -119,7 +119,7 @@ foreach($groups as $group) {
 	}
 	
 	//create an FTP upload dir for this project
-	if ($sys_use_ftpuploads) { 
+	if (forge_get_config('use_ftpuploads')) { 
 		if (!is_dir($sys_ftp_upload_dir.'/'.$group)) {
 			@mkdir($sys_ftp_upload_dir.'/'.$group); 
 		}

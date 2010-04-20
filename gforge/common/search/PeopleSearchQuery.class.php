@@ -44,11 +44,11 @@ class PeopleSearchQuery extends SearchQuery {
 	 * @return array query+params array
 	 */
 	function getQuery() {
-		global $sys_use_fti;
+
 		
 		$qpa = db_construct_qpa () ;
 
-		if ($sys_use_fti) {
+		if (forge_get_config('use_fti')) {
 			if (count ($this->words)) {
 				$words = $this->getFormattedWords();
 				$qpa = db_construct_qpa ($qpa,

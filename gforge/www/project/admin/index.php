@@ -69,8 +69,8 @@ project_admin_header(array('title'=>$adminheadertitle, 'group'=>$group->getID())
 
 
 <?php
-	global $sys_use_shell;
-	if ($sys_use_shell) {
+
+	if (forge_get_config('use_shell')) {
 ?> 
 <p><?php echo _('Group shell (SSH) server:&nbsp;') ?><strong><?php echo $group->getUnixName().'.'.forge_get_config('web_host'); ?></strong></p>
 <p><?php echo _('Group directory on shell server:&nbsp;') ?><br/><strong><?php echo account_group_homedir($group->getUnixName()); ?></strong></p>
@@ -190,61 +190,61 @@ function c($v) {
 ?>
 
 <?php
-if($sys_use_mail) {
+if(forge_get_config('use_mail')) {
 ?>
 <input type="hidden" name="use_mail" value="<?php echo ($group->usesMail() ? '1' : '0'); ?>" />
 <?php
 } 
 
-if($sys_use_survey) {
+if(forge_get_config('use_survey')) {
 ?>
 <input type="hidden" name="use_survey" value="<?php echo ($group->usesSurvey() ? '1' : '0'); ?>" />
 <?php
 }
 
-if($sys_use_forum) {
+if(forge_get_config('use_forum')) {
 ?>
 <input type="hidden" name="use_forum" value="<?php echo ($group->usesForum() ? '1' : '0'); ?>" />
 <?php
 }
 
-if($sys_use_pm) {
+if(forge_get_config('use_pm')) {
 ?>
 <input type="hidden" name="use_pm" value="<?php echo ($group->usesPM() ? '1' : '0'); ?>" />
 <?php
 }
 
-if($sys_use_scm) {
+if(forge_get_config('use_scm')) {
 ?>
 <input type="hidden" name="use_scm" value="<?php echo ($group->usesSCM() ? '1' : '0'); ?>" />
 <?php
 }
 
-if($sys_use_news) {
+if(forge_get_config('use_news')) {
 ?>
 <input type="hidden" name="use_news" value="<?php echo ($group->usesNews() ? '1' : '0'); ?>" />
 <?php
 }
 
-if($sys_use_docman) {
+if(forge_get_config('use_docman')) {
 ?>
 <input type="hidden" name="use_docman" value="<?php echo ($group->usesDocman() ? '1' : '0'); ?>" />
 <?php
 }
 
-if($sys_use_ftp) {
+if(forge_get_config('use_ftp')) {
 ?>
 <input type="hidden" name="use_ftp" value="<?php echo ($group->usesFTP() ? '1' : '0'); ?>" />
 <?php
 }
 
-if($sys_use_tracker) {
+if(forge_get_config('use_tracker')) {
 ?>
 <input type="hidden" name="use_tracker" value="<?php echo ($group->usesTracker() ? '1' : '0'); ?>" />
 <?php
 }
 
-if($sys_use_frs) {
+if(forge_get_config('use_frs')) {
 ?>
 <input type="hidden" name="use_frs" value="<?php echo ($group->usesFRS() ? '1' : '0'); ?>" />
 <?php } ?>

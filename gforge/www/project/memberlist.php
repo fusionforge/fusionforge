@@ -51,7 +51,7 @@ $title_arr=array();
 $title_arr[]=_('Member');
 $title_arr[]=_('Username');
 $title_arr[]=_('Role/Position');
-if($GLOBALS['sys_use_people']) {
+if(forge_get_config('use_people')) {
 	$title_arr[]=_('Skills');
 }
 
@@ -93,7 +93,7 @@ while ( $row_memb=db_fetch_array($res_memb) ) {
         echo '</span>';*/
 	echo '<td align="center">'.util_make_link_u ($row_memb['user_name'],$row_memb['user_id'],$row_memb['user_name']).'</td>
 	<td align="center">'.$row_memb['role'].'</td>';
-	if($GLOBALS['sys_use_people']) {
+	if(forge_get_config('use_people')) {
 		echo '<td align="center">'.util_make_link ('/people/viewprofile.php?user_id='.$row_memb['user_id'],_('View')).'</td>';
 	}
 	print '</div>';

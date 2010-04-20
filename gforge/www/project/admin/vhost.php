@@ -28,7 +28,7 @@ require_once('../../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
 
-if (!$sys_use_project_vhost) {
+if (!forge_get_config('use_project_vhost')) {
 	exit_disabled();
 }
 

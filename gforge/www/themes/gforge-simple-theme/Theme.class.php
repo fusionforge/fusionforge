@@ -338,7 +338,7 @@ function listTableBottom() {
 
 
 function outerTabs($params) {
-	global $sys_use_trove,$sys_use_snippet,$sys_use_people;
+
 
 	$selected=0;
 	$TABS_DIRS[]=util_make_url ('/') ;
@@ -352,7 +352,7 @@ function outerTabs($params) {
 		$selected=count($TABS_DIRS)-1;
 	}
 
-	if ($sys_use_trove) {
+	if (forge_get_config('use_trove')) {
 		$TABS_IDS[]='softwaremap';
 		$TABS_DIRS[]=util_make_url ('/softwaremap/') ;
 		$TABS_TITLES[]=_('Project&nbsp;Tree');
@@ -360,7 +360,7 @@ function outerTabs($params) {
 			$selected=count($TABS_DIRS)-1;
 		}
 	}
-	if ($sys_use_snippet) {
+	if (forge_get_config('use_snippet')) {
 		$TABS_IDS[]='snippet';
 		$TABS_DIRS[]=util_make_url ('/snippet/') ;
 		$TABS_TITLES[]=_('Code&nbsp;Snippets');
@@ -368,7 +368,7 @@ function outerTabs($params) {
 			$selected=count($TABS_DIRS)-1;
 		}
 	}
-	if ($sys_use_people) {
+	if (forge_get_config('use_people')) {
 		$TABS_IDS[]='people';
 		$TABS_DIRS[]=util_make_url ('/people/') ;
 		$TABS_TITLES[]=_('Project&nbsp;Openings');

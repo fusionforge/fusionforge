@@ -48,9 +48,9 @@ ORDER BY groupname',
 
 function docman_header($title,$pagehead,$style='xyz') {
 	
-	global $group_id, $HTML, $sys_use_docman;
+	global $group_id, $HTML;
 
-	if (!$sys_use_docman) {
+	if (!forge_get_config('use_docman')) {
 		exit_disabled();
 	}
 

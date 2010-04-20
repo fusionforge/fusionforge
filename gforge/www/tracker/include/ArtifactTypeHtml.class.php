@@ -29,8 +29,8 @@ class ArtifactTypeHtml extends ArtifactType {
 	}
 
 	function header($params) {
-		global $HTML, $sys_use_tracker;
-		if (!$sys_use_tracker) {
+		global $HTML;
+		if (!forge_get_config('use_tracker')) {
 			exit_disabled();
 		}
 		$group_id= $this->Group->getID();

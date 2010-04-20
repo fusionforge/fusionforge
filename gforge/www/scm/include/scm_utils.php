@@ -25,8 +25,8 @@
  */
 
 function scm_header($params) {
-	global $HTML, $sys_use_scm;
-	if (!$sys_use_scm) {
+	global $HTML;
+	if (!forge_get_config('use_scm')) {
 		exit_disabled();
 	}
 

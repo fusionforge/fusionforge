@@ -25,12 +25,12 @@ require_once $gfwww.'forum/admin/ForumAdmin.class.php';
 require_once $gfwww.'forum/include/AttachManager.class.php';
 
 function forum_header($params) {
-	global $HTML,$group_id,$forum_name,$forum_id,$sys_news_group,$f,$sys_use_forum,$sys_use_trove,$group_forum_id;
+	global $HTML,$group_id,$forum_name,$forum_id,$sys_news_group,$f,$group_forum_id;
 
 	if ($group_forum_id) {
 		$forum_id=$group_forum_id;
 	}
-	if (!$sys_use_forum) {
+	if (!forge_get_config('use_forum')) {
 		exit_disabled();
 	}
 
@@ -88,7 +88,7 @@ function forum_header($params) {
 				// display classification
 				if ($params['group'] == $sys_news_group) { 
 				   print stripslashes(trove_news_getcatlisting(db_result($result,0,'forum_id'),0,1));
-				} elseif ($sys_use_trove) {
+				} elseif (forge_get_config('use_trove')) {
 				   print stripslashes(trove_getcatlisting($params['group'],0,1));
 				}
 			}

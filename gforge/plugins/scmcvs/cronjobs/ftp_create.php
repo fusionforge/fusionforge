@@ -31,7 +31,7 @@ require $gfcommon.'include/cron_utils.php';
 
 $err = '';
 
-if ($sys_use_ftpuploads) { 	
+if (forge_get_config('use_ftpuploads')) { 	
 	//
 	//	Add the groups from the gforge database
 	//

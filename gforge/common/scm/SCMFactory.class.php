@@ -41,10 +41,10 @@ class SCMFactory extends Error {
 	 *	@return	boolean	success.
 	 */
 	function SCMFactory() {
-		global $sys_use_scm;
+
 
 		$this->Error();
-		if (!$sys_use_scm) {
+		if (!forge_get_config('use_scm')) {
 			$this->setError('SCMFactory::sys_use_scm');
 			return false;
 		}

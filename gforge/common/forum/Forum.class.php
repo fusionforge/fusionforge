@@ -407,15 +407,15 @@ class Forum extends Error {
 	 * @return string return email address
 	 */
 	function getReturnEmailAddress() {
-		global $sys_use_gateways;
+
 		$address = '';
-		if($sys_use_gateways) {
+		if(forge_get_config('use_gateways')) {
 			$address .= $this->getUnixName();
 		} else {
 			$address .= 'noreply';
 		}
 		$address .= '@';
-		if($sys_use_gateways && isset($GLOBALS['sys_forum_return_domain'])) {
+		if(forge_get_config('use_gateways') && isset($GLOBALS['sys_forum_return_domain'])) {
 			$address .= $GLOBALS['sys_forum_return_domain'];
 		} else {
 			$address .= forge_get_config('web_host');

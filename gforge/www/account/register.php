@@ -52,7 +52,7 @@ $title = getStringFromRequest('title');
 $ccode = getStringFromRequest('ccode');
 $accept_conditions = getIntFromRequest ('accept_conditions');
 
-if ($sys_use_ssl && !session_issecure()) {
+if (forge_get_config('use_ssl') && !session_issecure()) {
 	//force use of SSL for login
 	header('Location: https://'.getStringFromServer('HTTP_HOST').getStringFromServer('REQUEST_URI'));
 }

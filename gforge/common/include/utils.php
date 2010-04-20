@@ -1010,7 +1010,7 @@ function normalized_urlprefix () {
  * @return string URL
  */
 function util_make_url ($path) {
-	if ($GLOBALS['sys_use_ssl']) 
+	if (forge_get_config('use_ssl')) 
 		$url = "https://" ;
 	else
 		$url = "http://" ;

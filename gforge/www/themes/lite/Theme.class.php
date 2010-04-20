@@ -251,28 +251,28 @@ if (isset($params['group']) && $params['group']) {
 	}
 
        function mainMenu($params) {
-		global $sys_use_trove,$sys_use_snippet,$sys_use_people;
+
 		
 		$TABS_DIRS[]='/';
 		$TABS_DIRS[]='/my/';
-		if ($sys_use_trove) {
+		if (forge_get_config('use_trove')) {
 		        $TABS_DIRS[]='/softwaremap/';
 		}
-		if ($sys_use_snippet) {
+		if (forge_get_config('use_snippet')) {
 		        $TABS_DIRS[]='/snippet/';
 		}
-		if ($sys_use_people) {
+		if (forge_get_config('use_people')) {
 		        $TABS_DIRS[]='/people/';
 		}
 		$TABS_TITLES[]=_('Home');
 		$TABS_TITLES[]=_('My&nbsp;Page');
-		if ($sys_use_trove) {
+		if (forge_get_config('use_trove')) {
 		        $TABS_TITLES[]=_('Projects');
 		}
-		if ($sys_use_snippet) {
+		if (forge_get_config('use_snippet')) {
 		        $TABS_TITLES[]=_('Code&nbsp;Snippets');
 		}
-		if ($sys_use_people) {
+		if (forge_get_config('use_people')) {
 		        $TABS_TITLES[]=_('Project&nbsp;Openings');
 		}
 		

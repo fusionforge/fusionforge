@@ -39,7 +39,7 @@ echo $HTML->boxTop(_('Personal Information'), _('Personal Information')); ?>
 //echo '</div>';
 	}
 ?>
-		</strong><?php if($GLOBALS['sys_use_people']) { ?>( <?php echo util_make_link ('/people/viewprofile.php?user_id='.$user_id,'<strong>'._('Skills Profile').'</strong>'); ?> )<?php } ?>
+		</strong><?php if(forge_get_config('use_people')) { ?>( <?php echo util_make_link ('/people/viewprofile.php?user_id='.$user_id,'<strong>'._('Skills Profile').'</strong>'); ?> )<?php } ?>
 	</td>
 </tr>
 
@@ -124,7 +124,7 @@ echo $user->getPhone();
 </table>
 
 	<?php
-	if ($sys_use_ratings) {
+	if (forge_get_config('use_ratings')) {
 		echo $HTML->boxMiddle(_('Peer Rating'), _('Peer Rating'));
         echo '<table class="my-layout-table" id="user-profile-rating">';
 		if ($user->usesRatings()) {
@@ -227,7 +227,7 @@ echo "</div>\n"; // prefixes
 echo "</div>\n"; // end of about=""
 
 $me = session_get_user(); 
-if ($sys_use_ratings) {
+if (forge_get_config('use_ratings')) {
 if ($user->usesRatings() && (!$me || $me->usesRatings())) { 
 	printf(_('<p>If you are familiar with this user, please take a moment to rate him/her on the following criteria. Keep in mind, that your rating will be visible to the user and others.</p><p>The %1$s Peer Rating system is based on concepts from <a href="http://www.advogato.com/">Advogato.</a> The system has been re-implemented and expanded in a few ways.</p>'), forge_get_config ('forge_name'));
 ?>

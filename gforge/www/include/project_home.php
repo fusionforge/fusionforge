@@ -96,7 +96,7 @@ if ($GLOBALS['sys_use_project_tags']) {
 	}
 }
 
-if($GLOBALS['sys_use_trove']) {
+if(forge_get_config('use_trove')) {
 	print "<br />\n";
 	print stripslashes(trove_getcatlisting($group_id,0,1,1));
 }
@@ -119,13 +119,13 @@ if ($project->usesStats()) {
 	}
 	print '<br />'.sprintf (_('Activity Ranking: %d'), $actv_res) ;
 	print '<br />'.sprintf(_('View project <a href="%1$s" >Statistics</a>'),util_make_url ('/project/stats/?group_id='.$group_id));
-	if ( ($project->usesTracker() && $GLOBALS['sys_use_tracker']) || ($project->usesPm() && $GLOBALS['sys_use_pm']) ) {
+	if ( ($project->usesTracker() && forge_get_config('use_tracker')) || ($project->usesPm() && forge_get_config('use_pm')) ) {
 		print sprintf(_(' or <a href="%1$s">Activity</a>'),util_make_url ('/project/report/?group_id='.$group_id));
 	}
 	print '<br />'.sprintf(_('View list of <a href="%1$s">RSS feeds</a> available for this project.'), util_make_url ('/export/rss_project.php?group_id='.$group_id)). '&nbsp;' . html_image('ic/rss.png',16,16,array());
 }
 
-if($GLOBALS['sys_use_people']) {
+if(forge_get_config('use_people')) {
 	$jobs_res = db_query_params ('SELECT name 
 					FROM people_job,people_job_category 
 					WHERE people_job.category_id=people_job_category.category_id 

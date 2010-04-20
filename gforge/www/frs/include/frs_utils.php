@@ -64,12 +64,12 @@ function frs_admin_footer() {
 }
 
 function frs_header($params) {
-	global $group_id,$HTML,$sys_use_frs;
+	global $group_id,$HTML;
 
 	/*
 		Does this site use FRS?
 	*/
-	if (!$sys_use_frs) {
+	if (!forge_get_config('use_frs')) {
 		exit_disabled();
 	}
 

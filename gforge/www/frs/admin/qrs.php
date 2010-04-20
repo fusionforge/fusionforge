@@ -65,7 +65,7 @@ if (getStringFromRequest('submit')) {
 	$preformatted = getStringFromRequest('preformatted');
 	$ftp_filename = getStringFromRequest('ftp_filename');
 	$feedback = '' ;
-	if ($sys_use_ftpuploads && $ftp_filename && util_is_valid_filename($ftp_filename) && is_file($upload_dir.'/'.$ftp_filename)) {
+	if (forge_get_config('use_ftpuploads') && $ftp_filename && util_is_valid_filename($ftp_filename) && is_file($upload_dir.'/'.$ftp_filename)) {
 		//file was uploaded already via ftp
 		//use setuid prog to chown it
 		//$cmd = escapeshellcmd("$sys_ftp_upload_chowner $ftp_filename");
@@ -110,7 +110,7 @@ if (getStringFromRequest('submit')) {
 		} elseif ($frsp->isError()) {
 			exit_error('Error',$frsp->getErrorMessage());
 		} else {
-			if ($userfile && (is_uploaded_file($userfile['tmp_name']) || ($sys_use_ftpuploads && $ftp_filename))) {
+			if ($userfile && (is_uploaded_file($userfile['tmp_name']) || (forge_get_config('use_ftpuploads') && $ftp_filename))) {
 				//
 				//	Create a new FRSRelease in the db
 				//
@@ -242,7 +242,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 		<?php echo _('NOTE: In some browsers you must select the file in the file-upload dialog and click "OK". Double-clicking doesn\'t register the file.')?>
 		</span><br />
 		<?php echo _('Upload a new file') ?>: <input type="file" name="userfile"  size="30" />
-		<?php if ($sys_use_ftpuploads) {
+		<?php if (forge_get_config('use_ftpuploads')) {
 
 			echo '<p>';
 			printf(_('Alternatively, you can use FTP to upload a new file at %1$s'), $sys_ftp_upload_host).'<br />';

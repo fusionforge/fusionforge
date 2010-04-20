@@ -422,9 +422,9 @@ class ArtifactType extends Error {
 	 * @return string return email address
 	 */
 	function getReturnEmailAddress() {
-		global $sys_use_gateways;
+
 		$address = '';
-		if($sys_use_gateways) {
+		if(forge_get_config('use_gateways')) {
 			$address .= strtolower($this->getUnixName());
 		} else {
 			$address .= 'noreply';

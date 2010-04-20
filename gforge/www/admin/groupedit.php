@@ -156,8 +156,8 @@ if($status == 'P') {
 </tr>
 
 <?php
-	global $sys_use_shell;
-	if ($sys_use_shell) {
+
+	if (forge_get_config('use_shell')) {
 ?> 
 <tr>
 <td>

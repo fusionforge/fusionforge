@@ -31,9 +31,9 @@ class SurveyHTML extends Error {
 	 * Show survey header 
 	 */
 	function header($params) {
-		global $group_id,$is_admin_page,$HTML,$sys_use_survey;
+		global $group_id,$is_admin_page,$HTML;
 
-		if (!$sys_use_survey) {
+		if (!forge_get_config('use_survey')) {
 			exit_disabled();
 		}
 		

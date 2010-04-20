@@ -664,7 +664,7 @@ class ForumMessage extends Error {
 			}
 
 			$body = sprintf(_("\nRead and respond to this message at: \n%s"), util_make_url ('/forum/message.php?msg_id='.$this->getID()));
-			if ($GLOBALS['sys_use_mail']) {
+			if (forge_get_config('use_mail')) {
 				$body .= stripcslashes(sprintf(_('
 Or reply to this e-mail entering your response between the following markers: 
 %1$s

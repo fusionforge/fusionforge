@@ -64,13 +64,13 @@ if (getStringFromRequest('submit')) {
 	$is_public = getIntFromRequest('is_public');
 	$feedback = "";
 
-	if ($sys_use_scm && !$scm) {
+	if (forge_get_config('use_scm') && !$scm) {
 		form_release_key(getStringFromRequest("form_key"));
 		// $feedback .= _('Site has SCM enabled, but no SCM was chosen.');
 	} else {
 		$scm_host = '';
 		$plugin = false ;
-		if ($sys_use_scm && $scm && $scm != 'noscm') {
+		if (forge_get_config('use_scm') && $scm && $scm != 'noscm') {
 			$plugin = plugin_get_object($scm);
 			if ($plugin) {
 				$scm_host = $plugin->getDefaultServer();
@@ -93,7 +93,7 @@ if (getStringFromRequest('submit')) {
 			$scm_host,
 			$is_public
 		);
-		if ($res && $sys_use_scm && $plugin) {
+		if ($res && forge_get_config('use_scm') && $plugin) {
 			$group->setUsesSCM (true) ;
 			$res = $group->setPluginUse ($scm, true);
 		} else {
@@ -192,7 +192,7 @@ if ( $sys_project_reg_autoapprove != true ) {
 <?php
 	$SCMFactory = new SCMFactory() ;
 $scm_plugins=$SCMFactory->getSCMs() ;
-if ($sys_use_scm && count($scm_plugins) > 0) {	
+if (forge_get_config('use_scm') && count($scm_plugins) > 0) {	
 	$index++;
 	echo '<h3>'.$index.'. '._('Source Code').'</h3>';
 	echo _('<p>You can choose among different SCM for your project, but just one (or none at all). Please select the SCM system you want to use.</p>')."\n";

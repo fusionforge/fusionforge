@@ -158,8 +158,8 @@ if (getStringFromRequest('step2')) {
 	$group_unix_name=group_getunixname($group_id);
 	$ftp_filename = getStringFromRequest('ftp_filename');
 
-	if (($userfile && is_uploaded_file($userfile['tmp_name'])) || ($sys_use_ftpuploads && $ftp_filename)){
-		if ($sys_use_ftpuploads && $ftp_filename && util_is_valid_filename($ftp_filename) && is_file($upload_dir.'/'.$ftp_filename)) {
+	if (($userfile && is_uploaded_file($userfile['tmp_name'])) || (forge_get_config('use_ftpuploads') && $ftp_filename)){
+		if (forge_get_config('use_ftpuploads') && $ftp_filename && util_is_valid_filename($ftp_filename) && is_file($upload_dir.'/'.$ftp_filename)) {
 			//file was uploaded already via ftp
 			//use setuid prog to chown it
 			//$cmd = escapeshellcmd("$sys_ftp_upload_chowner $ftp_filename");
@@ -311,7 +311,7 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 <input type="hidden" name="step2" value="1" />
 <fieldset><legend><strong><?php echo _("File Name") ?></strong></legend>
 <?php echo _("Upload a new file") ?>: <input type="file" name="userfile"  size="30" />
-<?php if ($sys_use_ftpuploads) {
+<?php if (forge_get_config('use_ftpuploads')) {
 	echo '<p>';
 	printf(_('Alternatively, you can use FTP to upload a new file at %1$s'), $sys_ftp_upload_host).'<br />';
 	echo _('Choose an FTP file instead of uploading:').'<br />';

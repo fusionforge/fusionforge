@@ -42,7 +42,7 @@ $err='';
 /*
     Create an aggregation table that includes counts of forum messages
 */
-if ($sys_use_forum) {
+if (forge_get_config('use_forum')) {
 	db_begin();
 
 	db_query_params ('LOCK TABLE forum_agg_msg_count IN ACCESS EXCLUSIVE MODE',
@@ -76,7 +76,7 @@ GROUP BY fgl.group_forum_id',
 /*
 	Create an aggregation table that includes counts of artifacts
 */
-if ($sys_use_tracker) {
+if (forge_get_config('use_tracker')) {
 	db_begin();
 
 	db_query_params ('LOCK TABLE artifact_counts_agg IN ACCESS EXCLUSIVE MODE',
@@ -119,7 +119,7 @@ $res=db_query_params ('DELETE FROM project_sums_agg',
 /*
 	Get counts of mailing lists
 */
-if ($sys_use_mail) {
+if (forge_get_config('use_mail')) {
 	$res=db_query_params ('INSERT INTO project_sums_agg
 SELECT group_id,$1 AS type,count(*) AS count
 FROM mail_group_list WHERE is_public = 1
@@ -131,7 +131,7 @@ GROUP BY group_id,type',
 /*
 	Get counts of surveys
 */
-if ($sys_use_survey) {
+if (forge_get_config('use_survey')) {
 	$res=db_query_params ('INSERT INTO project_sums_agg
 SELECT group_id,$1 AS type,count(*) AS count
 FROM surveys
@@ -146,7 +146,7 @@ GROUP BY group_id,type',
 /*
 	Forum message count
 */
-if ($sys_use_forum) {
+if (forge_get_config('use_forum')) {
 	$res=db_query_params ('INSERT INTO project_sums_agg
 SELECT forum_group_list.group_id,$1 AS type, count(forum.msg_id) AS count
 FROM forum,forum_group_list

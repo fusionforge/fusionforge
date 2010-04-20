@@ -62,17 +62,17 @@ function project_admin_header($params) {
 	$labels[] = _('Users');
 	$labels[] = _('Tools');
 	$labels[] = _('Project History');
-	if($GLOBALS['sys_use_people']) {
+	if(forge_get_config('use_people')) {
 		$labels[] = _('Post Jobs');
 		$labels[] = _('Edit Jobs');
 	}
-	if($GLOBALS['sys_use_project_multimedia']) {
+	if(forge_get_config('use_project_multimedia')) {
 		$labels[] = _('Edit Multimedia Data');
 	}
-	if($GLOBALS['sys_use_project_vhost']) {
+	if(forge_get_config('use_project_vhost')) {
 		$labels[] = _('VHOSTs');
 	}
-	if($GLOBALS['sys_use_project_database']) {
+	if(forge_get_config('use_project_database')) {
 		$labels[] = _('Database Admin');
 	}
 	if ($project->usesStats()) {
@@ -84,17 +84,17 @@ function project_admin_header($params) {
 	$links[] = '/project/admin/users.php?group_id='.$group_id;
 	$links[] = '/project/admin/tools.php?group_id='.$group_id;
 	$links[] = '/project/admin/history.php?group_id='.$group_id;
-	if($GLOBALS['sys_use_people']) {
+	if(forge_get_config('use_people')) {
 		$links[] = '/people/createjob.php?group_id='.$group_id;
 		$links[] = '/people/?group_id='.$group_id;
 	}
-	if($GLOBALS['sys_use_project_multimedia']) {
+	if(forge_get_config('use_project_multimedia')) {
 		$links[] = '/project/admin/editimages.php?group_id='.$group_id;
 	}
-	if($GLOBALS['sys_use_project_vhost']) {
+	if(forge_get_config('use_project_vhost')) {
 		$links[] = '/project/admin/vhost.php?group_id='.$group_id;
 	}
-	if($GLOBALS['sys_use_project_database']) {
+	if(forge_get_config('use_project_database')) {
 		$links[] = '/project/admin/database.php?group_id='.$group_id;
 	}
 	$links[] = '/project/stats/?group_id='.$group_id;

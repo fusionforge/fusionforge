@@ -167,14 +167,14 @@ class SearchQuery extends Error {
 	 * executeQuery - execute the SQL query to get the results
 	 */ 
 	function executeQuery() {
-		global $sys_use_fti;
+
 		if($this->searchId) {
 			$qpa = $this->getSearchByIdQuery();
 		} else {
 			$qpa = $this->getQuery();
 		}
 
-		if ($sys_use_fti) {
+		if (forge_get_config('use_fti')) {
 			db_query_params ('select set_curcfg($1)',
 					 array ('default'));
 		}

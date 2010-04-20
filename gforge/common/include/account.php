@@ -45,7 +45,7 @@ function account_pwvalid($pw) {
  *
  */
 function account_namevalid($name) {
-	global $sys_use_shell;
+
 
 	// no spaces
 	if (strrpos($name,' ') > 0) {
@@ -75,7 +75,7 @@ function account_namevalid($name) {
 		$GLOBALS['register_error'] = _('Name is reserved.');
 		return 0;
 	}
-	if ($sys_use_shell) {
+	if (forge_get_config('use_shell')) {
 		if ( exec("getent passwd $name") != "" ){
 			$GLOBALS['register_error'] = _('That username already exists.');
 			return 0;

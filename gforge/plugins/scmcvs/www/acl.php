@@ -25,7 +25,7 @@ require_once '../../../www/env.inc.php';
 require_once $gfcommon.'include/escapingUtils.php';
 require_once $gfwww.'include/squal_pre.php';
 
-if (!$sys_use_scm) {
+if (!forge_get_config('use_scm')) {
 	exit_disabled();
 }
 

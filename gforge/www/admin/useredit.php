@@ -60,7 +60,7 @@ if (getStringFromRequest('delete_user') != '' && getStringFromRequest('confirm_d
 
     //XXX use_shell
 	if (!$u->setEmail($email)
-		|| ($sys_use_shell && !$u->setShell($shell))
+		|| (forge_get_config('use_shell') && !$u->setShell($shell))
 		|| !$u->setStatus($status)) {
 		exit_error(
 			_('Could Not Complete Operation'),
@@ -151,9 +151,9 @@ if ($u->getStatus() == 'D') {
 </tr>
 
 <?php 
-	global $sys_use_shell;
 
-	if ($sys_use_shell) {
+
+	if (forge_get_config('use_shell')) {
 ?>    
 <tr>
 	<td>
@@ -209,9 +209,9 @@ if ($u->getStatus() == 'D') {
 </p>
 
 <?php 
-	global $sys_use_shell;
 
-	if ($sys_use_shell) {
+
+	if (forge_get_config('use_shell')) {
 ?>    
 <p>
 <sup>2</sup><?php echo _('Unix status updated mirroring web status, unless it has value \'No unix account (N)\''); ?>

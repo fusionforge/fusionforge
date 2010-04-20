@@ -36,7 +36,7 @@ require_once $gfwww.'tracker/include/ArtifactHtml.class.php';
 require_once $gfcommon.'tracker/ArtifactCanned.class.php';
 require_once $gfcommon.'tracker/ArtifactTypeFactory.class.php';
 
-if (!$sys_use_tracker) {
+if (!forge_get_config('use_tracker')) {
 	exit_disabled();
 }
 

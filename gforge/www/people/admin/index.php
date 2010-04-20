@@ -27,7 +27,7 @@ require_once('../../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once $gfwww.'people/people_utils.php';
 
-if (!$sys_use_people) {
+if (!forge_get_config('use_people')) {
 	exit_disabled();
 }
 

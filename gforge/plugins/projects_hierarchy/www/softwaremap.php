@@ -15,7 +15,7 @@ require_once $gfwww.'include/pre.php';
 require_once $gfwww.'include/trove.php';
 require_once $gfwww.'docman/include/doc_utils.php';
 
-if (!$sys_use_trove) {
+if (!forge_get_config('use_trove')) {
 	exit_disabled();
 }
 

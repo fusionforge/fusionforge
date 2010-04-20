@@ -20,7 +20,7 @@ require_once $gfwww.'include/pre.php';
 require_once $gfwww.'scm/include/scm_utils.php';
 require_once $gfwww.'scm/include/viewvc_utils.php';
 
-if (!$sys_use_scm) {
+if (!forge_get_config('use_scm')) {
 	exit_disabled();
 }
 

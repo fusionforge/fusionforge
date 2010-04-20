@@ -66,11 +66,11 @@ class TrackersSearchQuery extends SearchQuery {
 	 * @return array query+params array
 	 */
 	function getQuery() {
-		global $sys_use_fti;
+
 		
 		$qpa = db_construct_qpa () ;
 
-		if ($sys_use_fti) {
+		if (forge_get_config('use_fti')) {
 			if (count ($this->words)) {
 				$qpa = db_construct_qpa ($qpa,
 							 'SELECT DISTINCT x.* FROM (SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.summary, artifact.open_date, users.realname, artifact_group_list.name, (rank(artifact_idx.vectors, q)+rank(artifact_message_idx.vectors, q)) AS rank FROM artifact LEFT OUTER JOIN artifact_message USING (artifact_id), users, artifact_group_list, to_tsquery($1) q, artifact_idx, artifact_message_idx WHERE users.user_id = artifact.submitted_by AND artifact_idx.artifact_id = artifact.artifact_id AND artifact_message_idx.id = artifact_message.id AND artifact_message_idx.artifact_id = artifact_message_idx.artifact_id AND artifact_group_list.group_artifact_id = artifact.group_artifact_id AND artifact_group_list.group_id = $2 ',

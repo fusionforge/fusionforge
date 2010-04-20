@@ -166,7 +166,7 @@ while ( $row_memb=db_fetch_array($res_memb) ) {
 			</td>
 			<td align="center">'.$row_memb['role'].'
 			</td>';
-	if($GLOBALS['sys_use_people']) {
+	if(forge_get_config('use_people')) {
 		echo '
 			<td align="center">'.util_make_link('/people/viewprofile.php?user_id='.$row_memb['user_id'],_('View')).'
 			</td>';

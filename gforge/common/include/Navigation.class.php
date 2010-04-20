@@ -215,7 +215,7 @@ class Navigation extends Error {
 	 *  number of the selected menu entry.
 	 */
         function getSiteMenu() {
-                global $sys_use_trove,$sys_use_snippet,$sys_use_people,$sys_use_project_tags, $sys_use_project_full_list;
+                global $sys_use_project_tags, $sys_use_project_full_list;
 
                 $request_uri = getStringFromServer('REQUEST_URI');
                 
@@ -240,7 +240,7 @@ class Navigation extends Error {
                         $selected=count($menu['urls'])-1;
                 }
                 
-		if ($sys_use_trove || $sys_use_project_tags || $sys_use_project_full_list) {
+		if (forge_get_config('use_trove') || $sys_use_project_tags || $sys_use_project_full_list) {
 			$menu['titles'][] = _('Projects');
 			$menu['urls'][] = util_make_url ('/softwaremap/') ;
 			if (strstr($request_uri, util_make_uri('/softwaremap/'))) {
@@ -248,7 +248,7 @@ class Navigation extends Error {
 			}
 		}
                  
-		if ($sys_use_snippet) {
+		if (forge_get_config('use_snippet')) {
 			$menu['titles'][] = _('Code&nbsp;Snippets');
 			$menu['urls'][] = util_make_url ('/snippet/') ;
 			if (strstr($request_uri, util_make_uri('/snippet/'))) {
@@ -256,7 +256,7 @@ class Navigation extends Error {
 			}
 		}
                  
-		if ($sys_use_people) {
+		if (forge_get_config('use_people')) {
 			$menu['titles'][] = _('Project&nbsp;Openings');
 			$menu['urls'][] = util_make_url ('/people/') ;
 			if (strstr($request_uri, util_make_uri('/people/'))) {

@@ -18,7 +18,7 @@ require_once('TroveCategory.class.php');
 require_once('TroveCategoryFactory.class.php');
 require_once('include/utils.php');
 
-if (!$sys_use_trove) {
+if (!forge_get_config('use_trove')) {
 	exit_disabled();
 }
 

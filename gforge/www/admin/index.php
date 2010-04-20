@@ -162,13 +162,13 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	<?php plugin_hook("site_admin_option_hook", false); ?>
 </ul>
 
-<?php if($GLOBALS['sys_use_project_database'] || $GLOBALS['sys_use_project_vhost']) { ?>
+<?php if(forge_get_config('use_project_database') || forge_get_config('use_project_vhost')) { ?>
 <ul>
-	<?php if($GLOBALS['sys_use_project_vhost']) { ?>
+	<?php if(forge_get_config('use_project_vhost')) { ?>
 		<li><a href="vhost.php"><?php echo _('Virtual Host Admin Tool'); ?></a></li>
 	<?php
 	}
-	if($GLOBALS['sys_use_project_database']) { ?>
+	if(forge_get_config('use_project_database')) { ?>
 		<li><a href="database.php"><?php echo _('Project Database Administration'); ?></a></li>
 	<?php } ?>
 </ul>

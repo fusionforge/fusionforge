@@ -1043,8 +1043,8 @@ class Group extends Error {
 	 *	@return	boolean	uses_scm.
 	 */
 	function usesSCM() {
-		global $sys_use_scm;
-		if ($sys_use_scm) {
+
+		if (forge_get_config('use_scm')) {
 			return $this->data_array['use_scm'];
 		} else {
 			return false;
@@ -1057,8 +1057,8 @@ class Group extends Error {
 	 *	@return	boolean uses_mail.
 	 */
 	function usesMail() {
-		global $sys_use_mail;
-		if ($sys_use_mail) {
+
+		if (forge_get_config('use_mail')) {
 			return $this->data_array['use_mail'];
 		} else {
 			return false;
@@ -1071,8 +1071,8 @@ class Group extends Error {
 	 *	@return	boolean	uses_news.
 	 */
 	function usesNews() {
-		global $sys_use_news;
-		if ($sys_use_news) {
+
+		if (forge_get_config('use_news')) {
 			return $this->data_array['use_news'];
 		} else {
 			return false;
@@ -1085,8 +1085,8 @@ class Group extends Error {
 	 *  @return	boolean	uses_forum.
 	 */
 	function usesForum() {
-		global $sys_use_forum;
-		if ($sys_use_forum) {
+
+		if (forge_get_config('use_forum')) {
 			return $this->data_array['use_forum'];
 		} else {
 			return false;
@@ -1108,8 +1108,8 @@ class Group extends Error {
 	 *  @return	boolean	uses_frs.
 	 */
 	function usesFRS() {
-		global $sys_use_frs;
-		if ($sys_use_frs) {
+
+		if (forge_get_config('use_frs')) {
 			return $this->data_array['use_frs'];
 		} else {
 			return false;
@@ -1122,8 +1122,8 @@ class Group extends Error {
 	 *  @return	boolean	uses_tracker.
 	 */
 	function usesTracker() {
-		global $sys_use_tracker;
-		if ($sys_use_tracker) {
+
+		if (forge_get_config('use_tracker')) {
 			return $this->data_array['use_tracker'];
 		} else {
 			return false;
@@ -1136,8 +1136,8 @@ class Group extends Error {
 	 *  @return	boolean	uses_docman.
 	 */
 	function usesDocman() {
-		global $sys_use_docman;
-		if ($sys_use_docman) {
+
+		if (forge_get_config('use_docman')) {
 			return $this->data_array['use_docman'];
 		} else {
 			return false;
@@ -1150,8 +1150,8 @@ class Group extends Error {
 	 *  @return	boolean	uses_ftp.
 	 */
 	function usesFTP() {
-		global $sys_use_ftp;
-		if ($sys_use_ftp) {
+
+		if (forge_get_config('use_ftp')) {
 			return $this->data_array['use_ftp'];
 		} else {
 			return false;
@@ -1164,8 +1164,8 @@ class Group extends Error {
 	 *  @return	boolean	uses_survey.
 	 */
 	function usesSurvey() {
-		global $sys_use_survey;
-		if ($sys_use_survey) {
+
+		if (forge_get_config('use_survey')) {
 			return $this->data_array['use_survey'];
 		} else {
 			return false;
@@ -1178,8 +1178,8 @@ class Group extends Error {
 	 *  @return	boolean	uses_projman.
 	 */
 	function usesPM() {
-		global $sys_use_pm;
-		if ($sys_use_pm) {
+
+		if (forge_get_config('use_pm')) {
 			return $this->data_array['use_pm'];
 		} else {
 			return false;
@@ -2156,7 +2156,7 @@ class Group extends Error {
 		//	Create MailingList
 		//
 		//
-		if ($GLOBALS['sys_use_mail']) {
+		if (forge_get_config('use_mail')) {
 			$mlist = new MailingList($this);
 			if (!$mlist->create('commits',_('Commits'),1,$idadmin_group)) {
 				$this->setError(sprintf(_('ML: %s'),$mlist->getErrorMessage()));

@@ -31,6 +31,28 @@ forge_define_config_item ('default_theme', 'core', $GLOBALS['sys_theme']) ;
 forge_define_config_item ('default_language', 'core', $GLOBALS['sys_lang']) ;
 forge_define_config_item ('default_timezone', 'core', $GLOBALS['sys_default_timezone']) ;
 forge_define_config_item ('default_country_code', 'core', $GLOBALS['sys_default_country_code']) ;
+forge_define_config_item ('use_scm', 'core', $GLOBALS['sys_use_scm']) ;
+forge_define_config_item ('use_tracker', 'core', $GLOBALS['sys_use_tracker']) ;
+forge_define_config_item ('use_forum', 'core', $GLOBALS['sys_use_forum']) ;
+forge_define_config_item ('use_pm', 'core', $GLOBALS['sys_use_pm']) ;
+forge_define_config_item ('use_docman', 'core', $GLOBALS['sys_use_docman']) ;
+forge_define_config_item ('use_news', 'core', $GLOBALS['sys_use_news']) ;
+forge_define_config_item ('use_mail', 'core', $GLOBALS['sys_use_mail']) ;
+forge_define_config_item ('use_survey', 'core', $GLOBALS['sys_use_survey']) ;
+forge_define_config_item ('use_frs', 'core', $GLOBALS['sys_use_frs']) ;
+forge_define_config_item ('use_fti', 'core', $GLOBALS['sys_use_fti']) ;
+forge_define_config_item ('use_ftp', 'core', $GLOBALS['sys_use_ftp']) ;
+forge_define_config_item ('use_trove', 'core', $GLOBALS['sys_use_trove']) ;
+forge_define_config_item ('use_snippet', 'core', $GLOBALS['sys_use_snippet']) ;
+forge_define_config_item ('use_ssl', 'core', $GLOBALS['sys_use_ssl']) ;
+forge_define_config_item ('use_people', 'core', $GLOBALS['sys_use_people']) ;
+forge_define_config_item ('use_shell', 'core', $GLOBALS['sys_use_shell']) ;
+forge_define_config_item ('use_ratings', 'core', $GLOBALS['sys_use_ratings']) ;
+forge_define_config_item ('use_ftpuploads', 'core', $GLOBALS['sys_use_ftpuploads']) ;
+forge_define_config_item ('use_gateways', 'core', $GLOBALS['sys_use_gateways']) ;
+forge_define_config_item ('use_project_vhost', 'core', $GLOBALS['sys_use_project_vhost']) ;
+forge_define_config_item ('use_project_database', 'core', $GLOBALS['sys_use_project_database']) ;
+forge_define_config_item ('use_project_multimedia', 'core', $GLOBALS['sys_use_project_multimedia']) ;
 // forge_define_config_item ('', 'core', $GLOBALS['sys_']) ;
 
 /* Long-term:

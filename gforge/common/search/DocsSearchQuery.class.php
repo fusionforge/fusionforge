@@ -66,8 +66,8 @@ class DocsSearchQuery extends SearchQuery {
 	 * @return array query+params array
 	 */
 	function getQuery() {
-		global $sys_use_fti;
-		if ($sys_use_fti) {
+
+		if (forge_get_config('use_fti')) {
 			return $this->getFTIQuery();
 		} else {
 			$qpa = db_construct_qpa () ;

@@ -103,7 +103,7 @@ if (getStringFromRequest('submit')) {
 			$filename=$file_url;
 			$filetype='URL';
 		/*
-		} elseif ($sys_use_ftpuploads && $ftp_filename!=100) { //100==None
+		} elseif (forge_get_config('use_ftp')uploads && $ftp_filename!=100) { //100==None
 			$filename=$upload_dir.'/'.$ftp_filename;
 			$data = fread(fopen($filename, 'r'), filesize($filename));
 			$filetype=$uploaded_data_type;
@@ -326,7 +326,7 @@ if ($editdoc && $docid) {
 		<?php } else { ?>
 		<strong><?php echo _('OPTIONAL: Upload new file') ?></strong><br />
 		<input type="file" name="uploaded_data" size="30" /><br/><br />
-			<?php //if ($sys_use_ftpuploads) { ?>
+			<?php //if (forge_get_config('use_ftp')uploads) { ?>
 			<!--<strong><?php //printf(_('OR choose one form FTP %1$s'), $sys_ftp_upload_host) ?></strong>--><br />
 			<?php
 			//$ftp_files_arr=array_merge($arr,ls($upload_dir,true));

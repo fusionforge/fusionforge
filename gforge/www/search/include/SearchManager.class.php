@@ -134,7 +134,7 @@ class SearchManager {
 			SEARCH__TYPE_IS_PEOPLE,
 			new GFSearchEngine(SEARCH__TYPE_IS_PEOPLE, 'PeopleHtmlSearchRenderer', _('People'))
 		);
-		if ($GLOBALS['sys_use_people']) {
+		if (forge_get_config('use_people')) {
 			$this->addSearchEngine(
 				SEARCH__TYPE_IS_SKILL,
 				new GFSearchEngine(SEARCH__TYPE_IS_SKILL, 'SkillHtmlSearchRenderer', _('Skill'))

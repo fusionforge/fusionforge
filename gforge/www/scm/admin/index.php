@@ -29,7 +29,7 @@ require_once $gfwww.'include/pre.php';
 require_once $gfwww.'scm/include/scm_utils.php';
 require_once $gfcommon.'scm/SCMFactory.class.php';
 
-global $sys_use_scm;
+
 
 $group_id = getIntFromRequest('group_id');
 
