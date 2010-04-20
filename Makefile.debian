@@ -108,10 +108,10 @@ PCHANGEFILE=$(PKGNAME)_$(SMAJOR)$(MINOR)+p_$(ARCH).changes
 # Quite heavy version, but still requires to be root
 COWBUILDERCMD=cd $(BUILDPLACE) && dpkg-source -x $(BUILDFILES)/$(DSCFILE) ; cd $(BUILDPLACE)/$(PKGNAME)-$(SMAJOR) && pdebuild --pbuilder cowbuilder --buildresult $(BUILDRESULT) -- --basepath $(COWBUILDERBASE)/base-$(DISTRIB)-$(ARCH).cow --buildplace $(BUILDPLACE) --aptcache $(APTCACHE) ; rm -rf $(BUILDPLACE)/$(PKGNAME)-$(SMAJOR) 
 # This one is with sudo and probably faster
-COWBUILDERCMD=sudo /usr/sbin/cowbuilder --build --basepath $(COWBUILDERBASE)/base-$(DISTRIB)-$(ARCH).cow --configfile $(COWBUILDERBASE)/configfile $(BUILDFILES)/$(DSCFILE) $(DEBBUILDOPTS)
+COWBUILDERCMD=sudo /usr/sbin/cowbuilder --build --basepath $(COWBUILDERBASE)/base-$(DISTRIB)-$(ARCH).cow --configfile $(COWBUILDERBASE)/configfile-$(ARCH) $(BUILDFILES)/$(DSCFILE) $(DEBBUILDOPTS)
 
 # This one is with pbuilder
-PBUILDERCMD=cd $(BUILDFILES) && sudo /usr/sbin/pbuilder --build --basetgz $(PBUILDERTGZ)/base-$(DISTRIB)-$(ARCH).tgz --configfile $(PBUILDERTGZ)/configfile $(BUILDFILES)/$(PDSCFILE)
+PBUILDERCMD=cd $(BUILDFILES) && sudo /usr/sbin/pbuilder --build --basetgz $(PBUILDERTGZ)/base-$(DISTRIB)-$(ARCH).tgz --configfile $(PBUILDERTGZ)/configfile-$(ARCH) $(BUILDFILES)/$(PDSCFILE)
 
 default: list
 
