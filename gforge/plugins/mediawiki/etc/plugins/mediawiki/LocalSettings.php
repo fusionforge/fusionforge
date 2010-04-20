@@ -130,7 +130,7 @@ function FusionForgeMWAuth( $user, &$result ) {
 		$current_groups = $user->getGroups() ;
 
                 // Role-based access control
-		if ($r->isError()) {
+		if (!isset ($r) || !$r || $r->isError()) {
 			$rname = '' ;
 		} else {
 			$rname = "ForgeRole:".$r->getName () ;
