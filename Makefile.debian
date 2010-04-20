@@ -251,7 +251,7 @@ cowbuildtest:
 cowbuilddeb: # ***** This is the one to cowbuild debian packages ***** #
 	@for dist in $(DEBIANLIST); do \
 	echo "$(MAKE) -f Makefile.debian cowbuilddist XDISTRIB=$$dist DISTROOP='$(DEBIANOP)' HOOK='$(DEBHOOK)'" ; \
-	$(MAKE) -f Makefile.debian cowbuilddist XDISTRIB=$$dist DISTROOP="$(DEBIANOP) HOOK='$(DEBHOOK)'" ; \
+	$(MAKE) -f Makefile.debian cowbuilddist XDISTRIB=$$dist DISTROOP="$(DEBIANOP)" HOOK='$(DEBHOOK)' ; \
 	done
 
 cowbuildubu: # ***** This is the one to cowbuild ubuntu packages ***** #
