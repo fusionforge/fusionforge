@@ -31,8 +31,8 @@ require_once 'MailmanListFactory.class.php';
 require_once 'MailmanListDao.class.php';
 require_once 'common/dao/CodendiDataAccess.class.php';
 
-require_once'mailman/include/events/SystemEvent_MAILMAN_LIST_CREATE.class.php');
-require_once'mailman/include/events/SystemEvent_MAILMAN_LIST_DELETE.class.php');
+require_once'mailman/include/events/SystemEvent_MAILMAN_LIST_CREATE.class.php';
+require_once'mailman/include/events/SystemEvent_MAILMAN_LIST_DELETE.class.php';
 
 
 class mailmanPlugin extends Plugin {
