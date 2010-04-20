@@ -105,11 +105,11 @@ $ath->header(array ('title'=>_('Submit')));
 		<a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=attach_file'); ?>')"><strong>(?)</strong></a><br />
 		<p>
 		<strong><?php echo _('Attach Files') ?>:</strong><br />
-		<input type="file" name="input_file[]" size="30" /><br />
-		<input type="file" name="input_file[]" size="30" /><br />
-		<input type="file" name="input_file[]" size="30" /><br />
-		<input type="file" name="input_file[]" size="30" /><br />
-		<input type="file" name="input_file[]" size="30" /><br />
+		<input type="file" name="input_file0" size="30" /><br />
+		<input type="file" name="input_file1" size="30" /><br />
+		<input type="file" name="input_file2" size="30" /><br />
+		<input type="file" name="input_file3" size="30" /><br />
+		<input type="file" name="input_file4" size="30" /><br />
 		</p>
 		</td>
 	</tr>
