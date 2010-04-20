@@ -135,7 +135,7 @@ function FusionForgeMWAuth( $user, &$result ) {
 		} else {
 			$rname = "ForgeRole:".$r->getName () ;
 		}
-		$role_groups = preg_grep ("^ForgeRole:", $current_groups) ;
+		$role_groups = preg_grep ("/^ForgeRole:/", $current_groups) ;
 		foreach ($role_groups as $cg) {
 			if ($cg != $rname) {
                                 $user->removeGroup ($cg) ;
