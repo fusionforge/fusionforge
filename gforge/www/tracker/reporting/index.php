@@ -53,10 +53,9 @@ if (!$start) {
 	$z =& $report->getMonthStartArr();
 	$start = $z[0];
 }
-
-if (!$end) {
+if (!$end || $end <= $start) {
 	$z =& $report->getMonthStartArr();
-	$end = $z[ count($z)-1];
+	$end = $z[count($z)-1];
 }
 
 $group =& group_get_object($group_id);

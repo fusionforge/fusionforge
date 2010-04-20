@@ -29,17 +29,17 @@ if ($report->isError()) {
 }
 
 $area = getStringFromRequest('area');
-$SPAN = getIntFromRequest('SPAN', 1);
+$SPAN = getIntFromRequest('SPAN', REPORT_TYPE_MONTHLY);
 $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');
 
-
 if (!$start) {
 	$z =& $report->getMonthStartArr();
-	$start = $z[count($z)-1];
+	$start = $z[0];
 }
 if (!$end || $end <= $start) {
-        $end = time () ;
+	$z =& $report->getMonthStartArr();
+	$end = $z[count($z)-1];
 }
 
 site_project_header(array('title'=>_('Project Activity').' '.$group->getPublicName(),'group'=>$group_id,'toptab'=>'home'));
