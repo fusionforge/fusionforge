@@ -91,6 +91,7 @@ class MailmanListDao extends DataAccessObject {
 		$isPublic = $this->da->quoteSmart($isPublic);
 		$creator_id = $this->da->quoteSmart($creator_id);
 		$requested = $this->da->quoteSmart($requested);
+		$listPassword = $this->da->quoteSmart($listPassword);
 		$description = $this->da->quoteSmart($description);
 		$sql = "INSERT INTO mail_group_list (group_id, list_name, is_public, password, list_admin, status, description) VALUES ($1,$2,$3,$4,$5,$6,$7);";
 		return db_insertid($this->update($sql,array($group_id, $realListName,$isPublic,$listPassword,$creator_id,$requested,$description)),'mail_group_list','group_list_id');
@@ -111,7 +112,7 @@ class MailmanListDao extends DataAccessObject {
 
 	}
 
-	function & newSubscriber($usermail, $username, $userpasswd, $listname) {
+	function  newSubscriber($usermail, $username, $userpasswd, $listname) {
 		$usermail = $this->da->quoteSmart($usermail);
 		$username = $this->da->quoteSmart($username);
 		$userpasswd = $this->da->quoteSmart($userpasswd);
@@ -120,7 +121,7 @@ class MailmanListDao extends DataAccessObject {
 		return $this->update($sql,array($usermail,$userpasswd,$username,$listname));
 	}
 
-	function & deleteSubscriber($usermail, $listname) {
+	function  deleteSubscriber($usermail, $listname) {
 		$usermail = $this->da->quoteSmart($usermail);
 		$listname = $this->da->quoteSmart($listname);
 		$sql="DELETE FROM  plugin_mailman WHERE listname=$1 AND address=$2;";

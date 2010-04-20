@@ -192,7 +192,7 @@ class MailmanList extends Error {
 	function activationRequested()
 	{
 		$systemevent =	SystemEventManager::instance();
-		$result = $systemevent->fetchEvents(0,10,false,SystemEvent::STATUS_NEW,'MAILMAN_LIST_CREATE',$this->getID());
+		$result = $systemevent->fetchEvents(0,10,false,array(SystemEvent::STATUS_NEW,SystemEvent::STATUS_RUNNING),array('MAILMAN_LIST_CREATE'),$this->getID());
 		if(count($result)<1) {
 			return false;
 		}
