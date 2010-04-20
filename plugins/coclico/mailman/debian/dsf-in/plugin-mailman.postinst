@@ -32,6 +32,7 @@ case "$1" in
 	chgrp list /var/lib/mailman/lists/extend.py 
 	su -s /bin/sh @OLDPACKAGE@ -c '/usr/share/@OLDPACKAGE@/plugins/mailman/bin/db-upgrade.pl'
 	getent group www-data | grep -q list || adduser list www-data
+	[ -d /var/lib/mailman/lists/mailman/ ] || /usr/sbin/newlist -q mailman postmaster@`hostname -f` `grep admin_password /etc/gforge/gforge.conf | cut -d= -f2`
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

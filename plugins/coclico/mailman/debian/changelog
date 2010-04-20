@@ -1,3 +1,9 @@
+fusionforge-plugin-mailman (1.3.0-1) karmic; urgency=low
+
+  * Add mailman mailing list creation 
+
+ -- Christian Bayle <bayle@debian.org>  Wed, 21 Apr 2010 00:11:46 +0200
+
 fusionforge-plugin-mailman (1.2.9-1) karmic; urgency=low
 
   * Make plugin nicer 
