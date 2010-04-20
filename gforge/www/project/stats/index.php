@@ -29,7 +29,7 @@ if ($report->isError()) {
 }
 
 $area = getStringFromRequest('area');
-$SPAN = getIntFromRequest('SPAN');
+$SPAN = getIntFromRequest('SPAN', 1);
 $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');
 
@@ -37,6 +37,9 @@ $end = getIntFromRequest('end');
 if (!$start) {
 	$z =& $report->getMonthStartArr();
 	$start = $z[count($z)-1];
+}
+if (!$end || $end <= $start) {
+        $end = time () ;
 }
 
 site_project_header(array('title'=>_('Project Activity').' '.$group->getPublicName(),'group'=>$group_id,'toptab'=>'home'));
