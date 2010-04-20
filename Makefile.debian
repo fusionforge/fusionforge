@@ -92,11 +92,12 @@ DEBUG=
 DEBBUILDOPTS=--debbuildopts -sa 
 ARCH=$(shell dpkg-architecture -qDEB_BUILD_ARCH)
 
-UBUHOOK="--hookdir $(CURDIR)/hook/ubuntu"
 # Some doc found there http://wiki.debian.org/cowbuilder
 # Hook are not anymore necessary, but I keep as an example
 UBUHOOK="--components 'main universe' --debootstrapopts --exclude=udev,pcmciautils,initramfs-tools"
 UBUHOOK=--components "main universe" --hookdir $(CURDIR)/hook/ubuntu
+UBUHOOK=--components "main universe"
+DEBHOOK=
 
 ORIGFILE=$(PKGNAME)_$(SMAJOR).orig.tar.gz
 DSCFILE=$(PKGNAME)_$(SMAJOR)$(MINOR).dsc
@@ -249,8 +250,8 @@ cowbuildtest:
 
 cowbuilddeb: # ***** This is the one to cowbuild debian packages ***** #
 	@for dist in $(DEBIANLIST); do \
-	echo "$(MAKE) -f Makefile.debian cowbuilddist XDISTRIB=$$dist DISTROOP='$(DEBIANOP)'" ; \
-	$(MAKE) -f Makefile.debian cowbuilddist XDISTRIB=$$dist DISTROOP="$(DEBIANOP)" ; \
+	echo "$(MAKE) -f Makefile.debian cowbuilddist XDISTRIB=$$dist DISTROOP='$(DEBIANOP)' HOOK='$(DEBHOOK)'" ; \
+	$(MAKE) -f Makefile.debian cowbuilddist XDISTRIB=$$dist DISTROOP="$(DEBIANOP) HOOK='$(DEBHOOK)'" ; \
 	done
 
 cowbuildubu: # ***** This is the one to cowbuild ubuntu packages ***** #
