@@ -167,7 +167,6 @@ if ($group_id) {
 					'title' => _('Mail admin'),
 					'help'=>'CommunicationServices.html#MailingLists',
 					'admin' => 1));
-		echo "PHPSELF=".$PHP_SELF;
 		?>
 
 			<h3><?php echo $mailingList->getName(); ?></h3>
