@@ -105,12 +105,12 @@ CHANGEFILE=$(PKGNAME)_$(SMAJOR)$(MINOR)_$(ARCH).changes
 PCHANGEFILE=$(PKGNAME)_$(SMAJOR)$(MINOR)+p_$(ARCH).changes
 
 # Quite heavy version, but still requires to be root
-COWBUILDERCMD=cd $(BUILDPLACE) && dpkg-source -x $(BUILDFILES)/$(DSCFILE) ; cd $(BUILDPLACE)/$(PKGNAME)-$(SMAJOR) && pdebuild --pbuilder cowbuilder --buildresult $(BUILDRESULT) -- --basepath $(COWBUILDERBASE)/base-$(DISTRIB).cow --buildplace $(BUILDPLACE) --aptcache $(APTCACHE) ; rm -rf $(BUILDPLACE)/$(PKGNAME)-$(SMAJOR) 
+COWBUILDERCMD=cd $(BUILDPLACE) && dpkg-source -x $(BUILDFILES)/$(DSCFILE) ; cd $(BUILDPLACE)/$(PKGNAME)-$(SMAJOR) && pdebuild --pbuilder cowbuilder --buildresult $(BUILDRESULT) -- --basepath $(COWBUILDERBASE)/base-$(DISTRIB)-$(ARCH).cow --buildplace $(BUILDPLACE) --aptcache $(APTCACHE) ; rm -rf $(BUILDPLACE)/$(PKGNAME)-$(SMAJOR) 
 # This one is with sudo and probably faster
-COWBUILDERCMD=sudo /usr/sbin/cowbuilder --build --basepath $(COWBUILDERBASE)/base-$(DISTRIB).cow --configfile $(COWBUILDERBASE)/configfile $(BUILDFILES)/$(DSCFILE) $(DEBBUILDOPTS)
+COWBUILDERCMD=sudo /usr/sbin/cowbuilder --build --basepath $(COWBUILDERBASE)/base-$(DISTRIB)-$(ARCH).cow --configfile $(COWBUILDERBASE)/configfile $(BUILDFILES)/$(DSCFILE) $(DEBBUILDOPTS)
 
 # This one is with pbuilder
-PBUILDERCMD=cd $(BUILDFILES) && sudo /usr/sbin/pbuilder --build --basetgz $(PBUILDERTGZ)/base-$(DISTRIB).tgz --configfile $(PBUILDERTGZ)/configfile $(BUILDFILES)/$(PDSCFILE)
+PBUILDERCMD=cd $(BUILDFILES) && sudo /usr/sbin/pbuilder --build --basetgz $(PBUILDERTGZ)/base-$(DISTRIB)-$(ARCH).tgz --configfile $(PBUILDERTGZ)/configfile $(BUILDFILES)/$(PDSCFILE)
 
 default: list
 
@@ -245,7 +245,7 @@ repoubu: cowbuildubu
 	done
 
 cowbuildtest:
-	@echo "Will build $(PKGNAME)_$(MAJOR)$(MINOR)$(DISTRIB)"
+	@echo "Will build $(PKGNAME)_$(MAJOR)_$(MINOR)_$(DISTRIB)_$(ARCH)"
 
 cowbuilddeb: # ***** This is the one to cowbuild debian packages ***** #
 	@for dist in $(DEBIANLIST); do \
@@ -289,7 +289,7 @@ $(BUILDFILES)/$(DSCFILE):
 		grep -v rpm-specific | grep -v docs/phpdoc/docs | \
 		grep -v ^./debian/ | cpio -pdumB $(BUILDFILES)/
 	# Set version for given distrib
-	cd $(BUILDFILES)/$(PKGDIR); dch -b -v $(MAJOR)$(MINOR) -D UNRELEASED "This is $(DISTRIB) autobuild"
+	cd $(BUILDFILES)/$(PKGDIR); dch -b -v $(MAJOR)$(MINOR) -D UNRELEASED "This is $(DISTRIB)-$(ARCH) autobuild"
 	perl -pi -e "s/UNRELEASED/$(DISTRIB)/" $(BUILDFILES)/$(PKGDIR)/debian/changelog
 	cd $(BUILDFILES) ; dpkg-source -b $(PKGDIR)
 	rm -rf $(BUILDFILES)/$(PKGDIR)
@@ -302,7 +302,7 @@ $(BUILDFILES)/$(PDSCFILE):
 		grep -v rpm-specific | grep -v docs/phpdoc/docs | \
 		grep -v ^./debian/ | cpio -pdumB $(BUILDFILES)/
 	# Set version for given distrib
-	cd $(BUILDFILES)/$(PKGDIR); dch -b -v $(MAJOR)$(MINOR)+p -D UNRELEASED "This is $(DISTRIB) autobuild"
+	cd $(BUILDFILES)/$(PKGDIR); dch -b -v $(MAJOR)$(MINOR)+p -D UNRELEASED "This is $(DISTRIB)-$(ARCH) autobuild"
 	perl -pi -e "s/UNRELEASED/$(DISTRIB)/" $(BUILDFILES)/$(PKGDIR)/debian/changelog
 	cd $(BUILDFILES) ; dpkg-source -b $(PKGDIR)
 	rm -rf $(BUILDFILES)/$(PKGDIR)
@@ -320,38 +320,38 @@ $(TARBALLS)/$(ORIGFILE): $(TARBALLS)
 		grep -v plugins/wiki/www/lib/pear | \
 		cpio -o -H ustar | gzip > $(TARBALLS)/$(ORIGFILE)
 
-pbuilderenv: $(PBUILDERTGZ) $(PBUILDERTGZ)/base-$(DISTRIB).tgz
-	@echo "=========> Ready for $(DISTRIB)"
+pbuilderenv: $(PBUILDERTGZ) $(PBUILDERTGZ)/base-$(DISTRIB)-$(ARCH).tgz
+	@echo "=========> Ready for $(DISTRIB)-$(ARCH)"
 
-cowbuilderenv: $(COWBUILDERBASE)/doconfig $(COWBUILDERBASE)/base-$(DISTRIB).stamp.update
-	@echo "=========> Ready for $(DISTRIB)"
+cowbuilderenv: $(COWBUILDERBASE)/doconfig-$(ARCH) $(COWBUILDERBASE)/base-$(DISTRIB)-$(ARCH).stamp.update
+	@echo "=========> Ready for $(DISTRIB)-$(ARCH)"
 
 forceupdatecow: # Force update of cowbuilder env #
 	rm -f $(COWBUILDERBASE)/base-*.stamp.update
 
-$(COWBUILDERBASE)/base-$(DISTRIB).stamp.update: $(COWBUILDERBASE)/base-$(DISTRIB).stamp
-	sudo /usr/sbin/cowbuilder --update $(HOOK) --distribution $(DISTRIB) --basepath $(COWBUILDERBASE)/base-$(DISTRIB).cow --configfile $(COWBUILDERBASE)/configfile $(DISTROOP)
+$(COWBUILDERBASE)/base-$(DISTRIB)-$(ARCH).stamp.update: $(COWBUILDERBASE)/base-$(DISTRIB)-$(ARCH).stamp
+	sudo /usr/sbin/cowbuilder --update $(HOOK) --distribution $(DISTRIB) --basepath $(COWBUILDERBASE)/base-$(DISTRIB)-$(ARCH).cow --configfile $(COWBUILDERBASE)/configfile-$(ARCH) $(DISTROOP)
 	touch $@
 
-$(PBUILDERTGZ)/base-$(DISTRIB).tgz: $(PBUILDERTGZ)/doconfig
-	[ -f $@ ] || sudo /usr/sbin/pbuilder --create --distribution $(DISTRIB) --basetgz $(PBUILDERTGZ)/base-$(DISTRIB).tgz --configfile $(PBUILDERTGZ)/configfile $(DISTROOP)
+$(PBUILDERTGZ)/base-$(DISTRIB)-$(ARCH).tgz: $(PBUILDERTGZ)/doconfig-$(ARCH)
+	[ -f $@ ] || sudo /usr/sbin/pbuilder --create --distribution $(DISTRIB) --basetgz $(PBUILDERTGZ)/base-$(DISTRIB).tgz --configfile $(PBUILDERTGZ)/configfile-$(ARCH) $(DISTROOP)
 
-$(COWBUILDERBASE)/base-$(DISTRIB).stamp:
-	[ -d $(COWBUILDERBASE)/base-$(DISTRIB).cow ] || sudo /usr/sbin/cowbuilder --create $(HOOK) --distribution $(DISTRIB) --basepath $(COWBUILDERBASE)/base-$(DISTRIB).cow --configfile $(COWBUILDERBASE)/configfile $(DISTROOP)
+$(COWBUILDERBASE)/base-$(DISTRIB)-$(ARCH).stamp:
+	[ -d $(COWBUILDERBASE)/base-$(DISTRIB)-$(ARCH).cow ] || sudo /usr/sbin/cowbuilder --create $(HOOK) --distribution $(DISTRIB) --basepath $(COWBUILDERBASE)/base-$(DISTRIB)-$(ARCH).cow --configfile $(COWBUILDERBASE)/configfile-$(ARCH) $(DISTROOP)
 	touch $@.update
 	touch $@
 
-$(PBUILDERTGZ)/doconfig: /usr/sbin/pbuilder
+$(PBUILDERTGZ)/doconfig-$(ARCH): /usr/sbin/pbuilder
 	@mkdir -p $(PBUILDERTGZ)
-	@echo "APTCACHE=$(APTCACHE)" > $(PBUILDERTGZ)/configfile
-	@echo "BUILDPLACE=$(BUILDPLACE)" >> $(PBUILDERTGZ)/configfile
-	@echo "BUILDRESULT=$(BUILDRESULT)" >> $(PBUILDERTGZ)/configfile
+	@echo "APTCACHE=$(APTCACHE)" > $(PBUILDERTGZ)/configfile-$(ARCH)
+	@echo "BUILDPLACE=$(BUILDPLACE)" >> $(PBUILDERTGZ)/configfile-$(ARCH)
+	@echo "BUILDRESULT=$(BUILDRESULT)" >> $(PBUILDERTGZ)/configfile-$(ARCH)
 
-$(COWBUILDERBASE)/doconfig: /usr/sbin/cowbuilder
+$(COWBUILDERBASE)/doconfig-$(ARCH): /usr/sbin/cowbuilder
 	@mkdir -p $(COWBUILDERBASE)
-	@echo "APTCACHE=$(APTCACHE)" > $(COWBUILDERBASE)/configfile
-	@echo "BUILDPLACE=$(BUILDPLACE)" >> $(COWBUILDERBASE)/configfile
-	@echo "BUILDRESULT=$(BUILDRESULT)" >> $(COWBUILDERBASE)/configfile
+	@echo "APTCACHE=$(APTCACHE)" > $(COWBUILDERBASE)/configfile-$(ARCH)
+	@echo "BUILDPLACE=$(BUILDPLACE)" >> $(COWBUILDERBASE)/configfile-$(ARCH)
+	@echo "BUILDRESULT=$(BUILDRESULT)" >> $(COWBUILDERBASE)/configfile-$(ARCH)
 
 /usr/sbin/pbuilder:
 	@echo "Error: you need to install package 'pbuilder', for instance with 'sudo apt-get install pbuilder'." ; /bin/false
