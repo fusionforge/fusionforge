@@ -171,7 +171,7 @@ foreach($groups as $group) {
 		fwrite($fw,$contents);
 		fclose($fw);
 	}
-	system("chown -R forge_get_config('apache_user'):forge_get_config('apache_group') $groupdir_prefix/$group");
+	system("chown -R ".forge_get_config('apache_user').":".forge_get_config('apache_group')." $groupdir_prefix/$group");
 }
 
 

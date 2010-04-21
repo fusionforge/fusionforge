@@ -71,11 +71,6 @@ if (!$frsr || !is_object($frsr)) {
 	exit_error('Error',$frsr->getErrorMessage());
 }
 
-//we make sure we are not receiving forge_get_config('ftp_upload_dir') by POST or GET, to prevent security problems
-
-if (!forge_get_config('ftp_upload_dir')) {
-	exit_error('Error','External sys_ftp_upload_dir detected');
-}
 $upload_dir = forge_get_config('ftp_upload_dir') . "/" . $g->getUnixName();
 
 

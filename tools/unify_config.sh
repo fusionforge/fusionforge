@@ -19,7 +19,7 @@ find_files () {
 
 find_files | xargs perl -pi -e"
 s/^\\s*global +\\\$$old *;//;
-s/^(\\s*global +)\\\$$old *,/\\1/;
+s/^(\\s*global) +\\\$$old *,/\\1 /;
 s/^(\\s*global .*), *\\\$$old/\\1/;
 s,\\\$GLOBALS\['$old'\](?"\!"\\s*=),$newstr,g;
 s,\\\$GLOBALS\[$old\](?"\!"\\s*=),$newstr,g;
