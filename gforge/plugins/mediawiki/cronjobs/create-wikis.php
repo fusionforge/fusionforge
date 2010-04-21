@@ -55,13 +55,12 @@ if (!file_exists($project_settings_template))
 
 # Owner of files - apache
 $file_owner = forge_get_config('apache_user').':'.forge_get_config('apache_group');
-if (forge_get_config('apache_user' == '') || forge_get_config('apache_group') == '') {
+if (forge_get_config('apache_user') == '' || forge_get_config('apache_group') == '') {
 	$err =  "Error: sys_apache_user Is Not Set Or sys_apache_group Is Not Set!";
 	cron_debug($err);
 	cron_entry(23,$err);
 	exit;
 }
-
 
 # Get all projects that use the mediawiki plugin
 $project_res = db_query_params ("SELECT g.unix_group_name from groups g, group_plugin gp, plugins p where g.group_id = gp.group_id and gp.plugin_id = p.plugin_id and p.plugin_name = $1;", array("mediawiki"));
