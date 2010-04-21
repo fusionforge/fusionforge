@@ -28,7 +28,7 @@ if ($group_id) {
 				  array($group_id,
 					'A'));
 	if ($rowwm = db_fetch_array($reswm)) {
-	  $webmaster = $rowwm['user_name']."@".$GLOBALS['sys_users_host']." (".$rowwm['realname'].")";
+	  $webmaster = $rowwm['user_name']."@".forge_get_config('users_host')." (".$rowwm['realname'].")";
 	} else {
 	  $webmaster = $GLOBALS['sys_admin_email'];
 	}
@@ -90,7 +90,7 @@ while ($row = db_fetch_array($res)) {
 		print "   <title>".htmlspecialchars($row['package_name'])." ".htmlspecialchars($row['module_name'])."</title>\n";
 		print "   <link>http://".forge_get_config('web_host')."/project/showfiles.php?group_id=".$row['group_id']."&amp;release_id=".$row['filerelease_id']."</link>\n";
 		print "   <description>".rss_description($row['module_notes'])."</description>\n";
-		print "   <author>".$row['user_name']."@".$GLOBALS['sys_users_host']." (".$row['realname'].")</author>\n";
+		print "   <author>".$row['user_name']."@".forge_get_config('users_host')." (".$row['realname'].")</author>\n";
 		print "   <comments>http://".forge_get_config('web_host')."/project/shownotes.php?group_id=".$row['group_id']."&amp;release_id=".$row['filerelease_id']."</comments>\n";
 		print "   <pubDate>".rss_date($row['release_date'])."</pubDate>\n";
 		print "   <guid>http://".forge_get_config('web_host')."/project/showfiles.php?group_id=".$row['group_id']."&amp;release_id=".$row['filerelease_id']."</guid>\n";

@@ -159,7 +159,7 @@ if ($GLOBALS['sys_require_unique_email']) {
 <p>
 @<?php
 	echo _('Email Address:') . utils_requiredField() . "<br />\n<em>";
-	printf(_('This email address will be verified before account activation. You will receive a mail forward account at &lt;loginname@%1$s&gt; that will forward to this address.'), $GLOBALS['sys_users_host']); ?></em>
+	printf(_('This email address will be verified before account activation. You will receive a mail forward account at &lt;loginname@%1$s&gt; that will forward to this address.'), forge_get_config('users_host')); ?></em>
 <br /><input size="30" type="text" name="email" value="<?php print(htmlspecialchars($email)); ?>" />
 </p>
 <p>

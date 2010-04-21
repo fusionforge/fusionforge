@@ -62,6 +62,12 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 			       'sys_use_project_vhost',
 			       'sys_use_project_database',
 			       'sys_use_project_multimedia',
+			       'sys_download_host',
+			       'sys_shell_host',
+			       'sys_users_host',
+			       'sys_lists_host',
+			       'sys_scm_host',
+			       'sys_forum_return_domain',
 			) ;
 
 		$pattern = implode ('|', $vars) ;

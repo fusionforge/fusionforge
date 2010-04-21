@@ -122,7 +122,7 @@ if ($group_id) {
 	if(getIntFromGet('add_list')) {
 		mail_header(array(
 			'title' => _('Add a Mailing List')));
-		printf(_('<p>Lists are named in this manner:<br /><strong>projectname-listname@%1$s</strong></p><p>It will take <span class="important">6-24 Hours</span> for your list to be created.</p>'), $GLOBALS['sys_lists_host']);
+		printf(_('<p>Lists are named in this manner:<br /><strong>projectname-listname@%1$s</strong></p><p>It will take <span class="important">6-24 Hours</span> for your list to be created.</p>'), forge_get_config('lists_host'));
 		
 		$mlFactory = new MailingListFactory($Group);
 		if (!$mlFactory || !is_object($mlFactory) || $mlFactory->isError()) {
@@ -168,7 +168,7 @@ if ($group_id) {
 			<input type="hidden" name="add_list" value="y" />
 			<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>" />
 			<p><strong><?php echo _('Mailing List Name:'); ?></strong><br />
-			<strong><?php echo $Group->getUnixName(); ?>-<input type="text" name="list_name" value="" size="10" maxlength="12" />@<?php echo $GLOBALS['sys_lists_host']; ?></strong><br /></p>
+			<strong><?php echo $Group->getUnixName(); ?>-<input type="text" name="list_name" value="" size="10" maxlength="12" />@<?php echo forge_get_config('lists_host'); ?></strong><br /></p>
 			<p>
 			<strong><?php echo _('Is Public?'); ?></strong><br />
 			<input type="radio" name="is_public" value="<?php echo MAIL__MAILING_LIST_IS_PUBLIC; ?>" checked="checked" /> <?php echo _('Yes'); ?><br />

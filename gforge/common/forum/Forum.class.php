@@ -415,8 +415,8 @@ class Forum extends Error {
 			$address .= 'noreply';
 		}
 		$address .= '@';
-		if(forge_get_config('use_gateways') && isset($GLOBALS['sys_forum_return_domain'])) {
-			$address .= $GLOBALS['sys_forum_return_domain'];
+		if(forge_get_config('use_gateways') && forge_get_config('forum_return_domain')) {
+			$address .= forge_get_config('forum_return_domain');
 		} else {
 			$address .= forge_get_config('web_host');
 		}

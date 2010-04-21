@@ -50,7 +50,7 @@ if ($group_id) {
 					'A'),
 				  1);
 	if ($rowwm = db_fetch_array($reswm)) {
-		$webmaster = $rowwm['user_name']."@".$GLOBALS['sys_users_host']." (".$rowwm['realname'].")";
+		$webmaster = $rowwm['user_name']."@".forge_get_config('users_host')." (".$rowwm['realname'].")";
 	} else {
 		$webmaster = $GLOBALS['sys_admin_email'];
 	}
@@ -121,7 +121,7 @@ if ($group_id) {
 		}
 
 		print "   <description>".rss_description($arr['description'])."</description>\n";
-		print "   <author>".$arr['user_name']."@".$GLOBALS['sys_users_host']." (".$arr['realname'].")</author>\n";
+		print "   <author>".$arr['user_name']."@".forge_get_config('users_host')." (".$arr['realname'].")</author>\n";
 		print "   <pubDate>".rss_date($arr['activity_date'])."</pubDate>\n";
 		print "  </item>\n";
 	}

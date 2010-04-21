@@ -1,10 +1,6 @@
 <?php
  
-if (isset ($GLOBALS['sys_scm_host'])) {
-	$default_cvs_server = "cvs." . forge_get_config('web_host');
-} else {
-	$default_cvs_server = 'scm';
-}
+$default_cvs_server = forge_get_config('scm_host') ;
 $cvs_binary_version='1.12';
 $use_ssl=false;
 $GLOBALS['cvs_binary_version']=$cvs_binary_version;

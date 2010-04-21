@@ -29,7 +29,7 @@ if ($group_id) {
 					'A'),
 				  1);
 	if ($rowwm = db_fetch_array($reswm)) {
-	  $webmaster = $rowwm['user_name']."@".$GLOBALS['sys_users_host']." (".$rowwm['realname'].")";
+	  $webmaster = $rowwm['user_name']."@".forge_get_config('users_host')." (".$rowwm['realname'].")";
 	} else {
 	  $webmaster = $GLOBALS['sys_admin_email'];
 	}
@@ -82,7 +82,7 @@ while ($row = db_fetch_array($res)) {
 		print "   <link>http://".forge_get_config('web_host')."/</link>\n";
 	}
 	print "   <description>".rss_description($row['details'])."</description>\n";
-	print "   <author>".$row['user_name']."@".$GLOBALS['sys_users_host']." (".$row['realname'].")</author>\n";
+	print "   <author>".$row['user_name']."@".forge_get_config('users_host')." (".$row['realname'].")</author>\n";
 	print "   <pubDate>".rss_date($row['post_date'])."</pubDate>\n";
 	if ($row['group_id'] != $sys_news_group) {
 		print "   <guid>http://".forge_get_config('web_host')."/forum/forum.php?forum_id=".$row['forum_id']."</guid>\n";

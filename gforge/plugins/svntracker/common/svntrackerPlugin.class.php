@@ -158,7 +158,7 @@ class svntrackerPlugin extends Plugin {
 	*
 	*/
 	/*function addCvsTrackerToFile($path) {
-		global $sys_plugins_path, $sys_users_host, $cvs_binary_version;
+		global $sys_plugins_path, $cvs_binary_version;
 		
 		$FOut = fopen($path, "a");
 		if($FOut) {

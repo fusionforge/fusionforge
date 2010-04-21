@@ -125,9 +125,9 @@ class MailingList extends Error {
 		
 		$realListName = strtolower($this->Group->getUnixName().'-'.$listName);
 		
-		if(!validate_email($realListName.'@'.$GLOBALS['sys_lists_host'])) {
+		if(!validate_email($realListName.'@'.forge_get_config('lists_host'))) {
 			$this->setError(_('Invalid List Name') . ': ' .
-			$realListName.'@'.$GLOBALS['sys_lists_host']);
+			$realListName.'@'.forge_get_config('lists_host'));
 			return false;
 		}
 
@@ -193,7 +193,7 @@ You are encouraged to change this password as soon as possible.
 Thank you for registering your project with %1$s.
 
 -- the %1$s staff
-'), forge_get_config ('forge_name'), $GLOBALS['sys_lists_host'], $realListName, $this->getExternalInfoUrl(), $this->getExternalAdminUrl(), $listPassword);
+'), forge_get_config ('forge_name'), forge_get_config('lists_host'), $realListName, $this->getExternalInfoUrl(), $this->getExternalAdminUrl(), $listPassword);
 			$mailSubject = sprintf(_('%1$s New Mailing List'), forge_get_config ('forge_name'));
 			
 			util_send_message($userEmail, $mailSubject, $mailBody, 'admin@'.forge_get_config('web_host'));
@@ -335,9 +335,9 @@ Thank you for registering your project with %1$s.
 	 */
 	function getArchivesUrl() {
 		if ($this->isPublic()) {
-			return 'http://'.$GLOBALS['sys_lists_host'].'/pipermail/'.$this->getName().'/';
+			return 'http://'.forge_get_config('lists_host').'/pipermail/'.$this->getName().'/';
 		} else {
-			return 'http://'.$GLOBALS['sys_lists_host'].'/mailman/private/'.$this->getName().'/';
+			return 'http://'.forge_get_config('lists_host').'/mailman/private/'.$this->getName().'/';
 		}
 	}
 	
@@ -347,7 +347,7 @@ Thank you for registering your project with %1$s.
 	 * @return string url of the info page
 	 */
 	function getExternalInfoUrl() {
-		return 'http://'.$GLOBALS['sys_lists_host'].'/mailman/listinfo/'.$this->getName();
+		return 'http://'.forge_get_config('lists_host').'/mailman/listinfo/'.$this->getName();
 	}
 	
 	/**
@@ -356,7 +356,7 @@ Thank you for registering your project with %1$s.
 	 * @return string url of the admin
 	 */
 	function getExternalAdminUrl() {
-		return 'http://'.$GLOBALS['sys_lists_host'].'/mailman/admin/'.$this->getName();
+		return 'http://'.forge_get_config('lists_host').'/mailman/admin/'.$this->getName();
 	}
 
 	/**

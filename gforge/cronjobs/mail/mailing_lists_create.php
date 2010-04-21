@@ -75,7 +75,7 @@ for ($i=0; $i<$rows; $i++) {
 	
 	if (! in_array($listname,$mailing_lists)) {		// New list?
 		$err .= "Creating Mailing List: $listname\n";
-		//$lcreate_cmd = $sys_path_to_mailman."/bin/newlist -q $listname@$sys_lists_host $email $listpassword &> /dev/null";
+		//$lcreate_cmd = $sys_path_to_mailman."/bin/newlist -q $listname@".forge_get_config('lists_host')." $email $listpassword &> /dev/null";
 		$lcreate_cmd = $sys_path_to_mailman."/bin/newlist -q $listname $email $listpassword";
 		$err .= "Command to be executed is $lcreate_cmd\n";
 		passthru($lcreate_cmd, $failed);

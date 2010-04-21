@@ -2,11 +2,7 @@
  
 //$default_svn_server = forge_get_config('web_host') ;
 //$default_svn_server = "svn." . forge_get_config('web_host') ;
-if (isset ($GLOBALS['sys_scm_host'])) {
-	$default_svn_server = $GLOBALS['sys_scm_host'];
-} else {
-	$default_svn_server = 'scm';
-}
+$default_svn_server = forge_get_config('scm_host');
 $use_ssh = false;
 $use_dav = true;
 $use_ssl = true;

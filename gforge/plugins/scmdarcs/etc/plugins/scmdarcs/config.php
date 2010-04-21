@@ -1,6 +1,6 @@
 <?php
  
-$default_darcs_server = $GLOBALS['sys_scm_host'];
+$default_darcs_server = forge_get_config('scm_host');
 // $darcs_root = $GLOBALS['sys_chroot'].'/scmrepos/darcs' ;
 
 // Local Variables:

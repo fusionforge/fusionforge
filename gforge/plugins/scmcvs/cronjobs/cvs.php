@@ -142,7 +142,7 @@ function cvs_write_file($filePath, $content, $append=1) {
  */
 function add_sync_mail($unix_group_name) {
 
-	global $sys_lists_host, $cvsdir_prefix, $cvs_binary_version,$sys_plugins_path;
+	global  $cvsdir_prefix, $cvs_binary_version,$sys_plugins_path;
 	$loginfo_file=$cvsdir_prefix.'/'.$unix_group_name.'/CVSROOT/loginfo';
 
 	if (!$loginfo_file) {
@@ -156,11 +156,11 @@ function add_sync_mail($unix_group_name) {
 		if ( $cvs_binary_version == "1.11" ) {
 			$pathsyncmail = "DEFAULT ".
 				$sys_plugins_path."/cvssyncmail/bin/syncmail -u %{sVv} ".
-				$unix_group_name."-commits@".$sys_lists_host;
+				$unix_group_name."-commits@".forge_get_config('lists_host');
 		} else { //it's 1.12
 			$pathsyncmail = "DEFAULT ".
 				$sys_plugins_path."/cvssyncmail/bin/syncmail -u %p %{sVv} ".
-				$unix_group_name."-commits@".$sys_lists_host;
+				$unix_group_name."-commits@".forge_get_config('lists_host');
 		}
 		$content = "\n#BEGIN Added by cvs.php script\n".
 			$pathsyncmail. "\n#END Added by cvs.php script\n";

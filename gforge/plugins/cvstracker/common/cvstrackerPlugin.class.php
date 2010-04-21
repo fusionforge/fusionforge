@@ -165,7 +165,7 @@ class cvstrackerPlugin extends Plugin {
 	*
 	*/
 	function addCvsTrackerToFile($group, $path) {
-		global $sys_plugins_path, $sys_users_host, $cvs_binary_version;
+		global $sys_plugins_path, $cvs_binary_version;
 		
 		$FOut = fopen($path, "a");
 		if($FOut) {		
@@ -193,7 +193,7 @@ class cvstrackerPlugin extends Plugin {
 	*	return array with the loginfo lines.
 	*/
 	function getCvsTrackerLogInfoLines() {
-		global $sys_plugins_path, $sys_users_host, $cvs_binary_version;
+		global $sys_plugins_path, $cvs_binary_version;
 		$array=array();
 		$array[]="# BEGIN added by gforge-plugin-cvstracker\n";
 		if ( $cvs_binary_version == "1.11" ) {

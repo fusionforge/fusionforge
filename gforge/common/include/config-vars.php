@@ -53,6 +53,12 @@ forge_define_config_item ('use_gateways', 'core', $GLOBALS['sys_use_gateways']) 
 forge_define_config_item ('use_project_vhost', 'core', $GLOBALS['sys_use_project_vhost']) ;
 forge_define_config_item ('use_project_database', 'core', $GLOBALS['sys_use_project_database']) ;
 forge_define_config_item ('use_project_multimedia', 'core', $GLOBALS['sys_use_project_multimedia']) ;
+forge_define_config_item ('download_host', 'core', $GLOBALS['sys_download_host']) ;
+forge_define_config_item ('shell_host', 'core', $GLOBALS['sys_shell_host']) ;
+forge_define_config_item ('users_host', 'core', $GLOBALS['sys_users_host']) ;
+forge_define_config_item ('lists_host', 'core', $GLOBALS['sys_lists_host']) ;
+forge_define_config_item ('scm_host', 'core', $GLOBALS['sys_scm_host']) ;
+forge_define_config_item ('forum_return_domain', 'core', $GLOBALS['sys_forum_return_domain']) ;
 // forge_define_config_item ('', 'core', $GLOBALS['sys_']) ;
 
 /* Long-term:
