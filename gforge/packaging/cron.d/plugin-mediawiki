@@ -3,4 +3,4 @@
 #
 
 # Create new wikis four times an hour
-*/15 * * * * root [ -x $FFDIR/plugins/mediawiki/cronjobs/create-wikis.sh ] && $FFDIR/plugins/mediawiki/cronjobs/create-wikis.sh
+*/15 * * * * root [ -x $FFDIR/plugins/mediawiki/cronjobs/create-wikis.php ] && $FFDIR/plugins/mediawiki/cronjobs/create-wikis.php
