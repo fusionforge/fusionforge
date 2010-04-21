@@ -22,27 +22,25 @@
  #
  # $Id$
  #
-
+require_once 'ForumML_MessageDao.class.php';
 
 // ForumML Database Query Class
 class ForumMLInsert {
     var $id_message;
     var $mail;
     var $id_list;
+    var $dao;
 	
     // Class Constructor
 	function __construct($list_id) {
 		// set id_list
 		$this->id_list = $list_id;
+		$this->dao = new ForumML_MessageDao(CodendiDataAccess::instance());
 	}
     
     // Insert values into forumml_messageheader table
     function insertMessageHeader($id_header,$value) {
-        
-    	$qry = sprintf('INSERT INTO plugin_forumml_messageheader'.
-    					' (id_message, id_header, value)'.
-    					' VALUES ($1,$2,$3)');
-    	db_query_params($qry,array($this->id_message , $id_header , $value));
+	$this->dao->insertMessageHeader($this->id_message,$id_header,$value);
     }
 
     // Insert values into forumml_attachment table 
@@ -52,57 +50,40 @@ class ForumMLInsert {
         } else {
             $filesize = 0;
         }
-    	$qry = sprintf('INSERT INTO plugin_forumml_attachment'.
-                       ' (id_message, file_name, file_type, file_size, file_path, content_id)'.
-                       ' VALUES ($1,$2,$3,$4,$5,$6)');
-    	db_query_params($qry,array($id_message , $filename , $filetype , $filesize , $filepath , $content_id));
+	$this->dao->insertAttachment($id_message, $filename, $filetype, $filesize, $filepath,$content_id);
     }
 
     // Insert values into forumml_header table
     function insertHeader($header) {
         
     	// Search if the header is already in the table
-        $qry = sprintf('SELECT id_header'.
-        				' FROM plugin_forumml_header'.
-        				' WHERE name = $1');
-    	$result = db_query_params($qry,array($header));
-        
+       $result = $this->dao->searchHeader($header);        
         // If not, insert it
-        if (db_result($result,0,'id_header') == "") {
-            $sql = sprintf('INSERT INTO plugin_forumml_header'.
-            				' (name)'.
-            				' VALUES  ($1)');
-        	$res = db_query_params($sql,array($header));
-            return (db_insertid($res,'plugin_forumml_header','id_header'));
-        } else {
-            return (db_result($result,0,'id_header'));
-        }
+       if ($result->rowCount()<1) {
+	       return $this->dao->insertHeader($header);
+       } else {
+	       $row=$result->getRow();
+	       return $row['id_header'];
+       }
     }
 
     function getParentMessageFromHeader($messageIdHeader) {
-        $qry = 'SELECT id_message'.
-            ' FROM plugin_forumml_messageheader'.
-            ' WHERE id_header = 1'.
-            ' AND value = $1 ';
-        $result = db_query_params($qry,array($messageIdHeader));
-        if ($result && !db_error($result)) {
-            $row = db_fetch_array($result);
-            return $row['id_message'];
-        }
-        return false;
+	    $result = $this->dao->getParentMessageFromHeader($messageIdHeader) ;
+	    if ($result && $result->rowCount() >= 1 ) {
+		    $row = $result->getRow();
+		    return $row['id_message'];
+	    }
+	    return false;
+
     }
 
     function updateParentDate($messageId, $date) {
 	    if ($messageId != 0) {
-		    $sql = 'SELECT id_parent, last_thread_update FROM plugin_forumml_message WHERE id_message = $1';
-		    $dar = db_query_params($sql,array($messageId));
-		    if ($dar && !db_error($dar)) {
-			    $row = db_fetch_array($dar);
+		    $dar = $this->dao->getParents($messageId);
+		    if ($dar) {
+			    $row = $dar->getRow();
 			    if ($date > $row['last_thread_update']) {
-				    $sql = 'UPDATE plugin_forumml_message'.
-					    ' SET last_thread_update =$1 '.
-					    ' WHERE id_message=$2';
-				    db_query_params($sql,array($date,$messageId));
+				    $this->dao->updateParentDate($messageId, $date);
 
 				    $this->updateParentDate($row['id_parent'], $date);
 			    }
@@ -147,12 +128,7 @@ class ForumMLInsert {
 	    if ($id_parent != 0) {
 		    $this->updateParentDate($id_parent, $messageDate);
 	    }
-
-	    $sql = sprintf('INSERT INTO plugin_forumml_message'.
-			    ' ( id_list, id_parent, body, last_thread_update, msg_type)'.
-			    ' VALUES ($1, $2, $3, $4, $5)');
-	    $res = db_query_params($sql,array($this->id_list , $id_parent , $body , $messageDate , $ctype));
-	    $this->id_message = db_insertid($res,'plugin_forumml_message','id_message');
+$this->id_message = $this->dao->insertMessage($this->id_list,  $id_parent , $body , $messageDate , $ctype);
 
 	    // All headers of the current mail are stored in the forumml_messageheader table
 	    $k=0;

@@ -173,9 +173,11 @@ class ForumMLPlugin extends Plugin {
 			$request =& HTTPRequest::instance();
 			$group_id = (int) $request->get('group_id');
 		}
-		$pm = ProjectManager::instance();
-		$Group = $pm->getProject($group_id);
-		return $Group->usesPlugin('forumml');
+		if(!isset($this->allowedForProject[$group_id])) {
+			$pM =& PluginManager::instance();
+			$this->allowedForProject[$group_id] = $pM->isPluginAllowedForProject($this, $group_id);
+		}
+		return $this->allowedForProject[$group_id];
 	}
 
 	function forumml_searchbox_option($params) {

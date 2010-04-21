@@ -33,6 +33,8 @@ class ForumML_MessageDao extends DataAccessObject {
 	}
 
 	function searchHeaderValue($messageId, $headerId) {
+		$messageId = $this->da->quoteSmart($messageId);
+		$headerId = $this->da->quoteSmart($headerId);
 		$sql = 'SELECT mh.value'.
 			' FROM plugin_forumml_message m'.
 			'  JOIN plugin_forumml_messageheader mh'.
@@ -45,6 +47,7 @@ class ForumML_MessageDao extends DataAccessObject {
 	}
 
 	function getMessageHeaders($id_message) {
+		$id_message = $this->da->quoteSmart($id_message);
 		$sql = 'SELECT value'.
 			' FROM plugin_forumml_messageheader'.
 			' WHERE id_message = $1'.
@@ -54,6 +57,8 @@ class ForumML_MessageDao extends DataAccessObject {
 	}
 
 	function getSpecificMessage($id_message,$list_id) {
+		$id_message = $this->da->quoteSmart($id_message);
+		$list_id = $this->da->quoteSmart($list_id);
 		$sql ='SELECT value, body'.
 			' FROM plugin_forumml_message m, plugin_forumml_messageheader mh'.
 			' WHERE m.id_message =$1 '.
@@ -64,6 +69,8 @@ class ForumML_MessageDao extends DataAccessObject {
 	}
 
 	function getHeaderValue($id, $ids) {
+		$id = $this->da->quoteSmart($id);
+		$ids = $this->da->quoteSmart($ids);
 		if (!isset($ids)) {
 			$ids = 'SELECT id_header FROM plugin_forumml_messageheader';
 		}
@@ -73,6 +80,9 @@ class ForumML_MessageDao extends DataAccessObject {
 	}
 
 	function getAllThreadsFromList($list_id,$offset,$chunks) {
+		$list_id = $this->da->quoteSmart($list_id);
+		$offset = $this->da->quoteSmart($offset);
+		$chunks = $this->da->quoteSmart($chunks);
 		$sql = 'SELECT m.id_message, m.last_thread_update as lastup, mh_d.value as date, mh_f.value as sender, mh_s.value as subject'.
 			' FROM plugin_forumml_message m'.
 			' LEFT JOIN plugin_forumml_messageheader mh_d ON (mh_d.id_message = m.id_message AND mh_d.id_header = $1)'.
@@ -81,12 +91,13 @@ class ForumML_MessageDao extends DataAccessObject {
 			' WHERE m.id_parent = 0'.
 			' AND id_list = $4 '.
 			' ORDER BY m.last_thread_update DESC'.
-			' OFFSET $5'.
-			' LIMIT $6';
+			' LIMIT $6'.
+			' OFFSET $5';
 		return $this->retrieve($sql,array(FORUMML_DATE,FORUMML_FROM,FORUMML_SUBJECT,$list_id,$offset,$chunks));
 	}
 
 	function countAllThreadsFromList($list_id) {
+		$list_id = $this->da->quoteSmart($list_id);
 		$sql = 'SELECT COUNT(*) as nb'.
 			' FROM plugin_forumml_message m'.
 			' LEFT JOIN plugin_forumml_messageheader mh_d ON (mh_d.id_message = m.id_message AND mh_d.id_header = $1)'.
@@ -120,6 +131,7 @@ class ForumML_MessageDao extends DataAccessObject {
 	}
 
 	function getFlattenedThread($topic) {
+		$topic = $this->da->quoteSmart($topic);
 		$sql = 'SELECT m.*, mh_d.value as date, mh_f.value as sender, mh_s.value as subject, mh_ct.value as content_type, mh_cc.value as cc, a.id_attachment, a.file_name, a.file_type, a.file_size, a.file_path, a.content_id'.
 			' FROM plugin_forumml_message m'.
 			' LEFT JOIN plugin_forumml_messageheader mh_d ON (mh_d.id_message = m.id_message AND mh_d.id_header = $1)'.
@@ -133,14 +145,20 @@ class ForumML_MessageDao extends DataAccessObject {
 	}
 
 	function updateCacheHTML($cache,$id) {
+		$cache = $this->da->quoteSmart($cache);
+		$id = $this->da->quoteSmart($id);
 		return $this->update('UPDATE plugin_forumml_message SET cached_html= $1 WHERE id_message= $2',array($cache,$id));
 	}
 
 	function getAttachment($id_message,$match) {
+		$id_message = $this->da->quoteSmart($id_message);
+		$match = $this->da->quoteSmart($match);
 		$sql = 'SELECT id_attachment FROM plugin_forumml_attachment WHERE id_message=$1 and content_id=<$2>';
 		return $this->retrieve($sql,array($id_message , $match));
 	}
 	function searchArchives($list_id,$pattern) {
+		$list_id = $this->da->quoteSmart($list_id);
+		$pattern = $this->da->quoteSmart($pattern);
 		$sql = 'SELECT mh.id_message, mh.value'.
 			' FROM plugin_forumml_message m, plugin_forumml_messageheader mh'.
 			' WHERE mh.id_header = $1'.
@@ -153,8 +171,87 @@ class ForumML_MessageDao extends DataAccessObject {
 	}
 
 	function hasArchives($list_id) {
+		$list_id = $this->da->quoteSmart($list_id);
 		$qry = 'SELECT NULL FROM plugin_forumml_message WHERE id_list = $1 LIMIT 1';
 		return $this->retrieve($qry,array($list_id));
+	}
+
+	function insertMessageHeader($id_message, $id_header,$value) {
+		$id_message = $this->da->quoteSmart($id_message);
+		$id_header = $this->da->quoteSmart($id_header);
+		$value = $this->da->quoteSmart($value);
+		$qry = 'INSERT INTO plugin_forumml_messageheader'.
+			' (id_message, id_header, value)'.
+			' VALUES ($1,$2,$3)';
+		return $this->update($qry,array($id_message , $id_header , $value));
+	}
+	function insertAttachment ($id_message, $filename,$filetype,$filesize,$filepath,$content_id) {
+
+		$id_message = $this->da->quoteSmart($id_message);
+		$filename = $this->da->quoteSmart($filename);
+		$filetype = $this->da->quoteSmart($filetype);
+		$filesize = $this->da->quoteSmart($filesize);
+		$filepath = $this->da->quoteSmart($filepath);
+		$content_id = $this->da->quoteSmart($content_id);
+		$qry = 'INSERT INTO plugin_forumml_attachment'.
+			' (id_message, file_name, file_type, file_size, file_path, content_id)'.
+			' VALUES ($1,$2,$3,$4,$5,$6)';
+		return $this->update($qry,array($id_message , $filename , $filetype , $filesize , $filepath , $content_id));
+	}
+	function searchHeader ($header) {
+		$header = $this->da->quoteSmart($header);
+		$qry = 'SELECT id_header'.
+			' FROM plugin_forumml_header'.
+			' WHERE name = $1';
+		return $this->retrieve($qry,array($header));
+
+	}
+	function insertHeader($header) {
+
+		$header = $this->da->quoteSmart($header);
+		$sql = 'INSERT INTO plugin_forumml_header'.
+			' (name)'.
+			' VALUES  ($1)';
+		return db_insertid($this->update($sql,array($header)),'plugin_forumml_header','id_header');
+	}
+
+	function getParentMessageFromHeader ($id_header) {
+		$id_header = $this->da->quoteSmart($id_header);
+		$qry = 'SELECT id_message'.
+			' FROM plugin_forumml_messageheader'.
+			' WHERE id_header = 1'.
+			' AND value = $1 ';
+		return $this->retrieve($qry,array($id_header));
+
+	}
+
+	function getParents($messageId) {
+		$messageId = $this->da->quoteSmart($messageId);
+		$sql = 'SELECT id_parent, last_thread_update FROM plugin_forumml_message WHERE id_message = $1';
+		return $this->retrieve($sql,array($messageId));
+
+	}
+	function updateParentDate($messageId,$date) {
+		$messageId = $this->da->quoteSmart($messageId);
+		$date = $this->da->quoteSmart($date);
+		$sql = 'UPDATE plugin_forumml_message'.
+			' SET last_thread_update =$1 '.
+			' WHERE id_message=$2';
+		$this->update($sql,array($date,$messageId));
+	}
+
+	function insertMessage ($id_list,$id_parent, $body, $messageDate, $ctype) {
+		$id_list = $this->da->quoteSmart($id_list);
+		$id_parent = $this->da->quoteSmart($id_parent);
+		$body = $this->da->quoteSmart($body);
+		$messageDate = $this->da->quoteSmart($messageDate);
+		$ctype = $this->da->quoteSmart($ctype);
+
+		$sql = 'INSERT INTO plugin_forumml_message'.
+			' ( id_list, id_parent, body, last_thread_update, msg_type)'.
+			' VALUES ($1, $2, $3, $4, $5)';
+		return db_insertid($this->update($sql,array($id_list , $id_parent , $body , $messageDate , $ctype)),'plugin_forumml_message' ,'id_message');
+
 	}
 
 }

@@ -730,7 +730,7 @@ function plugin_forumml_process_mail($plug,$reply=false) {
 		$mail->setBody($body);
 
 		if ($mail->send()) {
-			$feedback .= _('Mail successfully sent');
+			$feedback .= _('Mail successfully sent ');
 		} else {
 			$feedback .= _('Sending mail failed');
 			$continue = false;

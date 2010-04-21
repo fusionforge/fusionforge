@@ -3975,8 +3975,11 @@ plugins/coclico/forumml/README.txt -text
 plugins/coclico/forumml/TODO -text
 plugins/coclico/forumml/bin/db-upgrade.pl -text
 plugins/coclico/forumml/bin/installFF.sh -text
+plugins/coclico/forumml/bin/mail_2_DB.php -text
+plugins/coclico/forumml/bin/mail_2_DB.pl -text
 plugins/coclico/forumml/bin/mail_2_DBFF.php -text
 plugins/coclico/forumml/bin/mail_2_DBFF.pl -text
+plugins/coclico/forumml/bin/ml_arch_2_DB.pl -text
 plugins/coclico/forumml/bin/ml_arch_2_DBFF.pl -text
 plugins/coclico/forumml/common/forumml-init.php -text
 plugins/coclico/forumml/db/forumml-init.sql -text

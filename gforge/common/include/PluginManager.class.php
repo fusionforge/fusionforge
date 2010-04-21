@@ -250,6 +250,10 @@ class PluginManager extends Error {
 		}
 
 	}
+	function isPluginAllowedForProject($p, $group_id) {
+		$Group = group_get_object($group_id);
+		return $Group->usesPlugin($p->getName());
+	}
 }
 
 /**
