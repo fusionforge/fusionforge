@@ -1,33 +1,29 @@
 <?php
 // PLEASE DO NOT REMOVE THIS LINE
 
-// GForge Universal Site Modifications
+// FusionForge Universal Site Modifications
 // by David HM Spector <spector@zeitgeist.com>
 //
-// Really Important Safety Tip: --> DO NOT LEAVE ANY WHITE
-// SPACE AFTER THE CLOSING PHP TAG AT THE END OF THIS FILE!
+// FusionForge global paths
 //
-// Doing so will really confuse the software and cause
-// 1) cookies to fail and 2) HTML page headers to fail
-// which will give you some preally hard-to-debug problems.
-// Why? PHP is a *pre-processor* -- anything that's not PHP gets
-// emitted as part of the HTML stream and processed by the browser,
-// so white space is meaningful!
+$sys_etc_path='{gforge_etc}';
+$sys_share_path='{usr_share_gforge}';
+$sys_var_path='{var_lib_gforge}';
+
 //
-//
-// GForge hostnames
+// FusionForge hostnames
 //
 // Hostnames should be fully qualified domain names (FQDNs); using short names
-// would be prettier but would stop you from distributing your SourceForge
-// implementation across multiple domains.
+// would be prettier but would stop you from distributing your implementation
+// across multiple domains.
 //
 // Of course, if you have a lot of machines serving a particular purpose
 // such as FTP or for shell accounts, the "hostname" here might be in
 // reality an addr_list of machines that is serviced by a round-robin
 // mechanism or something fancy like a local-director.
 //
-// The default GForge domain
-// this is used where ever the "naked" form of the GForge domain
+// The default FusionForge domain
+// this is used where ever the "naked" form of the FusionForge domain
 // might be used.  E.g., "mailto:admin@gforge.net"
 $sys_default_domain = '{domain_name}';
 $sys_forum_return_domain = "{sys_forum_return_domain}";
@@ -43,7 +39,7 @@ $sys_download_host = '{download_host}';
 $sys_shell_host = '{shell_host}';
 $sys_users_host = '{users_host}';
 
-// Machine that hosts the GForge mailing lists (This could also be
+// Machine that hosts the FusionForge mailing lists (This could also be
 // the mail host if you have enough horsepower & bandwidth)
 $sys_lists_host = '{lists_host}';
 

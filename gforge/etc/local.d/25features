@@ -46,6 +46,13 @@ $sys_use_project_multimedia={sys_use_project_multimedia};
 //	If set to true, only a site admin can register projects
 //
 $sys_project_reg_restricted={sys_project_reg_restricted};
+
+//
+//  Auto approve project registration.
+//
+$sys_project_reg_autoapprove=false;
+$sys_project_reg_autoapprove_user='admin';
+
 //
 //	Restricted user registration
 //	If set to true, only a site admin can register users

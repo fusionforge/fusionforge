@@ -22,9 +22,9 @@ $sys_ftp_upload_host='{ftpuploadhost}';
 $sys_apache_user='{sys_apache_user}';
 $sys_apache_group='{sys_apache_group}';
 
-// Where the GForge files are placed
+// Where the FusionForge files are placed
 // *** IMPORTANT: sys_urlroot *MUST* be an ABSOLUTE FILEYSTEM PATH NAME
-//             that points to the www directory of the GForge
+//             that points to the www directory of the FusionForge
 //             installation.  If you use ANY form of relative path
 //             you will break the html_image function in include/html.php
 //
@@ -53,7 +53,7 @@ $sys_bcc_all_email_address='';
 
 // GUI modifications (menu colors, etc.)
 //	See the top of the file include/html.php, this is where the menu colors
-//	and colors used throughout GForge are defined.
+//	and colors used throughout FusionForge are defined.
 
 // Themeing related vars... Some of this needs to change in the session stuff
 // The theme base directory, everything else is handled by theme_sysinit()
@@ -70,7 +70,7 @@ $sys_images_url='';
 $sys_images_secure_url='';
 
 // Groups
-//	The GForge permission model is based on groups
+//	The FusionForge permission model is based on groups
 //	certain parts of the site, like news, stats, etc
 //	are based on special group_id numbers
 //	group_id #1 is the super-user group of sitewide admins
@@ -99,5 +99,15 @@ $sys_force_login={sys_force_login};
 //$gantt_task_font_size=12;
 
 // Place for customized files
-$sys_custom_path='{sys_custom_path}';
+$sys_custom_path=$sys_etc_path.'/custom';
+
+// Gettext files (default: /usr/share/locale).
+$sys_gettext_path=$sys_share_path.'/locales';
+
+// Define the type of installation
+//    * development: 
+//    * integration: 
+//    * staging: 
+//    * production: normal mode.
+$sys_install_type = 'production';
 
