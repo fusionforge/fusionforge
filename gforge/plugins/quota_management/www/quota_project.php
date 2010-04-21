@@ -119,9 +119,9 @@ $quota_tot_other = 0;
 $quota_tot_1 = 0;
 $quota_tot_scm = 0;
 
-$upload_dir = $sys_upload_dir .  $group->getUnixName();
-$chroot_dir = $sys_chroot;
-$ftp_dir = $sys_ftp_upload_dir."/pub/".$group->getUnixName();
+$upload_dir = forge_get_config('upload_dir') .  $group->getUnixName();
+$chroot_dir = forge_get_config('chroot');
+$ftp_dir = forge_get_config('ftp_upload_dir')."/pub/".$group->getUnixName();
 $group_dir = $chroot_dir.$groupdir_prefix . "/" . $group->getUnixName();
 $cvs_dir = $chroot_dir.$cvsdir_prefix . "/" . $group->getUnixName();
 $svn_dir = $chroot_dir.$svndir_prefix . "/" . $group->getUnixName();

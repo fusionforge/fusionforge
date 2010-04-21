@@ -90,7 +90,7 @@ if ($GLOBALS['sys_block_anonymous_downloads']) {
 	}
 }
 
-$filepath=$sys_upload_dir.'/'.$Group->getUnixName().'/'.$Package->getFileName().'/'.$Release->getFileName().'/'.$File->getName();
+$filepath=forge_get_config('upload_dir').'/'.$Group->getUnixName().'/'.$Package->getFileName().'/'.$Release->getFileName().'/'.$File->getName();
 if (file_exists($filepath)) {
 	Header('Content-disposition: attachment; filename="'.str_replace('"', '', $filename).'"');
 	Header("Content-type: application/binary");

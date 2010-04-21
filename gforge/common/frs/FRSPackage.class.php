@@ -131,7 +131,7 @@ class FRSPackage extends Error {
 	 *	@return	boolean success.
 	 */
 	function create($name,$is_public=1) {
-		global $sys_apache_user,$sys_apache_group;
+
 		if (strlen($name) < 3) {
 			$this->setError(_('FRSPackage Name Must Be At Least 3 Characters'));
 			return false;
@@ -172,7 +172,7 @@ class FRSPackage extends Error {
 		} else {
 
 			//make groupdir if it doesn't exist
-			$groupdir = $GLOBALS['sys_upload_dir'].'/'.$this->Group->getUnixName();
+			$groupdir = forge_get_config('upload_dir').'/'.$this->Group->getUnixName();
 			if (!is_dir($groupdir)) {
 				@mkdir($groupdir);
 			}
@@ -183,8 +183,8 @@ class FRSPackage extends Error {
 			}
 			
 			// this 2 should normally silently fail (because it's called with the apache user) but if it's root calling the create() method, then the owner and group for the directory should be changed
-			@chown($newdirlocation,$sys_apache_user);
-			@chgrp($newdirlocation,$sys_apache_group);
+			@chown($newdirlocation,forge_get_config('apache_user'));
+			@chgrp($newdirlocation,forge_get_config('apache_group'));
 			db_commit();
 			return true;
 		}
@@ -404,8 +404,8 @@ class FRSPackage extends Error {
 			return false;
 		}
 		$newdirname = $this->getFileName();
-		$olddirlocation = $GLOBALS['sys_upload_dir'].'/'.$this->Group->getUnixName().'/'.$olddirname;
-		$newdirlocation = $GLOBALS['sys_upload_dir'].'/'.$this->Group->getUnixName().'/'.$newdirname;
+		$olddirlocation = forge_get_config('upload_dir').'/'.$this->Group->getUnixName().'/'.$olddirname;
+		$newdirlocation = forge_get_config('upload_dir').'/'.$this->Group->getUnixName().'/'.$newdirname;
 		
 		if(($olddirname!=$newdirname)){
 			if(is_dir($newdirlocation)){
@@ -466,7 +466,7 @@ class FRSPackage extends Error {
 				return false;
 			}
 		}
-		$dir=$GLOBALS['sys_upload_dir'].'/'.
+		$dir=forge_get_config('upload_dir').'/'.
 			$this->Group->getUnixName() . '/' .
 			$this->getFileName().'/';
 

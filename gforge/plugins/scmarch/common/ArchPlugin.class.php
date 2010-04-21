@@ -35,7 +35,7 @@ class ArchPlugin extends SCMPlugin {
 		if (isset ($arch_root)) {
 			$this->arch_root = $arch_root;
 		} else {
-			$this->arch_root = $GLOBALS['sys_chroot'].'/scmrepos/arch' ;
+			$this->arch_root = forge_get_config('chroot').'/scmrepos/arch' ;
 		}
 
 		$this->register () ;

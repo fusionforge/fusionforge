@@ -1,6 +1,6 @@
 <?php
 
-require_once ($GLOBALS['sys_plugins_path'].'/extratabs/common/ExtraTabsPlugin.class.php') ;
+require_once (forge_get_config('plugins_path').'/extratabs/common/ExtraTabsPlugin.class.php') ;
 
 $ExtraTabsPluginObject = new ExtraTabsPlugin ;
 

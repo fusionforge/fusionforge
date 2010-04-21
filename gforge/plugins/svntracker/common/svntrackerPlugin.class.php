@@ -158,19 +158,19 @@ class svntrackerPlugin extends Plugin {
 	*
 	*/
 	/*function addCvsTrackerToFile($path) {
-		global $sys_plugins_path, $cvs_binary_version;
+		global  $cvs_binary_version;
 		
 		$FOut = fopen($path, "a");
 		if($FOut) {
 			fwrite($FOut, "# BEGIN added by gforge-plugin-cvstracker\n");
 			if ( $cvs_binary_version == "1.12" ) {
 				$Line = "ALL ( php -q -d include_path=".ini_get('include_path').
-					" ".$sys_plugins_path."/cvstracker/bin/post.php".
+					" ".forge_get_config('plugins_path')."/cvstracker/bin/post.php".
 					" %r %p %{sVv} )\n";
 			}
 			if ( $cvs_binary_version == "1.11") {
 				$Line = "ALL ( php -q -d include_path=".ini_get('include_path').
-					" ".$sys_plugins_path."/cvstracker/bin/post.php".
+					" ".forge_get_config('plugins_path')."/cvstracker/bin/post.php".
 					" %r %{sVv} )\n";
 			}
 			fwrite($FOut,$Line);

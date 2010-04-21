@@ -92,7 +92,7 @@ if (getStringFromRequest('update')) {
 			$installdir = $plugin->getInstallDir();
 			
 			// Remove the symbolic links made if plugin has a www.
-			if (is_dir($sys_plugins_path . '/' . $pluginname . '/www')) { // if the plugin has a www dir delete the link to it
+			if (is_dir(forge_get_config('plugins_path') . '/' . $pluginname . '/www')) { // if the plugin has a www dir delete the link to it
 				if (file_exists('../'.$installdir)) {
 					$result = unlink('../'.$installdir);
 					if (!$result) {
@@ -124,32 +124,32 @@ if (getStringFromRequest('update')) {
 			$installdir = $plugin->getInstallDir();
 
 			// Create a symbolic links to plugins/<plugin>/www (if directory exists).
-			if (is_dir($sys_plugins_path . '/' . $pluginname . '/www')) { // if the plugin has a www dir make a link to it
+			if (is_dir(forge_get_config('plugins_path') . '/' . $pluginname . '/www')) { // if the plugin has a www dir make a link to it
 				// The apache group or user should have write perms the www/plugins folder...
 				if (!is_link('../'.$installdir)) {
-					$code = symlink($sys_plugins_path . '/' . $pluginname . '/www', '../'.$installdir); 
+					$code = symlink(forge_get_config('plugins_path') . '/' . $pluginname . '/www', '../'.$installdir); 
 					if (!$code) {
-						$feedback .= '<br />['.'../'.$installdir.'->'.$sys_plugins_path . '/' . $pluginname . '/www]';
+						$feedback .= '<br />['.'../'.$installdir.'->'.forge_get_config('plugins_path') . '/' . $pluginname . '/www]';
 						$feedback .= _('<br />Soft link to www couldn\'t be created. Check the write permissions for apache in gforge www/plugins dir or create the link manually.');
 					}
 				}
 			}
 				
 			// Create a symbolic links to plugins/<plugin>/etc/plugins/<plugin> (if directory exists).
-			if (is_dir($sys_plugins_path . '/' . $pluginname . '/etc/plugins/' . $pluginname)) {
+			if (is_dir(forge_get_config('plugins_path') . '/' . $pluginname . '/etc/plugins/' . $pluginname)) {
 				// The apache group or user should have write perms in /etc/gforge/plugins folder...
-				$code = symlink($sys_plugins_path . '/' . $pluginname . '/etc/plugins/' . $pluginname, $sys_etc_path. '/plugins/'.$pluginname); 
+				$code = symlink(forge_get_config('plugins_path') . '/' . $pluginname . '/etc/plugins/' . $pluginname, $sys_etc_path. '/plugins/'.$pluginname); 
 				if (!$code) {
-					$feedback .= '<br />['.$sys_etc_path. '/plugins/'.$pluginname.'->'.$sys_plugins_path . '/' . $pluginname . '/etc/plugins/' . $pluginname . ']';
+					$feedback .= '<br />['.$sys_etc_path. '/plugins/'.$pluginname.'->'.forge_get_config('plugins_path') . '/' . $pluginname . '/etc/plugins/' . $pluginname . ']';
 					$feedback .= sprintf(_('<br />Config file could not be linked to etc/gforge/plugins/%1$s. Check the write permissions for apache in /etc/gforge/plugins or create the link manually.'), $pluginname);
 				}
 			}
 
 			if (getStringFromRequest('init')) {
 				// now we're going to check if there's a XX-init.sql file and run it
-				$db_init = $sys_plugins_path . '/' . $pluginname . '/db/' . $pluginname . '-init-pgsql.sql';
+				$db_init = forge_get_config('plugins_path') . '/' . $pluginname . '/db/' . $pluginname . '-init-pgsql.sql';
 				if (!is_file($db_init)) {
-					$db_init = $sys_plugins_path . '/' . $pluginname . '/db/' . $pluginname . '-init.sql';
+					$db_init = forge_get_config('plugins_path') . '/' . $pluginname . '/db/' . $pluginname . '-init.sql';
 					if (!is_file($db_init)) {
 						$db_init = 0;
 					}
@@ -168,8 +168,8 @@ if (getStringFromRequest('update')) {
 					}
 				}	
 				//we check for a php script	
-				if (is_file($sys_plugins_path . '/' . $pluginname . '/script/' . $pluginname . '-init.php')) {
-					include($sys_plugins_path . '/' . $pluginname . '/script/' . $pluginname . '-init.php');		
+				if (is_file(forge_get_config('plugins_path') . '/' . $pluginname . '/script/' . $pluginname . '-init.php')) {
+					include(forge_get_config('plugins_path') . '/' . $pluginname . '/script/' . $pluginname . '-init.php');		
 				} else {
 					
 				}
@@ -203,11 +203,11 @@ if (!$pm->PluginIsInstalled('scmcvs')) {
 
 //get the directories from the plugins dir
 
-$handle = opendir($sys_plugins_path);
+$handle = opendir(forge_get_config('plugins_path'));
 $filelist = array();
 while (($filename = readdir($handle)) !== false) {
 	if ($filename!='..' && $filename!='.' && $filename!=".svn" && $filename!="CVS" &&
-		is_dir($sys_plugins_path.'/'.$filename) &&
+		is_dir(forge_get_config('plugins_path').'/'.$filename) &&
 		!in_array($filename, $plugins_disabled)) {
 
 		$filelist[] = $filename;

@@ -70,25 +70,25 @@ function cron_debug($string) {
 }
 
 function checkChroot() {
-	global $sys_chroot;
-	if(isset($sys_chroot) && !empty($sys_chroot) && is_dir($sys_chroot)) {
+
+	if(forge_get_config('chroot') != '' && is_dir(forge_get_config('chroot'))) {
 		return true;
 	}
 	return false;
 }
 
 function chrootPath($path) {
-	global $sys_chroot;
+
 	if(checkChroot()) {
-		$path = $sys_chroot.$path;
+		$path = forge_get_config('chroot').$path;
 	}
 	return $path;
 }
 
 function chrootCommand($command) {
-	global $sys_chroot;
+
 	if(checkChroot()) {
-		$command = 'chroot '.$sys_chroot.' '.$command;
+		$command = 'chroot '.forge_get_config('chroot').' '.$command;
 	}
 	return $command;
 }

@@ -119,7 +119,7 @@ session_set();
 plugin_hook('after_session_set');
 
 //mandatory login
-if (!session_loggedin() && $sys_force_login == 1 ) {
+if (!session_loggedin() && forge_get_config ('force_login') == 1 ) {
 	$expl_pathinfo = explode('/',getStringFromServer('REQUEST_URI'));
         if (getStringFromServer('REQUEST_URI')!='/' && $expl_pathinfo[1]!='account' && $expl_pathinfo[1]!='export' ) exit_not_logged_in();
 	// Show proj* export even if not logged in when force login
@@ -144,7 +144,7 @@ if (session_loggedin()) {
 //
 //	Include user Theme
 //
-require_once $sys_themeroot.forge_get_config('default_theme').'/Theme.class.php';
+require_once forge_get_config('theme_root').forge_get_config('default_theme').'/Theme.class.php';
 
 $HTML=new Theme();
 

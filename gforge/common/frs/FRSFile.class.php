@@ -127,7 +127,7 @@ class FRSFile extends Error {
 		}
 
 
-		$path_name=$GLOBALS['sys_upload_dir'].'/'.$this->FRSRelease->FRSPackage->Group->getUnixName();
+		$path_name=forge_get_config('upload_dir').'/'.$this->FRSRelease->FRSPackage->Group->getUnixName();
 		if (!is_dir($path_name)) {
 			mkdir($path_name,0755);
 		} else {
@@ -153,7 +153,7 @@ class FRSFile extends Error {
 		}
 
 		$file_location=escapeshellcmd($file_location);
-		$newfilelocation = $GLOBALS['sys_upload_dir'].'/'.
+		$newfilelocation = forge_get_config('upload_dir').'/'.
 			$this->FRSRelease->FRSPackage->Group->getUnixName().'/'.
 			$this->FRSRelease->FRSPackage->getFileName().'/'.
 			$this->FRSRelease->getFileName().'/';
@@ -327,7 +327,7 @@ class FRSFile extends Error {
 			return false;
 		}
 
-		$file=$GLOBALS['sys_upload_dir'].'/'. 
+		$file=forge_get_config('upload_dir').'/'. 
 			$this->FRSRelease->FRSPackage->Group->getUnixName() . '/' . 
 			$this->FRSRelease->FRSPackage->getFileName().'/'.
 			$this->FRSRelease->getFileName().'/'.
@@ -399,12 +399,12 @@ class FRSFile extends Error {
 
 		// Move physically file if needed
 		if ($release_id != $this->FRSRelease->getID()) {
-			$old_file_location = $GLOBALS['sys_upload_dir'].'/'.
+			$old_file_location = forge_get_config('upload_dir').'/'.
 				$this->FRSRelease->FRSPackage->Group->getUnixName().'/'.
 				$this->FRSRelease->FRSPackage->getFileName().'/'.
 				$this->FRSRelease->getFileName().'/'.
 				$this->data_array['filename'];
-			$new_file_location = $GLOBALS['sys_upload_dir'].'/'.
+			$new_file_location = forge_get_config('upload_dir').'/'.
 				$FRSRelease->FRSPackage->Group->getUnixName().'/'.
 				$FRSRelease->FRSPackage->getFileName().'/'.
 				$FRSRelease->getFileName().'/'.

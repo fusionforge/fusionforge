@@ -199,7 +199,7 @@ if ($err == "")
 			{
 				$line .= implode (",", $gmembers) . ",";
 			}
-			$line .= $sys_apache_user . "\n";
+			$line .= forge_get_config('apache_user') . "\n";
 			fwrite ($h6, $line);
 		}
 	}

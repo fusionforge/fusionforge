@@ -71,12 +71,12 @@ if (!$frsr || !is_object($frsr)) {
 	exit_error('Error',$frsr->getErrorMessage());
 }
 
-//we make sure we are not receiving $sys_ftp_upload_dir by POST or GET, to prevent security problems
-global $sys_ftp_upload_dir;
-if (!$sys_ftp_upload_dir) {
+//we make sure we are not receiving forge_get_config('ftp_upload_dir') by POST or GET, to prevent security problems
+
+if (!forge_get_config('ftp_upload_dir')) {
 	exit_error('Error','External sys_ftp_upload_dir detected');
 }
-$upload_dir = $sys_ftp_upload_dir . "/" . $g->getUnixName();
+$upload_dir = forge_get_config('ftp_upload_dir') . "/" . $g->getUnixName();
 
 
 /*
@@ -313,7 +313,7 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 <?php echo _("Upload a new file") ?>: <input type="file" name="userfile"  size="30" />
 <?php if (forge_get_config('use_ftpuploads')) {
 	echo '<p>';
-	printf(_('Alternatively, you can use FTP to upload a new file at %1$s'), $sys_ftp_upload_host).'<br />';
+	printf(_('Alternatively, you can use FTP to upload a new file at %1$s'), forge_get_config('ftp_upload_host')).'<br />';
 	echo _('Choose an FTP file instead of uploading:').'<br />';
 	$arr[]='';
 	$ftp_files_arr=array_merge($arr,ls($upload_dir,true));

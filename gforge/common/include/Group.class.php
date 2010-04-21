@@ -1571,11 +1571,11 @@ class Group extends Error {
 		$hook_params['group_id'] = $this->getID();
 		plugin_hook ("group_delete", $hook_params);
 		
-		if (isset($GLOBALS['sys_upload_dir']) && $this->getUnixName()) {
-			exec('/bin/rm -rf '.$GLOBALS['sys_upload_dir'].'/'.$this->getUnixName().'/');
+		if (forge_get_config('upload_dir') != '' && $this->getUnixName()) {
+			exec('/bin/rm -rf '.forge_get_config('upload_dir').'/'.$this->getUnixName().'/');
 		}
-		if (isset($GLOBALS['sys_ftp_upload_dir']) && $this->getUnixName()) {
-			exec('/bin/rm -rf '.$GLOBALS['sys_ftp_upload_dir'].'/'.$this->getUnixName().'/');
+		if (forge_get_config('ftp_upload_dir') != '' && $this->getUnixName()) {
+			exec('/bin/rm -rf '.forge_get_config('ftp_upload_dir').'/'.$this->getUnixName().'/');
 		}
 		//
 		//	Delete reporting

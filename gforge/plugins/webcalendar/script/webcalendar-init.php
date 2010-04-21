@@ -17,7 +17,7 @@ single_user: false
 user_inc: user.php
 ?>" ;
 
-$handle = fopen($sys_plugins_path . '/' . $pluginname . "/www/includes/settings.php", "w");
+$handle = fopen(forge_get_config('plugins_path') . '/' . $pluginname . "/www/includes/settings.php", "w");
 fwrite($handle,$fichier_conf);
 fclose($handle);
 

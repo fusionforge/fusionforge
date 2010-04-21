@@ -38,7 +38,7 @@ class DarcsPlugin extends SCMPlugin {
 		if (isset ($darcs_root)) {
 			$this->darcs_root = $darcs_root;
 		} else {
-			$this->darcs_root = $GLOBALS['sys_chroot'].'/scmrepos/darcs' ;
+			$this->darcs_root = forge_get_config('chroot').'/scmrepos/darcs' ;
 		}
 		
 		$this->register () ;

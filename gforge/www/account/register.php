@@ -113,7 +113,7 @@ if (!isset($ccode) || empty($ccode) || !preg_match('/^[a-zA-Z]{2}$/', $ccode)) {
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 <p>
 <?php
-if ($GLOBALS['sys_require_unique_email']) {
+if (forge_get_config('require_unique_email')) {
 	echo _('Login Name (no uppercase letters; leave empty to have it generated automatically):');
 } else {
 	echo _('Login Name (do not use uppercase letters):'); echo utils_requiredField();

@@ -142,7 +142,7 @@ function cvs_write_file($filePath, $content, $append=1) {
  */
 function add_sync_mail($unix_group_name) {
 
-	global  $cvsdir_prefix, $cvs_binary_version,$sys_plugins_path;
+	global  $cvsdir_prefix, $cvs_binary_version;
 	$loginfo_file=$cvsdir_prefix.'/'.$unix_group_name.'/CVSROOT/loginfo';
 
 	if (!$loginfo_file) {
@@ -155,11 +155,11 @@ function add_sync_mail($unix_group_name) {
 //		echo $unix_group_name.":Syncmail not found in loginfo.Adding\n";
 		if ( $cvs_binary_version == "1.11" ) {
 			$pathsyncmail = "DEFAULT ".
-				$sys_plugins_path."/cvssyncmail/bin/syncmail -u %{sVv} ".
+				forge_get_config('plugins_path')."/cvssyncmail/bin/syncmail -u %{sVv} ".
 				$unix_group_name."-commits@".forge_get_config('lists_host');
 		} else { //it's 1.12
 			$pathsyncmail = "DEFAULT ".
-				$sys_plugins_path."/cvssyncmail/bin/syncmail -u %p %{sVv} ".
+				forge_get_config('plugins_path')."/cvssyncmail/bin/syncmail -u %p %{sVv} ".
 				$unix_group_name."-commits@".forge_get_config('lists_host');
 		}
 		$content = "\n#BEGIN Added by cvs.php script\n".
@@ -182,7 +182,7 @@ function add_sync_mail($unix_group_name) {
  *
  */
 function add_cvstracker($unix_group_name) {
-	global $cvsdir_prefix, $sys_plugins_path, $cvs_binary_version;
+	global $cvsdir_prefix, $cvs_binary_version;
 	$loginfo_file=$cvsdir_prefix.'/'.$unix_group_name.'/CVSROOT/loginfo';
 
 	if (!$loginfo_file) {
@@ -195,11 +195,11 @@ function add_cvstracker($unix_group_name) {
 		$content = "\n# BEGIN added by gforge-plugin-cvstracker";
 		if ( $cvs_binary_version == "1.11" ) {
 			$content .= "\nALL ( php -q -d include_path=".ini_get('include_path').
-				" ".$sys_plugins_path."/cvstracker/bin/post.php
+				" ".forge_get_config('plugins_path')."/cvstracker/bin/post.php
  ".$unix_group_name." %{sVv} )";
 		} else { //it's version 1.12
 			$content .= "\nALL ( php -q -d include_path=".ini_get('include_path').
-				" ".$sys_plugins_path."/cvstracker/bin/post.php
+				" ".forge_get_config('plugins_path')."/cvstracker/bin/post.php
  %r %p %{sVv} )";
 		}
 		$content .= "\n# END added by gforge-plugin-cvstracker";
@@ -258,12 +258,12 @@ function add_acl_check($unix_group_name) {
 		if ( $cvs_binary_version == "1.11" ) {
 			$aclcheck = "\n#BEGIN adding cvs acl check".
 				"\nALL php -q -d include_path=".ini_get('include_path').
-					" ".$GLOBALS['sys_plugins_path']."/scmcvs/bin/aclcheck.php ".$cvsdir_prefix."/".$unix_group_name.
+					" ".forge_get_config('plugins_path')."/scmcvs/bin/aclcheck.php ".$cvsdir_prefix."/".$unix_group_name.
 				"\n#END adding cvs acl check\n";
 		} else { //it's version 1.12
 			$aclcheck = "\n#BEGIN adding cvs acl check".
 				"\nALL php -q -d include_path=".ini_get('include_path').
-					" ".$GLOBALS['sys_plugins_path']."/scmcvs/bin/aclcheck.php %r %p ".
+					" ".forge_get_config('plugins_path')."/scmcvs/bin/aclcheck.php %r %p ".
 				"\n#END adding cvs acl check\n";
 		}
 

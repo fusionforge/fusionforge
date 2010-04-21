@@ -57,7 +57,7 @@ if (!$perm || $perm->isError() || !$perm->isDocEditor()) {
 $editdoc = getStringFromRequest('editdoc');
 $docid = getIntFromRequest('docid');
 
-$upload_dir = $sys_ftp_upload_dir . "/" . $g->getUnixName();
+$upload_dir = forge_get_config('ftp_upload_dir') . "/" . $g->getUnixName();
 
 //
 //
@@ -327,7 +327,7 @@ if ($editdoc && $docid) {
 		<strong><?php echo _('OPTIONAL: Upload new file') ?></strong><br />
 		<input type="file" name="uploaded_data" size="30" /><br/><br />
 			<?php //if (forge_get_config('use_ftpuploads')) { ?>
-			<!--<strong><?php //printf(_('OR choose one form FTP %1$s'), $sys_ftp_upload_host) ?></strong>--><br />
+			<!--<strong><?php //printf(_('OR choose one form FTP %1$s'), forge_get_config('ftp_upload_host')) ?></strong>--><br />
 			<?php
 			//$ftp_files_arr=array_merge($arr,ls($upload_dir,true));
 			//echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename','');

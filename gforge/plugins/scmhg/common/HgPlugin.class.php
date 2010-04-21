@@ -35,7 +35,7 @@ class HgPlugin extends SCMPlugin {
 		if (isset ($hg_root)) {
 			$this->hg_root = $hg_root;
 		} else {
-			$this->hg_root = $GLOBALS['sys_chroot'].'/scmrepos/hg' ;
+			$this->hg_root = forge_get_config('chroot').'/scmrepos/hg' ;
 		}
 		
 		$this->register () ;

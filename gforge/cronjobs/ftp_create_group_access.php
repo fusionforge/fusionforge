@@ -28,8 +28,8 @@ require $gfcommon.'include/cron_utils.php';
 
 $users = array();
 
-$chroot_dir = $sys_chroot;
-$ftp_dir = $sys_ftp_upload_dir."/pub/";
+$chroot_dir = forge_get_config('chroot');
+$ftp_dir = forge_get_config('ftp_upload_dir')."/pub/";
 $home_dir = $chroot_dir.$homedir_prefix."/";
 
 

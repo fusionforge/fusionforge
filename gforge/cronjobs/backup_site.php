@@ -75,13 +75,13 @@ if($retval!=0){
  * Backup uploads dir
  **************************************/ 
 $output="";
-if (file_exists($sys_upload_dir)) {
-	@exec('tar -hjcvf '.$sys_path_to_backup.'uploads-tmp-'.$datetime.'.tar.bz2 '.$sys_upload_dir.' 2>&1' ,$output,$retval);   //proceed upload dir tar file creation
+if (file_exists(forge_get_config('upload_dir'))) {
+	@exec('tar -hjcvf '.$sys_path_to_backup.'uploads-tmp-'.$datetime.'.tar.bz2 '.forge_get_config('upload_dir').' 2>&1' ,$output,$retval);   //proceed upload dir tar file creation
 	if($retval!=0){
 		$err.= implode("\n", $output);
 	}
 } else {
-		$err.= 'Unable to find Upload Dir. Value on local.inc is:'.$sys_upload_dir;
+		$err.= 'Unable to find Upload Dir. Value on local.inc is:'.forge_get_config('upload_dir');
 }
 
 /**************************************

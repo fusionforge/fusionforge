@@ -114,14 +114,14 @@ foreach($users as $user) {
 foreach($groups as $group) {
 
 	//test if the FTP upload dir exists and create it if not
-	if (!is_dir($sys_ftp_upload_dir)) {
-		@mkdir($sys_ftp_upload_dir,0755,true);
+	if (!is_dir(forge_get_config('ftp_upload_dir'))) {
+		@mkdir(forge_get_config('ftp_upload_dir'),0755,true);
 	}
 	
 	//create an FTP upload dir for this project
 	if (forge_get_config('use_ftpuploads')) { 
-		if (!is_dir($sys_ftp_upload_dir.'/'.$group)) {
-			@mkdir($sys_ftp_upload_dir.'/'.$group); 
+		if (!is_dir(forge_get_config('ftp_upload_dir').'/'.$group)) {
+			@mkdir(forge_get_config('ftp_upload_dir').'/'.$group); 
 		}
 	}
 
@@ -171,7 +171,7 @@ foreach($groups as $group) {
 		fwrite($fw,$contents);
 		fclose($fw);
 	}
-	system("chown -R $sys_apache_user:$sys_apache_group $groupdir_prefix/$group");
+	system("chown -R forge_get_config('apache_user'):forge_get_config('apache_group') $groupdir_prefix/$group");
 }
 
 

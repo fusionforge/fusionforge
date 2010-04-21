@@ -126,14 +126,14 @@ class Layout extends Error {
                 $this->navigation = new Navigation();
                 
 		// determine rootindex
-		if ( file_exists($GLOBALS['sys_custom_path'] . '/index_std.php') ) {
-			$this->rootindex = $GLOBALS['sys_custom_path'] . '/index_std.php';
+		if ( file_exists(forge_get_config('custom_path') . '/index_std.php') ) {
+			$this->rootindex = forge_get_config('custom_path') . '/index_std.php';
 		} else {
 			$this->rootindex = $GLOBALS['gfwww'].'index_std.php';
 		}
 
 		// determine theme{dir,url}
-		$this->themedir = $GLOBALS['sys_themeroot'] . forge_get_config('default_theme') . '/';
+		$this->themedir = forge_get_config('themes_root') . forge_get_config('default_theme') . '/';
 		if (!file_exists ($this->themedir)) {
 			html_error_top(_("Can't find theme directory!"));
 			return;

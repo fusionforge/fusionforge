@@ -13,7 +13,7 @@ require $gfwww.'include/squal_pre.php';
 require $gfcommon.'include/cron_utils.php';
 
 //	Owner of files - apache
-$file_owner=$sys_apache_user.':'.$sys_apache_group;
+$file_owner=forge_get_config('apache_user').':'.forge_get_config('apache_group');
 
 //	Whether to separate directories by first letter like /m/mygroup /a/apple
 $first_letter = false;
@@ -42,7 +42,7 @@ $basedir = dirname($argv[0]);
 
 $err = "Creating Groups at ". $upload_path."\n";
 
-if (empty($sys_apache_user) || empty($sys_apache_group)) {
+if (forge_get_config('apache_user') == '' || forge_get_config('apache_group') == '') {
 	$err .=  "Error! sys_apache_user Is Not Set Or sys_apache_group Is Not Set!";
 	echo $err;
 	cron_entry(23,$err);

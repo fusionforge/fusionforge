@@ -48,7 +48,7 @@ if (forge_get_config('use_ftpuploads')) {
 	foreach($groups as $group) {
 	
 		//create an FTP upload dir for this project
-		$destdir = $sys_ftp_upload_dir.'/'.$group;
+		$destdir = forge_get_config('ftp_upload_dir').'/'.$group;
 		if (util_is_root_dir($destdir)) {
 			$err .= "Trying to access root directory\n";
 			continue;
@@ -65,11 +65,11 @@ if (forge_get_config('use_ftpuploads')) {
 				$err .= 'Could not chmod dir: '.$destdir."\n";
 				continue;
 			} 
-			if (!@chown($destdir, $sys_apache_user)) {
+			if (!@chown($destdir, forge_get_config('apache_user'))) {
 				$err .= 'Could not chown dir: '.$destdir."\n";
 				continue;
 			} 
-			if (!@chgrp($destdir, $sys_apache_group)) {
+			if (!@chgrp($destdir, forge_get_config('apache_group'))) {
 				$err .= 'Could not chgrp dir: '.$destdir."\n";
 				continue;
 			} 

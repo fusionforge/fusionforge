@@ -37,7 +37,7 @@ if (!$g || !is_object($g)) {
 	exit_error('Error',$g->getErrorMessage());	
 }
 
-$upload_dir = $sys_ftp_upload_dir . "/" . $g->getUnixName();
+$upload_dir = forge_get_config('ftp_upload_dir') . "/" . $g->getUnixName();
 
 if (getStringFromRequest('submit')) {
 	$doc_group = getIntFromRequest('doc_group');
@@ -168,7 +168,7 @@ if (getStringFromRequest('submit')) {
 					echo '
 						<tr>
 							<td>
-							<strong>'.sprintf(_('You can use FTP to upload a new file at %1$s'), $sys_ftp_upload_host).'<br />';
+							<strong>'.sprintf(_('You can use FTP to upload a new file at %1$s'), forge_get_config('ftp_upload_host')).'<br />';
 					echo _('Choose an FTP file instead of uploading:').'</strong>'. utils_requiredField() .'<br />';
 					$ftp_files_arr=array_merge($arr,ls($upload_dir,true));
 					echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename','');

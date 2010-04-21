@@ -68,6 +68,18 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 			       'sys_lists_host',
 			       'sys_scm_host',
 			       'sys_forum_return_domain',
+			       'sys_chroot',
+			       'sys_upload_dir',
+			       'sys_ftp_upload_dir',
+			       'sys_ftp_upload_host',
+			       'sys_apache_user',
+			       'sys_apache_group',
+			       'sys_require_unique_email',
+			       'sys_bcc_all_email_address',
+			       'sys_themeroot',
+			       'sys_force_login',
+			       'sys_custom_path',
+			       'sys_plugins_path',
 			) ;
 
 		$pattern = implode ('|', $vars) ;

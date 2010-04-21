@@ -46,7 +46,7 @@ echo db_error();
 
 while ( $fms_filesize_row = db_fetch_array( $fms_filesize_res ) ) {
 
-  $fms_file_path = $sys_upload_dir . '/' .
+  $fms_file_path = forge_get_config('upload_dir') . '/' .
     $fms_filesize_row['unix_group_name'] . '/' .
     $fms_filesize_row['filename'];
 

@@ -140,7 +140,7 @@ class PluginManager extends Error {
 		global $gfplugins;
 
 		$plugins_data = $this->GetPlugins() ;
-		$include_path = $GLOBALS['sys_plugins_path'] ;
+		$include_path = forge_get_config('plugins_path') ;
 		$filename = $include_path . '/'. $p_name . "/common/".$p_name."-init.php" ;
 		if (file_exists ($filename)) {
 			require_once ($filename) ;

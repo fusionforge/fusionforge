@@ -129,7 +129,7 @@ function util_check_url($url) {
  *
  */
 function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$extra_headers='',$send_html_email=false) {
-	global $sys_bcc_all_email_address,$sys_sendmail_path;
+	global $sys_sendmail_path;
 
 	if (!$to) {
 		$to='noreply@'.forge_get_config('web_host');
@@ -150,8 +150,8 @@ function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$e
 	}
 	$body2 .= "To: $to".
 		"\nFrom: ".util_encode_mailaddr($from,$sendername,$charset);
-	if (!empty($sys_bcc_all_email_address)) {
-		$BCC.=",$sys_bcc_all_email_address";
+	if (forge_get_config('bcc_all_emails') != '') {
+		$BCC.=",".forge_get_config('bcc_all_emails');
 	}
 	if(!empty($BCC)) {
 		$body2 .= "\nBCC: $BCC";

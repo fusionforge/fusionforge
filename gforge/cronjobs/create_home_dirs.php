@@ -93,9 +93,9 @@ foreach($groups as $group)
 	//create an FTP upload dir for this project
 	if (forge_get_config('use_ftpuploads'))
 	{ 
-		if (!is_dir($sys_ftp_upload_dir.'/'.$group))
+		if (!is_dir(forge_get_config('ftp_upload_dir').'/'.$group))
 		{
-			@mkdir($sys_ftp_upload_dir.'/'.$group); 
+			@mkdir(forge_get_config('ftp_upload_dir').'/'.$group); 
 		}
 	}
 	if (is_dir($groupdir_prefix."/".$group) == false)
@@ -109,9 +109,9 @@ foreach($groups as $group)
 		//	Read in the template file
 		//
 		$contents = "";
-		if (is_file ($sys_custom_path . "/project_homepage_template.php") == true)
+		if (is_file (forge_get_config('custom_path') . "/project_homepage_template.php") == true)
 		{
-			$fo = fopen ($sys_custom_path . "/project_homepage_template.php", "r");
+			$fo = fopen (forge_get_config('custom_path') . "/project_homepage_template.php", "r");
 			if ($fo)
 			{
 				while (!feof ($fo))
@@ -124,7 +124,7 @@ foreach($groups as $group)
 		if (strlen ($contents) <= 0)
 		{
 			$contents = '<html><head><title>Default page for project not found</title></head><body><p><div align="center">Default page for project not found, please create a homepage for your project.</div></body></html>';
-			$err .= "Project homepage template " . $sys_custom_path . "/project_homepage_template.php not found";
+			$err .= "Project homepage template " . forge_get_config('custom_path') . "/project_homepage_template.php not found";
 		}
 		//
 		//	Change some defaults in the template file

@@ -42,7 +42,7 @@ class SVNPlugin extends SCMPlugin {
 		if (isset ($svn_root)) {
 			$this->svn_root = $svn_root;
 		} else {
-			$this->svn_root = $GLOBALS['sys_chroot'].'/scmrepos/svn' ;
+			$this->svn_root = forge_get_config('chroot').'/scmrepos/svn' ;
 		}
 
 		$this->register () ;
@@ -216,7 +216,7 @@ class SVNPlugin extends SCMPlugin {
 				system ("chmod -R g+wX,o-rwx $repo") ;
 			}
 		} else {
-			$unix_user = $GLOBALS['sys_apache_user'];
+			$unix_user = forge_get_config('apache_user');
 			system ("chown -R $unix_user:$unix_group $repo") ;
 			if ($project->enableAnonSCM()) {
 				system ("chmod -R g+wX,o+rX-w $repo") ;

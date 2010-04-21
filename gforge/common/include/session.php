@@ -148,7 +148,7 @@ function session_login_valid_dbonly ($loginname, $passwd, $allowpending) {
 	global $feedback,$userstatus;
 
 	//  Try to get the users from the database using user_id and (MD5) user_pw
-	if ($GLOBALS['sys_require_unique_email']) {
+	if (forge_get_config('require_unique_email')) {
 		$res = db_query_params ('SELECT user_id,status,unix_pw FROM users WHERE (user_name=$1 OR email=$1) AND user_pw=$2',
 					array ($loginname,
 					       md5($passwd))) ;
@@ -160,7 +160,7 @@ function session_login_valid_dbonly ($loginname, $passwd, $allowpending) {
 	if (!$res || db_numrows($res) < 1) {
 		// No user whose MD5 passwd matches the MD5 of the provided passwd
 		// Selecting by user_name/email only
-		if ($GLOBALS['sys_require_unique_email']) {
+		if (forge_get_config('require_unique_email')) {
 			$res = db_query_params ('SELECT user_id,status,unix_pw FROM users WHERE user_name=$1 OR email=$1',
 						array ($loginname)) ;
 		} else {

@@ -54,8 +54,8 @@ if (!file_exists($project_settings_template))
 		"$sys_opt_path/plugins/mediawiki/etc/plugins/mediawiki/ProjectSettings.template.php";
 
 # Owner of files - apache
-$file_owner = $sys_apache_user.':'.$sys_apache_group;
-if (empty($sys_apache_user) || empty($sys_apache_group)) {
+$file_owner = forge_get_config('apache_user').':'.forge_get_config('apache_group');
+if (forge_get_config('apache_user' == '') || forge_get_config('apache_group') == '') {
 	$err =  "Error: sys_apache_user Is Not Set Or sys_apache_group Is Not Set!";
 	cron_debug($err);
 	cron_entry(23,$err);

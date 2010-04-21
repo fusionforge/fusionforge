@@ -6,7 +6,7 @@ $default_svn_server = forge_get_config('scm_host');
 $use_ssh = false;
 $use_dav = true;
 $use_ssl = true;
-// $svn_root = $GLOBALS['sys_chroot'].'/scmrepos/svn' ;
+// $svn_root = forge_get_config('chroot').'/scmrepos/svn' ;
 
 $svn_bin = "/usr/bin/svn";
 

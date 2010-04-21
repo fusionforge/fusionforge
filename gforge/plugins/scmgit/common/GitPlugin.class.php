@@ -39,7 +39,7 @@ class GitPlugin extends SCMPlugin {
 		if (isset ($git_root)) {
 			$this->git_root = $git_root;
 		} else {
-			$this->git_root = $GLOBALS['sys_chroot'].'/scmrepos/git' ;
+			$this->git_root = forge_get_config('chroot').'/scmrepos/git' ;
 		}
 
 		$this->register () ;

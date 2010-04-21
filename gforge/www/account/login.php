@@ -121,7 +121,7 @@ if ($login && !$success) {
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 <input type="hidden" name="return_to" value="<?php echo htmlspecialchars(stripslashes($return_to)); ?>" />
 <p>
-<?php if ($GLOBALS['sys_require_unique_email']) {
+<?php if (forge_get_config('require_unique_email')) {
 	echo _('Login name or email address');
 } else {
 	echo _('Login name:');

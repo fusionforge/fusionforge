@@ -38,7 +38,7 @@ class BzrPlugin extends SCMPlugin {
 		if (isset ($bzr_root)) {
 			$this->bzr_root = $bzr_root;
 		} else {
-			$this->bzr_root = $GLOBALS['sys_chroot'].'/scmrepos/bzr' ;
+			$this->bzr_root = forge_get_config('chroot').'/scmrepos/bzr' ;
 		}
 
 		$this->main_branch_names = array () ;

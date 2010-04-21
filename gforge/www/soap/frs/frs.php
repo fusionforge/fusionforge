@@ -504,7 +504,7 @@ function getFile($session_ser,$group_id,$package_id,$release_id,$file_id) {
 		return new soap_fault ('','getFile',$frsf->getErrorMessage(),$frsf->getErrorMessage());
 	}
 	
-	$file_location = $GLOBALS['sys_upload_dir'].'/'.
+	$file_location = forge_get_config('upload_dir').'/'.
 				$frsf->FRSRelease->FRSPackage->Group->getUnixName().'/'.
 				$frsf->FRSRelease->FRSPackage->getFileName().'/'.
 				$frsf->FRSRelease->getFileName().'/'.

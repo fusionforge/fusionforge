@@ -56,7 +56,7 @@ function &user_get_object_by_name($user_name,$res=false) {
  */
 function user_get_object_by_email($email,$res=false) {
 	if (!validate_email($email)
-	    || !$GLOBALS['sys_require_unique_email']) {
+	    || !forge_get_config('require_unique_email')) {
 		return false ;
 	}
 	if (!$res) {
@@ -241,7 +241,7 @@ class GFUser extends Error {
 			$this->setError(_('You must supply a theme'));
 			return false;
 		}
-		if (! $GLOBALS['sys_require_unique_email']) {
+		if (! forge_get_config('require_unique_email')) {
 			if (!$unix_name) {
 				$this->setError(_('You must supply a username'));
 				return false;
@@ -294,13 +294,13 @@ class GFUser extends Error {
 			$this->setError(_('That username already exists.'));
 			return false;
 		}
-		if ($GLOBALS['sys_require_unique_email']) {
+		if (forge_get_config('require_unique_email')) {
 			if (user_get_object_by_email ('$email')) {
 				$this->setError(_('User with this email already exists - use people search to recover your login.'));
 				return false;
 			}
 		}
-		if ($GLOBALS['sys_require_unique_email'] && !$unix_name) {
+		if (forge_get_config('require_unique_email') && !$unix_name) {
 			// Let's generate a loginname for the user
 			// ...based on the email address:
 			$email_array = explode ('@', $email, 2) ;
@@ -859,7 +859,7 @@ Enjoy the site.
 			return false;
 		}
 
-		if ($GLOBALS['sys_require_unique_email']) {
+		if (forge_get_config('require_unique_email')) {
 			if (db_numrows(db_query_params('SELECT user_id FROM users WHERE user_id!=$1 AND (lower(email) LIKE $2 OR lower(email_new) LIKE $2)',
 						       array ($this->getID(),
 							      strtolower($email)))) > 0) {
@@ -912,7 +912,7 @@ Enjoy the site.
 			return false;
 		}
 
-		if ($GLOBALS['sys_require_unique_email']) {
+		if (forge_get_config('require_unique_email')) {
 			if (db_numrows(db_query_params('SELECT user_id FROM users WHERE user_id!=$1 AND (lower(email) LIKE $2 OR lower(email_new) LIKE $2)',
 						       array ($this->getID(),
 							      strtolower($email)))) > 0) {
@@ -1493,7 +1493,7 @@ Enjoy the site.
 		} else {
 			$this->theme=$this->data_array['dirname'];
 		}
-		if (is_file($GLOBALS['sys_themeroot'].$this->theme.'/Theme.class.php')) {
+		if (is_file(forge_get_config('themes_root').$this->theme.'/Theme.class.php')) {
 			$GLOBALS['sys_theme']=$this->theme;
 		} else {
 			$this->theme=forge_get_config('default_theme');

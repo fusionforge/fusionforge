@@ -99,9 +99,9 @@ if (db_numrows($res_db) > 0)
 }
 
 // disk space size
-$chroot_dir = $sys_chroot;
-$ftp_dir = $sys_ftp_upload_dir."/pub/";
-$upload_dir = $sys_upload_dir;
+$chroot_dir = forge_get_config('chroot');
+$ftp_dir = forge_get_config('ftp_upload_dir')."/pub/";
+$upload_dir = forge_get_config('upload_dir');
 $group_dir = $chroot_dir.$groupdir_prefix."/";
 $cvs_dir = $chroot_dir.$cvsdir_prefix."/";
 $svn_dir = $chroot_dir.$svndir_prefix."/";
@@ -138,7 +138,7 @@ foreach ($quotas as $p)
 }
 
 // users disk space size
-$chroot_dir = $sys_chroot;
+$chroot_dir = forge_get_config('chroot');
 $ftp_dir = $chroot_dir."/home/users/";
 $users = array();
 $res_db = db_query_params ('SELECT user_id, user_name, realname, unix_status FROM users ORDER BY user_id ',

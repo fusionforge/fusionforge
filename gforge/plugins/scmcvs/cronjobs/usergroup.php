@@ -296,7 +296,7 @@ for ($i = 0; $i < count($gforge_groups); $i++) {
 	$gmembers = util_result_column_to_array($resusers,'user_name');
 	if ($enable_pserver) $gmembers[] = 'anonymous';
 	if (!$project->enableAnonSCM()) {
-		$gmembers[] = $sys_apache_user;
+		$gmembers[] = forge_get_config('apache_user');
 	}
 	
 	$line .= implode(',', $gmembers);

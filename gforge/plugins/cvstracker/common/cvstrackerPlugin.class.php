@@ -165,19 +165,19 @@ class cvstrackerPlugin extends Plugin {
 	*
 	*/
 	function addCvsTrackerToFile($group, $path) {
-		global $sys_plugins_path, $cvs_binary_version;
+		global  $cvs_binary_version;
 		
 		$FOut = fopen($path, "a");
 		if($FOut) {		
 			fwrite($FOut, "# BEGIN added by gforge-plugin-cvstracker\n");
 			if ( $cvs_binary_version == "1.12" ) {
 				$Line = "ALL ( php -q -d include_path=".ini_get('include_path').
-					" ".$sys_plugins_path."/cvstracker/bin/post.php
+					" ".forge_get_config('plugins_path')."/cvstracker/bin/post.php
  %r %p %{sVv} )\n";
 			}
 			if ( $cvs_binary_version == "1.11") {
 				$Line = "ALL ( php -q -d include_path=".ini_get('include_path').
-					" ".$sys_plugins_path."/cvstracker/bin/post.php
+					" ".forge_get_config('plugins_path')."/cvstracker/bin/post.php
  ".$group->getUnixName()." %{sVv} )\n";
 			}
 			fwrite($FOut,$Line);
@@ -193,16 +193,16 @@ class cvstrackerPlugin extends Plugin {
 	*	return array with the loginfo lines.
 	*/
 	function getCvsTrackerLogInfoLines() {
-		global $sys_plugins_path, $cvs_binary_version;
+		global  $cvs_binary_version;
 		$array=array();
 		$array[]="# BEGIN added by gforge-plugin-cvstracker\n";
 		if ( $cvs_binary_version == "1.11" ) {
 				$array[] = "ALL ( php -q -d include_path=".ini_get('include_path').
-					" ".$sys_plugins_path."/cvstracker/bin/post.php
+					" ".forge_get_config('plugins_path')."/cvstracker/bin/post.php
  ".$group->getUnixName()." %{sVv} )\n";
 		}else { //it's version 1.12
 			$array[] = "ALL ( php -q -d include_path=".ini_get('include_path').
-			" ".$sys_plugins_path."/cvstracker/bin/post.php
+			" ".forge_get_config('plugins_path')."/cvstracker/bin/post.php
  %r %p %{sVv} )\n";
 		}			
 		$array[]= "# END added by gforge-plugin-cvstracker\n";

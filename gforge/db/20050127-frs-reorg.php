@@ -58,7 +58,7 @@ $groups =& group_get_objects(util_result_column_to_array($res));
 for ($g=0; $g<count($groups); $g++) {
 
 //make group dirs
-	$newdirlocation = $GLOBALS['sys_upload_dir'].'/'.$groups[$g]->getUnixName();
+	$newdirlocation = forge_get_config('upload_dir').'/'.$groups[$g]->getUnixName();
 	$cmd="/bin/mkdir $newdirlocation";
 	//echo "\n$cmd";
 	if (!is_dir($newdirlocation)){
@@ -72,7 +72,7 @@ for ($g=0; $g<count($groups); $g++) {
 			continue;
 		}
 		//make package dirs
-		$newdirlocation = $GLOBALS['sys_upload_dir'].'/'.$frsps[$p]->Group->getUnixName().'/'.$frsps[$p]->getFileName();
+		$newdirlocation = forge_get_config('upload_dir').'/'.$frsps[$p]->Group->getUnixName().'/'.$frsps[$p]->getFileName();
 		$cmd="/bin/mkdir $newdirlocation";
 		//echo "\n$cmd";
 		if (!is_dir($newdirlocation)){
@@ -86,7 +86,7 @@ for ($g=0; $g<count($groups); $g++) {
 				continue;
 			}
 			//make release dirs
-			$newdirlocation = $GLOBALS['sys_upload_dir'].'/'.$frsrs[$r]->FRSPackage->Group->getUnixName().'/'.$frsrs[$r]->FRSPackage->getFileName().'/'.$frsrs[$r]->getFileName();
+			$newdirlocation = forge_get_config('upload_dir').'/'.$frsrs[$r]->FRSPackage->Group->getUnixName().'/'.$frsrs[$r]->FRSPackage->getFileName().'/'.$frsrs[$r]->getFileName();
 			$cmd="/bin/mkdir $newdirlocation";
 			//echo "\n$cmd";
 			if (!is_dir($newdirlocation)){
@@ -98,8 +98,8 @@ for ($g=0; $g<count($groups); $g++) {
 				if (!is_object($frsfs[$f])) {
 					continue;
 				}
-				$olddirlocation = $GLOBALS['sys_upload_dir'].'/'.$frsfs[$f]->FRSRelease->FRSPackage->Group->getUnixName().'/'.$frsfs[$f]->getName();
-				$newdirlocation = $GLOBALS['sys_upload_dir'].'/'.$frsfs[$f]->FRSRelease->FRSPackage->Group->getUnixName().'/'.$frsfs[$f]->FRSRelease->FRSPackage->getFileName().'/'.$frsfs[$f]->FRSRelease->getFileName().'/';
+				$olddirlocation = forge_get_config('upload_dir').'/'.$frsfs[$f]->FRSRelease->FRSPackage->Group->getUnixName().'/'.$frsfs[$f]->getName();
+				$newdirlocation = forge_get_config('upload_dir').'/'.$frsfs[$f]->FRSRelease->FRSPackage->Group->getUnixName().'/'.$frsfs[$f]->FRSRelease->FRSPackage->getFileName().'/'.$frsfs[$f]->FRSRelease->getFileName().'/';
 				if (!is_file($newdirlocation.'/'.$frsfs[$f]->getName())) {
 					$cmd="/bin/mv $olddirlocation $newdirlocation";
 					//echo "\n$cmd";
@@ -112,7 +112,7 @@ for ($g=0; $g<count($groups); $g++) {
 	}
 }
 
-$cmd = '/bin/chown -R '.$GLOBALS["sys_apache_user"].':'.$GLOBALS["sys_apache_group"].' '.$GLOBALS['sys_upload_dir'];
+$cmd = '/bin/chown -R '.forge_get_config('apache_user').':'.forge_get_config('apache_group').' '.forge_get_config('upload_dir');
 exec($cmd,$out);
 
 echo "SUCCESS";

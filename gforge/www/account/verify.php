@@ -41,7 +41,7 @@ if (getStringFromRequest('submit')) {
 	}
 
 	$u = user_get_object_by_name($loginname);
-	if (!$u && $GLOBALS['sys_require_unique_email']) {
+	if (!$u && forge_get_config('require_unique_email')) {
 		$u = user_get_object_by_email ($loginname);
 	}
 	if (!$u || !is_object($u)) {
@@ -95,7 +95,7 @@ if (isset($GLOBALS['error_msg'])) {
 <form action="<?php echo util_make_url('/account/verify.php'); ?>" method="post">
 
 <p><?php 
-if ($GLOBALS['sys_require_unique_email']) {
+if (forge_get_config('require_unique_email')) {
 	echo _('Login name or email address:');
 } else {
 	echo _('Login name:'); 

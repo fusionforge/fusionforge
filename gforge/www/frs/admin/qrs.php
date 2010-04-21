@@ -45,7 +45,7 @@ if (!$can_post) {
 	exit_permission_denied();
 }
 
-$upload_dir = $sys_ftp_upload_dir . "/" . $g->getUnixName();
+$upload_dir = forge_get_config('ftp_upload_dir') . "/" . $g->getUnixName();
 
 /*
 	Quick file release system , Darrell Brogdon, SourceForge, Aug, 2000
@@ -245,7 +245,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 		<?php if (forge_get_config('use_ftpuploads')) {
 
 			echo '<p>';
-			printf(_('Alternatively, you can use FTP to upload a new file at %1$s'), $sys_ftp_upload_host).'<br />';
+			printf(_('Alternatively, you can use FTP to upload a new file at %1$s'), forge_get_config('ftp_upload_host')).'<br />';
 			echo _('Choose an FTP file instead of uploading:').'<br />';
 			$arr[]='';
 			$ftp_files_arr=array_merge($arr,ls($upload_dir,true));

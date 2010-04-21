@@ -167,7 +167,7 @@ class FRSRelease extends Error {
 			db_rollback();
 			return false;
 		} else {
-			$newdirlocation = $GLOBALS['sys_upload_dir'].'/'.$this->FRSPackage->Group->getUnixName().'/'.$this->FRSPackage->getFileName().'/'.$this->getFileName();
+			$newdirlocation = forge_get_config('upload_dir').'/'.$this->FRSPackage->Group->getUnixName().'/'.$this->FRSPackage->getFileName().'/'.$this->getFileName();
 			if (!is_dir($newdirlocation)) {
 				@mkdir($newdirlocation);
 			}
@@ -354,7 +354,7 @@ notified in the future, please login to %5$s and click this link:
 				return false;
 			}
 		}
-		$dir=$GLOBALS['sys_upload_dir'].'/'.
+		$dir=forge_get_config('upload_dir').'/'.
 			$this->FRSPackage->Group->getUnixName() . '/' .
 			$this->FRSPackage->getFileName().'/'.
 			$this->getFileName().'/';
@@ -438,8 +438,8 @@ notified in the future, please login to %5$s and click this link:
 			return false;
 		}
 		$newfilename = $this->getFileName();
-		$olddirlocation = $GLOBALS['sys_upload_dir'].'/'.$this->FRSPackage->Group->getUnixName().'/'.$this->FRSPackage->getFileName().'/'.$oldfilename;
-		$newdirlocation = $GLOBALS['sys_upload_dir'].'/'.$this->FRSPackage->Group->getUnixName().'/'.$this->FRSPackage->getFileName().'/'.$newfilename;
+		$olddirlocation = forge_get_config('upload_dir').'/'.$this->FRSPackage->Group->getUnixName().'/'.$this->FRSPackage->getFileName().'/'.$oldfilename;
+		$newdirlocation = forge_get_config('upload_dir').'/'.$this->FRSPackage->Group->getUnixName().'/'.$this->FRSPackage->getFileName().'/'.$newfilename;
 	
 		if (($oldfilename!=$newfilename) && is_dir($olddirlocation)) {
 			if (is_dir($newdirlocation)) {
