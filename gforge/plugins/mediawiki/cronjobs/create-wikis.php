@@ -35,7 +35,6 @@ require (dirname(__FILE__) . '/../../env.inc.php');
 require_once ($gfwww . 'include/squal_pre.php');
 require $gfcommon.'include/cron_utils.php';
 
-$project_settings_filename = "ProjectSettings.php";
 $upload_dir_basename = "images";
 
 if (!isset($mediawiki_var_path))
@@ -52,7 +51,7 @@ $project_settings_template =
 	"$sys_etc_path/plugins/mediawiki/ProjectSettings.template.php";
 if (!file_exists($project_settings_template))
 	$project_settings_template =
-		"$sys_opt_path/plugins/mediawiki/etc/plugins/mediawiki/$ProjectSettings.template.php";
+		"$sys_opt_path/plugins/mediawiki/etc/plugins/mediawiki/ProjectSettings.template.php";
 
 # Owner of files - apache
 $file_owner = $sys_apache_user.':'.$sys_apache_group;
