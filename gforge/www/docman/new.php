@@ -164,7 +164,7 @@ if (getStringFromRequest('submit')) {
 				break;
 			}
 			case 'ftpupload' : {
-				if (forge_get_config('use_ftp')uploads) {
+				if (forge_get_config('use_ftpuploads')) {
 					echo '
 						<tr>
 							<td>
