@@ -5,17 +5,39 @@
 ## DP: Disable SVN-over-WebDAV
 
 @DPATCH@
-diff -urNad gforge~/plugins/scmsvn/etc/plugins/scmsvn/config.php gforge/plugins/scmsvn/etc/plugins/scmsvn/config.php
---- gforge~/plugins/scmsvn/etc/plugins/scmsvn/config.php	2009-08-19 20:55:48.000000000 +0200
-+++ gforge/plugins/scmsvn/etc/plugins/scmsvn/config.php	2009-08-19 21:12:57.000000000 +0200
-@@ -7,8 +7,8 @@
- } else {
- 	$default_svn_server = 'scm';
- }
+diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' '--exclude=.hg' '--exclude=_darcs' '--exclude=.bzr' gforge~/plugins/scmsvn/etc/plugins/scmsvn/config.php gforge/plugins/scmsvn/etc/plugins/scmsvn/config.php
+--- gforge~/plugins/scmsvn/etc/plugins/scmsvn/config.php	2010-04-21 19:45:44.000000000 +0200
++++ gforge/plugins/scmsvn/etc/plugins/scmsvn/config.php	2010-04-21 20:44:14.000000000 +0200
+@@ -3,8 +3,8 @@
+ //$default_svn_server = forge_get_config('web_host') ;
+ //$default_svn_server = "svn." . forge_get_config('web_host') ;
+ $default_svn_server = forge_get_config('scm_host');
 -$use_ssh = false;
 -$use_dav = true;
 +$use_ssh = true;
 +$use_dav = false;
  $use_ssl = true;
- // $svn_root = $GLOBALS['sys_chroot'].'/scmrepos/svn' ;
+ // $svn_root = forge_get_config('chroot').'/scmrepos/svn' ;
  
+diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' '--exclude=.hg' '--exclude=_darcs' '--exclude=.bzr' gforge~/plugins/scmsvn/etc/plugins/scmsvn/config.php.~1~ gforge/plugins/scmsvn/etc/plugins/scmsvn/config.php.~1~
+--- gforge~/plugins/scmsvn/etc/plugins/scmsvn/config.php.~1~	1970-01-01 01:00:00.000000000 +0100
++++ gforge/plugins/scmsvn/etc/plugins/scmsvn/config.php.~1~	2010-04-21 19:45:44.000000000 +0200
+@@ -0,0 +1,18 @@
++<?php
++ 
++//$default_svn_server = forge_get_config('web_host') ;
++//$default_svn_server = "svn." . forge_get_config('web_host') ;
++$default_svn_server = forge_get_config('scm_host');
++$use_ssh = false;
++$use_dav = true;
++$use_ssl = true;
++// $svn_root = forge_get_config('chroot').'/scmrepos/svn' ;
++
++$svn_bin = "/usr/bin/svn";
++
++// Local Variables:
++// mode: php
++// c-file-style: "bsd"
++// End:
++ 
++?>
