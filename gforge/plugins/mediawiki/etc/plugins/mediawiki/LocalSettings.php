@@ -11,12 +11,12 @@ if (!isset($mediawiki_master_path))
 
 if ( isset( $_SERVER ) && array_key_exists( 'REQUEST_METHOD', $_SERVER ) ) {
 	// when loaded from the server
-        require_once ("$sys_opt_path/www/env.inc.php") ;
-	require_once ("$sys_opt_path/www/include/pre.php") ;
+        require_once ("$sys_share_path/www/env.inc.php") ;
+	require_once ("$sys_share_path/www/include/pre.php") ;
 } else {
 	// when run from the command line
         require_once ("$sys_etc_path/database.inc") ;
-	require_once ("$sys_opt_path/common/include/config.php") ;
+	require_once ("$sys_share_path/common/include/config.php") ;
 }
 
 $IP = $mediawiki_master_path;

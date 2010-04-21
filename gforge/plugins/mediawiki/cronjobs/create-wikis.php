@@ -51,7 +51,7 @@ $project_settings_template =
 	"$sys_etc_path/plugins/mediawiki/ProjectSettings.template.php";
 if (!file_exists($project_settings_template))
 	$project_settings_template =
-		"$sys_opt_path/plugins/mediawiki/etc/plugins/mediawiki/ProjectSettings.template.php";
+		"$sys_share_path/plugins/mediawiki/etc/plugins/mediawiki/ProjectSettings.template.php";
 
 # Owner of files - apache
 $file_owner = forge_get_config('apache_user').':'.forge_get_config('apache_group');
@@ -170,7 +170,7 @@ while ( $row = db_fetch_array($project_res) ) {
 			exit;
 		}
 
-		$mwwrapper = $sys_opt_path."/plugins/mediawiki/bin/mw-wrapper.php" ;
+		$mwwrapper = $sys_share_path."/plugins/mediawiki/bin/mw-wrapper.php" ;
 		$dumpfile = $sys_etc_path."/mediawiki/initial-content.xml" ;
 		
 		if (file_exists ($dumpfile)) {

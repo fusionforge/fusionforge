@@ -80,10 +80,10 @@ if (!($dh = opendir($mediawiki_src_path))) {
 	closedir ($dh);
 }
 
-# link LocalSettings.php from /etc/gforge/plugins/mediawiki/LocalSettings.php or from $sys_opt_path/plugins/mediawiki/etc/plugins/mediawiki/LocalSettings.php
+# link LocalSettings.php from /etc/gforge/plugins/mediawiki/LocalSettings.php or from $sys_share_path/plugins/mediawiki/etc/plugins/mediawiki/LocalSettings.php
 $from = "$sys_etc_path/plugins/mediawiki/LocalSettings.php";
 if (!file_exists($from)) {
-	$from = "$sys_opt_path/plugins/mediawiki/etc/plugins/mediawiki/LocalSettings.php";
+	$from = "$sys_share_path/plugins/mediawiki/etc/plugins/mediawiki/LocalSettings.php";
 }
 $to = "$mediawiki_master_path/LocalSettings.php";
 mysymlink($from, $to);
@@ -94,7 +94,7 @@ if (!is_dir($todir))
 	mkdir($todir);
 
 # link FusionForge skin file
-$fromdir = "$sys_opt_path/plugins/mediawiki/mediawiki-skin";
+$fromdir = "$sys_share_path/plugins/mediawiki/mediawiki-skin";
 $from = "$fromdir/FusionForge.php";
 $to = "$todir/FusionForge.php";
 mysymlink($from, $to);
