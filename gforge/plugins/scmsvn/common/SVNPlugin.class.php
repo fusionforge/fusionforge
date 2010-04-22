@@ -81,10 +81,10 @@ class SVNPlugin extends SCMPlugin {
 		$b =  _('<p><b>Anonymous Subversion Access</b></p><p>This project\'s SVN repository can be checked out through anonymous access with the following command(s).</p>');
 		$b .= '<p>' ;
 		if ($this->use_ssh) {
-			$b .= '<tt>svn checkout svn://'.$project->getSCMBox().$this->svn_root.'/'.$project->getUnixName().'</tt><br />';
+			$b .= '<tt>svn checkout svn://'.$project->getSCMBox().$this->svn_root.'/'.$project->getUnixName().'/trunk</tt><br />';
 		}
 		if ($this->use_dav) {
-			$b .= '<tt>svn checkout --username anonsvn http'.(($this->use_ssl) ? 's' : '').'://' . $project->getSCMBox(). $this->svn_root .'/'. $project->getUnixName() .'</tt><br/><br/>';
+			$b .= '<tt>svn checkout --username anonsvn http'.(($this->use_ssl) ? 's' : '').'://' . $project->getSCMBox(). $this->svn_root .'/'. $project->getUnixName() .'/trunk</tt><br/><br/>';
 			$b .= _('The password is \'anonsvn\'').'<br/>';
 		}
 		$b .= '</p>';
@@ -98,20 +98,20 @@ class SVNPlugin extends SCMPlugin {
 			$d = $u->getUnixName() ;
 			if ($this->use_ssh) {
 				$b .= _('<p><b>Developer Subversion Access via SSH</b></p><p>Only project developers can access the SVN tree via this method. SSH must be installed on your client machine. Enter your site password when prompted.</p>');
-				$b .= '<p><tt>svn checkout svn+ssh://'.$d.'@' . $project->getSCMBox() . $this->svn_root .'/'. $project->getUnixName().'</tt></p>' ;
+				$b .= '<p><tt>svn checkout svn+ssh://'.$d.'@' . $project->getSCMBox() . $this->svn_root .'/'. $project->getUnixName().'/trunk</tt></p>' ;
 			}
 			if ($this->use_dav) {
 				$b .= _('<p><b>Developer Subversion Access via DAV</b></p><p>Only project developers can access the SVN tree via this method. Enter your site password when prompted.</p>');
-				$b .= '<p><tt>svn checkout --username '.$d.' http'.(($this->use_ssl) ? 's' : '').'://'. $project->getSCMBox() . $this->svn_root .'/'.$project->getUnixName().'</tt></p>' ;
+				$b .= '<p><tt>svn checkout --username '.$d.' http'.(($this->use_ssl) ? 's' : '').'://'. $project->getSCMBox() . $this->svn_root .'/'.$project->getUnixName().'/trunk</tt></p>' ;
 			}
 		} else {
 			if ($this->use_ssh) {
 				$b .= _('<p><b>Developer Subversion Access via SSH</b></p><p>Only project developers can access the SVN tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
-				$b .= '<p><tt>svn checkout svn+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . $this->svn_root .'/'. $project->getUnixName().'</tt></p>' ;
+				$b .= '<p><tt>svn checkout svn+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . $this->svn_root .'/'. $project->getUnixName().'/trunk</tt></p>' ;
 			}
 			if ($this->use_dav) {
 				$b .= _('<p><b>Developer Subversion Access via DAV</b></p><p>Only project developers can access the SVN tree via this method. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
-				$b .= '<p><tt>svn checkout --username <i>'._('developername').'</i> http'.(($this->use_ssl) ? 's' : '').'://'. $project->getSCMBox() . $this->svn_root .'/'.$project->getUnixName().'</tt></p>' ;
+				$b .= '<p><tt>svn checkout --username <i>'._('developername').'</i> http'.(($this->use_ssl) ? 's' : '').'://'. $project->getSCMBox() . $this->svn_root .'/'.$project->getUnixName().'/trunk</tt></p>' ;
 			}
 		}
 		return $b ;
