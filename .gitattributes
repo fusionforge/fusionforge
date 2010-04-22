@@ -104,7 +104,6 @@ gforge/contrib/cmd-line-prototype.tar.gz -text
 gforge/contrib/fusionforge.dia -text
 gforge/contrib/migrate-from-gforge-as.pl -text
 gforge/cronjobs/auth_unix.php -text
-gforge/cronjobs/create_home_dirs.php -text
 gforge/cronjobs/create_scm_repos.php -text
 gforge/cronjobs/ftp_create_group_access.php -text
 gforge/cronjobs/gather_scm_stats.php -text
