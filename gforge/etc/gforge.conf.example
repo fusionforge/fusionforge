@@ -1,4 +1,4 @@
-system_name=MyGForge
+system_name=MyForge
 domain_name=gforge.company.com
 server_admin=webmaster@gforge.company.com
 db_host=
