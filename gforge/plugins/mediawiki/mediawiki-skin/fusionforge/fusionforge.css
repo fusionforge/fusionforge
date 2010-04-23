@@ -1,0 +1,10 @@
+#globalWrapper { position: relative; }
+/* disable the logo */
+#p-logo { display: none; }
+#column-one { padding-top: 0px; }
+/* use the font inherited from FF */
+body { font: inherit; };
+td.mainCanvas { font: x-small sans-serif; }
+
+table { background-color: transparent; }
+

@@ -35,6 +35,7 @@ class SkinFusionForge extends SkinTemplate {
 
 		// Append to the default screen common & print styles...
 		$out->addStyle( 'fusionforge/main.css', 'screen' );
+		$out->addStyle( 'fusionforge/fusionforge.css', 'screen' );
 		if( $wgHandheldStyle ) {
 			// Currently in testing... try 'chick/main.css'
 			$out->addStyle( $wgHandheldStyle, 'handheld' );

@@ -1031,9 +1031,7 @@ gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php.patch -text
 gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php.reference -text
 gforge/plugins/mediawiki/mediawiki-skin/Makefile -text
 gforge/plugins/mediawiki/mediawiki-skin/README.beforemodifying -text
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/main.css -text
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/main.css.patch -text
-gforge/plugins/mediawiki/mediawiki-skin/fusionforge/main.css.reference -text
+gforge/plugins/mediawiki/mediawiki-skin/fusionforge/fusionforge.css -text
 gforge/plugins/mediawiki/scripts/mediawiki-plugin-init.php -text
 gforge/plugins/mediawiki/www/frame.php -text
 gforge/plugins/online_help/common/online_help-init.php -text

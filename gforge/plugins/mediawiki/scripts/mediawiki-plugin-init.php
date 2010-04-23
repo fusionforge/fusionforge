@@ -104,10 +104,10 @@ $todir = "$todir/fusionforge";
 if (!is_dir($todir))
 	mkdir($todir);
 
-# link fusionforge main.css files
+# link fusionforge.css files
 $fromdir = "$fromdir/fusionforge";
-$from = "$fromdir/main.css";
-$to = "$todir/main.css";
+$from = "$fromdir/fusionforge.css";
+$to = "$todir/fusionforge.css";
 mysymlink($from, $to);
 
 # link the rest of the files from monobook skin
@@ -117,7 +117,6 @@ $dh = opendir($fromdir);
 $ignore_file = array( 
 	'.' => true, 
 	'..' => true,
-	'main.css' => true,
 	);
 while ($file = readdir($dh)) {
 	if (!$ignore_file[$file]) {
