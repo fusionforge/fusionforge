@@ -1,7 +1,5 @@
 <?php
 
-// $Id$
-
 // export forum posts in RSS 2.0
 // Author: Jutta Horstmann, data in transit <jh@dataintransit.com>
 // Created: 14.01.08
@@ -24,12 +22,13 @@
 // none: 10 last threads of evolvis as a whole
 //
 
-include "pre.php";
-include "rss_utils.inc";
-require_once('common/forum/Forum.class');
-require_once('common/forum/ForumFactory.class');
-require_once('common/forum/ForumMessage.class');
-require_once('common/forum/ForumMessageFactory.class');
+require_once '../env.inc.php';
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'export/rss_utils.inc';
+require_once $gfcommon.'forum/Forum.class.php';
+require_once $gfcommon.'forum/ForumFactory.class.php';
+require_once $gfcommon.'forum/ForumMessage.class.php';
+require_once $gfcommon.'forum/ForumMessageFactory.class.php';
 
 global $sys_name, $sys_default_domain;
 

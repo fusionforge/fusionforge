@@ -1,6 +1,8 @@
 <?php
-include "../include/pre.php";
-include "rss_utils.inc";
+
+require_once '../env.inc.php';
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'export/rss_utils.inc';
 
 global $sys_name, $sys_default_domain;
 

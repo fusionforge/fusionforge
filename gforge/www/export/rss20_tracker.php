@@ -1,7 +1,5 @@
 <?php
 
-// $Id$
-
 // export a group's tracker bugs per artifact in RSS 2.0
 // Author: Jutta Horstmann, data in transit <jh@dataintransit.com>
 // Created: 01.10.07
@@ -14,10 +12,9 @@
 //Notes:
 // Keep in mind to write "&" in URLs as &amp; in RSS feeds
 
-
-include "pre.php";
-include "rss_utils.inc";
-
+require_once '../env.inc.php';
+require_once $gfwww.'include/pre.php';
+require_once $gfwww.'export/rss_utils.inc';
 
 if (isset($_GET['group_id'])&&!empty($_GET['group_id'])&&is_numeric($_GET['group_id'])) {
 	$group_id = $_GET['group_id'];
