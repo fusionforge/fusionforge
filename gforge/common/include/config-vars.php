@@ -24,6 +24,7 @@
 
 forge_define_config_item ('forge_name', 'core', $GLOBALS['sys_name']) ;
 forge_define_config_item ('user_registration_restricted', 'core', $GLOBALS['sys_user_reg_restricted']) ;
+forge_define_config_item ('project_registration_restricted', 'core', $GLOBALS['sys_project_reg_restricted']) ;
 forge_define_config_item ('web_host', 'core', $GLOBALS['sys_default_domain']) ;
 forge_define_config_item ('apache_user', 'core', $GLOBALS['sys_apache_user']) ;
 forge_define_config_item ('apache_group', 'core', $GLOBALS['sys_apache_group']) ;

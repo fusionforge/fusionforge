@@ -43,7 +43,7 @@ require_once $gfcommon.'scm/SCMFactory.class.php';
 //
 //	Test if restricted project registration
 //
-if ($sys_project_reg_restricted) {
+if (forge_get_config('project_registration_restricted')) {
 	session_require(array('group'=>'1','admin_flags'=>'A'),
 			sprintf (_('Project registration is restricted on %s, and only administrators can create new projects.'),
 				 forge_get_config ('forge_name')));
