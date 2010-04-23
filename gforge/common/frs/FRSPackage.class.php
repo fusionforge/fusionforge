@@ -137,7 +137,7 @@ class FRSPackage extends Error {
 			return false;
 		}
 		if (!util_is_valid_filename($name)) {
-			$this->setError(_('FRSPackage::Update: Package Name can only be alphanumeric'));
+			$this->setError(_('FRSPackage::Update: Package Name can only be alphanumeric or "-" "_" "+" "." "~"'));
 		}
 		$perm =& $this->Group->getPermission( session_get_user() );
 

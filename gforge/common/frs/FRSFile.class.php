@@ -94,7 +94,7 @@ class FRSFile extends Error {
 			return false;
 		}
 		if (!util_is_valid_filename($name)) {
-			$this->setError(_('Filename can only be alphanumeric and "-" "_" "." characters.'));
+			$this->setError(_('Filename can only be alphanumeric and "-" "_" "+" "." "~" characters.'));
 			return false;
 		}
 //

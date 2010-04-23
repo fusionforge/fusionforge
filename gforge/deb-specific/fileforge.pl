@@ -49,8 +49,8 @@ sub fileforge {
     $dirty_group = $ARGV [2] ;
 
     # Check and untaint $user and $file here
-    $file = &wash_string ($dirty_file, "file") ;
-    $user = &wash_string ($dirty_user, "user") ;
+    $file = &wash_string ($dirty_file, "file", 1) ;
+    $user = &wash_string ($dirty_user, "user", 0) ;
 
     # Compute source file name
     $src_file = $homedir_prefix ;
@@ -59,7 +59,7 @@ sub fileforge {
     $src_file .= $file ;
 
     # Check and untaint $group here
-    $group = &wash_string ($dirty_group, "group") ;
+    $group = &wash_string ($dirty_group, "group", 0) ;
 
     # Compute and test destination dir name
     $dest_dir = "/var/lib/gforge/download/" ;
@@ -94,9 +94,9 @@ sub tmpfilemove {
     $dirty_user = $ARGV [2] ;
 
     # Check and untaint variables here
-    $file = &wash_string ($dirty_file, "file") ;
-    $real_file = &wash_string ($dirty_real_file, "real_file") ;
-    $user = &wash_string ($dirty_user, "user") ;
+    $file = &wash_string ($dirty_file, "file", 1) ;
+    $real_file = &wash_string ($dirty_real_file, "real_file", 1) ;
+    $user = &wash_string ($dirty_user, "user", 0) ;
 
     # Compute source file name
     $src_file = "/tmp/" ;
@@ -136,15 +136,23 @@ sub tmpfilemove {
 sub wash_string {
     my $string = shift ;
     my $name = shift ;
+    my $allowtilde = shift ;
 
     # Empty strings are not allowed
     if (length $string == 0) {
 	die "Forbidden empty $name '$string'" ;
     }
     
-    # Only allowed characters are alphanumerical . + _ -
-    if ($string =~ m,[^\w.+_-],) {
-	die "Forbidden characters in $name '$string'" ;
+    if ($allowtilde) {
+	# Only allowed characters are alphanumerical . + _ - ~
+	if ($string =~ m,[^\w.+_~-],) {
+		die "Forbidden characters in $name '$string'" ;
+	}
+    } else {
+	# Only allowed characters are alphanumerical . + _ -
+	if ($string =~ m,[^\w.+_-],) {
+		die "Forbidden characters in $name '$string'" ;
+	}
     }
 
     # No .. sequence is allowed
