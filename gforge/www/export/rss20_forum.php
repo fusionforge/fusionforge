@@ -102,8 +102,9 @@ if (isset($_GET['forum_ids']) && !empty($_GET['forum_ids'])) {
 
         if (is_numeric($fid)) {
             //based on code from forum/forum.php: Get the group_id based on this forum_id
-            $result=db_query("SELECT group_id FROM forum_group_list
-                              WHERE group_forum_id='".$fid."'");
+		$result=db_query_params('SELECT group_id FROM forum_group_list
+                              WHERE group_forum_id=$1',
+					array ($fid));
             if ($result && db_numrows($result) >= 1) {
                 $forum_group_id=db_result($result,0,'group_id');
     
@@ -211,21 +212,9 @@ if (!$error_no_messages){
     //messages to be displayed
     $rss_messages = array();
 
-    //assemble SQL statement to get messages from selected forums
-    if ($n_forums>0){
-        $where_start_or = " AND (";
-        $where_end_or = ") ";
-    }
-    
-    $cnt = 0;
-    foreach ($forums as $f){
-        $where_forum .= " f.group_forum_id = ". $f->getID();
-        $cnt++;
-        $where_forum .= $cnt < $n_forums ? " OR " : "";
-    }
     //get forum messages 
-    $msg_sql = 
-        "SELECT f.group_forum_id AS group_forum_id, 
+    $qpa = db_construct_qpa () ;
+    $qpa = db_construct_qpa ($qpa, 'SELECT f.group_forum_id AS group_forum_id, 
                 f.msg_id AS msg_id, f.subject AS subject, f.most_recent_date AS most_recent_date,
                 f.has_followups, f.thread_id,
                 u.realname AS user_realname,
@@ -236,26 +225,38 @@ if (!$error_no_messages){
         AND g.group_id = fg.group_id
         AND f.group_forum_id = fg.group_forum_id 
         AND g.is_public=1
-        AND g.status='A'
+        AND g.status=$1
         AND g.use_forum=1
-        AND fg.is_public=1 ".
-        $where_start_or . $where_forum . $where_end_or. $where_threads. 
-        " ORDER BY f.most_recent_date DESC
-        LIMIT ". $number_items;
+        AND fg.is_public=1 ',
+			     array ('A')) ;
+    $cnt = 0;
+    if ($n_forums > 0) {
+	    $qpa = db_construct_qpa ($qpa, 'AND (') ;
+	    foreach ($forums as $f){
+		    $qpa = db_construct_qpa ($qpa, 'f.group_forum_id = $1',
+					     array ($f->getID())) ;
+		    $cnt++ ;
+		    if ($cnt < $n_forums) {
+			    $qpa = db_construct_qpa ($qpa, ' OR ') ;
+		    }
+	    }
+	    $qpa = db_construct_qpa ($qpa, ') ') ;
+    }
+
+    $qpa = db_construct_qpa ($qpa, 'ORDER BY f.most_recent_date DESC LIMIT $1',
+			     array ($number_items)) ;
     
-    $res_msg = db_query($msg_sql);
+    $res_msg = db_query_qpa($qpa);
     if (!$res_msg || db_numrows($res_msg) < 1) {
             error_log(_("Forum RSS: Forum not found: ").' '.db_error(),0);
     }
-    if ($debug) error_log("Forum RSS: ". $msg_sql,0);
+    if ($debug) error_log("Forum RSS: Error",0);
 
 
     while ($row_msg = db_fetch_array($res_msg)) {
         //get thread name for posting
-        $res_thread = db_query("
-            SELECT subject  
-            FROM forum
-            WHERE is_followup_to=0 AND thread_id = ".$row_msg['thread_id']);
+        $res_thread = db_query_params('SELECT subject FROM forum WHERE is_followup_to=0 AND thread_id = $1',
+				      array ($row_msg['thread_id']));
         $row_thread = db_fetch_array($res_thread);
         if (!$res_thread || db_numrows($res_thread) != 1) {
                 error_log("Forum RSS: Could not get thread subject to thread-ID ".$row_msg['thread_id'],0);
