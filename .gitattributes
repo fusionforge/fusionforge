@@ -4082,6 +4082,7 @@ plugins/coclico/forumml/www/upload.php -text
 plugins/coclico/mailman/README.txt -text
 plugins/coclico/mailman/bin/db-delete.pl -text
 plugins/coclico/mailman/bin/db-upgrade.pl -text
+plugins/coclico/mailman/bin/import_members_DB.php -text
 plugins/coclico/mailman/common/mailman-init.php -text
 plugins/coclico/mailman/cronjobs/manage_mailmanlists.php -text
 plugins/coclico/mailman/db/mailman-init.sql -text
