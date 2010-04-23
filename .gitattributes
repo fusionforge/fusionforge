@@ -1016,15 +1016,17 @@ gforge/plugins/globalsearch/www/edit_assoc_sites.php -text
 gforge/plugins/globalsearch/www/index.php -text
 gforge/plugins/ldapextauth/rpm-specific/.keepme -text svneol=unset#application/octet-stream
 gforge/plugins/mediawiki/README -text
-gforge/plugins/mediawiki/bin/drop-wiki.php -text
+gforge/plugins/mediawiki/bin/mw-drop-wikis.php -text
+gforge/plugins/mediawiki/bin/mw-plugin-init.php -text
 gforge/plugins/mediawiki/bin/mw-wrapper.php -text
 gforge/plugins/mediawiki/common/MediaWikiPlugin.class.php -text
 gforge/plugins/mediawiki/common/mediawiki-init.php -text
+gforge/plugins/mediawiki/cronjobs/create-imagedirs.php -text
 gforge/plugins/mediawiki/cronjobs/create-wikis.php -text
+gforge/plugins/mediawiki/etc/config.ini -text
 gforge/plugins/mediawiki/etc/cron.d/mediawiki -text
 gforge/plugins/mediawiki/etc/httpd.d/03mediawiki -text
 gforge/plugins/mediawiki/etc/plugins/mediawiki/LocalSettings.php -text
-gforge/plugins/mediawiki/etc/plugins/mediawiki/ProjectSettings.template.php -text
 gforge/plugins/mediawiki/etc/plugins/mediawiki/config.php -text
 gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php -text
 gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php.patch -text
@@ -1032,7 +1034,6 @@ gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php.reference -text
 gforge/plugins/mediawiki/mediawiki-skin/Makefile -text
 gforge/plugins/mediawiki/mediawiki-skin/README.beforemodifying -text
 gforge/plugins/mediawiki/mediawiki-skin/fusionforge/fusionforge.css -text
-gforge/plugins/mediawiki/scripts/mediawiki-plugin-init.php -text
 gforge/plugins/mediawiki/www/frame.php -text
 gforge/plugins/online_help/common/online_help-init.php -text
 gforge/plugins/online_help/common/online_helpPlugin.class.php -text

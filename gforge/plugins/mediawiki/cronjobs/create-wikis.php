@@ -27,40 +27,17 @@
    */
 
 # TODO: How to use cronjob history?
-# Required variables:
-# $mediawiki_src_path: the directory where the mediawiki sources are installed
-# $mediawiki_var_path: the directory where mediawiki can store its data (i.e. LocalSettings.php and images/)
+# Required config variables:
+#   src_path: the directory where the mediawiki sources are installed
+#   var_path: the directory where mediawiki can store its data (i.e. LocalSettings.php and images/)
 
 require (dirname(__FILE__) . '/../../env.inc.php');
 require_once ($gfwww . 'include/squal_pre.php');
 require $gfcommon.'include/cron_utils.php';
+require(dirname(__FILE__) . '/../common/config-vars.php');
 
-$upload_dir_basename = "images";
-
-if (!isset($mediawiki_var_path))
-	$mediawiki_var_path = "$sys_var_path/plugins/mediawiki";
-if (!isset($mediawiki_src_path))
-	$mediawiki_src_path = "/usr/share/mediawiki";
-if (!isset($mediawiki_projects_path))
-	$mediawiki_projects_path = "$mediawiki_var_path/projects";
-if (!isset($mediawiki_master_path))
-	$mediawiki_master_path = "$mediawiki_var_path/master";
-
-# Find the project settings template
-$project_settings_template = 
-	"$sys_etc_path/plugins/mediawiki/ProjectSettings.template.php";
-if (!file_exists($project_settings_template))
-	$project_settings_template =
-		"$sys_share_path/plugins/mediawiki/etc/plugins/mediawiki/ProjectSettings.template.php";
-
-# Owner of files - apache
-$file_owner = forge_get_config('apache_user').':'.forge_get_config('apache_group');
-if (forge_get_config('apache_user') == '' || forge_get_config('apache_group') == '') {
-	$err =  "Error: sys_apache_user Is Not Set Or sys_apache_group Is Not Set!";
-	cron_debug($err);
-	cron_entry(23,$err);
-	exit;
-}
+$src_path = forge_get_config('src_path', 'mediawiki');
+$master_path = forge_get_config('master_path', 'mediawiki');
 
 # Get all projects that use the mediawiki plugin
 $project_res = db_query_params ("SELECT g.unix_group_name from groups g, group_plugin gp, plugins p where g.group_id = gp.group_id and gp.plugin_id = p.plugin_id and p.plugin_name = $1;", array("mediawiki"));
@@ -74,35 +51,18 @@ if (!$project_res) {
 # Loop over all projects that use the plugin
 while ( $row = db_fetch_array($project_res) ) {
 	$project = $row['unix_group_name'];
-	$project_dir = "$mediawiki_projects_path/$project";
+	$project_dir = forge_get_config('projects_path', 'mediawiki') 
+		. "/$project";
 	cron_debug("Checking $project...");
 
-	// Check whether the image (and project) directory exists
-	$upload_dir = "$project_dir/$upload_dir_basename";
-	if (!is_dir($upload_dir)) {
-		cron_debug("  Creating upload dir $upload_dir.");
-		system("mkdir -p $upload_dir");
+	// Create the project directory if necessary
+	if (is_dir($project_dir)) {
+		cron_debug("  Project dir $project_dir exists, so I assumen the project already exists.");
 	} else {
-		cron_debug("  Upload dir $upload_dir exists.");
-	}
+		cron_debug("  Creating project dir $project_dir.");
+		mkdir($project_dir, 0775, true);
 
-	// Check whether the project settings file exists
-	$project_settings = "$project_dir/ProjectSettings.php";
-	if (!file_exists($project_settings)) {
-		cron_debug("  Copying $project_settings_template to $project_settings.");
-		if (!copy($project_settings_template, $project_settings)) {
-			$err = ("Error: Failed to copy $project_settings_template to $project_settings!");
-			cron_debug($err);
-			cron_entry(23,$err);
-		}
-		$create_db = true;
-	} else {
-		cron_debug("  File $project_settings exists.");
-		$create_db = false;
-	}
-
-	// Create the DB
-	if ($create_db) {
+		// Create the DB
 		$schema = "plugin_mediawiki_$project";
 		// Sanitize schema name
 		strtr($schema, "-", "_");
@@ -121,9 +81,9 @@ while ( $row = db_fetch_array($project_res) ) {
 		}
 
 		cron_debug("  Creating mediawiki database.");
-		$table_file = "$mediawiki_src_path/maintenance/postgres/tables.sql";
+		$table_file = "$src_path/maintenance/postgres/tables.sql";
 		if (!file_exists($table_file)) {
-			$err =  "Error: Couldn't find Mediawiki Database Creation File $mediawiki_creation_file!";
+			$err =  "Error: Couldn't find Mediawiki Database Creation File $table_file!";
 			cron_debug($err);
 			cron_entry(23,$err);
 			db_rollback();
@@ -176,9 +136,7 @@ while ( $row = db_fetch_array($project_res) ) {
 			system ("$mwwrapper $project importDump.php $dumpfile") ;
 			system ("$mwwrapper $project rebuildrecentchanges.php") ;
 		}
-	} else {
-		cron_debug("  Nothing to be done.");
-	}
+	} 
 }
 
 

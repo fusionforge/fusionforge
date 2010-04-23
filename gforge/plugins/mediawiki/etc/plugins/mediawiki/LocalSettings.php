@@ -2,13 +2,6 @@
 
 require_once('/etc/gforge/local.inc');
 
-if (!isset($mediawiki_var_path))
-	$mediawiki_var_path = "$sys_var_path/plugins/mediawiki";
-if (!isset($mediawiki_projects_path))
-	$mediawiki_projects_path = "$mediawiki_var_path/projects";
-if (!isset($mediawiki_master_path))
-	$mediawiki_master_path = "$mediawiki_var_path/master";
-
 if ( isset( $_SERVER ) && array_key_exists( 'REQUEST_METHOD', $_SERVER ) ) {
 	// when loaded from the server
         require_once ("$sys_share_path/www/env.inc.php") ;
@@ -19,7 +12,9 @@ if ( isset( $_SERVER ) && array_key_exists( 'REQUEST_METHOD', $_SERVER ) ) {
 	require_once ("$sys_share_path/common/include/config.php") ;
 }
 
-$IP = $mediawiki_master_path;
+require_once ("$sys_share_path/plugins/mediawiki/common/config-vars.php");
+
+$IP = forge_get_config('master_path', 'mediawiki');
 
 if (!isset ($fusionforgeproject)) {
 	$fusionforgeproject = 'siteadmin' ;
@@ -36,7 +31,13 @@ while (count ($exppath) >= 4) {
         }
 }
 
-$project_dir = "$mediawiki_projects_path/$fusionforgeproject" ;
+$project_dir = forge_get_config('projects_path', 'mediawiki') . "/" 
+	. $fusionforgeproject ;
+
+if (!is_dir($project_dir)) {
+	exit_error (sprintf(_('Mediawiki for project %s not created yet, please wait for a few minutes.'), $fusionforgeproject)) ;
+}
+
 
 $path = array( $IP, "$IP/includes", "$IP/languages" );
 set_include_path( implode( PATH_SEPARATOR, $path ) . PATH_SEPARATOR . get_include_path() );
@@ -70,7 +71,7 @@ $wgDBts2schema      = str_replace ('-', '_', "plugin_mediawiki_$fusionforgeproje
 $wgMainCacheType = CACHE_NONE;
 $wgMemCachedServers = array();
 
-$wgEnableUploads = false;
+$wgEnableUploads = forge_get_config('enable_uploads', 'mediawiki');
 $wgUploadDirectory = "$project_dir/images";
 $wgUseImageMagick = true;
 $wgImageMagickConvertCommand = "/usr/bin/convert";
@@ -181,7 +182,6 @@ function FusionForgeMWAuth( $user, &$result ) {
 
                 $user->setCookies ();
                 $user->saveSettings ();
-		session_destroy () ;
 		wfSetupSession ();
 	} else {
 		$user->logout ();
@@ -266,12 +266,9 @@ if ($public) {
 
 if (file_exists ("$project_dir/ProjectSettings.php")) {
         require ("$project_dir/ProjectSettings.php") ;
-} else {
-	exit_error (sprintf(_('Mediawiki for project %s not created yet, please wait for a few minutes.'), $fusionforgeproject)) ;
-}
+} 
 
 // Override default wiki logo
-$wgLogo = "/themes/".forge_get_config('default_theme')."/images/wgLogo.png";
 $wgFavicon = '/images/icon.png' ;
 $wgBreakFrames = false ;
 ini_set ('memory_limit', '50M') ;

@@ -2,5 +2,6 @@
 # Regular cron jobs for plugin-mediawiki
 #
 
-# Create new wikis four times an hour
-*/15 * * * * root [ -x $FFDIR/plugins/mediawiki/cronjobs/create-wikis.php ] && $FFDIR/plugins/mediawiki/cronjobs/create-wikis.php
+# Create new wikis and imgdirs four times an hour
+0,15,30,45 * * * * $FFUSER [ -x $FFDIR/plugins/mediawiki/cronjobs/create-wikis.php ] && $PHP $FFDIR/plugins/mediawiki/cronjobs/create-wikis.php
+1,16,31,46 * * * * root [ -x $FFDIR/plugins/mediawiki/cronjobs/create-imgdirs.php ] && $PHP $FFDIR/plugins/mediawiki/cronjobs/create-imgdirs.php
