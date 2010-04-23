@@ -14,7 +14,7 @@ else
 fi
 
 find_files () {
-    ack-grep -l --php $old | grep -v www/include/pre.php
+    ack-grep -l --php $old | grep -v common/include/config-vars.php
 }
 
 find_files | xargs perl -pi -e"
