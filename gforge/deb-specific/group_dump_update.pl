@@ -155,7 +155,7 @@ sub update_group {
 	system("chmod $default_perms $cgi_dir");
 	system("chmod $default_perms $ht_dir");
 	system("chmod $default_perms $inc_dir");
-	chown $dummy_uid, $gid, ($group_dir, $log_dir, $cgi_dir, $ht_dir);
+	chown $dummy_uid, $gid, ($group_dir, $log_dir, $cgi_dir, $ht_dir, $inc_dir);
 	
 	my $realuid=get_file_owner_uid($group_dir);
 	if ($dummy_uid eq $realuid){
