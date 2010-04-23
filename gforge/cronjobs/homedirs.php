@@ -171,7 +171,17 @@ foreach($groups as $group) {
 		fwrite($fw,$contents);
 		fclose($fw);
 	}
+
+	if ($sys_use_manual_uploads) { 
+		$incoming = $groupdir_prefix/$group."/incoming" ;
+		if (!is_dir($incoming))
+		{
+			@mkdir($incoming); 
+		}
+	}
+
 	system("chown -R ".forge_get_config('apache_user').":".forge_get_config('apache_group')." $groupdir_prefix/$group");
+
 }
 
 

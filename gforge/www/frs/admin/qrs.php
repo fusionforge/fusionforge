@@ -60,41 +60,20 @@ if (getStringFromRequest('submit')) {
 	$type_id = getIntFromRequest('type_id');
 	$processor_id = getIntFromRequest('processor_id');
 	$release_date = getStringFromRequest('release_date');
+	// Build a Unix time value from the supplied Y-m-d value
+	$release_date = strtotime($release_date);
 	$release_notes = getStringFromRequest('release_notes');
 	$release_changes = getStringFromRequest('release_changes');
 	$preformatted = getStringFromRequest('preformatted');
 	$ftp_filename = getStringFromRequest('ftp_filename');
+	$manual_filename = getStringFromRequest('manual_filename');
+	$group_unix_name=group_getunixname($group_id);
+
 	$feedback = '' ;
-	if (forge_get_config('use_ftpuploads') && $ftp_filename && util_is_valid_filename($ftp_filename) && is_file($upload_dir.'/'.$ftp_filename)) {
-		//file was uploaded already via ftp
-		//use setuid prog to chown it
-		//$cmd = escapeshellcmd("$sys_ftp_upload_chowner $ftp_filename");
-		//exec($cmd,$output);
-		$userfile_name=$ftp_filename;
-		$userfile=$upload_dir.'/'.$ftp_filename;
-		//echo $cmd.'***'.$output.'***'.$userfile;
-	}
 	if (!$release_name) {
 		$feedback .= _('Must define a release name.');
 	} else 	if (!$package_id) {
 		$feedback .= _('Must select a package.');
-	} else 	if (!$userfile['tmp_name'] && !$ftp_filename) {
-		// Check errors
-		switch($userfile['error']) {
-			case UPLOAD_ERR_INI_SIZE:
-			case UPLOAD_ERR_FORM_SIZE:
-				$feedback .= _('The uploaded file exceeds the maximum file size. Contact to the site admin to upload this big file.');
-			break;
-			case UPLOAD_ERR_PARTIAL:
-				$feedback .= _('The uploaded file was only partially uploaded.');
-			break;
-			case UPLOAD_ERR_NO_FILE:
-				$feedback .= _('Must select a file.');
-			break;
-			default:
-				$feedback .= _('Unknown file upload error.');
-			break;
-		}
 	} else 	if (!$type_id || $type_id == "100") {
 		$feedback .= _('Must select a file type.');
 	} else 	if (!$processor_id || $processor_id == "100")  {
@@ -110,68 +89,43 @@ if (getStringFromRequest('submit')) {
 		} elseif ($frsp->isError()) {
 			exit_error('Error',$frsp->getErrorMessage());
 		} else {
-			if ($userfile && (is_uploaded_file($userfile['tmp_name']) || (forge_get_config('use_ftpuploads') && $ftp_filename))) {
-				//
-				//	Create a new FRSRelease in the db
-				//
-				$frsr = new FRSRelease($frsp);
-				if (!$frsr || !is_object($frsr)) {
-					exit_error('Error','Could Not Get FRSRelease');
-				} elseif ($frsr->isError()) {
+			//
+			//	Create a new FRSRelease in the db
+			//
+			$frsr = new FRSRelease($frsp);
+			if (!$frsr || !is_object($frsr)) {
+				exit_error('Error','Could Not Get FRSRelease');
+			} elseif ($frsr->isError()) {
+				exit_error('Error',$frsr->getErrorMessage());
+			} else {
+				db_begin();
+				if (!$frsr->create($release_name,$release_notes,$release_changes,
+						   $preformatted,$release_date)) {
+					db_rollback();
 					exit_error('Error',$frsr->getErrorMessage());
-				} else {
-//					$date_list = split('[- :]',$release_date,5);
-//					$release_date = mktime($date_list[3],$date_list[4],0,$date_list[1],$date_list[2],$date_list[0]);
-					$release_date = strtotime($release_date);
-					db_begin();
-					if (!$frsr->create($release_name,$release_notes,$release_changes,
-						$preformatted,$release_date)) {
-						db_rollback();
-						exit_error('Error',$frsr->getErrorMessage());
-					}
-
-					//
-					//	Now create the new FRSFile in the db
-					//
-					$frsf = new FRSFile($frsr);
-					if (!$frsf || !is_object($frsf)) {
-						exit_error('Error','Could Not Get FRSFile');
-					} elseif ($frsf->isError()) {
-						exit_error('Error',$frsf->getErrorMessage());
-					} else {
-						if (!$frsf->create($userfile_name,$userfile['tmp_name'],$type_id,$processor_id,$release_date)) {
-							db_rollback();
-							exit_error('Error',$frsf->getErrorMessage());
-						}
-						$frsr->sendNotice();
-						$feedback .= _('File Released: You May Choose To Edit the Release Now');
-
-						frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
-						?>
-						<p>
-							 <?php 
-							 printf (_('You can now <a href="%1$s"><strong>add files to this release</strong></a> if you wish, or edit the release. Please note that file(s) may not appear immediately on the <a href="%2$s">download page</a>. Allow several hours for propagation.'),
-								 util_make_url ('/frs/admin/editrelease.php?release_id='.$frsr->getID().'&amp;group_id='.$group_id.'&amp;package_id='.$package_id),
-								 util_make_url ('/frs/?group_id='.$group_id)
-								 )
-							 ?>
-						<?php
-						db_commit();
-						frs_admin_footer(array());
-						exit(); //quite dirty but less that a buggy output like before
-						
-					}
-
 				}
 
-			} else {
-				exit_error('Error','Could Not Upload User File: '.$userfile['name']);
+				$ret = frs_add_file_from_form ($frsr, $type_id, $processor_id, $release_date,
+							       $userfile, $ftp_filename, $manual_filename) ;
+				if ($ret != true) {
+					db_rollback() ;
+					exit_error ($ret) ;
+				}
+				$frsr->sendNotice();
+				
+				frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
+				echo '<p>' ;
+				printf (_('You can now <a href="%1$s"><strong>add files to this release</strong></a> if you wish, or edit the release. Please note that file(s) may not appear immediately on the <a href="%2$s">download page</a>. Allow several hours for propagation.'),
+					util_make_url ('/frs/admin/editrelease.php?release_id='.$frsr->getID().'&amp;group_id='.$group_id.'&amp;package_id='.$package_id),
+					util_make_url ('/frs/?group_id='.$group_id)
+					) ;
+				echo '</p>' ;
+				db_commit();
+				frs_admin_footer(array());
+				exit () ;
 			}
-
 		}
-
 	}
-
 } else {
 	$release_name = '';
 	$userfile = '';
@@ -183,6 +137,7 @@ if (getStringFromRequest('submit')) {
 	$release_changes = '';
 	$preformatted = '';
 	$ftp_filename = '';
+	$manual_filename = '';
 }
 
 frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
@@ -245,14 +200,27 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 		<?php if (forge_get_config('use_ftpuploads')) {
 
 			echo '<p>';
-			printf(_('Alternatively, you can use FTP to upload a new file at %1$s'), forge_get_config('ftp_upload_host')).'<br />';
+			printf(_('Alternatively, you can use FTP to upload a new file at %1$s.'), forge_get_config('ftp_upload_host'));
+			echo '<br />';
 			echo _('Choose an FTP file instead of uploading:').'<br />';
-			$arr[]='';
-			$ftp_files_arr=array_merge($arr,ls($upload_dir,true));
+			$ftp_files_arr=ls($upload_dir,true);
 			echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename',''); ?>
 		
 		</p>
 		<?php } ?>
+<?php if ($sys_use_manual_uploads) {
+	$incoming = $groupdir_prefix."/".$g->getUnixName()."/incoming" ;
+
+	echo '<p>';
+	printf(_('Alternatively, you can use a file you already uploaded (by SFTP or SCP) to the project\'s incoming directory (%1$s).'),
+	       $incoming) ;
+	echo '<br />';
+	echo _('Choose an already uploaded file:').'<br />';
+	$manual_files_arr=ls($incoming,true);
+	echo html_build_select_box_from_arrays($manual_files_arr,$manual_files_arr,'manual_filename',''); ?>
+	</p>
+<?php } ?>
+
 		</td>
 	</tr>
 	<tr>

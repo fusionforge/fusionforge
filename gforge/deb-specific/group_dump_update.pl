@@ -96,6 +96,7 @@ sub add_group {
 	$log_dir = $group_dir."/log";
 	$cgi_dir = $group_dir."/cgi-bin";
 	$ht_dir = $group_dir."/htdocs";
+	$inc_dir = $group_dir."/incoming";
 
         if ($is_public) {
             $default_perms = 2775 ;
@@ -113,12 +114,14 @@ sub add_group {
 	mkdir $log_dir, $default_perms ;
 	mkdir $cgi_dir, $default_perms ;
 	mkdir $ht_dir, $default_perms ;
+	mkdir $inc_dir, $default_perms ;
 	system("cp $default_page $ht_dir/index.php");
 	# perl is sometime fucked to create with right permission
 	system("chmod $default_perms $group_dir");
 	system("chmod $default_perms $log_dir");
 	system("chmod $default_perms $cgi_dir");
 	system("chmod $default_perms $ht_dir");
+	system("chmod $default_perms $inc_dir");
 	system("chmod $file_default_perms $ht_dir/index.php");
 	chown $dummy_uid, $gid, ($group_dir, $log_dir, $cgi_dir, $ht_dir);
 	chown $dummy_uid, $gid, ("$ht_dir/index.php");
@@ -137,6 +140,7 @@ sub update_group {
 	$log_dir = $group_dir."/log";
 	$cgi_dir = $group_dir."/cgi-bin";
 	$ht_dir = $group_dir."/htdocs";
+	$inc_dir = $group_dir."/incoming";
 
 	if ($is_public) {
 	    $default_perms = 2775 ;
@@ -150,6 +154,7 @@ sub update_group {
 	system("chmod $default_perms $log_dir");
 	system("chmod $default_perms $cgi_dir");
 	system("chmod $default_perms $ht_dir");
+	system("chmod $default_perms $inc_dir");
 	chown $dummy_uid, $gid, ($group_dir, $log_dir, $cgi_dir, $ht_dir);
 	
 	my $realuid=get_file_owner_uid($group_dir);

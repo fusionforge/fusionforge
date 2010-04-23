@@ -220,6 +220,71 @@ function frs_show_package_popup ($group_id, $name='package_id', $checked_val="xz
 	}
 }
 
+function frs_add_file_from_form ($release, $type_id, $processor_id, $release_date,
+				 $userfile, $ftp_filename, $manual_filename) {
+	global $groupdir_prefix, $sys_use_manual_uploads ;
+
+	$group_unix_name = $release->getFRSPackage()->getGroup()->getUnixName() ;
+	$incoming = "$groupdir_prefix/$group_unix_name/incoming" ;
+
+	$filechecks = false ;
+
+	if ($userfile && is_uploaded_file($userfile['tmp_name']) && util_is_valid_filename($userfile['name'])) {
+		$infile = $userfile['tmp_name'] ;
+		$fname = $userfile['name'] ;
+		$move = true ;
+		$filechecks = true ;
+	} elseif ($userfile && $userfile['error'] != UPLOAD_ERR_OK && $userfile['error'] != UPLOAD_ERR_NO_FILE) {
+		switch ($userfile['error']) {
+			case UPLOAD_ERR_INI_SIZE:
+			case UPLOAD_ERR_FORM_SIZE:
+				return _('The uploaded file exceeds the maximum file size. Contact to the site admin to upload this big file, or use an alternate upload method (if available).') ;
+			break;
+			case UPLOAD_ERR_PARTIAL:
+				return _('The uploaded file was only partially uploaded.') ;
+			break;
+			default:
+				return _('Unknown file upload error.') ;
+			break;
+		}
+	} elseif (forge_get_config('use_ftp_uploads') && $ftp_filename && util_is_valid_filename($ftp_filename) && is_file($upload_dir.'/'.$ftp_filename)) {
+		$infile = $upload_dir.'/'.$ftp_filename;
+		$fname = $ftp_filename ;
+		$move = false ;
+		$filechecks = true ;
+	} elseif ($sys_use_manual_uploads && $manual_filename && util_is_valid_filename($manual_filename) && is_file($incoming.'/'.$manual_filename)) {
+		$infile = $incoming.'/'.$manual_filename ;
+		$fname = $manual_filename ;
+		$move = false ;
+		$filechecks = true ;
+	} elseif ($userfile && $userfile['error'] == UPLOAD_ERR_NO_FILE) {
+		return _('Must select a file.') ;
+	}
+
+	if ($filechecks) {
+		if (!$move) {
+			$tmp = tempnam ('', '') ;
+			copy ($infile, $tmp) ;
+			$infile = $tmp ;
+		}
+		$frsf = new FRSFile($release);
+		if (!$frsf || !is_object($frsf)) {
+			exit_error('Error','Could Not Get FRSFile');
+		} elseif ($frsf->isError()) {
+			exit_error('Error',$frsf->getErrorMessage());
+		} else {
+			if (!$frsf->create($fname,$infile,$type_id,$processor_id,$release_date)) {
+				db_rollback();
+				exit_error('Error',$frsf->getErrorMessage());
+			}
+			return true ;
+		}
+	} else {
+		return _('Unknown file upload error.') ;
+	}
+}
+
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

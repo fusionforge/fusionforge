@@ -918,6 +918,10 @@ function human_readable_bytes ($bytes, $base10=false, $round=0, $labels=array(' 
  *	@return	array	array of file names.
  */
 function &ls($dir,$filter=false) {
+	if (!is_dir ($dir)) {
+		$out = array () ;
+		return $out ;
+	}
 	exec('ls -c1 '.$dir,$out);
 	if ($filter) {
 		for ($i=0; $i<count($out); $i++) {

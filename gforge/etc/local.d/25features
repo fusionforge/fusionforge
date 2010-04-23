@@ -31,6 +31,8 @@ $sys_use_mwframe=false;
 $sys_use_ratings={sys_use_ratings};
 // Enable/Disable the ability to upload files using FTP in FRS
 $sys_use_ftpuploads={sys_use_ftpuploads};
+// Enable/Disable the ability to upload files using SCP/SFTP in FRS
+$sys_use_manual_uploads={sys_use_manual_uploads};
 // Enable/Disable the use of mail gateways for trackers and forums
 $sys_use_gateways={sys_use_gateways};
 

@@ -147,38 +147,21 @@ if (getStringFromRequest('step2')) {
 	$userfile_name = $userfile['name'];
 	$type_id = getIntFromRequest('type_id');
 	$release_date = getStringFromRequest('release_date');
+	// Build a Unix time value from the supplied Y-m-d value
 	$release_date = strtotime($release_date);
 	$processor_id = getStringFromRequest('processor_id');
-	// Build a Unix time value from the supplied Y-m-d value
 	$group_unix_name=group_getunixname($group_id);
 	$ftp_filename = getStringFromRequest('ftp_filename');
+	$manual_filename = getStringFromRequest('manual_filename');
 
-	if (($userfile && is_uploaded_file($userfile['tmp_name'])) || (forge_get_config('use_ftpuploads') && $ftp_filename)){
-		if (forge_get_config('use_ftpuploads') && $ftp_filename && util_is_valid_filename($ftp_filename) && is_file($upload_dir.'/'.$ftp_filename)) {
-			//file was uploaded already via ftp
-			//use setuid prog to chown it
-			//$cmd = escapeshellcmd("$sys_ftp_upload_chowner $ftp_filename");
-			//exec($cmd,$output);
-			$userfile_name=$ftp_filename;
-			$userfile=$upload_dir.'/'.$ftp_filename;
-			//echo $cmd.'***'.$output.'***'.$userfile;
-		}
-		//
-		//  Now create the new FRSFile in the db
-		//
-		$frsf = new FRSFile($frsr);
-		if (!$frsf || !is_object($frsf)) {
-			exit_error('Error','Could Not Get FRSFile');
-		} elseif ($frsf->isError()) {
-			exit_error('Error',$frsf->getErrorMessage());
-		} else {
-			if (!$frsf->create($userfile_name,$userfile['tmp_name'],$type_id,$processor_id,$release_date)) {
-				db_rollback();
-				exit_error('Error',$frsf->getErrorMessage());
-			}
-			$feedback=_('File Released');
-		}
+	$ret = frs_add_file_from_form ($frsr, $type_id, $processor_id, $release_date,
+				       $userfile, $ftp_filename, $manual_filename) ;
+	if ($ret == true) {
+		$feedback = _('File Released') ;
+	} else {
+		$feedback .= $ret ;
 	}
+
 }
 
 // Edit/Delete files in a release
@@ -308,22 +291,27 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 <?php echo _("Upload a new file") ?>: <input type="file" name="userfile"  size="30" />
 <?php if (forge_get_config('use_ftpuploads')) {
 	echo '<p>';
-	printf(_('Alternatively, you can use FTP to upload a new file at %1$s'), forge_get_config('ftp_upload_host')).'<br />';
-	echo _('Choose an FTP file instead of uploading:').'<br />';
-	$arr[]='';
-	$ftp_files_arr=array_merge($arr,ls($upload_dir,true));
-	echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename','',false); ?>
+	  printf(_('Alternatively, you can use FTP to upload a new file at %1$s.'), forge_get_config('ftp_upload_host'));
+	echo '<br />';
+	echo _('Choose an already uploaded file:').'<br />';
+	$ftp_files_arr=ls($upload_dir,true);
+	echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename',''); ?>
 	</p>
 <?php } ?>
-<p>
-<span class="important">
-<?php echo _('NOTE: In some browsers you must select the file in the file-upload dialog and click "OK".  Double-clicking doesn\'t register the file.').' ('._('Maximum upload file size:').' '. ini_get('upload_max_filesize')?>)
-</span>
-</p>
-<p>
-<?php echo _('Specify a new URL') ?>: <input type="text" name="userlink"  size="50" />
-</p>
-</fieldset>
+
+<?php if ($sys_use_manual_uploads) {
+	$incoming = $groupdir_prefix."/".$g->getUnixName()."/incoming" ;
+
+	echo '<p>';
+	printf(_('Alternatively, you can use a file you already uploaded (by SFTP or SCP) to the project\'s incoming directory (%1$s).'),
+	       $incoming);
+	echo '<br />';
+	echo _('Choose an already uploaded file:').'<br />';
+	$manual_files_arr=ls($incoming,true);
+	echo html_build_select_box_from_arrays($manual_files_arr,$manual_files_arr,'manual_filename',''); ?>
+	</p>
+<?php } ?>
+
 <table width="60%">
 <tr>
 <td>
