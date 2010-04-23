@@ -18,7 +18,6 @@
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
 require_once('preplugins.php');
-require_once('ForumMLSearchEngine.class.php');
 
 
 class ForumMLPlugin extends Plugin {
@@ -124,6 +123,7 @@ class ForumMLPlugin extends Plugin {
 			echo "</tr>";
 		} elseif ($hookname == 'search_engines') {
 			$myfile=fopen('/tmp/hook','a');
+			require_once('ForumMLSearchEngine.class.php');
 			// FIXME: when the hook is called, the group_id is not set.
 			// So I use the global variable instead.
 			$request =& HTTPRequest::instance();
