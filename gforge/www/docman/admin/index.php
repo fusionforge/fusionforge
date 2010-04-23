@@ -107,6 +107,13 @@ if (getStringFromRequest('submit')) {
 			$filename=$upload_dir.'/'.$ftp_filename;
 			$data = fread(fopen($filename, 'r'), filesize($filename));
 			$filetype=$uploaded_data_type;
+		} elseif ($sys_use_manual_uploads && $uploaded_filename!=100 && util_is_valid_filename($uploaded_filename)) { //100==None
+			$incoming = $groupdir_prefix."/".$g->getUnixName()."/incoming" ;
+			$filename = $incoming.'/'.$uploaded_filename;
+			$data = addslashes(fread(fopen($filename, 'r'), filesize($filename)));
+			$finfo = finfo_open (FILEINFO_MIME_TYPE) ;
+			$filetype = finfo_file($finfo, $filename) ;
+			finfo_close ($finfo) ;
 		*/
 		} else {
 			$filename=$d->getFileName();
@@ -326,14 +333,28 @@ if ($editdoc && $docid) {
 		<?php } else { ?>
 		<strong><?php echo _('OPTIONAL: Upload new file') ?></strong><br />
 		<input type="file" name="uploaded_data" size="30" /><br/><br />
-			<?php //if (forge_get_config('use_ftpuploads')) { ?>
-			<!--<strong><?php //printf(_('OR choose one form FTP %1$s'), forge_get_config('ftp_upload_host')) ?></strong>--><br />
-			<?php
-			//$ftp_files_arr=array_merge($arr,ls($upload_dir,true));
-			//echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename','');
-			//echo '<br /><br />';			
-			//}
-		}
+			<?php 
+			if (forge_get_config('use_ftpuploads')) {
+				echo '<strong>' ;
+				printf(_('OR choose one form FTP %1$s.'), forge_get_config('ftp_upload_host'));
+				echo '</strong><br />' ;
+				$ftp_files_arr=array_merge($arr,ls($upload_dir,true));
+				echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename','');
+				echo '<br /><br />';			
+			}
+		
+/*		if ($sys_use_manual_uploads && $u->getUnixStatus() == 'A') {
+			$incoming = $groupdir_prefix."/".$g->getUnixName()."/incoming" ;
+			
+			echo '<strong>' ;
+			printf (_("OR choose one you alrealy uploaded (by SFTP or SCP) to the project's incoming directory ($1$s)."),
+				$incoming) ;
+			echo '</strong><br />' ;
+			$manual_files_arr=array_merge($arr,ls($incoming,true));
+			echo html_build_select_box_from_arrays($manual_files_arr,$manual_files_arr,'uploaded_filename','');
+			echo '<br /><br />';			
+			} */
+	}
 		?>
 		</td>
 	</tr>
