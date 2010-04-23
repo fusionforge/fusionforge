@@ -4,7 +4,7 @@ require_once '../env.inc.php';
 require_once $gfwww.'include/pre.php';
 require_once $gfwww.'export/rss_utils.inc';
 
-global $sys_name, $sys_default_domain;
+
 
 //Default Vars
 $number_items = 10;
@@ -139,7 +139,7 @@ $sql="
 $res=pg_query($sql);
 $i=0;
 
-beginTaskFeed('evolvis: Current Tasks',$sys_default_domain,'See all the tasks you want to see!');
+beginTaskFeed('evolvis: Current Tasks',forge_get_config('web_host'),'See all the tasks you want to see!');
 if(0<pg_num_rows($res))
 {
 	while($i<pg_num_rows($res))
@@ -223,7 +223,7 @@ function handle_getvar($name)
 
 
 function beginTaskFeed($feed_title, $feed_link, $feed_desc) {
-	global $sys_default_domain, $sys_name, $sys_admin_email;
+	global  $sys_admin_email;
 	header("Content-Type: text/xml");
 	print "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 	print "<rss version=\"2.0\">\n";
@@ -232,28 +232,28 @@ function beginTaskFeed($feed_title, $feed_link, $feed_desc) {
 	print "  <link>".$feed_link."</link>\n";
 	print "  <description>".$feed_desc."</description>\n";
 	print "  <language>en-us</language>\n";
-	print "  <copyright>Copyright 2000-".date("Y")." ".$sys_name."</copyright>\n";
+	print "  <copyright>Copyright 2000-".date("Y")." ".forge_get_config('forge_name')."</copyright>\n";
 	print "  <webMaster>".$sys_admin_email."</webMaster>\n";
 	print "  <lastBuildDate>".gmdate('D, d M Y G:i:s',time())." GMT</lastBuildDate>\n";
 	print "  <docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
 	print "  <image>\n";
-	print "    <url>http://".$sys_default_domain."/images/bflogo-88.png</url>\n";
-	print "    <title>".$sys_name." Developer</title>\n";
-	print "    <link>http://".$sys_default_domain."/</link>\n";
+	print "    <url>http://".forge_get_config('web_host')."/images/bflogo-88.png</url>\n";
+	print "    <title>".forge_get_config('forge_name')." Developer</title>\n";
+	print "    <link>http://".forge_get_config('web_host')."/</link>\n";
 	print "    <width>124</width>\n";
 	print "    <heigth>32</heigth>\n";
 	print "  </image>\n";
 }
 
 function writeTaskFeed($msg, $item_cat){
-    global $sys_default_domain, $show_threads;
+    global  $show_threads;
             
   $link = "pm/task.php?func=detailtask&amp;project_task_id=".$msg['project_task_id']."&amp;group_project_id=".$msg['group_project_id']."&amp;group_id=".$msg['group_id'];//group_id missing
 
     //------------ build one feed item ------------
     print "  <item>\n";					
         print "   <title>".$msg['subject']."</title>\n"; 
-        print "   <link>http://".$sys_default_domain."/".$link."</link>\n";
+        print "   <link>http://".forge_get_config('web_host')."/".$link."</link>\n";
         print "   <category>".$item_cat."</category>\n";
         print "   <description>".$msg['details']."</description>\n";
         print "   <author>".$msg['user_realname']."</author>\n";

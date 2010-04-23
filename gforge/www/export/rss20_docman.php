@@ -70,31 +70,31 @@ else {
 
 //**************************************************************++
 function beginFeed($groupname = "", $link = "") {
-	global $sys_default_domain, $sys_name, $sys_admin_email;
+	global  $sys_admin_email;
 	header("Content-Type: text/xml");
 	print '<?xml version="1.0" encoding="UTF-8"?>
 			<rss version="2.0">
 			';
 	print " <channel>\n";
-	print "  <title>".$sys_name." Project \"".$groupname."\" Documents</title>\n";
-	print "  <link>http://".$sys_default_domain.$link."</link>\n";
-	print "  <description>".$sys_name." Documents of \"".$groupname."\"</description>\n";
+	print "  <title>".forge_get_config('forge_name')." Project \"".$groupname."\" Documents</title>\n";
+	print "  <link>http://".forge_get_config('web_host').$link."</link>\n";
+	print "  <description>".forge_get_config('forge_name')." Documents of \"".$groupname."\"</description>\n";
 	print "  <language>en-us</language>\n";
-	print "  <copyright>Copyright 2000-".date("Y")." ".$sys_name."</copyright>\n";
+	print "  <copyright>Copyright 2000-".date("Y")." ".forge_get_config('forge_name')."</copyright>\n";
 	print "  <webMaster>".$sys_admin_email."</webMaster>\n";
 	print "  <lastBuildDate>".gmdate('D, d M Y G:i:s',time())." GMT</lastBuildDate>\n";
 	print "  <docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
 	print "  <image>\n";
-	print "    <url>http://".$sys_default_domain."/images/bflogo-88.png</url>\n";
-	print "    <title>".$sys_name." Developer</title>\n";
-	print "    <link>http://".$sys_default_domain."/</link>\n";
+	print "    <url>http://".forge_get_config('web_host')."/images/bflogo-88.png</url>\n";
+	print "    <title>".forge_get_config('forge_name')." Developer</title>\n";
+	print "    <link>http://".forge_get_config('web_host')."/</link>\n";
 	print "    <width>124</width>\n";
 	print "    <heigth>32</heigth>\n";
 	print "  </image>\n";
 }
 
 function writeFeed($d_arr, $group_id){
-	global $sys_default_domain;
+
 	// ## default limit
 	//if (isset($limit) ||empty($limit)) $limit = 10;
 	//if ($limit > 100) $limit = 100;
@@ -125,7 +125,7 @@ function writeFeed($d_arr, $group_id){
 						"<description>".rss_description($d_arr[$j]->getErrorMessage())."</decription>";
 			} else {				
 				print "   <title>".$d_arr[$j]->getName()."</title>\n"; 
-				print "   <link>http://".$sys_default_domain."/".$link."</link>\n";
+				print "   <link>http://".forge_get_config('web_host')."/".$link."</link>\n";
 				print "   <category>".$d_arr[$j]->getDocGroupName()."</category>\n";
 				
 				print "   <description>".

@@ -30,7 +30,7 @@ require_once $gfcommon.'forum/ForumFactory.class.php';
 require_once $gfcommon.'forum/ForumMessage.class.php';
 require_once $gfcommon.'forum/ForumMessageFactory.class.php';
 
-global $sys_name, $sys_default_domain;
+
 
 //Initialize
 $groups = array();
@@ -172,9 +172,9 @@ else $where_threads = " AND is_followup_to=0";
 
 // ------------- general settings and defaults for filtered and non-filtered feeds -------------
 $feed_title_desc = $show_threads ? "Current threads" : "Recent postings";
-$feed_title = $sys_name." Forums: ".$feed_title_desc; //all site's forums
-$feed_link = "http://".$sys_default_domain;
-$feed_desc = $sys_name." Forums";
+$feed_title = forge_get_config('forge_name')." Forums: ".$feed_title_desc; //all site's forums
+$feed_link = "http://".forge_get_config('web_host');
+$feed_desc = forge_get_config('forge_name')." Forums";
 
 
 // -------------for filtered feeds - set feed title, link and description-------------
@@ -275,7 +275,7 @@ endFeed();
 
 //*********************** HELPER FUNCTIONS ***************************************
 function beginForumFeed($feed_title, $feed_link, $feed_desc) {
-	global $sys_default_domain, $sys_name, $sys_admin_email;
+	global  $sys_admin_email;
 	header("Content-Type: text/xml");
 	print '<?xml version="1.0" encoding="UTF-8"?>
 			<rss version="2.0">
@@ -285,28 +285,28 @@ function beginForumFeed($feed_title, $feed_link, $feed_desc) {
 	print "  <link>".$feed_link."</link>\n";
 	print "  <description>".$feed_desc."</description>\n";
 	print "  <language>en-us</language>\n";
-	print "  <copyright>Copyright 2000-".date("Y")." ".$sys_name."</copyright>\n";
+	print "  <copyright>Copyright 2000-".date("Y")." ".forge_get_config('forge_name')."</copyright>\n";
 	print "  <webMaster>".$sys_admin_email."</webMaster>\n";
 	print "  <lastBuildDate>".gmdate('D, d M Y G:i:s',time())." GMT</lastBuildDate>\n";
 	print "  <docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
 	print "  <image>\n";
-	print "    <url>http://".$sys_default_domain."/images/bflogo-88.png</url>\n";
-	print "    <title>".$sys_name." Developer</title>\n";
-	print "    <link>http://".$sys_default_domain."/</link>\n";
+	print "    <url>http://".forge_get_config('web_host')."/images/bflogo-88.png</url>\n";
+	print "    <title>".forge_get_config('forge_name')." Developer</title>\n";
+	print "    <link>http://".forge_get_config('web_host')."/</link>\n";
 	print "    <width>124</width>\n";
 	print "    <heigth>32</heigth>\n";
 	print "  </image>\n";
 }
 
 function writeForumFeed($msg, $item_cat){
-    global $sys_default_domain, $show_threads;
+    global  $show_threads;
             
     $link = "forum/message.php?msg_id=".$msg['msg_id'];
 
     //------------ build one feed item ------------
     print "  <item>\n";					
         print "   <title>".$msg['subject']."</title>\n"; 
-        print "   <link>http://".$sys_default_domain."/".$link."</link>\n";
+        print "   <link>http://".forge_get_config('web_host')."/".$link."</link>\n";
         print "   <category>".$item_cat."</category>\n";
                 //print "   <description>".rss_description($item_desc)."</description>\n";
         print "   <author>".$msg['user_realname']."</author>\n";
