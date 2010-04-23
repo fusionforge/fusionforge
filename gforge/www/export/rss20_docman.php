@@ -106,7 +106,7 @@ function writeFeed($d_arr, $group_id){
 	$child_count = count($nested_groups["$parent_group"]);
 	*/	
 	if (!$d_arr || count($d_arr) < 1) {
-		endOnError($Language->getText('docman','error_no_docs'));
+		endOnError(_("No documents found in Document Manager"));
 
 	} else {
 		//	Put the result set (list of documents for this group) into feed items

@@ -80,7 +80,7 @@ if (isset($_GET['group_ids'])&&!empty($_GET['group_ids'])) {
                 if ($ff &&is_object($ff) && !$ff->isError()) {
                     $farr = array_merge($farr, $ff->getForums());
                     if (count($farr) < 1) {
-                            error_log("Forum RSS: ".$Language->getText('forum','error_no_forums_found', array($group->getPublicName())),0);
+                            error_log(_("Forum RSS: No forums found"),0);
                     }
                 }
                 else error_log("Forum RSS: ForumFactory error: ".$ff->getErrorMessage()." - No forums for group ".$group->getPublicName(),0);
@@ -245,7 +245,7 @@ if (!$error_no_messages){
     
     $res_msg = db_query($msg_sql);
     if (!$res_msg || db_numrows($res_msg) < 1) {
-            error_log("Forum RSS: ".$Language->getText('forum','error_forum_not_found').' '.db_error(),0);
+            error_log(_("Forum RSS: Forum not found: ").' '.db_error(),0);
     }
     if ($debug) error_log("Forum RSS: ". $msg_sql,0);
 

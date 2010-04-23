@@ -89,7 +89,7 @@ function writeFeed($at_arr, $group_id){
 	//if ($limit > 100) $limit = 100;
 
 	if (!$at_arr || count($at_arr) < 1) {
-		endOnError($Language->getText('tracker','no_trackers_text'));
+		endOnError(_("Tracker RSS: No trackers found"));
 
 	} else {
 		//	Put the result set (list of trackers for this group) into feed items
