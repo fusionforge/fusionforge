@@ -3504,6 +3504,10 @@ gforge/www/docman/include/vtemplate.class.php -text
 gforge/www/docman/search.php -text
 gforge/www/docman/search.tpl.html -text
 gforge/www/env.inc.php -text
+gforge/www/export/rss20_docman.php -text
+gforge/www/export/rss20_forum.php -text
+gforge/www/export/rss20_tasks.php -text
+gforge/www/export/rss20_tracker.php -text
 gforge/www/export/rss20_version.php -text
 gforge/www/export/search_plugin.php -text
 gforge/www/favicon.ico -text svneol=native#unset
