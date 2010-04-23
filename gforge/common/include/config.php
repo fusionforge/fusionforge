@@ -54,13 +54,9 @@ class FusionForgeConfig {
 	function read_config_file ($file) {
 		if (file_exists($file)) {
 			$sections = parse_ini_file ($file, true) ;
-			if(is_array($sections)) {
+			if (is_array($sections)) {
 				foreach ($sections as $section => $options) {
-					if (!isset (self::$instance->settings[$section]))
-						continue ;
 					foreach ($options as $var => $value) {
-						if (!isset (self::$instance->settings[$section][$var]))
-							continue ;
 						self::$instance->settings[$section][$var] = $value ;
 					}
 				}
