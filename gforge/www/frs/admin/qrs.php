@@ -208,7 +208,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 		
 		</p>
 		<?php } ?>
-<?php if ($sys_use_manual_uploads) {
+<?php if (forge_get_config('use_manual_uploads')) {
 	$incoming = $groupdir_prefix."/".$g->getUnixName()."/incoming" ;
 
 	echo '<p>';

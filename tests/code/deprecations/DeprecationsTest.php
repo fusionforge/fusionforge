@@ -58,6 +58,7 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 			       'sys_use_shell',
 			       'sys_use_ratings',
 			       'sys_use_ftpuploads',
+			       'sys_use_manual_uploads',
 			       'sys_use_gateways',
 			       'sys_use_project_vhost',
 			       'sys_use_project_database',

@@ -222,7 +222,7 @@ function frs_show_package_popup ($group_id, $name='package_id', $checked_val="xz
 
 function frs_add_file_from_form ($release, $type_id, $processor_id, $release_date,
 				 $userfile, $ftp_filename, $manual_filename) {
-	global $groupdir_prefix, $sys_use_manual_uploads ;
+	global $groupdir_prefix ;
 
 	$group_unix_name = $release->getFRSPackage()->getGroup()->getUnixName() ;
 	$incoming = "$groupdir_prefix/$group_unix_name/incoming" ;
@@ -252,7 +252,7 @@ function frs_add_file_from_form ($release, $type_id, $processor_id, $release_dat
 		$fname = $ftp_filename ;
 		$move = false ;
 		$filechecks = true ;
-	} elseif ($sys_use_manual_uploads && $manual_filename && util_is_valid_filename($manual_filename) && is_file($incoming.'/'.$manual_filename)) {
+	} elseif (forge_get_config('use_manual_uploads') && $manual_filename && util_is_valid_filename($manual_filename) && is_file($incoming.'/'.$manual_filename)) {
 		$infile = $incoming.'/'.$manual_filename ;
 		$fname = $manual_filename ;
 		$move = false ;

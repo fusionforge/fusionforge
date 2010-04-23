@@ -172,7 +172,7 @@ foreach($groups as $group) {
 		fclose($fw);
 	}
 
-	if ($sys_use_manual_uploads) { 
+	if (forge_get_config('use_manual_uploads')) { 
 		$incoming = $groupdir_prefix/$group."/incoming" ;
 		if (!is_dir($incoming))
 		{

@@ -53,6 +53,7 @@ forge_define_config_item ('use_people', 'core', $GLOBALS['sys_use_people']) ;
 forge_define_config_item ('use_shell', 'core', $GLOBALS['sys_use_shell']) ;
 forge_define_config_item ('use_ratings', 'core', $GLOBALS['sys_use_ratings']) ;
 forge_define_config_item ('use_ftpuploads', 'core', $GLOBALS['sys_use_ftpuploads']) ;
+forge_define_config_item ('use_manual_uploads', 'core', $GLOBALS['sys_use_manual_uploads']) ;
 forge_define_config_item ('use_gateways', 'core', $GLOBALS['sys_use_gateways']) ;
 forge_define_config_item ('use_project_vhost', 'core', $GLOBALS['sys_use_project_vhost']) ;
 forge_define_config_item ('use_project_database', 'core', $GLOBALS['sys_use_project_database']) ;

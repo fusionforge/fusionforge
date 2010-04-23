@@ -107,7 +107,7 @@ if (getStringFromRequest('submit')) {
 			$filename=$upload_dir.'/'.$ftp_filename;
 			$data = fread(fopen($filename, 'r'), filesize($filename));
 			$filetype=$uploaded_data_type;
-		} elseif ($sys_use_manual_uploads && $uploaded_filename!=100 && util_is_valid_filename($uploaded_filename)) { //100==None
+		} elseif (forge_get_config('use_manual_uploads') && $uploaded_filename!=100 && util_is_valid_filename($uploaded_filename)) { //100==None
 			$incoming = $groupdir_prefix."/".$g->getUnixName()."/incoming" ;
 			$filename = $incoming.'/'.$uploaded_filename;
 			$data = addslashes(fread(fopen($filename, 'r'), filesize($filename)));
@@ -343,7 +343,7 @@ if ($editdoc && $docid) {
 				echo '<br /><br />';			
 			}
 		
-/*		if ($sys_use_manual_uploads && $u->getUnixStatus() == 'A') {
+/*		if (forge_get_config('use_manual_uploads') && $u->getUnixStatus() == 'A') {
 			$incoming = $groupdir_prefix."/".$g->getUnixName()."/incoming" ;
 			
 			echo '<strong>' ;
