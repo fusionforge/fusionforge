@@ -1020,6 +1020,7 @@ gforge/plugins/mediawiki/bin/mw-drop-wikis.php -text
 gforge/plugins/mediawiki/bin/mw-plugin-init.php -text
 gforge/plugins/mediawiki/bin/mw-wrapper.php -text
 gforge/plugins/mediawiki/common/MediaWikiPlugin.class.php -text
+gforge/plugins/mediawiki/common/config-vars.php -text
 gforge/plugins/mediawiki/common/mediawiki-init.php -text
 gforge/plugins/mediawiki/cronjobs/create-imagedirs.php -text
 gforge/plugins/mediawiki/cronjobs/create-wikis.php -text
