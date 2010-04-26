@@ -32,7 +32,6 @@ if ( isset( $_SERVER ) &&
 } else {
 	// when run from the command line
         include $gfconfig . 'database.inc';
-	include $gfcommon .'include/config.php';
 }
 
 include $gfplugins . 'mediawiki/common/config-vars.php';

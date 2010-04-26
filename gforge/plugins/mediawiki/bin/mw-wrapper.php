@@ -35,13 +35,13 @@ $wrapperscript = array_shift ($argv) ;
 $fusionforgeproject = array_shift ($argv) ;
 $mwscript = array_shift ($argv) ;
 
-include (dirname(__FILE__)).'/../../env.inc.php';
-include $gfwww.'include/pre.php';
-include $gfcommon.'include/cron_utils.php';
+include (dirname(__FILE__).'/../../env.inc.php');
+include ($gfwww.'include/pre.php');
+include ($gfcommon.'include/cron_utils.php');
 
 // Plugins subsystem
-include $gfcommon.'include/Plugin.class.php' ;
-include $gfcommon.'include/PluginManager.class.php' ;
+require_once($gfcommon.'include/Plugin.class.php');
+require_once($gfcommon.'include/PluginManager.class.php');
 
 setup_plugin_manager () ;
 
@@ -58,9 +58,10 @@ if (!$group->usesPlugin('mediawiki')) {
 define( "MEDIAWIKI", true );
 require_once $gfwww.'plugins/mediawiki/LocalSettings.php' ;
 
-$mwscript = MW_INSTALL_PATH.'/maintenance/'.$mwscript ;
+$src_path = forge_get_config('src_path', 'mediawiki');
+$mwscript = $src_path . '/maintenance/'.$mwscript ;
 
-array_unshift ($argv, $mwscript, '--conf', "$wikidata/LocalSettings.php") ;
+array_unshift ($argv, $mwscript, '--conf', $gfplugins . 'mediawiki/www/LocalSettings.php') ;
 
 ob_end_flush() ;
 
