@@ -26,13 +26,12 @@
    It is intended to be started in a cronjob with root permissions.
    */
 
-require (dirname(__FILE__) . '/../../env.inc.php');
-require_once ($gfwww . 'include/squal_pre.php');
-require $gfcommon.'include/cron_utils.php';
-require(dirname(__FILE__) . '/../common/config-vars.php');
+include dirname(__FILE__) . '/../../env.inc.php';
+include $gfwww . 'include/squal_pre.php';
+include $gfcommon.'include/cron_utils.php';
+include $gfplugins . 'mediawiki/common/config-vars.php';
 
 if (forge_get_config('enable_uploads', 'mediawiki')) {
-
 	$upload_dir_basename = "images";
 	$projects_path = forge_get_config('projects_path', 'mediawiki');
 
@@ -63,10 +62,10 @@ if (forge_get_config('enable_uploads', 'mediawiki')) {
 		} else {
 			cron_debug("  Upload dir $upload_dir exists.");
 		}
-		cron_debug("  Changing owner, group and permission of upload dir $upload_dir.");
-		chown($project_dir, $dir_owner);
-		chgrp($project_dir, $dir_group);
-		chmod($project_dir, 0775);
+		cron_debug("  Changing owner ($dir_owner), group ($dir_group) and permission (0775) of upload dir $upload_dir.");
+		chown($upload_dir, $dir_owner);
+		chgrp($upload_dir, $dir_group);
+		chmod($upload_dir, 0775);
 	}
 } else {
 	cron_debug("Mediawiki uploads not enabled, quitting create-imagedirs.php!");

@@ -35,13 +35,13 @@ $wrapperscript = array_shift ($argv) ;
 $fusionforgeproject = array_shift ($argv) ;
 $mwscript = array_shift ($argv) ;
 
-require (dirname(__FILE__)).'/../../../www/env.inc.php';
-require_once $gfwww.'include/pre.php';
-require_once $gfcommon.'include/cron_utils.php';
+include (dirname(__FILE__)).'/../../env.inc.php';
+include $gfwww.'include/pre.php';
+include $gfcommon.'include/cron_utils.php';
 
 // Plugins subsystem
-require_once $gfcommon.'include/Plugin.class.php' ;
-require_once $gfcommon.'include/PluginManager.class.php' ;
+include $gfcommon.'include/Plugin.class.php' ;
+include $gfcommon.'include/PluginManager.class.php' ;
 
 setup_plugin_manager () ;
 

@@ -21,24 +21,22 @@
    */
 
   /** This script will destroy a mediawiki instance of a specific project.     */
-require (dirname(__FILE__) . '/../../env.inc.php');
-require_once ($gfwww . 'include/squal_pre.php');
-
-if (!isset($mediawiki_var_path))
-	$mediawiki_var_path = "$sys_var_path/plugins/mediawiki";
-if (!isset($mediawiki_projects_path))
-	$mediawiki_projects_path = "$mediawiki_var_path/projects";
-
 if ($argc < 2 ) {
 	echo "Usage " . $argv[0] . " <project>\n";
 	exit (0);
 }
 
+include dirname(__FILE__) . '/../../env.inc.php';
+include $gfwww . 'include/squal_pre.php';
+include $gfplugins . 'mediawiki/common/config-vars.php';
+
+$projects_path = forge_get_config('projects_path', 'mediawiki');
+
 array_shift($argv);
 foreach ($argv as $project) {
   echo "Removing project wiki of $project.\n";
 
-  $project_dir = "$mediawiki_projects_path/$project";
+  $project_dir = "$projects_path/$project";
   echo "  Deleting project subdir $project_dir.\n";
   if (!is_dir($project_dir)) {
     echo "$project_dir does not exist!\n";

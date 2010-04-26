@@ -1,18 +1,41 @@
 <?php
+  /* 
+   * Copyright (C) 2010 Roland Mas, Olaf Lenz
+   *
+   * This file is part of FusionForge.
+   *
+   * FusionForge is free software; you can redistribute it and/or modify
+   * it under the terms of the GNU General Public License as published by
+   * the Free Software Foundation; either version 2 of the License, or
+   * (at your option) any later version.
+   *
+   * FusionForge is distributed in the hope that it will be useful,
+   * but WITHOUT ANY WARRANTY; without even the implied warranty of
+   * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   * GNU General Public License for more details.
+   *
+   * You should have received a copy of the GNU General Public License
+   * along with FusionForge; if not, write to the Free Software
+   * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+   */
+  /** This contains the local settings for Mediawiki as used in the
+   *  Mediawiki plugin of FusionForge.
+   */
 
-require_once('/etc/gforge/local.inc');
+include dirname(__FILE__) . '/../../env.inc.php';
+include $gfcgfile;
 
-if ( isset( $_SERVER ) && array_key_exists( 'REQUEST_METHOD', $_SERVER ) ) {
+if ( isset( $_SERVER ) && 
+     array_key_exists( 'REQUEST_METHOD', $_SERVER ) ) {
 	// when loaded from the server
-        require_once ("$sys_share_path/www/env.inc.php") ;
-	require_once ("$sys_share_path/www/include/pre.php") ;
+	include $gfwww. 'include/pre.php';
 } else {
 	// when run from the command line
-        require_once ("$sys_etc_path/database.inc") ;
-	require_once ("$sys_share_path/common/include/config.php") ;
+        include $gfconfig . 'database.inc';
+	include $gfcommon .'include/config.php';
 }
 
-require_once ("$sys_share_path/plugins/mediawiki/common/config-vars.php");
+include $gfplugins . 'mediawiki/common/config-vars.php';
 
 $IP = forge_get_config('master_path', 'mediawiki');
 
@@ -191,9 +214,6 @@ function FusionForgeMWAuth( $user, &$result ) {
 	return true ;
 }
 
-if (is_file("/etc/mediawiki-extensions/extensions.php")) {
-        include( "/etc/mediawiki-extensions/extensions.php" );
-}
 //function NoLogoutLinkOnMainPage(&$personal_urls){unset($personal_urls['logout']);return true;}
 //$wgHooks['PersonalUrls']['logout']='NoLogoutLinkOnMainPage';
 //function NoLoginLinkOnMainPage(&$personal_urls){unset($personal_urls['anonlogin']);return true;}
@@ -264,14 +284,24 @@ if ($public) {
 	$wgGroupPermissions['*']['read']          	= false;
 } 
 
-if (file_exists ("$project_dir/ProjectSettings.php")) {
-        require ("$project_dir/ProjectSettings.php") ;
-} 
-
-// Override default wiki logo
 $wgFavicon = '/images/icon.png' ;
 $wgBreakFrames = false ;
 ini_set ('memory_limit', '50M') ;
+
+// LOAD THE SITE-WIDE AND PROJECT-SPECIFIC EXTRA-SETTINGS 
+if (is_file("$sys_etc_path/plugins/mediawiki/LocalSettings.php")) {
+	include("$sys_etc_path/plugins/mediawiki/LocalSettings.php");
+}
+
+// debian style system-wide mediawiki extensions
+if (is_file("/etc/mediawiki-extensions/extensions.php")) {
+        include( "/etc/mediawiki-extensions/extensions.php" );
+}
+
+// project specific settings
+if (is_file("$project_dir/ProjectSettings.php")) {
+        include ("$project_dir/ProjectSettings.php") ;
+} 
 
 // Local Variables:
 // mode: php

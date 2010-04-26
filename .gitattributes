@@ -340,6 +340,7 @@ gforge/packaging/install/shell-postgresql -text
 gforge/packaging/install/web-apache2 -text
 gforge/packaging/install/web-apache2-vhosts -text
 gforge/packaging/links/common -text
+gforge/packaging/links/plugin-mediawiki -text
 gforge/packaging/links/plugin-scmdarcs -text
 gforge/packaging/links/plugin-scmgit -text
 gforge/packaging/links/web-apache2 -text
@@ -1027,7 +1028,6 @@ gforge/plugins/mediawiki/cronjobs/create-wikis.php -text
 gforge/plugins/mediawiki/etc/config.ini -text
 gforge/plugins/mediawiki/etc/cron.d/mediawiki -text
 gforge/plugins/mediawiki/etc/httpd.d/03mediawiki -text
-gforge/plugins/mediawiki/etc/plugins/mediawiki/LocalSettings.php -text
 gforge/plugins/mediawiki/etc/plugins/mediawiki/config.php -text
 gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php -text
 gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php.patch -text
@@ -1035,6 +1035,7 @@ gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php.reference -text
 gforge/plugins/mediawiki/mediawiki-skin/Makefile -text
 gforge/plugins/mediawiki/mediawiki-skin/README.beforemodifying -text
 gforge/plugins/mediawiki/mediawiki-skin/fusionforge/fusionforge.css -text
+gforge/plugins/mediawiki/www/LocalSettings.php -text
 gforge/plugins/mediawiki/www/frame.php -text
 gforge/plugins/online_help/common/online_help-init.php -text
 gforge/plugins/online_help/common/online_helpPlugin.class.php -text

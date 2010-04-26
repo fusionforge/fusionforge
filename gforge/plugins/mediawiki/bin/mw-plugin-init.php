@@ -22,44 +22,44 @@
 
   /** This script will set up the structure required to use the
    mediawiki plugin. 
-   
-   It is usually started from the plugin manager, but can also be
-   started manually.
-   */
+  */
 
-if ( isset( $_SERVER ) && 
-     array_key_exists( 'REQUEST_METHOD', $_SERVER ) ) {
-	$command_line = false;
-} else {
-	require('/etc/gforge/local.inc');
-	require_once (dirname(__FILE__) . '/../../env.inc.php');
-	$command_line = true;
-}
+include (dirname(__FILE__) . '/../../env.inc.php');
+include ($gfwww.'include/squal_pre.php');
+include ($gfplugins . 'mediawiki/common/config-vars.php');
 
-if (!isset($mediawiki_var_path))
-	$mediawiki_var_path = "$sys_var_path/plugins/mediawiki";
-if (!isset($mediawiki_projects_path))
-	$mediawiki_projects_path = "$mediawiki_var_path/projects";
-if (!isset($mediawiki_master_path))
-	$mediawiki_master_path = "$mediawiki_var_path/master";
+$echo_links = $argc >= 1;
+
+$master_path = forge_get_config('master_path', 'mediawiki');
+$projects_path = forge_get_config('projects_path', 'mediawiki');
+$src_path = forge_get_config('src_path', 'mediawiki');
 
 # create directories
-if (!is_dir($mediawiki_projects_path))
-  system("mkdir -p $mediawiki_projects_path");
-if (!is_dir($mediawiki_master_path))
-  system("mkdir -p $mediawiki_master_path");
-
-function mysymlink($from, $to) {
-	global $mw_feedback;
-	if (!@symlink($from, $to))
-		$mw_feedback[] = sprintf(_('Could not create symbolic link from %1$s to %1$s'), $from, $to);
+if (!is_dir($projects_path)) {
+	echo "Creating $projects_path...\n";
+	mkdir($projects_path, 0755, true);
 }
 
-$mw_feedback = array();
+if (!is_dir($master_path)) {
+	echo "Creating $master_path...\n";
+	mkdir($master_path, 0755, true);
+}
+
+function mysymlink($from, $to) {
+	global $echo_links;
+	if (!@symlink($from, $to)) {
+		echo "Could not create symbolic link from $from to $to.\n";
+	}
+	if ($echo_links) {
+		echo "$from $to\n";
+	}
+}
+
+
 # install links in master
-# link files from $mediawiki_src_path to $mediawiki_master_path
-if (!($dh = opendir($mediawiki_src_path))) {
-	$mw_feedback[] = sprintf(_('Could not open mediawiki source directory %1$s!'), $mediawiki_src_path);
+echo "Creating symlinks from $master_path to $src_path...\n";
+if (!($dh = opendir($src_path))) {
+	echo "Could not open mediawiki source directory $src_path!\n";
 } else {
 	$ignore_file = array( 
 		'.' => true, 
@@ -72,26 +72,24 @@ if (!($dh = opendir($mediawiki_src_path))) {
 		);
 	while ($file = readdir($dh)) {
 		if (!$ignore_file[$file]) {
-			$from = "$mediawiki_src_path/$file";
-			$to = "$mediawiki_master_path/$file";
+			$from = "$src_path/$file";
+			$to = "$master_path/$file";
 			mysymlink($from, $to);
 		}
 	}
 	closedir ($dh);
 }
 
-# link LocalSettings.php from /etc/gforge/plugins/mediawiki/LocalSettings.php or from $sys_share_path/plugins/mediawiki/etc/plugins/mediawiki/LocalSettings.php
-$from = "$sys_etc_path/plugins/mediawiki/LocalSettings.php";
-if (!file_exists($from)) {
-	$from = "$sys_share_path/plugins/mediawiki/etc/plugins/mediawiki/LocalSettings.php";
-}
-$to = "$mediawiki_master_path/LocalSettings.php";
+# link LocalSettings.php from $sys_share_path/plugins/mediawiki/etc/plugins/mediawiki/LocalSettings.php
+$from = "$sys_share_path/plugins/mediawiki/www/LocalSettings.php";
+$to = "$master_path/LocalSettings.php";
 mysymlink($from, $to);
 
 # create skin directory
-$todir = "$mediawiki_master_path/skins";
-if (!is_dir($todir))
+$todir = "$master_path/skins";
+if (!is_dir($todir)) {
 	mkdir($todir);
+}
 
 # link FusionForge skin file
 $fromdir = "$sys_share_path/plugins/mediawiki/mediawiki-skin";
@@ -126,17 +124,6 @@ while ($file = readdir($dh)) {
 	}
 }
 closedir($dh);
-
-if ($command_line) {
-	foreach ($mw_feedback as $line) {
-		echo "$line\n";
-	}
-} else {
-	foreach ($mw_feedback as $line) {
-		$feedback .= "<br />$line";
-	}
-	$feedback .= "<br />";
-}
 
 // Local Variables:
 // mode: php

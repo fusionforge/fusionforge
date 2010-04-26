@@ -31,10 +31,10 @@
 #   src_path: the directory where the mediawiki sources are installed
 #   var_path: the directory where mediawiki can store its data (i.e. LocalSettings.php and images/)
 
-require (dirname(__FILE__) . '/../../env.inc.php');
-require_once ($gfwww . 'include/squal_pre.php');
-require $gfcommon.'include/cron_utils.php';
-require(dirname(__FILE__) . '/../common/config-vars.php');
+include dirname(__FILE__) . '/../../env.inc.php';
+include $gfwww . 'include/squal_pre.php';
+include $gfcommon.'include/cron_utils.php';
+include $gfplugins . 'mediawiki/common/config-vars.php';
 
 $src_path = forge_get_config('src_path', 'mediawiki');
 $master_path = forge_get_config('master_path', 'mediawiki');
