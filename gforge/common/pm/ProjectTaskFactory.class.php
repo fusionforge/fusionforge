@@ -101,14 +101,14 @@ class ProjectTaskFactory extends Error {
 			if ($order=='project_task_id' || $order=='percent_complete'
 				|| $order=='summary' || $order=='start_date' || $order=='end_date' || $order=='priority') {
 				if (session_loggedin()) {
-					$u->setPreference('pm_task_order', $order);
+					$u->setPreference('pm_task_order'.$this->ProjectGroup->getID(), $order);
 				}
 			} else {
 				$order = 'project_task_id';
 			}
 		} else {
 			if (session_loggedin()) {
-				$order = $u->getPreference('pm_task_order');
+				$order = $u->getPreference('pm_task_order'.$this->ProjectGroup->getID());
 			}
 		}
 		if (!$order) {
@@ -121,13 +121,12 @@ class ProjectTaskFactory extends Error {
 				if this custom set is different than the stored one, reset preference
 			*/
 			$pref_=$_assigned_to.'|'.$_status.'|'.$_category_id.'|'.$_view;
-			if (session_loggedin() && ($pref_ != $u->getPreference('pm_brow_cust'.$this->ProjectGroup->Group->getID()))) {
-				//echo 'setting pref';
-				$u->setPreference('pm_brow_cust'.$this->ProjectGroup->Group->getID(),$pref_);
+			if (session_loggedin() && ($pref_ != $u->getPreference('pm_brow_cust'.$this->ProjectGroup->getID()))) {
+				$u->setPreference('pm_brow_cust'.$this->ProjectGroup->getID(),$pref_);
 			}
 		} else {
 			if (session_loggedin()) {
-				if ($pref_=$u->getPreference('pm_brow_cust'.$this->ProjectGroup->Group->getID())) {
+				if ($pref_=$u->getPreference('pm_brow_cust'.$this->ProjectGroup->getID())) {
 					$prf_arr=explode('|',$pref_);
 					$_assigned_to=$prf_arr[0];
 					$_status=$prf_arr[1];
