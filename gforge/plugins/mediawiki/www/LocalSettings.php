@@ -66,8 +66,6 @@ set_include_path( implode( PATH_SEPARATOR, $path ) . PATH_SEPARATOR . get_includ
 
 require_once( "$IP/includes/DefaultSettings.php" );
 
-if (!isset($sys_dbport)) { $sys_dbport = 5432; }
-
 if ( $wgCommandLineMode ) {
         if ( isset( $_SERVER ) && array_key_exists( 'REQUEST_METHOD', $_SERVER ) ) {
                 die( "This script must be run from the command line\n" );
@@ -81,13 +79,13 @@ $wgEmergencyContact = forge_get_config('admin_email');
 $wgPasswordSender = forge_get_config('admin_email');
 
 $wgDBtype           = "postgres";
-$wgDBserver         = $sys_dbhost ;
-$wgDBname           = $sys_dbname;
-$wgDBuser           = $sys_dbuser ;
-$wgDBpassword       = $sys_dbpasswd ;
-$wgDBadminuser           = $sys_dbuser ;
-$wgDBadminpassword       = $sys_dbpasswd ;
-$wgDBport           = $sys_dbport ;
+$wgDBserver         = forge_get_config('database_host') ;
+$wgDBname           = forge_get_config('database_name');
+$wgDBuser           = forge_get_config('database_user') ;
+$wgDBpassword       = forge_get_config('database_password') ;
+$wgDBadminuser           = forge_get_config('database_user') ;
+$wgDBadminpassword       = forge_get_config('database_password') ;
+$wgDBport           = forge_get_config('database_port') ;
 $wgDBmwschema       = str_replace ('-', '_', "plugin_mediawiki_$fusionforgeproject") ;
 $wgDBts2schema      = str_replace ('-', '_', "plugin_mediawiki_$fusionforgeproject") ;
 $wgMainCacheType = CACHE_NONE;
@@ -103,11 +101,11 @@ $wgShowExceptionDetails = true ;
 $wgLanguageCode = "en";
 $wgDefaultSkin = 'fusionforge';
 
-$GLOBALS['sys_dbhost'] = $sys_dbhost ;
-$GLOBALS['sys_dbport'] = $sys_dbport ;
-$GLOBALS['sys_dbname'] = $sys_dbname ;
-$GLOBALS['sys_dbuser'] = $sys_dbuser ;
-$GLOBALS['sys_dbpasswd'] = $sys_dbpasswd ;
+$GLOBALS['sys_dbhost'] = forge_get_config('database_host') ;
+$GLOBALS['sys_dbport'] = forge_get_config('database_port') ;
+$GLOBALS['sys_dbname'] = forge_get_config('database_name') ;
+$GLOBALS['sys_dbuser'] = forge_get_config('database_user') ;
+$GLOBALS['sys_dbpasswd'] = forge_get_config('database_password') ;
 $GLOBALS['sys_plugins_path'] = forge_get_config('plugins_path') ;
 $GLOBALS['sys_urlprefix'] = forge_get_config('url_prefix') ;
 $GLOBALS['sys_use_ssl'] = forge_get_config('use_ssl') ;

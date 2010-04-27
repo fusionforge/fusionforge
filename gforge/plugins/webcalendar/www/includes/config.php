@@ -77,14 +77,14 @@ global $TROUBLE_URL;
   exit;
 }
 
-global $sys_dbhost,$sys_dbuser,$sys_dbpasswd,$sys_dbname;
+
 
 $db_type = 'postgresql';
 $settings['db_type'] = 'postgresql';
-$settings['db_host'] = $sys_dbhost;
-$settings['db_database'] = $sys_dbname;
-$settings['db_login'] = $sys_dbuser;
-$settings['db_password'] = $sys_dbpasswd;
+$settings['db_host'] = forge_get_config('database_host');
+$settings['db_database'] = forge_get_config('database_name');
+$settings['db_login'] = forge_get_config('database_user');
+$settings['db_password'] = forge_get_config('database_password');
 $settings['db_persistent'] = 'true';
 $settings['readonly'] = 'false';
 $settings['user_inc'] = 'user.php';

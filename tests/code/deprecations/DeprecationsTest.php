@@ -86,12 +86,14 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 			       'sys_jabber_user',
 			       'sys_jabber_server',
 			       'sys_jabber_port',
+			       'sys_jabber_pass',
 			       'sys_ldap_host',
 			       'sys_ldap_port',
 			       'sys_ldap_version',
 			       'sys_ldap_base_dn',
 			       'sys_ldap_bind_dn',
 			       'sys_ldap_admin_dn',
+			       'sys_ldap_passwd',
 			       'sys_news_group',
 			       'sys_stats_group',
 			       'sys_peer_rating_group',
@@ -111,6 +113,11 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 			       'sys_session_key',
 			       'sys_show_source',
 			       'default_trove_cat',
+			       'sys_dbhost',
+			       'sys_dbport',
+			       'sys_dbname',
+			       'sys_dbuser',
+			       'sys_dbpasswd',
 			) ;
 
 		$pattern = implode ('|', $vars) ;

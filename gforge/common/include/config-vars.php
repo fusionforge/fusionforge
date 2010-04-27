@@ -69,12 +69,14 @@ forge_define_config_item ('use_jabber', 'core', $GLOBALS['sys_use_jabber']) ;
 forge_define_config_item ('jabber_host', 'core', $GLOBALS['sys_jabber_server']) ;
 forge_define_config_item ('jabber_port', 'core', $GLOBALS['sys_jabber_port']) ;
 forge_define_config_item ('jabber_user', 'core', $GLOBALS['sys_jabber_user']) ;
+forge_define_config_item ('jabber_password', 'core', $GLOBALS['sys_jabber_pass']) ;
 forge_define_config_item ('ldap_host', 'core', $GLOBALS['sys_ldap_host']) ;
 forge_define_config_item ('ldap_port', 'core', $GLOBALS['sys_ldap_port']) ;
 forge_define_config_item ('ldap_version', 'core', $GLOBALS['sys_ldap_version']) ;
 forge_define_config_item ('ldap_base_dn', 'core', $GLOBALS['sys_ldap_base_dn']) ;
 forge_define_config_item ('ldap_bind_dn', 'core', $GLOBALS['sys_ldap_bind_dn']) ;
 forge_define_config_item ('ldap_admin_dn', 'core', $GLOBALS['sys_ldap_admin_dn']) ;
+forge_define_config_item ('ldap_password', 'core', $GLOBALS['sys_ldap_passwd']) ;
 forge_define_config_item ('news_group', 'core', $GLOBALS['sys_news_group']) ;
 forge_define_config_item ('stats_group', 'core', $GLOBALS['sys_stats_group']) ;
 forge_define_config_item ('peer_rating_group', 'core', $GLOBALS['sys_peer_rating_group']) ;
@@ -94,6 +96,11 @@ forge_define_config_item ('admin_email', 'core', $GLOBALS['sys_admin_email']) ;
 forge_define_config_item ('session_key', 'core', $GLOBALS['sys_session_key']) ;
 forge_define_config_item ('show_source', 'core', $GLOBALS['sys_show_source']) ;
 forge_define_config_item ('default_trove_cat', 'core', $GLOBALS['default_trove_cat']) ;
+forge_define_config_item ('database_host', 'core', $GLOBALS['sys_dbhost']) ;
+forge_define_config_item ('database_port', 'core', $GLOBALS['sys_dbport']) ;
+forge_define_config_item ('database_name', 'core', $GLOBALS['sys_dbname']) ;
+forge_define_config_item ('database_user', 'core', $GLOBALS['sys_dbuser']) ;
+forge_define_config_item ('database_password', 'core', $GLOBALS['sys_dbpasswd']) ;
 // forge_define_config_item ('', 'core', $GLOBALS['sys_']) ;
 
 /* Long-term:

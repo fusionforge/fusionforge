@@ -29,8 +29,8 @@ if (!$group_id || !$project) {
 	// Override the default configuration for VARIABLES after index.php:
 	// E.g. Use another DB:
 	$DBParams['dbtype'] = 'SQL';
-	$DBParams['dsn']    = 'pgsql://' . $sys_dbuser . ':' . 
-                              $sys_dbpasswd . '@' . $sys_dbhost .'/' . $sys_dbname
+	$DBParams['dsn']    = 'pgsql://' . forge_get_config('database_user') . ':' . 
+                              forge_get_config('database_password') . '@' . forge_get_config('database_host') .'/' . forge_get_config('database_name')
 . '_wiki';
 	$DBParams['prefix'] = $project->getUnixName() ."_";
 

@@ -29,8 +29,8 @@ $sys_db_oci_commit_mode='OCI_COMMIT_ON_SUCCESS';
  *  in other functions in this library
  */
 function db_connect() {
-	global $sys_dbhost,$sys_dbuser,$sys_dbpasswd,$gfconn,$sys_dbname;
-	$gfconn = @ocilogon($sys_dbuser,$sys_dbpasswd,$sys_dbname);
+	global $gfconn;
+	$gfconn = @ocilogon(forge_get_config('database_user'),forge_get_config('database_password'),forge_get_config('database_name'));
 	#return $gfconn;
 }
 

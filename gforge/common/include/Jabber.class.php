@@ -150,7 +150,7 @@ class Jabber
 		$this->port					= forge_get_config('jabber_port');
 
 		$this->username				= forge_get_config('jabber_user');
-		$this->password				= $GLOBALS['sys_jabber_pass'];
+		$this->password				= forge_get_config('jabber_password');
 		$this->resource				= 'home';
 		
 		$this->enable_logging		= FALSE;

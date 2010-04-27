@@ -68,14 +68,13 @@ function pg_connectstring($dbname, $user, $password = "", $host = "", $port = ""
  *  in other functions in this library.
  */
 function db_connect() {
-	global $sys_dbhost,$sys_dbuser,$sys_dbpasswd,$gfconn,
-		$sys_dbname,$sys_db_use_replication,$sys_dbport,$sys_dbreaddb,$sys_dbreadhost;
+	global $gfconn,$sys_db_use_replication,$sys_dbreaddb,$sys_dbreadhost;
 
 	//
 	//	Connect to primary database
 	//
 	if (function_exists("pg_pconnect")) {
-		$gfconn = pg_pconnect(pg_connectstring($sys_dbname, $sys_dbuser, $sys_dbpasswd, $sys_dbhost, $sys_dbport));
+		$gfconn = pg_pconnect(pg_connectstring(forge_get_config('database_name'), forge_get_config('database_user'), forge_get_config('database_password'), forge_get_config('database_host'), forge_get_config('database_port')));
 	} else {
 		print("function pg_pconnect doesn't exist: no postgresql interface");
 		exit;
@@ -85,7 +84,7 @@ function db_connect() {
 	//	If any replication is configured, connect
 	//
 	if ($sys_db_use_replication) {
-		$gfconn2 = pg_pconnect(pg_connectstring($sys_dbreaddb, $sys_dbuser, $sys_dbpasswd, $sys_dbreadhost, $sys_dbreadport));
+		$gfconn2 = pg_pconnect(pg_connectstring($sys_dbreaddb, forge_get_config('database_user'), forge_get_config('database_password'), $sys_dbreadhost, $sys_dbreadport));
 	} else {
 		$gfconn2 = $gfconn;
 	}

@@ -70,7 +70,7 @@ class LDAP extends UNIX {
 	 */
 	function gfLdapConnect() {
 
-		global $sys_ldap_passwd,$ldap_conn;
+		global $ldap_conn;
 
 		if (!$ldap_conn) {
 			$this->clearError();
@@ -82,7 +82,7 @@ class LDAP extends UNIX {
 			if (forge_get_config('ldap_version')) {
 				ldap_set_option($ldap_conn, LDAP_OPT_PROTOCOL_VERSION, forge_get_config('ldap_version'));
 			}
-			ldap_bind($ldap_conn,forge_get_config('ldap_bind_dn'),$sys_ldap_passwd);
+			ldap_bind($ldap_conn,forge_get_config('ldap_bind_dn'),forge_get_config('ldap_password'));
 		}
 		return true;
 	}

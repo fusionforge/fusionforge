@@ -25,9 +25,9 @@ require $gfwww.'include/squal_pre.php';
 require $gfcommon.'include/cron_utils.php';
 
 
-$database=$sys_dbname; //Database name from local.inc
-$username=$sys_dbuser; //Username used to log on to data base
-$password=$sys_dbpasswd; //Db Password 
+$database=forge_get_config('database_name'); //Database name from local.inc
+$username=forge_get_config('database_user'); //Username used to log on to data base
+$password=forge_get_config('database_password'); //Db Password 
 
 $datetime=date('Y-m-d'); //we will use this to concatenate it with the tar filename
 
