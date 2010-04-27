@@ -40,7 +40,7 @@ $err = '';
 define('DEFAULT_SHELL','/bin/cvssh.pl'); //use /bin/grap for cvs-only
 define('FILE_EXTENSION','.new'); // use .new when testing
 
-if (util_is_root_dir($groupdir_prefix)) {
+if (util_is_root_dir(forge_get_config('groupdir_prefix'))) {
 	$err .=  "Error! groupdir_prefix Points To Root Directory!";
 	echo $err;
 	cron_entry(16,$err);

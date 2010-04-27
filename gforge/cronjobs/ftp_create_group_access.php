@@ -30,7 +30,7 @@ $users = array();
 
 $chroot_dir = forge_get_config('chroot');
 $ftp_dir = forge_get_config('ftp_upload_dir')."/pub/";
-$home_dir = $chroot_dir.$homedir_prefix."/";
+$home_dir = $chroot_dir.forge_get_config('homedir_prefix')."/";
 
 
 $res_db = db_query_params ('SELECT groups.group_id, group_name, unix_group_name,

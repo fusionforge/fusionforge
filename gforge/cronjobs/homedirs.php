@@ -60,20 +60,20 @@ define('USER_DEFAULT_GROUP','users');
 //error variable
 $err = '';
 
-if (!isset($groupdir_prefix)) {		// this should be set in local.inc
-	$groupdir_prefix = '/home/groups';
+if (forge_get_config('groupdir_prefix') == '') {		// this should be set in local.inc
+	exit () ;
 }
 
-if (!is_dir($groupdir_prefix)) {
-	@mkdir($groupdir_prefix,0755,true);
+if (!is_dir(forge_get_config('groupdir_prefix'))) {
+	@mkdir(forge_get_config('groupdir_prefix'),0755,true);
 }
 
-if (!isset($homedir_prefix)) {		// this should be set in local.inc
-	$$homedir_prefix = '/home';
+if (forge_get_config('homedir_prefix') == '') {		// this should be set in local.inc
+	exit () ;
 }
 
-if (!is_dir($homedir_prefix)) {
-	@mkdir($homedir_prefix,0755,true);
+if (!is_dir(forge_get_config('homedir_prefix'))) {
+	@mkdir(forge_get_config('homedir_prefix'),0755,true);
 }
 
 $res = db_query_params ('SELECT distinct users.user_name,users.unix_pw,users.user_id
@@ -99,12 +99,12 @@ $groups = util_result_column_to_array($group_res,'unix_group_name');
 //	this is where we give a user a home
 //
 foreach($users as $user) {
-	if (is_dir($homedir_prefix."/".$user)) {
+	if (is_dir(forge_get_config('homedir_prefix')."/".$user)) {
 		
 	} else {
-		@mkdir($homedir_prefix."/".$user);
+		@mkdir(forge_get_config('homedir_prefix')."/".$user);
 	}
-	system("chown $user:".USER_DEFAULT_GROUP." ".$homedir_prefix."/".$user);
+	system("chown $user:".USER_DEFAULT_GROUP." ".forge_get_config('homedir_prefix')."/".$user);
 }
 
 
@@ -125,12 +125,12 @@ foreach($groups as $group) {
 		}
 	}
 
-	if (is_dir($groupdir_prefix."/".$group)) {
+	if (is_dir(forge_get_config('groupdir_prefix')."/".$group)) {
 
 	} else {
-		@mkdir($groupdir_prefix."/".$group);
-		@mkdir($groupdir_prefix."/".$group."/htdocs");
-		@mkdir($groupdir_prefix."/".$group."/cgi-bin");
+		@mkdir(forge_get_config('groupdir_prefix')."/".$group);
+		@mkdir(forge_get_config('groupdir_prefix')."/".$group."/htdocs");
+		@mkdir(forge_get_config('groupdir_prefix')."/".$group."/cgi-bin");
 		$g =& group_get_object_by_name($group);
 		
 
@@ -167,20 +167,20 @@ foreach($groups as $group) {
 		//
 		//	Write the file back out to the project home dir
 		//
-		$fw=fopen($groupdir_prefix."/".$group."/htdocs/index.html",'w');
+		$fw=fopen(forge_get_config('groupdir_prefix')."/".$group."/htdocs/index.html",'w');
 		fwrite($fw,$contents);
 		fclose($fw);
 	}
 
 	if (forge_get_config('use_manual_uploads')) { 
-		$incoming = $groupdir_prefix/$group."/incoming" ;
+		$incoming = forge_get_config('groupdir_prefix')/$group."/incoming" ;
 		if (!is_dir($incoming))
 		{
 			@mkdir($incoming); 
 		}
 	}
 
-	system("chown -R ".forge_get_config('apache_user').":".forge_get_config('apache_group')." $groupdir_prefix/$group");
+	system("chown -R ".forge_get_config('apache_user').":".forge_get_config('apache_group')." forge_get_config('groupdir_prefix')/$group");
 
 }
 

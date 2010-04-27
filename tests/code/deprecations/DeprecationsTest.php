@@ -101,6 +101,8 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 			       'sys_path_to_jpgraph',
 			       'sys_account_manager_type',
 			       'unix_cipher',
+			       'homedir_prefix',
+			       'groupdir_prefix',
 			) ;
 
 		$pattern = implode ('|', $vars) ;

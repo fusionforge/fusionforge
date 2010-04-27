@@ -43,7 +43,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 
 	$ssh_key=db_result($res,$i,'authorized_keys');
 	$username=db_result($res,$i,'user_name');
-	$dir = $homedir_prefix.'/'.$username;
+	$dir = forge_get_config('homedir_prefix').'/'.$username;
 	if (util_is_root_dir($dir)) {
 		$err .=  "Error! homedir_prefix/username Points To Root Directory!";
 		continue;
@@ -53,7 +53,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 	$ssh_key=str_replace('###',"\n",$ssh_key);
 	$uid += 1000;
 
-	$ssh_dir = "$homedir_prefix/$username/.ssh";
+	$ssh_dir = "forge_get_config('homedir_prefix')/$username/.ssh";
 	if (!is_dir($ssh_dir)) {
 		mkdir ($ssh_dir, 0755);
 	}
@@ -69,7 +69,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 	posix_seteuid(0);
 	posix_setegid(0);
 		
-	system("chown $username:users $homedir_prefix/$username");
+	system("chown $username:users forge_get_config('homedir_prefix')/$username");
 	system("chown $username:users $ssh_dir");
 	system("chmod 0644 $ssh_dir/authorized_keys");
 	system("chown $username:users $ssh_dir/authorized_keys");

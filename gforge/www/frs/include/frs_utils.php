@@ -222,10 +222,10 @@ function frs_show_package_popup ($group_id, $name='package_id', $checked_val="xz
 
 function frs_add_file_from_form ($release, $type_id, $processor_id, $release_date,
 				 $userfile, $ftp_filename, $manual_filename) {
-	global $groupdir_prefix ;
+
 
 	$group_unix_name = $release->getFRSPackage()->getGroup()->getUnixName() ;
-	$incoming = "$groupdir_prefix/$group_unix_name/incoming" ;
+	$incoming = "forge_get_config('groupdir_prefix')/$group_unix_name/incoming" ;
 
 	$filechecks = false ;
 

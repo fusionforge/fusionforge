@@ -108,7 +108,7 @@ if (getStringFromRequest('submit')) {
 			$data = fread(fopen($filename, 'r'), filesize($filename));
 			$filetype=$uploaded_data_type;
 		} elseif (forge_get_config('use_manual_uploads') && $uploaded_filename!=100 && util_is_valid_filename($uploaded_filename)) { //100==None
-			$incoming = $groupdir_prefix."/".$g->getUnixName()."/incoming" ;
+			$incoming = forge_get_config('groupdir_prefix')."/".$g->getUnixName()."/incoming" ;
 			$filename = $incoming.'/'.$uploaded_filename;
 			$data = addslashes(fread(fopen($filename, 'r'), filesize($filename)));
 			$finfo = finfo_open (FILEINFO_MIME_TYPE) ;
@@ -344,7 +344,7 @@ if ($editdoc && $docid) {
 			}
 		
 /*		if (forge_get_config('use_manual_uploads') && $u->getUnixStatus() == 'A') {
-			$incoming = $groupdir_prefix."/".$g->getUnixName()."/incoming" ;
+			$incoming = forge_get_config('groupdir_prefix')."/".$g->getUnixName()."/incoming" ;
 			
 			echo '<strong>' ;
 			printf (_("OR choose one you alrealy uploaded (by SFTP or SCP) to the project's incoming directory ($1$s)."),

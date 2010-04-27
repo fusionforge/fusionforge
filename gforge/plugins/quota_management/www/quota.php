@@ -102,7 +102,7 @@ if (db_numrows($res_db) > 0)
 $chroot_dir = forge_get_config('chroot');
 $ftp_dir = forge_get_config('ftp_upload_dir')."/pub/";
 $upload_dir = forge_get_config('upload_dir');
-$group_dir = $chroot_dir.$groupdir_prefix."/";
+$group_dir = $chroot_dir.forge_get_config('groupdir_prefix')."/";
 $cvs_dir = $chroot_dir.$cvsdir_prefix."/";
 $svn_dir = $chroot_dir.$svndir_prefix."/";
 

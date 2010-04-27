@@ -300,7 +300,7 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 <?php } ?>
 
 <?php if (forge_get_config('use_manual_uploads')) {
-	$incoming = $groupdir_prefix."/".$g->getUnixName()."/incoming" ;
+	$incoming = forge_get_config('groupdir_prefix')."/".$g->getUnixName()."/incoming" ;
 
 	echo '<p>';
 	printf(_('Alternatively, you can use a file you already uploaded (by SFTP or SCP) to the project\'s incoming directory (%1$s).'),

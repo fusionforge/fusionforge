@@ -84,6 +84,8 @@ forge_define_config_item ('mailman_path', 'core', $GLOBALS['sys_path_to_mailman'
 forge_define_config_item ('jpgraph_path', 'core', $GLOBALS['sys_path_to_jpgraph']) ;
 forge_define_config_item ('account_manager_type', 'core', $GLOBALS['sys_account_manager_type']) ;
 forge_define_config_item ('unix_cipher', 'core', $GLOBALS['unix_cipher']) ;
+forge_define_config_item ('homedir_prefix', 'core', $GLOBALS['homedir_prefix']) ;
+forge_define_config_item ('groupdir_prefix', 'core', $GLOBALS['groupdir_prefix']) ;
 // forge_define_config_item ('', 'core', $GLOBALS['sys_']) ;
 
 /* Long-term:

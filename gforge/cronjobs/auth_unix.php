@@ -56,7 +56,7 @@ if (file_exists ("/etc/group.org") == false)
 {
 	$err .= ", /etc/group.org missing!";
 }
-if (util_is_root_dir ($homedir_prefix) == true)
+if (util_is_root_dir (forge_get_config('homedir_prefix')) == true)
 {
 	$err .= ", homedir_prefix points to root directory!";
 }
@@ -111,7 +111,7 @@ if ($err == "")
 			{
 				$shell = $default_shell;
 			}
-			$line = $user_names [$i] . ":x:" . $user_ids [$i] . ":" . $user_ids [$i] . ":" . $user_realnames [$i] . ":" . $homedir_prefix . "/" . $user_names [$i] . ":" . $shell . "\n";
+			$line = $user_names [$i] . ":x:" . $user_ids [$i] . ":" . $user_ids [$i] . ":" . $user_realnames [$i] . ":" . forge_get_config('homedir_prefix') . "/" . $user_names [$i] . ":" . $shell . "\n";
 			fwrite ($h2, $line);
 		}
 
