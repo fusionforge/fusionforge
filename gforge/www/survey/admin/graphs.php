@@ -21,17 +21,17 @@ require_once('../../env.inc.php');
 require_once $gfwww.'include/pre.php';
 
 // Check if we have jpgraph
-if (!file_exists($sys_path_to_jpgraph.'/jpgraph.php')) {
+if (!file_exists(forge_get_config('jpgraph_path').'/jpgraph.php')) {
     //# TODO: Need to show the message as a image file
     exit_error('Error', 'Package JPGraph not installed');
 }
 
-// Read jPGraph libraries. Make sure the $sys_path_to_jpgraph is correct in local.inc
-require_once $sys_path_to_jpgraph.'/jpgraph.php';
-require_once $sys_path_to_jpgraph.'/jpgraph_line.php';
-require_once $sys_path_to_jpgraph.'/jpgraph_bar.php';
-require_once $sys_path_to_jpgraph.'/jpgraph_pie.php';
-require_once $sys_path_to_jpgraph.'/jpgraph_pie3d.php';
+// Read jPGraph libraries. Make sure the forge_get_config('jpgraph_path') is correct in local.inc
+require_once forge_get_config('jpgraph_path').'/jpgraph.php';
+require_once forge_get_config('jpgraph_path').'/jpgraph_line.php';
+require_once forge_get_config('jpgraph_path').'/jpgraph_bar.php';
+require_once forge_get_config('jpgraph_path').'/jpgraph_pie.php';
+require_once forge_get_config('jpgraph_path').'/jpgraph_pie3d.php';
 
 $type = getStringFromRequest('type');
 $legend = getStringFromRequest('legend');

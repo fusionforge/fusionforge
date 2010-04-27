@@ -129,7 +129,7 @@ function util_check_url($url) {
  *
  */
 function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$extra_headers='',$send_html_email=false) {
-	global $sys_sendmail_path;
+
 
 	if (!$to) {
 		$to='noreply@'.forge_get_config('web_host');
@@ -162,11 +162,11 @@ function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$e
 		"\n\n".
 		util_convert_body($body, $charset);
 	
-	if (!$sys_sendmail_path){
+	if (!forge_get_config('sendmail_path')){
 		$sys_sendmail_path="/usr/sbin/sendmail";
 	}
 
- 	$handle = popen($sys_sendmail_path." -f'$from' -t -i", 'w');
+ 	$handle = popen(forge_get_config('sendmail_path')." -f'$from' -t -i", 'w');
 	fwrite ($handle, $body2);
  	pclose($handle);
 }

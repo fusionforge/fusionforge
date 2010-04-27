@@ -13,7 +13,7 @@ require $gfcommon.'include/cron_utils.php';
 
 $err = '';
 
-if (is_dir($sys_path_to_mailman)) {
+if (is_dir(forge_get_config('mailman_path'))) {
 } elseif (is_dir("/usr/lib/mailman")) {
 	$sys_path_to_mailman="/usr/lib/mailman";
 } else {
@@ -26,7 +26,7 @@ if (is_dir($sys_path_to_mailman)) {
 // already exist
 //
 $mailing_lists=array();
-$mlists_cmd = escapeshellcmd($sys_path_to_mailman."/bin/list_lists");
+$mlists_cmd = escapeshellcmd(forge_get_config('mailman_path')."/bin/list_lists");
 $err .= "Command to be executed is $mlists_cmd\n";
 $fp = popen ($mlists_cmd,"r");
 while (!feof($fp)) {
@@ -70,13 +70,13 @@ for ($i=0; $i<$rows; $i++) {
 	
 	// Here we assume that the privatize_list.py script is located in the same dir as this script
 	$script_dir = dirname(__FILE__);
-	$privatize_cmd = escapeshellcmd($sys_path_to_mailman.'/bin/config_list -i '.$script_dir.'/privatize_list.py '.$listname);
-	$publicize_cmd = escapeshellcmd($sys_path_to_mailman.'/bin/config_list -i '.$script_dir.'/publicize_list.py '.$listname);
+	$privatize_cmd = escapeshellcmd(forge_get_config('mailman_path').'/bin/config_list -i '.$script_dir.'/privatize_list.py '.$listname);
+	$publicize_cmd = escapeshellcmd(forge_get_config('mailman_path').'/bin/config_list -i '.$script_dir.'/publicize_list.py '.$listname);
 	
 	if (! in_array($listname,$mailing_lists)) {		// New list?
 		$err .= "Creating Mailing List: $listname\n";
-		//$lcreate_cmd = $sys_path_to_mailman."/bin/newlist -q $listname@".forge_get_config('lists_host')." $email $listpassword &> /dev/null";
-		$lcreate_cmd = $sys_path_to_mailman."/bin/newlist -q $listname $email $listpassword";
+		//$lcreate_cmd = forge_get_config('mailman_path')."/bin/newlist -q $listname@".forge_get_config('lists_host')." $email $listpassword &> /dev/null";
+		$lcreate_cmd = forge_get_config('mailman_path')."/bin/newlist -q $listname $email $listpassword";
 		$err .= "Command to be executed is $lcreate_cmd\n";
 		passthru($lcreate_cmd, $failed);
 		if($failed) {
@@ -97,26 +97,26 @@ echo $err;
 		}
 	}
 	
-	if(file_exists($sys_path_to_mailman.'/mail/mailman')) {
+	if(file_exists(forge_get_config('mailman_path').'/mail/mailman')) {
 		// Mailman 2.1
 		$list_str =
-$listname.':              "|'.$sys_path_to_mailman.'/mail/mailman post '.$listname.'"'."\n"
-.$listname.'-admin:        "|'.$sys_path_to_mailman.'/mail/mailman admin '.$listname.'"'."\n"
-.$listname.'-bounces:      "|'.$sys_path_to_mailman.'/mail/mailman bounces '.$listname.'"'."\n"
-.$listname.'-confirm:      "|'.$sys_path_to_mailman.'/mail/mailman confirm '.$listname.'"'."\n"
-.$listname.'-join:         "|'.$sys_path_to_mailman.'/mail/mailman join '.$listname.'"'."\n"
-.$listname.'-leave:        "|'.$sys_path_to_mailman.'/mail/mailman leave '.$listname.'"'."\n"
-.$listname.'-owner:        "|'.$sys_path_to_mailman.'/mail/mailman owner '.$listname.'"'."\n"
-.$listname.'-request:      "|'.$sys_path_to_mailman.'/mail/mailman request '.$listname.'"'."\n"
-.$listname.'-subscribe:    "|'.$sys_path_to_mailman.'/mail/mailman subscribe '.$listname.'"'."\n"
-.$listname.'-unsubscribe:  "|'.$sys_path_to_mailman.'/mail/mailman unsubscribe '.$listname.'"'."\n\n"
+$listname.':              "|'.forge_get_config('mailman_path').'/mail/mailman post '.$listname.'"'."\n"
+.$listname.'-admin:        "|'.forge_get_config('mailman_path').'/mail/mailman admin '.$listname.'"'."\n"
+.$listname.'-bounces:      "|'.forge_get_config('mailman_path').'/mail/mailman bounces '.$listname.'"'."\n"
+.$listname.'-confirm:      "|'.forge_get_config('mailman_path').'/mail/mailman confirm '.$listname.'"'."\n"
+.$listname.'-join:         "|'.forge_get_config('mailman_path').'/mail/mailman join '.$listname.'"'."\n"
+.$listname.'-leave:        "|'.forge_get_config('mailman_path').'/mail/mailman leave '.$listname.'"'."\n"
+.$listname.'-owner:        "|'.forge_get_config('mailman_path').'/mail/mailman owner '.$listname.'"'."\n"
+.$listname.'-request:      "|'.forge_get_config('mailman_path').'/mail/mailman request '.$listname.'"'."\n"
+.$listname.'-subscribe:    "|'.forge_get_config('mailman_path').'/mail/mailman subscribe '.$listname.'"'."\n"
+.$listname.'-unsubscribe:  "|'.forge_get_config('mailman_path').'/mail/mailman unsubscribe '.$listname.'"'."\n\n"
 ;
 	} else {
 		// Mailman < 2.1
 		$list_str =
-$listname.':		"|'.$sys_path_to_mailman.'/mail/wrapper post '.$listname.'"'."\n"
-.$listname.'-admin:	"|'.$sys_path_to_mailman.'/mail/wrapper mailowner '.$listname.'"'."\n"
-.$listname.'-request:	"|'.$sys_path_to_mailman.'/mail/wrapper mailcmd '.$listname.'"'."\n"
+$listname.':		"|'.forge_get_config('mailman_path').'/mail/wrapper post '.$listname.'"'."\n"
+.$listname.'-admin:	"|'.forge_get_config('mailman_path').'/mail/wrapper mailowner '.$listname.'"'."\n"
+.$listname.'-request:	"|'.forge_get_config('mailman_path').'/mail/wrapper mailcmd '.$listname.'"'."\n"
 .$listname.'-owner:	'.$listname.'-admin'."\n\n";
 	}
 
@@ -144,7 +144,7 @@ $rows	 = db_numrows($res);
 for($k = 0; $k < $rows; $k++) {
 	$deleted_mail_list = db_result($res,$k,'mailing_list_name');
 	
-	exec($sys_path_to_mailman."/bin/rmlist -a $deleted_mail_list", $output);
+	exec(forge_get_config('mailman_path')."/bin/rmlist -a $deleted_mail_list", $output);
 	$success = false;
 	foreach ($output as $line) {
 		// Mailman 2.1.x

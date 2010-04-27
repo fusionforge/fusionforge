@@ -96,6 +96,9 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 			       'sys_stats_group',
 			       'sys_peer_rating_group',
 			       'sys_template_group',
+			       'sys_sendmail_path',
+			       'sys_path_to_mailman',
+			       'sys_path_to_jpgraph',
 			) ;
 
 		$pattern = implode ('|', $vars) ;

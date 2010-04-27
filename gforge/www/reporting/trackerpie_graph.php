@@ -26,9 +26,9 @@
 
 require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
-require_once($sys_path_to_jpgraph.'/jpgraph.php');
-require_once($sys_path_to_jpgraph.'/jpgraph_pie.php');
-require_once($sys_path_to_jpgraph.'/jpgraph_pie3d.php');
+require_once(forge_get_config('jpgraph_path').'/jpgraph.php');
+require_once(forge_get_config('jpgraph_path').'/jpgraph_pie.php');
+require_once(forge_get_config('jpgraph_path').'/jpgraph_pie3d.php');
 require_once $gfcommon.'reporting/Report.class.php';
 require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfwww.'tracker/include/ArtifactTypeHtml.class.php';

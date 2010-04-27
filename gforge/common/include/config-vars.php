@@ -79,6 +79,9 @@ forge_define_config_item ('news_group', 'core', $GLOBALS['sys_news_group']) ;
 forge_define_config_item ('stats_group', 'core', $GLOBALS['sys_stats_group']) ;
 forge_define_config_item ('peer_rating_group', 'core', $GLOBALS['sys_peer_rating_group']) ;
 forge_define_config_item ('template_group', 'core', $GLOBALS['sys_template_group']) ;
+forge_define_config_item ('sendmail_path', 'core', $GLOBALS['sys_sendmail_path']) ;
+forge_define_config_item ('mailman_path', 'core', $GLOBALS['sys_path_to_mailman']) ;
+forge_define_config_item ('jpgraph_path', 'core', $GLOBALS['sys_path_to_jpgraph']) ;
 // forge_define_config_item ('', 'core', $GLOBALS['sys_']) ;
 
 /* Long-term:
