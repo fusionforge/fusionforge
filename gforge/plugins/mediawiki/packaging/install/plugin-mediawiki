@@ -6,4 +6,3 @@ plugins/mediawiki/www/*            usr/share/gforge/plugins/mediawiki/www/
 plugins/mediawiki/mediawiki-skin/* usr/share/gforge/plugins/mediawiki/mediawiki-skin/
 plugins/mediawiki/etc/*    usr/share/gforge/etc/
 plugins/mediawiki/etc/httpd.d/*    usr/share/gforge/etc/httpd.d/
-plugins/mediawiki/etc/cron.d/*    usr/share/gforge/etc/cron.d/

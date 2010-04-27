@@ -323,7 +323,6 @@ gforge/packaging/install/mta-postfix -text
 gforge/packaging/install/plugin-contribtracker -text
 gforge/packaging/install/plugin-extratabs -text
 gforge/packaging/install/plugin-globalsearch -text
-gforge/packaging/install/plugin-mediawiki -text
 gforge/packaging/install/plugin-projectlabels -text
 gforge/packaging/install/plugin-scmarch -text
 gforge/packaging/install/plugin-scmbzr -text
@@ -1032,6 +1031,7 @@ gforge/plugins/mediawiki/packaging/control/160plugin-mediawiki -text
 gforge/plugins/mediawiki/packaging/control/160plugin-mediawiki.shortdesc -text
 gforge/plugins/mediawiki/packaging/cron.d/plugin-mediawiki -text
 gforge/plugins/mediawiki/packaging/dirs/plugin-mediawiki -text
+gforge/plugins/mediawiki/packaging/install/plugin-mediawiki -text
 gforge/plugins/mediawiki/packaging/links/plugin-mediawiki -text
 gforge/plugins/mediawiki/www/LocalSettings.php -text
 gforge/plugins/mediawiki/www/frame.php -text
