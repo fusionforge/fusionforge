@@ -993,12 +993,12 @@ function util_strip_accents($text) {
 }
 
 /**
- * Constructs the forge's URL prefix out of $GLOBALS['sys_urlprefix']
+ * Constructs the forge's URL prefix out of forge_get_config('url_prefix')
  * 
  * @return string
  */
 function normalized_urlprefix () {
-	$prefix = $GLOBALS['sys_urlprefix'] ;
+	$prefix = forge_get_config('url_prefix') ;
 	$prefix = ereg_replace ("^/", "", $prefix) ;
 	$prefix = ereg_replace ("/$", "", $prefix) ;
 	$prefix = "/$prefix/" ;

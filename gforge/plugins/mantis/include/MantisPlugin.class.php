@@ -134,14 +134,14 @@ class MantisPlugin extends Plugin {
 			//check if the user has the plugin activated
 			if ($user->usesPlugin($this->name)) {
 				echo '	<p>
-					<a href="'.$GLOBALS['sys_urlprefix'].'/plugins/mantis/index.php?id=' . $userid . '&type=user&pluginname=' . $this->name . '">' . _('View Mantis') .'</a></p>';
+					<a href="'.forge_get_config('url_prefix').'/plugins/mantis/index.php?id=' . $userid . '&type=user&pluginname=' . $this->name . '">' . _('View Mantis') .'</a></p>';
 			}
 		} elseif ($hookname == "project_admin_plugins") {
 			// this displays the link in the project admin options page to it's  Mantis administration
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
-				echo '<a href="'.$GLOBALS['sys_urlprefix'].'/plugins/mantis/index.php?id=' . $group->getID() . '&type=admin&pluginname=' . $this->name . '">' . _('Mantis admin') . '</a><br />';
+				echo '<a href="'.forge_get_config('url_prefix').'/plugins/mantis/index.php?id=' . $group->getID() . '&type=admin&pluginname=' . $this->name . '">' . _('Mantis admin') . '</a><br />';
 			}
 		}												    
 		elseif ($hookname == "blahblahblah") {

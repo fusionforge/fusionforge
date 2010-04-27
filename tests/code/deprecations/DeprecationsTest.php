@@ -103,6 +103,10 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 			       'unix_cipher',
 			       'homedir_prefix',
 			       'groupdir_prefix',
+			       'sys_urlroot',
+			       'sys_urlprefix',
+			       'sys_images_url',
+			       'sys_images_secure_url',
 			) ;
 
 		$pattern = implode ('|', $vars) ;

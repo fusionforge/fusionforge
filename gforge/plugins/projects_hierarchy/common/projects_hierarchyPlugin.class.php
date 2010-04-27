@@ -143,7 +143,7 @@ class projects_hierarchyPlugin extends Plugin {
 						       $group_id));
 			echo db_error();
 			while ($row = db_fetch_array($res)) {
-				echo html_image('ic/forum20g.png','20','20',array('alt'=>_('Link'))).'&nbsp;'._('Parent project').': <a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.$row['unix_group_name'].'/">' . $row['group_name'] . '</a><br/>';
+				echo html_image('ic/forum20g.png','20','20',array('alt'=>_('Link'))).'&nbsp;'._('Parent project').': <a href="'.forge_get_config('url_prefix').'/projects/'.$row['unix_group_name'].'/">' . $row['group_name'] . '</a><br/>';
 				$cpt_project ++;
 			}
 			
@@ -158,7 +158,7 @@ class projects_hierarchyPlugin extends Plugin {
 						       $group_id));
 			echo db_error();
 			while ($row = db_fetch_array($res)) {
-				echo html_image('ic/forum20g.png','20','20',array('alt'=>_('Link'))).'&nbsp;'._('Child project').' : <a href="'.$GLOBALS['sys_urlprefix'].'/projects/'.$row['unix_group_name'].'/">' . $row['group_name'] . '</a> : '.$row['com'].'<br/>';
+				echo html_image('ic/forum20g.png','20','20',array('alt'=>_('Link'))).'&nbsp;'._('Child project').' : <a href="'.forge_get_config('url_prefix').'/projects/'.$row['unix_group_name'].'/">' . $row['group_name'] . '</a> : '.$row['com'].'<br/>';
 				$cpt_project ++;
 			}
 			
@@ -175,7 +175,7 @@ class projects_hierarchyPlugin extends Plugin {
 						       $group_id));
 			echo db_error();
 			while ($row = db_fetch_array($res)) {
-				echo html_image('ic/forum20g.png','20','20',array('alt'=>_('Link'))).'&nbsp;'._('Links')." : <a href=\"".$GLOBALS['sys_urlprefix']."/projects/".$row['unix_group_name']."/\">" . $row['group_name'] . "</a> :  ".$row['com']."<br/>";
+				echo html_image('ic/forum20g.png','20','20',array('alt'=>_('Link'))).'&nbsp;'._('Links')." : <a href=\"".forge_get_config('url_prefix')."/projects/".$row['unix_group_name']."/\">" . $row['group_name'] . "</a> :  ".$row['com']."<br/>";
 				$cpt_project ++;
 			}
 			// links if project is son
@@ -185,7 +185,7 @@ class projects_hierarchyPlugin extends Plugin {
 						       $group_id));
 			echo db_error();
 			while ($row = db_fetch_array($res)) {
-				echo html_image('ic/forum20g.png','20','20',array('alt'=>_('Link'))).'&nbsp;'._('Links')." : <a href=\"".$GLOBALS['sys_urlprefix']."/projects/".$row['unix_group_name']."/\">" . $row['group_name'] . "</a><br/>";
+				echo html_image('ic/forum20g.png','20','20',array('alt'=>_('Link'))).'&nbsp;'._('Links')." : <a href=\"".forge_get_config('url_prefix')."/projects/".$row['unix_group_name']."/\">" . $row['group_name'] . "</a><br/>";
 				$cpt_project ++;
 			}
 			

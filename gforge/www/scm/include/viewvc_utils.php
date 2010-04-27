@@ -52,7 +52,7 @@ function viewcvs_execute($repos_name, $repos_type) {
 	$request_uri = getStringFromServer('REQUEST_URI');
 	$query_string = getStringFromServer('QUERY_STRING');
 	
-	$viewcvs_path = $GLOBALS['sys_urlroot'].'/scm/viewvc';
+	$viewcvs_path = forge_get_config('url_root').'/scm/viewvc';
 	
 	// this is very important ...
 	$path = getStringFromServer('PATH_INFO');

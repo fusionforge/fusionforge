@@ -86,6 +86,10 @@ forge_define_config_item ('account_manager_type', 'core', $GLOBALS['sys_account_
 forge_define_config_item ('unix_cipher', 'core', $GLOBALS['unix_cipher']) ;
 forge_define_config_item ('homedir_prefix', 'core', $GLOBALS['homedir_prefix']) ;
 forge_define_config_item ('groupdir_prefix', 'core', $GLOBALS['groupdir_prefix']) ;
+forge_define_config_item ('url_root', 'core', $GLOBALS['sys_urlroot']) ;
+forge_define_config_item ('url_prefix', 'core', $GLOBALS['sys_urlprefix']) ;
+forge_define_config_item ('images_url', 'core', $GLOBALS['sys_images_url']) ;
+forge_define_config_item ('images_secure_url', 'core', $GLOBALS['sys_images_secure_url']) ;
 // forge_define_config_item ('', 'core', $GLOBALS['sys_']) ;
 
 /* Long-term:

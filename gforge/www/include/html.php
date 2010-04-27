@@ -132,8 +132,8 @@ function html_abs_image($url, $width, $height, $args) {
  * @param		bool	DEPRECATED
  */
 function html_image($src,$width,$height,$args,$display=1) {
-	global $sys_images_url,$sys_images_secure_url,$HTML;
-	$s = ((session_issecure()) ? $sys_images_secure_url : $sys_images_url );
+	global $HTML;
+	$s = ((session_issecure()) ? forge_get_config('images_secure_url') : forge_get_config('images_url') );
 	return html_abs_image($s.$HTML->imgroot.$src, $width, $height, $args);
 }
 
