@@ -90,6 +90,10 @@ forge_define_config_item ('url_root', 'core', $GLOBALS['sys_urlroot']) ;
 forge_define_config_item ('url_prefix', 'core', $GLOBALS['sys_urlprefix']) ;
 forge_define_config_item ('images_url', 'core', $GLOBALS['sys_images_url']) ;
 forge_define_config_item ('images_secure_url', 'core', $GLOBALS['sys_images_secure_url']) ;
+forge_define_config_item ('admin_email', 'core', $GLOBALS['sys_admin_email']) ;
+forge_define_config_item ('session_key', 'core', $GLOBALS['sys_session_key']) ;
+forge_define_config_item ('show_source', 'core', $GLOBALS['sys_show_source']) ;
+forge_define_config_item ('default_trove_cat', 'core', $GLOBALS['default_trove_cat']) ;
 // forge_define_config_item ('', 'core', $GLOBALS['sys_']) ;
 
 /* Long-term:

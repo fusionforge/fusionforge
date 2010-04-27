@@ -93,7 +93,7 @@ if (getStringFromRequest('submit')) {
 
 if (getStringFromRequest("delete")) {
 	$form_trove_cat_id = getIntFromRequest('form_trove_cat_id');
-	if ($form_trove_cat_id==$default_trove_cat){
+	if ($form_trove_cat_id==forge_get_config('default_trove_cat')){
 		exit_error( _('Error In Trove Operation, can\'t delete trove category define as default in local.inc'));
 	}
 	trove_del_cat_id($form_trove_cat_id);

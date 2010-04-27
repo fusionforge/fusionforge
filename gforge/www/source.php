@@ -12,8 +12,8 @@
 require_once('env.inc.php');
 require_once $gfwww.'include/pre.php';
 
-global $sys_show_source;
-if (!$sys_show_source) {
+
+if (!forge_get_config('show_source')) {
 	exit_permission_denied();
 }
 

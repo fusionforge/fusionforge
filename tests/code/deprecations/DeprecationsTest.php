@@ -107,6 +107,10 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 			       'sys_urlprefix',
 			       'sys_images_url',
 			       'sys_images_secure_url',
+			       'sys_admin_email',
+			       'sys_session_key',
+			       'sys_show_source',
+			       'default_trove_cat',
 			) ;
 
 		$pattern = implode ('|', $vars) ;

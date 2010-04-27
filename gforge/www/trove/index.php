@@ -26,7 +26,7 @@ $categoryId = getIntFromGet('form_cat');
 
 // assign default if not defined
 if (!$categoryId) {
-	$categoryId = $default_trove_cat;
+	$categoryId = forge_get_config('default_trove_cat');
 }
 
 $category = new TroveCategory($categoryId);

@@ -613,15 +613,15 @@ class Navigation extends Error {
         }
         
         /** Create the HTML code for the "Show Source" link if
-	 *  $sys_show_source is set, otherwise "". If $asHTML is set
-	 *  to false, it returns NULL when $sys_show_source is not
+	 *  forge_get_config('show_source') is set, otherwise "". If $asHTML is set
+	 *  to false, it returns NULL when forge_get_config('show_source') is not
 	 *  set, otherwise an array with the following structure:
 	 *  $result['url']: URL of the link to the source code viewer;
 	 *  $result['title']: Title of the link.
 	 */
         function getShowSource($asHTML=true) {
-                global $sys_show_source;
-                if ($sys_show_source) {
+
+                if (forge_get_config('show_source')) {
                         $res['url'] = util_make_url('/source.php?file='.getStringFromServer('SCRIPT_NAME'));
                         $res['title'] = _('Show source');
                 } else {

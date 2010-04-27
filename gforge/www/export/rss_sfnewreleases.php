@@ -53,7 +53,7 @@ print "  <pubDate>".rss_date(time())."</pubDate>\n";
 print "  <description>".forge_get_config ('forge_name')." New Releases</description>\n";
 print "  <link>http://".forge_get_config('web_host')."</link>\n";
 print "  <title>".forge_get_config ('forge_name')." New Releases</title>\n";
-print "  <webMaster>".$GLOBALS['sys_admin_email']."</webMaster>\n";
+print "  <webMaster>".forge_get_config('admin_email')."</webMaster>\n";
 print "  <language>en-us</language>\n";
 // ## item outputs
 $outputtotal = 0;

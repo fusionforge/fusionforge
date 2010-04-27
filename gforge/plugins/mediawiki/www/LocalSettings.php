@@ -77,8 +77,8 @@ $g = group_get_object_by_name($fusionforgeproject) ;
 $wgSitename         = $g->getPublicName() . " Wiki";
 $wgScriptPath       = "/plugins/mediawiki/wiki/$fusionforgeproject" ;
 
-$wgEmergencyContact = $sys_admin_email;
-$wgPasswordSender = $sys_admin_email;
+$wgEmergencyContact = forge_get_config('admin_email');
+$wgPasswordSender = forge_get_config('admin_email');
 
 $wgDBtype           = "postgres";
 $wgDBserver         = $sys_dbhost ;
@@ -117,7 +117,7 @@ $GLOBALS['gfwww'] = $gfwww ;
 $GLOBALS['gfplugins'] = $gfplugins ;
 $GLOBALS['sys_lang'] = forge_get_config('default_language') ;
 $GLOBALS['sys_urlroot'] = forge_get_config('url_root');
-$GLOBALS['sys_session_key'] = $sys_session_key;
+$GLOBALS['sys_session_key'] = forge_get_config('session_key');
 $GLOBALS['sys_session_expire'] = $sys_session_expire;
 $GLOBALS['REMOTE_ADDR'] = getStringFromServer('REMOTE_ADDR') ;
 $GLOBALS['HTTP_USER_AGENT'] = getStringFromServer('HTTP_USER_AGENT') ;

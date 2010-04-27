@@ -26,7 +26,7 @@ if(isset($_GET['cat'])){
 
 // assign default. 18 is 'topic'
 if (!isset($form_cat) || !$form_cat) {
-	$form_cat = $default_trove_cat;
+	$form_cat = forge_get_config('default_trove_cat');
 }
 
 $form_cat = intval($form_cat);

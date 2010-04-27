@@ -145,8 +145,8 @@ class Theme extends Layout {
 		<a href="http://fusionforge.org/">Powered By FusionForge</a><br />
 		</div>
 <?php		
-		global $sys_show_source;
-		if ($sys_show_source) {
+
+		if (forge_get_config('show_source')) {
 			echo util_make_link ('/source.php?file='.getStringFromServer('SCRIPT_NAME'),_('Show Source'),array('class'=>'showsource'));
 		}
 		?>

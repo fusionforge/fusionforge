@@ -47,7 +47,7 @@ $session_ser = getStringFromCookie('session_ser');
  */
 function session_build_session_cookie($user_id) {
 	$session_serial = $user_id.'-*-'.time().'-*-'.getStringFromServer('REMOTE_ADDR').'-*-'.getStringFromServer('HTTP_USER_AGENT');
-	$session_serial_hash = md5($session_serial.$GLOBALS['sys_session_key']);
+	$session_serial_hash = md5($session_serial.forge_get_config('session_key'));
 	$session_serial_cookie = base64_encode($session_serial).'-*-'.$session_serial_hash;
 	return $session_serial_cookie;
 }
@@ -75,7 +75,7 @@ function session_check_session_cookie($session_cookie) {
 
 	list ($session_serial, $hash) = explode('-*-', $session_cookie);
 	$session_serial = base64_decode($session_serial);
-	$new_hash = md5($session_serial.$GLOBALS['sys_session_key']);
+	$new_hash = md5($session_serial.forge_get_config('session_key'));
 
 	if ($hash != $new_hash) {
 		return false;

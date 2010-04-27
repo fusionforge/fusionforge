@@ -202,8 +202,8 @@ function footerEnd($params) { ?> <!-- PLEASE LEAVE "Powered By FusionForge" on y
 	border="0" /></a>
 </div>
 <?php
-global $sys_show_source;
-if ($sys_show_source) {
+
+if (forge_get_config('show_source')) {
 	echo util_make_link ('/source.php?file='.getStringFromServer('SCRIPT_NAME'),_('Show source'),array('class'=>'showsource'));
 }
 ?>

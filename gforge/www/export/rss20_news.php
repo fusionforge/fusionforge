@@ -31,13 +31,13 @@ if ($group_id) {
 	if ($rowwm = db_fetch_array($reswm)) {
 	  $webmaster = $rowwm['user_name']."@".forge_get_config('users_host')." (".$rowwm['realname'].")";
 	} else {
-	  $webmaster = $GLOBALS['sys_admin_email'];
+	  $webmaster = forge_get_config('admin_email');
 	}
 } else {
 	$title = "";
 	$link = "";
 	$description = "";
-	$webmaster = $GLOBALS['sys_admin_email'];
+	$webmaster = forge_get_config('admin_email');
 }
 
 $rssTitle = forge_get_config ('forge_name')." Project$title News";

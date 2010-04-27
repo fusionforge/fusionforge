@@ -223,7 +223,7 @@ function handle_getvar($name)
 
 
 function beginTaskFeed($feed_title, $feed_link, $feed_desc) {
-	global  $sys_admin_email;
+
 	header("Content-Type: text/xml");
 	print "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 	print "<rss version=\"2.0\">\n";
@@ -233,7 +233,7 @@ function beginTaskFeed($feed_title, $feed_link, $feed_desc) {
 	print "  <description>".$feed_desc."</description>\n";
 	print "  <language>en-us</language>\n";
 	print "  <copyright>Copyright 2000-".date("Y")." ".forge_get_config('forge_name')."</copyright>\n";
-	print "  <webMaster>".$sys_admin_email."</webMaster>\n";
+	print "  <webMaster>".forge_get_config('admin_email')."</webMaster>\n";
 	print "  <lastBuildDate>".gmdate('D, d M Y G:i:s',time())." GMT</lastBuildDate>\n";
 	print "  <docs>http://blogs.law.harvard.edu/tech/rss</docs>\n";
 	print "  <image>\n";
