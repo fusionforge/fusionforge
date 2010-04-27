@@ -347,18 +347,6 @@ Description: collaborative development tool - GNU Arch plugin
  each FusionForge project to have its own Arch repository, and gives
  some control over it to the project's administrator.
 
-Package: gforge-plugin-mediawiki
-Architecture: all
-Depends: gforge-common (>= 4.8), gforge-db-postgresql (>= 4.8) | gforge-db, gforge-web-apache2 (>= 4.8) | gforge-web, mediawiki (>= 1:1.15~), php5-cli, ${misc:Depends}
-Description: Mediawiki plugin for FusionForge
- FusionForge provides many tools to aid collaboration in a
- development project, such as bug-tracking, task management,
- mailing-lists, SCM repository, forums, support request helper,
- web/FTP hosting, release management, etc. All these services are
- integrated into one web site and managed through a web interface.
- .
- This plugin allows each project to embed Mediawiki under a tab.
-
 Package: gforge-plugin-extratabs
 Architecture: all
 Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, ${misc:Depends}
@@ -411,4 +399,16 @@ Description: Contribution tracker plugin for FusionForge
  .
  This plugin allows each project to display a list of significant
  contributions, along with their authors.
+
+Package: gforge-plugin-mediawiki
+Architecture: all
+Depends: gforge-common (>= 4.8), gforge-db-postgresql (>= 4.8) | gforge-db, gforge-web-apache2 (>= 4.8) | gforge-web, mediawiki (>= 1:1.15~), php5-cli, ${misc:Depends}
+Description: Mediawiki plugin for FusionForge
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin allows each project to embed Mediawiki under a tab.
 

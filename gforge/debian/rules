@@ -18,17 +18,43 @@ default:
 include /usr/share/dpatch/dpatch.make
 
 CRONDFILES=$(patsubst packaging/cron.d/%,debian/$(OLDPACKAGE)-%.cron.d,$(wildcard packaging/cron.d/[a-z]*))
+PCRONDFILES=$(patsubst %,debian/$(OLDPACKAGE)-%.cron.d,$(word 5,$(subst /, ,$(wildcard plugins/*/packaging/cron.d/[a-z]*)))) 
+
 DIRSFILES=$(patsubst packaging/dirs/%,debian/$(OLDPACKAGE)-%.dirs,$(wildcard packaging/dirs/[a-z]*))
+PDIRSFILES=$(patsubst %,debian/$(OLDPACKAGE)-%.dirs,$(word 5,$(subst /, ,$(wildcard plugins/*/packaging/dirs/[a-z]*))))
+
 LINKSFILES=$(patsubst packaging/links/%,debian/$(OLDPACKAGE)-%.links,$(wildcard packaging/links/[a-z]*))
+PLINKSFILES=$(patsubst %,debian/$(OLDPACKAGE)-%.links,$(word 5,$(subst /, ,$(wildcard plugins/*/packaging/links/[a-z]*))))
+
 INSTALLFILES=$(patsubst packaging/install/%,debian/$(OLDPACKAGE)-%.install,$(wildcard packaging/install/[a-z]*))
+PINSTALLFILES=$(patsubst %,debian/$(OLDPACKAGE)-%.install,$(word 5,$(subst /, ,$(wildcard plugins/*/packaging/install/[a-z]*))))
+
 DOCSFILES=$(patsubst packaging/docs/oldpkgname%,debian/$(OLDPACKAGE)%.docs,$(wildcard packaging/docs/oldpkgname*)) $(patsubst packaging/docs/pkgname%,debian/$(PACKAGE)%.docs,$(wildcard packaging/docs/pkgname*))
+PDOCSFILES=$(patsubst %,debian/$(OLDPACKAGE)-%.docs,$(word 5,$(subst /, ,$(wildcard plugins/*/packaging/docs/[a-z]*))))
+
 POFILES=$(patsubst debian/dsf-po/%,debian/po/%,$(wildcard debian/dsf-po/*) debian/po/POTFILES.in)
+
+testpat:
+	@echo "CRONDFILES=$(CRONDFILES)"
+	@echo "DIRSFILES=$(DIRSFILES)"
+	@echo "LINKSFILES=$(LINKSFILES)"
+	@echo "INSTALLFILES=$(INSTALLFILES)"
+	@echo "DOCSFILES=$(DOCSFILES)"
+	@echo ""
+	@echo "PCRONDFILES=$(PCRONDFILES)"
+	@echo "PDIRSFILES=$(PDIRSFILES)"
+	@echo "PLINKSFILES=$(PLINKSFILES)"
+	@echo "PINSTALLFILES=$(PINSTALLFILES)"
+	@echo "PDOCSFILES=$(PDOCSFILES)"
 
 remove-binary-files:
 	sh $(CURDIR)/deb-specific/manage-uufiles.sh clean
 
 .PHONY: conffiles
 conffiles: $(CRONDFILES) $(DIRSFILES) $(LINKSFILES) $(INSTALLFILES) $(DOCSFILES) debian/control
+
+debian/$(OLDPACKAGE)-plugin-%.cron.d:
+	sed -e 's/\$$FFUSER/$(OLDPACKAGE)/g' $(wildcard plugins/*/packaging/cron.d/plugin-$*) > $@
 
 debian/$(OLDPACKAGE)-%.cron.d:
 	(cat $(CURDIR)/packaging/cron.d/00phpcron ; sed -e 's/\$$FFUSER/$(OLDPACKAGE)/g' $(CURDIR)/packaging/cron.d/$*) > $@
@@ -47,8 +73,8 @@ debian/$(OLDPACKAGE)-%.docs:
 debian/$(PACKAGE)-%.docs:
 	cp $(CURDIR)/packaging/docs/pkgname-$* $@
 
-debian/control: $(wildcard packaging/control/*)
-	ls $(CURDIR)/packaging/control/[0-9][0-9][0-9]* | grep -v shortdesc | grep -v scmcpold | while read file ; do cat $${file}; if [ -f $${file}.shortdesc ] ; then cat $(CURDIR)/packaging/control/AAAdesc; echo ' .'; cat $${file}.shortdesc; fi; echo '';  done | $(SED_REPLACE) > $@
+debian/control: $(wildcard packaging/control/*) $(wildcard plugins/*/packaging/control/[0-9][0-9][0-9]*) 
+	ls $(CURDIR)/packaging/control/[0-9][0-9][0-9]* $(CURDIR)/plugins/*/packaging/control/[0-9][0-9][0-9]* | grep -v shortdesc | grep -v scmcpold | while read file ; do cat $${file}; if [ -f $${file}.shortdesc ] ; then cat $(CURDIR)/packaging/control/AAAdesc; echo ' .'; cat $${file}.shortdesc; fi; echo '';  done | $(SED_REPLACE) > $@
 
 debian/po/templates.pot: $(wildcard debian/dsf-in/*.templates.dsfh-in) $(wildcard debian/dsf-helper/*.templates)
 	@debconf-updatepo --podir=debian/dsf-po
