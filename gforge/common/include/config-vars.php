@@ -65,6 +65,10 @@ forge_define_config_item ('users_host', 'core', $GLOBALS['sys_users_host']) ;
 forge_define_config_item ('lists_host', 'core', $GLOBALS['sys_lists_host']) ;
 forge_define_config_item ('scm_host', 'core', $GLOBALS['sys_scm_host']) ;
 forge_define_config_item ('forum_return_domain', 'core', $GLOBALS['sys_forum_return_domain']) ;
+forge_define_config_item ('use_jabber', 'core', $GLOBALS['sys_use_jabber']) ;
+forge_define_config_item ('jabber_host', 'core', $GLOBALS['sys_jabber_server']) ;
+forge_define_config_item ('jabber_port', 'core', $GLOBALS['sys_jabber_port']) ;
+forge_define_config_item ('jabber_user', 'core', $GLOBALS['sys_jabber_user']) ;
 // forge_define_config_item ('', 'core', $GLOBALS['sys_']) ;
 
 /* Long-term:

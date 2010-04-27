@@ -237,7 +237,7 @@ function util_convert_body($str,$charset) {
 }
 
 function util_send_jabber($to,$subject,$body) {
-	if (!$GLOBALS['sys_use_jabber']) {
+	if (!forge_get_config('use_jabber')) {
 		return;
 	}
 	$JABBER = new Jabber();

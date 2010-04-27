@@ -210,7 +210,7 @@ echo $HTML->boxTop(_('Account Maintenance'));
 </tr>
 
 <?php
-if ($sys_use_jabber) {
+if (forge_get_config('use_jabber')) {
     echo '<tr valign="top">
 <td>'. _('Jabber Address:') .'</td>
 <td>

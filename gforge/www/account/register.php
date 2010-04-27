@@ -164,7 +164,7 @@ if (forge_get_config('require_unique_email')) {
 </p>
 <p>
 <?php
-if ($sys_use_jabber) {
+if (forge_get_config('use_jabber')) {
 	echo _('Jabber Address:').'<br />
 	<input size="30" type="text" name="jabber_address" value="'. 
 	htmlspecialchars($jabber_address) .'" /><br />

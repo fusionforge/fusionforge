@@ -146,10 +146,10 @@ class Jabber
 
 	function Jabber()
 	{
-		$this->server				= $GLOBALS['sys_jabber_server'];
-		$this->port					= $GLOBALS['sys_jabber_port'];
+		$this->server				= forge_get_config('jabber_host');
+		$this->port					= forge_get_config('jabber_port');
 
-		$this->username				= $GLOBALS['sys_jabber_user'];
+		$this->username				= forge_get_config('jabber_user');
 		$this->password				= $GLOBALS['sys_jabber_pass'];
 		$this->resource				= 'home';
 		

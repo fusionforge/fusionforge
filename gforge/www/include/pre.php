@@ -42,7 +42,7 @@ require $gfcommon.'include/constants.php';
 
 
 //
-if ($sys_use_jabber) {
+if (forge_get_config('use_jabber')) {
 	require_once $gfcommon.'include/Jabber.class.php';
 }
 
