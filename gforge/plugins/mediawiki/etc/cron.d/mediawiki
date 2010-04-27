@@ -1,3 +1,0 @@
-# Create new mediawikis four times an hour
-0,15,30,45 * * * * $FFUSER [ -x $FFDIR/plugins/mediawiki/cronjobs/create-wikis.php ] && $PHP $FFDIR/plugins/mediawiki/cronjobs/create-wikis.php
-1,16,31,46 * * * * root [ -x $FFDIR/plugins/mediawiki/cronjobs/create-imgdirs.php ] && $PHP $FFDIR/plugins/mediawiki/cronjobs/create-imgdirs.php

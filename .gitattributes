@@ -272,8 +272,6 @@ gforge/packaging/control/135plugin-scmdarcs -text
 gforge/packaging/control/135plugin-scmdarcs.shortdesc -text
 gforge/packaging/control/136plugin-scmarch -text
 gforge/packaging/control/136plugin-scmarch.shortdesc -text
-gforge/packaging/control/160plugin-mediawiki -text
-gforge/packaging/control/160plugin-mediawiki.shortdesc -text
 gforge/packaging/control/170plugin-extratabs -text
 gforge/packaging/control/170plugin-extratabs.shortdesc -text
 gforge/packaging/control/180plugin-globalsearch -text
@@ -303,7 +301,6 @@ gforge/packaging/cron.d/web-apache2 -text
 gforge/packaging/cron.d/web-apache2-vhosts -text
 gforge/packaging/dirs/plugin-extratabs -text
 gforge/packaging/dirs/plugin-globalsearch -text
-gforge/packaging/dirs/plugin-mediawiki -text
 gforge/packaging/dirs/plugin-projectlabels -text
 gforge/packaging/dirs/plugin-scmarch -text
 gforge/packaging/dirs/plugin-scmbzr -text
@@ -340,7 +337,6 @@ gforge/packaging/install/shell-postgresql -text
 gforge/packaging/install/web-apache2 -text
 gforge/packaging/install/web-apache2-vhosts -text
 gforge/packaging/links/common -text
-gforge/packaging/links/plugin-mediawiki -text
 gforge/packaging/links/plugin-scmdarcs -text
 gforge/packaging/links/plugin-scmgit -text
 gforge/packaging/links/web-apache2 -text
@@ -1026,15 +1022,18 @@ gforge/plugins/mediawiki/common/mediawiki-init.php -text
 gforge/plugins/mediawiki/cronjobs/create-imagedirs.php -text
 gforge/plugins/mediawiki/cronjobs/create-wikis.php -text
 gforge/plugins/mediawiki/etc/config.ini -text
-gforge/plugins/mediawiki/etc/cron.d/mediawiki -text
-gforge/plugins/mediawiki/etc/httpd.d/03mediawiki -text
+gforge/plugins/mediawiki/etc/httpd.d/61plugin-mediawiki -text
 gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php -text
 gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php.patch -text
 gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php.reference -text
 gforge/plugins/mediawiki/mediawiki-skin/Makefile -text
 gforge/plugins/mediawiki/mediawiki-skin/README.beforemodifying -text
 gforge/plugins/mediawiki/mediawiki-skin/fusionforge/fusionforge.css -text
+gforge/plugins/mediawiki/packaging/control/160plugin-mediawiki -text
+gforge/plugins/mediawiki/packaging/control/160plugin-mediawiki.shortdesc -text
 gforge/plugins/mediawiki/packaging/cron.d/plugin-mediawiki -text
+gforge/plugins/mediawiki/packaging/dirs/plugin-mediawiki -text
+gforge/plugins/mediawiki/packaging/links/plugin-mediawiki -text
 gforge/plugins/mediawiki/www/LocalSettings.php -text
 gforge/plugins/mediawiki/www/frame.php -text
 gforge/plugins/online_help/common/online_help-init.php -text
