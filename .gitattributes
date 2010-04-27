@@ -1034,6 +1034,7 @@ gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php.reference -text
 gforge/plugins/mediawiki/mediawiki-skin/Makefile -text
 gforge/plugins/mediawiki/mediawiki-skin/README.beforemodifying -text
 gforge/plugins/mediawiki/mediawiki-skin/fusionforge/fusionforge.css -text
+gforge/plugins/mediawiki/packaging/cron.d/plugin-mediawiki -text
 gforge/plugins/mediawiki/www/LocalSettings.php -text
 gforge/plugins/mediawiki/www/frame.php -text
 gforge/plugins/online_help/common/online_help-init.php -text
