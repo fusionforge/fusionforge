@@ -30,7 +30,7 @@ require_once($sys_path_to_jpgraph.'/jpgraph.php');
 require_once($sys_path_to_jpgraph.'/jpgraph_line.php');
 require_once $gfcommon.'reporting/ReportGroupAdded.class.php';
 
-session_require( array('group'=>$sys_stats_group) );
+session_require( array('group'=>forge_get_config('stats_group')) );
 
 $SPAN = getIntFromRequest('SPAN');
 $start = getIntFromRequest('start');

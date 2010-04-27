@@ -30,7 +30,7 @@ require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/Report.class.php';
 require_once $gfcommon.'reporting/ReportSetup.class.php';
 
-session_require( array('group'=>$sys_stats_group,'A') );
+session_require( array('group'=>forge_get_config('stats_group'),'A') );
 
 echo report_header(_('Main Page'));
 if (getStringFromRequest('submit') && getStringFromRequest('im_sure')) {

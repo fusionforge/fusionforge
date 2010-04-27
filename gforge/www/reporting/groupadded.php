@@ -47,7 +47,7 @@ if (!$end || $end <= $start) {
 	$end = $z[count($z)-1];
 }
 
-session_require( array('group'=>$sys_stats_group) );
+session_require( array('group'=>forge_get_config('stats_group')) );
 
 echo report_header(_('Projects Added'));
 

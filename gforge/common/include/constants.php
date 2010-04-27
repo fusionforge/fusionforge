@@ -67,10 +67,10 @@ define('MAIL__MAILING_LIST_NAME_MIN_LENGTH', 4);
 
 /* Groups */
 define('GROUP_IS_MASTER', 1);
-define('GROUP_IS_STATS', $sys_stats_group);
-define('GROUP_IS_NEWS', $sys_news_group);
-define('GROUP_IS_PEER_RATINGS', $sys_peer_rating_group);
-define('GROUP_IS_TEMPLATE', $sys_template_group);
+define('GROUP_IS_STATS', forge_get_config('stats_group'));
+define('GROUP_IS_NEWS', forge_get_config('news_group'));
+define('GROUP_IS_PEER_RATINGS', forge_get_config('peer_rating_group'));
+define('GROUP_IS_TEMPLATE', forge_get_config('template_group'));
 
 /* Admin */
 define('ADMIN_CRONMAN_ROWS', 30);

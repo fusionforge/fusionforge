@@ -29,7 +29,7 @@ require_once $gfwww.'include/pre.php';
 require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/ReportSetup.class.php';
 
-session_require( array('group'=>$sys_stats_group,'A') );
+session_require( array('group'=>forge_get_config('stats_group'),'A') );
 
 $time_code = getIntFromRequest('time_code');
 $category_name = trim(getStringFromRequest('category_name'));

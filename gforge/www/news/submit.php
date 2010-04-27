@@ -64,7 +64,7 @@ if (session_loggedin()) {
 
 	$group_id = getIntFromRequest('group_id');
 
-	if ($group_id == $sys_news_group) {
+	if ($group_id == forge_get_config('news_group')) {
 		exit_permission_denied(_('Submitting news from the news group is not allowed.'));
 	}
 
@@ -91,7 +91,7 @@ if (session_loggedin()) {
 	   			*/
 
 				db_begin();
-				$f=new Forum(group_get_object($sys_news_group));
+				$f=new Forum(group_get_object(forge_get_config('news_group')));
 				if (!$f->create(ereg_replace('[^_\.0-9a-z-]','-', strtolower($summary)),$details,1,'',0,0)) {
 					db_rollback();
 					exit_error('Error',$f->getErrorMessage());

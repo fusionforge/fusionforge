@@ -2,7 +2,7 @@
 //
 //	FORM TO CLONE A TRACKER
 //
-		$g =& group_get_object($sys_template_group);
+		$g =& group_get_object(forge_get_config('template_group'));
 		if (!$g || !is_object($g)) {
 			exit_error('Error','Unable to Create Template Group Object');
 		} elseif ($g->isError()) {

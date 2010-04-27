@@ -82,7 +82,7 @@ FROM user_group
 WHERE
 user_group.group_id=$1
 AND user_group.admin_flags=$2',
-			array ($sys_peer_rating_group,
+			array (forge_get_config('peer_rating_group'),
 			       'A')) ;
 
 

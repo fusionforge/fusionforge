@@ -92,6 +92,10 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 			       'sys_ldap_base_dn',
 			       'sys_ldap_bind_dn',
 			       'sys_ldap_admin_dn',
+			       'sys_news_group',
+			       'sys_stats_group',
+			       'sys_peer_rating_group',
+			       'sys_template_group',
 			) ;
 
 		$pattern = implode ('|', $vars) ;

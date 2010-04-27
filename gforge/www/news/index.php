@@ -53,7 +53,7 @@ if ( !$limit || $limit < 0 || $limit > 50 || !is_numeric($limit) ) {
 	$limit = 50;
 }
 
-if ($group_id && ($group_id != $sys_news_group)) {
+if ($group_id && ($group_id != forge_get_config('news_group'))) {
 	$result = db_query_params ('SELECT * FROM news_bytes WHERE group_id=$1 AND is_approved <> 4 ORDER BY post_date DESC',
 				   array ($group_id),
 				   $limit+1,

@@ -392,7 +392,7 @@ function outerTabs($params) {
 		}
 
 	}
-	if (user_ismember($GLOBALS['sys_stats_group'])) {
+	if (user_ismember(forge_get_config('stats_group'))) {
 		$TABS_IDS[]='reporting';
 		$TABS_DIRS[]=util_make_url ('/reporting/') ;
 		$TABS_TITLES[]=_('Reporting');

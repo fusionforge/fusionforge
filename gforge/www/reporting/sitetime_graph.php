@@ -32,7 +32,7 @@ require_once($sys_path_to_jpgraph.'/jpgraph_pie3d.php');
 require_once $gfcommon.'reporting/ReportSiteTime.class.php';
 require_once $gfcommon.'reporting/report_utils.php';
 
-session_require( array('group'=>$sys_stats_group) );
+session_require( array('group'=>forge_get_config('stats_group')) );
 
 $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');

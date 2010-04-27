@@ -42,7 +42,7 @@ $id = getIntFromRequest('id');
 
 $feedback = '';
 
-if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
+if ($group_id && $group_id != forge_get_config('news_group') && user_ismember($group_id,'A')) {
 	$status = getIntFromRequest('status');
 	$summary = getStringFromRequest('summary');
 	$details = getStringFromRequest('details');
@@ -181,14 +181,14 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 	}
 	news_footer(array());
 
-} else if (user_ismember($sys_news_group,'A')) {
+} else if (user_ismember(forge_get_config('news_group'),'A')) {
 	/*
 
 		News uber-user admin pages
 
 		Show all waiting news items except those already rejected.
 
-		Admin members of $sys_news_group (news project) can edit/change/approve news items
+		Admin members of forge_get_config('news_group') (news project) can edit/change/approve news items
 
 	*/
 	if ($post_changes) {

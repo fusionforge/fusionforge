@@ -13,7 +13,7 @@ require_once $gfwww.'include/pre.php';
 require_once $gfwww.'stats/site_stats_utils.php';
 
 // require you to be a member of the sfstats group
-session_require( array('group'=>$sys_stats_group) );
+session_require( array('group'=>forge_get_config('stats_group')) );
 
 $HTML->header(array('title' => sprintf(_('%1$s I18n Statistics'), forge_get_config ('forge_name'))));
 echo "<h1>".sprintf(_('Languages Distributions'), forge_get_config ('forge_name'))." </h1>";

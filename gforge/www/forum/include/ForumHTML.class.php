@@ -25,7 +25,7 @@ require_once $gfwww.'forum/admin/ForumAdmin.class.php';
 require_once $gfwww.'forum/include/AttachManager.class.php';
 
 function forum_header($params) {
-	global $HTML,$group_id,$forum_name,$forum_id,$sys_news_group,$f,$group_forum_id;
+	global $HTML,$group_id,$forum_name,$forum_id,$f,$group_forum_id;
 
 	if ($group_forum_id) {
 		$forum_id=$group_forum_id;
@@ -41,7 +41,7 @@ function forum_header($params) {
 		bastardization for news
 		Show icon bar unless it's a news forum
 	*/
-	if ($group_id == $sys_news_group) {
+	if ($group_id == forge_get_config('news_group')) {
 		//this is a news item, not a regular forum
 		if ($forum_id) {
 			// Show this news item at the top of the page
@@ -86,7 +86,7 @@ function forum_header($params) {
 				echo '</p>';
 
 				// display classification
-				if ($params['group'] == $sys_news_group) { 
+				if ($params['group'] == forge_get_config('news_group')) { 
 				   print stripslashes(trove_news_getcatlisting(db_result($result,0,'forum_id'),0,1));
 				} elseif (forge_get_config('use_trove')) {
 				   print stripslashes(trove_getcatlisting($params['group'],0,1));

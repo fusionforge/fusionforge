@@ -153,8 +153,8 @@ class Forum extends Error {
 		// This is a hack to allow non-site-wide-admins to post
 		// news.  The news/submit.php checks for proper permissions.
 		// This needs to be revisited.
-		global $sys_news_group;
-		if ($this->Group->getID() == $sys_news_group) {
+
+		if ($this->Group->getID() == forge_get_config('news_group')) {
 			// Future check will be added.
 
 		} else {

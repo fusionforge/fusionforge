@@ -57,7 +57,7 @@ require_once $gfcommon.'include/FusionForge.class.php';
 </ul>
 <?php
 echo $HTML->boxTop(_('Latest News'), 'Latest_News');
-echo news_show_latest($sys_news_group,5,true,false,false,5);
+echo news_show_latest(forge_get_config('news_group'),5,true,false,false,5);
 echo $HTML->boxBottom();
 ?>
 

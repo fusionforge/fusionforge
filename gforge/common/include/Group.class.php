@@ -1370,10 +1370,10 @@ class Group extends Error {
 			$this->setMissingParamsError();
 			return false;
 		}
-		if ($this->getID() == $GLOBALS['sys_news_group'] ||
+		if ($this->getID() == forge_get_config('news_group') ||
 			$this->getID() == 1 ||
-			$this->getID() == $GLOBALS['sys_stats_group'] ||
-			$this->getID() == $GLOBALS['sys_peer_rating_group']) {
+			$this->getID() == forge_get_config('stats_group') ||
+			$this->getID() == forge_get_config('peer_rating_group')) {
 			$this->setError(_('Cannot Delete System Group'));
 			return false;
 		}
@@ -1454,7 +1454,7 @@ class Group extends Error {
 		//
 		//	Delete news
 		//
-		$news_group=&group_get_object($GLOBALS['sys_news_group']);
+		$news_group=&group_get_object(forge_get_config('news_group'));
 		$res = db_query_params ('SELECT forum_id FROM news_bytes WHERE group_id=$1',
 					array ($this->getID())) ;
 		for ($i=0; $i<db_numrows($res); $i++) {

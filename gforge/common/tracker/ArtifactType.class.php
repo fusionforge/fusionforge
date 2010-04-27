@@ -644,8 +644,8 @@ class ArtifactType extends Error {
 	 *	@return	boolean	true/false on success
 	 */
 	function cloneFieldsFrom($clone_tracker_id) {
-		global $sys_template_group;
-		$g =& group_get_object($sys_template_group);
+
+		$g =& group_get_object(forge_get_config('template_group'));
 		if (!$g || !is_object($g)) {
 			$this->setError('Could Not Get Template Group');
 			return false;

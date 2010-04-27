@@ -29,7 +29,7 @@ require_once $gfwww.'include/pre.php';
 require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/ReportProjectTime.class.php';
 
-session_require( array('group'=>$sys_stats_group) );
+session_require( array('group'=>forge_get_config('stats_group')) );
 
 $report=new Report();
 if ($report->isError()) {

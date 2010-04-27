@@ -287,7 +287,7 @@ if (isset($params['group']) && $params['group']) {
 		        $TABS_DIRS[]='/admin/';
 		        $TABS_TITLES[]=_('Admin');
 		}
-		if (user_ismember($GLOBALS['sys_stats_group'])) {
+		if (user_ismember(forge_get_config('stats_group'))) {
 		        $TABS_DIRS[]='/reporting/';
 		        $TABS_TITLES[]=_('Reporting');
 		}

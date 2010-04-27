@@ -30,7 +30,7 @@ require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/Report.class.php';
 require_once $gfcommon.'reporting/ReportSetup.class.php';
 
-session_require( array('group'=>$sys_stats_group) );
+session_require( array('group'=>forge_get_config('stats_group')) );
 
 $feedback = htmlspecialchars(getStringFromRequest('feedback'));
 
