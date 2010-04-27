@@ -51,22 +51,34 @@ remove-binary-files:
 	sh $(CURDIR)/deb-specific/manage-uufiles.sh clean
 
 .PHONY: conffiles
-conffiles: $(CRONDFILES) $(DIRSFILES) $(LINKSFILES) $(INSTALLFILES) $(DOCSFILES) debian/control
+conffiles: $(CRONDFILES) $(DIRSFILES) $(LINKSFILES) $(INSTALLFILES) $(DOCSFILES) $(PCRONDFILES) $(PDIRSFILES) $(PLINKSFILES) $(PINSTALLFILES) $(PDOCSFILES) debian/control
 
 debian/$(OLDPACKAGE)-plugin-%.cron.d:
-	sed -e 's/\$$FFUSER/$(OLDPACKAGE)/g' $(wildcard plugins/*/packaging/cron.d/plugin-$*) > $@
+	sed -e 's/\$$FFUSER/$(OLDPACKAGE)/g' $(CURDIR)/plugins/$*/packaging/cron.d/plugin-$* > $@
 
 debian/$(OLDPACKAGE)-%.cron.d:
 	(cat $(CURDIR)/packaging/cron.d/00phpcron ; sed -e 's/\$$FFUSER/$(OLDPACKAGE)/g' $(CURDIR)/packaging/cron.d/$*) > $@
 
+debian/$(OLDPACKAGE)-plugin-%.dirs:
+	cp $(CURDIR)/plugins/$*/packaging/dirs/plugin-$* $@ 
+
 debian/$(OLDPACKAGE)-%.dirs:
 	cp $(CURDIR)/packaging/dirs/$* $@ 
+
+debian/$(OLDPACKAGE)-plugin-%.links:
+	cp $(CURDIR)/plugins/$*/packaging/links/plugin-$* $@
 
 debian/$(OLDPACKAGE)-%.links:
 	cp $(CURDIR)/packaging/links/$* $@ 
 
+debian/$(OLDPACKAGE)-plugin-%.install:
+	cp $(CURDIR)/plugins/$*/packaging/install/plugin-$* $@
+
 debian/$(OLDPACKAGE)-%.install:
 	cp $(CURDIR)/packaging/install/$* $@ 
+
+debian/$(OLDPACKAGE)-plugin-%.docs:
+	cp $(CURDIR)/plugins/$*/packaging/docs/plugin-$* $@
 
 debian/$(OLDPACKAGE)-%.docs:
 	cp $(CURDIR)/packaging/docs/oldpkgname-$* $@
