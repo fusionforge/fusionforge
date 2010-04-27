@@ -295,7 +295,6 @@ gforge/packaging/cron.d/homedirs -text
 gforge/packaging/cron.d/lists-mailman -text
 gforge/packaging/cron.d/mail -text
 gforge/packaging/cron.d/plugin-globalsearch -text
-gforge/packaging/cron.d/plugin-mediawiki -text
 gforge/packaging/cron.d/shell-postgresql -text
 gforge/packaging/cron.d/web-apache2 -text
 gforge/packaging/cron.d/web-apache2-vhosts -text
