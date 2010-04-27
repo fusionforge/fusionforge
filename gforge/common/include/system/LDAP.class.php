@@ -69,20 +69,20 @@ class LDAP extends UNIX {
 	 *
 	 */
 	function gfLdapConnect() {
-		global $sys_ldap_host,$sys_ldap_port;
-		global $sys_ldap_bind_dn,$sys_ldap_passwd,$ldap_conn,$sys_ldap_version;
+
+		global $sys_ldap_passwd,$ldap_conn;
 
 		if (!$ldap_conn) {
 			$this->clearError();
-			$ldap_conn = @ldap_connect($sys_ldap_host,$sys_ldap_port);
+			$ldap_conn = @ldap_connect(forge_get_config('ldap_host'),forge_get_config('ldap_port'));
 			if (!$ldap_conn) {
 				$this->setError('ERROR: Cannot connect to LDAP server<br />');
 				return false;
 			}
-			if ($sys_ldap_version) {
-				ldap_set_option($ldap_conn, LDAP_OPT_PROTOCOL_VERSION, $sys_ldap_version);
+			if (forge_get_config('ldap_version')) {
+				ldap_set_option($ldap_conn, LDAP_OPT_PROTOCOL_VERSION, forge_get_config('ldap_version'));
 			}
-			ldap_bind($ldap_conn,$sys_ldap_bind_dn,$sys_ldap_passwd);
+			ldap_bind($ldap_conn,forge_get_config('ldap_bind_dn'),$sys_ldap_passwd);
 		}
 		return true;
 	}
@@ -247,13 +247,13 @@ class LDAP extends UNIX {
 	 */
 	function gfLdapcheck_user_by_name($user_name) {
 		global $ldap_conn;
-		global $sys_ldap_base_dn;
+
 	
 		if (!$this->gfLdapConnect()) {
 			return false;
 		}
 	
-		$dn = 'uid='.$user_name.',ou=People,'.$sys_ldap_base_dn;
+		$dn = 'uid='.$user_name.',ou=People,'.forge_get_config('ldap_base_dn');
 		$res = $this->gfLdapRead($dn,"objectClass=*",array("uid"));
 		if ($res) {
 			ldap_free_result($res);
@@ -303,11 +303,11 @@ class LDAP extends UNIX {
 	 *
 	 */
 	function gfLdapcreate_user_from_object(&$user) {
-		global $sys_ldap_base_dn;
+
 		if (!$this->gfLdapConnect()) {
 			return false;
 		}
-		$dn = 'uid='.$user->getUnixName().',ou=People,'.$sys_ldap_base_dn;
+		$dn = 'uid='.$user->getUnixName().',ou=People,'.forge_get_config('ldap_base_dn');
 		$entry['objectClass'][0]='top';
 		$entry['objectClass'][1]='account';
 		$entry['objectClass'][2]='posixAccount';
@@ -346,11 +346,11 @@ class LDAP extends UNIX {
 	 */
 	function gfLdapCreateUserFromProps($username, $cn, $crypt_pw,
 						$shell, $cvsshell, $uid, $gid, $email) {
-		global $sys_ldap_base_dn;
+
 		if (!$this->gfLdapConnect()) {
 			return false;
 		}
-		$dn = 'uid='.$username.',ou=People,'.$sys_ldap_base_dn;
+		$dn = 'uid='.$username.',ou=People,'.forge_get_config('ldap_base_dn');
 		$entry['objectClass'][0]='top';
 		$entry['objectClass'][1]='account';
 		$entry['objectClass'][2]='posixAccount';
@@ -386,13 +386,13 @@ class LDAP extends UNIX {
 	 *
 	 */
 	function sysRemoveUser($user_id) {
-		global $sys_ldap_base_dn;
+
 	
 		$user = &user_get_object($user_id);
 		if (!$this->gfLdapConnect()) {
 			return false;
 		}
-		$dn = 'uid='.$user->getUnixName().',ou=People,'.$sys_ldap_base_dn;
+		$dn = 'uid='.$user->getUnixName().',ou=People,'.forge_get_config('ldap_base_dn');
 	
 		if (!$this->gfLdapDelete($dn)) {
 		    $this->setError("ERROR: cannot delete LDAP user entry '".
@@ -412,13 +412,13 @@ class LDAP extends UNIX {
 	 *
 	 */
 	function sysUserSetAttribute($user_id,$attr,$value) {
-		global $sys_ldap_base_dn;
+
 	
 		$user = &user_get_object($user_id);
 		if (!$this->gfLdapConnect()) {
 			return false;
 		}
-		$dn = 'uid='.$user->getUnixName().',ou=People,'.$sys_ldap_base_dn;
+		$dn = 'uid='.$user->getUnixName().',ou=People,'.forge_get_config('ldap_base_dn');
 		$entry[$attr]=$value;
 	
 		if (!$this->gfLdapModifyIfExists($dn, $entry)) {
@@ -442,7 +442,7 @@ class LDAP extends UNIX {
 	 */
 	function sysCheckGroup($group_id) {
 		global $ldap_conn;
-		global $sys_ldap_base_dn;
+
 	
 		$group = &group_get_object($group_id);
 		if (!$group) {
@@ -452,7 +452,7 @@ class LDAP extends UNIX {
 		if (!$this->gfLdapConnect()) {
 			return false;
 		}
-		$dn = 'cn='.$group->getUnixName().',ou=Group,'.$sys_ldap_base_dn;
+		$dn = 'cn='.$group->getUnixName().',ou=Group,'.forge_get_config('ldap_base_dn');
 		$res=$this->gfLdapRead($dn, "objectClass=*", array("cn"));
 		if ($res) {
 			ldap_free_result($res);
@@ -469,13 +469,13 @@ class LDAP extends UNIX {
 	 *
 	 */
 	function sysCreateGroup($group_id) {
-		global $sys_ldap_base_dn;
+
 	
 		$group = &group_get_object($group_id);
 		if (!$this->gfLdapConnect()) {
 			return false;
 		}
-		$dn = 'cn='.$group->getUnixName().',ou=Group,'.$sys_ldap_base_dn;
+		$dn = 'cn='.$group->getUnixName().',ou=Group,'.forge_get_config('ldap_base_dn');
 		$entry['objectClass'][0]='top';
 		$entry['objectClass'][1]='posixGroup';
 		$entry['cn']=$group->getUnixName();
@@ -500,7 +500,7 @@ class LDAP extends UNIX {
 		// Add virtual anoncvs user to CVS group
 		$cvs_member_list[$i_cvs++] = 'anoncvs_'.$group->getUnixName();
 	
-		$dn = 'cn='.$group->getUnixName().',ou=cvsGroup,'.$sys_ldap_base_dn;
+		$dn = 'cn='.$group->getUnixName().',ou=cvsGroup,'.forge_get_config('ldap_base_dn');
 	
 		if ($cvs_member_list) {
 			$entry['memberUid']=$cvs_member_list;
@@ -540,7 +540,7 @@ class LDAP extends UNIX {
 	 *
 	 */
 	function sysRemoveGroup($group_id) {
-		global $sys_ldap_base_dn;
+
 	
 		$group = &group_get_object($group_id);
 		if (!$this->gfLdapConnect()) {
@@ -552,7 +552,7 @@ class LDAP extends UNIX {
 		//
 		$ret_val=true;
 		
-		$dn = 'cn='.$group->getUnixName().',ou=Group,'.$sys_ldap_base_dn;
+		$dn = 'cn='.$group->getUnixName().',ou=Group,'.forge_get_config('ldap_base_dn');
 	
 		if (!$this->gfLdapDelete($dn)) {
 		    $this->setError("ERROR: cannot delete LDAP group entry '".
@@ -564,7 +564,7 @@ class LDAP extends UNIX {
 		//	Remove CVS LDAP group
 		//
 	
-		$dn = 'cn='.$group->getUnixName().',ou=cvsGroup,'.$sys_ldap_base_dn;
+		$dn = 'cn='.$group->getUnixName().',ou=cvsGroup,'.forge_get_config('ldap_base_dn');
 	
 		if (!$this->gfLdapDelete($dn)) {
 		    $this->setError("ERROR: cannot delete LDAP CVS group entry '".
@@ -576,7 +576,7 @@ class LDAP extends UNIX {
 		//	Remove AnonCVS virtual user
 		//
 	
-		$dn = 'uid=anoncvs_'.$group->getUnixName().',ou=People,'.$sys_ldap_base_dn;
+		$dn = 'uid=anoncvs_'.$group->getUnixName().',ou=People,'.forge_get_config('ldap_base_dn');
 		if (!$this->gfLdapDelete($dn)) {
 		    $this->setError("ERROR: cannot delete LDAP AnonCVS user entry '".
 				 $group->getUnixName()."': ".$this->gfLdapError()."<br />");
@@ -597,15 +597,15 @@ class LDAP extends UNIX {
 	 */
 	function sysGroupAddUser($group_id,$user_id,$cvs_only=0) {
 		global $ldap_conn;
-		global $sys_ldap_base_dn;
+
 	
 		$group = &group_get_object($group_id);
 		$user  = &user_get_object($user_id);
 		if (!$this->gfLdapConnect()) {
 			return false;
 		}
-		$dn = 'cn='.$group->getUnixName().',ou=Group,'.$sys_ldap_base_dn;
-		$cvs_dn = 'cn='.$group->getUnixName().',ou=cvsGroup,'.$sys_ldap_base_dn;
+		$dn = 'cn='.$group->getUnixName().',ou=Group,'.forge_get_config('ldap_base_dn');
+		$cvs_dn = 'cn='.$group->getUnixName().',ou=cvsGroup,'.forge_get_config('ldap_base_dn');
 		$entry['memberUid'] = $user->getUnixName();
 		
 		//
@@ -667,7 +667,7 @@ class LDAP extends UNIX {
 	 *
 	 */
 	function sysGroupRemoveUser($group_id,$user_id,$cvs_only=0) {
-		global $sys_ldap_base_dn;
+
 	
 		$group = &group_get_object($group_id);
 		$user  = &user_get_object($user_id);
@@ -675,8 +675,8 @@ class LDAP extends UNIX {
 			return false;
 		}
 	
-		$dn = 'cn='.$group->getUnixName().',ou=Group,'.$sys_ldap_base_dn;
-		$cvs_dn = 'cn='.$group->getUnixName().',ou=cvsGroup,'.$sys_ldap_base_dn;
+		$dn = 'cn='.$group->getUnixName().',ou=Group,'.forge_get_config('ldap_base_dn');
+		$cvs_dn = 'cn='.$group->getUnixName().',ou=cvsGroup,'.forge_get_config('ldap_base_dn');
 		$entry['memberUid'] = $user->getUnixName();
 	
 		$ret_val=true;

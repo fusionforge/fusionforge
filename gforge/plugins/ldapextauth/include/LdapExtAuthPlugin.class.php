@@ -37,8 +37,8 @@ class LdapextauthPlugin extends Plugin {
 		$this->ldap_conn = false ;
 		$this->base_dn = '';
 		$this->user_dn = '';
-		$this->ldap_server = $GLOBALS['sys_ldap_host'] ;
-		$this->ldap_port = $GLOBALS['sys_ldap_port'] ;
+		$this->ldap_server = forge_get_config('ldap_host') ;
+		$this->ldap_port = forge_get_config('ldap_port') ;
 		$this->ldap_altserver = '';
 		$this->ldap_altport = '';
 		$this->ldap_start_tls = false;
@@ -52,12 +52,6 @@ class LdapextauthPlugin extends Plugin {
 		if (isset($user_dn)) {
 			$this->user_dn = $user_dn ;
 		}
-		if (isset($ldap_server)) {
-			$this->ldap_server = $ldap_server ;
-		}
-		if (isset($ldap_port)) {
-			$this->ldap_port = $ldap_port ;
-		}
 		if (isset($ldap_altserver)) {
 			$this->ldap_altserver = $ldap_altserver ;
 		}
@@ -66,9 +60,6 @@ class LdapextauthPlugin extends Plugin {
 		}
 		if (isset($ldap_start_tls)) {
 			$this->ldap_start_tls = $ldap_start_tls ;
-		}
-		if (isset($ldap_bind_dn)) {
-			$this->ldap_bind_dn = $ldap_bind_dn;
 		}
 		if (isset($ldap_bind_pwd)) {
 			$this->ldap_bind_pwd = $ldap_bind_pwd;
@@ -322,9 +313,9 @@ class LdapextauthPlugin extends Plugin {
 		}
 		debuglog("LDAP: Ldap handle: ".$this->ldap_conn);
 
-		if ($GLOBALS['sys_ldap_version']) {
-			debuglog("LDAP: ldap_set_option ($this->ldap_conn, LDAP_OPT_PROTOCOL_VERSION, $GLOBALS[sys_ldap_version]);");
-			if (!ldap_set_option ($this->ldap_conn, LDAP_OPT_PROTOCOL_VERSION, $GLOBALS['sys_ldap_version'])) {
+		if (forge_get_config('ldap_version')) {
+			debuglog("LDAP: ldap_set_option ($this->ldap_conn, LDAP_OPT_PROTOCOL_VERSION, forge_get_config('ldap_version'));");
+			if (!ldap_set_option ($this->ldap_conn, LDAP_OPT_PROTOCOL_VERSION, forge_get_config('ldap_version'))) {
 				debuglog("LDAP: ldap_set_option() failed: ".ldap_error($this->ldap_conn));
 				return false;
 			}

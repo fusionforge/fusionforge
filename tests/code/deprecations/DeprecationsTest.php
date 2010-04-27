@@ -85,7 +85,13 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 			       'sys_use_jabber',
 			       'sys_jabber_user',
 			       'sys_jabber_server',
-			       'sys_jabber_port'
+			       'sys_jabber_port',
+			       'sys_ldap_host',
+			       'sys_ldap_port',
+			       'sys_ldap_version',
+			       'sys_ldap_base_dn',
+			       'sys_ldap_bind_dn',
+			       'sys_ldap_admin_dn',
 			) ;
 
 		$pattern = implode ('|', $vars) ;
