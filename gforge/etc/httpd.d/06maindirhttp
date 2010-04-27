@@ -42,10 +42,6 @@
 	    allow from all
         </Directory>
 
-	RedirectMatch 301 ^({sys_urlprefix}plugins/mediawiki/wiki/[-a-zA-Z0-9_]*)/*$ $1/index.php
-	AliasMatch ^{sys_urlprefix}plugins/mediawiki/wiki/[-a-zA-Z0-9_]*/index.php {usr_share_gforge}/www/plugins/mediawiki/index.php
-	AliasMatch ^{sys_urlprefix}plugins/mediawiki/wiki/([-a-zA-Z0-9_]*)/images/(.*) {var_lib_gforge}/plugins/mediawiki/projects/$1/images/$2
-
         Alias {sys_urlprefix}anonscm/ {var_lib_gforge}/chroot/scmrepos/
 
         <DirectoryMatch {var_lib_gforge}/chroot/scmrepos/[^/]*>
