@@ -156,14 +156,14 @@ function genchr(){
  *
  */
 function account_gensalt(){
-	global $unix_cipher;
+
 	// ncommander: modified for cipher selection
 	// crypt() selects the cipher based on
 	// the salt, so ...
 	
 	$a = genchr(); 
 	$b = genchr();
-	switch($unix_cipher) {
+	switch(forge_get_config('unix_cipher')) {
 		case 'DES':
 			$salt = "$a$b";
 			break;
@@ -193,8 +193,8 @@ function account_gensalt(){
 function account_genunixpw($plainpw) {
 	// ncommander: Support clear password hashing
 	// for usergroup_plain.php
-	global $unix_cipher;
-	if (strcasecmp($unix_cipher, 'Plain') == 0) {
+
+	if (strcasecmp(forge_get_config('unix_cipher'), 'Plain') == 0) {
 		return $plainpw;
 	} else {
 		return crypt($plainpw,account_gensalt());

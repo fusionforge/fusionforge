@@ -50,11 +50,12 @@ require_once $gfwww.'include/squal_exit.php';
 
 //system library
 require_once $gfcommon.'include/System.class.php';
-if (!$sys_account_manager_type) {
+if (!forge_get_config('account_manager_type')) {
         $sys_account_manager_type='UNIX';
 }
-require_once $gfcommon.'include/system/'.$sys_account_manager_type.'.class.php';
-$SYS=new $sys_account_manager_type();
+require_once $gfcommon.'include/system/'.forge_get_config('account_manager_type').'.class.php';
+$amt = forge_get_config('account_manager_type') ;
+$SYS=new $amt();
 
 
 // #### Connect to db
