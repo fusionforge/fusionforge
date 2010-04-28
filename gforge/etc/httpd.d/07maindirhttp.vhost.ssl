@@ -76,25 +76,6 @@
                 allow from all
         </Location>
         ##### COPY 20list end #####
-        Alias {sys_urlprefix}anonscm/ {var_lib_gforge}/chroot/scmrepos/
-	Alias {sys_urlprefix} {usr_share_gforge}/www/
-
-        <DirectoryMatch {var_lib_gforge}/chroot/scmrepos/[^/]*>
-            Options -Indexes
-        </DirectoryMatch>
-        <DirectoryMatch {var_lib_gforge}/chroot/scmrepos/[^/]*/.*>
-            Options +Indexes
-        </DirectoryMatch>
-
-	<Proxy http://127.0.0.1:8081/*>
-	    Allow from all
-	</Proxy>
-
-	<Location {sys_urlprefix}scm/loggerhead/>
-	    ProxyPass http://127.0.0.1:8081/
-	    ProxyPassReverse http://127.0.0.1:8081/
-	</Location>
-	##### COPY of 06maindirhttp end #####
 	##### COPY of 61plugin-mediawiki begin #####
 RedirectMatch 301 ^({sys_urlprefix}plugins/mediawiki/wiki/[-a-zA-Z0-9_]*)/*$ $1/index.php
 AliasMatch ^{sys_urlprefix}plugins/mediawiki/wiki/[-a-zA-Z0-9_]*/index.php {usr_share_gforge}/www/plugins/mediawiki/index.php
@@ -116,6 +97,25 @@ AliasMatch ^{sys_urlprefix}plugins/mediawiki/wiki/([-a-zA-Z0-9_]*)/images/(.*) {
         AllowOverride None
 </DirectoryMatch>
 	##### COPY of 61plugin-mediawiki end #####
+        Alias {sys_urlprefix}anonscm/ {var_lib_gforge}/chroot/scmrepos/
+	Alias {sys_urlprefix} {usr_share_gforge}/www/
+
+        <DirectoryMatch {var_lib_gforge}/chroot/scmrepos/[^/]*>
+            Options -Indexes
+        </DirectoryMatch>
+        <DirectoryMatch {var_lib_gforge}/chroot/scmrepos/[^/]*/.*>
+            Options +Indexes
+        </DirectoryMatch>
+
+	<Proxy http://127.0.0.1:8081/*>
+	    Allow from all
+	</Proxy>
+
+	<Location {sys_urlprefix}scm/loggerhead/>
+	    ProxyPass http://127.0.0.1:8081/
+	    ProxyPassReverse http://127.0.0.1:8081/
+	</Location>
+	##### COPY of 06maindirhttp end #####
 	<IfModule mod_ssl.c>
 		SSLEngine on
 		SSLCertificateFile {sys_sslcrt}
