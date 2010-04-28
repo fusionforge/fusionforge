@@ -1,7 +1,7 @@
 <?php
 
 require_once dirname(__FILE__).'/../www/env.inc.php';
-require_once $gfwww.'include/squal_pre.php';
+require_once $gfwww.'include/pre.php';
 require_once $gfcommon.'tracker/Artifact.class.php';
 require_once $gfcommon.'tracker/ArtifactFile.class.php';
 require_once $gfwww.'tracker/include/ArtifactFileHtml.class.php';

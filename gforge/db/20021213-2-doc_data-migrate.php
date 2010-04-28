@@ -8,7 +8,7 @@
  */
 
 require_once dirname(__FILE__).'/../www/env.inc.php';
-require $gfwww.'include/squal_pre.php';
+require_once $gfwww.'include/pre.php';
 
 @ini_set('memory_limit', '128M');
 

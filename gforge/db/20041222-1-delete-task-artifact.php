@@ -1,7 +1,7 @@
 #! /usr/bin/php5
 <?php
 require_once dirname(__FILE__).'/../www/env.inc.php';
-require_once $gfwww.'include/squal_pre.php';
+require_once $gfwww.'include/pre.php';
 require_once $gfcommon.'pm/ProjectTask.class.php';
 
 db_begin();

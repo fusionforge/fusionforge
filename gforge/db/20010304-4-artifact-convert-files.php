@@ -2,7 +2,7 @@
 <?php
 
 require_once (dirname(__FILE__)).'/../www/env.inc.php';
-require $gfwww.'include/squal_pre.php';
+require_once $gfwww.'include/pre.php';
 
 db_begin();
 			      

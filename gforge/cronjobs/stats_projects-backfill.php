@@ -20,7 +20,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
-require_once $gfwww.'include/squal_pre.php';
+require_once $gfwww.'include/pre.php';
 include_once('cronjobs/stats_projects.inc');
 
 $i=0;

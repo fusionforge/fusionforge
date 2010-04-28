@@ -23,7 +23,7 @@
  */
 
 require dirname(__FILE__).'/../www/env.inc.php';
-require_once $gfwww.'include/squal_pre.php';
+require_once $gfwww.'include/pre.php';
 require_once $gfcommon.'pm/ProjectTasksForUser.class.php';
 require_once $gfcommon.'include/cron_utils.php';
 

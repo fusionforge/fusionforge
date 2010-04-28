@@ -521,7 +521,7 @@ function session_set() {
 	plugin_hook('session_set_return');
 }
 
-//TODO - this should be generalized and used for pre.php, squal_pre.php, 
+//TODO - this should be generalized and used for pre.php, 
 //SOAP, forum_gateway.php, tracker_gateway.php, etc to 
 //setup languages
 function session_continue($sessionKey) {

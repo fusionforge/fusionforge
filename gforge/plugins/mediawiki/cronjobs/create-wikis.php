@@ -32,7 +32,7 @@
 #   var_path: the directory where mediawiki can store its data (i.e. LocalSettings.php and images/)
 
 include dirname(__FILE__) . '/../../env.inc.php';
-include $gfwww . 'include/squal_pre.php';
+require_once $gfwww.'include/pre.php';
 include $gfcommon.'include/cron_utils.php';
 include $gfplugins . 'mediawiki/common/config-vars.php';
 

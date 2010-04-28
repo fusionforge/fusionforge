@@ -7,7 +7,7 @@
  *
  */
 
-require_once $gfwww.'include/squal_pre.php';
+require_once $gfwww.'include/pre.php';
 require_once $gfcommon.'pm/ProjectGroup.class.php';
 require_once $gfcommon.'pm/import_utils.php';
 require_once $gfcommon.'pm/ProjectTask.class.php';

@@ -30,7 +30,7 @@
  * Thanks
  */
 
-require_once $gfwww.'include/squal_pre.php';
+require_once $gfwww.'include/pre.php';
 
 db_begin();
 

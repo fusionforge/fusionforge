@@ -2,7 +2,7 @@
 <?php
 
 require_once dirname(__FILE__).'/../www/env.inc.php';
-require_once $gfwww.'include/squal_pre.php';
+require_once $gfwww.'include/pre.php';
 
 /** 
 * Sets up CLI environment based on SAPI and PHP version 

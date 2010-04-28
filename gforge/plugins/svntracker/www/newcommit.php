@@ -17,7 +17,7 @@
  */
 
 require_once dirname(__FILE__)."/../../env.inc.php";
-require_once $gfwww.'include/squal_pre.php';
+require_once $gfwww.'include/pre.php';
 require_once $gfconfig.'plugins/svntracker/config.php';
 
 if ($svn_tracker_debug) {

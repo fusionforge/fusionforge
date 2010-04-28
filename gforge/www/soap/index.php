@@ -3,7 +3,7 @@
 $no_gz_buffer=true;
 // 0. Include GForge files for access to GForge system
 require_once '../env.inc.php';
-require_once $gfwww.'include/squal_pre.php';
+require_once $gfwww.'include/pre.php';
 require_once $gfcommon.'include/gettext.php';
 require_once $gfcommon.'include/FusionForge.class.php';
 
