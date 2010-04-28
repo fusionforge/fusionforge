@@ -113,7 +113,7 @@ target cleansvn buildsvn : override version=$(shell grep '^Version:' gforge/plug
 cleansvn:               # Clean files of gforge-plugin-scmcvs build           #
 	@cd $(RPM_TMP)/SOURCES/; rm -rf fusionforge-plugin-scmsvn-$(version).tar.bz2 fusionforge-plugin-scmsvn-$(version)
 	@echo cleansvn Done
-	
+
 buildsvn:               # Build rpm gforge-plugin-scmsvn package                  #
 	cd gforge/plugins/scmsvn; find . -type f | grep -v '/CVS/' | grep -v '/.svn/' | grep -v contrib | grep -v '/debian/' | cpio -pdumvB --quiet $(RPM_TMP)/SOURCES/fusionforge-plugin-scmsvn-$(version)
 	mkdir -p $(RPM_TMP)/SOURCES/fusionforge-plugin-scmsvn-$(version)/bin
@@ -181,10 +181,11 @@ buildlibnsspgsql:               # Build rpm fusionforge-shell-postgresql package
 #
 # HTMLPURIFIER (third party plugin)
 #
-htmlpurifier: rpmprep depot/htmlpurifier-4.1.0.tar.gz
-	cp depot/htmlpurifier-4.1.0.tar.gz $(RPM_TMP)/SOURCES/
+HTMLPURIFIER_VERSION=4.1.0
+htmlpurifier: rpmprep depot/htmlpurifier-$(HTMLPURIFIER_VERSION).tar.gz
+	cp depot/htmlpurifier-$(HTMLPURIFIER_VERSION).tar.gz $(RPM_TMP)/SOURCES/
 	rpmbuild --quiet --clean -ba 3rd-party/htmlpurifier/htmlpurifier.spec
 
-depot/htmlpurifier-4.0.0.tar.gz: rpmprep
+depot/htmlpurifier-$(HTMLPURIFIER_VERSION).tar.gz: rpmprep
 	mkdir -p depot
-	cd depot; wget -q -N http://htmlpurifier.org/releases/htmlpurifier-4.1.0.tar.gz
+	cd depot; wget -q -N http://htmlpurifier.org/releases/htmlpurifier-$(HTMLPURIFIER_VERSION).tar.gz
