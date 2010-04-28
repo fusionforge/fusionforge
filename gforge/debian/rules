@@ -18,19 +18,19 @@ default:
 include /usr/share/dpatch/dpatch.make
 
 CRONDFILES=$(patsubst packaging/cron.d/%,debian/$(OLDPACKAGE)-%.cron.d,$(wildcard packaging/cron.d/[a-z]*))
-PCRONDFILES=$(patsubst %,debian/$(OLDPACKAGE)-%.cron.d,$(word 5,$(subst /, ,$(wildcard plugins/*/packaging/cron.d/[a-z]*)))) 
+PCRONDFILES=$(patsubst %,debian/$(OLDPACKAGE)-%.cron.d,$(shell ls  plugins/*/packaging/cron.d/[a-z]* | sed 's:.*/\(.[^/]*\):\1:'))
 
 DIRSFILES=$(patsubst packaging/dirs/%,debian/$(OLDPACKAGE)-%.dirs,$(wildcard packaging/dirs/[a-z]*))
-PDIRSFILES=$(patsubst %,debian/$(OLDPACKAGE)-%.dirs,$(word 5,$(subst /, ,$(wildcard plugins/*/packaging/dirs/[a-z]*))))
+PDIRSFILES=$(patsubst %,debian/$(OLDPACKAGE)-%.dirs,$(shell ls  plugins/*/packaging/dirs/[a-z]* | sed 's:.*/\(.[^/]*\):\1:'))
 
 LINKSFILES=$(patsubst packaging/links/%,debian/$(OLDPACKAGE)-%.links,$(wildcard packaging/links/[a-z]*))
-PLINKSFILES=$(patsubst %,debian/$(OLDPACKAGE)-%.links,$(word 5,$(subst /, ,$(wildcard plugins/*/packaging/links/[a-z]*))))
+PLINKSFILES=$(patsubst %,debian/$(OLDPACKAGE)-%.links,$(shell ls  plugins/*/packaging/links/[a-z]* | sed 's:.*/\(.[^/]*\):\1:'))
 
 INSTALLFILES=$(patsubst packaging/install/%,debian/$(OLDPACKAGE)-%.install,$(wildcard packaging/install/[a-z]*))
-PINSTALLFILES=$(patsubst %,debian/$(OLDPACKAGE)-%.install,$(word 5,$(subst /, ,$(wildcard plugins/*/packaging/install/[a-z]*))))
+PINSTALLFILES=$(patsubst %,debian/$(OLDPACKAGE)-%.install,$(shell ls  plugins/*/packaging/install/[a-z]* | sed 's:.*/\(.[^/]*\):\1:'))
 
 DOCSFILES=$(patsubst packaging/docs/oldpkgname%,debian/$(OLDPACKAGE)%.docs,$(wildcard packaging/docs/oldpkgname*)) $(patsubst packaging/docs/pkgname%,debian/$(PACKAGE)%.docs,$(wildcard packaging/docs/pkgname*))
-PDOCSFILES=$(patsubst %,debian/$(OLDPACKAGE)-%.docs,$(word 5,$(subst /, ,$(wildcard plugins/*/packaging/docs/[a-z]*))))
+PDOCSFILES=$(patsubst %,debian/$(OLDPACKAGE)-%.docs,$(shell ls  plugins/*/packaging/docs/[a-z]* | sed 's:.*/\(.[^/]*\):\1:'))
 
 POFILES=$(patsubst debian/dsf-po/%,debian/po/%,$(wildcard debian/dsf-po/*) debian/po/POTFILES.in)
 
