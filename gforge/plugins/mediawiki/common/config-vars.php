@@ -24,7 +24,7 @@
 forge_define_config_item('src_path','mediawiki', "/usr/share/mediawiki");
 
 forge_define_config_item('var_path','mediawiki', "$sys_var_path/plugins/mediawiki");
-forge_define_config_item('master_path', 'mediawiki', "$sys_var_path/plugins/mediawiki/master");
+forge_define_config_item('master_path', 'mediawiki', "$sys_share_path/plugins/mediawiki/www");
 forge_define_config_item('projects_path', 'mediawiki', "$sys_var_path/plugins/mediawiki/projects");
 
 forge_define_config_item('enable_uploads', 'mediawiki', false);
