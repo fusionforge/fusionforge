@@ -242,34 +242,84 @@ Description: collaborative development tool - mailing-lists (using Mailman)
  .
  This package controls the interaction between FusionForge and Mailman.
 
-Package: gforge-plugin-scmcvs
+Package: gforge-plugin-contribtracker
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, libipc-run-perl, rcs, liburi-perl, cvs, php5-cli, python, libphp-snoopy, ${misc:Depends}
-Provides: gforge-plugin-scm
-Description: collaborative development tool - CVS plugin
+Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, ${misc:Depends}
+Description: Contribution tracker plugin for FusionForge
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, SCM repository, forums, support request helper,
  web/FTP hosting, release management, etc. All these services are
  integrated into one web site and managed through a web interface.
  .
- This plugin contains the CVS subsystem of FusionForge. It allows each
- FusionForge project to have its own CVS repository, and gives some control
- over it to the project's administrator.
+ This plugin allows each project to display a list of significant
+ contributions, along with their authors.
 
-Package: gforge-plugin-scmsvn
+Package: gforge-plugin-extratabs
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, subversion, subversion-tools, viewvc | viewcvs, python-subversion, python (>= 2.3), php5-cli, ${misc:Depends}
-Provides: gforge-plugin-scm
-Description: collaborative development tool - Subversion plugin
+Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, ${misc:Depends}
+Description: Extratabs plugin for FusionForge
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, SCM repository, forums, support request helper,
  web/FTP hosting, release management, etc. All these services are
  integrated into one web site and managed through a web interface.
  .
- This plugin contains the Subversion subsystem of FusionForge. It allows
- each FusionForge project to have its own Subversion repository, and gives
+ This plugin allows each project to define extra tabs with arbitrary
+ titles and links.
+
+Package: gforge-plugin-globalsearch
+Architecture: all
+Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, libxml-rss-perl, libgetopt-mixed-perl, libdbi-perl, libwww-perl, libcrypt-ssleay-perl, libunicode-string-perl, ${misc:Depends}
+Description: Globalsearch plugin for FusionForge
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin contains a cross-FusionForge search engine.  You can
+ declare a list of other FusionForge sites, and search for projects
+ hosted on these forges from your own.
+
+Package: gforge-plugin-mediawiki
+Architecture: all
+Depends: gforge-common (>= 4.8), gforge-db-postgresql (>= 4.8) | gforge-db, gforge-web-apache2 (>= 4.8) | gforge-web, mediawiki (>= 1:1.15~), php5-cli, ${misc:Depends}
+Description: Mediawiki plugin for FusionForge
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin allows each project to embed Mediawiki under a tab.
+
+Package: gforge-plugin-projectlabels
+Architecture: all
+Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, ${misc:Depends}
+Description: Projectlabels plugin for FusionForge
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This can be used to highlight some projects on a forge, for instance
+ for a "project of the month".
+
+Package: gforge-plugin-scmarch
+Architecture: all
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, php5-cli, tla, ${misc:Depends}
+Provides: gforge-plugin-scm
+Description: collaborative development tool - GNU Arch plugin
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin contains the GNU Arch subsystem of FusionForge. It allows
+ each FusionForge project to have its own Arch repository, and gives
  some control over it to the project's administrator.
 
 Package: gforge-plugin-scmbzr
@@ -285,6 +335,36 @@ Description: collaborative development tool - Bazaar plugin
  .
  This plugin contains the Bazaar subsystem of FusionForge. It allows each
  FusionForge project to have its own Bazaar repository, and gives some control
+ over it to the project's administrator.
+
+Package: gforge-plugin-scmcvs
+Architecture: all
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, libipc-run-perl, rcs, liburi-perl, cvs, php5-cli, python, libphp-snoopy, ${misc:Depends}
+Provides: gforge-plugin-scm
+Description: collaborative development tool - CVS plugin
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin contains the CVS subsystem of FusionForge. It allows each
+ FusionForge project to have its own CVS repository, and gives some control
+ over it to the project's administrator.
+
+Package: gforge-plugin-scmdarcs
+Architecture: all
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, darcs, darcsweb, php5-cli, ${misc:Depends}
+Provides: gforge-plugin-scm
+Description: collaborative development tool - Darcs plugin
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin contains the Darcs subsystem of FusionForge. It allows each
+ FusionForge project to have its own Darcs repository, and gives some control
  over it to the project's administrator.
 
 Package: gforge-plugin-scmgit
@@ -317,98 +397,18 @@ Description: collaborative development tool - Mercurial (Hg) plugin
  allows each FusionForge project to have its own Mercurial repository,
  and gives some control over it to the project's administrator.
 
-Package: gforge-plugin-scmdarcs
+Package: gforge-plugin-scmsvn
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, darcs, darcsweb, php5-cli, ${misc:Depends}
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, subversion, subversion-tools, viewvc | viewcvs, python-subversion, python (>= 2.3), php5-cli, ${misc:Depends}
 Provides: gforge-plugin-scm
-Description: collaborative development tool - Darcs plugin
+Description: collaborative development tool - Subversion plugin
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, SCM repository, forums, support request helper,
  web/FTP hosting, release management, etc. All these services are
  integrated into one web site and managed through a web interface.
  .
- This plugin contains the Darcs subsystem of FusionForge. It allows each
- FusionForge project to have its own Darcs repository, and gives some control
- over it to the project's administrator.
-
-Package: gforge-plugin-scmarch
-Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, php5-cli, tla, ${misc:Depends}
-Provides: gforge-plugin-scm
-Description: collaborative development tool - GNU Arch plugin
- FusionForge provides many tools to aid collaboration in a
- development project, such as bug-tracking, task management,
- mailing-lists, SCM repository, forums, support request helper,
- web/FTP hosting, release management, etc. All these services are
- integrated into one web site and managed through a web interface.
- .
- This plugin contains the GNU Arch subsystem of FusionForge. It allows
- each FusionForge project to have its own Arch repository, and gives
+ This plugin contains the Subversion subsystem of FusionForge. It allows
+ each FusionForge project to have its own Subversion repository, and gives
  some control over it to the project's administrator.
-
-Package: gforge-plugin-extratabs
-Architecture: all
-Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, ${misc:Depends}
-Description: Extratabs plugin for FusionForge
- FusionForge provides many tools to aid collaboration in a
- development project, such as bug-tracking, task management,
- mailing-lists, SCM repository, forums, support request helper,
- web/FTP hosting, release management, etc. All these services are
- integrated into one web site and managed through a web interface.
- .
- This plugin allows each project to define extra tabs with arbitrary
- titles and links.
-
-Package: gforge-plugin-globalsearch
-Architecture: all
-Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, libxml-rss-perl, libgetopt-mixed-perl, libdbi-perl, libwww-perl, libcrypt-ssleay-perl, libunicode-string-perl, ${misc:Depends}
-Description: Globalsearch plugin for FusionForge
- FusionForge provides many tools to aid collaboration in a
- development project, such as bug-tracking, task management,
- mailing-lists, SCM repository, forums, support request helper,
- web/FTP hosting, release management, etc. All these services are
- integrated into one web site and managed through a web interface.
- .
- This plugin contains a cross-FusionForge search engine.  You can
- declare a list of other FusionForge sites, and search for projects
- hosted on these forges from your own.
-
-Package: gforge-plugin-projectlabels
-Architecture: all
-Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, ${misc:Depends}
-Description: Projectlabels plugin for FusionForge
- FusionForge provides many tools to aid collaboration in a
- development project, such as bug-tracking, task management,
- mailing-lists, SCM repository, forums, support request helper,
- web/FTP hosting, release management, etc. All these services are
- integrated into one web site and managed through a web interface.
- .
- This can be used to highlight some projects on a forge, for instance
- for a "project of the month".
-
-Package: gforge-plugin-contribtracker
-Architecture: all
-Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, ${misc:Depends}
-Description: Contribution tracker plugin for FusionForge
- FusionForge provides many tools to aid collaboration in a
- development project, such as bug-tracking, task management,
- mailing-lists, SCM repository, forums, support request helper,
- web/FTP hosting, release management, etc. All these services are
- integrated into one web site and managed through a web interface.
- .
- This plugin allows each project to display a list of significant
- contributions, along with their authors.
-
-Package: gforge-plugin-mediawiki
-Architecture: all
-Depends: gforge-common (>= 4.8), gforge-db-postgresql (>= 4.8) | gforge-db, gforge-web-apache2 (>= 4.8) | gforge-web, mediawiki (>= 1:1.15~), php5-cli, ${misc:Depends}
-Description: Mediawiki plugin for FusionForge
- FusionForge provides many tools to aid collaboration in a
- development project, such as bug-tracking, task management,
- mailing-lists, SCM repository, forums, support request helper,
- web/FTP hosting, release management, etc. All these services are
- integrated into one web site and managed through a web interface.
- .
- This plugin allows each project to embed Mediawiki under a tab.
 
