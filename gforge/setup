@@ -21,7 +21,7 @@ computedefault(){
 	DEFAULTdb_name=gforge
 	DEFAULTdb_user=gforge
 	DEFAULTdb_password=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
-	DEFAULTip_address=`hostname -i`
+	DEFAULTip_address=`hostname -i | cut -d' ' -f1`
 	DEFAULTscm_host=scm.$DEFAULTdomain_name
 	DEFAULTshell_host=shell.$DEFAULTdomain_name
 	DEFAULTusers_host=users.$DEFAULTdomain_name
