@@ -138,17 +138,18 @@ function forge_read_config_dir ($path) {
 	
 	$files = array () ;
 	
-	if ($handle = opendir($path)) {
-		while (false !== ($file = readdir($handle))) {
-			if ($file != "." 
-			    && $file != ".."
-			    // Avoid .bak, .old, .dpkg-old and so on
-			    && preg_match ('/^[0-9a-zA-Z_-]+$/', $file)) {
-				$files[] = "$path/$file" ;
+	if (is_dir($path)){
+		if ($handle = opendir($path)) {
+			while (false !== ($file = readdir($handle))) {
+				if ($file != "." 
+			    	&& $file != ".."
+			    	// Avoid .bak, .old, .dpkg-old and so on
+			    	&& preg_match ('/^[0-9a-zA-Z_-]+$/', $file)) {
+					$files[] = "$path/$file" ;
+				}
 			}
+			closedir($handle);
 		}
-		
-		closedir($handle);
 	}
 
 	natsort ($files) ;
