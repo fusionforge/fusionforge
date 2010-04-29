@@ -1,6 +1,32 @@
---- FusionForge.php.renamed	2010-02-24 21:22:57.000000000 +0100
-+++ FusionForge.php	2010-02-24 21:24:19.000000000 +0100
-@@ -80,6 +80,10 @@
+--- FusionForge.php.renamed	2010-04-29 23:18:01.000000000 +0200
++++ FusionForge.php	2010-04-29 23:05:54.000000000 +0200
+@@ -34,18 +34,19 @@
+ 		parent::setupSkinUserCss( $out );
+ 
+ 		// Append to the default screen common & print styles...
+-		$out->addStyle( 'fusionforge/main.css', 'screen' );
++		$out->addStyle( 'monobook/main.css', 'screen' );
++		$out->addStyle( 'fusionforge/fusionforge.css', 'screen' );
+ 		if( $wgHandheldStyle ) {
+ 			// Currently in testing... try 'chick/main.css'
+ 			$out->addStyle( $wgHandheldStyle, 'handheld' );
+ 		}
+ 
+-		$out->addStyle( 'fusionforge/IE50Fixes.css', 'screen', 'lt IE 5.5000' );
+-		$out->addStyle( 'fusionforge/IE55Fixes.css', 'screen', 'IE 5.5000' );
+-		$out->addStyle( 'fusionforge/IE60Fixes.css', 'screen', 'IE 6' );
+-		$out->addStyle( 'fusionforge/IE70Fixes.css', 'screen', 'IE 7' );
++		$out->addStyle( 'monobook/IE50Fixes.css', 'screen', 'lt IE 5.5000' );
++		$out->addStyle( 'monobook/IE55Fixes.css', 'screen', 'IE 5.5000' );
++		$out->addStyle( 'monobook/IE60Fixes.css', 'screen', 'IE 6' );
++		$out->addStyle( 'monobook/IE70Fixes.css', 'screen', 'IE 7' );
+ 
+-		$out->addStyle( 'fusionforge/rtl.css', 'screen', '', 'rtl' );
++		$out->addStyle( 'monobook/rtl.css', 'screen', '', 'rtl' );
+ 	}
+ }
+ 
+@@ -80,6 +81,10 @@
  		<meta http-equiv="Content-Type" content="<?php $this->text('mimetype') ?>; charset=<?php $this->text('charset') ?>" />
  		<?php $this->html('headlinks') ?>
  		<title><?php $this->text('pagetitle') ?></title>
@@ -11,7 +37,7 @@
  		<?php $this->html('csslinks') ?>
  
  		<!--[if lt IE 7]><script type="<?php $this->text('jsmimetype') ?>" src="<?php $this->text('stylepath') ?>/common/IEFixes.js?<?php echo $GLOBALS['wgStyleVersion'] ?>"></script>
-@@ -107,9 +111,22 @@
+@@ -107,9 +112,22 @@
  <?php	}
  		if($this->data['trackbackhtml']) print $this->data['trackbackhtml']; ?>
  	</head>
@@ -35,7 +61,7 @@
  	<div id="globalWrapper">
  		<div id="column-content">
  	<div id="content">
-@@ -242,7 +259,13 @@
+@@ -242,7 +260,13 @@
  
  -->
  <?php endif; ?>

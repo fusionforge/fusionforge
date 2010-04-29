@@ -1,6 +1,7 @@
 MWSKINPATH=/usr/share/mediawiki/skins
 
-all: FusionForge.php fusionforge/main.css
+all: FusionForge.php
+allold: FusionForge.php fusionforge/main.css
 
 FusionForge.php: FusionForge.php.renamed
 	@echo 'Building $@'
@@ -23,11 +24,14 @@ fusionforge/main.css.renamed: $(MWSKINPATH)
 $(MWSKINPATH):
 	echo 'You must install mediawiki to get reference files'
 
-clean:
-	rm -f FusionForge.php fusionforge/main.css \
-		FusionForge.php.renamed fusionforge/main.css.renamed \
-		FusionForge.php.patch2 fusionforge/main.css.patch2 
+cleanphp:
+	rm -f FusionForge.php.renamed FusionForge.php.patch2
 
-patch: fusionforge/main.css.renamed FusionForge.php.renamed
-	-diff -uN fusionforge/main.css.renamed fusionforge/main.css > fusionforge/main.css.patch2
+cleancss:
+	rm -f fusionforge/main.css.renamed fusionforge/main.css.patch2
+
+patchphp: FusionForge.php.renamed
 	-diff -uN FusionForge.php.renamed FusionForge.php > FusionForge.php.patch2
+
+patchcss: fusionforge/main.css.renamed
+	-diff -uN fusionforge/main.css.renamed fusionforge/main.css > fusionforge/main.css.patch2
