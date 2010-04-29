@@ -4082,6 +4082,75 @@ plugins/coclico/forumml/www/themes/default/images/ic/resultset_previous_disabled
 plugins/coclico/forumml/www/themes/default/images/ic/spinner-greenie.gif -text svneol=unset#unset
 plugins/coclico/forumml/www/themes/default/images/ic/trash.png -text svneol=unset#unset
 plugins/coclico/forumml/www/upload.php -text
+plugins/coclico/hudson/common/hudson-init.php -text
+plugins/coclico/hudson/db/hudson-init.sql -text
+plugins/coclico/hudson/db/install.sql -text
+plugins/coclico/hudson/db/uninstall.sql -text
+plugins/coclico/hudson/include/HudsonBuild.class.php -text
+plugins/coclico/hudson/include/HudsonJob.class.php -text
+plugins/coclico/hudson/include/HudsonJobURLFileException.class.php -text
+plugins/coclico/hudson/include/HudsonJobURLFileNotFoundException.class.php -text
+plugins/coclico/hudson/include/HudsonJobURLMalformedException.class.php -text
+plugins/coclico/hudson/include/HudsonJobWidget.class.php -text
+plugins/coclico/hudson/include/HudsonOverviewWidget.class.php -text
+plugins/coclico/hudson/include/HudsonTestResult.class.php -text
+plugins/coclico/hudson/include/HudsonWidget.class.php -text
+plugins/coclico/hudson/include/PluginHudsonJobDao.class.php -text
+plugins/coclico/hudson/include/hudson.class.php -text
+plugins/coclico/hudson/include/hudsonActions.class.php -text
+plugins/coclico/hudson/include/hudsonPlugin.class.php -text
+plugins/coclico/hudson/include/hudsonPluginDescriptor.class.php -text
+plugins/coclico/hudson/include/hudsonPluginInfo.class.php -text
+plugins/coclico/hudson/include/hudsonViews.class.php -text
+plugins/coclico/hudson/include/hudson_Widget_JobBuildHistory.class.php -text
+plugins/coclico/hudson/include/hudson_Widget_JobLastArtifacts.class.php -text
+plugins/coclico/hudson/include/hudson_Widget_JobLastBuilds.class.php -text
+plugins/coclico/hudson/include/hudson_Widget_JobTestResults.class.php -text
+plugins/coclico/hudson/include/hudson_Widget_JobTestTrend.class.php -text
+plugins/coclico/hudson/include/hudson_Widget_MyMonitoredJobs.class.php -text
+plugins/coclico/hudson/include/hudson_Widget_ProjectJobsOverview.class.php -text
+plugins/coclico/hudson/site-content/en_US/hudson.tab -text
+plugins/coclico/hudson/site-content/en_US/hudson.tab.back -text
+plugins/coclico/hudson/site-content/fr_FR/hudson.tab -text
+plugins/coclico/hudson/tests/AllTests.php -text
+plugins/coclico/hudson/tests/HudsonBuildTest.php -text
+plugins/coclico/hudson/tests/HudsonJobTest.php -text
+plugins/coclico/hudson/tests/HudsonTestResultTest.php -text
+plugins/coclico/hudson/tests/resources/jobbuild.xml -text
+plugins/coclico/hudson/tests/resources/testReport.xml -text
+plugins/coclico/hudson/www/hudson_tab.js -text
+plugins/coclico/hudson/www/index.php -text
+plugins/coclico/hudson/www/test_result_pie_chart.php -text
+plugins/coclico/hudson/www/themes/default/css/style.css -text
+plugins/coclico/hudson/www/themes/default/images/ic/cross.png -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/ic/edit.png -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/ic/health_00_to_19.gif -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/ic/health_20_to_39.gif -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/ic/health_40_to_59.gif -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/ic/health_60_to_79.gif -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/ic/health_80_plus.gif -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/ic/link_error.png -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/ic/rss_feed.png -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/ic/server_lightning.png -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/ic/status_blue.png -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/ic/status_grey.png -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/ic/status_red.png -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/ic/status_unknown.png -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/ic/status_yellow.png -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/widget_preview/en_US_hudson_widget_builds_history.png -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/widget_preview/en_US_hudson_widget_jobs_overview.png -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/widget_preview/en_US_hudson_widget_last_artifacts.png -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/widget_preview/en_US_hudson_widget_last_builds.png -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/widget_preview/en_US_hudson_widget_my_jobs.png -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/widget_preview/en_US_hudson_widget_test_results.png -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/widget_preview/en_US_hudson_widget_test_trend.png -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_builds_history.png -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_jobs_overview.png -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_last_artifacts.png -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_last_builds.png -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_my_jobs.png -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_test_results.png -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_test_trend.png -text svneol=unset#unset
 plugins/coclico/mailman/README.txt -text
 plugins/coclico/mailman/bin/db-delete.pl -text
 plugins/coclico/mailman/bin/db-upgrade.pl -text
