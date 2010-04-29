@@ -5,4 +5,5 @@
 	$sys_dbuser="www";
 	$sys_dbpasswd="";
 	$sys_ldap_passwd="";
+	$sys_dbport=5432;
 ?>

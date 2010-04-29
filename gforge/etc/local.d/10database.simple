@@ -6,7 +6,7 @@ $sys_dbhost='{db_host}';
 $sys_dbname='{db_name}';
 $sys_dbuser='{db_user}';
 // You can also specify a database port if you're using something other than 5432
-//$sys_dbport='4242';
+$sys_dbport='5432';
 $sys_server='pgsql';
 
 //
