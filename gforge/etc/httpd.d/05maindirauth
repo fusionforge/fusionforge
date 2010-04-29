@@ -4,7 +4,7 @@
   AllowOverride All
   order allow,deny
   allow from all
-  php_admin_value include_path "{sys_custom_path}:/etc/gforge:{usr_share_gforge}:{usr_share_gforge}/www/include:{usr_share_gforge}/plugins:/usr/share/php:."
+  php_admin_value include_path "{sys_custom_path}:/etc/gforge:{usr_share_gforge}:{usr_share_gforge}/www:{usr_share_gforge}/www/include:{usr_share_gforge}/plugins:/usr/share/php:."
   php_admin_value default_charset "UTF-8"
   # php_flag register_globals "Off"
   ###

@@ -88,7 +88,7 @@ AliasMatch ^{sys_urlprefix}plugins/mediawiki/wiki/([-a-zA-Z0-9_]*)/images/(.*) {
         allow from all
         # Allow mediawiki to connect to gforge
         Include {gforge_etc}/httpd.secrets
-        php_admin_value include_path "{sys_custom_path}:/etc/gforge:{usr_share_gforge}:{usr_share_gforge}/www/include:{usr_share_gforge}/plugins:/usr/share/php:."
+        php_admin_value include_path "{sys_custom_path}:/etc/gforge:{usr_share_gforge}:{usr_share_gforge}/www:{usr_share_gforge}/www/include:{usr_share_gforge}/plugins:/usr/share/php:."
 </Directory>
 
 # some directories must be protected
