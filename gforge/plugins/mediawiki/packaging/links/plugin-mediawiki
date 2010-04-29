@@ -11,3 +11,5 @@ usr/share/mediawiki/redirect.php		usr/share/gforge/plugins/mediawiki/www/redirec
 usr/share/mediawiki/StartProfiler.php		usr/share/gforge/plugins/mediawiki/www/StartProfiler.php
 usr/share/mediawiki/thumb.php			usr/share/gforge/plugins/mediawiki/www/thumb.php
 usr/share/mediawiki/trackback.php		usr/share/gforge/plugins/mediawiki/www/trackback.php
+
+usr/share/mediawiki/skins			usr/share/gforge/plugins/mediawiki/www/skins
