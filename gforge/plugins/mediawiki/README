@@ -41,7 +41,7 @@ src_path = < Mediawiki source path >
   has to be run by a user that can write to the FusionForge var
   directory.
 
-5. Adapt and add the contents of the file etc/httpd.d/03mediawiki to
+5. Adapt and add the contents of the file etc/httpd.d/61plugin-mediawiki to
    your apache configuration. To do that, the script "setup" might be
    helpful. Furthermore, adapt and add the following lines to the
    apache configuration:
@@ -49,6 +49,7 @@ src_path = < Mediawiki source path >
 RedirectMatch 301 ^({sys_urlprefix}plugins/mediawiki/wiki/[-a-zA-Z0-9_]*)/*$ $1/index.php
         AliasMatch ^{sys_urlprefix}plugins/mediawiki/wiki/[-a-zA-Z0-9_]*/index.php {usr_share_gforge}/www/plugins/mediawiki/index.php
         AliasMatch ^{sys_urlprefix}plugins/mediawiki/wiki/([-a-zA-Z0-9_]*)/images/(.*) {var_lib_gforge}/plugins/mediawiki/projects/$1/images/$2
+	AliasMatch ^{sys_urlprefix}plugins/mediawiki/wiki/([-a-zA-Z0-9_]*)/skins/(.*) /usr/share/gforge/www/plugins/mediawiki/skins/$2
 
 6. Add the cronjob in etc/cron.d/mediawiki to the FusionForge
    crontab. To do that, the script "setup" might be helpful.
