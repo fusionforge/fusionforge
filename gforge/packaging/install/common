@@ -11,6 +11,7 @@ deb-specific/install-ssh.sh            usr/share/gforge/bin/
 utils/fill-in-the-blanks.pl            usr/share/gforge/bin/
 deb-specific/gforge-config             usr/sbin/
 utils/include.pl                       usr/share/gforge/lib/
+utils/forge_get_config                 usr/share/gforge/bin/
 #
 deb-specific/user_dump_update.pl       usr/share/gforge/bin/
 deb-specific/group_dump_update.pl      usr/share/gforge/bin/
