@@ -48,6 +48,21 @@ require $gfcommon.'include/config.php';
 require $gfcommon.'include/config-vars.php';
 
 forge_read_config_file ($gfconfig.'/config.ini') ;
+forge_read_config_dir ($gfconfig.'/config.ini.d/') ;
+if (($ecf = forge_get_config ('extra_config_files')) != NULL) {
+	$ecfa = explode (',', $ecf) ;
+	foreach ($ecfa as $cf) {
+		$cf = trim ($cf) ;
+		forge_read_config_file ($cf) ;
+	}
+}
+if (($ecd = forge_get_config ('extra_config_dirs')) != NULL) {
+	$ecda = explode (',', $ecd) ;
+	foreach ($ecda as $cd) {
+		$cd = trim ($cd) ;
+		forge_read_config_file ($cd) ;
+	}
+}
 
 // Get constants used for flags or status
 require $gfcommon.'include/constants.php';
