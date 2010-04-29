@@ -4082,10 +4082,28 @@ plugins/coclico/forumml/www/themes/default/images/ic/resultset_previous_disabled
 plugins/coclico/forumml/www/themes/default/images/ic/spinner-greenie.gif -text svneol=unset#unset
 plugins/coclico/forumml/www/themes/default/images/ic/trash.png -text svneol=unset#unset
 plugins/coclico/forumml/www/upload.php -text
+plugins/coclico/hudson/bin/db-delete.pl -text
+plugins/coclico/hudson/bin/db-upgrade.pl -text
+plugins/coclico/hudson/bin/sayhello -text
 plugins/coclico/hudson/common/hudson-init.php -text
+plugins/coclico/hudson/cronjobs/manage_hudson.php -text
 plugins/coclico/hudson/db/hudson-init.sql -text
 plugins/coclico/hudson/db/install.sql -text
 plugins/coclico/hudson/db/uninstall.sql -text
+plugins/coclico/hudson/debian/README.Debian -text
+plugins/coclico/hudson/debian/README.source -text
+plugins/coclico/hudson/debian/changelog -text
+plugins/coclico/hudson/debian/compat -text
+plugins/coclico/hudson/debian/control -text
+plugins/coclico/hudson/debian/copyright -text
+plugins/coclico/hudson/debian/docs -text
+plugins/coclico/hudson/debian/dsf-in/plugin-hudson.postinst -text
+plugins/coclico/hudson/debian/dsf-in/plugin-hudson.prerm -text
+plugins/coclico/hudson/debian/po/templates.pot -text
+plugins/coclico/hudson/debian/rules -text
+plugins/coclico/hudson/debian/source/format -text
+plugins/coclico/hudson/etc/httpd.d/62plugin-hudson -text
+plugins/coclico/hudson/etc/plugins/hudson/config.php -text
 plugins/coclico/hudson/include/HudsonBuild.class.php -text
 plugins/coclico/hudson/include/HudsonJob.class.php -text
 plugins/coclico/hudson/include/HudsonJobURLFileException.class.php -text
@@ -4109,6 +4127,13 @@ plugins/coclico/hudson/include/hudson_Widget_JobTestResults.class.php -text
 plugins/coclico/hudson/include/hudson_Widget_JobTestTrend.class.php -text
 plugins/coclico/hudson/include/hudson_Widget_MyMonitoredJobs.class.php -text
 plugins/coclico/hudson/include/hudson_Widget_ProjectJobsOverview.class.php -text
+plugins/coclico/hudson/packaging/control/000source -text
+plugins/coclico/hudson/packaging/control/222plugin-hudson -text
+plugins/coclico/hudson/packaging/control/222plugin-hudson.shortdesc -text
+plugins/coclico/hudson/packaging/dirs/plugin-hudson -text
+plugins/coclico/hudson/packaging/docs/plugin-hudson -text
+plugins/coclico/hudson/packaging/install/plugin-hudson -text
+plugins/coclico/hudson/packaging/links/plugin-hudson -text
 plugins/coclico/hudson/site-content/en_US/hudson.tab -text
 plugins/coclico/hudson/site-content/en_US/hudson.tab.back -text
 plugins/coclico/hudson/site-content/fr_FR/hudson.tab -text
@@ -4118,6 +4143,10 @@ plugins/coclico/hudson/tests/HudsonJobTest.php -text
 plugins/coclico/hudson/tests/HudsonTestResultTest.php -text
 plugins/coclico/hudson/tests/resources/jobbuild.xml -text
 plugins/coclico/hudson/tests/resources/testReport.xml -text
+plugins/coclico/hudson/translations/en.po -text
+plugins/coclico/hudson/translations/gforge.pot -text
+plugins/coclico/hudson/utils/manage-translations.sh -text
+plugins/coclico/hudson/www/admin/index.php -text
 plugins/coclico/hudson/www/hudson_tab.js -text
 plugins/coclico/hudson/www/index.php -text
 plugins/coclico/hudson/www/test_result_pie_chart.php -text

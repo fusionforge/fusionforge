@@ -5,6 +5,7 @@ DIST=$(DISTDEBIAN)$(DISTREDHAT)$(DISTSUSE)
 
 PKGDIR1=mailman
 PKGDIR2=forumml
+PKGDIR3=hudson
 PKGDIR=mailman
 
 MINOR=$(shell head -1 $(PKGDIR)/debian/changelog | sed 's/.*(.*-\([^-]*\)).*/\1/')
@@ -13,7 +14,7 @@ PARAM=PKGDIR=$(PKGDIR) svnrev=$(MINOR)
 
 def:
 	@echo "#==============================================#"
-	@echo "Use make PKGDIR=<$(PKGDIR1)|$(PKGDIR2)> <target>"	
+	@echo "Use make PKGDIR=<$(PKGDIR1)|$(PKGDIR2)|$(PKGDIR3)> <target>"	
 	@#make -f Makefile.$(DIST) $(PARAM) default
 	@echo "target=default displays all params"
 	@echo "other available targets are: "

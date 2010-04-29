@@ -1,0 +1,8 @@
+common/*                  usr/share/gforge/plugins/hudson/common/
+include/*                 usr/share/gforge/plugins/hudson/include/
+db/*                      usr/share/gforge/plugins/hudson/db/
+bin/*                     usr/share/gforge/plugins/hudson/bin/
+www/*                     usr/share/gforge/plugins/hudson/www/
+cronjobs/*                usr/share/gforge/cronjobs
+etc/plugins/hudson/*     etc/gforge/plugins/hudson/
+etc/httpd.d/*             usr/share/gforge/etc/httpd.d/
