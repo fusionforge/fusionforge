@@ -1,10 +1,12 @@
 #globalWrapper { position: relative; }
 /* disable the logo */
+/*
 #p-logo { display: none; }
 #column-one { padding-top: 0px; }
+*/
 /* use the font inherited from FF */
-body { font: inherit; };
-td.mainCanvas { font: x-small sans-serif; }
+body {font-size:85%;font-family:"verdana"; color: rgb(68, 68, 68); background-color: rgb(247, 247, 247); text-align: left; };
+td.mainCanvas { font-size:85%;font-family:"verdana"; }
 
 table { background-color: transparent; }
 
