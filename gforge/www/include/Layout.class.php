@@ -317,6 +317,7 @@ class Layout extends Error {
 		plugin_hook ("javascript",false);
 		echo '
 		</script>';
+		plugin_hook ("javascript_file",false);
 	}
                
         function bodyHeader($params){

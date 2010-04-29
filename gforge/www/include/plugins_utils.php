@@ -23,19 +23,26 @@ function htmlRedirect($url) {
         session_redirect($url);
 }
 function htmlIframe($url,$poub) {
-        echo ('<iframe src= "'.$url.'" width=100% height=500px></iframe>');
+        if (isset($poub['id'])) {
+                $id=$poub['id'];
+        }
+        else {
+                $id='';
+        }
+        echo ('<iframe src= "'.$url.'" id="'.$id.'" width=100% height=500px></iframe>');
 }
-
-
+    
 function helpButton($help) {
-        
+
 }
 function getIcon($url,$w=16,$h=16,$args=array()) {
-        echo html_image($url,$w,$h,$args);
-}
+        echo html_image($url,$w,$h,$args); 
+}   
 function getImage($img) {
         echo util_make_url($html->imgroot.$img);
 
 }
+function get_server_url() {
+        return util_make_url();
+}
 ?>
-

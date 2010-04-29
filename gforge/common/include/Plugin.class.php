@@ -74,6 +74,18 @@ class Plugin extends Error {
 		else
 			return 'plugins/'.$this->name ;
 	}
+	/**
+	 * Added for Codendi compatibility
+	 * getPluginPath() - get installation dir for the plugin
+	 *
+	 * @return the directory where the plugin should be linked.
+	 */
+	function getPluginPath () {
+		if (isset($this->installdir) && $this->installdir)
+			return $this->installdir;
+		else
+			return 'plugins/'.$this->name ;
+	}
 
 	/**
 	 * CallHook() - call a particular hook

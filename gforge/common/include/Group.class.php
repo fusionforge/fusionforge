@@ -1223,6 +1223,22 @@ class Group extends Error {
 		}
 		return false ;
 	}
+	/**
+	 *  added for Codendi compatibility
+	 *  usesServices - returns true if the group uses a particular plugin 
+	 *
+	 *  @param	string	name of the plugin
+	 *  @return	boolean	whether plugin is being used or not
+	 */
+	function usesService($pluginname) {
+		$plugins_data = $this->getPlugins() ;
+		foreach ($plugins_data as $p_id => $p_name) {
+			if ($p_name == $pluginname) {
+				return true ;
+			}
+		}
+		return false ;
+	}
 
 	/**
 	 *  setPluginUse - enables/disables plugins for the group

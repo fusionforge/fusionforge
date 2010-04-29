@@ -93,6 +93,9 @@ gforge/common/include/rbac_texts.php -text
 gforge/common/include/tag_cloud.php -text
 gforge/common/include/utils_crossref.php -text
 gforge/common/mail/Mail.class.php -text
+gforge/common/mvc/Actions.class.php -text
+gforge/common/mvc/Controler.class.php -text
+gforge/common/mvc/Views.class.php -text
 gforge/common/reporting/ReportDownloads.class.php -text
 gforge/common/system_event/SystemEvent.class.php -text
 gforge/common/system_event/SystemEventManager.class.php -text
