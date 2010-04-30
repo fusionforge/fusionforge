@@ -4084,7 +4084,6 @@ plugins/coclico/forumml/www/themes/default/images/ic/trash.png -text svneol=unse
 plugins/coclico/forumml/www/upload.php -text
 plugins/coclico/hudson/bin/db-delete.pl -text
 plugins/coclico/hudson/bin/db-upgrade.pl -text
-plugins/coclico/hudson/bin/sayhello -text
 plugins/coclico/hudson/common/hudson-init.php -text
 plugins/coclico/hudson/cronjobs/manage_hudson.php -text
 plugins/coclico/hudson/db/hudson-init.sql -text
