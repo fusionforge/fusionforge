@@ -36,7 +36,6 @@ class hudsonActions extends Actions {
 	// {{{ Actions
     function addJob() {
    global $feedback; 
-echo "coucou";
         $request =& HTTPRequest::instance();
         $group_id = $request->get('group_id');
         $job_url = $request->get('hudson_job_url');
@@ -58,7 +57,6 @@ echo "coucou";
         } catch (Exception $e) {
             $feedback .= $e->getMessage();
         }
-echo $feedback;
     }
     function updateJob() {
         $request =& HTTPRequest::instance();

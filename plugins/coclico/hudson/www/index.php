@@ -20,6 +20,7 @@
 require_once('env.inc.php');
 require_once('pre.php');
 require_once('preplugins.php');
+require_once('plugins_utils.php');
 
 $plugin_manager =& PluginManager::instance();
 $p =& $plugin_manager->getPluginByName('hudson');

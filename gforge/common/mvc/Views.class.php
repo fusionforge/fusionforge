@@ -38,6 +38,7 @@ class Views {
   function View(&$controler, $view = null, $params = array()) {
       $this->_controler =& $controler;
       $this->view=$view;
+      $this->html_params = $params;
   }
   
     function getControler() {
