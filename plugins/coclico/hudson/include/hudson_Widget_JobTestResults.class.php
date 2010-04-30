@@ -47,7 +47,7 @@ class hudson_Widget_JobTestResults extends HudsonJobWidget {
     function getTitle() {
         $title = '';
         if ($this->job && $this->test_result) {
-            $title .= TODOBETTERvsprintf(_("$1 Test Results ($2 / $3)"),  array($this->job->getName(), $this->test_result->getPassCount(), $this->test_result->getTotalCount()));
+            $title .= TODOBETTERvsprintf(_("%s Test Results (%s / %s)"),  array($this->job->getName(), $this->test_result->getPassCount(), $this->test_result->getTotalCount()));
         } elseif ($this->job && ! $this->test_result) {
             $title .= vsprintf(_("%s Test Results"),  array($this->job->getName()));
         } else {

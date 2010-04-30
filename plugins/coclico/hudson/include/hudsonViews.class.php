@@ -314,12 +314,12 @@ class hudsonViews extends Views {
 					// function toggle_iframe is in script plugins/hudson/www/hudson_tab.js
 					echo '  <td class="boxitem"><a href="'.$job->getUrl().'" onclick="toggle_iframe(this); return false;" title="'.vsprintf(_("Show job %s"),  array($row['name'])).'">'.$row['name'].'</a></td>';
 					if ($job->getLastSuccessfulBuildNumber() != '') {
-						echo '  <td><a href="'.$job->getLastSuccessfulBuildUrl().'" onclick="toggle_iframe(this); return false;" title="'.sprintf(_("Show build #$1 of job $2"),  array($job->getLastSuccessfulBuildNumber(), $row['name'])).'">'._("build").' #'.$job->getLastSuccessfulBuildNumber().'</a></td>';
+						echo '  <td><a href="'.$job->getLastSuccessfulBuildUrl().'" onclick="toggle_iframe(this); return false;" title="'.sprintf(_("Show build #%s of job %s"),  array($job->getLastSuccessfulBuildNumber(), $row['name'])).'">'._("build").' #'.$job->getLastSuccessfulBuildNumber().'</a></td>';
 					} else {
 						echo '  <td>&nbsp;</td>';
 					}
 					if ($job->getLastFailedBuildNumber() != '') {
-						echo '  <td><a href="'.$job->getLastFailedBuildUrl().'" onclick="toggle_iframe(this); return false;" title="'.sprintf(_("Show build #$1 of job $2"),  array($job->getLastFailedBuildNumber(), $row['name'])).'">'._("build").' #'.$job->getLastFailedBuildNumber().'</a></td>';
+						echo '  <td><a href="'.$job->getLastFailedBuildUrl().'" onclick="toggle_iframe(this); return false;" title="'.sprintf(_("Show build #%s of job %s"),  array($job->getLastFailedBuildNumber(), $row['name'])).'">'._("build").' #'.$job->getLastFailedBuildNumber().'</a></td>';
 					} else {
 						echo '  <td>&nbsp;</td>';
 					}
@@ -358,7 +358,7 @@ class hudsonViews extends Views {
 					// delete job
 					echo '   <span class="job_action">';
 					echo '    <a href="?action=delete_job&group_id='.$group_id.'&job_id='.$row['job_id'].'" onclick="return confirm(';
-					echo "'" . sprintf(_("Are you sure you want to delete Job $1 from project $2?"),  array($row['name'], $project->getUnixName())) . "'";
+					echo "'" . sprintf(_("Are you sure you want to delete Job %s from project %s?"),  array($row['name'], $project->getUnixName())) . "'";
 					echo ');"><img src="'.$this->getControler()->getIconsPath().'cross.png" alt="'._("Delete this job").' title="'._("Delete this job").'">';
 					echo '</a>';
 					echo '   </span>';

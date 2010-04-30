@@ -46,7 +46,7 @@ class hudson_Widget_JobBuildHistory extends HudsonJobWidget {
         if ($this->job) {
             $title .= vsprintf(_("%s Builds History"),  array($this->job->getName()));
         } else {
-            $title .= _("$1 Builds History");
+            $title .= _("%s Builds History");
         }
         return  $title;
     }

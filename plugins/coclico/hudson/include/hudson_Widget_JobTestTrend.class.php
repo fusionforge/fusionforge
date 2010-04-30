@@ -48,7 +48,7 @@ class hudson_Widget_JobTestTrend extends HudsonJobWidget {
         if ($this->job) {
             $title .= vsprintf(_("%s Test Result Trend"),  array($this->job->getName()));
         } else {
-             $title .= _("$1 Test Result Trend");
+             $title .= _("%s Test Result Trend");
         }
         return  $title;
     }

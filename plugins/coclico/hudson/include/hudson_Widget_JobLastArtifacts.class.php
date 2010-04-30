@@ -49,7 +49,7 @@ class hudson_Widget_JobLastArtifacts extends HudsonJobWidget {
         if ($this->job) {
             $title .= vsprintf(_("%s Last Artifacts"),  array($this->job->getName()));
         } else {
-             $title .= _("$1 Last Artifacts");
+             $title .= _("%s Last Artifacts");
         }
         return  $title;
     }

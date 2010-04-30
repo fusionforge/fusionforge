@@ -46,7 +46,7 @@ class hudson_Widget_JobLastBuilds extends HudsonJobWidget {
         if ($this->job) {
             $title .= vsprintf(_("%s Last Builds"),  array($this->job->getName()));
         } else {
-            $title .= _("$1 Last Builds");
+            $title .= _("%s Last Builds");
         }
         return  $title;
     }
