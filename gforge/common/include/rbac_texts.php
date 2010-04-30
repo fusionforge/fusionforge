@@ -27,6 +27,7 @@
  */
 
 require_once $gfcommon.'include/PluginManager.class.php';
+require_once $gfcommon.'include/utils.php';
 
 function setup_rbac_strings () {
 	global $rbac_permission_names, $rbac_edit_section_names ;
