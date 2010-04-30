@@ -12,8 +12,8 @@ class Theme extends Layout {
                 $this->Layout();
                 $this->doctype = 'strict';
 		$this->cssurls = array(
-			'http://yui.yahooapis.com/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css',
-			'http://yui.yahooapis.com/2.6.0/build/base/base-min.css',
+			util_make_url ('/scripts/yui/reset-fonts-grids/reset-fonts-grids.css'),
+			util_make_url ('/scripts/yui/base/base-min.css'),
 			util_make_url ('/themes/css/fusionforge.css'),
 			$this->cssbaseurl .'theme.css',
 			$this->cssbaseurl .'theme-pages.css',
