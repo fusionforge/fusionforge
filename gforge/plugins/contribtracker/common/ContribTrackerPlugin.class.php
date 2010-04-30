@@ -49,7 +49,7 @@ class ContribTrackerPlugin extends Plugin {
 				return;
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
-				$params['TITLES'][] = _('Contribution tracker') ;
+				$params['TITLES'][] = '<nobr>'._('Contribution tracker').'</nobr>' ;
 				$params['DIRS'][]='/plugins/'.$this->name.'/?group_id=' . $group_id ;
 			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
