@@ -3739,8 +3739,8 @@ msgid ""
 "<p>Documentation for GNU Arch (sometimes referred to as \"tla\") is "
 "available <a href=\"http://www.gnu.org/software/gnu-arch/\">here</a>.</p>"
 msgstr ""
-"<p>Hai dispoñíbel documentación de Subversion (ás veces chámaselle \"SVN\") "
-"<a href=\"http://svnbook.red-bean.com/\">aquí</a>.</p>"
+"<p>Hai dispoñíbel documentación de Subversion (ás veces chámaselle \"SVN\") <a "
+"href=\"http://svnbook.red-bean.com/\">aquí</a>.</p>"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:75
 #: plugins/scmcvs/common/CVSPlugin.class.php:71
@@ -3758,8 +3758,8 @@ msgid ""
 "<a href=\"http://bazaar-vcs.org/Documentation\">here</a>.</p>"
 msgstr ""
 "<p>Hai dispoñíbel documentación de Bazaar (ás veces chámaselle \"bzr\") <a "
-"href=\"http://doc.bazaar-vcs.org/latest/en/user-guide/index.html\">aquí</a>."
-"</p>"
+"href=\"http://doc.bazaar-vcs.org/latest/en/user-"
+"guide/index.html\">aquí</a>.</p>"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:84
 #, fuzzy
@@ -3930,8 +3930,8 @@ msgid ""
 "<p>CVS documentation is available <a href=\"http://cvsbook.red-bean.com/"
 "\">here</a>.</p>"
 msgstr ""
-"<p>Hai dispoñíbel documentación de Subversion (ás veces chámaselle \"SVN\") "
-"<a href=\"http://svnbook.red-bean.com/\">aquí</a>.</p>"
+"<p>Hai dispoñíbel documentación de Subversion (ás veces chámaselle \"SVN\") <a "
+"href=\"http://svnbook.red-bean.com/\">aquí</a>.</p>"
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:81
 msgid ""
@@ -4029,8 +4029,8 @@ msgid ""
 "<p>Documentation for Darcs is available <a href=\"http://darcs.net/\">here</"
 "a>.</p>"
 msgstr ""
-"<p>Hai dispoñíbel documentación de Subversion (ás veces chámaselle \"SVN\") "
-"<a href=\"http://svnbook.red-bean.com/\">aquí</a>.</p>"
+"<p>Hai dispoñíbel documentación de Subversion (ás veces chámaselle \"SVN\") <a "
+"href=\"http://svnbook.red-bean.com/\">aquí</a>.</p>"
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:77
 #, fuzzy
@@ -4083,8 +4083,8 @@ msgid ""
 "<p>Documentation for Git is available <a href=\"http://git-scm.com/\">here</"
 "a>.</p>"
 msgstr ""
-"<p>Hai dispoñíbel documentación de Subversion (ás veces chámaselle \"SVN\") "
-"<a href=\"http://svnbook.red-bean.com/\">aquí</a>.</p>"
+"<p>Hai dispoñíbel documentación de Subversion (ás veces chámaselle \"SVN\") <a "
+"href=\"http://svnbook.red-bean.com/\">aquí</a>.</p>"
 
 #: plugins/scmgit/common/GitPlugin.class.php:78
 #, fuzzy
@@ -8399,8 +8399,8 @@ msgstr "Clasificación por actividade: %d"
 #, fuzzy, php-format
 msgid "View project <a href=\"%1$s\" >Statistics</a>"
 msgstr ""
-"Ver as <a href=\"%1$s\">estatísticas</a> do proxecto ou a <a href=\"%2$s"
-"\">súa actividade</a>"
+"Ver as <a href=\"%1$s\">estatísticas</a> do proxecto ou a <a href=\"%2$s\">súa "
+"actividade</a>"
 
 #: www/include/project_home.php:99
 #, fuzzy, php-format
@@ -8705,18 +8705,18 @@ msgstr ""
 "<p>A caixa de valoración entre pares mostra todas as medias de puntuación (e "
 "niveis de resposta) para cada criterio individual. Debido ao procesamento "
 "que sería necesario, estas cifras inclúen respostas de usuarios tanto "
-"\"fiábeis\" como \"non fiábeis\".</p><ul><li>A \"clasificación global\" "
-"mostra a clasificación do usuario comparada coa de todos os usuarios "
-"puntuados de %1$s.</li><li>A \"puntuación agregada\" mostra unha puntuación "
-"media ponderada baseada só en respostas fiábeis.</li><li>O campo de "
-"\"importancia persoal\" mostra o peso que terán as puntuacións de outros "
-"desenvolvedores (entre 1 e 1,5) -- as respostas dos usuarios ben puntuados "
-"teñen máis peso.</li></ul><p><i>Se non quere formar parte do sistema de "
-"clasificación entre iguais (isto impediríalle puntuar e ser puntuado), vaia "
-"á <a href=\"%2$s\">súa páxina de mantemento de conta</a>. Se escolle non "
-"participar, eliminaranse permanentemente as súas puntuacións a outros "
-"usuarios, e a caixa de clasificación enre iguais desaparecerá da súa páxina "
-"de usuario.</i></p>"
+"\"fiábeis\" como \"non fiábeis\".</p><ul><li>A \"clasificación global\" mostra a "
+"clasificación do usuario comparada coa de todos os usuarios puntuados de %"
+"1$s.</li><li>A \"puntuación agregada\" mostra unha puntuación media ponderada "
+"baseada só en respostas fiábeis.</li><li>O campo de \"importancia persoal\" "
+"mostra o peso que terán as puntuacións de outros desenvolvedores (entre 1 e "
+"1,5) -- as respostas dos usuarios ben puntuados teñen máis "
+"peso.</li></ul><p><i>Se non quere formar parte do sistema de clasificación "
+"entre iguais (isto impediríalle puntuar e ser puntuado), vaia á <a href=\"%"
+"2$s\">súa páxina de mantemento de conta</a>. Se escolle non participar, "
+"eliminaranse permanentemente as súas puntuacións a outros usuarios, e a "
+"caixa de clasificación enre iguais desaparecerá da súa páxina de "
+"usuario.</i></p>"
 
 #: www/include/user_home.php:184
 #, php-format
@@ -11930,8 +11930,8 @@ msgid ""
 "Choose the <strong>First Letter</strong> of the name of the person you wish "
 "to report on."
 msgstr ""
-"Escolla a <strong>inicial</strong> do nome da persoa da que quere informar."
-"<p>"
+"Escolla a <strong>inicial</strong> do nome da persoa da que quere "
+"informar.<p>"
 
 #: www/scm/admin/index.php:91
 msgid ""
@@ -14040,8 +14040,7 @@ msgstr "Actualizar configuración"
 #: www/tracker/admin/tracker.php:15
 #, fuzzy
 msgid "Set up preferences like expiration times, email addresses."
-msgstr ""
-"Configurar preferencias como tempos de expiración, correos electrónicos"
+msgstr "Configurar preferencias como tempos de expiración, correos electrónicos"
 
 #: www/tracker/admin/tracker.php:19
 #: www/tracker/include/ArtifactTypeHtml.class.php:100

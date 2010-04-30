@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2009-10-06 16:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: pl\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 1.2.1\n"
@@ -3515,8 +3515,8 @@ msgid ""
 "<p>Documentation for GNU Arch (sometimes referred to as \"tla\") is "
 "available <a href=\"http://www.gnu.org/software/gnu-arch/\">here</a>.</p>"
 msgstr ""
-"<p>Dokumentacja Subversion (czasem określanego jako \"SVN\") dostępna jest "
-"<a href=\"http://svnbook.red-bean.com/\">tutaj</a>.</p>"
+"<p>Dokumentacja Subversion (czasem określanego jako \"SVN\") dostępna jest <a "
+"href=\"http://svnbook.red-bean.com/\">tutaj</a>.</p>"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:75
 #: plugins/scmcvs/common/CVSPlugin.class.php:71
@@ -3534,8 +3534,8 @@ msgid ""
 "<a href=\"http://bazaar-vcs.org/Documentation\">here</a>.</p>"
 msgstr ""
 "<p>Dokumentacja Bazaar (czasem określanego jako \"bzr\") dostępna jest <a "
-"href=\"http://doc.bazaar-vcs.org/latest/en/user-guide/index.html\">tutaj</a>."
-"</p>"
+"href=\"http://doc.bazaar-vcs.org/latest/en/user-"
+"guide/index.html\">tutaj</a>.</p>"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:84
 #, fuzzy
@@ -3703,8 +3703,8 @@ msgid ""
 "<p>CVS documentation is available <a href=\"http://cvsbook.red-bean.com/"
 "\">here</a>.</p>"
 msgstr ""
-"<p>Dokumentacja Subversion (czasem określanego jako \"SVN\") dostępna jest "
-"<a href=\"http://svnbook.red-bean.com/\">tutaj</a>.</p>"
+"<p>Dokumentacja Subversion (czasem określanego jako \"SVN\") dostępna jest <a "
+"href=\"http://svnbook.red-bean.com/\">tutaj</a>.</p>"
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:81
 msgid ""
@@ -3796,8 +3796,8 @@ msgid ""
 "<p>Documentation for Darcs is available <a href=\"http://darcs.net/\">here</"
 "a>.</p>"
 msgstr ""
-"<p>Dokumentacja Subversion (czasem określanego jako \"SVN\") dostępna jest "
-"<a href=\"http://svnbook.red-bean.com/\">tutaj</a>.</p>"
+"<p>Dokumentacja Subversion (czasem określanego jako \"SVN\") dostępna jest <a "
+"href=\"http://svnbook.red-bean.com/\">tutaj</a>.</p>"
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:77
 #, fuzzy
@@ -3849,8 +3849,8 @@ msgid ""
 "<p>Documentation for Git is available <a href=\"http://git-scm.com/\">here</"
 "a>.</p>"
 msgstr ""
-"<p>Dokumentacja Subversion (czasem określanego jako \"SVN\") dostępna jest "
-"<a href=\"http://svnbook.red-bean.com/\">tutaj</a>.</p>"
+"<p>Dokumentacja Subversion (czasem określanego jako \"SVN\") dostępna jest <a "
+"href=\"http://svnbook.red-bean.com/\">tutaj</a>.</p>"
 
 #: plugins/scmgit/common/GitPlugin.class.php:78
 #, fuzzy

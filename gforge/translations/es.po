@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-03-01 22:22+0100\n"
-"PO-Revision-Date: 2009-07-01 23:15+0200\n"
-"Last-Translator: Mariano Guerra <luismarianoguerra@gmail.com>\n"
+"PO-Revision-Date: 2010-04-07 01:27+0200\n"
+"Last-Translator: Luis Cañas Díaz <lcanas@libresoft.es>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 1.2.1\n"
 
@@ -26,7 +26,7 @@ msgstr "El Título dete tener al menos 5 caracteres"
 #: common/docman/Document.class.php:116 common/docman/Document.class.php:451
 #: common/pm/ProjectGroup.class.php:136 common/pm/ProjectGroup.class.php:350
 msgid "Document Description Must Be At Least 10 Characters"
-msgstr "La descripción del documento debe de tener al menos diez caracteres"
+msgstr "La descripción del documento debe tener al menos diez caracteres"
 
 #: common/docman/Document.class.php:196
 msgid "Document:: Invalid docid"
@@ -47,13 +47,12 @@ msgstr "Grupo de documento: identificador del padre de DocumentGroup invalido"
 
 #: common/docman/DocumentGroup.class.php:125
 #: common/docman/DocumentGroup.class.php:279
-#, fuzzy
 msgid "Group name already exists"
-msgstr "Este nombre Unix está ocupado"
+msgstr "El nombre del grupo ya existe"
 
 #: common/docman/DocumentGroup.class.php:200
 msgid "DocumentGroup: Invalid DocumentGroup ID"
-msgstr "Grupo de documento: ID del grupo de documento inválida"
+msgstr "Grupo de documento: ID del grupo de documento inválido"
 
 #: common/forum/Forum.class.php:69 common/mail/MailingList.class.php:63
 #: common/mail/MailingListFactory.class.php:56
@@ -81,16 +80,15 @@ msgstr "La descripción del foro tiene que tener al menos 10 carácteres."
 
 #: common/forum/Forum.class.php:129 common/forum/Forum.class.php:601
 msgid "Illegal Characters in Forum Name"
-msgstr "Nombre de Foro contiene carácteres ilegales."
+msgstr "El nombre del foro contiene carácteres ilegales."
 
 #: common/forum/Forum.class.php:147
-#, fuzzy
 msgid "Mailing List Exists with same name"
-msgstr "Nombre de la Lista de Correo:"
+msgstr "Existe una lista de correo con el mismo nombre"
 
 #: common/forum/Forum.class.php:181
 msgid "Error Adding Forum"
-msgstr "Fue un error creando el foro."
+msgstr "Hubo un error creando el foro."
 
 #: common/forum/Forum.class.php:206 www/account/first.php:29
 #: www/help/index.php:29
@@ -110,7 +108,7 @@ msgstr "Solo puede monitorizar si está autenticado."
 
 #: common/forum/Forum.class.php:495
 msgid "Unable To Add Monitor"
-msgstr "Error - no puede monitorizar."
+msgstr "No es posible monitorizar."
 
 #: common/forum/Forum.class.php:544
 msgid "You Can Only Save Your Place If You Are Logged In"
@@ -141,7 +139,7 @@ msgstr "Foro"
 #: common/forum/ForumFactory.class.php:233
 #: common/forum/ForumFactory.class.php:268
 msgid "Forum not found"
-msgstr "Foro no existe."
+msgstr "El foro no existe."
 
 #: common/forum/ForumFactory.class.php:214
 #: common/forum/ForumFactory.class.php:242
@@ -337,9 +335,10 @@ msgid "Invalid Email Address"
 msgstr "Dirección de correo electrónico inválida"
 
 #: common/include/Error.class.php:163
-#, fuzzy, php-format
+#, php-format
+#, fuzzy
 msgid "Error On Update: %s"
-msgstr "Error en la Actualización"
+msgstr "Error en la Actualización: %s"
 
 #: common/include/Error.class.php:204 www/frs/admin/editrelease.php:219
 msgid "Missing Parameters"
@@ -348,7 +347,7 @@ msgstr "Faltan parámetros"
 #: common/include/Group.class.php:233
 #, fuzzy
 msgid "Group Not Found"
-msgstr "Fichero no encontrado"
+msgstr "Grupo no encontrado"
 
 #: common/include/Group.class.php:249 www/survey/admin/add_question.php:35
 #: www/survey/admin/add_survey.php:36 www/survey/admin/edit_question.php:37
@@ -400,16 +399,17 @@ msgstr "Describa su proyecto de modo más comprensible."
 msgid ""
 "Your project description is too long. Please make it smaller than 256 bytes."
 msgstr ""
+"La descripción de proyecto es muy larga. Por favor hazla menor de 256 bytes."
 
 #: common/include/Group.class.php:353
 #, php-format
 msgid "ERROR: Could not create group: %s"
-msgstr ""
+msgstr "ERROR: No se pudo crear el grupo: %s"
 
 #: common/include/Group.class.php:360
 #, php-format
 msgid "ERROR: Could not get group id: %s"
-msgstr ""
+msgstr "ERROR: No se pudo obtener el grupo de id: %s"
 
 #: common/include/Group.class.php:379
 #, php-format
@@ -418,7 +418,7 @@ msgstr ""
 
 #: common/include/Group.class.php:422 common/include/Group.class.php:494
 msgid "Could not get permission."
-msgstr "No puedo obtener permiso"
+msgstr "No se pudo obtener permiso"
 
 #: common/include/Group.class.php:445
 #, php-format
@@ -439,27 +439,27 @@ msgid ""
 msgstr ""
 
 #: common/include/Group.class.php:614
-#, fuzzy, php-format
+#, php-format
+#, fuzzy
 msgid "Error updating project information: %s"
-msgstr "Información sobre el Mapa de Proyectos"
+msgstr "Error actualizando información de proyecto: %s"
 
 #: common/include/Group.class.php:706
-#, fuzzy
 msgid "Invalid Status Change"
-msgstr "Usuario no válido"
+msgstr "Cambio de estado inválido"
 
 #: common/include/Group.class.php:717
 #, php-format
 msgid "ERROR: DB: Could not change group status: %s"
-msgstr ""
+msgstr "ERROR: DB: No se pudo cambiar el estado del grupo: %s"
 
 #: common/include/Group.class.php:885
 msgid "Couldn't insert SCM_BOX to database"
-msgstr ""
+msgstr "No se pudo insertar SCM_BOX en la base de datos"
 
 #: common/include/Group.class.php:889
 msgid "SCM Box can't be empty"
-msgstr ""
+msgstr "SCM Box no puede estar vacío"
 
 #: common/include/Group.class.php:1318
 msgid ""
@@ -550,24 +550,22 @@ msgid "ERROR: DB: project_assigned_to %d: %s"
 msgstr ""
 
 #: common/include/Group.class.php:1911 www/project/admin/roleedit.php:64
-#, fuzzy
 msgid "Could Not Get Role"
-msgstr "No se pudo completar la operación"
+msgstr "No se pudo obtener el rol"
 
 #: common/include/Group.class.php:1914 common/include/Group.class.php:1919
-#, fuzzy, php-format
+#, php-format
 msgid "Role: %s"
-msgstr "Rol"
+msgstr "Rol: %s"
 
 #: common/include/Group.class.php:1973
-#, fuzzy
 msgid "Error getting member object"
-msgstr "Error creando el objeto grupo"
+msgstr "Error obteniendo el objeto member"
 
 #: common/include/Group.class.php:1976
-#, fuzzy, php-format
+#, php-format
 msgid "Error getting member object: %s"
-msgstr "Error creando el objeto grupo"
+msgstr "Error obteniendo el objeto miembro: %s"
 
 #: common/include/Group.class.php:2015
 msgid "Group already active"
@@ -898,7 +896,7 @@ msgstr "Admin"
 #: www/export/rss_project.php:100
 #: www/themes/gforge-simple-theme/Theme.class.php:498
 msgid "Activity"
-msgstr ""
+msgstr "Actividad"
 
 #: common/include/Group.class.php:2592
 #: common/include/group_section_texts.php:30
@@ -972,7 +970,7 @@ msgstr "Ficheros"
 
 #: common/include/GroupJoinRequest.class.php:111
 msgid "You are already a member of this project."
-msgstr ""
+msgstr "Ya eres miembro de este proyecto"
 
 #: common/include/GroupJoinRequest.class.php:120
 msgid ""
@@ -985,7 +983,7 @@ msgstr ""
 #: common/include/GroupJoinRequest.class.php:265
 #, php-format
 msgid "Request to Join Project %1$s"
-msgstr ""
+msgstr "Petición para unirse al proyecto: %1 $s"
 
 #: common/include/GroupJoinRequest.class.php:227
 #, php-format
@@ -1046,7 +1044,7 @@ msgstr "No activa todavía"
 #: plugins/scmsvn/common/SVNPlugin.class.php:144
 #, fuzzy
 msgid "Repository Statistics"
-msgstr "Usar Estadísticas"
+msgstr "Estadísticas del repositorio"
 
 #: common/include/SCMPlugin.class.php:158
 msgid "<p>Not implemented for this SCM plugin yet.</p>"
@@ -3155,8 +3153,7 @@ msgstr "Página Principal del Sitio"
 #: plugins/globalsearch/www/index.php:84
 #, fuzzy
 msgid "Search must be at least three characters"
-msgstr ""
-"Debe proporcionar una contraseña válida (por lo menos seis carácteres)."
+msgstr "Debe proporcionar una contraseña válida (por lo menos seis carácteres)."
 
 #: plugins/globalsearch/www/index.php:90
 msgid "Enter Your Search Words Above"
@@ -4388,9 +4385,9 @@ msgstr ""
 "se hace con una tarea programada, por lo que no ocurrirá inmediatamente. Por "
 "favor, espera una hora.</p><p>Para generar una clave pública, ejecute el "
 "programa 'ssh-keygen' (puede usar tanto el protocolo 1 como el 2). La clave "
-"pública será colocada en '~/.ssh/identity.pub' (protocolo 1) and '~/.ssh/"
-"id_dsa.pub' o '~/.ssh/id_rsa.pub' (protocolo 2). Lea la documentación de ssh "
-"para más información en el uso de claves.</p>"
+"pública será colocada en '~/.ssh/identity.pub' (protocolo 1) and "
+"'~/.ssh/id_dsa.pub' o '~/.ssh/id_rsa.pub' (protocolo 2). Lea la "
+"documentación de ssh para más información en el uso de claves.</p>"
 
 #: www/account/editsshkeys.php:81
 msgid ""
@@ -6394,8 +6391,7 @@ msgstr "Título del Documento"
 #: www/docman/new.php:134 www/docman/new.php:141
 #, fuzzy, php-format
 msgid "(at least %1$s characters)"
-msgstr ""
-"Debe proporcionar una contraseña válida (por lo menos seis carácteres)."
+msgstr "Debe proporcionar una contraseña válida (por lo menos seis carácteres)."
 
 #: www/docman/admin/index.php:219
 msgid "File"

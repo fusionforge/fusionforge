@@ -8,12 +8,15 @@ msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-03-01 22:22+0100\n"
-"PO-Revision-Date: 2009-02-01 14:35+0100\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2010-04-11 16:27+0200\n"
+"Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Pootle 1.2.1\n"
 
 #: common/docman/Document.class.php:112 common/docman/Document.class.php:447
 #: common/pm/ProjectGroup.class.php:132 common/pm/ProjectGroup.class.php:346
@@ -95,7 +98,7 @@ msgstr "欢迎来到 %1$s"
 
 #: common/forum/Forum.class.php:244
 msgid "Invalid forum group identifier"
-msgstr ""
+msgstr "非法的论坛组ID"
 
 #: common/forum/Forum.class.php:474 common/forum/Forum.class.php:511
 #: common/frs/FRSPackage.class.php:270 common/frs/FRSPackage.class.php:302
@@ -106,11 +109,11 @@ msgstr "只有登录后才能监视"
 
 #: common/forum/Forum.class.php:495
 msgid "Unable To Add Monitor"
-msgstr "无法添加监视"
+msgstr "无法添加监视器"
 
 #: common/forum/Forum.class.php:544
 msgid "You Can Only Save Your Place If You Are Logged In"
-msgstr "只有登录后才能保存位置"
+msgstr "只有登录后才能保存你的位置"
 
 #: common/forum/Forum.class.php:562
 msgid "Forum::savePlace()"
@@ -136,9 +139,8 @@ msgstr "讨论区"
 #: common/forum/ForumFactory.class.php:185
 #: common/forum/ForumFactory.class.php:233
 #: common/forum/ForumFactory.class.php:268
-#, fuzzy
 msgid "Forum not found"
-msgstr "找不到问卷"
+msgstr "找不到论坛"
 
 #: common/forum/ForumFactory.class.php:214
 #: common/forum/ForumFactory.class.php:242
@@ -199,7 +201,7 @@ msgstr "ForumMessage::fetchData() 无效的文章编号"
 
 #: common/forum/ForumMessage.class.php:579
 msgid "Invalid Message ID"
-msgstr ""
+msgstr "非法的消息ID"
 
 #: common/forum/ForumMessage.class.php:666
 #, php-format
@@ -207,7 +209,7 @@ msgid ""
 "\n"
 "Read and respond to this message at: \n"
 "%s"
-msgstr ""
+msgstr "在%s处阅读和回复本消息"
 
 #: common/forum/ForumMessage.class.php:668
 #, php-format
@@ -219,6 +221,11 @@ msgid ""
 "(enter your response here)\n"
 "%1$s"
 msgstr ""
+"\n"
+"或者回复本邮件。把您的回复写在下面的标志中间：\n"
+"%1$s\n"
+"(您的回复输入在此)\n"
+"%1$s"
 
 #: common/forum/ForumMessage.class.php:674
 #, php-format
@@ -228,10 +235,14 @@ msgid ""
 "\n"
 "By: %s\n"
 msgstr ""
+"\n"
+"\n"
+"\n"
+"由: %s\n"
 
 #: common/forum/ForumMessage.class.php:679
 msgid "A file has been uploaded with this message."
-msgstr ""
+msgstr "在本消息中一个文件已被上传。"
 
 #: common/forum/ForumMessage.class.php:690
 #, php-format
@@ -239,15 +250,15 @@ msgid ""
 "You are receiving this email because you elected to monitor this forum.\n"
 "To stop monitoring this forum, login to %s and visit: \n"
 "%s\n"
-msgstr ""
+msgstr "你由于被选举出来监控这个论坛而接收到本邮件。如果想要停止监控这个论坛，请登录%s并访问:%s"
 
 #: common/frs/FRSFile.class.php:93
 msgid "FRSFile Name Must Be At Least 3 Characters"
-msgstr "FRSFile 文件名称必须至少3个字节"
+msgstr "文件发布系统规定文件名称必须至少3个字节"
 
 #: common/frs/FRSFile.class.php:97
 msgid "Filename can only be alphanumeric and \"-\" \"_\" \".\" characters."
-msgstr ""
+msgstr "文件名只能是字符和\"-\"\"_\"\".\"。"
 
 #: common/frs/FRSFile.class.php:107
 msgid "FRSFile Appears to be invalid"
@@ -273,7 +284,7 @@ msgstr "FRSPackage::Update：软件的名称只能是英文字母"
 #: common/frs/FRSRelease.class.php:289
 #, php-format
 msgid "[%1$s Release] %2$s"
-msgstr ""
+msgstr "[%1$s 发布] %2$s"
 
 #: common/frs/FRSRelease.class.php:292
 #, php-format
@@ -289,13 +300,18 @@ msgid ""
 "\n"
 "%6$s"
 msgstr ""
+"项目 %1$s(%2$s)已发布一个新的版本包 \"%3$s\"。\n"
+"您可以通过下面的链接下载:\n"
+"%4$s\n"
+"您接收到本邮件是由于您请求在有新的版本发布时通知您。如果您不希望被通知,请登录到 %5%s 点击链接:\n"
+"\n"
+"%6$s"
 
 #: common/include/Error.class.php:126 common/include/Group.class.php:427
 #: common/include/Group.class.php:499 www/include/exit.php:37
 #: www/news/admin/index.php:345
-#, fuzzy
 msgid "Permission denied."
-msgstr "权限不足"
+msgstr "权限不足."
 
 #: common/include/Error.class.php:143 common/include/User.class.php:280
 #: www/tracker/tracker.php:74
@@ -312,9 +328,8 @@ msgid "Missing Parameters"
 msgstr "缺少参数"
 
 #: common/include/Group.class.php:233
-#, fuzzy
 msgid "Group Not Found"
-msgstr "找不到文件"
+msgstr "找不到群组"
 
 #: common/include/Group.class.php:249 www/survey/admin/add_question.php:35
 #: www/survey/admin/add_survey.php:36 www/survey/admin/edit_question.php:37
@@ -331,11 +346,11 @@ msgstr "权限不足"
 #: common/include/Group.class.php:265
 #, php-format
 msgid "fetchData():: %s"
-msgstr ""
+msgstr "fetchData():: %s"
 
 #: common/include/Group.class.php:289
 msgid "Group::create: Group object already exists"
-msgstr ""
+msgstr "Group::create: 已经存在同名组"
 
 #: common/include/Group.class.php:294
 #, fuzzy
@@ -356,7 +371,7 @@ msgstr "请详细说明您为什么要在这里注册"
 msgid ""
 "The Registration Purpose text is too long. Please make it smaller than 1500 "
 "bytes."
-msgstr ""
+msgstr "注册说明太长。请简化到不超过1500字节。"
 
 #: common/include/Group.class.php:310
 msgid "Describe in a more comprehensive manner your project."
@@ -365,93 +380,91 @@ msgstr "请详细说明您的项目目的"
 #: common/include/Group.class.php:313
 msgid ""
 "Your project description is too long. Please make it smaller than 256 bytes."
-msgstr ""
+msgstr "项目说明太长。请简化到不超过256字节。"
 
 #: common/include/Group.class.php:353
 #, php-format
 msgid "ERROR: Could not create group: %s"
-msgstr ""
+msgstr "错误：不能创建组:%s"
 
 #: common/include/Group.class.php:360
 #, php-format
 msgid "ERROR: Could not get group id: %s"
-msgstr ""
+msgstr "错误：不能获取组编号:%s"
 
 #: common/include/Group.class.php:379
 #, php-format
 msgid "ERROR: Could not add admin to newly created group: %s"
-msgstr ""
+msgstr "错误: 不能将管理员帐号添加到新建组:%s"
 
 #: common/include/Group.class.php:422 common/include/Group.class.php:494
-#, fuzzy
 msgid "Could not get permission."
-msgstr "无法获得许可权"
+msgstr "无法获得权限"
 
 #: common/include/Group.class.php:445
 #, php-format
 msgid "ERROR: DB: Could not change group properties: %s"
-msgstr ""
+msgstr "错误:数据库:不能更改组属性:%s"
 
 #: common/include/Group.class.php:513
-#, fuzzy, php-format
+#, php-format
+#, fuzzy
 msgid "New Doc Address Appeared Invalid: %s"
 msgid_plural "New Doc Addresses Appeared Invalid: %s"
-msgstr[0] "E-mail位址明显无效"
-msgstr[1] "E-mail位址明显无效"
+msgstr[0] "新文档地址看起来无效:%s"
 
 #: common/include/Group.class.php:566
 msgid ""
 "Error updating project information: Maximum length for Project Description "
 "is 255 chars."
-msgstr ""
+msgstr "更新项目信息错误:项目描述不能超过256个字符。"
 
 #: common/include/Group.class.php:614
-#, fuzzy, php-format
+#, php-format
+#, fuzzy
 msgid "Error updating project information: %s"
-msgstr "项目类别"
+msgstr " 更新项目信息错误:%s"
 
 #: common/include/Group.class.php:706
-#, fuzzy
 msgid "Invalid Status Change"
-msgstr "不正确用户"
+msgstr "无效的状态变更"
 
 #: common/include/Group.class.php:717
 #, php-format
 msgid "ERROR: DB: Could not change group status: %s"
-msgstr ""
+msgstr "错误: 数据库: 不能更改组状态: %s"
 
 #: common/include/Group.class.php:885
 msgid "Couldn't insert SCM_BOX to database"
-msgstr ""
+msgstr "不能插入版本控制主机(SCM_BOX)到数据库"
 
 #: common/include/Group.class.php:889
 msgid "SCM Box can't be empty"
-msgstr "SCM Box 不能为空"
+msgstr "必须填写版本控制主机地址(SCM BOX)"
 
 #: common/include/Group.class.php:1318
 msgid ""
 "Bad tag name, you only can use the following characters: [A-Z][a-z][0-9]-_&'#"
 "+. and space"
-msgstr ""
+msgstr "标记名有问题，你只能使用一下字符:[A-Z][a-z][0-9]-_&'#+.和空格"
 
 #: common/include/Group.class.php:1328
-#, fuzzy
 msgid "Setting tags: "
-msgstr "设置"
+msgstr "设置标签:"
 
 #: common/include/Group.class.php:1373
 msgid "Cannot Delete System Group"
-msgstr ""
+msgstr "不能删除系统组"
 
 #: common/include/Group.class.php:1403
 #, php-format
 msgid "Not Object: ArtifactType: %d"
-msgstr ""
+msgstr "不是对象：追踪(Artifact)类型：%d"
 
 #: common/include/Group.class.php:1415
 #, php-format
 msgid "Not Object: Forum: %d"
-msgstr ""
+msgstr "不是对象:论坛:%d"
 
 #: common/include/Group.class.php:1428
 #, fuzzy, php-format
@@ -459,24 +472,25 @@ msgid "Not Object: ProjectGroup: %d"
 msgstr "无法更新上层文章"
 
 #: common/include/Group.class.php:1459
-#, fuzzy, php-format
+#, php-format
+#, fuzzy
 msgid "Could Not Delete News Forum: %d"
-msgstr "无法完成执行"
+msgstr "不能删除新论坛:%d"
 
 #: common/include/Group.class.php:1505
 #, php-format
 msgid "Not Object: Survey: %d"
-msgstr ""
+msgstr "不是对象: 调查: %d"
 
 #: common/include/Group.class.php:1518
-#, fuzzy, php-format
+#, php-format
 msgid "Not Object: SurveyQuestion: %d"
-msgstr "没有发现问卷问题"
+msgstr "不是对象: 问卷问题(SurveyQuestion): %d"
 
 #: common/include/Group.class.php:1531
 #, php-format
 msgid "Not Object: MailingList: %d"
-msgstr ""
+msgstr "不是对象: 邮件列表: %d"
 
 #: common/include/Group.class.php:1535
 #, fuzzy
@@ -485,148 +499,142 @@ msgstr "无法删除邮件列表"
 
 #: common/include/Group.class.php:1636
 msgid "User is not active. Only active users can be added."
-msgstr ""
+msgstr "用户没有激活。只能添加已经激活了的用户。"
 
 #: common/include/Group.class.php:1675
 #, php-format
 msgid "ERROR: Could Not Add User To Group: %s"
-msgstr ""
+msgstr "错误:不能将用户加到组：%s"
 
 #: common/include/Group.class.php:1702 common/include/Group.class.php:1725
 #, fuzzy
 msgid "Error Getting Role Object"
-msgstr "创建群组对象时发生错误"
+msgstr "获取角色信息时发生错误"
 
 #: common/include/Group.class.php:1755
 #, fuzzy
 msgid "ERROR: User does not exist"
-msgstr "查询不存在"
+msgstr "错误:用户不存在"
 
 #: common/include/Group.class.php:1802
 #, php-format
 msgid "ERROR: User not removed: %s"
-msgstr ""
+msgstr "错误：用户没有被删除：%s"
 
 #: common/include/Group.class.php:1817
 #, php-format
 msgid "ERROR: DB: artifact: %s"
-msgstr ""
+msgstr "错误:数据库:跟踪（artifact）:%s"
 
 #: common/include/Group.class.php:1852 common/include/Group.class.php:1865
 #, php-format
 msgid "ERROR: DB: project_assigned_to %d: %s"
-msgstr ""
+msgstr "错误：数据库：项目被指定给　%d: %s"
 
 #: common/include/Group.class.php:1911 www/project/admin/roleedit.php:64
 #, fuzzy
 msgid "Could Not Get Role"
-msgstr "无法完成执行"
+msgstr "不能获取角色信息"
 
 #: common/include/Group.class.php:1914 common/include/Group.class.php:1919
-#, fuzzy, php-format
+#, php-format
+#, fuzzy
 msgid "Role: %s"
-msgstr "角色"
+msgstr "角色:%s"
 
 #: common/include/Group.class.php:1973
-#, fuzzy
 msgid "Error getting member object"
-msgstr "创建群组对象时发生错误"
+msgstr "获取成员对象错误"
 
 #: common/include/Group.class.php:1976
-#, fuzzy, php-format
+#, php-format
 msgid "Error getting member object: %s"
-msgstr "创建群组对象时发生错误"
+msgstr "获取成员对象错误:%s"
 
 #: common/include/Group.class.php:2015
 #, fuzzy
 msgid "Group already active"
-msgstr "帐号已经启用。"
+msgstr "组已被激活"
 
 #: common/include/Group.class.php:2038
-#, fuzzy
 msgid "Error creating ArtifactTypes object"
-msgstr "创建群组对象时发生错误"
+msgstr "创建跟踪类型（artifacttypes）时发生错误"
 
 #: common/include/Group.class.php:2043 common/include/Group.class.php:2049
 #, php-format
 msgid "ATS%d: %s"
-msgstr ""
+msgstr "ATS%d: %s"
 
 #: common/include/Group.class.php:2061
-#, fuzzy
 msgid "Open-Discussion"
-msgstr "讨论版："
+msgstr "开放式讨论："
 
 #: common/include/Group.class.php:2061
 msgid "General Discussion"
-msgstr ""
+msgstr "一般讨论"
 
 #: common/include/Group.class.php:2062 common/include/Group.class.php:2069
 #: common/include/Group.class.php:2076
 #, php-format
 msgid "F%d: %s"
-msgstr ""
+msgstr "F%d: %s"
 
 #: common/include/Group.class.php:2068
 msgid "Help"
-msgstr ""
+msgstr "帮助"
 
 #: common/include/Group.class.php:2068
 msgid "Get Public Help"
-msgstr ""
+msgstr "获取公开帮助"
 
 #: common/include/Group.class.php:2075
-#, fuzzy
 msgid "Developers-Discussion"
-msgstr "所有项目开发者"
+msgstr "开发者讨论"
 
 #: common/include/Group.class.php:2075
-#, fuzzy
 msgid "Project Developer Discussion"
-msgstr "所有项目开发者"
+msgstr "项目开发者讨论"
 
 #: common/include/Group.class.php:2088
-#, fuzzy
 msgid "Uncategorized Submissions"
-msgstr "新文件提交"
+msgstr "未归类的提交"
 
 #: common/include/Group.class.php:2089
 #, php-format
 msgid "DG: %s"
-msgstr ""
+msgstr "DG:%s"
 
 #: common/include/Group.class.php:2102
 #, php-format
 msgid "FRSP: %s"
-msgstr ""
+msgstr "FRSP: %s"
 
 #: common/include/Group.class.php:2114
 msgid "To Do"
-msgstr ""
+msgstr "待办事宜"
 
 #: common/include/Group.class.php:2114
 msgid "Things We Have To Do"
-msgstr ""
+msgstr "我们必须做的事情"
 
 #: common/include/Group.class.php:2115 common/include/Group.class.php:2122
 #, php-format
 msgid "PG%d: %s"
-msgstr ""
+msgstr "PG%d: %s"
 
 #: common/include/Group.class.php:2121
 #, fuzzy
 msgid "Next Release"
-msgstr "最近更新"
+msgstr "下一个版本发布"
 
 #: common/include/Group.class.php:2121
-#, fuzzy
 msgid "Items For Our Next Release"
-msgstr "最新发布项目"
+msgstr "下个版本发布的内容"
 
 #: common/include/Group.class.php:2148
 #, php-format
 msgid "R%d: %s"
-msgstr ""
+msgstr "R%d: %s"
 
 #: common/include/Group.class.php:2167
 #: plugins/scmcvs/common/CVSPlugin.class.php:149
@@ -635,19 +643,19 @@ msgstr ""
 #: www/stats/site_stats_utils.php:284 www/tracker/detail.php:187
 #: www/tracker/mod-limited.php:185 www/tracker/mod.php:282
 msgid "Commits"
-msgstr ""
+msgstr "提交"
 
 #: common/include/Group.class.php:2168
 #, php-format
 msgid "ML: %s"
-msgstr ""
+msgstr "ML: %s"
 
 #: common/include/Group.class.php:2213 common/include/Group.class.php:2286
 msgid "Group does not have any administrators."
-msgstr ""
+msgstr "组没有任何管理员"
 
 #: common/include/Group.class.php:2222
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Your project registration for %4$s has been approved.\n"
 "\n"
@@ -681,37 +689,12 @@ msgid ""
 "\n"
 "-- the %4$s crew"
 msgstr ""
-"您在 %7$s 注册的项目通过审核了\n"
-"\n"
-"项目全名：%1$s\n"
-"项目Unix名称：%2$s\n"
-"CVS服务器：cvs.%2$s.%3$s\n"
-"控制/网页服务器：%2$s.%3$s\n"
-"\n"
-"您在我们网站上的DNS信息可能需要一天的时间才能够使用，在DNS信息可以使用前，您"
-"可以试着登录 %4$s 并且指定 CVS 到 %5$s\n"
-"\n"
-"如果在6个小时后您的控制介面/CVS帐号仍然无法运作，请开启一个支持传票，这样子我"
-"们就会帮您看看问题出在哪里。请注意所有的控制/CVS帐号无法通过telnet登录而且只"
-"能通过SSH1。\n"
-"\n"
-"您的网站可以通过控制帐号存取，请读取网站文件 (下面的链接) 来了解操作方式、可"
-"以使用的服务与帐号的资料夹配置。\n"
-"\n"
-"登录后参观您自己在 %7$s 的项目页面，您可以发现左手边有标示为'项目管理'的功能"
-"选单。\n"
-"\n"
-"我们非常建议您现在参观 %7$s 并且为您的项目创建一个公开的说明\n"
-" (请在登录后浏览 http://%3$s/project/admin/?group_id=%6$s)\n"
-"\n"
-"您的项目也不会立即出现在软件地图上 (主要的项目列表放在 %7$s，它在浏览与搜索上"
-"具有相当大的弹性)，您必须在管理介面中指定它的分类，这样一来浏览网站的朋友才可"
-"以找到您的项目，建议您可以现在进行登录网站后浏览您的项目，接着从左边的标示 "
-"'软件地图分类' 点击编辑进行分类。\n"
-"\n"
-"如果有任何问题请联络 %7$s，让我们知道您需要什么样的协助。\n"
-"\n"
-"--  %7$s"
+"你注册的项目 %4$s 已经批准.项目全名:  %1$s项目Unix名:  %2$s你的DNS需要一天才能激活。你的WEB网站可以通过shell帐号存取"
+"。请阅读下面的链接中的建站文档来了解用法,可使用的服务,和帐号的目录布局.你如果登录后访问%4%s处的项目页面, "
+"将会发现额外的菜单功能项:'项目管理'.强烈建议你现在访问 %4$s ,创建项目的公开说明.请登录后访问项目页面, 选择左边的'项目管理' "
+"菜单(或登录后访问%3$s).在你未通过项目管理页面将项目分类前，你的项目不会在项目分类列表中显示(部署在%4$s上的项目列表，以易于查找和浏览) "
+"。这样人们可以很方便的发现你的项目.登录后访问你的项目,再选择左边菜单的'项目管理'.享用这个系统的同时请告诉其他人%"
+"4$s。如果有需要请与我们联系，我们乐于提供帮助。-- %4$s的成员"
 
 #: common/include/Group.class.php:2258
 #, php-format
@@ -744,14 +727,14 @@ msgstr "%1$s 项目被取消了"
 
 #: common/include/Group.class.php:2336
 msgid "Could not find user who has submitted the project."
-msgstr ""
+msgstr "无法找到提交项目的用户。"
 
 #: common/include/Group.class.php:2351
 msgid "There is no administrator to send the mail."
-msgstr ""
+msgstr "没有发送邮件的管理员"
 
 #: common/include/Group.class.php:2360
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "New %1$s Project Submitted\n"
 "\n"
@@ -766,18 +749,18 @@ msgstr ""
 "\n"
 "项目全名：%2$s\n"
 "注册说明：%3$s\n"
-"授权方式：%4$s\n"
+"注册人：%5$s (%6$s)\n"
 "\n"
 "请浏览下面网址审核这个项目：\n"
-"%5$s"
+"%4$s"
 
 #: common/include/Group.class.php:2374 common/include/Group.class.php:2389
 #, php-format
 msgid "New %1$s Project Submitted"
-msgstr "新项目 %1$s 完成注册了"
+msgstr "新项目 %1$s 已提交。"
 
 #: common/include/Group.class.php:2382
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "New %1$s Project Submitted\n"
 "\n"
@@ -791,29 +774,25 @@ msgstr ""
 "\n"
 "项目全名：  %2$s\n"
 "注册说明： %3$s\n"
-"授权方式： %4$s\n"
 "\n"
 " %1$s 的管理团队会尽快审核您注册的项目，通过审核与否您都会收到通知。"
 
 #: common/include/Group.class.php:2407
-#, fuzzy
 msgid "Group name is too short"
-msgstr "问题太简略"
+msgstr "群组名称太短"
 
 #: common/include/Group.class.php:2410
-#, fuzzy
 msgid "Group name is too long"
-msgstr "群组名称 (编辑)"
+msgstr "群组名称太长"
 
 #: common/include/Group.class.php:2413
-#, fuzzy
 msgid "Group name already taken"
-msgstr "Unix名称重复"
+msgstr "群组名称已经有人使用"
 
 #: common/include/Group.class.php:2471
 #, php-format
 msgid "ERROR - Could Not Update Group Unix Status: %s"
-msgstr ""
+msgstr "错误 - 不能更新组的Unix状态: %s"
 
 #: common/include/Group.class.php:2550
 #: www/forum/include/ForumHTML.class.php:69 www/my/dashboard.php:79
@@ -858,7 +837,7 @@ msgstr "管理"
 #: www/export/rss_project.php:100
 #: www/themes/gforge-simple-theme/Theme.class.php:498
 msgid "Activity"
-msgstr ""
+msgstr "活动跟踪"
 
 #: common/include/Group.class.php:2592
 #: common/include/group_section_texts.php:30
@@ -899,7 +878,7 @@ msgstr "任务"
 #: common/include/Group.class.php:2654 common/reporting/report_utils.php:165
 #: www/themes/gforge-simple-theme/Theme.class.php:538
 msgid "Docs"
-msgstr "文件"
+msgstr "文档"
 
 #: common/include/Group.class.php:2669 www/include/project_home.php:405
 #: www/survey/include/SurveyHTML.class.php:53 www/survey/survey_utils.php:52
@@ -921,7 +900,7 @@ msgstr "新闻"
 #: www/stats/site_stats_utils.php:422
 #: www/themes/gforge-simple-theme/Theme.class.php:562
 msgid "SCM"
-msgstr "SCM"
+msgstr "源代码管理"
 
 #: common/include/Group.class.php:2729
 #: common/include/group_section_texts.php:34 common/include/rbac_texts.php:95
@@ -971,65 +950,61 @@ msgstr "您请求加入 %1$s 项目被管理人员否决。"
 
 #: common/include/SCMPlugin.class.php:121
 msgid "<p>Unimplemented SCM plugin.</p>"
-msgstr ""
+msgstr "<p>未实现的源代码控制（SCM）插件。</p>"
 
 #: common/include/SCMPlugin.class.php:125
 msgid "<p>Instructions for anonymous access for unimplemented SCM plugin.</p>"
-msgstr ""
+msgstr "<p>匿名访问未实现的源代码控制（SCM）插件说明。</p>"
 
 #: common/include/SCMPlugin.class.php:129
 msgid "<p>Instructions for read-write access for unimplemented SCM plugin.</p>"
-msgstr ""
+msgstr "<p>读写访问未实现的源代码控制（SCM）插件说明。</p>"
 
 #: common/include/SCMPlugin.class.php:133
 msgid "<p>Instructions for snapshot access for unimplemented SCM plugin.</p>"
-msgstr ""
+msgstr "<p>快照访问（snapshot access）未实现的源代码控制（SCM）插件说明。</p>"
 
 #: common/include/SCMPlugin.class.php:138
 #: common/include/SCMPlugin.class.php:150
-#, fuzzy
 msgid "Repository Browser"
-msgstr "SCM Repository"
+msgstr "存储库浏览"
 
 #: common/include/SCMPlugin.class.php:139
 #: common/include/SCMPlugin.class.php:151
 msgid ""
 "<p>Browsing the SCM tree is not yet implemented for this SCM plugin.</p>"
-msgstr ""
+msgstr "<p>此源代码控制（SCM）插件未实现浏览源代码树的功能。</p>"
 
 #: common/include/SCMPlugin.class.php:142
-#, fuzzy
 msgid "Not implemented yet"
-msgstr "尚未启动"
+msgstr "尚未实现"
 
 #: common/include/SCMPlugin.class.php:157
 #: plugins/scmcvs/common/CVSPlugin.class.php:144
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:124
 #: plugins/scmsvn/common/SVNPlugin.class.php:144
-#, fuzzy
 msgid "Repository Statistics"
-msgstr "使用统计"
+msgstr "存储库使用统计"
 
 #: common/include/SCMPlugin.class.php:158
 msgid "<p>Not implemented for this SCM plugin yet.</p>"
-msgstr ""
+msgstr "<p>未对此源代码控制（SCM）插件实现。</p>"
 
 #: common/include/SCMPlugin.class.php:191
 msgid "Repository History"
-msgstr ""
+msgstr "代码库历史"
 
 #: common/include/SCMPlugin.class.php:192
 msgid "Data about current and past states of the repository"
-msgstr ""
+msgstr "代码库关于过去和现在状态的数据"
 
 #: common/include/SCMPlugin.class.php:221
 msgid "Enable Anonymous Access"
-msgstr ""
+msgstr "开启匿名访问"
 
 #: common/include/User.class.php:241
-#, fuzzy
 msgid "You must supply a theme"
-msgstr "您必须提供一个帐号"
+msgstr "您必须提供一个方案"
 
 #: common/include/User.class.php:246
 msgid "You must supply a username"
@@ -1097,8 +1072,7 @@ msgid ""
 "\n"
 "-- the %3$s staff\n"
 msgstr ""
-"谢谢您在 %4$s 网站上注册。您创建了一个名为 %1$s 的帐号。为了完成注册，请点击"
-"下面的网址：\n"
+"谢谢您在 %4$s 网站上注册。您创建了一个名为 %1$s 的帐号。为了完成注册，请点击下面的网址：\n"
 "\n"
 "<http://%2$s/account/verify.php?confirm_hash=_%3$s>\n"
 "\n"
@@ -1142,9 +1116,8 @@ msgid "Illegal character in name."
 msgstr "名称使用了错误的字节"
 
 #: common/include/account.php:75
-#, fuzzy
 msgid "Name is reserved."
-msgstr "名称保留给 CVS 使用"
+msgstr "名称是保留的。"
 
 #: common/include/account.php:89
 msgid "Name is reserved for CVS."
@@ -1163,9 +1136,8 @@ msgid "Trackers"
 msgstr "跟踪者"
 
 #: common/include/group_section_texts.php:33
-#, fuzzy
 msgid "Documentations"
-msgstr "查看文件"
+msgstr "文档"
 
 #: common/include/rbac_texts.php:30 common/include/rbac_texts.php:33
 #: common/include/rbac_texts.php:35 common/include/rbac_texts.php:37
@@ -1173,7 +1145,7 @@ msgstr "查看文件"
 #: www/frs/admin/index.php:216 www/project/admin/editgroupinfo.php:153
 #: www/project/admin/index.php:174 www/register/projectinfo.php:183
 msgid "Private"
-msgstr "隐藏"
+msgstr "私人"
 
 #: common/include/rbac_texts.php:31 common/include/rbac_texts.php:34
 #: common/include/rbac_texts.php:38 common/include/rbac_texts.php:42
@@ -1184,67 +1156,55 @@ msgid "Public"
 msgstr "公开"
 
 #: common/include/rbac_texts.php:32 common/include/rbac_texts.php:94
-#, fuzzy
 msgid "File Release System"
-msgstr "使用文件发布系统"
+msgstr "文件发布系统"
 
 #: common/include/rbac_texts.php:36
-#, fuzzy
 msgid "Public (PServer)"
 msgstr "公共区域"
 
 #: common/include/rbac_texts.php:39 common/include/rbac_texts.php:45
-#, fuzzy
 msgid "No Anonymous Posts"
-msgstr "允许匿名发表文章？"
+msgstr "不允许匿名发表文章"
 
 #: common/include/rbac_texts.php:40 common/include/rbac_texts.php:46
-#, fuzzy
 msgid "Allow Anonymous Posts"
-msgstr "允许匿名发表文章？"
+msgstr "允许匿名发表文章"
 
 #: common/include/rbac_texts.php:47 common/include/rbac_texts.php:50
 #: common/include/rbac_texts.php:53 common/include/rbac_texts.php:57
 #: common/include/rbac_texts.php:62
-#, fuzzy
 msgid "Read"
-msgstr "感谢您"
+msgstr "读"
 
 #: common/include/rbac_texts.php:48 common/include/rbac_texts.php:51
-#, fuzzy
 msgid "Write"
-msgstr "隐藏"
+msgstr "写"
 
 #: common/include/rbac_texts.php:49 common/include/rbac_texts.php:52
 #: common/include/rbac_texts.php:56 common/include/rbac_texts.php:61
-#, fuzzy
 msgid "No Access"
-msgstr "没有变动"
+msgstr "没有访问权限"
 
 #: common/include/rbac_texts.php:54
-#, fuzzy
 msgid "Post"
-msgstr "文章数"
+msgstr "帖子"
 
 #: common/include/rbac_texts.php:58 common/include/rbac_texts.php:63
-#, fuzzy
 msgid "Tech"
-msgstr "搜索"
+msgstr "技术"
 
 #: common/include/rbac_texts.php:59 common/include/rbac_texts.php:64
-#, fuzzy
 msgid "Tech & Admin"
-msgstr "项目管理"
+msgstr "技术&管理"
 
 #: common/include/rbac_texts.php:60 common/include/rbac_texts.php:65
-#, fuzzy
 msgid "Admin Only"
 msgstr "管理"
 
 #: common/include/rbac_texts.php:66
-#, fuzzy
 msgid "Read/Post"
-msgstr "角色/职位"
+msgstr "阅读/发表"
 
 #: common/include/rbac_texts.php:68 common/include/rbac_texts.php:70
 #: common/include/rbac_texts.php:72 common/include/rbac_texts.php:74
@@ -1257,9 +1217,8 @@ msgid "None"
 msgstr "无"
 
 #: common/include/rbac_texts.php:76
-#, fuzzy
 msgid "See"
-msgstr "选择"
+msgstr "看"
 
 #: common/include/rbac_texts.php:77
 #: plugins/quota_management/www/quota_admin.php:140
@@ -1268,24 +1227,20 @@ msgid "Modify"
 msgstr "修改"
 
 #: common/include/rbac_texts.php:78
-#, fuzzy
 msgid "No access"
-msgstr "没有变动"
+msgstr "没有访问权限"
 
 #: common/include/rbac_texts.php:84
-#, fuzzy
 msgid "Anonymous Forum"
-msgstr "匿名FTP"
+msgstr "匿名论坛"
 
 #: common/include/rbac_texts.php:85
-#, fuzzy
 msgid "Forum Admin"
 msgstr "讨论区管理"
 
 #: common/include/rbac_texts.php:88
-#, fuzzy
 msgid "Tasks Admin"
-msgstr "跟踪管理"
+msgstr "任务管理"
 
 #: common/include/rbac_texts.php:89 www/forum/include/ForumHTML.class.php:72
 #: www/forum/myforums.php:73 www/news/admin/news_admin_utils.php:58
@@ -1297,27 +1252,24 @@ msgid "Project"
 msgstr "项目"
 
 #: common/include/rbac_texts.php:92
-#, fuzzy
 msgid "Anonymous Tracker"
-msgstr "匿名FTP"
+msgstr "匿名跟踪"
 
 #: common/include/rbac_texts.php:93
-#, fuzzy
 msgid "Tracker Admin"
 msgstr "跟踪管理"
 
 #: common/include/rbac_texts.php:96
 msgid "Webcal"
-msgstr ""
+msgstr "网页日历(Webcal)"
 
 #: common/include/rbac_texts.php:97 www/admin/approve-pending.php:156
 msgid "Project Admin"
 msgstr "项目管理"
 
 #: common/include/rbac_texts.php:100
-#, fuzzy
 msgid "Documentation Manager"
-msgstr "查看文件"
+msgstr "文档管理"
 
 #: common/include/session.php:135
 msgid "Missing Password Or Users Name"
@@ -1337,20 +1289,19 @@ msgstr "停止的帐号"
 
 #: common/include/session.php:234
 msgid "Account Pending"
-msgstr "等待中帐号"
+msgstr "等待审批中帐号"
 
 #: common/include/session.php:239
 msgid "Account Deleted"
-msgstr "帐号删除了"
+msgstr "帐号已删除"
 
 #: common/include/session.php:244
 msgid "Account Not Active"
 msgstr "帐号未启用"
 
 #: common/include/session.php:357
-#, fuzzy
 msgid "Could Not Get Group"
-msgstr "无法更新上层文章"
+msgstr "无法获取群组"
 
 #: common/include/session.php:418 www/account/lostlogin.php:49
 #: www/account/lostlogin.php:55 www/account/lostlogin.php:70
@@ -1365,21 +1316,19 @@ msgstr "错误"
 
 #: common/include/utils.php:129
 msgid "UTF-8"
-msgstr ""
+msgstr "UTF-8"
 
 #: common/include/utils.php:512
 msgid "Priority Colors"
 msgstr "优先权颜色"
 
 #: common/include/utils.php:1067
-#, fuzzy
 msgid "Error: a mailing list with the same email address already exists."
-msgstr "帐号已存在"
+msgstr "错误: 同样电子邮件地址的邮件列表已存在。"
 
 #: common/include/utils.php:1083
-#, fuzzy
 msgid "Error: a forum with the same email address already exists."
-msgstr "帐号已存在"
+msgstr "错误: 同样电子邮件地址的论坛已存在。"
 
 #: common/mail/MailingList.class.php:122
 msgid "Must Provide List Name That Is 4 or More Characters Long"
@@ -1395,7 +1344,7 @@ msgstr "邮件列表已经存在"
 
 #: common/mail/MailingList.class.php:147
 msgid "Forum exists with the same name"
-msgstr ""
+msgstr "同样名称论坛已存在"
 
 #: common/mail/MailingList.class.php:165
 #, php-format
@@ -1521,7 +1470,7 @@ msgstr "Y-m-d H:i"
 #: common/pm/ProjectTask.class.php:1173
 #, php-format
 msgid "[%1$s - %2$s] [Task #%3$d] "
-msgstr ""
+msgstr "[%1$s - %2$s] [任务 #%3$d] "
 
 #: common/reporting/TimeEntry.class.php:94 www/reporting/timeadd.php:90
 msgid "Successfully Added"
@@ -1651,13 +1600,12 @@ msgid "Other"
 msgstr "其它"
 
 #: common/search/SearchQuery.class.php:118
-#, fuzzy
 msgid "Error: criteria not specified"
-msgstr "错误插入一个订制栏位"
+msgstr "错误:未指定条件"
 
 #: common/search/SearchQuery.class.php:126
 msgid "Error: search query too short"
-msgstr ""
+msgstr "错误:查询请求太短"
 
 #: common/survey/Survey.class.php:103 common/survey/Survey.class.php:147
 #: www/survey/admin/edit_survey.php:49
@@ -1670,7 +1618,7 @@ msgstr "更新错误：必须要有问卷问题"
 
 #: common/survey/Survey.class.php:122
 msgid "Insert Error"
-msgstr ""
+msgstr "插入错误"
 
 #: common/survey/Survey.class.php:157 common/survey/Survey.class.php:192
 msgid "The Survey data is not filled"
@@ -4332,12 +4280,11 @@ msgid ""
 "ssh/id_rsa.pub' (protocol version 2). Read the ssh documentation for further "
 "information on sharing keys.</p>"
 msgstr ""
-"<p>为了避免必须每次输入您的 CVS/SSH 开发人员帐号的密码，您可以在这里上传您的"
-"公钥，而它们将被放置在 CVS 服务器中您的 ~/.ssh/authorized_keys 文件中。此文件"
-"不会立即更新，请在一个小时后才尝试登录。</p><p>为了产生这个公钥，执行这个程"
-"序 'ssh-keygen' (您可以使用protocol 1 或 2 两者其中之一)，这个 public key 将"
-"被放置在 '~/.ssh/identity.pub' (protocol 1) 与 '~/.ssh/id_dsa.pub' 或 '~/."
-"ssh/id_rsa.pub' (protocol 2)。关于公钥请阅读SSH说明书来获取更进一步信息。</p>"
+"<p>为了避免必须每次输入您的 CVS/SSH 开发人员帐号的密码，您可以在这里上传您的公钥，而它们将被放置在 CVS 服务器中您的 "
+"~/.ssh/authorized_keys 文件中。此文件不会立即更新，请在一个小时后才尝试登录。</p><p>为了产生这个公钥，执行这个程序 "
+"'ssh-keygen' (您可以使用protocol 1 或 2 两者其中之一)，这个 public key 将被放置在 "
+"'~/.ssh/identity.pub' (protocol 1) 与 '~/.ssh/id_dsa.pub' 或 "
+"'~/.ssh/id_rsa.pub' (protocol 2)。关于公钥请阅读SSH说明书来获取更进一步信息。</p>"
 
 #: www/account/editsshkeys.php:81
 msgid ""
@@ -4645,8 +4592,7 @@ msgid ""
 "\n"
 " -- the %1$s staff\n"
 msgstr ""
-"有人 （大概就是您本人）在 %3$s 网站上申请通过email确认来更改密码。如果这个人"
-"不是您，那么就忽略这封mail，当做一切都没有发生。\n"
+"有人 （大概就是您本人）在 %3$s 网站上申请通过email确认来更改密码。如果这个人不是您，那么就忽略这封mail，当做一切都没有发生。\n"
 "\n"
 "如果是您发出找个请求确认，请点击下面的网址来改变您的密码：\n"
 "\n"
@@ -5632,8 +5578,7 @@ msgstr "成功删除"
 msgid ""
 "<br />Soft link to www couldn't be created. Check the write permissions for "
 "apache in gforge www/plugins dir or create the link manually."
-msgstr ""
-"<br>无法创建www符号链接。请检查apache在/www/plugins的写权限或手工创建。"
+msgstr "<br>无法创建www符号链接。请检查apache在/www/plugins的写权限或手工创建。"
 
 #: www/admin/pluginman.php:144
 #, fuzzy, php-format
@@ -5642,8 +5587,8 @@ msgid ""
 "write permissions for apache in /etc/gforge/plugins or create the link "
 "manually."
 msgstr ""
-"<br>配置文件无法链接到/etc/gforge/plugins/%1$s。请检查apache在/etc/gforge/"
-"plugins 的写权限或手工创建。"
+"<br>配置文件无法链接到/etc/gforge/plugins/%1$s。请检查apache在/etc/gforge/plugins "
+"的写权限或手工创建。"
 
 #: www/admin/pluginman.php:169
 msgid "Initialisation error<br />Database said: "
@@ -11083,12 +11028,8 @@ msgid ""
 msgid_plural ""
 "You can request to join a project by clicking the submit button. The "
 "administrators will be emailed to approve or deny your request."
-msgstr[0] ""
-"藉着点击提交按钮，您可以请求参与一个项目，通过Email来通知管理人员核准或否决您"
-"的请求。"
-msgstr[1] ""
-"藉着点击提交按钮，您可以请求参与一个项目，通过Email来通知管理人员核准或否决您"
-"的请求。"
+msgstr[0] "藉着点击提交按钮，您可以请求参与一个项目，通过Email来通知管理人员核准或否决您的请求。"
+msgstr[1] "藉着点击提交按钮，您可以请求参与一个项目，通过Email来通知管理人员核准或否决您的请求。"
 
 #: www/project/request.php:63
 #, fuzzy
@@ -11224,8 +11165,8 @@ msgid ""
 "description (step 2), so feel free to use concise and catchy wording. "
 "Maximum length is 255 chars.</p>"
 msgstr ""
-"<h3>4. 项目公开说明</h3><p>这个说明会出现在项目首页、搜索结果等，这不需要像是"
-"第二个步骤时提供那么详细的信息，所以用您熟悉的方式去描述即可，最多255字节。"
+"<h3>4. 项目公开说明</h3><p>这个说明会出现在项目首页、搜索结果等，这不需要像是第二个步骤时提供那么详细的信息，所以用您熟悉的方式去描述即可"
+"，最多255字节。"
 
 #: www/register/projectinfo.php:152
 #, php-format
@@ -11251,9 +11192,8 @@ msgid ""
 "<h3>5. SCM</h3><p>You can choose among different SCM for your project, but "
 "just one (or none at all). Please select the SCM system you want to use.</p>"
 msgstr ""
-"<h3>5. SCM</h3><p>您为您的项目能在不同的SCM之中选择，但是只能选择一个。请选择"
-"您要使用的SCM系统。</p> <p><strong>一旦项目被注册你将不能够改变它！</"
-"strong></p>"
+"<h3>5. SCM</h3><p>您为您的项目能在不同的SCM之中选择，但是只能选择一个。请选择您要使用的SCM系统。</p> "
+"<p><strong>一旦项目被注册你将不能够改变它！</strong></p>"
 
 #: www/register/projectinfo.php:162
 #, fuzzy
@@ -13607,9 +13547,9 @@ msgid ""
 "they can be used with other selection boxes (for example, Categories or "
 "Groups) to describe and browse bugs or other artifact types."
 msgstr ""
-"添加新选单像阶段(Phases)、品质度量(Quality Metrics)、元件(Components)...等"
-"等，只要添加一次，它们可以被使用在其它的选择式选单(譬如类别或群组)来说明与浏"
-"览 bugs 或其它的定制类型。"
+"添加新选单像阶段(Phases)、品质度量(Quality "
+"Metrics)、元件(Components)...等等，只要添加一次，它们可以被使用在其它的选择式选单(譬如类别或群组)来说明与浏览 bugs "
+"或其它的定制类型。"
 
 #: www/tracker/admin/tracker.php:24
 #: www/tracker/include/ArtifactTypeHtml.class.php:103
