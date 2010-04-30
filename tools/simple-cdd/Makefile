@@ -30,3 +30,6 @@ passsetup:
 
 /usr/bin/build-simple-cdd:
 	sudo apt-get install simple-cdd
+
+test:
+	. profiles/fusionforge.conf ; env ; echo "cd_img=${cd_img}"
