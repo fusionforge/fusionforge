@@ -59,7 +59,7 @@ class hudsonPlugin extends Plugin {
 				return;
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
-				$params['TITLES'][]=$this->text;
+				$params['TITLES'][]='<nobr>'.$this->text.'</nobr>';
 				$params['DIRS'][]='/plugins/hudson/index.php?group_id=' . $group_id . "&pluginname=" . $this->name; // we indicate the part we�re calling is the project one
 			} 
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
