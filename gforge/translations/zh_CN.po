@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-03-01 22:22+0100\n"
-"PO-Revision-Date: 2010-04-11 16:27+0200\n"
+"PO-Revision-Date: 2010-04-30 16:36+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh_CN\n"
@@ -209,7 +209,7 @@ msgid ""
 "\n"
 "Read and respond to this message at: \n"
 "%s"
-msgstr "在%s处阅读和回复本消息"
+msgstr "\n在%s处阅读和回复本消息"
 
 #: common/forum/ForumMessage.class.php:668
 #, php-format
@@ -250,7 +250,7 @@ msgid ""
 "You are receiving this email because you elected to monitor this forum.\n"
 "To stop monitoring this forum, login to %s and visit: \n"
 "%s\n"
-msgstr "你由于被选举出来监控这个论坛而接收到本邮件。如果想要停止监控这个论坛，请登录%s并访问:%s"
+msgstr "你由于被选举出来监控这个论坛而接收到本邮件。如果想要停止监控这个论坛，请登录%s并访问:%s\n"
 
 #: common/frs/FRSFile.class.php:93
 msgid "FRSFile Name Must Be At Least 3 Characters"
