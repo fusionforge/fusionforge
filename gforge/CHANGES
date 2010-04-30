@@ -1,4 +1,5 @@
-UNRELEASED:
+FusionForge-5.0.1:
+* Maintenance release, bugfixes and translations only.
 
 FusionForge-5.0:
 * New projectlabels plugin, to tag projects with snippets of
