@@ -74,7 +74,8 @@ if (getStringFromRequest('add')) {
 			if (!$res || db_affected_rows($res) < 1) {
 				$feedback .= _('Error adding VHOST:') .db_error();
 			} else {
-				$feedback .= _('Virtual Host:'). "<strong>".$vhost_name."</strong>" ._('scheduled for creation on group'). "<em>".$group->getUnixName()."</em>";
+				$feedback .= sprintf(_("Virtual host <strong>%s</strong> scheduled for creation on group <em>%s</em>"),
+				    $vhost_name, $group->getUnixName());
 			}
 		} else {
 
