@@ -29,6 +29,7 @@ case "$1" in
 
 	# Prepare database
 	su -s /bin/sh @OLDPACKAGE@ -c '/usr/share/@OLDPACKAGE@/bin/register-plugin helloworld "HelloWorld"'
+	su -s /bin/sh @OLDPACKAGE@ -c '/usr/share/@OLDPACKAGE@/plugins/helloworld/bin/db-upgrade.pl'
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
