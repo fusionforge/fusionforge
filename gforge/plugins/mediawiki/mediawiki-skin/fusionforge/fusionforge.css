@@ -5,8 +5,8 @@
 #column-one { padding-top: 0px; }
 */
 /* use the font inherited from FF */
-body {font-size:85%;font-family:"verdana"; color: rgb(68, 68, 68); background-color: rgb(247, 247, 247); text-align: left; };
-td.mainCanvas { font-size:85%;font-family:"verdana"; }
+body {font-size:85%;font-family:"verdana",sans-serif;color:rgb(68,68,68);background-color:rgb(247,247,247);text-align:left; };
+td.mainCanvas { font-size:85%;font-family:"verdana",sans-serif; }
 
 table { background-color: transparent; }
 
