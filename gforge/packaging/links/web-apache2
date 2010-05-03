@@ -1,4 +1,4 @@
 usr/share/gforge/www/env.inc.php usr/share/gforge/plugins/env.inc.php
 usr/share/javascript/yui usr/share/gforge/www/scripts/yui
 usr/share/javascript/prototype usr/share/gforge/www/scripts/prototype
-usr/share/javascript/scriptaculous usr/share/gforge/www/scriptaculous
+usr/share/javascript/scriptaculous usr/share/gforge/www/scripts/scriptaculous
