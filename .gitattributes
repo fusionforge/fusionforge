@@ -1052,7 +1052,7 @@ gforge/plugins/online_help/www/ug_user_skills.html -text
 gforge/plugins/projectlabels/README -text
 gforge/plugins/projectlabels/bin/db-delete.pl -text
 gforge/plugins/projectlabels/bin/db-upgrade.pl -text
-gforge/plugins/projectlabels/common/ProjectLabelsPlugin.class -text
+gforge/plugins/projectlabels/common/ProjectLabelsPlugin.class.php -text
 gforge/plugins/projectlabels/common/projectlabels-init.php -text
 gforge/plugins/projectlabels/db/projectlabels-init.sql -text
 gforge/plugins/projectlabels/packaging/control/190plugin-projectlabels -text
