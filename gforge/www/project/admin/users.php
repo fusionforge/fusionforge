@@ -89,7 +89,7 @@ if (getStringFromRequest('submit')) {
 					//we should remove him from the request list
 					//since it has already been added
 					$gjr=new GroupJoinRequest($group,$user_id);
-					if (($gjr || is_object($gjr)) || (!$gjr->isError())) {
+					if (($gjr || is_object($gjr)) && (!$gjr->isError())) {
 						$gjr->delete(true);
 					}
 				}
