@@ -54,6 +54,11 @@
 3rd-party/php-mail-mbox/php-mail-mbox_0.6.3-1coclico1.diff.gz -text svneol=unset#unset
 3rd-party/php-mail-mbox/php-mail-mbox_0.6.3-1coclico1.dsc -text
 3rd-party/php-mail-mbox/php-mail-mbox_0.6.3.orig.tar.gz -text svneol=unset#unset
+3rd-party/yui/Makefile -text
+3rd-party/yui/Makefile.debian -text
+3rd-party/yui/yui_2.8.0r4-1.diff.gz -text svneol=unset#unset
+3rd-party/yui/yui_2.8.0r4-1.dsc -text
+3rd-party/yui/yui_2.8.0r4.orig.tar.gz -text svneol=unset#unset
 /README -text
 delivery/fusionforge/package/config -text
 delivery/gforge/package/config -text
