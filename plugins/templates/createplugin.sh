@@ -52,6 +52,7 @@ else
 	then
 		echo "Doing package"
 		chmod +x $plugdir/utils/*
+		chmod +x $plugdir/bin/*
 		(cd $modelplugdir;find debian;find packaging)|sort|while read debfile
 		do
 			if [ -d $modelminus/$debfile ]
