@@ -76,13 +76,18 @@ in_svn_repo:= $(wildcard .svn/)
 ifeq ($(strip $(in_svn_repo)),) 
 in_bzr_repo:= $(wildcard .bzr/)
 ifeq ($(strip $(in_bzr_repo)),)
+in_git_repo:= $(wildcard .git/)
+ifeq ($(strip $(in_git_repo)),)
 	svnrev=unknown
 else
+	svnrev=git$(shell git describe --always)
+endif # git
+else
 	svnrev=bzr$(shell bzr revno)
-endif
+endif # bzr
 else
 	svnrev=$(shell LANG=C svn info 2>&1 | grep Revision | cut -d: -f2| sed 's/ //g')
-endif
+endif # svn
 
 MINOR=-1
 MINOR=-$(BRANCH)$(svnrev)+$(XDISTRIB)
