@@ -97,7 +97,7 @@ forge_define_config_item ('session_key', 'core', $GLOBALS['sys_session_key']) ;
 forge_define_config_item ('show_source', 'core', $GLOBALS['sys_show_source']) ;
 forge_define_config_item ('default_trove_cat', 'core', $GLOBALS['default_trove_cat']) ;
 forge_define_config_item ('database_host', 'core', $GLOBALS['sys_dbhost']) ;
-forge_define_config_item ('database_port', 'core', $GLOBALS['sys_dbport']) ;
+forge_define_config_item ('database_port', 'core', @$GLOBALS['sys_dbport']) ;
 forge_define_config_item ('database_name', 'core', $GLOBALS['sys_dbname']) ;
 forge_define_config_item ('database_user', 'core', $GLOBALS['sys_dbuser']) ;
 forge_define_config_item ('database_password', 'core', $GLOBALS['sys_dbpasswd']) ;

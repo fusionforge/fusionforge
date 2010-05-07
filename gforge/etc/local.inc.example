@@ -159,6 +159,8 @@ $sys_use_bookmarks=true;
 $sys_use_project_tags=true;
 $sys_use_project_full_list=true;
 
+$sys_use_manual_uploads=false;
+
 // This one exists purely for hysteric raisins
 $sys_use_mwframe=false;
 
