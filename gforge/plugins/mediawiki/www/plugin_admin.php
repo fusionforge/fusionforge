@@ -83,8 +83,6 @@ $group_logo_url = util_make_url("/plugins/mediawiki/wiki/" .
     $group_unix_name . "/images/.wgLogo.png");
 
 if (getStringFromRequest("logo_submit")) {
-	global $groupdir_prefix, $sys_use_manual_uploads;
-
 	$userfile = getUploadedFile('userfile');
 	$userfile_name = $userfile['name'];
 	$manual_filename = getStringFromRequest('manual_filename');
@@ -115,10 +113,10 @@ if (getStringFromRequest("logo_submit")) {
 			$feedback = _('Unknown file upload error.');
 			break;
 		}
-	} else if ($sys_use_manual_uploads && $manual_filename &&
+	} else if (forge_get_config ('use_manual_uploads') && $manual_filename &&
 	    util_is_valid_filename($manual_filename) &&
 	    is_file($incoming.'/'.$manual_filename)) {
-		$incoming = "$groupdir_prefix/$group_unix_name/incoming";
+		$incoming = forge_get_config('groupdir_prefix')."/$group_unix_name/incoming";
 		$infile = $incoming.'/'.$manual_filename;
 		$fname = $manual_filename;
 		$move = false;
@@ -168,8 +166,8 @@ echo "</div>\n\n";
 </span>
 <p><?php echo _('Upload a new file') ?>: <input type="file" name="userfile"
  size="30" /></p>
-<?php if ($sys_use_manual_uploads) {
-	$incoming = $groupdir_prefix."/".$group_unix_name."/incoming" ;
+	  <?php if (forge_get_config('use_manual_uploads')) {
+$incoming = forge_get_config('groupdir_prefix')."/$group_unix_name/incoming" ;
 
 	echo '<p>';
 	printf(_('Alternatively, you can use a file you already uploaded (by SFTP or SCP) to the project\'s incoming directory (%1$s).'),

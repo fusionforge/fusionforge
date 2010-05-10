@@ -36,7 +36,7 @@ echo notepad_func();
 			<?php echo $pt->getSubmittedRealName(); ?> (<?php echo $pt->getSubmittedUnixName(); ?>)</td>
 		<td><input type="submit" value="<?php echo _('Submit') ?>" name="submit" /></td>
 		<td><strong>Task ID:</strong> <?php echo $project_task_id; ?> @ <?php
-		    echo $GLOBALS['sys_default_domain']; ?></td>
+		echo forge_get_config ('web_host') ; ?></td>
 	</tr>
 
 	<tr>

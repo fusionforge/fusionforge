@@ -91,8 +91,8 @@ if ($showall) {
 }
 
 $tinfo['public'] = $ispublic;
-$tinfo['forge_base'] = $sys_default_domain;
-$tinfo['forge_name'] = $sys_name;
+$tinfo['forge_base'] = forge_get_config ('web_host') ;
+$tinfo['forge_name'] = forge_get_config ('forge_name') ;
 
 header("Content-type: " . $asformat);
 echo minijson_encode($tinfo) . "\n";
