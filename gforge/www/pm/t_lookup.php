@@ -91,6 +91,8 @@ if ($showall) {
 }
 
 $tinfo['public'] = $ispublic;
+$tinfo['forge_base'] = $sys_default_domain;
+$tinfo['forge_name'] = $sys_name;
 
 header("Content-type: " . $asformat);
 echo minijson_encode($tinfo) . "\n";
