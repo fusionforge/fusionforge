@@ -155,7 +155,7 @@ for ($i_proj=1;$i_proj<=$querytotalcount;$i_proj++) {
 		// extra description
 		print '</td></tr><tr valign="top"><td>';
 		// list all trove categories
-		print trove_getcatlisting($row_grp['group_id'],0,1,0);
+		print trove_getcatlisting($row_grp['group_id'],0,1,1);
 		print '</td>';
 		print '<td valign="bottom" style="text-align:right;"><br />'._('Register Date:').' <strong>'.date(_('Y-m-d H:i'),$row_grp['register_time']).'</strong></td>';
 		print '</tr>';
