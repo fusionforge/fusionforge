@@ -84,7 +84,7 @@ Description: collaborative development tool - shared files
 
 Package: gforge-web-apache2
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, libapache2-mod-php5, php5-cgi, php5-pgsql, php5-gd, perl, perl-suid, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, cronolog, python, ssl-cert, libnusoap-php, php-htmlpurifier (>= 4.0), ${misc:Depends}
+Depends: gforge-common, gforge-db-postgresql | gforge-db, libapache2-mod-php5, php5-cgi, php5-pgsql, php5-gd, perl, perl-suid, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, cronolog, python, ssl-cert, libnusoap-php, php-htmlpurifier (>= 4.0), libphp-simplepie, libjs-yui, libjs-scriptaculous, ${misc:Depends}
 Recommends: libphp-jpgraph, locales | locales-all
 Provides: gforge-web
 Conflicts: gforge-web
@@ -284,7 +284,7 @@ Description: Globalsearch plugin for FusionForge
 
 Package: gforge-plugin-mediawiki
 Architecture: all
-Depends: gforge-common (>= 4.8), gforge-db-postgresql (>= 4.8) | gforge-db, gforge-web-apache2 (>= 4.8) | gforge-web, mediawiki (>= 1:1.15~), php5-cli, ${misc:Depends}
+Depends: gforge-common (>= 4.8), gforge-db-postgresql (>= 4.8) | gforge-db, gforge-web-apache2 (>= 4.8) | gforge-web, mediawiki (>= 1:1.15~), php5-cli, php5-gd, ${misc:Depends}
 Description: Mediawiki plugin for FusionForge
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,

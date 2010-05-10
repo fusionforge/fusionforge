@@ -33,6 +33,13 @@ function logo_create($file_location, $wgUploadDirectory) {
 	if (!is_file($file_location) || !file_exists($file_location))
 		return _("Invalid file upload");
 
+	$img = getimagesize($file_location);
+	if (!$img || ($img[2] != IMAGETYPE_PNG))
+		return _("Not a valid PNG image");
+	if ($img[0] != 135 || $img[1] != 135)
+		return sprintf(_("Image size is %dx%d pixels, expected %dx%d instead"),
+		    $img[0], $img[1], 135, 135);
+
 	if (!is_writable($wgUploadDirectory))
 		return _("Cannot copy file to target directory");
 
