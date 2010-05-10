@@ -94,6 +94,7 @@ gforge/common/include/UserManager.class.php -text
 gforge/common/include/config-vars.php -text
 gforge/common/include/config.php -text
 gforge/common/include/group_section_texts.php -text
+gforge/common/include/minijson.php -text
 gforge/common/include/rbac_texts.php -text
 gforge/common/include/tag_cloud.php -text
 gforge/common/include/utils_crossref.php -text
