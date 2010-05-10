@@ -149,7 +149,8 @@ echo "<h1>MediaWiki Plugin Admin for ".$group->getPublicName()."</h1>\n\n";
 echo "<h2>\$wgLogo</h2>\n";
 echo '<div style="border:solid 1px black; margin:3px; padding:3px;">';
 if (file_exists($group_logo)) {
-	echo "\n <p>" . _("Current logo:") . '<br /><img alt="wgLogo.png" ' .
+	echo "\n <p>" . _("Current logo:") . ' (<a href="' . $group_logo_url .
+	    '">' . _("Download") . '</a>)<br /><img alt="wgLogo.png" ' .
 	    'class="boxed_wgLogo" src="' . $group_logo_url . '" />' .
 	    "</p>\n";
 } else {
