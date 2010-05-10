@@ -35,6 +35,8 @@ echo notepad_func();
 		<td><strong><?php echo _('Submitted by') ?>:</strong><br />
 			<?php echo $pt->getSubmittedRealName(); ?> (<?php echo $pt->getSubmittedUnixName(); ?>)</td>
 		<td><input type="submit" value="<?php echo _('Submit') ?>" name="submit" /></td>
+		<td><strong>Task ID:</strong> <?php echo $project_task_id; ?> @ <?php
+		    echo $GLOBALS['sys_default_domain']; ?></td>
 	</tr>
 
 	<tr>
@@ -46,6 +48,11 @@ echo notepad_func();
 		<td>
 			<strong><?php echo _('Subproject'); ?>:</strong><br />
 			<?php echo $pg->groupProjectBox('new_group_project_id',$group_project_id,false); ?>
+		</td>
+
+		<td>
+			<strong><a href="<?php echo util_make_url("/pm/t_follow.php/" . $project_task_id); ?>">Permalink</a>:</strong><br />
+			<?php echo util_make_url("/pm/t_follow.php/" . $project_task_id); ?>
 		</td>
 	</tr>
 
@@ -59,6 +66,13 @@ echo notepad_func();
 		<strong><?php echo _('Priority') ?>:</strong><br />
 		<?php echo build_priority_select_box('priority',$pt->getPriority()); ?>
 		</td>
+
+		<td>
+		<strong>Task Detail Information (JSON):</strong><br />
+		<a href="<?php echo util_make_url("/pm/t_lookup.php?tid=" . $project_task_id); ?>">application/json</a>
+		or
+		<a href="<?php echo util_make_url("/pm/t_lookup.php?text=1&amp;tid=" . $project_task_id); ?>">text/plain</a>
+		</td>
 	</tr>
 
   	<tr>
@@ -66,13 +80,13 @@ echo notepad_func();
 		<strong><?php echo _('Task Summary') ?>:</strong><br />
 		<input type="text" name="summary" size="65" maxlength="65" value="<?php echo $pt->getSummary(); ?>" />
 		</td>
-		<td>
+		<td colspan="2">
 		<a href="<?php echo getStringFromServer('PHP_SELF')."?func=deletetask&amp;project_task_id=$project_task_id&amp;group_id=$group_id&amp;group_project_id=$group_project_id"; ?>"><?php echo _('Delete this task') ?></a>
 		</td>
 	</tr>
 
 	<tr>
-		<td colspan="2">
+		<td colspan="3">
 		<strong><?php echo _('Original Comment') ?>:</strong><br />
 		<?php echo nl2br( $pt->getDetails() ); ?>
 		<p />
@@ -82,7 +96,7 @@ echo notepad_func();
 	</tr>
 
 	<tr>
-		<td colspan="2">
+		<td colspan="3">
 		<strong><?php echo _('Start Date') ?>:</strong><br />
 		<?php
 		echo $pg->showMonthBox ('start_month',date('m', $pt->getStartDate()));
@@ -96,7 +110,7 @@ echo notepad_func();
 	</tr>
 
 	<tr>
-		<td colspan="2">
+		<td colspan="3">
 		<strong><?php echo _('End Date') ?>:</strong><br />
 		<?php
 		echo $pg->showMonthBox ('end_month',date('m', $pt->getEndDate()));
@@ -119,7 +133,7 @@ echo notepad_func();
 		?>
 		</td>
 
-		<td valign="top">
+		<td valign="top" colspan="2">
 		<strong><?php echo _('Dependent on task') ?>:</strong><br />
 		<?php
 		/*
@@ -138,7 +152,7 @@ echo notepad_func();
 		<input type="text" name="hours" size="5" value="<?php echo $pt->getHours(); ?>" />
 		</td>
 
-		<td>
+		<td colspan="2">
 		<strong><?php echo _('Status') ?>:</strong><br />
 		<?php
 		echo $pg->statusBox('status_id', $pt->getStatusID(), false );
@@ -155,7 +169,7 @@ echo notepad_func();
 		<input type="text" name="hours" size="5" value="<?php echo $pt->getHours(); ?>" />
 		</td>
 
-		<td>
+		<td colspan="2">
 		<strong><?php echo _('Status') ?></strong><br />
 		<?php
 //		echo $pg->statusBox('status_id', $pt->getStatusID(), false );
@@ -164,19 +178,19 @@ echo notepad_func();
 	</tr>
 -->
 	<tr>
-		<td colspan="2">
+		<td colspan="3">
 			<?php echo $pt->showDependentTasks(); ?>
 		</td>
 	</tr>
 
 	<tr>
-		<td colspan="2">
+		<td colspan="3">
 			<?php echo $pt->showRelatedArtifacts(); ?>
 		</td>
 	</tr>
 
 	<tr>
-		<td colspan="2">
+		<td colspan="3">
 			<?php echo $pt->showMessages(); ?>
 		</td>
 	</tr>
@@ -185,13 +199,13 @@ echo notepad_func();
 		plugin_hook("task_extra_detail",$hookParams);
 	?>
 	<tr>
-		<td colspan="2">
+		<td colspan="3">
 			<?php echo $pt->showHistory(); ?>
 		</td>
 	</tr>
 
 	<tr>
-		<td colspan="2" style="text-align:center">
+		<td colspan="3" style="text-align:center">
 		<input type="submit" value="<?php echo _('Submit') ?>" name="submit" />
 		</td>
 	</tr>
