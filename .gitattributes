@@ -3696,6 +3696,7 @@ gforge/www/plugins/webcalendar -text
 gforge/www/pm/csv.php -text
 gforge/www/pm/format_csv.php -text
 gforge/www/pm/t_follow.php -text
+gforge/www/pm/t_lookup.php -text
 gforge/www/project/admin/tools.php -text
 gforge/www/project/admin/users.php -text
 gforge/www/scm/browser.php -text

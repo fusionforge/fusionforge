@@ -21,20 +21,19 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *-
- * Follow up to the task information page by UUID (project_task_id)
- * via a redirection.
+ * Locate task information by UUID (project_task_id) and return as JSON.
  */
 
 /*-
- * I'm not a real programmer. I throw together things until it works
- * then I move on. The real programmers will say "yeah it works but
- * you're leaking memory everywhere. Perhaps we should fix that." I'll
- * just restart apache every 10 requests.
+ * We have things like protected properties. We have abstract methods.
+ * We have all this stuff that your computer science teacher told you
+ * you should be using. I don't care about this crap at all.
  * -- Rasmus Lerdorf
  */
 
 require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/minijson.php';
 require_once $gfcommon.'pm/ProjectTaskSqlQueries.php';
 
 $tid = getIntFromRequest('tid');
@@ -54,10 +53,45 @@ if (!$tinfo) {
 	exit;
 }
 
-$dsturl = util_make_url("/pm/task.php?func=detailtask&project_task_id=" .
-    $tinfo['project_task_id'] . "&group_id=" . $tinfo['group_id'] .
-    "&group_project_id=" . $tinfo['group_project_id']);
-header("HTTP/1.0 302 Found");
-header("Location: " . $dsturl);
-echo "The result is at:\n" . $dsturl . "\n";
+$asuser = getStringFromRequest('asuser');
+
+if (getIntFromRequest('text'))
+	$asformat = "text/plain; charset=\"UTF-8\"";
+else
+	$asformat = "application/json; charset=\"UTF-8\"";
+
+$islogin = session_loggedin();
+$isadmin = session_checkperm(array('group'=>'1','admin_flags'=>'A'));
+$ishttps = session_issecure();
+$ispublic = isProjectTaskInfoPublic($tid);
+
+if (!$ishttps) {
+	$islogin = false;
+	$isadmin = false;
+}
+
+if ($ispublic) {
+	$showall = true;
+} else if ($islogin) {
+	if (!$isadmin) {
+		/* operate as ourselves */
+		$asuser = session_get_user()->getUnixName();
+	}
+
+	if (isUserAndTaskinSameGroup($tid, $asuser))
+		$showall = true;
+	else
+		$showall = false;
+} else {
+	$showall = false;
+}
+
+if ($showall) {
+	$tinfo = getAllFromProjectTask($tid);
+}
+
+$tinfo['public'] = $ispublic;
+
+header("Content-type: " . $asformat);
+echo minijson_encode($tinfo) . "\n";
 exit;
