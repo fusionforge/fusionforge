@@ -418,3 +418,10 @@ A.lnkutility:hover { COLOR: #ffffff }
 .artifact_closed { text-decoration: line-through; }
 .task_closed { text-decoration: line-through; }
 
+.boxed_wgLogo {
+  width:135px;
+  height:135px;
+  border:1px solid #CCCCCC;
+  margin:1px;
+  padding:1px;
+}

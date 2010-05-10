@@ -295,6 +295,10 @@ if (is_file("/etc/mediawiki-extensions/extensions.php")) {
         include( "/etc/mediawiki-extensions/extensions.php" );
 }
 
+if (file_exists("$wgUploadDirectory/.wgLogo.png")) {
+	$wgLogo = "$wgScriptPath/images/.wgLogo.png";
+}
+
 // project specific settings
 if (is_file("$project_dir/ProjectSettings.php")) {
         include ("$project_dir/ProjectSettings.php") ;

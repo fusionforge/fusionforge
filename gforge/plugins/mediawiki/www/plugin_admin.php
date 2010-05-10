@@ -27,6 +27,27 @@
 require_once('../../env.inc.php');
 require_once $gfwww.'include/pre.php';
 
+function logo_create($file_location, $wgUploadDirectory) {
+	$logofile = $wgUploadDirectory . "/.wgLogo.png";
+
+	if (!is_file($file_location) || !file_exists($file_location))
+		return _("Invalid file upload");
+
+	if (!is_writable($wgUploadDirectory))
+		return _("Cannot copy file to target directory");
+
+	if (file_exists($logofile) && !is_writable($logofile))
+		return _("Cannot overwrite existing file");
+
+	$cmd = "/bin/mv " . escapeshellcmd($file_location) .
+	    " " . escapeshellcmd($logofile);
+	exec($cmd,$out);
+	if (!file_exists($logofile))
+		return _("Cannot move file to target location");
+
+	return _("New file installed successfully");
+}
+
 $user = session_get_user();
 if (!$user || !is_object($user) || $user->isError() || !$user->isActive())
 	exit_error("Invalid User", "Cannot process your request for this user.");
@@ -47,6 +68,67 @@ if (!$userperm->IsMember())
 if (!$userperm->IsAdmin())
 	exit_error("Access Denied", "You are not an admin of this project");
 
+$group_unix_name = $group->getUnixName();
+$wgUploadDirectory = "/var/lib/gforge/plugins/mediawiki/wikidata/" .
+    $group_unix_name . "/images";
+$group_logo = $wgUploadDirectory . "/.wgLogo.png";
+$group_logo_url = util_make_url("/plugins/mediawiki/wiki/" .
+    $group_unix_name . "/images/.wgLogo.png");
+
+if (getStringFromRequest("logo_submit")) {
+	global $groupdir_prefix, $sys_use_manual_uploads;
+
+	$userfile = getUploadedFile('userfile');
+	$userfile_name = $userfile['name'];
+	$manual_filename = getStringFromRequest('manual_filename');
+
+	$feedback = "";
+
+	if (getIntFromRequest("logo_nuke") == 1) {
+		if (unlink($wgUploadDirectory . "/.wgLogo.png"))
+			$feedback = _("File successfully removed");
+		else
+			$feedback = _("File removal error");
+	} else if ($userfile && is_uploaded_file($userfile['tmp_name']) &&
+	    util_is_valid_filename($userfile['name'])) {
+		$infile = $userfile['tmp_name'];
+		$fname = $userfile['name'];
+		$move = true;
+	} else if ($userfile && $userfile['error'] != UPLOAD_ERR_OK &&
+	    $userfile['error'] != UPLOAD_ERR_NO_FILE) {
+		switch ($userfile['error']) {
+		case UPLOAD_ERR_INI_SIZE:
+		case UPLOAD_ERR_FORM_SIZE:
+			$feedback = _('The uploaded file exceeds the maximum file size. Contact to the site admin to upload this big file, or use an alternate upload method (if available).');
+			break;
+		case UPLOAD_ERR_PARTIAL:
+			$feedback = _('The uploaded file was only partially uploaded.');
+			break;
+		default:
+			$feedback = _('Unknown file upload error.');
+			break;
+		}
+	} else if ($sys_use_manual_uploads && $manual_filename &&
+	    util_is_valid_filename($manual_filename) &&
+	    is_file($incoming.'/'.$manual_filename)) {
+		$incoming = "$groupdir_prefix/$group_unix_name/incoming";
+		$infile = $incoming.'/'.$manual_filename;
+		$fname = $manual_filename;
+		$move = false;
+	} else {
+		$feedback = _('Unknown file upload error.');
+	}
+
+	if (!$feedback) {
+		if (!$move) {
+			$tmp = tempnam('', '');
+			copy($infile, $tmp);
+			$infile = $tmp;
+		}
+		$feedback = logo_create($infile, $wgUploadDirectory);
+	}
+}
+
 site_project_header(array(
 	"title" => "MediaWiki Plugin Admin",
 	"pagename" => "MediaWiki Project Admin",
@@ -55,7 +137,46 @@ site_project_header(array(
 	"group" => $gid,
     ));
 
-echo "<p>Dummy page.</p>\n";
+echo "<h1>MediaWiki Plugin Admin for ".$group->getPublicName()."</h1>\n\n";
 
+echo "<h2>\$wgLogo</h2>\n";
+echo '<div style="border:solid 1px black; margin:3px; padding:3px;">';
+if (file_exists($group_logo)) {
+	echo "\n <p>" . _("Current logo:") . '<br /><img alt="wgLogo.png" ' .
+	    'class="boxed_wgLogo" src="' . $group_logo_url . '" />' .
+	    "</p>\n";
+} else {
+	echo "\n <p>" . _("No per-project logo currently installed.") . "</p>\n";
+}
+echo "</div>\n\n";
+
+?>
+<form enctype="multipart/form-data" method="post"
+ style="border:solid 1px black; margin:3px; padding:3px;"
+ action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$gid"; ?>">
+<h4><?php echo _("Upload a new logo") ?></h4>
+<span class="important">
+ <?php echo _('NOTE: In some browsers you must select the file in the file-upload dialog and click "OK".  Double-clicking doesn\'t register the file.')?>)
+</span>
+<p><?php echo _('Upload a new file') ?>: <input type="file" name="userfile"
+ size="30" /></p>
+<?php if ($sys_use_manual_uploads) {
+	$incoming = $groupdir_prefix."/".$group_unix_name."/incoming" ;
+
+	echo '<p>';
+	printf(_('Alternatively, you can use a file you already uploaded (by SFTP or SCP) to the project\'s incoming directory (%1$s).'),
+	       $incoming);
+	echo '<br />';
+	echo _('Choose an already uploaded file:').'<br />';
+	$manual_files_arr=ls($incoming,true);
+	echo html_build_select_box_from_arrays($manual_files_arr,$manual_files_arr,'manual_filename',''); ?>
+	</p>
+<?php } ?>
+<p><input type="checkbox" name="logo_nuke" value="1" /><?php
+ echo _("… or delete the currently uploaded logo and revert to the site default"); ?></p>
+<p><input type="submit" name="logo_submit" value="<?php echo _("Upload new logo"); ?>" /></p>
+</form>
+
+<?php
 site_project_footer(array());
 ?>
