@@ -141,7 +141,7 @@ class Valid {
      * @access private
      */
     function addFeedback($level, $error) {
-        $GLOBALS['Response']->addFeedback($level, $error);
+        $GLOBALS['feedback'].=  $level.": ". $error;
     }
 
     /**

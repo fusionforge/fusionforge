@@ -43,7 +43,7 @@ class Valid_GroupId
 extends Valid {
     function Valid_GroupId() {
         parent::Valid('group_id');
-        //$this->setErrorMessage($GLOBALS['Language']->getText('include_exit','no_gid_err'));
+        //$this->setErrorMessage(_("Error - No group_id was chosen."));
     }
 
     function validate($value) {
