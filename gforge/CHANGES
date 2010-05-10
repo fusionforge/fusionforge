@@ -1,4 +1,5 @@
-UNRELEASED:
+FusionForge-5.0.1:
+* Maintenance release, bugfixes and translations only.
 
 FusionForge-5.1:
 * Trackers: New progressbar to view completion state (when custom status field is used) (Alain Peyrat)
