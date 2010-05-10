@@ -895,6 +895,11 @@ class ProjectTask extends Error {
 		$status_id,$category_id,$percent_complete,&$assigned_arr,&$depend_arr,
 		$new_group_project_id,$duration=0,$parent_id=0) {
 		$has_changes = false; // if any of the values passed is different from
+		
+		$arrChangedAndInNotice = array("details"=>"","summary"=>"",
+		"complete"=>"","status"=>"","subproject"=>""); /* includes only 
+		entries that changed and will be sended by E-Mail (sendNotice()) */
+		
 		$v = new Validator();
 		$v->check($summary, "summary");
 		$v->check($priority, "priority");
@@ -965,11 +970,14 @@ class ProjectTask extends Error {
 			$this->ProjectGroup =& $newProjectGroup;
 			$this->addHistory ('group_project_id',$group_project_id);
 			$has_changes = true;
+			$arrChangedAndInNotice['subproject'] = ">";
 		}
 
 
 		if ($details) {
 			$has_changes = true;
+			if($details != "" && $details != null) {$arrChangedAndInNotice['details'] = ">";}
+			//Message vorhanden;
 			if (!$this->addMessage($details)) {
 				db_rollback();
 				return false;
@@ -978,6 +986,7 @@ class ProjectTask extends Error {
 		if ($this->getStatusID() != $status_id) { 
 			$this->addHistory ('status_id',$this->getStatusID());
 			$has_changes = true;
+			$arrChangedAndInNotice['status'] = ">";
 		}
 
 		if ($this->getCategoryID() != $category_id)	{
@@ -993,11 +1002,13 @@ class ProjectTask extends Error {
 		if ($this->getSummary() != htmlspecialchars(stripslashes($summary))) {
 			$this->addHistory ('summary',addslashes($this->getSummary()));
 			$has_changes = true;
+			$arrChangedAndInNotice['summary'] = ">";
 		}
 
 		if ($this->getPercentComplete() != $percent_complete) {
 			$this->addHistory ('percent_complete',$this->getPercentComplete());
 			$has_changes = true;
+			$arrChangedAndInNotice['complete'] = ">";
 		}
 
 		if ($this->getHours() != $hours) {
@@ -1077,7 +1088,7 @@ class ProjectTask extends Error {
 					return false;
 				} else {
 					if ($has_changes) { //only send email if there was any change
-						$this->sendNotice();
+						$this->sendNotice(false, $arrChangedAndInNotice);
 					}
 					db_commit();
 					return true;
@@ -1092,8 +1103,9 @@ class ProjectTask extends Error {
 	 *
 	 *	@return	boolean	success.
 	 */
-	function sendNotice($first=false) {
+	function sendNotice($first=false, $arrChangedAndInNotice=array()) {
 		global $send_task_email;
+
 		if ($send_task_email===false) {
 			return true;
 		}
@@ -1107,11 +1119,11 @@ class ProjectTask extends Error {
 		}
 
 		$body = "Task #". $this->getID() ." has been updated. ".
-			"\n\nProject: ". $this->ProjectGroup->Group->getPublicName() .
-			"\nSubproject: ". $this->ProjectGroup->getName() .
-			"\nSummary: ".util_unconvert_htmlspecialchars( $this->getSummary() ).
-			"\nComplete: ". $this->getPercentComplete() ."%".
-			"\nStatus: ". $this->getStatusName() .
+			"\n\nProject: ". $this->ProjectGroup->Group->getPublicName() 
+			."\n". $arrChangedAndInNotice['subproject']."Subproject: ". $this->ProjectGroup->getName() 
+			."\n". $arrChangedAndInNotice['summary']. "Summary: ".util_unconvert_htmlspecialchars( $this->getSummary() )
+			."\n". $arrChangedAndInNotice['complete']. "Complete: ". $this->getPercentComplete() ."%"
+			."\n". $arrChangedAndInNotice['status']. "Status: ". $this->getStatusName() .
 			"\n\nDescription: ". util_unconvert_htmlspecialchars( $this->getDetails() );
 
 		/*
@@ -1124,12 +1136,14 @@ class ProjectTask extends Error {
 		if ($result2 && $rows > 0) {
 			$body .= "\n\nFollow-Ups:";
 			for ($i=0; $i<$rows;$i++) {
+				if($i===0){ $temp = $arrChangedAndInNotice['details']; } else {$temp = "";}
 				$body .= "\n\n-------------------------------------------------------";
 				$body .= "\nDate: ". date(_('Y-m-d H:i'),db_result($result2,$i,'postdate'));
 				$body .= "\nBy: ".db_result($result2,$i,'user_name');
-				$body .= "\n\nComment:\n".util_unconvert_htmlspecialchars(db_result($result2,$i,'body'));
+				$body .= "\n\n". $temp ."Comment:\n".util_unconvert_htmlspecialchars(db_result($result2,$i,'body'));
 			}
 		}
+
 		$body .= "\n\n-------------------------------------------------------".
 			"\nFor more info, visit:".
 			"\n\n".util_make_url ('/pm/task.php?func=detailtask&project_task_id='.$this->getID().
