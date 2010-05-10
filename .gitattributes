@@ -4073,7 +4073,6 @@ plugins/coclico/codendi-specific/common/dao/include/DataAccessObject.class.php.o
 plugins/coclico/codendi-specific/common/dao/include/diffDataAccess -text
 plugins/coclico/codendi-specific/common/dao/include/diffDataAccessObject -text
 plugins/coclico/codendi-specific/env.inc.php -text
-plugins/coclico/codendi-specific/plugins_utils.php~ -text
 plugins/coclico/codendi-specific/www/include/plugins_utils.php -text
 plugins/coclico/forumml/README.txt -text
 plugins/coclico/forumml/TODO -text
