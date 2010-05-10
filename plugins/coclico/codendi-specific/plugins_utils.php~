@@ -1,0 +1,91 @@
+<?php
+
+require_once('pre.php');
+
+/**
+ * userIsAdmin - use this function to know if the user can administrate mailing lists
+ *
+ * This is a static method. Currently the user must be a project or a sitewide admin to administrate the mailing lists
+ *
+ * @return boolean true if the user can administrate mailing lists
+ */
+function userIsProjectAdmin($group_id) {
+	$current_user=UserManager::instance()->getCurrentUser();
+	if (!$current_user->isMember($group_id,'A')) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
+function & getGroup($group_id)
+{
+
+	$pm = ProjectManager::instance();
+	$Group = $pm->getProject($group_id);
+	return $Group;
+}
+
+function isLogged(){
+	return user_isloggedin();
+}
+
+function ismember($group_id){
+	$current_user=UserManager::instance()->getCurrentUser();
+	return $current_user->isMember($group_id);
+}
+
+function getCurrentID()
+{
+	$current_user=UserManager::instance()->getCurrentUser();
+	return $current_user->getID();
+}
+function getEmail($id=false)
+{
+	if(!$id) {
+		$id =getCurrentID();
+	}
+	$user=UserManager::instance()->getUserByID($id);
+	return $user->getEmail();
+}
+function getPasswd()
+{
+	$current_user=UserManager::instance()->getCurrentUser();
+	return $current_user->getUserPw();
+}
+function getRealName()
+{
+	$current_user=UserManager::instance()->getCurrentUser();
+	return $current_user->getRealName();
+}
+function getRequest($param)
+{
+	$request =& HTTPRequest::instance();
+	if ($request->exist($param)) {
+		$result=$request->get($param);
+	}
+	else {
+		$result = false;
+	}
+	return $result;
+
+}
+function htmlRedirect($url) {
+	$GLOBALS['HTML']->redirect($url);
+}
+function htmlIframe($url,$poub) {
+	$GLOBALS['HTML']->iframe($url,array('class' => 'iframe_service'));
+}
+
+
+function helpButton($params)
+{
+	echo ' | ';
+	echo help_button($params,false,_('Help'));
+}
+function getIcon() {
+	echo '<IMG SRC="'.util_get_image_theme("ic/cfolder15.png").'" HEIGHT="13" WIDTH="15" BORDER="0">';
+}
+?>
+
+

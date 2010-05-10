@@ -4066,6 +4066,15 @@ packaging/tag_packaging_create -text
 packaging/tag_packaging_delete -text
 plugins/coclico/Makefile -text
 plugins/coclico/Makefile.debian -text
+plugins/coclico/codendi-specific/common/dao/include/DataAccess.class.php -text
+plugins/coclico/codendi-specific/common/dao/include/DataAccess.class.php.orig -text
+plugins/coclico/codendi-specific/common/dao/include/DataAccessObject.class.php -text
+plugins/coclico/codendi-specific/common/dao/include/DataAccessObject.class.php.orig -text
+plugins/coclico/codendi-specific/common/dao/include/diffDataAccess -text
+plugins/coclico/codendi-specific/common/dao/include/diffDataAccessObject -text
+plugins/coclico/codendi-specific/env.inc.php -text
+plugins/coclico/codendi-specific/plugins_utils.php~ -text
+plugins/coclico/codendi-specific/www/include/plugins_utils.php -text
 plugins/coclico/forumml/README.txt -text
 plugins/coclico/forumml/TODO -text
 plugins/coclico/forumml/bin/db-upgrade.pl -text
