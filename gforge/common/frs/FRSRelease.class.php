@@ -281,7 +281,7 @@ class FRSRelease extends Error {
 	 *
 	 *  @return	boolean	success.
 	 */
-	function sendNotice() {
+	function sendNotice() { //send E-Mail
 		$arr =& $this->FRSPackage->getMonitorIDs();
 
 		$date = date('Y-m-d H:i',time());
@@ -290,18 +290,37 @@ class FRSRelease extends Error {
 				    $this->FRSPackage->Group->getUnixName(),
 				    $this->FRSPackage->getName());
 		$text = stripcslashes(sprintf(_('Project %1$s (%2$s) has released a new version of package "%3$s".
+
+Release note: 
+		
+%4$s
+								
+Change note:
+
+%5$s
+
+
 You can download it by following this link:
 
-%4$s
+%6$s
 
 You receive this email because you requested to be notified when new
 versions of this package were released. If you don\'t wish to be
-notified in the future, please login to %5$s and click this link:
+notified in the future, please login to %7$s and click this link:
 
-%6$s'),
+%8$s
+		
+
+		
+	
+
+'
+),
 					      $this->FRSPackage->Group->getPublicName(),
 					      $this->FRSPackage->Group->getUnixName(),
-					      $this->FRSPackage->getName(),
+					      $this->FRSPackage->getName(), 
+					      $this->getNotes(),
+					      $this->getChanges(),
 					      util_make_url ("/frs/?group_id=". $this->FRSPackage->Group->getID() ."&release_id=". $this->getID()),
 					      forge_get_config ('forge_name'),
 					      util_make_url ("/frs/monitor.php?filemodule_id=".$this->FRSPackage->getID()."&group_id=".$this->FRSPackage->Group->getID()."&stop=1")));
