@@ -1176,6 +1176,33 @@ if (!function_exists('array_replace_recursive')) {
 	}
 }
 
+/*-
+ * I have absolutely no idea how to write a programming language, I just
+ * kept adding the next logical step on the way.
+ * -- Rasmus Lerdorf
+ */
+
+/* returns an integer from http://forge/foo/bar.php/123 or false */
+function util_path_info_last_numeric_component() {
+	/* PHP devs are idiots… ereg_replace is deprecated WTF? */
+	$ok = false;
+	foreach (str_split($_SERVER['PATH_INFO']) as $x) {
+		if ($x == '/') {
+			$rv = 0;
+			$ok = true;
+		} else if ($ok == false) {
+			; /* need reset using slash */
+		} else if ((ord($x) >= 48) && (ord($x) <= 57)) {
+			$rv = $rv * 10 + ord($x) - 48;
+		} else {
+			$ok = false;
+		}
+	}
+	if ($ok)
+		return $rv;
+	return false;
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
