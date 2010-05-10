@@ -419,8 +419,11 @@ function session_set_new($user_id) {
 	// 
 	$res = session_getdata($user_id);
 
-	if (!$res || db_numrows($res) < 1) {
+	if (!$res) {
 		exit_error(_('ERROR'),_('ERROR').": ".db_error());
+	}
+	else if (db_numrows($res) < 1) {
+		exit_error(_('ERROR'),_('ERROR').": could not fetch user session data");
 	} else {
 
 		//set up the new user object
