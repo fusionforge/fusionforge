@@ -57,17 +57,22 @@ if ($func == 'delete') {
 if ($func == 'addlabeltoproject') {
 	$label_id = getIntFromRequest ('label_id', 0) ;
 	$group_uname = addslashes (getStringFromRequest ('group_uname')) ;
-		$g = group_get_object_by_name ($group_uname) ;
+	$g = group_get_object_by_name ($group_uname) ;
+
+	if ($g && !$g->isError()) {
 
 		$res = db_query_params ('INSERT INTO plugin_projectlabels_group_labels (label_id, group_id) VALUES ($1, $2)',
 					array ($label_id,
 					       $g->getID()));
-
-	if (!$res || db_affected_rows($res) < 1) {
-		printf (_('Cannot add label onto project: %s'),
-			db_error()) ;
+		
+		if (!$res || db_affected_rows($res) < 1) {
+			printf (_('Cannot add label onto project: %s'),
+				db_error()) ;
+		} else {
+			echo _('The label has been added to the project.');
+		}
 	} else {
-		echo _('The label has been added to the project.');
+		echo _('No such project.') ;
 	}
 	
 }

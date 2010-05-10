@@ -153,10 +153,12 @@ if (getStringFromRequest('submit')) {
 </textarea>
 </p>
 
+<?php if ($GLOBALS['sys_use_project_tags']) { ?>
 <p>
 <?php echo _('Tags (use comma as separator)') ?>:<br />
 <input type="text" name="form_tags" size="100" value="<?php echo $group->getTags(); ?>" />
 </p>
+<?php } ?>
 
 <p><?php echo _('Trove Categorization:&nbsp;') ?><a href="/project/admin/group_trove.php?group_id=<?php echo $group->getID(); ?>">[<?php echo _('Edit') ?>]</a></p>
 

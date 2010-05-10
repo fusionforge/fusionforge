@@ -406,6 +406,11 @@ function trove_del_cat_id($node) {
         if (!$res) {
                 exit_error( _('Error In Trove Operation'), db_error());
         }
+        $res=db_query_params ('DELETE FROM trove_agg WHERE trove_cat_id=$1',
+			array($node));
+        if (!$res) {
+                exit_error( _('Error In Trove Operation'), db_error());
+        }
         $res=db_query_params ('DELETE FROM trove_cat WHERE trove_cat_id=$1',
 			array($node));
         if (!$res || db_affected_rows($res)<1) {
