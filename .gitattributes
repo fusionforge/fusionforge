@@ -1031,6 +1031,7 @@ gforge/plugins/mediawiki/packaging/install/plugin-mediawiki -text
 gforge/plugins/mediawiki/packaging/links/plugin-mediawiki -text
 gforge/plugins/mediawiki/www/LocalSettings.php -text
 gforge/plugins/mediawiki/www/frame.php -text
+gforge/plugins/mediawiki/www/plugin_admin.php -text
 gforge/plugins/online_help/common/online_help-init.php -text
 gforge/plugins/online_help/common/online_helpPlugin.class.php -text
 gforge/plugins/online_help/www/ar01s01s01.html -text

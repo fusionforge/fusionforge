@@ -33,6 +33,7 @@ class MediaWikiPlugin extends Plugin {
 		$this->hooks[] = "role_get";
 		$this->hooks[] = "role_normalize";
 		$this->hooks[] = "role_translate_strings";
+		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page for group
 	}
 
 	function CallHook ($hookname, $params) {
@@ -133,6 +134,14 @@ class MediaWikiPlugin extends Plugin {
 			$edit->setValueDescriptions (array ('0' => _('No editing'),
 							    '1' => _('Edit existing pages only'), 
 							    '2' => _('Edit and create pages'))) ;
+		} else if ($hookname == "project_admin_plugins") {
+			$group_id = $params['group_id'];
+			$group = &group_get_object($group_id);
+			if ($group->usesPlugin($this->name))
+				echo util_make_link(
+				    "/plugins/mediawiki/plugin_admin.php?group_id=" .
+				    $group->getID(), _("MediaWiki Plugin admin")) .
+				    "<br />";
 		}
 	}
   }
