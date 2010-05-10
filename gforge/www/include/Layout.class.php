@@ -1,32 +1,32 @@
 <?php
-  /**
-   * Base layout class.
-   *
-   * Extends the basic Error class to add HTML functions
-   * for displaying all site dependent HTML, while allowing
-   * extendibility/overriding by themes via the Theme class.
-   *
-   * Make sure browser.php is included _before_ you create an instance
-   * of this object.
-   *
-   * Geoffrey Herteg, August 29, 2000
-   *
-   */
- 
+/**
+ * Base layout class.
+ *
+ * Extends the basic Error class to add HTML functions
+ * for displaying all site dependent HTML, while allowing
+ * extendibility/overriding by themes via the Theme class.
+ *
+ * Make sure browser.php is included _before_ you create an instance
+ * of this object.
+ *
+ * Geoffrey Herteg, August 29, 2000
+ *
+ */
+
 require_once $gfcommon.'include/constants.php';
 require_once $gfcommon.'include/Navigation.class.php';
 
 class Layout extends Error {
 
-        /**
+	/**
 	 * Which doctype to use. Can be configured in the
 	 * constructor. If set to 'strict', headerHTMLDeclaration will
 	 * create a doctype definition that uses the strict doctype,
 	 * otherwise it will use the transitional doctype.  
 	 * @var string $doctype
 	 */
-        var $doctype = 'transitional';
-        
+	var $doctype = 'transitional';
+
 	/**
 	 * Which cssfiles to use. Can be configured in the
 	 * constructor. 
@@ -39,15 +39,15 @@ class Layout extends Error {
 	/**
 	 * The default main page content 
 	 * @var      string $rootindex
-         */
+	 */
 	var $rootindex = 'index_std.php';
 
 	/**
 	 * The base directory of the theme in the servers file system
 	 * @var      string $themedir
 	 */ 
-        var $themedir;
-         
+	var $themedir;
+
 	/**
 	 * The base url of the theme
 	 * @var      string $themeurl
@@ -58,73 +58,73 @@ class Layout extends Error {
 	 * The base directory of the css files in the servers file system
 	 * @var      string $cssdir
 	 */ 
-        var $cssdir;
+	var $cssdir;
 
 	/**
 	 * The base url of the css files
 	 * @var      string $cssbaseurl
 	 */ 
-        var $cssbaseurl;
+	var $cssbaseurl;
 
 	/**
 	 * The base directory of the image files in the servers file system
 	 * @var      string $imgdir
 	 */ 
-        var $imgdir;
+	var $imgdir;
 
 	/**
 	 * The base url of the image files
 	 * @var      string $imgbaseurl
 	 */ 
-        var $imgbaseurl;
+	var $imgbaseurl;
 
 	/**
 	 * The base directory of the js files in the servers file system
 	 * @var      string $jsdir
 	 */ 
-        var $jsdir;
-         
+	var $jsdir;
+
 	/**
 	 * The base url of the js files
 	 * @var      string $jsbaseurl
 	 */ 
-        var $jsbaseurl;
-         
+	var $jsbaseurl;
+
 	/*
-         * kept for backwards compatibility
-         */
+	 * kept for backwards compatibility
+	 */
 	/**
-         * The base directory of the theme
-         * @var string $themeroot
-         * @todo: remove in 5.0
-         * @deprecated deprecated since 4.9
-         */
+	 * The base directory of the theme
+	 * @var string $themeroot
+	 * @todo: remove in 5.0
+	 * @deprecated deprecated since 4.9
+	 */
 	var $themeroot;
 
 	/**
-         * The base directory of the theme
-         * @var string $themeroot
-         * @todo: remove in 5.0
-         * @deprecated deprecated since 4.9
-         */
+	 * The base directory of the theme
+	 * @var string $themeroot
+	 * @todo: remove in 5.0
+	 * @deprecated deprecated since 4.9
+	 */
 	var $imgroot;
-         
-        /**
-         * The navigation object that provides the basic links. Should
-         * not be modified.
-         */
-        var $navigation;
-        
+
+	/**
+	 * The navigation object that provides the basic links. Should
+	 * not be modified.
+	 */
+	var $navigation;
+
 
 	/**
 	 * Layout() - Constructor
 	 */
 	function Layout() {
-                // parent constructor
-                $this->Error();
+		// parent constructor
+		$this->Error();
 
-                $this->navigation = new Navigation();
-                
+		$this->navigation = new Navigation();
+
 		// determine rootindex
 		if ( file_exists(forge_get_config('custom_path') . '/index_std.php') ) {
 			$this->rootindex = forge_get_config('custom_path') . '/index_std.php';
@@ -139,7 +139,7 @@ class Layout extends Error {
 			return;
 		}
 		$this->themeurl = util_make_url('themes/' . forge_get_config('default_theme') . '/');
-                 
+
 		// determine {css,img,js}{url,dir}
 		if (file_exists ($this->themedir . 'css/')) {
 			$this->cssdir = $this->themedir . 'css/';
@@ -148,7 +148,7 @@ class Layout extends Error {
 			$this->cssdir = $this->themedir;
 			$this->cssbaseurl = $this->themeurl;
 		}
-                 
+
 		if (file_exists ($this->themedir . 'images/')) {
 			$this->imgdir = $this->themedir . 'images/';
 			$this->imgbaseurl = $this->themeurl . 'images/';
@@ -156,7 +156,7 @@ class Layout extends Error {
 			$this->imgdir = $this->themedir;
 			$this->imgbaseurl = $this->themeurl;
 		}
-                 
+
 		if (file_exists ($this->themedir . 'js/')) {
 			$this->jsdir = $this->themedir . 'js/';
 			$this->jsbaseurl = $this->themeurl . 'js/';
@@ -169,17 +169,17 @@ class Layout extends Error {
 		$this->cssurls[] = util_make_url ('/themes/css/fusionforge.css');
 
 		/* check if a personalized css stylesheet exist, if yes include only
-		 this stylesheet. New stylesheets should use the <themename>.css file.
-		*/
+		   this stylesheet. New stylesheets should use the <themename>.css file.
+		 */
 		$theme_cssfile = forge_get_config('default_theme') . '.css';
 		if (file_exists($this->cssdir . $theme_cssfile)) {
 			$this->cssurls[] = $this->cssbaseurl . $theme_cssfile;
 		} else {
 			/* if this is not the case, then include the compatibility stylesheet
-			 that contains all removed styles from the code and check if a
-			 custom stylesheet exists. 
-			 Used for compatibility with existing stylesheets
-			*/
+			   that contains all removed styles from the code and check if a
+			   custom stylesheet exists. 
+			   Used for compatibility with existing stylesheets
+			 */
 			$this->cssurls[] = util_make_url('/themes/css/gforge-compat.css');
 			if (file_exists($this->cssdir . 'theme.css')) {
 				$this->cssurls[] = $this->cssbaseurl . 'theme.css';
@@ -191,18 +191,18 @@ class Layout extends Error {
 		$this->imgroot = $this->imgbaseurl;
 	}
 
-        /** 
+	/** 
 	 * header() - generates the complete header of page by calling 
 	 * headerStart() and bodyHeader().
 	 */
 	function header($params) {
 		$this->headerStart($params); ?>
 			<body>
-				 <?php
-				 $this->bodyHeader($params);
+			<?php
+			$this->bodyHeader($params);
 	}
 
-               
+
 	/**
 	 * headerStart() - generates the header code for all themes up to the 
 	 * closing </head>.
@@ -213,31 +213,31 @@ class Layout extends Error {
 	 * @param	array	Header parameters array
 	 */
 	function headerStart($params) {
-                $this->headerHTMLDeclaration();
-                ?>		
+		$this->headerHTMLDeclaration();
+		?>		
 			<head>
-				 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-				 <?php 
-				 $this->headerTitle($params);
-                $this->headerFavIcon();
-                $this->headerRSS();
-                $this->headerSearch();
-                $this->headerCSS();
-                $this->headerJS(); 
+			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+			<?php 
+			$this->headerTitle($params);
+		$this->headerFavIcon();
+		$this->headerRSS();
+		$this->headerSearch();
+		$this->headerCSS();
+		$this->headerJS(); 
 		?>
 			</head>
-				  <?php 
-				  } 
+			<?php 
+	} 
 
-        /**
+	/**
 	 * headerLink() - creates the link headers of the page (FavIcon, RSS and Search)
 	 * @deprecated deprecated since 4.9, use the individual header-functions
 	 * @todo remove in 5.0
 	 */
 	function headerLink() {
-                $this->headerFavIcon();
-                $this->headerRSS();
-                $this->headerSearch();
+		$this->headerFavIcon();
+		$this->headerRSS();
+		$this->headerSearch();
 	}
 
 	/**
@@ -245,7 +245,7 @@ class Layout extends Error {
 	 * XML declaration, the doctype definition, and the opening <html>. 
 	 *
 	 */
-        function headerHTMLDeclaration() {
+	function headerHTMLDeclaration() {
 		print '<?xml version="1.0" encoding="utf-8"?>';
 		if ($this->doctype=='strict') { 
 			echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">';
@@ -254,7 +254,7 @@ class Layout extends Error {
 		} 
 		echo '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="' 
 			. _('en') . '" lang="' . _('en') . '">';
-        }
+	}
 
 	/**
 	 * headerTitle() - creates the <title> header 
@@ -264,8 +264,8 @@ class Layout extends Error {
 	function headerTitle($params) {
 		echo $this->navigation->getTitle($params);
 	}
-        
-        
+
+
 	/**
 	 * headerFavIcon() - creates the favicon <link> headers 
 	 *
@@ -274,7 +274,7 @@ class Layout extends Error {
 		echo $this->navigation->getFavIcon();
 	}
 
-        /**
+	/**
 	 * headerRSS() - creates the RSS <link> headers 
 	 *
 	 */
@@ -282,7 +282,7 @@ class Layout extends Error {
 		echo $this->navigation->getRSS();
 	}
 
-        /**
+	/**
 	 * headerSearch() - creates the search <link> header 
 	 *
 	 */
@@ -293,12 +293,12 @@ class Layout extends Error {
 			. '" type="application/opensearchdescription+xml"/>';
 	}
 
-        /** 
+	/** 
 	 * Create the CSS headers for all cssfiles in $cssfiles and
 	 * calls the plugin cssfile hook.
 	 */
 	function headerCSS() {
-                // include the common css
+		// include the common css
 		foreach ($this->cssurls as $cssurl) {
 			echo '<link rel="stylesheet" type="text/css" href="' . $cssurl . '" />';
 		}
@@ -312,107 +312,113 @@ class Layout extends Error {
 	 */
 	function headerJS() {
 		echo '
-		<script type="text/javascript" src="'. util_make_uri('/js/common.js') .'"></script>
-		<script type="text/javascript">';
+<script type="text/javascript" src="/scripts/prototype/prototype.js"></script>
+                        <script type="text/javascript" src="/scripts/scriptaculous/scriptaculous.js"></script>
+                        <script type="text/javascript" src="/scripts/codendi/Tooltip.js"></script>
+                        <script type="text/javascript" src="/scripts/codendi/LayoutManager.js"></script>
+                        <script type="text/javascript" src="/scripts/codendi/ReorderColumns.js"></script>
+                        <script type="text/javascript" src="/scripts/codendi/codendi-1236793993.js"></script>
+			<script type="text/javascript" src="'. util_make_uri('/js/common.js') .'"></script>
+			<script type="text/javascript">';
 		plugin_hook ("javascript",false);
 		echo '
-		</script>';
+			</script>';
 		plugin_hook ("javascript_file",false);
 	}
-               
-        function bodyHeader($params){
+
+	function bodyHeader($params){
 		?>
-		<div class="header">
+			<div class="header">
 			<table border="0" width="100%" cellspacing="0" cellpadding="0" id="headertable">
 			<tr>
 			<td><a href="<?php echo util_make_url ('/'); ?>"><?php echo html_image('logo.png',198,52,array('border'=>'0')); ?></a></td>
-																		    <td><?php $this->searchBox(); ?></td>
-																							      <td align="right"><?php
-																							      $items = $this->navigation->getUserLinks();
-                for ($j = 0; $j < count($items['titles']); $j++) {
-                        echo util_make_link($items['urls'][$j], $items['titles'][$j], array('class'=>'lnkutility'), true);
-                }
-			
-                $params['template'] = ' {menu}';
-                plugin_hook ('headermenu', $params);
-			
-                $this->quickNav();
+			<td><?php $this->searchBox(); ?></td>
+			<td align="right"><?php
+			$items = $this->navigation->getUserLinks();
+		for ($j = 0; $j < count($items['titles']); $j++) {
+			echo util_make_link($items['urls'][$j], $items['titles'][$j], array('class'=>'lnkutility'), true);
+		}
+
+		$params['template'] = ' {menu}';
+		plugin_hook ('headermenu', $params);
+
+		$this->quickNav();
 
 		?></td>
-			    <td>&nbsp;&nbsp;</td>
-						      </tr>
+			<td>&nbsp;&nbsp;</td>
+			</tr>
 
-						      </table>
+			</table>
 
-						      <table border="0" width="100%" cellspacing="0" cellpadding="0">
+			<table border="0" width="100%" cellspacing="0" cellpadding="0">
 
-						      <tr>
-						      <td>&nbsp;</td>
-									  <td colspan="3">
+			<tr>
+			<td>&nbsp;</td>
+			<td colspan="3">
 
-									  <?php echo $this->outerTabs($params); ?>
+			<?php echo $this->outerTabs($params); ?>
 
-									  </td>
-										    <td>&nbsp;</td>
-													</tr>
+			</td>
+			<td>&nbsp;</td>
+			</tr>
 
-													<tr>
-													<td align="left" class="toptab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topleft.png" height="9" width="9" alt="" /></td>
-													<td class="toptab" width="30"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="30" height="1" alt="" /></td>
-													<td class="toptab"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
-													<td class="toptab" width="30"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="30" height="1" alt="" /></td>
-													<td align="right" class="toptab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topright.png" height="9" width="9" alt="" /></td>
-													</tr>
+			<tr>
+			<td align="left" class="toptab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topleft.png" height="9" width="9" alt="" /></td>
+			<td class="toptab" width="30"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="30" height="1" alt="" /></td>
+			<td class="toptab"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
+			<td class="toptab" width="30"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="30" height="1" alt="" /></td>
+			<td align="right" class="toptab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topright.png" height="9" width="9" alt="" /></td>
+			</tr>
 
-													<tr>
+			<tr>
 
-													<!-- Outer body row -->
+			<!-- Outer body row -->
 
-													<td class="toptab"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="10" height="1" alt="" /></td>
-													<td valign="top" width="99%" class="toptab" colspan="3">
+			<td class="toptab"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="10" height="1" alt="" /></td>
+			<td valign="top" width="99%" class="toptab" colspan="3">
 
-													<!-- Inner Tabs / Shell -->
+			<!-- Inner Tabs / Shell -->
 
-													<table border="0" width="100%" cellspacing="0" cellpadding="0">
-													<?php
+			<table border="0" width="100%" cellspacing="0" cellpadding="0">
+			<?php
 
 
-													if (isset($params['group']) && $params['group']) {
+			if (isset($params['group']) && $params['group']) {
 
-														?>
-														<tr>
-														<td>&nbsp;</td>
-														<td>
-														<?php
+				?>
+					<tr>
+					<td>&nbsp;</td>
+					<td>
+					<?php
 
-														echo $this->projectTabs($params['toptab'],$params['group']);
+					echo $this->projectTabs($params['toptab'],$params['group']);
 
-														?>
-														</td>
-														<td>&nbsp;</td>
-														</tr>
-														<?php
-													}
+				?>
+					</td>
+					<td>&nbsp;</td>
+					</tr>
+					<?php
+			}
 		?>
-													<tr>
-														 <td align="left" class="projecttab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topleft-inner.png" height="9" width="9" alt="" /></td>
-														 <td class="projecttab" ><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
-														 <td align="right" class="projecttab"  width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topright-inner.png" height="9" width="9" alt="" /></td>
-														 </tr>
+			<tr>
+			<td align="left" class="projecttab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topleft-inner.png" height="9" width="9" alt="" /></td>
+			<td class="projecttab" ><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
+			<td align="right" class="projecttab"  width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topright-inner.png" height="9" width="9" alt="" /></td>
+			</tr>
 
-														 <tr>
-														 <td class="projecttab" ><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="10" height="1" alt="" /></td>
-														 <td valign="top" width="99%" class="projecttab">
+			<tr>
+			<td class="projecttab" ><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="10" height="1" alt="" /></td>
+			<td valign="top" width="99%" class="projecttab">
 
-														 <?php
+			<?php
 
-														 }
-	
+	}
+
 	function footer($params) {
 
 		?>
 
-		<!-- end main body row -->
+			<!-- end main body row -->
 
 
 			</td>
@@ -447,14 +453,14 @@ class Layout extends Error {
 			<?php echo $this->navigation->getPoweredBy(); ?>
 			</div>
 
-				  <?php echo $this->navigation->getShowSource(); ?> 
+			<?php echo $this->navigation->getShowSource(); ?> 
 
-				  </body>
-					    </div>
-					    </html>
-					    <?php
+			</body>
+			</div>
+			</html>
+			<?php
 
-					    }
+	}
 
 	function getRootIndex() {
 		return $this->rootindex;
@@ -469,21 +475,21 @@ class Layout extends Error {
 	 */
 	function boxTop($title) {
 		return '
-		<!-- Box Top Start -->
+			<!-- Box Top Start -->
 
-		<table cellspacing="0" cellpadding="0" width="100%" border="0" style="background:url('.$this->imgbaseurl.'vert-grad.png)">
-		<tr class="align-center">
+			<table cellspacing="0" cellpadding="0" width="100%" border="0" style="background:url('.$this->imgbaseurl.'vert-grad.png)">
+			<tr class="align-center">
 			<td valign="top" align="right" width="10" style="background:url('.$this->imgbaseurl.'box-topleft.png)"><img src="'.$this->imgbaseurl.'clear.png" width="10" height="20" alt="" /></td>
 			<td width="100%" style="background:url('.$this->imgbaseurl.'box-grad.png)"><span class="titlebar">'.$title.'</span></td>
 			<td valign="top" width="10" style="background:url('.$this->imgbaseurl.'box-topright.png)"><img src="'.$this->imgbaseurl.'clear.png" width="10" height="20" alt="" /></td>
-		</tr>
-		<tr>
+			</tr>
+			<tr>
 			<td colspan="3">
 			<table cellspacing="2" cellpadding="2" width="100%" border="0">
-				<tr align="left">
-					<td colspan="2">
+			<tr align="left">
+			<td colspan="2">
 
-		<!-- Box Top End -->';
+			<!-- Box Top End -->';
 	}
 
 	/**
@@ -494,15 +500,15 @@ class Layout extends Error {
 	 */
 	function boxMiddle($title) {
 		return '
-		<!-- Box Middle Start -->
-					</td>
-				</tr>
-				<tr class="align-center">
-					<td colspan="2" style="background:url('.$this->imgbaseurl.'box-grad.png)"><span class="titlebar">'.$title.'</span></td>
-				</tr>
-				<tr align="left">
-					<td colspan="2">
-		<!-- Box Middle End -->';
+			<!-- Box Middle Start -->
+			</td>
+			</tr>
+			<tr class="align-center">
+			<td colspan="2" style="background:url('.$this->imgbaseurl.'box-grad.png)"><span class="titlebar">'.$title.'</span></td>
+			</tr>
+			<tr align="left">
+			<td colspan="2">
+			<!-- Box Middle End -->';
 	}
 
 	/**
@@ -513,13 +519,13 @@ class Layout extends Error {
 	function boxBottom() {
 		return '
 			<!-- Box Bottom Start -->
-					</td>
-				</tr>
+			</td>
+			</tr>
 			</table>
 			</td>
-		</tr>
-		</table><br />
-		<!-- Box Bottom End -->';
+			</tr>
+			</table><br />
+			<!-- Box Bottom End -->';
 	}
 
 	/**
@@ -543,11 +549,11 @@ class Layout extends Error {
 	 */
 	function listTableTop ($title_arr,$links_arr=false,$selected=false) {
 		$return = '
-		<table cellspacing="0" cellpadding="0" width="100%" border="0">
-		<tr class="align-center">
-	<!--		<td valign="top" align="right" width="10" style="background:url('.$this->imgbaseurl.'box-grad.png)"><img src="'.$this->imgbaseurl.'box-topleft.png" width="10" height="75" alt="" /></td> -->
+			<table cellspacing="0" cellpadding="0" width="100%" border="0">
+			<tr class="align-center">
+			<!--		<td valign="top" align="right" width="10" style="background:url('.$this->imgbaseurl.'box-grad.png)"><img src="'.$this->imgbaseurl.'box-topleft.png" width="10" height="75" alt="" /></td> -->
 			<td style="background:url('.$this->imgbaseurl.'box-grad.png)">
-		<table width="100%" border="0" cellspacing="1" cellpadding="2" >
+			<table width="100%" border="0" cellspacing="1" cellpadding="2" >
 			<tr class="tableheading">';
 		$count=count($title_arr);
 		if ($links_arr) {
@@ -557,7 +563,7 @@ class Layout extends Error {
 		} else {
 			for ($i=0; $i<$count; $i++) {
 				$return .= '
-				<td>'.$title_arr[$i].'</td>';
+					<td>'.$title_arr[$i].'</td>';
 			}
 		}
 		return $return.'</tr>';
@@ -570,7 +576,7 @@ class Layout extends Error {
 	}
 
 	function outerTabs($params) {
-                $menu =& $this->navigation->getSiteMenu();
+		$menu =& $this->navigation->getSiteMenu();
 
 		echo $this->tabGenerator($menu['urls'], $menu['titles'], false, $menu['selected'], '');
 
@@ -586,40 +592,40 @@ class Layout extends Error {
 		} else {
 			// get all projects that the user belongs to
 			$res = db_query_params ('SELECT group_id FROM groups JOIN user_group USING (group_id) WHERE user_group.user_id=$1 AND groups.status=$2 ORDER BY group_name',
-						array (user_getid(),
-						       'A'));
+					array (user_getid(),
+						'A'));
 			echo db_error();
 			if (!$res || db_numrows($res) < 1) {
 				return;
 			} else {
 				echo '
-		<form id="quicknavform" name="quicknavform" action=""><div>
-			<select name="quicknav" id="quicknav" onChange="location.href=document.quicknavform.quicknav.value">
-				<option value="">'._('Quick Jump To...').'</option>';
+					<form id="quicknavform" name="quicknavform" action=""><div>
+					<select name="quicknav" id="quicknav" onChange="location.href=document.quicknavform.quicknav.value">
+					<option value="">'._('Quick Jump To...').'</option>';
 
 				for ($i = 0; $i < db_numrows($res); $i++) {
 					$group_id = db_result($res, $i, 'group_id');
 					$menu =& $this->navigation->getProjectMenu($group_id);
-                                        
+
 					echo '
-				<option value="' . $menu['starturl'] . '">' 
+						<option value="' . $menu['starturl'] . '">' 
 						. $menu['name'] .'</option>';
 
 					for ($j = 0; $j < count($menu['urls']); $j++) {
 						echo '
-				<option value="' . $menu['urls'][$j] .'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' 
+							<option value="' . $menu['urls'][$j] .'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' 
 							. $menu['titles'][$j] . '</option>';
 						if ($menu['adminurls'][$j]) {
 							echo  '
-				<option value="' . $menu['adminurls'][$j] 
+								<option value="' . $menu['adminurls'][$j] 
 								. '">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' 
 								. _('Admin') . '</option>';
 						}
 					}
 				}
 				echo '
-			</select>
-		</div></form>';
+					</select>
+					</div></form>';
 			}
 		}
 	}
@@ -642,12 +648,12 @@ class Layout extends Error {
 
 		$count=count($TABS_DIRS);
 		$width=intval((100/$count));
-		
+
 		$return = '';
 		$return .= '
-		<!-- start tabs -->
-		<table class="tabGenerator" ';
-		
+			<!-- start tabs -->
+			<table class="tabGenerator" ';
+
 		if ($total_width != '100%') {
 			$return .= 'style="width:' . $total_width . ';"';
 		}
@@ -740,10 +746,10 @@ class Layout extends Error {
 
 
 		return $return.'
-		</table> 
+			</table> 
 
-		<!-- end tabs -->
-';
+			<!-- end tabs -->
+			';
 	}
 
 	function searchBox() {
@@ -781,7 +787,7 @@ class Layout extends Error {
 	function printSubMenu ($title_arr,$links_arr) {
 		$count=count($title_arr);
 		$count--;
-		
+
 		$return = '';
 		for ($i=0; $i<$count; $i++) {
 			$return .= util_make_link ($links_arr[$i],$title_arr[$i]).' | ';
@@ -818,7 +824,7 @@ class Layout extends Error {
 	 */
 	function multiTableRow($row_attr, $cell_data, $istitle) {
 		$return= '
-		<tr '.$row_attr;
+			<tr '.$row_attr;
 		if ( $istitle ) {
 			$return .=' class="align-center multiTableRowTitle"';
 		}
@@ -840,11 +846,11 @@ class Layout extends Error {
 
 		}
 		$return .= '</tr>
-		';
+			';
 
 		return $return;
 	}
-	
+
 	/**
 	 * feedback() - returns the htmlized feedback string when an action is performed.
 	 *
@@ -856,7 +862,7 @@ class Layout extends Error {
 			return '';
 		} else {
 			return '
-			<div class="feedback">'.strip_tags($feedback, '<br>').'</div>';
+				<div class="feedback">'.strip_tags($feedback, '<br>').'</div>';
 		}
 	}
 	/**
@@ -870,10 +876,10 @@ class Layout extends Error {
 			return '';
 		} else {
 			return '
-			<div class="warning_msg">'.strip_tags($msg, '<br>').'</div>';
+				<div class="warning_msg">'.strip_tags($msg, '<br>').'</div>';
 		}
 	}
-	
+
 	/**
 	 * error_msg() - returns the htmlized error string when an action is performed.
 	 *
@@ -885,7 +891,7 @@ class Layout extends Error {
 			return '';
 		} else {
 			return '
-			<div class="error">'.strip_tags($msg, '<br>').'</div>';
+				<div class="error">'.strip_tags($msg, '<br>').'</div>';
 		}
 	}
 
@@ -897,45 +903,45 @@ class Layout extends Error {
 	 * @return	integer the theme id	
 	 */
 	function getThemeIdFromName($dirname) {
-	 	$res = db_query_params ('SELECT theme_id FROM themes WHERE dirname=$1',
-					array ($dirname));
-	        return db_result($res,0,'theme_id');
+		$res = db_query_params ('SELECT theme_id FROM themes WHERE dirname=$1',
+				array ($dirname));
+		return db_result($res,0,'theme_id');
 	}
 
 	function confirmBox($msg, $params, $buttons, $image='*none*') {
-	 	if ($image == '*none*') {
-	 		$image = html_image('stop.png','48','48',array());
-	 	}
-	 	
-	 	foreach ($params as $b => $v) {
-	 		$prms[] = '<input type="hidden" name="'.$b.'" value="'.$v.'" />'."\n";
-	 	}
-	 	$prm = join('	 	', $prms);	 
-	 	
-	 	foreach ($buttons as $b => $v) {
-	 		$btns[] = '<input type="submit" name="'.$b.'" value="'.$v.'" />'."\n";
-	 	}
+		if ($image == '*none*') {
+			$image = html_image('stop.png','48','48',array());
+		}
+
+		foreach ($params as $b => $v) {
+			$prms[] = '<input type="hidden" name="'.$b.'" value="'.$v.'" />'."\n";
+		}
+		$prm = join('	 	', $prms);	 
+
+		foreach ($buttons as $b => $v) {
+			$btns[] = '<input type="submit" name="'.$b.'" value="'.$v.'" />'."\n";
+		}
 		$btn = join('	 	&nbsp;&nbsp;&nbsp;'."\n	 	", $btns);	 	
-	 	
-	 	return '
-	 	<div id="infobox" style="margin-top: 15%; margin-left: 15%; margin-right: 15%; text-align: center;">
-	 	<table align="center">
-	 	<tr>
-	 	<td>'.$image.'</td>
-	 	<td>'.$msg.'<br/></td>
-		</tr>
-		<tr>
-		<td colspan="2" align="center">
-		<br />
-		<form action="' . getStringFromServer('PHP_SELF') . '" method="get" >
-		'.$prm.'
-		'.$btn.'
-		</form>
-		</td>
-		</tr>
-		</table>
-		</div>
-	 	';
+
+		return '
+			<div id="infobox" style="margin-top: 15%; margin-left: 15%; margin-right: 15%; text-align: center;">
+			<table align="center">
+			<tr>
+			<td>'.$image.'</td>
+			<td>'.$msg.'<br/></td>
+			</tr>
+			<tr>
+			<td colspan="2" align="center">
+			<br />
+			<form action="' . getStringFromServer('PHP_SELF') . '" method="get" >
+			'.$prm.'
+			'.$btn.'
+			</form>
+			</td>
+			</tr>
+			</table>
+			</div>
+			';
 	}
 
 	function html_input($name, $id = '', $label = '', $type = 'text', $value = '', $extra_params = '') {
@@ -943,10 +949,10 @@ class Layout extends Error {
 			$id = $name;
 		}
 		$return = '<div class="field-holder">
-		';
+			';
 		if ($label) {
 			$return .= '<label for="' . $id . '">' . $label . '</label>
-			';
+				';
 		}
 		$return .= '<input id="' . $id . '" type="' . $type . '"';
 		//if input is a submit then name is not present
@@ -962,16 +968,16 @@ class Layout extends Error {
 			}
 		}
 		$return .= '/>
-		</div>';
+			</div>';
 		return $return;
 	}
-	
+
 	function html_checkbox($name, $value, $id = '', $label = '', $checked = '', $extra_params = '') {
 		if (!$id) {
 			$id = $name;
 		}
 		$return = '<div class="field-holder">
-        ';
+			';
 		$return .= '<input name="' . $name . '" id="' . $id . '" type="checkbox" value="' . $value . '" ';
 		if ($checked) {
 			$return .= 'checked="checked" ';
@@ -984,12 +990,12 @@ class Layout extends Error {
 		$return .= '/>';
 		if ($label) {
 			$return .= '<label for="' . $id . '">' . $label . '</label>
-            ';
+				';
 		}
 		$return .= '</div>';
 		return $return;
 	}
-	
+
 	function html_text_input_img_submit($name, $img_src, $id = '', $label = '', $value = '', $img_title = '', $img_alt = '', $extra_params = '', $img_extra_params = '') {
 		if (!$id) {
 			$id = $name;
@@ -1001,10 +1007,10 @@ class Layout extends Error {
 			$img_alt = $img_title;
 		}
 		$return = '<div class="field-holder">
-        ';
+			';
 		if ($label) {
 			$return .= '<label for="' . $id . '">' . $label . '</label>
-            ';
+				';
 		}
 		$return .= '<input id="' . $id . '" type="text" name="' . $name . '"';
 		if ($value) {
@@ -1016,14 +1022,14 @@ class Layout extends Error {
 			}
 		}
 		$return .= '/>
-        <input type="image" id="' . $id . '_submit" src="' . $this->imgbaseurl . $img_src . '" alt="' . $img_alt . '" title="' . $img_title . '"';
+			<input type="image" id="' . $id . '_submit" src="' . $this->imgbaseurl . $img_src . '" alt="' . $img_alt . '" title="' . $img_title . '"';
 		if (is_array($img_extra_params)) {
 			foreach ($img_extra_params as $key => $img_extra_params_value) {
 				$return .= $key . '="' . $img_extra_params_value . '" ';
 			}
 		}
 		$return .= '/>
-        </div>';
+			</div>';
 		return $return;
 	}
 
@@ -1032,10 +1038,10 @@ class Layout extends Error {
 			$id = $name;
 		}
 		$return = '<div class="field-holder">
-        ';
+			';
 		if ($label) {
 			$return .= '<label for="' . $id . '">' . $label . '</label>
-            ';
+				';
 		}
 		$return .= '<select name="' . $name . '" id="' . $id . '" ';
 		if (is_array($extra_params)) {
@@ -1048,13 +1054,13 @@ class Layout extends Error {
 		for ($i = 0; $i < $rows; $i++) {
 			if ( $text_is_value ) {
 				$return .= '
-				<option value="' . $vals[$i] . '"';
+					<option value="' . $vals[$i] . '"';
 				if ($vals[$i] == $checked_val) {
 					$return .= ' selected="selected"';
 				}
 			} else {
 				$return .= '
-				<option value="' . $i . '"';
+					<option value="' . $i . '"';
 				if ($i == $checked_val) {
 					$return .= ' selected="selected"';
 				}
@@ -1062,20 +1068,20 @@ class Layout extends Error {
 			$return .= '>' . htmlspecialchars($vals[$i]) . '</option>';
 		}
 		$return .= '
-		</select>
-		</div>';
+			</select>
+			</div>';
 		return $return;
 	}
-	
+
 	function html_textarea($name, $id = '', $label = '', $value = '',  $extra_params = '') {
 		if (!$id) {
 			$id = $name;
 		}
 		$return = '<div class="field-holder">
-        ';
+			';
 		if ($label) {
 			$return .= '<label for="' . $id . '">' . $label . '</label>
-            ';
+				';
 		}
 		$return .= '<textarea id="' . $id . '" name="' . $name . '" ';
 		if (is_array($extra_params)) {
@@ -1088,10 +1094,10 @@ class Layout extends Error {
 			$return .= $value;
 		}
 		$return .= '</textarea>
-        </div>';
+			</div>';
 		return $return;
 	}
-    
+
 	function html_table_top($cols, $summary = '', $class = '', $extra_params = '') {
 		$return = '<table summary="' . $summary . '" ';
 		if ($class) {
@@ -1111,44 +1117,44 @@ class Layout extends Error {
 		$return .= '</tr></thead>';
 		return $return;
 	}
-    
+
 	function getMonitorPic($title = '', $alt = '') {
 		return $this->getPicto('ic/mail16w.png', $title, $alt, '15', '15');
 	}
-    
+
 	function getReleaseNotesPic($title = '', $alt = '') {
 		return $this->getPicto('ic/manual16c.png', $title, $alt, '15', '15');
 	}
-    
+
 	/* no picto for download */
 	function getDownloadPic($title = '', $alt = '') {
 		return $this->getPicto('ic/save.png', $title, $alt, '15', '15');
 	}
-	
+
 	function getHomePic($title = '', $alt = '') {
 		return $this->getPicto('ic/home16b.png', $title, $alt);
 	}
-    
+
 	function getFollowPic($title = '', $alt = '') {
 		return $this->getPicto('ic/tracker20g.png', $title, $alt);
 	}
-    
+
 	function getForumPic($title = '', $alt = '') {
 		return $this->getPicto('ic/forum20g.png', $title, $alt);;
 	}
-    
+
 	function getDocmanPic($title = '', $alt = '') {
 		return $this->getPicto('ic/docman16b.png', $title, $alt);
 	}
-    
+
 	function getMailPic($title = '', $alt = '') {
 		return $this->getPicto('ic/mail16b.png', $title, $alt);
 	}
-    
+
 	function getPmPic($title = '', $alt = '') {
 		return $this->getPicto('ic/taskman20g.png', $title, $alt);
 	}
-    
+
 	function getSurveyPic($title = '', $alt = '') {
 		return $this->getPicto('ic/survey16b.png', $title, $alt);
 	}
@@ -1156,18 +1162,18 @@ class Layout extends Error {
 	function getScmPic($title = '', $alt = '') {
 		return $this->getPicto('ic/cvs16b.png', $title, $alt);
 	}
-    
+
 	function getFtpPic($title = '', $alt = '') {
 		return $this->getPicto('ic/ftp16b.png', $title, $alt);
 	}
-    
+
 	function getPicto($url, $title, $alt, $width = '20', $height = '20') {
 		if (!$alt) {
 			$alt = $title;   
 		}
 		return html_image($url, $width, $height, array('title'=>$title, 'alt'=>$alt));
 	}
-    
+
 	/**
 	 * toSlug() - protect a string to be used as a link or an anchor
 	 *
@@ -1183,6 +1189,60 @@ class Layout extends Error {
 		$string = strtolower($string);
 		$string = str_replace(" ", $space, $string);
 		return $string;
+	}
+	function widget(&$widget, $layout_id, $readonly, $column_id, $is_minimized, $display_preferences, $owner_id, $owner_type) {
+		$element_id = 'widget_'. $widget->id .'-'. $widget->getInstanceId();
+		echo '<div class="widget" id="'. $element_id .'">';
+		echo '<div class="widget_titlebar '. ($readonly?'':'widget_titlebar_handle') .'">';
+		echo '<div class="widget_titlebar_title">'. $widget->getTitle() .'</div>';
+		if (!$readonly) {
+			echo '<div class="widget_titlebar_close"><a href="/widgets/updatelayout.php?owner='. $owner_type.$owner_id .'&amp;action=widget&amp;name['. $widget->id .'][remove]='. $widget->getInstanceId() .'&amp;column_id='. $column_id .'&amp;layout_id='. $layout_id .'">'. $this->getPicto('ic/close.png', 'Close','Close') .'</a></div>';
+			if ($is_minimized) {
+				echo '<div class="widget_titlebar_maximize"><a href="/widgets/updatelayout.php?owner='. $owner_type.$owner_id .'&amp;action=maximize&amp;name['. $widget->id .']='. $widget->getInstanceId() .'&amp;column_id='. $column_id .'&amp;layout_id='. $layout_id .'">'. $this->getPicto($this->_getTogglePlusForWidgets(),  'Maximize', 'Maximize') .'</a></div>';
+			} else {
+				echo '<div class="widget_titlebar_minimize"><a href="/widgets/updatelayout.php?owner='. $owner_type.$owner_id .'&amp;action=minimize&amp;name['. $widget->id .']='. $widget->getInstanceId() .'&amp;column_id='. $column_id .'&amp;layout_id='. $layout_id .'">'. $this->getPicto($this->_getToggleMinusForWidgets(),  'Minimize', 'Minimize') .'</a></div>';
+			}
+			if (strlen($widget->hasPreferences())) {
+				echo '<div class="widget_titlebar_prefs"><a href="/widgets/updatelayout.php?owner='. $owner_type.$owner_id .'&amp;action=preferences&amp;name['. $widget->id .']='. $widget->getInstanceId() .'&amp;layout_id='. $layout_id .'">'. _('Preferences') .'</a></div>';
+			}
+		}
+		if ($widget->hasRss()) {
+			echo '<div class="widget_titlebar_rss"><a href="'.$widget->getRssUrl($owner_id, $owner_type).'">rss</a></div>';
+		}
+		echo '</div>';
+		$style = '';
+		if ($is_minimized) {
+			$style = 'display:none;';
+		}
+		echo '<div class="widget_content" style="'. $style .'">';
+		if (!$readonly && $display_preferences) {
+			echo '<div class="widget_preferences">'. $widget->getPreferencesForm($layout_id, $owner_id, $owner_type) .'</div>';
+		}
+		if ($widget->isAjax()) {
+			echo '<div id="'. $element_id .'-ajax">';
+			echo '<noscript><iframe width="99%" frameborder="0" src="'. $widget->getIframeUrl($owner_id, $owner_type) .'"></iframe></noscript>';
+			echo '</div>';
+		} else {
+			echo $widget->getContent();
+		}
+		echo '</div>';
+		if ($widget->isAjax()) {
+			echo '<script type="text/javascript">'."
+				document.observe('dom:loaded', function () {
+						$('$element_id-ajax').update('<div style=\"text-align:center\">". $this->getPicto('ic/spinner.gif','spinner','spinner') ."</div>');
+						new Ajax.Updater('$element_id-ajax', 
+							'". $widget->getAjaxUrl($owner_id, $owner_type) ."'
+							);
+						});
+			</script>";
+		}
+		echo '</div>';
+	}
+	function _getTogglePlusForWidgets() {
+		return 'ic/toggle_plus.png';
+	}
+	function _getToggleMinusForWidgets() {
+		return 'ic/toggle_minus.png';
 	}
 }	
 

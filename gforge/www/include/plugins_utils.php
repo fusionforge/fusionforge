@@ -39,7 +39,7 @@ function getIcon($url,$w=16,$h=16,$args=array()) {
         echo html_image($url,$w,$h,$args); 
 }   
 function getImage($img) {
-        echo util_make_url($html->imgroot.$img);
+        echo util_make_url($GLOBALS['HTML']->imgroot.$img);
 
 }
 function get_server_url() {

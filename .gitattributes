@@ -102,12 +102,32 @@ gforge/common/mvc/Actions.class.php -text
 gforge/common/mvc/Controler.class.php -text
 gforge/common/mvc/Views.class.php -text
 gforge/common/reporting/ReportDownloads.class.php -text
+gforge/common/rss/RSS.class.php -text
 gforge/common/system_event/SystemEvent.class.php -text
 gforge/common/system_event/SystemEventManager.class.php -text
 gforge/common/tracker/ArtifactWorkflow.class.php -text
 gforge/common/valid/Rule.class.php -text
 gforge/common/valid/Valid.class.php -text
 gforge/common/valid/ValidFactory.class.php -text
+gforge/common/widget/Rule_Widget.class.php -text
+gforge/common/widget/Valid_Widget.class.php -text
+gforge/common/widget/Widget.class.php -text
+gforge/common/widget/WidgetLayout.class.php -text
+gforge/common/widget/WidgetLayoutManager.class.php -text
+gforge/common/widget/WidgetLayout_Row.class.php -text
+gforge/common/widget/WidgetLayout_Row_Column.class.php -text
+gforge/common/widget/Widget_MyAdmin.class.php -text
+gforge/common/widget/Widget_MyArtifacts.class.php -text
+gforge/common/widget/Widget_MyBookmarks.class.php -text
+gforge/common/widget/Widget_MyLatestSvnCommits.class.php -text
+gforge/common/widget/Widget_MyMonitoredForums.class.php -text
+gforge/common/widget/Widget_MyMonitoredFp.class.php -text
+gforge/common/widget/Widget_MyProjects.class.php -text
+gforge/common/widget/Widget_MyRss.class.php -text
+gforge/common/widget/Widget_MySurveys.class.php -text
+gforge/common/widget/Widget_MyTasks.class.php -text
+gforge/common/widget/Widget_ProjectRss.class.php -text
+gforge/common/widget/Widget_Rss.class.php -text
 gforge/contrib/cmd-line-prototype.tar.gz -text
 gforge/contrib/fusionforge.dia -text
 gforge/contrib/migrate-from-gforge-as.pl -text
@@ -145,6 +165,8 @@ gforge/db/20100308-forum-attachment-types.sql -text
 gforge/db/20100330-add-system-event.sql -text
 gforge/db/20100331-alter-system-event.sql -text
 gforge/db/20100402_add_query_options.sql -text
+gforge/db/20100505-alter-user-preference.sql -text
+gforge/db/20100506-add-widgets.sql -text
 gforge/db/FTI-20061025.sql -text
 gforge/db/gforge-data-mysql.sql -text
 gforge/db/gforge-struct-mysql.sql -text
@@ -3592,6 +3614,46 @@ gforge/www/images/smiles/icon_twisted.gif -text
 gforge/www/images/smiles/icon_wink.gif -text
 gforge/www/images/t.png -text
 gforge/www/images/t2.png -text
+gforge/www/images/widget/widget-header.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-border.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-favorites.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-latest_file_releases-en_US.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-latest_file_releases-fr_FR.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-monitored_files-en_US.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-monitored_files-fr_FR.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-monitored_forums-en_US.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-monitored_forums-fr_FR.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-my_admin-en_US.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-my_admin-fr_FR.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-my_artifacts.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-my_bookmarks-en_US.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-my_bookmarks-fr_FR.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-my_latest_svn_commits-en_US.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-my_latest_svn_commits-fr_FR.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-my_projects-en_US.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-my_projects-fr_FR.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-my_surveys-en_US.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-my_surveys-fr_FR.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-mysystemevent-en_US.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-mysystemevent-fr_FR.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-project_classification-en_US.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-project_classification-fr_FR.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-project_description-en_US.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-project_description-fr_FR.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-project_latest_cvs_commits-en_US.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-project_latest_cvs_commits-fr_FR.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-project_latest_news-en_US.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-project_latest_news-fr_FR.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-project_latest_svn_commits-en_US.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-project_latest_svn_commits-fr_FR.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-project_members-en_US.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-project_members-fr_FR.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-project_public_areas-en_US.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-project_public_areas-fr_FR.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-project_svn-stats.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-rss.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview-twitterfollow.png -text svneol=unset#unset
+gforge/www/images/widget/widget-preview.png -text svneol=unset#unset
 gforge/www/include/plugins_utils.php -text
 gforge/www/include/preplugins.php -text
 gforge/www/include/unicode.php -text
@@ -3615,6 +3677,7 @@ gforge/www/jscook/ThemeXP/plus.gif svneol=native#unset
 gforge/www/jscook/ThemeXP/plusbottom.gif svneol=native#unset
 gforge/www/jscook/ThemeXP/spacer.gif svneol=native#unset
 gforge/www/my/dashboard.php -text
+gforge/www/my/my_utils.php -text
 gforge/www/plugins/cvstracker -text
 gforge/www/plugins/eirc -text
 gforge/www/plugins/fckeditor -text
@@ -3658,6 +3721,7 @@ gforge/www/scm/viewvc/windows/aspfool/aspfool.dll svneol=native#unset
 gforge/www/scripts/codendi/LayoutManager.js -text
 gforge/www/scripts/codendi/ReorderColumns.js -text
 gforge/www/scripts/codendi/Tooltip.js -text
+gforge/www/scripts/codendi/codendi-1236793993.js -text
 gforge/www/scripts/codendi/common.js -text
 gforge/www/scripts/codendi/cross_references.js -text
 gforge/www/scripts/codendi/debug_reserved_names.js -text
@@ -3802,6 +3866,7 @@ gforge/www/themes/gforge/images/ic/btn_up.png -text svneol=unset#unset
 gforge/www/themes/gforge/images/ic/caret.png -text
 gforge/www/themes/gforge/images/ic/cfolder15.png -text
 gforge/www/themes/gforge/images/ic/check.png -text
+gforge/www/themes/gforge/images/ic/close.png -text svneol=unset#unset
 gforge/www/themes/gforge/images/ic/cvs16b.png -text
 gforge/www/themes/gforge/images/ic/docman16b.png -text
 gforge/www/themes/gforge/images/ic/forum20g.png -text
@@ -3826,6 +3891,8 @@ gforge/www/themes/gforge/images/ic/save.png -text
 gforge/www/themes/gforge/images/ic/survey16b.png -text
 gforge/www/themes/gforge/images/ic/taskman20g.png -text
 gforge/www/themes/gforge/images/ic/taskman20w.png -text
+gforge/www/themes/gforge/images/ic/toggle_minus.png -text svneol=unset#unset
+gforge/www/themes/gforge/images/ic/toggle_plus.png -text svneol=unset#unset
 gforge/www/themes/gforge/images/ic/tracker20g.png -text
 gforge/www/themes/gforge/images/ic/tracker20w.png -text
 gforge/www/themes/gforge/images/ic/trash-x.png -text
@@ -3833,6 +3900,12 @@ gforge/www/themes/gforge/images/ic/trash.png -text
 gforge/www/themes/gforge/images/ic/wiki20g.png -text svneol=unset#unset
 gforge/www/themes/gforge/images/ic/write16w.png -text
 gforge/www/themes/gforge/images/ic/xmail16w.png -text
+gforge/www/themes/gforge/images/layout/2-columns.png -text svneol=unset#unset
+gforge/www/themes/gforge/images/layout/3-columns.png -text svneol=unset#unset
+gforge/www/themes/gforge/images/layout/custom.png -text svneol=unset#unset
+gforge/www/themes/gforge/images/layout/layouts.xcf -text svneol=unset#unset
+gforge/www/themes/gforge/images/layout/left.png -text svneol=unset#unset
+gforge/www/themes/gforge/images/layout/right.png -text svneol=unset#unset
 gforge/www/themes/gforge/images/logo200x200.png -text
 gforge/www/themes/gforge/images/notes.png -text svneol=unset#unset
 gforge/www/themes/gforge/images/spacer.gif -text svneol=unset#unset
@@ -3952,6 +4025,10 @@ gforge/www/trove/admin/trove_cat_list.php -text
 gforge/www/trove/include/trove.php -text
 gforge/www/trove/include/utils.php -text
 gforge/www/trove/index.php -text
+gforge/www/widgets/style.css -text
+gforge/www/widgets/updatelayout.php -text
+gforge/www/widgets/widget.php -text
+gforge/www/widgets/widgets.php -text
 hook/ubuntu/G00ubukey -text
 htdocs/box-grad2.png -text
 htdocs/favicon.ico -text

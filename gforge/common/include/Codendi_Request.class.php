@@ -82,6 +82,22 @@
 		}
 	}
 
+/**
+     * Returns from where the variable is accessed.
+     *
+     * @return string
+     */
+    function _getCallTrace() {
+        $backtrace = debug_backtrace();
+        $files = explode('/', $backtrace[1]['file']);
+        return $files[count($files) - 4] . '/'.
+            $files[count($files) - 3] . '/'.
+            $files[count($files) - 2] . '/'.
+            $files[count($files) - 1] . ' Line: '.
+            $backtrace[1]['line'];
+    }
+
+
 	/**
 	 * Check if $variable exists in user submitted parameters.
 	 *
@@ -156,6 +172,37 @@
 		  return $is_valid ? $this->get($variable) : $default_value;*/
 		return $this->get($variable);
 	}
+ /**
+     * Apply validator on submitted user array.
+     *
+     * @param string Index in the user submitted values where the array stands.
+     * @param Valid  Validator to apply
+     * @return boolean
+     */
+    function validInArray($index, &$validator) {
+        $this->_validated_input[$index][$validator->getKey()] = true;
+        return $validator->validate($this->getInArray($index, $validator->getKey()));
+    }
+ /**
+     * Get value of $idx[$variable] in $this->params (user submitted values).
+     *
+     * @param string The index of the variable array in $this->params.
+     * @param string Name of the parameter to get.
+     * @return mixed If the variable exist, the value is returned (string)
+     * otherwise return false;
+     */
+    function getInArray($idx, $variable) {
+        $this->_last_access_to_input[$idx][$variable] = $this->_getCallTrace();
+        if(is_array($this->params[$idx])) {
+            return $this->_get($variable, $this->params[$idx]);
+        } else {
+            return false;
+        }
+    }
+function isAjax() {
+        return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtoupper($_SERVER['HTTP_X_REQUESTED_WITH']) == 'XMLHTTPREQUEST';
+    }
+
 
 
 }

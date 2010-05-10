@@ -148,7 +148,7 @@ document.observe('dom:loaded', function() {
     }
 
     //Widget categorizer
-    var default_categ = location.href.match(/#filter-(widget-categ-[a-z0-9-_]+)$/);
+    var default_categ = location.href.match(/#filter-(widget-categ-[a-zA-Z0-9-_]+)$/);
     var current_categ;
     if (default_categ && default_categ[1]) {
         current_categ = default_categ[1];
@@ -156,10 +156,10 @@ document.observe('dom:loaded', function() {
         current_categ = 'widget-categ-general';
     }
     $$('.widget-categ-switcher').each(function (a) {
-        var scan_id = a.href.match(/#(widget-categ-[a-z0-9-_]+)$/);
+        var scan_id = a.href.match(/#(widget-categ-[a-zA-Z0-9-_]+)$/);
         if (scan_id && scan_id[1]) {
             var id = scan_id[1];
-            a.href = a.href.gsub(/#(widget-categ-[a-z0-9-_]+)$/, '#filter-'+id);
+            a.href = a.href.gsub(/#(widget-categ-[a-zA-Z0-9-_]+)$/, '#filter-'+id);
             a.observe('click', function(evt) {
                 current_categ = id;
                 //Display widgets of this category

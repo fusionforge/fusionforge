@@ -26,11 +26,14 @@
 
 require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
+//UNCOMMENT THIS TO TEST WIDGETS
+//require_once 'my_utils.php';
 require_once $gfwww.'include/vote_function.php';
 require_once $gfcommon.'tracker/ArtifactsForUser.class.php';
 require_once $gfcommon.'forum/ForumsForUser.class.php';
 require_once $gfcommon.'pm/ProjectTasksForUser.class.php';
-
+//UNCOMMENT THIS TO TEST WIDGETS
+//require_once('common/widget/WidgetLayoutManager.class.php');
 if (!session_loggedin()) { // || $sf_user_hash) {
 
 	exit_not_logged_in();
@@ -40,7 +43,13 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 	?>
 
 <script type="text/javascript" src="<?php echo util_make_uri ('/tabber/tabber.js'); ?>"></script>
+<?php
+//UNCOMMENT THIS TO TEST WIDGETS
+//$lm = new WidgetLayoutManager();
+// $lm->displayLayout(user_getid(), WidgetLayoutManager::OWNER_TYPE_USER);
+?>
 <div id="tabber" class="tabber tabber-user-homepage" <?php plugin_hook('call_user_js');?>>
+
 <?php if (forge_get_config('use_tracker')) { ?>
 <div class="tabbertab" 
 title="<?php echo _('Assigned Artifacts'); ?>">
