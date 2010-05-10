@@ -184,7 +184,7 @@ class FusionForgeTemplate extends QuickTemplate {
 			<ul>
 <?php 			foreach($this->data['personal_urls'] as $key => $item) { ?>
 				<li id="<?php echo Sanitizer::escapeId( "pt-$key" ) ?>"<?php
-					if ($item['active']) { ?> class="active"<?php } ?>><a href="<?php
+					if (isset($item['active']) && $item['active']) { ?> class="active"<?php } ?>><a href="<?php
 				echo htmlspecialchars($item['href']) ?>"<?php echo $skin->tooltipAndAccesskey('pt-'.$key) ?><?php
 				if(!empty($item['class'])) { ?> class="<?php
 				echo htmlspecialchars($item['class']) ?>"<?php } ?>><?php
@@ -383,7 +383,7 @@ class FusionForgeTemplate extends QuickTemplate {
 			<ul>
 <?php 			foreach($cont as $key => $val) { ?>
 				<li id="<?php echo Sanitizer::escapeId($val['id']) ?>"<?php
-					if ( $val['active'] ) { ?> class="active" <?php }
+					if (isset($val['active']) && $val['active']) { ?> class="active" <?php }
 				?>><a href="<?php echo htmlspecialchars($val['href']) ?>"<?php echo $this->skin->tooltipAndAccesskey($val['id']) ?>><?php echo htmlspecialchars($val['text']) ?></a></li>
 <?php			} ?>
 			</ul>
