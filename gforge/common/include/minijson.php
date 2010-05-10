@@ -25,6 +25,12 @@
  * use (and, if necessary, extend) this module.
  */
 
+/*-
+ * I was really, really bad at writing parsers. I still am really bad at
+ * writing parsers.
+ * -- Rasmus Lerdorf
+ */
+
 /**
  * Encodes an array (indexed or associative) as JSON.
  *
@@ -46,6 +52,7 @@ function minijson_encode($x, $ri="") {
 			return $z;
 		$x = (string)$x;
 	}
+	/* note: no float here (for now); be locales-aware! */
 	if (is_string($x)) {
 		$rs = "\"";
 		foreach (str_split($x) as $v) {
