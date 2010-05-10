@@ -26,7 +26,6 @@
 
 require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
-require_once $gfcommon.'include/minijson.php';
 require_once $gfcommon.'pm/ProjectTaskSqlQueries.php';
 
 $tid = getIntFromRequest('tid');
@@ -88,5 +87,6 @@ $tinfo['forge_base'] = forge_get_config ('web_host') ;
 $tinfo['forge_name'] = forge_get_config ('forge_name') ;
 
 header("Content-type: " . $asformat);
-echo minijson_encode($tinfo) . "\n";
+setup_gettext_from_langname ('English') ;
+echo json_encode($tinfo) . "\n";
 exit;

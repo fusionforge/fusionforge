@@ -1176,6 +1176,14 @@ if (!function_exists('array_replace_recursive')) {
 	}
 }
 
+// json_encode only appeared in PHP 5.2.0
+if (!function_exists('json_encode')) {
+	require_once $gfcommon.'include/minijson.php' ;
+	function json_encode ($a1) {
+		return minijson_encode ($a1) ;
+	}
+}
+
 /* returns an integer from http://forge/foo/bar.php/123 or false */
 function util_path_info_last_numeric_component() {
 	if (!isset($_SERVER['PATH_INFO']))
