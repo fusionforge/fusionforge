@@ -59,7 +59,7 @@ class hudsonPlugin extends Plugin {
 				return;
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
-				$params['TITLES'][]='<nobr>'.$this->text.'</nobr>';
+				$params['TITLES'][]=$this->text;
 				$params['DIRS'][]='/plugins/hudson/index.php?group_id=' . $group_id . "&pluginname=" . $this->name; // we indicate the part we�re calling is the project one
 			} 
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
@@ -167,13 +167,17 @@ class hudsonPlugin extends Plugin {
 	function jsFile($params) {
 		// Only include the js files if we're actually in the IM pages.
 		// This stops styles inadvertently clashing with the main site.
-		//if (strpos($_SERVER['REQUEST_URI'], $this->getPluginPath()) === 0) {
 			echo '<script type="text/javascript" src="/scripts/prototype/prototype.js"></script>'."\n";
 			echo '<script type="text/javascript" src="/scripts/scriptaculous/scriptaculous.js"></script>'."\n";
 			echo '<script type="text/javascript" src="/scripts/codendi/Tooltip.js"></script>'."\n";
-			echo '<script type="text/javascript" src="/scripts/codendi/cross_references.js"></script>'."\n";
+			echo '<script type="text/javascript" src="/scripts/codendi/LayoutManager.js"></script>'."\n";
+			echo '<script type="text/javascript" src="/scripts/codendi/ReorderColumns.js"></script>'."\n";
+			echo '<script type="text/javascript" src="/scripts/codendi/codendi-1236793993.js"></script>'."\n";
 			echo '<script type="text/javascript" src="hudson_tab.js"></script>'."\n";
-		//}
+		if (strpos($_SERVER['REQUEST_URI'], $this->getPluginPath()) === 0) {
+		//	echo '<script type="text/javascript" src="/scripts/codendi/cross_references.js"></script>'."\n";
+			echo '<script type="text/javascript" src="hudson_tab.js"></script>'."\n";
+		}
 	}
 
 	/**

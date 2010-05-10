@@ -41,27 +41,40 @@ abstract class HudsonJobWidget extends HudsonWidget {
         $vId->required();
         if ($request->valid($vId)) {
             $job_id = $request->get('job_id');
-            $sql = 'INSERT INTO plugin_hudson_widget (widget_name, owner_id, owner_type, job_id) VALUES ("' . $this->id . '", '. $this->owner_id .", '". $this->owner_type ."', " . db_escape_int($job_id) ." )";
-            $res = db_query($sql);
-            $content_id = db_insertid($res);
+            $sql = 'INSERT INTO plugin_hudson_widget (widget_name, owner_id, owner_type, job_id) VALUES ($1,$2,$3,$4)';
+            $res = db_query_params($sql,array($this->id,$this->owner_id,$this->owner_type,$job_id));
+            $content_id = db_insertid($res,'plugin_hudson_widget','id');
         }
         return $content_id;
     }
     
     function destroy($id) {
-        $sql = 'DELETE FROM plugin_hudson_widget WHERE id = '. $id .' AND owner_id = '. $this->owner_id ." AND owner_type = '". $this->owner_type ."'";
-        db_query($sql);
+        $sql = 'DELETE FROM plugin_hudson_widget WHERE id = $1 AND owner_id = $2 AND owner_type = $3';
+        db_query_params($sql,array($id,$this->owner_id,$this->owner_type));
     }
     
     function getInstallPreferences() {
         $prefs  = '';
         $prefs .= '<strong>'._("Monitored job:").'</strong><br />';
-        
+       /* 
         $jobs = $this->getAvailableJobs();
         
         foreach ($jobs as $job_id => $job) {
             $prefs .= '<input type="radio" name="job_id" value="'.$job_id.'"> '.$job->getName().'<br />';
         }
+        return $prefs;*/
+	$selected_jobs_id = $this->getSelectedJobsId();
+        $jobs = $this->getAvailableJobs();
+
+        $only_one_job = (count($jobs) == 1);
+            foreach ($jobs as $job_id => $job) {
+                $selected = ($only_one_job)?'checked="checked"':'';
+                $prefs .= '<input type="radio" name="' . $this->widget_id . '_job_id" value="'.$job_id.'" ' . $selected . '> ' . $job->getName() ;
+                if (in_array($job_id, $selected_jobs_id)) {
+                        $prefs .= ' <em>('._('Already used') .')</em>';
+                }
+                $prefs .= '<br />';
+            }
         return $prefs;
     }
     function hasPreferences() {
@@ -84,11 +97,25 @@ abstract class HudsonJobWidget extends HudsonWidget {
         $request->valid(new Valid_String('cancel'));
         if (!$request->exist('cancel')) {
             $job_id = $request->get($this->id);
-            $sql = "UPDATE plugin_hudson_widget SET job_id=". $job_id ." WHERE owner_id = ". $this->owner_id ." AND owner_type = '". $this->owner_type ."' AND id = ". (int)$request->get('content_id');
-            $res = db_query($sql); 
+            $sql = "UPDATE plugin_hudson_widget SET job_id=$1 WHERE owner_id = $2 AND owner_type = $3 AND id = $4";
+            $res = db_query_params($sql,array($job_id,$this->owner_id,$this->owner_type,(int)$request->get('content_id'))); 
         }
         return true;
     }
+/**
+     * Returns the jobs selected for this widget
+     */
+    function getSelectedJobsId() {
+        $sql = "SELECT * FROM plugin_hudson_widget WHERE widget_name='" . $this->widget_id . "' AND owner_id = ". $this->owner_id ." AND owner_type = '". $this->owner_type ."'";
+        $res = db_query($sql);
+
+        $selected_jobs_id = array();
+        while ($data = db_fetch_array($res)) {
+                $selected_jobs_id[] = $data['job_id'];
+        }
+        return $selected_jobs_id;
+    }
+
     
 }
 

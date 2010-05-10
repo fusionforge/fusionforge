@@ -20,7 +20,7 @@
 
 
 require_once('HudsonOverviewWidget.class.php');
-require_once('common/user/UserManager.class.php');
+//require_once('common/user/UserManager.class.php');
 require_once('common/include/HTTPRequest.class.php');
 require_once('PluginHudsonJobDao.class.php');
 require_once('HudsonJob.class.php');
@@ -38,18 +38,19 @@ class hudson_Widget_MyMonitoredJobs extends HudsonOverviewWidget {
     function hudson_Widget_MyMonitoredJobs($plugin) {
         $this->Widget('plugin_hudson_my_jobs');
         $this->plugin = $plugin;
+	$user=UserManager::instance()->getCurrentUser();
         
-        $this->_not_monitored_jobs = user_get_preference('plugin_hudson_my_not_monitored_jobs');
+        $this->_not_monitored_jobs = $user->getPreference('plugin_hudson_my_not_monitored_jobs');
         if ($this->_not_monitored_jobs === false) {
             $this->_not_monitored_jobs = array();
         } else {
             $this->_not_monitored_jobs = explode(",", $this->_not_monitored_jobs);
         }
         
-        $this->_use_global_status = user_get_preference('plugin_hudson_use_global_status');
+        $this->_use_global_status = $user->getPreference('plugin_hudson_use_global_status');
         if ($this->_use_global_status === false) {
             $this->_use_global_status = "false";
-            user_set_preference('plugin_hudson_use_global_status', $this->_use_global_status);
+            $user->setPreference('plugin_hudson_use_global_status', $this->_use_global_status);
         }
         
         if ($this->_use_global_status == "true") {
@@ -124,11 +125,11 @@ class hudson_Widget_MyMonitoredJobs extends HudsonOverviewWidget {
             
             $this->_not_monitored_jobs = $not_monitored_jobs; 
             
-            user_set_preference('plugin_hudson_my_not_monitored_jobs', implode(",", $this->_not_monitored_jobs));
+            $user->setPreference('plugin_hudson_my_not_monitored_jobs', implode(",", $this->_not_monitored_jobs));
             
             $use_global_status = $request->get('use_global_status');
             $this->_use_global_status = ($use_global_status !== false)?"true":"false";
-            user_set_preference('plugin_hudson_use_global_status', $this->_use_global_status);
+            $user->setPreference('plugin_hudson_use_global_status', $this->_use_global_status);
         }
         return true;
     }
@@ -177,8 +178,13 @@ class hudson_Widget_MyMonitoredJobs extends HudsonOverviewWidget {
                         $job_id = $row['job_id'];
                         $group_id = $row['group_id'];
                         $job = new HudsonJob($job_url);
-                        
-                        $html .= '<tr class="'. util_get_alt_row_color($cpt) .'">';
+                        if ($cpt % 2 == 0) {
+					$class="boxitemalt bgcolor-white";
+				} else {
+					$class="boxitem bgcolor-grey";
+				}
+
+                        $html .= '<tr class="'. $class .'">';
                         $html .= ' <td>';
                         $html .= ' <img src="'.$job->getStatusIcon().'" title="'.$job->getStatus().'" >';
                         $html .= ' </td>';

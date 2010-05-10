@@ -20,7 +20,6 @@
 
 
 require_once('HudsonJobWidget.class.php');
-require_once('common/user/UserManager.class.php');
 require_once('common/include/HTTPRequest.class.php');
 require_once('PluginHudsonJobDao.class.php');
 require_once('HudsonJob.class.php');
@@ -44,9 +43,9 @@ class hudson_Widget_JobBuildHistory extends HudsonJobWidget {
     function getTitle() {
         $title = '';
         if ($this->job) {
-            $title .= vsprintf(_("%s Builds History"),  array($this->job->getName()));
+            $title .= vsprintf(_("%s Builds History"),  $this->job->getName());
         } else {
-            $title .= _("%s Builds History");
+            $title .= _("Builds History");
         }
         return  $title;
     }
@@ -56,8 +55,8 @@ class hudson_Widget_JobBuildHistory extends HudsonJobWidget {
     }
     
     function loadContent($id) {
-        $sql = "SELECT * FROM plugin_hudson_widget WHERE widget_name='" . $this->widget_id . "' AND owner_id = ". $this->owner_id ." AND owner_type = '". $this->owner_type ."' AND id = ". $id;
-        $res = db_query($sql);
+        $sql = "SELECT * FROM plugin_hudson_widget WHERE widget_name=$1 AND owner_id = $2 AND owner_type = $3 AND id = $4";
+        $res = db_query_params($sql,array($this->widget_id,$this->owner_id,$this->owner_type,$id));
         if ($res && db_numrows($res)) {
             $data = db_fetch_array($res);
             $this->job_id    = $data['job_id'];

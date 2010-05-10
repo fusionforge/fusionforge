@@ -20,7 +20,6 @@
 
 
 require_once('HudsonJobWidget.class.php');
-require_once('common/user/UserManager.class.php');
 require_once('common/include/HTTPRequest.class.php');
 require_once('PluginHudsonJobDao.class.php');
 require_once('HudsonJob.class.php');
@@ -46,7 +45,7 @@ class hudson_Widget_JobLastBuilds extends HudsonJobWidget {
         if ($this->job) {
             $title .= vsprintf(_("%s Last Builds"),  array($this->job->getName()));
         } else {
-            $title .= _("%s Last Builds");
+            $title .= _("Last Builds");
         }
         return  $title;
     }

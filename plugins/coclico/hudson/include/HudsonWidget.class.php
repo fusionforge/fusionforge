@@ -24,7 +24,7 @@ require_once('common/widget/WidgetLayoutManager.class.php');
 abstract class HudsonWidget extends Widget {
     
     function getCategory() {
-        return 'ci';
+        return _('Hudson');
     }
     
     protected function getAvailableJobs() {

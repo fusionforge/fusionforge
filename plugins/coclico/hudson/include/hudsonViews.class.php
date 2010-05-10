@@ -89,13 +89,13 @@ class hudsonViews extends Views {
 		}
 		if ($dar->valid()) {
 			$row = $dar->current();
-			fwrite($myfile,"appel de Cross REf Factory avec :".$row['name']);
+			/*fwrite($myfile,"appel de Cross REf Factory avec :".$row['name']);
 			$crossref_fact= new CrossReferenceFactory($row['name'], 'hudson_job', $group_id);
 			$crossref_fact->fetchDatas();
 			if ($crossref_fact->getNbReferences() > 0) {
 				echo '<b> '._('References').'</b>';
 				$crossref_fact->DisplayCrossRefs();
-			}
+			}*/
 			$this->_display_iframe($row['job_url']);
 			fwrite($myfile,"display iframe de ".$row['job_url']);
 		} else {

@@ -20,7 +20,6 @@
 
 
 require_once('HudsonOverviewWidget.class.php');
-require_once('common/user/UserManager.class.php');
 require_once('common/include/HTTPRequest.class.php');
 require_once('PluginHudsonJobDao.class.php');
 require_once('HudsonJob.class.php');

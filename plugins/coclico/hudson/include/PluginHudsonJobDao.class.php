@@ -83,7 +83,7 @@ class PluginHudsonJobDao extends DataAccessObject {
 	 */
 	function & searchByUserID($user_id) {
 		$sql = "SELECT j.*  
-			FROM plugin_hudson_job j, user u, user_group ug
+			FROM plugin_hudson_job j, users u, user_group ug
 			WHERE ug.group_id = j.group_id AND
 			u.user_id = ug.user_id AND 
 			u.user_id = $1";
