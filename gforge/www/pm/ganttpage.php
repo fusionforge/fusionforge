@@ -145,7 +145,7 @@ echo '	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.
 		<td>'._('Sort On').'<br />'. $order_box .'</td>
 		<td>'._('Resolution').'<br />'. $dispres_box .'</td>
 		<td>'._('Size').'<br />'. $size_box .'</td>
-		<td><input type="submit" name="submit" value="'._('Browse').'" /></td>
+		<td>&nbsp;<input type="submit" name="submit" value="'._('Browse').'" /></td>
 	</tr></table></form>';
 
 echo '<img src="'. getStringFromServer('PHP_SELF') .

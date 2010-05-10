@@ -122,7 +122,7 @@ echo '	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.
 		<td>'._('Category').'<br />'. $cat_box .'</td>
 		<td>'._('Sort On').'<br />'. $order_box .'</td>
 		<td>'._('Detail View').'<br />'. $view_box .'</td>
-		<td><input type="submit" name="submit" value="'._('Browse').'" /></td>
+		<td>&nbsp;<br /><input type="submit" name="submit" value="'._('Browse').'" /></td>
 	</tr></table></form><p />';
 
 
