@@ -70,7 +70,7 @@ if (getStringFromRequest('submit')) {
 	} elseif (getStringFromRequest('add')) {
 		$days_adjust = getIntFromRequest('days_adjust');
 
-		if ($project_task_id && $week && $days_adjust && $time_code && $hours) {
+		if ($project_task_id && $week && $time_code && $hours) { # && $days_adjust has always a valid number. No need to prove.
 
 			//$date_list = split('[- :]',$report_date,5);
 			//$report_date = mktime($date_list[3],$date_list[4],0,$date_list[1],$date_list[2],$date_list[0]);
@@ -90,7 +90,6 @@ if (getStringFromRequest('submit')) {
 				$feedback.=_('Successfully Added');
 			}
 		} else {
-			echo "INTERNAL ERROR: add: $project_task_id && $week && $days_adjust && $time_code && $hours";
 			exit_error('Error',_('All Fields Are Required.'));
 		}
 
@@ -99,9 +98,9 @@ if (getStringFromRequest('submit')) {
 
 if ($week) {
 	$group_project_id = getStringFromRequest('group_project_id');
-
+	
 	report_header(_('Time tracking'));
-
+	
 	if (!$group_project_id) {
 		$respm = db_query_params ('SELECT pgl.group_project_id,g.group_name || $1 || pgl.project_name 
 		FROM groups g, project_group_list pgl, user_group ug
@@ -196,7 +195,7 @@ if (!$group_project_id) {
 </table>
 </form>
 <p>
-<h3>Change Week</h3>
+<h3><? echo _('Change week') ?></h3>
 <p>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>"
 	method="get" /><?php echo report_weeks_box($report,'week'); ?><input
@@ -209,7 +208,8 @@ if (!$group_project_id) {
 //
 else {
 
-	report_header(_('Time tracking'));
+	/* report_header(_('Time tracking')); Outcommented the report_header().
+	 * Do not get the reason of the report_header() in here. */
 
 	?>
 <h3><?php echo _('Choose A Week to Record Or Edit Your Time.'); ?></h3>
