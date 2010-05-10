@@ -24,13 +24,6 @@
  * Locate task information by UUID (project_task_id) and return as JSON.
  */
 
-/*-
- * We have things like protected properties. We have abstract methods.
- * We have all this stuff that your computer science teacher told you
- * you should be using. I don't care about this crap at all.
- * -- Rasmus Lerdorf
- */
-
 require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once $gfcommon.'include/minijson.php';

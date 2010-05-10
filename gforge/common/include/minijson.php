@@ -25,12 +25,6 @@
  * use (and, if necessary, extend) this module.
  */
 
-/*-
- * I was really, really bad at writing parsers. I still am really bad at
- * writing parsers.
- * -- Rasmus Lerdorf
- */
-
 /**
  * Encodes an array (indexed or associative) as JSON.
  *

@@ -1176,18 +1176,11 @@ if (!function_exists('array_replace_recursive')) {
 	}
 }
 
-/*-
- * I have absolutely no idea how to write a programming language, I just
- * kept adding the next logical step on the way.
- * -- Rasmus Lerdorf
- */
-
 /* returns an integer from http://forge/foo/bar.php/123 or false */
 function util_path_info_last_numeric_component() {
 	if (!isset($_SERVER['PATH_INFO']))
 		return false;
 
-	/* PHP devs are idiots… ereg_replace is deprecated WTF? */
 	$ok = false;
 	foreach (str_split($_SERVER['PATH_INFO']) as $x) {
 		if ($x == '/') {

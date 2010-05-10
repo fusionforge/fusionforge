@@ -25,14 +25,6 @@
  * via a redirection.
  */
 
-/*-
- * I'm not a real programmer. I throw together things until it works
- * then I move on. The real programmers will say "yeah it works but
- * you're leaking memory everywhere. Perhaps we should fix that." I'll
- * just restart apache every 10 requests.
- * -- Rasmus Lerdorf
- */
-
 require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once $gfcommon.'pm/ProjectTaskSqlQueries.php';
