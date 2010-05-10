@@ -248,18 +248,16 @@ function beginTaskFeed($feed_title, $feed_link, $feed_desc) {
 function writeTaskFeed($msg, $item_cat){
     global  $show_threads;
             
-  $link = "pm/task.php?func=detailtask&amp;project_task_id=".$msg['project_task_id']."&amp;group_project_id=".$msg['group_project_id']."&amp;group_id=".$msg['group_id'];//group_id missing
-
     //------------ build one feed item ------------
     print "  <item>\n";					
         print "   <title>".$msg['subject']."</title>\n"; 
-        print "   <link>http://".forge_get_config('web_host')."/".$link."</link>\n";
+        print "   <link>" . util_make_url("/pm/t_follow.php/" . $msg['project_task_id']) . "</link>\n";
         print "   <category>".$item_cat."</category>\n";
         print "   <description>".$msg['details']."</description>\n";
         print "   <author>".$msg['user_realname']."</author>\n";
                 //print "   <comment></comment>\n";
         print "   <pubDate>".gmdate('D, d M Y G:i:s',$msg['most_recent_date'])." GMT</pubDate>\n";
-                //print "   <guid></guid>\n";			
+	print "   <guid>" . util_make_url("/pm/t_lookup.php?tid=" . $msg['project_task_id']) . "</guid>\n";
     print "  </item>\n";
 
 }
