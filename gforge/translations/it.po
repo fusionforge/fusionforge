@@ -8,12 +8,15 @@ msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-03-01 22:22+0100\n"
-"PO-Revision-Date: 2009-02-01 14:36+0100\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2010-04-19 22:47+0200\n"
+"Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 1.2.1\n"
 
 #: common/docman/Document.class.php:112 common/docman/Document.class.php:447
 #: common/pm/ProjectGroup.class.php:132 common/pm/ProjectGroup.class.php:346
@@ -44,9 +47,8 @@ msgstr "DocumentGroup: ID parent DocumentGroup non valido"
 
 #: common/docman/DocumentGroup.class.php:125
 #: common/docman/DocumentGroup.class.php:279
-#, fuzzy
 msgid "Group name already exists"
-msgstr "Nome unix già utilizzato."
+msgstr "Il nome gruppo è già stato utilizzato"
 
 #: common/docman/DocumentGroup.class.php:200
 msgid "DocumentGroup: Invalid DocumentGroup ID"
@@ -58,13 +60,13 @@ msgstr "DocumentGroup: ID del DocumentGroup non valido"
 #: common/survey/SurveyResponse.class.php:54
 #, php-format
 msgid "%1$s:: No Valid Group Object"
-msgstr "%1$s:: No Valid Group Object"
+msgstr "%1$s:: Nessun oggetto Gruppo valido"
 
 #: common/forum/Forum.class.php:86 common/include/Error.class.php:180
 #: common/mail/MailingList.class.php:81 common/survey/Survey.class.php:80
 #: common/survey/SurveyQuestion.class.php:72
 msgid "Group_id in db result does not match Group Object"
-msgstr "Group_id in db result does not match Group Object"
+msgstr "Group_id in in risultato db non corrisponde a oggetto gruppo"
 
 #: common/forum/Forum.class.php:121 common/forum/Forum.class.php:593
 msgid "Forum Name Must Be At Least 3 Characters"
@@ -79,13 +81,12 @@ msgid "Illegal Characters in Forum Name"
 msgstr "Il nome del forum contiene caratteri non validi"
 
 #: common/forum/Forum.class.php:147
-#, fuzzy
 msgid "Mailing List Exists with same name"
-msgstr "Nome Mailing List:"
+msgstr "Nome Mailing List già esistente"
 
 #: common/forum/Forum.class.php:181
 msgid "Error Adding Forum"
-msgstr "Errore nella creazione del forum"
+msgstr "Errore nella aggiunta del forum"
 
 #: common/forum/Forum.class.php:206 www/account/first.php:29
 #: www/help/index.php:29
@@ -95,7 +96,7 @@ msgstr "Benvenuto su %1$s"
 
 #: common/forum/Forum.class.php:244
 msgid "Invalid forum group identifier"
-msgstr ""
+msgstr "Identificatore gruppo forum non valido"
 
 #: common/forum/Forum.class.php:474 common/forum/Forum.class.php:511
 #: common/frs/FRSPackage.class.php:270 common/frs/FRSPackage.class.php:302
@@ -110,7 +111,7 @@ msgstr "Impossibile aggiungere la notifica"
 
 #: common/forum/Forum.class.php:544
 msgid "You Can Only Save Your Place If You Are Logged In"
-msgstr "Si pu&ograve; salvare la posizione solo quando si è colleggati"
+msgstr "Si può salvare la posizione solo quando si è collegati"
 
 #: common/forum/Forum.class.php:562
 msgid "Forum::savePlace()"
@@ -136,9 +137,8 @@ msgstr "Forum"
 #: common/forum/ForumFactory.class.php:185
 #: common/forum/ForumFactory.class.php:233
 #: common/forum/ForumFactory.class.php:268
-#, fuzzy
 msgid "Forum not found"
-msgstr "Sondaggio non trovato"
+msgstr "Forum non trovato"
 
 #: common/forum/ForumFactory.class.php:214
 #: common/forum/ForumFactory.class.php:242
@@ -149,11 +149,11 @@ msgstr "Non hai i permessi per accedere a questa pagina"
 
 #: common/forum/ForumMessage.class.php:60
 msgid "ForumMessage:: No Valid Forum Object"
-msgstr "ForumMessage:: No Valid Forum Object"
+msgstr "ForumMessage:: Nessuno oggetto forum valido"
 
 #: common/forum/ForumMessage.class.php:88
 msgid "Group_forum_id in db result does not match Forum Object"
-msgstr "Group_forum_id in db result does not match Forum Object"
+msgstr "Group_forum_id in risultati db non corrisponde a oggetto Forum"
 
 #: common/forum/ForumMessage.class.php:113
 #: common/forum/ForumMessage.class.php:259
@@ -178,12 +178,12 @@ msgstr ""
 #: common/forum/ForumMessage.class.php:271
 #: www/forum/admin/ForumAdmin.class.php:490
 msgid "Couldn't Update Master Thread parent with current time"
-msgstr "Non ho potuto aggiornare il thread principale con l'ora corrente"
+msgstr "Impossibile aggiornare il thread principale con l'ora corrente"
 
 #: common/forum/ForumMessage.class.php:194
 #: common/forum/ForumMessage.class.php:282
 msgid "Could Not Update Parent"
-msgstr "Non ho potuto aggiornare il messaggio superiore"
+msgstr "Impossibile aggiornare il messaggio padre"
 
 #: common/forum/ForumMessage.class.php:340
 msgid "Must Include A Message Body And Subject"
@@ -191,12 +191,12 @@ msgstr "Deve includere un oggetto e il contenuto"
 
 #: common/forum/ForumMessage.class.php:356
 msgid "ForumMessage::create() No Valid ParentMessage Object"
-msgstr "ForumMessage::create() No Valid ParentMessage Object"
+msgstr "ForumMessage::create() nessun oggetto padre valido"
 
 #: common/forum/ForumMessage.class.php:407
 #: common/forum/ForumMessage.class.php:426
 msgid "ForumMessage::fetchData() Invalid MessageID"
-msgstr "ForumMessage::fetchData() Invalid MessageID"
+msgstr "ForumMessage::fetchData() MessageID non valido"
 
 #: common/forum/ForumMessage.class.php:579
 msgid "Invalid Message ID"
@@ -209,6 +209,9 @@ msgid ""
 "Read and respond to this message at: \n"
 "%s"
 msgstr ""
+"\n"
+"Leggi questo messaggio e rispondi a: \n"
+"%s"
 
 #: common/forum/ForumMessage.class.php:668
 #, php-format
@@ -220,6 +223,11 @@ msgid ""
 "(enter your response here)\n"
 "%1$s"
 msgstr ""
+"\n"
+"Oppure replica a questa e-mail tra i seguenti marcatori: \n"
+"%1$s\n"
+"(inserisci qui la tua risposta)\n"
+"%1$s"
 
 #: common/forum/ForumMessage.class.php:674
 #, php-format
@@ -229,10 +237,14 @@ msgid ""
 "\n"
 "By: %s\n"
 msgstr ""
+"\n"
+"\n"
+"\n"
+"Da: %s\n"
 
 #: common/forum/ForumMessage.class.php:679
 msgid "A file has been uploaded with this message."
-msgstr ""
+msgstr "Un file è stato caricato con questo messaggio."
 
 #: common/forum/ForumMessage.class.php:690
 #, php-format
@@ -241,6 +253,9 @@ msgid ""
 "To stop monitoring this forum, login to %s and visit: \n"
 "%s\n"
 msgstr ""
+"Stai ricevendo questa e-mail poiché hai scelto la notifica di questo forum.\n"
+"Per terminare la notifica, fai il login a %s e vai alla pagina: \n"
+"%s\n"
 
 #: common/frs/FRSFile.class.php:93
 msgid "FRSFile Name Must Be At Least 3 Characters"
@@ -249,6 +264,7 @@ msgstr "La lunghezza minima del nome di un FRSFile è di 3 caratteri"
 #: common/frs/FRSFile.class.php:97
 msgid "Filename can only be alphanumeric and \"-\" \"_\" \".\" characters."
 msgstr ""
+"Il nome del file può contenere solo caratteri alfanumerici e \"-\" \"_\" \".\"."
 
 #: common/frs/FRSFile.class.php:107
 msgid "FRSFile Appears to be invalid"
@@ -274,7 +290,7 @@ msgstr "Il nome di un pacchetto può contenere solo caratteri alfanumerici"
 #: common/frs/FRSRelease.class.php:289
 #, php-format
 msgid "[%1$s Release] %2$s"
-msgstr ""
+msgstr "[%1$s Rilascio] %2$s"
 
 #: common/frs/FRSRelease.class.php:292
 #, php-format
@@ -290,6 +306,18 @@ msgid ""
 "\n"
 "%6$s"
 msgstr ""
+"Il progetto %1$s (%2$s) has rilasciato una nuova versione del pacchetto \"%"
+"3$s\".\n"
+"Lo puoi scaricare da:\n"
+"\n"
+"%4$s\n"
+"\n"
+"Stai ricevendo questa email poiché hai richiesto di essere notificato quando\n"
+"nuove versioni di questo pacchetto vengono rilasciati. Se vuoi disabilitare "
+"la notifica, \n"
+"fai il login a %5$s e segui questo link:\n"
+"\n"
+"%6$s"
 
 #: common/include/Error.class.php:126 common/include/Group.class.php:427
 #: common/include/Group.class.php:499 www/include/exit.php:37
@@ -5690,9 +5718,9 @@ msgid ""
 "write permissions for apache in /etc/gforge/plugins or create the link "
 "manually."
 msgstr ""
-"<br>Non è stato possibile collegare il file di configurazione a etc/gforge/"
-"plugins/%1$s. Controlla i permessi di scrittura per apache in /etc/gforge/"
-"plugins oppure crea il link manualmente."
+"<br>Non è stato possibile collegare il file di configurazione a "
+"etc/gforge/plugins/%1$s. Controlla i permessi di scrittura per apache in "
+"/etc/gforge/plugins oppure crea il link manualmente."
 
 #: www/admin/pluginman.php:169
 msgid "Initialisation error<br />Database said: "
