@@ -64,10 +64,11 @@ if (getStringFromRequest('submit')) {
 	$is_public = getIntFromRequest('is_public');
 	$feedback = "";
 
-	if ($sys_use_scm && !$scm) {
-		form_release_key(getStringFromRequest("form_key"));
-		// $feedback .= _('Site has SCM enabled, but no SCM was chosen.');
-	} else {
+	if (!$scm) {
+		$scm = 'noscm' ;
+	}
+
+	if ($sys_use_scm) {
 		$scm_host = '';
 		$plugin = false ;
 		if ($sys_use_scm && $scm && $scm != 'noscm') {
