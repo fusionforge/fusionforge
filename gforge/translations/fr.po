@@ -584,7 +584,7 @@ msgstr "ATS%d: %s"
 
 #: common/include/Group.class.php:2061
 msgid "Open-Discussion"
-msgstr "Discussion ouverte"
+msgstr "Discussion-Ouverte"
 
 #: common/include/Group.class.php:2061
 msgid "General Discussion"
