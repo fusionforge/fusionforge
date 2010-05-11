@@ -3591,6 +3591,9 @@ gforge/www/images/icon.png -text
 gforge/www/images/magnifier.png -text svneol=unset#unset
 gforge/www/images/msg.png -text
 gforge/www/images/opensearchdescription.png -text svneol=unset#unset
+gforge/www/images/pointer_down.png -text svneol=unset#unset
+gforge/www/images/pointer_left.png -text svneol=unset#unset
+gforge/www/images/pointer_right.png -text svneol=unset#unset
 gforge/www/images/pow-fusionforge.png -text svneol=unset#unset
 gforge/www/images/sf-for-debian.png -text
 gforge/www/images/smiles/icon_arrow.gif -text
