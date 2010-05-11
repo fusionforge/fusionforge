@@ -56,25 +56,16 @@ abstract class HudsonJobWidget extends HudsonWidget {
     function getInstallPreferences() {
         $prefs  = '';
         $prefs .= '<strong>'._("Monitored job:").'</strong><br />';
-       /* 
         $jobs = $this->getAvailableJobs();
+	$selected_jobs_id = $this->getSelectedJobsId();
         
         foreach ($jobs as $job_id => $job) {
-            $prefs .= '<input type="radio" name="job_id" value="'.$job_id.'"> '.$job->getName().'<br />';
-        }
-        return $prefs;*/
-	$selected_jobs_id = $this->getSelectedJobsId();
-        $jobs = $this->getAvailableJobs();
-
-        $only_one_job = (count($jobs) == 1);
-            foreach ($jobs as $job_id => $job) {
-                $selected = ($only_one_job)?'checked="checked"':'';
-                $prefs .= '<input type="radio" name="' . $this->widget_id . '_job_id" value="'.$job_id.'" ' . $selected . '> ' . $job->getName() ;
+            $prefs .= '<input type="radio" name="job_id" value="'.$job_id.'"> '.$job->getName();
                 if (in_array($job_id, $selected_jobs_id)) {
                         $prefs .= ' <em>('._('Already used') .')</em>';
                 }
                 $prefs .= '<br />';
-            }
+        }
         return $prefs;
     }
     function hasPreferences() {
