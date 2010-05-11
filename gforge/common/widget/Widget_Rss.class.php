@@ -40,6 +40,11 @@ require_once('Widget.class.php');
 		$hp = Codendi_HTMLPurifier::instance();
 		$content = '';
 		if ($this->rss_url) {
+			// The following is to workaround the miss of idn_to_utf8 if php < 5.3.0
+			// common/rss/simplepie.inc is a copy from Codendi code that should be removed
+			// when use of php > 5.3.0 is generalized
+			// simplepie/simplepie.inc is supposed to point on the simplepie.inc distributed
+			// on your operating system
 			if (function_exists('idn_to_utf8()')) {
 				require_once('simplepie/simplepie.inc');
 			}
