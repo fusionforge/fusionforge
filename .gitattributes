@@ -105,6 +105,7 @@ gforge/common/mvc/Views.class.php -text
 gforge/common/pm/ProjectTaskSqlQueries.php -text
 gforge/common/reporting/ReportDownloads.class.php -text
 gforge/common/rss/RSS.class.php -text
+gforge/common/rss/simplepie.inc -text
 gforge/common/system_event/SystemEvent.class.php -text
 gforge/common/system_event/SystemEventManager.class.php -text
 gforge/common/tracker/ArtifactWorkflow.class.php -text

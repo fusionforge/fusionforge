@@ -40,7 +40,12 @@ require_once('Widget.class.php');
 		$hp = Codendi_HTMLPurifier::instance();
 		$content = '';
 		if ($this->rss_url) {
-			require_once('simplepie.inc');
+			if (function_exists('idn_to_utf8()')) {
+				require_once('simplepie/simplepie.inc');
+			}
+			else {
+				require_once('common/rss/simplepie.inc');
+			}
 			if (!is_dir($GLOBALS['sys_var_path'] .'/rss')) {
 				mkdir($GLOBALS['sys_var_path'] .'/rss');
 			}

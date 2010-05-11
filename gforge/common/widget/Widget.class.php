@@ -29,7 +29,7 @@ require_once('common/widget/Widget_MyLatestSvnCommits.class.php');
 require_once('common/widget/Widget_MyArtifacts.class.php');
 //require_once('common/widget/Widget_MyBugs.class.php');
 //require_once('common/widget/Widget_MySrs.class.php');
-//require_once('common/widget/Widget_MyTasks.class.php');
+require_once('common/widget/Widget_MyTasks.class.php');
 require_once('common/widget/Widget_MyRss.class.php');
 
 require_once('common/widget/Widget_MyAdmin.class.php');
@@ -174,7 +174,11 @@ require_once('common/widget/Widget_ProjectSvnStats.class.php');
 				if (UserManager::instance()->getCurrentUser()->is_super_user) { //This widget is only for super admin
 					$o =& new Widget_MyAdmin();
 				}
-				break;/*
+				break;
+			case 'mytasks':
+				$o =& new Widget_MyTasks();
+				break;
+/*
 			case 'mysrs':
 				$o =& new Widget_MySrs();
 				break;
@@ -186,9 +190,6 @@ require_once('common/widget/Widget_ProjectSvnStats.class.php');
 				break; 
 				case 'mybugs':
 				$o =& new Widget_MyBugs();
-				break;
-				case 'mytasks':
-				$o =& new Widget_MyTasks();
 				break;
 				case 'mytwitterfollow':
 				$o =& new Widget_MyTwitterFollow();
