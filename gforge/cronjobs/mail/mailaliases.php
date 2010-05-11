@@ -175,8 +175,11 @@ $rows=db_numrows($res);
 
 for ($i=0; $i<$rows; $i++) {
 	$user = db_result($res,$i,0);
-    $email = db_result($res,$i,1);
-    
+	if (preg_match('/@/', $user)) {
+		continue;
+	}
+	$email = db_result($res,$i,1);
+
 	if (array_key_exists($user, $aliases)) {
 		// A GForge alias was found outside the markers
 		unset($aliases[$user]);
