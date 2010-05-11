@@ -17,9 +17,12 @@ CREATE TABLE layouts (
 --
 
 INSERT INTO layouts (id, name, description, scope) VALUES
-(1, '2 columns', 'Simple layout made of 2 columns', 'S'),
-(2, '3 columns', 'Simple layout made of 3 columns', 'S'),
-(3, 'Left', 'Simple layout made of a main column and a small, left sided, column', 'S'),
+(1, '2 columns', 'Simple layout made of 2 columns', 'S');
+INSERT INTO layouts (id, name, description, scope) VALUES
+(2, '3 columns', 'Simple layout made of 3 columns', 'S');
+INSERT INTO layouts (id, name, description, scope) VALUES
+(3, 'Left', 'Simple layout made of a main column and a small, left sided, column', 'S');
+INSERT INTO layouts (id, name, description, scope) VALUES
 (4, 'Right', 'Simple layout made of a main column and a small, right sided, column', 'S');
 
 --
@@ -62,9 +65,12 @@ CREATE TABLE layouts_rows (
 --
 
 INSERT INTO layouts_rows (id, layout_id, rank) VALUES
-(1, 1, 0),
-(2, 2, 0),
-(3, 3, 0),
+(1, 1, 0);
+INSERT INTO layouts_rows (id, layout_id, rank) VALUES
+(2, 2, 0);
+INSERT INTO layouts_rows (id, layout_id, rank) VALUES
+(3, 3, 0);
+INSERT INTO layouts_rows (id, layout_id, rank) VALUES
 (4, 4, 0);
 
 CREATE SEQUENCE layouts_rows_columns_pk_seq
@@ -90,14 +96,22 @@ CREATE TABLE layouts_rows_columns (
 --
 
 INSERT INTO layouts_rows_columns (id, layout_row_id, width) VALUES
-(1, 1, 50),
-(2, 1, 50),
-(3, 2, 33),
-(4, 2, 33),
-(5, 2, 33),
-(6, 3, 33),
-(7, 3, 66),
-(8, 4, 66),
+(1, 1, 50);
+INSERT INTO layouts_rows_columns (id, layout_row_id, width) VALUES
+(2, 1, 50);
+INSERT INTO layouts_rows_columns (id, layout_row_id, width) VALUES
+(3, 2, 33);
+INSERT INTO layouts_rows_columns (id, layout_row_id, width) VALUES
+(4, 2, 33);
+INSERT INTO layouts_rows_columns (id, layout_row_id, width) VALUES
+(5, 2, 33);
+INSERT INTO layouts_rows_columns (id, layout_row_id, width) VALUES
+(6, 3, 33);
+INSERT INTO layouts_rows_columns (id, layout_row_id, width) VALUES
+(7, 3, 66);
+INSERT INTO layouts_rows_columns (id, layout_row_id, width) VALUES
+(8, 4, 66);
+INSERT INTO layouts_rows_columns (id, layout_row_id, width) VALUES
 (9, 4, 33);
 
 
