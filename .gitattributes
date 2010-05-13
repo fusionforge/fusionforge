@@ -249,7 +249,6 @@ gforge/etc/httpd.d/21list.vhost.ssl -text
 gforge/etc/httpd.d/61plugin-scmdarcs -text
 gforge/etc/httpd.d/61plugin-scmgit -text
 gforge/etc/httpd.d/99maindirhttp -text
-gforge/etc/local.d/60bbcode -text
 gforge/etc/templates/database.py -text
 gforge/fusionforge-install-2.php -text
 gforge/fusionforge-install-3-db.php -text

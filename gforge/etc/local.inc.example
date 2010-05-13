@@ -73,7 +73,7 @@ $sys_dbhost='';
 $sys_dbname='alexandria';
 $sys_dbuser='www';
 // You can also specify a database port if you're using something other than 5432
-//$sys_dbport='4242';
+$sys_dbport='5432';
 $sys_server='pgsql';
 
 //
@@ -132,7 +132,9 @@ $sys_jabber_port='5222';
 // messages sent to jabber accounts will come from this user
 // It is similar to the "From: noreply@gforge.org" used in emails
 $sys_jabber_user='noreply';
-
+if (!isset($sys_jabber_pass)) {
+   $sys_jabber_pass='';
+}
 //
 //	FEATURES
 //	You can turn features on/off sitewide
@@ -159,8 +161,6 @@ $sys_use_bookmarks=true;
 $sys_use_project_tags=true;
 $sys_use_project_full_list=true;
 
-$sys_use_manual_uploads=false;
-
 // This one exists purely for hysteric raisins
 $sys_use_mwframe=false;
 
@@ -168,6 +168,8 @@ $sys_use_mwframe=false;
 $sys_use_ratings=true;
 // Enable/Disable the ability to upload files using FTP in FRS
 $sys_use_ftpuploads=false;
+// Enable/Disable the ability to upload files using SCP/SFTP in FRS
+$sys_use_manual_uploads=false;
 // Enable/Disable the use of mail gateways for trackers and forums
 $sys_use_gateways=true;
 
@@ -328,11 +330,3 @@ $sys_plugins_path="$sys_share_path/plugins/";
 //	'Support Tech'=>array( 'projectadmin'=>'0', 'frs'=>'0', 'scm'=>'0', 'docman'=>'1', 'forumadmin'=>'0', 'forum'=>'1', 'trackeradmin'=>'0', 'tracker'=>'2', 'pmadmin'=>'0', 'pm'=>'0' , 'webcal'=>'2')
 //);
 
-//bbcode customizations
-$sys_bbcode_make_clickable=1;
-$sys_bbcode_smilie_on=1;
-$sys_bbcode_bbcode_on=1;
-$sys_bbcode_strip_html=1;
-
-// End of customizations -- place nothing after the closing PHP tag!
-?>
