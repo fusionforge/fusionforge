@@ -243,6 +243,11 @@
 	$hash = md5(microtime());
 	system("perl -spi -e \"s/sys_session_key = 'foobar'/sys_session_key = '$hash'/\" /etc/gforge/local.inc");
 
+	# Replace /path/to/gforge to /opt/gforge
+	$config = file_get_contents('/etc/gforge/local.inc');
+	$content = str_replace('/path/to/gforge', '/opt/gforge', $config);
+	file_put_contents('/etc/gforge/local.inc', $content);
+
 	# Set jpgraph path.
 	if (is_dir("/usr/share/jpgraph")) {
 		system("perl -spi -e \"s!^(.sys_path_to_jpgraph)=.*!\\$1='/usr/share/jpgraph';!\" /etc/gforge/local.inc");
