@@ -4391,6 +4391,11 @@ plugins/coclico/mailman/www/mailman_utils.php -text
 plugins/coclico/mailman/www/themes/default/images/ic/add.png -text svneol=unset#unset
 plugins/coclico/mailman/www/themes/default/images/ic/delete.png -text svneol=unset#unset
 plugins/coclico/mailman/www/themes/default/images/ic/tick.png -text svneol=unset#unset
+plugins/coclico/soapadmin/README.txt -text
+plugins/coclico/soapadmin/coreapi/FusionforgeCoreApi.wsdl -text
+plugins/coclico/soapadmin/coreapi/coreapi.php -text
+plugins/coclico/soapadmin/coreapi/coreapiobjects.php -text
+plugins/coclico/soapadmin/coreapi/coreapiservice.php -text
 plugins/templates/createplugin.sh -text
 plugins/templates/helloworld/bin/db-delete.pl -text
 plugins/templates/helloworld/bin/db-upgrade.pl -text
