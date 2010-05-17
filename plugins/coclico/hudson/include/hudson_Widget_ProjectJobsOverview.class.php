@@ -92,9 +92,15 @@ class hudson_Widget_ProjectJobsOverview extends HudsonOverviewWidget {
             $cpt = 1;
             
             foreach ($jobs as $job_id => $job) {
+		if ($cpt % 2 == 0) {
+                        $class="boxitemalt bgcolor-white";
+                } else {
+                        $class="boxitem bgcolor-grey";
+                }
+
                 try {
                     
-                    $html .= '<tr class="'. util_get_alt_row_color($cpt) .'">';
+                    $html .= '<tr class="'. $class .'">';
                     $html .= ' <td>';
                     $html .= ' <img src="'.$job->getStatusIcon().'" title="'.$job->getStatus().'" >';
                     $html .= ' </td>';
