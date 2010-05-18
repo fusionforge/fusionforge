@@ -37,12 +37,14 @@ require_once('common/widget/Widget_MyAdmin.class.php');
    require_once('common/widget/Widget_MyTwitterFollow.class.php');
    require_once('common/widget/Widget_MySystemEvent.class.php');
 //require_once('common/widget/Widget_MyWikiPage.class.php');
-require_once('common/widget/Widget_ProjectDescription.class.php');
-require_once('common/widget/Widget_ProjectClassification.class.php');
+*/require_once('common/widget/Widget_ProjectDescription.class.php');
+//require_once('common/widget/Widget_ProjectClassification.class.php');
+
 require_once('common/widget/Widget_ProjectMembers.class.php');
+require_once('common/widget/Widget_ProjectInfo.class.php');
 require_once('common/widget/Widget_ProjectLatestFileReleases.class.php');
 require_once('common/widget/Widget_ProjectLatestNews.class.php');
-require_once('common/widget/Widget_ProjectPublicAreas.class.php');*/
+require_once('common/widget/Widget_ProjectPublicAreas.class.php');
 require_once('common/widget/Widget_ProjectRss.class.php');/*
 							     require_once('common/widget/Widget_ProjectLatestSvnCommits.class.php');
 							     require_once('common/widget/Widget_ProjectLatestCvsCommits.class.php');
@@ -170,15 +172,15 @@ require_once('common/widget/Widget_ProjectSvnStats.class.php');
 			case 'myrss':
 				$o =& new Widget_MyRss();
 				break;
+			case 'mytasks':
+				$o =& new Widget_MyTasks();
+				break;
+
 			case 'myadmin':
 				if (UserManager::instance()->getCurrentUser()->is_super_user) { //This widget is only for super admin
 					$o =& new Widget_MyAdmin();
 				}
-				break;
-			case 'mytasks':
-				$o =& new Widget_MyTasks();
-				break;
-/*
+				break;/*
 			case 'mysrs':
 				$o =& new Widget_MySrs();
 				break;
@@ -191,7 +193,7 @@ require_once('common/widget/Widget_ProjectSvnStats.class.php');
 				case 'mybugs':
 				$o =& new Widget_MyBugs();
 				break;
-				case 'mytwitterfollow':
+								case 'mytwitterfollow':
 				$o =& new Widget_MyTwitterFollow();
 				break;
 				case 'mywikipage':                   //not yet
@@ -202,14 +204,17 @@ require_once('common/widget/Widget_ProjectSvnStats.class.php');
 				$o = new Widget_MySystemEvent();
 				}
 				break;
+				case 'projectclassification':
+				$o =& new Widget_ProjectClassification();
+				break;*/
 				case 'projectdescription':
 				$o =& new Widget_ProjectDescription();
 				break;
-				case 'projectclassification':
-				$o =& new Widget_ProjectClassification();
-				break;
 				case 'projectmembers':
 				$o =& new Widget_ProjectMembers();
+				break;
+				case 'projectinfo':
+				$o =& new Widget_ProjectInfo();
 				break;
 				case 'projectlatestfilereleases':
 				$o =& new Widget_ProjectLatestFileReleases();
@@ -222,7 +227,7 @@ require_once('common/widget/Widget_ProjectSvnStats.class.php');
 				break;
 				case 'projectrss':
 				$o =& new Widget_ProjectRss();
-				break;
+				break;/*
 				case 'projecttwitterfollow':
 				$o =& new Widget_ProjectTwitterFollow();
 				break;
@@ -259,7 +264,7 @@ require_once('common/widget/Widget_ProjectSvnStats.class.php');
 						);
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_GROUP:
-				$widgets = array('projectdescription', 'projectmembers', 
+				$widgets = array('projectdescription', 'projectmembers', 'projectinfo', 
 						'projectlatestfilereleases', 'projectlatestnews', 'projectpublicareas', //'projectwikipage' //not yet
 						'projectlatestsvncommits', 'projectlatestcvscommits', 'projecttwitterfollow', 
 						'projectsvnstats', 'projectrss', 

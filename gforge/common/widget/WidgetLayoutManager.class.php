@@ -40,10 +40,17 @@ class WidgetLayoutManager {
 	 * @param  owner_type  
 	 */
 	function displayLayout($owner_id, $owner_type) {
-		$sql = "SELECT * from owner_layouts where owner_id=$1";
-		$res = db_query_params($sql,array($owner_id));
+		$sql = "SELECT * from owner_layouts where owner_id=$1 and owner_type=$2";
+		$res = db_query_params($sql,array($owner_id,$owner_type));
 		if($res && db_numrows($res)<1) {
-			$this->createDefaultLayoutForUser($owner_id);
+			if($owner_type==self::OWNER_TYPE_USER) {
+				$this->createDefaultLayoutForUser($owner_id);
+				$this->displayLayout($owner_id,$owner_type);
+			}
+			else {
+				$this->createDefaultLayoutForProject($owner_id,1);
+				$this->displayLayout($owner_id,$owner_type);
+			}
 		}
 		else {
 			$sql = "SELECT l.* 
@@ -107,7 +114,7 @@ class WidgetLayoutManager {
 				}
 				break;
 			case self::OWNER_TYPE_GROUP:
-				if (user_is_super_user() || user_ismember($request->get('group_id'), 'A')) { //Only project admin
+				if (UserManager::instance()->getCurrentUser()->is_super_user==true || user_ismember($request->get('group_id'), 'A')) { //Only project admin
 					$readonly = false;
 				}
 				break;
@@ -168,7 +175,6 @@ class WidgetLayoutManager {
 	 */
 	function createDefaultLayoutForProject($group_id, $template_id) {
 		$pm = ProjectManager::instance();
-		$pm->clear($group_id);
 		$project = $pm->getProject($group_id);
 		$sql = "INSERT INTO owner_layouts(layout_id, is_default, owner_id, owner_type) 
 			SELECT layout_id, is_default, $1, owner_type 
@@ -466,7 +472,7 @@ class WidgetLayoutManager {
 			$widget_rows = array();
 			if (count($categs)) {
 				foreach($categs as $c => $ws) {
-					$widget_rows[$c] = '<a class="widget-categ-switcher" href="#widget-categ-'. $c .'"><span>'.   $hp->purify($c, CODENDI_PURIFIER_CONVERT_HTML)  .'</span></a>';
+					$widget_rows[$c] = '<a class="widget-categ-switcher" href="#widget-categ-'. $c .'"><span>'.  str_replace('-',' ', $hp->purify($c, CODENDI_PURIFIER_CONVERT_HTML))  .'</span></a>';
 				}
 				uksort($widget_rows, 'strnatcasecmp');
 				echo '<ul id="widget-categories">';
@@ -625,9 +631,11 @@ class WidgetLayoutManager {
 				LEFT JOIN layouts_contents AS R2 USING ( owner_type, owner_id, layout_id, column_id ) 
 				ORDER BY rank ASC 
 				LIMIT 1";
+			$myfile=fopen('/tmp/debug','a');
 			$params = array($name,$content_id,$owner_type,$owner_id,$layout_id,$column_id);
-			echo $sql." devient:\n";
-			echo str_replace(array("$1","$2","$3","$4","$5","$6"),$params,$sql);
+			fwrite($myfile, $sql." devient:\n");
+			fwrite($myfile, str_replace(array("$1","$2","$3","$4","$5","$6"),$params,$sql));
+			fwrite($myfile, "\n request content=".$request->get('content_id'));
 			db_query_params($sql,array($name,$content_id,$owner_type,$owner_id,$layout_id,$column_id));
 			echo db_error();
 		}

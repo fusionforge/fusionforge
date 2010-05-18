@@ -129,6 +129,12 @@ gforge/common/widget/Widget_MyProjects.class.php -text
 gforge/common/widget/Widget_MyRss.class.php -text
 gforge/common/widget/Widget_MySurveys.class.php -text
 gforge/common/widget/Widget_MyTasks.class.php -text
+gforge/common/widget/Widget_ProjectDescription.class.php -text
+gforge/common/widget/Widget_ProjectInfo.class.php -text
+gforge/common/widget/Widget_ProjectLatestFileReleases.class.php -text
+gforge/common/widget/Widget_ProjectLatestNews.class.php -text
+gforge/common/widget/Widget_ProjectMembers.class.php -text
+gforge/common/widget/Widget_ProjectPublicAreas.class.php -text
 gforge/common/widget/Widget_ProjectRss.class.php -text
 gforge/common/widget/Widget_Rss.class.php -text
 gforge/contrib/cmd-line-prototype.tar.gz -text
@@ -170,6 +176,7 @@ gforge/db/20100331-alter-system-event.sql -text
 gforge/db/20100402_add_query_options.sql -text
 gforge/db/20100505-alter-user-preference.sql -text
 gforge/db/20100506-add-widgets.sql -text
+gforge/db/20100517-add-project-widgets.sql -text
 gforge/db/FTI-20061025.sql -text
 gforge/db/gforge-data-mysql.sql -text
 gforge/db/gforge-struct-mysql.sql -text

@@ -13,6 +13,8 @@ require_once $gfwww.'news/news_utils.php';
 require_once $gfwww.'include/trove.php';
 require_once $gfwww.'include/project_summary.php';
 require_once $gfcommon.'include/tag_cloud.php';
+//UNCOMMENT TO TEST WIDGETS
+//require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 
 $title = _('Project Info');
 
@@ -20,6 +22,11 @@ site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'home'));
 
 
 // ########################################### end top area
+$request =& HTTPRequest::instance();
+$request->set('group_id',$group_id);
+//UNCOMMENT TO TEST WIDGETS
+//$lm = new WidgetLayoutManager();
+//$lm->displayLayout($group_id, WidgetLayoutManager::OWNER_TYPE_GROUP);
 
 // two column deal
 // Embedd some RDFa to describe the project using DOAP and SIOC

@@ -35,7 +35,7 @@ class Widget_MyMonitoredForums extends Widget {
     }
     function getContent() {
         $html_my_monitored_forums = '';
-        $sql="SELECT groups.group_id, groups.group_name ".
+        $sql="SELECT DISTINCT groups.group_id, groups.group_name ".
              "FROM groups,forum_group_list,forum_monitored_forums ".
              "WHERE groups.group_id=forum_group_list.group_id ".
              "AND groups.status = 'A' ".
