@@ -1,7 +1,7 @@
 -- Projects
 
 INSERT INTO owner_layouts (owner_id, owner_type, layout_id, is_default)
-VALUES (1, 'g', 1, 1);
+VALUES (1, 'g', 4, 1);
 
 -- First column
 INSERT INTO layouts_contents (owner_id, owner_type, layout_id, column_id, name, rank)
