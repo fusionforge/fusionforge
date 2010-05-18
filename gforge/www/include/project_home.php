@@ -24,10 +24,10 @@ site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'home'));
 // ########################################### end top area
 $request =& HTTPRequest::instance();
 $request->set('group_id',$group_id);
-//UNCOMMENT TO TEST WIDGETS
-//$lm = new WidgetLayoutManager();
-//$lm->displayLayout($group_id, WidgetLayoutManager::OWNER_TYPE_GROUP);
-
+//COMMENT TO DESACTIVATE WIDGETS
+$lm = new WidgetLayoutManager();
+$lm->displayLayout($group_id, WidgetLayoutManager::OWNER_TYPE_GROUP);
+/*
 // two column deal
 // Embedd some RDFa to describe the project using DOAP and SIOC
 echo '
@@ -287,10 +287,10 @@ if ($project->usesFRS()) {
 			echo '<tr><td colspan="6"><strong>'._('This Project Has Not Released Any Files').'</strong></td></tr>';
 
 		} else {
-			/*
-				This query actually contains ALL releases of all packages
-				We will test each row and make sure the package has changed before printing the row
-			*/
+			
+			//	This query actually contains ALL releases of all packages
+			//	We will test each row and make sure the package has changed before printing the row
+			
 			for ($f=0; $f<$rows_files; $f++) {
 				if (db_result($res_files,$f,'package_id')==db_result($res_files,($f-1),'package_id')) {
 					//same package as last iteration - don't show this release
@@ -548,7 +548,7 @@ echo '</td>
 //
 
 plugin_hook('project_home_link',$group_id);
-
+*/
 site_project_footer(array());
 
 // Local Variables:
