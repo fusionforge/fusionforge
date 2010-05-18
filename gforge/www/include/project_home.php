@@ -14,7 +14,7 @@ require_once $gfwww.'include/trove.php';
 require_once $gfwww.'include/project_summary.php';
 require_once $gfcommon.'include/tag_cloud.php';
 //UNCOMMENT TO TEST WIDGETS
-//require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
+require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 
 $title = _('Project Info');
 
