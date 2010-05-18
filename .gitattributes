@@ -3788,6 +3788,7 @@ gforge/www/scripts/codendi/codendi-1236793993.js -text
 gforge/www/scripts/codendi/common.js -text
 gforge/www/scripts/codendi/cross_references.js -text
 gforge/www/scripts/codendi/debug_reserved_names.js -text
+gforge/www/scripts/codendi/validate.js -text
 gforge/www/search/include/engines/DocsGroupSearchEngine.class.php -text svneol=unset#application/octet-stream
 gforge/www/search/include/engines/ForumsGroupSearchEngine.class.php -text svneol=unset#application/octet-stream
 gforge/www/search/include/engines/FrsGroupSearchEngine.class.php -text svneol=unset#application/octet-stream
