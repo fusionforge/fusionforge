@@ -223,6 +223,12 @@ class Widget_MyArtifacts extends Widget {
 					}
 
 					if($AS_flag !='N') {
+						if($count_aids % 2  == 1) {
+							$class="bgcolor-white";
+						}
+						else {
+							$class="bgcolor-grey";
+						}
 
 						$html .= '
 							<TR class="'.$class.'">'.

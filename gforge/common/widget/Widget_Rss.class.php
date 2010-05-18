@@ -44,15 +44,12 @@ require_once('Widget.class.php');
 				require_once('simplepie/simplepie.inc');
 			}
 			else {
-				function idn_to_utf8($param) {
-					return idn_to_unicode($param);
-				}
-				require_once('simplepie/simplepie.inc');
+				require_once('common/rss/simplepie.inc');
 			}
-			if (!is_dir($GLOBALS['sys_var_path'] .'/rss')) {
-				mkdir($GLOBALS['sys_var_path'] .'/rss');
+			if (!is_dir(forg_get_config('sys_var_path') .'/rss')) {
+				mkdir(forg_get_config('sys_var_path') .'/rss');
 			}
-			$rss =& new SimplePie($this->rss_url, $GLOBALS['sys_var_path'] .'/rss', null, $GLOBALS['sys_proxy']);
+			$rss =& new SimplePie($this->rss_url, forg_get_config('sys_var_path') .'/rss', null, forg_get_config('sys_proxy'));
 			$max_items = 10;
 			$items = array_slice($rss->get_items(), 0, $max_items);
 			$content .= '<table width="100%">';
@@ -129,11 +126,16 @@ require_once('Widget.class.php');
 			$vTitle = new Valid_String('title');
 			$vTitle->required();
 			if (!$request->validInArray('rss', $vTitle)) {
-				require_once('common/rss/libs/SimplePie/simplepie.inc');
-				if (!is_dir($GLOBALS['sys_var_path'] .'/rss')) {
-					mkdir($GLOBALS['sys_var_path'] .'/rss');
+				if (function_exists('idn_to_utf8()')) {
+					require_once('simplepie/simplepie.inc');
 				}
-				$rss_reader =& new SimplePie($rss['url'], $GLOBALS['sys_var_path'] .'/rss', null, 'http://p-goodway:3128');
+				else {
+					require_once('common/rss/simplepie.inc');
+				}
+				if (!is_dir(forg_get_config('sys_var_path') .'/rss')) {
+					mkdir(forg_get_config('sys_var_path') .'/rss');
+				}
+				$rss_reader =& new SimplePie($rss['url'], forg_get_config('sys_var_path') .'/rss', null, forge_get_config('sys_proxy'));
 				$rss['title'] = $rss_reader->get_title();
 			}
 			$sql = 'INSERT INTO widget_rss (owner_id, owner_type, title, url) VALUES ($1,$2,$3,$4)';
