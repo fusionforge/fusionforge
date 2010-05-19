@@ -271,21 +271,6 @@ function util_send_jabber($to,$subject,$body) {
 }
 
 /**
- * util_prep_string_for_sendmail() - Prepares a string to be sent by email
- *
- * @param		string	The text to be prepared
- * @returns The prepared text
- *
- */
-function util_prep_string_for_sendmail($body) {
-	/*$body=str_replace("`","\\`",$body);
-	$body=str_replace("\"","\\\"",$body);
-	$body=str_replace("\$","\\\$",$body);*/
-	$body = escapeshellarg($body);
-	return $body;
-}
-
-/**
  *	util_handle_message() - a convenience wrapper which sends messages
  *	to either a jabber account or email account or both, depending on
  *	user preferences
@@ -977,19 +962,6 @@ function readfile_chunked($filename, $returnBytes=true) {
  */
 function util_is_root_dir($dir) {
 	return !preg_match('/[^\\/]/',$dir);
-}
-
-/**
- * util_strip_accents() - Remove accents from given text.
- * @param	string	Text
- * @return 	string
- */
-function util_strip_accents($text) {
-	$find = utf8_decode($text);
-	$find = strtr($find,
-		utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'),
-		'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
-	return utf8_encode($find);
 }
 
 /**

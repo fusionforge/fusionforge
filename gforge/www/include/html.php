@@ -72,30 +72,6 @@ function html_blankimage($height,$width) {
 }
 
 /**
- * html_dbimage() - Show an image that is stored in the database
- *
- * @param		int		The id of the image to show
- */
-function html_dbimage($id, $args=0) {
-	if (!$id) {
-		return '';
-	}
-	if (!$args) {
-		$args = array();
-	}
-	$result = db_query_params ('SELECT width,height,version 
-FROM db_images WHERE id=$1',
-			array ($id));
-	$rows=db_numrows($result);
-
-	if (!$result || $rows < 1) {
-		return db_error();
-	} else {
-		return html_abs_image('/dbimage.php?id='.$id.'&amp;v='.db_result($result,0,'version'),db_result($result,0,'width'),db_result($result,0,'height'),$args);
-	}
-}
-
-/**
  * html_abs_image() - Show an image given an absolute URL.
  *
  * @param		string	URL
@@ -797,24 +773,6 @@ function html_clean_hash_string($hashstr) {
 	}
 
 	return $hashstr;
-}
-
-/**
- *	html_build_rich_textarea() - Renders textarea control
- *	
- *	@param name (string) - the name for the control
- *	@param rows (int) - the rows for the control (number of visible text lines)
- *	@param cols (int)  - the cols for the control (visible width in average character widths)
- *	@param text (string) - initial text to be displayed
- *	@param readonly (boolean) - if the text cannot be modified
- *	@return html code for control
- */
-function html_build_rich_textarea($name,$rows,$cols,$text,$readonly) {
-	return '<textarea name="'.$name.'"'
-		.' rows="'.$rows.'"'
-		.' cols="'.$cols.'"'
-		.($readonly ? ' readonly' : ' ').'>'
-		. $text . '</textarea>';
 }
 
 // Local Variables:

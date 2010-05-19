@@ -244,7 +244,6 @@ function updateVars($vars,$filepath) {
 				}
 			}
 			echo $HTML->listTableBottom();
-			/*echo '<br /><center>' . html_build_rich_textarea('filedata',30,150,$filedata,false) . '</center>';*/
 			echo '<br />';
 			if ($has_write) {
 				echo '<div align="center"><input type="submit" name="doedit" value="' . _('Save') .'"/></div>';
