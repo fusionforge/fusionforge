@@ -26,12 +26,10 @@ if (isLogged()) {
             switch($owner_type) {
                 case WidgetLayoutManager::OWNER_TYPE_USER:
                     $owner_id = user_getid();
-                    
-               //     $title = $GLOBALS['Language']->getText('my_index', 'title', array( $hp->purify(user_getrealname(user_getid()), CODENDI_PURIFIER_CONVERT_HTML) .' ('.user_getname().')'));
-$userm=UserManager::instance();
-$current=$userm->getCurrentUser();
-$title = _("My page : ").$current->getRealName();
-			site_header(array('title'=>$title, 'selected_top_tab' => '/my/'));
+
+		    $userm=UserManager::instance();
+		    $current=$userm->getCurrentUser();
+		    echo site_user_header(array('title'=>sprintf(_('Personal Page For %s'),user_getname())));
                     //my_header(array('title'=>$title, 'selected_top_tab' => '/my/'));
                     $lm->displayAvailableWidgets(user_getid(), WidgetLayoutManager::OWNER_TYPE_USER, $layout_id);
                     site_footer(array());

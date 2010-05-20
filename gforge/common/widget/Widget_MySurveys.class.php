@@ -82,11 +82,7 @@ class Widget_MySurveys extends Widget {
 				for ($i=0; $i<count($surveys); $i++) {
 					$survey=$surveys[$i];
 					if (!$hide_now) {
-						if ($i % 2 == 0) {
-							$class="boxitemalt bgcolor-white";
-						} else {
-							$class="boxitem bgcolor-grey";
-						}
+						$class = $HTML->boxGetAltRowStyle($i);
 						$group_survey_id= $survey->getId();
 						$survey_title = $survey->getTitle();
 						$devsurvey_is_active = $survey->isActive();

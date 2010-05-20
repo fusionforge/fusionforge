@@ -44,11 +44,7 @@ class Widget_MyBookmarks extends Widget {
         } else {
             $html_my_bookmarks .= '<table style="width:100%">';
             for ($i=0; $i<$rows; $i++) {
-if ($i % 2 == 0) {
-                        $class="boxitemalt bgcolor-white";
-                } else {
-                        $class="boxitem bgcolor-grey";
-                }
+		    $class = $HTML->boxGetAltRowStyle($i);
 
                 $html_my_bookmarks .= '<TR class="'. $class .'"><TD>';
                 $html_my_bookmarks .= '<A HREF="'. db_result($result,$i,'bookmark_url') .'">'. db_result($result,$i,'bookmark_title') .'</A> ';

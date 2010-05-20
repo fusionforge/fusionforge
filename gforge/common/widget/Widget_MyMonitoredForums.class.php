@@ -99,11 +99,7 @@ class Widget_MyMonitoredForums extends Widget {
 		for ($i=0; $i<$rows2; $i++) {
 
 			if (!$hide_now) {
-				if ($i % 2 == 0) {
-					$class="boxitemalt bgcolor-white";
-				} else {
-					$class="boxitem bgcolor-grey";
-				}
+				$class = $HTML->boxGetAltRowStyle($i);
 
 				$group_forum_id = db_result($result2,$i,'group_forum_id');
 
@@ -135,5 +131,14 @@ class Widget_MyMonitoredForums extends Widget {
     function isAjax() {
 	    return true;
     }
+    function getAjaxUrl($owner_id, $owner_type) {
+        $request =& HTTPRequest::instance();
+        $ajax_url = parent::getAjaxUrl($owner_id, $owner_type);
+        if ($request->exist('hide_item_id') || $request->exist('hide_forum')) {
+            $ajax_url .= '&hide_item_id=' . $request->get('hide_item_id') . '&hide_forum=' . $request->get('hide_forum');
+        }
+        return $ajax_url;
+    }
+
 }
 ?>

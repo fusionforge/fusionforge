@@ -88,32 +88,30 @@ class Widget_MyArtifacts extends Widget {
 	function getContent() {
 		$html_my_artifacts = '<table style="width:100%">';
 		$atf = new ArtifactsForUser(UserManager::instance()->getCurrentUser());
-		$monitored = $atf->getAssignedArtifactsByGroup();
+		$assigned = $atf->getAssignedArtifactsByGroup();
 		$submitted = $atf->getSubmittedArtifactsByGroup();
+		$all = $atf->getArtifactsFromSQLWithParams('SELECT * FROM artifact_vw av where (av.submitted_by=$1 OR  av.assigned_to=$1) AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',array( UserManager::instance()->getCurrentUser()->getID()));
 		if($this->_artifact_show == 'AS'){
-			$my_artifacts=array_merge($submitted,$monitored);
+			$my_artifacts=$all;
 		}
 		if($this->_artifact_show== 'S') {
 			$my_artifacts=$submitted;
 		}
 		if($this->_artifact_show== 'A') {
-			$my_artifacts=$monitored;
+			$my_artifacts=$assigned;
 		}
 
-		/*        if ($atf = new ArtifactTypeFactory(false)) {
-			  $my_artifacts = $atf->getMyArtifacts(user_getid(), $this->_artifact_show);*/
 		if (count($my_artifacts) > 0) {
 			$html_my_artifacts .= $this->_display_artifacts($my_artifacts, 0);
 		} else {
-			$html_my_artifacts = _("Failed to create ArtifactTypeFactory");
+			$html_my_artifacts .= _("You have no artifacts");
 		}
 		$html_my_artifacts .= '<TR><TD COLSPAN="3">'.(($this->_artifact_show == 'N' || count($my_artifacts) > 0)?'&nbsp;':_("None")).'</TD></TR>';
 		$html_my_artifacts .= '</table>';
 		return $html_my_artifacts;
 	}
 	function _display_artifacts($list_trackers, $print_box_begin) {
-		$request =& HTTPRequest::instance();
-
+		$request = HTTPRequest::instance();
 		$vItemId = new Valid_UInt('hide_item_id');
 		$vItemId->required();
 		if($request->valid($vItemId)) {
@@ -148,13 +146,6 @@ class Widget_MyArtifacts extends Widget {
 		$pm = ProjectManager::instance();
 		foreach ($list_trackers as $trackers_array ) {
 			$atid = $trackers_array->getArtifactType()->getID();
-			/*	if(array_key_exists($allIds,$atid)) {
-				$display=false;
-				}
-				else {
-				$display = true;
-				$allIds[$atid]=true;
-				}*/
 			$group_id = $trackers_array->getArtifactType()->getGroup()->getID();
 
 			// {{{ check permissions
@@ -223,13 +214,7 @@ class Widget_MyArtifacts extends Widget {
 					}
 
 					if($AS_flag !='N') {
-						if($count_aids % 2  == 1) {
-							$class="bgcolor-white";
-						}
-						else {
-							$class="bgcolor-grey";
-						}
-
+						$class=$HTML->boxGetAltRowStyle($count_aids);
 						$html .= '
 							<TR class="'.$class.'">'.
 							'<TD class="priority'.$trackers_array->getPriority().'">'.$trackers_array->getPriority().'</TD>'.
@@ -256,14 +241,20 @@ class Widget_MyArtifacts extends Widget {
 			$html_my_artifacts .= $html_hdr.$html;
 		}
 		return $html_my_artifacts;
-
 		}
-
 		function getCategory() {
 			return 'Trackers';
 		}
 		function getDescription() {
 			return _("List artifacts you have submitted or assigned to you, by project.");
+		}
+		function getAjaxUrl($owner_id, $owner_type) {
+			$request =& HTTPRequest::instance();
+			$ajax_url = parent::getAjaxUrl($owner_id, $owner_type);
+			if ($request->exist('hide_item_id') || $request->exist('hide_artifact')) {
+				$ajax_url .= '&hide_item_id=' . $request->get('hide_item_id') . '&hide_artifact=' . $request->get('hide_artifact');
+			}
+			return $ajax_url;
 		}
 		}
 		?>
