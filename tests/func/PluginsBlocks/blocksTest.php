@@ -65,7 +65,7 @@ class UserBlocks extends FForge_SeleniumTestCase
     $this->click("link=Blocks Admin");
     $this->waitForPageToLoad("30000");
     $this->click("activate[summary_description]");
-    $this->click("activate[summary_right]");
+//    $this->click("activate[summary_right]");
     $this->click("//input[@value='Save Blocks']");
     $this->waitForPageToLoad("30000");
 
@@ -75,17 +75,17 @@ class UserBlocks extends FForge_SeleniumTestCase
     $this->type("body", "This is my nice block.");
     $this->click("//input[@value='Save']");
     $this->waitForPageToLoad("30000");
-    $this->click("//div[@id='maindiv']/form/table/tbody/tr[2]/td[4]/a");
-    $this->waitForPageToLoad("30000");
-    $this->type("body", "{boxTop Project}\nThis is the summary block.\n{boxBottom}");
-    $this->click("//input[@value='Save']");
-    $this->waitForPageToLoad("30000");
+//    $this->click("//div[@id='maindiv']/form/table/tbody/tr[2]/td[4]/a");
+//    $this->waitForPageToLoad("30000");
+//    $this->type("body", "{boxTop Project}\nThis is the summary block.\n{boxBottom}");
+//    $this->click("//input[@value='Save']");
+//    $this->waitForPageToLoad("30000");
     $this->click("link=Summary");
     $this->waitForPageToLoad("30000");
 //    $this->assertText("//td[@id='main']/table[1]/tbody/tr/td[1]", "This is my nice block.");
 //    $this->assertEquals("This is the summary block.", $this->getText("//td[@id='main']/table[1]/tbody/tr/td[2]/table[1]/tbody/tr[2]/td"));
 	$this->assertTrue($this->isTextPresent("This is my nice block."));
-	$this->assertTrue($this->isTextPresent("This is the summary block."));
+//	$this->assertTrue($this->isTextPresent("This is the summary block."));
   }
   
   private function _activateBlocksPlugin() {

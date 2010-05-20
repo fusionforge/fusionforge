@@ -58,8 +58,9 @@ function getAvailableBlocks($group) {
 	$blocks = array(
 		'summary_description' => 
 			_("Block to replace the default project description with an enhanced one."),
-		'summary_right' => 
-			_("Block in the summary page (right)"),
+//	To be reworked to play nice with the widgets page.
+//		'summary_right' => 
+//			_("Block in the summary page (right)"),
 		'request_join' => 
 			_("Block to list informations requested to ask to join a project"),
 	);
