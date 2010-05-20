@@ -55,7 +55,13 @@ require_once('Widget.class.php');
 			$content .= '<table width="100%">';
 			$i = 0;
 			foreach($items as $item){
-				$class = $HTML->boxGetAltRowStyle($i);
+				if ($i % 2 == 0) {
+					$class="bgcolor-white";
+				}
+				else {
+					$class="bgcolor-grey";
+				}
+
 				$i=$i+1;
 
 				$content .= '<tr class="'. $class .'"><td WIDTH="99%">';

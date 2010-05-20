@@ -214,7 +214,13 @@ class Widget_MyArtifacts extends Widget {
 					}
 
 					if($AS_flag !='N') {
-						$class=$HTML->boxGetAltRowStyle($count_aids);
+						if ($count_aids % 2 == 0) {
+							$class="bgcolor-white";
+						}
+						else {
+							$class="bgcolor-grey";
+						}
+
 						$html .= '
 							<TR class="'.$class.'">'.
 							'<TD class="priority'.$trackers_array->getPriority().'">'.$trackers_array->getPriority().'</TD>'.

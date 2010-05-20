@@ -53,7 +53,12 @@ class Widget_MyProjects extends Widget {
             
             $html_my_projects .= '<table style="width:100%">';
             for ($i=0; $i<$rows; $i++) {
-		    $class=$HTML->boxGetAltRowStyle($i);
+		    if ($i % 2 == 0) {
+			    $class="bgcolor-white";
+		    }
+		    else {
+			    $class="bgcolor-grey";
+		    }
                 $html_my_projects .= '
 			<TR class="'. $class .'"><TD WIDTH="99%">'.
 			'<A href="/projects/'. db_result($result,$i,'unix_group_name') .'/">'.

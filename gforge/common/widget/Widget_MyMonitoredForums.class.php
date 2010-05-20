@@ -99,7 +99,14 @@ class Widget_MyMonitoredForums extends Widget {
 		for ($i=0; $i<$rows2; $i++) {
 
 			if (!$hide_now) {
-				$class = $HTML->boxGetAltRowStyle($i);
+				if ($i % 2 == 0) {
+					$class="bgcolor-white";
+				}
+				else {
+					$class="bgcolor-grey";
+				}
+
+
 
 				$group_forum_id = db_result($result2,$i,'group_forum_id');
 

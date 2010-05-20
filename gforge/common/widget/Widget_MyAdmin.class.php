@@ -121,7 +121,13 @@ class Widget_MyAdmin extends Widget {
     }
     function _get_admin_row($i, $text, $value, $bgcolor, $textcolor = 'white') {
 	    $i=$i++;
-	    $class=$HTML->boxGetAltRowStyle($i);
+	    if ($i % 2 == 0) {
+		    $class="bgcolor-white";
+	    }
+	    else {
+		    $class="bgcolor-grey";
+	    }
+
 
 
 	    return '<tr class="'. $class.'"><td>'. $text .'</td><td nowrap="nowrap" style="width:20%; background:'. $bgcolor .'; color:'. $textcolor .'; padding: 2px 8px; font-weight:bold; text-align:center;">'. $value .'</td></tr>';
