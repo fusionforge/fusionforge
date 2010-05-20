@@ -1,0 +1,3 @@
+ This plugin contains the SoapAdmin subsystem of FusionForge. It allows each
+ FusionForge project to have its own SoapAdmin, and gives some
+ control over it to the project's administrator.

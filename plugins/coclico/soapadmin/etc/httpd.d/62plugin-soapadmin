@@ -1,0 +1,12 @@
+# 62plugin-soapadmin begin
+#	AddHandler cgi-script .cgi
+
+#	ScriptAlias /cgi-bin/soapadmin/ /var/lib/soapadmin/cgi-bin/
+#	ScriptAlias /soapadmin/ /var/lib/soapadmin/cgi-bin/
+
+#	Alias /images/soapadmin /usr/share/images/soapadmin
+#	<Location /images/soapadmin>
+#		order allow,deny
+#		allow from all
+#	</Location>
+# 62plugin-soapadmin end
