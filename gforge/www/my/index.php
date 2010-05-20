@@ -26,14 +26,12 @@
 
 require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
-//UNCOMMENT THIS TO TEST WIDGETS
-//require_once 'my_utils.php';
+require_once 'my_utils.php';
 require_once $gfwww.'include/vote_function.php';
 require_once $gfcommon.'tracker/ArtifactsForUser.class.php';
 require_once $gfcommon.'forum/ForumsForUser.class.php';
 require_once $gfcommon.'pm/ProjectTasksForUser.class.php';
-//UNCOMMENT THIS TO TEST WIDGETS
-//require_once('common/widget/WidgetLayoutManager.class.php');
+require_once('common/widget/WidgetLayoutManager.class.php');
 if (!session_loggedin()) { // || $sf_user_hash) {
 
 	exit_not_logged_in();
@@ -44,9 +42,22 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 
 <script type="text/javascript" src="<?php echo util_make_uri ('/tabber/tabber.js'); ?>"></script>
 <?php
-//UNCOMMENT THIS TO TEST WIDGETS
-//$lm = new WidgetLayoutManager();
-// $lm->displayLayout(user_getid(), WidgetLayoutManager::OWNER_TYPE_USER);
+$user = UserManager::instance()->getCurrentUser();
+if(HTTPRequest::instance()->exist('enable_widget')) {
+        $user->setPreference('enable_widget','1');
+}
+if(HTTPRequest::instance()->exist('disable_widget')) {
+        $user->setPreference('enable_widget','0');
+}
+
+if($user->getPreference('enable_widget')) {
+        echo util_make_link('/my/?disable_widget=1','['._('Disable widgets').']');
+	$lm = new WidgetLayoutManager();
+	$lm->displayLayout(user_getid(), WidgetLayoutManager::OWNER_TYPE_USER);
+}       
+else {  
+        echo util_make_link('/my/?enable_widget=1','['._('Enable widgets').']');
+
 ?>
 <div id="tabber" class="tabber tabber-user-homepage" <?php plugin_hook('call_user_js');?>>
 
@@ -429,6 +440,7 @@ plugin_hook('call_user_cal') ;
 ?>
 </div>
 <?php
+}
 	echo site_user_footer(array());
 
 }
