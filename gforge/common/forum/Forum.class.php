@@ -30,6 +30,28 @@ require_once $gfcommon.'forum/ForumMessage.class.php';
 // user response
 define('FORUM_MAIL_MARKER', '#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+');	
 
+/**
+ * Gets a Forum object from its id
+ * 
+ * @param forum_id the Forum id
+ * @return the Forum object	
+ */
+function &forum_get_object($forum_id) {
+	$res = db_query_params ('SELECT group_id FROM forum_group_list WHERE group_forum_id=$1',
+				array ($forum_id)) ;
+	if (!$res || db_numrows($res) < 1) {
+		return NULL ;
+	}
+
+	$data =& db_fetch_array($res);
+	$Group =& group_get_object($data["group_id"]);
+	$f =  new Forum ($Group, $data["group_artifact_id"]);
+
+	$f->fetchData () ;
+
+	return $f ;
+}	
+
 class Forum extends Error {
 
 	/**
