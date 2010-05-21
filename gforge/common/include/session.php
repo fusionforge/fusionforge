@@ -338,7 +338,7 @@ function session_redirect($loc) {
 }
 
 /**
- *	session_require() - Convenience function to easily enforce permissions
+ *	session_require() - DEPRECATED Convenience function to easily enforce permissions
  *
  *	Calling page will terminate with error message if current user
  *	fails checks.

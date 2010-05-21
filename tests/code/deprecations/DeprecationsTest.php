@@ -129,12 +129,22 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 		$output = `cd .. ; find gforge tests -name '*.php' -type f | xargs pcregrep -n '\\\$GLOBALS\\[.?($pattern).?\\](?! *=[^=])' \
 					   | grep -v ^gforge/common/include/config-vars.php`;
 		$this->assertEquals('', $output, "Found deprecated \$GLOBALS['\$var'] for var in ($pattern):");
-		
 	}
+		
+	/**
+	 * Check that no code uses session_require()
+	 */
+	public function testsession_require()
+	{
+		$output = `cd .. ; find gforge tests -name '*.php' -type f | xargs pcregrep -l '\bsession_require[^_]' \
+					   | grep -v ^tests/code/deprecations/DeprecationsTest.php \
+					   | grep -v ^gforge/common/include/session.php`;
+		$this->assertEquals('', $output);
+	}
+	
+}
 	
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-}
