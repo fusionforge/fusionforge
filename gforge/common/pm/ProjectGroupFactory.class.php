@@ -73,6 +73,19 @@ class ProjectGroupFactory extends Error {
 		return $this->Group;
 	}
 
+	function &getAllProjectGroupIds() {
+		$result = array () ;
+		$res = db_query_params ('SELECT * FROM project_group_list_vw WHERE group_id=$1 ORDER BY group_project_id',
+					array ($this->Group->getID())) ;
+		if (!$res) {
+			return $result ;
+		}
+		while ($arr =& db_fetch_array($res)) {
+			$result[] = $arr['group_project_id'] ;
+		}
+		return $result ;
+	}
+
 	/**
 	 *	getProjectGroups - get an array of ProjectGroup objects.
 	 *
@@ -86,13 +99,15 @@ class ProjectGroupFactory extends Error {
 							   array ($this->Group->getID())) ;
 		$rows = db_numrows($result);
 
-		if (!$result || $rows < 1) {
-			$this->setError(_('No ProjectGroups Found').db_error());
+		$ids = $this->getAllArtifactTypeIds() ;
+
+		if (count ($ids) < 1) {
+			$this->setError('None Found '.db_error());
 			$this->projectGroups=NULL;
 		} else {
-			while ($arr = db_fetch_array($result)) {
-				if (forge_check_perm ('pm', $arr['group_project_id'], 'read')) {
-					$this->projectGroups[] = new ProjectGroup($this->Group, $arr['group_project_id'], $arr);
+			foreach ($ids as $id) {
+				if (forge_check_perm ('pm', $id, 'read')) {
+					$this->projectGroups[] = new ProjectGroup($this->Group, $id);
 				}
 			}
 		}

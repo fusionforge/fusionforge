@@ -81,6 +81,7 @@ if ($role_id=='observer') {
 			$new_data[$section][$ref_id] = $data[$section][$ref_id] ;
 		}
 	}
+	$data = $new_data ;
 
 	if (getStringFromRequest('submit')) {
 		$role_name = trim(getStringFromRequest('role_name'));

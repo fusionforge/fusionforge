@@ -332,7 +332,7 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 			break ;			
 		case 'pm':
 			$t = projectgroup_get_object ($reference) ;
-			$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('tracker_admin', $t->Group->getID())) ;
+			$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('pm_admin', $t->Group->getID())) ;
 			break ;			
 		case 'forum':
 			$t = forum_get_object ($reference) ;
@@ -343,7 +343,7 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 			break ;			
 		case 'new_pm':
 			$t = projectgroup_get_object ($reference) ;
-			$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('tracker_admin', $reference)) ;
+			$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('pm_admin', $reference)) ;
 			break ;			
 		case 'new_forum':
 			$t = forum_get_object ($reference) ;

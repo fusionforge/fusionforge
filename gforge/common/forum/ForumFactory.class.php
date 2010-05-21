@@ -72,6 +72,20 @@ class ForumFactory extends Error {
 		return $this->Group;
 	}
 
+	function &getAllForumIds() {
+		$res = db_query_params ('SELECT * FROM forum_group_list_vw
+WHERE group_id=$1
+ORDER BY group_forum_id',
+					   array ($this->Group->getID())) ;
+		if (!$res) {
+			return $result ;
+		}
+		while ($arr =& db_fetch_array($res)) {
+			$result[] = $arr['group_forum_id'] ;
+		}
+		return $result ;
+	}		
+
 	/**
 	 *	getForums - get an array of Forum objects for this Group.
 	 *
@@ -86,16 +100,16 @@ class ForumFactory extends Error {
 WHERE group_id=$1
 ORDER BY group_forum_id',
 					   array ($this->Group->getID())) ;
+
+		$ids = $this->getAllForumIds() ;
 		
-		$rows = db_numrows($result);
-		
-		if (!$result) {
+		if (count ($ids) < 1) {
 			$this->setError(_('Forum not found').' : '.db_error());
 			$this->forums = false;
 		} else {
-			while ($arr = db_fetch_array($result)) {
-				if (forge_check_perm ('forum', $arr['group_forum_id'], 'read')) {
-					$this->forums[] = new Forum($this->Group, $arr['group_forum_id'], $arr);
+			foreach ($ids as $id) {
+				if (forge_check_perm ('forum', $id, 'read')) {
+					$this->forums[] = new Forum($this->Group, $id);
 				}
 			}
 		}

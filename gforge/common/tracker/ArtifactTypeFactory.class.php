@@ -80,6 +80,26 @@ class ArtifactTypeFactory extends Error {
 	}
 
 	/**
+	 *	getAllArtifactTypeIds - return a list of tracker ids.
+	 *
+	 *	@return	array	The array of ArtifactType objects.
+	 */
+	function &getAllArtifactTypeIds() {
+		$result = array () ;
+		$res = db_query_params ('SELECT * FROM artifact_group_list_vw
+			WHERE group_id=$1
+			ORDER BY group_artifact_id ASC',
+					array ($this->Group->getID())) ;
+		if (!$res) {
+			return $result ;
+		}
+		while ($arr =& db_fetch_array($res)) {
+			$result[] = $arr['group_artifact_id'] ;
+		}
+		return $result ;
+	}
+
+	/**
 	 *	getArtifactTypes - return an array of ArtifactType objects.
 	 *
 	 *	@return	array	The array of ArtifactType objects.
@@ -88,20 +108,16 @@ class ArtifactTypeFactory extends Error {
 		if ($this->ArtifactTypes) {
 			return $this->ArtifactTypes;
 		}
-		$result = db_query_params ('SELECT * FROM artifact_group_list_vw
-			WHERE group_id=$1
-			ORDER BY group_artifact_id ASC',
-					   array ($this->Group->getID())) ;
 
-		$rows = db_numrows($result);
+		$ids = $this->getAllArtifactTypeIds() ;
 
-		if (!$result || $rows < 1) {
+		if (count ($ids) < 1) {
 			$this->setError('None Found '.db_error());
 			$this->ArtifactTypes=NULL;
 		} else {
-			while ($arr =& db_fetch_array($result)) {
-				if (forge_check_perm ('tracker', $arr['group_artifact_id'], 'read')) {
-					$artifactType = new ArtifactType($this->Group, $arr['group_artifact_id'], $arr);
+			foreach ($ids as $id) {
+				if (forge_check_perm ('tracker', $id, 'read')) {
+					$artifactType = new ArtifactType($this->Group, $id);
 					if($artifactType->isError()) {
 						$this->setError($artifactType->getErrorMessage());
 					} else {
