@@ -987,30 +987,6 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	getCurrentUserPerm - get the logged-in user's perms from his role
-	 *
-	 *	@return int perm level for the logged-in user.
-	 */
-	function getCurrentUserPerm() {
-		if (!session_loggedin()) {
-			return 0;
-		} else {
-			if (!isset($this->current_user_perm)) {
-				$this->current_user_perm=db_result(db_query_params ('SELECT role_setting.value::integer
-				FROM role_setting, user_group
-				WHERE role_setting.ref_id=$1
-				AND user_group.role_id=role_setting.role_id
-                                AND user_group.user_id=$2
-                                AND role_setting.section_name=$3',
-										    array ($this->getID(),
-											   user_getid(),
-											   'tracker')),0,0) ;
-			}
-			return $this->current_user_perm;
-		}
-	}
-
-	/**
 	 *  update - use this to update this ArtifactType in the database.
 	 *
 	 *  @param	string	The item name.

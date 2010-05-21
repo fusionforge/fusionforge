@@ -568,31 +568,6 @@ class ProjectGroup extends Error {
 		return forge_check_perm ('pm', $this->getID(), 'tech') ;
 	}
 
-	/**
-	 *  getCurrentUserPerm - get the logged-in user's perms from the role data
-	 *
-	 *  @return int perm level for the logged-in user.
-	 */
-	function getCurrentUserPerm() {
-		if (!session_loggedin()) {
-			return -1;
-		} else {
-			if (!isset($this->current_user_perm)) {
-				$res = db_query_params ('SELECT role_setting.value::integer
-				FROM role_setting, user_group
-				WHERE role_setting.ref_id=$1
-				AND user_group.role_id = role_setting.role_id
-                                AND user_group.user_id=$2
-                                AND role_setting.section_name=$3',
-							array ($this->getID(),
-							       user_getid(),
-							       'pm')) ;
-				$this->current_user_perm=db_result($res,0,0);
-			}
-			return $this->current_user_perm;
-		}
-	}
-
 }
 
 // Local Variables:
