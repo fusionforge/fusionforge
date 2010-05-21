@@ -482,6 +482,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 			}
 			break ;
 			
+		case 'forge_read':
 		case 'approve_projects':
 		case 'approve_news':
 			if (($value == 1)
