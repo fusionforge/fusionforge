@@ -68,19 +68,15 @@ function survey_header($params) {
 				)
 			));
 		} else {
-    		if (session_loggedin()) {
-				$perm =& $project->getPermission ();
-				if ($perm && is_object($perm) && !$perm->isError() && $perm->isAdmin()) {
-
-					echo ($HTML->subMenu(
-					array(
-						_('Admin')
-					),
-					array(
-						'/survey/admin/?group_id='.$group_id
-					)
-					));
-				}
+			if (forge_check_perm ('project_admin', $group_id)) {
+				echo ($HTML->subMenu(
+					      array(
+						      _('Admin')
+						      ),
+					      array(
+						      '/survey/admin/?group_id='.$group_id
+						      )
+					      ));
 			}
 		}
 	}// end if (valid group id)

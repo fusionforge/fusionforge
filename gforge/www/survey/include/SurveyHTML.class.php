@@ -42,12 +42,12 @@ class SurveyHTML extends Error {
 		
 		if ($project =& group_get_object($group_id)){
 			if (!$project->usesSurvey()) {
-			exit_error(_('Error'), _('This Group Has Turned Off Surveys.'));
+				exit_error(_('Error'), _('This Group Has Turned Off Surveys.'));
 			}
 			
 			site_project_header($params);
 			
-			if ($is_admin_page && $group_id) {
+			if ($is_admin_page) {
 				echo ($HTML->subMenu(
 					array(
 						_('Surveys'),
@@ -65,19 +65,15 @@ class SurveyHTML extends Error {
 					)
 				));
 			} else {
-				if (session_loggedin()) {
-					$perm =& $project->getPermission ();
-					if ($perm && is_object($perm) && !$perm->isError() && $perm->isDocEditor()) {
-
-						echo ($HTML->subMenu(
-							array(
-								_('Admin')
-							),
-							array(
-								'/survey/admin/?group_id='.$group_id
-							)
-						));
-					}
+				if (forge_check_perm ('project_admin', $group_id)) {
+					echo ($HTML->subMenu(
+						      array(
+							      _('Admin')
+							      ),
+						      array(
+							      '/survey/admin/?group_id='.$group_id
+							      )
+						      )) ;
 				}
 			}
 		}// end if (valid group id)

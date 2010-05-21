@@ -95,13 +95,13 @@ if (session_loggedin()) {
 //  kinda messy - but works for now
 //  need to get list of data types this person can admin
 //
-	$perm =& $group->getPermission ();
-	if ($perm->isArtifactAdmin()) {
-		$rsv = db_int_array_to_any_clause (array (0, 1, 2)) ;
-	} else {
-		$rsv = db_int_array_to_any_clause (array (1, 2)) ;
-	}
-	$res = db_query_params ('SELECT agl.group_artifact_id, agl.name
+if (forge_check_perm ('tracker_admin', $group_id)) {
+	$rsv = db_int_array_to_any_clause (array (0, 1, 2)) ;
+} else {
+	$rsv = db_int_array_to_any_clause (array (1, 2)) ;
+}
+
+$res = db_query_params ('SELECT agl.group_artifact_id, agl.name
 			FROM artifact_group_list agl, role_setting rs, user_group ug
 			WHERE agl.group_artifact_id=rs.ref_id
 			AND ug.user_id=$1
