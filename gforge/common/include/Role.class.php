@@ -3,7 +3,7 @@
  * FusionForge roles
  *
  * Copyright 2004, GForge, LLC
- * Copyright 2009, Roland Mas
+ * Copyright 2009-2010, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -24,8 +24,9 @@
  */
 
 require_once $gfcommon.'include/rbac_texts.php' ;
+require_once $gfcommon.'include/RBAC.php' ;
 
-class Role extends Error {
+class Role extends RoleExplicit implements PFO_RoleExplicit {
 
 	var $data_array;
 	var $setting_array;
@@ -173,6 +174,34 @@ class Role extends Error {
 	 */
 	function getName() {
 		return $this->data_array['role_name'];
+	}
+
+	/**
+	 *	setName - set the name of this role.
+	 *
+	 *	@param	string	The new name of this role.
+	 *      @return boolean True if updated OK
+	 */
+	function setName ($role_name) {
+		if ($this->getName() != stripslashes($role_name)) {
+			// Check if role_name is not already used.
+			$res = db_query_params('SELECT role_name FROM role WHERE group_id=$1 AND role_name=$2',
+				array ($this->Group->getID(), htmlspecialchars($role_name)));
+			if (db_numrows($res)) {
+				$this->setError('Cannot create a role with this name (already used)');
+				return false;
+			}
+
+			$res = db_query_params ('UPDATE role SET role_name=$1 WHERE group_id=$2 AND role_id=$3',
+						array (htmlspecialchars($role_name),
+						       $this->Group->getID(),
+						       $this->getID())) ;
+			if (!$res || db_affected_rows($res) < 1) {
+				$this->setError('update::name::'.db_error());
+				return false;
+			}
+		}
+		return true ;
 	}
 
 	/**
@@ -533,26 +562,11 @@ class Role extends Error {
 
 		db_begin();
 
-		if ($this->getName() != stripslashes($role_name)) {
-			// Check if role_name is not already used.
-			$res = db_query_params('SELECT role_name FROM role WHERE group_id=$1 AND role_name=$2',
-				array ($this->Group->getID(), htmlspecialchars($role_name)));
-			if (db_numrows($res)) {
-				$this->setError('Cannot create a role with this name (already used)');
-				db_rollback();
-				return false;
-			}
-
-			$res = db_query_params ('UPDATE role SET role_name=$1 WHERE group_id=$2 AND role_id=$3',
-						array (htmlspecialchars($role_name),
-						       $this->Group->getID(),
-						       $this->getID())) ;
-			if (!$res || db_affected_rows($res) < 1) {
-				$this->setError('update::name::'.db_error());
-				db_rollback();
-				return false;
-			}
+		if (! $this->setName($role_name)) {
+			db_rollback();
+			return false;
 		}
+
 ////$data['section_name']['ref_id']=$val
 		$arr1 = array_keys($data);
 		for ($i=0; $i<count($arr1); $i++) {	

@@ -27,8 +27,6 @@ require "PFO-RBAC.php" ;
 
 // Code shared between classes
 
-abstract class Error {}
-
 abstract class BaseRole extends Error implements PFO_Role {
 	public function getName() {
 		return $this->name ;
@@ -119,11 +117,6 @@ class RoleUnion extends BaseRole implements PFO_RoleUnion {
 		return true ;
 	}
 }
-
-$rs = new RoleExplicit () ;
-$ra = new RoleAnonymous () ;
-$rl = new RoleLoggedIn () ;
-$ru = new RoleUnion () ;
 
 // Local Variables:
 // mode: php
