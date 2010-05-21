@@ -23,7 +23,7 @@
  * USA
  */
 
-require "PFO-RBAC.php" ;
+require "PFO-RBAC.interface.php" ;
 
 // Code shared between classes
 
