@@ -157,7 +157,7 @@ BEGIN
 END ;
 $$ LANGUAGE plpgsql ;
 
-CREATE FUNCTION migrate_role_observer_to_pfo_rbac () RETURNS void AS $$
+CREATE OR REPLACE FUNCTION migrate_role_observer_to_pfo_rbac () RETURNS void AS $$
 DECLARE
 	g groups%ROWTYPE ;
 	t artifact_group_list%ROWTYPE ;
@@ -168,25 +168,37 @@ BEGIN
 	FOR g IN SELECT * FROM groups WHERE is_public = 1
 	LOOP
 		INSERT INTO role_project_refs VALUES (1, g.group_id) ;
+		INSERT INTO role_project_refs VALUES (2, g.group_id) ;
 		PERFORM insert_pfo_role_setting (1, 'project_read', g.group_id, 1) ;
+		PERFORM insert_pfo_role_setting (1, 'new_tracker', g.group_id, 1) ;
+		PERFORM insert_pfo_role_setting (1, 'new_pm', g.group_id, 1) ;
+		PERFORM insert_pfo_role_setting (1, 'new_forum', g.group_id, 1) ;
+		PERFORM insert_pfo_role_setting (1, 'frs', g.group_id, 1) ;
+		PERFORM insert_pfo_role_setting (2, 'project_read', g.group_id, 1) ;
+		PERFORM insert_pfo_role_setting (2, 'new_tracker', g.group_id, 1) ;
+		PERFORM insert_pfo_role_setting (2, 'new_pm', g.group_id, 1) ;
+		PERFORM insert_pfo_role_setting (2, 'new_forum', g.group_id, 1) ;
+		PERFORM insert_pfo_role_setting (2, 'frs', g.group_id, 1) ;
 
 		IF g.enable_anonscm = 1 THEN
 		   PERFORM insert_pfo_role_setting (1, 'scm', g.group_id, 1) ;
+		   PERFORM insert_pfo_role_setting (2, 'scm', g.group_id, 1) ;
 		END IF ;
 
 		FOR t IN SELECT * FROM artifact_group_list WHERE group_id = g.group_id AND is_public = 1
 		LOOP
 			IF t.allow_anon = 1 THEN
 			   PERFORM insert_pfo_role_setting (1, 'tracker', t.group_artifact_id, 1) ;
-			ELSE
-			   need_loggedin = true ;
-			   PERFORM insert_pfo_role_setting (2, 'tracker', t.group_artifact_id, 1) ;
 			END IF ;
+
+			PERFORM insert_pfo_role_setting (1, 'tracker', t.group_artifact_id, 1) ;
+			PERFORM insert_pfo_role_setting (2, 'tracker', t.group_artifact_id, 1) ;
 		END LOOP ;
 		
 		FOR p IN SELECT * FROM project_group_list WHERE group_id = g.group_id AND is_public = 1
 		LOOP
 			PERFORM insert_pfo_role_setting (1, 'pm', p.group_project_id, 1) ;
+			PERFORM insert_pfo_role_setting (2, 'pm', p.group_project_id, 1) ;
 		END LOOP ;
 		
 		FOR f IN SELECT * FROM forum_group_list WHERE group_id = g.group_id AND is_public = 1
@@ -197,20 +209,15 @@ BEGIN
 			   ELSE
 			      PERFORM insert_pfo_role_setting (1, 'forum', f.group_forum_id, 2) ;
 			   END IF ;
+			END IF ;
+
+			IF f.moderation_level = 0 THEN
+			   PERFORM insert_pfo_role_setting (2, 'forum', f.group_forum_id, 3) ;
 			ELSE
-			   need_loggedin = true ;
-			   IF f.moderation_level = 0 THEN
-			      PERFORM insert_pfo_role_setting (2, 'forum', f.group_forum_id, 3) ;
-			   ELSE
-			      PERFORM insert_pfo_role_setting (2, 'forum', f.group_forum_id, 2) ;
-			   END IF ;
+			   PERFORM insert_pfo_role_setting (2, 'forum', f.group_forum_id, 2) ;
 			END IF ;
 		END LOOP ;
 		
-		IF need_loggedin THEN
-		   INSERT INTO role_project_refs VALUES (2, g.group_id) ;
-		END IF ;
-
 	END LOOP ;
 
 END ;
