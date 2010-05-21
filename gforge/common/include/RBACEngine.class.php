@@ -27,6 +27,7 @@ require_once $gfcommon.'include/RBAC.php' ;
 class RBACEngine extends Error implements PFO_RBACEngine {
 	private static $_instance ;
 	private $_cached_roles = array () ;
+	private $_cached_available_roles = NULL ;
 
 	public static function getInstance() {
 		if (!isset(self::$_instance)) {
@@ -38,29 +39,33 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 	}
 
 	public function getAvailableRoles() {
-		$result = array () ;
+		if ($this->_cached_available_roles != NULL) {
+			return $this->_cached_available_roles ;
+		}
 
-		$result[] = RoleAnonymous::getInstance() ;
+		$this->_cached_available_roles = array () ;
+
+		$this->_cached_available_roles[] = RoleAnonymous::getInstance() ;
 		
 		if (session_loggedin()) {
-			$result[] = RoleLoggedIn::getInstance() ;
+			$this->_cached_available_roles[] = RoleLoggedIn::getInstance() ;
 			$user = session_get_user() ;
 
 			if (USE_PFO_RBAC) {
 				$res = db_query_params ('SELECT role_id FROM pfo_user_role WHERE user_id=$1',
 						array ($user->getID()));
 				while ($arr =& db_fetch_array($res)) {
-					$result[] = $this->getRoleById ($arr['role_id']) ;
+					$this->_cached_available_roles[] = $this->getRoleById ($arr['role_id']) ;
 				}
 			} else {
 				$groups = $user->getGroups() ;
 				foreach ($groups as $g) {
-					$result[] = $user->getRole($g) ;
+					$this->_cached_available_roles[] = $user->getRole($g) ;
 				}
 			}
 		}
 		
-		return $result ;
+		return $this->_cached_available_roles ;
 	}
 
 	public function getAvailableRolesForUser($user) {
