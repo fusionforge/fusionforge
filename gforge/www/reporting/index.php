@@ -30,7 +30,7 @@ require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/Report.class.php';
 require_once $gfcommon.'reporting/ReportSetup.class.php';
 
-session_require( array('group'=>forge_get_config('stats_group')) );
+session_require_global_perm ('forge_stats', 'read') ;
 
 $feedback = htmlspecialchars(getStringFromRequest('feedback'));
 
@@ -64,12 +64,15 @@ echo report_header('Main Page');
 <a href="sitetimebar.php"><?php echo _('Site-Wide Total Hours Graph (graph)'); ?></a> <a href="sitetimebar.php?typ=r">(<?php echo _('report'); ?>)</a><br />
 <a href="usersummary.php"><?php echo _('Site-Wide Task &amp; Hours (report)'); ?></a><br />
 </p>
+
+<?php if (forge_check_perm ('forge_stats', 'admin')) { ?>
 <h2><?php echo _('Administrative'); ?></h2>
 <p>
 <a href="rebuild.php"><?php echo _('Initialize / Rebuild Reporting Tables'); ?></a><br />
 <a href="timecategory.php"><?php echo _('Manage Time Tracker Categories'); ?></a><br />
 </p>
 <?php
+}
 
 plugin_hook ("reporting_reference", array());
 echo report_footer();

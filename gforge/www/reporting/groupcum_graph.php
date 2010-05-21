@@ -30,7 +30,7 @@ require_once(forge_get_config('jpgraph_path').'/jpgraph.php');
 require_once(forge_get_config('jpgraph_path').'/jpgraph_line.php');
 require_once $gfcommon.'reporting/ReportGroupCum.class.php';
 
-session_require( array('group'=>forge_get_config('stats_group')) );
+session_require_global_perm ('forge_stats', 'read') ;
 
 $SPAN = getIntFromRequest('SPAN');
 $start = getIntFromRequest('start');

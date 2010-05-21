@@ -31,7 +31,7 @@ require_once(forge_get_config('jpgraph_path').'/jpgraph_line.php');
 require_once $gfcommon.'reporting/ReportSiteAct.class.php';
 require_once $gfwww.'include/unicode.php';
 
-session_require( array('group'=>forge_get_config('stats_group')) );
+session_require_global_perm ('forge_stats', 'read') ;
 
 $area = getStringFromRequest('area');
 $SPAN = getIntFromRequest('SPAN');

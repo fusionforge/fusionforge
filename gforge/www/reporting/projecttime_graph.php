@@ -32,7 +32,7 @@ require_once(forge_get_config('jpgraph_path').'/jpgraph_pie3d.php');
 require_once $gfcommon.'reporting/ReportProjectTime.class.php';
 require_once $gfcommon.'reporting/report_utils.php';
 
-session_require( array('group'=>forge_get_config('stats_group')) );
+session_require_global_perm ('forge_stats', 'read') ;
 
 $g_id = getStringFromRequest('g_id');
 $type = getStringFromRequest('type');

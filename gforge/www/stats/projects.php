@@ -20,8 +20,7 @@ $orderby=getStringFromRequest('orderby');
 $projects=getIntFromRequest('projects'); 
 $trovecatid=getIntFromRequest('trovecatid');
 
-// require you to be a member of the sfstats group (group_id = 11084)
-session_require( array('group'=>forge_get_config('stats_group')) );
+session_require_global_perm ('forge_stats', 'read') ;
 
 $HTML->header(array('title'=>sprintf(_('%1$s Site Statistics'), forge_get_config ('forge_name'))));
 

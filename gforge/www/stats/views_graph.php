@@ -14,8 +14,7 @@ require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once $gfwww.'include/graph_lib.php';
 
-   // require you to be a member of the sfstats group (group_id = 11084)
-session_require( array('group'=>forge_get_config('stats_group')) );
+session_require_global_perm ('forge_stats', 'read') ;
 
 $group_id = getIntFromRequest('group_id');
 $year = getIntFromRequest('year');

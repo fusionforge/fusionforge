@@ -104,16 +104,23 @@ abstract class BaseRole extends Error {
 
 			// ...and map section names and values to the new values
 
+			if ($this->data_array['group_id'] == forge_get_config ('stats_group')) {
+				$this->perms_array['forge_stats'][-1] = 1 ;
+			}
+
 			$this->perms_array=array();
 			foreach ($this->setting_array as $oldsection => $t) {
 				switch ($oldsection) {
 				case 'projectadmin':
 					$newsection = 'project_admin' ;
 					if ($this->data_array['group_id'] == 1 && $t[0] == 'A') {
-						$this->perms_array['forge_admin'][-1] = true ;
+						$this->perms_array['forge_admin'][-1] = 1 ;
 					}
 					if ($this->data_array['group_id'] == forge_get_config ('news_group') && $t[0] == 'A') {
-						$this->perms_array['approve_news'][-1] = true ;
+						$this->perms_array['approve_news'][-1] = 1 ;
+					}
+					if ($this->data_array['group_id'] == forge_get_config ('stats_group') && $t[0] == 'A') {
+						$this->perms_array['forge_stats'][-1] = 2 ;
 					}
 					break ;
 				case 'trackeradmin':
@@ -222,6 +229,21 @@ abstract class BaseRole extends Error {
 		case 'approve_projects':
 		case 'approve_news':
 			if (($value == 1)
+			    || $this->hasGlobalPermission('forge_admin')) {
+				return true ;
+			}
+		break ;
+		
+		case 'forge_stats':
+			switch ($action) {
+			case 'read':
+				$min = 1 ;
+				break ;
+			case 'admin':
+				$min = 2 ;
+				break ;
+			}
+			if (($value >= $min)
 			    || $this->hasGlobalPermission('forge_admin')) {
 				return true ;
 			}

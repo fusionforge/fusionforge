@@ -43,7 +43,7 @@ if (!$start) {
 	$start = $z[count($z)-1];
 }
 
-session_require( array('group'=>forge_get_config('stats_group')) );
+session_require_global_perm ('forge_stats', 'read') ;
 
 echo report_header(_('Tool Pie Graphs'));
 

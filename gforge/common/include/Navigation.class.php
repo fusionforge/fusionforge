@@ -281,28 +281,20 @@ class Navigation extends Error {
 		}
                  
 		// Admin and Reporting 
-		$user_is_super=false;
-		if (session_loggedin()) {
-			$projectmaster =& group_get_object(GROUP_IS_MASTER);
-			$projectstats =& group_get_object(GROUP_IS_STATS);
-			$permmaster =& $projectmaster->getPermission ();
-			$permstats =& $projectstats->getPermission ();
-                         
-			if ($permmaster->isAdmin()) {
-				$user_is_super = true;
-				$menu['titles'][] = _('Site Admin');
-				$menu['urls'][] = util_make_url('/admin/') ;
-				if (strstr($request_uri, util_make_uri('/admin/'))) {
-					$selected=count($menu['urls'])-1;
-				}
+		if (forge_check_global_perm ('forge_admin')) {
+			$user_is_super = true;
+			$menu['titles'][] = _('Site Admin');
+			$menu['urls'][] = util_make_url('/admin/') ;
+			if (strstr($request_uri, util_make_uri('/admin/'))) {
+				$selected=count($menu['urls'])-1;
 			}
-			if ($permstats->isMember()) {
-				$menu['titles'][] = _('Reporting');
-				$menu['urls'][] = util_make_url ('/reporting/') ;
-				if (strstr($request_uri, util_make_uri('/reporting/'))) {
-					$selected=count($menu['urls'])-1;
-				}
-                        }
+		}
+		if (forge_check_global_perm ('forge_stats', 'read')) {
+			$menu['titles'][] = _('Reporting');
+			$menu['urls'][] = util_make_url ('/reporting/') ;
+			if (strstr($request_uri, util_make_uri('/reporting/'))) {
+				$selected=count($menu['urls'])-1;
+			}
 		}
  
 		// Project
