@@ -59,10 +59,6 @@ $external_scm = !$sys_scm_single_host;
 if (!forge_check_perm ('scm', $group->getID(), 'read')) {
 	exit_permission_denied();
 }
-	
-} else if (!$Group->enableAnonSCM()) {		// user is not logged in... check if group accepts anonymous CVS
-	exit_permission_denied();
-}
 
 if ($external_scm) {
 	//$server_script = "/cgi-bin/viewcvs.cgi";
