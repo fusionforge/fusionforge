@@ -83,7 +83,7 @@ class Document extends Error {
 				}
 			}
 			if (!$this->isPublic()) {
-				$perm =& $this->Group->getPermission( session_get_user() );
+				$perm =& $this->Group->getPermission ();
 
 				if (!$perm || !is_object($perm) || !$perm->isMember()) {
 					$this->setPermissionDeniedError();
@@ -119,7 +119,7 @@ class Document extends Error {
 		}
 
 /*
-		$perm =& $this->Group->getPermission( session_get_user() );
+		$perm =& $this->Group->getPermission ();
 		if (!$perm || !is_object($perm) || !$perm->isDocEditor()) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -130,7 +130,7 @@ class Document extends Error {
 		$doc_initstatus = '3';
 		// If Editor - uploaded Documents are ACTIVE
 		if ( session_loggedin() ) {
-			$perm =& $this->Group->getPermission( session_get_user() );
+			$perm =& $this->Group->getPermission ();
 			if ($perm && is_object($perm) && $perm->isDocEditor()) {
 				$doc_initstatus = '1';
 			}
@@ -452,7 +452,7 @@ class Document extends Error {
 			return false;
 		}
 
-		$perm =& $this->Group->getPermission( session_get_user() );
+		$perm =& $this->Group->getPermission ();
 
 		if (!$perm || !is_object($perm) || !$perm->isDocEditor()) {
 			$this->setPermissionDeniedError();
@@ -533,7 +533,7 @@ class Document extends Error {
 	}
 	
 	function delete() {
-		$perm =& $this->Group->getPermission( session_get_user() );
+		$perm =& $this->Group->getPermission ();
 		if (!$perm || !is_object($perm) || !$perm->isDocEditor()) {
 			$this->setPermissionDeniedError();
 			return false;

@@ -132,7 +132,7 @@ function FusionForgeMWAuth( $user, &$result ) {
         if ($s) {
                 $u = user_get_object ($s);
 		$g = group_get_object_by_name ($fusionforgeproject) ;
-		$perm =& $g->getPermission($u);
+		$perm =& $g->getPermission ();
 		$r =& $u->getRole($g) ;
 
                 $mwname = ucfirst($u->getUnixName ()) ;

@@ -42,7 +42,7 @@ class ForumAdmin extends Error {
 		if ($gid) {
 			$this->group_id = $group_id;
 			$this->g =& group_get_object($group_id);
-			$this->p =& $this->g->getPermission( session_get_user() );
+			$this->p =& $this->g->getPermission ();
 		}
 	}
 	
@@ -169,7 +169,7 @@ class ForumAdmin extends Error {
 			$this->setGroupIdError();
 			return false;
 		}
-		$this->p =& $this->g->getPermission( session_get_user() );
+		$this->p =& $this->g->getPermission ();
 		if (!$this->p || !is_object($this->p) || $this->p->isError()) {
 			$this->setPermissionDeniedError();
 			return false;

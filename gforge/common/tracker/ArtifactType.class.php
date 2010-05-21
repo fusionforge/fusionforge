@@ -202,7 +202,7 @@ class ArtifactType extends Error {
 	function create($name,$description,$is_public,$allow_anon,$email_all,$email_address,
 		$due_period,$use_resolution,$submit_instructions,$browse_instructions,$datatype=0) {
 
-		$perm =& $this->Group->getPermission( session_get_user() );
+		$perm =& $this->Group->getPermission ();
 
 		if (!$perm || !is_object($perm) || !$perm->isArtifactAdmin()) {
 			$this->setPermissionDeniedError();
@@ -1004,7 +1004,7 @@ class ArtifactType extends Error {
 		if (!session_loggedin()) {
 			return false;
 		} else {
-			$perm =& $this->Group->getPermission( session_get_user() );
+			$perm =& $this->Group->getPermission ();
 
 			if (($this->getCurrentUserPerm() >= 2) || ($perm->isArtifactAdmin())) {
 				return true;
@@ -1023,7 +1023,7 @@ class ArtifactType extends Error {
 		if (!session_loggedin()) {
 			return false;
 		} else {
-			$perm =& $this->Group->getPermission( session_get_user() );
+			$perm =& $this->Group->getPermission ();
 
 			if (($this->getCurrentUserPerm() >= 1) || ($perm->isArtifactAdmin())) {
 				return true;

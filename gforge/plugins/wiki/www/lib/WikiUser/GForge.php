@@ -46,7 +46,7 @@ class _GForgePassUser extends _PassUser {
 
 			$member = false ;
 			$user = session_get_user();
-			$perm =& $project->getPermission($user);
+			$perm =& $project->getPermission ();
 			if (!$perm || !is_object($perm)) {
 		       	$this->_level = WIKIAUTH_ANON;
 				return false;

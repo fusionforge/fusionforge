@@ -8,7 +8,7 @@
 	//
 
 
-	$perm =& $group->getPermission( session_get_user() );
+	$perm =& $group->getPermission ();
 
 	if (getStringFromRequest('post_changes')) {
 		$name = getStringFromRequest('name');

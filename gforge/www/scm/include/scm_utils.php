@@ -45,7 +45,7 @@ function scm_header($params) {
 		Show horizontal links
 	*/
 	if (session_loggedin()) {
-		$perm =& $project->getPermission(session_get_user());
+		$perm =& $project->getPermission ();
 		if ($perm && is_object($perm) && !$perm->isError() && $perm->isAdmin()) {
 				echo $HTML->subMenu(
 				array(

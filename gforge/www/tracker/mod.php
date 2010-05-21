@@ -95,7 +95,7 @@ if (session_loggedin()) {
 //  kinda messy - but works for now
 //  need to get list of data types this person can admin
 //
-	$perm =& $group->getPermission(session_get_user());
+	$perm =& $group->getPermission ();
 	if ($perm->isArtifactAdmin()) {
 		$rsv = db_int_array_to_any_clause (array (0, 1, 2)) ;
 	} else {

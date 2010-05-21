@@ -40,7 +40,7 @@ if ($group_id && $atid) {
 //		UPDATING A PARTICULAR ARTIFACT TYPE
 //
 
-/*	$perm =& $group->getPermission( session_get_user() );
+/*	$perm =& $group->getPermission ();
 
 	if (!$perm || !is_object($perm) || !$perm->isArtifactAdmin()) {
 		exit_permission_denied();

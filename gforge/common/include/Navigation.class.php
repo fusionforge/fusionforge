@@ -285,8 +285,8 @@ class Navigation extends Error {
 		if (session_loggedin()) {
 			$projectmaster =& group_get_object(GROUP_IS_MASTER);
 			$projectstats =& group_get_object(GROUP_IS_STATS);
-			$permmaster =& $projectmaster->getPermission( session_get_user() );
-			$permstats =& $projectstats->getPermission( session_get_user() );
+			$permmaster =& $projectmaster->getPermission ();
+			$permstats =& $projectstats->getPermission ();
                          
 			if ($permmaster->isAdmin()) {
 				$user_is_super = true;
@@ -363,7 +363,7 @@ class Navigation extends Error {
                                 return;
                         }
                         
-                        $perm =& $group->getPermission( session_get_user() );
+                        $perm =& $group->getPermission ();
                         
                         $selected = 0;
                         

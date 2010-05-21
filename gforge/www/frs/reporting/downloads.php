@@ -61,7 +61,7 @@ $g =& group_get_object($group_id);
 if (!$g || $g->isError()) {
 	exit_error('Error',$g->getErrorMessage());
 }
-$perm =& $g->getPermission(session_get_user());
+$perm =& $g->getPermission ();
 if (!$perm->isReleaseTechnician()) {
 	exit_permission_denied();
 }

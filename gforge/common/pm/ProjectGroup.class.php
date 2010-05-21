@@ -144,7 +144,7 @@ class ProjectGroup extends Error {
 			}
 		}
 		
-		$perm =& $this->Group->getPermission( session_get_user() );
+		$perm =& $this->Group->getPermission ();
 
 		if (!$perm || !is_object($perm) || !$perm->isPMAdmin()) {
 			$this->setPermissionDeniedError();
@@ -585,7 +585,7 @@ class ProjectGroup extends Error {
 		if (!session_loggedin()) {
 				return false;
 		} else {
-			$perm =& $this->Group->getPermission( session_get_user() );
+			$perm =& $this->Group->getPermission ();
 
 			if (($this->getCurrentUserPerm() >= 2) || ($perm->isPMAdmin())) {
 				return true;
@@ -604,7 +604,7 @@ class ProjectGroup extends Error {
 		if (!session_loggedin()) {
 				return false;
 		} else {
-			$perm =& $this->Group->getPermission( session_get_user() );
+			$perm =& $this->Group->getPermission ();
 
 			if (($this->getCurrentUserPerm() >= 1) || ($perm->isPMAdmin())) {
 				return true;

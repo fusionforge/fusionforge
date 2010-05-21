@@ -110,7 +110,7 @@ if (getStringFromRequest('submit')) {
 			setcookie ("gforgecurrentdocdata", "", time() - 3600);
 		}
 		// check if the user is docman's admin
-                $perm =& $g->getPermission( session_get_user() );
+                $perm =& $g->getPermission ();
                 if (!$perm || $perm->isError() || !$perm->isDocEditor()) {
 			Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='._('Document submitted sucessfully : pending state (need validation)')));
                         exit;

@@ -49,7 +49,7 @@ if (!$g || !is_object($g) || $g->isError()) {
 	exit_no_group();
 }
 
-$perm =& $g->getPermission( session_get_user() );
+$perm =& $g->getPermission ();
 if (!$perm || $perm->isError() || !$perm->isDocEditor()) {
 	exit_permission_denied();
 }

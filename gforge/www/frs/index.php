@@ -82,7 +82,7 @@ if ( $num_packages < 1) {
 	// check the permissions and see if this user is a release manager.
 	// If so, offer the opportunity to create a release
 
-	$perm =& $cur_group->getPermission(session_get_user());
+	$perm =& $cur_group->getPermission ();
 
 	if ($perm->isReleaseTechnician()) {
 		echo '<p><a href="admin/qrs.php?group_id='.$group_id.'">';

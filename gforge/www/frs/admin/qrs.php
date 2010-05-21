@@ -28,7 +28,7 @@ if (!$g || $g->isError()) {
 
 // check the permissions and see if this user is a release manager.
 // If so, he can create a release
-$perm =& $g->getPermission(session_get_user());
+$perm =& $g->getPermission ();
 $can_post = $perm->isReleaseTechnician();
 $packages = get_frs_packages($g);
 

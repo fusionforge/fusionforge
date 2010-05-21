@@ -99,7 +99,7 @@ if (!$language_id) {
 }
 
 // check if the user is docman's admin
-$perm =& $g->getPermission( session_get_user() );
+$perm =& $g->getPermission ();
 if (!$perm || $perm->isError() || !$perm->isDocEditor()) {
 	$is_editor = false;
 } else {

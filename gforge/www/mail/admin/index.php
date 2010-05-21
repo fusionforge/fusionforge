@@ -25,7 +25,7 @@ if ($group_id) {
 		exit_no_group();
 	}
 	
-	$perm =& $Group->getPermission(session_get_user());
+	$perm =& $Group->getPermission ();
 	if (!$perm || !is_object($perm) || $perm->isError() || !$perm->isAdmin()) {
 		exit_permission_denied();
 	}

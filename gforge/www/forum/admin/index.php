@@ -45,7 +45,7 @@ if ($group_id) {
 		exit_no_group();
 	}
 
-	$p =& $g->getPermission( session_get_user() );
+	$p =& $g->getPermission ();
 	if (!$p || !is_object($p) || $p->isError()) {
 		exit_permission_denied();
 	}

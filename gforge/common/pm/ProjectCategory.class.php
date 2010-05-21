@@ -96,7 +96,7 @@ class ProjectCategory extends Error {
 			return false;
 		}
 
-		$perm =& $this->ProjectGroup->Group->getPermission (session_get_user());
+		$perm =& $this->ProjectGroup->Group->getPermission ();
 		if (!$perm || !$perm->isPMAdmin()) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -175,7 +175,7 @@ class ProjectCategory extends Error {
 	 *  @return	boolean success.
 	 */
 	function update($name) {
-		$perm =& $this->ProjectGroup->Group->getPermission (session_get_user());
+		$perm =& $this->ProjectGroup->Group->getPermission ();
 		if (!$perm || !$perm->isPMAdmin()) {
 			$this->setPermissionDeniedError();
 			return false;

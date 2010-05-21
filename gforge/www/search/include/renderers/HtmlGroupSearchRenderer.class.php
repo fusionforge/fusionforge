@@ -80,7 +80,7 @@ class HtmlGroupSearchRenderer extends HtmlSearchRenderer {
 	function isGroupMember($groupId) {
 		$Group =& group_get_object($groupId);
 		if($Group && is_object($Group) && !$Group->isError() && session_loggedin()) {
-			$perm =& $Group->getPermission(session_get_user());
+			$perm =& $Group->getPermission ();
 			if($perm && is_object($perm) && $perm->isMember()) {
 				return true;
 			}

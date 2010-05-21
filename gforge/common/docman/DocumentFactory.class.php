@@ -142,7 +142,7 @@ class DocumentFactory extends Error {
 				
 				if (!$this->stateid) {
 					if (session_loggedin()) {
-						$perm =& $this->Group->getPermission( session_get_user() );
+						$perm =& $this->Group->getPermission ();
 						if (!$perm || !is_object($perm) || !$perm->isMember()) {
 							if ($doc->getStateID() != 1) {		// non-active document?
 								$valid = false;

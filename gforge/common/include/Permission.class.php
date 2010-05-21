@@ -77,7 +77,7 @@ class Permission extends Error {
 	 *
 	 * @var int $group_id.
 	 */
-	var $group_id
+	var $group_id;
 
 	/**
 	 * Whether the user is an admin/super user of this project.

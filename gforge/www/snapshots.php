@@ -31,7 +31,7 @@ if (!$group || !is_object($group)) {
 // logged in user belongs the group
 $permission = $group->enableAnonSCM();
 if(session_loggedin()) {
-	$perm =& $group->getPermission(session_get_user());
+	$perm =& $group->getPermission ();
  	if ($perm && is_object($perm) && !$perm->isError() && $perm->isMember()) {
  		$permission = true;
  	}

@@ -57,7 +57,7 @@ function quota_management_User_Header($params) {
 			if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the quota_management plugin active
 				exit_error("Error", "First activate the $pluginname plugin through the Project's Admin Interface");			
 			}
-			$userperm = $group->getPermission($user);//we'll check if the user belongs to the group (optional)
+			$userperm = $group->getPermission ();//we'll check if the user belongs to the group (optional)
 			if ( !$userperm->IsMember()) {
 				exit_error("Access Denied", "You are not a member of this project");
 			}
@@ -86,7 +86,7 @@ function quota_management_User_Header($params) {
 			if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the quota_management plugin active
 				exit_error("Error", "First activate the $pluginname plugin through the Project's Admin Interface");			
 			}
-			$userperm = $group->getPermission($user);//we'll check if the user belongs to the group
+			$userperm = $group->getPermission ();//we'll check if the user belongs to the group
 			if ( !$userperm->IsMember()) {
 				exit_error("Access Denied", "You are not a member of this project");
 			}

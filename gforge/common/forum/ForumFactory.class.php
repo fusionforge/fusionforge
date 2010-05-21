@@ -84,7 +84,7 @@ class ForumFactory extends Error {
 
 		
 		if (session_loggedin()) {
-			$perm =& $this->Group->getPermission( session_get_user() );
+			$perm =& $this->Group->getPermission ();
 			if (!$perm || !is_object($perm) || !$perm->isMember()) {
 				$result = db_query_params ('SELECT * FROM forum_group_list_vw
 WHERE group_id=$1
@@ -150,7 +150,7 @@ ORDER BY group_forum_id',
 
 		
 		if (session_loggedin()) {
-			$perm =& $this->Group->getPermission( session_get_user() );
+			$perm =& $this->Group->getPermission ();
 			if (!$perm || !is_object($perm) || !$perm->isForumAdmin()) {
 				$this->setError(_("You don't have a permission to access this page"));
 				$this->forums = false;

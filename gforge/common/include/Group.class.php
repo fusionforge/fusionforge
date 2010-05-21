@@ -243,7 +243,7 @@ class Group extends Error {
 		
 		$systemGroups = array(GROUP_IS_NEWS, GROUP_IS_STATS, GROUP_IS_PEER_RATINGS);
 		if(!$this->isPublic() && !in_array($id, $systemGroups)) {
-			$perm =& $this->getPermission(session_get_user());
+			$perm =& $this->getPermission ();
 
 			if (!$perm || !is_object($perm) || !$perm->isMember()) {
 				$this->setError(_('Permission denied'), ERROR__PERMISSION_DENIED_ERROR);
@@ -416,7 +416,7 @@ class Group extends Error {
 	 *	@access public
 	 */
 	function updateAdmin(&$user, $is_public, $type_id, $unix_box, $http_domain) {
-		$perm =& $this->getPermission($user);
+		$perm =& $this->getPermission ();
 
 		if (!$perm || !is_object($perm)) {
 			$this->setError(_('Could not get permission.'));
@@ -488,7 +488,7 @@ class Group extends Error {
 		$new_doc_address,$send_all_docs,$logo_image_id,
 		$use_ftp,$use_tracker,$use_frs,$use_stats,$tags,$is_public) {
 
-		$perm =& $this->getPermission($user);
+		$perm =& $this->getPermission ();
 
 		if (!$perm || !is_object($perm)) {
 			$this->setError(_('Could not get permission.'));
@@ -681,7 +681,7 @@ class Group extends Error {
 	function setStatus(&$user, $status) {
 		global $SYS;
 
-		$perm =& $this->getPermission($user);
+		$perm =& $this->getPermission ();
 		if (!$perm || !is_object($perm)) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -1356,13 +1356,12 @@ class Group extends Error {
 	}
 
 	/**
-	 *	getPermission - Return a Permission for this Group and the specified User.
+	 *	getPermission - Return a Permission for this Group
 	 *
-	 *	@param	object	The user you wish to get permission for (usually the logged in user).
 	 *	@return	object	The Permission.
 	 */
-	function &getPermission(&$_user) {
-		return permission_get_object($this, $_user);
+	function &getPermission() {
+		return permission_get_object($this);
 	}
 
 
@@ -1372,7 +1371,7 @@ class Group extends Error {
 	 *	@return boolean	is_admin.
 	 */
 	function userIsAdmin() {
-		$perm =& $this->getPermission( session_get_user() );
+		$perm =& $this->getPermission ();
 		if (!$perm || !is_object($perm)) {
 			return false;
 		} elseif ($perm->isError()) {
@@ -1393,7 +1392,7 @@ class Group extends Error {
 			$this->setError(_('Cannot Delete System Group'));
 			return false;
 		}
-		$perm =& $this->getPermission( session_get_user() );
+		$perm =& $this->getPermission ();
 		if (!$perm || !is_object($perm)) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -1633,7 +1632,7 @@ class Group extends Error {
 			Admins can add users to groups
 		*/
 
-		$perm =& $this->getPermission( session_get_user() );
+		$perm =& $this->getPermission ();
 		if (!$perm || !is_object($perm) || !$perm->isAdmin()) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -1806,7 +1805,7 @@ class Group extends Error {
 			//users can remove themselves
 			//everyone else must be a project admin
 		} else {
-			$perm =& $this->getPermission( session_get_user() );
+			$perm =& $this->getPermission ();
 
 			if (!$perm || !is_object($perm) || !$perm->isAdmin()) {
 				$this->setPermissionDeniedError();
@@ -1906,7 +1905,7 @@ class Group extends Error {
 	function updateUser($user_id,$role_id) {
 		global $SYS;
 
-		$perm =& $this->getPermission( session_get_user() );
+		$perm =& $this->getPermission ();
 		if (!$perm || !is_object($perm) || !$perm->isAdmin()) {
 			$this->setPermissionDeniedError();
 			return false;

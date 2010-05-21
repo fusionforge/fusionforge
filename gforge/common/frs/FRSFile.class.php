@@ -108,7 +108,7 @@ class FRSFile extends Error {
 			return false;
 		}
 
-		$perm =& $this->FRSRelease->FRSPackage->Group->getPermission( session_get_user() );
+		$perm =& $this->FRSRelease->FRSPackage->Group->getPermission ();
 
 		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
 			$this->setPermissionDeniedError();
@@ -320,7 +320,7 @@ class FRSFile extends Error {
 	 *  @return	boolean	success.
 	 */
 	function delete() {
-		$perm =& $this->FRSRelease->FRSPackage->Group->getPermission( session_get_user() );
+		$perm =& $this->FRSRelease->FRSPackage->Group->getPermission ();
 
 		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
 			$this->setPermissionDeniedError();
@@ -358,7 +358,7 @@ class FRSFile extends Error {
 	 *	@return	boolean success.
 	 */
 	function update($type_id,$processor_id,$release_time,$release_id=false) {
-		$perm =& $this->FRSRelease->FRSPackage->Group->getPermission( session_get_user() );
+		$perm =& $this->FRSRelease->FRSPackage->Group->getPermission ();
 
 		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
 			$this->setPermissionDeniedError();

@@ -61,7 +61,7 @@ if ($group_id) {
 		exit_no_group () ;
 	}
 	if (!$group->isPublic()) {
-		$perm =& $group->getPermission(session_get_user());
+		$perm =& $group->getPermission ();
 		
 		if (!$perm || !is_object($perm) || !$perm->isMember()) {
 			exit_no_group () ;

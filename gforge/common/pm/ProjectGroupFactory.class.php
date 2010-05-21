@@ -83,7 +83,7 @@ class ProjectGroupFactory extends Error {
 			return $this->projectGroups;
 		}
 		if (session_loggedin()) {
-			$perm =& $this->Group->getPermission( session_get_user() );
+			$perm =& $this->Group->getPermission ();
 			if (!$perm || !is_object($perm) || !$perm->isMember()) {
 				$result = db_query_params ('SELECT * FROM project_group_list_vw WHERE group_id=$1 AND is_public=1 ORDER BY group_project_id',
 							   array ($this->Group->getID())) ;

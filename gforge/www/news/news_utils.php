@@ -54,7 +54,7 @@ function news_header($params) {
 		if (session_loggedin()) {
 			$project =& group_get_object($params['group']);
 			if ($project && is_object($project) && !$project->isError()) {
-				$perm =& $project->getPermission(session_get_user());
+				$perm =& $project->getPermission ();
 				if ($perm && is_object($perm) && !$perm->isError() && $perm->isAdmin()) {
 					$menu_texts[]=_('Admin');
 					$menu_links[]='/news/admin/?group_id='.$group_id;

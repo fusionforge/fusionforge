@@ -298,7 +298,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 *	@return integer	The id on success or false on failure.
 	 */
 	function create($role_name,$data) {
-		$perm =& $this->Group->getPermission( session_get_user() );
+		$perm =& $this->Group->getPermission ();
 		if (!$perm || !is_object($perm) || $perm->isError() || !$perm->isAdmin()) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -610,7 +610,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 			$this->setError('Cannot Update Default Role');
 			return false;
 		}
-		$perm =& $this->Group->getPermission( session_get_user() );
+		$perm =& $this->Group->getPermission ();
 		if (!$perm || !is_object($perm) || $perm->isError() || !$perm->isAdmin()) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -779,7 +779,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 
 	function setUser($user_id) {
 		global $SYS;
-		$perm =& $this->Group->getPermission( session_get_user() );
+		$perm =& $this->Group->getPermission ();
 		if (!$perm || !is_object($perm) || $perm->isError() || !$perm->isAdmin()) {
 			$this->setPermissionDeniedError();
 			return false;

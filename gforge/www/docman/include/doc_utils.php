@@ -80,7 +80,7 @@ function docman_header($title,$pagehead,$style='xyz') {
 	
 
 	if (session_loggedin()) {
-		$perm =& $project->getPermission(session_get_user());
+		$perm =& $project->getPermission ();
 		if ($perm && is_object($perm) && !$perm->isError() && $perm->isDocEditor()) {
 			$menu_text[]=_('Admin');
 			$menu_links[]='/docman/admin/index.php?group_id='.$group_id;
@@ -99,7 +99,7 @@ function doc_droplist_count($l_group_id, $language_id, $g) {
 	$pub = array () ;
 	$pub[] = 1 ;
 	if (session_loggedin()) {
-		$perm =& $g->getPermission( session_get_user() );
+		$perm =& $g->getPermission ();
 		if ($perm && is_object($perm) && $perm->isMember()) {
 			$pub[] = 4 ;
 			$pub[] = 5 ;

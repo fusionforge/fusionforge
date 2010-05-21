@@ -84,7 +84,7 @@ class MailingList extends Error {
 				}
 			}
 			if (!$this->isPublic()) {
-				$perm =& $this->Group->getPermission(session_get_user());
+				$perm =& $this->Group->getPermission ();
 
 				if (!$perm || !is_object($perm) || !$perm->isMember()) {
 					$this->setPermissionDeniedError();
@@ -402,7 +402,7 @@ Thank you for registering your project with %1$s.
 	 * @return boolean true if the user can administrate mailing lists
 	 */
 	function userIsAdmin() {
-		$perm = & $this->Group->getPermission(session_get_user());
+		$perm = & $this->Group->getPermission ();
 		if (!$perm || !is_object($perm)) {
 			return false;
 		} elseif ($perm->isAdmin()) {

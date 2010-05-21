@@ -106,7 +106,7 @@ class CCasePlugin extends SCMPlugin {
 
 			$anonymous = 1;
 			if (session_loggedin()) {
-				$perm =& $project->getPermission(session_get_user());
+				$perm =& $project->getPermission ();
 				$anonymous = !$perm->isMember();
 			}
 			

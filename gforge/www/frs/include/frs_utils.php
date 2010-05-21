@@ -44,7 +44,7 @@ function frs_admin_header($params) {
 		return;
 	}
 
-	$perm =& $project->getPermission( session_get_user() );
+	$perm =& $project->getPermission ();
 	if (!$perm || !is_object($perm)) {
 		return;
 	}
@@ -83,7 +83,7 @@ function frs_header($params) {
 	site_project_header($params);
 
 	if (session_loggedin()) {
-		$perm =& $project->getPermission(session_get_user());
+		$perm =& $project->getPermission ();
 		if ($perm && is_object($perm) && !$perm->isError() && $perm->isReleaseTechnician()) {
 			echo $HTML->subMenu(
 				array(

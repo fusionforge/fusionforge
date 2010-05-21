@@ -281,7 +281,7 @@ Comments by the user:
 			$this->setError('Must be sure before deleting');
 			return false;
 		}
-		$perm =& $this->Group->getPermission( session_get_user() );
+		$perm =& $this->Group->getPermission ();
 		if (!$perm || !is_object($perm)) {
 			$this->setPermissionDeniedError();
 			return false;

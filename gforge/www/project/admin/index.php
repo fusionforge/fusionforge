@@ -44,7 +44,7 @@ if (!$group || !is_object($group)) {
 	exit_error('Error',$group->getErrorMessage());
 }
 
-$perm =& $group->getPermission( session_get_user() );
+$perm =& $group->getPermission ();
 if (!$perm || !is_object($perm)) {
 	exit_error('Error','Could Not Get Permission');
 } elseif ($perm->isError()) {

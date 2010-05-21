@@ -58,8 +58,7 @@ if (count($matches) == 0) {
 		exit_no_group();
 	}
 
-	$perm =& permission_get_object($Group, $User);
-	if (!$perm || !is_object($perm) || !$perm->isCVSWriter()) {
+	if (! forge_check_perm_for_user ($User, 'scm', $Group->getID(), 'write')) {
 		exit_permission_denied();
 	}
 }

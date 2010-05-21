@@ -56,7 +56,7 @@ if (getStringFromRequest('confirm')) {
 	Main code
 */
 
-$perm =& $group->getPermission(session_get_user());
+$perm =& $group->getPermission ();
 
 if ( $perm->isAdmin() ) {
 	exit_error(

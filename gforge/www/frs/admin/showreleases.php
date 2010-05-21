@@ -49,7 +49,7 @@ if (!$project || $project->isError()) {
 	exit_error('Error',$project->getErrorMessage());
 }
 
-$perm =& $project->getPermission(session_get_user());
+$perm =& $project->getPermission ();
 if (!$perm->isReleaseTechnician()) {
 	exit_permission_denied();
 }

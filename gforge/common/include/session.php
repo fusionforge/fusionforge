@@ -366,7 +366,7 @@ function session_require($req, $reason='') {
 			exit_error('Error',$reason == '' ? $group->getErrorMessage() : $reason);
 		}
 
-		$perm =& $group->getPermission( session_get_user() );
+		$perm =& $group->getPermission ();
 		if (!$perm || !is_object($perm) || $perm->isError()) {
 			exit_permission_denied($reason);
 		}

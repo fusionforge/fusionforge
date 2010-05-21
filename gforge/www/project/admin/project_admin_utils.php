@@ -41,7 +41,7 @@ function project_admin_header($params) {
 		return;
 	}
 
-	$perm =& $project->getPermission( session_get_user() );
+	$perm =& $project->getPermission ();
 	if (!$perm || !is_object($perm)) {
 		return;
 	}

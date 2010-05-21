@@ -111,7 +111,7 @@ class DocumentGroup extends Error {
 			$parent_doc_group = 0;
 		}
 
-		$perm =& $this->Group->getPermission (session_get_user());
+		$perm =& $this->Group->getPermission ();
 		if (!$perm || !$perm->isDocEditor()) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -155,7 +155,7 @@ class DocumentGroup extends Error {
 	 * @return boolean
 	 */
 	function delete($doc_groupid,$project_group_id) {
-		$perm =& $this->Group->getPermission (session_get_user());
+		$perm =& $this->Group->getPermission ();
 		if (!$perm || !$perm->isDocEditor()) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -248,7 +248,7 @@ class DocumentGroup extends Error {
 	 *  @return boolean.
 	 */
 	function update($name,$parent_doc_group) {
-		$perm =& $this->Group->getPermission (session_get_user());
+		$perm =& $this->Group->getPermission ();
 		if (!$perm || !$perm->isDocEditor()) {
 			$this->setPermissionDeniedError();
 			return false;

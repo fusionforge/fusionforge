@@ -585,7 +585,7 @@ class ForumMessage extends Error {
 			return false;
 		}
 		
-		/*$perm =& $this->Forum->Group->getPermission( session_get_user() );
+		/*$perm =& $this->Forum->Group->getPermission ();
 
 		if (!$perm || !is_object($perm) || !$perm->isForumAdmin()) {
 			$this->setPermissionDeniedError();

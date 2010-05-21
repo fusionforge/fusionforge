@@ -160,7 +160,7 @@ class Forum extends Error {
 		} else {
 			// Current permissions check.
 
-			$perm =& $this->Group->getPermission( session_get_user() );
+			$perm =& $this->Group->getPermission ();
 
 			if (!$perm || !is_object($perm) || !$perm->isForumAdmin()) {
 				$this->setPermissionDeniedError();
@@ -687,7 +687,7 @@ class Forum extends Error {
 				return true;//public forum, anonymous allowed, user not logged in
 			}
 		} else {
-			$perm =& $this->Group->getPermission( session_get_user() );
+			$perm =& $this->Group->getPermission ();
 			if (  (!$perm->isMember() )) {
 				//the user isn't a member of the project
 				return true;
@@ -741,7 +741,7 @@ class Forum extends Error {
 		if (!session_loggedin()) {
 				return false;
 		} else {
-			$perm =& $this->Group->getPermission( session_get_user() );
+			$perm =& $this->Group->getPermission ();
 
 			if (($this->getCurrentUserPerm() >= 2) || ($perm->isForumAdmin())) {
 				return true;

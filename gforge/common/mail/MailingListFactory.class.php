@@ -87,7 +87,7 @@ class MailingListFactory extends Error {
 		
 		$public_flag = MAIL__MAILING_LIST_IS_PUBLIC;
 		
-		$perm = & $this->Group->getPermission(session_get_user());
+		$perm = & $this->Group->getPermission ();
 		if ($perm && is_object($perm) && $perm->isMember()) {
 			$public_flag = MAIL__MAILING_LIST_IS_PRIVATE.', '.MAIL__MAILING_LIST_IS_PUBLIC;
 		}

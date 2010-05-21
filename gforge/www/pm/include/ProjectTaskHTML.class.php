@@ -78,7 +78,7 @@ class ProjectTaskHTML extends ProjectTask {
 
 		$rows=db_numrows($res);
 		if ($rows > 0) {
-			$perm =& $this->ProjectGroup->Group->getPermission( session_get_user() );
+			$perm =& $this->ProjectGroup->Group->getPermission ();
 
 			if (!$perm || !is_object($perm) || !$perm->isPMAdmin()) {
 				$is_admin=false;

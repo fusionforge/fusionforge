@@ -28,7 +28,7 @@ if (!$group || !is_object($group)) {
 		$group->getErrorMessage());
 }
 
-$perm =& $group->getPermission( session_get_user() );
+$perm =& $group->getPermission ();
 if (!$perm || !is_object($perm)) {
 	exit_error(_('Error'),
 		_('Error creating permission'));

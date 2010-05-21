@@ -40,7 +40,7 @@ if (!$g || !is_object($g)) {
 	exit_error('Error',$g->getErrorMessage());
 }
 
-$perm =& $g->getPermission( session_get_user() );
+$perm =& $g->getPermission ();
 if (!$perm->isPMAdmin()) {
 	exit_permission_denied();
 }

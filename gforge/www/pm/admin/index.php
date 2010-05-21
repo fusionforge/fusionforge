@@ -39,7 +39,7 @@ if (!$g || !is_object($g)) {
 	exit_error('Error',$g->getErrorMessage());
 }
 
-$perm =& $g->getPermission( session_get_user() );
+$perm =& $g->getPermission ();
 
 $update_cat = getStringFromRequest('update_cat');
 $add_cat = getStringFromRequest('add_cat');

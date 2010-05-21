@@ -66,7 +66,7 @@ class SurveyHTML extends Error {
 				));
 			} else {
 				if (session_loggedin()) {
-					$perm =& $project->getPermission(session_get_user());
+					$perm =& $project->getPermission ();
 					if ($perm && is_object($perm) && !$perm->isError() && $perm->isDocEditor()) {
 
 						echo ($HTML->subMenu(

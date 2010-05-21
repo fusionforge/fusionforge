@@ -118,7 +118,7 @@ function forum_header($params) {
 		} 
 	} else {
 			$gg=&group_get_object($group_id);
-			$perm =& $gg->getPermission( session_get_user() );
+			$perm =& $gg->getPermission ();
 			if ($perm->isForumAdmin()) {
 				$menu_text[]=_('Admin');
 				$menu_links[]='/forum/admin/?group_id='.$group_id;

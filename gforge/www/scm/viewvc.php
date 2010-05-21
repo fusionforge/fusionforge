@@ -58,7 +58,7 @@ $external_scm = !$sys_scm_single_host;
 
 if (session_loggedin()) {
 	if (user_ismember($Group->getID())) {
-		$perm = & $Group->getPermission(session_get_user());
+		$perm = & $Group->getPermission ();
 		
 		if (!($perm && is_object($perm) && $perm->isCVSReader()) && !$Group->enableAnonSCM()) {
 			exit_permission_denied();

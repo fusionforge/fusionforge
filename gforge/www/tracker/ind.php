@@ -20,7 +20,7 @@ $params['toptab']='tracker';
 
 echo site_project_header($params);
 
-$perm =& $group->getPermission( session_get_user() );
+$perm =& $group->getPermission ();
 if ($perm->isArtifactAdmin()) {
 	$menu_text=array();
 	$menu_links=array();

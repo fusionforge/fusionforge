@@ -231,7 +231,7 @@ function &MSPCreateProject($groupid,$session_hash,$name,$ispublic,$description) 
 		$res['description']="No Such Group";
 		return $res;
 	} else {
-		$perm =& $group->getPermission(session_get_user());
+		$perm =& $group->getPermission ();
 		if (!$perm || !is_object($perm)) {
 			$res['code']="error";
 			$res['description']="Could Not Get Perm Object";
