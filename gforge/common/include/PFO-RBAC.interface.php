@@ -33,7 +33,7 @@ define ("PFO_ROLE_LOGGEDIN",  4) ;
 interface PFO_RBACEngine {
 	public static function getInstance() ;
 	public function getAvailableRoles() ; // From session
-	public function isActionAllowed($section,$refid,$action) ;
+	public function isActionAllowed($section,$reference,$action) ;
 	public function isGlobalActionAllowed($section,$action) ;
 }
 
@@ -53,6 +53,7 @@ interface PFO_Role {
 	public function getUsers() ;
 	public function hasUser($user) ;
 	public function hasPermission($section, $reference, $permission) ;
+	public function hasGlobalPermission($section, $permission) ;
 	public function normalizeData() ;
 	public function getSettings() ;
 	public function setSettings($data) ;
