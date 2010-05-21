@@ -109,6 +109,12 @@ abstract class BaseRole extends Error {
 				switch ($oldsection) {
 				case 'projectadmin':
 					$newsection = 'project_admin' ;
+					if ($this->data_array['group_id'] == 1 && $t[0] == 'A') {
+						$this->perms_array['forge_admin'][-1] = true ;
+					}
+					if ($this->data_array['group_id'] == forge_get_config ('news_group') && $t[0] == 'A') {
+						$this->perms_array['approve_news'][-1] = true ;
+					}
 					break ;
 				case 'trackeradmin':
 					$newsection = 'tracker_admin' ;
