@@ -125,8 +125,16 @@ class MediaWikiPlugin extends Plugin {
 		} elseif ($hookname == "role_normalize") {
 			$role =& $params['role'] ;
 			$new_sa =& $params['new_sa'] ;
+			$new_pa =& $params['new_pa'] ;
 
-			$role->normalizeDataForSection ($new_sa, 'plugin_mediawiki_edit') ;
+			if (USE_PFO_RBAC) {
+				$projects = $role->getLinkedProjects() ;		
+				foreach ($projects as $p) {
+					$role->normalizePermsForSection ($new_pa, $section, $p->getID()) ;
+				}
+			} else {
+				$role->normalizeDataForSection ($new_sa, 'plugin_mediawiki_edit') ;
+			}
 		} elseif ($hookname == "role_translate_strings") {
 			$edit = new PluginSpecificRoleSetting ($role,
 							       'plugin_mediawiki_edit') ;

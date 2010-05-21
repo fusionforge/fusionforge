@@ -428,97 +428,127 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 		return $new_sa ;
 	}
 
+	function normalizePermsForSection (&$new_pa, $section, $refid) {
+		if (array_key_exists ($section, $this->perms_array)) {
+			$new_pa[$section][$refid] = $this->perms_array[$section][$refid] ;
+		} elseif (array_key_exists ($this->data_array['role_name'], $this->defaults)
+			  && array_key_exists ($section, $this->defaults[$this->data_array['role_name']])) {
+			$new_pa[$section][$refid] = $this->defaults[$this->data_array['role_name']][$section] ;
+		}
+		return $new_pa ;
+	}
+
 	function normalizeData () { // From the PFO spec
-		db_begin () ;
 		$this->fetchData ($this->getID()) ;
-		
+
+		$projects = $this->getLinkedProjects() ;		
 		$new_sa = array () ;
+		$new_pa = array () ;
 		
 		// Add missing settings
 		// ...project-wide settings
-		$arr = array ('projectadmin', 'frs', 'scm', 'docman', 'forumadmin', 'trackeradmin', 'newtracker', 'pmadmin', 'newpm', 'webcal') ;
-		foreach ($arr as $section) {
-			$this->normalizeDataForSection ($new_sa, $section) ;
+		if (USE_PFO_RBAC) {
+			$arr = array ('project_read', 'project_admin', 'frs', 'scm', 'docman', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm', 'webcal') ;
+			foreach ($projects as $p) {
+				foreach ($arr as $section) {
+					$this->normalizePermsForSection ($new_pa, $section, $p->getID()) ;
+				}
+			}
+			$this->normalizePermsForSection ($new_pa, 'forge_admin', -1) ;
+			$this->normalizePermsForSection ($new_pa, 'approve_projects', -1) ;
+			$this->normalizePermsForSection ($new_pa, 'approve_news', -1) ;
+			$this->normalizePermsForSection ($new_pa, 'forge_stats', -1) ;
+		} else {
+			$arr = array ('projectadmin', 'frs', 'scm', 'docman', 'forumadmin', 'trackeradmin', 'newtracker', 'pmadmin', 'newpm', 'webcal') ;
+			foreach ($arr as $section) {
+				$this->normalizeDataForSection ($new_sa, $section) ;
+			}
 		}
 
 		$hook_params = array ();
 		$hook_params['role'] =& $this;
 		$hook_params['new_sa'] =& $new_sa ; 
+		$hook_params['new_pa'] =& $new_pa ; 
 		plugin_hook ("role_normalize", $hook_params);
-		
+
 		// ...tracker-related settings
 		$new_sa['tracker'] = array () ;
-		$res = db_query_params ('SELECT group_artifact_id FROM artifact_group_list WHERE group_id=$1',
-					array ($this->Group->getID())) ;
-		if (!$res) {
-			$this->setError('Error: Tracker '.db_error());
-			return false;
-		}
-		for ($j=0; $j<db_numrows($res); $j++) {
-			$tid = db_result ($res,$j,'group_artifact_id') ;
-			if (array_key_exists ('tracker', $this->setting_array)
-			    && array_key_exists ($tid, $this->setting_array['tracker']) ) {
-				$new_sa['tracker'][$tid] = $this->setting_array['tracker'][$tid] ;
-			} else {
-				$new_sa['tracker'][$tid] = $new_sa['newtracker'][0] ;
+		$new_pa['tracker'] = array () ;
+		foreach ($projects as $p) {
+			$atf = new ArtifactTypeFactory ($p) ;
+			$trackers = $atf->getArtifactTypes () ;
+			foreach ($trackers as $t) {
+				if (USE_PFO_RBAC) {
+					if (array_key_exists ('tracker', $this->perms_array)
+					    && array_key_exists ($t->getID(), $this->perms_array['tracker']) ) {
+						$new_pa['tracker'][$t->getID()] = $this->perms_array['tracker'][$t->getID()] ;
+					} elseif (array_key_exists ('new_tracker', $this->perms_array)
+					    && array_key_exists ($p->getID(), $this->perms_array['new_tracker']) ) {
+						$new_pa['tracker'][$t->getID()] = $new_pa['new_tracker'][$p->getID()] ;
+					}
+				} else {
+					if (array_key_exists ('tracker', $this->setting_array)
+					    && array_key_exists ($t->getID(), $this->setting_array['tracker']) ) {
+						$new_sa['tracker'][$t->getID()] = $this->setting_array['tracker'][$t->getID()] ;
+					} else {
+						$new_sa['tracker'][$t->getID()] = $new_sa['newtracker'][0] ;
+					}
+				}
 			}
 		}
 		
 		// ...forum-related settings
 		$new_sa['forum'] = array () ;
-		$res = db_query_params ('SELECT group_forum_id FROM forum_group_list WHERE group_id=$1',
-					array ($this->Group->getID())) ;
-		if (!$res) {
-			$this->setError('Error: Forum '.db_error());
-			return false;
-		}
-		for ($j=0; $j<db_numrows($res); $j++) {
-			$tid = db_result ($res,$j,'group_forum_id') ;
-			if (array_key_exists ('forum', $this->setting_array)
-			    && array_key_exists ($tid, $this->setting_array['forum']) ) {
-				$new_sa['forum'][$tid] = $this->setting_array['forum'][$tid] ;
-			} else {
-				$new_sa['forum'][$tid] = $new_sa['newforum'][0] ;
+		$new_pa['forum'] = array () ;
+		foreach ($projects as $p) {
+			$ff = new ForumFactory ($p) ;
+			$forums = $ff->getForums () ;
+			foreach ($forums as $f) {
+				if (USE_PFO_RBAC) {
+					if (array_key_exists ('forum', $this->perms_array)
+					    && array_key_exists ($f->getID(), $this->perms_array['forum']) ) {
+						$new_pa['forum'][$f->getID()] = $this->perms_array['forum'][$f->getID()] ;
+					} elseif (array_key_exists ('new_forum', $this->perms_array)
+					    && array_key_exists ($p->getID(), $this->perms_array['new_forum']) ) {
+						$new_pa['forum'][$f->getID()] = $new_pa['new_forum'][$p->getID()] ;
+					}
+				} else {
+					if (array_key_exists ('forum', $this->setting_array)
+					    && array_key_exists ($f->getID(), $this->setting_array['forum']) ) {
+						$new_sa['forum'][$f->getID()] = $this->setting_array['forum'][$f->getID()] ;
+					} else {
+						$new_sa['forum'][$f->getID()] = $new_sa['newforum'][0] ;
+					}
+				}
 			}
 		}
-
-		// ...subproject-related settings
-		$new_sa['pm'] = array () ;
-		$res = db_query_params ('SELECT group_project_id FROM project_group_list WHERE group_id=$1',
-					array ($this->Group->getID())) ;
-		if (!$res) {
-			$this->setError('Error: Subproject '.db_error());
-			return false;
-		}
-		for ($j=0; $j<db_numrows($res); $j++) {
-			$tid = db_result ($res,$j,'group_project_id') ;
-			if (array_key_exists ('pm', $this->setting_array)
-			    && array_key_exists ($tid, $this->setting_array['pm']) ) {
-				$new_sa['pm'][$tid] = $this->setting_array['pm'][$tid] ;
-			} else {
-				$new_sa['pm'][$tid] = $new_sa['newpm'][0] ;
-			}
-		}
-
-		// Delete extra settings
-		db_query_params ('DELETE FROM role_setting WHERE role_id=$1 AND section_name <> ALL ($2)',
-				 array ($this->getID(),
-					db_string_array_to_any_clause (array_keys ($this->role_values)))) ;
-		db_query_params ('DELETE FROM role_setting WHERE role_id=$1 AND section_name = $2 AND ref_id <> ALL ($3)',
-				 array ($this->getID(),
-					'tracker',
-					db_int_array_to_any_clause (array_keys ($new_sa['tracker'])))) ;
-		db_query_params ('DELETE FROM role_setting WHERE role_id=$1 AND section_name = $2 AND ref_id <> ALL ($3)',
-				 array ($this->getID(),
-					'forum',
-					db_int_array_to_any_clause (array_keys ($new_sa['forum'])))) ;
-		db_query_params ('DELETE FROM role_setting WHERE role_id=$1 AND section_name = $2 AND ref_id <> ALL ($3)',
-				 array ($this->getID(),
-					'pm',
-					db_int_array_to_any_clause (array_keys ($new_sa['pm'])))) ;
 		
-		db_commit () ;
-
+		// ...pm-related settings
+		$new_sa['pm'] = array () ;
+		$new_pa['pm'] = array () ;
+		foreach ($projects as $p) {
+			$pgf = new ProjectGroupFactory ($p) ;
+			$pgs = $atf->getProjectGroups () ;
+			foreach ($pgs as $t) {
+				if (USE_PFO_RBAC) {
+					if (array_key_exists ('pm', $this->perms_array)
+					    && array_key_exists ($g->getID(), $this->perms_array['pm']) ) {
+						$new_pa['pm'][$g->getID()] = $this->perms_array['pm'][$g->getID()] ;
+					} elseif (array_key_exists ('new_pm', $this->perms_array)
+					    && array_key_exists ($p->getID(), $this->perms_array['new_pm']) ) {
+						$new_pa['pm'][$g->getID()] = $new_pa['new_pm'][$p->getID()] ;
+					}
+				} else {
+					if (array_key_exists ('pm', $this->setting_array)
+					    && array_key_exists ($g->getID(), $this->setting_array['pm']) ) {
+						$new_sa['pm'][$g->getID()] = $this->setting_array['pm'][$g->getID()] ;
+					} else {
+						$new_sa['pm'][$g->getID()] = $new_sa['newpm'][0] ;
+					}
+				}
+			}
+		}
+		
 		// Save
 		$this->update ($this->data_array['role_name'], $new_sa) ;
 
@@ -622,6 +652,45 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 			db_rollback();
 			return false;
 		}
+
+		if (USE_PFO_RBAC) {
+			// Clean everything
+			db_query_params ('DELETE FROM pfo_role_setting WHERE role_id=$1',
+					 array ($this->getID())) ;
+
+			// Re-add what's needed
+			foreach ($data as $sect => $refs) {
+				foreach ($refs as $refid => $value) {
+					$this->setSetting ($sect, $refid, $value) ;
+				}
+			}
+		} else {
+
+		// Delete extra settings
+		db_query_params ('DELETE FROM role_setting WHERE role_id=$1 AND section_name <> ALL ($2)',
+				 array ($this->getID(),
+					db_string_array_to_any_clause (array_keys ($this->role_values)))) ;
+		db_query_params ('DELETE FROM role_setting WHERE role_id=$1 AND section_name = $2 AND ref_id <> ALL ($3)',
+				 array ($this->getID(),
+					'tracker',
+					db_int_array_to_any_clause (array_keys ($data['tracker'])))) ;
+		db_query_params ('DELETE FROM role_setting WHERE role_id=$1 AND section_name = $2 AND ref_id <> ALL ($3)',
+				 array ($this->getID(),
+					'forum',
+					db_int_array_to_any_clause (array_keys ($data['forum'])))) ;
+		db_query_params ('DELETE FROM role_setting WHERE role_id=$1 AND section_name = $2 AND ref_id <> ALL ($3)',
+				 array ($this->getID(),
+					'pm',
+					db_int_array_to_any_clause (array_keys ($data['pm'])))) ;
+		
+
+
+
+
+
+
+
+
 
 ////$data['section_name']['ref_id']=$val
 		$arr1 = array_keys($data);
@@ -764,6 +833,8 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 			}
 
 //		}
+
+		} // USE_PFO_RBAC
 
 		$hook_params = array ();
 		$hook_params['role'] =& $this;
