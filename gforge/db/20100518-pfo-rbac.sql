@@ -53,6 +53,8 @@ CREATE TABLE pfo_user_role (
 
 INSERT INTO pfo_role (SELECT nextval ('pfo_role_seq'), role_name, 1, group_id, false, role_id FROM role) ;
 
+INSERT INTO pfo_user_role (SELECT ug.user_id, r.role_id FROM user_group ug, pfo_role r WHERE ug.role_id = r.old_role_id) ;
+
 CREATE OR REPLACE FUNCTION insert_pfo_role_setting (role_id integer, section_name text, ref_id integer, perm_val integer) RETURNS void AS $$
 BEGIN
 	-- RAISE NOTICE 'insert_pfo_role_setting (%,%,%,%)', role_id, section_name, ref_id, perm_val ;
