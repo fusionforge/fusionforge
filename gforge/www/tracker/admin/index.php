@@ -40,9 +40,8 @@ if ($group_id && $atid) {
 //		UPDATING A PARTICULAR ARTIFACT TYPE
 //
 
-	if (!forge_check_perm ('tracker_admin', $group_id)) {
-		exit_permission_denied();
-	}
+	session_require_perm ('tracker_admin', $group_id) ;
+
 	//
 	//  Create the ArtifactType object
 	//
@@ -52,9 +51,6 @@ if ($group_id && $atid) {
 	}
 	if ($ath->isError()) {
 		exit_error(_('Error').'',$ath->getErrorMessage());
-	}
-	if (!$ath->userIsAdmin()) {
-		exit_permission_denied();
 	}
 
 	$next = '';

@@ -140,7 +140,7 @@ class ArtifactQuery extends Error {
 			return false;
 		}
 
-		if ($query_type>0 && !$this->ArtifactType->userIsAdmin()) {
+		if ($query_type>0 && !forge_check_perm ('tracker', $this->ArtifactType->getID(), 'manager')) {
 			$this->setError( _('You must have tracker admin rights to set or update a project level query.'));
 			return false;
 		}
@@ -636,7 +636,7 @@ class ArtifactQuery extends Error {
 			$this->setError(_('Query does not exist'));
 			return false;
 		}
-		if ($query_type>0 && !$this->ArtifactType->userIsAdmin()) {
+		if ($query_type>0 && !forge_check_perm ('tracker', $this->ArtifactType->getID(), 'manager')) {
 			$this->setError(_('You must have tracker admin rights to set or update a project level query.'));
 			return false;
 		}
@@ -691,7 +691,7 @@ class ArtifactQuery extends Error {
 	}
 
 	function delete() {
-		if ($this->ArtifactType->userIsAdmin()) {
+		if (forge_check_perm ('tracker', $this->ArtifactType->getID(), 'manager')) {
 			$res = db_query_params ('DELETE FROM artifact_query WHERE artifact_query_id=$1 AND (user_id=$2 OR query_type>0)',
 					array ($this->getID(),
 					       user_getid())) ;

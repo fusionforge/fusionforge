@@ -50,7 +50,7 @@
 	$arr =& $atf->getArtifactTypes();
 	$i=0;
 	for ($j = 0; $j < count($arr); $j++) {
-		if ($arr[$j]->userIsAdmin()) {
+		if (forge_check_perm ('tracker', $arr[$j]->getID(), 'manager')) {
 			$at_arr[$i++] =& $arr[$j];
 		}
 	}

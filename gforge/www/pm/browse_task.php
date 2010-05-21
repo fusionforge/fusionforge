@@ -144,7 +144,7 @@ if ($rows < 1) {
 	/*
 		Now display the tasks in a table with priority colors
 	*/
-	$IS_ADMIN=($pg->userIsAdmin());
+	$IS_ADMIN = forge_check_perm ('pm', $pg->getID(), 'manager') ;
 
 	if ($IS_ADMIN) {
 		echo '

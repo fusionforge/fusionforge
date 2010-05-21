@@ -72,7 +72,7 @@ function pm_header($params) {
 		$labels[] = _('Import/Export CSV');
 		$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=csv';
 	}
-	if ($pg && is_object($pg) && $pg->userIsAdmin()) {
+	if ($pg && is_object($pg) && forge_check_perm ('pm', $pg->getID(), 'manager')) {
 		$labels[] = _('Reporting');
 		$links[]  = '/pm/reporting/?group_id='.$group_id;
 		$labels[] = _('Admin');

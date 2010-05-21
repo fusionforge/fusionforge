@@ -181,9 +181,9 @@ class ForumAdmin extends Error {
 			} elseif ($f->isError()) {
 				exit_error(_('Error'),$f->getErrorMessage());
 			}
-			if (!$f->userIsAdmin()) {
-				exit_permission_denied();
-			}
+
+			session_require_perm ('forum_admin', $f->Group->getID()) ;
+
 			if (!$f->update($forum_name,$description,$allow_anonymous,$is_public,$send_all_posts_to,$moderation_level)) {
 				exit_error(_('Error'),$f->getErrorMessage());
 			} else {
@@ -230,9 +230,8 @@ class ForumAdmin extends Error {
 			} elseif ($f->isError()) {
 				exit_error(_('Error'),$f->getErrorMessage());
 			}
-			if (!$f->userIsAdmin()) {
-				exit_permission_denied();
-			}
+
+			session_require_perm ('forum_admin', $f->Group->getID()) ;
 
 			$fm=new ForumMessage($f,$msg_id);
 			if (!$fm || !is_object($fm)) {
@@ -259,9 +258,9 @@ class ForumAdmin extends Error {
 			} elseif ($f->isError()) {
 				exit_error(_('Error'),$f->getErrorMessage());
 			}
-			if (!$f->userIsAdmin()) {
-				exit_permission_denied();
-			}
+
+			session_require_perm ('forum_admin', $f->Group->getID()) ;
+
 			if (!$f->delete(getStringFromRequest('sure'),getStringFromRequest('really_sure'))) {
 				exit_error(_('Error'),$f->getErrorMessage());
 			} else {

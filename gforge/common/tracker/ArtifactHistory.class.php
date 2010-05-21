@@ -92,7 +92,7 @@ class ArtifactHistory extends Error {
 			$this->setError(_('ArtifactCategory: name and assignee are Required'));
 			return false;
 		}
-		if (!$this->Artifact->userIsAdmin()) {
+		if (!forge_check_perm ('tracker', $this->Artifact->ArtifactType->getID()), 'manager') {
 			$this->setPermissionDeniedError();
 			return false;
 		}

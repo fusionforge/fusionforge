@@ -152,9 +152,7 @@ switch (getStringFromRequest('func')) {
 
 		$count=count($artifact_id_list);
 
-		if (!$ath->userIsAdmin()) {
-			exit_permission_denied();
-		}
+		session_require_perm ('tracker', $ath->getID(), 'manager') ;
 
 		$artifact_type_id=$ath->getID();
 
@@ -456,18 +454,16 @@ switch (getStringFromRequest('func')) {
 		//	Show delete form
 		//
 		case 'deleteartifact' : {
-			if ($ath->userIsAdmin()) {
-				$aid = getStringFromRequest('aid');
-				$ah= new ArtifactHtml($ath,$aid);
-				if (!$ah || !is_object($ah)) {
-					exit_error('ERROR','Artifact Could Not Be Created');
-				} elseif ($ah->isError()) {
-					exit_error('ERROR',$ah->getErrorMessage());
-				}
-				include $gfwww.'tracker/deleteartifact.php';
-			} else {
-				exit_permission_denied();
+			session_require_perm ('tracker', $ath->getID(), 'manager') ;
+
+			$aid = getStringFromRequest('aid');
+			$ah= new ArtifactHtml($ath,$aid);
+			if (!$ah || !is_object($ah)) {
+				exit_error('ERROR','Artifact Could Not Be Created');
+			} elseif ($ah->isError()) {
+				exit_error('ERROR',$ah->getErrorMessage());
 			}
+			include $gfwww.'tracker/deleteartifact.php';
 			break;
 		}
 
@@ -479,28 +475,26 @@ switch (getStringFromRequest('func')) {
 			if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 				exit_form_double_submit();
 			}
-			if ($ath->userIsAdmin()) {
-				$aid = getStringFromRequest('aid');
-				$ah= new ArtifactHtml($ath,$aid);
-				if (!$ah || !is_object($ah)) {
-					exit_error('ERROR','Artifact Could Not Be Created');
-				} elseif ($ah->isError()) {
-					exit_error('ERROR',$ah->getErrorMessage());
-				}
-				if (!getStringFromRequest('confirm_delete')) {
-					$feedback .= _('Confirmation failed. Artifact not deleted');
-				}
-				else {
-					if (!$ah->delete(true)) {
-						$feedback .= _('Artifact Delete Failed') . ': '.$ah->getErrorMessage();
-					} else {
-						$feedback .= _('Artifact Deleted Successfully');
-					}
-				}
-				include $gfwww.'tracker/browse.php';
-			} else {
-				exit_permission_denied();
+			session_require_perm ('tracker', $ath->getID(), 'manager') ;
+
+			$aid = getStringFromRequest('aid');
+			$ah= new ArtifactHtml($ath,$aid);
+			if (!$ah || !is_object($ah)) {
+				exit_error('ERROR','Artifact Could Not Be Created');
+			} elseif ($ah->isError()) {
+				exit_error('ERROR',$ah->getErrorMessage());
 			}
+			if (!getStringFromRequest('confirm_delete')) {
+				$feedback .= _('Confirmation failed. Artifact not deleted');
+			}
+			else {
+				if (!$ah->delete(true)) {
+					$feedback .= _('Artifact Delete Failed') . ': '.$ah->getErrorMessage();
+				} else {
+					$feedback .= _('Artifact Deleted Successfully');
+				}
+			}
+			include $gfwww.'tracker/browse.php';
 			break;
 		}
 

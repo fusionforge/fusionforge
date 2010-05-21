@@ -114,7 +114,7 @@ class ArtifactExtraField extends Error {
 			$this->setError("Type of custom field not selected");
 			return false;			
 		}
-		if (!$this->ArtifactType->userIsAdmin()) {
+		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID()) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -369,7 +369,7 @@ class ArtifactExtraField extends Error {
 	 *  @return	boolean	success.
 	 */
 	function update($name,$attribute1,$attribute2,$is_required=0,$alias="") {
-		if (!$this->ArtifactType->userIsAdmin()) {
+		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID()) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -431,7 +431,7 @@ class ArtifactExtraField extends Error {
 			$this->setMissingParamsError();
 			return false;
 		}
-		if (!$this->ArtifactType->userIsAdmin()) {
+		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID()) {
 			$this->setPermissionDeniedError();
 			return false;
 		}

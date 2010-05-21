@@ -78,17 +78,15 @@ switch (getStringFromRequest('func')) {
 	//	Show blank form to add new task
 	//
 	case 'addtask' : {
-		if ($pg->userIsAdmin()) {
-			$pt=new ProjectTaskHTML($pg);
-			if (!$pt || !is_object($pt)) {
-				exit_error('Error','Could Not Get ProjectTask');
-			} elseif ($pt->isError()) {
-				exit_error('Error',$pt->getErrorMessage());
-			}
-			include $gfwww.'pm/add_task.php';
-		} else {
-			exit_permission_denied();
+		session_require_perm ('pm', $pg->getID(), 'manager') ;
+
+		$pt=new ProjectTaskHTML($pg);
+		if (!$pt || !is_object($pt)) {
+			exit_error('Error','Could Not Get ProjectTask');
+		} elseif ($pt->isError()) {
+			exit_error('Error',$pt->getErrorMessage());
 		}
+		include $gfwww.'pm/add_task.php';
 		break;
 	}
 
@@ -96,44 +94,41 @@ switch (getStringFromRequest('func')) {
 	//	Insert the task into the database
 	//
 	case 'postaddtask' : {
-		if ($pg->userIsAdmin()) {
-			
-			$add_artifact_id = getStringFromRequest('add_artifact_id');
+		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
-			$pt = new ProjectTask($pg);
-			if (!$pt || !is_object($pt)) {
-				exit_error('Error','Could Not Get Empty ProjectTask');
-			} elseif ($pt->isError()) {
-				exit_error('Error',$pt->getErrorMessage());
-			}
-
-			$saved_hours = $hours;
-			$hours = (float) $hours;
-			if ( $saved_hours !== (string)$hours ) {
-				exit_error('Error', "Illegal format for hours: must be an integer or a float number.");
-			}
-
-			if (!$dependent_on)
-			{
-				$dependent_on=array();
-			}
-			$start_date=mktime($start_hour,$start_minute,0,$start_month,$start_day,$start_year);
-			$end_date=mktime($end_hour,$end_minute,0,$end_month,$end_day,$end_year);
-			
-			
-			if (!$pt->create($summary,$details,$priority,$hours,$start_date,$end_date,$category_id,$percent_complete,$assigned_to,$pt->convertDependentOn($dependent_on),$duration,$parent_id)) {
-				exit_error('ERROR',$pt->getErrorMessage());
-			} else {
-				if (count($add_artifact_id) > 0) {
-					if (!$pt->addRelatedArtifacts($add_artifact_id)) {
-						exit_error('ERROR','addRelatedArtifacts():: '.$pt->getErrorMessage());
-					}
-				}
-				$feedback=_('Task Created Successfully');
-				include $gfwww.'pm/browse_task.php';
-			}
+		$add_artifact_id = getStringFromRequest('add_artifact_id');
+		
+		$pt = new ProjectTask($pg);
+		if (!$pt || !is_object($pt)) {
+			exit_error('Error','Could Not Get Empty ProjectTask');
+		} elseif ($pt->isError()) {
+			exit_error('Error',$pt->getErrorMessage());
+		}
+		
+		$saved_hours = $hours;
+		$hours = (float) $hours;
+		if ( $saved_hours !== (string)$hours ) {
+			exit_error('Error', "Illegal format for hours: must be an integer or a float number.");
+		}
+		
+		if (!$dependent_on)
+		{
+			$dependent_on=array();
+		}
+		$start_date=mktime($start_hour,$start_minute,0,$start_month,$start_day,$start_year);
+		$end_date=mktime($end_hour,$end_minute,0,$end_month,$end_day,$end_year);
+		
+		
+		if (!$pt->create($summary,$details,$priority,$hours,$start_date,$end_date,$category_id,$percent_complete,$assigned_to,$pt->convertDependentOn($dependent_on),$duration,$parent_id)) {
+			exit_error('ERROR',$pt->getErrorMessage());
 		} else {
-			exit_permission_denied();
+			if (count($add_artifact_id) > 0) {
+				if (!$pt->addRelatedArtifacts($add_artifact_id)) {
+					exit_error('ERROR','addRelatedArtifacts():: '.$pt->getErrorMessage());
+				}
+			}
+			$feedback=_('Task Created Successfully');
+			include $gfwww.'pm/browse_task.php';
 		}
 		break;
 	}
@@ -142,45 +137,43 @@ switch (getStringFromRequest('func')) {
 	//	Modify an existing task
 	//
 	case 'postmodtask' : {
-		if ($pg->userIsAdmin()) {
-			$rem_artifact_id = getStringFromRequest('rem_artifact_id');
+		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
-			if(!$rem_artifact_id){
-				$rem_artifact_id=array();
-			}
+		$rem_artifact_id = getStringFromRequest('rem_artifact_id');
 		
-			$pt = new ProjectTask($pg,$project_task_id);
-			if (!$pt || !is_object($pt)) {
-				exit_error('Error','Could Not Get ProjectTask');
-			} elseif ($pt->isError()) {
-				exit_error('Error',$pt->getErrorMessage());
-			}
-
-			$saved_hours = $hours;
-			$hours = (float) $hours;
-			if ( $saved_hours !== (string)$hours ) {
-				exit_error('Error', "Illegal format for hours: must be an integer or a float number.");
-			}
-
-			if (!$dependent_on)	{
-				$dependent_on=array();
-			}
-			$start_date=mktime($start_hour,$start_minute,0,$start_month,$start_day,$start_year);
-			$end_date=mktime($end_hour,$end_minute,0,$end_month,$end_day,$end_year);
-			if (!$pt->update($summary,$details,$priority,$hours,$start_date,$end_date,
-				$status_id,$category_id,$percent_complete,$assigned_to,$pt->convertDependentOn($dependent_on),$new_group_project_id,$duration,$parent_id)) {
-				exit_error('ERROR','update():: '.$pt->getErrorMessage());
-			} else {
-				if (count($rem_artifact_id) > 0) {
-					if (!$pt->removeRelatedArtifacts($rem_artifact_id)) {
-						exit_error('ERROR','removeRelatedArtifacts():: '.$pt->getErrorMessage());
-					}
-				}
-				$feedback=_('Task Updated Successfully');
-				include $gfwww.'pm/browse_task.php';
-			}
+		if(!$rem_artifact_id){
+			$rem_artifact_id=array();
+		}
+		
+		$pt = new ProjectTask($pg,$project_task_id);
+		if (!$pt || !is_object($pt)) {
+			exit_error('Error','Could Not Get ProjectTask');
+		} elseif ($pt->isError()) {
+			exit_error('Error',$pt->getErrorMessage());
+		}
+		
+		$saved_hours = $hours;
+		$hours = (float) $hours;
+		if ( $saved_hours !== (string)$hours ) {
+			exit_error('Error', "Illegal format for hours: must be an integer or a float number.");
+		}
+		
+		if (!$dependent_on)	{
+			$dependent_on=array();
+		}
+		$start_date=mktime($start_hour,$start_minute,0,$start_month,$start_day,$start_year);
+		$end_date=mktime($end_hour,$end_minute,0,$end_month,$end_day,$end_year);
+		if (!$pt->update($summary,$details,$priority,$hours,$start_date,$end_date,
+				 $status_id,$category_id,$percent_complete,$assigned_to,$pt->convertDependentOn($dependent_on),$new_group_project_id,$duration,$parent_id)) {
+			exit_error('ERROR','update():: '.$pt->getErrorMessage());
 		} else {
-			exit_permission_denied();
+			if (count($rem_artifact_id) > 0) {
+				if (!$pt->removeRelatedArtifacts($rem_artifact_id)) {
+					exit_error('ERROR','removeRelatedArtifacts():: '.$pt->getErrorMessage());
+				}
+			}
+			$feedback=_('Task Updated Successfully');
+			include $gfwww.'pm/browse_task.php';
 		}
 		break;
 	}
@@ -196,35 +189,24 @@ switch (getStringFromRequest('func')) {
 	}
 
 	case 'downloadcsv': {
+		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
-		if ($pg->userIsAdmin()) {
-			include $gfwww.'pm/downloadcsv.php';
-			exit;
-		} else {
-			exit_permission_denied();
-		}
-
+		include $gfwww.'pm/downloadcsv.php';
+		exit;
 	}
 
 	case 'uploadcsv': {
+		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
-		if ($pg->userIsAdmin()) {
-			include $gfwww.'pm/uploadcsv.php';
-			exit;
-		} else {
-			exit_permission_denied();
-		}
-
+		include $gfwww.'pm/uploadcsv.php';
+		exit;
 	}
 
 	case 'postuploadcsv': {
+		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
-		if ($pg->userIsAdmin()) {
-			include $gfwww.'pm/postuploadcsv.php';
-			include $gfwww.'pm/browse_task.php';
-		} else {
-			exit_permission_denied();
-		}
+		include $gfwww.'pm/postuploadcsv.php';
+		include $gfwww.'pm/browse_task.php';
 		break;
 	}
 
@@ -232,90 +214,84 @@ switch (getStringFromRequest('func')) {
 		$project_task_id_list = getArrayFromRequest('project_task_id_list');
 		$count=count($project_task_id_list);
 	
-		if ($pg->userIsAdmin()) {
+		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
-			for ($i=0; $i < $count; $i++) {
-				$pt=new ProjectTask($pg,$project_task_id_list[$i]);
-				if (!$pt || !is_object($pt)) {
-					$feedback .= ' ID: '.$project_task_id_list[$i].'::ProjectTask Could Not Be Created';
-				} else if ($pt->isError()) {
-					$feedback .= ' ID: '.$project_task_id_list[$i].'::'.$pt->getErrorMessage();
+		for ($i=0; $i < $count; $i++) {
+			$pt=new ProjectTask($pg,$project_task_id_list[$i]);
+			if (!$pt || !is_object($pt)) {
+				$feedback .= ' ID: '.$project_task_id_list[$i].'::ProjectTask Could Not Be Created';
+			} else if ($pt->isError()) {
+				$feedback .= ' ID: '.$project_task_id_list[$i].'::'.$pt->getErrorMessage();
+			} else {
+
+				$mass_summary=addslashes(util_unconvert_htmlspecialchars($pt->getSummary()));
+				$mass_details='';
+				$mass_priority=(($priority != 100) ? $priority : $pt->getPriority());
+				$mass_hours=$pt->getHours();
+				$mass_start_date=$pt->getStartDate();
+				$mass_end_date=$pt->getEndDate();
+				$mass_status_id=(($status_id != 100) ? $status_id : $pt->getStatusID());
+				$mass_category_id=(($category_id != 100) ? $category_id : $pt->getCategoryID());
+				$mass_percent_complete=$pt->getPercentComplete();
+
+				//yikes, we want the ability to mass-update to "un-assigned", which is the ID=100, which
+				//conflicts with the "no change" ID! Sorry for messy use of 100.1
+				// 100 means => no change
+				// 100.1 means non assigned
+				// other means assigned to ...
+
+				if ($assigned_to == '100') {
+					$mass_assigned_to = $pt->getAssignedTo();
+				} else if ($assigned_to == '100.1') {
+					$mass_assigned_to = array('100');
 				} else {
-
-					$mass_summary=addslashes(util_unconvert_htmlspecialchars($pt->getSummary()));
-					$mass_details='';
-					$mass_priority=(($priority != 100) ? $priority : $pt->getPriority());
-					$mass_hours=$pt->getHours();
-					$mass_start_date=$pt->getStartDate();
-					$mass_end_date=$pt->getEndDate();
-					$mass_status_id=(($status_id != 100) ? $status_id : $pt->getStatusID());
-					$mass_category_id=(($category_id != 100) ? $category_id : $pt->getCategoryID());
-					$mass_percent_complete=$pt->getPercentComplete();
-
-					//yikes, we want the ability to mass-update to "un-assigned", which is the ID=100, which
-					//conflicts with the "no change" ID! Sorry for messy use of 100.1
-					// 100 means => no change
-					// 100.1 means non assigned
-					// other means assigned to ...
-
-					if ($assigned_to == '100') {
-					    $mass_assigned_to = $pt->getAssignedTo();
-					} else if ($assigned_to == '100.1') {
-					    $mass_assigned_to = array('100');
-					} else {
-						$mass_assigned_to = array($assigned_to);
-					}
-
-					$mass_dependent_on=$pt->getDependentOn();
-					$mass_new_group_project_id=(($new_group_project_id != 100) ? $new_group_project_id : $pt->ProjectGroup->getID() );
-					$mass_duration=$pt->getDuration();
-					$mass_parent_id=$pt->getParentID();
-
-					if (!$pt->update($mass_summary,$mass_details,$mass_priority,$mass_hours,$mass_start_date,$mass_end_date,
-						$mass_status_id,$mass_category_id,$mass_percent_complete,$mass_assigned_to,$mass_dependent_on,$mass_new_group_project_id,$mass_duration,$mass_parent_id)) {
-						$was_error=true;
-						$feedback .= ' ID: '.$project_task_id_list[$i].'::'.$pt->getErrorMessage();
-
-					}
-					unset($pt);
+					$mass_assigned_to = array($assigned_to);
 				}
-			}
-			if ($count == 0) {
-				$warning_msg = _('No task selected');
-			}
-			elseif (!$was_error) {
-				$feedback = _('Task Updated Successfully');
-			}
-			include $gfwww.'pm/browse_task.php';
-			break;
-		} else {
-			exit_permission_denied();
-		}
 
+				$mass_dependent_on=$pt->getDependentOn();
+				$mass_new_group_project_id=(($new_group_project_id != 100) ? $new_group_project_id : $pt->ProjectGroup->getID() );
+				$mass_duration=$pt->getDuration();
+				$mass_parent_id=$pt->getParentID();
+
+				if (!$pt->update($mass_summary,$mass_details,$mass_priority,$mass_hours,$mass_start_date,$mass_end_date,
+						 $mass_status_id,$mass_category_id,$mass_percent_complete,$mass_assigned_to,$mass_dependent_on,$mass_new_group_project_id,$mass_duration,$mass_parent_id)) {
+					$was_error=true;
+					$feedback .= ' ID: '.$project_task_id_list[$i].'::'.$pt->getErrorMessage();
+
+				}
+				unset($pt);
+			}
+		}
+		if ($count == 0) {
+			$warning_msg = _('No task selected');
+		}
+		elseif (!$was_error) {
+			$feedback = _('Task Updated Successfully');
+		}
+		include $gfwww.'pm/browse_task.php';
+		break;
 	}
 
 	//
 	//	Add an artifact relationship to an existing task
 	//
 	case 'addartifact' : {
-		if ($pg->userIsAdmin()) {
-			$add_artifact_id = getStringFromRequest('add_artifact_id');
+		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
-			$pt = new ProjectTask($pg,$project_task_id);
-			if (!$pt || !is_object($pt)) {
-				exit_error('Error','Could Not Get ProjectTask');
-			} elseif ($pt->isError()) {
-				exit_error('Error',$pt->getErrorMessage());
-			}
-			if (!$pt->addRelatedArtifacts($add_artifact_id)) {
-				exit_error('ERROR','addRelatedArtifacts():: '.$pt->getErrorMessage());
-			} else {
-				$feedback=_('Successfully Added Tracker Relationship');
-				include $gfwww.'pm/browse_task.php';
-
-			}
+		$add_artifact_id = getStringFromRequest('add_artifact_id');
+		
+		$pt = new ProjectTask($pg,$project_task_id);
+		if (!$pt || !is_object($pt)) {
+			exit_error('Error','Could Not Get ProjectTask');
+		} elseif ($pt->isError()) {
+			exit_error('Error',$pt->getErrorMessage());
+		}
+		if (!$pt->addRelatedArtifacts($add_artifact_id)) {
+			exit_error('ERROR','addRelatedArtifacts():: '.$pt->getErrorMessage());
 		} else {
-			exit_permission_denied();
+			$feedback=_('Successfully Added Tracker Relationship');
+			include $gfwww.'pm/browse_task.php';
+			
 		}
 		break;
 	}
@@ -324,17 +300,15 @@ switch (getStringFromRequest('func')) {
 	//	Show delete form
 	//
 	case 'deletetask' : {
-		if ($pg->userIsAdmin()) {
-			$pt= new ProjectTask($pg,$project_task_id);
-			if (!$pt || !is_object($pt)) {
-				exit_error('Error','Could Not Get ProjectTask');
-			} elseif ($pt->isError()) {
-				exit_error('Error',$pt->getErrorMessage());
-			}
-			include $gfwww.'pm/deletetask.php';
-		} else {
-			exit_permission_denied();
+		session_require_perm ('pm', $pg->getID(), 'manager') ;
+
+		$pt= new ProjectTask($pg,$project_task_id);
+		if (!$pt || !is_object($pt)) {
+			exit_error('Error','Could Not Get ProjectTask');
+		} elseif ($pt->isError()) {
+			exit_error('Error',$pt->getErrorMessage());
 		}
+		include $gfwww.'pm/deletetask.php';
 		break;
 	}
 
@@ -343,27 +317,25 @@ switch (getStringFromRequest('func')) {
 	//
 
 	case 'postdeletetask' : {
-		if ($pg->userIsAdmin()) {
-			$pt= new ProjectTask($pg, $project_task_id);
-			if (!$pt || !is_object($pt)) {
-				exit_error('Error','Could Not Get ProjectTask');
-			} elseif ($pt->isError()) {
-				exit_error('Error', $pt->getErrorMessage());
-			}
-			if (!getStringFromRequest('confirm_delete')) {
-				$feedback .= _('Confirmation failed. Task not deleted');
-			} else {
-				$deletion = $pt->delete(true);
-				if (!$deletion) {
-					$feedback .= _('Delete failed') . ': '.$pt->getErrorMessage();
-				} else {
-					$feedback .= _('Task Successfully Deleted');
-				}
-			}
-			include $gfwww.'pm/browse_task.php';
-		} else {
-			exit_permission_denied();
+		session_require_perm ('pm', $pg->getID(), 'manager') ;
+
+		$pt= new ProjectTask($pg, $project_task_id);
+		if (!$pt || !is_object($pt)) {
+			exit_error('Error','Could Not Get ProjectTask');
+		} elseif ($pt->isError()) {
+			exit_error('Error', $pt->getErrorMessage());
 		}
+		if (!getStringFromRequest('confirm_delete')) {
+			$feedback .= _('Confirmation failed. Task not deleted');
+		} else {
+			$deletion = $pt->delete(true);
+			if (!$deletion) {
+				$feedback .= _('Delete failed') . ': '.$pt->getErrorMessage();
+			} else {
+				$feedback .= _('Task Successfully Deleted');
+			}
+		}
+		include $gfwww.'pm/browse_task.php';
 		break;
 	}
 
@@ -393,7 +365,7 @@ switch (getStringFromRequest('func')) {
 		} elseif ($pt->isError()) {
 			exit_error('Error',$pt->getErrorMessage());
 		}
-		if (session_loggedin() && $pg->userIsAdmin()) {
+		if (forge_check_perm ('pm', $pg->getID(), 'manager')) {
 			include $gfwww.'pm/mod_task.php';
 		} else {
 			include $gfwww.'pm/detail_task.php';

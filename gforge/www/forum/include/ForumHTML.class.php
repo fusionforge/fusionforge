@@ -112,7 +112,7 @@ function forum_header($params) {
 			$menu_text[]=_('Discussion Forums:') .' '. $f->getName();
 			$menu_links[]='/forum/forum.php?forum_id='.$forum_id;
 		}
-		if ($f->userIsAdmin()) {
+		if (forge_check_perm ('forum_admin', $f->Group->getID())) {
 			$menu_text[]=_('Admin');
 			$menu_links[]='/forum/admin/?group_id='.$group_id;
 		} 
@@ -262,7 +262,7 @@ class ForumHTML extends Error {
 		$ret_val .= ' on '.date('Y-m-d H:i',$msg->getPostDate());
 		$ret_val .= '</td><td class="tablecontent"  align="right">';
 		$ret_val .= '<a href="'.$url.'">[forum:'.$msg->getID().']</a><br/>';
-		if ($msgforum->userIsAdmin()) {
+		if (forge_check_perm ('forum_admin', $msgforum->Group->getID())) {
 			$ret_val .= $fa->PrintAdminMessageOptions($msg->getID(),$group_id,$msg->getThreadID(),$msgforum->getID());
 		} 
 		$ret_val .= $am->PrintAttachLink($msg,$group_id,$msgforum->getID());

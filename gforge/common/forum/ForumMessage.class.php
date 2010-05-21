@@ -580,7 +580,7 @@ class ForumMessage extends Error {
 			return 0;
 		}
 		
-		if (!$this->Forum->userIsAdmin()) {
+		if (!forge_check_perm ('forum_admin', $this->Forum->Group->getID()) {
 			$this->setPermissionDeniedError();
 			return false;
 		}

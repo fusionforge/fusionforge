@@ -79,9 +79,7 @@ if (getStringFromRequest('post_changes')) {
 		/*
 			Add a project_category
 		*/
-		if (!$pg->userIsAdmin()) {
-			exit_permission_denied();
-		}
+		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 		$pc = new ProjectCategory($pg);
 		if (!$pc || !is_object($pc)) {
@@ -101,9 +99,7 @@ if (getStringFromRequest('post_changes')) {
 		/*
 			Update a project_category
 		*/
-		if (!$pg->userIsAdmin()) {
-			exit_permission_denied();
-		}
+		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 		$pc = new ProjectCategory($pg,$id);
 		if (!$pc || !is_object($pc)) {
@@ -128,9 +124,7 @@ if (getStringFromRequest('post_changes')) {
 		/*
 			Update a subproject
 		*/
-		if (!$pg->userIsAdmin()) {
-			exit_permission_denied();
-		}
+		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 		if (!$pg->update($project_name,$description,$send_all_posts_to)) {
 			exit_error('Error',$pg->getErrorMessage());
@@ -146,9 +140,7 @@ if (getStringFromRequest('post_changes')) {
 		/*
 			Delete a subproject
 		*/
-		if (!$pg->userIsAdmin()) {
-			exit_permission_denied();
-		}
+		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 		if (!$pg->delete(getStringFromRequest('sure'),getStringFromRequest('really_sure'))) {
 			exit_error('Error',$pg->getErrorMessage());
@@ -173,9 +165,8 @@ if ($add_cat && $group_project_id) {
 	} elseif ($pg->isError()) {
 		exit_error('Error',$pg->getErrorMessage());
 	}
-	if (!$pg->userIsAdmin()) {
-		exit_permission_denied();
-	}
+
+	session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 	$title = sprintf(_('Add Categories to: %s'), $pg->getName());
 	pm_header(array ('title'=>$title));
@@ -238,9 +229,9 @@ if ($add_cat && $group_project_id) {
 	} elseif ($pg->isError()) {
 		exit_error('Error',$pg->getErrorMessage());
 	}
-	if (!$pg->userIsAdmin()) {
-		exit_permission_denied();
-	}
+
+	session_require_perm ('pm', $pg->getID(), 'manager') ;
+
 	$title = sprintf(_('Modify a Category in: %s'), $pg->getName());
 	pm_header(array ('title'=>$title));
 
@@ -312,9 +303,8 @@ if ($add_cat && $group_project_id) {
 	} elseif ($pg->isError()) {
 		exit_error('Error',$pg->getErrorMessage());
 	}
-	if (!$pg->userIsAdmin()) {
-		exit_permission_denied();
-	}
+
+	session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 	pm_header(array('title'=>_('Change Tasks Status')));
 
@@ -378,9 +368,8 @@ if ($add_cat && $group_project_id) {
 	} elseif ($pg->isError()) {
 		exit_error('Error',$pg->getErrorMessage());
 	}
-	if (!$pg->userIsAdmin()) {
-		exit_permission_denied();
-	}
+
+	session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 	pm_header(array('title'=>_('Delete')));
 

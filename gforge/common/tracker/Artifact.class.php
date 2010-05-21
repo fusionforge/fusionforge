@@ -202,7 +202,7 @@ class Artifact extends Error {
 
 //
 // ape: Disabled, private means only restricted to members. So, no special rules #2503.
-//			if (!$this->ArtifactType->userIsAdmin()) {
+//			if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID()) {
 //				$this->setError(_('Artifact: Only Artifact Admins Can Modify Private ArtifactTypes'));
 //				return false;
 //			}
@@ -497,7 +497,7 @@ class Artifact extends Error {
 			$this->setMissingParamsError();
 			return false;
 		}
-		if (!$this->ArtifactType->userIsAdmin()) {
+		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID()) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -874,7 +874,7 @@ class Artifact extends Error {
 				return false;
 			}
 			//	do they have perms for new ArtifactType?
-			if (!$newArtifactType->userIsAdmin()) {
+			if (!forge_check_perm ('tracker', $newArtifactType->getID(), 'manager')) {
 				$this->setPermissionDeniedError();
 				db_rollback();
 				return false;

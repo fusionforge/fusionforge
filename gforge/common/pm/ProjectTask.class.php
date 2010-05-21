@@ -155,7 +155,7 @@ class ProjectTask extends Error {
 		if (!$duration) {
 			$duration=0;
 		}
-		if (!$this->ProjectGroup->userIsAdmin()) {
+		if (!forge_check_perm ('pm', $this->ProjectGroup->getID(), 'manager')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -444,7 +444,7 @@ class ProjectTask extends Error {
 	 *	@return	boolean	success.
 	 */
 	function addRelatedArtifacts($art_array) {
-		if (!$this->ProjectGroup->userIsAdmin()) {
+		if (!forge_check_perm ('pm', $this->ProjectGroup->getID(), 'manager')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -475,7 +475,7 @@ class ProjectTask extends Error {
 	 *	@return	boolean	success.
 	 */
 	function removeRelatedArtifacts($art_array) {
-		if (!$this->ProjectGroup->userIsAdmin()) {
+		if (!forge_check_perm ('pm', $this->ProjectGroup->getID(), 'manager')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -505,7 +505,7 @@ class ProjectTask extends Error {
 			$this->setMissingParamsError();
 			return false;
 		}
-		if (!$this->ProjectGroup->userIsAdmin()) {
+		if (!forge_check_perm ('pm', $this->ProjectGroup->getID(), 'manager')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -925,7 +925,7 @@ class ProjectTask extends Error {
 			$has_changes = true;
 		}
 
-		if (!$this->ProjectGroup->userIsAdmin()) {
+		if (!forge_check_perm ('pm', $this->ProjectGroup->getID(), 'manager')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -954,12 +954,11 @@ class ProjectTask extends Error {
 				db_rollback();
 				return false;
 			}
-			/*  do they have perms for new ArtifactType?
-			if (!$newArtifactType->userIsAdmin()) {
+			if (!forge_check_perm ('pm', $newProjectGroup->getID(), 'manager')) {
 				$this->setPermissionDeniedError();
 				db_rollback();
 				return false;
-			}*/
+			}
 			//
 			//  Now set ProjectGroup, Category, and Assigned to 100 in the new ProjectGroup
 			//

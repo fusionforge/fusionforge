@@ -568,7 +568,7 @@ class Forum extends Error {
 			}
 		}
 
-		if (!$this->userIsAdmin()) {
+		if (!forge_check_perm ('forum_admin', $this->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -610,7 +610,7 @@ class Forum extends Error {
 			$this->setMissingParamsError();
 			return false;
 		}
-		if (!$this->userIsAdmin()) {
+		if (!forge_check_perm ('forum_admin', $this->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -676,22 +676,13 @@ class Forum extends Error {
 	 *  @return boolean user_is_mod_lvl1
 	 */
 	function userIsModLvl2() {
-		if ( $this->userIsAdmin() ) {
+		if ( forge_check_perm ('forum_admin', $this->Group->getID()) ) {
 			return false;
 		} else {
 			return true;
 		}
 	}
 	
-	/**
-	 *  userIsAdmin - see if the logged-in user's perms are >= 2 or Group ForumAdmin.
-	 *
-	 *  @return boolean user_is_admin.
-	 */
-	function userIsAdmin() {
-		return forge_check_perm ('forum_admin', $this->Group->getID()) ;
-	}
-
 }
 
 // Local Variables:

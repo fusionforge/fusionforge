@@ -263,7 +263,7 @@ echo '
 	<tr class="tablecontent">
 		<td>';
 	if(db_numrows($res)>0) {
-		if ($query_type == 0 || ($query_type>0 && $ath->userIsAdmin())) {
+		if ($query_type == 0 || ($query_type>0 && forge_check_perm ('tracker', $ath->getID(), 'manager'))) {
 			$allow_update = true;
 			$checked[1] = '';
 			$checked[3] = ' checked="checked"';
@@ -293,7 +293,7 @@ echo '
 
 echo'
 <table width="100%" class="tablecontent">';
-if ($ath->userIsAdmin()) {
+if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 	$default_query = db_result(db_query_params('"SELECT query_name FROM artifact_query WHERE query_type=2 AND group_artifact_id=$1',
 						   array ($ath->getID())),
 				   0,

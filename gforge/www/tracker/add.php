@@ -58,7 +58,7 @@ $ath->header(array ('title'=>_('Submit')));
 	
 	$ath->renderExtraFields(array(),true,'none',false,'Any','',false,'UPDATE');
 
-	if ($ath->userIsAdmin()) {
+	if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 		echo '<tr>
 		<td><strong>'._('Assigned to').': <a href="javascript:help_window(\''.util_make_url ('/help/tracker.php?helpname=assignee').'\')"><strong>(?)</strong></a></strong><br />';
 		echo $ath->technicianBox ('assigned_to');

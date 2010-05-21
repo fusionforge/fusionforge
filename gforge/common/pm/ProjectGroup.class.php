@@ -388,7 +388,7 @@ class ProjectGroup extends Error {
                         return false;
                 }
 
-		if (!$this->userIsAdmin()) {
+		if (!forge_check_perm ('pm', $this->getID(), 'manager')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -421,7 +421,7 @@ class ProjectGroup extends Error {
 			$this->setMissingParamsError();
 			return false;
 		}
-		if (!$this->userIsAdmin()) {
+		if (!forge_check_perm ('pm', $this->getID(), 'manager')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -543,22 +543,6 @@ class ProjectGroup extends Error {
 
 		return true;
 	}
-
-	/*
-
-		USER PERMISSION FUNCTIONS
-
-	*/
-
-	/**
-	 *  userIsAdmin - see if the logged-in user's perms are >= 2 or Group PMAdmin.
-	 *
-	 *  @return boolean user_is_admin.
-	 */
-	function userIsAdmin() {
-		return forge_check_perm ('pm', $this->getID(), 'manager') ;
-	}
-
 }
 
 // Local Variables:

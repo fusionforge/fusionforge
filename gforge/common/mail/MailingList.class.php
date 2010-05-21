@@ -112,7 +112,7 @@ class MailingList extends Error {
 		//
 		if (!$creator_id) {
 			$creator_id=user_getid();
-			if(!$this->userIsAdmin()) {
+			if(!forge_check_perm ('project_admin', $this->Group->getID())) {
 				$this->setPermissionDeniedError();
 				return false;
 			}
@@ -230,7 +230,7 @@ Thank you for registering your project with %1$s.
 	 *	@return	boolean	success.
 	 */
 	function update($description, $isPublic = MAIL__MAILING_LIST_IS_PUBLIC, $status = 'xyzzy') {
-		if(! $this->userIsAdmin()) {
+		if(! forge_check_perm ('project_admin', $this->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -372,7 +372,7 @@ Thank you for registering your project with %1$s.
 			$this->setMissingParamsError();
 			return false;
 		}
-		if (!$this->userIsAdmin()) {
+		if (!forge_check_perm ('project_admin', $this->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -392,17 +392,6 @@ Thank you for registering your project with %1$s.
 		}
 		return true;
 		
-	}
-
-	/**
-	 * userIsAdmin - use this function to know if the user can administrate mailing lists
-	 *
-	 * This is a static method. Currently the user must be a project or a sitewide admin to administrate the mailing lists
-	 *
-	 * @return boolean true if the user can administrate mailing lists
-	 */
-	function userIsAdmin() {
-		return forge_check_perm ('project_admin', $this->Group->getID()) ;
 	}
 }
 

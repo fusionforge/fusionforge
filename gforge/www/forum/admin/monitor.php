@@ -37,9 +37,9 @@ if (!$f || !is_object($f)) {
 	exit_error('Error','Could Not Get Forum Object');
 } elseif ($f->isError()) {
 	exit_error('Error',$f->getErrorMessage());
-} elseif (!$f->userIsAdmin()) {
-	exit_permission_denied();
 }
+
+session_require_perm ('forum_admin', $f->Group->getID()) ;
 
 forum_header(array('title'=>_('Add forum')));
 

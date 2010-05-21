@@ -421,7 +421,7 @@ if ($art_arr && count($art_arr) > 0) {
 	}
 
 
-	$IS_ADMIN=$ath->userIsAdmin();
+	$IS_ADMIN = forge_check_perm ('tracker', $ath->getID(), 'manager') ;
 
 	if ($IS_ADMIN) {
 		echo '

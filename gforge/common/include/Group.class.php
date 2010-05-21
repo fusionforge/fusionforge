@@ -1365,21 +1365,6 @@ class Group extends Error {
 	}
 
 
-	/**
-	 *	userIsAdmin - Return if for this Group the User is admin.
-	 *
-	 *	@return boolean	is_admin.
-	 */
-	function userIsAdmin() {
-		$perm =& $this->getPermission ();
-		if (!$perm || !is_object($perm)) {
-			return false;
-		} elseif ($perm->isError()) {
-			return false;
-		}
-		return $perm->isAdmin();
-	}
-
 	function delete($sure,$really_sure,$really_really_sure) {
 		if (!$sure || !$really_sure || !$really_really_sure) {
 			$this->setMissingParamsError();
