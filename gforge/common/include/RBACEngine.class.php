@@ -95,6 +95,175 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 	public function isGlobalActionAllowedForUser ($user, $section, $action = NULL) {
 		return $this->isActionAllowedForUser ($user, $section, -1, $action) ;
 	}
+
+	public function getRolesByAllowedAction ($section, $reference, $action = NULL) {
+		$ids = $this->_getRolesIdByAllowedAction ($section, $reference, $action) ;
+		$roles = array () ;
+		foreach ($ids as $role_id) {
+			$roles[] = $this->getRoleById ($role_id) ;
+		}
+
+		return $roles ;
+	}
+
+	private function _getRolesIdByAllowedAction ($section, $reference, $action = NULL) {
+		$result = array () ;
+		$qpa = db_construct_qpa () ;
+		$qpa = db_construct_qpa ($qpa,
+					 'SELECT role_id FROM pfo_role_setting WHERE section_name=$1 AND ref_id=$2 ',
+					 array ($section,
+						$reference)) ;
+
+		// Look for roles that are directly allowed to perform action
+
+		switch ($section) {
+		case 'forge_admin':
+		case 'forge_read':
+		case 'approve_projects':
+		case 'approve_news':
+		case 'project_admin':
+		case 'project_read':
+		case 'tracker_admin':
+		case 'pm_admin':
+		case 'forum_admin':
+			$qpa = db_construct_qpa ($qpa, 'AND perm_val = 1') ;
+			break ;
+		case 'forge_stats':
+			switch ($action) {
+			case 'read':
+				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 1') ;
+				break ;
+			case 'admin':
+				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 2') ;
+				break ;
+			}
+			break ;
+		case 'scm':
+			switch ($action) {
+			case 'read':
+				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 1') ;
+				break ;
+			case 'write':
+				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 2') ;
+				break ;
+			}
+			break ;
+		case 'docman':
+			switch ($action) {
+			case 'read':
+				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 1') ;
+				break ;
+			case 'submit':
+				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 2') ;
+				break ;
+			case 'approve':
+				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 3') ;
+				break ;
+			case 'admin':
+				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 4') ;
+				break ;
+			}
+			break ;
+		case 'frs':
+			switch ($action) {
+			case 'read_public':
+				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 1') ;
+				break ;
+			case 'read_private':
+				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 2') ;
+				break ;
+			case 'write':
+				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 3') ;
+				break ;
+			}
+			break ;
+		case 'forum':
+			switch ($action) {
+			case 'read':
+				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 1') ;
+				break ;
+			case 'post':
+				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 2') ;
+				break ;
+			case 'unmoderated_post':
+				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 3') ;
+				break ;
+			case 'moderate':
+				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 4') ;
+				break ;
+			}
+			break ;
+		case 'tracker':
+		case 'pm':
+			switch ($action) {
+			case 'read':
+				$qpa = db_construct_qpa ($qpa, 'AND (perm_val & 1) = 1') ;
+				break ;
+			case 'tech':
+				$qpa = db_construct_qpa ($qpa, 'AND (perm_val & 1) = 2') ;
+				break ;
+			case 'manager':
+				$qpa = db_construct_qpa ($qpa, 'AND (perm_val & 1) = 4') ;
+				break ;
+			}
+			break ;
+		}
+
+		$res = db_query_qpa ($qpa) ;
+		if (!$res) {
+			$this->setError('RBACEngine::getRodesByAllowedAction()::'.db_error());
+			return false;
+		}
+		while ($arr =& db_fetch_array($res)) {
+			$result[] = $arr['role_id'] ;
+		}
+
+		// Also look for roles that can perform the action because they're more powerful
+
+		switch ($section) {
+		case 'forge_read':
+		case 'approve_projects':
+		case 'approve_news':
+		case 'forge_stats':
+		case 'project_admin':
+			$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('forge_admin', -1)) ;
+			break ;
+		case 'project_read':
+		case 'tracker_admin':
+		case 'pm_admin':
+		case 'forum_admin':
+		case 'scm':
+		case 'docman':
+		case 'frs':
+			$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('project_admin', $reference)) ;
+			break ;
+		case 'tracker':
+			$t = artifactType_get_object ($reference) ;
+			$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('tracker_admin', $t->Group->getID())) ;
+			break ;			
+		case 'pm':
+			$t = projectgroup_get_object ($reference) ;
+			$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('tracker_admin', $t->Group->getID())) ;
+			break ;			
+		case 'forum':
+			$t = forum_get_object ($reference) ;
+			$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('forum_admin', $t->Group->getID())) ;
+			break ;			
+		case 'new_tracker':
+			$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('tracker_admin', $reference)) ;
+			break ;			
+		case 'new_pm':
+			$t = projectgroup_get_object ($reference) ;
+			$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('tracker_admin', $reference)) ;
+			break ;			
+		case 'new_forum':
+			$t = forum_get_object ($reference) ;
+			$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('forum_admin', $reference)) ;
+			break ;			
+		}
+
+		return array_unique ($result) ;
+	}
 }
 
 function forge_check_perm ($section, $reference, $action = NULL) {
