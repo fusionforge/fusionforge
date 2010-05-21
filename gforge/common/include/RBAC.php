@@ -554,6 +554,58 @@ abstract class BaseRole extends Error {
 		}
 	}
 
+	/**
+	 *	getVal - get a value out of the array of settings for this role.
+	 *
+	 *	@param	string	The name of the role.
+	 *	@param	integer	The ref_id (ex: group_artifact_id, group_forum_id) for this item.
+	 *	@return integer	The value of this item.
+	 */
+	function getVal($section,$ref_id) {
+		global $role_default_array;
+		if (!$ref_id) {
+			$ref_id=0;
+		}
+		if (USE_PFO_RBAC) {
+			return $this->getSetting ($section, $ref_id) ;
+		} else {
+			if (array_key_exists ($section, $this->setting_array)) {
+				return $this->setting_array[$section][$ref_id];
+			} else {
+				return 0 ;
+			}
+		}
+	}
+
+	function setVal($section, $ref_id, $value) {
+		$this->setting_array[$section][$ref_id] = $value;
+		return $this->update( $this->getName(), $this->setting_array);
+	}
+
+	/**
+	 *  &getRoleVals - get all the values and language text strings for this section.
+	 *
+	 *  @return array	Assoc array of values for this section.
+	 */
+	function &getRoleVals($section) {
+		global $role_vals, $rbac_permission_names;
+		setup_rbac_strings () ;
+
+		//
+		//	Optimization - save array so it is only built once per page view
+		//
+		if (!isset($role_vals[$section])) {
+
+			for ($i=0; $i<count($this->role_values[$section]); $i++) {
+				//
+				//	Build an associative array of these key values + localized description
+				//
+				$role_vals[$section][$this->role_values[$section][$i]]=$rbac_permission_names["$section".$this->role_values[$section][$i]];
+			}
+		}
+		return $role_vals[$section];
+	}
+
         function hasPermission($section, $reference, $action = NULL) {
 		$result = false ;
 		
@@ -676,6 +728,232 @@ abstract class BaseRole extends Error {
 			break ;
 		}
 	}
+
+	/**
+	 *	update - update a new in the database.
+	 *
+	 *	@param	string	The name of the role.
+	 *	@param	array	A multi-dimensional array of data in this format: $data['section_name']['ref_id']=$val
+	 *	@return	boolean	True on success or false on failure.
+	 */
+	function update($role_name,$data) {
+		global $SYS;
+		//
+		//	Cannot update role_id=1
+		//
+		if ($this->getID() == 1 && !USE_PFO_RBAC) {
+			$this->setError('Cannot Update Default Role');
+			return false;
+		}
+		if (!USE_PFO_RBAC) {
+			$perm =& $this->Group->getPermission ();
+			if (!$perm || !is_object($perm) || $perm->isError() || !$perm->isAdmin()) {
+				$this->setPermissionDeniedError();
+				return false;
+			}
+		}
+
+		db_begin();
+
+
+		if (USE_PFO_RBAC) {
+			if ($role_name != $this->getName()) {
+				$this->setName($role_name) ;
+			}
+
+			foreach ($data as $sect => $refs) {
+				foreach ($refs as $refid => $value) {
+					$this->setSetting ($sect, $refid, $value) ;
+				}
+			}
+		} else {
+			if (! $this->setName($role_name)) {
+				db_rollback();
+				return false;
+			}
+
+		// Delete extra settings
+		db_query_params ('DELETE FROM role_setting WHERE role_id=$1 AND section_name <> ALL ($2)',
+				 array ($this->getID(),
+					db_string_array_to_any_clause (array_keys ($this->role_values)))) ;
+		db_query_params ('DELETE FROM role_setting WHERE role_id=$1 AND section_name = $2 AND ref_id <> ALL ($3)',
+				 array ($this->getID(),
+					'tracker',
+					db_int_array_to_any_clause (array_keys ($data['tracker'])))) ;
+		db_query_params ('DELETE FROM role_setting WHERE role_id=$1 AND section_name = $2 AND ref_id <> ALL ($3)',
+				 array ($this->getID(),
+					'forum',
+					db_int_array_to_any_clause (array_keys ($data['forum'])))) ;
+		db_query_params ('DELETE FROM role_setting WHERE role_id=$1 AND section_name = $2 AND ref_id <> ALL ($3)',
+				 array ($this->getID(),
+					'pm',
+					db_int_array_to_any_clause (array_keys ($data['pm'])))) ;
+		
+
+
+
+
+
+
+
+
+
+////$data['section_name']['ref_id']=$val
+		$arr1 = array_keys($data);
+		for ($i=0; $i<count($arr1); $i++) {	
+		//	array_values($Report->adjust_days)
+			$arr2 = array_keys($data[$arr1[$i]]);
+			for ($j=0; $j<count($arr2); $j++) {
+				$usection_name=$arr1[$i];
+				$uref_id=$arr2[$j];
+				$uvalue=$data[$usection_name][$uref_id];
+				if (!$uref_id) {
+					$uref_id=0;
+				}
+				if (!$uvalue) {
+					$uvalue=0;
+				}
+				//
+				//	See if this setting changed. If so, then update it
+				//
+//				if ($this->getVal($usection_name,$uref_id) != $uvalue) {
+					$res = db_query_params ('UPDATE role_setting SET value=$1 WHERE role_id=$2 AND section_name=$3 AND ref_id=$4',
+								array ($uvalue,
+								       $this->getID(),
+								       $usection_name,
+								       $uref_id)) ;
+					if (!$res || db_affected_rows($res) < 1) {
+						$res = db_query_params ('INSERT INTO role_setting (role_id, section_name, ref_id, value) VALUES ($1, $2, $3, $4)',
+									array ($this->getID(),
+									       $usection_name,
+									       $uref_id,
+									       $uvalue)) ;
+						if (!$res) {
+							$this->setError('update::rolesettinginsert::'.db_error());
+							db_rollback();
+							return false;
+						}
+					}
+					if ($usection_name == 'frs') {
+						$update_usergroup=true;
+					} elseif ($usection_name == 'scm') {
+						//$update_usergroup=true;
+
+						//iterate all users with this role
+						$res = db_query_params ('SELECT user_id	FROM user_group WHERE role_id=$1',
+									array ($this->getID())) ;
+						for ($z=0; $z<db_numrows($res); $z++) {
+
+							//TODO - Shell should be separate flag
+							//  If user acquired admin access to CVS,
+							//  one to be given normal shell on CVS machine,
+							//  else - restricted.
+							//
+							$cvs_flags=$data['scm'][0];
+							$res2 = db_query_params ('UPDATE user_group SET cvs_flags=$1 WHERE user_id=$2',
+										 array ($cvs_flags,
+											db_result($res,$z,'user_id')));
+							if (!$res2) {
+								$this->setError('update::scm::'.db_error());
+								db_rollback();
+								return false;
+							}
+							// I have doubt the following is usefull
+							// This is probably buggy if used
+							if ($cvs_flags>1) {
+								if (!$SYS->sysUserSetAttribute(db_result($res,$z,'user_id'),"debGforgeCvsShell","/bin/bash")) {
+									$this->setError($SYS->getErrorMessage());
+									db_rollback();
+									return false;
+								}
+							} else {
+								if (!$SYS->sysUserSetAttribute(db_result($res,$z,'user_id'),"debGforgeCvsShell","/bin/cvssh")) {
+									$this->setError($SYS->getErrorMessage());
+									db_rollback();
+									return false;
+								}
+							}
+
+							//
+							//  If user acquired at least commit access to CVS,
+							//  one to be promoted to CVS group, else, demoted.
+							//
+							if ($uvalue>0) {
+								if (!$SYS->sysGroupAddUser($this->Group->getID(),db_result($res,$z,'user_id'),1)) {
+									$this->setError($SYS->getErrorMessage());
+									db_rollback();
+									return false;
+								}
+							} else {
+								if (!$SYS->sysGroupRemoveUser($this->Group->getID(),db_result($res,$z,'user_id'),1)) {
+									$this->setError($SYS->getErrorMessage());
+									db_rollback();
+									return false;
+								}
+							}
+
+
+						}
+					} elseif ($usection_name == 'docman') {
+						$update_usergroup=true;
+					} elseif ($usection_name == 'forumadmin') {
+						$update_usergroup=true;
+					} elseif ($usection_name == 'trackeradmin') {
+						$update_usergroup=true;
+					} elseif ($usection_name == 'projectadmin') {
+						$update_usergroup=true;
+					} elseif ($usection_name == 'pmadmin') {
+						$update_usergroup=true;
+					}
+	//			}
+			}
+		}
+//		if ($update_usergroup) {
+			$keys = array ('forumadmin', 'pmadmin', 'trackeradmin', 'docman', 'scm', 'frs', 'projectadmin') ;
+			foreach ($keys as $k) {
+				if (!array_key_exists ($k, $data)) {
+					$data[$k] = array(0);
+				}
+			}
+			$res = db_query_params ('UPDATE user_group
+                               SET admin_flags=$1,
+   				   forum_flags=$2,
+   				   project_flags=$3,
+   				   doc_flags=$4,
+   				   cvs_flags=$5,
+   				   release_flags=$6,
+   				   artifact_flags=$7
+   				WHERE role_id=$8',
+   						array ($data['projectadmin'][0],
+						       $data['forumadmin'][0],
+						       $data['pmadmin'][0],
+						       $data['docman'][0],
+						       $data['scm'][0],
+						       $data['frs'][0],
+						       $data['trackeradmin'][0],
+						       $this->getID())) ;
+			if (!$res) {
+				$this->setError('::update::usergroup::'.db_error());
+				db_rollback();
+				return false;
+			}
+
+//		}
+
+		} // USE_PFO_RBAC
+
+		$hook_params = array ();
+		$hook_params['role'] =& $this;
+		$hook_params['role_id'] = $this->getID();
+		$hook_params['data'] = $data;
+		plugin_hook ("role_update", $hook_params);
+
+
+		db_commit();
+		$this->fetchData($this->getID());
+		return true;
+	}
+
 }
 
 // Actual classes
