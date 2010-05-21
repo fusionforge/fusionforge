@@ -29,7 +29,7 @@ define ('USE_PFO_RBAC', false) ;
 
 // Code shared between classes
 
-abstract class BaseRole extends Error implements PFO_Role {
+abstract class BaseRole extends Error {
 	public function getUsers() {
 		throw new Exception ("Not implemented") ;
 	}
@@ -359,7 +359,6 @@ abstract class BaseRole extends Error implements PFO_Role {
 			break ;
 		}
 	}
-
 }
 
 class SingletonRole extends BaseRole {
