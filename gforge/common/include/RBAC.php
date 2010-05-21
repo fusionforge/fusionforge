@@ -223,7 +223,7 @@ abstract class BaseRole extends Error {
 	}
 
 	public function getUsers() {
-		throw new Exception ("Not implemented") ;
+		return array () ;
 	}
 	public function hasUser($user) {
 		throw new Exception ("Not implemented") ;
