@@ -4441,6 +4441,7 @@ plugins/coclico/soapadmin/www/coreapi/coreapi.php -text
 plugins/coclico/soapadmin/www/coreapi/coreapiobjects.php -text
 plugins/coclico/soapadmin/www/coreapi/coreapiservice.php -text
 plugins/coclico/soapadmin/www/index.php -text
+plugins/coclico/soapadmin/www/log4php.properties -text
 plugins/templates/createplugin.sh -text
 plugins/templates/helloworld/bin/db-delete.pl -text
 plugins/templates/helloworld/bin/db-upgrade.pl -text
