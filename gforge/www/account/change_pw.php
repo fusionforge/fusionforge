@@ -25,7 +25,7 @@ require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once $gfcommon.'include/account.php';
 
-session_require(array('isloggedin'=>1));
+session_require_login () ;
 
 $u =& user_get_object(user_getid());
 if (!$u || !is_object($u)) {

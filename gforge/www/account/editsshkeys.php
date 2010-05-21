@@ -50,7 +50,8 @@ function checkKeys($keys) {
 	}
 }
 
-session_require(array('isloggedin'=>1));
+session_require_login () ;
+
 $u =& user_get_object(user_getid());
 if (!$u || !is_object($u)) {
 	exit_error('Error','Could Not Get User');

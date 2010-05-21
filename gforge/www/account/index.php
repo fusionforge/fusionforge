@@ -27,7 +27,7 @@ require_once $gfcommon.'include/timezones.php';
 
 $feedback = '';
 
-session_require(array('isloggedin'=>'1'));
+session_require_login () ;
 
 // get global users vars
 $u =& user_get_object(user_getid());

@@ -24,8 +24,7 @@
 require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
 
-session_require(array('isloggedin'=>1));
-
+session_require_login () ;
 
 if (getStringFromRequest('submit')) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {

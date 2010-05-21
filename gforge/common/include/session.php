@@ -401,7 +401,7 @@ function session_require_perm ($section, $reference, $action = NULL, $reason='')
 }
 
 /**
- *	session_require_perm() - Convenience function to easily enforce permissions
+ *	session_require_global_perm() - Convenience function to easily enforce permissions
  *
  *	Calling page will terminate with error message if current user
  *	fails checks.
@@ -411,6 +411,19 @@ function session_require_global_perm ($section, $action = NULL, $reason='') {
 	if (!forge_check_global_perm ($section, $action)) {
 		exit_permission_denied ($reason);
 	}		
+}
+
+/**
+ *	session_require_login() - Convenience function to easily enforce permissions
+ *
+ *	Calling page will terminate with error message if current user
+ *	fails checks.
+ *
+ */
+function session_require_login () {
+	if (!session_loggedin()) {
+		exit_not_logged_in () ;
+	}
 }
 
 /**
