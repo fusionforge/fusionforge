@@ -37,6 +37,8 @@ if (!$g || !is_object($g)) {
 	exit_error('Error',$g->getErrorMessage());	
 }
 
+session_require_perm ('docman', $group_id, 'submit')) {
+
 $upload_dir = forge_get_config('ftp_upload_dir') . "/" . $g->getUnixName();
 
 if (getStringFromRequest('submit')) {
@@ -110,12 +112,11 @@ if (getStringFromRequest('submit')) {
 			setcookie ("gforgecurrentdocdata", "", time() - 3600);
 		}
 		// check if the user is docman's admin
-                $perm =& $g->getPermission ();
-                if (!$perm || $perm->isError() || !$perm->isDocEditor()) {
-			Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='._('Document submitted sucessfully : pending state (need validation)')));
+		if (forge_check_perm ('docman', $group_id, 'approve')) {
+			Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='._('Document submitted sucessfully')));
                         exit;
                 } else {
-			Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='._('Document submitted sucessfully')));
+			Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='._('Document submitted sucessfully : pending state (need validation)')));
 			exit;
 		}
 	}

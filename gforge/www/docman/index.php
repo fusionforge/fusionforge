@@ -99,11 +99,10 @@ if (!$language_id) {
 }
 
 // check if the user is docman's admin
-$perm =& $g->getPermission ();
-if (!$perm || $perm->isError() || !$perm->isDocEditor()) {
-	$is_editor = false;
-} else {
+if (forge_check_perm ('docman', $group_id, 'approve')) {
 	$is_editor = true;
+} else {
+	$is_editor = false;
 }
 
 $df->setLanguageID($language_id);

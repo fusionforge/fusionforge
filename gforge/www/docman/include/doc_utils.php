@@ -79,12 +79,9 @@ function docman_header($title,$pagehead,$style='xyz') {
 	$menu_links[]='/docman/search.php?group_id='.$group_id;
 	
 
-	if (session_loggedin()) {
-		$perm =& $project->getPermission ();
-		if ($perm && is_object($perm) && !$perm->isError() && $perm->isDocEditor()) {
-			$menu_text[]=_('Admin');
-			$menu_links[]='/docman/admin/index.php?group_id='.$group_id;
-		}
+	if (forge_check_perm ('docman', $group_id, 'approve')) {
+		$menu_text[]=_('Admin');
+		$menu_links[]='/docman/admin/index.php?group_id='.$group_id;
 	}
 	echo $HTML->subMenu(
 		$menu_text,
