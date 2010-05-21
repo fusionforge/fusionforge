@@ -26,8 +26,10 @@ CREATE TABLE pfo_role (
        CONSTRAINT pfo_role_name_unique UNIQUE (role_id, role_name)
 ) ;
 
-INSERT INTO pfo_role (role_name, role_class, is_public) VALUES ('Anonymous', '2', true) ;
-INSERT INTO pfo_role (role_name, role_class, is_public) VALUES ('LoggedIn', '3', true) ;
+INSERT INTO pfo_role (role_id, role_name, role_class, is_public) VALUES (1, 'Anonymous', '2', true) ;
+INSERT INTO pfo_role (role_id, role_name, role_class, is_public) VALUES (2, 'LoggedIn', '3', true) ;
+
+SELECT setval ('pfo_role_seq', 2) ;
 
 CREATE TABLE role_project_refs (
        role_id integer DEFAULT 0 NOT NULL REFERENCES pfo_role,
