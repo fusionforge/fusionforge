@@ -121,7 +121,6 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 					    'webcal'=>'2')
 		);
 
-
 	/**
 	 *  Role($group,$id) - CONSTRUCTOR.
 	 *
@@ -229,6 +228,63 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 			return false;
 		}
 		return true;
+	}
+
+	function getHomeProject () {
+		return $this->Group ;
+	}
+
+	function getLinkedProjects () {
+		$res = db_query_params('SELECT group_id FROM role_project_refs WHERE role_id=$1',
+				       array ($this->getID()));
+		
+		$result = array (return $this->Group) ;
+		
+		while ($arr =& db_fetch_array($res)) {
+			$result[] = group_get_object ($arr['group_id']) ;
+		}
+		return $result ;
+	}
+
+	function linkProject ($project) {
+		if ($project->getID() == $this->getHomeProject()->getID()) {
+			$this->setError ("Can't link to home project") ;
+			return false ;
+		}
+
+		$res = db_query_params('SELECT group_id FROM role_project_refs WHERE role_id=$1 AND group_id=$2',
+				       array ($this->getID(),
+					      $project->getID()));
+
+		if (db_numrows($res)) {
+			return true ;
+		}
+		$res = db_query_params('INSERT INTO role_project_refs (role_id, group_id) VALUES ($1, $2)',
+				       array ($this->getID(),
+					      $project->getID()));
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setError('linkProject('.$project->getID().') '.db_error());
+			return false;
+		}
+
+		return true ;
+	}
+
+	function unlinkProject ($project) {
+		if ($project->getID() == $this->getHomeProject()->getID()) {
+			$this->setError ("Can't unlink from home project") ;
+			return false ;
+		}
+
+		$res = db_query_params('DELETE FROM role_project_refs WHERE role_id=$1 AND group_id=$2',
+				       array ($this->getID(),
+					      $project->getID()));
+		if (!$res) {
+			$this->setError('unlinkProject('.$project->getID().') '.db_error());
+			return false;
+		}
+
+		return true ;
 	}
 
 	/**

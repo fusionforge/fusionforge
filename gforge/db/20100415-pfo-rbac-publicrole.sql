@@ -3,5 +3,6 @@ ALTER TABLE role ALTER COLUMN group_id DROP NOT NULL ;
 
 CREATE TABLE role_project_refs (
        role_id integer DEFAULT 0 NOT NULL REFERENCES role,
-       group_id integer DEFAULT 0 NOT NULL REFERENCES groups
+       group_id integer DEFAULT 0 NOT NULL REFERENCES groups,
+       CONSTRAINT role_project_refs_unique UNIQUE (role_id, group_id)
 ) ;
