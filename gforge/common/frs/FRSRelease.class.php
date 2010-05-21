@@ -129,9 +129,7 @@ class FRSRelease extends Error {
 			$preformatted = 0;
 		}
 
-		$perm =& $this->FRSPackage->Group->getPermission ();
-
-		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
+		if (!forge_check_perm ('frs', $this->FRSPackage->Group->getID(), 'write')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -360,9 +358,7 @@ notified in the future, please login to %7$s and click this link:
 			$this->setMissingParamsError();
 			return false;
 		}
-		$perm =& $this->FRSPackage->Group->getPermission ();
-
-		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
+		if (!forge_check_perm ('frs', $this->FRSPackage->Group->getID(), 'write')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -408,9 +404,7 @@ notified in the future, please login to %7$s and click this link:
 			return false;
 		}
 		
-		$perm =& $this->FRSPackage->Group->getPermission ();
-
-		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
+		if (!forge_check_perm ('frs', $this->FRSPackage->Group->getID(), 'write')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}

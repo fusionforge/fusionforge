@@ -139,9 +139,7 @@ class FRSPackage extends Error {
 		if (!util_is_valid_filename($name)) {
 			$this->setError(_('FRSPackage::Update: Package Name can only be alphanumeric or "-" "_" "+" "." "~"'));
 		}
-		$perm =& $this->Group->getPermission ();
-
-		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
+		if (!forge_check_perm ('frs', $this->Group->getID(), 'write')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -370,9 +368,7 @@ class FRSPackage extends Error {
 			return false;
 		}
 
-		$perm =& $this->Group->getPermission ();
-
-		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
+		if (!forge_check_perm ('frs', $this->Group->getID(), 'write')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}		
@@ -453,9 +449,7 @@ class FRSPackage extends Error {
 			$this->setMissingParamsError();
 			return false;
 		}
-		$perm =& $this->Group->getPermission ();
-
-		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
+		if (!forge_check_perm ('frs', $this->Group->getID(), 'write')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
