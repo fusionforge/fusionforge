@@ -481,10 +481,12 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 					$newsection = $oldsection ;
 				}
 
-				foreach ($t as $reference => $oldvalue) {
+				foreach ($t as $oldreference => $oldvalue) {
 					$newvalue = 0 ;
+					$newreference = $oldreference ;
 					switch ($newsection) {
 					case 'project_admin':
+						$newreference = $this->Group->getID() ;
 						switch ($oldvalue) {
 						case '0': $newvalue = 0 ; break ;
 						case 'A': $newvalue = 1 ; break ;
@@ -494,6 +496,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 					case 'tracker_admin':
 					case 'pm_admin':
 					case 'forum_admin':
+						$newreference = $this->Group->getID() ;
 						switch ($oldvalue) {
 						case '0': $newvalue = 0 ; break ;
 						case '2': $newvalue = 1 ; break ;
@@ -511,11 +514,37 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 						}
 					break ;
 
+					case 'docman':
+						$newreference = $this->Group->getID() ;
+						switch ($oldvalue) {
+						case '0': $newvalue = 1 ; break ;
+						case '1': $newvalue = 4 ; break ;
+						}
+						break ;
+
+					case 'frs':
+						$newreference = $this->Group->getID() ;
+						switch ($oldvalue) {
+						case '0': $newvalue = 1 ; break ;
+						case '1': $newvalue = 3 ; break ;
+						}
+						break ;
+
+					case 'scm':
+						$newreference = $this->Group->getID() ;
+						switch ($oldvalue) {
+						case '-1': $newvalue = 0 ; break ;
+						case '0': $newvalue = 1 ; break ;
+						case '1': $newvalue = 2 ; break ;
+						}
+						break ;
+
 					default:
 						$newvalue = $oldvalue ;
+						$newreference = $oldreference ;
 					}
 
-					$this->perms_array[$newsection][$reference] = $newvalue ;
+					$this->perms_array[$newsection][$newreference] = $newvalue ;
 				}
 			}
 		}
