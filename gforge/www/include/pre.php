@@ -78,8 +78,10 @@ if (!$GLOBALS['gfconn']) {
 	exit;
 }
 
-// Security library
+// Authentication and access control
 require_once $gfcommon.'include/session.php';
+require_once $gfcommon.'include/RBACEngine.class.php';
+
 
 // System library
 require_once $gfcommon.'include/System.class.php';
