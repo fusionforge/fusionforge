@@ -54,6 +54,9 @@ DECLARE
 	nref integer := 0 ;
 	nval integer := 0 ;
 	opid integer := 0 ;
+	agl artifact_group_list%ROWTYPE ;
+	pgl project_group_list%ROWTYPE ;
+	fgl forum_group_list%ROWTYPE ;
 BEGIN
 	FOR r IN SELECT * FROM role
 	LOOP
@@ -89,8 +92,9 @@ BEGIN
 		nval = pfo_rbac_permissions_from_old (r.role_id, nsec, nref) ;
 		PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
 		nsec = 'tracker' ;
-		FOR nref IN SELECT group_artifact_id FROM artifact_group_list WHERE group_id = opid
+		FOR agl IN SELECT * FROM artifact_group_list WHERE group_id = opid
 		LOOP
+			nref = agl.group_artifact_id
 			nval = pfo_rbac_permissions_from_old (r.role_id, nsec, nref) ;
 			PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
 		END LOOP ;
@@ -104,8 +108,9 @@ BEGIN
 		nval = pfo_rbac_permissions_from_old (r.role_id, nsec, nref) ;
 		PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
 		nsec = 'pm' ;
-		FOR nref IN SELECT group_project_id FROM project_group_list WHERE group_id = opid
+		FOR pgl IN SELECT * FROM project_group_list WHERE group_id = opid
 		LOOP
+			nref = pgl.group_project_id
 			nval = pfo_rbac_permissions_from_old (r.role_id, nsec, nref) ;
 			PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
 		END LOOP ;
@@ -119,8 +124,9 @@ BEGIN
 		nval = pfo_rbac_permissions_from_old (r.role_id, nsec, nref) ;
 		PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
 		nsec = 'forum' ;
-		FOR nref IN SELECT group_forum_id FROM forum_group_list WHERE group_id = opid
+		FOR fgl IN SELECT * FROM forum_group_list WHERE group_id = opid
 		LOOP
+			nref = fgl.group_forum_id
 			nval = pfo_rbac_permissions_from_old (r.role_id, nsec, nref) ;
 			PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
 		END LOOP ;
