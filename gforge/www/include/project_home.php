@@ -92,9 +92,7 @@ if ($GLOBALS['sys_use_project_tags']) {
 		print '<p>' . _('Tags').':&nbsp;'. $list_tag . '</p>';
 	}
 	else {
-		$project =& group_get_object($group_id);
-		$perm =& $project->getPermission ();
-		if ($perm->isAdmin()) {
+		if (forge_check_perm ('project_admin', $group_id)) {
 			print '<p><a href="/project/admin/editgroupinfo.php?group_id=' . $group_id . '" >' . _('No tag defined for this project') . '</a>.</p>';
 		}
 		else {
