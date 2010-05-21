@@ -388,6 +388,32 @@ function session_require($req, $reason='') {
 }
 
 /**
+ *	session_require_perm() - Convenience function to easily enforce permissions
+ *
+ *	Calling page will terminate with error message if current user
+ *	fails checks.
+ *
+ */
+function session_require_perm ($section, $reference, $action = NULL, $reason='') {
+	if (!forge_check_perm ($section, $reference, $action)) {
+		exit_permission_denied ($reason);
+	}		
+}
+
+/**
+ *	session_require_perm() - Convenience function to easily enforce permissions
+ *
+ *	Calling page will terminate with error message if current user
+ *	fails checks.
+ *
+ */
+function session_require_global_perm ($section, $action = NULL, $reason='') {
+	if (!forge_check_global_perm ($section, $action)) {
+		exit_permission_denied ($reason);
+	}		
+}
+
+/**
  *	session_set_new() - Setup session for the given user
  *
  *	This function sets up SourceForge session for the given user,
