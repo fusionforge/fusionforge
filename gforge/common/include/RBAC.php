@@ -448,8 +448,8 @@ abstract class BaseRole extends Error {
 		return $result ;
 	}
 
-        function hasPermission($section, $reference, $action = NULL) {
-		$result = false ;
+        function getSetting($section, $reference) {
+		$result = 0 ;
                 if (isset ($this->perms_array[$section][$reference])) {
 			$value = $this->perms_array[$section][$reference] ;
 		} else {
@@ -460,103 +460,180 @@ abstract class BaseRole extends Error {
 		
 		switch ($section) {
 		case 'forge_admin':
-			if ($value == 1) {
-				return true ;
-			}
+			return $value ;
 			break ;
 			
 		case 'forge_read':
 		case 'approve_projects':
 		case 'approve_news':
-			if (($value == 1)
-			    || $this->hasGlobalPermission('forge_admin')) {
-				return true ;
+			if ($this->hasGlobalPermission('forge_admin')) {
+				return 1 ;
 			}
-		break ;
+			return $value ;
+			break ;
 		
 		case 'forge_stats':
-			switch ($action) {
-			case 'read':
-				$min = 1 ;
-				break ;
-			case 'admin':
-				$min = 2 ;
-				break ;
+			if ($this->hasGlobalPermission('forge_admin')) {
+				return 2 ;
 			}
-			if (($value >= $min)
-			    || $this->hasGlobalPermission('forge_admin')) {
-				return true ;
-			}
-		break ;
+			return $value ;
+			break ;
 		
 		case 'project_admin':
-			if (($value == 1)
-			    || $this->hasGlobalPermission('forge_admin')) {
-				return true ;
+			if ($this->hasGlobalPermission('forge_admin')) {
+				return 1 ;
 			}
+			return $value ;
 			break ;
 			
 		case 'project_read':
 		case 'tracker_admin':
 		case 'pm_admin':
 		case 'forum_admin':
-			if (($value == 1)
-			    || $this->hasPermission ('project_admin', $reference)) {
-				return true ;
+			if ($this->hasPermission('project_admin', $reference)) {
+				return 1 ;
 			}
-		break ;
+			return $value ;
+			break ;
 		
+		case 'scm':
+			if ($this->hasPermission('project_admin', $reference)) {
+				return 2 ;
+			}
+			return $value ;
+			break ;
+			
+		case 'docman':
+			if ($this->hasPermission('project_admin', $reference)) {
+				return 4 ;
+			}
+			return $value ;
+			break ;
+			
+		case 'frs':
+			if ($this->hasPermission('project_admin', $reference)) {
+				return 3 ;
+			}
+			return $value ;
+			break ;
+			
+		case 'forum':
+			$o = forum_get_object ($reference) ;
+			if ($o && !$o->isError()
+			    $this->hasPermission('forum_admin', $o->Group->getID())) {
+				return 4 ;
+			}
+			return $value ;
+			break ;
+		case 'new_forum':
+			if ($this->hasPermission('forum_admin', $reference)) {
+				return 4 ;
+			}
+			return $value ;
+			break ;
+			
+		case 'tracker':
+			$o = artifactType_get_object ($reference) ;
+			if ($o && !$o->isError()
+			    $this->hasPermission('tracker_admin', $o->Group->getID())) {
+				return 7 ;
+			}
+			return $value ;
+			break ;
+		case 'new_tracker':
+			if ($this->hasPermission('tracker_admin', $reference)) {
+				return 7 ;
+			}
+			return $value ;
+			break ;
+
+		case 'pm':
+			$o = projectgroup_get_object ($reference) ;
+			if ($o && !$o->isError()
+			    && $this->hasPermission('pm_admin', $o->Group->getID())) {
+				return 7 ;
+			}
+			return $value ;
+			break ;
+		case 'new_pm':
+			if ($this->hasPermission('pm_admin', $reference)) {
+				return 7 ;
+			}
+			return $value ;
+			break ;
+		}
+	}
+
+        function hasPermission($section, $reference, $action = NULL) {
+		$result = false ;
+		
+		$value = $this->getSetting ($section, $reference) ;
+		$min = PHP_INT_MAX ;
+		$mask = 0 ;
+		
+		switch ($section) {
+		case 'forge_admin':
+		case 'forge_read':
+		case 'approve_projects':
+		case 'approve_news':
+		case 'project_admin':
+		case 'project_read':
+		case 'tracker_admin':
+		case 'pm_admin':
+		case 'forum_admin':
+			return ($value >= 1) ;
+			break ;
+		
+		case 'forge_stats':
+			switch ($action) {
+			case 'read':
+				return ($value >= 1) ;
+				break ;
+			case 'admin':
+				return ($value >= 2) ;
+				break ;
+			}
+			break ;
+			
 		case 'scm':
 			switch ($action) {
 			case 'read':
-				$min = 1 ;
+				return ($value >= 1) ;
 				break ;
 			case 'write':
-				$min = 2 ;
+				return ($value >= 2) ;
 				break ;
-			}
-			if (($value >= $min)
-			    || $this->hasPermission ('project_admin', $reference)) {
-				return true ;
 			}
 			break ;
 			
 		case 'docman':
 			switch ($action) {
 			case 'read':
-				$min = 1 ;
+				return ($value >= 1) ;
 				break ;
 			case 'submit':
-				$min = 2 ;
+				return ($value >= 2) ;
 				break ;
 			case 'approve':
-				$min = 3 ;
+				return ($value >= 3) ;
 				break ;
 			case 'admin':
-				$min = 4 ;
+				return ($value >= 4) ;
 				break ;
-			}
-			if (($value >= $min)
-			    || $this->hasPermission ('project_admin', $reference)) {
-				return true ;
 			}
 			break ;
 			
 		case 'frs':
 			switch ($action) {
 			case 'read_public':
-				$min = 1 ;
+				return ($value >= 1) ;
 				break ;
 			case 'read_private':
-				$min = 2 ;
+				return ($value >= 2) ;
 				break ;
 			case 'write':
-				$min = 3 ;
+				return ($value >= 3) ;
 				break ;
-			}
-			if (($value >= $min)
-			    || $this->hasPermission ('project_admin', $reference)) {
-				return true ;
 			}
 			break ;
 			
@@ -564,21 +641,17 @@ abstract class BaseRole extends Error {
 		case 'new_forum':
 			switch ($action) {
 			case 'read':
-				$min = 1 ;
+				return ($value >= 1) ;
 				break ;
 			case 'post':
-				$min = 2 ;
+				return ($value >= 2) ;
 				break ;
 			case 'unmoderated_post':
-				$min = 3 ;
+				return ($value >= 3) ;
 				break ;
 			case 'moderate':
-				$min = 4 ;
+				return ($value >= 4) ;
 				break ;
-			}
-			if (($value >= $min)
-			    || $this->hasPermission ('forum_admin', $reference)) {
-				return true ;
 			}
 			break ;
 			
@@ -586,24 +659,14 @@ abstract class BaseRole extends Error {
 		case 'new_tracker':
 			switch ($action) {
 			case 'read':
-				$mask = 1 ;
+				return (($value & 1) != 0) ;
 				break ;
 			case 'tech':
-				$mask = 2 ;
+				return (($value & 2) != 0) ;
 				break ;
 			case 'manager':
-				$mask = 4 ;
+				return (($value & 4) != 0) ;
 				break ;
-			}
-			$o = artifactType_get_object ($reference) ;
-			if (!$o or $o->isError()) {
-				return false ;
-			}
-
-			if (($value & $mask)
-			    || $this->hasPermission ('tracker_admin', $o->Group->getID())
-			    || $this->hasPermission ('project_admin', $o->Group->getID())) {
-				return true ;
 			}
 			break ;
 
@@ -619,16 +682,6 @@ abstract class BaseRole extends Error {
 			case 'manager':
 				$mask = 4 ;
 				break ;
-			}
-			$o = projectgroup_get_object ($reference) ;
-			if (!$o or $o->isError()) {
-				return false ;
-			}
-
-			if (($value & $mask)
-			    || $this->hasPermission ('pm_admin', $o->Group->getID())
-			    || $this->hasPermission ('project_admin', $o->Group->getID())) {
-				return true ;
 			}
 			break ;
 		}
