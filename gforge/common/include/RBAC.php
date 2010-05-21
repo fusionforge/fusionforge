@@ -25,7 +25,11 @@
 
 require "PFO-RBAC.interface.php" ;
 
-define ('USE_PFO_RBAC', false) ;
+if (file_exists ('/tmp/fusionforge-use-pfo-rbac')) {
+	define ('USE_PFO_RBAC', true) ;
+} else {
+	define ('USE_PFO_RBAC', false) ;
+}
 
 // Code shared between classes
 
