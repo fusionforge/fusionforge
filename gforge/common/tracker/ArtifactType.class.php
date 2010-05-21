@@ -978,15 +978,6 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	userIsTechnician - see if the logged-in user's perms are >= 1 or Group ArtifactAdmin.
-	 *
-	 *	@return boolean	user_is_technician.
-	 */
-	function userIsTechnician() { 
-		return forge_check_perm ('tracker', $this->getID(), 'tech') ;
-	}
-
-	/**
 	 *  update - use this to update this ArtifactType in the database.
 	 *
 	 *  @param	string	The item name.

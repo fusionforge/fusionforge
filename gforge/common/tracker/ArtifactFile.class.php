@@ -191,7 +191,7 @@ class ArtifactFile extends Error {
 	 *	@return	boolean	success.
 	 */
 	function delete() {
-		if (!$this->Artifact->ArtifactType->userIsTechnician()) {
+		if (!forge_check_perm ('tracker', $this->Artifact->ArtifactType->getID(), 'tech')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}

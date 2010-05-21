@@ -559,15 +559,6 @@ class ProjectGroup extends Error {
 		return forge_check_perm ('pm', $this->getID(), 'manager') ;
 	}
 
-	/**
-	 *  userIsTechnician - see if the logged-in user's perms are >= 1 or Group PMAdmin.
-	 *
-	 *  @return boolean user_is_technician.
-	 */
-	function userIsTechnician() {
-		return forge_check_perm ('pm', $this->getID(), 'tech') ;
-	}
-
 }
 
 // Local Variables:

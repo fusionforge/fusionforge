@@ -808,10 +808,8 @@ class Artifact extends Error {
 		/*
 			Field-level permission checking
 		*/
-		if ($this->ArtifactType->userIsAdmin()) {
-			//admin can do everything
-		} else {
-			//everyone else cannot modify these fields
+		if (!forge_check_perm ('tracker', $this->ArtifactType->getID(), 'manager')) {
+			// Non-managers cannot modify these fields
 			$priority=$this->getPriority();
 			$summary=htmlspecialchars_decode($this->getSummary());
 			$description=htmlspecialchars_decode($this->getDetails());
@@ -819,15 +817,10 @@ class Artifact extends Error {
 			$new_artifact_type_id=$this->ArtifactType->getID();
 			$assigned_to=$this->getAssignedTo();
 
-			if ($this->ArtifactType->userIsTechnician()) {
-				//technician can update only certain fields
-				//which were not overridden above
-			} else {
-				//submitter can no longer call this function
+			if (!forge_check_perm ('tracker', $this->ArtifactType->getID(), 'tech')) {
 				$this->setPermissionDeniedError();
 				return false;
 			}
-
 		}
 		//
 		//	They may be using an extra field "status" box so we have to remap

@@ -266,8 +266,8 @@ switch (getStringFromRequest('func')) {
 				in the event that someone tampered with the HTML form
 
 			*/
-			if ($ath->userIsAdmin() || $ath->userIsTechnician()) {
-
+			if (forge_check_perm ('tracker', $ath->getID(), 'tech')
+					|| forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 				//admin and techs can do everything
 				//techs will have certain fields overridden inside the update() function call
 				if (!$ah->update($priority,$status_id,
@@ -311,8 +311,9 @@ switch (getStringFromRequest('func')) {
 			}
 
 			// Admin, Techs and Submitter can add files.
-			if ($ath->userIsAdmin() || $ath->userIsTechnician() || 
-				(session_loggedin() && ($ah->getSubmittedBy() == user_getid()))) {
+			if (forge_check_perm ('tracker', $ath->getID(), 'tech')
+					|| forge_check_perm ('tracker', $ath->getID(), 'manager')
+					|| (session_loggedin() && ($ah->getSubmittedBy() == user_getid()))) {
 				//
 				//	  Attach files to this Artifact.
 				//
@@ -362,7 +363,8 @@ switch (getStringFromRequest('func')) {
 				}
 					
 				// Admin and Techs can delete files.
-				if ($ath->userIsAdmin() || $ath->userIsTechnician()) {
+				if (forge_check_perm ('tracker', $ath->getID(), 'tech')
+						|| forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 					//
 					//	Delete list of files from this artifact
 					//
@@ -537,9 +539,9 @@ switch (getStringFromRequest('func')) {
 			} else if ($ah->isError()) {
 				exit_error('ERROR',$ah->getErrorMessage());
 			} else {
-				if ($ath->userIsAdmin()) {
+				if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 					include $gfwww.'tracker/mod.php';
-				} elseif ($ath->userIsTechnician()) {
+				} elseif (forge_check_perm ('tracker', $ath->getID(), 'tech')) {
 					include $gfwww.'tracker/mod-limited.php';
 				} else {
 					include $gfwww.'tracker/detail.php';
