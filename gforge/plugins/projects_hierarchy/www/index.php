@@ -60,11 +60,9 @@ function projects_hierarchy_User_Header($params) {
 			if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the projects_hierarchy plugin active
 				exit_error("Error", "First activate the $pluginname plugin through the Project's Admin Interface");			
 			}
-			$userperm = $group->getPermission ();//we'll check if the user belongs to the group (optional)
-			if ( !$userperm->IsMember()) {
-				exit_error("Access Denied", "You are not a member of this project");
-			}
-			// other perms checks here...
+
+			session_require_perm ('project_admin', $id) ;
+
 			projects_hierarchy_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));    
 			// DO THE STUFF FOR THE PROJECT PART HERE
 			echo "We are in the Project projects_hierarchy plugin <br>";
@@ -89,19 +87,13 @@ function projects_hierarchy_User_Header($params) {
 			if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the projects_hierarchy plugin active
 				exit_error("Error", "First activate the $pluginname plugin through the Project's Admin Interface");			
 			}
-			$userperm = $group->getPermission ();//we'll check if the user belongs to the group
-			if ( !$userperm->IsMember()) {
-				exit_error("Access Denied", "You are not a member of this project");
-			}
-			//only project admin can access here
-			if ( $userperm->isAdmin() ) {
-				projects_hierarchy_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));    
-				// DO THE STUFF FOR THE PROJECT ADMINISTRATION PART HERE
-				echo "We are in the Project projects_hierarchy plugin <font color=\"#ff0000\">ADMINISTRATION</font> <br>";
-				echo "Greetings from planet " . $world; // $world comes from the config file in /etc
-			} else {
-				exit_error("Access Denied", "You are not a project Admin");
-			}
+
+			session_require_perm ('project_admin', $id) ;
+
+			projects_hierarchy_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));    
+			// DO THE STUFF FOR THE PROJECT ADMINISTRATION PART HERE
+			echo "We are in the Project projects_hierarchy plugin <font color=\"#ff0000\">ADMINISTRATION</font> <br>";
+			echo "Greetings from planet " . $world; // $world comes from the config file in /etc
 		}
 	}	 
 	

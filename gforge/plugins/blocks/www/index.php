@@ -182,11 +182,9 @@ if (!$type) {
 		if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the blocks plugin active
 			exit_error("Error", "First activate the $pluginname plugin through the Project's Admin Interface");			
 		}
-		$userperm = $group->getPermission ();//we'll check if the user belongs to the group (optional)
-		if ( !$userperm->IsMember()) {
-				exit_error("Access Denied", "You are not a member of this project");
-		}
-		// other perms checks here...
+
+		session_require_perm ('project_admin', $id) ;
+
 		blocks_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));    
 		// DO THE STUFF FOR THE PROJECT PART HERE
 		echo "We are in the Project blocks plugin <br />";
@@ -199,68 +197,61 @@ if (!$type) {
 		if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the blocks plugin active
 			exit_error("Error", "First activate the $pluginname plugin through the Project's Admin Interface");			
 		}
-		$userperm = $group->getPermission ();//we'll check if the user belongs to the group
-		if ( !$userperm->IsMember()) {
-			exit_error("Access Denied", "You are not a member of this project");
+		session_require_perm ('project_admin', $id) ;
+
+		blocks_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));    
+		// DO THE STUFF FOR THE PROJECT ADMINISTRATION PART HERE
+		
+		$res = db_query_params('SELECT name, status FROM plugin_blocks WHERE group_id=$1',
+				       array($id));
+		while ($row = db_fetch_array($res)) {
+			$status[ $row['name'] ] = $row['status'];
 		}
-		//only project admin can access here
-		if ( $userperm->isAdmin() ) {
-			blocks_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));    
-			// DO THE STUFF FOR THE PROJECT ADMINISTRATION PART HERE
-
-			$res = db_query_params('SELECT name, status FROM plugin_blocks WHERE group_id=$1',
-				array($id));
-			while ($row = db_fetch_array($res)) {
-				$status[ $row['name'] ] = $row['status'];
+		
+		print _("Blocks are customizable HTML boxes in the left or right side of the pages the web site. They are created manually.");
+		
+		print "<form action=\"/plugins/blocks/\" method=\"post\">";
+		print "<input type=\"hidden\" name=\"id\" value=\"$id\" />\n";
+		print "<input type=\"hidden\" name=\"pluginname\" value=\"$pluginname\" />\n";
+		print "<input type=\"hidden\" name=\"type\" value=\"admin_post\" />\n";
+		
+		print "<table class=\"listing\" align=\"center\">";
+		print "<thead><tr><th>".
+			_("Name").
+			"</th>" .
+			"<th>".
+			_("Active").
+			"</th>" .
+			"<th>" .
+			_("Description").
+			"</th>" .
+			"<th>" .
+			_("Operation") .
+			"</th>" .
+			"</tr></thead>";
+		$blocks = getAvailableBlocks($group);
+		foreach ($blocks as $b => $help) {
+			
+			$class = ($class == 'even') ? "odd" : "even";
+			
+			$match = '';
+			if (preg_match('/(.*) index$/', $b, $match)) {
+				print '<tr><td colspan="4"><b>'.$blocks_text[$match[1]].'</b></td></tr>';
 			}
-
-			print _("Blocks are customizable HTML boxes in the left or right side of the pages the web site. They are created manually.");
-				
-			print "<form action=\"/plugins/blocks/\" method=\"post\">";
-			print "<input type=\"hidden\" name=\"id\" value=\"$id\" />\n";
-			print "<input type=\"hidden\" name=\"pluginname\" value=\"$pluginname\" />\n";
-			print "<input type=\"hidden\" name=\"type\" value=\"admin_post\" />\n";
-
-			print "<table class=\"listing\" align=\"center\">";
-			print "<thead><tr><th>".
-				_("Name").
-				"</th>" .
-				"<th>".
-				_("Active").
-				"</th>" .
-				"<th>" .
-				_("Description").
-				"</th>" .
-				"<th>" .
-				_("Operation") .
-				"</th>" .
-				"</tr></thead>";
-			$blocks = getAvailableBlocks($group);
-			foreach ($blocks as $b => $help) {
-				
-				$class = ($class == 'even') ? "odd" : "even";
-				
-				$match = '';
-				if (preg_match('/(.*) index$/', $b, $match)) {
-					print '<tr><td colspan="4"><b>'.$blocks_text[$match[1]].'</b></td></tr>';
-				}
-				
-				$checked = (isset($status[$b]) && $status[$b] == 1) ? ' checked="checked"' : '';
-				
-				print "<tr class=\"$class\"><td>$b</td>\n" .
-						"<td align=\"center\">" .
-						"<input type=\"checkbox\" name=\"activate[$b]\" value=\"1\"$checked /></td>\n" .
-						"<td>$help</td>\n" .
-						"<td><a href=\"/plugins/blocks/index.php?id=$id&amp;type=configure&amp;pluginname=blocks&amp;name=".urlencode($b)."\">configure</a></td>\n</tr>\n";
+			
+			$checked = (isset($status[$b]) && $status[$b] == 1) ? ' checked="checked"' : '';
+			
+			print "<tr class=\"$class\"><td>$b</td>\n" .
+				"<td align=\"center\">" .
+				"<input type=\"checkbox\" name=\"activate[$b]\" value=\"1\"$checked /></td>\n" .
+				"<td>$help</td>\n" .
+				"<td><a href=\"/plugins/blocks/index.php?id=$id&amp;type=configure&amp;pluginname=blocks&amp;name=".urlencode($b)."\">configure</a></td>\n</tr>\n";
 			}
-			print "</table>";
-			print "<p align=\"center\"><input type=\"submit\" value=\"" .
-					_("Save Blocks") .
-					"\" /></p>";
-			print "</form><p />";
-		} else {
-			exit_error("Access Denied", "You are not a project Admin");
-		}
+		print "</table>";
+		print "<p align=\"center\"><input type=\"submit\" value=\"" .
+			_("Save Blocks") .
+			"\" /></p>";
+		print "</form><p />";
 	} elseif ($type == 'admin_post') {
 		$group = group_get_object($id);
 		if ( !$group) {
@@ -269,53 +260,46 @@ if (!$type) {
 		if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the blocks plugin active
 			exit_error("Error", "First activate the $pluginname plugin through the Project's Admin Interface");			
 		}
-		$userperm = $group->getPermission ();//we'll check if the user belongs to the group
-		if ( !$userperm->IsMember()) {
-			exit_error("Access Denied", "You are not a member of this project");
-		}
-		//only project admin can access here
-		if ( $userperm->isAdmin() ) {
-			$res = db_query_params('SELECT name, status FROM plugin_blocks WHERE group_id=$1',
-				array($id));
-			while ($row = db_fetch_array($res)) {
-				$present[ $row['name'] ] = true;
-				$status[ $row['name'] ] = $row['status'];
-			}
-			$blocks = getAvailableBlocks($group);
-			
-			// Workaround when a block has a name with a &amp; inside.
-			// It seems sadly converted by the form (or php?).
-			foreach ($activate as $k => $v) {
-				$nk = str_replace("&","&amp;", $k);
-				if ($nk !== $k) {
-					$activate[$nk] = $v;
-					unset($activate[$k]);
-				}
-			}
+		session_require_perm ('project_admin', $id) ;
 
-			foreach ($blocks as $b => $help) {
+		$res = db_query_params('SELECT name, status FROM plugin_blocks WHERE group_id=$1',
+				       array($id));
+		while ($row = db_fetch_array($res)) {
+			$present[ $row['name'] ] = true;
+			$status[ $row['name'] ] = $row['status'];
+		}
+		$blocks = getAvailableBlocks($group);
+			
+		// Workaround when a block has a name with a &amp; inside.
+		// It seems sadly converted by the form (or php?).
+		foreach ($activate as $k => $v) {
+			$nk = str_replace("&","&amp;", $k);
+			if ($nk !== $k) {
+				$activate[$nk] = $v;
+				unset($activate[$k]);
+			}
+		}
+
+		foreach ($blocks as $b => $help) {
 				
-				if (!$activate[$b])
-					$activate[$b] = 0;
+			if (!$activate[$b])
+				$activate[$b] = 0;
 					
-				if ((!isset($status[$b]) && $activate[$b]) ||
-					 (isset($status[$b]) && $activate[$b] !== $status[$b]))
-					 // Must be updated.
-					 if (!isset($present[$b])) {
-						db_query_params('INSERT INTO plugin_blocks (group_id, name, status)
+			if ((!isset($status[$b]) && $activate[$b]) ||
+			    (isset($status[$b]) && $activate[$b] !== $status[$b]))
+				// Must be updated.
+				if (!isset($present[$b])) {
+					db_query_params('INSERT INTO plugin_blocks (group_id, name, status)
 							VALUES ($1, $2, $3)',
 							array($id, $b, $activate[$b]));
-					 } else {
-						db_query_params('UPDATE plugin_blocks SET status=$1
+				} else {
+					db_query_params('UPDATE plugin_blocks SET status=$1
 							WHERE group_id=$2 AND name=$3',
 							array($activate[$b], $id, $b));
-					 }
-			}
-			header("Location: /plugins/blocks/index.php?id=$id&type=admin&pluginname=blocks");
-			exit;
-		} else {
-			exit_error("Access Denied", "You are not a project Admin");
+				}
 		}
+		header("Location: /plugins/blocks/index.php?id=$id&type=admin&pluginname=blocks");
+		exit;
 	} elseif ($type == 'configure') {
 		$group = group_get_object($id);
 		if ( !$group) {
@@ -324,63 +308,56 @@ if (!$type) {
 		if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the blocks plugin active
 			exit_error("Error", "First activate the $pluginname plugin through the Project's Admin Interface");			
 		}
-		$userperm = $group->getPermission ();//we'll check if the user belongs to the group
-		if ( !$userperm->IsMember()) {
-			exit_error("Access Denied", "You are not a member of this project");
-		}
-		//only project admin can access here
-		if ( $userperm->isAdmin() ) {
-			blocks_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));    
-			// DO THE STUFF FOR THE PROJECT ADMINISTRATION PART HERE
+		session_require_perm ('project_admin', $id) ;
+
+		blocks_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));    
+		// DO THE STUFF FOR THE PROJECT ADMINISTRATION PART HERE
 			
-			$res = db_query_params('SELECT content FROM plugin_blocks WHERE group_id=$1 AND name=$2',
-						array($id, $name));
-			$body = db_result($res,0,"content");
+		$res = db_query_params('SELECT content FROM plugin_blocks WHERE group_id=$1 AND name=$2',
+				       array($id, $name));
+		$body = db_result($res,0,"content");
 			
-			print _("Edit the block as you want. If you activate the HTML editor, you will be able to use WYSIWYG formatting (bold, colors...)");
+		print _("Edit the block as you want. If you activate the HTML editor, you will be able to use WYSIWYG formatting (bold, colors...)");
 				
-			print "<center>";
-			print "<b>$blocks[$name]</b> ($name)";				
-			print "<form action=\"/plugins/blocks/\" method=\"post\">";
-			print "<input type=\"hidden\" name=\"id\" value=\"$id\" />\n";
-			print "<input type=\"hidden\" name=\"pluginname\" value=\"$pluginname\" />\n";
-			print "<input type=\"hidden\" name=\"type\" value=\"configure_post\" />\n";
-			print "<input type=\"hidden\" name=\"name\" value=\"$name\" />\n";
+		print "<center>";
+		print "<b>$blocks[$name]</b> ($name)";				
+		print "<form action=\"/plugins/blocks/\" method=\"post\">";
+		print "<input type=\"hidden\" name=\"id\" value=\"$id\" />\n";
+		print "<input type=\"hidden\" name=\"pluginname\" value=\"$pluginname\" />\n";
+		print "<input type=\"hidden\" name=\"type\" value=\"configure_post\" />\n";
+		print "<input type=\"hidden\" name=\"name\" value=\"$name\" />\n";
 
-			// Get default page from the templates defined in the config file.
-			if (!$body) {
-				if (isset($plugins_blocks_templates[$name])) {
-					$body = $plugins_blocks_templates[$name];
-				} else {
-					$body = $plugins_blocks_templates['*'];
-				}
+		// Get default page from the templates defined in the config file.
+		if (!$body) {
+			if (isset($plugins_blocks_templates[$name])) {
+				$body = $plugins_blocks_templates[$name];
+			} else {
+				$body = $plugins_blocks_templates['*'];
 			}
-			
-			$params['body'] = $body;
-			$params['width'] = "800";
-			$params['height'] = "500";
-			$params['group'] = $id;
-			plugin_hook("text_editor",$params);
-			if (!$GLOBALS['editor_was_set_up']) {
-				//if we don't have any plugin for text editor, display a simple textarea edit box
-				echo '<textarea name="body"  rows="20" cols="80">' . $body . '</textarea>';
-			}
-			unset($GLOBALS['editor_was_set_up']);
-
-			print "<br /><input type=\"submit\" value=\"" .
-					_("Save") .
-					"\" />";
-			print "</form>";
-			print "</center>";
-
-			print "<fieldset><legend>".
-				_("Tips").
-				"</legend>" .
-				_("<p>You can create boxes like the ones on the right site of summary page, by inserting the following sentences in the content:</p><ul><li>{boxTop Hello}: will create the top part of the box using Hello as title.</li><li>{boxMiddle Here}: will create a middle part of a box using Here as title (optional).</li><li>{boxBottom}: will create the end part of a box.</li></ul><p /><ul><li>{boxHeader}: will create a header before a text.</li><li>{boxFooter}: will create a footer after a text.</li></ul><p>You can create as many boxes as you want, but a boxTop has to be closed by a boxBottom and a boxHeader has to be closed by a boxFooter.</p>").
-				"</fieldset>";
-		} else {
-			exit_error("Access Denied", "You are not a project Admin");
 		}
+			
+		$params['body'] = $body;
+		$params['width'] = "800";
+		$params['height'] = "500";
+		$params['group'] = $id;
+		plugin_hook("text_editor",$params);
+		if (!$GLOBALS['editor_was_set_up']) {
+			//if we don't have any plugin for text editor, display a simple textarea edit box
+			echo '<textarea name="body"  rows="20" cols="80">' . $body . '</textarea>';
+		}
+		unset($GLOBALS['editor_was_set_up']);
+
+		print "<br /><input type=\"submit\" value=\"" .
+			_("Save") .
+			"\" />";
+		print "</form>";
+		print "</center>";
+
+		print "<fieldset><legend>".
+			_("Tips").
+			"</legend>" .
+			_("<p>You can create boxes like the ones on the right site of summary page, by inserting the following sentences in the content:</p><ul><li>{boxTop Hello}: will create the top part of the box using Hello as title.</li><li>{boxMiddle Here}: will create a middle part of a box using Here as title (optional).</li><li>{boxBottom}: will create the end part of a box.</li></ul><p /><ul><li>{boxHeader}: will create a header before a text.</li><li>{boxFooter}: will create a footer after a text.</li></ul><p>You can create as many boxes as you want, but a boxTop has to be closed by a boxBottom and a boxHeader has to be closed by a boxFooter.</p>").
+			"</fieldset>";
 	} elseif ($type == 'configure_post') {
 		$group = group_get_object($id);
 		if ( !$group) {
@@ -389,30 +366,23 @@ if (!$type) {
 		if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the blocks plugin active
 			exit_error("Error", "First activate the $pluginname plugin through the Project's Admin Interface");			
 		}
-		$userperm = $group->getPermission ();//we'll check if the user belongs to the group
-		if ( !$userperm->IsMember()) {
-			exit_error("Access Denied", "You are not a member of this project");
-		}
-		//only project admin can access here
-		if ( $userperm->isAdmin() ) {
-			$res = db_query_params('SELECT id FROM plugin_blocks WHERE group_id=$1 AND name=$2',
-						array($id,$name));
-			if (db_numrows($res)== 0) {
-				db_query_params('INSERT INTO plugin_blocks (group_id, name, content)
+		session_require_perm ('project_admin', $id) ;
+
+		$res = db_query_params('SELECT id FROM plugin_blocks WHERE group_id=$1 AND name=$2',
+				       array($id,$name));
+		if (db_numrows($res)== 0) {
+			db_query_params('INSERT INTO plugin_blocks (group_id, name, content)
 					VALUES ($1, $2, $3)',
 					array($id, $name, $body));
-			} else {
-				db_query_params('UPDATE plugin_blocks SET content=$1
+		} else {
+			db_query_params('UPDATE plugin_blocks SET content=$1
 					WHERE group_id=$2 AND name=$3',
 					array($body, $id, $name));
-			}
-			header("Location: /plugins/blocks/index.php?id=$id&type=admin&pluginname=blocks");
-			exit;
-		} else {
-			exit_error("Access Denied", "You are not a project Admin");
 		}
+		header("Location: /plugins/blocks/index.php?id=$id&type=admin&pluginname=blocks");
+		exit;
 	}
-}	 
+}
 	
 site_project_footer(array());
 
