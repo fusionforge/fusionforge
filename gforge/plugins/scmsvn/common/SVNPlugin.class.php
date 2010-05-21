@@ -239,18 +239,25 @@ class SVNPlugin extends SCMPlugin {
 
 		$svnusers = array () ;
 		foreach ($groups as $project) {
+			$access_data .= '[' . $project->getUnixName () . ":/]\n" ;
+			
 			$users = $project->getMembers () ;
-			$perm = $project->getPermission ($user) ;
-			if ($perm->isMember ('scm', 0)) {
-				$svnusers[$user->getID()] = $user ;
+			foreach ($users as $user) {
+				if (forge_check_perm_for_user ($user,
+							       'scm',
+							       $project->getID(),
+							       'write')) {
+					$access_data .= $user->getUnixName() . "= rw\n" ;
+					$svnusers[$user->getID()] = $user ;
+				} elseif (forge_check_perm_for_user ($user,
+								     'scm',
+								     $project->getID(),
+								     'read')) {
+					$access_data .= $user->getUnixName() . "= r\n" ;
+					$svnusers[$user->getID()] = $user ;
+				}
 			}
 
-			$access_data .= '[' . $project->getUnixName () . ":/]\n" ;
-			if ($perm->isMember ('scm', 1)) {
-				$access_data .= $user->getUnixName() . "= rw\n" ;
-			} elseif ($perm->isMember ('scm', 0)) {
-				$access_data .= $user->getUnixName() . "= r\n" ;
-			}
 			if ( $project->enableAnonSCM() ) {
 				$access_data .= "anonsvn= r\n" ;
 				$access_data .= "* = r\n" ;
