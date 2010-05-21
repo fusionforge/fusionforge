@@ -48,19 +48,43 @@ abstract class BaseRole extends Error implements PFO_Role {
 
 // Actual classes
 
-class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
+abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 	public function addUsers($users) {
-		return true ;
+		throw new Exception ("Not implemented") ;
 	}
 	public function removeUsers($users) {
-		return true ;
+		throw new Exception ("Not implemented") ;
 	}
 	public function getUsers() {
-		return array () ;
+		throw new Exception ("Not implemented") ;
 	}
 }
 
 class RoleAnonymous extends BaseRole implements PFO_RoleAnonymous {
+	public function getID () {
+		return -PFO_ROLE_ANONYMOUS ;
+	}
+	public function isPublic () {
+		return true ;
+	}
+	public function setPublic ($flag) {
+		throw new Exception ("Can't setPublic() on RoleAnonymous") ;
+	}
+	public function getHomeProject () {
+		return NULL ;
+	}
+	public function getLinkedProjects () {
+		throw new Exception ("Not implemented") ;
+	}
+	public function linkProject ($project) {
+		throw new Exception ("Not implemented") ;
+	}
+	public function unlinkProject ($project) {
+		throw new Exception ("Not implemented") ;
+	}
+	public function normalizeData () {
+		throw new Exception ("Not implemented") ;
+	}
 	public function getName () {
 		return _('Anonymous/not logged in') ;
 	}
@@ -70,6 +94,30 @@ class RoleAnonymous extends BaseRole implements PFO_RoleAnonymous {
 }
 
 class RoleLoggedIn extends BaseRole implements PFO_RoleLoggedIn {
+	public function getID () {
+		return -PFO_ROLE_LOGGEDIN ;
+	}
+	public function isPublic () {
+		return true ;
+	}
+	public function setPublic ($flag) {
+		throw new Exception ("Can't setPublic() on RoleLoggedIn") ;
+	}
+	public function getHomeProject () {
+		return NULL ;
+	}
+	public function getLinkedProjects () {
+		throw new Exception ("Not implemented") ;
+	}
+	public function linkProject ($project) {
+		throw new Exception ("Not implemented") ;
+	}
+	public function unlinkProject ($project) {
+		throw new Exception ("Not implemented") ;
+	}
+	public function normalizeData () {
+		throw new Exception ("Not implemented") ;
+	}
 	public function getName () {
 		return _('Any user logged in') ;
 	}
@@ -78,7 +126,7 @@ class RoleLoggedIn extends BaseRole implements PFO_RoleLoggedIn {
 	}
 }
 
-class RoleUnion extends BaseRole implements PFO_RoleUnion {
+abstract class RoleUnion extends BaseRole implements PFO_RoleUnion {
 	public function addRole ($role) {
 		return true ;
 	}
