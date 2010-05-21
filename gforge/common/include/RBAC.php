@@ -70,19 +70,19 @@ abstract class BaseRole extends Error {
 		unset($this->setting_array);
 		unset($this->perms_array);
 
-		$res = db_query_params ('SELECT * FROM role WHERE role_id=$1',
-					array ($role_id)) ;
-		if (!$res || db_numrows($res) < 1) {
-			$this->setError('Role::fetchData()::'.db_error());
-			return false;
-		}
-		$this->data_array =& db_fetch_array($res);
-
 		if (USE_PFO_RBAC) {
-			$res = db_query_params ('SELECT section, reference, value FROM role_perms WHERE role_id=$1',
+			$res = db_query_params ('SELECT * FROM pfo_role WHERE role_id=$1',
+						array ($role_id)) ;
+			if (!$res || db_numrows($res) < 1) {
+				$this->setError('BaseRole::fetchData()::'.db_error());
+				return false;
+			}
+			$this->data_array =& db_fetch_array($res);
+			
+			$res = db_query_params ('SELECT section, reference, value FROM pfo_role_setting WHERE role_id=$1',
 						array ($role_id)) ;
 			if (!$res) {
-				$this->setError('Role::fetchData()::'.db_error());
+				$this->setError('BaseRole::fetchData()::'.db_error());
 				return false;
 			}
 			$this->perms_array=array();
@@ -90,11 +90,19 @@ abstract class BaseRole extends Error {
 				$this->perms_array[$arr['section']][$arr['reference']] = $arr['value'];
 			}
 		} else {
+			$res = db_query_params ('SELECT * FROM role WHERE role_id=$1',
+						array ($role_id)) ;
+			if (!$res || db_numrows($res) < 1) {
+				$this->setError('BaseRole::fetchData()::'.db_error());
+				return false;
+			}
+			$this->data_array =& db_fetch_array($res);
+
 			// Load pre-PFO RBAC settings...
 			$res = db_query_params ('SELECT * FROM role_setting WHERE role_id=$1',
 						array ($role_id)) ;
 			if (!$res) {
-				$this->setError('Role::fetchData()::'.db_error());
+				$this->setError('BaseRole::fetchData()::'.db_error());
 				return false;
 			}
 			$this->setting_array=array();

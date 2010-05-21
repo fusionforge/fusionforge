@@ -2435,8 +2435,13 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		
 		$rolesId = Array();
 		
-		$roles_group_res = db_query_params ('SELECT role_id FROM role WHERE group_id=$1',
-					array ($this->getID()));
+		if (USE_PFO_RBAC) {
+			$roles_group_res = db_query_params ('SELECT role_id FROM pfo_role WHERE home_group_id=$1',
+							    array ($this->getID()));
+		} else {
+			$roles_group_res = db_query_params ('SELECT role_id FROM role WHERE group_id=$1',
+							    array ($this->getID()));
+		}
 		if (!$roles_group_res) {
 			$this->setError('Error: Roles from group id '. $this->getID() . ' ' .db_error());
 			return false;
