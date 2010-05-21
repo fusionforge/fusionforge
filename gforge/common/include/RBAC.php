@@ -514,9 +514,7 @@ abstract class BaseRole extends Error {
 			break ;
 			
 		case 'forum':
-			$o = forum_get_object ($reference) ;
-			if ($o && !$o->isError()
-			    && $this->hasPermission('forum_admin', $o->Group->getID())) {
+			if ($this->hasPermission('forum_admin', forum_get_groupid($reference))) {
 				return 4 ;
 			}
 			return $value ;
@@ -529,9 +527,7 @@ abstract class BaseRole extends Error {
 			break ;
 			
 		case 'tracker':
-			$o = artifactType_get_object ($reference) ;
-			if ($o && !$o->isError()
-			    && $this->hasPermission('tracker_admin', $o->Group->getID())) {
+			if ($this->hasPermission('tracker_admin', artifacttype_get_groupid($reference))) {
 				return 7 ;
 			}
 			return $value ;
@@ -544,9 +540,7 @@ abstract class BaseRole extends Error {
 			break ;
 
 		case 'pm':
-			$o = projectgroup_get_object ($reference) ;
-			if ($o && !$o->isError()
-			    && $this->hasPermission('pm_admin', $o->Group->getID())) {
+			if ($this->hasPermission('pm_admin', projectgroup_get_groupid($reference))) {
 				return 7 ;
 			}
 			return $value ;

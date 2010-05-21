@@ -54,6 +54,21 @@ require_once $gfcommon.'tracker/ArtifactExtraFieldElement.class.php';
 		return $ARTIFACTTYPE_OBJ["_".$artType_id."_"];
 	}	
 
+function artifacttype_get_groupid ($artifact_type_id) {
+	global $ARTIFACTTYPE_OBJ;
+	if (isset($ARTIFACTTYPE_OBJ["_".$artifact_type_id."_"])) {
+		return $ARTIFACTTYPE_OBJ["_".$artifact_type_id."_"]->Group->getID() ;
+	}
+
+	$res = db_query_params ('SELECT group_id FROM artifact_group_list WHERE group_artifact_id=$1',
+				array ($artifact_type_id)) ;
+	if (!$res || db_numrows($res) < 1) {
+		return false;
+	}
+	$arr =& db_fetch_array ($res);
+	return $arr['group_id'] ;
+}
+
 class ArtifactType extends Error {
 
 	/**

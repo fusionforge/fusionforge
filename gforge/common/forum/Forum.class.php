@@ -52,6 +52,16 @@ function &forum_get_object($forum_id) {
 	return $f ;
 }	
 
+function forum_get_groupid ($forum_id) {
+	$res = db_query_params ('SELECT group_id FROM forum_group_list WHERE group_forum_id=$1',
+				array ($forum_id)) ;
+	if (!$res || db_numrows($res) < 1) {
+		return false;
+	}
+	$arr =& db_fetch_array ($res);
+	return $arr['group_id'] ;
+}
+
 class Forum extends Error {
 
 	/**

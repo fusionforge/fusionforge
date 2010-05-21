@@ -53,6 +53,20 @@ require_once $gfcommon.'include/Error.class.php';
 		return $PROJECTGROUP_OBJ["_".$group_project_id."_"];
 	}
 
+function projectgroup_get_groupid ($group_project_id) {
+	global $PROJECTGROUP_OBJ;
+	if (isset($PROJECTGROUP_OBJ["_".$group_project_id."_"])) {
+		return $PROJECTGROUP_OBJ["_".$group_project_id."_"]->Group->getID() ;
+	}
+
+	$res = db_query_params ('SELECT group_id FROM project_group_list WHERE group_project_id=$1',
+				array ($group_project_id)) ;
+	if (!$res || db_numrows($res) < 1) {
+		return false;
+	}
+	$arr =& db_fetch_array ($res);
+	return $arr['group_id'] ;
+}
 
 class ProjectGroup extends Error {
 
