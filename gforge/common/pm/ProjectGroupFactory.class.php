@@ -82,33 +82,7 @@ class ProjectGroupFactory extends Error {
 		if ($this->projectGroups) {
 			return $this->projectGroups;
 		}
-		if (session_loggedin()) {
-			$perm =& $this->Group->getPermission ();
-			if (!$perm || !is_object($perm) || !$perm->isMember()) {
-				$result = db_query_params ('SELECT * FROM project_group_list_vw WHERE group_id=$1 AND is_public=1 ORDER BY group_project_id',
-							   array ($this->Group->getID())) ;
-			} else {
-				if ($perm->isPMAdmin()) {
-					$result = db_query_params ('SELECT * FROM project_group_list_vw WHERE group_id=$1 AND is_public<3 ORDER BY group_project_id',
-								   array ($this->Group->getID())) ;
-				} else {
-					$result = db_query_params ('SELECT * FROM project_group_list_vw
-	WHERE group_id=$1 AND is_public<3
-	  AND group_project_id IN (SELECT role_setting.ref_id
-			           FROM role_setting, user_group
-                                   WHERE role_setting.section_name = $2
-				     AND role_setting.value::integer >= 0
-                                     AND role_setting.ref_id=project_group_list_vw.group_project_id
-				     AND user_group.role_id = role_setting.role_id
-				     AND user_group.user_id=$3)
-        ORDER BY group_project_id',
-								   array ($this->Group->getID(),
-									  'pm',
-									  user_getid())) ;
-				}
-			}
-		} else {
-				$result = db_query_params ('SELECT * FROM project_group_list_vw WHERE group_id=$1 AND is_public=1 ORDER BY group_project_id',
+		$result = db_query_params ('SELECT * FROM project_group_list_vw WHERE group_id=$1 ORDER BY group_project_id',
 							   array ($this->Group->getID())) ;
 		}
 		$rows = db_numrows($result);
@@ -118,7 +92,9 @@ class ProjectGroupFactory extends Error {
 			$this->projectGroups=NULL;
 		} else {
 			while ($arr = db_fetch_array($result)) {
-				$this->projectGroups[] = new ProjectGroup($this->Group, $arr['group_project_id'], $arr);
+				if (forge_check_perm ('pm', $arr['group_project_id'], 'read')) {
+					$this->projectGroups[] = new ProjectGroup($this->Group, $arr['group_project_id'], $arr);
+				}
 			}
 		}
 		return $this->projectGroups;

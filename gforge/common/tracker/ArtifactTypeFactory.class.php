@@ -88,46 +88,10 @@ class ArtifactTypeFactory extends Error {
 		if ($this->ArtifactTypes) {
 			return $this->ArtifactTypes;
 		}
-		if (session_loggedin()) {
-			$perm =& $this->Group->getPermission ();
-			if (!$perm || !is_object($perm) || !$perm->isMember()) {
-				$result = db_query_params ('SELECT * FROM artifact_group_list_vw
+		$result = db_query_params ('SELECT * FROM artifact_group_list_vw
 			WHERE group_id=$1
-			AND is_public=1
 			ORDER BY group_artifact_id ASC',
-							   array ($this->Group->getID())) ;
-			} else {
-				if ($perm->isArtifactAdmin()) {
-					$result = db_query_params ('SELECT * FROM artifact_group_list_vw
-			WHERE group_id=$1
-			AND is_public<3
-			ORDER BY group_artifact_id ASC',
-								   array ($this->Group->getID())) ;
-				} else {
-					$result = db_query_params ('SELECT * FROM artifact_group_list_vw
-			WHERE group_id=$1
-			AND is_public<3
-                        AND group_artifact_id IN (SELECT role_setting.ref_id
-					FROM role_setting, user_group
-					WHERE role_setting.value::integer >= 0
-                                          AND role_setting.section_name = $2
-                                          AND role_setting.ref_id=artifact_group_list_vw.group_artifact_id
-                                          
-   					  AND user_group.role_id = role_setting.role_id
-					  AND user_group.user_id = $3 )
-			ORDER BY group_artifact_id ASC',
-								   array ($this->Group->getID(),
-									  'tracker',
-									  user_getid ())) ;
-				}
-			}
-		} else {
-			$result = db_query_params ('SELECT * FROM artifact_group_list_vw
-			WHERE group_id=$1
-			AND is_public=1
-			ORDER BY group_artifact_id ASC',
-						   array ($this->Group->getID())) ;
-		}
+					   array ($this->Group->getID())) ;
 
 		$rows = db_numrows($result);
 
@@ -136,11 +100,13 @@ class ArtifactTypeFactory extends Error {
 			$this->ArtifactTypes=NULL;
 		} else {
 			while ($arr =& db_fetch_array($result)) {
-				$artifactType = new ArtifactType($this->Group, $arr['group_artifact_id'], $arr);
-				if($artifactType->isError()) {
-					$this->setError($artifactType->getErrorMessage());
-				} else {
-					$this->ArtifactTypes[] = $artifactType;
+				if (forge_check_perm ('tracker', $arr['group_artifact_id'], 'read')) {
+					$artifactType = new ArtifactType($this->Group, $arr['group_artifact_id'], $arr);
+					if($artifactType->isError()) {
+						$this->setError($artifactType->getErrorMessage());
+					} else {
+						$this->ArtifactTypes[] = $artifactType;
+					}
 				}
 			}
 		}
