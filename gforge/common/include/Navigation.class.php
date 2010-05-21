@@ -391,7 +391,7 @@ class Navigation extends Error {
                         $menu['starturl'] = $url;
                         
                         // Project Admin
-                        if ($perm->isAdmin()) {
+                        if (forge_check_perm ('project_admin', $group_id)) {
                                 $menu['titles'][] = _('Admin');
                                 $menu['urls'][] = util_make_url ('/project/admin/?group_id=' . $group_id);
                                 $menu['adminurls'][] = false;
@@ -418,7 +418,7 @@ class Navigation extends Error {
                         if ($group->usesForum()) {
                                 $menu['titles'][] = _('Forums');
                                 $menu['urls'][] = util_make_url ('/forum/?group_id=' . $group_id);
-                                if ($perm->isAdmin() || $perm->isForumAdmin()) {
+                                if (forge_check_perm ('forum_admin', $group_id)) {
                                         $menu['adminurls'][] = util_make_url('/forum/admin/?group_id='.$group_id);
                                 } else {
                                         $menu['adminurls'][] = false;
@@ -432,7 +432,7 @@ class Navigation extends Error {
                         if ($group->usesTracker()) {
                                 $menu['titles'][] = _('Tracker');
                                 $menu['urls'][] = util_make_url ('/tracker/?group_id=' . $group_id);
-                                if ($perm->isAdmin() || $perm->isArtifactAdmin()) {
+                                if (forge_check_perm ('tracker_admin', $group_id)) {
                                         $menu['adminurls'][] = util_make_url('/tracker/admin/?group_id='.$group_id);
                                 } else {
                                         $menu['adminurls'][] = false;
@@ -450,7 +450,7 @@ class Navigation extends Error {
                         if ($group->usesMail()) {
                                 $menu['titles'][] = _('Lists');
                                 $menu['urls'][] = util_make_url ('/mail/?group_id=' . $group_id);
-                                if ($perm->isAdmin()) {
+                                if (forge_check_perm ('project_admin', $group_id)) {
                                         $menu['adminurls'][] = util_make_url('/mail/admin/?group_id='.$group_id);
                                 } else {
                                         $menu['adminurls'][] = false;
@@ -465,7 +465,7 @@ class Navigation extends Error {
                         if ($group->usesPm()) {
                                 $menu['titles'][] = _('Tasks');
                                 $menu['urls'][] = util_make_url ('/pm/?group_id=' . $group_id);
-                                if ($perm->isAdmin() || $perm->isPMAdmin()) {
+                                if (forge_check_perm ('pm_admin', $group_id)) {
                                         $menu['adminurls'][] = util_make_url ('/pm/admin/?group_id='.$group_id);
                                 } else {
                                         $menu['adminurls'][] = false;
@@ -480,7 +480,7 @@ class Navigation extends Error {
                         if ($group->usesDocman()) {
                                 $menu['titles'][] = _('Docs');
                                 $menu['urls'][] = util_make_url ('/docman/?group_id=' . $group_id);
-                                if ($perm->isAdmin() || $perm->isDocEditor()) {
+                                if (forge_check_perm ('docman', $group_id, 'approve')) {
                                         $menu['adminurls'][] = util_make_url ('/docman/admin/?group_id='.$group_id);
                                 } else {
                                         $menu['adminurls'][] = false;
@@ -495,7 +495,7 @@ class Navigation extends Error {
                         if ($group->usesSurvey()) {
                                 $menu['titles'][] = _('Surveys');
                                 $menu['urls'][] = util_make_url ('/survey/?group_id=' . $group_id);
-                                if ($perm->isAdmin()) {
+                                if (forge_check_perm ('project_admin', $group_id)) {
                                         $menu['adminurls'][] = util_make_url ('/survey/admin/?group_id='.$group_id);
                                 } else {
                                         $menu['adminurls'][] = false;
@@ -509,7 +509,7 @@ class Navigation extends Error {
                         if ($group->usesNews()) {
                                 $menu['titles'][] = _('News');
                                 $menu['urls'][] = util_make_url ('/news/?group_id=' . $group_id);
-                                if ($perm->isAdmin()) {
+                                if (forge_check_perm ('project_admin', $group_id)) {
                                         $menu['adminurls'][] = util_make_url ('/news/admin/?group_id='.$group_id);
                                 } else {
                                         $menu['adminurls'][] = false;
@@ -524,7 +524,7 @@ class Navigation extends Error {
                                 $menu['titles'][] = _('SCM');
                                 $menu['urls'][] = util_make_url ('/scm/?group_id=' . $group_id);
                                 // eval cvs_flags?
-                                if ($perm->isAdmin()) {
+                                if (forge_check_perm ('project_admin', $group_id)) {
                                         $menu['adminurls'][] = util_make_url ('/scm/admin/?group_id='.$group_id);
                                 } else {
                                         $menu['adminurls'][] = false;
@@ -553,7 +553,7 @@ class Navigation extends Error {
                         if ($group->usesFRS()) {
                                 $menu['titles'][] = _('Files');
                                 $menu['urls'][] = util_make_url ('/frs/?group_id=' . $group_id);
-                                if ($perm->isAdmin() || $perm->isReleaseTechnician()) {
+                                if (forge_check_perm ('frs', $group_id, 'write')) {
                                         $menu['adminurls'][] = util_make_url ('/frs/admin/?group_id='.$group_id);
                                 } else {
                                         $menu['adminurls'][] = false;
