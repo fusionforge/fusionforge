@@ -2433,6 +2433,9 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		} else {
 			$res = db_query_params ('SELECT role_id FROM role WHERE group_id=$1',
 							    array ($this->getID()));
+			while ($arr =& db_fetch_array($res)) {
+				$role_ids[] = $arr['role_id'] ;
+			}
 		}
 		
 		return array_unique ($role_ids) ;
