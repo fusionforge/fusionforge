@@ -2542,12 +2542,16 @@ The %1$s admin team will now examine your project submission.  You will be notif
 	 *
 	 *	@return array of user's objects.
 	 */
-	function getUsers() {
+	function getUsers($onlylocal = true) {
 		$users = array () ;
 
 		if (USE_PFO_RBAC) {
 			$ids = array () ;
 			foreach ($this->getRoles() as $role) {
+				if ($onlylocal 
+				    && ($role->getHomeProject() == NULL || $role->getHomeProject()->getID() != $this->getID())) {
+					continue ;
+				}
 				foreach ($role->getUsers() as $user) {
 					$ids[] = $user->getID() ;
 				}
@@ -2556,7 +2560,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 			foreach ($ids as $id) {
 				$u = user_get_object ($id) ;
 				if ($u->isActive()) {
-					$users[] = new GFUser ($id) ;
+					$users[] = $u ;
 				}
 			}
 		} else {

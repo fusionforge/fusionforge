@@ -58,43 +58,51 @@ if(forge_get_config('use_people')) {
 echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 // list members
-$res_memb = db_query_params("SELECT users.*,user_group.admin_flags,role.role_name AS role
-	FROM users,user_group
-	LEFT JOIN role ON user_group.role_id=role.role_id
-	WHERE users.user_id=user_group.user_id
-	AND user_group.group_id=$1
-	AND users.status='A'
-	ORDER BY users.user_name ", array($group_id));
+$members = $project->getUsers() ;
 
 $i=0;
-while ( $row_memb=db_fetch_array($res_memb) ) {
+foreach ($members as $user) {
 	echo '<tr '.$HTML->boxGetAltRowStyle($i++).'>'."\n";
 	// RDFa
-	$member_uri = util_make_url_u ($row_memb['user_name'],$row_memb['user_id']);
+	$member_uri = util_make_url_u ($user->getUnixName(),$user->getID());
 	print '<div about="'. $member_uri .'" typeof="sioc:UserAccount">';
 	print '<span rev="sioc:has_member" resource="'. $usergroup_stdzd_uri .'"></span>';
-	print '<span property="sioc:name" content="'. $row_memb['user_name'] .'"></span>';
-	if ( trim($row_memb['admin_flags'])=='A' ) {
+	print '<span property="sioc:name" content="'. $user->getUnixName() .'"></span>';
+	if ( RBACEngine::getInstance()->isActionAllowedForUser($user,'project_admin',$project->getID())) {
 //                echo '<div rev="doap:developer" typeof="doap:Project" xmlns:doap="http://usefulinc.com/ns/doap#">';
-		echo '		<td><strong>'.$row_memb['realname'].'</strong></td>';
+		echo '		<td><strong>'.$user->getRealName().'</strong></td>';
 //                echo '</div>';
 	} else {
 //		echo '<div rev="doap:maintainer" typeof="doap:Project" xmlns:doap="http://usefulinc.com/ns/doap#">';
-		echo '		<td>'.$row_memb['realname'].'</td>';
+		echo '		<td>'.$user->getRealName().'</td>';
 //                echo '</div>';
 	}
 	
 	/*
-        print '<span property ="dc:Identifier" content="'.$row_memb['user_id'].'" xmlns:dc="http://purl.org/dc/elements/1.1/">';
+        print '<span property ="dc:Identifier" content="'.$user->getID().'" xmlns:dc="http://purl.org/dc/elements/1.1/">';
         echo '</span>';
-        print '<span property="foaf:accountName" content="'.$row_memb['user_name'].'">';
+        print '<span property="foaf:accountName" content="'.$user->getUnixName().'">';
         echo '</span>';
-        print '<span property="fusionforge:has_job" content="'.$row_memb['role'].'" xmlns:fusionforge="http://fusionforge.org/fusionforge#">';
+        print '<span property="fusionforge:has_job" content="'.$role_string.'" xmlns:fusionforge="http://fusionforge.org/fusionforge#">';
         echo '</span>';*/
-	echo '<td align="center">'.util_make_link_u ($row_memb['user_name'],$row_memb['user_id'],$row_memb['user_name']).'</td>
-	<td align="center">'.$row_memb['role'].'</td>';
+
+	if (USE_PFO_RBAC) {
+		$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($user) ;
+		$role_names = array () ;
+		foreach ($roles as $role) {
+			if ($role->getHomeProject() && $role->getHomeProject()->getID() == $project->getID()) {
+				$role_names[] = $role->getName() ;
+			}
+		}
+		$role_string = implode (', ', $role_names) ;
+	} else {
+		$role_string = $user->getRole ($project)->getName() ;
+	}
+
+	echo '<td align="center">'.util_make_link_u ($user->getUnixName(),$user->getID(),$user->getUnixName()).'</td>
+	<td align="center">'.$role_string.'</td>';
 	if(forge_get_config('use_people')) {
-		echo '<td align="center">'.util_make_link ('/people/viewprofile.php?user_id='.$row_memb['user_id'],_('View')).'</td>';
+		echo '<td align="center">'.util_make_link ('/people/viewprofile.php?user_id='.$user->getID(),_('View')).'</td>';
 	}
 	print '</div>';
    	echo '</tr>';
