@@ -39,8 +39,6 @@ if (!$g || !is_object($g)) {
 	exit_error('Error',$g->getErrorMessage());
 }
 
-$perm =& $g->getPermission ();
-
 $update_cat = getStringFromRequest('update_cat');
 $add_cat = getStringFromRequest('add_cat');
 $delete = getStringFromRequest('delete');
@@ -66,9 +64,7 @@ if (getStringFromRequest('post_changes')) {
 		/*
 			Add new subproject
 		*/
-		if (!$perm->isPMAdmin()) {
-			exit_permission_denied();
-		}
+		session_require_perm ('pm_admin', $group_id) ;
 		if (!$pg->create($project_name,$description,$is_public,$send_all_posts_to)) {
 			exit_error('Error',$pg->getErrorMessage());
 		} else {
@@ -277,9 +273,7 @@ if ($add_cat && $group_project_id) {
 	/*
 		Create a new subproject
 	*/
-	if (!$perm->isPMAdmin()) {
-		exit_permission_denied();
-	}
+	session_require_perm ('pm_admin', $group_id) ;
 
 	pm_header(array ('title'=>_('Add a new subproject')));
 

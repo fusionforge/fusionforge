@@ -48,10 +48,9 @@ pm_header(array('title'=>_('Subprojects and Tasks')));
 
 plugin_hook("blocks", "tasks index");
 
-$perm =& $g->getPermission ();
-if ($perm->isPMAdmin()) {
+if (forge_check_perm ('pm_admin', $group_id)) {
 	$menu_text=array();
-    $menu_links=array();
+	$menu_links=array();
 	$menu_text[]=_('Admin');
 	$menu_links[]='/pm/admin/?group_id='.$group_id;
 	echo $HTML->subMenu($menu_text,$menu_links);

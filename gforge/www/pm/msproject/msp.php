@@ -231,16 +231,7 @@ function &MSPCreateProject($groupid,$session_hash,$name,$ispublic,$description) 
 		$res['description']="No Such Group";
 		return $res;
 	} else {
-		$perm =& $group->getPermission ();
-		if (!$perm || !is_object($perm)) {
-			$res['code']="error";
-			$res['description']="Could Not Get Perm Object";
-			return $res;
-		} elseif ($perm->isError()) {
-			$res['code']="error";
-			$res['description']="Error in Perm Object: ".$perm->getErrorMessage();
-			return $res;
-		} elseif (!$perm->isPMAdmin()) {
+		if (!forge_check_perm ('pm_admin', $group_id)) {
 			$res['code']="error";
 			$res['description']="User must be Admin";
 			return $res;

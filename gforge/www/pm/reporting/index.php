@@ -40,11 +40,7 @@ if (!$g || !is_object($g)) {
 	exit_error('Error',$g->getErrorMessage());
 }
 
-$perm =& $g->getPermission ();
-if (!$perm->isPMAdmin()) {
-	exit_permission_denied();
-}
-
+session_require_perm ('pm_admin', $group_id) ;
 
 $page_title=_('Task Reporting System');
 $bar_colors=array("pink","violet");
