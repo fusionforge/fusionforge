@@ -225,10 +225,12 @@ project_admin_header(array('title'=>sprintf(_('Project Admin: %s'), $group->getP
 		//
 		echo $HTML->boxMiddle(_("Edit Roles"));
 
+if (!USE_PFO_RBAC) {
 		echo '
         <form action="roleedit.php?group_id='. $group_id .'&amp;role_id=observer" method="post">
         <p><input type="submit" name="edit" value="'._("Edit Observer").'" /></p>
         </form>';
+}
 
 		echo '<form action="roleedit.php?group_id='. $group_id .'" method="post"><p>';
 		echo role_box($group_id,'role_id','',false);

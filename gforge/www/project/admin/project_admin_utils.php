@@ -49,7 +49,7 @@ function project_admin_header($params) {
 	$links = array();
 	
 	$labels[] = _('Project Info');
-	$labels[] = _('Users');
+	$labels[] = _('Users and permissions');
 	$labels[] = _('Tools');
 	$labels[] = _('Project History');
 	if(forge_get_config('use_people')) {
