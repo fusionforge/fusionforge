@@ -43,11 +43,19 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 		
 		if (session_loggedin()) {
 			$result[] = RoleLoggedIn::getInstance() ;
+			$user = session_get_user() ;
 
-                        $user = session_get_user() ;
-			$groups = $user->getGroups() ;
-			foreach ($groups as $g) {
-				$result[] = $user->getRole($g) ;
+			if (USE_PFO_RBAC) {
+				$res = db_query_params ('SELECT role_id FROM pfo_user_role WHERE user_id=$1',
+						array ($user->getID()));
+				while ($arr =& db_fetch_array($res)) {
+					$result[] = $this->getRoleById ($arr['role_id']) ;
+				}
+			} else {
+				$groups = $user->getGroups() ;
+				foreach ($groups as $g) {
+					$result[] = $user->getRole($g) ;
+				}
 			}
 		}
 		
