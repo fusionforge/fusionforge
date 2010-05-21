@@ -636,11 +636,6 @@ class Forum extends Error {
 		db_query_params ('DELETE FROM forum_group_list WHERE group_forum_id=$1',
 				 array ($this->getID())) ;
 //echo '5'.db_error();
-		//delete forum's role setting
-		db_query_params ('DELETE FROM role_setting WHERE section_name=$1 AND ref_id=$2',
-				 array ('forum',
-				 $this->getID())) ;
-
 		db_commit();
 
 		$this->Group->normalizeAllRoles () ;

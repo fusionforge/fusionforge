@@ -848,10 +848,6 @@ class ArtifactType extends Error {
 			WHERE group_artifact_id=$1',
 				 array ($this->getID())) ;
 //echo '4'.db_error();
-		db_query_params ('DELETE FROM role_setting WHERE ref_id=$1 AND section_name=$2 AND role_id IN (SELECT role_id FROM role WHERE group_id=$3)',
-				 array ($this->getID(),
-					'tracker',
-					$this->Group->getID())) ;
 		db_query_params ('DELETE FROM artifact_group_list
 			WHERE group_artifact_id=$1',
 				 array ($this->getID())) ;

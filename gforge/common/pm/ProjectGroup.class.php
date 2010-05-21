@@ -163,24 +163,6 @@ class ProjectGroup extends Error {
 		$this->group_project_id=db_insertid($result,'project_group_list','group_project_id');
 		$this->fetchData($this->group_project_id);
 
-		$roles_group = $this->Group->getRolesId();
-		for ($i=0; $i<sizeof($roles_group); $i++) {
-			// set the permission for the role's group 
-			$role = new Role($this);
-			$role_name = db_query_params ('SELECT role_name from role where role_id = $1', array($roles_group[$i]));
-			$role_name = db_fetch_array($role_name);
-			$role_setting_res = db_query_params ('INSERT INTO role_setting (role_id,section_name,ref_id,value) VALUES ($1,$2,$3,$4)',
-						array ($roles_group[$i],
-						       'pm',
-						       $this->group_project_id,
-						       $role->defaults[$role_name['role_name']]['pm'])) ;
-			if (!$role_setting_res) {
-				db_rollback();
-				$this->setError('Error: Role setting for tasks id ' . $this->group_forum_id . ' for groud id ' . $this->Group->getID() . ' ' .db_error());
-				return false;
-			}
-		}
-
 		db_commit();
 
 		$this->Group->normalizeAllRoles () ;
@@ -344,16 +326,6 @@ class ProjectGroup extends Error {
 				return false;
 			}
 		}
-
-		$res = db_query_params ('DELETE FROM role_setting WHERE section_name=$1 AND ref_id=$2',
-				 array ('pm',
-				 $this->getID())) ;
-
-                if (!$res)
-                {
-                        $this->setError('DATABASE '.db_error());
-                        return false;
-                }
 
 		if (!forge_check_perm ('pm', $this->getID(), 'manager')) {
 			$this->setPermissionDeniedError();
