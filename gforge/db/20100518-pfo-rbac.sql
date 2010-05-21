@@ -1,5 +1,3 @@
-BEGIN ;
-
 CREATE SEQUENCE pfo_role_class_seq ;
 CREATE TABLE pfo_role_class (
        class_id integer DEFAULT nextval ('pfo_role_class_seq') NOT NULL,
@@ -403,5 +401,3 @@ SELECT migrate_rbac_permissions_to_pfo_rbac () ;
 SELECT migrate_role_observer_to_pfo_rbac () ;
 -- SELECT r.role_name, s.section_name, s.ref_id, s.perm_val FROM pfo_role r, pfo_role_setting s WHERE r.home_group_id IS NULL AND r.role_id = s.role_id ORDER BY s.role_id, s.ref_id ;
 -- SELECT count(*) FROM pfo_role_setting ;
-
-ROLLBACK ;

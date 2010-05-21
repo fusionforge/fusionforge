@@ -2910,6 +2910,7 @@ eval {
     &update_with_sql("20100505-alter-user-preference","5.0.1-1");
     &update_with_sql("20100506-add-widgets","5.0.1-2");
     &update_with_sql("20100517-add-project-widgets","5.0.1-3");
+    &update_with_sql("20100518-pfo-rbac","5.0.1-4");
 
     ########################### INSERT HERE #################################
 
