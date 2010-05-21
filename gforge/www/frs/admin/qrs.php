@@ -28,22 +28,9 @@ if (!$g || $g->isError()) {
 
 // check the permissions and see if this user is a release manager.
 // If so, he can create a release
-$perm =& $g->getPermission ();
-$can_post = $perm->isReleaseTechnician();
+session_require_perm ('frs', $group_id, 'write') ;
+
 $packages = get_frs_packages($g);
-
-if (!$can_post) {
-	// If user has write access to at least one package, then it's ok.
-	foreach ( $packages as $f ) {
-		if ($f->userCanPost()) {
-			$can_post = true;
-		}
-	}
-}
-
-if (!$can_post) {
-	exit_permission_denied();
-}
 
 $upload_dir = forge_get_config('ftp_upload_dir') . "/" . $g->getUnixName();
 

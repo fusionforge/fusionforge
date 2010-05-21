@@ -84,7 +84,6 @@ class ProjectGroupFactory extends Error {
 		}
 		$result = db_query_params ('SELECT * FROM project_group_list_vw WHERE group_id=$1 ORDER BY group_project_id',
 							   array ($this->Group->getID())) ;
-		}
 		$rows = db_numrows($result);
 
 		if (!$result || $rows < 1) {

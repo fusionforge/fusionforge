@@ -40,10 +40,8 @@ $project =& group_get_object($group_id);
 if (!$project || $project->isError()) {
 	exit_error('Error',$project->getErrorMessage());
 }
-$perm =& $project->getPermission ();
-if (!$perm->isReleaseTechnician()) {
-	exit_permission_denied();
-}
+
+session_require_perm ('frs', $group_id, 'write') ;
 
 /*
 

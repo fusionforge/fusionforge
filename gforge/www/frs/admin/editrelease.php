@@ -46,10 +46,8 @@ $g =& group_get_object($group_id);
 if (!$g || $g->isError()) {
 	exit_error('Error',$g->getErrorMessage());
 }
-$perm =& $g->getPermission ();
-if (!$perm->isReleaseTechnician()) {
-	exit_permission_denied();
-}
+
+session_require_perm ('frs', $group_id, 'write') ;
 
 //
 //  Get the package

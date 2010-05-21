@@ -44,17 +44,7 @@ function frs_admin_header($params) {
 		return;
 	}
 
-	$perm =& $project->getPermission ();
-	if (!$perm || !is_object($perm)) {
-		return;
-	}
-
-	/*
-		Are they a release technician?
-	*/
-	if (!$perm->isReleaseTechnician()) {
-		exit_permission_denied();
-	}
+	session_require_perm ('frs', $group_id, 'write') ;
 
 	frs_header($params);
 }
@@ -82,22 +72,19 @@ function frs_header($params) {
 	$params['group']=$group_id;
 	site_project_header($params);
 
-	if (session_loggedin()) {
-		$perm =& $project->getPermission ();
-		if ($perm && is_object($perm) && !$perm->isError() && $perm->isReleaseTechnician()) {
-			echo $HTML->subMenu(
-				array(
-					_('Files'),
-					_('Admin'),
-					_('Reporting')
+	if (forge_check_perm ('frs', $group_id, 'write')) {
+		echo $HTML->subMenu(
+			array(
+				_('Files'),
+				_('Admin'),
+				_('Reporting')
 				),
-				array(
-					'/frs/?group_id='.$group_id,
-					'/frs/admin/?group_id='.$group_id,
-					'/frs/reporting/downloads.php?group_id='.$group_id
+			array(
+				'/frs/?group_id='.$group_id,
+				'/frs/admin/?group_id='.$group_id,
+				'/frs/reporting/downloads.php?group_id='.$group_id
 				)
 			);
-		}
 	}
 }
 

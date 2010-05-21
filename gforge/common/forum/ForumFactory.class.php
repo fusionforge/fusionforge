@@ -86,7 +86,6 @@ class ForumFactory extends Error {
 WHERE group_id=$1
 ORDER BY group_forum_id',
 					   array ($this->Group->getID())) ;
-	}
 		
 		$rows = db_numrows($result);
 		

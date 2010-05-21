@@ -82,11 +82,9 @@ if ( $num_packages < 1) {
 	// check the permissions and see if this user is a release manager.
 	// If so, offer the opportunity to create a release
 
-	$perm =& $cur_group->getPermission ();
-
-	if ($perm->isReleaseTechnician()) {
+	if (forge_check_perm ('frs', $group_id, 'write')) {
 		echo '<p><a href="admin/qrs.php?group_id='.$group_id.'">';
-        echo _('To create a new release click here.');
+		echo _('To create a new release click here.');
 		echo "</a></p>";
 	}
 
