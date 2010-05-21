@@ -402,14 +402,7 @@ Thank you for registering your project with %1$s.
 	 * @return boolean true if the user can administrate mailing lists
 	 */
 	function userIsAdmin() {
-		$perm = & $this->Group->getPermission ();
-		if (!$perm || !is_object($perm)) {
-			return false;
-		} elseif ($perm->isAdmin()) {
-			return true;
-		} else {
-			return false;
-		}
+		return forge_check_perm ('project_admin', $this->Group->getID()) ;
 	}
 }
 
