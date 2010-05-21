@@ -276,11 +276,14 @@ abstract class BaseRole extends Error implements PFO_Role {
 			
 		case 'frs':
 			switch ($action) {
-			case 'read':
+			case 'read_public':
 				$min = 1 ;
 				break ;
-			case 'write':
+			case 'read_private':
 				$min = 2 ;
+				break ;
+			case 'write':
+				$min = 3 ;
 				break ;
 			}
 			if (($value >= $min)

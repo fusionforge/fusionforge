@@ -231,7 +231,6 @@ echo '<div id="file-releases">';
 
 // ############################# File Releases
 
-// CB hide FRS if desired
 if ($project->usesFRS()) {
 	echo $HTML->boxTop(_('Latest File Releases'), 'Latest_File_Releases');
 	$unix_group_name = $project->getUnixName();
@@ -259,31 +258,31 @@ if ($project->usesFRS()) {
 			</th>
 		</tr>';
 
-		//
-		//  Members of projects can see all packages
-		//  Non-members can only see public packages
-		//
-		$public_required = 1;
-		if (session_loggedin() &&
-		    (user_ismember($group_id) || user_ismember(1,'A'))) {
-			$public_required = 0 ;
-		}
-
-		$res_files = db_query_params ('SELECT frs_package.package_id,frs_package.name AS package_name,frs_release.name AS release_name,frs_release.release_id AS release_id,frs_release.release_date AS release_date 
+	if (! forge_check_perm ('frs', $group_id, 'read_public')) {
+		echo '<tr><td colspan="6"><strong>'._('This Project Has Not Released Any Files (or you are not allowed to see them).').'</strong></td></tr>';
+	} else {
+		$qpa = db_construct_qpa () ;
+		$qpa = db_construct_qpa ($qpa, 'SELECT frs_package.package_id,frs_package.name AS package_name,frs_release.name AS release_name,frs_release.release_id AS release_id,frs_release.release_date AS release_date 
 			FROM frs_package,frs_release 
 			WHERE frs_package.package_id=frs_release.package_id 
 			AND frs_package.group_id=$1 
-			AND frs_release.status_id=1 
-			AND (frs_package.is_public=1 OR 1 != $2)
-			ORDER BY frs_package.package_id,frs_release.release_date DESC',
-			array ($group_id,
-				$public_required));
+			AND frs_release.status_id=1 ',
+					 array ($group_id)) ;
+		
+		if (! forge_check_perm ('frs', $group_id, 'read_private')) {
+			$qpa = db_construct_qpa ($qpa, 'AND (frs_package.is_public=1 ', array ()) ;
+		}
+		
+		$qpa = db_construct_qpa ($qpa, 'ORDER BY frs_package.package_id,frs_release.release_date DESC',
+					 array ());
+		
+		$res_files = db_query_qpa ($qpa);
 		$rows_files=db_numrows($res_files);
 		if (!$res_files || $rows_files < 1) {
 			echo db_error();
 			// No releases
-			echo '<tr><td colspan="6"><strong>'._('This Project Has Not Released Any Files').'</strong></td></tr>';
-
+			echo '<tr><td colspan="6"><strong>'._('This Project Has Not Released Any Files (or you are not allowed to see them).').'</strong></td></tr>';
+			
 		} else {
 			
 			//	This query actually contains ALL releases of all packages
@@ -303,6 +302,7 @@ if ($project->usesFRS()) {
 						</td>';
 					// Releases to display
 //print '<div about="" xmlns:sioc="http://rdfs.org/sioc/ns#" rel="container_of" resource="'.util_make_link ('/frs/?group_id=' . $group_id . '&amp;release_id=' . db_result($res_files,$f,'release_id').'">';
+
 					echo '
                         <td>'
 						.$package_release.'
@@ -342,10 +342,11 @@ if ($project->usesFRS()) {
 				}
 			}
 		}
-		echo '</table>';
-		echo '<div class="underline-link">' . util_make_link ('/frs/?group_id='.$group_id, _('View All Project Files')) . '</div>';
+	}
+	echo '</table>';
+	echo '<div class="underline-link">' . util_make_link ('/frs/?group_id='.$group_id, _('View All Project Files')) . '</div>';
 		
-		echo $HTML->boxBottom();
+	echo $HTML->boxBottom();
 }
 
 echo '</div><!-- id="file-releases" -->' . "\n";
