@@ -160,9 +160,7 @@ class Forum extends Error {
 		} else {
 			// Current permissions check.
 
-			$perm =& $this->Group->getPermission ();
-
-			if (!$perm || !is_object($perm) || !$perm->isForumAdmin()) {
+			if (!forge_check_perm ('forum_admin', $this->Group->getID())) {
 				$this->setPermissionDeniedError();
 				return false;
 			}
