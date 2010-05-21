@@ -417,12 +417,12 @@ abstract class BaseRole extends Error {
 
 		if (USE_PFO_RBAC) {
 			$sections = array ('project_read', 'project_admin', 'frs', 'scm', 'docman', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm', 'webcal') ;
-			foreach ($arr as $section) {
+			foreach ($sections as $section) {
 				$result[$section][$group_id] = $this->getVal ($section, $group_id) ;
 			}
 		} else {
 			$sections = array ('projectadmin', 'frs', 'scm', 'docman', 'trackeradmin', 'newtracker', 'forumadmin', 'newforum', 'pmadmin', 'newpm', 'webcal') ;
-			foreach ($arr as $section) {
+			foreach ($sections as $section) {
 				$result[$section][0] = $this->getVal ($section, 0) ;
 			}
 		}
