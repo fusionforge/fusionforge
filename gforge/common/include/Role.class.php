@@ -440,7 +440,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 		foreach ($projects as $p) {
 			$pgf = new ProjectGroupFactory ($p) ;
 			$pgs = $atf->getProjectGroups () ;
-			foreach ($pgs as $t) {
+			foreach ($pgs as $g) {
 				if (USE_PFO_RBAC) {
 					if (array_key_exists ('pm', $this->perms_array)
 					    && array_key_exists ($g->getID(), $this->perms_array['pm']) ) {
