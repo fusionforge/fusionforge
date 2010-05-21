@@ -331,7 +331,7 @@ function getUnitLabel($unit) {
 
 require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
-session_require(array('group'=>'1','admin_flags'=>'A'));
+session_require_global_perm ('forge_admin');
 
 $HTML->header(array('title'=>sprintf(_('Edit the %1$ss Table'), ucwords(getUnitLabel($unit)))));
 

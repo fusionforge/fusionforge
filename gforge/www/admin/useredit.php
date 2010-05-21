@@ -26,7 +26,8 @@ require_once $gfwww.'include/pre.php';
 require_once $gfcommon.'include/account.php';
 require_once $gfwww.'admin/admin_utils.php';
 
-session_require(array('group'=>'1','admin_flags'=>'A'));
+session_require_global_perm ('forge_admin');
+
 $unix_status2str = array(
 	'N'=>_('No Unix account (N)'),
 	'A'=>_('Active (A)'),

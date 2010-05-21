@@ -27,7 +27,7 @@ require_once $gfcommon.'include/account.php';
 require_once $gfcommon.'include/timezones.php';
 
 if (forge_get_config ('user_registration_restricted')) {
-	session_require(array('group'=>'1','admin_flags'=>'A'));
+	session_require_global_perm ('forge_admin');
 }
 
 $unix_name = getStringFromRequest('unix_name');

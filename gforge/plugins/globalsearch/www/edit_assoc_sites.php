@@ -26,7 +26,7 @@
 require_once('../../env.inc.php');
 require_once $gfwww.'include/pre.php';
 
-session_require(array('group'=>'1','admin_flags'=>'A'));
+session_require_global_perm ('forge_admin');
 include_once(forge_get_config('plugins_path').'/globalsearch/common/globalsearch_edit_utils.php');
 
 $HTML->header(array('title'=>_('Edit associated forges for global search')));

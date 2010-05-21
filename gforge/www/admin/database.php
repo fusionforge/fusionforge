@@ -37,7 +37,7 @@ if (!forge_get_config('use_project_database')) {
 	exit_disabled();
 }
 
-session_require(array('group'=>'1','admin_flags'=>'A'));
+session_require_global_perm ('forge_admin');
 
 if (getStringFromRequest('submit')) {
 	$group_id = getIntFromRequest('group_id');

@@ -26,7 +26,7 @@ require_once $gfwww.'include/pre.php';
 require_once $gfwww.'include/trove.php';
 require_once $gfwww.'admin/admin_utils.php';
 
-session_require(array('group'=>'1','admin_flags'=>'A'));
+session_require_global_perm ('forge_admin');
 
 // ########################################################
 

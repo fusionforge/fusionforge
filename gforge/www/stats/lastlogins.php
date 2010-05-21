@@ -14,7 +14,7 @@
 require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
 
-session_require(array('group'=>'1','admin_flags'=>'A'));
+session_require_global_perm ('forge_admin');
 
 $res_logins = db_query_params ('SELECT us.user_id AS user_id,
 	us.ip_addr AS ip_addr,

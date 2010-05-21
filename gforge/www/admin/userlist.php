@@ -23,7 +23,8 @@
 require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
-session_require(array('group'=>'1','admin_flags'=>'A'));
+
+session_require_global_perm ('forge_admin');
  
 $HTML->header(array('title'=>_(': User List')));
 

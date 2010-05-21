@@ -14,7 +14,7 @@ $plugin = plugin_get_object ('contribtracker') ;
 
 $max_logo_size = 50 ;		// In kibibytes
 
-session_require(array('group'=>'1','admin_flags'=>'A'));
+session_require_global_perm ('forge_admin') ;
 
 site_admin_header (array ('title' => _('Contribution tracker administration'))) ;
 
