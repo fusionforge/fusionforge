@@ -340,7 +340,7 @@ class ForumMessage extends Error {
 			$this->setError(_('Must Include A Message Body And Subject'));
 			return false;
 		}
-		if (!$this->Forum->userCanPost()) {
+		if (!forge_check_perm ('forum', $this->Forum->getID(), 'post')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}

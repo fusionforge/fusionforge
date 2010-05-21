@@ -175,7 +175,7 @@ class ArtifactType extends Error {
 			//
 			//  Make sure they can even access this object
 			//
-			if (!$this->userCanView()) {
+			if (!forge_check_perm ('tracker', $this->getID(), 'read')) {
 				$this->setPermissionDeniedError();
 				$this->data_array = null;
 				return false;
@@ -967,19 +967,6 @@ class ArtifactType extends Error {
 		USER PERMISSION FUNCTIONS
 
 	*/
-
-	/**
-	 *	  userCanView - determine if the user can view this artifact type.
-	 *
-	 *	  @return boolean	user_can_view.
-	 */
-	function userCanView() {
-		if ($this->isPublic()) {
-			return true;
-		} else {
-			return forge_check_perm ('tracker', $this->getID(), 'read') ;
-		}
-	}
 
 	/**
 	 *	userIsAdmin - see if the logged-in user's perms are >= 2 or Group ArtifactAdmin.

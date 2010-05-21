@@ -155,7 +155,7 @@ class Artifact extends Error {
 		//
 		//	make sure this person has permission to view artifacts
 		//
-		if (!$this->ArtifactType->userCanView()) {
+		if (!forge_check_perm ('tracker', $this->ArtifactType->getID(), 'read')) {
 			$this->setError(_('Artifact: Only group members can view private artifact types'));
 			return false;
 		}

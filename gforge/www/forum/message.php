@@ -97,8 +97,8 @@ if ($msg_id) {
 		exit_error(_('Error'),$fh->getErrorMessage());
 	}
 
-	if ($reply && !$f->userCanPost()) {
-		exit_permission_denied();
+	if ($reply) {
+		session_require_perm ('forum', $f->getID(), 'post') ;
 	}
 	
 	forum_header(array('title'=>$fm->getSubject(),'forum_id'=>$forum_id));

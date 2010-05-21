@@ -109,7 +109,7 @@ class ProjectGroup extends Error {
 			//
 			//  Make sure they can even access this object
 			//
-			if (!$this->userCanView()) {
+			if (!forge_check_perm ('pm', $this->getID(), 'read')) {
 				$this->setPermissionDeniedError();
 				$this->data_array = null;
 				return false;
@@ -549,30 +549,6 @@ class ProjectGroup extends Error {
 		USER PERMISSION FUNCTIONS
 
 	*/
-
-	/**
-	 *	userCanView - determine if the user can view this subproject.
-	 *
-	 *	@return boolean   user_can_view.
-	 */
-	function userCanView() {
-		if ($this->isPublic()) {
-			return true;
-		} else {
-			if (!session_loggedin()) {
-				return false;
-			} else {
-				//
-				//  You must have a role in this project if this subproject is not public
-				//
-				if ($this->getCurrentUserPerm() >= 0) {
-					return true;
-				} else {
-					return false;
-				}
-			}
-		}
-	}
 
 	/**
 	 *  userIsAdmin - see if the logged-in user's perms are >= 2 or Group PMAdmin.

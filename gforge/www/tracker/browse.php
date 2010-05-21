@@ -12,9 +12,7 @@ require_once $gfcommon.'tracker/ArtifactQuery.class.php';
 //
 //  make sure this person has permission to view artifacts
 //
-if (!$ath->userCanView()) {
-	exit_permission_denied();
-}
+session_require_perm ('tracker', $ath->getID(), 'read') ;
 
 $query_id = getIntFromRequest('query_id');
 $start = getIntFromRequest('start');

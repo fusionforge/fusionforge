@@ -155,7 +155,7 @@ class Widget_MyArtifacts extends Widget {
 				exit_no_group();
 			}
 			//Check if user can view artifact
-			if($trackers_array->getArtifactType()->userCanView() ) {
+			if (forge_check_perm ('tracker', $trackers_array->getArtifactType()->getID(), 'read')) {
 
 				//work on the tracker of the last round if there was one
 				if ($atid != $atid_old && $count_aids != 0) {

@@ -91,7 +91,7 @@ class Forum extends Error {
 			//
 			//	Make sure they can even access this object
 			//
-			if (!$this->userCanView()) {
+			if (!forge_check_perm ('forum', $this->getID(), 'read')) {
 				$this->setPermissionDeniedError();
 				$this->data_array = null;
 				return false;
@@ -651,30 +651,6 @@ class Forum extends Error {
 	*/
 
 	/**
-	 *  userCanView - determine if the user can view this forum.
-	 *
-	 *  @return boolean   user_can_view.
-	 */
-	function userCanView() {
-		if ($this->isPublic()) {
-			return true;
-		} else {
-			if (!session_loggedin()) {
-				return false;
-			} else {
-				//
-				//  You must have a role in the project if this forum is not public
-				//
-				if ($this->userIsAdmin() || $this->getCurrentUserPerm() >= 0) {
-					return true;
-				} else {
-					return false;
-				}
-			}
-		}
-	}
-
-	/**
 	 *  userIsModLvl1 - see if the user goes into the moderated level 1 category
 	 *
 	 *  @return boolean user_is_mod_lvl1
@@ -707,29 +683,6 @@ class Forum extends Error {
 		}
 	}
 	
-	/**
-	 *  userCanPost - see if the logged-in user's perms are >= 1 or Group ForumAdmin.
-	 *
-	 *  @return boolean user_can_post.
-	 */
-	function userCanPost() {
-		if (($this->isPublic() && $this->allowAnonymous()) || $this->userIsAdmin()) {
-			return true;
-		} elseif ($this->isPublic() && session_loggedin()) {
-			return true;
-		} else {
-			if (!session_loggedin()) {
-				return false;
-			} else {
-				if ($this->getCurrentUserPerm() >= 1) {
-					return true;
-				} else {
-					return false;
-				}
-			}
-		}
-	}
-
 	/**
 	 *  userIsAdmin - see if the logged-in user's perms are >= 2 or Group ForumAdmin.
 	 *

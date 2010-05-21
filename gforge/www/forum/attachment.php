@@ -79,9 +79,7 @@ if (!$f || !is_object($f)) {
 }
 
 if ($delete == "yes") {
-	if (!$f->userCanPost()) {
-		exit_permission_denied();
-	}
+	session_require_perm ('forum', $f->getID(), 'post') ;
 
 	//only the user that created the attach  or forum admin can delete it (safecheck)
 	if (!$pending) { //pending messages aren't deleted from this page
@@ -108,10 +106,7 @@ if ($delete == "yes") {
 }
 
 if ($edit=="yes") {
-	
-	if (!$f->userCanPost()) {
-		exit_permission_denied();
-	}
+	session_require_perm ('forum', $f->getID(), 'post') ;
 
 	//only the user that created the attach  or forum admin can edit it (safecheck)
 	if (!$pending) { //pending messages aren't deleted from this page
@@ -179,10 +174,7 @@ if ($edit=="yes") {
 	}
 }
 
-//only if the forum is public, or else the user is admin or has view privileges can download the attachment
-if ( ! ( ($f->userCanView()) || ($f->userIsAdmin()) || ($f->isPublic()) ) ) {
-	exit_permission_denied();
-}
+session_require_perm ('forum', $f->getID(), 'read') ;
 
 if (!$attachid) {
 	exit_missing_param();

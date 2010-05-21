@@ -481,7 +481,7 @@ class ForumHTML extends Error {
 		$g =& $this->Forum->getGroup();
 		$group_id = $g->getID();
 
-		if ($this->Forum->userCanPost()) { // minor control, but anyways it should be an admin at this point
+		if (forge_check_perm ('forum', $this->Forum->getID(), 'post')) { // minor control, but anyways it should be an admin at this point
 			echo notepad_func();
 			?>
 <div align="center">
@@ -545,7 +545,7 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 
 	$body = '';
 	
-	if ($this->Forum->userCanPost()) {
+	if (forge_check_perm ('forum', $this->Forum->getID(), 'post')) {
 		if ($subject) {
 			//if this is a followup, put a RE: before it if needed
 			if (!eregi('RE:',$subject,$test)) {

@@ -25,9 +25,7 @@ $date = date('Y-m-d');
 header('Content-type: text/csv');
 header('Content-disposition: filename="tracker_report-'.$date.'.csv"');
 
-if (!$ath->userCanView()) {
-	exit_permission_denied();
-}
+session_require_perm ('tracker', $ath->getID(), 'read') ;
 
 $af = new ArtifactFactory($ath);
 if (!$af || !is_object($af)) {
