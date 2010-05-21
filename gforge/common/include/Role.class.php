@@ -590,10 +590,37 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				break ;
 			}
 			$o = artifactType_get_object ($reference) ;
+			if (!$o or $o->is_error()) {
+				return false ;
+			}
 
 			if (($value & $mask == true)
-			    || $this->hasPermission ('project_admin', $reference)
+			    || $this->hasPermission ('tracker_admin', $reference)
 			    || $this->hasPermission ('project_admin', $reference)) {
+				return true ;
+			}
+			break ;
+
+		case 'pm':
+			switch ($action) {
+			case 'read':
+				$mask = 1 ;
+				break ;
+			case 'tech':
+				$mask = 2 ;
+				break ;
+			case 'manager':
+				$mask = 4 ;
+				break ;
+			}
+			$o = projectgroup_get_object ($reference) ;
+			if (!$o or $o->is_error()) {
+				return false ;
+			}
+
+			if (($value & $mask == true)
+			    || $this->hasPermission ('pm_admin', $o->Group->getID())
+			    || $this->hasPermission ('project_admin', $o->Group->getID())) {
 				return true ;
 			}
 			break ;

@@ -34,7 +34,7 @@ abstract class BaseRole extends Error implements PFO_Role {
 	public function hasUser($user) {
 		throw new Exception ("Not implemented") ;
 	}
-	public function hasPermission($section, $reference, $action) {
+	public function hasPermission($section, $reference, $action = NULL) {
 		throw new Exception ("Not implemented") ;
 	}
         function hasGlobalPermission($section, $action = NULL) {
