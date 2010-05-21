@@ -231,7 +231,7 @@ project_admin_header(array('title'=>sprintf(_('Project Admin: %s'), $group->getP
         </form>';
 
 		echo '<form action="roleedit.php?group_id='. $group_id .'" method="post"><p>';
-		echo role_box($group_id,'role_id','');
+		echo role_box($group_id,'role_id','',false);
 		echo '&nbsp;<input type="submit" name="edit" value="'._("Edit Role").'" /></p></form>';
 
 		echo '<p><a href="roleedit.php?group_id='.$group_id.'">'._("Add Role").'</a>';

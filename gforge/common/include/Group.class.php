@@ -2445,7 +2445,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		if (USE_PFO_RBAC) {				
 			$engine = RBACEngine::getInstance() ;
 			foreach ($roles as $role_id) {
-				$result[] = $engine->getRoleById () ;
+				$result[] = $engine->getRoleById ($role_id) ;
 			}
 		} else {
 			foreach ($roles as $role_id) {
