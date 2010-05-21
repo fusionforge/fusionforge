@@ -78,27 +78,6 @@ class ArtifactType extends Error {
 	var $extra_field;
 	
 	/**
-	 * Options	db resource ID.
-	 *
-	 * @var		int		$options_res.
-	 */
-	var $options_res;
-
-	/**
-	 * Choice name	db resource ID.
-	 *
-	 * @var		int		$choice_name_res.
-	 */
-	var $choice_name_res;
-
-	/**
-	 * Current user permissions.
-	 *
-	 * @var		int		$current_user_perm.
-	 */
-	var $current_user_perm;
-
-	/**
 	 * Technicians db resource ID.
 	 *
 	 * @var		int		$technicians_res.

@@ -53,8 +53,6 @@ class Forum extends Error {
 	 */
 	var $view_types;
 
-	var $current_user_perm;
-
 	/**
 	 *  Constructor.
 	 *

@@ -72,7 +72,6 @@ class ProjectGroup extends Error {
 	var $statuses;
 	var $categories;
 	var $technicians;
-	var $current_user_perm;
 
 	/**
 	 *  Constructor.
