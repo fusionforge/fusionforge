@@ -78,17 +78,6 @@ abstract class BaseRole extends Error implements PFO_Role {
 		}
 		$this->data_array =& db_fetch_array($res);
 
-		$res = db_query_params ('SELECT * FROM role_setting WHERE role_id=$1',
-					array ($role_id)) ;
-		if (!$res) {
-			$this->setError('Role::fetchData()::'.db_error());
-			return false;
-		}
-		$this->setting_array=array();
-		while ($arr =& db_fetch_array($res)) {
-			$this->setting_array[$arr['section_name']][$arr['ref_id']] = $arr['value'];
-		}
-
 		if (USE_PFO_RBAC) {
 			$res = db_query_params ('SELECT section, reference, value FROM role_perms WHERE role_id=$1',
 						array ($role_id)) ;
@@ -100,7 +89,21 @@ abstract class BaseRole extends Error implements PFO_Role {
 			while ($arr =& db_fetch_array($res)) {
 				$this->perms_array[$arr['section']][$arr['reference']] = $arr['value'];
 			}
-		} else { 	// Map pre-PFO RBAC section names and values to the new values
+		} else {
+			// Load pre-PFO RBAC settings...
+			$res = db_query_params ('SELECT * FROM role_setting WHERE role_id=$1',
+						array ($role_id)) ;
+			if (!$res) {
+				$this->setError('Role::fetchData()::'.db_error());
+				return false;
+			}
+			$this->setting_array=array();
+			while ($arr =& db_fetch_array($res)) {
+				$this->setting_array[$arr['section_name']][$arr['ref_id']] = $arr['value'];
+			}
+
+			// ...and map section names and values to the new values
+
 			$this->perms_array=array();
 			foreach ($this->setting_array as $oldsection => $t) {
 				switch ($oldsection) {
