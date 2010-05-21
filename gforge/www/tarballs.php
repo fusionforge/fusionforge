@@ -28,13 +28,9 @@ if (!$group || !is_object($group)) {
 		$group->getErrorMessage());
 }
 
-$perm =& $group->getPermission ();
-if (!$perm || !is_object($perm)) {
-	exit_error(_('Error'),
-		_('Error creating permission'));
-} else if ($perm->isError()) {
-	exit_error(_('Error'),
-		$perm->getErrorMessage());
+// Tarball downloads require the same permissions as SCM read access
+if (!forge_check_perm ('scm', $group->getID(), 'read')) {
+ 	exit_permission_denied();
 }
 
 $group_name=$group->getUnixName();

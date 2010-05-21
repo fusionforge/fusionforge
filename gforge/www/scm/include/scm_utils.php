@@ -45,20 +45,19 @@ function scm_header($params) {
 		Show horizontal links
 	*/
 	if (session_loggedin()) {
-		$perm =& $project->getPermission ();
-		if ($perm && is_object($perm) && !$perm->isError() && $perm->isAdmin()) {
-				echo $HTML->subMenu(
+		if (forge_check_perm ('project_admin', $project->getID())) {
+			echo $HTML->subMenu(
 				array(
 					_('SCM'),
 					_('Admin'),
 					_('Reporting')
-				),
+					),
 				array(
 					'/scm/?group_id='.$params['group'],
 					'/scm/admin/?group_id='.$params['group'],
 					'/scm/reporting/?group_id='.$params['group']
-				)
-			);
+					)
+				);
 		}
 	}
 	echo '<div class="scm" style="width:99%">';

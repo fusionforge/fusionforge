@@ -56,16 +56,9 @@ $scm_box = $Group->getSCMBox();
 //$external_scm = (gethostbyname(forge_get_config('web_host')) != gethostbyname($scm_box)); 
 $external_scm = !$sys_scm_single_host;
 
-if (session_loggedin()) {
-	if (user_ismember($Group->getID())) {
-		$perm = & $Group->getPermission ();
-		
-		if (!($perm && is_object($perm) && $perm->isCVSReader()) && !$Group->enableAnonSCM()) {
-			exit_permission_denied();
-		}
-	} else if (!$Group->enableAnonSCM()) {
-		exit_permission_denied();
-	}
+if (!forge_check_perm ('scm', $group->getID(), 'read')) {
+	exit_permission_denied();
+}
 	
 } else if (!$Group->enableAnonSCM()) {		// user is not logged in... check if group accepts anonymous CVS
 	exit_permission_denied();
@@ -142,5 +135,10 @@ if (viewcvs_is_html()) {
 	// seems to be corrupted
 	echo $content;
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

@@ -27,16 +27,8 @@ if (!$group || !is_object($group)) {
 		$group->getErrorMessage());
 }
 
-// Snapshot can be downloaded only if anon SCM is enabled or if the
-// logged in user belongs the group
-$permission = $group->enableAnonSCM();
-if(session_loggedin()) {
-	$perm =& $group->getPermission ();
- 	if ($perm && is_object($perm) && !$perm->isError() && $perm->isMember()) {
- 		$permission = true;
- 	}
-}
-if (!$permission) {
+// Snapshot downloads require the same permissions as SCM read access
+if (!forge_check_perm ('scm', $group->getID(), 'read')) {
  	exit_permission_denied();
 }
 
