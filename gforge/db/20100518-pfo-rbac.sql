@@ -94,7 +94,7 @@ BEGIN
 		nsec = 'tracker' ;
 		FOR agl IN SELECT * FROM artifact_group_list WHERE group_id = opid
 		LOOP
-			nref = agl.group_artifact_id
+			nref = agl.group_artifact_id ;
 			nval = pfo_rbac_permissions_from_old (r.role_id, nsec, nref) ;
 			PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
 		END LOOP ;
@@ -110,7 +110,7 @@ BEGIN
 		nsec = 'pm' ;
 		FOR pgl IN SELECT * FROM project_group_list WHERE group_id = opid
 		LOOP
-			nref = pgl.group_project_id
+			nref = pgl.group_project_id ;
 			nval = pfo_rbac_permissions_from_old (r.role_id, nsec, nref) ;
 			PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
 		END LOOP ;
@@ -126,7 +126,7 @@ BEGIN
 		nsec = 'forum' ;
 		FOR fgl IN SELECT * FROM forum_group_list WHERE group_id = opid
 		LOOP
-			nref = fgl.group_forum_id
+			nref = fgl.group_forum_id ;
 			nval = pfo_rbac_permissions_from_old (r.role_id, nsec, nref) ;
 			PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
 		END LOOP ;
@@ -157,7 +157,7 @@ BEGIN
 END ;
 $$ LANGUAGE plpgsql ;
 
-CREATE OR REPLACE FUNCTION migrate_role_observer_to_pfo_rbac () RETURNS void AS $$
+CREATE FUNCTION migrate_role_observer_to_pfo_rbac () RETURNS void AS $$
 DECLARE
 	g groups%ROWTYPE ;
 	t artifact_group_list%ROWTYPE ;
