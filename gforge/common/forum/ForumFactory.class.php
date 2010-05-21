@@ -96,11 +96,6 @@ ORDER BY group_forum_id',
 			return $this->forums;
 		}
 
-		$result = db_query_params ('SELECT * FROM forum_group_list_vw
-WHERE group_id=$1
-ORDER BY group_forum_id',
-					   array ($this->Group->getID())) ;
-
 		$ids = $this->getAllForumIds() ;
 		
 		if (count ($ids) < 1) {
@@ -115,8 +110,7 @@ ORDER BY group_forum_id',
 		}
 		return $this->forums;
 	}
-	
-	
+		
 	/**
 	 *	getForumsAdmin - get an array of all (public, private and suspended) Forum objects for this Group.
 	 *

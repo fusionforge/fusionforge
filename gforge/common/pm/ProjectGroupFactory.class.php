@@ -95,11 +95,8 @@ class ProjectGroupFactory extends Error {
 		if ($this->projectGroups) {
 			return $this->projectGroups;
 		}
-		$result = db_query_params ('SELECT * FROM project_group_list_vw WHERE group_id=$1 ORDER BY group_project_id',
-							   array ($this->Group->getID())) ;
-		$rows = db_numrows($result);
 
-		$ids = $this->getAllArtifactTypeIds() ;
+		$ids = $this->getAllProjectGroupIds() ;
 
 		if (count ($ids) < 1) {
 			$this->setError('None Found '.db_error());
