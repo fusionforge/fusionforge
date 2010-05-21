@@ -49,10 +49,10 @@ abstract class BaseRole extends Error implements PFO_Role {
 // Actual classes
 
 class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
-	public function addUser($user) {
+	public function addUsers($users) {
 		return true ;
 	}
-	public function removeUser($user) {
+	public function removeUsers($users) {
 		return true ;
 	}
 	public function getUsers() {

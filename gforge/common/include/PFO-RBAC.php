@@ -52,8 +52,8 @@ interface PFO_Role {
 
 interface PFO_RoleExplicit extends PFO_Role {
 	const roleclass = PFO_ROLE_EXPLICIT ;
-	public function addUser($user) ;
-	public function removeUser($user) ;
+	public function addUsers($users) ;
+	public function removeUsers($users) ;
 }
 
 interface PFO_RoleUnion extends PFO_Role {
