@@ -37,7 +37,7 @@ if (!$g || !is_object($g)) {
 	exit_error('Error',$g->getErrorMessage());	
 }
 
-session_require_perm ('docman', $group_id, 'submit')) {
+session_require_perm ('docman', $group_id, 'submit') ;
 
 $upload_dir = forge_get_config('ftp_upload_dir') . "/" . $g->getUnixName();
 
