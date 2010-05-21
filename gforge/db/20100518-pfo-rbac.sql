@@ -58,154 +58,112 @@ INSERT INTO pfo_user_role (SELECT ug.user_id, r.role_id FROM user_group ug, pfo_
 CREATE OR REPLACE FUNCTION insert_pfo_role_setting (role_id integer, section_name text, ref_id integer, perm_val integer) RETURNS void AS $$
 BEGIN
 	-- RAISE NOTICE 'insert_pfo_role_setting (%,%,%,%)', role_id, section_name, ref_id, perm_val ;
-	INSERT INTO pfo_role_setting VALUES (role_id, section_name, ref_id, perm_val) ;
+	IF perm_val != 0 THEN
+	   INSERT INTO pfo_role_setting VALUES (role_id, section_name, ref_id, perm_val) ;
+	END IF ;
 END ;
 $$ LANGUAGE plpgsql ;
 
 CREATE OR REPLACE FUNCTION migrate_rbac_permissions_to_pfo_rbac () RETURNS void AS $$
 DECLARE
-	os role_setting%ROWTYPE ;
+	r role%ROWTYPE ;
 	nrid integer := 0 ;
 	nsec text := '' ;
 	nref integer := 0 ;
 	nval integer := 0 ;
-	mastergroupid integer := 1 ;
-	newsgroupid integer := 0 ;
-	statsgroupid integer := 0 ;
 	opid integer := 0 ;
-	tmp integer := 0 ;
 BEGIN
-	SELECT group_id INTO newsgroupid FROM groups WHERE unix_group_name = 'newsadmin' ;
-	SELECT group_id INTO statsgroupid FROM groups WHERE unix_group_name = 'stats' ;
-
-	INSERT INTO pfo_role_setting (SELECT role_id, 'project_read', home_group_id, 1 FROM pfo_role WHERE home_group_id IS NOT NULL) ;
-
-	FOR os IN SELECT * FROM role_setting ORDER BY role_id, section_name, ref_id
+	FOR r IN SELECT * FROM role
 	LOOP
-		SELECT role_id INTO nrid FROM pfo_role WHERE old_role_id = os.role_id ;
-		SELECT group_id INTO opid FROM role WHERE role_id = os.role_id ;
-		-- RAISE NOTICE '% > %, %/%/%', os.role_id, nrid, os.section_name, os.ref_id, os.value ;
+		SELECT role_id INTO nrid FROM pfo_role WHERE old_role_id = r.role_id ;
+		SELECT group_id INTO opid FROM role WHERE role_id = r.role_id ;
 
-		IF os.section_name = 'projectadmin' THEN
-		   CONTINUE WHEN os.value != 'A' ;
-		   nsec = 'project_admin' ;
-		   nref = opid ;
-		   nval = 1 ;
-		   PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
-		   
-		   nref = -1 ;
-		   IF opid = mastergroupid THEN
-		   	  nsec = 'forge_admin' ;
-		   	  PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
-		   END IF ;
-		   IF opid = newsgroupid THEN
-		   	  nsec = 'approve_news' ;
-		   	  PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
-		   END IF ;
-		   IF opid = statsgroupid THEN
-		   	  nsec = 'forge_stats' ;
-		   	  PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
-		   END IF ;
+		PERFORM insert_pfo_role_setting (nrid, 'project_read', opid, 1) ;
 
-		ELSIF os.section_name IN ('trackeradmin', 'pmadmin', 'forumadmin') THEN
-		   CONTINUE WHEN os.value != '2' ;
-		   nsec = CASE WHEN os.section_name = 'trackeradmin' THEN 'tracker_admin'
-		   	       WHEN os.section_name = 'pmadmin' THEN 'pm_admin'
-		   	       WHEN os.section_name = 'forumadmin' THEN 'forum_admin' END ;
-		   nref = opid ;
-		   nval = 1 ;
-		   PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
+		nsec = 'project_admin' ;
+		nref = opid ;
+		nval = pfo_rbac_permissions_from_old (r.role_id, nsec, nref) ;
+		PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
 
-		ELSIF os.section_name IN ('tracker', 'newtracker') THEN
-		   CONTINUE WHEN os.value = '-1' ;
-		   nsec = CASE WHEN os.section_name = 'tracker' THEN os.section_name
-		   	       WHEN os.section_name = 'newtracker' THEN 'new_tracker' END ;
-		   nref = CASE WHEN os.section_name = 'tracker' THEN os.ref_id
-		   	       WHEN os.section_name = 'newtracker' THEN opid END ;
-		   nval = CASE WHEN os.value = '0' THEN 1
-		   	       WHEN os.value = '1' THEN 3
-		   	       WHEN os.value = '2' THEN 7
-		   	       WHEN os.value = '3' THEN 5 END ;
-		   PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
+		nsec = 'forge_admin' ;
+		nref = -1 ;
+		nval = pfo_rbac_permissions_from_old (r.role_id, nsec, nref) ;
+		PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
+		nsec = 'approve_news' ;
+		nref = -1 ;
+		nval = pfo_rbac_permissions_from_old (r.role_id, nsec, nref) ;
+		PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
+		nsec = 'forge_stats' ;
+		nref = opid ;
+		nval = pfo_rbac_permissions_from_old (r.role_id, nsec, nref) ;
+		PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
 
-		ELSIF os.section_name IN ('pm', 'newpm') THEN
-		   CONTINUE WHEN os.value = '-1' ;
-		   nsec = CASE WHEN os.section_name = 'pm' THEN os.section_name
-		   	       WHEN os.section_name = 'newpm' THEN 'new_pm' END ;
-		   nref = CASE WHEN os.section_name = 'pm' THEN os.ref_id
-		   	       WHEN os.section_name = 'newpm' THEN opid END ;
-		   nval = CASE WHEN os.value = '0' THEN 1
-		   	       WHEN os.value = '1' THEN 3
-		   	       WHEN os.value = '2' THEN 7
-		   	       WHEN os.value = '3' THEN 5 END ;
-		   PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
+		nsec = 'tracker_admin' ;
+		nref = opid ;
+		nval = pfo_rbac_permissions_from_old (r.role_id, nsec, nref) ;
+		PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
+		nsec = 'new_tracker' ;
+		nref = opid ;
+		nval = pfo_rbac_permissions_from_old (r.role_id, nsec, nref) ;
+		PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
+		nsec = 'tracker' ;
+		FOR nref IN SELECT group_artifact_id FROM artifact_group_list WHERE group_id = opid
+		LOOP
+			nval = pfo_rbac_permissions_from_old (r.role_id, nsec, nref) ;
+			PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
+		END LOOP ;
 
-		ELSIF os.section_name = 'forum' THEN
-		   CONTINUE WHEN os.value = '-1' ;
-		   nsec = os.section_name ;
-		   nref = os.ref_id ;
-		   SELECT moderation_level INTO tmp FROM forum_group_list WHERE group_forum_id = nref ;
-		   nval = CASE WHEN os.value = '0' THEN 1
-		   	       WHEN os.value = '1' AND tmp >= 2 THEN 2
-		   	       WHEN os.value = '1' AND tmp <= 1 THEN 3
-		   	       WHEN os.value = '2' THEN 4 END ;
-		   PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
+		nsec = 'pm_admin' ;
+		nref = opid ;
+		nval = pfo_rbac_permissions_from_old (r.role_id, nsec, nref) ;
+		PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
+		nsec = 'new_pm' ;
+		nref = opid ;
+		nval = pfo_rbac_permissions_from_old (r.role_id, nsec, nref) ;
+		PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
+		nsec = 'pm' ;
+		FOR nref IN SELECT group_project_id FROM project_group_list WHERE group_id = opid
+		LOOP
+			nval = pfo_rbac_permissions_from_old (r.role_id, nsec, nref) ;
+			PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
+		END LOOP ;
 
-		ELSIF os.section_name = 'newforum' THEN
-		   CONTINUE WHEN os.value = '-1' ;
-		   nsec = 'new_forum' ;
-		   nref = opid ;
-		   nval = CASE WHEN os.value = '0' THEN 1
-		   	       WHEN os.value = '1' THEN 2
-		   	       WHEN os.value = '2' THEN 4 END ;
-		   PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
+		nsec = 'forum_admin' ;
+		nref = opid ;
+		nval = pfo_rbac_permissions_from_old (r.role_id, nsec, nref) ;
+		PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
+		nsec = 'new_forum' ;
+		nref = opid ;
+		nval = pfo_rbac_permissions_from_old (r.role_id, nsec, nref) ;
+		PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
+		nsec = 'forum' ;
+		FOR nref IN SELECT group_forum_id FROM forum_group_list WHERE group_id = opid
+		LOOP
+			nval = pfo_rbac_permissions_from_old (r.role_id, nsec, nref) ;
+			PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
+		END LOOP ;
 
-		ELSIF os.section_name = 'docman' THEN
-		   nsec = os.section_name ;
-		   nref = opid ;
-		   nval = CASE WHEN os.value = '0' THEN 1
-		   	       WHEN os.value = '1' THEN 4 END ;
-		   PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
-
-		ELSIF os.section_name = 'frs' THEN
-		   nsec = os.section_name ;
-		   nref = opid ;
-		   nval = CASE WHEN os.value = '0' THEN 1
-		   	       WHEN os.value = '1' THEN 3 END ;
-		   PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
-
-		ELSIF os.section_name = 'scm' THEN
-		   CONTINUE WHEN os.value = '-1' ;
-		   nsec = os.section_name ;
-		   nref = opid ;
-		   nval = CASE WHEN os.value = '0' THEN 1
-		   	       WHEN os.value = '1' THEN 2 END ;
-		   PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
-
-		ELSIF os.section_name = 'webcal' THEN
-		   CONTINUE WHEN os.value = '0' ;
-		   nsec = os.section_name ;
-		   nref = opid ;
-		   nval = os.value ;
-		   PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
-
-		ELSIF os.section_name = 'plugin_mediawiki_edit' THEN
-		   CONTINUE WHEN os.value = '0' ;
-		   nsec = os.section_name ;
-		   nref = opid ;
-		   nval = os.value ;
-		   PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
-
-		ELSE
-		   RAISE EXCEPTION 'Unknown setting % for role %', os.section_name, os.role_id ;
-		   CONTINUE WHEN os.value = '0' ;
-		   nsec = os.section_name ;
-		   nref = os.ref_id ;
-		   nval = os.value::integer ;
-		   PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
-
-		END IF ;
-
+		nsec = 'docman' ;
+		nref = opid ;
+		nval = pfo_rbac_permissions_from_old (r.role_id, nsec, nref) ;
+		PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
+		nsec = 'scm' ;
+		nref = opid ;
+		nval = pfo_rbac_permissions_from_old (r.role_id, nsec, nref) ;
+		PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
+		nsec = 'frs' ;
+		nref = opid ;
+		nval = pfo_rbac_permissions_from_old (r.role_id, nsec, nref) ;
+		PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
+		nsec = 'webcal' ;
+		nref = opid ;
+		nval = pfo_rbac_permissions_from_old (r.role_id, nsec, nref) ;
+		PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
+		nsec = 'plugin_mediawiki_edit' ;
+		nref = opid ;
+		nval = pfo_rbac_permissions_from_old (r.role_id, nsec, nref) ;
+		PERFORM insert_pfo_role_setting (nrid, nsec, nref, nval) ;
+		
 	END LOOP ;
 
 END ;
@@ -270,9 +228,177 @@ BEGIN
 END ;
 $$ LANGUAGE plpgsql ;
 
+CREATE OR REPLACE FUNCTION pfo_rbac_permissions_from_old (rid integer, nsec text, nref integer) RETURNS integer AS $$
+DECLARE
+	os role_setting%ROWTYPE ;
+	onsec text ;
+	onref integer ;
+	onval integer ;
+	r pfo_role%ROWTYPE ;
+	mastergroupid integer := 1 ;
+	newsgroupid integer := 0 ;
+	statsgroupid integer := 0 ;
+	opid integer := 0 ;
+	tmp integer := 0 ;
+BEGIN
+	SELECT group_id INTO newsgroupid FROM groups WHERE unix_group_name = 'newsadmin' ;
+	SELECT group_id INTO statsgroupid FROM groups WHERE unix_group_name = 'stats' ;
+
+	SELECT * INTO r FROM pfo_role WHERE old_role_id = rid ;
+
+	IF nsec = 'project_read' AND nref = r.home_group_id THEN
+	   RETURN 1 ;
+	END IF ;
+
+	FOR os IN SELECT * FROM role_setting WHERE role_id = rid ORDER BY role_id, section_name, ref_id
+	LOOP
+		SELECT group_id INTO opid FROM role WHERE role_id = os.role_id ;
+
+		IF os.section_name = 'projectadmin' THEN
+		   CONTINUE WHEN os.value != 'A' ;
+		   IF nsec = 'project_admin' AND nref = opid THEN
+		      RETURN 1 ;
+		   END IF ;
+		   
+		   IF nsec = 'forge_admin' AND nref = -1 AND opid = mastergroupid THEN
+		      RETURN 1 ;
+		   END IF ;
+		   IF nsec = 'approve_news' AND nref = -1 AND opid = newsgroupid THEN
+		      RETURN 1 ;
+		   END IF ;
+		   IF nsec = 'forge_stats' AND nref = -1 AND opid = statsgroupid THEN
+		      RETURN 1 ;
+		   END IF ;
+
+		ELSIF os.section_name IN ('trackeradmin', 'pmadmin', 'forumadmin') THEN
+		   CONTINUE WHEN os.value != '2' ;
+		   onsec = CASE WHEN os.section_name = 'trackeradmin' THEN 'tracker_admin'
+		   	       WHEN os.section_name = 'pmadmin' THEN 'pm_admin'
+		   	       WHEN os.section_name = 'forumadmin' THEN 'forum_admin' END ;
+		   IF nsec = onsec AND nref = opid THEN
+		      RETURN 1 ;
+		   END IF ;
+
+		ELSIF os.section_name IN ('tracker', 'newtracker') THEN
+		   CONTINUE WHEN os.value = '-1' ;
+		   onsec = CASE WHEN os.section_name = 'tracker' THEN os.section_name
+		   	       WHEN os.section_name = 'newtracker' THEN 'new_tracker' END ;
+		   onref = CASE WHEN os.section_name = 'tracker' THEN os.ref_id
+		   	       WHEN os.section_name = 'newtracker' THEN opid END ;
+		   onval = CASE WHEN os.value = '0' THEN 1
+		   	       WHEN os.value = '1' THEN 3
+		   	       WHEN os.value = '2' THEN 7
+		   	       WHEN os.value = '3' THEN 5 END ;
+		   IF nsec = onsec AND nref = onref THEN
+		      RETURN onval ;
+		   END IF ;
+
+		ELSIF os.section_name IN ('pm', 'newpm') THEN
+		   CONTINUE WHEN os.value = '-1' ;
+		   onsec = CASE WHEN os.section_name = 'pm' THEN os.section_name
+		   	       WHEN os.section_name = 'newpm' THEN 'new_pm' END ;
+		   onref = CASE WHEN os.section_name = 'pm' THEN os.ref_id
+		   	       WHEN os.section_name = 'newpm' THEN opid END ;
+		   onval = CASE WHEN os.value = '0' THEN 1
+		   	       WHEN os.value = '1' THEN 3
+		   	       WHEN os.value = '2' THEN 7
+		   	       WHEN os.value = '3' THEN 5 END ;
+		   IF nsec = onsec AND nref = onref THEN
+		      RETURN onval ;
+		   END IF ;
+
+		ELSIF os.section_name = 'forum' THEN
+		   CONTINUE WHEN os.value = '-1' ;
+		   onsec = os.section_name ;
+		   onref = os.ref_id ;
+		   SELECT moderation_level INTO tmp FROM forum_group_list WHERE group_forum_id = onref ;
+		   onval = CASE WHEN os.value = '0' THEN 1
+		   	       WHEN os.value = '1' AND tmp >= 2 THEN 2
+		   	       WHEN os.value = '1' AND tmp <= 1 THEN 3
+		   	       WHEN os.value = '2' THEN 4 END ;
+		   IF nsec = onsec AND nref = onref THEN
+		      RETURN onval ;
+		   END IF ;
+
+		ELSIF os.section_name = 'newforum' THEN
+		   CONTINUE WHEN os.value = '-1' ;
+		   onsec = 'new_forum' ;
+		   onref = opid ;
+		   onval = CASE WHEN os.value = '0' THEN 1
+		   	       WHEN os.value = '1' THEN 2
+		   	       WHEN os.value = '2' THEN 4 END ;
+		   IF nsec = onsec AND nref = onref THEN
+		      RETURN onval ;
+		   END IF ;
+
+		ELSIF os.section_name = 'docman' THEN
+		   onsec = os.section_name ;
+		   onref = opid ;
+		   onval = CASE WHEN os.value = '0' THEN 1
+		   	       WHEN os.value = '1' THEN 4 END ;
+		   IF nsec = onsec AND nref = onref THEN
+		      RETURN onval ;
+		   END IF ;
+
+		ELSIF os.section_name = 'frs' THEN
+		   onsec = os.section_name ;
+		   onref = opid ;
+		   onval = CASE WHEN os.value = '0' THEN 1
+		   	       WHEN os.value = '1' THEN 3 END ;
+		   IF nsec = onsec AND nref = onref THEN
+		      RETURN onval ;
+		   END IF ;
+
+		ELSIF os.section_name = 'scm' THEN
+		   CONTINUE WHEN os.value = '-1' ;
+		   onsec = os.section_name ;
+		   onref = opid ;
+		   onval = CASE WHEN os.value = '0' THEN 1
+		   	       WHEN os.value = '1' THEN 2 END ;
+		   IF nsec = onsec AND nref = onref THEN
+		      RETURN onval ;
+		   END IF ;
+
+		ELSIF os.section_name = 'webcal' THEN
+		   CONTINUE WHEN os.value = '0' ;
+		   onsec = os.section_name ;
+		   onref = opid ;
+		   onval = os.value ;
+		   IF nsec = onsec AND nref = onref THEN
+		      RETURN onval ;
+		   END IF ;
+
+		ELSIF os.section_name = 'plugin_mediawiki_edit' THEN
+		   CONTINUE WHEN os.value = '0' ;
+		   onsec = os.section_name ;
+		   onref = opid ;
+		   onval = os.value ;
+		   IF nsec = onsec AND nref = onref THEN
+		      RETURN onval ;
+		   END IF ;
+
+		ELSE
+		   RAISE EXCEPTION 'Unknown setting % for role %', os.section_name, os.role_id ;
+		   CONTINUE WHEN os.value = '0' ;
+		   onsec = os.section_name ;
+		   onref = os.ref_id ;
+		   onval = os.value::integer ;
+		   IF nsec = onsec AND nref = onref THEN
+		      RETURN onval ;
+		   END IF ;
+
+		END IF ;
+
+	END LOOP ;
+
+	RETURN 0 ;
+
+END ;
+$$ LANGUAGE plpgsql ;
 
 SELECT migrate_rbac_permissions_to_pfo_rbac () ;
--- SELECT g.unix_group_name, r.role_name, s.section_name, s.ref_id, s.perm_val FROM groups g, pfo_role r, pfo_role_setting s WHERE g.group_id = r.home_group_id AND r.role_id = s.role_id ORDER BY s.role_id, s.ref_id ;
+-- SELECT g.unix_group_name, r.role_name, s.section_name, s.ref_id, s.perm_val, pfo_rbac_permissions_from_old(r.old_role_id,s.section_name,s.ref_id) as calc FROM groups g, pfo_role r, pfo_role_setting s WHERE g.group_id = r.home_group_id AND r.role_id = s.role_id ORDER BY s.section_name, s.role_id, s.ref_id ;
+
 
 SELECT migrate_role_observer_to_pfo_rbac () ;
 -- SELECT r.role_name, s.section_name, s.ref_id, s.perm_val FROM pfo_role r, pfo_role_setting s WHERE r.home_group_id IS NULL AND r.role_id = s.role_id ORDER BY s.role_id, s.ref_id ;
