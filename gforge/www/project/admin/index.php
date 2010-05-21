@@ -44,17 +44,6 @@ if (!$group || !is_object($group)) {
 	exit_error('Error',$group->getErrorMessage());
 }
 
-$perm =& $group->getPermission ();
-if (!$perm || !is_object($perm)) {
-	exit_error('Error','Could Not Get Permission');
-} elseif ($perm->isError()) {
-	exit_error('Error',$perm->getErrorMessage());
-}
-
-if (!$perm->isAdmin()) {
-	exit_permission_denied();
-}
-
 $group->clearError();
 
 $adminheadertitle=sprintf(_('Project Admin: %1$s'), $group->getPublicName() );

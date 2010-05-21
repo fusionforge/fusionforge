@@ -36,21 +36,11 @@ function project_admin_header($params) {
 	$params['toptab']='admin';
 	$params['group']=$group_id;
 
+	session_require_perm ('project_admin', $group_id) ;
+
 	$project =& group_get_object($group_id);
 	if (!$project || !is_object($project)) {
 		return;
-	}
-
-	$perm =& $project->getPermission ();
-	if (!$perm || !is_object($perm)) {
-		return;
-	}
-
-	/*
-		Enforce Project Admin Perms
-	*/
-	if (!$perm->isAdmin()) {
-		exit_permission_denied();
 	}
 
 	site_project_header($params);

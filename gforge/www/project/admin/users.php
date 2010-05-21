@@ -47,17 +47,6 @@ if (!$group || !is_object($group)) {
 	exit_error('Error',$group->getErrorMessage());
 }
 
-$perm =& $group->getPermission ();
-if (!$perm || !is_object($perm)) {
-	exit_error('Error','Could Not Get Permission');
-} elseif ($perm->isError()) {
-	exit_error('Error',$perm->getErrorMessage());
-}
-
-if (!$perm->isAdmin()) {
-	exit_permission_denied();
-}
-
 // Add hook to replace users managements by a plugin.
 $html_code = array();
 if (plugin_hook_listeners("project_admin_users") > 0) {
