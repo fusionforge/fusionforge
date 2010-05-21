@@ -177,6 +177,25 @@ abstract class BaseRole extends Error {
 		return true;
 	}
 
+	function setSetting ($section, $reference, $value) {
+		$role_id = $this->getID () ;
+
+		$res = db_query_params ('DELETE FROM pfo_role_setting WHERE role_id=$1 AND section_name=$2 AND ref_id=$3',
+					array ($role_id,
+					       $section,
+					       $reference)) ;
+
+		if ($value == 0) {
+			return ;
+		}
+
+		$res = db_query_params ('INSERT INTO pfo_role_setting (role_id, section_name, ref_id, perm_val) VALUES ($1, $2, $3, $4)',
+						array ($role_id,
+						       $section,
+						       $reference,
+						       $value)) ;
+	}
+
         function hasPermission($section, $reference, $action = NULL) {
 		$result = false ;
                 if (isset ($this->perms_array[$section][$reference])) {

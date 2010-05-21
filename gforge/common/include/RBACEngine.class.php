@@ -144,6 +144,9 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 			break ;
 		case 'forge_stats':
 			switch ($action) {
+			case 'ANY':
+				$qpa = db_construct_qpa ($qpa, 'AND perm_val != 0') ;
+				break ;
 			case 'read':
 				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 1') ;
 				break ;
@@ -154,6 +157,9 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 			break ;
 		case 'scm':
 			switch ($action) {
+			case 'ANY':
+				$qpa = db_construct_qpa ($qpa, 'AND perm_val != 0') ;
+				break ;
 			case 'read':
 				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 1') ;
 				break ;
@@ -164,6 +170,9 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 			break ;
 		case 'docman':
 			switch ($action) {
+			case 'ANY':
+				$qpa = db_construct_qpa ($qpa, 'AND perm_val != 0') ;
+				break ;
 			case 'read':
 				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 1') ;
 				break ;
@@ -180,6 +189,9 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 			break ;
 		case 'frs':
 			switch ($action) {
+			case 'ANY':
+				$qpa = db_construct_qpa ($qpa, 'AND perm_val != 0') ;
+				break ;
 			case 'read_public':
 				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 1') ;
 				break ;
@@ -193,6 +205,9 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 			break ;
 		case 'forum':
 			switch ($action) {
+			case 'ANY':
+				$qpa = db_construct_qpa ($qpa, 'AND perm_val != 0') ;
+				break ;
 			case 'read':
 				$qpa = db_construct_qpa ($qpa, 'AND perm_val >= 1') ;
 				break ;
@@ -210,6 +225,9 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 		case 'tracker':
 		case 'pm':
 			switch ($action) {
+			case 'ANY':
+				$qpa = db_construct_qpa ($qpa, 'AND perm_val != 0') ;
+				break ;
 			case 'read':
 				$qpa = db_construct_qpa ($qpa, 'AND (perm_val & 1) = 1') ;
 				break ;
@@ -225,7 +243,7 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 
 		$res = db_query_qpa ($qpa) ;
 		if (!$res) {
-			$this->setError('RBACEngine::getRodesByAllowedAction()::'.db_error());
+			$this->setError('RBACEngine::getRolesByAllowedAction()::'.db_error());
 			return false;
 		}
 		while ($arr =& db_fetch_array($res)) {
