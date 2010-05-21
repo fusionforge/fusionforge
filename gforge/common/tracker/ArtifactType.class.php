@@ -202,9 +202,7 @@ class ArtifactType extends Error {
 	function create($name,$description,$is_public,$allow_anon,$email_all,$email_address,
 		$due_period,$use_resolution,$submit_instructions,$browse_instructions,$datatype=0) {
 
-		$perm =& $this->Group->getPermission ();
-
-		if (!$perm || !is_object($perm) || !$perm->isArtifactAdmin()) {
+		if (!forge_check_perm('tracker_admin', $this->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -979,19 +977,7 @@ class ArtifactType extends Error {
 		if ($this->isPublic()) {
 			return true;
 		} else {
-			if (!session_loggedin()) {
-				return false;
-			} else {
-				//
-				//	You must have a role in the project if this tracker is not public
-				//
-				$perm = $this->getCurrentUserPerm();
-				if ($this->userIsAdmin() || (strlen($perm) && $perm >= 0)) {
-					return true;
-				} else {
-					return false;
-				}
-			}
+			return forge_check_perm ('tracker', $this->getID(), 'read') ;
 		}
 	}
 
@@ -1001,17 +987,7 @@ class ArtifactType extends Error {
 	 *	@return boolean	user_is_admin.
 	 */
 	function userIsAdmin() { 
-		if (!session_loggedin()) {
-			return false;
-		} else {
-			$perm =& $this->Group->getPermission ();
-
-			if (($this->getCurrentUserPerm() >= 2) || ($perm->isArtifactAdmin())) {
-				return true;
-			} else {
-				return false;
-			}
-		}
+		return forge_check_perm ('tracker', $this->getID(), 'manager') ;
 	}
 
 	/**
@@ -1020,17 +996,7 @@ class ArtifactType extends Error {
 	 *	@return boolean	user_is_technician.
 	 */
 	function userIsTechnician() { 
-		if (!session_loggedin()) {
-			return false;
-		} else {
-			$perm =& $this->Group->getPermission ();
-
-			if (($this->getCurrentUserPerm() >= 1) || ($perm->isArtifactAdmin())) {
-				return true;
-			} else {
-				return false;
-			}
-		}
+		return forge_check_perm ('tracker', $this->getID(), 'tech') ;
 	}
 
 	/**
