@@ -721,7 +721,13 @@ Or reply to this e-mail entering your response between the following markers:
 	 *	@return boolean success.
 	 */
 	function sendNewModeratedMsgNotice() {
-		$ids =& $this->Forum->getForumAdminIDs();
+		$ids = array () ;
+		$engine = RBACEngine::getInstance () ;
+		$moderators = $engine->getUsersByAllowedAction ('forum', $this->Forum->getID(), 'moderate') ;
+
+		foreach ($moderators as $m) {
+			$ids[] = $m->getID () ;
+		}
 		
 		//
 		//	See if there is anyone to send messages to

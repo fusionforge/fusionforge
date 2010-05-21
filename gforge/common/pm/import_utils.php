@@ -65,7 +65,8 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 		//
 		//  Build hash list of technicians so we can get their ID for assigning tasks
 		//
-		$techs =& $pg->getTechnicianObjects();
+		$engine = RBACEngine::getInstance () ;
+		$techs = $engine->getUsersByAllowedAction ('pm', $pg->getID(), 'tech') ;
 		$tcount=count($techs);
 		for ($i=0; $i<$tcount; $i++) {
 			$tarr[strtolower($techs[$i]->getUnixName())]=$techs[$i]->getID();

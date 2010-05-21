@@ -37,17 +37,24 @@ function &MSPLogin($username,$password) {
 	if ($success) {
 		$array['success']=true;
 		$array['session_hash']=$session_ser;
-		$res=db_query_params ('SELECT pgl.group_project_id, g.group_name || $1 || pgl.project_name AS name
-			FROM groups g, project_group_list pgl, role_setting rs, user_group ug
-			WHERE ug.user_id=$2
-			AND g.group_id=pgl.group_id
-			AND rs.value::integer > 0
-			AND rs.group_project_id = pgl.group_project_id
-                        AND ug.role_id = rs.role_id
-                        AND rs.section_name=$3',
-				      array(': ',
-					    user_getid(),
-					    'pm'));
+
+
+		$result = db_query_params ('SELECT group_project_id FROM project_group_list',
+					   array ()) ;
+		
+		$gids = array () ;
+		while ($arr =& db_fetch_array($result)) {
+			if (forge_check_perm ('pm', $arr['group_project_id'], 'read')) {
+				$gids[] = $arr['group_project_id'] ;
+			}
+		}
+
+		$res = db_query_params ('SELECT pgl.group_project_id, g.group_name || $1 || pgl.project_name AS name
+			FROM groups g, project_group_list pgl
+			WHERE g.group_id=pgl.group_id
+                        AND pgl_group_project_id = ANY ($2)',
+					array(': ',
+					      db_int_array_to_any_clause ($tids))) ;
 		$rows=db_numrows($res);
 		if (!$res || $rows<1) {
 			$array['success']=false;

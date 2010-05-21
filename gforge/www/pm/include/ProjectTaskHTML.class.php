@@ -32,10 +32,20 @@ class ProjectTaskHTML extends ProjectTask {
 	}
 
 	function multipleAssignedBox ($name='assigned_to[]') {
-		$result = $this->ProjectGroup->getTechnicians ();
+		$engine = RBACEngine::getInstance () ;
+		$techs = $engine->getUsersByAllowedAction ('pm', $pg->getID(), 'tech') ;
+
+		$tech_id_arr = array () ;
+		$tech_name_arr = array () ;
+		
+		foreach ($techs as $tech) {
+			$tech_id_arr[] = $tech->getID() ;
+			$tech_name_arr[] = $tech->getRealName() ;
+		}
+		
 		//get the data so we can mark items as SELECTED
 		$arr2 =& $this->getAssignedTo();
-		return html_build_multiple_select_box ($result,$name,$arr2);
+		return html_build_multiple_select_box_from_arrays ($tech_id_arr,$tech_name_arr,$name,$arr2);
 	}
 
 

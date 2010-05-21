@@ -138,12 +138,17 @@ $ath->header(array('atid'=>$ath->getID(), 'title'=>$ath->getName()));
 //
 //	creating a custom technician box which includes "any" and "unassigned"
 //
-$res_tech= $ath->getTechnicians();
+$engine = RBACEngine::getInstance () ;
+$techs = $engine->getUsersByAllowedAction ('tracker', $ath->getID(), 'tech') ;
 
-$tech_id_arr=util_result_column_to_array($res_tech,0);
+$tech_id_arr = array () ;
+$tech_name_arr = array () ;
+
+foreach ($techs as $tech) {
+	$tech_id_arr[] = $tech->getID() ;
+	$tech_name_arr[] = $tech->getRealName() ;
+}
 $tech_id_arr[]='0';  //this will be the 'any' row
-
-$tech_name_arr=util_result_column_to_array($res_tech,1);
 $tech_name_arr[]=_('Any');
 
 if (is_array($_assigned_to)) {

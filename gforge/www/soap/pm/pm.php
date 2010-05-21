@@ -509,14 +509,17 @@ function &getProjectTechnicians($session_ser,$group_id,$group_project_id) {
 		return new soap_fault ('','getProjectTechnicians',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
 
-	$at = new ProjectGroup($grp,$group_project_id);
-	if (!$at || !is_object($at)) {
+	$pg = new ProjectGroup($grp,$group_project_id);
+	if (!$pg || !is_object($pg)) {
 		return new soap_fault ('','getProjectTechnicians','Could Not Get ProjectGroup','Could Not Get ProjectGroup');
-	} elseif ($at->isError()) {
-		return new soap_fault ('','getProjectTechnicians',$at->getErrorMessage(),$at->getErrorMessage());
+	} elseif ($pg->isError()) {
+		return new soap_fault ('','getProjectTechnicians',$pg->getErrorMessage(),$pg->getErrorMessage());
 	}
 
-	return users_to_soap($at->getTechnicianObjects());
+	$engine = RBACEngine::getInstance () ;
+	$techs = $engine->getUsersByAllowedAction ('pm', $pg->getID(), 'tech') ;
+
+	return users_to_soap ($techs);
 }
 
 function &getProjectTasks($session_ser,$group_id,$group_project_id,$assigned_to,$status,$category,$group) {

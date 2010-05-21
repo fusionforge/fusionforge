@@ -78,24 +78,18 @@ if (!session_loggedin()) {
 //	Get list of trackers this person can see
 //
 
-$restracker = db_query_params ('SELECT DISTINCT agl.group_artifact_id,agl.name
-	FROM artifact_group_list agl, role_setting rs, user_group ug
-        WHERE agl.group_id=$1
-        AND agl.group_id=ug.group_id
-        AND ug.user_id=$2
-        AND ug.role_id=rs.role_id
-        AND (
-                           (rs.section_name = $3 AND rs.value = $4)
-                           OR (rs.section_name = $5 AND rs.value = $6)
-                           OR (rs.section_name = $6 AND rs.value::integer >= 1 AND rs.ref_id = agl.group_artifact_id)
-        )',
-			array($group_id,
-			      user_getid() ,
-			      'projectadmin',
-			      'A',
-			      'trackeradmin',
-			      2,
-			      'tracker'));
+$atf = new ArtifactTypeFactory ($group) ;
+$tids = array () ;
+foreach ($atf->getArtifactTypes() as $at) {
+	if (forge_check_perm ('tracker', $at->getID(), 'read')) {
+		$tids[] = $at->getID() ;
+	}
+}
+
+$restracker = db_query_params ('SELECT group_artifact_id, name
+			FROM artifact_group_list
+			WHERE group_artifact_id = ANY ($1)',
+			       array (db_int_array_to_any_clause ($tids))) ;
 echo db_error();
 
 //

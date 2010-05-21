@@ -60,13 +60,20 @@ pm_header(array('title'=>_('Browse tasks'),'group_project_id'=>$group_project_id
 /*
 		creating a custom technician box which includes "any" and "unassigned"
 */
-$res_tech=$pg->getTechnicians();
-$tech_id_arr=util_result_column_to_array($res_tech,0);
-$tech_id_arr[]='0';  //this will be the 'any' row
-$tech_name_arr=util_result_column_to_array($res_tech,1);
+$engine = RBACEngine::getInstance () ;
+$techs = $engine->getUsersByAllowedAction ('pm', $pg->getID(), 'tech') ;
+
+$tech_id_arr = array () ;
+$tech_name_arr = array () ;
+
+foreach ($techs as $tech) {
+	$tech_id_arr[] = $tech->getID() ;
+	$tech_name_arr[] = $tech->getRealName() ;
+}
+$tech_id_arr[]='0';
 $tech_name_arr[]=_('Any');
-$tech_box=html_build_select_box_from_arrays ($tech_id_arr,$tech_name_arr,'_assigned_to',
-$_assigned_to,true,_('Unassigned'));
+
+$tech_box=html_build_select_box_from_arrays ($tech_id_arr,$tech_name_arr,'_assigned_to',$_assigned_to,true,_('Unassigned'));
 
 /*
 		creating a custom category box which includes "any" and "none"
@@ -305,12 +312,17 @@ if ($rows < 1) {
 			creating a custom technician box which includes "No Change" and "Nobody"
 		*/
 
-		$res_tech=$pg->getTechnicians();
+		$engine = RBACEngine::getInstance () ;
+		$techs = $engine->getUsersByAllowedAction ('pm', $pg->getID(), 'tech') ;
 
-		$tech_id_arr=util_result_column_to_array($res_tech,0);
-		$tech_id_arr[]='100.1';  //this will be the 'any' row
-
-		$tech_name_arr=util_result_column_to_array($res_tech,1);
+		$tech_id_arr = array () ;
+		$tech_name_arr = array () ;
+		
+		foreach ($techs as $tech) {
+			$tech_id_arr[] = $tech->getID() ;
+			$tech_name_arr[] = $tech->getRealName() ;
+		}
+		$tech_id_arr[]='100.1';
 		$tech_name_arr[]=_('Unassigned');
 
 		$tech_box=html_build_select_box_from_arrays ($tech_id_arr,$tech_name_arr,'assigned_to',

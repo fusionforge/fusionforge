@@ -106,6 +106,20 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 		return $roles ;
 	}
 
+	public function getUsersByAllowedAction ($section, $reference, $action = NULL) {
+		$roles = $this->getRolesByAllowedAction ($section, $reference, $action) ;
+		$user_ids = array () ;
+		foreach ($roles as $role) {
+			foreach ($role->getUsers() as $user) {
+				$user_ids[] = $user->getID() ;
+			}
+		}
+
+		$user_ids = array_unique ($user_ids) ;
+
+		return user_get_objects ($user_ids) ;
+	}
+
 	private function _getRolesIdByAllowedAction ($section, $reference, $action = NULL) {
 		$result = array () ;
 		$qpa = db_construct_qpa () ;

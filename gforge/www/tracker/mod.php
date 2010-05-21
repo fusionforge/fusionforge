@@ -91,30 +91,20 @@ if (session_loggedin()) {
 		<td><strong><?php echo _('Data Type') ?>: <a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=data_type'); ?>')"><strong>(?)</strong></a></strong><br />
 		<?php
 
-//
-//  kinda messy - but works for now
-//  need to get list of data types this person can admin
-//
-if (forge_check_perm ('tracker_admin', $group_id)) {
-	$rsv = db_int_array_to_any_clause (array (0, 1, 2)) ;
-} else {
-	$rsv = db_int_array_to_any_clause (array (1, 2)) ;
+$atf = new ArtifactTypeFactory ($group) ;
+$tids = array () ;
+foreach ($atf->getArtifactTypes() as $at) {
+	if (forge_check_perm ('tracker', $at->getID(), 'manager')) {
+		$tids[] = $at->getID() ;
+	}
 }
 
-$res = db_query_params ('SELECT agl.group_artifact_id, agl.name
-			FROM artifact_group_list agl, role_setting rs, user_group ug
-			WHERE agl.group_artifact_id=rs.ref_id
-			AND ug.user_id=$1
-			AND rs.value = ANY ($2)
-			AND agl.group_id=$3
-			AND ug.role_id = rs.role_id
-			AND rs.section_name=$4',
-				array(user_getid(),
-				      $rsv,
-				      $group_id,
-				      'tracker'));
+$res = db_query_params ('SELECT group_artifact_id, name
+			FROM artifact_group_list
+			WHERE group_artifact_id = ANY ($1)',
+			array (db_int_array_to_any_clause ($tids))) ;
 
-	echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
+echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 
 		?>
 		</td>

@@ -404,22 +404,6 @@ class Forum extends Error {
 	}
 	
 	/**
-	 *	getForumAdminIDs - return an array of user_id's for those users which are forum admins.
-	 *
-	 *	@return	array 	The array of user_id's.
-	 */
-	function getForumAdminIDs() {
-		$result = db_query_params ('SELECT user_group.user_id FROM user_group, role_setting
-			WHERE role_setting.section_name=$1
-			  AND role_setting.ref_id=$2
-			  AND role_setting.value::integer > 1
-			  AND user_group.role_id = role_setting.role_id',
-					   array ('forum',
-						  $this->getID())) ;
-		return util_result_column_to_array($result);
-	}
-	
-	/**
 	 * getReturnEmailAddress() - return the return email address for notification emails
 	 *
 	 * @return string return email address

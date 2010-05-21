@@ -606,11 +606,18 @@ class ArtifactTypeHtml extends ArtifactType {
 		if ($text_100=='none'){
 			$text_100=_('Nobody');
 		}
-		$result = $this->getTechnicians();
-		//	this was a bad hack to allow you to mass-update to unassigned, which is ID=100, which 
-		//	conflicted with the "No Change" ID of 100.
-		$ids =& util_result_column_to_array($result,0);
-		$names =& util_result_column_to_array($result,1);
+
+		$engine = RBACEngine::getInstance () ;
+		$techs = $engine->getUsersByAllowedAction ('tracker', $ath->getID(), 'tech') ;
+
+		$ids = array () ;
+		$names = array () ;
+
+		foreach ($techs as $tech) {
+			$ids[] = $tech->getID() ;
+			$names[] = $tech->getRealName() ;
+		}
+
 		if ($extra_id != '-1') {
 			$ids[]=$extra_id;
 			$names[]=$extra_name;

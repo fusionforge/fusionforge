@@ -865,34 +865,6 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	getTechnicians - returns a result set of technicians.
-	 *
-	 *	@return database result set.
-	 */
-	function getTechnicians() {
-		if (!isset($this->technicians_res)) {
-			$this->technicians_res = db_query_params ('SELECT user_id,realname 
-				FROM artifactperm_user_vw
-				WHERE group_artifact_id=$1
-				AND perm_level in (1,2)
-				ORDER BY realname',
-				array ($this->getID())) ;
-		}
-		return $this->technicians_res;
-	}
-
-	/**
-	 *	getTechnicianObjects - Array of User objects set up for this artifact type.
-	 *
-	 *	@return	array	Of User objects.
-	 */
-	function &getTechnicianObjects() {
-		$res = $this->getTechnicians();
-		$arr =& util_result_column_to_array($res,0);
-		return user_get_objects($arr);
-	}
-
-	/**
 	 *	getCannedResponses - returns a result set of canned responses.
 	 *
 	 *	@return database result set.

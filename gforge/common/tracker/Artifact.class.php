@@ -840,11 +840,9 @@ class Artifact extends Error {
 		}
 
 
-		// Check that assigned_to is member of the project.
+		// Check that assigned_to is a tech for the tracker
 		if ($assigned_to != 100) {
-			$res = $this->ArtifactType->getTechnicians();
-			$arr =& util_result_column_to_array($res,0);
-			if (!in_array($assigned_to, $arr)) {
+			if (!forge_check_perm ('tracker', $this->ArtifactType->getID(), 'tech')) {
 				$this->setError("Invalid assigned_to (assigned person is not a technician)");
 				return false;
 			}
@@ -957,11 +955,9 @@ class Artifact extends Error {
 				return false;
 			}
 
-			// Check that assigned_to is member of the project.
+			// Check that assigned_to is a tech in the new tracker
 			if ($assigned_to != 100) {
-				$res = $newArtifactType->getTechnicians();
-				$arr =& util_result_column_to_array($res,0);
-				if (!in_array($assigned_to, $arr)) {
+				if (!forge_check_perm ('tracker', $newArtifactType->getID(), 'tech')) {
 					$assigned_to = 100;
 				}
 			}

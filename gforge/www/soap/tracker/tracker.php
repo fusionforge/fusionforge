@@ -690,7 +690,10 @@ function &getArtifactTechnicians($session_ser,$group_id,$group_artifact_id) {
 		return new soap_fault ('','getArtifactTechnicians',$at->getErrorMessage(),$at->getErrorMessage());
 	}
 
-	return users_to_soap($at->getTechnicianObjects());
+	$engine = RBACEngine::getInstance () ;
+	$techs = $engine->getUsersByAllowedAction ('tracker', $at->getID(), 'tech') ;
+
+	return users_to_soap ($techs);
 }
 
 //

@@ -40,7 +40,20 @@ $_size = getIntFromRequest('_size', 800);
 $_status = getIntFromRequest('_status', 100);
 $_order = getStringFromRequest('_order');
 
-$tech_box=html_build_select_box($pg->getTechnicians(),'_assigned_to',$_assigned_to,true,_('Unassigned'), true, _('Any'));
+$engine = RBACEngine::getInstance () ;
+$techs = $engine->getUsersByAllowedAction ('pm', $pg->getID(), 'tech') ;
+
+$tech_id_arr = array () ;
+$tech_name_arr = array () ;
+
+foreach ($techs as $tech) {
+	$tech_id_arr[] = $tech->getID() ;
+	$tech_name_arr[] = $tech->getRealName() ;
+}
+$tech_id_arr[]='0';
+$tech_name_arr[]=_('Any');
+
+$tech_box=html_build_select_box_from_arrays ($tech_id_arr,$tech_name_arr,'_assigned_to',$_assigned_to,true,_('Unassigned'), true, _('Any'));
 
 $status_box=html_build_select_box($pg->getStatuses(),'_status',$_status, false, '', true, _('Any'));
 

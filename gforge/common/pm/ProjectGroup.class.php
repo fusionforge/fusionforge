@@ -320,38 +320,6 @@ class ProjectGroup extends Error {
 	}
 
 	/**
-	 * getTechnicians - Return a result set of pm technicians in this group.
-	 *
-	 * @returns Datbase result set.
-	 */
-	function getTechnicians () {
-		if (!$this->technicians) {
-			$this->technicians = db_query_params ('SELECT users.user_id, users.realname 
-				FROM users, role_setting, user_group
-				WHERE users.user_id=user_group.user_id
-                                AND role_setting.role_id=user_group.role_id
-                                AND role_setting.ref_id=$1
-				AND role_setting.value::integer IN (1,2) 
-                                AND role_setting.section_name=$2
-				ORDER BY users.realname',
-							      array ($this->getID(),
-								     'pm')) ;
-		}
-		return $this->technicians;
-	}
-
-	/**
-	 *  getTechnicianObjects - Array of User objects set up for this artifact type.
-	 *
-	 *  @return array   Of User objects.
-	 */
-	function &getTechnicianObjects() {
-		$res = $this->getTechnicians();
-		$arr =& util_result_column_to_array($res,0);
-		return user_get_objects($arr);
-	}
-
-	/**
 	 *	update - update a ProjectGroup in the database.
 	 *
 	 *	@param	string	The project name.
