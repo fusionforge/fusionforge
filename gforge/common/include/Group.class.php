@@ -1617,8 +1617,7 @@ class Group extends Error {
 			Admins can add users to groups
 		*/
 
-		$perm =& $this->getPermission ();
-		if (!$perm || !is_object($perm) || !$perm->isAdmin()) {
+		if (!forge_check_perm ('project_admin', $this->getID()) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -1646,6 +1645,31 @@ class Group extends Error {
 			//	user was found - set new user_id var
 			//
 			$user_id = db_result($res_newuser,0,'user_id');
+
+			$role = new Role($this,$role_id);
+			if (!$role || !is_object($role)) {
+				$this->setError(_('Error Getting Role Object'));
+				db_rollback();
+				return false;
+			} elseif ($role->isError()) {
+				$this->setError('addUser::roleget::'.$role->getErrorMessage());
+				db_rollback();
+				return false;
+			}
+			
+			if (USE_PFO_RBAC) {
+				$role->addUser (user_get_object ($user_id)) ;
+				if (!$SYS->sysCheckCreateGroup($this->getID())){
+					$this->setError($SYS->getErrorMessage());
+					db_rollback();
+					return false;
+				}
+				if (!$SYS->sysCheckCreateUser($user_id)) {
+					$this->setError($SYS->getErrorMessage());
+					db_rollback();
+					return false;
+				}
+			} else {
 
 			//
 			//	if not already a member, add them
@@ -1701,16 +1725,6 @@ class Group extends Error {
 				//
 				//	Role setup
 				//
-				$role = new Role($this,$role_id);
-				if (!$role || !is_object($role)) {
-					$this->setError(_('Error Getting Role Object'));
-					db_rollback();
-					return false;
-				} elseif ($role->isError()) {
-					$this->setError('addUser::roleget::'.$role->getErrorMessage());
-					db_rollback();
-					return false;
-				}
 //echo "<h2>Group::addUser role->setUser($user_id)</h2>";
 				if (!$role->setUser($user_id)) {
 					$this->setError('addUser::role::setUser'.$role->getErrorMessage());
@@ -1752,6 +1766,7 @@ class Group extends Error {
 				db_commit();
 				return true;
 			}
+			} // USE_PFO_RBAC
 		} else {
 			//
 			//	user doesn't exist
@@ -1799,6 +1814,7 @@ class Group extends Error {
 		}
 	
 		db_begin();
+
 		$res = db_query_params ('DELETE FROM user_group WHERE group_id=$1 AND user_id=$2', 
 					array ($this->getID(),
 					       $user_id)) ;

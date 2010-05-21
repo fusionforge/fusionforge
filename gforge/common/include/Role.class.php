@@ -70,24 +70,6 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	}
 
 	/**
-	 *	getID - get the ID of this role.
-	 *
-	 *	@return	integer	The ID Number.
-	 */
-	function getID() {	// From the PFO spec
-		return $this->data_array['role_id'];
-	}
-
-	/**
-	 *	getName - get the name of this role.
-	 *
-	 *	@return	string	The name of this role.
-	 */
-	function getName() {	// From the PFO spec
-		return $this->data_array['role_name'];
-	}
-
-	/**
 	 *	setName - set the name of this role.
 	 *
 	 *	@param	string	The new name of this role.

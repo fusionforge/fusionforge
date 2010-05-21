@@ -959,14 +959,66 @@ abstract class BaseRole extends Error {
 // Actual classes
 
 abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
-	public function addUsers($users) {
-		throw new Exception ("Not implemented") ;
+	public function addUsers ($users) {
+		$ids = array () ;
+		foreach ($users as $user) {
+			$ids[] = $user->getID() ;
+		}
+
+		$already_there = array () ;
+		$res = db_query_params ('SELECT user_id FROM user_role WHERE user_id=ANY($1) AND role_id=$2',
+					array (db_int_array_to_any_clause($ids), $this->getID())) ;
+		while ($arr =& db_fetch_array($res)) {
+			$already_there[] = $arr['user_id'] ;
+		}
+
+		foreach ($ids as $id) {
+			if (!in_array ($id, $already_there)) {
+			db_query_params ('INSERT INTO user_role (user_id, role_id) VALUES ($1, $2)',
+					 array ($id,
+						$this->getID())) ;
+			}
+		}	
 	}
+
+	public function addUser ($user) {
+		return $this->addUsers (array ($user)) ;
+	}
+
 	public function removeUsers($users) {
-		throw new Exception ("Not implemented") ;
+		$ids = array () ;
+		foreach ($users as $user) {
+			$ids[] = $user->getID() ;
+		}
+
+		$already_there = array () ;
+		$res = db_query_params ('DELETE FROM user_role WHERE user_id=ANY($1) AND role_id=$2',
+					array (db_int_array_to_any_clause($ids), $this->getID())) ;
 	}
+
+	public function removeUser ($user) {
+		return $this->removeUsers (array ($user)) ;
+	}
+
 	public function getUsers() {
-		throw new Exception ("Not implemented") ;
+		$result = array () ;
+		$res = db_query_params ('SELECT user_id FROM user_role WHERE role_id=$1',
+					array ($this->getID())) ;
+		while ($arr =& db_fetch_array($res)) {
+			$result[] = user_get_object ($arr['user_id']) ;
+		}
+
+		return $result ;
+	}
+
+	public function hasUser($user) {
+		$res = db_query_params ('SELECT user_id FROM user_role WHERE user_id=$1 AND role_id=$2',
+					array (db_int_array_to_any_clause($user->getID()), $this->getID())) ;
+		if ($res && $db_numrows($res)) {
+			return true ;
+		} else {
+			return false ;
+		}
 	}
 }
 
