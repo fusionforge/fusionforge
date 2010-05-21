@@ -28,34 +28,6 @@ require "PFO-RBAC.php" ;
 // Code shared between classes
 
 abstract class BaseRole extends Error implements PFO_Role {
-	public function getName() {
-		return $this->name ;
-	}
-	public function setName($name) {
-		return true ;
-	}
-	public function getID() {
-		return $this->ID ;
-	}
-
-	public function isPublic() {
-		return false ;
-	}
-	public function setPublic($flag) {
-		return false ;
-	}
-	public function getHomeProject() {
-		return true ;
-	}
-	public function getLinkedProjects() {
-		return array () ;
-	}
-	public function linkProject($project) {
-		return true ;
-	}
-	public function unlinkProject($project) {
-		return true ;
-	}
 
 	public function getUsers() {
 		return array () ;
@@ -65,9 +37,6 @@ abstract class BaseRole extends Error implements PFO_Role {
 	}
 	public function hasPermission($section, $reference, $permission) {
 		return false ;
-	}
-	public function normalizeData() {
-		return true ;
 	}
 	public function getSettings() {
 		return array () ;

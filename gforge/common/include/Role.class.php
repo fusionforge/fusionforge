@@ -162,7 +162,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 *
 	 *	@return	integer	The ID Number.
 	 */
-	function getID() {
+	function getID() {	// From the PFO spec
 		return $this->data_array['role_id'];
 	}
 
@@ -171,7 +171,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 *
 	 *	@return	string	The name of this role.
 	 */
-	function getName() {
+	function getName() {	// From the PFO spec
 		return $this->data_array['role_name'];
 	}
 
@@ -181,7 +181,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 *	@param	string	The new name of this role.
 	 *      @return boolean True if updated OK
 	 */
-	function setName ($role_name) {
+	function setName ($role_name) { // From the PFO spec
 		if ($this->getName() != stripslashes($role_name)) {
 			// Check if role_name is not already used.
 			$res = db_query_params('SELECT role_name FROM role WHERE group_id=$1 AND role_name=$2',
@@ -209,7 +209,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 *
 	 *	@return	boolean True if public
 	 */
-	function getName() {
+	function isPublic() {	// From the PFO spec
 		return $this->data_array['is_public'];
 	}
 
@@ -219,7 +219,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 *	@param	boolean	The new value of the flag.
 	 *      @return boolean True if updated OK
 	 */
-	function setPublic ($flag) {
+	function setPublic ($flag) { // From the PFO spec
 		$res = db_query_params ('UPDATE role SET is_public=$1 WHERE role_id=$1',
 					array ($flag,
 					       $this->getID())) ;
@@ -230,11 +230,11 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 		return true;
 	}
 
-	function getHomeProject () {
+	function getHomeProject () { // From the PFO spec
 		return $this->Group ;
 	}
 
-	function getLinkedProjects () {
+	function getLinkedProjects () { // From the PFO spec
 		$res = db_query_params('SELECT group_id FROM role_project_refs WHERE role_id=$1',
 				       array ($this->getID()));
 		
@@ -246,7 +246,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 		return $result ;
 	}
 
-	function linkProject ($project) {
+	function linkProject ($project) { // From the PFO spec
 		if ($project->getID() == $this->getHomeProject()->getID()) {
 			$this->setError ("Can't link to home project") ;
 			return false ;
@@ -270,7 +270,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 		return true ;
 	}
 
-	function unlinkProject ($project) {
+	function unlinkProject ($project) { // From the PFO spec
 		if ($project->getID() == $this->getHomeProject()->getID()) {
 			$this->setError ("Can't unlink from home project") ;
 			return false ;
@@ -455,7 +455,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 		return $new_sa ;
 	}
 
-	function normalizeData () {
+	function normalizeData () { // From the PFO spec
 		db_begin () ;
 		$this->fetchData ($this->getID()) ;
 		
