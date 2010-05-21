@@ -26,10 +26,13 @@
 require_once $gfcommon.'include/rbac_texts.php' ;
 require_once $gfcommon.'include/RBAC.php' ;
 
+define ('USE_PFO_RBAC', false) ;
+
 class Role extends RoleExplicit implements PFO_RoleExplicit {
 
 	var $data_array;
 	var $setting_array;
+	var $perms_array ;
 	var $role_vals;
 	var $Group;
 	var $role_values = array(
@@ -425,6 +428,8 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	function fetchData($role_id) {
 		unset($this->data_array);
 		unset($this->setting_array);
+		unset($this->perms_array);
+
 		$res = db_query_params ('SELECT * FROM role WHERE role_id=$1',
 					array ($role_id)) ;
 		if (!$res || db_numrows($res) < 1) {
@@ -432,6 +437,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 			return false;
 		}
 		$this->data_array =& db_fetch_array($res);
+
 		$res = db_query_params ('SELECT * FROM role_setting WHERE role_id=$1',
 					array ($role_id)) ;
 		if (!$res) {
@@ -442,7 +448,155 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 		while ($arr =& db_fetch_array($res)) {
 			$this->setting_array[$arr['section_name']][$arr['ref_id']] = $arr['value'];
 		}
+
+		if (USE_PFO_RBAC) {
+		$res = db_query_params ('SELECT section, reference, value FROM role_perms WHERE role_id=$1',
+					array ($role_id)) ;
+		if (!$res) {
+			$this->setError('Role::fetchData()::'.db_error());
+			return false;
+		}
+		$this->perms_array=array();
+		while ($arr =& db_fetch_array($res)) {
+			$this->perms_array[$arr['section']][$arr['reference']] = $arr['value'];
+		}
+		}
+
 		return true;
+	}
+
+        function hasPermission($section, $reference, $action = NULL) {
+		$result = false ;
+                if (isset ($this->perms_array[$section][$reference])) {
+			$value = $this->perms_array[$section][$reference] ;
+		} else {
+			$value = 0 ;
+		}
+		$min = PHP_INT_MAX ;
+		$mask = 0 ;
+		
+		switch ($section) {
+		case 'forge_admin':
+			if ($value == 1) {
+				return true ;
+			}
+			break ;
+			
+		case 'approve_projects':
+		case 'approve_news':
+			if (($value == 1)
+			    || $this->hasGlobalPermission('forge_admin')) {
+				return true ;
+			}
+		break ;
+		
+		case 'project_admin':
+			if (($value == 1)
+			    || $this->hasGlobalPermission('forge_admin')) {
+				return true ;
+			}
+			break ;
+			
+		case 'project_read':
+		case 'tracker_admin':
+		case 'pm_admin':
+		case 'forum_admin':
+			if (($value == 1)
+			    || $this->hasPermission ('project_admin', $reference)) {
+				return true ;
+			}
+		break ;
+		
+		case 'scm':
+			switch ($action) {
+			case 'read':
+				$min = 1 ;
+				break ;
+			case 'write':
+				$min = 2 ;
+				break ;
+			}
+			if (($value >= $min)
+			    || $this->hasPermission ('project_admin', $reference)) {
+				return true ;
+			}
+			break ;
+			
+		case 'docman':
+			switch ($action) {
+			case 'read':
+				$min = 1 ;
+				break ;
+			case 'submit':
+				$min = 2 ;
+				break ;
+			case 'approve':
+				$min = 3 ;
+				break ;
+			case 'admin':
+				$min = 4 ;
+				break ;
+			}
+			if (($value >= $min)
+			    || $this->hasPermission ('project_admin', $reference)) {
+				return true ;
+			}
+			break ;
+			
+		case 'frs':
+			switch ($action) {
+			case 'read':
+				$min = 1 ;
+				break ;
+			case 'write':
+				$min = 2 ;
+				break ;
+			}
+			if (($value >= $min)
+			    || $this->hasPermission ('project_admin', $reference)) {
+				return true ;
+			}
+			break ;
+			
+		case 'forum':
+			switch ($action) {
+			case 'read':
+				$min = 1 ;
+				break ;
+			case 'post':
+				$min = 2 ;
+				break ;
+			case 'moderate':
+				$min = 3 ;
+				break ;
+			}
+			if (($value >= $min)
+			    || $this->hasPermission ('project_admin', $reference)) {
+				return true ;
+			}
+			break ;
+			
+		case 'tracker':
+			switch ($action) {
+			case 'read':
+				$mask = 1 ;
+				break ;
+			case 'tech':
+				$mask = 2 ;
+				break ;
+			case 'manager':
+				$mask = 4 ;
+				break ;
+			}
+			$o = artifactType_get_object ($reference) ;
+
+			if (($value & $mask == true)
+			    || $this->hasPermission ('project_admin', $reference)
+			    || $this->hasPermission ('project_admin', $reference)) {
+				return true ;
+			}
+			break ;
+		}
 	}
 
 	function normalizeDataForSection (&$new_sa, $section) {

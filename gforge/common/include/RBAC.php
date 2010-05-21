@@ -34,11 +34,11 @@ abstract class BaseRole extends Error implements PFO_Role {
 	public function hasUser($user) {
 		throw new Exception ("Not implemented") ;
 	}
-	public function hasPermission($section, $reference, $permission) {
+	public function hasPermission($section, $reference, $action) {
 		throw new Exception ("Not implemented") ;
 	}
-	public function hasGlobalPermission($section, $permission) {
-		throw new Exception ("Not implemented") ;
+        function hasGlobalPermission($section, $action = NULL) {
+		return $this->hasPermission ($section, -1, $action) ;
 	}
 	public function getSettings() {
 		throw new Exception ("Not implemented") ;
@@ -75,6 +75,17 @@ abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 }
 
 class RoleAnonymous extends BaseRole implements PFO_RoleAnonymous {
+	// This role is implemented as a singleton
+	private static $_instance ;
+	public static function getInstance() {
+		if (!isset(self::$_instance)) {
+			$c = __CLASS__;
+			self::$_instance = new $c;
+		}
+		
+		return self::$_instance;
+	}
+
 	public function getID () {
 		return -PFO_ROLE_ANONYMOUS ;
 	}
@@ -96,6 +107,17 @@ class RoleAnonymous extends BaseRole implements PFO_RoleAnonymous {
 }
 
 class RoleLoggedIn extends BaseRole implements PFO_RoleLoggedIn {
+	// This role is implemented as a singleton
+	private static $_instance ;
+	public static function getInstance() {
+		if (!isset(self::$_instance)) {
+			$c = __CLASS__;
+			self::$_instance = new $c;
+		}
+		
+		return self::$_instance;
+	}
+
 	public function getID () {
 		return -PFO_ROLE_LOGGEDIN ;
 	}
