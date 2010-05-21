@@ -48,8 +48,9 @@ sub parse_sql_file ( $ ) {
 		  'ERROR' => 9,
 		  'IN_COMMENT' => 10,
 		  'IN_SQL_COMMENT' => 11,
+		  'IN_DOLDOL' => 12,
 		  'DONE' => 999) ;
-    my ($state, $l, $par_level, $com_level, $chunk, $rest, $sql, @sql_list, $copy_table, $copy_rest, @copy_data, @copy_data_tmp, $copy_field) ;
+    my ($state, $l, $par_level, $com_level, $chunk, $rest, $sql, @sql_list, $copy_table, $copy_rest, @copy_data, @copy_data_tmp, $copy_field, @doldolstack) ;
 
     # Init the state machine
 
@@ -58,12 +59,13 @@ sub parse_sql_file ( $ ) {
     # my $n = 0 ;
     
   STATE_LOOP: while ($state != $states{DONE}) { # State machine main loop
-      # sql_parser_debug "STATE_LOOP: state = $state" ;
+      sql_parser_debug "STATE_LOOP: state = $state" ;
     STATE_SWITCH: {		# State machine step processing
 	$state == $states{INIT} && do {
-	    # sql_parser_debug "State = INIT" ;
+	    sql_parser_debug "State = INIT" ;
 	    $par_level = 0 ;
 	    $com_level = 0 ;
+	    @doldolstack = () ;
 	    $l = $sql = $chunk = $rest = "" ;	 
 	    @sql_list = () ;
 	    $copy_table = $copy_rest = "" ;
@@ -75,7 +77,7 @@ sub parse_sql_file ( $ ) {
 	} ;			# End of INIT state
 	
 	$state == $states{SCAN} && do {
-	    # sql_parser_debug "State = SCAN" ;
+	    sql_parser_debug "State = SCAN" ;
 	  SCAN_STATE_SWITCH: {
 	      ( ($l eq "") or ($l =~ /^\s*$/) or ($l =~ /^\s*--/) ) && do {
 		  $l = <F> ;
@@ -108,7 +110,7 @@ sub parse_sql_file ( $ ) {
 	} ;			# End of SCAN state
 
 	$state == $states{IN_COMMENT} && do {
-	    # sql_parser_debug "State = IN_COMMENT" ;
+	    sql_parser_debug "State = IN_COMMENT" ;
 	  IN_COMMENT_STATE_SWITCH: {
 	      ( ($l eq "") or ($l =~ /^\s*$/) ) && do {
 		  $l = <F> ;
@@ -146,7 +148,7 @@ sub parse_sql_file ( $ ) {
 
 	      ( 1 ) && do {
 		  $l = <F> ;
-		  # sql_parser_debug "Examining $l\n" ;
+		  sql_parser_debug "Examining $l\n" ;
 		  unless ($l) {
 		      $state = $states{ERROR} ;
 		      last IN_COMMENT_STATE_SWITCH ;
@@ -162,7 +164,7 @@ sub parse_sql_file ( $ ) {
 	} ;			# End of IN_COMMENT state
 	
 	$state == $states{IN_SQL_COMMENT} && do {
-	    # sql_parser_debug "State = IN_SQL_COMMENT" ;
+	    sql_parser_debug "State = IN_SQL_COMMENT" ;
 	  IN_SQL_COMMENT_STATE_SWITCH: {
 	      ( ($rest eq "") or ($rest =~ /^\s*$/) ) && do {
 		  $rest = <F> ;
@@ -216,7 +218,7 @@ sub parse_sql_file ( $ ) {
 	} ;			# End of IN_SQL_COMMENT state
 	
 	$state == $states{SQL_SCAN} && do {
-	    # sql_parser_debug "State = SQL_SCAN" ;
+	    sql_parser_debug "State = SQL_SCAN" ;
 	  SQL_SCAN_STATE_SWITCH: {
 	      ( ($l eq "") or ($l =~ /^\s*$/) or ($l =~ /^--/) ) && do {
 		  $l = <F> ;
@@ -238,6 +240,15 @@ sub parse_sql_file ( $ ) {
 		  last SQL_SCAN_STATE_SWITCH ;
 	      } ;
 	      
+	      ($l =~ m,^(.*?)\$([\w]*)\$,) && do {
+		  $sql .= "$1\$$2\$" ;
+		  push @doldolstack, $2 ;
+		  sql_parser_debug "---$sql---$doldolstack[0]---" ;
+		  $l =~ s,^(.*?)\$[\w]*\$,, ;
+		  $state = $states{IN_DOLDOL} ;
+		  last SQL_SCAN_STATE_SWITCH ;
+	      } ;
+	      
 	      ( 1 ) && do {
 		  ($chunk, $rest) = ($l =~ m,^([^()\';-]*)(.*),) ;
 		  $sql .= $chunk ;
@@ -251,7 +262,7 @@ sub parse_sql_file ( $ ) {
 	} ;			# End of SQL_SCAN state
 	
 	$state == $states{IN_COMMENT} && do {
-	    # sql_parser_debug "State = IN_COMMENT" ;
+	    sql_parser_debug "State = IN_COMMENT" ;
 	  IN_COMMENT_STATE_SWITCH: {
 	      ( ($l eq "") or ($l =~ /^\s*$/) ) && do {
 		  $l = <F> ;
@@ -305,7 +316,7 @@ sub parse_sql_file ( $ ) {
 	} ;			# End of IN_COMMENT state
 	
 	$state == $states{IN_SQL} && do {
-	    # sql_parser_debug "State = IN_SQL" ;
+	    sql_parser_debug "State = IN_SQL" ;
 	    
 	  IN_SQL_STATE_SWITCH: {
 	      ($rest =~ m,^\s*/\*,) && do {
@@ -400,7 +411,7 @@ sub parse_sql_file ( $ ) {
 	} ;			# End of IN_SQL state
 
 	$state == $states{END_SQL} && do {
-	    # sql_parser_debug "State = END_SQL" ;
+	    sql_parser_debug "State = END_SQL" ;
 	  END_SQL_STATE_SWITCH: {
 	      ($sql =~ /^\s*$/) && do {
 		  $sql = "" ;
@@ -412,7 +423,7 @@ sub parse_sql_file ( $ ) {
 
 	      ( 1 ) && do {
 		  push @sql_list, $sql ;
-		  # sql_parser_debug ("Found SQL $sql\n") ;
+		  sql_parser_debug ("Found SQL $sql\n") ;
 		  $sql = "" ;
 		  $l = $rest ;
 
@@ -425,7 +436,7 @@ sub parse_sql_file ( $ ) {
 	} ;			# End of END_SQL state
 
 	$state == $states{QUOTE_SCAN} && do {
-	    # sql_parser_debug "State = QUOTE_SCAN" ;
+	    sql_parser_debug "State = QUOTE_SCAN" ;
 	  QUOTE_SCAN_STATE_SWITCH: {
 	      ($rest eq "") && do {
 		  $sql .= "\n" ;
@@ -454,7 +465,7 @@ sub parse_sql_file ( $ ) {
 	} ;			# End of QUOTE_SCAN state
 	
 	$state == $states{IN_QUOTE} && do {
-	    # sql_parser_debug "State = IN_QUOTE" ;
+	    sql_parser_debug "State = IN_QUOTE" ;
 	  IN_QUOTE_STATE_SWITCH: {
 	      ($rest =~ /^\'/) && do {
 		  $sql .= q/'/ ;
@@ -497,8 +508,52 @@ sub parse_sql_file ( $ ) {
 	    last STATE_SWITCH ;
 	} ;			# End of IN_QUOTE state
 
+	$state == $states{IN_DOLDOL} && do {
+	    sql_parser_debug "State = IN_DOLDOL" ;
+	  IN_DOLDOL_STATE_SWITCH: {
+	      my $cur = $doldolstack[0] ;
+
+	      ($l =~ m,^(.*?)\$([\w]*)\$,) && do {
+		  $sql .= "$1\$$2\$" ;
+		  my $found = $2 ;
+		  if ($found eq $cur) {
+		      pop @doldolstack ;
+		      if ($#doldolstack >= 0) {
+			  $state = $states{IN_DOLDOL} ;
+		      } else {
+			  $rest = $l ;
+			  $rest =~ s,^(.*?)\$[\w]*\$,, ;
+			  sql_parser_debug "Exiting DOLDOL for $cur (current = $sql) ($rest)" ;
+			  $state = $states{SQL_SCAN} ;
+		      }
+		  } else {
+		      push @doldolstack, $found ;
+		  }
+		  $l =~ s,^(.*?)\$[\w]*\$,, ;
+		  last IN_DOLDOL_STATE_SWITCH ;
+	      } ;
+
+	      ( 1 ) && do {
+		  $sql .= $l ;
+
+		  $l = <F> ;
+		  unless ($l) {
+		      sql_parser_debug "Detected end of file within a dollar-quoted string." ;
+		      $state = $states{ERROR} ;
+		      last IN_DOLDOL_STATE_SWITCH ;
+		  }
+		  chomp $l ;
+		  
+		  $state = $states{IN_DOLDOL} ;
+		  last IN_DOLDOL_STATE_SWITCH ;
+	      } ;
+
+	  }			# IN_DOLDOL_STATE_SWITCH
+	    last STATE_SWITCH ;
+	} ;			# End of IN_DOLDOL state
+
 	$state == $states{START_COPY} && do {
-	    # sql_parser_debug "State = START_COPY" ;
+	    sql_parser_debug "State = START_COPY" ;
 	  START_COPY_STATE_SWITCH: {
 	      ($l =~ m/\s*copy\s+\"[\w_]+\"\s+from\s+stdin\s*;/i) && do {
 		  ($copy_table, $copy_rest) = ($l =~ /\s*copy\s+\"([\w_]+)\"\s+from\s+stdin\s*;(.*)/i) ;
@@ -539,7 +594,7 @@ sub parse_sql_file ( $ ) {
 	} ;			# End of START_COPY state
 
 	$state == $states{IN_COPY} && do {
-	    # sql_parser_debug "State = IN_COPY" ;
+	    sql_parser_debug "State = IN_COPY" ;
 	  IN_COPY_STATE_SWITCH: {
 	      ($l =~ /^\\\.$/) && do {
 		  $l = $copy_rest ;
@@ -580,12 +635,12 @@ sub parse_sql_file ( $ ) {
 	} ;			# End of IN_COPY state
 
 	$state == $states{DONE} && do {
-	    # sql_parser_debug "State = DONE" ;
+	    sql_parser_debug "State = DONE" ;
 	    last STATE_SWITCH ;
 	} ;			# End of DONE state
 
 	$state == $states{ERROR} && do {
-	    # sql_parser_debug "State = ERROR" ;
+	    sql_parser_debug "State = ERROR" ;
 	    sql_parser_debug "Reached the ERROR state.  Dying." ;
 	    die "State machine is buggy." ;
 	    
@@ -606,6 +661,7 @@ sub parse_sql_file ( $ ) {
 }
 
 sub sql_parser_debug ( $ ) {
+    # return ;
     my $v = shift ;
     chomp $v ;
     print STDERR "$v\n" ;
