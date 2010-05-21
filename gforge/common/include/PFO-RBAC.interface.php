@@ -25,9 +25,9 @@
 
 // Constants to identify role classes
 define ("PFO_ROLE_EXPLICIT",  1) ;
-define ("PFO_ROLE_UNION",     2) ;
-define ("PFO_ROLE_ANONYMOUS", 3) ;
-define ("PFO_ROLE_LOGGEDIN",  4) ;
+define ("PFO_ROLE_ANONYMOUS", 2) ;
+define ("PFO_ROLE_LOGGEDIN",  3) ;
+define ("PFO_ROLE_UNION",     4) ;
 
 // Interface for the RBAC engine
 interface PFO_RBACEngine {

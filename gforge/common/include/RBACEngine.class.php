@@ -96,6 +96,39 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 		return $this->isActionAllowedForUser ($user, $section, -1, $action) ;
 	}
 
+	public function getRoleById ($role_id) {
+		if (USE_PFO_RBAC) {
+			$res = db_query_params ('SELECT c.class_name, r.home_group_id FROM pfo_role r, pfo_role_class c WHERE r.role_class = c.class_id AND r.role_id = $1',
+						array ($role_id)) ;
+			if (!$res || !db_numrows($res)) {
+				return NULL ;
+			}
+			
+			$class_id = db_result ($res, 0, 'class_name') ;
+			switch ($class_id) {
+			case 'PFO_RoleExplicit':
+				$group_id = db_result ($res, 0, 'home_group_id') ;
+				$group = group_get_object ($group_id) ;
+				return new Role ($group, $role_id) ;
+			case 'PFO_RoleAnonymous':
+				return RoleAnonymous::getInstance() ;
+			case 'PFO_RoleLoggedIn':
+				return RoleLoggedIn::getInstance() ;
+			default:
+				throw new Exception ("Not implemented") ;
+			}
+		} else {
+			$res = db_query_params ('SELECT group_id FROM role r WHERE role_id = $1',
+						array ($role_id)) ;
+			if (!$res || !db_numrows($res)) {
+				return NULL ;
+			}
+			$group_id = db_result ($res, 0, 'group_id') ;
+			$group = group_get_object ($group_id) ;
+			return new Role ($group, $role_id) ;
+		}
+	}
+
 	public function getRolesByAllowedAction ($section, $reference, $action = NULL) {
 		$ids = $this->_getRolesIdByAllowedAction ($section, $reference, $action) ;
 		$roles = array () ;
