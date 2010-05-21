@@ -569,11 +569,6 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 		}
 
 		if (USE_PFO_RBAC) {
-			// Clean everything
-			db_query_params ('DELETE FROM pfo_role_setting WHERE role_id=$1',
-					 array ($this->getID())) ;
-
-			// Re-add what's needed
 			foreach ($data as $sect => $refs) {
 				foreach ($refs as $refid => $value) {
 					$this->setSetting ($sect, $refid, $value) ;
