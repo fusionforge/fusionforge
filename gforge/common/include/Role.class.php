@@ -34,6 +34,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	var $Group;
 	var $role_values;
 	var $defaults;
+	var $global_settings;
 
 	/**
 	 *  Role($group,$id) - CONSTRUCTOR.
@@ -50,7 +51,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 		$this->Group =& $Group;
 
 		if (USE_PFO_RBAC) {
-			$role_values = array (
+			$this->role_values = array (
 				'forge_admin' => array (0,1),
 				'approve_projects' => array (0,1),
 				'approve_news' => array (0,1),
@@ -63,12 +64,12 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				'pm_admin' => array (0,1),
 				'forum_admin' => array (0,1),
 				
-				'tracker' => array (0,1,2,3,4,5,6,7),
-				'pm' => array (0,1,2,3,4,5,6,7),
+				'tracker' => array (0,1,3,5,7),
+				'pm' => array (0,1,3,5,7),
 				'forum' => array (0,1,2,3,4),
 
-				'new_tracker' => array (0,1,2,3,4,5,6,7),
-				'new_pm' => array (0,1,2,3,4,5,6,7),
+				'new_tracker' => array (0,1,3,5,7),
+				'new_pm' => array (0,1,3,5,7),
 				'new_forum' => array (0,1,2,3,4),
 
 				'scm' => array (0,1,2),
@@ -78,7 +79,14 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				'webcal' => array (0,1,2),
 				);
 
-			$defaults = array(
+			$this->global_settings = array (
+				'forge_admin',
+				'approve_projects',
+				'approve_news',
+				'forge_stats'
+				);
+
+			$this->defaults = array(
 				'Admin' => array(            'project_admin'=> 1,
 							     'project_read' => 1,
 							     'frs' => 2,
@@ -133,7 +141,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 					),
 				);
 		} else {
-			$role_values = array(
+			$this->role_values = array(
 				'projectadmin' => array ('0','A'),
 				'frs'	       => array ('0','1'),
 				'scm'	       => array ('-1','0','1'),
@@ -149,7 +157,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				'newpm'	       => array ('-1','0','1','2','3'),
 				'webcal'       => array ('0','1','2'));
 			
-			$defaults = array(
+			$this->defaults = array(
 				'Admin'		  => array( 'projectadmin'=>'A',
 							    'frs'=>'1',
 							    'scm'=>'1',

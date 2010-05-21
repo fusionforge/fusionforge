@@ -138,6 +138,15 @@ echo $HTML->listTableTop($titles);
 //
 $j = 0;
 $keys = array_keys($role->role_values);
+if (USE_PFO_RBAC) {
+	$keys2 = array () ;
+	foreach ($keys as $key) {
+		if (!in_array ($key, $role->global_settings)) {
+			$keys2[] = $key ;
+		}
+	}
+	$keys = $keys2 ;
+}
 for ($i=0; $i<count($keys); $i++) {
         if ((!$group->usesForum() && ereg("forum", $keys[$i])) ||
                 (!$group->usesTracker() && ereg("tracker", $keys[$i])) ||

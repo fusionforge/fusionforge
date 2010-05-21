@@ -52,7 +52,11 @@ function role_box ($group_id,$name,$selected='xzxzxz',$local_only=true) {
 		}
 	}
 
-	return html_build_select_box_from_arrays($ids,$names,$name,$selected,false);
+	if ($selected == 'xzxzxz') {
+		$selected = $ids[0] ;
+	}
+
+	return html_build_select_box_from_arrays($ids,$names,$name,$selected,false,'',false);
 }
 
 // Local Variables:
