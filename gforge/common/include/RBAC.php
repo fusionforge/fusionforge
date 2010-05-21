@@ -400,10 +400,6 @@ abstract class BaseRole extends Error {
 					       $section,
 					       $reference)) ;
 
-		if ($value == 0) {
-			return ;
-		}
-
 		$res = db_query_params ('INSERT INTO pfo_role_setting (role_id, section_name, ref_id, perm_val) VALUES ($1, $2, $3, $4)',
 						array ($role_id,
 						       $section,
