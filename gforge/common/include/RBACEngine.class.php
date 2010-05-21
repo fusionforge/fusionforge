@@ -68,3 +68,16 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 		return $this->isActionAllowed ($section, -1, $action) ;
 	}
 }
+
+function forge_action_allowed ($section, $reference, $action = NULL) {
+	$engine = RBACEngine::getInstance() ;
+
+	return $engine->isActionAllowed($section, $reference, $action) ;
+}
+
+function forge_global_action_allowed ($section, $action = NULL) {
+	$engine = RBACEngine::getInstance() ;
+
+	return $engine->isGlobalActionAllowed($section, $action) ;
+}
+
