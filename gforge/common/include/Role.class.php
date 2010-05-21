@@ -590,7 +590,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				break ;
 			}
 			$o = artifactType_get_object ($reference) ;
-			if (!$o or $o->is_error()) {
+			if (!$o or $o->isError()) {
 				return false ;
 			}
 
@@ -614,7 +614,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				break ;
 			}
 			$o = projectgroup_get_object ($reference) ;
-			if (!$o or $o->is_error()) {
+			if (!$o or $o->isError()) {
 				return false ;
 			}
 
