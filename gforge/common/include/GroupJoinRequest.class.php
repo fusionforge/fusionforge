@@ -281,14 +281,7 @@ Comments by the user:
 			$this->setError('Must be sure before deleting');
 			return false;
 		}
-		$perm =& $this->Group->getPermission ();
-		if (!$perm || !is_object($perm)) {
-			$this->setPermissionDeniedError();
-			return false;
-		} elseif ($perm->isError()) {
-			$this->setPermissionDeniedError();
-			return false;
-		} elseif (!$perm->isAdmin()) {
+		if (! forge_check_perm ('project_admin', $this->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		} else {

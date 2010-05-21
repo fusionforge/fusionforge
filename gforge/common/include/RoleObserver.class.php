@@ -182,8 +182,7 @@ class RoleObserver extends Error {
      *  @return boolean True on success or false on failure.
      */
 	function update($data) {
-		$perm =& $this->Group->getPermission ();
-		if (!$perm || !is_object($perm) || $perm->isError() || !$perm->isAdmin()) {
+		if (!forge_check_perm ('project_admin', $this->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}

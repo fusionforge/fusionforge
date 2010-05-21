@@ -363,8 +363,6 @@ class Navigation extends Error {
                                 return;
                         }
                         
-                        $perm =& $group->getPermission ();
-                        
                         $selected = 0;
                         
                         $menu =& $this->project_menu_data[$group_id];
