@@ -31,10 +31,7 @@ $_quota_block_size = 1024;
 $_quota_block_size = trim(shell_exec("echo $BLOCK_SIZE")) + 0;
 if ($_quota_block_size == 0) $_quota_block_size = 1024;
 
-// session_require(array('group'=>$group_id,'admin_flags'=>'A'));
-
 site_admin_header(array('title'=>_('Site admin')));
-
 
 ?>
 <h4>

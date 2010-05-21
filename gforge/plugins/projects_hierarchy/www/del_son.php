@@ -30,7 +30,7 @@ require_once $gfwww.'include/pre.php';
 $group_id = getIntFromRequest('group_id');
 $sub_group_id = getIntFromRequest('sub_group_id');
 
-session_require(array('group'=>$group_id,'admin_flags'=>'A'));
+session_require_perm ('project_admin', $group_id) ;
 
 //plugin webcal
 $params[0] = $sub_group_id;

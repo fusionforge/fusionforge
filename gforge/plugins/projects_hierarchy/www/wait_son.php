@@ -29,7 +29,7 @@ require_once $gfwww.'include/pre.php';
 $group_id = getIntFromRequest('group_id');
 $sub_group_id = getIntFromRequest('sub_group_id');
 
-session_require(array('group'=>$group_id,'admin_flags'=>'A'));
+session_require_perm ('project_admin', $group_id) ;
 //update the link when the son allow the father
 db_begin();
 db_query_params ('UPDATE plugin_projects_hierarchy SET activated = true WHERE project_id  = $1 AND sub_project_id = $2',

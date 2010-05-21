@@ -21,7 +21,7 @@ load_global_settings ();
 
 if($_GET['type'] == 'group'){
 	$group_id = getIntFromRequest('group_id');
-	//session_require(array('group'=>$group_id,'admin_flags'=>'A'));
+	session_require_perm ('project_admin', $group_id) ;
 	
 	//choix du calendrier a afficher 
 	$sql_group = "SELECT unix_group_name FROM groups WHERE group_id = '".$_GET['group_id']."'" ;

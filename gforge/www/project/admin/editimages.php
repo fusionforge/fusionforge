@@ -36,7 +36,7 @@ if (!forge_get_config('use_project_multimedia')) {
 }
 
 $group_id = getIntFromRequest('group_id');
-session_require(array('group'=>$group_id,'admin_flags'=>'A'));
+session_require_perm ('project_admin', $group_id) ;
 
 function check_file_size($size) {
 	global $feedback;

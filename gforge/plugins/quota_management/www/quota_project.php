@@ -31,7 +31,7 @@ if (!forge_get_config('use_project_vhost')) {
 	exit_disabled();
 }
 
-session_require(array('group'=>$group_id,'admin_flags'=>'A'));
+session_require_perm ('project_admin', $group_id) ;
 
 $group = &group_get_object($group_id);
 

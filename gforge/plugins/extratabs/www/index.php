@@ -17,7 +17,7 @@ $index = getIntFromRequest ('index') ;
 $tab_name = htmlspecialchars(trim(getStringFromRequest ('tab_name')));
 $tab_url = htmlspecialchars(trim(getStringFromRequest ('tab_url', 'http://')));
 
-session_require(array('group'=>$group_id,'admin_flags'=>'A'));
+session_require_perm ('project_admin', $group_id) ;
 
 // get current information
 $group =& group_get_object($group_id);

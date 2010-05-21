@@ -31,7 +31,7 @@ $group_id = getIntFromRequest('group_id');
 $sub_project_id = getIntFromRequest('sub_project_id');
 $com = getStringFromRequest('com');
 
-session_require(array('group'=>$group_id,'admin_flags'=>'A'));
+session_require_perm ('project_admin', $group_id) ;
 //add link between two projects
 db_begin();
 db_query_params ('INSERT INTO plugin_projects_hierarchy (project_id ,sub_project_id,link_type,com) VALUES ($1 , $2, $3,$4)',

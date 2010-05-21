@@ -34,7 +34,7 @@ require_once $gfcommon.'scm/SCMFactory.class.php';
 $group_id = getIntFromRequest('group_id');
 
 // Check permissions
-session_require(array('group'=>$group_id,'admin_flags'=>'A'));
+session_require_perm ('project_admin', $group_id) ;
 
 scm_header(array('title'=>_('SCM Repository'),'group'=>$group_id));
 

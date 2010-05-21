@@ -30,7 +30,7 @@ require_once $gfwww.'project/admin/project_admin_utils.php';
 require_once $gfwww.'include/role_utils.php';
 
 $group_id = getIntFromRequest('group_id');
-session_require(array('group'=>$group_id,'admin_flags'=>'A'));
+session_require_perm ('project_admin', $group_id) ;
 
 $accumulated_ids = getStringFromRequest("accumulated_ids");
 

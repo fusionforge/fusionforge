@@ -38,7 +38,7 @@ if (!forge_get_config('use_project_database')) {
 }
 
 $group_id = getIntFromRequest('group_id');
-session_require(array('group'=>$group_id,'admin_flags'=>'A'));
+session_require_perm ('project_admin', $group_id) ;
 
 $group =& group_get_object($group_id);
 if (!$group || !is_object($group)) {
