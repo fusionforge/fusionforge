@@ -359,6 +359,18 @@ abstract class BaseRole extends Error implements PFO_Role {
 
 }
 
+class SingletonRole extends BaseRole {
+	// This role is implemented as a singleton
+	protected static $_instances = array () ;
+	public static function getInstance() {
+		$c = __CLASS__;
+		if (!isset(self::$_instances[$c])) {
+			self::$_instances[$c] = new $c;
+		}
+		return self::$_instances[$c];
+	}
+}
+
 // Actual classes
 
 abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
@@ -373,18 +385,7 @@ abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 	}
 }
 
-class RoleAnonymous extends BaseRole implements PFO_RoleAnonymous {
-	// This role is implemented as a singleton
-	private static $_instance ;
-	public static function getInstance() {
-		if (!isset(self::$_instance)) {
-			$c = __CLASS__;
-			self::$_instance = new $c;
-		}
-		
-		return self::$_instance;
-	}
-
+class RoleAnonymous extends SingletonRole implements PFO_RoleAnonymous {
 	public function getID () {
 		return -PFO_ROLE_ANONYMOUS ;
 	}
@@ -405,18 +406,7 @@ class RoleAnonymous extends BaseRole implements PFO_RoleAnonymous {
 	}
 }
 
-class RoleLoggedIn extends BaseRole implements PFO_RoleLoggedIn {
-	// This role is implemented as a singleton
-	private static $_instance ;
-	public static function getInstance() {
-		if (!isset(self::$_instance)) {
-			$c = __CLASS__;
-			self::$_instance = new $c;
-		}
-		
-		return self::$_instance;
-	}
-
+class RoleLoggedIn extends SingletonRole implements PFO_RoleLoggedIn {
 	public function getID () {
 		return -PFO_ROLE_LOGGEDIN ;
 	}
