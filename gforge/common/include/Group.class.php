@@ -1617,7 +1617,7 @@ class Group extends Error {
 			Admins can add users to groups
 		*/
 
-		if (!forge_check_perm ('project_admin', $this->getID()) {
+		if (!forge_check_perm ('project_admin', $this->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}

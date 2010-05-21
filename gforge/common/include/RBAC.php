@@ -966,7 +966,7 @@ abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 		}
 
 		$already_there = array () ;
-		$res = db_query_params ('SELECT user_id FROM user_role WHERE user_id=ANY($1) AND role_id=$2',
+		$res = db_query_params ('SELECT user_id FROM pfo_user_role WHERE user_id=ANY($1) AND role_id=$2',
 					array (db_int_array_to_any_clause($ids), $this->getID())) ;
 		while ($arr =& db_fetch_array($res)) {
 			$already_there[] = $arr['user_id'] ;
@@ -974,7 +974,7 @@ abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 
 		foreach ($ids as $id) {
 			if (!in_array ($id, $already_there)) {
-			db_query_params ('INSERT INTO user_role (user_id, role_id) VALUES ($1, $2)',
+			db_query_params ('INSERT INTO pfo_user_role (user_id, role_id) VALUES ($1, $2)',
 					 array ($id,
 						$this->getID())) ;
 			}
@@ -992,7 +992,7 @@ abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 		}
 
 		$already_there = array () ;
-		$res = db_query_params ('DELETE FROM user_role WHERE user_id=ANY($1) AND role_id=$2',
+		$res = db_query_params ('DELETE FROM pfo_user_role WHERE user_id=ANY($1) AND role_id=$2',
 					array (db_int_array_to_any_clause($ids), $this->getID())) ;
 	}
 
@@ -1002,7 +1002,7 @@ abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 
 	public function getUsers() {
 		$result = array () ;
-		$res = db_query_params ('SELECT user_id FROM user_role WHERE role_id=$1',
+		$res = db_query_params ('SELECT user_id FROM pfo_user_role WHERE role_id=$1',
 					array ($this->getID())) ;
 		while ($arr =& db_fetch_array($res)) {
 			$result[] = user_get_object ($arr['user_id']) ;
@@ -1012,13 +1012,21 @@ abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 	}
 
 	public function hasUser($user) {
-		$res = db_query_params ('SELECT user_id FROM user_role WHERE user_id=$1 AND role_id=$2',
+		$res = db_query_params ('SELECT user_id FROM pfo_user_role WHERE user_id=$1 AND role_id=$2',
 					array (db_int_array_to_any_clause($user->getID()), $this->getID())) ;
 		if ($res && $db_numrows($res)) {
 			return true ;
 		} else {
 			return false ;
 		}
+	}
+
+	function getID() {	// From the PFO spec
+		return $this->data_array['role_id'];
+	}
+
+	function getName() {	// From the PFO spec
+		return $this->data_array['role_name'];
 	}
 }
 
