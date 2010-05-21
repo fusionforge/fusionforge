@@ -133,6 +133,16 @@ abstract class BaseRole extends Error {
 					$newsection = 'forum_admin' ;
 					break ;
 
+				case 'newtracker':
+					$newsection = 'new_tracker' ;
+					break ;
+				case 'newpm':
+					$newsection = 'new_pm' ;
+					break ;
+				case 'newforum':
+					$newsection = 'new_forum' ;
+					break ;
+
 				default:
 					$newsection = $oldsection ;
 				}
@@ -160,7 +170,9 @@ abstract class BaseRole extends Error {
 					break;
 					
 					case 'tracker':
+					case 'new_tracker':
 					case 'pm':
+					case 'new_pm':
 						switch ($oldvalue) {
 						case '-1': $newvalue = 0 ; break ;
 						case '0': $newvalue = 1 ; break ;
@@ -195,6 +207,16 @@ abstract class BaseRole extends Error {
 						}
 						break ;
 
+					case 'forum':
+					case 'new_forum':
+						switch ($oldvalue) {
+						case '-1': $newvalue = 0 ; break ;
+						case '0': $newvalue = 2 ; break ;
+						case '1': $newvalue = 3 ; break ;
+						case '2': $newvalue = 4 ; break ;
+						}
+						break ;
+			
 					default:
 						$newvalue = $oldvalue ;
 						$newreference = $oldreference ;
@@ -328,8 +350,11 @@ abstract class BaseRole extends Error {
 			case 'post':
 				$min = 2 ;
 				break ;
-			case 'moderate':
+			case 'unmoderated_post':
 				$min = 3 ;
+				break ;
+			case 'moderate':
+				$min = 4 ;
 				break ;
 			}
 			if (($value >= $min)
