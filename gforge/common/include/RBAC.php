@@ -710,6 +710,7 @@ class RoleAnonymous extends BaseRole implements PFO_RoleAnonymous {
 			throw new Exception ("No PFO_RoleAnonymous role in the database") ;
 		}
 		self::$_instance->_role_id = db_result ($res, 0, 'role_id') ;
+		self::$_instance->fetchData (self::$_instance->_role_id) ;
 
 		return self::$_instance ;
 	}
@@ -752,6 +753,7 @@ class RoleLoggedIn extends BaseRole implements PFO_RoleLoggedIn {
 			throw new Exception ("No PFO_RoleLoggedIn role in the database") ;
 		}
 		self::$_instance->_role_id = db_result ($res, 0, 'role_id') ;
+		self::$_instance->fetchData (self::$_instance->_role_id) ;
 
 		return self::$_instance ;
 	}
