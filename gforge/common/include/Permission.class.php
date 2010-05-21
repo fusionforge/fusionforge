@@ -184,24 +184,6 @@ class Permission extends Error {
 	}
 
 	/**
-	 *	getUser - get the User object this Permission is associated with.
-	 *
-	 *	@return	object	The User object.
-	 */
-	function &getUser() {
-		return $this->User;
-	}
-
-	/**
-	 *	getGroup - get the Group object this Permission is associated with.
-	 *
-	 *	@return the Group object.
-	 */
-	function &getGroup() {
-		return $this->Group;
-	}
-
-	/**
 	 *  isSuperUser - whether the current user has site admin privilege.
 	 *
 	 *  @return	boolean	is_super_user.
