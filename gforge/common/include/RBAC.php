@@ -109,120 +109,59 @@ abstract class BaseRole extends Error {
 			}
 
 			$this->perms_array=array();
+			$tohandle = array () ;
+			$gid = $this->data_array['group_id'] ;
 			foreach ($this->setting_array as $oldsection => $t) {
 				switch ($oldsection) {
 				case 'projectadmin':
-					$newsection = 'project_admin' ;
+					$tohandle[] = array ('project_admin', $gid) ;
 					if ($this->data_array['group_id'] == 1 && $t[0] == 'A') {
-						$this->perms_array['forge_admin'][-1] = 1 ;
+						$tohandle[] = array ('forge_admin', -1) ;
 					}
 					if ($this->data_array['group_id'] == forge_get_config ('news_group') && $t[0] == 'A') {
-						$this->perms_array['approve_news'][-1] = 1 ;
+						$tohandle[] = array ('forge_admin', -1) ;
 					}
 					if ($this->data_array['group_id'] == forge_get_config ('stats_group') && $t[0] == 'A') {
-						$this->perms_array['forge_stats'][-1] = 2 ;
+						$tohandle[] = array ('forge_stats', -1) ;
 					}
 					break ;
 				case 'trackeradmin':
-					$newsection = 'tracker_admin' ;
+					$tohandle[] = array ('tracker_admin', $gid) ;
 					break ;
 				case 'pmadmin':
-					$newsection = 'pm_admin' ;
+					$tohandle[] = array ('pm_admin', $gid) ;
 					break ;
 				case 'forumadmin':
-					$newsection = 'forum_admin' ;
+					$tohandle[] = array ('forum_admin', $gid) ;
 					break ;
 
 				case 'newtracker':
-					$newsection = 'new_tracker' ;
+					$tohandle[] = array ('new_tracker', $gid) ;
 					break ;
 				case 'newpm':
-					$newsection = 'new_pm' ;
+					$tohandle[] = array ('new_pm', $gid) ;
 					break ;
 				case 'newforum':
-					$newsection = 'new_forum' ;
+					$tohandle[] = array ('new_forum', $gid) ;
 					break ;
-
+					
 				default:
-					$newsection = $oldsection ;
-				}
-
-				foreach ($t as $oldreference => $oldvalue) {
-					$newvalue = 0 ;
-					$newreference = $oldreference ;
-					switch ($newsection) {
-					case 'project_admin':
-						$newreference = $this->Group->getID() ;
-						switch ($oldvalue) {
-						case '0': $newvalue = 0 ; break ;
-						case 'A': $newvalue = 1 ; break ;
-						}
-					break;
-					
-					case 'tracker_admin':
-					case 'pm_admin':
-					case 'forum_admin':
-						$newreference = $this->Group->getID() ;
-						switch ($oldvalue) {
-						case '0': $newvalue = 0 ; break ;
-						case '2': $newvalue = 1 ; break ;
-						}
-					break;
-					
-					case 'tracker':
-					case 'new_tracker':
-					case 'pm':
-					case 'new_pm':
-						switch ($oldvalue) {
-						case '-1': $newvalue = 0 ; break ;
-						case '0': $newvalue = 1 ; break ;
-						case '1': $newvalue = 3 ; break ;
-						case '2': $newvalue = 7 ; break ;
-						case '3': $newvalue = 5 ; break ;
-						}
-					break ;
-
-					case 'docman':
-						$newreference = $this->Group->getID() ;
-						switch ($oldvalue) {
-						case '0': $newvalue = 1 ; break ;
-						case '1': $newvalue = 4 ; break ;
-						}
+					foreach ($t as $oldreference => $oldvalue) {
+						$tohandle[] = array ($oldsection, $oldreference) ;
 						break ;
-
-					case 'frs':
-						$newreference = $this->Group->getID() ;
-						switch ($oldvalue) {
-						case '0': $newvalue = 1 ; break ;
-						case '1': $newvalue = 3 ; break ;
-						}
-						break ;
-
-					case 'scm':
-						$newreference = $this->Group->getID() ;
-						switch ($oldvalue) {
-						case '-1': $newvalue = 0 ; break ;
-						case '0': $newvalue = 1 ; break ;
-						case '1': $newvalue = 2 ; break ;
-						}
-						break ;
-
-					case 'forum':
-					case 'new_forum':
-						switch ($oldvalue) {
-						case '-1': $newvalue = 0 ; break ;
-						case '0': $newvalue = 2 ; break ;
-						case '1': $newvalue = 3 ; break ;
-						case '2': $newvalue = 4 ; break ;
-						}
-						break ;
-			
-					default:
-						$newvalue = $oldvalue ;
-						$newreference = $oldreference ;
 					}
+				}
+			}
 
-					$this->perms_array[$newsection][$newreference] = $newvalue ;
+			foreach ($tohandle as $t) {
+				$nsec = $t[0] ;
+				$nref = $t[1] ;
+
+				$res = db_query_params ('SELECT pfo_rbac_permissions_from_old($1,$2,$3)',
+							array ($role_id, $nsec, $nref)) ;
+				if ($res) {
+					$arr =& db_fetch_array($res) ;
+					$this->perms_array[$nsec][$nref] = $arr[0] ;
 				}
 			}
 		}
