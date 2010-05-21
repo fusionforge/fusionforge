@@ -74,14 +74,6 @@ if (!session_loggedin()) {
 	exit_not_logged_in();
 }
 
-$perm =& $group->getPermission ();
-if (!$perm || !is_object($perm)) {
-	exit_error('Error','Error - Could Not Get Perm');
-} elseif ($perm->isError()) {
-	exit_error('Error',$perm->getErrorMessage());
-}
-
-
 //
 //	Get list of trackers this person can see
 //

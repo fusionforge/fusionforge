@@ -40,12 +40,9 @@ if ($group_id && $atid) {
 //		UPDATING A PARTICULAR ARTIFACT TYPE
 //
 
-/*	$perm =& $group->getPermission ();
-
-	if (!$perm || !is_object($perm) || !$perm->isArtifactAdmin()) {
+	if (!forge_check_perm ('tracker_admin', $group_id)) {
 		exit_permission_denied();
 	}
-*/
 	//
 	//  Create the ArtifactType object
 	//
@@ -184,5 +181,10 @@ if ($group_id && $atid) {
 	include $gfwww.'tracker/admin/ind.php';
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>
