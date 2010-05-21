@@ -516,7 +516,7 @@ abstract class BaseRole extends Error {
 		case 'forum':
 			$o = forum_get_object ($reference) ;
 			if ($o && !$o->isError()
-			    $this->hasPermission('forum_admin', $o->Group->getID())) {
+			    && $this->hasPermission('forum_admin', $o->Group->getID())) {
 				return 4 ;
 			}
 			return $value ;
@@ -531,7 +531,7 @@ abstract class BaseRole extends Error {
 		case 'tracker':
 			$o = artifactType_get_object ($reference) ;
 			if ($o && !$o->isError()
-			    $this->hasPermission('tracker_admin', $o->Group->getID())) {
+			    && $this->hasPermission('tracker_admin', $o->Group->getID())) {
 				return 7 ;
 			}
 			return $value ;
