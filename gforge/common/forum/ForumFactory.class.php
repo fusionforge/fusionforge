@@ -92,8 +92,7 @@ AND is_public=1
 ORDER BY group_forum_id',
 							   array ($this->Group->getID())) ;
 			} else {
-				$public_flag='<3';
-				if ($perm->isForumAdmin()) {
+				if (forge_check_perm ('forum_admin', $this->Group->getID())) {
 					$result = db_query_params ('SELECT * FROM forum_group_list_vw
 WHERE group_id=$1
 AND is_public < 3
@@ -150,8 +149,7 @@ ORDER BY group_forum_id',
 
 		
 		if (session_loggedin()) {
-			$perm =& $this->Group->getPermission ();
-			if (!$perm || !is_object($perm) || !$perm->isForumAdmin()) {
+			if (!forge_check_perm ('forum_admin', $this->Group->getID())) {
 				$this->setError(_("You don't have a permission to access this page"));
 				$this->forums = false;
 			} else {

@@ -736,17 +736,7 @@ class Forum extends Error {
 	 *  @return boolean user_is_admin.
 	 */
 	function userIsAdmin() {
-		if (!session_loggedin()) {
-				return false;
-		} else {
-			$perm =& $this->Group->getPermission ();
-
-			if (($this->getCurrentUserPerm() >= 2) || ($perm->isForumAdmin())) {
-				return true;
-			} else {
-				return false;
-			}
-		}
+		return forge_check_perm ('forum_admin', $this->Group->getID()) ;
 	}
 
 	/**

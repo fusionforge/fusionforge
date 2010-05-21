@@ -48,40 +48,32 @@ $fa = new ForumAdmin();
 if ( (!$forum_id) || (!$group_id) || (!$msg_id) ) {
 	exit_missing_param();
 }
-if ($fa->Authorized($group_id)) {
-	//user authorized, continue check
-	if ($fa->isForumAdmin($forum_id)) {
-		//print the message
-		forum_header(array());
-		$g =& $fa->GetGroupObject();
-		$f=new Forum($g,$forum_id);
-		if (!$f || !is_object($f)) {
-			exit_error(_('Error'),"Error getting new Forum");
-		} elseif ($f->isError()) {
-			exit_error(_('Error'),$f->getErrorMessage());
-		}
-		$fm = new ForumMessage($f,$msg_id,false,true); //create the pending message
-		if (!$fm || !is_object($fm)) {
-			exit_error(_('Error'), "Error getting new ForumMessage");
-		} elseif ($fm->isError()) {
-			exit_error(_('Error'),"Error getting new ForumMessage: ".$fm->getErrorMessage());
-		}
-		$fhtml = new ForumHTML($f);
-		if (!$fhtml || !is_object($fhtml)) {
-			exit_error(_('Error'), "Error getting new ForumHTML");
-		} elseif ($fhtml->isError()) {
-			exit_error(_('Error'),$fhtml->getErrorMessage());
-		}
-		echo $fhtml->showPendingMessage($fm);
-		$HTML->footer(array());
-	}
-	else {
-		exit_permission_denied();
-	}
-} else {
-	exit_permission_denied();
-}
 
+session_require_perm ('forum', $group_id, 'moderate') ;
+
+//print the message
+forum_header(array());
+$g =& $fa->GetGroupObject();
+$f=new Forum($g,$forum_id);
+if (!$f || !is_object($f)) {
+	exit_error(_('Error'),"Error getting new Forum");
+} elseif ($f->isError()) {
+	exit_error(_('Error'),$f->getErrorMessage());
+}
+$fm = new ForumMessage($f,$msg_id,false,true); //create the pending message
+if (!$fm || !is_object($fm)) {
+	exit_error(_('Error'), "Error getting new ForumMessage");
+} elseif ($fm->isError()) {
+	exit_error(_('Error'),"Error getting new ForumMessage: ".$fm->getErrorMessage());
+}
+$fhtml = new ForumHTML($f);
+if (!$fhtml || !is_object($fhtml)) {
+	exit_error(_('Error'), "Error getting new ForumHTML");
+} elseif ($fhtml->isError()) {
+	exit_error(_('Error'),$fhtml->getErrorMessage());
+}
+echo $fhtml->showPendingMessage($fm);
+$HTML->footer(array());
 
 // Local Variables:
 // mode: php

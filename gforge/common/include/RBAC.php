@@ -333,7 +333,7 @@ abstract class BaseRole extends Error {
 				break ;
 			}
 			if (($value >= $min)
-			    || $this->hasPermission ('project_admin', $reference)) {
+			    || $this->hasPermission ('forum_admin', $reference)) {
 				return true ;
 			}
 			break ;

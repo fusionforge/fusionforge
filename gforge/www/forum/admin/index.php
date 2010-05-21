@@ -36,55 +36,55 @@ $feedback = getStringFromRequest('feedback');
 
 global $HTML;
 
-if ($group_id) {
-	//
-	//  Set up local objects
-	//
-	$g =& group_get_object($group_id);
-	if (!$g || !is_object($g) || $g->isError()) {
-		exit_no_group();
-	}
+if (!$group_id) {
+	exit_no_group();
+}
 
-	$p =& $g->getPermission ();
-	if (!$p || !is_object($p) || $p->isError()) {
-		exit_permission_denied();
-	}
+//
+//  Set up local objects
+//
+$g =& group_get_object($group_id);
+if (!$g || !is_object($g) || $g->isError()) {
+	exit_no_group();
+}
 
-	if (getStringFromRequest('post_changes')) {
+session_require_perm ('forum_admin', $group_id) ;
+
+if (getStringFromRequest('post_changes')) {
+	/*
+	  Update the DB to reflect the changes
+	*/
+
+	if ($deleteforum) {
 		/*
-			Update the DB to reflect the changes
+		  Deleting entire forum
 		*/
-
-		if ($deleteforum) {
-			/*
-				Deleting entire forum
-			*/
-			$fa = new ForumAdmin($group_id);
-			$feedback .= $fa->ExecuteAction("delete_forum");
-			$group_forum_id=0;
-			$deleteforum=0;
-		} else if (getStringFromRequest('add_forum')) {
-			if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-				exit_form_double_submit();
-			}
-
-			if (check_email_available($g, $g->getUnixName() . '-' . getStringFromRequest('forum_name'), $error_msg)) {
-				$fa = new ForumAdmin($group_id);
-				$feedback .= $fa->ExecuteAction("add_forum");
-			}
-		} else if (getStringFromRequest('change_status')) {
-			$fa = new ForumAdmin($group_id);
-			$feedback .= $fa->ExecuteAction("change_status");
+		$fa = new ForumAdmin($group_id);
+		$feedback .= $fa->ExecuteAction("delete_forum");
+		$group_forum_id=0;
+		$deleteforum=0;
+	} else if (getStringFromRequest('add_forum')) {
+		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+			exit_form_double_submit();
 		}
+
+		if (check_email_available($g, $g->getUnixName() . '-' . getStringFromRequest('forum_name'), $error_msg)) {
+			$fa = new ForumAdmin($group_id);
+			$feedback .= $fa->ExecuteAction("add_forum");
+		}
+	} else if (getStringFromRequest('change_status')) {
+		$fa = new ForumAdmin($group_id);
+		$feedback .= $fa->ExecuteAction("change_status");
 	}
+}
 
-	if (getStringFromRequest('add_forum')) {
-		/*
-			Show the form for adding forums
-		*/
-		forum_header(array('title'=>_('Add forum')));
+if (getStringFromRequest('add_forum')) {
+	/*
+	  Show the form for adding forums
+	*/
+	forum_header(array('title'=>_('Add forum')));
 
-		echo '
+	echo '
 			<br />
 			<form method="post" action="'.getStringFromServer('PHP_SELF').'">
 			<input type="hidden" name="post_changes" value="y" />
@@ -103,7 +103,7 @@ if ($group_id) {
 			<input type="radio" name="allow_anonymous" value="1" />'._('Yes').'<br />
 			<input type="radio" name="allow_anonymous" value="0" checked="checked" />'._('No').'
 			<br /><br />' .
-					html_build_select_box_from_assoc(array("0" => _('No Moderation') ,"1" => _('Moderated Level 1'),"2" => _('Moderated Level 2') ),"moderation_level",0) . '
+		html_build_select_box_from_assoc(array("0" => _('No Moderation') ,"1" => _('Moderated Level 1'),"2" => _('Moderated Level 2') ),"moderation_level",0) . '
 				<br />' . _('Moderated Level 1') . ': ' . _('To moderate anonymous posts (if allowed in public forum) and posts from non-member users.') . '<br />' . _('Moderated Level 2') . ': ' . _('To moderate ALL posts.') . '<p>
 				
 			<strong>'._('Email All Posts To:').'</strong><br />
@@ -113,32 +113,21 @@ if ($group_id) {
 			</p>
 			</form>';
 
-		forum_footer(array());
+	forum_footer(array());
 
-	} else if (getStringFromRequest('change_status')) {
-		/*
-			Change a forum
-		*/
+} else if (getStringFromRequest('change_status')) {
+	/*
+	  Change a forum
+	*/
 
-		$f = new Forum ($g,$group_forum_id);
-		if (!$f || !is_object($f)) {
-			exit_error('Error','Could Not Get Forum Object');
-		} elseif ($f->isError()) {
-			exit_error('Error',$f->getErrorMessage());
-		} elseif (!$f->userIsAdmin()) {
-			exit_permission_denied();
-		}
+	$f = new Forum ($g,$group_forum_id);
 
-		forum_header(array('title'=>_('Change forum status')));
-		echo '<p>'._('You can adjust forum features from here. Please note that private forums can still be viewed by members of your project, not the general public.').'</p>';
-		$fa = new ForumAdmin();
-		if ($fa->Authorized($group_id)) {
-			if ($fa->isForumAdmin($group_forum_id)) {
-				$fa->PrintAdminPendingOption($group_forum_id);
-			}
-		}
+	forum_header(array('title'=>_('Change forum status')));
+	echo '<p>'._('You can adjust forum features from here. Please note that private forums can still be viewed by members of your project, not the general public.').'</p>';
+	$fa = new ForumAdmin();
+	$fa->PrintAdminPendingOption($group_forum_id);
 		
-		echo '
+	echo '
 			<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 				<input type="hidden" name="post_changes" value="y" />
 				<input type="hidden" name="change_status" value="y" />
@@ -155,7 +144,7 @@ if ($group_id) {
 				<input type="radio" name="is_public" value="0"'.(($f->isPublic() == 0)?' checked="checked"':'').' /> '._('No').'<br />
 				<input type="radio" name="is_public" value="9"'.(($f->isPublic() == 9)?' checked="checked"':'').' />'._('Suspended').'<br />
 				<p>' .
-					html_build_select_box_from_assoc(array("0" => _('No Moderation') ,"1" => _('Moderated Level 1'),"2" => _('Moderated Level 2') ),"moderation_level",$f->getModerationLevel()) . '
+		html_build_select_box_from_assoc(array("0" => _('No Moderation') ,"1" => _('Moderated Level 1'),"2" => _('Moderated Level 2') ),"moderation_level",$f->getModerationLevel()) . '
 				<br />' . _('Moderated Level 1') . ': ' . _('To moderate anonymous posts (if allowed in public forum) and posts from non-member users.') . '<br />' . _('Moderated Level 2') . ': ' . _('To moderate ALL posts.') . '<p>
 				
 
@@ -170,22 +159,16 @@ if ($group_id) {
 				<p>
 				<input type="submit" name="submit" value="'._('Update').'" />
 			</form><p>';
-			//echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_forum_id='.$group_forum_id.'&amp;delete=1">'._('Delete Message').'</a><br />';
-			echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_forum_id='.$group_forum_id.'&amp;deleteforum=1">'._('Delete entire forum and all content').'</a><br />';
-		forum_footer(array());
+	//echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_forum_id='.$group_forum_id.'&amp;delete=1">'._('Delete Message').'</a><br />';
+	echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_forum_id='.$group_forum_id.'&amp;deleteforum=1">'._('Delete entire forum and all content').'</a><br />';
+	forum_footer(array());
 
-	} elseif ($deleteforum && $group_forum_id) {
+} elseif ($deleteforum && $group_forum_id) {
 
-		$f = new Forum ($g,$group_forum_id);
-		if (!$f || !is_object($f)) {
-			exit_error('Error','Could Not Get Forum Object');
-		} elseif ($f->isError()) {
-			exit_error('Error',$f->getErrorMessage());
-		} elseif (!$f->userIsAdmin()) {
-			exit_permission_denied();
-		}
-		forum_header(array('title'=>_('Delete')));
-		echo '<p>
+	$f = new Forum ($g,$group_forum_id);
+
+	forum_header(array('title'=>_('Delete')));
+	echo '<p>
 			<strong>'._('You are about to permanently and irretrievably delete this entire forum and all its contents!').'</strong><br />
 			</p>
 			<form method="post" action="'.getStringFromServer('PHP_SELF').'">
@@ -197,36 +180,36 @@ if ($group_id) {
 			<input type="checkbox" name="really_sure" value="1" />'._('I\'m Really Sure').'<br />
 			<input type="submit" name="submit" value="'._('Delete').'" />
 			</form>';
-		forum_footer(array());
+	forum_footer(array());
 
-	} elseif ( getStringFromRequest("deletemsg") ) {
-		// delete message handling
+} elseif ( getStringFromRequest("deletemsg") ) {
+	// delete message handling
 		
-		$fa = new ForumAdmin();
-		if ($fa->Authorized($group_id)) {
-			$forum_id = getStringFromRequest("forum_id");
-			$thread_id = getStringFromRequest("thread_id");
-			$msg_id = getStringFromRequest("deletemsg");
-			if ($fa->isForumAdmin($forum_id)) {
-				if (getStringFromRequest("ok")) {
-					//actually delete the message
-					$feedback .= $fa->ExecuteAction("delete");
-					forum_header(array('title'=>_('Delete a Message')));
-					echo '<p>'.util_make_link ('/forum/forum.php?forum_id=' . $forum_id, _("Return to the forum")) . '</p>';
-					forum_footer(array());
-				} elseif (getStringFromRequest("cancel")) {
-					// the user cancelled the request, go back to forum
-					//if thread_id is 0, then we came from message.php. else, we came from forum.php
-					if (!$thread_id) {
-						header("Location: /forum/message.php?msg_id=$msg_id");
-					} else {
-						header("Location: /forum/forum.php?thread_id=$thread_id&forum_id=$forum_id");
-					}
-					exit;
-				} else {
-					//print the delete message confirmation
-					forum_header(array('title'=>_('Delete a Message')));
-					echo '<center>
+	$fa = new ForumAdmin();
+
+	$forum_id = getStringFromRequest("forum_id");
+	$thread_id = getStringFromRequest("thread_id");
+	$msg_id = getStringFromRequest("deletemsg");
+
+	if (getStringFromRequest("ok")) {
+		//actually delete the message
+		$feedback .= $fa->ExecuteAction("delete");
+		forum_header(array('title'=>_('Delete a Message')));
+		echo '<p>'.util_make_link ('/forum/forum.php?forum_id=' . $forum_id, _("Return to the forum")) . '</p>';
+		forum_footer(array());
+	} elseif (getStringFromRequest("cancel")) {
+		// the user cancelled the request, go back to forum
+		//if thread_id is 0, then we came from message.php. else, we came from forum.php
+		if (!$thread_id) {
+			header("Location: /forum/message.php?msg_id=$msg_id");
+		} else {
+			header("Location: /forum/forum.php?thread_id=$thread_id&forum_id=$forum_id");
+		}
+		exit;
+	} else {
+		//print the delete message confirmation
+		forum_header(array('title'=>_('Delete a Message')));
+		echo '<center>
 							<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 							<h3>' . _('WARNING! You are about to permanently delete a message and all of its followups!!') . '</h3><p>
 							<p>
@@ -239,199 +222,175 @@ if ($group_id) {
 							</p>
 							</form>
 							</center>';
-					forum_footer(array());
-				}
-			} else {
-				exit_permission_denied();
-			}
+		forum_footer(array());
+	}
+} elseif (getStringFromRequest("editmsg")) {
+	// edit message handling
+	$forum_id = getStringFromRequest("forum_id");
+	$thread_id = getStringFromRequest("thread_id");
+	$msg_id = getStringFromRequest("editmsg");
+	$fa = new ForumAdmin();
+
+	if (getStringFromRequest("ok")) {
+		//actually finish editing the message and save the contents
+		$f = new Forum ($fa->GetGroupObject(),$forum_id);
+		if (!$f || !is_object($f)) {
+			exit_error('Error','Error Getting Forum');
+		} elseif ($f->isError()) {
+			exit_error('Error',$f->getErrorMessage());
+		}
+		$fm=new ForumMessage($f,$msg_id,false,false);
+		if (!$fm || !is_object($fm)) {
+			exit_error(_('Error'),_('Error getting new forum message'));
+		} elseif ($fm->isError()) {
+			exit_error(_('Error'),$fm->getErrorMessage());
+		}
+		$subject = getStringFromRequest('subject');
+		$body = getStringFromRequest('body');
+			
+		$sanitizer = new TextSanitizer();
+		$body = $sanitizer->SanitizeHtml($body);
+			
+		$is_followup_to = getStringFromRequest('is_followup_to');
+		$form_key = getStringFromRequest('form_key');
+		$posted_by = getStringFromRequest('posted_by');
+		$post_date = getStringFromRequest('post_date');
+		$is_followup_to = getStringFromRequest('is_followup_to');
+		$has_followups = getStringFromRequest('has_followups');
+		$most_recent_date = getStringFromRequest('most_recent_date');
+		if ($fm->updatemsg($forum_id,$posted_by,$subject,$body,$post_date,$is_followup_to,$thread_id,$has_followups,$most_recent_date)) {
+			$feedback .= _('Message Edited Successfully');
 		} else {
-			//manage auth errors
-			if ($fa->isGroupIdError()) {
-				exit_no_group();
-			}	elseif ($fa->isPermissionDeniedError()) {
-				exit_permission_denied();
+			$feedback .= $fm->getErrorMessage();
+		}
+		forum_header(array('title'=>_('Edit a Message')));
+		echo '<p>'.util_make_link ('/forum/forum.php?forum_id=' . $forum_id, _("Return to the forum")) ;
+		forum_footer(array());
+	} elseif (getStringFromRequest("cancel")) {
+		// the user cancelled the request, go back to forum
+		header("Location: /forum/message.php?msg_id=$msg_id");
+		exit;
+	} else { 
+		//print the edit message confirmation
+			
+		$f = new Forum ($fa->GetGroupObject(),$forum_id);
+		if (!$f || !is_object($f)) {
+			exit_error('Error','Error Getting Forum');
+		} elseif ($f->isError()) {
+			exit_error('Error',$f->getErrorMessage());
+		}
+			
+		$fm=new ForumMessage($f,$msg_id,false,false);
+		if (!$fm || !is_object($fm)) {
+			exit_error(_('Error'),_('Error Getting ForumMessage'));
+		} elseif ($fm->isError()) {
+			exit_error(_('Error'),$fm->getErrorMessage());
+		}
+			
+		$fh = new ForumHTML($f);
+		if (!$fh || !is_object($fh)) {
+			exit_error(_('Error'),_('Error Getting ForumHTML'));
+		} elseif ($fh->isError()) {
+			exit_error(_('Error'),$fh->getErrorMessage());
+		}
+			
+		forum_header(array('title'=>_('Edit a Message')));
+		$fh->showEditForm($fm);
+		forum_footer(array());
+	}
+} elseif (getStringFromRequest("movethread")) {
+	$thread_id = getIntFromRequest("movethread");
+	$msg_id = getStringFromRequest("msg_id");
+	$forum_id = getIntFromRequest("forum_id");
+	$return_to_message = getIntFromRequest("return_to_message");
+	$new_forum_id = getIntFromRequest("new_forum_id");
+	$fa = new ForumAdmin();
+
+	if (getStringFromRequest("ok")) {
+		if ($forum_id == $new_forum_id) {
+			$feedback .= _('Thread not moved');
+		}
+		else {
+			// Move message in another forum
+			$f_from = new Forum ($fa->GetGroupObject(),$forum_id);
+			if (!$f_from || !is_object($f_from)) {
+				exit_error('Error','Could Not Get Forum Object');
+			} elseif ($f_from->isError()) {
+				exit_error('Error',$f_from->getErrorMessage());
+			}
+			$f_to = new Forum ($fa->GetGroupObject(),$new_forum_id);
+			if (!$f_to || !is_object($f_to)) {
+				exit_error('Error','Could Not Get Forum Object');
+			} elseif ($f_to->isError()) {
+				exit_error('Error',$f_to->getErrorMessage());
+			}
+
+			$ff = new ForumFactory($g);
+			if (!$ff || !is_object($ff) || $ff->isError()) {
+				exit_error(_('Error'),$ff->getErrorMessage());
+			}
+
+			if ($ff->moveThread($new_forum_id,$thread_id,$forum_id)) {
+				$feedback .= sprintf(_('Thread successfully moved from %1$s forum to %2$s forum'), $f_from->getName(),$f_to->getName());
+			} else {
+				$feedback .= $ff->getErrorMessage();
 			}
 		}
-	} elseif (getStringFromRequest("editmsg")) {
-		// edit message handling
-		$forum_id = getStringFromRequest("forum_id");
-		$thread_id = getStringFromRequest("thread_id");
-		$msg_id = getStringFromRequest("editmsg");
-		$fa = new ForumAdmin();
-		if ($fa->Authorized($group_id)) {
-			if ($fa->isForumAdmin($forum_id)) {
-				if (getStringFromRequest("ok")) {
-					//actually finish editing the message and save the contents
-					$f = new Forum ($fa->GetGroupObject(),$forum_id);
-					if (!$f || !is_object($f)) {
-						exit_error('Error','Error Getting Forum');
-					} elseif ($f->isError()) {
-						exit_error('Error',$f->getErrorMessage());
-					}
-					$fm=new ForumMessage($f,$msg_id,false,false);
-					if (!$fm || !is_object($fm)) {
-						exit_error(_('Error'),_('Error getting new forum message'));
-					} elseif ($fm->isError()) {
-						exit_error(_('Error'),$fm->getErrorMessage());
-					}
-					$subject = getStringFromRequest('subject');
-					$body = getStringFromRequest('body');
 					
-					$sanitizer = new TextSanitizer();
-					$body = $sanitizer->SanitizeHtml($body);
-					
-					$is_followup_to = getStringFromRequest('is_followup_to');
-					$form_key = getStringFromRequest('form_key');
-					$posted_by = getStringFromRequest('posted_by');
-					$post_date = getStringFromRequest('post_date');
-					$is_followup_to = getStringFromRequest('is_followup_to');
-					$has_followups = getStringFromRequest('has_followups');
-					$most_recent_date = getStringFromRequest('most_recent_date');
-					if ($fm->updatemsg($forum_id,$posted_by,$subject,$body,$post_date,$is_followup_to,$thread_id,$has_followups,$most_recent_date)) {
-						$feedback .= _('Message Edited Successfully');
-					} else {
-						$feedback .= $fm->getErrorMessage();
-					}
-					forum_header(array('title'=>_('Edit a Message')));
-					echo '<p>'.util_make_link ('/forum/forum.php?forum_id=' . $forum_id, _("Return to the forum")) ;
-					forum_footer(array());
-				} elseif (getStringFromRequest("cancel")) {
-					// the user cancelled the request, go back to forum
-					header("Location: /forum/message.php?msg_id=$msg_id");
-					exit;
-				} else { 
-					//print the edit message confirmation
-					
-					$f = new Forum ($fa->GetGroupObject(),$forum_id);
-					if (!$f || !is_object($f)) {
-						exit_error('Error','Error Getting Forum');
-					} elseif ($f->isError()) {
-						exit_error('Error',$f->getErrorMessage());
-					}
-					
-					$fm=new ForumMessage($f,$msg_id,false,false);
-					if (!$fm || !is_object($fm)) {
-						exit_error(_('Error'),_('Error Getting ForumMessage'));
-					} elseif ($fm->isError()) {
-						exit_error(_('Error'),$fm->getErrorMessage());
-					}
-					
-					$fh = new ForumHTML($f);
-					if (!$fh || !is_object($fh)) {
-						exit_error(_('Error'),_('Error Getting ForumHTML'));
-					} elseif ($fh->isError()) {
-						exit_error(_('Error'),$fh->getErrorMessage());
-					}
-					
-					forum_header(array('title'=>_('Edit a Message')));
-					$fh->showEditForm($fm);
-					forum_footer(array());
-				}
-			} else {
-				exit_permission_denied();
-			}
+		forum_header(array('title'=>_('Edit a Message')));
+		echo '<p><a href="/forum/forum.php?forum_id=' . $new_forum_id . '">Return to the forum</a></p>';
+		echo '<p><a href="/forum/forum.php?thread_id='.$thread_id.'&amp;forum_id=' . $new_forum_id . '">Return to the thread</a></p>';
+		forum_footer(array());
+	} elseif (getStringFromRequest("cancel")) {
+		// the user cancelled the request, go back to forum
+		if ($return_to_message) {
+			header("Location: /forum/message.php?msg_id=$msg_id");
 		} else {
-			//manage auth errors
-			if ($fa->isGroupIdError()) {
-				exit_no_group();
-			}	elseif ($fa->isPermissionDeniedError()) {
-				exit_permission_denied();
+			header("Location: /forum/forum.php?thread_id=$thread_id&forum_id=$forum_id");
+		}
+		exit;
+	} else { 
+		// Display select box to select new forum
+					
+		forum_header(array('title'=>_('Forums: Administration')));
+					
+		$ff = new ForumFactory($g);
+		if (!$ff || !is_object($ff) || $ff->isError()) {
+			exit_error(_("Error"),$ff->getErrorMessage());
+		}
+
+		$farr =& $ff->getForums();
+
+		if ($ff->isError()) {
+			echo '<h1>'.sprintf(_('No Forums Found For %s'), $g->getPublicName()) .'</h1>';
+			echo $ff->getErrorMessage();
+			forum_footer(array());
+			exit;
+		}
+
+		/*
+		  List the existing forums so they can be edited.
+		*/
+
+		$forums = array();
+		for ($j = 0; $j < count($farr); $j++) {
+			if (!is_object($farr[$j])) {
+				//just skip it - this object should never have been placed here
+			} elseif ($farr[$j]->isError()) {
+				echo $farr[$j]->getErrorMessage();
+			} else {
+				$forums[$farr[$j]->getID()] = $farr[$j]->getName();
 			}
 		}
-	} elseif (getStringFromRequest("movethread")) {
-		$thread_id = getIntFromRequest("movethread");
-		$msg_id = getStringFromRequest("msg_id");
-		$forum_id = getIntFromRequest("forum_id");
-		$return_to_message = getIntFromRequest("return_to_message");
-		$new_forum_id = getIntFromRequest("new_forum_id");
-		$fa = new ForumAdmin();
-		if ($fa->Authorized($group_id)) {
-			if ($fa->isForumAdmin($forum_id)) {
-				if (getStringFromRequest("ok")) {
-					if ($forum_id == $new_forum_id) {
-						$feedback .= _('Thread not moved');
-					}
-					else {
-						// Move message in another forum
-						$f_from = new Forum ($fa->GetGroupObject(),$forum_id);
-						if (!$f_from || !is_object($f_from)) {
-							exit_error('Error','Could Not Get Forum Object');
-						} elseif ($f_from->isError()) {
-							exit_error('Error',$f_from->getErrorMessage());
-						}
-						$f_to = new Forum ($fa->GetGroupObject(),$new_forum_id);
-						if (!$f_to || !is_object($f_to)) {
-							exit_error('Error','Could Not Get Forum Object');
-						} elseif ($f_to->isError()) {
-							exit_error('Error',$f_to->getErrorMessage());
-						}
-
-						$ff = new ForumFactory($g);
-						if (!$ff || !is_object($ff) || $ff->isError()) {
-							exit_error(_('Error'),$ff->getErrorMessage());
-						}
-
-						if ($ff->moveThread($new_forum_id,$thread_id,$forum_id)) {
-							$feedback .= sprintf(_('Thread successfully moved from %1$s forum to %2$s forum'), $f_from->getName(),$f_to->getName());
-						} else {
-							$feedback .= $ff->getErrorMessage();
-						}
-					}
 					
-					forum_header(array('title'=>_('Edit a Message')));
-					echo '<p><a href="/forum/forum.php?forum_id=' . $new_forum_id . '">Return to the forum</a></p>';
-					echo '<p><a href="/forum/forum.php?thread_id='.$thread_id.'&amp;forum_id=' . $new_forum_id . '">Return to the thread</a></p>';
-					forum_footer(array());
-				} elseif (getStringFromRequest("cancel")) {
-					// the user cancelled the request, go back to forum
-					if ($return_to_message) {
-						header("Location: /forum/message.php?msg_id=$msg_id");
-					} else {
-						header("Location: /forum/forum.php?thread_id=$thread_id&forum_id=$forum_id");
-					}
-					exit;
-				} else { 
-					// Display select box to select new forum
+		$f_from = new Forum ($fa->GetGroupObject(),$forum_id);
+		if (!$f_from || !is_object($f_from)) {
+			exit_error('Error','Could Not Get Forum Object');
+		} elseif ($f_from->isError()) {
+			exit_error('Error',$f_from->getErrorMessage());
+		}
 					
-					forum_header(array('title'=>_('Forums: Administration')));
-					
-					$ff = new ForumFactory($g);
-					if (!$ff || !is_object($ff) || $ff->isError()) {
-						exit_error(_("Error"),$ff->getErrorMessage());
-					}
-
-					$farr =& $ff->getForums();
-
-					if ($ff->isError()) {
-						echo '<h1>'.sprintf(_('No Forums Found For %s'), $g->getPublicName()) .'</h1>';
-						echo $ff->getErrorMessage();
-						forum_footer(array());
-						exit;
-					}
-
-					/*
-						List the existing forums so they can be edited.
-					*/
-
-					$forums = array();
-					for ($j = 0; $j < count($farr); $j++) {
-						if (!is_object($farr[$j])) {
-						//just skip it - this object should never have been placed here
-						} elseif ($farr[$j]->isError()) {
-							echo $farr[$j]->getErrorMessage();
-						} else {
-							$forums[$farr[$j]->getID()] = $farr[$j]->getName();
-						}
-					}
-					
-					$f_from = new Forum ($fa->GetGroupObject(),$forum_id);
-					if (!$f_from || !is_object($f_from)) {
-						exit_error('Error','Could Not Get Forum Object');
-					} elseif ($f_from->isError()) {
-						exit_error('Error',$f_from->getErrorMessage());
-					}
-					
-					echo '<center>
+		echo '<center>
 							<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 							<h3>' . sprintf(_('Move thread from %s forum to the following forum:'), $f_from->getName()) . '</h3>
 							<p>
@@ -440,94 +399,72 @@ if ($group_id) {
 							<input type="hidden" name="forum_id" value="'.$forum_id.'" />
 							<input type="hidden" name="msg_id" value="'.$msg_id.'" />
 							<input type="hidden" name="return_to_message" value="'.$return_to_message.'" />' .
-							html_build_select_box_from_assoc($forums,'new_forum_id',$forum_id) .
-							'<br /><br />
+			html_build_select_box_from_assoc($forums,'new_forum_id',$forum_id) .
+			'<br /><br />
 							<input type="submit" name="ok" value="' . _("Submit") . '" />
 							<input type="submit" name="cancel" value="' . _("Cancel") . '" />    
 							</p>
 							</form>
 							</center>';
 
-					forum_footer(array());
-				}
-			} else {
-				exit_permission_denied();
-			}
-		} else {
-			//manage auth errors
-			if ($fa->isGroupIdError()) {
-				exit_no_group();
-			}
-			elseif ($fa->isPermissionDeniedError()) {
-				exit_permission_denied();
-			}
-		}
-		
-		
-		
-		
-	} else {
-		/*
-			Show main page for choosing
-			either moderator or delete
-		*/
-		forum_header(array('title'=>_('Forums: Administration')));
-
-		//
-		//	Add new forum
-		//
-		if ($p->isForumAdmin()) {
-			$fa = new ForumAdmin();
-			$fa->PrintAdminOptions();
-		}
-
-		if ($f)
-			plugin_hook ("blocks", "forum index");
-
-		//
-		//	Get existing forums
-		//
-		$ff=new ForumFactory($g);
-		if (!$ff || !is_object($ff) || $ff->isError()) {
-			exit_error(_('Error'),$ff->getErrorMessage());
-		}
-
-		$farr =& $ff->getForumsAdmin();
-
-		if ($ff->isError()) {
-			echo '<h1>'.sprintf(_('No Forums Found For %1$s'), $g->getPublicName()) .'</h1>';
-			echo $ff->getErrorMessage();
-			forum_footer(array());
-			exit;
-		}
-
-		/*
-			List the existing forums so they can be edited.
-		*/
-
-		for ($j = 0; $j < count($farr); $j++) {
-			if (!is_object($farr[$j])) {
-				//just skip it - this object should never have been placed here
-			} elseif ($farr[$j]->isError()) {
-				echo $farr[$j]->getErrorMessage();
-			} else {
-				echo '<p><a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;change_status=1&amp;group_forum_id='. $farr[$j]->getID() .'">'.
-					$farr[$j]->getName() .'</a><br />'.$farr[$j]->getDescription().'<br /><a href="monitor.php?group_id='.$group_id.'&amp;group_forum_id='. $farr[$j]->getID() .'">'.
-					_('Monitoring Users').'</a></p>';
-			}
-		}
-
 		forum_footer(array());
 	}
 
 } else {
 	/*
-		Not logged in or insufficient privileges
+	  Show main page for choosing
+	  either moderator or delete
 	*/
-	if (!$group_id) {
-		exit_no_group();
-	} else {
-		exit_permission_denied();
+	forum_header(array('title'=>_('Forums: Administration')));
+
+	//
+	//	Add new forum
+	//
+	$fa = new ForumAdmin();
+	$fa->PrintAdminOptions();
+
+	if ($f)
+		plugin_hook ("blocks", "forum index");
+
+	//
+	//	Get existing forums
+	//
+	$ff=new ForumFactory($g);
+	if (!$ff || !is_object($ff) || $ff->isError()) {
+		exit_error(_('Error'),$ff->getErrorMessage());
 	}
+
+	$farr =& $ff->getForumsAdmin();
+
+	if ($ff->isError()) {
+		echo '<h1>'.sprintf(_('No Forums Found For %1$s'), $g->getPublicName()) .'</h1>';
+		echo $ff->getErrorMessage();
+		forum_footer(array());
+		exit;
+	}
+
+	/*
+	  List the existing forums so they can be edited.
+	*/
+
+	for ($j = 0; $j < count($farr); $j++) {
+		if (!is_object($farr[$j])) {
+			//just skip it - this object should never have been placed here
+		} elseif ($farr[$j]->isError()) {
+			echo $farr[$j]->getErrorMessage();
+		} else {
+			echo '<p><a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;change_status=1&amp;group_forum_id='. $farr[$j]->getID() .'">'.
+				$farr[$j]->getName() .'</a><br />'.$farr[$j]->getDescription().'<br /><a href="monitor.php?group_id='.$group_id.'&amp;group_forum_id='. $farr[$j]->getID() .'">'.
+				_('Monitoring Users').'</a></p>';
+		}
+	}
+
+	forum_footer(array());
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

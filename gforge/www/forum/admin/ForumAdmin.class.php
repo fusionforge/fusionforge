@@ -120,32 +120,11 @@ class ForumAdmin extends Error {
 	}
 	
 	/**
-	 *  isForumAdmin - checks whether the authorized user is a forum admin. The user must be authenticated
-	 *
-	 *	@param 	string	 The forum id
-	 */
-	function isForumAdmin($forum_id) {
-		$f = new Forum ($this->g,$forum_id);
-		if (!$f || !is_object($f)) {
-			exit_error('Error','Could Not Get Forum Object');
-		} elseif ($f->isError()) {
-			exit_error('Error',$f->getErrorMessage());
-		} elseif (!$f->userIsAdmin()) {
-			return false;
-		}
-		return true;
-	}
-	
-	/**
 	 *  isGroupAdmin - checks whether the authorized user is a group admin for the forums. The user must be authenticated
 	 *
 	 */
-	function isGroupAdmin() {	
-		if ($this->p->isForumAdmin()) {
-			return true;
-		} else {
-			return false;
-		}
+	function isGroupAdmin() {
+		return forge_check_perm ('forum_admin', $this->g->getID()) ;
 	}
 	
 	/**
@@ -222,7 +201,7 @@ class ForumAdmin extends Error {
 			/*
 				Adding forums to this group
 			*/
-			if (!$this->p->isForumAdmin()) {
+			if (!forge_check_perm ('forum_admin', $this->g->getID())) {
 				form_release_key(getStringFromRequest("form_key"));
 				exit_permission_denied();
 			}

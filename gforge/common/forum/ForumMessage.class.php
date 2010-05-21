@@ -585,12 +585,8 @@ class ForumMessage extends Error {
 			return false;
 		}
 		
-		/*$perm =& $this->Forum->Group->getPermission ();
+		return forge_check_perm ('forum', $this->Forum->getID(), 'moderate') ;
 
-		if (!$perm || !is_object($perm) || !$perm->isForumAdmin()) {
-			$this->setPermissionDeniedError();
-			return false;
-		}*/
 		$result = db_query_params ('SELECT msg_id FROM forum 
 			WHERE is_followup_to=$1
 			AND group_forum_id=$2',

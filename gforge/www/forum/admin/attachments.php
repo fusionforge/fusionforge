@@ -44,25 +44,15 @@ $group_id = getIntFromRequest('group_id');
 
 $fa = new ForumAdmin();
 
-if ($fa->Authorized($group_id)) {
-	//user authorized, continue
-	if ($fa->isGroupAdmin()) {
-		forum_header(array('title'=>_('Forums: Administration')));
-		$fa->ExecuteAction($action);
-		forum_footer(array());
-	} else {
-		exit_permission_denied();
-	}
-}	else {
-	//manage errors
-	if ($fa->isGroupIdError()) {
-		exit_no_group();
-	}	elseif ($fa->isPermissionDeniedError()) {
-		exit_permission_denied();
-	}
-	
-}
+session_require_perm ('forum_admin', $group_id) ;
 
+forum_header(array('title'=>_('Forums: Administration')));
+$fa->ExecuteAction($action);
+forum_footer(array());
 
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

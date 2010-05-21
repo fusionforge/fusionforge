@@ -42,51 +42,30 @@ $action = getStringFromRequest('action');
 $group_id = getIntFromRequest('group_id');
 $forum_id = getStringFromRequest("forum_id");
 
-$fa = new ForumAdmin();
+$fa = new ForumAdmin ();
 
-if ($fa->Authorized($group_id)) {
-	//user authorized, continue check
-	
-	//if there's no forum_id input, then the user must have access to all forums, thus he's a group admin for the forums
-	if (!$forum_id) {
-		if ($fa->isGroupAdmin()) {
-			forum_header(array('title'=>_('Forums: Administration')));
-			if (getStringFromRequest("Go")) {
-				$fa->ExecuteAction("view_pending");
-			} else {
-				$fa->ExecuteAction($action);
-			}
-			forum_footer(array());
-		} else {
-			exit_permission_denied();
-		}
+// If there's no forum_id input, then the user must have access to all forums, thus he's a group admin for the forums
+if (!$forum_id) {
+	session_require_perm ('forum_admin', $group_id) ;
+
+	forum_header(array('title'=>_('Forums: Administration')));
+	if (getStringFromRequest("Go")) {
+		$fa->ExecuteAction("view_pending");
 	} else {
-//		if ($forum_id=="A") {
-			//all messages
-//			if (!$fa->isGroupAdmin()) {
-//				exit_permission_denied();
-//			}
-//		} else {
-			if (!$fa->isForumAdmin($forum_id)) {
-				exit_permission_denied();
-			}
-//		}
-		forum_header(array('title'=>_('Forums: Administration')));
-		if (getStringFromRequest("Go")) {
-			$fa->ExecuteAction("view_pending");
-		} else {
-			$fa->ExecuteAction($action);
-		}
-		forum_footer(array());
+		$fa->ExecuteAction($action);
 	}
-}	else {
-	//manage auth errors
-	if ($fa->isGroupIdError()) {
-		exit_no_group();
-	}	elseif ($fa->isPermissionDeniedError()) {
-		exit_permission_denied();
+	forum_footer(array());
+
+} else {
+	session_require_perm ('forum', $forum_id, 'moderate') ;
+
+	forum_header(array('title'=>_('Forums: Administration')));
+	if (getStringFromRequest("Go")) {
+		$fa->ExecuteAction("view_pending");
+	} else {
+		$fa->ExecuteAction($action);
 	}
-	
+	forum_footer(array());
 }
 
 
