@@ -450,16 +450,74 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 		}
 
 		if (USE_PFO_RBAC) {
-		$res = db_query_params ('SELECT section, reference, value FROM role_perms WHERE role_id=$1',
-					array ($role_id)) ;
-		if (!$res) {
-			$this->setError('Role::fetchData()::'.db_error());
-			return false;
-		}
-		$this->perms_array=array();
-		while ($arr =& db_fetch_array($res)) {
-			$this->perms_array[$arr['section']][$arr['reference']] = $arr['value'];
-		}
+			$res = db_query_params ('SELECT section, reference, value FROM role_perms WHERE role_id=$1',
+						array ($role_id)) ;
+			if (!$res) {
+				$this->setError('Role::fetchData()::'.db_error());
+				return false;
+			}
+			$this->perms_array=array();
+			while ($arr =& db_fetch_array($res)) {
+				$this->perms_array[$arr['section']][$arr['reference']] = $arr['value'];
+			}
+		} else { 	// Map pre-PFO RBAC section names and values to the new values
+			$this->perms_array=array();
+			foreach ($this->setting_array as $oldsection => $t) {
+				switch ($oldsection) {
+				case 'projectadmin':
+					$newsection = 'project_admin' ;
+					break ;
+				case 'trackeradmin':
+					$newsection = 'tracker_admin' ;
+					break ;
+				case 'pmadmin':
+					$newsection = 'pm_admin' ;
+					break ;
+				case 'forumadmin':
+					$newsection = 'forum_admin' ;
+					break ;
+
+				default:
+					$newsection = $oldsection ;
+				}
+
+				foreach ($t as $reference => $oldvalue) {
+					$newvalue = 0 ;
+					switch ($newsection) {
+					case 'project_admin':
+						switch ($oldvalue) {
+						case 0: $newvalue = 0 ; break ;
+						case 'A': $newvalue = 1 ; break ;
+						}
+					break;
+					
+					case 'tracker_admin':
+					case 'pm_admin':
+					case 'forum_admin':
+						switch ($oldvalue) {
+						case 0: $newvalue = 0 ; break ;
+						case 2: $newvalue = 1 ; break ;
+						}
+					break;
+					
+					case 'tracker':
+					case 'pm':
+						switch ($value) {
+						case -1: $newvalue = 0 ; break ;
+						case 0: $newvalue = 1 ; break ;
+						case 1: $newvalue = 3 ; break ;
+						case 2: $newvalue = 7 ; break ;
+						case 3: $newvalue = 5 ; break ;
+						}
+					break ;
+
+					default:
+						$newvalue = $oldvalue ;
+					}
+
+					$this->perms_array[$newsection][$reference] = $newvalue ;
+				}
+			}
 		}
 
 		return true;
@@ -594,9 +652,9 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				return false ;
 			}
 
-			if (($value & $mask == true)
-			    || $this->hasPermission ('tracker_admin', $reference)
-			    || $this->hasPermission ('project_admin', $reference)) {
+			if (($value & $mask)
+			    || $this->hasPermission ('tracker_admin', $o->Group->getID())
+			    || $this->hasPermission ('project_admin', $o->Group->getID())) {
 				return true ;
 			}
 			break ;
@@ -618,7 +676,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				return false ;
 			}
 
-			if (($value & $mask == true)
+			if (($value & $mask)
 			    || $this->hasPermission ('pm_admin', $o->Group->getID())
 			    || $this->hasPermission ('project_admin', $o->Group->getID())) {
 				return true ;
