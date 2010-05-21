@@ -1801,28 +1801,41 @@ class Group extends Error {
 	function removeUser($user_id) {
 		global $SYS;
 
-		if ($user_id==user_getid()) {
-			//users can remove themselves
-			//everyone else must be a project admin
-		} else {
-			$perm =& $this->getPermission ();
-
-			if (!$perm || !is_object($perm) || !$perm->isAdmin()) {
-				$this->setPermissionDeniedError();
-				return false;
-			}
+		if ($user_id != user_getid()
+		    || !forge_check_perm ('project_admin', $this->getID())) {
+			$this->setPermissionDeniedError();
+			return false;
 		}
 	
 		db_begin();
 
-		$res = db_query_params ('DELETE FROM user_group WHERE group_id=$1 AND user_id=$2', 
-					array ($this->getID(),
-					       $user_id)) ;
-		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError(sprintf(_('ERROR: User not removed: %s'),db_error()));
-			db_rollback();
-			return false;
+		if (USE_PFO_RBAC) {
+			$user = user_get_object ($user_id) ;
+			$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($user) ;
+			$found_role = NULL ;
+			foreach ($roles as $role) {
+				if ($role->getHomeProject() && $role->getHomeProject()->getID() == $this->getID()) {
+					$found_role = $role ;
+					break ;
+				}
+			}
+			if ($found_role == NULL) {
+				$this->setError(sprintf(_('ERROR: User not removed: %s')));
+				db_rollback();
+				return false;
+			}
+			$found_role->removeUser ($user) ;
 		} else {
+			$res = db_query_params ('DELETE FROM user_group WHERE group_id=$1 AND user_id=$2', 
+						array ($this->getID(),
+						       $user_id)) ;
+			if (!$res || db_affected_rows($res) < 1) {
+				$this->setError(sprintf(_('ERROR: User not removed: %s'),db_error()));
+				db_rollback();
+				return false;
+			}
+		}
+
 			//
 			//	reassign open artifacts to id=100
 			//
@@ -1891,7 +1904,7 @@ class Group extends Error {
 
 			//audit trail
 			$this->addHistory('Removed User',$user_id);
-		}
+		
 		db_commit();
 		return true;
 	}
