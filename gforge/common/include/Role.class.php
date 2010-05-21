@@ -551,7 +551,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 		//
 		//	Cannot update role_id=1
 		//
-		if ($this->getID() == 1) {
+		if ($this->getID() == 1 && !USE_PFO_RBAC) {
 			$this->setError('Cannot Update Default Role');
 			return false;
 		}
