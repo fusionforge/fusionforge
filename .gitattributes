@@ -87,8 +87,10 @@ gforge/common/include/Codendi_HTMLPurifier.class.php -text
 gforge/common/include/Codendi_Request.class.php -text
 gforge/common/include/HTTPRequest.class.php -text
 gforge/common/include/Navigation.class.php -text
+gforge/common/include/PFO-RBAC.php -text
 gforge/common/include/PluginInfo.class.php -text
 gforge/common/include/ProjectManager.class.php -text
+gforge/common/include/RBAC.php -text
 gforge/common/include/TextSanitizer.class.php -text
 gforge/common/include/UserManager.class.php -text
 gforge/common/include/config-vars.php -text
