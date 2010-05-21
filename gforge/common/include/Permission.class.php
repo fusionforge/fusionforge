@@ -39,7 +39,7 @@ $PERMISSION_OBJ=array();
  * @return a Permission or false on failure
  *
  */
-function &permission_get_object(&$_Group, &$_User) {
+function &permission_get_object(&$_Group, &$_User = NULL) {
 	//create a common set of Permission objects
 	//saves a little wear on the database
 	
@@ -51,17 +51,10 @@ function &permission_get_object(&$_Group, &$_User) {
 		$group_id = 0;
 	}
 
-	if (is_object($_User)) {
-		$user_id = $_User->getID();
-	} else {
-		//invalid object, probably from user not being logged in
-		$user_id = 0;
+	if (!isset($PERMISSION_OBJ[$group_id])) {
+		$PERMISSION_OBJ[$group_id]= new Permission($_Group);
 	}
-
-	if (!isset($PERMISSION_OBJ["_".$group_id."_".$user_id])) {
-		$PERMISSION_OBJ["_".$group_id."_".$user_id]= new Permission($_Group, $_User);
-	}
-	return $PERMISSION_OBJ["_".$group_id."_".$user_id];
+	return $PERMISSION_OBJ[$group_id];
 }
 
 class Permission extends Error {
@@ -80,11 +73,11 @@ class Permission extends Error {
 	var $Group;
 
 	/**
-	 * The User object.
+	 * ID of the Group object
 	 *
-	 * @var object $User.
+	 * @var int $group_id.
 	 */
-	var $User;
+	var $group_id
 
 	/**
 	 * Whether the user is an admin/super user of this project.
@@ -107,7 +100,7 @@ class Permission extends Error {
 	 *	@param	object	User Object required.
 	 *	
 	 */
-	function Permission (&$_Group, &$_User) {
+	function Permission (&$_Group) {
 		if (!$_Group || !is_object($_Group)) {
 			$this->setError('No Valid Group Object');
 			return false;
@@ -117,70 +110,7 @@ class Permission extends Error {
 			return false;
 		}
 		$this->Group =& $_Group;
-
-		if (!$_User || !is_object($_User)) {
-			$this->setError('No Valid User Object');
-			return false;
-		}   
-		if ($_User->isError()) {
-			$this->setError('Permission: '.$_User->getErrorMessage());
-			return false;
-		}   
-		$this->User =& $_User;
-
-		if (!$this->fetchData()) {
-			return false;
-		} else {
-			return true;
-		}
-	}
-
-	/**
-	 *  fetchData - fetch the data for this Permission from the database.
-	 *
-	 *  @return	boolean success.
-	 *	@access private
-	 */
-	function fetchData() {
-		$res = db_query_params ('SELECT * FROM user_group WHERE user_id=$1 AND group_id=$2',
-					array ($this->User->getID(),
-					       $this->Group->getID())) ;
-		if (!$res || db_numrows($res) < 1) {
-			$this->setError('Permission: User Not Found');
-
-			if ($this->setUpSuperUser()) {
-				return true;
-			}
-		} else {
-			$this->data_array = db_fetch_array($res);
-			if (trim($this->data_array['admin_flags']) == 'A') {
-				$this->is_admin=true;
-			} else {
-				$this->setUpSuperUser();
-			}
-			db_free_result($res);
-			return true;
-		}
-	}
-
-	/**
-	 *	setUpSuperUser - check to see if this User is a site super-user.
-	 *
-	 *	@return	boolean	is_super_user.
-	 *	@access private
-	 */
-	function setUpSuperUser() {
-		//
-		//  see if they are a site super-user
-		//  if not a member of this group
-		//
-		if ($this->isSuperUser()) {
-			$this->clearError();
-			$this->is_admin = true;
-			return true;
-		}
-
-		return false;
+		$this->group_id = $this->Group->getID() ;
 	}
 
 	/**
@@ -189,18 +119,7 @@ class Permission extends Error {
 	 *  @return	boolean	is_super_user.
 	 */
 	function isSuperUser() {
-		if (isset($this->is_site_admin)) {
-			return $this->is_site_admin;
-		}
-
-		$res = db_query_params ('SELECT count(*) AS count FROM user_group WHERE user_id=$1 AND group_id=1 AND admin_flags=$2',
-					array ($this->User->getID(),
-					       'A')) ;
-		$row_count = db_fetch_array($res);
-		$this->is_site_admin = $res && $row_count['count'] > 0;
-		db_free_result($res);
-
-		return $this->is_site_admin;
+		return forge_check_global_perm ('forge_admin') ;
 	}
 
 	/**
@@ -209,7 +128,7 @@ class Permission extends Error {
 	 *  @return	boolean	is_forum_admin.
 	 */
 	function isForumAdmin() {
-		return $this->isMember('forum_flags',2);
+		return forge_check_perm ('forum_admin', $this->group_id) ;
 	}
 
 	/**
@@ -218,7 +137,7 @@ class Permission extends Error {
 	 *  @return	boolean	is_doc_editor.
 	 */
 	function isDocEditor() {
-		return $this->isMember('doc_flags',1);
+		return forge_check_perm ('docman', $this->group_id, 'admin') ;
 	}
 
 	/**
@@ -227,7 +146,7 @@ class Permission extends Error {
 	 *  @return	boolean	is_release_technician.
 	 */
 	function isReleaseTechnician() {
-		return $this->isMember('release_flags',1);
+		return forge_check_perm ('frs', $this->group_id, 'write') ;
 	}
 
 	/**
@@ -236,7 +155,7 @@ class Permission extends Error {
 	 *  @return	boolean	is_artifact_admin.
 	 */
 	function isArtifactAdmin() {
-		return $this->isMember('artifact_flags',2);
+		return forge_check_perm ('tracker_admin', $this->group_id) ;
 	}
 
 	/**
@@ -245,32 +164,7 @@ class Permission extends Error {
 	 *  @return	boolean	is_projman_admin.
 	 */
 	function isPMAdmin() {
-		return $this->isMember('project_flags',2);
-	}
-
-	/**
-	 *  isMember - Simple test to see if the current user is a member of this project.
-	 *
-	 *  Can optionally pass in vars to test other permissions.
-	 *
-	 *  @param string	The field to check.
-	 *  @param int		The value that $field should have.
-	 *  @return	boolean	is_member.
-	 */
-	function isMember($field='user_id',$value='-1') {
-		if ($this->isAdmin()) {
-			//admins are tested first so that super-users can return true
-			//and admins of a project should always have full privileges 
-			//on their project
-			return true;
-		} else {
-			$arr =& $this->getPermData();
-			if ($arr[$field] >= $value) {
-				return true; 
-			} else {
-				return false;
-			}
-		}
+		return forge_check_perm ('pm_admin', $this->group_id) ;
 	}
 
 	/**
@@ -279,17 +173,7 @@ class Permission extends Error {
 	 *  @return	boolean	is_admin.
 	 */
 	function isAdmin() {
-		return $this->is_admin;
-	}
-
-	/**
-	 *	getPermData - returns the assocative array from the db.
-	 *
-	 *	@return array The array of data.
-	 *	@access private
-	 */
-	function &getPermData() {
-		return $this->data_array;
+		return forge_check_perm ('project_admin', $this->group_id) ;
 	}
 
 	/**
@@ -298,7 +182,7 @@ class Permission extends Error {
 	 *	@return	boolean	cvs_flags
 	 */
 	function isCVSReader() {
-		return $this->isMember('cvs_flags',0);
+		return forge_check_perm ('scm', $this->group_id, 'read') ;
 	}
 	
 	/**
@@ -307,7 +191,32 @@ class Permission extends Error {
 	 *      @return boolean cvs_flags
 	 */
 	function isCVSWriter() {
-		return $this->isMember('cvs_flags',1);
+		return forge_check_perm ('scm', $this->group_id, 'write') ;
+	}
+
+	/**
+	 *  isMember - Simple test to see if the current user is a member of this project.
+	 *
+	 *  @return	boolean	is_member.
+	 */
+	function isMember() {
+		if ($this->isAdmin()) {
+			//admins are tested first so that super-users can return true
+			//and admins of a project should always have full privileges 
+			//on their project
+			return true;
+		} else {
+			$engine = RBACEngine::getInstance() ;
+
+			$roles = $engine->getAvailableRoles () ;
+			foreach ($roles as $role) {
+				$hp = $role->getHomeProject () ;
+				if ($hp != NULL
+				    && $hp->getID() == $this->group_id) {
+					return $true ;
+				}
+			}
+		}
 	}
 }
 
