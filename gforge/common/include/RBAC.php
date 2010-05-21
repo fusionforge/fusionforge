@@ -29,16 +29,36 @@ require "PFO-RBAC.php" ;
 
 abstract class Error {}
 
-abstract class BaseRole extends Error implements PFO_BaseRole {
+abstract class BaseRole extends Error implements PFO_Role {
 	public function getName() {
 		return $this->name ;
 	}
-	public function setName() {
+	public function setName($name) {
 		return true ;
 	}
 	public function getID() {
 		return $this->ID ;
 	}
+
+	public function isPublic() {
+		return false ;
+	}
+	public function setPublic($flag) {
+		return false ;
+	}
+	public function getHomeProject() {
+		return true ;
+	}
+	public function getLinkedProjects() {
+		return array () ;
+	}
+	public function linkProject($project) {
+		return true ;
+	}
+	public function unlinkProject($project) {
+		return true ;
+	}
+
 	public function getUsers() {
 		return array () ;
 	}
@@ -57,23 +77,11 @@ abstract class BaseRole extends Error implements PFO_BaseRole {
 	public function setSettings($data) {
 		return true ;
 	}
-	public function getLinkedProjects() {
-		return array () ;
-	}
-}
-
-abstract class BaseRoleGlobal extends BaseRole implements PFO_RoleForgeWide {
-	public function linkProject($project) {
-		return true ;
-	}
-	public function unlinkProject($project) {
-		return true ;
-	}
 }
 
 // Actual classes
 
-class RoleStandard extends BaseRole implements PFO_RoleStandard {
+class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 	public function addUser($user) {
 		return true ;
 	}
@@ -83,21 +91,9 @@ class RoleStandard extends BaseRole implements PFO_RoleStandard {
 	public function getUsers() {
 		return array () ;
 	}
-	public function getProject() {
-		return false ;
-	}
 }
 
-class RoleGlobal extends BaseRoleGlobal implements PFO_RoleGlobal {
-	public function addUser($user) {
-		return true ;
-	}
-	public function removeUser($user) {
-		return true ;
-	}
-}
-
-class RoleAnonymous extends BaseRoleGlobal implements PFO_RoleAnonymous {
+class RoleAnonymous extends BaseRole implements PFO_RoleAnonymous {
 	public function getName () {
 		return _('Anonymous/not logged in') ;
 	}
@@ -106,7 +102,7 @@ class RoleAnonymous extends BaseRoleGlobal implements PFO_RoleAnonymous {
 	}
 }
 
-class RoleLoggedIn extends BaseRoleGlobal implements PFO_RoleLoggedIn {
+class RoleLoggedIn extends BaseRole implements PFO_RoleLoggedIn {
 	public function getName () {
 		return _('Any user logged in') ;
 	}
@@ -115,7 +111,7 @@ class RoleLoggedIn extends BaseRoleGlobal implements PFO_RoleLoggedIn {
 	}
 }
 
-class RoleUnionProject extends BaseRole implements PFO_RoleUnionProject {
+class RoleUnion extends BaseRole implements PFO_RoleUnion {
 	public function addRole ($role) {
 		return true ;
 	}
@@ -124,21 +120,10 @@ class RoleUnionProject extends BaseRole implements PFO_RoleUnionProject {
 	}
 }
 
-class RoleUnionGlobal extends BaseRoleGlobal implements PFO_RoleUnionGlobal {
-	public function addRole ($role) {
-		return true ;
-	}
-	public function removeRole ($role) {
-		return true ;
-	}
-}
-
-$rs = new RoleStandard () ;
-$rg = new RoleGlobal () ;
+$rs = new RoleExplicit () ;
 $ra = new RoleAnonymous () ;
 $rl = new RoleLoggedIn () ;
-$rup = new RoleUnionProject () ;
-$rug = new RoleUnionGlobal () ;
+$ru = new RoleUnion () ;
 
 // Local Variables:
 // mode: php

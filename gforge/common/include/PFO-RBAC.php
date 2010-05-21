@@ -23,77 +23,52 @@
  * USA
  */
 
-// Constants for roles' “capabilities”
-define ("PFO_ROLE_CAP_EXPLICIT",  1) ;
-define ("PFO_ROLE_CAP_FORGEWIDE", 2) ;
-define ("PFO_ROLE_CAP_UNION",     4) ;
-define ("PFO_ROLE_CAP_ANONYMOUS", 8) ;
-define ("PFO_ROLE_CAP_LOGGEDIN", 16) ;
-
 // Constants to identify role classes
-define ("PFO_ROLE_STANDARD", PFO_ROLE_CAP_EXPLICIT) ;
-define ("PFO_ROLE_GLOBAL", PFO_ROLE_CAP_EXPLICIT | PFO_ROLE_CAP_FORGEWIDE) ;
-define ("PFO_ROLE_ANONYMOUS", PFO_ROLE_CAP_FORGEWIDE | PFO_ROLE_CAP_ANONYMOUS) ;
-define ("PFO_ROLE_LOGGEDIN", PFO_ROLE_CAP_FORGEWIDE | PFO_ROLE_CAP_LOGGEDIN) ;
-define ("PFO_ROLE_UNIONPROJECT", PFO_ROLE_CAP_UNION) ;
-define ("PFO_ROLE_UNIONGLOBAL", PFO_ROLE_CAP_FORGEWIDE | PFO_ROLE_CAP_UNION) ;
+define ("PFO_ROLE_EXPLICIT",  1) ;
+define ("PFO_ROLE_UNION",     2) ;
+define ("PFO_ROLE_ANONYMOUS", 3) ;
+define ("PFO_ROLE_LOGGEDIN",  4) ;
 
 // Interfaces for the capabilities
-interface PFO_BaseRole {
+interface PFO_Role {
 	public function getName() ;
-	public function setName() ;
+	public function setName($name) ;
 	public function getID() ;
+
+	public function isPublic() ;
+	public function setPublic($flag) ;
+	public function getHomeProject() ;
+	public function getLinkedProjects() ;
+	public function linkProject($project) ;
+	public function unlinkProject($project) ;
+
 	public function getUsers() ;
 	public function hasUser($user) ;
 	public function hasPermission($section, $reference, $permission) ;
 	public function normalizeData() ;
 	public function getSettings() ;
 	public function setSettings($data) ;
-	public function getLinkedProjects() ;
 }
 
-interface PFO_RoleExplicit extends PFO_BaseRole {
+interface PFO_RoleExplicit extends PFO_Role {
+	const roleclass = PFO_ROLE_EXPLICIT ;
 	public function addUser($user) ;
 	public function removeUser($user) ;
 }
 
-interface PFO_RoleForgeWide extends PFO_BaseRole {
-	public function linkProject($project) ;
-	public function unlinkProject($project) ;
-
-}
-
-interface PFO_RoleUnion extends PFO_BaseRole {
+interface PFO_RoleUnion extends PFO_Role {
+	const roleclass = PFO_ROLE_UNION ;
 	public function addRole($role) ;
 	public function removeRole($role) ;
 }
 
-// Interfaces for the combination of capabilities
-
-interface PFO_RoleStandard extends PFO_RoleExplicit {
-	const role_caps = PFO_ROLE_STANDARD ;
+interface PFO_RoleAnonymous extends PFO_Role {
+	const roleclass = PFO_ROLE_ANONYMOUS ;
 }
 
-interface PFO_RoleGlobal extends PFO_RoleExplicit {
-	const role_caps = PFO_ROLE_GLOBAL ;
+interface PFO_RoleLoggedin extends PFO_Role {
+	const roleclass = PFO_ROLE_LOGGEDIN ;
 }
-
-interface PFO_RoleAnonymous extends PFO_RoleForgeWide {
-	const role_caps = PFO_ROLE_ANONYMOUS ;
-}
-
-interface PFO_RoleLoggedin extends PFO_RoleForgeWide {
-	const role_caps = PFO_ROLE_LOGGEDIN ;
-}
-
-interface PFO_RoleUnionProject extends PFO_RoleUnion {
-	const role_caps = PFO_ROLE_UNIONPROJECT ;
-}
-
-interface PFO_RoleUnionGlobal extends PFO_RoleForgeWide, PFO_RoleUnion {
-	const role_caps = PFO_ROLE_UNIONGLOBAL ;
-}
-
 
 // Local Variables:
 // mode: php
