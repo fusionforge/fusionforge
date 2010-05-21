@@ -61,7 +61,11 @@ if ($role_id=='observer') {
 		}
 	}
 } else {
-	$role = new Role($group,$role_id);
+	if (USE_PFO_RBAC) {
+		$role = RBACEngine::getInstance()->getRoleById($role_id) ;
+	} else {
+		$role = new Role($group,$role_id);
+	}
 	if (!$role || !is_object($role)) {
 		exit_error('Error',_('Could Not Get Role'));
 	} elseif ($role->isError()) {
@@ -84,7 +88,12 @@ if ($role_id=='observer') {
 	$data = $new_data ;
 
 	if (getStringFromRequest('submit')) {
-		$role_name = trim(getStringFromRequest('role_name'));
+		if (($role->getHomeProject() != NULL)
+		    && ($role->getHomeProject()->getID() != $group_id)) {
+			$role_name = trim(getStringFromRequest('role_name'));
+		} else {
+			$role_name = $role->getName() ;
+		}
 		if (!$role_name) {
 			$feedback .= ' Missing Role Name ';
 		} else {
@@ -132,10 +141,26 @@ echo '
 <p>
 <form action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;role_id='. $role_id .'" method="post">';
 
-if ($role_id != 'observer') {
-	echo '<p><strong>'._('Role Name').'</strong><br />
+if (USE_PFO_RBAC) {
+	if ($role->getHomeProject() == NULL) {
+		echo '<p><strong>'._('Role Name').'</strong><br />' ;
+		printf (_('%s (global role)'),
+			$role->getName ()) ;
+	} elseif ($role->getHomeProject()->getID() != $group_id) {
+		echo '<p><strong>'._('Role Name').'</strong><br />' ;
+		printf (_('%s (in project %s)'),
+			$role->getName (),
+			$role->getHomeProject()->getPublicName()) ;
+	} else {
+		echo '<p><strong>'._('Role Name').'</strong><br /><input type="text" name="role_name" value="'.$role->getName().'">' ;
+	}
+	echo '</p>';
+} else {
+	if ($role_id != 'observer') {
+		echo '<p><strong>'._('Role Name').'</strong><br />
 	<input type="text" name="role_name" value="'.$role->getName().'">
-	<p>';
+	</p>';
+	}
 }
 
 $titles[]=_('Section');
