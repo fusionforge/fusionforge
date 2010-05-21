@@ -241,15 +241,6 @@ class Group extends Error {
 			}
 		}
 		
-		$systemGroups = array(GROUP_IS_NEWS, GROUP_IS_STATS, GROUP_IS_PEER_RATINGS);
-		if(!$this->isPublic() && !in_array($id, $systemGroups)) {
-			$perm =& $this->getPermission ();
-
-			if (!$perm || !is_object($perm) || !$perm->isMember()) {
-				$this->setError(_('Permission denied'), ERROR__PERMISSION_DENIED_ERROR);
-				return false;
-			}
-		}
 		return true;
 	}
 
